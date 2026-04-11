@@ -9,3 +9,15 @@
 - 编写 config.yaml 全局配置（3家测试公司）
 - 编写 CLAUDE.md Schema 规范
 - 创建 index.md 和 log.md
+
+## [2026-04-11 23:42] collect_news | Collected 23 new articles, 1 duplicates skipped
+
+## [2026-04-11 23:43] ingest | Ingested 3 files, updated 24 topic entries: 中微公司/公司动态, 半导体国产替代/市场与需求, 半导体国产替代/设备国产化, 半导体国产替代/资本投入, 半导体设备/技术趋势, 半导体设备/竞争格局, 半导体设备/行业概览, 半导体设备/资本与订单
+
+## [2026-04-11 23:44] ingest | Ingested 20 files, updated 160 topic entries: 中微公司/公司动态, 半导体国产替代/市场与需求, 半导体国产替代/设备国产化, 半导体国产替代/资本投入, 半导体设备/技术趋势, 半导体设备/竞争格局, 半导体设备/行业概览, 半导体设备/资本与订单
+
+## [2026-04-11 23:44] collect_news | Collected 15 new articles, 1 duplicates skipped
+
+## [2026-04-11 23:44] collect_news | Collected 15 new articles, 1 duplicates skipped
+
+## [2026-04-11 23:44] ingest | Ingested 30 files, updated 204 topic entries: 中密控股/公司动态, 中微公司/相关动态, 半导体国产替代/市场与需求, 半导体国产替代/设备国产化, 半导体国产替代/资本投入, 半导体设备/技术趋势, 半导体设备/竞争格局, 半导体设备/行业概览, 半导体设备/资本与订单, 密封件/竞争格局, 密封件/行业概览, 珂玛科技/公司动态, 高端制造/技术突破, 高端制造/政策支持

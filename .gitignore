@@ -1,0 +1,15 @@
+# Ingest 标记（可重建）
+.ingested/
+
+# 大型原始文件（PDF等）
+**/raw/reports/*.pdf
+**/raw/reports/*.doc*
+**/raw/reports/*.xls*
+
+# Python 缓存
+__pycache__/
+*.pyc
+
+# 系统文件
+.DS_Store
+Thumbs.db

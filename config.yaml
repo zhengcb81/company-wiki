@@ -1,111 +1,138 @@
 # ============================================
 # 上市公司知识库系统 — 全局配置
 # ============================================
-# 修改此文件来管理：公司列表、行业板块、主题问题清单
-# 所有自动化脚本都读取此配置
 
 # ── 公司列表 ──────────────────────────────
 companies:
-  - ticker: "BABA"
-    name: "阿里巴巴"
-    exchange: "NYSE"
-    sectors: ["互联网"]
-    themes: ["AI产业链"]
+  - ticker: "688012"
+    name: "中微公司"
+    exchange: "SSE STAR"       # 科创板
+    org_id: ""                  # StockInfoDownloader 会自动从 mapping 获取
+    sectors: ["半导体设备"]
+    themes: ["半导体国产替代"]
     news_queries:
-      - "阿里巴巴 最新消息"
-      - "Alibaba latest news"
-    report_sources:
-      - type: "sec-edgar"
-        cik: "0001577552"
+      - "中微公司 最新消息"
+      - "中微半导体 新闻"
+      - "AMEC semiconductor news"
 
-  - ticker: "0700.HK"
-    name: "腾讯控股"
-    exchange: "HKEX"
-    sectors: ["互联网"]
-    themes: ["AI产业链"]
+  - ticker: "300470"
+    name: "中密控股"
+    exchange: "SZSE"            # 创业板
+    org_id: "9900023856"
+    sectors: ["密封件"]
+    themes: ["高端制造"]
     news_queries:
-      - "腾讯 最新消息"
-      - "Tencent latest news"
-    report_sources:
-      - type: "hkex"
+      - "中密控股 最新消息"
+      - "中密控股 密封件"
 
-  - ticker: "9618.HK"
-    name: "京东集团"
-    exchange: "HKEX"
-    sectors: ["互联网"]
-    themes: []
+  - ticker: "301611"
+    name: "珂玛科技"
+    exchange: "SZSE"            # 创业板
+    org_id: "9900056250"
+    sectors: ["半导体设备"]
+    themes: ["半导体国产替代"]
     news_queries:
-      - "京东 最新消息"
-      - "JD.com latest news"
-    report_sources:
-      - type: "hkex"
+      - "珂玛科技 最新消息"
+      - "珂玛科技 半导体"
 
 # ── 行业定义 ──────────────────────────────
 sectors:
-  互联网:
-    description: "中国互联网行业，包含电商、社交、游戏、云计算等子领域"
+  半导体设备:
+    description: "半导体制造设备行业，包括刻蚀、薄膜、清洗、检测等设备"
     topics:
       - name: "行业概览"
         questions:
           - "本季度有哪些重大行业政策变化？"
-          - "用户增长趋势如何？"
-          - "变现模式有什么新动向？"
+          - "全球半导体设备市场规模和增速？"
+          - "中国半导体设备国产化率进展？"
       - name: "竞争格局"
         questions:
-          - "头部公司市占率有何变化？"
-          - "有无重大并购或合作？"
-          - "新进入者或退出者？"
+          - "国内各设备厂商市占率有何变化？"
+          - "有无重大技术突破或订单公告？"
+          - "海外厂商对中国市场的态度变化？"
       - name: "技术趋势"
         questions:
-          - "AI/大模型在行业内有哪些新应用？"
-          - "有无颠覆性技术出现？"
-      - name: "监管政策"
+          - "先进制程设备进展如何？"
+          - "成熟制程设备国产替代到了什么程度？"
+      - name: "资本与订单"
         questions:
-          - "近期有哪些新法规或政策出台？"
-          - "反垄断动态如何？"
+          - "大基金等资本动向？"
+          - "主要客户（中芯、华虹等）扩产计划？"
+
+  密封件:
+    description: "高端密封件行业，应用于石化、核电、航空航天等领域"
+    topics:
+      - name: "行业概览"
+        questions:
+          - "下游需求（石化、核电等）景气度如何？"
+          - "国产替代进展？"
+      - name: "竞争格局"
+        questions:
+          - "国内密封件厂商竞争态势？"
+          - "有无重大订单或技术突破？"
 
 # ── 跨行业主题 ──────────────────────────────
 themes:
-  AI产业链:
-    description: "从芯片到应用的完整AI产业链跟踪"
+  半导体国产替代:
+    description: "半导体全产业链国产替代进程跟踪"
     topics:
-      - name: "芯片与算力"
+      - name: "设备国产化"
         questions:
-          - "GPU/AI芯片供需格局如何？"
-          - "国产AI芯片替代进展如何？"
-          - "算力成本趋势？"
-      - name: "大模型竞争"
+          - "各环节设备国产化率？"
+          - "哪些设备已实现突破，哪些仍是瓶颈？"
+          - "美国制裁对设备国产化的影响？"
+      - name: "资本投入"
         questions:
-          - "各家大模型能力对比如何？"
-          - "开源 vs 闭源趋势？"
-          - "大模型商业模式演变？"
-      - name: "应用落地"
+          - "大基金三期投向？"
+          - "地方政府半导体投资？"
+      - name: "市场与需求"
         questions:
-          - "AI 在各行业有哪些新落地场景？"
-          - "商业化变现路径是否清晰？"
-          - "Agent/工作流自动化进展？"
+          - "晶圆厂扩产节奏？"
+          - "终端需求（AI、汽车电子等）对产能的拉动？"
+
+  高端制造:
+    description: "高端制造业国产替代与技术升级"
+    topics:
+      - name: "技术突破"
+        questions:
+          - "有哪些关键技术实现了国产化？"
+          - "与海外差距在哪些领域仍然显著？"
+      - name: "政策支持"
+        questions:
+          - "有哪些支持高端制造的政策出台？"
 
 # ── 调度配置 ──────────────────────────────
 schedule:
-  news_collection: "daily"       # 每天采集新闻
-  report_check: "weekly"         # 每周检查财报
-  lint: "weekly"                 # 每周健康检查
+  news_collection: "daily"
+  report_check: "weekly"
+  lint: "weekly"
 
 # ── 搜索配置 ──────────────────────────────
 search:
-  engine: "tavily"               # tavily | serper | brave | bing
-  tavily_api_key: ""             # 填入你的 API key
+  engine: "tavily"
+  tavily_api_key: "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"
   results_per_query: 8
   language: "zh"
-  max_age_days: 7                # 只采集最近7天的新闻
+  max_age_days: 7
+
+# ── StockInfoDownloader 配置 ──────────────
+report_downloader:
+  tool_path: "~/StockInfoDownloader"        # 本地路径（Windows: C:/Users/郑曾波/Projects/StockInfoDownloader）
+  save_dir: "downloads"
+  max_pages: 5
+  browser_strategy: "playwright"
+  pages:
+    - name: "Research"
+      suffix: "research"
+    - name: "Periodic Reports"
+      suffix: "periodicReports"
 
 # ── 进化机制 ──────────────────────────────
 evolution:
-  auto_discover_topics: true     # 自动发现新主题
-  suggest_companies: true        # 自动建议新公司
-  evolve_questions: true         # 自动更新问题清单
+  auto_discover_topics: true
+  suggest_companies: true
+  evolve_questions: true
 
 # ── 路径配置 ──────────────────────────────
 paths:
-  wiki_root: "~/company-wiki"    # 知识库根目录
-  obsidian_vault: ""             # 如果用 Obsidian，填入 vault 路径
+  wiki_root: "~/company-wiki"
