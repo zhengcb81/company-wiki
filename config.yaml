@@ -1,0 +1,111 @@
+# ============================================
+# 上市公司知识库系统 — 全局配置
+# ============================================
+# 修改此文件来管理：公司列表、行业板块、主题问题清单
+# 所有自动化脚本都读取此配置
+
+# ── 公司列表 ──────────────────────────────
+companies:
+  - ticker: "BABA"
+    name: "阿里巴巴"
+    exchange: "NYSE"
+    sectors: ["互联网"]
+    themes: ["AI产业链"]
+    news_queries:
+      - "阿里巴巴 最新消息"
+      - "Alibaba latest news"
+    report_sources:
+      - type: "sec-edgar"
+        cik: "0001577552"
+
+  - ticker: "0700.HK"
+    name: "腾讯控股"
+    exchange: "HKEX"
+    sectors: ["互联网"]
+    themes: ["AI产业链"]
+    news_queries:
+      - "腾讯 最新消息"
+      - "Tencent latest news"
+    report_sources:
+      - type: "hkex"
+
+  - ticker: "9618.HK"
+    name: "京东集团"
+    exchange: "HKEX"
+    sectors: ["互联网"]
+    themes: []
+    news_queries:
+      - "京东 最新消息"
+      - "JD.com latest news"
+    report_sources:
+      - type: "hkex"
+
+# ── 行业定义 ──────────────────────────────
+sectors:
+  互联网:
+    description: "中国互联网行业，包含电商、社交、游戏、云计算等子领域"
+    topics:
+      - name: "行业概览"
+        questions:
+          - "本季度有哪些重大行业政策变化？"
+          - "用户增长趋势如何？"
+          - "变现模式有什么新动向？"
+      - name: "竞争格局"
+        questions:
+          - "头部公司市占率有何变化？"
+          - "有无重大并购或合作？"
+          - "新进入者或退出者？"
+      - name: "技术趋势"
+        questions:
+          - "AI/大模型在行业内有哪些新应用？"
+          - "有无颠覆性技术出现？"
+      - name: "监管政策"
+        questions:
+          - "近期有哪些新法规或政策出台？"
+          - "反垄断动态如何？"
+
+# ── 跨行业主题 ──────────────────────────────
+themes:
+  AI产业链:
+    description: "从芯片到应用的完整AI产业链跟踪"
+    topics:
+      - name: "芯片与算力"
+        questions:
+          - "GPU/AI芯片供需格局如何？"
+          - "国产AI芯片替代进展如何？"
+          - "算力成本趋势？"
+      - name: "大模型竞争"
+        questions:
+          - "各家大模型能力对比如何？"
+          - "开源 vs 闭源趋势？"
+          - "大模型商业模式演变？"
+      - name: "应用落地"
+        questions:
+          - "AI 在各行业有哪些新落地场景？"
+          - "商业化变现路径是否清晰？"
+          - "Agent/工作流自动化进展？"
+
+# ── 调度配置 ──────────────────────────────
+schedule:
+  news_collection: "daily"       # 每天采集新闻
+  report_check: "weekly"         # 每周检查财报
+  lint: "weekly"                 # 每周健康检查
+
+# ── 搜索配置 ──────────────────────────────
+search:
+  engine: "tavily"               # tavily | serper | brave | bing
+  tavily_api_key: ""             # 填入你的 API key
+  results_per_query: 8
+  language: "zh"
+  max_age_days: 7                # 只采集最近7天的新闻
+
+# ── 进化机制 ──────────────────────────────
+evolution:
+  auto_discover_topics: true     # 自动发现新主题
+  suggest_companies: true        # 自动建议新公司
+  evolve_questions: true         # 自动更新问题清单
+
+# ── 路径配置 ──────────────────────────────
+paths:
+  wiki_root: "~/company-wiki"    # 知识库根目录
+  obsidian_vault: ""             # 如果用 Obsidian，填入 vault 路径
