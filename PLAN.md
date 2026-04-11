@@ -292,33 +292,37 @@ LLM 读取新文件内容
 
 ## 九、实施路线图
 
-### Phase 1：基础框架（当前）
+### Phase 1：基础框架 ✅ 2026-04-11
 - [x] 创建目录结构
 - [x] 编写 PLAN.md
-- [ ] 编写 config.yaml（2-3家测试公司）
-- [ ] 编写 CLAUDE.md（Schema）
-- [ ] 创建示例 wiki 页面验证格式
+- [x] 编写 config.yaml（3家 A 股公司）
+- [x] 编写 CLAUDE.md（Schema）
+- [x] 创建示例 wiki 页面验证格式
 
-### Phase 2：新闻采集
-- [ ] 实现 collect_news.py
+### Phase 2：新闻采集 ✅ 2026-04-11
+- [x] 实现 collect_news.py（Tavily API，去重，保存为 markdown）
 - [ ] 配置 Hermes cronjob 每日运行
-- [ ] 测试采集流程
+- [x] 测试采集流程（3家公司共53篇新闻）
 
-### Phase 3：Ingest 流程
-- [ ] 实现 ingest.py
-- [ ] 实现双向更新逻辑
-- [ ] 测试完整链路
+### Phase 3：Ingest 流程 ✅ 2026-04-11
+- [x] 实现 ingest.py（扫描 raw/，判断相关性，更新 wiki）
+- [x] 实现双向更新逻辑（公司 → 行业 → 主题，一次新闻更新最多8个 wiki 页面）
+- [x] 测试完整链路（53篇新闻 → 204条 topic 条目 → 14个 wiki 页面）
+
+### Phase 3.5：财报采集 🔄 2026-04-11
+- [x] 实现 collect_reports.py（StockInfoDownloader 适配器）
+- [ ] 在本地 Windows 环境测试
 
 ### Phase 4：自我进化
-- [ ] 实现 lint 逻辑
-- [ ] 实现自动发现机制
+- [ ] 实现 lint 逻辑（矛盾检测、过时标记、孤儿页面）
+- [ ] 实现自动发现机制（新主题、新公司建议）
 - [ ] 实现 config.yaml 动态更新
 
 ### Phase 5：完善优化
-- [ ] 接入财报采集
+- [ ] 引入 LLM 做智能摘要（当前摘要提取较粗糙）
+- [ ] 配置 cronjob 定时自动运行
 - [ ] 扩展公司和行业
-- [ ] 优化 ingest 准确性
-- [ ] 考虑向量搜索
+- [ ] 考虑向量搜索（qmd）
 
 ---
 
@@ -338,3 +342,12 @@ LLM 读取新文件内容
 | 2026-04-11 | 配置 3 家 A 股公司，接入 Tavily API，编写 collect_news.py |
 | 2026-04-11 | 编写 ingest.py（双向更新），编写 collect_reports.py（StockInfoDownloader 适配） |
 | 2026-04-11 | 首次完整跑通采集→ingest 链路：53 篇新闻，204 条 topic 条目，14 个 wiki 页面 |
+| 2026-04-11 | Phase 1-3 完成，Phase 3.5（财报采集适配器已写，待本地测试） |
+
+## 十二、待办事项（下次继续）
+
+1. 在本地 Windows 环境测试 collect_reports.py（StockInfoDownloader）
+2. 引入 LLM 做智能摘要（当前 ingest 的摘要直接取 raw 文本前5行，质量一般）
+3. 配置 Hermes cronjob 每日自动采集+ingest
+4. 实现 lint 模块（矛盾检测、过时页面标记）
+5. 添加更多公司和行业
