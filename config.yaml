@@ -126,15 +126,24 @@ search:
 
 # ── StockInfoDownloader 配置 ──────────────
 report_downloader:
-  tool_path: "~/StockInfoDownloader"        # 本地路径（Windows: C:/Users/郑曾波/Projects/StockInfoDownloader）
+  tool_path: "C:/Users/郑曾波/Projects/StockInfoDownloader"  # Windows 本地路径
+  config_file: "~/company-wiki/configs/stockinfo_config.json"  # 我们生成的配置
   save_dir: "downloads"
-  max_pages: 5
   browser_strategy: "playwright"
   pages:
-    - name: "Research"
-      suffix: "research"
-    - name: "Periodic Reports"
+    - name: "定期报告"
       suffix: "periodicReports"
+      allowed_keywords: null       # 不过滤，下载所有季报/半年报/年报
+      max_pages: 10
+    - name: "招股说明书"
+      suffix: "latestAnnouncement"
+      allowed_keywords: ["招股说明书", "上市招股说明书"]
+      max_pages: 3
+      reverse_order: true          # 倒序（最新的在前）
+    - name: "投资者关系"
+      suffix: "research"
+      allowed_keywords: ["投资者关系活动记录表", "投资者关系管理信息", "调研活动"]
+      max_pages: 10
 
 # ── 进化机制 ──────────────────────────────
 evolution:
