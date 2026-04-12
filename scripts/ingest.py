@@ -28,7 +28,12 @@ from datetime import datetime
 from pathlib import Path
 
 # ── 路径 ──────────────────────────────────
-WIKI_ROOT = Path(__file__).resolve().parent.parent
+SCRIPTS_DIR = Path(__file__).resolve().parent
+WIKI_ROOT = SCRIPTS_DIR.parent
+
+# 添加 scripts 目录到 path，导入 extract 模块
+sys.path.insert(0, str(SCRIPTS_DIR))
+from extract import extract_summary, classify_info_type
 CONFIG_PATH = WIKI_ROOT / "config.yaml"
 LOG_PATH = WIKI_ROOT / "log.md"
 INDEX_PATH = WIKI_ROOT / "index.md"
@@ -281,34 +286,41 @@ def add_timeline_entry(wiki_path, meta, topic_name, entity_type, config):
     content = meta.get("_content", "")
     filename = meta.get("_filename", "")
 
-    # 从内容中提取摘要（去掉 frontmatter 和标题）
+    # 从内容中提取摘要（使用 extract 模块）
     body = content
     if body.startswith("---"):
         end = body.find("---", 3)
         if end > 0:
             body = body[end + 3:]
     # 去掉第一个 # 标题行
-    lines = body.strip().split("\n")
-    summary_lines = []
-    skipped_title = False
-    for line in lines:
-        if not skipped_title and line.startswith("#"):
-            skipped_title = True
+    body_lines = body.strip().split("\n")
+    clean_body_lines = []
+    for line in body_lines:
+        if line.startswith("#"):
             continue
-        stripped = line.strip()
-        if stripped and not stripped.startswith("---") and not stripped.startswith("来源:"):
-            summary_lines.append(stripped)
-        if len(summary_lines) >= 5:
-            break
+        clean_body_lines.append(line)
+    body_text = "\n".join(clean_body_lines)
 
-    summary = "\n".join(summary_lines) if summary_lines else title
+    # 使用 extract 模块做智能摘要
+    extracted = extract_summary(body_text, max_sentences=3)
 
-    # 来源类型判断
+    # 质量过滤：低质量内容只保留标题
+    if extracted['quality'] == 'low' and len(body_text) < 100:
+        summary_points = [title]
+    else:
+        summary_points = extracted['points'] if extracted['points'] else [title]
+
+    summary = "\n".join(f"- {p}" for p in summary_points)
+
+    # 来源类型判断（结合 extract 的分类结果）
+    info_type = extracted.get('info_type', '新闻')
     source_type = "新闻"
-    if "report" in filename.lower() or "研报" in title:
-        source_type = "研报"
-    elif "report" in str(wiki_path) or "财报" in title:
+    if info_type == "财报":
         source_type = "财报"
+    elif info_type == "产品":
+        source_type = "产品"
+    elif "研报" in title or "report" in filename.lower():
+        source_type = "研报"
     elif "公告" in title:
         source_type = "公告"
 
@@ -380,9 +392,78 @@ def add_timeline_entry(wiki_path, meta, topic_name, entity_type, config):
 
 
 # ── 主流程 ────────────────────────────────
+def is_low_quality_source(file_path, meta):
+    """
+    检查是否是低质量来源（行情页、公司主页、百科等）。
+    这些页面不进入 wiki，避免噪音。
+    """
+    filename = Path(file_path).name.lower()
+    url = meta.get("source_url", "").lower()
+    title = meta.get("title", "").lower()
+
+    # URL 黑名单模式
+    skip_url_patterns = [
+        "quote.eastmoney.com",      # 东方财富行情页
+        "quote.futunn.com",         # 富途行情页
+        "xueqiu.com/S/",            # 雪球个股页
+        "stock_quote",              # 通用行情页
+        "baidu.com/baike",          # 百度百科
+        "baike.baidu.com",
+        "hq.sinajs.cn",             # 新浪行情
+        "finance.sina.com.cn/realstock",
+        "amec-inc.com",             # AMEC 公司主页
+    ]
+
+    # 标题黑名单模式
+    skip_title_patterns = [
+        "行情走势", "股票股价", "最新价格", "实时走势图",
+        "公司简介", "股票行情中心",
+        "百科", "百度百科",
+        "最新新闻",  # 通常是行情页的标题
+        "最新资讯",
+        "个股资讯",
+    ]
+
+    for p in skip_url_patterns:
+        if p in url:
+            return True
+
+    for p in skip_title_patterns:
+        if p in title:
+            return True
+
+    # 文件名检查
+    skip_file_patterns = [
+        "行情走势", "股票股价", "最新价格", "行情_走势图",
+        "公司简介", "行情中心", "百科",
+        "_公司新闻",  # 公司新闻导航页（非新闻正文）
+    ]
+
+    # 内容太短且标题就是公司名（公司主页）
+    if len(meta.get("_content", "")) < 200:
+        company_names = ["中微公司", "中密控股", "珂玛科技", "AMEC"]
+        title_clean = title.replace(" ", "")
+        for cn in company_names:
+            if title_clean == cn or title_clean == cn.lower():
+                return True
+    for p in skip_file_patterns:
+        if p in filename:
+            return True
+
+    return False
+
+
 def process_file(file_path, entity_name, entity_type, config, dry_run=False):
     """处理单个待 ingest 文件"""
     meta = read_news_metadata(file_path)
+
+    # 质量过滤：跳过低质量来源
+    if is_low_quality_source(file_path, meta):
+        print(f"  SKIP (low quality): {meta.get('title', '')[:50]}")
+        if not dry_run:
+            mark_ingested(file_path)
+        return []
+
     relevant = determine_relevance(meta, config)
 
     if not relevant:
