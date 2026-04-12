@@ -349,8 +349,10 @@ LLM 读取新文件内容
 | 2026-04-11 | 配置 3 家 A 股公司，接入 Tavily API，编写 collect_news.py |
 | 2026-04-11 | 编写 ingest.py（双向更新），编写 collect_reports.py（StockInfoDownloader 适配） |
 | 2026-04-11 | 首次完整跑通采集→ingest 链路：53 篇新闻，204 条 topic 条目，14 个 wiki 页面 |
-| 2026-04-11 | Phase 1-3 完成，Phase 3.5（财报采集适配器已写，待本地测试） |
 | 2026-04-12 | Phase 4-5 完成：extract.py 智能摘要、refine.py LLM 管道、lint.py 健康检查、cronjob 每日自动运行 |
+| 2026-04-12 | 重构：graph.yaml 作为单一数据源，43家公司、25个行业、23条拓扑关系 |
+| 2026-04-12 | 重构：ingest.py/collect_news.py 去掉硬编码，全部从 Graph API 读取 |
+| 2026-04-12 | 重构：config.yaml 精简为纯运维配置（API keys, schedule） |
 
 ## 十二、当前问题与重构计划
 

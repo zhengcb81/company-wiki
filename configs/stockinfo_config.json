@@ -1,5 +1,5 @@
 {
-  "save_dir": "downloads",
+  "save_dir": "/home/zhengcb/company-wiki/companies",
   "headless": true,
   "max_retries": 3,
   "use_dynamic_delay": true,
