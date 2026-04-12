@@ -3,7 +3,7 @@ title: "GPU与AI芯片"
 entity: "GPU与AI芯片"
 type: sector_topic
 last_updated: "2026-04-12"
-sources_count: 54
+sources_count: 57
 tags: []
 ---
 
@@ -16,6 +16,27 @@ tags: []
 - AI芯片架构创新方向？
 
 ## 时间线
+### 2026-04-12 | 财报 | 中密控股：2023年年度报告摘要
+- 中密控股股份有限公司2023 年年度报告摘要 1 证券代码：300470 证券简称：中密控股 公告编号：2024-005 中密控股股份有限公司2023 年年度报告摘要 一、重要提示 本年度报告摘要来自年度报告全文，为全面了解本公司的经营成果、财务状况及未来发展规划，投资者应当到证监会指 定媒体仔细阅读年度报告全文。
+- 非标准审计意见提示 □适用 不适用 公司上市时未盈利且目前未实现盈利 □适用 不适用 董事会审议的报告期利润分配预案或公积金转增股本预案 适用 □不适用 公司经本次董事会审议通过的利润分配预案为：以205,352,577 为基数，向全体股东每10 股派发现金红利5 元（含税）， 送红股0 股（含税），以资本公积金向全体股东每10 股转增0 股。
+- 公司主要产品机械密封是一种重要的工业基础件，广 中密控股股份有限公司2023 年年度报告摘要 2 泛应用于国内外的石油化工、煤化工、油气输送、核电、制药、造纸、冶金、食品、船舶、航空航天等各个工业领域， 主要用于解决在高温、高压、高速及高危、易燃易爆介质下转动设备运转时的泄漏问题，产品性能直接影响上述领域客 户生产装置的安全、稳定、长周期、满负荷运转。
+
+- [来源](../../../companies/中密控股/raw/reports/中密控股：2023年年度报告摘要.pdf)
+
+### 2026-04-12 | 财报 | 中密控股：2023年半年度报告
+- 功的示范效应与“2018 年限制性股票激励计划”的成功实施，极大地提升了企业的凝聚力与核心竞争力，为公司长期稳
+- 2022 年，公司承担的国家重点研发项目“超高速密封干气密封关键技术及示范性应用”项目取得突破性进展，陆续
+- 2022 年，公司完成了“15MPa 长输管线和油田注水泵用机械密封项目”的研制，通过了专家团队的鉴定，打破了国
+
+- [来源](../../../companies/中密控股/raw/reports/中密控股：2023年半年度报告.pdf)
+
+### 2026-04-12 | 财报 | 中密控股：2022年半年度报告
+- 功的示范效应与“2018 年限制性股票激励计划”的成功实施，极大地提升了企业的凝聚力与核心竞争力，为公司长期稳
+- 2020 年5 月，公司承担的中石化茂名石化“乙烯装置裂解气压缩机干气密封研制项目”通过用户验收，“乙烯三机”
+- 司的不完全统计，“十四五”期间，国内炼油产能将净增长1.1 亿吨，炼油总产能接近10 亿吨/年；
+
+- [来源](../../../companies/中密控股/raw/reports/中密控股：2022年半年度报告.pdf)
+
 ### 2026-04-12 | 新闻 | Baidu joins China's OpenClaw frenzy with new AI agents
 - [Skip to main content](https://www.reuters.com/business/media-telecom/baidu-joins-chinas-openclaw-frenzy-with-new-ai-agents-2026-03-17/#main-content). *   [World](https://www.reuters.com/world/). [Browse World](https://www.reuters.com/world/). *   [China](https://www.reuters.com/world/china/). *   [India](https://www.reuters.com/world/india/). *   [United States](https://www.reuters.com/world/us/). *   [Business](https://www.reuters.com/business/). [Browse Business](https://www.reuters.com/business/). *   [Energy](https://www.reuters.com/business/energy/). *   [Take Five](https://www.reuters.com/business/take-five/). *   [Markets](https://www.reuters.com/markets/). [Browse Markets](https://www.reuters.com/markets/). *   [On the Money](https://www.reuters.com/markets/on-the-money/). *   [Watchlist](https://www.reuters.com/markets/watchlist/). *   [Commodities](https://www.reuters.com/markets/commodities/). *   [Currencies](https://www.reuters.com/markets/currencies/). *   [Deals](https://www.reuters.com/markets/deals/). *   [U.S
 - Markets](https://www.reuters.com/markets/us/). *   [Wealth](https://www.reuters.com/markets/wealth/). *   [Sustainability](https://www.reuters.com/sustainability/). [Browse Sustainability](https://www.reuters.com/sustainability/). *   [Legal](https://www.reuters.com/legal/). [Browse Legal](https://www.reuters.com/legal/). [Commentary](https://www.reuters.com/commentary/). [Technology](https://www.reuters.com/technology/). [Investigations](https://www.reuters.com/investigations/). [Sports](https://www.reuters.com/sports/). [Graphics](https://www.reuters.com/graphics/). [Podcasts](https://www.reuters.com/podcasts/). [Video](https://www.reuters.com/video/). BEIJING, March 18 (Reuters) - Chinese tech giant Baidu [(9888.HK), opens new tab](https://www.reuters.com/markets/companies/9888.HK) on Tuesday unveiled a suite of artificial intelligence products, tapping growing domestic interest in OpenClaw, an open-source framework ​for agents that can perform complex tasks with less human input than ‌chatbots. [](https://www.reuters.com/authors/eduardo-baptista/). [Business](https://www.reuters.com/business/). *   [Home](https://www.reuters.com/). *    [Videos](https://www.reuters.com/video/). *    [Graphics](https://www.reuters.com/graphics/). *    [Podcasts](https://www.reuters.com/podcasts/). *   [Home](https://www.reuters.com/). *   [World](https://www.reuters.com/world/). *   [Business](https://www.reuters.com/business/). *   [Markets](https://www.reuters.com/markets/). *   [Sustainability](https://www.reuters.com/sustainability/). *   [Legal](https://www.reuters.com/legal/). *   [Breakingviews](https://www.reuters.com/breakingviews/). *   [Technology](https://www.reuters.com/technology/). *   [Investigations](https://www.reuters.com/investigations/). *   [Sports](https://www.reuters.com/sports/). *    [Videos](https://www.reuters.com/video/). *    [Graphics](https://www.reuters.com/graphics/). *    [Podcasts](https://www.reuters.com/podcasts/). *   [Media Center, opens new tab](https://www.reuters.com/media-center/). *   [Newsletters](https://www.reuters.com/newsletters/). *   [](https://www.facebook.com/Reuters). *   [](https://www.instagram.com/Reuters). [See here for a list of exchanges and delays.](https://www.reuters.com/info-pages/disclaimer/).

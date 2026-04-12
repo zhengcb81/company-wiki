@@ -268,6 +268,22 @@ nodes:
     - 配电
     - 电网
     - 特高压
+  密封件:
+    type: sector
+    description: 高端密封件行业，应用于石化、核电、航空航天等领域
+    tier: 4
+    keywords:
+    - 密封
+    - 密封件
+    - 机械密封
+    - 干气密封
+  高端制造:
+    type: theme
+    description: 高端制造业国产替代与技术升级
+    keywords:
+    - 高端制造
+    - 智能制造
+    - 工业母机
 edges:
 - from: 半导体设备
   to: 半导体代工
@@ -820,6 +836,28 @@ companies:
     position: 讯飞星火大模型，语音AI龙头
     news_queries:
     - 科大讯飞 最新消息
+  中密控股:
+    ticker: '300470'
+    exchange: SZSE
+    sectors:
+    - 密封件
+    themes:
+    - 高端制造
+    news_queries:
+    - 中密控股 最新消息
+    - 中密控股 密封件
+    position: 国内机械密封龙头，大密封产业布局
+  珂玛科技:
+    ticker: '301611'
+    exchange: SZSE
+    sectors:
+    - 半导体设备
+    themes:
+    - 半导体国产替代
+    news_queries:
+    - 珂玛科技 最新消息
+    - 珂玛科技 半导体
+    position: 半导体设备先进陶瓷材料供应商
 questions:
   GPU与AI芯片:
   - 各家GPU产品性能对比如何？
@@ -866,3 +904,7 @@ questions:
   - 大模型能力演进？
   - AI应用商业化进展？
   - Agent/工作流自动化落地？
+  密封件:
+  - 下游需求景气度如何？
+  - 国产替代进展？
+  - 重大订单或技术突破？

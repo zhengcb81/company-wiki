@@ -34,6 +34,7 @@ WIKI_ROOT = SCRIPTS_DIR.parent
 # 添加 scripts 目录到 path，导入模块
 sys.path.insert(0, str(SCRIPTS_DIR))
 from extract import extract_summary, classify_info_type
+from pdf_extract import extract_pdf_summary
 from graph import Graph
 
 LOG_PATH = WIKI_ROOT / "log.md"
@@ -114,9 +115,34 @@ def scan_pending_files(graph, company_name=None):
 
 # ── 读取文件元数据 ─────────────────────────
 def read_news_metadata(file_path):
-    """从 markdown 文件的 frontmatter 中读取元数据"""
-    content = Path(file_path).read_text(encoding="utf-8", errors="replace")
-    meta = {}
+    """读取文件元数据（支持 markdown 和 PDF）"""
+    path = Path(file_path)
+    filename = path.name
+    meta = {"_path": str(file_path), "_filename": filename}
+
+    # PDF 文件
+    if filename.lower().endswith(".pdf"):
+        result = extract_pdf_summary(str(file_path))
+        if result.get("error"):
+            meta["_content"] = ""
+            meta["_pdf_error"] = result["error"]
+        else:
+            # 合并所有提取的章节
+            sections_text = "\n\n".join(
+                f"[{s['name']}]\n{s['content']}" for s in result.get("sections", [])
+            )
+            meta["_content"] = sections_text
+            meta["_pdf_type"] = result.get("type", "unknown")
+            meta["_pdf_pages"] = result.get("pages_extracted", 0)
+        meta["title"] = filename.replace(".pdf", "")
+        meta["type"] = "report"
+        return meta
+
+    # Markdown 文件
+    try:
+        content = path.read_text(encoding="utf-8", errors="replace")
+    except Exception:
+        content = ""
 
     # 解析 frontmatter
     if content.startswith("---"):
@@ -126,13 +152,9 @@ def read_news_metadata(file_path):
             for line in front.strip().split("\n"):
                 if ":" in line:
                     key, val = line.split(":", 1)
-                    key = key.strip()
-                    val = val.strip().strip('"').strip("'")
-                    meta[key] = val
+                    meta[key.strip()] = val.strip().strip('"').strip("'")
 
     meta["_content"] = content
-    meta["_path"] = str(file_path)
-    meta["_filename"] = Path(file_path).name
     return meta
 
 
@@ -246,10 +268,21 @@ def add_timeline_entry(wiki_path, meta, topic_name, entity_type):
 
     summary = "\n".join(f"- {p}" for p in summary_points)
 
-    # 来源类型判断（结合 extract 的分类结果）
+    # 来源类型判断
     info_type = extracted.get('info_type', '新闻')
     source_type = "新闻"
-    if info_type == "财报":
+    if meta.get("type") == "report" or filename.lower().endswith(".pdf"):
+        # PDF 文件按内容细分
+        pdf_type = meta.get("_pdf_type", "")
+        if pdf_type == "investor_relations":
+            source_type = "投资者关系"
+        elif pdf_type == "research_report":
+            source_type = "研报"
+        elif "招股" in title:
+            source_type = "招股书"
+        else:
+            source_type = "财报"
+    elif info_type == "财报":
         source_type = "财报"
     elif info_type == "产品":
         source_type = "产品"
