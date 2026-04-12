@@ -127,8 +127,9 @@ search:
 # ── StockInfoDownloader 配置 ──────────────
 report_downloader:
   tool_path: "C:/Users/郑曾波/Projects/StockInfoDownloader"  # Windows 本地路径
-  config_file: "~/company-wiki/configs/stockinfo_config.json"  # 我们生成的配置
-  save_dir: "downloads"
+  # 直接下载到 wiki 的 companies/ 目录，无需 copy
+  # StockInfoDownloader 路径结构: {save_dir}/{公司名}/{文件名}.pdf
+  save_dir: "~/company-wiki/companies"
   browser_strategy: "playwright"
   pages:
     - name: "定期报告"

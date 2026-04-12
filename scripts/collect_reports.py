@@ -343,37 +343,26 @@ def main():
         print(f"    python main.py --parallel --workers 2")
         return
 
-    # 下载模式
+    # 下载模式 — 直接下载到 wiki 的 companies/ 目录
     tool_path, main_py = get_downloader_info(config)
-    wiki_root = str(WIKI_ROOT)
-
-    total_copied = 0
 
     for company in sd_config["companies"]:
         name = company["company_name"]
         code = company["stock_code"]
         print(f"\n[{name}] ({code})")
 
-        # 运行下载器
+        # 运行下载器（save_dir 已配置为 wiki 的 companies/ 目录）
         success = run_downloader(main_py, code, sd_config, tool_path)
 
         if not success:
             print(f"  Download may have failed, checking for partial results...")
 
-        # 复制到知识库
-        dl_save_dir = os.path.join(tool_path, sd_config["save_dir"])
-        if os.path.isdir(dl_save_dir):
-            count = copy_to_wiki(dl_save_dir, wiki_root, name)
-            print(f"  Copied {count} new files")
-            total_copied += count
-
     print(f"\n{'=' * 50}")
-    print(f"  Done. Total new files: {total_copied}")
+    print(f"  Done. Files saved directly to wiki/companies/")
     print(f"{'=' * 50}")
 
-    if total_copied > 0:
-        append_log(f"Collected {total_copied} report/research files")
-        print(f"\n  下一步: python3 scripts/ingest.py")
+    append_log("Ran StockInfoDownloader for reports/research")
+    print(f"\n  下一步: python3 scripts/ingest.py")
 
 
 if __name__ == "__main__":

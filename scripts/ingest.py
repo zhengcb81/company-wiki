@@ -86,16 +86,18 @@ def scan_pending_files(config, company_name=None):
     if company_name:
         companies = [c for c in companies if c["name"] == company_name]
 
-    # 扫描公司 raw/ 目录
+    # 扫描公司目录下所有文件（raw/ 子目录 + 直接存放的下载文件）
     for company in companies:
         name = company["name"]
-        for subdir in ["reports", "research", "news"]:
-            raw_dir = WIKI_ROOT / "companies" / name / "raw" / subdir
-            if not raw_dir.exists():
-                continue
-            for f in sorted(raw_dir.rglob("*")):
-                if f.is_file() and not is_ingested(f, ingested):
-                    pending.append((str(f), name, "company"))
+        company_dir = WIKI_ROOT / "companies" / name
+        if not company_dir.exists():
+            continue
+        for f in sorted(company_dir.rglob("*")):
+            if f.is_file() and not is_ingested(f, ingested):
+                # 跳过 wiki/ 目录下的文件（这些是产出，不是输入）
+                if "/wiki/" in str(f) or "\\wiki\\" in str(f):
+                    continue
+                pending.append((str(f), name, "company"))
 
     # 扫描行业 raw/ 目录
     sectors = config.get("sectors", {})

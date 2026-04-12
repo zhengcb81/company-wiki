@@ -12,13 +12,20 @@
 
 ## 目录规范
 
-- `companies/{公司名}/raw/` — 原始文档（只读，不修改）
+- `companies/{公司名}/` — 公司所有原始文档（新闻 .md、财报/研报 .pdf 直接存放）
+- `companies/{公司名}/raw/` — （可选）旧版按类型分的子目录，新文件直接存公司根目录
 - `companies/{公司名}/wiki/` — LLM 生成的主题时间线文档
-- `sectors/{行业名}/` — 行业层面的信息
+- `sectors/{行业名}/raw/` — 行业原始文档
+- `sectors/{行业名}/wiki/` — 行业 wiki 页面
 - `themes/{主题名}/` — 跨行业主题信息
 - `config.yaml` — 全局配置（公司列表、问题清单等）
 - `index.md` — 全局索引
 - `log.md` — 操作日志（append-only）
+
+文件来源：
+- `collect_news.py` → 新闻存入 `companies/{name}/raw/news/*.md`
+- `StockInfoDownloader` → 财报/研报直接存入 `companies/{name}/*.pdf`
+- `ingest.py` → 扫描 `companies/{name}/` 下所有非 wiki 文件
 
 ## Wiki 文档格式
 
