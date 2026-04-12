@@ -107,6 +107,15 @@ schedule:
   report_check: "weekly"
   lint: "weekly"
 
+# ── LLM 配置 ──────────────────────────────
+llm:
+  provider: "deepseek"
+  api_key: "sk-81a1961e9f9441c98c7840cb5f08449c"
+  model: "deepseek-reasoner"
+  base_url: "https://api.deepseek.com"
+  max_tokens: 1024
+  temperature: 0.3
+
 # ── 搜索配置 ──────────────────────────────
 search:
   engine: "tavily"

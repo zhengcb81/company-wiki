@@ -1,22 +1,21 @@
 #!/usr/bin/env python3
 """
 refine.py — LLM 精炼摘要模块
-扫描 wiki 页面中质量较低的条目，生成精炼清单供 LLM 处理。
+扫描 wiki 页面中质量较低的条目，调用 DeepSeek API 生成精炼摘要。
 
 用法：
-    # 步骤1：生成待精炼清单
-    python3 scripts/refine.py --generate-manifest > refine_manifest.json
+    # 一键精炼：扫描 → 调用 LLM → 应用
+    python3 scripts/refine.py --process
 
-    # 步骤2：用 LLM 处理清单（由 Hermes agent 或外部脚本完成）
-    # LLM 读取 manifest + raw 内容，输出 refined_summary
+    # 只处理前 5 个条目（调试用）
+    python3 scripts/refine.py --process --limit 5
 
-    # 步骤3：应用精炼结果
+    # 分步执行
+    python3 scripts/refine.py --generate-manifest > manifest.json
     python3 scripts/refine.py --apply refined_output.json
 
-工作流设计：
-    refine.py 负责"扫描+格式化+应用"
-    LLM（通过 agent 或 API）负责"理解+总结"
-    两者通过 JSON manifest 解耦
+    # 查看统计
+    python3 scripts/refine.py --stats
 """
 
 import argparse
@@ -25,13 +24,108 @@ import json
 import os
 import re
 import sys
+import time
+import urllib.request
+import urllib.error
 from datetime import datetime
 from pathlib import Path
 
 SCRIPTS_DIR = Path(__file__).resolve().parent
 WIKI_ROOT = SCRIPTS_DIR.parent
+CONFIG_PATH = WIKI_ROOT / "config.yaml"
 sys.path.insert(0, str(SCRIPTS_DIR))
 from extract import extract_summary, clean_text
+
+
+def load_config():
+    import yaml
+    with open(CONFIG_PATH, "r", encoding="utf-8") as f:
+        return yaml.safe_load(f)
+
+
+# ── DeepSeek API ──────────────────────────
+def call_deepseek(prompt, config):
+    """
+    调用 DeepSeek Reasoner API。
+    返回: (response_text, thinking_text, usage_info)
+    """
+    llm_cfg = config.get("llm", {})
+    api_key = llm_cfg.get("api_key", "")
+    model = llm_cfg.get("model", "deepseek-reasoner")
+    base_url = llm_cfg.get("base_url", "https://api.deepseek.com")
+    max_tokens = llm_cfg.get("max_tokens", 1024)
+    temperature = llm_cfg.get("temperature", 0.3)
+
+    url = f"{base_url}/chat/completions"
+    payload = json.dumps({
+        "model": model,
+        "messages": [
+            {
+                "role": "system",
+                "content": (
+                    "你是一个专业的金融分析师助手，负责将新闻内容提炼为简洁的要点摘要。\n"
+                    "要求：\n"
+                    "1. 输出 2-5 个关键要点，每条一行\n"
+                    "2. 每条要点以动词或名词开头，不要用'本文'、'报道'等开头\n"
+                    "3. 包含具体数字、日期、金额等关键数据\n"
+                    "4. 指出事件的意义或影响\n"
+                    "5. 如果原文内容不足以提炼要点，输出'内容不足，待补充'\n"
+                    "6. 直接输出要点列表，不要输出标题或解释"
+                )
+            },
+            {
+                "role": "user",
+                "content": prompt
+            }
+        ],
+        "max_tokens": max_tokens,
+        "temperature": temperature,
+    }).encode("utf-8")
+
+    req = urllib.request.Request(url, data=payload, method="POST")
+    req.add_header("Content-Type", "application/json")
+    req.add_header("Authorization", f"Bearer {api_key}")
+
+    try:
+        with urllib.request.urlopen(req, timeout=60) as resp:
+            data = json.loads(resp.read().decode("utf-8"))
+
+        choice = data.get("choices", [{}])[0]
+        message = choice.get("message", {})
+        response_text = message.get("content", "")
+        thinking_text = message.get("reasoning_content", "")
+        usage = data.get("usage", {})
+
+        return response_text, thinking_text, usage
+
+    except urllib.error.HTTPError as e:
+        body = e.read().decode("utf-8", errors="replace")
+        print(f"  DeepSeek API error {e.code}: {body[:200]}")
+        return "", "", {}
+    except Exception as e:
+        print(f"  DeepSeek request failed: {e}")
+        return "", "", {}
+
+
+def build_refine_prompt(entry):
+    """构建 LLM 精炼提示词"""
+    title = entry['title']
+    entity = entry['entity']
+    topic = entry['topic']
+    current = entry['current_summary']
+    raw = entry['raw_content']
+
+    prompt = f"""请为以下新闻条目生成精炼摘要。
+
+公司/实体：{entity}
+所属主题：{topic}
+新闻标题：{title}
+
+原始内容：
+{raw if raw else current}
+
+请输出 2-5 个关键要点："""
+    return prompt
 
 
 def scan_wiki_entries(wiki_root):
@@ -282,8 +376,64 @@ def apply_refinements(refinements):
     return updated_files
 
 
+def process_with_llm(manifest, config, limit=0):
+    """
+    用 DeepSeek LLM 处理 manifest 中的每个条目。
+    返回: [{wiki_path, date, title, refined_summary}, ...]
+    """
+    if limit > 0:
+        manifest = manifest[:limit]
+
+    refinements = []
+    total = len(manifest)
+    total_tokens = 0
+
+    for i, entry in enumerate(manifest):
+        print(f"  [{i+1}/{total}] {entry['entity']}/{entry['topic']}: {entry['title'][:40]}")
+
+        prompt = build_refine_prompt(entry)
+        response, thinking, usage = call_deepseek(prompt, config)
+
+        if response:
+            # 清理响应：去掉可能的编号前缀（1. 2. 等）
+            lines = response.strip().split('\n')
+            clean_lines = []
+            for line in lines:
+                line = line.strip()
+                # 去掉编号前缀
+                line = re.sub(r'^\d+[\.\)、]\s*', '', line)
+                # 去掉 markdown 列表符号
+                line = re.sub(r'^[-*•]\s*', '', line)
+                if line:
+                    clean_lines.append(line)
+
+            refined = '\n'.join(clean_lines)
+            print(f"    -> {refined[:80]}...")
+
+            refinements.append({
+                'wiki_path': entry['wiki_path'],
+                'date': entry['date'],
+                'title': entry['title'],
+                'refined_summary': refined,
+            })
+
+            tokens = usage.get("total_tokens", 0)
+            total_tokens += tokens
+        else:
+            print(f"    -> FAILED (no response)")
+
+        # 避免 rate limit
+        if i < total - 1:
+            time.sleep(1)
+
+    print(f"\n  Total tokens used: {total_tokens}")
+    return refinements
+
+
 def main():
     parser = argparse.ArgumentParser(description="LLM 精炼摘要")
+    parser.add_argument("--process", action="store_true",
+                        help="一键精炼：扫描 → LLM → 应用")
     parser.add_argument("--generate-manifest", action="store_true",
                         help="生成待精炼清单（输出 JSON）")
     parser.add_argument("--all", action="store_true",
@@ -292,6 +442,8 @@ def main():
                         help="应用精炼结果（输入 JSON 文件路径）")
     parser.add_argument("--stats", action="store_true",
                         help="显示统计信息")
+    parser.add_argument("--limit", type=int, default=0,
+                        help="最多处理 N 个条目（调试用）")
     args = parser.parse_args()
 
     if args.stats:
@@ -300,6 +452,33 @@ def main():
         print(f"Total entries: {len(entries)}")
         print(f"Needs refinement: {len(needs)}")
         print(f"Quality entries: {len(entries) - len(needs)}")
+        return
+
+    if args.process:
+        # 一键精炼
+        config = load_config()
+        print("=" * 50)
+        print("  LLM 精炼 — DeepSeek Reasoner")
+        print("=" * 50)
+
+        entries = scan_wiki_entries(WIKI_ROOT)
+        manifest = generate_refine_manifest(entries, only_needed=not args.all)
+
+        if not manifest:
+            print("\n  No entries need refinement. All quality entries!")
+            if not args.all:
+                print("  Use --all to refine all entries regardless of quality.")
+            return
+
+        print(f"\n  Found {len(manifest)} entries to refine\n")
+        refinements = process_with_llm(manifest, config, args.limit)
+
+        if refinements:
+            print(f"\n  Applying {len(refinements)} refinements...")
+            count = apply_refinements(refinements)
+            print(f"\n{'=' * 50}")
+            print(f"  Done. Updated {count} wiki files")
+            print(f"{'=' * 50}")
         return
 
     if args.generate_manifest:
