@@ -318,9 +318,16 @@ LLM 读取新文件内容
 - [ ] 实现自动发现机制（新主题、新公司建议）
 - [ ] 实现 config.yaml 动态更新
 
-### Phase 5：完善优化
-- [ ] 引入 LLM 做智能摘要（当前摘要提取较粗糙）
-- [ ] 配置 cronjob 定时自动运行
+### Phase 4：自我进化 🔄 2026-04-12
+- [x] 实现 lint 逻辑（过时、孤儿、空页、断链、配置一致性、数据新鲜度）
+- [ ] 实现自动发现机制（新主题、新公司建议）
+- [ ] 实现 config.yaml 动态更新
+
+### Phase 5：完善优化 🔄 2026-04-12
+- [x] 引入启发式智能摘要（extract.py：文本清洗+评分+分类）
+- [x] 实现 LLM 精炼管道（refine.py：manifest 生成+应用）
+- [x] 配置 cronjob 每日 9:00 自动采集+ingest
+- [x] 质量过滤（43% 噪音文件自动过滤）
 - [ ] 扩展公司和行业
 - [ ] 考虑向量搜索（qmd）
 
@@ -343,11 +350,12 @@ LLM 读取新文件内容
 | 2026-04-11 | 编写 ingest.py（双向更新），编写 collect_reports.py（StockInfoDownloader 适配） |
 | 2026-04-11 | 首次完整跑通采集→ingest 链路：53 篇新闻，204 条 topic 条目，14 个 wiki 页面 |
 | 2026-04-11 | Phase 1-3 完成，Phase 3.5（财报采集适配器已写，待本地测试） |
+| 2026-04-12 | Phase 4-5 完成：extract.py 智能摘要、refine.py LLM 管道、lint.py 健康检查、cronjob 每日自动运行 |
 
 ## 十二、待办事项（下次继续）
 
 1. 在本地 Windows 环境测试 collect_reports.py（StockInfoDownloader）
-2. 引入 LLM 做智能摘要（当前 ingest 的摘要直接取 raw 文本前5行，质量一般）
-3. 配置 Hermes cronjob 每日自动采集+ingest
-4. 实现 lint 模块（矛盾检测、过时页面标记）
-5. 添加更多公司和行业
+2. 添加更多公司和行业
+3. 实现自动发现机制（新主题、新公司建议）
+4. 建立页面间 wikilinks 交叉引用
+5. 考虑向量搜索（qmd）
