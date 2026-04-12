@@ -1,13 +1,13 @@
 ---
-title: "公司动态"
-entity: "中微公司"
-type: company_topic
+title: "CMP设备"
+entity: "CMP设备"
+type: sector_topic
 last_updated: "2026-04-12"
 sources_count: 12
 tags: []
 ---
 
-# 中微公司 — 公司动态
+# CMP设备 — CMP设备
 
 ## 核心问题
 - （待设定）
@@ -16,67 +16,67 @@ tags: []
 ### 2026-04-11 | 新闻 | 中微公司(688012) 最新新聞
 - 格隆匯4月9日丨中微公司(688012.SH)公佈，公司於近日收到持股5%以上股東巽鑫（上海）投資有限公司出具的《關於股份減持情況的告知函》：2026年2月11日至2026年4月9日，巽鑫（上海
 
-- [来源](../raw/news/2026-04-11_ffadd5ae_中微公司_688012__最新新聞.md)
+- [来源](../../../companies/中微公司/raw/news/2026-04-11_ffadd5ae_中微公司_688012__最新新聞.md)
 
 ### 2026-04-11 | 新闻 | 中微半导体_相关新闻报道_手机财新网
 - Shenzhen China Micro Semicon Co.,Ltd.'s Net Profit Dropped 40.5% in First Half of 2023 · 智库科技周评｜刚刚起步的中国半导体装备业，卷起来了？
 - · 【新科技观察】国内
 
-- [来源](../raw/news/2026-04-11_d8e7b387_中微半导体_相关新闻报道_手机财新网.md)
+- [来源](../../../companies/中微公司/raw/news/2026-04-11_d8e7b387_中微半导体_相关新闻报道_手机财新网.md)
 
 ### 2026-04-11 | 新闻 | Congratulations to AMEC who made its IPO debut on the Shanghai Stock Exchange, STAR Market! - Qualcomm Ventures
 - Among the first companies listing on China’s Nasdaq-style market is Advanced Micro-Fabrication Equipment Inc
 - China (AMEC), a Qualcomm Ventures portfolio company
 - The company was founded in 2004, the year China’s semiconductor industry was getting started
 
-- [来源](../raw/news/2026-04-11_d89d00bc_Congratulations_to_AMEC_who_made_its_IPO.md)
+- [来源](../../../companies/中微公司/raw/news/2026-04-11_d89d00bc_Congratulations_to_AMEC_who_made_its_IPO.md)
 
 ### 2026-04-11 | 新闻 | ΢˾(688012) ¶̬_F10_ͬ˳ڷ
 - | 2026-02-05 | **߹ܼ֣** >>  ־Ң(¡߼ԱļԱ)5.2ɣռͨɱ0.0083%ɽ349.52Ԫɷݱ䶯ԭ򣺶г |. | 2026-02-05 | **߹ܼԱ֣** >>  ־ǿ(ļԱ)0.27ɣռͨɱ0.0004%ɽ352.09Ԫɷݱ䶯ԭ򣺶г |. | 2026-01-07 | **߹ܼԱ֣** >>  ꐻգļԱ0.15ɣռͨɱ0.0002%ɽ355.00Ԫɷݱ䶯ԭ򣺶г |. | 2025-09-29 | **߹ܼԱ֣** >>  ־ǿļԱ0.16ɣռͨɱ0.0003%ɽ300.00Ԫɷݱ䶯ԭ򣺶г |. | 2025-09-23 | **߹ܼԱ֣** >>  ־ǿļԱ0.21ɣռͨɱ0.0003%ɽ260.00Ԫɷݱ䶯ԭ򣺶г |. | 2025-09-18 | **߹ܼԱ֣** >>  ꐻգļԱ0.5ɣռͨɱ0.0008%ɽ250.12Ԫɷݱ䶯ԭ򣺶г |. | 2025-09-17 | **߹ܼԱ֣** >>  ſļԱ0.5ɣռͨɱ0.0008%ɽ223.60Ԫɷݱ䶯ԭ򣺶г |. | 2025-08-22 | **߹ܼԱ֣** >>  ſļԱ0.3ɣռͨɱ0.0005%ɽ212.00Ԫɷݱ䶯ԭ򣺶г |. | 2025-07-31 | **߹ܼԱ֣** >>  ־ǿļԱ0.84ɣռͨɱ0.0013%ɽ197.00Ԫɷݱ䶯ԭ򣺶г |. | 2025-07-22 | **߹ܼԱ֣** >>  ſļԱ0.29ɣռͨɱ0.0005%ɽ188.56Ԫɷݱ䶯ԭ򣺶г |. | 2025-07-08 | **߹ܼԱ֣** >>  ſļԱ0.13ɣռͨɱ0.0002%ɽ183.88Ԫɷݱ䶯ԭ򣺶г |. | 2025-06-30 | **߹ܼԱ֣** >>  ΰҵļԱ0.6ɣռͨɱ0.001%ɽ180.57Ԫɷݱ䶯ԭ򣺶г |. | 2025-05-29 | **߹ܼԱ֣** >>  ΰҵļԱ0.13ɣռͨɱ0.0002%ɽ173.88Ԫɷݱ䶯ԭ򣺶г |. | 2025-05-14 | **߹ܼԱ֣** >>  ſļԱ0.05ɣռͨɱ0.0001%ɽ187.25Ԫɷݱ䶯ԭ򣺶г |. | 2024-11-12 | **߹ܼԱ֣** >>  ־ǿļԱ0.58ɣռͨɱ0.0009%ɽ244.64Ԫɷݱ䶯ԭ򣺶г |. | 2024-11-11 | **߹ܼԱ֣** >>  ꐻգļԱ0.2ɣռͨɱ0.0003%ɽ236.01Ԫɷݱ䶯ԭ򣺶г |. | 2024-10-31 | **߹ܼԱ֣** >>  £ļԱ0.5ɣռͨɱ0.0008%ɽ186.00Ԫɷݱ䶯ԭ򣺶г |. | 2024-10-08 | **߹ܼԱ֣** >>  ־ǿļԱ0.7ɣռͨɱ0.0011%ɽ196.80Ԫɷݱ䶯ԭ򣺶г |. | 2024-09-30 | **߹ܼԱ֣** >>  £ļԱ0.5ɣռͨɱ0.0008%ɽ163.00Ԫɷݱ䶯ԭ򣺶г |. | 2024-06-21 | **߹ܼԱ֣** >>  ־ǿļԱ0.54ɣռͨɱ0.0009%ɽ147.60Ԫɷݱ䶯ԭ򣺶г |. | 2024-06-11 | **߹ܼԱ֣** >>  YANG JAMES WEIļԱ0.5ɣռͨɱ0.0008%ɽ147.06Ԫɷݱ䶯ԭ򣺶г |. | 2024-06-03 | **߹ܼԱ֣** >>  ΰҵļԱ0.12ɣռͨɱ0.0002%ɽ135.86Ԫɷݱ䶯ԭ򣺶г |.
 
-- [来源](../raw/news/2026-04-11_c9c4d056____688012_____F10___ڷ.md)
+- [来源](../../../companies/中微公司/raw/news/2026-04-11_c9c4d056____688012_____F10___ڷ.md)
 
 ### 2026-04-11 | 公告 | 中微公司324.00(0.84%)_公司公告
 - 2026-04-10 中微公司：简式权益变动报告书(巽鑫投资) 2026-04-10 中微公司：关于持股5%以上股东权益变动触及1%及5%刻度的提示性公告 2026-04-09 中微公司：
 
-- [来源](../raw/news/2026-04-11_a92091c8_中微公司324_00_0_84___公司公告.md)
+- [来源](../../../companies/中微公司/raw/news/2026-04-11_a92091c8_中微公司324_00_0_84___公司公告.md)
 
 ### 2026-04-11 | 新闻 | [News] China's Etching Tool Giant AMEC Flags Up to 35% Profit ...
 - AMEC's 2025 sales are expected to rise nearly 37% year on year to RMB 12.385 billion, with its core etching equipment business performing
 
-- [来源](../raw/news/2026-04-11_92307223__News__China_s_Etching_Tool_Giant_AMEC_F.md)
+- [来源](../../../companies/中微公司/raw/news/2026-04-11_92307223__News__China_s_Etching_Tool_Giant_AMEC_F.md)
 
 ### 2026-04-11 | 新闻 | Advanced Micro-Fabrication Equipment Inc. China Price - Perplexity
 - Jefferies raised its price target sharply from 248 yuan to 368 yuan, maintaining a Buy rating, signaling strong confidence in AMEC's growth trajectory
 
-- [来源](../raw/news/2026-04-11_6442e86e_Advanced_Micro_Fabrication_Equipment_Inc.md)
+- [来源](../../../companies/中微公司/raw/news/2026-04-11_6442e86e_Advanced_Micro_Fabrication_Equipment_Inc.md)
 
 ### 2026-04-11 | 新闻 | [News] China's Chipmaking Tool Giant AMEC Eyes Sizone ...
 - Over the next five to ten years, Yin said, AMEC and its partners aim to expand to over 60% of the high-end IC market, with a goal of joining the
 
-- [来源](../raw/news/2026-04-11_56c10c33__News__China_s_Chipmaking_Tool_Giant_AME.md)
+- [来源](../../../companies/中微公司/raw/news/2026-04-11_56c10c33__News__China_s_Chipmaking_Tool_Giant_AME.md)
 
 ### 2026-04-11 | 产品 | 中微公司推出四款覆盖硅基及化合物半导体关键工艺的新产品 - 证券时报
 - 人民财讯3月25日电，据中微公司消息，在SEMICON China 2026期间，中微半导体设备（上海）股份有限公司（简称“中微公司”）宣布推出四款覆盖硅基及化合物半导体
 
-- [来源](../raw/news/2026-04-11_43de33fa_中微公司推出四款覆盖硅基及化合物半导体关键工艺的新产品___证券时报.md)
+- [来源](../../../companies/中微公司/raw/news/2026-04-11_43de33fa_中微公司推出四款覆盖硅基及化合物半导体关键工艺的新产品___证券时报.md)
 
 ### 2026-04-11 | 新闻 | Advanced Micro-Fabrication Equipment Inc. China (688012.SS) Stock Price, News, Quote & History - Yahoo Finance
 - - Best Valentine's Day gifts. # Advanced Micro-Fabrication Equipment Inc
 - China (688012.SS). Advanced Micro-Fabrication Equipment Inc
 - China engages in the research and development, manufacture, and sale of high-end semiconductor equipment and pan-semiconductor equipment in China
 
-- [来源](../raw/news/2026-04-11_31428042_Advanced_Micro_Fabrication_Equipment_Inc.md)
+- [来源](../../../companies/中微公司/raw/news/2026-04-11_31428042_Advanced_Micro_Fabrication_Equipment_Inc.md)
 
 ### 2026-04-11 | 新闻 | 直接对标国际巨头！记者实探中微公司六大半导体设备新品
 - 中微公司董事长兼总经理尹志尧在该展会主旨演讲环节表示，目前，中微公司在研项目涵盖六大类、超二十款新设备，过去一款新设备的开发周期通常为3-5年，如今仅
 
-- [来源](../raw/news/2026-04-11_1510d0b9_直接对标国际巨头_记者实探中微公司六大半导体设备新品.md)
+- [来源](../../../companies/中微公司/raw/news/2026-04-11_1510d0b9_直接对标国际巨头_记者实探中微公司六大半导体设备新品.md)
 
 ### 2026-04-11 | 新闻 | AMEC acquires Sizone to expand CMP capabilities, outlines 2026 ...
 - Chinese semiconductor equipment maker Advanced Micro-Fabrication Equipment (AMEC) announced on March 30, 2026, plans to acquire a stake in
 
-- [来源](../raw/news/2026-04-11_08251b19_AMEC_acquires_Sizone_to_expand_CMP_capab.md)
+- [来源](../../../companies/中微公司/raw/news/2026-04-11_08251b19_AMEC_acquires_Sizone_to_expand_CMP_capab.md)
 
 
 

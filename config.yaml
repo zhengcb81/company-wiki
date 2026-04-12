@@ -1,105 +1,8 @@
 # ============================================
-# 上市公司知识库系统 — 全局配置
+# 上市公司知识库 — 运维配置
 # ============================================
-
-# ── 公司列表 ──────────────────────────────
-companies:
-  - ticker: "688012"
-    name: "中微公司"
-    exchange: "SSE STAR"       # 科创板
-    org_id: ""                  # StockInfoDownloader 会自动从 mapping 获取
-    sectors: ["半导体设备"]
-    themes: ["半导体国产替代"]
-    news_queries:
-      - "中微公司 最新消息"
-      - "中微半导体 新闻"
-      - "AMEC semiconductor news"
-
-  - ticker: "300470"
-    name: "中密控股"
-    exchange: "SZSE"            # 创业板
-    org_id: "9900023856"
-    sectors: ["密封件"]
-    themes: ["高端制造"]
-    news_queries:
-      - "中密控股 最新消息"
-      - "中密控股 密封件"
-
-  - ticker: "301611"
-    name: "珂玛科技"
-    exchange: "SZSE"            # 创业板
-    org_id: "9900056250"
-    sectors: ["半导体设备"]
-    themes: ["半导体国产替代"]
-    news_queries:
-      - "珂玛科技 最新消息"
-      - "珂玛科技 半导体"
-
-# ── 行业定义 ──────────────────────────────
-sectors:
-  半导体设备:
-    description: "半导体制造设备行业，包括刻蚀、薄膜、清洗、检测等设备"
-    topics:
-      - name: "行业概览"
-        questions:
-          - "本季度有哪些重大行业政策变化？"
-          - "全球半导体设备市场规模和增速？"
-          - "中国半导体设备国产化率进展？"
-      - name: "竞争格局"
-        questions:
-          - "国内各设备厂商市占率有何变化？"
-          - "有无重大技术突破或订单公告？"
-          - "海外厂商对中国市场的态度变化？"
-      - name: "技术趋势"
-        questions:
-          - "先进制程设备进展如何？"
-          - "成熟制程设备国产替代到了什么程度？"
-      - name: "资本与订单"
-        questions:
-          - "大基金等资本动向？"
-          - "主要客户（中芯、华虹等）扩产计划？"
-
-  密封件:
-    description: "高端密封件行业，应用于石化、核电、航空航天等领域"
-    topics:
-      - name: "行业概览"
-        questions:
-          - "下游需求（石化、核电等）景气度如何？"
-          - "国产替代进展？"
-      - name: "竞争格局"
-        questions:
-          - "国内密封件厂商竞争态势？"
-          - "有无重大订单或技术突破？"
-
-# ── 跨行业主题 ──────────────────────────────
-themes:
-  半导体国产替代:
-    description: "半导体全产业链国产替代进程跟踪"
-    topics:
-      - name: "设备国产化"
-        questions:
-          - "各环节设备国产化率？"
-          - "哪些设备已实现突破，哪些仍是瓶颈？"
-          - "美国制裁对设备国产化的影响？"
-      - name: "资本投入"
-        questions:
-          - "大基金三期投向？"
-          - "地方政府半导体投资？"
-      - name: "市场与需求"
-        questions:
-          - "晶圆厂扩产节奏？"
-          - "终端需求（AI、汽车电子等）对产能的拉动？"
-
-  高端制造:
-    description: "高端制造业国产替代与技术升级"
-    topics:
-      - name: "技术突破"
-        questions:
-          - "有哪些关键技术实现了国产化？"
-          - "与海外差距在哪些领域仍然显著？"
-      - name: "政策支持"
-        questions:
-          - "有哪些支持高端制造的政策出台？"
+# 业务数据（公司、行业、主题、拓扑关系）在 graph.yaml 中。
+# 本文件只包含 API 密钥、调度、路径等运维设置。
 
 # ── 调度配置 ──────────────────────────────
 schedule:
@@ -126,21 +29,19 @@ search:
 
 # ── StockInfoDownloader 配置 ──────────────
 report_downloader:
-  tool_path: "C:/Users/郑曾波/Projects/StockInfoDownloader"  # Windows 本地路径
-  # 直接下载到 wiki 的 companies/ 目录，无需 copy
-  # StockInfoDownloader 路径结构: {save_dir}/{公司名}/{文件名}.pdf
+  tool_path: "C:/Users/郑曾波/Projects/StockInfoDownloader"
   save_dir: "~/company-wiki/companies"
   browser_strategy: "playwright"
   pages:
     - name: "定期报告"
       suffix: "periodicReports"
-      allowed_keywords: null       # 不过滤，下载所有季报/半年报/年报
+      allowed_keywords: null
       max_pages: 10
     - name: "招股说明书"
       suffix: "latestAnnouncement"
       allowed_keywords: ["招股说明书", "上市招股说明书"]
       max_pages: 3
-      reverse_order: true          # 倒序（最新的在前）
+      reverse_order: true
     - name: "投资者关系"
       suffix: "research"
       allowed_keywords: ["投资者关系活动记录表", "投资者关系管理信息", "调研活动"]

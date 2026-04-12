@@ -31,19 +31,19 @@ from pathlib import Path
 SCRIPTS_DIR = Path(__file__).resolve().parent
 WIKI_ROOT = SCRIPTS_DIR.parent
 
-# 添加 scripts 目录到 path，导入 extract 模块
+# 添加 scripts 目录到 path，导入模块
 sys.path.insert(0, str(SCRIPTS_DIR))
 from extract import extract_summary, classify_info_type
-CONFIG_PATH = WIKI_ROOT / "config.yaml"
+from graph import Graph
+
 LOG_PATH = WIKI_ROOT / "log.md"
 INDEX_PATH = WIKI_ROOT / "index.md"
-INGESTED_DIR = WIKI_ROOT / ".ingested"  # 存储已 ingest 文件的标记
+INGESTED_DIR = WIKI_ROOT / ".ingested"
 
 
-def load_config():
-    import yaml
-    with open(CONFIG_PATH, "r", encoding="utf-8") as f:
-        return yaml.safe_load(f)
+def load_graph():
+    """加载图数据（单一数据源）"""
+    return Graph(str(WIKI_ROOT / "graph.yaml"))
 
 
 # ── Ingest 标记管理 ────────────────────────
@@ -73,20 +73,20 @@ def is_ingested(file_path, ingested_set):
 
 
 # ── 扫描待处理文件 ─────────────────────────
-def scan_pending_files(config, company_name=None):
+def scan_pending_files(graph, company_name=None):
     """
-    扫描所有 raw/ 目录，返回待 ingest 的文件列表。
+    扫描所有待 ingest 文件（从 Graph 获取公司列表）。
     返回: [(file_path, entity_name, entity_type), ...]
-    entity_type: company | sector | theme
     """
     ingested = get_ingested_set()
     pending = []
 
-    companies = config.get("companies", [])
+    # 从 graph 获取公司列表
+    companies = graph.get_all_companies()
     if company_name:
         companies = [c for c in companies if c["name"] == company_name]
 
-    # 扫描公司目录下所有文件（raw/ 子目录 + 直接存放的下载文件）
+    # 扫描公司目录下所有文件
     for company in companies:
         name = company["name"]
         company_dir = WIKI_ROOT / "companies" / name
@@ -94,31 +94,20 @@ def scan_pending_files(config, company_name=None):
             continue
         for f in sorted(company_dir.rglob("*")):
             if f.is_file() and not is_ingested(f, ingested):
-                # 跳过 wiki/ 目录下的文件（这些是产出，不是输入）
                 if "/wiki/" in str(f) or "\\wiki\\" in str(f):
                     continue
                 pending.append((str(f), name, "company"))
 
-    # 扫描行业 raw/ 目录
-    sectors = config.get("sectors", {})
-    for sector_name in sectors:
-        for subdir in ["research", "news"]:
-            raw_dir = WIKI_ROOT / "sectors" / sector_name / "raw" / subdir
-            if not raw_dir.exists():
-                continue
-            for f in sorted(raw_dir.rglob("*")):
-                if f.is_file() and not is_ingested(f, ingested):
-                    pending.append((str(f), sector_name, "sector"))
-
-    # 扫描主题 raw/ 目录
-    themes = config.get("themes", {})
-    for theme_name in themes:
-        raw_dir = WIKI_ROOT / "themes" / theme_name / "raw" / "news"
-        if not raw_dir.exists():
+    # 扫描行业目录
+    for sector_name in graph.get_all_sectors():
+        sector_dir = WIKI_ROOT / "sectors" / sector_name
+        if not sector_dir.exists():
             continue
-        for f in sorted(raw_dir.rglob("*")):
+        for f in sorted(sector_dir.rglob("*")):
             if f.is_file() and not is_ingested(f, ingested):
-                pending.append((str(f), theme_name, "theme"))
+                if "/wiki/" in str(f) or "\\wiki\\" in str(f):
+                    continue
+                pending.append((str(f), sector_name, "sector"))
 
     return pending
 
@@ -148,73 +137,27 @@ def read_news_metadata(file_path):
 
 
 # ── 判断相关性 ─────────────────────────────
-def determine_relevance(meta, config):
+def determine_relevance(meta, graph):
     """
     判断一条新闻/文档属于哪些 topics。
     返回: [(entity_name, entity_type, topic_name), ...]
+    使用 Graph API 动态推导，不再硬编码。
     """
-    title = meta.get("title", "").lower()
-    content = meta.get("_content", "").lower()
+    title = meta.get("title", "")
+    content = meta.get("_content", "")
     company_name = meta.get("company", "")
-    text = title + " " + content
 
-    relevant = []
+    # 提取正文（去掉 frontmatter）
+    body = content
+    if body.startswith("---"):
+        end = body.find("---", 3)
+        if end > 0:
+            body = body[end + 3:]
 
-    companies = config.get("companies", {})
-    sectors_cfg = config.get("sectors", {})
-    themes_cfg = config.get("themes", {})
+    text = f"{title} {body}"
 
-    # 1. 如果有明确的 company 标签，直接关联
-    if company_name:
-        # 找到该公司的所有 topics
-        for comp in config.get("companies", []):
-            if comp["name"] == company_name:
-                # 添加公司专属 topics（从 config 中定义的）
-                relevant.append((company_name, "company", "公司动态"))
-                # 添加关联行业 topics
-                for sector_name in comp.get("sectors", []):
-                    if sector_name in sectors_cfg:
-                        for topic in sectors_cfg[sector_name].get("topics", []):
-                            relevant.append((sector_name, "sector", topic["name"]))
-                # 添加关联主题 topics
-                for theme_name in comp.get("themes", []):
-                    if theme_name in themes_cfg:
-                        for topic in themes_cfg[theme_name].get("topics", []):
-                            relevant.append((theme_name, "theme", topic["name"]))
-                break
-
-    # 2. 关键词匹配（补充）
-    # 检查是否提到了其他公司
-    for comp in config.get("companies", []):
-        if comp["name"] != company_name and comp["name"] in text:
-            relevant.append((comp["name"], "company", "相关动态"))
-
-    # 3. 行业/主题关键词匹配
-    sector_keywords = {
-        "半导体设备": ["半导体", "芯片", "晶圆", "刻蚀", "薄膜", "光刻", "设备"],
-        "密封件": ["密封", "石化", "核电", "机械密封"],
-    }
-    theme_keywords = {
-        "半导体国产替代": ["国产替代", "自主可控", "半导体设备国产", "大基金"],
-        "高端制造": ["高端制造", "智能制造", "工业母机"],
-    }
-
-    for sector_name, keywords in sector_keywords.items():
-        if any(kw in text for kw in keywords) and sector_name in sectors_cfg:
-            for topic in sectors_cfg[sector_name].get("topics", []):
-                entry = (sector_name, "sector", topic["name"])
-                if entry not in relevant:
-                    relevant.append(entry)
-
-    for theme_name, keywords in theme_keywords.items():
-        if any(kw in text for kw in keywords) and theme_name in themes_cfg:
-            for topic in themes_cfg[theme_name].get("topics", []):
-                entry = (theme_name, "theme", topic["name"])
-                if entry not in relevant:
-                    relevant.append(entry)
-
-    # 去重
-    return list(set(relevant))
+    # 使用 Graph API 一次性获取所有相关实体
+    return graph.find_related_entities(text, company_hint=company_name or None)
 
 
 # ── Wiki 页面操作 ──────────────────────────
@@ -229,28 +172,17 @@ def get_wiki_path(entity_name, entity_type, topic_name):
     return None
 
 
-def create_topic_template(entity_name, entity_type, topic_name, config):
+def create_topic_template(entity_name, entity_type, topic_name, graph):
     """创建新 topic wiki 文档的模板"""
-    type_label = {
-        "company": "公司动态",
-        "sector": "行业动态",
-        "theme": "主题动态"
-    }.get(entity_type, "动态")
-
-    # 从 config 获取问题列表
+    # 从 graph 获取问题列表
     questions = []
     if entity_type == "sector":
-        sector_cfg = config.get("sectors", {}).get(entity_name, {})
-        for t in sector_cfg.get("topics", []):
-            if t["name"] == topic_name:
-                questions = t.get("questions", [])
-                break
+        sector_info = graph.get_sector(entity_name)
+        if sector_info:
+            questions = sector_info.get("questions", [])
     elif entity_type == "theme":
-        theme_cfg = config.get("themes", {}).get(entity_name, {})
-        for t in theme_cfg.get("topics", []):
-            if t["name"] == topic_name:
-                questions = t.get("questions", [])
-                break
+        all_q = graph.get_all_questions()
+        questions = all_q.get(entity_name, [])
 
     questions_md = "\n".join(f"- {q}" for q in questions) if questions else "- （待设定）"
 
@@ -277,7 +209,7 @@ tags: []
 """
 
 
-def add_timeline_entry(wiki_path, meta, topic_name, entity_type, config):
+def add_timeline_entry(wiki_path, meta, topic_name, entity_type):
     """
     向 wiki 文档的时间线中添加新条目。
     返回: True 如果成功添加，False 如果跳过
@@ -443,11 +375,17 @@ def is_low_quality_source(file_path, meta):
 
     # 内容太短且标题就是公司名（公司主页）
     if len(meta.get("_content", "")) < 200:
-        company_names = ["中微公司", "中密控股", "珂玛科技", "AMEC"]
-        title_clean = title.replace(" ", "")
-        for cn in company_names:
-            if title_clean == cn or title_clean == cn.lower():
-                return True
+        # 从文件路径推断公司名
+        company_from_path = Path(file_path).parts
+        for part in company_from_path:
+            if part == "companies":
+                idx = company_from_path.index(part)
+                if idx + 1 < len(company_from_path):
+                    company_name_from_path = company_from_path[idx + 1]
+                    title_clean = title.replace(" ", "")
+                    if title_clean == company_name_from_path:
+                        return True
+                break
     for p in skip_file_patterns:
         if p in filename:
             return True
@@ -455,7 +393,7 @@ def is_low_quality_source(file_path, meta):
     return False
 
 
-def process_file(file_path, entity_name, entity_type, config, dry_run=False):
+def process_file(file_path, entity_name, entity_type, graph, dry_run=False):
     """处理单个待 ingest 文件"""
     meta = read_news_metadata(file_path)
 
@@ -466,7 +404,7 @@ def process_file(file_path, entity_name, entity_type, config, dry_run=False):
             mark_ingested(file_path)
         return []
 
-    relevant = determine_relevance(meta, config)
+    relevant = determine_relevance(meta, graph)
 
     if not relevant:
         print(f"  SKIP (no relevance): {meta.get('title', '')[:50]}")
@@ -486,7 +424,7 @@ def process_file(file_path, entity_name, entity_type, config, dry_run=False):
                 print(f"    [DRY] Would create: {wiki_path.relative_to(WIKI_ROOT)}")
             else:
                 wiki_path.parent.mkdir(parents=True, exist_ok=True)
-                template = create_topic_template(ent_name, ent_type, topic_name, config)
+                template = create_topic_template(ent_name, ent_type, topic_name, graph)
                 wiki_path.write_text(template, encoding="utf-8")
                 print(f"    Created: {wiki_path.relative_to(WIKI_ROOT)}")
 
@@ -494,7 +432,7 @@ def process_file(file_path, entity_name, entity_type, config, dry_run=False):
         if dry_run:
             print(f"    [DRY] Would update: {ent_name}/{topic_name}")
         else:
-            success = add_timeline_entry(wiki_path, meta, topic_name, ent_type, config)
+            success = add_timeline_entry(wiki_path, meta, topic_name, ent_type)
             if success:
                 print(f"    Updated: {ent_name}/{topic_name}")
                 updated_topics.append(f"{ent_name}/{topic_name}")
@@ -527,8 +465,8 @@ def main():
     print("  上市公司知识库 — Ingest")
     print("=" * 50)
 
-    config = load_config()
-    pending = scan_pending_files(config, args.company)
+    graph = load_graph()
+    pending = scan_pending_files(graph, args.company)
 
     if args.limit > 0:
         pending = pending[:args.limit]
@@ -552,7 +490,7 @@ def main():
     for i, (fp, ent, etype) in enumerate(pending):
         rel = Path(fp).relative_to(WIKI_ROOT)
         print(f"\n  [{i+1}/{len(pending)}] {rel}")
-        topics = process_file(fp, ent, etype, config, args.dry_run)
+        topics = process_file(fp, ent, etype, graph, args.dry_run)
 
         if topics:
             total_updated += len(topics)

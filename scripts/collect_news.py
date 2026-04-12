@@ -22,9 +22,13 @@ from datetime import datetime, timedelta
 from pathlib import Path
 
 # ── 路径 ──────────────────────────────────
-WIKI_ROOT = Path(__file__).resolve().parent.parent
+SCRIPTS_DIR = Path(__file__).resolve().parent
+WIKI_ROOT = SCRIPTS_DIR.parent
 CONFIG_PATH = WIKI_ROOT / "config.yaml"
 LOG_PATH = WIKI_ROOT / "log.md"
+
+sys.path.insert(0, str(SCRIPTS_DIR))
+from graph import Graph
 
 # ── 简易 YAML 解析（避免依赖 pyyaml）───────
 def load_yaml_simple(path):
@@ -205,11 +209,18 @@ type: news
 
 
 # ── 主流程 ────────────────────────────────
-def collect_for_company(company, config, dry_run=False):
+def load_search_config():
+    """从 config.yaml 读取搜索运维配置（API key 等）"""
+    import yaml
+    with open(CONFIG_PATH, "r", encoding="utf-8") as f:
+        cfg = yaml.safe_load(f)
+    return cfg.get("search", {})
+
+
+def collect_for_company(company, search_cfg, dry_run=False):
     """为单个公司采集新闻"""
     name = company["name"]
-    queries = company.get("news_queries", [])
-    search_cfg = config.get("search", {})
+    queries = company.get("news_queries", [f"{name} 最新消息"])
 
     api_key = search_cfg.get("tavily_api_key", "")
     if not api_key:
@@ -279,13 +290,14 @@ def main():
     print("  上市公司知识库 — 新闻采集")
     print("=" * 50)
 
-    config = load_config()
-    companies = config.get("companies", [])
+    graph = Graph()
+    companies = graph.get_all_companies()
+    search_cfg = load_search_config()
 
     if args.company:
         companies = [c for c in companies if c["name"] == args.company]
         if not companies:
-            print(f"ERROR: Company '{args.company}' not found in config")
+            print(f"ERROR: Company '{args.company}' not found in graph.yaml")
             sys.exit(1)
 
     total_new = 0
@@ -293,7 +305,7 @@ def main():
 
     for company in companies:
         print(f"\n[{company['name']}] ({company['ticker']})")
-        new, dup = collect_for_company(company, config, args.dry_run)
+        new, dup = collect_for_company(company, search_cfg, args.dry_run)
         total_new += new
         total_dup += dup
 
