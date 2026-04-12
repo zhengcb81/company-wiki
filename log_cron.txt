@@ -1,0 +1,3844 @@
+=== Sun Apr 12 21:00:02 BST 2026 collect_news ===
+==================================================
+  上市公司知识库 — 新闻采集
+==================================================
+
+[英伟达] (NVDA)
+  Searching: 英伟达 最新消息
+    + 英伟达(NVDA) 最新公告和新闻稿 - Moomoo
+    + 英伟达公司(NVDA)股票股价,实时行情,新闻,财报,研报评级_新浪财经
+  Searching: NVIDIA news
+    + NVIDIA Corporation (NVDA) - Yahoo Finance
+    + All The News Today On NVIDIA Stock, AI Demand - NVDA Update
+
+[AMD] (AMD)
+  Searching: AMD 最新消息
+    + 新闻搜索 | AMD
+    + AMD - Advanced Micro Devices Inc 公司介紹、財報與股價分析
+  Searching: AMD latest news
+
+[寒武纪] (688256)
+  Searching: 寒武纪 最新消息
+    + 寒武纪AI芯片-阿里云
+    + 关于我们 - 寒武纪
+
+[海光信息] (688041)
+  Searching: 海光信息 最新消息
+    + 海光信息 231.82 4.82(+2.12%)_财经频道_腾讯网
+    + 海光信息(688041)股票股价, 市值, 实时行情, 走势图, 财报- Moomoo
+    + Ϣ(688041)Ѷ_˲ƾ_
+
+[景嘉微] (300474)
+  Searching: 景嘉微 最新消息
+    + 景嘉微（sz300474）行情走势
+
+[北方华创] (002371)
+  Searching: 北方华创 最新消息
+    + 北方华创(002371)股吧_北方华创怎么样_分析讨论社区—东方财富网
+    + 北方华创476.89(0.86%)_个股资讯- 新浪股票
+    + 北方华创(002371)股票最新价格行情,实时走势图,股价分析预测
+
+[中微公司] (688012)
+  Searching: 中微公司 最新消息
+    + 中微公司(688012)股吧_中微公司怎么样_分析讨论社区 - 东方财富网
+    + 公告摘要 - 上海证券交易所
+  Searching: 中微半导体 新闻
+    + 中微半导体 - 电子工程专辑
+  Searching: AMEC semiconductor news
+
+[拓荆科技] (688072)
+  Searching: 拓荆科技 最新消息
+    + 拓荆科技(688072)股票股价, 市值, 实时行情, 走势图, 财报- Moomoo
+    + 拓荆科技股份有限公司
+
+[盛美上海] (688082)
+  Searching: 盛美上海 最新消息
+    + 盛美上海（sh688082）行情走势
+    + 首页-盛美半导体设备（上海）股份有限公司
+
+[华海清科] (688120)
+  Searching: 华海清科 最新消息
+    + 华海清科：部分产能已被核心客户提前锁定 - 电子工程专辑
+    + 华海清科股份有限公司- 新闻舆情动态 - 爱企查
+    + 华海清科183.50(0.75%)_年度报告_新浪财经
+
+[精测电子] (300567)
+  Searching: 精测电子 最新消息
+    + 精測電子(300567.SZ) 最新股票消息和頭條新聞 - Yahoo 財經
+    + 精测电子84.26 -1.04(-1.22%) - 腾讯证券
+
+[沪硅产业] (688126)
+  Searching: 沪硅产业 最新消息
+    + AASTOCKS 财经新闻 - 沪硅产业(688126.SH)
+    + 上海硅产业集团股份有限公司
+
+[南大光电] (300346)
+  Searching: 南大光电 最新消息
+    + 南大光电47.52(-0.38%)_个股资讯_新浪财经
+    + 南大光电2025年实现营收25.85亿元，净利润同比增长18%！-电子工程专辑
+
+[华特气体] (688268)
+  Searching: 华特气体 最新消息
+    + 华特气体：业绩彰显经营韧性，拟10派5元（含税）
+    + 中东战火下氦气价格暴涨，华特气体一个月股价涨超40%，去年净利下滑26%-虎嗅网
+    + 工业气体概念逆势走强 华特气体涨近10%
+    + 华特气体2025年实现营收14.19亿元，进口替代产品增至57款
+
+[江丰电子] (300666)
+  Searching: 江丰电子 最新消息
+    + 新闻动态 - 宁波江丰电子材料股份有限公司-
+    + 江丰电子(300666)股票最新价格行情,实时走势图,股价分析预测
+    + 江丰电子股票_数据_资料_信息 — 东方财富网
+
+[台积电] (TSM)
+  Searching: 台积电 最新消息
+    + 新闻中心 - 台湾集成电路制造股份有限公司
+  Searching: TSMC news
+    + TSM Stock Quote Price and Forecast - CNN
+    + Press Center - Taiwan Semiconductor Manufacturing Company Li
+    + Why AI Chips Made In The U.S. Are Being Sent To Taiwan - You
+
+[中芯国际] (688981)
+  Searching: 中芯国际 最新消息
+    + о(688981)˾_˲ƾ_
+    + AASTOCKS 財經新聞 - 中芯國際 (00981.HK)
+
+[华虹半导体] (688347)
+  Searching: 华虹半导体 最新消息
+    + 华虹半导体(01347) 股价、新闻、报价和图表 - 富途牛牛
+    + 华虹半导体(1347)股票最新价格行情,实时走势图,股价分析预测
+    + 华虹半导体怎么样_分析讨论社区 - 股吧- 东方财富网
+
+[华大九天] (301269)
+  Searching: 华大九天 最新消息
+    + 招聘信息_关于我们_华大九天| EDA及相关服务
+    + 公司简介_关于我们_华大九天| EDA及相关服务
+    + 华大九天与海光信息达成战略合作拓展EDA与算力协同应用
+
+[长电科技] (600584)
+  Searching: 长电科技 最新消息
+    + 长电科技43.02(2.65%)_公司公告_新浪财经
+    + 长电科技(600584)股吧_长电科技怎么样_分析讨论社区 - 东方财富网
+    + 長電科技(600584.SS) 股價、新聞、報價和記錄 - Yahoo 財經
+
+[通富微电] (002156)
+  Searching: 通富微电 最新消息
+    + 通富微电最新资讯动态 - 全球半导体观察
+    + 通富微电(002156)_最新价格_行情_走势图 - 东方财富
+
+[甬矽电子] (688362)
+  Searching: 甬矽电子 最新消息
+    + 公司动态-甬矽电子（宁波）股份有限公司
+    + 董事長、總經理王順波擬出資500萬元參與渠清如許擴募 - 中國市場新聞
+
+[中际旭创] (300308)
+  Searching: 中际旭创 最新消息
+    + 中际旭创股份有限公司-集光通信器件设计研发制造、智能装备制造于一身的技术创新型企业
+    + 中际旭创股票_数据_资料_信息 — 东方财富网
+
+[新易盛] (300502)
+  Searching: 新易盛 最新消息
+    + 新易盛(300502)公司公告_新浪财经_新浪网
+    + 新易盛(300502)最新价格_行情_走势图-手机东方财富财经门户
+
+[天孚通信] (300394)
+  Searching: 天孚通信 最新消息
+    + 天孚通信(300394)最新消息
+    + 天孚通信358.90(3.46%)_公司公告- 新浪财经
+    + 天孚通信(300394)_股票行情，行情首页_中财网
+
+[光迅科技] (002281)
+  Searching: 光迅科技 最新消息
+    + 光迅科技怎么样_分析讨论社区 - 股吧- 东方财富
+    + 光迅科技(002281) 最新新闻 - Moomoo
+    + 光迅科技(002281)个股资讯_新浪财经
+    + 光迅科技(002281)新闻公告_个股行情 - 同花顺
+    + 光迅科技(002281)股票最新价格行情,实时走势图,股价分析预测
+
+[太辰光] (300570)
+  Searching: 太辰光 最新消息
+    + 太辰光(300570) 最新公告和新闻稿 - Moomoo
+    + 太辰光(SZ300570) - 最新公告- 雪球
+    + 太辰光(300570)股票行情_行情中心 - 凤凰网财经
+
+[英维克] (002837)
+  Searching: 英维克 最新消息
+    + 英维克（sz002837）行情走势
+
+[高澜股份] (300499)
+  Searching: 高澜股份 最新消息
+    + 高澜股份(300499)股票股价, 市值, 实时行情, 走势图, 财报- Moomoo
+    + 高澜股份(300499)_最新价格_行情_走势图—东方财富网
+
+[申菱环境] (301018)
+  Searching: 申菱环境 最新消息
+    + 申菱环境(301018)股票行情_行情中心 - 凤凰网财经
+
+[曙光数创] (872808)
+  Searching: 曙光数创 最新消息
+    + 曙光数创:71.60 6.06% +4.09 920808 搜狐证券 - 搜狐股票
+    + 曙光数创(BJ872808)股票股价 - 雪球
+
+[飞龙股份] (002536)
+  Searching: 飞龙股份 最新消息
+    + 飞龙股份（sz002536）行情走势
+    + 飞龙股份(002536)股票最新价格行情,实时走势图,股价分析预测
+    + 液冷服务器概念震荡拉升飞龙股份2连板 - 财经- 东方财富网
+    + ɷ(002536)˾߹_˲ƾ_
+
+[浪潮信息] (000977)
+  Searching: 浪潮信息 最新消息
+    + 浪潮信息(000977) 最新公告和新闻稿 - 富途牛牛
+    + 浪潮-云计算 大数据服务商
+
+[中科曙光] (603019)
+  Searching: 中科曙光 最新消息
+    + 中科曙光(603019)股票股价, 市值, 实时行情, 走势图, 财报- Moomoo
+    + 中科曙光 - 腾讯证券 - QQ
+
+[工业富联] (601138)
+  Searching: 工业富联 最新消息
+
+[紫光股份] (000938)
+  Searching: 紫光股份 最新消息
+    + 紫光股份(000938) 最新新闻
+    + 紫光股份(临时代码) (810773) 最新公告和新闻稿
+    + 紫光股份怎么样_分析讨论社区 - 股吧- 东方财富网
+
+[东方电缆] (603606)
+  Searching: 东方电缆 最新消息
+    + 最新动态 - 东方电缆
+    + 东方电缆(SH603606)股票股价 - 雪球
+
+[许继电气] (000400)
+  Searching: 许继电气 最新消息
+    + 许继电气(000400)_最新价格_行情_走势图—东方财富网
+    + 许继电气28.00(-0.74%)_公司高管 - 新浪
+    + 许继电气股份有限公司
+    + 许继电气28.48(1.68%)_年度报告 - 新浪
+
+[宁德时代] (300750)
+  Searching: 宁德时代 最新消息
+    + 宁德时代(300750)个股资讯_新浪财经_新浪网
+    + 宁德时代(03750) 最新新闻 - 富途牛牛
+    + 宁德时代（300750）公告列表 _ 数据中心 _ 东方财富网
+
+[阳光电源] (300274)
+  Searching: 阳光电源 最新消息
+    + 阳光电源(SZ300274)股票股价_股价行情_财报_数据报告 - 雪球
+    + 公司公告_阳光电源 SUNGROW
+    + 阳光电源股票_数据_资料_信息 — 东方财富网
+
+[百度] (BIDU)
+  Searching: 百度 最新消息
+    + 百度新闻
+    + 百度新闻
+  Searching: Baidu AI news
+    + China AI champion Baidu rolls out most sweeping changes to s
+
+[商汤科技] (0020.HK)
+  Searching: 商汤科技 最新消息
+
+[科大讯飞] (002230)
+  Searching: 科大讯飞 最新消息
+    + 新闻资讯 - 科大讯飞智慧教育
+    + 科大讯飞回应网传技术岗大幅裁员消息：“假的”_腾讯新闻
+
+[中密控股] (300470)
+  Searching: 中密控股 最新消息
+  Searching: 中密控股 密封件
+    + 产品列表-中密控股股份有限公司
+    + 关键因素｜中密控股机械密封件 - 环球老虎财经
+
+[珂玛科技] (301611)
+  Searching: 珂玛科技 最新消息
+    + 珂玛科技二期项目在苏州高新区开工   总投资6亿元_中金在线财经号
+    + 通知公告_新闻资讯_苏州珂玛材料科技股份有限公司
+  Searching: 珂玛科技 半导体
+    + 3位留美博士创办的这家半导体材料企业，上市了—新闻—科学网
+    + 珂玛科技是存储陶瓷零部件的龙头企业， 国内市占率超过80% - 雪球
+
+==================================================
+  Done. New: 112, Duplicates: 312
+==================================================
+=== Sun Apr 12 21:01:03 BST 2026 ingest ===
+==================================================
+  上市公司知识库 — Ingest
+==================================================
+
+  Pending files: 548
+
+  [1/548] companies/英伟达/raw/news/2026-04-12_697baaac_英伟达_NVDA__最新公告和新闻稿___Moomoo.md
+    Updated: GPU与AI芯片/GPU与AI芯片
+    Updated: AI产业链/AI产业链
+    Updated: 英伟达/公司动态
+
+  [2/548] companies/英伟达/raw/news/2026-04-12_6a706cd4_英伟达公司_NVDA_股票股价_实时行情_新闻_财报_研报评级_新浪财经.md
+  SKIP (low quality): 英伟达公司(NVDA)股票股价,实时行情,新闻,财报,研报评级_新浪财经
+
+  [3/548] companies/英伟达/raw/news/2026-04-12_aab02179_All_The_News_Today_On_NVIDIA_Stock__AI_D.md
+    Updated: GPU与AI芯片/GPU与AI芯片
+    Updated: AI产业链/AI产业链
+    Updated: 英伟达/公司动态
+
+  [4/548] companies/英伟达/raw/news/2026-04-12_e8bb1ca3_NVIDIA_Corporation__NVDA____Yahoo_Financ.md
+    Updated: AI产业链/AI产业链
+    Updated: AMD/相关动态
+    Updated: GPU与AI芯片/GPU与AI芯片
+    Updated: 英伟达/公司动态
+
+  [5/548] companies/AMD/raw/news/2026-04-12_78d4d700_新闻搜索___AMD.md
+    Updated: 算力基建/算力基建
+    Updated: AMD/公司动态
+    Updated: AI产业链/AI产业链
+    Updated: GPU与AI芯片/GPU与AI芯片
+
+  [6/548] companies/AMD/raw/news/2026-04-12_a232cfdb_AMD___Advanced_Micro_Devices_Inc_公司介紹_財報.md
+    Updated: AMD/公司动态
+    Updated: AI产业链/AI产业链
+    Updated: GPU与AI芯片/GPU与AI芯片
+
+  [7/548] companies/寒武纪/raw/news/2026-04-12_0d49c317_关于我们___寒武纪.md
+    Updated: 寒武纪/公司动态
+    Updated: 输配电/输配电
+    Updated: 电力基建/电力基建
+    Updated: 算力基建/算力基建
+    Updated: 发电设备/发电设备
+    Updated: AI产业链/AI产业链
+    Updated: 储能/储能
+    Updated: GPU与AI芯片/GPU与AI芯片
+
+  [8/548] companies/寒武纪/raw/news/2026-04-12_213108a9_寒武纪AI芯片_阿里云.md
+    Updated: 寒武纪/公司动态
+    Updated: GPU与AI芯片/GPU与AI芯片
+    Updated: AI应用/AI应用
+    Updated: AI产业链/AI产业链
+
+  [9/548] companies/海光信息/raw/news/2026-04-12_2e5d6437_海光信息_688041_股票股价__市值__实时行情__走势图__财报__Moo.md
+  SKIP (low quality): 海光信息(688041)股票股价, 市值, 实时行情, 走势图, 财报- Moomoo
+
+  [10/548] companies/海光信息/raw/news/2026-04-12_3b2bd864_海光信息_231_82_4_82__2_12___财经频道_腾讯网.md
+    Updated: GPU与AI芯片/GPU与AI芯片
+    Updated: AI产业链/AI产业链
+    Updated: 海光信息/公司动态
+
+  [11/548] companies/海光信息/raw/news/2026-04-12_75533bac_Ϣ_688041_Ѷ__ƾ_.md
+    Updated: GPU与AI芯片/GPU与AI芯片
+    Updated: AI产业链/AI产业链
+    Updated: 海光信息/公司动态
+
+  [12/548] companies/景嘉微/raw/news/2026-04-12_9a27f9d7_景嘉微_sz300474_行情走势.md
+  SKIP (low quality): 景嘉微（sz300474）行情走势
+
+  [13/548] companies/北方华创/raw/news/2026-04-12_028bb878_北方华创_002371_股吧_北方华创怎么样_分析讨论社区_东方财富网.md
+    Updated: 输配电/输配电
+    Updated: 刻蚀设备/刻蚀设备
+    Created: companies/宁德时代/wiki/相关动态.md
+    Updated: 宁德时代/相关动态
+    Updated: 电力基建/电力基建
+    Updated: 北方华创/公司动态
+    Updated: 半导体设备/半导体设备
+    Updated: 发电设备/发电设备
+    Updated: 清洗设备/清洗设备
+    Updated: 薄膜沉积设备/薄膜沉积设备
+    Updated: AI产业链/AI产业链
+    Updated: 光刻设备/光刻设备
+    Updated: 储能/储能
+    Updated: CMP设备/CMP设备
+    Updated: 量检测设备/量检测设备
+    Updated: 半导体国产替代/半导体国产替代
+
+  [14/548] companies/北方华创/raw/news/2026-04-12_2d509d88_北方华创_002371_股票最新价格行情_实时走势图_股价分析预测.md
+  SKIP (low quality): 北方华创(002371)股票最新价格行情,实时走势图,股价分析预测
+
+  [15/548] companies/北方华创/raw/news/2026-04-12_3a0416de_北方华创476_89_0_86___个股资讯__新浪股票.md
+  SKIP (low quality): 北方华创476.89(0.86%)_个股资讯- 新浪股票
+
+  [16/548] companies/中微公司/raw/news/2026-04-12_bbc480be_中微半导体___电子工程专辑.md
+    Updated: 刻蚀设备/刻蚀设备
+    Updated: 半导体设备/半导体设备
+    Updated: 清洗设备/清洗设备
+    Updated: 中微公司/公司动态
+    Updated: 薄膜沉积设备/薄膜沉积设备
+    Updated: AI产业链/AI产业链
+    Updated: 光刻设备/光刻设备
+    Updated: CMP设备/CMP设备
+    Updated: 量检测设备/量检测设备
+    Updated: 半导体国产替代/半导体国产替代
+
+  [17/548] companies/中微公司/raw/news/2026-04-12_ea43a011_中微公司_688012_股吧_中微公司怎么样_分析讨论社区___东方财富网.md
+    Updated: 刻蚀设备/刻蚀设备
+    Updated: 半导体设备/半导体设备
+    Updated: 清洗设备/清洗设备
+    Updated: 中微公司/公司动态
+    Updated: 薄膜沉积设备/薄膜沉积设备
+    Updated: AI产业链/AI产业链
+    Updated: 光刻设备/光刻设备
+    Updated: CMP设备/CMP设备
+    Updated: 量检测设备/量检测设备
+    Updated: 半导体国产替代/半导体国产替代
+
+  [18/548] companies/中微公司/raw/news/2026-04-12_ebb368fd_公告摘要___上海证券交易所.md
+    Updated: 刻蚀设备/刻蚀设备
+    Updated: 半导体设备/半导体设备
+    Updated: 清洗设备/清洗设备
+    Updated: 中微公司/公司动态
+    Updated: 薄膜沉积设备/薄膜沉积设备
+    Updated: AI产业链/AI产业链
+    Updated: 光刻设备/光刻设备
+    Updated: CMP设备/CMP设备
+    Updated: 量检测设备/量检测设备
+    Updated: 半导体国产替代/半导体国产替代
+
+  [19/548] companies/拓荆科技/raw/news/2026-04-12_67a70c6c_拓荆科技股份有限公司.md
+    Updated: 刻蚀设备/刻蚀设备
+    Updated: 量检测设备/量检测设备
+    Updated: 半导体设备/半导体设备
+    Updated: 清洗设备/清洗设备
+    Updated: 薄膜沉积设备/薄膜沉积设备
+    Updated: AI产业链/AI产业链
+    Updated: 光刻设备/光刻设备
+    Updated: CMP设备/CMP设备
+    Updated: 拓荆科技/公司动态
+    Updated: 半导体国产替代/半导体国产替代
+
+  [20/548] companies/拓荆科技/raw/news/2026-04-12_7b620e25_拓荆科技_688072_股票股价__市值__实时行情__走势图__财报__Moo.md
+  SKIP (low quality): 拓荆科技(688072)股票股价, 市值, 实时行情, 走势图, 财报- Moomoo
+
+  [21/548] companies/盛美上海/raw/news/2026-04-12_2b05dd6e_首页_盛美半导体设备_上海_股份有限公司.md
+    Updated: 盛美上海/公司动态
+    Updated: 刻蚀设备/刻蚀设备
+    Updated: 半导体设备/半导体设备
+    Updated: 清洗设备/清洗设备
+    Updated: 薄膜沉积设备/薄膜沉积设备
+    Updated: AI产业链/AI产业链
+    Updated: 光刻设备/光刻设备
+    Updated: CMP设备/CMP设备
+    Updated: 量检测设备/量检测设备
+    Updated: 半导体国产替代/半导体国产替代
+
+  [22/548] companies/盛美上海/raw/news/2026-04-12_6b8ef6d0_盛美上海_sh688082_行情走势.md
+  SKIP (low quality): 盛美上海（sh688082）行情走势
+
+  [23/548] companies/华海清科/raw/news/2026-04-12_7944f719_华海清科股份有限公司__新闻舆情动态___爱企查.md
+    Updated: CMP设备/CMP设备
+    Updated: 刻蚀设备/刻蚀设备
+    Updated: 半导体设备/半导体设备
+    Updated: 清洗设备/清洗设备
+    Updated: 薄膜沉积设备/薄膜沉积设备
+    Updated: AI产业链/AI产业链
+    Updated: 光刻设备/光刻设备
+    Updated: 华海清科/公司动态
+    Updated: 量检测设备/量检测设备
+    Updated: 半导体国产替代/半导体国产替代
+
+  [24/548] companies/华海清科/raw/news/2026-04-12_8d8381f3_华海清科183_50_0_75___年度报告_新浪财经.md
+    Updated: CMP设备/CMP设备
+    Updated: 刻蚀设备/刻蚀设备
+    Updated: 半导体设备/半导体设备
+    Updated: 清洗设备/清洗设备
+    Updated: 薄膜沉积设备/薄膜沉积设备
+    Updated: AI产业链/AI产业链
+    Updated: 光刻设备/光刻设备
+    Updated: 华海清科/公司动态
+    Updated: 量检测设备/量检测设备
+    Updated: 半导体国产替代/半导体国产替代
+
+  [25/548] companies/华海清科/raw/news/2026-04-12_e6f066e1_华海清科_部分产能已被核心客户提前锁定___电子工程专辑.md
+    Updated: CMP设备/CMP设备
+    Updated: 刻蚀设备/刻蚀设备
+    Updated: 半导体设备/半导体设备
+    Updated: 清洗设备/清洗设备
+    Updated: 薄膜沉积设备/薄膜沉积设备
+    Updated: AI产业链/AI产业链
+    Updated: 光刻设备/光刻设备
+    Updated: 华海清科/公司动态
+    Updated: 量检测设备/量检测设备
+    Updated: 半导体国产替代/半导体国产替代
+
+  [26/548] companies/精测电子/raw/news/2026-04-12_21d48de8_精測電子_300567_SZ__最新股票消息和頭條新聞___Yahoo_財經.md
+    Updated: 精测电子/公司动态
+    Updated: 刻蚀设备/刻蚀设备
+    Updated: 半导体设备/半导体设备
+    Updated: 清洗设备/清洗设备
+    Updated: 薄膜沉积设备/薄膜沉积设备
+    Updated: AI产业链/AI产业链
+    Updated: 光刻设备/光刻设备
+    Updated: CMP设备/CMP设备
+    Updated: 量检测设备/量检测设备
+    Updated: 半导体国产替代/半导体国产替代
+
+  [27/548] companies/精测电子/raw/news/2026-04-12_ffddaa2d_精测电子84_26__1_04__1_22_____腾讯证券.md
+    Updated: 精测电子/公司动态
+    Updated: 刻蚀设备/刻蚀设备
+    Updated: 半导体设备/半导体设备
+    Updated: 清洗设备/清洗设备
+    Updated: 薄膜沉积设备/薄膜沉积设备
+    Updated: AI产业链/AI产业链
+    Updated: 光刻设备/光刻设备
+    Updated: CMP设备/CMP设备
+    Updated: 量检测设备/量检测设备
+    Updated: 半导体国产替代/半导体国产替代
+
+  [28/548] companies/沪硅产业/raw/news/2026-04-12_d414bdbf_AASTOCKS_财经新闻___沪硅产业_688126_SH_.md
+    Updated: 光刻胶/光刻胶
+    Updated: AI产业链/AI产业链
+    Updated: 沪硅产业/公司动态
+    Updated: 半导体国产替代/半导体国产替代
+    Updated: 靶材CMP/靶材CMP
+    Updated: 半导体材料/半导体材料
+    Updated: 硅片/硅片
+    Updated: 电子特气/电子特气
+
+  [29/548] companies/沪硅产业/raw/news/2026-04-12_fd0a50ac_上海硅产业集团股份有限公司.md
+    Updated: 光刻胶/光刻胶
+    Updated: AI产业链/AI产业链
+    Updated: 沪硅产业/公司动态
+    Updated: 半导体国产替代/半导体国产替代
+    Updated: 靶材CMP/靶材CMP
+    Updated: 半导体材料/半导体材料
+    Updated: 硅片/硅片
+    Updated: 电子特气/电子特气
+
+  [30/548] companies/南大光电/raw/news/2026-04-12_19bc135b_南大光电47_52__0_38___个股资讯_新浪财经.md
+  SKIP (low quality): 南大光电47.52(-0.38%)_个股资讯_新浪财经
+
+  [31/548] companies/南大光电/raw/news/2026-04-12_51954977_南大光电2025年实现营收25_85亿元_净利润同比增长18___电子工程专辑.md
+    Updated: 光刻胶/光刻胶
+    Updated: AI产业链/AI产业链
+    Updated: 南大光电/公司动态
+    Updated: 半导体国产替代/半导体国产替代
+    Updated: 靶材CMP/靶材CMP
+    Updated: 半导体材料/半导体材料
+    Updated: 硅片/硅片
+    Updated: 电子特气/电子特气
+
+  [32/548] companies/南大光电/raw/research/南大光电：2025年4月8日投资者关系活动记录表.pdf
+    Updated: 半导体材料/半导体材料
+    Updated: 硅片/硅片
+    Updated: 电子特气/电子特气
+    Updated: 光刻胶/光刻胶
+    Updated: 光刻设备/光刻设备
+    Updated: 靶材CMP/靶材CMP
+    Updated: 南大光电/相关动态
+
+  [33/548] companies/华特气体/raw/news/2026-04-12_01c1dd73_华特气体2025年实现营收14_19亿元_进口替代产品增至57款.md
+    Updated: 半导体材料/半导体材料
+    Updated: AI应用/AI应用
+    Updated: 硅片/硅片
+    Updated: 华特气体/公司动态
+    Updated: 电子特气/电子特气
+    Updated: 光刻胶/光刻胶
+    Updated: AI产业链/AI产业链
+    Updated: 靶材CMP/靶材CMP
+    Updated: 半导体国产替代/半导体国产替代
+
+  [34/548] companies/华特气体/raw/news/2026-04-12_02104497_中东战火下氦气价格暴涨_华特气体一个月股价涨超40__去年净利下滑26__虎嗅网.md
+    Updated: 刻蚀设备/刻蚀设备
+    Updated: 半导体材料/半导体材料
+    Updated: 半导体代工/半导体代工
+    Updated: 台积电/相关动态
+    Updated: 硅片/硅片
+    Updated: 华特气体/公司动态
+    Updated: 中芯国际/相关动态
+    Updated: 电子特气/电子特气
+    Updated: 光刻胶/光刻胶
+    Updated: AI产业链/AI产业链
+    Updated: 光刻设备/光刻设备
+    Updated: 封测/封测
+    Updated: 靶材CMP/靶材CMP
+    Updated: 半导体国产替代/半导体国产替代
+
+  [35/548] companies/华特气体/raw/news/2026-04-12_a79f8174_华特气体_业绩彰显经营韧性_拟10派5元_含税_.md
+    Updated: 刻蚀设备/刻蚀设备
+    Updated: 半导体材料/半导体材料
+    Updated: 半导体代工/半导体代工
+    Updated: 算力基建/算力基建
+    Updated: 硅片/硅片
+    Updated: 华特气体/公司动态
+    Updated: 中芯国际/相关动态
+    Updated: 电子特气/电子特气
+    Updated: 光刻胶/光刻胶
+    Updated: AI产业链/AI产业链
+    Updated: 光刻设备/光刻设备
+    Updated: 封测/封测
+    Updated: 靶材CMP/靶材CMP
+    Updated: 半导体国产替代/半导体国产替代
+
+  [36/548] companies/华特气体/raw/news/2026-04-12_df9db8f2_工业气体概念逆势走强_华特气体涨近10_.md
+    Updated: 刻蚀设备/刻蚀设备
+    Updated: 半导体材料/半导体材料
+    Updated: 硅片/硅片
+    Updated: 华特气体/公司动态
+    Updated: 电子特气/电子特气
+    Updated: 光刻胶/光刻胶
+    Updated: AI产业链/AI产业链
+    Updated: 靶材CMP/靶材CMP
+    Updated: 半导体国产替代/半导体国产替代
+
+  [37/548] companies/江丰电子/raw/news/2026-04-12_2205fcb4_江丰电子_300666_股票最新价格行情_实时走势图_股价分析预测.md
+  SKIP (low quality): 江丰电子(300666)股票最新价格行情,实时走势图,股价分析预测
+
+  [38/548] companies/江丰电子/raw/news/2026-04-12_257ffd53_新闻动态___宁波江丰电子材料股份有限公司_.md
+    Updated: 光刻胶/光刻胶
+    Updated: AI产业链/AI产业链
+    Updated: 电子特气/电子特气
+    Updated: 半导体材料/半导体材料
+    Updated: 半导体国产替代/半导体国产替代
+    Updated: 靶材CMP/靶材CMP
+    Updated: 硅片/硅片
+    Updated: 江丰电子/公司动态
+
+  [39/548] companies/江丰电子/raw/news/2026-04-12_804da9dc_江丰电子股票_数据_资料_信息___东方财富网.md
+    Updated: 光刻胶/光刻胶
+    Updated: AI产业链/AI产业链
+    Updated: 电子特气/电子特气
+    Updated: 半导体材料/半导体材料
+    Updated: 半导体国产替代/半导体国产替代
+    Updated: 靶材CMP/靶材CMP
+    Updated: 硅片/硅片
+    Updated: 江丰电子/公司动态
+
+  [40/548] companies/江丰电子/raw/reports/江丰电子：2020年年度报告.pdf
+    Updated: 半导体材料/半导体材料
+    Updated: 硅片/硅片
+    Updated: 清洗设备/清洗设备
+    Updated: 电子特气/电子特气
+    Updated: 光刻胶/光刻胶
+    Created: companies/江丰电子/wiki/相关动态.md
+    Updated: 江丰电子/相关动态
+    Updated: 薄膜沉积设备/薄膜沉积设备
+    Updated: 储能/储能
+    Updated: 靶材CMP/靶材CMP
+    Updated: 量检测设备/量检测设备
+
+  [41/548] companies/江丰电子/raw/reports/江丰电子：2020年年度报告摘要.pdf
+    Updated: 光刻胶/光刻胶
+    Updated: 江丰电子/相关动态
+    Updated: 半导体材料/半导体材料
+    Updated: 靶材CMP/靶材CMP
+    Updated: 硅片/硅片
+    Updated: 电子特气/电子特气
+
+  [42/548] companies/江丰电子/raw/reports/江丰电子：2021年半年度报告.pdf
+    Updated: CMP设备/CMP设备
+    Updated: 算力基建/算力基建
+    Updated: 硅片/硅片
+    Updated: 电子特气/电子特气
+    Updated: 江丰电子/相关动态
+    Updated: 薄膜沉积设备/薄膜沉积设备
+    Updated: 量检测设备/量检测设备
+    Updated: 刻蚀设备/刻蚀设备
+    Updated: 半导体材料/半导体材料
+    Updated: 半导体设备/半导体设备
+    Updated: 清洗设备/清洗设备
+    Updated: 光刻胶/光刻胶
+    Updated: 储能/储能
+    Updated: 光刻设备/光刻设备
+    Updated: 靶材CMP/靶材CMP
+
+  [43/548] companies/江丰电子/raw/reports/江丰电子：2021年半年度报告摘要.pdf
+    Updated: CMP设备/CMP设备
+    Updated: 算力基建/算力基建
+    Updated: 硅片/硅片
+    Updated: 电子特气/电子特气
+    Updated: 江丰电子/相关动态
+    Updated: 薄膜沉积设备/薄膜沉积设备
+    Updated: 量检测设备/量检测设备
+    Updated: 刻蚀设备/刻蚀设备
+    Updated: 半导体材料/半导体材料
+    Updated: 半导体设备/半导体设备
+    Updated: 清洗设备/清洗设备
+    Updated: 光刻胶/光刻胶
+    Updated: 光刻设备/光刻设备
+    Updated: 靶材CMP/靶材CMP
+
+  [44/548] companies/江丰电子/raw/reports/江丰电子：2021年年度报告.pdf
+    Updated: 北方华创/相关动态
+    Updated: CMP设备/CMP设备
+    Updated: 硅片/硅片
+    Updated: 中芯国际/相关动态
+    Updated: 电子特气/电子特气
+    Updated: 江丰电子/相关动态
+    Updated: 薄膜沉积设备/薄膜沉积设备
+    Updated: 量检测设备/量检测设备
+    Updated: 刻蚀设备/刻蚀设备
+    Updated: 半导体材料/半导体材料
+    Updated: 台积电/相关动态
+    Updated: 半导体设备/半导体设备
+    Updated: 靶材CMP/靶材CMP
+    Updated: 清洗设备/清洗设备
+    Updated: 光刻胶/光刻胶
+    Updated: 拓荆科技/相关动态
+    Updated: 储能/储能
+    Updated: 光刻设备/光刻设备
+    Updated: 半导体代工/半导体代工
+
+  [45/548] companies/江丰电子/raw/reports/江丰电子：2021年年度报告摘要.pdf
+    Updated: 光刻胶/光刻胶
+    Updated: 江丰电子/相关动态
+    Updated: 半导体材料/半导体材料
+    Updated: 靶材CMP/靶材CMP
+    Updated: 硅片/硅片
+    Updated: 电子特气/电子特气
+
+  [46/548] companies/江丰电子/raw/reports/江丰电子：2021年第一季度报告全文.pdf
+    Updated: 光刻胶/光刻胶
+    Updated: 江丰电子/相关动态
+    Updated: 半导体材料/半导体材料
+    Updated: 靶材CMP/靶材CMP
+    Updated: 硅片/硅片
+    Updated: 电子特气/电子特气
+
+  [47/548] companies/江丰电子/raw/reports/江丰电子：2021年第三季度报告.pdf
+    Updated: 光刻胶/光刻胶
+    Updated: 江丰电子/相关动态
+    Updated: 半导体代工/半导体代工
+    Updated: 半导体材料/半导体材料
+    Updated: 靶材CMP/靶材CMP
+    Updated: 硅片/硅片
+    Updated: 中芯国际/相关动态
+    Updated: 电子特气/电子特气
+
+  [48/548] companies/江丰电子/raw/reports/江丰电子：2022年一季度报告.pdf
+    Updated: 光刻胶/光刻胶
+    Updated: 江丰电子/相关动态
+    Updated: 半导体材料/半导体材料
+    Updated: 靶材CMP/靶材CMP
+    Updated: 硅片/硅片
+    Updated: 电子特气/电子特气
+
+  [49/548] companies/江丰电子/raw/reports/江丰电子：2022年三季度报告.pdf
+    Updated: 光刻胶/光刻胶
+    Updated: 江丰电子/相关动态
+    Updated: 半导体材料/半导体材料
+    Updated: 靶材CMP/靶材CMP
+    Updated: 硅片/硅片
+    Updated: 电子特气/电子特气
+
+  [50/548] companies/江丰电子/raw/reports/江丰电子：2022年半年度报告.pdf
+    Updated: 刻蚀设备/刻蚀设备
+    Updated: 半导体材料/半导体材料
+    Updated: 硅片/硅片
+    Updated: 电子特气/电子特气
+    Updated: 光刻胶/光刻胶
+    Updated: 清洗设备/清洗设备
+    Updated: 江丰电子/相关动态
+    Updated: 薄膜沉积设备/薄膜沉积设备
+    Updated: 储能/储能
+    Updated: 靶材CMP/靶材CMP
+    Updated: 量检测设备/量检测设备
+
+  [51/548] companies/江丰电子/raw/reports/江丰电子：2022年半年度报告摘要.pdf
+    Updated: 光刻胶/光刻胶
+    Updated: 江丰电子/相关动态
+    Updated: 半导体材料/半导体材料
+    Updated: 靶材CMP/靶材CMP
+    Updated: 硅片/硅片
+    Updated: 电子特气/电子特气
+
+  [52/548] companies/江丰电子/raw/reports/江丰电子：2022年年度报告.pdf
+    Updated: CMP设备/CMP设备
+    Updated: 硅片/硅片
+    Updated: 中芯国际/相关动态
+    Updated: 电子特气/电子特气
+    Updated: 江丰电子/相关动态
+    Updated: 薄膜沉积设备/薄膜沉积设备
+    Updated: 量检测设备/量检测设备
+    Updated: 刻蚀设备/刻蚀设备
+    Updated: 半导体材料/半导体材料
+    Updated: 半导体代工/半导体代工
+    Updated: 台积电/相关动态
+    Updated: 半导体设备/半导体设备
+    Updated: 清洗设备/清洗设备
+    Updated: 光刻胶/光刻胶
+    Updated: 储能/储能
+    Updated: 光刻设备/光刻设备
+    Updated: 靶材CMP/靶材CMP
+
+  [53/548] companies/江丰电子/raw/reports/江丰电子：2022年年度报告摘要.pdf
+    Updated: 光刻胶/光刻胶
+    Updated: 江丰电子/相关动态
+    Updated: 半导体材料/半导体材料
+    Updated: 靶材CMP/靶材CMP
+    Updated: 硅片/硅片
+    Updated: 电子特气/电子特气
+
+  [54/548] companies/江丰电子/raw/reports/江丰电子：2023年一季度报告.pdf
+    Updated: 光刻胶/光刻胶
+    Updated: 江丰电子/相关动态
+    Updated: 半导体材料/半导体材料
+    Updated: 靶材CMP/靶材CMP
+    Updated: 硅片/硅片
+    Updated: 电子特气/电子特气
+
+  [55/548] companies/江丰电子/raw/reports/江丰电子：2023年三季度报告.pdf
+    Updated: 光刻胶/光刻胶
+    Updated: 江丰电子/相关动态
+    Updated: 半导体材料/半导体材料
+    Updated: 靶材CMP/靶材CMP
+    Updated: 硅片/硅片
+    Updated: 电子特气/电子特气
+
+  [56/548] companies/江丰电子/raw/reports/江丰电子：2023年半年度报告.pdf
+    Updated: 半导体材料/半导体材料
+    Updated: 算力基建/算力基建
+    Updated: 硅片/硅片
+    Updated: 电子特气/电子特气
+    Updated: 光刻胶/光刻胶
+    Updated: 江丰电子/相关动态
+    Updated: 靶材CMP/靶材CMP
+
+  [57/548] companies/江丰电子/raw/reports/江丰电子：2023年半年度报告摘要.pdf
+    Updated: 光刻胶/光刻胶
+    Updated: 江丰电子/相关动态
+    Updated: 半导体材料/半导体材料
+    Updated: 靶材CMP/靶材CMP
+    Updated: 硅片/硅片
+    Updated: 电子特气/电子特气
+
+  [58/548] companies/江丰电子/raw/reports/江丰电子：2023年年度报告.pdf
+    Updated: CMP设备/CMP设备
+    Updated: 输配电/输配电
+    Updated: 电力基建/电力基建
+    Updated: 硅片/硅片
+    Updated: 中芯国际/相关动态
+    Updated: 发电设备/发电设备
+    Updated: 电子特气/电子特气
+    Updated: 液冷/液冷
+    Updated: 江丰电子/相关动态
+    Updated: 薄膜沉积设备/薄膜沉积设备
+    Updated: 量检测设备/量检测设备
+    Updated: 刻蚀设备/刻蚀设备
+    Updated: 半导体材料/半导体材料
+    Updated: 半导体代工/半导体代工
+    Updated: 台积电/相关动态
+    Updated: 半导体设备/半导体设备
+    Updated: 清洗设备/清洗设备
+    Updated: 光刻胶/光刻胶
+    Updated: 储能/储能
+    Updated: 光刻设备/光刻设备
+    Updated: 靶材CMP/靶材CMP
+
+  [59/548] companies/江丰电子/raw/reports/江丰电子：2023年年度报告摘要.pdf
+    Updated: 光刻胶/光刻胶
+    Updated: 江丰电子/相关动态
+    Updated: 半导体材料/半导体材料
+    Updated: 靶材CMP/靶材CMP
+    Updated: 硅片/硅片
+    Updated: 电子特气/电子特气
+
+  [60/548] companies/江丰电子/raw/reports/江丰电子：2024年一季度报告.pdf
+    Updated: 光刻胶/光刻胶
+    Updated: 江丰电子/相关动态
+    Updated: 半导体材料/半导体材料
+    Updated: 靶材CMP/靶材CMP
+    Updated: 硅片/硅片
+    Updated: 电子特气/电子特气
+
+  [61/548] companies/江丰电子/raw/reports/江丰电子：2024年三季度报告.pdf
+    Updated: 光刻胶/光刻胶
+    Updated: 江丰电子/相关动态
+    Updated: 半导体材料/半导体材料
+    Updated: 靶材CMP/靶材CMP
+    Updated: 硅片/硅片
+    Updated: 电子特气/电子特气
+
+  [62/548] companies/江丰电子/raw/reports/江丰电子：2024年半年度报告.pdf
+    Updated: 刻蚀设备/刻蚀设备
+    Updated: 半导体材料/半导体材料
+    Updated: 硅片/硅片
+    Updated: 电子特气/电子特气
+    Updated: 光刻胶/光刻胶
+    Updated: 江丰电子/相关动态
+    Updated: 薄膜沉积设备/薄膜沉积设备
+    Updated: 靶材CMP/靶材CMP
+    Updated: 量检测设备/量检测设备
+
+  [63/548] companies/江丰电子/raw/reports/江丰电子：2024年半年度报告摘要.pdf
+    Updated: 光刻胶/光刻胶
+    Updated: 江丰电子/相关动态
+    Updated: 半导体材料/半导体材料
+    Updated: 靶材CMP/靶材CMP
+    Updated: 硅片/硅片
+    Updated: 电子特气/电子特气
+
+  [64/548] companies/江丰电子/raw/reports/江丰电子：2024年年度报告.pdf
+    Updated: CMP设备/CMP设备
+    Updated: 算力基建/算力基建
+    Updated: 硅片/硅片
+    Updated: 中芯国际/相关动态
+    Updated: 电子特气/电子特气
+    Updated: 江丰电子/相关动态
+    Updated: 薄膜沉积设备/薄膜沉积设备
+    Updated: 量检测设备/量检测设备
+    Updated: 刻蚀设备/刻蚀设备
+    Updated: 半导体材料/半导体材料
+    Updated: 半导体代工/半导体代工
+    Updated: AI应用/AI应用
+    Updated: 台积电/相关动态
+    Updated: 半导体设备/半导体设备
+    Updated: 清洗设备/清洗设备
+    Updated: 光刻胶/光刻胶
+    Updated: 光刻设备/光刻设备
+    Updated: 靶材CMP/靶材CMP
+
+  [65/548] companies/江丰电子/raw/reports/江丰电子：2024年年度报告摘要.pdf
+    Updated: 光刻胶/光刻胶
+    Updated: 江丰电子/相关动态
+    Updated: 半导体材料/半导体材料
+    Updated: 靶材CMP/靶材CMP
+    Updated: 硅片/硅片
+    Updated: 电子特气/电子特气
+
+  [66/548] companies/江丰电子/raw/reports/江丰电子：2025年一季度报告.pdf
+    Updated: 光刻胶/光刻胶
+    Updated: 江丰电子/相关动态
+    Updated: 半导体材料/半导体材料
+    Updated: 靶材CMP/靶材CMP
+    Updated: 硅片/硅片
+    Updated: 电子特气/电子特气
+
+  [67/548] companies/江丰电子/raw/reports/江丰电子：2025年三季度报告.pdf
+    Updated: 光刻胶/光刻胶
+    Updated: 江丰电子/相关动态
+    Updated: 半导体代工/半导体代工
+    Updated: 半导体材料/半导体材料
+    Updated: 靶材CMP/靶材CMP
+    Updated: 硅片/硅片
+    Updated: 中芯国际/相关动态
+    Updated: 电子特气/电子特气
+
+  [68/548] companies/江丰电子/raw/reports/江丰电子：2025年半年度报告.pdf
+    Updated: CMP设备/CMP设备
+    Updated: 刻蚀设备/刻蚀设备
+    Updated: 半导体材料/半导体材料
+    Updated: 半导体设备/半导体设备
+    Updated: 硅片/硅片
+    Updated: 清洗设备/清洗设备
+    Updated: 电子特气/电子特气
+    Updated: 光刻胶/光刻胶
+    Updated: 江丰电子/相关动态
+    Updated: 薄膜沉积设备/薄膜沉积设备
+    Updated: 光刻设备/光刻设备
+    Updated: 高端制造/高端制造
+    Updated: 靶材CMP/靶材CMP
+    Updated: 量检测设备/量检测设备
+
+  [69/548] companies/江丰电子/raw/reports/江丰电子：2025年半年度报告摘要.pdf
+    Updated: 光刻胶/光刻胶
+    Updated: 江丰电子/相关动态
+    Updated: 半导体材料/半导体材料
+    Updated: 靶材CMP/靶材CMP
+    Updated: 硅片/硅片
+    Updated: 电子特气/电子特气
+
+  [70/548] companies/江丰电子/raw/research/江丰电子：2021年11月5日投资者关系活动记录表.pdf
+    Updated: 半导体材料/半导体材料
+    Updated: 靶材CMP/靶材CMP
+    Updated: 硅片/硅片
+    Updated: 电子特气/电子特气
+    Updated: 光刻胶/光刻胶
+    Updated: 江丰电子/相关动态
+    Updated: CMP设备/CMP设备
+
+  [71/548] companies/江丰电子/raw/research/江丰电子：2021年11月9日投资者关系活动记录表.pdf
+    Updated: 刻蚀设备/刻蚀设备
+    Updated: 半导体材料/半导体材料
+    Updated: 算力基建/算力基建
+    Updated: 半导体设备/半导体设备
+    Updated: 靶材CMP/靶材CMP
+    Updated: 硅片/硅片
+    Updated: 清洗设备/清洗设备
+    Updated: 电子特气/电子特气
+    Updated: 光刻胶/光刻胶
+    Updated: 江丰电子/相关动态
+    Updated: 薄膜沉积设备/薄膜沉积设备
+    Updated: 光刻设备/光刻设备
+    Updated: CMP设备/CMP设备
+    Updated: 量检测设备/量检测设备
+
+  [72/548] companies/江丰电子/raw/research/江丰电子：2021年8月28日投资者关系活动记录表.pdf
+    Updated: 刻蚀设备/刻蚀设备
+    Updated: 半导体材料/半导体材料
+    Updated: 靶材CMP/靶材CMP
+    Updated: 硅片/硅片
+    Updated: 电子特气/电子特气
+    Updated: 光刻胶/光刻胶
+    Updated: 江丰电子/相关动态
+    Updated: 薄膜沉积设备/薄膜沉积设备
+    Updated: CMP设备/CMP设备
+
+  [73/548] companies/江丰电子/raw/research/江丰电子：2021年8月31日投资者关系活动记录表.pdf
+    Updated: 半导体代工/半导体代工
+    Updated: 半导体材料/半导体材料
+    Updated: 台积电/相关动态
+    Updated: 硅片/硅片
+    Updated: 电子特气/电子特气
+    Updated: 光刻胶/光刻胶
+    Updated: 江丰电子/相关动态
+    Updated: 薄膜沉积设备/薄膜沉积设备
+    Updated: 靶材CMP/靶材CMP
+
+  [74/548] companies/江丰电子/raw/research/江丰电子：2021年9月2日投资者关系活动记录表.pdf
+    Updated: 半导体材料/半导体材料
+    Updated: 硅片/硅片
+    Updated: 电子特气/电子特气
+    Updated: 光刻胶/光刻胶
+    Updated: 江丰电子/相关动态
+    Updated: 靶材CMP/靶材CMP
+    Updated: 量检测设备/量检测设备
+
+  [75/548] companies/江丰电子/raw/research/江丰电子：2025年三季度报告.pdf
+    Updated: 光刻胶/光刻胶
+    Updated: 江丰电子/相关动态
+    Updated: 半导体代工/半导体代工
+    Updated: 半导体材料/半导体材料
+    Updated: 靶材CMP/靶材CMP
+    Updated: 硅片/硅片
+    Updated: 中芯国际/相关动态
+    Updated: 电子特气/电子特气
+
+  [76/548] companies/江丰电子/raw/research/江丰电子：2025年半年度报告摘要.pdf
+    Updated: 光刻胶/光刻胶
+    Updated: 江丰电子/相关动态
+    Updated: 半导体材料/半导体材料
+    Updated: 靶材CMP/靶材CMP
+    Updated: 硅片/硅片
+    Updated: 电子特气/电子特气
+
+  [77/548] companies/台积电/raw/news/2026-04-12_06d261c8_Why_AI_Chips_Made_In_The_U_S__Are_Being_.md
+    Updated: 半导体代工/半导体代工
+    Updated: AI产业链/AI产业链
+    Updated: 台积电/公司动态
+
+  [78/548] companies/台积电/raw/news/2026-04-12_0ee38d1d_TSM_Stock_Quote_Price_and_Forecast___CNN.md
+    Updated: 半导体代工/半导体代工
+    Updated: AI产业链/AI产业链
+    Updated: 台积电/公司动态
+
+  [79/548] companies/台积电/raw/news/2026-04-12_75c3fcb9_Press_Center___Taiwan_Semiconductor_Manu.md
+    Updated: 半导体代工/半导体代工
+    Updated: AI产业链/AI产业链
+    Updated: 台积电/公司动态
+
+  [80/548] companies/台积电/raw/news/2026-04-12_a999c30d_新闻中心___台湾集成电路制造股份有限公司.md
+    Updated: 半导体代工/半导体代工
+    Updated: AI产业链/AI产业链
+    Updated: 台积电/公司动态
+
+  [81/548] companies/中芯国际/raw/news/2026-04-12_79e6c748_AASTOCKS_財經新聞___中芯國際__00981_HK_.md
+    Updated: 中芯国际/公司动态
+    Updated: 半导体代工/半导体代工
+    Updated: 半导体国产替代/半导体国产替代
+    Updated: AI产业链/AI产业链
+
+  [82/548] companies/中芯国际/raw/news/2026-04-12_cd91a128_о_688981____ƾ_.md
+    Updated: 中芯国际/公司动态
+    Updated: 半导体代工/半导体代工
+    Updated: 半导体国产替代/半导体国产替代
+    Updated: AI产业链/AI产业链
+
+  [83/548] companies/华虹半导体/raw/news/2026-04-12_8780358a_华虹半导体_1347_股票最新价格行情_实时走势图_股价分析预测.md
+  SKIP (low quality): 华虹半导体(1347)股票最新价格行情,实时走势图,股价分析预测
+
+  [84/548] companies/华虹半导体/raw/news/2026-04-12_9725f798_华虹半导体怎么样_分析讨论社区___股吧__东方财富网.md
+    Updated: 半导体国产替代/半导体国产替代
+    Updated: 半导体代工/半导体代工
+    Updated: 华虹半导体/公司动态
+    Updated: AI产业链/AI产业链
+
+  [85/548] companies/华虹半导体/raw/news/2026-04-12_a4080608_华虹半导体_01347__股价_新闻_报价和图表___富途牛牛.md
+    Updated: 半导体国产替代/半导体国产替代
+    Updated: 半导体代工/半导体代工
+    Updated: 华虹半导体/公司动态
+    Updated: AI产业链/AI产业链
+
+  [86/548] companies/华虹半导体/raw/reports/华虹公司：2023年半年度报告摘要.pdf
+  SKIP (no relevance): 华虹公司：2023年半年度报告摘要
+
+  [87/548] companies/华虹半导体/raw/reports/华虹公司：2023年年度报告摘要.pdf
+    Updated: 半导体代工/半导体代工
+    Updated: EDA与IP/EDA与IP
+
+  [88/548] companies/华虹半导体/raw/reports/华虹公司：2023年第三季度报告.pdf
+    Created: companies/华虹半导体/wiki/相关动态.md
+    Updated: 华虹半导体/相关动态
+    Updated: 半导体代工/半导体代工
+
+  [89/548] companies/华虹半导体/raw/reports/华虹公司：2024年半年度报告.pdf
+    Updated: 华虹半导体/相关动态
+    Updated: 半导体代工/半导体代工
+    Updated: EDA与IP/EDA与IP
+
+  [90/548] companies/华虹半导体/raw/reports/华虹公司：2024年半年度报告摘要.pdf
+  SKIP (no relevance): 华虹公司：2024年半年度报告摘要
+
+  [91/548] companies/华虹半导体/raw/reports/华虹公司：2024年年度报告.pdf
+    Updated: 华虹半导体/相关动态
+    Updated: 半导体代工/半导体代工
+    Updated: EDA与IP/EDA与IP
+
+  [92/548] companies/华虹半导体/raw/reports/华虹公司：2024年年度报告摘要.pdf
+    Updated: EDA与IP/EDA与IP
+    Updated: 封测/封测
+    Updated: 半导体代工/半导体代工
+    Updated: 华虹半导体/相关动态
+
+  [93/548] companies/华虹半导体/raw/reports/华虹公司：2024年第一季度报告.pdf
+    Updated: 华虹半导体/相关动态
+    Updated: 半导体代工/半导体代工
+
+  [94/548] companies/华虹半导体/raw/reports/华虹公司：2024年第三季度报告.pdf
+    Updated: 华虹半导体/相关动态
+    Updated: 半导体代工/半导体代工
+
+  [95/548] companies/华虹半导体/raw/reports/华虹公司：2025年半年度报告.pdf
+    Updated: 华虹半导体/相关动态
+    Updated: 半导体代工/半导体代工
+    Updated: 量检测设备/量检测设备
+
+  [96/548] companies/华虹半导体/raw/reports/华虹公司：2025年半年度报告摘要.pdf
+  SKIP (no relevance): 华虹公司：2025年半年度报告摘要
+
+  [97/548] companies/华虹半导体/raw/reports/华虹公司：2025年年度报告.pdf
+    Updated: 华虹半导体/相关动态
+    Updated: 半导体代工/半导体代工
+
+  [98/548] companies/华虹半导体/raw/reports/华虹公司：2025年年度报告摘要.pdf
+    Updated: 算力基建/算力基建
+    Updated: EDA与IP/EDA与IP
+    Updated: 封测/封测
+    Updated: 半导体代工/半导体代工
+    Updated: 华虹半导体/相关动态
+
+  [99/548] companies/华虹半导体/raw/reports/华虹公司：2025年第一季度报告.pdf
+    Updated: 华虹半导体/相关动态
+    Updated: 半导体代工/半导体代工
+
+  [100/548] companies/华虹半导体/raw/reports/华虹公司：2025年第三季度报告.pdf
+    Updated: 华虹半导体/相关动态
+    Updated: 半导体代工/半导体代工
+
+  [101/548] companies/华虹半导体/raw/reports/华虹公司：华虹半导体有限公司2023年半年度报告.pdf
+    Updated: EDA与IP/EDA与IP
+    Updated: 华虹半导体/相关动态
+    Updated: 算力基建/算力基建
+    Updated: 半导体代工/半导体代工
+
+  [102/548] companies/华虹半导体/raw/reports/华虹公司：华虹半导体有限公司2023年年度报告.pdf
+    Updated: 华虹半导体/相关动态
+    Updated: 半导体代工/半导体代工
+    Updated: EDA与IP/EDA与IP
+
+  [103/548] companies/华虹半导体/raw/reports/华虹公司：港股公告：2024年度报告.pdf
+    Updated: 输配电/输配电
+    Updated: 储能/储能
+    Updated: 电力基建/电力基建
+    Updated: 硅片/硅片
+    Updated: 发电设备/发电设备
+
+  [104/548] companies/华大九天/raw/news/2026-04-12_1ba3f220_招聘信息_关于我们_华大九天__EDA及相关服务.md
+    Updated: EDA与IP/EDA与IP
+    Updated: AI产业链/AI产业链
+    Updated: 华大九天/公司动态
+    Updated: 半导体国产替代/半导体国产替代
+
+  [105/548] companies/华大九天/raw/news/2026-04-12_45052c14_公司简介_关于我们_华大九天__EDA及相关服务.md
+  SKIP (low quality): 公司简介_关于我们_华大九天| EDA及相关服务
+
+  [106/548] companies/华大九天/raw/news/2026-04-12_f5dd72e5_华大九天与海光信息达成战略合作拓展EDA与算力协同应用.md
+    Updated: EDA与IP/EDA与IP
+    Updated: 海光信息/相关动态
+    Updated: AI产业链/AI产业链
+    Updated: GPU与AI芯片/GPU与AI芯片
+    Updated: 算力基建/算力基建
+    Updated: 华大九天/公司动态
+    Updated: 半导体国产替代/半导体国产替代
+
+  [107/548] companies/华大九天/raw/reports/华大九天：2022年三季度报告.pdf
+    Created: companies/华大九天/wiki/相关动态.md
+    Updated: 华大九天/相关动态
+    Updated: EDA与IP/EDA与IP
+
+  [108/548] companies/华大九天/raw/reports/华大九天：2022年半年度报告.pdf
+    Updated: 华大九天/相关动态
+    Updated: EDA与IP/EDA与IP
+    Updated: 薄膜沉积设备/薄膜沉积设备
+    Updated: 封测/封测
+    Updated: 算力基建/算力基建
+    Updated: 半导体代工/半导体代工
+    Updated: 量检测设备/量检测设备
+
+  [109/548] companies/华大九天/raw/reports/华大九天：2022年半年度报告摘要.pdf
+    Updated: 华大九天/相关动态
+    Updated: EDA与IP/EDA与IP
+
+  [110/548] companies/华大九天/raw/reports/华大九天：2022年年度报告.pdf
+    Updated: 封测/封测
+    Updated: EDA与IP/EDA与IP
+    Updated: 华大九天/相关动态
+
+  [111/548] companies/华大九天/raw/reports/华大九天：2022年年度报告摘要.pdf
+    Updated: 封测/封测
+    Updated: EDA与IP/EDA与IP
+    Updated: 华大九天/相关动态
+
+  [112/548] companies/华大九天/raw/reports/华大九天：2023年一季度报告.pdf
+    Updated: 华大九天/相关动态
+    Updated: EDA与IP/EDA与IP
+
+  [113/548] companies/华大九天/raw/reports/华大九天：2023年三季度报告.pdf
+    Updated: 华大九天/相关动态
+    Updated: EDA与IP/EDA与IP
+
+  [114/548] companies/华大九天/raw/reports/华大九天：2023年半年度报告.pdf
+    Updated: 封测/封测
+    Updated: EDA与IP/EDA与IP
+    Updated: 华大九天/相关动态
+
+  [115/548] companies/华大九天/raw/reports/华大九天：2023年半年度报告摘要.pdf
+    Updated: 华大九天/相关动态
+    Updated: EDA与IP/EDA与IP
+
+  [116/548] companies/华大九天/raw/reports/华大九天：2023年年度报告.pdf
+    Updated: 封测/封测
+    Updated: EDA与IP/EDA与IP
+    Updated: 华大九天/相关动态
+
+  [117/548] companies/华大九天/raw/reports/华大九天：2023年年度报告摘要.pdf
+    Updated: 封测/封测
+    Updated: EDA与IP/EDA与IP
+    Updated: 华大九天/相关动态
+
+  [118/548] companies/华大九天/raw/reports/华大九天：2024年一季度报告.pdf
+    Updated: 华大九天/相关动态
+    Updated: EDA与IP/EDA与IP
+
+  [119/548] companies/华大九天/raw/reports/华大九天：2024年三季度报告.pdf
+    Updated: 华大九天/相关动态
+    Updated: EDA与IP/EDA与IP
+
+  [120/548] companies/华大九天/raw/reports/华大九天：2024年半年度报告.pdf
+    Updated: 封测/封测
+    Updated: EDA与IP/EDA与IP
+    Updated: 华大九天/相关动态
+
+  [121/548] companies/华大九天/raw/reports/华大九天：2024年半年度报告摘要.pdf
+    Updated: 华大九天/相关动态
+    Updated: EDA与IP/EDA与IP
+
+  [122/548] companies/华大九天/raw/reports/华大九天：2024年年度报告.pdf
+    Updated: 封测/封测
+    Updated: EDA与IP/EDA与IP
+    Updated: 华大九天/相关动态
+
+  [123/548] companies/华大九天/raw/reports/华大九天：2024年年度报告摘要.pdf
+    Updated: 华大九天/相关动态
+    Updated: GPU与AI芯片/GPU与AI芯片
+    Updated: EDA与IP/EDA与IP
+
+  [124/548] companies/华大九天/raw/reports/华大九天：2025年一季度报告.pdf
+    Updated: 华大九天/相关动态
+    Updated: EDA与IP/EDA与IP
+
+  [125/548] companies/华大九天/raw/reports/华大九天：2025年三季度报告.pdf
+    Updated: 华大九天/相关动态
+    Updated: EDA与IP/EDA与IP
+
+  [126/548] companies/华大九天/raw/reports/华大九天：2025年半年度报告.pdf
+    Updated: 华大九天/相关动态
+    Updated: 算力基建/算力基建
+    Updated: EDA与IP/EDA与IP
+    Updated: 封测/封测
+    Updated: 半导体代工/半导体代工
+
+  [127/548] companies/华大九天/raw/reports/华大九天：2025年半年度报告摘要.pdf
+    Updated: 华大九天/相关动态
+    Updated: EDA与IP/EDA与IP
+
+  [128/548] companies/华大九天/raw/research/华大九天：2022年11月22日投资者关系活动记录表.pdf
+    Updated: 华大九天/相关动态
+    Updated: EDA与IP/EDA与IP
+
+  [129/548] companies/华大九天/raw/research/华大九天：2023年2月10日投资者关系活动记录表.pdf
+    Updated: 华大九天/相关动态
+    Updated: EDA与IP/EDA与IP
+    Updated: 封测/封测
+    Updated: 半导体代工/半导体代工
+
+  [130/548] companies/华大九天/raw/research/华大九天：2024年5月20日投资者关系活动记录表.pdf
+    Updated: 封测/封测
+    Updated: EDA与IP/EDA与IP
+    Updated: 华大九天/相关动态
+
+  [131/548] companies/华大九天/raw/research/华大九天：2025年4月29日投资者关系活动记录表.pdf
+    Updated: 华大九天/相关动态
+    Updated: EDA与IP/EDA与IP
+
+  [132/548] companies/华大九天/raw/research/华大九天：2025年5月20日投资者关系活动记录表.pdf
+    Updated: 华大九天/相关动态
+    Updated: EDA与IP/EDA与IP
+    Updated: 半导体代工/半导体代工
+    Updated: 光刻设备/光刻设备
+    Updated: 封测/封测
+    Updated: 台积电/相关动态
+
+  [133/548] companies/华大九天/raw/research/华大九天：2025年7月11日投资者关系活动记录表.pdf
+    Updated: 华大九天/相关动态
+    Updated: EDA与IP/EDA与IP
+    Updated: 光刻设备/光刻设备
+    Updated: 封测/封测
+
+  [134/548] companies/长电科技/raw/news/2026-04-12_136f111d_长电科技43_02_2_65___公司公告_新浪财经.md
+    Updated: 封测/封测
+    Updated: 长电科技/公司动态
+    Updated: 半导体国产替代/半导体国产替代
+    Updated: AI产业链/AI产业链
+
+  [135/548] companies/长电科技/raw/news/2026-04-12_20d475a8_长电科技_600584_股吧_长电科技怎么样_分析讨论社区___东方财富网.md
+    Updated: 长电科技/公司动态
+    Updated: AI产业链/AI产业链
+    Updated: 封测/封测
+    Updated: 半导体国产替代/半导体国产替代
+
+  [136/548] companies/长电科技/raw/news/2026-04-12_66b7d2d6_長電科技_600584_SS__股價_新聞_報價和記錄___Yahoo_財經.md
+    Updated: 封测/封测
+    Updated: 长电科技/公司动态
+    Updated: 半导体国产替代/半导体国产替代
+    Updated: AI产业链/AI产业链
+
+  [137/548] companies/通富微电/raw/news/2026-04-12_2c20b99a_通富微电最新资讯动态___全球半导体观察.md
+  SKIP (low quality): 通富微电最新资讯动态 - 全球半导体观察
+
+  [138/548] companies/通富微电/raw/news/2026-04-12_9a567ae1_通富微电_002156__最新价格_行情_走势图___东方财富.md
+  SKIP (low quality): 通富微电(002156)_最新价格_行情_走势图 - 东方财富
+
+  [139/548] companies/通富微电/raw/reports/通富微电：2020年年度报告.pdf
+    Created: companies/通富微电/wiki/相关动态.md
+    Updated: 通富微电/相关动态
+    Updated: AMD/相关动态
+    Updated: 封测/封测
+    Updated: GPU与AI芯片/GPU与AI芯片
+    Updated: 算力基建/算力基建
+
+  [140/548] companies/通富微电/raw/reports/通富微电：2021年半年度报告.pdf
+    Updated: 通富微电/相关动态
+    Updated: AMD/相关动态
+    Updated: 封测/封测
+    Updated: GPU与AI芯片/GPU与AI芯片
+    Updated: 液冷/液冷
+
+  [141/548] companies/通富微电/raw/reports/通富微电：2021年半年度报告摘要.pdf
+    Updated: 封测/封测
+    Updated: 通富微电/相关动态
+
+  [142/548] companies/通富微电/raw/reports/通富微电：2021年第一季度报告全文.pdf
+    Updated: 封测/封测
+    Updated: 通富微电/相关动态
+
+  [143/548] companies/通富微电/raw/reports/通富微电：2021年第一季度报告正文.pdf
+    Updated: 封测/封测
+    Updated: 通富微电/相关动态
+
+  [144/548] companies/通富微电/raw/reports/通富微电：2021年第三季度报告.pdf
+    Updated: 封测/封测
+    Updated: 通富微电/相关动态
+
+  [145/548] companies/通富微电/raw/reports/通富微电：2024年年度报告.pdf
+    Updated: 算力基建/算力基建
+    Updated: 液冷/液冷
+    Updated: 封测/封测
+    Updated: 高端制造/高端制造
+    Updated: 量检测设备/量检测设备
+    Updated: 通富微电/相关动态
+    Updated: AI应用/AI应用
+    Updated: 台积电/相关动态
+    Updated: AMD/相关动态
+    Updated: GPU与AI芯片/GPU与AI芯片
+    Updated: 半导体代工/半导体代工
+
+  [146/548] companies/通富微电/raw/reports/通富微电：2025年一季度报告.pdf
+    Updated: 封测/封测
+    Updated: 通富微电/相关动态
+
+  [147/548] companies/通富微电/raw/reports/通富微电：2025年三季度报告.pdf
+    Updated: 封测/封测
+    Updated: 通富微电/相关动态
+
+  [148/548] companies/通富微电/raw/reports/通富微电：2025年半年度报告.pdf
+    Updated: 通富微电/相关动态
+    Updated: 算力基建/算力基建
+    Updated: AI应用/AI应用
+    Updated: 液冷/液冷
+    Updated: EDA与IP/EDA与IP
+    Updated: AMD/相关动态
+    Updated: GPU与AI芯片/GPU与AI芯片
+    Updated: 封测/封测
+    Updated: 高端制造/高端制造
+
+  [149/548] companies/通富微电/raw/reports/通富微电：2025年半年度报告摘要.pdf
+    Updated: 通富微电/相关动态
+    Updated: 算力基建/算力基建
+    Updated: 液冷/液冷
+    Updated: EDA与IP/EDA与IP
+    Updated: AMD/相关动态
+    Updated: GPU与AI芯片/GPU与AI芯片
+    Updated: 封测/封测
+    Updated: 高端制造/高端制造
+
+  [150/548] companies/通富微电/raw/research/通富微电：002156通富微电投资者关系管理信息20240424.pdf
+    Updated: 通富微电/相关动态
+    Updated: 英伟达/相关动态
+    Updated: AMD/相关动态
+    Updated: 半导体代工/半导体代工
+    Updated: 封测/封测
+    Updated: GPU与AI芯片/GPU与AI芯片
+    Updated: 台积电/相关动态
+
+  [151/548] companies/通富微电/raw/research/通富微电：002156通富微电投资者关系管理信息20250418.pdf
+    Updated: 封测/封测
+    Updated: 通富微电/相关动态
+    Updated: 液冷/液冷
+
+  [152/548] companies/通富微电/raw/research/通富微电：002156通富微电投资者关系管理信息20250625.pdf
+    Updated: 通富微电/相关动态
+    Updated: 液冷/液冷
+    Updated: AMD/相关动态
+    Updated: 封测/封测
+    Updated: GPU与AI芯片/GPU与AI芯片
+
+  [153/548] companies/通富微电/raw/research/通富微电：002156通富微电投资者关系管理信息20250916.pdf
+    Updated: 通富微电/相关动态
+    Updated: AMD/相关动态
+    Updated: 封测/封测
+    Updated: GPU与AI芯片/GPU与AI芯片
+
+  [154/548] companies/通富微电/raw/research/通富微电：002156通富微电投资者关系管理信息20260116.pdf
+    Updated: 封测/封测
+    Updated: 算力基建/算力基建
+    Updated: 通富微电/相关动态
+
+  [155/548] companies/通富微电/raw/research/通富微电：002156通富微电投资者关系管理信息20260121.pdf
+    Updated: 封测/封测
+    Updated: 通富微电/相关动态
+
+  [156/548] companies/通富微电/raw/research/通富微电：002156通富微电投资者关系管理信息20260129.pdf
+    Updated: 通富微电/相关动态
+    Updated: 算力基建/算力基建
+    Updated: AMD/相关动态
+    Updated: 封测/封测
+    Updated: GPU与AI芯片/GPU与AI芯片
+
+  [157/548] companies/通富微电/raw/research/通富微电：投资者关系活动记录表.pdf
+    Updated: 通富微电/相关动态
+    Updated: AMD/相关动态
+    Updated: 封测/封测
+    Updated: GPU与AI芯片/GPU与AI芯片
+
+  [158/548] companies/通富微电/raw/research/通富微电：投资者关系活动记录表2021年12月24日.pdf
+    Updated: 通富微电/相关动态
+    Updated: AMD/相关动态
+    Updated: 封测/封测
+    Updated: GPU与AI芯片/GPU与AI芯片
+
+  [159/548] companies/甬矽电子/raw/news/2026-04-12_5b9e65be_董事長_總經理王順波擬出資500萬元參與渠清如許擴募___中國市場新聞.md
+    Updated: 封测/封测
+    Updated: 甬矽电子/公司动态
+    Updated: 半导体国产替代/半导体国产替代
+    Updated: AI产业链/AI产业链
+
+  [160/548] companies/甬矽电子/raw/news/2026-04-12_8f469ef4_公司动态_甬矽电子_宁波_股份有限公司.md
+    Updated: AI产业链/AI产业链
+    Updated: 刻蚀设备/刻蚀设备
+    Updated: 封测/封测
+    Updated: 甬矽电子/公司动态
+    Updated: 半导体国产替代/半导体国产替代
+
+  [161/548] companies/甬矽电子/raw/reports/甬矽电子：2022年年度报告(更正后).pdf
+    Updated: 封测/封测
+    Created: companies/甬矽电子/wiki/相关动态.md
+    Updated: 甬矽电子/相关动态
+
+  [162/548] companies/甬矽电子/raw/reports/甬矽电子：2023年半年度报告(更正后).pdf
+    Updated: 封测/封测
+    Updated: 甬矽电子/相关动态
+
+  [163/548] companies/甬矽电子/raw/reports/甬矽电子：2023年半年度报告.pdf
+    Updated: 封测/封测
+    Updated: 甬矽电子/相关动态
+
+  [164/548] companies/甬矽电子/raw/reports/甬矽电子：2023年半年度报告摘要.pdf
+    Updated: 封测/封测
+    Updated: 甬矽电子/相关动态
+
+  [165/548] companies/甬矽电子/raw/reports/甬矽电子：2023年年度报告.pdf
+    Updated: 封测/封测
+    Updated: 甬矽电子/相关动态
+
+  [166/548] companies/甬矽电子/raw/reports/甬矽电子：2023年年度报告摘要.pdf
+    Updated: 算力基建/算力基建
+    Updated: AI应用/AI应用
+    Updated: 台积电/相关动态
+    Updated: 甬矽电子/相关动态
+    Updated: EDA与IP/EDA与IP
+    Updated: 封测/封测
+    Updated: 半导体代工/半导体代工
+
+  [167/548] companies/甬矽电子/raw/reports/甬矽电子：2023年第一季度报告(更正后).pdf
+    Updated: 封测/封测
+    Updated: 甬矽电子/相关动态
+
+  [168/548] companies/甬矽电子/raw/reports/甬矽电子：2023年第三季度报告(更正后).pdf
+    Updated: 封测/封测
+    Updated: 甬矽电子/相关动态
+
+  [169/548] companies/甬矽电子/raw/reports/甬矽电子：2023年第三季度报告.pdf
+    Updated: 封测/封测
+    Updated: 甬矽电子/相关动态
+
+  [170/548] companies/甬矽电子/raw/reports/甬矽电子：2024年半年度报告.pdf
+    Updated: 封测/封测
+    Updated: 甬矽电子/相关动态
+
+  [171/548] companies/甬矽电子/raw/reports/甬矽电子：2024年半年度报告摘要.pdf
+    Updated: 封测/封测
+    Updated: 甬矽电子/相关动态
+
+  [172/548] companies/甬矽电子/raw/reports/甬矽电子：2024年年度报告.pdf
+    Updated: 封测/封测
+    Updated: 甬矽电子/相关动态
+
+  [173/548] companies/甬矽电子/raw/reports/甬矽电子：2024年年度报告摘要.pdf
+    Updated: EDA与IP/EDA与IP
+    Updated: AI应用/AI应用
+    Updated: 台积电/相关动态
+    Updated: 封测/封测
+    Updated: 算力基建/算力基建
+    Updated: 半导体代工/半导体代工
+    Updated: 甬矽电子/相关动态
+
+  [174/548] companies/甬矽电子/raw/reports/甬矽电子：2024年第一季度报告.pdf
+    Updated: 封测/封测
+    Updated: 甬矽电子/相关动态
+
+  [175/548] companies/甬矽电子/raw/reports/甬矽电子：2024年第三季度报告.pdf
+    Updated: 封测/封测
+    Updated: 甬矽电子/相关动态
+
+  [176/548] companies/甬矽电子/raw/reports/甬矽电子：2025年半年度报告.pdf
+    Updated: 封测/封测
+    Updated: 算力基建/算力基建
+    Updated: AI应用/AI应用
+    Updated: 甬矽电子/相关动态
+
+  [177/548] companies/甬矽电子/raw/reports/甬矽电子：2025年半年度报告摘要.pdf
+    Updated: 封测/封测
+    Updated: 甬矽电子/相关动态
+
+  [178/548] companies/甬矽电子/raw/reports/甬矽电子：2025年第一季度报告.pdf
+    Updated: 封测/封测
+    Updated: 甬矽电子/相关动态
+
+  [179/548] companies/甬矽电子/raw/reports/甬矽电子：2025年第三季度报告.pdf
+    Updated: 封测/封测
+    Updated: 甬矽电子/相关动态
+
+  [180/548] companies/甬矽电子/raw/reports/甬矽电子：甬矽电子2022年年度报告.pdf
+    Updated: 封测/封测
+    Updated: 甬矽电子/相关动态
+
+  [181/548] companies/甬矽电子/raw/reports/甬矽电子：甬矽电子2022年年度报告摘要.pdf
+    Updated: 台积电/相关动态
+    Updated: 甬矽电子/相关动态
+    Updated: EDA与IP/EDA与IP
+    Updated: 封测/封测
+    Updated: 半导体代工/半导体代工
+
+  [182/548] companies/甬矽电子/raw/reports/甬矽电子：甬矽电子2023年一季度报告.pdf
+    Updated: 封测/封测
+    Updated: 甬矽电子/相关动态
+
+  [183/548] companies/中际旭创/raw/news/2026-04-12_6539dfa9_中际旭创股票_数据_资料_信息___东方财富网.md
+    Updated: 中际旭创/公司动态
+    Updated: AI产业链/AI产业链
+    Updated: 光模块/光模块
+
+  [184/548] companies/中际旭创/raw/news/2026-04-12_cdc002e6_中际旭创股份有限公司_集光通信器件设计研发制造_智能装备制造于一身的技术创新型企.md
+    Updated: 中际旭创/公司动态
+    Updated: AI产业链/AI产业链
+    Updated: 光模块/光模块
+
+  [185/548] companies/中际旭创/raw/research/中际旭创：300308中际旭创投资者关系管理信息20240617.pdf
+    Updated: 光模块/光模块
+    Updated: 算力基建/算力基建
+    Updated: AI应用/AI应用
+    Updated: 中际旭创/相关动态
+
+  [186/548] companies/中际旭创/raw/research/中际旭创：300308中际旭创投资者关系管理信息20240714.pdf
+    Updated: 光模块/光模块
+    Updated: GPU与AI芯片/GPU与AI芯片
+    Updated: 算力基建/算力基建
+    Updated: 中际旭创/相关动态
+
+  [187/548] companies/中际旭创/raw/research/中际旭创：300308中际旭创投资者关系管理信息20240721.pdf
+    Updated: 中际旭创/相关动态
+    Updated: 光模块/光模块
+
+  [188/548] companies/中际旭创/raw/research/中际旭创：300308中际旭创投资者关系管理信息20240805.pdf
+    Updated: 算力基建/算力基建
+    Updated: 中际旭创/相关动态
+    Updated: 光模块/光模块
+
+  [189/548] companies/中际旭创/raw/research/中际旭创：300308中际旭创投资者关系管理信息20240825.pdf
+    Updated: 算力基建/算力基建
+    Updated: 中际旭创/相关动态
+    Updated: 光模块/光模块
+
+  [190/548] companies/中际旭创/raw/research/中际旭创：300308中际旭创投资者关系管理信息20240829.pdf
+    Updated: 算力基建/算力基建
+    Updated: 中际旭创/相关动态
+    Updated: 光模块/光模块
+
+  [191/548] companies/中际旭创/raw/research/中际旭创：300308中际旭创投资者关系管理信息20241023.pdf
+    Updated: 算力基建/算力基建
+    Updated: 中际旭创/相关动态
+    Updated: 光模块/光模块
+
+  [192/548] companies/中际旭创/raw/research/中际旭创：300308中际旭创投资者关系管理信息20250110.pdf
+    Updated: 算力基建/算力基建
+    Updated: 中际旭创/相关动态
+    Updated: 光模块/光模块
+
+  [193/548] companies/中际旭创/raw/research/中际旭创：300308中际旭创投资者关系管理信息20250126.pdf
+    Updated: 算力基建/算力基建
+    Updated: 中际旭创/相关动态
+    Updated: 光模块/光模块
+
+  [194/548] companies/中际旭创/raw/research/中际旭创：投资者关系活动记录表20240128.pdf
+    Updated: 算力基建/算力基建
+    Updated: 中际旭创/相关动态
+    Updated: 光模块/光模块
+
+  [195/548] companies/中际旭创/raw/research/中际旭创：投资者关系活动记录表20240421.pdf
+    Updated: 中际旭创/相关动态
+    Updated: 光模块/光模块
+
+  [196/548] companies/中际旭创/raw/research/中际旭创：投资者关系活动记录表20240430.pdf
+    Updated: 中际旭创/相关动态
+    Updated: 薄膜沉积设备/薄膜沉积设备
+    Updated: 光模块/光模块
+
+  [197/548] companies/中际旭创/raw/research/中际旭创：投资者关系活动记录表20250406.pdf
+    Updated: 算力基建/算力基建
+    Updated: 中际旭创/相关动态
+    Updated: 光模块/光模块
+
+  [198/548] companies/中际旭创/raw/research/中际旭创：投资者关系活动记录表20250420.pdf
+    Updated: 光模块/光模块
+    Updated: GPU与AI芯片/GPU与AI芯片
+    Updated: 算力基建/算力基建
+    Updated: 中际旭创/相关动态
+
+  [199/548] companies/中际旭创/raw/research/中际旭创：投资者关系活动记录表20250430.pdf
+    Updated: 薄膜沉积设备/薄膜沉积设备
+    Updated: 光模块/光模块
+    Updated: GPU与AI芯片/GPU与AI芯片
+    Updated: 算力基建/算力基建
+    Updated: 中际旭创/相关动态
+    Updated: 液冷/液冷
+
+  [200/548] companies/中际旭创/raw/research/中际旭创：投资者关系活动记录表20250611.pdf
+    Updated: 算力基建/算力基建
+    Updated: 中际旭创/相关动态
+    Updated: 光模块/光模块
+
+  [201/548] companies/中际旭创/raw/research/中际旭创：投资者关系活动记录表20250715.pdf
+    Updated: 光模块/光模块
+    Updated: 算力基建/算力基建
+    Updated: AI应用/AI应用
+    Updated: 中际旭创/相关动态
+
+  [202/548] companies/中际旭创/raw/research/中际旭创：投资者关系活动记录表20250827.pdf
+    Updated: 光模块/光模块
+    Updated: GPU与AI芯片/GPU与AI芯片
+    Updated: 算力基建/算力基建
+    Updated: 中际旭创/相关动态
+    Updated: 液冷/液冷
+
+  [203/548] companies/中际旭创/raw/research/中际旭创：投资者关系活动记录表20251030.pdf
+    Updated: 算力基建/算力基建
+    Updated: 中际旭创/相关动态
+    Updated: 光模块/光模块
+
+  [204/548] companies/中际旭创/raw/research/中际旭创：投资者关系活动记录表20260131.pdf
+    Updated: 算力基建/算力基建
+    Updated: 中际旭创/相关动态
+    Updated: 光模块/光模块
+
+  [205/548] companies/中际旭创/raw/research/中际旭创：投资者关系活动记录表20260330.pdf
+    Updated: 算力基建/算力基建
+    Updated: 中际旭创/相关动态
+    Updated: 光模块/光模块
+
+  [206/548] companies/新易盛/raw/news/2026-04-12_737442f2_新易盛_300502_最新价格_行情_走势图_手机东方财富财经门户.md
+  SKIP (low quality): 新易盛(300502)最新价格_行情_走势图-手机东方财富财经门户
+
+  [207/548] companies/新易盛/raw/news/2026-04-12_a39688b2_新易盛_300502_公司公告_新浪财经_新浪网.md
+    Updated: EDA与IP/EDA与IP
+    Updated: 新易盛/公司动态
+    Updated: AI产业链/AI产业链
+    Updated: 光模块/光模块
+    Updated: 算力基建/算力基建
+
+  [208/548] companies/新易盛/raw/research/新易盛：2016年12月16日投资者关系活动记录表.pdf
+    Updated: 算力基建/算力基建
+    Updated: 光模块/光模块
+    Created: companies/新易盛/wiki/相关动态.md
+    Updated: 新易盛/相关动态
+
+  [209/548] companies/新易盛/raw/research/新易盛：2016年5月12日投资者关系活动记录表（二）.pdf
+    Updated: 新易盛/相关动态
+    Updated: 光模块/光模块
+
+  [210/548] companies/新易盛/raw/research/新易盛：2016年5月13日投资者关系活动记录表.pdf
+    Updated: 新易盛/相关动态
+    Updated: 光模块/光模块
+
+  [211/548] companies/新易盛/raw/research/新易盛：2016年9月13日投资者关系活动记录表.pdf
+    Created: companies/光迅科技/wiki/相关动态.md
+    Updated: 光迅科技/相关动态
+    Updated: 输配电/输配电
+    Updated: 光模块/光模块
+    Updated: 算力基建/算力基建
+    Updated: 新易盛/相关动态
+
+  [212/548] companies/新易盛/raw/research/新易盛：2017年6月27日投资者关系活动记录表.pdf
+    Updated: 新易盛/相关动态
+    Updated: 光模块/光模块
+
+  [213/548] companies/新易盛/raw/research/新易盛：2017年8月25日投资者关系活动记录表.pdf
+    Updated: 输配电/输配电
+    Updated: 光模块/光模块
+    Updated: 电力基建/电力基建
+    Updated: 算力基建/算力基建
+    Updated: 新易盛/相关动态
+    Updated: 发电设备/发电设备
+    Updated: 储能/储能
+    Created: companies/天孚通信/wiki/相关动态.md
+    Updated: 天孚通信/相关动态
+
+  [214/548] companies/新易盛/raw/research/新易盛：300502新易盛投资者关系管理信息20240423.pdf
+    Updated: 新易盛/相关动态
+    Updated: 薄膜沉积设备/薄膜沉积设备
+    Updated: 光模块/光模块
+
+  [215/548] companies/新易盛/raw/research/新易盛：300502新易盛投资者关系管理信息20240509.pdf
+    Updated: 新易盛/相关动态
+    Updated: 光模块/光模块
+
+  [216/548] companies/新易盛/raw/research/新易盛：300502新易盛投资者关系管理信息20240829.pdf
+    Updated: 新易盛/相关动态
+    Updated: 光模块/光模块
+
+  [217/548] companies/新易盛/raw/research/新易盛：300502新易盛投资者关系管理信息20240912.pdf
+    Updated: 英伟达/相关动态
+    Updated: 光模块/光模块
+    Updated: 算力基建/算力基建
+    Updated: 新易盛/相关动态
+    Updated: GPU与AI芯片/GPU与AI芯片
+
+  [218/548] companies/新易盛/raw/research/新易盛：300502新易盛投资者关系管理信息20250110.pdf
+    Updated: 算力基建/算力基建
+    Updated: 光模块/光模块
+    Updated: 新易盛/相关动态
+
+  [219/548] companies/新易盛/raw/research/新易盛：300502新易盛投资者关系管理信息20250423.pdf
+    Updated: 算力基建/算力基建
+    Updated: 光模块/光模块
+    Updated: 新易盛/相关动态
+
+  [220/548] companies/新易盛/raw/research/新易盛：300502新易盛投资者关系管理信息20250509.pdf
+    Updated: 薄膜沉积设备/薄膜沉积设备
+    Updated: 光模块/光模块
+    Updated: 算力基建/算力基建
+    Updated: 新易盛/相关动态
+
+  [221/548] companies/新易盛/raw/research/新易盛：300502新易盛投资者关系管理信息20250716.pdf
+    Updated: 算力基建/算力基建
+    Updated: 光模块/光模块
+    Updated: 新易盛/相关动态
+
+  [222/548] companies/新易盛/raw/research/新易盛：300502新易盛投资者关系管理信息20250826.pdf
+    Updated: 算力基建/算力基建
+    Updated: 光模块/光模块
+    Updated: 新易盛/相关动态
+
+  [223/548] companies/新易盛/raw/research/新易盛：300502新易盛投资者关系管理信息20250912.pdf
+    Updated: 英伟达/相关动态
+    Updated: 光模块/光模块
+    Updated: 算力基建/算力基建
+    Updated: 新易盛/相关动态
+    Updated: 中际旭创/相关动态
+    Updated: 液冷/液冷
+    Updated: 薄膜沉积设备/薄膜沉积设备
+    Updated: GPU与AI芯片/GPU与AI芯片
+
+  [224/548] companies/新易盛/raw/research/新易盛：300502新易盛投资者关系管理信息20251029.pdf
+    Updated: 英伟达/相关动态
+    Updated: 光模块/光模块
+    Updated: 新易盛/相关动态
+    Updated: EDA与IP/EDA与IP
+    Updated: GPU与AI芯片/GPU与AI芯片
+
+  [225/548] companies/新易盛/raw/research/新易盛：300502新易盛调研活动信息20190524.pdf
+    Updated: 算力基建/算力基建
+    Updated: 光模块/光模块
+    Updated: 新易盛/相关动态
+
+  [226/548] companies/天孚通信/raw/news/2026-04-12_24495fd5_天孚通信_300394__股票行情_行情首页_中财网.md
+    Updated: 天孚通信/公司动态
+    Updated: AI产业链/AI产业链
+    Updated: 光模块/光模块
+
+  [227/548] companies/天孚通信/raw/news/2026-04-12_cddcfbb8_天孚通信_300394_最新消息.md
+    Updated: 天孚通信/公司动态
+    Updated: AI产业链/AI产业链
+    Updated: 光模块/光模块
+
+  [228/548] companies/天孚通信/raw/news/2026-04-12_ef77cefc_天孚通信358_90_3_46___公司公告__新浪财经.md
+    Updated: 天孚通信/公司动态
+    Updated: AI产业链/AI产业链
+    Updated: 光模块/光模块
+
+  [229/548] companies/天孚通信/raw/research/天孚通信：2021年8月25日天孚通信投资者关系活动记录表.pdf
+    Updated: 天孚通信/相关动态
+    Updated: 光模块/光模块
+    Updated: 算力基建/算力基建
+    Updated: 量检测设备/量检测设备
+
+  [230/548] companies/天孚通信/raw/research/天孚通信：2022年12月1日天孚通信投资者关系活动记录表.pdf
+    Updated: 天孚通信/相关动态
+    Updated: 光模块/光模块
+
+  [231/548] companies/天孚通信/raw/research/天孚通信：2022年4月27日天孚通信投资者关系活动记录表.pdf
+    Updated: 天孚通信/相关动态
+    Updated: 光模块/光模块
+
+  [232/548] companies/天孚通信/raw/research/天孚通信：2022年6月2日天孚通信投资者关系活动记录表.pdf
+    Updated: 算力基建/算力基建
+    Updated: 天孚通信/相关动态
+    Updated: 光模块/光模块
+
+  [233/548] companies/天孚通信/raw/research/天孚通信：2022年7月19日天孚通信投资者关系活动记录表.pdf
+    Updated: 算力基建/算力基建
+    Updated: 天孚通信/相关动态
+    Updated: 光模块/光模块
+
+  [234/548] companies/天孚通信/raw/research/天孚通信：2022年8月26日天孚通信投资者关系活动记录表.pdf
+    Updated: 算力基建/算力基建
+    Updated: 天孚通信/相关动态
+    Updated: 光模块/光模块
+
+  [235/548] companies/天孚通信/raw/research/天孚通信：2023年10月19日天孚通信投资者关系活动记录表.pdf
+    Updated: 天孚通信/相关动态
+    Updated: 光模块/光模块
+
+  [236/548] companies/天孚通信/raw/research/天孚通信：2023年10月20日天孚通信投资者关系活动记录表.pdf
+    Updated: 算力基建/算力基建
+    Updated: 天孚通信/相关动态
+    Updated: 光模块/光模块
+
+  [237/548] companies/天孚通信/raw/research/天孚通信：2023年1月31日天孚通信投资者关系活动记录表.pdf
+    Updated: 算力基建/算力基建
+    Updated: 天孚通信/相关动态
+    Updated: 光模块/光模块
+
+  [238/548] companies/天孚通信/raw/research/天孚通信：2023年5月31日天孚通信投资者关系活动记录表.pdf
+    Updated: 天孚通信/相关动态
+    Updated: 光模块/光模块
+
+  [239/548] companies/天孚通信/raw/research/天孚通信：2023年8月25日天孚通信投资者关系活动记录表.pdf
+    Updated: 天孚通信/相关动态
+    Updated: 光模块/光模块
+
+  [240/548] companies/天孚通信/raw/research/天孚通信：2023年9月25日天孚通信投资者关系活动记录表.pdf
+    Updated: 天孚通信/相关动态
+    Updated: 光模块/光模块
+
+  [241/548] companies/天孚通信/raw/research/天孚通信：2024年4月23日天孚通信投资者关系活动记录表.pdf
+    Updated: 天孚通信/相关动态
+    Updated: 光模块/光模块
+
+  [242/548] companies/天孚通信/raw/research/天孚通信：2024年4月24日天孚通信投资者关系活动记录表.pdf
+    Updated: 天孚通信/相关动态
+    Updated: 光模块/光模块
+
+  [243/548] companies/天孚通信/raw/research/天孚通信：2024年8月22日天孚通信投资者关系活动记录表.pdf
+    Updated: 天孚通信/相关动态
+    Updated: 光模块/光模块
+
+  [244/548] companies/天孚通信/raw/research/天孚通信：2024年8月23日天孚通信投资者关系活动记录表.pdf
+    Updated: 天孚通信/相关动态
+    Updated: 光模块/光模块
+
+  [245/548] companies/天孚通信/raw/research/天孚通信：2025年11月27日天孚通信投资者关系活动记录表.pdf
+    Updated: 天孚通信/相关动态
+    Updated: 光模块/光模块
+
+  [246/548] companies/天孚通信/raw/research/天孚通信：2025年4月24日天孚通信投资者关系活动记录表.pdf
+    Updated: 算力基建/算力基建
+    Updated: 天孚通信/相关动态
+    Updated: 光模块/光模块
+
+  [247/548] companies/天孚通信/raw/research/天孚通信：2025年4月8日天孚通信投资者关系活动记录表.pdf
+    Updated: 算力基建/算力基建
+    Updated: 天孚通信/相关动态
+    Updated: 光模块/光模块
+
+  [248/548] companies/天孚通信/raw/research/天孚通信：2025年6月11日天孚通信投资者关系活动记录表.pdf
+    Updated: 天孚通信/相关动态
+    Updated: 光模块/光模块
+
+  [249/548] companies/天孚通信/raw/research/天孚通信：2025年8月26日天孚通信投资者关系活动记录表.pdf
+    Updated: 天孚通信/相关动态
+    Updated: 光模块/光模块
+
+  [250/548] companies/光迅科技/raw/news/2026-04-12_1c4442ee_光迅科技_002281_新闻公告_个股行情___同花顺.md
+    Updated: 光迅科技/公司动态
+    Updated: AI产业链/AI产业链
+    Updated: 光模块/光模块
+
+  [251/548] companies/光迅科技/raw/news/2026-04-12_6194fb43_光迅科技_002281_个股资讯_新浪财经.md
+  SKIP (low quality): 光迅科技(002281)个股资讯_新浪财经
+
+  [252/548] companies/光迅科技/raw/news/2026-04-12_7c2ecb46_光迅科技怎么样_分析讨论社区___股吧__东方财富.md
+    Updated: 光迅科技/公司动态
+    Updated: AI产业链/AI产业链
+    Updated: 光模块/光模块
+
+  [253/548] companies/光迅科技/raw/news/2026-04-12_820381cb_光迅科技_002281__最新新闻___Moomoo.md
+  SKIP (low quality): 光迅科技(002281) 最新新闻 - Moomoo
+
+  [254/548] companies/光迅科技/raw/news/2026-04-12_c56ef0b4_光迅科技_002281_股票最新价格行情_实时走势图_股价分析预测.md
+  SKIP (low quality): 光迅科技(002281)股票最新价格行情,实时走势图,股价分析预测
+
+  [255/548] companies/光迅科技/raw/research/光迅科技：002281光迅科技投资者关系管理信息20240429.pdf
+    Updated: 算力基建/算力基建
+    Updated: 光模块/光模块
+    Updated: 光迅科技/相关动态
+
+  [256/548] companies/光迅科技/raw/research/光迅科技：002281光迅科技投资者关系管理信息20240516.pdf
+    Updated: 中际旭创/相关动态
+    Updated: 光模块/光模块
+    Updated: 光迅科技/相关动态
+
+  [257/548] companies/光迅科技/raw/research/光迅科技：002281光迅科技投资者关系管理信息20240719.pdf
+    Updated: 光模块/光模块
+    Updated: 光迅科技/相关动态
+
+  [258/548] companies/光迅科技/raw/research/光迅科技：002281光迅科技投资者关系管理信息20240827.pdf
+    Updated: 光模块/光模块
+    Updated: 光迅科技/相关动态
+
+  [259/548] companies/光迅科技/raw/research/光迅科技：002281光迅科技投资者关系管理信息20250427.pdf
+    Updated: 算力基建/算力基建
+    Updated: 光模块/光模块
+    Updated: 光迅科技/相关动态
+
+  [260/548] companies/光迅科技/raw/research/光迅科技：002281光迅科技投资者关系管理信息20250429.pdf
+    Updated: 光迅科技/相关动态
+    Updated: 薄膜沉积设备/薄膜沉积设备
+    Updated: 光模块/光模块
+    Updated: 中际旭创/相关动态
+    Updated: 新易盛/相关动态
+
+  [261/548] companies/光迅科技/raw/research/光迅科技：002281光迅科技投资者关系管理信息20250902.pdf
+    Updated: 光模块/光模块
+    Updated: 光迅科技/相关动态
+
+  [262/548] companies/太辰光/raw/news/2026-04-12_39a732df_太辰光_300570__最新公告和新闻稿___Moomoo.md
+    Updated: 光模块/光模块
+    Updated: AI产业链/AI产业链
+    Updated: 太辰光/公司动态
+
+  [263/548] companies/太辰光/raw/news/2026-04-12_6f20582e_太辰光_300570_股票行情_行情中心___凤凰网财经.md
+  SKIP (low quality): 太辰光(300570)股票行情_行情中心 - 凤凰网财经
+
+  [264/548] companies/太辰光/raw/news/2026-04-12_d0518759_太辰光_SZ300570____最新公告__雪球.md
+    Updated: 光模块/光模块
+    Updated: AI产业链/AI产业链
+    Updated: 太辰光/公司动态
+
+  [265/548] companies/太辰光/raw/research/太辰光：2021年5月21日投资者关系活动记录表.pdf
+    Updated: 算力基建/算力基建
+    Created: companies/太辰光/wiki/相关动态.md
+    Updated: 太辰光/相关动态
+    Updated: 光模块/光模块
+
+  [266/548] companies/太辰光/raw/research/太辰光：2022年4月22日投资者关系活动记录表.pdf
+    Updated: 输配电/输配电
+    Updated: 太辰光/相关动态
+    Updated: 储能/储能
+    Updated: 电力基建/电力基建
+    Updated: 光模块/光模块
+    Updated: 发电设备/发电设备
+
+  [267/548] companies/太辰光/raw/research/太辰光：2024年4月12日投资者关系活动记录表.pdf
+    Updated: 算力基建/算力基建
+    Updated: 太辰光/相关动态
+    Updated: 光模块/光模块
+
+  [268/548] companies/太辰光/raw/research/太辰光：300570太辰光投资者关系管理信息20241107.pdf
+    Updated: 太辰光/相关动态
+    Updated: 光模块/光模块
+    Updated: 算力基建/算力基建
+    Updated: 量检测设备/量检测设备
+
+  [269/548] companies/太辰光/raw/research/太辰光：300570太辰光投资者关系管理信息20250418.pdf
+    Updated: 算力基建/算力基建
+    Updated: 太辰光/相关动态
+    Updated: 光模块/光模块
+
+  [270/548] companies/太辰光/raw/research/太辰光：300570太辰光投资者关系管理信息20250821.pdf
+    Updated: 太辰光/相关动态
+    Updated: 光模块/光模块
+    Updated: 算力基建/算力基建
+    Updated: 量检测设备/量检测设备
+
+  [271/548] companies/太辰光/raw/research/太辰光：300570太辰光投资者关系管理信息20251017.pdf
+    Updated: 太辰光/相关动态
+    Updated: 光模块/光模块
+
+  [272/548] companies/太辰光/raw/research/太辰光：300570太辰光调研活动信息20220622.pdf
+    Updated: 输配电/输配电
+    Updated: 太辰光/相关动态
+    Updated: 光模块/光模块
+    Updated: 储能/储能
+    Updated: 电力基建/电力基建
+    Updated: 算力基建/算力基建
+    Updated: 发电设备/发电设备
+
+  [273/548] companies/太辰光/raw/research/太辰光：太辰光：2021年11月11日投资者关系活动记录表.pdf
+    Updated: 算力基建/算力基建
+    Updated: 太辰光/相关动态
+    Updated: 光模块/光模块
+
+  [274/548] companies/英维克/raw/news/2026-04-12_ccc4ab11_英维克_sz002837_行情走势.md
+  SKIP (low quality): 英维克（sz002837）行情走势
+
+  [275/548] companies/英维克/raw/research/英维克：2021年10月26日投资者关系活动记录表.pdf
+    Updated: 输配电/输配电
+    Updated: 储能/储能
+    Updated: 英维克/相关动态
+    Updated: 算力基建/算力基建
+    Updated: 发电设备/发电设备
+    Updated: 液冷/液冷
+
+  [276/548] companies/英维克/raw/research/英维克：2021年11月30日投资者关系活动记录表.pdf
+    Updated: 英维克/相关动态
+    Updated: 储能/储能
+    Updated: 液冷/液冷
+
+  [277/548] companies/英维克/raw/research/英维克：2021年5月11日投资者关系活动记录表（二）.pdf
+    Updated: 储能/储能
+    Updated: 英维克/相关动态
+    Updated: 算力基建/算力基建
+    Updated: 发电设备/发电设备
+    Updated: 液冷/液冷
+
+  [278/548] companies/英维克/raw/research/英维克：2021年8月3日-8月4日投资者关系活动记录表.pdf
+    Updated: 输配电/输配电
+    Updated: 算力基建/算力基建
+    Updated: 液冷/液冷
+    Updated: 储能/储能
+    Updated: 英维克/相关动态
+
+  [279/548] companies/英维克/raw/research/英维克：2021年8月6日投资者关系活动记录表.pdf
+    Updated: 输配电/输配电
+    Updated: 储能/储能
+    Updated: 电力基建/电力基建
+    Updated: 英维克/相关动态
+    Updated: 算力基建/算力基建
+    Updated: 发电设备/发电设备
+    Updated: 液冷/液冷
+
+  [280/548] companies/英维克/raw/research/英维克：2022年10月26日投资者关系活动记录表.pdf
+    Updated: 输配电/输配电
+    Updated: 储能/储能
+    Updated: 电力基建/电力基建
+    Updated: 英维克/相关动态
+    Updated: 算力基建/算力基建
+    Updated: 发电设备/发电设备
+    Updated: 液冷/液冷
+
+  [281/548] companies/英维克/raw/research/英维克：2022年11月09日投资者关系活动记录表.pdf
+    Updated: 英维克/相关动态
+    Updated: 储能/储能
+    Updated: 液冷/液冷
+
+  [282/548] companies/英维克/raw/research/英维克：2022年4月26日-4月29日投资者关系活动记录表.pdf
+    Updated: 英维克/相关动态
+    Updated: 液冷/液冷
+
+  [283/548] companies/英维克/raw/research/英维克：2022年4月28日投资者关系活动记录表.pdf
+    Updated: 输配电/输配电
+    Updated: 储能/储能
+    Updated: 电力基建/电力基建
+    Updated: 英维克/相关动态
+    Updated: 算力基建/算力基建
+    Updated: 发电设备/发电设备
+    Updated: 液冷/液冷
+
+  [284/548] companies/英维克/raw/research/英维克：2022年8月9日-8月11日投资者关系活动记录表.pdf
+    Updated: 算力基建/算力基建
+    Updated: 液冷/液冷
+    Updated: 储能/储能
+    Updated: GPU与AI芯片/GPU与AI芯片
+    Updated: 英维克/相关动态
+
+  [285/548] companies/英维克/raw/research/英维克：2023年11月15日投资者关系活动记录表.pdf
+    Created: companies/申菱环境/wiki/相关动态.md
+    Updated: 申菱环境/相关动态
+    Updated: 储能/储能
+    Updated: 算力基建/算力基建
+    Created: companies/高澜股份/wiki/相关动态.md
+    Updated: 高澜股份/相关动态
+    Created: companies/曙光数创/wiki/相关动态.md
+    Updated: 曙光数创/相关动态
+    Updated: 英维克/相关动态
+    Updated: 液冷/液冷
+
+  [286/548] companies/英维克/raw/research/英维克：2023年4月11日投资者关系活动记录表.pdf
+    Updated: 输配电/输配电
+    Updated: 储能/储能
+    Updated: 电力基建/电力基建
+    Updated: 英维克/相关动态
+    Updated: 算力基建/算力基建
+    Updated: 发电设备/发电设备
+    Updated: 液冷/液冷
+
+  [287/548] companies/英维克/raw/research/英维克：2023年4月27日投资者关系活动记录表.pdf
+    Created: companies/浪潮信息/wiki/相关动态.md
+    Updated: 浪潮信息/相关动态
+    Updated: 算力基建/算力基建
+    Updated: 中科曙光/相关动态
+    Updated: 液冷/液冷
+    Updated: 储能/储能
+    Updated: GPU与AI芯片/GPU与AI芯片
+    Updated: 英维克/相关动态
+
+  [288/548] companies/英维克/raw/research/英维克：2024年12月12日投资者关系活动记录表.pdf
+    Updated: 输配电/输配电
+    Updated: 电力基建/电力基建
+    Updated: 算力基建/算力基建
+    Updated: 发电设备/发电设备
+    Updated: 液冷/液冷
+    Updated: 英伟达/相关动态
+    Updated: 储能/储能
+    Updated: GPU与AI芯片/GPU与AI芯片
+    Updated: 英维克/相关动态
+
+  [289/548] companies/英维克/raw/research/英维克：2024年4月16日投资者关系活动记录表.pdf
+    Updated: 输配电/输配电
+    Updated: 电力基建/电力基建
+    Updated: 算力基建/算力基建
+    Updated: 发电设备/发电设备
+    Updated: 液冷/液冷
+    Updated: 高端制造/高端制造
+    Updated: 量检测设备/量检测设备
+    Updated: 储能/储能
+    Updated: 英维克/相关动态
+
+  [290/548] companies/英维克/raw/research/英维克：2024年4月24日投资者关系活动记录表.pdf
+    Updated: 算力基建/算力基建
+    Updated: 液冷/液冷
+    Updated: 储能/储能
+    Updated: 量检测设备/量检测设备
+    Updated: 英维克/相关动态
+
+  [291/548] companies/英维克/raw/research/英维克：2025年11月20日投资者关系活动记录表.pdf
+    Updated: 英伟达/相关动态
+    Created: companies/百度/wiki/相关动态.md
+    Updated: 百度/相关动态
+    Updated: 储能/储能
+    Updated: GPU与AI芯片/GPU与AI芯片
+    Updated: 算力基建/算力基建
+    Updated: AI应用/AI应用
+    Updated: 英维克/相关动态
+    Updated: 液冷/液冷
+
+  [292/548] companies/英维克/raw/research/英维克：2025年11月3日-11月12日投资者关系活动记录表.pdf
+    Updated: 输配电/输配电
+    Updated: 储能/储能
+    Updated: 电力基建/电力基建
+    Updated: 英维克/相关动态
+    Updated: 算力基建/算力基建
+    Updated: 发电设备/发电设备
+    Updated: 液冷/液冷
+
+  [293/548] companies/英维克/raw/research/英维克：2025年4月22日投资者关系活动记录表.pdf
+    Updated: 英伟达/相关动态
+    Updated: 储能/储能
+    Updated: GPU与AI芯片/GPU与AI芯片
+    Updated: 算力基建/算力基建
+    Updated: 英维克/相关动态
+    Updated: 液冷/液冷
+
+  [294/548] companies/英维克/raw/research/英维克：2025年4月25日投资者关系活动记录表.pdf
+    Updated: 英伟达/相关动态
+    Updated: 算力基建/算力基建
+    Updated: 液冷/液冷
+    Updated: GPU与AI芯片/GPU与AI芯片
+    Updated: 英维克/相关动态
+
+  [295/548] companies/英维克/raw/research/英维克：2025年5月20日投资者关系活动记录表.pdf
+    Updated: 储能/储能
+    Updated: 算力基建/算力基建
+    Updated: 英维克/相关动态
+    Updated: 液冷/液冷
+
+  [296/548] companies/高澜股份/raw/news/2026-04-12_6140dc14_高澜股份_300499__最新价格_行情_走势图_东方财富网.md
+  SKIP (low quality): 高澜股份(300499)_最新价格_行情_走势图—东方财富网
+
+  [297/548] companies/高澜股份/raw/news/2026-04-12_bd3f41b7_高澜股份_300499_股票股价__市值__实时行情__走势图__财报__Moo.md
+  SKIP (low quality): 高澜股份(300499)股票股价, 市值, 实时行情, 走势图, 财报- Moomoo
+
+  [298/548] companies/高澜股份/raw/reports/高澜股份：2024年三季度报告.pdf
+    Updated: 高澜股份/相关动态
+    Updated: 液冷/液冷
+
+  [299/548] companies/高澜股份/raw/reports/高澜股份：2024年半年度报告.pdf
+    Updated: 输配电/输配电
+    Updated: 储能/储能
+    Updated: 电力基建/电力基建
+    Updated: 算力基建/算力基建
+    Updated: 高澜股份/相关动态
+    Updated: 发电设备/发电设备
+    Updated: 液冷/液冷
+
+  [300/548] companies/高澜股份/raw/reports/高澜股份：2024年半年度报告摘要.pdf
+    Updated: 高澜股份/相关动态
+    Updated: 液冷/液冷
+
+  [301/548] companies/高澜股份/raw/reports/高澜股份：2024年年度报告.pdf
+    Updated: 输配电/输配电
+    Updated: 电力基建/电力基建
+    Updated: 算力基建/算力基建
+    Updated: 发电设备/发电设备
+    Updated: 液冷/液冷
+    Updated: 薄膜沉积设备/薄膜沉积设备
+    Updated: 储能/储能
+    Updated: 高澜股份/相关动态
+
+  [302/548] companies/高澜股份/raw/reports/高澜股份：2024年年度报告摘要.pdf
+    Updated: 输配电/输配电
+    Updated: 储能/储能
+    Updated: 电力基建/电力基建
+    Updated: 算力基建/算力基建
+    Updated: 高澜股份/相关动态
+    Updated: 发电设备/发电设备
+    Updated: 液冷/液冷
+
+  [303/548] companies/高澜股份/raw/reports/高澜股份：2025年一季度报告.pdf
+    Updated: 高澜股份/相关动态
+    Updated: 液冷/液冷
+
+  [304/548] companies/高澜股份/raw/reports/高澜股份：2025年三季度报告.pdf
+    Updated: 输配电/输配电
+    Updated: 电力基建/电力基建
+    Updated: 发电设备/发电设备
+    Updated: 液冷/液冷
+    Updated: 储能/储能
+    Updated: 高澜股份/相关动态
+
+  [305/548] companies/高澜股份/raw/reports/高澜股份：2025年半年度报告.pdf
+    Updated: 输配电/输配电
+    Updated: 电力基建/电力基建
+    Updated: 算力基建/算力基建
+    Updated: 发电设备/发电设备
+    Updated: 液冷/液冷
+    Updated: 储能/储能
+    Updated: GPU与AI芯片/GPU与AI芯片
+    Updated: 高澜股份/相关动态
+
+  [306/548] companies/高澜股份/raw/reports/高澜股份：2025年半年度报告摘要.pdf
+    Updated: 高澜股份/相关动态
+    Updated: 液冷/液冷
+
+  [307/548] companies/高澜股份/raw/research/高澜股份：2021年11月10日投资者关系活动记录表.pdf
+    Updated: 输配电/输配电
+    Updated: 储能/储能
+    Updated: 电力基建/电力基建
+    Updated: 算力基建/算力基建
+    Updated: 高澜股份/相关动态
+    Updated: 发电设备/发电设备
+    Updated: 液冷/液冷
+
+  [308/548] companies/高澜股份/raw/research/高澜股份：2021年11月17日投资者关系活动记录表.pdf
+    Updated: 输配电/输配电
+    Updated: 储能/储能
+    Updated: 电力基建/电力基建
+    Updated: 高澜股份/相关动态
+    Updated: 发电设备/发电设备
+    Updated: 液冷/液冷
+
+  [309/548] companies/高澜股份/raw/research/高澜股份：2021年11月18日投资者关系活动记录表.pdf
+    Updated: 输配电/输配电
+    Updated: 储能/储能
+    Updated: 电力基建/电力基建
+    Updated: 算力基建/算力基建
+    Updated: 高澜股份/相关动态
+    Updated: 发电设备/发电设备
+    Updated: 液冷/液冷
+
+  [310/548] companies/高澜股份/raw/research/高澜股份：2021年11月19日投资者关系活动记录表.pdf
+    Updated: 输配电/输配电
+    Updated: 储能/储能
+    Updated: 电力基建/电力基建
+    Updated: 算力基建/算力基建
+    Updated: 高澜股份/相关动态
+    Updated: 发电设备/发电设备
+    Updated: 液冷/液冷
+
+  [311/548] companies/高澜股份/raw/research/高澜股份：2021年11月1日投资者关系活动记录表.pdf
+    Updated: 输配电/输配电
+    Updated: 电力基建/电力基建
+    Updated: 算力基建/算力基建
+    Updated: 发电设备/发电设备
+    Updated: 液冷/液冷
+    Updated: 储能/储能
+    Updated: 量检测设备/量检测设备
+    Updated: 高澜股份/相关动态
+
+  [312/548] companies/高澜股份/raw/research/高澜股份：2021年11月26日投资者关系活动记录表.pdf
+    Updated: 输配电/输配电
+    Updated: 电力基建/电力基建
+    Updated: 宁德时代/相关动态
+    Updated: 发电设备/发电设备
+    Updated: 液冷/液冷
+    Updated: 储能/储能
+    Updated: 高澜股份/相关动态
+
+  [313/548] companies/高澜股份/raw/research/高澜股份：2021年11月2日投资者关系活动记录表.pdf
+    Updated: 输配电/输配电
+    Updated: 储能/储能
+    Updated: 算力基建/算力基建
+    Updated: 高澜股份/相关动态
+    Updated: 发电设备/发电设备
+    Updated: 液冷/液冷
+
+  [314/548] companies/高澜股份/raw/research/高澜股份：2021年11月4日投资者关系活动记录表.pdf
+    Updated: 输配电/输配电
+    Updated: 电力基建/电力基建
+    Updated: 发电设备/发电设备
+    Updated: 液冷/液冷
+    Updated: 储能/储能
+    Created: companies/许继电气/wiki/相关动态.md
+    Updated: 许继电气/相关动态
+    Updated: 量检测设备/量检测设备
+    Updated: 高澜股份/相关动态
+
+  [315/548] companies/高澜股份/raw/research/高澜股份：2021年12月30日投资者关系活动记录表.pdf
+    Updated: 输配电/输配电
+    Updated: 储能/储能
+    Updated: 电力基建/电力基建
+    Updated: 算力基建/算力基建
+    Updated: 高澜股份/相关动态
+    Updated: 发电设备/发电设备
+    Updated: 液冷/液冷
+
+  [316/548] companies/高澜股份/raw/research/高澜股份：2021年1月29日投资者关系活动记录表.pdf
+    Updated: 输配电/输配电
+    Updated: 储能/储能
+    Updated: 电力基建/电力基建
+    Updated: 算力基建/算力基建
+    Updated: 高澜股份/相关动态
+    Updated: 发电设备/发电设备
+    Updated: 液冷/液冷
+
+  [317/548] companies/高澜股份/raw/research/高澜股份：2021年5月8日投资者关系活动记录表.pdf
+    Updated: 输配电/输配电
+    Updated: 储能/储能
+    Updated: 电力基建/电力基建
+    Updated: 高澜股份/相关动态
+    Updated: 发电设备/发电设备
+    Updated: 液冷/液冷
+
+  [318/548] companies/高澜股份/raw/research/高澜股份：2021年8月11日投资者关系活动记录表.pdf
+    Updated: 输配电/输配电
+    Updated: 电力基建/电力基建
+    Updated: 算力基建/算力基建
+    Updated: 发电设备/发电设备
+    Updated: 液冷/液冷
+    Updated: 储能/储能
+    Updated: 量检测设备/量检测设备
+    Updated: 高澜股份/相关动态
+
+  [319/548] companies/高澜股份/raw/research/高澜股份：2021年8月25日投资者关系活动记录表.pdf
+    Updated: 输配电/输配电
+    Updated: 电力基建/电力基建
+    Updated: 算力基建/算力基建
+    Updated: 发电设备/发电设备
+    Updated: 液冷/液冷
+    Updated: 储能/储能
+    Updated: 量检测设备/量检测设备
+    Updated: 高澜股份/相关动态
+
+  [320/548] companies/高澜股份/raw/research/高澜股份：2021年8月31日投资者关系活动记录表.pdf
+    Updated: 输配电/输配电
+    Updated: 电力基建/电力基建
+    Updated: 算力基建/算力基建
+    Updated: 发电设备/发电设备
+    Updated: 液冷/液冷
+    Updated: 储能/储能
+    Updated: 量检测设备/量检测设备
+    Updated: 高澜股份/相关动态
+
+  [321/548] companies/高澜股份/raw/research/高澜股份：2021年9月27日投资者关系活动记录表.pdf
+    Updated: 输配电/输配电
+    Updated: 电力基建/电力基建
+    Updated: 宁德时代/相关动态
+    Updated: 算力基建/算力基建
+    Updated: 发电设备/发电设备
+    Updated: 液冷/液冷
+    Updated: 储能/储能
+    Updated: 高澜股份/相关动态
+
+  [322/548] companies/高澜股份/raw/research/高澜股份：2022年1月19日投资者关系活动记录表.pdf
+    Updated: 输配电/输配电
+    Updated: 电力基建/电力基建
+    Updated: 宁德时代/相关动态
+    Updated: 发电设备/发电设备
+    Updated: 液冷/液冷
+    Updated: 储能/储能
+    Updated: 高澜股份/相关动态
+
+  [323/548] companies/高澜股份/raw/research/高澜股份：2022年1月20日投资者关系活动记录表.pdf
+    Updated: 输配电/输配电
+    Updated: 储能/储能
+    Updated: 电力基建/电力基建
+    Updated: 高澜股份/相关动态
+    Updated: 发电设备/发电设备
+    Updated: 液冷/液冷
+
+  [324/548] companies/高澜股份/raw/research/高澜股份：2022年1月4日投资者关系活动记录表.pdf
+    Updated: 输配电/输配电
+    Updated: 储能/储能
+    Updated: 电力基建/电力基建
+    Updated: 高澜股份/相关动态
+    Updated: 发电设备/发电设备
+    Updated: 液冷/液冷
+
+  [325/548] companies/高澜股份/raw/research/高澜股份：2022年2月22日投资者关系活动记录表.pdf
+    Updated: 输配电/输配电
+    Updated: 电力基建/电力基建
+    Updated: 宁德时代/相关动态
+    Updated: 算力基建/算力基建
+    Updated: 发电设备/发电设备
+    Updated: 液冷/液冷
+    Updated: 储能/储能
+    Updated: 许继电气/相关动态
+    Updated: 高澜股份/相关动态
+
+  [326/548] companies/高澜股份/raw/research/高澜股份：2022年2月24日投资者关系活动记录表.pdf
+    Updated: 输配电/输配电
+    Updated: 储能/储能
+    Updated: 电力基建/电力基建
+    Updated: 量检测设备/量检测设备
+    Updated: 高澜股份/相关动态
+    Updated: 发电设备/发电设备
+    Updated: 液冷/液冷
+
+  [327/548] companies/高澜股份/raw/research/高澜股份：2022年3月1日投资者关系活动记录表.pdf
+    Updated: 输配电/输配电
+    Updated: 电力基建/电力基建
+    Updated: 宁德时代/相关动态
+    Updated: 算力基建/算力基建
+    Updated: 发电设备/发电设备
+    Updated: 液冷/液冷
+    Updated: 储能/储能
+    Updated: 高澜股份/相关动态
+
+  [328/548] companies/高澜股份/raw/research/高澜股份：2022年3月4日投资者关系活动记录表.pdf
+    Updated: 输配电/输配电
+    Updated: 电力基建/电力基建
+    Updated: 宁德时代/相关动态
+    Updated: 发电设备/发电设备
+    Updated: 液冷/液冷
+    Updated: 储能/储能
+    Updated: 许继电气/相关动态
+    Updated: 高澜股份/相关动态
+
+  [329/548] companies/高澜股份/raw/research/高澜股份：2022年3月9日投资者关系活动记录表.pdf
+    Updated: 输配电/输配电
+    Updated: 宁德时代/相关动态
+    Updated: 电力基建/电力基建
+    Updated: 算力基建/算力基建
+    Updated: 发电设备/发电设备
+    Updated: 液冷/液冷
+    Updated: 储能/储能
+    Updated: 高澜股份/相关动态
+
+  [330/548] companies/高澜股份/raw/research/高澜股份：2022年4月25日投资者关系活动记录表.pdf
+    Updated: 输配电/输配电
+    Updated: 宁德时代/相关动态
+    Updated: 电力基建/电力基建
+    Updated: 发电设备/发电设备
+    Updated: 液冷/液冷
+    Updated: 储能/储能
+    Updated: 高澜股份/相关动态
+
+  [331/548] companies/高澜股份/raw/research/高澜股份：2022年4月26日投资者关系活动记录表.pdf
+    Updated: 输配电/输配电
+    Updated: 储能/储能
+    Updated: 电力基建/电力基建
+    Updated: 算力基建/算力基建
+    Updated: 高澜股份/相关动态
+    Updated: 发电设备/发电设备
+    Updated: 液冷/液冷
+
+  [332/548] companies/高澜股份/raw/research/高澜股份：2022年4月27日2021年度网上业绩说明会投资者关系活动记录表.pdf
+    Updated: 输配电/输配电
+    Updated: 电力基建/电力基建
+    Updated: 宁德时代/相关动态
+    Updated: 算力基建/算力基建
+    Updated: 发电设备/发电设备
+    Updated: 液冷/液冷
+    Updated: 储能/储能
+    Updated: 高澜股份/相关动态
+
+  [333/548] companies/高澜股份/raw/research/高澜股份：2022年5月24日投资者关系活动记录表.pdf
+    Updated: 输配电/输配电
+    Updated: 宁德时代/相关动态
+    Updated: 电力基建/电力基建
+    Updated: 算力基建/算力基建
+    Updated: 发电设备/发电设备
+    Updated: 液冷/液冷
+    Updated: 储能/储能
+    Updated: 高澜股份/相关动态
+
+  [334/548] companies/高澜股份/raw/research/高澜股份：2023年5月12日2022年度网上业绩说明会投资者关系活动记录表.pdf
+    Updated: 输配电/输配电
+    Updated: 电力基建/电力基建
+    Updated: 算力基建/算力基建
+    Updated: 中科曙光/相关动态
+    Updated: 发电设备/发电设备
+    Updated: 液冷/液冷
+    Updated: 储能/储能
+    Updated: GPU与AI芯片/GPU与AI芯片
+    Updated: 高澜股份/相关动态
+    Updated: 曙光数创/相关动态
+
+  [335/548] companies/高澜股份/raw/research/高澜股份：2023年6月20日投资者关系活动记录表.pdf
+    Updated: 输配电/输配电
+    Updated: 电力基建/电力基建
+    Updated: 算力基建/算力基建
+    Updated: 发电设备/发电设备
+    Updated: 液冷/液冷
+    Updated: 申菱环境/相关动态
+    Updated: 储能/储能
+    Updated: 高澜股份/相关动态
+    Updated: 英维克/相关动态
+
+  [336/548] companies/高澜股份/raw/research/高澜股份：2024年5月10日2023年度网上业绩说明会投资者关系活动记录表.pdf
+    Updated: 输配电/输配电
+    Updated: 储能/储能
+    Updated: 电力基建/电力基建
+    Updated: 算力基建/算力基建
+    Updated: 高澜股份/相关动态
+    Updated: 发电设备/发电设备
+    Updated: 液冷/液冷
+
+  [337/548] companies/高澜股份/raw/research/高澜股份：2024年5月13日投资者关系活动记录表.pdf
+    Updated: 输配电/输配电
+    Updated: 储能/储能
+    Updated: 电力基建/电力基建
+    Updated: 算力基建/算力基建
+    Updated: 高澜股份/相关动态
+    Updated: 发电设备/发电设备
+    Updated: 液冷/液冷
+
+  [338/548] companies/高澜股份/raw/research/高澜股份：2024年7月16日投资者关系活动记录表.pdf
+    Updated: 输配电/输配电
+    Updated: 储能/储能
+    Updated: 电力基建/电力基建
+    Updated: 算力基建/算力基建
+    Updated: 高澜股份/相关动态
+    Updated: 发电设备/发电设备
+    Updated: 液冷/液冷
+
+  [339/548] companies/高澜股份/raw/research/高澜股份：2024年8月29日2024年半年度网上业绩说明会投资者关系活动记录表.pdf
+    Updated: 输配电/输配电
+    Updated: 储能/储能
+    Updated: 算力基建/算力基建
+    Updated: 高澜股份/相关动态
+    Updated: 发电设备/发电设备
+    Updated: 液冷/液冷
+
+  [340/548] companies/高澜股份/raw/research/高澜股份：2025年4月29日2024年度暨2025年第一季度网上业绩说明会投资者关系活动记录表.pdf
+    Updated: 输配电/输配电
+    Updated: 储能/储能
+    Updated: 电力基建/电力基建
+    Updated: 算力基建/算力基建
+    Updated: 高澜股份/相关动态
+    Updated: 发电设备/发电设备
+    Updated: 液冷/液冷
+
+  [341/548] companies/高澜股份/raw/research/高澜股份：2025年8月28日2025年半年度网上业绩说明会投资者关系活动记录表.pdf
+    Updated: 输配电/输配电
+    Updated: 储能/储能
+    Updated: 电力基建/电力基建
+    Updated: 高澜股份/相关动态
+    Updated: 发电设备/发电设备
+    Updated: 液冷/液冷
+
+  [342/548] companies/高澜股份/raw/research/高澜股份：2026年3月3日投资者关系活动记录表.pdf
+    Updated: 输配电/输配电
+    Updated: 储能/储能
+    Updated: 电力基建/电力基建
+    Updated: 算力基建/算力基建
+    Updated: 高澜股份/相关动态
+    Updated: 发电设备/发电设备
+    Updated: 液冷/液冷
+
+  [343/548] companies/申菱环境/raw/news/2026-04-12_dd091426_申菱环境_301018_股票行情_行情中心___凤凰网财经.md
+  SKIP (low quality): 申菱环境(301018)股票行情_行情中心 - 凤凰网财经
+
+  [344/548] companies/申菱环境/raw/research/申菱环境：2021年10月28日-10月29日投资者关系活动记录表.pdf
+    Updated: 申菱环境/相关动态
+    Updated: 储能/储能
+    Updated: 液冷/液冷
+
+  [345/548] companies/申菱环境/raw/research/申菱环境：2022年10月28日、10月31日投资者关系活动记录表.pdf
+    Updated: 算力基建/算力基建
+    Updated: 申菱环境/相关动态
+    Updated: 液冷/液冷
+
+  [346/548] companies/申菱环境/raw/research/申菱环境：2022年11月3日投资者关系活动记录表.pdf
+    Updated: 输配电/输配电
+    Updated: 申菱环境/相关动态
+    Updated: 储能/储能
+    Updated: 电力基建/电力基建
+    Updated: 算力基建/算力基建
+    Updated: 发电设备/发电设备
+    Updated: 液冷/液冷
+
+  [347/548] companies/申菱环境/raw/research/申菱环境：2022年12月1日—12月20日投资者关系活动记录表.pdf
+    Updated: 申菱环境/相关动态
+    Updated: 储能/储能
+    Updated: 算力基建/算力基建
+    Updated: 液冷/液冷
+
+  [348/548] companies/申菱环境/raw/research/申菱环境：2022年8月30日—9月1日投资者关系活动记录表.pdf
+    Updated: 申菱环境/相关动态
+    Updated: 液冷/液冷
+
+  [349/548] companies/申菱环境/raw/research/申菱环境：2022年9月22日投资者关系活动记录表.pdf
+    Updated: 输配电/输配电
+    Updated: 申菱环境/相关动态
+    Updated: 储能/储能
+    Updated: 电力基建/电力基建
+    Updated: 发电设备/发电设备
+    Updated: 液冷/液冷
+
+  [350/548] companies/申菱环境/raw/research/申菱环境：2022年度业绩说明会投资者关系活动记录表.pdf
+    Updated: 申菱环境/相关动态
+    Updated: 储能/储能
+    Updated: 算力基建/算力基建
+    Updated: 高澜股份/相关动态
+    Updated: 曙光数创/相关动态
+    Updated: 液冷/液冷
+
+  [351/548] companies/申菱环境/raw/research/申菱环境：2023年9月19日投资者关系活动记录表.pdf
+    Updated: 申菱环境/相关动态
+    Updated: 储能/储能
+    Updated: 算力基建/算力基建
+    Updated: 液冷/液冷
+
+  [352/548] companies/申菱环境/raw/research/申菱环境：2023年9月7日投资者关系活动记录表.pdf
+    Updated: 高端制造/高端制造
+    Updated: 申菱环境/相关动态
+    Updated: 液冷/液冷
+
+  [353/548] companies/申菱环境/raw/research/申菱环境：2023年度业绩说明会投资者关系活动记录表.pdf
+    Updated: 输配电/输配电
+    Updated: 电力基建/电力基建
+    Updated: 算力基建/算力基建
+    Updated: 发电设备/发电设备
+    Updated: 液冷/液冷
+    Updated: 申菱环境/相关动态
+    Updated: 储能/储能
+    Updated: 高端制造/高端制造
+
+  [354/548] companies/申菱环境/raw/research/申菱环境：2024年10月29日-10月30日投资者关系活动记录表.pdf
+    Updated: 算力基建/算力基建
+    Updated: 申菱环境/相关动态
+    Updated: 液冷/液冷
+
+  [355/548] companies/申菱环境/raw/research/申菱环境：2024年4月29日投资者关系活动记录表.pdf
+    Updated: 申菱环境/相关动态
+    Updated: 高端制造/高端制造
+    Updated: 算力基建/算力基建
+    Updated: 液冷/液冷
+
+  [356/548] companies/申菱环境/raw/research/申菱环境：2024年8月27日、8月29日投资者关系活动记录表.pdf
+    Updated: 算力基建/算力基建
+    Updated: 申菱环境/相关动态
+    Updated: 液冷/液冷
+
+  [357/548] companies/申菱环境/raw/research/申菱环境：2024年9月12日投资者关系活动记录表.pdf
+    Updated: 申菱环境/相关动态
+    Updated: 液冷/液冷
+
+  [358/548] companies/申菱环境/raw/research/申菱环境：2025年2月27日投资者关系活动记录表.pdf
+    Updated: 输配电/输配电
+    Updated: 申菱环境/相关动态
+    Updated: 储能/储能
+    Updated: 电力基建/电力基建
+    Updated: 算力基建/算力基建
+    Updated: 发电设备/发电设备
+    Updated: 液冷/液冷
+
+  [359/548] companies/申菱环境/raw/research/申菱环境：2025年9月19日投资者关系活动记录表.pdf
+    Updated: 算力基建/算力基建
+    Updated: 申菱环境/相关动态
+    Updated: 液冷/液冷
+
+  [360/548] companies/申菱环境/raw/research/申菱环境：301018申菱环境投资者关系管理信息.pdf
+    Updated: 算力基建/算力基建
+    Updated: 申菱环境/相关动态
+    Updated: 液冷/液冷
+
+  [361/548] companies/申菱环境/raw/research/申菱环境：广东申菱环境系统股份有限公司2024年度业绩说明会投资者关系活动记录表.pdf
+    Updated: 输配电/输配电
+    Updated: 申菱环境/相关动态
+    Updated: 储能/储能
+    Updated: 电力基建/电力基建
+    Updated: 算力基建/算力基建
+    Updated: 发电设备/发电设备
+    Updated: 液冷/液冷
+
+  [362/548] companies/曙光数创/raw/news/2026-04-12_117e58f5_曙光数创_71_60_6_06___4_09_920808_搜狐证券___搜狐股.md
+    Updated: 曙光数创/公司动态
+    Updated: AI产业链/AI产业链
+    Updated: 液冷/液冷
+
+  [363/548] companies/曙光数创/raw/news/2026-04-12_3c4cc137_曙光数创_BJ872808_股票股价___雪球.md
+  SKIP (low quality): 曙光数创(BJ872808)股票股价 - 雪球
+
+  [364/548] companies/飞龙股份/raw/news/2026-04-12_4de15932_飞龙股份_002536_股票最新价格行情_实时走势图_股价分析预测.md
+  SKIP (low quality): 飞龙股份(002536)股票最新价格行情,实时走势图,股价分析预测
+
+  [365/548] companies/飞龙股份/raw/news/2026-04-12_597e0628_ɷ_002536_____ƾ_.md
+    Updated: AI产业链/AI产业链
+    Updated: 飞龙股份/公司动态
+    Updated: 液冷/液冷
+
+  [366/548] companies/飞龙股份/raw/news/2026-04-12_7b19a507_飞龙股份_sz002536_行情走势.md
+  SKIP (low quality): 飞龙股份（sz002536）行情走势
+
+  [367/548] companies/飞龙股份/raw/news/2026-04-12_e7345038_液冷服务器概念震荡拉升飞龙股份2连板___财经__东方财富网.md
+    Updated: AI产业链/AI产业链
+    Updated: 飞龙股份/公司动态
+    Updated: 液冷/液冷
+
+  [368/548] companies/浪潮信息/raw/news/2026-04-12_69e4666f_浪潮信息_000977__最新公告和新闻稿___富途牛牛.md
+    Updated: 算力基建/算力基建
+    Updated: 浪潮信息/公司动态
+    Updated: AI产业链/AI产业链
+
+  [369/548] companies/浪潮信息/raw/news/2026-04-12_f18ba3af_浪潮_云计算_大数据服务商.md
+    Updated: 算力基建/算力基建
+    Updated: AI应用/AI应用
+    Updated: 浪潮信息/公司动态
+    Updated: AI产业链/AI产业链
+
+  [370/548] companies/浪潮信息/raw/research/浪潮信息：000977浪潮信息投资者关系管理信息20250509.pdf
+    Updated: 浪潮信息/相关动态
+    Created: companies/工业富联/wiki/相关动态.md
+    Updated: 工业富联/相关动态
+    Updated: 算力基建/算力基建
+    Updated: AI应用/AI应用
+    Updated: 液冷/液冷
+
+  [371/548] companies/浪潮信息/raw/research/浪潮信息：000977浪潮信息投资者关系管理信息20250515.pdf
+    Updated: 算力基建/算力基建
+    Updated: AI应用/AI应用
+    Updated: 浪潮信息/相关动态
+
+  [372/548] companies/浪潮信息/raw/research/浪潮信息：000977浪潮信息调研活动信息20230302.pdf
+    Updated: 算力基建/算力基建
+    Updated: 浪潮信息/相关动态
+    Updated: 液冷/液冷
+
+  [373/548] companies/浪潮信息/raw/research/浪潮信息：2024年10月17日投资者关系活动记录表.pdf
+    Updated: 浪潮信息/相关动态
+    Updated: 高端制造/高端制造
+    Updated: 算力基建/算力基建
+    Updated: 液冷/液冷
+
+  [374/548] companies/浪潮信息/raw/research/浪潮信息：2024年5月11日、14日投资者关系活动记录表.pdf
+    Updated: 算力基建/算力基建
+    Updated: AI应用/AI应用
+    Updated: 浪潮信息/相关动态
+
+  [375/548] companies/浪潮信息/raw/research/浪潮信息：2024年5月15日投资者关系活动记录表.pdf
+    Updated: 浪潮信息/相关动态
+    Updated: 算力基建/算力基建
+    Updated: 中科曙光/相关动态
+    Created: companies/紫光股份/wiki/相关动态.md
+    Updated: 紫光股份/相关动态
+    Updated: 液冷/液冷
+
+  [376/548] companies/浪潮信息/raw/research/浪潮信息：2024年6月13日投资者关系活动记录表.pdf
+    Updated: 浪潮信息/相关动态
+    Updated: 工业富联/相关动态
+    Updated: 算力基建/算力基建
+    Updated: AI应用/AI应用
+    Updated: 液冷/液冷
+
+  [377/548] companies/中科曙光/raw/news/2026-04-12_c57359be_中科曙光_603019_股票股价__市值__实时行情__走势图__财报__Moo.md
+  SKIP (low quality): 中科曙光(603019)股票股价, 市值, 实时行情, 走势图, 财报- Moomoo
+
+  [378/548] companies/中科曙光/raw/news/2026-04-12_c8c234b6_中科曙光___腾讯证券___QQ.md
+    Updated: 中科曙光/公司动态
+    Updated: 算力基建/算力基建
+    Updated: AI产业链/AI产业链
+
+  [379/548] companies/紫光股份/raw/news/2026-04-12_11374f7f_紫光股份_临时代码___810773__最新公告和新闻稿.md
+    Updated: 算力基建/算力基建
+    Updated: 紫光股份/公司动态
+    Updated: AI产业链/AI产业链
+
+  [380/548] companies/紫光股份/raw/news/2026-04-12_c40f25d3_紫光股份怎么样_分析讨论社区___股吧__东方财富网.md
+    Updated: 算力基建/算力基建
+    Updated: 紫光股份/公司动态
+    Updated: AI产业链/AI产业链
+
+  [381/548] companies/紫光股份/raw/news/2026-04-12_cdae55f3_紫光股份_000938__最新新闻.md
+  SKIP (low quality): 紫光股份(000938) 最新新闻
+
+  [382/548] companies/紫光股份/raw/research/紫光股份：2021年4月29日投资者关系活动记录表.pdf
+    Updated: 算力基建/算力基建
+    Updated: 紫光股份/相关动态
+
+  [383/548] companies/紫光股份/raw/research/紫光股份：2021年5月7日投资者关系活动记录表.pdf
+    Updated: 算力基建/算力基建
+    Updated: 紫光股份/相关动态
+
+  [384/548] companies/紫光股份/raw/research/紫光股份：2022年10月28日-30日投资者关系活动记录表.pdf
+    Updated: 算力基建/算力基建
+    Updated: 紫光股份/相关动态
+
+  [385/548] companies/紫光股份/raw/research/紫光股份：2022年3月26日-27日投资者关系活动记录表.pdf
+    Updated: 算力基建/算力基建
+    Updated: 紫光股份/相关动态
+    Updated: 液冷/液冷
+
+  [386/548] companies/紫光股份/raw/research/紫光股份：2022年4月7日投资者关系活动记录表.pdf
+    Updated: 算力基建/算力基建
+    Updated: 紫光股份/相关动态
+    Updated: 液冷/液冷
+
+  [387/548] companies/紫光股份/raw/research/紫光股份：2023年4月14日投资者关系活动记录表.pdf
+    Updated: 输配电/输配电
+    Updated: 英伟达/相关动态
+    Updated: 电力基建/电力基建
+    Updated: 算力基建/算力基建
+    Updated: 发电设备/发电设备
+    Updated: 液冷/液冷
+    Updated: 储能/储能
+    Updated: GPU与AI芯片/GPU与AI芯片
+    Updated: 紫光股份/相关动态
+
+  [388/548] companies/紫光股份/raw/research/紫光股份：2023年4月1日投资者关系活动记录表.pdf
+    Updated: 算力基建/算力基建
+    Updated: 紫光股份/相关动态
+
+  [389/548] companies/紫光股份/raw/research/紫光股份：2023年8月25日投资者关系活动记录表.pdf
+    Updated: 英伟达/相关动态
+    Updated: 光模块/光模块
+    Updated: GPU与AI芯片/GPU与AI芯片
+    Updated: 算力基建/算力基建
+    Updated: AI应用/AI应用
+    Updated: 紫光股份/相关动态
+    Updated: 液冷/液冷
+
+  [390/548] companies/紫光股份/raw/research/紫光股份：2024年10月30日投资者关系活动记录表.pdf
+    Updated: 输配电/输配电
+    Updated: 光模块/光模块
+    Updated: 电力基建/电力基建
+    Updated: 算力基建/算力基建
+    Updated: 发电设备/发电设备
+    Updated: 液冷/液冷
+    Updated: 储能/储能
+    Updated: 紫光股份/相关动态
+
+  [391/548] companies/紫光股份/raw/research/紫光股份：2024年4月29日投资者关系活动记录表.pdf
+    Updated: 光模块/光模块
+    Updated: 算力基建/算力基建
+    Updated: AI应用/AI应用
+    Updated: 紫光股份/相关动态
+
+  [392/548] companies/紫光股份/raw/research/紫光股份：2024年5月16日投资者关系活动记录表.pdf
+    Updated: 算力基建/算力基建
+    Updated: 紫光股份/相关动态
+
+  [393/548] companies/紫光股份/raw/research/紫光股份：2024年8月26日投资者关系活动记录表.pdf
+    Updated: 算力基建/算力基建
+    Updated: AI应用/AI应用
+    Updated: 紫光股份/相关动态
+
+  [394/548] companies/紫光股份/raw/research/紫光股份：2025年8月29日投资者关系活动记录表.pdf
+    Updated: 光模块/光模块
+    Updated: GPU与AI芯片/GPU与AI芯片
+    Updated: 高端制造/高端制造
+    Updated: 算力基建/算力基建
+    Updated: AI应用/AI应用
+    Updated: 紫光股份/相关动态
+    Updated: 液冷/液冷
+
+  [395/548] companies/东方电缆/raw/news/2026-04-12_9dde9d5e_东方电缆_SH603606_股票股价___雪球.md
+  SKIP (low quality): 东方电缆(SH603606)股票股价 - 雪球
+
+  [396/548] companies/东方电缆/raw/news/2026-04-12_f2176bdd_最新动态___东方电缆.md
+    Updated: 输配电/输配电
+    Updated: AI产业链/AI产业链
+    Updated: 储能/储能
+    Updated: 电力基建/电力基建
+    Updated: 东方电缆/公司动态
+    Updated: 发电设备/发电设备
+
+  [397/548] companies/许继电气/raw/news/2026-04-12_0496325d_许继电气股份有限公司.md
+    Updated: 输配电/输配电
+    Updated: 许继电气/公司动态
+    Updated: 电力基建/电力基建
+    Updated: 发电设备/发电设备
+    Updated: AI产业链/AI产业链
+    Updated: 储能/储能
+
+  [398/548] companies/许继电气/raw/news/2026-04-12_3a3cec35_许继电气_000400__最新价格_行情_走势图_东方财富网.md
+  SKIP (low quality): 许继电气(000400)_最新价格_行情_走势图—东方财富网
+
+  [399/548] companies/许继电气/raw/news/2026-04-12_b3353e1b_许继电气28_48_1_68___年度报告___新浪.md
+    Updated: 输配电/输配电
+    Updated: 许继电气/公司动态
+    Updated: AI产业链/AI产业链
+    Updated: 储能/储能
+    Updated: 电力基建/电力基建
+    Updated: 发电设备/发电设备
+
+  [400/548] companies/许继电气/raw/news/2026-04-12_d8241cb1_许继电气28_00__0_74___公司高管___新浪.md
+    Updated: 输配电/输配电
+    Updated: 许继电气/公司动态
+    Updated: AI产业链/AI产业链
+    Updated: 储能/储能
+    Updated: 电力基建/电力基建
+    Updated: 发电设备/发电设备
+
+  [401/548] companies/宁德时代/raw/news/2026-04-12_0989846d_宁德时代_300750_个股资讯_新浪财经_新浪网.md
+  SKIP (low quality): 宁德时代(300750)个股资讯_新浪财经_新浪网
+
+  [402/548] companies/宁德时代/raw/news/2026-04-12_0eda2234_宁德时代_300750_公告列表___数据中心___东方财富网.md
+    Updated: 宁德时代/公司动态
+    Updated: 输配电/输配电
+    Updated: AI产业链/AI产业链
+    Updated: 储能/储能
+    Updated: 电力基建/电力基建
+    Updated: 刻蚀设备/刻蚀设备
+    Updated: 算力基建/算力基建
+    Updated: 发电设备/发电设备
+
+  [403/548] companies/宁德时代/raw/news/2026-04-12_6beee957_宁德时代_03750__最新新闻___富途牛牛.md
+  SKIP (low quality): 宁德时代(03750) 最新新闻 - 富途牛牛
+
+  [404/548] companies/阳光电源/raw/news/2026-04-12_4692ef6d_公司公告_阳光电源_SUNGROW.md
+    Updated: 阳光电源/公司动态
+    Updated: 输配电/输配电
+    Updated: AI产业链/AI产业链
+    Updated: 储能/储能
+    Updated: 电力基建/电力基建
+    Updated: 刻蚀设备/刻蚀设备
+    Updated: 发电设备/发电设备
+
+  [405/548] companies/阳光电源/raw/news/2026-04-12_88ea8fd0_阳光电源股票_数据_资料_信息___东方财富网.md
+    Updated: 阳光电源/公司动态
+    Updated: 输配电/输配电
+    Updated: AI产业链/AI产业链
+    Updated: 储能/储能
+    Updated: 电力基建/电力基建
+    Updated: 发电设备/发电设备
+
+  [406/548] companies/阳光电源/raw/news/2026-04-12_bbeddca3_阳光电源_SZ300274_股票股价_股价行情_财报_数据报告___雪球.md
+  SKIP (low quality): 阳光电源(SZ300274)股票股价_股价行情_财报_数据报告 - 雪球
+
+  [407/548] companies/百度/raw/news/2026-04-12_6f0678cf_百度新闻.md
+    Updated: 百度/公司动态
+    Updated: AI应用/AI应用
+    Updated: AI产业链/AI产业链
+
+  [408/548] companies/百度/raw/news/2026-04-12_73cb48e4_百度新闻.md
+    Updated: 百度/公司动态
+    Updated: AI应用/AI应用
+    Updated: AI产业链/AI产业链
+
+  [409/548] companies/百度/raw/news/2026-04-12_88bc09f4_China_AI_champion_Baidu_rolls_out_most_s.md
+    Updated: 百度/公司动态
+    Updated: CMP设备/CMP设备
+    Updated: AI应用/AI应用
+    Updated: AI产业链/AI产业链
+
+  [410/548] companies/科大讯飞/raw/news/2026-04-12_5b56997e_新闻资讯___科大讯飞智慧教育.md
+    Updated: 科大讯飞/公司动态
+    Updated: AI应用/AI应用
+    Updated: AI产业链/AI产业链
+
+  [411/548] companies/科大讯飞/raw/news/2026-04-12_a1002ba0_科大讯飞回应网传技术岗大幅裁员消息__假的__腾讯新闻.md
+    Updated: 科大讯飞/公司动态
+    Updated: AI应用/AI应用
+    Updated: AI产业链/AI产业链
+
+  [412/548] companies/科大讯飞/raw/reports/科大讯飞：2018年半年度报告.pdf
+    Updated: AI应用/AI应用
+    Created: companies/科大讯飞/wiki/相关动态.md
+    Updated: 科大讯飞/相关动态
+
+  [413/548] companies/科大讯飞/raw/reports/科大讯飞：2018年年度报告.pdf
+    Updated: AI应用/AI应用
+    Updated: 百度/相关动态
+    Updated: 科大讯飞/相关动态
+
+  [414/548] companies/科大讯飞/raw/reports/科大讯飞：2018年年度报告摘要.pdf
+    Updated: AI应用/AI应用
+    Updated: 科大讯飞/相关动态
+
+  [415/548] companies/科大讯飞/raw/reports/科大讯飞：2018年第三季度报告全文.pdf
+    Updated: AI应用/AI应用
+    Updated: 科大讯飞/相关动态
+
+  [416/548] companies/科大讯飞/raw/reports/科大讯飞：2018年第三季度报告正文.pdf
+    Updated: AI应用/AI应用
+    Updated: 科大讯飞/相关动态
+
+  [417/548] companies/科大讯飞/raw/reports/科大讯飞：2019年半年度报告.pdf
+    Updated: AI应用/AI应用
+    Updated: 科大讯飞/相关动态
+
+  [418/548] companies/科大讯飞/raw/reports/科大讯飞：2019年半年度报告摘要.pdf
+    Updated: AI应用/AI应用
+    Updated: 量检测设备/量检测设备
+    Updated: 科大讯飞/相关动态
+
+  [419/548] companies/科大讯飞/raw/reports/科大讯飞：2019年年度报告.pdf
+    Updated: AI应用/AI应用
+    Updated: 科大讯飞/相关动态
+
+  [420/548] companies/科大讯飞/raw/reports/科大讯飞：2019年第一季度报告正文.pdf
+    Updated: AI应用/AI应用
+    Updated: 科大讯飞/相关动态
+
+  [421/548] companies/科大讯飞/raw/reports/科大讯飞：2019年第三季度报告全文.pdf
+    Updated: AI应用/AI应用
+    Updated: 科大讯飞/相关动态
+
+  [422/548] companies/科大讯飞/raw/reports/科大讯飞：2019年第三季度报告正文.pdf
+    Updated: AI应用/AI应用
+    Updated: 科大讯飞/相关动态
+
+  [423/548] companies/科大讯飞/raw/reports/科大讯飞：2020年半年度报告.pdf
+    Updated: 输配电/输配电
+    Updated: 电力基建/电力基建
+    Updated: AI应用/AI应用
+    Updated: 发电设备/发电设备
+    Created: companies/寒武纪/wiki/相关动态.md
+    Updated: 寒武纪/相关动态
+    Updated: 储能/储能
+    Updated: 科大讯飞/相关动态
+    Updated: GPU与AI芯片/GPU与AI芯片
+    Created: companies/商汤科技/wiki/相关动态.md
+    Updated: 商汤科技/相关动态
+
+  [424/548] companies/科大讯飞/raw/reports/科大讯飞：2020年年度报告.pdf
+    Updated: AI应用/AI应用
+    Updated: 科大讯飞/相关动态
+
+  [425/548] companies/科大讯飞/raw/reports/科大讯飞：2020年年度报告摘要.pdf
+    Updated: AI应用/AI应用
+    Updated: 科大讯飞/相关动态
+
+  [426/548] companies/科大讯飞/raw/reports/科大讯飞：2020年第一季度报告全文.pdf
+    Updated: AI应用/AI应用
+    Updated: 科大讯飞/相关动态
+
+  [427/548] companies/科大讯飞/raw/reports/科大讯飞：2020年第一季度报告正文.pdf
+    Updated: AI应用/AI应用
+    Updated: 科大讯飞/相关动态
+
+  [428/548] companies/科大讯飞/raw/reports/科大讯飞：2020年第三季度报告全文.pdf
+    Updated: AI应用/AI应用
+    Updated: 科大讯飞/相关动态
+
+  [429/548] companies/科大讯飞/raw/reports/科大讯飞：2020年第三季度报告正文.pdf
+    Updated: AI应用/AI应用
+    Updated: 科大讯飞/相关动态
+
+  [430/548] companies/科大讯飞/raw/reports/科大讯飞：2021年半年度报告.pdf
+    Updated: AI应用/AI应用
+    Updated: 科大讯飞/相关动态
+
+  [431/548] companies/科大讯飞/raw/reports/科大讯飞：2021年半年度报告摘要.pdf
+    Updated: AI应用/AI应用
+    Updated: 科大讯飞/相关动态
+
+  [432/548] companies/科大讯飞/raw/reports/科大讯飞：2021年年度报告.pdf
+    Updated: AI应用/AI应用
+    Updated: 科大讯飞/相关动态
+
+  [433/548] companies/科大讯飞/raw/reports/科大讯飞：2021年年度报告（英文简版）.pdf
+    Updated: AI应用/AI应用
+    Updated: 科大讯飞/相关动态
+
+  [434/548] companies/科大讯飞/raw/reports/科大讯飞：2021年第一季度报告正文.pdf
+    Updated: AI应用/AI应用
+    Updated: 科大讯飞/相关动态
+
+  [435/548] companies/科大讯飞/raw/reports/科大讯飞：2021年第三季度报告.pdf
+    Updated: GPU与AI芯片/GPU与AI芯片
+    Updated: AI应用/AI应用
+    Updated: 寒武纪/相关动态
+    Updated: 科大讯飞/相关动态
+
+  [436/548] companies/科大讯飞/raw/reports/科大讯飞：2022年一季度报告.pdf
+    Updated: GPU与AI芯片/GPU与AI芯片
+    Updated: AI应用/AI应用
+    Updated: 寒武纪/相关动态
+    Updated: 科大讯飞/相关动态
+
+  [437/548] companies/科大讯飞/raw/reports/科大讯飞：2022年三季度报告.pdf
+    Updated: GPU与AI芯片/GPU与AI芯片
+    Updated: AI应用/AI应用
+    Updated: 寒武纪/相关动态
+    Updated: 科大讯飞/相关动态
+
+  [438/548] companies/科大讯飞/raw/reports/科大讯飞：2022年半年度报告.pdf
+    Updated: 寒武纪/相关动态
+    Updated: 科大讯飞/相关动态
+    Updated: GPU与AI芯片/GPU与AI芯片
+    Updated: AI应用/AI应用
+
+  [439/548] companies/科大讯飞/raw/reports/科大讯飞：2022年年度报告摘要.pdf
+    Updated: GPU与AI芯片/GPU与AI芯片
+    Updated: AI应用/AI应用
+    Updated: 量检测设备/量检测设备
+    Updated: 科大讯飞/相关动态
+
+  [440/548] companies/科大讯飞/raw/reports/科大讯飞：2023年半年度报告摘要.pdf
+    Updated: AI应用/AI应用
+    Updated: 科大讯飞/相关动态
+
+  [441/548] companies/科大讯飞/raw/reports/科大讯飞：2023年年度报告.pdf
+    Updated: 算力基建/算力基建
+    Updated: AI应用/AI应用
+    Updated: 科大讯飞/相关动态
+    Updated: GPU与AI芯片/GPU与AI芯片
+    Updated: 量检测设备/量检测设备
+
+  [442/548] companies/科大讯飞/raw/reports/科大讯飞：2024年一季度报告.pdf
+    Updated: 算力基建/算力基建
+    Updated: AI应用/AI应用
+    Updated: 寒武纪/相关动态
+    Updated: 科大讯飞/相关动态
+    Updated: GPU与AI芯片/GPU与AI芯片
+
+  [443/548] companies/科大讯飞/raw/reports/科大讯飞：2024年三季度报告.pdf
+    Updated: 寒武纪/相关动态
+    Updated: 科大讯飞/相关动态
+    Updated: GPU与AI芯片/GPU与AI芯片
+    Updated: AI应用/AI应用
+
+  [444/548] companies/科大讯飞/raw/reports/科大讯飞：2024年半年度报告.pdf
+    Updated: 寒武纪/相关动态
+    Updated: 科大讯飞/相关动态
+    Updated: GPU与AI芯片/GPU与AI芯片
+    Updated: 算力基建/算力基建
+    Updated: AI应用/AI应用
+
+  [445/548] companies/科大讯飞/raw/reports/科大讯飞：2024年半年度报告摘要.pdf
+    Updated: 算力基建/算力基建
+    Updated: AI应用/AI应用
+    Updated: 寒武纪/相关动态
+    Updated: 科大讯飞/相关动态
+    Updated: GPU与AI芯片/GPU与AI芯片
+
+  [446/548] companies/科大讯飞/raw/reports/科大讯飞：2024年年度报告.pdf
+    Updated: 科大讯飞/相关动态
+    Updated: GPU与AI芯片/GPU与AI芯片
+    Updated: 算力基建/算力基建
+    Updated: AI应用/AI应用
+
+  [447/548] companies/科大讯飞/raw/reports/科大讯飞：2024年年度报告（英文简版）.pdf
+    Updated: AI应用/AI应用
+    Updated: 科大讯飞/相关动态
+
+  [448/548] companies/科大讯飞/raw/reports/科大讯飞：2025年三季度报告.pdf
+    Updated: 算力基建/算力基建
+    Updated: AI应用/AI应用
+    Updated: 科大讯飞/相关动态
+
+  [449/548] companies/科大讯飞/raw/reports/科大讯飞：2025年半年度报告.pdf
+    Updated: 百度/相关动态
+    Updated: 科大讯飞/相关动态
+    Updated: GPU与AI芯片/GPU与AI芯片
+    Updated: 算力基建/算力基建
+    Updated: AI应用/AI应用
+
+  [450/548] companies/科大讯飞/raw/reports/科大讯飞：2025年半年度报告摘要.pdf
+    Updated: AI应用/AI应用
+    Updated: 科大讯飞/相关动态
+
+  [451/548] companies/中密控股/raw/news/2026-04-12_1df599ff_关键因素_中密控股机械密封件___环球老虎财经.md
+    Updated: 中密控股/公司动态
+    Updated: 高端制造/高端制造
+    Updated: 密封件/密封件
+
+  [452/548] companies/中密控股/raw/news/2026-04-12_402af7e9_产品列表_中密控股股份有限公司.md
+    Updated: 中密控股/公司动态
+    Updated: 高端制造/高端制造
+    Updated: 密封件/密封件
+
+  [453/548] companies/中密控股/raw/reports/中密控股：2024年10月29日投资者关系活动记录表.pdf
+    Updated: 中密控股/相关动态
+    Updated: 密封件/密封件
+
+  [454/548] companies/中密控股/raw/reports/中密控股：2024年11月29日投资者关系活动记录表.pdf
+    Updated: 中密控股/相关动态
+    Updated: 密封件/密封件
+
+  [455/548] companies/中密控股/raw/reports/中密控股：2024年9月25日投资者关系活动记录表.pdf
+    Updated: 密封件/密封件
+    Updated: 中密控股/相关动态
+
+  [456/548] companies/中密控股/raw/reports/中密控股：2025年10月30日投资者关系活动记录表.pdf
+    Updated: 中密控股/相关动态
+    Updated: 密封件/密封件
+
+  [457/548] companies/中密控股/raw/reports/中密控股：2025年11月28日投资者关系活动记录表.pdf
+    Updated: 中密控股/相关动态
+    Updated: 密封件/密封件
+
+  [458/548] companies/中密控股/raw/reports/中密控股：2025年11月6日投资者关系活动记录表.pdf
+    Updated: 中密控股/相关动态
+    Updated: 密封件/密封件
+
+  [459/548] companies/中密控股/raw/reports/中密控股：2025年11月7日投资者关系活动记录表.pdf
+    Updated: 中密控股/相关动态
+    Updated: 密封件/密封件
+
+  [460/548] companies/中密控股/raw/reports/中密控股：2025年12月19日投资者关系活动记录表.pdf
+    Updated: 中密控股/相关动态
+    Updated: 密封件/密封件
+
+  [461/548] companies/中密控股/raw/reports/中密控股：2025年1月24日投资者关系活动记录表.pdf
+    Updated: 中密控股/相关动态
+    Updated: 密封件/密封件
+
+  [462/548] companies/中密控股/raw/reports/中密控股：2025年4月25日投资者关系活动记录表.pdf
+    Updated: 中密控股/相关动态
+    Updated: 密封件/密封件
+    Updated: 储能/储能
+
+  [463/548] companies/中密控股/raw/reports/中密控股：2025年5月26日投资者关系活动记录表.pdf
+    Updated: 中密控股/相关动态
+    Updated: 密封件/密封件
+
+  [464/548] companies/中密控股/raw/reports/中密控股：2025年5月9日投资者关系活动记录表.pdf
+    Updated: 中密控股/相关动态
+    Updated: 密封件/密封件
+
+  [465/548] companies/中密控股/raw/reports/中密控股：2025年6月18日投资者关系活动记录表.pdf
+    Updated: 中密控股/相关动态
+    Updated: 密封件/密封件
+
+  [466/548] companies/中密控股/raw/reports/中密控股：2025年6月30日投资者关系活动记录表.pdf
+    Updated: 中密控股/相关动态
+    Updated: 密封件/密封件
+
+  [467/548] companies/中密控股/raw/reports/中密控股：2025年7月28日投资者关系活动记录表.pdf
+    Updated: 中密控股/相关动态
+    Updated: 密封件/密封件
+
+  [468/548] companies/中密控股/raw/reports/中密控股：2025年8月29日投资者关系活动记录表.pdf
+    Updated: 中密控股/相关动态
+    Updated: 密封件/密封件
+    Updated: 储能/储能
+
+  [469/548] companies/中密控股/raw/reports/中密控股：2025年9月17日投资者关系活动记录表.pdf
+    Updated: 中密控股/相关动态
+    Updated: 密封件/密封件
+
+  [470/548] companies/中密控股/raw/reports/中密控股：2025年一季度报告.pdf
+    Updated: 中密控股/相关动态
+    Updated: 密封件/密封件
+
+  [471/548] companies/中密控股/raw/reports/中密控股：2025年三季度报告.pdf
+    Updated: 密封件/密封件
+    Updated: 中密控股/相关动态
+
+  [472/548] companies/中密控股/raw/reports/中密控股：2025年半年度报告.pdf
+    Updated: 密封件/密封件
+    Updated: 薄膜沉积设备/薄膜沉积设备
+    Updated: 中密控股/相关动态
+    Updated: 高端制造/高端制造
+    Updated: 量检测设备/量检测设备
+
+  [473/548] companies/中密控股/raw/reports/中密控股：2025年半年度报告摘要.pdf
+    Updated: 中密控股/相关动态
+    Updated: 密封件/密封件
+
+  [474/548] companies/中密控股/raw/reports/中密控股：2026年2月13日投资者关系活动记录表.pdf
+    Updated: 中密控股/相关动态
+    Updated: 密封件/密封件
+
+  [475/548] companies/中密控股/raw/reports/中密控股：2026年3月12日投资者关系活动记录表.pdf
+    Updated: 中密控股/相关动态
+    Updated: 密封件/密封件
+
+  [476/548] companies/中密控股/raw/reports/中密控股：2026年3月5日投资者关系活动记录表.pdf
+    Updated: 密封件/密封件
+    Updated: 中密控股/相关动态
+
+  [477/548] companies/中密控股/raw/reports/日机密封：2015年半年度报告摘要.pdf
+    Updated: 密封件/密封件
+
+  [478/548] companies/中密控股/raw/reports/日机密封：2015年年度报告.pdf
+    Updated: 输配电/输配电
+    Updated: 储能/储能
+    Updated: 电力基建/电力基建
+    Updated: 高端制造/高端制造
+    Updated: 密封件/密封件
+    Updated: 发电设备/发电设备
+
+  [479/548] companies/中密控股/raw/reports/日机密封：2015年年度报告摘要.pdf
+    Updated: 密封件/密封件
+
+  [480/548] companies/中密控股/raw/reports/日机密封：2015年第三季度报告全文.pdf
+    Updated: 输配电/输配电
+    Updated: 储能/储能
+    Updated: 电力基建/电力基建
+    Updated: 密封件/密封件
+    Updated: 发电设备/发电设备
+
+  [481/548] companies/中密控股/raw/reports/日机密封：2016年半年度报告.pdf
+    Updated: 密封件/密封件
+
+  [482/548] companies/中密控股/raw/reports/日机密封：2016年年度报告摘要.pdf
+    Updated: 输配电/输配电
+    Updated: 储能/储能
+    Updated: 电力基建/电力基建
+    Updated: 密封件/密封件
+    Updated: 发电设备/发电设备
+
+  [483/548] companies/中密控股/raw/reports/日机密封：2016年第一季度报告全文.pdf
+    Updated: 输配电/输配电
+    Updated: 储能/储能
+    Updated: 电力基建/电力基建
+    Updated: 密封件/密封件
+    Updated: 发电设备/发电设备
+
+  [484/548] companies/中密控股/raw/reports/日机密封：2017年半年度报告.pdf
+    Updated: 输配电/输配电
+    Updated: 储能/储能
+    Updated: 电力基建/电力基建
+    Updated: 密封件/密封件
+    Updated: 发电设备/发电设备
+
+  [485/548] companies/中密控股/raw/reports/日机密封：2017年半年度报告摘要.pdf
+    Updated: 输配电/输配电
+    Updated: 储能/储能
+    Updated: 电力基建/电力基建
+    Updated: 密封件/密封件
+    Updated: 发电设备/发电设备
+
+  [486/548] companies/中密控股/raw/reports/日机密封：2017年年度报告摘要.pdf
+    Updated: 密封件/密封件
+
+  [487/548] companies/中密控股/raw/reports/日机密封：2018年半年度报告.pdf
+    Updated: 输配电/输配电
+    Updated: 储能/储能
+    Updated: 电力基建/电力基建
+    Updated: 密封件/密封件
+    Updated: 发电设备/发电设备
+
+  [488/548] companies/中密控股/raw/reports/日机密封：2018年半年度报告摘要.pdf
+    Updated: 密封件/密封件
+    Updated: 清洗设备/清洗设备
+
+  [489/548] companies/中密控股/raw/reports/日机密封：2018年年度报告摘要.pdf
+    Updated: 密封件/密封件
+    Updated: 清洗设备/清洗设备
+
+  [490/548] companies/中密控股/raw/reports/日机密封：2019年半年度报告摘要.pdf
+    Updated: 输配电/输配电
+    Updated: 储能/储能
+    Updated: 电力基建/电力基建
+    Updated: 高端制造/高端制造
+    Updated: 密封件/密封件
+    Updated: 发电设备/发电设备
+
+  [491/548] companies/中密控股/raw/reports/日机密封：2019年第一季度报告全文.pdf
+    Updated: 量检测设备/量检测设备
+    Updated: 密封件/密封件
+
+  [492/548] companies/中密控股/raw/reports/日机密封：2019年第三季度报告全文.pdf
+    Updated: 密封件/密封件
+
+  [493/548] companies/中密控股/raw/research/中密控股：2024年10月29日投资者关系活动记录表.pdf
+    Updated: 中密控股/相关动态
+    Updated: 密封件/密封件
+
+  [494/548] companies/中密控股/raw/research/中密控股：2024年11月29日投资者关系活动记录表.pdf
+    Updated: 中密控股/相关动态
+    Updated: 密封件/密封件
+
+  [495/548] companies/中密控股/raw/research/中密控股：2024年9月25日投资者关系活动记录表.pdf
+    Updated: 密封件/密封件
+    Updated: 中密控股/相关动态
+
+  [496/548] companies/中密控股/raw/research/中密控股：2025年10月30日投资者关系活动记录表.pdf
+    Updated: 中密控股/相关动态
+    Updated: 密封件/密封件
+
+  [497/548] companies/中密控股/raw/research/中密控股：2025年11月28日投资者关系活动记录表.pdf
+    Updated: 中密控股/相关动态
+    Updated: 密封件/密封件
+
+  [498/548] companies/中密控股/raw/research/中密控股：2025年11月6日投资者关系活动记录表.pdf
+    Updated: 中密控股/相关动态
+    Updated: 密封件/密封件
+
+  [499/548] companies/中密控股/raw/research/中密控股：2025年11月7日投资者关系活动记录表.pdf
+    Updated: 中密控股/相关动态
+    Updated: 密封件/密封件
+
+  [500/548] companies/中密控股/raw/research/中密控股：2025年12月19日投资者关系活动记录表.pdf
+    Updated: 中密控股/相关动态
+    Updated: 密封件/密封件
+
+  [501/548] companies/中密控股/raw/research/中密控股：2025年1月24日投资者关系活动记录表.pdf
+    Updated: 中密控股/相关动态
+    Updated: 密封件/密封件
+
+  [502/548] companies/中密控股/raw/research/中密控股：2025年4月25日投资者关系活动记录表.pdf
+    Updated: 中密控股/相关动态
+    Updated: 密封件/密封件
+    Updated: 储能/储能
+
+  [503/548] companies/中密控股/raw/research/中密控股：2025年5月26日投资者关系活动记录表.pdf
+    Updated: 中密控股/相关动态
+    Updated: 密封件/密封件
+
+  [504/548] companies/中密控股/raw/research/中密控股：2025年5月9日投资者关系活动记录表.pdf
+    Updated: 中密控股/相关动态
+    Updated: 密封件/密封件
+
+  [505/548] companies/中密控股/raw/research/中密控股：2025年6月18日投资者关系活动记录表.pdf
+    Updated: 中密控股/相关动态
+    Updated: 密封件/密封件
+
+  [506/548] companies/中密控股/raw/research/中密控股：2025年6月30日投资者关系活动记录表.pdf
+    Updated: 中密控股/相关动态
+    Updated: 密封件/密封件
+
+  [507/548] companies/中密控股/raw/research/中密控股：2025年7月28日投资者关系活动记录表.pdf
+    Updated: 中密控股/相关动态
+    Updated: 密封件/密封件
+
+  [508/548] companies/中密控股/raw/research/中密控股：2025年8月29日投资者关系活动记录表.pdf
+    Updated: 中密控股/相关动态
+    Updated: 密封件/密封件
+    Updated: 储能/储能
+
+  [509/548] companies/中密控股/raw/research/中密控股：2025年9月17日投资者关系活动记录表.pdf
+    Updated: 中密控股/相关动态
+    Updated: 密封件/密封件
+
+  [510/548] companies/中密控股/raw/research/中密控股：2026年2月13日投资者关系活动记录表.pdf
+    Updated: 中密控股/相关动态
+    Updated: 密封件/密封件
+
+  [511/548] companies/中密控股/raw/research/中密控股：2026年3月12日投资者关系活动记录表.pdf
+    Updated: 中密控股/相关动态
+    Updated: 密封件/密封件
+
+  [512/548] companies/中密控股/raw/research/中密控股：2026年3月5日投资者关系活动记录表.pdf
+    Updated: 密封件/密封件
+    Updated: 中密控股/相关动态
+
+  [513/548] companies/珂玛科技/raw/news/2026-04-11_3a585b63_珂玛科技_301611__股价_新闻_报价和图表___富途牛牛.md
+    Updated: 刻蚀设备/刻蚀设备
+    Updated: 半导体设备/半导体设备
+    Updated: 清洗设备/清洗设备
+    Updated: 薄膜沉积设备/薄膜沉积设备
+    Updated: 光刻设备/光刻设备
+    Created: companies/珂玛科技/wiki/公司动态.md
+    Updated: 珂玛科技/公司动态
+    Updated: CMP设备/CMP设备
+    Updated: 量检测设备/量检测设备
+    Updated: 半导体国产替代/半导体国产替代
+
+  [514/548] companies/珂玛科技/raw/news/2026-04-11_4a22b60a_珂玛科技_SZ301611_股票股价___雪球.md
+  SKIP (low quality): 珂玛科技(SZ301611)股票股价 - 雪球
+
+  [515/548] companies/珂玛科技/raw/news/2026-04-11_4fbfcdcb_总投资6亿元珂玛科技二期项目开工___苏州新闻网.md
+    Updated: 刻蚀设备/刻蚀设备
+    Updated: 半导体设备/半导体设备
+    Updated: 清洗设备/清洗设备
+    Updated: 薄膜沉积设备/薄膜沉积设备
+    Updated: 光刻设备/光刻设备
+    Updated: 珂玛科技/公司动态
+    Updated: CMP设备/CMP设备
+    Updated: 量检测设备/量检测设备
+    Updated: 半导体国产替代/半导体国产替代
+
+  [516/548] companies/珂玛科技/raw/news/2026-04-11_581946d4_珂玛科技_301611____公司简介__股票行情中心__搜狐证券.md
+  SKIP (low quality): 珂玛科技(301611) - 公司简介- 股票行情中心- 搜狐证券
+
+  [517/548] companies/珂玛科技/raw/news/2026-04-11_658905ad_苏州珂玛材料科技股份有限公司_百度百科.md
+  SKIP (low quality): 苏州珂玛材料科技股份有限公司_百度百科
+
+  [518/548] companies/珂玛科技/raw/news/2026-04-11_6e1c7d10_珂玛科技94_18__1_98___公司公告_新浪财经.md
+    Updated: 刻蚀设备/刻蚀设备
+    Updated: 半导体设备/半导体设备
+    Updated: 清洗设备/清洗设备
+    Updated: 薄膜沉积设备/薄膜沉积设备
+    Updated: 光刻设备/光刻设备
+    Updated: 珂玛科技/公司动态
+    Updated: CMP设备/CMP设备
+    Updated: 量检测设备/量检测设备
+    Updated: 半导体国产替代/半导体国产替代
+
+  [519/548] companies/珂玛科技/raw/news/2026-04-11_79774a5f_珂玛科技_301611__最新价格_行情_走势图___东方财富.md
+  SKIP (low quality): 珂玛科技(301611)_最新价格_行情_走势图 - 东方财富
+
+  [520/548] companies/珂玛科技/raw/news/2026-04-11_83a332f5_珂玛科技94_18__1_98___个股资讯_新浪财经.md
+  SKIP (low quality): 珂玛科技94.18(-1.98%)_个股资讯_新浪财经
+
+  [521/548] companies/珂玛科技/raw/news/2026-04-11_98027b4d_国产半导体的_隐形冠军__这家做芯片_螺丝钉_的企业如何成为产业链____.md
+    Updated: 北方华创/相关动态
+    Updated: 刻蚀设备/刻蚀设备
+    Updated: 中微公司/相关动态
+    Updated: 半导体设备/半导体设备
+    Updated: 清洗设备/清洗设备
+    Updated: 薄膜沉积设备/薄膜沉积设备
+    Updated: 光刻设备/光刻设备
+    Updated: 珂玛科技/公司动态
+    Updated: CMP设备/CMP设备
+    Updated: 量检测设备/量检测设备
+    Updated: 半导体国产替代/半导体国产替代
+
+  [522/548] companies/珂玛科技/raw/news/2026-04-11_9aebb6f9_苏州珂玛材料科技股份有限公司.md
+    Updated: 刻蚀设备/刻蚀设备
+    Updated: 半导体设备/半导体设备
+    Updated: 清洗设备/清洗设备
+    Updated: 薄膜沉积设备/薄膜沉积设备
+    Updated: 光刻设备/光刻设备
+    Updated: 珂玛科技/公司动态
+    Updated: CMP设备/CMP设备
+    Updated: 量检测设备/量检测设备
+    Updated: 半导体国产替代/半导体国产替代
+
+  [523/548] companies/珂玛科技/raw/news/2026-04-11_9b5024c5_珂玛科技_SZ301611____最新资讯__雪球.md
+  SKIP (low quality): 珂玛科技(SZ301611) - 最新资讯- 雪球
+
+  [524/548] companies/珂玛科技/raw/news/2026-04-11_aa525010_新闻资讯_苏州珂玛材料科技股份有限公司.md
+    Updated: 北方华创/相关动态
+    Updated: 刻蚀设备/刻蚀设备
+    Updated: 半导体设备/半导体设备
+    Updated: 清洗设备/清洗设备
+    Updated: 薄膜沉积设备/薄膜沉积设备
+    Updated: 光刻设备/光刻设备
+    Updated: 珂玛科技/公司动态
+    Updated: CMP设备/CMP设备
+    Updated: 量检测设备/量检测设备
+    Updated: 半导体国产替代/半导体国产替代
+
+  [525/548] companies/珂玛科技/raw/news/2026-04-11_b9cb1485_半导体_苏州珂玛材料科技股份有限公司.md
+    Updated: 刻蚀设备/刻蚀设备
+    Updated: 半导体设备/半导体设备
+    Updated: 清洗设备/清洗设备
+    Updated: 薄膜沉积设备/薄膜沉积设备
+    Updated: 光刻设备/光刻设备
+    Updated: 珂玛科技/公司动态
+    Updated: CMP设备/CMP设备
+    Updated: 量检测设备/量检测设备
+    Updated: 半导体国产替代/半导体国产替代
+
+  [526/548] companies/珂玛科技/raw/news/2026-04-11_c4f845c2_半导体设备先进陶瓷材料实现国产替代__珂玛科技成功上市___华业天成.md
+    Updated: 刻蚀设备/刻蚀设备
+    Updated: 半导体设备/半导体设备
+    Updated: 清洗设备/清洗设备
+    Updated: 薄膜沉积设备/薄膜沉积设备
+    Updated: 光刻设备/光刻设备
+    Updated: 珂玛科技/公司动态
+    Updated: CMP设备/CMP设备
+    Updated: 量检测设备/量检测设备
+    Updated: 半导体国产替代/半导体国产替代
+
+  [527/548] companies/珂玛科技/raw/news/2026-04-11_c82bb909_珂玛科技股票_数据_资料___东方财富网.md
+    Updated: 刻蚀设备/刻蚀设备
+    Updated: 半导体设备/半导体设备
+    Updated: 清洗设备/清洗设备
+    Updated: 薄膜沉积设备/薄膜沉积设备
+    Updated: 光刻设备/光刻设备
+    Updated: 珂玛科技/公司动态
+    Updated: CMP设备/CMP设备
+    Updated: 量检测设备/量检测设备
+    Updated: 半导体国产替代/半导体国产替代
+
+  [528/548] companies/珂玛科技/raw/news/2026-04-12_04e4626c_3位留美博士创办的这家半导体材料企业_上市了_新闻_科学网.md
+    Updated: 刻蚀设备/刻蚀设备
+    Updated: 半导体材料/半导体材料
+    Updated: 半导体设备/半导体设备
+    Updated: 硅片/硅片
+    Updated: 靶材CMP/靶材CMP
+    Updated: 清洗设备/清洗设备
+    Updated: 电子特气/电子特气
+    Updated: 光刻胶/光刻胶
+    Updated: 薄膜沉积设备/薄膜沉积设备
+    Updated: 储能/储能
+    Updated: 光刻设备/光刻设备
+    Updated: 珂玛科技/公司动态
+    Updated: CMP设备/CMP设备
+    Updated: 量检测设备/量检测设备
+    Updated: 半导体国产替代/半导体国产替代
+
+  [529/548] companies/珂玛科技/raw/news/2026-04-12_2636b825_珂玛科技二期项目在苏州高新区开工___总投资6亿元_中金在线财经号.md
+    Updated: 刻蚀设备/刻蚀设备
+    Updated: 半导体设备/半导体设备
+    Updated: 清洗设备/清洗设备
+    Updated: 薄膜沉积设备/薄膜沉积设备
+    Updated: 光刻设备/光刻设备
+    Updated: 珂玛科技/公司动态
+    Updated: CMP设备/CMP设备
+    Updated: 量检测设备/量检测设备
+    Updated: 半导体国产替代/半导体国产替代
+
+  [530/548] companies/珂玛科技/raw/news/2026-04-12_75375f72_珂玛科技是存储陶瓷零部件的龙头企业__国内市占率超过80____雪球.md
+    Updated: 刻蚀设备/刻蚀设备
+    Updated: 半导体设备/半导体设备
+    Updated: 清洗设备/清洗设备
+    Updated: 薄膜沉积设备/薄膜沉积设备
+    Updated: 光刻设备/光刻设备
+    Updated: 珂玛科技/公司动态
+    Updated: CMP设备/CMP设备
+    Updated: 量检测设备/量检测设备
+    Updated: 半导体国产替代/半导体国产替代
+
+  [531/548] companies/珂玛科技/raw/news/2026-04-12_f4ecaa42_通知公告_新闻资讯_苏州珂玛材料科技股份有限公司.md
+    Updated: 刻蚀设备/刻蚀设备
+    Updated: 半导体设备/半导体设备
+    Updated: 清洗设备/清洗设备
+    Updated: 薄膜沉积设备/薄膜沉积设备
+    Updated: 光刻设备/光刻设备
+    Updated: 珂玛科技/公司动态
+    Updated: CMP设备/CMP设备
+    Updated: 量检测设备/量检测设备
+    Updated: 半导体国产替代/半导体国产替代
+
+  [532/548] companies/珂玛科技/raw/reports/珂玛科技：2024年年度报告.pdf
+    Updated: 北方华创/相关动态
+    Updated: 中微公司/相关动态
+    Updated: 算力基建/算力基建
+    Updated: 薄膜沉积设备/薄膜沉积设备
+    Updated: 量检测设备/量检测设备
+    Updated: 刻蚀设备/刻蚀设备
+    Updated: 半导体设备/半导体设备
+    Created: companies/珂玛科技/wiki/相关动态.md
+    Updated: 珂玛科技/相关动态
+    Updated: 清洗设备/清洗设备
+    Updated: 拓荆科技/相关动态
+    Updated: 储能/储能
+    Updated: 光刻设备/光刻设备
+    Updated: CMP设备/CMP设备
+
+  [533/548] companies/珂玛科技/raw/reports/珂玛科技：2024年年度报告摘要.pdf
+    Updated: 北方华创/相关动态
+    Updated: 中微公司/相关动态
+    Updated: 硅片/硅片
+    Updated: 薄膜沉积设备/薄膜沉积设备
+    Updated: 量检测设备/量检测设备
+    Updated: 刻蚀设备/刻蚀设备
+    Updated: 半导体设备/半导体设备
+    Updated: 珂玛科技/相关动态
+    Updated: 清洗设备/清洗设备
+    Updated: 光刻设备/光刻设备
+    Updated: CMP设备/CMP设备
+
+  [534/548] companies/珂玛科技/raw/reports/珂玛科技：2025年一季度报告.pdf
+    Updated: 刻蚀设备/刻蚀设备
+    Updated: 半导体设备/半导体设备
+    Updated: 珂玛科技/相关动态
+    Updated: 清洗设备/清洗设备
+    Updated: 薄膜沉积设备/薄膜沉积设备
+    Updated: 光刻设备/光刻设备
+    Updated: CMP设备/CMP设备
+    Updated: 量检测设备/量检测设备
+
+  [535/548] companies/珂玛科技/raw/reports/珂玛科技：2025年三季度报告.pdf
+    Updated: 刻蚀设备/刻蚀设备
+    Updated: 半导体设备/半导体设备
+    Updated: 珂玛科技/相关动态
+    Updated: 清洗设备/清洗设备
+    Updated: 薄膜沉积设备/薄膜沉积设备
+    Updated: 光刻设备/光刻设备
+    Updated: CMP设备/CMP设备
+    Updated: 量检测设备/量检测设备
+
+  [536/548] companies/珂玛科技/raw/reports/珂玛科技：2025年半年度报告.pdf
+    Updated: 北方华创/相关动态
+    Updated: 中微公司/相关动态
+    Updated: 算力基建/算力基建
+    Updated: 薄膜沉积设备/薄膜沉积设备
+    Updated: 量检测设备/量检测设备
+    Updated: 刻蚀设备/刻蚀设备
+    Updated: 半导体设备/半导体设备
+    Updated: 珂玛科技/相关动态
+    Updated: 清洗设备/清洗设备
+    Updated: 拓荆科技/相关动态
+    Updated: 储能/储能
+    Updated: 光刻设备/光刻设备
+    Updated: CMP设备/CMP设备
+
+  [537/548] companies/珂玛科技/raw/reports/珂玛科技：2025年半年度报告摘要.pdf
+    Updated: 北方华创/相关动态
+    Updated: 中微公司/相关动态
+    Updated: 算力基建/算力基建
+    Updated: 硅片/硅片
+    Updated: 薄膜沉积设备/薄膜沉积设备
+    Updated: 量检测设备/量检测设备
+    Updated: 刻蚀设备/刻蚀设备
+    Updated: 半导体设备/半导体设备
+    Updated: 珂玛科技/相关动态
+    Updated: 清洗设备/清洗设备
+    Updated: 拓荆科技/相关动态
+    Updated: 储能/储能
+    Updated: 光刻设备/光刻设备
+    Updated: CMP设备/CMP设备
+
+  [538/548] companies/珂玛科技/raw/research/珂玛科技：301611珂玛科技投资者关系管理信息20240829.pdf
+    Updated: 刻蚀设备/刻蚀设备
+    Updated: 半导体设备/半导体设备
+    Updated: 珂玛科技/相关动态
+    Updated: 清洗设备/清洗设备
+    Updated: 薄膜沉积设备/薄膜沉积设备
+    Updated: 光刻设备/光刻设备
+    Updated: CMP设备/CMP设备
+    Updated: 量检测设备/量检测设备
+
+  [539/548] companies/珂玛科技/raw/research/珂玛科技：301611珂玛科技投资者关系管理信息20240902.pdf
+    Updated: 刻蚀设备/刻蚀设备
+    Updated: 半导体设备/半导体设备
+    Updated: 珂玛科技/相关动态
+    Updated: 清洗设备/清洗设备
+    Updated: 薄膜沉积设备/薄膜沉积设备
+    Updated: 光刻设备/光刻设备
+    Updated: CMP设备/CMP设备
+    Updated: 量检测设备/量检测设备
+
+  [540/548] companies/珂玛科技/raw/research/珂玛科技：301611珂玛科技投资者关系管理信息20240906.pdf
+    Updated: 刻蚀设备/刻蚀设备
+    Updated: 半导体设备/半导体设备
+    Updated: 珂玛科技/相关动态
+    Updated: 清洗设备/清洗设备
+    Updated: 薄膜沉积设备/薄膜沉积设备
+    Updated: 光刻设备/光刻设备
+    Updated: CMP设备/CMP设备
+    Updated: 量检测设备/量检测设备
+
+  [541/548] companies/珂玛科技/raw/research/珂玛科技：301611珂玛科技投资者关系管理信息20240919.pdf
+    Updated: 刻蚀设备/刻蚀设备
+    Updated: 半导体设备/半导体设备
+    Updated: 珂玛科技/相关动态
+    Updated: 清洗设备/清洗设备
+    Updated: 薄膜沉积设备/薄膜沉积设备
+    Updated: 光刻设备/光刻设备
+    Updated: CMP设备/CMP设备
+    Updated: 量检测设备/量检测设备
+
+  [542/548] companies/珂玛科技/raw/research/珂玛科技：301611珂玛科技投资者关系管理信息20241111.pdf
+    Updated: 刻蚀设备/刻蚀设备
+    Updated: 半导体设备/半导体设备
+    Updated: 珂玛科技/相关动态
+    Updated: 清洗设备/清洗设备
+    Updated: 薄膜沉积设备/薄膜沉积设备
+    Updated: 光刻设备/光刻设备
+    Updated: CMP设备/CMP设备
+    Updated: 量检测设备/量检测设备
+
+  [543/548] companies/珂玛科技/raw/research/珂玛科技：301611珂玛科技投资者关系管理信息20250303.pdf
+    Updated: 刻蚀设备/刻蚀设备
+    Updated: 半导体设备/半导体设备
+    Updated: 珂玛科技/相关动态
+    Updated: 清洗设备/清洗设备
+    Updated: 薄膜沉积设备/薄膜沉积设备
+    Updated: 光刻设备/光刻设备
+    Updated: CMP设备/CMP设备
+    Updated: 量检测设备/量检测设备
+
+  [544/548] companies/珂玛科技/raw/research/珂玛科技：301611珂玛科技投资者关系管理信息20250429.pdf
+    Updated: 北方华创/相关动态
+    Updated: 刻蚀设备/刻蚀设备
+    Updated: 半导体设备/半导体设备
+    Updated: 珂玛科技/相关动态
+    Updated: 清洗设备/清洗设备
+    Updated: 薄膜沉积设备/薄膜沉积设备
+    Updated: 光刻设备/光刻设备
+    Updated: CMP设备/CMP设备
+    Updated: 量检测设备/量检测设备
+
+  [545/548] companies/珂玛科技/raw/research/珂玛科技：301611珂玛科技投资者关系管理信息20250509.pdf
+    Updated: 刻蚀设备/刻蚀设备
+    Updated: 半导体设备/半导体设备
+    Updated: 珂玛科技/相关动态
+    Updated: 清洗设备/清洗设备
+    Updated: 薄膜沉积设备/薄膜沉积设备
+    Updated: 光刻设备/光刻设备
+    Updated: CMP设备/CMP设备
+    Updated: 量检测设备/量检测设备
+
+  [546/548] companies/珂玛科技/raw/research/珂玛科技：301611珂玛科技投资者关系管理信息20250725.pdf
+    Updated: 刻蚀设备/刻蚀设备
+    Updated: 半导体设备/半导体设备
+    Updated: 珂玛科技/相关动态
+    Updated: 清洗设备/清洗设备
+    Updated: 薄膜沉积设备/薄膜沉积设备
+    Updated: 光刻设备/光刻设备
+    Updated: CMP设备/CMP设备
+    Updated: 量检测设备/量检测设备
+
+  [547/548] companies/珂玛科技/raw/research/珂玛科技：301611珂玛科技投资者关系管理信息20251202.pdf
+    Updated: 刻蚀设备/刻蚀设备
+    Updated: 半导体设备/半导体设备
+    Updated: 珂玛科技/相关动态
+    Updated: 清洗设备/清洗设备
+    Updated: 薄膜沉积设备/薄膜沉积设备
+    Updated: 光刻设备/光刻设备
+    Updated: CMP设备/CMP设备
+    Updated: 量检测设备/量检测设备
+
+  [548/548] companies/珂玛科技/raw/research/珂玛科技：301611珂玛科技投资者关系管理信息20260109.pdf
+    Updated: 刻蚀设备/刻蚀设备
+    Updated: 半导体设备/半导体设备
+    Updated: 珂玛科技/相关动态
+    Updated: 清洗设备/清洗设备
+    Updated: 薄膜沉积设备/薄膜沉积设备
+    Updated: 光刻设备/光刻设备
+    Updated: CMP设备/CMP设备
+    Updated: 量检测设备/量检测设备
+
+==================================================
+  Done. Topics updated: 2409, Skipped: 41
+  Affected topics: AI产业链/AI产业链, AI应用/AI应用, AMD/公司动态, AMD/相关动态, CMP设备/CMP设备, EDA与IP/EDA与IP, GPU与AI芯片/GPU与AI芯片, 东方电缆/公司动态, 中密控股/公司动态, 中密控股/相关动态, 中微公司/公司动态, 中微公司/相关动态, 中科曙光/公司动态, 中科曙光/相关动态, 中芯国际/公司动态, 中芯国际/相关动态, 中际旭创/公司动态, 中际旭创/相关动态, 储能/储能, 光刻胶/光刻胶, 光刻设备/光刻设备, 光模块/光模块, 光迅科技/公司动态, 光迅科技/相关动态, 刻蚀设备/刻蚀设备, 北方华创/公司动态, 北方华创/相关动态, 半导体代工/半导体代工, 半导体国产替代/半导体国产替代, 半导体材料/半导体材料, 半导体设备/半导体设备, 华大九天/公司动态, 华大九天/相关动态, 华海清科/公司动态, 华特气体/公司动态, 华虹半导体/公司动态, 华虹半导体/相关动态, 南大光电/公司动态, 南大光电/相关动态, 发电设备/发电设备, 台积电/公司动态, 台积电/相关动态, 商汤科技/相关动态, 天孚通信/公司动态, 天孚通信/相关动态, 太辰光/公司动态, 太辰光/相关动态, 宁德时代/公司动态, 宁德时代/相关动态, 密封件/密封件, 寒武纪/公司动态, 寒武纪/相关动态, 封测/封测, 工业富联/相关动态, 拓荆科技/公司动态, 拓荆科技/相关动态, 新易盛/公司动态, 新易盛/相关动态, 曙光数创/公司动态, 曙光数创/相关动态, 江丰电子/公司动态, 江丰电子/相关动态, 沪硅产业/公司动态, 浪潮信息/公司动态, 浪潮信息/相关动态, 海光信息/公司动态, 海光信息/相关动态, 液冷/液冷, 清洗设备/清洗设备, 珂玛科技/公司动态, 珂玛科技/相关动态, 甬矽电子/公司动态, 甬矽电子/相关动态, 申菱环境/相关动态, 电力基建/电力基建, 电子特气/电子特气, 百度/公司动态, 百度/相关动态, 盛美上海/公司动态, 硅片/硅片, 科大讯飞/公司动态, 科大讯飞/相关动态, 算力基建/算力基建, 精测电子/公司动态, 紫光股份/公司动态, 紫光股份/相关动态, 英伟达/公司动态, 英伟达/相关动态, 英维克/相关动态, 薄膜沉积设备/薄膜沉积设备, 许继电气/公司动态, 许继电气/相关动态, 输配电/输配电, 通富微电/相关动态, 量检测设备/量检测设备, 长电科技/公司动态, 阳光电源/公司动态, 靶材CMP/靶材CMP, 飞龙股份/公司动态, 高澜股份/相关动态, 高端制造/高端制造
+==================================================
+=== Sun Apr 12 21:01:27 BST 2026 done ===

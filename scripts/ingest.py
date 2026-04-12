@@ -545,6 +545,14 @@ def main():
         topics_str = ", ".join(sorted(all_topics))
         append_log(f"Ingested {len(pending)} files, updated {total_updated} topic entries: {topics_str}")
 
+        # 自动重建索引
+        try:
+            from generate_index import generate as gen_index
+            gen_index()
+            print("  Index regenerated.")
+        except Exception:
+            pass
+
 
 if __name__ == "__main__":
     main()
