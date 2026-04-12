@@ -28,11 +28,33 @@ from graph import Graph
 DOWNLOADER_DIR = Path(os.path.expanduser("~/StockInfoDownloader"))
 WIKI_COMPANIES = WIKI_ROOT / "companies"
 
-PAGE_TYPES = {
-    "periodicReports": {"name": "定期报告", "wiki_subdir": "raw/reports", "keywords": None, "max_pages": 3},
-    "latestAnnouncement": {"name": "招股说明书", "wiki_subdir": "raw/reports", "keywords": ["招股说明书"], "max_pages": 2, "reverse_order": True},
-    "research": {"name": "投资者关系", "wiki_subdir": "raw/research", "keywords": ["投资者关系活动记录表", "投资者关系管理信息"], "max_pages": 2},
-}
+def load_page_types():
+    """从 config.yaml 读取页面类型配置"""
+    import yaml
+    cfg_path = WIKI_ROOT / "config.yaml"
+    with open(cfg_path) as f:
+        cfg = yaml.safe_load(f)
+
+    types = {}
+    for page in cfg.get("report_downloader", {}).get("pages", []):
+        suffix = page["suffix"]
+        # 确定 wiki 子目录
+        if suffix == "research":
+            wiki_subdir = "raw/research"
+        else:
+            wiki_subdir = "raw/reports"
+
+        types[suffix] = {
+            "name": page["name"],
+            "wiki_subdir": wiki_subdir,
+            "keywords": page.get("allowed_keywords"),
+            "max_pages": page.get("max_pages", 3),
+            "reverse": page.get("reverse_order", False),
+        }
+    return types
+
+
+PAGE_TYPES = load_page_types()
 
 
 def get_a_share_companies(graph):

@@ -376,6 +376,10 @@ companies:
     news_queries:
     - 英伟达 最新消息
     - NVIDIA news
+    aliases:
+    - NVIDIA
+    - NVIDIA Corp
+    - NVDA
   AMD:
     ticker: AMD
     exchange: NASDAQ
@@ -389,6 +393,10 @@ companies:
     news_queries:
     - AMD 最新消息
     - AMD latest news
+    aliases:
+    - Advanced Micro Devices
+    - AMD
+    - 超微半导体
   寒武纪:
     ticker: '688256'
     exchange: SSE STAR
@@ -399,6 +407,10 @@ companies:
     position: 国产AI芯片龙头，思元系列
     news_queries:
     - 寒武纪 最新消息
+    aliases:
+    - '688256'
+    - Cambricon
+    - 寒武纪科技
   海光信息:
     ticker: '688041'
     exchange: SSE STAR
@@ -409,6 +421,10 @@ companies:
     position: 国产GPU替代，深算系列DCU
     news_queries:
     - 海光信息 最新消息
+    aliases:
+    - 海光
+    - '688041'
+    - Hygon
   景嘉微:
     ticker: '300474'
     exchange: SZSE
@@ -419,6 +435,8 @@ companies:
     position: 国产GPU，JM9系列
     news_queries:
     - 景嘉微 最新消息
+    aliases:
+    - '300474'
   北方华创:
     ticker: '002371'
     exchange: SZSE
@@ -433,6 +451,9 @@ companies:
     position: 国产半导体设备龙头，产品线最全
     news_queries:
     - 北方华创 最新消息
+    aliases:
+    - 北方华创科技
+    - '002371'
   中微公司:
     ticker: '688012'
     exchange: SSE STAR
@@ -447,6 +468,12 @@ companies:
     - 中微公司 最新消息
     - 中微半导体 新闻
     - AMEC semiconductor news
+    aliases:
+    - '688012'
+    - 中微半导体
+    - 中微半导体设备
+    - AMEC Inc
+    - AMEC
   拓荆科技:
     ticker: '688072'
     exchange: SSE STAR
@@ -459,6 +486,8 @@ companies:
     position: CVD设备龙头
     news_queries:
     - 拓荆科技 最新消息
+    aliases:
+    - '688072'
   盛美上海:
     ticker: '688082'
     exchange: SSE STAR
@@ -471,6 +500,8 @@ companies:
     position: 清洗设备龙头
     news_queries:
     - 盛美上海 最新消息
+    aliases:
+    - '688082'
   华海清科:
     ticker: '688120'
     exchange: SSE STAR
@@ -483,6 +514,8 @@ companies:
     position: CMP设备国产龙头
     news_queries:
     - 华海清科 最新消息
+    aliases:
+    - '688120'
   精测电子:
     ticker: '300567'
     exchange: SZSE
@@ -495,6 +528,8 @@ companies:
     position: 量检测设备龙头
     news_queries:
     - 精测电子 最新消息
+    aliases:
+    - '300567'
   沪硅产业:
     ticker: '688126'
     exchange: SSE STAR
@@ -507,6 +542,8 @@ companies:
     position: 大硅片国产龙头
     news_queries:
     - 沪硅产业 最新消息
+    aliases:
+    - '688126'
   南大光电:
     ticker: '300346'
     exchange: SZSE
@@ -519,6 +556,8 @@ companies:
     position: ArF光刻胶国产突破
     news_queries:
     - 南大光电 最新消息
+    aliases:
+    - '300346'
   华特气体:
     ticker: '688268'
     exchange: SSE STAR
@@ -531,6 +570,8 @@ companies:
     position: 电子特气国产龙头
     news_queries:
     - 华特气体 最新消息
+    aliases:
+    - '688268'
   江丰电子:
     ticker: '300666'
     exchange: SZSE
@@ -543,6 +584,8 @@ companies:
     position: 高纯溅射靶材龙头
     news_queries:
     - 江丰电子 最新消息
+    aliases:
+    - '300666'
   台积电:
     ticker: TSM
     exchange: NYSE
@@ -554,6 +597,10 @@ companies:
     news_queries:
     - 台积电 最新消息
     - TSMC news
+    aliases:
+    - TSMC
+    - TSM
+    - Taiwan Semiconductor
   中芯国际:
     ticker: '688981'
     exchange: SSE STAR
@@ -565,6 +612,10 @@ companies:
     position: 国内代工龙头，N+2工艺量产
     news_queries:
     - 中芯国际 最新消息
+    aliases:
+    - 中芯
+    - '688981'
+    - SMIC
   华虹半导体:
     ticker: '688347'
     exchange: SSE STAR
@@ -576,6 +627,10 @@ companies:
     position: 特色工艺代工龙头
     news_queries:
     - 华虹半导体 最新消息
+    aliases:
+    - 华虹宏力
+    - '688347'
+    - 华虹公司
   华大九天:
     ticker: '301269'
     exchange: SZSE
@@ -587,6 +642,8 @@ companies:
     position: 国产EDA龙头
     news_queries:
     - 华大九天 最新消息
+    aliases:
+    - '301269'
   长电科技:
     ticker: '600584'
     exchange: SSE
@@ -598,6 +655,10 @@ companies:
     position: 国内封测龙头，CoWoS先进封装布局
     news_queries:
     - 长电科技 最新消息
+    aliases:
+    - '600584'
+    - 江苏长电
+    - JCET
   通富微电:
     ticker: '002156'
     exchange: SZSE
@@ -609,6 +670,9 @@ companies:
     position: AMD先进封装合作伙伴
     news_queries:
     - 通富微电 最新消息
+    aliases:
+    - 通富微电股份
+    - '002156'
   甬矽电子:
     ticker: '688362'
     exchange: SSE STAR
@@ -620,6 +684,8 @@ companies:
     position: 系统级封装(SiP)领先
     news_queries:
     - 甬矽电子 最新消息
+    aliases:
+    - '688362'
   中际旭创:
     ticker: '300308'
     exchange: SZSE
@@ -630,6 +696,8 @@ companies:
     position: 全球光模块龙头，800G/1.6T领先
     news_queries:
     - 中际旭创 最新消息
+    aliases:
+    - '300308'
   新易盛:
     ticker: '300502'
     exchange: SZSE
@@ -640,6 +708,8 @@ companies:
     position: 高速光模块核心供应商
     news_queries:
     - 新易盛 最新消息
+    aliases:
+    - '300502'
   天孚通信:
     ticker: '300394'
     exchange: SZSE
@@ -650,6 +720,8 @@ companies:
     position: 光器件龙头，CPO布局
     news_queries:
     - 天孚通信 最新消息
+    aliases:
+    - '300394'
   光迅科技:
     ticker: 002281
     exchange: SZSE
@@ -660,6 +732,8 @@ companies:
     position: 光通信全产业链布局
     news_queries:
     - 光迅科技 最新消息
+    aliases:
+    - 002281
   太辰光:
     ticker: '300570'
     exchange: SZSE
@@ -670,6 +744,8 @@ companies:
     position: 光连接器龙头
     news_queries:
     - 太辰光 最新消息
+    aliases:
+    - '300570'
   英维克:
     ticker: 002837
     exchange: SZSE
@@ -680,6 +756,8 @@ companies:
     position: 液冷温控龙头
     news_queries:
     - 英维克 最新消息
+    aliases:
+    - 002837
   高澜股份:
     ticker: '300499'
     exchange: SZSE
@@ -690,6 +768,8 @@ companies:
     position: 液冷设备核心供应商
     news_queries:
     - 高澜股份 最新消息
+    aliases:
+    - '300499'
   申菱环境:
     ticker: '301018'
     exchange: SZSE
@@ -700,6 +780,8 @@ companies:
     position: 数据中心液冷方案商
     news_queries:
     - 申菱环境 最新消息
+    aliases:
+    - '301018'
   曙光数创:
     ticker: '872808'
     exchange: BSE
@@ -710,6 +792,8 @@ companies:
     position: 浸没式液冷龙头
     news_queries:
     - 曙光数创 最新消息
+    aliases:
+    - '872808'
   飞龙股份:
     ticker: '002536'
     exchange: SZSE
@@ -720,6 +804,8 @@ companies:
     position: 液冷泵核心供应商
     news_queries:
     - 飞龙股份 最新消息
+    aliases:
+    - '002536'
   浪潮信息:
     ticker: 000977
     exchange: SZSE
@@ -730,6 +816,10 @@ companies:
     position: 国内AI服务器龙头
     news_queries:
     - 浪潮信息 最新消息
+    aliases:
+    - Inspur
+    - 000977
+    - 浪潮
   中科曙光:
     ticker: '603019'
     exchange: SSE
@@ -740,6 +830,10 @@ companies:
     position: 高端计算龙头，海光生态
     news_queries:
     - 中科曙光 最新消息
+    aliases:
+    - '603019'
+    - 曙光信息
+    - Sugon
   工业富联:
     ticker: '601138'
     exchange: SSE
@@ -750,6 +844,8 @@ companies:
     position: 全球AI服务器代工龙头
     news_queries:
     - 工业富联 最新消息
+    aliases:
+    - '601138'
   紫光股份:
     ticker: 000938
     exchange: SZSE
@@ -760,6 +856,8 @@ companies:
     position: 云计算基础设施龙头
     news_queries:
     - 紫光股份 最新消息
+    aliases:
+    - 000938
   东方电缆:
     ticker: '603606'
     exchange: SSE
@@ -771,6 +869,8 @@ companies:
     position: 海底电缆龙头，数据中心电力传输
     news_queries:
     - 东方电缆 最新消息
+    aliases:
+    - '603606'
   许继电气:
     ticker: '000400'
     exchange: SZSE
@@ -782,6 +882,8 @@ companies:
     position: 特高压/智能电网核心
     news_queries:
     - 许继电气 最新消息
+    aliases:
+    - '000400'
   宁德时代:
     ticker: '300750'
     exchange: SZSE
@@ -793,6 +895,10 @@ companies:
     position: 全球储能电池龙头
     news_queries:
     - 宁德时代 最新消息
+    aliases:
+    - '300750'
+    - CATL
+    - 宁德
   阳光电源:
     ticker: '300274'
     exchange: SZSE
@@ -805,6 +911,9 @@ companies:
     position: 光伏逆变器+储能龙头
     news_queries:
     - 阳光电源 最新消息
+    aliases:
+    - '300274'
+    - Sungrow
   百度:
     ticker: BIDU
     exchange: NASDAQ
@@ -816,6 +925,10 @@ companies:
     news_queries:
     - 百度 最新消息
     - Baidu AI news
+    aliases:
+    - Baidu
+    - 百度集团
+    - BIDU
   商汤科技:
     ticker: 0020.HK
     exchange: HKEX
@@ -826,6 +939,10 @@ companies:
     position: 日日新大模型，AI视觉龙头
     news_queries:
     - 商汤科技 最新消息
+    aliases:
+    - 商汤
+    - 0020.HK
+    - SenseTime
   科大讯飞:
     ticker: '002230'
     exchange: SZSE
@@ -836,6 +953,10 @@ companies:
     position: 讯飞星火大模型，语音AI龙头
     news_queries:
     - 科大讯飞 最新消息
+    aliases:
+    - iFLYTEK
+    - 讯飞
+    - '002230'
   中密控股:
     ticker: '300470'
     exchange: SZSE
@@ -847,6 +968,9 @@ companies:
     - 中密控股 最新消息
     - 中密控股 密封件
     position: 国内机械密封龙头，大密封产业布局
+    aliases:
+    - '300470'
+    - 中密控股股份
   珂玛科技:
     ticker: '301611'
     exchange: SZSE
@@ -858,6 +982,11 @@ companies:
     - 珂玛科技 最新消息
     - 珂玛科技 半导体
     position: 半导体设备先进陶瓷材料供应商
+    aliases:
+    - '301611'
+    - 珂玛材料
+    - 苏州珂玛
+    - 苏州珂玛材料科技
 questions:
   GPU与AI芯片:
   - 各家GPU产品性能对比如何？
@@ -908,3 +1037,42 @@ questions:
   - 下游需求景气度如何？
   - 国产替代进展？
   - 重大订单或技术突破？
+settings:
+  name_blacklist:
+  - 有限公司
+  - 股份公司
+  - 集团公司
+  - 股份有限公司
+  - 证券时报
+  - 搜狐证券
+  - 东方财富
+  - 新浪财经
+  - 格隆汇
+  - 富途牛牛
+  - 腾讯证券
+  - 东莞证券
+  - 开源证券
+  - 国泰君安
+  - 中信证券
+  - 华泰证券
+  - 招商证券
+  - 海通证券
+  - 广发证券
+  - 申万宏源
+  - 中金公司
+  - 上海证券
+  - 深圳证券
+  - 经营证券
+  - 增值电信
+  - 互联网新闻信息服务
+  - 人工智能
+  - 联网新闻信息
+  - 发布虚假信息
+  - 尚未完善信息
+  - 名称变更信息
+  - 先进陶瓷材料
+  - 国产半导体
+  - 第三代半导体
+  - 中国医学装备
+  - 世界人工智能
+  - 促进感知智能
