@@ -98,3 +98,15 @@ Sun Apr 12 13:24:57 BST 2026: Downloading IR for 沪硅产业 (688126)
 Sun Apr 12 13:25:26 BST 2026: Downloading IR for 南大光电 (300346)
 Sun Apr 12 13:28:56 BST 2026: Downloading IR for 华特气体 (688268)
 Sun Apr 12 13:29:15 BST 2026: Downloading IR for 江丰电子 (300666)
+Sun Apr 12 13:36:23 BST 2026: Downloading IR for 中芯国际 (688981)
+Sun Apr 12 13:41:32 BST 2026: Downloading IR for 华虹半导体 (688347)
+Sun Apr 12 13:48:12 BST 2026: Downloading IR for 华大九天 (301269)
+Sun Apr 12 13:54:47 BST 2026: Downloading IR for 长电科技 (600584)
+
+## [2026-04-12 13:58] ingest | Ingested 5 files, updated 62 topic entries: CMP设备/CMP设备, 储能/储能, 光刻胶/光刻胶, 光刻设备/光刻设备, 刻蚀设备/刻蚀设备, 北方华创/相关动态, 半导体材料/半导体材料, 半导体设备/半导体设备, 密封件/密封件, 封测/封测, 清洗设备/清洗设备, 电子特气/电子特气, 硅片/硅片, 薄膜沉积设备/薄膜沉积设备, 输配电/输配电, 量检测设备/量检测设备, 靶材CMP/靶材CMP, 高端制造/高端制造
+Sun Apr 12 14:05:14 BST 2026: Downloading IR for 通富微电 (002156)
+
+## [2026-04-12 14:05] ingest | Ingested 50 files, updated 503 topic entries: AI应用/AI应用, CMP设备/CMP设备, GPU与AI芯片/GPU与AI芯片, 中微公司/相关动态, 中芯国际/相关动态, 储能/储能, 光刻胶/光刻胶, 光刻设备/光刻设备, 刻蚀设备/刻蚀设备, 北方华创/相关动态, 半导体代工/半导体代工, 半导体材料/半导体材料, 半导体设备/半导体设备, 发电设备/发电设备, 封测/封测, 拓荆科技/相关动态, 液冷/液冷, 清洗设备/清洗设备, 电力基建/电力基建, 电子特气/电子特气, 硅片/硅片, 算力基建/算力基建, 薄膜沉积设备/薄膜沉积设备, 输配电/输配电, 量检测设备/量检测设备, 靶材CMP/靶材CMP, 高端制造/高端制造
+Sun Apr 12 14:13:27 BST 2026: Downloading IR for 甬矽电子 (688362)
+Sun Apr 12 14:24:03 BST 2026: Downloading IR for 中际旭创 (300308)
+Sun Apr 12 14:24:34 BST 2026: Downloading IR for 新易盛 (300502)

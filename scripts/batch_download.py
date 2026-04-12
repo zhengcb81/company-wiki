@@ -50,8 +50,8 @@ def needs_download(company, suffix):
     if not target.exists():
         return True
     existing = len(list(target.glob("*.pdf")))
-    # 如果已有足够文件（>=5），跳过
-    return existing < 5
+    # 只下载完全没有文件的
+    return existing == 0
 
 
 def download_one(stock_code, company_name, suffix):

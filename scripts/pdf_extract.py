@@ -102,8 +102,52 @@ IR_SECTIONS = [
 ]
 
 
-def extract_text_from_pdf(pdf_path, max_pages=100):
-    """从 PDF 提取文本（限制页数避免处理超长文档）"""
+def find_section_pages_by_scan(doc, total_pages):
+    """
+    逐页扫描，找到关键章节的正文起始页（跳过目录中的条目）。
+    区分方法：目录页中章节标题后跟点号，正文页中标题后跟实际内容。
+    """
+    section_headers = [
+        ("公司简介和主要财务指标", ["公司简介和主要财务指标", "公司简介及主要财务"]),
+        ("管理层讨论与分析", ["管理层讨论与分析", "经营情况讨论与分析", "经营情况的讨论与分析"]),
+    ]
+
+    found = []
+    for page_idx in range(min(60, total_pages)):
+        text = doc[page_idx].get_text()
+        for name, headers in section_headers:
+            if any(f[0] == name for f in found):
+                continue
+            for header in headers:
+                if header in text:
+                    # 检查是否是正文页（标题后有实际内容，不是点号）
+                    pos = text.find(header)
+                    after = text[pos + len(header):pos + len(header) + 100]
+                    # 如果标题后紧跟点号，是目录页，跳过
+                    if re.match(r'^[.\s·•—–\-]{5,}', after):
+                        continue
+                    # 是正文页
+                    found.append((name, page_idx + 1))
+                    break
+
+    # 推算结束页
+    result = []
+    for i, (name, start) in enumerate(found):
+        if i + 1 < len(found):
+            end = found[i + 1][1] - 1
+        else:
+            end = min(start + 30, total_pages)
+        result.append((name, start, end))
+
+    return result
+
+
+def extract_text_from_pdf(pdf_path, max_pages=60):
+    """
+    从 PDF 智能提取两个关键章节。
+    1. 扫描前 60 页找到"公司简介+财务指标"和"管理层讨论与分析"的位置
+    2. 只读这两个章节的页面
+    """
     if fitz is None:
         return {"error": "PyMuPDF not installed. Run: pip install PyMuPDF"}
 
@@ -111,21 +155,35 @@ def extract_text_from_pdf(pdf_path, max_pages=100):
         doc = fitz.open(str(pdf_path))
         total_pages = len(doc)
         text_parts = []
+        read_pages = set()
 
-        for i, page in enumerate(doc):
-            if i >= max_pages:
-                break
-            text = page.get_text()
-            if text.strip():
-                text_parts.append(text)
+        # 定位章节
+        sections = find_section_pages_by_scan(doc, total_pages)
+
+        # 读取目标章节
+        for name, start, end in sections:
+            for page_idx in range(start - 1, min(end, total_pages)):
+                if page_idx not in read_pages and len(read_pages) < max_pages:
+                    text = doc[page_idx].get_text()
+                    if text.strip():
+                        text_parts.append(text)
+                    read_pages.add(page_idx)
+
+        # 如果没找到章节，读前 25 页兜底
+        if not sections:
+            for i in range(min(25, total_pages)):
+                text = doc[i].get_text()
+                if text.strip():
+                    text_parts.append(text)
 
         doc.close()
-        full_text = "\n".join(text_parts)
 
         return {
-            "text": full_text,
-            "pages": min(total_pages, max_pages),
-            "total_chars": len(full_text),
+            "text": "\n".join(text_parts),
+            "pages_read": len(read_pages) if read_pages else min(25, total_pages),
+            "total_pages": total_pages,
+            "sections_found": [s[0] for s in sections],
+            "total_chars": len("\n".join(text_parts)),
         }
     except Exception as e:
         return {"error": str(e)}
