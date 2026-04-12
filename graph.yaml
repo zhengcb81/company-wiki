@@ -1,0 +1,868 @@
+nodes:
+  AI产业链:
+    type: theme
+    description: 从芯片到应用的完整AI产业链
+    keywords:
+    - AI产业链
+  GPU与AI芯片:
+    type: sector
+    parent_theme:
+    - AI产业链
+    description: AI训练/推理用GPU、NPU、TPU等专用芯片
+    tier: 3
+    keywords:
+    - GPU与AI芯片
+    - GPU
+    - AI芯片
+    - NPU
+    - TPU
+    - 加速卡
+    - AI处理器
+  半导体设备:
+    type: sector
+    parent_theme:
+    - AI产业链
+    description: 半导体制造设备：刻蚀、薄膜、清洗、检测、光刻等
+    tier: 5
+    keywords:
+    - 半导体设备
+    - 芯片设备
+    - 晶圆设备
+    - 前道设备
+  半导体材料:
+    type: sector
+    parent_theme:
+    - AI产业链
+    description: 硅片、光刻胶、靶材、电子特气、CMP材料等
+    tier: 5
+    keywords:
+    - 半导体材料
+    - 芯片材料
+    - 晶圆材料
+  半导体代工:
+    type: sector
+    parent_theme:
+    - AI产业链
+    description: 晶圆代工制造
+    tier: 4
+    keywords:
+    - 半导体代工
+    - 晶圆代工
+    - 芯片代工
+    - Foundry
+  封测:
+    type: sector
+    parent_theme:
+    - AI产业链
+    description: 芯片封装与测试，包括先进封装(CoWoS, HBM)
+    tier: 3
+    keywords:
+    - 封测
+    - 封装测试
+    - 先进封装
+    - CoWoS
+    - HBM
+  EDA与IP:
+    type: sector
+    parent_theme:
+    - AI产业链
+    description: 芯片设计工具和IP核
+    tier: 4
+    keywords:
+    - EDA与IP
+    - EDA
+    - 芯片设计
+    - IP核
+  光模块:
+    type: sector
+    parent_theme:
+    - AI产业链
+    description: 数据中心光通信模块，AI算力互联核心
+    tier: 2
+    keywords:
+    - 光模块
+    - 光通信
+    - 800G
+    - 1.6T
+    - CPO
+  液冷:
+    type: sector
+    parent_theme:
+    - AI产业链
+    description: AI服务器液冷散热解决方案
+    tier: 2
+    keywords:
+    - 液冷
+    - 散热
+    - 温控
+    - 浸没式
+  算力基建:
+    type: sector
+    parent_theme:
+    - AI产业链
+    description: AI服务器整机、数据中心建设、算力租赁
+    tier: 2
+    keywords:
+    - 算力基建
+    - 算力
+    - AI服务器
+    - 数据中心
+    - 智算中心
+  电力基建:
+    type: sector
+    parent_theme:
+    - AI产业链
+    description: 数据中心电力供应：发电设备、储能、输配电、UPS
+    tier: 1
+    keywords:
+    - 电力基建
+    - 电力
+    - 供电
+    - 配电
+    - UPS
+    - 储能
+  AI应用:
+    type: sector
+    parent_theme:
+    - AI产业链
+    description: 大模型、AI Agent、行业AI应用
+    tier: 0
+    keywords:
+    - AI应用
+    - 大模型
+    - AI Agent
+    - 人工智能应用
+  刻蚀设备:
+    type: subsector
+    parent_sector:
+    - 半导体设备
+    parent_theme:
+    - AI产业链
+    keywords:
+    - 刻蚀设备
+    - 刻蚀
+    - Etch
+    - ICP
+    - CCP
+  薄膜沉积设备:
+    type: subsector
+    parent_sector:
+    - 半导体设备
+    parent_theme:
+    - AI产业链
+    keywords:
+    - 薄膜沉积设备
+    - 薄膜
+    - CVD
+    - PVD
+    - ALD
+  量检测设备:
+    type: subsector
+    parent_sector:
+    - 半导体设备
+    parent_theme:
+    - AI产业链
+    keywords:
+    - 量检测设备
+    - 量检测
+    - 检测
+    - 量测
+  光刻设备:
+    type: subsector
+    parent_sector:
+    - 半导体设备
+    parent_theme:
+    - AI产业链
+    keywords:
+    - 光刻设备
+    - 光刻
+    - Lithography
+  清洗设备:
+    type: subsector
+    parent_sector:
+    - 半导体设备
+    parent_theme:
+    - AI产业链
+    keywords:
+    - 清洗设备
+    - 清洗
+    - Cleaning
+  CMP设备:
+    type: subsector
+    parent_sector:
+    - 半导体设备
+    parent_theme:
+    - AI产业链
+    keywords:
+    - CMP设备
+    - CMP
+    - 化学机械抛光
+  硅片:
+    type: subsector
+    parent_sector:
+    - 半导体材料
+    parent_theme:
+    - AI产业链
+    keywords:
+    - 硅片
+    - 硅晶圆
+    - Wafer
+  光刻胶:
+    type: subsector
+    parent_sector:
+    - 半导体材料
+    parent_theme:
+    - AI产业链
+    keywords:
+    - 光刻胶
+    - Photoresist
+  电子特气:
+    type: subsector
+    parent_sector:
+    - 半导体材料
+    parent_theme:
+    - AI产业链
+    keywords:
+    - 电子特气
+    - 电子气体
+    - 特种气体
+  靶材CMP:
+    type: subsector
+    parent_sector:
+    - 半导体材料
+    parent_theme:
+    - AI产业链
+    keywords:
+    - 靶材CMP
+    - 靶材
+    - Sputtering
+  发电设备:
+    type: subsector
+    parent_sector:
+    - 电力基建
+    parent_theme:
+    - AI产业链
+    keywords:
+    - 发电设备
+    - 发电
+    - 电力生产
+  储能:
+    type: subsector
+    parent_sector:
+    - 电力基建
+    parent_theme:
+    - AI产业链
+    keywords:
+    - 储能
+    - 电池
+    - Energy Storage
+  输配电:
+    type: subsector
+    parent_sector:
+    - 电力基建
+    parent_theme:
+    - AI产业链
+    keywords:
+    - 输配电
+    - 输电
+    - 配电
+    - 电网
+    - 特高压
+edges:
+- from: 半导体设备
+  to: 半导体代工
+  type: upstream_of
+  label: 设备是代工的上游
+- from: 半导体材料
+  to: 半导体代工
+  type: upstream_of
+  label: 材料是代工的上游
+- from: EDA与IP
+  to: GPU与AI芯片
+  type: upstream_of
+  label: 设计工具是芯片的上游
+- from: 半导体代工
+  to: GPU与AI芯片
+  type: upstream_of
+  label: 代工是芯片的上游
+- from: 封测
+  to: GPU与AI芯片
+  type: upstream_of
+  label: 封测是芯片成品的上游
+- from: GPU与AI芯片
+  to: 算力基建
+  type: upstream_of
+  label: 芯片是算力基建的上游
+- from: 算力基建
+  to: AI应用
+  type: upstream_of
+  label: 算力是AI应用的基础设施
+- from: 光模块
+  to: 算力基建
+  type: upstream_of
+  label: 光模块支撑算力互联
+- from: 液冷
+  to: 算力基建
+  type: upstream_of
+  label: 液冷支撑算力散热
+- from: 电力基建
+  to: 算力基建
+  type: upstream_of
+  label: 电力是算力基建的能源基础
+- from: 刻蚀设备
+  to: 半导体设备
+  type: belongs_to
+- from: 薄膜沉积设备
+  to: 半导体设备
+  type: belongs_to
+- from: 量检测设备
+  to: 半导体设备
+  type: belongs_to
+- from: 光刻设备
+  to: 半导体设备
+  type: belongs_to
+- from: 清洗设备
+  to: 半导体设备
+  type: belongs_to
+- from: CMP设备
+  to: 半导体设备
+  type: belongs_to
+- from: 硅片
+  to: 半导体材料
+  type: belongs_to
+- from: 光刻胶
+  to: 半导体材料
+  type: belongs_to
+- from: 电子特气
+  to: 半导体材料
+  type: belongs_to
+- from: 靶材CMP
+  to: 半导体材料
+  type: belongs_to
+- from: 发电设备
+  to: 电力基建
+  type: belongs_to
+- from: 储能
+  to: 电力基建
+  type: belongs_to
+- from: 输配电
+  to: 电力基建
+  type: belongs_to
+companies:
+  英伟达:
+    ticker: NVDA
+    exchange: NASDAQ
+    sectors:
+    - GPU与AI芯片
+    themes:
+    - AI产业链
+    position: 全球GPU绝对龙头，AI训练市场>80%份额
+    news_queries:
+    - 英伟达 最新消息
+    - NVIDIA news
+  AMD:
+    ticker: AMD
+    exchange: NASDAQ
+    sectors:
+    - GPU与AI芯片
+    themes:
+    - AI产业链
+    position: GPU第二梯队，MI300系列挑战英伟达
+    competes_with:
+    - 英伟达
+    news_queries:
+    - AMD 最新消息
+    - AMD latest news
+  寒武纪:
+    ticker: '688256'
+    exchange: SSE STAR
+    sectors:
+    - GPU与AI芯片
+    themes:
+    - AI产业链
+    position: 国产AI芯片龙头，思元系列
+    news_queries:
+    - 寒武纪 最新消息
+  海光信息:
+    ticker: '688041'
+    exchange: SSE STAR
+    sectors:
+    - GPU与AI芯片
+    themes:
+    - AI产业链
+    position: 国产GPU替代，深算系列DCU
+    news_queries:
+    - 海光信息 最新消息
+  景嘉微:
+    ticker: '300474'
+    exchange: SZSE
+    sectors:
+    - GPU与AI芯片
+    themes:
+    - AI产业链
+    position: 国产GPU，JM9系列
+    news_queries:
+    - 景嘉微 最新消息
+  北方华创:
+    ticker: '002371'
+    exchange: SZSE
+    sectors:
+    - 半导体设备
+    - 刻蚀设备
+    - 薄膜沉积设备
+    - 清洗设备
+    themes:
+    - AI产业链
+    - 半导体国产替代
+    position: 国产半导体设备龙头，产品线最全
+    news_queries:
+    - 北方华创 最新消息
+  中微公司:
+    ticker: '688012'
+    exchange: SSE STAR
+    sectors:
+    - 半导体设备
+    - 刻蚀设备
+    themes:
+    - AI产业链
+    - 半导体国产替代
+    position: 刻蚀设备龙头，CCP/ICP全覆盖
+    news_queries:
+    - 中微公司 最新消息
+    - 中微半导体 新闻
+    - AMEC semiconductor news
+  拓荆科技:
+    ticker: '688072'
+    exchange: SSE STAR
+    sectors:
+    - 半导体设备
+    - 薄膜沉积设备
+    themes:
+    - AI产业链
+    - 半导体国产替代
+    position: CVD设备龙头
+    news_queries:
+    - 拓荆科技 最新消息
+  盛美上海:
+    ticker: '688082'
+    exchange: SSE STAR
+    sectors:
+    - 半导体设备
+    - 清洗设备
+    themes:
+    - AI产业链
+    - 半导体国产替代
+    position: 清洗设备龙头
+    news_queries:
+    - 盛美上海 最新消息
+  华海清科:
+    ticker: '688120'
+    exchange: SSE STAR
+    sectors:
+    - 半导体设备
+    - CMP设备
+    themes:
+    - AI产业链
+    - 半导体国产替代
+    position: CMP设备国产龙头
+    news_queries:
+    - 华海清科 最新消息
+  精测电子:
+    ticker: '300567'
+    exchange: SZSE
+    sectors:
+    - 半导体设备
+    - 量检测设备
+    themes:
+    - AI产业链
+    - 半导体国产替代
+    position: 量检测设备龙头
+    news_queries:
+    - 精测电子 最新消息
+  沪硅产业:
+    ticker: '688126'
+    exchange: SSE STAR
+    sectors:
+    - 半导体材料
+    - 硅片
+    themes:
+    - AI产业链
+    - 半导体国产替代
+    position: 大硅片国产龙头
+    news_queries:
+    - 沪硅产业 最新消息
+  南大光电:
+    ticker: '300346'
+    exchange: SZSE
+    sectors:
+    - 半导体材料
+    - 光刻胶
+    themes:
+    - AI产业链
+    - 半导体国产替代
+    position: ArF光刻胶国产突破
+    news_queries:
+    - 南大光电 最新消息
+  华特气体:
+    ticker: '688268'
+    exchange: SSE STAR
+    sectors:
+    - 半导体材料
+    - 电子特气
+    themes:
+    - AI产业链
+    - 半导体国产替代
+    position: 电子特气国产龙头
+    news_queries:
+    - 华特气体 最新消息
+  江丰电子:
+    ticker: '300666'
+    exchange: SZSE
+    sectors:
+    - 半导体材料
+    - 靶材CMP
+    themes:
+    - AI产业链
+    - 半导体国产替代
+    position: 高纯溅射靶材龙头
+    news_queries:
+    - 江丰电子 最新消息
+  台积电:
+    ticker: TSM
+    exchange: NYSE
+    sectors:
+    - 半导体代工
+    themes:
+    - AI产业链
+    position: 全球晶圆代工绝对龙头，先进制程垄断
+    news_queries:
+    - 台积电 最新消息
+    - TSMC news
+  中芯国际:
+    ticker: '688981'
+    exchange: SSE STAR
+    sectors:
+    - 半导体代工
+    themes:
+    - AI产业链
+    - 半导体国产替代
+    position: 国内代工龙头，N+2工艺量产
+    news_queries:
+    - 中芯国际 最新消息
+  华虹半导体:
+    ticker: '688347'
+    exchange: SSE STAR
+    sectors:
+    - 半导体代工
+    themes:
+    - AI产业链
+    - 半导体国产替代
+    position: 特色工艺代工龙头
+    news_queries:
+    - 华虹半导体 最新消息
+  华大九天:
+    ticker: '301269'
+    exchange: SZSE
+    sectors:
+    - EDA与IP
+    themes:
+    - AI产业链
+    - 半导体国产替代
+    position: 国产EDA龙头
+    news_queries:
+    - 华大九天 最新消息
+  长电科技:
+    ticker: '600584'
+    exchange: SSE
+    sectors:
+    - 封测
+    themes:
+    - AI产业链
+    - 半导体国产替代
+    position: 国内封测龙头，CoWoS先进封装布局
+    news_queries:
+    - 长电科技 最新消息
+  通富微电:
+    ticker: '002156'
+    exchange: SZSE
+    sectors:
+    - 封测
+    themes:
+    - AI产业链
+    - 半导体国产替代
+    position: AMD先进封装合作伙伴
+    news_queries:
+    - 通富微电 最新消息
+  甬矽电子:
+    ticker: '688362'
+    exchange: SSE STAR
+    sectors:
+    - 封测
+    themes:
+    - AI产业链
+    - 半导体国产替代
+    position: 系统级封装(SiP)领先
+    news_queries:
+    - 甬矽电子 最新消息
+  中际旭创:
+    ticker: '300308'
+    exchange: SZSE
+    sectors:
+    - 光模块
+    themes:
+    - AI产业链
+    position: 全球光模块龙头，800G/1.6T领先
+    news_queries:
+    - 中际旭创 最新消息
+  新易盛:
+    ticker: '300502'
+    exchange: SZSE
+    sectors:
+    - 光模块
+    themes:
+    - AI产业链
+    position: 高速光模块核心供应商
+    news_queries:
+    - 新易盛 最新消息
+  天孚通信:
+    ticker: '300394'
+    exchange: SZSE
+    sectors:
+    - 光模块
+    themes:
+    - AI产业链
+    position: 光器件龙头，CPO布局
+    news_queries:
+    - 天孚通信 最新消息
+  光迅科技:
+    ticker: 002281
+    exchange: SZSE
+    sectors:
+    - 光模块
+    themes:
+    - AI产业链
+    position: 光通信全产业链布局
+    news_queries:
+    - 光迅科技 最新消息
+  太辰光:
+    ticker: '300570'
+    exchange: SZSE
+    sectors:
+    - 光模块
+    themes:
+    - AI产业链
+    position: 光连接器龙头
+    news_queries:
+    - 太辰光 最新消息
+  英维克:
+    ticker: 002837
+    exchange: SZSE
+    sectors:
+    - 液冷
+    themes:
+    - AI产业链
+    position: 液冷温控龙头
+    news_queries:
+    - 英维克 最新消息
+  高澜股份:
+    ticker: '300499'
+    exchange: SZSE
+    sectors:
+    - 液冷
+    themes:
+    - AI产业链
+    position: 液冷设备核心供应商
+    news_queries:
+    - 高澜股份 最新消息
+  申菱环境:
+    ticker: '301018'
+    exchange: SZSE
+    sectors:
+    - 液冷
+    themes:
+    - AI产业链
+    position: 数据中心液冷方案商
+    news_queries:
+    - 申菱环境 最新消息
+  曙光数创:
+    ticker: '872808'
+    exchange: BSE
+    sectors:
+    - 液冷
+    themes:
+    - AI产业链
+    position: 浸没式液冷龙头
+    news_queries:
+    - 曙光数创 最新消息
+  飞龙股份:
+    ticker: '002536'
+    exchange: SZSE
+    sectors:
+    - 液冷
+    themes:
+    - AI产业链
+    position: 液冷泵核心供应商
+    news_queries:
+    - 飞龙股份 最新消息
+  浪潮信息:
+    ticker: 000977
+    exchange: SZSE
+    sectors:
+    - 算力基建
+    themes:
+    - AI产业链
+    position: 国内AI服务器龙头
+    news_queries:
+    - 浪潮信息 最新消息
+  中科曙光:
+    ticker: '603019'
+    exchange: SSE
+    sectors:
+    - 算力基建
+    themes:
+    - AI产业链
+    position: 高端计算龙头，海光生态
+    news_queries:
+    - 中科曙光 最新消息
+  工业富联:
+    ticker: '601138'
+    exchange: SSE
+    sectors:
+    - 算力基建
+    themes:
+    - AI产业链
+    position: 全球AI服务器代工龙头
+    news_queries:
+    - 工业富联 最新消息
+  紫光股份:
+    ticker: 000938
+    exchange: SZSE
+    sectors:
+    - 算力基建
+    themes:
+    - AI产业链
+    position: 云计算基础设施龙头
+    news_queries:
+    - 紫光股份 最新消息
+  东方电缆:
+    ticker: '603606'
+    exchange: SSE
+    sectors:
+    - 电力基建
+    - 输配电
+    themes:
+    - AI产业链
+    position: 海底电缆龙头，数据中心电力传输
+    news_queries:
+    - 东方电缆 最新消息
+  许继电气:
+    ticker: '000400'
+    exchange: SZSE
+    sectors:
+    - 电力基建
+    - 输配电
+    themes:
+    - AI产业链
+    position: 特高压/智能电网核心
+    news_queries:
+    - 许继电气 最新消息
+  宁德时代:
+    ticker: '300750'
+    exchange: SZSE
+    sectors:
+    - 电力基建
+    - 储能
+    themes:
+    - AI产业链
+    position: 全球储能电池龙头
+    news_queries:
+    - 宁德时代 最新消息
+  阳光电源:
+    ticker: '300274'
+    exchange: SZSE
+    sectors:
+    - 电力基建
+    - 储能
+    - 发电设备
+    themes:
+    - AI产业链
+    position: 光伏逆变器+储能龙头
+    news_queries:
+    - 阳光电源 最新消息
+  百度:
+    ticker: BIDU
+    exchange: NASDAQ
+    sectors:
+    - AI应用
+    themes:
+    - AI产业链
+    position: 文心大模型，AI搜索/驾驶
+    news_queries:
+    - 百度 最新消息
+    - Baidu AI news
+  商汤科技:
+    ticker: 0020.HK
+    exchange: HKEX
+    sectors:
+    - AI应用
+    themes:
+    - AI产业链
+    position: 日日新大模型，AI视觉龙头
+    news_queries:
+    - 商汤科技 最新消息
+  科大讯飞:
+    ticker: '002230'
+    exchange: SZSE
+    sectors:
+    - AI应用
+    themes:
+    - AI产业链
+    position: 讯飞星火大模型，语音AI龙头
+    news_queries:
+    - 科大讯飞 最新消息
+questions:
+  GPU与AI芯片:
+  - 各家GPU产品性能对比如何？
+  - 国产AI芯片替代进展？
+  - GPU供需格局和价格趋势？
+  - AI芯片架构创新方向？
+  半导体设备:
+  - 各环节设备国产化率？
+  - 先进制程设备进展？
+  - 大客户订单和扩产计划？
+  - 美国制裁对设备出口的影响？
+  半导体材料:
+  - 各环节材料国产化率？
+  - 大硅片、光刻胶等关键材料突破？
+  - 原材料价格波动影响？
+  半导体代工:
+  - 先进制程产能利用率？
+  - 成熟制程竞争格局？
+  - 各厂商扩产计划和资本开支？
+  封测:
+  - 先进封装(CoWoS/HBM)产能？
+  - 封测厂商订单能见度？
+  - Chiplet技术进展？
+  EDA与IP:
+  - 国产EDA工具覆盖度？
+  - AI辅助EDA技术进展？
+  光模块:
+  - 800G/1.6T产品出货节奏？
+  - CPO技术商用进展？
+  - 海外云厂商资本开支趋势？
+  液冷:
+  - 液冷渗透率提升趋势？
+  - 浸没式vs冷板式技术路线？
+  - 数据中心液冷改造需求？
+  算力基建:
+  - 国内智算中心建设进度？
+  - AI服务器出货量和ASP趋势？
+  - 算力租赁商业模式？
+  电力基建:
+  - 数据中心电力需求增长？
+  - 储能配套比例？
+  - 特高压/智能电网建设？
+  AI应用:
+  - 大模型能力演进？
+  - AI应用商业化进展？
+  - Agent/工作流自动化落地？

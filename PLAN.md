@@ -352,10 +352,104 @@ LLM 读取新文件内容
 | 2026-04-11 | Phase 1-3 完成，Phase 3.5（财报采集适配器已写，待本地测试） |
 | 2026-04-12 | Phase 4-5 完成：extract.py 智能摘要、refine.py LLM 管道、lint.py 健康检查、cronjob 每日自动运行 |
 
-## 十二、待办事项（下次继续）
+## 十二、当前问题与重构计划
 
-1. 在本地 Windows 环境测试 collect_reports.py（StockInfoDownloader）
-2. 添加更多公司和行业
-3. 实现自动发现机制（新主题、新公司建议）
-4. 建立页面间 wikilinks 交叉引用
-5. 考虑向量搜索（qmd）
+### 问题诊断
+
+**问题 1：两个数据源，信息重复**
+```
+config.yaml:  companies[], sectors{}, themes{}  ← 定义公司/行业/问题
+graph.yaml:   nodes{}, edges{}, companies{}     ← 定义拓扑关系
+```
+改一个忘改另一个就会不一致。
+
+**问题 2：硬编码相关性判断**
+```python
+# ingest.py 中的硬编码（不可扩展）
+sector_keywords = {"半导体设备": ["半导体", "芯片", ...]}
+theme_keywords = {"半导体国产替代": ["国产替代", ...]}
+```
+新增行业必须改代码。
+
+**问题 3：无自动拓扑发现机制**
+新公司加入时，需手动：确定所属行业、搜索关键词、上下游关系。
+
+### 重构方案：三层架构
+
+```
+┌─────────────────────────────────────────────────┐
+│  graph.yaml（单一数据源，动态扩展）                │
+│  - nodes: 行业/子领域/主题（含 description, tier）│
+│  - edges: 上下游/竞争/从属关系                    │
+│  - companies: 公司（含 sectors, themes,           │
+│               news_queries, position）            │
+│  - questions: 每个行业的核心跟踪问题              │
+├─────────────────────────────────────────────────┤
+│  config.yaml（纯运维配置，不包含业务数据）         │
+│  - API keys (tavily, deepseek)                   │
+│  - schedule, paths                               │
+│  - report_downloader 设置                        │
+├─────────────────────────────────────────────────┤
+│  scripts/（从 graph.yaml 动态读取）              │
+│  - graph.py: 图查询 + 数据加载（统一入口）        │
+│  - ingest.py: 从 graph 推导相关性                │
+│  - collect_news.py: 从 graph 读取公司+查询词      │
+│  - enrich.py: 新公司自动拓扑发现                  │
+│  - lint.py: 配置一致性检查                        │
+└─────────────────────────────────────────────────┘
+```
+
+### 实施步骤
+
+#### Step 1: graph.yaml 增强 — 补全数据结构
+给 graph.yaml 中的 nodes 和 companies 补全必要字段：
+- nodes 加 `keywords` 字段（用于 ingest 相关性匹配）
+- companies 加 `news_queries` 字段（用于 collect_news）
+- 新增 `questions` 部分（每个行业/主题的核心问题）
+
+#### Step 2: graph.py 增强 — 统一数据加载入口
+给 graph.py 添加：
+- `load_all(config_path)` → 返回统一的图数据结构
+- `get_company(name)` → 公司详情+关联行业+搜索词
+- `get_sector(name)` → 行业详情+公司列表+上游+下游+问题
+- `get_relevance_keywords()` → 动态生成所有行业/主题的关键词映射
+- `get_all_companies()` → 所有公司列表（含配置）
+- `find_related_sectors(text)` → 根据文本动态匹配相关行业
+
+#### Step 3: 重构 ingest.py — 去掉硬编码
+- 删掉 `sector_keywords` 和 `theme_keywords` 硬编码
+- 改为从 `graph.find_related_sectors(text)` 动态推导
+- 相关性判断逻辑：优先用公司 frontmatter 标签 → 再用关键词匹配 graph nodes
+
+#### Step 4: 重构 collect_news.py — 从 graph 读取
+- 删掉从 config.yaml 读取 companies 的逻辑
+- 改为从 graph.yaml 读取公司列表+news_queries
+
+#### Step 5: config.yaml 精简
+- 删掉 `companies`, `sectors`, `themes` 部分
+- 只保留 API keys, schedule, paths, report_downloader
+
+#### Step 6: 实现 enrich.py — 新公司自动拓扑发现
+```
+输入: 公司名 + 股票代码
+流程:
+  1. Tavily 搜索公司业务信息
+  2. LLM 分析 → 匹配 graph.yaml 中的现有行业
+  3. LLM 推荐: 上下游关系、竞争对手、搜索关键词
+  4. 生成 proposal → pending_enrichment.yaml
+  5. --auto 模式：自动合并到 graph.yaml
+  6. --review 模式：人工审核后合并
+```
+
+#### Step 7: 实现 auto_suggest.py — 新公司自动发现
+```
+在每日新闻采集中：
+  - 如果一条新闻频繁提到一个不在 graph.yaml 中的公司名
+  - → 标记为潜在新公司
+  - → 调用 enrich.py 自动生成拓扑提案
+```
+
+#### Step 8: 验证 — 端到端测试
+- 新增一家公司只需在 graph.yaml 加一条记录
+- 所有脚本自动适配（collect_news, ingest, graph query）
+- enrich.py 自动发现并融入拓扑
