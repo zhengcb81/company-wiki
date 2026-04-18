@@ -1,0 +1,362 @@
+# ============================================
+# 分类和发现规则配置
+# ============================================
+# 将硬编码的规则提取到配置文件中，便于维护和扩展
+
+# ── 文档分类规则 ──────────────────────────
+document_classification:
+  # 年报
+  annual_report:
+    patterns:
+      - "年年度报告"
+      - "年年报"
+    confidence: 0.95
+    target_dir: "financial_reports/annual"
+  
+  # 半年报
+  semi_annual_report:
+    patterns:
+      - "半年度报告"
+      - "半年报"
+    confidence: 0.95
+    target_dir: "financial_reports/semi_annual"
+  
+  # 季报
+  quarterly_report:
+    patterns:
+      - "第[一二三四]季度报告"
+      - "季报"
+      - "一季度报告"
+      - "二季度报告"
+      - "三季度报告"
+      - "四季度报告"
+    confidence: 0.95
+    target_dir: "financial_reports/quarterly"
+  
+  # 招股说明书
+  prospectus:
+    patterns:
+      - "招股说明书"
+      - "招股意向书"
+    confidence: 0.95
+    target_dir: "prospectus"
+  
+  # 投资者关系
+  investor_relations:
+    patterns:
+      - "投资者关系"
+      - "投资者交流"
+      - "投资者问答"
+      - "投资者关系活动记录"
+      - "投资者关系管理"
+    confidence: 0.95
+    target_dir: "investor_relations"
+  
+  # 研报
+  research:
+    patterns:
+      - "研报"
+      - "深度报告"
+      - "点评报告"
+      - "跟踪报告"
+    confidence: 0.85
+    target_dir: "research"
+  
+  # 公告
+  announcement:
+    patterns:
+      - "公告"
+      - "决议"
+      - "通知"
+      - "提示"
+    confidence: 0.80
+    target_dir: "announcements"
+  
+  # 新闻
+  news:
+    file_extensions:
+      - ".md"
+    confidence: 0.70
+    target_dir: "news"
+
+# ── 问题关键词映射 ──────────────────────────
+question_keywords:
+  国产化率:
+    - "国产化"
+    - "国产替代"
+    - "自主可控"
+    - "国产"
+    - "本土化"
+  
+  先进制程:
+    - "先进制程"
+    - "制程"
+    - "nm"
+    - "纳米"
+    - "工艺节点"
+  
+  订单:
+    - "订单"
+    - "客户"
+    - "签约"
+    - "中标"
+    - "采购"
+  
+  扩产:
+    - "扩产"
+    - "产能"
+    - "产量"
+    - "扩建"
+    - "投产"
+  
+  制裁:
+    - "制裁"
+    - "出口管制"
+    - "限制"
+    - "美国"
+    - "实体清单"
+  
+  技术:
+    - "技术"
+    - "创新"
+    - "研发"
+    - "突破"
+    - "专利"
+  
+  竞争:
+    - "竞争"
+    - "格局"
+    - "对手"
+    - "市场份额"
+    - "龙头"
+  
+  趋势:
+    - "趋势"
+    - "方向"
+    - "发展"
+    - "前景"
+    - "展望"
+  
+  财务:
+    - "营收"
+    - "利润"
+    - "增长"
+    - "毛利率"
+    - "净利率"
+
+# ── 主题发现关键词 ──────────────────────────
+topic_keywords:
+  Chiplet:
+    - "Chiplet"
+    - "芯粒"
+    - "小芯片"
+    - "异构集成"
+  
+  HBM:
+    - "HBM"
+    - "高带宽内存"
+    - "High Bandwidth Memory"
+    - "HBM3"
+    - "HBM3E"
+  
+  先进封装:
+    - "先进封装"
+    - "CoWoS"
+    - "2.5D"
+    - "3D封装"
+    - "SiP"
+    - "扇出"
+  
+  光刻:
+    - "光刻"
+    - "EUV"
+    - "DUV"
+    - "Lithography"
+    - "曝光"
+  
+  刻蚀:
+    - "刻蚀"
+    - "Etch"
+    - "ICP"
+    - "CCP"
+    - "干法刻蚀"
+    - "湿法刻蚀"
+  
+  沉积:
+    - "沉积"
+    - "CVD"
+    - "PVD"
+    - "ALD"
+    - "薄膜"
+    - "外延"
+  
+  清洗:
+    - "清洗"
+    - "Cleaning"
+    - "湿法清洗"
+    - "干法清洗"
+  
+  CMP:
+    - "CMP"
+    - "化学机械抛光"
+    - "研磨"
+    - "平坦化"
+  
+  量检测:
+    - "量检测"
+    - "检测"
+    - "量测"
+    - "计量"
+    - "缺陷检测"
+  
+  硅片:
+    - "硅片"
+    - "硅晶圆"
+    - "Wafer"
+    - "大硅片"
+    - "12寸"
+    - "8寸"
+  
+  光刻胶:
+    - "光刻胶"
+    - "Photoresist"
+    - "ArF"
+    - "KrF"
+    - "EUV光刻胶"
+  
+  电子特气:
+    - "电子特气"
+    - "电子气体"
+    - "特种气体"
+    - "高纯气体"
+  
+  靶材:
+    - "靶材"
+    - "Sputtering"
+    - "溅射"
+    - "高纯靶材"
+  
+  液冷:
+    - "液冷"
+    - "浸没式"
+    - "冷板"
+    - "散热"
+    - "温控"
+  
+  光模块:
+    - "光模块"
+    - "800G"
+    - "1.6T"
+    - "CPO"
+    - "硅光"
+    - "LPO"
+  
+  算力:
+    - "算力"
+    - "AI服务器"
+    - "智算中心"
+    - "GPU服务器"
+    - "推理"
+    - "训练"
+  
+  储能:
+    - "储能"
+    - "电池"
+    - "Energy Storage"
+    - "锂电池"
+    - "钠电池"
+
+# ── 公司名称模式 ──────────────────────────
+company_name_patterns:
+  # 中文公司名称
+  chinese:
+    - pattern: "[\u4e00-\u9fff]{2,}(?:公司|集团|股份|科技|电子|半导体|设备|材料|光电)"
+      min_length: 2
+  
+  # 英文公司名称
+  english:
+    - pattern: "[A-Z][a-zA-Z]+(?:Inc|Corp|Ltd|Co|Technologies|Semiconductor)"
+      min_length: 3
+  
+  # A股股票代码
+  a_share:
+    - pattern: "[036]\\d{5}"
+      min_length: 6
+  
+  # 美股代码
+  us_stock:
+    - pattern: "[A-Z]{1,5}"
+      min_length: 1
+      max_length: 5
+
+# ── 问题模式 ──────────────────────────
+question_patterns:
+  - pattern: "国产化率.*?达到.*?(\\d+)%"
+    template: "国产化率达到{}%"
+  
+  - pattern: "产能.*?提升.*?(\\d+)%"
+    template: "产能提升{}%"
+  
+  - pattern: "营收.*?增长.*?(\\d+)%"
+    template: "营收增长{}%"
+  
+  - pattern: "获得.*?订单"
+    template: "获得新订单"
+  
+  - pattern: "发布.*?新品"
+    template: "发布新品"
+  
+  - pattern: "突破.*?技术"
+    template: "技术突破"
+  
+  - pattern: "客户.*?验证"
+    template: "客户验证通过"
+  
+  - pattern: "量产.*?([\\u4e00-\u9fff]+)"
+    template: "{}量产"
+
+# ── 低质量来源过滤 ──────────────────────────
+low_quality_sources:
+  # URL 黑名单
+  url_patterns:
+    - "quote.eastmoney.com"
+    - "quote.futunn.com"
+    - "xueqiu.com/S/"
+    - "stock_quote"
+    - "baidu.com/baike"
+    - "baike.baidu.com"
+    - "hq.sinajs.cn"
+    - "finance.sina.com.cn/realstock"
+  
+  # 标题黑名单
+  title_patterns:
+    - "行情走势"
+    - "股票股价"
+    - "最新价格"
+    - "实时走势图"
+    - "公司简介"
+    - "股票行情中心"
+    - "百科"
+    - "百度百科"
+    - "最新新闻"
+    - "最新资讯"
+    - "个股资讯"
+
+# ── 噪音过滤 ──────────────────────────
+noise_patterns:
+  # 导航/菜单
+  - "^(关于|产品|支持|联系|服务|首页|导航|菜单|公司简介|版权所有)"
+  - "^(Company|Products|Support|Contact|About|Menu|Navigation)"
+  
+  # 网站元素
+  - "(登录|注册|搜索|订阅|分享|收藏|点赞|评论区|版权所有|版权声明)"
+  - "(Copyright|All rights reserved|Terms of Service|Privacy Policy)"
+  - "(备案号|ICP备|增值电信|互联网新闻信息服务)"
+  
+  # 股票行情
+  - "^\\|?\\s*(开盘价|昨收盘|最高|最低|换手率|振幅|成交额|市盈率|市净率)"
+  - "^\\|?\\s*(日期|两融余额|融资余额|环比|占流通市值)"
+  
+  # 重复分隔符
+  - "^[\\s\\-_=*#]{10,}$"
+  - "^[\\|:\\s]+$"

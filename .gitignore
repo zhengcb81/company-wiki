@@ -1,15 +1,32 @@
 # Ingest 标记（可重建）
 .ingested/
 
-# 大型原始文件（PDF等）
-**/raw/reports/*.pdf
-**/raw/reports/*.doc*
-**/raw/reports/*.xls*
+# 大型原始文件（PDF等）— 所有 raw 子目录下的 PDF
+*.pdf
+**/raw/reports/
+**/raw/research/
+**/raw/financial_reports/
+**/raw/prospectus/
+**/raw/investor_relations/
+**/raw/announcements/
 
 # Python 缓存
 __pycache__/
 *.pyc
+*.pyo
 
 # 系统文件
 .DS_Store
 Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# 环境变量
+.env
+
+# 临时文件
+*.tmp
+*.swp
+*~

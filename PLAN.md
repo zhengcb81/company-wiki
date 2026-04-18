@@ -353,6 +353,9 @@ LLM 读取新文件内容
 | 2026-04-12 | 重构：graph.yaml 作为单一数据源，43家公司、25个行业、23条拓扑关系 |
 | 2026-04-12 | 重构：ingest.py/collect_news.py 去掉硬编码，全部从 Graph API 读取 |
 | 2026-04-12 | 重构：config.yaml 精简为纯运维配置（API keys, schedule） |
+| 2026-04-18 | 全量 re-ingest：5,397 文件处理，26,316 条 topic 更新，123 wiki 页面 |
+| 2026-04-18 | Wiki 内容增强：核心问题 + 综合评估生成（DeepSeek Reasoner） |
+| 2026-04-18 | lint 清理：删除 2,704 条 broken_link 条目，最终 0 errors, 1 warning |
 
 ## 十二、当前问题与重构计划
 

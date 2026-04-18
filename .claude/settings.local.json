@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python:*)",
+      "Bash(DEEPSEEK_API_KEY=sk-27166ed345c54d19a2fa2f3041e98c4c python:*)",
+      "Bash(grep:*)",
+      "Bash(git checkout:*)",
+      "Bash(ls:*)",
+      "Bash(DEEPSEEK_API_KEY=sk-27166ed345c54d19a2fa2f3041e98c4c PYTHONIOENCODING=utf-8 python:*)",
+      "Bash(PYTHONIOENCODING=utf-8 python:*)",
+      "Bash(du:*)",
+      "Bash(git rm:*)",
+      "Bash(git remote add:*)",
+      "Bash(git add:*)"
+    ]
+  }
+}
