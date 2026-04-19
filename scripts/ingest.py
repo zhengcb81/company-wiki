@@ -39,6 +39,7 @@ sys.path.insert(0, str(SCRIPTS_DIR))
 from extract import extract_summary, classify_info_type
 from pdf_extract import extract_pdf_summary
 from graph import Graph
+from log_writer import append_log
 
 LOG_PATH = WIKI_ROOT / "log.md"
 INDEX_PATH = WIKI_ROOT / "index.md"
@@ -197,8 +198,22 @@ def get_wiki_path(entity_name, entity_type, topic_name):
     return None
 
 
-def create_topic_template(entity_name, entity_type, topic_name, graph):
-    """创建新 topic wiki 文档的模板"""
+def create_topic_template(entity_name, entity_type, topic_name, graph, page_type=None):
+    """创建新 topic wiki 文档的模板。
+
+    Args:
+        page_type: 可选，显式指定页面类型 (concept/comparison/synthesis)。
+                   为 None 时自动从 entity_type 推导。
+    """
+    # 确定模板类型
+    if page_type == "concept":
+        return _concept_template(entity_name, topic_name)
+    elif page_type == "comparison":
+        return _comparison_template(entity_name, topic_name, graph)
+    elif page_type == "synthesis":
+        return _synthesis_template(entity_name, topic_name, graph)
+
+    # 默认：按 entity_type 生成标准模板
     # 从 graph 获取问题列表
     questions = []
     if entity_type == "sector":
@@ -213,6 +228,7 @@ def create_topic_template(entity_name, entity_type, topic_name, graph):
 
     return f"""---
 title: "{topic_name}"
+description: ""
 entity: "{entity_name}"
 type: {entity_type}_topic
 last_updated: "{datetime.now().strftime('%Y-%m-%d')}"
@@ -231,6 +247,92 @@ tags: []
 
 ## 综合评估
 > 待积累数据后补充。
+"""
+
+
+def _concept_template(entity_name, topic_name):
+    """概念百科页模板"""
+    return f"""---
+title: "{topic_name}"
+description: ""
+entity: "{entity_name}"
+type: concept
+aliases: []
+related_topics: []
+last_updated: "{datetime.now().strftime('%Y-%m-%d')}"
+sources_count: 0
+tags: [概念]
+---
+
+# {topic_name}
+
+## 定义
+
+
+## 技术要点
+
+
+## 产业影响
+
+
+## 相关引用
+
+"""
+
+
+def _comparison_template(entity_name, topic_name, graph):
+    """对比分析页模板"""
+    return f"""---
+title: "{topic_name}"
+description: ""
+entity: "{entity_name}"
+type: comparison
+entities: []
+dimension: ""
+last_updated: "{datetime.now().strftime('%Y-%m-%d')}"
+sources_count: 0
+tags: [对比]
+---
+
+# {topic_name}
+
+## 对比维度
+
+
+## 时间线对比
+
+
+## 综合判断
+
+"""
+
+
+def _synthesis_template(entity_name, topic_name, graph):
+    """综合报告页模板"""
+    now = datetime.now()
+    quarter = f"{now.year}-Q{(now.month - 1) // 3 + 1}"
+    return f"""---
+title: "{topic_name}"
+description: ""
+entity: "{entity_name}"
+type: synthesis
+scope: []
+period: "{quarter}"
+last_updated: "{now.strftime('%Y-%m-%d')}"
+sources_count: 0
+tags: [综合]
+---
+
+# {topic_name}
+
+## 核心发现
+
+
+## 详细分析
+
+
+## 展望
+
 """
 
 
@@ -517,23 +619,14 @@ def process_file(file_path, entity_name, entity_type, graph, dry_run=False):
     return updated_topics
 
 
-def append_log(message):
-    now = datetime.now().strftime("%Y-%m-%d %H:%M")
-    entry = f"\n## [{now}] ingest | {message}\n"
-    if LOG_PATH.exists():
-        content = LOG_PATH.read_text(encoding="utf-8")
-    else:
-        content = "# 知识库操作日志\n"
-    content += entry
-    LOG_PATH.write_text(content, encoding="utf-8")
-
-
 def main():
     parser = argparse.ArgumentParser(description="数据整理 — Ingest")
     parser.add_argument("--company", type=str, help="只处理指定公司")
     parser.add_argument("--dry-run", action="store_true", help="只检查不执行")
     parser.add_argument("--check", action="store_true", help="列出待处理文件")
     parser.add_argument("--limit", type=int, default=0, help="最多处理 N 个文件")
+    parser.add_argument("--interactive", action="store_true",
+                        help="交互式模式：每个文件处理前需用户确认")
     args = parser.parse_args()
 
     print("=" * 50)
@@ -565,6 +658,27 @@ def main():
     for i, (fp, ent, etype) in enumerate(pending):
         rel = Path(fp).relative_to(WIKI_ROOT)
         print(f"\n  [{i+1}/{len(pending)}] {rel}")
+
+        # 交互式模式：显示摘要，等待确认
+        if args.interactive and not args.dry_run:
+            meta = read_news_metadata(fp)
+            title = meta.get("title", "未知标题")[:60]
+            relevant = determine_relevance(meta, graph)
+            entities = [r[0] for r in relevant]
+            topics_preview = [f"{r[0]}/{r[2]}" for r in relevant]
+            print(f"    标题: {title}")
+            print(f"    相关实体: {', '.join(entities[:5])}")
+            print(f"    将更新: {', '.join(topics_preview[:5])}")
+            choice = input("    [y=处理 / n=跳过 / q=退出]? ").strip().lower()
+            if choice in ("q", "quit"):
+                print("  用户中断 ingest。")
+                break
+            if choice in ("n", "s", "skip", "no"):
+                print("    -> 跳过")
+                total_skipped += 1
+                mark_ingested(fp)
+                continue
+
         topics = process_file(fp, ent, etype, graph, args.dry_run)
 
         if topics:
@@ -585,12 +699,15 @@ def main():
 
     if not args.dry_run and total_updated > 0:
         topics_str = ", ".join(sorted(all_topics))
-        append_log(f"Ingested {len(pending)} files, updated {total_updated} topic entries: {topics_str}")
+        append_log("ingest",
+                   f"Ingested {len(pending)} files, updated {total_updated} topic entries",
+                   details=[f"Topics: {topics_str}"])
 
         # 自动重建索引
         try:
             from generate_index import generate as gen_index
             gen_index()
+            append_log("index_regen", "Index regenerated after ingest")
             print("  Index regenerated.")
         except Exception:
             pass

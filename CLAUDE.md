@@ -35,13 +35,54 @@
 ```yaml
 ---
 title: {文档标题}
+description: {一行摘要，≤80字，用于 index.md 展示}
 entity: {所属实体名}
-type: company_topic | sector_topic | theme_topic | overview
+type: company_topic | sector_topic | theme_topic | overview | concept | comparison | synthesis
 last_updated: YYYY-MM-DD
 sources_count: N
 tags: [tag1, tag2]
 ---
 ```
+
+`description` 为可选字段。如果省略，generate_index.py 会自动从正文提取摘要。
+
+### 页面类型说明
+
+| type | 用途 | 典型来源 |
+|------|------|---------|
+| `company_topic` | 公司动态/相关动态 | ingest 新闻、财报 |
+| `sector_topic` | 行业概览 | ingest 跨公司信息 |
+| `theme_topic` | 跨行业主题 | ingest 跨行业信息 |
+| `overview` | 实体总览 | LLM 生成 |
+| `concept` | 概念百科（如"EUV光刻"） | Query 归档 / LLM 发现 |
+| `comparison` | 对比分析（如"中微 vs 北方华创"） | Query 归档 / 用户请求 |
+| `synthesis` | 综合报告（如"Q1 半导体设备回顾"） | Query 归档 / LLM 生成 |
+
+**新增类型模板格式：**
+
+概念页（concept）：
+```markdown
+## 定义
+## 技术要点
+## 产业影响
+## 相关引用
+```
+
+对比页（comparison）：
+```markdown
+## 对比维度
+## 时间线对比
+## 综合判断
+```
+
+综合页（synthesis）：
+```markdown
+## 核心发现
+## 详细分析
+## 展望
+```
+
+这些模板仅为建议结构，LLM 可根据内容灵活调整。
 
 ### 核心问题
 列出本文档跟踪的核心问题，这些来自 config.yaml 中对应 topic 的 questions。

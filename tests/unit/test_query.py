@@ -277,15 +277,15 @@ class TestAnswerSaver:
     
     def test_append_log(self, test_wiki):
         """测试追加日志"""
-        saver = AnswerSaver(test_wiki)
-        
-        # 追加日志
-        saver._append_log("测试日志消息")
-        
+        # 使用统一的 log_writer 模块
+        from log_writer import append_log
+
+        append_log("query", "测试日志消息", log_path=test_wiki / "log.md")
+
         # 检查日志文件
         log_file = test_wiki / "log.md"
         content = log_file.read_text(encoding="utf-8")
-        
+
         assert "测试日志消息" in content
         assert "query" in content
 

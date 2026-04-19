@@ -161,14 +161,11 @@ def download_documents(missing_docs: List[MissingDoc], doc_type: Optional[str] =
         for doc in docs:
             stats['total'] += 1
             
-            # 构建下载命令
-            # 使用 cninfo_download.py 下载
+            # 使用 collect_reports.py 调用 StockInfoDownloader 下载
             cmd = [
                 sys.executable,
-                str(SCRIPTS_DIR / 'cninfo_download.py'),
+                str(SCRIPTS_DIR / 'collect_reports.py'),
                 '--company', company_name,
-                '--ticker', ticker,
-                '--type', doc.doc_type,
             ]
             
             print(f'  下载 {doc.doc_name}...')

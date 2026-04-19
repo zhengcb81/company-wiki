@@ -414,6 +414,245 @@ def check_claim_freshness(result):
             result.add("INFO", "freshness_llm", f"LLM freshness check skipped for {relpath}: {e}")
 
 
+# ── 新增规则驱动检查 ────────────────────────
+
+def check_missing_cross_references(result):
+    """检查被频繁提及但缺少 wikilink 的概念"""
+    import yaml
+
+    # 从 graph.yaml 加载实体关键词
+    graph_path = WIKI_ROOT / "graph.yaml"
+    if not graph_path.exists():
+        return
+
+    with open(graph_path, "r", encoding="utf-8") as f:
+        graph_data = yaml.safe_load(f)
+
+    # 构建实体名列表
+    entity_names = set()
+    for name in graph_data.get("companies", {}):
+        entity_names.add(name)
+    for name, node in graph_data.get("nodes", {}).items():
+        entity_names.add(name)
+        for kw in node.get("keywords", []):
+            entity_names.add(kw)
+
+    # 扫描所有 wiki 页面，统计实体被提及但未 wikilink 的次数
+    mention_counts = {}  # entity -> count of mentions without wikilink
+
+    for pattern in [
+        f"{WIKI_ROOT}/companies/*/wiki/*.md",
+        f"{WIKI_ROOT}/sectors/*/wiki/*.md",
+        f"{WIKI_ROOT}/themes/*/wiki/*.md",
+    ]:
+        for wiki_file in glob.glob(pattern):
+            content = Path(wiki_file).read_text(encoding="utf-8")
+
+            for entity in entity_names:
+                if entity not in content:
+                    continue
+                # 检查是否有 [[entity]] 包裹
+                # 计算裸提及次数（不在 [[ ]] 内的）
+                # 简化：如果出现但不在 wikilink 中
+                wikilink_pattern = rf'\[\[[^\]]*{re.escape(entity)}[^\]]*\]\]'
+                has_wikilink = bool(re.search(wikilink_pattern, content))
+                if not has_wikilink:
+                    mention_counts[entity] = mention_counts.get(entity, 0) + 1
+
+    # 被提及 >=3 次但没有 wikilink 的实体
+    for entity, count in sorted(mention_counts.items(), key=lambda x: -x[1]):
+        if count >= 3:
+            result.add("WARNING", "cross_refs",
+                      f"Entity '{entity}' mentioned in {count} pages but has no wikilinks")
+
+
+def check_data_gaps(result, gap_days=30):
+    """检查核心问题长期无新进展"""
+    import yaml
+
+    graph_path = WIKI_ROOT / "graph.yaml"
+    if not graph_path.exists():
+        return
+
+    with open(graph_path, "r", encoding="utf-8") as f:
+        graph_data = yaml.safe_load(f)
+
+    cutoff = (datetime.now() - timedelta(days=gap_days)).strftime("%Y-%m-%d")
+
+    # 检查每个 sector 页面的时间线最新条目
+    for sector_name in graph_data.get("nodes", {}):
+        node = graph_data["nodes"][sector_name]
+        if node.get("type") not in ("sector", "subsector"):
+            continue
+
+        # 检查对应的 wiki 页面
+        wiki_file = WIKI_ROOT / "sectors" / sector_name / "wiki" / f"{sector_name}.md"
+        if not wiki_file.exists():
+            continue
+
+        content = wiki_file.read_text(encoding="utf-8")
+
+        # 从 frontmatter 获取 last_updated
+        match = re.search(r'last_updated:\s*"?(\d{4}-\d{2}-\d{2})"?', content)
+        if match and match.group(1) < cutoff:
+            age = (datetime.now() - datetime.strptime(match.group(1), "%Y-%m-%d")).days
+            result.add("WARNING", "data_gaps",
+                      f"Sector '{sector_name}' not updated for {age} days",
+                      str(wiki_file.relative_to(WIKI_ROOT)))
+
+
+def check_duplicate_pages(result, similarity_threshold=0.7):
+    """检查内容高度相似的页面"""
+    pages = _load_all_wiki_pages()
+
+    # 提取每个页面的文本（去掉 frontmatter）
+    page_texts = []
+    for relpath, content in pages:
+        # 跳过非标准页面
+        if content.startswith("---"):
+            end = content.find("---", 3)
+            if end > 0:
+                content = content[end + 3:]
+        # 取前 500 字做快速比较
+        text = content[:500].strip()
+        if text:
+            page_texts.append((relpath, text))
+
+    # 两两比较 Jaccard 相似度（基于字符集合）
+    for i in range(len(page_texts)):
+        for j in range(i + 1, len(page_texts)):
+            set_a = set(page_texts[i][1])
+            set_b = set(page_texts[j][1])
+            if not set_a or not set_b:
+                continue
+            intersection = len(set_a & set_b)
+            union = len(set_a | set_b)
+            if union == 0:
+                continue
+            similarity = intersection / union
+            if similarity > similarity_threshold:
+                result.add("WARNING", "duplicates",
+                          f"Pages may be duplicates (similarity: {similarity:.0%}): "
+                          f"{page_texts[i][0]} <-> {page_texts[j][0]}")
+
+
+def check_frontmatter_completeness(result):
+    """检查 frontmatter 必要字段是否完整"""
+    required_fields = ['title', 'entity', 'type', 'last_updated', 'sources_count', 'tags']
+
+    for pattern in [
+        f"{WIKI_ROOT}/companies/*/wiki/*.md",
+        f"{WIKI_ROOT}/sectors/*/wiki/*.md",
+        f"{WIKI_ROOT}/themes/*/wiki/*.md",
+    ]:
+        for wiki_file in glob.glob(pattern):
+            content = Path(wiki_file).read_text(encoding="utf-8")
+
+            if not content.startswith("---"):
+                relpath = os.path.relpath(wiki_file, WIKI_ROOT)
+                result.add("ERROR", "frontmatter", "Missing frontmatter entirely", relpath)
+                continue
+
+            end = content.find("---", 3)
+            if end < 0:
+                relpath = os.path.relpath(wiki_file, WIKI_ROOT)
+                result.add("ERROR", "frontmatter", "Malformed frontmatter (no closing ---)", relpath)
+                continue
+
+            frontmatter = content[3:end]
+            missing = []
+            for field in required_fields:
+                if f"{field}:" not in frontmatter:
+                    missing.append(field)
+
+            if missing:
+                relpath = os.path.relpath(wiki_file, WIKI_ROOT)
+                result.add("ERROR", "frontmatter",
+                          f"Missing required fields: {', '.join(missing)}", relpath)
+
+
+def check_tag_consistency(result):
+    """检查标签规范性"""
+    import yaml
+
+    # 从 graph.yaml 获取所有已知实体名
+    graph_path = WIKI_ROOT / "graph.yaml"
+    known_entities = set()
+    if graph_path.exists():
+        with open(graph_path, "r", encoding="utf-8") as f:
+            graph_data = yaml.safe_load(f)
+        for name in graph_data.get("companies", {}):
+            known_entities.add(name)
+        for name in graph_data.get("nodes", {}):
+            known_entities.add(name)
+
+    for pattern in [
+        f"{WIKI_ROOT}/companies/*/wiki/*.md",
+        f"{WIKI_ROOT}/sectors/*/wiki/*.md",
+        f"{WIKI_ROOT}/themes/*/wiki/*.md",
+    ]:
+        for wiki_file in glob.glob(pattern):
+            content = Path(wiki_file).read_text(encoding="utf-8")
+
+            # 提取 tags 字段
+            tags_match = re.search(r'tags:\s*\[([^\]]*)\]', content)
+            if not tags_match:
+                continue
+
+            tags_str = tags_match.group(1)
+            tags = [t.strip() for t in tags_str.split(",") if t.strip()]
+
+            # 检查空标签
+            if not tags:
+                relpath = os.path.relpath(wiki_file, WIKI_ROOT)
+                result.add("INFO", "tags", "Empty tags list", relpath)
+
+
+def check_web_searchable_gaps(result):
+    """LLM 驱动：识别可通过 web search 填补的信息缺口"""
+    # 复用 data_gaps 的结果，用 LLM 生成搜索建议
+    pages = _load_all_wiki_pages()
+    cutoff = (datetime.now() - timedelta(days=30)).strftime("%Y-%m-%d")
+
+    stale_pages = []
+    for relpath, content in pages:
+        match = re.search(r'last_updated:\s*"?(\d{4}-\d{2}-\d{2})"?', content)
+        if match and match.group(1) < cutoff:
+            # 提取核心问题
+            q_start = content.find("## 核心问题")
+            if q_start >= 0:
+                q_section = content[q_start:q_start + 300]
+                stale_pages.append((relpath, q_section))
+
+    if not stale_pages:
+        result.add("INFO", "web_gaps", "No stale pages with searchable gaps")
+        return
+
+    client = _get_llm_client()
+    combined = "\n".join(f"--- {rp} ---\n{qs}" for rp, qs in stale_pages[:10])
+
+    prompt = f"""以下页面长期未更新。针对每个页面的核心问题，建议一条 web search 查询关键词，
+帮助获取最新信息来更新这些页面。
+
+{combined[:3000]}
+
+请用以下格式输出，每行一条建议：
+搜索: [搜索关键词] | 目标页面: [页面路径] | 目的: [搜索目的]
+
+如果没有需要搜索的，输出: 无搜索建议"""
+
+    try:
+        response = client.chat(prompt, max_tokens=512)
+        if response and "无搜索建议" not in response:
+            for line in response.strip().split("\n"):
+                line = line.strip()
+                if line.startswith("搜索:") or line.startswith("搜索："):
+                    result.add("INFO", "web_gaps",
+                              line.replace("搜索:", "").replace("搜索：", "").strip())
+    except Exception as e:
+        result.add("INFO", "web_gaps", f"LLM web gap check skipped: {e}")
+
+
 def run_lint(checks=None, use_llm=False):
     """运行指定的检查项"""
     result = LintResult()
@@ -426,12 +665,19 @@ def run_lint(checks=None, use_llm=False):
         'links': lambda: check_broken_links(result),
         'config': lambda: check_config_consistency(result, config),
         'freshness': lambda: check_data_freshness(result),
+        # 新增规则驱动检查
+        'cross_refs': lambda: check_missing_cross_references(result),
+        'data_gaps': lambda: check_data_gaps(result),
+        'duplicates': lambda: check_duplicate_pages(result),
+        'frontmatter': lambda: check_frontmatter_completeness(result),
+        'tags': lambda: check_tag_consistency(result),
     }
 
     if use_llm:
         all_checks['semantic'] = lambda: check_semantic_contradictions(result)
         all_checks['missing'] = lambda: discover_missing_concepts(result)
         all_checks['freshness_llm'] = lambda: check_claim_freshness(result)
+        all_checks['web_gaps'] = lambda: check_web_searchable_gaps(result)
 
     if checks is None or 'all' in checks:
         checks = list(all_checks.keys())
@@ -446,7 +692,7 @@ def run_lint(checks=None, use_llm=False):
 def main():
     parser = argparse.ArgumentParser(description="知识库健康检查")
     parser.add_argument("--check", type=str, default="all",
-                        help="检查项: all|stale|orphans|empty|links|config|freshness|semantic|missing|freshness_llm")
+                        help="检查项: all|stale|orphans|empty|links|config|freshness|cross_refs|data_gaps|duplicates|frontmatter|tags|semantic|missing|freshness_llm|web_gaps")
     parser.add_argument("--llm", action="store_true",
                         help="启用 LLM 驱动的检查 (semantic, missing, freshness_llm)")
     parser.add_argument("--json", action="store_true", help="输出 JSON 格式")
@@ -484,17 +730,13 @@ def main():
     # 记录到 log
     errors, warnings, infos = result.summary()
     if errors > 0 or warnings > 0:
-        now = datetime.now().strftime("%Y-%m-%d %H:%M")
-        entry = f"\n## [{now}] lint | {errors} errors, {warnings} warnings, {infos} info\n"
+        details = []
         for i in result.issues:
             if i['level'] in ('ERROR', 'WARNING'):
-                entry += f"- [{i['level']}] {i['category']}: {i['message']}\n"
-        if LOG_PATH.exists():
-            content = LOG_PATH.read_text(encoding="utf-8")
-        else:
-            content = "# 知识库操作日志\n"
-        content += entry
-        LOG_PATH.write_text(content, encoding="utf-8")
+                details.append(f"[{i['level']}] {i['category']}: {i['message']}")
+        sys.path.insert(0, str(SCRIPTS_DIR))
+        from log_writer import append_log
+        append_log("lint", f"{errors} errors, {warnings} warnings, {infos} info", details=details)
 
 
 if __name__ == "__main__":

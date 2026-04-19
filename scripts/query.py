@@ -23,6 +23,7 @@ WIKI_ROOT = SCRIPTS_DIR.parent
 
 sys.path.insert(0, str(SCRIPTS_DIR))
 from graph import Graph
+from log_writer import append_log
 
 
 @dataclass
@@ -441,18 +442,191 @@ class AnswerSynthesizer:
         return "\n".join(answer_parts)
 
 
+class AnswerQualityJudge:
+    """评估答案是否值得归档为 wiki 页面"""
+
+    def __init__(self, wiki_root: Path):
+        self.wiki_root = wiki_root
+
+    def judge(self, answer: QueryAnswer) -> dict:
+        """
+        评估答案质量。
+
+        Returns:
+            {
+                should_file: bool,
+                quality: str,          # high / medium / low
+                suggested_type: str,   # concept / comparison / synthesis / timeline_entry
+                reason: str,
+            }
+        """
+        # 低置信度直接排除
+        if answer.confidence == "low" or not answer.sources:
+            return {
+                "should_file": False,
+                "quality": "low",
+                "suggested_type": "none",
+                "reason": "置信度太低或无来源",
+            }
+
+        quality = answer.confidence  # high / medium
+
+        # 判断答案类型
+        suggested_type = self._classify_answer_type(answer)
+        reason = self._build_reason(answer, suggested_type, quality)
+
+        # medium 及以上都可归档
+        return {
+            "should_file": True,
+            "quality": quality,
+            "suggested_type": suggested_type,
+            "reason": reason,
+        }
+
+    def _classify_answer_type(self, answer: QueryAnswer) -> str:
+        """根据问题和答案内容判断合适的 wiki 页面类型。"""
+        q = answer.question.lower()
+        a = answer.answer.lower()
+
+        # 对比类：问题包含 vs、对比、比较、区别
+        vs_patterns = [" vs ", "对比", "比较", "区别", "还是"]
+        if any(p in q for p in vs_patterns):
+            return "comparison"
+
+        # 概念类：问题包含 是什么、定义、介绍
+        concept_patterns = ["是什么", "什么是", "定义", "介绍", "概念", "原理"]
+        if any(p in q for p in concept_patterns):
+            return "concept"
+
+        # 如果来源 >=3 个实体，且答案较长 → 综合报告
+        unique_entities = set(s.entity_name for s in answer.sources)
+        if len(unique_entities) >= 3 and len(answer.answer) > 200:
+            return "synthesis"
+
+        # 默认作为时间线条目插入现有页面
+        return "timeline_entry"
+
+    def _build_reason(self, answer: QueryAnswer, suggested_type: str, quality: str) -> str:
+        reasons = []
+        if quality == "high":
+            reasons.append("置信度高")
+        reasons.append(f"建议类型: {suggested_type}")
+        reasons.append(f"来源: {len(answer.sources)} 个页面")
+        return "，".join(reasons)
+
+
 class AnswerSaver:
     """答案保存器"""
-    
+
     def __init__(self, wiki_root: Path):
-        """
-        初始化保存器
-        
-        Args:
-            wiki_root: Wiki 根目录
-        """
         self.wiki_root = wiki_root
+        self._graph = None
+
+    def _get_graph(self):
+        """懒加载 Graph"""
+        if self._graph is None:
+            try:
+                self._graph = Graph()
+            except Exception:
+                self._graph = None
+        return self._graph
     
+    def file_as_wiki_page(self, answer: QueryAnswer, page_type: str = "synthesis") -> Optional[Path]:
+        """
+        将高质量答案归档为正式 wiki 页面（非 Q_ 前缀）。
+
+        根据答案类型创建 concept / comparison / synthesis 页面，
+        自动注入 wikilinks 并更新 index.md。
+
+        Args:
+            answer: 查询答案
+            page_type: concept / comparison / synthesis
+
+        Returns:
+            保存的文件路径
+        """
+        # 确定目录：concept/comparison/synthesis 页面存放在 themes/ 下
+        safe_name = re.sub(r'[^\w\u4e00-\u9fff]', '_', answer.question)[:40]
+        wiki_dir = self.wiki_root / "themes" / safe_name / "wiki"
+        wiki_dir.mkdir(parents=True, exist_ok=True)
+
+        filename = f"{safe_name}.md"
+        file_path = wiki_dir / filename
+
+        # 构建 frontmatter
+        now_str = datetime.now().strftime('%Y-%m-%d')
+        source_entities = list(set(s.entity_name for s in answer.sources))
+        description = answer.answer[:80].replace('"', "'").replace("\n", " ")
+
+        if page_type == "concept":
+            title = answer.question.rstrip("？?")
+            fm_type = "concept"
+        elif page_type == "comparison":
+            title = answer.question.rstrip("？?")
+            fm_type = "comparison"
+        else:
+            title = answer.question.rstrip("？?")
+            fm_type = "synthesis"
+
+        # 构建页面内容
+        content = f"""---
+title: "{title}"
+description: "{description}..."
+entity: "{safe_name}"
+type: {fm_type}
+last_updated: "{now_str}"
+sources_count: {len(answer.sources)}
+tags: [{fm_type}, auto-generated, {', '.join(source_entities[:5])}]
+---
+
+# {title}
+
+## 问题
+{answer.question}
+
+## 答案
+{answer.answer}
+
+## 来源页面
+"""
+        for source in answer.sources:
+            rel_path = source.path.relative_to(self.wiki_root)
+            content += f"- [[{source.entity_name}/{source.topic_name}]]\n"
+
+        content += f"""
+## 元数据
+- 生成时间: {answer.generated_at}
+- 置信度: {answer.confidence}
+- 来源数量: {len(answer.sources)}
+
+---
+*此页面由 query.py 归档生成*
+"""
+
+        # 保存文件
+        file_path.write_text(content, encoding="utf-8")
+        print(f"答案已归档为 wiki 页面: {file_path.relative_to(self.wiki_root)}")
+
+        # 注入 wikilinks
+        try:
+            from wikilinks import WikilinkEngine
+            engine = WikilinkEngine(self.wiki_root)
+            engine.inject_wikilinks(file_path)
+        except Exception as e:
+            print(f"  注入 wikilinks 时出错: {e}")
+
+        # 更新 index.md
+        try:
+            from generate_index import generate as regenerate_index
+            regenerate_index()
+        except Exception as e:
+            print(f"  更新 index.md 时出错: {e}")
+
+        # 更新 log.md
+        append_log("query", f"Answer filed as {fm_type} page: {answer.question} -> {file_path.relative_to(self.wiki_root)}")
+
+        return file_path
+
     def save_to_wiki(self, answer: QueryAnswer, entity_name: str, entity_type: str) -> Optional[Path]:
         """
         将答案保存到 wiki
@@ -523,9 +697,9 @@ tags: [query, auto-generated]
         # 保存文件
         file_path.write_text(content, encoding="utf-8")
         print(f"答案已保存到: {file_path.relative_to(self.wiki_root)}")
-        
+
         # 更新 log.md
-        self._append_log(f"Query answer saved: {answer.question} -> {entity_name}")
+        append_log("query", f"Query answer saved: {answer.question} -> {entity_name}")
         
         return file_path
     
@@ -599,27 +773,6 @@ tags: [query, auto-generated]
         
         return True
     
-    def _append_log(self, message: str) -> None:
-        """
-        追加日志
-        
-        Args:
-            message: 日志消息
-        """
-        log_path = self.wiki_root / "log.md"
-        
-        now = datetime.now().strftime("%Y-%m-%d %H:%M")
-        entry = f"\n## [{now}] query | {message}\n"
-        
-        if log_path.exists():
-            content = log_path.read_text(encoding="utf-8")
-        else:
-            content = "# 知识库操作日志\n"
-        
-        content += entry
-        log_path.write_text(content, encoding="utf-8")
-
-
 def main():
     parser = argparse.ArgumentParser(description="Wiki 查询")
     parser.add_argument("question", nargs="?", help="查询问题")
@@ -629,84 +782,116 @@ def main():
     parser.add_argument("--entity-type", type=str, default="company", choices=["company", "sector", "theme"], help="实体类型")
     parser.add_argument("--topic", type=str, help="目标主题名称")
     parser.add_argument("--max-results", type=int, default=5, help="最大搜索结果数")
+    parser.add_argument("--auto-file", action="store_true", help="自动归档高质量答案为 wiki 页面")
+    parser.add_argument("--no-file", action="store_true", help="不归档答案（仅显示）")
     args = parser.parse_args()
-    
+
     print("=" * 50)
     print("  上市公司知识库 — 查询")
     print("=" * 50)
-    
+
     # 初始化
     searcher = WikiSearcher(WIKI_ROOT)
     synthesizer = AnswerSynthesizer(WIKI_ROOT)
     saver = AnswerSaver(WIKI_ROOT)
-    
+    judge = AnswerQualityJudge(WIKI_ROOT)
+
     if args.save_answer:
         # 直接保存答案
         question, answer_text = args.save_answer
-        
+
         if not args.entity:
             print("Error: --entity is required when using --save-answer")
             sys.exit(1)
-        
+
         answer = QueryAnswer(
             question=question,
             answer=answer_text,
             confidence="manual",
         )
-        
+
         if args.topic:
-            # 保存为时间线条目
             saver.save_as_timeline_entry(answer, args.entity, args.entity_type, args.topic)
         else:
-            # 保存为新页面
             saver.save_to_wiki(answer, args.entity, args.entity_type)
-        
+
         return
-    
+
     # 搜索
     query = args.question or args.search
     if not query:
         print("Error: Please provide a question or use --search")
         sys.exit(1)
-    
+
     print(f"\n查询: {query}")
     print(f"搜索 wiki 页面...")
-    
+
     results = searcher.search(query, max_results=args.max_results)
-    
+
     print(f"找到 {len(results)} 个相关页面:")
     for i, result in enumerate(results, 1):
         print(f"  {i}. {result.page.entity_name}/{result.page.topic_name} (相关性: {result.relevance_score:.1f})")
         for section in result.matched_sections[:2]:
             print(f"     - {section[:80]}...")
-    
+
     if args.search:
-        # 只搜索，不综合答案
         return
-    
+
     # 综合答案
     print(f"\n综合答案...")
     answer = synthesizer.synthesize(query, results)
-    
+
     print(f"\n{'=' * 50}")
     print(f"答案 (置信度: {answer.confidence}):")
     print(f"{'=' * 50}")
     print(answer.answer)
-    
-    # 询问是否保存
+
     if answer.sources:
         print(f"\n来源: {len(answer.sources)} 个 wiki 页面")
-        
-        # 自动保存到第一个来源的实体
-        first_source = answer.sources[0]
-        print(f"\n自动保存到: {first_source.entity_name}/{first_source.topic_name}")
-        
-        saver.save_as_timeline_entry(
-            answer,
-            first_source.entity_name,
-            first_source.entity_type,
-            first_source.topic_name,
-        )
+
+    # 评估是否值得归档
+    if args.no_file:
+        return
+
+    verdict = judge.judge(answer)
+    print(f"\n质量评估: {verdict['reason']}")
+
+    if not verdict["should_file"]:
+        print("答案质量不足以归档，跳过。")
+        return
+
+    if verdict["suggested_type"] == "timeline_entry":
+        # 归档为时间线条目（原有逻辑）
+        if answer.sources:
+            first_source = answer.sources[0]
+            if args.auto_file:
+                print(f"自动归档为时间线条目: {first_source.entity_name}/{first_source.topic_name}")
+                saver.save_as_timeline_entry(answer, first_source.entity_name, first_source.entity_type, first_source.topic_name)
+            else:
+                print(f"建议归档到: {first_source.entity_name}/{first_source.topic_name}")
+                choice = input("归档为时间线条目? [Y/n] ").strip().lower()
+                if choice in ("", "y", "yes"):
+                    saver.save_as_timeline_entry(answer, first_source.entity_name, first_source.entity_type, first_source.topic_name)
+                else:
+                    print("跳过归档。")
+    else:
+        # 归档为 concept/comparison/synthesis 页面（新逻辑）
+        if args.auto_file:
+            print(f"自动归档为 {verdict['suggested_type']} 页面")
+            saver.file_as_wiki_page(answer, page_type=verdict["suggested_type"])
+        else:
+            print(f"建议归档为 {verdict['suggested_type']} 类型 wiki 页面")
+            choice = input("归档为新 wiki 页面? [Y/n/s(skip)] ").strip().lower()
+            if choice in ("", "y", "yes"):
+                saver.file_as_wiki_page(answer, page_type=verdict["suggested_type"])
+            elif choice in ("s", "skip"):
+                # fallback 到时间线条目
+                if answer.sources:
+                    first_source = answer.sources[0]
+                    print(f"改为归档为时间线条目: {first_source.entity_name}/{first_source.topic_name}")
+                    saver.save_as_timeline_entry(answer, first_source.entity_name, first_source.entity_type, first_source.topic_name)
+            else:
+                print("跳过归档。")
 
 
 if __name__ == "__main__":
