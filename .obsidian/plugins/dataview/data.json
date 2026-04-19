@@ -1,0 +1,8 @@
+{
+  "renderNullAs": "\\-",
+  "warnOnEmptyResult": true,
+  "enableInlineDataview": true,
+  "enableDataviewJs": true,
+  "enableInlineDataviewJs": true,
+  "allowHtmlInDataViews": true
+}

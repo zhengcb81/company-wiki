@@ -34,3 +34,16 @@ Thumbs.db
 *.tmp
 *.swp
 *~
+
+# Obsidian 用户个人数据
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/plugins/*/data.json.bak
+.trash/
+
+# 搜索索引（可重建）
+.search_index.json
+
+# Web 构建产物
+web/dist/
+node_modules/

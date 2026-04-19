@@ -1,0 +1,38 @@
+{
+  "collapse-filter": true,
+  "search": "",
+  "showTags": true,
+  "showAttachments": false,
+  "hideUnresolved": false,
+  "showOrphans": true,
+  "collapse-color-groups": true,
+  "colorGroups": [
+    {
+      "query": "type: company_topic",
+      "color": { "a": 1, "r": 76, "g": 175, "b": 80 }
+    },
+    {
+      "query": "type: sector_topic",
+      "color": { "a": 1, "r": 33, "g": 150, "b": 243 }
+    },
+    {
+      "query": "type: theme_topic",
+      "color": { "a": 1, "r": 255, "g": 152, "b": 0 }
+    },
+    {
+      "query": "type: overview",
+      "color": { "a": 1, "r": 156, "g": 39, "b": 176 }
+    }
+  ],
+  "collapse-display": true,
+  "showArrow": true,
+  "textFadeMultiplier": -0.5,
+  "nodeSizeMultiplier": 1.0,
+  "lineSizeMultiplier": 1.0,
+  "collapse-forces": false,
+  "centerStrength": 0.5,
+  "repelStrength": 10,
+  "linkStrength": 0.5,
+  "linkDistance": 50,
+  "scale": 1.0
+}

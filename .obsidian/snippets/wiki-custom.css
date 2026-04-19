@@ -1,0 +1,27 @@
+/* 时间线条目：三级标题加底边框 */
+.markdown-preview-view h3 {
+  border-bottom: 1px solid var(--background-modifier-border);
+  padding-bottom: 4px;
+}
+
+/* 来源链接：小字半透明 */
+.markdown-preview-view a[href^="../raw"] {
+  font-size: 0.85em;
+  opacity: 0.7;
+}
+
+/* 综合评估引用块：左侧强调色 */
+blockquote {
+  border-left: 4px solid var(--interactive-accent);
+  background: var(--background-secondary);
+}
+
+/* Dataview 表格自适应宽度 */
+table.dataview {
+  width: 100%;
+}
+
+/* Frontmatter 元数据区域缩小 */
+.metadata-container {
+  font-size: 0.9em;
+}

@@ -1,0 +1,20 @@
+{
+  "legacyEditor": false,
+  "livePreview": true,
+  "readableLineLength": true,
+  "defaultViewMode": "preview",
+  "attachmentFolderPath": "assets",
+  "strictLineBreaks": true,
+  "showLineNumber": false,
+  "spellcheck": false,
+  "autoPairBrackets": true,
+  "autoPairMarkdown": true,
+  "foldHeading": true,
+  "foldIndent": true,
+  "showUnsupportedFiles": true,
+  "promptDelete": false,
+  "alwaysUpdateLinks": true,
+  "newFileLocation": "current",
+  "useMarkdownLinks": false,
+  "showInlineTitle": true
+}
