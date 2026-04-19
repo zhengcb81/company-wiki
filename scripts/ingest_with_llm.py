@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
 """
-ingest_with_llm.py — LLM 增强的 Ingest 流程
+ingest_with_llm.py — LLM 增强的 Ingest 流程 (备用入口，函数式实现)
 使用 LLM 深度理解内容，提取关键信息，整合到 wiki
+
+主入口: ingest.py (规则驱动)
+备选:   llm_ingest.py (类式 LLM 入口)
 
 用法：
     python3 scripts/ingest_with_llm.py                       # 处理所有待 ingest 文件
@@ -81,17 +84,10 @@ class LLMIngester:
         self.llm_client = self._init_llm_client()
     
     def _init_llm_client(self):
-        """初始化 LLM 客户端"""
+        """初始化 LLM 客户端 (使用统一 llm_client)"""
         try:
-            # 尝试导入 LLM 客户端
-            # 这里可以根据配置选择不同的 LLM 提供商
-            from openai import OpenAI
-            
-            client = OpenAI(
-                api_key=self.config.llm.api_key,
-                base_url=self.config.llm.base_url,
-            )
-            return client
+            from llm_client import get_llm_client
+            return get_llm_client()
         except Exception as e:
             logger.warning(f"LLM 客户端初始化失败: {e}")
             return None
@@ -183,17 +179,15 @@ class LLMIngester:
         prompt = self._build_extraction_prompt(content, entity_names)
         
         try:
-            # 调用 LLM
-            response = self.llm_client.chat.completions.create(
-                model=self.config.llm.model,
-                messages=[{"role": "user", "content": prompt}],
-                max_tokens=self.config.llm.max_tokens,
-                temperature=self.config.llm.temperature,
+            # 调用 LLM (统一客户端)
+            response = self.llm_client.chat_with_retry(
+                prompt,
+                "你是一个专业的上市公司研究分析助手。请准确提取关键信息。"
             )
-            
-            # 解析响应
-            result = response.choices[0].message.content
-            return self._parse_llm_response(result)
+            if response.success:
+                return self._parse_llm_response(response.content)
+            else:
+                raise RuntimeError(f"LLM 调用失败: {response.error}")
         
         except Exception as e:
             logger.error(f"LLM 调用失败: {e}")

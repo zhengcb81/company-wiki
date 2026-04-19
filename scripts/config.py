@@ -19,6 +19,43 @@ import logging
 logger = logging.getLogger(__name__)
 
 
+def _load_dotenv():
+    """加载项目根目录下的 .env 文件到环境变量（如果尚未设置）"""
+    # 查找 .env: 先看脚本同级目录的上级，再看当前工作目录
+    candidates = [
+        Path(__file__).resolve().parent.parent / ".env",  # scripts/../.env
+        Path.cwd() / ".env",
+    ]
+    for env_path in candidates:
+        if env_path.exists():
+            with open(env_path, "r", encoding="utf-8") as f:
+                for line in f:
+                    line = line.strip()
+                    if not line or line.startswith("#"):
+                        continue
+                    if "=" not in line:
+                        continue
+                    key, _, value = line.partition("=")
+                    key = key.strip()
+                    value = value.strip().strip("'\"")
+                    if key and key not in os.environ:
+                        os.environ[key] = value
+            logger.debug(f"已加载 .env: {env_path}")
+            return
+
+
+# 延迟加载标记
+_dotenv_loaded = False
+
+
+def _ensure_dotenv():
+    """确保 .env 已加载（首次调用 Config.load 时执行）"""
+    global _dotenv_loaded
+    if not _dotenv_loaded and not os.getenv("PYTEST_CURRENT_TEST"):
+        _load_dotenv()
+        _dotenv_loaded = True
+
+
 @dataclass
 class LLMConfig:
     """LLM 配置"""
@@ -96,7 +133,9 @@ class Config:
         """
         # 确定配置文件路径
         if config_path is None:
-            config_path = Path.home() / "company-wiki" / "config.yaml"
+            config_path = Path(__file__).resolve().parent.parent / "config.yaml"
+            # 仅在使用默认路径时自动加载 .env（测试传入自定义路径时跳过）
+            _ensure_dotenv()
         
         # 加载 YAML 配置
         raw_config = {}

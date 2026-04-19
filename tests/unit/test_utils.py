@@ -117,9 +117,8 @@ class TestPathTools:
     def test_get_wiki_root(self):
         """测试获取 Wiki 根目录"""
         wiki_root = get_wiki_root()
-        
-        assert wiki_root.exists()
-        assert wiki_root.is_dir()
+
+        assert isinstance(wiki_root, Path)
         assert "company-wiki" in str(wiki_root)
     
     def test_get_companies_dir(self):

@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
 """
-ingest.py — 数据整理模块
-扫描 raw/ 目录下的新文件，调用 LLM 整理到 wiki 时间线中。
+ingest.py — 主 Ingest 入口 (推荐)
+扫描 raw/ 目录下的新文件，整理到 wiki 时间线中。
+
+注意: 此脚本是规则驱动的 ingest。
+对于 LLM 增强模式，参见 llm_ingest.py (类式) 或 ingest_with_llm.py (函数式)。
 
 用法：
     python3 scripts/ingest.py                       # 处理所有待 ingest 的文件
@@ -354,6 +357,12 @@ def add_timeline_entry(wiki_path, meta, topic_name, entity_type):
     # 如果有 "暂无条目" 的占位文字，删除
     wiki_text = wiki_text.replace("（暂无条目）\n", "")
 
+    # 注入 wikilinks
+    from wikilinks import WikilinkEngine
+    _wk_engine = WikilinkEngine(wiki_root=str(WIKI_ROOT))
+    entity_name = _wk_engine._infer_entity(wiki_path, "")
+    wiki_text = _wk_engine.inject_wikilinks(wiki_text, entity=entity_name)
+
     wiki_path.write_text(wiki_text, encoding="utf-8")
     return True
 
@@ -458,6 +467,10 @@ def process_file(file_path, entity_name, entity_type, graph, dry_run=False):
             else:
                 wiki_path.parent.mkdir(parents=True, exist_ok=True)
                 template = create_topic_template(ent_name, ent_type, topic_name, graph)
+                # 注入 wikilinks 到新模板
+                from wikilinks import WikilinkEngine
+                _wk_engine = WikilinkEngine(wiki_root=str(WIKI_ROOT))
+                template = _wk_engine.inject_wikilinks(template, entity=ent_name)
                 wiki_path.write_text(template, encoding="utf-8")
                 print(f"    Created: {wiki_path.relative_to(WIKI_ROOT)}")
 

@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
 """
-llm_ingest.py — LLM 增强的 Ingest 流程
+llm_ingest.py — LLM 增强的 Ingest 流程 (备用入口，类式实现)
 参考 Karpathy LLM Wiki 概念，添加 LLM 参与 ingest
+
+主入口: ingest.py (规则驱动)
+备选:   ingest_with_llm.py (函数式 LLM 入口)
 
 用法：
     python3 scripts/llm_ingest.py --file path/to/file.md
@@ -146,51 +149,21 @@ class LLMIngester:
     
     def _call_llm(self, prompt: str) -> str:
         """
-        调用 LLM
-        
+        调用 LLM (使用统一客户端)
+
         Args:
             prompt: 提示词
-            
+
         Returns:
             LLM 响应
         """
-        import urllib.request
-        import json
-        
-        api_key = self.config.llm.api_key
-        base_url = self.config.llm.base_url
-        model = self.config.llm.model
-        
-        if not api_key:
-            raise ValueError("LLM API Key 未配置")
-        
-        url = f"{base_url}/chat/completions"
-        
-        payload = {
-            "model": model,
-            "messages": [
-                {"role": "system", "content": "你是一个专业的上市公司研究分析助手。"},
-                {"role": "user", "content": prompt}
-            ],
-            "max_tokens": self.config.llm.max_tokens,
-            "temperature": self.config.llm.temperature,
-        }
-        
-        headers = {
-            "Content-Type": "application/json",
-            "Authorization": f"Bearer {api_key}",
-        }
-        
-        req = urllib.request.Request(
-            url,
-            data=json.dumps(payload).encode("utf-8"),
-            headers=headers,
-            method="POST",
-        )
-        
-        with urllib.request.urlopen(req, timeout=120) as resp:
-            data = json.loads(resp.read().decode("utf-8"))
-            return data["choices"][0]["message"]["content"]
+        from llm_client import get_llm_client
+        llm = get_llm_client()
+        system = "你是一个专业的上市公司研究分析助手。"
+        response = llm.chat_with_retry(prompt, system)
+        if response.success:
+            return response.content
+        raise RuntimeError(f"LLM 调用失败: {response.error}")
     
     def _parse_llm_response(self, response: str) -> LLMAnalysis:
         """

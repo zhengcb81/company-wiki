@@ -54,7 +54,7 @@ questions:
   - 各环节设备国产化率？
   - 先进制程设备进展？
 """
-    (wiki_root / "graph.yaml").write_text(graph_yaml)
+    (wiki_root / "graph.yaml").write_text(graph_yaml, encoding="utf-8")
     
     # 创建公司目录（有wiki但时间线为空）
     company_dir = wiki_root / "companies" / "中微公司"
@@ -82,7 +82,7 @@ sources_count: 0
 > 待积累数据后补充。
 """
     
-    (company_dir / "wiki" / "公司动态.md").write_text(wiki_content)
+    (company_dir / "wiki" / "公司动态.md").write_text(wiki_content, encoding="utf-8")
     
     # 创建另一个公司（没有wiki）
     company_dir2 = wiki_root / "companies" / "北方华创"
@@ -111,7 +111,7 @@ sources_count: 5
 - [来源](../raw/research/report.md)
 """
     
-    (sector_dir / "wiki" / "半导体设备.md").write_text(sector_content)
+    (sector_dir / "wiki" / "半导体设备.md").write_text(sector_content, encoding="utf-8")
     
     return wiki_root
 

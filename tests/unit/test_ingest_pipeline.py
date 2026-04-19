@@ -102,7 +102,7 @@ type: news
 3. 已获得多家客户验证
 
 公司董事长尹志尧表示，这标志着国产半导体设备在高端领域取得重要突破。
-""")
+""", encoding="utf-8")
     
     # 更新配置中的 wiki_root
     test_config.wiki_root = wiki_root
@@ -322,7 +322,7 @@ class TestUpdater:
         assert wiki_path.exists()
         
         # 验证内容
-        content = wiki_path.read_text()
+        content = wiki_path.read_text(encoding="utf-8")
         assert "title:" in content
         assert "entity:" in content
         assert "type:" in content

@@ -144,14 +144,16 @@ class WikilinkEngine:
 
     def scan_all_pages(self) -> Dict[str, Path]:
         """
-        扫描所有 wiki 页面, 返回 {页面标题: 文件路径}
+        扫描所有 wiki 页面, 返回 {页面名: 文件路径}
 
-        页面标题从 frontmatter 的 title 字段提取。
+        页面名优先使用 frontmatter title，重复时加上实体前缀。
+        也使用文件 stem 作为别名。
         """
         if self._all_pages is not None:
             return self._all_pages
 
         self._all_pages = {}
+        seen_titles = {}  # title -> count for dedup
 
         for pattern in [
             "companies/*/wiki/*.md",
@@ -161,15 +163,27 @@ class WikilinkEngine:
             for md_file in self.wiki_root.glob(pattern):
                 content = md_file.read_text(encoding='utf-8', errors='replace')
                 title_match = re.search(r'title:\s*"?([^"\n]+)"?', content)
-                if title_match:
-                    title = title_match.group(1).strip()
-                    self._all_pages[title] = md_file
+                title = title_match.group(1).strip() if title_match else md_file.stem
 
-        # 也用文件名作为 key
-        for md_file in self.wiki_root.glob("companies/*/wiki/*.md"):
-            stem = md_file.stem
-            if stem not in self._all_pages:
-                self._all_pages[stem] = md_file
+                # 推断实体名用于去重
+                entity = self._infer_entity(md_file, title)
+
+                # 如果标题重复，用 "实体/标题" 格式区分
+                page_name = title
+                if title in seen_titles:
+                    page_name = f"{entity}/{title}"
+                    # 也要回改之前那个
+                    prev_path = seen_titles[title]
+                    prev_entity = self._infer_entity(prev_path, title)
+                    self._all_pages[f"{prev_entity}/{title}"] = prev_path
+                    # 保留原标题作为别名（仅当不冲突时）
+                seen_titles[title] = md_file
+
+                self._all_pages[page_name] = md_file
+
+                # 也用 "实体名" 作为 key（公司通常有 "公司动态" 页面）
+                if entity and entity not in self._all_pages:
+                    self._all_pages[entity] = md_file
 
         return self._all_pages
 
@@ -323,7 +337,13 @@ class WikilinkEngine:
         updated_files = 0
         total_links = 0
 
+        # 去重: 同一个文件路径只处理一次
+        seen_paths = set()
         for page_title, page_path in all_pages.items():
+            if str(page_path) in seen_paths:
+                continue
+            seen_paths.add(str(page_path))
+
             # 推断实体名
             entity = self._infer_entity(page_path, page_title)
 

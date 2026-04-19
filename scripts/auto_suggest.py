@@ -13,7 +13,6 @@ import json
 import os
 import random
 import sys
-import urllib.request
 from pathlib import Path
 
 SCRIPTS_DIR = Path(__file__).resolve().parent
@@ -22,6 +21,7 @@ CONFIG_PATH = WIKI_ROOT / "config.yaml"
 
 sys.path.insert(0, str(SCRIPTS_DIR))
 from graph import Graph
+from llm_client import get_llm_client
 
 
 def load_config():
@@ -31,32 +31,19 @@ def load_config():
 
 
 def call_llm(prompt, config):
-    """调用 DeepSeek"""
-    llm = config.get("llm", {})
-    url = f"{llm.get('base_url', 'https://api.deepseek.com')}/chat/completions"
-    payload = json.dumps({
-        "model": llm.get("model", "deepseek-reasoner"),
-        "messages": [
-            {"role": "system", "content": "你是产业分析师。只输出 JSON，不要解释。"},
-            {"role": "user", "content": prompt}
-        ],
-        "max_tokens": 2048,
-        "temperature": 0.1,
-    }).encode("utf-8")
-
-    req = urllib.request.Request(url, data=payload, method="POST")
-    req.add_header("Content-Type", "application/json")
-    req.add_header("Authorization", f"Bearer {llm.get('api_key', '')}")
-
-    try:
-        with urllib.request.urlopen(req, timeout=120) as resp:
-            data = json.loads(resp.read().decode("utf-8"))
-        content = data["choices"][0]["message"]["content"].strip()
+    """使用统一 LLM 客户端调用"""
+    llm = get_llm_client()
+    system = "你是产业分析师。只输出 JSON，不要解释。"
+    response = llm.chat_with_retry(prompt, system)
+    if response.success:
+        content = response.content.strip()
         if content.startswith("```"):
             content = content.split("\n", 1)[1].rsplit("```", 1)[0]
-        return json.loads(content)
-    except Exception as e:
-        return {"error": str(e)}
+        try:
+            return json.loads(content)
+        except json.JSONDecodeError:
+            return {"error": f"JSON parse failed: {content[:200]}"}
+    return {"error": response.error}
 
 
 def sample_news(wiki_root, max_files=30):

@@ -32,7 +32,7 @@ companies:
     sectors:
     - 半导体设备
 """
-    (wiki_root / "graph.yaml").write_text(graph_yaml)
+    (wiki_root / "graph.yaml").write_text(graph_yaml, encoding="utf-8")
     
     # 创建公司目录
     company_dir = wiki_root / "companies" / "中微公司"
@@ -76,8 +76,8 @@ last_updated: "2026-04-16"
 - [来源](../raw/research/report1.md)
 """
     
-    (company_dir / "wiki" / "公司动态.md").write_text(page1_content)
-    (company_dir / "wiki" / "相关动态.md").write_text(page2_content)
+    (company_dir / "wiki" / "公司动态.md").write_text(page1_content, encoding="utf-8")
+    (company_dir / "wiki" / "相关动态.md").write_text(page2_content, encoding="utf-8")
     
     # 创建带有时间矛盾的页面
     page3_content = """---
@@ -102,7 +102,7 @@ last_updated: "2026-04-15"
 - [来源](../raw/reports/annual2.md)
 """
     
-    (company_dir / "wiki" / "财务数据.md").write_text(page3_content)
+    (company_dir / "wiki" / "财务数据.md").write_text(page3_content, encoding="utf-8")
     
     return wiki_root
 

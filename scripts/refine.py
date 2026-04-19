@@ -25,8 +25,6 @@ import os
 import re
 import sys
 import time
-import urllib.request
-import urllib.error
 from datetime import datetime
 from pathlib import Path
 
@@ -35,6 +33,7 @@ WIKI_ROOT = SCRIPTS_DIR.parent
 CONFIG_PATH = WIKI_ROOT / "config.yaml"
 sys.path.insert(0, str(SCRIPTS_DIR))
 from extract import extract_summary, clean_text
+from llm_client import get_llm_client
 
 
 def load_config():
@@ -43,68 +42,16 @@ def load_config():
         return yaml.safe_load(f)
 
 
-# ── DeepSeek API ──────────────────────────
+# ── LLM 调用 (统一客户端) ──────────────────
 def call_deepseek(prompt, config):
     """
-    调用 DeepSeek Reasoner API。
+    使用统一 LLM 客户端生成摘要。
     返回: (response_text, thinking_text, usage_info)
     """
-    llm_cfg = config.get("llm", {})
-    api_key = llm_cfg.get("api_key", "")
-    model = llm_cfg.get("model", "deepseek-reasoner")
-    base_url = llm_cfg.get("base_url", "https://api.deepseek.com")
-    max_tokens = llm_cfg.get("max_tokens", 1024)
-    temperature = llm_cfg.get("temperature", 0.3)
-
-    url = f"{base_url}/chat/completions"
-    payload = json.dumps({
-        "model": model,
-        "messages": [
-            {
-                "role": "system",
-                "content": (
-                    "你是一个专业的金融分析师助手，负责将新闻内容提炼为简洁的要点摘要。\n"
-                    "要求：\n"
-                    "1. 输出 2-5 个关键要点，每条一行\n"
-                    "2. 每条要点以动词或名词开头，不要用'本文'、'报道'等开头\n"
-                    "3. 包含具体数字、日期、金额等关键数据\n"
-                    "4. 指出事件的意义或影响\n"
-                    "5. 如果原文内容不足以提炼要点，输出'内容不足，待补充'\n"
-                    "6. 直接输出要点列表，不要输出标题或解释"
-                )
-            },
-            {
-                "role": "user",
-                "content": prompt
-            }
-        ],
-        "max_tokens": max_tokens,
-        "temperature": temperature,
-    }).encode("utf-8")
-
-    req = urllib.request.Request(url, data=payload, method="POST")
-    req.add_header("Content-Type", "application/json")
-    req.add_header("Authorization", f"Bearer {api_key}")
-
-    try:
-        with urllib.request.urlopen(req, timeout=60) as resp:
-            data = json.loads(resp.read().decode("utf-8"))
-
-        choice = data.get("choices", [{}])[0]
-        message = choice.get("message", {})
-        response_text = message.get("content", "")
-        thinking_text = message.get("reasoning_content", "")
-        usage = data.get("usage", {})
-
-        return response_text, thinking_text, usage
-
-    except urllib.error.HTTPError as e:
-        body = e.read().decode("utf-8", errors="replace")
-        print(f"  DeepSeek API error {e.code}: {body[:200]}")
-        return "", "", {}
-    except Exception as e:
-        print(f"  DeepSeek request failed: {e}")
-        return "", "", {}
+    llm = get_llm_client()
+    response = llm.generate_summary(prompt)
+    # 返回兼容的三元组
+    return response if response else "", "", {}
 
 
 def build_refine_prompt(entry):

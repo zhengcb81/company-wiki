@@ -81,8 +81,10 @@ search:
         config_file = tmp_path / "config.yaml"
         config_file.write_text(config_content)
         
-        # 移除测试环境变量，启用严格验证
+        # 移除测试环境变量和环境变量中的 API Key，启用严格验证
         monkeypatch.delenv("PYTEST_CURRENT_TEST", raising=False)
+        monkeypatch.delenv("DEEPSEEK_API_KEY", raising=False)
+        monkeypatch.delenv("TAVILY_API_KEY", raising=False)
         
         # 应该抛出 ValueError
         with pytest.raises(ValueError) as exc_info:

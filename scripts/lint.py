@@ -213,7 +213,208 @@ def check_data_freshness(result):
         result.add("WARNING", "freshness", "No news collection found in log")
 
 
-def run_lint(checks=None):
+# ── LLM 驱动的检查 ──────────────────────────
+
+def _get_llm_client():
+    """懒加载 LLM 客户端"""
+    sys.path.insert(0, str(SCRIPTS_DIR))
+    from llm_client import get_llm_client
+    return get_llm_client()
+
+
+def _load_all_wiki_pages():
+    """加载所有 wiki 页面内容，返回 [(relpath, content), ...]"""
+    pages = []
+    for pattern in [
+        f"{WIKI_ROOT}/companies/*/wiki/*.md",
+        f"{WIKI_ROOT}/sectors/*/wiki/*.md",
+        f"{WIKI_ROOT}/themes/*/wiki/*.md",
+    ]:
+        for wiki_file in glob.glob(pattern):
+            content = Path(wiki_file).read_text(encoding="utf-8")
+            relpath = os.path.relpath(wiki_file, WIKI_ROOT)
+            pages.append((relpath, content))
+    return pages
+
+
+def _extract_entity_name(relpath):
+    """从路径提取实体名"""
+    parts = Path(relpath).parts
+    if len(parts) >= 2:
+        return parts[1]  # companies/X/... → X
+    return ""
+
+
+def check_semantic_contradictions(result):
+    """用 LLM 检测语义级矛盾（跨页面不一致陈述）"""
+    pages = _load_all_wiki_pages()
+    # 按实体分组，只检查有多个页面的实体
+    from collections import defaultdict
+    by_entity = defaultdict(list)
+    for relpath, content in pages:
+        entity = _extract_entity_name(relpath)
+        if entity:
+            by_entity[entity].append((relpath, content))
+
+    client = _get_llm_client()
+
+    for entity, entity_pages in by_entity.items():
+        if len(entity_pages) < 2:
+            continue
+        # 拼接同一实体的所有页面摘要
+        combined = ""
+        for relpath, content in entity_pages:
+            # 只取时间线部分的前 1500 字
+            tl_start = content.find("## 时间线")
+            if tl_start >= 0:
+                combined += f"\n--- {relpath} ---\n{content[tl_start:tl_start+1500]}\n"
+
+        if len(combined) < 200:
+            continue
+
+        prompt = f"""检查以下关于"{entity}"的多条信息中是否存在矛盾或不一致的陈述。
+只报告明确的矛盾（同一事实有不同说法），忽略时间变化导致的数据更新。
+
+{combined}
+
+请用以下格式输出，每行一条矛盾：
+矛盾: [简要描述矛盾] | 页面1: [陈述1] | 页面2: [陈述2]
+
+如果没有矛盾，输出: 无矛盾"""
+
+        try:
+            response = client.chat(prompt, max_tokens=512)
+            if response and "无矛盾" not in response:
+                for line in response.strip().split("\n"):
+                    line = line.strip()
+                    if line.startswith("矛盾:") or line.startswith("矛盾："):
+                        result.add("WARNING", "semantic",
+                                  line.replace("矛盾:", "").replace("矛盾：", "").strip(),
+                                  entity)
+        except Exception as e:
+            result.add("INFO", "semantic", f"LLM check skipped for {entity}: {e}")
+
+
+def discover_missing_concepts(result):
+    """发现被提及但未建立 wiki 页面的重要概念"""
+    pages = _load_all_wiki_pages()
+
+    # 收集已有页面名
+    existing_pages = set()
+    for relpath, _ in pages:
+        basename = Path(relpath).stem
+        existing_pages.add(basename)
+        entity = _extract_entity_name(relpath)
+        if entity:
+            existing_pages.add(entity)
+
+    # 从 graph.yaml 获取所有实体
+    import yaml
+    graph_path = WIKI_ROOT / "graph.yaml"
+    if not graph_path.exists():
+        result.add("INFO", "missing", "graph.yaml not found, skipping concept discovery")
+        return
+
+    with open(graph_path, "r", encoding="utf-8") as f:
+        graph_data = yaml.safe_load(f)
+
+    graph_entities = set()
+    for comp_name in graph_data.get("companies", {}):
+        graph_entities.add(comp_name)
+    for sector_name in graph_data.get("sectors", {}):
+        graph_entities.add(sector_name)
+    for theme_name in graph_data.get("themes", {}):
+        graph_entities.add(theme_name)
+
+    # 检查 graph.yaml 中有但 wiki 中没有页面的实体
+    for entity in graph_entities:
+        if entity not in existing_pages:
+            result.add("INFO", "missing",
+                      f"Entity in graph.yaml but no wiki page: {entity}")
+
+    # 用 LLM 抽取前 20 个页面中频繁提及但未建页的概念
+    client = _get_llm_client()
+    sample_pages = pages[:20]
+    combined = ""
+    for relpath, content in sample_pages:
+        tl_start = content.find("## 时间线")
+        if tl_start >= 0:
+            combined += f"\n--- {relpath} ---\n{content[tl_start:tl_start+800]}\n"
+
+    if len(combined) < 200:
+        return
+
+    prompt = f"""分析以下 wiki 内容，找出被频繁提及但可能需要独立 wiki 页面的重要概念（如技术、产品、事件）。
+排除已有页面的实体: {', '.join(list(graph_entities)[:30])}
+
+{combined[:4000]}
+
+请列出最多5个值得创建独立页面的概念，每行一个：
+概念: [名称] | 理由: [为什么需要独立页面]
+
+如果没有明显缺失，输出: 无缺失概念"""
+
+    try:
+        response = client.chat(prompt, max_tokens=512)
+        if response and "无缺失概念" not in response:
+            for line in response.strip().split("\n"):
+                line = line.strip()
+                if line.startswith("概念:") or line.startswith("概念："):
+                    result.add("INFO", "missing",
+                              line.replace("概念:", "").replace("概念：", "").strip())
+    except Exception as e:
+        result.add("INFO", "missing", f"LLM concept discovery skipped: {e}")
+
+
+def check_claim_freshness(result):
+    """用 LLM 判断哪些结论可能已过时"""
+    pages = _load_all_wiki_pages()
+    cutoff = (datetime.now() - timedelta(days=60)).strftime("%Y-%m-%d")
+
+    # 筛选 60 天以上未更新的页面
+    stale_pages = []
+    for relpath, content in pages:
+        match = re.search(r'last_updated:\s*"?(\d{4}-\d{2}-\d{2})"?', content)
+        if match and match.group(1) < cutoff:
+            stale_pages.append((relpath, content))
+
+    if not stale_pages:
+        result.add("INFO", "freshness_llm", "All pages are reasonably fresh")
+        return
+
+    client = _get_llm_client()
+
+    for relpath, content in stale_pages[:15]:
+        # 提取综合评估部分
+        eval_start = content.find("## 综合评估")
+        if eval_start < 0:
+            continue
+        eval_section = content[eval_start:eval_start+500]
+
+        prompt = f"""以下是一段关于某公司的综合评估，最后更新时间较早。
+判断其中哪些结论可能已经过时或需要更新。只列出明显可能过时的结论。
+
+{eval_section}
+
+请用以下格式输出：
+过时: [结论] | 原因: [为什么可能过时]
+
+如果没有明显过时的结论，输出: 无过时结论"""
+
+        try:
+            response = client.chat(prompt, max_tokens=256)
+            if response and "无过时结论" not in response:
+                for line in response.strip().split("\n"):
+                    line = line.strip()
+                    if line.startswith("过时:") or line.startswith("过时："):
+                        result.add("WARNING", "freshness_llm",
+                                  line.replace("过时:", "").replace("过时：", "").strip(),
+                                  relpath)
+        except Exception as e:
+            result.add("INFO", "freshness_llm", f"LLM freshness check skipped for {relpath}: {e}")
+
+
+def run_lint(checks=None, use_llm=False):
     """运行指定的检查项"""
     result = LintResult()
     config = load_config()
@@ -226,6 +427,11 @@ def run_lint(checks=None):
         'config': lambda: check_config_consistency(result, config),
         'freshness': lambda: check_data_freshness(result),
     }
+
+    if use_llm:
+        all_checks['semantic'] = lambda: check_semantic_contradictions(result)
+        all_checks['missing'] = lambda: discover_missing_concepts(result)
+        all_checks['freshness_llm'] = lambda: check_claim_freshness(result)
 
     if checks is None or 'all' in checks:
         checks = list(all_checks.keys())
@@ -240,12 +446,14 @@ def run_lint(checks=None):
 def main():
     parser = argparse.ArgumentParser(description="知识库健康检查")
     parser.add_argument("--check", type=str, default="all",
-                        help="检查项: all|stale|orphans|empty|links|config|freshness")
+                        help="检查项: all|stale|orphans|empty|links|config|freshness|semantic|missing|freshness_llm")
+    parser.add_argument("--llm", action="store_true",
+                        help="启用 LLM 驱动的检查 (semantic, missing, freshness_llm)")
     parser.add_argument("--json", action="store_true", help="输出 JSON 格式")
     args = parser.parse_args()
 
     checks = args.check.split(",") if args.check != "all" else ["all"]
-    result = run_lint(checks)
+    result = run_lint(checks, use_llm=args.llm)
 
     if args.json:
         import json

@@ -237,6 +237,10 @@ class Graph:
                     related.update(self._expand_sector_topics(s))
                 for t in comp.get("themes", []):
                     related.update(self._expand_theme_topics(t))
+                # 1b. 关联竞争者（竞争者的"相关动态"也会被更新）
+                for competitor in comp.get("competes_with", []):
+                    if self.get_company(competitor):
+                        related.add((competitor, "company", "相关动态"))
 
         # 2. 关键词匹配行业/主题
         for keyword, (entity_name, entity_type) in self._keyword_index.items():

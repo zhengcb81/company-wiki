@@ -165,7 +165,7 @@ edges:
   - from: 半导体设备
     to: 半导体代工
     type: upstream_of
-""")
+""", encoding="utf-8")
         
         loader = GraphLoader(graph_yaml)
         data = loader.load()
@@ -196,7 +196,7 @@ edges:
         
         # 验证内容
         import yaml
-        with open(graph_yaml) as f:
+        with open(graph_yaml, encoding="utf-8") as f:
             content = yaml.safe_load(f)
         
         assert "nodes" in content
@@ -212,7 +212,7 @@ nodes:
   半导体设备:
     type: sector
     description: 半导体制造设备
-""")
+""", encoding="utf-8")
         
         loader = GraphLoader(graph_yaml)
         data = loader.load()
