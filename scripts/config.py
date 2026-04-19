@@ -99,7 +99,7 @@ class PathsConfig:
     """路径配置"""
     wiki_root: Path = Path.home() / "company-wiki"
     downloader_dir: Path = Path.home() / "StockInfoDownloader"
-    windows_downloads: Path = Path("/mnt/c/Users/郑曾波/Projects/StockInfoDownloader/downloads")
+    windows_downloads: Path = Path.home() / "StockInfoDownloader" / "downloads"
 
 
 @dataclass
@@ -224,7 +224,7 @@ class Config:
         paths = PathsConfig(
             wiki_root=wiki_root,
             downloader_dir=Path(os.path.expanduser("~/StockInfoDownloader")),
-            windows_downloads=Path("/mnt/c/Users/郑曾波/Projects/StockInfoDownloader/downloads"),
+            windows_downloads=Path(os.path.expanduser("~/StockInfoDownloader/downloads")),
         )
         
         return Config(

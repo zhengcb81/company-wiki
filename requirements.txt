@@ -1,4 +1,10 @@
-# Runtime dependencies
+# Runtime dependencies (also in pyproject.toml)
 pyyaml>=6.0
 requests>=2.28.0
 openai>=1.0.0
+
+# Optional: PDF extraction
+PyMuPDF>=1.23.0
+
+# Optional: direct download from cninfo
+playwright>=1.40.0

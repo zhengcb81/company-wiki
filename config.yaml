@@ -29,7 +29,7 @@ search:
 
 # ── StockInfoDownloader 配置 ──────────────
 report_downloader:
-  tool_path: "C:/Users/郑曾波/Projects/StockInfoDownloader"
+  tool_path: "~/StockInfoDownloader"
   save_dir: "~/company-wiki/companies"
   browser_strategy: "playwright"
   pages:

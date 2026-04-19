@@ -4,7 +4,7 @@ ingest.py — 主 Ingest 入口 (推荐)
 扫描 raw/ 目录下的新文件，整理到 wiki 时间线中。
 
 注意: 此脚本是规则驱动的 ingest。
-对于 LLM 增强模式，参见 llm_ingest.py (类式) 或 ingest_with_llm.py (函数式)。
+对于 LLM 增强模式，参见 ingest_with_llm.py。
 
 用法：
     python3 scripts/ingest.py                       # 处理所有待 ingest 的文件
@@ -299,6 +299,8 @@ def add_timeline_entry(wiki_path, meta, topic_name, entity_type):
         meta["_path"],
         str(wiki_path.parent)
     )
+    # 统一路径分隔符为正斜杠
+    relative_path = relative_path.replace("\\", "/")
 
     entry = f"""
 ### {published} | {source_type} | {title}
@@ -312,6 +314,15 @@ def add_timeline_entry(wiki_path, meta, topic_name, entity_type):
         wiki_text = wiki_path.read_text(encoding="utf-8")
     else:
         return False
+
+    # 去重检查：检查是否已有相同日期+标题的条目
+    title_clean = re.sub(r'\[\[([^]]+)\]\]', r'\1', title)
+    dedup_pattern = re.compile(
+        rf'^###\s+{re.escape(published)}\s*\|[^|]+\|\s*{re.escape(title_clean)}\s*$',
+        re.MULTILINE
+    )
+    if dedup_pattern.search(wiki_text):
+        return False  # 已存在，跳过
 
     # 找到 "## 时间线" 的位置
     timeline_pos = wiki_text.find("## 时间线")
@@ -435,9 +446,27 @@ def is_low_quality_source(file_path, meta):
     return False
 
 
+def has_mojibake(text):
+    """检测文本是否包含乱码（mojibake），避免将损坏内容入库"""
+    if not text:
+        return False
+    if '\ufffd' in text:
+        return True
+    if re.search(r'[\u00c0-\u00ff]{4,}', text):
+        return True
+    return False
+
+
 def process_file(file_path, entity_name, entity_type, graph, dry_run=False):
     """处理单个待 ingest 文件"""
     meta = read_news_metadata(file_path)
+
+    # 编码质量门禁：跳过乱码内容
+    if has_mojibake(meta.get("_content", "")) or has_mojibake(meta.get("title", "")):
+        print(f"  SKIP (encoding): {meta.get('title', '')[:50]}")
+        if not dry_run:
+            mark_ingested(file_path)
+        return []
 
     # 质量过滤：跳过低质量来源
     if is_low_quality_source(file_path, meta):

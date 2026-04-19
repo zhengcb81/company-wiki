@@ -157,6 +157,19 @@ def load_existing_urls(news_dir):
     return urls
 
 
+def has_mojibake(text):
+    """检测文本是否包含乱码（mojibake），避免将损坏内容入库"""
+    if not text:
+        return False
+    # Unicode replacement character（UTF-8 解码失败的标志）
+    if '\ufffd' in text:
+        return True
+    # 连续的 Latin-1 补充字符（常见于 UTF-8 被错误解读为 Latin-1）
+    if re.search(r'[\u00c0-\u00ff]{4,}', text):
+        return True
+    return False
+
+
 def save_news_item(company_name, result, news_dir):
     """
     将一条搜索结果保存为 markdown 文件。
@@ -166,6 +179,10 @@ def save_news_item(company_name, result, news_dir):
     url = result.get("url", "")
     content = result.get("content", "")
     published = result.get("published_date", "")
+
+    # 编码质量门禁：跳过乱码内容
+    if has_mojibake(content) or has_mojibake(title):
+        return False
 
     # 解析日期
     if published:

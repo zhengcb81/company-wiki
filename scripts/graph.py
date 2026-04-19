@@ -250,15 +250,11 @@ class Graph:
                 elif entity_type == "theme":
                     related.update(self._expand_theme_topics(entity_name))
 
-        # 3. 公司名匹配
+        # 3. 公司名匹配（仅关联到该公司的"相关动态"，不级联到行业）
+        # 原因：如果一篇文章只是顺带提到某公司，不应因此被归入该公司的行业wiki
         for comp_name in self._data.get("companies", {}):
             if comp_name in text and comp_name != company_hint:
                 related.add((comp_name, "company", "相关动态"))
-                # 也关联到该公司的行业
-                comp = self.get_company(comp_name)
-                if comp:
-                    for s in comp.get("sectors", []):
-                        related.update(self._expand_sector_topics(s))
 
         return list(related)
 
