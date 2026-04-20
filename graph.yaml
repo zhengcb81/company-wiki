@@ -373,6 +373,10 @@ companies:
     themes:
     - AI产业链
     position: 全球GPU绝对龙头，AI训练市场>80%份额
+    competes_with:
+    - AMD
+    - 寒武纪
+    - 海光信息
     news_queries:
     - 英伟达 最新消息
     - NVIDIA news
@@ -405,6 +409,9 @@ companies:
     themes:
     - AI产业链
     position: 国产AI芯片龙头，思元系列
+    competes_with:
+    - 英伟达
+    - 海光信息
     news_queries:
     - 寒武纪 最新消息
     aliases:
@@ -419,6 +426,9 @@ companies:
     themes:
     - AI产业链
     position: 国产GPU替代，深算系列DCU
+    competes_with:
+    - 英伟达
+    - 寒武纪
     news_queries:
     - 海光信息 最新消息
     aliases:
@@ -449,6 +459,9 @@ companies:
     - AI产业链
     - 半导体国产替代
     position: 国产半导体设备龙头，产品线最全
+    competes_with:
+    - 中微公司
+    - 拓荆科技
     news_queries:
     - 北方华创 最新消息
     aliases:
@@ -464,6 +477,8 @@ companies:
     - AI产业链
     - 半导体国产替代
     position: 刻蚀设备龙头，CCP/ICP全覆盖
+    competes_with:
+    - 北方华创
     news_queries:
     - 中微公司 最新消息
     - 中微半导体 新闻
@@ -484,6 +499,8 @@ companies:
     - AI产业链
     - 半导体国产替代
     position: CVD设备龙头
+    competes_with:
+    - 北方华创
     news_queries:
     - 拓荆科技 最新消息
     aliases:
@@ -594,6 +611,9 @@ companies:
     themes:
     - AI产业链
     position: 全球晶圆代工绝对龙头，先进制程垄断
+    competes_with:
+    - 中芯国际
+    - 华虹半导体
     news_queries:
     - 台积电 最新消息
     - TSMC news
@@ -610,6 +630,9 @@ companies:
     - AI产业链
     - 半导体国产替代
     position: 国内代工龙头，N+2工艺量产
+    competes_with:
+    - 台积电
+    - 华虹半导体
     news_queries:
     - 中芯国际 最新消息
     aliases:
@@ -653,6 +676,8 @@ companies:
     - AI产业链
     - 半导体国产替代
     position: 国内封测龙头，CoWoS先进封装布局
+    competes_with:
+    - 通富微电
     news_queries:
     - 长电科技 最新消息
     aliases:
@@ -668,6 +693,8 @@ companies:
     - AI产业链
     - 半导体国产替代
     position: AMD先进封装合作伙伴
+    competes_with:
+    - 长电科技
     news_queries:
     - 通富微电 最新消息
     aliases:
@@ -694,6 +721,9 @@ companies:
     themes:
     - AI产业链
     position: 全球光模块龙头，800G/1.6T领先
+    competes_with:
+    - 新易盛
+    - 光迅科技
     news_queries:
     - 中际旭创 最新消息
     aliases:
@@ -706,6 +736,9 @@ companies:
     themes:
     - AI产业链
     position: 高速光模块核心供应商
+    competes_with:
+    - 中际旭创
+    - 光迅科技
     news_queries:
     - 新易盛 最新消息
     aliases:
@@ -922,6 +955,9 @@ companies:
     themes:
     - AI产业链
     position: 文心大模型，AI搜索/驾驶
+    competes_with:
+    - 科大讯飞
+    - 商汤科技
     news_queries:
     - 百度 最新消息
     - Baidu AI news
@@ -951,6 +987,9 @@ companies:
     themes:
     - AI产业链
     position: 讯飞星火大模型，语音AI龙头
+    competes_with:
+    - 百度
+    - 商汤科技
     news_queries:
     - 科大讯飞 最新消息
     aliases:
@@ -1076,3 +1115,91 @@ settings:
   - 中国医学装备
   - 世界人工智能
   - 促进感知智能
+
+  # 关键词特异性配置
+  # 特异性分数 0.0-1.0：0=最泛，1=最特异
+  # < min_specificity_threshold 的关键词不参与匹配
+  keyword_meta:
+    default_specificity: 0.5
+    min_specificity_threshold: 0.3
+    specificity_overrides:
+      # ── 太泛（<0.3，被过滤）──
+      检测: 0.1
+      发展: 0.1
+      增长: 0.1
+      技术: 0.1
+      竞争: 0.1
+      创新: 0.1
+      产能: 0.1
+      市场: 0.1
+      供应链: 0.1
+      国产: 0.15
+      半导体: 0.2
+      芯片: 0.2
+      # ── 中等特异性（0.3-0.6）──
+      代工: 0.35
+      封装: 0.4
+      晶圆: 0.4
+      Foundry: 0.4
+      前道设备: 0.45
+      晶圆设备: 0.45
+      芯片材料: 0.45
+      晶圆材料: 0.45
+      芯片设备: 0.45
+      芯片代工: 0.45
+      晶圆代工: 0.45
+      半导体代工: 0.5
+      半导体材料: 0.5
+      半导体设备: 0.5
+      液冷: 0.5
+      光模块: 0.55
+      储能: 0.55
+      算力: 0.55
+      芯片设计: 0.55
+      IP核: 0.55
+      清洗: 0.55
+      # ── 高特异性（0.6-0.8）──
+      刻蚀: 0.7
+      光刻: 0.7
+      薄膜: 0.7
+      CMP: 0.7
+      EDA: 0.7
+      硅片: 0.65
+      光刻胶: 0.7
+      电子特气: 0.7
+      靶材: 0.7
+      密封: 0.65
+      加速卡: 0.65
+      GPU: 0.65
+      NPU: 0.7
+      TPU: 0.7
+      AI芯片: 0.7
+      AI处理器: 0.7
+      先进封装: 0.75
+      封装测试: 0.7
+      # ── 极高特异性（0.8+）──
+      CoWoS: 0.95
+      HBM: 0.95
+      EUV: 0.95
+      DUV: 0.9
+      CMP设备: 0.9
+      EDA与IP: 0.85
+      光刻设备: 0.85
+      刻蚀设备: 0.85
+      薄膜沉积设备: 0.85
+      清洗设备: 0.85
+      量检测设备: 0.85
+      靶材CMP: 0.85
+      AI产业链: 0.9
+      半导体国产替代: 0.9
+      高端制造: 0.8
+
+  # 相关性匹配权重
+  relevance_weights:
+    company_hint: 1.0
+    sector_cascade: 0.5
+    keyword_max: 0.7
+    company_mention: 0.3
+    min_score_threshold: 0.3
+    prominent_mention_chars: 500
+    prominent_mention_count: 3

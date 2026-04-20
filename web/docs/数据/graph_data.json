@@ -1,0 +1,2308 @@
+{
+  "nodes": [
+    {
+      "id": "AI产业链",
+      "label": "AI产业链",
+      "type": "theme",
+      "tier": 99,
+      "tier_label": "",
+      "description": "从芯片到应用的完整AI产业链",
+      "color": {
+        "background": "#FF6B00",
+        "border": "#E65100"
+      },
+      "font": {
+        "size": 20,
+        "bold": true
+      },
+      "size": 40
+    },
+    {
+      "id": "GPU与AI芯片",
+      "label": "GPU与AI芯片",
+      "type": "sector",
+      "tier": 3,
+      "tier_label": "核心器件层",
+      "description": "AI训练/推理用GPU、NPU、TPU等专用芯片",
+      "color": {
+        "background": "#2196F3",
+        "border": "#1565C0"
+      },
+      "font": {
+        "size": 16,
+        "bold": true
+      },
+      "size": 30
+    },
+    {
+      "id": "半导体设备",
+      "label": "半导体设备",
+      "type": "sector",
+      "tier": 5,
+      "tier_label": "上游基础层",
+      "description": "半导体制造设备：刻蚀、薄膜、清洗、检测、光刻等",
+      "color": {
+        "background": "#2196F3",
+        "border": "#1565C0"
+      },
+      "font": {
+        "size": 16,
+        "bold": true
+      },
+      "size": 30
+    },
+    {
+      "id": "半导体材料",
+      "label": "半导体材料",
+      "type": "sector",
+      "tier": 5,
+      "tier_label": "上游基础层",
+      "description": "硅片、光刻胶、靶材、电子特气、CMP材料等",
+      "color": {
+        "background": "#2196F3",
+        "border": "#1565C0"
+      },
+      "font": {
+        "size": 16,
+        "bold": true
+      },
+      "size": 30
+    },
+    {
+      "id": "半导体代工",
+      "label": "半导体代工",
+      "type": "sector",
+      "tier": 4,
+      "tier_label": "制造层",
+      "description": "晶圆代工制造",
+      "color": {
+        "background": "#2196F3",
+        "border": "#1565C0"
+      },
+      "font": {
+        "size": 16,
+        "bold": true
+      },
+      "size": 30
+    },
+    {
+      "id": "封测",
+      "label": "封测",
+      "type": "sector",
+      "tier": 3,
+      "tier_label": "核心器件层",
+      "description": "芯片封装与测试，包括先进封装(CoWoS, HBM)",
+      "color": {
+        "background": "#2196F3",
+        "border": "#1565C0"
+      },
+      "font": {
+        "size": 16,
+        "bold": true
+      },
+      "size": 30
+    },
+    {
+      "id": "EDA与IP",
+      "label": "EDA与IP",
+      "type": "sector",
+      "tier": 4,
+      "tier_label": "制造层",
+      "description": "芯片设计工具和IP核",
+      "color": {
+        "background": "#2196F3",
+        "border": "#1565C0"
+      },
+      "font": {
+        "size": 16,
+        "bold": true
+      },
+      "size": 30
+    },
+    {
+      "id": "光模块",
+      "label": "光模块",
+      "type": "sector",
+      "tier": 2,
+      "tier_label": "基础设施层",
+      "description": "数据中心光通信模块，AI算力互联核心",
+      "color": {
+        "background": "#2196F3",
+        "border": "#1565C0"
+      },
+      "font": {
+        "size": 16,
+        "bold": true
+      },
+      "size": 30
+    },
+    {
+      "id": "液冷",
+      "label": "液冷",
+      "type": "sector",
+      "tier": 2,
+      "tier_label": "基础设施层",
+      "description": "AI服务器液冷散热解决方案",
+      "color": {
+        "background": "#2196F3",
+        "border": "#1565C0"
+      },
+      "font": {
+        "size": 16,
+        "bold": true
+      },
+      "size": 30
+    },
+    {
+      "id": "算力基建",
+      "label": "算力基建",
+      "type": "sector",
+      "tier": 2,
+      "tier_label": "基础设施层",
+      "description": "AI服务器整机、数据中心建设、算力租赁",
+      "color": {
+        "background": "#2196F3",
+        "border": "#1565C0"
+      },
+      "font": {
+        "size": 16,
+        "bold": true
+      },
+      "size": 30
+    },
+    {
+      "id": "电力基建",
+      "label": "电力基建",
+      "type": "sector",
+      "tier": 1,
+      "tier_label": "支撑层",
+      "description": "数据中心电力供应：发电设备、储能、输配电、UPS",
+      "color": {
+        "background": "#2196F3",
+        "border": "#1565C0"
+      },
+      "font": {
+        "size": 16,
+        "bold": true
+      },
+      "size": 30
+    },
+    {
+      "id": "AI应用",
+      "label": "AI应用",
+      "type": "sector",
+      "tier": 0,
+      "tier_label": "应用层",
+      "description": "大模型、AI Agent、行业AI应用",
+      "color": {
+        "background": "#2196F3",
+        "border": "#1565C0"
+      },
+      "font": {
+        "size": 16,
+        "bold": true
+      },
+      "size": 30
+    },
+    {
+      "id": "刻蚀设备",
+      "label": "刻蚀设备",
+      "type": "subsector",
+      "tier": 99,
+      "tier_label": "",
+      "description": "",
+      "color": {
+        "background": "#64B5F6",
+        "border": "#42A5F5"
+      },
+      "font": {
+        "size": 13
+      },
+      "size": 20
+    },
+    {
+      "id": "薄膜沉积设备",
+      "label": "薄膜沉积设备",
+      "type": "subsector",
+      "tier": 99,
+      "tier_label": "",
+      "description": "",
+      "color": {
+        "background": "#64B5F6",
+        "border": "#42A5F5"
+      },
+      "font": {
+        "size": 13
+      },
+      "size": 20
+    },
+    {
+      "id": "量检测设备",
+      "label": "量检测设备",
+      "type": "subsector",
+      "tier": 99,
+      "tier_label": "",
+      "description": "",
+      "color": {
+        "background": "#64B5F6",
+        "border": "#42A5F5"
+      },
+      "font": {
+        "size": 13
+      },
+      "size": 20
+    },
+    {
+      "id": "光刻设备",
+      "label": "光刻设备",
+      "type": "subsector",
+      "tier": 99,
+      "tier_label": "",
+      "description": "",
+      "color": {
+        "background": "#64B5F6",
+        "border": "#42A5F5"
+      },
+      "font": {
+        "size": 13
+      },
+      "size": 20
+    },
+    {
+      "id": "清洗设备",
+      "label": "清洗设备",
+      "type": "subsector",
+      "tier": 99,
+      "tier_label": "",
+      "description": "",
+      "color": {
+        "background": "#64B5F6",
+        "border": "#42A5F5"
+      },
+      "font": {
+        "size": 13
+      },
+      "size": 20
+    },
+    {
+      "id": "CMP设备",
+      "label": "CMP设备",
+      "type": "subsector",
+      "tier": 99,
+      "tier_label": "",
+      "description": "",
+      "color": {
+        "background": "#64B5F6",
+        "border": "#42A5F5"
+      },
+      "font": {
+        "size": 13
+      },
+      "size": 20
+    },
+    {
+      "id": "硅片",
+      "label": "硅片",
+      "type": "subsector",
+      "tier": 99,
+      "tier_label": "",
+      "description": "",
+      "color": {
+        "background": "#64B5F6",
+        "border": "#42A5F5"
+      },
+      "font": {
+        "size": 13
+      },
+      "size": 20
+    },
+    {
+      "id": "光刻胶",
+      "label": "光刻胶",
+      "type": "subsector",
+      "tier": 99,
+      "tier_label": "",
+      "description": "",
+      "color": {
+        "background": "#64B5F6",
+        "border": "#42A5F5"
+      },
+      "font": {
+        "size": 13
+      },
+      "size": 20
+    },
+    {
+      "id": "电子特气",
+      "label": "电子特气",
+      "type": "subsector",
+      "tier": 99,
+      "tier_label": "",
+      "description": "",
+      "color": {
+        "background": "#64B5F6",
+        "border": "#42A5F5"
+      },
+      "font": {
+        "size": 13
+      },
+      "size": 20
+    },
+    {
+      "id": "靶材CMP",
+      "label": "靶材CMP",
+      "type": "subsector",
+      "tier": 99,
+      "tier_label": "",
+      "description": "",
+      "color": {
+        "background": "#64B5F6",
+        "border": "#42A5F5"
+      },
+      "font": {
+        "size": 13
+      },
+      "size": 20
+    },
+    {
+      "id": "发电设备",
+      "label": "发电设备",
+      "type": "subsector",
+      "tier": 99,
+      "tier_label": "",
+      "description": "",
+      "color": {
+        "background": "#64B5F6",
+        "border": "#42A5F5"
+      },
+      "font": {
+        "size": 13
+      },
+      "size": 20
+    },
+    {
+      "id": "储能",
+      "label": "储能",
+      "type": "subsector",
+      "tier": 99,
+      "tier_label": "",
+      "description": "",
+      "color": {
+        "background": "#64B5F6",
+        "border": "#42A5F5"
+      },
+      "font": {
+        "size": 13
+      },
+      "size": 20
+    },
+    {
+      "id": "输配电",
+      "label": "输配电",
+      "type": "subsector",
+      "tier": 99,
+      "tier_label": "",
+      "description": "",
+      "color": {
+        "background": "#64B5F6",
+        "border": "#42A5F5"
+      },
+      "font": {
+        "size": 13
+      },
+      "size": 20
+    },
+    {
+      "id": "密封件",
+      "label": "密封件",
+      "type": "sector",
+      "tier": 4,
+      "tier_label": "制造层",
+      "description": "高端密封件行业，应用于石化、核电、航空航天等领域",
+      "color": {
+        "background": "#2196F3",
+        "border": "#1565C0"
+      },
+      "font": {
+        "size": 16,
+        "bold": true
+      },
+      "size": 30
+    },
+    {
+      "id": "高端制造",
+      "label": "高端制造",
+      "type": "theme",
+      "tier": 99,
+      "tier_label": "",
+      "description": "高端制造业国产替代与技术升级",
+      "color": {
+        "background": "#FF6B00",
+        "border": "#E65100"
+      },
+      "font": {
+        "size": 20,
+        "bold": true
+      },
+      "size": 40
+    },
+    {
+      "id": "英伟达",
+      "label": "英伟达\nNVDA",
+      "type": "company",
+      "ticker": "NVDA",
+      "exchange": "NASDAQ",
+      "position": "全球GPU绝对龙头，AI训练市场>80%份额",
+      "sectors": [
+        "GPU与AI芯片"
+      ],
+      "color": {
+        "background": "#4CAF50",
+        "border": "#2E7D32"
+      },
+      "font": {
+        "size": 12
+      },
+      "size": 15
+    },
+    {
+      "id": "AMD",
+      "label": "AMD\nAMD",
+      "type": "company",
+      "ticker": "AMD",
+      "exchange": "NASDAQ",
+      "position": "GPU第二梯队，MI300系列挑战英伟达",
+      "sectors": [
+        "GPU与AI芯片"
+      ],
+      "color": {
+        "background": "#4CAF50",
+        "border": "#2E7D32"
+      },
+      "font": {
+        "size": 12
+      },
+      "size": 15
+    },
+    {
+      "id": "寒武纪",
+      "label": "寒武纪\n688256",
+      "type": "company",
+      "ticker": "688256",
+      "exchange": "SSE STAR",
+      "position": "国产AI芯片龙头，思元系列",
+      "sectors": [
+        "GPU与AI芯片"
+      ],
+      "color": {
+        "background": "#4CAF50",
+        "border": "#2E7D32"
+      },
+      "font": {
+        "size": 12
+      },
+      "size": 15
+    },
+    {
+      "id": "海光信息",
+      "label": "海光信息\n688041",
+      "type": "company",
+      "ticker": "688041",
+      "exchange": "SSE STAR",
+      "position": "国产GPU替代，深算系列DCU",
+      "sectors": [
+        "GPU与AI芯片"
+      ],
+      "color": {
+        "background": "#4CAF50",
+        "border": "#2E7D32"
+      },
+      "font": {
+        "size": 12
+      },
+      "size": 15
+    },
+    {
+      "id": "景嘉微",
+      "label": "景嘉微\n300474",
+      "type": "company",
+      "ticker": "300474",
+      "exchange": "SZSE",
+      "position": "国产GPU，JM9系列",
+      "sectors": [
+        "GPU与AI芯片"
+      ],
+      "color": {
+        "background": "#4CAF50",
+        "border": "#2E7D32"
+      },
+      "font": {
+        "size": 12
+      },
+      "size": 15
+    },
+    {
+      "id": "北方华创",
+      "label": "北方华创\n002371",
+      "type": "company",
+      "ticker": "002371",
+      "exchange": "SZSE",
+      "position": "国产半导体设备龙头，产品线最全",
+      "sectors": [
+        "半导体设备",
+        "刻蚀设备",
+        "薄膜沉积设备",
+        "清洗设备"
+      ],
+      "color": {
+        "background": "#4CAF50",
+        "border": "#2E7D32"
+      },
+      "font": {
+        "size": 12
+      },
+      "size": 15
+    },
+    {
+      "id": "中微公司",
+      "label": "中微公司\n688012",
+      "type": "company",
+      "ticker": "688012",
+      "exchange": "SSE STAR",
+      "position": "刻蚀设备龙头，CCP/ICP全覆盖",
+      "sectors": [
+        "半导体设备",
+        "刻蚀设备"
+      ],
+      "color": {
+        "background": "#4CAF50",
+        "border": "#2E7D32"
+      },
+      "font": {
+        "size": 12
+      },
+      "size": 15
+    },
+    {
+      "id": "拓荆科技",
+      "label": "拓荆科技\n688072",
+      "type": "company",
+      "ticker": "688072",
+      "exchange": "SSE STAR",
+      "position": "CVD设备龙头",
+      "sectors": [
+        "半导体设备",
+        "薄膜沉积设备"
+      ],
+      "color": {
+        "background": "#4CAF50",
+        "border": "#2E7D32"
+      },
+      "font": {
+        "size": 12
+      },
+      "size": 15
+    },
+    {
+      "id": "盛美上海",
+      "label": "盛美上海\n688082",
+      "type": "company",
+      "ticker": "688082",
+      "exchange": "SSE STAR",
+      "position": "清洗设备龙头",
+      "sectors": [
+        "半导体设备",
+        "清洗设备"
+      ],
+      "color": {
+        "background": "#4CAF50",
+        "border": "#2E7D32"
+      },
+      "font": {
+        "size": 12
+      },
+      "size": 15
+    },
+    {
+      "id": "华海清科",
+      "label": "华海清科\n688120",
+      "type": "company",
+      "ticker": "688120",
+      "exchange": "SSE STAR",
+      "position": "CMP设备国产龙头",
+      "sectors": [
+        "半导体设备",
+        "CMP设备"
+      ],
+      "color": {
+        "background": "#4CAF50",
+        "border": "#2E7D32"
+      },
+      "font": {
+        "size": 12
+      },
+      "size": 15
+    },
+    {
+      "id": "精测电子",
+      "label": "精测电子\n300567",
+      "type": "company",
+      "ticker": "300567",
+      "exchange": "SZSE",
+      "position": "量检测设备龙头",
+      "sectors": [
+        "半导体设备",
+        "量检测设备"
+      ],
+      "color": {
+        "background": "#4CAF50",
+        "border": "#2E7D32"
+      },
+      "font": {
+        "size": 12
+      },
+      "size": 15
+    },
+    {
+      "id": "沪硅产业",
+      "label": "沪硅产业\n688126",
+      "type": "company",
+      "ticker": "688126",
+      "exchange": "SSE STAR",
+      "position": "大硅片国产龙头",
+      "sectors": [
+        "半导体材料",
+        "硅片"
+      ],
+      "color": {
+        "background": "#4CAF50",
+        "border": "#2E7D32"
+      },
+      "font": {
+        "size": 12
+      },
+      "size": 15
+    },
+    {
+      "id": "南大光电",
+      "label": "南大光电\n300346",
+      "type": "company",
+      "ticker": "300346",
+      "exchange": "SZSE",
+      "position": "ArF光刻胶国产突破",
+      "sectors": [
+        "半导体材料",
+        "光刻胶"
+      ],
+      "color": {
+        "background": "#4CAF50",
+        "border": "#2E7D32"
+      },
+      "font": {
+        "size": 12
+      },
+      "size": 15
+    },
+    {
+      "id": "华特气体",
+      "label": "华特气体\n688268",
+      "type": "company",
+      "ticker": "688268",
+      "exchange": "SSE STAR",
+      "position": "电子特气国产龙头",
+      "sectors": [
+        "半导体材料",
+        "电子特气"
+      ],
+      "color": {
+        "background": "#4CAF50",
+        "border": "#2E7D32"
+      },
+      "font": {
+        "size": 12
+      },
+      "size": 15
+    },
+    {
+      "id": "江丰电子",
+      "label": "江丰电子\n300666",
+      "type": "company",
+      "ticker": "300666",
+      "exchange": "SZSE",
+      "position": "高纯溅射靶材龙头",
+      "sectors": [
+        "半导体材料",
+        "靶材CMP"
+      ],
+      "color": {
+        "background": "#4CAF50",
+        "border": "#2E7D32"
+      },
+      "font": {
+        "size": 12
+      },
+      "size": 15
+    },
+    {
+      "id": "台积电",
+      "label": "台积电\nTSM",
+      "type": "company",
+      "ticker": "TSM",
+      "exchange": "NYSE",
+      "position": "全球晶圆代工绝对龙头，先进制程垄断",
+      "sectors": [
+        "半导体代工"
+      ],
+      "color": {
+        "background": "#4CAF50",
+        "border": "#2E7D32"
+      },
+      "font": {
+        "size": 12
+      },
+      "size": 15
+    },
+    {
+      "id": "中芯国际",
+      "label": "中芯国际\n688981",
+      "type": "company",
+      "ticker": "688981",
+      "exchange": "SSE STAR",
+      "position": "国内代工龙头，N+2工艺量产",
+      "sectors": [
+        "半导体代工"
+      ],
+      "color": {
+        "background": "#4CAF50",
+        "border": "#2E7D32"
+      },
+      "font": {
+        "size": 12
+      },
+      "size": 15
+    },
+    {
+      "id": "华虹半导体",
+      "label": "华虹半导体\n688347",
+      "type": "company",
+      "ticker": "688347",
+      "exchange": "SSE STAR",
+      "position": "特色工艺代工龙头",
+      "sectors": [
+        "半导体代工"
+      ],
+      "color": {
+        "background": "#4CAF50",
+        "border": "#2E7D32"
+      },
+      "font": {
+        "size": 12
+      },
+      "size": 15
+    },
+    {
+      "id": "华大九天",
+      "label": "华大九天\n301269",
+      "type": "company",
+      "ticker": "301269",
+      "exchange": "SZSE",
+      "position": "国产EDA龙头",
+      "sectors": [
+        "EDA与IP"
+      ],
+      "color": {
+        "background": "#4CAF50",
+        "border": "#2E7D32"
+      },
+      "font": {
+        "size": 12
+      },
+      "size": 15
+    },
+    {
+      "id": "长电科技",
+      "label": "长电科技\n600584",
+      "type": "company",
+      "ticker": "600584",
+      "exchange": "SSE",
+      "position": "国内封测龙头，CoWoS先进封装布局",
+      "sectors": [
+        "封测"
+      ],
+      "color": {
+        "background": "#4CAF50",
+        "border": "#2E7D32"
+      },
+      "font": {
+        "size": 12
+      },
+      "size": 15
+    },
+    {
+      "id": "通富微电",
+      "label": "通富微电\n002156",
+      "type": "company",
+      "ticker": "002156",
+      "exchange": "SZSE",
+      "position": "AMD先进封装合作伙伴",
+      "sectors": [
+        "封测"
+      ],
+      "color": {
+        "background": "#4CAF50",
+        "border": "#2E7D32"
+      },
+      "font": {
+        "size": 12
+      },
+      "size": 15
+    },
+    {
+      "id": "甬矽电子",
+      "label": "甬矽电子\n688362",
+      "type": "company",
+      "ticker": "688362",
+      "exchange": "SSE STAR",
+      "position": "系统级封装(SiP)领先",
+      "sectors": [
+        "封测"
+      ],
+      "color": {
+        "background": "#4CAF50",
+        "border": "#2E7D32"
+      },
+      "font": {
+        "size": 12
+      },
+      "size": 15
+    },
+    {
+      "id": "中际旭创",
+      "label": "中际旭创\n300308",
+      "type": "company",
+      "ticker": "300308",
+      "exchange": "SZSE",
+      "position": "全球光模块龙头，800G/1.6T领先",
+      "sectors": [
+        "光模块"
+      ],
+      "color": {
+        "background": "#4CAF50",
+        "border": "#2E7D32"
+      },
+      "font": {
+        "size": 12
+      },
+      "size": 15
+    },
+    {
+      "id": "新易盛",
+      "label": "新易盛\n300502",
+      "type": "company",
+      "ticker": "300502",
+      "exchange": "SZSE",
+      "position": "高速光模块核心供应商",
+      "sectors": [
+        "光模块"
+      ],
+      "color": {
+        "background": "#4CAF50",
+        "border": "#2E7D32"
+      },
+      "font": {
+        "size": 12
+      },
+      "size": 15
+    },
+    {
+      "id": "天孚通信",
+      "label": "天孚通信\n300394",
+      "type": "company",
+      "ticker": "300394",
+      "exchange": "SZSE",
+      "position": "光器件龙头，CPO布局",
+      "sectors": [
+        "光模块"
+      ],
+      "color": {
+        "background": "#4CAF50",
+        "border": "#2E7D32"
+      },
+      "font": {
+        "size": 12
+      },
+      "size": 15
+    },
+    {
+      "id": "光迅科技",
+      "label": "光迅科技\n002281",
+      "type": "company",
+      "ticker": "002281",
+      "exchange": "SZSE",
+      "position": "光通信全产业链布局",
+      "sectors": [
+        "光模块"
+      ],
+      "color": {
+        "background": "#4CAF50",
+        "border": "#2E7D32"
+      },
+      "font": {
+        "size": 12
+      },
+      "size": 15
+    },
+    {
+      "id": "太辰光",
+      "label": "太辰光\n300570",
+      "type": "company",
+      "ticker": "300570",
+      "exchange": "SZSE",
+      "position": "光连接器龙头",
+      "sectors": [
+        "光模块"
+      ],
+      "color": {
+        "background": "#4CAF50",
+        "border": "#2E7D32"
+      },
+      "font": {
+        "size": 12
+      },
+      "size": 15
+    },
+    {
+      "id": "英维克",
+      "label": "英维克\n002837",
+      "type": "company",
+      "ticker": "002837",
+      "exchange": "SZSE",
+      "position": "液冷温控龙头",
+      "sectors": [
+        "液冷"
+      ],
+      "color": {
+        "background": "#4CAF50",
+        "border": "#2E7D32"
+      },
+      "font": {
+        "size": 12
+      },
+      "size": 15
+    },
+    {
+      "id": "高澜股份",
+      "label": "高澜股份\n300499",
+      "type": "company",
+      "ticker": "300499",
+      "exchange": "SZSE",
+      "position": "液冷设备核心供应商",
+      "sectors": [
+        "液冷"
+      ],
+      "color": {
+        "background": "#4CAF50",
+        "border": "#2E7D32"
+      },
+      "font": {
+        "size": 12
+      },
+      "size": 15
+    },
+    {
+      "id": "申菱环境",
+      "label": "申菱环境\n301018",
+      "type": "company",
+      "ticker": "301018",
+      "exchange": "SZSE",
+      "position": "数据中心液冷方案商",
+      "sectors": [
+        "液冷"
+      ],
+      "color": {
+        "background": "#4CAF50",
+        "border": "#2E7D32"
+      },
+      "font": {
+        "size": 12
+      },
+      "size": 15
+    },
+    {
+      "id": "曙光数创",
+      "label": "曙光数创\n872808",
+      "type": "company",
+      "ticker": "872808",
+      "exchange": "BSE",
+      "position": "浸没式液冷龙头",
+      "sectors": [
+        "液冷"
+      ],
+      "color": {
+        "background": "#4CAF50",
+        "border": "#2E7D32"
+      },
+      "font": {
+        "size": 12
+      },
+      "size": 15
+    },
+    {
+      "id": "飞龙股份",
+      "label": "飞龙股份\n002536",
+      "type": "company",
+      "ticker": "002536",
+      "exchange": "SZSE",
+      "position": "液冷泵核心供应商",
+      "sectors": [
+        "液冷"
+      ],
+      "color": {
+        "background": "#4CAF50",
+        "border": "#2E7D32"
+      },
+      "font": {
+        "size": 12
+      },
+      "size": 15
+    },
+    {
+      "id": "浪潮信息",
+      "label": "浪潮信息\n000977",
+      "type": "company",
+      "ticker": "000977",
+      "exchange": "SZSE",
+      "position": "国内AI服务器龙头",
+      "sectors": [
+        "算力基建"
+      ],
+      "color": {
+        "background": "#4CAF50",
+        "border": "#2E7D32"
+      },
+      "font": {
+        "size": 12
+      },
+      "size": 15
+    },
+    {
+      "id": "中科曙光",
+      "label": "中科曙光\n603019",
+      "type": "company",
+      "ticker": "603019",
+      "exchange": "SSE",
+      "position": "高端计算龙头，海光生态",
+      "sectors": [
+        "算力基建"
+      ],
+      "color": {
+        "background": "#4CAF50",
+        "border": "#2E7D32"
+      },
+      "font": {
+        "size": 12
+      },
+      "size": 15
+    },
+    {
+      "id": "工业富联",
+      "label": "工业富联\n601138",
+      "type": "company",
+      "ticker": "601138",
+      "exchange": "SSE",
+      "position": "全球AI服务器代工龙头",
+      "sectors": [
+        "算力基建"
+      ],
+      "color": {
+        "background": "#4CAF50",
+        "border": "#2E7D32"
+      },
+      "font": {
+        "size": 12
+      },
+      "size": 15
+    },
+    {
+      "id": "紫光股份",
+      "label": "紫光股份\n000938",
+      "type": "company",
+      "ticker": "000938",
+      "exchange": "SZSE",
+      "position": "云计算基础设施龙头",
+      "sectors": [
+        "算力基建"
+      ],
+      "color": {
+        "background": "#4CAF50",
+        "border": "#2E7D32"
+      },
+      "font": {
+        "size": 12
+      },
+      "size": 15
+    },
+    {
+      "id": "东方电缆",
+      "label": "东方电缆\n603606",
+      "type": "company",
+      "ticker": "603606",
+      "exchange": "SSE",
+      "position": "海底电缆龙头，数据中心电力传输",
+      "sectors": [
+        "电力基建",
+        "输配电"
+      ],
+      "color": {
+        "background": "#4CAF50",
+        "border": "#2E7D32"
+      },
+      "font": {
+        "size": 12
+      },
+      "size": 15
+    },
+    {
+      "id": "许继电气",
+      "label": "许继电气\n000400",
+      "type": "company",
+      "ticker": "000400",
+      "exchange": "SZSE",
+      "position": "特高压/智能电网核心",
+      "sectors": [
+        "电力基建",
+        "输配电"
+      ],
+      "color": {
+        "background": "#4CAF50",
+        "border": "#2E7D32"
+      },
+      "font": {
+        "size": 12
+      },
+      "size": 15
+    },
+    {
+      "id": "宁德时代",
+      "label": "宁德时代\n300750",
+      "type": "company",
+      "ticker": "300750",
+      "exchange": "SZSE",
+      "position": "全球储能电池龙头",
+      "sectors": [
+        "电力基建",
+        "储能"
+      ],
+      "color": {
+        "background": "#4CAF50",
+        "border": "#2E7D32"
+      },
+      "font": {
+        "size": 12
+      },
+      "size": 15
+    },
+    {
+      "id": "阳光电源",
+      "label": "阳光电源\n300274",
+      "type": "company",
+      "ticker": "300274",
+      "exchange": "SZSE",
+      "position": "光伏逆变器+储能龙头",
+      "sectors": [
+        "电力基建",
+        "储能",
+        "发电设备"
+      ],
+      "color": {
+        "background": "#4CAF50",
+        "border": "#2E7D32"
+      },
+      "font": {
+        "size": 12
+      },
+      "size": 15
+    },
+    {
+      "id": "百度",
+      "label": "百度\nBIDU",
+      "type": "company",
+      "ticker": "BIDU",
+      "exchange": "NASDAQ",
+      "position": "文心大模型，AI搜索/驾驶",
+      "sectors": [
+        "AI应用"
+      ],
+      "color": {
+        "background": "#4CAF50",
+        "border": "#2E7D32"
+      },
+      "font": {
+        "size": 12
+      },
+      "size": 15
+    },
+    {
+      "id": "商汤科技",
+      "label": "商汤科技\n0020.HK",
+      "type": "company",
+      "ticker": "0020.HK",
+      "exchange": "HKEX",
+      "position": "日日新大模型，AI视觉龙头",
+      "sectors": [
+        "AI应用"
+      ],
+      "color": {
+        "background": "#4CAF50",
+        "border": "#2E7D32"
+      },
+      "font": {
+        "size": 12
+      },
+      "size": 15
+    },
+    {
+      "id": "科大讯飞",
+      "label": "科大讯飞\n002230",
+      "type": "company",
+      "ticker": "002230",
+      "exchange": "SZSE",
+      "position": "讯飞星火大模型，语音AI龙头",
+      "sectors": [
+        "AI应用"
+      ],
+      "color": {
+        "background": "#4CAF50",
+        "border": "#2E7D32"
+      },
+      "font": {
+        "size": 12
+      },
+      "size": 15
+    },
+    {
+      "id": "中密控股",
+      "label": "中密控股\n300470",
+      "type": "company",
+      "ticker": "300470",
+      "exchange": "SZSE",
+      "position": "国内机械密封龙头，大密封产业布局",
+      "sectors": [
+        "密封件"
+      ],
+      "color": {
+        "background": "#4CAF50",
+        "border": "#2E7D32"
+      },
+      "font": {
+        "size": 12
+      },
+      "size": 15
+    },
+    {
+      "id": "珂玛科技",
+      "label": "珂玛科技\n301611",
+      "type": "company",
+      "ticker": "301611",
+      "exchange": "SZSE",
+      "position": "半导体设备先进陶瓷材料供应商",
+      "sectors": [
+        "半导体设备"
+      ],
+      "color": {
+        "background": "#4CAF50",
+        "border": "#2E7D32"
+      },
+      "font": {
+        "size": 12
+      },
+      "size": 15
+    }
+  ],
+  "edges": [
+    {
+      "from": "英伟达",
+      "to": "GPU与AI芯片",
+      "type": "belongs_to",
+      "arrows": "to",
+      "color": {
+        "color": "#4CAF50",
+        "opacity": 0.4
+      },
+      "width": 1
+    },
+    {
+      "from": "AMD",
+      "to": "GPU与AI芯片",
+      "type": "belongs_to",
+      "arrows": "to",
+      "color": {
+        "color": "#4CAF50",
+        "opacity": 0.4
+      },
+      "width": 1
+    },
+    {
+      "from": "AMD",
+      "to": "英伟达",
+      "type": "competes_with",
+      "arrows": "",
+      "dashes": true,
+      "color": {
+        "color": "#F44336",
+        "opacity": 0.5
+      },
+      "width": 1,
+      "label": "竞争"
+    },
+    {
+      "from": "寒武纪",
+      "to": "GPU与AI芯片",
+      "type": "belongs_to",
+      "arrows": "to",
+      "color": {
+        "color": "#4CAF50",
+        "opacity": 0.4
+      },
+      "width": 1
+    },
+    {
+      "from": "海光信息",
+      "to": "GPU与AI芯片",
+      "type": "belongs_to",
+      "arrows": "to",
+      "color": {
+        "color": "#4CAF50",
+        "opacity": 0.4
+      },
+      "width": 1
+    },
+    {
+      "from": "景嘉微",
+      "to": "GPU与AI芯片",
+      "type": "belongs_to",
+      "arrows": "to",
+      "color": {
+        "color": "#4CAF50",
+        "opacity": 0.4
+      },
+      "width": 1
+    },
+    {
+      "from": "北方华创",
+      "to": "半导体设备",
+      "type": "belongs_to",
+      "arrows": "to",
+      "color": {
+        "color": "#4CAF50",
+        "opacity": 0.4
+      },
+      "width": 1
+    },
+    {
+      "from": "北方华创",
+      "to": "刻蚀设备",
+      "type": "belongs_to",
+      "arrows": "to",
+      "color": {
+        "color": "#4CAF50",
+        "opacity": 0.4
+      },
+      "width": 1
+    },
+    {
+      "from": "北方华创",
+      "to": "薄膜沉积设备",
+      "type": "belongs_to",
+      "arrows": "to",
+      "color": {
+        "color": "#4CAF50",
+        "opacity": 0.4
+      },
+      "width": 1
+    },
+    {
+      "from": "北方华创",
+      "to": "清洗设备",
+      "type": "belongs_to",
+      "arrows": "to",
+      "color": {
+        "color": "#4CAF50",
+        "opacity": 0.4
+      },
+      "width": 1
+    },
+    {
+      "from": "中微公司",
+      "to": "半导体设备",
+      "type": "belongs_to",
+      "arrows": "to",
+      "color": {
+        "color": "#4CAF50",
+        "opacity": 0.4
+      },
+      "width": 1
+    },
+    {
+      "from": "中微公司",
+      "to": "刻蚀设备",
+      "type": "belongs_to",
+      "arrows": "to",
+      "color": {
+        "color": "#4CAF50",
+        "opacity": 0.4
+      },
+      "width": 1
+    },
+    {
+      "from": "拓荆科技",
+      "to": "半导体设备",
+      "type": "belongs_to",
+      "arrows": "to",
+      "color": {
+        "color": "#4CAF50",
+        "opacity": 0.4
+      },
+      "width": 1
+    },
+    {
+      "from": "拓荆科技",
+      "to": "薄膜沉积设备",
+      "type": "belongs_to",
+      "arrows": "to",
+      "color": {
+        "color": "#4CAF50",
+        "opacity": 0.4
+      },
+      "width": 1
+    },
+    {
+      "from": "盛美上海",
+      "to": "半导体设备",
+      "type": "belongs_to",
+      "arrows": "to",
+      "color": {
+        "color": "#4CAF50",
+        "opacity": 0.4
+      },
+      "width": 1
+    },
+    {
+      "from": "盛美上海",
+      "to": "清洗设备",
+      "type": "belongs_to",
+      "arrows": "to",
+      "color": {
+        "color": "#4CAF50",
+        "opacity": 0.4
+      },
+      "width": 1
+    },
+    {
+      "from": "华海清科",
+      "to": "半导体设备",
+      "type": "belongs_to",
+      "arrows": "to",
+      "color": {
+        "color": "#4CAF50",
+        "opacity": 0.4
+      },
+      "width": 1
+    },
+    {
+      "from": "华海清科",
+      "to": "CMP设备",
+      "type": "belongs_to",
+      "arrows": "to",
+      "color": {
+        "color": "#4CAF50",
+        "opacity": 0.4
+      },
+      "width": 1
+    },
+    {
+      "from": "精测电子",
+      "to": "半导体设备",
+      "type": "belongs_to",
+      "arrows": "to",
+      "color": {
+        "color": "#4CAF50",
+        "opacity": 0.4
+      },
+      "width": 1
+    },
+    {
+      "from": "精测电子",
+      "to": "量检测设备",
+      "type": "belongs_to",
+      "arrows": "to",
+      "color": {
+        "color": "#4CAF50",
+        "opacity": 0.4
+      },
+      "width": 1
+    },
+    {
+      "from": "沪硅产业",
+      "to": "半导体材料",
+      "type": "belongs_to",
+      "arrows": "to",
+      "color": {
+        "color": "#4CAF50",
+        "opacity": 0.4
+      },
+      "width": 1
+    },
+    {
+      "from": "沪硅产业",
+      "to": "硅片",
+      "type": "belongs_to",
+      "arrows": "to",
+      "color": {
+        "color": "#4CAF50",
+        "opacity": 0.4
+      },
+      "width": 1
+    },
+    {
+      "from": "南大光电",
+      "to": "半导体材料",
+      "type": "belongs_to",
+      "arrows": "to",
+      "color": {
+        "color": "#4CAF50",
+        "opacity": 0.4
+      },
+      "width": 1
+    },
+    {
+      "from": "南大光电",
+      "to": "光刻胶",
+      "type": "belongs_to",
+      "arrows": "to",
+      "color": {
+        "color": "#4CAF50",
+        "opacity": 0.4
+      },
+      "width": 1
+    },
+    {
+      "from": "华特气体",
+      "to": "半导体材料",
+      "type": "belongs_to",
+      "arrows": "to",
+      "color": {
+        "color": "#4CAF50",
+        "opacity": 0.4
+      },
+      "width": 1
+    },
+    {
+      "from": "华特气体",
+      "to": "电子特气",
+      "type": "belongs_to",
+      "arrows": "to",
+      "color": {
+        "color": "#4CAF50",
+        "opacity": 0.4
+      },
+      "width": 1
+    },
+    {
+      "from": "江丰电子",
+      "to": "半导体材料",
+      "type": "belongs_to",
+      "arrows": "to",
+      "color": {
+        "color": "#4CAF50",
+        "opacity": 0.4
+      },
+      "width": 1
+    },
+    {
+      "from": "江丰电子",
+      "to": "靶材CMP",
+      "type": "belongs_to",
+      "arrows": "to",
+      "color": {
+        "color": "#4CAF50",
+        "opacity": 0.4
+      },
+      "width": 1
+    },
+    {
+      "from": "台积电",
+      "to": "半导体代工",
+      "type": "belongs_to",
+      "arrows": "to",
+      "color": {
+        "color": "#4CAF50",
+        "opacity": 0.4
+      },
+      "width": 1
+    },
+    {
+      "from": "中芯国际",
+      "to": "半导体代工",
+      "type": "belongs_to",
+      "arrows": "to",
+      "color": {
+        "color": "#4CAF50",
+        "opacity": 0.4
+      },
+      "width": 1
+    },
+    {
+      "from": "华虹半导体",
+      "to": "半导体代工",
+      "type": "belongs_to",
+      "arrows": "to",
+      "color": {
+        "color": "#4CAF50",
+        "opacity": 0.4
+      },
+      "width": 1
+    },
+    {
+      "from": "华大九天",
+      "to": "EDA与IP",
+      "type": "belongs_to",
+      "arrows": "to",
+      "color": {
+        "color": "#4CAF50",
+        "opacity": 0.4
+      },
+      "width": 1
+    },
+    {
+      "from": "长电科技",
+      "to": "封测",
+      "type": "belongs_to",
+      "arrows": "to",
+      "color": {
+        "color": "#4CAF50",
+        "opacity": 0.4
+      },
+      "width": 1
+    },
+    {
+      "from": "通富微电",
+      "to": "封测",
+      "type": "belongs_to",
+      "arrows": "to",
+      "color": {
+        "color": "#4CAF50",
+        "opacity": 0.4
+      },
+      "width": 1
+    },
+    {
+      "from": "甬矽电子",
+      "to": "封测",
+      "type": "belongs_to",
+      "arrows": "to",
+      "color": {
+        "color": "#4CAF50",
+        "opacity": 0.4
+      },
+      "width": 1
+    },
+    {
+      "from": "中际旭创",
+      "to": "光模块",
+      "type": "belongs_to",
+      "arrows": "to",
+      "color": {
+        "color": "#4CAF50",
+        "opacity": 0.4
+      },
+      "width": 1
+    },
+    {
+      "from": "新易盛",
+      "to": "光模块",
+      "type": "belongs_to",
+      "arrows": "to",
+      "color": {
+        "color": "#4CAF50",
+        "opacity": 0.4
+      },
+      "width": 1
+    },
+    {
+      "from": "天孚通信",
+      "to": "光模块",
+      "type": "belongs_to",
+      "arrows": "to",
+      "color": {
+        "color": "#4CAF50",
+        "opacity": 0.4
+      },
+      "width": 1
+    },
+    {
+      "from": "光迅科技",
+      "to": "光模块",
+      "type": "belongs_to",
+      "arrows": "to",
+      "color": {
+        "color": "#4CAF50",
+        "opacity": 0.4
+      },
+      "width": 1
+    },
+    {
+      "from": "太辰光",
+      "to": "光模块",
+      "type": "belongs_to",
+      "arrows": "to",
+      "color": {
+        "color": "#4CAF50",
+        "opacity": 0.4
+      },
+      "width": 1
+    },
+    {
+      "from": "英维克",
+      "to": "液冷",
+      "type": "belongs_to",
+      "arrows": "to",
+      "color": {
+        "color": "#4CAF50",
+        "opacity": 0.4
+      },
+      "width": 1
+    },
+    {
+      "from": "高澜股份",
+      "to": "液冷",
+      "type": "belongs_to",
+      "arrows": "to",
+      "color": {
+        "color": "#4CAF50",
+        "opacity": 0.4
+      },
+      "width": 1
+    },
+    {
+      "from": "申菱环境",
+      "to": "液冷",
+      "type": "belongs_to",
+      "arrows": "to",
+      "color": {
+        "color": "#4CAF50",
+        "opacity": 0.4
+      },
+      "width": 1
+    },
+    {
+      "from": "曙光数创",
+      "to": "液冷",
+      "type": "belongs_to",
+      "arrows": "to",
+      "color": {
+        "color": "#4CAF50",
+        "opacity": 0.4
+      },
+      "width": 1
+    },
+    {
+      "from": "飞龙股份",
+      "to": "液冷",
+      "type": "belongs_to",
+      "arrows": "to",
+      "color": {
+        "color": "#4CAF50",
+        "opacity": 0.4
+      },
+      "width": 1
+    },
+    {
+      "from": "浪潮信息",
+      "to": "算力基建",
+      "type": "belongs_to",
+      "arrows": "to",
+      "color": {
+        "color": "#4CAF50",
+        "opacity": 0.4
+      },
+      "width": 1
+    },
+    {
+      "from": "中科曙光",
+      "to": "算力基建",
+      "type": "belongs_to",
+      "arrows": "to",
+      "color": {
+        "color": "#4CAF50",
+        "opacity": 0.4
+      },
+      "width": 1
+    },
+    {
+      "from": "工业富联",
+      "to": "算力基建",
+      "type": "belongs_to",
+      "arrows": "to",
+      "color": {
+        "color": "#4CAF50",
+        "opacity": 0.4
+      },
+      "width": 1
+    },
+    {
+      "from": "紫光股份",
+      "to": "算力基建",
+      "type": "belongs_to",
+      "arrows": "to",
+      "color": {
+        "color": "#4CAF50",
+        "opacity": 0.4
+      },
+      "width": 1
+    },
+    {
+      "from": "东方电缆",
+      "to": "电力基建",
+      "type": "belongs_to",
+      "arrows": "to",
+      "color": {
+        "color": "#4CAF50",
+        "opacity": 0.4
+      },
+      "width": 1
+    },
+    {
+      "from": "东方电缆",
+      "to": "输配电",
+      "type": "belongs_to",
+      "arrows": "to",
+      "color": {
+        "color": "#4CAF50",
+        "opacity": 0.4
+      },
+      "width": 1
+    },
+    {
+      "from": "许继电气",
+      "to": "电力基建",
+      "type": "belongs_to",
+      "arrows": "to",
+      "color": {
+        "color": "#4CAF50",
+        "opacity": 0.4
+      },
+      "width": 1
+    },
+    {
+      "from": "许继电气",
+      "to": "输配电",
+      "type": "belongs_to",
+      "arrows": "to",
+      "color": {
+        "color": "#4CAF50",
+        "opacity": 0.4
+      },
+      "width": 1
+    },
+    {
+      "from": "宁德时代",
+      "to": "电力基建",
+      "type": "belongs_to",
+      "arrows": "to",
+      "color": {
+        "color": "#4CAF50",
+        "opacity": 0.4
+      },
+      "width": 1
+    },
+    {
+      "from": "宁德时代",
+      "to": "储能",
+      "type": "belongs_to",
+      "arrows": "to",
+      "color": {
+        "color": "#4CAF50",
+        "opacity": 0.4
+      },
+      "width": 1
+    },
+    {
+      "from": "阳光电源",
+      "to": "电力基建",
+      "type": "belongs_to",
+      "arrows": "to",
+      "color": {
+        "color": "#4CAF50",
+        "opacity": 0.4
+      },
+      "width": 1
+    },
+    {
+      "from": "阳光电源",
+      "to": "储能",
+      "type": "belongs_to",
+      "arrows": "to",
+      "color": {
+        "color": "#4CAF50",
+        "opacity": 0.4
+      },
+      "width": 1
+    },
+    {
+      "from": "阳光电源",
+      "to": "发电设备",
+      "type": "belongs_to",
+      "arrows": "to",
+      "color": {
+        "color": "#4CAF50",
+        "opacity": 0.4
+      },
+      "width": 1
+    },
+    {
+      "from": "百度",
+      "to": "AI应用",
+      "type": "belongs_to",
+      "arrows": "to",
+      "color": {
+        "color": "#4CAF50",
+        "opacity": 0.4
+      },
+      "width": 1
+    },
+    {
+      "from": "商汤科技",
+      "to": "AI应用",
+      "type": "belongs_to",
+      "arrows": "to",
+      "color": {
+        "color": "#4CAF50",
+        "opacity": 0.4
+      },
+      "width": 1
+    },
+    {
+      "from": "科大讯飞",
+      "to": "AI应用",
+      "type": "belongs_to",
+      "arrows": "to",
+      "color": {
+        "color": "#4CAF50",
+        "opacity": 0.4
+      },
+      "width": 1
+    },
+    {
+      "from": "中密控股",
+      "to": "密封件",
+      "type": "belongs_to",
+      "arrows": "to",
+      "color": {
+        "color": "#4CAF50",
+        "opacity": 0.4
+      },
+      "width": 1
+    },
+    {
+      "from": "珂玛科技",
+      "to": "半导体设备",
+      "type": "belongs_to",
+      "arrows": "to",
+      "color": {
+        "color": "#4CAF50",
+        "opacity": 0.4
+      },
+      "width": 1
+    },
+    {
+      "from": "半导体设备",
+      "to": "半导体代工",
+      "type": "upstream_of",
+      "label": "设备是代工的上游",
+      "arrows": "to",
+      "color": {
+        "color": "#2196F3",
+        "opacity": 0.6
+      },
+      "width": 2
+    },
+    {
+      "from": "半导体材料",
+      "to": "半导体代工",
+      "type": "upstream_of",
+      "label": "材料是代工的上游",
+      "arrows": "to",
+      "color": {
+        "color": "#2196F3",
+        "opacity": 0.6
+      },
+      "width": 2
+    },
+    {
+      "from": "EDA与IP",
+      "to": "GPU与AI芯片",
+      "type": "upstream_of",
+      "label": "设计工具是芯片的上游",
+      "arrows": "to",
+      "color": {
+        "color": "#2196F3",
+        "opacity": 0.6
+      },
+      "width": 2
+    },
+    {
+      "from": "半导体代工",
+      "to": "GPU与AI芯片",
+      "type": "upstream_of",
+      "label": "代工是芯片的上游",
+      "arrows": "to",
+      "color": {
+        "color": "#2196F3",
+        "opacity": 0.6
+      },
+      "width": 2
+    },
+    {
+      "from": "封测",
+      "to": "GPU与AI芯片",
+      "type": "upstream_of",
+      "label": "封测是芯片成品的上游",
+      "arrows": "to",
+      "color": {
+        "color": "#2196F3",
+        "opacity": 0.6
+      },
+      "width": 2
+    },
+    {
+      "from": "GPU与AI芯片",
+      "to": "算力基建",
+      "type": "upstream_of",
+      "label": "芯片是算力基建的上游",
+      "arrows": "to",
+      "color": {
+        "color": "#2196F3",
+        "opacity": 0.6
+      },
+      "width": 2
+    },
+    {
+      "from": "算力基建",
+      "to": "AI应用",
+      "type": "upstream_of",
+      "label": "算力是AI应用的基础设施",
+      "arrows": "to",
+      "color": {
+        "color": "#2196F3",
+        "opacity": 0.6
+      },
+      "width": 2
+    },
+    {
+      "from": "光模块",
+      "to": "算力基建",
+      "type": "upstream_of",
+      "label": "光模块支撑算力互联",
+      "arrows": "to",
+      "color": {
+        "color": "#2196F3",
+        "opacity": 0.6
+      },
+      "width": 2
+    },
+    {
+      "from": "液冷",
+      "to": "算力基建",
+      "type": "upstream_of",
+      "label": "液冷支撑算力散热",
+      "arrows": "to",
+      "color": {
+        "color": "#2196F3",
+        "opacity": 0.6
+      },
+      "width": 2
+    },
+    {
+      "from": "电力基建",
+      "to": "算力基建",
+      "type": "upstream_of",
+      "label": "电力是算力基建的能源基础",
+      "arrows": "to",
+      "color": {
+        "color": "#2196F3",
+        "opacity": 0.6
+      },
+      "width": 2
+    },
+    {
+      "from": "刻蚀设备",
+      "to": "半导体设备",
+      "type": "belongs_to",
+      "label": "",
+      "arrows": "to",
+      "color": {
+        "color": "#64B5F6",
+        "opacity": 0.4
+      },
+      "width": 1,
+      "dashes": true
+    },
+    {
+      "from": "薄膜沉积设备",
+      "to": "半导体设备",
+      "type": "belongs_to",
+      "label": "",
+      "arrows": "to",
+      "color": {
+        "color": "#64B5F6",
+        "opacity": 0.4
+      },
+      "width": 1,
+      "dashes": true
+    },
+    {
+      "from": "量检测设备",
+      "to": "半导体设备",
+      "type": "belongs_to",
+      "label": "",
+      "arrows": "to",
+      "color": {
+        "color": "#64B5F6",
+        "opacity": 0.4
+      },
+      "width": 1,
+      "dashes": true
+    },
+    {
+      "from": "光刻设备",
+      "to": "半导体设备",
+      "type": "belongs_to",
+      "label": "",
+      "arrows": "to",
+      "color": {
+        "color": "#64B5F6",
+        "opacity": 0.4
+      },
+      "width": 1,
+      "dashes": true
+    },
+    {
+      "from": "清洗设备",
+      "to": "半导体设备",
+      "type": "belongs_to",
+      "label": "",
+      "arrows": "to",
+      "color": {
+        "color": "#64B5F6",
+        "opacity": 0.4
+      },
+      "width": 1,
+      "dashes": true
+    },
+    {
+      "from": "CMP设备",
+      "to": "半导体设备",
+      "type": "belongs_to",
+      "label": "",
+      "arrows": "to",
+      "color": {
+        "color": "#64B5F6",
+        "opacity": 0.4
+      },
+      "width": 1,
+      "dashes": true
+    },
+    {
+      "from": "硅片",
+      "to": "半导体材料",
+      "type": "belongs_to",
+      "label": "",
+      "arrows": "to",
+      "color": {
+        "color": "#64B5F6",
+        "opacity": 0.4
+      },
+      "width": 1,
+      "dashes": true
+    },
+    {
+      "from": "光刻胶",
+      "to": "半导体材料",
+      "type": "belongs_to",
+      "label": "",
+      "arrows": "to",
+      "color": {
+        "color": "#64B5F6",
+        "opacity": 0.4
+      },
+      "width": 1,
+      "dashes": true
+    },
+    {
+      "from": "电子特气",
+      "to": "半导体材料",
+      "type": "belongs_to",
+      "label": "",
+      "arrows": "to",
+      "color": {
+        "color": "#64B5F6",
+        "opacity": 0.4
+      },
+      "width": 1,
+      "dashes": true
+    },
+    {
+      "from": "靶材CMP",
+      "to": "半导体材料",
+      "type": "belongs_to",
+      "label": "",
+      "arrows": "to",
+      "color": {
+        "color": "#64B5F6",
+        "opacity": 0.4
+      },
+      "width": 1,
+      "dashes": true
+    },
+    {
+      "from": "发电设备",
+      "to": "电力基建",
+      "type": "belongs_to",
+      "label": "",
+      "arrows": "to",
+      "color": {
+        "color": "#64B5F6",
+        "opacity": 0.4
+      },
+      "width": 1,
+      "dashes": true
+    },
+    {
+      "from": "储能",
+      "to": "电力基建",
+      "type": "belongs_to",
+      "label": "",
+      "arrows": "to",
+      "color": {
+        "color": "#64B5F6",
+        "opacity": 0.4
+      },
+      "width": 1,
+      "dashes": true
+    },
+    {
+      "from": "输配电",
+      "to": "电力基建",
+      "type": "belongs_to",
+      "label": "",
+      "arrows": "to",
+      "color": {
+        "color": "#64B5F6",
+        "opacity": 0.4
+      },
+      "width": 1,
+      "dashes": true
+    }
+  ]
+}

@@ -29,6 +29,7 @@ import re
 import sys
 from datetime import datetime
 from pathlib import Path
+from typing import Optional
 
 # ── 路径 ──────────────────────────────────
 SCRIPTS_DIR = Path(__file__).resolve().parent
@@ -40,15 +41,32 @@ from extract import extract_summary, classify_info_type
 from pdf_extract import extract_pdf_summary
 from graph import Graph
 from log_writer import append_log
+from config_rules_loader import RulesConfig
+from ingest.stages import IngestStages
 
 LOG_PATH = WIKI_ROOT / "log.md"
 INDEX_PATH = WIKI_ROOT / "index.md"
 INGESTED_DIR = WIKI_ROOT / ".ingested"
 
+# 模块级规则配置实例（延迟加载）
+_rules = None
+
+
+def _get_rules():
+    global _rules
+    if _rules is None:
+        _rules = RulesConfig()
+    return _rules
+
 
 def load_graph():
     """加载图数据（单一数据源）"""
     return Graph(str(WIKI_ROOT / "graph.yaml"))
+
+
+def load_rules():
+    """加载规则配置"""
+    return RulesConfig()
 
 
 # ── Ingest 标记管理 ────────────────────────
@@ -365,10 +383,18 @@ def add_timeline_entry(wiki_path, meta, topic_name, entity_type):
     # 使用 extract 模块做智能摘要
     extracted = extract_summary(body_text, max_sentences=3)
 
-    # 质量过滤：低质量内容只保留标题
+    # 质量门：内容不足时拒绝写入（不做标题填充）
     if extracted['quality'] == 'low' and len(body_text) < 100:
-        summary_points = [title]
-    else:
+        return False
+
+    summary_points = extracted['points'] if extracted['points'] else []
+
+    # 二次质量检查：摘要等于标题则拒绝写入
+    if len(summary_points) == 1:
+        point_clean = summary_points[0].strip().rstrip('。.!')
+        title_clean = title.strip().rstrip('。.!')
+        if point_clean == title_clean or len(point_clean) < 15:
+            return False
         summary_points = extracted['points'] if extracted['points'] else [title]
 
     summary = "\n".join(f"- {p}" for p in summary_points)
@@ -484,52 +510,29 @@ def add_timeline_entry(wiki_path, meta, topic_name, entity_type):
 def is_low_quality_source(file_path, meta):
     """
     检查是否是低质量来源（行情页、公司主页、百科等）。
-    这些页面不进入 wiki，避免噪音。
+    所有过滤规则从 config_rules.yaml 读取，无硬编码。
     """
+    rules = _get_rules()
     filename = Path(file_path).name.lower()
     url = meta.get("source_url", "").lower()
     title = meta.get("title", "").lower()
 
-    # URL 黑名单模式
-    skip_url_patterns = [
-        "quote.eastmoney.com",      # 东方财富行情页
-        "quote.futunn.com",         # 富途行情页
-        "xueqiu.com/S/",            # 雪球个股页
-        "stock_quote",              # 通用行情页
-        "baidu.com/baike",          # 百度百科
-        "baike.baidu.com",
-        "hq.sinajs.cn",             # 新浪行情
-        "finance.sina.com.cn/realstock",
-        "amec-inc.com",             # AMEC 公司主页
-    ]
+    # URL 黑名单（从 config_rules.yaml 读取）
+    if rules.is_url_blacklisted(url):
+        return True
 
-    # 标题黑名单模式
-    skip_title_patterns = [
-        "行情走势", "股票股价", "最新价格", "实时走势图",
-        "公司简介", "股票行情中心",
-        "百科", "百度百科",
-        "最新新闻",  # 通常是行情页的标题
-        "最新资讯",
-        "个股资讯",
-    ]
+    # 标题黑名单（从 config_rules.yaml 读取）
+    if rules.is_title_blacklisted(title):
+        return True
 
-    for p in skip_url_patterns:
-        if p in url:
-            return True
-
-    for p in skip_title_patterns:
-        if p in title:
-            return True
-
-    # 文件名检查
-    skip_file_patterns = [
-        "行情走势", "股票股价", "最新价格", "行情_走势图",
-        "公司简介", "行情中心", "百科",
-        "_公司新闻",  # 公司新闻导航页（非新闻正文）
-    ]
+    # 文件名黑名单（从 config_rules.yaml 读取）
+    if rules.is_filename_blacklisted(filename):
+        return True
 
     # 内容太短且标题就是公司名（公司主页）
-    if len(meta.get("_content", "")) < 200:
+    cq = rules.get_collection_quality()
+    min_content = cq.get("min_content_length", 200)
+    if len(meta.get("_content", "")) < min_content:
         # 从文件路径推断公司名
         company_from_path = Path(file_path).parts
         for part in company_from_path:
@@ -541,9 +544,6 @@ def is_low_quality_source(file_path, meta):
                     if title_clean == company_name_from_path:
                         return True
                 break
-    for p in skip_file_patterns:
-        if p in filename:
-            return True
 
     return False
 
@@ -560,63 +560,30 @@ def has_mojibake(text):
 
 
 def process_file(file_path, entity_name, entity_type, graph, dry_run=False):
-    """处理单个待 ingest 文件"""
-    meta = read_news_metadata(file_path)
+    """处理单个待 ingest 文件（兼容接口，内部使用 IngestStages）"""
+    stages = IngestStages(graph)
+    topics, decisions = stages.process_file(file_path, dry_run=dry_run)
 
-    # 编码质量门禁：跳过乱码内容
-    if has_mojibake(meta.get("_content", "")) or has_mojibake(meta.get("title", "")):
-        print(f"  SKIP (encoding): {meta.get('title', '')[:50]}")
-        if not dry_run:
-            mark_ingested(file_path)
-        return []
+    # 打印状态信息（保持与原版一致的控制台输出）
+    meta_result, quality = stages.stage_collect(file_path)
+    title = ""
+    if meta_result:
+        title = meta_result.get("title", "")[:50]
+    else:
+        title = Path(file_path).name[:50]
 
-    # 质量过滤：跳过低质量来源
-    if is_low_quality_source(file_path, meta):
-        print(f"  SKIP (low quality): {meta.get('title', '')[:50]}")
-        if not dry_run:
-            mark_ingested(file_path)
-        return []
+    if meta_result is None:
+        reason = quality
+        print(f"  SKIP ({reason}): {title}")
+    elif decisions.get("action") == "reject":
+        print(f"  SKIP (quality {decisions.get('quality_grade', '?')}): {title}")
+    elif not decisions.get("target_entities"):
+        print(f"  SKIP (no relevance): {title}")
+    else:
+        for t in topics:
+            print(f"    Updated: {t}")
 
-    relevant = determine_relevance(meta, graph)
-
-    if not relevant:
-        print(f"  SKIP (no relevance): {meta.get('title', '')[:50]}")
-        return []
-
-    updated_topics = []
-
-    for ent_name, ent_type, topic_name in relevant:
-        wiki_path = get_wiki_path(ent_name, ent_type, topic_name)
-
-        if wiki_path is None:
-            continue
-
-        # 如果 wiki 文档不存在，创建模板
-        if not wiki_path.exists():
-            if dry_run:
-                print(f"    [DRY] Would create: {wiki_path.relative_to(WIKI_ROOT)}")
-            else:
-                wiki_path.parent.mkdir(parents=True, exist_ok=True)
-                template = create_topic_template(ent_name, ent_type, topic_name, graph)
-                # 注入 wikilinks 到新模板
-                from wikilinks import WikilinkEngine
-                _wk_engine = WikilinkEngine(wiki_root=str(WIKI_ROOT))
-                template = _wk_engine.inject_wikilinks(template, entity=ent_name)
-                wiki_path.write_text(template, encoding="utf-8")
-                print(f"    Created: {wiki_path.relative_to(WIKI_ROOT)}")
-
-        # 添加时间线条目
-        if dry_run:
-            print(f"    [DRY] Would update: {ent_name}/{topic_name}")
-        else:
-            success = add_timeline_entry(wiki_path, meta, topic_name, ent_type)
-            if success:
-                print(f"    Updated: {ent_name}/{topic_name}")
-                updated_topics.append(f"{ent_name}/{topic_name}")
-            else:
-                print(f"    Skip: {ent_name}/{topic_name} (insert failed)")
-
-    return updated_topics
+    return topics
 
 
 def main():
@@ -627,6 +594,10 @@ def main():
     parser.add_argument("--limit", type=int, default=0, help="最多处理 N 个文件")
     parser.add_argument("--interactive", action="store_true",
                         help="交互式模式：每个文件处理前需用户确认")
+    parser.add_argument("--batch-id", type=str, default=None,
+                        help="批次ID（用于中间文档追踪）")
+    parser.add_argument("--save-routing", action="store_true",
+                        help="保存路由决策到中间 JSON 文档")
     args = parser.parse_args()
 
     print("=" * 50)
@@ -654,42 +625,82 @@ def main():
     total_updated = 0
     total_skipped = 0
     all_topics = set()
+    stages = IngestStages(graph)
+    routing_decisions = []
 
     for i, (fp, ent, etype) in enumerate(pending):
         rel = Path(fp).relative_to(WIKI_ROOT)
         print(f"\n  [{i+1}/{len(pending)}] {rel}")
 
-        # 交互式模式：显示摘要，等待确认
+        # 阶段 1: 收集 + 质量检查
+        meta, quality = stages.stage_collect(fp)
+
+        # 阶段 2: 分类 + 路由
+        decisions = stages.stage_classify(meta, quality, graph)
+
+        # 收集路由决策（用于中间文档）
+        if args.save_routing or args.dry_run:
+            decision_record = {
+                "file_path": str(rel),
+                "title": meta.get("title", "")[:100] if meta else "",
+                "action": decisions.get("action", "unknown"),
+                "quality_grade": decisions.get("quality_grade", "?"),
+                "quality_score": decisions.get("quality_score", 0),
+                "target_entities": decisions.get("target_entities", [])
+            }
+            routing_decisions.append(decision_record)
+
+        # 交互式模式
         if args.interactive and not args.dry_run:
-            meta = read_news_metadata(fp)
-            title = meta.get("title", "未知标题")[:60]
-            relevant = determine_relevance(meta, graph)
-            entities = [r[0] for r in relevant]
-            topics_preview = [f"{r[0]}/{r[2]}" for r in relevant]
-            print(f"    标题: {title}")
-            print(f"    相关实体: {', '.join(entities[:5])}")
-            print(f"    将更新: {', '.join(topics_preview[:5])}")
-            choice = input("    [y=处理 / n=跳过 / q=退出]? ").strip().lower()
-            if choice in ("q", "quit"):
-                print("  用户中断 ingest。")
-                break
-            if choice in ("n", "s", "skip", "no"):
-                print("    -> 跳过")
+            if meta is None:
+                print(f"    SKIP: {quality}")
+            else:
+                title = meta.get("title", "未知标题")[:60]
+                entities = [t["entity"] for t in decisions.get("target_entities", [])]
+                print(f"    标题: {title}")
+                print(f"    质量等级: {decisions.get('quality_grade', '?')}")
+                print(f"    相关实体: {', '.join(entities[:5])}")
+                choice = input("    [y=处理 / n=跳过 / q=退出]? ").strip().lower()
+                if choice in ("q", "quit"):
+                    print("  用户中断 ingest。")
+                    break
+                if choice in ("n", "s", "skip", "no"):
+                    print("    -> 跳过")
+                    total_skipped += 1
+                    mark_ingested(fp)
+                    continue
+
+        # 阶段 3: 写入
+        if args.dry_run:
+            # dry-run 模式只显示路由信息
+            if meta is None:
+                print(f"    [DRY] SKIP: {quality}")
+            elif decisions.get("action") == "reject":
+                print(f"    [DRY] REJECT (grade={decisions.get('quality_grade')}): "
+                      f"{meta.get('title', '')[:50]}")
+            elif not decisions.get("target_entities"):
+                print(f"    [DRY] NO MATCH: {meta.get('title', '')[:50]}")
+            else:
+                entities = [t["entity"] for t in decisions["target_entities"]]
+                print(f"    [DRY] WOULD UPDATE: {', '.join(entities[:5])}")
+            total_skipped += 1
+        else:
+            topics = stages.stage_ingest(meta, decisions, graph)
+            if topics:
+                total_updated += len(topics)
+                all_topics.update(topics)
+                for t in topics:
+                    print(f"    Updated: {t}")
+                mark_ingested(fp)
+            else:
                 total_skipped += 1
                 mark_ingested(fp)
-                continue
 
-        topics = process_file(fp, ent, etype, graph, args.dry_run)
-
-        if topics:
-            total_updated += len(topics)
-            all_topics.update(topics)
-            if not args.dry_run:
-                mark_ingested(fp)
-        else:
-            total_skipped += 1
-            if not args.dry_run:
-                mark_ingested(fp)  # 即使跳过也标记，避免重复扫描
+    # 保存路由决策中间文档
+    if routing_decisions:
+        batch_id = args.batch_id or datetime.now().strftime("%Y%m%d_%H%M%S")
+        routing_path = stages.write_routing_decisions(routing_decisions, batch_id)
+        print(f"\n  Routing decisions saved: {routing_path}")
 
     print(f"\n{'=' * 50}")
     print(f"  Done. Topics updated: {total_updated}, Skipped: {total_skipped}")

@@ -327,7 +327,13 @@ low_quality_sources:
     - "baike.baidu.com"
     - "hq.sinajs.cn"
     - "finance.sina.com.cn/realstock"
-  
+    - "guba.eastmoney.com"
+    - "finance.yahoo.com"
+    - "stock.finance.sina.com.cn"
+    - "quote.stock.163.com"
+    - "stockpage.10jqka.com.cn"
+    - "quote.cfi.cn"
+
   # 标题黑名单
   title_patterns:
     - "行情走势"
@@ -341,6 +347,29 @@ low_quality_sources:
     - "最新新闻"
     - "最新资讯"
     - "个股资讯"
+    - "股吧"
+    - "东方财富股吧"
+    - "股票行情"
+    - "最新消息_股票"
+    - "同花顺财经"
+    - "腾讯证券"
+
+  # 文件名黑名单
+  filename_patterns:
+    - "行情走势"
+    - "股票股价"
+    - "最新价格"
+    - "行情_走势图"
+    - "公司简介"
+    - "行情中心"
+    - "百科"
+    - "_公司新闻"
+
+# ── 采集质量控制 ──────────────────────────
+collection_quality:
+  min_content_length: 100
+  min_title_length: 10
+  skip_if_title_equals_company: true
 
 # ── 噪音过滤 ──────────────────────────
 noise_patterns:
@@ -360,3 +389,73 @@ noise_patterns:
   # 重复分隔符
   - "^[\\s\\-_=*#]{10,}$"
   - "^[\\|:\\s]+$"
+
+# ── 文档质量评分 ──────────────────────────
+quality_grading:
+  weights:
+    has_specific_numbers: 0.25    # 包含具体数字（金额、百分比、数量）
+    has_entity_names: 0.20        # 包含公司/行业名等实体
+    content_length: 0.15          # 内容长度足够
+    sentence_diversity: 0.15      # 句子多样性（非重复文本）
+    has_action_verbs: 0.10        # 包含动作性动词（发布、增长、突破）
+    no_noise_ratio: 0.15          # 非噪声内容占比
+  thresholds:
+    accept: 0.5                   # >= 0.5: 接受
+    review: 0.2                   # >= 0.2: 待审
+    # < 0.2: 拒绝
+  grading:
+    S:
+      min_score: 0.8
+      description: "深度研报/年报级内容"
+    A:
+      min_score: 0.5
+      description: "有实质内容的新闻/公告"
+    B:
+      min_score: 0.2
+      description: "泛泛而谈，可审可不审"
+    C:
+      min_score: 0.0
+      description: "垃圾数据（标题复制、导航文本、乱码）"
+
+# ── 来源质量分级 ──────────────────────────
+source_grading:
+  grades:
+    S:
+      description: "深度研报/年报全文"
+      patterns: ["深度报告", "年报", "年度报告", "research report"]
+      max_entries: 50
+    A:
+      description: "公告/财报摘要/投资者关系"
+      patterns: ["公告", "半年度报告", "投资者关系", "investor relations"]
+      max_entries: 100
+    B:
+      description: "新闻/行业分析"
+      patterns: ["新闻", "资讯", "news", "分析"]
+      max_entries: 200
+    C:
+      description: "社交媒体/论坛"
+      patterns: ["股吧", "讨论", "社区", "forum", "comment"]
+      max_entries: 20
+
+# ── 富化验证规则 ──────────────────────────
+enrichment_validation:
+  questions:
+    min_length: 10           # 问题最少字数
+    max_length: 100          # 问题最多字数
+    require_question_marker: true   # 必须含 ？ 或 吗/哪/如何/什么/多少/是否
+    max_similarity_threshold: 0.8   # 与已有问题相似度上限
+    reject_patterns:
+      - "核心竞争优势"
+      - "主要增长驱动力"
+      - "面临的最大风险"
+      - "护城河"
+  assessments:
+    min_length: 50           # 评估最少字数
+    max_length: 800          # 评估最多字数
+    require_data_point: true # 必须含数字或具体实体名
+    reject_patterns:
+      - "待积累数据后补充"
+      - "暂无"
+      - "有待观察"
+      - "待补充"
+      - "信息不足"

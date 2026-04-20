@@ -15,7 +15,12 @@
       "Bash(git commit:*)",
       "Bash(git push:*)",
       "Bash(git stash:*)",
-      "Bash(find:*)"
+      "Bash(find:*)",
+      "Bash(dir \"C:\\\\Users\\\\郑曾波\\\\Projects\\\\company-wiki\" /a:*)",
+      "Bash(for d in \"C:\\\\Users\\\\郑曾波\\\\Projects\\\\company-wiki\\\\companies\"/*/)",
+      "Bash(do if [ ! -d \"$dwiki\" ])",
+      "Bash(fi:*)",
+      "Bash(done)"
     ]
   }
 }

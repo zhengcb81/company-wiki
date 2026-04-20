@@ -580,23 +580,38 @@ class LLMClient:
         return "> 待积累数据后补充。"
 
     def generate_core_questions(self, entity: str, sector: str = "",
-                                 position: str = "", existing_data: str = "") -> List[str]:
+                                 position: str = "", existing_data: str = "",
+                                 question_templates: List[str] = None) -> List[str]:
         """
-        为实体生成核心追踪问题
+        为实体生成核心追踪问题。
+
+        Args:
+            question_templates: 行业级问题模板（从 graph.yaml 加载），
+                               用于锚定 LLM 的研究方向，避免产出通用废话。
         """
         system = "你是一个上市公司研究框架设计专家。"
+
+        # 构建问题模板锚定段
+        template_section = ""
+        if question_templates:
+            template_section = f"""
+研究框架参考（请基于以下行业级问题框架，针对{entity}的具体情况做个性化适配）:
+{chr(10).join(f'- {t}' for t in question_templates)}
+"""
+
         user = f"""请为以下实体设计 3-5 个核心研究追踪问题。
 
 实体: {entity}
 {f'所属行业: {sector}' if sector else ''}
 {f'定位: {position}' if position else ''}
-
+{template_section}
 {f'已有数据概况: {existing_data[:500]}' if existing_data else ''}
 
 要求:
 1. 问题要具体、可追踪、有信息增量
-2. 覆盖: 竞争格局/技术趋势/财务健康/增长动力 等维度
-3. 每个问题一行, 不要编号
+2. 必须结合{entity}的实际情况，不要产出适用于任何公司的通用问题
+3. 不要出现"核心竞争优势是什么""主要增长驱动力在哪里"这类泛泛的问题
+4. 每个问题一行, 不要编号
 
 请直接输出问题列表:"""
 
@@ -605,11 +620,10 @@ class LLMClient:
             lines = [l.strip().lstrip('- •').strip() for l in response.content.strip().split('\n')]
             return [l for l in lines if l and len(l) > 5][:5]
 
-        return [
-            f"{entity}的核心竞争优势和护城河是什么？",
-            f"{entity}的主要增长驱动力在哪里？",
-            f"{entity}面临的最大风险和挑战是什么？",
-        ]
+        # LLM 不可用时，如果有模板就使用模板，否则返回空
+        if question_templates:
+            return question_templates[:5]
+        return []
 
     # ── 业务方法: 查询 ──────────────────────────
 

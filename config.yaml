@@ -9,6 +9,7 @@ schedule:
   news_collection: "daily"
   report_check: "weekly"
   lint: "weekly"
+  maintenance: "weekly"    # 运行 python scripts/maintenance.py --all
 
 # ── LLM 配置 ──────────────────────────────
 # api_key 从环境变量 DEEPSEEK_API_KEY 读取，不在此处设置

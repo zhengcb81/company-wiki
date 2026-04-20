@@ -56,6 +56,78 @@ def get_company_info(graph_data: dict, company_name: str) -> dict:
     return {}
 
 
+def _load_validation_rules():
+    """加载富化验证规则"""
+    import yaml
+    rules_path = WIKI_ROOT / "config_rules.yaml"
+    if rules_path.exists():
+        with open(rules_path, "r", encoding="utf-8") as f:
+            data = yaml.safe_load(f) or {}
+        return data.get("enrichment_validation", {})
+    return {}
+
+
+def validate_questions(questions: List[str]) -> List[str]:
+    """验证 LLM 生成的问题质量，过滤不合格的"""
+    rules = _load_validation_rules()
+    q_rules = rules.get("questions", {})
+
+    min_len = q_rules.get("min_length", 10)
+    max_len = q_rules.get("max_length", 100)
+    require_marker = q_rules.get("require_question_marker", True)
+    reject_patterns = q_rules.get("reject_patterns", [])
+
+    validated = []
+    for q in questions:
+        q = q.strip()
+        if not q:
+            continue
+        # 长度检查
+        if len(q) < min_len or len(q) > max_len:
+            continue
+        # 问题标记检查
+        if require_marker:
+            has_marker = any(m in q for m in ['？', '?', '吗', '哪', '如何', '什么', '多少', '是否', '为什么', '能否', '会不会'])
+            if not has_marker:
+                continue
+        # 拒绝模式检查
+        if any(p in q for p in reject_patterns):
+            continue
+        validated.append(q)
+
+    return validated
+
+
+def validate_assessment(assessment: str) -> bool:
+    """验证 LLM 生成的评估质量"""
+    if not assessment or not assessment.strip():
+        return False
+
+    rules = _load_validation_rules()
+    a_rules = rules.get("assessments", {})
+
+    min_len = a_rules.get("min_length", 50)
+    max_len = a_rules.get("max_length", 800)
+    require_data = a_rules.get("require_data_point", True)
+    reject_patterns = a_rules.get("reject_patterns", [])
+
+    # 长度检查
+    if len(assessment) < min_len or len(assessment) > max_len:
+        return False
+    # 拒绝模式
+    if any(p in assessment for p in reject_patterns):
+        return False
+    # 数据点检查
+    if require_data:
+        import re
+        has_numbers = bool(re.search(r'\d+\.?\d*', assessment))
+        has_entities = bool(re.search(r'[\u4e00-\u9fff]{2,}(公司|集团|产业|设备|芯片|市场)', assessment))
+        if not has_numbers and not has_entities:
+            return False
+
+    return True
+
+
 def scan_wiki_pages(company_filter: str = None) -> List[Dict[str, Any]]:
     """扫描所有 wiki 页面, 返回结构化信息"""
     pages = []
@@ -196,6 +268,16 @@ def generate_core_questions(pages: List[Dict], graph_data: dict, dry_run: bool =
         sector = ", ".join(entity_info.get("sectors", []))
         position = entity_info.get("position", "")
 
+        # 加载行业级问题模板作为锚定框架
+        question_templates = []
+        for s in entity_info.get("sectors", []):
+            sector_questions = graph_data.get("questions", {}).get(s, [])
+            question_templates.extend(sector_questions)
+        # 也加载主题级模板
+        for t in entity_info.get("themes", []):
+            theme_questions = graph_data.get("questions", {}).get(t, [])
+            question_templates.extend(theme_questions)
+
         # 提取时间线摘要作为已有数据
         existing_data = ""
         if page["timeline_entries"]:
@@ -204,15 +286,21 @@ def generate_core_questions(pages: List[Dict], graph_data: dict, dry_run: bool =
                 summaries.append(f"{entry['date']}: {'; '.join(entry['points'][:2])}")
             existing_data = "\n".join(summaries)
 
-        # 调用 LLM 生成核心问题
+        # 调用 LLM 生成核心问题（传入行业模板作为锚定框架）
         questions = llm.generate_core_questions(
             entity=entity,
             sector=sector,
             position=position,
             existing_data=existing_data,
+            question_templates=question_templates if question_templates else None,
         )
 
         if questions:
+            # 验证问题质量
+            questions = validate_questions(questions)
+            if not questions:
+                print(f" -> all rejected by validation")
+                continue
             # 写入页面
             new_content = update_core_questions(page["content"], questions)
             if new_content != page["content"] and not dry_run:
@@ -259,7 +347,7 @@ def generate_assessments(pages: List[Dict], dry_run: bool = False) -> int:
             core_questions=page["core_questions"] if page["has_core_questions"] else None,
         )
 
-        if assessment and "待积累数据后补充" not in assessment:
+        if assessment and validate_assessment(assessment):
             # 写入页面
             new_content = update_assessment(page["content"], assessment)
             if new_content != page["content"] and not dry_run:
@@ -267,7 +355,7 @@ def generate_assessments(pages: List[Dict], dry_run: bool = False) -> int:
             updated += 1
             print(f" -> done")
         else:
-            print(f" -> skipped")
+            print(f" -> skipped (validation)")
 
     return updated
 

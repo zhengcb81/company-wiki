@@ -29,6 +29,7 @@ LOG_PATH = WIKI_ROOT / "log.md"
 
 sys.path.insert(0, str(SCRIPTS_DIR))
 from graph import Graph
+from config_rules_loader import RulesConfig
 
 # ── 简易 YAML 解析（避免依赖 pyyaml）───────
 def load_yaml_simple(path):
@@ -170,10 +171,11 @@ def has_mojibake(text):
     return False
 
 
-def save_news_item(company_name, result, news_dir):
+def save_news_item(company_name, result, news_dir, rules=None):
     """
     将一条搜索结果保存为 markdown 文件。
     文件名格式: YYYY-MM-DD_{hash8}_{safe_title}.md
+    在写入前执行质量预过滤，从源头拦截垃圾数据。
     """
     title = result.get("title", "untitled")
     url = result.get("url", "")
@@ -183,6 +185,29 @@ def save_news_item(company_name, result, news_dir):
     # 编码质量门禁：跳过乱码内容
     if has_mojibake(content) or has_mojibake(title):
         return False
+
+    # 质量预过滤（在写入文件之前拦截垃圾数据）
+    if rules:
+        # URL 黑名单检查
+        if rules.is_url_blacklisted(url):
+            return False
+
+        # 标题黑名单检查
+        if rules.is_title_blacklisted(title):
+            return False
+
+        # 最低内容长度检查
+        cq = rules.get_collection_quality()
+        min_content = cq.get("min_content_length", 100)
+        min_title = cq.get("min_title_length", 10)
+
+        if len(content) < min_content:
+            # 内容太短，且标题=公司名 → 大概率是公司主页
+            if cq.get("skip_if_title_equals_company", True):
+                title_clean = title.replace(" ", "").replace("-", "")
+                company_clean = company_name.replace(" ", "")
+                if title_clean == company_clean or len(title) < min_title:
+                    return False
 
     # 解析日期
     if published:
@@ -234,7 +259,7 @@ def load_search_config():
     return cfg.get("search", {})
 
 
-def collect_for_company(company, search_cfg, dry_run=False):
+def collect_for_company(company, search_cfg, dry_run=False, rules=None):
     """为单个公司采集新闻"""
     name = company["name"]
     queries = company.get("news_queries", [f"{name} 最新消息"])
@@ -272,7 +297,7 @@ def collect_for_company(company, search_cfg, dry_run=False):
                 print(f"    [DRY] Would save: {r.get('title', '')[:50]}")
                 total_new += 1
             else:
-                saved = save_news_item(name, r, news_dir)
+                saved = save_news_item(name, r, news_dir, rules=rules)
                 if saved:
                     print(f"    + {r.get('title', '')[:60]}")
                     total_new += 1
@@ -310,6 +335,7 @@ def main():
     graph = Graph()
     companies = graph.get_all_companies()
     search_cfg = load_search_config()
+    rules = RulesConfig()
 
     if args.company:
         companies = [c for c in companies if c["name"] == args.company]
@@ -322,7 +348,7 @@ def main():
 
     for company in companies:
         print(f"\n[{company['name']}] ({company['ticker']})")
-        new, dup = collect_for_company(company, search_cfg, args.dry_run)
+        new, dup = collect_for_company(company, search_cfg, args.dry_run, rules=rules)
         total_new += new
         total_dup += dup
 

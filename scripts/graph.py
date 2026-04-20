@@ -87,6 +87,28 @@ class Graph:
             if ticker:
                 self._company_index[ticker] = comp
 
+        # 名称黑名单（从 graph.yaml settings 加载）
+        self._name_blacklist = set(
+            self._data.get("settings", {}).get("name_blacklist", [])
+        )
+
+        # 关键词特异性配置
+        settings = self._data.get("settings", {})
+        km = settings.get("keyword_meta", {})
+        self._keyword_specificity_map = km.get("specificity_overrides", {})
+        self._default_specificity = km.get("default_specificity", 0.5)
+        self._min_specificity = km.get("min_specificity_threshold", 0.3)
+
+        # 相关性权重配置
+        rw = settings.get("relevance_weights", {})
+        self._w_company_hint = rw.get("company_hint", 1.0)
+        self._w_sector_cascade = rw.get("sector_cascade", 0.5)
+        self._w_keyword_max = rw.get("keyword_max", 0.7)
+        self._w_company_mention = rw.get("company_mention", 0.3)
+        self._min_score_threshold = rw.get("min_score_threshold", 0.3)
+        self._prominent_chars = rw.get("prominent_mention_chars", 500)
+        self._prominent_count = rw.get("prominent_mention_count", 3)
+
     # ── 公司查询 ──────────────────────────────
 
     def get_all_companies(self):
@@ -218,45 +240,105 @@ class Graph:
 
     # ── 相关性匹配（核心 API）──────────────────
 
+    def _keyword_specificity(self, keyword):
+        """获取关键词的特异性分数（0.0-1.0）"""
+        return self._keyword_specificity_map.get(
+            keyword, self._default_specificity
+        )
+
+    def _is_prominent_mention(self, name, text):
+        """
+        判断公司名是否为"显著提及"（而非顺带提到）。
+        显著提及 = 出现在文本前N字符 或 出现次数>=阈值。
+        """
+        # 出现在文本开头区域
+        if name in text[:self._prominent_chars]:
+            return True
+        # 多次出现
+        if text.count(name) >= self._prominent_count:
+            return True
+        return False
+
     def find_related_entities(self, text, company_hint=None):
         """
         给定一段文本，判断它与哪些实体（公司/行业/主题）相关。
+        使用加权多信号评分：company_hint > keyword specificity > prominent mention。
+
         返回: [(entity_name, entity_type, topic_name), ...]
 
         这是 ingest.py 判断相关性的核心逻辑。
         """
         text_lower = text.lower()
-        related = set()
+        candidates = {}  # (entity_name, entity_type, topic_name) -> score
 
-        # 1. 如果有公司线索，直接关联该公司及其行业
+        # ── Signal 1: company_hint（权重最高）──
         if company_hint:
             comp = self.get_company(company_hint)
             if comp:
-                related.add((company_hint, "company", "公司动态"))
+                candidates[(company_hint, "company", "公司动态")] = self._w_company_hint
+                # 级联到行业（权重较低）
                 for s in comp.get("sectors", []):
-                    related.update(self._expand_sector_topics(s))
+                    for topic in self._expand_sector_topics(s):
+                        candidates[topic] = max(
+                            candidates.get(topic, 0),
+                            self._w_sector_cascade
+                        )
                 for t in comp.get("themes", []):
-                    related.update(self._expand_theme_topics(t))
-                # 1b. 关联竞争者（竞争者的"相关动态"也会被更新）
+                    for topic in self._expand_theme_topics(t):
+                        candidates[topic] = max(
+                            candidates.get(topic, 0),
+                            self._w_sector_cascade
+                        )
+                # 竞争者关联
                 for competitor in comp.get("competes_with", []):
                     if self.get_company(competitor):
-                        related.add((competitor, "company", "相关动态"))
+                        key = (competitor, "company", "相关动态")
+                        candidates[key] = max(
+                            candidates.get(key, 0),
+                            self._w_company_mention
+                        )
 
-        # 2. 关键词匹配行业/主题
+        # ── Signal 2: 关键词特异性匹配 ──
         for keyword, (entity_name, entity_type) in self._keyword_index.items():
-            if keyword in text_lower:
-                if entity_type in ("sector", "subsector"):
-                    related.update(self._expand_sector_topics(entity_name))
-                elif entity_type == "theme":
-                    related.update(self._expand_theme_topics(entity_name))
+            if keyword not in text_lower:
+                continue
 
-        # 3. 公司名匹配（仅关联到该公司的"相关动态"，不级联到行业）
-        # 原因：如果一篇文章只是顺带提到某公司，不应因此被归入该公司的行业wiki
+            specificity = self._keyword_specificity(keyword)
+            if specificity < self._min_specificity:
+                continue  # 太泛的关键词不参与匹配
+
+            score = specificity * self._w_keyword_max
+
+            if entity_type in ("sector", "subsector"):
+                topics = self._expand_sector_topics(entity_name)
+            elif entity_type == "theme":
+                topics = self._expand_theme_topics(entity_name)
+            else:
+                continue
+
+            for topic in topics:
+                candidates[topic] = max(candidates.get(topic, 0), score)
+
+        # ── Signal 3: 公司名显著提及 ──
         for comp_name in self._data.get("companies", {}):
-            if comp_name in text and comp_name != company_hint:
-                related.add((comp_name, "company", "相关动态"))
+            if comp_name == company_hint:
+                continue
+            if comp_name in self._name_blacklist:
+                continue
+            if len(comp_name) < 2:
+                continue
+            if comp_name not in text:
+                continue
+            # 只有关联提及才路由
+            if self._is_prominent_mention(comp_name, text):
+                key = (comp_name, "company", "相关动态")
+                candidates[key] = max(candidates.get(key, 0), self._w_company_mention)
 
-        return list(related)
+        # ── 过滤：只保留超过阈值的候选 ──
+        return [
+            entity for entity, score in candidates.items()
+            if score >= self._min_score_threshold
+        ]
 
     def _expand_sector_topics(self, sector_name):
         """展开行业下的所有 topic"""

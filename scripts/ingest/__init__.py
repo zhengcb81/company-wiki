@@ -7,6 +7,7 @@ from .pipeline import IngestPipeline, PipelineResult
 from .scanner import FileScanner
 from .extractor import ContentExtractor
 from .updater import WikiUpdater
+from .stages import IngestStages
 
 __all__ = [
     "IngestPipeline",
@@ -14,4 +15,5 @@ __all__ = [
     "FileScanner",
     "ContentExtractor",
     "WikiUpdater",
+    "IngestStages",
 ]

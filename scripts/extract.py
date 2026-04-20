@@ -13,30 +13,31 @@ import re
 import sys
 from pathlib import Path
 
-
-# ── 噪音模式 ──────────────────────────────
-NOISE_PATTERNS = [
-    # 导航/菜单
-    r'^#{1,6}\s*(关于|产品|支持|联系|服务|首页|导航|菜单|公司简介|版权所有)',
-    r'^#{1,6}\s*(Company|Products|Support|Contact|About|Menu|Navigation)',
-    r'^#+\s*-+\s*[▲▼↑↓]?\s*$',
-    # 网站元素
-    r'(登录|注册|搜索|订阅|分享|收藏|点赞|评论区|版权所有|版权声明)',
-    r'(Copyright|All rights reserved|Terms of Service|Privacy Policy)',
-    r'(备案号|ICP备|增值电信|互联网新闻信息服务)',
-    r'(粤公网安备|京ICP|沪ICP)',
-    # 股票行情页特有
-    r'^\|?\s*(开盘价|昨收盘|最高|最低|换手率|振幅|成交额|市盈率|市净率)',
-    r'^\|?\s*(日期|两融余额|融资余额|环比|占流通市值)',
-    r'^\|?\s*(Open|High|Low|Close|Volume|Turnover)',
-    # 重复分隔符
-    r'^[\s\-_=*#]{10,}$',
-    r'^[\|:\s]+$',  # 纯表格分隔行
-    # 杂项
-    r'^(更多|详情|点击|查看|进入|返回|上一页|下一页)',
-    r'^(Read more|Learn more|Click here|Continue)',
-    r'手机财新网|新浪财经|东方财富|雪球|格隆汇',
-]
+# ── 尝试从 config_rules.yaml 加载噪声模式 ─────────
+try:
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from config_rules_loader import RulesConfig
+    _rules = RulesConfig()
+    NOISE_PATTERNS = _rules.get_noise_patterns()
+except Exception:
+    # 回退：硬编码的噪声模式（当 config_rules.yaml 不可用时）
+    NOISE_PATTERNS = [
+        r'^#{1,6}\s*(关于|产品|支持|联系|服务|首页|导航|菜单|公司简介|版权所有)',
+        r'^#{1,6}\s*(Company|Products|Support|Contact|About|Menu|Navigation)',
+        r'^#+\s*-+\s*[▲▼↑↓]?\s*$',
+        r'(登录|注册|搜索|订阅|分享|收藏|点赞|评论区|版权所有|版权声明)',
+        r'(Copyright|All rights reserved|Terms of Service|Privacy Policy)',
+        r'(备案号|ICP备|增值电信|互联网新闻信息服务)',
+        r'(粤公网安备|京ICP|沪ICP)',
+        r'^\|?\s*(开盘价|昨收盘|最高|最低|换手率|振幅|成交额|市盈率|市净率)',
+        r'^\|?\s*(日期|两融余额|融资余额|环比|占流通市值)',
+        r'^\|?\s*(Open|High|Low|Close|Volume|Turnover)',
+        r'^[\s\-_=*#]{10,}$',
+        r'^[\|:\s]+$',
+        r'^(更多|详情|点击|查看|进入|返回|上一页|下一页)',
+        r'^(Read more|Learn more|Click here|Continue)',
+        r'手机财新网|新浪财经|东方财富|雪球|格隆汇',
+    ]
 
 
 def clean_text(text):
@@ -162,6 +163,147 @@ def score_sentence(sentence):
         score -= 1
 
     return score
+
+
+def score_document_quality(text, title=""):
+    """
+    对文档整体质量进行评分。
+    返回: {
+        'score': 0.0-1.0,
+        'grade': 'S'|'A'|'B'|'C',
+        'reasons': ['reason1', ...],
+        'action': 'accept'|'review'|'reject'
+    }
+    所有权重和阈值从 config_rules.yaml 的 quality_grading 段读取。
+    """
+    # 加载配置
+    try:
+        grading_cfg = _rules._data.get("quality_grading", {})
+        weights = grading_cfg.get("weights", {})
+        thresholds = grading_cfg.get("thresholds", {})
+        grading = grading_cfg.get("grading", {})
+    except (AttributeError, TypeError):
+        weights = {}
+        thresholds = {}
+        grading = {}
+
+    # 默认值
+    w_numbers = weights.get("has_specific_numbers", 0.25)
+    w_entities = weights.get("has_entity_names", 0.20)
+    w_length = weights.get("content_length", 0.15)
+    w_diversity = weights.get("sentence_diversity", 0.15)
+    w_actions = weights.get("has_action_verbs", 0.10)
+    w_no_noise = weights.get("no_noise_ratio", 0.15)
+
+    t_accept = thresholds.get("accept", 0.5)
+    t_review = thresholds.get("review", 0.2)
+
+    if not text or len(text.strip()) < 20:
+        return {
+            "score": 0.0,
+            "grade": "C",
+            "reasons": ["内容过短或为空"],
+            "action": "reject"
+        }
+
+    reasons = []
+    dimension_scores = {}
+
+    # 1. 具体数字检测
+    has_numbers = bool(re.search(
+        r'\d+\.?\d*\s*(亿|万|%|元|倍|美元|人民币|万元|亿元|Q[1-4]|mm|nm|nm|GB|TB)',
+        text
+    ))
+    dimension_scores["has_specific_numbers"] = 1.0 if has_numbers else 0.0
+    if has_numbers:
+        reasons.append("含具体数据")
+
+    # 2. 实体名称检测
+    entity_patterns = [
+        r'(公司|集团|股份|有限|科技|电子|半导体|芯片|设备|材料)',
+        r'(NVIDIA|AMD|TSMC|Intel|Samsung|ASML)',
+    ]
+    has_entities = any(re.search(p, text) for p in entity_patterns)
+    dimension_scores["has_entity_names"] = 1.0 if has_entities else 0.0
+    if has_entities:
+        reasons.append("含实体名称")
+
+    # 3. 内容长度（归一化到 0-1）
+    length_score = min(1.0, len(text) / 1000)
+    dimension_scores["content_length"] = length_score
+    if len(text) < 100:
+        reasons.append("内容过短")
+
+    # 4. 句子多样性
+    sentences = split_sentences(clean_text(text))
+    if sentences:
+        unique_starts = len(set(s[:10] for s in sentences if len(s) >= 10))
+        diversity = min(1.0, unique_starts / max(len(sentences), 1))
+    else:
+        diversity = 0.0
+    dimension_scores["sentence_diversity"] = diversity
+    if diversity < 0.3 and len(sentences) > 3:
+        reasons.append("句子重复度高")
+
+    # 5. 动作性动词
+    action_words = [
+        '发布', '推出', '宣布', '获得', '突破', '增长', '下降', '合作',
+        '收购', '投资', '融资', '上市', '签约', '中标', '获批', '实现',
+        'launched', 'announced', 'acquired', 'grew',
+    ]
+    text_lower = text.lower()
+    has_actions = any(w in text_lower for w in action_words)
+    dimension_scores["has_action_verbs"] = 1.0 if has_actions else 0.0
+    if has_actions:
+        reasons.append("含事件描述")
+
+    # 6. 非噪声比例
+    cleaned = clean_text(text)
+    noise_ratio = 1.0 - (len(cleaned) / max(len(text), 1))
+    dimension_scores["no_noise_ratio"] = max(0.0, 1.0 - noise_ratio)
+    if noise_ratio > 0.5:
+        reasons.append("噪声占比高")
+
+    # 计算加权总分
+    total_score = (
+        dimension_scores.get("has_specific_numbers", 0) * w_numbers
+        + dimension_scores.get("has_entity_names", 0) * w_entities
+        + dimension_scores.get("content_length", 0) * w_length
+        + dimension_scores.get("sentence_diversity", 0) * w_diversity
+        + dimension_scores.get("has_action_verbs", 0) * w_actions
+        + dimension_scores.get("no_noise_ratio", 0) * w_no_noise
+    )
+
+    # 确定等级
+    s_threshold = grading.get("S", {}).get("min_score", 0.8)
+    a_threshold = grading.get("A", {}).get("min_score", 0.5)
+    b_threshold = grading.get("B", {}).get("min_score", 0.2)
+
+    if total_score >= s_threshold:
+        grade = "S"
+    elif total_score >= a_threshold:
+        grade = "A"
+    elif total_score >= b_threshold:
+        grade = "B"
+    else:
+        grade = "C"
+        reasons.append("质量分过低")
+
+    # 确定动作
+    if total_score >= t_accept:
+        action = "accept"
+    elif total_score >= t_review:
+        action = "review"
+    else:
+        action = "reject"
+
+    return {
+        "score": round(total_score, 3),
+        "grade": grade,
+        "reasons": reasons if reasons else ["无显著特征"],
+        "action": action,
+        "dimensions": dimension_scores
+    }
 
 
 def extract_summary(text, max_sentences=3):
