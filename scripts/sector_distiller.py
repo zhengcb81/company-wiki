@@ -24,12 +24,7 @@ from datetime import datetime
 from pathlib import Path
 from typing import Dict, List, Optional
 
-SCRIPTS_DIR = Path(__file__).resolve().parent
-WIKI_ROOT = SCRIPTS_DIR.parent
-sys.path.insert(0, str(SCRIPTS_DIR))
-
-from dotenv import load_dotenv
-load_dotenv()
+from common import WIKI_ROOT
 
 from llm_client import LLMClient, get_llm_client
 from graph import Graph

@@ -57,10 +57,29 @@ from typing import Dict, List, Any, Optional, Tuple
 from dataclasses import dataclass, field
 from pathlib import Path
 
+from common import WIKI_ROOT
+
+from prompts import (
+    CONTENT_ANALYSIS_SYSTEM_PROMPT,
+    SUMMARY_GENERATION_SYSTEM_PROMPT,
+    ASSESSMENT_SYSTEM_PROMPT,
+    CORE_QUESTIONS_SYSTEM_PROMPT,
+    QUERY_ANSWER_SYSTEM_PROMPT,
+    CONTRADICTION_DETECTION_SYSTEM_PROMPT,
+    LINT_PAGE_SYSTEM_PROMPT,
+    build_content_analysis_prompt,
+    build_summary_generation_prompt,
+    build_assessment_client_prompt,
+    build_core_questions_prompt,
+    build_query_answer_prompt,
+    build_contradiction_detection_prompt,
+    build_lint_page_prompt,
+)
+
 logger = logging.getLogger(__name__)
 
 # ── LLM 成本追踪 ──────────────────────────
-_COST_LOG_PATH = Path(__file__).resolve().parent.parent / "llm_cost_log.csv"
+_COST_LOG_PATH = WIKI_ROOT / "llm_cost_log.csv"
 
 # 各 provider 每百万 token 价格（USD）
 # 参考各厂商官方定价，可按需更新
@@ -658,29 +677,8 @@ class LLMClient:
             {"key_points", "entities_mentioned", "topics_affected",
              "sentiment", "importance", "suggested_questions"}
         """
-        content_preview = content[:3000] if len(content) > 3000 else content
-
-        system = (
-            "你是一个专业的上市公司研究分析助手。请准确提取关键信息, 以 JSON 格式返回。"
-        )
-        user = f"""请分析以下文档内容，提取关键信息。
-
-{f"相关实体: {entity_name}" if entity_name else ""}
-
-内容:
-{content_preview}
-
-请以 JSON 格式返回:
-{{
-    "key_points": ["要点1", "要点2", "要点3"],
-    "entities_mentioned": ["提及的公司/行业/主题"],
-    "topics_affected": ["影响的主题"],
-    "sentiment": "positive/negative/neutral",
-    "importance": 0.0到1.0之间的数值,
-    "suggested_questions": ["这份文档可能回答的研究问题"]
-}}
-
-只返回 JSON，不要其他内容。"""
+        system = CONTENT_ANALYSIS_SYSTEM_PROMPT
+        user = build_content_analysis_prompt(content, entity_name)
 
         response = self.chat_with_retry(user, system)
         if response.success:
@@ -780,26 +778,8 @@ class LLMClient:
         """
         生成精炼摘要 (返回 "- 要点" 格式)
         """
-        content_truncated = content[:2000] if len(content) > 2000 else content
-
-        system = (
-            "你是一个专业的金融分析师助手，负责将新闻内容提炼为简洁的要点摘要。\n"
-            "要求：\n"
-            "1. 输出 2-5 个关键要点，每条一行\n"
-            "2. 每条要点以动词或名词开头\n"
-            "3. 包含具体数字、日期、金额等关键数据\n"
-            "4. 指出事件的意义或影响\n"
-            "5. 直接输出要点列表，不要输出标题或解释"
-        )
-
-        user_parts = []
-        if entity:
-            user_parts.append(f"公司/实体：{entity}")
-        if topic:
-            user_parts.append(f"所属主题：{topic}")
-        user_parts.append(f"\n原始内容：\n{content_truncated}")
-        user_parts.append("\n请输出 2-5 个关键要点：")
-        user = "\n".join(user_parts)
+        system = SUMMARY_GENERATION_SYSTEM_PROMPT
+        user = build_summary_generation_prompt(content, topic, entity)
 
         response = self.chat_with_retry(user, system)
         if response.success and response.content.strip():
@@ -816,6 +796,7 @@ class LLMClient:
             return "\n".join(clean_lines)
 
         # Fallback
+        content_truncated = content[:2000] if len(content) > 2000 else content
         sentences = re.split(r"(?<=[。！？；])\s*", content_truncated)
         fallback = [f"- {s.strip()}" for s in sentences[:3] if len(s.strip()) > 10]
         return "\n".join(fallback) if fallback else "- 内容已处理"
@@ -861,30 +842,8 @@ class LLMClient:
         if len(combined) > 4000:
             combined = combined[:4000]
 
-        questions_text = ""
-        if core_questions:
-            questions_text = "\n\n核心追踪问题:\n" + "\n".join(
-                f"- {q}" for q in core_questions
-            )
-
-        system = "你是一个资深上市公司研究分析师，擅长从多条信息中提炼趋势、判断方向、发现风险。"
-
-        user = f"""请基于以下时间线条目，为 {entity} 的「{topic}」主题生成一段综合评估。
-
-要求:
-1. 100-300 字的段落
-2. 总结关键趋势和变化
-3. 给出核心判断和前瞻
-4. 如有风险要点也要提及
-5. 用引用块格式 (>) 输出
-
-实体: {entity}
-主题: {topic}{questions_text}
-
-时间线条目:
-{combined}
-
-请直接输出综合评估 (以 > 开头的引用块格式):"""
+        system = ASSESSMENT_SYSTEM_PROMPT
+        user = build_assessment_client_prompt(combined, topic, entity, core_questions)
 
         response = self.chat_with_retry(user, system)
         if response.success and response.content.strip():
@@ -910,31 +869,10 @@ class LLMClient:
             question_templates: 行业级问题模板（从 graph.yaml 加载），
                                用于锚定 LLM 的研究方向，避免产出通用废话。
         """
-        system = "你是一个上市公司研究框架设计专家。"
-
-        # 构建问题模板锚定段
-        template_section = ""
-        if question_templates:
-            template_section = f"""
-研究框架参考（请基于以下行业级问题框架，针对{entity}的具体情况做个性化适配）:
-{chr(10).join(f"- {t}" for t in question_templates)}
-"""
-
-        user = f"""请为以下实体设计 3-5 个核心研究追踪问题。
-
-实体: {entity}
-{f"所属行业: {sector}" if sector else ""}
-{f"定位: {position}" if position else ""}
-{template_section}
-{f"已有数据概况: {existing_data[:500]}" if existing_data else ""}
-
-要求:
-1. 问题要具体、可追踪、有信息增量
-2. 必须结合{entity}的实际情况，不要产出适用于任何公司的通用问题
-3. 不要出现"核心竞争优势是什么""主要增长驱动力在哪里"这类泛泛的问题
-4. 每个问题一行, 不要编号
-
-请直接输出问题列表:"""
+        system = CORE_QUESTIONS_SYSTEM_PROMPT
+        user = build_core_questions_prompt(
+            entity, sector, position, existing_data, question_templates
+        )
 
         response = self.chat_with_retry(user, system)
         if response.success and response.content.strip():
@@ -1054,17 +992,8 @@ class LLMClient:
         if len(context) > 800000:
             context = context[:800000]
 
-        system = (
-            "你是一个上市公司研究知识库的智能助手。基于提供的知识库内容准确回答问题。"
-        )
-        user = f"""请基于以下知识库内容回答问题。
-
-问题: {query}
-
-知识库内容:
-{context}
-
-请给出详细、准确的回答。如果信息不足，请明确说明。"""
+        system = QUERY_ANSWER_SYSTEM_PROMPT
+        user = build_query_answer_prompt(query, context)
 
         response = self.chat_with_retry(user, system, max_tokens=8192)
         return response.content if response.success else "无法生成答案 (LLM 不可用)"
@@ -1077,17 +1006,8 @@ class LLMClient:
         """
         检测两个页面之间的矛盾
         """
-        system = "你是一个数据一致性检查专家。请仔细对比两段文本, 找出矛盾。"
-
-        user = f"""请对比以下两段关于 {entity if entity else "某个实体"} 的文本，找出矛盾。
-
-文本 A:
-{page1_content[:2000]}
-
-文本 B:
-{page2_content[:2000]}
-
-请列出所有矛盾, 每个矛盾一行。如果没有矛盾, 输出"未发现矛盾"。只输出矛盾列表:"""
+        system = CONTRADICTION_DETECTION_SYSTEM_PROMPT
+        user = build_contradiction_detection_prompt(page1_content, page2_content, entity)
 
         response = self.chat(user, system)
         if response.success:
@@ -1158,28 +1078,8 @@ class LLMClient:
         """
         LLM 驱动的 wiki 页面质量检查
         """
-        system = "你是一个知识库质量审查专家。请检查 wiki 页面质量。"
-
-        user = f"""请检查以下 wiki 页面的质量，找出问题:
-
-1. 过时的结论或数据
-2. 提及了但未链接的概念/公司 (应该有 wikilink 的地方)
-3. 信息缺失或不够深入的地方
-4. 格式问题
-
-页面内容:
-{page_content[:3000]}
-
-{f"知识库其他页面: {all_pages_index[:500]}" if all_pages_index else ""}
-
-请以 JSON 格式返回问题列表:
-[
-    {{"type": "stale", "description": "...", "suggestion": "..."}},
-    {{"type": "missing_link", "description": "...", "suggestion": "..."}},
-    {{"type": "content_gap", "description": "...", "suggestion": "..."}}
-]
-
-如果没有问题, 返回 []。只返回 JSON:"""
+        system = LINT_PAGE_SYSTEM_PROMPT
+        user = build_lint_page_prompt(page_content, all_pages_index)
 
         response = self.chat(user, system)
         if response.success:

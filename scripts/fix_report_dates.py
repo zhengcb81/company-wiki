@@ -17,8 +17,7 @@ from datetime import datetime
 from pathlib import Path
 from typing import Optional
 
-SCRIPTS_DIR = Path(__file__).resolve().parent
-WIKI_ROOT = SCRIPTS_DIR.parent
+from common import WIKI_ROOT
 
 
 def infer_correct_date(filename: str) -> Optional[str]:

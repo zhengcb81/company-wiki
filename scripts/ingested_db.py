@@ -24,10 +24,11 @@ import sqlite3
 from pathlib import Path
 from typing import Optional, Set
 
+from common import WIKI_ROOT
+
 logger = logging.getLogger(__name__)
 
 # ── 路径 ──────────────────────────────────
-WIKI_ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_DB_PATH = WIKI_ROOT / ".ingested" / "ingested.db"
 HASH_DIR = WIKI_ROOT / ".ingested"
 

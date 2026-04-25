@@ -19,8 +19,7 @@ import sys
 import time
 from pathlib import Path
 
-# 添加 scripts 目录到路径以便导入
-sys.path.insert(0, str(Path(__file__).parent))
+from common import SCRIPTS_DIR
 
 from pdf_extract_v2 import extract_pdf_text
 

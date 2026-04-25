@@ -27,10 +27,7 @@ import sys
 from datetime import datetime, timedelta
 from pathlib import Path
 
-SCRIPTS_DIR = Path(__file__).resolve().parent
-WIKI_ROOT = SCRIPTS_DIR.parent
-CONFIG_PATH = WIKI_ROOT / "config.yaml"
-LOG_PATH = WIKI_ROOT / "log.md"
+from common import WIKI_ROOT, CONFIG_PATH, LOG_PATH, SCRIPTS_DIR
 
 
 def load_config():

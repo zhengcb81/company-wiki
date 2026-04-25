@@ -16,14 +16,16 @@ from pathlib import Path
 from typing import Optional, Dict, Any, List
 import logging
 
+from common import WIKI_ROOT
+
 logger = logging.getLogger(__name__)
 
 
 def _load_dotenv():
     """加载项目根目录下的 .env 文件到环境变量（如果尚未设置）"""
-    # 查找 .env: 先看脚本同级目录的上级，再看当前工作目录
+    # 查找 .env: 先看项目根目录，再看当前工作目录
     candidates = [
-        Path(__file__).resolve().parent.parent / ".env",  # scripts/../.env
+        WIKI_ROOT / ".env",
         Path.cwd() / ".env",
     ]
     for env_path in candidates:
@@ -134,7 +136,7 @@ class Config:
         """
         # 确定配置文件路径
         if config_path is None:
-            config_path = Path(__file__).resolve().parent.parent / "config.yaml"
+            config_path = WIKI_ROOT / "config.yaml"
             # 仅在使用默认路径时自动加载 .env（测试传入自定义路径时跳过）
             _ensure_dotenv()
         
@@ -240,27 +242,46 @@ class Config:
     def validate(self, strict: bool = True) -> None:
         """
         验证配置
-        
+
         Args:
             strict: 是否严格验证（检查路径是否存在）
-            
+
         Raises:
             ValueError: 配置验证失败
         """
         errors = []
-        
+
         # 验证 LLM 配置
         if strict and not self.llm.api_key:
             errors.append("缺少 LLM API Key (设置 DEEPSEEK_API_KEY 环境变量)")
-        
+
+        # LLM provider 白名单
+        valid_providers = {"deepseek", "openai", "claude"}
+        if self.llm.provider and self.llm.provider not in valid_providers:
+            errors.append(f"不支持的 LLM provider: {self.llm.provider} (支持: {valid_providers})")
+
+        # 数值范围验证
+        if self.llm.temperature is not None and not (0 <= self.llm.temperature <= 2):
+            errors.append(f"temperature 超出范围 [0, 2]: {self.llm.temperature}")
+        if self.llm.max_tokens is not None and self.llm.max_tokens < 1:
+            errors.append(f"max_tokens 必须为正数: {self.llm.max_tokens}")
+
         # 验证搜索配置
         if strict and not self.search.api_key:
             errors.append("缺少搜索 API Key (设置 TAVILY_API_KEY 环境变量)")
-        
+
+        # 验证调度配置白名单
+        valid_intervals = {"hourly", "daily", "weekly", "monthly"}
+        if hasattr(self, '_raw'):
+            schedule = self._raw.get("schedule", {})
+            for task, interval in schedule.items():
+                if isinstance(interval, str) and interval not in valid_intervals:
+                    errors.append(f"不支持的调度间隔: {task}={interval} (支持: {valid_intervals})")
+
         # 验证路径（仅在严格模式下检查）
         if strict and not self.paths.wiki_root.exists():
             errors.append(f"Wiki 根目录不存在: {self.paths.wiki_root}")
-        
+
         if errors:
             error_msg = "配置验证失败:\n" + "\n".join(f"  - {e}" for e in errors)
             error_msg += "\n\n请检查 config.yaml 或设置环境变量"

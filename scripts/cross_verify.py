@@ -27,20 +27,8 @@ from datetime import datetime
 from pathlib import Path
 from typing import Dict, List, Optional, Set, Tuple
 
-# Windows 控制台 UTF-8 编码
-if sys.platform == "win32":
-    try:
-        if hasattr(sys.stdout, "reconfigure"):
-            sys.stdout.reconfigure(encoding="utf-8")
-        if hasattr(sys.stderr, "reconfigure"):
-            sys.stderr.reconfigure(encoding="utf-8")
-    except (AttributeError, OSError):
-        pass
+from common import WIKI_ROOT
 
-SCRIPTS_DIR = Path(__file__).resolve().parent
-WIKI_ROOT = SCRIPTS_DIR.parent
-
-sys.path.insert(0, str(SCRIPTS_DIR))
 from graph import Graph
 
 

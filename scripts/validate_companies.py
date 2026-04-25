@@ -16,15 +16,13 @@ import argparse
 import sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).parent))
+from common import WIKI_ROOT, COMPANIES_YAML
 
 import yaml
 
 
 def load_companies():
-    root = Path(__file__).resolve().parent.parent
-    path = root / "companies.yaml"
-    with open(path, "r", encoding="utf-8") as f:
+    with open(COMPANIES_YAML, "r", encoding="utf-8") as f:
         return yaml.safe_load(f)["companies"]
 
 
@@ -226,11 +224,9 @@ def main():
 
     if args.fix:
         apply_fixes(fixes, companies)
-        root = Path(__file__).resolve().parent.parent
-        path = root / "companies.yaml"
-        with open(path, "w", encoding="utf-8") as f:
+        with open(COMPANIES_YAML, "w", encoding="utf-8") as f:
             yaml.dump({"companies": companies}, f, allow_unicode=True, sort_keys=False)
-        print(f"\n  已自动修复并保存到 {path}")
+        print(f"\n  已自动修复并保存到 {COMPANIES_YAML}")
 
     print(f"\n{'=' * 60}")
     return 1 if conflicts else 0

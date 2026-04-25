@@ -118,6 +118,20 @@ def setup_paths() -> tuple[Path, Path]:
     return SCRIPTS_DIR, WIKI_ROOT
 
 
+# ── 缓存实例 ──────────────────────────────
+_graph = None
+
+
+def get_graph():
+    """缓存的单例 Graph 实例"""
+    global _graph
+    from graph import Graph
+
+    if _graph is None:
+        _graph = Graph(str(GRAPH_YAML))
+    return _graph
+
+
 # ── 路径辅助函数（从 utils.py 合并）─────────────────
 def get_company_dir(company_name: str) -> Path:
     """获取公司目录"""

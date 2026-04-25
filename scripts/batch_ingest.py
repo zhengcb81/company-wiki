@@ -9,7 +9,7 @@ import argparse
 import hashlib
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).parent))
+from common import SCRIPTS_DIR
 
 from ingest_v2 import (
     process_file, get_ingested_set, is_ingested, mark_ingested, WIKI_ROOT

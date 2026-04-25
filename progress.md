@@ -198,7 +198,7 @@
   - companies/北方华创/wiki/公司动态.md
 
 ### Phase 8: 最终系统验证与报告
-- **Status:** in_progress
+- **Status:** complete
 - **Started:** 2026-04-25 20:00
 - Actions taken:
   - 运行 scheduler dry-run 验证完整工作流（extract → tag → ingest → assess → detect）
@@ -206,12 +206,26 @@
   - 验证 companies.yaml 与 graph.yaml 一致性（通过）
   - 检查所有 wiki frontmatter 规范（发现并修复 3 个缺失 last_updated）
 - 关键发现：
-  - 评估缺失：213 个 wiki 页面无综合评估（已记录到 findings.md）
+  - 评估缺失：213 个 wiki 页面无综合评估，其中 210 个为空模板（催化剂日历/投资估值/风险雷达），仅 3 个有内容需要评估
+  - batch_assessment.py 已成功为 3 个有时间线的页面生成评估
   - 新闻采集倾斜：7 天内仅北方华创 19 篇，其余 232 家零采集
   - 矛盾检测：200 条潜在矛盾，无高置信度结果
-- Files modified:
-  - task_plan.md (updated Phase 8 status)
-  - progress.md (this file)
+  - ~90% wiki 缺少 sources_count frontmatter 字段（P2 优先级）
+
+### Git Commit: c849eca
+- **Status:** complete
+- 964 files changed, 449143 insertions(+), 53716 deletions(-)
+- 包含 Phase 1-8 全部变更及评估补全
+
+## 5-Question Reboot Check（最终）
+
+| Question | Answer |
+|----------|--------|
+| Where am I? | Phase 1-8 全部完成，已提交 |
+| Where am I going? | Phase 9: 数据填充与质量提升（待启动） |
+| What's the goal? | 知识库已升级为可自维持的研究助理 |
+| What have I learned? | 210/213 缺失评估是空模板；新闻采集需均衡化 |
+| What have I done? | 8 个阶段全部完成，168 测试通过，964 文件已提交 |
 
 ## Next Actions（已完成 Phase 1-8）
 

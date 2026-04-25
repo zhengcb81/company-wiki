@@ -12,7 +12,7 @@ import glob
 from pathlib import Path
 from collections import defaultdict
 
-WIKI_ROOT = Path('.')
+from common import WIKI_ROOT
 DRY_RUN = False  # Set to True to only report, not fix
 
 

@@ -9,10 +9,7 @@ import sys
 from pathlib import Path
 from dataclasses import dataclass, field
 
-# 确保 scripts/ 在 sys.path 中
-_scripts_dir = str(Path(__file__).resolve().parent)
-if _scripts_dir not in sys.path:
-    sys.path.insert(0, _scripts_dir)
+from common import SCRIPTS_DIR
 
 from config import (
     Config as _Config,

@@ -22,7 +22,8 @@ from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
-WIKI_ROOT = Path(__file__).resolve().parent.parent
+from common import WIKI_ROOT
+
 INDEX_PATH = WIKI_ROOT / ".search_index.json"
 
 SNIPPET_MAX_LEN = 200

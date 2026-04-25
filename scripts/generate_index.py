@@ -15,7 +15,7 @@ import yaml
 from datetime import datetime
 from pathlib import Path
 
-WIKI_ROOT = Path(__file__).resolve().parent.parent
+from common import WIKI_ROOT
 
 MAX_SUMMARY_LEN = 80
 

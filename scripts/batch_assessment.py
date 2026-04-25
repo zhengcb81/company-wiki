@@ -11,13 +11,11 @@ from pathlib import Path
 from datetime import datetime
 from typing import Dict, List, Optional
 
-sys.path.insert(0, str(Path(__file__).parent))
+from common import WIKI_ROOT
 
 from llm_client import get_llm_client
 from prompts import build_assessment_prompt
 from graph import Graph
-
-WIKI_ROOT = Path(__file__).resolve().parent.parent
 
 
 def has_assessment(wiki_path: Path) -> bool:

@@ -11,17 +11,14 @@ contradiction_detector.py — 矛盾检测模块
 
 import argparse
 import re
-import sys
 from pathlib import Path
 from typing import Dict, List, Any, Optional, Tuple
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta
 
 # 路径
-SCRIPTS_DIR = Path(__file__).resolve().parent
-WIKI_ROOT = SCRIPTS_DIR.parent
+from common import WIKI_ROOT
 
-sys.path.insert(0, str(SCRIPTS_DIR))
 from graph import Graph
 
 

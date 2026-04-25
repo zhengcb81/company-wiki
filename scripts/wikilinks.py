@@ -30,6 +30,8 @@ from pathlib import Path
 from typing import Dict, List, Set, Tuple, Optional
 from collections import defaultdict
 
+from common import WIKI_ROOT, GRAPH_YAML
+
 logger = logging.getLogger(__name__)
 
 
@@ -45,9 +47,9 @@ class WikilinkEngine:
             wiki_root: wiki 根目录
         """
         if wiki_root is None:
-            wiki_root = str(Path(__file__).resolve().parent.parent)
+            wiki_root = str(WIKI_ROOT)
         if graph_path is None:
-            graph_path = str(Path(wiki_root) / "graph.yaml")
+            graph_path = str(GRAPH_YAML)
 
         self.wiki_root = Path(wiki_root)
         self.graph_path = Path(graph_path)

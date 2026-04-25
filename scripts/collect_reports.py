@@ -42,9 +42,7 @@ from datetime import datetime
 from pathlib import Path
 
 # ── 路径 ──────────────────────────────────
-WIKI_ROOT = Path(__file__).resolve().parent.parent
-CONFIG_PATH = WIKI_ROOT / "config.yaml"
-LOG_PATH = WIKI_ROOT / "log.md"
+from common import WIKI_ROOT, CONFIG_PATH, LOG_PATH
 
 
 def load_config():

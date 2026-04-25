@@ -16,8 +16,8 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
-SCRIPTS_DIR = Path(__file__).resolve().parent
-WIKI_ROOT = SCRIPTS_DIR.parent
+from common import WIKI_ROOT
+
 LOG_PATH = WIKI_ROOT / "log.md"
 
 # 轮转配置

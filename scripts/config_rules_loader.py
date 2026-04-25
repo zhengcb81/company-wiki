@@ -15,8 +15,8 @@ config_rules_loader.py — 统一规则配置加载器
 import re
 from pathlib import Path
 
-SCRIPTS_DIR = Path(__file__).resolve().parent
-WIKI_ROOT = SCRIPTS_DIR.parent
+from common import WIKI_ROOT
+
 CONFIG_RULES_PATH = WIKI_ROOT / "config_rules.yaml"
 
 # 缓存：避免重复加载

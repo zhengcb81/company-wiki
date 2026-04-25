@@ -668,3 +668,310 @@ def build_distillation_prompt(
 - 如果没有行业级洞察，将 industry_insights 设为空数组，并在 no_insights_reason 中说明
 """
     return prompt
+
+
+# ── 内容分析 Prompt (轻量版) ──────────────────────────
+
+
+CONTENT_ANALYSIS_SYSTEM_PROMPT = (
+    "你是一个专业的上市公司研究分析助手。请准确提取关键信息, 以 JSON 格式返回。"
+)
+
+
+def build_content_analysis_prompt(
+    content: str,
+    entity_name: str = "",
+    max_content_chars: int = 3000,
+) -> str:
+    """
+    轻量内容分析 prompt — 用于 analyze_content() 快速提取关键信息。
+
+    Args:
+        content: 文档正文
+        entity_name: 相关实体名称（可选）
+        max_content_chars: 内容截断长度
+    """
+    content_preview = content[:max_content_chars] if len(content) > max_content_chars else content
+
+    entity_line = f"\n相关实体: {entity_name}" if entity_name else ""
+
+    prompt = f"""请分析以下文档内容，提取关键信息。
+{entity_line}
+
+内容:
+{content_preview}
+
+请以 JSON 格式返回:
+{{
+    "key_points": ["要点1", "要点2", "要点3"],
+    "entities_mentioned": ["提及的公司/行业/主题"],
+    "topics_affected": ["影响的主题"],
+    "sentiment": "positive/negative/neutral",
+    "importance": 0.0到1.0之间的数值,
+    "suggested_questions": ["这份文档可能回答的研究问题"]
+}}
+
+只返回 JSON，不要其他内容。"""
+    return prompt
+
+
+# ── 摘要生成 Prompt ──────────────────────────
+
+
+SUMMARY_GENERATION_SYSTEM_PROMPT = (
+    "你是一个专业的金融分析师助手，负责将新闻内容提炼为简洁的要点摘要。\n"
+    "要求：\n"
+    "1. 输出 2-5 个关键要点，每条一行\n"
+    "2. 每条要点以动词或名词开头\n"
+    "3. 包含具体数字、日期、金额等关键数据\n"
+    "4. 指出事件的意义或影响\n"
+    "5. 直接输出要点列表，不要输出标题或解释"
+)
+
+
+def build_summary_generation_prompt(
+    content: str,
+    topic: str = "",
+    entity: str = "",
+    max_content_chars: int = 2000,
+) -> str:
+    """
+    摘要生成 prompt — 将新闻内容提炼为简洁的要点摘要。
+
+    Args:
+        content: 原始内容文本
+        topic: 所属主题（可选）
+        entity: 公司/实体名称（可选）
+        max_content_chars: 内容截断长度
+    """
+    content_truncated = content[:max_content_chars] if len(content) > max_content_chars else content
+
+    user_parts = []
+    if entity:
+        user_parts.append(f"公司/实体：{entity}")
+    if topic:
+        user_parts.append(f"所属主题：{topic}")
+    user_parts.append(f"\n原始内容：\n{content_truncated}")
+    user_parts.append("\n请输出 2-5 个关键要点：")
+
+    return "\n".join(user_parts)
+
+
+# ── 综合评估 Prompt (LLMClient 版本) ──────────────────────────
+
+
+ASSESSMENT_SYSTEM_PROMPT = "你是一个资深上市公司研究分析师，擅长从多条信息中提炼趋势、判断方向、发现风险。"
+
+
+def build_assessment_client_prompt(
+    combined_entries: str,
+    topic: str = "",
+    entity: str = "",
+    core_questions: Optional[List[str]] = None,
+) -> str:
+    """
+    综合评估 prompt (LLMClient 版本) — 基于时间线条目文本生成综合评估。
+
+    与 build_assessment_prompt() 不同，此函数接受预格式化的时间线条目文本
+    而非条目列表，用于 LLMClient.synthesize_assessment() 方法。
+
+    Args:
+        combined_entries: 已格式化的时间线条目文本
+        topic: 主题名称
+        entity: 实体名称
+        core_questions: 核心追踪问题列表（可选）
+    """
+    questions_text = ""
+    if core_questions:
+        questions_text = "\n\n核心追踪问题:\n" + "\n".join(
+            f"- {q}" for q in core_questions
+        )
+
+    prompt = f"""请基于以下时间线条目，为 {entity} 的「{topic}」主题生成一段综合评估。
+
+要求:
+1. 100-300 字的段落
+2. 总结关键趋势和变化
+3. 给出核心判断和前瞻
+4. 如有风险要点也要提及
+5. 用引用块格式 (>) 输出
+
+实体: {entity}
+主题: {topic}{questions_text}
+
+时间线条目:
+{combined_entries}
+
+请直接输出综合评估 (以 > 开头的引用块格式):"""
+    return prompt
+
+
+# ── 核心问题生成 Prompt (LLMClient 版本) ──────────────────────────
+
+
+CORE_QUESTIONS_SYSTEM_PROMPT = "你是一个上市公司研究框架设计专家。"
+
+
+def build_core_questions_prompt(
+    entity: str,
+    sector: str = "",
+    position: str = "",
+    existing_data: str = "",
+    question_templates: Optional[List[str]] = None,
+    max_existing_data_chars: int = 500,
+) -> str:
+    """
+    核心问题生成 prompt (LLMClient 版本) — 为实体生成核心追踪问题。
+
+    与 build_question_generation_prompt() 不同，此函数接受问题模板锚定段
+    并直接输出问题列表（非 JSON），用于 LLMClient.generate_core_questions() 方法。
+
+    Args:
+        entity: 实体名称
+        sector: 所属行业（可选）
+        position: 定位描述（可选）
+        existing_data: 已有数据概况（可选）
+        question_templates: 行业级问题模板列表（可选）
+        max_existing_data_chars: 已有数据截断长度
+    """
+    template_section = ""
+    if question_templates:
+        template_section = f"""
+研究框架参考（请基于以下行业级问题框架，针对{entity}的具体情况做个性化适配）:
+{chr(10).join(f"- {t}" for t in question_templates)}
+"""
+
+    existing_line = ""
+    if existing_data:
+        existing_line = f"已有数据概况: {existing_data[:max_existing_data_chars]}"
+
+    prompt = f"""请为以下实体设计 3-5 个核心研究追踪问题。
+
+实体: {entity}
+{f"所属行业: {sector}" if sector else ""}
+{f"定位: {position}" if position else ""}
+{template_section}
+{existing_line}
+
+要求:
+1. 问题要具体、可追踪、有信息增量
+2. 必须结合{entity}的实际情况，不要产出适用于任何公司的通用问题
+3. 不要出现"核心竞争优势是什么""主要增长驱动力在哪里"这类泛泛的问题
+4. 每个问题一行, 不要编号
+
+请直接输出问题列表:"""
+    return prompt
+
+
+# ── 查询回答 Prompt ──────────────────────────
+
+
+QUERY_ANSWER_SYSTEM_PROMPT = (
+    "你是一个上市公司研究知识库的智能助手。基于提供的知识库内容准确回答问题。"
+)
+
+
+def build_query_answer_prompt(
+    query: str,
+    relevant_pages_text: str,
+) -> str:
+    """
+    查询回答 prompt — 基于知识库内容回答用户查询。
+
+    Args:
+        query: 用户查询问题
+        relevant_pages_text: 已格式化的知识库相关页面文本
+    """
+    prompt = f"""请基于以下知识库内容回答问题。
+
+问题: {query}
+
+知识库内容:
+{relevant_pages_text}
+
+请给出详细、准确的回答。如果信息不足，请明确说明。"""
+    return prompt
+
+
+# ── 矛盾检测 Prompt ──────────────────────────
+
+
+CONTRADICTION_DETECTION_SYSTEM_PROMPT = (
+    "你是一个数据一致性检查专家。请仔细对比两段文本, 找出矛盾。"
+)
+
+
+def build_contradiction_detection_prompt(
+    page1_content: str,
+    page2_content: str,
+    entity: str = "",
+    max_page_chars: int = 2000,
+) -> str:
+    """
+    矛盾检测 prompt — 对比两段文本找出矛盾。
+
+    Args:
+        page1_content: 第一段文本内容
+        page2_content: 第二段文本内容
+        entity: 实体名称（可选）
+        max_page_chars: 每段文本截断长度
+    """
+    entity_label = entity if entity else "某个实体"
+
+    prompt = f"""请对比以下两段关于 {entity_label} 的文本，找出矛盾。
+
+文本 A:
+{page1_content[:max_page_chars]}
+
+文本 B:
+{page2_content[:max_page_chars]}
+
+请列出所有矛盾, 每个矛盾一行。如果没有矛盾, 输出"未发现矛盾"。只输出矛盾列表:"""
+    return prompt
+
+
+# ── 页面质量检查 Prompt ──────────────────────────
+
+
+LINT_PAGE_SYSTEM_PROMPT = "你是一个知识库质量审查专家。请检查 wiki 页面质量。"
+
+
+def build_lint_page_prompt(
+    page_content: str,
+    all_pages_index: str = "",
+    max_page_chars: int = 3000,
+    max_index_chars: int = 500,
+) -> str:
+    """
+    页面质量检查 prompt — LLM 驱动的 wiki 页面质量检查。
+
+    Args:
+        page_content: 页面内容文本
+        all_pages_index: 知识库其他页面索引文本（可选）
+        max_page_chars: 页面内容截断长度
+        max_index_chars: 页面索引截断长度
+    """
+    index_section = ""
+    if all_pages_index:
+        index_section = f"\n知识库其他页面: {all_pages_index[:max_index_chars]}"
+
+    prompt = f"""请检查以下 wiki 页面的质量，找出问题:
+
+1. 过时的结论或数据
+2. 提及了但未链接的概念/公司 (应该有 wikilink 的地方)
+3. 信息缺失或不够深入的地方
+4. 格式问题
+
+页面内容:
+{page_content[:max_page_chars]}
+{index_section}
+
+请以 JSON 格式返回问题列表:
+[
+    {{"type": "stale", "description": "...", "suggestion": "..."}},
+    {{"type": "missing_link", "description": "...", "suggestion": "..."}},
+    {{"type": "content_gap", "description": "...", "suggestion": "..."}}
+]
+
+如果没有问题, 返回 []。只返回 JSON:"""
+    return prompt

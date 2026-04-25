@@ -23,8 +23,8 @@ from pathlib import Path
 from typing import Dict, List, Optional, Any, Union
 
 # ── 路径 ──────────────────────────────────
-SCRIPTS_DIR = Path(__file__).resolve().parent
-WIKI_ROOT = SCRIPTS_DIR.parent
+from common import WIKI_ROOT
+
 DB_PATH = WIKI_ROOT / ".state" / "state.db"
 
 

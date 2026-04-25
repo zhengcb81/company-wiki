@@ -939,3 +939,15 @@ timestamp,provider,model,prompt_tokens,completion_tokens,total_tokens,estimated_
 2026-04-25T20:58:59.851260,deepseek,deepseek-v4-flash,5224,1111,6335,0.001042
 2026-04-25T20:59:10.990772,deepseek,deepseek-v4-flash,5596,857,6453,0.001023
 2026-04-25T20:59:18.829977,deepseek,deepseek-v4-flash,4440,612,5052,0.000793
+2026-04-25T21:23:29.852674,deepseek,deepseek-v4-flash,147,192,339,7.4e-05
+2026-04-25T21:25:04.689824,deepseek,deepseek-v4-flash,147,172,319,6.9e-05
+2026-04-25T21:43:18.752275,deepseek,deepseek-v4-flash,147,311,458,0.000108
+2026-04-25T21:50:49.125322,deepseek,deepseek-v4-flash,147,353,500,0.000119
+2026-04-25T21:53:26.284871,deepseek,deepseek-v4-flash,147,274,421,9.7e-05
+2026-04-25T21:58:00.321106,deepseek,deepseek-v4-flash,147,321,468,0.00011
+2026-04-25T21:59:17.134643,deepseek,deepseek-v4-flash,147,229,376,8.5e-05
+2026-04-25T22:01:14.190806,deepseek,deepseek-v4-flash,147,273,420,9.7e-05
+2026-04-25T22:01:46.884286,deepseek,deepseek-v4-flash,147,335,482,0.000114
+2026-04-25T22:02:56.710352,deepseek,deepseek-v4-flash,147,220,367,8.2e-05
+2026-04-25T22:03:25.674922,deepseek,deepseek-v4-flash,147,234,381,8.6e-05
+2026-04-25T22:05:08.195583,deepseek,deepseek-v4-flash,147,227,374,8.4e-05

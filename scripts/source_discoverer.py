@@ -18,10 +18,8 @@ from dataclasses import dataclass, field
 from datetime import datetime
 
 # 路径
-SCRIPTS_DIR = Path(__file__).resolve().parent
-WIKI_ROOT = SCRIPTS_DIR.parent
+from common import WIKI_ROOT
 
-sys.path.insert(0, str(SCRIPTS_DIR))
 from graph import Graph
 
 

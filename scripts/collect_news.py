@@ -23,15 +23,8 @@ from datetime import datetime, timedelta
 from pathlib import Path
 
 # ── 路径 ──────────────────────────────────
-SCRIPTS_DIR = Path(__file__).resolve().parent
-WIKI_ROOT = SCRIPTS_DIR.parent
-CONFIG_PATH = WIKI_ROOT / "config.yaml"
-LOG_PATH = WIKI_ROOT / "log.md"
+from common import WIKI_ROOT, CONFIG_PATH, LOG_PATH
 
-sys.path.insert(0, str(SCRIPTS_DIR))
-from dotenv import load_dotenv
-
-load_dotenv(WIKI_ROOT / ".env")
 from graph import Graph
 from config_rules_loader import RulesConfig
 

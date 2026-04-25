@@ -23,8 +23,7 @@ from typing import List, Optional, Tuple
 
 import yaml
 
-
-WIKI_ROOT = Path(__file__).resolve().parent.parent
+from common import WIKI_ROOT
 
 MAX_TIMELINE_ENTRIES = 10
 

@@ -16,19 +16,7 @@ import re
 import sys
 from pathlib import Path
 
-# Windows 控制台编码修复
-if sys.platform == "win32":
-    try:
-        if hasattr(sys.stdout, "reconfigure"):
-            sys.stdout.reconfigure(encoding="utf-8")
-        if hasattr(sys.stderr, "reconfigure"):
-            sys.stderr.reconfigure(encoding="utf-8")
-    except (AttributeError, OSError):
-        pass
-
-SCRIPTS_DIR = Path(__file__).resolve().parent
-WIKI_ROOT = SCRIPTS_DIR.parent
-sys.path.insert(0, str(SCRIPTS_DIR))
+from common import WIKI_ROOT
 
 from config_rules_loader import RulesConfig
 

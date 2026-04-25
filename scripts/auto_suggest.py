@@ -15,11 +15,8 @@ import random
 import sys
 from pathlib import Path
 
-SCRIPTS_DIR = Path(__file__).resolve().parent
-WIKI_ROOT = SCRIPTS_DIR.parent
-CONFIG_PATH = WIKI_ROOT / "config.yaml"
+from common import WIKI_ROOT, CONFIG_PATH
 
-sys.path.insert(0, str(SCRIPTS_DIR))
 from graph import Graph
 from llm_client import get_llm_client
 

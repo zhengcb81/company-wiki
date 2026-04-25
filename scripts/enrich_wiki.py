@@ -27,10 +27,7 @@ from pathlib import Path
 from typing import Dict, List, Any, Optional, Tuple
 from datetime import datetime
 
-SCRIPTS_DIR = Path(__file__).resolve().parent
-WIKI_ROOT = SCRIPTS_DIR.parent
-
-sys.path.insert(0, str(SCRIPTS_DIR))
+from common import WIKI_ROOT
 
 
 def load_graph():

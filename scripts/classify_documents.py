@@ -20,8 +20,7 @@ from dataclasses import dataclass
 from enum import Enum
 
 # 路径
-SCRIPTS_DIR = Path(__file__).resolve().parent
-WIKI_ROOT = SCRIPTS_DIR.parent
+from common import WIKI_ROOT
 
 
 class DocumentType(str, Enum):

@@ -20,10 +20,8 @@ from collections import defaultdict
 from datetime import datetime, timedelta
 from pathlib import Path
 
-SCRIPTS_DIR = Path(__file__).resolve().parent
-WIKI_ROOT = SCRIPTS_DIR.parent
+from common import WIKI_ROOT
 
-sys.path.insert(0, str(SCRIPTS_DIR))
 from graph import Graph
 
 

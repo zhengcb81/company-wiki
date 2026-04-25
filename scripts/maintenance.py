@@ -45,8 +45,9 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
-SCRIPTS_DIR = Path(__file__).resolve().parent
-WIKI_ROOT = SCRIPTS_DIR.parent
+from common import WIKI_ROOT
+
+SCRIPTS_DIR = WIKI_ROOT / "scripts"
 
 
 def run_step(cmd, description, dry_run=False):
