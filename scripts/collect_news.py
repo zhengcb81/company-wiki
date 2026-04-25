@@ -16,6 +16,7 @@ import json
 import os
 import re
 import sys
+import time
 import urllib.request
 import urllib.error
 from datetime import datetime, timedelta
@@ -29,9 +30,11 @@ LOG_PATH = WIKI_ROOT / "log.md"
 
 sys.path.insert(0, str(SCRIPTS_DIR))
 from dotenv import load_dotenv
+
 load_dotenv(WIKI_ROOT / ".env")
 from graph import Graph
 from config_rules_loader import RulesConfig
+
 
 # ── 简易 YAML 解析（避免依赖 pyyaml）───────
 def load_yaml_simple(path):
@@ -41,6 +44,7 @@ def load_yaml_simple(path):
     """
     try:
         import yaml
+
         with open(path, "r", encoding="utf-8") as f:
             return yaml.safe_load(f)
     except ImportError:
@@ -55,6 +59,7 @@ def load_yaml_simple(path):
     # 简单方案：直接 import json，手动解析
     try:
         import json as _json
+
         # 这个回退方案太脆弱，推荐安装 pyyaml
         print("WARNING: pyyaml not installed. Trying json fallback...")
         print("  Install with: pip install pyyaml")
@@ -79,7 +84,7 @@ def _minimal_yaml_parse(content):
             continue
         # 移除行内注释（但保留引号内的 #）
         if "#" in line and not ('"' in line or "'" in line):
-            line = line[:line.index("#")]
+            line = line[: line.index("#")]
         clean_lines.append(line)
 
     content = "\n".join(clean_lines)
@@ -98,6 +103,7 @@ def load_config():
 
     try:
         import yaml
+
         with open(CONFIG_PATH, "r", encoding="utf-8") as f:
             return yaml.safe_load(f)
     except ImportError:
@@ -113,31 +119,49 @@ def tavily_search(query, api_key, max_results=8, days=7, language="zh"):
     返回结果列表: [{title, url, content, published_date}, ...]
     """
     url = "https://api.tavily.com/search"
-    payload = json.dumps({
-        "query": query,
-        "max_results": max_results,
-        "search_depth": "advanced",
-        "include_answer": False,
-        "include_raw_content": True,
-        "days": days,
-        "topic": "general",
-    }).encode("utf-8")
+    payload = json.dumps(
+        {
+            "query": query,
+            "max_results": max_results,
+            "search_depth": "advanced",
+            "include_answer": False,
+            "include_raw_content": True,
+            "days": days,
+            "topic": "general",
+        }
+    ).encode("utf-8")
 
     req = urllib.request.Request(url, data=payload, method="POST")
     req.add_header("Content-Type", "application/json")
     req.add_header("Authorization", f"Bearer {api_key}")
 
-    try:
-        with urllib.request.urlopen(req, timeout=30) as resp:
-            data = json.loads(resp.read().decode("utf-8"))
-            return data.get("results", [])
-    except urllib.error.HTTPError as e:
-        body = e.read().decode("utf-8", errors="replace")
-        print(f"  Tavily API error {e.code}: {body}")
-        return []
-    except Exception as e:
-        print(f"  Tavily request failed: {e}")
-        return []
+    # 带指数退避的重试机制
+    max_retries = 3
+    base_delay = 2.0
+    for attempt in range(max_retries):
+        try:
+            with urllib.request.urlopen(req, timeout=30) as resp:
+                data = json.loads(resp.read().decode("utf-8"))
+                return data.get("results", [])
+        except urllib.error.HTTPError as e:
+            body = e.read().decode("utf-8", errors="replace")
+            # 4xx 错误不_retry（客户端错误）
+            if 400 <= e.code < 500:
+                print(f"  Tavily API error {e.code}: {body}")
+                return []
+            # 5xx 错误重试
+            print(
+                f"  Tavily API error {e.code} (attempt {attempt + 1}/{max_retries}): {body}"
+            )
+        except Exception as e:
+            print(f"  Tavily request failed (attempt {attempt + 1}/{max_retries}): {e}")
+
+        if attempt < max_retries - 1:
+            delay = base_delay * (2**attempt)
+            print(f"  Retrying in {delay:.1f}s...")
+            time.sleep(delay)
+
+    return []
 
 
 # ── 去重 ──────────────────────────────────
@@ -165,10 +189,10 @@ def has_mojibake(text):
     if not text:
         return False
     # Unicode replacement character（UTF-8 解码失败的标志）
-    if '\ufffd' in text:
+    if "\ufffd" in text:
         return True
     # 连续的 Latin-1 补充字符（常见于 UTF-8 被错误解读为 Latin-1）
-    if re.search(r'[\u00c0-\u00ff]{4,}', text):
+    if re.search(r"[\u00c0-\u00ff]{4,}", text):
         return True
     return False
 
@@ -223,7 +247,7 @@ def save_news_item(company_name, result, news_dir, rules=None):
 
     # 生成文件名
     url_hash = hashlib.md5(url.encode()).hexdigest()[:8]
-    safe_title = re.sub(r'[^\w\u4e00-\u9fff]', '_', title)[:40]
+    safe_title = re.sub(r"[^\w\u4e00-\u9fff]", "_", title)[:40]
     filename = f"{date_str}_{url_hash}_{safe_title}.md"
     filepath = news_dir / filename
 
@@ -236,7 +260,7 @@ def save_news_item(company_name, result, news_dir, rules=None):
 title: "{title}"
 source_url: "{url}"
 published_date: "{date_str}"
-collected_date: "{datetime.now().strftime('%Y-%m-%d %H:%M')}"
+collected_date: "{datetime.now().strftime("%Y-%m-%d %H:%M")}"
 company: "{company_name}"
 type: news
 ---
@@ -287,9 +311,9 @@ def load_company_questions(name: str, entity_type: str = "company") -> list:
             if q in ("（待设定）", "（待补充）", ""):
                 continue
             # 移除 wikilinks: [[设备国产化]] → 设备国产化
-            q = re.sub(r'\[\[([^\]]+)\]\]', r'\1', q)
+            q = re.sub(r"\[\[([^\]]+)\]\]", r"\1", q)
             # 移除陈旧/过时标记: [陈旧]
-            q = re.sub(r'\s*\[[^\]]*\]', '', q)
+            q = re.sub(r"\s*\[[^\]]*\]", "", q)
             q = q.strip().rstrip("？?").strip()
             if q and len(q) > 4:
                 questions.append(q)
@@ -310,8 +334,12 @@ def generate_question_queries(name: str, questions: list) -> list:
         if len(q) > 80:
             # 尝试按句号/逗号截断到第一个完整子句
             truncated = q[:80]
-            last_punct = max(truncated.rfind("，"), truncated.rfind("、"),
-                             truncated.rfind(" "), truncated.rfind("的"))
+            last_punct = max(
+                truncated.rfind("，"),
+                truncated.rfind("、"),
+                truncated.rfind(" "),
+                truncated.rfind("的"),
+            )
             if last_punct > 20:
                 truncated = truncated[:last_punct]
             q = truncated
@@ -325,24 +353,66 @@ def generate_question_queries(name: str, questions: list) -> list:
 # ── 主流程 ────────────────────────────────
 def load_search_config():
     """从 config.yaml 读取搜索运维配置（API key 等）"""
-    import yaml
-    with open(CONFIG_PATH, "r", encoding="utf-8") as f:
-        cfg = yaml.safe_load(f)
-    return cfg.get("search", {})
+    try:
+        from config import Config
+
+        config = Config.load()
+        return {
+            "api_key": config.search.api_key,
+            "results_per_query": config.search.results_per_query,
+            "max_age_days": config.search.max_age_days,
+            "language": config.search.language,
+        }
+    except Exception:
+        # Fallback: 直接读取 YAML
+        import yaml
+
+        with open(CONFIG_PATH, "r", encoding="utf-8") as f:
+            cfg = yaml.safe_load(f)
+        search_cfg = cfg.get("search", {})
+        return {
+            "api_key": search_cfg.get("tavily_api_key", search_cfg.get("api_key", "")),
+            "results_per_query": search_cfg.get("results_per_query", 8),
+            "max_age_days": search_cfg.get("max_age_days", 7),
+            "language": search_cfg.get("language", "zh"),
+        }
 
 
-def collect_for_company(company, search_cfg, dry_run=False, rules=None, use_questions=True):
-    """为单个公司采集新闻"""
+def collect_for_company(
+    company, search_cfg, dry_run=False, rules=None, use_questions=True
+):
+    """为单个公司采集新闻（含配额检查）"""
     name = company["name"]
     queries = company.get("news_queries", [f"{name} 最新消息"])
 
-    api_key = search_cfg.get("tavily_api_key", "") or os.environ.get("TAVILY_API_KEY", "")
+    api_key = search_cfg.get("api_key", "") or os.environ.get("TAVILY_API_KEY", "")
     if not api_key:
         print(f"  ERROR: No Tavily API key (config.yaml or TAVILY_API_KEY env)")
         return 0, 0
 
     max_results = search_cfg.get("results_per_query", 8)
     days = search_cfg.get("max_age_days", 7)
+
+    # ── 配额检查：30 天无采集则拓宽关键词 ──
+    try:
+        from state_store import get_state
+
+        state = get_state()
+        company_state = state.get_company_state(name)
+        if company_state and company_state.get("last_collect_time"):
+            last_collect = datetime.fromisoformat(company_state["last_collect_time"])
+            days_since = (datetime.now() - last_collect).days
+            if days_since > 30:
+                # 拓宽关键词：添加行业相关词
+                broad_queries = [
+                    f"{name} 行业动态",
+                    f"{name} 最新进展",
+                    f"{name} 市场表现",
+                ]
+                queries = list(dict.fromkeys(queries + broad_queries))  # 去重保持顺序
+                print(f"  [配额] {name} 已 {days_since} 天未采集，拓宽关键词")
+    except Exception:
+        pass  # state_store 未初始化时不阻塞
 
     # 目标目录
     news_dir = WIKI_ROOT / "companies" / name / "raw" / "news"
@@ -385,7 +455,9 @@ def collect_for_company(company, search_cfg, dry_run=False, rules=None, use_ques
             print(f"  Question-driven search ({len(question_queries)} queries)...")
             for q_query in question_queries:
                 print(f"  Searching: {q_query[:80]}")
-                results = tavily_search(q_query, api_key, max(3, max_results // 2), days)
+                results = tavily_search(
+                    q_query, api_key, max(3, max_results // 2), days
+                )
 
                 for r in results:
                     url = r.get("url", "")
@@ -401,6 +473,16 @@ def collect_for_company(company, search_cfg, dry_run=False, rules=None, use_ques
                             print(f"    + {r.get('title', '')[:60]}")
                             total_new += 1
                             existing_urls.add(url)
+
+    # ── 记录采集时间 ──
+    if not dry_run:
+        try:
+            from state_store import get_state
+
+            state = get_state()
+            state.set_last_collect(name)
+        except Exception:
+            pass
 
     return total_new, total_dup
 
@@ -419,20 +501,67 @@ def append_log(message):
     LOG_PATH.write_text(content, encoding="utf-8")
 
 
+def get_last_collect_time(company_name: str) -> datetime:
+    """获取公司上次采集时间，优先从 state_store 读取，fallback 到 news 目录最新文件时间"""
+    try:
+        from state_store import get_state
+
+        state = get_state()
+        company_state = state.get_company_state(company_name)
+        if company_state and company_state.get("last_collect_time"):
+            return datetime.fromisoformat(company_state["last_collect_time"])
+    except Exception:
+        pass
+
+    # Fallback: 检查 news 目录最新文件
+    news_dir = WIKI_ROOT / "companies" / company_name / "raw" / "news"
+    if news_dir.exists():
+        newest = None
+        for f in news_dir.glob("*.md"):
+            try:
+                mtime = datetime.fromtimestamp(f.stat().st_mtime)
+                if newest is None or mtime > newest:
+                    newest = mtime
+            except Exception:
+                pass
+        if newest:
+            return newest
+
+    # 从未采集过
+    return datetime.min
+
+
 def main():
     if sys.platform == "win32":
-        if hasattr(sys.stdout, "reconfigure"):
-            sys.stdout.reconfigure(encoding="utf-8")
-        if hasattr(sys.stderr, "reconfigure"):
-            sys.stderr.reconfigure(encoding="utf-8")
+        try:
+            if hasattr(sys.stdout, "reconfigure"):
+                sys.stdout.reconfigure(encoding="utf-8")
+            if hasattr(sys.stderr, "reconfigure"):
+                sys.stderr.reconfigure(encoding="utf-8")
+        except (AttributeError, OSError):
+            pass
 
     parser = argparse.ArgumentParser(description="采集上市公司新闻")
     parser.add_argument("--company", type=str, help="只采集指定公司")
     parser.add_argument("--dry-run", action="store_true", help="只打印不保存")
-    parser.add_argument("--use-questions", action="store_true", default=True,
-                        help="使用核心问题驱动搜索（默认启用）")
-    parser.add_argument("--no-use-questions", action="store_false", dest="use_questions",
-                        help="禁用问题驱动搜索")
+    parser.add_argument(
+        "--use-questions",
+        action="store_true",
+        default=True,
+        help="使用核心问题驱动搜索（默认启用）",
+    )
+    parser.add_argument(
+        "--no-use-questions",
+        action="store_false",
+        dest="use_questions",
+        help="禁用问题驱动搜索",
+    )
+    parser.add_argument(
+        "--max-companies",
+        type=int,
+        default=0,
+        help="每轮最多采集 N 家公司（0=全部，默认）",
+    )
     args = parser.parse_args()
 
     print("=" * 50)
@@ -449,13 +578,28 @@ def main():
         if not companies:
             print(f"ERROR: Company '{args.company}' not found in graph.yaml")
             sys.exit(1)
+    else:
+        # 均衡采集：按上次采集时间排序，最久未采集的优先
+        companies_with_time = [(c, get_last_collect_time(c["name"])) for c in companies]
+        companies_with_time.sort(key=lambda x: x[1])
+        companies = [c for c, _ in companies_with_time]
+
+        if args.max_companies > 0:
+            companies = companies[: args.max_companies]
+            print(f"  均衡模式: 处理最久未采集的 {len(companies)} 家公司")
 
     total_new = 0
     total_dup = 0
 
     for company in companies:
         print(f"\n[{company['name']}] ({company['ticker']})")
-        new, dup = collect_for_company(company, search_cfg, args.dry_run, rules=rules, use_questions=args.use_questions)
+        new, dup = collect_for_company(
+            company,
+            search_cfg,
+            args.dry_run,
+            rules=rules,
+            use_questions=args.use_questions,
+        )
         total_new += new
         total_dup += dup
 
@@ -464,7 +608,9 @@ def main():
     print(f"{'=' * 50}")
 
     if not args.dry_run and total_new > 0:
-        append_log(f"Collected {total_new} new articles, {total_dup} duplicates skipped")
+        append_log(
+            f"Collected {total_new} new articles, {total_dup} duplicates skipped"
+        )
 
 
 if __name__ == "__main__":

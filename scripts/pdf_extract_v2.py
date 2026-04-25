@@ -19,7 +19,7 @@ import re
 import os
 import sys
 from pathlib import Path
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Union
 
 try:
     import fitz  # PyMuPDF
@@ -143,7 +143,9 @@ def _text_from_html(html_text: str) -> str:
     return text.strip()
 
 
-def extract_pdf_text(pdf_path: str, max_pages: Optional[int] = None) -> Dict:
+def extract_pdf_text(
+    pdf_path: Union[str, Path], max_pages: Optional[int] = None
+) -> Dict:
     """
     从 PDF 提取全部可识别文本。
 
@@ -184,25 +186,23 @@ def extract_pdf_text(pdf_path: str, max_pages: Optional[int] = None) -> Dict:
         }
 
     try:
-        doc = fitz.open(str(pdf_path))
-        total_pages = len(doc)
-        text_parts = []
-        read_pages = 0
-        total_quality_scores = []
+        with fitz.open(str(pdf_path)) as doc:
+            total_pages = len(doc)
+            text_parts = []
+            read_pages = 0
+            total_quality_scores = []
 
-        # 确定读取范围
-        end_page = max_pages if max_pages else total_pages
-        end_page = min(end_page, total_pages)
+            # 确定读取范围
+            end_page = max_pages if max_pages else total_pages
+            end_page = min(end_page, total_pages)
 
-        for page_idx in range(end_page):
-            page = doc[page_idx]
-            text = _extract_page_text(page)
-            if text.strip():
-                text_parts.append(text)
-                read_pages += 1
-                total_quality_scores.append(_text_quality_score(text))
-
-        doc.close()
+            for page_idx in range(end_page):
+                page = doc[page_idx]
+                text = _extract_page_text(page)
+                if text.strip():
+                    text_parts.append(text)
+                    read_pages += 1
+                    total_quality_scores.append(_text_quality_score(text))
 
         full_text = "\n\n".join(text_parts)
         total_chars = len(full_text)
@@ -245,8 +245,15 @@ def classify_pdf(filename: str) -> str:
     """根据文件名判断 PDF 类型"""
     name = filename.lower()
 
-    if any(kw in name for kw in ["年报", "半年报", "季报", "年度报告", "季度报告", "半年度报告"]):
+    if any(kw in name for kw in ["年报", "年度报告"]):
         return "annual_report"
+    elif any(kw in name for kw in ["半年报", "半年度报告"]):
+        return "semi_annual_report"
+    elif any(
+        kw in name
+        for kw in ["季报", "季度报告", "一季度", "二季度", "三季度", "四季度"]
+    ):
+        return "quarterly_report"
     elif any(kw in name for kw in ["招股"]):
         return "prospectus"
     elif any(kw in name for kw in ["投资者关系", "调研", "交流", "投资者活动"]):

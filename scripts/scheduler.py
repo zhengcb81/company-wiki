@@ -28,6 +28,7 @@ scheduler.py — 知识库调度器
 """
 
 import argparse
+import json
 import signal
 import sys
 import time
@@ -38,16 +39,20 @@ from typing import Any, Dict, List, Optional
 
 # Windows 控制台 UTF-8 编码修复
 if sys.platform == "win32":
-    if hasattr(sys.stdout, "reconfigure"):
-        sys.stdout.reconfigure(encoding="utf-8")
-    if hasattr(sys.stderr, "reconfigure"):
-        sys.stderr.reconfigure(encoding="utf-8")
+    try:
+        if hasattr(sys.stdout, "reconfigure"):
+            sys.stdout.reconfigure(encoding="utf-8")
+        if hasattr(sys.stderr, "reconfigure"):
+            sys.stderr.reconfigure(encoding="utf-8")
+    except (AttributeError, OSError):
+        pass
 
 SCRIPTS_DIR = Path(__file__).resolve().parent
 WIKI_ROOT = SCRIPTS_DIR.parent
 sys.path.insert(0, str(SCRIPTS_DIR))
 
 from dotenv import load_dotenv
+
 load_dotenv()
 
 from log_writer import append_log
@@ -59,19 +64,28 @@ from collect_news import collect_for_company, load_search_config
 from config_rules_loader import RulesConfig
 from ingest_v2 import scan_pending_files, process_file, get_wiki_path
 from batch_assessment import (
-    has_assessment, extract_timeline_entries,
-    generate_assessment, add_assessment_section,
+    has_assessment,
+    extract_timeline_entries,
+    generate_assessment,
+    add_assessment_section,
     is_assessment_stale,
+    verify_predictions,
 )
 from contradiction_detector import ContradictionDetector
 from sector_distiller import distill_sector
 from investment_judgment import generate_all as generate_judgment
-from cross_verify import collect_all_entries, cluster_events, generate_report as generate_verify_report
+from cross_verify import (
+    collect_all_entries,
+    cluster_events,
+    generate_report as generate_verify_report,
+)
 from evolve_questions import analyze_wiki, mark_stale_questions, suggest_new_questions
 from quality_dashboard import generate_report as generate_dashboard
 from lint import run_lint
 from consolidate import find_oversized_pages, consolidate_page
 from review_queue import ReviewQueue
+from build_extracts import scan_pdf_files, build_extract
+from tag_segments import scan_extract_files, process_extract
 
 
 class Scheduler:
@@ -86,15 +100,46 @@ class Scheduler:
         self.review_queue = ReviewQueue()
         self.summary: Dict[str, Any] = {}
         self._running = True
+        # 加载审核队列配置
+        self._load_review_config()
+
+    def _load_review_config(self):
+        """加载审核队列配置"""
+        config_path = WIKI_ROOT / "config.yaml"
+        self.review_config = {
+            "enabled": True,
+            "auto_approve_low": True,
+            "auto_approve_medium": False,
+            "auto_approve_high": False,
+        }
+        if config_path.exists():
+            try:
+                with open(config_path, "r", encoding="utf-8") as f:
+                    config = yaml.safe_load(f)
+                if config and "review_queue" in config:
+                    self.review_config.update(config["review_queue"])
+            except Exception as e:
+                print(f"[WARN] {e}")
 
     def load_schedule_config(self) -> Dict:
         """从 config.yaml 加载调度配置"""
-        config_path = WIKI_ROOT / "config.yaml"
-        if not config_path.exists():
-            return {}
-        with open(config_path, "r", encoding="utf-8") as f:
-            config = yaml.safe_load(f)
-        return config.get("schedule", {})
+        try:
+            from config import Config
+
+            config = Config.load()
+            return {
+                "news_collection": config.schedule.news_collection,
+                "report_check": config.schedule.report_check,
+                "lint": config.schedule.lint,
+            }
+        except Exception:
+            # Fallback: 直接读取 YAML
+            config_path = WIKI_ROOT / "config.yaml"
+            if not config_path.exists():
+                return {}
+            with open(config_path, "r", encoding="utf-8") as f:
+                config = yaml.safe_load(f)
+            return config.get("schedule", {})
 
     def parse_interval(self, interval_str: str) -> timedelta:
         """解析调度间隔字符串"""
@@ -126,7 +171,7 @@ class Scheduler:
             self._running = False
 
         signal.signal(signal.SIGINT, signal_handler)
-        if hasattr(signal, 'SIGTERM'):
+        if hasattr(signal, "SIGTERM"):
             signal.signal(signal.SIGTERM, signal_handler)
 
         # 记录上次执行时间
@@ -137,7 +182,18 @@ class Scheduler:
             "news_collection": ["collect"],
             "report_check": ["ingest"],
             "lint": ["lint", "evolve", "dashboard"],
-            "maintenance": ["collect", "ingest", "assess", "distill", "judgment", "detect", "evolve", "dashboard", "lint", "consolidate"],
+            "maintenance": [
+                "collect",
+                "ingest",
+                "assess",
+                "distill",
+                "judgment",
+                "detect",
+                "evolve",
+                "dashboard",
+                "lint",
+                "consolidate",
+            ],
         }
 
         print("\n守护模式启动。按 Ctrl+C 停止。\n")
@@ -174,7 +230,7 @@ class Scheduler:
         print("\n守护模式已停止。")
 
     def run_collect(self) -> Dict:
-        """Step 1: 新闻采集"""
+        """Step 1: 新闻采集（支持均衡调度）"""
         print("\n" + "=" * 50)
         print("  Step 1: 新闻采集")
         print("=" * 50)
@@ -184,6 +240,24 @@ class Scheduler:
         companies = self.graph.get_all_companies()
         if self.company_filter:
             companies = [c for c in companies if c["name"] == self.company_filter]
+        else:
+            # 均衡采集：按上次采集时间排序，最久未采集的优先
+            try:
+                from collect_news import get_last_collect_time
+
+                companies_with_time = [
+                    (c, get_last_collect_time(c["name"])) for c in companies
+                ]
+                companies_with_time.sort(key=lambda x: x[1])
+                companies = [c for c, _ in companies_with_time]
+            except Exception as e:
+                print(f"[WARN] {e}")
+
+            # 限制每轮采集数量（从配置读取）
+            max_per_round = search_cfg.get("max_companies_per_round", 0)
+            if max_per_round > 0:
+                companies = companies[:max_per_round]
+                print(f"  均衡模式: 处理最久未采集的 {len(companies)} 家公司")
 
         total_new = 0
         total_dup = 0
@@ -205,10 +279,148 @@ class Scheduler:
 
         print(f"\n  采集完成: {total_new} 新文章, {total_dup} 重复跳过")
         if not self.dry_run and total_new > 0:
-            append_log("collect_news",
-                       f"scheduler采集 {total_new} 篇新文章",
-                       details=company_results)
+            append_log(
+                "collect_news",
+                f"scheduler采集 {total_new} 篇新文章",
+                details=company_results,
+            )
         return result
+
+    def run_build_extracts(self) -> Dict:
+        """Step 1.5: PDF → 完整 Markdown (Layer 2)"""
+        print("\n" + "=" * 50)
+        print("  Step 1.5: PDF 提取 (build_extracts)")
+        print("=" * 50)
+
+        pdf_files = scan_pdf_files(self.company_filter)
+        db = {}
+        db_path = WIKI_ROOT / ".extracts_db.json"
+        if db_path.exists():
+            try:
+                db = json.loads(db_path.read_text(encoding="utf-8"))
+            except Exception as e:
+                print(f"[WARN] {e}")
+
+        import hashlib
+
+        pending = []
+        for company_name, pdf_path in pdf_files:
+            stat = pdf_path.stat()
+            fh = hashlib.md5(
+                f"{pdf_path.name}:{stat.st_size}:{stat.st_mtime}".encode()
+            ).hexdigest()
+            key = f"{company_name}/{pdf_path.name}"
+            if db.get(key) != fh:
+                pending.append((company_name, pdf_path, fh))
+
+        print(f"  PDF 总数: {len(pdf_files)}, 待处理: {len(pending)}")
+
+        if not pending:
+            return {"processed": 0, "skipped": 0, "errors": 0}
+
+        success = 0
+        skipped = 0
+        errors = 0
+
+        for i, (company_name, pdf_path, fh) in enumerate(pending, 1):
+            print(f"\n[{i}/{len(pending)}] {company_name}/{pdf_path.name}")
+            result = build_extract(company_name, pdf_path, dry_run=self.dry_run)
+            status = result["status"]
+            if status == "success":
+                success += 1
+                print(f"  -> OK | {result['chars']} chars")
+                if not self.dry_run:
+                    db[f"{company_name}/{pdf_path.name}"] = fh
+            elif status == "dry_run":
+                print(f"  -> DRY-RUN | {result['chars']} chars")
+            elif status == "skip":
+                skipped += 1
+                print(f"  -> SKIP | {result.get('error', '')}")
+            else:
+                errors += 1
+                print(f"  -> ERR | {result.get('error', '')}")
+
+        if not self.dry_run:
+            db_path.write_text(
+                json.dumps(db, ensure_ascii=False, indent=2), encoding="utf-8"
+            )
+
+        print(f"\n  提取完成: {success} 成功, {skipped} 跳过, {errors} 错误")
+        return {"processed": success, "skipped": skipped, "errors": errors}
+
+    def run_tag_segments(self) -> Dict:
+        """Step 1.8: Markdown → 标签化分段 (Layer 3)"""
+        print("\n" + "=" * 50)
+        print("  Step 1.8: 标签化分段 (tag_segments)")
+        print("=" * 50)
+
+        extract_files = scan_extract_files(self.company_filter)
+        db = {}
+        db_path = WIKI_ROOT / ".segments_db.json"
+        if db_path.exists():
+            try:
+                db = json.loads(db_path.read_text(encoding="utf-8"))
+            except Exception as e:
+                print(f"[WARN] {e}")
+
+        import hashlib
+
+        pending = []
+        for company_name, extract_path in extract_files:
+            stat = extract_path.stat()
+            fh = hashlib.md5(
+                f"{extract_path.name}:{stat.st_size}:{stat.st_mtime}".encode()
+            ).hexdigest()
+            key = f"{company_name}/{extract_path.name}"
+            if db.get(key) != fh:
+                pending.append((company_name, extract_path, fh))
+
+        print(f"  Extract 总数: {len(extract_files)}, 待处理: {len(pending)}")
+
+        if not pending:
+            return {"processed": 0, "skipped": 0, "errors": 0, "segments": 0}
+
+        success = 0
+        skipped = 0
+        errors = 0
+        total_segments = 0
+
+        for i, (company_name, extract_path, fh) in enumerate(pending, 1):
+            print(f"\n[{i}/{len(pending)}] {company_name}/{extract_path.name}")
+            result = process_extract(
+                company_name, extract_path, self.llm_client, dry_run=self.dry_run
+            )
+            status = result["status"]
+            if status == "success":
+                success += 1
+                segs = result["segments"]
+                total_segments += segs
+                print(f"  -> OK | {segs} segments")
+                if not self.dry_run:
+                    db[f"{company_name}/{extract_path.name}"] = fh
+            elif status == "dry_run":
+                print(f"  -> DRY-RUN | ~{result.get('est_segments', 0)} segments")
+            elif status == "skip":
+                skipped += 1
+                print(f"  -> SKIP | {result.get('error', '')}")
+            else:
+                errors += 1
+                print(f"  -> ERR | {result.get('error', '')}")
+
+        if not self.dry_run:
+            db_path.write_text(
+                json.dumps(db, ensure_ascii=False, indent=2), encoding="utf-8"
+            )
+
+        print(
+            f"\n  分段完成: {success} 成功, {skipped} 跳过, {errors} 错误, {total_segments} 总段数"
+        )
+        return {
+            "processed": success,
+            "skipped": skipped,
+            "errors": errors,
+            "segments": total_segments,
+        }
 
     def run_ingest(self) -> Dict:
         """Step 2: 文件处理"""
@@ -227,12 +439,17 @@ class Scheduler:
         errors = 0
         error_files = []
 
+        processed_companies = set()
         for i, (file_path, entity_name, entity_type) in enumerate(pending, 1):
             print(f"\n[{i}/{len(pending)}] {Path(file_path).name[:60]}")
             try:
                 result = process_file(
-                    file_path, entity_name, entity_type,
-                    self.graph, self.llm_client, dry_run=self.dry_run
+                    file_path,
+                    entity_name,
+                    entity_type,
+                    self.graph,
+                    self.llm_client,
+                    dry_run=self.dry_run,
                 )
                 status = result["status"]
                 if status == "success":
@@ -240,6 +457,8 @@ class Scheduler:
                     total_entries += entries
                     success += 1
                     print(f"  -> OK | entries:{entries}")
+                    if not self.dry_run and entity_type == "company":
+                        processed_companies.add(entity_name)
                 elif status == "dry_run":
                     success += 1
                     print(f"  -> DRY-RUN | would process")
@@ -252,6 +471,7 @@ class Scheduler:
                     error_files.append(f"{Path(file_path).name}: {err_msg}")
                     print(f"  -> ERR | {err_msg}")
             except Exception as e:
+                print(f"[WARN] {e}")
                 errors += 1
                 error_files.append(f"{Path(file_path).name}: {e}")
                 print(f"  -> EXC | {e}")
@@ -265,8 +485,19 @@ class Scheduler:
 
         print(f"\n  处理完成: {success} 成功, {total_entries} 条目, {errors} 错误")
         if not self.dry_run and (success > 0 or errors > 0):
-            append_log("ingest",
-                       f"scheduler处理 {success} 文件, +{total_entries} 条目, {errors} 错误")
+            append_log(
+                "ingest",
+                f"scheduler处理 {success} 文件, +{total_entries} 条目, {errors} 错误",
+            )
+            # 更新 state_store: last_ingest_time
+            try:
+                from state_store import get_state
+
+                state = get_state()
+                for company_name in processed_companies:
+                    state.set_last_ingest(company_name)
+            except Exception as e:
+                print(f"[WARN] {e}")
         return result
 
     def run_assess(self) -> Dict:
@@ -311,10 +542,28 @@ class Scheduler:
 
         missing_count = sum(1 for t in targets if t[3] == "missing")
         stale_count = sum(1 for t in targets if t[3] == "stale")
-        print(f"  待更新评估: {len(targets)} 页 (缺失: {missing_count}, 过时: {stale_count})")
+        print(
+            f"  待更新评估: {len(targets)} 页 (缺失: {missing_count}, 过时: {stale_count})"
+        )
 
         if not targets:
             return {"success": 0, "skipped": 0, "errors": 0}
+
+        # 批量限制：每次最多处理 20 个，优先处理缺失的
+        MAX_ASSESS_PER_RUN = 20
+        if len(targets) > MAX_ASSESS_PER_RUN:
+            # 优先处理缺失评估，然后按过时时间排序
+            targets = sorted(
+                targets,
+                key=lambda t: (
+                    0 if t[3] == "missing" else 1,
+                    t[2].stat().st_mtime if t[2].exists() else 0,
+                ),
+            )
+            targets = targets[:MAX_ASSESS_PER_RUN]
+            print(
+                f"  本次处理前 {MAX_ASSESS_PER_RUN} 个（剩余 {missing_count + stale_count - MAX_ASSESS_PER_RUN} 个下次处理）"
+            )
 
         success = 0
         skipped = 0
@@ -341,24 +590,53 @@ class Scheduler:
 
             try:
                 if self.dry_run:
-                    print(f"  -> [DRY] Would {'regenerate' if reason == 'stale' else 'generate'} assessment from {len(entries)} entries")
+                    print(
+                        f"  -> [DRY] Would {'regenerate' if reason == 'stale' else 'generate'} assessment from {len(entries)} entries"
+                    )
                     success += 1
                     continue
 
-                assessment = generate_assessment(wiki, name, topic, questions, self.llm_client)
+                assessment = generate_assessment(
+                    wiki, name, topic, questions, self.llm_client
+                )
                 if assessment:
                     add_assessment_section(wiki, assessment)
-                    print(f"  -> OK | {len(assessment)} chars, based on {len(entries)} entries")
-                    # 添加到审核队列（低风险自动批准）
+                    print(
+                        f"  -> OK | {len(assessment)} chars, based on {len(entries)} entries"
+                    )
+                    # 添加到审核队列（根据配置决定是否自动批准）
                     try:
+                        risk_level = "low"  # assessment 更新为低风险
                         rq_id = self.review_queue.add_entry(
-                            risk="low", op_type="assess", entity=name,
+                            risk=risk_level,
+                            op_type="assess",
+                            entity=name,
                             description=f"更新综合评估: {wiki.name} ({reason})",
                             source=str(wiki.relative_to(WIKI_ROOT)),
                         )
-                        self.review_queue.approve(rq_id)
-                    except Exception:
-                        pass
+                        # 只有配置允许时才自动批准
+                        auto_approve = self.review_config.get(
+                            f"auto_approve_{risk_level}", False
+                        )
+                        if auto_approve:
+                            self.review_queue.approve(rq_id)
+                    except Exception as e:
+                        print(f"[WARN] {e}")
+
+                    # 验证历史预测
+                    try:
+                        verifications = verify_predictions(wiki)
+                        if verifications:
+                            print(
+                                f"  -> 预测验证: {len(verifications)} 个历史预测需关注"
+                            )
+                            for v in verifications[:2]:  # 只显示前2个
+                                print(
+                                    f"      • {v['prediction'][:50]}... | 偏差: {v['deviation']}"
+                                )
+                    except Exception as e:
+                        print(f"[WARN] {e}")
+
                     success += 1
                 else:
                     print(f"  -> SKIP | LLM returned empty")
@@ -398,7 +676,9 @@ class Scheduler:
                 continue
 
             try:
-                result = distill_sector(sname, self.graph, self.llm_client, dry_run=False)
+                result = distill_sector(
+                    sname, self.graph, self.llm_client, dry_run=False
+                )
                 status = result.get("status", "unknown")
                 if status == "success":
                     success += 1
@@ -418,7 +698,9 @@ class Scheduler:
 
         print(f"\n  蒸馏完成: {success}/{processed} 行业成功, +{total_entries} 条目")
         if not self.dry_run and success > 0:
-            append_log("distill", f"scheduler蒸馏 {success} 行业, +{total_entries} 条目")
+            append_log(
+                "distill", f"scheduler蒸馏 {success} 行业, +{total_entries} 条目"
+            )
         return result
 
     def run_judgment(self) -> Dict:
@@ -443,7 +725,9 @@ class Scheduler:
                 success_count += 1
                 continue
 
-            result = generate_judgment(name, WIKI_ROOT, dry_run=False)
+            result = generate_judgment(
+                name, WIKI_ROOT, dry_run=False, use_llm=True, llm_client=self.llm_client
+            )
             page_results = result.get("results", {})
             if page_results:
                 success_count += 1
@@ -495,7 +779,9 @@ class Scheduler:
             report_path = str(WIKI_ROOT / "cross_verify_report.md")
             generate_verify_report(clusters, Path(report_path))
             print(f"  报告已保存: {report_path}")
-            append_log("lint", f"scheduler交叉验证: {len(clusters)} 事件, {len(high)} 高可信度")
+            append_log(
+                "lint", f"scheduler交叉验证: {len(clusters)} 事件, {len(high)} 高可信度"
+            )
 
         return {
             "total": len(entries),
@@ -573,9 +859,14 @@ class Scheduler:
             "modified_wikis": modified_wikis,
         }
 
-        print(f"\n  问题演化完成: {total_active} 活跃, {total_stale} 陈旧, {total_unaddressed} 未回答, {modified_wikis} 文件更新")
+        print(
+            f"\n  问题演化完成: {total_active} 活跃, {total_stale} 陈旧, {total_unaddressed} 未回答, {modified_wikis} 文件更新"
+        )
         if not self.dry_run and modified_wikis > 0:
-            append_log("lint", f"scheduler问题演化: {total_stale} 陈旧, {total_unaddressed} 未回答, {modified_wikis} 文件更新")
+            append_log(
+                "lint",
+                f"scheduler问题演化: {total_stale} 陈旧, {total_unaddressed} 未回答, {modified_wikis} 文件更新",
+            )
         return result
 
     def run_dashboard(self) -> Dict:
@@ -615,16 +906,21 @@ class Scheduler:
             print(f"\n  Lint 完成: {errors} errors, {warnings} warnings, {infos} info")
 
             # 自动修复 broken links
-            broken_link_count = sum(1 for i in result.issues if i['category'] == 'broken_link')
+            broken_link_count = sum(
+                1 for i in result.issues if i["category"] == "broken_link"
+            )
             if broken_link_count > 0:
                 print(f"  尝试修复 {broken_link_count} 个 broken links...")
                 try:
                     import subprocess
+
                     fix_script = SCRIPTS_DIR / "fix_broken_links.py"
                     if fix_script.exists():
                         proc = subprocess.run(
                             [sys.executable, str(fix_script)],
-                            capture_output=True, text=True, cwd=str(WIKI_ROOT)
+                            capture_output=True,
+                            text=True,
+                            cwd=str(WIKI_ROOT),
                         )
                         if proc.returncode == 0:
                             print(f"  修复完成")
@@ -673,13 +969,16 @@ class Scheduler:
                     success += 1
                     total_original += result["original_lines"]
                     total_compressed += result["compressed_lines"]
-                    print(f"  -> OK | {result['original_lines']} -> {result['compressed_lines']} 行")
+                    print(
+                        f"  -> OK | {result['original_lines']} -> {result['compressed_lines']} 行"
+                    )
                 elif result["status"] == "skip":
                     print(f"  -> SKIP | {result.get('reason', '')}")
                 else:
                     errors += 1
                     print(f"  -> ERR | {result.get('reason', 'unknown')}")
             except Exception as e:
+                print(f"[WARN] {e}")
                 errors += 1
                 print(f"  -> EXC | {e}")
 
@@ -695,7 +994,10 @@ class Scheduler:
         if total_original > 0:
             print(f"  行数: {total_original} -> {total_compressed}")
         if not self.dry_run and success > 0:
-            append_log("enrich", f"scheduler知识压缩: {success} 页面, {total_original} -> {total_compressed} 行")
+            append_log(
+                "enrich",
+                f"scheduler知识压缩: {success} 页面, {total_original} -> {total_compressed} 行",
+            )
         return result
 
     def run_detect(self) -> Dict:
@@ -738,7 +1040,27 @@ class Scheduler:
                     f.write(f"- 页面2: {c.page2}\n")
                     f.write(f"- 陈述2: {c.statement2[:200]}\n\n")
 
-            append_log("lint", f"scheduler矛盾检测: {len(contradictions)} 潜在, {len(high_conf)} 高置信度")
+            # 高置信度矛盾 → 审核队列
+            added_to_queue = 0
+            for c in high_conf[:10]:  # 最多 10 个加入队列
+                try:
+                    self.review_queue.add_entry(
+                        risk="high",
+                        op_type="contradiction",
+                        entity=c.entity1,
+                        description=f"矛盾: {c.description[:100]}",
+                        source=f"{c.page1} vs {c.page2}",
+                    )
+                    added_to_queue += 1
+                except Exception as e:
+                    print(f"[WARN] {e}")
+            if added_to_queue > 0:
+                print(f"  -> {added_to_queue} 个高置信度矛盾已加入审核队列")
+
+            append_log(
+                "lint",
+                f"scheduler矛盾检测: {len(contradictions)} 潜在, {len(high_conf)} 高置信度, {added_to_queue} 入队列",
+            )
 
         return {
             "total": len(contradictions),
@@ -766,7 +1088,9 @@ class Scheduler:
 
         # 3. 读取 review queue 统计
         review_stats = self._get_review_stats()
-        print(f"  审核队列: {review_stats.get('pending', 0)} 待审, {review_stats.get('approved', 0)} 已批")
+        print(
+            f"  审核队列: {review_stats.get('pending', 0)} 待审, {review_stats.get('approved', 0)} 已批"
+        )
 
         # 4. 读取 lint 报告问题摘要
         lint_summary = self._get_lint_summary()
@@ -775,7 +1099,9 @@ class Scheduler:
         # 5. 用 LLM 生成改进建议
         suggestions = ""
         try:
-            suggestions = self._generate_evolve_suggestions(metrics, recent_logs, review_stats, lint_summary)
+            suggestions = self._generate_evolve_suggestions(
+                metrics, recent_logs, review_stats, lint_summary
+            )
             print(f"  改进建议: {len(suggestions)} chars")
         except Exception as e:
             print(f"  [WARN] LLM 建议生成失败: {e}")
@@ -792,7 +1118,10 @@ class Scheduler:
 
         print(f"\n  Schema 进化完成")
         if not self.dry_run:
-            append_log("evolve", f"scheduler schema进化: {len(metrics)} 指标, 建议 {len(suggestions)} chars")
+            append_log(
+                "evolve",
+                f"scheduler schema进化: {len(metrics)} 指标, 建议 {len(suggestions)} chars",
+            )
         return result
 
     def _collect_metrics(self) -> Dict[str, Any]:
@@ -803,8 +1132,12 @@ class Scheduler:
         company_wikis = list(WIKI_ROOT.glob("companies/*/wiki/*.md"))
         sector_wikis = list(WIKI_ROOT.glob("sectors/*/wiki/*.md"))
         theme_wikis = list(WIKI_ROOT.glob("themes/*/wiki/*.md"))
-        metrics["company_pages"] = len([w for w in company_wikis if "_slides" not in w.name])
-        metrics["sector_pages"] = len([w for w in sector_wikis if "_slides" not in w.name])
+        metrics["company_pages"] = len(
+            [w for w in company_wikis if "_slides" not in w.name]
+        )
+        metrics["sector_pages"] = len(
+            [w for w in sector_wikis if "_slides" not in w.name]
+        )
         metrics["theme_pages"] = len(theme_wikis)
 
         # 统计过时页面 (>60 天未更新)
@@ -845,8 +1178,9 @@ class Scheduler:
             content = log_path.read_text(encoding="utf-8")
             # 提取最近的日志条目 (按日期分组)
             import re
+
             # 匹配形如 "## [2026-04-24 22:43] ..." 的日志标题
-            date_pattern = re.compile(r'##\s*\[?(\d{4}-\d{2}-\d{2})')
+            date_pattern = re.compile(r"##\s*\[?(\d{4}-\d{2}-\d{2})")
             entries = []
             current_date = None
             current_lines = []
@@ -858,12 +1192,14 @@ class Scheduler:
                         try:
                             entry_date = datetime.strptime(current_date, "%Y-%m-%d")
                             if (datetime.now() - entry_date).days <= days:
-                                entries.append(current_date + ": " + " | ".join(current_lines))
+                                entries.append(
+                                    current_date + ": " + " | ".join(current_lines)
+                                )
                         except ValueError:
                             pass
                     current_date = m.group(1)
                     # 提取 header 的描述部分（去掉日期和级别前缀）
-                    header_desc = re.sub(r'\[.*?\]\s*\w+\s*', '', line.strip()).strip()
+                    header_desc = re.sub(r"\[.*?\]\s*\w+\s*", "", line.strip()).strip()
                     current_lines = [header_desc] if header_desc else []
                 elif current_date and line.strip().startswith("- "):
                     current_lines.append(line.strip()[2:])
@@ -885,6 +1221,7 @@ class Scheduler:
         """读取审核队列统计"""
         try:
             from review_queue import ReviewQueue
+
             rq = ReviewQueue()
             entries = rq.get_all()
             stats = {"pending": 0, "approved": 0, "rejected": 0, "total": len(entries)}
@@ -913,7 +1250,12 @@ class Scheduler:
                 lines = content.splitlines()
                 for line in lines[:30]:
                     s = line.strip()
-                    if s.startswith("- ") or s.startswith("* ") or "error" in s.lower() or "warning" in s.lower():
+                    if (
+                        s.startswith("- ")
+                        or s.startswith("* ")
+                        or "error" in s.lower()
+                        or "warning" in s.lower()
+                    ):
                         parts.append(s)
                 if not parts:
                     parts.append(f"Lint 报告存在 ({len(lines)} 行)")
@@ -927,13 +1269,18 @@ class Scheduler:
                 summary_lines = [l.strip() for l in lines[1:15] if l.strip()]
                 if summary_lines:
                     parts.append(f"质量报告: {len(lines)} 行")
-            except Exception:
-                pass
+            except Exception as e:
+                print(f"[WARN] {e}")
 
         return "\\n".join(parts[:5]) if parts else "_（暂无 lint 数据）_"
 
-    def _generate_evolve_suggestions(self, metrics: Dict, recent_logs: List[str],
-                                     review_stats: Dict, lint_summary: str) -> str:
+    def _generate_evolve_suggestions(
+        self,
+        metrics: Dict,
+        recent_logs: List[str],
+        review_stats: Dict,
+        lint_summary: str,
+    ) -> str:
         """用 LLM 分析系统状态并生成改进建议"""
         prompt = f"""你是公司知识库系统的自我优化分析助手。
 
@@ -941,21 +1288,21 @@ class Scheduler:
 建议应针对 CLAUDE.md 中定义的维护规范（LLM 驱动的上市公司知识库），重点关注：数据质量、自动闭环、信息发现。
 
 ## 系统指标
-- 跟踪公司数: {metrics.get('tracked_companies', 'N/A')}
-- 跟踪行业数: {metrics.get('tracked_sectors', 'N/A')}
-- 公司 wiki 页面: {metrics.get('company_pages', 'N/A')}
-- 行业 wiki 页面: {metrics.get('sector_pages', 'N/A')}
-- 已有综合评估: {metrics.get('total_assessments', 'N/A')}
-- 过时评估(>60天): {metrics.get('stale_assessments', 'N/A')}
-- 缺失评估: {metrics.get('missing_assessments', 'N/A')}
+- 跟踪公司数: {metrics.get("tracked_companies", "N/A")}
+- 跟踪行业数: {metrics.get("tracked_sectors", "N/A")}
+- 公司 wiki 页面: {metrics.get("company_pages", "N/A")}
+- 行业 wiki 页面: {metrics.get("sector_pages", "N/A")}
+- 已有综合评估: {metrics.get("total_assessments", "N/A")}
+- 过时评估(>60天): {metrics.get("stale_assessments", "N/A")}
+- 缺失评估: {metrics.get("missing_assessments", "N/A")}
 
 ## 近期日志（近 7 天）
-{chr(10).join(recent_logs[:10]) if recent_logs else '（暂无）'}
+{chr(10).join(recent_logs[:10]) if recent_logs else "（暂无）"}
 
 ## 审核队列
-- 总计: {review_stats.get('total', 0)}
-- 待审: {review_stats.get('pending', 0)}
-- 已批: {review_stats.get('approved', 0)}
+- 总计: {review_stats.get("total", 0)}
+- 待审: {review_stats.get("pending", 0)}
+- 已批: {review_stats.get("approved", 0)}
 
 ## Lint 报告
 {lint_summary}
@@ -978,8 +1325,9 @@ class Scheduler:
             return response.content.strip()
         return "_（LLM 分析失败）_"
 
-    def _update_claude_feedback(self, metrics: Dict, review_stats: Dict,
-                                lint_summary: str, suggestions: str):
+    def _update_claude_feedback(
+        self, metrics: Dict, review_stats: Dict, lint_summary: str, suggestions: str
+    ):
         """更新 CLAUDE.md 的反馈记录 section"""
         claude_path = WIKI_ROOT / "CLAUDE.md"
         if not claude_path.exists():
@@ -997,10 +1345,10 @@ class Scheduler:
 > 最后更新：{today}
 
 ### 运行指标
-- 跟踪实体：{metrics.get('tracked_companies', 0)} 家公司, {metrics.get('tracked_sectors', 0)} 个行业
-- Wiki 页面：{metrics.get('company_pages', 0)} 公司页, {metrics.get('sector_pages', 0)} 行业页
-- 综合评估：{metrics.get('total_assessments', 0)} 已有, {metrics.get('stale_assessments', 0)} 过时, {metrics.get('missing_assessments', 0)} 缺失
-- 审核队列：{review_stats.get('total', 0)} 总计, {review_stats.get('pending', 0)} 待审, {review_stats.get('approved', 0)} 已批
+- 跟踪实体：{metrics.get("tracked_companies", 0)} 家公司, {metrics.get("tracked_sectors", 0)} 个行业
+- Wiki 页面：{metrics.get("company_pages", 0)} 公司页, {metrics.get("sector_pages", 0)} 行业页
+- 综合评估：{metrics.get("total_assessments", 0)} 已有, {metrics.get("stale_assessments", 0)} 过时, {metrics.get("missing_assessments", 0)} 缺失
+- 审核队列：{review_stats.get("total", 0)} 总计, {review_stats.get("pending", 0)} 待审, {review_stats.get("approved", 0)} 已批
 - Lint 状态：{lint_summary}
 
 ### 改进建议
@@ -1010,6 +1358,7 @@ class Scheduler:
 
         # 替换或添加反馈记录 section
         import re
+
         if "## 反馈记录" in content:
             content = re.sub(
                 r"## 反馈记录[\s\S]*?(?=\Z)",
@@ -1046,6 +1395,10 @@ class Scheduler:
 
         if "collect" in steps:
             results["collect"] = self.run_collect()
+        if "extract" in steps:
+            results["extract"] = self.run_build_extracts()
+        if "tag" in steps:
+            results["tag"] = self.run_tag_segments()
         if "ingest" in steps:
             results["ingest"] = self.run_ingest()
         if "assess" in steps:
@@ -1072,7 +1425,7 @@ class Scheduler:
         # 生成摘要
         elapsed = (datetime.now() - start_time).total_seconds()
         self.summary = {
-            "start_time": start_time.strftime('%Y-%m-%d %H:%M:%S'),
+            "start_time": start_time.strftime("%Y-%m-%d %H:%M:%S"),
             "elapsed_seconds": int(elapsed),
             "dry_run": self.dry_run,
             "company_filter": self.company_filter,
@@ -1098,6 +1451,21 @@ class Scheduler:
             print(f"\n  [新闻采集]")
             print(f"    新文章: {r.get('new', 0)}")
             print(f"    重复: {r.get('dup', 0)}")
+
+        if "extract" in s["results"]:
+            r = s["results"]["extract"]
+            print(f"\n  [PDF提取]")
+            print(f"    成功: {r.get('processed', 0)}")
+            print(f"    跳过: {r.get('skipped', 0)}")
+            print(f"    错误: {r.get('errors', 0)}")
+
+        if "tag" in s["results"]:
+            r = s["results"]["tag"]
+            print(f"\n  [标签化分段]")
+            print(f"    成功: {r.get('processed', 0)}")
+            print(f"    跳过: {r.get('skipped', 0)}")
+            print(f"    错误: {r.get('errors', 0)}")
+            print(f"    总段数: {r.get('segments', 0)}")
 
         if "ingest" in s["results"]:
             r = s["results"]["ingest"]
@@ -1177,7 +1545,9 @@ class Scheduler:
             print(f"\n  [知识压缩]")
             print(f"    处理: {r.get('processed', 0)} 页")
             print(f"    成功: {r.get('success', 0)}")
-            print(f"    行数: {r.get('original_lines', 0)} -> {r.get('compressed_lines', 0)}")
+            print(
+                f"    行数: {r.get('original_lines', 0)} -> {r.get('compressed_lines', 0)}"
+            )
 
         if "schema_evolve" in s["results"]:
             r = s["results"]["schema_evolve"]
@@ -1192,29 +1562,45 @@ class Scheduler:
             details = [f"elapsed={s['elapsed_seconds']}s"]
             for step, result in s["results"].items():
                 if step == "ingest":
-                    details.append(f"ingest={result.get('processed',0)}/{result.get('entries',0)}")
+                    details.append(
+                        f"ingest={result.get('processed', 0)}/{result.get('entries', 0)}"
+                    )
                 elif step == "collect":
-                    details.append(f"collect=+{result.get('new',0)}")
+                    details.append(f"collect=+{result.get('new', 0)}")
+                elif step == "extract":
+                    details.append(f"extract=+{result.get('processed', 0)}")
+                elif step == "tag":
+                    details.append(
+                        f"tag=+{result.get('processed', 0)}/{result.get('segments', 0)}segs"
+                    )
                 elif step == "assess":
-                    details.append(f"assess=+{result.get('success',0)}")
+                    details.append(f"assess=+{result.get('success', 0)}")
                 elif step == "detect":
-                    details.append(f"detect={result.get('high_confidence',0)}high")
+                    details.append(f"detect={result.get('high_confidence', 0)}high")
                 elif step == "distill":
-                    details.append(f"distill=+{result.get('added',0)}entries")
+                    details.append(f"distill=+{result.get('added', 0)}entries")
                 elif step == "judgment":
-                    details.append(f"judgment={result.get('success',0)}companies")
+                    details.append(f"judgment={result.get('success', 0)}companies")
                 elif step == "verify":
-                    details.append(f"verify={result.get('clusters',0)}events")
+                    details.append(f"verify={result.get('clusters', 0)}events")
                 elif step == "evolve":
-                    details.append(f"evolve={result.get('stale',0)}stale/{result.get('unaddressed',0)}unanswered")
+                    details.append(
+                        f"evolve={result.get('stale', 0)}stale/{result.get('unaddressed', 0)}unanswered"
+                    )
                 elif step == "dashboard":
-                    details.append(f"dashboard={result.get('status','N/A')}")
+                    details.append(f"dashboard={result.get('status', 'N/A')}")
                 elif step == "lint":
-                    details.append(f"lint={result.get('errors',0)}err/{result.get('warnings',0)}warn")
+                    details.append(
+                        f"lint={result.get('errors', 0)}err/{result.get('warnings', 0)}warn"
+                    )
                 elif step == "consolidate":
-                    details.append(f"consolidate={result.get('success',0)}pages/{result.get('original_lines',0)}->{result.get('compressed_lines',0)}lines")
+                    details.append(
+                        f"consolidate={result.get('success', 0)}pages/{result.get('original_lines', 0)}->{result.get('compressed_lines', 0)}lines"
+                    )
                 elif step == "schema_evolve":
-                    details.append(f"schema_evolve={result.get('metrics_count',0)}metrics/{result.get('suggestions_chars',0)}chars")
+                    details.append(
+                        f"schema_evolve={result.get('metrics_count', 0)}metrics/{result.get('suggestions_chars', 0)}chars"
+                    )
             append_log("scheduler", "调度周期完成", details=details)
 
 
@@ -1223,6 +1609,8 @@ def main():
     parser.add_argument("--company", type=str, help="只处理指定公司")
     parser.add_argument("--dry-run", action="store_true", help="只打印不执行")
     parser.add_argument("--collect-only", action="store_true", help="只执行新闻采集")
+    parser.add_argument("--extract-only", action="store_true", help="只执行 PDF 提取")
+    parser.add_argument("--tag-only", action="store_true", help="只执行标签化分段")
     parser.add_argument("--ingest-only", action="store_true", help="只执行文件处理")
     parser.add_argument("--assess-only", action="store_true", help="只执行评估更新")
     parser.add_argument("--detect-only", action="store_true", help="只执行矛盾检测")
@@ -1230,13 +1618,25 @@ def main():
     parser.add_argument("--judgment-only", action="store_true", help="只执行投资判断")
     parser.add_argument("--verify-only", action="store_true", help="只执行交叉验证")
     parser.add_argument("--evolve-only", action="store_true", help="只执行问题演化")
-    parser.add_argument("--dashboard-only", action="store_true", help="只执行质量仪表盘")
+    parser.add_argument(
+        "--dashboard-only", action="store_true", help="只执行质量仪表盘"
+    )
     parser.add_argument("--lint-only", action="store_true", help="只执行健康检查")
-    parser.add_argument("--consolidate-only", action="store_true", help="只执行知识压缩")
-    parser.add_argument("--schema-evolve-only", action="store_true", help="只执行 Schema 进化")
-    parser.add_argument("--daemon", action="store_true", help="守护模式，按配置自动调度")
-    parser.add_argument("--steps", type=str, default="collect,ingest,assess,distill,judgment,detect,evolve,dashboard,lint",
-                        help="执行的步骤，逗号分隔 (默认: collect,ingest,assess,distill,judgment,detect,evolve,dashboard,lint)")
+    parser.add_argument(
+        "--consolidate-only", action="store_true", help="只执行知识压缩"
+    )
+    parser.add_argument(
+        "--schema-evolve-only", action="store_true", help="只执行 Schema 进化"
+    )
+    parser.add_argument(
+        "--daemon", action="store_true", help="守护模式，按配置自动调度"
+    )
+    parser.add_argument(
+        "--steps",
+        type=str,
+        default="collect,extract,tag,ingest,assess,consolidate,distill,judgment,detect,evolve,dashboard,lint",
+        help="执行的步骤，逗号分隔 (默认: collect,extract,tag,ingest,assess,distill,judgment,detect,evolve,dashboard,lint)",
+    )
     args = parser.parse_args()
 
     scheduler = Scheduler(company_filter=args.company, dry_run=args.dry_run)
@@ -1249,6 +1649,10 @@ def main():
     # 确定执行步骤
     if args.collect_only:
         steps = ["collect"]
+    elif args.extract_only:
+        steps = ["extract"]
+    elif args.tag_only:
+        steps = ["tag"]
     elif args.ingest_only:
         steps = ["ingest"]
     elif args.assess_only:

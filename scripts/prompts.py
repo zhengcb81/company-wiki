@@ -15,6 +15,7 @@ from typing import Dict, List, Optional
 
 # ── 通用分析 Prompt ──────────────────────────
 
+
 def build_analysis_prompt(
     content: str,
     entity_name: str,
@@ -40,7 +41,11 @@ def build_analysis_prompt(
     """
     content = content[:max_content_chars]
 
-    questions_text = "\n".join(f"{i+1}. {q}" for i, q in enumerate(core_questions)) if core_questions else "（暂无核心问题）"
+    questions_text = (
+        "\n".join(f"{i + 1}. {q}" for i, q in enumerate(core_questions))
+        if core_questions
+        else "（暂无核心问题）"
+    )
 
     related_text = ""
     if related_entities:
@@ -120,6 +125,7 @@ def build_analysis_prompt(
 
 # ── 财报专用 Prompt ──────────────────────────
 
+
 def build_financial_report_prompt(
     content: str,
     entity_name: str,
@@ -135,12 +141,16 @@ def build_financial_report_prompt(
     """
     content = content[:max_content_chars]
 
-    questions_text = "\n".join(f"{i+1}. {q}" for i, q in enumerate(core_questions)) if core_questions else "（暂无核心问题）"
+    questions_text = (
+        "\n".join(f"{i + 1}. {q}" for i, q in enumerate(core_questions))
+        if core_questions
+        else "（暂无核心问题）"
+    )
 
     prev_text = ""
     if previous_period_data:
-        prev_text = f"""\n## 上一期（{previous_period_data.get('period', '上期')}）关键数据
-{previous_period_data.get('summary', '无')}\n"""
+        prev_text = f"""\n## 上一期（{previous_period_data.get("period", "上期")}）关键数据
+{previous_period_data.get("summary", "无")}\n"""
 
     prompt = f"""你是一名资深财务分析师。请深度分析以下{entity_name}的{period}{report_type}内容。
 
@@ -220,6 +230,7 @@ def build_financial_report_prompt(
 
 # ── 投资者关系专用 Prompt ──────────────────────────
 
+
 def build_ir_prompt(
     content: str,
     entity_name: str,
@@ -233,7 +244,11 @@ def build_ir_prompt(
     """
     content = content[:max_content_chars]
 
-    questions_text = "\n".join(f"{i+1}. {q}" for i, q in enumerate(core_questions)) if core_questions else "（暂无核心问题）"
+    questions_text = (
+        "\n".join(f"{i + 1}. {q}" for i, q in enumerate(core_questions))
+        if core_questions
+        else "（暂无核心问题）"
+    )
 
     prompt = f"""你是一名资深行业研究员。以下内容是{entity_name}的投资者关系活动记录，包含机构投资者与管理层的问答对话。
 
@@ -248,19 +263,19 @@ def build_ir_prompt(
 {content}
 
 ## 分析要求
-1. **逐对提取 QA**：
-   - 每个有价值的问题-回答对都作为一个独立条目
-   - 保留问题的原始措辞（不要简化）
-   - 保留回答的完整内容（不要省略关键信息）
+1. **综合提取**（重要：一个 IR 文件只生成一个时间线条目）：
+   - 将整个 IR 活动记录作为一个整体分析
+   - 提取最重要的 3-5 个 QA 对的核心内容，合并为一个条目
+   - 不要为每个 QA 对生成独立条目（避免时间线过度膨胀）
 
 2. **判断回答质量**：
-   - 管理层是否正面回答了问题？
+   - 管理层是否正面回答了关键问题？
    - 回答中是否包含具体数字/日期/事实？
    - 回答是否有回避或模糊之处？
 
 3. **映射核心问题**：
-   - 每个 QA 对可能回答一个或多个核心问题
-   - 如果 QA 涉及新的重要话题但未在核心问题中，标记为"新问题"
+   - 识别本次 IR 活动中回答的核心问题
+   - 如果涉及新的重要话题但未在核心问题中，标记为"新问题"
 
 4. **提取关键洞察**：
    - 管理层透露的非公开信息或前瞻判断
@@ -272,13 +287,14 @@ def build_ir_prompt(
   "timeline_entries": [
     {{
       "date": "YYYY-MM-DD",
-      "title": "IR: 问题简要概括",
+      "title": "IR: 活动主题概括（如'机构调研：业务进展与竞争格局'）",
       "key_points": [
-        "问: 机构的问题",
-        "答: 管理层的回答",
-        "洞察: 回答中的关键信息"
+        "要点1: 最重要的 QA 核心内容（含具体数据）",
+        "要点2: 次重要的 QA 核心内容",
+        "要点3: 管理层透露的关键洞察",
+        "...最多5个要点"
       ],
-      "answered_questions": ["回答的核心问题"],
+      "answered_questions": ["本次IR回答的核心问题"],
       "importance": 0.0,
       "sentiment": "positive/negative/neutral",
       "source_type": "投资者关系"
@@ -293,13 +309,15 @@ def build_ir_prompt(
 
 注意：
 - 只输出 JSON
-- 每个有价值的 QA 对都要生成一个 timeline_entries 条目
-- 如果管理层回避了问题，在 key_points 中明确指出
+- **一个 IR 文件只生成一个 timeline_entries 条目**（这是关键要求）
+- 将多个 QA 对的核心内容合并为 3-5 个要点
+- 如果管理层回避了关键问题，在 key_points 中明确指出
 """
     return prompt
 
 
 # ── 综合评估生成 Prompt ──────────────────────────
+
 
 def build_assessment_prompt(
     timeline_entries: List[Dict],
@@ -311,11 +329,16 @@ def build_assessment_prompt(
     基于时间线条目生成综合评估。
     """
     entries_text = "\n\n".join(
-        f"[{e.get('date', '')}] {e.get('title', '')}\n" + "\n".join(f"- {p}" for p in e.get('key_points', []))
+        f"[{e.get('date', '')}] {e.get('title', '')}\n"
+        + "\n".join(f"- {p}" for p in e.get("key_points", []))
         for e in timeline_entries[-20:]  # 最近20条
     )
 
-    questions_text = "\n".join(f"{i+1}. {q}" for i, q in enumerate(core_questions)) if core_questions else "（暂无核心问题）"
+    questions_text = (
+        "\n".join(f"{i + 1}. {q}" for i, q in enumerate(core_questions))
+        if core_questions
+        else "（暂无核心问题）"
+    )
 
     prompt = f"""你是一名资深上市公司研究分析师。请基于以下时间线条目，为 {entity_name} 的「{topic_name}」主题生成一段综合评估。
 
@@ -344,6 +367,7 @@ def build_assessment_prompt(
 
 # ── 核心问题生成 Prompt ──────────────────────────
 
+
 def build_question_generation_prompt(
     entity_name: str,
     sector: str,
@@ -354,7 +378,11 @@ def build_question_generation_prompt(
     """
     基于最新信息生成/更新核心追踪问题。
     """
-    existing_text = "\n".join(f"- {q}" for q in existing_questions) if existing_questions else "（暂无）"
+    existing_text = (
+        "\n".join(f"- {q}" for q in existing_questions)
+        if existing_questions
+        else "（暂无）"
+    )
 
     prompt = f"""你是一名上市公司研究框架设计专家。请为 {entity_name} 设计或更新核心追踪问题。
 
@@ -392,6 +420,7 @@ def build_question_generation_prompt(
 
 # ── 公告专用 Prompt ──────────────────────────
 
+
 def build_announcement_prompt(
     content: str,
     entity_name: str,
@@ -406,7 +435,11 @@ def build_announcement_prompt(
     """
     content = content[:max_content_chars]
 
-    questions_text = "\n".join(f"{i+1}. {q}" for i, q in enumerate(core_questions)) if core_questions else "（暂无核心问题）"
+    questions_text = (
+        "\n".join(f"{i + 1}. {q}" for i, q in enumerate(core_questions))
+        if core_questions
+        else "（暂无核心问题）"
+    )
 
     prompt = f"""你是一名资深事件驱动分析师。以下{entity_name}的{announcement_type}公告可能对投资决策产生重大影响，请深度分析。
 
@@ -467,6 +500,7 @@ def build_announcement_prompt(
 
 # ── 招股书专用 Prompt ──────────────────────────
 
+
 def build_prospectus_prompt(
     content: str,
     entity_name: str,
@@ -480,7 +514,11 @@ def build_prospectus_prompt(
     """
     content = content[:max_content_chars]
 
-    questions_text = "\n".join(f"{i+1}. {q}" for i, q in enumerate(core_questions)) if core_questions else "（暂无核心问题）"
+    questions_text = (
+        "\n".join(f"{i + 1}. {q}" for i, q in enumerate(core_questions))
+        if core_questions
+        else "（暂无核心问题）"
+    )
 
     prompt = f"""你是一名资深IPO分析师。请深度分析{entity_name}的招股说明书，提取对打新/投资决策最关键的信息。
 
@@ -539,6 +577,7 @@ def build_prospectus_prompt(
 
 # ── 行业蒸馏 Prompt ──────────────────────────
 
+
 def build_distillation_prompt(
     sector_name: str,
     company_entries: dict,
@@ -554,7 +593,11 @@ def build_distillation_prompt(
         core_questions: 该行业的核心追踪问题
         existing_assessment: 行业 wiki 现有综合评估（可选）
     """
-    questions_text = "\n".join(f"{i+1}. {q}" for i, q in enumerate(core_questions)) if core_questions else "（暂无核心问题）"
+    questions_text = (
+        "\n".join(f"{i + 1}. {q}" for i, q in enumerate(core_questions))
+        if core_questions
+        else "（暂无核心问题）"
+    )
 
     # 构建公司条目文本
     companies_text = ""

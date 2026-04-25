@@ -37,12 +37,38 @@ CATEGORY_RULES: list[tuple[str, list[str]]] = [
 
 # 公告类关键词（不含财报、招股书、投资者关系的其他 PDF）
 ANNOUNCEMENT_KEYWORDS = [
-    "公告", "章程", "制度", "通知", "决议", "专项", "述职",
-    "审计报告", "审计委员会", "内控", "薪酬", "评价", "权益分派",
-    "资金占用", "独立性", "履职", "会议资料", "港股公告",
-    "治理报告", "法律意见", "核查意见", "权益变动", "说明",
-    "工作报告", "审核报告", "跟踪报告", "督导", "募集资金",
-    "股票期权", "归属期", "重组", "发行",
+    "公告",
+    "章程",
+    "制度",
+    "通知",
+    "决议",
+    "专项",
+    "述职",
+    "审计报告",
+    "审计委员会",
+    "内控",
+    "薪酬",
+    "评价",
+    "权益分派",
+    "资金占用",
+    "独立性",
+    "履职",
+    "会议资料",
+    "港股公告",
+    "治理报告",
+    "法律意见",
+    "核查意见",
+    "权益变动",
+    "说明",
+    "工作报告",
+    "审核报告",
+    "跟踪报告",
+    "督导",
+    "募集资金",
+    "股票期权",
+    "归属期",
+    "重组",
+    "发行",
 ]
 
 
@@ -59,27 +85,33 @@ def classify_pdf(filename: str) -> str | None:
     if any(kw in name for kw in ir_keywords):
         return "investor_relations"
 
-    # 3. 港股公告
-    if "港股公告" in name:
-        return "announcements"
-
-    # 4. 财报类 — 半年度报告（必须在年度之前检查，因为"半年度报告"包含"年度报告"）
+    # 3. 财报类 — 半年度报告（必须在年度之前检查，因为"半年度报告"包含"年度报告"）
     if "半年度报告" in name or "中报" in name:
         return "financial_reports/semi_annual"
 
-    # 5. 财报类 — 年度报告
+    # 4. 财报类 — 年度报告
     if "年度报告" in name or "年报" in name:
         return "financial_reports/annual"
 
-    # 6. 财报类 — 季度报告
+    # 5. 财报类 — 季度报告
     quarter_patterns = [
-        r"季度报告", r"一季度报告", r"三季度报告",
-        r"第一季度", r"第三季度", r"一季度", r"三季度",
-        r"Q[1-4]", r"[一二三四]季度",
+        r"季度报告",
+        r"一季度报告",
+        r"三季度报告",
+        r"第一季度",
+        r"第三季度",
+        r"一季度",
+        r"三季度",
+        r"Q[1-4]",
+        r"[一二三四]季度",
     ]
     for pat in quarter_patterns:
         if re.search(pat, name):
             return "financial_reports/quarterly"
+
+    # 6. 港股公告（仅限非财报类公告，财报已在上面处理）
+    if "港股公告" in name:
+        return "announcements"
 
     # 7. 公告类（必须在摘要兜底之前，避免"摘要公告"被错误归类）
     for kw in ANNOUNCEMENT_KEYWORDS:
@@ -120,11 +152,13 @@ def organize_company(company_dir: Path, dry_run: bool = True) -> list[dict]:
         category = classify_pdf(src.name)
         if category is None:
             # 无法分类，跳过
-            actions.append({
-                "action": "SKIP",
-                "src": str(src.relative_to(WIKI_ROOT)),
-                "reason": "无法自动分类",
-            })
+            actions.append(
+                {
+                    "action": "SKIP",
+                    "src": str(src.relative_to(WIKI_ROOT)),
+                    "reason": "无法自动分类",
+                }
+            )
             continue
 
         dest_dir = raw_dir / category
@@ -138,12 +172,14 @@ def organize_company(company_dir: Path, dry_run: bool = True) -> list[dict]:
             # 目标已存在同名文件，检查是否内容一致
             if src.stat().st_size == dest.stat().st_size:
                 # 内容一致（大小相同），删除源文件（去重）
-                actions.append({
-                    "action": "DEDUP_DELETE",
-                    "src": str(src.relative_to(WIKI_ROOT)),
-                    "dest": str(dest.relative_to(WIKI_ROOT)),
-                    "reason": "目标已存在相同文件，删除重复源文件",
-                })
+                actions.append(
+                    {
+                        "action": "DEDUP_DELETE",
+                        "src": str(src.relative_to(WIKI_ROOT)),
+                        "dest": str(dest.relative_to(WIKI_ROOT)),
+                        "reason": "目标已存在相同文件，删除重复源文件",
+                    }
+                )
                 if not dry_run:
                     src.unlink()
                 continue
@@ -160,12 +196,14 @@ def organize_company(company_dir: Path, dry_run: bool = True) -> list[dict]:
         rel_src = str(src.relative_to(WIKI_ROOT))
         rel_dest = str(dest.relative_to(WIKI_ROOT))
 
-        actions.append({
-            "action": action,
-            "src": rel_src,
-            "dest": rel_dest,
-            "category": category,
-        })
+        actions.append(
+            {
+                "action": action,
+                "src": rel_src,
+                "dest": rel_dest,
+                "category": category,
+            }
+        )
 
         if not dry_run:
             dest_dir.mkdir(parents=True, exist_ok=True)
@@ -178,8 +216,9 @@ def main():
     import argparse
 
     parser = argparse.ArgumentParser(description="归类 companies/ 下散落的文件")
-    parser.add_argument("--execute", action="store_true",
-                        help="默认 dry-run 模式；加此参数实际执行移动")
+    parser.add_argument(
+        "--execute", action="store_true", help="默认 dry-run 模式；加此参数实际执行移动"
+    )
     args = parser.parse_args()
 
     dry_run = not args.execute

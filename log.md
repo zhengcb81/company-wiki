@@ -29,194 +29,6 @@
 
 ## [2026-04-24 23:26] INFO query | Query answer saved: 测试问题？ -> 中微公司
 
-## [2026-04-24 23:26] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-24 23:27] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-24 23:27] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-24 23:27] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-24 23:28] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-24 23:28] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-24 23:28] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-24 23:29] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-24 23:29] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-24 23:29] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-24 23:30] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-24 23:30] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-24 23:30] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-24 23:30] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-24 23:31] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-24 23:31] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-24 23:31] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-24 23:32] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-24 23:32] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-24 23:33] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-24 23:33] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-24 23:33] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-24 23:34] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-24 23:34] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-24 23:35] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-24 23:35] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-24 23:36] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-24 23:36] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-24 23:36] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-24 23:37] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-24 23:37] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-24 23:37] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-24 23:38] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-24 23:38] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-24 23:38] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-24 23:39] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-24 23:39] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-24 23:39] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-24 23:40] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-24 23:40] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-24 23:40] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-24 23:41] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-24 23:41] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-24 23:41] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-24 23:42] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-24 23:42] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-24 23:42] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-24 23:47] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-24 23:47] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-24 23:48] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-24 23:48] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-24 23:48] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-24 23:49] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-24 23:49] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-24 23:49] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-24 23:50] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-24 23:50] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-24 23:50] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-24 23:50] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-24 23:51] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-24 23:51] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-24 23:51] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-24 23:52] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-24 23:52] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-24 23:52] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-24 23:53] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-24 23:53] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-24 23:53] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-24 23:54] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-24 23:54] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-24 23:54] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-24 23:55] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-24 23:55] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-25 07:23] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-25 07:24] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-25 07:24] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-25 07:24] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-25 07:25] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-25 07:25] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-25 07:25] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-25 07:26] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-25 07:26] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-25 07:26] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-25 07:27] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-25 07:27] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-25 07:27] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-25 07:28] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-25 07:28] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-25 07:29] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-25 07:29] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-25 07:29] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-25 07:30] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-25 07:30] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
-## [2026-04-25 07:30] INFO query | Query answer saved: 测试问题？ -> 中微公司
-
 ## [2026-04-25 07:31] INFO query | Query answer saved: 测试问题？ -> 中微公司
 
 ## [2026-04-25 07:31] INFO query | Query answer saved: 测试问题？ -> 中微公司
@@ -277,3 +89,83 @@
 ## [2026-04-25 07:56] INFO scheduler | 调度周期完成
 - elapsed=10s
 - schema_evolve=8metrics/473chars
+
+## [2026-04-25 08:35] INFO query | Query answer saved: 测试问题？ -> 中微公司
+
+## [2026-04-25 09:31] INFO query | Query answer saved: 测试问题？ -> 中微公司
+
+## [2026-04-25 09:32] INFO query | Query answer saved: 测试问题？ -> 中微公司
+
+## [2026-04-25 09:32] INFO query | Query answer saved: 测试问题？ -> 中微公司
+
+## [2026-04-25 09:32] INFO query | Query answer saved: 测试问题？ -> 中微公司
+
+## [2026-04-25 09:33] INFO query | Query answer saved: 测试问题？ -> 中微公司
+
+## [2026-04-25 09:33] INFO query | Query answer saved: 测试问题？ -> 中微公司
+
+## [2026-04-25 09:38] INFO query | Query answer saved: 测试问题？ -> 中微公司
+
+## [2026-04-25 10:24] INFO query | Query answer saved: 测试问题？ -> 中微公司
+
+## [2026-04-25 10:25] INFO query | Query answer saved: 测试问题？ -> 中微公司
+
+## [2026-04-25 10:27] INFO query | Query answer saved: 测试问题？ -> 中微公司
+
+## [2026-04-25 11:05] INFO enrich | 知识压缩: 19 页面, 19833 -> 4191 行
+
+## [2026-04-25 11:41] INFO query | Answer filed as concept page: 中微公司的竞争优势是什么 -> themes\中微公司的竞争优势是什么\wiki\中微公司的竞争优势是什么.md
+
+## [2026-04-25 13:21] INFO consolidate | 压缩 33 个页面, 总行数 17765 -> 9538, 压缩率 46.3%
+
+## [2026-04-25 13:52] INFO query | Query answer saved: 测试问题？ -> 中微公司
+
+## [2026-04-25 14:29] INFO query | Query answer saved: 测试问题？ -> 中微公司
+
+## [2026-04-25 14:31] INFO query | Query answer saved: 测试问题？ -> 中微公司
+
+## [2026-04-25 14:32] INFO query | Query answer saved: 测试问题？ -> 中微公司
+
+## [2026-04-25 14:32] INFO query | Query answer saved: 测试问题？ -> 中微公司
+
+## [2026-04-25 14:33] INFO query | Query answer saved: 测试问题？ -> 中微公司
+
+## [2026-04-25 14:33] INFO query | Query answer saved: 测试问题？ -> 中微公司
+
+## [2026-04-25 14:33] INFO query | Query answer saved: 测试问题？ -> 中微公司
+
+## [2026-04-25 14:34] INFO query | Query answer saved: 测试问题？ -> 中微公司
+
+## [2026-04-25 14:41] INFO query | Query answer saved: 测试问题？ -> 中微公司
+
+## [2026-04-25 14:47] INFO query | Query answer saved: 测试问题？ -> 中微公司
+
+## [2026-04-25 14:48] INFO query | Query answer saved: 测试问题？ -> 中微公司
+
+## [2026-04-25 15:27] INFO query | Query answer saved: 测试问题？ -> 中微公司
+
+## [2026-04-25 16:45] INFO query | Query answer saved: 测试问题？ -> 中微公司
+
+## [2026-04-25 16:46] INFO query | Query answer saved: 测试问题？ -> 中微公司
+
+## [2026-04-25 18:10] INFO query | Query answer saved: 测试问题？ -> 中微公司
+
+## [2026-04-25 18:11] INFO query | Query answer saved: 测试问题？ -> 中微公司
+
+## [2026-04-25 18:14] INFO query | Query answer saved: 测试问题？ -> 中微公司
+
+## [2026-04-25 18:15] INFO query | Query answer saved: 测试问题？ -> 中微公司
+
+## [2026-04-25 18:17] INFO query | Query answer saved: 测试问题？ -> 中微公司
+
+## [2026-04-25 19:57] INFO query | Query answer saved: 测试问题？ -> 中微公司
+
+## [2026-04-25 20:02] INFO query | Query answer saved: 测试问题？ -> 中微公司
+
+## [2026-04-25 20:03] INFO query | Query answer saved: 测试问题？ -> 中微公司
+
+## [2026-04-25 20:09] INFO query | Query answer saved: 测试问题？ -> 中微公司
+
+## [2026-04-25 20:32] INFO query | Query answer saved: 测试问题？ -> 中微公司
+
+## [2026-04-25 20:44] INFO query | Query answer saved: 测试问题？ -> 中微公司

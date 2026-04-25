@@ -3,6 +3,9 @@
 graph.py — 统一数据加载入口
 所有脚本通过此模块访问 graph.yaml，避免各自硬编码。
 
+注意：scripts/models/ 目录下有一个类型化的替代实现（dataclass），但已弃用。
+      新代码应始终使用本模块的 Graph 类。models/ 仅为测试和归档脚本保留。
+
 用法：
     from graph import Graph
     g = Graph()                          # 自动加载 graph.yaml

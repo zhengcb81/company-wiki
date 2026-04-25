@@ -115,11 +115,10 @@ companies:
     - 北方华创
     news_queries:
     - 中微公司 最新消息
-    - 中微半导体 新闻
+    - 中微公司 AMEC 新闻
     - AMEC semiconductor news
     aliases:
     - '688012'
-    - 中微半导体
     - 中微半导体设备
     - AMEC Inc
     - AMEC
@@ -1054,6 +1053,8 @@ companies:
     position: 全球显示面板龙头
     aliases:
     - '000725'
+    negative_keywords:
+    - 京东
   亿华通:
     ticker: '688339'
     exchange: SSE

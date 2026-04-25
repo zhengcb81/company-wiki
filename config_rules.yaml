@@ -319,20 +319,34 @@ question_patterns:
 low_quality_sources:
   # URL 黑名单
   url_patterns:
+    # 行情页面（纯数据，无分析价值）
     - "quote.eastmoney.com"
     - "quote.futunn.com"
-    - "xueqiu.com/S/"
-    - "stock_quote"
-    - "baidu.com/baike"
-    - "baike.baidu.com"
+    - "q.stock.sohu.com"
     - "hq.sinajs.cn"
     - "finance.sina.com.cn/realstock"
-    - "guba.eastmoney.com"
-    - "finance.yahoo.com"
     - "stock.finance.sina.com.cn"
     - "quote.stock.163.com"
     - "stockpage.10jqka.com.cn"
+    - "basic.10jqka.com.cn"
     - "quote.cfi.cn"
+    - "data.eastmoney.com"
+    - "gu.qq.com"
+    # 股吧/社区（低质量用户生成内容）
+    - "guba.eastmoney.com"
+    - "xueqiu.com/S/"
+    - "xueqiu.com/stock/"
+    # 财经聚合/行情平台（多为机器生成或翻译）
+    - "hk.finance.yahoo.com"
+    - "finance.yahoo.com"
+    - "www.futunn.com"
+    - "www.moomoo.com"
+    - "cn.investing.com"
+    # 百科/导航（无实质内容）
+    - "baidu.com/baike"
+    - "baike.baidu.com"
+    - "m.news.baidu.com"
+    - "stock_quote"
 
   # 标题黑名单
   title_patterns:

@@ -18,38 +18,29 @@ ingest_v2.py — LLM 驱动的 Ingest 主流程（v2）
 """
 
 import argparse
-import hashlib
 import json
 import os
 import re
-import os
 import sys
 from datetime import datetime
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
-# Windows 控制台 UTF-8 编码修复
-if sys.platform == "win32":
-    import io
-    if hasattr(sys.stdout, "reconfigure"):
-        sys.stdout.reconfigure(encoding="utf-8")
-    if hasattr(sys.stderr, "reconfigure"):
-        sys.stderr.reconfigure(encoding="utf-8")
+# 公共基础设施（路径、环境、配置）
+from common import WIKI_ROOT
 
-# ── 路径 ──────────────────────────────────
-SCRIPTS_DIR = Path(__file__).resolve().parent
-WIKI_ROOT = SCRIPTS_DIR.parent
-
-sys.path.insert(0, str(SCRIPTS_DIR))
-
-from dotenv import load_dotenv
-load_dotenv()
-
-from pdf_extract_v2 import extract_pdf_text, classify_pdf, split_long_text
-from extract_v2 import clean_text, extract_frontmatter, classify_source, truncate_for_llm
+from pdf_extract_v2 import extract_pdf_text, classify_pdf
+from extract_v2 import (
+    clean_text,
+    extract_frontmatter,
+    classify_source,
+)
 from prompts import (
-    build_analysis_prompt, build_financial_report_prompt, build_ir_prompt,
-    build_announcement_prompt, build_prospectus_prompt,
+    build_analysis_prompt,
+    build_financial_report_prompt,
+    build_ir_prompt,
+    build_announcement_prompt,
+    build_prospectus_prompt,
 )
 from llm_client import LLMClient, get_llm_client
 from graph import Graph
@@ -62,11 +53,18 @@ def _atomic_write(path: Path, content: str, encoding: str = "utf-8") -> None:
     try:
         tmp_path.write_text(content, encoding=encoding)
         os.replace(str(tmp_path), str(path))
-    except Exception:
+    except Exception as e:
         # 如果原子写入失败，回退到直接写入（好过丢数据）
         if tmp_path.exists():
-            tmp_path.unlink()
-        path.write_text(content, encoding=encoding)
+            try:
+                tmp_path.unlink()
+            except Exception:
+                pass
+        try:
+            path.write_text(content, encoding=encoding)
+        except Exception as e2:
+            print(f"[ERROR] 文件写入完全失败 {path}: {e2}")
+            raise
 
 
 # ── 标记管理 ──────────────────────────────
@@ -157,6 +155,69 @@ def read_file_content(file_path: str) -> Tuple[Optional[str], Optional[Dict], st
 
 
 # ── 获取核心问题 ──────────────────────────
+def extract_report_date(file_path: str, source_type: str) -> Optional[str]:
+    """
+    从文件名提取实际报告日期，避免所有 PDF 都被标记为处理当天。
+
+    支持的文件名模式：
+      - 2023年年度报告.pdf → 2023-12-31
+      - 2024-04-26_投资者关系活动记录表.pdf → 2024-04-26
+      - 2023semi_annual.pdf → 2023-06-30
+      - 2024_Q1_report.pdf → 2024-03-31
+    """
+    import re
+    from pathlib import Path
+
+    name = Path(file_path).stem
+
+    # 尝试从文件名提取年份和季度/月份
+    year_match = re.search(r"(20\d{2})", name)
+    if not year_match:
+        return None
+
+    year = int(year_match.group(1))
+
+    # 根据文档类型和文件名中的季度信息推断报告期
+    if source_type in ["annual_report", "年报"]:
+        return f"{year}-12-31"
+    elif source_type in ["semi_annual_report", "半年报"]:
+        return f"{year}-06-30"
+    elif source_type in ["quarterly_report", "季报"]:
+        # 尝试从文件名提取季度（不区分大小写）
+        name_lower = name.lower()
+        if any(q in name_lower for q in ["q1", "一季报", "第一季度", "1季报"]):
+            return f"{year}-03-31"
+        elif any(
+            q in name_lower for q in ["q2", "二季报", "第二季度", "2季报", "半年报"]
+        ):
+            return f"{year}-06-30"
+        elif any(q in name_lower for q in ["q3", "三季报", "第三季度", "3季报"]):
+            return f"{year}-09-30"
+        elif any(
+            q in name_lower for q in ["q4", "四季报", "第四季度", "4季报", "年报"]
+        ):
+            return f"{year}-12-31"
+        else:
+            # 默认年报
+            return f"{year}-12-31"
+    elif source_type in ["investor_relations", "ir", "投资者关系"]:
+        # IR 活动记录表尝试从文件名提取具体日期
+        # 支持格式：2022-04-16, 2022_0416, 20220416
+        date_match = re.search(r"(20\d{2})[-_]?(\d{2})[-_]?(\d{2})", name)
+        if date_match:
+            y, m, d = date_match.group(1), date_match.group(2), date_match.group(3)
+            # 验证是合理的日期（月 01-12，日 01-31）
+            if 1 <= int(m) <= 12 and 1 <= int(d) <= 31:
+                return f"{y}-{m}-{d}"
+        # 只有年份时，默认年中
+        return f"{year}-06-30"
+    elif source_type == "prospectus":
+        # 招股书用年份+年初
+        return f"{year}-01-01"
+
+    return None
+
+
 def get_core_questions(graph, entity_name: str, entity_type: str) -> List[str]:
     """从 graph.yaml 获取实体的核心问题"""
     questions = []
@@ -179,7 +240,7 @@ def get_existing_assessment(wiki_path: Path) -> str:
     try:
         text = wiki_path.read_text(encoding="utf-8")
         # 找到综合评估部分
-        match = re.search(r'## 综合评估\n+>\s*(.+?)(?=\n## |\Z)', text, re.DOTALL)
+        match = re.search(r"## 综合评估\n+>\s*(.+?)(?=\n## |\Z)", text, re.DOTALL)
         if match:
             return match.group(1).strip()
     except Exception:
@@ -188,7 +249,9 @@ def get_existing_assessment(wiki_path: Path) -> str:
 
 
 # ── 获取 wiki 路径 ─────────────────────────
-def get_wiki_path(entity_name: str, entity_type: str, topic_name: str) -> Optional[Path]:
+def get_wiki_path(
+    entity_name: str, entity_type: str, topic_name: str
+) -> Optional[Path]:
     if entity_type == "company":
         return WIKI_ROOT / "companies" / entity_name / "wiki" / f"{topic_name}.md"
     elif entity_type == "sector":
@@ -199,14 +262,16 @@ def get_wiki_path(entity_name: str, entity_type: str, topic_name: str) -> Option
 
 
 # ── 创建 wiki 模板 ─────────────────────────
-def create_wiki_template(wiki_path: Path, entity_name: str, topic_name: str, entity_type: str):
+def create_wiki_template(
+    wiki_path: Path, entity_name: str, topic_name: str, entity_type: str
+):
     wiki_path.parent.mkdir(parents=True, exist_ok=True)
     template = f"""---
 title: "{topic_name}"
 description: ""
 entity: "{entity_name}"
 type: {entity_type}_topic
-last_updated: "{datetime.now().strftime('%Y-%m-%d')}"
+last_updated: "{datetime.now().strftime("%Y-%m-%d")}"
 sources_count: 0
 tags: []
 ---
@@ -227,7 +292,9 @@ tags: []
 
 
 # ── 添加时间线条目 ─────────────────────────
-def add_timeline_entries(wiki_path: Path, entries: List[Dict], source_file: str = "") -> int:
+def add_timeline_entries(
+    wiki_path: Path, entries: List[Dict], source_file: str = ""
+) -> int:
     """向 wiki 文档批量添加时间线条目"""
     if not wiki_path.exists():
         return 0
@@ -259,10 +326,10 @@ def add_timeline_entries(wiki_path: Path, entries: List[Dict], source_file: str 
 """
 
         # 去重检查
-        title_clean = re.sub(r'\[\[([^]]+)\]\]', r'\1', title)
+        title_clean = re.sub(r"\[\[([^]]+)\]\]", r"\1", title)
         dedup_pattern = re.compile(
-            rf'^###\s+{re.escape(date)}\s*\|[^|]+\|\s*{re.escape(title_clean)}\s*$',
-            re.MULTILINE
+            rf"^###\s+{re.escape(date)}\s*\|[^|]+\|\s*{re.escape(title_clean)}\s*$",
+            re.MULTILINE,
         )
         if dedup_pattern.search(wiki_text):
             continue
@@ -280,7 +347,9 @@ def add_timeline_entries(wiki_path: Path, entries: List[Dict], source_file: str 
             wiki_text = wiki_text[:insert_pos] + entry_text + wiki_text[insert_pos:]
         else:
             abs_first_entry = timeline_pos + first_entry
-            wiki_text = wiki_text[:abs_first_entry] + entry_text + wiki_text[abs_first_entry:]
+            wiki_text = (
+                wiki_text[:abs_first_entry] + entry_text + wiki_text[abs_first_entry:]
+            )
 
         added += 1
 
@@ -289,14 +358,14 @@ def add_timeline_entries(wiki_path: Path, entries: List[Dict], source_file: str 
         wiki_text = re.sub(
             r'last_updated: "?\d{4}-\d{2}-\d{2}"?',
             f'last_updated: "{datetime.now().strftime("%Y-%m-%d")}"',
-            wiki_text
+            wiki_text,
         )
-        count_match = re.search(r'sources_count: (\d+)', wiki_text)
+        count_match = re.search(r"sources_count: (\d+)", wiki_text)
         if count_match:
             old_count = int(count_match.group(1))
             wiki_text = re.sub(
-                r'sources_count: \d+',
-                f'sources_count: {old_count + added}',
+                r"sources_count: \d+",
+                f"sources_count: {old_count + added}",
                 wiki_text,
                 count=1,
             )
@@ -307,7 +376,9 @@ def add_timeline_entries(wiki_path: Path, entries: List[Dict], source_file: str 
 
 
 # ── 提取上一期财务数据 ──────────────────────
-def extract_previous_period_data(wiki_path: Path, current_period: str) -> Optional[Dict]:
+def extract_previous_period_data(
+    wiki_path: Path, current_period: str
+) -> Optional[Dict]:
     """
     从 wiki 时间线中提取最近一期的财务数据，用于季度对比。
     返回 {period, summary} 或 None。
@@ -319,7 +390,16 @@ def extract_previous_period_data(wiki_path: Path, current_period: str) -> Option
     lines = wiki_text.splitlines()
 
     # 寻找包含财务关键词的时间线条目
-    financial_keywords = ["营收", "净利润", "扣非", "毛利率", "研发投入", "现金流", "同比", "环比"]
+    financial_keywords = [
+        "营收",
+        "净利润",
+        "扣非",
+        "毛利率",
+        "研发投入",
+        "现金流",
+        "同比",
+        "环比",
+    ]
     entries = []
     current_entry = []
     in_entry = False
@@ -346,14 +426,18 @@ def extract_previous_period_data(wiki_path: Path, current_period: str) -> Option
     for entry_text in reversed(entries):
         if any(kw in entry_text for kw in financial_keywords):
             # 提取要点（- 开头的行）
-            points = [l.strip()[2:] for l in entry_text.splitlines() if l.strip().startswith("- ")]
+            points = [
+                l.strip()[2:]
+                for l in entry_text.splitlines()
+                if l.strip().startswith("- ")
+            ]
             if points:
                 # 尝试提取日期作为 period
-                date_match = re.search(r'###\s+(\d{4}-\d{2}-\d{2})', entry_text)
+                date_match = re.search(r"###\s+(\d{4}-\d{2}-\d{2})", entry_text)
                 period = date_match.group(1) if date_match else "上期"
                 return {
                     "period": period,
-                    "summary": "\n".join(points[:8])  # 最多取8个要点
+                    "summary": "\n".join(points[:8]),  # 最多取8个要点
                 }
 
     return None
@@ -367,35 +451,37 @@ def update_assessment(wiki_path: Path, assessment: str) -> bool:
 
     # 确保评估文本以 > 开头（引用块格式）
     assessment = assessment.strip()
-    if not assessment.startswith('>'):
+    if not assessment.startswith(">"):
         # 将多行文本转换为引用块格式
-        lines = assessment.split('\n')
-        assessment = '\n'.join(f'> {line}' if line.strip() else '>' for line in lines)
+        lines = assessment.split("\n")
+        assessment = "\n".join(f"> {line}" if line.strip() else ">" for line in lines)
 
     wiki_text = wiki_path.read_text(encoding="utf-8")
 
     # 替换现有评估（匹配 ## 综合评估 后面的内容直到下一个 ## 标题）
-    old_pattern = r'(## 综合评估\n+)([\s\S]*?)(?=\n## |\Z)'
+    old_pattern = r"(## 综合评估\n+)([\s\S]*?)(?=\n## |\Z)"
     match = re.search(old_pattern, wiki_text)
     if match:
         # 替换现有评估内容
         old_content = match.group(2)
         wiki_text = wiki_text.replace(
-            f"## 综合评估\n{old_content}",
-            f"## 综合评估\n{assessment}\n"
+            f"## 综合评估\n{old_content}", f"## 综合评估\n{assessment}\n"
         )
     else:
         # 在时间线之后添加
         timeline_pos = wiki_text.find("## 时间线")
         if timeline_pos >= 0:
             # 在时间线之后找下一个 ## 标题
-            after_timeline = wiki_text[timeline_pos + len("## 时间线"):]
+            after_timeline = wiki_text[timeline_pos + len("## 时间线") :]
             next_section = after_timeline.find("\n## ")
             if next_section >= 0:
                 insert_pos = timeline_pos + len("## 时间线") + next_section
                 wiki_text = (
-                    wiki_text[:insert_pos] + "\n\n## 综合评估\n" + assessment + "\n" +
-                    wiki_text[insert_pos:]
+                    wiki_text[:insert_pos]
+                    + "\n\n## 综合评估\n"
+                    + assessment
+                    + "\n"
+                    + wiki_text[insert_pos:]
                 )
             else:
                 wiki_text = wiki_text.rstrip() + f"\n\n## 综合评估\n{assessment}\n"
@@ -415,21 +501,34 @@ def write_contradictions(wiki_path: Path, contradictions: List[Dict]):
 
     # 过滤：跳过明显的"内容不同"误报，只保留事实性矛盾
     filtered = []
-    skip_keywords = ["内容完全不同", "文件类型不同", "性质完全不同", "不存在事实矛盾",
-                     "并非矛盾", "并不直接矛盾", "没有直接信息冲突", "不同事件",
-                     "描述完全不符", "描述完全错误", "描述不准确", "严重低估"]
+    skip_keywords = [
+        "内容完全不同",
+        "文件类型不同",
+        "性质完全不同",
+        "不存在事实矛盾",
+        "并非矛盾",
+        "并不直接矛盾",
+        "没有直接信息冲突",
+        "不同事件",
+        "描述完全不符",
+        "描述完全错误",
+        "描述不准确",
+        "严重低估",
+    ]
     for c in contradictions:
         # 处理 LLM 返回字符串而非字典的情况
         if isinstance(c, str):
             expl = c
         elif isinstance(c, dict):
-            expl = c.get('explanation', '')
+            expl = c.get("explanation", "")
         else:
             continue
         if any(kw in expl for kw in skip_keywords):
             continue
         # 只保留有具体数据/事实冲突的
-        if isinstance(c, dict) and (c.get('field') or c.get('old_value') or c.get('new_value')):
+        if isinstance(c, dict) and (
+            c.get("field") or c.get("old_value") or c.get("new_value")
+        ):
             filtered.append(c)
         elif any(ch.isdigit() for ch in expl):
             filtered.append(c)
@@ -441,7 +540,8 @@ def write_contradictions(wiki_path: Path, contradictions: List[Dict]):
 
     # 清理旧警告（防止堆积）
     import re
-    wiki_text = re.sub(r'> ⚠️ \*\*矛盾警告\*\*\n(?:> .+\n)*\n?', '', wiki_text)
+
+    wiki_text = re.sub(r"> ⚠️ \*\*矛盾警告\*\*\n(?:> .+\n)*\n?", "", wiki_text)
 
     # 只保留最新的 3 条
     filtered = filtered[-3:]
@@ -457,12 +557,16 @@ def write_contradictions(wiki_path: Path, contradictions: List[Dict]):
     # 插入到综合评估之前
     assessment_pos = wiki_text.find("## 综合评估")
     if assessment_pos > 0:
-        wiki_text = wiki_text[:assessment_pos] + warning_text + wiki_text[assessment_pos:]
+        wiki_text = (
+            wiki_text[:assessment_pos] + warning_text + wiki_text[assessment_pos:]
+        )
     else:
         # 回退：插入到标题之后
         title_end = wiki_text.find("\n## ")
         if title_end > 0:
-            wiki_text = wiki_text[:title_end] + "\n" + warning_text + wiki_text[title_end:]
+            wiki_text = (
+                wiki_text[:title_end] + "\n" + warning_text + wiki_text[title_end:]
+            )
 
     _atomic_write(wiki_path, wiki_text)
 
@@ -486,14 +590,14 @@ def is_assessment_stale(wiki_path: Path, max_age_days: int = 30) -> bool:
         return True
 
     # 提取评估部分
-    assessment_match = re.search(r'## 综合评估\n+([\s\S]*?)(?=\n## |\Z)', content)
+    assessment_match = re.search(r"## 综合评估\n+([\s\S]*?)(?=\n## |\Z)", content)
     if not assessment_match:
         return True  # 没有评估，需要生成
 
     assessment = assessment_match.group(1)
 
     # 检查评估中提到的年份
-    year_pattern = re.compile(r'20(\d{2})年')
+    year_pattern = re.compile(r"20(\d{2})年")
     years = year_pattern.findall(assessment)
     if years:
         max_year = max(int(y) for y in years)
@@ -502,7 +606,7 @@ def is_assessment_stale(wiki_path: Path, max_age_days: int = 30) -> bool:
             return True
 
     # 检查"截至"日期
-    date_pattern = re.compile(r'截至\s*(\d{4})[年/]')
+    date_pattern = re.compile(r"截至\s*(\d{4})[年/]")
     dates = date_pattern.findall(assessment)
     if dates:
         max_date_year = max(int(y) for y in dates)
@@ -527,12 +631,18 @@ def validate_entries(entries: List[Dict]) -> Tuple[List[Dict], List[str]]:
     warnings = []
 
     # HTML 残留检测
-    html_pattern = re.compile(r'<[^>]+>|&[a-z]+;|&#\d+;')
+    html_pattern = re.compile(r"<[^>]+>|&[a-z]+;|&#\d+;")
     # 不相关内容检测
     garbage_patterns = [
-        'DISCLAIMER', 'AASTOCKS', 'YouTube', 'Reddit',
-        'stock prices', 'authored by', 'click here',
-        'subscribe', 'follow us',
+        "DISCLAIMER",
+        "AASTOCKS",
+        "YouTube",
+        "Reddit",
+        "stock prices",
+        "authored by",
+        "click here",
+        "subscribe",
+        "follow us",
     ]
 
     for entry in entries:
@@ -583,6 +693,38 @@ def validate_entries(entries: List[Dict]) -> Tuple[List[Dict], List[str]]:
     return valid_entries, warnings
 
 
+# ── 实体元数据缓存 ────────────────────────
+_COMPANY_META: Optional[Dict[str, Dict]] = None
+
+
+def _load_company_meta() -> Dict[str, Dict]:
+    """加载 companies.yaml 中的元数据（别名、负向关键词等）"""
+    global _COMPANY_META
+    if _COMPANY_META is not None:
+        return _COMPANY_META
+
+    meta = {}
+    companies_yaml = WIKI_ROOT / "companies.yaml"
+    if companies_yaml.exists():
+        import yaml
+
+        with open(companies_yaml, "r", encoding="utf-8") as f:
+            data = yaml.safe_load(f)
+        for name, info in data.get("companies", {}).items():
+            meta[name] = {
+                "aliases": [
+                    a.lower() for a in info.get("aliases", []) if isinstance(a, str)
+                ],
+                "negative_keywords": [
+                    k.lower()
+                    for k in info.get("negative_keywords", [])
+                    if isinstance(k, str)
+                ],
+            }
+    _COMPANY_META = meta
+    return meta
+
+
 # ── 相关性检查 ────────────────────────────
 def check_relevance(text: str, entity_name: str, entity_type: str) -> int:
     """
@@ -594,6 +736,7 @@ def check_relevance(text: str, entity_name: str, entity_type: str) -> int:
     - 实体名出现多次（>3次）：+2 分
     - 行业/主题关键词：+2 分
     - 不相关关键词（负分）：-3 分
+    - 负向关键词（防止子串误匹配）：-5 分
     - 文本质量（长度、结构）：+1-2 分
     """
     score = 0
@@ -607,11 +750,28 @@ def check_relevance(text: str, entity_name: str, entity_type: str) -> int:
         if entity_count > 3:
             score += 2
 
+    # 1.5 负向关键词检查（防止子串误匹配，如 "京东" 匹配到 "京东方"）
+    meta = _load_company_meta()
+    entity_meta = meta.get(entity_name, {})
+    for neg_kw in entity_meta.get("negative_keywords", []):
+        if neg_kw in text_lower:
+            score -= 5  # 强惩罚，直接判为不相关
+            break
+
     # 2. 行业/主题关键词
     if entity_type == "sector":
         # 行业关键词
         sector_keywords = {
-            "半导体设备": ["刻蚀", "薄膜沉积", "清洗设备", "光刻", "离子注入", "CMP", "量检测", "国产化率"],
+            "半导体设备": [
+                "刻蚀",
+                "薄膜沉积",
+                "清洗设备",
+                "光刻",
+                "离子注入",
+                "CMP",
+                "量检测",
+                "国产化率",
+            ],
             "光模块": ["800G", "1.6T", "CPO", "光模块", "EML", "硅光"],
             "GPU与AI芯片": ["GPU", "AI芯片", "CUDA", "算力", "训练", "推理"],
             "储能": ["储能", "电池", "锂电", "钠电", "液流电池"],
@@ -625,7 +785,13 @@ def check_relevance(text: str, entity_name: str, entity_type: str) -> int:
     elif entity_type == "theme":
         # 主题关键词
         theme_keywords = {
-            "半导体国产替代": ["国产替代", "国产化率", "自主可控", "进口替代", "供应链"],
+            "半导体国产替代": [
+                "国产替代",
+                "国产化率",
+                "自主可控",
+                "进口替代",
+                "供应链",
+            ],
             "AI产业链": ["AI", "人工智能", "大模型", "算力", "芯片"],
             "高端制造": ["高端制造", "智能制造", "工业4.0", "自动化"],
         }
@@ -658,8 +824,14 @@ def check_relevance(text: str, entity_name: str, entity_type: str) -> int:
 
 
 # ── 主处理逻辑 ────────────────────────────
-def process_file(file_path: str, entity_name: str, entity_type: str,
-                 graph: Graph, llm_client: LLMClient, dry_run: bool = False) -> Dict:
+def process_file(
+    file_path: str,
+    entity_name: str,
+    entity_type: str,
+    graph: Graph,
+    llm_client: LLMClient,
+    dry_run: bool = False,
+) -> Dict:
     """
     使用 LLM 处理单个文件。
     返回处理结果摘要。
@@ -696,7 +868,11 @@ def process_file(file_path: str, entity_name: str, entity_type: str,
 
     # 2.5 跳过摘要文件（与完整报告重复）
     filename_lower = Path(file_path).name.lower()
-    if "摘要" in filename_lower and source_type in ["annual_report", "semi_annual_report", "quarterly_report"]:
+    if "摘要" in filename_lower and source_type in [
+        "annual_report",
+        "semi_annual_report",
+        "quarterly_report",
+    ]:
         result["status"] = "skip"
         result["error"] = "摘要文件跳过（完整报告已覆盖）"
         return result
@@ -708,6 +884,9 @@ def process_file(file_path: str, entity_name: str, entity_type: str,
 
     # 4. 确定使用哪个 prompt
     published_date = front.get("published_date", "") if front else ""
+    if not published_date:
+        # 尝试从文件名提取实际报告日期，避免所有 PDF 都被标记为处理当天
+        published_date = extract_report_date(file_path, source_type)
     if not published_date:
         published_date = datetime.now().strftime("%Y-%m-%d")
 
@@ -785,14 +964,19 @@ def process_file(file_path: str, entity_name: str, entity_type: str,
         # 判断是否使用整篇文档分析（利用 1M 上下文）
         # 条件：文档超过 30000 字符 且 是大型文档类型
         use_full_doc = len(cleaned) > 30000 and source_type in (
-            "annual_report", "semi_annual_report", "quarterly_report", "prospectus"
+            "annual_report",
+            "semi_annual_report",
+            "quarterly_report",
+            "prospectus",
         )
 
         if use_full_doc:
             # B1: 整篇文档直接分析（不分段）
             prev_data = None
             if source_type == "quarterly_report" and wiki_path and wiki_path.exists():
-                prev_data = extract_previous_period_data(wiki_path, Path(file_path).stem)
+                prev_data = extract_previous_period_data(
+                    wiki_path, Path(file_path).stem
+                )
 
             doc_type_map = {
                 "annual_report": "annual_report",
@@ -806,14 +990,16 @@ def process_file(file_path: str, entity_name: str, entity_type: str,
                 content=cleaned,
                 entity_name=entity_name,
                 doc_type=doc_type,
-                previous_period_data=prev_data,
+                previous_period_data=json.dumps(prev_data, ensure_ascii=False)
+                if prev_data
+                else "",
             )
             llm_response = None  # 不需要单独的 LLM 响应对象
         else:
             # 原有方式：prompt-based + chat_with_retry
             llm_response = llm_client.chat_with_retry(
                 prompt,
-                "你是一个专业的上市公司研究分析助手。请严格按照要求的JSON格式输出。"
+                "你是一个专业的上市公司研究分析助手。请严格按照要求的JSON格式输出。",
             )
             if not llm_response.success:
                 result["status"] = "llm_error"
@@ -836,9 +1022,16 @@ def process_file(file_path: str, entity_name: str, entity_type: str,
         entries = parsed.get("timeline_entries", [])
         if entries and wiki_path:
             # 7.1 质量检查
+            original_count = len(entries)
             entries, quality_warnings = validate_entries(entries)
             if quality_warnings:
                 print(f"  质量警告: {'; '.join(quality_warnings[:3])}")
+
+            # 如果所有条目都被过滤，标记为质量拒绝
+            if not entries and original_count > 0:
+                result["status"] = "quality_rejected"
+                result["error"] = f"所有 {original_count} 个条目未通过质量检查"
+                return result
 
             added = add_timeline_entries(wiki_path, entries, file_path)
             result["entries_added"] = added
@@ -861,11 +1054,239 @@ def process_file(file_path: str, entity_name: str, entity_type: str,
             write_contradictions(wiki_path, contradictions)
             result["contradictions_found"] = len(contradictions)
 
+        # ── 双向更新：更新相关行业/主题 wiki ──
+        if result["entries_added"] > 0 and not dry_run:
+            try:
+                _update_related_entities(
+                    graph, entity_name, entity_type, entries, file_path, llm_client
+                )
+            except Exception:
+                pass  # 不阻塞主流程
+
         result["status"] = "success"
 
     except Exception as e:
         result["status"] = "error"
         result["error"] = str(e)
+
+    return result
+
+
+# ── 双向更新：更新相关行业/主题 ───────────
+def _update_related_entities(
+    graph, entity_name, entity_type, entries, file_path, llm_client
+):
+    """
+    更新与主实体相关的行业/主题 wiki。
+    使用 graph.find_related_entities() 找到相关实体，将条目复制过去（标记为 secondary）。
+    """
+    if entity_type != "company":
+        return
+
+    # 找到相关行业/主题
+    related = graph.find_related_entities(entity_name, top_k=3)
+    if not related:
+        return
+
+    for rel in related:
+        rel_name = rel.get("name", "")
+        rel_type = rel.get("type", "")
+        relevance = rel.get("relevance_score", 0)
+
+        # 只处理高相关性的行业/主题
+        if relevance < 0.5:
+            continue
+
+        if rel_type == "sector":
+            rel_wiki = get_wiki_path(rel_name, "sector", rel_name)
+        elif rel_type == "theme":
+            rel_wiki = get_wiki_path(rel_name, "theme", rel_name)
+        else:
+            continue
+
+        if not rel_wiki:
+            continue
+
+        # 创建或更新相关实体 wiki
+        if not rel_wiki.exists():
+            create_wiki_template(rel_wiki, rel_name, rel_name, rel_type)
+
+        # 添加条目（标记为相关公司动态）
+        for entry in entries[:3]:  # 最多添加 3 个条目
+            entry_copy = entry.copy()
+            entry_copy["title"] = f"[{entity_name}] {entry_copy.get('title', '')}"
+            entry_copy["points"] = entry_copy.get("points", []) + [
+                f"来源: {entity_name}"
+            ]
+
+            add_timeline_entries(rel_wiki, [entry_copy], file_path)
+
+
+# ── Segments 模式支持 ─────────────────────
+
+
+def scan_pending_segments(graph, company_name=None):
+    """扫描待处理的 segments 文件（JSONL）"""
+    companies = graph.get_all_companies()
+    if company_name:
+        companies = [c for c in companies if c["name"] == company_name]
+
+    pending = []
+    ingested = get_ingested_set()
+
+    for company in companies:
+        name = company["name"]
+        segments_dir = WIKI_ROOT / "companies" / name / "segments"
+        if not segments_dir.exists():
+            continue
+        for seg_file in sorted(segments_dir.rglob("*.jsonl")):
+            if is_ingested(seg_file, ingested):
+                continue
+            pending.append((str(seg_file), name, "company"))
+
+    return pending
+
+
+CATEGORY_TO_SOURCE = {
+    "财务": "财报",
+    "业务": "新闻",
+    "战略": "新闻",
+    "风险": "公告",
+    "市场": "新闻",
+    "治理": "公告",
+    "技术": "新闻",
+    "其他": "新闻",
+}
+
+
+def process_segments_file(
+    seg_file: str, entity_name: str, entity_type: str, graph, dry_run=False
+) -> dict:
+    """从 segments JSONL 合成 wiki 时间线条目"""
+    result = {
+        "status": "pending",
+        "entries_added": 0,
+        "assessment_updated": False,
+        "contradictions_found": 0,
+        "error": None,
+    }
+
+    seg_path = Path(seg_file)
+    try:
+        segments = []
+        with open(seg_file, "r", encoding="utf-8") as f:
+            for line in f:
+                line = line.strip()
+                if not line:
+                    continue
+                segments.append(json.loads(line))
+    except Exception as e:
+        result["status"] = "error"
+        result["error"] = f"读取 segments 失败: {e}"
+        return result
+
+    if not segments:
+        result["status"] = "skip"
+        result["error"] = "无 segments"
+        return result
+
+    # 过滤低重要性段落
+    important = [s for s in segments if s.get("importance") in ("高", "中")]
+    if not important:
+        important = segments[:5]  # 如果没有高/中，取前5个
+
+    # 推断来源信息
+    first_meta = segments[0].get("_meta", {}) if segments else {}
+    doc_type = first_meta.get("doc_type", "unknown")
+    source_rel = first_meta.get("source", "")
+
+    # 优先从 segment _meta 读取原始日期，否则从 source 推断
+    published_date = first_meta.get("original_date", "")
+    if not published_date and source_rel:
+        # 构造一个假文件名用于 extract_report_date
+        fake_path = f"companies/{entity_name}/extracts/{source_rel}"
+        published_date = extract_report_date(fake_path, doc_type) or ""
+    if not published_date:
+        published_date = datetime.now().strftime("%Y-%m-%d")
+
+    # 推断标题
+    title = source_rel.replace(".md", "").split("/")[-1] if source_rel else "分段合成"
+    if len(title) > 60:
+        title = title[:60] + "..."
+
+    # 构建 key_points
+    key_points = []
+    for seg in important[:8]:  # 最多8个要点
+        text = seg.get("text", "").strip()
+        if not text:
+            continue
+        # 截断过长
+        if len(text) > 200:
+            text = text[:197] + "..."
+        # 添加标签前缀
+        cat = seg.get("category", "其他")
+        imp = seg.get("importance", "中")
+        prefix = f"[{cat}/{imp}] " if cat != "其他" else ""
+        key_points.append(prefix + text)
+
+    if not key_points:
+        result["status"] = "skip"
+        result["error"] = "无有效要点"
+        return result
+
+    # 确定 source_type
+    category_counts = {}
+    for seg in important:
+        cat = seg.get("category", "其他")
+        category_counts[cat] = category_counts.get(cat, 0) + 1
+    if category_counts:
+        dominant_category = max(category_counts.items(), key=lambda x: x[1])[0]
+    else:
+        dominant_category = "其他"
+    source_type = CATEGORY_TO_SOURCE.get(dominant_category, "新闻")
+
+    # 映射 doc_type → source_type
+    if doc_type in ["annual_report", "semi_annual_report", "quarterly_report"]:
+        source_type = "财报"
+    elif doc_type == "prospectus":
+        source_type = "招股"
+    elif doc_type == "investor_relations":
+        source_type = "投资者关系"
+    elif doc_type == "announcement":
+        source_type = "公告"
+    elif doc_type == "research_report":
+        source_type = "研报"
+
+    entry = {
+        "date": published_date,
+        "source_type": source_type,
+        "title": title,
+        "key_points": key_points,
+    }
+
+    # 写入 wiki
+    topic_name = "公司动态" if entity_type == "company" else entity_name
+    wiki_path = get_wiki_path(entity_name, entity_type, topic_name)
+
+    if dry_run:
+        result["status"] = "dry_run"
+        result["entries_added"] = 1
+        return result
+
+    if wiki_path and not wiki_path.exists():
+        create_wiki_template(wiki_path, entity_name, topic_name, entity_type)
+
+    if wiki_path:
+        added = add_timeline_entries(wiki_path, [entry], seg_file)
+        result["entries_added"] = added
+        if added > 0:
+            result["status"] = "success"
+        else:
+            result["status"] = "skip"
+            result["error"] = "条目已存在或写入失败"
+    else:
+        result["status"] = "error"
+        result["error"] = "无法确定 wiki 路径"
 
     return result
 
@@ -878,10 +1299,18 @@ def main():
     parser.add_argument("--check", action="store_true", help="列出待处理文件")
     parser.add_argument("--limit", type=int, default=0, help="最多处理 N 个文件")
     parser.add_argument("--file", type=str, help="处理指定文件")
+    parser.add_argument(
+        "--source",
+        type=str,
+        choices=["raw", "segments", "all"],
+        default="raw",
+        help="数据来源: raw=原始文件(默认), segments=标签化分段, all=两者都处理",
+    )
     args = parser.parse_args()
 
     print("=" * 60)
     print("  上市公司知识库 — Ingest v2 (LLM 驱动)")
+    print(f"  Source: {args.source}")
     print("=" * 60)
 
     # 加载图数据和 LLM
@@ -910,29 +1339,51 @@ def main():
         else:
             inferred_type = "company"
             inferred_name = args.company or "未知"
-        result = process_file(args.file, args.company or inferred_name, inferred_type,
-                             graph, llm_client, args.dry_run)
+        result = process_file(
+            args.file,
+            args.company or inferred_name,
+            inferred_type,
+            graph,
+            llm_client,
+            args.dry_run,
+        )
         print(f"  Entity: {inferred_name} ({inferred_type})")
         print(f"  Status: {result['status']}")
         print(f"  Entries added: {result['entries_added']}")
         return
 
     # 扫描待处理文件
-    pending = scan_pending_files(graph, args.company)
+    pending_raw = []
+    pending_segments = []
+
+    if args.source in ("raw", "all"):
+        pending_raw = scan_pending_files(graph, args.company)
+    if args.source in ("segments", "all"):
+        pending_segments = scan_pending_segments(graph, args.company)
+
+    pending = []
+    if args.source in ("raw", "all"):
+        pending.extend([("raw", fp, ent, etype) for fp, ent, etype in pending_raw])
+    if args.source in ("segments", "all"):
+        pending.extend(
+            [("segments", fp, ent, etype) for fp, ent, etype in pending_segments]
+        )
 
     if args.limit > 0:
-        pending = pending[:args.limit]
+        pending = pending[: args.limit]
 
     if not pending:
         print("\n  No pending files to ingest.")
         return
 
-    print(f"\n  Pending files: {len(pending)}")
+    print(
+        f"\n  Pending: {len(pending)} (raw:{len(pending_raw)}, segments:{len(pending_segments)})"
+    )
 
     if args.check:
-        for fp, ent, etype in pending:
+        for source_type, fp, ent, etype in pending:
             rel = Path(fp).relative_to(WIKI_ROOT)
-            print(f"    [{etype}] {ent}: {rel}")
+            print(f"    [{source_type}] [{etype}] {ent}: {rel}")
         return
 
     # 处理文件
@@ -942,11 +1393,14 @@ def main():
     total_skipped = 0
     total_errors = 0
 
-    for i, (fp, ent, etype) in enumerate(pending):
+    for i, (source_type, fp, ent, etype) in enumerate(pending):
         rel = Path(fp).relative_to(WIKI_ROOT)
-        print(f"\n  [{i+1}/{len(pending)}] {rel}")
+        print(f"\n  [{i + 1}/{len(pending)}] [{source_type}] {rel}")
 
-        result = process_file(fp, ent, etype, graph, llm_client, args.dry_run)
+        if source_type == "raw":
+            result = process_file(fp, ent, etype, graph, llm_client, args.dry_run)
+        else:
+            result = process_segments_file(fp, ent, etype, graph, args.dry_run)
 
         status_emoji = {
             "success": "[OK]",
@@ -989,8 +1443,10 @@ def main():
     print(f"{'=' * 60}")
 
     if not args.dry_run and total_entries > 0:
-        append_log("ingest_v2",
-                   f"LLM ingest: {len(pending)} files, +{total_entries} entries, {total_assessments} assessments")
+        append_log(
+            "ingest_v2",
+            f"LLM ingest ({args.source}): {len(pending)} files, +{total_entries} entries, {total_assessments} assessments",
+        )
 
 
 if __name__ == "__main__":

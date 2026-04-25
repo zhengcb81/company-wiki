@@ -29,10 +29,13 @@ from typing import Dict, List, Optional, Set, Tuple
 
 # Windows 控制台 UTF-8 编码
 if sys.platform == "win32":
-    if hasattr(sys.stdout, "reconfigure"):
-        sys.stdout.reconfigure(encoding="utf-8")
-    if hasattr(sys.stderr, "reconfigure"):
-        sys.stderr.reconfigure(encoding="utf-8")
+    try:
+        if hasattr(sys.stdout, "reconfigure"):
+            sys.stdout.reconfigure(encoding="utf-8")
+        if hasattr(sys.stderr, "reconfigure"):
+            sys.stderr.reconfigure(encoding="utf-8")
+    except (AttributeError, OSError):
+        pass
 
 SCRIPTS_DIR = Path(__file__).resolve().parent
 WIKI_ROOT = SCRIPTS_DIR.parent
@@ -43,13 +46,15 @@ from graph import Graph
 
 # ── 数据结构 ──────────────────────────────
 
+
 class EventCluster:
     """事件聚类"""
+
     def __init__(self, canonical_title: str):
         self.canonical_title = canonical_title  # 规范化标题
-        self.entries: List[Dict] = []           # 时间线条目
-        self.companies: Set[str] = set()        # 涉及的公司
-        self.sources: Set[str] = set()          # 来源文件
+        self.entries: List[Dict] = []  # 时间线条目
+        self.companies: Set[str] = set()  # 涉及的公司
+        self.sources: Set[str] = set()  # 来源文件
 
     @property
     def source_count(self) -> int:
@@ -84,6 +89,7 @@ class EventCluster:
 
 
 # ── 条目收集 ──────────────────────────────
+
 
 def collect_all_entries(company_filter: Optional[str] = None) -> List[Dict]:
     """
@@ -123,14 +129,13 @@ def collect_all_entries(company_filter: Optional[str] = None) -> List[Dict]:
     return entries
 
 
-def _parse_wiki_entries(content: str, wiki_file: Path,
-                        company_name: str) -> List[Dict]:
+def _parse_wiki_entries(content: str, wiki_file: Path, company_name: str) -> List[Dict]:
     """解析 wiki 文件中的时间线条目"""
     entries = []
     entry_pattern = re.compile(
-        r'^### (\d{4}-\d{2}-\d{2}) \| (.+?) \| (.+)$\n'
-        r'((?:^- .+$\n?)*)',
-        re.MULTILINE
+        r"^### (\d{4}-\d{2}-\d{2}) \| (.+?) \| (.+)$\n"
+        r"((?:^- .+$\n?)*)",
+        re.MULTILINE,
     )
 
     for match in entry_pattern.finditer(content):
@@ -141,49 +146,89 @@ def _parse_wiki_entries(content: str, wiki_file: Path,
 
         source_url = ""
         for line in body.split("\n"):
-            src_match = re.search(r'\[来源\]\((.+?)\)', line)
+            src_match = re.search(r"\[来源\]\((.+?)\)", line)
             if src_match:
                 source_url = src_match.group(1)
                 break
 
-        entries.append({
-            "date": date,
-            "source_type": source_type,
-            "title": title,
-            "company": company_name,
-            "source_url": source_url,
-            "file": str(wiki_file.relative_to(WIKI_ROOT)),
-        })
+        entries.append(
+            {
+                "date": date,
+                "source_type": source_type,
+                "title": title,
+                "company": company_name,
+                "source_url": source_url,
+                "file": str(wiki_file.relative_to(WIKI_ROOT)),
+            }
+        )
 
     return entries
 
 
 # ── 事件聚类 ──────────────────────────────
 
+
 def normalize_title(title: str) -> str:
     """规范化标题用于聚类比较"""
     # 移除常见的前缀/后缀
-    title = re.sub(r'^(?:[A-Z]+[\s-]+)?', '', title)
+    title = re.sub(r"^(?:[A-Z]+[\s-]+)?", "", title)
     # 移除日期
-    title = re.sub(r'\d{4}年\d{1,2}月\d{1,2}日', '', title)
-    title = re.sub(r'\d{4}年\d{1,2}月', '', title)
-    title = re.sub(r'\d{4}', '', title)
+    title = re.sub(r"\d{4}年\d{1,2}月\d{1,2}日", "", title)
+    title = re.sub(r"\d{4}年\d{1,2}月", "", title)
+    title = re.sub(r"\d{4}", "", title)
     # 统一空格
-    title = re.sub(r'\s+', ' ', title).strip()
+    title = re.sub(r"\s+", " ", title).strip()
     return title
 
 
 def title_similarity(title1: str, title2: str) -> float:
-    """计算两个标题的相似度"""
+    """计算两个标题的相似度（结合字符串匹配和语义判断）"""
     n1 = normalize_title(title1)
     n2 = normalize_title(title2)
     if not n1 or not n2:
         return 0.0
-    return difflib.SequenceMatcher(None, n1, n2).ratio()
+
+    # 1. 快速字符串匹配
+    str_sim = difflib.SequenceMatcher(None, n1, n2).ratio()
+    if str_sim >= 0.8:
+        return str_sim  # 高字符串相似度直接返回
+
+    # 2. 语义判断：提取核心事件类型
+    # 如果两个标题描述不同类型的事件，相似度降低
+    event_types_1 = _extract_event_keywords(n1)
+    event_types_2 = _extract_event_keywords(n2)
+
+    if event_types_1 and event_types_2:
+        # 如果事件类型完全不同，大幅降低相似度
+        if not event_types_1.intersection(event_types_2):
+            return str_sim * 0.3
+
+    return str_sim
 
 
-def cluster_events(entries: List[Dict],
-                   similarity_threshold: float = 0.6) -> List[EventCluster]:
+def _extract_event_keywords(title: str) -> set:
+    """提取标题中的事件关键词"""
+    event_keywords = {
+        "财报": ["年报", "季报", "半年报", "营收", "净利润", "毛利率"],
+        "订单": ["订单", "合同", "中标", "采购"],
+        "产品": ["发布", "新品", "推出", "量产"],
+        "产能": ["产能", "扩产", "投产", "建设"],
+        "投资": ["投资", "并购", "收购", "定增"],
+        "人事": ["任命", "离职", "高管", "董事"],
+        "技术": ["专利", "技术", "研发", "突破"],
+    }
+
+    found_types = set()
+    for event_type, keywords in event_keywords.items():
+        if any(kw in title for kw in keywords):
+            found_types.add(event_type)
+
+    return found_types
+
+
+def cluster_events(
+    entries: List[Dict], similarity_threshold: float = 0.6
+) -> List[EventCluster]:
     """
     将相似的时间线条目聚类为事件。
 
@@ -217,6 +262,11 @@ def cluster_events(entries: List[Dict],
 
         # 同一个月内的条目比较
         month_key = entry_i["date"][:7]
+
+        # 提取条目的事件类型和公司名
+        entry_i_event_types = _extract_event_keywords(entry_i["title"])
+        entry_i_company = entry_i.get("company", "")
+
         for j in range(i + 1, len(flat_entries)):
             if j in clustered_indices:
                 continue
@@ -235,10 +285,36 @@ def cluster_events(entries: List[Dict],
                 except (ValueError, IndexError):
                     continue
 
-            sim = title_similarity(entry_i["title"], entry_j["title"])
-            if sim >= similarity_threshold:
-                cluster.add_entry(entry_j)
-                clustered_indices.add(j)
+            # 过滤：如果两个条目属于不同公司且标题相似度不高，跳过
+            entry_j_company = entry_j.get("company", "")
+            if (
+                entry_j_company
+                and entry_i_company
+                and entry_j_company != entry_i_company
+            ):
+                # 跨公司匹配需要更高的相似度阈值
+                sim = title_similarity(entry_i["title"], entry_j["title"])
+                if sim < similarity_threshold + 0.15:  # 跨公司需要 +0.15
+                    continue
+            else:
+                sim = title_similarity(entry_i["title"], entry_j["title"])
+                if sim < similarity_threshold:
+                    continue
+
+            # 额外过滤：检查事件类型
+            entry_j_event_types = _extract_event_keywords(entry_j["title"])
+            if entry_i_event_types and entry_j_event_types:
+                # 如果事件类型完全不同，跳过（除非是财报类通用事件）
+                common_types = entry_i_event_types.intersection(entry_j_event_types)
+                if (
+                    not common_types
+                    and "财报" not in entry_i_event_types
+                    and "财报" not in entry_j_event_types
+                ):
+                    continue
+
+            cluster.add_entry(entry_j)
+            clustered_indices.add(j)
 
         clusters.append(cluster)
 
@@ -249,8 +325,10 @@ def cluster_events(entries: List[Dict],
 
 # ── 报告生成 ──────────────────────────────
 
-def generate_report(clusters: List[EventCluster],
-                    output_path: Optional[Path] = None) -> str:
+
+def generate_report(
+    clusters: List[EventCluster], output_path: Optional[Path] = None
+) -> str:
     """
     生成交叉验证报告。
 
@@ -291,7 +369,9 @@ def generate_report(clusters: List[EventCluster],
             title_short = c.canonical_title[:50]
             if len(c.canonical_title) > 50:
                 title_short += "..."
-            lines.append(f"| {title_short} | {c.source_count} | {c.company_count} | {companies_str} | {c.first_date} |")
+            lines.append(
+                f"| {title_short} | {c.source_count} | {c.company_count} | {companies_str} | {c.first_date} |"
+            )
         lines.append("")
 
     if medium:
@@ -306,7 +386,9 @@ def generate_report(clusters: List[EventCluster],
             title_short = c.canonical_title[:50]
             if len(c.canonical_title) > 50:
                 title_short += "..."
-            lines.append(f"| {title_short} | {c.source_count} | {c.company_count} | {companies_str} | {c.first_date} |")
+            lines.append(
+                f"| {title_short} | {c.source_count} | {c.company_count} | {companies_str} | {c.first_date} |"
+            )
         lines.append("")
 
     if low:
@@ -335,12 +417,14 @@ def generate_report(clusters: List[EventCluster],
 
 # ── CLI ─────────────────────────────────
 
+
 def main():
     parser = argparse.ArgumentParser(description="多源交叉验证")
     parser.add_argument("--company", type=str, help="指定公司")
     parser.add_argument("--report", action="store_true", help="生成报告")
-    parser.add_argument("--threshold", type=float, default=0.6,
-                        help="标题相似度阈值 (默认: 0.6)")
+    parser.add_argument(
+        "--threshold", type=float, default=0.6, help="标题相似度阈值 (默认: 0.6)"
+    )
     parser.add_argument("--dry-run", action="store_true", help="仅预览不生成报告")
     args = parser.parse_args()
 

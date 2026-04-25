@@ -3,6 +3,8 @@ LLMClient 测试
 测试 llm_client.py 的核心功能: 初始化、chat 调用、业务方法
 所有 LLM API 调用使用 mock，不依赖外部服务。
 """
+
+import os
 import pytest
 from pathlib import Path
 from unittest.mock import patch, MagicMock
@@ -25,14 +27,13 @@ def _make_response(content="测试回复", model="test-model", success=True):
 
 @pytest.mark.unit
 class TestLLMClientInit:
-
     def test_init_with_explicit_params(self):
         """测试显式参数初始化"""
         client = LLMClient(
             provider="deepseek",
             api_key="sk-test",
             model="test-model",
-            base_url="https://api.test.com"
+            base_url="https://api.test.com",
         )
         assert client.provider == "deepseek"
         assert client.api_key == "sk-test"
@@ -45,7 +46,7 @@ class TestLLMClientInit:
             provider="openai",
             api_key="sk-openai-test",
             model="gpt-4",
-            base_url="https://api.openai.com/v1"
+            base_url="https://api.openai.com/v1",
         )
         assert client.provider == "openai"
         assert client.model == "gpt-4"
@@ -65,6 +66,7 @@ class TestLLMClientInit:
         client = LLMClient(provider="deepseek", api_key="sk-test")
         assert client.available
 
+    @patch.dict(os.environ, {}, clear=True)
     def test_unavailable_without_api_key(self):
         """测试无 API key 时 available 为 False"""
         client = LLMClient(provider="deepseek", api_key="")
@@ -73,8 +75,7 @@ class TestLLMClientInit:
 
 @pytest.mark.unit
 class TestLLMClientChat:
-
-    @patch.object(LLMClient, '_call_with_urllib')
+    @patch.object(LLMClient, "_call_with_urllib")
     def test_chat_returns_response(self, mock_call):
         """测试 chat 返回 LLMResponse"""
         mock_call.return_value = _make_response("你好世界")
@@ -85,7 +86,7 @@ class TestLLMClientChat:
         assert isinstance(result, LLMResponse)
         assert result.content == "你好世界"
 
-    @patch.object(LLMClient, '_call_with_urllib')
+    @patch.object(LLMClient, "_call_with_urllib")
     def test_chat_with_system_prompt(self, mock_call):
         """测试带 system prompt 的调用"""
         mock_call.return_value = _make_response("ok")
@@ -94,7 +95,7 @@ class TestLLMClientChat:
         result = client.chat("分析文本", system="你是分析师")
         assert result.content == "ok"
 
-    @patch.object(LLMClient, 'chat')
+    @patch.object(LLMClient, "chat")
     def test_chat_with_retry_success(self, mock_chat):
         """测试重试成功"""
         mock_chat.return_value = _make_response("ok")
@@ -102,7 +103,7 @@ class TestLLMClientChat:
         result = client.chat_with_retry("测试")
         assert result.success
 
-    @patch.object(LLMClient, 'chat')
+    @patch.object(LLMClient, "chat")
     def test_generate_backward_compat(self, mock_chat):
         """测试 generate() 返回 LLMResponse"""
         mock_chat.return_value = _make_response("分析结果")
@@ -111,6 +112,7 @@ class TestLLMClientChat:
         assert isinstance(result, LLMResponse)
         assert result.content == "分析结果"
 
+    @patch.dict(os.environ, {}, clear=True)
     def test_chat_unavailable_returns_error(self):
         """测试无 API key 时返回错误"""
         client = LLMClient(provider="deepseek", api_key="")
@@ -121,8 +123,7 @@ class TestLLMClientChat:
 
 @pytest.mark.unit
 class TestLLMClientBusinessMethods:
-
-    @patch.object(LLMClient, 'chat')
+    @patch.object(LLMClient, "chat")
     def test_analyze_content(self, mock_chat):
         """测试内容分析"""
         mock_chat.return_value = _make_response(
@@ -134,7 +135,7 @@ class TestLLMClientBusinessMethods:
         result = client.analyze_content("测试内容", entity_name="测试公司")
         assert isinstance(result, dict)
 
-    @patch.object(LLMClient, 'chat')
+    @patch.object(LLMClient, "chat")
     def test_generate_summary(self, mock_chat):
         """测试摘要生成"""
         mock_chat.return_value = _make_response("这是摘要")
@@ -143,15 +144,17 @@ class TestLLMClientBusinessMethods:
         assert isinstance(result, str)
         assert len(result) > 0
 
-    @patch.object(LLMClient, 'chat')
+    @patch.object(LLMClient, "chat")
     def test_generate_wikilinks(self, mock_chat):
         """测试 wikilinks 生成"""
         mock_chat.return_value = _make_response('["中微公司", "半导体设备"]')
         client = LLMClient(provider="deepseek", api_key="sk-test")
-        result = client.generate_wikilinks("测试内容", available_pages=["中微公司", "北方华创"])
+        result = client.generate_wikilinks(
+            "测试内容", available_pages=["中微公司", "北方华创"]
+        )
         assert isinstance(result, list)
 
-    @patch.object(LLMClient, 'chat')
+    @patch.object(LLMClient, "chat")
     def test_judge_relevance(self, mock_chat):
         """测试相关性判断"""
         mock_chat.return_value = _make_response(
@@ -164,13 +167,12 @@ class TestLLMClientBusinessMethods:
 
 @pytest.mark.unit
 class TestLLMResponse:
-
     def test_response_creation(self):
         """测试 LLMResponse 创建"""
         resp = LLMResponse(
             content="测试",
             model="test-model",
-            usage={"prompt_tokens": 10, "completion_tokens": 5}
+            usage={"prompt_tokens": 10, "completion_tokens": 5},
         )
         assert resp.content == "测试"
         assert resp.model == "test-model"
