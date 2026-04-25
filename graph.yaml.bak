@@ -1,0 +1,3234 @@
+nodes:
+  AI产业链:
+    type: theme
+    description: 从芯片到应用的完整AI产业链
+    keywords:
+    - AI产业链
+  GPU与AI芯片:
+    type: sector
+    parent_theme:
+    - AI产业链
+    description: AI训练/推理用GPU、NPU、TPU等专用芯片
+    tier: 3
+    keywords:
+    - GPU与AI芯片
+    - GPU
+    - AI芯片
+    - NPU
+    - TPU
+    - 加速卡
+    - AI处理器
+  半导体设备:
+    type: sector
+    parent_theme:
+    - AI产业链
+    description: 半导体制造设备：刻蚀、薄膜、清洗、检测、光刻等
+    tier: 5
+    keywords:
+    - 半导体设备
+    - 芯片设备
+    - 晶圆设备
+    - 前道设备
+  半导体材料:
+    type: sector
+    parent_theme:
+    - AI产业链
+    description: 硅片、光刻胶、靶材、电子特气、CMP材料等
+    tier: 5
+    keywords:
+    - 半导体材料
+    - 芯片材料
+    - 晶圆材料
+  半导体代工:
+    type: sector
+    parent_theme:
+    - AI产业链
+    description: 晶圆代工制造
+    tier: 4
+    keywords:
+    - 半导体代工
+    - 晶圆代工
+    - 芯片代工
+    - Foundry
+  封测:
+    type: sector
+    parent_theme:
+    - AI产业链
+    description: 芯片封装与测试，包括先进封装(CoWoS, HBM)
+    tier: 3
+    keywords:
+    - 封测
+    - 封装测试
+    - 先进封装
+    - CoWoS
+    - HBM
+  EDA与IP:
+    type: sector
+    parent_theme:
+    - AI产业链
+    description: 芯片设计工具和IP核
+    tier: 4
+    keywords:
+    - EDA与IP
+    - EDA
+    - 芯片设计
+    - IP核
+  光模块:
+    type: sector
+    parent_theme:
+    - AI产业链
+    description: 数据中心光通信模块，AI算力互联核心
+    tier: 2
+    keywords:
+    - 光模块
+    - 光通信
+    - 800G
+    - 1.6T
+    - CPO
+  液冷:
+    type: sector
+    parent_theme:
+    - AI产业链
+    description: AI服务器液冷散热解决方案
+    tier: 2
+    keywords:
+    - 液冷
+    - 散热
+    - 温控
+    - 浸没式
+  算力基建:
+    type: sector
+    parent_theme:
+    - AI产业链
+    description: AI服务器整机、数据中心建设、算力租赁
+    tier: 2
+    keywords:
+    - 算力基建
+    - 算力
+    - AI服务器
+    - 数据中心
+    - 智算中心
+  电力基建:
+    type: sector
+    parent_theme:
+    - AI产业链
+    description: 数据中心电力供应：发电设备、储能、输配电、UPS
+    tier: 1
+    keywords:
+    - 电力基建
+    - 电力
+    - 供电
+    - 配电
+    - UPS
+    - 储能
+  AI应用:
+    type: sector
+    parent_theme:
+    - AI产业链
+    description: 大模型、AI Agent、行业AI应用
+    tier: 0
+    keywords:
+    - AI应用
+    - 大模型
+    - AI Agent
+    - 人工智能应用
+  刻蚀设备:
+    type: subsector
+    parent_sector:
+    - 半导体设备
+    parent_theme:
+    - AI产业链
+    keywords:
+    - 刻蚀设备
+    - 刻蚀
+    - Etch
+    - ICP
+    - CCP
+  薄膜沉积设备:
+    type: subsector
+    parent_sector:
+    - 半导体设备
+    parent_theme:
+    - AI产业链
+    keywords:
+    - 薄膜沉积设备
+    - 薄膜
+    - CVD
+    - PVD
+    - ALD
+  量检测设备:
+    type: subsector
+    parent_sector:
+    - 半导体设备
+    parent_theme:
+    - AI产业链
+    keywords:
+    - 量检测设备
+    - 量检测
+    - 检测
+    - 量测
+  光刻设备:
+    type: subsector
+    parent_sector:
+    - 半导体设备
+    parent_theme:
+    - AI产业链
+    keywords:
+    - 光刻设备
+    - 光刻
+    - Lithography
+  清洗设备:
+    type: subsector
+    parent_sector:
+    - 半导体设备
+    parent_theme:
+    - AI产业链
+    keywords:
+    - 清洗设备
+    - 清洗
+    - Cleaning
+  CMP设备:
+    type: subsector
+    parent_sector:
+    - 半导体设备
+    parent_theme:
+    - AI产业链
+    keywords:
+    - CMP设备
+    - CMP
+    - 化学机械抛光
+  硅片:
+    type: subsector
+    parent_sector:
+    - 半导体材料
+    parent_theme:
+    - AI产业链
+    keywords:
+    - 硅片
+    - 硅晶圆
+    - Wafer
+  光刻胶:
+    type: subsector
+    parent_sector:
+    - 半导体材料
+    parent_theme:
+    - AI产业链
+    keywords:
+    - 光刻胶
+    - Photoresist
+  电子特气:
+    type: subsector
+    parent_sector:
+    - 半导体材料
+    parent_theme:
+    - AI产业链
+    keywords:
+    - 电子特气
+    - 电子气体
+    - 特种气体
+  靶材CMP:
+    type: subsector
+    parent_sector:
+    - 半导体材料
+    parent_theme:
+    - AI产业链
+    keywords:
+    - 靶材CMP
+    - 靶材
+    - Sputtering
+  发电设备:
+    type: subsector
+    parent_sector:
+    - 电力基建
+    parent_theme:
+    - AI产业链
+    keywords:
+    - 发电设备
+    - 发电
+    - 电力生产
+  储能:
+    type: subsector
+    parent_sector:
+    - 电力基建
+    parent_theme:
+    - AI产业链
+    keywords:
+    - 储能
+    - 电池
+    - Energy Storage
+  输配电:
+    type: subsector
+    parent_sector:
+    - 电力基建
+    parent_theme:
+    - AI产业链
+    keywords:
+    - 输配电
+    - 输电
+    - 配电
+    - 电网
+    - 特高压
+  密封件:
+    type: sector
+    description: 高端密封件行业，应用于石化、核电、航空航天等领域
+    tier: 4
+    keywords:
+    - 密封
+    - 密封件
+    - 机械密封
+    - 干气密封
+  高端制造:
+    type: theme
+    description: 高端制造业国产替代与技术升级
+    keywords:
+    - 高端制造
+    - 智能制造
+    - 工业母机
+edges:
+- from: 半导体设备
+  to: 半导体代工
+  type: upstream_of
+  label: 设备是代工的上游
+- from: 半导体材料
+  to: 半导体代工
+  type: upstream_of
+  label: 材料是代工的上游
+- from: EDA与IP
+  to: GPU与AI芯片
+  type: upstream_of
+  label: 设计工具是芯片的上游
+- from: 半导体代工
+  to: GPU与AI芯片
+  type: upstream_of
+  label: 代工是芯片的上游
+- from: 封测
+  to: GPU与AI芯片
+  type: upstream_of
+  label: 封测是芯片成品的上游
+- from: GPU与AI芯片
+  to: 算力基建
+  type: upstream_of
+  label: 芯片是算力基建的上游
+- from: 算力基建
+  to: AI应用
+  type: upstream_of
+  label: 算力是AI应用的基础设施
+- from: 光模块
+  to: 算力基建
+  type: upstream_of
+  label: 光模块支撑算力互联
+- from: 液冷
+  to: 算力基建
+  type: upstream_of
+  label: 液冷支撑算力散热
+- from: 电力基建
+  to: 算力基建
+  type: upstream_of
+  label: 电力是算力基建的能源基础
+- from: 刻蚀设备
+  to: 半导体设备
+  type: belongs_to
+- from: 薄膜沉积设备
+  to: 半导体设备
+  type: belongs_to
+- from: 量检测设备
+  to: 半导体设备
+  type: belongs_to
+- from: 光刻设备
+  to: 半导体设备
+  type: belongs_to
+- from: 清洗设备
+  to: 半导体设备
+  type: belongs_to
+- from: CMP设备
+  to: 半导体设备
+  type: belongs_to
+- from: 硅片
+  to: 半导体材料
+  type: belongs_to
+- from: 光刻胶
+  to: 半导体材料
+  type: belongs_to
+- from: 电子特气
+  to: 半导体材料
+  type: belongs_to
+- from: 靶材CMP
+  to: 半导体材料
+  type: belongs_to
+- from: 发电设备
+  to: 电力基建
+  type: belongs_to
+- from: 储能
+  to: 电力基建
+  type: belongs_to
+- from: 输配电
+  to: 电力基建
+  type: belongs_to
+companies:
+  英伟达:
+    ticker: NVDA
+    exchange: NASDAQ
+    sectors:
+    - GPU与AI芯片
+    themes:
+    - AI产业链
+    position: 全球GPU绝对龙头，AI训练市场>80%份额
+    competes_with:
+    - AMD
+    - 寒武纪
+    - 海光信息
+    news_queries:
+    - 英伟达 最新消息
+    - NVIDIA news
+    aliases:
+    - NVIDIA
+    - NVIDIA Corp
+    - NVDA
+  AMD:
+    ticker: AMD
+    exchange: NASDAQ
+    sectors:
+    - GPU与AI芯片
+    themes:
+    - AI产业链
+    position: GPU第二梯队，MI300系列挑战英伟达
+    competes_with:
+    - 英伟达
+    news_queries:
+    - AMD 最新消息
+    - AMD latest news
+    aliases:
+    - Advanced Micro Devices
+    - AMD
+    - 超微半导体
+  寒武纪:
+    ticker: '688256'
+    exchange: SSE STAR
+    sectors:
+    - GPU与AI芯片
+    themes:
+    - AI产业链
+    position: 国产AI芯片龙头，思元系列
+    competes_with:
+    - 英伟达
+    - 海光信息
+    news_queries:
+    - 寒武纪 最新消息
+    aliases:
+    - '688256'
+    - Cambricon
+    - 寒武纪科技
+  海光信息:
+    ticker: '688041'
+    exchange: SSE STAR
+    sectors:
+    - GPU与AI芯片
+    themes:
+    - AI产业链
+    position: 国产GPU替代，深算系列DCU
+    competes_with:
+    - 英伟达
+    - 寒武纪
+    news_queries:
+    - 海光信息 最新消息
+    aliases:
+    - 海光
+    - '688041'
+    - Hygon
+  景嘉微:
+    ticker: '300474'
+    exchange: SZSE
+    sectors:
+    - GPU与AI芯片
+    themes:
+    - AI产业链
+    position: 国产GPU，JM9系列
+    news_queries:
+    - 景嘉微 最新消息
+    aliases:
+    - '300474'
+  北方华创:
+    ticker: '002371'
+    exchange: SZSE
+    sectors:
+    - 半导体设备
+    - 刻蚀设备
+    - 薄膜沉积设备
+    - 清洗设备
+    themes:
+    - AI产业链
+    - 半导体国产替代
+    position: 国产半导体设备龙头，产品线最全
+    competes_with:
+    - 中微公司
+    - 拓荆科技
+    news_queries:
+    - 北方华创 最新消息
+    aliases:
+    - 北方华创科技
+    - '002371'
+  中微公司:
+    ticker: '688012'
+    exchange: SSE STAR
+    sectors:
+    - 半导体设备
+    - 刻蚀设备
+    themes:
+    - AI产业链
+    - 半导体国产替代
+    position: 刻蚀设备龙头，CCP/ICP全覆盖
+    competes_with:
+    - 北方华创
+    news_queries:
+    - 中微公司 最新消息
+    - 中微半导体 新闻
+    - AMEC semiconductor news
+    aliases:
+    - '688012'
+    - 中微半导体
+    - 中微半导体设备
+    - AMEC Inc
+    - AMEC
+  拓荆科技:
+    ticker: '688072'
+    exchange: SSE STAR
+    sectors:
+    - 半导体设备
+    - 薄膜沉积设备
+    themes:
+    - AI产业链
+    - 半导体国产替代
+    position: CVD设备龙头
+    competes_with:
+    - 北方华创
+    news_queries:
+    - 拓荆科技 最新消息
+    aliases:
+    - '688072'
+  盛美上海:
+    ticker: '688082'
+    exchange: SSE STAR
+    sectors:
+    - 半导体设备
+    - 清洗设备
+    themes:
+    - AI产业链
+    - 半导体国产替代
+    position: 清洗设备龙头
+    news_queries:
+    - 盛美上海 最新消息
+    aliases:
+    - '688082'
+  华海清科:
+    ticker: '688120'
+    exchange: SSE STAR
+    sectors:
+    - 半导体设备
+    - CMP设备
+    themes:
+    - AI产业链
+    - 半导体国产替代
+    position: CMP设备国产龙头
+    news_queries:
+    - 华海清科 最新消息
+    aliases:
+    - '688120'
+  精测电子:
+    ticker: '300567'
+    exchange: SZSE
+    sectors:
+    - 半导体设备
+    - 量检测设备
+    themes:
+    - AI产业链
+    - 半导体国产替代
+    position: 量检测设备龙头
+    news_queries:
+    - 精测电子 最新消息
+    aliases:
+    - '300567'
+  沪硅产业:
+    ticker: '688126'
+    exchange: SSE STAR
+    sectors:
+    - 半导体材料
+    - 硅片
+    themes:
+    - AI产业链
+    - 半导体国产替代
+    position: 大硅片国产龙头
+    news_queries:
+    - 沪硅产业 最新消息
+    aliases:
+    - '688126'
+  南大光电:
+    ticker: '300346'
+    exchange: SZSE
+    sectors:
+    - 半导体材料
+    - 光刻胶
+    themes:
+    - AI产业链
+    - 半导体国产替代
+    position: ArF光刻胶国产突破
+    news_queries:
+    - 南大光电 最新消息
+    aliases:
+    - '300346'
+  华特气体:
+    ticker: '688268'
+    exchange: SSE STAR
+    sectors:
+    - 半导体材料
+    - 电子特气
+    themes:
+    - AI产业链
+    - 半导体国产替代
+    position: 电子特气国产龙头
+    news_queries:
+    - 华特气体 最新消息
+    aliases:
+    - '688268'
+  江丰电子:
+    ticker: '300666'
+    exchange: SZSE
+    sectors:
+    - 半导体材料
+    - 靶材CMP
+    themes:
+    - AI产业链
+    - 半导体国产替代
+    position: 高纯溅射靶材龙头
+    news_queries:
+    - 江丰电子 最新消息
+    aliases:
+    - '300666'
+  台积电:
+    ticker: TSM
+    exchange: NYSE
+    sectors:
+    - 半导体代工
+    themes:
+    - AI产业链
+    position: 全球晶圆代工绝对龙头，先进制程垄断
+    competes_with:
+    - 中芯国际
+    - 华虹半导体
+    news_queries:
+    - 台积电 最新消息
+    - TSMC news
+    aliases:
+    - TSMC
+    - TSM
+    - Taiwan Semiconductor
+  中芯国际:
+    ticker: '688981'
+    exchange: SSE STAR
+    sectors:
+    - 半导体代工
+    themes:
+    - AI产业链
+    - 半导体国产替代
+    position: 国内代工龙头，N+2工艺量产
+    competes_with:
+    - 台积电
+    - 华虹半导体
+    news_queries:
+    - 中芯国际 最新消息
+    aliases:
+    - 中芯
+    - '688981'
+    - SMIC
+  华虹半导体:
+    ticker: '688347'
+    exchange: SSE STAR
+    sectors:
+    - 半导体代工
+    themes:
+    - AI产业链
+    - 半导体国产替代
+    position: 特色工艺代工龙头
+    news_queries:
+    - 华虹半导体 最新消息
+    aliases:
+    - 华虹宏力
+    - '688347'
+    - 华虹公司
+  华大九天:
+    ticker: '301269'
+    exchange: SZSE
+    sectors:
+    - EDA与IP
+    themes:
+    - AI产业链
+    - 半导体国产替代
+    position: 国产EDA龙头
+    news_queries:
+    - 华大九天 最新消息
+    aliases:
+    - '301269'
+  长电科技:
+    ticker: '600584'
+    exchange: SSE
+    sectors:
+    - 封测
+    themes:
+    - AI产业链
+    - 半导体国产替代
+    position: 国内封测龙头，CoWoS先进封装布局
+    competes_with:
+    - 通富微电
+    news_queries:
+    - 长电科技 最新消息
+    aliases:
+    - '600584'
+    - 江苏长电
+    - JCET
+  通富微电:
+    ticker: '002156'
+    exchange: SZSE
+    sectors:
+    - 封测
+    themes:
+    - AI产业链
+    - 半导体国产替代
+    position: AMD先进封装合作伙伴
+    competes_with:
+    - 长电科技
+    news_queries:
+    - 通富微电 最新消息
+    aliases:
+    - 通富微电股份
+    - '002156'
+  甬矽电子:
+    ticker: '688362'
+    exchange: SSE STAR
+    sectors:
+    - 封测
+    themes:
+    - AI产业链
+    - 半导体国产替代
+    position: 系统级封装(SiP)领先
+    news_queries:
+    - 甬矽电子 最新消息
+    aliases:
+    - '688362'
+  中际旭创:
+    ticker: '300308'
+    exchange: SZSE
+    sectors:
+    - 光模块
+    themes:
+    - AI产业链
+    position: 全球光模块龙头，800G/1.6T领先
+    competes_with:
+    - 新易盛
+    - 光迅科技
+    news_queries:
+    - 中际旭创 最新消息
+    aliases:
+    - '300308'
+  新易盛:
+    ticker: '300502'
+    exchange: SZSE
+    sectors:
+    - 光模块
+    themes:
+    - AI产业链
+    position: 高速光模块核心供应商
+    competes_with:
+    - 中际旭创
+    - 光迅科技
+    news_queries:
+    - 新易盛 最新消息
+    aliases:
+    - '300502'
+  天孚通信:
+    ticker: '300394'
+    exchange: SZSE
+    sectors:
+    - 光模块
+    themes:
+    - AI产业链
+    position: 光器件龙头，CPO布局
+    news_queries:
+    - 天孚通信 最新消息
+    aliases:
+    - '300394'
+  光迅科技:
+    ticker: 002281
+    exchange: SZSE
+    sectors:
+    - 光模块
+    themes:
+    - AI产业链
+    position: 光通信全产业链布局
+    news_queries:
+    - 光迅科技 最新消息
+    aliases:
+    - 002281
+  太辰光:
+    ticker: '300570'
+    exchange: SZSE
+    sectors:
+    - 光模块
+    themes:
+    - AI产业链
+    position: 光连接器龙头
+    news_queries:
+    - 太辰光 最新消息
+    aliases:
+    - '300570'
+  英维克:
+    ticker: 002837
+    exchange: SZSE
+    sectors:
+    - 液冷
+    themes:
+    - AI产业链
+    position: 液冷温控龙头
+    news_queries:
+    - 英维克 最新消息
+    aliases:
+    - 002837
+  高澜股份:
+    ticker: '300499'
+    exchange: SZSE
+    sectors:
+    - 液冷
+    themes:
+    - AI产业链
+    position: 液冷设备核心供应商
+    news_queries:
+    - 高澜股份 最新消息
+    aliases:
+    - '300499'
+  申菱环境:
+    ticker: '301018'
+    exchange: SZSE
+    sectors:
+    - 液冷
+    themes:
+    - AI产业链
+    position: 数据中心液冷方案商
+    news_queries:
+    - 申菱环境 最新消息
+    aliases:
+    - '301018'
+  曙光数创:
+    ticker: '872808'
+    exchange: BSE
+    sectors:
+    - 液冷
+    themes:
+    - AI产业链
+    position: 浸没式液冷龙头
+    news_queries:
+    - 曙光数创 最新消息
+    aliases:
+    - '872808'
+  飞龙股份:
+    ticker: '002536'
+    exchange: SZSE
+    sectors:
+    - 液冷
+    themes:
+    - AI产业链
+    position: 液冷泵核心供应商
+    news_queries:
+    - 飞龙股份 最新消息
+    aliases:
+    - '002536'
+  浪潮信息:
+    ticker: 000977
+    exchange: SZSE
+    sectors:
+    - 算力基建
+    themes:
+    - AI产业链
+    position: 国内AI服务器龙头
+    news_queries:
+    - 浪潮信息 最新消息
+    aliases:
+    - Inspur
+    - 000977
+    - 浪潮
+  中科曙光:
+    ticker: '603019'
+    exchange: SSE
+    sectors:
+    - 算力基建
+    themes:
+    - AI产业链
+    position: 高端计算龙头，海光生态
+    news_queries:
+    - 中科曙光 最新消息
+    aliases:
+    - '603019'
+    - 曙光信息
+    - Sugon
+  工业富联:
+    ticker: '601138'
+    exchange: SSE
+    sectors:
+    - 算力基建
+    themes:
+    - AI产业链
+    position: 全球AI服务器代工龙头
+    news_queries:
+    - 工业富联 最新消息
+    aliases:
+    - '601138'
+  紫光股份:
+    ticker: 000938
+    exchange: SZSE
+    sectors:
+    - 算力基建
+    themes:
+    - AI产业链
+    position: 云计算基础设施龙头
+    news_queries:
+    - 紫光股份 最新消息
+    aliases:
+    - 000938
+  东方电缆:
+    ticker: '603606'
+    exchange: SSE
+    sectors:
+    - 电力基建
+    - 输配电
+    themes:
+    - AI产业链
+    position: 海底电缆龙头，数据中心电力传输
+    news_queries:
+    - 东方电缆 最新消息
+    aliases:
+    - '603606'
+  许继电气:
+    ticker: '000400'
+    exchange: SZSE
+    sectors:
+    - 电力基建
+    - 输配电
+    themes:
+    - AI产业链
+    position: 特高压/智能电网核心
+    news_queries:
+    - 许继电气 最新消息
+    aliases:
+    - '000400'
+  宁德时代:
+    ticker: '300750'
+    exchange: SZSE
+    sectors:
+    - 电力基建
+    - 储能
+    themes:
+    - AI产业链
+    position: 全球储能电池龙头
+    news_queries:
+    - 宁德时代 最新消息
+    aliases:
+    - '300750'
+    - CATL
+    - 宁德
+  阳光电源:
+    ticker: '300274'
+    exchange: SZSE
+    sectors:
+    - 电力基建
+    - 储能
+    - 发电设备
+    themes:
+    - AI产业链
+    position: 光伏逆变器+储能龙头
+    news_queries:
+    - 阳光电源 最新消息
+    aliases:
+    - '300274'
+    - Sungrow
+  百度:
+    ticker: BIDU
+    exchange: NASDAQ
+    sectors:
+    - AI应用
+    themes:
+    - AI产业链
+    position: 文心大模型，AI搜索/驾驶
+    competes_with:
+    - 科大讯飞
+    - 商汤科技
+    news_queries:
+    - 百度 最新消息
+    - Baidu AI news
+    aliases:
+    - Baidu
+    - 百度集团
+    - BIDU
+  商汤科技:
+    ticker: 0020.HK
+    exchange: HKEX
+    sectors:
+    - AI应用
+    themes:
+    - AI产业链
+    position: 日日新大模型，AI视觉龙头
+    news_queries:
+    - 商汤科技 最新消息
+    aliases:
+    - 商汤
+    - 0020.HK
+    - SenseTime
+  科大讯飞:
+    ticker: '002230'
+    exchange: SZSE
+    sectors:
+    - AI应用
+    themes:
+    - AI产业链
+    position: 讯飞星火大模型，语音AI龙头
+    competes_with:
+    - 百度
+    - 商汤科技
+    news_queries:
+    - 科大讯飞 最新消息
+    aliases:
+    - iFLYTEK
+    - 讯飞
+    - '002230'
+  中密控股:
+    ticker: '300470'
+    exchange: SZSE
+    sectors:
+    - 密封件
+    themes:
+    - 高端制造
+    news_queries:
+    - 中密控股 最新消息
+    - 中密控股 密封件
+    position: 国内机械密封龙头，大密封产业布局
+    aliases:
+    - '300470'
+    - 中密控股股份
+  珂玛科技:
+    ticker: '301611'
+    exchange: SZSE
+    sectors:
+    - 半导体设备
+    themes:
+    - 半导体国产替代
+    news_queries:
+    - 珂玛科技 最新消息
+    - 珂玛科技 半导体
+    position: 半导体设备先进陶瓷材料供应商
+    aliases:
+    - '301611'
+    - 珂玛材料
+    - 苏州珂玛
+    - 苏州珂玛材料科技
+  SHEIN:
+    ticker: SHEIN
+    exchange: NASDAQ
+    sectors: []
+    themes: []
+    news_queries:
+    - SHEIN 最新消息
+    position: 全球快时尚跨境电商
+  七一二:
+    ticker: '603712'
+    exchange: SSE
+    sectors: []
+    themes:
+    - 高端制造
+    news_queries:
+    - 七一二 最新消息
+    position: 军用无线通信
+    aliases:
+    - '603712'
+  万华化学:
+    ticker: '600309'
+    exchange: SSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 万华化学 最新消息
+    position: 全球MDI龙头
+    aliases:
+    - '600309'
+  万润股份:
+    ticker: '002643'
+    exchange: SZSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 万润股份 最新消息
+    position: 功能性材料
+    aliases:
+    - '002643'
+  万科:
+    ticker: '000002'
+    exchange: SZSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 万科 最新消息
+    position: 房地产龙头
+    aliases:
+    - '000002'
+  三七互娱:
+    ticker: '002555'
+    exchange: SZSE
+    sectors:
+    - AI应用
+    themes:
+    - AI产业链
+    news_queries:
+    - 三七互娱 最新消息
+    position: 游戏+AI游戏开发
+    aliases:
+    - '002555'
+  三只松鼠:
+    ticker: '300783'
+    exchange: SZSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 三只松鼠 最新消息
+    position: 休闲食品电商
+    aliases:
+    - '300783'
+  三德科技:
+    ticker: '300515'
+    exchange: SZSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 三德科技 最新消息
+    position: 煤质检测仪器
+    aliases:
+    - '300515'
+  三环集团:
+    ticker: '300408'
+    exchange: SZSE
+    sectors:
+    - 半导体材料
+    themes:
+    - AI产业链
+    - 半导体国产替代
+    news_queries:
+    - 三环集团 最新消息
+    position: 电子陶瓷材料龙头
+    aliases:
+    - '300408'
+  三联虹普:
+    ticker: '300384'
+    exchange: SZSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 三联虹普 最新消息
+    position: 锦纶工程技术服务
+    aliases:
+    - '300384'
+  三角防务:
+    ticker: '300775'
+    exchange: SZSE
+    sectors: []
+    themes:
+    - 高端制造
+    news_queries:
+    - 三角防务 最新消息
+    position: 航空锻件
+    aliases:
+    - '300775'
+  上峰水泥:
+    ticker: '000672'
+    exchange: SZSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 上峰水泥 最新消息
+    position: 水泥区域龙头
+    aliases:
+    - '000672'
+  世华科技:
+    ticker: '688093'
+    exchange: SSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 世华科技 最新消息
+    position: 复合功能性材料
+    aliases:
+    - '688093'
+  世茂:
+    ticker: 0873.HK
+    exchange: HKEX
+    sectors: []
+    themes: []
+    news_queries:
+    - 世茂 最新消息
+    position: 房地产
+    aliases:
+    - 0873.HK
+  东方雨虹:
+    ticker: '002271'
+    exchange: SZSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 东方雨虹 最新消息
+    position: 防水材料龙头
+    aliases:
+    - '002271'
+  东珠生态:
+    ticker: '603359'
+    exchange: SSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 东珠生态 最新消息
+    position: 生态修复
+    aliases:
+    - '603359'
+  东睦股份:
+    ticker: '600114'
+    exchange: SSE
+    sectors: []
+    themes:
+    - 高端制造
+    news_queries:
+    - 东睦股份 最新消息
+    position: 粉末冶金龙头
+    aliases:
+    - '600114'
+  中信建投:
+    ticker: 002168
+    exchange: SZSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 中信建投 最新消息
+    position: 头部券商
+    aliases:
+    - 002168
+  中国巨石:
+    ticker: '600176'
+    exchange: SSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 中国巨石 最新消息
+    position: 玻璃纤维龙头
+    aliases:
+    - '600176'
+  中国平安:
+    ticker: '601318'
+    exchange: SSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 中国平安 最新消息
+    position: 综合金融龙头
+    aliases:
+    - '601318'
+  中国生物制药:
+    ticker: 1177.HK
+    exchange: HKEX
+    sectors: []
+    themes: []
+    news_queries:
+    - 中国生物制药 最新消息
+    position: 仿制药+创新药
+    aliases:
+    - 1177.HK
+  中大力德:
+    ticker: 002896
+    exchange: SZSE
+    sectors: []
+    themes:
+    - 高端制造
+    news_queries:
+    - 中大力德 最新消息
+    position: 精密减速器
+    aliases:
+    - 002896
+  中望软件:
+    ticker: '688083'
+    exchange: SSE
+    sectors:
+    - EDA与IP
+    themes:
+    - AI产业链
+    news_queries:
+    - 中望软件 最新消息
+    position: 国产CAD龙头
+    aliases:
+    - '688083'
+  中直股份:
+    ticker: '600038'
+    exchange: SSE
+    sectors: []
+    themes:
+    - 高端制造
+    news_queries:
+    - 中直股份 最新消息
+    position: 直升机龙头
+    aliases:
+    - '600038'
+  中航光电:
+    ticker: 002179
+    exchange: SZSE
+    sectors: []
+    themes:
+    - 高端制造
+    news_queries:
+    - 中航光电 最新消息
+    position: 军工连接器龙头
+    aliases:
+    - 002179
+  中航机电:
+    ticker: '002013'
+    exchange: SZSE
+    sectors: []
+    themes:
+    - 高端制造
+    news_queries:
+    - 中航机电 最新消息
+    position: 航空机电系统
+    aliases:
+    - '002013'
+  中航沈飞:
+    ticker: '600760'
+    exchange: SSE
+    sectors: []
+    themes:
+    - 高端制造
+    news_queries:
+    - 中航沈飞 最新消息
+    position: 战斗机龙头
+    aliases:
+    - '600760'
+  中航电子:
+    ticker: '600372'
+    exchange: SSE
+    sectors: []
+    themes:
+    - 高端制造
+    news_queries:
+    - 中航电子 最新消息
+    position: 航空电子系统
+    aliases:
+    - '600372'
+  中航电测:
+    ticker: '300114'
+    exchange: SZSE
+    sectors: []
+    themes:
+    - 高端制造
+    news_queries:
+    - 中航电测 最新消息
+    position: 航空测控+成飞集成重组
+    aliases:
+    - '300114'
+  中航西飞:
+    ticker: 000768
+    exchange: SZSE
+    sectors: []
+    themes:
+    - 高端制造
+    news_queries:
+    - 中航西飞 最新消息
+    position: 大飞机龙头
+    aliases:
+    - 000768
+  中航重机:
+    ticker: '600765'
+    exchange: SSE
+    sectors: []
+    themes:
+    - 高端制造
+    news_queries:
+    - 中航重机 最新消息
+    position: 航空锻铸造
+    aliases:
+    - '600765'
+  中颖电子:
+    ticker: '300327'
+    exchange: SZSE
+    sectors:
+    - 半导体代工
+    themes:
+    - AI产业链
+    news_queries:
+    - 中颖电子 最新消息
+    position: MCU芯片设计
+    aliases:
+    - '300327'
+  丸美股份:
+    ticker: '603983'
+    exchange: SSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 丸美股份 最新消息
+    position: 眼部护肤品
+    aliases:
+    - '603983'
+  久吾高科:
+    ticker: '300631'
+    exchange: SZSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 久吾高科 最新消息
+    position: ''
+    aliases:
+    - '300631'
+  五芳斋:
+    ticker: '603237'
+    exchange: SSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 五芳斋 最新消息
+    position: 粽子龙头
+    aliases:
+    - '603237'
+  京东:
+    ticker: 9618.HK
+    exchange: HKEX
+    sectors:
+    - 算力基建
+    - AI应用
+    themes:
+    - AI产业链
+    news_queries:
+    - 京东 最新消息
+    position: 电商+京东云+AI
+    aliases:
+    - 9618.HK
+  京东方:
+    ticker: '000725'
+    exchange: SZSE
+    sectors:
+    - 半导体材料
+    themes:
+    - AI产业链
+    news_queries:
+    - 京东方 最新消息
+    position: 全球显示面板龙头
+    aliases:
+    - '000725'
+  亿华通:
+    ticker: '688339'
+    exchange: SSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 亿华通 最新消息
+    position: 氢燃料电池龙头
+    aliases:
+    - '688339'
+  伊利股份:
+    ticker: '600887'
+    exchange: SSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 伊利股份 最新消息
+    position: 乳制品龙头
+    aliases:
+    - '600887'
+  优利德:
+    ticker: '688628'
+    exchange: SSE
+    sectors:
+    - 量检测设备
+    themes:
+    - AI产业链
+    - 半导体国产替代
+    news_queries:
+    - 优利德 最新消息
+    position: 电子测量仪器
+    aliases:
+    - '688628'
+  伟星新材:
+    ticker: '002372'
+    exchange: SZSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 伟星新材 最新消息
+    position: PPR管材龙头
+    aliases:
+    - '002372'
+  信达生物:
+    ticker: 1801.HK
+    exchange: HKEX
+    sectors: []
+    themes: []
+    news_queries:
+    - 信达生物 最新消息
+    position: 创新药龙头
+    aliases:
+    - 1801.HK
+  元祖股份:
+    ticker: '603886'
+    exchange: SSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 元祖股份 最新消息
+    position: ''
+    aliases:
+    - '603886'
+  兆易创新:
+    ticker: '603986'
+    exchange: SSE
+    sectors:
+    - GPU与AI芯片
+    themes:
+    - AI产业链
+    - 半导体国产替代
+    news_queries:
+    - 兆易创新 最新消息
+    position: 存储芯片+MCU龙头
+    aliases:
+    - '603986'
+  光明乳业:
+    ticker: '600597'
+    exchange: SSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 光明乳业 最新消息
+    position: 乳制品
+    aliases:
+    - '600597'
+  光线传媒:
+    ticker: '300251'
+    exchange: SZSE
+    sectors:
+    - AI应用
+    themes:
+    - AI产业链
+    news_queries:
+    - 光线传媒 最新消息
+    position: 影视+AI影视制作
+    aliases:
+    - '300251'
+  八方股份:
+    ticker: '603489'
+    exchange: SSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 八方股份 最新消息
+    position: 电机龙头
+    aliases:
+    - '603489'
+  共创草坪:
+    ticker: '605099'
+    exchange: SSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 共创草坪 最新消息
+    position: 人造草坪龙头
+    aliases:
+    - '605099'
+  养元饮品:
+    ticker: '603156'
+    exchange: SSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 养元饮品 最新消息
+    position: 六个核桃
+    aliases:
+    - '603156'
+  凯赛生物:
+    ticker: '688065'
+    exchange: SSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 凯赛生物 最新消息
+    position: 生物基材料龙头
+    aliases:
+    - '688065'
+  分众传媒:
+    ticker: '002027'
+    exchange: SZSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 分众传媒 最新消息
+    position: 梯媒龙头
+    aliases:
+    - '002027'
+  北新建材:
+    ticker: 000786
+    exchange: SZSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 北新建材 最新消息
+    position: 石膏板龙头
+    aliases:
+    - 000786
+  十论“复苏牛”:
+    ticker: ''
+    exchange: UNKNOWN
+    sectors: []
+    themes: []
+    news_queries:
+    - 十论“复苏牛” 最新消息
+    position: ''
+  华住酒店:
+    ticker: 1179.HK
+    exchange: HKEX
+    sectors: []
+    themes: []
+    news_queries:
+    - 华住酒店 最新消息
+    position: 酒店连锁龙头
+    aliases:
+    - 1179.HK
+  华利集团:
+    ticker: '300979'
+    exchange: SZSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 华利集团 最新消息
+    position: 运动鞋代工龙头
+    aliases:
+    - '300979'
+  华卓精科:
+    ticker: '688152'
+    exchange: SSE
+    sectors:
+    - 半导体设备
+    themes:
+    - AI产业链
+    - 半导体国产替代
+    news_queries:
+    - 华卓精科 最新消息
+    position: 光刻机双工件台国产突破
+    aliases:
+    - '688152'
+  华铁应急:
+    ticker: '603300'
+    exchange: SSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 华铁应急 最新消息
+    position: 高空作业平台租赁
+    aliases:
+    - '603300'
+  华锐精密:
+    ticker: '688059'
+    exchange: SSE
+    sectors: []
+    themes:
+    - 高端制造
+    news_queries:
+    - 华锐精密 最新消息
+    position: 数控刀具国产替代
+    aliases:
+    - '688059'
+  卓胜微:
+    ticker: '300782'
+    exchange: SZSE
+    sectors:
+    - GPU与AI芯片
+    themes:
+    - AI产业链
+    - 半导体国产替代
+    news_queries:
+    - 卓胜微 最新消息
+    position: 射频芯片龙头
+    aliases:
+    - '300782'
+  博威合金:
+    ticker: '601137'
+    exchange: SSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 博威合金 最新消息
+    position: 高端铜合金材料
+    aliases:
+    - '601137'
+  双环传动:
+    ticker: '002472'
+    exchange: SZSE
+    sectors: []
+    themes:
+    - 高端制造
+    news_queries:
+    - 双环传动 最新消息
+    position: 齿轮龙头
+    aliases:
+    - '002472'
+  古井贡酒:
+    ticker: 000596
+    exchange: SZSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 古井贡酒 最新消息
+    position: 区域白酒龙头
+    aliases:
+    - 000596
+  吉比特:
+    ticker: '603444'
+    exchange: SSE
+    sectors:
+    - AI应用
+    themes:
+    - AI产业链
+    news_queries:
+    - 吉比特 最新消息
+    position: 精品游戏研发
+    aliases:
+    - '603444'
+  周大生:
+    ticker: 002867
+    exchange: SZSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 周大生 最新消息
+    position: 珠宝连锁
+    aliases:
+    - 002867
+  哔哩哔哩:
+    ticker: 9626.HK
+    exchange: HKEX
+    sectors:
+    - AI应用
+    themes:
+    - AI产业链
+    news_queries:
+    - 哔哩哔哩 最新消息
+    position: 视频社区+AI内容推荐
+    aliases:
+    - 9626.HK
+  国恩股份:
+    ticker: 002768
+    exchange: SZSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 国恩股份 最新消息
+    position: 高分子材料
+    aliases:
+    - 002768
+  国检集团:
+    ticker: '603060'
+    exchange: SSE
+    sectors:
+    - 量检测设备
+    themes: []
+    news_queries:
+    - 国检集团 最新消息
+    position: 第三方检测龙头
+    aliases:
+    - '603060'
+  地素时尚:
+    ticker: '603587'
+    exchange: SSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 地素时尚 最新消息
+    position: 中高端女装
+    aliases:
+    - '603587'
+  坤彩科技:
+    ticker: '603826'
+    exchange: SSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 坤彩科技 最新消息
+    position: 珠光材料龙头
+    aliases:
+    - '603826'
+  埃斯顿:
+    ticker: '002747'
+    exchange: SZSE
+    sectors: []
+    themes:
+    - 高端制造
+    news_queries:
+    - 埃斯顿 最新消息
+    position: 工业机器人龙头
+    aliases:
+    - '002747'
+  大全能源:
+    ticker: '688303'
+    exchange: SSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 大全能源 最新消息
+    position: 多晶硅龙头
+    aliases:
+    - '688303'
+  天宜上佳:
+    ticker: '688033'
+    exchange: SSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 天宜上佳 最新消息
+    position: 高铁刹车片+碳碳复合材料
+    aliases:
+    - '688033'
+  天马股份:
+    ticker: '002122'
+    exchange: SZSE
+    sectors: []
+    themes:
+    - 高端制造
+    news_queries:
+    - 天马股份 最新消息
+    position: 通用航空
+    aliases:
+    - '002122'
+  奥普特:
+    ticker: '688686'
+    exchange: SSE
+    sectors:
+    - 量检测设备
+    themes:
+    - AI产业链
+    - 半导体国产替代
+    news_queries:
+    - 奥普特 最新消息
+    position: 机器视觉核心部件
+    aliases:
+    - '688686'
+  奥来德:
+    ticker: '688378'
+    exchange: SSE
+    sectors:
+    - 半导体材料
+    themes:
+    - AI产业链
+    - 半导体国产替代
+    news_queries:
+    - 奥来德 最新消息
+    position: OLED有机材料龙头
+    aliases:
+    - '688378'
+  好未来:
+    ticker: TAL
+    exchange: NASDAQ
+    sectors:
+    - AI应用
+    themes:
+    - AI产业链
+    news_queries:
+    - 好未来 最新消息
+    position: 教育AI龙头
+  妙可蓝多:
+    ticker: '600882'
+    exchange: SSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 妙可蓝多 最新消息
+    position: 奶酪龙头
+    aliases:
+    - '600882'
+  字节跳动:
+    ticker: BYTE
+    exchange: NASDAQ
+    sectors:
+    - AI应用
+    themes:
+    - AI产业链
+    news_queries:
+    - 字节跳动 最新消息
+    position: 豆包大模型+TikTok全球AI
+  安博通:
+    ticker: '688168'
+    exchange: SSE
+    sectors:
+    - 算力基建
+    themes:
+    - AI产业链
+    news_queries:
+    - 安博通 最新消息
+    position: 网络安全+AI算力安全
+    aliases:
+    - '688168'
+  安宁股份:
+    ticker: 002978
+    exchange: SZSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 安宁股份 最新消息
+    position: ''
+    aliases:
+    - 002978
+  安杰思:
+    ticker: '688581'
+    exchange: SSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 安杰思 最新消息
+    position: 消化内镜诊疗器械
+    aliases:
+    - '688581'
+  安集科技:
+    ticker: '688019'
+    exchange: SSE
+    sectors:
+    - 半导体材料
+    themes:
+    - AI产业链
+    - 半导体国产替代
+    news_queries:
+    - 安集科技 最新消息
+    position: CMP抛光液龙头
+    aliases:
+    - '688019'
+  宋城演艺:
+    ticker: '300144'
+    exchange: SZSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 宋城演艺 最新消息
+    position: ''
+    aliases:
+    - '300144'
+  完美世界:
+    ticker: '002624'
+    exchange: SZSE
+    sectors:
+    - AI应用
+    themes:
+    - AI产业链
+    news_queries:
+    - 完美世界 最新消息
+    position: 游戏+影视+AI
+    aliases:
+    - '002624'
+  密尔克卫:
+    ticker: '603713'
+    exchange: SSE
+    sectors:
+    - 电子特气
+    themes:
+    - AI产业链
+    news_queries:
+    - 密尔克卫 最新消息
+    position: 化工供应链+电子特气分销
+    aliases:
+    - '603713'
+  富森美:
+    ticker: 002818
+    exchange: SZSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 富森美 最新消息
+    position: 家居卖场
+    aliases:
+    - 002818
+  小米集团:
+    ticker: 1810.HK
+    exchange: HKEX
+    sectors:
+    - 算力基建
+    themes:
+    - AI产业链
+    news_queries:
+    - 小米集团 最新消息
+    position: AIoT+小米汽车+大模型
+    aliases:
+    - 1810.HK
+  尚品宅配:
+    ticker: '300616'
+    exchange: SZSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 尚品宅配 最新消息
+    position: 全屋定制
+    aliases:
+    - '300616'
+  山石网科:
+    ticker: '688030'
+    exchange: SSE
+    sectors:
+    - 算力基建
+    themes:
+    - AI产业链
+    news_queries:
+    - 山石网科 最新消息
+    position: 网络安全+数据中心安全
+    aliases:
+    - '688030'
+  广州酒家:
+    ticker: '603043'
+    exchange: SSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 广州酒家 最新消息
+    position: 食品+餐饮
+    aliases:
+    - '603043'
+  广联达:
+    ticker: '002410'
+    exchange: SZSE
+    sectors:
+    - EDA与IP
+    themes: []
+    news_queries:
+    - 广联达 最新消息
+    position: 建筑信息化龙头
+    aliases:
+    - '002410'
+  康基医疗:
+    ticker: 9997.HK
+    exchange: HKEX
+    sectors: []
+    themes: []
+    news_queries:
+    - 康基医疗 最新消息
+    position: 微创外科手术器械
+    aliases:
+    - 9997.HK
+  康拓医疗:
+    ticker: '688314'
+    exchange: SSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 康拓医疗 最新消息
+    position: 神经外科植入物
+    aliases:
+    - '688314'
+  开润股份:
+    ticker: '300577'
+    exchange: SZSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 开润股份 最新消息
+    position: 箱包代工
+    aliases:
+    - '300577'
+  弘亚数控:
+    ticker: 002833
+    exchange: SZSE
+    sectors: []
+    themes:
+    - 高端制造
+    news_queries:
+    - 弘亚数控 最新消息
+    position: 板式家具机械龙头
+    aliases:
+    - 002833
+  微创医疗:
+    ticker: 0853.HK
+    exchange: HKEX
+    sectors: []
+    themes: []
+    news_queries:
+    - 微创医疗 最新消息
+    position: 高端医疗器械
+    aliases:
+    - 0853.HK
+  德林海:
+    ticker: '688069'
+    exchange: SSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 德林海 最新消息
+    position: 蓝藻治理
+    aliases:
+    - '688069'
+  德赛西威:
+    ticker: 002920
+    exchange: SZSE
+    sectors:
+    - GPU与AI芯片
+    themes:
+    - AI产业链
+    news_queries:
+    - 德赛西威 最新消息
+    position: 智能座舱/自动驾驶芯片龙头
+    aliases:
+    - 002920
+  快克股份:
+    ticker: '603203'
+    exchange: SSE
+    sectors:
+    - 半导体设备
+    themes:
+    - AI产业链
+    - 半导体国产替代
+    news_queries:
+    - 快克股份 最新消息
+    position: 精密焊接设备
+    aliases:
+    - '603203'
+  快手:
+    ticker: 1024.HK
+    exchange: HKEX
+    sectors:
+    - AI应用
+    themes:
+    - AI产业链
+    news_queries:
+    - 快手 最新消息
+    position: 短视频AI+可灵大模型
+    aliases:
+    - 1024.HK
+  恒锋工具:
+    ticker: '300488'
+    exchange: SZSE
+    sectors: []
+    themes:
+    - 高端制造
+    news_queries:
+    - 恒锋工具 最新消息
+    position: 精密复杂刀具
+    aliases:
+    - '300488'
+  恩华药业:
+    ticker: '002262'
+    exchange: SZSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 恩华药业 最新消息
+    position: 中枢神经系统用药龙头
+    aliases:
+    - '002262'
+  惠泰医疗:
+    ticker: '688617'
+    exchange: SSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 惠泰医疗 最新消息
+    position: 电生理+血管介入
+    aliases:
+    - '688617'
+  拓尔思:
+    ticker: '300229'
+    exchange: SZSE
+    sectors:
+    - AI应用
+    themes:
+    - AI产业链
+    news_queries:
+    - 拓尔思 最新消息
+    position: NLP/AI内容安全龙头
+    aliases:
+    - '300229'
+  拓斯达:
+    ticker: '300607'
+    exchange: SZSE
+    sectors:
+    - 半导体设备
+    themes:
+    - AI产业链
+    - 半导体国产替代
+    news_queries:
+    - 拓斯达 最新消息
+    position: 工业机器人+注塑设备
+    aliases:
+    - '300607'
+  拼多多:
+    ticker: PDD.US
+    exchange: NASDAQ
+    sectors:
+    - AI应用
+    themes:
+    - AI产业链
+    news_queries:
+    - 拼多多 最新消息
+    position: 跨境电商Temu+AI推荐
+  新产业:
+    ticker: '300832'
+    exchange: SZSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 新产业 最新消息
+    position: 体外诊断化学发光
+    aliases:
+    - '300832'
+  新华保险:
+    ticker: '601336'
+    exchange: SSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 新华保险 最新消息
+    position: 寿险龙头
+    aliases:
+    - '601336'
+  方大特钢:
+    ticker: '600507'
+    exchange: SSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 方大特钢 最新消息
+    position: 特钢龙头
+    aliases:
+    - '600507'
+  方邦股份:
+    ticker: '688020'
+    exchange: SSE
+    sectors:
+    - 半导体材料
+    themes:
+    - AI产业链
+    - 半导体国产替代
+    news_queries:
+    - 方邦股份 最新消息
+    position: 电磁屏蔽膜龙头
+    aliases:
+    - '688020'
+  时代天使:
+    ticker: 6699.HK
+    exchange: HKEX
+    sectors: []
+    themes: []
+    news_queries:
+    - 时代天使 最新消息
+    position: 隐形正畸龙头
+    aliases:
+    - 6699.HK
+  时代新材:
+    ticker: '600458'
+    exchange: SSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 时代新材 最新消息
+    position: 高分子材料+风电叶片
+    aliases:
+    - '600458'
+  时代电气:
+    ticker: '688187'
+    exchange: SSE
+    sectors:
+    - 半导体设备
+    themes:
+    - AI产业链
+    - 半导体国产替代
+    news_queries:
+    - 时代电气 最新消息
+    position: 功率半导体器件+轨道交通
+    aliases:
+    - '688187'
+  明源云:
+    ticker: 0909.HK
+    exchange: HKEX
+    sectors: []
+    themes: []
+    news_queries:
+    - 明源云 最新消息
+    position: 地产SaaS
+    aliases:
+    - 0909.HK
+  星网宇达:
+    ticker: 002829
+    exchange: SZSE
+    sectors: []
+    themes:
+    - 高端制造
+    news_queries:
+    - 星网宇达 最新消息
+    position: 惯性导航+无人机
+    aliases:
+    - 002829
+  春秋航空:
+    ticker: '601021'
+    exchange: SSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 春秋航空 最新消息
+    position: 低成本航空龙头
+    aliases:
+    - '601021'
+  普门科技:
+    ticker: '688389'
+    exchange: SSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 普门科技 最新消息
+    position: 体外诊断+康复设备
+    aliases:
+    - '688389'
+  杭氧股份:
+    ticker: '002430'
+    exchange: SZSE
+    sectors:
+    - 电子特气
+    themes:
+    - AI产业链
+    - 半导体国产替代
+    news_queries:
+    - 杭氧股份 最新消息
+    position: 工业气体龙头
+    aliases:
+    - '002430'
+  格力电器:
+    ticker: '000651'
+    exchange: SZSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 格力电器 最新消息
+    position: 家电龙头
+    aliases:
+    - '000651'
+  桃李面包:
+    ticker: '603866'
+    exchange: SSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 桃李面包 最新消息
+    position: 短保面包龙头
+    aliases:
+    - '603866'
+  梦百合:
+    ticker: '603313'
+    exchange: SSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 梦百合 最新消息
+    position: 记忆棉床垫龙头
+    aliases:
+    - '603313'
+  欧派家居:
+    ticker: '603833'
+    exchange: SSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 欧派家居 最新消息
+    position: 定制家居龙头
+    aliases:
+    - '603833'
+  欧科亿:
+    ticker: '688308'
+    exchange: SSE
+    sectors: []
+    themes:
+    - 高端制造
+    news_queries:
+    - 欧科亿 最新消息
+    position: 数控刀片龙头
+    aliases:
+    - '688308'
+  歌力思:
+    ticker: '603808'
+    exchange: SSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 歌力思 最新消息
+    position: 高级女装
+    aliases:
+    - '603808'
+  沃尔德:
+    ticker: '688028'
+    exchange: SSE
+    sectors: []
+    themes:
+    - 高端制造
+    news_queries:
+    - 沃尔德 最新消息
+    position: 超硬刀具材料
+    aliases:
+    - '688028'
+  泽达易盛:
+    ticker: '688555'
+    exchange: SSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 泽达易盛 最新消息
+    position: 信息技术服务
+    aliases:
+    - '688555'
+  洋河股份:
+    ticker: '002304'
+    exchange: SZSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 洋河股份 最新消息
+    position: 白酒龙头
+    aliases:
+    - '002304'
+  洽洽食品:
+    ticker: '002557'
+    exchange: SZSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 洽洽食品 最新消息
+    position: 坚果炒货龙头
+    aliases:
+    - '002557'
+  派克新材:
+    ticker: '605123'
+    exchange: SSE
+    sectors: []
+    themes:
+    - 高端制造
+    news_queries:
+    - 派克新材 最新消息
+    position: 航空航天锻件
+    aliases:
+    - '605123'
+  海天瑞声:
+    ticker: '688787'
+    exchange: SSE
+    sectors:
+    - AI应用
+    themes:
+    - AI产业链
+    news_queries:
+    - 海天瑞声 最新消息
+    position: AI训练数据服务龙头
+    aliases:
+    - '688787'
+  海底捞:
+    ticker: 9658.HK
+    exchange: HKEX
+    sectors: []
+    themes: []
+    news_queries:
+    - 海底捞 最新消息
+    position: 火锅连锁龙头
+    aliases:
+    - 9658.HK
+  海康威视:
+    ticker: '002415'
+    exchange: SZSE
+    sectors:
+    - GPU与AI芯片
+    - AI应用
+    themes:
+    - AI产业链
+    news_queries:
+    - 海康威视 最新消息
+    position: 全球安防AI龙头
+    aliases:
+    - '002415'
+  海澜之家:
+    ticker: '600398'
+    exchange: SSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 海澜之家 最新消息
+    position: 男装龙头
+    aliases:
+    - '600398'
+  溢多利:
+    ticker: '300381'
+    exchange: SZSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 溢多利 最新消息
+    position: 生物酶制剂
+    aliases:
+    - '300381'
+  潮宏基:
+    ticker: '002345'
+    exchange: SZSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 潮宏基 最新消息
+    position: 时尚珠宝
+    aliases:
+    - '002345'
+  火炬电子:
+    ticker: '603678'
+    exchange: SSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 火炬电子 最新消息
+    position: ''
+    aliases:
+    - '603678'
+  爱婴室:
+    ticker: '603214'
+    exchange: SSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 爱婴室 最新消息
+    position: 母婴连锁
+    aliases:
+    - '603214'
+  玉禾田:
+    ticker: '300815'
+    exchange: SZSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 玉禾田 最新消息
+    position: 环卫服务
+    aliases:
+    - '300815'
+  玲珑轮胎:
+    ticker: '601966'
+    exchange: SSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 玲珑轮胎 最新消息
+    position: 轮胎龙头
+    aliases:
+    - '601966'
+  珀莱雅:
+    ticker: '603605'
+    exchange: SSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 珀莱雅 最新消息
+    position: 化妆品龙头
+    aliases:
+    - '603605'
+  百傲化学:
+    ticker: '603360'
+    exchange: SSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 百傲化学 最新消息
+    position: 工业杀菌剂龙头
+    aliases:
+    - '603360'
+  百济神州:
+    ticker: '688235'
+    exchange: SSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 百济神州 最新消息
+    position: 创新药国际化龙头
+    aliases:
+    - '688235'
+  盈建科:
+    ticker: '300935'
+    exchange: SZSE
+    sectors:
+    - EDA与IP
+    themes:
+    - AI产业链
+    news_queries:
+    - 盈建科 最新消息
+    position: 建筑设计软件
+    aliases:
+    - '300935'
+  石英股份:
+    ticker: '603688'
+    exchange: SSE
+    sectors:
+    - 半导体材料
+    themes:
+    - AI产业链
+    - 半导体国产替代
+    news_queries:
+    - 石英股份 最新消息
+    position: 高纯石英砂龙头
+    aliases:
+    - '603688'
+  石药集团:
+    ticker: 1093.HK
+    exchange: HKEX
+    sectors: []
+    themes: []
+    news_queries:
+    - 石药集团 最新消息
+    position: 创新药+仿制药
+    aliases:
+    - 1093.HK
+  祥源新材:
+    ticker: '300980'
+    exchange: SZSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 祥源新材 最新消息
+    position: 聚烯烃发泡材料
+    aliases:
+    - '300980'
+  福斯特:
+    ticker: '603806'
+    exchange: SSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 福斯特 最新消息
+    position: 光伏胶膜龙头
+    aliases:
+    - '603806'
+  禾信仪器:
+    ticker: '688622'
+    exchange: SSE
+    sectors:
+    - 量检测设备
+    themes:
+    - AI产业链
+    - 半导体国产替代
+    news_queries:
+    - 禾信仪器 最新消息
+    position: 质谱仪国产替代
+    aliases:
+    - '688622'
+  科思科技:
+    ticker: '688788'
+    exchange: SSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 科思科技 最新消息
+    position: 军工电子信息
+    aliases:
+    - '688788'
+  索菲亚:
+    ticker: '002572'
+    exchange: SZSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 索菲亚 最新消息
+    position: 定制家居
+    aliases:
+    - '002572'
+  绝味食品:
+    ticker: '603517'
+    exchange: SSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 绝味食品 最新消息
+    position: 卤味连锁龙头
+    aliases:
+    - '603517'
+  绿茵生态:
+    ticker: 002887
+    exchange: SZSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 绿茵生态 最新消息
+    position: 生态园林
+    aliases:
+    - 002887
+  网易:
+    ticker: 9999.HK
+    exchange: HKEX
+    sectors:
+    - AI应用
+    themes:
+    - AI产业链
+    news_queries:
+    - 网易 最新消息
+    position: 游戏+AI+有道大模型
+    aliases:
+    - 9999.HK
+  美凯龙:
+    ticker: '601828'
+    exchange: SSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 美凯龙 最新消息
+    position: 家居零售龙头
+    aliases:
+    - '601828'
+  美团:
+    ticker: 3690.HK
+    exchange: HKEX
+    sectors:
+    - AI应用
+    themes:
+    - AI产业链
+    news_queries:
+    - 美团 最新消息
+    position: 本地生活AI+配送自动化
+    aliases:
+    - 3690.HK
+  老凤祥:
+    ticker: '600612'
+    exchange: SSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 老凤祥 最新消息
+    position: 黄金珠宝龙头
+    aliases:
+    - '600612'
+  联影医疗:
+    ticker: '688271'
+    exchange: SSE
+    sectors:
+    - GPU与AI芯片
+    - AI应用
+    themes:
+    - AI产业链
+    news_queries:
+    - 联影医疗 最新消息
+    position: 高端医疗影像AI龙头
+    aliases:
+    - '688271'
+  腾讯:
+    ticker: 0700.HK
+    exchange: HKEX
+    sectors:
+    - 算力基建
+    - AI应用
+    themes:
+    - AI产业链
+    news_queries:
+    - 腾讯 最新消息
+    position: 腾讯云+混元大模型
+    aliases:
+    - 0700.HK
+  至纯科技:
+    ticker: '603690'
+    exchange: SSE
+    sectors:
+    - 半导体设备
+    - 清洗设备
+    themes:
+    - AI产业链
+    - 半导体国产替代
+    news_queries:
+    - 至纯科技 最新消息
+    position: 高纯工艺系统+清洗设备
+    aliases:
+    - '603690'
+  航发动力:
+    ticker: '600893'
+    exchange: SSE
+    sectors: []
+    themes:
+    - 高端制造
+    news_queries:
+    - 航发动力 最新消息
+    position: 航空发动机龙头
+    aliases:
+    - '600893'
+  航发控制:
+    ticker: 000738
+    exchange: SZSE
+    sectors: []
+    themes:
+    - 高端制造
+    news_queries:
+    - 航发控制 最新消息
+    position: 航空发动机控制系统
+    aliases:
+    - 000738
+  航发科技:
+    ticker: '600391'
+    exchange: SSE
+    sectors: []
+    themes:
+    - 高端制造
+    news_queries:
+    - 航发科技 最新消息
+    position: 航空发动机零部件
+    aliases:
+    - '600391'
+  航天发展:
+    ticker: '000547'
+    exchange: SZSE
+    sectors: []
+    themes:
+    - 高端制造
+    news_queries:
+    - 航天发展 最新消息
+    position: 航天防务电子
+    aliases:
+    - '000547'
+  芒果超媒:
+    ticker: '300413'
+    exchange: SZSE
+    sectors:
+    - AI应用
+    themes:
+    - AI产业链
+    news_queries:
+    - 芒果超媒 最新消息
+    position: 流媒体+AI内容
+    aliases:
+    - '300413'
+  苏博特:
+    ticker: '603916'
+    exchange: SSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 苏博特 最新消息
+    position: 混凝土外加剂龙头
+    aliases:
+    - '603916'
+  苏试试验:
+    ticker: '300416'
+    exchange: SZSE
+    sectors:
+    - 量检测设备
+    themes:
+    - AI产业链
+    - 半导体国产替代
+    news_queries:
+    - 苏试试验 最新消息
+    position: 半导体可靠性试验设备
+    aliases:
+    - '300416'
+  茅台:
+    ticker: '600519'
+    exchange: SSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 茅台 最新消息
+    position: ''
+    aliases:
+    - '600519'
+  药明康德:
+    ticker: '603259'
+    exchange: SSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 药明康德 最新消息
+    position: 全球CXO龙头
+    aliases:
+    - '603259'
+  药明生物:
+    ticker: 2269.HK
+    exchange: HKEX
+    sectors: []
+    themes: []
+    news_queries:
+    - 药明生物 最新消息
+    position: 生物药CXO龙头
+    aliases:
+    - 2269.HK
+  菲利华:
+    ticker: '300395'
+    exchange: SZSE
+    sectors:
+    - 半导体材料
+    themes:
+    - AI产业链
+    - 半导体国产替代
+    news_queries:
+    - 菲利华 最新消息
+    position: 石英玻璃材料龙头
+    aliases:
+    - '300395'
+  虹软科技:
+    ticker: '688088'
+    exchange: SSE
+    sectors:
+    - AI应用
+    themes:
+    - AI产业链
+    news_queries:
+    - 虹软科技 最新消息
+    position: AI视觉算法龙头
+    aliases:
+    - '688088'
+  视觉中国:
+    ticker: 000681
+    exchange: SZSE
+    sectors:
+    - AI应用
+    themes:
+    - AI产业链
+    news_queries:
+    - 视觉中国 最新消息
+    position: 图片版权+AI生成
+    aliases:
+    - 000681
+  设计总院:
+    ticker: '603357'
+    exchange: SSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 设计总院 最新消息
+    position: 工程设计咨询
+    aliases:
+    - '603357'
+  贝泰妮:
+    ticker: '300957'
+    exchange: SZSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 贝泰妮 最新消息
+    position: 功效护肤品龙头
+    aliases:
+    - '300957'
+  赛轮轮胎:
+    ticker: '601058'
+    exchange: SSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 赛轮轮胎 最新消息
+    position: 轮胎龙头
+    aliases:
+    - '601058'
+  迈瑞医疗:
+    ticker: '300760'
+    exchange: SZSE
+    sectors: []
+    themes:
+    - 高端制造
+    news_queries:
+    - 迈瑞医疗 最新消息
+    position: 医疗器械龙头
+    aliases:
+    - '300760'
+  道氏技术:
+    ticker: '300409'
+    exchange: SZSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 道氏技术 最新消息
+    position: 陶瓷材料+新能源材料
+    aliases:
+    - '300409'
+  金禾实业:
+    ticker: 002597
+    exchange: SZSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 金禾实业 最新消息
+    position: 甜味剂龙头
+    aliases:
+    - 002597
+  锦江股份:
+    ticker: '600754'
+    exchange: SSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 锦江股份 最新消息
+    position: 酒店连锁龙头
+    aliases:
+    - '600754'
+  长安汽车:
+    ticker: '000625'
+    exchange: SZSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 长安汽车 最新消息
+    position: 汽车+智能驾驶
+    aliases:
+    - '000625'
+  长江证券:
+    ticker: 000783
+    exchange: SZSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 长江证券 最新消息
+    position: 中部券商
+    aliases:
+    - 000783
+  阿拉丁:
+    ticker: '688179'
+    exchange: SSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 阿拉丁 最新消息
+    position: 科研试剂龙头
+    aliases:
+    - '688179'
+  阿里巴巴:
+    ticker: 9988.HK
+    exchange: HKEX
+    sectors:
+    - 算力基建
+    - AI应用
+    themes:
+    - AI产业链
+    news_queries:
+    - 阿里巴巴 最新消息
+    position: 阿里云+通义大模型
+    aliases:
+    - 9988.HK
+  陆家嘴:
+    ticker: '600663'
+    exchange: SSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 陆家嘴 最新消息
+    position: 商业地产
+    aliases:
+    - '600663'
+  雅克科技:
+    ticker: 002409
+    exchange: SZSE
+    sectors:
+    - 半导体材料
+    - 电子特气
+    themes:
+    - AI产业链
+    - 半导体国产替代
+    news_queries:
+    - 雅克科技 最新消息
+    position: 电子特气+光刻胶材料
+    aliases:
+    - 002409
+  雪榕生物:
+    ticker: '300511'
+    exchange: SZSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 雪榕生物 最新消息
+    position: 食用菌龙头
+    aliases:
+    - '300511'
+  飞亚达:
+    ticker: '000026'
+    exchange: SZSE
+    sectors: []
+    themes: []
+    news_queries:
+    - 飞亚达 最新消息
+    position: 手表龙头
+    aliases:
+    - '000026'
+  飞凯材料:
+    ticker: '300398'
+    exchange: SZSE
+    sectors:
+    - 半导体材料
+    themes:
+    - AI产业链
+    - 半导体国产替代
+    news_queries:
+    - 飞凯材料 最新消息
+    position: 半导体湿电子化学品
+    aliases:
+    - '300398'
+  鼎龙股份:
+    ticker: '300054'
+    exchange: SZSE
+    sectors:
+    - 半导体材料
+    themes:
+    - AI产业链
+    - 半导体国产替代
+    news_queries:
+    - 鼎龙股份 最新消息
+    position: CMP抛光垫+光电显示材料
+    aliases:
+    - '300054'
+questions:
+  GPU与AI芯片:
+  - 各家GPU产品性能对比如何？
+  - 国产AI芯片替代进展？
+  - GPU供需格局和价格趋势？
+  - AI芯片架构创新方向？
+  半导体设备:
+  - 各环节设备国产化率？
+  - 先进制程设备进展？
+  - 大客户订单和扩产计划？
+  - 美国制裁对设备出口的影响？
+  半导体材料:
+  - 各环节材料国产化率？
+  - 大硅片、光刻胶等关键材料突破？
+  - 原材料价格波动影响？
+  半导体代工:
+  - 先进制程产能利用率？
+  - 成熟制程竞争格局？
+  - 各厂商扩产计划和资本开支？
+  封测:
+  - 先进封装(CoWoS/HBM)产能？
+  - 封测厂商订单能见度？
+  - Chiplet技术进展？
+  EDA与IP:
+  - 国产EDA工具覆盖度？
+  - AI辅助EDA技术进展？
+  光模块:
+  - 800G/1.6T产品出货节奏？
+  - CPO技术商用进展？
+  - 海外云厂商资本开支趋势？
+  液冷:
+  - 液冷渗透率提升趋势？
+  - 浸没式vs冷板式技术路线？
+  - 数据中心液冷改造需求？
+  算力基建:
+  - 国内智算中心建设进度？
+  - AI服务器出货量和ASP趋势？
+  - 算力租赁商业模式？
+  电力基建:
+  - 数据中心电力需求增长？
+  - 储能配套比例？
+  - 特高压/智能电网建设？
+  AI应用:
+  - 大模型能力演进？
+  - AI应用商业化进展？
+  - Agent/工作流自动化落地？
+  密封件:
+  - 下游需求景气度如何？
+  - 国产替代进展？
+  - 重大订单或技术突破？
+settings:
+  name_blacklist:
+  - 有限公司
+  - 股份公司
+  - 集团公司
+  - 股份有限公司
+  - 证券时报
+  - 搜狐证券
+  - 东方财富
+  - 新浪财经
+  - 格隆汇
+  - 富途牛牛
+  - 腾讯证券
+  - 东莞证券
+  - 开源证券
+  - 国泰君安
+  - 中信证券
+  - 华泰证券
+  - 招商证券
+  - 海通证券
+  - 广发证券
+  - 申万宏源
+  - 中金公司
+  - 上海证券
+  - 深圳证券
+  - 经营证券
+  - 增值电信
+  - 互联网新闻信息服务
+  - 人工智能
+  - 联网新闻信息
+  - 发布虚假信息
+  - 尚未完善信息
+  - 名称变更信息
+  - 先进陶瓷材料
+  - 国产半导体
+  - 第三代半导体
+  - 中国医学装备
+  - 世界人工智能
+  - 促进感知智能
+  keyword_meta:
+    default_specificity: 0.5
+    min_specificity_threshold: 0.3
+    specificity_overrides:
+      检测: 0.1
+      发展: 0.1
+      增长: 0.1
+      技术: 0.1
+      竞争: 0.1
+      创新: 0.1
+      产能: 0.1
+      市场: 0.1
+      供应链: 0.1
+      国产: 0.15
+      半导体: 0.2
+      芯片: 0.2
+      代工: 0.35
+      封装: 0.4
+      晶圆: 0.4
+      Foundry: 0.4
+      前道设备: 0.45
+      晶圆设备: 0.45
+      芯片材料: 0.45
+      晶圆材料: 0.45
+      芯片设备: 0.45
+      芯片代工: 0.45
+      晶圆代工: 0.45
+      半导体代工: 0.5
+      半导体材料: 0.5
+      半导体设备: 0.5
+      液冷: 0.5
+      光模块: 0.55
+      储能: 0.55
+      算力: 0.55
+      芯片设计: 0.55
+      IP核: 0.55
+      清洗: 0.55
+      刻蚀: 0.7
+      光刻: 0.7
+      薄膜: 0.7
+      CMP: 0.7
+      EDA: 0.7
+      硅片: 0.65
+      光刻胶: 0.7
+      电子特气: 0.7
+      靶材: 0.7
+      密封: 0.65
+      加速卡: 0.65
+      GPU: 0.65
+      NPU: 0.7
+      TPU: 0.7
+      AI芯片: 0.7
+      AI处理器: 0.7
+      先进封装: 0.75
+      封装测试: 0.7
+      CoWoS: 0.95
+      HBM: 0.95
+      EUV: 0.95
+      DUV: 0.9
+      CMP设备: 0.9
+      EDA与IP: 0.85
+      光刻设备: 0.85
+      刻蚀设备: 0.85
+      薄膜沉积设备: 0.85
+      清洗设备: 0.85
+      量检测设备: 0.85
+      靶材CMP: 0.85
+      AI产业链: 0.9
+      半导体国产替代: 0.9
+      高端制造: 0.8
+  relevance_weights:
+    company_hint: 1.0
+    sector_cascade: 0.5
+    keyword_max: 0.7
+    company_mention: 0.3
+    min_score_threshold: 0.3
+    prominent_mention_chars: 500
+    prominent_mention_count: 3

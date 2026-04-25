@@ -130,7 +130,7 @@ class TestPhase1Integration:
 llm:
   provider: "deepseek"
   api_key: ""
-  model: "deepseek-reasoner"
+  model: "deepseek-v4-flash"
   base_url: "https://api.deepseek.com"
 search:
   engine: "tavily"
@@ -222,7 +222,7 @@ search:
 llm:
   provider: "deepseek"
   api_key: "file-key-123"
-  model: "deepseek-reasoner"
+  model: "deepseek-v4-flash"
   base_url: "https://api.deepseek.com"
 search:
   engine: "tavily"

@@ -24,7 +24,7 @@ schedule:
 llm:
   provider: "deepseek"
   api_key: "sk-test-key-123"
-  model: "deepseek-reasoner"
+  model: "deepseek-v4-flash"
   base_url: "https://api.deepseek.com"
 
 search:
@@ -128,7 +128,7 @@ class TestConfigDefaults:
         
         llm = LLMConfig()
         assert llm.provider == "deepseek"
-        assert llm.max_tokens == 1024
+        assert llm.max_tokens == 8192
         assert llm.temperature == 0.3
         
         search = SearchConfig()

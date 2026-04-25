@@ -61,9 +61,9 @@ schedule:
 llm:
   provider: "deepseek"
   api_key: "sk-test-key-12345"
-  model: "deepseek-reasoner"
+  model: "deepseek-v4-flash"
   base_url: "https://api.deepseek.com"
-  max_tokens: 1024
+  max_tokens: 8192
   temperature: 0.3
 
 search:
@@ -106,10 +106,10 @@ type: news
 def temp_wiki_structure(wiki_root, sample_graph_yaml, sample_config_yaml):
     """创建临时 wiki 目录结构"""
     # 创建目录
-    (wiki_root / "companies").mkdir()
-    (wiki_root / "sectors").mkdir()
-    (wiki_root / "themes").mkdir()
-    (wiki_root / "scripts").mkdir()
+    (wiki_root / "companies").mkdir(exist_ok=True)
+    (wiki_root / "sectors").mkdir(exist_ok=True)
+    (wiki_root / "themes").mkdir(exist_ok=True)
+    (wiki_root / "scripts").mkdir(exist_ok=True)
     
     # 创建文件
     (wiki_root / "graph.yaml").write_text(sample_graph_yaml)
@@ -119,10 +119,10 @@ def temp_wiki_structure(wiki_root, sample_graph_yaml, sample_config_yaml):
     
     # 创建公司目录
     company_dir = wiki_root / "companies" / "中微公司"
-    company_dir.mkdir()
-    (company_dir / "wiki").mkdir()
-    (company_dir / "raw").mkdir()
-    (company_dir / "raw" / "news").mkdir()
+    company_dir.mkdir(exist_ok=True)
+    (company_dir / "wiki").mkdir(exist_ok=True)
+    (company_dir / "raw").mkdir(exist_ok=True)
+    (company_dir / "raw" / "news").mkdir(exist_ok=True)
     
     return wiki_root
 

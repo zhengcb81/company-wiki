@@ -102,6 +102,8 @@ def generate_stockinfo_config(config, companies=None, pages=None):
             page["allowed_keywords"] = p["allowed_keywords"]
         if p.get("reverse_order"):
             page["reverse_order"] = p["reverse_order"]
+        if p.get("blocked_keywords"):
+            page["blocked_keywords"] = p["blocked_keywords"]
         sd_pages.append(page)
 
     # 构建 companies 配置

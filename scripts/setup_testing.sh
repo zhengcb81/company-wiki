@@ -77,7 +77,7 @@ schedule:
 llm:
   provider: "deepseek"
   api_key: "sk-test-key-12345"
-  model: "deepseek-reasoner"
+  model: "deepseek-v4-flash"
   base_url: "https://api.deepseek.com"
   max_tokens: 1024
   temperature: 0.3

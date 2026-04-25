@@ -1,0 +1,286 @@
+nodes:
+  AI产业链:
+    type: theme
+    description: 从芯片到应用的完整AI产业链
+    keywords:
+    - AI产业链
+  GPU与AI芯片:
+    type: sector
+    parent_theme:
+    - AI产业链
+    description: AI训练/推理用GPU、NPU、TPU等专用芯片
+    tier: 3
+    keywords:
+    - GPU与AI芯片
+    - GPU
+    - AI芯片
+    - NPU
+    - TPU
+    - 加速卡
+    - AI处理器
+  半导体设备:
+    type: sector
+    parent_theme:
+    - AI产业链
+    description: 半导体制造设备：刻蚀、薄膜、清洗、检测、光刻等
+    tier: 5
+    keywords:
+    - 半导体设备
+    - 芯片设备
+    - 晶圆设备
+    - 前道设备
+  半导体材料:
+    type: sector
+    parent_theme:
+    - AI产业链
+    description: 硅片、光刻胶、靶材、电子特气、CMP材料等
+    tier: 5
+    keywords:
+    - 半导体材料
+    - 芯片材料
+    - 晶圆材料
+  半导体代工:
+    type: sector
+    parent_theme:
+    - AI产业链
+    description: 晶圆代工制造
+    tier: 4
+    keywords:
+    - 半导体代工
+    - 晶圆代工
+    - 芯片代工
+    - Foundry
+  封测:
+    type: sector
+    parent_theme:
+    - AI产业链
+    description: 芯片封装与测试，包括先进封装(CoWoS, HBM)
+    tier: 3
+    keywords:
+    - 封测
+    - 封装测试
+    - 先进封装
+    - CoWoS
+    - HBM
+  EDA与IP:
+    type: sector
+    parent_theme:
+    - AI产业链
+    description: 芯片设计工具和IP核
+    tier: 4
+    keywords:
+    - EDA与IP
+    - EDA
+    - 芯片设计
+    - IP核
+  光模块:
+    type: sector
+    parent_theme:
+    - AI产业链
+    description: 数据中心光通信模块，AI算力互联核心
+    tier: 2
+    keywords:
+    - 光模块
+    - 光通信
+    - 800G
+    - 1.6T
+    - CPO
+  液冷:
+    type: sector
+    parent_theme:
+    - AI产业链
+    description: AI服务器液冷散热解决方案
+    tier: 2
+    keywords:
+    - 液冷
+    - 散热
+    - 温控
+    - 浸没式
+  算力基建:
+    type: sector
+    parent_theme:
+    - AI产业链
+    description: AI服务器整机、数据中心建设、算力租赁
+    tier: 2
+    keywords:
+    - 算力基建
+    - 算力
+    - AI服务器
+    - 数据中心
+    - 智算中心
+  电力基建:
+    type: sector
+    parent_theme:
+    - AI产业链
+    description: 数据中心电力供应：发电设备、储能、输配电、UPS
+    tier: 1
+    keywords:
+    - 电力基建
+    - 电力
+    - 供电
+    - 配电
+    - UPS
+    - 储能
+  AI应用:
+    type: sector
+    parent_theme:
+    - AI产业链
+    description: 大模型、AI Agent、行业AI应用
+    tier: 0
+    keywords:
+    - AI应用
+    - 大模型
+    - AI Agent
+    - 人工智能应用
+  刻蚀设备:
+    type: subsector
+    parent_sector:
+    - 半导体设备
+    parent_theme:
+    - AI产业链
+    keywords:
+    - 刻蚀设备
+    - 刻蚀
+    - Etch
+    - ICP
+    - CCP
+  薄膜沉积设备:
+    type: subsector
+    parent_sector:
+    - 半导体设备
+    parent_theme:
+    - AI产业链
+    keywords:
+    - 薄膜沉积设备
+    - 薄膜
+    - CVD
+    - PVD
+    - ALD
+  量检测设备:
+    type: subsector
+    parent_sector:
+    - 半导体设备
+    parent_theme:
+    - AI产业链
+    keywords:
+    - 量检测设备
+    - 量检测
+    - 检测
+    - 量测
+  光刻设备:
+    type: subsector
+    parent_sector:
+    - 半导体设备
+    parent_theme:
+    - AI产业链
+    keywords:
+    - 光刻设备
+    - 光刻
+    - Lithography
+  清洗设备:
+    type: subsector
+    parent_sector:
+    - 半导体设备
+    parent_theme:
+    - AI产业链
+    keywords:
+    - 清洗设备
+    - 清洗
+    - Cleaning
+  CMP设备:
+    type: subsector
+    parent_sector:
+    - 半导体设备
+    parent_theme:
+    - AI产业链
+    keywords:
+    - CMP设备
+    - CMP
+    - 化学机械抛光
+  硅片:
+    type: subsector
+    parent_sector:
+    - 半导体材料
+    parent_theme:
+    - AI产业链
+    keywords:
+    - 硅片
+    - 硅晶圆
+    - Wafer
+  光刻胶:
+    type: subsector
+    parent_sector:
+    - 半导体材料
+    parent_theme:
+    - AI产业链
+    keywords:
+    - 光刻胶
+    - Photoresist
+  电子特气:
+    type: subsector
+    parent_sector:
+    - 半导体材料
+    parent_theme:
+    - AI产业链
+    keywords:
+    - 电子特气
+    - 电子气体
+    - 特种气体
+  靶材CMP:
+    type: subsector
+    parent_sector:
+    - 半导体材料
+    parent_theme:
+    - AI产业链
+    keywords:
+    - 靶材CMP
+    - 靶材
+    - Sputtering
+  发电设备:
+    type: subsector
+    parent_sector:
+    - 电力基建
+    parent_theme:
+    - AI产业链
+    keywords:
+    - 发电设备
+    - 发电
+    - 电力生产
+  储能:
+    type: subsector
+    parent_sector:
+    - 电力基建
+    parent_theme:
+    - AI产业链
+    keywords:
+    - 储能
+    - 电池
+    - Energy Storage
+  输配电:
+    type: subsector
+    parent_sector:
+    - 电力基建
+    parent_theme:
+    - AI产业链
+    keywords:
+    - 输配电
+    - 输电
+    - 配电
+    - 电网
+    - 特高压
+  密封件:
+    type: sector
+    description: 高端密封件行业，应用于石化、核电、航空航天等领域
+    tier: 4
+    keywords:
+    - 密封
+    - 密封件
+    - 机械密封
+    - 干气密封
+  高端制造:
+    type: theme
+    description: 高端制造业国产替代与技术升级
+    keywords:
+    - 高端制造
+    - 智能制造
+    - 工业母机

@@ -172,25 +172,38 @@ def check_broken_links(result):
 
 
 def check_config_consistency(result, config):
-    """检查 config.yaml 与目录结构是否一致"""
-    # 检查公司目录
-    for company in config.get("companies", []):
-        name = company["name"]
-        company_dir = WIKI_ROOT / "companies" / name
-        if not company_dir.exists():
-            result.add("ERROR", "config", f"Company directory missing: {name}")
+    """检查 companies.yaml / sectors.yaml 与目录结构是否一致"""
+    try:
+        import yaml
+    except ImportError:
+        return
 
-    # 检查行业目录
-    for sector_name in config.get("sectors", {}):
-        sector_dir = WIKI_ROOT / "sectors" / sector_name
-        if not sector_dir.exists():
-            result.add("ERROR", "config", f"Sector directory missing: {sector_name}")
+    # 加载 companies.yaml
+    companies_path = WIKI_ROOT / "companies.yaml"
+    if companies_path.exists():
+        with open(companies_path, "r", encoding="utf-8") as f:
+            companies_data = yaml.safe_load(f) or {}
+        for name in companies_data.get("companies", {}):
+            company_dir = WIKI_ROOT / "companies" / name
+            if not company_dir.exists():
+                result.add("WARNING", "config", f"Company directory missing: {name}")
 
-    # 检查主题目录
-    for theme_name in config.get("themes", {}):
-        theme_dir = WIKI_ROOT / "themes" / theme_name
-        if not theme_dir.exists():
-            result.add("ERROR", "config", f"Theme directory missing: {theme_name}")
+    # 加载 sectors.yaml
+    sectors_path = WIKI_ROOT / "sectors.yaml"
+    if sectors_path.exists():
+        with open(sectors_path, "r", encoding="utf-8") as f:
+            sectors_data = yaml.safe_load(f) or {}
+        for node_name in sectors_data.get("nodes", {}):
+            node_info = sectors_data["nodes"][node_name]
+            node_type = node_info.get("type", "")
+            if node_type == "sector":
+                node_dir = WIKI_ROOT / "sectors" / node_name
+            elif node_type == "theme":
+                node_dir = WIKI_ROOT / "themes" / node_name
+            else:
+                continue
+            if not node_dir.exists():
+                result.add("WARNING", "config", f"{node_type.capitalize()} directory missing: {node_name}")
 
 
 def check_data_freshness(result):
@@ -284,8 +297,8 @@ def check_semantic_contradictions(result):
 
         try:
             response = client.chat(prompt, max_tokens=512)
-            if response and "无矛盾" not in response:
-                for line in response.strip().split("\n"):
+            if response and response.content and "无矛盾" not in response.content:
+                for line in response.content.strip().split("\n"):
                     line = line.strip()
                     if line.startswith("矛盾:") or line.startswith("矛盾："):
                         result.add("WARNING", "semantic",
@@ -356,8 +369,8 @@ def discover_missing_concepts(result):
 
     try:
         response = client.chat(prompt, max_tokens=512)
-        if response and "无缺失概念" not in response:
-            for line in response.strip().split("\n"):
+        if response and response.content and "无缺失概念" not in response.content:
+            for line in response.content.strip().split("\n"):
                 line = line.strip()
                 if line.startswith("概念:") or line.startswith("概念："):
                     result.add("INFO", "missing",
@@ -403,8 +416,8 @@ def check_claim_freshness(result):
 
         try:
             response = client.chat(prompt, max_tokens=256)
-            if response and "无过时结论" not in response:
-                for line in response.strip().split("\n"):
+            if response and response.content and "无过时结论" not in response.content:
+                for line in response.content.strip().split("\n"):
                     line = line.strip()
                     if line.startswith("过时:") or line.startswith("过时："):
                         result.add("WARNING", "freshness_llm",
@@ -643,8 +656,8 @@ def check_web_searchable_gaps(result):
 
     try:
         response = client.chat(prompt, max_tokens=512)
-        if response and "无搜索建议" not in response:
-            for line in response.strip().split("\n"):
+        if response and response.content and "无搜索建议" not in response.content:
+            for line in response.content.strip().split("\n"):
                 line = line.strip()
                 if line.startswith("搜索:") or line.startswith("搜索："):
                     result.add("INFO", "web_gaps",
@@ -696,6 +709,8 @@ def main():
     parser.add_argument("--llm", action="store_true",
                         help="启用 LLM 驱动的检查 (semantic, missing, freshness_llm)")
     parser.add_argument("--json", action="store_true", help="输出 JSON 格式")
+    parser.add_argument("--fix", action="store_true",
+                        help="自动修复可修复的问题（如 broken links）")
     args = parser.parse_args()
 
     checks = args.check.split(",") if args.check != "all" else ["all"]
@@ -726,6 +741,35 @@ def main():
         print(f"\n{'=' * 50}")
         print(f"  Summary: {errors} errors, {warnings} warnings, {infos} info")
         print(f"{'=' * 50}")
+
+    # 自动修复
+    if args.fix:
+        print("\n" + "=" * 50)
+        print("  自动修复")
+        print("=" * 50)
+
+        # 修复 broken links
+        broken_link_count = sum(1 for i in result.issues if i['category'] == 'broken_link')
+        if broken_link_count > 0:
+            print(f"\n  修复 broken links ({broken_link_count} 个)...")
+            try:
+                import subprocess
+                fix_script = SCRIPTS_DIR / "fix_broken_links.py"
+                if fix_script.exists():
+                    proc = subprocess.run(
+                        [sys.executable, str(fix_script)],
+                        capture_output=True, text=True, cwd=str(WIKI_ROOT)
+                    )
+                    if proc.returncode == 0:
+                        print(f"  ✓ {proc.stdout.strip().split(chr(10))[-1]}")
+                    else:
+                        print(f"  ✗ 修复失败: {proc.stderr[:100]}")
+                else:
+                    print(f"  ✗ 修复脚本不存在: {fix_script}")
+            except Exception as e:
+                print(f"  ✗ 修复异常: {e}")
+        else:
+            print("\n  无需修复 broken links")
 
     # 记录到 log
     errors, warnings, infos = result.summary()

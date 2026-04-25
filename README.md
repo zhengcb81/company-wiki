@@ -198,7 +198,7 @@ python3 scripts/auto_discover.py
 llm:
   provider: "deepseek"
   api_key: ""  # 使用环境变量
-  model: "deepseek-reasoner"
+  model: "deepseek-v4-flash"
 
 # 搜索配置
 search:

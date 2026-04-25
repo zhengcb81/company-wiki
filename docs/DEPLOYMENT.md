@@ -83,7 +83,7 @@ schedule:
 llm:
   provider: "deepseek"
   api_key: ""  # 使用环境变量 DEEPSEEK_API_KEY
-  model: "deepseek-reasoner"
+  model: "deepseek-v4-flash"
   base_url: "https://api.deepseek.com"
   max_tokens: 1024
   temperature: 0.3

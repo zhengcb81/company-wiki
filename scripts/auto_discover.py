@@ -59,25 +59,80 @@ class QuestionSuggestion:
 def extract_company_names(text: str) -> List[str]:
     """
     从文本中提取公司名称
-    
+
     Args:
         text: 文本
-        
+
     Returns:
         公司名称列表
     """
-    # 常见公司名称模式
+    # 噪声词黑名单 — 这些不是公司名
+    _NOISE_PHRASES = {
+        # 财务报告 boilerplate
+        "归属于上市公司", "公开发行证券的公司", "该指标侧面反映出一家公司",
+        "市净率是公司", "每股收益是公司", "每股净资产是公司",
+        "请问公司", "公司拟", "公司决定", "公司认为", "公司预计",
+        "公司公告", "公司股票", "公司债券", "公司治理",
+        "上市公司", "股份有限公司", "有限责任公司",
+        "公司简称", "公司全称", "公司名称", "公司代码",
+        "公司现有", "公司目前", "公司未来", "公司计划",
+        # 常见非公司短语
+        "公司营收", "公司利润", "公司股价", "公司市值",
+        "公司业务", "公司产品", "公司技术", "公司研发",
+        "公司客户", "公司订单", "公司产能", "公司业绩",
+        # 财务/法律术语（非公司名）
+        "公开发行证券", "证券投资基金", "证券投资", "基金管理",
+        "资产管理", "投资管理", "投资咨询", "投资有限",
+        "有限合伙", "合伙企业", "企业集团", "控股有限",
+        "控股股份", "控股科技", "控股电子",
+    }
+
+    _NOISE_CAPS = {
+        "CEO", "CFO", "CTO", "COO", "HTTP", "HTTPS", "HTML", "CSS", "JSON",
+        "XML", "API", "SDK", "PDF", "DOC", "XLS", "PPT", "USA", "CNY", "USD",
+        "RMB", "GDP", "IPO", "ROE", "ROA", "EPS", "PE", "PB", "AI", "IT",
+        "OK", "NO", "GO", "TO", "BY", "AT", "IS", "IN", "ON", "AS", "OR",
+        "INC", "LTD", "CORP", "PLC", "Q1", "Q2", "Q3", "Q4",
+        "FY", "H1", "H2", "YTD", "QOQ", "YOY",
+    }
+
+    # 公司名称模式 — 只匹配高置信度的模式
     patterns = [
-        r'[\u4e00-\u9fff]{2,}(?:公司|集团|股份|科技|电子|半导体|设备)',
-        r'[\u4e00-\u9fff]{2,}(?:Inc|Corp|Ltd|Co)',
-        r'[A-Z][a-zA-Z]+(?:Inc|Corp|Ltd|Co)',
+        # 中文公司名带明确后缀（至少2个汉字 + 后缀）
+        r'[\u4e00-\u9fff]{2,}(?:集团|股份|科技|电子|半导体|光电|微电子|集成电路|仪器|精密|新材|材料|化学|制药|生物|能源|环保|智能|机器人|通信|网络|软件|数据|云|计算|芯片|存储|显示|照明|电池|新能源|汽车|装备|机械|重工|航空|航天|船舶|钢铁|矿业|地产|金融|银行|保险|证券|基金|期货|信托|租赁|担保|典当)',
+        # 英文公司名带后缀
+        r'[A-Z][a-zA-Z]{2,}(?:\s+(?:Inc|Corp|Ltd|Co|Technologies|Semiconductor|Electronics|Systems|Solutions|Group|Holdings|Capital|Partners|Associates|International|Global|Digital|Networks|Software|Services))',
+        # 知名中文公司名（无标准后缀但有特征词）
+        r'[\u4e00-\u9fff]{2,}(?:跳动|小红书|大疆|美团|快手|滴滴|拼多多|京东|阿里|腾讯|百度|华为|小米|比亚迪|宁德时代|中芯|华虹|长电|通富|晶方|寒武纪|海光|景嘉微|龙芯|飞腾|兆芯|申威|紫光|长江存储|合肥长鑫|士兰微|华润微|斯达半导|闻泰|韦尔|卓胜微|圣邦|思瑞浦|芯原|芯朋微|晶晨|乐鑫|瑞芯微|全志|翱捷|芯海|兆易创新|北京君正|澜起|聚辰|普冉|东芯|恒烁|佰维|江波龙|群联|慧荣|联咏|瑞昱|敦南|致新|矽力杰|天钰|晶豪|力旺|旺宏|华邦|南亚科|华亚科)',
+        # "中X公司" 格式的知名公司（排除 boilerplate）
+        r'(?:中微|中芯|中兴|中环|中颖|中颖电子|中科创达|中际旭创|中科曙光|中科星图|中望软件|中微公司)',
+        # 知名简称（2-4字，高频出现在新闻标题中的公司）
+        r'(?:北方华创|拓荆科技|华海清科|盛美上海|芯源微|至纯科技|精测电子|赛腾股份|万业企业|凯世通|华峰测控|长川科技|联动科技|金海通|耐科装备|富乐德|芯碁微装|大族数控|德龙激光|帝尔激光|迈为股份|捷佳伟创|拉普拉斯|奥特维|京运通|晶盛机电|天通股份|连城数控)',
+        # 股票代码格式（如 002049.SZ）
+        r'\b\d{6}\.(?:SZ|SH|BJ)\b',
     ]
-    
+
     companies = set()
     for pattern in patterns:
         matches = re.findall(pattern, text)
-        companies.update(matches)
-    
+        for m in matches:
+            m = m.strip()
+            if not m:
+                continue
+            # 过滤噪声词
+            if m in _NOISE_PHRASES:
+                continue
+            # 过滤全大写噪声词
+            if m.isupper() and m in _NOISE_CAPS:
+                continue
+            # 过滤太短的（<2字符）
+            if len(m) < 2:
+                continue
+            # 过滤纯数字
+            if m.replace(".", "").isdigit():
+                continue
+            companies.add(m)
+
     return list(companies)
 
 
@@ -390,7 +445,7 @@ def save_suggestions(
     suggestions_file = WIKI_ROOT / "suggestions.json"
     
     data = {
-        "timestamp": str(Path(__file__).stat().st_mtime),
+        "timestamp": __import__('datetime').datetime.now().isoformat(),
         "companies": [
             {
                 "name": s.name,
@@ -474,9 +529,8 @@ def apply_company_suggestion(suggestion: Dict[str, Any], graph: Graph) -> bool:
         # 创建公司目录
         company_dir = WIKI_ROOT / "companies" / suggestion["name"]
         company_dir.mkdir(parents=True, exist_ok=True)
-        (company_dir / "raw").mkdir(exist_ok=True)
-        (company_dir / "raw" / "news").mkdir(exist_ok=True)
-        (company_dir / "wiki").mkdir(exist_ok=True)
+        (company_dir / "raw" / "news").mkdir(parents=True, exist_ok=True)
+        (company_dir / "wiki").mkdir(parents=True, exist_ok=True)
         
         return True
     
@@ -562,6 +616,197 @@ def apply_question_suggestion(suggestion: Dict[str, Any], graph: Graph) -> bool:
         return False
 
 
+def _filter_via_llm(candidates: list, known_companies: set, llm_client=None) -> list:
+    """
+    使用 LLM 过滤正则提取的候选列表，只保留真实公司名。
+
+    正则提取了大量 boilerplate 文本（如"该指标侧面反映出一家公司"），
+    LLM 可以从语义上判断哪些是真实的公司名称。
+
+    Args:
+        candidates: 候选列表，每项为 {"type": ..., "name": ..., "count": ...}
+        known_companies: 已知公司名集合（已跟踪的）
+        llm_client: LLM 客户端（可选，如果为 None 则自动获取）
+
+    Returns:
+        过滤后的候选列表（仅保留 LLM 确认的真实公司名）
+    """
+    if not candidates:
+        return []
+
+    if llm_client is None:
+        try:
+            from llm_client import get_llm_client
+            llm_client = get_llm_client()
+        except Exception:
+            return candidates  # 回退到不过滤
+
+    if not llm_client or not llm_client.available:
+        return candidates  # LLM 不可用时回退
+
+    # 构建候选列表文本（只传公司类型候选，排除 tech/link）
+    company_candidates = [c for c in candidates if c["type"] == "company"]
+    if not company_candidates:
+        return candidates  # 没有公司候选可过滤
+
+    candidate_text = "\n".join(
+        f"- {c['name']} (出现{c['count']}次)"
+        for c in company_candidates[:50]  # 最多 50 个
+    )
+
+    known_list = "\n".join(sorted(known_companies)[:30])
+
+    prompt = f"""你是一个上市公司名称识别专家。以下是 wiki 文本中出现的高频词组列表。
+请判断哪些是真实的公司名称（如"中微公司"、"北方华创"），哪些是通用词汇或财务术语（如"股份有限公司"、"归属于上市公司"、"市净率是公司"）。
+
+已知已跟踪的公司:
+{known_list}
+
+候选列表:
+{candidate_text}
+
+请以 JSON 格式输出，只包含确认为真实公司名的项:
+{{"valid_companies": ["公司名1", "公司名2", ...]}}
+
+判断标准:
+1. 是具体的公司名称（非通用术语、非财务 boilerplate）
+2. 不是已知跟踪公司（已知列表已排除）
+3. 是实际的上市公司或重要非上市公司（非虚构、非泛称）
+
+只输出 JSON，不要其他文字。如果没有有效的公司名，输出 {{"valid_companies": []}}。"""
+
+    try:
+        response = llm_client.chat_with_retry(
+            prompt,
+            "你是一个专业的上市公司名称识别助手。只输出JSON。",
+        )
+        if response.success:
+            import json
+            result = json.loads(response.content.strip())
+            valid_names = set(result.get("valid_companies", []))
+            # 只保留 LLM 确认的公司名
+            filtered = [
+                c for c in candidates
+                if c["type"] != "company" or c["name"] in valid_names
+            ]
+            return filtered
+    except Exception as e:
+        print(f"  LLM 过滤失败，回退到不过滤: {e}")
+
+    return candidates  # 出错时回退到不过滤
+
+
+def discover_from_wikis(graph: Graph, min_count: int = 3, top_n: int = 30, use_llm: bool = True) -> Dict:
+    """
+    扫描所有 wiki 时间线，发现未跟踪的高频实体。
+    """
+    from collections import Counter
+
+    NOISE = {
+        "公司", "股份", "集团", "科技", "技术", "产品", "业务", "市场", "行业",
+        "报告", "年度", "季度", "公告", "万元", "亿元", "同比", "环比",
+        "增长", "下降", "增加", "减少", "其中", "主要", "相关", "其他",
+        "进行", "表示", "认为", "预计", "关于", "通过", "根据", "目前",
+        "未来", "阶段", "期间", "时间", "一个", "需要", "可能", "影响",
+        "因素", "情况", "问题", "方面", "部分", "整体", "合计", "总计",
+        "分别", "相应", "进一步", "持续", "不断", "已经", "正在", "完成",
+        "实现", "达到", "超过", "接近", "积极", "有效", "显著", "明显",
+        "大幅", "快速", "稳步", "全面", "系统", "完善", "加强", "提升",
+        "优化", "推动", "促进", "开展", "实施", "推进", "落实", "建立",
+        "形成", "构建", "打造", "证券", "研报", "研究所",
+        # 通用公司名模式
+        "有限公司", "股份有限公司", "上市公司", "归属于上市公司",
+        "公开发行证券的公司", "实现归属于上市公司",
+        "为全面了解本公司", "除同公司",
+        # 银行/金融机构
+        "中国工商银行股份", "中国建设银行股份", "香港中央结算有限公司",
+        # 后缀
+        "科技股份", "电子股份", "半导体股份", "集团股份",
+    }
+
+    tracked = set()
+    for comp in graph.get_all_companies():
+        tracked.add(comp["name"])
+        for a in graph._data.get("nodes", {}).get(comp["name"], {}).get("aliases", []):
+            tracked.add(a)
+    for sector in graph.get_all_sectors():
+        tracked.add(sector)
+    for node_name, node_data in graph._data.get("nodes", {}).items():
+        tracked.add(node_name)
+        for kw in node_data.get("keywords", []):
+            tracked.add(kw)
+    tracked = {t.lower() for t in tracked if t}
+
+    all_candidates = Counter()
+    wiki_count = 0
+
+    for pattern in ["companies/*/wiki/*.md", "sectors/*/wiki/*.md"]:
+        for wiki in WIKI_ROOT.glob(pattern):
+            if "_slides" in wiki.name:
+                continue
+            try:
+                content = wiki.read_text(encoding="utf-8")
+                # 去掉 frontmatter
+                if content.startswith("---"):
+                    parts = content.split("---", 2)
+                    if len(parts) >= 3:
+                        content = parts[2]
+                wiki_count += 1
+
+                # 提取公司名称候选
+                for m in re.finditer(r'[\u4e00-\u9fff]{2,8}(?:公司|股份|集团|科技|半导体|电子|微电|光电|通信)', content):
+                    name = m.group(0)
+                    if len(name) >= 4 and name not in NOISE:
+                        all_candidates[("company", name)] += 1
+
+                # 提取技术术语
+                for m in re.finditer(r'\b[A-Z]{2,6}\d?\b', content):
+                    name = m.group(0)
+                    if name not in NOISE and len(name) >= 2:
+                        all_candidates[("tech", name)] += 1
+
+                # 提取 wikilink
+                for m in re.finditer(r'\[\[([^\]]+)\]\]', content):
+                    link = m.group(1).split("/")[-1]
+                    if link and link not in NOISE and len(link) >= 2:
+                        all_candidates[("link", link)] += 1
+            except Exception:
+                continue
+
+    discovered = []
+    for (etype, name), count in all_candidates.most_common(top_n * 3):
+        if count < min_count:
+            continue
+        normalized = name.lower().strip()
+        if normalized in tracked:
+            continue
+        # 子串检查
+        is_sub = False
+        for t in tracked:
+            if normalized in t or t in normalized:
+                if abs(len(normalized) - len(t)) < 3:
+                    is_sub = True
+                    break
+        if is_sub:
+            continue
+        discovered.append({"type": etype, "name": name, "count": count})
+        if len(discovered) >= top_n:
+            break
+
+    # LLM 过滤：让 LLM 确认哪些是真实的公司名
+    if use_llm and discovered:
+        tracked_names = set()
+        for comp in graph.get_all_companies():
+            tracked_names.add(comp["name"])
+        discovered = _filter_via_llm(discovered, tracked_names)
+
+    return {
+        "discovered": discovered,
+        "wiki_count": wiki_count,
+        "total_candidates": len(all_candidates),
+    }
+
+
 def main():
     parser = argparse.ArgumentParser(description="自动发现")
     parser.add_argument("--show-suggestions", action="store_true", help="显示建议")
@@ -569,38 +814,81 @@ def main():
     parser.add_argument("--apply-company", type=str, help="应用指定公司建议")
     parser.add_argument("--apply-topic", type=str, help="应用指定主题建议")
     parser.add_argument("--apply-question", type=str, help="应用指定问题建议")
+    parser.add_argument("--from-wikis", action="store_true", help="从 wiki 时间线扫描（而非新闻）")
+    parser.add_argument("--min-count", type=int, default=3, help="最少出现次数")
+    parser.add_argument("--top-n", type=int, default=30, help="最多报告数量")
+    parser.add_argument("--report", action="store_true", help="生成 markdown 报告")
+    parser.add_argument("--no-llm", action="store_true", help="禁用 LLM 过滤（仅使用正则）")
     args = parser.parse_args()
-    
+
     print("=" * 50)
     print("  上市公司知识库 — 自动发现")
     print("=" * 50)
-    
+
+    if args.from_wikis:
+        graph = Graph()
+        result = discover_from_wikis(graph, min_count=args.min_count, top_n=args.top_n, use_llm=not args.no_llm)
+
+        print(f"\n扫描了 {result['wiki_count']} 个 wiki 页面")
+        print(f"提取了 {result['total_candidates']} 个候选实体")
+        print(f"\n高频未跟踪实体（前 {len(result['discovered'])} 个）:\n")
+
+        type_labels = {"company": "公司", "tech": "技术", "link": "链接"}
+        for item in result["discovered"][:20]:
+            tlabel = type_labels.get(item["type"], item["type"])
+            print(f"  [{tlabel}] {item['name']} — 出现 {item['count']} 次")
+
+        if args.report:
+            report_path = WIKI_ROOT / "auto_discover_report.md"
+            lines = [
+                "# 自动发现报告",
+                "",
+                f"> 扫描 wiki 数: {result['wiki_count']}",
+                f"> 候选实体数: {result['total_candidates']}",
+                f"> 生成时间: {__import__('datetime').datetime.now().strftime('%Y-%m-%d %H:%M')}",
+                "",
+                "## 高频未跟踪实体",
+                "",
+                "| 类型 | 实体名 | 出现次数 | 建议操作 |",
+                "|------|--------|----------|----------|",
+            ]
+            for item in result["discovered"]:
+                tlabel = type_labels.get(item["type"], item["type"])
+                if item["type"] == "company":
+                    action = "建议添加到 graph.yaml 公司列表"
+                elif item["type"] == "tech":
+                    action = "建议创建 concept 页面或添加到行业 keywords"
+                else:
+                    action = "建议检查是否需要创建对应 wiki 页面"
+                lines.append(f"| {tlabel} | {item['name']} | {item['count']} | {action} |")
+            lines.extend(["", "## 建议后续行动", "", "1. 审查上表中的公司名，确认是否需要添加到跟踪列表", "2. 技术/产品术语考虑创建 `concept` 类型页面", "3. wikilink 提及的未跟踪页面考虑补充内容", ""])
+            report_path.write_text("\n".join(lines), encoding="utf-8")
+            print(f"\n报告已保存: {report_path}")
+            from log_writer import append_log
+            append_log("lint", f"自动发现: {len(result['discovered'])} 个未跟踪实体")
+
+        print("\n" + "=" * 50)
+        return
+
     if args.show_suggestions:
-        # 显示建议
         suggestions = load_suggestions()
-        
         print(f"\n公司建议 ({len(suggestions['companies'])}个):")
         for s in suggestions['companies'][:10]:
             print(f"  - {s['name']} (出现{s['news_count']}次)")
             print(f"    {s['context'][:80]}...")
-        
         print(f"\n主题建议 ({len(suggestions['topics'])}个):")
         for s in suggestions['topics'][:10]:
             print(f"  - {s['topic_name']} (出现{s['news_count']}次)")
             if s['related_companies']:
                 print(f"    相关公司: {', '.join(s['related_companies'][:3])}")
-        
         print(f"\n问题建议 ({len(suggestions['questions'])}个):")
         for s in suggestions['questions'][:10]:
             print(f"  - [{s['entity_name']}] {s['question']}")
-        
         return
-    
+
     if args.apply_company:
-        # 应用公司建议
         suggestions = load_suggestions()
         graph = Graph()
-        
         for s in suggestions['companies']:
             if s['name'] == args.apply_company:
                 if apply_company_suggestion(s, graph):
@@ -610,14 +898,11 @@ def main():
                 break
         else:
             print(f"Company suggestion not found: {args.apply_company}")
-        
         return
-    
+
     if args.apply_topic:
-        # 应用主题建议
         suggestions = load_suggestions()
         graph = Graph()
-        
         for s in suggestions['topics']:
             if s['topic_name'] == args.apply_topic:
                 if apply_topic_suggestion(s, graph):
@@ -627,14 +912,11 @@ def main():
                 break
         else:
             print(f"Topic suggestion not found: {args.apply_topic}")
-        
         return
-    
+
     if args.apply_question:
-        # 应用问题建议
         suggestions = load_suggestions()
         graph = Graph()
-        
         for s in suggestions['questions']:
             if s['question'] == args.apply_question:
                 if apply_question_suggestion(s, graph):
@@ -644,50 +926,39 @@ def main():
                 break
         else:
             print(f"Question suggestion not found: {args.apply_question}")
-        
         return
-    
-    # 运行发现
+
+    # 默认运行：从新闻文件扫描
     print("\n扫描新闻文件...")
-    
-    # 获取新闻文件
     news_files = []
     for company_dir in (WIKI_ROOT / "companies").iterdir():
         if company_dir.is_dir() and not company_dir.name.startswith("_"):
             news_dir = company_dir / "raw" / "news"
             if news_dir.exists():
                 news_files.extend(news_dir.glob("*.md"))
-    
+
     print(f"Found {len(news_files)} news files")
-    
-    # 获取已知公司和主题
     graph = Graph()
     known_companies = set(c["name"] for c in graph.get_all_companies())
     known_topics = set(graph.get_all_sectors())
-    
     print(f"Known companies: {len(known_companies)}")
     print(f"Known topics: {len(known_topics)}")
-    
-    # 发现新公司
+
     print("\n发现新公司...")
     company_suggestions = discover_new_companies(news_files, known_companies)
     print(f"Found {len(company_suggestions)} company suggestions")
-    
-    # 发现新主题
+
     print("\n发现新主题...")
     topic_suggestions = discover_new_topics(news_files, known_topics)
     print(f"Found {len(topic_suggestions)} topic suggestions")
-    
-    # 建议新问题
+
     print("\n建议新问题...")
     question_suggestions = suggest_new_questions(news_files, graph)
     print(f"Found {len(question_suggestions)} question suggestions")
-    
-    # 保存建议
+
     suggestions_file = save_suggestions(company_suggestions, topic_suggestions, question_suggestions)
     print(f"\nSuggestions saved to: {suggestions_file}")
-    
-    # 显示摘要
+
     print("\n" + "=" * 50)
     print("  Summary")
     print("=" * 50)
@@ -696,6 +967,7 @@ def main():
     print(f"Question suggestions: {len(question_suggestions)}")
     print("\nUse --show-suggestions to view details")
     print("Use --apply-company/--apply-topic/--apply-question to apply")
+    print("Use --from-wikis to scan wiki timelines instead of news")
 
 
 if __name__ == "__main__":

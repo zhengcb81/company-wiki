@@ -33,16 +33,29 @@ llm_client.py — 统一 LLM 客户端模块
     issues = client.lint_page(page_content, all_pages_index)
 """
 
+import csv
 import json
 import os
 import re
 import time
 import logging
+from datetime import datetime
 from typing import Dict, List, Any, Optional
 from dataclasses import dataclass, field
 from pathlib import Path
 
 logger = logging.getLogger(__name__)
+
+# ── LLM 成本追踪 ──────────────────────────
+_COST_LOG_PATH = Path(__file__).resolve().parent.parent / "llm_cost_log.csv"
+
+# 各 provider 每百万 token 价格（USD）
+# 参考各厂商官方定价，可按需更新
+_PROVIDER_PRICING = {
+    "deepseek": {"input": 0.14, "output": 0.28},
+    "openai": {"input": 2.50, "output": 10.00},
+    "claude": {"input": 3.00, "output": 15.00},
+}
 
 
 @dataclass
@@ -147,11 +160,11 @@ class LLMClient:
     def _get_default_model(self, provider: str) -> str:
         """获取默认模型"""
         models = {
-            "deepseek": "deepseek-reasoner",
+            "deepseek": "deepseek-v4-flash",
             "openai": "gpt-4",
             "claude": "claude-3-opus-20240229",
         }
-        return models.get(provider, "deepseek-reasoner")
+        return models.get(provider, "deepseek-v4-flash")
 
     def _get_base_url(self, provider: str) -> str:
         """获取基础 URL"""
@@ -189,7 +202,8 @@ class LLMClient:
 
     # ── 核心调用方法 ──────────────────────────
 
-    def chat(self, user: str, system: str = "", json_mode: bool = False) -> LLMResponse:
+    def chat(self, user: str, system: str = "", json_mode: bool = False,
+             max_tokens: int = None, temperature: float = None) -> LLMResponse:
         """
         基础聊天调用
 
@@ -197,6 +211,8 @@ class LLMClient:
             user: 用户消息
             system: 系统消息
             json_mode: 是否要求 JSON 格式响应
+            max_tokens: 覆盖实例默认值（不修改实例状态）
+            temperature: 覆盖实例默认值（不修改实例状态）
 
         Returns:
             LLMResponse 对象
@@ -212,22 +228,23 @@ class LLMClient:
         messages.append({"role": "user", "content": user})
 
         if self.provider == "claude":
-            return self._call_claude(messages, json_mode)
+            return self._call_claude(messages, json_mode, max_tokens=max_tokens)
 
         # DeepSeek / OpenAI 都用 OpenAI 兼容 API
         if self._sdk_client is not None:
-            return self._call_with_sdk(messages, json_mode)
+            return self._call_with_sdk(messages, json_mode, max_tokens=max_tokens, temperature=temperature)
         else:
-            return self._call_with_urllib(messages, json_mode)
+            return self._call_with_urllib(messages, json_mode, max_tokens=max_tokens, temperature=temperature)
 
-    def chat_with_retry(self, user: str, system: str = "", max_retries: int = None) -> LLMResponse:
+    def chat_with_retry(self, user: str, system: str = "", max_retries: int = None,
+                        max_tokens: int = None, temperature: float = None) -> LLMResponse:
         """带重试的聊天调用"""
         if max_retries is None:
             max_retries = self._max_retries
 
         last_error = ""
         for attempt in range(max_retries):
-            response = self.chat(user, system)
+            response = self.chat(user, system, max_tokens=max_tokens, temperature=temperature)
             if response.success:
                 return response
 
@@ -258,31 +275,23 @@ class LLMClient:
         Returns:
             LLMResponse 对象
         """
-        # 临时覆盖参数
-        orig_max_tokens = self._max_tokens
-        orig_temperature = self._temperature
-
-        if max_tokens is not None:
-            self._max_tokens = max_tokens
-        if temperature is not None:
-            self._temperature = temperature
-
-        try:
-            return self.chat_with_retry(prompt, system_prompt or "")
-        finally:
-            self._max_tokens = orig_max_tokens
-            self._temperature = orig_temperature
+        # 通过参数传递到底层调用，不修改实例状态（线程安全）
+        return self.chat_with_retry(
+            prompt, system_prompt or "",
+            max_tokens=max_tokens, temperature=temperature
+        )
 
     # ── 底层调用实现 ──────────────────────────
 
-    def _call_with_sdk(self, messages: list, json_mode: bool) -> LLMResponse:
+    def _call_with_sdk(self, messages: list, json_mode: bool,
+                       max_tokens: int = None, temperature: float = None) -> LLMResponse:
         """使用 OpenAI SDK 调用"""
         try:
             kwargs = {
                 "model": self.model,
                 "messages": messages,
-                "max_tokens": self._max_tokens,
-                "temperature": self._temperature,
+                "max_tokens": max_tokens if max_tokens is not None else self._max_tokens,
+                "temperature": temperature if temperature is not None else self._temperature,
             }
             if json_mode:
                 kwargs["response_format"] = {"type": "json_object"}
@@ -302,6 +311,7 @@ class LLMClient:
                 }
 
             self._call_count += 1
+            self._log_cost(usage)
             return LLMResponse(
                 content=content,
                 model=self.model,
@@ -314,7 +324,8 @@ class LLMClient:
         except Exception as e:
             return LLMResponse(success=False, error=f"SDK 调用失败: {e}")
 
-    def _call_with_urllib(self, messages: list, json_mode: bool) -> LLMResponse:
+    def _call_with_urllib(self, messages: list, json_mode: bool,
+                          max_tokens: int = None, temperature: float = None) -> LLMResponse:
         """使用 urllib 直接调用"""
         import urllib.request
         import urllib.error
@@ -322,8 +333,8 @@ class LLMClient:
         payload = {
             "model": self.model,
             "messages": messages,
-            "max_tokens": self._max_tokens,
-            "temperature": self._temperature,
+            "max_tokens": max_tokens if max_tokens is not None else self._max_tokens,
+            "temperature": temperature if temperature is not None else self._temperature,
         }
         if json_mode:
             payload["response_format"] = {"type": "json_object"}
@@ -351,6 +362,7 @@ class LLMClient:
             usage = data.get("usage", {})
 
             self._call_count += 1
+            self._log_cost(usage)
             return LLMResponse(
                 content=content,
                 model=data.get("model", self.model),
@@ -366,7 +378,8 @@ class LLMClient:
         except Exception as e:
             return LLMResponse(success=False, error=f"urllib 调用失败: {e}")
 
-    def _call_claude(self, messages: list, json_mode: bool) -> LLMResponse:
+    def _call_claude(self, messages: list, json_mode: bool,
+                     max_tokens: int = None) -> LLMResponse:
         """调用 Claude API (不同的请求格式)"""
         import urllib.request
         import urllib.error
@@ -382,7 +395,7 @@ class LLMClient:
 
         payload = {
             "model": self.model,
-            "max_tokens": self._max_tokens,
+            "max_tokens": max_tokens if max_tokens is not None else self._max_tokens,
             "messages": user_messages,
         }
         if system_content:
@@ -409,6 +422,7 @@ class LLMClient:
             usage = data.get("usage", {})
 
             self._call_count += 1
+            self._log_cost(usage)
             return LLMResponse(
                 content=content,
                 model=data.get("model", self.model),
@@ -425,6 +439,72 @@ class LLMClient:
         if elapsed < self._min_interval:
             time.sleep(self._min_interval - elapsed)
         self._last_call_time = time.time()
+
+    # ── 成本追踪 ────────────────────────────────
+
+    def _log_cost(self, usage: Dict[str, int]):
+        """将本次调用记录到成本 CSV"""
+        if not usage:
+            return
+        prompt_tokens = usage.get("prompt_tokens", 0)
+        completion_tokens = usage.get("completion_tokens", 0)
+        total_tokens = usage.get("total_tokens", 0)
+
+        pricing = _PROVIDER_PRICING.get(self.provider, {"input": 0.27, "output": 1.10})
+        input_cost = prompt_tokens / 1_000_000 * pricing["input"]
+        output_cost = completion_tokens / 1_000_000 * pricing["output"]
+        estimated_cost = input_cost + output_cost
+
+        _COST_LOG_PATH.parent.mkdir(parents=True, exist_ok=True)
+
+        try:
+            # 检查是否需要写 header（在 open 之前原子判断）
+            needs_header = not _COST_LOG_PATH.exists() or _COST_LOG_PATH.stat().st_size == 0
+            with open(_COST_LOG_PATH, "a", newline="", encoding="utf-8") as f:
+                writer = csv.writer(f)
+                if needs_header:
+                    writer.writerow([
+                        "timestamp", "provider", "model",
+                        "prompt_tokens", "completion_tokens", "total_tokens",
+                        "estimated_cost_usd",
+                    ])
+                writer.writerow([
+                    datetime.now().isoformat(),
+                    self.provider,
+                    self.model,
+                    prompt_tokens,
+                    completion_tokens,
+                    total_tokens,
+                    round(estimated_cost, 6),
+                ])
+        except Exception as e:
+            logger.warning(f"成本日志写入失败: {e}")
+
+    def get_cost_stats(self) -> Dict[str, Any]:
+        """获取成本统计"""
+        if not _COST_LOG_PATH.exists():
+            return {"total_calls": 0, "total_tokens": 0, "total_cost_usd": 0.0}
+
+        total_tokens = 0
+        total_cost = 0.0
+        count = 0
+
+        try:
+            with open(_COST_LOG_PATH, "r", encoding="utf-8") as f:
+                reader = csv.DictReader(f)
+                for row in reader:
+                    count += 1
+                    total_tokens += int(row.get("total_tokens", 0))
+                    total_cost += float(row.get("estimated_cost_usd", 0))
+        except Exception as e:
+            logger.warning(f"成本统计读取失败: {e}")
+
+        return {
+            "total_calls": count,
+            "total_tokens": total_tokens,
+            "total_cost_usd": round(total_cost, 4),
+            "avg_cost_per_call": round(total_cost / count, 6) if count else 0,
+        }
 
     # ── 业务方法: 内容分析 ──────────────────────
 
@@ -465,6 +545,86 @@ class LLMClient:
                 return parsed
 
         return self._fallback_analyze(content)
+
+    def analyze_full_document(self, content: str, entity_name: str = "",
+                               doc_type: str = "annual_report",
+                               previous_period_data: str = "") -> Dict[str, Any]:
+        """
+        分析完整文档（利用 1M 上下文，直接传入整篇文档不做截断）。
+
+        适用于：年报/半年报/季报/招股书等大型 PDF 文档。
+
+        Args:
+            content: 完整文档文本（可长达数十万字符）
+            entity_name: 相关实体名称
+            doc_type: 文档类型 (annual_report/quarterly_report/prospectus/announcement)
+            previous_period_data: 上一期财务数据（用于环比分析）
+
+        Returns:
+            {"key_points", "financial_highlights", "entities_mentioned",
+             "topics_affected", "sentiment", "importance", "suggested_questions"}
+        """
+        # 根据文档类型选择分析角度
+        doc_type_prompts = {
+            "annual_report": "请从年度经营、财务表现、研发投入、行业地位等角度全面分析。",
+            "半年度报告": "请从半年度经营、财务表现、环比变化、行业地位等角度分析。",
+            "quarterly_report": "请从季度经营、财务表现、环比同比变化等角度分析。",
+            "prospectus": "请从业务模式、竞争优势、募集资金用途、风险因素等角度分析。",
+            "announcement": "请从公告内容、影响程度、投资价值等角度快速分析。",
+        }
+        doc_hint = doc_type_prompts.get(doc_type, "请全面分析此文档的关键信息。")
+
+        # 如果有上一期数据，添加环比分析提示
+        prev_section = ""
+        if previous_period_data:
+            prev_section = f"""
+上一期财务数据（用于环比分析）:
+{previous_period_data}
+
+请结合上期数据进行环比分析。"""
+
+        system = "你是一个专业的上市公司研究分析助手。请严格按要求的JSON格式输出。"
+
+        user = f"""你是一名资深财务分析师。请深度分析以下{doc_hint}{prev_section}
+
+{f'相关实体: {entity_name}' if entity_name else ''}
+{f'文档类型: {doc_type}' if doc_type else ''}
+
+## 分析要求
+请从以下维度提取关键信息，每维度输出一条时间线条目：
+
+1. **经营亮点**：营收、利润、市场份额等核心指标
+2. **研发突破**：关键技术、专利、产品进展
+3. **行业动态**：市场竞争、供需变化、政策影响
+4. **战略布局**：产能扩张、并购合作、海外布局
+5. **风险因素**：竞争风险、政策风险、经营风险
+6. **财务健康**：现金流、负债、资产质量
+
+## 输出格式
+请以以下JSON格式返回（必须是有效JSON，不要有其他内容）：
+{{
+    "timeline_entries": [
+        {{
+            "date": "<YYYY-MM-DD>",
+            "source_type": "<来源类型>",
+            "title": "<标题，简洁概括>",
+            "points": ["<要点1>", "<要点2>", "<要点3>"]
+        }}
+    ],
+    "sentiment": "positive/negative/neutral",
+    "importance": 0.0到1.0之间的数值
+}}
+
+只返回JSON，不要其他内容。"""
+
+        response = self.chat_with_retry(user, system, max_tokens=8192)
+        if response.success:
+            parsed = self._parse_json_response(response.content)
+            if parsed:
+                return parsed
+
+        # Fallback：返回空结构
+        return {"timeline_entries": [], "sentiment": "neutral", "importance": 0.0}
 
     # ── 业务方法: 摘要生成 ──────────────────────
 
@@ -625,22 +785,108 @@ class LLMClient:
             return question_templates[:5]
         return []
 
+    def batch_analyze(self, contents: List[Dict[str, str]], entity: str = "",
+                      topic: str = "公司动态") -> List[Dict[str, Any]]:
+        """
+        批量分析多个文档，生成综合时间线条目。
+
+        利用 1M 上下文，将多个文档一次性发给 LLM 做综合分析，
+        比逐个分析能更好地捕捉跨文档的关联和趋势。
+
+        Args:
+            contents: 文档列表，每项包含:
+                - content: 文档文本
+                - title: 文档标题/标签
+                - date: 日期（可选）
+                - source_type: 来源类型（可选）
+            entity: 实体名称
+            topic: 主题
+
+        Returns:
+            [{"date": "...", "title": "...", "points": [...], "source": "..."}, ...]
+        """
+        if not contents:
+            return []
+
+        # 组合多个文档内容（最多 10 个，总计控制在 80 万字符）
+        MAX_DOCS = 10
+        MAX_TOTAL_CHARS = 800000
+
+        selected = contents[:MAX_DOCS]
+        combined = ""
+        for i, doc in enumerate(selected):
+            src = doc.get("source_type", "文档")
+            title = doc.get("title", f"文档{i+1}")
+            date = doc.get("date", "")
+            date_prefix = f"[{date}] " if date else ""
+            combined += f"\n\n## {date_prefix}{title} ({src})\n{doc['content'][:80000]}"
+
+        if len(combined) > MAX_TOTAL_CHARS:
+            combined = combined[:MAX_TOTAL_CHARS]
+
+        system = "你是一个专业的上市公司研究分析助手。请从多个文档中提取关键信息，以 JSON 格式返回结构化时间线条目。"
+
+        user = f"""请分析以下 {len(selected)} 个文档，提取关键时间线条目。
+
+实体: {entity}
+主题: {topic}
+
+要求：
+1. 每个文档提取 1-3 条关键时间线条目
+2. 条目按时间排序（最新优先）
+3. 每条包含：日期、来源类型、标题、2-4 个要点
+4. 跨文档的信息（如"Q1营收同比增长25%，与Q2订单增长呼应"）要特别标注
+
+文档内容:
+{combined}
+
+请以 JSON 格式返回:
+{{
+    "timeline_entries": [
+        {{
+            "date": "<YYYY-MM-DD>",
+            "source_type": "<来源类型>",
+            "title": "<标题>",
+            "points": ["<要点1>", "<要点2>"],
+            "cross_doc": true  // 跨文档关联时为 true
+        }}
+    ]
+}}
+
+只返回 JSON，不要其他内容。"""
+
+        response = self.chat_with_retry(user, system, max_tokens=8192)
+        if response.success:
+            parsed = self._parse_json_response(response.content)
+            if parsed:
+                return parsed.get("timeline_entries", [])
+
+        return []
+
     # ── 业务方法: 查询 ──────────────────────────
 
-    def answer_query(self, query: str, relevant_pages: List[Dict[str, str]]) -> str:
+    def answer_query(self, query: str, relevant_pages: List[Dict[str, str]],
+                     max_pages: int = 20) -> str:
         """
-        基于多个 wiki 页面内容综合回答查询
+        基于多个 wiki 页面内容综合回答查询（利用 1M 上下文，支持更多页面）。
+
+        Args:
+            query: 查询问题
+            relevant_pages: 相关页面列表
+            max_pages: 最多使用的页面数（默认 20，利用 1M 上下文）
         """
         context_parts = []
-        for i, page in enumerate(relevant_pages[:5]):
+        for i, page in enumerate(relevant_pages[:max_pages]):
+            content = page.get('content', '')
+            # 每个页面取前 5000 字符（20 个页面约 10 万字符，加上 prompt 仍在 1M 范围内）
             context_parts.append(
                 f"### 资料 {i+1}: {page.get('title', '')} ({page.get('entity', '')})\n"
-                f"{page.get('content', '')[:2000]}"
+                f"{content[:5000]}"
             )
 
         context = '\n\n'.join(context_parts)
-        if len(context) > 6000:
-            context = context[:6000]
+        if len(context) > 800000:
+            context = context[:800000]
 
         system = "你是一个上市公司研究知识库的智能助手。基于提供的知识库内容准确回答问题。"
         user = f"""请基于以下知识库内容回答问题。
@@ -650,9 +896,9 @@ class LLMClient:
 知识库内容:
 {context}
 
-请给出详细、准确的回答:"""
+请给出详细、准确的回答。如果信息不足，请明确说明。"""
 
-        response = self.chat_with_retry(user, system)
+        response = self.chat_with_retry(user, system, max_tokens=8192)
         return response.content if response.success else "无法生成答案 (LLM 不可用)"
 
     # ── 业务方法: 矛盾检测 ──────────────────────
@@ -776,28 +1022,40 @@ class LLMClient:
         if not text:
             return None
 
-        # 直接解析
-        try:
-            return json.loads(text.strip())
-        except json.JSONDecodeError:
-            pass
+        candidates = [text.strip()]
 
         # markdown 代码块
         json_match = re.search(r'```(?:json)?\s*(.*?)\s*```', text, re.DOTALL)
         if json_match:
-            try:
-                return json.loads(json_match.group(1))
-            except json.JSONDecodeError:
-                pass
+            candidates.append(json_match.group(1))
 
         # 裸 JSON
         for pattern in [r'\{.*\}', r'\[.*\]']:
             match = re.search(pattern, text, re.DOTALL)
             if match:
+                candidates.append(match.group())
+
+        for candidate in candidates:
+            # 尝试直接解析
+            try:
+                return json.loads(candidate)
+            except json.JSONDecodeError:
+                pass
+
+            # 清理乱码（U+FFFD replacement character）后重试
+            if '\ufffd' in candidate:
+                cleaned = candidate.replace('\ufffd', '?')
                 try:
-                    return json.loads(match.group())
+                    return json.loads(cleaned)
                 except json.JSONDecodeError:
                     pass
+
+            # 尝试修复常见的 JSON 格式错误：移除尾部逗号
+            try:
+                fixed = re.sub(r',(\s*[}\]])', r'\1', candidate)
+                return json.loads(fixed)
+            except json.JSONDecodeError:
+                pass
 
         return None
 
@@ -834,12 +1092,14 @@ class LLMClient:
         }
 
     def get_stats(self) -> Dict[str, Any]:
-        """获取调用统计"""
+        """获取调用统计（含成本）"""
+        cost_stats = self.get_cost_stats()
         return {
             "total_calls": self._call_count,
             "provider": self.provider,
             "model": self.model,
             "available": self.available,
+            "cost": cost_stats,
         }
 
 

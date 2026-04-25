@@ -782,8 +782,9 @@ def main():
     parser.add_argument("--entity-type", type=str, default="company", choices=["company", "sector", "theme"], help="实体类型")
     parser.add_argument("--topic", type=str, help="目标主题名称")
     parser.add_argument("--max-results", type=int, default=5, help="最大搜索结果数")
-    parser.add_argument("--auto-file", action="store_true", help="自动归档高质量答案为 wiki 页面")
+    parser.add_argument("--auto-file", action="store_true", help="自动归档高质量答案为 wiki 页面（无需确认）")
     parser.add_argument("--no-file", action="store_true", help="不归档答案（仅显示）")
+    parser.add_argument("--quiet", action="store_true", help="静默模式（调度器调用时使用，减少输出）")
     args = parser.parse_args()
 
     print("=" * 50)
@@ -851,6 +852,24 @@ def main():
 
     # 评估是否值得归档
     if args.no_file:
+        return
+
+    # 静默模式：只输出关键结果
+    if args.quiet:
+        verdict = judge.judge(answer)
+        if verdict["should_file"]:
+            if verdict["suggested_type"] == "timeline_entry":
+                if answer.sources:
+                    first_source = answer.sources[0]
+                    ok = saver.save_as_timeline_entry(answer, first_source.entity_name, first_source.entity_type, first_source.topic_name)
+                    if ok:
+                        print(f"[QUIET] filed to {first_source.entity_name}/{first_source.topic_name}")
+            else:
+                path = saver.file_as_wiki_page(answer, page_type=verdict["suggested_type"])
+                if path:
+                    print(f"[QUIET] filed to {path}")
+        else:
+            print(f"[QUIET] quality too low, skipped")
         return
 
     verdict = judge.judge(answer)

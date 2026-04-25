@@ -15,9 +15,13 @@ schedule:
 # api_key 从环境变量 DEEPSEEK_API_KEY 读取，不在此处设置
 llm:
   provider: "deepseek"
-  model: "deepseek-reasoner"
+  # deepseek-v4-flash: V4 Flash 模型，支持非思考模式和思考模式
+  # 非思考模式: 默认，响应快且稳定，适合常规分析任务
+  # 思考模式: 推理能力更强，适合深度推理场景（通过 thinking 参数切换）
+  model: "deepseek-v4-flash"
   base_url: "https://api.deepseek.com"
-  max_tokens: 1024
+  max_tokens: 8192
+  max_document_chars: 800000  # ~1M tokens，用于整篇文档分析
   temperature: 0.3
 
 # ── 搜索配置 ──────────────────────────────
@@ -37,6 +41,7 @@ report_downloader:
     - name: "定期报告"
       suffix: "periodicReports"
       allowed_keywords: null
+      blocked_keywords: ["摘要"]
       max_pages: 10
     - name: "招股说明书"
       suffix: "latestAnnouncement"
@@ -53,6 +58,25 @@ evolution:
   auto_discover_topics: true
   suggest_companies: true
   evolve_questions: true
+
+# ── 投资判断配置 ──────────────────────────
+judgment:
+  enabled: true
+  pages: ["valuation", "catalyst", "risk"]  # 生成的页面类型
+  auto_update: true                          # 调度时自动更新
+
+# ── 交叉验证配置 ──────────────────────────
+cross_verify:
+  enabled: true
+  similarity_threshold: 0.6                  # 事件聚类相似度阈值
+  auto_report: true                          # 自动生成报告
+
+# ── 审核队列配置 ──────────────────────────
+review_queue:
+  enabled: true                              # 启用审核队列
+  auto_approve_low: true                     # 低风险操作自动批准
+  auto_approve_medium: false                 # 中风险操作需审核
+  auto_approve_high: false                   # 高风险操作需审核
 
 # ── 路径配置 ──────────────────────────────
 paths:

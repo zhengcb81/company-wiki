@@ -99,7 +99,7 @@ class LLMClient:
 llm:
   provider: "deepseek"         # deepseek / openai / anthropic
   api_key_env: "DEEPSEEK_API_KEY"
-  model: "deepseek-reasoner"
+  model: "deepseek-v4-flash"
   base_url: "https://api.deepseek.com"
   max_tokens: 2048
   temperature: 0.3

@@ -61,9 +61,10 @@ class LLMConfig:
     """LLM 配置"""
     provider: str = "deepseek"
     api_key: str = ""
-    model: str = "deepseek-reasoner"
+    model: str = "deepseek-v4-flash"
     base_url: str = "https://api.deepseek.com"
-    max_tokens: int = 1024
+    max_tokens: int = 8192
+    max_document_chars: int = 800000  # ~1M tokens 的 80%，用于整篇文档分析
     temperature: float = 0.3
 
 
@@ -183,9 +184,10 @@ class Config:
         llm = LLMConfig(
             provider=llm_raw.get("provider", "deepseek"),
             api_key=llm_raw.get("api_key", ""),
-            model=llm_raw.get("model", "deepseek-reasoner"),
+            model=llm_raw.get("model", "deepseek-v4-flash"),
             base_url=llm_raw.get("base_url", "https://api.deepseek.com"),
-            max_tokens=llm_raw.get("max_tokens", 1024),
+            max_tokens=llm_raw.get("max_tokens", 8192),
+            max_document_chars=llm_raw.get("max_document_chars", 800000),
             temperature=llm_raw.get("temperature", 0.3),
         )
         
@@ -307,12 +309,12 @@ if __name__ == "__main__":
         
         # 验证 API Key
         if config.llm.api_key:
-            print(f"  LLM API Key: {config.llm.api_key[:10]}...")
+            print("  LLM API Key: 已配置")
         else:
             print("  ⚠️ LLM API Key 为空")
-        
+
         if config.search.api_key:
-            print(f"  搜索 API Key: {config.search.api_key[:10]}...")
+            print("  搜索 API Key: 已配置")
         else:
             print("  ⚠️ 搜索 API Key 为空")
         

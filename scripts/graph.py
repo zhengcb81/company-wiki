@@ -47,14 +47,38 @@ class Graph:
     """产业链拓扑图 — 统一数据访问层"""
 
     def __init__(self, graph_path=None):
-        self._path = Path(graph_path) if graph_path else WIKI_ROOT / "graph.yaml"
+        base = Path(graph_path) if graph_path else WIKI_ROOT / "graph.yaml"
+        self._path = base
+        # 派生 companies.yaml 和 sectors.yaml 路径
+        self._companies_path = base.parent / "companies.yaml"
+        self._sectors_path = base.parent / "sectors.yaml"
         self._data = self._load()
         self._build_indices()
 
     def _load(self):
         import yaml
-        with open(self._path, "r", encoding="utf-8") as f:
-            return yaml.safe_load(f)
+
+        # 主 graph.yaml（edges, questions, settings）
+        merged = {}
+        if self._path.exists():
+            with open(self._path, "r", encoding="utf-8") as f:
+                merged = yaml.safe_load(f) or {}
+
+        # 合并 sectors.yaml（nodes）
+        merged.setdefault("nodes", {})
+        if self._sectors_path.exists():
+            with open(self._sectors_path, "r", encoding="utf-8") as f:
+                sectors_data = yaml.safe_load(f) or {}
+            merged["nodes"] = sectors_data.get("nodes", {})
+
+        # 合并 companies.yaml（companies）
+        merged.setdefault("companies", {})
+        if self._companies_path.exists():
+            with open(self._companies_path, "r", encoding="utf-8") as f:
+                companies_data = yaml.safe_load(f) or {}
+            merged["companies"] = companies_data.get("companies", {})
+
+        return merged
 
     def _build_indices(self):
         """预构建索引，加速查询"""
@@ -86,6 +110,10 @@ class Graph:
             ticker = comp.get("ticker", "")
             if ticker:
                 self._company_index[ticker] = comp
+            # 按 aliases 索引（如 "NVIDIA"、"NVDA" 等）
+            for alias in comp.get("aliases", []):
+                if alias:
+                    self._company_index[alias] = comp
 
         # 名称黑名单（从 graph.yaml settings 加载）
         self._name_blacklist = set(
@@ -369,11 +397,28 @@ class Graph:
     # ── 写入 ──────────────────────────────
 
     def save(self):
-        """保存图数据到文件"""
+        """保存图数据到文件（按类型拆分存储 + 生成完整合并版 graph.yaml）"""
         import yaml
+        dump_kwargs = dict(allow_unicode=True, default_flow_style=False,
+                           sort_keys=False, width=120)
+
+        # sectors.yaml: nodes
+        sectors_out = {"nodes": self._data.get("nodes", {})}
+        with open(self._sectors_path, "w", encoding="utf-8") as f:
+            yaml.dump(sectors_out, f, **dump_kwargs)
+
+        # companies.yaml: companies
+        companies_out = {"companies": self._data.get("companies", {})}
+        with open(self._companies_path, "w", encoding="utf-8") as f:
+            yaml.dump(companies_out, f, **dump_kwargs)
+
+        # graph.yaml: 仅 edges、questions、settings（nodes 和 companies 分别存储）
+        merged = {}
+        for key in ("edges", "questions", "settings"):
+            if key in self._data:
+                merged[key] = self._data[key]
         with open(self._path, "w", encoding="utf-8") as f:
-            yaml.dump(self._data, f, allow_unicode=True, default_flow_style=False,
-                      sort_keys=False, width=120)
+            yaml.dump(merged, f, **dump_kwargs)
 
     def add_company(self, name, ticker, exchange, sectors, themes,
                     news_queries=None, position="", competes_with=None):

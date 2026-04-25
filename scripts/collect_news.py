@@ -28,6 +28,8 @@ CONFIG_PATH = WIKI_ROOT / "config.yaml"
 LOG_PATH = WIKI_ROOT / "log.md"
 
 sys.path.insert(0, str(SCRIPTS_DIR))
+from dotenv import load_dotenv
+load_dotenv(WIKI_ROOT / ".env")
 from graph import Graph
 from config_rules_loader import RulesConfig
 
@@ -114,9 +116,9 @@ def tavily_search(query, api_key, max_results=8, days=7, language="zh"):
     payload = json.dumps({
         "query": query,
         "max_results": max_results,
-        "search_depth": "basic",
+        "search_depth": "advanced",
         "include_answer": False,
-        "include_raw_content": False,
+        "include_raw_content": True,
         "days": days,
         "topic": "general",
     }).encode("utf-8")
@@ -250,6 +252,76 @@ type: news
     return True
 
 
+# ── 问题驱动搜索 ──────────────────────────
+def load_company_questions(name: str, entity_type: str = "company") -> list:
+    """
+    从 wiki 页面加载核心问题，用于生成定向搜索查询。
+
+    解析 companies/{name}/wiki/公司动态.md 或 sectors/{name}/wiki/{name}.md
+    中 '## 核心问题' 下的所有条目，清理后返回。
+    """
+    if entity_type == "company":
+        wiki_path = WIKI_ROOT / "companies" / name / "wiki" / "公司动态.md"
+    elif entity_type == "sector":
+        wiki_path = WIKI_ROOT / "sectors" / name / "wiki" / f"{name}.md"
+    else:
+        return []
+
+    if not wiki_path.exists():
+        return []
+
+    content = wiki_path.read_text(encoding="utf-8")
+    questions = []
+    in_section = False
+
+    for line in content.splitlines():
+        stripped = line.strip()
+        if stripped == "## 核心问题":
+            in_section = True
+            continue
+        elif in_section and stripped.startswith("## "):
+            break
+        elif in_section and stripped.startswith("- "):
+            q = stripped[2:]
+            # 跳过占位符
+            if q in ("（待设定）", "（待补充）", ""):
+                continue
+            # 移除 wikilinks: [[设备国产化]] → 设备国产化
+            q = re.sub(r'\[\[([^\]]+)\]\]', r'\1', q)
+            # 移除陈旧/过时标记: [陈旧]
+            q = re.sub(r'\s*\[[^\]]*\]', '', q)
+            q = q.strip().rstrip("？?").strip()
+            if q and len(q) > 4:
+                questions.append(q)
+
+    return questions[:5]  # 最多取 5 个问题
+
+
+def generate_question_queries(name: str, questions: list) -> list:
+    """
+    根据核心问题生成定向搜索查询。
+    格式: "{公司名} {问题核心}"
+
+    对长问题截断到 80 字（保留前部分，移除具体细节）。
+    """
+    queries = []
+    for q in questions:
+        # 截断过长的问题（保留核心意图）
+        if len(q) > 80:
+            # 尝试按句号/逗号截断到第一个完整子句
+            truncated = q[:80]
+            last_punct = max(truncated.rfind("，"), truncated.rfind("、"),
+                             truncated.rfind(" "), truncated.rfind("的"))
+            if last_punct > 20:
+                truncated = truncated[:last_punct]
+            q = truncated
+
+        query = f"{name} {q}"
+        queries.append(query)
+
+    return queries
+
+
 # ── 主流程 ────────────────────────────────
 def load_search_config():
     """从 config.yaml 读取搜索运维配置（API key 等）"""
@@ -259,14 +331,14 @@ def load_search_config():
     return cfg.get("search", {})
 
 
-def collect_for_company(company, search_cfg, dry_run=False, rules=None):
+def collect_for_company(company, search_cfg, dry_run=False, rules=None, use_questions=True):
     """为单个公司采集新闻"""
     name = company["name"]
     queries = company.get("news_queries", [f"{name} 最新消息"])
 
-    api_key = search_cfg.get("tavily_api_key", "")
+    api_key = search_cfg.get("tavily_api_key", "") or os.environ.get("TAVILY_API_KEY", "")
     if not api_key:
-        print(f"  ERROR: No Tavily API key in config.yaml")
+        print(f"  ERROR: No Tavily API key (config.yaml or TAVILY_API_KEY env)")
         return 0, 0
 
     max_results = search_cfg.get("results_per_query", 8)
@@ -305,6 +377,31 @@ def collect_for_company(company, search_cfg, dry_run=False, rules=None):
                 else:
                     total_dup += 1
 
+    # ── 问题驱动搜索（补充） ─────────────────
+    if use_questions:
+        questions = load_company_questions(name)
+        if questions:
+            question_queries = generate_question_queries(name, questions)
+            print(f"  Question-driven search ({len(question_queries)} queries)...")
+            for q_query in question_queries:
+                print(f"  Searching: {q_query[:80]}")
+                results = tavily_search(q_query, api_key, max(3, max_results // 2), days)
+
+                for r in results:
+                    url = r.get("url", "")
+                    if url in existing_urls:
+                        continue
+
+                    if dry_run:
+                        print(f"    [DRY] Would save: {r.get('title', '')[:50]}")
+                        total_new += 1
+                    else:
+                        saved = save_news_item(name, r, news_dir, rules=rules)
+                        if saved:
+                            print(f"    + {r.get('title', '')[:60]}")
+                            total_new += 1
+                            existing_urls.add(url)
+
     return total_new, total_dup
 
 
@@ -323,9 +420,19 @@ def append_log(message):
 
 
 def main():
+    if sys.platform == "win32":
+        if hasattr(sys.stdout, "reconfigure"):
+            sys.stdout.reconfigure(encoding="utf-8")
+        if hasattr(sys.stderr, "reconfigure"):
+            sys.stderr.reconfigure(encoding="utf-8")
+
     parser = argparse.ArgumentParser(description="采集上市公司新闻")
     parser.add_argument("--company", type=str, help="只采集指定公司")
     parser.add_argument("--dry-run", action="store_true", help="只打印不保存")
+    parser.add_argument("--use-questions", action="store_true", default=True,
+                        help="使用核心问题驱动搜索（默认启用）")
+    parser.add_argument("--no-use-questions", action="store_false", dest="use_questions",
+                        help="禁用问题驱动搜索")
     args = parser.parse_args()
 
     print("=" * 50)
@@ -348,7 +455,7 @@ def main():
 
     for company in companies:
         print(f"\n[{company['name']}] ({company['ticker']})")
-        new, dup = collect_for_company(company, search_cfg, args.dry_run, rules=rules)
+        new, dup = collect_for_company(company, search_cfg, args.dry_run, rules=rules, use_questions=args.use_questions)
         total_new += new
         total_dup += dup
 

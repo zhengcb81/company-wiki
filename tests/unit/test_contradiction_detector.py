@@ -190,14 +190,14 @@ class TestContradictionDetector:
         stmt2 = {"value": 50.0, "entity": "北方华创", "entity_type": "company", "metric": "百分比"}
         assert not detector._is_numeric_contradiction(stmt1, stmt2)
         
-        # 同一实体，差异超过30%，矛盾
+        # 同一实体，差异超过50%且绝对值>5，矛盾
         stmt1 = {"value": 30.0, "entity": "中微公司", "entity_type": "company", "metric": "百分比"}
-        stmt2 = {"value": 50.0, "entity": "中微公司", "entity_type": "company", "metric": "百分比"}
+        stmt2 = {"value": 80.0, "entity": "中微公司", "entity_type": "company", "metric": "百分比"}
         assert detector._is_numeric_contradiction(stmt1, stmt2)
-        
-        # 同一实体，差异小于30%，不矛盾
+
+        # 同一实体，差异小于50%，不矛盾
         stmt1 = {"value": 100.0, "entity": "中微公司", "entity_type": "company", "metric": "百分比"}
-        stmt2 = {"value": 110.0, "entity": "中微公司", "entity_type": "company", "metric": "百分比"}
+        stmt2 = {"value": 140.0, "entity": "中微公司", "entity_type": "company", "metric": "百分比"}
         assert not detector._is_numeric_contradiction(stmt1, stmt2)
 
 

@@ -47,3 +47,4 @@ Thumbs.db
 # Web 构建产物
 web/dist/
 node_modules/
+nul
