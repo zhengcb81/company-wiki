@@ -201,18 +201,11 @@ class ContradictionDetector:
             矛盾列表
         """
         contradictions = []
-        key_fields = [
-            "营收",
-            "净利润",
-            "毛利率",
-            "市占率",
-            "订单",
-            "产能利用率",
-            "每股收益",
-            "研发投入",
-            "精度",
-            "国产化率",
-        ]
+
+        # 硬性字段：这些字段的数值矛盾是高置信度（营收/净利润等事实性数据）
+        hard_fields = {"营收", "净利润", "毛利率", "每股收益", "研发投入"}
+        soft_fields = {"市占率", "订单", "产能利用率", "精度", "国产化率"}
+        key_fields = list(hard_fields | soft_fields)
         window_days = 90
 
         # 第一步：收集所有页面的条目（按实体分组）
@@ -251,6 +244,8 @@ class ContradictionDetector:
                 if field:
                     field_entries.setdefault(field, []).append((page_path, entry))
 
+            entity_contradictions = 0
+
             # 对每个字段检测矛盾
             for field, field_items in field_entries.items():
                 if len(field_items) < 2:
@@ -282,50 +277,70 @@ class ContradictionDetector:
                                 description=f"语义矛盾: {field} - {c.get('reason', '')}",
                             )
                         )
-                else:
-                    # 回退：规则检测（跨页面数值差异）
-                    # 只匹配带 % 的百分比数字，避免年份/日期被误匹配
-                    values = []
-                    for page_path, item in field_items:
-                        # 严格匹配：数字 + 可选空格 + %（% 必须存在）
-                        nums = re.findall(r"(\d+\.?\d*)\s*%", item["body"])
+                        entity_contradictions += 1
+                        continue
+
+                # 回退：硬性规则检测
+                confidence = "high" if field in hard_fields else "medium"
+                threshold_ratio = 0.3 if field in hard_fields else 0.5
+                threshold_abs = 2 if field in hard_fields else 5
+
+                # 收集数值：百分比 + 绝对金额
+                values = []
+                for page_path, item in field_items:
+                    # 百分比匹配
+                    nums = re.findall(r"(\d+\.?\d*)\s*%", item["body"])
+                    for n in nums:
+                        val = float(n)
+                        if 1990 <= val <= 2100:
+                            continue
+                        values.append((val, page_path, item, "%"))
+
+                    # 绝对金额匹配（亿/万）
+                    for unit in ("亿", "万"):
+                        nums = re.findall(
+                            rf"(\d+\.?\d*)\s*{unit}", item["body"]
+                        )
                         for n in nums:
                             val = float(n)
-                            # 过滤掉年份（1990-2100）
                             if 1990 <= val <= 2100:
                                 continue
-                            values.append((val, page_path, item))
+                            values.append((val, page_path, item, unit))
 
-                    if len(values) >= 2:
-                        # 如果数值差异 > 50%，且绝对差值 > 5，认为是潜在矛盾
-                        for i in range(len(values)):
-                            for j in range(i + 1, len(values)):
-                                v1, page1, item1 = values[i]
-                                v2, page2, item2 = values[j]
-                                # 跳过同一页面
-                                if page1 == page2:
-                                    continue
-                                diff_ratio = abs(v1 - v2) / max(v1, v2)
-                                abs_diff = abs(v1 - v2)
-                                if v1 > 0 and diff_ratio > 0.5 and abs_diff > 5:
-                                    contradictions.append(
-                                        Contradiction(
-                                            entity1=entity_name,
-                                            entity1_type="company",
-                                            page1=page1,
-                                            statement1=item1["body"][:100],
-                                            entity2=entity_name,
-                                            entity2_type="company",
-                                            page2=page2,
-                                            statement2=item2["body"][:100],
-                                            contradiction_type="numeric",
-                                            confidence="medium",
-                                            description=f"数值差异: {field} {v1}% vs {v2}%",
-                                        )
+                if len(values) >= 2:
+                    for i in range(len(values)):
+                        for j in range(i + 1, len(values)):
+                            v1, page1, item1, u1 = values[i]
+                            v2, page2, item2, u2 = values[j]
+                            if page1 == page2 or u1 != u2:
+                                continue
+                            if v1 <= 0 or v2 <= 0:
+                                continue
+                            diff_ratio = abs(v1 - v2) / max(v1, v2)
+                            abs_diff = abs(v1 - v2)
+                            if diff_ratio > threshold_ratio and abs_diff > threshold_abs:
+                                contradictions.append(
+                                    Contradiction(
+                                        entity1=entity_name,
+                                        entity1_type="company",
+                                        page1=page1,
+                                        statement1=item1["body"][:100],
+                                        entity2=entity_name,
+                                        entity2_type="company",
+                                        page2=page2,
+                                        statement2=item2["body"][:100],
+                                        contradiction_type="numeric",
+                                        confidence=confidence,
+                                        description=(
+                                            f"数值差异: {field} "
+                                            f"{v1}{u1} vs {v2}{u2} "
+                                            f"(差异{diff_ratio:.0%})"
+                                        ),
                                     )
+                                )
+                                entity_contradictions += 1
 
-                # 每实体每字段最多 3 个矛盾
-                if len([c for c in contradictions if c.entity1 == entity_name]) >= 3:
+                if entity_contradictions >= 3:
                     break
 
         return contradictions
@@ -742,6 +757,10 @@ class ContradictionDetector:
                             stmt2 = attr_stmts[j]
 
                             if stmt1["value"] != stmt2["value"]:
+                                # 只标记同一页面内的分类矛盾为高置信度
+                                # 跨页面的分类差异可能是正常视角不同
+                                same_page = stmt1["page"] == stmt2["page"]
+                                confidence = "high" if same_page else "low"
                                 contradictions.append(
                                     Contradiction(
                                         entity1=entity,
@@ -753,7 +772,7 @@ class ContradictionDetector:
                                         page2=stmt2["page"],
                                         statement2=stmt2["statement"],
                                         contradiction_type="categorical",
-                                        confidence="low",
+                                        confidence=confidence,
                                         description=f"分类矛盾: {attr} 有不同值",
                                     )
                                 )

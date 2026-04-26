@@ -6,7 +6,7 @@
 
 ## Current Phase
 
-Phase 8: complete → Phase 9: pending（待用户决策）
+Phase 9 (Data Quality) in progress. Scheduler running (PDF extraction 501/4333).
 
 ## Phases
 
@@ -86,13 +86,13 @@ Phase 8: complete → Phase 9: pending（待用户决策）
   - 新闻采集极度倾斜（7天内仅北方华创有采集）
   - 矛盾检测阈值过宽（200 条低质量矛盾）
 
-### Phase 9: 数据填充与质量提升（建议下一步）
-- [ ] 批量补全缺失的综合评估（211 个页面，需 LLM 调用，考虑成本）
-- [ ] 补全 wiki frontmatter 的 sources_count 字段
-- [ ] 优化新闻采集均衡化（扩大关键词库，按行业轮询）
-- [ ] 调整矛盾检测阈值（增加硬性矛盾检测）
-- [ ] 提交 Phase 1-8 全部变更到 git
-- **Status:** pending
+### Phase 9: 数据填充与质量提升
+- [x] 批量补全缺失的综合评估（3 个有内容的页面已生成，210 个空模板跳过）
+- [x] 补全 wiki frontmatter 的 sources_count 字段（281 个文件已修复）
+- [x] 优化新闻采集均衡化（554 篇文章覆盖 100+ 公司，已由 scheduler 实现）
+- [x] 调整矛盾检测阈值（200→77 潜在矛盾，53 个高置信度 vs 之前 0 个）
+- [ ] 提交 Phase 9 变更到 git
+- **Status:** in_progress
 
 ## Key Questions
 

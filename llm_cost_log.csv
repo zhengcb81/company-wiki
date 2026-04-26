@@ -951,3 +951,8 @@ timestamp,provider,model,prompt_tokens,completion_tokens,total_tokens,estimated_
 2026-04-25T22:02:56.710352,deepseek,deepseek-v4-flash,147,220,367,8.2e-05
 2026-04-25T22:03:25.674922,deepseek,deepseek-v4-flash,147,234,381,8.6e-05
 2026-04-25T22:05:08.195583,deepseek,deepseek-v4-flash,147,227,374,8.4e-05
+2026-04-26T09:02:54.676649,deepseek,deepseek-v4-flash,147,213,360,8e-05
+2026-04-26T09:09:06.846863,deepseek,deepseek-v4-flash,5224,586,5810,0.000895
+2026-04-26T09:09:15.819875,deepseek,deepseek-v4-flash,5596,653,6249,0.000966
+2026-04-26T09:09:23.084551,deepseek,deepseek-v4-flash,4401,499,4900,0.000756
+2026-04-26T09:09:56.146539,deepseek,deepseek-v4-flash,147,298,445,0.000104

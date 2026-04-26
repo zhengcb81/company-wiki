@@ -11,6 +11,7 @@ paginate: true
 aliases: [688012, AMEC, AMEC Inc, 中微半导体, 中微半导体设备]
 sector: [半导体设备, 刻蚀设备]
 ticker: "688012"
+sources_count: 10
 ---
 
 # 核心跟踪问题
