@@ -3,12 +3,9 @@
 
 # 大型原始文件（PDF等）— 所有 raw 子目录下的 PDF
 *.pdf
-**/raw/reports/
-**/raw/research/
-**/raw/financial_reports/
-**/raw/prospectus/
-**/raw/investor_relations/
-**/raw/announcements/
+
+# 忽略所有 raw 目录下的内容（本地文档不同步到git）
+**/raw/
 
 # Python 缓存
 __pycache__/
