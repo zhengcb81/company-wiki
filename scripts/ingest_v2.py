@@ -83,6 +83,30 @@ def is_ingested(file_path, ingested_set):
     return get_db().is_ingested(str(file_path), ingested_set)
 
 
+def _pdf_metadata_date(file_path: str) -> Optional[str]:
+    """从 PDF 元数据读取创建/修改日期，格式 D:YYYYMMDDHHMMSS+TZ'ZZ'。"""
+    if not file_path.lower().endswith(".pdf"):
+        return None
+    try:
+        import fitz
+    except ImportError:
+        return None
+    try:
+        doc = fitz.open(file_path)
+    except Exception:
+        return None
+    md = doc.metadata or {}
+    for k in ("creationDate", "modDate"):
+        s = md.get(k, "") or ""
+        if s.startswith("D:"):
+            digits = re.sub(r"\D", "", s[2:])
+            if len(digits) >= 8:
+                y, mo, d = digits[:4], digits[4:6], digits[6:8]
+                if 1 <= int(mo) <= 12 and 1 <= int(d) <= 31:
+                    return f"{y}-{mo}-{d}"
+    return None
+
+
 # ── 扫描待处理文件 ─────────────────────────
 def scan_pending_files(graph, company_name=None):
     ingested = get_ingested_set()
@@ -95,6 +119,16 @@ def scan_pending_files(graph, company_name=None):
     # 公司扫描时跳过明显属于行业层面的文件（防污染）
     _sector_file_patterns = ["行业分析", "行业研究", "行业报告"]
 
+    # 跳过的中间处理目录（非原始数据源）
+    _skip_dir_patterns = [
+        "/wiki/",
+        "\\wiki\\",
+        "/extracts/",
+        "\\extracts\\",
+        "/segments/",
+        "\\segments\\",
+    ]
+
     for company in companies:
         name = company["name"]
         company_dir = WIKI_ROOT / "companies" / name
@@ -104,22 +138,24 @@ def scan_pending_files(graph, company_name=None):
             if not f.is_file() or is_ingested(f, ingested):
                 continue
             fp_str = str(f)
-            if "/wiki/" in fp_str or "\\wiki\\" in fp_str:
+            if any(p in fp_str for p in _skip_dir_patterns):
                 continue
             # 跳过行业层面的文件（可能在旧操作中误放入公司目录）
             if any(p in f.name for p in _sector_file_patterns):
                 continue
             pending.append((str(f), name, "company"))
 
-    for sector_name in graph.get_all_sectors():
-        sector_dir = WIKI_ROOT / "sectors" / sector_name
-        if not sector_dir.exists():
-            continue
-        for f in sorted(sector_dir.rglob("*")):
-            if f.is_file() and not is_ingested(f, ingested):
-                if "/wiki/" in str(f) or "\\wiki\\" in str(f):
-                    continue
-                pending.append((str(f), sector_name, "sector"))
+    # 仅在未指定公司过滤时扫描行业目录
+    if not company_name:
+        for sector_name in graph.get_all_sectors():
+            sector_dir = WIKI_ROOT / "sectors" / sector_name
+            if not sector_dir.exists():
+                continue
+            for f in sorted(sector_dir.rglob("*")):
+                if f.is_file() and not is_ingested(f, ingested):
+                    if "/wiki/" in str(f) or "\\wiki\\" in str(f):
+                        continue
+                    pending.append((str(f), sector_name, "sector"))
 
     return pending
 
@@ -177,29 +213,41 @@ def extract_report_date(file_path: str, source_type: str) -> Optional[str]:
 
     year = int(year_match.group(1))
 
-    # 根据文档类型和文件名中的季度信息推断报告期
+    # Q1 根因修复完善：文件名是日期事实层，不依赖容易错分类的 source_type
+    # （preexisting bug：classify_source 把"半年度报告.pdf"归为 annual_report，
+    #   导致 extract_report_date 走年报分支返回 12-31。先按文件名关键字判定。）
+    name_lower = name.lower()
+    if (
+        any(k in name for k in ["半年度", "半年报", "半年"])
+        or "semi_annual" in name_lower
+    ):
+        return f"{year}-06-30"
+    if any(k in name for k in ["一季", "第一季度", "1季", "Q1"]) or "q1" in name_lower:
+        return f"{year}-03-31"
+    if any(k in name for k in ["三季", "第三季度", "3季", "Q3"]) or "q3" in name_lower:
+        return f"{year}-09-30"
+    if any(k in name for k in ["二季", "第二季度", "2季", "Q2"]) or "q2" in name_lower:
+        return f"{year}-06-30"
+    if any(k in name for k in ["四季", "第四季度", "4季", "Q4"]) or "q4" in name_lower:
+        return f"{year}-12-31"
+    if any(k in name for k in ["年报", "年度报告", "年度"]) or "annual" in name_lower:
+        return f"{year}-12-31"
+
+    # Q1 修复扩展：非财报类（券商研报/公告/新闻等）从文件名提取真实发布日期，
+    # 避免走 datetime.now() 兜底成今天的日期。
+    # 券商研报常见格式：20190227-东北证券-北方华创-002371-... (YYYYMMDD 包含 8 位连续数字)
+    # 也支持 YYYY-MM-DD / YYYY_MM_DD 等分隔日期
+    date_match = re.search(r"(20\d{2})[-_]?(\d{2})[-_]?(\d{2})", name)
+    if date_match:
+        y, m, d = date_match.group(1), date_match.group(2), date_match.group(3)
+        if 1 <= int(m) <= 12 and 1 <= int(d) <= 31:
+            return f"{y}-{m}-{d}"
+
+    # Fallback：source_type 不可靠时的回退逻辑
     if source_type in ["annual_report", "年报"]:
         return f"{year}-12-31"
     elif source_type in ["semi_annual_report", "半年报"]:
         return f"{year}-06-30"
-    elif source_type in ["quarterly_report", "季报"]:
-        # 尝试从文件名提取季度（不区分大小写）
-        name_lower = name.lower()
-        if any(q in name_lower for q in ["q1", "一季报", "第一季度", "1季报"]):
-            return f"{year}-03-31"
-        elif any(
-            q in name_lower for q in ["q2", "二季报", "第二季度", "2季报", "半年报"]
-        ):
-            return f"{year}-06-30"
-        elif any(q in name_lower for q in ["q3", "三季报", "第三季度", "3季报"]):
-            return f"{year}-09-30"
-        elif any(
-            q in name_lower for q in ["q4", "四季报", "第四季度", "4季报", "年报"]
-        ):
-            return f"{year}-12-31"
-        else:
-            # 默认年报
-            return f"{year}-12-31"
     elif source_type in ["investor_relations", "ir", "投资者关系"]:
         # IR 活动记录表尝试从文件名提取具体日期
         # 支持格式：2022-04-16, 2022_0416, 20220416
@@ -302,14 +350,21 @@ def add_timeline_entries(
     wiki_text = wiki_path.read_text(encoding="utf-8")
     added = 0
 
-    # 构建来源链接（相对路径）
+    # 构建来源链接（相对 wiki 文件位置，对齐 AGENTS.md 规范 ../raw/{path}）
+    # wiki 文件在 companies/{name}/wiki/{topic}.md，源在 companies/{name}/raw/{...}
+    # 所以从 wiki 文件回退一级到 companies/{name}/，再进 raw/ → ../raw/{tail}
     source_link = ""
     if source_file:
-        try:
-            rel_path = Path(source_file).relative_to(WIKI_ROOT)
-            source_link = f"\n- [来源](../{rel_path.as_posix()})"
-        except ValueError:
-            pass
+        norm = source_file.replace("\\", "/")
+        m = re.search(r"companies/[^/]+/raw/(.+)$", norm)
+        if m:
+            source_link = f"\n- [来源](../raw/{m.group(1)})"
+        else:
+            try:
+                rel_path = Path(source_file).relative_to(WIKI_ROOT)
+                source_link = f"\n- [来源](../{rel_path.as_posix()})"
+            except ValueError:
+                pass
 
     for entry in entries:
         date = entry.get("date", datetime.now().strftime("%Y-%m-%d"))
@@ -888,6 +943,24 @@ def process_file(
         # 尝试从文件名提取实际报告日期，避免所有 PDF 都被标记为处理当天
         published_date = extract_report_date(file_path, source_type)
     if not published_date:
+        # Q1 修复再扩展：文件名无日期 pattern 时，从 PDF/MD 顶部前 800 字符扫日期
+        # （如研报 PDF 文件名"非公开发行股票预案.PDF"无日期，但内容开头通常含
+        #   "二〇一九年一月四日董事会审议通过..."）
+        head = cleaned[:800] if cleaned else ""
+        m = re.search(r"(20\d{2})[年\-/_](\d{1,2})[月\-/_](\d{1,2})", head)
+        if m:
+            y = m.group(1)
+            mo = f"{int(m.group(2)):02d}"
+            d = f"{int(m.group(3)):02d}"
+            if 1 <= int(mo) <= 12 and 1 <= int(d) <= 31:
+                published_date = f"{y}-{mo}-{d}"
+    if not published_date:
+        # Q1 修复终兜底：内容 head 也无日期时（PDF 是 GBK 编码、cleaned 是 latin-1 mangled），
+        # 回看 PDF metadata 创建日期（fitz 读出的 D:YYYYMMDDHHMMSS+TZ'ZZ'）
+        pdf_md_date = _pdf_metadata_date(file_path)
+        if pdf_md_date:
+            published_date = pdf_md_date
+    if not published_date:
         published_date = datetime.now().strftime("%Y-%m-%d")
 
     if source_type in ["annual_report", "semi_annual_report", "quarterly_report"]:
@@ -993,6 +1066,7 @@ def process_file(
                 previous_period_data=json.dumps(prev_data, ensure_ascii=False)
                 if prev_data
                 else "",
+                published_date=published_date,
             )
             llm_response = None  # 不需要单独的 LLM 响应对象
         else:
@@ -1020,6 +1094,14 @@ def process_file(
 
         # 写入时间线条目（含质量检查）
         entries = parsed.get("timeline_entries", [])
+        # Q1 根因修复第二层保险：对所有 source_type 强制覆盖 entry.date 为 published_date
+        # 日期是结构字段（来源发布日期），应由文件名/frontmatter 事实层决定，
+        # 而非 LLM 看到文档正文里出现的年份自填（会导致全部条目标今天日期）。
+        # news/announcement 一份源里的多 entry 共享发布日期也安全。
+        if published_date:
+            for e in entries:
+                if "date" not in e or not e.get("date") or e["date"] != published_date:
+                    e["date"] = published_date
         if entries and wiki_path:
             # 7.1 质量检查
             original_count = len(entries)

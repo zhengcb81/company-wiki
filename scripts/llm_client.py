@@ -694,6 +694,7 @@ class LLMClient:
         entity_name: str = "",
         doc_type: str = "annual_report",
         previous_period_data: str = "",
+        published_date: str = "",
     ) -> Dict[str, Any]:
         """
         分析完整文档（利用 1M 上下文，直接传入整篇文档不做截断）。
@@ -729,9 +730,20 @@ class LLMClient:
 
 请结合上期数据进行环比分析。"""
 
+        # 报告发布日期真相源 — 防止 LLM 自填日期幻觉
+        # （根因修复：整篇文档分析时 LLM 看到年报正文里出现多个年份的数字，
+        #   会自填 date 字段为正文里提到的年份，导致时间线日期失真。
+        #   日期是结构字段不是内容，应由文件名事实层决定。）
+        date_section = ""
+        if published_date:
+            date_section = f"""
+报告发布日期: {published_date}
+⚠️ 重要：所有 timeline_entries 的 date 字段必须填 "{published_date}"，
+不要从文档正文里挑年份自填，不要使用原文中提到的其他历史年份。"""
+
         system = "你是一个专业的上市公司研究分析助手。请严格按要求的JSON格式输出。"
 
-        user = f"""你是一名资深财务分析师。请深度分析以下{doc_hint}{prev_section}
+        user = f"""你是一名资深财务分析师。请深度分析以下{doc_hint}{prev_section}{date_section}
 
 {f"相关实体: {entity_name}" if entity_name else ""}
 {f"文档类型: {doc_type}" if doc_type else ""}
@@ -1007,7 +1019,9 @@ class LLMClient:
         检测两个页面之间的矛盾
         """
         system = CONTRADICTION_DETECTION_SYSTEM_PROMPT
-        user = build_contradiction_detection_prompt(page1_content, page2_content, entity)
+        user = build_contradiction_detection_prompt(
+            page1_content, page2_content, entity
+        )
 
         response = self.chat(user, system)
         if response.success:
