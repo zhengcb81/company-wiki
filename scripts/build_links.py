@@ -11,16 +11,22 @@ from pathlib import Path
 from collections import defaultdict
 
 from common import WIKI_ROOT as BASE
+from graph import Graph
 
 
 def main():
     base = BASE
-    graph = yaml.safe_load((base / "graph.yaml").read_text(encoding="utf-8"))
+    # 修：用 Graph 类加载 companies/sectors（Graph 从 companies.yaml/sectors.yaml 读，
+    # 不是 graph.yaml；graph.yaml 只有 edges/questions/settings）
+    g = Graph(str(base / "graph.yaml"))
+    companies = {c["name"]: g.get_company(c["name"]) for c in g.get_all_companies()}
 
-    # 收集实体信息
-    companies = graph.get("companies", {})
-    sectors = graph.get("sectors", {})
-    themes = graph.get("themes", {})
+    sector_names = g.get_all_sectors()
+    sectors = {name: g.get_sector(name) for name in sector_names}
+    sectors = {k: v for k, v in sectors.items() if v is not None}
+
+    # themes 暂无独立数据源，留空（graph.yaml 无 themes section）
+    themes = {}
 
     all_names = set()
     all_names.update(companies.keys())
@@ -91,8 +97,7 @@ def main():
 
     out_path = base / "links.yml"
     out_path.write_text(
-        yaml.dump(links_data, allow_unicode=True, sort_keys=False),
-        encoding="utf-8"
+        yaml.dump(links_data, allow_unicode=True, sort_keys=False), encoding="utf-8"
     )
 
     total = sum(len(v) for v in links_data["links"].values())
