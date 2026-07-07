@@ -36,7 +36,7 @@ def main():
     # 扫描 wiki 页面
     wiki_pages = {}  # entity_key -> {topic: rel_path}
     for md in sorted(base.rglob("wiki/*.md")):
-        rel = str(md.relative_to(base))
+        rel = str(md.relative_to(base)).replace("\\", "/")
         parts = rel.split("/")
         if len(parts) >= 3:
             entity_key = f"{parts[0]}/{parts[1]}"
@@ -64,15 +64,16 @@ def main():
     # 2) 基于内容中的实体名提及构建关联
     content_links = defaultdict(set)
     for md in sorted(base.rglob("wiki/*.md")):
-        rel = str(md.relative_to(base))
+        rel = str(md.relative_to(base)).replace("\\", "/")
         parts = rel.split("/")
         if len(parts) < 2:
             continue
         entity_key = f"{parts[0]}/{parts[1]}"
+        self_name = parts[1]
         content = md.read_text(encoding="utf-8")
 
         for name in all_names:
-            if name in content and name != parts[1]:
+            if name in content and name != self_name:
                 # 推断目标实体类型
                 if name in companies:
                     content_links[entity_key].add(f"companies/{name}")
