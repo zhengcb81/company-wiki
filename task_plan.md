@@ -109,7 +109,7 @@ Historical: CW-2.28 independent review **FAIL** (2026-07-26). CW-2.29, CW-2.30, 
 - [x] 补全 wiki frontmatter 的 sources_count 字段（281 个文件已修复）
 - [x] 优化新闻采集均衡化（554 篇文章覆盖 100+ 公司，已由 scheduler 实现）
 - [x] 调整矛盾检测阈值（200→77 潜在矛盾，53 个高置信度 vs 之前 0 个）
-- [ ] 提交 Phase 9 变更到 git
+- [x] 提交 Phase 9 变更到 git
 - **Status:** in_progress
 
 ## Key Questions
