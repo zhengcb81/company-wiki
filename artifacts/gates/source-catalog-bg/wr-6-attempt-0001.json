@@ -1,0 +1,27 @@
+{
+  "work_unit": "WR-6",
+  "section": "10.8.7",
+  "timestamp_utc": "20260727T220000Z",
+  "status": "PASS",
+  "verdict": "healthy",
+  "runtime": {
+    "pid": 30016,
+    "runtime_state": "running",
+    "desired_state": "enabled",
+    "heartbeat_age_at_last_check": 85.9
+  },
+  "5m_pilot": {"status": "PASS", "path": "artifacts/gates/source-catalog-bg/wr-6-pilot-5m.json", "delta": "artifacts+5, pending-5, completed+5"},
+  "30m_pilot": {"status": "PASS", "path": "artifacts/gates/source-catalog-bg/wr-6-pilot-30m.json", "duration_seconds": 1694, "samples": 28, "delta": "artifacts+50, pending-50, completed+50", "docs_per_hour": "~106"},
+  "checks": {
+    "production_worker_count_always_1": true,
+    "pytest_temp_worker_max_0": true,
+    "foreign_worker_max_0": true,
+    "same_pid_throughout": true,
+    "inventory_errors_0": true,
+    "raw_sample_unchanged": true,
+    "stockwiki_writes_0": true,
+    "db_quick_check_ok": true,
+    "scan_interrupted_delta_0": true
+  },
+  "next": "WR-7 final regression gate (already completed in previous batch)"
+}

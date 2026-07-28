@@ -1,0 +1,17 @@
+{
+  "work_unit": "WR-3",
+  "section": "10.8.4",
+  "verdict": "healthy_for_wr3_scope",
+  "timestamp_utc": "20260727T201134Z",
+  "status": "PASS",
+  "tests": {
+    "governance": 5,
+    "pass_all": true
+  },
+  "files": [
+    "tests/contract/test_source_catalog_temp_worker_governance.py",
+    "tests/contract/conftest.py",
+    "tests/helpers/wr3_governance.py"
+  ],
+  "next": "WR-4 background reliability xfail→GREEN"
+}

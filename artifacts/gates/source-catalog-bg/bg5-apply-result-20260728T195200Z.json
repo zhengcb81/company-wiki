@@ -1,0 +1,23 @@
+{
+  "work_unit": "BG-5-apply",
+  "timestamp_utc": "20260728T195200Z",
+  "backup_path": ".source_catalog/catalog.sqlite3.bak-bg5-apply-20260728T194951Z",
+  "normalized": {
+    "total": 2673,
+    "matched": 1497,
+    "already_indexed": 1176,
+    "detached": 0,
+    "hash_mismatch": 0,
+    "missing_frontmatter": 0
+  },
+  "summary": {
+    "total": 1420,
+    "matched": 1188,
+    "already_indexed": 232,
+    "detached": 0,
+    "hash_mismatch": 0,
+    "missing_frontmatter": 0
+  },
+  "total_new_artifacts": 2685,
+  "total_time_seconds": 54.3
+}

@@ -1,0 +1,69 @@
+{
+  "receipt_type": "bg-0-baseline",
+  "timestamp_utc": "2026-07-26T16:56:26Z",
+  "status": "PASS",
+  "worker": {
+    "production_pid": 1828,
+    "production_worker_count": 1,
+    "runtime_state": "running",
+    "desired_state": "enabled",
+    "heartbeat_age_seconds": 182.4,
+    "stale_runtime": false,
+    "current_stage": "exporting",
+    "started_at_unix": 1785061870.52,
+    "startup_method": "current_user_run_registry"
+  },
+  "foreign_workers": [
+    {"pid": 19040, "note": "pytest temp worker (AppData\\Local)"},
+    {"pid": 7060, "note": "pytest temp worker (AppData\\Local)"}
+  ],
+  "pipeline": {
+    "markdown_eligible": 23722,
+    "markdown_pending": 22984,
+    "markdown_completed": 716,
+    "markdown_partial": 16,
+    "markdown_unsupported": 6,
+    "markdown_blocked": 67,
+    "markdown_failed": 0,
+    "llm_summary_completed": 190,
+    "llm_summary_failed": 55,
+    "llm_summary_pending": 493,
+    "artifacts_actual": 928,
+    "derived_normalized_md_files": 2673,
+    "derived_summary_md_files": 1420,
+    "artifact_index_empty": false,
+    "derived_detached": true,
+    "reconciliation_needed": true
+  },
+  "scan": {
+    "last_scan_status": "completed_with_errors",
+    "last_scan_started": "2026-07-26T15:40:35Z",
+    "last_scan_completed": "2026-07-26T15:47:52Z",
+    "last_scan_duration_seconds": 437.35,
+    "historical_interrupted_count": 5,
+    "stale_running_scan": false
+  },
+  "database": {
+    "size_bytes": 6468038656,
+    "sha256_prefix": "9363f88e1fee37b0",
+    "quick_check": "not_verified_db_locked_by_running_worker"
+  },
+  "index": {
+    "documents": 23789,
+    "unique_sources": 43230,
+    "active_locations": 46780,
+    "incomplete_documents": 66,
+    "quarantined_documents": 1,
+    "upstream_rejected_documents": 189
+  },
+  "raw_safety": {
+    "note": "Raw file count/hash sampling deferred - DB locked. No raw files were touched."
+  },
+  "stockwiki_writes": 0,
+  "errors": [
+    "SQLite read-only queries timed out (DB locked by running worker PID 1828). Counts taken from worker-status JSON.",
+    "PowerShell variable expansion mangled by bash shell - used simplified commands."
+  ],
+  "blocker": null,
+  "next_fr": "FR-1"
+}

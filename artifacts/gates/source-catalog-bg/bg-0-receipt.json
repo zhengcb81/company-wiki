@@ -1,0 +1,56 @@
+{
+  "phase": "BG-0",
+  "status": "PASS",
+  "timestamp": "2026-07-26T10:20:00Z",
+  "worker": {
+    "pid": 20848,
+    "status": "stopped",
+    "stale": true,
+    "heartbeat_age": 11308
+  },
+  "catalog": {
+    "quick_check": "ok",
+    "db_sha256": "68496841a33e433eea96f0ba75b33d931eef3e493750acb66dab073486ce4564",
+    "db_size": 77262848,
+    "documents": 11706,
+    "sources": 23409,
+    "locations": 23451,
+    "artifacts": 0,
+    "evidence_spans": 0,
+    "assertions": 2
+  },
+  "scan_health": {
+    "total_runs": 5,
+    "last_status": "running (stale)",
+    "completed_runs": 0,
+    "interrupted_runs": 4,
+    "last_completed": "NONE",
+    "all_dates": [
+      "interrupted",
+      "interrupted",
+      "interrupted",
+      "interrupted",
+      "running(stale)"
+    ]
+  },
+  "pipeline": {
+    "markdown_eligible": 11706,
+    "markdown_pending": 11706,
+    "llm_summary_eligible": 0,
+    "normalized_total": 0,
+    "blocked": 0
+  },
+  "runtime_files": {
+    "instance_lock": "exists (stale)",
+    "operation_lock": "exists (stale)",
+    "launcher_events": 1,
+    "console_log": 52610,
+    "derived_files": 4093,
+    "derived_md": 4093
+  },
+  "process": {
+    "python_procs_count": 5,
+    "worker_pid": "20848 (dead)"
+  },
+  "STOP_gates": "ALL CLEAR: no live worker, DB ok, no raw changes"
+}

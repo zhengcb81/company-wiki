@@ -1,0 +1,77 @@
+{
+  "pilot_pass": false,
+  "duration_minutes": 1.3,
+  "sample_count": 4,
+  "production_worker_count": 2,
+  "heartbeat_stale_count": 0,
+  "foreign_worker_max": 0,
+  "pytest_temp_worker_max": 2,
+  "pending_start": 22837,
+  "pending_end": 22834,
+  "pending_delta": 3,
+  "artifact_start": 1115,
+  "artifact_end": 1118,
+  "artifact_delta": 3,
+  "raw_samples": [
+    "companies\\SHEIN\\raw\\research\\20210727-\u5f00\u6e90\u8bc1\u5238-\u7eba\u7ec7\u670d\u88c5\u884c\u4e1a\uff1a\u654f\u6377\u4f9b\u5e94\u94fe\u4e0e\u6570\u5b57\u5316\u8fd0\u8425\u4e0b\u7684SHEIN\u6a21\u5f0f\u89e3\u6790.pdf",
+    "companies\\SHEIN\\raw\\research\\20211214-\u4e2d\u6cf0\u8bc1\u5238-\u4e92\u8054\u7f51\u884c\u4e1a\u54c1\u724c\u51fa\u6d77\u7cfb\u5217\u6df1\u5ea6\u00b7SheIn\u7bc7\uff1a\u75be\u5982\u98ce\uff0c\u5f90\u5982\u6797.pdf",
+    "companies\\SHEIN\\raw\\research\\20221009-\u62db\u5546\u8bc1\u5238-\u53ef\u9009\u6d88\u8d39\u884c\u4e1aSHEIN\u6df1\u5ea6\u62a5\u544a\uff1a\u4f9b\u5e94\u94fe&\u6d41\u91cf\u4e3a\u6838\uff0c\u5feb\u65f6\u5c1a\u8de8\u5883\u5de8\u5934\u539a\u79ef\u8584\u53d1.pdf",
+    "companies\\\u4e03\u4e00\u4e8c\\raw\\financial_reports\\\u4e03\u4e00\u4e8c\uff1a2017\u5e74\u5e74\u5ea6\u62a5\u544a.pdf",
+    "companies\\\u4e03\u4e00\u4e8c\\raw\\financial_reports\\\u4e03\u4e00\u4e8c\uff1a2018\u5e74\u534a\u5e74\u5ea6\u62a5\u544a.pdf"
+  ],
+  "stockwiki_writes": 0,
+  "samples": [
+    {
+      "timestamp": 1785095175.0212247,
+      "runtime_state": "running",
+      "heartbeat_age": 16.6,
+      "worker_status": "normalizing",
+      "markdown_pending": 22837,
+      "markdown_completed": 855,
+      "artifact_rows": 1115,
+      "production_workers": 2,
+      "foreign_workers": 0,
+      "pytest_temp_workers": 2,
+      "long_running": false
+    },
+    {
+      "timestamp": 1785095192.8678174,
+      "runtime_state": "running",
+      "heartbeat_age": 13.2,
+      "worker_status": "normalizing",
+      "markdown_pending": 22836,
+      "markdown_completed": 856,
+      "artifact_rows": 1117,
+      "production_workers": 2,
+      "foreign_workers": 0,
+      "pytest_temp_workers": 2,
+      "long_running": false
+    },
+    {
+      "timestamp": 1785095211.0565176,
+      "runtime_state": "running",
+      "heartbeat_age": 16.4,
+      "worker_status": "normalizing",
+      "markdown_pending": 22835,
+      "markdown_completed": 857,
+      "artifact_rows": 1117,
+      "production_workers": 2,
+      "foreign_workers": 0,
+      "pytest_temp_workers": 2,
+      "long_running": false
+    },
+    {
+      "timestamp": 1785095229.892413,
+      "runtime_state": "running",
+      "heartbeat_age": 5.3,
+      "worker_status": "waiting",
+      "markdown_pending": 22834,
+      "markdown_completed": 858,
+      "artifact_rows": 1118,
+      "production_workers": 2,
+      "foreign_workers": 0,
+      "pytest_temp_workers": 2,
+      "long_running": false
+    }
+  ]
+}

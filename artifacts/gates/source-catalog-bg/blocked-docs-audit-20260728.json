@@ -1,0 +1,20 @@
+{
+  "work_unit": "blocked-docs-audit",
+  "section": "10.2 line 178",
+  "status": "PASS",
+  "timestamp_utc": "20260728T200549Z",
+  "total_flagged": 256,
+  "breakdown": {
+    "upstream_rejected_regulatory_filing": 189,
+    "incomplete_no_source": 66,
+    "incomplete_with_source": 0,
+    "quarantined_broker_research": 1
+  },
+  "orphan_doc_logical": "66 incomplete document-logical with no primary_source_id, 0 artifacts/evidence_spans referenced",
+  "verdict": {
+    "upstream_rejected": "正常终态，不需修复",
+    "orphan_doc_logical": "historical document-logical 类型孤儿，安全隔离不影响 worker",
+    "quarantined": "单一 broker_research 文件需人工审查 source identity"
+  },
+  "csv_path": "artifacts/gates/source-catalog-bg/blocked-docs-audit-20260728.csv"
+}

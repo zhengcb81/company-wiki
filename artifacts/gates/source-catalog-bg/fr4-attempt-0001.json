@@ -1,0 +1,12 @@
+{
+  "work_unit": "FR-4",
+  "section": "10.7.5",
+  "status": "PASS",
+  "verdict": "behavior_already_implemented_contract_solidified",
+  "timestamp_utc": "20260728T193041Z",
+  "tests": "5 contract tests GREEN (elapsed暴露/long_running>180s/under_180s/panel文本/progress字段)",
+  "production_evidence": "control.py line 704-722 already exposes current_path/elapsed/long_running_document_warning(>180s)/progress_*; PS1 line 235-242 already shows WARNING for long running.",
+  "files": [
+    "tests/contract/test_source_catalog_long_running_observable.py"
+  ]
+}

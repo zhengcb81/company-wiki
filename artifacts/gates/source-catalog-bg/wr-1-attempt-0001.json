@@ -1,0 +1,131 @@
+{
+  "work_unit": "WR-1",
+  "section": "10.8.2",
+  "phase": "WR-1 (encoding-safe and precise process inventory)",
+  "receipt_id": "wr-1-attempt-0001",
+  "timestamp_utc": "20260727T193500Z",
+  "status": "PASS",
+  "verdict": "healthy_for_wr-1_scope",
+  "scope": {
+    "allowed_files_changed": [
+      "src/company_wiki/source_catalog/control.py",
+      "tests/contract/test_source_catalog_process_inventory.py"
+    ],
+    "production_db_touched": false,
+    "raw_files_touched": false,
+    "stockwiki_writes": 0,
+    "production_worker_started": false,
+    "production_worker_stopped": false
+  },
+  "wr0_baseline": {
+    "worker_status_path": "artifacts/gates/source-catalog-bg/wr-0-worker-status-20260727T192112Z.json",
+    "processes_path": "artifacts/gates/source-catalog-bg/wr-0-processes-20260727T192112Z.json",
+    "ambient_runtime_state_pre": "stopped (PID 1828 exited at 2026-07-26T20:51:23 with reason=control_request)",
+    "ambient_desired_state_pre": "enabled",
+    "ambient_markdown_pending_pre": 22828,
+    "ambient_normalized_artifact_rows_pre": 1126,
+    "ambient_recent_interrupted_count_pre": 5,
+    "ambient_last_scan_status_pre": "completed_with_errors (run_id=scan-bd6f2b3a0ede48cfae5af38f3bfd0aca)"
+  },
+  "control_py_changes": {
+    "added_imports": ["re"],
+    "new_helpers": [
+      "_run_powershell_inventory_subprocess(project_root) -> CompletedProcess[str]",
+      "_normalize_path(value, project_root) -> str | None",
+      "_classify_worker_command(cmd, project_root, config_path, worker_config_path) -> str"
+    ],
+    "rewrote": "_scan_source_catalog_processes",
+    "rewrote_shape": {
+      "production_workers": "list[{pid, creation_date?}]",
+      "foreign_workers": "list[{pid, creation_date?}]",
+      "pytest_temp_workers": "list[{pid, creation_date?}]",
+      "ignored_matching_processes": "list[{pid, reason}]",
+      "inventory_error": "str | None"
+    },
+    "ansi_encoding": "subprocess.run uses encoding='utf-8', errors='replace', timeout=15",
+    "exception_handling": [
+      "OSError",
+      "subprocess.TimeoutExpired",
+      "UnicodeDecodeError",
+      "json.JSONDecodeError"
+    ],
+    "classification_rules": {
+      "require_cli_module_marker": "company_wiki.source_catalog.cli",
+      "require_worker_token_after_excluding_subcommands": [
+        "worker-status",
+        "worker-start",
+        "worker-stop",
+        "worker-pause",
+        "worker-resume"
+      ],
+      "ignored_reasons": [
+        "empty_command",
+        "audit_command (Get-CimInstance Win32_Process enumerator self-match)",
+        "control_ps1 (scripts/source_catalog_control.ps1)",
+        "not_cli_module",
+        "subcommand_worker_status",
+        "subcommand_worker_start",
+        "subcommand_worker_stop",
+        "subcommand_worker_pause",
+        "subcommand_worker_resume",
+        "not_worker_subcommand",
+        "no_config_path"
+      ],
+      "production_match": "--config/--worker-config path equals or lives under project_root (POSIX lower)",
+      "pytest_temp_match": "config path under %TEMP%/%TMP% (POSIX lower) or cmd contains \\pytest-of-",
+      "foreign_match": "real worker command but neither production nor pytest_temp"
+    },
+    "ignored_payload": "entries carry only pid + reason; full CommandLine never persisted (PII/secret-safe)"
+  },
+  "worker_controller_default_inventory": "now passes config_path/worker_config_path so classification uses the project's resolved config paths (not just project_root substring matching)",
+  "test_results": {
+    "new_inventory_contract_tests": "tests/contract/test_source_catalog_process_inventory.py",
+    "new_tests_count": 15,
+    "new_tests_pass": 15,
+    "new_tests_xfail": 0,
+    "new_tests_skip": 0,
+    "broader_subset_pass": "73 passed, 1 skipped (pre-existing skip real_background_worker hand-authored)",
+    "broader_subset_paths": [
+      "tests/contract/test_source_catalog_control.py",
+      "tests/contract/test_source_catalog_worker.py",
+      "tests/contract/test_source_catalog_process_inventory.py",
+      "tests/contract/test_source_catalog_pipeline.py"
+    ]
+  },
+  "static_gates": {
+    "ruff_changed_files": "All checks passed!",
+    "compileall_control_py": "0 errors",
+    "git_diff_check_changed_files": "0 whitespace errors",
+    "ruff_changed_files_exit": 0,
+    "compileall_exit": 0,
+    "git_diff_check_exit": 0
+  },
+  "production_evidence": {
+    "command": "python -m company_wiki.source_catalog.cli --config config/source_catalog.yaml worker-status --worker-config config/source_catalog_worker.yaml",
+    "process_inventory_observed": {
+      "production_workers": [],
+      "foreign_workers": [],
+      "pytest_temp_workers": [],
+      "ignored_matching_processes": [
+        {"pid": 31936, "reason": "not_worker_subcommand"},
+        {"pid": 30844, "reason": "subcommand_worker_status"}
+      ],
+      "inventory_error": null
+    },
+    "inventory_shape_correct": true,
+    "self_worker_status_command_now_ignored_not_production": true,
+    "inventory_error_absent": true,
+    "ambient_runtime_state_post": "stopped",
+    "pipeline_index_documents": 23789
+  },
+  "red_tests_failed_before_implementation": "RED tests were written first; the implementation already produced GREEN in this session because the helper extraction + behavior implementation land in the same work unit. No existing assertion was lowered to make a test green.",
+  "remaining_out_of_scope_for_wr1": [
+    "WR-2 worker bootstrap/start/restart process-event evidence",
+    "WR-3 pytest-temp worker cleanup governance",
+    "WR-4 background reliability xfail removal",
+    "WR-5 control panel truthful health sections",
+    "WR-6 production resume + 5m/30m pilot",
+    "WR-7 final regression + static gate"
+  ],
+  "next_action": "WR-2 — make worker bootstrap/start/restart self-proving (process events, exit-code evidence, no crash before session open)"
+}

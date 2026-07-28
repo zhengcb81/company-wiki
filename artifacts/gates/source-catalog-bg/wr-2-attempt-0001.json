@@ -1,0 +1,108 @@
+{
+  "work_unit": "WR-2",
+  "section": "10.8.3",
+  "phase": "WR-2 (worker bootstrap self-evidence + start/restart failure diagnostics)",
+  "receipt_id": "wr-2-attempt-0001",
+  "timestamp_utc": "20260727T195200Z",
+  "status": "PASS",
+  "verdict": "healthy_for_wr-2_scope",
+  "scope": {
+    "allowed_files_changed": [
+      "src/company_wiki/source_catalog/control.py",
+      "src/company_wiki/source_catalog/worker.py",
+      "src/company_wiki/source_catalog/cli.py",
+      "tests/contract/test_source_catalog_worker_bootstrap.py"
+    ],
+    "production_db_touched": false,
+    "raw_files_touched": false,
+    "stockwiki_writes": 0,
+    "production_worker_started": false,
+    "production_worker_stopped": false
+  },
+  "control_py_changes": {
+    "new_method_read_desired_state": "Reads worker_control.json directly; never touches runtime/lock or the PowerShell process inventory. Returns 'enabled' or 'paused'.",
+    "new_helpers": [
+      "_read_console_tail(max_lines=40) — last N lines of worker_console.log",
+      "_read_recent_process_event() -> (event | None, error | None) — last JSONL line of worker_process_events.jsonl; OSError / JSONDecodeError reported as error string instead of raising",
+      "_classify_start_failure_reason(spawned_pid, exit_code, runtime_state) — produces a human-readable reason covering exit_code None / 0 / nonzero"
+    ],
+    "start_return_shape_when_runtime_not_published": {
+      "started": false,
+      "spawned_pid": "<int or None>",
+      "spawned_exit_code": "<int or None>",
+      "startup_failure_reason": "<string>",
+      "console_tail": "<last 40 lines, '\\n'-joined>",
+      "recent_process_event": "<last JSONL event dict or None>",
+      "recent_process_event_error": "<str only when recent_process_event is None>"
+    },
+    "status_path_key_inventory_isolation": "status() still returns process_inventory as before; new code path cli.py worker branch uses read_desired_state() instead"
+  },
+  "worker_py_changes": {
+    "run_forever_desired_state_read": "Uses control.read_desired_state() when available; only falls back to control.status().get('desired_state') for legacy stubs.",
+    "process_events_written": [
+      "process_starting (immediately after set_low_process_priority)",
+      "session_opened (after control.open_session() succeeds)",
+      "process_exiting {reason=control_request} (clean control stop)",
+      "process_exiting {reason=persistent_pause} (desired_state==paused OR open_session RuntimeError containing 'paused')",
+      "process_exiting {reason=unhandled_exception} (any BaseException escaping the with session block, control=None while loop, or open_session failure other than paused)",
+      "unhandled_exception {exception_type, message_redacted[:200]} (immediately BEFORE process_exiting reason=unhandled_exception)",
+      "process_exiting {reason=clean_exit} (control=None without control endpoint — historical standalone mode)"
+    ],
+    "no_secret_commandline_env_leak": "All payloads only carry event/pid/timestamp/catalog_dir/exception_type/message_redacted/reason — no full env, full command line, or API key."
+  },
+  "cli_py_changes": {
+    "worker_branch_no_longer_calls_status_before_session_open": "worker_controller().read_desired_state() == \"paused\" replaces full status() call",
+    "worker_status_recent_events": "Helper _read_recent_worker_events(catalog_dir) reads worker_process_events.jsonl + worker_launcher_events.jsonl, returns {recent_process_event, recent_launcher_event} and emits {recent_process_event_error, recent_launcher_event_error} on JSONL parse failure; strips UTF-8 BOM; never raises."
+  },
+  "test_results": {
+    "new_bootstrap_contract_tests": "tests/contract/test_source_catalog_worker_bootstrap.py",
+    "new_tests_count": 14,
+    "new_tests_pass": 14,
+    "new_tests_xfail": 0,
+    "new_tests_skip": 0,
+    "broader_subset_pass": "87 passed, 1 skipped (pre-existing test_real_background_worker skip — WR-4 will remove), 5 xfailed (background reliability — WR-4), 3 xpassed",
+    "broader_subset_paths": [
+      "tests/contract/test_source_catalog_worker_bootstrap.py",
+      "tests/contract/test_source_catalog_process_inventory.py",
+      "tests/contract/test_source_catalog_control.py",
+      "tests/contract/test_source_catalog_worker.py",
+      "tests/contract/test_source_catalog_pipeline.py",
+      "tests/contract/test_source_catalog_background_reliability.py"
+    ]
+  },
+  "static_gates": {
+    "ruff_changed_files": "All checks passed!",
+    "compileall_control_worker_cli": "0 errors",
+    "git_diff_check_changed_files": "0 whitespace errors",
+    "ruff_exit": 0,
+    "compileall_exit": 0,
+    "git_diff_check_exit": 0
+  },
+  "production_evidence": {
+    "command_worker_status": "python -m company_wiki.source_catalog.cli --config config/source_catalog.yaml worker-status --worker-config config/source_catalog_worker.yaml",
+    "recent_process_event_observed": {
+      "event": "process_exiting",
+      "pid": 1828,
+      "timestamp": "2026-07-26T20:51:23.797087",
+      "catalog_dir": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.source_catalog"
+    },
+    "recent_launcher_event_observed": {
+      "status": "launcher_exception",
+      "message": "Exception in thread Thread-1 (_readerthread):",
+      "exit_code": 1,
+      "recorded_at": "2026-07-27T16:26:03.1993384Z"
+    },
+    "recent_process_event_error": null,
+    "recent_launcher_event_error": null,
+    "ambient_runtime_state_post": "stopped",
+    "ambient_desired_state": "enabled"
+  },
+  "remaining_out_of_scope_for_wr2": [
+    "WR-3 pytest-temp worker残留治理",
+    "WR-4 background reliability xfail→真 GREEN（移除 test_real_background_worker skip + xfail markers）",
+    "WR-5 控制面板讲真话 + 健康区块",
+    "WR-6 生产恢复 + 5m/30m pilot（须 WR-1..WR-5 全绿后执行）",
+    "WR-7 最终回归门禁"
+  ],
+  "next_action": "WR-3 — pytest-temp worker cleanup governance: test fixtures must stop their own workers in teardown; production worker-status must report foreign/pytest_temp workers without confusion; pilot PASS requires pytest_temp_worker_max=0."
+}

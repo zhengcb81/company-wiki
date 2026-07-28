@@ -1,0 +1,18 @@
+{
+  "work_unit": "CW-2.28C",
+  "phase": 2,
+  "section": "semantic entity testing",
+  "status": "PASS",
+  "verdict": "all focused tests GREEN, 0 fail/skip/xfail",
+  "timestamp_utc": "20260728T200258Z",
+  "tests": {
+    "test_source_catalog_text_fingerprint": "6 passed",
+    "test_source_catalog_semantic_duplicates": "5 passed",
+    "total": "11 passed, 0 failed, 0 skipped, 0 xfailed"
+  },
+  "pass_criteria": {
+    "0_fail_skip_xfail": true,
+    "no_embedding_LLM_manual_DB": true,
+    "exact_copy_counts_unchanged": true
+  }
+}

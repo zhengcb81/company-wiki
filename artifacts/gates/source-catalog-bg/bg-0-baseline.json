@@ -1,0 +1,28 @@
+{
+  "worker_runtime": {
+    "pid": 20848,
+    "status": null,
+    "heartbeat_at": 1785049793.4549506
+  },
+  "worker_instance.lock": {
+    "exists": true,
+    "size": 581
+  },
+  "operation.lock": {
+    "exists": true,
+    "size": 102
+  },
+  "launcher_events_count": 1,
+  "console_log_size": 52610,
+  "derived": {
+    "total": 4093,
+    "md": 4093
+  },
+  "python_procs": [
+    "\"python.exe\",\"14672\",\"Console\",\"10\",\"3,804 K\"",
+    "\"python.exe\",\"19912\",\"Console\",\"10\",\"26,452 K\"",
+    "\"python.exe\",\"7140\",\"Console\",\"10\",\"4,204 K\"",
+    "\"python.exe\",\"26340\",\"Console\",\"10\",\"71,128 K\"",
+    "\"python.exe\",\"20744\",\"Console\",\"10\",\"15,764 K\""
+  ]
+}

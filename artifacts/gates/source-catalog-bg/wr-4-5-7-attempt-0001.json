@@ -1,0 +1,15 @@
+{
+  "work_units": ["WR-4","WR-5","WR-7"],
+  "sections": ["10.8.5","10.8.6§10.8.8"],
+  "timestamp_utc": "20260727T201600Z",
+  "verdict": "healthy_for_wr-4-5-7_scope",
+  "wr4_removed_xfail": "test_source_catalog_background_reliability.py rewritten: 3 passed, 3 skipped (production catalog conditional). ZERO xfail/xpassed markers remaining.",
+  "wr5_control_panel": "Added Scan health / Artifact health / Lock health / Process events sections to scripts/source_catalog_control.ps1",
+  "wr7_gate": {
+    "pytest_with_runxfail": "102 passed, 4 skipped (3 production catalog not available, 1 pre-existing). 0 failed, 0 xfail, 0 xpassed",
+    "ruff": "All checks passed!",
+    "compileall": "0 errors",
+    "diff_check": "0 whitespace errors"
+  },
+  "next": "WR-6 production resume requires user authorization per §10.8.7"
+}
