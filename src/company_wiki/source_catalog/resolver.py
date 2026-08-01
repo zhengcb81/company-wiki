@@ -336,6 +336,14 @@ class SourceResolver:
         future_matches = 0
         unknown_date_matches = 0
         identity_mismatch = 0
+        # Only locations under a company_raw root are canonical reuse
+        # candidates: dayu portfolio ingestion lives outside the companies/
+        # subtree, and filing-fetch rejects such handles (MongoDB finding).
+        company_raw_root_ids = frozenset(
+            root.root_id
+            for root in self.catalog.config.roots
+            if root.kind == "company_raw"
+        )
         for document in self.catalog.query(limit=10_000_000):
             if not self._entity_matches(request.entity, document):
                 continue
@@ -408,6 +416,20 @@ class SourceResolver:
                 continue
             if published > request.as_of_date:
                 future_matches += 1
+                continue
+            canonical_locations = [
+                item
+                for item in document["locations"]
+                if item.get("is_canonical")
+                and item.get("role") == "original_primary"
+                and item.get("location_status") == "active"
+            ]
+            if not any(
+                item.get("root_id") in company_raw_root_ids
+                for item in canonical_locations
+            ):
+                # No canonical company_raw location: not a reusable source
+                # (dayu portfolio documents live outside companies/).
                 continue
             handle = self._handle(
                 document,

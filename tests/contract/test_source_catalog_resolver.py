@@ -108,12 +108,49 @@ def test_resolver_reuses_existing_exact_copy_without_downloader(tmp_path):
 
 
 def test_resolver_prefers_strong_provider_identity_and_builds_capture_ready_handle(tmp_path):
-    from company_wiki.source_catalog import ResolutionStatus, SourceRequest, SourceResolver
+    from company_wiki.source_catalog import (
+        CatalogConfig,
+        ResolutionStatus,
+        RootSpec,
+        SourceCatalog,
+        SourceRequest,
+        SourceResolver,
+    )
 
-    catalog, primary = _dayu_catalog(tmp_path)
+    # A canonical company_raw document with a complete sidecar identity.
+    project = tmp_path / "project"
+    company = project / "companies" / "ACME" / "raw" / "financial_reports" / "annual"
+    company.mkdir(parents=True)
+    primary = company / "2026-02-20_ACME_2025_annual_report.htm"
+    primary.write_text("<html>ACME FY2025 annual report.</html>", encoding="utf-8")
+    (company / "2026-02-20_ACME_2025_annual_report.htm.source.json").write_text(
+        json.dumps(
+            {
+                "market": "US",
+                "security_id": "ACME",
+                "source_title": "ACME 2025 Annual Report",
+                "form_type": "10-K",
+                "filing_date": "2026-02-20",
+                "fiscal_year": 2025,
+                "provider": "sec",
+                "provider_document_id": "0001234567-26-000001",
+                "source_url": "https://www.sec.gov/Archives/edgar/data/1/0001-26-000001/annual.htm",
+            }
+        ),
+        encoding="utf-8",
+    )
+    catalog = SourceCatalog(
+        CatalogConfig(
+            project_root=project,
+            catalog_dir=project / ".source_catalog",
+            roots=(RootSpec("company_raw", project / "companies", "company_raw"),),
+        )
+    )
+    catalog.scan()
     request = SourceRequest(
         entity="ACME",
         market="US",
+        security_id="ACME",
         document_kind="annual_report",
         form_type="10-K",
         fiscal_year=2025,
@@ -136,6 +173,32 @@ def test_resolver_prefers_strong_provider_identity_and_builds_capture_ready_hand
     assert handle.fiscal_year == 2025
     assert handle.form_type == "10-K"
     assert handle.snapshot_sha256 == handle.content_sha256
+
+
+def test_resolver_does_not_reuse_dayu_portfolio_non_canonical_documents(tmp_path):
+    """Documents ingested from the dayu portfolio live outside the canonical
+    companies/ subtree; filing-fetch rejects such paths, so reuse-first must
+    yield MISSING and let the download path proceed (MongoDB finding)."""
+    from company_wiki.source_catalog import ResolutionStatus, SourceRequest, SourceResolver
+
+    catalog, _ = _dayu_catalog(tmp_path)
+    request = SourceRequest(
+        entity="ACME",
+        market="US",
+        security_id="ACME",
+        document_kind="annual_report",
+        form_type="10-K",
+        fiscal_year=2025,
+        provider="sec",
+        provider_document_id="0001234567-26-000001",
+        as_of_date="2026-07-18",
+    )
+
+    result = SourceResolver(catalog).resolve(request)
+
+    assert result.status is ResolutionStatus.MISSING
+    assert result.reason == "no_existing_source_satisfies_request"
+    assert result.download_required is True
 
 
 def test_resolver_enforces_as_of_date_and_does_not_reuse_future_source(tmp_path):

@@ -195,6 +195,16 @@ def test_scan_propagates_identity_from_provider_company_id(tmp_path):
     )
     catalog.scan()
 
+    # identity propagation itself: the ingested document metadata now carries
+    # market/security_id resolved from provider_company_id
+    docs = catalog.query(limit=10)
+    assert len(docs) == 1
+    dayu_meta = (docs[0].get("metadata") or {}).get("dayu_meta") or {}
+    assert dayu_meta.get("market") == "CN"
+    assert dayu_meta.get("security_id") == "601899"
+
+    # dayu portfolio documents live outside the canonical companies/ subtree
+    # and are therefore not reusable (resolver canonical-root rule)
     result = SourceResolver(catalog).resolve(
         SourceRequest(
             entity="Zijin",
@@ -205,5 +215,4 @@ def test_scan_propagates_identity_from_provider_company_id(tmp_path):
             as_of_date="2026-07-31",
         )
     )
-    assert result.status is ResolutionStatus.REUSED_EQUIVALENT
-    assert len(result.matches) == 1
+    assert result.status is ResolutionStatus.MISSING
