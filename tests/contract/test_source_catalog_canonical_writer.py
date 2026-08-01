@@ -305,6 +305,50 @@ def test_writer_deduplicates_downloaded_bytes_without_second_canonical_file(tmp_
     assert raw_files == [Path(first.canonical_path)]
 
 
+def test_writer_dedup_ignores_dayu_portfolio_locations(tmp_path):
+    """Dedup must only match canonical company_raw locations: a same-hash file
+    ingested from the dayu portfolio lives outside companies/ and must not be
+    offered as the canonical path (MongoDB finding)."""
+    from company_wiki.source_catalog import (
+        CanonicalImportStatus,
+        CanonicalSourceWriter,
+        CatalogConfig,
+        RootSpec,
+        SourceCatalog,
+    )
+
+    project = tmp_path / "project"
+    companies = project / "companies"
+    portfolio = tmp_path / "dayu" / "portfolio"
+    companies.mkdir(parents=True)
+    filing = portfolio / "MDB" / "filings" / "fil_x"
+    filing.mkdir(parents=True)
+    catalog = SourceCatalog(
+        CatalogConfig(
+            project_root=project,
+            catalog_dir=project / ".source_catalog",
+            roots=(
+                RootSpec("company_raw", companies, "company_raw", priority=10),
+                RootSpec("dayu", portfolio, "dayu_portfolio", priority=20),
+            ),
+        )
+    )
+    request, candidate, receipt, staged = _staged_contract(tmp_path)
+
+    # a same-hash file exists only under the dayu portfolio root
+    dayu_copy = filing / "same.htm"
+    dayu_copy.write_bytes(staged.read_bytes())
+    catalog.scan()
+
+    writer = CanonicalSourceWriter(catalog)
+    imported = writer.import_staged(request, candidate, receipt)
+
+    assert imported.status is CanonicalImportStatus.IMPORTED_NEW
+    canonical = Path(imported.canonical_path)
+    assert canonical.is_relative_to(companies / "示例公司")
+    assert not str(canonical).startswith(str(portfolio))
+
+
 def test_ensure_service_records_download_and_later_zero_call_reuse(tmp_path):
     from company_wiki.source_catalog import (
         AcquisitionCoordinator,

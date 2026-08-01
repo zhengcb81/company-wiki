@@ -271,12 +271,16 @@ class CanonicalSourceWriter:
             )
 
     def _existing_original(self, content_sha256: str) -> Path | None:
+        # Only canonical company_raw locations are dedup targets: dayu
+        # portfolio ingestion lives outside the companies/ subtree and its
+        # paths are rejected by the filing-fetch handle contract (MongoDB
+        # finding).
         rows = self.catalog.store.fetchall(
             """SELECT l.absolute_path FROM sources s
             JOIN locations l ON l.source_id=s.source_id
             JOIN roots r ON r.root_id=l.root_id
             WHERE s.content_sha256=? AND l.role='original_primary'
-            AND l.location_status='active'
+            AND l.location_status='active' AND r.kind='company_raw'
             ORDER BY r.priority,l.root_id,l.relative_path""",
             (content_sha256,),
         )
