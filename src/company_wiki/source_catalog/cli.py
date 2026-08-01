@@ -149,6 +149,17 @@ def _parser() -> argparse.ArgumentParser:
     )
     subparsers.add_parser("status", help="show catalog counts")
 
+    documents_cmd = subparsers.add_parser(
+        "documents", help="manage catalog documents (retire, ...)"
+    )
+    documents_sub = documents_cmd.add_subparsers(dest="document_action")
+    retire_cmd = documents_sub.add_parser(
+        "retire", help="soft-delete a document: retired + audit, nothing removed"
+    )
+    retire_cmd.add_argument("--document-id", required=True)
+    retire_cmd.add_argument("--reason", required=True)
+    retire_cmd.add_argument("--created-by", default="cli")
+
     identity_enrich = subparsers.add_parser(
         "identity-enrichment",
         help="manage source metadata assertions: preview, verify, reject",
@@ -350,11 +361,13 @@ def _parser() -> argparse.ArgumentParser:
         "worker-start", "start the background worker now if it is enabled"
     )
     worker_start.add_argument("--wait-seconds", type=float, default=5.0)
+    worker_start.add_argument("--startup-delay-seconds", type=int, default=0)
 
     worker_resume = add_worker_control_parser(
         "worker-resume", "clear persistent pause and start the background worker"
     )
     worker_resume.add_argument("--wait-seconds", type=float, default=5.0)
+    worker_resume.add_argument("--startup-delay-seconds", type=int, default=0)
 
     for name, help_text in (
         ("worker-pause", "persistently pause the worker and stop it now"),
@@ -515,6 +528,18 @@ def main(argv: Sequence[str] | None = None) -> int:
             )
         elif args.command == "status":
             result = get_catalog().status()
+        elif args.command == "documents":
+            if getattr(args, "document_action", None) == "retire":
+                from .store import retire_document
+
+                result = retire_document(
+                    get_catalog().store,
+                    document_id=args.document_id,
+                    reason=args.reason,
+                    created_by=getattr(args, "created_by", "cli"),
+                )
+            else:
+                return 2
         elif args.command == "identity-enrichment":
             from .assertion_service import (
                 preview_assertion,
@@ -705,9 +730,15 @@ def main(argv: Sequence[str] | None = None) -> int:
             result["pipeline"] = pipeline
             result.update(_read_recent_worker_events(config.catalog_dir))
         elif args.command == "worker-start":
-            result = worker_controller().start(wait_seconds=args.wait_seconds)
+            result = worker_controller().start(
+                wait_seconds=args.wait_seconds,
+                startup_delay_seconds=args.startup_delay_seconds,
+            )
         elif args.command == "worker-resume":
-            result = worker_controller().resume(wait_seconds=args.wait_seconds)
+            result = worker_controller().resume(
+                wait_seconds=args.wait_seconds,
+                startup_delay_seconds=args.startup_delay_seconds,
+            )
         elif args.command == "worker-pause":
             result = worker_controller().pause(
                 graceful_timeout_seconds=args.graceful_timeout_seconds,

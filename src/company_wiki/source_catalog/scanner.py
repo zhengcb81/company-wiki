@@ -1,0 +1,905 @@
+"""Read-only scanners for company raw trees, generic directories, and dayu portfolios."""
+
+from __future__ import annotations
+
+from collections import defaultdict
+from dataclasses import dataclass
+from datetime import UTC, datetime
+import hashlib
+import json
+import mimetypes
+import os
+from pathlib import Path
+import re
+import unicodedata
+import uuid
+from typing import Any, Callable, Iterable
+
+from company_wiki.source_contract import SourceManifest, SourceType
+
+from .models import CatalogConfig, DOCUMENT_EXTENSIONS, SCANNER_VERSION, RootSpec, ScanReport
+from .store import CatalogStore, canonical_json
+
+
+_SKIP_DIRS = frozenset(
+    {
+        ".git",
+        ".hg",
+        ".svn",
+        "__pycache__",
+        ".pytest_cache",
+        ".mypy_cache",
+        "node_modules",
+        ".venv",
+        "venv",
+    }
+)
+_DATE_RE = re.compile(r"(?<!\d)(20\d{2})[-_.年](0[1-9]|1[0-2]|[1-9])[-_.月](0[1-9]|[12]\d|3[01]|[1-9])")
+_ACQUISITION_SIDECAR_SUFFIX = ".source.json"
+
+
+@dataclass(frozen=True)
+class _Candidate:
+    root: RootSpec
+    path: Path
+    relative_path: str
+    group_key: str
+    role: str
+    entity_name: str | None
+    group_metadata: dict[str, Any]
+    source_status: str
+
+
+@dataclass(frozen=True)
+class _ObservedFile:
+    candidate: _Candidate
+    source_id: str | None
+    content_sha256: str | None
+    size: int
+    mtime_ns: int
+    mime_type: str
+    manifest_json: str | None
+    reused: bool
+    error: str | None
+
+
+def _utc_now() -> str:
+    return datetime.now(UTC).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+
+
+def _sha256_text(value: str) -> str:
+    return hashlib.sha256(value.encode("utf-8")).hexdigest()
+
+
+def _location_id(root_id: str, relative_path: str) -> str:
+    return "urn:company-wiki:location:sha256:" + _sha256_text(root_id + "\0" + relative_path)
+
+
+def _document_id_for_source(source_id: str) -> str:
+    return "urn:company-wiki:document:sha256:" + source_id.rsplit(":", 1)[-1]
+
+
+def _logical_document_id(root_id: str, group_key: str) -> str:
+    return "urn:company-wiki:document-logical:sha256:" + _sha256_text(root_id + "\0" + group_key)
+
+
+def _mime_type(path: Path) -> str:
+    extension = path.suffix.lower()
+    overrides = {
+        ".md": "text/markdown",
+        ".mht": "multipart/related",
+        ".xsd": "application/xml",
+        ".xml": "application/xml",
+        ".json": "application/json",
+    }
+    if extension in overrides:
+        return overrides[extension]
+    guessed = mimetypes.guess_type(path.name)[0]
+    return (guessed or "application/octet-stream").lower()
+
+
+def _published_date(text: str) -> str | None:
+    match = _DATE_RE.search(text)
+    if not match:
+        return None
+    try:
+        return datetime(int(match.group(1)), int(match.group(2)), int(match.group(3))).date().isoformat()
+    except ValueError:
+        return None
+
+
+def _classification(path: Path, *, root_kind: str, metadata: dict[str, Any]) -> tuple[str, SourceType]:
+    form = str(metadata.get("form_type") or "").casefold()
+    text = re.sub(
+        r"[_-]+",
+        " ",
+        path.stem + " " + str(metadata.get("source_title") or "") + " " + form,
+    ).casefold()
+    # --- trust order: sidecar > form_type > precise keywords > weak keywords ---
+    # 1. explicit sidecar document_kind (highest trust)
+    sidecar_kind = str(metadata.get("document_kind") or "").strip().lower()
+    if sidecar_kind:
+        _SIDECAR_MAP = {
+            "annual_report": (SourceType.REGULATORY_FILING, "annual_report"),
+            "semi_annual_report": (SourceType.REGULATORY_FILING, "semi_annual_report"),
+            "quarterly_report": (SourceType.REGULATORY_FILING, "quarterly_report"),
+            "regulatory_filing": (SourceType.REGULATORY_FILING, "regulatory_filing"),
+            "broker_research": (SourceType.BROKER_RESEARCH, "broker_research"),
+            "investor_relations": (SourceType.INVESTOR_RELATIONS, "investor_relations"),
+            "prospectus": (SourceType.PROSPECTUS, "prospectus"),
+            "news": (SourceType.ORIGINAL_NEWS, "news"),
+        }
+        if sidecar_kind in _SIDECAR_MAP:
+            st, kind = _SIDECAR_MAP[sidecar_kind]
+            return kind, st
+    # 2. broker research commentary must precede annual/semi/quarterly checks
+    if any(token in text for token in ("点评", "深度报告", "调研报告")):
+        return "broker_research", SourceType.BROKER_RESEARCH
+    # 3. explicit form_type (regulatory filing)
+    if form in {"10-k", "20-f", "40-f"} or "20f" in text or "10k" in text or "40f" in text:
+        return "annual_report", SourceType.REGULATORY_FILING
+    # 4. semi-annual BEFORE annual (半年度 contains 年度)
+    if any(token in text for token in ("半年度", "半年报", "interim report")):
+        return "semi_annual_report", SourceType.REGULATORY_FILING
+    # 5. quarterly
+    if form in {"10-q", "q1", "q2", "q3", "q4"} or any(
+        token in text for token in ("季度报告", "一季报", "三季报", "quarterly report")
+    ):
+        return "quarterly_report", SourceType.REGULATORY_FILING
+    # 6. annual report (after semi/quarterly exclusion)
+    if any(token in text for token in ("年度报告", "年报", "annual report")):
+        return "annual_report", SourceType.REGULATORY_FILING
+    if root_kind == "dayu_portfolio":
+        return "regulatory_filing", SourceType.REGULATORY_FILING
+    if any(token in text for token in ("投资者关系", "调研", "路演", "业绩说明会", "investor relation")):
+        return "investor_relations", SourceType.INVESTOR_RELATIONS
+    if any(token in text for token in ("招股", "prospectus")):
+        return "prospectus", SourceType.PROSPECTUS
+    if root_kind == "directory":
+        return "broker_research", SourceType.BROKER_RESEARCH
+    if path.suffix.lower() == ".md" and "news" in {part.casefold() for part in path.parts}:
+        return "news", SourceType.ORIGINAL_NEWS
+    return "other", SourceType.OTHER
+
+
+def _entity(entity_name: str | None, root_id: str) -> tuple[str, str, str, float, str]:
+    if entity_name:
+        if re.fullmatch(r"[A-Za-z0-9._-]+", entity_name):
+            return f"ticker:{entity_name.upper()}", entity_name, "ticker", 1.0, "path_ticker"
+        return f"company-name:{entity_name}", entity_name, "company", 1.0, "company_raw_path"
+    return f"unresolved:{root_id}", f"Unresolved ({root_id})", "unresolved", 0.0, "unresolved"
+
+
+def _walk_files(root: Path) -> Iterable[Path]:
+    for current, directories, files in os.walk(root):
+        directories[:] = [name for name in directories if name not in _SKIP_DIRS]
+        current_path = Path(current)
+        for name in files:
+            path = current_path / name
+            if path.suffix.lower() in DOCUMENT_EXTENSIONS:
+                yield path
+
+
+def _relative(path: Path, root: Path) -> str:
+    return unicodedata.normalize("NFC", path.relative_to(root).as_posix())
+
+
+def _company_names(config: CatalogConfig) -> tuple[str, ...]:
+    names: set[str] = set()
+    for root in config.roots:
+        if root.kind != "company_raw" or not root.path.is_dir():
+            continue
+        for child in root.path.iterdir():
+            if child.is_dir() and (child / "raw").is_dir():
+                names.add(unicodedata.normalize("NFC", child.name))
+    return tuple(sorted(names, key=lambda value: (-len(value), value.casefold())))
+
+
+def _infer_company(relative_path: str, names: tuple[str, ...]) -> str | None:
+    folded = relative_path.casefold()
+    matches = [name for name in names if name.casefold() in folded]
+    return matches[0] if len(matches) == 1 else None
+
+
+def _load_acquisition_metadata(path: Path) -> dict[str, Any]:
+    try:
+        value = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, UnicodeError, json.JSONDecodeError):
+        return {"meta_parse_error": True}
+    if not isinstance(value, dict):
+        return {"meta_parse_error": True}
+    return value
+
+
+def _load_security_master_identity(catalog_dir: Path) -> dict[str, tuple[str, str]]:
+    """Build provider org id → (market, security_id) from the security-master
+    snapshots, so a dayu meta.json's provider_company_id can propagate
+    identity into ingested documents (Phase 15.4)."""
+    mapping: dict[str, tuple[str, str]] = {}
+    master_dir = catalog_dir / "security_master"
+    if not master_dir.is_dir():
+        return mapping
+    for market in ("cn", "hk", "us"):
+        master_file = master_dir / f"{market}.json"
+        if not master_file.is_file():
+            continue
+        try:
+            payload = json.loads(master_file.read_text(encoding="utf-8"))
+        except (OSError, UnicodeError, json.JSONDecodeError):
+            continue
+        records = payload.get("records") if isinstance(payload, dict) else None
+        if not isinstance(records, list):
+            continue
+        for record in records:
+            if not isinstance(record, dict):
+                continue
+            identifiers = record.get("identifiers")
+            if not isinstance(identifiers, dict):
+                identifiers = {}
+            org = str(
+                record.get("source_record_id") or identifiers.get("org_id") or ""
+            ).strip()
+            market_value = str(record.get("market") or "").strip().upper()
+            security_id = str(record.get("security_id") or "").strip()
+            if org and market_value and security_id:
+                mapping.setdefault(org, (market_value, security_id))
+    return mapping
+
+
+def _enumerate_root(
+    root: RootSpec,
+    company_names: tuple[str, ...],
+    *,
+    progress: Callable[..., None] | None = None,
+    master_identity: dict[str, tuple[str, str]] | None = None,
+) -> tuple[list[_Candidate], int]:
+    candidates: list[_Candidate] = []
+    excluded = 0
+    if root.kind == "company_raw":
+        companies = sorted(
+            (item for item in root.path.iterdir() if item.is_dir()),
+            key=lambda item: item.name,
+        )
+        for company_index, company in enumerate(companies, start=1):
+            raw = company / "raw"
+            if not raw.is_dir():
+                continue
+            if progress is not None:
+                progress(
+                    current_path=str(raw.resolve(strict=False)),
+                    current=company_index,
+                    total=len(companies),
+                    detail=f"enumerating root {root.root_id}",
+                )
+            paths = sorted(_walk_files(raw))
+            sidecars = {
+                str(path)[: -len(_ACQUISITION_SIDECAR_SUFFIX)]: path
+                for path in paths
+                if path.name.endswith(_ACQUISITION_SIDECAR_SUFFIX)
+            }
+            primary_paths = [
+                path for path in paths if not path.name.endswith(_ACQUISITION_SIDECAR_SUFFIX)
+            ]
+            for path in primary_paths:
+                relative = _relative(path, root.path)
+                sidecar = sidecars.get(str(path))
+                metadata = _load_acquisition_metadata(sidecar) if sidecar else {}
+                candidates.append(
+                    _Candidate(
+                        root,
+                        path,
+                        relative,
+                        relative,
+                        "original_primary",
+                        company.name,
+                        metadata,
+                        "active",
+                    )
+                )
+                if sidecar is not None:
+                    candidates.append(
+                        _Candidate(
+                            root,
+                            sidecar,
+                            _relative(sidecar, root.path),
+                            relative,
+                            "metadata",
+                            company.name,
+                            metadata,
+                            "active",
+                        )
+                    )
+            primary_names = {str(path) for path in primary_paths}
+            for target, sidecar in sorted(sidecars.items()):
+                if target in primary_names:
+                    continue
+                relative = _relative(sidecar, root.path)
+                candidates.append(
+                    _Candidate(
+                        root,
+                        sidecar,
+                        relative,
+                        relative[: -len(_ACQUISITION_SIDECAR_SUFFIX)],
+                        "metadata",
+                        company.name,
+                        _load_acquisition_metadata(sidecar),
+                        "incomplete",
+                    )
+                )
+    elif root.kind == "directory":
+        for directory_index, (current, directories, files) in enumerate(
+            os.walk(root.path),
+            start=1,
+        ):
+            directories[:] = [name for name in directories if name not in _SKIP_DIRS]
+            current_path = Path(current)
+            if progress is not None:
+                progress(
+                    current_path=str(current_path.resolve(strict=False)),
+                    current=directory_index,
+                    total=0,
+                    detail=f"enumerating root {root.root_id}",
+                )
+            for name in files:
+                path = current_path / name
+                if path.suffix.lower() not in DOCUMENT_EXTENSIONS:
+                    excluded += 1
+                    continue
+                relative = _relative(path, root.path)
+                candidates.append(
+                    _Candidate(
+                        root,
+                        path,
+                        relative,
+                        relative,
+                        "original_primary",
+                        _infer_company(relative, company_names),
+                        {},
+                        "active",
+                    )
+                )
+    else:
+        raw_groups: dict[str, list[Path]] = defaultdict(list)
+        for file_index, path in enumerate(_walk_files(root.path), start=1):
+            if progress is not None and file_index % 100 == 1:
+                progress(
+                    current_path=str(path.resolve(strict=False)),
+                    current=file_index,
+                    total=0,
+                    detail=f"enumerating root {root.root_id}",
+                )
+            relative = _relative(path, root.path)
+            parts = Path(relative).parts
+            if len(parts) >= 3 and parts[1] == "filings":
+                if len(parts) >= 4 and parts[2] == ".rejections":
+                    group_key = Path(*parts[:4]).as_posix()
+                else:
+                    group_key = Path(*parts[:3]).as_posix()
+            else:
+                group_key = relative
+            raw_groups[group_key].append(path)
+        for group_key, paths in sorted(raw_groups.items()):
+            parts = Path(group_key).parts
+            ticker = parts[0] if parts else None
+            group_dir = root.path.joinpath(*parts) if len(paths) > 1 or Path(group_key).suffix == "" else paths[0].parent
+            meta_path = group_dir / "meta.json"
+            metadata: dict[str, Any] = {}
+            if meta_path.is_file():
+                try:
+                    loaded = json.loads(meta_path.read_text(encoding="utf-8"))
+                    if isinstance(loaded, dict):
+                        metadata = loaded
+                except (OSError, UnicodeError, json.JSONDecodeError):
+                    metadata = {"meta_parse_error": True}
+            # Phase 15.4: propagate identity that exists upstream but is not
+            # carried in the dayu meta.json (provider_company_id ↔ security
+            # master org id), so ingested documents are not identity-less.
+            if master_identity and (
+                not metadata.get("market") or not metadata.get("security_id")
+            ):
+                org = str(metadata.get("provider_company_id") or "").strip()
+                org = org.rsplit(":", 1)[-1] if org else ""
+                resolved = master_identity.get(org) if org else None
+                if resolved is not None:
+                    market_value, security_id = resolved
+                    metadata.setdefault("market", market_value)
+                    metadata.setdefault("security_id", security_id)
+            names = {path.name: path for path in paths}
+            selected = str(metadata.get("selected_primary_document") or "")
+            primary = str(metadata.get("primary_document") or "")
+            preferred: Path | None = None
+            for name in (selected, primary):
+                if name and name in names and not name.endswith("_docling.json"):
+                    preferred = names[name]
+                    break
+            if preferred is None:
+                preferred = next((path for path in paths if path.suffix.lower() == ".pdf"), None)
+            if preferred is None:
+                preferred = next(
+                    (path for path in paths if path.suffix.lower() in {".htm", ".html"} and path.name != "meta.json"),
+                    None,
+                )
+            if preferred is None:
+                preferred = next(
+                    (
+                        path
+                        for path in paths
+                        if path.name != "meta.json"
+                        and not path.name.endswith("manifest.json")
+                        and not path.name.endswith("_docling.json")
+                    ),
+                    None,
+                )
+            if preferred is None:
+                # Metadata-only group (no preferred file): do not ingest a
+                # document (Phase 15.4).  dayu stages meta.json before bytes
+                # exist; byte-less placeholder documents polluted the catalog
+                # with identity-less records that blocked reuse and download.
+                # The group is re-evaluated on the next scan once a preferred
+                # file appears.
+                continue
+            rejected = ".rejections" in parts
+            complete = metadata.get("ingest_complete") is True
+            if rejected:
+                source_status = "upstream_rejected"
+            elif preferred is None:
+                source_status = "incomplete"
+            else:
+                source_status = "active" if complete or len(paths) == 1 else "incomplete"
+            for path in sorted(paths):
+                if path.name == "meta.json" or path.name.endswith("manifest.json"):
+                    role = "metadata"
+                elif path.name.endswith("_docling.json"):
+                    role = "processed_docling"
+                elif preferred is not None and path == preferred:
+                    role = "original_primary"
+                else:
+                    role = "original_attachment"
+                candidates.append(
+                    _Candidate(
+                        root,
+                        path,
+                        _relative(path, root.path),
+                        group_key,
+                        role,
+                        ticker,
+                        metadata,
+                        source_status,
+                    )
+                )
+    return candidates, excluded
+
+
+def _observe_file(
+    candidate: _Candidate,
+    *,
+    existing: Any,
+    scan_time: str,
+    document_kind: str,
+    source_type: SourceType,
+    entity_id: str,
+) -> _ObservedFile:
+    stat = candidate.path.stat()
+    if (
+        existing is not None
+        and existing["source_id"]
+        and existing["manifest_json"]
+        and existing["observed_size"] == stat.st_size
+        and existing["observed_mtime_ns"] == stat.st_mtime_ns
+    ):
+        manifest = SourceManifest.from_dict(json.loads(existing["manifest_json"]))
+        return _ObservedFile(
+            candidate,
+            manifest.source_id,
+            manifest.content_sha256,
+            stat.st_size,
+            stat.st_mtime_ns,
+            manifest.mime_type,
+            manifest.canonical_json(),
+            True,
+            None,
+        )
+    mime_type = _mime_type(candidate.path)
+    try:
+        collector_name = f"filesystem-catalog-{candidate.root.root_id}"
+        collector_version = SCANNER_VERSION
+        retrieved_at = scan_time
+        if candidate.role == "original_primary" and candidate.group_metadata:
+            collector_name = str(
+                candidate.group_metadata.get("adapter_name") or collector_name
+            )
+            collector_version = str(
+                candidate.group_metadata.get("adapter_version") or collector_version
+            )
+            retrieved_at = str(
+                candidate.group_metadata.get("retrieved_at") or retrieved_at
+            )
+        manifest = SourceManifest.from_file(
+            root=candidate.root.path,
+            file_path=candidate.path,
+            entity_ids=(entity_id,),
+            source_type=source_type if candidate.role == "original_primary" else SourceType.OTHER,
+            published_date=(
+                str(candidate.group_metadata.get("filing_date"))
+                if candidate.group_metadata.get("filing_date")
+                else _published_date(candidate.path.name)
+            ),
+            retrieved_at=retrieved_at,
+            collector_name=collector_name,
+            collector_version=collector_version,
+            mime_type=mime_type,
+        )
+        expected_sha256 = candidate.group_metadata.get("content_sha256")
+        if (
+            candidate.role == "original_primary"
+            and expected_sha256
+            and manifest.content_sha256 != expected_sha256
+        ):
+            raise ValueError("acquisition sidecar SHA-256 does not match source bytes")
+    except Exception as exc:
+        return _ObservedFile(
+            candidate,
+            None,
+            None,
+            stat.st_size,
+            stat.st_mtime_ns,
+            mime_type,
+            None,
+            False,
+            f"{type(exc).__name__}: {exc}",
+        )
+    return _ObservedFile(
+        candidate,
+        manifest.source_id,
+        manifest.content_sha256,
+        stat.st_size,
+        stat.st_mtime_ns,
+        manifest.mime_type,
+        manifest.canonical_json(),
+        False,
+        None,
+    )
+
+
+def _select_roots(
+    config: CatalogConfig,
+    root_ids: set[str] | None,
+) -> tuple[RootSpec, ...]:
+    selected_roots = tuple(
+        root for root in config.roots if root_ids is None or root.root_id in root_ids
+    )
+    if not selected_roots:
+        raise ValueError("no configured roots matched root_ids")
+    if root_ids is not None:
+        unknown = root_ids - {root.root_id for root in config.roots}
+        if unknown:
+            raise ValueError(f"unknown root_ids: {sorted(unknown)}")
+    return selected_roots
+
+
+def _begin_scan_run(store: CatalogStore, run_id: str, scan_time: str) -> None:
+    with store.transaction() as connection:
+        connection.execute(
+            "UPDATE scan_runs SET completed_at=?,status='interrupted' WHERE status='running'",
+            (scan_time,),
+        )
+        connection.execute(
+            "INSERT INTO scan_runs(run_id,started_at,status) VALUES(?,?,?)",
+            (run_id, scan_time, "running"),
+        )
+
+
+def _interrupt_scan_run(store: CatalogStore, run_id: str) -> None:
+    with store.transaction() as connection:
+        connection.execute(
+            """UPDATE scan_runs SET completed_at=?,status='interrupted'
+            WHERE run_id=? AND status='running'""",
+            (_utc_now(), run_id),
+        )
+
+
+def _scan_catalog_impl(
+    config: CatalogConfig,
+    store: CatalogStore | None,
+    *,
+    dry_run: bool = False,
+    root_ids: set[str] | None = None,
+    progress: Callable[..., None] | None = None,
+    run_id: str | None = None,
+    scan_time: str | None = None,
+    selected_roots: tuple[RootSpec, ...] | None = None,
+    scan_run_started: bool = False,
+) -> ScanReport:
+    run_id = run_id or "scan-" + uuid.uuid4().hex
+    scan_time = scan_time or _utc_now()
+    names = _company_names(config)
+    files_seen = files_hashed = files_reused = files_excluded = errors = 0
+    if selected_roots is None:
+        selected_roots = _select_roots(config, root_ids)
+    if not dry_run:
+        if store is None:
+            raise TypeError("store is required for a non-dry-run scan")
+        if not scan_run_started:
+            _begin_scan_run(store, run_id, scan_time)
+
+    master_identity = _load_security_master_identity(config.catalog_dir)
+    for root in selected_roots:
+        if not root.path.is_dir():
+            errors += 1
+            continue
+        candidates, excluded = _enumerate_root(
+            root, names, progress=progress, master_identity=master_identity
+        )
+        files_seen += len(candidates)
+        files_excluded += excluded
+        if dry_run:
+            continue
+        with store.transaction() as connection:
+            connection.execute(
+                """INSERT INTO roots(root_id,path,kind,priority,last_scan_run,last_scanned_at)
+                VALUES(?,?,?,?,?,?) ON CONFLICT(root_id) DO UPDATE SET
+                path=excluded.path,kind=excluded.kind,priority=excluded.priority,
+                last_scan_run=excluded.last_scan_run,last_scanned_at=excluded.last_scanned_at""",
+                (root.root_id, str(root.path.resolve()), root.kind, root.priority, run_id, scan_time),
+            )
+        groups: dict[str, list[_Candidate]] = defaultdict(list)
+        for candidate in candidates:
+            groups[candidate.group_key].append(candidate)
+        existing_locations = {
+            row["relative_path"]: row
+            for row in store.fetchall(
+                """SELECT relative_path,source_id,observed_size,observed_mtime_ns,manifest_json
+                FROM locations WHERE root_id=?""",
+                (root.root_id,),
+            )
+        }
+        group_items = sorted(groups.items())
+        for group_index, (group_key, group) in enumerate(group_items, start=1):
+            primary_candidate = next((item for item in group if item.role == "original_primary"), None)
+            classification_path = primary_candidate.path if primary_candidate else group[0].path
+            if progress is not None:
+                progress(
+                    current_path=str(classification_path.resolve(strict=False)),
+                    current=group_index,
+                    total=len(group_items),
+                    detail=f"scanning root {root.root_id}",
+                )
+            metadata = primary_candidate.group_metadata if primary_candidate else group[0].group_metadata
+            document_kind, source_type = _classification(
+                classification_path, root_kind=root.kind, metadata=metadata
+            )
+            entity_name = (primary_candidate or group[0]).entity_name
+            entity_id, entity_label, entity_kind, confidence, method = _entity(entity_name, root.root_id)
+            observed: list[_ObservedFile] = []
+            for candidate in group:
+                try:
+                    item = _observe_file(
+                        candidate,
+                        existing=existing_locations.get(candidate.relative_path),
+                        scan_time=scan_time,
+                        document_kind=document_kind,
+                        source_type=source_type,
+                        entity_id=entity_id,
+                    )
+                except OSError:
+                    errors += 1
+                    continue
+                observed.append(item)
+                if item.reused:
+                    files_reused += 1
+                elif item.source_id:
+                    files_hashed += 1
+                if item.error:
+                    errors += 1
+            primary = next((item for item in observed if item.candidate.role == "original_primary" and item.source_id), None)
+            document_id = (
+                _document_id_for_source(primary.source_id)
+                if primary and primary.source_id
+                else _logical_document_id(root.root_id, group_key)
+            )
+            title = str(metadata.get("source_title") or "").strip() or classification_path.stem
+            published = (
+                str(metadata.get("filing_date") or metadata.get("published_date") or "")
+                .strip()
+                or _published_date(classification_path.name)
+                or None
+            )
+            source_status = (primary_candidate or group[0]).source_status
+            if primary is None:
+                source_status = (
+                    "quarantined" if any(item.error for item in observed) else "incomplete"
+                )
+            document_metadata = {
+                "root_id": root.root_id,
+                "group_key": group_key,
+                "scanner_version": SCANNER_VERSION,
+                "dayu_meta": metadata if root.kind == "dayu_portfolio" else None,
+                "acquisition": metadata if root.kind == "company_raw" and metadata else None,
+            }
+            with store.transaction() as connection:
+                for item in observed:
+                    if item.source_id:
+                        connection.execute(
+                            "INSERT OR IGNORE INTO sources(source_id,content_sha256,byte_size,mime_type,first_seen_at) VALUES(?,?,?,?,?)",
+                            (item.source_id, item.content_sha256, item.size, item.mime_type, scan_time),
+                        )
+                existing_document = connection.execute(
+                    "SELECT metadata_priority, source_status FROM documents WHERE document_id=?", (document_id,)
+                ).fetchone()
+                if existing_document is None:
+                    connection.execute(
+                        """INSERT INTO documents(document_id,primary_source_id,title,source_type,document_kind,
+                        published_date,source_status,metadata_priority,metadata_json,first_seen_at,last_seen_at)
+                        VALUES(?,?,?,?,?,?,?,?,?,?,?)""",
+                        (
+                            document_id,
+                            primary.source_id if primary else None,
+                            title,
+                            source_type.value,
+                            document_kind,
+                            published,
+                            source_status,
+                            root.priority,
+                            canonical_json(document_metadata),
+                            scan_time,
+                            scan_time,
+                        ),
+                    )
+                elif existing_document["source_status"] == "retired":
+                    # Retirement is terminal: a rescan must never revive a
+                    # retired document even while its files remain on disk
+                    # (Phase 15.6 batch governance).  Its locations stay
+                    # retired as well, so a partially-active location can
+                    # never exist (see the location_status computation below).
+                    connection.execute(
+                        "UPDATE documents SET last_seen_at=? WHERE document_id=?",
+                        (scan_time, document_id),
+                    )
+                elif root.priority <= existing_document["metadata_priority"]:
+                    connection.execute(
+                        """UPDATE documents SET primary_source_id=COALESCE(?,primary_source_id),title=?,source_type=?,
+                        document_kind=?,published_date=COALESCE(?,published_date),source_status=?,metadata_priority=?,
+                        metadata_json=?,last_seen_at=? WHERE document_id=?""",
+                        (
+                            primary.source_id if primary else None,
+                            title,
+                            source_type.value,
+                            document_kind,
+                            published,
+                            source_status,
+                            root.priority,
+                            canonical_json(document_metadata),
+                            scan_time,
+                            document_id,
+                        ),
+                    )
+                else:
+                    connection.execute(
+                        "UPDATE documents SET last_seen_at=? WHERE document_id=?",
+                        (scan_time, document_id),
+                    )
+                connection.execute(
+                    "INSERT OR IGNORE INTO entities(entity_id,name,entity_kind) VALUES(?,?,?)",
+                    (entity_id, entity_label, entity_kind),
+                )
+                connection.execute(
+                    """INSERT INTO document_entities(document_id,entity_id,confidence,method) VALUES(?,?,?,?)
+                    ON CONFLICT(document_id,entity_id) DO UPDATE SET confidence=MAX(confidence,excluded.confidence),method=excluded.method""",
+                    (document_id, entity_id, confidence, method),
+                )
+                retired_group = (
+                    existing_document is not None
+                    and existing_document["source_status"] == "retired"
+                )
+                for item in observed:
+                    candidate = item.candidate
+                    location_status = (
+                        "retired"
+                        if retired_group
+                        else ("active" if item.source_id else "quarantined")
+                    )
+                    connection.execute(
+                        """INSERT INTO locations(location_id,root_id,relative_path,absolute_path,source_id,document_id,
+                        role,location_status,observed_size,observed_mtime_ns,last_seen_run,manifest_json,metadata_json,error)
+                        VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?) ON CONFLICT(root_id,relative_path) DO UPDATE SET
+                        absolute_path=excluded.absolute_path,source_id=excluded.source_id,document_id=excluded.document_id,
+                        role=excluded.role,
+                        location_status=CASE WHEN locations.location_status='retired'
+                                             THEN locations.location_status
+                                             ELSE excluded.location_status END,
+                        observed_size=excluded.observed_size,
+                        observed_mtime_ns=excluded.observed_mtime_ns,last_seen_run=excluded.last_seen_run,
+                        manifest_json=excluded.manifest_json,metadata_json=excluded.metadata_json,error=excluded.error""",
+                        (
+                            _location_id(root.root_id, candidate.relative_path),
+                            root.root_id,
+                            candidate.relative_path,
+                            str(candidate.path.resolve()),
+                            item.source_id,
+                            document_id,
+                            candidate.role,
+                            location_status,
+                            item.size,
+                            item.mtime_ns,
+                            run_id,
+                            item.manifest_json,
+                            canonical_json({"group_key": group_key, "source_status": source_status}),
+                            item.error,
+                        ),
+                    )
+        with store.transaction() as connection:
+            connection.execute(
+                "UPDATE locations SET location_status='missing' WHERE root_id=? AND last_seen_run<>? AND location_status<>'missing'",
+                (root.root_id, run_id),
+            )
+
+    if dry_run:
+        return ScanReport(
+            run_id=run_id,
+            files_seen=files_seen,
+            files_excluded=files_excluded,
+            dry_run=True,
+            errors=errors,
+        )
+    active = store.fetchone("SELECT COUNT(*) AS count FROM locations WHERE location_status='active'")["count"]
+    missing = store.fetchone("SELECT COUNT(*) AS count FROM locations WHERE location_status='missing'")["count"]
+    report = ScanReport(
+        run_id=run_id,
+        files_seen=files_seen,
+        files_hashed=files_hashed,
+        files_reused=files_reused,
+        files_excluded=files_excluded,
+        locations_active=int(active),
+        locations_missing=int(missing),
+        errors=errors,
+    )
+    with store.transaction() as connection:
+        completed_at = _utc_now()
+        connection.execute(
+            "UPDATE scan_runs SET completed_at=?,status=?,report_json=? WHERE run_id=?",
+            (completed_at, "completed_with_errors" if errors else "completed", canonical_json(report.to_dict()), run_id),
+        )
+    return report
+
+
+def scan_catalog(
+    config: CatalogConfig,
+    store: CatalogStore | None,
+    *,
+    dry_run: bool = False,
+    root_ids: set[str] | None = None,
+    progress: Callable[..., None] | None = None,
+) -> ScanReport:
+    if dry_run:
+        return _scan_catalog_impl(
+            config,
+            store,
+            dry_run=True,
+            root_ids=root_ids,
+            progress=progress,
+        )
+    if store is None:
+        raise TypeError("store is required for a non-dry-run scan")
+    selected_roots = _select_roots(config, root_ids)
+    run_id = "scan-" + uuid.uuid4().hex
+    scan_time = _utc_now()
+    _begin_scan_run(store, run_id, scan_time)
+    try:
+        with store.coalesced_transactions(max_operations=250):
+            return _scan_catalog_impl(
+                config,
+                store,
+                dry_run=False,
+                root_ids=root_ids,
+                progress=progress,
+                run_id=run_id,
+                scan_time=scan_time,
+                selected_roots=selected_roots,
+                scan_run_started=True,
+            )
+    except Exception:
+        _interrupt_scan_run(store, run_id)
+        raise
+
+
+__all__ = ["scan_catalog"]
