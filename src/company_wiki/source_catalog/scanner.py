@@ -17,6 +17,7 @@ from typing import Any, Callable, Iterable
 
 from company_wiki.source_contract import SourceManifest, SourceType
 
+from .admission import AdmissionDecision, evaluate_admission
 from .models import CatalogConfig, DOCUMENT_EXTENSIONS, SCANNER_VERSION, RootSpec, ScanReport
 from .store import CatalogStore, canonical_json
 
@@ -48,6 +49,7 @@ class _Candidate:
     entity_name: str | None
     group_metadata: dict[str, Any]
     source_status: str
+    admission: AdmissionDecision | None = None
 
 
 @dataclass(frozen=True)
@@ -61,6 +63,7 @@ class _ObservedFile:
     manifest_json: str | None
     reused: bool
     error: str | None
+    known_error: bool = False
 
 
 def _utc_now() -> str:
@@ -126,6 +129,10 @@ def _classification(path: Path, *, root_kind: str, metadata: dict[str, Any]) -> 
             "regulatory_filing": (SourceType.REGULATORY_FILING, "regulatory_filing"),
             "broker_research": (SourceType.BROKER_RESEARCH, "broker_research"),
             "investor_relations": (SourceType.INVESTOR_RELATIONS, "investor_relations"),
+            "investor_call_transcript": (
+                SourceType.INVESTOR_RELATIONS,
+                "investor_call_transcript",
+            ),
             "prospectus": (SourceType.PROSPECTUS, "prospectus"),
             "news": (SourceType.ORIGINAL_NEWS, "news"),
         }
@@ -151,6 +158,11 @@ def _classification(path: Path, *, root_kind: str, metadata: dict[str, Any]) -> 
         return "annual_report", SourceType.REGULATORY_FILING
     if root_kind == "dayu_portfolio":
         return "regulatory_filing", SourceType.REGULATORY_FILING
+    if any(
+        token in text
+        for token in ("电话会议纪要", "业绩电话会", "earnings call transcript")
+    ):
+        return "investor_call_transcript", SourceType.INVESTOR_RELATIONS
     if any(token in text for token in ("投资者关系", "调研", "路演", "业绩说明会", "investor relation")):
         return "investor_relations", SourceType.INVESTOR_RELATIONS
     if any(token in text for token in ("招股", "prospectus")):
@@ -292,9 +304,10 @@ def _enumerate_root(
     progress: Callable[..., None] | None = None,
     master_identity: dict[str, tuple[str, str]] | None = None,
     portfolio_urls: dict[str, str] | None = None,
-) -> tuple[list[_Candidate], int]:
+) -> tuple[list[_Candidate], int, int]:
     candidates: list[_Candidate] = []
     excluded = 0
+    policy_excluded = 0
     if root.kind == "company_raw":
         companies = sorted(
             (item for item in root.path.iterdir() if item.is_dir()),
@@ -387,12 +400,40 @@ def _enumerate_root(
                     total=0,
                     detail=f"enumerating root {root.root_id}",
                 )
+            supported: list[Path] = []
             for name in files:
                 path = current_path / name
                 if path.suffix.lower() not in DOCUMENT_EXTENSIONS:
                     excluded += 1
                     continue
+                supported.append(path)
+            sidecars = {
+                str(path)[: -len(_ACQUISITION_SIDECAR_SUFFIX)]: path
+                for path in supported
+                if path.name.endswith(_ACQUISITION_SIDECAR_SUFFIX)
+            }
+            primary_paths = [
+                path
+                for path in supported
+                if not path.name.endswith(_ACQUISITION_SIDECAR_SUFFIX)
+            ]
+            for path in primary_paths:
                 relative = _relative(path, root.path)
+                sidecar = sidecars.get(str(path))
+                metadata = _load_acquisition_metadata(sidecar) if sidecar else {}
+                admission = evaluate_admission(
+                    root_id=root.root_id,
+                    relative_path=relative,
+                    metadata=metadata,
+                )
+                if admission is not None and not admission.admitted:
+                    policy_excluded += 1
+                    excluded += 1
+                    if sidecar is not None:
+                        policy_excluded += 1
+                        excluded += 1
+                    continue
+                entity_name = _infer_company(relative, company_names)
                 candidates.append(
                     _Candidate(
                         root,
@@ -400,11 +441,38 @@ def _enumerate_root(
                         relative,
                         relative,
                         "original_primary",
-                        _infer_company(relative, company_names),
-                        {},
+                        entity_name,
+                        metadata,
                         "active",
+                        admission,
                     )
                 )
+                if sidecar is not None:
+                    candidates.append(
+                        _Candidate(
+                            root,
+                            sidecar,
+                            _relative(sidecar, root.path),
+                            relative,
+                            "metadata",
+                            entity_name,
+                            metadata,
+                            "active",
+                            admission,
+                        )
+                    )
+            primary_names = {str(path) for path in primary_paths}
+            for target, sidecar in sidecars.items():
+                if target in primary_names:
+                    continue
+                excluded += 1
+                orphan_decision = evaluate_admission(
+                    root_id=root.root_id,
+                    relative_path=_relative(sidecar, root.path),
+                    metadata=_load_acquisition_metadata(sidecar),
+                )
+                if orphan_decision is not None:
+                    policy_excluded += 1
     else:
         raw_groups: dict[str, list[Path]] = defaultdict(list)
         for file_index, path in enumerate(_walk_files(root.path), start=1):
@@ -457,6 +525,14 @@ def _enumerate_root(
                 edgar_url = _construct_edgar_url(metadata)
                 if edgar_url is not None:
                     metadata.setdefault("source_url", edgar_url)
+            # Phase 17 pilot: SEC dayu documents are deterministically
+            # US-listed; carry market/security identity when the upstream
+            # meta.json omits it, so capture-ready handles can resolve
+            # (Alphabet 10-K capture_ready deadlock).
+            if not metadata.get("market") and metadata.get("accession_number"):
+                metadata["market"] = "US"
+            if not metadata.get("security_id") and metadata.get("ticker"):
+                metadata["security_id"] = str(metadata["ticker"])
             names = {path.name: path for path in paths}
             selected = str(metadata.get("selected_primary_document") or "")
             primary = str(metadata.get("primary_document") or "")
@@ -520,7 +596,7 @@ def _enumerate_root(
                         source_status,
                     )
                 )
-    return candidates, excluded
+    return candidates, excluded, policy_excluded
 
 
 def _observe_file(
@@ -551,6 +627,7 @@ def _observe_file(
             manifest.canonical_json(),
             True,
             None,
+            False,
         )
     mime_type = _mime_type(candidate.path)
     try:
@@ -590,6 +667,14 @@ def _observe_file(
         ):
             raise ValueError("acquisition sidecar SHA-256 does not match source bytes")
     except Exception as exc:
+        error = f"{type(exc).__name__}: {exc}"
+        known_error = bool(
+            existing is not None
+            and existing["location_status"] == "quarantined"
+            and existing["observed_size"] == stat.st_size
+            and existing["observed_mtime_ns"] == stat.st_mtime_ns
+            and existing["error"] == error
+        )
         return _ObservedFile(
             candidate,
             None,
@@ -599,7 +684,8 @@ def _observe_file(
             mime_type,
             None,
             False,
-            f"{type(exc).__name__}: {exc}",
+            error,
+            known_error,
         )
     return _ObservedFile(
         candidate,
@@ -611,6 +697,7 @@ def _observe_file(
         manifest.canonical_json(),
         False,
         None,
+        False,
     )
 
 
@@ -667,6 +754,9 @@ def _scan_catalog_impl(
     scan_time = scan_time or _utc_now()
     names = _company_names(config)
     files_seen = files_hashed = files_reused = files_excluded = errors = 0
+    policy_excluded = 0
+    new_errors = known_quarantined = 0
+    error_details: list[dict[str, Any]] = []
     if selected_roots is None:
         selected_roots = _select_roots(config, root_ids)
     if not dry_run:
@@ -680,8 +770,18 @@ def _scan_catalog_impl(
     for root in selected_roots:
         if not root.path.is_dir():
             errors += 1
+            new_errors += 1
+            if len(error_details) < 5:
+                error_details.append(
+                    {
+                        "root_id": root.root_id,
+                        "relative_path": "",
+                        "error": "root directory is unavailable",
+                        "unchanged": False,
+                    }
+                )
             continue
-        candidates, excluded = _enumerate_root(
+        candidates, excluded, policy_count = _enumerate_root(
             root,
             names,
             progress=progress,
@@ -690,6 +790,7 @@ def _scan_catalog_impl(
         )
         files_seen += len(candidates)
         files_excluded += excluded
+        policy_excluded += policy_count
         if dry_run:
             continue
         with store.transaction() as connection:
@@ -706,12 +807,26 @@ def _scan_catalog_impl(
         existing_locations = {
             row["relative_path"]: row
             for row in store.fetchall(
-                """SELECT relative_path,source_id,observed_size,observed_mtime_ns,manifest_json
+                """SELECT relative_path,source_id,document_id,observed_size,observed_mtime_ns,
+                manifest_json,location_status,error
                 FROM locations WHERE root_id=?""",
                 (root.root_id,),
             )
         }
-        group_items = sorted(groups.items())
+        group_items = sorted(
+            groups.items(),
+            key=lambda item: (
+                min(
+                    (
+                        candidate.admission.priority
+                        for candidate in item[1]
+                        if candidate.admission is not None
+                    ),
+                    default=1000,
+                ),
+                item[0],
+            ),
+        )
         for group_index, (group_key, group) in enumerate(group_items, start=1):
             primary_candidate = next((item for item in group if item.role == "original_primary"), None)
             classification_path = primary_candidate.path if primary_candidate else group[0].path
@@ -723,9 +838,22 @@ def _scan_catalog_impl(
                     detail=f"scanning root {root.root_id}",
                 )
             metadata = primary_candidate.group_metadata if primary_candidate else group[0].group_metadata
-            document_kind, source_type = _classification(
-                classification_path, root_kind=root.kind, metadata=metadata
+            admission = (
+                primary_candidate.admission
+                if primary_candidate is not None
+                else group[0].admission
             )
+            if admission is not None and admission.admitted:
+                if admission.document_kind is None or admission.source_type is None:
+                    raise RuntimeError("admitted source is missing classification")
+                document_kind, source_type = (
+                    admission.document_kind,
+                    admission.source_type,
+                )
+            else:
+                document_kind, source_type = _classification(
+                    classification_path, root_kind=root.kind, metadata=metadata
+                )
             entity_name = (primary_candidate or group[0]).entity_name
             entity_id, entity_label, entity_kind, confidence, method = _entity(entity_name, root.root_id)
             observed: list[_ObservedFile] = []
@@ -739,8 +867,18 @@ def _scan_catalog_impl(
                         source_type=source_type,
                         entity_id=entity_id,
                     )
-                except OSError:
+                except OSError as exc:
                     errors += 1
+                    new_errors += 1
+                    if len(error_details) < 5:
+                        error_details.append(
+                            {
+                                "root_id": root.root_id,
+                                "relative_path": candidate.relative_path,
+                                "error": f"{type(exc).__name__}: {exc}",
+                                "unchanged": False,
+                            }
+                        )
                     continue
                 observed.append(item)
                 if item.reused:
@@ -749,12 +887,32 @@ def _scan_catalog_impl(
                     files_hashed += 1
                 if item.error:
                     errors += 1
+                    if item.known_error:
+                        known_quarantined += 1
+                    else:
+                        new_errors += 1
+                    if len(error_details) < 5:
+                        error_details.append(
+                            {
+                                "root_id": root.root_id,
+                                "relative_path": candidate.relative_path,
+                                "error": item.error,
+                                "unchanged": item.known_error,
+                            }
+                        )
             primary = next((item for item in observed if item.candidate.role == "original_primary" and item.source_id), None)
             document_id = (
                 _document_id_for_source(primary.source_id)
                 if primary and primary.source_id
                 else _logical_document_id(root.root_id, group_key)
             )
+            obsolete_document_ids = {
+                str(existing["document_id"])
+                for candidate in group
+                if (existing := existing_locations.get(candidate.relative_path))
+                and existing["document_id"]
+                and existing["document_id"] != document_id
+            }
             title = str(metadata.get("source_title") or "").strip() or classification_path.stem
             published = (
                 str(metadata.get("filing_date") or metadata.get("published_date") or "")
@@ -773,6 +931,15 @@ def _scan_catalog_impl(
                 "scanner_version": SCANNER_VERSION,
                 "dayu_meta": metadata if root.kind == "dayu_portfolio" else None,
                 "acquisition": metadata if root.kind == "company_raw" and metadata else None,
+                "admission": (
+                    {
+                        "reason": admission.reason,
+                        "evidence": list(admission.evidence),
+                        "processing_priority": admission.priority,
+                    }
+                    if admission is not None
+                    else None
+                ),
             }
             with store.transaction() as connection:
                 for item in observed:
@@ -825,9 +992,19 @@ def _scan_catalog_impl(
                     # re-ingested from another path, prefer the metadata that
                     # carries a source URL (an old bare sidecar must not
                     # overwrite a complete one).
+                    # Phase 17 pilot: likewise prefer metadata that carries
+                    # market/security identity when the stored copy predates
+                    # the identity backfill (Alphabet 10-K capture_ready
+                    # deadlock).
                     prefer_new = (
-                        not (existing_inner.get("source_url") or existing_inner.get("https_url"))
-                        and (new_inner.get("source_url") or new_inner.get("https_url"))
+                        (
+                            not (existing_inner.get("source_url") or existing_inner.get("https_url"))
+                            and (new_inner.get("source_url") or new_inner.get("https_url"))
+                        )
+                        or (
+                            not (existing_inner.get("market") and existing_inner.get("security_id"))
+                            and (new_inner.get("market") and new_inner.get("security_id"))
+                        )
                     )
                     update_metadata = (
                         canonical_json(document_metadata)
@@ -905,6 +1082,58 @@ def _scan_catalog_impl(
                             item.error,
                         ),
                     )
+                for obsolete_document_id in sorted(obsolete_document_ids):
+                    if not obsolete_document_id.startswith(
+                        "urn:company-wiki:document-logical:sha256:"
+                    ):
+                        continue
+                    removable = connection.execute(
+                        """SELECT 1 FROM documents d
+                        WHERE d.document_id=?
+                        AND d.primary_source_id IS NULL
+                        AND d.source_status IN ('quarantined','incomplete')
+                        AND NOT EXISTS (
+                            SELECT 1 FROM locations l WHERE l.document_id=d.document_id
+                        )
+                        AND NOT EXISTS (
+                            SELECT 1 FROM artifacts a WHERE a.document_id=d.document_id
+                        )
+                        AND NOT EXISTS (
+                            SELECT 1 FROM llm_summary_failures f
+                            WHERE f.document_id=d.document_id
+                        )
+                        AND NOT EXISTS (
+                            SELECT 1 FROM evidence_spans e
+                            WHERE e.document_id=d.document_id
+                        )
+                        AND NOT EXISTS (
+                            SELECT 1 FROM document_fingerprint_state s
+                            WHERE s.document_id=d.document_id
+                        )
+                        AND NOT EXISTS (
+                            SELECT 1 FROM source_metadata_assertions a
+                            WHERE a.document_id=d.document_id
+                        )
+                        AND NOT EXISTS (
+                            SELECT 1 FROM document_retire_audit a
+                            WHERE a.document_id=d.document_id
+                        )
+                        AND NOT EXISTS (
+                            SELECT 1 FROM document_restore_audit a
+                            WHERE a.document_id=d.document_id
+                        )""",
+                        (obsolete_document_id,),
+                    ).fetchone()
+                    if removable is None:
+                        continue
+                    connection.execute(
+                        "DELETE FROM document_entities WHERE document_id=?",
+                        (obsolete_document_id,),
+                    )
+                    connection.execute(
+                        "DELETE FROM documents WHERE document_id=?",
+                        (obsolete_document_id,),
+                    )
         with store.transaction() as connection:
             connection.execute(
                 "UPDATE locations SET location_status='missing' WHERE root_id=? AND last_seen_run<>? AND location_status<>'missing'",
@@ -916,8 +1145,12 @@ def _scan_catalog_impl(
             run_id=run_id,
             files_seen=files_seen,
             files_excluded=files_excluded,
+            policy_excluded=policy_excluded,
             dry_run=True,
             errors=errors,
+            new_errors=new_errors,
+            known_quarantined=known_quarantined,
+            error_details=tuple(error_details),
         )
     active = store.fetchone("SELECT COUNT(*) AS count FROM locations WHERE location_status='active'")["count"]
     missing = store.fetchone("SELECT COUNT(*) AS count FROM locations WHERE location_status='missing'")["count"]
@@ -927,9 +1160,13 @@ def _scan_catalog_impl(
         files_hashed=files_hashed,
         files_reused=files_reused,
         files_excluded=files_excluded,
+        policy_excluded=policy_excluded,
         locations_active=int(active),
         locations_missing=int(missing),
         errors=errors,
+        new_errors=new_errors,
+        known_quarantined=known_quarantined,
+        error_details=tuple(error_details),
     )
     with store.transaction() as connection:
         completed_at = _utc_now()

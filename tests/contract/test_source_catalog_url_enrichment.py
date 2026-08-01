@@ -65,6 +65,93 @@ def test_dayu_sec_document_gets_edgar_url_from_accession(tmp_path):
     )
 
 
+def test_dayu_sec_document_gets_market_and_security_id(tmp_path):
+    """A dayu SEC meta.json without market/security_id must get market="US"
+    and security_id from its ticker so capture-ready handles can resolve
+    (Alphabet 10-K pilot deadlock, Phase 17 checklist)."""
+    catalog = _dayu_sec_catalog(
+        tmp_path,
+        {
+            "ticker": "GOOG",
+            "document_id": "fil_x",
+            "company_id": "1652044",
+            "accession_number": "0001652044-26-000018",
+            "primary_document": "goog-20251231.htm",
+            "document_kind": "annual_report",
+            "source_title": "Alphabet Inc. 10-K 2025-12-31",
+            "filing_date": "2026-02-05",
+            "fiscal_year": 2025,
+            "ingest_complete": True,
+            "files": [{"name": "goog-20251231.htm", "source": "original"}],
+        },
+    )
+
+    docs = catalog.query(limit=10)
+    assert len(docs) == 1
+    dayu_meta = (docs[0].get("metadata") or {}).get("dayu_meta") or {}
+    assert dayu_meta.get("market") == "US"
+    assert dayu_meta.get("security_id") == "GOOG"
+
+
+def test_rescan_backfills_market_and_security_id_on_existing_document(tmp_path):
+    """A dayu SEC document ingested before the identity backfill must gain
+    market/security_id on rescan even when it already carries a source URL
+    (Phase 17 pilot: Alphabet 10-K capture_ready deadlock)."""
+    import sqlite3
+
+    from company_wiki.source_catalog import CatalogConfig, RootSpec, SourceCatalog
+
+    project = tmp_path / "project"
+    portfolio = tmp_path / "dayu" / "portfolio"
+    filing = portfolio / "GOOG" / "filings" / "fil_x"
+    filing.mkdir(parents=True)
+    (filing / "goog-20251231.htm").write_text("<html>GOOG 10-K</html>", encoding="utf-8")
+    meta = {
+        "ticker": "GOOG",
+        "document_id": "fil_x",
+        "company_id": "1652044",
+        "accession_number": "0001652044-26-000018",
+        "primary_document": "goog-20251231.htm",
+        "document_kind": "annual_report",
+        "source_title": "Alphabet Inc. 10-K 2025-12-31",
+        "filing_date": "2026-02-05",
+        "fiscal_year": 2025,
+        "ingest_complete": True,
+        "files": [{"name": "goog-20251231.htm", "source": "original"}],
+    }
+    (filing / "meta.json").write_text(json.dumps(meta), encoding="utf-8")
+    config = CatalogConfig(
+        project_root=project,
+        catalog_dir=project / ".source_catalog",
+        roots=(RootSpec("dayu", portfolio, "dayu_portfolio", priority=20),),
+    )
+    catalog = SourceCatalog(config)
+    catalog.scan()
+
+    # Simulate a pre-fix ingestion: the document exists and carries a source
+    # URL (Phase 16.1) but no market/security identity — the exact Alphabet
+    # state that deadlocked capture_ready.
+    conn = sqlite3.connect(config.catalog_dir / "catalog.sqlite3")
+    row = conn.execute("SELECT metadata_json FROM documents LIMIT 1").fetchone()
+    old_meta = json.loads(row[0])
+    old_meta["dayu_meta"] = {
+        **{k: v for k, v in meta.items() if k != "files"},
+        "source_url": "https://www.sec.gov/Archives/edgar/data/0001652044/"
+        "000165204426000018/goog-20251231.htm",
+    }
+    conn.execute("UPDATE documents SET metadata_json=?", (json.dumps(old_meta),))
+    conn.commit()
+    conn.close()
+
+    catalog.scan()
+
+    docs = catalog.query(limit=10)
+    assert len(docs) == 1
+    dayu_meta = (docs[0].get("metadata") or {}).get("dayu_meta") or {}
+    assert dayu_meta.get("market") == "US"
+    assert dayu_meta.get("security_id") == "GOOG"
+
+
 def test_company_raw_sidecar_without_url_gets_dayu_meta_url(tmp_path):
     """A company_raw document whose sidecar lacks source_url must get the URL
     from the matching dayu portfolio meta.json (Phase 16.1)."""
