@@ -782,6 +782,7 @@ def main(argv: Sequence[str] | None = None) -> int:
                     get_catalog(),
                     worker_config,
                     state_path=state_path,
+                    project_root=project_root,
                     llm_client_factory=factory,
                 )
                 if args.once:

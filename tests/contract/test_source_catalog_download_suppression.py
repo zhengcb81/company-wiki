@@ -34,22 +34,13 @@ def _catalog_with_identity(tmp_path: Path):
     from company_wiki.source_catalog import CatalogConfig, RootSpec, SourceCatalog
 
     project = tmp_path / "project"
-    report = project / "companies" / "Acme" / "raw" / "financial_reports" / "annual" / "2026-02-20_Acme_annual.txt"
-    report.parent.mkdir(parents=True)
-    report.write_text("annual report", encoding="utf-8")
-    sidecar = report.with_suffix(".txt.source.json")
-    sidecar.write_text(
-        json.dumps({"market": "CN", "security_id": "600519", "source_title": "Acme 2025 Annual Report"}),
-        encoding="utf-8",
+    from helpers.source_factory import canonical_source, company_raw_catalog
+
+    canonical_source(
+        tmp_path,
+        filename="2026-02-20_Acme_annual.txt",
     )
-    catalog = SourceCatalog(
-        CatalogConfig(
-            project_root=project,
-            catalog_dir=project / ".source_catalog",
-            roots=(RootSpec("company_raw", project / "companies", "company_raw", priority=10),),
-        )
-    )
-    catalog.scan()
+    catalog = company_raw_catalog(tmp_path)
     return catalog
 
 

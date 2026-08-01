@@ -31,6 +31,7 @@ def _multi_market_catalog(tmp_path: Path):
                 "form_type": "年报",
                 "filing_date": "2026-03-01",
                 "fiscal_year": 2025,
+                "source_url": "https://www.cninfo.com.cn/new/disclosure/detail?stockCode=600519&announcementId=cn1",
             }
         ),
         encoding="utf-8",
@@ -52,6 +53,7 @@ def _multi_market_catalog(tmp_path: Path):
                 "form_type": "annual",
                 "filing_date": "2026-03-05",
                 "fiscal_year": 2025,
+                "source_url": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0305/hk1.pdf",
             }
         ),
         encoding="utf-8",
@@ -73,27 +75,21 @@ def _multi_market_catalog(tmp_path: Path):
 
 
 def _no_identity_catalog(tmp_path: Path):
-    """Catalog with a document that has no market/security_id metadata."""
-    from company_wiki.source_catalog import CatalogConfig, RootSpec, SourceCatalog
+    """Catalog with a document that has no market/security_id metadata but is
+    capture-ready (factory default)."""
+    from helpers.source_factory import canonical_source, company_raw_catalog
 
-    project = tmp_path / "project"
-    company = project / "companies" / "Beta" / "raw" / "research"
-    company.mkdir(parents=True)
-    doc = company / "2026-01-15_Beta_report.txt"
-    doc.write_text("some report", encoding="utf-8")
-
-    catalog = SourceCatalog(
-        CatalogConfig(
-            project_root=project,
-            catalog_dir=project / ".source_catalog",
-            roots=(
-                RootSpec(
-                    "company_raw", project / "companies", "company_raw", priority=10
-                ),
-            ),
-        )
+    doc = canonical_source(
+        tmp_path,
+        company="Beta",
+        filename="2026-01-15_Beta_report.txt",
+        kind_dir="research",
+        market=None,
+        security_id=None,
+        source_title="Beta report",
+        url="https://example.com/beta-report.pdf",
     )
-    catalog.scan()
+    catalog = company_raw_catalog(tmp_path)
     return catalog, doc
 
 

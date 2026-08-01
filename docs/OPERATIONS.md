@@ -346,3 +346,26 @@ python -m company_wiki.source_catalog.cli --config config/source_catalog.yaml `
 
 - 仅 retired 文档可 restore（active 文档 restore 报错且零写入）。
 - 治理工具化：批量恢复一律调用 `store.restore_document`（带 created_by/reason），禁止裸 SQL。
+
+---
+
+## 十二、测试 fixture 约定与契约变更影响面清单（2026-08-01 新增，Phase 16.10）
+
+### fixture 工厂
+
+- `tests/helpers/source_factory.py` 提供 `canonical_source()` 与 `company_raw_catalog()`：
+  - **默认生成完整 capture-ready sidecar**（market/security_id/source_title/https source_url）——新测试一律使用，复用路径开箱可用；
+  - 需要"缺 URL / 缺身份"场景时**显式**传 `drop_url=True` 或 `market=None`——缺失是显式异常，不是默认；
+  - 需要 dayu portfolio 或复杂 multi-root 场景时仍可手写 fixture，但 company_raw 基础文档一律走工厂。
+- 目的：契约变更（如 16.2 的 capture_ready 复用门）不再靠"测试逐个爆红再补"传播，而是让默认 fixture 始终代表最新契约。
+
+### 契约变更影响面清单（变更 resolver/摄入语义前必做）
+
+1. grep 所有 `.source.json` 写入点与 sidecar 内容假设：`grep -rn "source.json" tests/contract/`；
+2. grep 复用断言：`grep -rn "REUSED\|capture_ready\|resolver" tests/contract/`；
+3. 列出受影响测试文件，一次性迁移到工厂（或显式 `drop_url`/`market=None`），并在同一提交内完成；
+4. 全量测试必须一次全绿，禁止"改一行跑一次等爆红"。
+
+### worker 依赖注入
+
+- `SourceCatalogWorker.__init__` 接收 `project_root`（CLI 传入）；worker 内部不得依赖 `catalog.config` 内部结构（调度门禁测试强制）。

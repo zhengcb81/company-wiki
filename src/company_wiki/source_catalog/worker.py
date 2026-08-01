@@ -276,6 +276,7 @@ class SourceCatalogWorker:
         config: WorkerConfig,
         *,
         state_path: Path,
+        project_root: Path | None = None,
         idle_detector: Any | None = None,
         llm_client_factory: Callable[[], Any],
         sleep: Callable[[float], None] = time.sleep,
@@ -284,6 +285,9 @@ class SourceCatalogWorker:
         self.catalog = catalog
         self.config = config
         self.state_path = state_path
+        # Phase 16.10: project_root is injected by the caller (the CLI has it);
+        # the catalog.config fallback only serves test doubles that omit it.
+        self._project_root = project_root
         self.log_path = state_path.with_name("worker_runs.jsonl")
         self.idle_detector = idle_detector or SystemIdleDetector()
         self.llm_client_factory = llm_client_factory
@@ -789,9 +793,19 @@ class SourceCatalogWorker:
         self._write_process_event("session_opened")
         try:
             with session:
+                project_root = self._project_root
+                if project_root is None:
+                    try:
+                        project_root = self.catalog.config.project_root
+                    except AttributeError:
+                        project_root = None
                 session.heartbeat(
                     "starting",
-                    code_version=_code_version(self.catalog.config.project_root),
+                    code_version=(
+                        _code_version(project_root)
+                        if project_root is not None
+                        else "unknown"
+                    ),
                 )
                 if startup_delay_seconds > 0 and not session.wait(
                     startup_delay_seconds
