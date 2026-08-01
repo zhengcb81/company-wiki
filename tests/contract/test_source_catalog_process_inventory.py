@@ -59,6 +59,16 @@ def _cmd(config: str, worker_config: str, subcommand: str = "worker") -> str:
     )
 
 
+def _supervisor_cmd(project: str) -> str:
+    return (
+        "powershell.exe -NoProfile -NonInteractive -WindowStyle Hidden "
+        "-ExecutionPolicy Bypass -File "
+        f"{project}/scripts/source_catalog_worker.ps1 "
+        f"-PythonExe C:/Miniconda/python.exe -ProjectRoot {project} "
+        "-StartupDelaySeconds 120"
+    )
+
+
 def test_chinese_path_json_array_does_not_raise(tmp_path):
     """Chinese (UTF-8) process inventory must not raise UnicodeDecodeError."""
     from company_wiki.source_catalog import control
@@ -216,6 +226,34 @@ def test_classify_six_command_categories(tmp_path):
     assert ignored[103] == "audit_command"
 
 
+def test_classifies_production_temp_and_foreign_supervisors_separately():
+    from company_wiki.source_catalog import control
+
+    rows = [
+        {"ProcessId": 401, "CommandLine": _supervisor_cmd(_PROD_PROJECT)},
+        {"ProcessId": 402, "CommandLine": _supervisor_cmd(_PYTEST_PROJECT)},
+        {"ProcessId": 403, "CommandLine": _supervisor_cmd(_FOREIGN_PROJECT)},
+    ]
+
+    result = control._scan_source_catalog_processes(
+        Path(_PROD_PROJECT),
+        config_path=Path(_PROD_CONFIG),
+        worker_config_path=Path(_PROD_WORKER_CONFIG),
+        runner=lambda _pr: _completed(stdout=_make_stdout(rows)),
+    )
+
+    assert result["inventory_error"] is None
+    assert [item["pid"] for item in result["production_supervisors"]] == [401]
+    assert [item["pid"] for item in result["pytest_temp_supervisors"]] == [402]
+    assert [item["pid"] for item in result["foreign_supervisors"]] == [403]
+    for key in (
+        "production_supervisors",
+        "pytest_temp_supervisors",
+        "foreign_supervisors",
+    ):
+        assert all(set(item) <= {"pid", "creation_date"} for item in result[key])
+
+
 def test_ignored_processes_do_not_carry_full_command_line(tmp_path):
     """ignored_matching_processes must contain only pid + reason (no command line)."""
     from company_wiki.source_catalog import control
@@ -259,6 +297,9 @@ def test_no_matching_processes_returns_empty_inventory(tmp_path):
     assert result["production_workers"] == []
     assert result["foreign_workers"] == []
     assert result["pytest_temp_workers"] == []
+    assert result["production_supervisors"] == []
+    assert result["pytest_temp_supervisors"] == []
+    assert result["foreign_supervisors"] == []
     assert result["ignored_matching_processes"] == []
     assert result["inventory_error"] is None
 

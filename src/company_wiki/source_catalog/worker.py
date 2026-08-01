@@ -8,6 +8,7 @@ from datetime import datetime
 import json
 import os
 from pathlib import Path
+import subprocess
 import time
 from typing import Any, Callable
 
@@ -68,6 +69,24 @@ class WorkerConfig:
         for field_name in ("allow_processing_on_battery", "require_user_idle"):
             if not isinstance(getattr(self, field_name), bool):
                 raise TypeError(f"{field_name} must be a boolean")
+
+
+def _code_version(project_root: Path) -> str:
+    """Short git commit of the code the worker process loaded (Phase 16.3).
+    Falls back to 'unknown' when git is unavailable."""
+    try:
+        result = subprocess.run(
+            ["git", "-C", str(project_root), "rev-parse", "--short", "HEAD"],
+            capture_output=True,
+            text=True,
+            timeout=10,
+            check=False,
+        )
+        if result.returncode == 0 and result.stdout.strip():
+            return result.stdout.strip()
+    except (OSError, subprocess.SubprocessError):
+        pass
+    return "unknown"
 
 
 def _resolve(value: Any, *, project_root: Path) -> Path:
@@ -277,6 +296,9 @@ class SourceCatalogWorker:
             "schema_version": "1.0",
             "last_scan_at": None,
             "last_export_at": None,
+            "last_export_duration_seconds": None,
+            "last_export_progress_total": None,
+            "last_export_progress_detail": None,
             "last_cycle_at": None,
             "normalized_total": 0,
             "llm_summarized_total": 0,
@@ -342,6 +364,7 @@ class SourceCatalogWorker:
         *,
         now: float | None = None,
         activity: Callable[..., None] | None = None,
+        should_stop: Callable[[], bool] | None = None,
     ) -> dict[str, Any]:
         timestamp = time.time() if now is None else float(now)
         result: dict[str, Any] = {
@@ -525,7 +548,7 @@ class SourceCatalogWorker:
                 progress=lambda **details: report_progress(
                     fingerprint_stage, **details
                 ),
-                should_stop=lambda: self.should_stop(),
+                should_stop=should_stop or (lambda: False),
                 retry_limit=self.config.fingerprint_retry_limit,
                 retry_backoff_seconds=self.config.fingerprint_retry_backoff_seconds,
             )
@@ -605,9 +628,25 @@ class SourceCatalogWorker:
                 SourceOnlyStage.EXPORTING, "export_indexes"
             )
             begin_stage(export_stage, detail="updating read-only indexes")
-            result["export"] = self.catalog.export_indexes()
+            export_start = time.monotonic()
+
+            def export_progress(**details: Any) -> None:
+                total = details.get("total")
+                self.state["last_export_progress_total"] = (
+                    int(total) if total is not None else None
+                )
+                self.state["last_export_progress_detail"] = details.get("detail")
+                report_progress(export_stage, **details)
+
+            result["export"] = self.catalog.export_indexes(
+                progress=export_progress
+            )
             _record_work("export")
             self.state["last_export_at"] = timestamp
+            self.state["last_export_duration_seconds"] = round(
+                time.monotonic() - export_start,
+                3,
+            )
             self.state["dirty_since_last_export"] = 0
         self.state["last_cycle_at"] = timestamp
         summary_result = result["summarize_llm"]
@@ -623,12 +662,15 @@ class SourceCatalogWorker:
         return _plain(result)
 
     def _run_cycle_guarded(
-        self, *, activity: Callable[..., None] | None = None
+        self,
+        *,
+        activity: Callable[..., None] | None = None,
+        should_stop: Callable[[], bool] | None = None,
     ) -> dict[str, Any]:
         """Run one cycle while keeping scheduler failures non-fatal."""
 
         try:
-            return self.run_cycle(activity=activity)
+            return self.run_cycle(activity=activity, should_stop=should_stop)
         except Exception as exc:
             self.state["last_cycle_at"] = time.time()
             self.state["last_error"] = f"{type(exc).__name__}: {str(exc)[:1000]}"
@@ -747,7 +789,10 @@ class SourceCatalogWorker:
         self._write_process_event("session_opened")
         try:
             with session:
-                session.heartbeat("starting")
+                session.heartbeat(
+                    "starting",
+                    code_version=_code_version(self.catalog.config.project_root),
+                )
                 if startup_delay_seconds > 0 and not session.wait(
                     startup_delay_seconds
                 ):
@@ -758,7 +803,10 @@ class SourceCatalogWorker:
                     return {"status": "stopped", "reason": "control_request"}
                 while not session.should_stop():
                     session.heartbeat("running")
-                    cycle = self._run_cycle_guarded(activity=session.heartbeat)
+                    cycle = self._run_cycle_guarded(
+                        activity=session.heartbeat,
+                        should_stop=session.should_stop,
+                    )
                     wait_plan = self._next_wait_plan(cycle)
                     next_wake_at = time.time() + float(wait_plan["seconds"])
                     session.heartbeat(

@@ -11,7 +11,7 @@
 **错误信息**:
 ```
 ValueError: 配置验证失败:
-  - 缺少 LLM API Key (设置 DEEPSEEK_API_KEY 环境变量)
+  - 缺少 LLM API Key (设置 MINIMAX_API_KEY 环境变量)
   - 缺少搜索 API Key (设置 TAVILY_API_KEY 环境变量)
 ```
 
@@ -19,7 +19,7 @@ ValueError: 配置验证失败:
 
 1. 设置环境变量:
 ```bash
-export DEEPSEEK_API_KEY="your_key_here"
+export MINIMAX_API_KEY="your_key_here"
 export TAVILY_API_KEY="your_key_here"
 ```
 
@@ -348,6 +348,44 @@ grep "download" ~/company-wiki/log.md | tail -20
 ```bash
 grep "ingest" ~/company-wiki/log.md | tail -20
 ```
+
+---
+
+## Source Catalog 后台吞吐与等待状态
+
+### backlog 很大但 worker 显示 waiting
+
+`waiting` 只表示当前循环正在等待，不表示没有待处理资料。先运行：
+
+```powershell
+& '.\scripts\source_catalog_control.ps1' -Action status -PythonExe 'C:\Miniconda\python.exe'
+```
+
+schema 1.2 的控制中心会显示 `Next wake`：
+
+- `productive_cycle`：上一轮实际完成了 Markdown 或 LLM 摘要，默认2秒后继续；
+- `no_output`：没有产生新结果，按普通30秒轮询；
+- `on_battery` / `user_active`：电源或兼容空闲门控阻止处理；
+- `llm_deferred` / `llm_global_failure`：provider级退避，禁止通过缩短间隔绕过；
+- `cycle_failed`：调度周期异常，保留普通轮询并检查 Last error。
+
+如果配置已经是schema 1.2但看不到`Next wake`，通常是旧worker进程尚未加载新代码。先完成合同测试，再通过控制中心执行 Stop（保留ENABLED）和Start；不要手改`worker_runtime.json`、`worker_state.json`或SQLite。
+
+### LLM 显示 401 或 `llm_deferred`
+
+先查看控制中心的 `Last error`、`LLM retry` 和 `Next wake`。provider 全局失败会进入有界退避；不要缩短间隔、循环 Start，也不要手改 `worker_state.json` 来绕过。
+
+MiniMax/MiMo 的托管凭据以项目根目录 `.env` 为权威来源。Windows 用户环境可能仍保留旧值，但 worker 必须在每次新进程启动时让项目 `.env` 覆盖它。配置和代码修复通过合同测试后，在 worker 为 `waiting` 且活动文档为 0 时执行一次 Stop/Start；Stop 保留 ENABLED 和登录自启动，原有 retry deadline 也会保留。deadline 到期后的新错误会带实际 `provider/model` route，便于判断主模型还是 fallback，但不会显示 key。
+
+诊断时只核对 key 是否存在、来源是否一致以及最小 health request 是否成功；不要把 key、前后缀、请求头、可逆编码或 provider 原始响应复制到终端、Markdown、日志或工单。若项目 `.env` 的两个 provider 健康而旧进程仍报 401，通常是旧 worker 尚未加载修复；若新进程在 deadline 后仍对同一 route 报认证失败，再由 owner 在既有安全配置位置更新凭据。
+
+### active模式占用资源过高
+
+先确认进程仍为Idle/低优先级、batch仍为1且没有provider重复调用。需要立即回滚时，把`config/source_catalog_worker.yaml`中的`active_poll_interval_seconds`改为30，运行配置/worker合同测试后优雅Stop/Start。回滚不需要也不允许清空数据库、删除派生文件或移动原件。
+
+### Pause/Stop偶发 WinError 5
+
+控制JSON的原子替换会对瞬时`PermissionError`做最多6次短暂重试；若仍失败，说明不是瞬时共享冲突。保留控制中心错误与`.source_catalog/worker_console.log`，检查安全软件/同步软件占用和目录权限。不要循环强杀Python，也不要删除lock/runtime文件绕过身份校验。
 
 ---
 

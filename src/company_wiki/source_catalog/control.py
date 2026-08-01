@@ -24,6 +24,9 @@ _INVENTORY_NULL_RESULT: dict[str, Any] = {
     "production_workers": [],
     "foreign_workers": [],
     "pytest_temp_workers": [],
+    "production_supervisors": [],
+    "foreign_supervisors": [],
+    "pytest_temp_supervisors": [],
     "ignored_matching_processes": [],
     "inventory_error": None,
 }
@@ -45,6 +48,10 @@ _NON_WORKER_SUBCOMMANDS = (
 _WORKER_TOKEN_RE = re.compile(r"(?:^|\s)worker(?:\s|$)")
 _CLI_MODULE_MARKER = "company_wiki.source_catalog.cli"
 _CONTROL_PS1_MARKER = "source_catalog_control.ps1"
+_SUPERVISOR_PS1_MARKERS = (
+    "source_catalog_worker.ps1",
+    "source_catalog_worker_at_logon.ps1",
+)
 _AUDIT_MARKER = "get-ciminstance win32_process"
 _CONFIG_FLAG_RE = re.compile(
     r"--config(?:=|\s+)(?:[\"']?)(?P<value>[^\s\"']+)",
@@ -52,6 +59,10 @@ _CONFIG_FLAG_RE = re.compile(
 )
 _WORKER_CONFIG_FLAG_RE = re.compile(
     r"--worker-config(?:=|\s+)(?:[\"']?)(?P<value>[^\s\"']+)",
+    re.IGNORECASE,
+)
+_PROJECT_ROOT_FLAG_RE = re.compile(
+    r"-projectroot(?:=|\s+)(?P<value>\"[^\"]+\"|'[^']+'|[^\s]+)",
     re.IGNORECASE,
 )
 
@@ -68,7 +79,9 @@ def _run_powershell_inventory_subprocess(
     ps_command = (
         "[Console]::OutputEncoding=[System.Text.Encoding]::UTF8; "
         "$rows = Get-CimInstance Win32_Process | Where-Object { "
-        "$_.CommandLine -match 'company_wiki\\.source_catalog' } | ForEach-Object { "
+        "$_.CommandLine -match "
+        "'company_wiki\\.source_catalog|source_catalog_worker(?:_at_logon)?\\.ps1' "
+        "} | ForEach-Object { "
         "[pscustomobject]@{ ProcessId=$_.ProcessId; ParentProcessId=$_.ParentProcessId; "
         "CreationDate=$_.CreationDate; CommandLine=$_.CommandLine } }; "
         "@($rows) | ConvertTo-Json -Compress -Depth 4"
@@ -92,6 +105,7 @@ def _run_powershell_inventory_subprocess(
 def _normalize_path(value: str, project_root: Path) -> str | None:
     if not value:
         return None
+    value = value.strip().strip("\"'")
     try:
         path = Path(value)
         if not path.is_absolute():
@@ -100,6 +114,35 @@ def _normalize_path(value: str, project_root: Path) -> str | None:
     except (OSError, ValueError):
         return None
     return resolved.as_posix().lower()
+
+
+def _classify_supervisor_command(cmd: str, project_root: Path) -> str | None:
+    cmd_lower = cmd.lower()
+    if not any(marker in cmd_lower for marker in _SUPERVISOR_PS1_MARKERS):
+        return None
+    if _AUDIT_MARKER in cmd_lower:
+        return "audit_command"
+    match = _PROJECT_ROOT_FLAG_RE.search(cmd)
+    if match is None:
+        return "supervisor_no_project_root"
+    resolved = _normalize_path(match.group("value"), project_root)
+    if resolved is None:
+        return "supervisor_no_project_root"
+
+    temp_dirs = [os.environ.get("TEMP", ""), os.environ.get("TMP", "")]
+    for temp_dir in temp_dirs:
+        normalized_temp = temp_dir.replace("\\", "/").rstrip("/").lower()
+        if normalized_temp and (
+            resolved == normalized_temp or resolved.startswith(normalized_temp + "/")
+        ):
+            return "supervisor_pytest_temp"
+    if "\\pytest-of-" in resolved or "/pytest-of-" in resolved:
+        return "supervisor_pytest_temp"
+
+    production_root = project_root.resolve(strict=False).as_posix().lower()
+    if resolved == production_root:
+        return "supervisor_production"
+    return "supervisor_foreign"
 
 
 def _classify_worker_command(
@@ -216,6 +259,9 @@ def _scan_source_catalog_processes(
           "production_workers": [{pid, creation_date?}, ...],
           "foreign_workers": [{pid, creation_date?}, ...],
           "pytest_temp_workers": [{pid, creation_date?}, ...],
+          "production_supervisors": [{pid, creation_date?}, ...],
+          "foreign_supervisors": [{pid, creation_date?}, ...],
+          "pytest_temp_supervisors": [{pid, creation_date?}, ...],
           "ignored_matching_processes": [{pid, reason}, ...],
           "inventory_error": str | None,
         }
@@ -238,6 +284,9 @@ def _scan_source_catalog_processes(
         "production_workers": [],
         "foreign_workers": [],
         "pytest_temp_workers": [],
+        "production_supervisors": [],
+        "foreign_supervisors": [],
+        "pytest_temp_supervisors": [],
         "ignored_matching_processes": [],
         "inventory_error": None,
     }
@@ -277,6 +326,23 @@ def _scan_source_catalog_processes(
         pid = row.get("ProcessId")
         cmd = row.get("CommandLine") or ""
         if not pid or not cmd:
+            continue
+        supervisor_category = _classify_supervisor_command(cmd, project_root)
+        if supervisor_category is not None:
+            supervisor_info: dict[str, Any] = {"pid": pid}
+            if row.get("CreationDate"):
+                supervisor_info["creation_date"] = row["CreationDate"]
+            supervisor_key = {
+                "supervisor_production": "production_supervisors",
+                "supervisor_pytest_temp": "pytest_temp_supervisors",
+                "supervisor_foreign": "foreign_supervisors",
+            }.get(supervisor_category)
+            if supervisor_key is not None:
+                result[supervisor_key].append(supervisor_info)
+            else:
+                result["ignored_matching_processes"].append(
+                    {"pid": pid, "reason": supervisor_category}
+                )
             continue
         category = _classify_worker_command(
             cmd, project_root, config_path, worker_config_path
@@ -319,11 +385,15 @@ def _atomic_write_json(path: Path, payload: dict[str, Any]) -> None:
 
 
 def _read_json(path: Path) -> dict[str, Any] | None:
-    try:
-        value = json.loads(path.read_text(encoding="utf-8"))
-    except (FileNotFoundError, OSError, json.JSONDecodeError):
-        return None
-    return value if isinstance(value, dict) else None
+    for attempt in range(4):
+        try:
+            value = json.loads(path.read_text(encoding="utf-8"))
+            return value if isinstance(value, dict) else None
+        except (FileNotFoundError, OSError, json.JSONDecodeError):
+            if attempt == 3:
+                return None
+            time.sleep(0.01 * (2**attempt))
+    return None
 
 
 def _normal_executable(value: object) -> str:
@@ -567,6 +637,7 @@ class WorkerController:
         sleeper: Callable[[float], None] = time.sleep,
         clock: Callable[[], float] = time.time,
         process_inventory_provider: Callable[[], dict[str, Any]] | None = None,
+        launcher_path: Path | None = None,
     ):
         self.catalog_dir = catalog_dir.resolve(strict=False)
         self.project_root = project_root.resolve(strict=False)
@@ -577,6 +648,19 @@ class WorkerController:
         self.runtime_path = self.catalog_dir / "worker_runtime.json"
         self.lock_path = self.catalog_dir / "worker_instance.lock"
         self.console_log_path = self.catalog_dir / "worker_console.log"
+        project_launcher = (
+            self.project_root / "scripts" / "source_catalog_worker.ps1"
+        )
+        package_launcher = (
+            Path(__file__).resolve().parents[3]
+            / "scripts"
+            / "source_catalog_worker.ps1"
+        )
+        self.launcher_path = (
+            launcher_path
+            if launcher_path is not None
+            else project_launcher if project_launcher.is_file() else package_launcher
+        ).resolve(strict=False)
         self.process_identity = process_identity
         self.terminate_process = terminate_process
         self.popen = popen
@@ -640,10 +724,18 @@ class WorkerController:
 
     def _runtime_is_live(self, runtime: dict[str, Any] | None) -> bool:
         expected = self._runtime_identity(runtime)
-        return bool(
-            expected
-            and _same_identity(self.process_identity(int(expected["pid"])), expected)
-        )
+        if not expected:
+            return False
+        current = None
+        for attempt in range(3):
+            current = self.process_identity(int(expected["pid"]))
+            if current is not None:
+                break
+            # QueryFullProcessImageName/GetProcessTimes can transiently fail while a
+            # newly spawned Windows process is publishing or closing its lease.
+            if attempt < 2:
+                self.sleeper(0.02)
+        return _same_identity(current, expected)
 
     def _clear_stale_runtime(self) -> None:
         # CW-3.5 / Phase 10 — watchdog: only heal when deliberately enabled.
@@ -702,6 +794,12 @@ class WorkerController:
             )
             if live:
                 elapsed = runtime.get("current_path_elapsed_seconds")
+                current_path_started_at = runtime.get("current_path_started_at")
+                if runtime.get("current_path") and current_path_started_at is not None:
+                    elapsed = round(
+                        max(0.0, now - float(current_path_started_at)),
+                        1,
+                    )
                 result.update(
                     {
                         "worker_status": runtime.get("worker_status"),
@@ -807,23 +905,33 @@ class WorkerController:
         assert expected is not None
         self._write_control(stop_requested_for=runtime.get("token"))
         deadline = time.monotonic() + max(0.0, graceful_timeout_seconds)
+        consecutive_not_live = 0
         while time.monotonic() < deadline:
-            if not self._runtime_is_live(runtime):
-                break
+            if self._runtime_is_live(runtime):
+                consecutive_not_live = 0
+            else:
+                consecutive_not_live += 1
+                if consecutive_not_live >= 2:
+                    break
             self.sleeper(min(0.2, max(0.0, deadline - time.monotonic())))
         forced = False
         if self._runtime_is_live(runtime) and force:
-            current = self.process_identity(int(expected["pid"]))
-            if _same_identity(current, expected):
+            for attempt in range(3):
+                if not self._runtime_is_live(runtime):
+                    break
                 forced = bool(self.terminate_process(expected))
                 if forced:
-                    exit_wait_attempts = max(
-                        20, int(max(0.0, graceful_timeout_seconds) / 0.1)
-                    )
-                    for _ in range(exit_wait_attempts):
-                        if not self._runtime_is_live(runtime):
-                            break
-                        self.sleeper(0.1)
+                    break
+                if attempt < 2:
+                    self.sleeper(0.05)
+            if forced:
+                exit_wait_attempts = max(
+                    20, int(max(0.0, graceful_timeout_seconds) / 0.1)
+                )
+                for _ in range(exit_wait_attempts):
+                    if not self._runtime_is_live(runtime):
+                        break
+                    self.sleeper(0.1)
         if not self._runtime_is_live(runtime):
             self.runtime_path.unlink(missing_ok=True)
             self.lock_path.unlink(missing_ok=True)
@@ -926,53 +1034,68 @@ class WorkerController:
         if self._runtime_is_live(current_runtime):
             return {"started": False, "reason": "already_running"}
         self._clear_stale_runtime()
-        command = [
-            str(self.python_executable),
-            "-m",
-            "company_wiki.source_catalog.cli",
-            "--config",
-            str(self.config_path),
-            "worker",
-            "--worker-config",
-            str(self.worker_config_path),
-        ]
-        if startup_delay_seconds > 0:
-            command.extend(["--startup-delay-seconds", str(startup_delay_seconds)])
+        if os.name == "nt":
+            command = [
+                "powershell.exe",
+                "-NoProfile",
+                "-NonInteractive",
+                "-ExecutionPolicy",
+                "Bypass",
+                "-File",
+                str(self.launcher_path),
+                "-PythonExe",
+                str(self.python_executable),
+                "-ProjectRoot",
+                str(self.project_root),
+                "-ConfigPath",
+                str(self.config_path),
+                "-WorkerConfigPath",
+                str(self.worker_config_path),
+                "-CatalogDir",
+                str(self.catalog_dir),
+                "-StartupDelaySeconds",
+                str(startup_delay_seconds),
+            ]
+        else:
+            command = [
+                str(self.python_executable),
+                "-m",
+                "company_wiki.source_catalog.cli",
+                "--config",
+                str(self.config_path),
+                "worker",
+                "--worker-config",
+                str(self.worker_config_path),
+            ]
+            if startup_delay_seconds > 0:
+                command.extend(
+                    ["--startup-delay-seconds", str(startup_delay_seconds)]
+                )
         self.console_log_path.parent.mkdir(parents=True, exist_ok=True)
         environment = os.environ.copy()
         environment["PYTHONUTF8"] = "1"
         environment["PYTHONIOENCODING"] = "utf-8"
         creationflags = 0
         if os.name == "nt":
-            creationflags = 0x08000000 | 0x00000008 | 0x00000200
-        # Use PIPE capture to avoid subprocess _readerthread encoding issues
-        # on Windows (GBK locale vs UTF-8 child output). We write the raw
-        # bytes to the log ourselves with explicit UTF-8 decoding.
-        process = self.popen(
-            command,
-            cwd=self.project_root,
-            env=environment,
-            stdin=subprocess.DEVNULL,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.STDOUT,
-            close_fds=False,
-            creationflags=creationflags,
-        )
-
-        # Drain stdout in a background thread with UTF-8 fallback decoding.
-        def _drain() -> None:
-            try:
-                assert process.stdout is not None
-                with self.console_log_path.open("ab") as log:
-                    for chunk in iter(lambda: process.stdout.read(65536), b""):
-                        log.write(chunk)
-            except Exception:
-                pass
-
-        import threading
-
-        drainer = threading.Thread(target=_drain, daemon=True)
-        drainer.start()
+            # DETACHED_PROCESS makes Windows PowerShell exit 0 without
+            # executing its -File script. CREATE_NO_WINDOW keeps the
+            # supervisor hidden while the new process group isolates control
+            # signals from the CLI process that launched it.
+            creationflags = 0x08000000 | 0x00000200
+        # Give the child its own binary append handle. A PIPE keeps the CLI
+        # caller's capture pipe open for the worker lifetime on Windows, so
+        # `worker-start` never returns even though the worker is healthy.
+        with self.console_log_path.open("ab", buffering=0) as log:
+            process = self.popen(
+                command,
+                cwd=self.project_root,
+                env=environment,
+                stdin=subprocess.DEVNULL,
+                stdout=log,
+                stderr=subprocess.STDOUT,
+                close_fds=True,
+                creationflags=creationflags,
+            )
         deadline = time.monotonic() + max(0.0, wait_seconds)
         spawned_pid = getattr(process, "pid", None)
         runtime_state = "stopped"
@@ -987,9 +1110,12 @@ class WorkerController:
             self.sleeper(0.1)
 
         if runtime_state == "running":
+            runtime = _read_json(self.runtime_path) or {}
             return {
                 "started": True,
                 "spawned_pid": spawned_pid,
+                "supervisor_pid": spawned_pid if os.name == "nt" else None,
+                "worker_pid": runtime.get("pid"),
             }
 
         # Worker exited before publishing a runtime file. Provide explicit
@@ -1021,9 +1147,17 @@ class WorkerController:
             result["recent_process_event_error"] = None
         return result
 
-    def resume(self, *, wait_seconds: float = 5.0) -> dict[str, Any]:
+    def resume(
+        self,
+        *,
+        wait_seconds: float = 5.0,
+        startup_delay_seconds: int = 0,
+    ) -> dict[str, Any]:
         self._write_control(desired_state="enabled", stop_requested_for=None)
-        return self.start(wait_seconds=wait_seconds)
+        return self.start(
+            wait_seconds=wait_seconds,
+            startup_delay_seconds=startup_delay_seconds,
+        )
 
 
 __all__ = [

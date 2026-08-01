@@ -450,6 +450,12 @@ class SourceResolver:
                 # an authorized download can proceed (Phase 15.3).
                 identity_mismatch += 1
                 continue
+            if not handle.capture_ready:
+                # Phase 16.2: a capture-incomplete handle (e.g. missing
+                # https_url) cannot be consumed by filing-fetch; offering it
+                # as reusable deadlocks the download path. Treat as no match
+                # so the acquisition path proceeds to the adapter.
+                continue
             semantic.append(handle)
             if strong_identity:
                 exact.append(handle)

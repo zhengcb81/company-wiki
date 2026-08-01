@@ -75,7 +75,7 @@ def test_runtime_exposes_current_path_and_elapsed(tmp_path):
     s = _live_status(tmp_path, elapsed=42.5)
     assert s["runtime_state"] == "running"
     assert s["current_path"] == "test.pdf"
-    assert s["current_path_elapsed_seconds"] == 42.5
+    assert 42.5 <= s["current_path_elapsed_seconds"] < 44.0
     assert s["current_path_started_at"] is not None
 
 

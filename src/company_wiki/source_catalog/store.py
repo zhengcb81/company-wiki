@@ -229,6 +229,14 @@ CREATE TABLE IF NOT EXISTS document_retire_audit (
     created_at TEXT NOT NULL,
     FOREIGN KEY(document_id) REFERENCES documents(document_id)
 );
+CREATE TABLE IF NOT EXISTS document_restore_audit (
+    audit_id TEXT PRIMARY KEY,
+    document_id TEXT NOT NULL,
+    reason TEXT NOT NULL,
+    created_by TEXT NOT NULL,
+    created_at TEXT NOT NULL,
+    FOREIGN KEY(document_id) REFERENCES documents(document_id)
+);
 """
 
 
@@ -342,6 +350,52 @@ def retire_document(
     return {
         "document_id": document_id,
         "source_status": "retired",
+        "audit_id": audit_id,
+        "created_at": now,
+    }
+
+
+def restore_document(
+    store: "CatalogStore", *, document_id: str, reason: str, created_by: str
+) -> dict[str, Any]:
+    """Reverse of retire_document (Phase 16.6): reactivate a retired document
+    and its locations, writing an audit row.  Nothing else is touched."""
+    if not document_id or not document_id.strip():
+        raise ValueError("document_id must be non-empty text")
+    if not reason or not reason.strip():
+        raise ValueError("reason must be non-empty text")
+    if not created_by or not created_by.strip():
+        raise ValueError("created_by must be non-empty text")
+    now = _utc_iso()
+    audit_id = f"restore-{uuid.uuid4().hex}"
+    with store.transaction() as conn:
+        row = conn.execute(
+            "SELECT source_status FROM documents WHERE document_id=?", (document_id,)
+        ).fetchone()
+        if row is None:
+            raise KeyError(f"document not found: {document_id}")
+        if row["source_status"] != "retired":
+            raise ValueError(
+                f"document is not retired: {document_id} ({row['source_status']})"
+            )
+        conn.execute(
+            "UPDATE documents SET source_status='active' WHERE document_id=?",
+            (document_id,),
+        )
+        conn.execute(
+            "UPDATE locations SET location_status='active' "
+            "WHERE document_id=? AND location_status='retired'",
+            (document_id,),
+        )
+        conn.execute(
+            """INSERT INTO document_restore_audit
+            (audit_id, document_id, reason, created_by, created_at)
+            VALUES(?,?,?,?,?)""",
+            (audit_id, document_id, reason, created_by, now),
+        )
+    return {
+        "document_id": document_id,
+        "source_status": "active",
         "audit_id": audit_id,
         "created_at": now,
     }
@@ -814,6 +868,17 @@ class CatalogStore:
         if "document_retire_audit" not in tables:
             connection.execute(
                 """CREATE TABLE IF NOT EXISTS document_retire_audit (
+                    audit_id TEXT PRIMARY KEY,
+                    document_id TEXT NOT NULL,
+                    reason TEXT NOT NULL,
+                    created_by TEXT NOT NULL,
+                    created_at TEXT NOT NULL,
+                    FOREIGN KEY(document_id) REFERENCES documents(document_id)
+                )"""
+            )
+        if "document_restore_audit" not in tables:
+            connection.execute(
+                """CREATE TABLE IF NOT EXISTS document_restore_audit (
                     audit_id TEXT PRIMARY KEY,
                     document_id TEXT NOT NULL,
                     reason TEXT NOT NULL,

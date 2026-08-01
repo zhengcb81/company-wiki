@@ -1,54 +1,29 @@
 # 架构文档
 
-> 最后更新: 2026-04-17
+> 最后更新: 2026-07-17
 
 ## 系统概述
 
-company-wiki 是一个基于 LLM 的上市公司知识库系统，自动采集、整理、分析上市公司信息。
+company-wiki 是 StockWiki 的上游来源系统。canonical 职责是采集、immutable raw、source manifest、文档规范化、EvidenceSpan、解析质量、全文索引和只读 export；StockWiki 独占投资研究、人工证据裁决、估值、研究 Wiki 与报告发布。
+
+系统不生成或持久化 accepted/rejected 投资结论，不写入 StockWiki 的目录或数据库。legacy Wiki/Index/Log 仅保留为只读兼容或 source-oriented projection，不是 canonical state。
 
 ## 架构图
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                        用户层                                │
-│  CLI 命令 / Python API / 查询界面                            │
-└─────────────────────────────────────────────────────────────┘
-                            │
-                            ▼
-┌─────────────────────────────────────────────────────────────┐
-│                       应用层                                 │
-│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐         │
-│  │   采集模块   │  │   处理模块   │  │   查询模块   │         │
-│  │ collect_news │  │   ingest    │  │    query    │         │
-│  │   download   │  │   extract   │  │    graph    │         │
-│  └─────────────┘  └─────────────┘  └─────────────┘         │
-└─────────────────────────────────────────────────────────────┘
-                            │
-                            ▼
-┌─────────────────────────────────────────────────────────────┐
-│                       基础设施层                             │
-│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐         │
-│  │   配置管理   │  │   日志管理   │  │   工具函数   │         │
-│  │   config    │  │   logger    │  │    utils    │         │
-│  └─────────────┘  └─────────────┘  └─────────────┘         │
-│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐         │
-│  │   存储层    │  │   异步处理   │  │   错误处理   │         │
-│  │   storage   │  │ async_utils │  │error_handling│         │
-│  └─────────────┘  └─────────────┘  └─────────────┘         │
-└─────────────────────────────────────────────────────────────┘
-                            │
-                            ▼
-┌─────────────────────────────────────────────────────────────┐
-│                       数据层                                 │
-│  ┌─────────────────────────────────────────────────────┐   │
-│  │                  文件系统                             │   │
-│  │  graph.yaml / companies/ / sectors/ / themes/        │   │
-│  └─────────────────────────────────────────────────────┘   │
-│  ┌─────────────────────────────────────────────────────┐   │
-│  │                  SQLite 数据库                       │   │
-│  │  wiki.db (可选，用于大规模数据)                        │   │
-│  └─────────────────────────────────────────────────────┘   │
-└─────────────────────────────────────────────────────────────┘
+外部来源
+   │
+   ▼
+collect / download
+   │
+   ▼
+immutable raw ──→ source manifest（稳定 ID、hash、采集元数据）
+   │
+   ▼
+normalize / parse ──→ EvidenceSpan（locator、原文/结构化值、解析质量）
+   │
+   ├──→ 全文索引 / 原文预览 / 资料型问答
+   └──→ 版本化只读 export ──→ StockWiki 等消费者
 ```
 
 ## 核心模块
@@ -66,34 +41,31 @@ company-wiki 是一个基于 LLM 的上市公司知识库系统，自动采集�
 外部数据源 → 采集脚本 → companies/{公司}/raw/
 ```
 
-### 2. 数据处理模块
+### 2. 规范化与解析模块
 
-**职责**: 将原始数据整理为结构化知识
+**职责**: 验证 immutable raw 身份，生成 source manifest、规范化内容、EvidenceSpan 和 extraction quality；相同输入与版本必须产生相同 ID/hash。
 
-**组件**:
-- `ingest.py`: 主处理流水线
-- `extract.py`: 内容提取
-- `classify_documents.py`: 文档分类
-- `refine.py`: 内容精炼
+`company_wiki.ingest.IngestService` 已发布首个 source-only 垂直切片：接收 `SourceManifest + ParserResult`，生成 `EvidenceSpan + SourceExportBundle`，并保持全程只读。`scripts/ingest_v2.py`、`stage5_ingest.py`、`extract.py`、`classify_documents.py`、`refine.py` 等仍是待迁移的 legacy 实现，不得把其中的 Wiki/review writer 当作新功能入口。
 
 **数据流**:
 ```
-companies/{公司}/raw/ → 处理流水线 → companies/{公司}/wiki/
+immutable raw → normalize/parse → manifest + evidence spans + parse diagnostics
 ```
 
-### 3. 查询分析模块
+### 3. 资料检索与导出模块
 
-**职责**: 提供知识查询和分析功能
+**职责**: 提供全文检索、原文预览、带 source ID/locator 的资料答案，以及版本化只读 export。
 
 **组件**:
-- `query.py`: 智能查询
+- `company_wiki.source_contract.cli`: 校验 raw/manifest/span，执行 add-only incremental merge，并向 stdout 输出 canonical Source Export v1
+- `query.py`: legacy 查询入口，迁移后只返回资料答案/evidence bundle
 - `graph.py`: 图数据查询
 - `auto_discover.py`: 自动发现
-- `contradiction_detector.py`: 矛盾检测
+- `contradiction_detector.py`: 来源/解析诊断；不得裁决投资命题
 
 **数据流**:
 ```
-用户查询 → 查询模块 → wiki 文件 → 答案
+用户/消费者 → manifest/span/index → 带 locator 的答案或只读 export
 ```
 
 ### 4. 基础设施模块
@@ -109,6 +81,19 @@ companies/{公司}/raw/ → 处理流水线 → companies/{公司}/wiki/
 - `error_handling/`: 错误处理
 
 ## 数据模型
+
+### Canonical source contract（CW-1）
+
+正式字段、身份算法与失败语义见 [Announcement Collector v1](contracts/announcement-collector-v1.md)、[Source Manifest v1](contracts/source-manifest-v1.md)、[Evidence Span v1](contracts/evidence-span-v1.md)、[Source Export v1](contracts/source-export-v1.md)、[Canonical IngestService v1](contracts/ingest-service-v1.md) 和 [Source Contract Compatibility Policy v1](contracts/source-contract-compatibility-v1.md)。
+
+- **AnnouncementCollectionReceipt**：把显式交易所官方 URL、最终 URL、标题、HTTP provenance 和 content-addressed raw/manifest 路径绑定到稳定 collection ID；采集仅允许 create-once，不具备 overwrite 权限。
+- **SourceRecord / source manifest**：稳定 `source_id`、entity ID、original path、SHA-256、source type、发布时间/采集时间、collector/version、MIME、size 和 immutable 状态。
+- **EvidenceSpan**：绑定 `source_id` 的稳定 locator，包含页/段/表格坐标、原文或结构化值、parser/version、output hash、parse status 和 quality flags。
+- **SourceExportBundle**：按 ID 排序的 manifest/span 快照；不含运行时间，通过 `bundle_sha256` 和内容寻址 `export_id` 支持 full replay 与 add-only incremental merge。
+- **ParserResult / IngestService**：进程内不可变 parser 适配值与唯一 source-only ingest 边界；复用 manifest/span/export 合同完成 raw 验证、source 绑定、冲突检测和重放，不新增持久化研究状态。
+- **CompatibilityPolicy**：机器可读地列出三个 contract 的 current/supported 精确版本、允许的完整版本组合、兼容窗口与弃用通知；consumer 必须只从 `compatible_version_sets` 做原子 `exact_highest` 协商，不能构造未发布组合或假设同 major 自动兼容。
+- **状态语义**：只表达 source/extraction quality。任何 `accepted` 都不表示 accepted investment conclusion。
+- **集成语义**：消费者通过只读 export 按 ID/hash 引用；不得共享可变数据库或反向改写 raw。
 
 ### 实体模型
 
@@ -171,25 +156,24 @@ collect_reports.py (StockInfoDownloader)
     └─→ companies/{公司}/raw/investor_relations/*.pdf
 ```
 
-### 2. 数据处理流
+### 2. Canonical 规范化与解析流
 
 ```
 companies/{公司}/raw/
     │
     ▼
-ingest.py
+IngestService（CW-2 收敛目标）
     │
-    ├─→ 读取新文件
-    ├─→ 提取摘要 (extract.py)
-    ├─→ 判断相关性 (graph.py)
-    └─→ 更新 wiki (ingest/updater.py)
-            │
-            ├─→ companies/{公司}/wiki/*.md
-            ├─→ sectors/{行业}/wiki/*.md
-            └─→ themes/{主题}/wiki/*.md
+    ├─→ 校验 raw 不可变身份与 SHA-256
+    ├─→ 写入/复用 source manifest
+    ├─→ normalize / parse
+    ├─→ 生成 EvidenceSpan 与解析质量
+    └─→ 更新全文索引和只读 export
 ```
 
-### 3. 查询流
+legacy wiki updater 不在 canonical 流程中；只允许维护历史只读内容或 source-oriented projection。
+
+### 3. 查询与 export 流
 
 ```
 用户查询
@@ -197,9 +181,13 @@ ingest.py
     ▼
 query.py
     │
-    ├─→ 搜索 wiki (WikiSearcher)
-    ├─→ 综合答案 (AnswerSynthesizer)
-    └─→ 存回 wiki (AnswerSaver)
+    ├─→ 搜索 manifest/span/index
+    ├─→ 返回 source ID + locator + 原文片段
+    └─→ 不存回研究 Wiki，不形成投资结论
+
+consumer export
+    │
+    └─→ 版本化 manifest/span bundle（只读）→ StockWiki
 ```
 
 ## 配置管理
@@ -243,9 +231,7 @@ pytest.ini          # 测试配置
 │       │   ├── investor_relations/
 │       │   ├── research/
 │       │   └── announcements/
-│       └── wiki/
-│           ├── 公司动态.md
-│           └── 相关动态.md
+│       └── wiki/                 # legacy 只读兼容/source projection
 ├── sectors/
 │   └── {行业名}/
 │       ├── raw/
@@ -259,7 +245,9 @@ pytest.ini          # 测试配置
 └── logs/
 ```
 
-### 数据库存储（可选）
+### Legacy 数据库存储示例（非 canonical）
+
+以下 `wiki_entries` 草案仅记录旧设计，不得作为新 schema 实施。CW-1 的正式 source manifest/evidence span schema 将独立版本化发布。
 
 ```sql
 -- 公司表
@@ -375,13 +363,15 @@ status = checker.get_overall_status()
 
 - 自定义分类规则
 - 自定义提取逻辑
-- 自定义分析算法
+- 自定义 parser 与 extraction-quality 检查
 
 ### 3. 查询功能扩展
 
 - 自定义查询接口
-- 自定义答案格式
+- 自定义带 locator 的 evidence bundle 格式
 - 自定义可视化
+
+扩展不得增加投资模型、估值、研究报告 writer 或跨仓写入。
 
 ## 部署架构
 
@@ -415,6 +405,8 @@ status = checker.get_overall_status()
 ## 性能优化
 
 ### 1. 并发处理
+
+当前生产约束为单线程顺序执行；`LLMClient` 和现有状态管理不是线程安全的。下列异步示例只保留为未来设想，必须先完成无状态重构和并发契约测试，不能直接用于当前 scheduler。
 
 ```python
 from async_utils import AsyncExecutor

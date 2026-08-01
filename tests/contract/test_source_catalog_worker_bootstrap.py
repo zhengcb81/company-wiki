@@ -28,7 +28,11 @@
 from __future__ import annotations
 
 import json
+import os
+import shutil
+import subprocess
 import sys
+import time
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -79,7 +83,7 @@ def _make_worker(tmp_path: Path, *, catalog=None):
             self.calls.append("summarize_with_llm")
             return _Report()
 
-        def export_indexes(self):
+        def export_indexes(self, *, progress=None):
             self.calls.append("export")
             return {"index": Path("index.md")}
 
@@ -580,3 +584,532 @@ def test_read_recent_worker_events_handles_utf8_bom(tmp_path):
 
     assert result["recent_process_event"]["event"] == "process_starting"
     assert result["recent_process_event"]["pid"] == 42
+
+
+# ---------------------------------------------------------------------------
+# WR-10 — real Windows launcher stderr isolation and recovery
+# ---------------------------------------------------------------------------
+
+
+def _prepare_fake_launcher_project(
+    tmp_path: Path, behaviors: list[dict[str, object]]
+) -> Path:
+    project = tmp_path / "fake-project"
+    package = project / "company_wiki" / "source_catalog"
+    package.mkdir(parents=True)
+    (project / "company_wiki" / "__init__.py").write_text("", encoding="utf-8")
+    (package / "__init__.py").write_text("", encoding="utf-8")
+    (project / "fake_behaviors.json").write_text(
+        json.dumps(behaviors),
+        encoding="utf-8",
+    )
+    catalog = project / ".source_catalog"
+    catalog.mkdir()
+    (catalog / "worker_control.json").write_text(
+        json.dumps(
+            {
+                "schema_version": "1.0",
+                "desired_state": "enabled",
+                "stop_requested_for": "baseline-stop-token",
+                "updated_at": 1,
+            }
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    (package / "cli.py").write_text(
+        """
+from __future__ import annotations
+
+import json
+import os
+import sys
+import time
+from pathlib import Path
+
+project = Path.cwd()
+catalog = project / ".source_catalog"
+count_path = catalog / "fake_worker_count.txt"
+count = int(count_path.read_text(encoding="utf-8")) + 1 if count_path.exists() else 1
+count_path.write_text(str(count), encoding="utf-8")
+behaviors = json.loads((project / "fake_behaviors.json").read_text(encoding="utf-8"))
+behavior = behaviors[min(count - 1, len(behaviors) - 1)]
+if "runtime_heartbeat_age_seconds" in behavior:
+    now = time.time()
+    runtime = {
+        "schema_version": "1.0",
+        "pid": os.getpid(),
+        "heartbeat_at": now - float(behavior["runtime_heartbeat_age_seconds"]),
+        "updated_at": now - float(behavior["runtime_heartbeat_age_seconds"]),
+        "worker_status": behavior.get("worker_status", "normalizing"),
+        "current_path": behavior.get("current_path", "slow.pdf"),
+        "current_path_started_at": now
+        - float(behavior.get("current_path_elapsed_seconds", 0)),
+    }
+    (catalog / "worker_runtime.json").write_text(
+        json.dumps(runtime) + "\\n",
+        encoding="utf-8",
+    )
+if behavior.get("desired_state") or behavior.get("stop_requested_for"):
+    control = json.loads(
+        (catalog / "worker_control.json").read_text(encoding="utf-8")
+    )
+    if behavior.get("desired_state"):
+        control["desired_state"] = behavior["desired_state"]
+    if behavior.get("stop_requested_for"):
+        control["stop_requested_for"] = behavior["stop_requested_for"]
+    control["updated_at"] = count + 1
+    (catalog / "worker_control.json").write_text(
+        json.dumps(control) + "\\n",
+        encoding="utf-8",
+    )
+if behavior.get("stdout"):
+    print(behavior["stdout"], flush=True)
+if behavior.get("stderr"):
+    print(behavior["stderr"], file=sys.stderr, flush=True)
+time.sleep(float(behavior.get("sleep_seconds", 0)))
+raise SystemExit(int(behavior.get("exit_code", 0)))
+""".lstrip(),
+        encoding="utf-8",
+    )
+    return project
+
+
+def _real_worker_launcher_command(
+    project: Path,
+    *,
+    restart_base_seconds: float = 0,
+    restart_max_seconds: float = 0,
+    worker_hang_timeout_seconds: float | None = None,
+    child_poll_milliseconds: int | None = None,
+) -> list[str]:
+    launcher = Path(__file__).resolve().parents[2] / "scripts" / "source_catalog_worker.ps1"
+    command = [
+        "powershell.exe",
+        "-NoProfile",
+        "-NonInteractive",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        str(launcher),
+        "-PythonExe",
+        sys.executable,
+        "-ProjectRoot",
+        str(project),
+        "-StartupDelaySeconds",
+        "0",
+        "-RestartBaseSeconds",
+        str(restart_base_seconds),
+        "-RestartMaxSeconds",
+        str(restart_max_seconds),
+    ]
+    if worker_hang_timeout_seconds is not None:
+        command.extend(
+            ["-WorkerHangTimeoutSeconds", str(worker_hang_timeout_seconds)]
+        )
+    if child_poll_milliseconds is not None:
+        command.extend(["-ChildPollMilliseconds", str(child_poll_milliseconds)])
+    return command
+
+
+def _run_real_worker_launcher(
+    project: Path,
+    *,
+    timeout: float = 30.0,
+    restart_base_seconds: float = 0,
+    restart_max_seconds: float = 0,
+    worker_hang_timeout_seconds: float | None = None,
+    child_poll_milliseconds: int | None = None,
+):
+    return subprocess.run(
+        _real_worker_launcher_command(
+            project,
+            restart_base_seconds=restart_base_seconds,
+            restart_max_seconds=restart_max_seconds,
+            worker_hang_timeout_seconds=worker_hang_timeout_seconds,
+            child_poll_milliseconds=child_poll_milliseconds,
+        ),
+        cwd=project,
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+        errors="replace",
+        timeout=timeout,
+        check=False,
+    )
+
+
+def _launcher_events(project: Path) -> list[dict[str, object]]:
+    path = project / ".source_catalog" / "worker_launcher_events.jsonl"
+    return [
+        json.loads(line)
+        for line in path.read_text(encoding="utf-8-sig").splitlines()
+        if line.strip()
+    ]
+
+
+@pytest.mark.skipif(os.name != "nt", reason="Windows PowerShell launcher integration")
+def test_stderr_exit_zero_does_not_fail_launcher_and_logs_are_utf8(tmp_path):
+    project = _prepare_fake_launcher_project(
+        tmp_path,
+        [{"stderr": "fixture warning 你好", "exit_code": 0}],
+    )
+
+    completed = _run_real_worker_launcher(project)
+
+    assert completed.returncode == 0, completed.stderr
+    assert (project / ".source_catalog" / "fake_worker_count.txt").read_text() == "1"
+    events = _launcher_events(project)
+    assert [event["status"] for event in events] == [
+        "starting",
+        "child_started",
+        "exited",
+    ]
+    child_started = next(event for event in events if event["status"] == "child_started")
+    assert "exit_code" not in child_started
+    assert "restart_delay_seconds" not in child_started
+    assert child_started["worker_hang_timeout_seconds"] == 900
+    assert child_started["child_poll_milliseconds"] == 5000
+    assert all(event["status"] != "launcher_exception" for event in events)
+    stderr_log = Path(str(events[-1]["stderr_log"]))
+    raw_stderr = stderr_log.read_bytes()
+    assert b"\x00" not in raw_stderr
+    assert "fixture warning 你好" in raw_stderr.decode("utf-8")
+
+
+@pytest.mark.skipif(os.name != "nt", reason="Windows PowerShell launcher integration")
+def test_nonzero_child_restarts_once_then_recovers(tmp_path):
+    project = _prepare_fake_launcher_project(
+        tmp_path,
+        [
+            {"stderr": "first attempt failed", "exit_code": 7},
+            {"stdout": "second attempt recovered", "exit_code": 0},
+        ],
+    )
+
+    completed = _run_real_worker_launcher(project)
+
+    assert completed.returncode == 0, completed.stderr
+    assert (project / ".source_catalog" / "fake_worker_count.txt").read_text() == "2"
+    events = _launcher_events(project)
+    assert [event["status"] for event in events] == [
+        "starting",
+        "child_started",
+        "restarting",
+        "child_started",
+        "exited",
+    ]
+    restart = events[2]
+    assert restart["exit_code"] == 7
+    assert restart["restart_delay_seconds"] == 0
+    assert restart["reason"] == "unexpected_nonzero_exit"
+
+
+@pytest.mark.skipif(os.name != "nt", reason="Windows PowerShell launcher integration")
+def test_explicit_stop_marker_suppresses_restart_after_nonzero_exit(tmp_path):
+    project = _prepare_fake_launcher_project(
+        tmp_path,
+        [
+            {
+                "stderr": "terminated during explicit stop",
+                "stop_requested_for": "current-worker-token",
+                "exit_code": 9,
+            }
+        ],
+    )
+
+    completed = _run_real_worker_launcher(project)
+
+    assert completed.returncode == 0, completed.stderr
+    assert (project / ".source_catalog" / "fake_worker_count.txt").read_text() == "1"
+    events = _launcher_events(project)
+    assert events[-1]["status"] == "exited"
+    assert events[-1]["reason"] == "control_stop"
+    assert not any(event["status"] == "restarting" for event in events)
+
+
+@pytest.mark.skipif(os.name != "nt", reason="Windows PowerShell launcher integration")
+def test_persistent_pause_suppresses_restart_after_nonzero_exit(tmp_path):
+    project = _prepare_fake_launcher_project(
+        tmp_path,
+        [{"desired_state": "paused", "exit_code": 11}],
+    )
+
+    completed = _run_real_worker_launcher(project)
+
+    assert completed.returncode == 0, completed.stderr
+    assert (project / ".source_catalog" / "fake_worker_count.txt").read_text() == "1"
+    events = _launcher_events(project)
+    assert events[-1]["status"] == "exited"
+    assert events[-1]["reason"] == "persistent_pause"
+    assert not any(event["status"] == "restarting" for event in events)
+
+
+@pytest.mark.skipif(os.name != "nt", reason="Windows PowerShell launcher integration")
+def test_duplicate_supervisor_is_rejected_without_second_child(tmp_path):
+    project = _prepare_fake_launcher_project(
+        tmp_path,
+        [{"sleep_seconds": 2, "exit_code": 0}],
+    )
+    first = subprocess.Popen(
+        _real_worker_launcher_command(project),
+        cwd=project,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+        encoding="utf-8",
+        errors="replace",
+    )
+    count_path = project / ".source_catalog" / "fake_worker_count.txt"
+    deadline = time.monotonic() + 10
+    while not count_path.exists() and time.monotonic() < deadline:
+        time.sleep(0.05)
+    assert count_path.exists()
+
+    second = _run_real_worker_launcher(project)
+    first_stdout, first_stderr = first.communicate(timeout=15)
+
+    assert second.returncode == 0, second.stderr
+    assert first.returncode == 0, f"{first_stdout}\n{first_stderr}"
+    assert count_path.read_text(encoding="utf-8") == "1"
+    statuses = [event["status"] for event in _launcher_events(project)]
+    assert statuses.count("child_started") == 1
+    assert statuses.count("already_running") == 1
+
+
+@pytest.mark.skipif(os.name != "nt", reason="Windows PowerShell launcher integration")
+def test_child_without_runtime_session_is_terminated_and_restarted(tmp_path):
+    project = _prepare_fake_launcher_project(
+        tmp_path,
+        [
+            {"sleep_seconds": 5, "exit_code": 0},
+            {"exit_code": 0},
+        ],
+    )
+
+    completed = _run_real_worker_launcher(
+        project,
+        timeout=15,
+        worker_hang_timeout_seconds=0.5,
+        child_poll_milliseconds=100,
+    )
+
+    assert completed.returncode == 0, completed.stderr
+    events = _launcher_events(project)
+    unresponsive = next(
+        event for event in events if event["status"] == "child_unresponsive"
+    )
+    restarting = next(event for event in events if event["status"] == "restarting")
+    assert unresponsive["reason"] == "session_start_timeout"
+    assert restarting["reason"] == "session_start_timeout"
+    assert len(
+        [event for event in events if event["status"] == "child_started"]
+    ) == 2
+
+
+@pytest.mark.skipif(os.name != "nt", reason="Windows PowerShell launcher integration")
+def test_stale_child_heartbeat_is_terminated_and_restarted(tmp_path):
+    project = _prepare_fake_launcher_project(
+        tmp_path,
+        [
+            {
+                "runtime_heartbeat_age_seconds": 5,
+                "current_path": "slow.pdf",
+                "current_path_elapsed_seconds": 5,
+                "sleep_seconds": 5,
+                "exit_code": 0,
+            },
+            {"exit_code": 0},
+        ],
+    )
+
+    completed = _run_real_worker_launcher(
+        project,
+        timeout=15,
+        worker_hang_timeout_seconds=0.5,
+        child_poll_milliseconds=100,
+    )
+
+    assert completed.returncode == 0, completed.stderr
+    count_path = project / ".source_catalog" / "fake_worker_count.txt"
+    assert count_path.read_text(encoding="utf-8") == "2"
+    events = _launcher_events(project)
+    unresponsive = next(
+        event for event in events if event["status"] == "child_unresponsive"
+    )
+    restarting = next(event for event in events if event["status"] == "restarting")
+    child_events = [event for event in events if event["status"] == "child_started"]
+    assert unresponsive["reason"] == "heartbeat_timeout"
+    assert restarting["reason"] == "heartbeat_timeout"
+    assert restarting["exit_code"] != 0
+    assert len(child_events) == 2
+    assert child_events[0]["child_pid"] != child_events[1]["child_pid"]
+
+
+@pytest.mark.skipif(os.name != "nt", reason="Windows PowerShell launcher integration")
+def test_restart_backoff_is_exponential_and_capped(tmp_path):
+    project = _prepare_fake_launcher_project(
+        tmp_path,
+        [
+            {"exit_code": 3},
+            {"exit_code": 4},
+            {"exit_code": 0},
+        ],
+    )
+
+    completed = _run_real_worker_launcher(
+        project,
+        restart_base_seconds=0.01,
+        restart_max_seconds=0.015,
+    )
+
+    assert completed.returncode == 0, completed.stderr
+    restart_events = [
+        event
+        for event in _launcher_events(project)
+        if event["status"] == "restarting"
+    ]
+    assert [event["restart_delay_seconds"] for event in restart_events] == [
+        0.01,
+        0.015,
+    ]
+
+
+@pytest.mark.skipif(os.name != "nt", reason="Windows PowerShell launcher integration")
+def test_terminating_supervisor_does_not_leave_an_orphan_worker(tmp_path):
+    from company_wiki.source_catalog.control import (
+        process_identity,
+        terminate_matching_process,
+    )
+
+    project = _prepare_fake_launcher_project(
+        tmp_path,
+        [{"sleep_seconds": 30, "exit_code": 0}],
+    )
+    supervisor = subprocess.Popen(
+        _real_worker_launcher_command(project),
+        cwd=project,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+    )
+    child_identity = None
+    try:
+        deadline = time.monotonic() + 10
+        child_pid = None
+        while time.monotonic() < deadline:
+            events_path = (
+                project / ".source_catalog" / "worker_launcher_events.jsonl"
+            )
+            if events_path.exists():
+                child_events = [
+                    event
+                    for event in _launcher_events(project)
+                    if event["status"] == "child_started"
+                ]
+                if child_events:
+                    child_pid = int(child_events[-1]["child_pid"])
+                    child_identity = process_identity(child_pid)
+                    if child_identity is not None:
+                        break
+            time.sleep(0.05)
+        assert child_identity is not None
+
+        supervisor.terminate()
+        supervisor.wait(timeout=10)
+        deadline = time.monotonic() + 5
+        while process_identity(child_pid) is not None and time.monotonic() < deadline:
+            time.sleep(0.05)
+
+        assert process_identity(child_pid) is None
+    finally:
+        if supervisor.poll() is None:
+            supervisor.terminate()
+            supervisor.wait(timeout=10)
+        if child_identity is not None and process_identity(child_identity["pid"]):
+            terminate_matching_process(child_identity)
+
+
+@pytest.mark.skipif(os.name != "nt", reason="Windows logon launcher integration")
+def test_logon_wrapper_detaches_a_live_supervisor_with_quoted_paths(tmp_path):
+    from company_wiki.source_catalog.control import (
+        process_identity,
+        terminate_matching_process,
+    )
+
+    project = _prepare_fake_launcher_project(
+        tmp_path / "project path with spaces",
+        [{"sleep_seconds": 2, "exit_code": 0}],
+    )
+    source_scripts = Path(__file__).resolve().parents[2] / "scripts"
+    scripts = project / "scripts"
+    scripts.mkdir()
+    for name in ("source_catalog_worker.ps1", "source_catalog_worker_at_logon.ps1"):
+        shutil.copyfile(source_scripts / name, scripts / name)
+
+    wrapper = scripts / "source_catalog_worker_at_logon.ps1"
+    completed = subprocess.run(
+        [
+            "powershell.exe",
+            "-NoProfile",
+            "-NonInteractive",
+            "-ExecutionPolicy",
+            "Bypass",
+            "-File",
+            str(wrapper),
+            "-PythonExe",
+            sys.executable,
+            "-ProjectRoot",
+            str(project),
+        ],
+        cwd=project,
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+        errors="replace",
+        timeout=15,
+        check=False,
+    )
+    assert completed.returncode == 0, completed.stderr
+
+    supervisor_identity = None
+    child_identity = None
+    try:
+        deadline = time.monotonic() + 10
+        events = []
+        while time.monotonic() < deadline:
+            events_path = (
+                project / ".source_catalog" / "worker_launcher_events.jsonl"
+            )
+            if events_path.exists():
+                events = _launcher_events(project)
+                child_events = [
+                    event for event in events if event["status"] == "child_started"
+                ]
+                if child_events:
+                    child_event = child_events[-1]
+                    supervisor_identity = process_identity(
+                        int(child_event["launcher_pid"])
+                    )
+                    child_identity = process_identity(int(child_event["child_pid"]))
+                    if supervisor_identity is not None and child_identity is not None:
+                        break
+            time.sleep(0.05)
+        assert supervisor_identity is not None
+        assert child_identity is not None
+
+        deadline = time.monotonic() + 15
+        while process_identity(supervisor_identity["pid"]) is not None:
+            if time.monotonic() >= deadline:
+                break
+            time.sleep(0.05)
+        assert process_identity(supervisor_identity["pid"]) is None
+        assert process_identity(child_identity["pid"]) is None
+        assert [event["status"] for event in _launcher_events(project)] == [
+            "starting",
+            "child_started",
+            "exited",
+        ]
+    finally:
+        for identity in (child_identity, supervisor_identity):
+            if identity is not None and process_identity(identity["pid"]) == identity:
+                terminate_matching_process(identity)

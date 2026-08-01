@@ -184,3 +184,63 @@ def test_resolver_never_reuses_retired_document(tmp_path):
 
     assert result.status is ResolutionStatus.MISSING
     assert result.reason == "no_existing_source_satisfies_request"
+
+
+def test_cli_restore_document_reactivates_with_audit(tmp_path, capsys):
+    """`documents restore` must turn a retired document back to active with
+    an audit row (Phase 16.6, the reverse of retire)."""
+    from company_wiki.source_catalog.cli import main
+
+    project, config_path, catalog = _catalog(tmp_path)
+    document_id = catalog.query(limit=1)[0]["document_id"]
+    main(
+        [
+            "--config", str(config_path), "documents", "retire",
+            "--document-id", document_id, "--reason", "test-retire",
+        ]
+    )
+    assert catalog.query(limit=10) == []
+    capsys.readouterr()  # discard the retire output
+
+    rc = main(
+        [
+            "--config", str(config_path), "documents", "restore",
+            "--document-id", document_id, "--reason", "test-restore",
+            "--created-by", "phase-16.6-test",
+        ]
+    )
+
+    assert rc == 0
+    restored = json.loads(capsys.readouterr().out)
+    assert restored["source_status"] == "active"
+
+    docs = catalog.query(limit=10)
+    assert len(docs) == 1
+    assert docs[0]["document_id"] == document_id
+    assert docs[0]["source_status"] == "active"
+    assert all(
+        location["location_status"] == "active" for location in docs[0]["locations"]
+    )
+    audit = catalog.store.fetchall(
+        "SELECT * FROM document_restore_audit WHERE document_id=?", (document_id,)
+    )
+    assert len(audit) == 1
+    assert audit[0]["reason"] == "test-restore"
+    assert audit[0]["created_by"] == "phase-16.6-test"
+
+
+def test_cli_restore_active_document_fails_without_changes(tmp_path, capsys):
+    from company_wiki.source_catalog.cli import main
+
+    project, config_path, catalog = _catalog(tmp_path)
+    document_id = catalog.query(limit=1)[0]["document_id"]
+
+    rc = main(
+        [
+            "--config", str(config_path), "documents", "restore",
+            "--document-id", document_id, "--reason", "noop",
+        ]
+    )
+
+    assert rc != 0
+    assert catalog.query(limit=10) != []

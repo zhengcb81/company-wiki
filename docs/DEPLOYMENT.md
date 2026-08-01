@@ -51,8 +51,11 @@ vim .env
 # Tavily 搜索 API
 TAVILY_API_KEY=your_tavily_api_key_here
 
-# DeepSeek LLM API
-DEEPSEEK_API_KEY=your_deepseek_api_key_here
+# MiniMax-M3 主 LLM API
+MINIMAX_API_KEY=your_minimax_api_key_here
+
+# MiMo 2.5 Pro 通用次 LLM（可选）
+MIMO_API_KEY=your_mimo_api_key_here
 
 # Wiki 根目录（可选）
 # WIKI_ROOT=~/company-wiki
@@ -81,12 +84,17 @@ schedule:
 
 # LLM 配置
 llm:
-  provider: "deepseek"
-  api_key: ""  # 使用环境变量 DEEPSEEK_API_KEY
-  model: "deepseek-v4-flash"
-  base_url: "https://api.deepseek.com"
-  max_tokens: 1024
-  temperature: 0.3
+  provider: "minimax"
+  model: "MiniMax-M3"
+  base_url: "https://api.minimaxi.com/v1"
+  max_tokens: 8192
+  temperature: 1.0
+  reasoning_split: true
+  fallback:
+    provider: "mimo"
+    model: "mimo-v2.5-pro"
+    base_url: "https://token-plan-cn.xiaomimimo.com/v1"
+    usage_scope: "general"
 
 # 搜索配置
 search:

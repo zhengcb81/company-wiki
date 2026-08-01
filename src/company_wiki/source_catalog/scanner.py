@@ -211,6 +211,45 @@ def _load_acquisition_metadata(path: Path) -> dict[str, Any]:
     return value
 
 
+def _construct_edgar_url(metadata: dict[str, Any]) -> str | None:
+    """Deterministically construct an SEC EDGAR URL from dayu SEC metadata
+    (accession_number + company_id + primary_document), Phase 16.1."""
+    acc = str(metadata.get("accession_number") or "").strip()
+    cik = str(metadata.get("company_id") or "").strip()
+    primary = str(metadata.get("primary_document") or "").strip()
+    if not (acc and cik and primary):
+        return None
+    cik10 = cik.zfill(10)
+    return (
+        f"https://www.sec.gov/Archives/edgar/data/{cik10}/"
+        f"{acc.replace('-', '')}/{primary}"
+    )
+
+
+def _load_dayu_portfolio_urls(config: CatalogConfig) -> dict[str, str]:
+    """Build company_name -> source_url from dayu portfolio meta.json files,
+    so company_raw documents whose sidecar lacks a URL can be enriched
+    (Phase 16.1).  Only entries that carry a source_url are indexed."""
+    mapping: dict[str, str] = {}
+    for root in config.roots:
+        if root.kind != "dayu_portfolio" or not root.path.is_dir():
+            continue
+        for meta_path in root.path.rglob("meta.json"):
+            try:
+                payload = json.loads(meta_path.read_text(encoding="utf-8"))
+            except (OSError, UnicodeError, json.JSONDecodeError):
+                continue
+            if not isinstance(payload, dict):
+                continue
+            url = str(payload.get("source_url") or "").strip()
+            if not url:
+                continue
+            company_name = str(payload.get("company_name") or "").strip()
+            if company_name:
+                mapping.setdefault(company_name, url)
+    return mapping
+
+
 def _load_security_master_identity(catalog_dir: Path) -> dict[str, tuple[str, str]]:
     """Build provider org id → (market, security_id) from the security-master
     snapshots, so a dayu meta.json's provider_company_id can propagate
@@ -252,6 +291,7 @@ def _enumerate_root(
     *,
     progress: Callable[..., None] | None = None,
     master_identity: dict[str, tuple[str, str]] | None = None,
+    portfolio_urls: dict[str, str] | None = None,
 ) -> tuple[list[_Candidate], int]:
     candidates: list[_Candidate] = []
     excluded = 0
@@ -284,6 +324,13 @@ def _enumerate_root(
                 relative = _relative(path, root.path)
                 sidecar = sidecars.get(str(path))
                 metadata = _load_acquisition_metadata(sidecar) if sidecar else {}
+                # Phase 16.1: a sidecar without any source URL is enriched
+                # from the matching dayu portfolio meta.json (by company name).
+                if not metadata.get("source_url") and not metadata.get("https_url"):
+                    portfolio_url = (portfolio_urls or {}).get(company.name)
+                    if portfolio_url:
+                        metadata = dict(metadata)
+                        metadata["source_url"] = portfolio_url
                 candidates.append(
                     _Candidate(
                         root,
@@ -404,6 +451,12 @@ def _enumerate_root(
                     market_value, security_id = resolved
                     metadata.setdefault("market", market_value)
                     metadata.setdefault("security_id", security_id)
+            # Phase 16.1: SEC documents without a source URL get a
+            # deterministically constructed EDGAR URL (accession_number).
+            if not metadata.get("source_url") and not metadata.get("https_url"):
+                edgar_url = _construct_edgar_url(metadata)
+                if edgar_url is not None:
+                    metadata.setdefault("source_url", edgar_url)
             names = {path.name: path for path in paths}
             selected = str(metadata.get("selected_primary_document") or "")
             primary = str(metadata.get("primary_document") or "")
@@ -623,12 +676,17 @@ def _scan_catalog_impl(
             _begin_scan_run(store, run_id, scan_time)
 
     master_identity = _load_security_master_identity(config.catalog_dir)
+    portfolio_urls = _load_dayu_portfolio_urls(config)
     for root in selected_roots:
         if not root.path.is_dir():
             errors += 1
             continue
         candidates, excluded = _enumerate_root(
-            root, names, progress=progress, master_identity=master_identity
+            root,
+            names,
+            progress=progress,
+            master_identity=master_identity,
+            portfolio_urls=portfolio_urls,
         )
         files_seen += len(candidates)
         files_excluded += excluded
@@ -724,7 +782,7 @@ def _scan_catalog_impl(
                             (item.source_id, item.content_sha256, item.size, item.mime_type, scan_time),
                         )
                 existing_document = connection.execute(
-                    "SELECT metadata_priority, source_status FROM documents WHERE document_id=?", (document_id,)
+                    "SELECT metadata_priority, source_status, metadata_json FROM documents WHERE document_id=?", (document_id,)
                 ).fetchone()
                 if existing_document is None:
                     connection.execute(
@@ -756,6 +814,26 @@ def _scan_catalog_impl(
                         (scan_time, document_id),
                     )
                 elif root.priority <= existing_document["metadata_priority"]:
+                    existing_meta = {}
+                    try:
+                        existing_meta = json.loads(existing_document["metadata_json"] or "{}")
+                    except json.JSONDecodeError:
+                        pass
+                    existing_inner = existing_meta.get("dayu_meta") or existing_meta.get("acquisition") or {}
+                    new_inner = document_metadata.get("dayu_meta") or document_metadata.get("acquisition") or {}
+                    # Phase 16.5: when the same content-addressed document is
+                    # re-ingested from another path, prefer the metadata that
+                    # carries a source URL (an old bare sidecar must not
+                    # overwrite a complete one).
+                    prefer_new = (
+                        not (existing_inner.get("source_url") or existing_inner.get("https_url"))
+                        and (new_inner.get("source_url") or new_inner.get("https_url"))
+                    )
+                    update_metadata = (
+                        canonical_json(document_metadata)
+                        if prefer_new
+                        else existing_document["metadata_json"]
+                    )
                     connection.execute(
                         """UPDATE documents SET primary_source_id=COALESCE(?,primary_source_id),title=?,source_type=?,
                         document_kind=?,published_date=COALESCE(?,published_date),source_status=?,metadata_priority=?,
@@ -768,7 +846,7 @@ def _scan_catalog_impl(
                             published,
                             source_status,
                             root.priority,
-                            canonical_json(document_metadata),
+                            update_metadata,
                             scan_time,
                             document_id,
                         ),

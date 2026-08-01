@@ -159,6 +159,12 @@ def _parser() -> argparse.ArgumentParser:
     retire_cmd.add_argument("--document-id", required=True)
     retire_cmd.add_argument("--reason", required=True)
     retire_cmd.add_argument("--created-by", default="cli")
+    restore_cmd = documents_sub.add_parser(
+        "restore", help="reactivate a retired document: active + audit"
+    )
+    restore_cmd.add_argument("--document-id", required=True)
+    restore_cmd.add_argument("--reason", required=True)
+    restore_cmd.add_argument("--created-by", default="cli")
 
     identity_enrich = subparsers.add_parser(
         "identity-enrichment",
@@ -533,6 +539,15 @@ def main(argv: Sequence[str] | None = None) -> int:
                 from .store import retire_document
 
                 result = retire_document(
+                    get_catalog().store,
+                    document_id=args.document_id,
+                    reason=args.reason,
+                    created_by=getattr(args, "created_by", "cli"),
+                )
+            elif getattr(args, "document_action", None) == "restore":
+                from .store import restore_document
+
+                result = restore_document(
                     get_catalog().store,
                     document_id=args.document_id,
                     reason=args.reason,

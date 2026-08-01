@@ -1,0 +1,193 @@
+"""Value objects shared by the source catalog pipeline."""
+
+from __future__ import annotations
+
+from dataclasses import dataclass
+from enum import Enum
+from pathlib import Path
+from typing import Any
+
+
+CATALOG_SCHEMA_VERSION = "1.2.0"
+SCANNER_VERSION = "1.0.0"
+NORMALIZER_VERSION = "1.0.0"
+SUMMARIZER_VERSION = "1.0.0"
+
+
+class FingerprintStatus(str, Enum):
+    """Persistent per-document fingerprint state (CW-2.28 §12.3).
+
+    The string values are stored in ``document_fingerprint_state.status`` and
+    are part of the on-disk contract; do not rename them.
+    """
+
+    PENDING = "pending"
+    COMPLETED = "completed"
+    UNSUPPORTED_TERMINAL = "unsupported_terminal"
+    RETRYABLE_FAILED = "retryable_failed"
+    FAILED_TERMINAL = "failed_terminal"
+
+
+# Statuses that are terminal: the scheduler must never re-select them
+# automatically. Only reconciliation (source SHA / normalizer version / location
+# change) may reset them to PENDING.
+FINGERPRINT_TERMINAL_STATUSES = frozenset(
+    {FingerprintStatus.UNSUPPORTED_TERMINAL.value, FingerprintStatus.FAILED_TERMINAL.value}
+)
+
+ROOT_KINDS = frozenset({"company_raw", "directory", "dayu_portfolio"})
+DOCUMENT_EXTENSIONS = frozenset(
+    {
+        ".pdf",
+        ".md",
+        ".txt",
+        ".html",
+        ".htm",
+        ".mht",
+        ".doc",
+        ".docx",
+        ".xls",
+        ".xlsx",
+        ".ppt",
+        ".pptx",
+        ".xml",
+        ".xsd",
+        ".json",
+        ".csv",
+        ".jpg",
+        ".jpeg",
+        ".png",
+    }
+)
+
+
+@dataclass(frozen=True)
+class RootSpec:
+    root_id: str
+    path: Path
+    kind: str
+    priority: int = 100
+
+    def __post_init__(self) -> None:
+        if not isinstance(self.root_id, str) or not self.root_id.strip():
+            raise ValueError("root_id must be non-empty text")
+        if self.root_id != self.root_id.strip():
+            raise ValueError("root_id must be trimmed")
+        if not isinstance(self.path, Path):
+            raise TypeError("path must be pathlib.Path")
+        if self.kind not in ROOT_KINDS:
+            raise ValueError(f"unsupported root kind: {self.kind}")
+        if isinstance(self.priority, bool) or not isinstance(self.priority, int):
+            raise TypeError("priority must be an integer")
+
+
+@dataclass(frozen=True)
+class CatalogConfig:
+    project_root: Path
+    catalog_dir: Path
+    roots: tuple[RootSpec, ...]
+
+    def __post_init__(self) -> None:
+        if not isinstance(self.project_root, Path) or not isinstance(
+            self.catalog_dir, Path
+        ):
+            raise TypeError("project_root and catalog_dir must be pathlib.Path")
+        if not isinstance(self.roots, tuple) or not self.roots:
+            raise ValueError("roots must be a non-empty tuple")
+        if not all(isinstance(item, RootSpec) for item in self.roots):
+            raise TypeError("roots must contain RootSpec values")
+        root_ids = [item.root_id for item in self.roots]
+        if len(root_ids) != len(set(root_ids)):
+            raise ValueError("root_id values must be unique")
+
+    @property
+    def database_path(self) -> Path:
+        return self.catalog_dir / "catalog.sqlite3"
+
+    @property
+    def derived_dir(self) -> Path:
+        return self.catalog_dir / "derived"
+
+    @property
+    def export_dir(self) -> Path:
+        return self.catalog_dir / "index"
+
+
+@dataclass(frozen=True)
+class ScanReport:
+    run_id: str
+    files_seen: int = 0
+    files_hashed: int = 0
+    files_reused: int = 0
+    files_excluded: int = 0
+    locations_active: int = 0
+    locations_missing: int = 0
+    errors: int = 0
+    dry_run: bool = False
+
+    def to_dict(self) -> dict[str, Any]:
+        return dict(self.__dict__)
+
+
+@dataclass(frozen=True)
+class ProcessingReport:
+    operation: str
+    completed: int = 0
+    skipped: int = 0
+    partial: int = 0
+    unsupported: int = 0
+    failed: int = 0
+    eligible: int = 0
+    terminal_reasons: dict[str, int] | None = None
+    due_retry: int = 0
+    terminal: int = 0
+
+    @property
+    def pending(self) -> int:
+        # ``eligible`` is the global backlog (pending + due-retry) read from the
+        # persistent state table before the batch; ``completed``/``unsupported``/
+        # ``failed`` are this batch's increments. The subtraction therefore
+        # yields the remaining global backlog, not a tautology.
+        return max(0, self.eligible - self.completed - self.unsupported - self.failed)
+
+    def to_dict(self) -> dict[str, Any]:
+        d = dict(self.__dict__)
+        if self.terminal_reasons is None:
+            d.pop("terminal_reasons", None)
+        d["pending"] = self.pending
+        return d
+
+
+@dataclass(frozen=True)
+class FingerprintState:
+    """One row of ``document_fingerprint_state`` (CW-2.28 §12.3)."""
+
+    document_id: str
+    source_id: str
+    source_sha256: str
+    status: str
+    attempt_count: int = 0
+    terminal_reason: str | None = None
+    last_error_code: str | None = None
+    last_error_message_redacted: str | None = None
+    normalizer_version: str = NORMALIZER_VERSION
+    last_attempt_at: str | None = None
+    next_retry_at: str | None = None
+    updated_at: str = ""
+
+
+__all__ = [
+    "CATALOG_SCHEMA_VERSION",
+    "CatalogConfig",
+    "DOCUMENT_EXTENSIONS",
+    "FINGERPRINT_TERMINAL_STATUSES",
+    "FingerprintState",
+    "FingerprintStatus",
+    "NORMALIZER_VERSION",
+    "ProcessingReport",
+    "ROOT_KINDS",
+    "RootSpec",
+    "SCANNER_VERSION",
+    "SUMMARIZER_VERSION",
+    "ScanReport",
+]

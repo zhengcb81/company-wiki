@@ -1,0 +1,161 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://company-wiki.local/contracts/cw-2.28-receipt.schema.json",
+  "title": "CW-2.28 phase attempt receipt",
+  "description": "Immutable per-attempt receipt for CW-2.28 phases (§12.2). Status enum and per-attempt fields override the older §6 four-value status rule. Only status=PASS unlocks the next phase (enforced by chain validation, not by this per-receipt schema).",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "schema_version",
+    "work_unit",
+    "phase",
+    "attempt_id",
+    "status",
+    "started_at",
+    "completed_at",
+    "executor",
+    "project_root",
+    "git_heads",
+    "supersedes_receipt_sha256",
+    "product_file_hashes_before",
+    "product_file_hashes_after",
+    "command_results",
+    "invariant_results",
+    "authorization_used",
+    "concurrent_change_detected",
+    "network_used",
+    "downloader_invocations",
+    "llm_invocations",
+    "diff_allowlist_result",
+    "secret_scan_result",
+    "errors",
+    "next_phase"
+  ],
+  "properties": {
+    "schema_version": { "type": "string", "const": "1.0" },
+    "work_unit": { "type": "string", "minLength": 1 },
+    "phase": { "type": "integer", "minimum": 0 },
+    "attempt_id": {
+      "type": "string",
+      "description": "Stable id, e.g. 'phase-2-attempt-0001'. Filename MUST be phase-{N}-attempt-{NNNN}.json."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "PASS",
+        "FAIL",
+        "PARTIAL",
+        "BLOCKED_AUTHORIZATION",
+        "BLOCKED_UPSTREAM",
+        "INVALIDATED_CONCURRENT_CHANGE",
+        "NOT_RUN"
+      ]
+    },
+    "started_at": { "type": "string", "minLength": 1 },
+    "completed_at": { "type": "string", "minLength": 1 },
+    "executor": { "type": "string", "minLength": 1 },
+    "project_root": { "type": "string", "minLength": 1 },
+    "git_heads": { "type": "object", "minProperties": 1 },
+    "supersedes_receipt_sha256": {
+      "description": "SHA-256 of the previous attempt's receipt file for this phase, or null for the first attempt.",
+      "type": ["string", "null"]
+    },
+    "product_file_hashes_before": {
+      "type": "object",
+      "description": "Map of allowlist product file path -> {sha256,size,mtime} captured before the phase."
+    },
+    "product_file_hashes_after": {
+      "type": "object",
+      "description": "Same map captured after the phase; compared against before for concurrent-change detection."
+    },
+    "command_results": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/commandResult" }
+    },
+    "invariant_results": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/invariantResult" }
+    },
+    "authorization_used": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Explicit authorizations relied upon (e.g. 'offline_phase_2', 'derived_catalog_only')."
+    },
+    "concurrent_change_detected": { "type": "boolean" },
+    "before_scoped_status": { "type": ["object", "string", "null"] },
+    "after_scoped_status": { "type": ["object", "string", "null"] },
+    "before_target_sha256": { "type": ["object", "null"] },
+    "after_target_sha256": { "type": ["object", "null"] },
+    "pytest_summary": { "type": ["object", "null"] },
+    "static_summary": { "type": ["object", "string", "null"] },
+    "catalog_before": { "type": ["object", "string", "null"] },
+    "catalog_after": { "type": ["object", "string", "null"] },
+    "db_backup": { "type": ["object", "string", "null"] },
+    "raw_manifest_before": { "type": ["object", "string", "null"] },
+    "raw_manifest_after": { "type": ["object", "string", "null"] },
+    "network_used": { "type": "boolean" },
+    "downloader_invocations": { "type": "integer", "minimum": 0 },
+    "llm_invocations": { "type": "integer", "minimum": 0 },
+    "files_created": { "type": "array", "items": { "type": "string" } },
+    "files_modified": { "type": "array", "items": { "type": "string" } },
+    "diff_allowlist_result": { "type": "string", "minLength": 1 },
+    "secret_scan_result": { "type": ["string", "object"] },
+    "errors": { "type": "array", "items": { "type": "string" } },
+    "blocker": { "type": ["string", "null"] },
+    "next_phase": { "type": ["string", "null"] }
+  },
+  "$defs": {
+    "commandResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "command_id",
+        "argv",
+        "cwd",
+        "started_at",
+        "completed_at",
+        "exit_code",
+        "summary",
+        "stdout_sha256",
+        "stderr_sha256",
+        "failed_tests",
+        "skipped_tests",
+        "xfailed_tests"
+      ],
+      "properties": {
+        "command_id": { "type": "string", "minLength": 1 },
+        "argv": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1,
+          "description": "Argv array, never a shell-concatenated string."
+        },
+        "red_contract": {
+          "type": "boolean",
+          "default": false,
+          "description": "True only for a RED probe (§12.1.2/§12.4.2): the command is EXPECTED to fail, and its failure is the phase's success criterion. Under status=PASS a red_contract command is exempt from the exit-code/failed/xfailed rule, but skipped_tests must still be empty and the receipt must carry an invariant proving the RED failed for the right reason."
+        },
+        "cwd": { "type": "string", "minLength": 1 },
+        "started_at": { "type": "string", "minLength": 1 },
+        "completed_at": { "type": "string", "minLength": 1 },
+        "exit_code": { "type": "integer" },
+        "summary": { "type": "string" },
+        "stdout_sha256": { "type": ["string", "null"] },
+        "stderr_sha256": { "type": ["string", "null"] },
+        "failed_tests": { "type": "array", "items": { "type": "string" } },
+        "skipped_tests": { "type": "array", "items": { "type": "string" } },
+        "xfailed_tests": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "invariantResult": {
+      "type": "object",
+      "required": ["name", "passed"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "passed": { "type": "boolean" },
+        "detail": { "type": ["string", "null"] }
+      },
+      "additionalProperties": true
+    }
+  }
+}

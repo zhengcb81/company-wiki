@@ -306,3 +306,43 @@ SELECT * FROM document_retire_audit WHERE document_id = '<document-id>';
 - 未知 document-id 报错且零写入（无部分删除）。
 
 历史遗留：2026-07-31 紫金会话前清理占位文档使用裸 SQL 删除；此后一律使用本命令。
+
+---
+
+## 十一、worker 版本管理与治理操作协议（2026-08-01 新增，Phase 16.3）
+
+### worker 代码版本
+
+- `worker_runtime.json` 的 `code_version` 字段 = worker 进程加载代码时的 git short commit（Phase 16.3 起）。
+- **代码变更后必须重启 worker**：`worker-stop` →（确认 `runtime_state: stopped`）→ `worker-start` → 检查 `worker_runtime.json` 的 `code_version` 等于当前 `git rev-parse --short HEAD`。
+- 长进程不热更新代码：旧进程会继续用启动时的代码（曾导致 F13 治理被旧 scanner 静默撤销）。
+
+### 治理操作协议（防撤销）
+
+任何批量数据治理（retire/restore/注入/删除）必须按序执行：
+
+1. `worker-stop`（杀 worker 与 launcher）；
+2. 确认无残留 launcher：`worker_launcher.lock` 不存在；如有残留 `taskkill /F /PID <pid>`；
+3. 执行治理操作（写入审计，created_by/reason）；
+4. `worker-start`（新代码）；
+5. **立即重扫受影响 root 并验证**（治理目标计数门）。
+
+禁止在 worker 运行中直接改 catalog 状态后不重扫验证——扫描会按摄入逻辑重写状态。
+
+### 故障排查
+
+- worker 启动失败 `worker_exited_clean_before_writing_runtime`：查 `worker_process_events.jsonl` 的 `unhandled_exception` 与 `worker_launcher_events.jsonl` 的 exit_code；旧 launcher 持锁时先 `taskkill`。
+
+---
+
+## 十二、documents restore（2026-08-01 新增，Phase 16.6）
+
+`retire` 的对称反向操作：把 retired 文档与 locations 转回 active，写 `document_restore_audit`（与 retire 审计对称），不物理删除。
+
+```powershell
+python -m company_wiki.source_catalog.cli --config config/source_catalog.yaml `
+  documents restore --document-id urn:company-wiki:document:sha256:... --reason correction --created-by <actor>
+```
+
+- 仅 retired 文档可 restore（active 文档 restore 报错且零写入）。
+- 治理工具化：批量恢复一律调用 `store.restore_document`（带 created_by/reason），禁止裸 SQL。

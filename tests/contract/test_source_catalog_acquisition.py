@@ -99,7 +99,7 @@ def _catalog(tmp_path: Path, *, with_source: bool):
         report.write_text("existing audited annual report", encoding="utf-8")
         sidecar = report.with_suffix(".txt.source.json")
         sidecar.write_text(
-            '{"market": "CN", "security_id": "600519", "source_title": "Acme 2025 Annual Report"}',
+            '{"market": "CN", "security_id": "600519", "source_title": "Acme 2025 Annual Report", "source_url": "https://www.cninfo.com.cn/new/disclosure/detail?stockCode=600519&announcementId=1"}',
             encoding="utf-8",
         )
     catalog = SourceCatalog(

@@ -22,6 +22,11 @@ def _company_catalog(tmp_path: Path):
     )
     source.parent.mkdir(parents=True)
     source.write_text("ACME FY2025 audited annual report.", encoding="utf-8")
+    (company / "Acme" / "raw" / "financial_reports" / "annual" / "2026-02-20_Acme_2025_annual_report.txt.source.json").write_text(
+        json.dumps({
+            "market": "CN", "security_id": "600519", "source_title": "Acme 2025 Annual Report",
+            "source_url": "https://www.cninfo.com.cn/new/disclosure/detail?stockCode=600519&announcementId=1",
+        }), encoding="utf-8")
     external.mkdir()
     (external / "different-name.txt").write_bytes(source.read_bytes())
     catalog = SourceCatalog(
@@ -103,8 +108,8 @@ def test_resolver_reuses_existing_exact_copy_without_downloader(tmp_path):
     assert Path(handle.canonical_path) == canonical_path
     assert handle.exact_duplicate_location_count == 1
     assert handle.content_sha256 == handle.source_id.rsplit(":", 1)[-1]
-    assert handle.capture_ready is False
-    assert handle.missing_capture_fields == ("https_url",)
+    assert handle.capture_ready is True
+    assert handle.https_url.startswith("https://www.cninfo.com.cn/")
 
 
 def test_resolver_prefers_strong_provider_identity_and_builds_capture_ready_handle(tmp_path):
@@ -175,6 +180,61 @@ def test_resolver_prefers_strong_provider_identity_and_builds_capture_ready_hand
     assert handle.snapshot_sha256 == handle.content_sha256
 
 
+def test_resolver_does_not_reuse_capture_incomplete_document(tmp_path):
+    """A company_raw document whose handle is not capture-ready (missing
+    https_url) must not be offered as a reuse candidate: filing-fetch rejects
+    such handles and would otherwise deadlock instead of downloading (Phase
+    16.2)."""
+    from company_wiki.source_catalog import (
+        CatalogConfig,
+        ResolutionStatus,
+        RootSpec,
+        SourceCatalog,
+        SourceRequest,
+        SourceResolver,
+    )
+
+    project = tmp_path / "project"
+    company = project / "companies" / "Acme" / "raw" / "financial_reports" / "annual"
+    company.mkdir(parents=True)
+    (company / "2026-02-20_Acme_2025_annual_report.pdf").write_bytes(
+        b"%PDF-1.7\nreal bytes"
+    )
+    (company / "2026-02-20_Acme_2025_annual_report.pdf.source.json").write_text(
+        json.dumps(
+            {
+                "market": "CN",
+                "security_id": "Acme",
+                "source_title": "Acme 2025 Annual Report",
+            }
+        ),
+        encoding="utf-8",
+    )
+    catalog = SourceCatalog(
+        CatalogConfig(
+            project_root=project,
+            catalog_dir=project / ".source_catalog",
+            roots=(RootSpec("company_raw", project / "companies", "company_raw"),),
+        )
+    )
+    catalog.scan()
+
+    result = SourceResolver(catalog).resolve(
+        SourceRequest(
+            entity="Acme",
+            market="CN",
+            security_id="Acme",
+            document_kind="annual_report",
+            fiscal_year=2025,
+            as_of_date="2026-07-31",
+        )
+    )
+
+    assert result.status is ResolutionStatus.MISSING
+    assert result.reason == "no_existing_source_satisfies_request"
+    assert result.download_required is True
+
+
 def test_resolver_does_not_reuse_dayu_portfolio_non_canonical_documents(tmp_path):
     """Documents ingested from the dayu portfolio live outside the canonical
     companies/ subtree; filing-fetch rejects such paths, so reuse-first must
@@ -239,6 +299,13 @@ def test_resolver_returns_ambiguous_instead_of_guessing_between_semantic_matches
     (company / "2026-02-21_Acme_2025_annual_report_B.txt").write_text(
         "second bytes", encoding="utf-8"
     )
+    for name in ("2026-02-20_Acme_2025_annual_report_A", "2026-02-21_Acme_2025_annual_report_B"):
+        (company / (name + ".txt.source.json")).write_text(
+            json.dumps({
+                "market": "CN", "security_id": "600519", "source_title": name,
+                "source_url": f"https://www.cninfo.com.cn/new/disclosure/detail?announcementId={name}",
+            }), encoding="utf-8")
+
     catalog = SourceCatalog(
         CatalogConfig(
             project_root=project,
