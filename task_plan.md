@@ -2782,10 +2782,10 @@ python -m compileall -q src/company_wiki/source_catalog
 | 首次只检索 `## CW-*` 二级标题，漏掉置顶控制面中的 `### 6.1 CW-2.18 自适应后台吞吐`，错误暂占 CW-2.18。 | 1 | 立即撤销冲突编号；依据 canonical roadmap 已使用至 CW-2.23，改用 CW-2.24。不得覆盖或改写原 CW-2.18。 |
 | 纠正编号的首次跨三文件组合补丁把 findings 上下文误放进 task_plan update，verification failed。 | 1 | 补丁未落盘；改为逐文件精确补丁，不重复组合上下文。 |
 
-## CW-2.28（统一下载、语义去重与下载前复用最终封板）— 状态：phase_2_completed / Phase 2 gate cleared（2026-07-28 CW-2.28C Phase 2 semantic entity tests 11P/0F/0xfail/0xpass；2026-07-27 记录 "CW-2.28 Phase 2 completed"）
+## CW-2.28（统一下载、语义去重与下载前复用最终封板）— 状态：completed（2026-07-28 §12 0R-10R 重放全部 PASS，见 §10.8 表格；progress.md 2026-07-28 FINAL）
 
 **登记时间：** 2026-07-26
-**实施状态：** 另一模型提交了候选实现；2026-07-26 独立审查判定 FAIL，最低返回点为 Phase 2；**Phase 2 已按 §10.8 WR-1..WR-7 与 CW-2.28C 重新完成并通过**（progress.md 2026-07-28 FINAL）。Phase 3-10 为历史 review_failed 状态，未获进一步实施授权。
+**实施状态：** 另一模型提交的候选实现经 2026-07-26 独立审查判定 FAIL，最低返回点 Phase 2；**§12 按新 receipt 合同重放 0R-10R 全部 PASS**：2R core state machine（120 focused tests）、3R 生产副本 drill、4R 生产 backfill（978 fingerprints）、5R assertion+resolver（11 tests）、6R download suppression（14 tests）、7R StockInfo delivery（127 tests）、8R 五公司 resolver 5/5 capture-ready（BYD/中微/宁德/美团/NVIDIA）、9R 回归 RESOLVED、10R 10 receipts indexed COMPLETED。Phase 1/4/5/6/7 章节内的 legacy_attempt_invalidated / review_failed 标注为历史评审记录，已被重放结果取代。
 **来源：** 2026-07-26 对用户原始“统一下载与去重”要求的逐条审计。
 **承接关系：**
 
