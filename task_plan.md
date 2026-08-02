@@ -67,7 +67,7 @@
 - [x] 五类正例：中英文招股书；年报/半年报/季报；IR 调研/业绩说明会材料；电话会 transcript/minutes；有明确券商机构证据的公司/行业研报（合同 + 生产 dry-run 82 决策复核）。
 - [x] 拒绝负例：当前目录中的股票池、筛选器、个人投资笔记、投资组合、账户 statement、水晶苍蝇拍点评；泛称“研究框架/研究报告”及只有券商名但实为选股表的文件（合同 + 生产 dry-run 全部 reject）。
 - [x] sidecar 信任边界：只有合法 JSON、允许字段和值的显式 `document_kind` 可提供强证据；当前三字段自动 sidecar 不得提升准入。
-- [x] 队列顺序：normalize、fingerprint、extractive/LLM summary 全部按 `10/20/21/22/30/40/50 + document_id` 稳定排序；低优先类别不得在更高优先 pending 存在时抢占。
+- [x] 队列顺序：normalize、fingerprint、extractive/LLM summary 全部按 `10/20/21/22/30/40/50/60 + document_id` 稳定排序；低优先类别不得在更高优先 pending 存在时抢占。（2026-08-02 用户调整：季报 22→60，移至研报之后，新顺序 prospectus→annual→semi→regulatory_filing→IR→call→broker→quarterly）
 - [x] 清理合同：dry-run 零 DB/源目录写入；apply 不删原件；共享 document/source 保留；孤儿派生数据按 FK 顺序清理；重复 apply 幂等；陈旧 token 拒绝。
 - [x] 重扫合同：清理后连续两次 scan 都不得重建不合格 location、sidecar、artifact 或 pending 队列；合格样例仍能被收录和按优先级处理。
 
@@ -129,7 +129,7 @@
 1. 正例：招股书；年报；半年报；季报；IR 记录；电话会纪要；明确券商 + 公司/行业研究语义。
 2. 负例：当前 82 份原件；`IB statements`；选股表；个人笔记；股票池；博客点评；泛研究框架；普通公告；监管问询；`年报点评/财报解读/季报复盘` 无券商证据。
 3. 冲突例：sidecar=regulatory_filing + filename=公告；sidecar=broker_research + form=10-K；损坏/非对象 JSON sidecar；NFC/NFD 中文路径；`重点关注旧/`；`../重点关注`。
-4. 队列例：normalize、fingerprint、extractive summary、LLM summary 均验证 `10/20/21/22/30/40/50/document_id`；`limit=1` 和跨 batch 都不能插队。
+4. 队列例：normalize、fingerprint、extractive summary、LLM summary 均验证 `10/20/21/22/30/40/50/60/document_id`；`limit=1` 和跨 batch 都不能插队。
 5. 清理例：dry-run 零 DB/源目录变更；共享 document/source/artifact 保留；孤儿 child rows 按 FK 删除；原件 hash/mtime 不变；stale token 拒绝；第二次 apply=0；异常 rollback；archive/restore drill 成功。
 6. 回归命令必须保存 stdout/exit code：focused；136 类扩展；所有 `test_source_catalog_*.py`；Ruff；compileall；PowerShell parser；strict UTF-8/NUL/trailing whitespace；scoped diff-check。任何 skip/xfail/xpass 或 flaky rerun 都需解释，不能只报“测试通过”。
 

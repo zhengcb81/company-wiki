@@ -16,6 +16,8 @@ CORE_SOURCE_PATHS = (
     "src/company_wiki/source_catalog/llm_summarizer.py",
     "src/company_wiki/source_catalog/llm_failure_policy.py",
     "src/company_wiki/source_catalog/service.py",
+    "src/company_wiki/source_catalog/admission.py",
+    "src/company_wiki/source_catalog/focus_cleanup.py",
 )
 
 

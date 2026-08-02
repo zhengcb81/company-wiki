@@ -17,11 +17,11 @@ _PRIORITIES = {
     "prospectus": 10,
     "annual_report": 20,
     "semi_annual_report": 21,
-    "quarterly_report": 22,
     "regulatory_filing": 22,
     "investor_relations": 30,
     "investor_call_transcript": 40,
     "broker_research": 50,
+    "quarterly_report": 60,
 }
 
 _SOURCE_TYPES = {

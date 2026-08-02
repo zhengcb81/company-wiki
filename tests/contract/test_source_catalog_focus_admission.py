@@ -42,7 +42,7 @@ def test_focus_policy_admits_only_the_five_requested_source_categories():
         "重点关注/Acme招股说明书.pdf": ("prospectus", 10),
         "重点关注/Acme 2025年度报告.pdf": ("annual_report", 20),
         "重点关注/Acme 2025年半年度报告.pdf": ("semi_annual_report", 21),
-        "重点关注/Acme 2025年第三季度报告.pdf": ("quarterly_report", 22),
+        "重点关注/Acme 2025年第三季度报告.pdf": ("quarterly_report", 60),
         "重点关注/Acme投资者关系活动记录.pdf": ("investor_relations", 30),
         "重点关注/Acme业绩电话会议纪要.pdf": ("investor_call_transcript", 40),
         "重点关注/中信证券-Acme-公司深度报告.pdf": ("broker_research", 50),
@@ -128,7 +128,7 @@ def test_processing_priority_is_stable_and_matches_requested_order():
         10,
         20,
         21,
-        22,
+        60,
         30,
         40,
         50,
@@ -237,10 +237,10 @@ def test_fingerprint_batch_uses_the_same_requested_priority_order(tmp_path: Path
         "prospectus",
         "annual_report",
         "semi_annual_report",
-        "quarterly_report",
         "investor_relations",
         "investor_call_transcript",
         "broker_research",
+        "quarterly_report",
     ]
 
 
