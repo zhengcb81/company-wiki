@@ -509,6 +509,12 @@ def _run_parser_isolated(
     ownership_mode = "process_group"
     started_at = time.monotonic()
     try:
+        if os.name == "nt":
+            # Spawn children re-read the environment at interpreter start;
+            # force UTF-8 so a failing child's stderr (which may carry
+            # non-ASCII paths) cannot break UTF-8-decoding collectors
+            # (pytest capture).
+            os.environ.setdefault("PYTHONUTF8", "1")
         process.start()
         parent_liveness_reader.close()
         if os.name == "nt":

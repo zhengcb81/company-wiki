@@ -110,6 +110,47 @@ class _FailingParser:
         )()
 
 
+# Module-level parser stand-ins for monkeypatching.  Local closures cannot be
+# pickled into the spawn-isolated parser children (WR-10.15), so the simulated
+# failure behavior must be self-contained (path-based) and pickleable by
+# reference — mirroring the module-level ``_FailingParser`` class above.
+def _selective_fail_parser(path, manifest, maybe_extra):
+    """Fail for bad.txt, else run the real normalizer."""
+    import company_wiki.source_catalog.normalizer as norm_mod
+
+    if "bad.txt" in str(path):
+        raise RuntimeError("simulated parser failure")
+    return norm_mod._normalize_source(path, manifest, maybe_extra)
+
+
+def _empty_for_target_parser(path, manifest, maybe_extra):
+    """Return empty text for empty.txt, else run the real normalizer."""
+    import company_wiki.source_catalog.normalizer as norm_mod
+
+    result = norm_mod._normalize_source(path, manifest, maybe_extra)
+    if "empty.txt" in str(path):
+        # Spawn-era envelope statuses are completed/partial/unsupported/failed;
+        # "parsed" (in-process semantics) fails the protocol check.
+        return norm_mod._Normalized(
+            body="",
+            parser_results=(),
+            parser_name="fake",
+            parser_version="0",
+            status="unsupported",
+            quality_flags=(),
+        )
+    return result
+
+
+def _raise_for_bad_parser(path, manifest, maybe_extra):
+    """Raise for bad.txt, else run the real normalizer."""
+    import company_wiki.source_catalog.normalizer as norm_mod
+
+    if "bad.txt" in str(path):
+        raise RuntimeError("simulated")
+    return norm_mod._normalize_source(path, manifest, maybe_extra)
+
+
 def test_parser_failure_does_not_block_next_document(tmp_path, monkeypatch):
     """When one document's parser fails, the next document must still be processed.
 
@@ -129,19 +170,9 @@ def test_parser_failure_does_not_block_next_document(tmp_path, monkeypatch):
     with catalog.store.transaction() as conn:
         conn.execute("UPDATE documents SET text_fingerprint=NULL")
 
-    import company_wiki.source_catalog.normalizer as norm_mod
-
-    orig_normalize = norm_mod._normalize_source
-
-    def selective_fail(path, manifest, maybe_extra):
-        path_str = str(Path(path))
-        if "bad.txt" in path_str:
-            raise RuntimeError("simulated parser failure")
-        return orig_normalize(path, manifest, maybe_extra)
-
     monkeypatch.setattr(
         "company_wiki.source_catalog.normalizer._normalize_source",
-        selective_fail,
+        _selective_fail_parser,
     )
 
     report = backfill_text_fingerprints(catalog.config, catalog.store)
@@ -277,16 +308,20 @@ def test_t2_07_should_stop_finishes_current_file_then_stops(tmp_path):
     with catalog.store.transaction() as conn:
         conn.execute("UPDATE documents SET text_fingerprint=NULL")
 
-    # Stop requested after the first document is processed.
-    state = {"processed": 0}
-
+    # Stop after the first document is actually completed (fingerprint
+    # persisted). Progress/heartbeat events fire mid-parse and must not cancel
+    # the in-flight parser, so completion is detected from the DB.
     def should_stop() -> bool:
-        return state["processed"] >= 1
+        return (
+            catalog.store.fetchone(
+                "SELECT COUNT(*) FROM documents WHERE text_fingerprint IS NOT NULL"
+            )[0]
+            >= 1
+        )
 
     progress_calls: list[dict] = []
 
     def progress(**kw):
-        state["processed"] = kw.get("current", state["processed"])
         progress_calls.append(kw)
 
     report = catalog.backfill_text_fingerprints(
@@ -403,25 +438,9 @@ def test_t2_04_empty_text_terminal_is_not_re_selected(tmp_path, monkeypatch):
     with catalog.store.transaction() as conn:
         conn.execute("UPDATE documents SET text_fingerprint=NULL")
 
-    import company_wiki.source_catalog.normalizer as norm_mod
-
-    orig = norm_mod._normalize_source
-
-    def empty_for_target(path, manifest, maybe_extra):
-        result = orig(path, manifest, maybe_extra)
-        if "empty.txt" in str(path):
-            return norm_mod._Normalized(
-                body="",
-                parser_results=(),
-                parser_name="fake",
-                parser_version="0",
-                status="parsed",
-                quality_flags=(),
-            )
-        return result
-
     monkeypatch.setattr(
-        "company_wiki.source_catalog.normalizer._normalize_source", empty_for_target
+        "company_wiki.source_catalog.normalizer._normalize_source",
+        _empty_for_target_parser,
     )
 
     report1 = catalog.backfill_text_fingerprints()
@@ -453,17 +472,9 @@ def test_t2_05_retry_backoff_and_three_strike_failed_terminal(tmp_path, monkeypa
     with catalog.store.transaction() as conn:
         conn.execute("UPDATE documents SET text_fingerprint=NULL")
 
-    import company_wiki.source_catalog.normalizer as norm_mod
-
-    orig = norm_mod._normalize_source
-
-    def raise_for_bad(path, manifest, maybe_extra):
-        if "bad.txt" in str(path):
-            raise RuntimeError("simulated")
-        return orig(path, manifest, maybe_extra)
-
     monkeypatch.setattr(
-        "company_wiki.source_catalog.normalizer._normalize_source", raise_for_bad
+        "company_wiki.source_catalog.normalizer._normalize_source",
+        _raise_for_bad_parser,
     )
 
     loc = catalog.store.fetchone(
@@ -512,7 +523,9 @@ def test_t2_05_retry_backoff_and_three_strike_failed_terminal(tmp_path, monkeypa
     assert s3["terminal_reason"] and s3["terminal_reason"].startswith(
         "retry_exhausted:"
     )
-    assert s3["last_error_code"] == "RuntimeError"
+    # Spawn isolation wraps the child's exception in ParserProcessError
+    # (WR-10.15); the child's original type survives in the message.
+    assert s3["last_error_code"] == "ParserProcessError"
 
     # Attempt 4: not re-selected (terminal)
     report4 = catalog.backfill_text_fingerprints(
