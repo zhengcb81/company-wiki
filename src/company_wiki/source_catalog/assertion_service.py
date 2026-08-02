@@ -90,6 +90,29 @@ def _get_active_verified_assertions(
     return [dict(r) for r in rows if r["assertion_id"] not in superseded_ids]
 
 
+def _resolve_active_verified(
+    active: list[dict[str, Any]],
+) -> dict[str, Any] | None:
+    """Resolve active verified assertions to the authoritative one.
+
+    A single active row is authoritative.  Multiple active rows that all share
+    the same evidence key (source_id, document_id, content_sha256) resolve to
+    the latest (rows arrive in created_at DESC order) — Phase 18.2: verifying a
+    corrected candidate supersedes the prior one, and pre-fix rows that were
+    never linked still resolve to the newest correction.  Rows with genuinely
+    different evidence keys remain an unresolved conflict (None, fail closed).
+    """
+    if len(active) == 1:
+        return active[0]
+    if len(active) > 1:
+        keys = {
+            (a["source_id"], a["document_id"], a["content_sha256"]) for a in active
+        }
+        if len(keys) == 1:
+            return active[0]
+    return None
+
+
 def get_verified_assertion(
     store: CatalogStore,
     source_id: str,
@@ -97,15 +120,14 @@ def get_verified_assertion(
 ) -> dict[str, Any] | None:
     """Return the active verified assertion for a source, or None.
 
-    Must match both source_id and current content_sha256.
-    Multiple verified assertions for the same source without a supersedes chain
-    is a conflict and returns None (fail closed).
+    Must match both source_id and current content_sha256.  Multiple verified
+    assertions sharing the same evidence resolve to the latest (Phase 18.2
+    correction chain); different evidence remains a conflict (None, fail
+    closed).
     """
     active = _get_active_verified_assertions(store, source_id)
     matching = [a for a in active if a["content_sha256"] == content_sha256]
-    if len(matching) == 1:
-        return matching[0]
-    return None
+    return _resolve_active_verified(matching)
 
 
 def get_verified_assertion_by_document(
@@ -119,9 +141,10 @@ def get_verified_assertion_by_document(
     Documents without a primary source (placeholders) surface ``source_id``
     as NULL to the resolver, so source_id-based lookups can never match them;
     assertions carry ``document_id`` and are resolved by it here.  When
-    ``content_sha256`` is given it must match; multiple active verified
-    assertions for the same document is a conflict and returns None (fail
-    closed).
+    ``content_sha256`` is given it must match.  Multiple active verified
+    assertions sharing the same evidence resolve to the latest (Phase 18.2
+    correction chain); different evidence is a conflict and returns None
+    (fail closed).
     """
     rows = store.fetchall(
         """SELECT * FROM source_metadata_assertions
@@ -137,9 +160,7 @@ def get_verified_assertion_by_document(
     active = [dict(r) for r in rows if r["assertion_id"] not in superseded_ids]
     if content_sha256 is not None:
         active = [a for a in active if a["content_sha256"] == content_sha256]
-    if len(active) == 1:
-        return active[0]
-    return None
+    return _resolve_active_verified(active)
 
 
 def preview_assertion(
@@ -293,6 +314,27 @@ def verify_assertion(
     if existing["content_sha256"] != current_sha256:
         raise ValueError("Current content_sha256 does not match assertion")
 
+    # Phase 18.2: a verified correction supersedes the prior active verified
+    # assertion on the same (source, document, content) instead of
+    # self-superseding its own candidate, so lookups resolve to the latest
+    # (GOOGL -> GOOG correction flow).  With no prior verified, keep pointing
+    # at the candidate (existing behavior: a promoted candidate cannot be
+    # rejected afterwards).
+    prior_rows = store.fetchall(
+        """SELECT * FROM source_metadata_assertions
+        WHERE source_id=? AND document_id=? AND content_sha256=?
+          AND decision='verified'
+        ORDER BY created_at DESC""",
+        (existing["source_id"], existing["document_id"], current_sha256),
+    )
+    superseded_ids = {
+        r["supersedes_assertion_id"]
+        for r in prior_rows
+        if r["supersedes_assertion_id"] is not None
+    }
+    active_prior = [r for r in prior_rows if r["assertion_id"] not in superseded_ids]
+    supersedes = active_prior[0]["assertion_id"] if active_prior else assertion_id
+
     new = _build_assertion(
         source_id=existing["source_id"],
         document_id=existing["document_id"],
@@ -311,7 +353,7 @@ def verify_assertion(
         evidence_basis=existing["evidence_basis"],
         evidence_json=json.loads(existing["evidence_json"]),
         decision="verified",
-        supersedes_assertion_id=assertion_id,
+        supersedes_assertion_id=supersedes,
         created_by=confirmed_by,
     )
 

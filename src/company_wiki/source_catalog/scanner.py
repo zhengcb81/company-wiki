@@ -349,6 +349,22 @@ def _enumerate_root(
                     if portfolio_url:
                         metadata = dict(metadata)
                         metadata["source_url"] = portfolio_url
+                # Phase 18.4: SEC company_raw documents are deterministically
+                # US-listed (same rule as the dayu portfolio pilot): backfill
+                # market/security identity when the sidecar omits it, so
+                # capture-ready handles resolve by market.
+                form_type = str(metadata.get("form_type") or "").upper()
+                is_sec = bool(
+                    metadata.get("accession_number")
+                    or str(metadata.get("provider") or "").strip().lower() == "sec"
+                    or form_type.startswith(("10-", "20-", "6-"))
+                )
+                if not metadata.get("market") and is_sec:
+                    metadata = dict(metadata)
+                    metadata["market"] = "US"
+                if not metadata.get("security_id") and metadata.get("ticker"):
+                    metadata = dict(metadata)
+                    metadata["security_id"] = str(metadata["ticker"])
                 candidates.append(
                     _Candidate(
                         root,

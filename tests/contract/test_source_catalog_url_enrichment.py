@@ -37,8 +37,6 @@ def _dayu_sec_catalog(tmp_path: Path, meta: dict):
 def test_dayu_sec_document_gets_edgar_url_from_accession(tmp_path):
     """A dayu meta.json without source_url but with SEC accession_number must
     get a deterministically constructed EDGAR URL (Phase 16.1)."""
-    from company_wiki.source_catalog import ResolutionStatus, SourceRequest, SourceResolver
-
     catalog = _dayu_sec_catalog(
         tmp_path,
         {
@@ -155,14 +153,7 @@ def test_rescan_backfills_market_and_security_id_on_existing_document(tmp_path):
 def test_company_raw_sidecar_without_url_gets_dayu_meta_url(tmp_path):
     """A company_raw document whose sidecar lacks source_url must get the URL
     from the matching dayu portfolio meta.json (Phase 16.1)."""
-    from company_wiki.source_catalog import (
-        CatalogConfig,
-        ResolutionStatus,
-        RootSpec,
-        SourceCatalog,
-        SourceRequest,
-        SourceResolver,
-    )
+    from company_wiki.source_catalog import CatalogConfig, RootSpec, SourceCatalog
 
     project = tmp_path / "project"
     companies = project / "companies"
@@ -267,3 +258,48 @@ def test_same_content_two_paths_prefers_metadata_with_url(tmp_path):
     assert acquisition.get("source_url") == (
         "https://www.cninfo.com.cn/new/disclosure/detail?announcementId=2"
     )
+
+
+def test_company_raw_sec_sidecar_gets_market_and_security_id(tmp_path):
+    """Phase 18.4: a company_raw SEC document whose sidecar carries
+    accession_number/provider but no market must get market="US" and
+    security_id from its ticker on ingestion — mirroring the dayu portfolio
+    backfill (Alphabet 10-K shape), so capture-ready handles resolve by
+    market."""
+    from company_wiki.source_catalog import CatalogConfig, RootSpec, SourceCatalog
+
+    project = tmp_path / "project"
+    companies = project / "companies"
+    company = companies / "Alphabet Inc" / "raw" / "financial_reports" / "annual"
+    company.mkdir(parents=True)
+    primary = "2026-02-05_sec_0001652044-26-000018_Alphabet_10K.htm"
+    (company / primary).write_text("<html>Alphabet FY2025 10-K</html>", encoding="utf-8")
+    (company / (primary + ".source.json")).write_text(
+        json.dumps(
+            {
+                "ticker": "GOOG",
+                "provider": "sec",
+                "provider_document_id": "0001652044-26-000018",
+                "accession_number": "0001652044-26-000018",
+                "source_title": "Alphabet Inc. 10-K 2025-12-31",
+                "form_type": "10-K",
+                "fiscal_year": 2025,
+                "source_url": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000018/10k.htm",
+            }
+        ),
+        encoding="utf-8",
+    )
+    catalog = SourceCatalog(
+        CatalogConfig(
+            project_root=project,
+            catalog_dir=project / ".source_catalog",
+            roots=(RootSpec("company_raw", companies, "company_raw", priority=10),),
+        )
+    )
+    catalog.scan()
+
+    docs = catalog.query(limit=10)
+    assert len(docs) == 1
+    acquisition = (docs[0].get("metadata") or {}).get("acquisition") or {}
+    assert acquisition.get("market") == "US"
+    assert acquisition.get("security_id") == "GOOG"

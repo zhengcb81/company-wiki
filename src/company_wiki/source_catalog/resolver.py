@@ -5,6 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from datetime import date
 from enum import Enum
+from functools import lru_cache
 import hashlib
 import json
 from pathlib import Path
@@ -252,9 +253,12 @@ class ResolutionResult:
     download_required: bool
     download_allowed: bool
     matches: tuple[SourceHandle, ...]
+    # Phase 19.6: per-candidate exclusion reasons for diagnostics (empty when
+    # no candidate passed the entity gate and none were rejected).
+    debug_trace: tuple[str, ...] = ()
 
     def to_dict(self) -> dict[str, Any]:
-        return {
+        payload = {
             "schema_version": self.schema_version,
             "request_id": self.request_id,
             "status": self.status.value,
@@ -263,6 +267,9 @@ class ResolutionResult:
             "download_allowed": self.download_allowed,
             "matches": [item.to_dict() for item in self.matches],
         }
+        if self.debug_trace:
+            payload["debug_trace"] = list(self.debug_trace)
+        return payload
 
 
 def _source_metadata(document: dict[str, Any]) -> dict[str, Any]:
@@ -320,6 +327,61 @@ def _provider_identity(
     return provider, preferred, identities
 
 
+# Sentinel issuer: a token shared by more than one issuer never anchors.
+_AMBIGUOUS_ISSUER = ""
+
+
+@lru_cache(maxsize=8)
+def _load_issuer_index(
+    catalog_dir: str,
+) -> tuple[dict[str, str], dict[str, frozenset[str]]]:
+    """Build a ticker/alias -> issuer (canonical-name) index from security_master.
+
+    Phase 18.1: dual-class tickers (GOOGL/GOOG) and same-issuer names share the
+    same canonical issuer, so a request by any one ticker can reuse documents
+    filed under the issuer name.  Returns ``(token_to_issuer, issuer_tokens)``:
+    every token of every record maps to its canonical issuer, and every issuer
+    maps to the full set of its tokens (all classes, aliases, tickers).  A
+    token shared by two different issuers maps to ``_AMBIGUOUS_ISSUER`` and
+    never anchors (fail-closed).
+    """
+    token_to_issuer: dict[str, str] = {}
+    issuer_tokens: dict[str, set[str]] = {}
+    root = Path(catalog_dir) / "security_master"
+    for market_file in ("cn", "hk", "us"):
+        path = root / f"{market_file}.json"
+        if not path.is_file():
+            continue
+        try:
+            payload = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            continue
+        for record in payload.get("records") or []:
+            canonical = str(record.get("canonical_name") or "").strip()
+            if not canonical:
+                continue
+            issuer = canonical.casefold()
+            tokens = {issuer}
+            for alias in record.get("aliases") or []:
+                alias_text = str(alias).strip()
+                if alias_text:
+                    tokens.add(alias_text.casefold())
+            for key in ("ticker", "security_id", "canonical_name"):
+                value = str(record.get(key) or "").strip()
+                if value:
+                    tokens.add(value.casefold())
+            issuer_tokens.setdefault(issuer, set()).update(tokens)
+            for token in tokens:
+                existing = token_to_issuer.get(token)
+                if existing is None:
+                    token_to_issuer[token] = issuer
+                elif existing != issuer:
+                    token_to_issuer[token] = _AMBIGUOUS_ISSUER
+    return token_to_issuer, {
+        issuer: frozenset(values) for issuer, values in issuer_tokens.items()
+    }
+
+
 class SourceResolver:
     """Resolve existing catalog sources without performing acquisition side effects."""
 
@@ -336,6 +398,10 @@ class SourceResolver:
         future_matches = 0
         unknown_date_matches = 0
         identity_mismatch = 0
+        # Phase 19.6: per-candidate exclusion reasons for diagnostics, plus the
+        # count of documents rejected at the entity gate.
+        trace: list[str] = []
+        entity_gate_rejected = 0
         # Only locations under a company_raw root are canonical reuse
         # candidates: dayu portfolio ingestion lives outside the companies/
         # subtree, and filing-fetch rejects such handles (MongoDB finding).
@@ -346,14 +412,19 @@ class SourceResolver:
         )
         for document in self.catalog.query(limit=10_000_000):
             if not self._entity_matches(request.entity, document):
+                entity_gate_rejected += 1
                 continue
             if document["document_kind"] != request.document_kind:
+                trace.append(f"{document['title']}: document_kind_mismatch")
                 continue
             metadata = _source_metadata(document)
             # --- identity-aware market/security_id filtering ---
             market_match = self._identity_matches(request, metadata)
             if market_match == "conflict":
                 identity_mismatch += 1
+                trace.append(
+                    f"{document['title']}: identity_conflict_market_or_security_id"
+                )
                 continue
             if market_match == "missing_fail_closed":
                 # Try verified assertion as fallback identity source (CW-2.28 T2-11).
@@ -390,18 +461,23 @@ class SourceResolver:
                 # the strict check runs after the handle is built below.
             year = _fiscal_year(document, metadata)
             if request.fiscal_year is not None and year != request.fiscal_year:
+                trace.append(f"{document['title']}: fiscal_year_mismatch")
                 continue
             form_type = str(metadata.get("form_type") or "").strip() or None
             if request.form_type and form_type != request.form_type:
+                trace.append(f"{document['title']}: form_type_mismatch")
                 continue
             fiscal_period = str(metadata.get("fiscal_period") or "").strip() or None
             if request.fiscal_period and fiscal_period != request.fiscal_period:
+                trace.append(f"{document['title']}: fiscal_period_mismatch")
                 continue
             language = str(metadata.get("language") or "").strip() or None
             if request.language and language != request.language:
+                trace.append(f"{document['title']}: language_mismatch")
                 continue
             provider, provider_document_id, identities = _provider_identity(metadata)
             if request.provider and provider and provider != request.provider:
+                trace.append(f"{document['title']}: provider_mismatch")
                 continue
             strong_identity = bool(
                 request.provider_document_id
@@ -409,13 +485,16 @@ class SourceResolver:
                 and (not request.provider or provider == request.provider)
             )
             if request.provider_document_id and not strong_identity:
+                trace.append(f"{document['title']}: provider_document_id_not_strong")
                 continue
             published = document["published_date"]
             if not published:
                 unknown_date_matches += 1
+                trace.append(f"{document['title']}: published_date_unknown")
                 continue
             if published > request.as_of_date:
                 future_matches += 1
+                trace.append(f"{document['title']}: published_after_as_of_date")
                 continue
             canonical_locations = [
                 item
@@ -430,6 +509,7 @@ class SourceResolver:
             ):
                 # No canonical company_raw location: not a reusable source
                 # (dayu portfolio documents live outside companies/).
+                trace.append(f"{document['title']}: no_canonical_company_raw_location")
                 continue
             handle = self._handle(
                 document,
@@ -442,6 +522,7 @@ class SourceResolver:
                 provider_document_id=provider_document_id,
             )
             if handle is None:
+                trace.append(f"{document['title']}: placeholder_no_handle")
                 continue
             if market_match == "missing_fail_closed":
                 # Reusable, but identity is unverifiable (no metadata, no
@@ -449,22 +530,29 @@ class SourceResolver:
                 # Only placeholders (handle=None) fall through to MISSING so
                 # an authorized download can proceed (Phase 15.3).
                 identity_mismatch += 1
+                trace.append(f"{document['title']}: identity_unverifiable_strict")
                 continue
             if not handle.capture_ready:
                 # Phase 16.2: a capture-incomplete handle (e.g. missing
                 # https_url) cannot be consumed by filing-fetch; offering it
                 # as reusable deadlocks the download path. Treat as no match
                 # so the acquisition path proceeds to the adapter.
+                trace.append(f"{document['title']}: capture_incomplete")
                 continue
             semantic.append(handle)
+            trace.append(f"{document['title']}: matched")
             if strong_identity:
                 exact.append(handle)
+        if trace or entity_gate_rejected:
+            trace.insert(0, f"entity_gate_rejected: {entity_gate_rejected}")
+        debug_trace = tuple(trace)
         if len(exact) == 1:
             return self._result(
                 request,
                 ResolutionStatus.REUSED_EXACT,
                 "one_existing_source_matches_provider_identity",
                 (exact[0],),
+                debug_trace,
             )
         if len(exact) > 1:
             return self._result(
@@ -472,6 +560,7 @@ class SourceResolver:
                 ResolutionStatus.AMBIGUOUS,
                 "multiple_existing_sources_match_provider_identity",
                 tuple(exact),
+                debug_trace,
             )
         if len(semantic) == 1:
             return self._result(
@@ -479,6 +568,7 @@ class SourceResolver:
                 ResolutionStatus.REUSED_EQUIVALENT,
                 "one_existing_source_satisfies_semantic_request",
                 (semantic[0],),
+                debug_trace,
             )
         if len(semantic) > 1:
             return self._result(
@@ -486,6 +576,7 @@ class SourceResolver:
                 ResolutionStatus.AMBIGUOUS,
                 "multiple_existing_sources_match_semantic_request",
                 tuple(semantic),
+                debug_trace,
             )
         if identity_mismatch:
             return self._result(
@@ -493,6 +584,7 @@ class SourceResolver:
                 ResolutionStatus.IDENTITY_CONFLICT,
                 "identity_mismatch_market_or_security_id",
                 (),
+                debug_trace,
             )
         if future_matches:
             reason = "only_sources_published_after_as_of_date"
@@ -502,10 +594,13 @@ class SourceResolver:
                 ResolutionStatus.AMBIGUOUS,
                 "matching_sources_have_unknown_published_date",
                 (),
+                debug_trace,
             )
         else:
             reason = "no_existing_source_satisfies_request"
-        return self._result(request, ResolutionStatus.MISSING, reason, ())
+        return self._result(
+            request, ResolutionStatus.MISSING, reason, (), debug_trace
+        )
 
     @staticmethod
     def _identity_matches(request: SourceRequest, metadata: dict[str, Any]) -> str:
@@ -538,14 +633,23 @@ class SourceResolver:
             return "conflict"
         return "match"
 
-    @staticmethod
-    def _entity_matches(entity: str, document: dict[str, Any]) -> bool:
+    def _issuer_index(self) -> tuple[dict[str, str], dict[str, frozenset[str]]]:
+        catalog_dir = getattr(self.catalog.config, "catalog_dir", None)
+        if catalog_dir is None:
+            return {}, {}
+        return _load_issuer_index(str(catalog_dir))
+
+    def _entity_matches(self, entity: str, document: dict[str, Any]) -> bool:
         wanted = entity.casefold()
-        values = {
-            str(item.get("entity_id") or "").casefold() for item in document["entities"]
-        } | {str(item.get("name") or "").casefold() for item in document["entities"]}
+        doc_values = {
+            str(item.get("entity_id") or "").casefold()
+            for item in document["entities"]
+        } | {
+            str(item.get("name") or "").casefold()
+            for item in document["entities"]
+        }
         metadata = _source_metadata(document)
-        values.update(
+        doc_values.update(
             str(value).casefold()
             for value in (
                 metadata.get("ticker"),
@@ -554,7 +658,19 @@ class SourceResolver:
             )
             if value
         )
-        return wanted in values
+        doc_values.discard("")
+        if wanted in doc_values:
+            return True
+        # Phase 18.1: anchor a ticker request to its issuer (security_master
+        # canonical name) so dual-class tickers (GOOGL/GOOG) and issuer aliases
+        # match documents filed under the issuer name.  Market filtering stays
+        # strict in _identity_matches (18.0 decision 2); tokens shared by
+        # multiple issuers never anchor (fail-closed).
+        token_to_issuer, issuer_tokens = self._issuer_index()
+        issuer = token_to_issuer.get(wanted)
+        if not issuer:
+            return False
+        return bool(issuer_tokens.get(issuer, frozenset()) & doc_values)
 
     @staticmethod
     def _handle(
@@ -644,6 +760,7 @@ class SourceResolver:
         status: ResolutionStatus,
         reason: str,
         matches: tuple[SourceHandle, ...],
+        debug_trace: tuple[str, ...] = (),
     ) -> ResolutionResult:
         return ResolutionResult(
             schema_version=SOURCE_RESOLVER_SCHEMA_VERSION,
@@ -653,6 +770,7 @@ class SourceResolver:
             download_required=status is ResolutionStatus.MISSING,
             download_allowed=request.allow_download,
             matches=matches,
+            debug_trace=debug_trace,
         )
 
 

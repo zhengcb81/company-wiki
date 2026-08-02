@@ -369,3 +369,25 @@ python -m company_wiki.source_catalog.cli --config config/source_catalog.yaml `
 ### worker 依赖注入
 
 - `SourceCatalogWorker.__init__` 接收 `project_root`（CLI 传入）；worker 内部不得依赖 `catalog.config` 内部结构（调度门禁测试强制）。
+
+## 十三、身份断言与发行人归一协议（2026-08-02 新增，Phase 18）
+
+### 身份断言（identity-enrichment）何时使用
+
+- 旧摄入文档缺 `market`/`security_id` 且无法从 sidecar 或 security_master 补全时，用 assertions 显式核对身份（`preview_assertion` → `verify_assertion`）。
+- 断言只回答"该文档属于哪个发行人"；不构成任何投资结论（`verified` 仅表示来源身份/抽取质量通过）。
+
+### 更正流程（supersedes 链，Phase 18.2）
+
+- 对同一 (source, document, content) 已有 verified 时，verify 新候选会**自动 supersede**（链式），查询返回最新一条——纠正错误断言的正确方式 = 再 verify 一条新候选，**不是 reject**（reject 只接受 candidate）。
+- 同一证据键（source/document/content）多条 active verified 解析到最新（含 Phase 18.2 前的历史损坏行，如 Alphabet GOOGL/GOOG 双 verified）；不同证据键仍视为冲突（fail-closed，返回 None）。
+
+### 发行人归一（issuer anchoring，Phase 18.1）
+
+- 请求 ticker 经 security_master `canonical_name` 锚定到发行人：双类股（GOOGL/GOOG/GOOGM/GOOGN → "Alphabet Inc."）任意 ticker 互查命中同一文档；别名（如 "Alphabet"）同样命中。
+- 市场过滤仍严格（`_identity_matches`）：CN 请求只命中 CN 文档；跨市场同发行人不误共享（如 601899/02899、9988/BABA）。
+- security_master 中跨 issuer 共享的 token 不锚定（fail-closed），防止泛化别名误匹配。
+
+### 排查（resolve 诊断，Phase 19.6）
+
+- resolve 响应的 `debug_trace`（非空时）列出逐候选排除原因（`entity_gate_rejected: N` 计数 + identity/year/form/capture 各步），filing-fetch `--debug` 透传；`not_found` 时一次给出原因链。

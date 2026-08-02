@@ -470,3 +470,202 @@ def test_resolver_contradictory_market_is_still_identity_conflict(tmp_path):
     assert result.status is ResolutionStatus.IDENTITY_CONFLICT
     assert result.reason == "identity_mismatch_market_or_security_id"
     assert result.download_required is False
+
+
+# --- Phase 18.1: issuer-name anchoring (dual-class / same-issuer tickers) ---
+
+_ALPHABET_SECURITY_MASTER = {
+    "market": "US",
+    "record_count": 2,
+    "records": [
+        {
+            "active": True,
+            "aliases": ["Alphabet"],
+            "canonical_name": "Alphabet Inc.",
+            "market": "US",
+            "security_id": "GOOG",
+            "ticker": "GOOG",
+            "source_record_id": "0001652044",
+            "identifiers": {"cik": "0001652044"},
+        },
+        {
+            "active": True,
+            "aliases": ["Alphabet"],
+            "canonical_name": "Alphabet Inc.",
+            "market": "US",
+            "security_id": "GOOGL",
+            "ticker": "GOOGL",
+            "source_record_id": "0001652044",
+            "identifiers": {"cik": "0001652044"},
+        },
+    ],
+}
+
+
+def _alphabet_catalog(tmp_path: Path, *, security_id: str):
+    """A company_raw catalog with one Alphabet 10-K plus a security_master
+    fixture that resolves GOOGL/GOOG to the same canonical issuer."""
+    from company_wiki.source_catalog import CatalogConfig, RootSpec, SourceCatalog
+
+    project = tmp_path / "project"
+    company = (
+        project / "companies" / "Alphabet Inc" / "raw" / "financial_reports" / "annual"
+    )
+    company.mkdir(parents=True)
+    (company / "2026-02-05_Alphabet_2025_10K.htm").write_text(
+        "<html>Alphabet FY2025 10-K</html>", encoding="utf-8"
+    )
+    (company / "2026-02-05_Alphabet_2025_10K.htm.source.json").write_text(
+        json.dumps(
+            {
+                "market": "US",
+                "security_id": security_id,
+                "company_name": "Alphabet Inc.",
+                "source_title": "Alphabet 2025 Annual Report",
+                "form_type": "10-K",
+                "fiscal_year": 2025,
+                "provider": "sec",
+                "provider_document_id": "0001652044-26-000001",
+                "source_url": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000001/10k.htm",
+            }
+        ),
+        encoding="utf-8",
+    )
+    security_master = project / ".source_catalog" / "security_master"
+    security_master.mkdir(parents=True)
+    (security_master / "us.json").write_text(
+        json.dumps(_ALPHABET_SECURITY_MASTER), encoding="utf-8"
+    )
+    catalog = SourceCatalog(
+        CatalogConfig(
+            project_root=project,
+            catalog_dir=project / ".source_catalog",
+            roots=(RootSpec("company_raw", project / "companies", "company_raw"),),
+        )
+    )
+    catalog.scan()
+    return catalog
+
+
+def test_resolver_anchors_ticker_to_issuer_canonical_name(tmp_path):
+    """Phase 18.1: a GOOGL request must reuse the Alphabet document even though
+    the document only carries the sibling ticker GOOG and the issuer name."""
+    from company_wiki.source_catalog import ResolutionStatus, SourceRequest, SourceResolver
+
+    catalog = _alphabet_catalog(tmp_path, security_id="GOOG")
+
+    result = SourceResolver(catalog).resolve(
+        SourceRequest(
+            entity="GOOGL",
+            market="US",
+            document_kind="annual_report",
+            form_type="10-K",
+            fiscal_year=2025,
+            as_of_date="2026-07-18",
+        )
+    )
+
+    assert result.status is ResolutionStatus.REUSED_EQUIVALENT
+    assert len(result.matches) == 1
+    assert result.matches[0].https_url.startswith("https://www.sec.gov/")
+
+
+def test_resolver_matches_sibling_ticker_and_alias_of_same_issuer(tmp_path):
+    """Phase 18.1 reverse: a GOOG request (document carries GOOGL) and an
+    issuer-alias request (Alphabet) must both hit the same document."""
+    from company_wiki.source_catalog import ResolutionStatus, SourceRequest, SourceResolver
+
+    catalog = _alphabet_catalog(tmp_path, security_id="GOOGL")
+
+    for entity in ("GOOG", "Alphabet"):
+        result = SourceResolver(catalog).resolve(
+            SourceRequest(
+                entity=entity,
+                market="US",
+                document_kind="annual_report",
+                form_type="10-K",
+                fiscal_year=2025,
+                as_of_date="2026-07-18",
+            )
+        )
+        assert result.status is ResolutionStatus.REUSED_EQUIVALENT, entity
+        assert len(result.matches) == 1, entity
+
+
+def test_resolver_unknown_ticker_does_not_anchor_to_unrelated_issuer(tmp_path):
+    """Phase 18.1 control: a ticker absent from security_master must not start
+    matching the Alphabet document (fail-closed, no over-matching)."""
+    from company_wiki.source_catalog import ResolutionStatus, SourceRequest, SourceResolver
+
+    catalog = _alphabet_catalog(tmp_path, security_id="GOOG")
+
+    result = SourceResolver(catalog).resolve(
+        SourceRequest(
+            entity="MSFT",
+            market="US",
+            document_kind="annual_report",
+            form_type="10-K",
+            fiscal_year=2025,
+            as_of_date="2026-07-18",
+        )
+    )
+
+    assert result.status is ResolutionStatus.MISSING
+
+
+def test_resolve_debug_trace_names_candidate_exclusion_reasons(tmp_path):
+    """Phase 19.6: a non-reused resolution must carry a debug_trace naming each
+    candidate that passed the entity gate and its exclusion reasons (identity /
+    year / form / capture steps) plus the entity-gate reject count, so a
+    not_found result explains itself."""
+    from company_wiki.source_catalog import (
+        CatalogConfig,
+        ResolutionStatus,
+        RootSpec,
+        SourceCatalog,
+        SourceRequest,
+        SourceResolver,
+    )
+
+    project = tmp_path / "project"
+    company = project / "companies" / "Acme" / "raw" / "financial_reports" / "annual"
+    company.mkdir(parents=True)
+    (company / "2026-02-20_Acme_2025_annual_report.pdf").write_bytes(
+        b"%PDF-1.7\nreal bytes"
+    )
+    (company / "2026-02-20_Acme_2025_annual_report.pdf.source.json").write_text(
+        json.dumps(
+            {
+                "market": "CN",
+                "security_id": "600519",
+                "source_title": "Acme 2025 Annual Report",
+            }
+        ),
+        encoding="utf-8",
+    )
+    catalog = SourceCatalog(
+        CatalogConfig(
+            project_root=project,
+            catalog_dir=project / ".source_catalog",
+            roots=(RootSpec("company_raw", project / "companies", "company_raw"),),
+        )
+    )
+    catalog.scan()
+
+    result = SourceResolver(catalog).resolve(
+        SourceRequest(
+            entity="Acme",
+            market="US",  # conflicts with the CN document identity
+            document_kind="annual_report",
+            fiscal_year=2024,  # mismatches the 2025 document
+            as_of_date="2026-07-31",
+        )
+    )
+
+    assert result.status is ResolutionStatus.IDENTITY_CONFLICT
+    trace = result.to_dict().get("debug_trace")
+    assert trace, "non-reused resolution must carry a debug_trace"
+    joined = "\n".join(trace)
+    assert "Acme 2025" in joined
+    assert "identity_conflict" in joined
+    assert "entity_gate_rejected" in joined

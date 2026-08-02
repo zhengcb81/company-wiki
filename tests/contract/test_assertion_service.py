@@ -226,7 +226,10 @@ def test_append_only_no_update_delete(tmp_path):
     assert "rejected" in decisions
 
 
-def test_conflict_verified_returns_none(tmp_path):
+def test_second_verify_supersedes_prior_verified_same_evidence(tmp_path):
+    """Phase 18.2 contract change: a second verify on the same evidence
+    supersedes the first; the lookup resolves to the latest (Corp B) instead of
+    failing closed with None."""
     from company_wiki.source_catalog.assertion_service import (
         get_verified_assertion,
         preview_assertion,
@@ -253,10 +256,47 @@ def test_conflict_verified_returns_none(tmp_path):
         entity="Corp B",
         evidence_basis="test",
     )
-    verify_assertion(store, assertion_id=p2["assertion_id"], current_sha256="abc123")
+    v2 = verify_assertion(store, assertion_id=p2["assertion_id"], current_sha256="abc123")
 
-    # Two verified assertions for same source → conflict → None
-    assert get_verified_assertion(store, "s:test", "abc123") is None
+    gv = get_verified_assertion(store, "s:test", "abc123")
+    assert gv is not None
+    assert gv["entity"] == "Corp B"
+    assert gv["assertion_id"] == v2["assertion_id"]
+
+
+def test_conflict_on_different_evidence_returns_none(tmp_path):
+    """Phase 18.2 control: verified assertions with genuinely different
+    evidence (content hash) on the same document stay an unresolved conflict
+    when looked up without a content filter (fail closed preserved)."""
+    from company_wiki.source_catalog.assertion_service import (
+        get_verified_assertion_by_document,
+        preview_assertion,
+        verify_assertion,
+    )
+
+    store = _temp_store(tmp_path)
+
+    p1 = preview_assertion(
+        store,
+        source_id="s:test",
+        document_id="d:test",
+        content_sha256="abc123",
+        entity="Corp A",
+        evidence_basis="test",
+    )
+    verify_assertion(store, assertion_id=p1["assertion_id"], current_sha256="abc123")
+
+    p2 = preview_assertion(
+        store,
+        source_id="s:test",
+        document_id="d:test",
+        content_sha256="xyz789",
+        entity="Corp B",
+        evidence_basis="test",
+    )
+    verify_assertion(store, assertion_id=p2["assertion_id"], current_sha256="xyz789")
+
+    assert get_verified_assertion_by_document(store, "d:test", None) is None
 
 
 def test_reject_only_candidate(tmp_path):
@@ -295,3 +335,54 @@ def test_reject_only_candidate(tmp_path):
     reject_assertion(store, assertion_id=p2["assertion_id"], reason="wrong")
     with pytest.raises(ValueError, match="superseded"):
         reject_assertion(store, assertion_id=p2["assertion_id"], reason="double")
+
+
+def test_second_verify_supersedes_prior_verified_and_resolves_to_latest(tmp_path):
+    """Phase 18.2: verifying a corrected candidate on the same
+    (source, document, content) must supersede the prior verified assertion,
+    and lookups must resolve to the latest (GOOGL -> GOOG correction flow).
+    Today the second verify self-supersedes its own candidate, so two verified
+    assertions stay active and lookups fail closed with None."""
+    from company_wiki.source_catalog.assertion_service import (
+        get_verified_assertion,
+        get_verified_assertion_by_document,
+        preview_assertion,
+        verify_assertion,
+    )
+
+    store = _temp_store(tmp_path)
+
+    p1 = preview_assertion(
+        store,
+        source_id="s:test",
+        document_id="d:test",
+        content_sha256="abc123",
+        entity="Alphabet Inc.",
+        market="US",
+        security_id="GOOGL",
+        evidence_basis="test",
+    )
+    v1 = verify_assertion(store, assertion_id=p1["assertion_id"], current_sha256="abc123")
+
+    p2 = preview_assertion(
+        store,
+        source_id="s:test",
+        document_id="d:test",
+        content_sha256="abc123",
+        entity="Alphabet Inc.",
+        market="US",
+        security_id="GOOG",
+        evidence_basis="test",
+    )
+    v2 = verify_assertion(store, assertion_id=p2["assertion_id"], current_sha256="abc123")
+
+    # The correction chains: v2 supersedes v1 (not its own candidate).
+    assert v2["supersedes_assertion_id"] == v1["assertion_id"]
+
+    found = get_verified_assertion(store, "s:test", "abc123")
+    assert found is not None
+    assert found["security_id"] == "GOOG"
+
+    by_doc = get_verified_assertion_by_document(store, "d:test", "abc123")
+    assert by_doc is not None
+    assert by_doc["security_id"] == "GOOG"
