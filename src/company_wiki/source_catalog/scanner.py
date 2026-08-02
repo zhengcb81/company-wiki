@@ -17,7 +17,12 @@ from typing import Any, Callable, Iterable
 
 from company_wiki.source_contract import SourceManifest, SourceType
 
-from .admission import AdmissionDecision, evaluate_admission
+from .admission import (
+    AdmissionDecision,
+    FOCUS_RELATIVE_PREFIX,
+    FOCUS_ROOT_ID,
+    evaluate_admission,
+)
 from .models import CatalogConfig, DOCUMENT_EXTENSIONS, SCANNER_VERSION, RootSpec, ScanReport
 from .store import CatalogStore, canonical_json
 
@@ -407,6 +412,31 @@ def _enumerate_root(
                     excluded += 1
                     continue
                 supported.append(path)
+            relative_dir = _relative(current_path, root.path)
+            focus_scope = root.root_id == FOCUS_ROOT_ID and (
+                relative_dir == FOCUS_RELATIVE_PREFIX
+                or relative_dir.startswith(FOCUS_RELATIVE_PREFIX + "/")
+            )
+            if not focus_scope:
+                # Legacy behavior for every directory outside the exact
+                # 重点关注 subtree: each supported file (including .source.json)
+                # is a standalone primary document with no sidecar pairing.
+                for path in supported:
+                    relative = _relative(path, root.path)
+                    candidates.append(
+                        _Candidate(
+                            root,
+                            path,
+                            relative,
+                            relative,
+                            "original_primary",
+                            _infer_company(relative, company_names),
+                            {},
+                            "active",
+                            None,
+                        )
+                    )
+                continue
             sidecars = {
                 str(path)[: -len(_ACQUISITION_SIDECAR_SUFFIX)]: path
                 for path in supported

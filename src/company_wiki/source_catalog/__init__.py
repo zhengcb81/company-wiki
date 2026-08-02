@@ -69,6 +69,10 @@ from .duplicate_cleanup import (
     DuplicateCleanupService,
     recycle_to_windows_bin,
 )
+from .focus_cleanup import (
+    FOCUS_CLEANUP_SCHEMA_VERSION,
+    FocusScopeCleanupService,
+)
 from .evidence_query import (
     EVIDENCE_QUERY_SCHEMA_VERSION,
     MAX_EVIDENCE_QUERY_LIMIT,
@@ -162,6 +166,8 @@ __all__ = [
     "DuplicateCleanupError",
     "DuplicateCleanupJournal",
     "DuplicateCleanupService",
+    "FOCUS_CLEANUP_SCHEMA_VERSION",
+    "FocusScopeCleanupService",
     "EVIDENCE_QUERY_SCHEMA_VERSION",
     "EXTRACTION_QUALITY_SCHEMA_VERSION",
     "EvidenceLocationRef",

@@ -19,6 +19,7 @@ from .control import WorkerController
 from .duplicate_cleanup import DuplicateCleanupService
 from .evidence_query import EvidenceQueryService
 from .extraction_quality import ExtractionQualityService
+from .focus_cleanup import FocusScopeCleanupService
 from .llm_summarizer import build_configured_llm_client
 from .service import SourceCatalog
 from .resolver import SourceRequest, SourceResolver
@@ -148,6 +149,18 @@ def _parser() -> argparse.ArgumentParser:
         help="limit the number of derived files to audit (0=all)",
     )
     subparsers.add_parser("status", help="show catalog counts")
+
+    focus_cleanup = subparsers.add_parser(
+        "focus-cleanup",
+        help="dry-run or apply the exact dropbox_stock/重点关注 admission cleanup",
+    )
+    focus_cleanup.add_argument("--root-id", required=True)
+    focus_cleanup.add_argument("--relative-prefix", required=True)
+    focus_cleanup.add_argument("--apply", action="store_true")
+    focus_cleanup.add_argument("--confirmation-token")
+    focus_cleanup.add_argument("--snapshot-path", type=Path)
+    focus_cleanup.add_argument("--receipt-path", type=Path)
+    focus_cleanup.add_argument("--archive-dir", type=Path)
 
     documents_cmd = subparsers.add_parser(
         "documents", help="manage catalog documents (retire, ...)"
@@ -534,6 +547,38 @@ def main(argv: Sequence[str] | None = None) -> int:
             )
         elif args.command == "status":
             result = get_catalog().status()
+        elif args.command == "focus-cleanup":
+            cleanup = FocusScopeCleanupService(get_catalog())
+            receipt_path = args.receipt_path
+            snapshot_path = args.snapshot_path
+            if receipt_path is not None and not receipt_path.is_absolute():
+                receipt_path = (project_root / receipt_path).resolve(strict=False)
+            if snapshot_path is not None and not snapshot_path.is_absolute():
+                snapshot_path = (project_root / snapshot_path).resolve(strict=False)
+            if args.apply:
+                if (
+                    not args.confirmation_token
+                    or snapshot_path is None
+                    or receipt_path is None
+                ):
+                    raise ValueError(
+                        "--apply requires --confirmation-token, --snapshot-path, "
+                        "and --receipt-path"
+                    )
+                result = cleanup.apply(
+                    root_id=args.root_id,
+                    relative_prefix=args.relative_prefix,
+                    confirmation_token=args.confirmation_token,
+                    snapshot_path=snapshot_path,
+                    receipt_path=receipt_path,
+                    archive_dir=args.archive_dir,
+                )
+            else:
+                result = cleanup.preview(
+                    root_id=args.root_id,
+                    relative_prefix=args.relative_prefix,
+                    receipt_path=receipt_path,
+                )
         elif args.command == "documents":
             if getattr(args, "document_action", None) == "retire":
                 from .store import retire_document
@@ -724,8 +769,36 @@ def main(argv: Sequence[str] | None = None) -> int:
                     pipeline["llm_summary"]["in_progress"] = 1
                     active_documents = 1
             retry_after = scheduler.get("llm_retry_after")
-            pipeline["llm_summary"]["deferred"] = bool(
+            retry_active = bool(
                 retry_after is not None and float(retry_after) > time.time()
+            )
+            pipeline["llm_summary"]["deferred"] = retry_active
+            last_llm_report = scheduler.get("last_llm_summary_report")
+            global_report = (
+                last_llm_report
+                if isinstance(last_llm_report, dict)
+                and last_llm_report.get("failure_scope") == "global"
+                else None
+            )
+            global_deferred = bool(
+                retry_active
+                and (
+                    global_report is not None
+                    or scheduler.get("last_error_scope") == "llm_global"
+                )
+            )
+            pipeline["llm_summary"].update(
+                {
+                    "global_deferred": global_deferred,
+                    "global_retry_after": retry_after if global_deferred else None,
+                    "global_error": (
+                        str(global_report.get("error") or scheduler.get("last_error"))
+                        if global_deferred and global_report is not None
+                        else scheduler.get("last_error")
+                        if global_deferred
+                        else None
+                    ),
+                }
             )
             pipeline["current"] = {
                 "stage": stage if live else "stopped",

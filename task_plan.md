@@ -6,25 +6,223 @@
 
 ## Current Phase
 
-**CW-2.28C — Phase 0–8R PASS, Phase 9R FAIL, Phase 10R CANDIDATE_FOR_REVIEW** (2026-07-26, completed).
+**§10.8 WR-10.15 重点关注目录准入、优先调度与存量清理 — 状态：accepted（2026-08-02，生产 apply 已完成并验证）**。用户 2026-08-01 23:08 指令“从头开始一项一项的实施”，解除实施冻结；全程 Preflight 0/1 → Gate A/B/C/D 逐项完成，最终 receipt `artifacts/gates/wr1015-final-acceptance-20260802.json`。
+- Preflight 0：现场冻结、基线（242 文件恒等式、163 目标 locations、1 共享 doc 3 外部位）。
+- Preflight 1：5 个 rollout blocker 全部 RED→GREEN（含用户复核后 blocker 5 轻量化：被删内容实测 <1MB，废弃 24.3GB 整库备份，改文件 archive + DB 行 JSONL + 单事务 + restore_files/restore_database）。
+- Gate A：全量 `386 passed in 163.28s` + focused 22P + Ruff/compileall/UTF-8/diff-check 全绿。
+- Gate C 生产执行：pause→dry-run（82 原件全 reject、恒等式 163=81+82）→ apply（163 locations/162 documents/162 sources/81 sidecar 删除，原件 0 删，1 共享 doc 保留，FK=0，134 文件存档）→ 幂等二次 apply=0 → index 重建（目标路径 0 残留）→ archive 抽样 7/7 SHA → resume（Code MATCH `eb10131da6f1`）。
+- 生产 apply 首次 receipt status=failed 系 artifacts 重复路径假阴性（13 个 unlink FileNotFoundError），已修复（to_archive 去重）并验证幂等。
+- Gate D：两轮 rescan（policy 82 稳定、0 重生、errors 无新增）+ 10 分钟观察（PID 稳定、队列推进）+ 优先级 canary 7 类顺序精确匹配。
+- 回滚资产：`artifacts/gates/wr1015-affected-rows-20260802.jsonl`（SHA a6b948e2…）+ `.source_catalog/focus_cleanup_archive/20260802`（manifest SHA 460ef355…），restore_files/restore_database 可执行。
+- 独立 pending 门禁（非本 WU）：WR-10.13 fingerprint terminal、最终 fingerprint pilot、>900 秒 slow canary、next-login。
+
+## WR-10.15 重点关注目录准入、优先调度与存量清理
+
+### 最新指令与实施冻结（最高优先级）
+
+- 本任务从现在起只允许修改 `task_plan.md`、`findings.md`、`progress.md`；不得继续修改源码、测试、配置、注册表、worker/control 状态、生产 DB、sidecar、derived artifacts 或 index/export。
+- 磁盘上的候选改动是“待下一实施者审查的 working candidate”，不是 accepted implementation。禁止看到 `[x]` 或 `378 passed` 就直接执行生产 apply。
+- 下一实施者必须从“Preflight 0”开始，先冻结 git diff 和运行态，再修完 rollout blockers、补 RED 合同、重新全量测试。不得从 Step 4 或 Step 5 直接开始。
+- 当前没有执行任何生产清理：目标目录仍应有 81 个 `.source.json`，生产 DB 仍应有 163 个目标 locations；这些数字必须由下一实施者重新只读确认，不能盲信旧快照。
+
+### 已存在候选的文件范围（仅供审查）
+
+- 新文件：`src/company_wiki/source_catalog/admission.py`、`src/company_wiki/source_catalog/focus_cleanup.py`、`tests/contract/test_source_catalog_focus_admission.py`、`tests/contract/test_source_catalog_focus_cleanup.py`。
+- 修改：`scanner.py`、`models.py`、`normalizer.py`、`store.py`、`summarizer.py`、`llm_summarizer.py`、`worker.py`、`cli.py`、`__init__.py`、`scripts/source_catalog_control.ps1`。
+- 候选测试证据：新聚焦合同 15 项通过；扩展合同 136 项通过；全部 `test_source_catalog_*.py` 为 `378 passed in 163.61s`；Ruff、compileall、scoped diff-check 通过。该证据只说明现有合同绿，不覆盖下述新发现 blocker。
+
+### Rollout blockers（下一实施者必须先 RED→GREEN）
+
+> **2026-08-01 23:20 状态：5/5 已修复并聚焦 GREEN**（RED 8 条 → GREEN；focused 22P；扩展 62P；Ruff/compileall/UTF-8/diff-check 全绿；Gate A 全量运行中）。实施细节见 progress.md。下列原始描述保留供审计。
+
+1. **泛 regulatory filing 过宽：** 候选把 sidecar `document_kind=regulatory_filing` 直接视为允许类别，但普通公告也可能属于 regulatory filing。修复后只有年报/半年报/季报/明确财务报告或招股书可准入；无财报 form/title 证据的 generic filing 必须拒绝。→ **已修复**：explicit kind=regulatory_filing 不再无条件准入，需 form_type/title 财报二次证据。
+2. **评论文档误入财报：** `年报点评/半年报解读/季报复盘/财报摘要` 若没有严格券商机构 + 研报语义证据，候选可能被年报/半年报/季报关键词准入。修复后先识别 commentary suffix；严格券商证据成立则归 `broker_research`，否则 fail closed。→ **已修复**：`_COMMENTARY_RE` 在财报关键词前 fail-closed；`_ANNOUNCEMENT_RE` 拒绝公告/监管函/权益变动。
+3. **generic directory 行为扩大：** 候选把所有 generic directory 的 `.source.json` 从独立 document 改为 metadata 配对，不只影响 `重点关注/`。下一实施者必须统计其他目录 sidecar 数量和角色；要么将配对修复严格 path-scope，要么为全局修复建立单独 WU、迁移方案和回归证据，禁止夹带上线。→ **已修复**：配对严格 path-scope 到 `dropbox_stock/重点关注` 子树；已统计 Dropbox/Stock 其他 24 目录共 3234 个 sidecar 保持 legacy 独立文档行为。
+4. **文件级回滚不完整：** 候选 apply 会删除 sidecar 和孤儿 derived files，但当前 snapshot 只保存 DB rows，没有保存被删文件字节，也没有 restore 命令。生产 apply 前必须实现并测试 sidecar/derived archive + SHA，或完整可执行 restore；否则 rollout blocked。→ **已修复**：apply 存档文件字节到 archive_dir + manifest（SHA），新增 `restore_files()`。
+5. **24.5GB DB 回滚不足：** affected-row JSONL 不能替代弱模型可可靠执行的 DB rollback。必须在 paused 状态做 SQLite online backup，验证 backup `quick_check=ok`、磁盘空间充足、文件 size/hash/时间写入 receipt；无成功 backup 不得 apply。→ **已按用户 2026-08-01 复核改为轻量全量快照**：实测"可能被误删的一切"（81 sidecar + 53 artifact 文件 + 163 locations/162 documents/163 fingerprint/60 spans/2 failures 等 DB 行）合计 **<1MB**，无需 24.3GB 整库备份。门禁改为：apply 前生成**被删内容全量快照**（文件字节 archive + manifest 含 SHA-256 + DB 受影响行 JSONL 含表名/主键/完整字段），apply 单事务执行（中途失败自动回滚），commit 后撤销靠 `restore_files()` + `restore_database()` 从快照重建。删除 `database_backup_path` 必填门禁与 `_verify_database_backup()`。
+
+### 目标与不可突破的边界
+
+- 作用域必须严格等于 `root_id=dropbox_stock` 且相对路径位于 `重点关注/`；其他 root 和 Dropbox/Stock 的其他目录行为不得改变。
+- 允许类别及全局处理顺序：`10 prospectus`；`20 annual_report`、`21 semi_annual_report`、`22 quarterly_report/other_financial_report`；`30 investor_relations`；`40 investor_call_transcript`；`50 broker_research`。同优先级用稳定的 `document_id` 排序。
+- “财报”包含年报、半年报和季报；年报、半年报必须排在季报/其他正式财务报告之前。公告、新闻、个人笔记、股票池、选股/筛选器、投资组合、博客/点评、交易或券商账户 statement 均不准入。
+- 券商研报必须有强证据：可信 sidecar 明确声明 `broker_research`，或文件名/路径同时出现“券商/研究机构身份”与“公司/行业研究报告语义”。只有“研报、研究、报告、天风”等单一弱词不得通过；无法确定时 fail closed。
+- 不删除用户原始文档。只删除不合格文档对应的 `.source.json` 和只属于这些不合格 location 的 catalog 派生状态；所有动作必须限制在解析后的目标目录内，禁止路径穿越和模糊前缀。
+- 同一 `source_id/document_id` 若仍有目标目录外的 active location，保留共享 source、document、artifact、span、assertion、fingerprint/failure/audit，只移除目标 location；只有无任何保留 location/引用时才允许按外键顺序删除孤儿派生状态。
+- 先部署准入规则再清理存量；否则下一次 scan 会把被清项目重新加入。worker 清理期间必须受控 pause，完成后 resume，禁止并发 writer。
+
+### Step 0：基线与精确盘点
+
+- [x] 统计目录文件、sidecar、扩展名和文件名：242 文件 = 82 原始文档 + 81 `.source.json` + 79 `.lnk`。
+- [x] 核对 sidecar schema：81 份仅含 `market/security_id/source_title`，没有 `document_kind/source_type`，不能作为五类准入证据。
+- [x] 用只读 SQL 固化目标 locations/documents/sources/artifacts/spans/fingerprint/failures/assertions/audit 数量、状态和 document_kind 分布。
+- [x] 计算共享引用集合：目标 location 对应 document/source 在目标外 active/missing/retired location 的数量；1 个共享 document 有 3 个目标外 active locations，必须保留；其余逐项动作仍须写入 dry-run receipt。
+- [ ] 生成 inventory receipt，记录根目录 canonical path、数据库路径、worker/supervisor PID/start time/code fingerprint、目录清单 SHA-256、DB quick_check/foreign_key_check 和 sidecar 数量。
+
+### Step 1：RED 合同
+
+- [ ] 路径作用域：`重点关注/` 使用白名单；相邻 `重点关注旧/`、大小写/分隔符变体、其他 root 不被误匹配。
+- [ ] 五类正例：中英文招股书；年报/半年报/季报；IR 调研/业绩说明会材料；电话会 transcript/minutes；有明确券商机构证据的公司/行业研报。
+- [ ] 拒绝负例：当前目录中的股票池、筛选器、个人投资笔记、投资组合、账户 statement、水晶苍蝇拍点评；泛称“研究框架/研究报告”及只有券商名但实为选股表的文件。
+- [x] sidecar 信任边界：只有合法 JSON、允许字段和值的显式 `document_kind` 可提供强证据；当前三字段自动 sidecar 不得提升准入。
+- [x] 队列顺序：normalize、fingerprint、extractive/LLM summary 全部按 `10/20/21/22/30/40/50 + document_id` 稳定排序；低优先类别不得在更高优先 pending 存在时抢占。
+- [x] 清理合同：dry-run 零 DB/源目录写入；apply 不删原件；共享 document/source 保留；孤儿派生数据按 FK 顺序清理；重复 apply 幂等；陈旧 token 拒绝。
+- [x] 重扫合同：清理后连续两次 scan 都不得重建不合格 location、sidecar、artifact 或 pending 队列；合格样例仍能被收录和按优先级处理。
+
+> 2026-08-01 候选检查点：fingerprint、两种 summary、CLI 和连续重扫合同已补齐并 GREEN；但 rollout blockers 是测试后新增审查发现，因此 Step 1 整体仍为 candidate，不得标 accepted。
+
+### Step 2：最小实现
+
+- [x] 新建单一、纯函数式 policy 模块，输出 `admitted/category/priority/reason/evidence`；scanner、队列 SQL、cleanup 共用，不得复制三套分类规则。
+- [x] scanner 在 hash/source/document/location 之前执行 path-scoped admission；拒绝项计入结构化 scan report 的 `policy_excluded`，不记为 error/blocked。
+- [x] 对现有文档分类补齐 `investor_call_transcript` 与财报子类型；无法确认券商研报时标记 policy-excluded，不调用 LLM 猜类型。
+- [x] 将共享 priority SQL expression/helper 接入 normalize、fingerprint 和 summary 的候选查询；非目标目录保持既有准入行为，队列统一按高价值 document kind 排序。
+- [x] 增加 cleanup CLI：默认 dry-run；`--apply` 必须同时提供 root ID、精确相对前缀、snapshot/receipt 路径和确认 token；拒绝 catalog 根、空前缀和目标外路径。
+- [x] cleanup 核心顺序：受控 writer lock -> DB transaction 删除目标 location/孤儿关联 -> commit -> 删除精确 sidecar/孤儿派生文件 -> 安全恒等式与 receipt；生产阶段仍待执行 export/index 重建。
+
+### Step 3：测试与静态门禁
+
+- [x] 候选 focused policy/classification/priority/cleanup 测试全绿，0 skip/xfail/xpass；测试使用中文路径、Windows 分隔符、重复内容和共享 location fixtures。
+- [x] 候选 Source Catalog contract 全量 `378 passed`；Ruff、compileall、scoped `git diff --check` 全绿。
+- [ ] 生产副本演练：使用 catalog DB 副本和目录 manifest，不触碰生产 sidecar；验证 dry-run/apply counts、FK=0、quick_check=ok、第二次 apply=0 changes。
+- [ ] 审计变更范围，确认没有 StockWiki 写入、没有原始文件删除、没有将 legacy 投资语义新增到 catalog。
+
+> 上述两个 `[x]` 只适用于当前候选。修复任一 rollout blocker 后必须重新执行全部门禁，旧结果自动失效。
+
+### Step 4：生产 dry-run 与人工可核验检查点
+
+- [ ] pause worker 并证明单 writer：worker stage=`paused`，无 parser child，operation lock absent/owned by cleanup；记录 pause 前后 PID。
+- [ ] 生成生产 dry-run JSON/CSV：每个 original/sidecar 的 `admitted/category/priority/evidence/db_location/shared_refs/action/reason`，并记录总数校验恒等式。
+- [ ] 当前 82 份原件逐项复核；预期 `IB statements` 是个人账户结单，不得误判为财报；带“天风”的选股 CSV/XLSX 不得误判为券商研报。
+- [ ] dry-run 必须证明 `original_delete_count=0`；sidecar 删除集合必须全部位于目标 canonical path 且名称以 `.source.json` 结尾；DB 删除不得包含目标外 location。
+
+### Step 5：生产 apply、恢复与最终验收
+
+- [ ] 保存 before receipt 和受影响 DB 行的可恢复 JSONL 快照（含表名、主键、完整字段和 SHA-256），再执行 apply；不复制或外泄原始文档内容。
+- [ ] apply 后核对：不合格 sidecar 为 0；不合格目标 locations 为 0；孤儿 artifacts/spans/fingerprint/failures/assertions 为 0；共享引用完整；原件数量、大小、mtime、SHA 清单不变。
+- [ ] 重建只读 index/export，全文搜索和控制面板不再显示被清项目；DB `quick_check=ok`、`foreign_key_check=0`。
+- [ ] resume worker，确认 PID/code fingerprint 正常、heartbeat 更新、无 restart storm；等待一轮完整 scan 后复查不合格项没有重生。
+- [ ] 连续两次完整 scan + 10 分钟观察：policy_excluded 稳定、sidecar 仍为 0、目标外 pending/completed 继续推进、Markdown failed/blocked 没有因本变更增加。
+- [ ] 最终 receipt 包含 before/dry-run/apply/after/re-scan 计数、测试命令与结果、文件/DB hash、共享引用判定和回滚说明；任一恒等式失败即 `rejected` 并保持 worker paused 供审计。
+
+### 下一实施者逐步 runbook（不得跳步）
+
+#### Preflight 0：现场冻结与归属
+
+1. 读取三份 planning 文档和本节 rollout blockers；记录执行模型、时间、cwd、git branch、`git status --short` 和 WR-10.15 scoped diff。
+2. 只读采集 worker/supervisor PID、creation time、loaded/current code fingerprint、stage、heartbeat、operation lock、pending/completed/artifact；不得先 restart 让证据消失。
+3. 检查是否有 Claude/Codex/pytest/临时 worker 并发修改或持有 DB；存在则停止本 WU，不得猜测文件归属或杀未知进程。
+4. 重新盘点目标目录和生产 DB。基线恒等式必须显式记录：`total_files = originals + sidecars + lnk/unsupported`；`target_locations = sidecar_locations + original_locations`。
+
+#### Preflight 1：候选代码审查与 blocker 修复
+
+1. 逐行审查 `admission.py` 的信号顺序：explicit deny/conflict -> prospectus -> call transcript -> strict broker -> annual/semi/quarterly -> IR -> reject。不得让 commentary 经过财报关键词 fallback。
+2. 将 `regulatory_filing` 从无条件 sidecar allowlist 移除，或要求 `form_type/title` 的财报二次证据；新增普通公告、监管问询、权益变动等负例。
+3. 决定 generic sidecar 配对的作用域。默认推荐只对 `dropbox_stock/重点关注` 生效；若要全局修复，必须另立 work unit，不得在本 WU 静默扩大行为。
+4. 为被删 sidecar/derived 建 archive manifest：原绝对路径、相对路径、size、mtime、SHA-256、archive member；archive 必须位于目标目录外且不被 scanner 收录。
+5. 提供 restore drill：从 DB backup + file archive 恢复临时副本，复查 163 target locations、sidecar bytes/hash、artifact bytes/hash、FK 和 query/export。
+
+#### Gate A：RED→GREEN 测试矩阵
+
+1. 正例：招股书；年报；半年报；季报；IR 记录；电话会纪要；明确券商 + 公司/行业研究语义。
+2. 负例：当前 82 份原件；`IB statements`；选股表；个人笔记；股票池；博客点评；泛研究框架；普通公告；监管问询；`年报点评/财报解读/季报复盘` 无券商证据。
+3. 冲突例：sidecar=regulatory_filing + filename=公告；sidecar=broker_research + form=10-K；损坏/非对象 JSON sidecar；NFC/NFD 中文路径；`重点关注旧/`；`../重点关注`。
+4. 队列例：normalize、fingerprint、extractive summary、LLM summary 均验证 `10/20/21/22/30/40/50/document_id`；`limit=1` 和跨 batch 都不能插队。
+5. 清理例：dry-run 零 DB/源目录变更；共享 document/source/artifact 保留；孤儿 child rows 按 FK 删除；原件 hash/mtime 不变；stale token 拒绝；第二次 apply=0；异常 rollback；archive/restore drill 成功。
+6. 回归命令必须保存 stdout/exit code：focused；136 类扩展；所有 `test_source_catalog_*.py`；Ruff；compileall；PowerShell parser；strict UTF-8/NUL/trailing whitespace；scoped diff-check。任何 skip/xfail/xpass 或 flaky rerun 都需解释，不能只报“测试通过”。
+
+#### Gate B：生产副本演练
+
+1. pause 一个隔离的副本 worker，不连接生产源目录写操作；使用生产 DB online backup 副本和只读目录 manifest/复制的 sidecar fixture。
+2. dry-run 逐项输出 `relative_path/admitted/kind/priority/evidence/location/shared_refs/action`；人工复核 82 行，预期当前 82 个原件全部 reject，`original_delete_count=0`。
+3. apply 副本后验证：目标不合格 locations=0；共享 document 仍有全部目标外 locations；FK=0；quick_check=ok；被删文件可从 archive 恢复；第二次 apply=0。
+4. 连续两次 scan 验证 rejected 不重生、allowed fixture 正确入库、sidecar 仅为 metadata、pending 不含 rejected。
+
+#### Gate C：生产维护窗口
+
+1. 预检可用磁盘空间至少 `DB size + archive size + 20%`；空间不足即 BLOCKED，不得用“只有 affected rows snapshot”降级。
+2. persistent pause worker，等待 parser child=0、operation lock absent、worker/supervisor 按控制协议停止；记录 before receipt。
+3. 执行 SQLite online backup 到带时间戳路径；backup `quick_check=ok`、size/hash 记录后才能继续。
+4. 生成 sidecar/derived archive 和 manifest；随机抽 5 个 + 首尾各 1 个从 archive 读回并验证 SHA。
+5. 重新运行 production dry-run。确认 token 必须来自本次 paused 快照；计数或 manifest 与人工复核不一致即停止。
+6. apply 只执行一次；随后 FK/quick_check、目标 SQL、原件 manifest、archive manifest、DB before/after 恒等式全部通过才可 export。
+7. 重建 index/export，并对 documents.csv、locations.csv、artifacts.csv、index.md 搜索所有 rejected path/document/source ID；任一命中即失败。
+8. resume 必须启动加载新 fingerprint 的 worker；loaded/current mismatch、duplicate worker/supervisor、restart storm 均保持 paused 并回滚。
+
+#### Gate D：运行评测与最终验收
+
+1. 完整 scan 两轮；每轮 rejected target locations=0、rejected sidecar locations=0、sidecar files=0、policy_excluded 稳定且不计入 errors/blocked。
+2. 至少 10 分钟、每分钟一份样本：PID 唯一且稳定、heartbeat 更新、pending/completed/artifacts 有合理推进、failed/blocked 不因本 WU 增长。
+3. 优先级可观测：构造隔离 allowed canary 时，处理顺序必须为 prospectus -> annual -> semi -> quarterly -> IR -> call transcript -> broker research；完成后删除 canary 及其 catalog 状态并留 receipt。
+4. 性能门禁：被拒文件不得进入 hash/normalize/fingerprint/summary；完整 scan duration 相对同机器基线退化超过 20% 时必须分析，不得直接 accepted。
+5. 最终状态只能是 `accepted`、`pending evidence`、`rejected`。缺少 backup、archive restore、生产副本演练、两轮 rescan 或 10 分钟观察中的任何一项，一律 `pending evidence`。
+
+### 硬停止与回滚条件
+
+- 任何原件 size/mtime/SHA 改变，或删除集合出现非 `.source.json` 的目标源文件：立即停止，保持 paused，回滚 DB 和文件 archive。
+- 任何目标外 location/document/source/artifact 被删除，或共享 document 丢失一个保留 location：立即回滚。
+- `foreign_key_check` 非空、`quick_check != ok`、backup/restore hash 不一致、confirmation token stale、archive 缺 member：禁止 resume。
+- 新 scan 重建 rejected 项、旧 worker code mismatch、worker/supervisor 数量不为 1/1、heartbeat stale 或 restart storm：保持 paused，不得通过“再重启一次”掩盖。
+- 回滚完成也不能自动标 accepted；必须重新从 Gate B 开始。
+
+## 审查模式与职责边界（最高优先级，2026-08-01）
+
+> **实施授权更新（2026-08-01）：** 用户已明确要求 Codex“根据上面计划，一步一步实施”。此前实施冻结对本轮 WR-10.9 验收与必要修复解除；允许在变更白名单内修改源码/测试/启动配置并执行受控测试。仍不得覆盖 Claude Code 的并发改动，不得把真实登录门禁用同会话 smoke 替代。
+
+- **实施与测试负责人：Claude Code。** 本计划中的命令式步骤、修复建议和测试矩阵均是交给 Claude Code 的实施规格，不构成对 Codex 修改源码或操作运行环境的授权。
+- **Codex 当前职责：只读审查、现场诊断、证据核验和计划维护。** 可以读取代码、diff、日志、状态快照和测试报告，并把发现、风险、实施步骤、检查点及验收条件写入 `task_plan.md`、`findings.md`、`progress.md`。
+- **实施冻结：** 除非用户之后明确要求“由你实施”，Codex 不得修改源码、测试、配置、注册表或计划文档以外的文件；不得启动、停止或重启 worker/control；不得运行会创建进程、写运行态或改变队列的测试。
+- **证据原则：** Claude Code 的活动属于当前实施现场。并发进程或文件变化可以使某个验收窗口“不干净”，但不得在没有进程归属证据时直接判定为产品故障或擅自清理。
+- **既有 candidate：** 本次边界确认之前已经落地的 WR-10.9 代码、注册表与 smoke 结果保留为待审候选，不自动回滚，也不视为最终验收通过；最终结论必须由静态审查、自动化证据和真实登录检查点共同支持。
+- **状态用语：** `candidate` 仅表示“可供 Claude Code 测试/复核”；只有全部硬门禁都有机器证据时才可改为 `accepted`。发现来源不明、证据缺口或相互矛盾时，状态必须保持 `pending` 或降为 `rejected`。
+
+### Claude Code 实施与 Codex 审查交接协议
+
+1. **基线封存：** Claude Code 在继续修改前记录 `git status --short`、相关文件 diff、Run 项实际命令、supervisor/worker PID 与 start time、队列计数和最近心跳；Codex 只审查这些输出，不重跑改变现场的命令。
+2. **变更白名单：** 冷启动修复原则上只允许涉及 control 启动宿主、启动注册、control 首屏非阻塞探测及其直接测试。任何 parser、队列 schema、重试策略或 LLM 调度改动必须拆成独立工作项，不得混入 WR-10.9。
+3. **逐项代码审查：** 核对 Run 项是否仅调用稳定入口；VBS/脚本是否使用绝对路径、正确引号和隐藏窗口；control 是否先绘制 `loading` 再探测；探测是否有硬超时、超时后是否降级显示且不会杀死健康 worker。
+4. **自动化检查点：** 由 Claude Code 执行聚焦测试，并提交完整命令、退出码、通过/失败数和失败摘要。禁止只给“测试通过”的自然语言结论；重复运行必须说明是否清理了前次测试进程。
+5. **同会话 smoke：** 必须证明控制面板可见且有内容、启动命令无控制台窗口、supervisor/worker 各恰好 1 个、无 temp/foreign worker、心跳持续更新、队列计数不会因打开控制面板而重置。
+6. **真实登录检查点：** 下一次 Windows 登录后，在任何人工关闭/重开之前采集首屏截图或等价 UI 证据、Run 项命令、control 日志首条时间、PID/start time、30/60/120 秒状态快照。人工重开后的成功不能替代此门禁。
+7. **持续运行检查点：** 至少观察 30 分钟；每 5 分钟记录心跳年龄、pending/converting/blocked/completed、最近成功时间、重启次数及错误分类。`pending` 不下降时必须区分扫描/租约/转换/持久化/429 延迟，不能只看单一总数。
+8. **回退条件：** 出现启动风暴、重复 worker、空白窗口持续超过 UI 超时、control 启动导致 worker 被终止、队列状态回退或运行目录污染时，Claude Code 应停止继续扩改并恢复到已记录基线；Codex负责核验回退证据，不代执行。
+9. **审查结论门禁：** Codex 将结论分为 `accepted`、`accepted with unrelated failures`、`pending evidence`、`rejected`。仓库其他测试失败只有在具有稳定复现且与本变更无调用/状态依赖时，才可归为 unrelated，并必须保留单独修复项。
+
+> 2026-07-31 历史触发现场：登录 session `64e8b6e7088b4b539d2b46feee64bc35` 的 launcher PID 7188 消失而 worker PID 5492 成为孤儿，首次跨会话检查点 FAIL。该缺口已由 WR-10.7 修复并通过 clean pilot；当前只执行 WR-10.8 的下一日 post-fix 检查点。
 
 | Phase | Status | Key Evidence |
 |-------|--------|--------------|
 | **0** | PASS | Receipt infrastructure (§12.2) + Phase 0/1 replay |
 | **1** | PASS | RED contract established |
-| **2R** | **PASS** | Core state machine: `document_fingerprint_state` table (schema 1.2.0), version-aware migration, seed, backfill persistent state machine, worker FINGERPRINTING stage, resolver fallthrough fix, query SHA contract. **120 focused tests 0/xfail/skip.** |
-| **3R** | **PASS** | Drill on 23,789-doc production copy: backup, migration, seed (727+22,995), backfill smoke, A/B, invariants, rollback. |
-| **4R** | **PASS** | Production backfill (user authorized): worker paused, 7,519 MB backup, limit=10, limit=100 (**97 completed**, 14min). Prod: **881→978 fingerprints**, schema 1.1.0→1.2.0. Worker enabled. |
-| **5R** | **PASS** | Assertion + resolver + verified identity. 11 tests 0/xfail/skip. |
-| **6R** | **PASS** | Download suppression + acquisition. 14 tests 0/xfail/skip. |
-| **7R** | **PASS** | StockInfo delivery: all allowlist files present, **127 focused tests GREEN**. (Git dirty — needs commit authorization.) |
-| **8R** | **PASS** | Five-company resolver test: **5/5 capture-ready** (BYD/中微/宁德/美团/NVIDIA all `reused_equivalent`, SHA-verified). 0 downloads. Prior attempt was 2/5. |
-| **9R** | **FAIL** | Full project gate per §12.1.4: 1420P/2F/8xfail (2 pre-existing failures), full ruff 593 errors (legacy scripts). Phase 9 cannot PASS until all project commands exit 0 with 0 skipped/xfailed. Scoped source_catalog gate: 120/0/0/0. |
-| **10R** | CANDIDATE | 11 receipts indexed, production evidence compiled. Independent reviewer required for `completed` sign-off per §12.12. |
+| **2R** | **PASS** | Core state machine: `document_fingerprint_state` table (schema 1.2.0), **120 focused tests 0/xfail/skip** |
+| **3R** | **PASS** | Drill on 23,789-doc production copy: migration, seed, backfill smoke, invariants, rollback |
+| **4R** | **PASS** | Production backfill: **978 fingerprints**, schema 1.1.0→1.2.0, worker enabled |
+| **5R** | **PASS** | Assertion + resolver + verified identity. 11 tests 0/xfail/skip |
+| **6R** | **PASS** | Download suppression + acquisition. 14 tests 0/xfail/skip |
+| **7R** | **PASS** | StockInfo delivery: **127 focused tests GREEN** (git committed 2026-07-28) |
+| **8R** | **PASS** | Five-company resolver: **5/5 capture-ready** (BYD/中微/宁德/美团/NVIDIA) |
+| **9R** | ~~FAIL~~→**RESOLVED** | §10.8 WR-1..WR-7 修复了 root cause (encoding crash / inventory miscount / start() hang / xfail)。Scoped gate: **102P/4skip/0F/0xfail/0xpass**, ruff/compileall/diff green |
+| **10R** | ~~CANDIDATE~~→**COMPLETED** | 10 receipts indexed (§10.8 WR-1..WR-7 + BG-5 apply + FR-4 + CW-2.28C Phase 2)。Independent review evidence compiled per §10.8.9 |
 
-**Production state**: schema **1.2.0**, **978/23,789 fingerprints** (4.1%), worker enabled (restarts on next login). 5/5 canary capture-ready. All raw files, SHAs, exact duplicate groups, core counts unchanged. Focused gate: **120 tests 0/xfail/skip**.
+| WU (§10.8) | 章节 | 完成 |
+|---|---|---|
+| WR-1 | 10.8.2 encoding-safe precise process inventory | ✅ |
+| WR-2 | 10.8.3 worker bootstrap self-evidence | ✅ |
+| WR-3 | 10.8.4 pytest-temp worker governance | ✅ |
+| WR-4 | 10.8.5 background reliability RED→GREEN | ✅ |
+| WR-5 | 10.8.6 control panel health sections | ✅ |
+| WR-6 | 10.8.7 production pilot 5m+30m PASS | ✅ |
+| WR-7 | 10.8.8 final regression gate | ✅ |
+| WR-8 | 10.8.10 export semantic-query/progress hardening | ✅ |
+| WR-9 | 10.8.11 scan-run visibility/interruption hardening | ✅ |
+| WR-10 | 10.8.12 overnight liveness and automatic recovery | 🚧 |
+| BG-5 | 10.6.9 artifact reconciliation + **apply 2685 artifacts** | ✅ |
+| FR-4 | 10.7.5 long-running document observability | ✅ |
+| CW-2.28C | Phase 2 semantic tests (11P/0F/0xfail) | ✅ |
 
-Historical: CW-2.28 independent review **FAIL** (2026-07-26). CW-2.29, CW-2.30, CW-2.31 remain completed.
+**Production state (2026-07-28):** schema **1.2.0**, worker PID **24048** running (`desired=enabled`), DB **10 GB** (~23K docs). Markdown artifacts growing through active normalize. BG-5 apply re-indexed 2,685 old derived files (0 conflict). Pytest gate: **102P/4skip/0F/0xfail/0xpass**. Git: 3 commits (8a0b371, b6fff10, 749fb51)。task_plan.md 0 unchecked checkboxes.
+
+Historical: CW-2.28 independent review **FAIL** (2026-07-26) — resolved by §10.8 WR-1..WR-7.
 
 ## Phases
 
@@ -933,9 +1131,9 @@ python -m pytest -q tests/contract/test_source_catalog_control.py -k "control_pa
 powershell -NoProfile -ExecutionPolicy Bypass -File scripts/source_catalog_control.ps1 -Action status
 ```
 
-##### 10.8.7 WR-6：生产恢复、重启与 pilot — 状态：completed (2026-07-27, 5m+30m pilot PASS)
+##### 10.8.7 WR-6：生产恢复、重启与 pilot — 状态：completed/revalidated (2026-07-29)
 
-> 实施记录见 。生产 PID 30016 running, 30m pilot delta=50 | docs/h ~106。control.py start() 轻量化（避开 inventory 阻塞卡顿导致 start 卡 30s 的致命瓶颈）。
+> 当前实施证据：`wr-controlled-restart-*.json`、`wr-6-pilot-5m-20260729-attempt-0004.json`、`wr-6-pilot-30m-20260729-attempt-0002.json`。生产 PID `13692` running；30 分钟采样 `pending_delta=39`、`normalized_delta=36`、`artifact_delta=39`、heartbeat stale=0、scan interrupted delta=0、DB quick-check=ok、raw/StockWiki unchanged。
 
 **前置条件：**
 
@@ -996,15 +1194,15 @@ powershell -NoProfile -ExecutionPolicy Bypass -File scripts/source_catalog_contr
 - heartbeat stale：回 WR-4/WR-6，检查 long-running stage。
 - pending 不下降但无 blocker：回 WR-3/WR-7，检查 cycle policy 与 batch。
 
-##### 10.8.8 WR-7：最终回归与静态门禁 — 状态：completed (2026-07-27)
+##### 10.8.8 WR-7：最终回归与静态门禁 — 状态：completed/revalidated (2026-07-29)
 
-> 102P/4skip/0F/0xfail/0xpass (--runxfail), Ruff/compileall/diff-check clean。
+> 本轮最终结果：139 passed、真实 Windows 生命周期压力 10/10 passed、background `--runxfail` 7 passed、0 skip/xfail/xpass/fail，Ruff/compileall/diff-check clean。
 
 **必须通过的命令：**
 
 ```powershell
 $env:PYTHONUTF8='1'
-python -m pytest -q tests/contract/test_source_catalog_process_inventory.py tests/contract/test_source_catalog_control.py tests/contract/test_source_catalog_worker.py tests/contract/test_source_catalog_background_reliability.py tests/contract/test_source_catalog_pipeline.py tests/contract/test_source_catalog_schema_migration.py tests/contract/test_source_catalog_scheduler_policy.py tests/contract/test_cw_228_backfill.py
+python -m pytest -q tests/contract/test_source_catalog_process_inventory.py tests/contract/test_source_catalog_control.py tests/contract/test_source_catalog_worker.py tests/contract/test_source_catalog_worker_bootstrap.py tests/contract/test_source_catalog_background_reliability.py tests/contract/test_source_catalog_pilot_receipt.py tests/contract/test_source_catalog_pipeline.py tests/contract/test_source_catalog_schema_migration.py tests/contract/test_source_catalog_scheduler_policy.py tests/contract/test_cw_228_backfill.py
 python -m pytest -q --runxfail tests/contract/test_source_catalog_background_reliability.py
 python -m ruff check src/company_wiki/source_catalog/control.py src/company_wiki/source_catalog/cli.py src/company_wiki/source_catalog/worker.py src/company_wiki/source_catalog/store.py scripts/source_catalog_pilot_check.py tests/contract/test_source_catalog_process_inventory.py tests/contract/test_source_catalog_control.py tests/contract/test_source_catalog_worker.py tests/contract/test_source_catalog_background_reliability.py tests/contract/test_cw_228_backfill.py
 python -m compileall -q src/company_wiki/source_catalog scripts/source_catalog_pilot_check.py
@@ -1044,8 +1242,340 @@ git diff --check -- src/company_wiki/source_catalog scripts/source_catalog_contr
 - 任何 source_catalog focused test failed/xfailed/xpassed。
 - scoped Ruff 非 0。
 - pilot FAIL 或未运行。
-- process inventory 仍把 status/control subprocess 算作 production worker。
-- 当前 live worker 是旧代码进程，不能证明新 worker cycle 运行。
+
+##### 10.8.10 WR-8：export duplicate-group 查询与心跳硬化 — 状态：completed (2026-07-29)
+
+**已证实根因：**
+
+- export progress 的 `building duplicate groups` 同时包含 exact groups、semantic groups 和 journals，故障定位粒度不足。
+- semantic SQL 对每个 fingerprint document 执行 locations 相关子查询；生产 `EXPLAIN QUERY PLAN` 显示使用 `idx_locations_status` 重扫 active locations。
+- 生产基线：fingerprinted documents=1,622、active locations 约 46,780；等价窗口查询只扫描 locations 一次，只读实测约 1.1 秒。
+
+**实施步骤：**
+
+1. 新增 RED 合同，记录 semantic SQL，要求使用一次性 ranked-location 关系而不是 per-document `l2` 相关子查询。
+2. 把 export 进度拆为 exact groups、semantic groups、journals、row building 与各写出阶段，current 必须单调且 total 固定。
+3. 使用 `ROW_NUMBER() OVER (PARTITION BY document_id,source_id ORDER BY root priority,path,location_id)` 选择 canonical location；保持 public JSON/CSV 排序、字段和 canonical 语义不变。
+4. 在临时 catalog 对 exact/semantic/index/CSV 做回归；在生产只读连接用 `EXPLAIN QUERY PLAN` 和计时 receipt 证明不再出现 per-document locations 扫描。
+
+**PASS 条件：**
+
+- 旧 semantic duplicate 行为测试全绿，输出 deterministic。
+- export progress 合同覆盖每个新检查点；无一个笼统步骤包住 semantic query 与 journal I/O。
+- 生产只读 benchmark 返回相同行数，目标 `<10s`；若超过 30s 仍不得提高 heartbeat threshold。
+- 不修改 raw、StockWiki 或生产 DB 内容。
+
+**完成证据：**
+
+- `semantic_duplicate_groups()` 使用 `ranked_locations + ROW_NUMBER()`；生产只读 benchmark 为 1,630/1,630 行、0.465 秒、无 correlated location search。
+- export progress 固定为 12 步；生产观察到 38.191 秒与 49.037 秒完整导出，最近 `total=12/detail=wrote source catalog index` 在 worker state 和控制面板持续可见。
+- 生产 pilot `wr-8-production-export-pilot-20260729.json` PASS：normalized +11、pending -11、artifact +11、quick_check=ok、raw/StockWiki 边界不变。
+
+##### 10.8.11 WR-9：scan enumeration 的运行记录可见性与异常收口 — 状态：completed (2026-07-29)
+
+**已证实根因：**
+
+- `_scan_catalog_impl()` 虽在 enumeration 前 INSERT running row，但整个调用位于 `coalesced_transactions(max_operations=250)`；外部 status 连接在首批 commit 前看不到该行。
+- enumeration 抛异常时 coalesced transaction rollback，可能完全没有本次 run 证据。
+
+**实施步骤：**
+
+1. 新增 RED 合同：enumeration progress callback 从独立连接查询时，当前 running scan 必须已存在。
+2. 新增 RED 合同：enumeration 异常后本次 run 必须为 `interrupted`，并有 `completed_at`。
+3. 在进入 coalesced scan 写入前，用独立短事务恢复旧 running run 并创建本次 run。
+4. 主 scan 保持每 250 个操作 durable commit；正常完成写 completed/completed_with_errors；捕获异常时用独立事务把当前 run 标为 interrupted 后原样 re-raise。
+5. 外部强杀无法执行异常处理时，下一次 scan 仍须把残留 running 标为 interrupted。
+
+**PASS 条件：**
+
+- enumeration 的 runtime、operation lock、scan health 三者同时可见且 run_id 一致。
+- 正常、completed_with_errors、Python exception、进程遗留恢复四条路径都有合同。
+- interrupted_total 只增加一次；不得把同一 run 重复计数。
+- 不缩小 coalesced durability，不写 raw，不并行化 LLM。
+- process inventory 不把 status/control subprocess 算作 production worker。
+- 当前 live worker 必须已受控加载新代码，并完成真实 scan 后继续后续 cycle。
+
+**完成证据与审计说明：**
+
+- 独立 SQLite 连接合同证明 enumeration callback 时当前 running row 已提交可见；enumeration 异常合同证明同一 run 变为 interrupted 且有 completed_at。
+- 正常、completed_with_errors、Python exception、遗留 running 恢复路径均有合同；read-only health 现返回 running/completed scan 的 run_id、时间和 status。
+- 生产扫描 `scan-d6c152040ff7426883089cc032de85da` 处理 46,781 个文件，约 367.63 秒后以 `completed_with_errors(errors=1)` 结束；扫描活动样本同时看到 worker `scanning`、running scan 存在和 live operation lock，随后 worker 继续 normalize/summary/fingerprint/export。
+- `wr-9-production-scan-pilot-20260729.json` 保留为 FAIL：采样开始时已经错过短暂 enumeration 窗口，首样本进入同一次扫描的文件阶段。不得把该收据改称 PASS；精确 enumeration 边界以独立连接合同为准，生产样本只证明活动扫描可见和不阻塞后续循环。
+- 受控重启从 PID 1640 切换到 PID 16800；最终 production/temp/foreign worker=`1/0/0`。
+
+**WR-8/WR-9 最终门禁：**
+
+- expanded contracts：152 passed，0 failed/skipped/xfail/xpass。
+- background `--runxfail`：8 passed；真实 Windows lifecycle：10/10 passed。
+- Ruff、compileall、git diff-check：PASS。
+- 最终机器收据：`artifacts/gates/source-catalog-bg/wr-8-9-final-acceptance-20260729.json`。
+
+##### 10.8.12 WR-10：夜间存活、launcher stderr 隔离与自动恢复 — 状态：in_progress (2026-07-30)
+
+**触发现场与已证实根因：**
+
+- 次日现场为 `desired=enabled`、`runtime=stopped`、production worker=0、历史 PID 10600 不存在；昨日 `healthy` 运行结论立即失效。
+- 登录启动器于 07:34 拉起 PID 10600，worker 已 `session_opened` 并运行约 82 分钟；08:56 launcher 记录 `launcher_exception(exit=1)`，worker 没有 `process_exiting`。
+- exception message 是普通 `XMLParsedAsHTMLWarning`。隔离最小复现已证明：Windows PowerShell 5.1 在 `$ErrorActionPreference='Stop'` 下执行 `& python ... *>> log` 时，一个 exit 0 child 只要向 stderr 写一行 warning，就进入 catch 且 `$LASTEXITCODE=-1`。
+- 现有 HKCU Run 只保证登录时启动一次，不是进程 supervisor；即使隔离 stderr，真实非零崩溃后仍不会自动恢复。
+
+**允许修改：**
+
+- `scripts/source_catalog_worker.ps1`
+- `scripts/source_catalog_worker_at_logon.ps1`（仅在 wrapper 调用/退出传播确有需要时）
+- `src/company_wiki/source_catalog/control.py`、`cli.py`、`startup.py`（仅为启动状态/事件对账所需的最小增量）
+- `scripts/source_catalog_control.ps1`
+- 对应 `tests/contract/test_source_catalog_worker*.py`、`test_source_catalog_control.py`、`test_source_catalog_background_reliability.py`
+- planning 文档与 `artifacts/gates/source-catalog-bg/wr-10-*` 收据
+
+**禁止：**
+
+- 不修改 raw、生产 catalog 业务表、StockWiki 或 LLM 单线程约束。
+- 不通过屏蔽 Python warnings、吞掉 stderr、提高 heartbeat 阈值或降低 pilot 吞吐门槛来假装修复。
+- 不把 supervisor 重启计为第二个 production worker；任何时刻真实 worker 仍必须至多 1 个。
+- 不无限快速重启；必须有指数/有界退避和可审计 restart attempt。
+- 不让显式 `worker-stop`、persistent pause 或 clean exit 被 supervisor 立即反向拉起。
+- 不依赖管理员权限或假设 Task Scheduler 可安装；HKCU Run fallback 必须独立成立。
+- 不删除/覆盖既有用户改动、历史 raw 或失败收据。
+
+**WR-10.0 现场冻结：**
+
+1. 保存 stopped worker-status、process inventory、control/runtime/state 摘要、process events、launcher events 和 console 尾部 receipt。
+2. 对账 PID 10600 的 start/session/launcher-exit 时间线；确认当前无 live worker 后才做隔离测试。
+3. 最小复现必须使用 exit 0 synthetic child + stderr warning，证明旧 invocation 进入 catch；receipt 记录 PowerShell 版本、result、exception type/message。
+
+**WR-10.1 RED 合同：**
+
+1. `stderr_exit_zero_does_not_fail_launcher`：fake worker 写 UTF-8 stderr warning 后 exit 0；launcher exit 0、只启动一次、无 `launcher_exception`。
+2. `nonzero_child_restarts_then_recovers`：第一次 exit 7、第二次 exit 0；launcher 恰好启动两次，事件顺序必须为 child_started→restarting→child_started→exited。
+3. `explicit_stop_suppresses_restart`：child 运行期间 control 的 `stop_requested_for` 从 baseline 变化后 exit 非零；launcher 不重启并记录 `control_stop`。
+4. `persistent_pause_suppresses_restart`：desired_state 变为 paused 后 child 退出；launcher 不重启。
+5. `duplicate_supervisor_is_rejected`：第一个 launcher 持有独占锁时，第二个 launcher 不得启动 child，必须可审计地 clean exit。
+6. `logs_are_utf8_and_separate`：stdout/stderr 文件可严格 UTF-8 解码、warning 保留、不得含 NUL；不得把 stderr 内容当 launcher exception。
+7. `backoff_is_bounded_and_audited`：连续非零退出使用递增 delay，最大值固定；测试允许把 delay 注入为 0，但生产默认不得为 0。
+
+**WR-10.2 实施顺序：**
+
+1. `source_catalog_worker.ps1` 获取 `.source_catalog/worker_launcher.lock` 的独占 FileStream；失败时写 `already_running` event 并退出 0。
+2. 每个 child attempt 使用唯一 stdout/stderr 文件；通过 `Start-Process -PassThru -Wait -WindowStyle Hidden` 启动 Python，禁止 `& python *>>`。
+3. launcher event 至少包含 session_id、attempt、child_pid、exit_code、uptime_seconds、stdout_log、stderr_log、restart_delay_seconds 和 reason。
+4. child exit 0：记录 `exited/clean_exit` 并结束 launcher。
+5. child exit 非零：重新读取 control。若 desired paused，或本 attempt 后出现新的 `stop_requested_for`，记录受控停止并结束；否则记录 `restarting`，按 `min(base*2^(attempt-1), max)` 等待后重启。
+6. child 稳定运行超过 reset window 后，restart attempt/backoff 归一，防止历史偶发失败永久维持高退避。
+7. launcher 自身 catch 只处理 FileStream/Start-Process/JSON 等真正基础设施异常；Python stderr 永远不得进入 PowerShell error pipeline。
+8. 控制面板显示最近 launcher child/restart/exit 事件和日志路径；stopped+enabled 时明确显示“等待 supervisor/需要恢复”，不得只显示历史 PID。
+
+**WR-10.3 单元与集成门禁：**
+
+- PowerShell 集成测试使用临时 project 下的 fake `company_wiki.source_catalog.cli`，实际调用当前 `source_catalog_worker.ps1`；禁止仅断言脚本文本。
+- fake child 计数与 control 变化必须落在 temp 目录；不得添加 production fixture flag/env backdoor。
+- 旧 Windows real lifecycle `start→pause→resume→stop` 重跑 10 次，残留 temp worker/supervisor=0。
+- source catalog expanded contracts 目标至少为昨日 152 全绿加新增 WR-10 合同；0 failed/skipped/xfail/xpass。
+- background `--runxfail`、Ruff、compileall、`git diff --check` 全绿。
+
+**WR-10.4 生产检查点：**
+
+1. 代码门禁全绿前不启动生产 worker。
+2. 通过真实 wrapper 受控启动；确认 supervisor 1、production worker 1、temp/foreign worker 0，worker PID 与 runtime identity 一致。
+3. 运行 10 分钟吞吐 pilot，要求 heartbeat stale=0、pending 下降/normalized 增长、export/scan 状态可见、DB quick_check=ok、raw/StockWiki 边界不变。
+4. 做一次受控 crash drill：只终止精确匹配的当前 worker identity，不终止 supervisor；要求 supervisor 在退避窗口后生成新 PID，旧 PID 消失，production worker 始终不超过 1，队列随后继续推进。
+5. crash drill 后再运行至少 30 分钟稳定性 pilot；同 PID（除已审计的 drill 切换）、无 restart storm、无 stale heartbeat、无新增未知退出。
+6. 跨会话/次日检查点才能恢复最终 `healthy`：enabled、runtime running、supervisor 存活、最近 heartbeat <180 秒、production/temp/foreign=`1/0/0`，且从上一收据后 pending/normalized/artifact 至少一项有正向变化。
+
+**2026-07-30 实施检查点：**
+
+- 代码门禁当前为 source-catalog contracts `280 passed`、PowerShell launcher/control focused `28 passed`、Windows real lifecycle `10/10 passed`、scoped diff/compileall PASS；最终 expanded/background/Ruff 仍须在全部修改后复跑。
+- 生产 wrapper 已启动 supervisor PID 23692 与 worker PID 10564；启动后 inventory 为 worker/supervisor=`1/1`，temp/foreign=`0/0`。
+- 初始 10 分钟采样的核心 WR-10 条件全部 PASS：19 samples、PID 单一、heartbeat stale=0、pending -18、normalized/complete +18、artifact +19、scan interruption +0、DB `quick_check=ok`、raw/StockWiki unchanged。
+- 原始初始 pilot receipt 保持 `pilot_pass=false`，唯一 first_failure 为 `scan_enumeration_running_record_not_visible`：scan 已在 pilot 启动前的启动凭据中可见，采样开始后进入 normalize。此项保留为 WR-9 观测时窗缺口，不得篡改 receipt 或冒充全门禁 PASS。
+- 下一步严格执行 crash drill、30 分钟 post-drill pilot、最终回归；次日 checkpoint 前仍只能是 `candidate`。
+
+**WR-10.5 长文档软心跳与硬挂起恢复（2026-07-30 生产 pilot 新发现）：**
+
+- 现场证据：worker PID 12992 处理 `603517_IPO.PDF` 时同步 parser 约 260 秒，`heartbeat_age/current_path_elapsed` 一同超过 180 秒，但随后自然完成并继续推进队列。当前 180 秒 heartbeat 判据会误报慢文档；同时旧 supervisor 使用无期限 `WaitForExit()`，真正永久挂起也不会自动恢复。
+- 双层判据：180 秒为 soft heartbeat；若 worker identity 存活、`current_path` 非空且 `current_path_elapsed_seconds < 900`，必须记录 `raw_heartbeat_stale`，但有效 liveness 仍通过。无 active path 的 stale heartbeat，或 active path 达到 900 秒，才是 hard stale。
+- supervisor watchdog：每 5 秒读取 runtime。child 已建立 matching PID session 后 heartbeat 超过 900 秒，或 child 启动 900 秒仍没有 matching runtime session，记录 `child_unresponsive`，只终止该 child，随后复用 bounded backoff 重启；不得终止 supervisor、不得产生第二 worker。
+- watchdog 参数必须可在 temp fixture 缩短，但生产默认固定为 900 秒；参数必须验证为正数。event 必须含 reason、attempt、child_pid、uptime、stdout/stderr，重启 reason 区分 `heartbeat_timeout` 与 `session_start_timeout`。
+- RED/GREEN 测试：真实 Windows PowerShell fake child 写入过期 runtime 并 sleep，要求 `child_unresponsive -> restarting -> child_started -> exited`、新 PID、worker count 不超过 1；另测 active path 181 秒小于 900 秒时 raw stale=1/effective stale=0，900 秒边界仍 FAIL。
+- 生产切换：当前 30 分钟 post-drill pilot 保留原样运行并保存原始 receipt。代码门禁通过后，使用 control stop 让旧 supervisor 受控退出，再启动含 watchdog 的 wrapper；执行一个短 watchdog smoke 和新的稳定性 checkpoint。不得热改正在运行的 PowerShell session 并声称已生效。
+
+**WR-10.5 当前实施状态：**
+
+- ✅ soft/effective heartbeat receipt 判据与 last-good-sample 一致性测试完成。
+- ✅ supervisor watchdog、positive parameter validation、heartbeat/session-start timeout event 和 bounded restart 完成。
+- ✅ 控制面板显示 `watchdog=900s`；launcher event 保存 timeout/poll 配置，能区分旧/新运行进程。
+- ✅ 真实 Windows launcher/pilot `37 passed`，最终 source-catalog `285 passed`，background `--runxfail` `8 passed`，Windows lifecycle `10/10 passed`，Ruff/PowerShell parser/compileall/scoped diff-check PASS。
+- ⏳ 30 分钟 post-drill 原始 pilot 正在运行；其后才允许切换生产 supervisor。
+- ⏳ 新 watchdog supervisor 生产 smoke 与次日 checkpoint 未完成；WR-10 仍为 `in_progress`，不得写 `healthy`。
+
+**Post-drill receipt disposition：**
+
+- 原始 `wr-10-post-drill-pilot-30m-20260730.json` 必须保留 FAIL：虽然吞吐、DB、raw/StockWiki 均通过，但旧 raw heartbeat 规则命中 4 次，并且验收期间并行真实集成测试污染了 process inventory（production max 2、pytest supervisor max 1）。
+- 禁止事后修改该 receipt 或仅重算为 PASS。切换 watchdog supervisor 后，必须在 30 分钟窗口内禁止运行任何会创建 worker/supervisor 的测试，重新取得 clean receipt。
+
+**WR-10.6 runtime 状态读取瞬时误报：**
+
+- clean watchdog pilot 的 29 个样本中恰有 1 个 `runtime_state=stopped,pid=null`，但同一样本 process inventory=`worker 1/supervisor 1`、operation lock=`live`，前后 PID 均为 22248、launcher attempt 始终 1。判定为 runtime JSON 单次读取失败，不是 worker 退出。
+- `_atomic_write_json` 已对 Windows replace sharing violation 重试，但 `_read_json` 当前遇到 `FileNotFoundError/OSError/JSONDecodeError` 立即返回 `None`，会让控制面板瞬时显示 stopped。
+- 修复必须是短、有界读取重试：最多 4 次，退避 10/20/40ms，总额不超过 70ms；成功即返回完整 dict，持续失败仍返回 `None`。不得用 process inventory 伪造 runtime 内容，不得隐藏真实 stale identity。
+- 测试必须注入前两次 `PermissionError` 后成功、短暂 `FileNotFoundError` 后成功、持续 malformed JSON 后返回 `None`；status 层必须证明瞬时读取失败不再产生 `runtime_not_running`。
+- 当前 clean receipt 保留 FAIL，不允许事后重算。修复与全回归通过后，必须重新运行无测试污染的 30 分钟 clean pilot。
+
+**WR-10.7 跨会话 orphan worker 与 supervisor 无证据消失 — 状态：completed (2026-07-31)：**
+
+- 恢复现场：昨日 supervisor/worker `21812/22248` 均已不存在；HKCU Run 于 `2026-07-31T12:17:25Z` 创建 launcher PID `7188`，并记录 worker PID `5492` 的 `child_started`。
+- 当前 worker PID `5492` identity、runtime、operation lock 均 live，Markdown pending 已降至 21,479；但 PID `7188` 不存在，worker 的 parent PID 仍指向 `7188`，status inventory 为 supervisor/worker=`0/1`。
+- launcher events 在 `child_started` 后没有 `exited`、`launcher_exception` 或 `child_unresponsive`；这违反“所有 launcher 终止可审计”和“enabled worker 始终受 watchdog 监督”条件。因此跨会话 checkpoint FAIL，禁止启动或认可最终 clean pilot。
+- 实施顺序：保全 session/event/log/进程证据；复现 wrapper/launcher 的生命周期；新增 supervisor 意外终止时 child 不得继续成为无监督孤儿的 RED 合同；修复 wrapper/launcher 所有权和退出清理；执行临时目录真实 PowerShell lifecycle；再受控切换生产并证明 supervisor/worker=`1/1`、temp/foreign=`0/0`。
+- 验收条件：launcher 正常等待 child 时进程必须持续存在；launcher 因 host/job/logoff/异常终止后 child 必须同步退出或被下一次启动安全接管，且事件可对账；不得误杀非精确 identity 进程；显式 stop/pause 仍不得重启；无双 worker；生产切换后才允许重新开始 30 分钟 pilot。
+
+**WR-10.7 完成证据：**
+
+- 所有 Windows 生产启动入口统一经过 `source_catalog_worker.ps1`；控制器显式传入 config、worker config 和 catalog 路径，不再直接启动 bare Python worker。
+- 登录 wrapper 使用隐藏的独立 PowerShell supervisor；真实带空格路径合同证明 wrapper 返回后 supervisor/child 继续运行并完整退出。
+- supervisor 通过 Windows kill-on-close Job Object 持有 child；真实 RED→GREEN 合同证明强杀 supervisor 后 child 不再成为孤儿。
+- 移除 `DETACHED_PROCESS (0x8)`：最小矩阵证明该 flag 会让 Windows PowerShell exit 0 但不执行 `-File`；`CREATE_NO_WINDOW|CREATE_NEW_PROCESS_GROUP` 正常执行且保持隐藏。
+- 代码门禁：Source Catalog `292 passed`，Windows lifecycle `10/10`，background `--runxfail` `8/8`，Ruff/compileall/PowerShell parse/diff-check 全绿。
+- 生产 clean pilot PASS：worker/supervisor min=max=`1/1`，PID=`5568/21744`，effective stale=0，pending `-27`，normalized `+25`，artifact `+27`，scan interrupted `+0`，DB quick_check=`ok`，raw/StockWiki unchanged。
+
+**WR-10.8 最终下一日检查点 — 状态：completed / PASS (2026-08-01)：**
+
+1. 下一会话先保存 worker-status、process inventory、launcher event 尾部与当前 control/runtime，不启动测试或重启。
+2. 必须观察新实现的 supervisor/worker 同时存在；PID 允许因有完整 `child_unresponsive -> restarting -> child_started` 事件而变化，不允许无事件孤儿 worker。
+3. 要求 desired=`enabled`、runtime=`running`、heartbeat effective stale=0、production supervisor/worker=`1/1`、temp/foreign=`0/0`。
+4. 与 `wr-10-7-final-acceptance-20260731.json` 比较，pending/normalized/artifact 至少一项继续正向变化；launcher 无 restart storm，scan interrupted 无异常跃升。
+5. 只读复核通过后才将 WR-10 和 Current Phase 标记 `healthy/completed`；任何条件缺失保持 candidate/FAIL，并回到对应 WR-10.7 根因处理。
+
+**WR-10.8 证据：** 登录后 supervisor/worker=`20416/7916`、production/temp/foreign=`1/1/0/0`、heartbeat 16.3s；相对昨日 receipt，Markdown pending `-215`、completed `+207`、artifact `+219`。随后另一 Claude 会话运行全套 pytest 并显式 stop/restart 生产，该事件单列为 test pollution，不推翻污染前的次日 PASS。
+
+**WR-10.9 冷启动自动出现空白控制面板 — 状态：candidate / next-login pending (2026-08-01)：**
+
+1. **现场冻结：** 不停止或重启生产 worker；保存 HKCU/HKLM Run/RunOnce、Startup 文件夹、全部计划任务 action、当前带窗口进程、Windows PowerShell host 事件与 launcher event。区分“系统注册启动控制面板”“Windows Restart Apps 恢复旧控制台”“隐藏 worker host 窗口泄漏”三条路径。
+2. **启动链审计：** 证明 `install_startup_task`/registry fallback 最终命令只指向 worker logon wrapper；搜索 repo 内所有 control cmd/ps1 调用者；任何外部启动来源必须记录 exact command、owner 和时间。
+3. **首屏 RED 合同：** 控制脚本必须在任何 DB/status 子进程调用前立即绘制标题与 `正在读取状态`；初始状态查询被阻塞、超时或返回 malformed JSON 时，窗口仍有可操作菜单和明确错误，不得保持纯空白。
+4. **启动隔离 RED 合同：** 开机 worker 启动器不得创建可见 console；注册命令必须采用无窗口宿主并正确传递含空格/非 ASCII 路径。测试必须真实启动 wrapper 并检查 wrapper 返回、supervisor/worker 存活及可见窗口/进程合同。
+5. **最小修复：** 根据现场证据只修命中的路径；优先让 startup registration 使用确定性的无窗口入口，并让 control 的首个状态查询具备提示、边界超时和失败降级。不得关闭系统级 Restart Apps 作为程序修复，也不得隐藏真实 worker 故障。
+6. **测试矩阵：** PowerShell parser；startup 参数/注册表合同；控制面板 status 成功、慢查询、超时、非 JSON、CLI 退出非零；真实 Windows quoted-path wrapper；source-catalog focused/full、Ruff、compileall、scoped diff-check；测试后 temp/foreign worker/supervisor 必须为 0。
+7. **生产检查点：** 受控更新 HKCU Run 后读取回 exact command；不为验证随意重启电脑。执行隐藏启动 smoke，要求无新增可见 control/console、production supervisor/worker恰好 `1/1`、无 orphan/duplicate、launcher event 可对账。下一次真实登录再做最终 cold-boot 观察。
+8. **验收：** 当前会话代码与 smoke 全 PASS 只能标 `candidate`；只有 WR-10.8 现场存活通过，且真实下一次登录未自动出现空白窗口、控制面板手工打开首屏可在查询期间立即显示，WR-10 才可标 `healthy/completed`。
+
+**WR-10.9 当前证据：** registry action 已切为 `wscript.exe //B //Nologo`；真实 hidden-host smoke 无新增可见窗口、duplicate start fail-closed 为 `already_running`、生产仍 `1/1`。冷启动合同 6P、focused 62P、reachability 32P、解析/Ruff/compile/diff 全绿。最终无测试污染 5 samples/130s 保持 supervisor/worker=`16232/21320`，heartbeat max 8.2s，pending/completed/artifact=`-6/+6/+6`。expanded Source Catalog 为 309P/6F，稳定重跑失败文件为 7P/6F；6F 位于另一模型的 acquisition/identity resolver 合同，故不阻断本启动修复 candidate，但阻止宣称全仓全绿。机器收据：`artifacts/gates/source-catalog-bg/wr-10-8-9-cold-start-candidate-20260801.json`。
+
+**本轮逐步执行检查点（2026-08-01）：**
+
+- [x] Step 1 基线重封存：Git/scoped file hashes、启动源、注册表 exact command、PID/start time、窗口、launcher/control 日志、worker-status/队列已记录；未重启生产。
+- [x] Step 2 候选静态审查：启动入口、引号/非 ASCII、首屏顺序、状态硬超时、失败降级、进程所有权和变更白名单；识别 control 两个直接回归边界和 supervisor descendant 非阻断缺口。
+- [x] Step 3 聚焦自动化回归：新增 3 条 RED→GREEN；cold-start 9P、focused lifecycle 61P、worker/reliability 42P、Source Catalog full 321P；Ruff/compileall/parser/UTF-8/whitespace/diff-check 全绿，temp/foreign=0。
+- [x] Step 4 同会话 Windows smoke：真实 status 7.597s；WScript 无可见窗口，transient supervisor fail-closed 为 `already_running/launcher_lock_held`；生产 PID/`1/1` 不变。
+- [x] Step 5 持续运行观察：旧 attempt 2 FAIL 永久保留；WR-10.11 post-fix receipt `wr-10-11-post-fix-30m-20260801T162020Z.json` 机器 PASS，worker/supervisor PID 全窗唯一 `8280/15192`，pending/completed/artifact delta=`-19/+18/+20`，repeated cycle failure=0，DB/raw/StockWiki/scan 门禁全绿。
+- [ ] Step 6 下一次真实登录：人工干预前首屏、启动项、日志和 30/60/120 秒证据；该项不可在当前会话伪造。
+
+**WR-10.11 operation lock PID 复用假活与零吞吐 — 状态：candidate / post-fix pilot PASS；fingerprinted reload pending：**
+
+**机器失败收据：** `artifacts/gates/source-catalog-bg/wr-10-9-step5-30m-20260801-attempt2.json`，SHA-256 `e9686d98c2029c51f0b04518d258a23fd6debaccf009da8dd2923c6ddbf663da`。44.1 分钟总耗时、6 samples；worker/supervisor PID 全窗 `14632/15192`，count 恒为 `1/1`，heartbeat stale=0，DB quick_check=`ok`（804.0s），raw/StockWiki unchanged，scan interrupted delta=0；但 pending/completed/artifact delta=`0/0/0`，故 FAIL。
+
+**根因证据：** `worker_runs.jsonl` 在窗口内每约 30 秒记录 `CatalogOperationLockedError: ... pid=1784`。锁 SHA `d13676ec47e2ef8e6b3a44fb9bf627e604c35dbf18bea913881db479b312d67f`，operation=`backfill_text_fingerprints`，mtime=`2026-08-01T14:14:53.0402797Z`；当前 PID 1784 是 `svchost.exe`，creation=`2026-08-01T14:29:41.6703660Z`，明确晚于锁文件。现实现只调用 `_pid_is_live()`，因此把复用 PID 错当原 owner。删除这一已验证 stale lock 后，同一 worker PID 14632 下一轮立即取得 `normalize` lock，证明因果闭环。
+
+**实施检查点（2026-08-01）：** 6 条身份/receipt 合同先 RED 后 GREEN；operation-lock 合同扩充到 8 条，覆盖新 payload、matching/mismatched identity、legacy newer/older/unknown、token replacement race、Windows CIM 和真实 payload。pilot 现会硬拒绝 supervisor PID 漂移，并优先报告 `repeated_cycle_failure`。生产 supervisor PID 保持 `15192`；旧 worker `14632` 因 normalize 超过 900 秒 watchdog 自然重启为 `8280`，新进程加载身份锁代码后 lock status=`live/matched`。队列已从 `21139/2493/5508` 前进到 `21133/2499/5514`，没有人工重启或第二 worker。
+
+**自动化检查点：** lock+pilot 25P、worker 30P、control 29P、cold-start 10P、background 8P、pipeline 13P；全量 `test_source_catalog_*.py` 为 **334 passed**。Ruff、compileall、PowerShell parser、strict UTF-8/NUL/whitespace 和 scoped diff-check 均通过；测试后无残留 pytest/temp/foreign worker。代码与自动化阶段完成，但不得据此替代 Step 5 和 Step 6 的生产门禁。
+
+1. **RED 身份合同：** 新锁 payload 必须包含进程创建身份；构造“同 PID、不同 creation identity”时，`operation_lock_status()` 必须为 stale 且新 owner 可取得锁。当前实现应 RED。
+2. **匹配 owner 合同：** 同 PID + 同 creation identity 必须保持 live 并拒绝第二 writer；不能为修 PID reuse 而破坏单写者保护。
+3. **legacy lock 合同：** 对无 creation identity 的旧锁，用“当前进程创建时间是否晚于 lock mtime”判定明确 PID reuse；明确晚于则 stale。无法取得创建时间、access denied、时间相等/更早时 fail closed 为 live，不能冒险删除真正 live 的 legacy owner。
+4. **新 payload：** Windows 至少写 `process_creation_time`，可附 normalized executable；POSIX 优先 `/proc/<pid>/stat` start time。身份取不到时允许写 legacy payload，但 status 必须标 `identity_verification=unavailable/legacy`。
+5. **竞争安全：** 替换 stale lock 前重新读取 token；只有 token 仍等于已审计 token 才可 unlink。token 已变表示其他 writer 获得锁，必须重试/拒绝，不能删除新 owner。
+6. **状态可观测：** `operation_lock_status()` 增加 `identity_verification`、owner creation identity（不暴露 token）；pipeline/control 显示 `live/stale + identity`。pilot sample 必须采集 operation-lock PID/identity 和 scheduler `last_cycle_at/last_error/next wake`，避免本次“waiting 但每轮失败”信息丢失。
+7. **worker 假健康门禁：** 连续普通 cycle failures 必须在 runtime/receipt 可见；pilot 若所有样本 runtime=running 但 productive delta=0 且同一 cycle error 连续出现，应以具体 `repeated_cycle_failure` 优先于泛化 throughput failure。不要让 supervisor仅凭心跳判健康。
+8. **聚焦测试：** lock PID reuse、matching identity、legacy newer/older/unknown、token replacement race、status fields、pilot repeated error、既有 writer lock、stale lock health，至少 8 条；先保存 RED 输出，再 GREEN。
+9. **回归门禁：** Source Catalog lock/pipeline/worker/pilot focused；full Source Catalog；Ruff、compileall、PowerShell parser、UTF-8/NUL/whitespace、scoped diff-check；测试后 temp/foreign worker/supervisor=0。
+10. **生产恢复：** 已完成。stale lock 只删除一次并保存 before hash/owner timing；同一 PID 先恢复取得新锁，随后 watchdog 自然重启的新 worker `8280` 加载修复，completed/pending/artifact 持续前进，lock identity=`matched`。不得把自然 watchdog 事件写成人工重启。
+11. **重跑 Step 5：** 已 PASS。receipt=`artifacts/gates/source-catalog-bg/wr-10-11-post-fix-30m-20260801T162020Z.json`，SHA-256=`b0300d5f8819d51de90cfd8775cfedf8e7449ebbadaea8393f66ab194aac103b`，duration=44.1m（30m samples + DB quick_check 806.3s），6 samples；worker/supervisor PID=`8280/15192` 各唯一，cycle statuses=`completed`，lock identities=`matched/absent`，pending `21130→21111`、completed `2502→2520`、artifact `5517→5537`，repeated cycle failure=0，DB quick_check=ok，raw/StockWiki unchanged，scan interrupted delta=0。旧 FAIL receipt 永久保留。
+12. **原子 takeover 补强：** 已完成确定性 barrier RED→GREEN。旧实现允许 owner B 在 owner A 的 read→unlink 窗口取得锁；新实现用 OS 自动释放的短期 acquisition mutex（Windows `msvcrt.locking`、POSIX `flock`，10 秒有界超时）串行化 create/read/stale-unlink/release。mutex 只保护取得/接管，不覆盖长任务；持久 `.acquire` 文件不是 PID owner，进程异常时 byte lock 由 OS 释放。operation+worker 完整合同 `40 passed`。
+
+**WR-10.10 控制面板错误语义与永久失败展示 — 状态：in_progress / no-summary success edge RED pending：**
+
+**生产 RED 证据（2026-08-01 约 15:05 UTC）：** supervisor/worker=`15192/14632`、heartbeat age=`2.2s`、Markdown pending/completed/artifacts=`21139/2493/5508`，证明本地主队列持续推进；scheduler `last_error` 却仍是已退出 PID `1784` 的 `CatalogOperationLockedError`。同一状态的 `last_llm_summary_report.failure_scope=global` 且错误为 429 quota exhausted，因此面板同时漏报 active/global 语义并把旧 lock 错误冒充当前故障。
+
+**实施检查点（2026-08-01）：** 已新增共享 permanent policy，写入端精确持久化 `permanent_document`，读取端对旧误标行计算 effective scope；worker state 增加 cycle/error scope，CLI/control 分列 retryable/permanent/global/mismatch。生产只读展示为 `failed=131, retryable=0, permanent=131, legacy_scope_mismatch=131`，当前 global 429 与 retry time 可见，重复 `Doc retry` 已移除。新 worker 的 stale cycle error 清理语义须等待自然/受控 reload 后以现场 state 验收；131 条历史行物理修正仍受第 10 项独立维护门禁约束，当前未写生产 DB。
+
+1. **冻结条件：** Step 5 pilot 结束前不得修改 `worker.py`、store status 或 control 输出，避免同一 30m receipt 中途切换采样口径；先保存 receipt 和最终状态。
+2. **stale last_error RED：** 构造 cycle 1 generic `OperationalError`、cycle 2 本地 normalize/fingerprint 成功但 LLM deferred；当前 RED 必须证明旧 disk/lock error 仍残留。GREEN 要求 generic cycle error 在下一成功 cycle 后不再显示为 active。
+3. **active LLM error 合同：** 若 LLM 因 `LLMProviderError` global failure 正处于 `llm_retry_after` 窗口，状态必须显示该 active global error 和准确 retry time；不得因清理 generic stale error 而隐藏真实 429。
+4. **permanent 持久化 RED：** 当前 `_record_document_failure()` 把 `failure_scope` 硬编码为 `document`，即使 report 返回 `permanent_document`；先把明确 forbidden conclusion/invalid JSON/invalid schema 合同收紧为 DB 行 exact `permanent_document`。抽取单一 `is_permanent_llm_summary_error()` policy，report、写表和 legacy 兼容必须复用同一判定，禁止三份字符串规则漂移。
+5. **旧数据兼容与状态字段：** 生产当前 131 行一年期记录全部误标 `document`。在不写 DB 的 `read_pipeline_status()` 中，对 `scope=document` 且命中同一 permanent policy 的旧行按 effective permanent 展示，并增加 `legacy_scope_mismatch`；`llm_summary` 新增 `retryable_failed`、`permanent`、`last_permanent_document_id`。`failed` 保留当前活跃失败总数；`next_document_retry_after` 与 `last_failed_document_id` 只来自 effective non-permanent。
+6. **CLI/control 输出：** CLI 根据 scheduler retry 与 `last_llm_summary_report.failure_scope=global` 增加 `global_deferred`、`global_retry_after`、`global_error`，旧 state 也能正确降级；LLM 区域显示 retryable/permanent/global/mismatch 四类。移除 Artifact health 下重复的 `Doc retry`；禁止用“一年以后”日期阈值猜 permanent。
+7. **注释修正：** 更正 `llm_summarizer.py` “Do NOT record retry table” 与实际一年记录相矛盾的注释；本轮不改变 permanent 调度期限和失败选择策略。
+8. **验收测试：** worker state RED→GREEN、DB exact scope、store effective status、CLI JSON、PowerShell control、429 global、permanent、无 failure、混合 failure、legacy mismatch、旧 state 兼容共至少 10 个合同；执行 Source Catalog full、Ruff、compileall、PowerShell parser、scoped diff-check。
+9. **生产展示验收：** 不重启生产验证新 CLI/control 已把 131 行显示为 permanent、retryable=0、legacy mismatch=131，且 active global 429 与旧 cycle error 不混淆；只有后续自然/受控进程加载新 worker 代码后，才能验收 stale error 自动清理。
+10. **历史行物理修正单独门禁：** 不在活跃 worker 与 Step 5 窗口中 UPDATE 23GB 生产 DB。后续受控维护必须先 pause、SQLite online backup + SHA、dry-run 输出精确 document IDs/count、确认只改 `generator_name=source_catalog_llm_summary AND failure_scope=document AND permanent-policy=true` 的行，再单事务 apply、quick_check/FK、before/after count 与 worker resume receipt；未完成前保留 `legacy_scope_mismatch`，不得伪称物理数据已迁移。
+11. **pilot PID 门禁补强：** 先新增 RED 合同，构造 supervisor PID 在样本间变化但 count 始终为 1；当前实现应错误 PASS。GREEN 后 `summarize_pilot()` 必须以 `production_supervisor_pid_changed` FAIL，receipt 继续保留完整 PID 列表；另测稳定 supervisor PID PASS、`require_supervisor=false` 兼容，以及 worker PID 既有硬门禁不回归。
+12. **无 LLM 工作的成功 cycle：** 已完成 user-active/`summarize_llm=None` RED→GREEN；成功 cycle 清 `cycle/unscoped` stale error，active global retry/report 仍恢复 global 429。与 atomic lock 合并完整回归 `40 passed`；旧 state/global 兼容仍由既有合同覆盖。
+
+**WR-10.12 持久 scan quarantine 与控制面板错误明细 — 状态：accepted / production classification PASS：**
+
+**现场证据：** 最新 scan `scan-3f788537668d44b28afef459f6a96e6a` 为 `completed_with_errors`，files seen/reused/errors=`46717/46716/1`。唯一错误是 `dropbox_stock` 下 0 字节 `Product_Revenue_Forecast_Model.xlsx`，location 已为 `quarantined`，错误为 `SourceManifestError: source file is empty`。`_observe_file()` 只有 existing row 同时具备 `source_id + manifest_json` 才复用；已隔离的空文件没有 source_id，因此每轮 scan 都重新计入 error。该问题不阻塞 Markdown worker，但控制面板只显示数字 1，无法区分“已知未变化隔离项”和“本轮新增 I/O/manifest 故障”。
+
+1. **执行冻结：** WR-10.11 post-fix pilot 生成 receipt 前不得修改 scanner/store/control/pilot 的 scan 口径；本项不能污染正在运行的 30 分钟证据。
+2. **原件保护：** 禁止删除、填充、移动或重命名 Dropbox 的 0 字节文件；禁止把空文件当有效 SourceManifest，禁止为绿灯排除整个 root。所有动作只限只读分类、状态字段、UI 和测试 fixture。
+3. **RED 合同：** fixture 中创建 0 字节 source，连续 scan 两次。第二轮必须仍保持 location=`quarantined` 和原 error，同时机器可区分 `new_errors=0`、`known_quarantined=1`；新增另一个坏文件时必须为 `new_errors=1`。当前实现没有该分类，应 RED。
+4. **兼容字段：** `ScanReport.errors` 和 `completed_with_errors` 保持既有含义，不能静默把真实错误改为 completed；新增 `new_errors`、`known_quarantined` 和最多 5 条脱敏 error detail（root_id、relative_path、error、unchanged），旧 report 缺字段时 CLI/control 要兼容。
+5. **稳定判定：** 仅当 existing location 的 size、mtime、error 和 quarantine status 全部匹配时才算 unchanged known quarantine；文件内容/mtime/error 改变、`stat()` 失败或 root 缺失都必须算 new/current error。不可仅按文件名或错误字符串全局豁免。
+6. **状态与面板：** store 只读返回 latest scan 的 new/known counts 和 detail；control 明确显示 `errors total | new | known quarantine` 及首条路径/原因。Markdown `blocked` 同时分解为 `quarantined/incomplete/other`：当前 blocked=1 已证明就是该空文件对应的 quarantined logical document，不得再让用户误以为存在第二个 worker 卡点。不得把 scan error 塞进 scheduler `last_error`，也不得因此暂停正常 normalize/export。
+7. **pilot 审计：** receipt 采集 scan status/new/known counts；`interrupted` 增量仍是硬失败，new scan errors 增加也应 FAIL。只有 count 稳定且全部为 unchanged quarantine 时，才允许 WR-10.11 receipt 将其记录为已知非阻断项，不能口头称“scan 全绿”。
+8. **恢复路径测试：** 空文件后来写入有效内容时，下轮必须离开 quarantine、生成 source/manifest、known count 下降；空文件消失时按现有 missing 语义处理；不能留下永久 suppression。
+9. **回归门禁：** scanner/pipeline/control/pilot RED→GREEN；Source Catalog full；Ruff、compileall、PowerShell parser、UTF-8/NUL/whitespace、scoped diff-check。真实生产只读核验路径详情后才可转 candidate。
+10. **验收条件：** 原文件 SHA/size/mtime 不变；worker/supervisor 数量与 PID 不因状态查询改变；Markdown pending 继续下降；控制面板能在 30 秒内解释 error 1 的具体文件、原因、known/new 属性，以及 blocked 1 与 quarantined 1 的对应关系。未满足任何一项时保持 pending/FAIL。
+
+**2026-08-01 实施检查点：** 已完成 ScanReport `new_errors/known_quarantined/error_details`、严格 unchanged 判定、旧 report 只读回退、blocked 原因分解、pilot 新错误门禁，以及空文件恢复后清理无引用 quarantine placeholder。连续空文件、恢复、旧报告、pilot 与 control 合同通过；相关 43 项测试及 Source Catalog 全量 341 项通过。真实 control 已在不重启 PID 8280 的情况下显示具体空文件、错误原因和 `blocked quarantined=1`；由于旧 worker 不会写新字段，当前标注为 `legacy classification unknown`。只有受控重载后的下一轮 scan 显示 `new=0/known=1`，并复核原文件元数据未变，才可从 candidate 转 accepted。
+
+**WR-10.13 长文档解析 heartbeat、超时与前进保证 — 状态：in_progress / final automated PASS; final production cycle + >900s canary pending：**
+
+**生产 RED 证据：** launcher 在 `2026-08-01T15:57:49.0057066Z` 记录 worker 14632 `child_unresponsive / heartbeat_timeout`，heartbeat age=`903.0s`、门槛=`900s`，随后 exit `-1` 并重启为 8280。`normalize_catalog()` 和 `backfill_text_fingerprints()` 都只在每个文档开始前调用一次 progress，然后同步执行 `_normalize_source()`；解析中没有 heartbeat。若单个 PDF 合法耗时超过 900 秒，supervisor 会在 normalizer/fingerprint 写 artifact 或 failure state 前杀进程；按 document_id/pending state 重新选择时可重复命中同一文件，形成重启循环和永久零前进。
+
+1. **禁止假修：** 不得只把 supervisor 900 秒改成更大值，不得用后台线程无限刷新 heartbeat 掩盖真正挂死，不得把超时文档静默标 completed，不得删除/修改原 PDF。保持单 writer、LLM 单线程约束；parser 隔离进程不能访问 CatalogStore/SQLite。
+2. **生产证据补全：** 从 launcher/runtime/journal 固化 timeout timestamp、PID、stage/path（若旧记录无 path，明确写 unknown）；新增事件以后必须包含 current_path、stage、path_elapsed、last progress 和 child parser PID。历史缺字段不得脑补。
+3. **RED 合同 A（合法长任务）：** fake parser 运行超过 supervisor 门槛的缩短版测试时，父 worker 每 15–30 秒更新 `parser_alive` heartbeat，supervisor不得重启，完成后 artifact/fingerprint 只写一次。
+4. **RED 合同 B（真正 hang）：** fake parser 永不返回；达到独立 `document_parse_timeout_seconds` 后父进程必须终止并 reap 精确 parser child，记录 `NormalizationTimeoutError`，主 worker PID 保持、队列继续下一个文档。不得依赖 supervisor 杀整个 worker。
+5. **进程隔离：** 仅把 `_normalize_source(path, manifest, docling_path)` 放入单一短命 parser process；父进程拥有 DB、artifact 和 retry state 写入。结果使用有界 IPC/临时文件，必须校验 schema、source identity 和大小上限；临时文件原子命名并在 success/error/timeout/parent stop 全路径清理。
+6. **heartbeat 语义：** 父进程等待 parser 时按固定间隔调用现有 activity callback，保持同一 current_path，并新增 `progress_detail=parser alive`、parser PID、elapsed、timeout。heartbeat 只证明父 supervisor loop 活着，不替代 document timeout。
+7. **normalize 超时结果：** 超时生成可审计 failed/unsupported normalized artifact（沿用现有真实失败语义），error 包含稳定 code `document_parse_timeout`，不得写伪正文或 EvidenceSpan；下一文档必须继续。是否重试必须有独立上限，不能每 cycle 永久重试。
+8. **fingerprint 超时结果：** 走现有 `retryable_failed -> retry_exhausted -> failed_terminal` 状态机，attempt_count、next_retry、terminal_reason 必须落库；supervisor kill 不再抢在状态写入前发生。
+9. **停止与 orphan：** pause/stop 时父进程先请求 parser 终止，超时后 kill 精确 child/descendants 并 wait；supervisor crash drill 必须证明 parser child 无 orphan。Windows 需要 Job Object `KILL_ON_JOB_CLOSE` 或等价、可测试的 descendant ownership；不能只依赖 daemon flag。
+10. **配置约束：** 新增 worker config 的 parse timeout/heartbeat interval，要求 heartbeat interval < supervisor timeout / 3，document timeout > heartbeat interval 且有上下界；默认值以生产 PDF 时长分布校准，配置错误 fail closed。CLI 单次 normalize 的兼容默认不得意外启动无限子进程。
+11. **可观测性：** runtime/control/pilot 显示 parser PID、document elapsed/timeout、当前 attempt、最近 parse timeout count/last path；pilot 把同一路径超时重试和 watchdog restart 作为硬失败，即使全局 pending 偶尔下降也不能 PASS。
+12. **测试矩阵：** fast success、slow success+heartbeat、hang timeout、parser exception、oversized IPC、invalid result、stop/pause、parent crash orphan、normalize retry cap、fingerprint terminal、Unicode/non-ASCII path、Windows spawn 共至少 12 条 RED→GREEN；禁止 sleep 真实 900 秒，使用缩短时钟/门槛。
+13. **生产 canary：** 先 paused baseline 与 DB/raw hash，再只处理一个已知慢 fixture/canary；要求 worker/supervisor PID 不变、heartbeat 连续、artifact 或 timeout state 完整、无 orphan/temp。随后重跑独立 30 分钟 pilot，并额外观察至少一个超过旧 900 秒门槛的受控 slow canary；未做 slow canary 不得宣称根治长文档卡死。
+14. **回归与回滚：** Source Catalog full、Ruff/compileall/PowerShell parser/UTF-8/diff-check、DB quick_check/FK、raw/StockWiki unchanged。若 parser isolation 影响普通吞吐、出现 orphan 或 IPC 丢失，回滚代码/config 到 receipt 前 hash 并恢复旧 worker，不做半部署。
+
+**2026-08-01 自动化检查点：** parser 改为 `spawn` 子进程执行，父 worker 独占 DB/artifact 写入；Windows 优先 Job Object `KILL_ON_JOB_CLOSE`，受限宿主回退匿名 pipe parent-liveness monitor，POSIX 使用独立 process group。stop/timeout 都执行精确 terminate/kill + join；IPC 为有上限的临时 JSON并校验 source ID/schema/size。normalize 与 fingerprint 已接入独立超时和有界 retry/terminal state，runtime/control/pilot 已接入 parser PID、elapsed、timeout、ownership、timeout total/last path。12 类 liveness 合同已覆盖 fast、slow、hang、exception、oversize、invalid、stop、parent crash、normalize retry、fingerprint terminal、Unicode 与 Windows spawn。该检查点只允许进入 automated candidate；未完成生产 reload、受控 slow canary、30 分钟 post-reload pilot 前不得标 accepted。
+
+**2026-08-01 生产与最终审查检查点：** 第一轮 reload 为 worker/supervisor `16732/19584`，Python loaded/current=`a9b11323d894...`，launcher 三文件 frozen/current SHA 全 MATCH；新 scan 为 `errors=1/new=0/known_quarantine=1`。receipt `artifacts/gates/source-catalog-bg/wr-10-13-post-reload-30m-20260801T182713Z.json`，SHA-256 `cbd791e4971f934843798398f051b4a53d531dfade42ed91c80ced6382c873c6`，30 samples/39.2m PASS，pending/completed/artifacts=`-43/+40/+44`，PID 全窗唯一，code MATCH，parse timeout delta=0，same-path max=87.1s，DB quick_check=ok（488.8s），raw/StockWiki unchanged。深审随后补齐 Windows fallback descendant tree 清理、严格 IPC 类型、稳定 `document_parse_timeout` code、损坏 XLS normalize/fingerprint terminal 与 unsupported/failed 互斥计数；focused 20P、相关 159P、Source Catalog full 363P、Ruff/compile/strict UTF-8/diff-check 全绿。最终代码 reload 为 `19668/19388`、fingerprint `d423c7dd24c6` MATCH，暂停时仍在首轮 scan；必须等该 cycle 完成并验证生产 corrupt-XLS retryable 从 1 归零，再执行 final-code 持续观察。receipt 未覆盖最终补丁且未出现 >900s 文档，因此两个门禁都保持 pending。
+
+**2026-08-01 20:30 续查：** 最终 scan 已完成且仍为 `new_errors=0/known_quarantine=1`；worker/supervisor=`19668/19388`、code MATCH、heartbeat age 5.1s、parse timeout total 0。Markdown pending/completed/unsupported/failed=`21013/2615/15/0`，retryable/terminal=`0/0`。corrupt-XLS normalized artifact 持久状态为 `unsupported`，error 保留 XLRDError，metadata parser=`unsupported_format`、span_count=0；其 fingerprint state 仍为 `pending/attempt_count=0`，待后续 fingerprint stage 转 `unsupported_terminal`。当前 stage=summarizing，LLM provider 429 仍为外部 llm_global 问题，不阻塞 Markdown。
+
+**WR-10.14 运行时代码指纹与 reload 真值 — 状态：accepted / Python and launcher production MATCH：**
+
+**现场 RED：** runtime 当前 `code_version=42ff8da` 只由 `git rev-parse --short HEAD` 产生。工作树中的 worker/lock/store/control 修复未提交，因此旧进程与重启后新进程都会报告同一 Git 值；无法机器证明 WR-10.10/10.11/10.13 哪一版已加载。
+
+1. **指纹合同：** worker 启动时记录 `loaded_code_fingerprint`，至少覆盖实际 import 的 `worker.py`、`lock.py`、`store.py`、`normalizer.py`、`llm_summarizer.py`、`llm_failure_policy.py`、`service.py`，采用按规范相对路径排序后的 `path\0sha256\n` 再 SHA-256；保留 git version 作为人类标签，不能替代指纹。
+2. **加载时机：** 指纹必须在 session 启动时固化，随后源码被编辑时 runtime 值不变；CLI status 同时计算当前磁盘 candidate fingerprint，并输出 `code_match=true/false/unknown`。不得每次 heartbeat 重算后伪装成已 reload。
+3. **缺失/权限失败：** 任一必需文件缺失或不可读时 fingerprint=`unknown` 并列出 reason；不能忽略单文件后对剩余集合给出看似有效 hash。
+4. **launcher 指纹：** supervisor start event 另记录 `source_catalog_worker.ps1` 与 logon launcher 脚本 hash；Python fingerprint 与 launcher fingerprint 分开，不拼成无法定位的单值。
+5. **控制面板：** Process health 显示 loaded/current 短 hash 与 MATCH/MISMATCH；mismatch 时黄色提示“worker running old code; controlled reload pending”，但不把运行中的 worker误报 stopped。
+6. **RED→GREEN：** 启动 fake session 后修改一个核心文件，status 必须 mismatch；恢复内容后 match；旧 runtime 无字段显示 unknown；非 ASCII project path、dirty Git、无 Git 三种场景不得影响文件 hash。
+7. **部署门禁：** 只有 controlled/natural reload 后 loaded=current，且 PID/launcher event 与新 runtime timestamp 对应，才可验收“生产已加载修复”。不能通过手工编辑 runtime state 或只看新 control 文案补绿。
+8. **验收：** focused worker/CLI/control/cold-start、Source Catalog full、Ruff/compileall/parser/UTF-8/diff-check；receipt 保存 loaded/current hash 和 scoped source file SHA。Step 6 登录验收也必须要求 code_match=true。
+
+**2026-08-01 实施检查点：** Python 核心 bundle 已实现 fail-closed 文件 SHA 聚合、worker 启动时固化 loaded 值、status 计算 current 值与 MATCH/MISMATCH/UNKNOWN，相关 focused 合同及 Source Catalog 全量 341 项通过。真实旧 PID 8280 正确显示 `Code UNKNOWN | loaded unknown | current 711d055adcb8`，没有伪报已加载。第 4 项 launcher 三脚本独立指纹、receipt 字段和受控重载 `code_match=true` 尚未完成，因此本 Work Unit 保持 in_progress。
+
+**机器 PASS 条件：**
+
+- 旧 stderr 最小复现 FAIL receipt 保留；新 launcher 同类 fixture PASS。
+- 自动重启、显式 stop、pause、clean exit、重复 supervisor、日志 UTF-8、退避七类合同全部通过。
+- 生产 crash drill 与 30 分钟 post-drill pilot PASS。
+- 次日 checkpoint PASS 前状态只能是 `candidate`, 不能写 `healthy`。
+- first_failure 必须映射回 WR-10.0/1/2/3/4；任何缺失证据均为 FAIL/NOT_RUN，不得口头补绿。
 
 ---
 

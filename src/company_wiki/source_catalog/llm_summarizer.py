@@ -14,8 +14,10 @@ from typing import Any, Callable
 
 import yaml
 
+from .admission import processing_priority_sql
 from .models import CatalogConfig, ProcessingReport, SUMMARIZER_VERSION
 from .store import CatalogStore, canonical_json
+from .llm_failure_policy import is_permanent_llm_summary_error
 
 
 _GENERATOR_NAME = "source_catalog_llm_summary"
@@ -78,6 +80,7 @@ def _record_document_failure(
     error: str,
     failed_at: float,
     retry_backoff_seconds: int,
+    failure_scope: str = "document",
 ) -> tuple[float, int]:
     with store.transaction() as connection:
         previous = connection.execute(
@@ -101,7 +104,7 @@ def _record_document_failure(
                 row["document_id"],
                 _GENERATOR_NAME,
                 SUMMARIZER_VERSION,
-                "document",
+                failure_scope,
                 error,
                 attempt_count,
                 retry_after,
@@ -287,7 +290,7 @@ def summarize_catalog_with_llm(
         raise ValueError("LLM summary limits must be positive")
     batch_time = time.time()
     rows = store.fetchall(
-        """SELECT d.*,a.path AS normalized_path,a.status AS normalized_status,
+        f"""SELECT d.*,a.path AS normalized_path,a.status AS normalized_status,
         a.content_sha256 AS normalized_sha256,s.content_sha256 AS source_sha256,
         (SELECT l.absolute_path FROM locations l
          WHERE l.document_id=d.document_id AND l.location_status='active'
@@ -308,7 +311,7 @@ def summarize_catalog_with_llm(
             AND failure.generator_name=? AND failure.generator_version=?
             AND failure.retry_after>?
         )
-        ORDER BY d.document_id LIMIT ?""",
+        ORDER BY {processing_priority_sql('d')}, d.document_id LIMIT ?""",
         (_GENERATOR_NAME, _GENERATOR_NAME, SUMMARIZER_VERSION, batch_time, limit),
     )
     if not rows:
@@ -449,16 +452,9 @@ def summarize_catalog_with_llm(
         except (OSError, UnicodeError, ValueError, TypeError, LLMSummaryError) as exc:
             failed += 1
             error = f"{type(exc).__name__}: {str(exc)[:500]}"
-            # CW-3.5 / Phase 10: permanent errors (forbidden conclusion,
-            # invalid JSON, invalid schema) are non-recoverable — the LLM
-            # will produce the same bad output every time.  Do NOT record
-            # them in the retry table so the summarizer never picks this
-            # document again.
-            permanent = (
-                "forbidden investment conclusion" in error
-                or "not valid JSON" in error
-                or "invalid schema" in error
-            )
+            # Permanent source-policy/schema errors remain auditable in the
+            # failure table and use the existing one-year suppression window.
+            permanent = is_permanent_llm_summary_error(error)
             if not permanent:
                 retry_after, retry_count = _record_document_failure(
                     store,
@@ -466,6 +462,7 @@ def summarize_catalog_with_llm(
                     error=error,
                     failed_at=time.time(),
                     retry_backoff_seconds=retry_backoff_seconds,
+                    failure_scope="document",
                 )
             else:
                 # Permanent error: record in failure table so analytics can
@@ -476,6 +473,7 @@ def summarize_catalog_with_llm(
                     error=error,
                     failed_at=time.time(),
                     retry_backoff_seconds=86400 * 365,
+                    failure_scope="permanent_document",
                 )
                 if failure_scope is None:
                     failure_scope = "permanent_document"

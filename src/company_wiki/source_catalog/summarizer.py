@@ -10,6 +10,7 @@ from typing import Any
 
 import yaml
 
+from .admission import processing_priority_sql
 from .models import CatalogConfig, ProcessingReport, SUMMARIZER_VERSION
 from .store import CatalogStore, canonical_json
 
@@ -151,7 +152,7 @@ def summarize_catalog(
             WHERE existing.document_id=d.document_id
             AND existing.artifact_role='summary'
         )"""
-    sql += " ORDER BY d.document_id"
+    sql += f" ORDER BY {processing_priority_sql('d')}, d.document_id"
     if limit is not None:
         sql += " LIMIT ?"
         params += (limit,)

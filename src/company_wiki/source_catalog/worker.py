@@ -14,6 +14,8 @@ from typing import Any, Callable
 
 import yaml
 
+from .code_identity import source_bundle_fingerprint
+from .normalizer import DOCUMENT_PARSE_TIMEOUT_CODE
 from .scheduler_policy import SourceOnlySchedulerPolicy, SourceOnlyStage
 
 
@@ -40,6 +42,11 @@ class WorkerConfig:
     fingerprint_backfill_batch_size: int = 3
     fingerprint_retry_limit: int = 3
     fingerprint_retry_backoff_seconds: int = 900
+    document_parse_timeout_seconds: int = 3600
+    parser_heartbeat_interval_seconds: int = 15
+    parser_result_max_bytes: int = 268_435_456
+    normalization_retry_limit: int = 3
+    normalization_retry_backoff_seconds: int = 900
 
     def __post_init__(self) -> None:
         if not isinstance(self.runtime_config, Path):
@@ -62,10 +69,27 @@ class WorkerConfig:
             "fingerprint_backfill_batch_size",
             "fingerprint_retry_limit",
             "fingerprint_retry_backoff_seconds",
+            "document_parse_timeout_seconds",
+            "parser_heartbeat_interval_seconds",
+            "parser_result_max_bytes",
+            "normalization_retry_limit",
+            "normalization_retry_backoff_seconds",
         ):
             value = getattr(self, field_name)
             if isinstance(value, bool) or not isinstance(value, int) or value <= 0:
                 raise ValueError(f"{field_name} must be a positive integer")
+        if not 60 <= self.document_parse_timeout_seconds <= 21_600:
+            raise ValueError("document_parse_timeout_seconds must be between 60 and 21600")
+        if not 1 <= self.parser_heartbeat_interval_seconds <= 300:
+            raise ValueError("parser_heartbeat_interval_seconds must be between 1 and 300")
+        if self.parser_heartbeat_interval_seconds >= self.document_parse_timeout_seconds:
+            raise ValueError(
+                "parser_heartbeat_interval_seconds must be less than document_parse_timeout_seconds"
+            )
+        if not 1_048_576 <= self.parser_result_max_bytes <= 536_870_912:
+            raise ValueError(
+                "parser_result_max_bytes must be between 1048576 and 536870912"
+            )
         for field_name in ("allow_processing_on_battery", "require_user_idle"):
             if not isinstance(getattr(self, field_name), bool):
                 raise TypeError(f"{field_name} must be a boolean")
@@ -131,7 +155,7 @@ def load_worker_config(path: Path, *, project_root: Path) -> WorkerConfig:
         if not isinstance(require_user_idle, bool):
             raise ValueError("require_user_idle must be a boolean")
         active_poll_interval_seconds = payload["poll_interval_seconds"]
-    elif schema_version == "1.2":
+    elif schema_version in {"1.2", "1.3"}:
         expected = base_expected | {
             "require_user_idle",
             "active_poll_interval_seconds",
@@ -139,6 +163,14 @@ def load_worker_config(path: Path, *, project_root: Path) -> WorkerConfig:
             "fingerprint_retry_limit",
             "fingerprint_retry_backoff_seconds",
         }
+        if schema_version == "1.3":
+            expected |= {
+                "document_parse_timeout_seconds",
+                "parser_heartbeat_interval_seconds",
+                "parser_result_max_bytes",
+                "normalization_retry_limit",
+                "normalization_retry_backoff_seconds",
+            }
         optional = {
             "normalize_before_scan_when_pending",
             "scan_defer_threshold",
@@ -148,7 +180,7 @@ def load_worker_config(path: Path, *, project_root: Path) -> WorkerConfig:
             raise ValueError("require_user_idle must be a boolean")
         active_poll_interval_seconds = payload.get("active_poll_interval_seconds")
     else:
-        raise ValueError("worker schema_version must be 1.0, 1.1, or 1.2")
+        raise ValueError("worker schema_version must be 1.0, 1.1, 1.2, or 1.3")
     present = set(payload)
     if present - expected - optional:
         raise ValueError(
@@ -192,6 +224,19 @@ def load_worker_config(path: Path, *, project_root: Path) -> WorkerConfig:
             "normalize_before_scan_when_pending", True
         ),
         scan_defer_threshold=int(payload.get("scan_defer_threshold", 5)),
+        document_parse_timeout_seconds=int(
+            payload.get("document_parse_timeout_seconds", 3600)
+        ),
+        parser_heartbeat_interval_seconds=int(
+            payload.get("parser_heartbeat_interval_seconds", 15)
+        ),
+        parser_result_max_bytes=int(
+            payload.get("parser_result_max_bytes", 268_435_456)
+        ),
+        normalization_retry_limit=int(payload.get("normalization_retry_limit", 3)),
+        normalization_retry_backoff_seconds=int(
+            payload.get("normalization_retry_backoff_seconds", 900)
+        ),
     )
 
 
@@ -304,13 +349,18 @@ class SourceCatalogWorker:
             "last_export_progress_total": None,
             "last_export_progress_detail": None,
             "last_cycle_at": None,
+            "last_cycle_status": None,
             "normalized_total": 0,
             "llm_summarized_total": 0,
             "dirty_since_last_export": 0,
             "last_error": None,
+            "last_error_scope": None,
             "llm_retry_after": None,
             "last_scan_report": None,
             "last_normalize_report": None,
+            "parse_timeout_total": 0,
+            "last_parse_timeout_document_id": None,
+            "last_parse_timeout_path": None,
             "last_llm_summary_report": None,
         }
         if not self.state_path.is_file():
@@ -331,6 +381,13 @@ class SourceCatalogWorker:
             # Pre-scope releases treated every document-quality failure as global. Retry once
             # immediately so the upgraded classifier can persist the correct scope.
             state["llm_retry_after"] = None
+        if (
+            state.get("last_error_scope") is None
+            and state.get("llm_retry_after") is not None
+            and isinstance(last_report, dict)
+            and last_report.get("failure_scope") == "global"
+        ):
+            state["last_error_scope"] = "llm_global"
         return state
 
     def _write_state(self) -> None:
@@ -406,6 +463,7 @@ class SourceCatalogWorker:
             current: int,
             total: int,
             detail: str | None = None,
+            **extra: Any,
         ) -> None:
             if activity is None:
                 return
@@ -426,6 +484,7 @@ class SourceCatalogWorker:
                 progress_total=total,
                 progress_percent=percent,
                 progress_detail=detail,
+                **extra,
             )
 
         last_scan = self.state["last_scan_at"]
@@ -473,6 +532,9 @@ class SourceCatalogWorker:
                         "files_reused": int(getattr(result["scan"], "files_reused", 0)),
                         "files_excluded": int(
                             getattr(result["scan"], "files_excluded", 0)
+                        ),
+                        "policy_excluded": int(
+                            getattr(result["scan"], "policy_excluded", 0)
                         ),
                         "errors": int(getattr(result["scan"], "errors", 0)),
                         "duration_seconds": round(scan_elapsed, 2),
@@ -536,9 +598,35 @@ class SourceCatalogWorker:
             result["normalize"] = self.catalog.normalize(
                 limit=self.config.normalize_batch_size,
                 progress=lambda **details: report_progress(normalize_stage, **details),
+                should_stop=should_stop or (lambda: False),
+                parser_timeout_seconds=self.config.document_parse_timeout_seconds,
+                parser_heartbeat_interval_seconds=(
+                    self.config.parser_heartbeat_interval_seconds
+                ),
+                parser_result_max_bytes=self.config.parser_result_max_bytes,
+                retry_limit=self.config.normalization_retry_limit,
+                retry_backoff_seconds=(
+                    self.config.normalization_retry_backoff_seconds
+                ),
             )
             _record_work("normalize")
             self.state["last_normalize_report"] = _plain(result["normalize"])
+            normalize_reasons = getattr(result["normalize"], "terminal_reasons", None)
+            timeout_increment = (
+                int(normalize_reasons.get(DOCUMENT_PARSE_TIMEOUT_CODE, 0))
+                if isinstance(normalize_reasons, dict)
+                else 0
+            )
+            if timeout_increment:
+                self.state["parse_timeout_total"] = (
+                    int(self.state.get("parse_timeout_total") or 0) + timeout_increment
+                )
+                self.state["last_parse_timeout_document_id"] = getattr(
+                    result["normalize"], "last_failed_document_id", None
+                )
+                self.state["last_parse_timeout_path"] = getattr(
+                    result["normalize"], "last_failed_path", None
+                )
             normalized = self._processed_count(result["normalize"])
             self.state["normalized_total"] += normalized
 
@@ -555,6 +643,11 @@ class SourceCatalogWorker:
                 should_stop=should_stop or (lambda: False),
                 retry_limit=self.config.fingerprint_retry_limit,
                 retry_backoff_seconds=self.config.fingerprint_retry_backoff_seconds,
+                parser_timeout_seconds=self.config.document_parse_timeout_seconds,
+                parser_heartbeat_interval_seconds=(
+                    self.config.parser_heartbeat_interval_seconds
+                ),
+                parser_result_max_bytes=self.config.parser_result_max_bytes,
             )
             self.state["last_fingerprint_report"] = _plain(result["fingerprint"])
             _record_work("fingerprint")
@@ -589,6 +682,9 @@ class SourceCatalogWorker:
                             getattr(result["summarize_llm"], "error", None)
                             or "LLM summary batch failed"
                         )
+                        self.state["last_error_scope"] = (
+                            f"llm_{failure_scope or 'global'}"
+                        )
                     if failure_scope == "permanent_document":
                         # Permanent error: never retry this document.
                         self.state["llm_retry_after"] = None
@@ -602,11 +698,13 @@ class SourceCatalogWorker:
                     result["summarize_llm"] = {
                         "status": "failed",
                         "error": f"{type(exc).__name__}: {str(exc)[:500]}",
+                        "failure_scope": "global",
                     }
                     self.state["llm_retry_after"] = (
                         timestamp + self.config.llm_retry_backoff_seconds
                     )
                     self.state["last_error"] = result["summarize_llm"]["error"]
+                    self.state["last_error_scope"] = "llm_global"
                 self.state["last_llm_summary_report"] = _plain(result["summarize_llm"])
                 _record_work("summarize")
             else:
@@ -653,6 +751,7 @@ class SourceCatalogWorker:
             )
             self.state["dirty_since_last_export"] = 0
         self.state["last_cycle_at"] = timestamp
+        self.state["last_cycle_status"] = "completed"
         summary_result = result["summarize_llm"]
         if summary_result is not None:
             deferred_or_failed = isinstance(
@@ -661,6 +760,39 @@ class SourceCatalogWorker:
             report_failed = int(getattr(summary_result, "failed", 0)) > 0
             if not deferred_or_failed and not report_failed:
                 self.state["last_error"] = None
+                self.state["last_error_scope"] = None
+            elif deferred_or_failed and isinstance(summary_result, dict):
+                if summary_result.get("status") == "deferred":
+                    last_report = self.state.get("last_llm_summary_report")
+                    if (
+                        self.state.get("llm_retry_after") is not None
+                        and isinstance(last_report, dict)
+                        and last_report.get("failure_scope") == "global"
+                    ):
+                        self.state["last_error"] = str(
+                            last_report.get("error") or "LLM summary provider failure"
+                        )
+                        self.state["last_error_scope"] = "llm_global"
+                    elif self.state.get("last_error_scope") in {None, "cycle"}:
+                        self.state["last_error"] = None
+                        self.state["last_error_scope"] = None
+        elif self.state.get("last_error_scope") in {None, "cycle"}:
+            last_report = self.state.get("last_llm_summary_report")
+            retry_after = self.state.get("llm_retry_after")
+            global_retry_active = bool(
+                retry_after is not None
+                and timestamp < float(retry_after)
+                and isinstance(last_report, dict)
+                and last_report.get("failure_scope") == "global"
+            )
+            if global_retry_active:
+                self.state["last_error"] = str(
+                    last_report.get("error") or "LLM summary provider failure"
+                )
+                self.state["last_error_scope"] = "llm_global"
+            else:
+                self.state["last_error"] = None
+                self.state["last_error_scope"] = None
         self._write_state()
         self._append_log(result)
         return _plain(result)
@@ -677,7 +809,9 @@ class SourceCatalogWorker:
             return self.run_cycle(activity=activity, should_stop=should_stop)
         except Exception as exc:
             self.state["last_cycle_at"] = time.time()
+            self.state["last_cycle_status"] = "failed"
             self.state["last_error"] = f"{type(exc).__name__}: {str(exc)[:1000]}"
+            self.state["last_error_scope"] = "cycle"
             result = {
                 "timestamp": self.state["last_cycle_at"],
                 "status": "failed",
@@ -799,6 +933,15 @@ class SourceCatalogWorker:
                         project_root = self.catalog.config.project_root
                     except AttributeError:
                         project_root = None
+                code_identity = (
+                    source_bundle_fingerprint(project_root)
+                    if project_root is not None
+                    else {
+                        "fingerprint": None,
+                        "error": "project root unavailable",
+                        "files": [],
+                    }
+                )
                 session.heartbeat(
                     "starting",
                     code_version=(
@@ -806,6 +949,9 @@ class SourceCatalogWorker:
                         if project_root is not None
                         else "unknown"
                     ),
+                    loaded_code_fingerprint=code_identity["fingerprint"],
+                    loaded_code_fingerprint_error=code_identity["error"],
+                    loaded_code_files=code_identity["files"],
                 )
                 if startup_delay_seconds > 0 and not session.wait(
                     startup_delay_seconds

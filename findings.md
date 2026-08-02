@@ -1,6 +1,197 @@
 # Findings & Decisions
 
-## 2026-07-27 §10.6.9/§10.7.6 BG-5/FR-5 — artifact reconciliation 发现
+## 2026-08-01 WR-10.15 最新指令：planning-only 与候选 rollout blockers
+
+- 用户最新明确要求只形成详细计划并写入 planning-with-files，不在本任务继续实施。该指令到达时一版候选源码和临时库测试已经完成；此后只等待已启动的全量 pytest 自然结束，并停止所有后续源码/生产动作。
+- 全量 Source Catalog 合同最终为 `378 passed in 163.61s`。没有执行 production dry-run、worker pause/reload、DB apply、sidecar/derived 删除、index export 或生产重扫；运行中的生产 worker 也没有由本 WU 重启加载候选代码。
+- 候选不能 rollout：显式 `regulatory_filing` 目前过宽，可能让普通公告进入；无严格券商证据的“年报点评/财报解读”等可能回落为财报；两者需新增 RED 合同并修复。
+- 候选 generic-directory sidecar 配对是全局行为变化，不仅限于 `重点关注`。这可能是合理的独立 bug fix，但超出本 WU 的最小作用域，必须 path-scope 或另立迁移 WU。
+- 候选 cleanup 的 DB JSONL snapshot 不包含被删 sidecar/derived 文件字节，也没有 restore 命令；对弱模型而言不可视为可靠回滚。生产必须有 SQLite online backup、文件 archive + manifest、恢复演练和磁盘空间门禁。
+- 因此当前结论为 `planning_only / candidate present / production untouched / rollout blocked`，不能写成 implemented 或 accepted。
+
+## 2026-08-01 WR-10.15 重点关注目录优先级与浪费根因
+
+- `C:\Users\郑曾波\Dropbox\Stock\重点关注` 实际有 242 个文件：82 个原始文档、81 个 `.source.json`、79 个 `.lnk`。原始文档由 37 个 TXT、22 个 XLSX、17 个 CSV、5 个 PDF、1 个 DOCX 组成。
+- 81 个 sidecar 均是自动生成的身份 sidecar，字段只有 `market/security_id/source_title`；没有 `document_kind/source_type`，不能证明它们属于招股书、财报、IR、电话会或券商研报。
+- 文件名审计显示绝大多数是选股/筛选器、股票池、投资组合、个人笔记和“水晶苍蝇拍点评”。`IB statements/*.pdf` 是个人券商账户结单，不能因单词 statement 被当作上市公司财报；带“天风”的选股表也不能因券商名被当作券商研报。
+- 根因是 scanner 当前按支持扩展名枚举并建立 source/document/location，分类只决定 `document_kind`，没有针对该目录的前置 allowlist admission；因此无价值文件也会生成 sidecar、进入 normalize/index 队列。
+- 根修复必须同时覆盖三层：扫描前准入、所有后台队列的稳定优先级、存量 reference-aware 清理。只删除 sidecar/DB 行会在下次 scan 重建；只改显示不会减少处理浪费。
+- 用户原件必须视为只读。清理对象仅限不合格 `.source.json`、目标 location 和没有其他有效 location 的派生 catalog 状态；共享 source/document 必须保留。
+- 券商研报采用 fail-closed 规则：明确 sidecar 类型或“券商/研究机构身份 + 研究报告语义”的组合证据才准入；单一“研究、报告、天风”等弱词不够。
+- 财报类别解释为年报、半年报、季报/其他正式财务报告，内部顺序年报 > 半年报 > 季报；五大类别总体顺序严格遵循用户给定顺序。
+- 生产只读 SQL 精确计数：目标下 163 locations = 82 原件 + 81 sidecar，且是 163 个独立 documents/sources；已生成 52 artifacts、58 EvidenceSpan、163 fingerprint states、2 LLM failures，assertion/retire/restore audit 均为 0。
+- 分类分布暴露系统性误判：81 个原件被标为 `broker_research`，1 个为 `other`；81 个 `.source.json` 也全部被标为 `broker_research`。sidecar 本身被当成主文档扫描和规范化，是处理浪费的第二个直接根因。
+- 目标集合中有 1 个共享 document，在目标外仍有 3 个 active locations（`company_raw` 两处、Dropbox 交通运输目录一处）；清理目标 location 时必须保留该 document/source 及其派生数据。精确 source 外部引用为 1 个 shared source、2 个 location，说明 location-level 和 source-level 保护都要独立计算。
+- 源码根因已确认：generic `directory` 枚举没有配对 `.source.json`，而 `_classification()` 对任何 `root_kind == directory` 的剩余项无条件返回 `broker_research`。因此 sidecar 独立入库和 162 条 broker_research 误标是同一分支的两个缺陷。
+- 新 policy 已通过 7 项首批合同：五类正例、当前目录负例、精确路径组件、三字段 sidecar 不升权、显式类型强证据、优先级、scanner 配对与 normalize 首项。
+- 新 cleanup 服务在临时 catalog 上证明：dry-run 不改表；目标外相同内容 location 可保留共享 document/artifact；目标唯一 document 的 child rows/source/entity 可按 FK 删除；原件 SHA/mtime 不变；拒绝 sidecar 删除；允许 sidecar 保留；第二次 apply 为 0 变更。
+
+## 2026-08-01 20:30 最终生产 cycle 续查
+
+- worker/supervisor 仍为 `19668/19388`，loaded/current fingerprint=`d423c7dd24c6...` MATCH，heartbeat age 5.1s，parse timeout total 0；最终 scan 于 20:29:40 完成，scan error 仍是 new 0 / known quarantine 1。
+- Markdown 已完成生产重分类：pending 21013、completed 2615、unsupported 15、failed 0、retryable 0、terminal 0。此前唯一 corrupt-XLS retryable 不再占失败队列。
+- 精确 document SQL 证明 normalized artifact=`unsupported`，error 保留 `XLRDError: Expected BOF record`，metadata 为 unsupported_format、span_count=0；不是控制面板聚合误差。
+- 同一文档 fingerprint state 仍是旧 `pending/attempt_count=0`，因为本轮当前 stage 是 summarizing，尚未进入 fingerprint backfill。只有转为 `unsupported_terminal` 后才可关闭该子门禁。
+- LLM 当前再次调用人民币升值 PDF；既有主提供商 422/fallback 429 属 llm_global defer，不会重新制造 Markdown blocked。
+
+## 2026-08-01 暂停检查点：WR-10.13 最终代码已部署，仍有两个硬门禁
+
+- 第一轮 production reload 的 Python fingerprint 为 `a9b11323d894...`，launcher supervisor/logon PS1/VBS frozen hash 与磁盘全 MATCH；worker/supervisor=`16732/19584`。新 scan 正确显示 `errors=1/new=0/known_quarantine=1`，确认 0 字节 Excel 是已知来源质量隔离，不是 Markdown worker 卡死。
+- 39.2 分钟 pilot receipt 为 `artifacts/gates/source-catalog-bg/wr-10-13-post-reload-30m-20260801T182713Z.json`，SHA `cbd791e4971f934843798398f051b4a53d531dfade42ed91c80ced6382c873c6`。30 samples 全窗 worker/supervisor PID 唯一，code MATCH；pending `-43`、completed `+40`、artifact `+44`、parse timeout delta 0、DB quick_check ok、raw/StockWiki unchanged。
+- pilot 最长同路径只有 87.1 秒，未覆盖旧 watchdog 的 900 秒界线。因此它证明持续吞吐和 parser heartbeat 生效，但不能被写成 >900 秒 slow canary PASS。
+- pilot 后深审发现 Windows restricted-job fallback 只清 parser PID，未证明 descendant。新增真正派生 60 秒子进程的 timeout 与 parent-crash RED 后，采用精确 `taskkill /PID <parser> /T /F`；两个合同 GREEN，失败 cleanup 也按精确 PID tree 处理。
+- IPC 旧实现会把 `body/parser_name=None`、字符串 quality_flags、整数 error 强制 `str()` 成伪合法结果；现已严格验证字段类型、status 枚举、quality flag array 和 error nullable text。
+- 生产曾出现唯一 Markdown `retryable_failed=1`：一份损坏/伪装的 legacy `.xls` 返回 `XLRDError: Expected BOF record`。根因是 child error mapper 只认 EmptyFile/FileData；最终代码把 XLRDError/BadZipFile/InvalidFileException/PackageNotFoundError 等确定性损坏归为 unsupported terminal，normalize 与 fingerprint 都不再重试。
+- UnsupportedDocumentError 旧分支同时累加 unsupported 和 failed，导致 ProcessingReport.pending 双重扣减。最终语义改为互斥：确定性坏格式只计 unsupported，真正 operational/timeout 才计 failed；corrupt PDF 仍保持原件 immutable、无 EvidenceSpan、truthful unsupported stub。
+- timeout 持久 code 从 Python 类名改为稳定 `document_parse_timeout`，worker 有独立合同验证 total/last document/last path 落盘。最终 Source Catalog `363 passed`，相关宽回归 `159 passed`，focused `20 passed`，Ruff/compile/严格文本/diff-check 全绿。
+- 最终代码 fingerprint `d423c7dd24c6...` 已由 worker/supervisor `19668/19388` 加载并 MATCH；暂停时 runtime 在扫描 `company_raw`、路径推进至金达莱。首轮最终 cycle 尚未完成，生产 corrupt-XLS retryable 行是否归零尚未验收。
+- 仍未完成的硬门禁只有：最终 fingerprint 的完整生产 cycle/持续观察及 >900 秒 controlled slow canary；下一次真实 Windows 登录确认控制面板不再自动空白。外部 LLM 仍有主提供商 422 sensitive 与 fallback 429 quota，当前被隔离为 llm_global defer，不阻塞 Markdown parser。
+
+## 2026-08-01 WR-10.13 自动化候选与生产门禁
+
+- parser isolation 已贯通 normalize/fingerprint/worker/control/pilot；父 worker 保持 SQLite 与 artifact 单写者，parser 子进程只读原件并通过有界 JSON 返回结构化结果。
+- Windows 宿主存在无法嵌套 assignment 的 Job。实现可分配时使用 `KILL_ON_JOB_CLOSE`；不可分配时使用父进程持有的匿名 pipe，child monitor 在 EOF 后立即退出。该机制比 Windows `os.getppid()` 可靠，并由真实 parent crash 子进程合同验证。
+- 12 类直接/集成合同覆盖 fast/slow/hang/exception/oversize/invalid/stop/parent crash/normalize retry/fingerprint terminal/Unicode/Windows spawn；pilot 额外拒绝同一路径 parser PID 变化、parse timeout total 增长和 loaded/current code mismatch。
+- launcher source hash 已改为 supervisor 进程启动时一次性冻结，后续事件复用 frozen hashes；不能在每次写事件时重算磁盘 hash，否则会把运行中修改误报成已加载。
+- 当前仍是自动化候选，不是生产完成。旧 worker PID 8280 没有加载 parser isolation/新 fingerprint；生产受控 reload、MATCH、新 scan known quarantine、慢 canary、post-reload 30 分钟 pilot 和下一次真实登录仍未验收。
+
+## 2026-08-01 WR-10.12 实施验收与 WR-10.13 交接
+
+- WR-10.13 隔离执行器的 Windows 测试发现 Codex 宿主已处于限制嵌套 assignment 的 Job，`AssignProcessToJobObject` 会失败；生产实现因此采用双路径所有权：可分配时用 `KILL_ON_JOB_CLOSE`，受限宿主中用 child-side parent PID monitor，stop/timeout 仍由父进程精确 terminate/kill + join。控制面板必须公开实际 `parser_ownership`，不能假定每台机器都是 Job 模式。
+- WR-10.12 已实现并通过自动化合同：稳定的 0 字节来源第一次计入 `new_errors=1`，后续同 size/mtime/error/quarantine 的扫描计入 `known_quarantined=1`；内容恢复后 location 转为 active，并删除无 location/artifact/failure/span/audit 引用的旧 quarantine placeholder，避免 `blocked=1` 永久残留。
+- 旧 worker 写出的 scan report 不包含新字段。store 采用只读 location 回退恢复最多 5 条路径/原因，并将 new/known 保持 `None`；control 明确标为 `legacy classification unknown`，没有依据当前 location 反推历史扫描时分类。
+- 真实 control 在 5.4 秒返回：worker/supervisor=`8280/15192`，Markdown `pending=21104/converting=1/blocked=1/completed=2528`；blocked 分解为 quarantined=1，且显示同一 `Product_Revenue_Forecast_Model.xlsx` 的空文件错误。该 blocked 与 scan error 是同一来源质量问题，不是第二个 worker 阻塞点。
+- Source Catalog 全量 341 项通过；其中 WR-10.12/10.14 相关聚焦集合 43 项通过。当前 PID 8280 启动于新 fingerprint 代码之前，真实状态正确显示 `Code UNKNOWN | loaded unknown | current 711d055adcb8`，所以生产加载仍未验收。
+- WR-10.14 尚未全部完成：Python 核心文件 bundle 已实现并测试，但计划要求的 supervisor/logon PS1/VBS launcher 独立指纹、receipt 记录和生产 reload MATCH 仍缺失，不能把 Python 部分通过写成 Work Unit completed。
+- 当前优先级进入 WR-10.13。已有生产证据证明 900 秒 supervisor watchdog 会杀死仍在合法同步解析的 worker；平均 30 分钟吞吐 PASS 不能覆盖单个超长 PDF 的活性与有界跳过保证。
+
+## 2026-08-01 职责边界更正：Claude Code 实施，Codex 仅审查
+
+- 用户明确当前正使用 Claude Code 进行实施与测试；Codex 的任务是审查、诊断、提出详细方案，并只维护 planning-with-files 的三份文档，不立即实施。
+- 因此，此前观察到的并发启动、测试进程或工作树变化，应首先视为 Claude Code 的预期实施活动。它们可能污染某次干净验收窗口，但在缺少 PID/start time、命令行和时间线证据时，不能直接归因于产品自身的重复启动或“外部干扰”。
+- 边界确认之前由 Codex 已落地的 WR-10.9 变更保留为 `candidate`，交由 Claude Code 和后续审查验证；不擅自回滚，也不以“已写入代码”替代真实登录验收。
+- 后续诊断必须区分三类证据：静态实现证据、Claude Code 自动化/同会话测试证据、真实 Windows 登录证据。三类任一缺失，都不能宣称冷启动问题“彻底修复”。
+- 后续只读审查重点：启动入口唯一性与引号安全、隐藏宿主行为、首屏先绘制后探测、探测硬超时与降级、worker 单实例、队列租约/进度连续性、重启风暴、429 延迟与本地执行故障的分类边界。
+- `Markdown eligible/pending` 的验收不能依赖单点截图：需要连续样本证明心跳、新成功时间与 completed/artifacts 至少有一个持续前进；若 pending 长时间不降，必须基于每阶段计数和错误分类定位，而不是仅凭控制面板汇总行判断 worker 停止。
+- 本次更正后的文档修改不触碰源码、注册表、配置或进程；也不运行会改变运行态的测试。
+
+## 2026-08-01 WR-10.9 逐步实施：Step 1 前置发现
+
+- 用户随后明确授权 Codex 按计划逐步实施，WR-10.9 范围内的实施冻结已解除；仍需保护 Claude Code 的并发修改并遵守变更白名单。
+- CodeGraph 状态健康：319 files / 6,906 nodes / 11,925 edges。结构上下文确认 Python 侧核心入口是 `WorkerController` 与 `SourceCatalogWorker`，控制器持有 catalog/config/worker-config/python/launcher 等启动身份。
+- CodeGraph 当前只索引 Python，无法覆盖 `source_catalog_control.ps1`、logon wrapper 和 VBS hidden host；因此 PowerShell/VBS 启动链不能仅凭图索引验收，必须补充精确文件 diff、注册表 exact command、PowerShell parser 和真实 Windows 进程/窗口证据。
+- 当前计划漂移检查结论：现有 WR-10.9 已是代码 candidate，未完成项从“重新实现”收敛为基线重封存、候选静态审查、聚焦回归、同会话 smoke、持续观察和真实登录门禁。
+- Git 基线共有 1,598 条 porcelain 状态，属于高度并发的脏工作树。WR-10.9 相关状态为：`source_catalog_control.ps1` modified；control CMD、pilot、worker supervisor、logon PS1、logon VBS 均 untracked；三份 planning 文件 modified。
+- 因关键启动脚本尚未被 Git 跟踪，`git diff` 不能完整表达 candidate。后续基线必须同时保存文件 SHA-256/mtime/size，并按白名单逐文件审查；禁止全仓 reset、checkout、clean 或批量格式化。
+- Step 1 启动源清单：唯一标准入口是 HKCU Run `CompanyWikiSourceCatalog`，exact command 为 `wscript.exe //B //Nologo <source_catalog_worker_at_logon.vbs> C:\Miniconda\python.exe <project-root>`；用户/公共 Startup 无匹配项，计划任务无匹配项。当前没有重复的标准启动来源。
+- 生产只读状态：desired/runtime=`enabled/running`，supervisor/worker=`15188/1784` 且恰好 `1/1`，temp/foreign=`0/0`，operation lock live 并归属 worker 1784。worker 正在 normalize 长 PDF，采样时 heartbeat/current-path age 224.1 秒，已触发 soft warning 但低于 900 秒 supervisor hard timeout，不能据此判死。
+- Markdown 当前 `eligible=23724 / pending=21168 / in_progress=1 / blocked=1 / partial=79 / completed=2464`，artifact rows=5479；最近 batch normalize completed=3。它与最初 `11706/11706/0/0` 已明显不同，证明后台有真实推进。
+- LLM summary 当前 deferred，最近失败是 provider `429 quota exhausted`，属于外部配额降级；不阻断本地 Markdown normalize/fingerprint/export。最近 scan 为 `completed_with_errors` 且 errors=1、recent interrupted=2，需保留为独立数据质量/并发审计项，不能包装成全绿。
+- 日志路径已从实现确认：launcher events=`.source_catalog/worker_launcher_events.jsonl`，control log=`.source_catalog/control_center.log`，runtime=`.source_catalog/worker_runtime.json`，console log=`.source_catalog/worker_console.log`。
+- 当前窗口清单中不存在标题为 `Company Wiki Source Catalog Control` 的窗口；生产 PowerShell supervisor 15188 与 worker Python 1784 的 `MainWindowHandle=0`。其他 PowerShell 也均无主窗口；唯一相关可见终端是用户正在运行 Claude Code 的 Windows Terminal。该证据只证明当前会话 hidden-host 状态，不替代下一次登录门禁。
+- Launcher 尾部显示 11:56Z 的会话曾连续 `unexpected_nonzero_exit` 并按 40/80 秒退避，符合此前并发热修改造成的 restart storm；此后又有 11:59、12:13 启动。当前生产 session `c3385e...` 自 12:23:11Z 记录 `starting -> child_started(1784)` 后没有新的 restarting/exception 事件。
+- Control log 今日最新且唯一记录是 12:49:25+01 的 `action=status`；没有 `action=menu` 的登录时自动启动记录。结合注册表 exact command，可继续排除标准登录入口主动拉起 control menu，但仍需下一次真实登录观察 Windows Restart Apps/宿主恢复行为。
+
+## 2026-08-01 WR-10.9 Step 2 静态审查（进行中）
+
+- CodeGraph 定位 `startup.py` 的 `install_startup_task`、`startup_task_status`、`uninstall_startup_task`。安装前会硬性检查 supervisor PS1、logon PS1、logon VBS 三个入口文件，避免注册一个缺少 hidden host 的半成品。
+- 安装流程先尝试 Task Scheduler，失败才写 HKCU Run；status 先查任务再查注册表，uninstall 同时尝试删除两者。结构上不存在“安装一种、状态只看另一种”或卸载遗留标准入口的问题。
+- 上述结论尚未覆盖 `build_startup_task_args` / `build_startup_registry_args` 的精确命令构造，也未覆盖 VBS/PowerShell 文件内容；这些是 Step 2 的下一审查点。
+- `build_startup_task_args` 与 `build_startup_registry_args` 复用同一个 `_hidden_startup_action`；Task Scheduler action 和 HKCU Run action 因而具有同一宿主/参数语义，不会各自漂移。
+- `_hidden_startup_action` 固定生成 `"<wscript>" //B //Nologo "<vbs>" "<python>" "<project-root>"`，对系统宿主、VBS、Python 和项目根路径逐项加引号。Windows 文件路径不能合法包含双引号，因此此层参数边界合理；仍需审查 `_wscript_executable` 的路径选择和 VBS 内部再次构造 PowerShell 命令的转义。
+- `_wscript_executable` 从 `%WINDIR%/System32/wscript.exe` 构造绝对路径，当前注册表实际解析为 `C:\WINDOWS\System32\wscript.exe`，与设计一致。
+- VBS 要求恰好两个参数，拒绝参数内双引号，以 window style 0、`wait=False` 调用 logon PS1；宿主不会等待长期 supervisor，也不会创建可见窗口。logon PS1 用参数数组和逐项引号，以 `Start-Process -WindowStyle Hidden -PassThru` 启动 supervisor，然后立即退出。
+- 启动链保持 `WScript -> logon PS1 -> supervisor PS1 -> Python worker`，没有绕过 supervisor 直接启动裸 worker；120 秒延迟传给 supervisor/worker 路径，仍可由 pause/stop 合同管理。
+- Control menu 的 first-paint 顺序正确：设置窗口标题后，`Show-WorkerStatusSafely` 在任何 `worker-status` 子进程前打印产品名和 `Reading worker status (timeout 30s)`；超时、非零退出、非法 JSON 均进入 catch，写明错误并保留菜单。
+- 状态子进程使用 `ProcessStartInfo`、`UseShellExecute=false`、`CreateNoWindow=true`、双流异步读取和有界 `WaitForExit`；这同时解决初始 blank wait 与 status 查询自身弹窗问题。超时只终止 status CLI，不触碰生产 worker。
+- 静态审查发现待测试边界 A：`Invoke-CatalogCommand` 手工把参数包在双引号中，但没有实现 Windows 对“结尾反斜杠”和嵌入双引号的完整 escaping。固定 config/worker-status 参数不命中，但 duplicate search 等已有功能可能发生参数漂移或被新拒绝，属于 control 共享调用器的潜在回归。
+- 静态审查发现待测试边界 B：非 menu 的 `start/pause/resume/stop` 在控制动作成功后调用非安全的 `Show-WorkerStatus`。若后续 status 恰好超时，脚本会以失败退出，使调用方误以为控制动作未成功；menu 路径外层 catch 可恢复，但 action CLI 路径没有同等降级。
+- 现有 `test_source_catalog_cold_start.py` 有 6 个 Windows 合同：慢 status 首屏、timeout/malformed/nonzero 菜单降级、Task/registry WScript action、真实 VBS 无可见窗口。主问题覆盖充分，但没有覆盖参数末尾反斜杠/引号，也没有覆盖“控制动作成功、随后的 status 失败”语义。
+- 因两个风险都位于本次改写的共享 `Invoke-CatalogCommand` / `Invoke-ControlAction`，不能简单归类为无关旧功能；Step 3 应先补 RED 合同，再做最小修复。
+- Supervisor 静态所有权主合同成立：launcher file lock 防重复；kill-on-close Job Object 绑定精确 child；PowerShell 5.1 先 materialize process handle；心跳/session-start 双 watchdog；pause、stop、clean exit、unexpected exit 分类；指数退避；catch/finally 事件和资源关闭。
+- 待核验边界 C：watchdog 超时时调用 `$Child.Kill()` 只直接终止 Python 进程，而 Job Object handle 在 supervisor finally 才关闭。若 Python 正挂在外部 parser 子进程，旧子树可能在 supervisor继续重启期间仍属于未关闭 job 并短暂存活。需要检查真实测试是否验证“watchdog restart 后旧 descendant 为 0”，否则加入后续可靠性工作项；它不是当前空白首屏的直接根因。
+- 既有 lifecycle 测试覆盖无 runtime session、stale heartbeat、restart/backoff、duplicate supervisor、显式 stop/pause 和“杀 supervisor 后无直接 worker 孤儿”；没有“watchdog restart 后旧 parser descendant 为 0”。边界 C 保留为独立后续可靠性项，不在没有 RED 复现时扩张 WR-10.9。
+- Step 2 结论：startup/hidden host/first paint/timeout/失败降级/直接进程所有权主合同静态通过；边界 A/B 与本次 control 共享调用器直接相关，进入 Step 3 RED→GREEN；边界 C 非本次阻断。
+- Step 3 变更前基线稳定：PowerShell parser 0 error，原有 cold-start 6/6 PASS。新增回归合同可据此建立可信 RED，不需要先修理既有测试环境。
+- Step 3 RED 有效复现：末尾两个反斜杠经旧 ArgumentLine 到 Python 后只剩一个；含 `"` 的搜索被旧代码主动拒绝；`worker-start` 成功后 synthetic status exit 7 令整个 action exit 1。
+- 最小修复采用 Windows CRT 命令行 quoting 规则：普通反斜杠原样保留；双引号前反斜杠按 `2n+1` 编码；参数结尾反斜杠按 `2n` 编码；空字符串有明确双引号；NUL fail-closed。没有改变 CLI 参数集合或生产 worker。
+- `Invoke-ControlAction` 的动作后刷新改为 `Show-WorkerStatusSafely`，使“动作执行结果”和“后续观察结果”解耦；状态失败会显示降级信息但不反转已成功动作的退出语义。
+- 修复后 control parser 0 error，新增选择集 `3 passed / 6 deselected`。
+- 完整 cold-start 从原 6 条扩为 9 条后全绿，Ruff 同步通过；新增参数合同真实穿过 Windows PowerShell 和 Python argv，不是纯文本断言。
+- 61 项 cold-start/control/bootstrap 回归全绿，且生产 PID 未改变、temp/foreign 无残留，证明测试隔离合同在本轮成立。
+- Step 1 观察中的科大讯飞长 PDF 随后完成，Markdown completed/artifacts 各 +3、pending -3；因此 soft-stale heartbeat 告警应显示“长文档处理中”，不能由控制面板或 reviewer 自动判定 worker 死亡。
+- 额外 42 项 worker/reliability/long-document 合同全绿，覆盖 `--runxfail`；本次 control 修复没有破坏 background restart、长文档软告警或已有 worker 状态机。
+- 完整 321 项首次回归不是全绿：320P/1F。历史 resolver/acquisition 6F 已由并发后续实现修复；新唯一失败落在真实 Windows quoted-path logon detach 合同，需在判定 flaky 前取得事件/时序证据。
+- 失败合同的 fake child 仅 `sleep_seconds=2`，wrapper 返回后测试才开始轮询事件并要求 supervisor/child 两个 live identity 同时存在；整套高负载末尾若线程调度延迟超过 2 秒，事件仍可存在但 supervisor 已随 clean child exit 正常结束，导致 `supervisor_identity is None`。这是明确的脆弱观察窗口。
+- 失败后进程审计无 pytest temp/foreign 残留，生产仍 supervisor/worker=`1/1`、PID 15188/1784、latest launcher 未变；没有证据表明测试触发了生产 restart 或真实 orphan。
+- 将 fixture live window 加固后，目标单测与 24 项 bootstrap 全文件均通过；这保留了真实 PowerShell detach/identity/clean-exit 断言，只消除了 2 秒调度竞态。
+- 第二次完整 321 项在整套负载下全绿，故 quoted-path 失败已由可解释、可验证的 fixture 加固闭环；不需要修改生产 launcher。
+- 最终 scoped encoding/whitespace/parser 审计全绿；control 文件哈希从基线 `30800954...` 变为本轮修复后的 `f38986b4...`，其余 hidden-host/supervisor 文件未被本轮重写。
+- 真实 control status 在 7.597 秒内完整返回，first-paint 文本位于状态查询输出之前；控制面板正确显示后台正在 normalize、1/1 进程、live lock、429 配额降级及队列进展。
+- Duplicate WScript 首次 smoke 的 1 秒固定等待不足以覆盖双层 PowerShell 冷启动；观察到临时 supervisor 但无可见窗口。必须等待 fail-closed event/进程退出后再判断，不能把瞬时 `2 supervisors` 截图误判为持久重复实例。
+- 等待实际 transient 后，duplicate chain 正确写 `already_running/launcher_lock_held` 并退出，没有第二个 worker、orphan 或可见窗口。控制面板/监控若采样到短暂第二个 supervisor，应结合 launcher lock event 和有界复采判定，而不是立即误报警。
+- Step 5 15m 出现新的非致命存储信号：worker state 的 last_error 为 `OperationalError: disk I/O error`。同一时刻 worker 正在 export 11/12、heartbeat live、队列已推进 14，故这不是“worker 已停”；但它可能指向 SQLite/文件系统短暂 I/O 失败，必须在 pilot 后按事件频率和 DB quick_check 单独判级。
+- 长观察若绑定当前 PTY，会在用户消息中断工具等待时被回收；这次确实无 receipt/无残留。验收基础设施应让 30m pilot 独立于对话 PTY，并通过 receipt + PID 轮询取证，否则“继续”本身会破坏门禁。
+- `OperationalError: disk I/O error` 在 worker journal 中只出现一次，且 30 秒后同 PID 自动恢复工作；没有连续 failed rows 或 restart。当前应分类为 transient cycle error，仍需 DB quick_check 和捕获点审查，但不支持“worker 卡死”结论。
+- Step 5 PID 时间线更正：worker 14632 / supervisor 15192 在 Attempt 2 开始前约 17 分钟已启动，故不能用更早 Attempt 1 的 PID 1784 作为 Attempt 2 内部稳定性基线。此前“5m 内切换”判断撤回，保留为一次证据时间窗教训。
+- 14:30Z 新 session 没有对应旧 session 的 `exited`/`launcher_exception` 尾事件，说明此前 1784/15188 结束仍可能是外部停止/host teardown；但该事件发生在本 pilot 窗口外。旧 operation lock 的错误由新 worker可见并继续恢复，不应隐藏。
+- CodeGraph 将通用长期循环入口定位为 `SourceCatalogWorker.run_forever`（worker.py:747）；需要核对它对单 cycle exception 的记录/继续/退避语义，才能判断一次 I/O 错误是否会造成忙循环或静默停机。
+- `_run_cycle_guarded` 捕获普通 cycle Exception，更新 `last_cycle_at/last_error`、原子写 state、追加 failed journal 并返回失败结果；`run_forever` 随后继续循环，不退出进程。现场单次 I/O error 的同 PID 恢复符合设计。
+- 若错误严重到 `_write_state` 或 `_append_log` 也失败，异常会逃出 guarded 层，`run_forever` 写 unhandled/process_exiting 后交给 supervisor restart；因此不会无限静默停在异常栈中。仍需核对 failed result 对应的 wait plan，排除忙循环。
+- `_next_wait_plan` 对 failed cycle 使用正常 `poll_interval_seconds` 并标记 `cycle_failed`；不会零等待忙循环。当前单次 30 秒恢复符合配置。限制是连续 generic I/O failure 没有独立指数退避/计数，后续应增加连续失败可观测性与上限退避，但不在一次 transient 未复现时扩改当前 worker。
+- LLM `next_document_retry_after` 显示到 2027 并非 epoch/timezone 错误：`llm_summarizer.py` 对判定为 permanent 的文档错误明确写 1 年 retry window，使这些记录不参与正常候选选择；store status 返回所有未来 failure 中最早的 retry_after。
+- 因此控制面板的 `failed=131` 和 2027 `Doc retry` 表示 terminal/permanent 文档集合，不是整个 LLM 队列暂停一年。当前 UI 标签缺少 permanent/terminal 语义，容易误诊；应作为后续展示修复，而不是缩短调度窗口重新轰炸永久失败文档。
+- 分类核验：`LLMProviderError`（当前 429）明确标 `failure_scope=global` 并 break，由 worker `llm_retry_after` 管理；只有 forbidden conclusion / not valid JSON / invalid schema 进入 `permanent_document` 一年窗口，两者没有混淆。
+- `llm_summarizer.py` 注释声称 permanent error “Do NOT record them in retry table”，实际实现是记录 1 年 retry window；该注释已过时，会误导弱模型。应与 control terminal/permanent 展示修复一起更正，但不改变当前调度数据。
+- `run_cycle` 结尾只在 summary 非 deferred/failed 且 report_failed=0 时清空 `last_error`。因此成功的本地 cycle 遇到 LLM 429 deferred 时，会无限保留已经恢复的 disk I/O/旧 lock error；这是控制面板错误显示的直接根因，不是 worker 仍在失败。
+- 已建立 WR-10.10 计划：pilot 后用结构化 active-global/retryable/permanent 字段修复展示，禁止日期启发式；同时保留 429 active error，不把“清 stale”变成隐藏故障。
+- WR-10.10 可复用现有 worker/pipeline fixtures，但当前 permanent 测试多处仅断言 scope `in (document, permanent_document)`，强度不足；pipeline status 只验 failed 总数。实施时应把明确 forbidden conclusion 场景收紧为 exact `permanent_document`，并新增 retryable/permanent 分列断言。
+- Step 5 pilot 代码审计确认 worker PID 稳定性是硬门禁：样本 PID 集合不等于 1 会触发 `production_pid_changed`。但 supervisor 目前只校验每个样本 count 恰好为 1；虽然 receipt 收集 `production_supervisor_pids`，PID 在观察窗内变化仍可能 PASS。当前回执需人工复核 supervisor PID 唯一，后续以 RED→GREEN 增加 `production_supervisor_pid_changed`，不能只凭 count 判定 clean window。
+- 生产只读复现进一步确认状态展示失真：supervisor/worker=`15192/14632`、heartbeat age=`2.2s`，Markdown pending/completed/artifacts=`21139/2493/5508`，但 scheduler `last_error` 仍是旧 PID `1784` 的 `CatalogOperationLockedError`；最新 LLM report 则是 `failure_scope=global` 的 429 quota exhausted。主队列没有被这条错误卡住，面板却把历史 lock 错误显示为当前错误，并没有结构化展示真实 global LLM 退避。
+- failure 表虽已有 `failure_scope`，但 `_record_document_failure()` 把写入值硬编码成 `document`；report 层的 `permanent_document` 没有进入数据库。生产只读分组证据为 `document total=131, active=131, next_retry=1816599348.963516`，其他 scope 为 0。根修复必须同时覆盖 report、持久化和旧行兼容，不能只改 UI。
+- 旧 131 行不能在活跃 worker 上无备份静默 UPDATE。短期只读状态应使用与写入端相同的 permanent policy 计算 effective scope，并公开 `legacy_scope_mismatch`；物理修正需 pause、online backup、dry-run IDs/count、单事务、quick_check/FK 和 resume receipt。
+- WR-10.9 Step 5 attempt 2 是有效 FAIL：44.1 分钟总耗时、6 samples，worker/supervisor PID 全窗稳定 `14632/15192`，heartbeat/DB/raw/StockWiki/scan 均通过，但 pending/completed/artifact delta 全为 0。receipt SHA 为 `e9686d98c2029c51f0b04518d258a23fd6debaccf009da8dd2923c6ddbf663da`。
+- 零吞吐根因不是长文档，而是 operation-lock PID reuse。窗口内 `worker_runs.jsonl` 每约 30 秒出现同一 `CatalogOperationLockedError(pid=1784)`；锁 mtime `14:14:53Z`，当前 PID 1784 的 `svchost.exe` creation `14:29:41Z`，因此它不可能是原 owner。`lock.py` 只测 PID 是否 live，造成 stale lock 永久假活；worker 继续发心跳，supervisor 也就看不出队列已停。
+- 删除已验证 stale lock 后，同一 production worker PID 14632 在下一轮取得新的 `normalize` lock，owner PID 正确变为 14632，未重启、未产生第二 worker。这一恢复验证了因果关系，但代码仍需 process creation identity + legacy mtime fallback，防止下次 PID reuse 重现。
+- pilot 的样本 schema 还漏采 scheduler `last_cycle_at/last_error/next wake`，所以 receipt 里 worker 显示 `waiting` 且这些诊断字段为 null，只有事后读 journal 才看见每 30 秒失败。机器验收必须补 repeated-cycle-error 采集与分类。
+- WR-10.11 已完成 6 条初始 RED→GREEN，并扩充为 8 条 operation-lock 身份合同；Windows 对 protected PID 使用有界 CIM fallback，真实 PID 1784 可得到 creation time，legacy lock 被准确分类为 `legacy_pid_reused`。新锁同时记录 process creation identity，stale unlink 前复核原始 token，避免删除竞争中产生的新 owner。
+- pilot 现在采集 scheduler cycle/error/wake 与 lock PID/identity，supervisor PID 全窗唯一也成为硬门禁；连续同一 cycle failure 会优先归因为 `repeated_cycle_failure`，不再只给出泛化的 throughput failure。
+- 生产 worker 14632 在长 normalize 阶段触发既有 900 秒 watchdog，自然重启为 8280；supervisor 15192 未变。8280 加载新身份锁后 owner creation recorded/observed 完全相同，状态为 `live/matched`。该事件是有日志的正常恢复，不是人工 restart。
+- 生产队列在修复后持续从 pending/completed/artifacts `21139/2493/5508` 前进至 `21133/2499/5514`；这证明 stale PID lock 根因已解除，但最终健康结论仍需 post-fix 30m receipt 与下一次真实登录门禁。
+- LLM failure scope 的根修复已贯通 report、DB 写入、store、CLI、worker state 与 PowerShell control。生产旧 131 行只读 effective 分类为 permanent 131 / retryable 0 / mismatch 131；当前 global 429 与 retry time 单独展示。历史行没有被 UPDATE，物理修正仍必须走 pause/backup/dry-run/transaction/integrity/resume 门禁。
+- Source Catalog 全量回归为 334 passed；Ruff、compileall、PowerShell parser、UTF-8/NUL/whitespace 和 scoped diff-check 均绿。功能测试通过不能替代生产持续观察，也不能把 Step 6 次日登录提前勾绿。
+- 最新 scan 的唯一 error 已定位到 `dropbox_stock` 中一个 0 字节 `Product_Revenue_Forecast_Model.xlsx`：location=`quarantined`，error=`SourceManifestError: source file is empty`。scanner 只有 existing source_id+manifest 才复用，故这个无 source_id 的稳定隔离项每轮都会再次计入 error。它不阻塞 Markdown 队列，但 control 只显示总数，无法区分 known quarantine 与新故障。
+- WR-10.12 已登记为 post-pilot 后续项：保留 `errors/completed_with_errors` 的诚实语义，不改/删原件；新增 new/known/detail 和恢复路径合同。当前 pilot 只硬检查 scan interrupted delta，最终人工验收不能把这一点写成“scan error=0”。
+- 深审发现 `_remove_if_unchanged()` 的 token 二次读取不是严格原子 compare-and-delete：另一 contender 可在 read 与 unlink 之间完成旧锁删除和新锁创建，理论上导致新 owner 被误删。现有 token replacement 测试只覆盖 replacement 发生在复核前。WR-10.11 增加 OS acquisition mutex + 三进程 barrier/stress 门禁，未补齐前不能称单写者竞争合同彻底完成。
+- worker 的 stale cycle error 清理仍有未覆盖边缘：`summary_result is None` 时整个清理分支不运行。若成功 cycle 因 user-active/on-battery 等没有 LLM result，旧 generic cycle error 可继续显示。WR-10.10 增加 no-summary success RED；修复时必须保留 active global 429。
+- 长文档是另一条真实停滞链：launcher 明确在 `15:57:49Z` 因 heartbeat age 903s 超过 900s 杀掉 worker 14632。normalize/fingerprint 都只在文档开始发一次 progress，然后同步 `_normalize_source()`；合法慢 PDF 与真正 hang 在 supervisor 看来完全相同。
+- watchdog kill 发生在 artifact/fingerprint failure state 落库之前；normalize 按 document_id、fingerprint 按 pending state 重新选择，故慢文档可在重启后反复成为队首。提高 watchdog 数值或假 heartbeat 都不能保证前进；需要父 worker 活跳 + parser 隔离进程独立超时 + 有界 retry/terminal state + orphan 清理。
+- WR-10.13 已登记为高优先级。当前 30 分钟 pilot 只能证明这段窗口有平均吞吐，不能证明任意 >900 秒文档可完成或被有界跳过；最终验收必须包含缩时 RED 和至少一个受控 slow canary。
+- runtime 的 `code_version` 只执行 `git rev-parse --short HEAD`。在当前大量未提交修复下，旧 worker 与 reload 后 worker 都会显示 `42ff8da`，无法证明进程实际加载的文件版本；这也解释了为什么只能通过 `last_error_scope` 等行为字段推断 WR-10.10 尚未 reload。
+- WR-10.14 增加 loaded/current 核心文件 SHA bundle 与 code_match 门禁。指纹须在进程启动时固化，磁盘候选另算；否则源码修改后 runtime 若跟着重算，会再次制造“看起来已加载”的假象。
+- Markdown `blocked=1` 与 scan error 不是两个问题。只读 SQL 证明唯一 `primary_source_id IS NULL` 的 document 是 `Product_Revenue_Forecast_Model`，source_status=`quarantined`，即同一 0 字节 Excel 的 logical document。control 应把 blocked 分解为 quarantined/incomplete/other，而不是继续显示无法解释的总数。
+- Atomic takeover 的确定性线程 barrier 合同先证明旧实现中 owner B 可在 owner A 最终 unlink 前取得 stale lock；加入 OS byte-lock acquisition mutex 后 GREEN。guard file 可持久存在，但不携带 PID/stale state，进程退出由内核释放锁，因此没有递归制造第二个 stale-lock 问题。
+- `summarize_llm=None` 成功 cycle 的 stale error 合同也按预期 RED；修复后只清 cycle/unscoped，global retry/report 仍优先保留。两个新合同与 lock/worker 全文件合计 40 passed。
+- WR-10.11 post-fix pilot 正式 PASS：receipt SHA `b0300d5f8819d51de90cfd8775cfedf8e7449ebbadaea8393f66ab194aac103b`，6 samples，worker/supervisor PID 唯一 `8280/15192`，pending/completed/artifact `-19/+18/+20`，repeated failure=0，DB quick_check=ok（806.3s），raw/StockWiki unchanged，scan interrupted delta=0。
+- receipt 中 lock identity 只有 `matched`（操作中）与 `absent`（waiting）两种正常状态，owner PID 只有 8280；证明 PID-reuse 修复后的生产主队列在窗口内真实前进。该 PASS 不覆盖 >900s parser 风险，也不替代 fingerprinted reload/next-login。
+- Pilot receipt 结构已确认包含 supervisor count、foreign/temp、DB quick_check、throughput、raw/StockWiki safety、first_failure/last_good_sample 等；但仍需核对 stable PID 是否是硬检查，避免把“每次都是 1 个、期间却换过 PID”误判为稳定。
+- 本轮完整结果同时证明先前 309P/6F 的 resolver/acquisition 失败已不再存在，但该改善来自工作树中的后续并发实现，不应错误归功于 WR-10.9 control 修复。
+
+## 2026-07-28 本次会话最终发现汇总
+
+### 发现 15：task_plan.md 全部 checkbox 已清零，§10.8 队列全部完成
+- WR-1 到 WR-7 全部 GREEN（各 2-15 个 contract tests），BG-5 reconciled + applied 2685 个旧 derived 文件，FR-4 long-running observability 合同固化，CW-2.28C Phase 2 11 semantic tests GREEN。
+- Phase 9R prior FAIL 的 root cause（encoding crash / inventory miscount / start() hang）全部被 WR-1/2/6 修复。
+- 剩余 item：CW-2.28 Phase 3-10（历史 review_failed，Phase 2 gate cleared 后可按顺序重走）。
+
+### 发现 16：生产 catalog.sqlite3 从 77MB 膨胀到 10GB
+- artifacts 表从空（0 rows）增长到 ~1700+ rows（经历 BG-5 apply 2685 rows）→ not the 10 GB cause。
+- 主要膨胀来自 document_fingerprint_state 表（schema 1.2.0 backfill） + WAL 磁盘碎片化。需 VACUUM 或 reindex（不可干扰 worker）。
+
+### 发现 17：§10.6/§10.7 是实施前计划阶段，§10.8 是 authoritative 返工入口
+- §10.6 的 BG-0..BG-7 和 §10.7 的 FR-1..FR-8 在 §10.8 实施时已全部被覆盖。所有 checkbox 在 commit 前全部勾选。Phase 15 被 BOUNDARY-0 收窄（不实施）。task_plan_v2.md 和 task_plan_cw_recovery_20260725.md 是历史恢复文件（不再是 active plan）。
+
+## 2026-07-27 §10.8.2 WR-1 — process inventory encoding & classification
 
 ### 发现 13：生产 .source_catalog/derived 中 2,673+1,420=4,093 个旧文件几乎全部可安全回填
 - dry-run 全量：normalized matched=1497、summary matched=1188、0 detached、0 hash_mismatch、0 missing_frontmatter；1176+232=1408 个 already_indexed（被 worker 在 WR-6 pilot 期间自然处理而无需 apply）。
@@ -547,3 +738,116 @@
 - The new plan decomposes repair into WR-1 through WR-7: encoding-safe precise process inventory, bootstrap/start self-evidence, pytest-temp cleanup, real GREEN background reliability tests, truthful control panel health sections, production resume/pilot, and final static/regression gates.
 - The plan now has machine-checkable stop conditions, allowed/forbidden file scope, exact test commands, pilot thresholds, and a final delivery template. It forbids claiming `healthy` while worker is stopped/paused, temp start fails, xfail remains, Ruff fails, pilot is missing/failed, or live worker is an old-code process.
 - This planning update did not change product code, did not resume/start/stop production worker, did not write catalog DB, and did not touch raw files.
+
+## 2026-07-29 Source Catalog worker plan-drift audit — in progress
+
+- `task_plan.md` 当前顶部与 §10.8 将 WR-1..WR-7 标为 completed/healthy，但 `progress.md` 最新 worker 记录仍是 2026-07-26 的 FAIL，缺少 2026-07-27/28 的逐 WR 执行日志。
+- §10.8 的 WR-3、WR-4、WR-5、WR-6 实施记录存在空白 receipt 引用，不能仅凭勾选框恢复 healthy 结论。
+- CodeGraph 对当前 `src/company_wiki/source_catalog` 仍未返回有效入口，只命中旧测试变量；本轮结构审查会记录该盲区，并使用精确文件读取与真实测试作为验收依据。
+- 本轮执行入口改为 WR-0 现场重验：先做只读状态、进程、数据库健康与证据清单；再按 WR-1 到 WR-7 的门禁逐项验证，失败即回对应 WR 修复。
+- 2026-07-29 WR-0 现场状态：`desired_state=enabled`，但 `runtime_state=stopped`、`stale_runtime=true`，runtime PID `7860` 已不存在，process inventory 中 production/pytest-temp/foreign 均为 0。
+- worker 最近一次 session 已打开，但 scheduler 持久化的最后错误为 `AttributeError: 'SourceCatalogWorker' object has no attribute 'should_stop'`。源码中 fingerprint 阶段传入 `should_stop=lambda: self.should_stop()`，而 `should_stop()` 属于 control session，不属于 `SourceCatalogWorker`；这会使每个 eligible cycle 在 normalize 后、fingerprint 前失败。
+- 现有 worker 单元测试的 fake catalog 只接收但不执行 `should_stop` callback，因此没有覆盖生产调用点，造成“focused tests 绿但真实 worker 退出”的漏检。
+- 7 月 27 日的 WR receipts 实际存在于 `artifacts/gates/source-catalog-bg/`，但未完整同步进 planning 日志；本轮需逐份重验，不能仅补文档。
+- 旧 WR-1/2/3/6 receipts 都声称 PASS，但结构很弱：多数只有一个 command result，`wr-4-5-7-attempt-0001.json` 甚至没有顶层 `status`；这些 receipt 只能作为历史线索，不能覆盖 2026-07-29 的运行回归。
+- WR-1 原测试命令初次重跑为 `17 passed, 1 skipped`；skip 正是 Windows 真实 background start/pause/resume/stop 测试，理由仍写着“manual verification”。这违反 §10.8.8 的 Windows 验收条件。
+- 取消无条件 skip 后，真实 temp worker 首次 start/pause 成功，但 resume 后一次 `status()` 瞬时误报 stopped。process events 证明第二个 worker 已 `session_opened`，真正的 `process_exiting(control_request)` 发生在断言失败后的 finally stop；根因是 Windows process identity 查询偶发返回 None。
+- `WorkerController._runtime_is_live()` 现仅在 identity 为 None 时短重试一次，不放宽 PID/creation_time/executable 三字段匹配。合同测试和真实 temp start/pause/resume/stop 均已通过。
+- 本轮真实 background integration 完成后，CIM 扫描确认 pytest temp worker 残留数为 0。
+
+## 2026-07-29 Source Catalog worker root-cause findings — implementation checkpoint
+
+- worker 停止的直接根因是 fingerprint 阶段调用不存在的 `SourceCatalogWorker.should_stop()`；旧测试 fake 只接收、不执行 callback，因此漏检真实崩溃。
+- “启动慢/命令不返回”的根因是后台 child 继承了启动命令的 capture pipe；即使 child 已启动，父命令仍等不到 EOF。把 child 输出定向到独立日志并关闭句柄继承后，CLI 在数秒内返回。
+- Windows 偶发把 live worker 显示 stopped 的根因是单次 CIM/process identity 空读；精确身份匹配前进行有界短重试可消除瞬时假阴性，不会把 PID reuse 当作 live。
+- “控制面板像没跑过 scan”的根因之一是 health 只接受精确 `completed`，生产常见终态 `completed_with_errors` 被排除；现已统一为终态完成并保留 status。
+- 全量 scan enumeration 与全量 export 曾在内部长时间不发进度，导致健康 worker 被判 heartbeat stale；两者现有有界分段进度。单个 PDF 仍可能长达数分钟，因此 pilot 同时检查 180 秒 heartbeat 与 900 秒同路径上限。
+- pilot 自身也有 Windows 中文路径解码漏洞：子进程仅设置 `PYTHONUTF8=1`，父端仍按 GBK 解码；现显式使用 UTF-8-SIG + replacement，并有契约测试。
+- 旧 pilot 的 `stockwiki_writes=0` 只是静态声明、`db_quick_check` 缺失、无吞吐硬门槛，可能产生假绿；新 receipt 使用真实边界快照、只读 quick-check 和可选 `--require-progress`。
+- 5 分钟真实 pilot PASS 证明新 PID 能跨 export、normalization、fingerprint、LLM summary 持续推进；最终结论仍依赖 30 分钟门禁。
+
+## 2026-07-29 Source Catalog worker final findings
+
+- 30 分钟真实 pilot 已排除“进程活着但不干活”：normalized +36、pending -39、artifact +39；稳定单 PID，无 stale heartbeat、无测试/外来 worker、无新增 interrupted scan。
+- 最终门禁额外发现并修复 force-stop 的第二处 transient identity 漏洞。live 判断虽有重试，但 terminate 前的单次读取仍可能为空；受身份保护的有界 terminate 重试是完整修复。
+- `completed_with_errors` 是生产扫描的常见终态（本轮最近 scan 46,781 files，errors=1），应显示为完成且带错误数；不能把它当作“从未完成扫描”。
+- export 的 duplicate-group 步骤仍是主要性能热点，真实样本最长约 135 秒，曾在人工检查中接近 171 秒；当前未超过 180 秒 pilot 门槛，也未阻止吞吐。后续性能优化应细分该查询或缓存重复组，但不得通过提高 heartbeat 阈值掩盖。
+- scan enumeration 期间 runtime/lock 已准确显示 scanning，但 DB `latest_running_scan` 要到枚举结束后才出现；这是非阻塞的审计时序改进项，可在未来把 scan-run 建立前移。
+- LLM summary 偶尔因包含投资结论被 source-only guard 拒绝，属于正确的 document-scoped 边界隔离；本轮观察到 worker 随后继续 normalization，不会拖死 Markdown 主队列。
+- 最终 `healthy` 是有边界的运行结论：后台生命周期、心跳、单实例、恢复、吞吐、DB/raw/StockWiki 安全和 scoped gates 均通过；不表示 22,000+ backlog 已清空，也不表示 export/scan 已达到最优性能。
+
+## 2026-07-29 WR-8/WR-9 baseline findings
+
+- export 的长步骤不是 exact group Python loop 本身，而主要是 `semantic_duplicate_groups()` 的 canonical-location 相关子查询；query planner 对每个 document 使用 `idx_locations_status` 搜索 locations 并临时排序。
+- 一次性 ranked-location 窗口查询保留相同 canonical ordering，生产只读实测从分钟级热点降到约 1.1 秒，具备明确实施依据。
+- scan-run 已在源码上“先 INSERT”，但 coalesced transaction 让该事实对 status 连接不可见；审计问题发生在事务边界，不应通过面板猜测或额外 runtime 假字段掩盖。
+- CodeGraph 对这两个当前 source_catalog 入口仍只返回旧 catalog 测试变量；按既有盲区规则，本轮使用精确源码读取、SQLite query plan 和真实合同作为证据。
+
+## 2026-07-29 WR-8/WR-9 final findings
+
+- export 的分钟级停顿根因是 semantic duplicate 的 per-document canonical-location 相关子查询，不是 worker 死亡。窗口查询把核心生产只读查询降到 0.465 秒；完整导出仍需 38-49 秒用于装载和多份 CSV/index 写出，但已有 12 个可见检查点。
+- 快速导出可能完全落在 15 秒采样间隔之间，因此只看瞬时 runtime 会产生假阴性。最近导出时间、耗时、total=12 和最后一步必须写入 worker state，并在控制面板长期显示。
+- scan running row 的问题是事务可见性：把 INSERT 写在 enumeration 前仍不够，必须在进入 coalesced transaction 前独立提交。异常路径同样需要在 rollback 后用独立事务写 interrupted。
+- 生产 scan pilot 的 FAIL 是真实且应保留的采样边界：它没有捕捉到短暂 enumeration，但首个文件扫描样本已同时看到 live worker、live lock 和 running scan。精确 enumeration 断言由独立 SQLite 连接合同承担，不能篡改失败收据来凑 PASS。
+- read_pipeline_status 原先只返回 `latest_running_scan="present"`，无法满足 run_id 对账。现已返回 run_id/started_at/status；完成扫描还返回 completed_at，因此面板、pilot 和审计收据能引用同一身份。
+- 当前生产 backlog 仍约 22,000，原因是单线程、每轮 Markdown batch=3 且部分 PDF 单文件耗时可达 1-2 分钟；这影响清空速度，不等于 worker 卡住。本轮 pilot 的 completed +11/pending -11 与随后持续增长证明队列在真实推进。
+- 最近 scan 的 1 个文件错误和个别 LLM schema/source-policy 错误都是 document-scoped；worker 会记录并继续。它们是解析/资料质量待办，不再是后台生命周期阻塞。
+
+## 2026-07-30 WR-10 overnight liveness regression
+
+- 昨日短时与 30 分钟 pilot 证明了进程在观察窗口内可工作，但没有证明 unattended overnight survival，也没有证明 enabled 状态下的进程级自动恢复。
+- 次日现场为 desired enabled + runtime stopped + production worker 0。这意味着“单次进程内部容错”与“进程退出后的 supervisor recovery”是两个不同合同；此前计划只充分覆盖了前者和 logon 启动，没有覆盖后者。
+- 队列在退出前继续下降，说明 WR-8/WR-9 的吞吐与导出改进仍有效；当前新增根因域是退出原因、退出分类和 supervisor/launcher 恢复，而不是重新打开 semantic query 或 scan transaction 修复。
+- `source_catalog_worker.ps1` 使用 `$ErrorActionPreference='Stop'` 和 `& $PythonExe ... *>> $ConsoleLogPath` 包裹长期 worker。Windows PowerShell 5.1 会把 native stderr 包装成 `NativeCommandError`；普通 parser warning 因而可能触发 launcher catch/exit 1。
+- 现场时间线支持该假设：PID 10600 已成功 session_opened 并运行约 82 分钟；launcher 最终 exception message 不是 Python traceback，而是 `XMLParsedAsHTMLWarning` 的第一行。worker 自身没有写 `process_exiting`。
+- `worker_console.log` 由 PowerShell native redirection 写入，尾部带大量 NUL，且中文路径被破坏；即使不导致退出，这也违反可审计 UTF-8 日志合同。修复必须同时隔离 stderr 的退出语义和日志编码。
+- `Start-Process` 把 native stdout/stderr 直接重定向到不同文件后，普通 stderr 不再进入 PowerShell error pipeline，UTF-8 中文 warning 可严格解码且无 NUL。
+- Windows PowerShell 5.1 的另一个陷阱是快速 child 的 `Process.ExitCode` 可能在未 materialize handle 时表现为默认 0；launcher 必须在写 child_started 后等待前固定读取 `$Child.Handle`，否则 crash 会被误判 clean exit。
+- supervisor 的恢复判定不能只看 desired_state：`worker-stop` 保持 desired=enabled 以便下次登录启动。正确合同是对比本 attempt 前后的 `stop_requested_for`；新 token 表示显式 stop，应结束 supervisor而非重启。
+- 独占 `worker_launcher.lock` 使用 OS FileStream share-none 语义；重复 launcher clean exit，但真实 worker singleton 仍由既有 worker_instance lock 独立保护。两层锁职责不同。
+- 既有 `_scan_source_catalog_processes()` 只枚举 Python CLI marker；PowerShell supervisor 不属于 production worker，也不能塞进 ignored 列表。它需要独立的 production/pytest-temp/foreign supervisor inventory，才能机器判定 `supervisor=1 + worker=1`。
+## WR-10 initial production pilot (2026-07-30)
+
+- The repaired process stayed live and productive through a full pipeline rotation. Across the pilot, production worker and supervisor counts were always exactly one, heartbeat never crossed 180 seconds, and no restart occurred.
+- The initial receipt's sole failure is an evidence-timing issue: scanning was captured immediately after startup but not inside the pilot sample window. All WR-10 liveness, throughput, database, raw immutability, and cross-repository safety checks passed.
+- Pilot CLI argument handling was itself unsafe: unknown options were ignored, so `--help` launched a 30-minute run. Strict argparse handling now makes help bounded and option typos fail closed.
+
+## WR-10 long-document liveness finding (2026-07-30)
+
+- A live production PDF normalize call ran for roughly 260 seconds with no nested progress callback. The worker remained present and then completed, proving that a raw 180-second heartbeat threshold alone produces false positives.
+- The opposite failure is also real: the supervisor currently blocks forever in `WaitForExit()`, so a parser that never returns is not recoverable. The safe boundary is an external single supervisor watchdog; it does not thread or touch `LLMClient`, and it only terminates the exact child after the 900-second hard limit.
+- The repaired redirect path has production evidence, not only fixtures: attempt 1 wrote 1020 bytes of BeautifulSoup/openpyxl warnings to its UTF-8 stderr log and continued running until the intentional crash drill.
+# 2026-07-31 WR-10.7 跨会话恢复发现
+
+- HKCU Run 在 `2026-07-31T12:17:25Z` 启动 session `64e8b6e7088b4b539d2b46feee64bc35`，launcher event 记录 PID `7188`，随后 child event 记录 worker PID `5492`。
+- 恢复检查时 PID `7188` 已不存在，`worker-status.process_inventory.production_supervisors=[]`；PID `5492` 仍运行，CIM parent PID 为 `7188`，runtime identity 和 operation lock 都指向 `5492`。
+- 这不是 worker 卡死：状态为 `normalizing`，heartbeat/current path age 约 96 秒，Markdown completed 2,165、pending 21,479、artifact rows 5,164。问题是 worker 已失去 watchdog 监督。
+- launcher event 在 `child_started` 后没有任何终止事件，说明当前实现无法审计 PowerShell host 被外部结束/宿主生命周期终止的路径。
+- 结论：WR-10 次日门禁 FAIL；先修复 orphan-worker/supervisor ownership，再运行最终 clean pilot。
+- Windows PowerShell event log 证明 session 的 host application 正是 HKCU Run 命令 `powershell.exe ... -File source_catalog_worker_at_logon.ps1`；同一时间段 Application error log 只有无关 DbxSvc 事件，没有 PowerShell crash 诊断。
+- `source_catalog_worker.ps1` 的基础设施 `catch` 当前不会终止已经启动的 `$Child`；host 被强制结束时更不可能运行 catch/finally。现有 worker CLI 也不知道期望 supervisor PID，因此 child 在 parent 消失后可无限继续。
+- 普通 `WorkerController.start/resume` 原来也直接 Popen Python `worker`，会绕过 PowerShell watchdog；因此控制面板人工恢复同样可能生成无 supervisor worker。
+- Windows 最小矩阵确认 `DETACHED_PROCESS (0x8)` 与 PowerShell `-File` 不兼容于当前环境：进程返回 0 但脚本未执行、无 launcher event；去掉该 flag 后事件完整。
+- 最终实现以三个互补机制收口：登录 wrapper 脱离 HKCU Run host、所有控制入口统一启动 supervisor、supervisor 使用 kill-on-close Job Object 强制 child 与其所有权一致。
+- 2026-07-31 clean pilot PASS：29 个样本、42.7 分钟（其中 DB quick_check 729.5 秒），同一 worker/supervisor PID 全程 `1/1`；raw heartbeat 有 1 个 soft-stale 样本，但 effective stale 为 0，最长同路径 202.9 秒，小于 900 秒硬门槛。
+
+## 2026-08-01 冷启动空白控制面板初始现场
+
+- 标准开机入口只有 `HKCU\Software\Microsoft\Windows\CurrentVersion\Run` 的 `CompanyWikiSourceCatalog`，命令指向 `source_catalog_worker_at_logon.ps1`，并显式带 `-WindowStyle Hidden`；用户/公共 Startup 文件夹没有项目快捷方式，也没有名称匹配的计划任务。
+- `source_catalog_control.cmd` 会显式启动可见 PowerShell，`source_catalog_control.ps1` 设置标题 `Company Wiki Source Catalog Control`；当前已发现的 worker wrapper/registry 链没有调用这两个控制面板文件。
+- 因此现阶段不能把自动出现的标题窗口归因于已登记 worker 启动项。高优先级待证路径是 Windows Restart Apps 恢复上次控制台，或标准位置之外的 task/RunOnce/action；同时控制脚本在首次状态读取前若没有输出，会把慢 DB/锁等待表现为“纯空白”。
+- 两次只读工具编排失败未改变生产状态：一次 JavaScript 语法错误，一次误用不存在的 `shell_command`；后续已改用 `exec_command`。一次多文件 planning patch 因旧上下文不匹配而整体未应用，随后按当前文本重试。
+- 今天系统启动时间为 `2026-08-01 07:29:50 +01:00`。`.source_catalog/control_center.log` 最后一条 menu launch 是 `2026-07-31 20:49:11 +01:00`，今天没有任何 control launch；该日志在 `Set-Location` 后、设置窗口标题和调用 status 之前立即写入。故今天自动出现的窗口不是成功执行中的 `source_catalog_control.ps1`。
+- 当前 repo 内除文档/测试外，唯一 control 调用链是用户双击的 `source_catalog_control.cmd -> source_catalog_control.ps1`；Python startup symbols 只构造 worker launcher 注册，不调用 control UI。当前 Windows Terminal settings 也没有 `startOnUserLogin` 或恢复窗口配置。
+- 已定位确定的首屏缺陷：menu 入口在设置窗口标题后立刻同步调用 `Show-WorkerStatusSafely -> Show-WorkerStatus -> Invoke-WorkerCommand`；脚本在 Python `worker-status` 返回前没有任何 `Write-Host`，且 `Invoke-CatalogCommand` 直接 `& $PythonExe`、无超时。本次 live status 实测约 10 秒，冷启动/DB 竞争时可能更久，因此真实 control 窗口会呈现纯空白。
+- WR-10.8 次日现场目前满足核心存活与吞吐条件：desired/runtime=`enabled/running`，supervisor/worker=`1/1`（PID `20416/7916`），temp/foreign=`0/0`，heartbeat/effective stale 正常；相对昨日 clean receipt，Markdown pending `21436 -> 21221`、completed `2206 -> 2413`、artifact rows `5207 -> 5426`。
+- 当前非阻塞降级：LLM summary provider 返回 `429 quota exhausted`，因此 summary deferred；Markdown normalize、fingerprint、export 仍推进。scan 当前 `completed_with_errors`（1 error）、interrupted_total=7/recent=1，需要单独对账，不能把 summary 和 scan 质量误称全绿。
+- launcher events 进一步证明旧 HKCU Run 在本次真实登录正常触发：`2026-08-01T06:30:37Z` supervisor PID 16100、startup delay 120，worker PID 16308；故“完全没有启动”不是根因。旧 registry action 直接创建 `powershell.exe` console host，即使带 `-WindowStyle Hidden` 仍依赖 host/默认终端实现，改为 `wscript.exe //B //Nologo` 才能从入口层保证不创建可见控制台。
+- 另一个仍在运行的 Claude 会话于本地约 12:38 执行 `python -m pytest tests/ -q`，期间生产 launcher event 出现 `control_stop -> starting`，worker/supervisor 从 `7916/20416` 切到 `6220/19332`。这是外部测试干预，不是 watchdog 自发崩溃；该现场解释了 interrupted counter 增长，也使“无外部污染的连续 PID”门禁暂时失效。
+- WR-10.9 RED 为 6 failed：无首屏、无 status timeout、malformed/nonzero 无可靠降级、startup action 仍是 PowerShell、VBS host 缺失。实现 WScript 隐藏宿主、bounded ProcessStartInfo status 和 loading first paint 后为 `6 passed in 7.47s`；真实 VBS fixture 证明 child PowerShell 无可见顶层窗口。
+- 新 control 对生产 `-Action status` 真实 smoke PASS，4.7 秒返回完整状态。当前 worker/supervisor=`1/1`，Markdown pending=21207、completed=2427、artifacts=5440；最新 scan 已变为 `completed`/errors=0。`last_error=CatalogOperationLockedError(pid=3508)` 是并发测试期间的历史竞争，当前 operation lock 已回到 live PID 6220，处理继续推进。
+- 实际 `install-startup` 走预期 registry fallback（Task Scheduler access denied），HKCU Run 已逐字读回为 WScript hidden host；安装前后生产 PID 都是 `19332/6220`，证明安装不隐式启动或重启 worker。
+- 用实际 registry 参数做 duplicate smoke：WScript exit 0、新增可见窗口 0、production worker/supervisor 仍 `1/1`，临时 launcher 以 `already_running/launcher_lock_held` 退出。第一次 smoke 命令误用了只读 PowerShell `$Host` 变量而未启动任何进程，修正变量名后取得有效结果。
+- expanded Source Catalog：309 passed、6 failed。失败全部位于 `test_source_catalog_download_suppression.py` 和 `test_source_catalog_identity_resolver.py`，对应另一模型当前 resolver/acquisition 漂移；本次 startup/control 文件不调用这些模块。它们不否定后台 worker 正在推进，但意味着仓库不能称为全量测试健康。
+- expanded 测试期间生产再次出现 launcher restart storm；对账 stderr 后确认不是 lifecycle test 所有权错误，而是另一 Claude 会话同时热改 worker，过渡版本触发 `AttributeError: SourceCatalogWorker ... project_root`。该会话无活跃 shell 后，失败的 resolver 两文件稳定复跑仍为 7P/6F；当前 worker PID 21320 的启动时间晚于 `worker.py` 最后写入时间，已加载最终文件。
+- 最终 clean observation 为 5 samples/130s：supervisor/worker 固定 `16232/21320`，temp/foreign 最大 0，heartbeat max 8.2s；Markdown pending `21201 -> 21195`、completed `2433 -> 2439`、artifacts `5446 -> 5452`。后台 worker 当前可判运行健康。

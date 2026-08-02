@@ -9,10 +9,15 @@ import hashlib
 import html
 import json
 import math
+import multiprocessing
 import os
 from pathlib import Path
 import re
+import signal
 import subprocess
+import tempfile
+import threading
+import time
 import unicodedata
 from typing import Any, Callable, Iterable
 
@@ -31,12 +36,28 @@ from company_wiki.source_contract import (
     SourceManifest,
 )
 
+from .admission import processing_priority_sql
 from .models import CatalogConfig, NORMALIZER_VERSION, ProcessingReport
 from .store import CatalogStore, canonical_json
 
 
 _NORMALIZER_NAME = "source_catalog_normalizer"
 _SENTENCE_BREAK_RE = re.compile(r"\n\s*\n+")
+DOCUMENT_PARSE_TIMEOUT_CODE = "document_parse_timeout"
+_UNSUPPORTED_CHILD_ERROR_TYPES = {
+    "BadZipFile",
+    "EmptyFileError",
+    "FileDataError",
+    "InvalidFileException",
+    "PackageNotFoundError",
+    "UnsupportedDocumentError",
+    "XLRDError",
+}
+_UNSUPPORTED_VALUE_ERROR_MESSAGES = {
+    "PDF is password protected",
+    "XLS contains no non-empty sheets",
+    "XLSX contains no non-empty sheets",
+}
 
 
 def _utc_iso(epoch: float | None = None) -> str:
@@ -60,6 +81,525 @@ class _Normalized:
     status: str
     quality_flags: tuple[str, ...]
     error: str | None = None
+
+
+class NormalizationProcessError(RuntimeError):
+    """Base class for failures in the isolated document parser process."""
+
+
+class NormalizationCancelledError(NormalizationProcessError):
+    """Raised when a stop request cancels an active parser process."""
+
+
+class NormalizationTimeoutError(NormalizationProcessError):
+    """Raised when one document exceeds its independent parser deadline."""
+
+
+class ParserProcessError(NormalizationProcessError):
+    """Raised when the parser child fails or returns an invalid envelope."""
+
+
+class UnsupportedDocumentError(ParserProcessError):
+    """Raised when a parser proves that the source bytes are malformed."""
+
+
+class ParserResultTooLargeError(ParserProcessError):
+    """Raised when parser output exceeds the configured IPC size limit."""
+
+
+class ParserResultProtocolError(ParserProcessError):
+    """Raised when parser output violates the normalized-result contract."""
+
+
+def _normalized_to_payload(
+    normalized: Any, *, expected_source_id: str
+) -> dict[str, Any]:
+    if not isinstance(normalized, _Normalized):
+        raise ParserResultProtocolError("parser must return _Normalized")
+    parser_results: list[dict[str, Any]] = []
+    for result in normalized.parser_results:
+        if not isinstance(result, ParserResult):
+            raise ParserResultProtocolError(
+                "normalized parser_results must contain ParserResult values"
+            )
+        if result.source_id != expected_source_id:
+            raise ParserResultProtocolError(
+                "parser result source_id does not match the input manifest"
+            )
+        span_payload = result.to_evidence_span().to_dict()
+        parser_results.append(
+            {
+                "source_id": span_payload["source_id"],
+                "coordinates": span_payload["coordinates"],
+                "raw_text": span_payload["raw_text"],
+                "structured_value": span_payload["structured_value"],
+                "parser_name": span_payload["parser_name"],
+                "parser_version": span_payload["parser_version"],
+                "parse_status": span_payload["parse_status"],
+                "quality_flags": span_payload["quality_flags"],
+            }
+        )
+    return {
+        "schema_version": "1.0",
+        "source_id": expected_source_id,
+        "body": normalized.body,
+        "parser_results": parser_results,
+        "parser_name": normalized.parser_name,
+        "parser_version": normalized.parser_version,
+        "status": normalized.status,
+        "quality_flags": list(normalized.quality_flags),
+        "error": normalized.error,
+    }
+
+
+def _normalized_from_payload(
+    payload: Any, *, expected_source_id: str
+) -> _Normalized:
+    if not isinstance(payload, dict):
+        raise ParserResultProtocolError("parser result payload must be an object")
+    expected_fields = {
+        "schema_version",
+        "source_id",
+        "body",
+        "parser_results",
+        "parser_name",
+        "parser_version",
+        "status",
+        "quality_flags",
+        "error",
+    }
+    if set(payload) != expected_fields or payload.get("schema_version") != "1.0":
+        raise ParserResultProtocolError("parser result payload schema is invalid")
+    if payload.get("source_id") != expected_source_id:
+        raise ParserResultProtocolError(
+            "parser result payload source_id does not match the input manifest"
+        )
+    for field in ("body", "parser_name", "parser_version", "status"):
+        if not isinstance(payload[field], str):
+            raise ParserResultProtocolError(f"{field} must be text")
+    if payload["status"] not in {"completed", "partial", "unsupported", "failed"}:
+        raise ParserResultProtocolError("status is invalid")
+    if not isinstance(payload["quality_flags"], list) or any(
+        not isinstance(item, str) for item in payload["quality_flags"]
+    ):
+        raise ParserResultProtocolError("quality_flags must be an array of text")
+    if payload["error"] is not None and not isinstance(payload["error"], str):
+        raise ParserResultProtocolError("error must be text or null")
+    raw_results = payload.get("parser_results")
+    if not isinstance(raw_results, list):
+        raise ParserResultProtocolError("parser_results must be an array")
+    parser_results: list[ParserResult] = []
+    for item in raw_results:
+        if not isinstance(item, dict):
+            raise ParserResultProtocolError("parser result item must be an object")
+        try:
+            parser_result = ParserResult(
+                source_id=item["source_id"],
+                coordinates=EvidenceCoordinates.from_dict(item["coordinates"]),
+                raw_text=item["raw_text"],
+                structured_value=item["structured_value"],
+                parser_name=item["parser_name"],
+                parser_version=item["parser_version"],
+                parse_status=item["parse_status"],
+                quality_flags=item["quality_flags"],
+            )
+        except (KeyError, TypeError, ValueError) as exc:
+            raise ParserResultProtocolError(
+                f"invalid parser result item: {type(exc).__name__}: {str(exc)[:500]}"
+            ) from exc
+        if parser_result.source_id != expected_source_id:
+            raise ParserResultProtocolError(
+                "parser result source_id does not match the input manifest"
+            )
+        parser_results.append(parser_result)
+    try:
+        return _Normalized(
+            body=payload["body"],
+            parser_results=tuple(parser_results),
+            parser_name=payload["parser_name"],
+            parser_version=payload["parser_version"],
+            status=payload["status"],
+            quality_flags=tuple(payload["quality_flags"]),
+            error=payload["error"],
+        )
+    except (TypeError, ValueError) as exc:
+        raise ParserResultProtocolError(
+            f"invalid normalized result: {type(exc).__name__}: {str(exc)[:500]}"
+        ) from exc
+
+
+def _write_parser_envelope(
+    result_path: Path, envelope: dict[str, Any], *, result_max_bytes: int
+) -> None:
+    encoded = json.dumps(
+        envelope,
+        ensure_ascii=False,
+        sort_keys=True,
+        separators=(",", ":"),
+        allow_nan=False,
+    ).encode("utf-8")
+    if envelope.get("ok") and len(encoded) > result_max_bytes:
+        encoded = json.dumps(
+            {
+                "schema_version": "1.0",
+                "ok": False,
+                "error_type": "ParserResultTooLargeError",
+                "error": (
+                    f"parser result is {len(encoded)} bytes; limit is "
+                    f"{result_max_bytes} bytes"
+                ),
+            },
+            sort_keys=True,
+            separators=(",", ":"),
+        ).encode("utf-8")
+    temporary = result_path.with_name(result_path.name + f".{os.getpid()}.tmp")
+    try:
+        temporary.write_bytes(encoded)
+        os.replace(temporary, result_path)
+    finally:
+        temporary.unlink(missing_ok=True)
+
+
+def _terminate_windows_process_tree(pid: int) -> None:
+    try:
+        subprocess.run(
+            ["taskkill.exe", "/PID", str(pid), "/T", "/F"],
+            stdin=subprocess.DEVNULL,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+            creationflags=subprocess.CREATE_NO_WINDOW,
+            timeout=10,
+            check=False,
+        )
+    except (OSError, subprocess.TimeoutExpired):
+        pass
+
+
+def _exit_if_parser_parent_dies(parent_liveness: Any) -> None:
+    try:
+        parent_liveness.recv()
+    except (EOFError, OSError):
+        if os.name == "nt":
+            _terminate_windows_process_tree(os.getpid())
+        os._exit(70)
+
+
+def _parser_process_entry(
+    start_event: Any,
+    result_path_text: str,
+    path_text: str,
+    manifest_payload: dict[str, Any],
+    docling_path_text: str | None,
+    result_max_bytes: int,
+    parent_liveness: Any,
+    parser: Callable[[Path, SourceManifest, Path | None], _Normalized],
+) -> None:
+    if os.name != "nt":
+        try:
+            os.setsid()
+        except OSError:
+            pass
+    start_event.wait()
+    monitor = threading.Thread(
+        target=_exit_if_parser_parent_dies,
+        args=(parent_liveness,),
+        name="source-catalog-parser-parent-watch",
+        daemon=True,
+    )
+    monitor.start()
+    result_path = Path(result_path_text)
+    try:
+        manifest = SourceManifest.from_dict(manifest_payload)
+        normalized = parser(
+            Path(path_text),
+            manifest,
+            Path(docling_path_text) if docling_path_text is not None else None,
+        )
+        envelope = {
+            "schema_version": "1.0",
+            "ok": True,
+            "result": _normalized_to_payload(
+                normalized, expected_source_id=manifest.source_id
+            ),
+        }
+    except BaseException as exc:  # noqa: BLE001 - error is returned to the parent
+        envelope = {
+            "schema_version": "1.0",
+            "ok": False,
+            "error_type": type(exc).__name__,
+            "error": str(exc)[:1000],
+        }
+    _write_parser_envelope(
+        result_path, envelope, result_max_bytes=result_max_bytes
+    )
+
+
+class _WindowsParserJob:
+    """Kill a parser and its descendants if the owning worker handle closes."""
+
+    def __init__(self, process: multiprocessing.Process):
+        self._handle: int | None = None
+        if os.name != "nt":
+            return
+        import ctypes
+        from ctypes import wintypes
+
+        class _IoCounters(ctypes.Structure):
+            _fields_ = [
+                ("ReadOperationCount", ctypes.c_ulonglong),
+                ("WriteOperationCount", ctypes.c_ulonglong),
+                ("OtherOperationCount", ctypes.c_ulonglong),
+                ("ReadTransferCount", ctypes.c_ulonglong),
+                ("WriteTransferCount", ctypes.c_ulonglong),
+                ("OtherTransferCount", ctypes.c_ulonglong),
+            ]
+
+        class _BasicLimitInformation(ctypes.Structure):
+            _fields_ = [
+                ("PerProcessUserTimeLimit", ctypes.c_longlong),
+                ("PerJobUserTimeLimit", ctypes.c_longlong),
+                ("LimitFlags", wintypes.DWORD),
+                ("MinimumWorkingSetSize", ctypes.c_size_t),
+                ("MaximumWorkingSetSize", ctypes.c_size_t),
+                ("ActiveProcessLimit", wintypes.DWORD),
+                ("Affinity", ctypes.c_size_t),
+                ("PriorityClass", wintypes.DWORD),
+                ("SchedulingClass", wintypes.DWORD),
+            ]
+
+        class _ExtendedLimitInformation(ctypes.Structure):
+            _fields_ = [
+                ("BasicLimitInformation", _BasicLimitInformation),
+                ("IoInfo", _IoCounters),
+                ("ProcessMemoryLimit", ctypes.c_size_t),
+                ("JobMemoryLimit", ctypes.c_size_t),
+                ("PeakProcessMemoryUsed", ctypes.c_size_t),
+                ("PeakJobMemoryUsed", ctypes.c_size_t),
+            ]
+
+        kernel32 = ctypes.WinDLL("kernel32", use_last_error=True)
+        kernel32.CreateJobObjectW.argtypes = (wintypes.LPVOID, wintypes.LPCWSTR)
+        kernel32.CreateJobObjectW.restype = wintypes.HANDLE
+        kernel32.SetInformationJobObject.argtypes = (
+            wintypes.HANDLE,
+            ctypes.c_int,
+            wintypes.LPVOID,
+            wintypes.DWORD,
+        )
+        kernel32.SetInformationJobObject.restype = wintypes.BOOL
+        kernel32.AssignProcessToJobObject.argtypes = (
+            wintypes.HANDLE,
+            wintypes.HANDLE,
+        )
+        kernel32.AssignProcessToJobObject.restype = wintypes.BOOL
+        kernel32.CloseHandle.argtypes = (wintypes.HANDLE,)
+        kernel32.CloseHandle.restype = wintypes.BOOL
+
+        handle = kernel32.CreateJobObjectW(None, None)
+        if not handle:
+            raise OSError(ctypes.get_last_error(), "CreateJobObjectW failed")
+        self._kernel32 = kernel32
+        self._handle = int(handle)
+        try:
+            information = _ExtendedLimitInformation()
+            information.BasicLimitInformation.LimitFlags = 0x00002000
+            if not kernel32.SetInformationJobObject(
+                handle,
+                9,
+                ctypes.byref(information),
+                ctypes.sizeof(information),
+            ):
+                raise OSError(
+                    ctypes.get_last_error(), "SetInformationJobObject failed"
+                )
+            process_handle = getattr(process, "_handle", None)
+            if process_handle is None or not kernel32.AssignProcessToJobObject(
+                handle, wintypes.HANDLE(int(process_handle))
+            ):
+                raise OSError(
+                    ctypes.get_last_error(), "AssignProcessToJobObject failed"
+                )
+        except BaseException:
+            self.close()
+            raise
+
+    def close(self) -> None:
+        if self._handle is None:
+            return
+        handle, self._handle = self._handle, None
+        self._kernel32.CloseHandle(handle)
+
+
+def _terminate_parser_process(
+    process: multiprocessing.Process,
+    job: _WindowsParserJob | None,
+    *,
+    grace_seconds: float = 2.0,
+) -> None:
+    if os.name == "nt":
+        if job is not None:
+            job.close()
+        elif process.pid is not None and process.is_alive():
+            _terminate_windows_process_tree(process.pid)
+    elif process.pid is not None and process.is_alive():
+        try:
+            os.killpg(process.pid, signal.SIGTERM)
+        except (OSError, ProcessLookupError):
+            process.terminate()
+    process.join(timeout=grace_seconds)
+    if process.is_alive():
+        if os.name != "nt" and process.pid is not None:
+            try:
+                os.killpg(process.pid, signal.SIGKILL)
+            except (OSError, ProcessLookupError):
+                process.kill()
+        else:
+            process.kill()
+        process.join(timeout=grace_seconds)
+    if process.is_alive():
+        raise ParserProcessError(f"parser process {process.pid} could not be reaped")
+
+
+def _run_parser_isolated(
+    path: Path,
+    manifest: SourceManifest,
+    docling_path: Path | None,
+    *,
+    timeout_seconds: float,
+    heartbeat_interval_seconds: float,
+    result_max_bytes: int,
+    temp_dir: Path,
+    progress: Callable[[dict[str, Any]], None] | None = None,
+    should_stop: Callable[[], bool] | None = None,
+    parser: Callable[[Path, SourceManifest, Path | None], _Normalized] | None = None,
+) -> _Normalized:
+    if timeout_seconds <= 0 or heartbeat_interval_seconds <= 0:
+        raise ValueError("parser timeout and heartbeat interval must be positive")
+    if heartbeat_interval_seconds >= timeout_seconds:
+        raise ValueError("parser heartbeat interval must be less than timeout")
+    if isinstance(result_max_bytes, bool) or result_max_bytes <= 0:
+        raise ValueError("parser result_max_bytes must be positive")
+    parser = _normalize_source if parser is None else parser
+    temp_dir.mkdir(parents=True, exist_ok=True)
+    descriptor, result_name = tempfile.mkstemp(
+        prefix=".parser-result-", suffix=".json", dir=temp_dir
+    )
+    os.close(descriptor)
+    result_path = Path(result_name)
+    result_path.unlink(missing_ok=True)
+    context = multiprocessing.get_context("spawn")
+    start_event = context.Event()
+    parent_liveness_reader, parent_liveness_writer = context.Pipe(duplex=False)
+    process = context.Process(
+        target=_parser_process_entry,
+        args=(
+            start_event,
+            str(result_path),
+            str(path),
+            manifest.to_dict(),
+            str(docling_path) if docling_path is not None else None,
+            result_max_bytes,
+            parent_liveness_reader,
+            parser,
+        ),
+        name="source-catalog-document-parser",
+        daemon=False,
+    )
+    job: _WindowsParserJob | None = None
+    ownership_mode = "process_group"
+    started_at = time.monotonic()
+    try:
+        process.start()
+        parent_liveness_reader.close()
+        if os.name == "nt":
+            try:
+                job = _WindowsParserJob(process)
+                ownership_mode = "windows_job"
+            except OSError:
+                # Some test/desktop hosts place this process in a restrictive job.
+                # The child-side parent monitor remains the ownership fallback.
+                job = None
+                ownership_mode = "parent_monitor"
+        start_event.set()
+
+        def emit_progress() -> None:
+            if progress is not None:
+                progress(
+                    {
+                        "detail": "parser_alive",
+                        "parser_pid": process.pid,
+                        "parser_elapsed_seconds": round(
+                            time.monotonic() - started_at, 3
+                        ),
+                        "parser_timeout_seconds": timeout_seconds,
+                        "parser_ownership": ownership_mode,
+                    }
+                )
+
+        emit_progress()
+        while process.is_alive():
+            if should_stop is not None and should_stop():
+                _terminate_parser_process(process, job)
+                job = None
+                raise NormalizationCancelledError(
+                    f"parser process {process.pid} cancelled by stop request"
+                )
+            elapsed = time.monotonic() - started_at
+            remaining = timeout_seconds - elapsed
+            if remaining <= 0:
+                _terminate_parser_process(process, job)
+                job = None
+                raise NormalizationTimeoutError(
+                    f"parser process {process.pid} exceeded {timeout_seconds}s for {path}"
+                )
+            process.join(timeout=min(heartbeat_interval_seconds, remaining))
+            if process.is_alive():
+                emit_progress()
+        process.join()
+        if job is not None:
+            job.close()
+            job = None
+        if not result_path.is_file():
+            raise ParserProcessError(
+                f"parser process {process.pid} exited {process.exitcode} without a result"
+            )
+        result_size = result_path.stat().st_size
+        if result_size > result_max_bytes + 65_536:
+            raise ParserResultTooLargeError(
+                f"parser envelope is {result_size} bytes; limit is {result_max_bytes}"
+            )
+        try:
+            envelope = json.loads(result_path.read_text(encoding="utf-8"))
+        except (OSError, UnicodeDecodeError, json.JSONDecodeError) as exc:
+            raise ParserResultProtocolError(
+                f"parser result envelope is unreadable: {type(exc).__name__}: {exc}"
+            ) from exc
+        if not isinstance(envelope, dict) or envelope.get("schema_version") != "1.0":
+            raise ParserResultProtocolError("parser result envelope schema is invalid")
+        if envelope.get("ok") is not True:
+            error_type = str(envelope.get("error_type") or "ParserProcessError")
+            message = str(envelope.get("error") or "parser child failed")
+            if error_type == "ParserResultTooLargeError":
+                raise ParserResultTooLargeError(message)
+            if error_type in _UNSUPPORTED_CHILD_ERROR_TYPES or (
+                error_type == "ValueError"
+                and message in _UNSUPPORTED_VALUE_ERROR_MESSAGES
+            ):
+                raise UnsupportedDocumentError(f"{error_type}: {message}")
+            raise ParserProcessError(f"{error_type}: {message}")
+        return _normalized_from_payload(
+            envelope.get("result"), expected_source_id=manifest.source_id
+        )
+    finally:
+        start_event.set()
+        parent_liveness_writer.close()
+        parent_liveness_reader.close()
+        if process.pid is not None and process.is_alive():
+            _terminate_parser_process(process, job)
+            job = None
+        if job is not None:
+            job.close()
+        result_path.unlink(missing_ok=True)
 
 
 def _nfc_lf(text: str) -> str:
@@ -743,6 +1283,25 @@ def _unsupported(path: Path, reason: str) -> _Normalized:
     )
 
 
+def _failed(path: Path, reason: str) -> _Normalized:
+    body = (
+        "## Extraction status\n\n"
+        "This source was cataloged, but the isolated parser did not complete.\n\n"
+        f"- Format: `{path.suffix.lower() or '[none]'}`\n"
+        "- Quality flag: `parser_failed`\n"
+        f"- Reason: {html.escape(reason)}\n"
+    )
+    return _Normalized(
+        body,
+        (),
+        "isolated_parser",
+        "1.0.0",
+        "failed",
+        ("parser_failed",),
+        reason,
+    )
+
+
 def _normalize_source(
     path: Path, manifest: SourceManifest, docling_path: Path | None
 ) -> _Normalized:
@@ -825,27 +1384,48 @@ def normalize_catalog(
     limit: int | None = None,
     force: bool = False,
     progress: Callable[..., None] | None = None,
+    should_stop: Callable[[], bool] | None = None,
+    parser_timeout_seconds: float = 3600,
+    parser_heartbeat_interval_seconds: float = 15,
+    parser_result_max_bytes: int = 268_435_456,
+    retry_limit: int = 3,
+    retry_backoff_seconds: int = 900,
 ) -> ProcessingReport:
     if limit is not None and limit <= 0:
         raise ValueError("limit must be positive")
-    sql = """SELECT d.*,s.content_sha256,s.byte_size,s.mime_type FROM documents d
-        JOIN sources s ON s.source_id=d.primary_source_id"""
-    params: tuple[Any, ...] = ()
+    if retry_limit < 1:
+        raise ValueError("retry_limit must be >= 1")
+    if retry_backoff_seconds < 0:
+        raise ValueError("retry_backoff_seconds must be >= 0")
+    now_epoch = time.time()
+    sql = """SELECT d.*,s.content_sha256,s.byte_size,s.mime_type,
+        existing.metadata_json AS normalization_metadata_json
+        FROM documents d JOIN sources s ON s.source_id=d.primary_source_id
+        LEFT JOIN artifacts existing ON existing.document_id=d.document_id
+        AND existing.artifact_role='normalized' AND existing.generator_name=?
+        AND existing.generator_version=?"""
+    params: tuple[Any, ...] = (_NORMALIZER_NAME, NORMALIZER_VERSION)
     if not force:
-        sql += """ WHERE NOT EXISTS (
-            SELECT 1 FROM artifacts existing
-            WHERE existing.document_id=d.document_id
-            AND existing.artifact_role='normalized'
-            AND existing.generator_name=? AND existing.generator_version=?
+        sql += """ WHERE existing.artifact_id IS NULL OR (
+            existing.status='failed'
+            AND COALESCE(json_extract(existing.metadata_json,'$.terminal'),0)=0
+            AND COALESCE(json_extract(existing.metadata_json,'$.next_retry_epoch'),0)<=?
         )"""
-        params = (_NORMALIZER_NAME, NORMALIZER_VERSION)
-    sql += " ORDER BY d.document_id"
+        params += (now_epoch,)
+    sql += f" ORDER BY {processing_priority_sql('d')}, d.document_id"
     if limit is not None:
         sql += " LIMIT ?"
         params += (limit,)
     documents = store.fetchall(sql, params)
     completed = skipped = partial = unsupported = failed = 0
+    failure_reasons: dict[str, int] = {}
+    last_failure_code: str | None = None
+    last_failed_document_id: str | None = None
+    last_failed_path: str | None = None
     for document_index, document in enumerate(documents, start=1):
+        if should_stop is not None and should_stop():
+            partial += max(0, len(documents) - document_index + 1)
+            break
         source_id = document["primary_source_id"]
         locations = store.fetchall(
             """SELECT l.*,r.path AS root_path,r.priority FROM locations l JOIN roots r ON r.root_id=l.root_id
@@ -888,20 +1468,72 @@ def normalize_catalog(
                 possible = Path(sidecar["absolute_path"])
                 if possible.is_file():
                     docling_path = possible
+        def parser_progress(details: dict[str, Any]) -> None:
+            if progress is not None:
+                progress(
+                    current_path=str(source_path.resolve(strict=False)),
+                    current=document_index,
+                    total=len(documents),
+                    **details,
+                )
+
+        failure_metadata: dict[str, Any] | None = None
         try:
-            normalized = _normalize_source(source_path, manifest, docling_path)
+            normalized = _run_parser_isolated(
+                source_path,
+                manifest,
+                docling_path,
+                timeout_seconds=parser_timeout_seconds,
+                heartbeat_interval_seconds=parser_heartbeat_interval_seconds,
+                result_max_bytes=parser_result_max_bytes,
+                temp_dir=config.catalog_dir / "parser_tmp",
+                progress=parser_progress,
+                should_stop=should_stop,
+            )
             bundle = IngestService(root=Path(primary["root_path"])).ingest(
                 manifest=manifest,
                 parser_results=normalized.parser_results,
             )
-        except Exception as exc:
-            normalized = _unsupported(
-                source_path, f"{type(exc).__name__}: {str(exc)[:500]}"
-            )
+        except NormalizationCancelledError:
+            partial += max(0, len(documents) - document_index + 1)
+            break
+        except UnsupportedDocumentError as exc:
+            normalized = _unsupported(source_path, str(exc)[:500])
             bundle = IngestService(root=Path(primary["root_path"])).ingest(
                 manifest=manifest, parser_results=()
             )
+        except Exception as exc:
+            existing_metadata = json.loads(
+                document["normalization_metadata_json"] or "{}"
+            )
+            next_attempt = int(existing_metadata.get("attempt_count") or 0) + 1
+            terminal = next_attempt >= retry_limit
+            error_code = (
+                DOCUMENT_PARSE_TIMEOUT_CODE
+                if isinstance(exc, NormalizationTimeoutError)
+                else type(exc).__name__
+            )
+            error_text = f"{error_code}: {str(exc)[:500]}"
+            normalized = _failed(source_path, error_text)
+            bundle = IngestService(root=Path(primary["root_path"])).ingest(
+                manifest=manifest, parser_results=()
+            )
+            failure_metadata = {
+                "attempt_count": next_attempt,
+                "terminal": terminal,
+                "terminal_reason": (
+                    f"retry_exhausted:{error_code}" if terminal else None
+                ),
+                "next_retry_epoch": (
+                    None if terminal else now_epoch + retry_backoff_seconds
+                ),
+                "error_code": error_code,
+            }
             failed += 1
+            last_failure_code = error_code
+            last_failed_document_id = document["document_id"]
+            last_failed_path = str(source_path.resolve(strict=False))
+            failure_reasons[error_code] = failure_reasons.get(error_code, 0) + 1
         raw_text = "\n\n".join(
             result.raw_text or "" for result in normalized.parser_results
         )
@@ -980,6 +1612,7 @@ def normalize_catalog(
                             "parser_version": normalized.parser_version,
                             "quality_flags": list(normalized.quality_flags),
                             "span_count": len(bundle.evidence_spans),
+                            **(failure_metadata or {}),
                         }
                     ),
                 ),
@@ -995,7 +1628,16 @@ def normalize_catalog(
         elif normalized.status == "unsupported":
             unsupported += 1
     return ProcessingReport(
-        "normalize", completed, skipped, partial, unsupported, failed
+        "normalize",
+        completed,
+        skipped,
+        partial,
+        unsupported,
+        failed,
+        terminal_reasons=failure_reasons or None,
+        last_failure_code=last_failure_code,
+        last_failed_document_id=last_failed_document_id,
+        last_failed_path=last_failed_path,
     )
 
 
@@ -1009,6 +1651,9 @@ def backfill_text_fingerprints(
     retry_limit: int = 3,
     retry_backoff_seconds: int = 900,
     now_epoch: float | None = None,
+    parser_timeout_seconds: float = 3600,
+    parser_heartbeat_interval_seconds: float = 15,
+    parser_result_max_bytes: int = 268_435_456,
 ) -> ProcessingReport:
     """Compute and persist ``text_fingerprint`` via the persistent state machine.
 
@@ -1088,15 +1733,60 @@ def backfill_text_fingerprints(
                 detail="backfilling text fingerprint",
             )
         manifest = SourceManifest.from_dict(json.loads(locations[0]["manifest_json"]))
+
+        def parser_progress(details: dict[str, Any]) -> None:
+            if progress is not None:
+                progress(
+                    current_path=str(source_path.resolve(strict=False)),
+                    current=document_index,
+                    total=len(batch),
+                    **details,
+                )
+
         try:
-            normalized = _normalize_source(source_path, manifest, None)
+            normalized = _run_parser_isolated(
+                source_path,
+                manifest,
+                None,
+                timeout_seconds=parser_timeout_seconds,
+                heartbeat_interval_seconds=parser_heartbeat_interval_seconds,
+                result_max_bytes=parser_result_max_bytes,
+                temp_dir=config.catalog_dir / "parser_tmp",
+                progress=parser_progress,
+                should_stop=should_stop,
+            )
             raw_text = "\n\n".join(
                 result.raw_text or "" for result in normalized.parser_results
             )
             fingerprint = compute_text_fingerprint(raw_text)
+        except NormalizationCancelledError:
+            partial += max(0, len(batch) - document_index + 1)
+            break
+        except UnsupportedDocumentError as exc:
+            store.record_fingerprint_outcome(
+                document_id=document_id,
+                source_id=source_id,
+                source_sha256=source_sha256,
+                fingerprint=None,
+                status="unsupported_terminal",
+                attempt_count=attempt_count + 1,
+                terminal_reason="unsupported_document",
+                error_code="unsupported_document",
+                error_message=str(exc),
+                updated_at=now_iso,
+            )
+            unsupported += 1
+            terminal_reasons["unsupported_document"] = (
+                terminal_reasons.get("unsupported_document", 0) + 1
+            )
+            continue
         except Exception as exc:
             next_attempt = attempt_count + 1
-            error_code = type(exc).__name__
+            error_code = (
+                DOCUMENT_PARSE_TIMEOUT_CODE
+                if isinstance(exc, NormalizationTimeoutError)
+                else type(exc).__name__
+            )
             if next_attempt >= retry_limit:
                 store.record_fingerprint_outcome(
                     document_id=document_id,

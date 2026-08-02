@@ -70,6 +70,12 @@ class SourceCatalog:
         limit: int | None = None,
         force: bool = False,
         progress: Callable[..., None] | None = None,
+        should_stop: Callable[[], bool] | None = None,
+        parser_timeout_seconds: float = 3600,
+        parser_heartbeat_interval_seconds: float = 15,
+        parser_result_max_bytes: int = 268_435_456,
+        retry_limit: int = 3,
+        retry_backoff_seconds: int = 900,
     ) -> ProcessingReport:
         with CatalogOperationLock(self.config.catalog_dir, operation="normalize"):
             return normalize_catalog(
@@ -78,6 +84,12 @@ class SourceCatalog:
                 limit=limit,
                 force=force,
                 progress=progress,
+                should_stop=should_stop,
+                parser_timeout_seconds=parser_timeout_seconds,
+                parser_heartbeat_interval_seconds=parser_heartbeat_interval_seconds,
+                parser_result_max_bytes=parser_result_max_bytes,
+                retry_limit=retry_limit,
+                retry_backoff_seconds=retry_backoff_seconds,
             )
 
     def backfill_text_fingerprints(
@@ -89,6 +101,9 @@ class SourceCatalog:
         retry_limit: int = 3,
         retry_backoff_seconds: int = 900,
         now_epoch: float | None = None,
+        parser_timeout_seconds: float = 3600,
+        parser_heartbeat_interval_seconds: float = 15,
+        parser_result_max_bytes: int = 268_435_456,
     ) -> ProcessingReport:
         with CatalogOperationLock(
             self.config.catalog_dir, operation="backfill_text_fingerprints"
@@ -102,6 +117,9 @@ class SourceCatalog:
                 retry_limit=retry_limit,
                 retry_backoff_seconds=retry_backoff_seconds,
                 now_epoch=now_epoch,
+                parser_timeout_seconds=parser_timeout_seconds,
+                parser_heartbeat_interval_seconds=parser_heartbeat_interval_seconds,
+                parser_result_max_bytes=parser_result_max_bytes,
             )
 
     def summarize(

@@ -120,9 +120,13 @@ class ScanReport:
     files_hashed: int = 0
     files_reused: int = 0
     files_excluded: int = 0
+    policy_excluded: int = 0
     locations_active: int = 0
     locations_missing: int = 0
     errors: int = 0
+    new_errors: int = 0
+    known_quarantined: int = 0
+    error_details: tuple[dict[str, Any], ...] = ()
     dry_run: bool = False
 
     def to_dict(self) -> dict[str, Any]:
@@ -141,6 +145,9 @@ class ProcessingReport:
     terminal_reasons: dict[str, int] | None = None
     due_retry: int = 0
     terminal: int = 0
+    last_failure_code: str | None = None
+    last_failed_document_id: str | None = None
+    last_failed_path: str | None = None
 
     @property
     def pending(self) -> int:
@@ -154,6 +161,13 @@ class ProcessingReport:
         d = dict(self.__dict__)
         if self.terminal_reasons is None:
             d.pop("terminal_reasons", None)
+        for optional_name in (
+            "last_failure_code",
+            "last_failed_document_id",
+            "last_failed_path",
+        ):
+            if d[optional_name] is None:
+                d.pop(optional_name)
         d["pending"] = self.pending
         return d
 

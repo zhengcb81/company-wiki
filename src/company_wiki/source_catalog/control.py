@@ -14,6 +14,8 @@ import time
 from typing import Any, Callable
 from uuid import uuid4
 
+from .code_identity import source_bundle_fingerprint
+
 
 CONTROL_SCHEMA_VERSION = "1.0"
 RUNTIME_SCHEMA_VERSION = "1.0"
@@ -562,6 +564,10 @@ class WorkerSession:
             "progress_total": 0,
             "progress_percent": None,
             "progress_detail": None,
+            "parser_pid": None,
+            "parser_elapsed_seconds": None,
+            "parser_timeout_seconds": None,
+            "parser_ownership": None,
         }
         if status != "waiting":
             update.update(
@@ -765,6 +771,19 @@ class WorkerController:
         control = self._read_control()
         runtime = _read_json(self.runtime_path)
         live = self._runtime_is_live(runtime)
+        current_code = source_bundle_fingerprint(self.project_root)
+        loaded_fingerprint = (
+            runtime.get("loaded_code_fingerprint") if runtime else None
+        )
+        loaded_error = (
+            runtime.get("loaded_code_fingerprint_error") if runtime else None
+        )
+        current_fingerprint = current_code["fingerprint"]
+        fingerprint_errors = [
+            str(value)
+            for value in (loaded_error, current_code["error"])
+            if value
+        ]
         result: dict[str, Any] = {
             "schema_version": "1.0",
             "status_generated_at": self.clock(),
@@ -773,6 +792,16 @@ class WorkerController:
             "control_path": str(self.control_path),
             "runtime_path": str(self.runtime_path),
             "process_inventory": self._inventory(),
+            "loaded_code_fingerprint": loaded_fingerprint,
+            "current_code_fingerprint": current_fingerprint,
+            "code_match": (
+                loaded_fingerprint == current_fingerprint
+                if loaded_fingerprint and current_fingerprint
+                else None
+            ),
+            "code_fingerprint_error": (
+                "; ".join(fingerprint_errors) if fingerprint_errors else None
+            ),
         }
         if runtime:
             stale = not live
@@ -815,6 +844,14 @@ class WorkerController:
                         "progress_total": runtime.get("progress_total", 0),
                         "progress_percent": runtime.get("progress_percent"),
                         "progress_detail": runtime.get("progress_detail"),
+                        "parser_pid": runtime.get("parser_pid"),
+                        "parser_elapsed_seconds": runtime.get(
+                            "parser_elapsed_seconds"
+                        ),
+                        "parser_timeout_seconds": runtime.get(
+                            "parser_timeout_seconds"
+                        ),
+                        "parser_ownership": runtime.get("parser_ownership"),
                         "cycle_productive": runtime.get("cycle_productive"),
                         "next_wait_seconds": runtime.get("next_wait_seconds"),
                         "next_wake_reason": runtime.get("next_wake_reason"),
@@ -830,6 +867,10 @@ class WorkerController:
                         "progress_total": 0,
                         "progress_percent": None,
                         "progress_detail": None,
+                        "parser_pid": None,
+                        "parser_elapsed_seconds": None,
+                        "parser_timeout_seconds": None,
+                        "parser_ownership": None,
                         "cycle_productive": None,
                         "next_wait_seconds": None,
                         "next_wake_reason": None,

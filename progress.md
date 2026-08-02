@@ -1,5 +1,282 @@
 # Progress Log
 
+## 2026-08-02 WR-10.15 Gate D 运行评测与最终验收 — 完成，verdict=accepted
+
+- **第一轮 rescan（10:03:17）**：policy 82（仅 82 个原件，sidecar 未重生）、excluded 460（541-81）、errors=1 既有 quarantine（空 Excel，非本 WU 新增）、new=0。
+- **10 分钟观察（10:08-10:17，10 样本）**：PID 3316 全程唯一稳定；supervisor 23496；Code MATCH `eb10131da6f1`；heartbeat 持续更新（age 0.8-36.9s）；Markdown pending 20772→20769 持续推进；failed/blocked 无增长；parser PID 正常轮换（parent_monitor 属主）。
+- **第二轮 rescan（11:05:25）**：与第一轮完全一致（policy 82、0 重生、errors 无新增）——两轮 rescan 门禁通过。
+- **优先级 canary（隔离临时目录）**：7 类文件 scan 后 fingerprint 批序精确匹配 `prospectus→annual→semi→quarterly→IR→call→broker`（10/20/21/22/30/40/50），临时目录已清理。
+- **最终验收 receipt**：`artifacts/gates/wr1015-final-acceptance-20260802.json`，verdict=`accepted`；回滚资产（snapshot JSONL + archive manifest + restore_files/restore_database）完整记录。
+- **task_plan.md** WR-10.15 状态更新为 `accepted`。WR-10.13 的 fingerprint terminal、最终 fingerprint pilot、>900 秒 slow canary、next-login 仍为独立 pending 门禁。
+
+## 2026-08-02 WR-10.15 Gate C 生产维护窗口 — 完成（apply 已执行，Gate D 观察中）
+
+- **pause**：worker 21768 persistent pause（launcher `reason=persistent_pause`），无残留进程，单 writer 条件满足。
+- **生产 dry-run**（只读）：82 原件全部 reject（IB statements 个人结单/天风选股表/投资组合等，均 `no_allowed_category_evidence`）；恒等式 `163 = 81 sidecars + 82 originals` ✓；`original_delete_count=0`；1 共享 document（3 个目标外 active locations）保留；token 已存 receipt。
+- **apply（第一次）**：DB 163 locations / 162 documents / 162 sources 删除；81 sidecar 文件删除；40 artifact 文件删除；134 文件存档（81 sidecar + 53 artifact）；原件 0 删；FK=0；孤儿 artifacts=0。**但 receipt status=failed**——13 个 unlink `FileNotFoundError` 系 artifacts 表重复路径行（同文件多行引用，如两个 `10f69.../normalized.md`）导致的假阴性：同一文件在 `to_archive` 出现两次，第一次 unlink 成功第二次报错。apply() 按门禁抛 RuntimeError 保持 worker paused。
+- **修复**：`to_archive` 改为按 resolved path 去重的 dict；新增合同测试（重复 artifact 路径只存档/删除一次，仍 completed）。focused 22P 全绿。
+- **第二次 dry-run + apply（幂等验证）**：0 sidecars / 0 locations / 0 orphans；apply `status=completed`、全 0 删除、`originals_unchanged=True`、FK=0、无 filesystem_errors。
+- **重建 index/export**：18s 完成；目标目录路径（`重点关注/` 前缀）在 documents/locations/artifacts csv 与 index.md 中 **0 命中**（此前的"重点关注"命中均为研报标题词语，非目标路径）。
+- **archive 抽样**：manifest 134 成员，首尾各 1 + 随机 5 读回 SHA 全部匹配（7/7）。
+- **resume**：worker PID 3316 / supervisor 23496；**Code MATCH**（loaded=current=`eb10131da6f1`）；heartbeat 12.2s；新 scan 已启动（admission policy 163 在生产 scan 生效）。
+- 待 Gate D：等本轮 scan 完成后确认 rejected 项不重生、pending/completed 推进、10 分钟观察、优先级 canary。
+
+## 2026-08-02 WR-10.15 回滚门禁改为轻量全量快照（用户复核决策）
+
+- 用户质疑"为什么需要 24.3GB 整库备份"并要求量化"可能被误删的文件到底多大"。只读测量生产库：81 sidecar（~几十 KB）+ 53 artifact 文件（0.15 MB）+ DB 受影响行（163 locations/162 documents/163 fingerprint/60 spans/2 failures/0 assertions + 关联 sources/entities）——**全部被删内容 <1MB**。
+- 结论：24.3GB 整库 backup 是深审过度保守。用户指示"占地不多就全量备份也可以"→ 采用轻量全量快照：文件字节 archive（manifest+SHA）+ DB 受影响行 JSONL（表名/主键/完整字段）+ 单事务 apply（中途失败自动回滚）+ commit 后撤销用 `restore_files()` / `restore_database()` 重建。
+- 代码变更：删除 `_verify_database_backup()` 与 apply 必填 `database_backup_path`；`apply()` 只要求 `confirmation_token/snapshot_path/receipt_path/archive_dir`；CLI `--apply` 移除 `--database-backup-path` 要求；新增 `restore_database()`（FK 安全逆序重建：entities→sources→documents→child rows→locations，INSERT OR IGNORE + foreign_key_check 校验）。测试改为验证 restore_database 后行数完全恢复、FK=0。focused `21 passed`。
+- 教训（用户反馈）：大体积操作前先量化实际数据量，不盲目执行计划文本。已写入 memory（quantify-before-large-ops）。
+- 已清理 D 盘 24.3GB×2 临时副本（恢复 72GB 可用）。Gate B 不再需要整库副本演练：dry-run/apply/restore/两次 rescan 已由 focused 21 项合同 + 全量 387 项覆盖，生产 dry-run 步骤直接复用 apply 的 preview（只读零写）。
+- 下一步：Gate A 全量复跑（验证 apply 签名变更无回归）→ Gate C 生产维护窗口。
+
+## 2026-08-01 WR-10.15 Preflight 1：候选代码审查 + 5 个 blocker 修复 — 完成（Gate A 全量进行中）
+
+- 逐行审查 admission.py 信号顺序、scanner.py directory-root 配对、focus_cleanup.py apply、队列 SQL（normalizer/store/summarizer/llm_summarizer 均用 `processing_priority_sql`，非 focus 目录保持既有准入）、cli.py focus-cleanup、worker/control/lock（WR-10.11-10.14 候选，非本 WU 范围）。
+- **Blocker 1 修复**：`regulatory_filing` 从无条件 sidecar allowlist 移除；显式 kind=regulatory_filing 必须靠 form_type（10-K→annual）或 title 财报证据（财务报告→regulatory_filing）二次准入，否则 fall through 到证据分析并拒绝。
+- **Blocker 2 修复**：新增 `_ANNOUNCEMENT_RE`（公告/问询函/监管函/权益变动/减持公告/质押公告/处罚决定/立案调查）与 `_COMMENTARY_RE`（年报点评/半年报解读/季报复盘/财报摘要等），顺序：deny → prospectus → call → strict broker → commentary fail-closed → forms → semi/quarterly/annual → financial → IR → reject。commentary 无严格券商证据不再落入财报关键词。
+- **Blocker 3 修复**：scanner.py directory-root 的 sidecar 配对与 admission 仅对 `dropbox_stock/重点关注[/]` 子树生效（`relative_dir` startswith 判断）；其他目录（含 Dropbox/Stock 其他 24 目录、3234 个 sidecar）恢复 legacy 行为——每个支持文件独立 original_primary、metadata={}、无配对。焦点目录内配对+准入逻辑不变。
+- **Blocker 4 修复**：focus_cleanup.py apply 前将待删 sidecar/derived 文件字节复制到 archive_dir（默认 `catalog_dir/focus_cleanup_archive/<receipt-stem>`），写 manifest.json（schema_version、database_backup{path/sha256/size}、files[original_path/relative_path/kind/size/mtime_ns/content_sha256/archive_member]）；删除只发生在存档成功后。新增 `restore_files(manifest_path, dest_root)` 按 SHA 校验逐字节恢复。
+- **Blocker 5 修复**：新增 `_verify_database_backup()`（只读连接 + `PRAGMA quick_check=ok` + sha256/size）；`apply()` 新增必填 `database_backup_path` 与可选 `archive_dir`；cli.py `--apply` 现在要求 `--database-backup-path`。无有效 backup 不得 apply。
+- RED→GREEN：先写 8 条新合同（regulatory_filing 二次证据、公告/监管负例、commentary fail-closed、commentary+券商→broker、sidecar 配对作用域、backup 门禁、archive/restore、既有 apply 调用补 backup），8 RED 确认后实现，focused `22 passed in 26.66s`；扩展回归（classification/pipeline/fingerprint/semantic/export/duplicate）`62 passed in 21.85s`。
+- 静态门禁：Ruff 全绿、compileall OK、strict UTF-8/NUL/trailing whitespace OK、scoped diff-check OK（仅既有 LF→CRLF 提示）。
+- Gate A 全量 `test_source_catalog_*.py` 已在后台运行（artifacts/gates/gate-a-full-20260801.log）。
+
+## 2026-08-01 WR-10.15 Preflight 0：现场冻结与归属 — 完成
+
+- 用户指令“从头开始一项一项的实施”，实施冻结解除，从 Preflight 0 开始逐项执行。
+- 执行身份：Claude Code，2026-08-01 23:08 GMT，cwd=`C:\Users\郑曾波\Projects\company-wiki`，branch=`phase-15-filing-fixes`，HEAD=`70f1f4c`。
+- 作用域 diff：12 个修改文件（control/cli/llm_summarizer/lock/models/normalizer/service/store/summarizer/worker/__init__/control.ps1，+1783/-130）+ 4 个未跟踪新文件（admission/code_identity/focus_cleanup/llm_failure_policy）+ 2 个未跟踪测试。**关键发现：HEAD 的 scanner.py 已提交 `from .admission import`，但 admission.py 从未入库——git 层面 HEAD 自身不完整，working tree 整体才是候选 blob，审查必须以全树为单位。**
+- 运行态：**worker 已处于 stopped**（launcher `reason=control_stop`、exit=2，最后事件 session_opened pid 19668；last scan 22:28:24 completed、last export 21:59:04）。无任何 source_catalog 进程存活 → 无并发 writer、无 parser child，operation lock absent。队列：documents 23726（active 23534/upstream rejected 189/quarantined 1）、Markdown pending 20926/completed 2699/blocked 1（quarantined）、LLM pending 2222/completed 446/permanent 131、DB 24.5GB、schema 1.2.0。
+- 目录重盘点：242 文件 = 82 原件 + 81 `.source.json` + 79 `.lnk`（顶层 40/39/79；`IB statements/` 5/5；`水晶苍蝇拍点评/` 37/37）+ 2 子目录，与 2026-08-01 早盘快照一致。恒等式 `total_files = originals + sidecars + lnk/unsupported` ✓。
+- DB 只读基线：163 目标 locations 全部 `active/original_primary`（=plan 快照）；162 误标 `broker_research` + 1 `other`；0 sidecar location（sidecar 被当作独立 document 收录）；163 distinct sources；**1 个共享 document**（`...c195a3f6...` 公司研究_天风证券）目标外 3 个 active locations 必须保留；schema_version=1.2.0。
+- Preflight 0.3 并发检查：进程清单仅本会话自身 bash/powershell，无 Claude/Codex/pytest/临时 worker 持有 DB。
+- 结论：现场干净、无并发 writer、数字与旧快照一致；下一实施者可进入 Preflight 1 候选代码审查与 blocker 修复。
+
+## 2026-08-01 WR-10.15 planning-only 冻结与交接
+
+- 用户在 Source Catalog 全量回归运行期间将任务改为“只做计划，不在这里实施”。已立即停止新增实施；仅等待已启动 pytest 正常退出，避免遗留测试进程。
+- 全量结果：`378 passed in 163.61s`。该结果与此前 15 项新合同、136 项扩展回归、Ruff/compileall/scoped diff-check 一并记录为候选证据，不是生产验收。
+- 用户最新指令后未修改任何源码/测试/配置/运行态/生产数据；本次只更新三份 planning-with-files 文档。
+- 当前生产清理明确未执行：未 dry-run、未 pause/reload worker、未删除 81 个 sidecar、未删除 163 个目标 DB locations、未删 derived、未重建 index/export。
+- 深审新增 5 个 rollout blockers：generic regulatory filing 过宽；commentary 可能误入财报；generic sidecar 配对扩大作用域；文件字节回滚缺失；24.5GB DB 缺 full online backup/restore 门禁。
+- 已将下一实施者的 Preflight、RED→GREEN、生产副本、生产维护、运行评测、验收与硬回滚条件写入 `task_plan.md`。下一步必须由新的实施任务从 Preflight 0 开始，不能直接 apply。
+
+## 2026-08-01 WR-10.15 Step 0：只读目录盘点与计划固化
+
+- 用户新增要求：`Dropbox\Stock\重点关注` 只处理五类来源并按招股书、财报、IR、电话会、严格券商研报排序；其余已处理项目删除 `.source` sidecar 并移出 index。
+- 已完成只读文件盘点：82 原件、81 `.source.json`、79 `.lnk`；没有 `.source` 裸扩展名。抽样和完整文件名列表确认大量不合格个人研究材料。
+- 已核对 sidecar：UTF-8 JSON 可解析，全部只有 `market/security_id/source_title`，没有文档类别证据。第一次未指定 PowerShell `-Encoding UTF8` 导致 14 个中文 JSON 假解析错误；改为 UTF-8 后消除，未修改文件。
+- CodeGraph 定位 scanner 入口 `_enumerate_root`、normalizer 入口 `normalize_catalog`、store schema 和 worker/service；现有 normalize 候选按 `document_id`，尚未体现用户优先级。
+- 已建立 WR-10.15 详细实施、限制、RED 测试、dry-run、共享引用保护和生产验收计划。尚未修改源码、数据库、sidecar、worker 或 index。
+- 下一步：只读 SQL 固化目标 DB 行和共享引用，再写 RED tests；在准入规则部署前禁止执行生产删除。
+- 已完成生产只读 SQL：163 locations/documents/sources、52 artifacts、58 spans、163 fingerprints、2 LLM failures；162 条 location 被误标为 broker research（含全部 sidecar），另 1 条 original 为 other。
+- 共享引用审计发现 1 个 document 在目标外有 3 个 active locations，故不能级联删除；清理算法必须按 document/source 两层重新判断孤儿性。
+- 下一步：读取 scanner 分类与枚举实现、候选队列 SQL 和现有 retire/cleanup 模式，建立 RED contracts 后再修改代码。
+- 首批 admission RED 因 `ModuleNotFoundError: admission` 正确失败；首个合并补丁因 `normalizer.py` import 上下文漂移被 `apply_patch` 整体拒绝，确认无半成品后拆分落地。
+- 新增 `admission.py`、scanner path-scoped 前置准入/generic sidecar 配对、`ScanReport.policy_excluded`，并将统一 priority SQL 接入 normalize、fingerprint、extractive summary、LLM summary。
+- admission focused：`7 passed`。cleanup RED 因 `ModuleNotFoundError: focus_cleanup` 正确失败；实现确认 token、snapshot、operation lock、paused-worker 门禁、引用保护和派生文件清理后 `3 passed`。
+- 分类/准入/清理聚焦回归：`37 passed in 7.86s`。尚未跑全量；下一步补三条队列与 CLI/重扫合同。
+- 补齐 fingerprint、extractive summary、LLM summary、连续两次重扫、控制面板 policy-excluded 和 CLI 默认 dry-run/guard 合同；新测试集合 `15 passed`。
+- Ruff、compileall、scoped `git diff --check` 通过；diff check 仅报告仓库既有 LF→CRLF 提示。ScanReport 仅用关键字构造，没有位置参数兼容风险。
+- 扩展 Source Catalog 回归 `136 passed in 77.24s`，覆盖 pipeline、worker、control、export、schema migration 和 fingerprint。下一步运行 Source Catalog 全量合同。
+
+## 2026-08-01 20:30 只读进展复核
+
+- control status：RUNNING，worker/supervisor=`19668/19388`，code MATCH `d423c7dd24c6`，heartbeat age 5.1s，parse timeouts 0；stage=summarizing。
+- 最终 scan 20:29:40 completed_with_errors，唯一错误 new=0/known quarantine=1。Markdown pending 21013、completed 2615、unsupported 15、failed/retryable/terminal 全 0；corrupt-XLS normalized 生产重分类 PASS。
+- 第一次精确 fingerprint SQL 错用 `last_error_message`，实际列为 `last_error_message_redacted`；读取 schema 后更正。最终查询显示 normalized unsupported，但 fingerprint 仍 pending/attempt 0，未写库。
+- 下一步保持只读：等本 cycle 进入 fingerprinting 后复查该 document state；不要为加速而手工 UPDATE 或重启 worker。
+
+## 2026-08-01 暂停检查点：最终 parser 修复、生产 pilot 与当前运行状态
+
+- 受控停止旧 `8280/15192` 后，24.5GB DB baseline SHA=`0346a665928d4e2ad592d8847787b8f1287652d46ff2f86331292e41a1fdfa0f`；paused `PRAGMA quick_check=ok`、foreign key violations=0。0 字节 quarantine 原件 length=0、mtime=`2025-06-22T20:42:54Z`，未修改。
+- 第一轮 reload `16732/19584`：Python code MATCH `a9b11323d894...`；launcher frozen/current 三 hash 全 MATCH；scan 完成为 new=0/known=1，control 显示 parser PID/elapsed/3600s timeout/parent_monitor。
+- 生产 pilot PASS：receipt `wr-10-13-post-reload-30m-20260801T182713Z.json`，SHA=`cbd791e4971f934843798398f051b4a53d531dfade42ed91c80ced6382c873c6`，30 samples、39.2m；pending/completed/artifacts `-43/+40/+44`，worker/supervisor PIDs=`16732/19584`，parse timeout delta=0，same-path max=87.1s，DB quick check=ok（488.8s），raw/StockWiki unchanged。
+- 深审新增 RED：严格 payload 4F、descendant parent-crash 1F、corrupt XLS retry 1F；timeout-tree 初次 0.5s fixture 尚未写 descendant PID，改为 Windows spawn 可容忍的 5s。产品修复后 parser/pipeline 19P，新增 worker timeout persistence 后 focused 20P。
+- 生产 SQL 审计确认唯一 retryable Markdown 行是损坏 `.xls`，attempt=2、error=`ParserProcessError: XLRDError...Expected BOF record`。前两次 Python `-c` SQL 因 PowerShell 引号破坏失败，第三次列名误用 `l.status`；改用 parameterized single-line SQL 和实际 `location_status` 后得到结果，未写 DB。
+- 相关宽回归 `159 passed in 98.58s`。Source Catalog full 首轮 `362 passed, 1 failed`，唯一是旧 corrupt-PDF 合同期待双计 `failed=1`；更新为 `unsupported=1/failed=0` 且保留 immutable/no-span stub 后 focused 1P，第二轮 full `363 passed in 166.26s`。
+- 最终静态门禁：targeted Ruff PASS、compileall PASS、20 文件 strict UTF-8/NUL/trailing whitespace PASS、scoped `git diff --check` PASS（仅既有 LF→CRLF warning）。
+- 最终 reload 为 worker/supervisor `19668/19388`，loaded/current=`d423c7dd24c6...` MATCH，parse timeout total=0。暂停请求到达时 worker 仍在首轮 scanning，runtime 路径持续推进至 `companies/金达莱/raw`；只停止了 Codex 的轮询 PID 9688，后台 worker 保持运行。
+- 待续第一步：不要重启。先只读等 stage 离开 scanning，查询 corrupt-XLS normalized/fingerprint state 是否变为 unsupported terminal、Markdown retryable 是否从 1 归零；再跑 final-fingerprint 短/长 pilot。>900s slow canary 和 next-login 必须继续保持 pending。
+
+## 2026-08-01 WR-10.13 parser isolation 自动化候选
+
+- 修复 pilot 测试中误放到 code-match 用例的 `timed_out` 断言；pilot+parser 文件 `30 passed`，随后补独立 fast-success 合同使 parser liveness 直接矩阵达到 12 类。
+- parser isolation 已接入 normalize 与 fingerprint；新增 config 1.3 超时/heartbeat/IPC/retry 参数，worker 透传，store 区分 retryable/terminal，control/PowerShell/pilot 展示 parser 与 timeout 状态。
+- 父进程崩溃孤儿合同已通过；Windows Job assignment 受限时使用 pipe parent monitor，stop/timeout 后无 active child 或 result temp 残留。
+- targeted Ruff 全绿；PowerShell worker/control/logon 三脚本 parser 全绿。宽回归首轮 `150 passed, 1 failed`，唯一失败是旧 control 测试未预期额外 `parser_alive`；更新合同后 focused `1 passed`。
+- launcher hash 改为 supervisor 启动时冻结；WR-10.14 代码进入 automated candidate。尚未重载生产 PID 8280，生产 MATCH/slow canary/post-reload pilot/next-login 继续 pending。
+- 文档+测试首次组合 patch 因 WR-10.13 回滚行上下文少一个空格而整体未应用；拆为精确小 patch 后完成，未覆盖其他计划内容。
+
+## 2026-08-01 WR-10.12 candidate 与 WR-10.13 启动
+
+- WR-10.13 隔离执行器首轮 GREEN 遇到 7F：Codex Windows Job 禁止再次 assignment，清理又错误调用不存在的 `os.killpg`。已终止精确 pytest 父子进程树，修为 Windows job 可用则用、受限则 parent-monitor fallback，并修正 Windows terminate 分支；后续 fixture 又补齐合法 paragraph locator、放宽 spawn 成功用例 deadline。最终 7 条 Phase A 合同 `7 passed in 11.85s`，无残留 parser result 临时文件或 active child。
+- WR-10.13 Phase A 新增 7 条 parser liveness 合同；首次运行在 collection 阶段按预期 RED，缺少 `NormalizationCancelledError` 等隔离执行 API，exit 1。该 RED 证明测试尚未误走现有同步 `_normalize_source()`。
+- 恢复后确认被截断的 legacy scan fallback 补丁已写入，但错误地插入 `classified_failures` 列表推导式，导致 `store.py:590 SyntaxError`；第一次组合 apply_patch 因上下文不匹配未修改文件，随后拆为删除错误块、在 `last_scan` 构造后插入两个补丁，`py_compile` 恢复通过。
+- focused legacy fallback + cold-start 为 `2 passed`；pipeline/pilot/cold-start/code-identity 完整相关集合为 `43 passed in 14.33s`。
+- Source Catalog 全量通过：`341 passed in 131.47s`，exit 0。运行期间没有重启、暂停或写生产数据库。
+- 真实 `source_catalog_control.ps1 -Action status` exit 0、5.4 秒完成；显示 worker/supervisor=`8280/15192`、pending/completed/artifacts=`21104/2528/5544`、当前 converting=1，scan 的唯一空文件路径与原因可见，blocked 分解为 quarantined=1。
+- 当前旧 worker 的 loaded fingerprint 缺失，control 正确显示 UNKNOWN；WR-10.14 Python bundle 已是 candidate，但 launcher fingerprint 与生产 MATCH 尚未完成。
+- `task_plan.md` Current Phase 已推进到 `WR-10.13 Phase A parser liveness RED`；WR-10.12 保持 candidate，直到受控重载后的新 scan 证明 `new=0/known=1` 且原件元数据不变。Step 6 下一次真实登录继续未完成。
+
+## 2026-08-01 WR-10.9 逐步实施恢复
+
+- 用户明确要求按现有计划逐步实施，故解除本轮 WR-10.9 的 Codex 实施冻结。
+- Step 5 attempt 2 已用独立隐藏进程启动 30 分钟生产观察，PID `18532`，启动 UTC `2026-08-01T14:47:19.4049363Z`；在 10.8 分钟检查点仍存活，stdout/stderr 均为空，最终 receipt 尚未生成。
+- 观察脚本只读审计发现：worker PID 跨样本变化已有硬失败；supervisor 仅有 count 硬门禁，没有 PID 稳定性硬门禁。已把人工验收要求和后续 RED→GREEN 合同补入计划，当前 pilot 结束时必须人工核对 `production_supervisor_pids` 只有一个值。
+- Step 5 中途生产只读快照：supervisor/worker=`15192/14632`、heartbeat=`2.2s`、Markdown pending/completed/artifacts=`21139/2493/5508`；队列继续前进，但 scheduler 仍显示旧 PID `1784` 的 lock error，而最新 LLM report 是 global 429。已形成 WR-10.10 的生产 RED 证据；未修改 worker/store/control。
+- 进一步只读 SQL 发现生产 LLM failure 按 scope 分组只有 `document=131`，而源码 report 会把这些永久错误称为 `permanent_document`。定位到 `_record_document_failure()` 硬编码 scope；已扩充 WR-10.10 为持久化 RED、legacy mismatch 展示和单独受控数据修正门禁，仍未写生产 DB。
+- WR-10.9 Step 5 attempt 2 完成并生成 FAIL receipt：`throughput_below_required_threshold`，pending/completed/artifact delta=`0/0/0`；其他生命周期与安全门禁通过。receipt SHA `e9686d98c2029c51f0b04518d258a23fd6debaccf009da8dd2923c6ddbf663da`，Step 5 保持未完成。
+- 事后 journal 审计定位 operation-lock PID reuse：旧 lock PID 1784 已变为晚于锁创建的 `svchost.exe`，但 `_pid_is_live()` 把它误认 live，worker 每 30 秒失败、supervisor 因心跳新鲜不重启。已把 WR-10.11 设为当前优先级并写入详细 RED/兼容/竞争/验收门禁。
+- 已保存 stale lock SHA/timing 后用 `apply_patch` 删除单个 `.source_catalog/operation.lock`；第一次 PowerShell Remove-Item 被安全策略拒绝且未改文件。删除后同一 worker PID 14632 取得新 normalize lock，supervisor仍15192，无 duplicate/restart。下一步先写 identity RED 测试，再改 `lock.py`。
+- WR-10.11 首轮选择集 6 条全部 RED，分别证明缺少 creation identity、PID reuse 假活、legacy 误判、status 缺字段、supervisor PID 漂移误通过和 repeated failure 归因不足；实现后 6 条全部 GREEN，operation-lock/pilot 合同最终 25 passed。
+- operation lock 已加入跨平台 process identity、Windows protected-process CIM fallback、legacy mtime 判定和 token 竞争复核；store/control 显示 identity。pilot 已采集 cycle/error/wake/lock 字段并硬拒绝 worker 或 supervisor PID 漂移与重复 cycle failure。
+- WR-10.10 三条核心 RED 已保存并修复：成功本地 cycle 不再保留旧 cycle error、permanent error 精确写 DB scope、status 分列 retryable/permanent/mismatch。CLI/control 兼容旧 worker state，并单独展示 global 429。
+- 分文件回归：lock+pilot 25P、worker 30P、control 29P、cold-start 10P、background 8P、pipeline 13P；全量 `test_source_catalog_*.py` 为 `334 passed in 125.49s`。最终 Ruff、compileall、PowerShell parser、UTF-8/NUL/whitespace、scoped diff-check 全绿，无残留 pytest 进程。
+- 生产 supervisor 15192 自始未变；worker 14632 因 heartbeat age 超过既有 900 秒 watchdog 自然重启为 8280。新 worker 的 operation lock identity=`matched`；最新 control status 为 pending/completed/artifacts=`21133/2499/5514`，相对修复前 `-6/+6/+6`，当前 stage=normalizing。
+- post-fix Step 5 已以独立隐藏进程 PID `2956` 启动，UTC `2026-08-01T16:20:21Z`，30 分钟/300 秒采样，要求 progress+supervisor；receipt 目标 `artifacts/gates/source-catalog-bg/wr-10-11-post-fix-30m-20260801T162020Z.json`。receipt 与 SHA 未生成前 Step 5 保持未完成。
+- pilot 约 4 分钟检查点：PID 2956 存活，stdout/stderr 均 0 bytes，receipt 尚未生成，符合首个 5 分钟采样前预期。
+- 追查 control 的 scan errors=1：只读 DB 查询定位到 `dropbox_stock` 的 0 字节 `Product_Revenue_Forecast_Model.xlsx`，location 已 quarantined；未修改该文件或生产 DB。新增 WR-10.12 详细计划，当前不污染 pilot。
+- 工具错误记录：一次 `rg tests/contract/test_source_catalog_*.py` 在 PowerShell/Windows 下因 glob 不展开返回 path error，后改用 CodeGraph files 得到精确文件名；两次内联 Python SQL 因 PowerShell/native quoting 失败，随后改用 base64 编码代码参数成功。未重复原失败命令，未产生文件或数据库写入。
+- pilot 8.0 分钟检查点：PID 2956 alive、stderr 0；生产 worker/supervisor 仍 `8280/15192`。当前 PDF path elapsed/heartbeat age 约 160 秒，低于 900 秒 long-document 门槛，last cycle status=completed。
+- 代码二次审查新增两个未覆盖 RED：operation stale takeover 的 read→unlink TOCTOU，以及成功但 `summarize_llm=None` 时 stale cycle error 不清。已写入 WR-10.11 step 12 / WR-10.10 step 12；pilot 期间不启动 pytest 或修改正在采样的运行口径。
+- launcher 事件复核确认 14632 不是普通自然退出：`child_unresponsive` at `15:57:49Z`，heartbeat age 903.0s > watchdog 900s，随后 `restarting` exit=-1、8280 启动。normalizer/fingerprint 源码确认每文档只有开始 progress，解析期没有 heartbeat。
+- 新增 WR-10.13 高优先级计划：父 worker heartbeat、parser 短命隔离进程、独立 document timeout、有界 normalize/fingerprint failure state、Windows descendant ownership、slow canary。当前 pilot 继续运行，但其 PASS 不能关闭该长文档风险。
+- 版本真值审查：`_code_version()` 仅返回 Git HEAD short hash，dirty 修复不会改变 runtime version，无法证明 reload。新增 WR-10.14 loaded/current source bundle fingerprint、control mismatch 和部署 receipt 门禁。
+- 只读 DB 核对 Markdown blocked=1：唯一无 primary source 的 document 为 `Product_Revenue_Forecast_Model`，status=quarantined，与 scan 的空文件是同一对象，不是额外 worker 阻塞。WR-10.12 验收增加 blocked 原因分解。
+- 30 分钟采样循环结束后写入两个新 RED。首次 lock RED 的 teardown 先等 B 退出再释放 B，导致测试自身等待错误；调整清理顺序后准确 RED 为 `owner_b_entered_during_takeover=True`。worker no-summary RED 准确保留旧 cycle error。
+- 实施 OS acquisition mutex + no-summary 清错后，两条 GREEN；`test_source_catalog_operation_lock.py + test_source_catalog_worker.py` 全文件 `40 passed in 9.71s`。该测试在 pilot 采样完成后运行，未污染 6 个生产样本；pilot DB quick_check 仍独立运行。
+- WR-10.14 loaded/current fingerprint 两条 RED 均为缺字段，新增 `code_identity.py`、worker starting 固化、controller current compare 后 GREEN；helper+worker+control+PowerShell focused `4 passed`。首次多文件 patch 因 worker import 上下文不匹配整体拒绝、无文件变化，拆小后成功。
+- 真实 control 已诚实显示 `Code: UNKNOWN | loaded unknown | current 049aa82dbfc8`，因为当前 PID 8280 启动于 fingerprint 实施前；没有把旧进程误报 MATCH。
+- post-fix pilot PID 2956 完成，receipt PASS，SHA `b0300d5f8819d51de90cfd8775cfedf8e7449ebbadaea8393f66ab194aac103b`。44.1m/6 samples；PID `8280/15192` 稳定，pending `21130→21111`、completed `2502→2520`、artifact `5517→5537`，DB quick_check=ok 806.3s，raw/StockWiki unchanged。WR-10.9 Step 5 已勾选。
+- Current Phase 转入 WR-10.12 scan quarantine observability；不重启生产、不改空 Excel 原件。
+- 已重读 planning-with-files 技能、顶部 Current Phase、WR-10.7/10.8/10.9 和审查交接协议；确认现有代码处于 candidate，首个未完成动作是 Step 1 基线重封存，而不是重复改写启动代码。
+- 当前状态更新为 `in_progress / WR-10.9 Step 1 baseline refresh`；下一步只读保存 Git、启动项、进程身份、队列和心跳，再进入静态代码复核。
+- 限制继续有效：保护 Claude Code 的并发修改；不主动重启生产；真实下一次登录仍是不可伪造的最终硬门禁。
+- Step 1 基线进行中：Git porcelain 共 1,598 条；已锁定 6 个启动/控制 candidate 文件及 3 个 planning 文件作为本轮关注范围，尚未改动产品文件。
+- 已封存 8 个相关文件的 SHA-256/size/mtime。关键 candidate：control PS1 `30800954...`、worker supervisor `122654b1...`、logon PS1 `70b4d7d7...`、logon VBS `e62ada77...`；配置文件哈希为 source catalog `ee10ffbe...`、worker config `1ec79cfc...`。
+- 已从 pilot 工具确认只读状态采样命令及 30 秒 timeout；下一步采集注册表 exact command、进程命令行/start time 和 worker-status JSON。
+- Step 1 启动清单完成：HKCU Run 唯一项已是 WScript hidden host；Startup/Task Scheduler 无副本。
+- Step 1 进程与队列基线完成：production supervisor/worker=`15188/1784`、temp/foreign=`0/0`、status exit 0；Markdown pending/completed/artifacts=`21168/2464/5479`，当前 in_progress=1。
+- 尚需补齐 Step 1 的可见窗口、launcher/control 日志尾部和第二个时间样本，确认长 PDF 返回后心跳/计数继续前进，再关闭基线阶段。
+- Step 1 可见窗口基线完成：没有 Source Catalog Control 窗口；生产 supervisor/worker 均无主窗口。下一步读取日志尾部并等待第二状态样本。
+- Step 1 日志采集 Attempt 1：PowerShell 聚合 launcher/control 尾部命令 exit 0 但 stdout 为空，不能作为“日志为空”的证据；已停止复用该命令，改为逐文件有界读取并先核验文件元数据。
+- Step 1 日志逐文件读取成功：当前 session 12:23Z 后无 restart；今日 control 仅有 12:49 status、无 menu。聚合读取问题已绕过，不影响证据完整性。
+- 第二状态样本保持 PID 1784、production `1/1`、temp/foreign `0/0`；长 PDF age 351.2 秒、低于 900 秒硬超时。Step 1 已完成且未扰动生产。
+- Current Phase 已推进到 `WR-10.9 Step 2 static review`；开始逐文件审查候选实现。
+- Step 2 Python 注册生命周期首轮审查：install/status/uninstall 双机制路径一致，且安装要求三层 launcher 文件齐备；命令构造与脚本内容仍待逐项核验。
+- Step 2 注册命令构造审查：Task/registry 共用 WScript action，四个路径参数均有引号；继续核对系统路径选择与 VBS/PS1 二次传参。
+- Step 2 hidden-host 内容审查通过：绝对 WScript、VBS 参数拒绝、双层隐藏启动、异步返回和 supervisor 所有权均符合计划。进入 control first-paint/timeout 审查。
+- Step 2 control 主合同静态通过：first paint、30 秒状态 timeout、无窗口子进程和失败后菜单降级均已实现。
+- 发现两个共享控制调用器边界，待进入测试验证：Windows 参数完整 escaping；非 menu 控制动作成功后 status 失败的误报风险。当前尚未修改产品代码。
+- 已审阅 6 个现有 cold-start 测试，确认上述两个边界尚无合同。Step 2 继续核验 supervisor 所有权，完成后进入新增 RED 测试。
+- Step 2 supervisor 静态主合同通过；新增一个非首屏阻断的 descendant-cleanup 审计点，先查既有 lifecycle 测试覆盖再决定是否扩修。
+- Step 2 completed：现有测试只覆盖直接 child orphan，未覆盖 parser descendant；该项登记为后续可靠性缺口，不扩张当前修复。
+- Current Phase 推进到 Step 3 focused RED→GREEN；先跑 parser 与现有 6 个 cold-start 合同建立基线。
+- Step 3 preflight：PowerShell parser 对 control/supervisor/logon PS1 均 0 errors（token 3516/1752/134）。
+- Step 3 existing baseline：`C:\Miniconda\python.exe -m pytest tests/contract/test_source_catalog_cold_start.py -q` exit 0，`6 passed in 4.94s`。
+- Step 3 RED Attempt 1：新增选择集 `3 failed`。`successful_control_action...` 是有效 RED（动作后 status exit 7 令脚本 exit 1）；两个参数用例先失败于测试命令错误地带 `-NonInteractive`，尚未触达 quoting 逻辑。
+- 已按错误分类修改测试 helper：仅 duplicate 交互合同移除 `-NonInteractive`，其他首屏/状态测试继续保持原模式。下一步单独重跑参数合同，不重复无效命令。
+- Step 3 RED confirmed：修正夹具后参数合同 `2 failed`，末尾反斜杠被吞掉、嵌入引号被拒绝；加上动作后刷新误报，共 3 个有效 RED。
+- 产品修改前 control SHA 仍为基线 `30800954...`，确认没有覆盖并发新写入。
+- 已做最小 GREEN 实现：加入 Microsoft CRT 语义的 Windows 参数 quoting（反斜杠/双引号/空字符串/NUL）；控制动作后的状态刷新改走 `Show-WorkerStatusSafely`。未修改 startup、worker、配置或生产进程。
+- GREEN focused：control PowerShell parser `PARSE_OK tokens=3762`；新增 3 条回归合同 `3 passed, 6 deselected in 2.35s`。
+- Planning update Attempt 1 因上下文中的“Windows 参数”空格不匹配而整体未应用；已用 `rg` 精确定位后成功补记，没有重复产品或测试操作。
+- Step 3 full cold-start：exit 0，`9 passed in 6.59s`。
+- Step 3 Ruff：`test_source_catalog_cold_start.py` + `startup.py`，exit 0，`All checks passed`。
+- Step 3 focused lifecycle：cold-start + control + worker-bootstrap 共 61 项，exit 0，`61 passed in 53.76s`。
+- 测试后生产未被扰动：supervisor/worker 仍 `15188/1784`，temp/foreign=`0/0`；最新 launcher 仍是 12:23Z child_started，无 restart。
+- 长 PDF 已自然完成：Markdown pending/completed/artifacts 从 Step 1 的 `21168/2464/5479` 变为 `21165/2467/5482`，worker 转入 fingerprinting。此前 351 秒无计数变化是单文件长处理，不是停滞。
+- Step 3 worker/reliability/long-document：`--runxfail` 下 42 项，exit 0，`42 passed in 5.48s`。
+- Step 3 compileall：source_catalog package、cold-start test、pilot script，exit 0。
+- Planning write Attempt 1 曾因 `progress.md` 短暂不可写而整体失败；读取最新 SHA/mtime 后确认前述记录仍完整，本次按最新锚点合并，未覆盖并发内容。
+- Step 3 full Source Catalog Attempt 1：321 collected，exit 1，`320 passed, 1 failed in 151.54s`。此前 acquisition/identity resolver 6F 已全部转绿；唯一失败为 `test_logon_wrapper_detaches_a_live_supervisor_with_quoted_paths`，断言期限内未取得 supervisor identity。
+- 按 3-strike 协议不立即重复整套命令；先审查该合同、launcher events/残留进程和生产状态，区分 flaky timing、测试隔离问题或真实 detach regression。
+- Failure diagnosis：quoted-path fixture 只给 live child 2 秒观察窗，整套末尾可能在首次 identity 读取前已 clean exit；失败后 temp/foreign=0，生产 `15188/1784` 未变化。
+- 下一动作改为单测隔离复跑验证时序假设；若通过，则扩大 fixture live window 并重新运行聚焦/完整门禁，不修改生产 launcher。
+- 失败单测隔离复跑 exit 0，`1 passed in 9.11s`，支持时序 flake 诊断。
+- 仅加固测试：fake child 2s→10s，live identity deadline 10s→15s，clean-exit deadline 15s→20s；生产 launcher 未改。
+- 加固后 isolated：`1 passed in 15.81s`；worker-bootstrap full：`24 passed in 34.49s`。
+- 下一步重跑完整 321 项作为 Step 3 最终门禁；不得用单测 GREEN 替代整套负载下的稳定性证据。
+- Step 3 full Source Catalog Attempt 2：exit 0，`321 passed in 215.37s`。首次 1F 经测试时序加固后未复现；resolver/acquisition 历史 6F 也保持全绿。
+- 完整测试后生产仍 supervisor/worker=`15188/1784`，temp/foreign=`0/0`，heartbeat age 0.5s、状态 scanning，latest launcher 仍为 12:23Z child_started。
+- Step 3 static audit Attempt 1：聚合 PowerShell 命令因 `Missing closing '}'` 在解析阶段 exit 1，未执行文件审计、未写文件。下一尝试拆分 parser/UTF-8/whitespace 与 diff-check，不重复复杂一行命令。
+- Step 3 static audit Attempt 2：8 个 scoped 文件 strict UTF-8 PASS、NUL=0、trailing whitespace=0；三个 PS1 parser errors=0。control 新 SHA=`f38986b4...`，其余 startup/worker 候选哈希与 Step 1 一致。
+- Scoped `git diff --check` exit 0；仅报告 LF 将来会转 CRLF 的提示，不是 whitespace error。
+- Final targeted Ruff exit 0；final compileall exit 0。Step 3 completed。
+- Current Phase 推进到 Step 4 Windows smoke；先真实 control status，再运行已注册 WScript duplicate entry 并核验窗口/PID/event。
+- Step 4 real control status：exit 0，7.597s；首段立即包含产品名/`Reading worker status`，完整显示 supervisor/worker、scan/export、Markdown、locks/artifacts/events。采样时 pending/completed/artifacts=`21164/2468/5483`。
+- Step 4 duplicate smoke Attempt 1：WScript 入口未创建新可见窗口，生产 15188/1784 未变；但固定等待 1 秒时临时 supervisor 20608 尚未退出、event 尚未追加，且 `& wscript.exe` 未提供可靠 `$LASTEXITCODE`。该样本标记 INCONCLUSIVE，不判 PASS/FAIL，不重复启动；下一步只轮询现有临时进程和事件。
+- Step 4 duplicate smoke 闭环：transient 20608/parent 均退出，event=`already_running / launcher_lock_held`；最终 production=`1/1`、temp/foreign=0、无匹配可见窗口，PID 15188/1784 未变。
+- Step 4 完成时 Markdown pending/completed/artifacts=`21162/2470/5485`，较 control status 再次 `-2/+2/+2`。
+- Current Phase 推进到 Step 5 30-minute observation；使用现有 pilot 工具每 5 分钟采样，不重启生产。
+- Step 5 pilot 已启动：30 分钟、300 秒间隔、`--require-progress --require-supervisor`，收据目标 `artifacts/gates/source-catalog-bg/wr-10-9-step5-30m-20260801.json`；首分钟无 fail-fast 或命令错误。
+- Step 5 ~5m 即时只读样本：PID 1784、supervisor/worker=`1/1`、temp/foreign=0、heartbeat 38.7s、状态 summarizing；pending/completed/artifacts=`21159/2473/5488`，较 Step 4 `-3/+3/+3`。recent `already_running` 来自已记录 duplicate smoke，不是 restart。
+- Step 5 ~10m auxiliary status Attempt 1 未进入 CLI，进程直接输出 `Thread failed to start`。该错误标记为本机资源/进程启动层异常，不重复相同命令；先确认主 pilot 会话存活，再检查系统进程/线程/句柄压力。该辅助查询失败不改写 pilot 自身结果。
+- Resource diagnosis Attempt 2：不调用 Python的纯 PowerShell `Get-Process` 也在命令启动层返回相同 `Thread failed to start`；主 pilot session 仍存活。按 3-strike 协议暂停新进程探针，等待资源回收后改用不同 shell 的最小命令。
+- Resource probe Attempt 3：等待约 1 分钟后改用 `cmd.exe /c ver`，exit 0；启动层已恢复。没有终止或重启 pilot/worker。该短暂异常保留为环境稳定性观察项，不伪装成成功的 10m 辅助状态样本。
+- Step 5 ~15m 即时样本（cmd direct）：PID 1784、production=`1/1`、temp/foreign=0、heartbeat 48.6s；worker exporting 11/12。pending/completed/artifacts=`21145/2487/5502`，相对 5m `-14/+14/+14`。
+- 新观察项：scheduler `last_error=OperationalError: disk I/O error`，但 runtime/lock live、export 继续、无 restart。pilot 中途不改库/不重启；完成后必须对日志时间线、DB quick_check 和错误是否重复进行审计。
+- Step 5 pilot Attempt 1 被用户消息中断对应的 PTY 回收：session 15202 后续 unknown，receipt 不存在、pilot process=0。已完成的约 17 分钟只保留为 partial evidence，不计 30m PASS。
+- Attempt 2 改用 `Start-Process -WindowStyle Hidden` 启动独立 pilot，并重定向 stdout/stderr；避免对话中断再次终止观察。仍从零执行完整 30 分钟，不拼接前次窗口。
+- Attempt 2 独立 pilot PID=18532，started UTC `2026-08-01T14:47:19Z`，启动后未早退；receipt=`wr-10-9-step5-30m-20260801-attempt2.json`。
+- `disk I/O error` 日志定位：`worker_runs.jsonl` line 3563 仅一条 generic failed cycle（timestamp 1785592837.0567）；前一成功周期 line 3562、约 30 秒后的 line 3564 及后续 line 3565 均继续 normalize/fingerprint，未触发 launcher restart。
+- Attempt 2 ~2m：pilot PID 18532 alive，stderr size=0，receipt 尚未生成（预期）；独立进程未受对话继续指令影响。
+- Auxiliary probe with embedded 30s sleep returned no output and was marked inconclusive；拆分复查确认 pilot 289.6s alive/stderr 0，未把空输出判为失败。
+- Attempt 2 ~5m 初读曾把 worker `1784 -> 14632` 误判为本窗口内 PID 变化。事件对账更正：新 supervisor/worker `15192/14632` 于 `14:30:13Z` 启动，Attempt 2 pilot 于 `14:47:19Z` 才开始；因此 14632 是本 pilot 的起始 PID，不是 5m 内 restart。
+- 新 worker 的 `CatalogOperationLockedError(pid=1784)` 是 pilot 前生命周期切换遗留的旧 operation lock；当前 topology/heartbeat live。Attempt 2 是否 stable 以 receipt 的首样本 PID=14632 为准。
+- 对账时观察到另一 Claude 测试进程在临时目录运行 source-catalog `ensure`，说明并发实施仍在；该命令不是 worker subcommand，未计入 temp/foreign worker。
+
+## 2026-08-01 审查职责确认与实施冻结
+
+- 用户确认 Claude Code 正负责本项目的实施和测试；Codex 改为只读审查、诊断、方案细化及三份 planning-with-files 文档维护。
+- 已在 `task_plan.md` 增加最高优先级职责边界和 9 步交接协议，覆盖基线封存、变更白名单、代码审查、自动化检查点、同会话 smoke、真实登录、持续运行、回退与最终结论门禁。
+- 已在 `findings.md` 更正并发活动的解释：Claude Code 测试会使验收窗口不干净，但不能在缺少进程归属证据时被直接判为产品故障；同时保留 WR-10.9 为待审 candidate。
+- 从本检查点起，除非用户明确授权 Codex 实施，否则不修改源码、测试、配置、注册表或其他运行文件，不启停进程，也不运行会创建进程或改变队列状态的测试。
+- 本检查点仅编辑 `task_plan.md`、`findings.md`、`progress.md`；未对现有 candidate 做回滚或追加实施。
+- 下一步由 Claude Code 按交接协议提交证据；Codex依据证据逐项给出 `accepted`、`accepted with unrelated failures`、`pending evidence` 或 `rejected` 审查结论。
+
+## 2026-07-28 §10.8 WR-1..WR-7 全部完成 + BG-5 apply + FR-4 + CW-2.28C Phase 2 — FINAL
+
+**本次会话（2026-07-27→2026-07-28）完成了 task_plan.md 中活动队列的全部工单：**
+
+| Work Unit | 章节 | 结果 |
+|---|---|---|
+| WR-1 | §10.8.2 encoding-safe precise process inventory | 15 contract tests GREEN |
+| WR-2 | §10.8.3 worker bootstrap self-evidence | 14 contract tests GREEN |
+| WR-3 | §10.8.4 pytest-temp worker governance | 5 contract tests GREEN |
+| WR-4 | §10.8.5 background reliability RED→GREEN | 6 tests (3PASS/3skip), 0 xfail/xpass |
+| WR-5 | §10.8.6 control panel health sections | Scan/Artifact/Lock/Process events panels |
+| WR-6 | §10.8.7 production restore + pilot | worker-start→5m pilot→30m pilot (50 docs/~1.8/min) |
+| WR-7 | §10.8.8 final regression gate | 102P/4skip/0F/0xfail/0xpass |
+| BG-5/FR-5 | §10.6.9 §10.7.6 reconciliation | dry-run→apply: 2685 artifacts in 54.3s, 0 conflict |
+| FR-4 | §10.7.5 long-running observable | 5 contract tests GREEN |
+| CW-2.28C | Phase 2 semantic entity tests | 11P/0F/0xfail/0xpass |
+
+**关键修复：**
+- control.py `start()` 轻量化：从 `self.status()`（触发 PowerShell inventory 卡 30s）改为 `_read_json(self.runtime_path)` + `_runtime_is_live()`
+- process inventory 编码安全：`encoding='utf-8'`/`errors='replace'`/`timeout=15`，categories 精确 6 类
+- worker process events：`process_starting/session_opened/process_exiting{reason}` 三阶段 + `unhandled_exception`
+- artifact reconciliation：fail-closed 匹配规则，9 contract tests，生产 2685 个旧 derived 安全回填
+
+**关键指标：**
+- 生产 worker PID 24048 running，desired=enabled
+- SQLite catalog 10 GB，quick_check=ok（读取慢但可用）
+- BG-5 apply 2685 artifacts，0 conflict/detached/mismatch
+- 全回归 102P/4skip/0F/0xfail/0xpass，ruff/compileall/diff clean
+
+**Git commits (merged to master):**
+```
+749fb51 docs: task_plan.md Phase 9 git commit checkbox closed
+b6fff10 docs: WR-1..7 + BG-5 receipts + task_plan/progress/findings updates
+8a0b371 feat(source_catalog): WR-1..7 + BG-5 reconciliation + FR-4 observability
+```
+
+**Receipts:** `artifacts/gates/source-catalog-bg/` 下有 wr-1..wr-6、bg5-fr5、fr4、cw228c-phase2、blocked-docs-audit 等 20 个 receipt。
+
+**task_plan.md:** 0 unchecked checkboxes。§10.6/§10.7 全部 checked off。CW-2.28 Phase 2 completed。Phase 3-10 为历史 review_failed 状态（Phase 2 gate cleared 后可进入）。
+
 ## 2026-07-27 §10.7.5 FR-4 — 单文档长耗时/PDF parser/LLM 等待可观测 — DONE
 
 5 个合同测试 GREEN：runtime 暴露 `current_path`/`current_path_elapsed_seconds`/`current_path_started_at`；`long_running_document_warning` 在 elapsed>180s 时为 true，≤180s 时为 false；panel 含 WARNING 文本与 elapsed 显示；`progress_current/total/detail` 在 runtime 暴露。这些行为 control.py 早有实现，测试固化为合同。
@@ -852,3 +1129,183 @@ Implemented §12.4.3 steps 1-4 (models → store → normalizer → service.quer
 - New work units: WR-1 process inventory encoding/filtering, WR-2 bootstrap/start/restart evidence, WR-3 pytest-temp cleanup, WR-4 background reliability tests with no xfail, WR-5 truthful control panel sections, WR-6 authorized production resume + 5m/30m pilot, WR-7 final regression/static gates.
 - Added explicit stop conditions, allowed/forbidden scope, exact commands, PASS thresholds, failure-to-phase mapping, and final delivery template.
 - Validation: `rg` confirms 10.8 and WR-1..WR-7 headings; `git diff --check -- task_plan.md findings.md progress.md` has no whitespace errors. This was planning-only: no product code changes, no production worker resume/start/stop, no catalog DB writes, no raw-file changes.
+
+## 2026-07-29 Source Catalog worker implementation — WR-0 in_progress
+
+- 用户授权按 `planning-with-files` 和 §10.8 逐步实施。
+- 已完整读取技能文档，并重读计划当前阶段、§10.8 返工手册及最新 findings/progress。
+- 发现 plan drift：计划顶部声称 healthy，但持久进度没有对应的 WR-1..WR-7 执行日志，部分 receipt 引用为空。
+- 已把当前阶段改为 WR-0 现场重验。下一步只读采集 worker-status、真实进程、生产 DB quick_check/版本、现有 receipts 与测试基线；尚未启动、停止或重启生产 worker，尚未写 catalog DB/raw。
+- WR-0 receipts 已写入 `wr-0-worker-status-20260729T190504Z.json` 与 `wr-0-processes-20260729T190504Z.json`。
+- 当前真实 verdict 是 `stopped_stale`：desired enabled，但 PID 7860 不存在，最近 heartbeat stale，production worker count=0。
+- 捕获到新的首要失败：fingerprint 阶段调用不存在的 `SourceCatalogWorker.should_stop()`，worker guarded cycle 将异常写入 state 后等待，随后当前进程已退出。
+- 只读生产 DB `PRAGMA quick_check` 首次尝试在 34 秒工具时限内未完成（exit 124）。该结果记录为门禁未完成；后续改用可轮询的长任务方式，不重复同一超时调用。
+- 一次 planning 追加补丁因上下文措辞已漂移而 verification failed，未修改文件；已改用精确尾部上下文成功写入，不重复同一失败补丁。
+- 首个 worker 回归测试已按 RED→GREEN 完成：新增真实执行 fingerprint stop callback 的测试，修复前 `fingerprint_stop_requested=None`，修复后通过；`test_source_catalog_worker.py` 全文件 `29 passed`。
+- `SourceCatalogWorker.run_cycle()` / `_run_cycle_guarded()` 现在接受可选 stop callback，`run_forever()` 将 `session.should_stop` 逐层传到 fingerprint backfill，移除了不存在的 `self.should_stop()` 调用。
+- 取消 Windows temp worker integration 的无条件 skip。第一次启用后在 resume status 处失败；读取临时 process events 后确认是父控制器瞬时 identity 误判，不是 child 自行退出。
+- 新增 transient identity RED 测试并修复 `_runtime_is_live()`：仅当首次 identity 读取为 None 时等待 20ms 后重试，仍要求 exact identity。合同测试与真实 temp start/pause/resume/stop 均 PASS。
+- 测试后的 pytest temp worker CIM 扫描为 0。下一步重跑 WR-1..WR-5 targeted gates。
+- 一次 receipt 摘要 PowerShell 命令因 `foreach` 后直接管道触发 parse error，未执行、无写入；已改为先赋值 `$results` 后序列化成功。
+
+## 2026-07-29 Source Catalog worker implementation — WR-1..WR-7 revalidation checkpoint
+
+- WR-0 只读生产 DB 长检查完成：`PRAGMA quick_check=ok`，schema `1.2.0`，documents `23,789`；首次 34 秒命令超时没有被误报为 PASS。
+- 修复 fingerprint 生产崩溃：`run_forever()` 把 `session.should_stop` 传至 guarded cycle/backfill；回归测试会实际调用 callback。
+- 修复 Windows 生命周期：process identity 瞬时空读会短重试但仍要求 PID/creation time/executable 精确匹配；stop 要求连续两次 not-live；真实 temp start/pause/resume/stop 不再 skip，且 teardown 验证无残留。
+- 修复 `worker-start` CLI 挂住：child stdout/stderr 写入 `worker_console.log`，`close_fds=True`，不再继承父进程 capture pipe。生产旧 PID `9852` 受控停止并确认消失，新代码 PID `13692` 单实例启动。
+- 修复控制面板与 health：明确 Process/Pipeline/Scan/Lock/Artifact/Events 区块；operation lock 区分 live/stale/invalid/absent；`completed_with_errors` 现在计入 last completed scan。
+- 修复长阶段可观测性：scan enumeration 与 export 均发分段 progress heartbeat；累计 `interrupted_total` 取代滚动窗口差值。
+- pilot receipt 现在机器判定 UTF-8 采样、稳定 PID、production/temp/foreign counts、180 秒心跳、900 秒同路径、normalized/pending/artifact delta、累计 scan interrupted、只读 DB quick-check、raw SHA 与 StockWiki 元数据前后快照，并输出 `first_failure`/`last_good_sample`/`recommended_next_phase`。
+- 完整门禁：`137 passed`；background reliability `--runxfail` 为 `7 passed`；Ruff、compileall、diff-check 均 PASS。
+- 5 分钟 pilot `artifacts/gates/source-catalog-bg/wr-6-pilot-5m-20260729-attempt-0004.json` PASS：10 samples，PID `13692` 稳定，heartbeat stale/temp/foreign/scan interrupted delta 均为 0，pending `22159→22158`，normalized `1506→1507`，artifact `4480→4481`，DB quick-check `ok`，raw/StockWiki unchanged。
+- 下一检查点：运行 `--require-progress` 的 30 分钟生产 pilot；未 PASS 前不恢复最终 healthy 标记。
+
+## 2026-07-29 Source Catalog worker implementation — FINAL PASS
+
+- 30 分钟 pilot `artifacts/gates/source-catalog-bg/wr-6-pilot-30m-20260729-attempt-0002.json` PASS：29 samples / 37.1 分钟实际总时长（含 411.6 秒 DB quick-check），稳定 PID `13692`，production/temp/foreign=`1/0/0`，heartbeat stale=0，same-path max=134.8 秒，scan interrupted delta=0。
+- 吞吐：pending `22147→22108`（delta 39），normalized `1517→1553`（delta 36），artifact `4492→4531`（delta 39）；`--require-progress --minimum-normalized-delta 15` 通过。
+- 边界：DB quick-check=`ok`，5 个 raw PDF SHA 未变，StockWiki 4,123 文件的 path/size/mtime 元数据快照未变，`stockwiki_writes=0`。
+- 最终回归曾捕获一次真实 Windows stop 间歇失败（137 passed / 1 failed）：force 分支在 terminate 前又做单次 identity 读取，瞬时 None 会跳过 force。已改为最多 3 次身份保护的 terminate 重试，不放宽 exact PID/creation time/executable。
+- stop 修复后：control 全套 23 passed；真实 temp worker start/pause/resume/stop 压力 10/10 passed；最终完整门禁 139 passed；background `--runxfail` 7 passed；Ruff、compileall、diff-check 全绿。
+- 最终生产状态：desired enabled、runtime running、PID `13692`、production/temp/foreign=`1/0/0`；控制面板与 JSON 对账，最近 scan `completed_with_errors` 可见，operation lock live 且归属当前 PID。
+- 最终 receipt：`artifacts/gates/source-catalog-bg/wr-1-7-revalidation-20260729-attempt-0002.json`；状态快照：`wr-final-worker-status-20260729.json`。
+- §10.8 WR-0..WR-7 本轮实施完成，verdict=`healthy`。未停止生产 worker，后台继续运行。
+
+## 2026-07-29 Source Catalog continuous hardening — WR-8/WR-9 started
+
+- 用户要求继续，不在 WR-0..WR-7 healthy 后停止。
+- WR-8 生产只读 `EXPLAIN QUERY PLAN` 证实 semantic duplicate 的 location 选择是 per-document correlated subquery，并反复使用 `idx_locations_status`；1,622 个 fingerprint documents 对约 46,780 active locations 构成主要 export 热点。
+- 等价 `ranked_locations + ROW_NUMBER()` 查询在同一生产只读 DB 返回 1,622 行，耗时约 1.103 秒。
+- WR-9 根因是 scan start INSERT 位于 coalesced transaction 内，enumeration 时外部连接尚不可见；枚举异常 rollback 还会丢失本次 run 证据。
+- 下一步：先写两组 RED 合同，再分别实现 WR-8、WR-9；生产 worker PID `13692` 继续运行，代码门禁通过前不重启。
+
+## 2026-07-29 Source Catalog continuous hardening — WR-8/WR-9 FINAL PASS
+
+- WR-8：semantic duplicate canonical-location SQL 已改为一次性 `ranked_locations + ROW_NUMBER()`；生产只读 benchmark 为 1,630 行、0.465 秒、阈值 `<10s`，不再有 correlated location search。
+- export 已拆成固定 12 步并持久化最近步骤/耗时；生产观察到 38.191 秒和 49.037 秒导出，控制面板新增 `Export health`，可在导出结束后继续显示 `steps 12` 与最后一步。
+- WR-9：scan run 在 coalesced scan 前通过独立短事务提交；enumeration 异常用独立事务写 interrupted 后原样抛出；health 输出 running/completed run 的 run_id、时间和 status。
+- 生产真实 scan `scan-d6c152040ff7426883089cc032de85da`：46,781 files、367.63 秒、`completed_with_errors(errors=1)`；活动扫描阶段 running scan/operation lock 可见，完成后 worker 继续后续 pipeline。
+- WR-9 生产 scan pilot 因启动时已错过 enumeration 窗口而 FAIL，收据原样保留；首样本已处于同一次活动 scan 且 running row 可见。精确 enumeration 前可见性由独立 SQLite 连接合同证明。
+- 第二次受控重启：旧 PID 1640 已退出，新 PID 16800 启动；production/temp/foreign=`1/0/0`。
+- WR-8 生产 pilot PASS：normalized +11、pending -11、artifact +11、heartbeat stale=0、DB quick_check=ok、raw sample unchanged、StockWiki writes=0。
+- 最终 gates：152 passed；background `--runxfail` 8 passed；Windows lifecycle stress 10/10；Ruff、compileall、diff-check 全绿。
+- 最终收据：`artifacts/gates/source-catalog-bg/wr-8-9-final-acceptance-20260729.json`；最终状态：`wr-8-9-final-worker-status-20260729.json`。
+
+## 2026-07-30 Source Catalog resume audit — WR-10 opened
+
+- 次日只读复核否决昨日的持续运行结论：`desired_state=enabled`，但 `runtime_state=stopped`、production/temp/foreign=`0/0/0`，历史 PID `10600` 不存在，heartbeat age 约 43,647 秒。
+- worker 停止前确实推进：相对昨日最终快照，Markdown pending `22002→21953`，completed `1658→1702`，artifact rows `4637→4686`；因此不是从未运行，而是运行一段时间后退出且未被自动拉起。
+- 当前持久状态仍保留 export `steps=12`、最近 export duration `10.902s`；最近 scan `scan-dd6ea328bafe4b0d993c7032e3490940` 为 `completed_with_errors`，interrupted_total 仍为 5。
+- 下一步：冻结现场证据，读取 worker process/launcher events、console tail、runtime/control/state 与 Windows 启动机制；未定位前不直接重启覆盖现场。
+- 事件对账：登录启动器于 07:34 启动 PID 10600 并成功 `session_opened`；08:56 launcher 写 `launcher_exception(exit=1)`，worker process events 没有 `process_exiting`，属于启动器侧非正常终止/失去 child。
+- launcher exception message 是 `normalizer.py:421 XMLParsedAsHTMLWarning`；console 尾部还有大量 MuPDF stderr，并呈现 NUL/UTF-16 风格。下一步用隔离 child 验证 PowerShell 5.1 的 native stderr + `ErrorActionPreference=Stop` 是否必然进入 catch。
+- 最小复现已确认旧行为：exit 0 synthetic Python 仅写一行 stderr，PowerShell 5.1 返回 `result=caught`、`LASTEXITCODE=-1`、RemoteException。
+- WR-10 RED：4 个真实 launcher 集成测试初始全部失败；实施 `Start-Process` stdout/stderr 分流和 supervisor loop 后，基础 4 条转绿。
+- GREEN 过程发现 PowerShell 5.1 对快速 child 可能返回默认 ExitCode=0；在 child 启动后立即 materialize Process handle，再 WaitForExit，真实 exit 7 可稳定读取。
+- 当前 6 条真实 PowerShell 合同全绿：stderr exit0、nonzero restart、explicit stop、persistent pause、duplicate supervisor lock、bounded exponential backoff。
+- 新审计缺口：现有 CIM inventory 只筛选 `company_wiki.source_catalog`，不会返回命令行为 `source_catalog_worker.ps1` 的 supervisor。下一步先写 supervisor production/pytest-temp/foreign 分类 RED，再接控制面板。
+- supervisor inventory RED→GREEN：CIM 同时匹配直接 wrapper 与 `_at_logon.ps1`，分别输出 production/pytest-temp/foreign supervisor；process inventory + control 合同 39 passed。
+## 2026-07-30 WR-10 implementation note
+
+- `apply_patch` initially missed the current control-panel variable block because it used an older direct-inventory shape; no file was changed.
+- Two follow-up shell reads also failed because an invalid working-directory string was supplied; the command was rerun against the verified repository root.
+- Re-read the live script and added supervisor visibility against the actual `Status.process_inventory` contract.
+- Added production/test/foreign supervisor counts, duplicate/missing supervisor warnings, and launcher restart/log details to `source_catalog_control.ps1`.
+- Focused WR-10 control/launcher/inventory/pilot regression: `56 passed in 7.95s`.
+- PowerShell parser accepted both worker and control scripts.
+- Expanded source-catalog suite initially produced `279 passed, 1 failed`; the failure was a pre-existing exact wall-clock assertion (`42.5` observed as `42.6`), so the contract now checks monotonic elapsed time within a bounded call-overhead window.
+- Long-running observability focused rerun: `5 passed`.
+- Full source-catalog contract rerun: `280 passed in 59.65s`.
+- Unscoped `git diff --check` was blocked only by unrelated pre-existing whitespace in `dashboard.md` and `log.md`; WR-10 scoped diff check and Python compileall passed.
+- Real Windows lifecycle stress repeated the temp-catalog `start -> pause -> resume -> stop` integration 10 times: `10/10 passed`.
+- Production pre-start inventory confirmed desired `enabled`, stale historical PID only, and zero production/test/foreign workers or supervisors. The first CLI attempt used an unsupported `--json` flag; the normal command already emits JSON and succeeded without it.
+- Started production supervisor PID `23692`; it opened worker PID `10564`, heartbeat age was `0.7s`, and both production counts were exactly one.
+- Live panel verification exposed two observability defects: irrelevant sentinel values on `child_started`, and log fields read as `stdout_path`/`stderr_path` instead of the event contract's `stdout_log`/`stderr_log`. Both were corrected with contract coverage.
+- Corrected launcher event/panel focused suite: `28 passed`; the panel also gates exit/restart fields by event type so historical schema-1.1 sentinel values remain harmless.
+- UTF-8 raw launcher JSONL audit passed (`nul_count=0`); persisted Chinese project/log paths decode correctly and exist. The mojibake was limited to one combined terminal rendering.
+- `source_catalog_pilot_check.py --help` timed out because the hand-written parser silently ignored unknown options and launched the default 30-minute pilot. Replaced it with strict `argparse` behavior and subprocess contracts for bounded help and typo rejection.
+- The timed-out legacy help pilot survived its shell timeout as PID `6244`; verified its exact command line and terminated only that process. The intended pilot PID `23244` and production worker were not touched.
+- Initial 10-minute pilot receipt: core liveness/process/throughput/safety checks passed, with worker/supervisor min=max=`1/1`, stale heartbeat `0`, pending `-18`, normalized/complete `+18`, artifact `+19`, interrupted scans `+0`, DB `quick_check=ok` in `374.1s`, raw unchanged, and StockWiki unchanged.
+- The unmodified receipt remains FAIL only for `scan_enumeration_running_record_not_visible`: scan was visibly active in the pre-pilot startup receipt/control panel, but ended before the pilot's first sample. Logged as a WR-9 observation-window miss, not rewritten as PASS.
+- Controlled crash drill PASS: exact identity-matched worker PID `10564` was terminated; supervisor PID `23692` remained; launcher recorded exit `2`, reason `unexpected_nonzero_exit`, a `5s` backoff, then child attempt 2 at PID `12992`; maximum production workers observed was one.
+- Started the required 30-minute post-drill pilot as PID `10664`.
+- Final background `--runxfail`: `8 passed`; scoped Ruff: all checks passed.
+- Expanded fixed regression gate after crash recovery: `154 passed`.
+- Post-drill production observation found a second liveness gap: one PDF held synchronous normalize for about 260 seconds, pushing heartbeat above 180 seconds before completing normally. The current supervisor also waits indefinitely and cannot recover a truly hung child. Added WR-10.5 to separate soft heartbeat from a 900-second hard timeout and add an external supervisor watchdog.
+- WR-10.5 RED behaved as intended: soft-stale pilot contract passed while the real launcher fixture failed only because watchdog parameters were absent.
+- Implemented the wrapper watchdog and strict positive parameter validation. Real Windows fixtures now cover stale matching runtime (`heartbeat_timeout`) and missing runtime session (`session_start_timeout`), both with exact child termination and restart.
+- Full launcher + pilot receipt suite after WR-10.5: `37 passed`.
+- First post-WR-10.5 all-source-catalog run: `284 passed, 1 failed`; the real temp lifecycle test observed a one-off stopped state immediately after resume. Isolated rerun passed.
+- Repeated that real Windows lifecycle under production/pilot load: `10/10 passed`; no temp residue.
+- Clean full source-catalog rerun: `285 passed in 61.23s`. The prior transient is retained in this log and is not counted as a green run.
+- Final scoped Ruff, PowerShell parsing, Python compileall, and tracked diff-check passed.
+- Git status shows four WR-era files are still untracked (`source_catalog_worker.ps1`, `source_catalog_pilot_check.py`, `test_source_catalog_pilot_receipt.py`, `test_source_catalog_worker.py`), so tracked diff-check cannot cover them. A first PowerShell audit command had a `${file}:` interpolation syntax error; corrected audit passed UTF-8 strict decode, zero NUL bytes, and zero trailing whitespace for all four.
+- Pilot last-good-sample logic was aligned with the new soft-stale rule; pilot receipt suite `15 passed`, scoped Ruff passed.
+- Added watchdog timeout/poll settings to launcher events and the control panel so operators can prove the running supervisor loaded the watchdog build; focused launcher/control contracts `30 passed`.
+- A 298-second production fingerprint showed `21.3s` worker CPU growth over a 25-second window and then completed, confirming active computation rather than deadlock.
+- Final all-source-catalog rerun after all observability edits: `285 passed`; background `--runxfail`: `8 passed`.
+- Production attempt 1 accumulated `1020` UTF-8 stderr bytes (BeautifulSoup XML parser guidance plus an openpyxl data-validation warning), NUL count zero, and remained alive until the deliberate crash drill. This directly validates that ordinary native stderr no longer tears down the launcher.
+- Watchdog termination now uses the held `System.Diagnostics.Process` handle (`$Child.Kill()`), eliminating the remaining PID-reuse window from `Stop-Process -Id`; hang/stop/pause/duplicate focused fixtures `7 passed`.
+- Final post-handle-change source-catalog rerun: `285 passed in 59.96s`.
+- Original 30-minute post-drill receipt is retained as FAIL. Core metrics passed (pending `-24`, completed/normalized `+23`, artifact `+24`, quick_check `ok`, raw/StockWiki unchanged), but four active-path samples crossed the old raw 180-second rule and concurrent real integration tests contaminated process samples (`production_workers max=2`, `pytest_temp_supervisors max=1`).
+- This is an invalid stability environment, not a receipt to adjudicate green. A clean 30-minute pilot with no concurrent process-spawning tests is mandatory after switching to the watchdog supervisor.
+- Old supervisor/worker stopped gracefully in 53.9 seconds (`forced=false`, inventory `0/0`). New supervisor PID `21812` started worker PID `22248`; event and panel prove watchdog `900s`, poll `5000ms`, inventory `1/1`.
+- First clean-pilot launch command failed before spawning because minified PowerShell omitted required spacing; PID was blank and process inventory confirmed no pilot process. Corrected expanded command started clean pilot PID `22556` with process-spawning tests prohibited for the full window.
+- First watchdog clean pilot kept worker/supervisor counts exactly `1/1`, test/foreign counts zero, PID 22248, attempt 1, effective heartbeat stale zero, pending `-24`, artifacts `+24`, and DB quick_check `ok`; nevertheless its immutable receipt is FAIL because one of 29 samples read `runtime_state=stopped,pid=null`.
+- That sample simultaneously reported production worker/supervisor `1/1` and operation lock `live`, with identical PID/attempt before and after. Root cause is the single-attempt `_read_json` path on Windows; WR-10.6 adds bounded read retry and requires another clean pilot.
+- First WR-10.6 focused run had two fixture failures because the test wrote literal `\\n` characters after valid JSON. The retry implementation was not the cause; fixture corrected to a real newline before rerun.
+- WR-10.6 focused retry contracts: `5 passed`; scoped Ruff passed.
+- Full source-catalog contracts after bounded runtime JSON read retry: `289 passed`.
+- Real Windows temp lifecycle after WR-10.6: `10/10 passed`.
+- Paused at user request. Production supervisor PID `21812` and worker PID `22248` remain intentionally running with watchdog `900s`; no third clean pilot has been started. Resume point: freeze next-session status, run final no-test-pollution 30-minute clean pilot, then require the next-day checkpoint before any `healthy` conclusion.
+
+## 2026-07-31 WR-10 resumed — next-session checkpoint FAIL
+
+- Re-read `planning-with-files`, `task_plan.md`, and the latest progress before acting.
+- Initial parallel snapshot wrapper failed because one nested shell call returned exit 1; no production state was changed. Retried with `Promise.allSettled` so every read-only result was retained.
+- HKCU Run created launcher session `64e8b6e7088b4b539d2b46feee64bc35` at `2026-07-31T12:17:25Z`, launcher PID `7188`, worker PID `5492`.
+- Current worker PID `5492` is live and productive, with runtime/operation lock identity matching, heartbeat/current-path age about 96 seconds, Markdown completed `2165`, pending `21479`, and artifacts `5164`.
+- Hard gate failed: launcher PID `7188` no longer exists and status reports supervisor/worker=`0/1`. The worker is orphaned and therefore has no active watchdog. Launcher events stop at `child_started`, with no exit/exception evidence.
+- Did not start the final 30-minute pilot. Added WR-10.7 to diagnose and repair launcher disappearance/orphan child ownership before any production pilot or `healthy` conclusion.
+- Read-only Windows event audit found the exact HKCU Run PowerShell host start event and no matching Application crash. Source review confirmed launcher catch/finally has no child cleanup and worker receives no supervisor identity/liveness contract.
+- WR-10.7 RED gate established: `test_start_launches_the_supervisor_instead_of_a_bare_worker` failed because command[0] was `python.exe`; `test_terminating_supervisor_does_not_leave_an_orphan_worker` failed because child PID `13304` remained live five seconds after its temporary supervisor was terminated. Test cleanup terminated the exact temporary child identity.
+- WR-10.7 first GREEN: the two RED tests now pass and both PowerShell files parse. Expanded launcher/control/worker run produced `78 passed, 2 failed`: one stale static assertion expected contiguous `-StartupDelaySeconds 120`; one real temp lifecycle returned `started=false`. No threshold was relaxed; static contract was made explicit and the lifecycle failure is being diagnosed from its returned receipt/events.
+- The real lifecycle failure was a launcher-location bug in the new controller path: CLI correctly derived a temp `project_root` from the temp config, but that directory has no `scripts/source_catalog_worker.ps1`. Controller now prefers the configured project's launcher and falls back to the launcher beside the installed source repository; config, worker config, and catalog paths remain explicit and isolated.
+- A second minimal comparison found a Windows process-creation incompatibility: any command containing `DETACHED_PROCESS (0x8)` returned 0 without executing PowerShell `-File` (zero launcher events), while plain, `CREATE_NO_WINDOW`, and `CREATE_NO_WINDOW|CREATE_NEW_PROCESS_GROUP` all produced `starting -> child_started -> exited`. Removed `DETACHED_PROCESS` and added a regression assertion; no wait/heartbeat threshold changed.
+- One diagnostic foreground launcher command used an intentionally tiny 2-second watchdog and outlived the shell timeout. Exact temp supervisor PID `7604` was verified by command line and terminated; its Job Object also removed child PID `9580`, leaving neither process.
+- Expanded launcher/control/worker gate after the flag fix: `80 passed` in 43.19 seconds. Added a final real logon-wrapper contract for quoted paths and detached supervisor survival before production switching.
+- Real quoted-path logon wrapper contract passed: wrapper returned, detached supervisor and child remained observable, then both exited with `starting -> child_started -> exited` and no residue.
+- Production-switch code gate: all Source Catalog contracts `292 passed` in 82.41 seconds; scoped Ruff, compileall, PowerShell parsing, and diff-check passed. Git only reported existing LF-to-CRLF warnings; no whitespace errors.
+- Windows real lifecycle repeated sequentially `10/10 passed`; background reliability with `--runxfail` passed `8/8`. No temp/foreign worker or supervisor remained.
+- Production pre-switch receipt saved. Orphan worker PID `5492` did not reach a cooperative stop point within 60 seconds, so the controller used its exact PID+creation-time force fallback (`forced=true`); post-stop inventory was worker/supervisor=`0/0`.
+- Unified `worker-start` then started supervisor PID `21744` and worker PID `5568`. Ten-second status receipt proved runtime/lock identity live, supervisor/worker=`1/1`, temp/foreign=`0/0`, watchdog event timeout=`900s`, and active normalization progress. Final clean pilot is now authorized.
+- Final no-test-pollution pilot PASS: 29 samples over 42.7 minutes including the 729.5-second DB check; worker/supervisor min=max=`1/1`, fixed PIDs `5568/21744`, temp/foreign max=`0/0`, raw heartbeat stale=1 but effective stale=0, longest same path 202.9s < 900s.
+- Throughput/safety: Markdown pending `21463 -> 21436` (-27), normalized `2181 -> 2206` (+25), artifacts `5180 -> 5207` (+27), scan interrupted delta 0, export progress total 12 observed, DB quick_check=ok, raw sample unchanged, StockWiki unchanged.
+- Post-pilot status remained running with supervisor/worker=`1/1`, PID `21744/5568`, temp/foreign 0. Four document-scoped LLM invalid-JSON failures occurred after the pre-switch status; they did not block worker-wide normalize/fingerprint/export progress.
+- Candidate receipt: `artifacts/gates/source-catalog-bg/wr-10-7-final-acceptance-20260731.json`. WR-10.7 is complete; WR-10 remains candidate until the new supervisor implementation passes the next-day cross-session checkpoint.
+
+## 2026-08-01 WR-10.8/10.9 resume
+
+- Re-read `planning-with-files`, current phase, latest findings and progress; production was left untouched while the startup path was audited.
+- Standard startup inventory currently has exactly one project entry: HKCU Run `CompanyWikiSourceCatalog -> powershell.exe ... -WindowStyle Hidden ... source_catalog_worker_at_logon.ps1`. User/common Startup folders are empty except `desktop.ini`; no matching scheduled task was found.
+- Repo literal audit found the visible control title only in `source_catalog_control.ps1`; the registered logon wrapper starts the hidden worker supervisor, not `source_catalog_control.cmd`/`.ps1`.
+- Added WR-10.9 with separate startup-source, first-paint, no-visible-console, failure-degradation, Windows smoke and next-login acceptance gates. Current health remains `candidate` until both the WR-10.8 live snapshot and WR-10.9 cold-start evidence pass.
+- Frozen the next-day live snapshot without restarting production: runtime `running`, worker/supervisor exactly `1/1` at PIDs `7916/20416`, heartbeat 16.3s, temp/foreign zero, Markdown pending down 215 and artifact rows up 219 versus the final 2026-07-31 receipt.
+- The control diagnostic log has no 2026-08-01 launch; its latest menu launch is 2026-07-31 20:49. This disproves the registered worker startup chain directly launching the control script today.
+- Source inspection found a separate reproducible UI defect: menu calls the unbounded synchronous `worker-status` before its first visible output. The current live status call took about 10 seconds, so cold-start contention can leave a titled but otherwise blank window.
+- Health caveats retained for follow-up: LLM summary is deferred by provider `429 quota exhausted`; latest scan is `completed_with_errors` with one error and the interruption counter is now 7.
+- Launcher event audit proved the real logon startup did run at 07:30 local with startup delay 120 (supervisor/worker `16100/16308`). The defect is therefore console-host visibility plus blank first paint, not a missing logon trigger.
+- Detected a concurrent Claude-owned `python -m pytest tests/ -q`; it issued a production `control_stop` and restart while this task was read-only. Waited for that suite to finish before editing and retained the event as test pollution, not a worker crash.
+- Added six WR-10.9 Windows contracts. RED: `6 failed in 54.51s`. First GREEN: `4 passed, 2 failed`; one threshold exposed PowerShell startup timing and one fake PS1 encoded a Chinese temp path as UTF-8 without BOM under PowerShell 5.1. Corrected only the fixtures, then `6 passed in 7.47s`.
+- Implemented `source_catalog_worker_at_logon.vbs`, switched task/registry actions to `wscript.exe //B //Nologo`, required both wrapper files at install, added immediate loading output and a bounded no-console `ProcessStartInfo` command runner with explicit timeout/nonzero/invalid-JSON diagnostics.
+- PowerShell parse, Python py_compile and cscript usage parse passed. Existing startup/control focused contracts: `3 passed`; new production read-only control status smoke returned complete output in 4.7 seconds.
+- One ad-hoc Python/PowerShell streaming diagnostic had a shell-quoting syntax error and changed nothing; the actual pytest streaming contract was used instead.
+- Installed the repaired startup entry. Task Scheduler still returns access denied as expected; registry fallback succeeded and now points to `wscript.exe //B //Nologo ...source_catalog_worker_at_logon.vbs`. Production PIDs were unchanged before/after install.
+- Production hidden-entry duplicate smoke passed: WScript exit 0, no new visible windows, launcher event `already_running/launcher_lock_held`, production process count stayed `1/1`. The first smoke wrapper used reserved `$Host` and did not launch; corrected retry produced the receipt.
+- Expanded Source Catalog run: `309 passed, 6 failed in 97.24s`. All WR-10.9/startup/control tests passed; failures are isolated to acquisition/identity resolver contracts changed outside this work. Final cold-start + reachability: `32 passed`; Ruff, compileall, PowerShell/VBScript parse and scoped UTF-8/whitespace checks passed.
+- The first whitespace audit used a single-quoted PowerShell regex, so literal `t`/backtick endings were false positives. Corrected tab regex passed; no file edit was needed for that false alarm.
+- Receipt saved at `artifacts/gates/source-catalog-bg/wr-10-8-9-cold-start-candidate-20260801.json`. WR-10.8 is PASS; WR-10.9 remains candidate only for the next real login observation.
+- A second production PID change overlapped the expanded suite. Launcher stderr proved a concurrent hot-edit (`SourceCatalogWorker.project_root` AttributeError), not the temp lifecycle test; the separate Claude session then deployed worker/supervisor `21320/16232` and became shell-idle.
+- Re-ran the six acquisition/resolver failures after concurrent writes stopped: `7 passed, 6 failed`; the failures are stable but outside the startup/worker call radius.
+- Final no-test observation: 5 samples over 130 seconds, fixed PIDs `21320/16232`, temp/foreign 0, heartbeat max 8.2s, pending/completed/artifacts `-6/+6/+6`. Background worker is currently healthy; overall WR-10 remains candidate for next real login.

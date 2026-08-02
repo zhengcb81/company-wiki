@@ -11,7 +11,9 @@ import time
 from typing import Any, Iterator, Sequence
 import uuid
 
+from .admission import processing_priority_sql
 from .lock import operation_lock_status
+from .llm_failure_policy import effective_llm_summary_failure_scope
 from .models import CATALOG_SCHEMA_VERSION, FingerprintStatus, NORMALIZER_VERSION
 
 
@@ -274,6 +276,9 @@ def _empty_pipeline_status(*, error: str | None = None) -> dict[str, Any]:
             "eligible": 0,
             "pending": 0,
             "blocked": 0,
+            "blocked_quarantined": 0,
+            "blocked_incomplete": 0,
+            "blocked_other": 0,
             "in_progress": 0,
             "completed": 0,
             "partial": 0,
@@ -287,9 +292,16 @@ def _empty_pipeline_status(*, error: str | None = None) -> dict[str, Any]:
             "completed": 0,
             "partial": 0,
             "failed": 0,
+            "retryable_failed": 0,
+            "permanent": 0,
+            "legacy_scope_mismatch": 0,
             "deferred": False,
+            "global_deferred": False,
+            "global_retry_after": None,
+            "global_error": None,
             "next_document_retry_after": None,
             "last_failed_document_id": None,
+            "last_permanent_document_id": None,
         },
         "health": {
                 "scan": {
@@ -299,7 +311,14 @@ def _empty_pipeline_status(*, error: str | None = None) -> dict[str, Any]:
                     "recent_interrupted_count": 0,
                     "interrupted_total": 0,
                 },
-            "locks": {"operation_lock": "absent"},
+            "locks": {
+                "operation_lock": "absent",
+                "operation_lock_pid": None,
+                "operation_lock_operation": None,
+                "operation_lock_identity_verification": "absent",
+                "operation_lock_process_creation_time": None,
+                "operation_lock_observed_process_creation_time": None,
+            },
             "artifacts": {
                 "artifact_rows": 0,
                 "artifact_index_empty": True,
@@ -425,7 +444,7 @@ def read_pipeline_status(database_path: Path) -> dict[str, Any]:
             latest = connection.execute(
                 """SELECT run_id,started_at,completed_at,status,report_json
                 FROM scan_runs WHERE completed_at IS NOT NULL
-                ORDER BY started_at DESC LIMIT 1"""
+                ORDER BY started_at DESC,rowid DESC LIMIT 1"""
             ).fetchone()
             last_scan: dict[str, Any] | None = None
             if latest is not None:
@@ -447,6 +466,28 @@ def read_pipeline_status(database_path: Path) -> dict[str, Any]:
                         (latest["started_at"], latest["completed_at"]),
                     ),
                 }
+                if "error_details" not in report:
+                    legacy_error_rows = connection.execute(
+                        """SELECT root_id,relative_path,error FROM locations
+                        WHERE last_seen_run=? AND error IS NOT NULL
+                        AND trim(error)<>'' ORDER BY root_id,relative_path LIMIT 5""",
+                        (latest["run_id"],),
+                    ).fetchall()
+                    last_scan.update(
+                        {
+                            "new_errors": None,
+                            "known_quarantined": None,
+                            "error_details": [
+                                {
+                                    "root_id": row["root_id"],
+                                    "relative_path": row["relative_path"],
+                                    "error": row["error"],
+                                    "unchanged": None,
+                                }
+                                for row in legacy_error_rows
+                            ],
+                        }
+                    )
 
             active_linked = _count(
                 connection,
@@ -510,6 +551,30 @@ def read_pipeline_status(database_path: Path) -> dict[str, Any]:
                 """SELECT COUNT(*) FROM documents d
                 JOIN sources s ON s.source_id=d.primary_source_id""",
             )
+            blocked_statuses = {
+                row["source_status"]: int(row["count"])
+                for row in connection.execute(
+                    """SELECT source_status,COUNT(*) AS count FROM documents
+                    WHERE primary_source_id IS NULL GROUP BY source_status"""
+                )
+            }
+            markdown_retryable_failed = _count(
+                connection,
+                """SELECT COUNT(*) FROM artifacts WHERE artifact_role='normalized'
+                AND generator_name=? AND generator_version=? AND status='failed'
+                AND COALESCE(json_extract(metadata_json,'$.terminal'),0)=0""",
+                (_NORMALIZER_NAME, NORMALIZER_VERSION),
+            )
+            markdown_terminal_failed = _count(
+                connection,
+                """SELECT COUNT(*) FROM artifacts WHERE artifact_role='normalized'
+                AND generator_name=? AND generator_version=? AND status='failed'
+                AND COALESCE(json_extract(metadata_json,'$.terminal'),0)=1""",
+                (_NORMALIZER_NAME, NORMALIZER_VERSION),
+            )
+            markdown_blocked = max(0, index["documents"] - markdown_eligible)
+            blocked_quarantined = blocked_statuses.get("quarantined", 0)
+            blocked_incomplete = blocked_statuses.get("incomplete", 0)
             markdown = {
                 "eligible": markdown_eligible,
                 "pending": _count(
@@ -521,15 +586,27 @@ def read_pipeline_status(database_path: Path) -> dict[str, Any]:
                         WHERE existing.document_id=d.document_id
                         AND existing.artifact_role='normalized'
                         AND existing.generator_name=? AND existing.generator_version=?
+                        AND NOT (
+                            existing.status='failed'
+                            AND COALESCE(json_extract(existing.metadata_json,'$.terminal'),0)=0
+                        )
                     )""",
                     (_NORMALIZER_NAME, NORMALIZER_VERSION),
                 ),
-                "blocked": max(0, index["documents"] - markdown_eligible),
+                "blocked": markdown_blocked,
+                "blocked_quarantined": blocked_quarantined,
+                "blocked_incomplete": blocked_incomplete,
+                "blocked_other": max(
+                    0,
+                    markdown_blocked - blocked_quarantined - blocked_incomplete,
+                ),
                 "in_progress": 0,
                 "completed": markdown_statuses.get("completed", 0),
                 "partial": markdown_statuses.get("partial", 0),
                 "unsupported": markdown_statuses.get("unsupported", 0),
                 "failed": markdown_statuses.get("failed", 0),
+                "retryable_failed": markdown_retryable_failed,
+                "terminal_failed": markdown_terminal_failed,
             }
 
             llm_statuses = {
@@ -541,18 +618,45 @@ def read_pipeline_status(database_path: Path) -> dict[str, Any]:
                 )
             }
             status_now = time.time()
-            llm_failure = connection.execute(
-                """SELECT COUNT(*) AS count,MIN(retry_after) AS next_retry_after
-                FROM llm_summary_failures
-                WHERE generator_name=? AND retry_after>?""",
-                (_LLM_SUMMARIZER_NAME, status_now),
-            ).fetchone()
-            latest_llm_failure = connection.execute(
-                """SELECT document_id FROM llm_summary_failures
-                WHERE generator_name=? AND retry_after>?
-                ORDER BY last_failed_at DESC LIMIT 1""",
-                (_LLM_SUMMARIZER_NAME, status_now),
-            ).fetchone()
+            llm_failure_rows = connection.execute(
+                """SELECT document_id,failure_scope,error,retry_after,last_failed_at
+                FROM llm_summary_failures WHERE generator_name=?""",
+                (_LLM_SUMMARIZER_NAME,),
+            ).fetchall()
+            classified_failures = [
+                {
+                    **dict(row),
+                    "effective_scope": effective_llm_summary_failure_scope(
+                        str(row["failure_scope"]), str(row["error"])
+                    ),
+                }
+                for row in llm_failure_rows
+            ]
+            active_failures = [
+                row
+                for row in classified_failures
+                if float(row["retry_after"]) > status_now
+            ]
+            retryable_failures = [
+                row
+                for row in active_failures
+                if row["effective_scope"] != "permanent_document"
+            ]
+            permanent_failures = [
+                row
+                for row in classified_failures
+                if row["effective_scope"] == "permanent_document"
+            ]
+            latest_retryable = max(
+                retryable_failures,
+                key=lambda row: float(row["last_failed_at"]),
+                default=None,
+            )
+            latest_permanent = max(
+                permanent_failures,
+                key=lambda row: float(row["last_failed_at"]),
+                default=None,
+            )
             llm_summary = {
                 "eligible": _count(
                     connection,
@@ -579,19 +683,30 @@ def read_pipeline_status(database_path: Path) -> dict[str, Any]:
                 "in_progress": 0,
                 "completed": llm_statuses.get("completed", 0),
                 "partial": llm_statuses.get("partial", 0),
-                "failed": int(llm_failure["count"]),
+                "failed": len(active_failures),
+                "retryable_failed": len(retryable_failures),
+                "permanent": len(permanent_failures),
+                "legacy_scope_mismatch": sum(
+                    1
+                    for row in classified_failures
+                    if row["failure_scope"] != row["effective_scope"]
+                ),
                 "deferred": False,
-                "next_document_retry_after": llm_failure["next_retry_after"],
+                "next_document_retry_after": min(
+                    (float(row["retry_after"]) for row in retryable_failures),
+                    default=None,
+                ),
                 "last_failed_document_id": (
-                    latest_llm_failure["document_id"]
-                    if latest_llm_failure is not None
-                    else None
+                    latest_retryable["document_id"] if latest_retryable else None
+                ),
+                "last_permanent_document_id": (
+                    latest_permanent["document_id"] if latest_permanent else None
                 ),
             }
             # --- health diagnostics ---
             scan_runs = connection.execute(
                 """SELECT run_id,started_at,completed_at,status
-                FROM scan_runs ORDER BY started_at DESC LIMIT 20"""
+                FROM scan_runs ORDER BY started_at DESC,rowid DESC LIMIT 20"""
             ).fetchall()
             running_scans = [r for r in scan_runs if r["status"] == "running"]
             interrupted_scans = [r for r in scan_runs if r["status"] == "interrupted"]
@@ -641,6 +756,15 @@ def read_pipeline_status(database_path: Path) -> dict[str, Any]:
                     "operation_lock": lock_health["state"],
                     "operation_lock_pid": lock_health["pid"],
                     "operation_lock_operation": lock_health["operation"],
+                    "operation_lock_identity_verification": lock_health[
+                        "identity_verification"
+                    ],
+                    "operation_lock_process_creation_time": lock_health[
+                        "process_creation_time"
+                    ],
+                    "operation_lock_observed_process_creation_time": lock_health[
+                        "observed_process_creation_time"
+                    ],
                 },
                 "artifacts": {
                     "artifact_rows": artifact_rows,
@@ -989,7 +1113,7 @@ class CatalogStore:
         connection.row_factory = sqlite3.Row
         try:
             runs = connection.execute(
-                "SELECT * FROM scan_runs ORDER BY started_at DESC LIMIT 20"
+                "SELECT * FROM scan_runs ORDER BY started_at DESC,rowid DESC LIMIT 20"
             ).fetchall()
             latest_running = None
             latest_completed = None
@@ -1084,7 +1208,7 @@ class CatalogStore:
         """
         if limit is not None and limit <= 0:
             raise ValueError("limit must be positive or None")
-        base_sql = """
+        base_sql = f"""
             SELECT d.document_id, d.primary_source_id AS source_id,
                    s.content_sha256 AS source_sha256,
                    COALESCE(st.attempt_count, 0) AS attempt_count
@@ -1095,7 +1219,7 @@ class CatalogStore:
                OR st.status='pending'
                OR (st.status='retryable_failed'
                    AND (st.next_retry_at IS NULL OR st.next_retry_at <= ?))
-            ORDER BY d.document_id
+            ORDER BY {processing_priority_sql('d')}, d.document_id
             """
         if limit is None:
             return self.fetchall(base_sql, (now_iso,))
