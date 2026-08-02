@@ -1,0 +1,795 @@
+{
+  "version": "1.0",
+  "annotator": "human",
+  "annotated_at": "2025-04-01",
+  "routing": [
+    {
+      "source_id": "gk-bh-2024-ar",
+      "source_entity": "北方华创",
+      "content_summary": "北方华创2024年营业收入140.1亿元",
+      "expected_targets": [
+        {
+          "entity_id": "北方华创",
+          "entity_type": "company",
+          "confidence": "high",
+          "reason": "主实体"
+        },
+        {
+          "entity_id": "半导体设备",
+          "entity_type": "sector",
+          "confidence": "medium",
+          "reason": "行业关联"
+        },
+        {
+          "entity_id": "半导体国产替代",
+          "entity_type": "theme",
+          "confidence": "medium",
+          "reason": "国产替代"
+        }
+      ],
+      "has_ambiguity": false,
+      "is_irrelevant": false
+    },
+    {
+      "source_id": "gk-bh-2025-ar",
+      "source_entity": "北方华创",
+      "content_summary": "北方华创2025年年报",
+      "expected_targets": [
+        {
+          "entity_id": "北方华创",
+          "entity_type": "company",
+          "confidence": "high",
+          "reason": "主实体，年报直接关联"
+        },
+        {
+          "entity_id": "半导体设备",
+          "entity_type": "sector",
+          "confidence": "medium",
+          "reason": "公司主营半导体设备，行业数据可用于行业分析"
+        },
+        {
+          "entity_id": "半导体国产替代",
+          "entity_type": "theme",
+          "confidence": "medium",
+          "reason": "14nm刻蚀验证、国产替代进展"
+        }
+      ],
+      "has_ambiguity": false,
+      "is_irrelevant": false
+    },
+    {
+      "source_id": "gk-bh-2025-order",
+      "source_entity": "北方华创",
+      "content_summary": "北方华创2025上半年订单情况说明",
+      "expected_targets": [
+        {
+          "entity_id": "北方华创",
+          "entity_type": "company",
+          "confidence": "high",
+          "reason": "主实体，订单更新"
+        },
+        {
+          "entity_id": "半导体设备",
+          "entity_type": "sector",
+          "confidence": "medium",
+          "reason": "行业关联"
+        }
+      ],
+      "has_ambiguity": false,
+      "is_irrelevant": false
+    },
+    {
+      "source_id": "gk-bh-br-assumption",
+      "source_entity": "北方华创",
+      "content_summary": "估值关键假设：半导体设备国产化率持续提升（主观假设）",
+      "expected_targets": [
+        {
+          "entity_id": "北方华创",
+          "entity_type": "company",
+          "confidence": "high",
+          "reason": "假设对象（routing 仍为主实体 high；假设强度由 claim materiality/type 承载）"
+        },
+        {
+          "entity_id": "半导体国产替代",
+          "entity_type": "theme",
+          "confidence": "medium",
+          "reason": "国产替代假设"
+        }
+      ],
+      "has_ambiguity": false,
+      "is_irrelevant": false
+    },
+    {
+      "source_id": "gk-bh-br-rating",
+      "source_entity": "北方华创",
+      "content_summary": "分析师上调北方华创评级至买入（主观观点）",
+      "expected_targets": [
+        {
+          "entity_id": "北方华创",
+          "entity_type": "company",
+          "confidence": "high",
+          "reason": "评级对象"
+        },
+        {
+          "entity_id": "半导体设备",
+          "entity_type": "sector",
+          "confidence": "medium",
+          "reason": "行业"
+        }
+      ],
+      "has_ambiguity": false,
+      "is_irrelevant": false
+    },
+    {
+      "source_id": "gk-bh-correction",
+      "source_entity": "北方华创",
+      "content_summary": "北方华创年报更正公告",
+      "expected_targets": [
+        {
+          "entity_id": "北方华创",
+          "entity_type": "company",
+          "confidence": "high",
+          "reason": "主实体，更正原年报数据"
+        }
+      ],
+      "correction_of": "gk-bh-2025-ar",
+      "correction_type": "restatement",
+      "has_ambiguity": false,
+      "is_irrelevant": false
+    },
+    {
+      "source_id": "gk-bh-ir-guidance",
+      "source_entity": "北方华创",
+      "content_summary": "管理层指引2025全年营收同比约+30%（前瞻）",
+      "expected_targets": [
+        {
+          "entity_id": "北方华创",
+          "entity_type": "company",
+          "confidence": "high",
+          "reason": "主实体，管理层指引"
+        },
+        {
+          "entity_id": "半导体国产替代",
+          "entity_type": "theme",
+          "confidence": "medium",
+          "reason": "国产替代动因"
+        }
+      ],
+      "has_ambiguity": false,
+      "is_irrelevant": false
+    },
+    {
+      "source_id": "gk-bh-ir-monthly",
+      "source_entity": "北方华创",
+      "content_summary": "2025年4月未经审计月度营收16.2亿元",
+      "expected_targets": [
+        {
+          "entity_id": "北方华创",
+          "entity_type": "company",
+          "confidence": "high",
+          "reason": "主实体，月度数据"
+        }
+      ],
+      "has_ambiguity": false,
+      "is_irrelevant": false
+    },
+    {
+      "source_id": "gk-bh-news-asof",
+      "source_entity": "北方华创",
+      "content_summary": "北方华创2025Q2营收初步98.0亿（as_of=2025-04-30不得引用）",
+      "expected_targets": [
+        {
+          "entity_id": "北方华创",
+          "entity_type": "company",
+          "confidence": "high",
+          "reason": "主实体"
+        },
+        {
+          "entity_id": "半导体设备",
+          "entity_type": "sector",
+          "confidence": "low",
+          "reason": "行业边际"
+        }
+      ],
+      "has_ambiguity": false,
+      "is_irrelevant": false
+    },
+    {
+      "source_id": "gk-bh-news-interview",
+      "source_entity": "北方华创",
+      "content_summary": "公司已向客户交付多台28nm CCP刻蚀设备",
+      "expected_targets": [
+        {
+          "entity_id": "北方华创",
+          "entity_type": "company",
+          "confidence": "high",
+          "reason": "主实体"
+        },
+        {
+          "entity_id": "半导体设备",
+          "entity_type": "sector",
+          "confidence": "medium",
+          "reason": "行业"
+        }
+      ],
+      "has_ambiguity": false,
+      "is_irrelevant": false
+    },
+    {
+      "source_id": "gk-bh-risk-warning",
+      "source_entity": "北方华创",
+      "content_summary": "北方华创先进制程设备零部件面临美国出口管制风险",
+      "expected_targets": [
+        {
+          "entity_id": "北方华创",
+          "entity_type": "company",
+          "confidence": "high",
+          "reason": "主实体，风险提示"
+        },
+        {
+          "entity_id": "半导体国产替代",
+          "entity_type": "theme",
+          "confidence": "medium",
+          "reason": "国产替代动因"
+        }
+      ],
+      "has_ambiguity": false,
+      "is_irrelevant": false
+    },
+    {
+      "source_id": "gk-consumer-irrelevant3",
+      "source_entity": "合成消费",
+      "content_summary": "合成消费发布无糖饮料新品",
+      "expected_targets": [
+        {
+          "entity_id": "合成消费",
+          "entity_type": "company",
+          "confidence": "high",
+          "reason": "新闻主实体"
+        }
+      ],
+      "has_ambiguity": false,
+      "is_irrelevant": true,
+      "not_expected": [
+        "北方华创",
+        "中微公司",
+        "中芯国际",
+        "半导体设备"
+      ]
+    },
+    {
+      "source_id": "gk-logistics-irrelevant4",
+      "source_entity": "合成物流",
+      "content_summary": "合成物流完成冷链仓储升级",
+      "expected_targets": [
+        {
+          "entity_id": "合成物流",
+          "entity_type": "company",
+          "confidence": "high",
+          "reason": "新闻主实体"
+        }
+      ],
+      "has_ambiguity": false,
+      "is_irrelevant": true,
+      "not_expected": [
+        "北方华创",
+        "中微公司",
+        "中芯国际",
+        "半导体设备"
+      ]
+    },
+    {
+      "source_id": "gk-mt-irrelevant",
+      "source_entity": "贵州茅台",
+      "content_summary": "贵州茅台年报",
+      "expected_targets": [
+        {
+          "entity_id": "贵州茅台",
+          "entity_type": "company",
+          "confidence": "high",
+          "reason": "主实体"
+        }
+      ],
+      "not_expected": [
+        "北方华创",
+        "中微公司",
+        "中芯国际"
+      ],
+      "has_ambiguity": false,
+      "is_irrelevant": true
+    },
+    {
+      "source_id": "gk-news-agg-bh-reprint",
+      "source_entity": "北方华创",
+      "content_summary": "聚合转载：北方华创2025年报营收185.6亿（转引，pre-correction）",
+      "expected_targets": [
+        {
+          "entity_id": "北方华创",
+          "entity_type": "company",
+          "confidence": "high",
+          "reason": "主实体"
+        },
+        {
+          "entity_id": "半导体设备",
+          "entity_type": "sector",
+          "confidence": "low",
+          "reason": "行业"
+        }
+      ],
+      "canonical_source_id": "gk-bh-2025-ar",
+      "has_ambiguity": false,
+      "is_irrelevant": false
+    },
+    {
+      "source_id": "gk-news-agg-chain",
+      "source_entity": "北方华创",
+      "content_summary": "转载链：三站转载溯源至原始订单公告",
+      "expected_targets": [
+        {
+          "entity_id": "北方华创",
+          "entity_type": "company",
+          "confidence": "high",
+          "reason": "主实体"
+        },
+        {
+          "entity_id": "半导体设备",
+          "entity_type": "sector",
+          "confidence": "low",
+          "reason": "行业"
+        }
+      ],
+      "canonical_source_id": "gk-bh-2025-order",
+      "has_ambiguity": false,
+      "is_irrelevant": false
+    },
+    {
+      "source_id": "gk-news-agg-exaggerated",
+      "source_entity": "北方华创",
+      "content_summary": "聚合标题夸张称营收翻倍（实际+32.5%，标题不符）",
+      "expected_targets": [
+        {
+          "entity_id": "北方华创",
+          "entity_type": "company",
+          "confidence": "high",
+          "reason": "主实体"
+        },
+        {
+          "entity_id": "半导体设备",
+          "entity_type": "sector",
+          "confidence": "low",
+          "reason": "行业"
+        }
+      ],
+      "canonical_source_id": "gk-bh-2025-ar",
+      "has_ambiguity": false,
+      "is_irrelevant": false
+    },
+    {
+      "source_id": "gk-news-agg-syndication",
+      "source_entity": "北方华创",
+      "content_summary": "同文多发：同一原创被多站转载（仅计一条独立链）",
+      "expected_targets": [
+        {
+          "entity_id": "北方华创",
+          "entity_type": "company",
+          "confidence": "high",
+          "reason": "主实体"
+        }
+      ],
+      "canonical_source_id": "gk-bh-news-interview",
+      "has_ambiguity": false,
+      "is_irrelevant": false
+    },
+    {
+      "source_id": "gk-news-ambig2",
+      "source_entity": "北方华创",
+      "content_summary": "报道同时提及北方华创与中微公司，主实体不明",
+      "expected_targets": [
+        {
+          "entity_id": "北方华创",
+          "entity_type": "company",
+          "confidence": "ambiguous",
+          "reason": "可能主实体"
+        },
+        {
+          "entity_id": "中微公司",
+          "entity_type": "company",
+          "confidence": "ambiguous",
+          "reason": "可能主实体"
+        }
+      ],
+      "has_ambiguity": true,
+      "is_irrelevant": false,
+      "disambiguation_needed": "同时提及两家半导体设备公司，未明确比较对象，需确认主实体"
+    },
+    {
+      "source_id": "gk-news-irr-ev",
+      "source_entity": "合成新能源",
+      "content_summary": "新能源汽车公司发布新款车型（与半导体设备无关）",
+      "expected_targets": [
+        {
+          "entity_id": "合成新能源",
+          "entity_type": "company",
+          "confidence": "high",
+          "reason": "主实体"
+        }
+      ],
+      "has_ambiguity": false,
+      "is_irrelevant": true,
+      "not_expected": [
+        "北方华创",
+        "中微公司",
+        "中芯国际"
+      ]
+    },
+    {
+      "source_id": "gk-smic-2025q1",
+      "source_entity": "中芯国际",
+      "content_summary": "中芯国际2025Q1营业收入132.5亿元，同比增长28.1%",
+      "expected_targets": [
+        {
+          "entity_id": "中芯国际",
+          "entity_type": "company",
+          "confidence": "high",
+          "reason": "主实体，季报"
+        },
+        {
+          "entity_id": "半导体国产替代",
+          "entity_type": "theme",
+          "confidence": "medium",
+          "reason": "国产代工客户"
+        }
+      ],
+      "has_ambiguity": false,
+      "is_irrelevant": false
+    },
+    {
+      "source_id": "gk-smic-ambig4",
+      "source_entity": "中芯",
+      "content_summary": "“中芯扩产”表述无法唯一定位公司主体",
+      "expected_targets": [
+        {
+          "entity_id": "中芯国际",
+          "entity_type": "company",
+          "confidence": "ambiguous",
+          "reason": "简称歧义，需人工确认"
+        }
+      ],
+      "has_ambiguity": true,
+      "is_irrelevant": false,
+      "disambiguation_needed": "中芯可能指中芯国际或中芯集成，正文未给出证券代码"
+    },
+    {
+      "source_id": "gk-smic-ann-asof4",
+      "source_entity": "中芯国际",
+      "content_summary": "十一月确认的新增产线不得前视到十月底",
+      "expected_targets": [
+        {
+          "entity_id": "中芯国际",
+          "entity_type": "company",
+          "confidence": "high",
+          "reason": "公告主实体"
+        }
+      ],
+      "has_ambiguity": false,
+      "is_irrelevant": false
+    },
+    {
+      "source_id": "gk-smic-br-quote",
+      "source_entity": "中芯国际",
+      "content_summary": "研报转引中芯国际披露的590亿资本开支（非独立事实）",
+      "expected_targets": [
+        {
+          "entity_id": "中芯国际",
+          "entity_type": "company",
+          "confidence": "high",
+          "reason": "披露主体"
+        },
+        {
+          "entity_id": "半导体国产替代",
+          "entity_type": "theme",
+          "confidence": "low",
+          "reason": "边际"
+        }
+      ],
+      "has_ambiguity": false,
+      "is_irrelevant": false
+    },
+    {
+      "source_id": "gk-smic-ir-capex",
+      "source_entity": "中芯国际",
+      "content_summary": "预计2025全年资本开支约590亿元（前瞻指引）",
+      "expected_targets": [
+        {
+          "entity_id": "中芯国际",
+          "entity_type": "company",
+          "confidence": "high",
+          "reason": "主实体，capex指引"
+        },
+        {
+          "entity_id": "半导体国产替代",
+          "entity_type": "theme",
+          "confidence": "medium",
+          "reason": "扩产拉动国产替代"
+        }
+      ],
+      "has_ambiguity": false,
+      "is_irrelevant": false
+    },
+    {
+      "source_id": "gk-smic-ir-control",
+      "source_entity": "中芯国际",
+      "content_summary": "中芯国际现有生产计划保持不变",
+      "expected_targets": [
+        {
+          "entity_id": "中芯国际",
+          "entity_type": "company",
+          "confidence": "high",
+          "reason": "IR主实体"
+        }
+      ],
+      "has_ambiguity": false,
+      "is_irrelevant": false
+    },
+    {
+      "source_id": "gk-smic-major-contract",
+      "source_entity": "中芯国际",
+      "content_summary": "中芯国际签订82.0亿元三年期设备框架采购协议",
+      "expected_targets": [
+        {
+          "entity_id": "中芯国际",
+          "entity_type": "company",
+          "confidence": "high",
+          "reason": "主实体，采购方"
+        },
+        {
+          "entity_id": "半导体设备",
+          "entity_type": "sector",
+          "confidence": "medium",
+          "reason": "设备供应商受益方"
+        }
+      ],
+      "has_ambiguity": false,
+      "is_irrelevant": false
+    },
+    {
+      "source_id": "gk-smic-news-asof2",
+      "source_entity": "中芯国际",
+      "content_summary": "九月披露的中芯国际Q3新增产能不得前视到六月末",
+      "expected_targets": [
+        {
+          "entity_id": "中芯国际",
+          "entity_type": "company",
+          "confidence": "high",
+          "reason": "新闻主实体"
+        }
+      ],
+      "has_ambiguity": false,
+      "is_irrelevant": false
+    },
+    {
+      "source_id": "gk-smic-supersedes2",
+      "source_entity": "中芯国际",
+      "content_summary": "中芯国际更新2025Q1营业收入为133.1亿元",
+      "expected_targets": [
+        {
+          "entity_id": "中芯国际",
+          "entity_type": "company",
+          "confidence": "high",
+          "reason": "更新公告主实体"
+        }
+      ],
+      "has_ambiguity": false,
+      "is_irrelevant": false
+    },
+    {
+      "source_id": "gk-zw-2023-restated",
+      "source_entity": "中微公司",
+      "content_summary": "中微公司重述后2023年营业收入47.4亿元（原49.8亿）",
+      "expected_targets": [
+        {
+          "entity_id": "中微公司",
+          "entity_type": "company",
+          "confidence": "high",
+          "reason": "主实体，重述"
+        },
+        {
+          "entity_id": "半导体设备",
+          "entity_type": "sector",
+          "confidence": "medium",
+          "reason": "行业关联"
+        }
+      ],
+      "has_ambiguity": false,
+      "is_irrelevant": false
+    },
+    {
+      "source_id": "gk-zw-2025-ar",
+      "source_entity": "中微公司",
+      "content_summary": "中微公司2025年年报",
+      "expected_targets": [
+        {
+          "entity_id": "中微公司",
+          "entity_type": "company",
+          "confidence": "high",
+          "reason": "主实体"
+        },
+        {
+          "entity_id": "北方华创",
+          "entity_type": "company",
+          "confidence": "low",
+          "reason": "竞品提及，需人工确认"
+        },
+        {
+          "entity_id": "半导体设备",
+          "entity_type": "sector",
+          "confidence": "medium",
+          "reason": "行业关联"
+        }
+      ],
+      "has_ambiguity": false,
+      "is_irrelevant": false
+    },
+    {
+      "source_id": "gk-zw-ambig3",
+      "source_entity": "中微",
+      "content_summary": "“中微”简称存在主体歧义，需人工确认",
+      "expected_targets": [
+        {
+          "entity_id": "中微公司",
+          "entity_type": "company",
+          "confidence": "ambiguous",
+          "reason": "简称歧义，需人工确认"
+        }
+      ],
+      "has_ambiguity": true,
+      "is_irrelevant": false,
+      "disambiguation_needed": "中微可能指中微公司（688012）或其他同名半导体主体"
+    },
+    {
+      "source_id": "gk-zw-ambiguous",
+      "source_entity": "中微",
+      "content_summary": "中微公司和中微半导体对比新闻",
+      "expected_targets": [
+        {
+          "entity_id": "中微公司",
+          "entity_type": "company",
+          "confidence": "ambiguous",
+          "reason": "名称歧义，需确认是中微公司(688012)还是中微半导体"
+        }
+      ],
+      "has_ambiguity": true,
+      "disambiguation_needed": "中微可能指中微公司(688012)或中微半导体(MCU芯片)",
+      "is_irrelevant": false
+    },
+    {
+      "source_id": "gk-zw-br-forecast",
+      "source_entity": "中微公司",
+      "content_summary": "分析师预测中微公司2025年归母净利润12.5亿元",
+      "expected_targets": [
+        {
+          "entity_id": "中微公司",
+          "entity_type": "company",
+          "confidence": "high",
+          "reason": "预测对象"
+        },
+        {
+          "entity_id": "半导体设备",
+          "entity_type": "sector",
+          "confidence": "medium",
+          "reason": "行业"
+        }
+      ],
+      "has_ambiguity": false,
+      "is_irrelevant": false
+    },
+    {
+      "source_id": "gk-zw-br-target",
+      "source_entity": "中微公司",
+      "content_summary": "分析师给予中微公司12个月目标价220.0元",
+      "expected_targets": [
+        {
+          "entity_id": "中微公司",
+          "entity_type": "company",
+          "confidence": "high",
+          "reason": "目标价对象"
+        }
+      ],
+      "has_ambiguity": false,
+      "is_irrelevant": false
+    },
+    {
+      "source_id": "gk-zw-correction2",
+      "source_entity": "中微公司",
+      "content_summary": "中微公司二次更正2023年营业收入为47.1亿元",
+      "expected_targets": [
+        {
+          "entity_id": "中微公司",
+          "entity_type": "company",
+          "confidence": "high",
+          "reason": "更正公告主实体"
+        }
+      ],
+      "has_ambiguity": false,
+      "is_irrelevant": false
+    },
+    {
+      "source_id": "gk-zw-ir-qna",
+      "source_entity": "中微公司",
+      "content_summary": "管理层判断先进制程放量初期毛利率承压（主观展望）",
+      "expected_targets": [
+        {
+          "entity_id": "中微公司",
+          "entity_type": "company",
+          "confidence": "high",
+          "reason": "主实体，毛利率观点"
+        },
+        {
+          "entity_id": "半导体设备",
+          "entity_type": "sector",
+          "confidence": "low",
+          "reason": "行业边际"
+        }
+      ],
+      "has_ambiguity": false,
+      "is_irrelevant": false
+    },
+    {
+      "source_id": "gk-zw-ir-view",
+      "source_entity": "中微公司",
+      "content_summary": "管理层认为国内刻蚀设备市场竞争趋于激烈（主观判断）",
+      "expected_targets": [
+        {
+          "entity_id": "中微公司",
+          "entity_type": "company",
+          "confidence": "high",
+          "reason": "主实体，管理层观点"
+        },
+        {
+          "entity_id": "半导体设备",
+          "entity_type": "sector",
+          "confidence": "medium",
+          "reason": "行业观点"
+        }
+      ],
+      "has_ambiguity": false,
+      "is_irrelevant": false
+    },
+    {
+      "source_id": "gk-zw-news-asof3",
+      "source_entity": "中微公司",
+      "content_summary": "十月公开的中微公司Q4订单不得前视到九月末",
+      "expected_targets": [
+        {
+          "entity_id": "中微公司",
+          "entity_type": "company",
+          "confidence": "high",
+          "reason": "新闻主实体"
+        }
+      ],
+      "has_ambiguity": false,
+      "is_irrelevant": false
+    },
+    {
+      "source_id": "gk-zw-terminate",
+      "source_entity": "中微公司",
+      "content_summary": "中微公司终止与某海外客户的设备销售合作",
+      "expected_targets": [
+        {
+          "entity_id": "中微公司",
+          "entity_type": "company",
+          "confidence": "high",
+          "reason": "主实体"
+        },
+        {
+          "entity_id": "半导体设备",
+          "entity_type": "sector",
+          "confidence": "low",
+          "reason": "行业边际相关"
+        }
+      ],
+      "has_ambiguity": false,
+      "is_irrelevant": false
+    }
+  ]
+}

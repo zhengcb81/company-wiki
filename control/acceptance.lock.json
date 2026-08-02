@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "algorithm": "sha256",
+  "created_for_head": "a57160646ed0d02a7d8befe2e390b523c73432c6",
+  "files": {
+    "设计思想.md": "ed5a040732374c4973c5b15688a045568821d93150766bae622ac3fc682308db",
+    "llm-wiki.md": "dc3efe98ae62f23dd08acad13aba2e95287beb20b6bec2f4af0423557fe37401",
+    "AGENTS.md": "e55f1ac4fadf2f8079287ead6c6b3a82cc26ef3c9b3490ea520583674c35eb88",
+    "control/acceptance.json": "0f6f83d5f415a3dc02e8de9bc1cc7ab126fe6e15b6164fd0a55286c062515416",
+    "control/README.md": "ff1373e6dc4049f562b856cb261f56562cfc817ca4b391c57ec0720c151b040f",
+    "control/architecture.json": "110587389a28b2b690c6bfe1bdde95f1dcbd83245e50fe2dd4b48d05ae8d2330",
+    "control/commands/full-pytest.json": "65e8f9b8c5b962fd064c51f1d86f49248547f9bb0446e26638d8d4ee50f8f766",
+    "control/known_bad.json": "be348065e0490ae60c0197024a5c6df12bc22ff47ab58686a15791eafced40a5",
+    "tests/acceptance/test_control_bootstrap.py": "39ad78080c996215bd172852e4d544c0957ad698baa4a4ef50051ecb6320763b",
+    "control/work_units/CTRL-BOOTSTRAP.json": "b7dc70e0e8f2d83751055da76f21e4054004b65ff23bf1aa09530ad67e1ecd14",
+    "control/work_units/RR-11.2.json": "d93d97bb2f8b2cd4b7b8b379b08f5df37d53c45ce5ef47612912ced26785d659",
+    "control/work_units/RR-11.3.json": "84c30f95d034cf698d6386f9732cd81b1bdb695e6f3ee60e681efb37028afa60",
+    "artifacts/recovery/deletion-manifest.json": "ed38ede00e92432345b0c039e3203b67092e7efd8a07280256ddd4f446ba393a",
+    "control/work_units/RR-11.4.json": "930be6123b226bde00c5a3a9ce40e032f3130dee6235fc58323149bfd066c7e3",
+    "artifacts/security/secret-decision.json": "70ee4d863a978b764e12bf77872245c1c3ceee93d5e66f2aa520b4ca77dc0009",
+    "control/work_units/CTRL-0.9.json": "716b875528bb2c77ba7713d2a091c44c6b675cb948171f2af1c8f26b27b58a48",
+    "control/work_units/RR-11.5.json": "5535e07e2f705e57ca4ce38e8e3cc0e414ea1e031bd7cff989387e47978d0bde"
+  }
+}

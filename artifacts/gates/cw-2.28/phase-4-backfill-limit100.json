@@ -1,0 +1,49 @@
+{
+  "step": "limit=100",
+  "before": {
+    "eligible": 22835,
+    "pending": 22831,
+    "due_retry": 4,
+    "completed": 881,
+    "terminal": 6,
+    "unsupported_terminal": 6,
+    "retryable_failed": 4,
+    "failed_terminal": 0
+  },
+  "after": {
+    "eligible": 22735,
+    "pending": 22731,
+    "due_retry": 4,
+    "completed": 978,
+    "terminal": 9,
+    "unsupported_terminal": 9,
+    "retryable_failed": 4,
+    "failed_terminal": 0
+  },
+  "state_before": {
+    "completed": 881,
+    "pending": 22831,
+    "retryable_failed": 4,
+    "unsupported_terminal": 6
+  },
+  "state_after": {
+    "completed": 978,
+    "pending": 22731,
+    "retryable_failed": 4,
+    "unsupported_terminal": 9
+  },
+  "report": {
+    "completed": 97,
+    "unsupported": 3,
+    "failed": 0,
+    "elapsed_s": 835.6
+  },
+  "invariants": {
+    "docs": 23789,
+    "srcs": 43230,
+    "locs": 46780,
+    "fp_nonnull": 978,
+    "schema": "1.2.0",
+    "dup_groups": 3477
+  }
+}

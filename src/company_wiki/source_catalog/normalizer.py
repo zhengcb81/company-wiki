@@ -67,9 +67,7 @@ def _utc_iso(epoch: float | None = None) -> str:
 
     if epoch is None:
         epoch = _time.time()
-    return datetime.fromtimestamp(epoch, tz=timezone.utc).strftime(
-        "%Y-%m-%dT%H:%M:%SZ"
-    )
+    return datetime.fromtimestamp(epoch, tz=timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
 @dataclass(frozen=True)
@@ -152,9 +150,7 @@ def _normalized_to_payload(
     }
 
 
-def _normalized_from_payload(
-    payload: Any, *, expected_source_id: str
-) -> _Normalized:
+def _normalized_from_payload(payload: Any, *, expected_source_id: str) -> _Normalized:
     if not isinstance(payload, dict):
         raise ParserResultProtocolError("parser result payload must be an object")
     expected_fields = {
@@ -329,9 +325,7 @@ def _parser_process_entry(
             "error_type": type(exc).__name__,
             "error": str(exc)[:1000],
         }
-    _write_parser_envelope(
-        result_path, envelope, result_max_bytes=result_max_bytes
-    )
+    _write_parser_envelope(result_path, envelope, result_max_bytes=result_max_bytes)
 
 
 class _WindowsParserJob:
@@ -409,9 +403,7 @@ class _WindowsParserJob:
                 ctypes.byref(information),
                 ctypes.sizeof(information),
             ):
-                raise OSError(
-                    ctypes.get_last_error(), "SetInformationJobObject failed"
-                )
+                raise OSError(ctypes.get_last_error(), "SetInformationJobObject failed")
             process_handle = getattr(process, "_handle", None)
             if process_handle is None or not kernel32.AssignProcessToJobObject(
                 handle, wintypes.HANDLE(int(process_handle))
@@ -761,7 +753,11 @@ def _pymupdf_page_snapshots(document: Iterable[Any]) -> tuple[dict[str, Any], ..
                 try:
                     table_bbox = _bbox(getattr(table, "bbox", None))
                     data = tuple(
-                        tuple(value for value in row) for row in table.extract()
+                        tuple(
+                            _nfc_lf(value) if isinstance(value, str) else value
+                            for value in row
+                        )
+                        for row in table.extract()
                     )
                     rows = int(table.row_count)
                     cols = int(table.col_count)
@@ -1474,6 +1470,7 @@ def normalize_catalog(
                 possible = Path(sidecar["absolute_path"])
                 if possible.is_file():
                     docling_path = possible
+
         def parser_progress(details: dict[str, Any]) -> None:
             if progress is not None:
                 progress(

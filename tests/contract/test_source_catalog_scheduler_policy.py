@@ -37,13 +37,15 @@ class _Catalog:
         self.events.append(("call", "scan"))
         return _Report()
 
-    def normalize(self, *, limit, progress=None):
+    def normalize(self, *, limit, progress=None, **kwargs):
+        del limit, progress, kwargs
         self.events.append(("call", "normalize"))
         return _Report()
 
     def backfill_text_fingerprints(self, *, limit, progress=None,
                                     should_stop=None, retry_limit=3,
-                                    retry_backoff_seconds=900):
+                                    retry_backoff_seconds=900, **kwargs):
+        del limit, progress, should_stop, retry_limit, retry_backoff_seconds, kwargs
         self.events.append(("call", "backfill_text_fingerprints"))
         return _Report()
 

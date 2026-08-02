@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "work_unit": "RR-12.2e-R2-CASE-VIEWER",
+  "status": "viewer_candidate",
+  "implementer_role": "implementation_only_not_primary_or_secondary_reviewer",
+  "base_head": "a57160646ed0d02a7d8befe2e390b523c73432c6",
+  "objective": "provide a deterministic read-only per-revision review case without generating review decisions or modifying corpus state",
+  "red_phase": {
+    "command": "python -m pytest -q tests/contract/test_gold_review_gate.py",
+    "result": "36 passed, 8 failed",
+    "collection_errors": 0,
+    "failures": "seven missing build_review_case assertions and one unknown case subcommand"
+  },
+  "tests": {
+    "gold_review_target": "45 passed",
+    "all_revision_cases": "40 of 40 built with all verification checks true",
+    "compatibility_suite": "110 passed (45 gold review + 52 gold corpus + 13 writer freeze)",
+    "full_suite": "730 passed in 28.61s",
+    "failed": 0,
+    "collection_errors": 0,
+    "unexpected_skips": 0
+  },
+  "viewer": {
+    "command": "python scripts/gold_review_gate.py case --corpus tests/fixtures/gold_corpus --packet artifacts/gates/rr-12.2e-r1-review-packet.json --revision-id gkr-news-agg-bh-reprint-v1",
+    "output_channel": "stdout_json_only",
+    "artifact_writes": 0,
+    "sample_exit_code": 0,
+    "sample_verification": true,
+    "source_content_marked_untrusted": true,
+    "decision_fields": 0,
+    "verification_checks": 7
+  },
+  "review_baseline": {
+    "packet": "artifacts/gates/rr-12.2e-r1-review-packet.json",
+    "packet_canonical_sha256": "a56319dde2558247e3b69321ab5f8be5e1184593e81ed7350ca663fa89c2ddc0",
+    "review_input_bundle_sha256": "b12b47f1b66a24c3596e5814edc99c56c120ef1a804c4631e1a8591fa49ef86c"
+  },
+  "corpus_review_status": {
+    "draft": 40,
+    "reviewed": 0
+  },
+  "control_plane": {
+    "acceptance_lock": "pass",
+    "deletion_manifest": "pass",
+    "staged_secret_findings": 0,
+    "staged_files": 0,
+    "scoped_diff_check": "pass",
+    "git_index_unchanged": true
+  },
+  "production_data": {
+    "before": "b97f177c60da1a7f0165cba69dfc567df9edba7558001b4ba5aeddcd5361433c",
+    "after": "b97f177c60da1a7f0165cba69dfc567df9edba7558001b4ba5aeddcd5361433c",
+    "files": 16789,
+    "bytes": 25472376075,
+    "changed_paths": 0
+  },
+  "remaining_gates": [
+    "an independent primary reviewer must use the R1 packet and R2 viewer to review all 40 revisions",
+    "a different independent secondary reviewer must review the deterministic 8 or more revisions across all six source kinds",
+    "the completed schema v2 receipt must validate with exit code 0 before a separate promotion work unit may open",
+    "all manifest entries remain draft until that separate promotion succeeds",
+    "Phase 11 external remediation and other Phase 13 entry gates remain independent blockers"
+  ],
+  "derived_status": "viewer candidate only; independent corpus review has not occurred"
+}

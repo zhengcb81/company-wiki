@@ -37,9 +37,6 @@ graph.py — 统一数据加载入口
 """
 
 import argparse
-import os
-import re
-import sys
 from collections import defaultdict
 from pathlib import Path
 
@@ -562,7 +559,7 @@ def cmd_sector(g, name):
         print(f"  下游: {', '.join(s['downstream'])}")
 
     if s["subsectors"]:
-        print(f"\n  子领域:")
+        print("\n  子领域:")
         for sub in s["subsectors"]:
             sub_comps = s["subsector_companies"].get(sub, [])
             print(f"    {sub}: {', '.join(sub_comps) if sub_comps else '(空)'}")
@@ -574,14 +571,14 @@ def cmd_sector(g, name):
             print(f"    {c} ({info['ticker']}): {info['position']}")
 
     if s["questions"]:
-        print(f"\n  跟踪问题:")
+        print("\n  跟踪问题:")
         for q in s["questions"]:
             print(f"    - {q}")
 
 
 def cmd_find(g, text):
     print(f"\n文本: {text}")
-    print(f"相关实体:")
+    print("相关实体:")
     for name, etype, topic in g.find_related_entities(text):
         print(f"  [{etype}] {name} → {topic}")
 
@@ -651,6 +648,11 @@ def main():
         cmd_generate_nav(g)
     else:
         parser.print_help()
+
+
+from writer_policy import enforce_direct_cli as _enforce_legacy_writer_freeze
+
+_enforce_legacy_writer_freeze(__name__, __file__)
 
 
 if __name__ == "__main__":

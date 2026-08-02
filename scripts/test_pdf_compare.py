@@ -19,7 +19,6 @@ import sys
 import time
 from pathlib import Path
 
-from common import SCRIPTS_DIR
 
 from pdf_extract_v2 import extract_pdf_text
 
@@ -106,7 +105,7 @@ def _call_deepseek_ocr(file_path: str) -> dict:
 
     body_parts = []
     body_parts.append(f"--{boundary}\r\n")
-    body_parts.append(f'Content-Disposition: form-data; name="file"; filename="test.pdf"\r\n')
+    body_parts.append('Content-Disposition: form-data; name="file"; filename="test.pdf"\r\n')
     body_parts.append("Content-Type: application/pdf\r\n\r\n")
     body_parts.append(pdf_bytes.decode("latin-1"))
     body_parts.append(f"\r\n--{boundary}--\r\n")
@@ -246,7 +245,7 @@ def main():
         is_scanned = pymupdf_result.get("is_scanned", False)
         pages = pymupdf_result.get("pages", 0)
 
-        print(f"  成功: True")
+        print("  成功: True")
         print(f"  提取时间: {pymupdf_time:.2f} 秒")
         print(f"  页数: {pages}")
         print(f"  字符数: {len(text)}")
@@ -261,11 +260,11 @@ def main():
     doc_result = _call_deepseek_document_parse(pdf_path)
 
     if doc_result.get("success"):
-        print(f"  成功: 是")
+        print("  成功: 是")
         print(f"  响应: {json.dumps(doc_result['data'], ensure_ascii=False)[:300]}")
     else:
         status = doc_result.get("status_code", "N/A")
-        print(f"  成功: 否")
+        print("  成功: 否")
         print(f"  HTTP 状态码: {status}")
         print(f"  错误: {doc_result.get('error', '未知错误')}")
 
@@ -276,11 +275,11 @@ def main():
     ocr_result = _call_deepseek_ocr(pdf_path)
 
     if ocr_result.get("success"):
-        print(f"  成功: 是")
+        print("  成功: 是")
         print(f"  响应: {json.dumps(ocr_result['data'], ensure_ascii=False)[:300]}")
     else:
         status = ocr_result.get("status_code", "N/A")
-        print(f"  成功: 否")
+        print("  成功: 否")
         print(f"  HTTP 状态码: {status}")
         print(f"  错误: {ocr_result.get('error', '未知错误')}")
 
@@ -292,7 +291,7 @@ def main():
     if not pymupdf_result.get("is_scanned"):
         chat_result = _call_deepseek_chat_with_file(pdf_path)
         if chat_result.get("success"):
-            print(f"  成功: 是")
+            print("  成功: 是")
             print(f"  耗时: {chat_result.get('elapsed_seconds', 0):.2f} 秒")
             print(f"  Token 使用: {chat_result.get('usage', {})}")
             response_content = ""
@@ -303,10 +302,10 @@ def main():
                 response_content = str(chat_result["response"])[:200]
             print(f"  响应内容: {response_content[:300]}")
         else:
-            print(f"  成功: 否")
+            print("  成功: 否")
             print(f"  错误: {chat_result.get('error', '未知错误')}")
     else:
-        print(f"  跳过: PDF 是扫描件，无法处理")
+        print("  跳过: PDF 是扫描件，无法处理")
 
     # 总结
     print("\n" + "=" * 60)

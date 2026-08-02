@@ -1,0 +1,116 @@
+{
+  "schema_version": "1.0",
+  "recorded_at": "2026-08-01T13:04:59.7302829+01:00",
+  "work_unit": "WR-10.8/WR-10.9",
+  "verdict": "candidate",
+  "healthy": false,
+  "background_worker_healthy": true,
+  "repository_fully_green": false,
+  "remaining_gate": "next_real_login_cold_start_observation",
+  "wr_10_8_next_day": {
+    "verdict": "pass",
+    "desired_state": "enabled",
+    "runtime_state": "running",
+    "production_workers": [7916],
+    "production_supervisors": [20416],
+    "pytest_temp_workers": 0,
+    "pytest_temp_supervisors": 0,
+    "foreign_workers": 0,
+    "foreign_supervisors": 0,
+    "heartbeat_age_seconds": 16.3,
+    "baseline": {
+      "receipt": "artifacts/gates/source-catalog-bg/wr-10-7-final-acceptance-20260731.json",
+      "markdown_pending": 21436,
+      "markdown_completed": 2206,
+      "artifact_rows": 5207
+    },
+    "observed": {
+      "markdown_pending": 21221,
+      "markdown_completed": 2413,
+      "artifact_rows": 5426
+    },
+    "delta": {
+      "markdown_pending": -215,
+      "markdown_completed": 207,
+      "artifact_rows": 219
+    }
+  },
+  "external_interference_after_checkpoint": {
+    "owner": "separate Claude session",
+    "command": "python -m pytest tests/ -q",
+    "effect": "production control_stop followed by restart",
+    "old_worker_supervisor": [7916, 20416],
+    "new_worker_supervisor": [6220, 19332],
+    "classification": "test pollution, not autonomous worker failure"
+  },
+  "subsequent_concurrent_deployment": {
+    "observed_during_expanded_tests": true,
+    "failed_session": "d76f6191d00549af8d307d287301348e",
+    "failure": "AttributeError: SourceCatalogWorker object has no attribute project_root",
+    "classification": "separate Claude session edited and redeployed worker code during this task",
+    "final_worker_file_changed_before_final_worker_start": true,
+    "final_worker_supervisor": [21320, 16232]
+  },
+  "wr_10_9_cold_start": {
+    "implementation": "pass",
+    "registry_install": "pass",
+    "hidden_host_smoke": "pass",
+    "control_first_paint": "pass",
+    "status_timeout_seconds": 30,
+    "registry_action": "\"C:\\WINDOWS\\System32\\wscript.exe\" //B //Nologo \"C:\\Users\\郑曾波\\Projects\\company-wiki\\scripts\\source_catalog_worker_at_logon.vbs\" \"C:\\Miniconda\\python.exe\" \"C:\\Users\\郑曾波\\Projects\\company-wiki\"",
+    "smoke": {
+      "wscript_exit_code": 0,
+      "new_visible_windows": 0,
+      "production_workers_after": [6220],
+      "production_supervisors_after": [19332],
+      "launcher_event": "already_running",
+      "launcher_reason": "launcher_lock_held"
+    },
+    "next_real_login": "not_run"
+  },
+  "test_gates": {
+    "cold_start_contracts": "6 passed",
+    "startup_control_focused": "62 passed, 1 deselected",
+    "cold_start_and_reachability": "32 passed",
+    "source_catalog_expanded": "309 passed, 6 failed",
+    "expanded_failure_stable_rerun": "7 passed, 6 failed",
+    "expanded_failure_scope": "concurrent acquisition and identity-resolver work outside startup/worker call radius",
+    "ruff": "pass",
+    "compileall": "pass",
+    "powershell_parser": "pass",
+    "vbscript_parser": "pass",
+    "scoped_diff_utf8_whitespace": "pass"
+  },
+  "current_health": {
+    "desired_state": "enabled",
+    "runtime_state": "running",
+    "worker_status": "normalizing",
+    "worker_pid": 21320,
+    "supervisor_pid": 16232,
+    "temp_and_foreign_processes": 0,
+    "markdown_pending": 21194,
+    "markdown_completed": 2439,
+    "artifact_rows": 5453,
+    "latest_scan_status": "completed",
+    "latest_scan_errors": 0,
+    "llm_summary_deferred": true,
+    "llm_provider_error": "429 quota exhausted",
+    "clean_observation": {
+      "samples": 5,
+      "duration_seconds": 130,
+      "worker_pid_min_max": [21320, 21320],
+      "supervisor_pid_min_max": [16232, 16232],
+      "temp_and_foreign_max": 0,
+      "heartbeat_age_max_seconds": 8.2,
+      "markdown_pending_delta": -6,
+      "markdown_completed_delta": 6,
+      "artifact_rows_delta": 6
+    }
+  },
+  "files": {
+    "scripts/source_catalog_control.ps1": "30800954D097F8BD6A4843198A649249BB8619DC330A87F17A6AF5AA47D57C93",
+    "scripts/source_catalog_worker_at_logon.vbs": "E62ADA77A775B8EE6C9113006E39EAB4D224036BC2296D89A0B04C4E536AE994",
+    "src/company_wiki/source_catalog/startup.py": "211590A0D629142FB548575E96FB9D11F1429BAC08A5A34A8CCFCCA5DE470804",
+    "tests/contract/test_source_catalog_cold_start.py": "E6991DD3D5CA81B2D8E2A4A1B7D30F8526081D4CEAC350810A43C6439DF95203"
+  }
+}

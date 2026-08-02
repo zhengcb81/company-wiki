@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "id": "RR-11.2",
+  "implementer_id": "root-current-task",
+  "acceptance": "control/acceptance.json",
+  "acceptance_lock": "control/acceptance.lock.json",
+  "baseline_snapshot": "artifacts/gates/rr-11.2-validation-baseline.json",
+  "allowed_paths": [
+    "artifacts/gates/**"
+  ],
+  "invariants": [
+    "Every direct legacy writer/orchestrator CLI is explicitly fail-closed.",
+    "Gate processes cannot inherit legacy-writer authorization.",
+    "Tests make no network or real-LLM call and change no production-data fingerprint.",
+    "Large dirty-tree deletions and production data remain untouched."
+  ],
+  "implementation_evidence": {
+    "preimplementation_snapshot": "artifacts/gates/ctrl-bootstrap-baseline.json",
+    "before_full_external_receipt": "rr112-before-full-3.json",
+    "after_full_external_receipt": "rr112-after-full-3.json",
+    "expected_guarded_cli_minimum": 49,
+    "expected_production_files": 16789,
+    "expected_production_bytes": 25472376070
+  },
+  "commands": [
+    {
+      "name": "acceptance-lock",
+      "argv": [
+        "python",
+        "scripts/gate_runner.py",
+        "verify-lock",
+        "--root",
+        ".",
+        "--lock",
+        "control/acceptance.lock.json"
+      ],
+      "timeout_s": 60
+    },
+    {
+      "name": "writer-freeze-contracts",
+      "argv": [
+        "python",
+        "-m",
+        "pytest",
+        "tests/unit/test_writer_freeze.py",
+        "tests/unit/test_gate_runner.py",
+        "tests/unit/test_clean_env_gate.py",
+        "-q"
+      ],
+      "timeout_s": 180
+    },
+    {
+      "name": "full-local-suite",
+      "argv": [
+        "python",
+        "-m",
+        "pytest",
+        "-q"
+      ],
+      "timeout_s": 300
+    }
+  ]
+}

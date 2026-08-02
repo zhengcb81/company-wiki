@@ -18,7 +18,6 @@ investment_judgment.py — 投资判断层
 
 import argparse
 import re
-import sys
 from collections import defaultdict
 from datetime import datetime
 from pathlib import Path
@@ -972,6 +971,11 @@ def main():
     print(f"  跳过: {total_results['skip']}")
     print(f"  错误: {total_results['error']}")
     print(f"{'=' * 40}")
+
+
+from writer_policy import enforce_direct_cli as _enforce_legacy_writer_freeze
+
+_enforce_legacy_writer_freeze(__name__, __file__)
 
 
 if __name__ == "__main__":

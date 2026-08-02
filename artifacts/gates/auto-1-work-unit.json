@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "id": "AUTO-1-CONTRACTS",
+  "baseline_snapshot": "artifacts/gates/auto-1-before.json",
+  "acceptance": "control/acceptance.json",
+  "acceptance_lock": "control/acceptance.lock.json",
+  "allowed_paths": [
+    "src/company_wiki/automation/__init__.py",
+    "src/company_wiki/automation/models.py",
+    "src/company_wiki/automation/cli.py",
+    "tests/unit/test_automation_models.py",
+    "tests/contract/test_automation_cli.py",
+    "artifacts/gates/auto-1-before.json",
+    "artifacts/gates/auto-1-after.json",
+    "artifacts/gates/auto-1-work-unit.json",
+    "artifacts/gates/auto-1-receipt.json",
+    "task_plan.md",
+    "findings.md",
+    "progress.md"
+  ],
+  "commands": [
+    {
+      "name": "auto-1-contracts",
+      "argv": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/unit/test_automation_models.py",
+        "tests/contract/test_automation_cli.py"
+      ],
+      "timeout_s": 120
+    },
+    {
+      "name": "automation-status-read-only",
+      "argv": [
+        "python",
+        "-m",
+        "company_wiki.automation.cli",
+        "status",
+        "--json"
+      ],
+      "timeout_s": 30
+    },
+    {
+      "name": "automation-doctor-read-only",
+      "argv": [
+        "python",
+        "-m",
+        "company_wiki.automation.cli",
+        "doctor",
+        "--json"
+      ],
+      "timeout_s": 30
+    },
+    {
+      "name": "full-hermetic-pytest",
+      "argv": [
+        "python",
+        "-m",
+        "pytest",
+        "-q"
+      ],
+      "timeout_s": 180
+    }
+  ]
+}

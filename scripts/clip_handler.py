@@ -18,7 +18,6 @@ clip_handler.py -- Obsidian Web Clipper 文件处理器
 
 import argparse
 import hashlib
-import os
 import re
 import shutil
 import sys
@@ -178,7 +177,7 @@ def process_file(filepath, graph, company_patterns, blacklist, dry_run=False):
 
     if not ranked:
         print(f"  WARNING: No company matched for {filepath.name}")
-        print(f"           File remains in inbox.")
+        print("           File remains in inbox.")
         return None, None
 
     best_company, match_count = ranked[0]
@@ -222,7 +221,7 @@ def process_file(filepath, graph, company_patterns, blacklist, dry_run=False):
                 title = line[2:].strip()
                 break
 
-        date_str = datetime.now().strftime("%Y-%m-%d")
+        datetime.now().strftime("%Y-%m-%d")
         frontmatter = (
             f"---\n"
             f"title: \"{title}\"\n"
@@ -305,7 +304,7 @@ def main():
     print(f"\n{'=' * 50}")
     print(f"  Processed: {processed}, Unmatched: {unmatched}")
     if companies_hit:
-        print(f"  Companies:")
+        print("  Companies:")
         for comp, count in sorted(companies_hit.items()):
             print(f"    {comp}: {count} file(s)")
     print(f"{'=' * 50}")

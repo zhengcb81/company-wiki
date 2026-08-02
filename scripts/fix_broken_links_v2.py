@@ -2,7 +2,8 @@
 """一次性 fix: themes 等多个 wiki 里指向 中密控股/中微公司 的 broken_link，
 通过文件名在公司 raw 目下做模糊匹配（lowercase）找真实路径。"""
 
-import re, os
+import re
+import os
 from pathlib import Path
 
 WIKI_ROOT = Path(".")
@@ -60,7 +61,6 @@ for wiki_path, hint in fix_targets:
         target = all_files_index.get(fname.lower())
         if target:
             rel = os.path.relpath(target, str(wiki_dir)).replace("\\", "/")
-            fixed_count = 0
             return f"[来源]({rel})"
         # 也试 不带正反括号 同名版本
         # 试加/剥 .pdf/.PDF 后缀

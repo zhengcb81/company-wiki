@@ -11,9 +11,8 @@ source_discoverer.py — 源发现模块
 
 import argparse
 import re
-import sys
 from pathlib import Path
-from typing import Dict, List, Any, Optional, Set
+from typing import Dict, List
 from dataclasses import dataclass, field
 from datetime import datetime
 
@@ -181,7 +180,7 @@ class SourceDiscoverer:
                             suggestions=[f"添加新闻/公告到 {entity_name}"],
                         ))
             
-            except Exception as e:
+            except Exception:
                 continue
         
         return gaps
@@ -229,7 +228,7 @@ class SourceDiscoverer:
                     except ValueError:
                         pass
             
-            except Exception as e:
+            except Exception:
                 continue
         
         return gaps
@@ -455,21 +454,21 @@ def main():
         with open(output_path, "w", encoding="utf-8") as f:
             f.write("# 来源建议报告\n\n")
             f.write(f"> 生成时间: {datetime.now().strftime('%Y-%m-%d %H:%M')}\n\n")
-            f.write(f"## 概述\n\n")
+            f.write("## 概述\n\n")
             f.write(f"发现 {len(gaps)} 个知识缺口，生成 {len(suggestions)} 个来源建议\n\n")
             
-            f.write(f"## 知识缺口\n\n")
+            f.write("## 知识缺口\n\n")
             for gap_type, gap_list in by_type.items():
                 f.write(f"### {gap_type} ({len(gap_list)}个)\n\n")
                 for gap in gap_list:
                     f.write(f"- {gap.description} (优先级: {gap.priority})\n")
                 f.write("\n")
             
-            f.write(f"## 来源建议\n\n")
+            f.write("## 来源建议\n\n")
             for i, suggestion in enumerate(suggestions, 1):
                 f.write(f"### {i}. {suggestion.title}\n\n")
                 f.write(f"{suggestion.description}\n\n")
-                f.write(f"**搜索词**:\n")
+                f.write("**搜索词**:\n")
                 for query in suggestion.search_queries:
                     f.write(f"- {query}\n")
                 f.write(f"\n**优先级**: {suggestion.priority}\n")

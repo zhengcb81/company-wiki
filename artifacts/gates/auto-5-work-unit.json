@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "id": "AUTO-5-CONTROLLER-CLI",
+  "baseline_snapshot": "artifacts/gates/auto-5-before.json",
+  "acceptance": "control/acceptance.json",
+  "acceptance_lock": "control/acceptance.lock.json",
+  "allowed_paths": [
+    "src/company_wiki/automation/event_sources.py",
+    "src/company_wiki/automation/controller.py",
+    "src/company_wiki/automation/cli.py",
+    "tests/unit/test_automation_controller.py",
+    "tests/contract/test_automation_store_boundary.py",
+    "tests/contract/test_automation_cli.py",
+    "artifacts/gates/auto-5-before.json",
+    "artifacts/gates/auto-5-after.json",
+    "artifacts/gates/auto-5-work-unit.json",
+    "artifacts/gates/auto-5-receipt.json",
+    "task_plan.md",
+    "findings.md",
+    "progress.md"
+  ],
+  "commands": [
+    {
+      "name": "automation-controller-tests",
+      "argv": ["python", "-m", "pytest", "-q", "tests/unit/test_automation_controller.py"],
+      "timeout_s": 120
+    },
+    {
+      "name": "automation-boundary-cli",
+      "argv": ["python", "-m", "pytest", "-q", "tests/contract/test_automation_store_boundary.py", "tests/contract/test_automation_cli.py"],
+      "timeout_s": 120
+    },
+    {
+      "name": "automation-status",
+      "argv": ["python", "-m", "company_wiki.automation.cli", "status", "--json"],
+      "timeout_s": 30
+    },
+    {
+      "name": "automation-doctor",
+      "argv": ["python", "-m", "company_wiki.automation.cli", "doctor", "--json"],
+      "timeout_s": 30
+    },
+    {
+      "name": "full-hermetic-pytest",
+      "argv": ["python", "-m", "pytest", "-q"],
+      "timeout_s": 240
+    }
+  ]
+}

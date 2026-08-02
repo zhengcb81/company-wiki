@@ -20,7 +20,7 @@ import sqlite3
 import threading
 from datetime import datetime
 from pathlib import Path
-from typing import Dict, List, Optional, Any, Union
+from typing import Dict, List, Optional
 
 # ── 路径 ──────────────────────────────────
 from common import WIKI_ROOT

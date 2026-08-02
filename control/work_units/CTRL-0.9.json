@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "id": "CTRL-0.9",
+  "implementer_id": "root-current-task",
+  "acceptance": "control/acceptance.json",
+  "acceptance_lock": "control/acceptance.lock.json",
+  "baseline_snapshot": "artifacts/gates/ctrl-0.9-validation-baseline.json",
+  "allowed_paths": [
+    "artifacts/gates/**"
+  ],
+  "invariants": [
+    "Gate and clean environments strip API keys and disable dotenv loading.",
+    "Ordinary pytest cannot establish a real socket connection.",
+    "Mocked LLM unit tests remain usable without granting real network access.",
+    "Production data and Git index remain unchanged."
+  ],
+  "implementation_evidence": {
+    "clean_receipt_external": "ctrl09-clean-receipt.json",
+    "clean_candidate_files": 451,
+    "clean_full_suite_passed": 588
+  },
+  "commands": [
+    {
+      "name": "acceptance-lock",
+      "argv": [
+        "python",
+        "scripts/gate_runner.py",
+        "verify-lock",
+        "--root",
+        ".",
+        "--lock",
+        "control/acceptance.lock.json"
+      ],
+      "timeout_s": 60
+    },
+    {
+      "name": "hermetic-runtime-contracts",
+      "argv": [
+        "python",
+        "-m",
+        "pytest",
+        "tests/unit/test_hermetic_runtime.py",
+        "tests/unit/test_config.py",
+        "tests/unit/test_llm_client.py",
+        "tests/unit/test_query.py",
+        "-q"
+      ],
+      "timeout_s": 180
+    },
+    {
+      "name": "full-local-suite",
+      "argv": [
+        "python",
+        "-m",
+        "pytest",
+        "-q"
+      ],
+      "timeout_s": 300
+    }
+  ]
+}

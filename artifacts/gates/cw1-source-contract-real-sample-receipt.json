@@ -1,0 +1,132 @@
+{
+  "acceptance_id": "urn:company-wiki:cw1-acceptance:sha256:fa056bfb4b0dc23787e11c63caf093948a49f9a098bab8735c5d6bda73c0001c",
+  "announcement_collection": {
+    "collection_id": "urn:company-wiki:announcement-collection:sha256:51c2151daddc44857f96099f3319e951e281e6ba31996eba7ac189c7894686af",
+    "collector_name": "company-wiki-explicit-announcement",
+    "collector_version": "1.0.0",
+    "manifest_file_sha256": "0d5a70c044677af5bd1a73d08a473fca3a4a3b8812decadb67365e6c2ffd168e",
+    "manifest_path": "source_manifests/companies/中微公司/888f427abdb31cb5b284b73263d6b0aebf08f0e5e75814268cea85139857fc87.json",
+    "provenance_file_sha256": "2becd484dc30bda2d8c466cb1f6aa71db1b06f3e21432cf88a61757c8bbec9e6",
+    "provenance_path": "source_provenance/companies/中微公司/announcements/90d8afc844403b83a3ee0b8f62bf598e0581a9f70a5b6269c3b922287825bcb3.json",
+    "source_url": "https://star.sse.com.cn/disclosure/listedinfo/announcement/c/new/2026-03-25/688012_20260325_404H.pdf"
+  },
+  "checks": {
+    "announcement_pdf_verified_visually": true,
+    "announcement_provenance_verified": true,
+    "export_ids_identical": true,
+    "forbidden_downstream_terms_absent": true,
+    "full_replay_bytes_identical": true,
+    "incremental_bytes_identical": true,
+    "original_announcement_raw_present": true,
+    "production_raw_unchanged": true,
+    "raw_digest_unchanged": true,
+    "required_inputs_present": true,
+    "retrieval_timestamps_deterministic": true,
+    "source_reverification_passed": true,
+    "stockwiki_write_absent": true,
+    "table_locator_verified_visually": true,
+    "three_companies_present": true
+  },
+  "export": {
+    "bundle_sha256": "3a27f14457f8ed5f00acd34ad7feaff0f0ccc541c6a62ea286f1ad04b6957b8e",
+    "counts": {
+      "evidence_spans": 3,
+      "source_manifests": 3
+    },
+    "export_id": "urn:company-wiki:source-export:sha256:3a27f14457f8ed5f00acd34ad7feaff0f0ccc541c6a62ea286f1ad04b6957b8e",
+    "schema_version": "1.0.0"
+  },
+  "known_gaps": [],
+  "observed_at": "2026-07-18T08:47:53Z",
+  "receipt_sha256": "fa056bfb4b0dc23787e11c63caf093948a49f9a098bab8735c5d6bda73c0001c",
+  "result": "candidate",
+  "samples": [
+    {
+      "byte_size": 2074,
+      "company": "北方华创",
+      "content_sha256": "e5479f65d643b6737f9352e7aaae203bfe757608455055677462397ec794d24c",
+      "entity_id": "SZSE:002371",
+      "input_kind": "news",
+      "locator": "loc:v1/paragraph:0/chars:203-231",
+      "original_path": "companies/北方华创/raw/news/2026-04-25_b0116710_北方华创2025年营收同比增长逾三成_国产化替代持续加速.md",
+      "parse_status": "parsed",
+      "published_date": "2026-04-25",
+      "quality_flags": [],
+      "retrieved_at": "2026-05-19T20:34:55Z",
+      "source_id": "urn:company-wiki:source:sha256:e5479f65d643b6737f9352e7aaae203bfe757608455055677462397ec794d24c",
+      "source_type": "original_news",
+      "span_id": "urn:company-wiki:evidence-span:sha256:d6e0fda2a256a1dabff752c660bf2afafb07a85f46c9994f106a27d3df85c4b9"
+    },
+    {
+      "byte_size": 115427,
+      "company": "中微公司",
+      "content_sha256": "888f427abdb31cb5b284b73263d6b0aebf08f0e5e75814268cea85139857fc87",
+      "entity_id": "SSE:688012",
+      "input_kind": "announcement",
+      "locator": "loc:v1/page:1/paragraph:0",
+      "original_path": "companies/中微公司/raw/announcements/888f427abdb31cb5b284b73263d6b0aebf08f0e5e75814268cea85139857fc87.pdf",
+      "parse_status": "parsed",
+      "published_date": "2026-03-25",
+      "quality_flags": [],
+      "retrieved_at": "2026-07-18T08:43:35Z",
+      "source_id": "urn:company-wiki:source:sha256:888f427abdb31cb5b284b73263d6b0aebf08f0e5e75814268cea85139857fc87",
+      "source_type": "company_announcement",
+      "span_id": "urn:company-wiki:evidence-span:sha256:54e0f75897fe66c50b188f806cba18a34816c5660c9cab32a4c6bba4c347ca67"
+    },
+    {
+      "byte_size": 192593,
+      "company": "中芯国际",
+      "content_sha256": "08385ab4fcde54dc411ea3131285cf57abbb3ad93e63dea2096ecb2e94b52961",
+      "entity_id": "SSE:688981",
+      "input_kind": "financial_report_table",
+      "locator": "loc:v1/page:10/table:0/row:2/column:1",
+      "original_path": "companies/中芯国际/raw/financial_reports/中芯国际：中芯国际2025年第一季度报告.pdf",
+      "parse_status": "parsed",
+      "published_date": null,
+      "quality_flags": [],
+      "retrieved_at": "2026-05-24T11:53:41Z",
+      "source_id": "urn:company-wiki:source:sha256:08385ab4fcde54dc411ea3131285cf57abbb3ad93e63dea2096ecb2e94b52961",
+      "source_type": "regulatory_filing",
+      "span_id": "urn:company-wiki:evidence-span:sha256:00a95ae29f60733fcd35ccef27c501426a54ec8ae594647017a652a16d22ed67"
+    }
+  ],
+  "schema_version": "1.1.0",
+  "scope": {
+    "companies": [
+      "北方华创",
+      "中微公司",
+      "中芯国际"
+    ],
+    "required_inputs": [
+      "announcement",
+      "financial_report",
+      "news",
+      "table"
+    ],
+    "stockwiki_write_allowed": false
+  },
+  "visual_verification": {
+    "announcement": {
+      "announcement_number": "2026-016",
+      "document": "中微公司关于召开2025年度业绩说明会的公告",
+      "page_count": 2,
+      "page_number": 1,
+      "render_result": "legible_no_clipping_or_overlap",
+      "security_code": "688012",
+      "signature_date": "2026-03-25",
+      "title": "关于召开2025年度业绩说明会的公告"
+    },
+    "financial_table": {
+      "column_index": 1,
+      "document": "中芯国际2025年第一季度报告",
+      "label": "货币资金",
+      "page_number": 10,
+      "period": "2025-03-31",
+      "raw_text": "36,042,919",
+      "render_result": "legible_no_clipping_or_overlap",
+      "row_index": 2,
+      "table_index": 0,
+      "unit": "CNY_thousand"
+    }
+  }
+}

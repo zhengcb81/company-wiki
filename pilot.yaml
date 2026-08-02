@@ -1,0 +1,114 @@
+# Pilot 配置 — Phase 12 正确性验证范围
+# 只有 pilot 范围内的实体才参与 shadow/canary 验证
+
+pilot:
+  companies:
+    - name: 北方华创
+      ticker: "002371"
+      exchange: SZSE
+      sectors: [半导体设备, 刻蚀设备, 薄膜沉积设备, 清洗设备]
+      themes: [半导体国产替代]
+      rationale: "国产半导体设备龙头，产品线最全，数据最丰富"
+
+    - name: 中微公司
+      ticker: "688012"
+      exchange: SSE STAR
+      sectors: [半导体设备, 刻蚀设备]
+      themes: [半导体国产替代]
+      rationale: "刻蚀设备龙头，CCP/ICP全覆盖，与北方华创有竞合关系"
+
+    - name: 中芯国际
+      ticker: "688981"
+      exchange: SSE STAR
+      sectors: [半导体代工]
+      themes: [半导体国产替代]
+      rationale: "国内代工龙头，设备采购方，可验证下游需求传导"
+
+  sectors:
+    - name: 半导体设备
+      questions:
+        - 各环节设备国产化率？
+        - 先进制程设备进展？
+        - 大客户订单和扩产计划？
+        - 美国制裁对设备出口的影响？
+
+  themes:
+    - name: 半导体国产替代
+      questions:
+        - 国产替代进度如何？
+        - 哪些环节替代率最高/最低？
+        - 政策支持力度？
+
+  # 10-20 个高价值研究问题（跨实体）
+  questions:
+    - id: Q001
+      text: "北方华创2025年订单增速？"
+      owner: 北方华创
+      priority: high
+      evidence_type: financial_report
+
+    - id: Q002
+      text: "中微公司刻蚀设备市占率变化？"
+      owner: 中微公司
+      priority: high
+      evidence_type: financial_report
+
+    - id: Q003
+      text: "中芯国际先进制程产能利用率？"
+      owner: 中芯国际
+      priority: high
+      evidence_type: financial_report
+
+    - id: Q004
+      text: "半导体设备国产化率整体水平？"
+      owner: 半导体设备
+      priority: high
+      evidence_type: industry_report
+
+    - id: Q005
+      text: "美国制裁对北方华创出口影响？"
+      owner: 北方华创
+      priority: high
+      evidence_type: news
+
+    - id: Q006
+      text: "中微公司与北方华创在刻蚀领域的竞争格局？"
+      owner: null  # cross-entity
+      priority: medium
+      evidence_type: comparison
+
+    - id: Q007
+      text: "中芯国际资本开支计划及对设备采购的影响？"
+      owner: 中芯国际
+      priority: medium
+      evidence_type: financial_report
+
+    - id: Q008
+      text: "国产替代政策（大基金等）最新动向？"
+      owner: 半导体国产替代
+      priority: medium
+      evidence_type: news
+
+    - id: Q009
+      text: "北方华创薄膜沉积设备进展？"
+      owner: 北方华创
+      priority: medium
+      evidence_type: financial_report
+
+    - id: Q010
+      text: "中微公司MOCVD设备市场地位？"
+      owner: 中微公司
+      priority: medium
+      evidence_type: financial_report
+
+    - id: Q011
+      text: "半导体设备行业景气度指标？"
+      owner: 半导体设备
+      priority: medium
+      evidence_type: industry_report
+
+    - id: Q012
+      text: "中芯国际与台积电技术差距？"
+      owner: 中芯国际
+      priority: medium
+      evidence_type: comparison

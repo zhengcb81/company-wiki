@@ -4,13 +4,12 @@
 避免重复初始化 graph 和 llm_client。
 """
 
-import sys
 import re
 import argparse
 import hashlib
 from pathlib import Path
 
-from common import SCRIPTS_DIR
+from common import require_legacy_writer_permission
 
 from ingest_v2 import (
     process_file,
@@ -111,6 +110,9 @@ def scan_company_files(
 
 
 def main():
+    if not require_legacy_writer_permission("batch_ingest.py"):
+        return
+
     parser = argparse.ArgumentParser(description="批量 Ingest v2")
     parser.add_argument("--company", type=str, required=True)
     parser.add_argument("--limit", type=int, default=0, help="最多处理 N 个")
@@ -122,7 +124,6 @@ def main():
 
     graph = Graph(str(WIKI_ROOT / "graph.yaml"))
     llm_client = get_llm_client()
-    llm_client.model = "deepseek-v4-flash"
     llm_client._max_tokens = 4096
     llm_client._timeout = 120
 
@@ -176,6 +177,11 @@ def main():
     print(
         f"Done. Entries:{total_entries} Assessments:{total_assessments} Skip:{skipped} Err:{errors}"
     )
+
+
+from writer_policy import enforce_direct_cli as _enforce_legacy_writer_freeze
+
+_enforce_legacy_writer_freeze(__name__, __file__)
 
 
 if __name__ == "__main__":

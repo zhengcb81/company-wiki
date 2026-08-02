@@ -4,9 +4,6 @@
 """
 
 import pytest
-import os
-import tempfile
-import shutil
 from pathlib import Path
 import sys
 
@@ -26,8 +23,8 @@ class TestConfigLoading:
         config = load_config(config_path)
 
         assert config is not None
-        assert config.llm.provider == "deepseek"
-        assert config.llm.model == "deepseek-v4-flash"
+        assert config.llm.provider == "minimax"
+        assert config.llm.model == "MiniMax-M3"
         assert config.search.engine == "tavily"
         assert config.search.results_per_query == 8
 
@@ -62,13 +59,13 @@ search:
 
         # 设置环境变量
         monkeypatch.setenv("TAVILY_API_KEY", "env-tavily-key-12345")
-        monkeypatch.setenv("DEEPSEEK_API_KEY", "env-deepseek-key-12345")
+        monkeypatch.setenv("MINIMAX_API_KEY", "env-minimax-key-12345")
 
         config_path = temp_wiki_structure / "config.yaml"
         config = load_config(config_path)
 
         # 验证环境变量覆盖了文件中的值
-        assert config.llm.api_key == "env-deepseek-key-12345"
+        assert config.llm.api_key == "env-minimax-key-12345"
         assert config.search.api_key == "env-tavily-key-12345"
 
     def test_config_missing_file(self, tmp_path):
@@ -80,7 +77,7 @@ search:
         # 现在不抛出异常，改用默认值
         config = load_config(config_path)
         assert config is not None
-        assert config.llm.provider == "deepseek"  # 默认值
+        assert config.llm.provider == "minimax"  # 默认值
 
     def test_config_invalid_yaml(self, tmp_path):
         """测试无效 YAML 格式"""
@@ -193,7 +190,7 @@ paths:
 @pytest.mark.e2e
 def test_full_config_workflow(temp_wiki_structure, monkeypatch):
     """完整配置工作流测试"""
-    from config_loader import load_config, Config
+    from config_loader import load_config
 
     # 1. 从文件加载
     config_path = temp_wiki_structure / "config.yaml"
@@ -206,7 +203,7 @@ def test_full_config_workflow(temp_wiki_structure, monkeypatch):
     assert config2.search.api_key == "workflow-test-key"
 
     # 3. 验证配置完整性
-    assert config2.llm.provider == "deepseek"
+    assert config2.llm.provider == "minimax"
     assert config2.search.engine == "tavily"
     assert config2.schedule.news_collection == "daily"
 

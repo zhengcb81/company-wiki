@@ -12,7 +12,6 @@ log_writer.py -- 统一日志写入模块
 """
 
 import shutil
-import sys
 from datetime import datetime
 from pathlib import Path
 

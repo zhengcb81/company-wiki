@@ -4,7 +4,7 @@
 """
 import yaml
 from pathlib import Path
-from typing import Optional, Dict, Any
+from typing import Optional
 import logging
 
 from .graph_data import GraphData
@@ -36,7 +36,7 @@ class GraphLoader:
         Returns:
             GraphData 对象
         """
-        dump_kwargs = dict(allow_unicode=True, default_flow_style=False,
+        dict(allow_unicode=True, default_flow_style=False,
                            sort_keys=False, width=120)
 
         # 主 graph.yaml（edges, questions, settings）

@@ -14,9 +14,8 @@ cleanup_junk.py — 清理明显垃圾条目
 import argparse
 import re
 import sys
-from pathlib import Path
 
-from common import WIKI_ROOT
+from common import WIKI_ROOT, require_legacy_writer_permission
 
 from config_rules_loader import RulesConfig
 
@@ -85,7 +84,6 @@ def remove_orphan_entries(dry_run=True):
         if "## 时间线" not in text:
             continue
 
-        original_text = text
         timeline_pos = text.find("## 时间线")
         timeline_section = text[timeline_pos:]
         next_section = re.search(r"\n## (?!时间线)", timeline_section)
@@ -165,6 +163,9 @@ def remove_orphan_entries(dry_run=True):
 
 
 def main():
+    if not require_legacy_writer_permission("cleanup_junk.py"):
+        return 1
+
     parser = argparse.ArgumentParser(description="清理明显垃圾条目")
     parser.add_argument("--dry-run", action="store_true", help="预览模式（默认）")
     parser.add_argument("--execute", action="store_true", help="实际执行")
@@ -197,6 +198,11 @@ def main():
         print(f"\n提示: 运行 `python3 {__file__} --execute` 应用清理")
         return 1
     return 0
+
+
+from writer_policy import enforce_direct_cli as _enforce_legacy_writer_freeze
+
+_enforce_legacy_writer_freeze(__name__, __file__)
 
 
 if __name__ == "__main__":

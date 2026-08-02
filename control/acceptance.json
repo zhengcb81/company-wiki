@@ -1,0 +1,165 @@
+{
+  "schema_version": 1,
+  "owner": "reviewer",
+  "status_lifecycle": [
+    "pending",
+    "in_progress",
+    "candidate",
+    "verified",
+    "completed"
+  ],
+  "implementer_max_status": "candidate",
+  "design_sources": [
+    {
+      "path": "设计思想.md",
+      "sha256": "ed5a040732374c4973c5b15688a045568821d93150766bae622ac3fc682308db"
+    },
+    {
+      "path": "llm-wiki.md",
+      "sha256": "dc3efe98ae62f23dd08acad13aba2e95287beb20b6bec2f4af0423557fe37401"
+    },
+    {
+      "path": "AGENTS.md",
+      "sha256": "e55f1ac4fadf2f8079287ead6c6b3a82cc26ef3c9b3490ea520583674c35eb88"
+    }
+  ],
+  "reviewer_owned_paths": [
+    "control/acceptance.json",
+    "control/acceptance.lock.json",
+    "control/architecture.json",
+    "control/commands/**",
+    "control/work_units/**",
+    "tests/acceptance/**",
+    "tests/fixtures/gold_corpus/expected/**",
+    "artifacts/recovery/deletion-manifest.json",
+    "artifacts/security/secret-decision.json"
+  ],
+  "hard_policy": {
+    "failed": 0,
+    "collection_errors": 0,
+    "unexpected_skips": 0,
+    "unexpected_xfails": 0,
+    "pytest_return_warnings": 0,
+    "network_allowed": false,
+    "real_llm_allowed": false,
+    "production_data_writes_allowed": false,
+    "waiver_required_below_threshold": true,
+    "pass_with_notes_can_satisfy_hard_gate": false
+  },
+  "invariants": [
+    {
+      "id": "raw-immutability",
+      "description": "Ingest, cleanup and migration never modify or delete raw sources without an approved manifest.",
+      "observable": "before/after raw manifest is byte-identical"
+    },
+    {
+      "id": "evidence-conservation",
+      "description": "Every active factual claim has a resolvable source revision and evidence locator.",
+      "observable": "active factual evidence coverage equals 1.0"
+    },
+    {
+      "id": "commit-conservation",
+      "description": "Accepted patch, claims, answers and per-target outbox are committed in one transaction.",
+      "observable": "crash injection never exposes a completed source with incomplete hidden delivery"
+    },
+    {
+      "id": "projection-determinism",
+      "description": "The same accepted ledger and template version produce identical bytes across dates and machines.",
+      "observable": "rebuild SHA-256 is identical"
+    },
+    {
+      "id": "propagation-conservation",
+      "description": "Company, sector and theme targets are independently idempotent and recoverable.",
+      "observable": "partial target failure only retries incomplete deliveries"
+    },
+    {
+      "id": "control-conservation",
+      "description": "Budget, write mode, kill switch and review decisions control the real production writers.",
+      "observable": "fault drills stop or resume the canonical production entrypoint"
+    },
+    {
+      "id": "reproducibility",
+      "description": "A clean clone can install, test and rebuild projections without local raw, network or real LLM.",
+      "observable": "clean environment gate receipt passes"
+    }
+  ],
+  "semantic_thresholds": {
+    "active_factual_evidence_coverage": 1.0,
+    "numeric_exactness": 0.95,
+    "material_claim_recall": 0.95,
+    "routing_precision": 0.9,
+    "routing_recall": 0.85,
+    "raw_deleted": 0,
+    "duplicate_deliveries": 0,
+    "schema_errors": 0,
+    "link_errors": 0
+  },
+  "phase_gates": {
+    "P11": [
+      "recovery-baseline",
+      "deletion-manifest",
+      "writer-freeze",
+      "secret-decision"
+    ],
+    "P12": [
+      "clean-install",
+      "hermetic-tests",
+      "reviewer-owned-gold",
+      "ci-runs-current-project"
+    ],
+    "P13": [
+      "stable-identities",
+      "strict-config",
+      "source-revisions",
+      "registry-migrations"
+    ],
+    "P14": [
+      "canonical-shadow-cli",
+      "production-tree-zero-write",
+      "evidence-gate",
+      "reproducible-proposals"
+    ],
+    "P15": [
+      "transactional-ledger-outbox",
+      "crash-recovery-matrix",
+      "deterministic-projector",
+      "legacy-writer-zero"
+    ],
+    "P16": [
+      "semantic-thresholds",
+      "three-entity-routing",
+      "question-dependencies",
+      "derived-staleness"
+    ],
+    "P17": [
+      "pilot-copy-only",
+      "plan-apply-inverse",
+      "repeat-apply-zero-change",
+      "interruption-resume"
+    ],
+    "P18": [
+      "canonical-scheduler",
+      "budget-stop",
+      "kill-restart",
+      "write-mode-controls-real-writers"
+    ],
+    "P19": [
+      "clean-clone",
+      "cross-platform-ci",
+      "computed-quality-snapshot",
+      "full-dr-rebuild"
+    ],
+    "P20": [
+      "multi-cycle-shadow-canary",
+      "real-failure-drills",
+      "legacy-production-callers-zero",
+      "rollback-evidence"
+    ],
+    "P21": [
+      "no-lifecycle-skip",
+      "critical-human-approval",
+      "inverse-apply",
+      "slo-demotion"
+    ]
+  }
+}

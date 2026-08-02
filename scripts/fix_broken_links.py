@@ -10,7 +10,6 @@ import os
 import re
 import glob
 from pathlib import Path
-from collections import defaultdict
 
 from common import WIKI_ROOT
 DRY_RUN = False  # Set to True to only report, not fix
@@ -103,7 +102,7 @@ def main():
     print(f"\nFixing broken links ({'DRY RUN' if DRY_RUN else 'LIVE RUN'})...")
     stats = fix_wiki_files(pdf_index, dry_run=DRY_RUN)
 
-    print(f"\nResults:")
+    print("\nResults:")
     print(f"  Files scanned: {stats['files_scanned']}")
     print(f"  Links fixed (path updated): {stats['links_fixed']}")
     print(f"  Links removed (PDF not found): {stats['links_removed']}")
@@ -112,6 +111,11 @@ def main():
 
     if DRY_RUN:
         print("\n[DRY RUN] No files were modified. Run without --dry-run to apply fixes.")
+
+
+from writer_policy import enforce_direct_cli as _enforce_legacy_writer_freeze
+
+_enforce_legacy_writer_freeze(__name__, __file__)
 
 
 if __name__ == '__main__':

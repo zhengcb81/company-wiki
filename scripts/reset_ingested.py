@@ -11,7 +11,6 @@ reset_ingested.py — 清除公司的 ingested 标记，让 v2 重新处理
 import argparse
 import hashlib
 import sys
-from pathlib import Path
 
 from common import WIKI_ROOT
 
@@ -86,6 +85,11 @@ def main():
 
     else:
         parser.print_help()
+
+
+from writer_policy import enforce_direct_cli as _enforce_legacy_writer_freeze
+
+_enforce_legacy_writer_freeze(__name__, __file__)
 
 
 if __name__ == "__main__":

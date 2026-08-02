@@ -141,6 +141,56 @@ fingerprint_retry_backoff_seconds: 900
         load_worker_config(path, project_root=project)
 
 
+def test_worker_config_1_3_requires_bounded_parser_liveness_settings(tmp_path):
+    from company_wiki.source_catalog.worker import load_worker_config
+
+    project = tmp_path / "project"
+    path = project / "config" / "source_catalog_worker.yaml"
+    path.parent.mkdir(parents=True)
+    payload = """
+schema_version: '1.3'
+runtime_config: '${PROJECT_ROOT}/config.yaml'
+scan_interval_minutes: 60
+export_interval_minutes: 60
+poll_interval_seconds: 30
+active_poll_interval_seconds: 2
+idle_seconds_required: 600
+require_user_idle: false
+normalize_batch_size: 1
+llm_summary_batch_size: 1
+llm_max_input_chars: 120000
+llm_max_output_tokens: 1200
+llm_retry_backoff_minutes: 60
+allow_processing_on_battery: false
+fingerprint_backfill_batch_size: 3
+fingerprint_retry_limit: 3
+fingerprint_retry_backoff_seconds: 900
+document_parse_timeout_seconds: 3600
+parser_heartbeat_interval_seconds: 15
+parser_result_max_bytes: 268435456
+normalization_retry_limit: 3
+normalization_retry_backoff_seconds: 900
+""".strip()
+    path.write_text(payload, encoding="utf-8")
+
+    config = load_worker_config(path, project_root=project)
+
+    assert config.document_parse_timeout_seconds == 3600
+    assert config.parser_heartbeat_interval_seconds == 15
+    assert config.parser_result_max_bytes == 268_435_456
+    assert config.normalization_retry_limit == 3
+
+    path.write_text(
+        payload.replace(
+            "parser_heartbeat_interval_seconds: 15",
+            "parser_heartbeat_interval_seconds: 3600",
+        ),
+        encoding="utf-8",
+    )
+    with pytest.raises(ValueError, match="parser_heartbeat_interval_seconds"):
+        load_worker_config(path, project_root=project)
+
+
 @dataclass
 class _Report:
     completed: int = 1
@@ -159,18 +209,27 @@ class _FakeCatalog:
     def __init__(self):
         self.calls: list[tuple[str, int | None]] = []
         self.summary_report = _Report()
+        self.normalize_options: dict = {}
+        self.fingerprint_options: dict = {}
 
     def scan(self, *, progress=None):
         self.calls.append(("scan", None))
         return _Report()
 
-    def normalize(self, *, limit, progress=None):
+    def normalize(self, *, limit, progress=None, **kwargs):
+        self.normalize_options = dict(kwargs)
         self.calls.append(("normalize", limit))
         return _Report()
 
     def backfill_text_fingerprints(self, *, limit, progress=None,
                                    should_stop=None, retry_limit=3,
-                                   retry_backoff_seconds=900):
+                                   retry_backoff_seconds=900, **kwargs):
+        del progress, should_stop
+        self.fingerprint_options = {
+            "retry_limit": retry_limit,
+            "retry_backoff_seconds": retry_backoff_seconds,
+            **kwargs,
+        }
         self.calls.append(("backfill_text_fingerprints", limit))
         return _Report()
 
@@ -196,7 +255,9 @@ class _StopAwareFingerprintCatalog(_FakeCatalog):
         should_stop=None,
         retry_limit=3,
         retry_backoff_seconds=900,
+        **kwargs,
     ):
+        del kwargs
         assert should_stop is not None
         self.fingerprint_stop_requested = should_stop()
         return super().backfill_text_fingerprints(
@@ -221,14 +282,19 @@ class _ProgressCatalog(_FakeCatalog):
             )
         return _Report()
 
-    def normalize(self, *, limit, progress=None):
+    def normalize(self, *, limit, progress=None, **kwargs):
+        del kwargs
         self.calls.append(("normalize", limit))
         assert progress is not None
         progress(
             current_path="C:/incoming/current-report.pdf",
             current=1,
             total=3,
-            detail="extracting Markdown",
+            detail="parser_alive",
+            parser_pid=4321,
+            parser_elapsed_seconds=12.5,
+            parser_timeout_seconds=3600,
+            parser_ownership="windows_job",
         )
         return _Report()
 
@@ -268,6 +334,95 @@ class _Idle:
 
     def on_battery(self) -> bool:
         return self.battery
+
+
+def test_worker_passes_parser_liveness_and_retry_limits_to_both_paths(tmp_path):
+    from company_wiki.source_catalog.worker import SourceCatalogWorker, WorkerConfig
+
+    catalog = _FakeCatalog()
+    worker = SourceCatalogWorker(
+        catalog,
+        WorkerConfig(
+            runtime_config=tmp_path / "config.yaml",
+            scan_interval_seconds=3600,
+            export_interval_seconds=3600,
+            poll_interval_seconds=30,
+            idle_seconds_required=600,
+            normalize_batch_size=1,
+            llm_summary_batch_size=1,
+            llm_max_input_chars=120000,
+            llm_max_output_tokens=1200,
+            llm_retry_backoff_seconds=3600,
+            allow_processing_on_battery=False,
+            document_parse_timeout_seconds=4200,
+            parser_heartbeat_interval_seconds=20,
+            parser_result_max_bytes=134_217_728,
+            normalization_retry_limit=4,
+            normalization_retry_backoff_seconds=1200,
+        ),
+        state_path=tmp_path / "state.json",
+        idle_detector=_Idle(700),
+        llm_client_factory=lambda: object(),
+    )
+
+    worker.run_cycle(now=10_000)
+
+    assert catalog.normalize_options["parser_timeout_seconds"] == 4200
+    assert catalog.normalize_options["parser_heartbeat_interval_seconds"] == 20
+    assert catalog.normalize_options["parser_result_max_bytes"] == 134_217_728
+    assert catalog.normalize_options["retry_limit"] == 4
+    assert catalog.normalize_options["retry_backoff_seconds"] == 1200
+    assert catalog.fingerprint_options["parser_timeout_seconds"] == 4200
+    assert catalog.fingerprint_options["parser_heartbeat_interval_seconds"] == 20
+    assert catalog.fingerprint_options["parser_result_max_bytes"] == 134_217_728
+
+
+def test_worker_persists_stable_parse_timeout_counters(tmp_path):
+    from company_wiki.source_catalog.models import ProcessingReport
+    from company_wiki.source_catalog.normalizer import DOCUMENT_PARSE_TIMEOUT_CODE
+    from company_wiki.source_catalog.worker import SourceCatalogWorker, WorkerConfig
+
+    class TimeoutCatalog(_FakeCatalog):
+        def normalize(self, *, limit, progress=None, **kwargs):
+            del progress, kwargs
+            self.calls.append(("normalize", limit))
+            return ProcessingReport(
+                "normalize",
+                failed=1,
+                eligible=1,
+                terminal_reasons={DOCUMENT_PARSE_TIMEOUT_CODE: 1},
+                last_failure_code=DOCUMENT_PARSE_TIMEOUT_CODE,
+                last_failed_document_id="document-timeout",
+                last_failed_path="C:/sources/timeout.pdf",
+            )
+
+    state_path = tmp_path / "state.json"
+    worker = SourceCatalogWorker(
+        TimeoutCatalog(),
+        WorkerConfig(
+            runtime_config=tmp_path / "config.yaml",
+            scan_interval_seconds=3600,
+            export_interval_seconds=3600,
+            poll_interval_seconds=30,
+            idle_seconds_required=600,
+            normalize_batch_size=1,
+            llm_summary_batch_size=1,
+            llm_max_input_chars=120000,
+            llm_max_output_tokens=1200,
+            llm_retry_backoff_seconds=3600,
+            allow_processing_on_battery=False,
+        ),
+        state_path=state_path,
+        idle_detector=_Idle(700),
+        llm_client_factory=lambda: object(),
+    )
+
+    worker.run_cycle(now=10_000)
+    persisted = json.loads(state_path.read_text(encoding="utf-8"))
+
+    assert persisted["parse_timeout_total"] == 1
+    assert persisted["last_parse_timeout_document_id"] == "document-timeout"
+    assert persisted["last_parse_timeout_path"] == "C:/sources/timeout.pdf"
 
 
 def test_worker_processes_while_the_user_is_active_when_idle_is_not_required(tmp_path):
@@ -450,6 +605,11 @@ def test_worker_reports_document_paths_percentages_and_throttles_scan_updates(tm
     assert normalizing["progress_current"] == 1
     assert normalizing["progress_total"] == 3
     assert normalizing["progress_percent"] == 33.3
+    assert normalizing["progress_detail"] == "parser_alive"
+    assert normalizing["parser_pid"] == 4321
+    assert normalizing["parser_elapsed_seconds"] == 12.5
+    assert normalizing["parser_timeout_seconds"] == 3600
+    assert normalizing["parser_ownership"] == "windows_job"
     summarizing = [details for stage, details in events if stage == "summarizing"][-1]
     assert summarizing["progress_percent"] == 50.0
     assert summarizing["progress_detail"] == "calling LLM summary"
@@ -499,6 +659,109 @@ def test_worker_defers_llm_retries_after_a_global_provider_failure(tmp_path):
     second = worker.run_cycle(now=20_030)
     assert second["summarize_llm"]["status"] == "deferred"
     assert "summarize_with_llm" not in [name for name, _ in catalog.calls]
+    assert worker.state["last_error"] == "LLMProviderError: HTTP 429 rate limited"
+    assert worker.state["last_error_scope"] == "llm_global"
+
+
+def test_successful_local_cycle_replaces_stale_cycle_error_with_active_llm_error(
+    tmp_path,
+):
+    from company_wiki.source_catalog.worker import SourceCatalogWorker, WorkerConfig
+
+    class FailNormalizeOnce(_FakeCatalog):
+        def __init__(self):
+            super().__init__()
+            self.fail_once = True
+
+        def normalize(self, *, limit, progress=None, **kwargs):
+            if self.fail_once:
+                self.fail_once = False
+                raise OSError("synthetic disk I/O error")
+            return super().normalize(limit=limit, progress=progress, **kwargs)
+
+    catalog = FailNormalizeOnce()
+    config = WorkerConfig(
+        runtime_config=tmp_path / "config.yaml",
+        scan_interval_seconds=3600,
+        export_interval_seconds=3600,
+        poll_interval_seconds=30,
+        idle_seconds_required=600,
+        normalize_batch_size=1,
+        llm_summary_batch_size=1,
+        llm_max_input_chars=120000,
+        llm_max_output_tokens=1200,
+        llm_retry_backoff_seconds=3600,
+        allow_processing_on_battery=False,
+    )
+    worker = SourceCatalogWorker(
+        catalog,
+        config,
+        state_path=tmp_path / "state.json",
+        idle_detector=_Idle(700),
+        llm_client_factory=lambda: object(),
+    )
+    retry_after = __import__("time").time() + 3600
+    global_error = "LLMProviderError: HTTP 429 quota exhausted"
+    worker.state.update(
+        {
+            "llm_retry_after": retry_after,
+            "last_error": global_error,
+            "last_llm_summary_report": {
+                "failed": 1,
+                "failure_scope": "global",
+                "error": global_error,
+            },
+        }
+    )
+
+    failed = worker._run_cycle_guarded()
+    assert failed["status"] == "failed"
+    assert worker.state["last_error"] == "OSError: synthetic disk I/O error"
+
+    recovered = worker.run_cycle(now=retry_after - 1800)
+
+    assert recovered["summarize_llm"]["status"] == "deferred"
+    assert worker.state["last_cycle_status"] == "completed"
+    assert worker.state["last_error"] == global_error
+    assert worker.state["last_error_scope"] == "llm_global"
+
+
+def test_successful_cycle_without_llm_work_clears_a_stale_cycle_error(tmp_path):
+    from company_wiki.source_catalog.worker import SourceCatalogWorker, WorkerConfig
+
+    worker = SourceCatalogWorker(
+        _FakeCatalog(),
+        WorkerConfig(
+            runtime_config=tmp_path / "config.yaml",
+            scan_interval_seconds=3600,
+            export_interval_seconds=3600,
+            poll_interval_seconds=30,
+            idle_seconds_required=600,
+            normalize_batch_size=1,
+            llm_summary_batch_size=1,
+            llm_max_input_chars=120000,
+            llm_max_output_tokens=1200,
+            llm_retry_backoff_seconds=3600,
+            allow_processing_on_battery=False,
+            require_user_idle=True,
+        ),
+        state_path=tmp_path / "state.json",
+        idle_detector=_Idle(0),
+        llm_client_factory=lambda: object(),
+    )
+    worker.state.update(
+        {
+            "last_error": "OSError: recovered disk I/O error",
+            "last_error_scope": "cycle",
+        }
+    )
+
+    result = worker.run_cycle(now=20_000)
+
+    assert result["summarize_llm"] is None
+    assert worker.state["last_cycle_status"] == "completed"
+    assert worker.state["last_error"] is None
+    assert worker.state["last_error_scope"] is None
 
 
 def test_worker_continues_after_a_document_scoped_llm_failure(tmp_path):
@@ -702,6 +965,54 @@ def test_forever_worker_uses_interruptible_wait_and_releases_session(tmp_path):
     assert "waiting" in session.heartbeats
     assert session.heartbeats[-1] == "stopping"
     assert [name for name, _ in catalog.calls] == ["scan", "export"]
+
+
+def test_forever_worker_freezes_loaded_code_fingerprint_at_session_start(
+    tmp_path, monkeypatch
+):
+    import company_wiki.source_catalog.worker as worker_module
+    from company_wiki.source_catalog.worker import SourceCatalogWorker, WorkerConfig
+
+    monkeypatch.setattr(
+        worker_module,
+        "source_bundle_fingerprint",
+        lambda _root: {
+            "fingerprint": "a" * 64,
+            "error": None,
+            "files": [{"path": "worker.py", "sha256": "b" * 64}],
+        },
+        raising=False,
+    )
+    session = _StoppingSession()
+    worker = SourceCatalogWorker(
+        _FakeCatalog(),
+        WorkerConfig(
+            runtime_config=tmp_path / "config.yaml",
+            scan_interval_seconds=3600,
+            export_interval_seconds=3600,
+            poll_interval_seconds=30,
+            idle_seconds_required=600,
+            normalize_batch_size=1,
+            llm_summary_batch_size=1,
+            llm_max_input_chars=120000,
+            llm_max_output_tokens=1200,
+            llm_retry_backoff_seconds=3600,
+            allow_processing_on_battery=False,
+            require_user_idle=True,
+        ),
+        state_path=tmp_path / "state.json",
+        project_root=tmp_path,
+        idle_detector=_Idle(20),
+        llm_client_factory=lambda: object(),
+    )
+
+    worker.run_forever(control=_ControlStub(session))
+
+    starting = next(
+        details for status, details in session.heartbeat_details if status == "starting"
+    )
+    assert starting["loaded_code_fingerprint"] == "a" * 64
+    assert starting["loaded_code_fingerprint_error"] is None
 
 
 def test_forever_worker_uses_active_wait_and_reports_next_wake_after_productive_cycle(
@@ -987,7 +1298,7 @@ def test_llm_summary_rejects_generated_investment_conclusions(tmp_path):
         == "LLMSummaryError: LLM response contains a forbidden investment conclusion"
     )
     assert report.failed_document_id
-    assert report.failure_scope in ("document", "permanent_document")
+    assert report.failure_scope == "permanent_document"
     # CW-3.5 / Phase 10: permanent_document errors still get recorded
     # in the failure table with a long retry window, but the report's
     # retry_after/retry_count fields are None (no immediate backoff needed).
@@ -999,7 +1310,7 @@ def test_llm_summary_rejects_generated_investment_conclusions(tmp_path):
         (report.failed_document_id,),
     )
     assert failure is not None
-    assert failure["failure_scope"] in ("document", "permanent_document")
+    assert failure["failure_scope"] == "permanent_document"
     assert failure["attempt_count"] >= 1
     assert failure["retry_after"] == report.retry_after
 
@@ -1451,7 +1762,7 @@ def test_llm_summary_rejects_generated_investment_conclusions(tmp_path):
         == "LLMSummaryError: LLM response contains a forbidden investment conclusion"
     )
     assert report.failed_document_id
-    assert report.failure_scope in ("document", "permanent_document")
+    assert report.failure_scope == "permanent_document"
     # CW-3.5 / Phase 10: permanent_document errors still get recorded
     # in the failure table with a long retry window, but the report's
     # retry_after/retry_count fields are None (no immediate backoff needed).
@@ -1463,7 +1774,7 @@ def test_llm_summary_rejects_generated_investment_conclusions(tmp_path):
         (report.failed_document_id,),
     )
     assert failure is not None
-    assert failure["failure_scope"] in ("document", "permanent_document")
+    assert failure["failure_scope"] == "permanent_document"
     assert failure["attempt_count"] >= 1
     assert failure["retry_after"] == report.retry_after
 

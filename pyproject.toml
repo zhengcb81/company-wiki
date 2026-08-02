@@ -1,11 +1,11 @@
 [build-system]
 requires = ["setuptools>=68.0", "wheel"]
-build-backend = "setuptools.backends._legacy:_Backend"
+build-backend = "setuptools.build_meta"
 
 [project]
 name = "company-wiki"
 version = "0.1.0"
-description = "上市公司知识库系统 — 基于 LLM 的上市公司研究知识库"
+description = "StockWiki 上游公司资料采集、不可变来源与证据定位平台"
 requires-python = ">=3.10"
 dependencies = [
     "pyyaml>=6.0",
@@ -13,12 +13,37 @@ dependencies = [
     "openai>=1.0.0",
 ]
 
+[project.scripts]
+company-wiki-source-export = "company_wiki.source_contract.cli:main"
+company-wiki-collect-announcement = "company_wiki.source_contract.announcement_cli:main"
+company-wiki-source-catalog = "company_wiki.source_catalog.cli:main"
+company-wiki-identify = "company_wiki.source_catalog.identity_cli:main"
+
 [project.optional-dependencies]
 pdf = ["PyMuPDF>=1.23.0"]
 download = ["playwright>=1.40.0"]
+catalog = [
+    "PyMuPDF>=1.23.0",
+    "beautifulsoup4>=4.12.0",
+    "docling-core>=2.0.0",
+    "markdownify>=0.13.0",
+    "opencc>=1.4.1,<2.0",
+    "openpyxl>=3.1.0",
+    "python-docx>=1.1.0",
+    "python-pptx>=1.0.0",
+    "xlrd>=2.0.0",
+]
 all = [
     "PyMuPDF>=1.23.0",
     "playwright>=1.40.0",
+    "beautifulsoup4>=4.12.0",
+    "docling-core>=2.0.0",
+    "markdownify>=0.13.0",
+    "opencc>=1.4.1,<2.0",
+    "openpyxl>=3.1.0",
+    "python-docx>=1.1.0",
+    "python-pptx>=1.0.0",
+    "xlrd>=2.0.0",
 ]
 test = [
     "pytest>=7.0.0",
@@ -30,16 +55,21 @@ test = [
     "coverage>=7.0.0",
 ]
 
-[tool.setuptools.packages.find]
-include = ["scripts*"]
+[tool.setuptools]
+package-dir = {"" = "src"}
 
-[tool.pytest.ini_options]
-testpaths = ["tests"]
-addopts = "-v --tb=short --strict-markers"
-markers = [
-    "slow: marks tests as slow",
-    "integration: marks tests as integration tests",
-    "e2e: marks tests as end-to-end tests",
-    "unit: marks tests as unit tests",
-]
-asyncio_mode = "auto"
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["company_wiki*"]
+
+[tool.setuptools.package-data]
+"company_wiki.source_contract.schemas" = ["*.json"]
+
+[tool.ruff.lint.per-file-ignores]
+"scripts/*.py" = ["E402", "E741", "F401"]
+"tests/contract/test_source_catalog_worker.py" = ["F811"]
+"tests/unit/test_hermetic_runtime.py" = ["E402"]
+"tests/unit/test_secret_audit.py" = ["E402"]
+"tests/unit/test_deletion_manifest.py" = ["E402"]
+"tests/unit/test_secret_preflight.py" = ["E402"]
+"tests/unit/test_writer_freeze.py" = ["E402"]

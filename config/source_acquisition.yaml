@@ -1,0 +1,27 @@
+schema_version: "1.1"
+staging_root: "${PROJECT_ROOT}/.source_catalog/staging"
+# dayu HK/US downloads wait for Docling+RapidOCR conversion before exiting;
+# large PDFs can take 5-15 minutes. 30 minutes provides ample headroom.
+timeout_seconds: 1800
+adapters:
+  cn:
+    name: "stockinfo-cninfo"
+    version: "1.1.0"
+    interface: "json_command_v1"
+    project_root: "${PROJECT_ROOT}/../StockInfoDLSimple/v2-clean-rewrite"
+    config_root: null
+    command: ["${PYTHON_EXECUTABLE}", "-m", "src.company_wiki_adapter_cli"]
+  hk:
+    name: "dayu-hkex-cli"
+    version: "1.0.0"
+    interface: "dayu_cli_v1"
+    project_root: "${PROJECT_ROOT}/../dayu-agent/dayu-agent"
+    config_root: "${PROJECT_ROOT}/../dayu-agent/workspace/config"
+    command: ["${PROJECT_ROOT}/../dayu-agent/dayu-agent/.venv/Scripts/python.exe", "-m", "dayu.cli"]
+  us:
+    name: "dayu-sec-cli"
+    version: "1.0.0"
+    interface: "dayu_cli_v1"
+    project_root: "${PROJECT_ROOT}/../dayu-agent/dayu-agent"
+    config_root: "${PROJECT_ROOT}/../dayu-agent/workspace/config"
+    command: ["${PROJECT_ROOT}/../dayu-agent/dayu-agent/.venv/Scripts/python.exe", "-m", "dayu.cli"]

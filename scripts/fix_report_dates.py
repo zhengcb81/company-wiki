@@ -59,7 +59,6 @@ def fix_wiki_dates(wiki_path: Path, dry_run=True):
         return 0, 0, 0
 
     text = wiki_path.read_text(encoding="utf-8")
-    original_text = text
 
     # 找到时间线部分
     timeline_pos = text.find("## 时间线")
@@ -69,10 +68,10 @@ def fix_wiki_dates(wiki_path: Path, dry_run=True):
     timeline_section = text[timeline_pos:]
     next_section = re.search(r"\n## (?!时间线)", timeline_section)
     if next_section:
-        after_timeline = timeline_section[next_section.start() :]
+        timeline_section[next_section.start() :]
         timeline_section = timeline_section[: next_section.start()]
     else:
-        after_timeline = ""
+        pass
 
     # 分割条目（每个条目以 ### 开头）
     entry_pattern = re.compile(
@@ -190,6 +189,11 @@ def main():
         print(f"\n提示: 运行 `python3 {__file__} --execute` 应用修正")
         return 1
     return 0
+
+
+from writer_policy import enforce_direct_cli as _enforce_legacy_writer_freeze
+
+_enforce_legacy_writer_freeze(__name__, __file__)
 
 
 if __name__ == "__main__":

@@ -1,0 +1,96 @@
+{
+  "schema_version": "1.0",
+  "work_unit": "WR-10.9 Step 6",
+  "title": "next-login pre-login baseline",
+  "taken_at": "2026-08-02T17:19:04Z",
+  "launcher_events_tail": [
+    {
+      "schema_version": "1.1",
+      "recorded_at": "2026-08-02T14:12:38.5712572Z",
+      "status": "child_started",
+      "message": "",
+      "reason": "worker_process_started",
+      "python_exe": "C:\\Miniconda\\python.exe",
+      "project_root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "startup_delay_seconds": 0,
+      "worker_hang_timeout_seconds": 900,
+      "child_poll_milliseconds": 5000,
+      "launcher_pid": 6428,
+      "session_id": "622b718924d748ea938965e85ccb00ee",
+      "stdout_log": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.source_catalog\\worker_stdout-622b718924d748ea938965e85ccb00ee-attempt-0001.log",
+      "stderr_log": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.source_catalog\\worker_stderr-622b718924d748ea938965e85ccb00ee-attempt-0001.log",
+      "launcher_source_hashes": {
+        "supervisor_ps1": "5c12cd740cc36abf95f3b9559485472d9d9a760143d27de46e3aaa7b4bbbc311",
+        "logon_ps1": "70b4d7d7128567c0a753e684c3d4e8359c6a93bdc3dbefc7c5f93feaadbe5a1c",
+        "logon_vbs": "e62ada77a775b8ee6c9113006e39eab4d224036bc2296d89a0b04c4e536ae994"
+      },
+      "attempt": 1,
+      "child_pid": 14188
+    },
+    {
+      "schema_version": "1.1",
+      "recorded_at": "2026-08-02T15:48:38.8452187Z",
+      "status": "starting",
+      "message": "",
+      "reason": "launcher_session_started",
+      "python_exe": "C:\\Miniconda\\python.exe",
+      "project_root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "startup_delay_seconds": 120,
+      "worker_hang_timeout_seconds": 900,
+      "child_poll_milliseconds": 5000,
+      "launcher_pid": 14432,
+      "session_id": "d913baa231c44ea08b4c73587006e64a",
+      "stdout_log": "",
+      "stderr_log": "",
+      "launcher_source_hashes": {
+        "supervisor_ps1": "5c12cd740cc36abf95f3b9559485472d9d9a760143d27de46e3aaa7b4bbbc311",
+        "logon_ps1": "70b4d7d7128567c0a753e684c3d4e8359c6a93bdc3dbefc7c5f93feaadbe5a1c",
+        "logon_vbs": "e62ada77a775b8ee6c9113006e39eab4d224036bc2296d89a0b04c4e536ae994"
+      }
+    },
+    {
+      "schema_version": "1.1",
+      "recorded_at": "2026-08-02T15:48:39.0200482Z",
+      "status": "child_started",
+      "message": "",
+      "reason": "worker_process_started",
+      "python_exe": "C:\\Miniconda\\python.exe",
+      "project_root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "startup_delay_seconds": 120,
+      "worker_hang_timeout_seconds": 900,
+      "child_poll_milliseconds": 5000,
+      "launcher_pid": 14432,
+      "session_id": "d913baa231c44ea08b4c73587006e64a",
+      "stdout_log": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.source_catalog\\worker_stdout-d913baa231c44ea08b4c73587006e64a-attempt-0001.log",
+      "stderr_log": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.source_catalog\\worker_stderr-d913baa231c44ea08b4c73587006e64a-attempt-0001.log",
+      "launcher_source_hashes": {
+        "supervisor_ps1": "5c12cd740cc36abf95f3b9559485472d9d9a760143d27de46e3aaa7b4bbbc311",
+        "logon_ps1": "70b4d7d7128567c0a753e684c3d4e8359c6a93bdc3dbefc7c5f93feaadbe5a1c",
+        "logon_vbs": "e62ada77a775b8ee6c9113006e39eab4d224036bc2296d89a0b04c4e536ae994"
+      },
+      "attempt": 1,
+      "child_pid": 12956
+    }
+  ],
+  "process_events_tail": [
+    {
+      "event": "session_opened",
+      "pid": 14188,
+      "timestamp": "2026-08-02T15:12:39.245270",
+      "catalog_dir": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.source_catalog"
+    },
+    {
+      "event": "process_starting",
+      "pid": 12956,
+      "timestamp": "2026-08-02T16:48:40.112451",
+      "catalog_dir": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.source_catalog"
+    },
+    {
+      "event": "session_opened",
+      "pid": 12956,
+      "timestamp": "2026-08-02T16:48:40.293521",
+      "catalog_dir": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.source_catalog"
+    }
+  ],
+  "note": "captured before user performs the real Windows logon for Step 6"
+}

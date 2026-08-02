@@ -1,0 +1,102 @@
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.0.1, pluggy-1.5.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: C:\Users\郑曾波\Projects\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-40.19.1, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 47 items
+
+tests\contract\test_gold_corpus.py .........................FFFFFFFFFFF. [ 78%]
+FFFFFFFFFF                                                               [100%]
+
+================================== FAILURES ===================================
+E   AssertionError: 缺少 corpus_manifest.json（C:\Users\郑曾波\Projects\company-wiki\tests\fixtures\gold_corpus\corpus_manifest.json）；当前 corpus 没有唯一目录索引
+    assert False
+     +  where False = exists()
+     +    where exists = WindowsPath('C:/Users/郑曾波/Projects/company-wiki/tests/fixtures/gold_corpus/corpus_manifest.json').exists
+C:\Users\郑曾波\Projects\company-wiki\tests\contract\test_gold_corpus.py:481: AssertionError: 缺少 corpus_manifest.json（C:\Users\郑曾波\Projects\company-wiki\tests\fixtures\gold_corpus\corpus_manifest.json）；当前 corpus 没有唯一目录索引
+E   assert None is not None
+C:\Users\郑曾波\Projects\company-wiki\tests\contract\test_gold_corpus.py:487: assert None is not None
+E   assert None is not None
+C:\Users\郑曾波\Projects\company-wiki\tests\contract\test_gold_corpus.py:494: assert None is not None
+E   assert None is not None
+C:\Users\郑曾波\Projects\company-wiki\tests\contract\test_gold_corpus.py:499: assert None is not None
+E   assert None is not None
+C:\Users\郑曾波\Projects\company-wiki\tests\contract\test_gold_corpus.py:509: assert None is not None
+E   assert None is not None
+C:\Users\郑曾波\Projects\company-wiki\tests\contract\test_gold_corpus.py:520: assert None is not None
+E   assert None is not None
+C:\Users\郑曾波\Projects\company-wiki\tests\contract\test_gold_corpus.py:530: assert None is not None
+E   AssertionError: annotation 引用了 4 个不存在的 source: ['gk-bh-correction', 'gk-mt-irrelevant', 'gk-zw-2025-ar', 'gk-zw-ambiguous']
+    assert not ['gk-bh-correction', 'gk-mt-irrelevant', 'gk-zw-2025-ar', 'gk-zw-ambiguous']
+C:\Users\郑曾波\Projects\company-wiki\tests\contract\test_gold_corpus.py:552: AssertionError: annotation 引用了 4 个不存在的 source: ['gk-bh-correction', 'gk-mt-irrelevant', 'gk-zw-2025-ar', 'gk-zw-ambiguous']
+E   AssertionError: 3 个 span 未被任何 claim 引用: ['S005', 'S006', 'S008']
+    assert not ['S005', 'S006', 'S008']
+C:\Users\郑曾波\Projects\company-wiki\tests\contract\test_gold_corpus.py:556: AssertionError: 3 个 span 未被任何 claim 引用: ['S005', 'S006', 'S008']
+E   AssertionError: 3 个 span 的 claim_id 指向不存在的 claim: [('S005', 'C005'), ('S006', 'C006'), ('S008', 'C008')]
+    assert not [('S005', 'C005'), ('S006', 'C006'), ('S008', 'C008')]
+C:\Users\郑曾波\Projects\company-wiki\tests\contract\test_gold_corpus.py:560: AssertionError: 3 个 span 的 claim_id 指向不存在的 claim: [('S005', 'C005'), ('S006', 'C006'), ('S008', 'C008')]
+E   AssertionError: contradictions 引用了 2 个不存在的 claim: ['C010', 'C011']
+    assert not ['C010', 'C011']
+C:\Users\郑曾波\Projects\company-wiki\tests\contract\test_gold_corpus.py:567: AssertionError: contradictions 引用了 2 个不存在的 claim: ['C010', 'C011']
+E   AssertionError: 9 个 span 的 offset 与正文不符: [('S001', 'body[start:end] != text'), ('S002', 'body[start:end] != text'), ('S003', 'body[start:end] != text'), ('S004', 'body[start:end] != text'), ('S005', 'body[start:end] != text'), ('S006', 'body[start:end] != text'), ('S007', 'body[start:end] != text'), ('S008', 'body[start:end] != text'), ('S009', 'end 1480 > body len 1211')]
+    assert not [('S001', 'body[start:end] != text'), ('S002', 'body[start:end] != text'), ('S003', 'body[start:end] != text'), ('S004', 'body[start:end] != text'), ('S005', 'body[start:end] != text'), ('S006', 'body[start:end] != text'), ...]
+C:\Users\郑曾波\Projects\company-wiki\tests\contract\test_gold_corpus.py:592: AssertionError: 9 个 span 的 offset 与正文不符: [('S001', 'body[start:end] != text'), ('S002', 'body[start:end] != text'), ('S003', 'body[start:end] != text'), ('S004', 'body[start:end] != text'), ('S005', 'body[start:end] != text'), ('S006', 'body[start:end] != text'), ('S007', 'body[start:end] != text'), ('S008', 'body[start:end] != text'), ('S009', 'end 1480 > body len 1211')]
+E   AssertionError: README 声称存在 sources/中芯国际/，但磁盘无此目录
+    assert False
+     +  where False = is_dir()
+     +    where is_dir = (WindowsPath('C:/Users/郑曾波/Projects/company-wiki/tests/fixtures/gold_corpus/sources') / '中芯国际').is_dir
+C:\Users\郑曾波\Projects\company-wiki\tests\contract\test_gold_corpus.py:606: AssertionError: README 声称存在 sources/中芯国际/，但磁盘无此目录
+E   AssertionError: README 声称存在 annotations/numeric_values.json，但磁盘无此文件
+    assert False
+     +  where False = exists()
+     +    where exists = (WindowsPath('C:/Users/郑曾波/Projects/company-wiki/tests/fixtures/gold_corpus/annotations') / 'numeric_values.json').exists
+C:\Users\郑曾波\Projects\company-wiki\tests\contract\test_gold_corpus.py:612: AssertionError: README 声称存在 annotations/numeric_values.json，但磁盘无此文件
+E   AssertionError: README 未提及 corpus_manifest.json（唯一目录索引）
+    assert 'corpus_manifest.json' in '# Gold Corpus — 金标语料库\n\n## 用途\n\n验证系统正确性的**人工标注** ground truth。\n\n## 结构\n\n```\ngold_corpus/\n├── sources/         ...主实体"},\n    {"entity_id": "半导体设备", "confidence": "medium", "reason": "行业关联"}\n  ],\n  "has_ambiguity": false\n}\n```\n'
+C:\Users\郑曾波\Projects\company-wiki\tests\contract\test_gold_corpus.py:618: AssertionError: README 未提及 corpus_manifest.json（唯一目录索引）
+E   AssertionError: corpus 仅 1 个 source revision，低于门槛 30
+    assert 1 >= 30
+C:\Users\郑曾波\Projects\company-wiki\tests\contract\test_gold_corpus.py:632: AssertionError: corpus 仅 1 个 source revision，低于门槛 30
+E   AssertionError: source kind 覆盖不足: {'regulatory': (1, 6), 'company_announcement': (0, 5), 'ir': (0, 5), 'broker_research': (0, 5), 'original_news': (0, 5), 'aggregated_news': (0, 4)}
+    assert not {'aggregated_news': (0, 4), 'broker_research': (0, 5), 'company_announcement': (0, 5), 'ir': (0, 5), ...}
+C:\Users\郑曾波\Projects\company-wiki\tests\contract\test_gold_corpus.py:643: AssertionError: source kind 覆盖不足: {'regulatory': (1, 6), 'company_announcement': (0, 5), 'ir': (0, 5), 'broker_research': (0, 5), 'original_news': (0, 5), 'aggregated_news': (0, 4)}
+E   AssertionError: corpus 仅覆盖 1 家公司 {'北方华创'}，低于门槛 3
+    assert 1 >= 3
+     +  where 1 = len({'北方华创'})
+C:\Users\郑曾波\Projects\company-wiki\tests\contract\test_gold_corpus.py:658: AssertionError: corpus 仅覆盖 1 家公司 {'北方华创'}，低于门槛 3
+E   AssertionError: source_coverage.total_sources=5 与磁盘 source 数 1 不符
+    assert 5 == 1
+C:\Users\郑曾波\Projects\company-wiki\tests\contract\test_gold_corpus.py:678: AssertionError: source_coverage.total_sources=5 与磁盘 source 数 1 不符
+E   AssertionError: material_claim_recall.total_material_claims=9 与标注 claims 数 6 不符
+    assert 9 == 6
+C:\Users\郑曾波\Projects\company-wiki\tests\contract\test_gold_corpus.py:686: AssertionError: material_claim_recall.total_material_claims=9 与标注 claims 数 6 不符
+E   AssertionError: 指标未达标 [('numeric_exactness', 0.857, 0.95)]，但 all_critical_metrics_pass=true
+    assert True is not True
+     +  where True = <built-in method get of dict object at 0x00000147EF6D4480>('all_critical_metrics_pass')
+     +    where <built-in method get of dict object at 0x00000147EF6D4480> = {'all_critical_metrics_pass': True, 'notes': '金标语料验证通过，可进入canary阶段', 'ready_for_canary': True}.get
+C:\Users\郑曾波\Projects\company-wiki\tests\contract\test_gold_corpus.py:704: AssertionError: 指标未达标 [('numeric_exactness', 0.857, 0.95)]，但 all_critical_metrics_pass=true
+=========================== short test summary info ===========================
+FAILED tests/contract/test_gold_corpus.py::TestCorpusManifest::test_manifest_file_exists
+FAILED tests/contract/test_gold_corpus.py::TestCorpusManifest::test_manifest_top_level_fields
+FAILED tests/contract/test_gold_corpus.py::TestCorpusManifest::test_manifest_synthetic_only
+FAILED tests/contract/test_gold_corpus.py::TestCorpusManifest::test_manifest_revisions_have_required_fields
+FAILED tests/contract/test_gold_corpus.py::TestCorpusManifest::test_manifest_ids_are_layered
+FAILED tests/contract/test_gold_corpus.py::TestCorpusManifest::test_manifest_paths_resolve_to_real_files
+FAILED tests/contract/test_gold_corpus.py::TestCorpusManifest::test_manifest_content_sha256_matches_disk
+FAILED tests/contract/test_gold_corpus.py::TestReferentialIntegrity::test_no_missing_sources_referenced
+FAILED tests/contract/test_gold_corpus.py::TestReferentialIntegrity::test_no_orphan_spans
+FAILED tests/contract/test_gold_corpus.py::TestReferentialIntegrity::test_spans_claim_refs_exist
+FAILED tests/contract/test_gold_corpus.py::TestReferentialIntegrity::test_contradiction_claim_refs_exist
+FAILED tests/contract/test_gold_corpus.py::TestEvidenceExactness::test_span_offsets_match_source_body
+FAILED tests/contract/test_gold_corpus.py::TestReadmeConsistency::test_readme_claimed_source_dirs_exist
+FAILED tests/contract/test_gold_corpus.py::TestReadmeConsistency::test_readme_claimed_annotation_files_exist
+FAILED tests/contract/test_gold_corpus.py::TestReadmeConsistency::test_readme_mentions_manifest
+FAILED tests/contract/test_gold_corpus.py::TestCoverageGates::test_revision_count_at_least_30
+FAILED tests/contract/test_gold_corpus.py::TestCoverageGates::test_source_kind_coverage
+FAILED tests/contract/test_gold_corpus.py::TestCoverageGates::test_company_coverage_at_least_3
+FAILED tests/contract/test_gold_corpus.py::TestQualityMetricsConsistency::test_total_sources_matches_disk
+FAILED tests/contract/test_gold_corpus.py::TestQualityMetricsConsistency::test_total_material_claims_matches_annotations
+FAILED tests/contract/test_gold_corpus.py::TestQualityMetricsConsistency::test_below_threshold_implies_not_canary_ready
+======================== 21 failed, 26 passed in 0.24s ========================

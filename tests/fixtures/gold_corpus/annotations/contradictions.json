@@ -1,0 +1,91 @@
+{
+  "version": "1.0",
+  "annotator": "human",
+  "annotated_at": "2025-04-01",
+  "contradictions": [
+    {
+      "id": "CONTRADICT-001",
+      "type": "restatement",
+      "description": "年报更正公告修正营收数据",
+      "original_claim": {
+        "claim_id": "C001",
+        "source_id": "gk-bh-2025-ar",
+        "text": "2025年营收185.6亿元"
+      },
+      "correcting_claim": {
+        "claim_id": "C010",
+        "source_id": "gk-bh-correction",
+        "text": "2025年营收更正为183.2亿元，原披露185.6亿元为计算错误"
+      },
+      "resolution": "以更正公告为准",
+      "effective_date": "2025-04-15"
+    },
+    {
+      "id": "CONTRADICT-002",
+      "type": "restatement",
+      "description": "二次更正2023年营收",
+      "original_claim": {
+        "claim_id": "C014",
+        "source_id": "gk-zw-2023-restated",
+        "text": "中微公司重述后2023年营业收入47.4亿元"
+      },
+      "correcting_claim": {
+        "claim_id": "C043",
+        "source_id": "gk-zw-correction2",
+        "text": "中微公司二次更正2023年营业收入为47.1亿元"
+      },
+      "resolution": "以二次更正公告为准",
+      "effective_date": "2025-01-15"
+    }
+  ],
+  "corrections": [
+    {
+      "id": "CORRECTION-001",
+      "type": "numeric_restatement",
+      "original_source": "gk-bh-2025-ar",
+      "correcting_source": "gk-bh-correction",
+      "affected_claims": [
+        "C001"
+      ],
+      "field_changes": [
+        {
+          "field": "value",
+          "old": 185.6,
+          "new": 183.2,
+          "reason": "计算错误"
+        }
+      ]
+    },
+    {
+      "id": "CORRECTION-002",
+      "type": "numeric_restatement",
+      "original_source": "gk-zw-2023-restated",
+      "correcting_source": "gk-zw-correction2",
+      "affected_claims": [
+        "C014"
+      ],
+      "field_changes": [
+        {
+          "field": "value",
+          "old": 47.4,
+          "new": 47.1,
+          "reason": "二次口径复核"
+        }
+      ]
+    }
+  ],
+  "supersedes": [
+    {
+      "newer_claim": "C011",
+      "supersedes": "C007",
+      "reason": "更新在手订单数据",
+      "effective_date": "2025-06-30"
+    },
+    {
+      "newer_claim": "C044",
+      "supersedes": "C012",
+      "reason": "更新Q1营收数据",
+      "effective_date": "2025-05-20"
+    }
+  ]
+}

@@ -1,0 +1,98 @@
+{
+ "schema_version": "1.0",
+ "work_unit": "WR-10.15",
+ "title": "重点关注目录准入、优先调度与存量清理",
+ "verdict": "accepted",
+ "completed_at": "2026-08-02T11:10:00Z",
+ "evidence": {
+  "preflight_0": {
+   "status": "passed",
+   "detail": "现场冻结；worker stopped→resumed；242文件恒等式；163目标locations全active；1共享document 3外部位"
+  },
+  "preflight_1": {
+   "status": "passed",
+   "detail": "5/5 rollout blockers RED→GREEN"
+  },
+  "gate_a": {
+   "status": "passed",
+   "detail": "full suite 386 passed (163.28s) + focused 22P + static gates"
+  },
+  "gate_b": {
+   "status": "passed",
+   "detail": "生产dry-run决策82行人工复核 + 合同测试覆盖apply/restore/两轮rescan（轻量方案，用户批准）"
+  },
+  "gate_c": {
+   "status": "passed",
+   "detail": "pause→dry-run→apply→幂等→archive→index→resume",
+   "apply": {
+    "database_locations_deleted": 163,
+    "documents_deleted": 162,
+    "sources_deleted": 162,
+    "sidecars_deleted": 81,
+    "artifact_files_deleted": 40,
+    "archived_files": 134,
+    "original_delete_count": 0,
+    "shared_documents_preserved": 1,
+    "foreign_key_violations": 0
+   },
+   "idempotent_second_apply": {
+    "status": "completed",
+    "deletions": 0
+   },
+   "index_rebuild": {
+    "target_path_hits": 0
+   },
+   "archive_sampling": {
+    "verified": "7/7 SHA matches"
+   },
+   "resume": {
+    "code_match": true,
+    "fingerprint": "eb10131da6f1"
+   }
+  },
+  "gate_d": {
+   "status": "passed",
+   "rescan_1": {
+    "policy": 82,
+    "reborn": 0,
+    "errors_new": 0
+   },
+   "rescan_2": {
+    "policy": 82,
+    "reborn": 0,
+    "errors_new": 0
+   },
+   "observation_10min": {
+    "pid_stable": true,
+    "heartbeat": true,
+    "queue_progress": true,
+    "failed_blocked_growth": 0
+   },
+   "priority_canary": {
+    "order": [
+     "prospectus",
+     "annual_report",
+     "semi_annual_report",
+     "quarterly_report",
+     "investor_relations",
+     "investor_call_transcript",
+     "broker_research"
+    ],
+    "match": true
+   }
+  }
+ },
+ "rollback_assets": {
+  "snapshot": "artifacts/gates/wr1015-affected-rows-20260802.jsonl",
+  "snapshot_sha256": "a6b948e2df22c0109bc15a5f22161b31d33ca8c9d155d31c95cfdf3a9baca547",
+  "archive_dir": ".source_catalog/focus_cleanup_archive/20260802",
+  "archive_manifest_sha256": "460ef355adbdfa1d2aaa8703409ce7f241d1a154de9edfaffb61901703de35fa",
+  "restore": "FocusScopeCleanupService.restore_files() + restore_database()"
+ },
+ "out_of_scope": [
+  "WR-10.13 fingerprint terminal",
+  "final fingerprint pilot",
+  ">900s slow canary",
+  "next-login gate"
+ ]
+}

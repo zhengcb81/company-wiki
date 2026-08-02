@@ -9,9 +9,9 @@
 import time
 import logging
 import json
-from datetime import datetime, timedelta
+from datetime import datetime
 from pathlib import Path
-from typing import Dict, Any, List, Optional, Callable
+from typing import Dict, Any, List, Optional
 from dataclasses import dataclass, field, asdict
 from functools import wraps
 from collections import defaultdict
@@ -399,7 +399,7 @@ if __name__ == "__main__":
     
     # 打印摘要
     summary = monitor.get_summary()
-    print(f"\n监控摘要:")
+    print("\n监控摘要:")
     print(f"  计数器: {len(summary['counters'])}")
     print(f"  仪表盘: {len(summary['gauges'])}")
     print(f"  计时器: {len(summary['timers'])}")

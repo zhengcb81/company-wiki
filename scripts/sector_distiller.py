@@ -104,13 +104,13 @@ def distill_sector(
     # 获取行业信息
     sector = graph.get_sector(sector_name)
     if not sector:
-        print(f"  -> SKIP | Sector not found in graph.yaml")
+        print("  -> SKIP | Sector not found in graph.yaml")
         return {"status": "skip", "reason": "not_found"}
 
     # 获取所属公司
     companies = get_sector_companies(graph, sector_name)
     if not companies:
-        print(f"  -> SKIP | No companies in this sector")
+        print("  -> SKIP | No companies in this sector")
         return {"status": "skip", "reason": "no_companies"}
 
     # 获取各公司最新的时间线条目
@@ -121,7 +121,7 @@ def distill_sector(
             company_entries[cname] = entries
 
     if not company_entries:
-        print(f"  -> SKIP | No company wiki entries found")
+        print("  -> SKIP | No company wiki entries found")
         return {"status": "skip", "reason": "no_entries"}
 
     # 如果公司太多，按最近更新时间取前几个
@@ -163,7 +163,7 @@ def distill_sector(
     )
 
     print(f"  Companies: {len(company_entries)}, Entries: {total_entries}")
-    print(f"  Calling LLM...")
+    print("  Calling LLM...")
 
     if dry_run:
         print(f"  [DRY] Would call LLM with {total_entries} entries from {len(company_entries)} companies")
@@ -175,7 +175,7 @@ def distill_sector(
     )
 
     if not response.success:
-        print(f"  -> ERR | LLM call failed")
+        print("  -> ERR | LLM call failed")
         return {"status": "error", "reason": "llm_failed"}
 
     # 解析 JSON 输出
@@ -231,7 +231,7 @@ def distill_sector(
         if assessment_update:
             from batch_assessment import add_assessment_section
             add_assessment_section(sector_wiki, assessment_update)
-            print(f"  -> Assessment updated")
+            print("  -> Assessment updated")
 
         return {
             "status": "success",
@@ -240,7 +240,7 @@ def distill_sector(
             "assessment": bool(assessment_update),
         }
     else:
-        print(f"  -> SKIP | Sector wiki not found")
+        print("  -> SKIP | Sector wiki not found")
         return {"status": "skip", "reason": "no_wiki"}
 
 
@@ -263,7 +263,6 @@ def main():
 
     graph = Graph(str(WIKI_ROOT / "graph.yaml"))
     llm_client = get_llm_client()
-    llm_client.model = "deepseek-v4-flash"
     llm_client._max_tokens = 4096
     llm_client._timeout = 120
 
@@ -299,7 +298,7 @@ def main():
         details.append(f"{sname}: {status}")
 
     print("\n" + "=" * 50)
-    print(f"  蒸馏完成")
+    print("  蒸馏完成")
     print(f"  成功: {results.get('success', 0)}")
     print(f"  跳过: {results.get('skip', 0)}")
     print(f"  错误: {results.get('error', 0)}")

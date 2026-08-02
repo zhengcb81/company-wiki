@@ -22,10 +22,8 @@ enrich_wiki.py — Wiki 内容增强模块
 
 import argparse
 import re
-import sys
 from pathlib import Path
-from typing import Dict, List, Any, Optional, Tuple
-from datetime import datetime
+from typing import Dict, List, Any, Optional
 
 from common import WIKI_ROOT
 
@@ -296,7 +294,7 @@ def generate_core_questions(pages: List[Dict], graph_data: dict, dry_run: bool =
             # 验证问题质量
             questions = validate_questions(questions)
             if not questions:
-                print(f" -> all rejected by validation")
+                print(" -> all rejected by validation")
                 continue
             # 写入页面
             new_content = update_core_questions(page["content"], questions)
@@ -305,7 +303,7 @@ def generate_core_questions(pages: List[Dict], graph_data: dict, dry_run: bool =
             updated += 1
             print(f" -> {len(questions)} questions")
         else:
-            print(f" -> skipped")
+            print(" -> skipped")
 
     return updated
 
@@ -350,9 +348,9 @@ def generate_assessments(pages: List[Dict], dry_run: bool = False) -> int:
             if new_content != page["content"] and not dry_run:
                 page["path"].write_text(new_content, encoding="utf-8")
             updated += 1
-            print(f" -> done")
+            print(" -> done")
         else:
-            print(f" -> skipped (validation)")
+            print(" -> skipped (validation)")
 
     return updated
 
@@ -453,6 +451,11 @@ def main():
     action = "将更新" if args.dry_run else "已更新"
     print(f"  {action} {total_updated} 个页面")
     print(f"{'=' * 50}")
+
+
+from writer_policy import enforce_direct_cli as _enforce_legacy_writer_freeze
+
+_enforce_legacy_writer_freeze(__name__, __file__)
 
 
 if __name__ == "__main__":

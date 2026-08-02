@@ -1,0 +1,716 @@
+{
+  "corpus_manifest_sha256": "df8913a6e13c5f1f3573c4522f6a8d1fc541b40287d9b4c3322fec6b600b3899",
+  "implementer_id": "codex-implementation-session",
+  "packet_sha256": "a56319dde2558247e3b69321ab5f8be5e1184593e81ed7350ca663fa89c2ddc0",
+  "primary_reviews": [
+    {
+      "checks": {
+        "claim_semantics": "pending",
+        "numeric_accuracy": "pending",
+        "routing_accuracy": "pending",
+        "source_span_exact": "pending",
+        "synthetic_and_safe": "pending",
+        "temporal_relations": "pending"
+      },
+      "decision": "pending",
+      "notes": "",
+      "reviewed_at": null,
+      "reviewer_id": null,
+      "revision_id": "gkr-news-agg-bh-reprint-v1"
+    },
+    {
+      "checks": {
+        "claim_semantics": "pending",
+        "numeric_accuracy": "pending",
+        "routing_accuracy": "pending",
+        "source_span_exact": "pending",
+        "synthetic_and_safe": "pending",
+        "temporal_relations": "pending"
+      },
+      "decision": "pending",
+      "notes": "",
+      "reviewed_at": null,
+      "reviewer_id": null,
+      "revision_id": "gkr-news-agg-chain-v1"
+    },
+    {
+      "checks": {
+        "claim_semantics": "pending",
+        "numeric_accuracy": "pending",
+        "routing_accuracy": "pending",
+        "source_span_exact": "pending",
+        "synthetic_and_safe": "pending",
+        "temporal_relations": "pending"
+      },
+      "decision": "pending",
+      "notes": "",
+      "reviewed_at": null,
+      "reviewer_id": null,
+      "revision_id": "gkr-news-agg-exaggerated-v1"
+    },
+    {
+      "checks": {
+        "claim_semantics": "pending",
+        "numeric_accuracy": "pending",
+        "routing_accuracy": "pending",
+        "source_span_exact": "pending",
+        "synthetic_and_safe": "pending",
+        "temporal_relations": "pending"
+      },
+      "decision": "pending",
+      "notes": "",
+      "reviewed_at": null,
+      "reviewer_id": null,
+      "revision_id": "gkr-news-agg-syndication-v1"
+    },
+    {
+      "checks": {
+        "claim_semantics": "pending",
+        "numeric_accuracy": "pending",
+        "routing_accuracy": "pending",
+        "source_span_exact": "pending",
+        "synthetic_and_safe": "pending",
+        "temporal_relations": "pending"
+      },
+      "decision": "pending",
+      "notes": "",
+      "reviewed_at": null,
+      "reviewer_id": null,
+      "revision_id": "gkr-bh-br-assumption-v1"
+    },
+    {
+      "checks": {
+        "claim_semantics": "pending",
+        "numeric_accuracy": "pending",
+        "routing_accuracy": "pending",
+        "source_span_exact": "pending",
+        "synthetic_and_safe": "pending",
+        "temporal_relations": "pending"
+      },
+      "decision": "pending",
+      "notes": "",
+      "reviewed_at": null,
+      "reviewer_id": null,
+      "revision_id": "gkr-bh-br-rating-v1"
+    },
+    {
+      "checks": {
+        "claim_semantics": "pending",
+        "numeric_accuracy": "pending",
+        "routing_accuracy": "pending",
+        "source_span_exact": "pending",
+        "synthetic_and_safe": "pending",
+        "temporal_relations": "pending"
+      },
+      "decision": "pending",
+      "notes": "",
+      "reviewed_at": null,
+      "reviewer_id": null,
+      "revision_id": "gkr-smic-br-quote-v1"
+    },
+    {
+      "checks": {
+        "claim_semantics": "pending",
+        "numeric_accuracy": "pending",
+        "routing_accuracy": "pending",
+        "source_span_exact": "pending",
+        "synthetic_and_safe": "pending",
+        "temporal_relations": "pending"
+      },
+      "decision": "pending",
+      "notes": "",
+      "reviewed_at": null,
+      "reviewer_id": null,
+      "revision_id": "gkr-zw-br-forecast-v1"
+    },
+    {
+      "checks": {
+        "claim_semantics": "pending",
+        "numeric_accuracy": "pending",
+        "routing_accuracy": "pending",
+        "source_span_exact": "pending",
+        "synthetic_and_safe": "pending",
+        "temporal_relations": "pending"
+      },
+      "decision": "pending",
+      "notes": "",
+      "reviewed_at": null,
+      "reviewer_id": null,
+      "revision_id": "gkr-zw-br-target-v1"
+    },
+    {
+      "checks": {
+        "claim_semantics": "pending",
+        "numeric_accuracy": "pending",
+        "routing_accuracy": "pending",
+        "source_span_exact": "pending",
+        "synthetic_and_safe": "pending",
+        "temporal_relations": "pending"
+      },
+      "decision": "pending",
+      "notes": "",
+      "reviewed_at": null,
+      "reviewer_id": null,
+      "revision_id": "gkr-bh-2025-order-v1"
+    },
+    {
+      "checks": {
+        "claim_semantics": "pending",
+        "numeric_accuracy": "pending",
+        "routing_accuracy": "pending",
+        "source_span_exact": "pending",
+        "synthetic_and_safe": "pending",
+        "temporal_relations": "pending"
+      },
+      "decision": "pending",
+      "notes": "",
+      "reviewed_at": null,
+      "reviewer_id": null,
+      "revision_id": "gkr-bh-correction-v1"
+    },
+    {
+      "checks": {
+        "claim_semantics": "pending",
+        "numeric_accuracy": "pending",
+        "routing_accuracy": "pending",
+        "source_span_exact": "pending",
+        "synthetic_and_safe": "pending",
+        "temporal_relations": "pending"
+      },
+      "decision": "pending",
+      "notes": "",
+      "reviewed_at": null,
+      "reviewer_id": null,
+      "revision_id": "gkr-bh-risk-warning-v1"
+    },
+    {
+      "checks": {
+        "claim_semantics": "pending",
+        "numeric_accuracy": "pending",
+        "routing_accuracy": "pending",
+        "source_span_exact": "pending",
+        "synthetic_and_safe": "pending",
+        "temporal_relations": "pending"
+      },
+      "decision": "pending",
+      "notes": "",
+      "reviewed_at": null,
+      "reviewer_id": null,
+      "revision_id": "gkr-smic-ann-asof4-v1"
+    },
+    {
+      "checks": {
+        "claim_semantics": "pending",
+        "numeric_accuracy": "pending",
+        "routing_accuracy": "pending",
+        "source_span_exact": "pending",
+        "synthetic_and_safe": "pending",
+        "temporal_relations": "pending"
+      },
+      "decision": "pending",
+      "notes": "",
+      "reviewed_at": null,
+      "reviewer_id": null,
+      "revision_id": "gkr-smic-major-contract-v1"
+    },
+    {
+      "checks": {
+        "claim_semantics": "pending",
+        "numeric_accuracy": "pending",
+        "routing_accuracy": "pending",
+        "source_span_exact": "pending",
+        "synthetic_and_safe": "pending",
+        "temporal_relations": "pending"
+      },
+      "decision": "pending",
+      "notes": "",
+      "reviewed_at": null,
+      "reviewer_id": null,
+      "revision_id": "gkr-smic-supersedes2-v1"
+    },
+    {
+      "checks": {
+        "claim_semantics": "pending",
+        "numeric_accuracy": "pending",
+        "routing_accuracy": "pending",
+        "source_span_exact": "pending",
+        "synthetic_and_safe": "pending",
+        "temporal_relations": "pending"
+      },
+      "decision": "pending",
+      "notes": "",
+      "reviewed_at": null,
+      "reviewer_id": null,
+      "revision_id": "gkr-zw-correction2-v1"
+    },
+    {
+      "checks": {
+        "claim_semantics": "pending",
+        "numeric_accuracy": "pending",
+        "routing_accuracy": "pending",
+        "source_span_exact": "pending",
+        "synthetic_and_safe": "pending",
+        "temporal_relations": "pending"
+      },
+      "decision": "pending",
+      "notes": "",
+      "reviewed_at": null,
+      "reviewer_id": null,
+      "revision_id": "gkr-zw-terminate-v1"
+    },
+    {
+      "checks": {
+        "claim_semantics": "pending",
+        "numeric_accuracy": "pending",
+        "routing_accuracy": "pending",
+        "source_span_exact": "pending",
+        "synthetic_and_safe": "pending",
+        "temporal_relations": "pending"
+      },
+      "decision": "pending",
+      "notes": "",
+      "reviewed_at": null,
+      "reviewer_id": null,
+      "revision_id": "gkr-bh-ir-guidance-v1"
+    },
+    {
+      "checks": {
+        "claim_semantics": "pending",
+        "numeric_accuracy": "pending",
+        "routing_accuracy": "pending",
+        "source_span_exact": "pending",
+        "synthetic_and_safe": "pending",
+        "temporal_relations": "pending"
+      },
+      "decision": "pending",
+      "notes": "",
+      "reviewed_at": null,
+      "reviewer_id": null,
+      "revision_id": "gkr-bh-ir-monthly-v1"
+    },
+    {
+      "checks": {
+        "claim_semantics": "pending",
+        "numeric_accuracy": "pending",
+        "routing_accuracy": "pending",
+        "source_span_exact": "pending",
+        "synthetic_and_safe": "pending",
+        "temporal_relations": "pending"
+      },
+      "decision": "pending",
+      "notes": "",
+      "reviewed_at": null,
+      "reviewer_id": null,
+      "revision_id": "gkr-smic-ir-capex-v1"
+    },
+    {
+      "checks": {
+        "claim_semantics": "pending",
+        "numeric_accuracy": "pending",
+        "routing_accuracy": "pending",
+        "source_span_exact": "pending",
+        "synthetic_and_safe": "pending",
+        "temporal_relations": "pending"
+      },
+      "decision": "pending",
+      "notes": "",
+      "reviewed_at": null,
+      "reviewer_id": null,
+      "revision_id": "gkr-smic-ir-control-v1"
+    },
+    {
+      "checks": {
+        "claim_semantics": "pending",
+        "numeric_accuracy": "pending",
+        "routing_accuracy": "pending",
+        "source_span_exact": "pending",
+        "synthetic_and_safe": "pending",
+        "temporal_relations": "pending"
+      },
+      "decision": "pending",
+      "notes": "",
+      "reviewed_at": null,
+      "reviewer_id": null,
+      "revision_id": "gkr-zw-ir-qna-v1"
+    },
+    {
+      "checks": {
+        "claim_semantics": "pending",
+        "numeric_accuracy": "pending",
+        "routing_accuracy": "pending",
+        "source_span_exact": "pending",
+        "synthetic_and_safe": "pending",
+        "temporal_relations": "pending"
+      },
+      "decision": "pending",
+      "notes": "",
+      "reviewed_at": null,
+      "reviewer_id": null,
+      "revision_id": "gkr-zw-ir-view-v1"
+    },
+    {
+      "checks": {
+        "claim_semantics": "pending",
+        "numeric_accuracy": "pending",
+        "routing_accuracy": "pending",
+        "source_span_exact": "pending",
+        "synthetic_and_safe": "pending",
+        "temporal_relations": "pending"
+      },
+      "decision": "pending",
+      "notes": "",
+      "reviewed_at": null,
+      "reviewer_id": null,
+      "revision_id": "gkr-bh-news-asof-v1"
+    },
+    {
+      "checks": {
+        "claim_semantics": "pending",
+        "numeric_accuracy": "pending",
+        "routing_accuracy": "pending",
+        "source_span_exact": "pending",
+        "synthetic_and_safe": "pending",
+        "temporal_relations": "pending"
+      },
+      "decision": "pending",
+      "notes": "",
+      "reviewed_at": null,
+      "reviewer_id": null,
+      "revision_id": "gkr-bh-news-interview-v1"
+    },
+    {
+      "checks": {
+        "claim_semantics": "pending",
+        "numeric_accuracy": "pending",
+        "routing_accuracy": "pending",
+        "source_span_exact": "pending",
+        "synthetic_and_safe": "pending",
+        "temporal_relations": "pending"
+      },
+      "decision": "pending",
+      "notes": "",
+      "reviewed_at": null,
+      "reviewer_id": null,
+      "revision_id": "gkr-consumer-irrelevant3-v1"
+    },
+    {
+      "checks": {
+        "claim_semantics": "pending",
+        "numeric_accuracy": "pending",
+        "routing_accuracy": "pending",
+        "source_span_exact": "pending",
+        "synthetic_and_safe": "pending",
+        "temporal_relations": "pending"
+      },
+      "decision": "pending",
+      "notes": "",
+      "reviewed_at": null,
+      "reviewer_id": null,
+      "revision_id": "gkr-logistics-irrelevant4-v1"
+    },
+    {
+      "checks": {
+        "claim_semantics": "pending",
+        "numeric_accuracy": "pending",
+        "routing_accuracy": "pending",
+        "source_span_exact": "pending",
+        "synthetic_and_safe": "pending",
+        "temporal_relations": "pending"
+      },
+      "decision": "pending",
+      "notes": "",
+      "reviewed_at": null,
+      "reviewer_id": null,
+      "revision_id": "gkr-news-ambig2-v1"
+    },
+    {
+      "checks": {
+        "claim_semantics": "pending",
+        "numeric_accuracy": "pending",
+        "routing_accuracy": "pending",
+        "source_span_exact": "pending",
+        "synthetic_and_safe": "pending",
+        "temporal_relations": "pending"
+      },
+      "decision": "pending",
+      "notes": "",
+      "reviewed_at": null,
+      "reviewer_id": null,
+      "revision_id": "gkr-news-irr-ev-v1"
+    },
+    {
+      "checks": {
+        "claim_semantics": "pending",
+        "numeric_accuracy": "pending",
+        "routing_accuracy": "pending",
+        "source_span_exact": "pending",
+        "synthetic_and_safe": "pending",
+        "temporal_relations": "pending"
+      },
+      "decision": "pending",
+      "notes": "",
+      "reviewed_at": null,
+      "reviewer_id": null,
+      "revision_id": "gkr-smic-ambig4-v1"
+    },
+    {
+      "checks": {
+        "claim_semantics": "pending",
+        "numeric_accuracy": "pending",
+        "routing_accuracy": "pending",
+        "source_span_exact": "pending",
+        "synthetic_and_safe": "pending",
+        "temporal_relations": "pending"
+      },
+      "decision": "pending",
+      "notes": "",
+      "reviewed_at": null,
+      "reviewer_id": null,
+      "revision_id": "gkr-smic-news-asof2-v1"
+    },
+    {
+      "checks": {
+        "claim_semantics": "pending",
+        "numeric_accuracy": "pending",
+        "routing_accuracy": "pending",
+        "source_span_exact": "pending",
+        "synthetic_and_safe": "pending",
+        "temporal_relations": "pending"
+      },
+      "decision": "pending",
+      "notes": "",
+      "reviewed_at": null,
+      "reviewer_id": null,
+      "revision_id": "gkr-zw-ambig3-v1"
+    },
+    {
+      "checks": {
+        "claim_semantics": "pending",
+        "numeric_accuracy": "pending",
+        "routing_accuracy": "pending",
+        "source_span_exact": "pending",
+        "synthetic_and_safe": "pending",
+        "temporal_relations": "pending"
+      },
+      "decision": "pending",
+      "notes": "",
+      "reviewed_at": null,
+      "reviewer_id": null,
+      "revision_id": "gkr-zw-ambiguous-v1"
+    },
+    {
+      "checks": {
+        "claim_semantics": "pending",
+        "numeric_accuracy": "pending",
+        "routing_accuracy": "pending",
+        "source_span_exact": "pending",
+        "synthetic_and_safe": "pending",
+        "temporal_relations": "pending"
+      },
+      "decision": "pending",
+      "notes": "",
+      "reviewed_at": null,
+      "reviewer_id": null,
+      "revision_id": "gkr-zw-news-asof3-v1"
+    },
+    {
+      "checks": {
+        "claim_semantics": "pending",
+        "numeric_accuracy": "pending",
+        "routing_accuracy": "pending",
+        "source_span_exact": "pending",
+        "synthetic_and_safe": "pending",
+        "temporal_relations": "pending"
+      },
+      "decision": "pending",
+      "notes": "",
+      "reviewed_at": null,
+      "reviewer_id": null,
+      "revision_id": "gkr-bh-2024-ar-v1"
+    },
+    {
+      "checks": {
+        "claim_semantics": "pending",
+        "numeric_accuracy": "pending",
+        "routing_accuracy": "pending",
+        "source_span_exact": "pending",
+        "synthetic_and_safe": "pending",
+        "temporal_relations": "pending"
+      },
+      "decision": "pending",
+      "notes": "",
+      "reviewed_at": null,
+      "reviewer_id": null,
+      "revision_id": "gkr-bh-2025-ar-v1"
+    },
+    {
+      "checks": {
+        "claim_semantics": "pending",
+        "numeric_accuracy": "pending",
+        "routing_accuracy": "pending",
+        "source_span_exact": "pending",
+        "synthetic_and_safe": "pending",
+        "temporal_relations": "pending"
+      },
+      "decision": "pending",
+      "notes": "",
+      "reviewed_at": null,
+      "reviewer_id": null,
+      "revision_id": "gkr-mt-irrelevant-v1"
+    },
+    {
+      "checks": {
+        "claim_semantics": "pending",
+        "numeric_accuracy": "pending",
+        "routing_accuracy": "pending",
+        "source_span_exact": "pending",
+        "synthetic_and_safe": "pending",
+        "temporal_relations": "pending"
+      },
+      "decision": "pending",
+      "notes": "",
+      "reviewed_at": null,
+      "reviewer_id": null,
+      "revision_id": "gkr-smic-2025q1-v1"
+    },
+    {
+      "checks": {
+        "claim_semantics": "pending",
+        "numeric_accuracy": "pending",
+        "routing_accuracy": "pending",
+        "source_span_exact": "pending",
+        "synthetic_and_safe": "pending",
+        "temporal_relations": "pending"
+      },
+      "decision": "pending",
+      "notes": "",
+      "reviewed_at": null,
+      "reviewer_id": null,
+      "revision_id": "gkr-zw-2023-restated-v1"
+    },
+    {
+      "checks": {
+        "claim_semantics": "pending",
+        "numeric_accuracy": "pending",
+        "routing_accuracy": "pending",
+        "source_span_exact": "pending",
+        "synthetic_and_safe": "pending",
+        "temporal_relations": "pending"
+      },
+      "decision": "pending",
+      "notes": "",
+      "reviewed_at": null,
+      "reviewer_id": null,
+      "revision_id": "gkr-zw-2025-ar-v1"
+    }
+  ],
+  "receipt_type": "gold_corpus_independent_review",
+  "review_summary": "",
+  "schema_version": 2,
+  "second_reviews": [
+    {
+      "agrees_with_primary": null,
+      "checks": {
+        "independent_annotation_check": "pending",
+        "independent_routing_check": "pending",
+        "independent_source_check": "pending"
+      },
+      "decision": "pending",
+      "notes": "",
+      "reviewed_at": null,
+      "reviewer_id": null,
+      "revision_id": "gkr-news-agg-bh-reprint-v1"
+    },
+    {
+      "agrees_with_primary": null,
+      "checks": {
+        "independent_annotation_check": "pending",
+        "independent_routing_check": "pending",
+        "independent_source_check": "pending"
+      },
+      "decision": "pending",
+      "notes": "",
+      "reviewed_at": null,
+      "reviewer_id": null,
+      "revision_id": "gkr-news-agg-chain-v1"
+    },
+    {
+      "agrees_with_primary": null,
+      "checks": {
+        "independent_annotation_check": "pending",
+        "independent_routing_check": "pending",
+        "independent_source_check": "pending"
+      },
+      "decision": "pending",
+      "notes": "",
+      "reviewed_at": null,
+      "reviewer_id": null,
+      "revision_id": "gkr-news-agg-exaggerated-v1"
+    },
+    {
+      "agrees_with_primary": null,
+      "checks": {
+        "independent_annotation_check": "pending",
+        "independent_routing_check": "pending",
+        "independent_source_check": "pending"
+      },
+      "decision": "pending",
+      "notes": "",
+      "reviewed_at": null,
+      "reviewer_id": null,
+      "revision_id": "gkr-bh-br-assumption-v1"
+    },
+    {
+      "agrees_with_primary": null,
+      "checks": {
+        "independent_annotation_check": "pending",
+        "independent_routing_check": "pending",
+        "independent_source_check": "pending"
+      },
+      "decision": "pending",
+      "notes": "",
+      "reviewed_at": null,
+      "reviewer_id": null,
+      "revision_id": "gkr-bh-2025-order-v1"
+    },
+    {
+      "agrees_with_primary": null,
+      "checks": {
+        "independent_annotation_check": "pending",
+        "independent_routing_check": "pending",
+        "independent_source_check": "pending"
+      },
+      "decision": "pending",
+      "notes": "",
+      "reviewed_at": null,
+      "reviewer_id": null,
+      "revision_id": "gkr-bh-ir-guidance-v1"
+    },
+    {
+      "agrees_with_primary": null,
+      "checks": {
+        "independent_annotation_check": "pending",
+        "independent_routing_check": "pending",
+        "independent_source_check": "pending"
+      },
+      "decision": "pending",
+      "notes": "",
+      "reviewed_at": null,
+      "reviewer_id": null,
+      "revision_id": "gkr-bh-news-asof-v1"
+    },
+    {
+      "agrees_with_primary": null,
+      "checks": {
+        "independent_annotation_check": "pending",
+        "independent_routing_check": "pending",
+        "independent_source_check": "pending"
+      },
+      "decision": "pending",
+      "notes": "",
+      "reviewed_at": null,
+      "reviewer_id": null,
+      "revision_id": "gkr-bh-2024-ar-v1"
+    }
+  ]
+}

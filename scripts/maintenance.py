@@ -45,7 +45,11 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
-from common import WIKI_ROOT
+from writer_policy import enforce_direct_cli
+
+enforce_direct_cli(__name__, __file__)
+
+from common import WIKI_ROOT  # noqa: E402
 
 SCRIPTS_DIR = WIKI_ROOT / "scripts"
 
@@ -56,7 +60,7 @@ def run_step(cmd, description, dry_run=False):
     print(f"  STEP: {description}")
     print(f"  CMD:  {' '.join(cmd)}")
     if dry_run and '--execute' in cmd:
-        print(f"  [DRY-RUN] Removing --execute flag")
+        print(f"  [DRY-RUN] Removing --execute flag")  # noqa: F541
         cmd = [c for c in cmd if c != '--execute']
         if '--dry-run' not in cmd:
             cmd.append('--dry-run')
@@ -213,7 +217,7 @@ def main():
     if failed:
         print(f"\n  {failed} 步骤失败，请检查日志")
     else:
-        print(f"\n  所有步骤完成")
+        print(f"\n  所有步骤完成")  # noqa: F541
 
 
 if __name__ == "__main__":

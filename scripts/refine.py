@@ -23,14 +23,12 @@ import glob
 import json
 import os
 import re
-import sys
 import time
-from datetime import datetime
 from pathlib import Path
 
 from common import WIKI_ROOT, CONFIG_PATH
 
-from extract import extract_summary, clean_text
+from extract import clean_text
 from llm_client import get_llm_client
 
 
@@ -260,7 +258,7 @@ def apply_refinements(refinements):
             # 构建匹配模式
             entry_start = f"### {date}"
             # 找到标题行
-            title_pattern = re.escape(title[:30])  # 取前30字符匹配
+            re.escape(title[:30])  # 取前30字符匹配
 
             # 找到条目位置
             pos = content.find(entry_start)
@@ -283,11 +281,11 @@ def apply_refinements(refinements):
 
                     # 确定摘要区域的结束位置
                     if next_entry > 0 and (next_section < 0 or next_entry < next_section):
-                        end_pos = next_entry
+                        pass
                     elif next_section > 0:
-                        end_pos = next_section
+                        pass
                     else:
-                        end_pos = len(content)
+                        len(content)
 
                     # 提取并格式化精炼摘要
                     refined_lines = refined.strip().split('\n')
@@ -306,7 +304,7 @@ def apply_refinements(refinements):
                     refined_block = '\n'.join(formatted_lines)
 
                     # 替换
-                    old_summary = content[line_end+1:source_line].strip()
+                    content[line_end+1:source_line].strip()
                     new_content = content[:line_end+1] + refined_block + content[source_line:]
                     content = new_content
                     break
@@ -365,7 +363,7 @@ def process_with_llm(manifest, config, limit=0):
             tokens = usage.get("total_tokens", 0)
             total_tokens += tokens
         else:
-            print(f"    -> FAILED (no response)")
+            print("    -> FAILED (no response)")
 
         # 避免 rate limit
         if i < total - 1:
@@ -440,6 +438,11 @@ def main():
         return
 
     parser.print_help()
+
+
+from writer_policy import enforce_direct_cli as _enforce_legacy_writer_freeze
+
+_enforce_legacy_writer_freeze(__name__, __file__)
 
 
 if __name__ == "__main__":

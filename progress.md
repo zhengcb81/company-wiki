@@ -1,5 +1,42 @@
 # Progress Log
 
+## 2026-08-02 NFC parser 缺陷修复 — 完成，生产已生效（worker PID 3540，Code 41f08db2c5f1）
+
+- **根因**：`_pymupdf_page_snapshots` 表格 data 提取未 NFC 规范化单元格 → `pdf_page_aware._cell_value` 严格校验拒绝非 NFC 文本（盈建科/时代新材招股书 `PageAwarePDFAdapterError: table cell must use Unicode NFC`，failed_terminal attempt=3）。
+- **修复**：normalizer.py:764-768 对 str 单元格应用 `_nfc_lf`；新增回归测试 `test_snapshot_builder_normalizes_non_nfc_table_cells`；顺带修正 `test_corrupt_pdf_remains_fail_closed_and_source_immutable` 过时断言（failed→unsupported，与 WR-10.13 语义一致）。
+- **验证**：盈建科 partial（25363 spans）、时代新材 completed（8211 spans）、fingerprint 均 completed。
+- **生产修复**：pause → 备份（`wr-10-13-nfc-fix-reset-backup-20260802.json`）→ 删 failed artifact + fingerprint 重置 pending → resume。worker 用新代码自动重处理。`failed_terminal` 7→5。
+- **回归**：pdf_page_aware+liveness+backfill+parser = 64 passed；Ruff 通过。
+
+## 2026-08-02 四项 pending 门禁实施（当前最终代码 724f0d5a8481）
+
+- **现场基线**：分支 `phase-18-issuer-identity`，HEAD `dd6ab15`。生产 worker/supervisor=`12956/14432`，Code MATCH `724f0d5a8481`（磁盘 source_bundle_fingerprint 逐文件 SHA 一致，code_identity 校验通过）。此指纹不同于 WR-10.15 验收时点 `eb10131da6f1`——WR-10.15 后又合并了 issuer identity / quarterly priority 等 commit，因此四项门禁在**当前最终代码**下重新验收。
+- **门禁 1：WR-10.13 fingerprint terminal — 核验通过（receipt 已生成）**
+  - corrupt-XLS（东安动力资产负债表 `06b0fcc7`）fingerprint=`failed_terminal`，terminal_reason=`retry_exhausted:XLRDError`，attempt=3，next_retry_at=None；normalized artifact=`unsupported`（XLRDError）。
+  - 全库 fingerprint：`pending 21027 / completed 2403 / unsupported_terminal 126 / failed_terminal 7`；`retryable_failed=0`（无重试残留）。
+  - `select_fingerprint_batch` SQL 只选 `st.document_id IS NULL OR status='pending' OR (retryable_failed AND next_retry_at<=?)`，terminal 永不重选（store.py:1198-1226）。
+  - DB `quick_check=ok`、`foreign_key_check=0`。receipt：`artifacts/gates/source-catalog-bg/wr-10-13-fingerprint-terminal-acceptance-20260802.json`（SHA 9d268925…）。
+  - 结论：corrupt-XLS 已进入 terminal 且不再被任何批次重选，WR-10.13 fingerprint terminal 生产验收达成。
+- **门禁 2：最终 fingerprint pilot — 通过（44.5 分钟，receipt 已生成）**
+  - 后台独立进程（PID 16992）运行 30 分钟 pilot，实际 `duration_minutes=44.5`、`sample_count=29`、`pilot_pass=True`。
+  - 关键指标：runtime 全窗 running；production_worker=1（PID 12956 唯一）；production_supervisor=1（PID 14432 唯一）；`code_match_all=True`（loaded=current=`724f0d5a8481`）；heartbeat_stale=0；foreign/pytest_temp=0；repeated_cycle_failure=0；`pending_delta=+2`、`normalized_delta=+2`、`artifact_delta=+3`（throughput 判定 = normalized_delta>=15 OR pending_delta>0，工具设计语义）；same-path max=360.6s < 900s；parse_timeout_delta=0；scan_interrupted_delta=0；new_scan_error=0；`db_quick_check=ok`；raw_sample_unchanged=True；stockwiki_unchanged=True。
+  - receipt：`artifacts/gates/source-catalog-bg/wr-10-13-final-pilot-acceptance-20260802.json`（SHA cbc82b22…）+ 原始 pilot JSON（SHA 见 receipt）。
+- **门禁 3：>900s slow canary — 合同层证据已固化**
+  - `tests/contract/test_source_catalog_parser_liveness.py` slow-canary 两合同在最终代码下 `2 passed in 56.31s`（缩短时钟：45s slow work / 60s parser timeout ≈ 旧 900s 门槛比例；over-timeout 变 terminal 不 loop，无 temp 残留）。
+  - 生产自然观察：本次 pilot same-path max=360.6s（极氪集团招股书 PDF），heartbeat 连续（parser_alive）、无 watchdog kill、无 orphan；生产队列最大 PDF 104MB（比亚迪审计报告），未在窗口内处理到超 900s。
+  - 生产受控 slow canary 演练与 next-login 需用户决策（见会话消息）。
+- **门禁 4：next-login（WR-10.9 Step 6）**：需下一次真实 Windows 登录采集首屏/30/60/120 秒证据，无法自动完成。
+  - 已保存登录前基线：`artifacts/gates/source-catalog-bg/wr-10-9-step6-pre-login-baseline-20260802.json`（launcher events tail：最新 child_started `622b7189...` 于 14:12:38Z，PID 6428；process events tail：worker 12956 session_opened 16:48:40Z）。
+  - HKCU Run `CompanyWikiSourceCatalog` 启动项确认存在：`wscript.exe //B //Nologo <logon.vbs> <python> <project-root>`。
+  - 已准备登录后采集脚本 `scripts/wr109_step6_capture.py`（语法校验 OK）：自动采集 Run 项命令、launcher/process events tail、control log tail、worker-status，并在 30/60/120 秒各拍快照，输出 JSON receipt。
+  - **待用户操作**：注销并重新登录 Windows（触发 Run 登录项）；登录后重新打开本会话，运行 `python scripts/wr109_step6_capture.py --json-out artifacts/gates/source-catalog-bg/wr-10-9-step6-login-20260802.json`，随后比对登录前/后 PID、code_match、首屏证据，判定 Step 6 通过与否。人工重开不能替代本次真实登录门禁。
+  - **✅ 用户已真实重启并验收通过**（2026-08-02）：
+    - 登录触发新 launcher session `1ec5c35c0d07`（17:23:54.050Z `starting` → 17:23:54.202Z `child_started`，reason=worker_process_started，startup_delay=120s），与登录前基线 session `622b7189`/`d913baa231c4`（worker 12956）明显不同。
+    - 登录后 supervisor 15184（18:23:53 本地）→ worker 14476（18:23:54 本地）顺序启动，间隔 1s；两者 `MainWindowTitle` 均为空（隐藏运行）→ **登录时未出现空白控制面板**。
+    - Code MATCH `724f0d5a8481`（loaded=current）；worker 健康：heartbeat age 12.6s、Markdown pending 20588、parse timeout total 0、known quarantine 1 / new errors 0。
+    - control log 在登录窗口（16:51:46→18:24:56）无任何 control center launched 记录——登录自启动仅拉起隐藏 supervisor+worker，符合设计。
+    - Step 6 receipt：`artifacts/gates/source-catalog-bg/wr-10-9-step6-acceptance-20260802.json`（登录后采集 `wr-10-9-step6-login-20260802.json`）。**WR-10.9 Step 6 accepted，四项 pending 门禁全部关闭。**
+
 ## 2026-08-02 WR-10.15 Gate D 运行评测与最终验收 — 完成，verdict=accepted
 
 - **第一轮 rescan（10:03:17）**：policy 82（仅 82 个原件，sidecar 未重生）、excluded 460（541-81）、errors=1 既有 quarantine（空 Excel，非本 WU 新增）、new=0。

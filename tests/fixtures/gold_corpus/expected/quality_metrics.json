@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "owner": "independent_reviewer",
+  "policy": "This file defines thresholds only. Metric actuals and pass/fail status are emitted exclusively by the d-4 evaluator receipt.",
+  "thresholds": {
+    "material_claim_recall": {
+      "operator": ">=",
+      "value": 0.9,
+      "critical": true
+    },
+    "material_claim_precision": {
+      "operator": ">=",
+      "value": 0.9,
+      "critical": true
+    },
+    "evidence_exactness": {
+      "operator": ">=",
+      "value": 0.95,
+      "critical": true
+    },
+    "provenance_coverage": {
+      "operator": ">=",
+      "value": 1.0,
+      "critical": true
+    },
+    "numeric_exactness": {
+      "operator": ">=",
+      "value": 1.0,
+      "critical": true
+    },
+    "claim_type_accuracy": {
+      "operator": ">=",
+      "value": 1.0,
+      "critical": true,
+      "notes": "Mutation control: opinion/prediction must not be relabeled as fact."
+    },
+    "routing_micro_precision": {
+      "operator": ">=",
+      "value": 0.9,
+      "critical": true
+    },
+    "routing_micro_recall": {
+      "operator": ">=",
+      "value": 0.9,
+      "critical": true
+    },
+    "routing_macro_f1": {
+      "operator": ">=",
+      "value": 0.85,
+      "critical": false
+    },
+    "irrelevant_rejection": {
+      "operator": ">=",
+      "value": 1.0,
+      "critical": true
+    },
+    "ambiguity_detection_recall": {
+      "operator": ">=",
+      "value": 1.0,
+      "critical": true
+    },
+    "correction_supersedes_accuracy": {
+      "operator": ">=",
+      "value": 1.0,
+      "critical": true
+    },
+    "as_of_leakage_rate": {
+      "operator": "<=",
+      "value": 0.0,
+      "critical": true
+    },
+    "aggregation_dedup_accuracy": {
+      "operator": ">=",
+      "value": 1.0,
+      "critical": true
+    }
+  }
+}

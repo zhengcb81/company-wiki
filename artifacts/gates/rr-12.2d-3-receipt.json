@@ -1,0 +1,72 @@
+{
+  "work_unit": "RR-12.2d-3",
+  "phase": "expand_to_30_revisions",
+  "base_head": "a57160646ed0d02a7d8befe2e390b523c73432c6",
+  "production_data": {
+    "before": "b97f177c60da1a7f0165cba69dfc567df9edba7558001b4ba5aeddcd5361433c",
+    "after": "b97f177c60da1a7f0165cba69dfc567df9edba7558001b4ba5aeddcd5361433c",
+    "drift": "none (16,789 files / 25,472,376,075 bytes)"
+  },
+  "test_transition": {
+    "d-2_red": 2,
+    "d-3_final_red": 0,
+    "gold": "47 passed (all green)",
+    "full_suite": "636 passed (all green \u2014 first fully-green suite since d-1 red tests)"
+  },
+  "control_plane": {
+    "verify-lock": "pass",
+    "deletion-manifest": "pass",
+    "staged-secret": "0 active",
+    "staged_count": 0
+  },
+  "corpus": {
+    "revisions": 30,
+    "claims": 35,
+    "spans": 35,
+    "routes": 30,
+    "source_kinds": {
+      "regulatory": 6,
+      "company_announcement": 5,
+      "ir": 5,
+      "broker_research": 5,
+      "original_news": 5,
+      "aggregated_news": 4
+    },
+    "companies": [
+      "\u5317\u65b9\u534e\u521b",
+      "\u4e2d\u5fae\u516c\u53f8",
+      "\u4e2d\u82af\u56fd\u9645",
+      "\u8d35\u5dde\u8305\u53f0",
+      "\u5408\u6210\u65b0\u80fd\u6e90"
+    ]
+  },
+  "cohort_summary": {
+    "1_regulatory": "+3 (quarterly/yoy-base/restatement)",
+    "2_company_announcement": "+3 (risk-warning/termination/major-contract multi-target)",
+    "3_ir": "+5 (introduced opinion/prediction claim_types)",
+    "4_broker_research": "+5 (rating/forecast/quoted-fact non_independent/assumption/target)",
+    "5_original_news": "+4 (interview/ambiguity2/irrelevant2/as_of)",
+    "6_aggregated_news": "+4 (reprint/exaggerated-title/syndication/chain, all canonical_source_id)"
+  },
+  "all_new_content_draft": "every new revision synthetic:true + review_status:draft; nothing reviewed; reviewer can reject",
+  "section4_met": [
+    "revisions >=30 (30)",
+    "6 source kinds with minimums",
+    ">=3 companies (5)",
+    ">=4 opinion/prediction (8+)",
+    "aggregation dedup (4 aggregated with canonical_source_id)",
+    "claim_type layering fact/opinion/prediction",
+    "non_independent marker (C025)",
+    "as_of anti-foresight case (C031)",
+    "correction+supersedes chains (C010/C011)"
+  ],
+  "section4_gaps_unformalized": [
+    "entity <=40% cap NOT met: \u5317\u65b9\u534e\u521b ~16/30 = 53% (anchor-company imbalance; not encoded in tests; reviewer may rebalance)",
+    "scenario minimums partially met: ambiguity 2/4, irrelevant 2/4, as_of 1/4, correction chains 2/4 (>=6 numeric met; multi-target several)",
+    "these are construction-spec guidelines not yet formalized into TestCoverageGates; documented honestly"
+  ],
+  "deferred": {
+    "d-4": "independent evaluator computes pending_evaluator actuals; may add 40%/scenario-minimum tests"
+  },
+  "derived_status": "candidate (formal coverage gate green, full suite green, production zero-drift). Independent reviewer still required; \u00a74 detailed gaps documented."
+}

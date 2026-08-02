@@ -1,0 +1,200 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:company-wiki:schema:evidence-span:1.0.0",
+  "title": "company-wiki evidence span",
+  "description": "A deterministic parser result located within one immutable upstream source.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "span_id",
+    "source_id",
+    "locator",
+    "coordinates",
+    "raw_text",
+    "structured_value",
+    "parser_name",
+    "parser_version",
+    "output_sha256",
+    "parse_status",
+    "quality_flags"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "span_id": {
+      "type": "string",
+      "pattern": "^urn:company-wiki:evidence-span:sha256:[0-9a-f]{64}$"
+    },
+    "source_id": {
+      "type": "string",
+      "pattern": "^urn:company-wiki:source:sha256:[0-9a-f]{64}$"
+    },
+    "locator": {
+      "type": "string",
+      "pattern": "^loc:v1(?:/page:[1-9]\\d*)?(?:/paragraph:(?:0|[1-9]\\d*))?(?:/table:(?:0|[1-9]\\d*))?(?:/row:(?:0|[1-9]\\d*))?(?:/column:(?:0|[1-9]\\d*))?(?:/chars:(?:0|[1-9]\\d*)-(?:0|[1-9]\\d*))?$"
+    },
+    "coordinates": {
+      "$ref": "#/$defs/coordinates"
+    },
+    "raw_text": {
+      "type": ["string", "null"]
+    },
+    "structured_value": {},
+    "parser_name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "parser_version": {
+      "type": "string",
+      "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-[0-9A-Za-z]+(?:[.-][0-9A-Za-z]+)*)?(?:\\+[0-9A-Za-z]+(?:[.-][0-9A-Za-z]+)*)?$"
+    },
+    "output_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "parse_status": {
+      "enum": ["parsed", "partial", "failed", "quarantined"]
+    },
+    "quality_flags": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "ocr_used",
+          "low_ocr_confidence",
+          "layout_ambiguous",
+          "table_structure_ambiguous",
+          "truncated",
+          "encoding_repaired",
+          "unit_inferred",
+          "date_inferred",
+          "locator_unstable",
+          "parser_warning",
+          "parser_error",
+          "unsupported_format",
+          "password_protected",
+          "empty_output"
+        ]
+      }
+    }
+  },
+  "$defs": {
+    "coordinates": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "page_number",
+        "paragraph_index",
+        "table_index",
+        "row_index",
+        "column_index",
+        "char_start",
+        "char_end"
+      ],
+      "properties": {
+        "page_number": {
+          "type": ["integer", "null"],
+          "minimum": 1
+        },
+        "paragraph_index": {
+          "type": ["integer", "null"],
+          "minimum": 0
+        },
+        "table_index": {
+          "type": ["integer", "null"],
+          "minimum": 0
+        },
+        "row_index": {
+          "type": ["integer", "null"],
+          "minimum": 0
+        },
+        "column_index": {
+          "type": ["integer", "null"],
+          "minimum": 0
+        },
+        "char_start": {
+          "type": ["integer", "null"],
+          "minimum": 0
+        },
+        "char_end": {
+          "type": ["integer", "null"],
+          "minimum": 0
+        }
+      },
+      "anyOf": [
+        {"properties": {"page_number": {"type": "integer"}}},
+        {"properties": {"paragraph_index": {"type": "integer"}}},
+        {"properties": {"table_index": {"type": "integer"}}},
+        {"properties": {"row_index": {"type": "integer"}}},
+        {"properties": {"column_index": {"type": "integer"}}},
+        {"properties": {"char_start": {"type": "integer"}}},
+        {"properties": {"char_end": {"type": "integer"}}}
+      ],
+      "allOf": [
+        {
+          "if": {"properties": {"char_start": {"type": "integer"}}},
+          "then": {"properties": {"char_end": {"type": "integer"}}}
+        },
+        {
+          "if": {"properties": {"char_end": {"type": "integer"}}},
+          "then": {"properties": {"char_start": {"type": "integer"}}}
+        },
+        {
+          "if": {"properties": {"row_index": {"type": "integer"}}},
+          "then": {"properties": {"table_index": {"type": "integer"}}}
+        },
+        {
+          "if": {"properties": {"column_index": {"type": "integer"}}},
+          "then": {"properties": {"table_index": {"type": "integer"}}}
+        },
+        {
+          "not": {
+            "properties": {
+              "paragraph_index": {"type": "integer"},
+              "table_index": {"type": "integer"}
+            }
+          }
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"parse_status": {"const": "parsed"}}},
+      "then": {
+        "anyOf": [
+          {"properties": {"raw_text": {"type": "string"}}},
+          {"properties": {"structured_value": {"not": {"type": "null"}}}}
+        ]
+      }
+    },
+    {
+      "if": {"properties": {"parse_status": {"const": "partial"}}},
+      "then": {
+        "properties": {"quality_flags": {"minItems": 1}},
+        "anyOf": [
+          {"properties": {"raw_text": {"type": "string"}}},
+          {"properties": {"structured_value": {"not": {"type": "null"}}}}
+        ]
+      }
+    },
+    {
+      "if": {"properties": {"parse_status": {"const": "failed"}}},
+      "then": {
+        "properties": {
+          "raw_text": {"type": "null"},
+          "structured_value": {"type": "null"},
+          "quality_flags": {"minItems": 1}
+        }
+      }
+    },
+    {
+      "if": {"properties": {"parse_status": {"const": "quarantined"}}},
+      "then": {
+        "properties": {"quality_flags": {"minItems": 1}}
+      }
+    }
+  ]
+}

@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "work_unit": "RR-12.2d-3B",
+  "status": "candidate",
+  "implementer_role": "implementation_only_not_independent_reviewer",
+  "base_head": "a57160646ed0d02a7d8befe2e390b523c73432c6",
+  "objective": "formalize and close gold corpus entity-concentration and scenario-coverage gaps",
+  "red_phase": {
+    "command": "python -m pytest -q tests/contract/test_gold_corpus.py",
+    "result": "47 passed, 5 failed",
+    "failures": {
+      "primary_entity_share": "16/30 = 53.3%, limit 40%",
+      "ambiguity": "2/4",
+      "irrelevant": "2/4",
+      "as_of": "1/4",
+      "correction_or_supersedes": "2/4"
+    },
+    "collection_errors": 0
+  },
+  "cohorts": {
+    "a": {
+      "added_revisions": 5,
+      "coverage": "2 ambiguity + 2 irrelevant + 1 as_of",
+      "result": "93 passed, 3 expected coverage failures",
+      "implementation_error": "frontmatter/body boundary added one newline, invalidating 5 hashes/offsets",
+      "resolution": "fixed boundary and used scoped repair-existing mode; no expected test was relaxed"
+    },
+    "b": {
+      "added_revisions": 5,
+      "coverage": "2 as_of + 1 correction + 1 supersedes + 1 neutral control",
+      "result": "96 gold/evaluator/mutation tests passed"
+    }
+  },
+  "tests": {
+    "gold_target": "96 passed",
+    "mutation_contracts": 21,
+    "full_suite": "685 passed in 34.56s",
+    "failed": 0,
+    "unexpected_skips": 0
+  },
+  "evaluator": {
+    "version": "1.0.0",
+    "manifest_sha256": "df8913a6e13c5f1f3573c4522f6a8d1fc541b40287d9b4c3322fec6b600b3899",
+    "thresholds_sha256": "83e43db740fc93d1182ceb00c3120003f0f45e1c8b000bf0bb874f35be973876",
+    "perfect_predictions_sha256": "347b98d8f4a205216f1692949c9821ba06916f9e48f095ba69903d979f47029d",
+    "perfect_receipt_sha256": "57481f0fa4741cd08b7c4af5e570511349ff5888be57d524c66c5e461678be77",
+    "perfect_result": "pass",
+    "perfect_failures": 0,
+    "empty_negative_receipt_sha256": "bd250e5270b76820a02bd67955b6ec3c4ddf91527951d9a43d3e13198370710e",
+    "empty_negative_result": "fail",
+    "empty_negative_failures": 10
+  },
+  "corpus": {
+    "revisions": 40,
+    "claims": 45,
+    "spans": 45,
+    "routes": 40,
+    "review_status": {
+      "draft": 40,
+      "reviewed": 0
+    },
+    "source_kinds": {
+      "regulatory": 6,
+      "company_announcement": 8,
+      "ir": 6,
+      "broker_research": 5,
+      "original_news": 11,
+      "aggregated_news": 4
+    },
+    "primary_entities": {
+      "北方华创": 16,
+      "中微公司": 9,
+      "中芯国际": 8,
+      "maximum_share": 0.4
+    },
+    "scenario_counts": {
+      "ambiguity": 4,
+      "irrelevant": 4,
+      "as_of": 4,
+      "correction_or_supersedes": 4
+    }
+  },
+  "control_plane": {
+    "acceptance_lock": "pass",
+    "deletion_manifest": "pass",
+    "staged_secret_findings": 0,
+    "staged_files": 0,
+    "scoped_diff_check": "pass"
+  },
+  "production_data": {
+    "before": "b97f177c60da1a7f0165cba69dfc567df9edba7558001b4ba5aeddcd5361433c",
+    "after": "b97f177c60da1a7f0165cba69dfc567df9edba7558001b4ba5aeddcd5361433c",
+    "files": 16789,
+    "bytes": 25472376075,
+    "changed_paths": 0
+  },
+  "remaining_gates": [
+    "all 40 revisions remain draft and require independent review",
+    "at least 20% second-review coverage across every source kind is still required",
+    "Phase 11 external remediation and independent review still block Phase 13+"
+  ],
+  "derived_status": "candidate only; construction gates pass but human review is not complete"
+}

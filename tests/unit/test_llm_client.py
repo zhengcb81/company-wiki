@@ -112,6 +112,71 @@ class TestLLMClientChat:
         assert isinstance(result, LLMResponse)
         assert result.content == "分析结果"
 
+    @patch.object(LLMClient, "chat")
+    def test_generate_propagates_json_mode_through_retry(self, mock_chat):
+        """结构化调用显式启用 JSON mode，默认调用仍向后兼容。"""
+        mock_chat.return_value = _make_response('{"status":"ok"}')
+        client = LLMClient(provider="deepseek", api_key="sk-test")
+
+        result = client.generate("返回 JSON", json_mode=True)
+
+        assert result.success
+        assert mock_chat.call_args.kwargs["json_mode"] is True
+
+    def test_primary_failure_returns_fallback_route_metadata(self):
+        primary = LLMClient(
+            provider="minimax",
+            api_key="primary-test-only",
+            model="MiniMax-M3",
+            enable_fallback=False,
+        )
+        fallback = LLMClient(
+            provider="mimo",
+            api_key="fallback-test-only",
+            model="mimo-v2.5-pro",
+            enable_fallback=False,
+        )
+        primary.fallback_client = fallback
+        primary.chat = MagicMock(
+            return_value=LLMResponse(success=False, error="primary unavailable")
+        )
+        fallback.chat = MagicMock(
+            return_value=LLMResponse(success=True, content="ok")
+        )
+
+        result = primary.chat_with_retry("health", max_retries=1)
+
+        assert result.success is True
+        assert result.provider == "mimo"
+        assert result.model == "mimo-v2.5-pro"
+
+    def test_both_provider_failures_preserve_final_fallback_route_metadata(self):
+        primary = LLMClient(
+            provider="minimax",
+            api_key="primary-test-only",
+            model="MiniMax-M3",
+            enable_fallback=False,
+        )
+        fallback = LLMClient(
+            provider="mimo",
+            api_key="fallback-test-only",
+            model="mimo-v2.5-pro",
+            enable_fallback=False,
+        )
+        primary.fallback_client = fallback
+        primary.chat = MagicMock(
+            return_value=LLMResponse(success=False, error="primary unavailable")
+        )
+        fallback.chat = MagicMock(
+            return_value=LLMResponse(success=False, error="fallback unauthorized")
+        )
+
+        result = primary.chat_with_retry("health", max_retries=1)
+
+        assert result.success is False
+        assert result.provider == "mimo"
+        assert result.model == "mimo-v2.5-pro"
+
     @patch.dict(os.environ, {}, clear=True)
     def test_chat_unavailable_returns_error(self):
         """测试无 API key 时返回错误"""

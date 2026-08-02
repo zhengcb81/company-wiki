@@ -1,0 +1,62 @@
+{
+    "schema_version":  "1.0",
+    "recorded_at":  "2026-07-31T20:52:05.2814874Z",
+    "work_unit":  "WR-10.7",
+    "verdict":  "candidate",
+    "healthy":  false,
+    "remaining_gate":  "next-day post-fix supervisor/worker checkpoint",
+    "code_gates":  {
+                       "source_catalog_contracts":  "292 passed",
+                       "windows_lifecycle":  "10/10 passed",
+                       "background_runxfail":  "8/8 passed",
+                       "ruff":  "passed",
+                       "compileall":  "passed",
+                       "powershell_parse":  "passed",
+                       "diff_check":  "passed"
+                   },
+    "production_switch":  {
+                              "old_orphan_worker_pid":  5492,
+                              "old_stop_forced":  true,
+                              "supervisor_pid":  21744,
+                              "worker_pid":  5568,
+                              "worker_count":  1,
+                              "supervisor_count":  1,
+                              "temp_workers":  0,
+                              "temp_supervisors":  0,
+                              "foreign_workers":  0,
+                              "foreign_supervisors":  0
+                          },
+    "pilot":  {
+                  "path":  "artifacts/gates/source-catalog-bg/wr-10-7-clean-pilot-30m-20260731.json",
+                  "pass":  true,
+                  "duration_minutes":  42.7,
+                  "sample_count":  29,
+                  "worker_min":  1,
+                  "worker_max":  1,
+                  "supervisor_min":  1,
+                  "supervisor_max":  1,
+                  "effective_stale_count":  0,
+                  "raw_stale_count":  1,
+                  "pending_delta":  27,
+                  "normalized_delta":  25,
+                  "artifact_delta":  27,
+                  "scan_interrupted_delta":  0,
+                  "quick_check":  "ok",
+                  "quick_check_seconds":  729.5,
+                  "raw_unchanged":  true,
+                  "stockwiki_unchanged":  true
+              },
+    "post_pilot":  {
+                       "runtime_state":  "running",
+                       "desired_state":  "enabled",
+                       "worker_pid":  5568,
+                       "worker_status":  "exporting",
+                       "production_workers":  1,
+                       "production_supervisors":  1,
+                       "temp_workers":  0,
+                       "temp_supervisors":  0,
+                       "foreign_workers":  0,
+                       "foreign_supervisors":  0,
+                       "heartbeat_age_seconds":  56.2
+                   }
+}

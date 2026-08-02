@@ -530,7 +530,7 @@ class AnswerQualityJudge:
     def _classify_answer_type(self, answer: QueryAnswer) -> str:
         """根据问题和答案内容判断合适的 wiki 页面类型。"""
         q = answer.question.lower()
-        a = answer.answer.lower()
+        answer.answer.lower()
 
         # 对比类：问题包含 vs、对比、比较、区别
         vs_patterns = [" vs ", "对比", "比较", "区别", "还是"]
@@ -638,7 +638,7 @@ tags: [{fm_type}, auto-generated, {", ".join(source_entities[:5])}]
 ## 来源页面
 """
         for source in answer.sources:
-            rel_path = source.path.relative_to(self.wiki_root)
+            source.path.relative_to(self.wiki_root)
             content += f"- [[{source.entity_name}/{source.topic_name}]]\n"
 
         content += f"""
@@ -676,6 +676,7 @@ tags: [{fm_type}, auto-generated, {", ".join(source_entities[:5])}]
         append_log(
             "query",
             f"Answer filed as {fm_type} page: {answer.question} -> {file_path.relative_to(self.wiki_root)}",
+            log_path=self.wiki_root / "log.md",
         )
 
         return file_path
@@ -754,7 +755,11 @@ tags: [query, auto-generated]
         print(f"答案已保存到: {file_path.relative_to(self.wiki_root)}")
 
         # 更新 log.md
-        append_log("query", f"Query answer saved: {answer.question} -> {entity_name}")
+        append_log(
+            "query",
+            f"Query answer saved: {answer.question} -> {entity_name}",
+            log_path=self.wiki_root / "log.md",
+        )
 
         return file_path
 
@@ -992,7 +997,7 @@ def main():
         sys.exit(1)
 
     print(f"\n查询: {query}")
-    print(f"搜索 wiki 页面...")
+    print("搜索 wiki 页面...")
 
     results = searcher.search(query, max_results=args.max_results)
 
@@ -1008,7 +1013,7 @@ def main():
         return
 
     # 综合答案
-    print(f"\n综合答案...")
+    print("\n综合答案...")
     answer = synthesizer.synthesize(query, results)
 
     print(f"\n{'=' * 50}")
@@ -1047,7 +1052,7 @@ def main():
                 if path:
                     print(f"[QUIET] filed to {path}")
         else:
-            print(f"[QUIET] quality too low, skipped")
+            print("[QUIET] quality too low, skipped")
         return
 
     verdict = judge.judge(answer)
@@ -1110,6 +1115,11 @@ def main():
                     )
             else:
                 print("跳过归档。")
+
+
+from writer_policy import enforce_direct_cli as _enforce_legacy_writer_freeze
+
+_enforce_legacy_writer_freeze(__name__, __file__)
 
 
 if __name__ == "__main__":

@@ -4,8 +4,6 @@
 """
 
 import pytest
-import tempfile
-import os
 from pathlib import Path
 
 import sys
@@ -25,7 +23,6 @@ schedule:
 
 llm:
   provider: "deepseek"
-  api_key: "sk-test-key-123"
   model: "deepseek-v4-flash"
   base_url: "https://api.deepseek.com"
 
@@ -60,7 +57,7 @@ class TestConfig:
         config = load_config(test_config_file)
 
         assert config.llm.provider == "deepseek"
-        assert config.llm.api_key == "sk-test-key-123"
+        assert config.llm.api_key == ""
         assert config.search.api_key == "tvly-test-key-456"
 
     def test_env_override(self, test_config_file, env_vars):
@@ -103,7 +100,7 @@ search:
         # 应该使用默认值
         config = load_config(config_file)
 
-        assert config.llm.provider == "deepseek"
+        assert config.llm.provider == "minimax"
         assert config.search.engine == "tavily"
 
     def test_get_methods(self, test_config_file):
@@ -128,12 +125,14 @@ class TestConfigDefaults:
 
     def test_default_values(self):
         """测试默认值"""
-        from config import LLMConfig, SearchConfig, ScheduleConfig
+        from config import LLMConfig, SearchConfig
 
         llm = LLMConfig()
-        assert llm.provider == "deepseek"
+        assert llm.provider == "minimax"
+        assert llm.model == "MiniMax-M3"
+        assert llm.fallback.model == "mimo-v2.5-pro"
         assert llm.max_tokens == 8192
-        assert llm.temperature == 0.3
+        assert llm.temperature == 1.0
 
         search = SearchConfig()
         assert search.engine == "tavily"
@@ -144,7 +143,7 @@ class TestConfigDefaults:
 @pytest.mark.unit
 def test_config_module_import():
     """测试配置模块导入"""
-    from config import Config, load_config, get_config
+    from config import load_config, get_config
 
     assert Config is not None
     assert load_config is not None

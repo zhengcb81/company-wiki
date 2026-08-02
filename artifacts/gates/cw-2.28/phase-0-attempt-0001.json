@@ -1,0 +1,173 @@
+{
+  "schema_version": "1.0",
+  "work_unit": "CW-2.28A",
+  "phase": 0,
+  "attempt_id": "phase-0-attempt-0001",
+  "status": "PASS",
+  "started_at": "2026-07-26T08:40:00Z",
+  "completed_at": "2026-07-26T08:55:00Z",
+  "executor": "claude-code/glm-5.2 (replayed legacy CW-2.28A/B facts into §12.2 attempt schema)",
+  "project_root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+  "git_heads": {
+    "company-wiki": "a571606"
+  },
+  "supersedes_receipt_sha256": null,
+  "replayed_from_legacy": {
+    "path": "phase-0-receipt.json",
+    "sha256": "164cab248413a9070f71dbccf94f7b18699d5a47a081707ec4ba9ae519338d76"
+  },
+  "product_file_hashes_before": {},
+  "product_file_hashes_after": {},
+  "command_results": [
+    {
+      "command_id": "git-head",
+      "argv": [
+        "git",
+        "rev-parse",
+        "--short",
+        "HEAD"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "started_at": "2026-07-26T08:40:00Z",
+      "completed_at": "2026-07-26T08:55:00Z",
+      "exit_code": 0,
+      "summary": "a571606",
+      "stdout_sha256": null,
+      "stderr_sha256": null,
+      "failed_tests": [],
+      "skipped_tests": [],
+      "xfailed_tests": []
+    },
+    {
+      "command_id": "catalog-status",
+      "argv": [
+        "python",
+        "-m",
+        "company_wiki.source_catalog.cli",
+        "status"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "started_at": "2026-07-26T08:40:00Z",
+      "completed_at": "2026-07-26T08:55:00Z",
+      "exit_code": 0,
+      "summary": "23451 locations / 11706 docs / 23409 sources; 0 text_fingerprint; 42 exact / 0 semantic",
+      "stdout_sha256": null,
+      "stderr_sha256": null,
+      "failed_tests": [],
+      "skipped_tests": [],
+      "xfailed_tests": []
+    },
+    {
+      "command_id": "worker-status",
+      "argv": [
+        "python",
+        "-m",
+        "company_wiki.source_catalog.cli",
+        "worker-status"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "started_at": "2026-07-26T08:40:00Z",
+      "completed_at": "2026-07-26T08:55:00Z",
+      "exit_code": 0,
+      "summary": "stopped (stale_runtime=true, PID 20848, heartbeat 5771s)",
+      "stdout_sha256": null,
+      "stderr_sha256": null,
+      "failed_tests": [],
+      "skipped_tests": [],
+      "xfailed_tests": []
+    },
+    {
+      "command_id": "catalog-quick-check",
+      "argv": [
+        "python",
+        "-c",
+        "PRAGMA quick_check"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "started_at": "2026-07-26T08:40:00Z",
+      "completed_at": "2026-07-26T08:55:00Z",
+      "exit_code": 0,
+      "summary": "ok",
+      "stdout_sha256": null,
+      "stderr_sha256": null,
+      "failed_tests": [],
+      "skipped_tests": [],
+      "xfailed_tests": []
+    },
+    {
+      "command_id": "duplicate-cli",
+      "argv": [
+        "python",
+        "-m",
+        "company_wiki.source_catalog.cli",
+        "duplicates"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "started_at": "2026-07-26T08:40:00Z",
+      "completed_at": "2026-07-26T08:55:00Z",
+      "exit_code": 0,
+      "summary": "42 exact_copy groups, 0 semantic, ~81.9MB reclaimable",
+      "stdout_sha256": null,
+      "stderr_sha256": null,
+      "failed_tests": [],
+      "skipped_tests": [],
+      "xfailed_tests": []
+    }
+  ],
+  "invariant_results": [
+    {
+      "name": "read_only_no_product_writes",
+      "passed": true,
+      "detail": "planning files only"
+    },
+    {
+      "name": "five_company_raw_evidence_confirmed",
+      "passed": true,
+      "detail": "BYD/中微/宁德/美团/NVIDIA SHA recorded"
+    }
+  ],
+  "authorization_used": [
+    "read_only_preflight"
+  ],
+  "concurrent_change_detected": false,
+  "catalog_before": {
+    "documents": 11706,
+    "sources": 23409,
+    "locations": 23451,
+    "text_fingerprint_non_null": 0,
+    "exact_copy_groups": 42,
+    "semantic_copy_groups": 0,
+    "quick_check": "ok",
+    "db_sha256": "2685cc069a1632cbb5b4e8e765e8149e497d97050b8211b40d8f20c6355bee7d",
+    "db_size": 77238272
+  },
+  "catalog_after": "unchanged from before",
+  "db_backup": null,
+  "raw_manifest_before": "five-company fixtures SHA-verified (see legacy phase-0-receipt.json)",
+  "raw_manifest_after": "same as before",
+  "network_used": false,
+  "downloader_invocations": 0,
+  "llm_invocations": 0,
+  "files_created": [
+    "artifacts/gates/cw-2.28/phase-0-attempt-0001.json"
+  ],
+  "files_modified": [],
+  "diff_allowlist_result": "PASS (artifacts/planning only)",
+  "secret_scan_result": "0 active secrets",
+  "pytest_summary": {
+    "baseline_preexisting_failures_accepted": [
+      "company focused: 47 passed/1 failed (worker stop timing)",
+      "company full: 1373 passed/1 failed (same worker stop)",
+      "company ruff: 14 errors (E402 x1, F811 x13) pre-existing",
+      "stockinfo focused: 102 passed/2 failed (browser.py cwd)"
+    ],
+    "note": "pre-existing baseline failures are observations, not Phase-0 gate commands; gate = read-only freeze completeness"
+  },
+  "static_summary": {
+    "ruff": "14 pre-existing errors (E402 x1, F811 x13)",
+    "compileall": "not run in Phase 0"
+  },
+  "errors": [],
+  "blocker": null,
+  "next_phase": "CW-2.28B (Phase 1: RED contract)"
+}

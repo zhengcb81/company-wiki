@@ -1,0 +1,609 @@
+{
+  "version": "1.0",
+  "annotator": "human",
+  "annotated_at": "2025-04-01",
+  "spans": {
+    "gk-bh-2024-ar": [
+      {
+        "span_id": "S013",
+        "start": 179,
+        "end": 202,
+        "text": "2024 年公司实现营业收入 140.1 亿元",
+        "claim_id": "C013",
+        "confidence": 1.0,
+        "notes": [
+          "numeric",
+          "prior_year",
+          "yoy_base"
+        ]
+      }
+    ],
+    "gk-bh-2025-ar": [
+      {
+        "span_id": "S001",
+        "start": 144,
+        "end": 172,
+        "text": "公司实现营业收入 185.6 亿元，同比增长 32.5%",
+        "claim_id": "C001",
+        "confidence": 1.0,
+        "notes": "财务数据，来自合并利润表"
+      },
+      {
+        "span_id": "S002",
+        "start": 173,
+        "end": 205,
+        "text": "归属于上市公司股东的净利润 28.3 亿元，同比增长 45.2%",
+        "claim_id": "C002",
+        "confidence": 1.0,
+        "notes": "财务数据，来自合并利润表"
+      },
+      {
+        "span_id": "S003",
+        "start": 208,
+        "end": 248,
+        "text": "半导体设备业务收入 152.8 亿元，占总营收 82.3%，同比增长 38.7%",
+        "claim_id": "C003",
+        "confidence": 1.0,
+        "notes": "业务结构数据"
+      },
+      {
+        "span_id": "S004",
+        "start": 279,
+        "end": 329,
+        "text": "ICP 刻蚀设备已进入 14nm 产线验证阶段，CCP 刻蚀设备在 28nm 及以上制程实现批量交付",
+        "claim_id": "C004",
+        "confidence": 1.0,
+        "notes": "技术进展，关键里程碑"
+      },
+      {
+        "span_id": "S005",
+        "start": 330,
+        "end": 359,
+        "text": "报告期内刻蚀设备收入 45.2 亿元，同比增长 28.3%",
+        "claim_id": "C005",
+        "confidence": 1.0,
+        "notes": "产品线收入数据"
+      },
+      {
+        "span_id": "S006",
+        "start": 378,
+        "end": 415,
+        "text": "PVD 设备已覆盖 28nm 制程，CVD 设备在 40nm 制程实现突破",
+        "claim_id": "C006",
+        "confidence": 1.0,
+        "notes": "薄膜沉积设备技术进展"
+      },
+      {
+        "span_id": "S007",
+        "start": 529,
+        "end": 565,
+        "text": "截至报告期末，公司在手订单 210.5 亿元，较上年同期增长 25.8%",
+        "claim_id": "C007",
+        "confidence": 1.0,
+        "notes": "订单数据，前瞻性指标"
+      },
+      {
+        "span_id": "S008",
+        "start": 599,
+        "end": 625,
+        "text": "报告期内研发投入 32.8 亿元，占营收 17.7%",
+        "claim_id": "C008",
+        "confidence": 1.0,
+        "notes": "研发投入数据"
+      },
+      {
+        "span_id": "S009",
+        "start": 1075,
+        "end": 1107,
+        "text": "公司与国内某大型晶圆厂签订设备采购合同，合同金额 25.8 亿元",
+        "claim_id": "C009",
+        "confidence": 0.95,
+        "notes": "重大合同，未披露客户名称"
+      }
+    ],
+    "gk-bh-2025-order": [
+      {
+        "span_id": "S011",
+        "start": 208,
+        "end": 223,
+        "text": "公司在手订单 230.0 亿元",
+        "claim_id": "C011",
+        "confidence": 1.0,
+        "notes": "更新在手订单，supersedes C007"
+      }
+    ],
+    "gk-bh-br-assumption": [
+      {
+        "span_id": "S026",
+        "start": 136,
+        "end": 149,
+        "text": "半导体设备国产化率持续提升",
+        "claim_id": "C026",
+        "confidence": 0.9,
+        "notes": [
+          "broker",
+          "assumption",
+          "opinion"
+        ]
+      }
+    ],
+    "gk-bh-br-rating": [
+      {
+        "span_id": "S023",
+        "start": 166,
+        "end": 177,
+        "text": "上调北方华创评级至买入",
+        "claim_id": "C023",
+        "confidence": 0.9,
+        "notes": [
+          "broker",
+          "rating",
+          "opinion"
+        ]
+      }
+    ],
+    "gk-bh-ir-guidance": [
+      {
+        "span_id": "S018",
+        "start": 158,
+        "end": 185,
+        "text": "管理层指引 2025 年全年营业收入同比增长约 30%",
+        "claim_id": "C018",
+        "confidence": 0.9,
+        "notes": [
+          "prediction",
+          "guidance",
+          "opinion_prediction"
+        ]
+      }
+    ],
+    "gk-bh-ir-monthly": [
+      {
+        "span_id": "S021",
+        "start": 154,
+        "end": 174,
+        "text": "未经审计的月度营业收入为 16.2 亿元",
+        "claim_id": "C021",
+        "confidence": 1.0,
+        "notes": [
+          "numeric",
+          "unaudited"
+        ]
+      }
+    ],
+    "gk-bh-news-asof": [
+      {
+        "span_id": "S031",
+        "start": 183,
+        "end": 206,
+        "text": "2025 年第二季度营收初步达 98.0 亿元",
+        "claim_id": "C031",
+        "confidence": 1.0,
+        "notes": [
+          "as_of",
+          "numeric",
+          "future_leakage"
+        ]
+      }
+    ],
+    "gk-bh-news-interview": [
+      {
+        "span_id": "S028",
+        "start": 147,
+        "end": 171,
+        "text": "公司已向客户交付多台 28nm CCP 刻蚀设备",
+        "claim_id": "C028",
+        "confidence": 1.0,
+        "notes": [
+          "original_news",
+          "interview"
+        ]
+      }
+    ],
+    "gk-bh-risk-warning": [
+      {
+        "span_id": "S015",
+        "start": 182,
+        "end": 195,
+        "text": "零部件面临美国出口管制风险",
+        "claim_id": "C015",
+        "confidence": 1.0,
+        "notes": [
+          "risk_warning",
+          "geopolitical"
+        ]
+      }
+    ],
+    "gk-consumer-irrelevant3": [
+      {
+        "span_id": "S038",
+        "start": 70,
+        "end": 101,
+        "text": "合成消费品牌发布无糖饮料新品，与半导体设备公司和行业均无关系。",
+        "claim_id": "C038",
+        "confidence": 1.0,
+        "notes": [
+          "rr-12.2d-3b",
+          "irrelevant",
+          "negative",
+          "original_news"
+        ]
+      }
+    ],
+    "gk-logistics-irrelevant4": [
+      {
+        "span_id": "S039",
+        "start": 68,
+        "end": 97,
+        "text": "合成物流完成冷链仓储升级，不涉及芯片制造或半导体设备业务。",
+        "claim_id": "C039",
+        "confidence": 1.0,
+        "notes": [
+          "rr-12.2d-3b",
+          "irrelevant",
+          "negative",
+          "original_news"
+        ]
+      }
+    ],
+    "gk-news-agg-bh-reprint": [
+      {
+        "span_id": "S032",
+        "start": 172,
+        "end": 199,
+        "text": "北方华创 2025 年报披露营业收入 185.6 亿元",
+        "claim_id": "C032",
+        "confidence": 1.0,
+        "notes": [
+          "aggregated_news",
+          "reprint",
+          "dedup"
+        ]
+      }
+    ],
+    "gk-news-agg-chain": [
+      {
+        "span_id": "S035",
+        "start": 115,
+        "end": 124,
+        "text": "经由三站转载链传播",
+        "claim_id": "C035",
+        "confidence": 1.0,
+        "notes": [
+          "aggregated_news",
+          "reprint_chain",
+          "dedup"
+        ]
+      }
+    ],
+    "gk-news-agg-exaggerated": [
+      {
+        "span_id": "S033",
+        "start": 128,
+        "end": 142,
+        "text": "标题「北方华创营收暴涨翻倍」",
+        "claim_id": "C033",
+        "confidence": 1.0,
+        "notes": [
+          "aggregated_news",
+          "exaggerated_title"
+        ]
+      }
+    ],
+    "gk-news-agg-syndication": [
+      {
+        "span_id": "S034",
+        "start": 126,
+        "end": 137,
+        "text": "与多家聚合站点同文多发",
+        "claim_id": "C034",
+        "confidence": 1.0,
+        "notes": [
+          "aggregated_news",
+          "syndication",
+          "dedup"
+        ]
+      }
+    ],
+    "gk-news-ambig2": [
+      {
+        "span_id": "S029",
+        "start": 149,
+        "end": 165,
+        "text": "本报道同时提及北方华创与中微公司",
+        "claim_id": "C029",
+        "confidence": 1.0,
+        "notes": [
+          "ambiguity",
+          "negative"
+        ]
+      }
+    ],
+    "gk-news-irr-ev": [
+      {
+        "span_id": "S030",
+        "start": 160,
+        "end": 174,
+        "text": "某新能源汽车公司发布新款车型",
+        "claim_id": "C030",
+        "confidence": 1.0,
+        "notes": [
+          "irrelevant",
+          "negative"
+        ]
+      }
+    ],
+    "gk-smic-2025q1": [
+      {
+        "span_id": "S012",
+        "start": 307,
+        "end": 326,
+        "text": "132.5 亿元，同比增长 28.1%",
+        "claim_id": "C012",
+        "confidence": 1.0,
+        "notes": [
+          "numeric",
+          "quarterly"
+        ]
+      }
+    ],
+    "gk-smic-ambig4": [
+      {
+        "span_id": "S037",
+        "start": 70,
+        "end": 99,
+        "text": "稿件只写“中芯扩产”，无法判断所指为中芯国际还是中芯集成。",
+        "claim_id": "C037",
+        "confidence": 1.0,
+        "notes": [
+          "rr-12.2d-3b",
+          "ambiguity",
+          "original_news"
+        ]
+      }
+    ],
+    "gk-smic-ann-asof4": [
+      {
+        "span_id": "S042",
+        "start": 69,
+        "end": 109,
+        "text": "十一月公告确认新增产线投产，该事实不得进入十月三十一日以前的 as_of 答案。",
+        "claim_id": "C042",
+        "confidence": 1.0,
+        "notes": [
+          "rr-12.2d-3b",
+          "as_of",
+          "future_leakage",
+          "company_announcement"
+        ]
+      }
+    ],
+    "gk-smic-br-quote": [
+      {
+        "span_id": "S025",
+        "start": 152,
+        "end": 174,
+        "text": "引用中芯国际披露的 590 亿元资本开支计划",
+        "claim_id": "C025",
+        "confidence": 1.0,
+        "notes": [
+          "broker",
+          "quoted_fact",
+          "non_independent"
+        ]
+      }
+    ],
+    "gk-smic-ir-capex": [
+      {
+        "span_id": "S020",
+        "start": 155,
+        "end": 175,
+        "text": "2025 年全年资本开支约 590 亿元",
+        "claim_id": "C020",
+        "confidence": 0.9,
+        "notes": [
+          "prediction",
+          "capex",
+          "opinion_prediction"
+        ]
+      }
+    ],
+    "gk-smic-ir-control": [
+      {
+        "span_id": "S045",
+        "start": 72,
+        "end": 101,
+        "text": "公司表示现有生产计划保持不变，本次沟通未披露新增财务指引。",
+        "claim_id": "C045",
+        "confidence": 1.0,
+        "notes": [
+          "rr-12.2d-3b",
+          "neutral_control",
+          "ir"
+        ]
+      }
+    ],
+    "gk-smic-major-contract": [
+      {
+        "span_id": "S017",
+        "start": 177,
+        "end": 201,
+        "text": "签订三年期设备框架采购协议，金额 82.0 亿元",
+        "claim_id": "C017",
+        "confidence": 1.0,
+        "notes": [
+          "numeric",
+          "major_contract",
+          "multi_target"
+        ]
+      }
+    ],
+    "gk-smic-news-asof2": [
+      {
+        "span_id": "S040",
+        "start": 70,
+        "end": 107,
+        "text": "中芯国际第三季度新增产能已在九月披露，不得用于六月末的 as_of 查询。",
+        "claim_id": "C040",
+        "confidence": 1.0,
+        "notes": [
+          "rr-12.2d-3b",
+          "as_of",
+          "future_leakage",
+          "original_news"
+        ]
+      }
+    ],
+    "gk-smic-supersedes2": [
+      {
+        "span_id": "S044",
+        "start": 72,
+        "end": 113,
+        "text": "公司更新2025Q1营业收入为133.1亿元，该数据替代此前披露的132.5亿元。",
+        "claim_id": "C044",
+        "confidence": 1.0,
+        "notes": [
+          "rr-12.2d-3b",
+          "supersedes",
+          "numeric",
+          "company_announcement"
+        ]
+      }
+    ],
+    "gk-zw-2023-restated": [
+      {
+        "span_id": "S014",
+        "start": 207,
+        "end": 230,
+        "text": "重述后 2023 年营业收入为 47.4 亿元",
+        "claim_id": "C014",
+        "confidence": 1.0,
+        "notes": [
+          "numeric",
+          "restatement"
+        ]
+      }
+    ],
+    "gk-zw-ambig3": [
+      {
+        "span_id": "S036",
+        "start": 70,
+        "end": 100,
+        "text": "报道仅使用“中微”简称，无法确认指中微公司还是其他同名主体。",
+        "claim_id": "C036",
+        "confidence": 1.0,
+        "notes": [
+          "rr-12.2d-3b",
+          "ambiguity",
+          "original_news"
+        ]
+      }
+    ],
+    "gk-zw-br-forecast": [
+      {
+        "span_id": "S024",
+        "start": 129,
+        "end": 155,
+        "text": "预测中微公司 2025 年归母净利润 12.5 亿元",
+        "claim_id": "C024",
+        "confidence": 0.9,
+        "notes": [
+          "broker",
+          "forecast",
+          "prediction"
+        ]
+      }
+    ],
+    "gk-zw-br-target": [
+      {
+        "span_id": "S027",
+        "start": 127,
+        "end": 150,
+        "text": "给予中微公司 12 个月目标价 220.0 元",
+        "claim_id": "C027",
+        "confidence": 0.9,
+        "notes": [
+          "broker",
+          "target_price",
+          "prediction"
+        ]
+      }
+    ],
+    "gk-zw-correction2": [
+      {
+        "span_id": "S043",
+        "start": 75,
+        "end": 111,
+        "text": "公司将重述后的2023年营业收入由47.4亿元进一步更正为47.1亿元。",
+        "claim_id": "C043",
+        "confidence": 1.0,
+        "notes": [
+          "rr-12.2d-3b",
+          "correction",
+          "restatement",
+          "numeric"
+        ]
+      }
+    ],
+    "gk-zw-ir-qna": [
+      {
+        "span_id": "S022",
+        "start": 171,
+        "end": 180,
+        "text": "放量初期毛利率承压",
+        "claim_id": "C022",
+        "confidence": 0.9,
+        "notes": [
+          "opinion",
+          "margin",
+          "opinion_prediction"
+        ]
+      }
+    ],
+    "gk-zw-ir-view": [
+      {
+        "span_id": "S019",
+        "start": 152,
+        "end": 166,
+        "text": "国内刻蚀设备市场竞争趋于激烈",
+        "claim_id": "C019",
+        "confidence": 0.9,
+        "notes": [
+          "opinion",
+          "competition",
+          "opinion_prediction"
+        ]
+      }
+    ],
+    "gk-zw-news-asof3": [
+      {
+        "span_id": "S041",
+        "start": 70,
+        "end": 108,
+        "text": "中微公司第四季度订单信息于十月公开，不得写入九月末之前的 as_of 答案。",
+        "claim_id": "C041",
+        "confidence": 1.0,
+        "notes": [
+          "rr-12.2d-3b",
+          "as_of",
+          "future_leakage",
+          "original_news"
+        ]
+      }
+    ],
+    "gk-zw-terminate": [
+      {
+        "span_id": "S016",
+        "start": 189,
+        "end": 208,
+        "text": "公司决定终止与某海外客户的设备销售合作",
+        "claim_id": "C016",
+        "confidence": 1.0,
+        "notes": [
+          "termination",
+          "negative"
+        ]
+      }
+    ]
+  }
+}

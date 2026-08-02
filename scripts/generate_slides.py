@@ -528,5 +528,10 @@ def main() -> None:
     print(f"  Total slides: {slide_count}")
 
 
+from writer_policy import enforce_direct_cli as _enforce_legacy_writer_freeze
+
+_enforce_legacy_writer_freeze(__name__, __file__)
+
+
 if __name__ == "__main__":
     main()

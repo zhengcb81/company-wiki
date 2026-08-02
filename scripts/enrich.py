@@ -10,9 +10,6 @@ enrich.py — 用 LLM 为新公司自动构建拓扑
 
 import argparse
 import json
-import os
-import sys
-from pathlib import Path
 
 from common import WIKI_ROOT, CONFIG_PATH
 
@@ -108,14 +105,12 @@ JSON 格式:
         print(f"  竞争对手: {proposal['competes_with']}")
 
     if dry_run:
-        print(f"\n  [DRY RUN] 未写入")
+        print("\n  [DRY RUN] 未写入")
         return False
 
     # 写入 graph.yaml
-    new_sector = None
     for s in proposal.get("sectors", []):
         if s not in graph._data.get("nodes", {}):
-            new_sector = s
             graph.add_node(s, "sector",
                           description=f"{s}行业",
                           keywords=proposal.get("keywords", []),
@@ -132,7 +127,7 @@ JSON 格式:
     )
 
     graph.save()
-    print(f"\n  ✅ 已添加到 graph.yaml")
+    print("\n  ✅ 已添加到 graph.yaml")
 
     # 创建目录
     for sub in ["raw/news", "wiki"]:

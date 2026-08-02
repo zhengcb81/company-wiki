@@ -21,15 +21,12 @@ cross_verify.py — 多源交叉验证
 import argparse
 import difflib
 import re
-import sys
-from collections import defaultdict
 from datetime import datetime
 from pathlib import Path
-from typing import Dict, List, Optional, Set, Tuple
+from typing import Dict, List, Optional, Set
 
 from common import WIKI_ROOT
 
-from graph import Graph
 
 
 # ── 数据结构 ──────────────────────────────
@@ -440,13 +437,13 @@ def main():
     medium = [c for c in clusters if c.credibility.startswith("中")]
     low = [c for c in clusters if c.credibility.startswith("待")]
 
-    print(f"\n可信度分布:")
+    print("\n可信度分布:")
     print(f"  高(3+来源): {len(high)}")
     print(f"  中(2来源):  {len(medium)}")
     print(f"  待验证:     {len(low)}")
 
     if high:
-        print(f"\nTop 5 高可信度事件:")
+        print("\nTop 5 高可信度事件:")
         for i, c in enumerate(high[:5], 1):
             title_short = c.canonical_title[:60]
             print(f"  {i}. [{c.source_count}来源] {title_short}")
@@ -458,7 +455,12 @@ def main():
         generate_report(clusters, report_path)
         print(f"\n报告路径: {report_path}")
     elif args.dry_run:
-        print(f"\n(DRY-RUN 模式，未生成报告)")
+        print("\n(DRY-RUN 模式，未生成报告)")
+
+
+from writer_policy import enforce_direct_cli as _enforce_legacy_writer_freeze
+
+_enforce_legacy_writer_freeze(__name__, __file__)
 
 
 if __name__ == "__main__":

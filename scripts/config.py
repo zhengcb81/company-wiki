@@ -9,8 +9,8 @@
 """
 
 import os
+import copy
 import yaml
-import json
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Optional, Dict, Any, List
@@ -20,9 +20,15 @@ from common import WIKI_ROOT
 
 logger = logging.getLogger(__name__)
 
+_PROJECT_DOTENV_AUTHORITATIVE_KEYS = frozenset(
+    {"MINIMAX_API_KEY", "MIMO_API_KEY", "DEEPSEEK_API_KEY"}
+)
+
 
 def _load_dotenv():
-    """加载项目根目录下的 .env 文件到环境变量（如果尚未设置）"""
+    """Load project .env; its managed LLM keys override stale inherited values."""
+    if os.environ.get("PYTHON_DOTENV_DISABLED", "").casefold() in {"1", "true", "yes"}:
+        return
     # 查找 .env: 先看项目根目录，再看当前工作目录
     candidates = [
         WIKI_ROOT / ".env",
@@ -40,7 +46,10 @@ def _load_dotenv():
                     key, _, value = line.partition("=")
                     key = key.strip()
                     value = value.strip().strip("'\"")
-                    if key and key not in os.environ:
+                    if key and (
+                        key in _PROJECT_DOTENV_AUTHORITATIVE_KEYS
+                        or key not in os.environ
+                    ):
                         os.environ[key] = value
             logger.debug(f"已加载 .env: {env_path}")
             return
@@ -59,15 +68,31 @@ def _ensure_dotenv():
 
 
 @dataclass
+class LLMFallbackConfig:
+    """Secondary provider profile with an explicit workload policy."""
+
+    provider: str = "mimo"
+    api_key: str = ""
+    api_key_env: str = "MIMO_API_KEY"
+    model: str = "mimo-v2.5-pro"
+    base_url: str = "https://token-plan-cn.xiaomimimo.com/v1"
+    enabled: bool = True
+    usage_scope: str = "general"
+
+
+@dataclass
 class LLMConfig:
     """LLM 配置"""
-    provider: str = "deepseek"
+    provider: str = "minimax"
     api_key: str = ""
-    model: str = "deepseek-v4-flash"
-    base_url: str = "https://api.deepseek.com"
+    api_key_env: str = "MINIMAX_API_KEY"
+    model: str = "MiniMax-M3"
+    base_url: str = "https://api.minimaxi.com/v1"
     max_tokens: int = 8192
     max_document_chars: int = 800000  # ~1M tokens 的 80%，用于整篇文档分析
-    temperature: float = 0.3
+    temperature: float = 1.0
+    reasoning_split: bool = True
+    fallback: LLMFallbackConfig = field(default_factory=LLMFallbackConfig)
 
 
 @dataclass
@@ -122,7 +147,7 @@ class Config:
         """
         加载配置
         
-        优先级: 环境变量 > config.yaml > 默认值
+        优先级: 项目 .env 中受管 LLM Key > 环境变量 > config.yaml > 默认值
         
         Args:
             config_path: 配置文件路径，默认为 ~/company-wiki/config.yaml
@@ -163,10 +188,16 @@ class Config:
     
     @staticmethod
     def _apply_env_overrides(raw: Dict[str, Any]) -> Dict[str, Any]:
-        """应用环境变量覆盖"""
-        # LLM API Key
-        if os.getenv("DEEPSEEK_API_KEY"):
-            raw.setdefault("llm", {})["api_key"] = os.getenv("DEEPSEEK_API_KEY")
+        """Apply non-secret overrides and remove repository-stored LLM keys."""
+        raw = copy.deepcopy(raw)
+        llm_raw = raw.get("llm")
+        if isinstance(llm_raw, dict):
+            # LLM secrets are runtime-only. Do not retain YAML values in _raw,
+            # and never copy environment secrets into the serializable mapping.
+            llm_raw.pop("api_key", None)
+            fallback_raw = llm_raw.get("fallback")
+            if isinstance(fallback_raw, dict):
+                fallback_raw.pop("api_key", None)
         
         # Search API Key
         if os.getenv("TAVILY_API_KEY"):
@@ -183,14 +214,42 @@ class Config:
         """构建配置对象"""
         # LLM 配置
         llm_raw = raw.get("llm", {})
+        provider_defaults = {
+            "minimax": ("MINIMAX_API_KEY", "MiniMax-M3", "https://api.minimaxi.com/v1"),
+            "mimo": ("MIMO_API_KEY", "mimo-v2.5-pro", "https://token-plan-cn.xiaomimimo.com/v1"),
+            "deepseek": ("DEEPSEEK_API_KEY", "deepseek-v4-flash", "https://api.deepseek.com"),
+            "openai": ("OPENAI_API_KEY", "gpt-4", "https://api.openai.com/v1"),
+            "claude": ("ANTHROPIC_API_KEY", "claude-3-opus-20240229", "https://api.anthropic.com"),
+        }
+        provider = llm_raw.get("provider", "minimax")
+        api_key_env, default_model, default_base_url = provider_defaults.get(
+            provider, provider_defaults["minimax"]
+        )
+        fallback_raw = llm_raw.get("fallback", {})
+        fallback_provider = fallback_raw.get("provider", "mimo")
+        fallback_env, fallback_model, fallback_base_url = provider_defaults.get(
+            fallback_provider, provider_defaults["mimo"]
+        )
+        fallback = LLMFallbackConfig(
+            provider=fallback_provider,
+            api_key=os.getenv(fallback_env, ""),
+            api_key_env=fallback_env,
+            model=fallback_raw.get("model", fallback_model),
+            base_url=fallback_raw.get("base_url", fallback_base_url),
+            enabled=bool(fallback_raw.get("enabled", True)),
+            usage_scope=fallback_raw.get("usage_scope", "general"),
+        )
         llm = LLMConfig(
-            provider=llm_raw.get("provider", "deepseek"),
-            api_key=llm_raw.get("api_key", ""),
-            model=llm_raw.get("model", "deepseek-v4-flash"),
-            base_url=llm_raw.get("base_url", "https://api.deepseek.com"),
+            provider=provider,
+            api_key=os.getenv(api_key_env, ""),
+            api_key_env=api_key_env,
+            model=llm_raw.get("model", default_model),
+            base_url=llm_raw.get("base_url", default_base_url),
             max_tokens=llm_raw.get("max_tokens", 8192),
             max_document_chars=llm_raw.get("max_document_chars", 800000),
-            temperature=llm_raw.get("temperature", 0.3),
+            temperature=llm_raw.get("temperature", 1.0),
+            reasoning_split=bool(llm_raw.get("reasoning_split", True)),
+            fallback=fallback,
         )
         
         # 搜索配置
@@ -253,12 +312,18 @@ class Config:
 
         # 验证 LLM 配置
         if strict and not self.llm.api_key:
-            errors.append("缺少 LLM API Key (设置 DEEPSEEK_API_KEY 环境变量)")
+            errors.append(f"缺少 LLM API Key (设置 {self.llm.api_key_env} 环境变量)")
 
         # LLM provider 白名单
-        valid_providers = {"deepseek", "openai", "claude"}
+        valid_providers = {"minimax", "mimo", "deepseek", "openai", "claude"}
         if self.llm.provider and self.llm.provider not in valid_providers:
             errors.append(f"不支持的 LLM provider: {self.llm.provider} (支持: {valid_providers})")
+        if self.llm.fallback.provider not in valid_providers:
+            errors.append(f"不支持的备用 LLM provider: {self.llm.fallback.provider}")
+        if self.llm.fallback.usage_scope != "general":
+            errors.append(
+                f"不支持的备用 LLM usage_scope: {self.llm.fallback.usage_scope}"
+            )
 
         # 数值范围验证
         if self.llm.temperature is not None and not (0 <= self.llm.temperature <= 2):

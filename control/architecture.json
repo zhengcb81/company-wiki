@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "rules": [
+    {
+      "id": "production-scheduler-imports-canonical-service",
+      "kind": "required_regex",
+      "glob": "scripts/scheduler.py",
+      "regex": "(?:from|import)\\s+company_wiki\\.",
+      "message": "production scheduler is not connected to the canonical company_wiki package"
+    },
+    {
+      "id": "production-ingest-imports-canonical-service",
+      "kind": "required_regex",
+      "glob": "scripts/ingest_v2.py",
+      "regex": "(?:from|import)\\s+company_wiki\\.ingest",
+      "message": "legacy ingest remains independent from canonical IngestService"
+    },
+    {
+      "id": "failure-drills-are-not-constant-success",
+      "kind": "forbidden_regex",
+      "glob": "src/company_wiki/deployment.py",
+      "regex": "def\\s+_drill_(?:repeat_run|interrupt_recovery|partial_failure|budget_exhaustion|review_rejection)\\([^)]*\\)[\\s\\S]{0,220}?return\\s+True",
+      "message": "failure drill returns constant success without executing a failure"
+    },
+    {
+      "id": "critical-proposal-approval-is-enforced",
+      "kind": "forbidden_regex",
+      "glob": "src/company_wiki/proposal.py",
+      "regex": "RiskLevel\\.CRITICAL[\\s\\S]{0,180}?pass\\s*(?:#.*)?$",
+      "message": "critical proposal approval contains an empty pass branch"
+    },
+    {
+      "id": "legacy-direct-writers-zero",
+      "kind": "max_regex_matches",
+      "glob": "scripts/**/*.py",
+      "regex": "(?:\\.write_text\\(|\\.unlink\\(|os\\.replace\\()",
+      "max_matches": 0,
+      "exclude": [
+        "scripts/recovery_baseline.py",
+        "scripts/gate_runner.py",
+        "scripts/clean_env_gate.py",
+        "scripts/architecture_gate.py"
+      ],
+      "message": "legacy scripts still contain direct filesystem writers"
+    },
+    {
+      "id": "deprecated-graph-models-not-imported-by-production",
+      "kind": "max_regex_matches",
+      "glob": "scripts/**/*.py",
+      "regex": "(?:from|import)\\s+(?:scripts\\.)?models\\.",
+      "max_matches": 0,
+      "exclude": [
+        "scripts/models/**"
+      ],
+      "message": "production scripts still import deprecated typed Graph models"
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0",
+  "work_unit": "WR-10.13",
+  "title": "fingerprint terminal 生产验收（corrupt-XLS → terminal，不再重试）",
+  "gate": "final-fingerprint-terminal",
+  "verdict": "accepted",
+  "completed_at": "2026-08-02T16:01:47Z",
+  "code_fingerprint_loaded": "724f0d5a8481709ac6a9f0169e645c517044127fd942f0c20d0a227cd4e2ffa4",
+  "evidence": {
+    "corrupt_xls_document_id": "urn:company-wiki:document:sha256:06b0fcc7fd4a3d8ad3d1e5de90054dc074737857eef1ecf21311a9331cade95d",
+    "fingerprint_state": {
+      "status": "failed_terminal",
+      "attempt_count": 3,
+      "terminal_reason": "retry_exhausted:XLRDError",
+      "last_error_code": "XLRDError",
+      "next_retry_at": null,
+      "normalizer_version": "1.0.0",
+      "last_attempt_at": "2026-07-29T20:02:12Z"
+    },
+    "normalized_artifact": {
+      "status": "unsupported",
+      "error": "XLRDError: Unsupported format, or corrupt file: Expected BOF record; found b'\\xb1\\xa8\\xb1\\xed\\xc8\\xd5\\xc6\\xda'"
+    },
+    "fingerprint_status_distribution": {
+      "completed": 2403,
+      "failed_terminal": 7,
+      "pending": 21027,
+      "unsupported_terminal": 126
+    },
+    "retryable_failed_count": 0,
+    "select_fingerprint_batch_rule": "st.document_id IS NULL OR status=pending OR (retryable_failed AND next_retry_at<=now) — terminal never re-selected",
+    "source_evidence": "src/company_wiki/source_catalog/store.py:1198-1226 select_fingerprint_batch; normalizer.py:1650-1849 backfill_text_fingerprints; _UNSUPPORTED_CHILD_ERROR_TYPES includes XLRDError",
+    "conclusion": "corrupt-XLS fingerprint=failed_terminal(retry_exhausted:XLRDError) attempt=3 next_retry_at=None; retryable_failed=0; terminal 永不重选。不再无限重试达成。",
+    "db_quick_check": "ok",
+    "foreign_key_check_rows": 0,
+    "db_check_cmd": "PRAGMA quick_check; PRAGMA foreign_key_check (read-only URI connection)"
+  },
+  "worker_status_snapshot": {
+    "pid": 12956,
+    "supervisor": 14432,
+    "code_match": "MATCH",
+    "fingerprint": "724f0d5a8481"
+  }
+}

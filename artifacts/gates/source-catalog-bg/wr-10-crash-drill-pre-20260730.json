@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0",
+  "gate": "WR-10 controlled crash drill pre-termination",
+  "recorded_at": 1785444877.102275,
+  "worker_runtime": {
+    "creation_time": 134299168914810878,
+    "current_path": "C:\\Users\\郑曾波\\Dropbox\\Stock\\消费品\\食品饮料\\绝味食品\\603517_IPO.PDF",
+    "current_path_elapsed_seconds": null,
+    "current_path_started_at": 1785444697.726955,
+    "cycle_productive": null,
+    "executable": "C:\\Miniconda\\python.exe",
+    "heartbeat_at": 1785444697.726955,
+    "last_cycle_at": 1785444552.9933445,
+    "last_error": "LLMSummaryError: LLM response contains a forbidden investment conclusion",
+    "next_wait_seconds": null,
+    "next_wake_at": null,
+    "next_wake_reason": null,
+    "pid": 10564,
+    "progress_current": 1,
+    "progress_detail": "extracting Markdown",
+    "progress_percent": 33.3,
+    "progress_total": 3,
+    "project_root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "schema_version": "1.0",
+    "started_at": 1785443292.0994396,
+    "token": "54c83a494a224371a69ed46981c3dfb2",
+    "updated_at": 1785444697.726955,
+    "worker_status": "normalizing"
+  },
+  "verified_worker_identity": {
+    "pid": 10564,
+    "executable": "C:\\Miniconda\\python.exe",
+    "creation_time": 134299168914810878
+  },
+  "launcher_event_lines_before": 10,
+  "supervisor_pid_expected": 23692
+}

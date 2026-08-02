@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "cases": [
+    "tampered-acceptance-lock",
+    "path-outside-work-unit-allowlist",
+    "reviewer-owned-path-change",
+    "failed-command-marked-candidate",
+    "production-data-in-clean-candidate",
+    "constant-success-failure-drill",
+    "below-threshold-pass-with-notes",
+    "review-bound-to-different-receipt"
+  ],
+  "positive_control": "minimal-valid-candidate-remains-candidate-until-review"
+}

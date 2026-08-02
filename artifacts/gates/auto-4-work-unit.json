@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "id": "AUTO-4-WORKER-RETRY-OUTBOX",
+  "baseline_snapshot": "artifacts/gates/auto-4-before.json",
+  "acceptance": "control/acceptance.json",
+  "acceptance_lock": "control/acceptance.lock.json",
+  "allowed_paths": [
+    "src/company_wiki/automation/_clock.py",
+    "src/company_wiki/automation/retry.py",
+    "src/company_wiki/automation/outbox.py",
+    "src/company_wiki/automation/worker.py",
+    "src/company_wiki/automation/store.py",
+    "src/company_wiki/automation/cli.py",
+    "tests/unit/test_automation_worker.py",
+    "tests/contract/test_automation_store_boundary.py",
+    "tests/contract/test_automation_cli.py",
+    "artifacts/gates/auto-4-before.json",
+    "artifacts/gates/auto-4-after.json",
+    "artifacts/gates/auto-4-work-unit.json",
+    "artifacts/gates/auto-4-receipt.json",
+    "task_plan.md",
+    "findings.md",
+    "progress.md"
+  ],
+  "commands": [
+    {
+      "name": "automation-worker-tests",
+      "argv": ["python", "-m", "pytest", "-q", "tests/unit/test_automation_worker.py"],
+      "timeout_s": 120
+    },
+    {
+      "name": "automation-boundary-cli",
+      "argv": ["python", "-m", "pytest", "-q", "tests/contract/test_automation_store_boundary.py", "tests/contract/test_automation_cli.py"],
+      "timeout_s": 120
+    },
+    {
+      "name": "automation-status",
+      "argv": ["python", "-m", "company_wiki.automation.cli", "status", "--json"],
+      "timeout_s": 30
+    },
+    {
+      "name": "automation-doctor",
+      "argv": ["python", "-m", "company_wiki.automation.cli", "doctor", "--json"],
+      "timeout_s": 30
+    },
+    {
+      "name": "full-hermetic-pytest",
+      "argv": ["python", "-m", "pytest", "-q"],
+      "timeout_s": 240
+    }
+  ]
+}

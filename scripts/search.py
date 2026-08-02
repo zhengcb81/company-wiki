@@ -16,7 +16,6 @@ import argparse
 import json
 import math
 import re
-import sys
 import time
 from collections import Counter, defaultdict
 from pathlib import Path
@@ -361,7 +360,6 @@ class WikiSearchIndex:
         # Find the best window: count how many query tokens appear in each window
         # We look for clusters of matching bigrams
         best_pos = 0
-        best_hits = 0
 
         # Simple approach: find the position with the highest concentration of
         # query token matches
@@ -477,6 +475,11 @@ def main():
 
     print()
     print(f"Search completed in {elapsed * 1000:.1f}ms ({len(results)} results)")
+
+
+from writer_policy import enforce_direct_cli as _enforce_legacy_writer_freeze
+
+_enforce_legacy_writer_freeze(__name__, __file__)
 
 
 if __name__ == "__main__":

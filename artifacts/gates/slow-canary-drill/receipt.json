@@ -1,0 +1,56 @@
+{
+  "schema_version": "1.0",
+  "work_unit": "WR-10.13",
+  "title": "controlled slow-canary drill (isolated catalog)",
+  "verdict": "accepted",
+  "source_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\artifacts\\gates\\slow-canary-drill\\source",
+  "catalog_dir": "C:\\Users\\郑曾波\\Projects\\company-wiki\\artifacts\\gates\\slow-canary-drill\\catalog",
+  "config": {
+    "parser_timeout_seconds": 600.0,
+    "heartbeat_interval_seconds": 5.0,
+    "note": "shortened clock; ratio equivalent to old 900s watchdog / 3600s parser timeout"
+  },
+  "scan": {
+    "files_seen": 1,
+    "locations_active": 1,
+    "new_errors": 0
+  },
+  "normalize": {
+    "completed": 1,
+    "failed": 0,
+    "unsupported": 0,
+    "partial": 0,
+    "wall_seconds": 29.894
+  },
+  "fingerprint": {
+    "completed": 1,
+    "failed": 0,
+    "unsupported": 0,
+    "partial": 0,
+    "wall_seconds": 56.335
+  },
+  "heartbeat": {
+    "count": 16,
+    "normalize": {
+      "count": 7,
+      "parser_alive_count": 6,
+      "parser_pids_seen": [
+        "20324"
+      ],
+      "parser_pid_stable": true,
+      "max_elapsed_on_path": 25.035
+    },
+    "fingerprint": {
+      "count": 6,
+      "parser_alive_count": 5,
+      "parser_pids_seen": [
+        "3576"
+      ],
+      "parser_pid_stable": true,
+      "max_elapsed_on_path": 20.016
+    }
+  },
+  "temp_leaks_after": [],
+  "total_wall_seconds": 56.336,
+  "reason": "scan found canary, normalize completed, fingerprint completed, each operation kept one stable parser PID, no temp leaks"
+}

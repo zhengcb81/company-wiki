@@ -166,6 +166,51 @@ def test_status_survives_transient_runtime_sharing_violation(tmp_path, monkeypat
     assert status["pid"] == 321
 
 
+def test_status_compares_loaded_and_current_code_fingerprints(tmp_path, monkeypatch):
+    import company_wiki.source_catalog.control as control
+
+    processes = _FakeProcesses()
+    controller = _controller(tmp_path, processes)
+    identity = {
+        "pid": 654,
+        "executable": "C:/Python/python.exe",
+        "creation_time": 789,
+    }
+    processes.alive[654] = identity
+    controller.runtime_path.parent.mkdir(parents=True, exist_ok=True)
+    controller.runtime_path.write_text(
+        json.dumps(
+            {
+                "schema_version": "1.0",
+                **identity,
+                "token": "runtime-token",
+                "heartbeat_at": 1000,
+                "loaded_code_fingerprint": "a" * 64,
+                "loaded_code_fingerprint_error": None,
+            }
+        ),
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(
+        control,
+        "source_bundle_fingerprint",
+        lambda _root: {
+            "fingerprint": "b" * 64,
+            "error": None,
+            "files": [{"path": "worker.py", "sha256": "c" * 64}],
+        },
+        raising=False,
+    )
+    controller.clock = lambda: 1001
+
+    status = controller.status()
+
+    assert status["loaded_code_fingerprint"] == "a" * 64
+    assert status["current_code_fingerprint"] == "b" * 64
+    assert status["code_match"] is False
+    assert status["code_fingerprint_error"] is None
+
+
 @pytest.mark.skipif(os.name != "nt", reason="Windows supervisor startup contract")
 def test_start_launches_the_supervisor_instead_of_a_bare_worker(tmp_path):
     processes = _FakeProcesses()
@@ -294,6 +339,10 @@ def test_runtime_progress_is_exposed_then_cleared_by_waiting_heartbeat(tmp_path)
         progress_total=4,
         progress_percent=25.0,
         progress_detail="extracting Markdown",
+        parser_pid=4321,
+        parser_elapsed_seconds=12.5,
+        parser_timeout_seconds=3600,
+        parser_ownership="windows_job",
     )
     active = controller.status()
     assert active["current_path"] == "C:/incoming/report.pdf"
@@ -301,6 +350,10 @@ def test_runtime_progress_is_exposed_then_cleared_by_waiting_heartbeat(tmp_path)
     assert active["progress_total"] == 4
     assert active["progress_percent"] == 25.0
     assert active["progress_detail"] == "extracting Markdown"
+    assert active["parser_pid"] == 4321
+    assert active["parser_elapsed_seconds"] == 12.5
+    assert active["parser_timeout_seconds"] == 3600
+    assert active["parser_ownership"] == "windows_job"
     assert active["updated_at"] == active["heartbeat_at"]
 
     session.heartbeat("waiting")
@@ -310,6 +363,7 @@ def test_runtime_progress_is_exposed_then_cleared_by_waiting_heartbeat(tmp_path)
     assert waiting["progress_total"] == 0
     assert waiting["progress_percent"] is None
     assert waiting["progress_detail"] is None
+    assert waiting["parser_pid"] is None
     session.close()
 
 
@@ -494,6 +548,25 @@ roots:
     paused = __import__("json").loads(capsys.readouterr().out)
     assert paused["desired_state"] == "paused"
 
+    retry_after = __import__("time").time() + 3600
+    state_path = project / ".source_catalog" / "worker_state.json"
+    state_path.parent.mkdir(parents=True, exist_ok=True)
+    state_path.write_text(
+        json.dumps(
+            {
+                "schema_version": "1.0",
+                "last_error": "CatalogOperationLockedError: stale historical error",
+                "llm_retry_after": retry_after,
+                "last_llm_summary_report": {
+                    "failed": 1,
+                    "failure_scope": "global",
+                    "error": "LLMProviderError: HTTP 429 quota exhausted",
+                },
+            }
+        ),
+        encoding="utf-8",
+    )
+
     assert (
         cli.main(
             [
@@ -511,6 +584,10 @@ roots:
     assert status["runtime_state"] == "stopped"
     assert status["startup"]["installed"] is True
     assert status["pipeline"]["available"] is False
+    summary = status["pipeline"]["llm_summary"]
+    assert summary["global_deferred"] is True
+    assert summary["global_retry_after"] == retry_after
+    assert summary["global_error"] == "LLMProviderError: HTTP 429 quota exhausted"
 
 
 def test_read_pipeline_status_reports_scan_index_and_processing_queues(tmp_path):
@@ -561,14 +638,105 @@ def test_read_pipeline_status_reports_scan_index_and_processing_queues(tmp_path)
     assert after["llm_summary"]["eligible"] == 1
     assert after["llm_summary"]["pending"] == 1
     assert after["llm_summary"]["completed"] == 0
-    assert normalize_progress == [
-        {
-            "current_path": str(source / "new-document.txt"),
-            "current": 1,
-            "total": 1,
-            "detail": "extracting Markdown",
-        }
-    ]
+    assert normalize_progress[0] == {
+        "current_path": str(source / "new-document.txt"),
+        "current": 1,
+        "total": 1,
+        "detail": "extracting Markdown",
+    }
+    parser_progress = next(
+        item for item in normalize_progress if item["detail"] == "parser_alive"
+    )
+    assert parser_progress["current_path"] == str(source / "new-document.txt")
+    assert parser_progress["current"] == 1
+    assert parser_progress["total"] == 1
+    assert parser_progress["parser_pid"] > 0
+    assert parser_progress["parser_elapsed_seconds"] >= 0
+    assert parser_progress["parser_timeout_seconds"] > 0
+    assert parser_progress["parser_ownership"] in {
+        "windows_job",
+        "parent_monitor",
+        "posix_process_group",
+    }
+
+
+def test_pipeline_status_separates_retryable_permanent_and_legacy_failures(tmp_path):
+    from company_wiki.source_catalog import CatalogConfig, RootSpec, SourceCatalog
+    from company_wiki.source_catalog.store import read_pipeline_status
+
+    project = tmp_path / "project"
+    source = tmp_path / "source"
+    source.mkdir()
+    for index in range(3):
+        (source / f"doc-{index}.txt").write_text(
+            f"source document {index}", encoding="utf-8"
+        )
+    catalog = SourceCatalog(
+        CatalogConfig(
+            project_root=project,
+            catalog_dir=project / ".source_catalog",
+            roots=(RootSpec("source", source, "directory"),),
+        )
+    )
+    catalog.scan()
+    catalog.normalize()
+    documents = catalog.store.fetchall(
+        "SELECT document_id FROM documents ORDER BY document_id"
+    )
+    now = __import__("time").time()
+    rows = (
+        (
+            documents[0]["document_id"],
+            "document",
+            "LLMSummaryError: temporary source read error",
+            now + 120,
+            now + 10,
+        ),
+        (
+            documents[1]["document_id"],
+            "document",
+            "LLMSummaryError: LLM response contains a forbidden investment conclusion",
+            now + 86400 * 365,
+            now + 20,
+        ),
+        (
+            documents[2]["document_id"],
+            "permanent_document",
+            "LLMSummaryError: LLM response is not valid JSON",
+            now + 86400 * 365,
+            now + 30,
+        ),
+    )
+    with catalog.store.transaction() as connection:
+        connection.executemany(
+            """INSERT INTO llm_summary_failures(
+            document_id,generator_name,generator_version,failure_scope,error,
+            attempt_count,retry_after,first_failed_at,last_failed_at
+            ) VALUES(?,?,?,?,?,1,?,?,?)""",
+            [
+                (
+                    document_id,
+                    "source_catalog_llm_summary",
+                    "test",
+                    scope,
+                    error,
+                    retry_after,
+                    failed_at,
+                    failed_at,
+                )
+                for document_id, scope, error, retry_after, failed_at in rows
+            ],
+        )
+
+    status = read_pipeline_status(catalog.config.database_path)["llm_summary"]
+
+    assert status["failed"] == 3
+    assert status["retryable_failed"] == 1
+    assert status["permanent"] == 2
+    assert status["legacy_scope_mismatch"] == 1
+    assert status["next_document_retry_after"] == rows[0][3]
+    assert status["last_failed_document_id"] == rows[0][0]
+    assert status["last_permanent_document_id"] == rows[2][0]
 
 
 def test_read_pipeline_status_is_read_only_and_handles_a_missing_database(tmp_path):
@@ -666,6 +834,10 @@ def test_empty_pipeline_status_has_explanations_and_health():
     assert status["explanations"]["markdown_pending_reason"] == "database unavailable"
     assert "health" in status
     assert status["health"]["artifacts"]["artifact_index_empty"] is True
+    assert (
+        status["health"]["locks"]["operation_lock_identity_verification"]
+        == "absent"
+    )
 
 
 def test_process_inventory_categorizes_production_vs_test_workers(tmp_path):

@@ -12,9 +12,8 @@ auto_discover.py — 自动发现模块
 import argparse
 import re
 import json
-import sys
 from pathlib import Path
-from typing import Dict, List, Any, Optional, Set
+from typing import Dict, List, Any, Set
 from dataclasses import dataclass, field
 from collections import Counter
 
@@ -446,7 +445,7 @@ def discover_new_topics(
         if count >= 3:  # 至少出现3次
             suggestion = TopicSuggestion(
                 topic_name=topic,
-                description=f"从新闻中自动发现的主题",
+                description="从新闻中自动发现的主题",
                 related_companies=list(topic_companies.get(topic, set()))[:5],
                 news_count=count,
             )
@@ -554,12 +553,12 @@ def suggest_new_questions(
                                 entity_name=entity_name,
                                 entity_type=entity_type,
                                 question=question,
-                                reason=f"从新闻中自动发现",
+                                reason="从新闻中自动发现",
                                 confidence=0.5,
                             )
                             suggestions.append(suggestion)
 
-        except Exception as e:
+        except Exception:
             continue
 
     # 去重
@@ -1231,6 +1230,11 @@ def main():
     print("\nUse --show-suggestions to view details")
     print("Use --apply-company/--apply-topic/--apply-question to apply")
     print("Use --from-wikis to scan wiki timelines instead of news")
+
+
+from writer_policy import enforce_direct_cli as _enforce_legacy_writer_freeze
+
+_enforce_legacy_writer_freeze(__name__, __file__)
 
 
 if __name__ == "__main__":

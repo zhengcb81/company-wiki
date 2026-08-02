@@ -1,0 +1,14 @@
+# Mini wiki fixture 配置
+schedule:
+  news_collection: "daily"
+
+llm:
+  provider: "deepseek"
+  model: "deepseek-v4-flash"
+  base_url: "https://api.deepseek.com"
+  max_tokens: 8192
+  temperature: 0.3
+
+search:
+  engine: "tavily"
+  results_per_query: 8

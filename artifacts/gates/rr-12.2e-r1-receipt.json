@@ -1,0 +1,81 @@
+{
+  "schema_version": 2,
+  "work_unit": "RR-12.2e-R1-PACKET-BINDING",
+  "status": "mechanism_candidate_v2",
+  "implementer_role": "implementation_only_not_primary_or_secondary_reviewer",
+  "base_head": "a57160646ed0d02a7d8befe2e390b523c73432c6",
+  "objective": "bind the review packet to all current corpus review inputs and reject synchronized packet-receipt tampering",
+  "red_phase": {
+    "command": "python -m pytest -q tests/contract/test_gold_review_gate.py",
+    "result": "26 passed, 9 failed",
+    "collection_errors": 0,
+    "failures": {
+      "review_input_hash_binding": 3,
+      "identity_alias": 2,
+      "synchronized_packet_receipt_tamper": 1,
+      "receipt_schema_or_type": 2,
+      "invalid_calendar_timestamp": 1
+    }
+  },
+  "tests": {
+    "gold_review_target": "36 passed",
+    "compatibility_suite": "101 passed (36 gold review + 52 gold corpus + 13 writer freeze)",
+    "full_suite": "721 passed in 29.57s",
+    "failed": 0,
+    "collection_errors": 0,
+    "unexpected_skips": 0
+  },
+  "review_artifacts": {
+    "packet_path": "artifacts/gates/rr-12.2e-r1-review-packet.json",
+    "packet_canonical_sha256": "a56319dde2558247e3b69321ab5f8be5e1184593e81ed7350ca663fa89c2ddc0",
+    "packet_file_sha256": "c72cf69b8bf1dfdd60b04e45cd4580bb04582ff8866c6f15ac6e99cc9950f152",
+    "template_path": "artifacts/gates/rr-12.2e-r1-review-template.json",
+    "template_file_sha256": "b5e8f9925b4cf957ab0655a0c470c88c382b7f0bd2119703cd536cf52410ba81",
+    "readiness_path": "artifacts/gates/rr-12.2e-r1-readiness.json",
+    "readiness_file_sha256": "26628326bb974f9918c6b5b863078212b6385ea58ec691b9c5ac035447048304",
+    "review_input_bundle_sha256": "b12b47f1b66a24c3596e5814edc99c56c120ef1a804c4631e1a8591fa49ef86c",
+    "review_input_files": 6,
+    "manifest_sha256": "df8913a6e13c5f1f3573c4522f6a8d1fc541b40287d9b4c3322fec6b600b3899",
+    "thresholds_sha256": "83e43db740fc93d1182ceb00c3120003f0f45e1c8b000bf0bb874f35be973876"
+  },
+  "actual_pending_validation": {
+    "exit_code": 1,
+    "status": "blocked_independent_review_pending",
+    "approved": false,
+    "findings": 49,
+    "primary_slots": 40,
+    "second_slots": 8,
+    "source_kinds_covered": 6
+  },
+  "v1_historical_artifacts": {
+    "unchanged": true,
+    "status": "superseded_do_not_use_for_new_review_or_promotion"
+  },
+  "corpus_review_status": {
+    "draft": 40,
+    "reviewed": 0
+  },
+  "control_plane": {
+    "acceptance_lock": "pass",
+    "deletion_manifest": "pass",
+    "staged_secret_findings": 0,
+    "staged_files": 0,
+    "scoped_diff_check": "pass",
+    "git_index_unchanged": true
+  },
+  "production_data": {
+    "before": "b97f177c60da1a7f0165cba69dfc567df9edba7558001b4ba5aeddcd5361433c",
+    "after": "b97f177c60da1a7f0165cba69dfc567df9edba7558001b4ba5aeddcd5361433c",
+    "files": 16789,
+    "bytes": 25472376075,
+    "changed_paths": 0
+  },
+  "remaining_gates": [
+    "an independent primary reviewer must review all 40 revisions using the schema v2 packet",
+    "a different independent secondary reviewer must review the deterministic 8 or more revisions across all six source kinds",
+    "the completed schema v2 receipt must validate with exit code 0 before a separate promotion work unit may open",
+    "all manifest entries remain draft until that separate promotion succeeds",
+    "Phase 11 external remediation and other Phase 13 entry gates remain independent blockers"
+  ],
+  "derived_status": "schema v2 mechanism candidate only; independent corpus review has not occurred"
+}

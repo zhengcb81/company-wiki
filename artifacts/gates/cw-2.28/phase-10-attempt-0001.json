@@ -1,0 +1,87 @@
+{
+  "schema_version": "1.0",
+  "work_unit": "CW-2.28K",
+  "phase": 10,
+  "attempt_id": "phase-10-attempt-0001",
+  "started_at": "2026-07-26T21:00:00Z",
+  "completed_at": "2026-07-26T21:00:00Z",
+  "executor": "claude-code/glm-5.2",
+  "project_root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+  "git_heads": {
+    "company-wiki": "a571606"
+  },
+  "supersedes_receipt_sha256": null,
+  "product_file_hashes_before": {},
+  "product_file_hashes_after": {},
+  "command_results": [
+    {
+      "command_id": "evidence-collection",
+      "argv": [
+        "phase-10",
+        "evidence-packet"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "started_at": "2026-07-26T21:00:00Z",
+      "completed_at": "2026-07-26T21:00:00Z",
+      "exit_code": 0,
+      "summary": "All 11 receipts indexed; production backfill evidence; 5/5 canary resolver verified",
+      "stdout_sha256": null,
+      "stderr_sha256": null,
+      "failed_tests": [],
+      "skipped_tests": [],
+      "xfailed_tests": []
+    }
+  ],
+  "invariant_results": [
+    {
+      "name": "all_11_receipts_present",
+      "passed": true
+    },
+    {
+      "name": "receipt_index_integrity",
+      "passed": true,
+      "detail": "all SHA links valid"
+    },
+    {
+      "name": "phase_0_6_pass",
+      "passed": true
+    },
+    {
+      "name": "phase_7_pass",
+      "passed": true
+    },
+    {
+      "name": "phase_8_pass",
+      "passed": true,
+      "detail": "5/5 capture-ready"
+    },
+    {
+      "name": "phase_9_fail",
+      "passed": null,
+      "detail": "pre-existing failures documented"
+    },
+    {
+      "name": "production_evidence",
+      "passed": true,
+      "detail": "978 fingerprints, schema 1.2.0, worker enabled"
+    },
+    {
+      "name": "raw_immutability",
+      "passed": true,
+      "detail": "5 canary SHAs confirmed throughout"
+    }
+  ],
+  "authorization_used": [],
+  "concurrent_change_detected": false,
+  "network_used": false,
+  "downloader_invocations": 0,
+  "llm_invocations": 0,
+  "diff_allowlist_result": "PASS",
+  "secret_scan_result": "0 active secrets",
+  "errors": [],
+  "files_created": [],
+  "files_modified": [],
+  "status": "CANDIDATE_FOR_REVIEW",
+  "blocker": "Independent reviewer not available. Per S12.12: implementer can only mark CANDIDATE_FOR_REVIEW, never self-sign completed. Phase 9R FAIL means this review must also verify the pre-existing failure exemptions. All 11 receipts (Phase 0-10) are in artifacts/gates/cw-2.28/ with receipt-index.json. Production catalog: schema 1.2.0, 978 fingerprints. All raw canary SHAs verified. Focused gate: 120 tests 0/xfail/skip.",
+  "next_phase": null
+}

@@ -1,0 +1,100 @@
+﻿{
+    "schema_version":  "1.0",
+    "receipt_id":  "wr-1-7-revalidation-20260729-attempt-0002",
+    "generated_at":  "2026-07-29T21:02:09.5985657Z",
+    "status":  "PASS",
+    "verdict":  "healthy",
+    "scope":  "Company Wiki Source Catalog background worker WR-0 through WR-7 revalidation",
+    "production":  {
+                       "desired_state":  "enabled",
+                       "runtime_state":  "running",
+                       "worker_status":  "normalizing",
+                       "pid":  13692,
+                       "heartbeat_age_seconds":  100.0,
+                       "production_workers":  1,
+                       "pytest_temp_workers":  0,
+                       "foreign_workers":  0,
+                       "recent_process_event":  {
+                                                    "catalog_dir":  "C:\\Users\\郑曾波\\Projects\\company-wiki\\.source_catalog",
+                                                    "event":  "session_opened",
+                                                    "pid":  13692,
+                                                    "timestamp":  "2026-07-29T21:01:07.041060"
+                                                },
+                       "markdown":  {
+                                        "blocked":  67,
+                                        "completed":  1559,
+                                        "eligible":  23722,
+                                        "failed":  0,
+                                        "in_progress":  1,
+                                        "partial":  50,
+                                        "pending":  22102,
+                                        "unsupported":  11
+                                    },
+                       "last_scan":  {
+                                         "completed_at":  "2026-07-29T20:54:59Z",
+                                         "dry_run":  false,
+                                         "errors":  1,
+                                         "files_excluded":  378,
+                                         "files_hashed":  0,
+                                         "files_reused":  46780,
+                                         "files_seen":  46781,
+                                         "locations_active":  46780,
+                                         "locations_missing":  0,
+                                         "new_documents":  0,
+                                         "new_sources":  0,
+                                         "run_id":  "scan-f394578e07824d7c8ec7df74ff3480eb",
+                                         "started_at":  "2026-07-29T20:49:04Z",
+                                         "status":  "completed_with_errors"
+                                     },
+                       "locks":  {
+                                     "operation_lock":  "live",
+                                     "operation_lock_operation":  "normalize",
+                                     "operation_lock_pid":  13692
+                                 },
+                       "artifacts":  {
+                                         "artifact_index_empty":  false,
+                                         "artifact_rows":  4537,
+                                         "derived_detached_count":  0,
+                                         "reconciliation_needed":  false
+                                     }
+                   },
+    "gates":  {
+                  "focused_pytest":  "139 passed",
+                  "real_windows_lifecycle_stress":  "10/10 passed",
+                  "background_runxfail":  "7 passed",
+                  "ruff":  "passed",
+                  "compileall":  "passed",
+                  "diff_check":  "passed"
+              },
+    "pilots":  {
+                   "five_minute":  {
+                                       "path":  "artifacts/gates/source-catalog-bg/wr-6-pilot-5m-20260729-attempt-0004.json",
+                                       "pass":  true,
+                                       "pending_delta":  1,
+                                       "normalized_delta":  1,
+                                       "heartbeat_stale_count":  0,
+                                       "db_quick_check":  "ok"
+                                   },
+                   "thirty_minute":  {
+                                         "path":  "artifacts/gates/source-catalog-bg/wr-6-pilot-30m-20260729-attempt-0002.json",
+                                         "pass":  true,
+                                         "duration_minutes":  37.1,
+                                         "sample_count":  29,
+                                         "pending_delta":  39,
+                                         "normalized_delta":  36,
+                                         "artifact_delta":  39,
+                                         "same_path_max_seconds":  134.8,
+                                         "heartbeat_stale_count":  0,
+                                         "scan_interrupted_delta":  0,
+                                         "db_quick_check":  "ok",
+                                         "raw_sample_unchanged":  true,
+                                         "stockwiki_unchanged":  true
+                                     }
+               },
+    "evidence":  {
+                     "status_snapshot":  "artifacts\\gates\\source-catalog-bg\\wr-final-worker-status-20260729.json",
+                     "controlled_restart_pre":  "artifacts/gates/source-catalog-bg/wr-controlled-restart-pre-20260729T200036Z.json",
+                     "controlled_restart_stop":  "artifacts/gates/source-catalog-bg/wr-controlled-restart-stop-20260729T200036Z.json",
+                     "controlled_restart_start":  "artifacts/gates/source-catalog-bg/wr-controlled-restart-start-20260729T200105Z.json"
+                 }
+}

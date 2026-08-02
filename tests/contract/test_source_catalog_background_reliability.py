@@ -31,7 +31,8 @@ class _FakeCatalog:
         self.calls.append(("scan", None))
         return _FakeReport()
 
-    def normalize(self, *, limit, progress=None):
+    def normalize(self, *, limit, progress=None, **kwargs):
+        del progress, kwargs
         self.calls.append(("normalize", limit))
         return _FakeReport()
 
@@ -197,6 +198,9 @@ def test_stale_operation_lock_in_health(tmp_path):
     assert lock["operation_lock"] == "stale"
     assert lock["operation_lock_pid"] == 2_147_483_647
     assert lock["operation_lock_operation"] == "normalize"
+    assert lock["operation_lock_identity_verification"] == "not_live"
+    assert lock["operation_lock_process_creation_time"] is None
+    assert lock["operation_lock_observed_process_creation_time"] is None
 
 
 def test_artifacts_zero_reports_detached_status(tmp_path):
@@ -212,6 +216,9 @@ def test_control_panel_has_pipeline_inventory_section():
     ps1 = Path("scripts/source_catalog_control.ps1")
     assert ps1.is_file()
     c = ps1.read_text(encoding="utf-8", errors="replace")
+    w = Path("scripts/source_catalog_worker.ps1").read_text(
+        encoding="utf-8", errors="replace"
+    )
     for heading in (
         "Process health",
         "Scan health",
@@ -222,6 +229,8 @@ def test_control_panel_has_pipeline_inventory_section():
         "Pipeline inventory",
     ):
         assert f"Write-Host '{heading}'" in c
+    assert "operation_lock_identity_verification" in c
+    assert c.count('Write-Host "    Doc retry') == 1
     for scheduler_field in (
         "last_export_at",
         "last_export_duration_seconds",
@@ -241,6 +250,18 @@ def test_control_panel_has_pipeline_inventory_section():
     assert "$Launcher.status -eq 'restarting'" in c
     assert "$Launcher.stdout_log" in c
     assert "$Launcher.stderr_log" in c
+    for timeout_field in (
+        "worker_stage",
+        "current_path",
+        "current_path_elapsed_seconds",
+        "progress_detail",
+        "parser_pid",
+    ):
+        assert timeout_field in w
+    assert "launcher_source_hashes" in w
+    assert "supervisor_ps1" in w
+    assert "logon_ps1" in w
+    assert "logon_vbs" in w
 
 
 def test_worker_writes_exit_event(tmp_path):

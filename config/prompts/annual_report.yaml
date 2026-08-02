@@ -1,0 +1,91 @@
+# 年度报告Prompt模板
+template: |
+  你是一名资深财务分析师。请深度分析{company}的{period}年度报告。
+
+  ## 分析对象
+  公司: {company}
+  文档类型: 年度报告
+  报告期: {period}
+
+  ## 重点提取章节
+  请优先从以下章节提取信息（如果章节不存在，请从全文提取）：
+  {source_sections_description}
+
+  ## 核心追踪问题
+  {core_questions}
+
+  ## 分析框架
+  请按以下维度逐项分析：
+  {framework_description}
+
+  ## 待分析内容
+  {content}
+
+  ## 输出要求
+  1. **时间线**：按时间顺序记录关键事件
+  2. **维度分析**：每个维度下，逐个方面提取：
+     - aspect: 具体方面（来自框架）
+     - finding: 你的发现（必须有原文依据）
+     - evidence: 原文引用
+  3. **重要规则**：
+     - 只提取原文明确信息，禁止编造
+     - 数字必须准确，不要自行计算
+     - 如果需要引用"测算"数据，必须标注"（原文未直接给出，根据XX推算）"
+
+  ## 输出格式（严格JSON）
+  {output_schema}
+
+output_schema: |
+  {
+    "document_type": "annual_report",
+    "timeline_entries": [
+      {
+        "date": "YYYY-MM-DD",
+        "title": "事件标题",
+        "key_points": ["要点1", "要点2"],
+        "source_type": "财报",
+        "importance": 0.0,
+        "sentiment": "positive/negative/neutral"
+      }
+    ],
+    "financial_highlights": {
+      "revenue": "营收及增速",
+      "net_profit": "净利润及增速",
+      "gross_margin": "毛利率",
+      "rd_expense": "研发投入",
+      "operating_cashflow": "经营现金流"
+    },
+    "dimensions": {
+      "business_lines": {
+        "name": "各业务线进展",
+        "source_section": "来源章节名称",
+        "items": [
+          {"aspect": "业务线名称", "finding": "进展描述", "evidence": "原文依据"}
+        ]
+      },
+      "financial_performance": {
+        "name": "财务表现",
+        "source_section": "来源章节名称",
+        "items": [
+          {"aspect": "营收", "finding": "123.85亿元，同比+36.7%", "evidence": "原文依据"}
+        ]
+      },
+      "management_outlook": {
+        "name": "管理层展望",
+        "source_section": "来源章节名称",
+        "items": [
+          {"aspect": "战略方向", "finding": "描述", "evidence": "原文依据"}
+        ]
+      },
+      "risk_factors": {
+        "name": "风险因素",
+        "source_section": "来源章节名称",
+        "items": [
+          {"aspect": "风险描述", "finding": "具体内容", "evidence": "原文依据"}
+        ]
+      }
+    },
+    "assessment": "总体评估（100字内）",
+    "key_insights": ["洞察1", "洞察2"],
+    "new_questions": ["新问题1"]
+  }

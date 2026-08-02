@@ -12,8 +12,8 @@ contradiction_detector.py — 矛盾检测模块
 import argparse
 import re
 from pathlib import Path
-from typing import Dict, List, Any, Optional, Tuple
-from dataclasses import dataclass, field
+from typing import Dict, List, Any, Optional
+from dataclasses import dataclass
 from datetime import datetime, timedelta
 
 # 路径
@@ -60,6 +60,10 @@ class Contradiction:
 class ContradictionDetector:
     """矛盾检测器"""
 
+    # 任务 2 修复：LLM 调用预算，防止 field×entity 循环数百次 × 60s 超时卡死
+    # 上限 30 次 LLM 验证 ≈ 30×60s 最坏情况 ≈ 30 分钟，足以覆盖典型场景
+    MAX_LLM_CALLS_PER_RUN = 30
+
     def __init__(self, wiki_root: Path, use_llm: bool = True):
         """
         初始化检测器
@@ -72,6 +76,7 @@ class ContradictionDetector:
         self.graph = Graph(str(wiki_root / "graph.yaml"))
         self.use_llm = use_llm
         self._llm_client = None
+        self._llm_call_count = 0  # 整个 detect_all 期间的 LLM 调用计数
 
     def _get_llm(self):
         """懒加载 LLM 客户端"""
@@ -108,9 +113,16 @@ class ContradictionDetector:
 
         verified = []
         # 批量处理，每批最多 10 对
-        batch = contradictions[:20]
+        # 任务 2 修复：受 MAX_LLM_CALLS_PER_RUN 节流，按剩余预算减批
+        remaining_budget = self.MAX_LLM_CALLS_PER_RUN - self._llm_call_count
+        if remaining_budget <= 0:
+            # 预算耗尽，回退到不过滤
+            return contradictions
+        cap = min(20, remaining_budget)
+        batch = contradictions[:cap]
 
         for i, c in enumerate(batch):
+            self._llm_call_count += 1
             try:
                 # 构建验证 prompt
                 prompt = f"""你是一个事实核查专家。请判断以下两条信息是否构成真正的矛盾。
@@ -251,8 +263,17 @@ class ContradictionDetector:
                 if len(field_items) < 2:
                     continue
 
+                # 任务 2 修复：LLM 调用预算节流，超出就停止 numeric 继续扫
+                if (
+                    llm
+                    and llm.available
+                    and self._llm_call_count >= self.MAX_LLM_CALLS_PER_RUN
+                ):
+                    break
+
                 if llm and llm.available:
                     # LLM 检测
+                    self._llm_call_count += 1
                     result = self._llm_detect_contradictions(
                         entity_name, field, [e for _, e in field_items]
                     )
@@ -298,9 +319,7 @@ class ContradictionDetector:
 
                     # 绝对金额匹配（亿/万）
                     for unit in ("亿", "万"):
-                        nums = re.findall(
-                            rf"(\d+\.?\d*)\s*{unit}", item["body"]
-                        )
+                        nums = re.findall(rf"(\d+\.?\d*)\s*{unit}", item["body"])
                         for n in nums:
                             val = float(n)
                             if 1990 <= val <= 2100:
@@ -318,7 +337,10 @@ class ContradictionDetector:
                                 continue
                             diff_ratio = abs(v1 - v2) / max(v1, v2)
                             abs_diff = abs(v1 - v2)
-                            if diff_ratio > threshold_ratio and abs_diff > threshold_abs:
+                            if (
+                                diff_ratio > threshold_ratio
+                                and abs_diff > threshold_abs
+                            ):
                                 contradictions.append(
                                     Contradiction(
                                         entity1=entity_name,
@@ -493,7 +515,7 @@ class ContradictionDetector:
                             }
                         )
 
-            except Exception as e:
+            except Exception:
                 continue
 
         return statements
@@ -637,7 +659,7 @@ class ContradictionDetector:
                             statement2=stmt2["statement"],
                             contradiction_type="temporal",
                             confidence="medium",
-                            description=f"时间矛盾: 同一事件在不同时间出现",
+                            description="时间矛盾: 同一事件在不同时间出现",
                         )
                     )
 
@@ -678,7 +700,7 @@ class ContradictionDetector:
                         }
                     )
 
-            except Exception as e:
+            except Exception:
                 continue
 
         return statements
@@ -823,7 +845,7 @@ class ContradictionDetector:
                             }
                         )
 
-            except Exception as e:
+            except Exception:
                 continue
 
         return statements
@@ -864,7 +886,7 @@ class ContradictionDetector:
                         # 可能有遗漏，但这不是矛盾
                         pass
 
-                except Exception as e:
+                except Exception:
                     continue
 
         return contradictions
@@ -965,7 +987,7 @@ def main():
         with open(report_path, "w", encoding="utf-8") as f:
             f.write("# 矛盾检测报告\n\n")
             f.write(f"> 生成时间: {datetime.now().strftime('%Y-%m-%d %H:%M')}\n\n")
-            f.write(f"## 概述\n\n")
+            f.write("## 概述\n\n")
             f.write(f"发现 {len(contradictions)} 个潜在矛盾\n\n")
 
             for ctype, clist in by_type.items():

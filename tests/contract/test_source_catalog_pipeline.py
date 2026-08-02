@@ -123,6 +123,89 @@ def test_scan_deduplicates_content_but_preserves_every_location_and_dayu_bundle(
     assert (_snapshot(company), _snapshot(dropbox), _snapshot(portfolio)) == before
 
 
+def test_repeated_empty_source_is_a_known_quarantine_and_recovers(tmp_path):
+    from company_wiki.source_catalog.store import read_pipeline_status
+
+    module = _catalog_module()
+    project = tmp_path / "project"
+    company = project / "companies"
+    dropbox = tmp_path / "Dropbox" / "Stock"
+    portfolio = tmp_path / "dayu" / "portfolio"
+    company.mkdir(parents=True)
+    dropbox.mkdir(parents=True)
+    portfolio.mkdir(parents=True)
+    source = dropbox / "医疗器械选股20250622" / "data" / "Product_Revenue_Forecast_Model.xlsx"
+    source.parent.mkdir(parents=True)
+    source.write_bytes(b"")
+    catalog = module.SourceCatalog(
+        _config(
+            module,
+            project=project,
+            company=company,
+            dropbox=dropbox,
+            portfolio=portfolio,
+        )
+    )
+
+    first = catalog.scan()
+    second = catalog.scan()
+    pipeline = read_pipeline_status(catalog.config.database_path)
+
+    assert first.errors == 1
+    assert first.new_errors == 1
+    assert first.known_quarantined == 0
+    assert second.errors == 1
+    assert second.new_errors == 0
+    assert second.known_quarantined == 1
+    assert second.error_details == (
+        {
+            "root_id": "dropbox_stock",
+            "relative_path": "医疗器械选股20250622/data/Product_Revenue_Forecast_Model.xlsx",
+            "error": "SourceManifestError: source file is empty",
+            "unchanged": True,
+        },
+    )
+    assert pipeline["markdown"]["blocked"] == 1
+    assert pipeline["markdown"]["blocked_quarantined"] == 1
+    assert pipeline["markdown"]["blocked_incomplete"] == 0
+    assert pipeline["markdown"]["blocked_other"] == 0
+    assert pipeline["last_scan"]["new_errors"] == 0
+    assert pipeline["last_scan"]["known_quarantined"] == 1
+
+    with catalog.store.transaction() as connection:
+        latest = connection.execute(
+            "SELECT run_id,report_json FROM scan_runs ORDER BY rowid DESC LIMIT 1"
+        ).fetchone()
+        legacy_report = json.loads(latest["report_json"])
+        for field in ("new_errors", "known_quarantined", "error_details"):
+            legacy_report.pop(field)
+        connection.execute(
+            "UPDATE scan_runs SET report_json=? WHERE run_id=?",
+            (json.dumps(legacy_report), latest["run_id"]),
+        )
+    legacy_pipeline = read_pipeline_status(catalog.config.database_path)
+    assert legacy_pipeline["last_scan"]["new_errors"] is None
+    assert legacy_pipeline["last_scan"]["known_quarantined"] is None
+    assert legacy_pipeline["last_scan"]["error_details"] == [
+        {
+            "root_id": "dropbox_stock",
+            "relative_path": "医疗器械选股20250622/data/Product_Revenue_Forecast_Model.xlsx",
+            "error": "SourceManifestError: source file is empty",
+            "unchanged": None,
+        }
+    ]
+
+    source.write_bytes(b"valid workbook placeholder")
+    recovered = catalog.scan()
+    recovered_pipeline = read_pipeline_status(catalog.config.database_path)
+
+    assert recovered.errors == 0
+    assert recovered.new_errors == 0
+    assert recovered.known_quarantined == 0
+    assert recovered_pipeline["markdown"]["blocked"] == 0
+    assert recovered_pipeline["markdown"]["blocked_quarantined"] == 0
+
+
 def test_exact_duplicate_index_marks_canonical_and_extra_original_locations(tmp_path):
     module = _catalog_module()
     project = tmp_path / "project"
@@ -492,6 +575,7 @@ def test_page_aware_pdf_and_office_adapters_emit_markdown_or_truthful_stub(tmp_p
 
     assert result.completed == 4
     assert result.unsupported == 1
+    assert result.failed == 0
     by_title = {row["title"]: row for row in rows}
     pdf_content = Path(by_title["annual_report"]["normalized_path"]).read_text(encoding="utf-8")
     assert "## Page 1" in pdf_content

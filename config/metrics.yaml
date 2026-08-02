@@ -1,0 +1,94 @@
+# 指标定义配置
+# 定义系统监控指标、阈值和健康状态
+
+metrics:
+  # Pipeline指标
+  pipeline:
+    llm_calls:
+      description: "LLM调用次数"
+      source: "stage3_analyze.py"
+      threshold:
+        warning: 10
+        critical: 0
+      unit: "次"
+    
+    analysis_files:
+      description: "分析结果文件数"
+      source: "companies/*/extracts/**/*.analysis.json"
+      threshold:
+        warning: 50
+        critical: 10
+      unit: "个"
+    
+    gate_pass_rate:
+      description: "Gate通过率"
+      source: "test_results/latest.json"
+      threshold:
+        warning: 0.8
+        critical: 0.6
+      unit: "%"
+
+  # 数据质量指标
+  data_quality:
+    wiki_pages:
+      description: "Wiki页面数"
+      source: "companies/*/wiki/*.md"
+      threshold:
+        warning: 100
+        critical: 50
+      unit: "页"
+    
+    extract_files:
+      description: "提取文件数"
+      source: "companies/*/extracts/**/*.md"
+      threshold:
+        warning: 500
+        critical: 100
+      unit: "个"
+    
+    companies_covered:
+      description: "已覆盖公司数"
+      source: "companies/"
+      threshold:
+        warning: 20
+        critical: 10
+      unit: "家"
+
+  # 系统健康指标
+  system_health:
+    test_pass_rate:
+      description: "测试通过率"
+      source: "test_results/latest.json"
+      threshold:
+        warning: 0.9
+        critical: 0.7
+      unit: "%"
+    
+    last_test_time:
+      description: "最后测试时间"
+      source: "test_results/latest.json"
+      threshold:
+        warning: 86400  # 24小时
+        critical: 172800  # 48小时
+      unit: "秒"
+
+# 健康状态计算
+health_calculation:
+  formula: "加权平均"
+  weights:
+    pipeline: 0.4
+    data_quality: 0.3
+    system_health: 0.3
+  states:
+    healthy:
+      min_score: 0.8
+      label: "健康"
+      color: "green"
+    warning:
+      min_score: 0.6
+      label: "警告"
+      color: "yellow"
+    critical:
+      min_score: 0
+      label: "严重"
+      color: "red"

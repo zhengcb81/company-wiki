@@ -155,7 +155,7 @@ def check_orphan_pages(result):
         basename = os.path.basename(page).replace(".md", "")
         if basename not in referenced and page not in referenced:
             result.add(
-                "INFO", "orphan", f"Page may be orphaned (no inbound references)", page
+                "INFO", "orphan", "Page may be orphaned (no inbound references)", page
             )
 
 

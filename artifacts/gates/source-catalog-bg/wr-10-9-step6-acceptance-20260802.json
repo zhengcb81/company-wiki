@@ -1,0 +1,52 @@
+{
+  "schema_version": "1.0",
+  "work_unit": "WR-10.9 Step 6",
+  "title": "next-login 真实 Windows 登录检查点",
+  "gate": "real-login-next-login",
+  "verdict": "accepted",
+  "completed_at": "2026-08-02T17:26:19Z",
+  "evidence": {
+    "login_triggered_launcher": {
+      "session_id": "1ec5c35c0d07",
+      "launcher_pid": 15184,
+      "event_sequence": "starting (17:23:54.050Z) -> child_started (17:23:54.202Z)",
+      "child_pid": 14476,
+      "reason": "worker_process_started",
+      "startup_delay_seconds": 120
+    },
+    "login_process_start_times": {
+      "supervisor_pid": 15184,
+      "supervisor_start_local": "2026-08-02 18:23:53",
+      "main_window_title": "",
+      "worker_pid": 14476,
+      "worker_start_local": "2026-08-02 18:23:54",
+      "note": "sequential launch 1s apart; both hidden (empty MainWindowTitle) -> no blank control window on logon"
+    },
+    "pre_login_baseline": {
+      "receipt": "artifacts/gates/source-catalog-bg/wr-10-9-step6-pre-login-baseline-20260802.json",
+      "prior_launcher_session": "622b7189 -> d913baa231c4",
+      "prior_worker_pid": 12956
+    },
+    "code_match": {
+      "loaded": "724f0d5a8481",
+      "current": "724f0d5a8481",
+      "match": true,
+      "source": "worker-status via control (Snapshot 2026-08-02 18:24:59)"
+    },
+    "blank_panel_absence": {
+      "control_log": "no control center launched between 16:51:46 and 18:24:56 (login window); logon auto-start only raises hidden supervisor+worker",
+      "main_window_titles": "empty for both supervisor and worker"
+    },
+    "worker_health_after_login": {
+      "heartbeat_age_seconds": 12.6,
+      "markdown_pending": 20588,
+      "last_cycle": "2026-08-02 17:53:18",
+      "parse_timeouts_total": 0,
+      "known_quarantine": 1,
+      "new_errors": 0
+    },
+    "capture_receipt": "artifacts/gates/source-catalog-bg/wr-10-9-step6-login-20260802.json",
+    "capture_receipt_sha256": "a9a32374a636a54b45c866bc9100faa5120680ad4452aa2fee0f7b987f3c536e"
+  },
+  "conclusion": "下一次真实 Windows 登录后，登录自启动正确拉起 supervisor+worker（新 session 1ec5c35c0d07），Code MATCH，worker 健康推进，未出现空白控制面板。Step 6 达成。"
+}

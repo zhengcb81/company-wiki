@@ -1,0 +1,73 @@
+{
+  "schema_version": "1.0",
+  "work_unit": "WR-10.13",
+  "title": ">900s controlled slow canary 验收（合同层缩短时钟 + 隔离目录真实大 PDF 演练）",
+  "gate": "slow-canary-over-900s",
+  "verdict": "accepted",
+  "completed_at": "2026-08-02T17:18:50Z",
+  "evidence": {
+    "contract_level": {
+      "test_file": "tests/contract/test_source_catalog_parser_liveness.py",
+      "tests": [
+        "test_slow_canary_document_under_parser_timeout_completes_with_heartbeats",
+        "test_slow_canary_document_over_parser_timeout_becomes_terminal_not_loop"
+      ],
+      "result": "2 passed in 56.31s (final code 724f0d5a8481)",
+      "semantics": "shortened clock: 45s slow work / 60s parser timeout ~= old 900s watchdog / 3600s parser timeout ratio; over-timeout -> terminal, no loop, no temp leak"
+    },
+    "isolated_drill": {
+      "receipt": "artifacts/gates/slow-canary-drill/receipt.json",
+      "receipt_sha256": "54c9520334b576a3e4be639f1eac43e74bf672964e7c4380492d8d1359ed77b8",
+      "verdict": "accepted",
+      "reason": "scan found canary, normalize completed, fingerprint completed, each operation kept one stable parser PID, no temp leaks",
+      "source": "real 40.9MB PDF (中信建投 2021 年报) in throwaway catalog, production DB untouched",
+      "config": {
+        "parser_timeout_seconds": 600.0,
+        "heartbeat_interval_seconds": 5.0,
+        "note": "shortened clock; ratio equivalent to old 900s watchdog / 3600s parser timeout"
+      },
+      "normalize": {
+        "completed": 1,
+        "failed": 0,
+        "unsupported": 0,
+        "partial": 0,
+        "wall_seconds": 29.894
+      },
+      "fingerprint": {
+        "completed": 1,
+        "failed": 0,
+        "unsupported": 0,
+        "partial": 0,
+        "wall_seconds": 56.335
+      },
+      "heartbeat": {
+        "count": 16,
+        "normalize": {
+          "count": 7,
+          "parser_alive_count": 6,
+          "parser_pids_seen": [
+            "20324"
+          ],
+          "parser_pid_stable": true,
+          "max_elapsed_on_path": 25.035
+        },
+        "fingerprint": {
+          "count": 6,
+          "parser_alive_count": 5,
+          "parser_pids_seen": [
+            "3576"
+          ],
+          "parser_pid_stable": true,
+          "max_elapsed_on_path": 20.016
+        }
+      },
+      "temp_leaks_after": []
+    },
+    "production_context": {
+      "note": "task_plan forbids real 900s sleep; production queue had no natural >900s doc during pilot (same-path max 360.6s). Contract + isolated drill establish the mechanism; production pilot separately confirmed long-doc heartbeat continuity (parser_alive) with no watchdog kill up to 360.6s."
+    }
+  },
+  "out_of_scope": [
+    "next-login (WR-10.9 Step 6) remains pending awaiting real Windows login"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "backup_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.source_catalog\\backups\\catalog-before-phase4r-1785095525.sqlite3",
+  "backup_sha256": "2e81acfc67289e796ced4901b738b1807cc9c1192a88ca20e81579bc5ab576f7",
+  "backup_size": 7883988992,
+  "quick_check": "ok",
+  "fk_violations": 0,
+  "documents": 23789,
+  "fp_nonnull": 881,
+  "schema_version": "1.1.0",
+  "fp_status_before": {
+    "eligible": 22841,
+    "pending": 22841,
+    "due_retry": 0,
+    "completed": 881,
+    "terminal": 0,
+    "unsupported_terminal": 0,
+    "retryable_failed": 0,
+    "failed_terminal": 0
+  },
+  "state_counts_before": {
+    "completed": 881,
+    "pending": 22841
+  }
+}

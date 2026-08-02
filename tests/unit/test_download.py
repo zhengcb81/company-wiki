@@ -3,8 +3,6 @@
 测试文件下载和分类
 """
 import pytest
-import tempfile
-import shutil
 from pathlib import Path
 
 import sys

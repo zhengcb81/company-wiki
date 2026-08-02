@@ -1,0 +1,21 @@
+{
+  "company_raw": {
+    "file_count": 33098,
+    "total_bytes": 24991305762
+  },
+  "dayu_portfolio": {
+    "file_count": 3657,
+    "total_bytes": 1629627490
+  },
+  "dropbox_stock": {
+    "file_count": 10469,
+    "total_bytes": 15576043422
+  },
+  "_canaries": {
+    "BYD_FY2024": "e9c2d7fdd088e151ccb6c8ad3d95587b2b014b10f2c9731508d23ce07fde4de3",
+    "中微_FY2024": "3273711fbb79fa6ee5e9a3b2f0eea7d5a1dfa0d305721c61e5af251f9addf399",
+    "宁德_FY2024": "b4f1713d7b821eb076c102711d177fe942ccc2bc8dd171ae5d7a95799a65b0ad",
+    "美团_FY2024": "36eae4d0397187bef187286e394b7d85421eac75f7380d1a95de9f1bfa25e70a",
+    "NVIDIA_FY2025": "dae19486be264fd26eb00a7f920dc641041a261c81bc8c03b678eea947de4856"
+  }
+}

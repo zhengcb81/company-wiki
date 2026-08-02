@@ -15,8 +15,6 @@ quality_dashboard.py — 知识库质量仪表盘
 
 import argparse
 import re
-import sys
-from collections import defaultdict
 from datetime import datetime, timedelta
 from pathlib import Path
 
@@ -105,7 +103,7 @@ def generate_report(graph, output_path=None, sector_filter=None):
     """生成质量报告"""
     now = datetime.now()
     report = []
-    report.append(f"# 知识库质量报告")
+    report.append("# 知识库质量报告")
     report.append(f"\n> 生成时间: {now.strftime('%Y-%m-%d %H:%M')}\n")
 
     # ── 收集所有 wiki 页面 ──
@@ -160,8 +158,8 @@ def generate_report(graph, output_path=None, sector_filter=None):
     ]
 
     report.append("## 全局统计\n")
-    report.append(f"| 指标 | 数值 |")
-    report.append(f"|------|------|")
+    report.append("| 指标 | 数值 |")
+    report.append("|------|------|")
     report.append(f"| 总 wiki 页面 | {total_pages} |")
     report.append(f"| 总时间线条目 | {total_entries} |")
     report.append(f"| 缺少综合评估 | {len(pages_no_assessment)} ({len(pages_no_assessment)*100//max(total_pages,1)}%) |")
@@ -256,6 +254,11 @@ def main():
 
     graph = Graph()
     generate_report(graph, args.output, args.sector)
+
+
+from writer_policy import enforce_direct_cli as _enforce_legacy_writer_freeze
+
+_enforce_legacy_writer_freeze(__name__, __file__)
 
 
 if __name__ == "__main__":

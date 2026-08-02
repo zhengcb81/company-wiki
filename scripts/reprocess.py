@@ -13,11 +13,9 @@ reprocess.py — 批量重处理工具
 """
 
 import argparse
-import json
 import re
 import sys
 from datetime import datetime
-from pathlib import Path
 
 from common import WIKI_ROOT
 
@@ -228,8 +226,13 @@ def main():
     print(f"\n{'=' * 60}")
     print(f"  Total: {total_entries} entries, {total_kept} kept, {total_removed} removed")
     if dry_run:
-        print(f"  Use --execute to actually remove entries")
+        print("  Use --execute to actually remove entries")
     print(f"{'=' * 60}")
+
+
+from writer_policy import enforce_direct_cli as _enforce_legacy_writer_freeze
+
+_enforce_legacy_writer_freeze(__name__, __file__)
 
 
 if __name__ == "__main__":

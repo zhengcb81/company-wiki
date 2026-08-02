@@ -31,17 +31,33 @@ def _sample(**overrides):
         "foreign_workers": 0,
         "pytest_temp_workers": 0,
         "production_supervisors": 0,
+        "production_supervisor_pids": [],
         "foreign_supervisors": 0,
         "pytest_temp_supervisors": 0,
         "markdown_pending": 10,
         "markdown_completed": 5,
         "artifact_rows": 5,
         "current_path_elapsed_seconds": 30,
+        "parser_pid": None,
+        "parser_elapsed_seconds": None,
+        "parser_timeout_seconds": None,
+        "parser_ownership": None,
+        "parse_timeout_total": 0,
+        "last_parse_timeout_path": None,
+        "loaded_code_fingerprint": "a" * 64,
+        "current_code_fingerprint": "a" * 64,
+        "code_match": True,
         "scan_interrupted_count": 2,
+        "last_scan_run_id": "scan-baseline",
+        "last_scan_new_errors": 0,
+        "last_scan_known_quarantined": 1,
         "latest_running_scan": None,
         "operation_lock": "live",
         "last_export_progress_total": None,
         "last_export_duration_seconds": None,
+        "last_cycle_at": None,
+        "last_cycle_status": None,
+        "last_cycle_error": None,
     }
     value.update(overrides)
     return value
@@ -57,6 +73,7 @@ def _summarize(
     required_export_progress_total=None,
     require_visible_scan_enumeration=False,
     require_supervisor=False,
+    require_code_match=False,
 ):
     module = _pilot_module()
     before = {"samples": ["companies/a.pdf"], "hashes": ["a" * 64]}
@@ -89,6 +106,7 @@ def _summarize(
         required_export_progress_total=required_export_progress_total,
         require_visible_scan_enumeration=require_visible_scan_enumeration,
         require_supervisor=require_supervisor,
+        require_code_match=require_code_match,
     )
 
 
@@ -178,16 +196,80 @@ def test_pilot_fails_when_database_or_stockwiki_boundary_check_fails():
     assert stockwiki["pilot_pass"] is False
 
 
+def test_pilot_fails_only_for_new_scan_errors_created_inside_the_window():
+    known_before_window = _summarize([_sample(), _sample()])
+    new_error = _summarize(
+        [
+            _sample(),
+            _sample(
+                last_scan_run_id="scan-new",
+                last_scan_new_errors=1,
+                last_scan_known_quarantined=1,
+            ),
+        ]
+    )
+
+    assert known_before_window["pilot_pass"] is True
+    assert known_before_window["new_scan_error_count"] == 0
+    assert new_error["pilot_pass"] is False
+    assert new_error["first_failure"] == "scan_new_errors_nonzero"
+    assert new_error["new_scan_error_count"] == 1
+
+
 def test_pilot_can_require_progress_and_enforces_same_path_limit():
     no_progress = _summarize([_sample(), _sample()], require_progress=True)
     timed_out = _summarize(
         [_sample(), _sample(current_path_elapsed_seconds=900)]
+    )
+    isolated_slow = _summarize(
+        [
+            _sample(),
+            _sample(
+                current_path="companies/slow.pdf",
+                current_path_elapsed_seconds=1200,
+                parser_pid=4321,
+                parser_elapsed_seconds=1200,
+                parser_timeout_seconds=3600,
+                parser_ownership="windows_job",
+            ),
+        ]
+    )
+    parser_restarted = _summarize(
+        [
+            _sample(current_path="companies/retry.pdf", parser_pid=100),
+            _sample(current_path="companies/retry.pdf", parser_pid=200),
+        ]
+    )
+    timeout_increased = _summarize(
+        [_sample(parse_timeout_total=0), _sample(parse_timeout_total=1)]
     )
 
     assert no_progress["first_failure"] == "throughput_below_required_threshold"
     assert no_progress["pilot_pass"] is False
     assert timed_out["first_failure"] == "same_path_timeout"
     assert timed_out["pilot_pass"] is False
+    assert isolated_slow["pilot_pass"] is True
+    assert parser_restarted["first_failure"] == "same_path_parser_restarted"
+    assert timeout_increased["first_failure"] == "normalization_timeout_delta_nonzero"
+
+
+def test_pilot_can_require_the_worker_to_have_loaded_current_code():
+    matched = _summarize([_sample(), _sample()], require_code_match=True)
+    mismatched = _summarize(
+        [
+            _sample(),
+            _sample(
+                current_code_fingerprint="b" * 64,
+                code_match=False,
+            ),
+        ],
+        require_code_match=True,
+    )
+
+    assert matched["pilot_pass"] is True
+    assert matched["loaded_code_fingerprints"] == ["a" * 64]
+    assert matched["current_code_fingerprints"] == ["a" * 64]
+    assert mismatched["first_failure"] == "worker_code_mismatch_or_unknown"
 
 
 def test_dry_run_arguments_are_order_independent(monkeypatch, capsys):
@@ -328,23 +410,28 @@ def test_pilot_accepts_persisted_export_contract_when_fast_export_is_missed():
 def test_pilot_can_require_one_stable_production_supervisor():
     valid = _summarize(
         [
-            _sample(production_supervisors=1),
-            _sample(production_supervisors=1, markdown_completed=6),
+            _sample(production_supervisors=1, production_supervisor_pids=[100]),
+            _sample(
+                production_supervisors=1,
+                production_supervisor_pids=[100],
+                markdown_completed=6,
+            ),
         ],
         require_supervisor=True,
     )
     missing = _summarize(
         [
-            _sample(production_supervisors=1),
+            _sample(production_supervisors=1, production_supervisor_pids=[100]),
             _sample(production_supervisors=0, markdown_completed=6),
         ],
         require_supervisor=True,
     )
     foreign = _summarize(
         [
-            _sample(production_supervisors=1),
+            _sample(production_supervisors=1, production_supervisor_pids=[100]),
             _sample(
                 production_supervisors=1,
+                production_supervisor_pids=[100],
                 foreign_supervisors=1,
                 markdown_completed=6,
             ),
@@ -358,3 +445,48 @@ def test_pilot_can_require_one_stable_production_supervisor():
     assert missing["first_failure"] == "production_supervisor_count_not_one"
     assert missing["recommended_next_phase"] == "WR-10"
     assert foreign["first_failure"] == "foreign_supervisor_present"
+
+
+def test_pilot_fails_if_supervisor_pid_changes_while_count_remains_one():
+    receipt = _summarize(
+        [
+            _sample(production_supervisors=1, production_supervisor_pids=[100]),
+            _sample(
+                production_supervisors=1,
+                production_supervisor_pids=[200],
+                markdown_completed=6,
+            ),
+        ],
+        require_supervisor=True,
+    )
+
+    assert receipt["first_failure"] == "production_supervisor_pid_changed"
+    assert receipt["recommended_next_phase"] == "WR-10"
+
+
+def test_pilot_reports_repeated_cycle_failure_before_generic_zero_throughput():
+    error = "CatalogOperationLockedError: catalog operation already running: pid=1784"
+    receipt = _summarize(
+        [
+            _sample(
+                last_cycle_at=1_000.0,
+                last_cycle_status="failed",
+                last_cycle_error=error,
+            ),
+            _sample(
+                last_cycle_at=1_030.0,
+                last_cycle_status="failed",
+                last_cycle_error=error,
+            ),
+            _sample(
+                last_cycle_at=1_060.0,
+                last_cycle_status="failed",
+                last_cycle_error=error,
+            ),
+        ],
+        require_progress=True,
+    )
+
+    assert receipt["first_failure"] == "repeated_cycle_failure"
+    assert receipt["repeated_cycle_failure_count"] == 3
+    assert receipt["repeated_cycle_error"] == error

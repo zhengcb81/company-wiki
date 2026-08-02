@@ -10,10 +10,7 @@ auto_suggest.py — 用 LLM 发现未跟踪公司
 
 import argparse
 import json
-import os
 import random
-import sys
-from pathlib import Path
 
 from common import WIKI_ROOT, CONFIG_PATH
 
@@ -141,7 +138,7 @@ def main():
 
     if args.enrich:
         from enrich import enrich_company
-        print(f"\n  自动 enrich...")
+        print("\n  自动 enrich...")
         for s in suggestions[:3]:
             ticker = s.get("estimated_ticker", "")
             if ticker:
@@ -150,7 +147,7 @@ def main():
                 print(f"\n  跳过 {s['name']} — 无法推断股票代码")
                 print(f"  手动添加: python3 scripts/enrich.py --company {s['name']} --ticker <CODE>")
     else:
-        print(f"\n  添加公司:")
+        print("\n  添加公司:")
         for s in suggestions[:3]:
             ticker = s.get("estimated_ticker", "<CODE>")
             print(f"    python3 scripts/enrich.py --company {s['name']} --ticker {ticker}")

@@ -1,0 +1,78 @@
+{
+  "work_unit": "WR-10.13 NFC fix production reset",
+  "created_at": "2026-08-02T18:56:32Z",
+  "documents": {
+    "urn:company-wiki:document:sha256:ba8ced1df6150abeafb3daa4f2423e3b2379b9a8f5dee2816dac7cd2b4e4de21": {
+      "artifacts": [
+        {
+          "artifact_id": "urn:company-wiki:artifact:sha256:bb3e2eed993647febaaf090049aaf3e6667c3247ee9305bcf201ae8a5a90e596",
+          "document_id": "urn:company-wiki:document:sha256:ba8ced1df6150abeafb3daa4f2423e3b2379b9a8f5dee2816dac7cd2b4e4de21",
+          "source_id": "urn:company-wiki:source:sha256:ba8ced1df6150abeafb3daa4f2423e3b2379b9a8f5dee2816dac7cd2b4e4de21",
+          "artifact_role": "normalized",
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.source_catalog\\derived\\ba\\ba8ced1df6150abeafb3daa4f2423e3b2379b9a8f5dee2816dac7cd2b4e4de21\\normalized.md",
+          "content_sha256": "a67600c0a34a9856e497dcbd6befdd39258f11fbdd2838e1202f0bec372324c5",
+          "byte_size": 838,
+          "mime_type": "text/markdown",
+          "generator_name": "source_catalog_normalizer",
+          "generator_version": "1.0.0",
+          "status": "failed",
+          "error": "ParserProcessError: PageAwarePDFAdapterError: table cell must use Unicode NFC",
+          "metadata_json": "{\"attempt_count\":3,\"error_code\":\"ParserProcessError\",\"next_retry_epoch\":null,\"parser_name\":\"isolated_parser\",\"parser_version\":\"1.0.0\",\"quality_flags\":[\"parser_failed\"],\"span_count\":0,\"terminal\":true,\"terminal_reason\":\"retry_exhausted:ParserProcessError\"}",
+          "created_at": "2026-08-02 14:43:53"
+        }
+      ],
+      "fingerprint": [
+        {
+          "document_id": "urn:company-wiki:document:sha256:ba8ced1df6150abeafb3daa4f2423e3b2379b9a8f5dee2816dac7cd2b4e4de21",
+          "source_id": "urn:company-wiki:source:sha256:ba8ced1df6150abeafb3daa4f2423e3b2379b9a8f5dee2816dac7cd2b4e4de21",
+          "source_sha256": "ba8ced1df6150abeafb3daa4f2423e3b2379b9a8f5dee2816dac7cd2b4e4de21",
+          "status": "failed_terminal",
+          "attempt_count": 3,
+          "terminal_reason": "retry_exhausted:ParserProcessError",
+          "last_error_code": "ParserProcessError",
+          "last_error_message_redacted": "PageAwarePDFAdapterError: table cell must use Unicode NFC",
+          "normalizer_version": "1.0.0",
+          "last_attempt_at": "2026-08-02T15:00:10Z",
+          "next_retry_at": null,
+          "updated_at": "2026-08-02T15:00:10Z"
+        }
+      ]
+    },
+    "urn:company-wiki:document:sha256:b25f6a649617a3721d0b78c9536568c4ad14ae5975bff9090eb8a9ab4e413e24": {
+      "artifacts": [
+        {
+          "artifact_id": "urn:company-wiki:artifact:sha256:7060b8418983e732c44cf19191cd405d21813bd5ad77e370719b7cd1408abc62",
+          "document_id": "urn:company-wiki:document:sha256:b25f6a649617a3721d0b78c9536568c4ad14ae5975bff9090eb8a9ab4e413e24",
+          "source_id": "urn:company-wiki:source:sha256:b25f6a649617a3721d0b78c9536568c4ad14ae5975bff9090eb8a9ab4e413e24",
+          "artifact_role": "normalized",
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.source_catalog\\derived\\b2\\b25f6a649617a3721d0b78c9536568c4ad14ae5975bff9090eb8a9ab4e413e24\\normalized.md",
+          "content_sha256": "dc4b207d6daacb5e9d721be3ba1bbd9fad23f02e6eb43e2f0ea93edbfa8aa87c",
+          "byte_size": 898,
+          "mime_type": "text/markdown",
+          "generator_name": "source_catalog_normalizer",
+          "generator_version": "1.0.0",
+          "status": "failed",
+          "error": "ParserProcessError: PageAwarePDFAdapterError: table cell must use Unicode NFC",
+          "metadata_json": "{\"attempt_count\":3,\"error_code\":\"ParserProcessError\",\"next_retry_epoch\":null,\"parser_name\":\"isolated_parser\",\"parser_version\":\"1.0.0\",\"quality_flags\":[\"parser_failed\"],\"span_count\":0,\"terminal\":true,\"terminal_reason\":\"retry_exhausted:ParserProcessError\"}",
+          "created_at": "2026-08-02 14:31:46"
+        }
+      ],
+      "fingerprint": [
+        {
+          "document_id": "urn:company-wiki:document:sha256:b25f6a649617a3721d0b78c9536568c4ad14ae5975bff9090eb8a9ab4e413e24",
+          "source_id": "urn:company-wiki:source:sha256:b25f6a649617a3721d0b78c9536568c4ad14ae5975bff9090eb8a9ab4e413e24",
+          "source_sha256": "b25f6a649617a3721d0b78c9536568c4ad14ae5975bff9090eb8a9ab4e413e24",
+          "status": "failed_terminal",
+          "attempt_count": 3,
+          "terminal_reason": "retry_exhausted:ParserProcessError",
+          "last_error_code": "ParserProcessError",
+          "last_error_message_redacted": "PageAwarePDFAdapterError: table cell must use Unicode NFC",
+          "normalizer_version": "1.0.0",
+          "last_attempt_at": "2026-08-02T14:56:40Z",
+          "next_retry_at": null,
+          "updated_at": "2026-08-02T14:56:40Z"
+        }
+      ]
+    }
+  }
+}

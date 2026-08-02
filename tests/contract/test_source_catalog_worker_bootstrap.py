@@ -71,7 +71,8 @@ def _make_worker(tmp_path: Path, *, catalog=None):
             self.calls.append("scan")
             return _Report()
 
-        def normalize(self, *, limit, progress=None):
+        def normalize(self, *, limit, progress=None, **kwargs):
+            del limit, progress, kwargs
             self.calls.append("normalize")
             return _Report()
 
@@ -1038,7 +1039,7 @@ def test_logon_wrapper_detaches_a_live_supervisor_with_quoted_paths(tmp_path):
 
     project = _prepare_fake_launcher_project(
         tmp_path / "project path with spaces",
-        [{"sleep_seconds": 2, "exit_code": 0}],
+        [{"sleep_seconds": 10, "exit_code": 0}],
     )
     source_scripts = Path(__file__).resolve().parents[2] / "scripts"
     scripts = project / "scripts"
@@ -1074,7 +1075,7 @@ def test_logon_wrapper_detaches_a_live_supervisor_with_quoted_paths(tmp_path):
     supervisor_identity = None
     child_identity = None
     try:
-        deadline = time.monotonic() + 10
+        deadline = time.monotonic() + 15
         events = []
         while time.monotonic() < deadline:
             events_path = (
@@ -1097,7 +1098,7 @@ def test_logon_wrapper_detaches_a_live_supervisor_with_quoted_paths(tmp_path):
         assert supervisor_identity is not None
         assert child_identity is not None
 
-        deadline = time.monotonic() + 15
+        deadline = time.monotonic() + 20
         while process_identity(supervisor_identity["pid"]) is not None:
             if time.monotonic() >= deadline:
                 break

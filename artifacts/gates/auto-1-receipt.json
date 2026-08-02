@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "work_unit": "AUTO-1-CONTRACTS",
+  "generated_at": "2026-07-12T07:12:31Z",
+  "head": "a57160646ed0d02a7d8befe2e390b523c73432c6",
+  "workspace_digest": "65e674a72fb6796b030a7cc5fcda61be76e7769dd8838e585f4870946206b0c1",
+  "baseline_digest": "e75875fc59743e2f7c4e9bd512ac941e78f25cc0e3413d24540a90c960127c06",
+  "production_data": {
+    "digest": "b97f177c60da1a7f0165cba69dfc567df9edba7558001b4ba5aeddcd5361433c",
+    "files": 16789,
+    "bytes": 25472376075,
+    "hash_policy": "wiki/state/root control files: full size<=1048576, otherwise 65536-byte head/tail samples; raw binaries/content: path+size+mtime_ns"
+  },
+  "status": "candidate",
+  "result": "pass",
+  "violations": [],
+  "commands": [
+    {
+      "name": "auto-1-contracts",
+      "argv": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/unit/test_automation_models.py",
+        "tests/contract/test_automation_cli.py"
+      ],
+      "exit_code": 0,
+      "duration_s": 3.305,
+      "stdout_tail": "============================= test session starts =============================\nplatform win32 -- Python 3.13.9, pytest-9.0.1, pluggy-1.5.0\nbenchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)\nrootdir: C:\\Users\\֣����\\Projects\\company-wiki\nconfigfile: pytest.ini\nplugins: anyio-4.13.0, Faker-40.19.1, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, xdist-3.8.0\nasyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\ncollected 36 items\n\ntests\\unit\\test_automation_models.py .............................       [ 80%]\ntests\\contract\\test_automation_cli.py .......                            [100%]\n\n============================= 36 passed in 1.39s ==============================\n",
+      "stderr_tail": ""
+    },
+    {
+      "name": "automation-status-read-only",
+      "argv": [
+        "python",
+        "-m",
+        "company_wiki.automation.cli",
+        "status",
+        "--json"
+      ],
+      "exit_code": 0,
+      "duration_s": 0.115,
+      "stdout_tail": "{\"database\":null,\"mode\":\"off\",\"next_work_unit\":\"AUTO-2\",\"schema_version\":1,\"status\":\"not_initialized\",\"writes_performed\":0}\n",
+      "stderr_tail": ""
+    },
+    {
+      "name": "automation-doctor-read-only",
+      "argv": [
+        "python",
+        "-m",
+        "company_wiki.automation.cli",
+        "doctor",
+        "--json"
+      ],
+      "exit_code": 0,
+      "duration_s": 0.104,
+      "stdout_tail": "{\"checks\":{\"automation_store\":\"not_initialized\",\"llm_required\":false,\"models_importable\":true,\"network_required\":false},\"overall\":\"ready_for_auto_2\",\"schema_version\":1,\"writes_performed\":0}\n",
+      "stderr_tail": ""
+    },
+    {
+      "name": "full-hermetic-pytest",
+      "argv": [
+        "python",
+        "-m",
+        "pytest",
+        "-q"
+      ],
+      "exit_code": 0,
+      "duration_s": 27.884,
+      "stdout_tail": "ests\\contract\\test_packaging_contract.py ....                           [ 22%]\ntests\\e2e\\test_config_loading.py ............                            [ 24%]\ntests\\integration\\test_full_pipeline.py ..                               [ 24%]\ntests\\integration\\test_stage1_extract.py ........                        [ 25%]\ntests\\test_relevance.py ................                                 [ 27%]\ntests\\unit\\test_architecture_gate.py ....                                [ 28%]\ntests\\unit\\test_automation_models.py .............................       [ 32%]\ntests\\unit\\test_batch_assessment.py ................                     [ 34%]\ntests\\unit\\test_clean_env_gate.py ....                                   [ 34%]\ntests\\unit\\test_cleanup_deprecated.py .....                              [ 35%]\ntests\\unit\\test_common.py ...............                                [ 37%]\ntests\\unit\\test_config.py ........                                       [ 38%]\ntests\\unit\\test_contradiction_detector.py .........                      [ 39%]\ntests\\unit\\test_deletion_manifest.py ......                              [ 40%]\ntests\\unit\\test_deployment.py ......................                     [ 43%]\ntests\\unit\\test_domain.py .........                                      [ 44%]\ntests\\unit\\test_download.py .........                                    [ 45%]\ntests\\unit\\test_gate_runner.py .......                                   [ 46%]\ntests\\unit\\test_gate_state.py ....                                       [ 46%]\ntests\\unit\\test_gate_system.py ............................              [ 50%]\ntests\\unit\\test_graph_models.py ............                             [ 52%]\ntests\\unit\\test_hermetic_runtime.py ...                                  [ 52%]\ntests\\unit\\test_ingest.py ...............                                [ 54%]\ntests\\unit\\test_llm_client.py ..................                         [ 56%]\ntests\\unit\\test_llm_defaults.py ........                                 [ 57%]\ntests\\unit\\test_log_writer.py ........                                   [ 59%]\ntests\\unit\\test_migrate_raw.py ...........                               [ 60%]\ntests\\unit\\test_migration.py ..................                          [ 62%]\ntests\\unit\\test_monitor.py .................                             [ 65%]\ntests\\unit\\test_new_modules.py ..................                        [ 67%]\ntests\\unit\\test_pdf_classify.py ....                                     [ 67%]\ntests\\unit\\test_pipeline.py ...................                          [ 70%]\ntests\\unit\\test_prompts.py ...................                           [ 72%]\ntests\\unit\\test_proposal.py .............................                [ 76%]\ntests\\unit\\test_quality.py ................                              [ 78%]\ntests\\unit\\test_query.py ..............                                  [ 80%]\ntests\\unit\\test_question_model.py ........................               [ 83%]\ntests\\unit\\test_recovery_baseline.py ....                                [ 84%]\ntests\\unit\\test_reviewer_gate.py ....                                    [ 84%]\ntests\\unit\\test_scheduler.py .........................                   [ 87%]\ntests\\unit\\test_secret_audit.py .......                                  [ 88%]\ntests\\unit\\test_secret_preflight.py ...                                  [ 89%]\ntests\\unit\\test_semantic_gate.py ....                                    [ 89%]\ntests\\unit\\test_source_discoverer.py ..........                          [ 91%]\ntests\\unit\\test_source_policy.py .............                           [ 92%]\ntests\\unit\\test_state_store.py ...............                           [ 94%]\ntests\\unit\\test_wiki_repository.py ..................                    [ 97%]\ntests\\unit\\test_wikilinks.py .........                                   [ 98%]\ntests\\unit\\test_writer_freeze.py .............                           [100%]\n\n============================ 766 passed in 26.15s =============================\n",
+      "stderr_tail": ""
+    }
+  ],
+  "review": {
+    "status": "pending",
+    "reviewer": null
+  }
+}

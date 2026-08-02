@@ -6,6 +6,15 @@
 
 ## Current Phase
 
+**§10.8 WR-10.13/10.9 pending 门禁实施 + NFC parser 修复 — 状态：completed（2026-08-02，最终代码 41f08db2c5f1）**。用户在 WR-10.15 accepted 后要求逐项实施剩余 pending 门禁；全面验收后修复遗留 NFC parser 缺陷并同步文档。全部完成。
+- **NFC parser 缺陷修复 — completed**：`_pymupdf_page_snapshots` 表格 data 提取未对 str 单元格 NFC 规范化 → 盈建科/时代新材两份招股书被 `PageAwarePDFAdapterError: table cell must use Unicode NFC` 拒。已修复（normalizer.py:764-768 应用 `_nfc_lf`）；新增回归测试；顺带修正过时断言（corrupt→unsupported）。生产 reset 后 worker（PID 3540）已用新代码重新处理成功（盈建科 partial 25363 spans / 时代新材 completed 8211 spans），`failed_terminal` 7→5。receipt 备份 `wr-10-13-nfc-fix-reset-backup-20260802.json`。
+- **WR-10.13 fingerprint terminal — accepted**。corrupt-XLS fingerprint=`failed_terminal`(XLRDError, attempt=3, next_retry_at=None)、`retryable_failed=0`、terminal 永不重选（select_fingerprint_batch store.py:1198-1226）、DB `quick_check=ok`/`FK=0`。receipt `artifacts/gates/source-catalog-bg/wr-10-13-fingerprint-terminal-acceptance-20260802.json`。
+- **最终 fingerprint pilot — accepted**。44.5 分钟独立 pilot（PID 16992），`pilot_pass=True`，29 样本全窗 worker/supervisor PID 唯一、code MATCH、heartbeat 新鲜、无 foreign/temp/orphan、DB quick_check ok、raw/StockWiki unchanged、same-path max 360.6s、parse_timeout=0。receipt `artifacts/gates/source-catalog-bg/wr-10-13-final-pilot-acceptance-20260802.json`。
+- **>900s slow canary — accepted**。合同层缩短时钟 GREEN（`test_source_catalog_parser_liveness.py` slow-canary `2 passed in 56.31s`）；隔离目录真实 40.9MB PDF 演练 accepted（normalize+fingerprint 各单稳定 parser PID、heartbeat 连续、无 temp leak、verdict=accepted）。receipt `artifacts/gates/source-catalog-bg/wr-10-13-slow-canary-acceptance-20260802.json`。
+- **next-login（WR-10.9 Step 6）— accepted**。用户真实重启后采集登录前后证据：登录触发新 launcher session `1ec5c35c0d07`（17:23:54Z starting→child_started），supervisor 15184→worker 14476 顺序启动、均无主窗口（无空白控制面板）、Code MATCH `724f0d5a8481`、worker 健康推进。receipt `artifacts/gates/source-catalog-bg/wr-10-9-step6-acceptance-20260802.json`（登录后采集 `wr-10-9-step6-login-20260802.json`，登录前基线 `wr-10-9-step6-pre-login-baseline-20260802.json`）。
+
+### 历史状态存档
+
 **§10.8 WR-10.15 重点关注目录准入、优先调度与存量清理 — 状态：accepted（2026-08-02，生产 apply 已完成并验证）**。用户 2026-08-01 23:08 指令“从头开始一项一项的实施”，解除实施冻结；全程 Preflight 0/1 → Gate A/B/C/D 逐项完成，最终 receipt `artifacts/gates/wr1015-final-acceptance-20260802.json`。
 - Preflight 0：现场冻结、基线（242 文件恒等式、163 目标 locations、1 共享 doc 3 外部位）。
 - Preflight 1：5 个 rollout blocker 全部 RED→GREEN（含用户复核后 blocker 5 轻量化：被删内容实测 <1MB，废弃 24.3GB 整库备份，改文件 archive + DB 行 JSONL + 单事务 + restore_files/restore_database）。
@@ -217,7 +226,7 @@
 | WR-7 | 10.8.8 final regression gate | ✅ |
 | WR-8 | 10.8.10 export semantic-query/progress hardening | ✅ |
 | WR-9 | 10.8.11 scan-run visibility/interruption hardening | ✅ |
-| WR-10 | 10.8.12 overnight liveness and automatic recovery | ✅（经 WR-10.7/10.8；WR-10.9 真实登录 Step 6 仍 pending） |
+| WR-10 | 10.8.12 overnight liveness and automatic recovery | ✅（经 WR-10.7/10.8；WR-10.9 真实登录 Step 6 已通过 2026-08-02） |
 | BG-5 | 10.6.9 artifact reconciliation + **apply 2685 artifacts** | ✅ |
 | FR-4 | 10.7.5 long-running document observability | ✅ |
 | CW-2.28C | Phase 2 semantic tests (11P/0F/0xfail) | ✅ |
@@ -1312,7 +1321,7 @@ git diff --check -- src/company_wiki/source_catalog scripts/source_catalog_contr
 - Ruff、compileall、git diff-check：PASS。
 - 最终机器收据：`artifacts/gates/source-catalog-bg/wr-8-9-final-acceptance-20260729.json`。
 
-##### 10.8.12 WR-10：夜间存活、launcher stderr 隔离与自动恢复 — 状态：completed_via_WR-10.7/10.8（2026-08-01 WR-10.7 completed、WR-10.8 次日检查点 PASS；WR-10.9 candidate 仅差真实登录 Step 6；WR-10.10-10.14 均已达成各自终态，见下）
+##### 10.8.12 WR-10：夜间存活、launcher stderr 隔离与自动恢复 — 状态：completed_via_WR-10.7/10.8（2026-08-01 WR-10.7 completed、WR-10.8 次日检查点 PASS；WR-10.9 真实登录 Step 6 已于 2026-08-02 通过；WR-10.10-10.14 均已达成各自终态，见下）
 
 **触发现场与已证实根因：**
 
@@ -1450,7 +1459,7 @@ git diff --check -- src/company_wiki/source_catalog scripts/source_catalog_contr
 
 **WR-10.8 证据：** 登录后 supervisor/worker=`20416/7916`、production/temp/foreign=`1/1/0/0`、heartbeat 16.3s；相对昨日 receipt，Markdown pending `-215`、completed `+207`、artifact `+219`。随后另一 Claude 会话运行全套 pytest 并显式 stop/restart 生产，该事件单列为 test pollution，不推翻污染前的次日 PASS。
 
-**WR-10.9 冷启动自动出现空白控制面板 — 状态：candidate / next-login pending (2026-08-01)：**
+**WR-10.9 冷启动自动出现空白控制面板 — 状态：accepted / Step 6 真实登录通过（2026-08-02）：**
 
 1. **现场冻结：** 不停止或重启生产 worker；保存 HKCU/HKLM Run/RunOnce、Startup 文件夹、全部计划任务 action、当前带窗口进程、Windows PowerShell host 事件与 launcher event。区分“系统注册启动控制面板”“Windows Restart Apps 恢复旧控制台”“隐藏 worker host 窗口泄漏”三条路径。
 2. **启动链审计：** 证明 `install_startup_task`/registry fallback 最终命令只指向 worker logon wrapper；搜索 repo 内所有 control cmd/ps1 调用者；任何外部启动来源必须记录 exact command、owner 和时间。
@@ -1470,7 +1479,7 @@ git diff --check -- src/company_wiki/source_catalog scripts/source_catalog_contr
 - [x] Step 3 聚焦自动化回归：新增 3 条 RED→GREEN；cold-start 9P、focused lifecycle 61P、worker/reliability 42P、Source Catalog full 321P；Ruff/compileall/parser/UTF-8/whitespace/diff-check 全绿，temp/foreign=0。
 - [x] Step 4 同会话 Windows smoke：真实 status 7.597s；WScript 无可见窗口，transient supervisor fail-closed 为 `already_running/launcher_lock_held`；生产 PID/`1/1` 不变。
 - [x] Step 5 持续运行观察：旧 attempt 2 FAIL 永久保留；WR-10.11 post-fix receipt `wr-10-11-post-fix-30m-20260801T162020Z.json` 机器 PASS，worker/supervisor PID 全窗唯一 `8280/15192`，pending/completed/artifact delta=`-19/+18/+20`，repeated cycle failure=0，DB/raw/StockWiki/scan 门禁全绿。
-- [ ] Step 6 下一次真实登录：人工干预前首屏、启动项、日志和 30/60/120 秒证据；该项不可在当前会话伪造。
+- [x] Step 6 下一次真实登录：用户 2026-08-02 真实重启后完成；登录触发新 launcher session `1ec5c35c0d07`（17:23:54Z starting→child_started），supervisor 15184→worker 14476 顺序启动、均无主窗口（无空白控制面板）、Code MATCH `724f0d5a8481`、worker 健康。receipt `artifacts/gates/source-catalog-bg/wr-10-9-step6-acceptance-20260802.json`。
 
 **WR-10.11 operation lock PID 复用假活与零吞吐 — 状态：accepted / post-fix pilot PASS + fingerprinted reload MATCH（2026-08-02 生产 worker 3316 Code MATCH `eb10131da6f1`，lock identity=matched）：**
 

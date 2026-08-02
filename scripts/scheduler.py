@@ -28,13 +28,19 @@ scheduler.py — 知识库调度器
 """
 
 import argparse
+import os
 import signal
 import sys
 import time
-import yaml
 from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Any, Dict, List, Optional
+
+from writer_policy import enforce_direct_cli
+
+enforce_direct_cli(__name__, __file__)
+
+import yaml
 
 # Windows 控制台 UTF-8 编码修复
 if sys.platform == "win32":
@@ -52,7 +58,8 @@ sys.path.insert(0, str(SCRIPTS_DIR))
 
 from dotenv import load_dotenv
 
-load_dotenv()
+if os.environ.get("PYTHON_DOTENV_DISABLED", "").casefold() not in {"1", "true", "yes"}:
+    load_dotenv()
 
 from log_writer import append_log
 from graph import Graph
@@ -136,7 +143,7 @@ class Scheduler:
         print("=" * 50)
         print("  知识库调度器 — 守护模式")
         print("=" * 50)
-        print(f"\n调度配置:")
+        print("\n调度配置:")
         for task, interval in schedule_config.items():
             print(f"  {task}: {interval}")
 
@@ -221,7 +228,7 @@ class Scheduler:
         if self.company_filter:
             print(f"  过滤条件: 公司 = {self.company_filter}")
         if self.dry_run:
-            print(f"  模式: DRY-RUN (只打印不执行)")
+            print("  模式: DRY-RUN (只打印不执行)")
         print("=" * 50)
 
         results = {}
@@ -257,20 +264,20 @@ class Scheduler:
 
         if "collect" in s["results"]:
             r = s["results"]["collect"]
-            print(f"\n  [新闻采集]")
+            print("\n  [新闻采集]")
             print(f"    新文章: {r.get('new', 0)}")
             print(f"    重复: {r.get('dup', 0)}")
 
         if "extract" in s["results"]:
             r = s["results"]["extract"]
-            print(f"\n  [PDF提取]")
+            print("\n  [PDF提取]")
             print(f"    成功: {r.get('processed', 0)}")
             print(f"    跳过: {r.get('skipped', 0)}")
             print(f"    错误: {r.get('errors', 0)}")
 
         if "tag" in s["results"]:
             r = s["results"]["tag"]
-            print(f"\n  [标签化分段]")
+            print("\n  [标签化分段]")
             print(f"    成功: {r.get('processed', 0)}")
             print(f"    跳过: {r.get('skipped', 0)}")
             print(f"    错误: {r.get('errors', 0)}")
@@ -278,7 +285,7 @@ class Scheduler:
 
         if "ingest" in s["results"]:
             r = s["results"]["ingest"]
-            print(f"\n  [文件处理]")
+            print("\n  [文件处理]")
             print(f"    成功: {r.get('processed', 0)}")
             print(f"    新条目: {r.get('entries', 0)}")
             print(f"    错误: {r.get('errors', 0)}")
@@ -288,14 +295,14 @@ class Scheduler:
 
         if "assess" in s["results"]:
             r = s["results"]["assess"]
-            print(f"\n  [评估更新]")
+            print("\n  [评估更新]")
             print(f"    成功: {r.get('success', 0)}")
             print(f"    跳过: {r.get('skipped', 0)}")
             print(f"    错误: {r.get('errors', 0)}")
 
         if "detect" in s["results"]:
             r = s["results"]["detect"]
-            print(f"\n  [矛盾检测]")
+            print("\n  [矛盾检测]")
             print(f"    潜在矛盾: {r.get('total', 0)}")
             print(f"    高置信度: {r.get('high_confidence', 0)}")
             by_type = r.get("by_type", {})
@@ -304,21 +311,21 @@ class Scheduler:
 
         if "distill" in s["results"]:
             r = s["results"]["distill"]
-            print(f"\n  [行业蒸馏]")
+            print("\n  [行业蒸馏]")
             print(f"    行业数: {r.get('processed', 0)}")
             print(f"    成功: {r.get('success', 0)}")
             print(f"    新增条目: {r.get('added', 0)}")
 
         if "judgment" in s["results"]:
             r = s["results"]["judgment"]
-            print(f"\n  [投资判断]")
+            print("\n  [投资判断]")
             print(f"    公司数: {r.get('success', 0)}")
             print(f"    跳过: {r.get('skipped', 0)}")
             print(f"    数据条目: {r.get('total_metrics', 0)}")
 
         if "verify" in s["results"]:
             r = s["results"]["verify"]
-            print(f"\n  [交叉验证]")
+            print("\n  [交叉验证]")
             print(f"    条目数: {r.get('total', 0)}")
             print(f"    事件数: {r.get('clusters', 0)}")
             print(f"    高可信度: {r.get('high', 0)}")
@@ -327,7 +334,7 @@ class Scheduler:
 
         if "evolve" in s["results"]:
             r = s["results"]["evolve"]
-            print(f"\n  [问题演化]")
+            print("\n  [问题演化]")
             print(f"    总问题数: {r.get('total_questions', 0)}")
             print(f"    活跃: {r.get('active', 0)}")
             print(f"    陈旧: {r.get('stale', 0)}")
@@ -336,13 +343,13 @@ class Scheduler:
 
         if "dashboard" in s["results"]:
             r = s["results"]["dashboard"]
-            print(f"\n  [质量仪表盘]")
+            print("\n  [质量仪表盘]")
             print(f"    报告: {r.get('path', 'N/A')}")
             print(f"    状态: {r.get('status', 'N/A')}")
 
         if "lint" in s["results"]:
             r = s["results"]["lint"]
-            print(f"\n  [健康检查]")
+            print("\n  [健康检查]")
             print(f"    Errors: {r.get('errors', 0)}")
             print(f"    Warnings: {r.get('warnings', 0)}")
             print(f"    Info: {r.get('infos', 0)}")
@@ -351,7 +358,7 @@ class Scheduler:
 
         if "consolidate" in s["results"]:
             r = s["results"]["consolidate"]
-            print(f"\n  [知识压缩]")
+            print("\n  [知识压缩]")
             print(f"    处理: {r.get('processed', 0)} 页")
             print(f"    成功: {r.get('success', 0)}")
             print(
@@ -360,7 +367,7 @@ class Scheduler:
 
         if "schema_evolve" in s["results"]:
             r = s["results"]["schema_evolve"]
-            print(f"\n  [Schema 进化]")
+            print("\n  [Schema 进化]")
             print(f"    指标数: {r.get('metrics_count', 0)}")
             print(f"    建议长度: {r.get('suggestions_chars', 0)} chars")
 

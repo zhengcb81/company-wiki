@@ -357,3 +357,1058 @@
 ## [2026-04-26 09:02] INFO query | Query answer saved: 测试问题？ -> 中微公司
 
 ## [2026-04-26 09:09] INFO query | Query answer saved: 测试问题？ -> 中微公司
+
+## [2026-05-20 20:57] INFO query | Query answer saved: 测试问题？ -> 中微公司
+
+## [2026-05-20 21:51] INFO ingest_v2 | LLM ingest (raw): 5 files, +3 entries, 3 assessments
+
+## [2026-05-20 21:52] INFO ingest_v2 | LLM ingest (raw): 10 files, +2 entries, 1 assessments
+
+## [2026-05-20 21:52] INFO scheduler | 调度周期完成
+- elapsed=0s
+- assess=+0
+
+## [2026-05-20 21:57] INFO query | Query answer saved: 测试问题？ -> 中微公司
+
+## [2026-07-07 20:17] INFO lint | 2 errors, 77 warnings, 51 info
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-21)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-21)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-21)
+- [WARNING] stale: Page not updated for 73 days (last: 2026-04-25)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-21)
+- [WARNING] stale: Page not updated for 73 days (last: 2026-04-25)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-21)
+- [WARNING] stale: Page not updated for 73 days (last: 2026-04-25)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 73 days (last: 2026-04-25)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 86 days (last: 2026-04-12)
+- [WARNING] stale: Page not updated for 86 days (last: 2026-04-12)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] empty: Timeline has no entries
+- [WARNING] empty: Timeline has no entries
+- [WARNING] broken_link: Source file not found: ../companies/中微公司/segments/financial_reports/annual/中微公司：独立董事2025年度述职报告-徐萍.jsonl
+- [WARNING] broken_link: Source file not found: ../companies/中微公司/segments/announcements/中微公司：2025年年度利润分配及资本公积金转增股本方案公告.jsonl
+- [WARNING] broken_link: Source file not found: ../companies/中微公司/extracts/research/中微公司：2022年6月投资者关系活动记录表.md
+- [WARNING] broken_link: Source file not found: ../companies/中微公司/extracts/research/中微公司：2022年5月投资者关系活动记录表.md
+- [WARNING] broken_link: Source file not found: ../companies/中微公司/extracts/research/中微公司：2022年4月投资者关系活动记录表.md
+- [WARNING] broken_link: Source file not found: ../companies/中微公司/extracts/financial_reports/中微公司：2026年第一季度报告.md
+- [WARNING] broken_link: Source file not found: ../companies/中微公司/raw/news/2026-04-12_ebb368fd_公告摘要___上海证券交易所.md
+- [WARNING] broken_link: Source file not found: ../companies/中微公司/raw/news/2026-04-11_ac627dee_新闻活动_新闻发布_中微公司.md
+- [WARNING] broken_link: Source file not found: ../companies/中微公司/raw/news/2026-04-11_1510d0b9_直接对标国际巨头_记者实探中微公司六大半导体设备新品.md
+- [WARNING] broken_link: Source file not found: ../companies/中微公司/raw/investor_relations/【芯片】中微公司交流纪要20220113.pdf
+- [WARNING] broken_link: Source file not found: ../companies/中微公司/raw/financial_reports/中微公司：2026年第一季度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/investor_relations/中密控股：2023年11月10日投资者关系活动记录表.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/semi_annual/中密控股：2025年半年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/semi_annual/中密控股：2024年半年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/semi_annual/中密控股：2023年半年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/semi_annual/中密控股：2022年半年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/semi_annual/中密控股：2021年半年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/quarterly/中密控股：2023年三季度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/quarterly/中密控股：2021年第一季度报告全文.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/quarterly/中密控股：2020年第一季度报告全文.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/annual/日机密封：2018年年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/annual/日机密封：2016年年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/annual/日机密封：2015年年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/annual/中密控股：2024年年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/annual/中密控股：2023年年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/annual/中密控股：2022年年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/annual/中密控股：2021年年度报告.pdf
+- [WARNING] config: Company directory missing: 明源云
+- [WARNING] config: Company directory missing: 泽达易盛
+- [WARNING] config: Company directory missing: 石药集团
+- [WARNING] config: Company directory missing: 禾信仪器
+- [WARNING] config: Company directory missing: 绝味食品
+- [WARNING] config: Company directory missing: 网易
+- [WARNING] config: Company directory missing: 茅台
+- [WARNING] config: Company directory missing: 药明生物
+- [WARNING] config: Company directory missing: 锦江股份
+- [WARNING] freshness: No news collection found in log
+- [WARNING] duplicates: Pages may be duplicates (similarity: 77%): themes\半导体国产替代\wiki\市场与需求.md <-> themes\半导体国产替代\wiki\设备国产化.md
+- [WARNING] duplicates: Pages may be duplicates (similarity: 78%): themes\半导体国产替代\wiki\市场与需求.md <-> themes\半导体国产替代\wiki\资本投入.md
+- [WARNING] duplicates: Pages may be duplicates (similarity: 81%): themes\半导体国产替代\wiki\设备国产化.md <-> themes\半导体国产替代\wiki\资本投入.md
+- [WARNING] duplicates: Pages may be duplicates (similarity: 84%): themes\高端制造\wiki\技术突破.md <-> themes\高端制造\wiki\政策支持.md
+- [ERROR] frontmatter: Missing required fields: title, entity, type, last_updated, sources_count, tags
+- [ERROR] frontmatter: Missing required fields: title, entity, type, last_updated, sources_count, tags
+
+## [2026-07-07 20:20] INFO lint | 2 errors, 77 warnings, 51 info
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-21)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-21)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-21)
+- [WARNING] stale: Page not updated for 73 days (last: 2026-04-25)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-21)
+- [WARNING] stale: Page not updated for 73 days (last: 2026-04-25)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-21)
+- [WARNING] stale: Page not updated for 73 days (last: 2026-04-25)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 73 days (last: 2026-04-25)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 86 days (last: 2026-04-12)
+- [WARNING] stale: Page not updated for 86 days (last: 2026-04-12)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] empty: Timeline has no entries
+- [WARNING] empty: Timeline has no entries
+- [WARNING] broken_link: Source file not found: ../companies/中微公司/segments/financial_reports/annual/中微公司：独立董事2025年度述职报告-徐萍.jsonl
+- [WARNING] broken_link: Source file not found: ../companies/中微公司/segments/announcements/中微公司：2025年年度利润分配及资本公积金转增股本方案公告.jsonl
+- [WARNING] broken_link: Source file not found: ../companies/中微公司/extracts/research/中微公司：2022年6月投资者关系活动记录表.md
+- [WARNING] broken_link: Source file not found: ../companies/中微公司/extracts/research/中微公司：2022年5月投资者关系活动记录表.md
+- [WARNING] broken_link: Source file not found: ../companies/中微公司/extracts/research/中微公司：2022年4月投资者关系活动记录表.md
+- [WARNING] broken_link: Source file not found: ../companies/中微公司/extracts/financial_reports/中微公司：2026年第一季度报告.md
+- [WARNING] broken_link: Source file not found: ../companies/中微公司/raw/news/2026-04-12_ebb368fd_公告摘要___上海证券交易所.md
+- [WARNING] broken_link: Source file not found: ../companies/中微公司/raw/news/2026-04-11_ac627dee_新闻活动_新闻发布_中微公司.md
+- [WARNING] broken_link: Source file not found: ../companies/中微公司/raw/news/2026-04-11_1510d0b9_直接对标国际巨头_记者实探中微公司六大半导体设备新品.md
+- [WARNING] broken_link: Source file not found: ../companies/中微公司/raw/investor_relations/【芯片】中微公司交流纪要20220113.pdf
+- [WARNING] broken_link: Source file not found: ../companies/中微公司/raw/financial_reports/中微公司：2026年第一季度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/investor_relations/中密控股：2023年11月10日投资者关系活动记录表.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/semi_annual/中密控股：2025年半年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/semi_annual/中密控股：2024年半年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/semi_annual/中密控股：2023年半年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/semi_annual/中密控股：2022年半年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/semi_annual/中密控股：2021年半年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/quarterly/中密控股：2023年三季度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/quarterly/中密控股：2021年第一季度报告全文.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/quarterly/中密控股：2020年第一季度报告全文.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/annual/日机密封：2018年年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/annual/日机密封：2016年年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/annual/日机密封：2015年年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/annual/中密控股：2024年年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/annual/中密控股：2023年年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/annual/中密控股：2022年年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/annual/中密控股：2021年年度报告.pdf
+- [WARNING] config: Company directory missing: 明源云
+- [WARNING] config: Company directory missing: 泽达易盛
+- [WARNING] config: Company directory missing: 石药集团
+- [WARNING] config: Company directory missing: 禾信仪器
+- [WARNING] config: Company directory missing: 绝味食品
+- [WARNING] config: Company directory missing: 网易
+- [WARNING] config: Company directory missing: 茅台
+- [WARNING] config: Company directory missing: 药明生物
+- [WARNING] config: Company directory missing: 锦江股份
+- [WARNING] freshness: No news collection found in log
+- [WARNING] duplicates: Pages may be duplicates (similarity: 77%): themes\半导体国产替代\wiki\市场与需求.md <-> themes\半导体国产替代\wiki\设备国产化.md
+- [WARNING] duplicates: Pages may be duplicates (similarity: 78%): themes\半导体国产替代\wiki\市场与需求.md <-> themes\半导体国产替代\wiki\资本投入.md
+- [WARNING] duplicates: Pages may be duplicates (similarity: 81%): themes\半导体国产替代\wiki\设备国产化.md <-> themes\半导体国产替代\wiki\资本投入.md
+- [WARNING] duplicates: Pages may be duplicates (similarity: 84%): themes\高端制造\wiki\技术突破.md <-> themes\高端制造\wiki\政策支持.md
+- [ERROR] frontmatter: Missing required fields: title, entity, type, last_updated, sources_count, tags
+- [ERROR] frontmatter: Missing required fields: title, entity, type, last_updated, sources_count, tags
+
+## [2026-07-07 20:21] INFO lint | 2 errors, 77 warnings, 51 info
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-21)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-21)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-21)
+- [WARNING] stale: Page not updated for 73 days (last: 2026-04-25)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-21)
+- [WARNING] stale: Page not updated for 73 days (last: 2026-04-25)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-21)
+- [WARNING] stale: Page not updated for 73 days (last: 2026-04-25)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 73 days (last: 2026-04-25)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 86 days (last: 2026-04-12)
+- [WARNING] stale: Page not updated for 86 days (last: 2026-04-12)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] empty: Timeline has no entries
+- [WARNING] empty: Timeline has no entries
+- [WARNING] broken_link: Source file not found: ../companies/中微公司/segments/financial_reports/annual/中微公司：独立董事2025年度述职报告-徐萍.jsonl
+- [WARNING] broken_link: Source file not found: ../companies/中微公司/segments/announcements/中微公司：2025年年度利润分配及资本公积金转增股本方案公告.jsonl
+- [WARNING] broken_link: Source file not found: ../companies/中微公司/extracts/research/中微公司：2022年6月投资者关系活动记录表.md
+- [WARNING] broken_link: Source file not found: ../companies/中微公司/extracts/research/中微公司：2022年5月投资者关系活动记录表.md
+- [WARNING] broken_link: Source file not found: ../companies/中微公司/extracts/research/中微公司：2022年4月投资者关系活动记录表.md
+- [WARNING] broken_link: Source file not found: ../companies/中微公司/extracts/financial_reports/中微公司：2026年第一季度报告.md
+- [WARNING] broken_link: Source file not found: ../companies/中微公司/raw/news/2026-04-12_ebb368fd_公告摘要___上海证券交易所.md
+- [WARNING] broken_link: Source file not found: ../companies/中微公司/raw/news/2026-04-11_ac627dee_新闻活动_新闻发布_中微公司.md
+- [WARNING] broken_link: Source file not found: ../companies/中微公司/raw/news/2026-04-11_1510d0b9_直接对标国际巨头_记者实探中微公司六大半导体设备新品.md
+- [WARNING] broken_link: Source file not found: ../companies/中微公司/raw/investor_relations/【芯片】中微公司交流纪要20220113.pdf
+- [WARNING] broken_link: Source file not found: ../companies/中微公司/raw/financial_reports/中微公司：2026年第一季度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/investor_relations/中密控股：2023年11月10日投资者关系活动记录表.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/semi_annual/中密控股：2025年半年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/semi_annual/中密控股：2024年半年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/semi_annual/中密控股：2023年半年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/semi_annual/中密控股：2022年半年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/semi_annual/中密控股：2021年半年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/quarterly/中密控股：2023年三季度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/quarterly/中密控股：2021年第一季度报告全文.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/quarterly/中密控股：2020年第一季度报告全文.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/annual/日机密封：2018年年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/annual/日机密封：2016年年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/annual/日机密封：2015年年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/annual/中密控股：2024年年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/annual/中密控股：2023年年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/annual/中密控股：2022年年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/annual/中密控股：2021年年度报告.pdf
+- [WARNING] config: Company directory missing: 明源云
+- [WARNING] config: Company directory missing: 泽达易盛
+- [WARNING] config: Company directory missing: 石药集团
+- [WARNING] config: Company directory missing: 禾信仪器
+- [WARNING] config: Company directory missing: 绝味食品
+- [WARNING] config: Company directory missing: 网易
+- [WARNING] config: Company directory missing: 茅台
+- [WARNING] config: Company directory missing: 药明生物
+- [WARNING] config: Company directory missing: 锦江股份
+- [WARNING] freshness: No news collection found in log
+- [WARNING] duplicates: Pages may be duplicates (similarity: 77%): themes\半导体国产替代\wiki\市场与需求.md <-> themes\半导体国产替代\wiki\设备国产化.md
+- [WARNING] duplicates: Pages may be duplicates (similarity: 78%): themes\半导体国产替代\wiki\市场与需求.md <-> themes\半导体国产替代\wiki\资本投入.md
+- [WARNING] duplicates: Pages may be duplicates (similarity: 81%): themes\半导体国产替代\wiki\设备国产化.md <-> themes\半导体国产替代\wiki\资本投入.md
+- [WARNING] duplicates: Pages may be duplicates (similarity: 84%): themes\高端制造\wiki\技术突破.md <-> themes\高端制造\wiki\政策支持.md
+- [ERROR] frontmatter: Missing required fields: title, entity, type, last_updated, sources_count, tags
+- [ERROR] frontmatter: Missing required fields: title, entity, type, last_updated, sources_count, tags
+
+## [2026-07-07 20:21] INFO lint | 2 errors, 77 warnings, 51 info
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-21)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-21)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-21)
+- [WARNING] stale: Page not updated for 73 days (last: 2026-04-25)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-21)
+- [WARNING] stale: Page not updated for 73 days (last: 2026-04-25)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-21)
+- [WARNING] stale: Page not updated for 73 days (last: 2026-04-25)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 73 days (last: 2026-04-25)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 86 days (last: 2026-04-12)
+- [WARNING] stale: Page not updated for 86 days (last: 2026-04-12)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] empty: Timeline has no entries
+- [WARNING] empty: Timeline has no entries
+- [WARNING] broken_link: Source file not found: ../companies/中微公司/segments/financial_reports/annual/中微公司：独立董事2025年度述职报告-徐萍.jsonl
+- [WARNING] broken_link: Source file not found: ../companies/中微公司/segments/announcements/中微公司：2025年年度利润分配及资本公积金转增股本方案公告.jsonl
+- [WARNING] broken_link: Source file not found: ../companies/中微公司/extracts/research/中微公司：2022年6月投资者关系活动记录表.md
+- [WARNING] broken_link: Source file not found: ../companies/中微公司/extracts/research/中微公司：2022年5月投资者关系活动记录表.md
+- [WARNING] broken_link: Source file not found: ../companies/中微公司/extracts/research/中微公司：2022年4月投资者关系活动记录表.md
+- [WARNING] broken_link: Source file not found: ../companies/中微公司/extracts/financial_reports/中微公司：2026年第一季度报告.md
+- [WARNING] broken_link: Source file not found: ../companies/中微公司/raw/news/2026-04-12_ebb368fd_公告摘要___上海证券交易所.md
+- [WARNING] broken_link: Source file not found: ../companies/中微公司/raw/news/2026-04-11_ac627dee_新闻活动_新闻发布_中微公司.md
+- [WARNING] broken_link: Source file not found: ../companies/中微公司/raw/news/2026-04-11_1510d0b9_直接对标国际巨头_记者实探中微公司六大半导体设备新品.md
+- [WARNING] broken_link: Source file not found: ../companies/中微公司/raw/investor_relations/【芯片】中微公司交流纪要20220113.pdf
+- [WARNING] broken_link: Source file not found: ../companies/中微公司/raw/financial_reports/中微公司：2026年第一季度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/investor_relations/中密控股：2023年11月10日投资者关系活动记录表.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/semi_annual/中密控股：2025年半年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/semi_annual/中密控股：2024年半年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/semi_annual/中密控股：2023年半年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/semi_annual/中密控股：2022年半年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/semi_annual/中密控股：2021年半年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/quarterly/中密控股：2023年三季度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/quarterly/中密控股：2021年第一季度报告全文.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/quarterly/中密控股：2020年第一季度报告全文.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/annual/日机密封：2018年年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/annual/日机密封：2016年年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/annual/日机密封：2015年年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/annual/中密控股：2024年年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/annual/中密控股：2023年年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/annual/中密控股：2022年年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/annual/中密控股：2021年年度报告.pdf
+- [WARNING] config: Company directory missing: 明源云
+- [WARNING] config: Company directory missing: 泽达易盛
+- [WARNING] config: Company directory missing: 石药集团
+- [WARNING] config: Company directory missing: 禾信仪器
+- [WARNING] config: Company directory missing: 绝味食品
+- [WARNING] config: Company directory missing: 网易
+- [WARNING] config: Company directory missing: 茅台
+- [WARNING] config: Company directory missing: 药明生物
+- [WARNING] config: Company directory missing: 锦江股份
+- [WARNING] freshness: No news collection found in log
+- [WARNING] duplicates: Pages may be duplicates (similarity: 77%): themes\半导体国产替代\wiki\市场与需求.md <-> themes\半导体国产替代\wiki\设备国产化.md
+- [WARNING] duplicates: Pages may be duplicates (similarity: 78%): themes\半导体国产替代\wiki\市场与需求.md <-> themes\半导体国产替代\wiki\资本投入.md
+- [WARNING] duplicates: Pages may be duplicates (similarity: 81%): themes\半导体国产替代\wiki\设备国产化.md <-> themes\半导体国产替代\wiki\资本投入.md
+- [WARNING] duplicates: Pages may be duplicates (similarity: 84%): themes\高端制造\wiki\技术突破.md <-> themes\高端制造\wiki\政策支持.md
+- [ERROR] frontmatter: Missing required fields: title, entity, type, last_updated, sources_count, tags
+- [ERROR] frontmatter: Missing required fields: title, entity, type, last_updated, sources_count, tags
+
+## [2026-07-07 20:21] INFO lint | 2 errors, 77 warnings, 51 info
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-21)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-21)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-21)
+- [WARNING] stale: Page not updated for 73 days (last: 2026-04-25)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-21)
+- [WARNING] stale: Page not updated for 73 days (last: 2026-04-25)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-21)
+- [WARNING] stale: Page not updated for 73 days (last: 2026-04-25)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 73 days (last: 2026-04-25)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 86 days (last: 2026-04-12)
+- [WARNING] stale: Page not updated for 86 days (last: 2026-04-12)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] empty: Timeline has no entries
+- [WARNING] empty: Timeline has no entries
+- [WARNING] broken_link: Source file not found: ../companies/中微公司/segments/financial_reports/annual/中微公司：独立董事2025年度述职报告-徐萍.jsonl
+- [WARNING] broken_link: Source file not found: ../companies/中微公司/segments/announcements/中微公司：2025年年度利润分配及资本公积金转增股本方案公告.jsonl
+- [WARNING] broken_link: Source file not found: ../companies/中微公司/extracts/research/中微公司：2022年6月投资者关系活动记录表.md
+- [WARNING] broken_link: Source file not found: ../companies/中微公司/extracts/research/中微公司：2022年5月投资者关系活动记录表.md
+- [WARNING] broken_link: Source file not found: ../companies/中微公司/extracts/research/中微公司：2022年4月投资者关系活动记录表.md
+- [WARNING] broken_link: Source file not found: ../companies/中微公司/extracts/financial_reports/中微公司：2026年第一季度报告.md
+- [WARNING] broken_link: Source file not found: ../companies/中微公司/raw/news/2026-04-12_ebb368fd_公告摘要___上海证券交易所.md
+- [WARNING] broken_link: Source file not found: ../companies/中微公司/raw/news/2026-04-11_ac627dee_新闻活动_新闻发布_中微公司.md
+- [WARNING] broken_link: Source file not found: ../companies/中微公司/raw/news/2026-04-11_1510d0b9_直接对标国际巨头_记者实探中微公司六大半导体设备新品.md
+- [WARNING] broken_link: Source file not found: ../companies/中微公司/raw/investor_relations/【芯片】中微公司交流纪要20220113.pdf
+- [WARNING] broken_link: Source file not found: ../companies/中微公司/raw/financial_reports/中微公司：2026年第一季度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/investor_relations/中密控股：2023年11月10日投资者关系活动记录表.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/semi_annual/中密控股：2025年半年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/semi_annual/中密控股：2024年半年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/semi_annual/中密控股：2023年半年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/semi_annual/中密控股：2022年半年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/semi_annual/中密控股：2021年半年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/quarterly/中密控股：2023年三季度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/quarterly/中密控股：2021年第一季度报告全文.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/quarterly/中密控股：2020年第一季度报告全文.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/annual/日机密封：2018年年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/annual/日机密封：2016年年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/annual/日机密封：2015年年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/annual/中密控股：2024年年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/annual/中密控股：2023年年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/annual/中密控股：2022年年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/annual/中密控股：2021年年度报告.pdf
+- [WARNING] config: Company directory missing: 明源云
+- [WARNING] config: Company directory missing: 泽达易盛
+- [WARNING] config: Company directory missing: 石药集团
+- [WARNING] config: Company directory missing: 禾信仪器
+- [WARNING] config: Company directory missing: 绝味食品
+- [WARNING] config: Company directory missing: 网易
+- [WARNING] config: Company directory missing: 茅台
+- [WARNING] config: Company directory missing: 药明生物
+- [WARNING] config: Company directory missing: 锦江股份
+- [WARNING] freshness: No news collection found in log
+- [WARNING] duplicates: Pages may be duplicates (similarity: 77%): themes\半导体国产替代\wiki\市场与需求.md <-> themes\半导体国产替代\wiki\设备国产化.md
+- [WARNING] duplicates: Pages may be duplicates (similarity: 78%): themes\半导体国产替代\wiki\市场与需求.md <-> themes\半导体国产替代\wiki\资本投入.md
+- [WARNING] duplicates: Pages may be duplicates (similarity: 81%): themes\半导体国产替代\wiki\设备国产化.md <-> themes\半导体国产替代\wiki\资本投入.md
+- [WARNING] duplicates: Pages may be duplicates (similarity: 84%): themes\高端制造\wiki\技术突破.md <-> themes\高端制造\wiki\政策支持.md
+- [ERROR] frontmatter: Missing required fields: title, entity, type, last_updated, sources_count, tags
+- [ERROR] frontmatter: Missing required fields: title, entity, type, last_updated, sources_count, tags
+
+## [2026-07-07 20:21] INFO lint | 2 errors, 77 warnings, 51 info
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-21)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-21)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-21)
+- [WARNING] stale: Page not updated for 73 days (last: 2026-04-25)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-21)
+- [WARNING] stale: Page not updated for 73 days (last: 2026-04-25)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-21)
+- [WARNING] stale: Page not updated for 73 days (last: 2026-04-25)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 73 days (last: 2026-04-25)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 86 days (last: 2026-04-12)
+- [WARNING] stale: Page not updated for 86 days (last: 2026-04-12)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] empty: Timeline has no entries
+- [WARNING] empty: Timeline has no entries
+- [WARNING] broken_link: Source file not found: ../companies/中微公司/segments/financial_reports/annual/中微公司：独立董事2025年度述职报告-徐萍.jsonl
+- [WARNING] broken_link: Source file not found: ../companies/中微公司/segments/announcements/中微公司：2025年年度利润分配及资本公积金转增股本方案公告.jsonl
+- [WARNING] broken_link: Source file not found: ../companies/中微公司/extracts/research/中微公司：2022年6月投资者关系活动记录表.md
+- [WARNING] broken_link: Source file not found: ../companies/中微公司/extracts/research/中微公司：2022年5月投资者关系活动记录表.md
+- [WARNING] broken_link: Source file not found: ../companies/中微公司/extracts/research/中微公司：2022年4月投资者关系活动记录表.md
+- [WARNING] broken_link: Source file not found: ../companies/中微公司/extracts/financial_reports/中微公司：2026年第一季度报告.md
+- [WARNING] broken_link: Source file not found: ../companies/中微公司/raw/news/2026-04-12_ebb368fd_公告摘要___上海证券交易所.md
+- [WARNING] broken_link: Source file not found: ../companies/中微公司/raw/news/2026-04-11_ac627dee_新闻活动_新闻发布_中微公司.md
+- [WARNING] broken_link: Source file not found: ../companies/中微公司/raw/news/2026-04-11_1510d0b9_直接对标国际巨头_记者实探中微公司六大半导体设备新品.md
+- [WARNING] broken_link: Source file not found: ../companies/中微公司/raw/investor_relations/【芯片】中微公司交流纪要20220113.pdf
+- [WARNING] broken_link: Source file not found: ../companies/中微公司/raw/financial_reports/中微公司：2026年第一季度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/investor_relations/中密控股：2023年11月10日投资者关系活动记录表.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/semi_annual/中密控股：2025年半年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/semi_annual/中密控股：2024年半年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/semi_annual/中密控股：2023年半年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/semi_annual/中密控股：2022年半年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/semi_annual/中密控股：2021年半年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/quarterly/中密控股：2023年三季度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/quarterly/中密控股：2021年第一季度报告全文.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/quarterly/中密控股：2020年第一季度报告全文.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/annual/日机密封：2018年年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/annual/日机密封：2016年年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/annual/日机密封：2015年年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/annual/中密控股：2024年年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/annual/中密控股：2023年年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/annual/中密控股：2022年年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/annual/中密控股：2021年年度报告.pdf
+- [WARNING] config: Company directory missing: 明源云
+- [WARNING] config: Company directory missing: 泽达易盛
+- [WARNING] config: Company directory missing: 石药集团
+- [WARNING] config: Company directory missing: 禾信仪器
+- [WARNING] config: Company directory missing: 绝味食品
+- [WARNING] config: Company directory missing: 网易
+- [WARNING] config: Company directory missing: 茅台
+- [WARNING] config: Company directory missing: 药明生物
+- [WARNING] config: Company directory missing: 锦江股份
+- [WARNING] freshness: No news collection found in log
+- [WARNING] duplicates: Pages may be duplicates (similarity: 77%): themes\半导体国产替代\wiki\市场与需求.md <-> themes\半导体国产替代\wiki\设备国产化.md
+- [WARNING] duplicates: Pages may be duplicates (similarity: 78%): themes\半导体国产替代\wiki\市场与需求.md <-> themes\半导体国产替代\wiki\资本投入.md
+- [WARNING] duplicates: Pages may be duplicates (similarity: 81%): themes\半导体国产替代\wiki\设备国产化.md <-> themes\半导体国产替代\wiki\资本投入.md
+- [WARNING] duplicates: Pages may be duplicates (similarity: 84%): themes\高端制造\wiki\技术突破.md <-> themes\高端制造\wiki\政策支持.md
+- [ERROR] frontmatter: Missing required fields: title, entity, type, last_updated, sources_count, tags
+- [ERROR] frontmatter: Missing required fields: title, entity, type, last_updated, sources_count, tags
+
+## [2026-07-07 20:26] INFO lint | 2 errors, 66 warnings, 51 info
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-21)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-21)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-21)
+- [WARNING] stale: Page not updated for 73 days (last: 2026-04-25)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-21)
+- [WARNING] stale: Page not updated for 73 days (last: 2026-04-25)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-21)
+- [WARNING] stale: Page not updated for 73 days (last: 2026-04-25)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 73 days (last: 2026-04-25)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 86 days (last: 2026-04-12)
+- [WARNING] stale: Page not updated for 86 days (last: 2026-04-12)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] empty: Timeline has no entries
+- [WARNING] empty: Timeline has no entries
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/investor_relations/中密控股：2023年11月10日投资者关系活动记录表.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/semi_annual/中密控股：2025年半年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/semi_annual/中密控股：2024年半年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/semi_annual/中密控股：2023年半年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/semi_annual/中密控股：2022年半年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/semi_annual/中密控股：2021年半年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/quarterly/中密控股：2023年三季度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/quarterly/中密控股：2021年第一季度报告全文.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/quarterly/中密控股：2020年第一季度报告全文.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/annual/日机密封：2018年年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/annual/日机密封：2016年年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/annual/日机密封：2015年年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/annual/中密控股：2024年年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/annual/中密控股：2023年年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/annual/中密控股：2022年年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/annual/中密控股：2021年年度报告.pdf
+- [WARNING] config: Company directory missing: 明源云
+- [WARNING] config: Company directory missing: 泽达易盛
+- [WARNING] config: Company directory missing: 石药集团
+- [WARNING] config: Company directory missing: 禾信仪器
+- [WARNING] config: Company directory missing: 绝味食品
+- [WARNING] config: Company directory missing: 网易
+- [WARNING] config: Company directory missing: 茅台
+- [WARNING] config: Company directory missing: 药明生物
+- [WARNING] config: Company directory missing: 锦江股份
+- [WARNING] freshness: No news collection found in log
+- [WARNING] duplicates: Pages may be duplicates (similarity: 77%): themes\半导体国产替代\wiki\市场与需求.md <-> themes\半导体国产替代\wiki\设备国产化.md
+- [WARNING] duplicates: Pages may be duplicates (similarity: 78%): themes\半导体国产替代\wiki\市场与需求.md <-> themes\半导体国产替代\wiki\资本投入.md
+- [WARNING] duplicates: Pages may be duplicates (similarity: 81%): themes\半导体国产替代\wiki\设备国产化.md <-> themes\半导体国产替代\wiki\资本投入.md
+- [WARNING] duplicates: Pages may be duplicates (similarity: 84%): themes\高端制造\wiki\技术突破.md <-> themes\高端制造\wiki\政策支持.md
+- [ERROR] frontmatter: Missing required fields: title, entity, type, last_updated, sources_count, tags
+- [ERROR] frontmatter: Missing required fields: title, entity, type, last_updated, sources_count, tags
+
+## [2026-07-07 21:03] INFO lint | 2 errors, 66 warnings, 51 info
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-21)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-21)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-21)
+- [WARNING] stale: Page not updated for 73 days (last: 2026-04-25)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-21)
+- [WARNING] stale: Page not updated for 73 days (last: 2026-04-25)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-21)
+- [WARNING] stale: Page not updated for 73 days (last: 2026-04-25)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 73 days (last: 2026-04-25)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 86 days (last: 2026-04-12)
+- [WARNING] stale: Page not updated for 86 days (last: 2026-04-12)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] empty: Timeline has no entries
+- [WARNING] empty: Timeline has no entries
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/investor_relations/中密控股：2023年11月10日投资者关系活动记录表.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/semi_annual/中密控股：2025年半年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/semi_annual/中密控股：2024年半年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/semi_annual/中密控股：2023年半年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/semi_annual/中密控股：2022年半年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/semi_annual/中密控股：2021年半年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/quarterly/中密控股：2023年三季度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/quarterly/中密控股：2021年第一季度报告全文.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/quarterly/中密控股：2020年第一季度报告全文.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/annual/日机密封：2018年年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/annual/日机密封：2016年年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/annual/日机密封：2015年年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/annual/中密控股：2024年年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/annual/中密控股：2023年年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/annual/中密控股：2022年年度报告.pdf
+- [WARNING] broken_link: Source file not found: ../../../companies/中密控股/raw/financial_reports/annual/中密控股：2021年年度报告.pdf
+- [WARNING] config: Company directory missing: 明源云
+- [WARNING] config: Company directory missing: 泽达易盛
+- [WARNING] config: Company directory missing: 石药集团
+- [WARNING] config: Company directory missing: 禾信仪器
+- [WARNING] config: Company directory missing: 绝味食品
+- [WARNING] config: Company directory missing: 网易
+- [WARNING] config: Company directory missing: 茅台
+- [WARNING] config: Company directory missing: 药明生物
+- [WARNING] config: Company directory missing: 锦江股份
+- [WARNING] freshness: No news collection found in log
+- [WARNING] duplicates: Pages may be duplicates (similarity: 77%): themes\半导体国产替代\wiki\市场与需求.md <-> themes\半导体国产替代\wiki\设备国产化.md
+- [WARNING] duplicates: Pages may be duplicates (similarity: 78%): themes\半导体国产替代\wiki\市场与需求.md <-> themes\半导体国产替代\wiki\资本投入.md
+- [WARNING] duplicates: Pages may be duplicates (similarity: 81%): themes\半导体国产替代\wiki\设备国产化.md <-> themes\半导体国产替代\wiki\资本投入.md
+- [WARNING] duplicates: Pages may be duplicates (similarity: 84%): themes\高端制造\wiki\技术突破.md <-> themes\高端制造\wiki\政策支持.md
+- [ERROR] frontmatter: Missing required fields: title, entity, type, last_updated, sources_count, tags
+- [ERROR] frontmatter: Missing required fields: title, entity, type, last_updated, sources_count, tags
+
+## [2026-07-07 21:04] INFO lint | 2 errors, 50 warnings, 51 info
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-21)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-21)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-21)
+- [WARNING] stale: Page not updated for 73 days (last: 2026-04-25)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-21)
+- [WARNING] stale: Page not updated for 73 days (last: 2026-04-25)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-21)
+- [WARNING] stale: Page not updated for 73 days (last: 2026-04-25)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 73 days (last: 2026-04-25)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 86 days (last: 2026-04-12)
+- [WARNING] stale: Page not updated for 86 days (last: 2026-04-12)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] empty: Timeline has no entries
+- [WARNING] empty: Timeline has no entries
+- [WARNING] config: Company directory missing: 明源云
+- [WARNING] config: Company directory missing: 泽达易盛
+- [WARNING] config: Company directory missing: 石药集团
+- [WARNING] config: Company directory missing: 禾信仪器
+- [WARNING] config: Company directory missing: 绝味食品
+- [WARNING] config: Company directory missing: 网易
+- [WARNING] config: Company directory missing: 茅台
+- [WARNING] config: Company directory missing: 药明生物
+- [WARNING] config: Company directory missing: 锦江股份
+- [WARNING] freshness: No news collection found in log
+- [WARNING] duplicates: Pages may be duplicates (similarity: 77%): themes\半导体国产替代\wiki\市场与需求.md <-> themes\半导体国产替代\wiki\设备国产化.md
+- [WARNING] duplicates: Pages may be duplicates (similarity: 78%): themes\半导体国产替代\wiki\市场与需求.md <-> themes\半导体国产替代\wiki\资本投入.md
+- [WARNING] duplicates: Pages may be duplicates (similarity: 81%): themes\半导体国产替代\wiki\设备国产化.md <-> themes\半导体国产替代\wiki\资本投入.md
+- [WARNING] duplicates: Pages may be duplicates (similarity: 84%): themes\高端制造\wiki\技术突破.md <-> themes\高端制造\wiki\政策支持.md
+- [ERROR] frontmatter: Missing required fields: title, entity, type, last_updated, sources_count, tags
+- [ERROR] frontmatter: Missing required fields: title, entity, type, last_updated, sources_count, tags
+
+## [2026-07-07 21:04] INFO lint | 2 errors, 50 warnings, 51 info
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-21)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-21)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-21)
+- [WARNING] stale: Page not updated for 73 days (last: 2026-04-25)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-21)
+- [WARNING] stale: Page not updated for 73 days (last: 2026-04-25)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-21)
+- [WARNING] stale: Page not updated for 73 days (last: 2026-04-25)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 73 days (last: 2026-04-25)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 86 days (last: 2026-04-12)
+- [WARNING] stale: Page not updated for 86 days (last: 2026-04-12)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] empty: Timeline has no entries
+- [WARNING] empty: Timeline has no entries
+- [WARNING] config: Company directory missing: 明源云
+- [WARNING] config: Company directory missing: 泽达易盛
+- [WARNING] config: Company directory missing: 石药集团
+- [WARNING] config: Company directory missing: 禾信仪器
+- [WARNING] config: Company directory missing: 绝味食品
+- [WARNING] config: Company directory missing: 网易
+- [WARNING] config: Company directory missing: 茅台
+- [WARNING] config: Company directory missing: 药明生物
+- [WARNING] config: Company directory missing: 锦江股份
+- [WARNING] freshness: No news collection found in log
+- [WARNING] duplicates: Pages may be duplicates (similarity: 77%): themes\半导体国产替代\wiki\市场与需求.md <-> themes\半导体国产替代\wiki\设备国产化.md
+- [WARNING] duplicates: Pages may be duplicates (similarity: 78%): themes\半导体国产替代\wiki\市场与需求.md <-> themes\半导体国产替代\wiki\资本投入.md
+- [WARNING] duplicates: Pages may be duplicates (similarity: 81%): themes\半导体国产替代\wiki\设备国产化.md <-> themes\半导体国产替代\wiki\资本投入.md
+- [WARNING] duplicates: Pages may be duplicates (similarity: 84%): themes\高端制造\wiki\技术突破.md <-> themes\高端制造\wiki\政策支持.md
+- [ERROR] frontmatter: Missing required fields: title, entity, type, last_updated, sources_count, tags
+- [ERROR] frontmatter: Missing required fields: title, entity, type, last_updated, sources_count, tags
+
+## [2026-07-07 21:06] INFO lint | 0 errors, 49 warnings, 47 info
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-21)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-21)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-21)
+- [WARNING] stale: Page not updated for 73 days (last: 2026-04-25)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-21)
+- [WARNING] stale: Page not updated for 73 days (last: 2026-04-25)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-21)
+- [WARNING] stale: Page not updated for 73 days (last: 2026-04-25)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 73 days (last: 2026-04-25)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 86 days (last: 2026-04-12)
+- [WARNING] stale: Page not updated for 86 days (last: 2026-04-12)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] empty: Timeline has no entries
+- [WARNING] config: Company directory missing: 明源云
+- [WARNING] config: Company directory missing: 泽达易盛
+- [WARNING] config: Company directory missing: 石药集团
+- [WARNING] config: Company directory missing: 禾信仪器
+- [WARNING] config: Company directory missing: 绝味食品
+- [WARNING] config: Company directory missing: 网易
+- [WARNING] config: Company directory missing: 茅台
+- [WARNING] config: Company directory missing: 药明生物
+- [WARNING] config: Company directory missing: 锦江股份
+- [WARNING] freshness: No news collection found in log
+- [WARNING] duplicates: Pages may be duplicates (similarity: 77%): themes\半导体国产替代\wiki\市场与需求.md <-> themes\半导体国产替代\wiki\设备国产化.md
+- [WARNING] duplicates: Pages may be duplicates (similarity: 78%): themes\半导体国产替代\wiki\市场与需求.md <-> themes\半导体国产替代\wiki\资本投入.md
+- [WARNING] duplicates: Pages may be duplicates (similarity: 81%): themes\半导体国产替代\wiki\设备国产化.md <-> themes\半导体国产替代\wiki\资本投入.md
+- [WARNING] duplicates: Pages may be duplicates (similarity: 84%): themes\高端制造\wiki\技术突破.md <-> themes\高端制造\wiki\政策支持.md
+
+## [2026-07-07 21:06] INFO lint | 0 errors, 49 warnings, 47 info
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-21)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-21)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-21)
+- [WARNING] stale: Page not updated for 73 days (last: 2026-04-25)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-21)
+- [WARNING] stale: Page not updated for 73 days (last: 2026-04-25)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-21)
+- [WARNING] stale: Page not updated for 73 days (last: 2026-04-25)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 73 days (last: 2026-04-25)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 86 days (last: 2026-04-12)
+- [WARNING] stale: Page not updated for 86 days (last: 2026-04-12)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] empty: Timeline has no entries
+- [WARNING] config: Company directory missing: 明源云
+- [WARNING] config: Company directory missing: 泽达易盛
+- [WARNING] config: Company directory missing: 石药集团
+- [WARNING] config: Company directory missing: 禾信仪器
+- [WARNING] config: Company directory missing: 绝味食品
+- [WARNING] config: Company directory missing: 网易
+- [WARNING] config: Company directory missing: 茅台
+- [WARNING] config: Company directory missing: 药明生物
+- [WARNING] config: Company directory missing: 锦江股份
+- [WARNING] freshness: No news collection found in log
+- [WARNING] duplicates: Pages may be duplicates (similarity: 77%): themes\半导体国产替代\wiki\市场与需求.md <-> themes\半导体国产替代\wiki\设备国产化.md
+- [WARNING] duplicates: Pages may be duplicates (similarity: 78%): themes\半导体国产替代\wiki\市场与需求.md <-> themes\半导体国产替代\wiki\资本投入.md
+- [WARNING] duplicates: Pages may be duplicates (similarity: 81%): themes\半导体国产替代\wiki\设备国产化.md <-> themes\半导体国产替代\wiki\资本投入.md
+- [WARNING] duplicates: Pages may be duplicates (similarity: 84%): themes\高端制造\wiki\技术突破.md <-> themes\高端制造\wiki\政策支持.md
+
+## [2026-07-07 21:06] INFO lint | 0 errors, 49 warnings, 47 info
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-21)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-21)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-21)
+- [WARNING] stale: Page not updated for 73 days (last: 2026-04-25)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-21)
+- [WARNING] stale: Page not updated for 73 days (last: 2026-04-25)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-21)
+- [WARNING] stale: Page not updated for 73 days (last: 2026-04-25)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 73 days (last: 2026-04-25)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 86 days (last: 2026-04-12)
+- [WARNING] stale: Page not updated for 86 days (last: 2026-04-12)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] empty: Timeline has no entries
+- [WARNING] config: Company directory missing: 明源云
+- [WARNING] config: Company directory missing: 泽达易盛
+- [WARNING] config: Company directory missing: 石药集团
+- [WARNING] config: Company directory missing: 禾信仪器
+- [WARNING] config: Company directory missing: 绝味食品
+- [WARNING] config: Company directory missing: 网易
+- [WARNING] config: Company directory missing: 茅台
+- [WARNING] config: Company directory missing: 药明生物
+- [WARNING] config: Company directory missing: 锦江股份
+- [WARNING] freshness: No news collection found in log
+- [WARNING] duplicates: Pages may be duplicates (similarity: 77%): themes\半导体国产替代\wiki\市场与需求.md <-> themes\半导体国产替代\wiki\设备国产化.md
+- [WARNING] duplicates: Pages may be duplicates (similarity: 78%): themes\半导体国产替代\wiki\市场与需求.md <-> themes\半导体国产替代\wiki\资本投入.md
+- [WARNING] duplicates: Pages may be duplicates (similarity: 81%): themes\半导体国产替代\wiki\设备国产化.md <-> themes\半导体国产替代\wiki\资本投入.md
+- [WARNING] duplicates: Pages may be duplicates (similarity: 84%): themes\高端制造\wiki\技术突破.md <-> themes\高端制造\wiki\政策支持.md
+
+## [2026-07-07 21:25] INFO lint | 0 errors, 49 warnings, 47 info
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-21)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-21)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-21)
+- [WARNING] stale: Page not updated for 73 days (last: 2026-04-25)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-21)
+- [WARNING] stale: Page not updated for 73 days (last: 2026-04-25)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-21)
+- [WARNING] stale: Page not updated for 73 days (last: 2026-04-25)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 73 days (last: 2026-04-25)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 86 days (last: 2026-04-12)
+- [WARNING] stale: Page not updated for 86 days (last: 2026-04-12)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-19)
+- [WARNING] empty: Timeline has no entries
+- [WARNING] config: Company directory missing: 明源云
+- [WARNING] config: Company directory missing: 泽达易盛
+- [WARNING] config: Company directory missing: 石药集团
+- [WARNING] config: Company directory missing: 禾信仪器
+- [WARNING] config: Company directory missing: 绝味食品
+- [WARNING] config: Company directory missing: 网易
+- [WARNING] config: Company directory missing: 茅台
+- [WARNING] config: Company directory missing: 药明生物
+- [WARNING] config: Company directory missing: 锦江股份
+- [WARNING] freshness: No news collection found in log
+- [WARNING] duplicates: Pages may be duplicates (similarity: 77%): themes\半导体国产替代\wiki\市场与需求.md <-> themes\半导体国产替代\wiki\设备国产化.md
+- [WARNING] duplicates: Pages may be duplicates (similarity: 78%): themes\半导体国产替代\wiki\市场与需求.md <-> themes\半导体国产替代\wiki\资本投入.md
+- [WARNING] duplicates: Pages may be duplicates (similarity: 81%): themes\半导体国产替代\wiki\设备国产化.md <-> themes\半导体国产替代\wiki\资本投入.md
+- [WARNING] duplicates: Pages may be duplicates (similarity: 84%): themes\高端制造\wiki\技术突破.md <-> themes\高端制造\wiki\政策支持.md
+
+## [2026-07-07 21:35] INFO distill | 行业蒸馏: 6 行业完成
+
+## [2026-07-09 21:47] INFO query | Query answer saved: 测试问题？ -> 中微公司
+
+## [2026-07-09 21:55] INFO lint | 0 errors, 28 warnings, 0 info
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-21)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-21)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-21)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-21)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-25)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 81 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-25)
+- [WARNING] stale: Page not updated for 81 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 81 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 81 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 81 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 88 days (last: 2026-04-12)
+- [WARNING] stale: Page not updated for 88 days (last: 2026-04-12)
+- [WARNING] stale: Page not updated for 81 days (last: 2026-04-19)
+
+## [2026-07-09 21:56] INFO lint | 0 errors, 28 warnings, 0 info
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-21)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-21)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-21)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 79 days (last: 2026-04-21)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-25)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 77 days (last: 2026-04-23)
+- [WARNING] stale: Page not updated for 81 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 75 days (last: 2026-04-25)
+- [WARNING] stale: Page not updated for 81 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 81 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 81 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 81 days (last: 2026-04-19)
+- [WARNING] stale: Page not updated for 88 days (last: 2026-04-12)
+- [WARNING] stale: Page not updated for 88 days (last: 2026-04-12)
+- [WARNING] stale: Page not updated for 81 days (last: 2026-04-19)
+
+## [2026-07-10 21:24] INFO query | Query answer saved: 测试问题？ -> 中微公司
+
+## [2026-07-10 21:28] INFO query | Query answer saved: 测试问题？ -> 中微公司
+
+## [2026-07-10 21:37] INFO query | Query answer saved: 测试问题？ -> 中微公司
+
+## [2026-07-10 21:42] INFO query | Query answer saved: 测试问题？ -> 中微公司
+
+## [2026-07-10 21:44] INFO query | Query answer saved: 测试问题？ -> 中微公司
+
+## [2026-07-10 21:55] INFO query | Query answer saved: 测试问题？ -> 中微公司
+
+## [2026-07-10 21:56] INFO query | Query answer saved: 测试问题？ -> 中微公司
+
+## [2026-07-10 21:57] INFO query | Query answer saved: 测试问题？ -> 中微公司
+
+## [2026-07-10 21:59] INFO query | Query answer saved: 测试问题？ -> 中微公司
+
+## [2026-07-10 21:59] INFO query | Query answer saved: 测试问题？ -> 中微公司
+
+## [2026-07-10 22:01] INFO query | Query answer saved: 测试问题？ -> 中微公司
+
+## [2026-07-10 22:03] INFO query | Query answer saved: 测试问题？ -> 中微公司
+
+## [2026-07-10 22:04] INFO query | Query answer saved: 测试问题？ -> 中微公司
+
+## [2026-07-10 22:15] INFO query | Query answer saved: 测试问题？ -> 中微公司
+
+## [2026-07-10 22:16] INFO query | Query answer saved: 测试问题？ -> 中微公司
+
+## [2026-07-10 22:17] INFO query | Query answer saved: 测试问题？ -> 中微公司
+
+## [2026-07-10 22:17] INFO query | Query answer saved: 测试问题？ -> 中微公司
+
+## [2026-07-10 22:22] INFO query | Query answer saved: 测试问题？ -> 中微公司
+
+## [2026-07-10 22:33] INFO query | Query answer saved: 测试问题？ -> 中微公司
+
+## [2026-07-11 08:04] INFO query | Query answer saved: 测试问题？ -> 中微公司
+

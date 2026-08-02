@@ -16,7 +16,6 @@ pdf_extract_v2.py — PDF 文本提取模块（v2，LLM驱动简化版）
 
 import html
 import re
-import os
 import sys
 from pathlib import Path
 from typing import Dict, List, Optional, Union
@@ -55,7 +54,7 @@ def _text_quality_score(text: str) -> float:
     ascii_chars = len(re.findall(r"[a-zA-Z0-9]", text))
     replacement = text.count("\ufffd")  # Unicode 替换字符 �
     control = sum(1 for c in text if ord(c) < 32 and c not in "\n\t\r")
-    high_private = sum(1 for c in text if 0xE000 <= ord(c) <= 0xF8FF)
+    sum(1 for c in text if 0xE000 <= ord(c) <= 0xF8FF)
 
     # 有效文本比例
     effective = chinese + ascii_chars

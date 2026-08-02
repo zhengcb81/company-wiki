@@ -115,9 +115,10 @@ def test_source_catalog_persists_paragraphs_empty_pages_and_stable_global_offset
     normalized_text = "First paragraph.\n\nSecond paragraph.\n\nThird page."
     for item in paragraph_values:
         coordinates = item["coordinates"]
-        assert normalized_text[
-            coordinates["char_start"] : coordinates["char_end"]
-        ] == item["raw_text"]
+        assert (
+            normalized_text[coordinates["char_start"] : coordinates["char_end"]]
+            == item["raw_text"]
+        )
     empty_page = [
         item
         for item in first
@@ -151,9 +152,7 @@ def test_source_catalog_persists_table_cells_without_duplicate_narrative(tmp_pat
     assert report.completed == 1
     assert _file_identity(pdf_path) == before
     paragraphs = [
-        item
-        for item in evidence
-        if item["coordinates"]["paragraph_index"] is not None
+        item for item in evidence if item["coordinates"]["paragraph_index"] is not None
     ]
     cells = [
         item for item in evidence if item["coordinates"]["table_index"] is not None
@@ -242,10 +241,57 @@ def test_corrupt_pdf_remains_fail_closed_and_source_immutable(tmp_path):
     catalog.scan()
     report = catalog.normalize()
 
-    assert report.failed == 1
+    # Deterministic corruption maps to unsupported, never to a retryable
+    # failed state (WR-10.13 unsupported/failed mutual exclusivity).
+    assert report.unsupported == 1
+    assert report.failed == 0
     assert _file_identity(pdf_path) == before
     assert _evidence(catalog) == []
     normalized_path = Path(catalog.query(limit=1)[0]["normalized_path"])
     normalized = normalized_path.read_text(encoding="utf-8")
     assert "normalization_status: unsupported" in normalized
     assert "loc:v1/page:" not in normalized
+
+
+def test_snapshot_builder_normalizes_non_nfc_table_cells():
+    """Non-NFC table cells (e.g. U+2126 OHM SIGN) must be NFC-normalized so
+    pdf_page_aware's strict input validation does not reject a valid PDF.
+    Regression for the two prospectus PDFs that failed with
+    ``PageAwarePDFAdapterError: table cell must use Unicode NFC``.
+    """
+    import unicodedata
+
+    normalizer = _normalizer_module()
+
+    class _Table:
+        bbox = (10.0, 10.0, 200.0, 100.0)
+        row_count = 1
+        col_count = 1
+
+        def extract(self):
+            return [("\u2126",)]  # OHM SIGN, non-NFC; NFC form is U+03A9
+
+        def to_markdown(self):
+            return "| \u2126 |"
+
+    class _Finder:
+        tables = (_Table(),)
+
+    class _Page:
+        def find_tables(self):
+            return _Finder()
+
+        def get_text(self, mode: str, *, sort: bool):
+            assert mode == "blocks"
+            assert sort is True
+            return []
+
+    pages = normalizer._pymupdf_page_snapshots([_Page()])
+    assert len(pages) == 1
+    tables = pages[0]["tables"]
+    assert len(tables) == 1
+    (cell,) = tables[0]["data"][0]
+    assert cell == "\u03a9"
+    assert unicodedata.normalize("NFC", cell) == cell
+    # markdown normalized too
+    assert tables[0]["markdown"] == "| \u03a9 |"

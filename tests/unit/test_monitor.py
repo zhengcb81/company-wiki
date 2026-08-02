@@ -3,7 +3,6 @@
 """
 import pytest
 import time
-import tempfile
 from pathlib import Path
 
 import sys

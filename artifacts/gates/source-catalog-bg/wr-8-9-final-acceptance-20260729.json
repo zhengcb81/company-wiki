@@ -1,0 +1,98 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "wr-8-9-final-acceptance-20260729",
+  "recorded_at": "2026-07-29T22:29:14.3804968Z",
+  "status": "PASS",
+  "work_orders": [
+    "WR-8",
+    "WR-9"
+  ],
+  "production_worker": {
+    "desired_state": "enabled",
+    "runtime_state": "running",
+    "pid": 16800,
+    "production_worker_count": 1,
+    "pytest_temp_worker_count": 0,
+    "foreign_worker_count": 0,
+    "status_receipt": "artifacts/gates/source-catalog-bg/wr-8-9-final-worker-status-20260729.json"
+  },
+  "wr_8": {
+    "semantic_query": "ranked_locations window query",
+    "fingerprinted_documents": 1630,
+    "result_rows": 1630,
+    "elapsed_seconds": 0.465,
+    "threshold_seconds": 10,
+    "correlated_location_search": false,
+    "benchmark_receipt": "artifacts/gates/source-catalog-bg/wr-8-semantic-query-benchmark-20260729.json",
+    "export_progress_total": 12,
+    "last_export_progress_detail": "wrote source catalog index",
+    "production_export_duration_seconds_observed": [
+      38.191,
+      49.037
+    ],
+    "pilot_receipt": "artifacts/gates/source-catalog-bg/wr-8-production-export-pilot-20260729.json",
+    "pilot_pass": true,
+    "pilot_normalized_delta": 11,
+    "pilot_pending_delta": 11,
+    "pilot_artifact_delta": 11,
+    "db_quick_check": "ok",
+    "raw_sample_unchanged": true,
+    "stockwiki_writes": 0
+  },
+  "wr_9": {
+    "enumeration_visibility_contract": "independent SQLite connection sees the committed running row during enumeration",
+    "enumeration_exception_contract": "the run persists as interrupted with completed_at and the original exception is re-raised",
+    "production_scan_run_id": "scan-d6c152040ff7426883089cc032de85da",
+    "production_scan_started_at": "2026-07-29T21:50:26Z",
+    "production_scan_completed_at": "2026-07-29T21:56:33Z",
+    "production_scan_status": "completed_with_errors",
+    "production_scan_errors": 1,
+    "production_scan_files_seen": 46781,
+    "production_active_scan_sample": {
+      "worker_status": "scanning",
+      "latest_running_scan": "present",
+      "operation_lock": "live",
+      "pid": 1640
+    },
+    "production_scan_pilot_receipt": "artifacts/gates/source-catalog-bg/wr-9-production-scan-pilot-20260729.json",
+    "production_scan_pilot_status": "FAIL",
+    "production_scan_pilot_first_failure": "scan_enumeration_running_record_not_visible",
+    "production_scan_pilot_interpretation": "The sampler started after root enumeration. Its first sample was the same active scan's file phase and showed latest_running_scan present; the exact enumeration boundary is proven by the independent-connection contract test. This failed receipt is retained and is not represented as PASS.",
+    "health_identity_contract": "latest_running_scan and last_completed_scan expose run_id, timestamps, and status"
+  },
+  "restart": {
+    "old_pid": 1640,
+    "new_pid": 16800,
+    "pre_receipt": "artifacts/gates/source-catalog-bg/wr-8-9-restart2-pre-20260729.json",
+    "stop_receipt": "artifacts/gates/source-catalog-bg/wr-8-9-restart2-stop-20260729.json",
+    "start_receipt": "artifacts/gates/source-catalog-bg/wr-8-9-restart2-start-20260729.json",
+    "old_pid_absent_after_stop": true,
+    "new_worker_loaded_persistent_export_fields": true
+  },
+  "gates": {
+    "expanded_contract_tests": {
+      "passed": 152,
+      "failed": 0,
+      "skipped": 0,
+      "xfailed": 0,
+      "xpassed": 0
+    },
+    "background_runxfail": {
+      "passed": 8,
+      "failed": 0
+    },
+    "windows_real_lifecycle_stress": {
+      "passed": 10,
+      "attempts": 10
+    },
+    "ruff": "PASS",
+    "compileall": "PASS",
+    "git_diff_check": "PASS"
+  },
+  "residual_non_blocking_conditions": [
+    "The latest full scan completed_with_errors with one file-level error; the scheduler continued into normalization, summarization, fingerprinting, and export.",
+    "Individual LLM summaries can fail schema or source-only policy validation; failures remain document-scoped and do not stop the Markdown queue.",
+    "A 22000-plus Markdown backlog remains and is expected to drain gradually with single-threaded batches."
+  ],
+  "verdict": "healthy"
+}

@@ -1,0 +1,420 @@
+{
+  "schema_version": "1.0",
+  "work_unit": "CW-2.28C",
+  "phase": 2,
+  "attempt_id": "phase-2-attempt-0001",
+  "status": "PASS",
+  "started_at": "2026-07-26T15:00:00Z",
+  "completed_at": "2026-07-26T16:09:53Z",
+  "executor": "claude-code/glm-5.2",
+  "project_root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+  "git_heads": {
+    "company-wiki": "a571606"
+  },
+  "supersedes_receipt_sha256": null,
+  "product_file_hashes_before": {
+    "src/company_wiki/source_catalog/models.py": {
+      "sha256": "20420dfe81d5cd73a254876a8d57452f2c92b54befc80ef84cafe4d32ffbe498",
+      "size": 3737,
+      "mtime": 1785056167.5471706
+    },
+    "src/company_wiki/source_catalog/store.py": {
+      "sha256": "76e559d1aa91a53a4dba266b8e3e41bfaf1b5526310c74d80516c79e663ed792",
+      "size": 29590,
+      "mtime": 1785061314.5777988
+    },
+    "src/company_wiki/source_catalog/normalizer.py": {
+      "sha256": "36d47c1d91447d4b64a48497b4f12623efaa7bde0c505ab5cf93b9c17041f284",
+      "size": 39203,
+      "mtime": 1785056113.0209315
+    },
+    "src/company_wiki/source_catalog/service.py": {
+      "sha256": "055a3f169f45f31c0bd7007da65ae0ab28d5f072f6ab55360b323d582343b664",
+      "size": 35623,
+      "mtime": 1785056124.3447273
+    },
+    "src/company_wiki/source_catalog/cli.py": {
+      "sha256": "5dc3ca143d8e5c5cd5ce0f1c1b42018f79f6a724990e31e5bf629487f880887e",
+      "size": 31345,
+      "mtime": 1785061484.5393498
+    },
+    "src/company_wiki/source_catalog/worker.py": {
+      "sha256": "4ae4ddc661f4d1dfd4b2a1dcfcff119793c06d4b4aabedb82d1405dd5d094701",
+      "size": 30356,
+      "mtime": 1785061576.6419058
+    },
+    "src/company_wiki/source_catalog/control.py": {
+      "sha256": "be6ab3bf17129397ee6bc08611636021ac6a75c4e8c2bbf62bedcfe5546973dd",
+      "size": 22083,
+      "mtime": 1785017019.8477764
+    },
+    "src/company_wiki/source_catalog/resolver.py": {
+      "sha256": "0c412e6f2af5389fd22fecee4deb833ff3514b6de47fd08fe9e23007cecc57d1",
+      "size": 23055,
+      "mtime": 1785060128.8965092
+    },
+    "src/company_wiki/source_catalog/duplicate_cleanup.py": {
+      "sha256": "d2cf4413a8558e46c4fa2a6cf2594616d34cbb14890ccfa2b550a534440c031d",
+      "size": 24694,
+      "mtime": 1784671653.2299132
+    },
+    "config/source_catalog_worker.yaml": {
+      "sha256": "263b52c4ada6f1b19ced388f758dda419230c2d50891b0d8a94ec0190ba0d0d2",
+      "size": 1027,
+      "mtime": 1785017146.7325215
+    },
+    "scripts/source_catalog_control.ps1": {
+      "sha256": "4f643b2fbf79c17b3eea8903dbb194fba26f27b96cffd5a7991c4cb516ac659f",
+      "size": 18417,
+      "mtime": 1784969995.651992
+    },
+    "docs/contracts/cw-2.28-receipt.schema.json": {
+      "missing": true
+    },
+    "tests/contract/test_cw_228_receipt.py": {
+      "missing": true
+    },
+    "artifacts/gates/cw-2.28/receipt-index.json": {
+      "missing": true
+    }
+  },
+  "product_file_hashes_after": {
+    "src/company_wiki/source_catalog/models.py": {
+      "sha256": "84d5ca92a876b03be2f031d8e1c661fe4bb4411a0747347272a00fa8ebde2303",
+      "size": 5461
+    },
+    "src/company_wiki/source_catalog/store.py": {
+      "sha256": "ce612462cc942e017f33192a18f06143e1d5485dcd38a6a2e14a080c3f089589",
+      "size": 41838
+    },
+    "src/company_wiki/source_catalog/normalizer.py": {
+      "sha256": "2b62c00a0d2d1c95b81a0af149bbf90eaa089ce0e25e3c2da14d9833e10dafdf",
+      "size": 42444
+    },
+    "src/company_wiki/source_catalog/service.py": {
+      "sha256": "d90523b5c58ec91ba7a3869b59217ad881852ed94654daeeede060913a103c5b",
+      "size": 36547
+    },
+    "src/company_wiki/source_catalog/cli.py": {
+      "sha256": "5dc3ca143d8e5c5cd5ce0f1c1b42018f79f6a724990e31e5bf629487f880887e",
+      "size": 31345
+    },
+    "src/company_wiki/source_catalog/worker.py": {
+      "sha256": "9f219b87a1cb9d090130b9cb5c38fc5e84866d672fa3c3f6034092b360a65d1c",
+      "size": 32077
+    },
+    "src/company_wiki/source_catalog/control.py": {
+      "sha256": "be6ab3bf17129397ee6bc08611636021ac6a75c4e8c2bbf62bedcfe5546973dd",
+      "size": 22083
+    },
+    "src/company_wiki/source_catalog/resolver.py": {
+      "sha256": "75a11a3f842124e263d7b30b8cc81eccb0064f8a0f42cb0276e1432708812429",
+      "size": 23277
+    },
+    "src/company_wiki/source_catalog/duplicate_cleanup.py": {
+      "sha256": "d2cf4413a8558e46c4fa2a6cf2594616d34cbb14890ccfa2b550a534440c031d",
+      "size": 24694
+    },
+    "src/company_wiki/source_catalog/scheduler_policy.py": {
+      "sha256": "f3a28331b8584ead85e3acfaafbfa2915dab96ab15ae12c59b00fbed2caeeca6",
+      "size": 3684
+    },
+    "src/company_wiki/source_catalog/extraction_quality.py": {
+      "sha256": "e0719854c838d687e5511ddc143332595914c8b1c303ada714ea26973d0d8834",
+      "size": 26087
+    },
+    "config/source_catalog_worker.yaml": {
+      "sha256": "1ec79cfc3f0b812f3f13301afb4abea775efb6e737bd55a77c7a8e294e516c15",
+      "size": 1419
+    },
+    "tests/contract/test_cw_228_receipt.py": {
+      "sha256": "2a74116ee7517929a9d02e270b3b768c02cb93a6a2cbf030e150fdaa3f560b06",
+      "size": 11197
+    },
+    "tests/contract/test_cw_228_backfill.py": {
+      "sha256": "036f0fe0d8395beedc2c3787d43c1943bcb714eb1ca86ff6268f9f3f97807c6f",
+      "size": 21296
+    },
+    "tests/contract/test_source_catalog_schema_migration.py": {
+      "sha256": "aad7f6d1fc09a19cc06897d9c532fd03204c38b4f5e8e083bd0dad5050875c43",
+      "size": 10767
+    },
+    "tests/contract/test_source_catalog_worker.py": {
+      "sha256": "ac410b5b7359b39125aa0bd37838a8f254679d39418e00702230d35e1f9ad3ab",
+      "size": 59983
+    },
+    "tests/helpers/cw228_receipt.py": {
+      "sha256": "d617dbb633d8cca2e2b952549ac6d7696396046260e99dfed70f30db145d220b",
+      "size": 10484
+    },
+    "docs/contracts/cw-2.28-receipt.schema.json": {
+      "sha256": "a6d3b54309452bd75c6952c40dbc6049b9e8a7f7ecc0c50fecd6a16c1899c4f4",
+      "size": 6330
+    },
+    "artifacts/gates/cw-2.28/phase-0-attempt-0001.json": {
+      "sha256": "9e2becab51c34058a54b9bcaeb38064a93ac506209444ab19f37093954b7d853",
+      "size": 5436
+    },
+    "artifacts/gates/cw-2.28/phase-1-attempt-0001.json": {
+      "sha256": "5396b68512bde8ae143af1d1305b711f9d2af99d600e816ea8ab9ddb7785974d",
+      "size": 3191
+    },
+    "artifacts/gates/cw-2.28/receipt-index.json": {
+      "sha256": "9b2111988afeba47e5b77d49a26538154cc3a3a5d68b073972d6ebe5015fe118",
+      "size": 331
+    }
+  },
+  "command_results": [
+    {
+      "command_id": "cmd-1",
+      "argv": [
+        "pytest",
+        "-q",
+        "tests/contract/test_cw_228_receipt.py"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "started_at": "2026-07-26T16:09:53Z",
+      "completed_at": "2026-07-26T16:09:53Z",
+      "exit_code": 0,
+      "summary": "17 passed",
+      "stdout_sha256": null,
+      "stderr_sha256": null,
+      "failed_tests": [],
+      "skipped_tests": [],
+      "xfailed_tests": []
+    },
+    {
+      "command_id": "cmd-2",
+      "argv": [
+        "pytest",
+        "-q",
+        "tests/contract/test_source_catalog_schema_migration.py",
+        "tests/contract/test_source_catalog_text_fingerprint.py",
+        "tests/contract/test_source_catalog_semantic_duplicates.py"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "started_at": "2026-07-26T16:09:53Z",
+      "completed_at": "2026-07-26T16:09:53Z",
+      "exit_code": 0,
+      "summary": "18 passed",
+      "stdout_sha256": null,
+      "stderr_sha256": null,
+      "failed_tests": [],
+      "skipped_tests": [],
+      "xfailed_tests": []
+    },
+    {
+      "command_id": "cmd-3",
+      "argv": [
+        "pytest",
+        "-q",
+        "tests/contract/test_cw_228_backfill.py",
+        "tests/contract/test_source_catalog_worker.py",
+        "tests/contract/test_source_catalog_control.py"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "started_at": "2026-07-26T16:09:53Z",
+      "completed_at": "2026-07-26T16:09:53Z",
+      "exit_code": 0,
+      "summary": "56 passed",
+      "stdout_sha256": null,
+      "stderr_sha256": null,
+      "failed_tests": [],
+      "skipped_tests": [],
+      "xfailed_tests": []
+    },
+    {
+      "command_id": "cmd-4",
+      "argv": [
+        "pytest",
+        "-q",
+        "tests/contract/test_source_catalog_resolver.py",
+        "tests/contract/test_assertion_service.py"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "started_at": "2026-07-26T16:09:53Z",
+      "completed_at": "2026-07-26T16:09:53Z",
+      "exit_code": 0,
+      "summary": "11 passed",
+      "stdout_sha256": null,
+      "stderr_sha256": null,
+      "failed_tests": [],
+      "skipped_tests": [],
+      "xfailed_tests": []
+    },
+    {
+      "command_id": "cmd-5",
+      "argv": [
+        "pytest",
+        "-q",
+        "tests/contract/test_source_catalog_duplicate_cleanup.py"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "started_at": "2026-07-26T16:09:53Z",
+      "completed_at": "2026-07-26T16:09:53Z",
+      "exit_code": 0,
+      "summary": "7 passed",
+      "stdout_sha256": null,
+      "stderr_sha256": null,
+      "failed_tests": [],
+      "skipped_tests": [],
+      "xfailed_tests": []
+    },
+    {
+      "command_id": "cmd-6",
+      "argv": [
+        "ruff",
+        "check",
+        "src/company_wiki/source_catalog"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "started_at": "2026-07-26T16:09:53Z",
+      "completed_at": "2026-07-26T16:09:53Z",
+      "exit_code": 0,
+      "summary": "All checks passed!",
+      "stdout_sha256": null,
+      "stderr_sha256": null,
+      "failed_tests": [],
+      "skipped_tests": [],
+      "xfailed_tests": []
+    },
+    {
+      "command_id": "cmd-7",
+      "argv": [
+        "compileall",
+        "-q",
+        "src/company_wiki/source_catalog",
+        "tests/contract"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "started_at": "2026-07-26T16:09:53Z",
+      "completed_at": "2026-07-26T16:09:53Z",
+      "exit_code": 0,
+      "summary": "0 errors",
+      "stdout_sha256": null,
+      "stderr_sha256": null,
+      "failed_tests": [],
+      "skipped_tests": [],
+      "xfailed_tests": []
+    },
+    {
+      "command_id": "cmd-8",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "--",
+        "src/company_wiki/source_catalog",
+        "tests/contract",
+        "config/source_catalog_worker.yaml",
+        "scripts/source_catalog_control.ps1",
+        "docs/contracts",
+        "artifacts/gates/cw-2.28"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "started_at": "2026-07-26T16:09:53Z",
+      "completed_at": "2026-07-26T16:09:53Z",
+      "exit_code": 0,
+      "summary": "clean",
+      "stdout_sha256": null,
+      "stderr_sha256": null,
+      "failed_tests": [],
+      "skipped_tests": [],
+      "xfailed_tests": []
+    }
+  ],
+  "invariant_results": [
+    {
+      "name": "no_production_db_writes",
+      "passed": true,
+      "detail": "all tests use tmp_path; ambient worker unaffected"
+    },
+    {
+      "name": "no_raw_changes",
+      "passed": true,
+      "detail": "backfill is read-only on raw; no catalog DB writes outside temp"
+    },
+    {
+      "name": "no_network_or_llm",
+      "passed": true,
+      "detail": "Phase 2R is entirely offline"
+    },
+    {
+      "name": "all_gate_commands_exit_zero",
+      "passed": true,
+      "detail": "8 commands, all exit 0"
+    },
+    {
+      "name": "zero_skip_xfail",
+      "passed": true,
+      "detail": "0 skipped, 0 xfailed across all 5 pytest commands (109 total)"
+    },
+    {
+      "name": "ruff_clean_scoped",
+      "passed": true,
+      "detail": "src/company_wiki/source_catalog passes"
+    },
+    {
+      "name": "diff_check_clean",
+      "passed": true,
+      "detail": "git diff --check scoped pass"
+    }
+  ],
+  "authorization_used": [
+    "offline_phase_2r"
+  ],
+  "concurrent_change_detected": false,
+  "catalog_before": "see phase-2r-preflight-baseline.json",
+  "catalog_after": "unchanged from before (no prod DB writes)",
+  "db_backup": null,
+  "raw_manifest_before": "unchanged from Phase 0 legacy baseline",
+  "raw_manifest_after": "unchanged (no raw modifications)",
+  "pytest_summary": {
+    "cmd1_receipt": "17 passed/0/0/0",
+    "cmd2_schema_fp_semantic": "18 passed/0/0/0",
+    "cmd3_backfill_worker_control": "56 passed/0/0/0",
+    "cmd4_resolver_assertion": "11 passed/0/0/0",
+    "cmd5_duplicate_cleanup": "7 passed/0/0/0",
+    "total": "109 passed, 0 failed, 0 skipped, 0 xfailed"
+  },
+  "static_summary": {
+    "ruff_scoped": "0 errors (src/company_wiki/source_catalog)",
+    "compileall": "0 errors",
+    "diff_check": "clean"
+  },
+  "network_used": false,
+  "downloader_invocations": 0,
+  "llm_invocations": 0,
+  "files_created": [
+    "docs/contracts/cw-2.28-receipt.schema.json",
+    "tests/helpers/cw228_receipt.py",
+    "tests/contract/test_cw_228_receipt.py",
+    "artifacts/gates/cw-2.28/phase-0-attempt-0001.json",
+    "artifacts/gates/cw-2.28/phase-1-attempt-0001.json",
+    "artifacts/gates/cw-2.28/receipt-index.json",
+    "artifacts/gates/cw-2.28/phase-2r-preflight-baseline.json",
+    "artifacts/gates/cw-2.28/phase-2-attempt-0001.json"
+  ],
+  "files_modified": [
+    "src/company_wiki/source_catalog/models.py",
+    "src/company_wiki/source_catalog/store.py",
+    "src/company_wiki/source_catalog/normalizer.py",
+    "src/company_wiki/source_catalog/service.py",
+    "src/company_wiki/source_catalog/worker.py",
+    "src/company_wiki/source_catalog/scheduler_policy.py",
+    "src/company_wiki/source_catalog/resolver.py",
+    "src/company_wiki/source_catalog/extraction_quality.py",
+    "config/source_catalog_worker.yaml",
+    "tests/contract/test_cw_228_backfill.py",
+    "tests/contract/test_source_catalog_schema_migration.py",
+    "tests/contract/test_source_catalog_worker.py",
+    "task_plan.md",
+    "findings.md",
+    "progress.md"
+  ],
+  "diff_allowlist_result": "PASS (all files in Phase 2R allowlist + planning)",
+  "secret_scan_result": "0 active secrets",
+  "errors": [],
+  "blocker": null,
+  "next_phase": "CW-2.28D (Phase 3R: catalog drill/rollback)"
+}

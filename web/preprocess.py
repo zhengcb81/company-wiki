@@ -139,7 +139,8 @@ def convert_wikilinks(content: str, page_map: dict, current_rel_path: str) -> st
         if rel.endswith(".md"):
             rel = rel[:-3]
 
-        return f"[{display}]({quote(rel, safe='/:@!$&\'()*+,;=-._~')})"
+        _safe_chars = "/:@!$&'()*+,;=-._~"
+        return f"[{display}]({quote(rel, safe=_safe_chars)})"
 
     # 匹配 [[...]] 但不匹配已在代码块中的
     result = []
@@ -626,7 +627,7 @@ def download_visjs():
     import urllib.request
     vis_url = "https://unpkg.com/vis-network@9.1.9/dist/vis-network.min.js"
 
-    logger.info(f"下载 vis-network.min.js ...")
+    logger.info("下载 vis-network.min.js ...")
     try:
         urllib.request.urlretrieve(vis_url, str(target))
         logger.info(f"已下载: {target}")

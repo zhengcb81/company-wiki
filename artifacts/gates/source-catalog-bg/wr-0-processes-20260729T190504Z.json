@@ -1,0 +1,9 @@
+[
+    {
+        "ProcessId":  25540,
+        "ParentProcessId":  11852,
+        "CreationDate":  "\/Date(1785351904184)\/",
+        "ExecutablePath":  "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "CommandLine":  "\"C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -Command \"try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}\n$env:PYTHONUTF8=\u00271\u0027\n$stamp = [DateTime]::UtcNow.ToString(\u0027yyyyMMddTHHmmssZ\u0027)\n$outDir = Join-Path (Get-Location) \u0027artifacts\\gates\\source-catalog-bg\u0027\nNew-Item -ItemType Directory -Force -Path $outDir | Out-Null\n$statusText = (\u0026 python -m company_wiki.source_catalog.cli --config config/source_catalog.yaml worker-status --worker-config config/source_catalog_worker.yaml 2\u003e\u00261 | Out-String).Trim()\n$statusPath = Join-Path $outDir (\\\"wr-0-worker-status-{0}.json\\\" -f $stamp)\n[System.IO.File]::WriteAllText($statusPath, $statusText + [Environment]::NewLine, [System.Text.UTF8Encoding]::new($false))\n$rows = Get-CimInstance Win32_Process | Where-Object { $_.CommandLine -match \u0027company_wiki\\.source_catalog|source_catalog_worker|source_catalog_control\u0027 } | Select-Object ProcessId,ParentProcessId,CreationDate,ExecutablePath,CommandLine\n$processText = ConvertTo-Json -InputObject @($rows) -Depth 6\n$processPath = Join-Path $outDir (\\\"wr-0-processes-{0}.json\\\" -f $stamp)\n[System.IO.File]::WriteAllText($processPath, $processText + [Environment]::NewLine, [System.Text.UTF8Encoding]::new($false))\n[pscustomobject]@{Stamp=$stamp; WorkerStatus=$statusPath; Processes=$processPath} | ConvertTo-Json -Compress\""
+    }
+]

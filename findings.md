@@ -1,5 +1,41 @@
 # Findings & Decisions
 
+## 2026-08-02 NFC parser 缺陷修复完成 — 已修复并生产生效
+
+- **根因**：`normalizer.py _pymupdf_page_snapshots`（743 行起）在提取表格 `data` 时未对字符串单元格做 NFC 规范化（`table.extract()` 原样返回），而 `pdf_page_aware._cell_value`（pdf_page_aware.py:235）严格校验 NFC → 含非 NFC 字符（如 U+2126 OHM SIGN `Ω`→`Ω`）的表格单元格触发 `PageAwarePDFAdapterError: table cell must use Unicode NFC`。page narrative（805 行）和 table markdown（773 行）已用 `_nfc_lf` 规范化，唯独 `data`（764 行）遗漏 → 不一致。
+- **修复**：`_pymupdf_page_snapshots` 中 `data` 提取对 str 单元格应用 `_nfc_lf`（normalizer.py:764-768），与 narrative/markdown 路径一致。
+- **验证**：
+  - 盈建科招股书 PDF 修复前 FAIL（`PageAwarePDFAdapterError`）→ 修复后 `completed`/`partial`，25363 evidence spans，fingerprint `completed`。
+  - 时代新材招股书 PDF 修复后 `completed`，8211 evidence spans，fingerprint `completed`。
+  - 新增回归测试 `test_snapshot_builder_normalizes_non_nfc_table_cells`（U+2126 场景）。
+- **顺带修复**：`test_corrupt_pdf_remains_fail_closed_and_source_immutable` 第 244 行过时断言 `failed==1` 改为 `unsupported==1, failed==0`（与 WR-10.13 确定性损坏→unsupported 语义一致；此前 WR-10.13 改语义时未同步此测试）。
+- **生产数据修复**（用户确认"仅重置这 2 份"）：pause worker → 备份 2 份文档 artifacts/fingerprint 行（`wr-10-13-nfc-fix-reset-backup-20260802.json`）→ 删除 failed normalized artifact + fingerprint 重置 pending → resume。新 worker（PID 3540，Code `41f08db2c5f1` MATCH）自动重新处理。生产库 `failed_terminal` 从 7→5。
+- **回归**：pdf_page_aware + liveness + backfill + pdf_page_aware_parser = 64 passed；Ruff 通过。
+
+## 2026-08-02 全面深度验收结论 — 四项门禁全部确认有效，发现 1 个遗留 parser 缺陷 + 2 处文档同步问题（均已修复）
+
+- **验收方法**：不依赖 planning 文档记录，逐项独立复核现场证据（重新查 DB、重跑合同测试、独立采集 worker-status、校验 receipt 完整性、验证磁盘代码指纹与 pilot loaded 一致）。
+- **门禁 1（fingerprint terminal）独立复核通过**：corrupt-XLS `06b0fcc7` 仍 `failed_terminal`(XLRDError, attempt=3, next_retry_at=None)；全库 `retryable_failed=0`；terminal 永不重选（select_fingerprint_batch）。DB `quick_check=ok`、`foreign_key_check=0`（最终复核确认）。
+- **门禁 2（最终 fingerprint pilot）独立复核通过**：pilot receipt `pilot_pass=True`、44.5m/29 样本、worker/supervisor PID 唯一、code_match_all=True、db_quick_check=ok、raw/StockWiki unchanged；当前磁盘指纹 `724f0d5a8481` 与 pilot loaded 完全一致（MATCH）。
+- **门禁 3（>900s slow canary）独立复核通过**：slow-canary 合同测试在当前代码下重跑 `2 passed in 56.21s`；隔离演练 receipt verdict=accepted（normalize/fingerprint 各单稳定 parser PID、无 temp leak、生产 DB 零触碰）。
+- **门禁 4（Step 6）独立复核通过**：登录触发新 launcher session `1ec5c35c0d07`（17:23:54Z starting→child_started PID 14476），supervisor 15184→worker 14476 顺序启动、均无主窗口、Code MATCH、worker 健康（heartbeat 2.8s、production 1/1、无 foreign/temp）。**局限**：首屏/30/60/120 秒快照在登录约 1 小时后采集（窗口已过），但核心目标（登录自启动正确、无空白面板）由 launcher/process events + control status 三重独立证据确认。
+- **发现 1（遗留 parser 缺陷，非本次范围）**：`pdf_page_aware.py:103-110` 的 `_require_nfc_lf` 要求表格单元格文本为 Unicode NFC。时代新材、盈建科两份招股书的 PageAware 解析产生非 NFC 文本 → `ParserProcessError: PageAwarePDFAdapterError: table cell must use Unicode NFC` → normalized=`failed`、fingerprint=`failed_terminal`(attempt=3, next_retry_at=None)。已 terminal 不重试（符合有界重试语义），但这是合法 PDF 因 parser 输出校验缺陷被拒。未在 task_plan 记录为待办，建议另立 WU（NFC 规范化在 adapter 输出前处理，而非拒绝）。
+- **发现 2（文档同步，已修复）**：task_plan.md:1481 Step 6 checkbox 未勾选、1461 WR-10.9 状态行仍写 candidate/next-login pending、228 行 WR-10 表仍写 Step 6 pending、1323 行 WR-10 状态仍写 candidate。全部已更新为通过。task_plan 现 `- [ ]` 残留为 0。
+- **发现 3（采集脚本 bug，已修复）**：`scripts/wr109_step6_capture.py` 的 `_run_cmd` 把 stdout 截断到 3000 字符，导致 worker-status（9598 字节）JSON 解析失败、snapshots 内 worker_status 为 None。修复为 `truncate=0`（完整输出）后快照正确含 pid/code_match。脚本已端到端验证（3 快照均 pid=14476、code_match=True）。
+- **回归验证**：`test_source_catalog_parser_liveness.py`+`test_cw_228_backfill.py` = 34 passed；`test_source_catalog_focus_admission/cleanup/worker.py` = 57 passed。全绿。
+
+## 2026-08-02 四项 pending 门禁实施（当前最终代码 724f0d5a8481）— 全部完成，四项 accepted
+
+- **当前分支**：`phase-18-issuer-identity`，HEAD `dd6ab15`。生产 worker 登录后为 14476/supervisor 15184，Code MATCH `724f0d5a8481`（磁盘 source_bundle_fingerprint 逐文件 SHA 一致）。此指纹 ≠ WR-10.15 验收点 `eb10131da6f1`，因为 WR-10.15 后又合并了 issuer identity / quarterly priority 等 commit；因此四项门禁在最终代码下重新验收。
+- **WR-10.13 fingerprint terminal（门禁 1）— accepted**：
+  - corrupt-XLS（东安动力资产负债表 `06b0fcc7`）fingerprint=`failed_terminal`（retry_exhausted:XLRDError, attempt=3, next_retry_at=None），normalized artifact=`unsupported`。
+  - 全库 fingerprint：pending 21027 / completed 2403 / unsupported_terminal 126 / failed_terminal 7，`retryable_failed=0`。
+  - `select_fingerprint_batch`（store.py:1198-1226）只选 pending/到期 retryable，terminal 永不重选；DB `quick_check=ok`/`FK=0`。
+  - receipt：`artifacts/gates/source-catalog-bg/wr-10-13-fingerprint-terminal-acceptance-20260802.json`（SHA 9d268925…）。
+- **最终 fingerprint pilot（门禁 2）— accepted**：44.5 分钟独立 pilot（PID 16992），`pilot_pass=True`，29 样本 worker/supervisor PID 唯一、code MATCH `724f0d5a8481`、heartbeat 新鲜、无 foreign/temp/orphan、`db_quick_check=ok`、raw/StockWiki unchanged、same-path max 360.6s < 900s、parse_timeout_delta=0、scan_interrupted_delta=0。receipt `wr-10-13-final-pilot-acceptance-20260802.json`。
+- **>900s slow canary（门禁 3）— accepted**：合同层缩短时钟 GREEN（slow-canary `2 passed in 56.31s`）；隔离目录真实 40.9MB PDF（中信建投 2021 年报）演练 accepted——normalize 单稳定 parser PID（7 hb/6 alive）、fingerprint 单稳定 PID（6 hb/5 alive）、无 temp leak、verdict=accepted，生产 DB 零触碰。receipt `wr-10-13-slow-canary-acceptance-20260802.json`。
+- **next-login（门禁 4，WR-10.9 Step 6）— accepted**：用户真实重启后，登录触发新 launcher session `1ec5c35c0d07`（17:23:54Z starting→child_started），supervisor 15184→worker 14476 顺序启动、均无主窗口（无空白控制面板）、Code MATCH、worker 健康（heartbeat 12.6s、pending 20588）。登录前基线 `wr-10-9-step6-pre-login-baseline-20260802.json`、登录后采集 `wr-10-9-step6-login-20260802.json`、验收 `wr-10-9-step6-acceptance-20260802.json`。**Step 6 达成。**
+
 ## 2026-08-01 WR-10.15 最新指令：planning-only 与候选 rollout blockers
 
 - 用户最新明确要求只形成详细计划并写入 planning-with-files，不在本任务继续实施。该指令到达时一版候选源码和临时库测试已经完成；此后只等待已启动的全量 pytest 自然结束，并停止所有后续源码/生产动作。

@@ -1,0 +1,876 @@
+{
+  "version": "1.0",
+  "annotator": "human",
+  "annotated_at": "2025-04-01",
+  "claims": [
+    {
+      "claim_id": "C001",
+      "source_id": "gk-bh-2025-ar",
+      "claim_type": "fact",
+      "text": "2025年营收185.6亿元，同比增长32.5%",
+      "entity_id": "北方华创",
+      "question_id": "Q001",
+      "published_at": "2025-03-28",
+      "effective_period": "2025年",
+      "evidence_spans": [
+        "S001"
+      ],
+      "materiality": "high",
+      "numeric": {
+        "metric": "营业收入",
+        "value": 185.6,
+        "unit": "亿元",
+        "currency": "CNY",
+        "period": "2025年",
+        "scope": "合并",
+        "restatement": false
+      }
+    },
+    {
+      "claim_id": "C002",
+      "source_id": "gk-bh-2025-ar",
+      "claim_type": "fact",
+      "text": "2025年归母净利润28.3亿元，同比增长45.2%",
+      "entity_id": "北方华创",
+      "question_id": "Q001",
+      "published_at": "2025-03-28",
+      "effective_period": "2025年",
+      "evidence_spans": [
+        "S002"
+      ],
+      "materiality": "high",
+      "numeric": {
+        "metric": "归母净利润",
+        "value": 28.3,
+        "unit": "亿元",
+        "currency": "CNY",
+        "period": "2025年",
+        "scope": "合并",
+        "restatement": false
+      }
+    },
+    {
+      "claim_id": "C003",
+      "source_id": "gk-bh-2025-ar",
+      "claim_type": "fact",
+      "text": "半导体设备业务收入152.8亿元，占比82.3%，同比增长38.7%",
+      "entity_id": "北方华创",
+      "question_id": null,
+      "published_at": "2025-03-28",
+      "effective_period": "2025年",
+      "evidence_spans": [
+        "S003"
+      ],
+      "materiality": "medium",
+      "numeric": {
+        "metric": "半导体设备收入",
+        "value": 152.8,
+        "unit": "亿元",
+        "currency": "CNY",
+        "period": "2025年",
+        "scope": "合并",
+        "restatement": false
+      }
+    },
+    {
+      "claim_id": "C004",
+      "source_id": "gk-bh-2025-ar",
+      "claim_type": "fact",
+      "text": "ICP刻蚀设备进入14nm验证，CCP刻蚀28nm批量交付",
+      "entity_id": "北方华创",
+      "question_id": null,
+      "published_at": "2025-03-28",
+      "effective_period": "2025年",
+      "evidence_spans": [
+        "S004"
+      ],
+      "materiality": "high",
+      "numeric": null,
+      "technology_milestone": true
+    },
+    {
+      "claim_id": "C005",
+      "source_id": "gk-bh-2025-ar",
+      "claim_type": "fact",
+      "text": "2025年刻蚀设备收入45.2亿元，同比增长28.3%",
+      "entity_id": "北方华创",
+      "question_id": null,
+      "published_at": "2025-03-28",
+      "effective_period": "2025年",
+      "evidence_spans": [
+        "S005"
+      ],
+      "materiality": "medium",
+      "numeric": {
+        "metric": "刻蚀设备收入",
+        "value": 45.2,
+        "unit": "亿元",
+        "currency": "CNY",
+        "period": "2025年",
+        "scope": "合并",
+        "restatement": false
+      }
+    },
+    {
+      "claim_id": "C006",
+      "source_id": "gk-bh-2025-ar",
+      "claim_type": "fact",
+      "text": "PVD设备已覆盖28nm制程，CVD设备在40nm制程实现突破",
+      "entity_id": "北方华创",
+      "question_id": null,
+      "published_at": "2025-03-28",
+      "effective_period": "2025年",
+      "evidence_spans": [
+        "S006"
+      ],
+      "materiality": "medium",
+      "numeric": null,
+      "technology_milestone": true
+    },
+    {
+      "claim_id": "C007",
+      "source_id": "gk-bh-2025-ar",
+      "claim_type": "fact",
+      "text": "在手订单210.5亿元，同比增长25.8%",
+      "entity_id": "北方华创",
+      "question_id": "Q001",
+      "published_at": "2025-03-28",
+      "effective_period": "2025-03-28",
+      "evidence_spans": [
+        "S007"
+      ],
+      "materiality": "high",
+      "numeric": {
+        "metric": "在手订单",
+        "value": 210.5,
+        "unit": "亿元",
+        "currency": "CNY",
+        "period": "2025-03-28",
+        "scope": "合并",
+        "restatement": false
+      }
+    },
+    {
+      "claim_id": "C008",
+      "source_id": "gk-bh-2025-ar",
+      "claim_type": "fact",
+      "text": "2025年研发投入32.8亿元，占营收17.7%",
+      "entity_id": "北方华创",
+      "question_id": null,
+      "published_at": "2025-03-28",
+      "effective_period": "2025年",
+      "evidence_spans": [
+        "S008"
+      ],
+      "materiality": "medium",
+      "numeric": {
+        "metric": "研发投入",
+        "value": 32.8,
+        "unit": "亿元",
+        "currency": "CNY",
+        "period": "2025年",
+        "scope": "合并",
+        "restatement": false
+      }
+    },
+    {
+      "claim_id": "C009",
+      "source_id": "gk-bh-2025-ar",
+      "claim_type": "fact",
+      "text": "与国内大型晶圆厂签订25.8亿元设备采购合同",
+      "entity_id": "北方华创",
+      "question_id": null,
+      "published_at": "2025-03-28",
+      "effective_period": "2025年",
+      "evidence_spans": [
+        "S009"
+      ],
+      "materiality": "medium",
+      "numeric": {
+        "metric": "重大合同金额",
+        "value": 25.8,
+        "unit": "亿元",
+        "currency": "CNY",
+        "period": "2025年",
+        "scope": "合并",
+        "restatement": false
+      }
+    },
+    {
+      "claim_id": "C010",
+      "source_id": "gk-bh-correction",
+      "claim_type": "fact",
+      "text": "2025年营收更正为183.2亿元，原披露185.6亿元为计算错误",
+      "entity_id": "北方华创",
+      "question_id": "Q001",
+      "published_at": "2025-04-15",
+      "effective_period": "2025年",
+      "evidence_spans": [],
+      "materiality": "high",
+      "corrects": "C001",
+      "numeric": {
+        "metric": "营业收入",
+        "value": 183.2,
+        "unit": "亿元",
+        "currency": "CNY",
+        "period": "2025年",
+        "scope": "合并",
+        "restatement": true
+      }
+    },
+    {
+      "claim_id": "C011",
+      "source_id": "gk-bh-2025-order",
+      "claim_type": "fact",
+      "text": "截至2025年6月30日在手订单230.0亿元，较年初210.5亿元增长",
+      "entity_id": "北方华创",
+      "question_id": "Q001",
+      "published_at": "2025-06-30",
+      "effective_period": "2025-06-30",
+      "evidence_spans": [
+        "S011"
+      ],
+      "materiality": "high",
+      "supersedes": "C007",
+      "numeric": {
+        "metric": "在手订单",
+        "value": 230.0,
+        "unit": "亿元",
+        "currency": "CNY",
+        "period": "2025-06-30",
+        "scope": "合并",
+        "restatement": false
+      }
+    },
+    {
+      "claim_id": "C012",
+      "source_id": "gk-smic-2025q1",
+      "claim_type": "fact",
+      "text": "中芯国际2025Q1营业收入132.5亿元，同比增长28.1%",
+      "entity_id": "中芯国际",
+      "question_id": null,
+      "published_at": "2025-04-30",
+      "effective_period": "2025Q1",
+      "evidence_spans": [
+        "S012"
+      ],
+      "materiality": "high",
+      "numeric": {
+        "metric": "营业收入",
+        "value": 132.5,
+        "unit": "亿元",
+        "currency": "CNY",
+        "period": "2025Q1",
+        "scope": "合并",
+        "restatement": false
+      }
+    },
+    {
+      "claim_id": "C013",
+      "source_id": "gk-bh-2024-ar",
+      "claim_type": "fact",
+      "text": "北方华创2024年营业收入140.1亿元",
+      "entity_id": "北方华创",
+      "question_id": null,
+      "published_at": "2025-03-28",
+      "effective_period": "2024年",
+      "evidence_spans": [
+        "S013"
+      ],
+      "materiality": "high",
+      "numeric": {
+        "metric": "营业收入",
+        "value": 140.1,
+        "unit": "亿元",
+        "currency": "CNY",
+        "period": "2024年",
+        "scope": "合并",
+        "restatement": false
+      }
+    },
+    {
+      "claim_id": "C014",
+      "source_id": "gk-zw-2023-restated",
+      "claim_type": "fact",
+      "text": "中微公司重述后2023年营业收入47.4亿元（原49.8亿）",
+      "entity_id": "中微公司",
+      "question_id": null,
+      "published_at": "2024-04-26",
+      "effective_period": "2023年",
+      "evidence_spans": [
+        "S014"
+      ],
+      "materiality": "high",
+      "numeric": {
+        "metric": "营业收入",
+        "value": 47.4,
+        "unit": "亿元",
+        "currency": "CNY",
+        "period": "2023年",
+        "scope": "合并",
+        "restatement": true
+      },
+      "corrects": null
+    },
+    {
+      "claim_id": "C015",
+      "source_id": "gk-bh-risk-warning",
+      "claim_type": "fact",
+      "text": "北方华创先进制程设备零部件面临美国出口管制风险",
+      "entity_id": "北方华创",
+      "question_id": "Q005",
+      "published_at": "2025-05-20",
+      "effective_period": "2025-05",
+      "evidence_spans": [
+        "S015"
+      ],
+      "materiality": "high",
+      "numeric": null
+    },
+    {
+      "claim_id": "C016",
+      "source_id": "gk-zw-terminate",
+      "claim_type": "fact",
+      "text": "中微公司终止与某海外客户的设备销售合作",
+      "entity_id": "中微公司",
+      "question_id": null,
+      "published_at": "2025-06-12",
+      "effective_period": "2025-06",
+      "evidence_spans": [
+        "S016"
+      ],
+      "materiality": "medium",
+      "numeric": null
+    },
+    {
+      "claim_id": "C017",
+      "source_id": "gk-smic-major-contract",
+      "claim_type": "fact",
+      "text": "中芯国际签订82.0亿元三年期设备框架采购协议",
+      "entity_id": "中芯国际",
+      "question_id": null,
+      "published_at": "2025-07-08",
+      "effective_period": "2025-07",
+      "evidence_spans": [
+        "S017"
+      ],
+      "materiality": "high",
+      "numeric": {
+        "metric": "重大合同金额",
+        "value": 82.0,
+        "unit": "亿元",
+        "currency": "CNY",
+        "period": "2025-07",
+        "scope": "合并",
+        "restatement": false
+      }
+    },
+    {
+      "claim_id": "C018",
+      "source_id": "gk-bh-ir-guidance",
+      "claim_type": "prediction",
+      "text": "管理层指引2025全年营收同比约+30%（前瞻）",
+      "entity_id": "北方华创",
+      "question_id": null,
+      "published_at": "2025-05-09",
+      "effective_period": "2025FY",
+      "evidence_spans": [
+        "S018"
+      ],
+      "materiality": "high",
+      "numeric": {
+        "metric": "营业收入增速",
+        "value": 30.0,
+        "unit": "%",
+        "currency": "CNY",
+        "period": "2025FY",
+        "scope": "合并",
+        "restatement": false
+      }
+    },
+    {
+      "claim_id": "C019",
+      "source_id": "gk-zw-ir-view",
+      "claim_type": "opinion",
+      "text": "管理层认为国内刻蚀设备市场竞争趋于激烈（主观判断）",
+      "entity_id": "中微公司",
+      "question_id": null,
+      "published_at": "2025-05-12",
+      "effective_period": "2025-05",
+      "evidence_spans": [
+        "S019"
+      ],
+      "materiality": "medium",
+      "numeric": null
+    },
+    {
+      "claim_id": "C020",
+      "source_id": "gk-smic-ir-capex",
+      "claim_type": "prediction",
+      "text": "预计2025全年资本开支约590亿元（前瞻指引）",
+      "entity_id": "中芯国际",
+      "question_id": null,
+      "published_at": "2025-05-15",
+      "effective_period": "2025FY",
+      "evidence_spans": [
+        "S020"
+      ],
+      "materiality": "high",
+      "numeric": {
+        "metric": "资本开支",
+        "value": 590.0,
+        "unit": "亿元",
+        "currency": "CNY",
+        "period": "2025FY",
+        "scope": "合并",
+        "restatement": false
+      }
+    },
+    {
+      "claim_id": "C021",
+      "source_id": "gk-bh-ir-monthly",
+      "claim_type": "fact",
+      "text": "2025年4月未经审计月度营收16.2亿元",
+      "entity_id": "北方华创",
+      "question_id": null,
+      "published_at": "2025-05-08",
+      "effective_period": "2025-04",
+      "evidence_spans": [
+        "S021"
+      ],
+      "materiality": "low",
+      "numeric": {
+        "metric": "月度营业收入",
+        "value": 16.2,
+        "unit": "亿元",
+        "currency": "CNY",
+        "period": "2025-04",
+        "scope": "合并",
+        "restatement": false
+      }
+    },
+    {
+      "claim_id": "C022",
+      "source_id": "gk-zw-ir-qna",
+      "claim_type": "opinion",
+      "text": "管理层判断先进制程放量初期毛利率承压（主观展望）",
+      "entity_id": "中微公司",
+      "question_id": null,
+      "published_at": "2025-05-12",
+      "effective_period": "2025-05",
+      "evidence_spans": [
+        "S022"
+      ],
+      "materiality": "medium",
+      "numeric": null
+    },
+    {
+      "claim_id": "C023",
+      "source_id": "gk-bh-br-rating",
+      "claim_type": "opinion",
+      "text": "分析师上调北方华创评级至买入（主观观点）",
+      "entity_id": "北方华创",
+      "question_id": null,
+      "published_at": "2025-06-03",
+      "effective_period": "2025-06",
+      "evidence_spans": [
+        "S023"
+      ],
+      "materiality": "medium",
+      "numeric": null
+    },
+    {
+      "claim_id": "C024",
+      "source_id": "gk-zw-br-forecast",
+      "claim_type": "prediction",
+      "text": "分析师预测中微公司2025年归母净利润12.5亿元",
+      "entity_id": "中微公司",
+      "question_id": null,
+      "published_at": "2025-06-05",
+      "effective_period": "2025-06",
+      "evidence_spans": [
+        "S024"
+      ],
+      "materiality": "medium",
+      "numeric": {
+        "metric": "归母净利润",
+        "value": 12.5,
+        "unit": "亿元",
+        "currency": "CNY",
+        "period": "2025FY",
+        "scope": "合并",
+        "restatement": false
+      }
+    },
+    {
+      "claim_id": "C025",
+      "source_id": "gk-smic-br-quote",
+      "claim_type": "fact",
+      "text": "研报转引中芯国际披露的590亿资本开支（非独立事实）",
+      "entity_id": "中芯国际",
+      "question_id": null,
+      "published_at": "2025-05-20",
+      "effective_period": "2025-05",
+      "evidence_spans": [
+        "S025"
+      ],
+      "materiality": "medium",
+      "numeric": {
+        "metric": "资本开支",
+        "value": 590.0,
+        "unit": "亿元",
+        "currency": "CNY",
+        "period": "2025FY",
+        "scope": "合并",
+        "restatement": false
+      },
+      "non_independent": true
+    },
+    {
+      "claim_id": "C026",
+      "source_id": "gk-bh-br-assumption",
+      "claim_type": "opinion",
+      "text": "估值关键假设：半导体设备国产化率持续提升（主观假设）",
+      "entity_id": "北方华创",
+      "question_id": null,
+      "published_at": "2025-06-08",
+      "effective_period": "2025-06",
+      "evidence_spans": [
+        "S026"
+      ],
+      "materiality": "low",
+      "numeric": null
+    },
+    {
+      "claim_id": "C027",
+      "source_id": "gk-zw-br-target",
+      "claim_type": "prediction",
+      "text": "分析师给予中微公司12个月目标价220.0元",
+      "entity_id": "中微公司",
+      "question_id": null,
+      "published_at": "2025-07-02",
+      "effective_period": "2025-07",
+      "evidence_spans": [
+        "S027"
+      ],
+      "materiality": "medium",
+      "numeric": {
+        "metric": "目标价",
+        "value": 220.0,
+        "unit": "元",
+        "currency": "CNY",
+        "period": "12M",
+        "scope": "合并",
+        "restatement": false
+      }
+    },
+    {
+      "claim_id": "C028",
+      "source_id": "gk-bh-news-interview",
+      "claim_type": "fact",
+      "text": "公司已向客户交付多台28nm CCP刻蚀设备",
+      "entity_id": "北方华创",
+      "question_id": null,
+      "published_at": "2025-05-18",
+      "effective_period": "2025-05",
+      "evidence_spans": [
+        "S028"
+      ],
+      "materiality": "medium",
+      "numeric": null
+    },
+    {
+      "claim_id": "C029",
+      "source_id": "gk-news-ambig2",
+      "claim_type": "fact",
+      "text": "报道同时提及北方华创与中微公司，主实体不明",
+      "entity_id": "北方华创",
+      "question_id": null,
+      "published_at": "2025-06-15",
+      "effective_period": "2025-06",
+      "evidence_spans": [
+        "S029"
+      ],
+      "materiality": "low",
+      "numeric": null
+    },
+    {
+      "claim_id": "C030",
+      "source_id": "gk-news-irr-ev",
+      "claim_type": "fact",
+      "text": "新能源汽车公司发布新款车型（与半导体设备无关）",
+      "entity_id": "合成新能源",
+      "question_id": null,
+      "published_at": "2025-06-20",
+      "effective_period": "2025-06",
+      "evidence_spans": [
+        "S030"
+      ],
+      "materiality": "low",
+      "numeric": null
+    },
+    {
+      "claim_id": "C031",
+      "source_id": "gk-bh-news-asof",
+      "claim_type": "fact",
+      "text": "北方华创2025Q2营收初步98.0亿（as_of=2025-04-30不得引用）",
+      "entity_id": "北方华创",
+      "question_id": null,
+      "published_at": "2025-08-10",
+      "effective_period": "2025Q2",
+      "evidence_spans": [
+        "S031"
+      ],
+      "materiality": "medium",
+      "numeric": {
+        "metric": "营业收入",
+        "value": 98.0,
+        "unit": "亿元",
+        "currency": "CNY",
+        "period": "2025Q2",
+        "scope": "合并",
+        "restatement": false
+      }
+    },
+    {
+      "claim_id": "C032",
+      "source_id": "gk-news-agg-bh-reprint",
+      "claim_type": "fact",
+      "text": "聚合转载：北方华创2025年报营收185.6亿（转引，pre-correction）",
+      "entity_id": "北方华创",
+      "question_id": null,
+      "published_at": "2025-04-02",
+      "effective_period": "2025-04",
+      "evidence_spans": [
+        "S032"
+      ],
+      "materiality": "low",
+      "canonical_source_id": "gk-bh-2025-ar",
+      "numeric": {
+        "metric": "营业收入",
+        "value": 185.6,
+        "unit": "亿元",
+        "currency": "CNY",
+        "period": "2025年",
+        "scope": "合并",
+        "restatement": false
+      }
+    },
+    {
+      "claim_id": "C033",
+      "source_id": "gk-news-agg-exaggerated",
+      "claim_type": "fact",
+      "text": "聚合标题夸张称营收翻倍（实际+32.5%，标题不符）",
+      "entity_id": "北方华创",
+      "question_id": null,
+      "published_at": "2025-04-05",
+      "effective_period": "2025-04",
+      "evidence_spans": [
+        "S033"
+      ],
+      "materiality": "low",
+      "canonical_source_id": "gk-bh-2025-ar",
+      "numeric": null
+    },
+    {
+      "claim_id": "C034",
+      "source_id": "gk-news-agg-syndication",
+      "claim_type": "fact",
+      "text": "同文多发：同一原创被多站转载（仅计一条独立链）",
+      "entity_id": "北方华创",
+      "question_id": null,
+      "published_at": "2025-05-10",
+      "effective_period": "2025-05",
+      "evidence_spans": [
+        "S034"
+      ],
+      "materiality": "low",
+      "canonical_source_id": "gk-bh-news-interview",
+      "numeric": null
+    },
+    {
+      "claim_id": "C035",
+      "source_id": "gk-news-agg-chain",
+      "claim_type": "fact",
+      "text": "转载链：三站转载溯源至原始订单公告",
+      "entity_id": "北方华创",
+      "question_id": null,
+      "published_at": "2025-07-05",
+      "effective_period": "2025-07",
+      "evidence_spans": [
+        "S035"
+      ],
+      "materiality": "low",
+      "canonical_source_id": "gk-bh-2025-order",
+      "numeric": null
+    },
+    {
+      "claim_id": "C036",
+      "source_id": "gk-zw-ambig3",
+      "claim_type": "fact",
+      "text": "“中微”简称存在主体歧义，需人工确认",
+      "entity_id": "中微公司",
+      "question_id": null,
+      "published_at": "2025-07-01",
+      "effective_period": "2025-07",
+      "evidence_spans": [
+        "S036"
+      ],
+      "materiality": "medium",
+      "numeric": null
+    },
+    {
+      "claim_id": "C037",
+      "source_id": "gk-smic-ambig4",
+      "claim_type": "fact",
+      "text": "“中芯扩产”表述无法唯一定位公司主体",
+      "entity_id": "中芯国际",
+      "question_id": null,
+      "published_at": "2025-07-02",
+      "effective_period": "2025-07",
+      "evidence_spans": [
+        "S037"
+      ],
+      "materiality": "medium",
+      "numeric": null
+    },
+    {
+      "claim_id": "C038",
+      "source_id": "gk-consumer-irrelevant3",
+      "claim_type": "fact",
+      "text": "合成消费发布无糖饮料新品",
+      "entity_id": "合成消费",
+      "question_id": null,
+      "published_at": "2025-07-03",
+      "effective_period": "2025-07",
+      "evidence_spans": [
+        "S038"
+      ],
+      "materiality": "low",
+      "numeric": null
+    },
+    {
+      "claim_id": "C039",
+      "source_id": "gk-logistics-irrelevant4",
+      "claim_type": "fact",
+      "text": "合成物流完成冷链仓储升级",
+      "entity_id": "合成物流",
+      "question_id": null,
+      "published_at": "2025-07-04",
+      "effective_period": "2025-07",
+      "evidence_spans": [
+        "S039"
+      ],
+      "materiality": "low",
+      "numeric": null
+    },
+    {
+      "claim_id": "C040",
+      "source_id": "gk-smic-news-asof2",
+      "claim_type": "fact",
+      "text": "九月披露的中芯国际Q3新增产能不得前视到六月末",
+      "entity_id": "中芯国际",
+      "question_id": null,
+      "published_at": "2025-09-15",
+      "effective_period": "2025Q3",
+      "evidence_spans": [
+        "S040"
+      ],
+      "materiality": "medium",
+      "numeric": null
+    },
+    {
+      "claim_id": "C041",
+      "source_id": "gk-zw-news-asof3",
+      "claim_type": "fact",
+      "text": "十月公开的中微公司Q4订单不得前视到九月末",
+      "entity_id": "中微公司",
+      "question_id": null,
+      "published_at": "2025-10-20",
+      "effective_period": "2025Q4",
+      "evidence_spans": [
+        "S041"
+      ],
+      "materiality": "medium",
+      "numeric": null
+    },
+    {
+      "claim_id": "C042",
+      "source_id": "gk-smic-ann-asof4",
+      "claim_type": "fact",
+      "text": "十一月确认的新增产线不得前视到十月底",
+      "entity_id": "中芯国际",
+      "question_id": null,
+      "published_at": "2025-11-05",
+      "effective_period": "2025-11",
+      "evidence_spans": [
+        "S042"
+      ],
+      "materiality": "medium",
+      "numeric": null
+    },
+    {
+      "claim_id": "C043",
+      "source_id": "gk-zw-correction2",
+      "claim_type": "fact",
+      "text": "中微公司二次更正2023年营业收入为47.1亿元",
+      "entity_id": "中微公司",
+      "question_id": null,
+      "published_at": "2025-01-15",
+      "effective_period": "2023年",
+      "evidence_spans": [
+        "S043"
+      ],
+      "materiality": "medium",
+      "numeric": {
+        "metric": "营业收入",
+        "value": 47.1,
+        "unit": "亿元",
+        "currency": "CNY",
+        "period": "2023年",
+        "scope": "合并",
+        "restatement": true
+      },
+      "corrects": "C014"
+    },
+    {
+      "claim_id": "C044",
+      "source_id": "gk-smic-supersedes2",
+      "claim_type": "fact",
+      "text": "中芯国际更新2025Q1营业收入为133.1亿元",
+      "entity_id": "中芯国际",
+      "question_id": null,
+      "published_at": "2025-05-20",
+      "effective_period": "2025Q1",
+      "evidence_spans": [
+        "S044"
+      ],
+      "materiality": "medium",
+      "numeric": {
+        "metric": "营业收入",
+        "value": 133.1,
+        "unit": "亿元",
+        "currency": "CNY",
+        "period": "2025Q1",
+        "scope": "合并",
+        "restatement": true
+      },
+      "supersedes": "C012"
+    },
+    {
+      "claim_id": "C045",
+      "source_id": "gk-smic-ir-control",
+      "claim_type": "fact",
+      "text": "中芯国际现有生产计划保持不变",
+      "entity_id": "中芯国际",
+      "question_id": null,
+      "published_at": "2025-06-18",
+      "effective_period": "2025-06",
+      "evidence_spans": [
+        "S045"
+      ],
+      "materiality": "low",
+      "numeric": null
+    }
+  ]
+}

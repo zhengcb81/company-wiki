@@ -5,9 +5,7 @@
 构建正向和反向引用关系，检测孤立页面。
 """
 
-import os, re, sys
 import yaml
-from pathlib import Path
 from collections import defaultdict
 
 from common import WIKI_ROOT as BASE
@@ -115,6 +113,11 @@ def main():
         print(f"  Orphans: {len(orphans)}")
         for o in orphans[:5]:
             print(f"    {o}")
+
+
+from writer_policy import enforce_direct_cli as _enforce_legacy_writer_freeze
+
+_enforce_legacy_writer_freeze(__name__, __file__)
 
 
 if __name__ == "__main__":

@@ -1,0 +1,257 @@
+# ============================================
+# Pipeline Gate 系统 — 规则配置
+# ============================================
+# 所有质量控制规则从此文件加载，非硬编码。
+# 修改此文件即可调整Pipeline行为，无需改代码。
+#
+# 文档类型分类：
+#   financial_report: 年报/半年报/季报 (annual_report, semi_annual_report, quarterly_report)
+#   investor_relations: 投资者关系活动记录
+#   prospectus: 招股说明书
+#
+# 每个Gate配置包含：
+#   - 规则参数（阈值、必填字段等）
+#   - failure_action: 失败后的处理策略
+#     - diagnose_then_retry_or_human: 诊断→重试(如有fix_hint)→超限转人工
+#     - human_review: 直接转人工
+#     - skip: 跳过此文档
+# ============================================
+
+pipeline_gates:
+  # ── 财务报告类（年报/半年报/季报）────────────────
+  financial_report:
+    gate_0_input_validation:
+      rules:
+        - check: file_exists
+          required: true
+        - check: file_size
+          min_bytes: 1024
+        - check: filename_pattern
+          allowed_extensions: [".pdf"]
+      failure_action: skip
+
+    gate_1_extraction_quality:
+      thresholds:
+        annual_report:
+          min_chars: 50000
+          min_quality: 0.30
+          max_scanned_pages_pct: 20
+        semi_annual_report:
+          min_chars: 25000
+          min_quality: 0.30
+        quarterly_report:
+          min_chars: 10000
+          min_quality: 0.20
+      failure_action: diagnose_then_retry_or_human
+      retry_strategies:
+        - root_cause: extraction_too_short
+          fix_method: retry_with_different_strategy
+          max_retries: 1
+        - root_cause: quality_score_too_low
+          fix_method: retry_with_higher_quality_settings
+          max_retries: 1
+        - root_cause: scanned_pdf_detected
+          fix_method: retry_with_ocr
+          max_retries: 1
+
+    gate_2_data_contract:
+      required_fields:
+        - revenue
+        - net_profit
+        - gross_margin
+      numeric_ranges:
+        gross_margin:
+          min: 0
+          max: 100
+        revenue:
+          min: 0
+      cross_validations:
+        - formula: "revenue >= net_profit"
+          description: "营收应大于等于净利润"
+        - formula: "total_assets >= equity"
+          description: "总资产应大于等于净资产"
+      failure_action: diagnose_then_retry_or_human
+      retry_strategies:
+        - root_cause: missing_required_field
+          fix_method: re_analyze_with_field_reminder
+          max_retries: 2
+        - root_cause: numeric_inconsistency
+          fix_method: re_analyze_with_correction
+          max_retries: 2
+
+    gate_3_llm_output:
+      hallucination:
+        unit_conversions:
+          - "元"
+          - "万元"
+          - "亿元"
+        tolerance: 0.02
+      logic_check:
+        explanation_keywords:
+          margin:
+            - "产品结构"
+            - "原材料"
+            - "价格"
+            - "成本"
+            - "附加值"
+            - "高利润"
+            - "业务结构"
+            - "收入结构"
+      json_repair:
+        enabled: true
+        max_attempts: 3
+      failure_action: diagnose_then_retry_or_human
+      retry_strategies:
+        - root_cause: json_parse_error
+          fix_method: json_repair
+          max_retries: 3
+        - root_cause: fact_hallucination
+          fix_method: re_analyze_with_fact_correction
+          max_retries: 2
+        - root_cause: logic_inconsistency
+          fix_method: re_analyze_with_logic_hint
+          max_retries: 2
+
+    gate_4_5_analyst_review:
+      enabled: true
+      approval_threshold: 4.0
+      max_llm_retries: 2
+      mandatory_dimensions:
+        - revenue_analysis
+        - profit_quality
+        - cashflow_analysis
+        - risk_factors:
+            - name: customer_concentration
+              threshold_pct: 20
+              description: "前五大客户销售占比"
+            - name: supplier_concentration
+              threshold_pct: 50
+              description: "前五大供应商采购占比"
+            - name: seasonal_risk
+              q4_variance_threshold: 30
+              description: "Q4与其他季度波动超过30%"
+            - name: subsidy_dependency
+              subsidy_to_netprofit_threshold: 30
+              description: "政府补助占净利润比例"
+            - name: raw_material_exposure
+              description: "原材料价格波动敏感"
+            - name: capex_pressure
+              description: "资本支出/经营现金流 > 1"
+            - name: ar_turnover_risk
+              description: "应收账款增速 > 营收增速"
+        - forward_outlook
+        - peer_comparison
+      failure_action: diagnose_then_retry_or_human
+      retry_strategies:
+        - root_cause: analyst_review_failed
+          fix_method: re_analyze_with_reviewer_feedback
+          max_retries: 2
+
+    gate_5_wiki_integrity:
+      checks:
+        - frontmatter_complete
+        - source_links_accessible
+        - no_duplicate_entries
+      failure_action: diagnose_then_retry_or_human
+
+  # ── 投资者关系活动记录 ───────────────────────
+  investor_relations:
+    gate_0_input_validation:
+      rules:
+        - check: file_exists
+          required: true
+        - check: file_size
+          min_bytes: 512
+      failure_action: skip
+
+    gate_1_extraction_quality:
+      thresholds:
+        min_chars: 2000
+        min_quality: 0.15
+      failure_action: diagnose_then_retry_or_human
+
+    gate_2_data_contract:
+      required_fields: []
+      extract_indicators:
+        - order_amount
+        - capacity_utilization
+        - customer_names
+        - management_guidance
+      failure_action: diagnose_then_retry_or_human
+
+    gate_3_llm_output:
+      hallucination:
+        unit_conversions:
+          - "元"
+          - "万元"
+          - "亿元"
+        tolerance: 0.02
+      failure_action: diagnose_then_retry_or_human
+
+    gate_4_5_analyst_review:
+      enabled: true
+      approval_threshold: 4.0
+      max_llm_retries: 2
+      mandatory_dimensions:
+        - management_guidance
+        - order_pipeline
+        - investor_concerns
+        - sentiment_shift_vs_history
+      failure_action: diagnose_then_retry_or_human
+
+  # ── 招股说明书 ────────────────────────────
+  prospectus:
+    gate_0_input_validation:
+      rules:
+        - check: file_exists
+          required: true
+        - check: file_size
+          min_bytes: 1024
+      failure_action: skip
+
+    gate_1_extraction_quality:
+      thresholds:
+        min_chars: 80000
+        min_quality: 0.30
+      failure_action: diagnose_then_retry_or_human
+
+    gate_2_data_contract:
+      required_fields:
+        - revenue
+        - net_profit
+        - total_assets
+        - equity
+      tag_predictions: true
+      failure_action: diagnose_then_retry_or_human
+
+    gate_3_llm_output:
+      hallucination:
+        unit_conversions:
+          - "元"
+          - "万元"
+          - "亿元"
+        tolerance: 0.02
+      failure_action: diagnose_then_retry_or_human
+
+    gate_4_5_analyst_review:
+      enabled: true
+      approval_threshold: 4.0
+      max_llm_retries: 2
+      mandatory_dimensions:
+        - fundraising_use
+        - profitability_trend
+        - industry_competition
+        - risk_factors_prospectus
+      failure_action: diagnose_then_retry_or_human
+
+# ── 诊断引擎全局配置 ──────────────────────
+diagnostics:
+  default_max_retries: 2
+  escalation: human_review
+  retry_cooldown_seconds: 5
+
+# ── 重试调度器全局配置 ────────────────────
+retry_orchestrator:
+  same_cause_max_retries: 2
+  review_queue_path: "~/company-wiki/review_queue.md"
+  log_retries: true

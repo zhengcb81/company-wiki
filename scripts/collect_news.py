@@ -19,8 +19,7 @@ import sys
 import time
 import urllib.request
 import urllib.error
-from datetime import datetime, timedelta
-from pathlib import Path
+from datetime import datetime
 
 # ── 路径 ──────────────────────────────────
 from common import WIKI_ROOT, CONFIG_PATH, LOG_PATH
@@ -51,7 +50,6 @@ def load_yaml_simple(path):
     # 尝试把 YAML 转成 JSON（只处理我们的特定格式）
     # 简单方案：直接 import json，手动解析
     try:
-        import json as _json
 
         # 这个回退方案太脆弱，推荐安装 pyyaml
         print("WARNING: pyyaml not installed. Trying json fallback...")
@@ -66,7 +64,6 @@ def load_yaml_simple(path):
 
 def _minimal_yaml_parse(content):
     """极简 YAML 解析 — 只处理 config.yaml 的特定格式"""
-    import json
 
     # 移除注释
     lines = content.split("\n")
@@ -380,7 +377,7 @@ def collect_for_company(
 
     api_key = search_cfg.get("api_key", "") or os.environ.get("TAVILY_API_KEY", "")
     if not api_key:
-        print(f"  ERROR: No Tavily API key (config.yaml or TAVILY_API_KEY env)")
+        print("  ERROR: No Tavily API key (config.yaml or TAVILY_API_KEY env)")
         return 0, 0
 
     max_results = search_cfg.get("results_per_query", 8)
@@ -604,6 +601,11 @@ def main():
         append_log(
             f"Collected {total_new} new articles, {total_dup} duplicates skipped"
         )
+
+
+from writer_policy import enforce_direct_cli as _enforce_legacy_writer_freeze
+
+_enforce_legacy_writer_freeze(__name__, __file__)
 
 
 if __name__ == "__main__":

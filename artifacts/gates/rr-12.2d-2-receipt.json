@@ -1,0 +1,53 @@
+{
+  "work_unit": "RR-12.2d-2",
+  "phase": "schema_normalize_and_sample_fix",
+  "base_head": "a57160646ed0d02a7d8befe2e390b523c73432c6",
+  "production_data": {
+    "before": "b97f177c60da1a7f0165cba69dfc567df9edba7558001b4ba5aeddcd5361433c",
+    "after": "b97f177c60da1a7f0165cba69dfc567df9edba7558001b4ba5aeddcd5361433c",
+    "drift": "none (16,789 files / 25,472,376,075 bytes)"
+  },
+  "test_transition": {
+    "d-1_red": 21,
+    "d-2_red": 2,
+    "turned_green": 19,
+    "gold_now": "45 passed / 2 failed",
+    "full_suite": "634 passed / 2 failed (zero non-gold failures)"
+  },
+  "control_plane": {
+    "verify-lock": "pass",
+    "deletion-manifest": "pass",
+    "staged-secret": "0 active",
+    "staged_count": 0
+  },
+  "implemented": {
+    "manifest": "created corpus_manifest.json (6 revisions, 3-layer IDs, body content_sha256, synthetic_only=true)",
+    "existing_source_fix": "gk-bh-2025-ar: fake cninfo URL -> fixture.invalid; removed fake content_hash (manifest holds body sha256)",
+    "materialized_sources": [
+      "gk-zw-2025-ar (regulatory, competitor_mention)",
+      "gk-zw-ambiguous (original_news, ambiguity)",
+      "gk-mt-irrelevant (regulatory, irrelevant negative)",
+      "gk-bh-correction (company_announcement, correction/restatement)",
+      "gk-bh-2025-order (company_announcement, supersedes)"
+    ],
+    "claims_added": [
+      "C005/C006/C008 (resolve orphan spans S005/S006/S008)",
+      "C010 (revenue correction 183.2, corrects C001)",
+      "C011 (updated order book 230.0, supersedes C007)"
+    ],
+    "offsets": "all 10 spans recomputed to body[start:end]==text (evidence exactness green)",
+    "readme": "regenerated from disk + manifest (removed fictional \u4e2d\u82af\u56fd\u9645 dir + numeric_values.json)",
+    "quality_metrics": "structural counts aligned to disk (total_sources=6, total_material_claims=11); computed metrics -> pending_evaluator; ready_for_canary=false"
+  },
+  "all_new_content_is_draft": "every new/changed fixture is synthetic:true + review_status:draft; nothing marked reviewed; reviewer can reject",
+  "remaining_red_d3_scope": [
+    "TestCoverageGates::test_revision_count_at_least_30 (6 < 30)",
+    "TestCoverageGates::test_source_kind_coverage (3 kinds: regulatory x3, company_announcement x2, original_news x1; need 6 kinds with minimums)"
+  ],
+  "deferred": {
+    "d-3": "expand to >=30 revisions across 6 source kinds + scenario coverage",
+    "d-4": "independent evaluator; quality_metrics actual computed from predictions"
+  },
+  "reviewer_note": "Implementer materialized sources/claims that the EXISTING routing/contradiction annotations already referenced (per \u00a76 d-2 step 2 'supplement synthetic source' option). No routing expectation was invented or deleted; routing_targets unchanged except one new entry backing the already-defined supersedes scenario. All content draft; needs reviewer confirmation before review_status=reviewed.",
+  "derived_status": "candidate (schema/referential green; only d-3 coverage red remains). Independent reviewer still required for verified."
+}

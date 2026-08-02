@@ -3,6 +3,7 @@ from __future__ import annotations
 from concurrent.futures import ThreadPoolExecutor, TimeoutError as FutureTimeout
 import ctypes
 from ctypes import wintypes
+import json
 import os
 from pathlib import Path
 import subprocess
@@ -39,8 +40,42 @@ import json
 import os
 import sys
 import time
+from pathlib import Path
 
 mode = os.environ.get("FAKE_CONTROL_MODE", "success")
+command = next(
+    (
+        value
+        for value in (
+            "worker-status",
+            "worker-start",
+            "worker-pause",
+            "worker-resume",
+            "worker-stop",
+            "duplicates",
+        )
+        if value in sys.argv
+    ),
+    "",
+)
+if command == "duplicates":
+    argv_path = os.environ.get("FAKE_CONTROL_ARGV_PATH")
+    if argv_path:
+        Path(argv_path).write_text(json.dumps(sys.argv), encoding="utf-8")
+    print(json.dumps({
+        "groups": [],
+        "total_groups": 0,
+        "total_reclaimable_copies": 0,
+        "total_reclaimable_bytes": 0,
+    }))
+    raise SystemExit(0)
+if mode == "action_then_status_failure":
+    if command == "worker-start":
+        print("{}")
+        raise SystemExit(0)
+    if command == "worker-status":
+        print("synthetic post-action status failure", file=sys.stderr)
+        raise SystemExit(7)
 if mode == "slow":
     time.sleep(float(os.environ.get("FAKE_CONTROL_DELAY", "4")))
 elif mode == "timeout":
@@ -51,6 +86,103 @@ elif mode == "malformed":
 elif mode == "nonzero":
     print("synthetic status failure", file=sys.stderr)
     raise SystemExit(7)
+elif mode == "llm_semantics":
+    print(json.dumps({
+        "startup": {"installed": True, "method": "fixture"},
+        "desired_state": "enabled",
+        "runtime_state": "running",
+        "pid": 123,
+        "status_generated_at": time.time(),
+        "heartbeat_age_seconds": 0.1,
+        "stale_runtime": False,
+        "current_path": "C:/incoming/slow.pdf",
+        "current_path_elapsed_seconds": 12.5,
+        "parser_pid": 4321,
+        "parser_elapsed_seconds": 12.5,
+        "parser_timeout_seconds": 3600,
+        "parser_ownership": "windows_job",
+        "loaded_code_fingerprint": "a" * 64,
+        "current_code_fingerprint": "b" * 64,
+        "code_match": False,
+        "code_fingerprint_error": None,
+        "scheduler": {
+            "last_cycle_at": time.time(),
+            "last_error": None,
+            "parse_timeout_total": 2,
+            "last_parse_timeout_path": "C:/incoming/retry.pdf",
+        },
+        "process_inventory": {
+            "production_workers": [{"pid": 123}],
+            "production_supervisors": [{"pid": 122}],
+            "pytest_temp_workers": [],
+            "pytest_temp_supervisors": [],
+            "foreign_workers": [],
+            "foreign_supervisors": [],
+        },
+        "pipeline": {
+            "available": True,
+            "last_scan": {
+                "completed_at": time.time(),
+                "status": "completed_with_errors",
+                "files_seen": 10,
+                "files_reused": 9,
+                "files_hashed": 0,
+                "files_excluded": 0,
+                "errors": 1,
+                "new_errors": 0,
+                "known_quarantined": 1,
+                "new_documents": 0,
+                "new_sources": 0,
+                "error_details": [{
+                    "root_id": "dropbox_stock",
+                    "relative_path": "data/Product_Revenue_Forecast_Model.xlsx",
+                    "error": "SourceManifestError: source file is empty",
+                    "unchanged": True,
+                }],
+            },
+            "index": {},
+            "markdown": {
+                "eligible": 9,
+                "pending": 9,
+                "in_progress": 0,
+                "blocked": 1,
+                "blocked_quarantined": 1,
+                "blocked_incomplete": 0,
+                "blocked_other": 0,
+                "completed": 0,
+                "partial": 0,
+                "unsupported": 0,
+                "failed": 0,
+                "retryable_failed": 2,
+                "terminal_failed": 1,
+            },
+            "llm_summary": {
+                "pending": 20,
+                "in_progress": 0,
+                "completed": 5,
+                "failed": 131,
+                "retryable_failed": 0,
+                "permanent": 131,
+                "legacy_scope_mismatch": 131,
+                "last_permanent_document_id": "urn:permanent:last",
+                "next_document_retry_after": None,
+                "last_failed_document_id": None,
+                "deferred": True,
+                "global_deferred": True,
+                "global_retry_after": time.time() + 3600,
+                "global_error": "LLMProviderError: HTTP 429 quota exhausted",
+            },
+            "health": {
+                "scan": {},
+                "locks": {"operation_lock": "absent"},
+                "artifacts": {},
+            },
+            "explanations": {},
+            "current": {},
+            "recent_batches": {},
+        },
+    }))
+    raise SystemExit(0)
 
 print(json.dumps({
     "startup": {"installed": True, "method": "fixture"},
@@ -76,22 +208,33 @@ print(json.dumps({
     return root
 
 
-def _control_command(project: Path, *, action: str = "menu", timeout: int | None = None) -> list[str]:
+def _control_command(
+    project: Path,
+    *,
+    action: str = "menu",
+    timeout: int | None = None,
+    interactive: bool = False,
+) -> list[str]:
     command = [
         _powershell(),
         "-NoProfile",
-        "-NonInteractive",
-        "-ExecutionPolicy",
-        "Bypass",
-        "-File",
-        str(CONTROL),
-        "-Action",
-        action,
-        "-PythonExe",
-        sys.executable,
-        "-ProjectRoot",
-        str(project),
     ]
+    if not interactive:
+        command.append("-NonInteractive")
+    command.extend(
+        [
+            "-ExecutionPolicy",
+            "Bypass",
+            "-File",
+            str(CONTROL),
+            "-Action",
+            action,
+            "-PythonExe",
+            sys.executable,
+            "-ProjectRoot",
+            str(project),
+        ]
+    )
     if timeout is not None:
         command.extend(["-StatusTimeoutSeconds", str(timeout)])
     return command
@@ -207,6 +350,91 @@ def test_control_status_failure_keeps_menu_available(tmp_path, mode, expected):
     assert expected in stdout
     assert "1. Refresh status" in stdout
     assert "0. Exit" in stdout
+
+
+def test_control_renders_structured_llm_failure_semantics(tmp_path):
+    project = tmp_path / "project with spaces"
+    (project / "config").mkdir(parents=True)
+    fake_package = _write_fake_cli(tmp_path / "fake package")
+
+    result = subprocess.run(
+        _control_command(project, action="status"),
+        cwd=PROJECT,
+        env=_control_environment(fake_package, "llm_semantics"),
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+        errors="replace",
+        timeout=15,
+        check=False,
+    )
+
+    assert result.returncode == 0
+    assert "retryable 0 | permanent 131" in result.stdout
+    assert "Global retry" in result.stdout
+    assert "HTTP 429 quota exhausted" in result.stdout
+    assert "Legacy scope mismatch: 131" in result.stdout
+    assert "Code       : MISMATCH" in result.stdout
+    assert "loaded aaaaaaaaaaaa | current bbbbbbbbbbbb" in result.stdout
+    assert "total 1 | new 0 | known quarantine 1" in result.stdout
+    assert "dropbox_stock/data/Product_Revenue_Forecast_Model.xlsx" in result.stdout
+    assert "SourceManifestError: source file is empty" in result.stdout
+    assert "Blocked  : quarantined 1 | incomplete 0 | other 0" in result.stdout
+    assert "Parser   : PID 4321 | elapsed 12.5s / timeout 3600s | owner windows_job" in result.stdout
+    assert "MD retry : retryable 2 | terminal 1" in result.stdout
+    assert "Parse timeouts: total 2" in result.stdout
+    assert "Last path: C:/incoming/retry.pdf" in result.stdout
+
+
+@pytest.mark.parametrize("search", ["C:\\\\", 'quoted "value"'])
+def test_control_preserves_windows_command_line_arguments(tmp_path, search):
+    project = tmp_path / "project with spaces"
+    (project / "config").mkdir(parents=True)
+    fake_package = _write_fake_cli(tmp_path / "fake package")
+    argv_path = tmp_path / "captured-argv.json"
+    environment = _control_environment(fake_package, "success")
+    environment["FAKE_CONTROL_ARGV_PATH"] = str(argv_path)
+
+    completed = subprocess.run(
+        _control_command(project, action="duplicates", interactive=True),
+        cwd=PROJECT,
+        env=environment,
+        input=f"{search}\n\n",
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+        errors="replace",
+        timeout=10,
+        check=False,
+    )
+
+    assert completed.returncode == 0, completed.stderr
+    arguments = json.loads(argv_path.read_text(encoding="utf-8"))
+    text_index = arguments.index("--text")
+    assert arguments[text_index + 1] == search
+
+
+def test_successful_control_action_is_not_failed_by_status_refresh(tmp_path):
+    project = tmp_path / "project with spaces"
+    (project / "config").mkdir(parents=True)
+    fake_package = _write_fake_cli(tmp_path / "fake package")
+
+    completed = subprocess.run(
+        _control_command(project, action="start", timeout=1),
+        cwd=PROJECT,
+        env=_control_environment(fake_package, "action_then_status_failure"),
+        stdin=subprocess.DEVNULL,
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+        errors="replace",
+        timeout=10,
+        check=False,
+    )
+
+    assert completed.returncode == 0, completed.stderr
+    assert "Unable to read worker status" in completed.stdout
+    assert "exit code 7" in completed.stdout
 
 
 def test_startup_actions_use_wscript_instead_of_a_console_host(tmp_path):

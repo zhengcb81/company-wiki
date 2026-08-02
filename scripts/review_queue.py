@@ -16,7 +16,6 @@ review_queue.py — 审核队列
 
 import argparse
 import re
-import sys
 from datetime import datetime
 from pathlib import Path
 from typing import Dict, List, Optional
@@ -325,7 +324,7 @@ def main():
         print(f"  已批准: {stats['approved']}")
         print(f"  已拒绝: {stats['rejected']}")
         print(f"  总计:   {stats['total']}")
-        print(f"\n  待审核风险分布:")
+        print("\n  待审核风险分布:")
         for risk, count in stats['risk_counts'].items():
             print(f"    {risk}: {count}")
 
@@ -338,6 +337,11 @@ def main():
 
     else:
         parser.print_help()
+
+
+from writer_policy import enforce_direct_cli as _enforce_legacy_writer_freeze
+
+_enforce_legacy_writer_freeze(__name__, __file__)
 
 
 if __name__ == "__main__":

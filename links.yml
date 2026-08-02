@@ -1,0 +1,951 @@
+links:
+  companies/AMD:
+  - companies/英伟达
+  - sectors/GPU与AI芯片
+  - themes/AI产业链
+  companies/七一二:
+  - themes/高端制造
+  companies/万华化学:
+  - companies/中信建投
+  - companies/安集科技
+  - companies/索菲亚
+  - companies/长江证券
+  - companies/鼎龙股份
+  companies/三七互娱:
+  - sectors/AI应用
+  - themes/AI产业链
+  companies/三环集团:
+  - sectors/半导体材料
+  - themes/AI产业链
+  - themes/半导体国产替代
+  companies/三角防务:
+  - themes/高端制造
+  companies/东方电缆:
+  - sectors/电力基建
+  - sectors/输配电
+  - themes/AI产业链
+  companies/东睦股份:
+  - themes/高端制造
+  companies/中大力德:
+  - themes/高端制造
+  companies/中密控股:
+  - sectors/密封件
+  - themes/高端制造
+  companies/中微公司:
+  - companies/中信建投
+  - companies/中芯国际
+  - companies/北方华创
+  - companies/华虹半导体
+  - companies/台积电
+  - companies/拓荆科技
+  - companies/长江证券
+  - sectors/CMP设备
+  - sectors/刻蚀设备
+  - sectors/半导体设备
+  - sectors/薄膜沉积设备
+  - sectors/量检测设备
+  - themes/AI产业链
+  - themes/半导体国产替代
+  companies/中望软件:
+  - sectors/EDA与IP
+  - themes/AI产业链
+  companies/中直股份:
+  - themes/高端制造
+  companies/中科曙光:
+  - sectors/算力基建
+  - themes/AI产业链
+  companies/中航光电:
+  - themes/高端制造
+  companies/中航机电:
+  - themes/高端制造
+  companies/中航沈飞:
+  - themes/高端制造
+  companies/中航电子:
+  - themes/高端制造
+  companies/中航电测:
+  - themes/高端制造
+  companies/中航西飞:
+  - themes/高端制造
+  companies/中航重机:
+  - themes/高端制造
+  companies/中芯国际:
+  - companies/华虹半导体
+  - companies/台积电
+  - sectors/半导体代工
+  - sectors/半导体设备
+  - sectors/封测
+  - themes/AI产业链
+  - themes/半导体国产替代
+  companies/中际旭创:
+  - companies/光迅科技
+  - companies/新易盛
+  - sectors/光模块
+  - themes/AI产业链
+  companies/中颖电子:
+  - sectors/半导体代工
+  - themes/AI产业链
+  companies/京东:
+  - sectors/AI应用
+  - sectors/算力基建
+  - themes/AI产业链
+  companies/京东方:
+  - sectors/半导体材料
+  - themes/AI产业链
+  companies/优利德:
+  - sectors/量检测设备
+  - themes/AI产业链
+  - themes/半导体国产替代
+  companies/兆易创新:
+  - sectors/GPU与AI芯片
+  - themes/AI产业链
+  - themes/半导体国产替代
+  companies/光线传媒:
+  - sectors/AI应用
+  - themes/AI产业链
+  companies/光迅科技:
+  - sectors/光模块
+  - themes/AI产业链
+  companies/北方华创:
+  - companies/中微公司
+  - companies/中芯国际
+  - companies/华虹半导体
+  - companies/台积电
+  - companies/拓荆科技
+  - companies/长江证券
+  - sectors/光刻设备
+  - sectors/刻蚀设备
+  - sectors/半导体材料
+  - sectors/半导体设备
+  - sectors/清洗设备
+  - sectors/硅片
+  - sectors/薄膜沉积设备
+  - themes/AI产业链
+  - themes/半导体国产替代
+  companies/华卓精科:
+  - sectors/半导体设备
+  - themes/AI产业链
+  - themes/半导体国产替代
+  companies/华大九天:
+  - sectors/EDA与IP
+  - themes/AI产业链
+  - themes/半导体国产替代
+  companies/华海清科:
+  - sectors/CMP设备
+  - sectors/半导体设备
+  - themes/AI产业链
+  - themes/半导体国产替代
+  companies/华特气体:
+  - sectors/半导体材料
+  - sectors/电子特气
+  - themes/AI产业链
+  - themes/半导体国产替代
+  companies/华虹半导体:
+  - sectors/半导体代工
+  - themes/AI产业链
+  - themes/半导体国产替代
+  companies/华锐精密:
+  - themes/高端制造
+  companies/卓胜微:
+  - sectors/GPU与AI芯片
+  - themes/AI产业链
+  - themes/半导体国产替代
+  companies/南大光电:
+  - sectors/光刻胶
+  - sectors/半导体材料
+  - themes/AI产业链
+  - themes/半导体国产替代
+  companies/双环传动:
+  - themes/高端制造
+  companies/台积电:
+  - companies/中芯国际
+  - companies/华虹半导体
+  - sectors/半导体代工
+  - themes/AI产业链
+  companies/吉比特:
+  - sectors/AI应用
+  - themes/AI产业链
+  companies/哔哩哔哩:
+  - sectors/AI应用
+  - themes/AI产业链
+  companies/商汤科技:
+  - sectors/AI应用
+  - themes/AI产业链
+  companies/国检集团:
+  - sectors/量检测设备
+  companies/埃斯顿:
+  - themes/高端制造
+  companies/天孚通信:
+  - sectors/光模块
+  - themes/AI产业链
+  companies/天马股份:
+  - themes/高端制造
+  companies/太辰光:
+  - sectors/光模块
+  - themes/AI产业链
+  companies/奥普特:
+  - sectors/量检测设备
+  - themes/AI产业链
+  - themes/半导体国产替代
+  companies/奥来德:
+  - sectors/半导体材料
+  - themes/AI产业链
+  - themes/半导体国产替代
+  companies/好未来:
+  - sectors/AI应用
+  - themes/AI产业链
+  companies/字节跳动:
+  - sectors/AI应用
+  - themes/AI产业链
+  companies/宁德时代:
+  - sectors/储能
+  - sectors/电力基建
+  - themes/AI产业链
+  companies/安博通:
+  - sectors/算力基建
+  - themes/AI产业链
+  companies/安集科技:
+  - sectors/半导体材料
+  - themes/AI产业链
+  - themes/半导体国产替代
+  companies/完美世界:
+  - sectors/AI应用
+  - themes/AI产业链
+  companies/密尔克卫:
+  - sectors/电子特气
+  - themes/AI产业链
+  companies/寒武纪:
+  - companies/AMD
+  - companies/中科曙光
+  - companies/中芯国际
+  - companies/台积电
+  - companies/商汤科技
+  - companies/字节跳动
+  - companies/海光信息
+  - companies/百度
+  - companies/英伟达
+  - sectors/GPU与AI芯片
+  - sectors/半导体设备
+  - themes/AI产业链
+  companies/小米集团:
+  - sectors/算力基建
+  - themes/AI产业链
+  companies/山石网科:
+  - sectors/算力基建
+  - themes/AI产业链
+  companies/工业富联:
+  - sectors/算力基建
+  - themes/AI产业链
+  companies/广联达:
+  - sectors/EDA与IP
+  companies/弘亚数控:
+  - themes/高端制造
+  companies/德赛西威:
+  - sectors/GPU与AI芯片
+  - themes/AI产业链
+  companies/快克股份:
+  - sectors/半导体设备
+  - themes/AI产业链
+  - themes/半导体国产替代
+  companies/快手:
+  - sectors/AI应用
+  - themes/AI产业链
+  companies/恒锋工具:
+  - themes/高端制造
+  companies/拓尔思:
+  - sectors/AI应用
+  - themes/AI产业链
+  companies/拓斯达:
+  - sectors/半导体设备
+  - themes/AI产业链
+  - themes/半导体国产替代
+  companies/拓荆科技:
+  - companies/北方华创
+  - sectors/半导体设备
+  - sectors/薄膜沉积设备
+  - themes/AI产业链
+  - themes/半导体国产替代
+  companies/拼多多:
+  - sectors/AI应用
+  - themes/AI产业链
+  companies/新易盛:
+  - companies/中际旭创
+  - companies/光迅科技
+  - sectors/光模块
+  - themes/AI产业链
+  companies/方邦股份:
+  - sectors/半导体材料
+  - themes/AI产业链
+  - themes/半导体国产替代
+  companies/时代电气:
+  - sectors/半导体设备
+  - themes/AI产业链
+  - themes/半导体国产替代
+  companies/星网宇达:
+  - themes/高端制造
+  companies/景嘉微:
+  - sectors/GPU与AI芯片
+  - themes/AI产业链
+  companies/曙光数创:
+  - sectors/液冷
+  - themes/AI产业链
+  companies/杭氧股份:
+  - sectors/电子特气
+  - themes/AI产业链
+  - themes/半导体国产替代
+  companies/欧科亿:
+  - themes/高端制造
+  companies/江丰电子:
+  - sectors/半导体材料
+  - sectors/靶材CMP
+  - themes/AI产业链
+  - themes/半导体国产替代
+  companies/沃尔德:
+  - themes/高端制造
+  companies/沪硅产业:
+  - sectors/半导体材料
+  - sectors/硅片
+  - themes/AI产业链
+  - themes/半导体国产替代
+  companies/派克新材:
+  - themes/高端制造
+  companies/浪潮信息:
+  - sectors/算力基建
+  - themes/AI产业链
+  companies/海光信息:
+  - companies/寒武纪
+  - companies/英伟达
+  - sectors/GPU与AI芯片
+  - themes/AI产业链
+  companies/海天瑞声:
+  - sectors/AI应用
+  - themes/AI产业链
+  companies/海康威视:
+  - sectors/AI应用
+  - sectors/GPU与AI芯片
+  - themes/AI产业链
+  companies/珂玛科技:
+  - sectors/半导体设备
+  - themes/半导体国产替代
+  companies/甬矽电子:
+  - sectors/封测
+  - themes/AI产业链
+  - themes/半导体国产替代
+  companies/申菱环境:
+  - sectors/液冷
+  - themes/AI产业链
+  companies/百度:
+  - companies/商汤科技
+  - companies/科大讯飞
+  - sectors/AI应用
+  - themes/AI产业链
+  companies/盈建科:
+  - sectors/EDA与IP
+  - themes/AI产业链
+  companies/盛美上海:
+  - sectors/半导体设备
+  - sectors/清洗设备
+  - themes/AI产业链
+  - themes/半导体国产替代
+  companies/石英股份:
+  - sectors/半导体材料
+  - themes/AI产业链
+  - themes/半导体国产替代
+  companies/禾信仪器:
+  - sectors/量检测设备
+  - themes/AI产业链
+  - themes/半导体国产替代
+  companies/科大讯飞:
+  - companies/商汤科技
+  - companies/百度
+  - sectors/AI应用
+  - themes/AI产业链
+  companies/精测电子:
+  - sectors/半导体设备
+  - sectors/量检测设备
+  - themes/AI产业链
+  - themes/半导体国产替代
+  companies/紫光股份:
+  - sectors/算力基建
+  - themes/AI产业链
+  companies/网易:
+  - sectors/AI应用
+  - themes/AI产业链
+  companies/美团:
+  - sectors/AI应用
+  - themes/AI产业链
+  companies/联影医疗:
+  - sectors/AI应用
+  - sectors/GPU与AI芯片
+  - themes/AI产业链
+  companies/腾讯:
+  - sectors/AI应用
+  - sectors/算力基建
+  - themes/AI产业链
+  companies/至纯科技:
+  - sectors/半导体设备
+  - sectors/清洗设备
+  - themes/AI产业链
+  - themes/半导体国产替代
+  companies/航发动力:
+  - themes/高端制造
+  companies/航发控制:
+  - themes/高端制造
+  companies/航发科技:
+  - themes/高端制造
+  companies/航天发展:
+  - themes/高端制造
+  companies/芒果超媒:
+  - sectors/AI应用
+  - themes/AI产业链
+  companies/苏试试验:
+  - sectors/量检测设备
+  - themes/AI产业链
+  - themes/半导体国产替代
+  companies/英伟达:
+  - companies/AMD
+  - companies/寒武纪
+  - companies/海光信息
+  - sectors/GPU与AI芯片
+  - themes/AI产业链
+  companies/英维克:
+  - sectors/液冷
+  - themes/AI产业链
+  companies/菲利华:
+  - sectors/半导体材料
+  - themes/AI产业链
+  - themes/半导体国产替代
+  companies/虹软科技:
+  - sectors/AI应用
+  - themes/AI产业链
+  companies/视觉中国:
+  - sectors/AI应用
+  - themes/AI产业链
+  companies/许继电气:
+  - sectors/电力基建
+  - sectors/输配电
+  - themes/AI产业链
+  companies/迈瑞医疗:
+  - themes/高端制造
+  companies/通富微电:
+  - companies/长电科技
+  - sectors/封测
+  - themes/AI产业链
+  - themes/半导体国产替代
+  companies/长电科技:
+  - companies/通富微电
+  - sectors/封测
+  - themes/AI产业链
+  - themes/半导体国产替代
+  companies/阳光电源:
+  - sectors/储能
+  - sectors/发电设备
+  - sectors/电力基建
+  - themes/AI产业链
+  companies/阿里巴巴:
+  - sectors/AI应用
+  - sectors/算力基建
+  - themes/AI产业链
+  companies/雅克科技:
+  - sectors/半导体材料
+  - sectors/电子特气
+  - themes/AI产业链
+  - themes/半导体国产替代
+  companies/飞凯材料:
+  - sectors/半导体材料
+  - themes/AI产业链
+  - themes/半导体国产替代
+  companies/飞龙股份:
+  - sectors/液冷
+  - themes/AI产业链
+  companies/高澜股份:
+  - sectors/液冷
+  - themes/AI产业链
+  companies/鼎龙股份:
+  - sectors/半导体材料
+  - themes/AI产业链
+  - themes/半导体国产替代
+  sectors/AI应用:
+  - companies/三七互娱
+  - companies/京东
+  - companies/光线传媒
+  - companies/吉比特
+  - companies/哔哩哔哩
+  - companies/商汤科技
+  - companies/好未来
+  - companies/字节跳动
+  - companies/完美世界
+  - companies/寒武纪
+  - companies/快手
+  - companies/拓尔思
+  - companies/拼多多
+  - companies/海天瑞声
+  - companies/海康威视
+  - companies/百度
+  - companies/科大讯飞
+  - companies/网易
+  - companies/美团
+  - companies/联影医疗
+  - companies/腾讯
+  - companies/芒果超媒
+  - companies/虹软科技
+  - companies/视觉中国
+  - companies/阿里巴巴
+  sectors/CMP设备:
+  - companies/华海清科
+  sectors/EDA与IP:
+  - companies/中望软件
+  - companies/华大九天
+  - companies/广联达
+  - companies/盈建科
+  sectors/GPU与AI芯片:
+  - companies/AMD
+  - companies/中芯国际
+  - companies/兆易创新
+  - companies/卓胜微
+  - companies/台积电
+  - companies/寒武纪
+  - companies/德赛西威
+  - companies/景嘉微
+  - companies/海光信息
+  - companies/海康威视
+  - companies/联影医疗
+  - companies/英伟达
+  - companies/通富微电
+  - sectors/封测
+  sectors/储能:
+  - companies/宁德时代
+  - companies/阳光电源
+  sectors/光刻胶:
+  - companies/南大光电
+  - sectors/GPU与AI芯片
+  sectors/光刻设备:
+  - companies/中芯国际
+  - companies/台积电
+  - sectors/半导体代工
+  - sectors/半导体设备
+  sectors/光模块:
+  - companies/中际旭创
+  - companies/光迅科技
+  - companies/天孚通信
+  - companies/太辰光
+  - companies/新易盛
+  - companies/英伟达
+  sectors/刻蚀设备:
+  - companies/中微公司
+  - companies/中芯国际
+  - companies/北方华创
+  - companies/华虹半导体
+  - companies/台积电
+  - companies/珂玛科技
+  - sectors/CMP设备
+  - sectors/半导体设备
+  - sectors/薄膜沉积设备
+  sectors/半导体代工:
+  - companies/中芯国际
+  - companies/中颖电子
+  - companies/华虹半导体
+  - companies/台积电
+  - sectors/半导体设备
+  sectors/半导体材料:
+  - companies/三环集团
+  - companies/中芯国际
+  - companies/京东
+  - companies/京东方
+  - companies/北方华创
+  - companies/华特气体
+  - companies/南大光电
+  - companies/奥来德
+  - companies/安集科技
+  - companies/方邦股份
+  - companies/江丰电子
+  - companies/沪硅产业
+  - companies/石英股份
+  - companies/菲利华
+  - companies/长江证券
+  - companies/长电科技
+  - companies/雅克科技
+  - companies/飞凯材料
+  - companies/鼎龙股份
+  - sectors/光刻胶
+  - sectors/封测
+  - sectors/电子特气
+  - sectors/硅片
+  sectors/半导体设备:
+  - companies/中微公司
+  - companies/中芯国际
+  - companies/北方华创
+  - companies/华卓精科
+  - companies/华海清科
+  - companies/华虹半导体
+  - companies/快克股份
+  - companies/拓斯达
+  - companies/拓荆科技
+  - companies/时代电气
+  - companies/珂玛科技
+  - companies/盛美上海
+  - companies/精测电子
+  - companies/至纯科技
+  - companies/英伟达
+  - sectors/CMP设备
+  - sectors/刻蚀设备
+  - sectors/清洗设备
+  - sectors/薄膜沉积设备
+  sectors/发电设备:
+  - companies/腾讯
+  - companies/阳光电源
+  - sectors/储能
+  sectors/密封件:
+  - companies/中密控股
+  - sectors/储能
+  sectors/封测:
+  - companies/台积电
+  - companies/甬矽电子
+  - companies/通富微电
+  - companies/长电科技
+  sectors/液冷:
+  - companies/中科曙光
+  - companies/曙光数创
+  - companies/浪潮信息
+  - companies/申菱环境
+  - companies/腾讯
+  - companies/英伟达
+  - companies/英维克
+  - companies/飞龙股份
+  - companies/高澜股份
+  sectors/清洗设备:
+  - companies/北方华创
+  - companies/盛美上海
+  - companies/至纯科技
+  - sectors/半导体设备
+  sectors/电力基建:
+  - companies/东方电缆
+  - companies/宁德时代
+  - companies/曙光数创
+  - companies/许继电气
+  - companies/阳光电源
+  - sectors/储能
+  - sectors/液冷
+  - sectors/算力基建
+  sectors/电子特气:
+  - companies/中芯国际
+  - companies/华特气体
+  - companies/南大光电
+  - companies/台积电
+  - companies/密尔克卫
+  - companies/杭氧股份
+  - companies/雅克科技
+  - sectors/GPU与AI芯片
+  - sectors/光刻胶
+  - sectors/半导体材料
+  - sectors/硅片
+  - sectors/算力基建
+  sectors/硅片:
+  - companies/中芯国际
+  - companies/沪硅产业
+  sectors/算力基建:
+  - companies/中科曙光
+  - companies/中际旭创
+  - companies/京东
+  - companies/安博通
+  - companies/寒武纪
+  - companies/小米集团
+  - companies/山石网科
+  - companies/工业富联
+  - companies/浪潮信息
+  - companies/紫光股份
+  - companies/腾讯
+  - companies/英伟达
+  - companies/阿里巴巴
+  - sectors/AI应用
+  - sectors/光模块
+  - sectors/液冷
+  sectors/薄膜沉积设备:
+  - companies/中微公司
+  - companies/北方华创
+  - companies/拓荆科技
+  sectors/输配电:
+  - companies/东方电缆
+  - companies/许继电气
+  sectors/量检测设备:
+  - companies/优利德
+  - companies/国检集团
+  - companies/奥普特
+  - companies/禾信仪器
+  - companies/精测电子
+  - companies/苏试试验
+  - sectors/半导体设备
+  sectors/靶材CMP:
+  - companies/安集科技
+  - companies/江丰电子
+  - companies/鼎龙股份
+  - sectors/半导体材料
+  themes/AI产业链:
+  - companies/AMD
+  - companies/三七互娱
+  - companies/三环集团
+  - companies/东方电缆
+  - companies/中微公司
+  - companies/中望软件
+  - companies/中科曙光
+  - companies/中芯国际
+  - companies/中际旭创
+  - companies/中颖电子
+  - companies/京东
+  - companies/京东方
+  - companies/优利德
+  - companies/兆易创新
+  - companies/光线传媒
+  - companies/光迅科技
+  - companies/北方华创
+  - companies/华卓精科
+  - companies/华大九天
+  - companies/华海清科
+  - companies/华特气体
+  - companies/华虹半导体
+  - companies/卓胜微
+  - companies/南大光电
+  - companies/台积电
+  - companies/吉比特
+  - companies/哔哩哔哩
+  - companies/商汤科技
+  - companies/天孚通信
+  - companies/太辰光
+  - companies/奥普特
+  - companies/奥来德
+  - companies/好未来
+  - companies/字节跳动
+  - companies/宁德时代
+  - companies/安博通
+  - companies/安集科技
+  - companies/完美世界
+  - companies/密尔克卫
+  - companies/寒武纪
+  - companies/小米集团
+  - companies/山石网科
+  - companies/工业富联
+  - companies/德赛西威
+  - companies/快克股份
+  - companies/快手
+  - companies/拓尔思
+  - companies/拓斯达
+  - companies/拓荆科技
+  - companies/拼多多
+  - companies/新产业
+  - companies/新易盛
+  - companies/方邦股份
+  - companies/时代电气
+  - companies/景嘉微
+  - companies/曙光数创
+  - companies/杭氧股份
+  - companies/江丰电子
+  - companies/沪硅产业
+  - companies/浪潮信息
+  - companies/海光信息
+  - companies/海天瑞声
+  - companies/海康威视
+  - companies/甬矽电子
+  - companies/申菱环境
+  - companies/百度
+  - companies/盈建科
+  - companies/盛美上海
+  - companies/石英股份
+  - companies/禾信仪器
+  - companies/科大讯飞
+  - companies/精测电子
+  - companies/紫光股份
+  - companies/网易
+  - companies/美团
+  - companies/联影医疗
+  - companies/腾讯
+  - companies/至纯科技
+  - companies/芒果超媒
+  - companies/苏试试验
+  - companies/英伟达
+  - companies/英维克
+  - companies/菲利华
+  - companies/虹软科技
+  - companies/视觉中国
+  - companies/许继电气
+  - companies/通富微电
+  - companies/长电科技
+  - companies/阳光电源
+  - companies/阿里巴巴
+  - companies/陆家嘴
+  - companies/雅克科技
+  - companies/飞凯材料
+  - companies/飞龙股份
+  - companies/高澜股份
+  - companies/鼎龙股份
+  - sectors/AI应用
+  - sectors/CMP设备
+  - sectors/EDA与IP
+  - sectors/GPU与AI芯片
+  - sectors/储能
+  - sectors/光刻胶
+  - sectors/光刻设备
+  - sectors/光模块
+  - sectors/刻蚀设备
+  - sectors/半导体代工
+  - sectors/半导体材料
+  - sectors/半导体设备
+  - sectors/发电设备
+  - sectors/封测
+  - sectors/液冷
+  - sectors/清洗设备
+  - sectors/电力基建
+  - sectors/电子特气
+  - sectors/硅片
+  - sectors/算力基建
+  - sectors/薄膜沉积设备
+  - sectors/输配电
+  - sectors/量检测设备
+  - sectors/靶材CMP
+  themes/中微公司的竞争优势是什么:
+  - companies/中微公司
+  - companies/珂玛科技
+  themes/半导体国产替代:
+  - companies/三环集团
+  - companies/中微公司
+  - companies/中芯国际
+  - companies/优利德
+  - companies/兆易创新
+  - companies/北方华创
+  - companies/华卓精科
+  - companies/华大九天
+  - companies/华海清科
+  - companies/华特气体
+  - companies/华虹半导体
+  - companies/卓胜微
+  - companies/南大光电
+  - companies/奥普特
+  - companies/奥来德
+  - companies/安集科技
+  - companies/快克股份
+  - companies/拓斯达
+  - companies/拓荆科技
+  - companies/方邦股份
+  - companies/时代电气
+  - companies/杭氧股份
+  - companies/江丰电子
+  - companies/沪硅产业
+  - companies/珂玛科技
+  - companies/甬矽电子
+  - companies/盛美上海
+  - companies/石英股份
+  - companies/禾信仪器
+  - companies/精测电子
+  - companies/至纯科技
+  - companies/苏试试验
+  - companies/菲利华
+  - companies/通富微电
+  - companies/长电科技
+  - companies/雅克科技
+  - companies/飞凯材料
+  - companies/鼎龙股份
+  - sectors/半导体设备
+  themes/高端制造:
+  - companies/七一二
+  - companies/三角防务
+  - companies/东睦股份
+  - companies/中大力德
+  - companies/中密控股
+  - companies/中直股份
+  - companies/中航光电
+  - companies/中航机电
+  - companies/中航沈飞
+  - companies/中航电子
+  - companies/中航电测
+  - companies/中航西飞
+  - companies/中航重机
+  - companies/华锐精密
+  - companies/双环传动
+  - companies/埃斯顿
+  - companies/天马股份
+  - companies/弘亚数控
+  - companies/恒锋工具
+  - companies/星网宇达
+  - companies/欧科亿
+  - companies/沃尔德
+  - companies/派克新材
+  - companies/航发动力
+  - companies/航发控制
+  - companies/航发科技
+  - companies/航天发展
+  - companies/迈瑞医疗
+  - sectors/密封件
+entities:
+  companies/万华化学:
+    公司动态: companies/万华化学/wiki/公司动态.md
+  companies/中微公司:
+    公司动态: companies/中微公司/wiki/公司动态.md
+  companies/中芯国际:
+    公司动态: companies/中芯国际/wiki/公司动态.md
+  companies/北方华创:
+    公司动态: companies/北方华创/wiki/公司动态.md
+  companies/寒武纪:
+    公司动态: companies/寒武纪/wiki/公司动态.md
+  sectors/AI应用:
+    AI应用: sectors/AI应用/wiki/AI应用.md
+  sectors/CMP设备:
+    CMP设备: sectors/CMP设备/wiki/CMP设备.md
+  sectors/EDA与IP:
+    EDA与IP: sectors/EDA与IP/wiki/EDA与IP.md
+  sectors/GPU与AI芯片:
+    GPU与AI芯片: sectors/GPU与AI芯片/wiki/GPU与AI芯片.md
+  sectors/储能:
+    储能: sectors/储能/wiki/储能.md
+  sectors/光刻胶:
+    光刻胶: sectors/光刻胶/wiki/光刻胶.md
+  sectors/光刻设备:
+    光刻设备: sectors/光刻设备/wiki/光刻设备.md
+  sectors/光模块:
+    光模块: sectors/光模块/wiki/光模块.md
+  sectors/刻蚀设备:
+    刻蚀设备: sectors/刻蚀设备/wiki/刻蚀设备.md
+  sectors/半导体代工:
+    半导体代工: sectors/半导体代工/wiki/半导体代工.md
+  sectors/半导体材料:
+    半导体材料: sectors/半导体材料/wiki/半导体材料.md
+  sectors/半导体设备:
+    半导体设备: sectors/半导体设备/wiki/半导体设备.md
+    半导体设备_slides: sectors/半导体设备/wiki/半导体设备_slides.md
+  sectors/发电设备:
+    发电设备: sectors/发电设备/wiki/发电设备.md
+  sectors/密封件:
+    密封件: sectors/密封件/wiki/密封件.md
+  sectors/封测:
+    封测: sectors/封测/wiki/封测.md
+  sectors/液冷:
+    液冷: sectors/液冷/wiki/液冷.md
+  sectors/清洗设备:
+    清洗设备: sectors/清洗设备/wiki/清洗设备.md
+  sectors/电力基建:
+    电力基建: sectors/电力基建/wiki/电力基建.md
+  sectors/电子特气:
+    电子特气: sectors/电子特气/wiki/电子特气.md
+  sectors/硅片:
+    硅片: sectors/硅片/wiki/硅片.md
+  sectors/算力基建:
+    算力基建: sectors/算力基建/wiki/算力基建.md
+  sectors/薄膜沉积设备:
+    薄膜沉积设备: sectors/薄膜沉积设备/wiki/薄膜沉积设备.md
+  sectors/输配电:
+    输配电: sectors/输配电/wiki/输配电.md
+  sectors/量检测设备:
+    量检测设备: sectors/量检测设备/wiki/量检测设备.md
+  sectors/靶材CMP:
+    靶材CMP: sectors/靶材CMP/wiki/靶材CMP.md
+  themes/AI产业链:
+    AI产业链: themes/AI产业链/wiki/AI产业链.md
+    AI产业链_slides: themes/AI产业链/wiki/AI产业链_slides.md
+  themes/中微公司的竞争优势是什么:
+    中微公司的竞争优势是什么: themes/中微公司的竞争优势是什么/wiki/中微公司的竞争优势是什么.md
+  themes/半导体国产替代:
+    半导体国产替代: themes/半导体国产替代/wiki/半导体国产替代.md
+    市场与需求: themes/半导体国产替代/wiki/市场与需求.md
+    设备国产化: themes/半导体国产替代/wiki/设备国产化.md
+    资本投入: themes/半导体国产替代/wiki/资本投入.md
+  themes/高端制造:
+    技术突破: themes/高端制造/wiki/技术突破.md
+    政策支持: themes/高端制造/wiki/政策支持.md
+    高端制造: themes/高端制造/wiki/高端制造.md

@@ -1,0 +1,95 @@
+{
+  "schema_version": "1.0",
+  "work_unit": "CW-2.28F",
+  "phase": 5,
+  "attempt_id": "phase-5-attempt-0001",
+  "started_at": "2026-07-26T20:00:00Z",
+  "completed_at": "2026-07-26T20:00:00Z",
+  "executor": "claude-code/glm-5.2",
+  "project_root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+  "git_heads": {
+    "company-wiki": "a571606"
+  },
+  "supersedes_receipt_sha256": null,
+  "product_file_hashes_before": {},
+  "product_file_hashes_after": {},
+  "command_results": [
+    {
+      "command_id": "assertion-tests",
+      "argv": [
+        "pytest",
+        "test_assertion_service"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "started_at": "2026-07-26T20:00:00Z",
+      "completed_at": "2026-07-26T20:00:00Z",
+      "exit_code": 0,
+      "summary": "6 passed, 0/xfail/skip",
+      "stdout_sha256": null,
+      "stderr_sha256": null,
+      "failed_tests": [],
+      "skipped_tests": [],
+      "xfailed_tests": []
+    },
+    {
+      "command_id": "resolver-tests",
+      "argv": [
+        "pytest",
+        "test_source_catalog_resolver"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "started_at": "2026-07-26T20:00:00Z",
+      "completed_at": "2026-07-26T20:00:00Z",
+      "exit_code": 0,
+      "summary": "5 passed, 0/xfail/skip",
+      "stdout_sha256": null,
+      "stderr_sha256": null,
+      "failed_tests": [],
+      "skipped_tests": [],
+      "xfailed_tests": []
+    }
+  ],
+  "invariant_results": [
+    {
+      "name": "assertion_service_tests_green",
+      "passed": true,
+      "detail": "6/0/0/0"
+    },
+    {
+      "name": "resolver_tests_green",
+      "passed": true,
+      "detail": "5/0/0/0"
+    },
+    {
+      "name": "resolver_assertion_fallthrough_fixed",
+      "passed": true,
+      "detail": "Phase 2R removed continue bug; verified assertion now falls through to period/provider checks"
+    },
+    {
+      "name": "query_content_sha256_available",
+      "passed": true,
+      "detail": "Phase 2R added top-level content_sha256 + byte_size to query()"
+    },
+    {
+      "name": "production_assertions_table_present",
+      "passed": true,
+      "detail": "source_metadata_assertions exists in production catalog"
+    }
+  ],
+  "authorization_used": [
+    "offline_phase_5r"
+  ],
+  "concurrent_change_detected": false,
+  "network_used": false,
+  "downloader_invocations": 0,
+  "llm_invocations": 0,
+  "diff_allowlist_result": "PASS",
+  "secret_scan_result": "0 active secrets",
+  "errors": [],
+  "files_created": [],
+  "files_modified": [],
+  "status": "PASS",
+  "blocker": null,
+  "next_phase": "CW-2.28G (Phase 6R)",
+  "db_backup": null
+}

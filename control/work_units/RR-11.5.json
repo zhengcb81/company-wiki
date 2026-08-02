@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "id": "RR-11.5",
+  "implementer_id": "root-current-task",
+  "acceptance": "control/acceptance.json",
+  "acceptance_lock": "control/acceptance.lock.json",
+  "baseline_snapshot": "artifacts/gates/rr-11.5-validation-baseline.json",
+  "allowed_paths": [
+    "artifacts/gates/**"
+  ],
+  "invariants": [
+    "Staged active credential candidates fail without emitting their values.",
+    "Placeholder and test credentials do not create false blocking findings.",
+    "No Git hook, provider credential, remote ref, or Git history is mutated.",
+    "The protected external-blocked decision remains internally valid."
+  ],
+  "commands": [
+    {
+      "name": "acceptance-lock",
+      "argv": [
+        "python",
+        "scripts/gate_runner.py",
+        "verify-lock",
+        "--root",
+        ".",
+        "--lock",
+        "control/acceptance.lock.json"
+      ],
+      "timeout_s": 60
+    },
+    {
+      "name": "staged-secret-preflight",
+      "argv": [
+        "python",
+        "scripts/secret_audit.py",
+        "scan-staged",
+        "--root",
+        "."
+      ],
+      "timeout_s": 60
+    },
+    {
+      "name": "secret-preflight-contracts",
+      "argv": [
+        "python",
+        "-m",
+        "pytest",
+        "tests/unit/test_secret_preflight.py",
+        "tests/unit/test_secret_audit.py",
+        "-q"
+      ],
+      "timeout_s": 180
+    },
+    {
+      "name": "full-local-suite",
+      "argv": [
+        "python",
+        "-m",
+        "pytest",
+        "-q"
+      ],
+      "timeout_s": 300
+    }
+  ]
+}

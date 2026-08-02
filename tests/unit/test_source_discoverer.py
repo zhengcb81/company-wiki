@@ -3,7 +3,6 @@
 测试知识缺口分析和来源建议生成
 """
 import pytest
-import tempfile
 from pathlib import Path
 
 import sys

@@ -3,8 +3,6 @@ Common module tests
 测试公共基础设施模块
 """
 
-import pytest
-import tempfile
 from pathlib import Path
 
 import sys
@@ -108,7 +106,6 @@ class TestYamlConfig:
 
     def test_load_yaml_config_existing(self, tmp_path):
         """测试加载存在的 YAML 文件"""
-        import yaml
 
         config_file = tmp_path / "config.yaml"
         config_file.write_text("key: value\n", encoding="utf-8")

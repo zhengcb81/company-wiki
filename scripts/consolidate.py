@@ -25,8 +25,6 @@ consolidate.py — 知识压缩机制（Phase 3 增强版）
 
 import argparse
 import re
-import sys
-import shutil
 from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
@@ -587,6 +585,11 @@ def main():
             "enrich",
             f"知识压缩: {success} 页面, {total_original} -> {total_compressed} 行",
         )
+
+
+from writer_policy import enforce_direct_cli as _enforce_legacy_writer_freeze
+
+_enforce_legacy_writer_freeze(__name__, __file__)
 
 
 if __name__ == "__main__":

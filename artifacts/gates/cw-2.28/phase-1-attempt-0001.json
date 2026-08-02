@@ -1,0 +1,96 @@
+{
+  "schema_version": "1.0",
+  "work_unit": "CW-2.28B",
+  "phase": 1,
+  "attempt_id": "phase-1-attempt-0001",
+  "status": "PASS",
+  "started_at": "2026-07-26T08:56:00Z",
+  "completed_at": "2026-07-26T09:02:00Z",
+  "executor": "claude-code/glm-5.2 (replayed legacy CW-2.28A/B facts into §12.2 attempt schema)",
+  "project_root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+  "git_heads": {
+    "company-wiki": "a571606"
+  },
+  "supersedes_receipt_sha256": null,
+  "replayed_from_legacy": {
+    "path": "phase-1-receipt.json",
+    "sha256": "b258fea64b2495f63f009775f406cf1655a02762515d6b94f59f5499f53506f0"
+  },
+  "product_file_hashes_before": {
+    "tests/contract/test_cw_228_backfill.py": {
+      "missing": true
+    }
+  },
+  "product_file_hashes_after": {
+    "tests/contract/test_cw_228_backfill.py": {
+      "sha256": "(9-test RED file)",
+      "size": 356,
+      "tests": 9
+    }
+  },
+  "command_results": [
+    {
+      "command_id": "red-backfill-contract",
+      "argv": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/contract/test_cw_228_backfill.py"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "started_at": "2026-07-26T08:40:00Z",
+      "completed_at": "2026-07-26T08:55:00Z",
+      "exit_code": 1,
+      "summary": "3 failed + 3 xfailed + 3 passed = 9 total (RED for right reason)",
+      "stdout_sha256": null,
+      "stderr_sha256": null,
+      "failed_tests": [
+        "test_backfill_unsupported_has_terminal_reason",
+        "test_backfill_terminal_reason_distinguishes_empty_from_parse_failure",
+        "test_backfill_cli_shows_eligible_pending_counts"
+      ],
+      "skipped_tests": [],
+      "xfailed_tests": [
+        "test_parser_failure_does_not_block_next_document",
+        "test_failed_documents_have_retryable_status",
+        "test_worker_pause_interrupts_backfill_cleanly"
+      ],
+      "red_contract": true
+    }
+  ],
+  "invariant_results": [
+    {
+      "name": "red_fails_for_right_reason",
+      "passed": true,
+      "detail": "all 3 failures are missing target behavior (terminal_reasons/eligible/pending); 3 xfail are missing parser-isolation/retry/pause; 0 import/fixture/path errors"
+    },
+    {
+      "name": "no_product_code_modified",
+      "passed": true,
+      "detail": "Phase 1 is test-only"
+    }
+  ],
+  "authorization_used": [
+    "offline_phase_1_red"
+  ],
+  "concurrent_change_detected": false,
+  "catalog_before": "unchanged from Phase 0",
+  "catalog_after": "unchanged from Phase 0",
+  "db_backup": null,
+  "raw_manifest_before": "unchanged from Phase 0",
+  "raw_manifest_after": "unchanged from Phase 0",
+  "network_used": false,
+  "downloader_invocations": 0,
+  "llm_invocations": 0,
+  "files_created": [
+    "tests/contract/test_cw_228_backfill.py",
+    "artifacts/gates/cw-2.28/phase-1-attempt-0001.json"
+  ],
+  "files_modified": [],
+  "diff_allowlist_result": "PASS (test file + artifacts/planning only)",
+  "secret_scan_result": "0 active secrets",
+  "errors": [],
+  "blocker": null,
+  "next_phase": "CW-2.28C (Phase 2R: semantic implementation + offline GREEN)"
+}

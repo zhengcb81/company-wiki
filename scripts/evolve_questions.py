@@ -15,7 +15,6 @@ evolve_questions.py — 问题清单演化
 
 import argparse
 import re
-import sys
 from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
@@ -280,7 +279,7 @@ def main():
         # 建议新问题
         suggestions = suggest_new_questions(wiki)
         if suggestions:
-            print(f"  建议新问题:")
+            print("  建议新问题:")
             for sq in suggestions:
                 print(f"    + {sq}")
 
@@ -307,6 +306,11 @@ def main():
 
     if not args.dry_run:
         append_log("lint", f"问题清单演化: {total_stale} 陈旧, {total_unaddressed} 未回答, {modified_wikis} 文件更新")
+
+
+from writer_policy import enforce_direct_cli as _enforce_legacy_writer_freeze
+
+_enforce_legacy_writer_freeze(__name__, __file__)
 
 
 if __name__ == "__main__":

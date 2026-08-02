@@ -1,0 +1,263 @@
+{
+  "approved": false,
+  "corpus_manifest_sha256": "df8913a6e13c5f1f3573c4522f6a8d1fc541b40287d9b4c3322fec6b600b3899",
+  "counts": {
+    "expected_revisions": 40,
+    "primary_accepted": 0,
+    "primary_received": 40,
+    "second_accepted": 0,
+    "second_received": 8,
+    "second_required": 8,
+    "source_kinds_covered": 6
+  },
+  "findings": [
+    {
+      "code": "PRIMARY_PENDING",
+      "detail": "primary review is pending",
+      "revision_id": "gkr-bh-2024-ar-v1"
+    },
+    {
+      "code": "PRIMARY_PENDING",
+      "detail": "primary review is pending",
+      "revision_id": "gkr-bh-2025-ar-v1"
+    },
+    {
+      "code": "PRIMARY_PENDING",
+      "detail": "primary review is pending",
+      "revision_id": "gkr-bh-2025-order-v1"
+    },
+    {
+      "code": "PRIMARY_PENDING",
+      "detail": "primary review is pending",
+      "revision_id": "gkr-bh-br-assumption-v1"
+    },
+    {
+      "code": "PRIMARY_PENDING",
+      "detail": "primary review is pending",
+      "revision_id": "gkr-bh-br-rating-v1"
+    },
+    {
+      "code": "PRIMARY_PENDING",
+      "detail": "primary review is pending",
+      "revision_id": "gkr-bh-correction-v1"
+    },
+    {
+      "code": "PRIMARY_PENDING",
+      "detail": "primary review is pending",
+      "revision_id": "gkr-bh-ir-guidance-v1"
+    },
+    {
+      "code": "PRIMARY_PENDING",
+      "detail": "primary review is pending",
+      "revision_id": "gkr-bh-ir-monthly-v1"
+    },
+    {
+      "code": "PRIMARY_PENDING",
+      "detail": "primary review is pending",
+      "revision_id": "gkr-bh-news-asof-v1"
+    },
+    {
+      "code": "PRIMARY_PENDING",
+      "detail": "primary review is pending",
+      "revision_id": "gkr-bh-news-interview-v1"
+    },
+    {
+      "code": "PRIMARY_PENDING",
+      "detail": "primary review is pending",
+      "revision_id": "gkr-bh-risk-warning-v1"
+    },
+    {
+      "code": "PRIMARY_PENDING",
+      "detail": "primary review is pending",
+      "revision_id": "gkr-consumer-irrelevant3-v1"
+    },
+    {
+      "code": "PRIMARY_PENDING",
+      "detail": "primary review is pending",
+      "revision_id": "gkr-logistics-irrelevant4-v1"
+    },
+    {
+      "code": "PRIMARY_PENDING",
+      "detail": "primary review is pending",
+      "revision_id": "gkr-mt-irrelevant-v1"
+    },
+    {
+      "code": "PRIMARY_PENDING",
+      "detail": "primary review is pending",
+      "revision_id": "gkr-news-agg-bh-reprint-v1"
+    },
+    {
+      "code": "PRIMARY_PENDING",
+      "detail": "primary review is pending",
+      "revision_id": "gkr-news-agg-chain-v1"
+    },
+    {
+      "code": "PRIMARY_PENDING",
+      "detail": "primary review is pending",
+      "revision_id": "gkr-news-agg-exaggerated-v1"
+    },
+    {
+      "code": "PRIMARY_PENDING",
+      "detail": "primary review is pending",
+      "revision_id": "gkr-news-agg-syndication-v1"
+    },
+    {
+      "code": "PRIMARY_PENDING",
+      "detail": "primary review is pending",
+      "revision_id": "gkr-news-ambig2-v1"
+    },
+    {
+      "code": "PRIMARY_PENDING",
+      "detail": "primary review is pending",
+      "revision_id": "gkr-news-irr-ev-v1"
+    },
+    {
+      "code": "PRIMARY_PENDING",
+      "detail": "primary review is pending",
+      "revision_id": "gkr-smic-2025q1-v1"
+    },
+    {
+      "code": "PRIMARY_PENDING",
+      "detail": "primary review is pending",
+      "revision_id": "gkr-smic-ambig4-v1"
+    },
+    {
+      "code": "PRIMARY_PENDING",
+      "detail": "primary review is pending",
+      "revision_id": "gkr-smic-ann-asof4-v1"
+    },
+    {
+      "code": "PRIMARY_PENDING",
+      "detail": "primary review is pending",
+      "revision_id": "gkr-smic-br-quote-v1"
+    },
+    {
+      "code": "PRIMARY_PENDING",
+      "detail": "primary review is pending",
+      "revision_id": "gkr-smic-ir-capex-v1"
+    },
+    {
+      "code": "PRIMARY_PENDING",
+      "detail": "primary review is pending",
+      "revision_id": "gkr-smic-ir-control-v1"
+    },
+    {
+      "code": "PRIMARY_PENDING",
+      "detail": "primary review is pending",
+      "revision_id": "gkr-smic-major-contract-v1"
+    },
+    {
+      "code": "PRIMARY_PENDING",
+      "detail": "primary review is pending",
+      "revision_id": "gkr-smic-news-asof2-v1"
+    },
+    {
+      "code": "PRIMARY_PENDING",
+      "detail": "primary review is pending",
+      "revision_id": "gkr-smic-supersedes2-v1"
+    },
+    {
+      "code": "PRIMARY_PENDING",
+      "detail": "primary review is pending",
+      "revision_id": "gkr-zw-2023-restated-v1"
+    },
+    {
+      "code": "PRIMARY_PENDING",
+      "detail": "primary review is pending",
+      "revision_id": "gkr-zw-2025-ar-v1"
+    },
+    {
+      "code": "PRIMARY_PENDING",
+      "detail": "primary review is pending",
+      "revision_id": "gkr-zw-ambig3-v1"
+    },
+    {
+      "code": "PRIMARY_PENDING",
+      "detail": "primary review is pending",
+      "revision_id": "gkr-zw-ambiguous-v1"
+    },
+    {
+      "code": "PRIMARY_PENDING",
+      "detail": "primary review is pending",
+      "revision_id": "gkr-zw-br-forecast-v1"
+    },
+    {
+      "code": "PRIMARY_PENDING",
+      "detail": "primary review is pending",
+      "revision_id": "gkr-zw-br-target-v1"
+    },
+    {
+      "code": "PRIMARY_PENDING",
+      "detail": "primary review is pending",
+      "revision_id": "gkr-zw-correction2-v1"
+    },
+    {
+      "code": "PRIMARY_PENDING",
+      "detail": "primary review is pending",
+      "revision_id": "gkr-zw-ir-qna-v1"
+    },
+    {
+      "code": "PRIMARY_PENDING",
+      "detail": "primary review is pending",
+      "revision_id": "gkr-zw-ir-view-v1"
+    },
+    {
+      "code": "PRIMARY_PENDING",
+      "detail": "primary review is pending",
+      "revision_id": "gkr-zw-news-asof3-v1"
+    },
+    {
+      "code": "PRIMARY_PENDING",
+      "detail": "primary review is pending",
+      "revision_id": "gkr-zw-terminate-v1"
+    },
+    {
+      "code": "SECOND_PENDING",
+      "detail": "second review is pending",
+      "revision_id": "gkr-bh-2024-ar-v1"
+    },
+    {
+      "code": "SECOND_PENDING",
+      "detail": "second review is pending",
+      "revision_id": "gkr-bh-2025-order-v1"
+    },
+    {
+      "code": "SECOND_PENDING",
+      "detail": "second review is pending",
+      "revision_id": "gkr-bh-br-assumption-v1"
+    },
+    {
+      "code": "SECOND_PENDING",
+      "detail": "second review is pending",
+      "revision_id": "gkr-bh-ir-guidance-v1"
+    },
+    {
+      "code": "SECOND_PENDING",
+      "detail": "second review is pending",
+      "revision_id": "gkr-bh-news-asof-v1"
+    },
+    {
+      "code": "SECOND_PENDING",
+      "detail": "second review is pending",
+      "revision_id": "gkr-news-agg-bh-reprint-v1"
+    },
+    {
+      "code": "SECOND_PENDING",
+      "detail": "second review is pending",
+      "revision_id": "gkr-news-agg-chain-v1"
+    },
+    {
+      "code": "SECOND_PENDING",
+      "detail": "second review is pending",
+      "revision_id": "gkr-news-agg-exaggerated-v1"
+    },
+    {
+      "code": "REVIEW_SUMMARY_MISSING",
+      "detail": "review_summary must contain at least 10 characters"
+    }
+  ],
+  "gate": "gold_independent_review",
+  "packet_sha256": "8b737fc0eb9e7a7758523b884de2c7e82cdd4ced2728820a8cc95b60740502e9",
+  "schema_version": 1,
+  "status": "blocked_independent_review_pending"
+}

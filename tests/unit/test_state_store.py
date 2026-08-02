@@ -2,6 +2,7 @@
 """Tests for scripts/state_store.py — SQLite-backed state store."""
 
 import sys
+from datetime import datetime
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent / "scripts"))
@@ -12,12 +13,12 @@ from state_store import StateStore
 class TestStateStoreInit:
     def test_creates_db(self, tmp_path):
         db_path = tmp_path / "test_state.db"
-        store = StateStore(db_path=db_path)
+        StateStore(db_path=db_path)
         assert db_path.exists()
 
     def test_creates_tables(self, tmp_path):
         db_path = tmp_path / "test_state.db"
-        store = StateStore(db_path=db_path)
+        StateStore(db_path=db_path)
         import sqlite3
         conn = sqlite3.connect(str(db_path))
         tables = [row[0] for row in conn.execute(
@@ -81,8 +82,9 @@ class TestCompanyState:
 
     def test_companies_needing_collect(self, tmp_path):
         store = StateStore(db_path=tmp_path / "test.db")
-        # Company with no state
-        store.set_last_collect("公司A", "2026-04-25")  # recent
+        # Company with recent collect time (today)
+        now = datetime.now().isoformat()
+        store.set_last_collect("公司A", now)  # recent
         # CompanyB has no state at all
         need = store.get_companies_needing_collect(days=7)
         assert "公司B" not in need  # Not in DB, so won't show up

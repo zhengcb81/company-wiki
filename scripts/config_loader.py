@@ -5,15 +5,14 @@
 使用方应迁移到: from config import Config, load_config, get_config
 """
 
-import sys
 from pathlib import Path
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 
-from common import SCRIPTS_DIR
 
 from config import (
     Config as _Config,
     LLMConfig,
+    LLMFallbackConfig,
     SearchConfig,
     ScheduleConfig,
     DownloaderConfig,
@@ -70,7 +69,7 @@ def Config(*args, **kwargs):
 
 # 导出
 __all__ = [
-    "Config", "LLMConfig", "SearchConfig", "ScheduleConfig",
+    "Config", "LLMConfig", "LLMFallbackConfig", "SearchConfig", "ScheduleConfig",
     "ReportDownloaderConfig", "DownloaderConfig", "EvolutionConfig",
     "PathsConfig", "load_config", "get_config",
 ]

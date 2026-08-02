@@ -55,7 +55,6 @@ import logging
 from datetime import datetime
 from typing import Dict, List, Any, Optional, Tuple
 from dataclasses import dataclass, field
-from pathlib import Path
 
 from common import WIKI_ROOT
 
@@ -95,6 +94,7 @@ class LLMResponse:
     """LLM 响应"""
 
     content: str = ""
+    provider: str = ""
     model: str = ""
     reasoning: str = ""
     usage: Dict[str, int] = field(default_factory=dict)
@@ -121,6 +121,8 @@ class LLMClient:
         model: Optional[str] = None,
         base_url: Optional[str] = None,
         config=None,
+        workload: str = "research",
+        enable_fallback: bool = True,
     ):
         """
         初始化 LLM 客户端
@@ -128,7 +130,7 @@ class LLMClient:
         优先级: 显式参数 > config 对象 > config.yaml > 环境变量 > 默认值
 
         Args:
-            provider: LLM 提供商 (deepseek/openai/claude)
+            provider: LLM 提供商 (minimax/mimo/deepseek/openai/claude)
             api_key: API Key
             model: 模型名称
             base_url: API 基础 URL
@@ -137,6 +139,9 @@ class LLMClient:
         self._sdk_client = None
         self._last_call_time = 0.0
         self._call_count = 0
+        self.workload = workload
+        self.fallback_client = None
+        self.fallback_status = "not_configured"
 
         # 尝试从 config 对象加载
         if config is None and provider is None:
@@ -155,13 +160,36 @@ class LLMClient:
             self.base_url = base_url or config.llm.base_url
             self._max_tokens = config.llm.max_tokens
             self._temperature = config.llm.temperature
+            self._reasoning_split = bool(
+                getattr(config.llm, "reasoning_split", self.provider == "minimax")
+            )
         else:
             self.provider = provider or self._detect_provider()
             self.api_key = api_key or self._get_api_key(self.provider)
             self.model = model or self._get_default_model(self.provider)
             self.base_url = base_url or self._get_base_url(self.provider)
             self._max_tokens = 1024
-            self._temperature = 0.3
+            self._temperature = 1.0 if self.provider == "minimax" else 0.3
+            self._reasoning_split = self.provider == "minimax"
+
+        if enable_fallback and config and hasattr(config, "llm"):
+            fallback = getattr(config.llm, "fallback", None)
+            if fallback is None:
+                self.fallback_status = "not_configured"
+            elif not fallback.enabled:
+                self.fallback_status = "disabled"
+            elif not fallback.api_key:
+                self.fallback_status = "missing_api_key"
+            else:
+                self.fallback_client = LLMClient(
+                    provider=fallback.provider,
+                    api_key=fallback.api_key,
+                    model=fallback.model,
+                    base_url=fallback.base_url,
+                    workload=workload,
+                    enable_fallback=False,
+                )
+                self.fallback_status = "ready"
 
         # 限流和重试配置
         self._min_interval = 1.0
@@ -179,17 +207,21 @@ class LLMClient:
 
     def _detect_provider(self) -> str:
         """根据环境变量检测 provider"""
+        if os.getenv("MINIMAX_API_KEY"):
+            return "minimax"
         if os.getenv("DEEPSEEK_API_KEY"):
             return "deepseek"
         if os.getenv("OPENAI_API_KEY"):
             return "openai"
         if os.getenv("ANTHROPIC_API_KEY"):
             return "claude"
-        return "deepseek"
+        return "minimax"
 
     def _get_api_key(self, provider: str) -> str:
         """获取 API Key"""
         env_vars = {
+            "minimax": "MINIMAX_API_KEY",
+            "mimo": "MIMO_API_KEY",
             "deepseek": "DEEPSEEK_API_KEY",
             "openai": "OPENAI_API_KEY",
             "claude": "ANTHROPIC_API_KEY",
@@ -199,20 +231,24 @@ class LLMClient:
     def _get_default_model(self, provider: str) -> str:
         """获取默认模型"""
         models = {
+            "minimax": "MiniMax-M3",
+            "mimo": "mimo-v2.5-pro",
             "deepseek": "deepseek-v4-flash",
             "openai": "gpt-4",
             "claude": "claude-3-opus-20240229",
         }
-        return models.get(provider, "deepseek-v4-flash")
+        return models.get(provider, "MiniMax-M3")
 
     def _get_base_url(self, provider: str) -> str:
         """获取基础 URL"""
         urls = {
+            "minimax": "https://api.minimaxi.com/v1",
+            "mimo": "https://token-plan-cn.xiaomimimo.com/v1",
             "deepseek": "https://api.deepseek.com",
             "openai": "https://api.openai.com/v1",
             "claude": "https://api.anthropic.com",
         }
-        return urls.get(provider, "https://api.deepseek.com")
+        return urls.get(provider, "https://api.minimaxi.com/v1")
 
     def _init_sdk_client(self):
         """初始化 OpenAI SDK 客户端 (兼容 DeepSeek)"""
@@ -366,6 +402,7 @@ class LLMClient:
         max_retries: int = None,
         max_tokens: int = None,
         temperature: float = None,
+        json_mode: bool = False,
     ) -> LLMResponse:
         """带重试的聊天调用"""
         if max_retries is None:
@@ -374,8 +411,16 @@ class LLMClient:
         last_error = ""
         for attempt in range(max_retries):
             response = self.chat(
-                user, system, max_tokens=max_tokens, temperature=temperature
+                user,
+                system,
+                json_mode=json_mode,
+                max_tokens=max_tokens,
+                temperature=temperature,
             )
+            if not response.provider:
+                response.provider = self.provider
+            if not response.model:
+                response.model = self.model
             if response.success:
                 return response
 
@@ -387,9 +432,27 @@ class LLMClient:
                 )
                 time.sleep(wait)
 
-        return LLMResponse(
-            success=False, error=f"重试 {max_retries} 次后仍失败: {last_error}"
+        primary_failure = LLMResponse(
+            provider=self.provider,
+            model=self.model,
+            success=False,
+            error=f"重试 {max_retries} 次后仍失败: {last_error}",
         )
+        if self.fallback_client is not None:
+            logger.warning(
+                "Primary LLM exhausted retries; trying policy-approved fallback %s/%s",
+                self.fallback_client.provider,
+                self.fallback_client.model,
+            )
+            return self.fallback_client.chat_with_retry(
+                user,
+                system,
+                max_retries=max_retries,
+                max_tokens=max_tokens,
+                temperature=temperature,
+                json_mode=json_mode,
+            )
+        return primary_failure
 
     def generate(
         self,
@@ -397,6 +460,7 @@ class LLMClient:
         system_prompt: Optional[str] = None,
         max_tokens: int = None,
         temperature: float = None,
+        json_mode: bool = False,
     ) -> LLMResponse:
         """
         生成文本 (向后兼容接口)
@@ -406,13 +470,18 @@ class LLMClient:
             system_prompt: 系统提示
             max_tokens: 最大 token 数 (覆盖默认值)
             temperature: 温度 (覆盖默认值)
+            json_mode: 是否要求 provider 返回 JSON 对象
 
         Returns:
             LLMResponse 对象
         """
         # 通过参数传递到底层调用，不修改实例状态（线程安全）
         return self.chat_with_retry(
-            prompt, system_prompt or "", max_tokens=max_tokens, temperature=temperature
+            prompt,
+            system_prompt or "",
+            max_tokens=max_tokens,
+            temperature=temperature,
+            json_mode=json_mode,
         )
 
     # ── 底层调用实现 ──────────────────────────
@@ -426,16 +495,20 @@ class LLMClient:
     ) -> LLMResponse:
         """使用 OpenAI SDK 调用"""
         try:
+            token_limit = max_tokens if max_tokens is not None else self._max_tokens
             kwargs = {
                 "model": self.model,
                 "messages": messages,
-                "max_tokens": max_tokens
-                if max_tokens is not None
-                else self._max_tokens,
                 "temperature": temperature
                 if temperature is not None
                 else self._temperature,
             }
+            if self.provider in {"minimax", "mimo"}:
+                kwargs["max_completion_tokens"] = token_limit
+            else:
+                kwargs["max_tokens"] = token_limit
+            if self.provider == "minimax" and self._reasoning_split:
+                kwargs["extra_body"] = {"reasoning_split": True}
             if json_mode:
                 kwargs["response_format"] = {"type": "json_object"}
 
@@ -478,14 +551,20 @@ class LLMClient:
         import urllib.request
         import urllib.error
 
+        token_limit = max_tokens if max_tokens is not None else self._max_tokens
         payload = {
             "model": self.model,
             "messages": messages,
-            "max_tokens": max_tokens if max_tokens is not None else self._max_tokens,
             "temperature": temperature
             if temperature is not None
             else self._temperature,
         }
+        if self.provider in {"minimax", "mimo"}:
+            payload["max_completion_tokens"] = token_limit
+        else:
+            payload["max_tokens"] = token_limit
+        if self.provider == "minimax" and self._reasoning_split:
+            payload["reasoning_split"] = True
         if json_mode:
             payload["response_format"] = {"type": "json_object"}
 
@@ -1215,7 +1294,6 @@ def summarize_text(text: str, max_points: int = 5) -> List[str]:
 
 
 if __name__ == "__main__":
-    import sys
 
     print("=" * 50)
     print("  统一 LLM 客户端 — 测试")

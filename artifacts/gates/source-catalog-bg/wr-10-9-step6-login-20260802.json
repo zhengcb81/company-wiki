@@ -1,0 +1,360 @@
+{
+  "schema_version": "1.0",
+  "work_unit": "WR-10.9 Step 6",
+  "title": "next-login real Windows logon evidence",
+  "capture_started_at": "2026-08-02T17:25:40Z",
+  "run_item": {
+    "exit": 0,
+    "stdout": "{\"present\":true,\"value\":\"\\\"C:\\\\WINDOWS\\\\System32\\\\wscript.exe\\\" //B //Nologo \\\"C:\\\\Users\\\\֣����\\\\Projects\\\\company-wiki\\\\scripts\\\\source_catalog_worker_at_logon.vbs\\\" \\\"C:\\\\Miniconda\\\\python.exe\\\" \\\"C:\\\\Users\\\\֣����\\\\Projects\\\\company-wiki\\\"\"}\n",
+    "stderr": ""
+  },
+  "launcher_events_tail": [
+    {
+      "schema_version": "1.1",
+      "recorded_at": "2026-08-02T12:03:16.1693042Z",
+      "status": "starting",
+      "message": "",
+      "reason": "launcher_session_started",
+      "python_exe": "C:\\Miniconda\\python.exe",
+      "project_root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "startup_delay_seconds": 0,
+      "worker_hang_timeout_seconds": 900,
+      "child_poll_milliseconds": 5000,
+      "launcher_pid": 18708,
+      "session_id": "9a2795689eb640be83120c1d15e026f3",
+      "stdout_log": "",
+      "stderr_log": "",
+      "launcher_source_hashes": {
+        "supervisor_ps1": "5c12cd740cc36abf95f3b9559485472d9d9a760143d27de46e3aaa7b4bbbc311",
+        "logon_ps1": "70b4d7d7128567c0a753e684c3d4e8359c6a93bdc3dbefc7c5f93feaadbe5a1c",
+        "logon_vbs": "e62ada77a775b8ee6c9113006e39eab4d224036bc2296d89a0b04c4e536ae994"
+      }
+    },
+    {
+      "schema_version": "1.1",
+      "recorded_at": "2026-08-02T12:03:16.2374307Z",
+      "status": "child_started",
+      "message": "",
+      "reason": "worker_process_started",
+      "python_exe": "C:\\Miniconda\\python.exe",
+      "project_root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "startup_delay_seconds": 0,
+      "worker_hang_timeout_seconds": 900,
+      "child_poll_milliseconds": 5000,
+      "launcher_pid": 18708,
+      "session_id": "9a2795689eb640be83120c1d15e026f3",
+      "stdout_log": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.source_catalog\\worker_stdout-9a2795689eb640be83120c1d15e026f3-attempt-0001.log",
+      "stderr_log": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.source_catalog\\worker_stderr-9a2795689eb640be83120c1d15e026f3-attempt-0001.log",
+      "launcher_source_hashes": {
+        "supervisor_ps1": "5c12cd740cc36abf95f3b9559485472d9d9a760143d27de46e3aaa7b4bbbc311",
+        "logon_ps1": "70b4d7d7128567c0a753e684c3d4e8359c6a93bdc3dbefc7c5f93feaadbe5a1c",
+        "logon_vbs": "e62ada77a775b8ee6c9113006e39eab4d224036bc2296d89a0b04c4e536ae994"
+      },
+      "attempt": 1,
+      "child_pid": 14092
+    },
+    {
+      "schema_version": "1.1",
+      "recorded_at": "2026-08-02T12:57:26.2206628Z",
+      "status": "exited",
+      "message": "",
+      "reason": "control_stop",
+      "python_exe": "C:\\Miniconda\\python.exe",
+      "project_root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "startup_delay_seconds": 0,
+      "worker_hang_timeout_seconds": 900,
+      "child_poll_milliseconds": 5000,
+      "launcher_pid": 18708,
+      "session_id": "9a2795689eb640be83120c1d15e026f3",
+      "stdout_log": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.source_catalog\\worker_stdout-9a2795689eb640be83120c1d15e026f3-attempt-0001.log",
+      "stderr_log": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.source_catalog\\worker_stderr-9a2795689eb640be83120c1d15e026f3-attempt-0001.log",
+      "launcher_source_hashes": {
+        "supervisor_ps1": "5c12cd740cc36abf95f3b9559485472d9d9a760143d27de46e3aaa7b4bbbc311",
+        "logon_ps1": "70b4d7d7128567c0a753e684c3d4e8359c6a93bdc3dbefc7c5f93feaadbe5a1c",
+        "logon_vbs": "e62ada77a775b8ee6c9113006e39eab4d224036bc2296d89a0b04c4e536ae994"
+      },
+      "exit_code": 2,
+      "attempt": 1,
+      "child_pid": 14092,
+      "uptime_seconds": 3249.992
+    },
+    {
+      "schema_version": "1.1",
+      "recorded_at": "2026-08-02T12:57:33.4409531Z",
+      "status": "starting",
+      "message": "",
+      "reason": "launcher_session_started",
+      "python_exe": "C:\\Miniconda\\python.exe",
+      "project_root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "startup_delay_seconds": 0,
+      "worker_hang_timeout_seconds": 900,
+      "child_poll_milliseconds": 5000,
+      "launcher_pid": 4328,
+      "session_id": "6a0f93576d2d4722b61be980bd70ae6a",
+      "stdout_log": "",
+      "stderr_log": "",
+      "launcher_source_hashes": {
+        "supervisor_ps1": "5c12cd740cc36abf95f3b9559485472d9d9a760143d27de46e3aaa7b4bbbc311",
+        "logon_ps1": "70b4d7d7128567c0a753e684c3d4e8359c6a93bdc3dbefc7c5f93feaadbe5a1c",
+        "logon_vbs": "e62ada77a775b8ee6c9113006e39eab4d224036bc2296d89a0b04c4e536ae994"
+      }
+    },
+    {
+      "schema_version": "1.1",
+      "recorded_at": "2026-08-02T12:57:33.5372915Z",
+      "status": "child_started",
+      "message": "",
+      "reason": "worker_process_started",
+      "python_exe": "C:\\Miniconda\\python.exe",
+      "project_root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "startup_delay_seconds": 0,
+      "worker_hang_timeout_seconds": 900,
+      "child_poll_milliseconds": 5000,
+      "launcher_pid": 4328,
+      "session_id": "6a0f93576d2d4722b61be980bd70ae6a",
+      "stdout_log": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.source_catalog\\worker_stdout-6a0f93576d2d4722b61be980bd70ae6a-attempt-0001.log",
+      "stderr_log": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.source_catalog\\worker_stderr-6a0f93576d2d4722b61be980bd70ae6a-attempt-0001.log",
+      "launcher_source_hashes": {
+        "supervisor_ps1": "5c12cd740cc36abf95f3b9559485472d9d9a760143d27de46e3aaa7b4bbbc311",
+        "logon_ps1": "70b4d7d7128567c0a753e684c3d4e8359c6a93bdc3dbefc7c5f93feaadbe5a1c",
+        "logon_vbs": "e62ada77a775b8ee6c9113006e39eab4d224036bc2296d89a0b04c4e536ae994"
+      },
+      "attempt": 1,
+      "child_pid": 18252
+    },
+    {
+      "schema_version": "1.1",
+      "recorded_at": "2026-08-02T14:12:31.4677332Z",
+      "status": "exited",
+      "message": "",
+      "reason": "control_stop",
+      "python_exe": "C:\\Miniconda\\python.exe",
+      "project_root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "startup_delay_seconds": 0,
+      "worker_hang_timeout_seconds": 900,
+      "child_poll_milliseconds": 5000,
+      "launcher_pid": 4328,
+      "session_id": "6a0f93576d2d4722b61be980bd70ae6a",
+      "stdout_log": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.source_catalog\\worker_stdout-6a0f93576d2d4722b61be980bd70ae6a-attempt-0001.log",
+      "stderr_log": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.source_catalog\\worker_stderr-6a0f93576d2d4722b61be980bd70ae6a-attempt-0001.log",
+      "launcher_source_hashes": {
+        "supervisor_ps1": "5c12cd740cc36abf95f3b9559485472d9d9a760143d27de46e3aaa7b4bbbc311",
+        "logon_ps1": "70b4d7d7128567c0a753e684c3d4e8359c6a93bdc3dbefc7c5f93feaadbe5a1c",
+        "logon_vbs": "e62ada77a775b8ee6c9113006e39eab4d224036bc2296d89a0b04c4e536ae994"
+      },
+      "exit_code": 2,
+      "attempt": 1,
+      "child_pid": 18252,
+      "uptime_seconds": 4497.931
+    },
+    {
+      "schema_version": "1.1",
+      "recorded_at": "2026-08-02T14:12:38.4760167Z",
+      "status": "starting",
+      "message": "",
+      "reason": "launcher_session_started",
+      "python_exe": "C:\\Miniconda\\python.exe",
+      "project_root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "startup_delay_seconds": 0,
+      "worker_hang_timeout_seconds": 900,
+      "child_poll_milliseconds": 5000,
+      "launcher_pid": 6428,
+      "session_id": "622b718924d748ea938965e85ccb00ee",
+      "stdout_log": "",
+      "stderr_log": "",
+      "launcher_source_hashes": {
+        "supervisor_ps1": "5c12cd740cc36abf95f3b9559485472d9d9a760143d27de46e3aaa7b4bbbc311",
+        "logon_ps1": "70b4d7d7128567c0a753e684c3d4e8359c6a93bdc3dbefc7c5f93feaadbe5a1c",
+        "logon_vbs": "e62ada77a775b8ee6c9113006e39eab4d224036bc2296d89a0b04c4e536ae994"
+      }
+    },
+    {
+      "schema_version": "1.1",
+      "recorded_at": "2026-08-02T14:12:38.5712572Z",
+      "status": "child_started",
+      "message": "",
+      "reason": "worker_process_started",
+      "python_exe": "C:\\Miniconda\\python.exe",
+      "project_root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "startup_delay_seconds": 0,
+      "worker_hang_timeout_seconds": 900,
+      "child_poll_milliseconds": 5000,
+      "launcher_pid": 6428,
+      "session_id": "622b718924d748ea938965e85ccb00ee",
+      "stdout_log": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.source_catalog\\worker_stdout-622b718924d748ea938965e85ccb00ee-attempt-0001.log",
+      "stderr_log": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.source_catalog\\worker_stderr-622b718924d748ea938965e85ccb00ee-attempt-0001.log",
+      "launcher_source_hashes": {
+        "supervisor_ps1": "5c12cd740cc36abf95f3b9559485472d9d9a760143d27de46e3aaa7b4bbbc311",
+        "logon_ps1": "70b4d7d7128567c0a753e684c3d4e8359c6a93bdc3dbefc7c5f93feaadbe5a1c",
+        "logon_vbs": "e62ada77a775b8ee6c9113006e39eab4d224036bc2296d89a0b04c4e536ae994"
+      },
+      "attempt": 1,
+      "child_pid": 14188
+    },
+    {
+      "schema_version": "1.1",
+      "recorded_at": "2026-08-02T15:48:38.8452187Z",
+      "status": "starting",
+      "message": "",
+      "reason": "launcher_session_started",
+      "python_exe": "C:\\Miniconda\\python.exe",
+      "project_root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "startup_delay_seconds": 120,
+      "worker_hang_timeout_seconds": 900,
+      "child_poll_milliseconds": 5000,
+      "launcher_pid": 14432,
+      "session_id": "d913baa231c44ea08b4c73587006e64a",
+      "stdout_log": "",
+      "stderr_log": "",
+      "launcher_source_hashes": {
+        "supervisor_ps1": "5c12cd740cc36abf95f3b9559485472d9d9a760143d27de46e3aaa7b4bbbc311",
+        "logon_ps1": "70b4d7d7128567c0a753e684c3d4e8359c6a93bdc3dbefc7c5f93feaadbe5a1c",
+        "logon_vbs": "e62ada77a775b8ee6c9113006e39eab4d224036bc2296d89a0b04c4e536ae994"
+      }
+    },
+    {
+      "schema_version": "1.1",
+      "recorded_at": "2026-08-02T15:48:39.0200482Z",
+      "status": "child_started",
+      "message": "",
+      "reason": "worker_process_started",
+      "python_exe": "C:\\Miniconda\\python.exe",
+      "project_root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "startup_delay_seconds": 120,
+      "worker_hang_timeout_seconds": 900,
+      "child_poll_milliseconds": 5000,
+      "launcher_pid": 14432,
+      "session_id": "d913baa231c44ea08b4c73587006e64a",
+      "stdout_log": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.source_catalog\\worker_stdout-d913baa231c44ea08b4c73587006e64a-attempt-0001.log",
+      "stderr_log": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.source_catalog\\worker_stderr-d913baa231c44ea08b4c73587006e64a-attempt-0001.log",
+      "launcher_source_hashes": {
+        "supervisor_ps1": "5c12cd740cc36abf95f3b9559485472d9d9a760143d27de46e3aaa7b4bbbc311",
+        "logon_ps1": "70b4d7d7128567c0a753e684c3d4e8359c6a93bdc3dbefc7c5f93feaadbe5a1c",
+        "logon_vbs": "e62ada77a775b8ee6c9113006e39eab4d224036bc2296d89a0b04c4e536ae994"
+      },
+      "attempt": 1,
+      "child_pid": 12956
+    },
+    {
+      "schema_version": "1.1",
+      "recorded_at": "2026-08-02T17:23:54.0500298Z",
+      "status": "starting",
+      "message": "",
+      "reason": "launcher_session_started",
+      "python_exe": "C:\\Miniconda\\python.exe",
+      "project_root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "startup_delay_seconds": 120,
+      "worker_hang_timeout_seconds": 900,
+      "child_poll_milliseconds": 5000,
+      "launcher_pid": 15184,
+      "session_id": "1ec5c35c0d074f2f9dbb46b7562bcfcd",
+      "stdout_log": "",
+      "stderr_log": "",
+      "launcher_source_hashes": {
+        "supervisor_ps1": "5c12cd740cc36abf95f3b9559485472d9d9a760143d27de46e3aaa7b4bbbc311",
+        "logon_ps1": "70b4d7d7128567c0a753e684c3d4e8359c6a93bdc3dbefc7c5f93feaadbe5a1c",
+        "logon_vbs": "e62ada77a775b8ee6c9113006e39eab4d224036bc2296d89a0b04c4e536ae994"
+      }
+    },
+    {
+      "schema_version": "1.1",
+      "recorded_at": "2026-08-02T17:23:54.2016652Z",
+      "status": "child_started",
+      "message": "",
+      "reason": "worker_process_started",
+      "python_exe": "C:\\Miniconda\\python.exe",
+      "project_root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "startup_delay_seconds": 120,
+      "worker_hang_timeout_seconds": 900,
+      "child_poll_milliseconds": 5000,
+      "launcher_pid": 15184,
+      "session_id": "1ec5c35c0d074f2f9dbb46b7562bcfcd",
+      "stdout_log": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.source_catalog\\worker_stdout-1ec5c35c0d074f2f9dbb46b7562bcfcd-attempt-0001.log",
+      "stderr_log": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.source_catalog\\worker_stderr-1ec5c35c0d074f2f9dbb46b7562bcfcd-attempt-0001.log",
+      "launcher_source_hashes": {
+        "supervisor_ps1": "5c12cd740cc36abf95f3b9559485472d9d9a760143d27de46e3aaa7b4bbbc311",
+        "logon_ps1": "70b4d7d7128567c0a753e684c3d4e8359c6a93bdc3dbefc7c5f93feaadbe5a1c",
+        "logon_vbs": "e62ada77a775b8ee6c9113006e39eab4d224036bc2296d89a0b04c4e536ae994"
+      },
+      "attempt": 1,
+      "child_pid": 14476
+    }
+  ],
+  "process_events_tail": [
+    {
+      "event": "process_starting",
+      "pid": 18252,
+      "timestamp": "2026-08-02T13:57:34.036035",
+      "catalog_dir": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.source_catalog"
+    },
+    {
+      "event": "session_opened",
+      "pid": 18252,
+      "timestamp": "2026-08-02T13:57:34.257516",
+      "catalog_dir": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.source_catalog"
+    },
+    {
+      "event": "process_starting",
+      "pid": 14188,
+      "timestamp": "2026-08-02T15:12:39.009642",
+      "catalog_dir": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.source_catalog"
+    },
+    {
+      "event": "session_opened",
+      "pid": 14188,
+      "timestamp": "2026-08-02T15:12:39.245270",
+      "catalog_dir": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.source_catalog"
+    },
+    {
+      "event": "process_starting",
+      "pid": 12956,
+      "timestamp": "2026-08-02T16:48:40.112451",
+      "catalog_dir": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.source_catalog"
+    },
+    {
+      "event": "session_opened",
+      "pid": 12956,
+      "timestamp": "2026-08-02T16:48:40.293521",
+      "catalog_dir": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.source_catalog"
+    },
+    {
+      "event": "process_starting",
+      "pid": 14476,
+      "timestamp": "2026-08-02T18:23:55.368763",
+      "catalog_dir": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.source_catalog"
+    },
+    {
+      "event": "session_opened",
+      "pid": 14476,
+      "timestamp": "2026-08-02T18:23:55.546573",
+      "catalog_dir": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.source_catalog"
+    }
+  ],
+  "control_log_tail": [
+    "2026-08-02T12:12:11.7359602+01:00 Control center launched (action=status, host=ConsoleHost, pid=6380).",
+    "2026-08-02T12:20:38.3960658+01:00 Control center launched (action=pause, host=ConsoleHost, pid=12704).",
+    "2026-08-02T12:31:51.2835113+01:00 Control center launched (action=status, host=ConsoleHost, pid=20628).",
+    "2026-08-02T12:32:08.1129153+01:00 Control center launched (action=resume, host=ConsoleHost, pid=23268).",
+    "2026-08-02T12:39:44.6860884+01:00 Control center launched (action=status, host=ConsoleHost, pid=23196).",
+    "2026-08-02T12:39:58.4917776+01:00 Control center launched (action=status, host=ConsoleHost, pid=11288).",
+    "2026-08-02T12:44:19.6986050+01:00 Control center launched (action=status, host=ConsoleHost, pid=14576).",
+    "2026-08-02T12:46:04.1366649+01:00 Control center launched (action=status, host=ConsoleHost, pid=19076).",
+    "2026-08-02T12:49:18.9821303+01:00 Control center launched (action=status, host=ConsoleHost, pid=396).",
+    "2026-08-02T12:59:08.3268929+01:00 Control center launched (action=status, host=ConsoleHost, pid=4928).",
+    "2026-08-02T12:59:27.7004198+01:00 Control center launched (action=status, host=ConsoleHost, pid=6984).",
+    "2026-08-02T13:03:02.5185268+01:00 Control center launched (action=pause, host=ConsoleHost, pid=6964).",
+    "2026-08-02T13:03:14.9938736+01:00 Control center launched (action=resume, host=ConsoleHost, pid=8188).",
+    "2026-08-02T16:51:46.7429189+01:00 Control center launched (action=status, host=ConsoleHost, pid=2780).",
+    "2026-08-02T18:24:56.7810150+01:00 Control center launched (action=status, host=ConsoleHost, pid=13060)."
+  ],
+  "snapshots": [
+    {
+      "tag": "0",
+      "taken_at": "2026-08-02T17:25:43Z",
+      "worker_status_exit": 0,
+      "worker_status_error": null,
+      "worker_status": null
+    }
+  ],
+  "capture_ended_at": "2026-08-02T17:25:43Z"
+}

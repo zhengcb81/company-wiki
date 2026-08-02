@@ -1,0 +1,311 @@
+﻿{
+    "control_path":  "C:\\Users\\郑曾波\\Projects\\company-wiki\\.source_catalog\\worker_control.json",
+    "current_path":  "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\三只松鼠\\raw\\financial_reports\\三只松鼠：2020年第三季度报告全文.pdf",
+    "current_path_elapsed_seconds":  10.3,
+    "current_path_started_at":  1785447423.0071616,
+    "cycle_productive":  null,
+    "desired_state":  "enabled",
+    "heartbeat_age_seconds":  10.3,
+    "heartbeat_at":  1785447423.0071616,
+    "long_running_document_warning":  false,
+    "next_wait_seconds":  null,
+    "next_wake_at":  null,
+    "next_wake_reason":  null,
+    "pid":  22248,
+    "pipeline":  {
+                     "available":  true,
+                     "current":  {
+                                     "active_documents":  1,
+                                     "current":  3,
+                                     "detail":  "extracting Markdown",
+                                     "path":  "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\三只松鼠\\raw\\financial_reports\\三只松鼠：2020年第三季度报告全文.pdf",
+                                     "percent":  100.0,
+                                     "stage":  "normalizing",
+                                     "total":  3,
+                                     "updated_at":  1785447423.0071616
+                                 },
+                     "error":  null,
+                     "explanations":  {
+                                          "markdown_pending_reason":  ""
+                                      },
+                     "health":  {
+                                    "artifacts":  {
+                                                      "artifact_index_empty":  false,
+                                                      "artifact_rows":  4746,
+                                                      "derived_detached_count":  0,
+                                                      "reconciliation_needed":  false
+                                                  },
+                                    "locks":  {
+                                                  "operation_lock":  "live",
+                                                  "operation_lock_operation":  "normalize",
+                                                  "operation_lock_pid":  22248
+                                              },
+                                    "scan":  {
+                                                 "interrupted_total":  5,
+                                                 "last_completed_scan":  {
+                                                                             "completed_at":  "2026-07-30T21:35:37Z",
+                                                                             "run_id":  "scan-55e0684502cc44a28bb78367ddfe03fb",
+                                                                             "started_at":  "2026-07-30T21:29:17Z",
+                                                                             "status":  "completed_with_errors"
+                                                                         },
+                                                 "latest_running_scan":  null,
+                                                 "recent_interrupted_count":  0,
+                                                 "stale_running_scan":  false
+                                             }
+                                },
+                     "index":  {
+                                   "active_documents":  23533,
+                                   "active_locations":  46780,
+                                   "documents":  23789,
+                                   "duplicate_copies":  3550,
+                                   "incomplete_documents":  66,
+                                   "missing_locations":  0,
+                                   "physical_locations":  46781,
+                                   "quarantined_documents":  1,
+                                   "quarantined_locations":  1,
+                                   "unique_sources":  43230,
+                                   "unlinked_active_locations":  0,
+                                   "upstream_rejected_documents":  189
+                               },
+                     "last_scan":  {
+                                       "completed_at":  "2026-07-30T21:35:37Z",
+                                       "dry_run":  false,
+                                       "errors":  1,
+                                       "files_excluded":  378,
+                                       "files_hashed":  0,
+                                       "files_reused":  46780,
+                                       "files_seen":  46781,
+                                       "locations_active":  46780,
+                                       "locations_missing":  0,
+                                       "new_documents":  0,
+                                       "new_sources":  0,
+                                       "run_id":  "scan-55e0684502cc44a28bb78367ddfe03fb",
+                                       "started_at":  "2026-07-30T21:29:17Z",
+                                       "status":  "completed_with_errors"
+                                   },
+                     "llm_summary":  {
+                                         "completed":  308,
+                                         "deferred":  false,
+                                         "eligible":  2673,
+                                         "failed":  84,
+                                         "in_progress":  0,
+                                         "last_failed_document_id":  "urn:company-wiki:document:sha256:0414c3fd337a536f2b261cfeaa84dd90e1429d448113a9c992bccfa0b5cd3467",
+                                         "next_document_retry_after":  1816599348.963516,
+                                         "partial":  0,
+                                         "pending":  2281
+                                     },
+                     "markdown":  {
+                                      "blocked":  67,
+                                      "completed":  1760,
+                                      "eligible":  23722,
+                                      "failed":  0,
+                                      "in_progress":  1,
+                                      "partial":  57,
+                                      "pending":  21894,
+                                      "unsupported":  11
+                                  },
+                     "recent_batches":  {
+                                            "llm_summary":  {
+                                                                "completed":  1,
+                                                                "due_retry":  0,
+                                                                "eligible":  0,
+                                                                "error":  null,
+                                                                "failed":  0,
+                                                                "failed_document_id":  null,
+                                                                "failure_scope":  null,
+                                                                "operation":  "summarize_llm",
+                                                                "partial":  0,
+                                                                "pending":  0,
+                                                                "retry_after":  null,
+                                                                "retry_count":  null,
+                                                                "skipped":  0,
+                                                                "terminal":  0,
+                                                                "unsupported":  0
+                                                            },
+                                            "markdown":  {
+                                                             "completed":  3,
+                                                             "due_retry":  0,
+                                                             "eligible":  0,
+                                                             "failed":  0,
+                                                             "operation":  "normalize",
+                                                             "partial":  0,
+                                                             "pending":  0,
+                                                             "skipped":  0,
+                                                             "terminal":  0,
+                                                             "unsupported":  0
+                                                         },
+                                            "scan":  {
+                                                         "dry_run":  false,
+                                                         "errors":  1,
+                                                         "files_excluded":  378,
+                                                         "files_hashed":  0,
+                                                         "files_reused":  46780,
+                                                         "files_seen":  46781,
+                                                         "locations_active":  46780,
+                                                         "locations_missing":  0,
+                                                         "run_id":  "scan-55e0684502cc44a28bb78367ddfe03fb"
+                                                     }
+                                        },
+                     "schema_version":  "1.0"
+                 },
+    "process_inventory":  {
+                              "foreign_supervisors":  [
+
+                                                      ],
+                              "foreign_workers":  [
+
+                                                  ],
+                              "ignored_matching_processes":  [
+                                                                 {
+                                                                     "pid":  7316,
+                                                                     "reason":  "subcommand_worker_status"
+                                                                 },
+                                                                 {
+                                                                     "pid":  17288,
+                                                                     "reason":  "subcommand_worker_status"
+                                                                 }
+                                                             ],
+                              "inventory_error":  null,
+                              "production_supervisors":  [
+                                                             {
+                                                                 "creation_date":  "/Date(1785447420272)/",
+                                                                 "pid":  21812
+                                                             }
+                                                         ],
+                              "production_workers":  [
+                                                         {
+                                                             "creation_date":  "/Date(1785447421123)/",
+                                                             "pid":  22248
+                                                         }
+                                                     ],
+                              "pytest_temp_supervisors":  [
+
+                                                          ],
+                              "pytest_temp_workers":  [
+
+                                                      ]
+                          },
+    "progress_current":  3,
+    "progress_detail":  "extracting Markdown",
+    "progress_percent":  100.0,
+    "progress_total":  3,
+    "recent_launcher_event":  {
+                                  "attempt":  1,
+                                  "child_pid":  22248,
+                                  "child_poll_milliseconds":  5000,
+                                  "launcher_pid":  21812,
+                                  "message":  "",
+                                  "project_root":  "C:\\Users\\郑曾波\\Projects\\company-wiki",
+                                  "python_exe":  "C:\\Miniconda\\python.exe",
+                                  "reason":  "worker_process_started",
+                                  "recorded_at":  "2026-07-30T21:37:01.1386102Z",
+                                  "schema_version":  "1.1",
+                                  "session_id":  "49c21fdbd4bd49f886da174711423d7f",
+                                  "startup_delay_seconds":  0,
+                                  "status":  "child_started",
+                                  "stderr_log":  "C:\\Users\\郑曾波\\Projects\\company-wiki\\.source_catalog\\worker_stderr-49c21fdbd4bd49f886da174711423d7f-attempt-0001.log",
+                                  "stdout_log":  "C:\\Users\\郑曾波\\Projects\\company-wiki\\.source_catalog\\worker_stdout-49c21fdbd4bd49f886da174711423d7f-attempt-0001.log",
+                                  "worker_hang_timeout_seconds":  900
+                              },
+    "recent_process_event":  {
+                                 "catalog_dir":  "C:\\Users\\郑曾波\\Projects\\company-wiki\\.source_catalog",
+                                 "event":  "session_opened",
+                                 "pid":  22248,
+                                 "timestamp":  "2026-07-30T22:37:02.073262"
+                             },
+    "runtime_path":  "C:\\Users\\郑曾波\\Projects\\company-wiki\\.source_catalog\\worker_runtime.json",
+    "runtime_state":  "running",
+    "scheduler":  {
+                      "dirty_since_last_export":  0,
+                      "last_cycle_at":  1785446957.1245139,
+                      "last_error":  null,
+                      "last_export_at":  1785446957.1245139,
+                      "last_export_duration_seconds":  40.679,
+                      "last_export_progress_detail":  "wrote source catalog index",
+                      "last_export_progress_total":  12,
+                      "last_fingerprint_report":  {
+                                                      "completed":  0,
+                                                      "due_retry":  0,
+                                                      "eligible":  22448,
+                                                      "failed":  0,
+                                                      "operation":  "backfill_text_fingerprints",
+                                                      "partial":  3,
+                                                      "pending":  22448,
+                                                      "skipped":  0,
+                                                      "terminal":  19,
+                                                      "unsupported":  0
+                                                  },
+                      "last_llm_summary_report":  {
+                                                      "completed":  1,
+                                                      "due_retry":  0,
+                                                      "eligible":  0,
+                                                      "error":  null,
+                                                      "failed":  0,
+                                                      "failed_document_id":  null,
+                                                      "failure_scope":  null,
+                                                      "operation":  "summarize_llm",
+                                                      "partial":  0,
+                                                      "pending":  0,
+                                                      "retry_after":  null,
+                                                      "retry_count":  null,
+                                                      "skipped":  0,
+                                                      "terminal":  0,
+                                                      "unsupported":  0
+                                                  },
+                      "last_normalize_report":  {
+                                                    "completed":  3,
+                                                    "due_retry":  0,
+                                                    "eligible":  0,
+                                                    "failed":  0,
+                                                    "operation":  "normalize",
+                                                    "partial":  0,
+                                                    "pending":  0,
+                                                    "skipped":  0,
+                                                    "terminal":  0,
+                                                    "unsupported":  0
+                                                },
+                      "last_scan_at":  1785446957.1245139,
+                      "last_scan_duration_seconds":  380.82,
+                      "last_scan_error":  null,
+                      "last_scan_report":  {
+                                               "dry_run":  false,
+                                               "errors":  1,
+                                               "files_excluded":  378,
+                                               "files_hashed":  0,
+                                               "files_reused":  46780,
+                                               "files_seen":  46781,
+                                               "locations_active":  46780,
+                                               "locations_missing":  0,
+                                               "run_id":  "scan-55e0684502cc44a28bb78367ddfe03fb"
+                                           },
+                      "last_scan_stats":  {
+                                              "duration_seconds":  380.82,
+                                              "errors":  1,
+                                              "files_excluded":  378,
+                                              "files_hashed":  0,
+                                              "files_reused":  46780,
+                                              "files_seen":  46781
+                                          },
+                      "llm_retry_after":  null,
+                      "llm_summarized_total":  1726,
+                      "normalized_total":  4050,
+                      "scan_failures_consecutive":  0,
+                      "scan_retry_after":  null,
+                      "schema_version":  "1.0"
+                  },
+    "schema_version":  "1.0",
+    "stale_runtime":  false,
+    "started_at":  1785447422.0692613,
+    "startup":  {
+                    "installed":  true,
+                    "method":  "current_user_run_registry",
+                    "returncode":  0,
+                    "stderr":  "",
+                    "stdout":  "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\n    CompanyWikiSourceCatalog    REG_SZ    powershell.exe -NoProfile -NonInteractive -WindowStyle Hidden -ExecutionPolicy Bypass -File \"C:\\Users\\郑曾波\\Projects\\company-wiki\\scripts\\source_catalog_worker_at_logon.ps1\" -PythonExe \"C:\\Miniconda\\python.exe\" -ProjectRoot \"C:\\Users\\郑曾波\\Projects\\company-wiki\"",
+                    "success":  true,
+                    "task_name":  "CompanyWiki Source Catalog"
+                },
+    "status_generated_at":  1785447432.7499933,
+    "updated_at":  1785447423.0071616,
+    "worker_status":  "normalizing"
+}

@@ -13,9 +13,8 @@ classify_documents.py — 文档分类脚本
 import argparse
 import re
 import shutil
-import sys
 from pathlib import Path
-from typing import Dict, List, Tuple, Optional, Any
+from typing import Dict, List, Tuple, Any
 from dataclasses import dataclass
 from enum import Enum
 
@@ -166,7 +165,7 @@ def classify_by_filename(filename: str) -> Tuple[DocumentType, float, str]:
         patterns = rule_config.get("patterns", [])
         file_extensions = rule_config.get("file_extensions", [])
         confidence = rule_config.get("confidence", 0.5)
-        target_dir = rule_config.get("target_dir", "other")
+        rule_config.get("target_dir", "other")
         
         # 检查文件扩展名
         if file_extensions:
@@ -258,7 +257,7 @@ def classify_document(file_path: Path) -> FileClassification:
     # 从 companies/{公司名}/raw/... 开始
     parts = file_path.parts
     try:
-        raw_idx = parts.index("raw")
+        parts.index("raw")
         company_idx = parts.index("companies") + 1
         company_name = parts[company_idx]
         

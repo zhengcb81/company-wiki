@@ -131,7 +131,7 @@ class TestCrossContaminationPrevention:
 
         # 这种泛泛的文本应该匹配很少实体或无匹配
         # 不应有具体行业的匹配
-        entity_types = [r[1] for r in result]
+        [r[1] for r in result]
         # 关键词匹配不应导致误报
         assert len(result) < 10, "泛泛文本不应匹配大量实体"
 
@@ -158,7 +158,7 @@ class TestCompanyNameMatching:
         result = graph.find_related_entities(text)
 
         # 不应将"人工智能"匹配为任何公司
-        entity_names = get_entities(result)
+        get_entities(result)
         # 这个测试验证黑名单过滤生效
         # 由于"人工智能"在黑名单中，不应有基于它的公司匹配
 

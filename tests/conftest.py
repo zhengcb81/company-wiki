@@ -4,12 +4,52 @@ pytest 配置文件
 import os
 import sys
 import pytest
-import tempfile
-import shutil
+import socket
 from pathlib import Path
+
+# Hermetic defaults apply during collection as well as individual tests.  This
+# prevents imported modules from loading the repository's real .env before an
+# autouse fixture has a chance to run.
+for _secret_name in (
+    "OPENAI_API_KEY",
+    "DEEPSEEK_API_KEY",
+    "MINIMAX_API_KEY",
+    "MIMO_API_KEY",
+    "TAVILY_API_KEY",
+    "ANTHROPIC_API_KEY",
+):
+    os.environ.pop(_secret_name, None)
+os.environ["PYTHON_DOTENV_DISABLED"] = "1"
+os.environ["COMPANY_WIKI_NETWORK"] = "blocked"
+os.environ["COMPANY_WIKI_REAL_LLM"] = "0"
+
+
+@pytest.fixture(autouse=True)
+def hermetic_runtime(monkeypatch):
+    """Fail every real socket connection in the ordinary pytest suite."""
+    for secret_name in (
+        "OPENAI_API_KEY",
+        "DEEPSEEK_API_KEY",
+        "MINIMAX_API_KEY",
+        "MIMO_API_KEY",
+        "TAVILY_API_KEY",
+        "ANTHROPIC_API_KEY",
+    ):
+        monkeypatch.delenv(secret_name, raising=False)
+    monkeypatch.setenv("PYTHON_DOTENV_DISABLED", "1")
+    monkeypatch.setenv("COMPANY_WIKI_NETWORK", "blocked")
+    monkeypatch.setenv("COMPANY_WIKI_REAL_LLM", "0")
+
+    def blocked_connection(*_args, **_kwargs):
+        raise RuntimeError("HERMETIC NETWORK BLOCKED: ordinary tests cannot open sockets")
+
+    monkeypatch.setattr(socket.socket, "connect", blocked_connection)
+    monkeypatch.setattr(socket, "create_connection", blocked_connection)
 
 # 添加 scripts 目录到 Python 路径
 sys.path.insert(0, str(Path(__file__).parent.parent / "scripts"))
+# 添加 tests 目录到 Python 路径（供 tests/helpers 等测试内部模块导入；RR-12.2d-4 evaluator）
+sys.path.insert(0, str(Path(__file__).parent))
 
 @pytest.fixture(scope="session")
 def wiki_root(tmp_path_factory):
@@ -59,12 +99,11 @@ schedule:
   report_check: "weekly"
 
 llm:
-  provider: "deepseek"
-  api_key: "sk-test-key-12345"
-  model: "deepseek-v4-flash"
-  base_url: "https://api.deepseek.com"
+  provider: "minimax"
+  model: "MiniMax-M3"
+  base_url: "https://api.minimaxi.com/v1"
   max_tokens: 8192
-  temperature: 0.3
+  temperature: 1.0
 
 search:
   engine: "tavily"
@@ -132,3 +171,23 @@ def mock_env_vars(monkeypatch):
     monkeypatch.setenv("TAVILY_API_KEY", "test-tavily-key")
     monkeypatch.setenv("DEEPSEEK_API_KEY", "test-deepseek-key")
     monkeypatch.setenv("WIKI_ROOT", "/tmp/test-wiki")
+
+
+@pytest.fixture
+def synthetic_announcement_pdf(tmp_path):
+    """Create a small deterministic text PDF without production/raw dependencies."""
+    import fitz
+
+    pdf_path = tmp_path / "测试公司：2026年重大事项公告.pdf"
+    document = fitz.open()
+    for page_number in range(3):
+        page = document.new_page()
+        for line_number in range(18):
+            text = (
+                f"Page {page_number + 1} line {line_number + 1}: Company announcement "
+                "revenue 100 million assets 500 million net profit 20 million."
+            )
+            page.insert_text((36, 48 + line_number * 38), text, fontsize=9)
+    document.save(pdf_path)
+    document.close()
+    return pdf_path

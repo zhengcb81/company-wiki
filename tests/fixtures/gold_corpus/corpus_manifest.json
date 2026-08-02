@@ -1,0 +1,908 @@
+{
+  "schema_version": 1,
+  "corpus_version": "rr-12.2d-v1",
+  "annotation_policy_version": "1.0",
+  "synthetic_only": true,
+  "revisions": [
+    {
+      "source_id": "gk-bh-2024-ar",
+      "revision_id": "gkr-bh-2024-ar-v1",
+      "logical_document_id": "gkd-bh-2024-ar",
+      "path": "sources/北方华创/北方华创_2024年报.md",
+      "source_kind": "regulatory",
+      "publisher": "北方华创",
+      "entity_hints": [
+        "北方华创",
+        "002371"
+      ],
+      "published_at": "2025-03-28",
+      "observed_at": "2025-03-29",
+      "effective_period": "2024年",
+      "scenario_tags": [
+        "numeric",
+        "prior_year",
+        "yoy_base"
+      ],
+      "content_sha256": "2a69b999777e0402b17202432be47e143f106b046fcf4a66192baf9239807dd4",
+      "synthetic": true,
+      "review_status": "draft"
+    },
+    {
+      "source_id": "gk-bh-2025-ar",
+      "revision_id": "gkr-bh-2025-ar-v1",
+      "logical_document_id": "gkd-bh-2025-ar",
+      "path": "sources/北方华创/北方华创_2025年报.md",
+      "source_kind": "regulatory",
+      "publisher": "北方华创",
+      "entity_hints": [
+        "北方华创",
+        "002371"
+      ],
+      "published_at": "2025-03-28",
+      "observed_at": "2025-03-29",
+      "effective_period": "2025年",
+      "scenario_tags": [
+        "numeric",
+        "regulatory",
+        "technology"
+      ],
+      "content_sha256": "00fd9f5cc7fd11f0e460e4dfb52732437fe34a6defd001a2a89cd687bfebc54d",
+      "synthetic": true,
+      "review_status": "draft"
+    },
+    {
+      "source_id": "gk-bh-2025-order",
+      "revision_id": "gkr-bh-2025-order-v1",
+      "logical_document_id": "gkd-bh-order",
+      "path": "sources/北方华创/北方华创_2025订单更新.md",
+      "source_kind": "company_announcement",
+      "publisher": "北方华创",
+      "entity_hints": [
+        "北方华创",
+        "002371"
+      ],
+      "published_at": "2025-06-30",
+      "observed_at": "2025-06-30",
+      "effective_period": "2025-06",
+      "scenario_tags": [
+        "supersedes",
+        "numeric"
+      ],
+      "content_sha256": "8f5b57d1e7d375bf890ba3e0a1d6f89d49a2e503cef0a42fd34f823570f3e391",
+      "synthetic": true,
+      "review_status": "draft"
+    },
+    {
+      "source_id": "gk-bh-br-assumption",
+      "revision_id": "gkr-bh-br-assumption-v1",
+      "logical_document_id": "gkd-bh-br-assumption",
+      "path": "sources/券商研报/券商_北方华创关键假设.md",
+      "source_kind": "broker_research",
+      "publisher": "合成券商研究所（fixture）",
+      "entity_hints": [
+        "北方华创",
+        "002371"
+      ],
+      "published_at": "2025-06-08",
+      "observed_at": "2025-06-09",
+      "effective_period": "2025-06",
+      "scenario_tags": [
+        "broker",
+        "assumption",
+        "opinion"
+      ],
+      "content_sha256": "4c842873ff6c1b6ffe281408098e25215c97206b74b84db148791be0b0b1824e",
+      "synthetic": true,
+      "review_status": "draft"
+    },
+    {
+      "source_id": "gk-bh-br-rating",
+      "revision_id": "gkr-bh-br-rating-v1",
+      "logical_document_id": "gkd-bh-br-rating",
+      "path": "sources/券商研报/券商_北方华创评级上调.md",
+      "source_kind": "broker_research",
+      "publisher": "合成券商研究所（fixture）",
+      "entity_hints": [
+        "北方华创",
+        "002371"
+      ],
+      "published_at": "2025-06-03",
+      "observed_at": "2025-06-04",
+      "effective_period": "2025-06",
+      "scenario_tags": [
+        "broker",
+        "rating",
+        "opinion"
+      ],
+      "content_sha256": "d687fae65da8ebef25133b23575f3dcac1a7069304b0a6946b8fa7f85b45c03f",
+      "synthetic": true,
+      "review_status": "draft"
+    },
+    {
+      "source_id": "gk-bh-correction",
+      "revision_id": "gkr-bh-correction-v1",
+      "logical_document_id": "gkd-bh-2025-ar",
+      "path": "sources/北方华创/北方华创_年报更正公告.md",
+      "source_kind": "company_announcement",
+      "publisher": "北方华创",
+      "entity_hints": [
+        "北方华创",
+        "002371"
+      ],
+      "published_at": "2025-04-15",
+      "observed_at": "2025-04-15",
+      "effective_period": "2025年",
+      "scenario_tags": [
+        "correction",
+        "restatement",
+        "numeric"
+      ],
+      "content_sha256": "6b697686a0f7f13ca7687e9ecf93d722cbb306b55ef7d233fd5f31cd0559c0fa",
+      "synthetic": true,
+      "review_status": "draft"
+    },
+    {
+      "source_id": "gk-bh-ir-guidance",
+      "revision_id": "gkr-bh-ir-guidance-v1",
+      "logical_document_id": "gkd-bh-ir-guidance",
+      "path": "sources/北方华创/北方华创_2025业绩说明会.md",
+      "source_kind": "ir",
+      "publisher": "北方华创",
+      "entity_hints": [
+        "北方华创",
+        "002371"
+      ],
+      "published_at": "2025-05-09",
+      "observed_at": "2025-05-09",
+      "effective_period": "2025FY",
+      "scenario_tags": [
+        "prediction",
+        "guidance",
+        "opinion_prediction"
+      ],
+      "content_sha256": "1dabcbed21c2b767b714ba624f15a6a8bb961dbd14458d78adde030cbbe75ba5",
+      "synthetic": true,
+      "review_status": "draft"
+    },
+    {
+      "source_id": "gk-bh-ir-monthly",
+      "revision_id": "gkr-bh-ir-monthly-v1",
+      "logical_document_id": "gkd-bh-ir-monthly",
+      "path": "sources/北方华创/北方华创_2025年4月经营数据.md",
+      "source_kind": "ir",
+      "publisher": "北方华创",
+      "entity_hints": [
+        "北方华创",
+        "002371"
+      ],
+      "published_at": "2025-05-08",
+      "observed_at": "2025-05-08",
+      "effective_period": "2025-04",
+      "scenario_tags": [
+        "numeric",
+        "unaudited"
+      ],
+      "content_sha256": "01903e1c84d960af325af5d1ca8866593c26236a2efe8173743ce014f3a37378",
+      "synthetic": true,
+      "review_status": "draft"
+    },
+    {
+      "source_id": "gk-bh-news-asof",
+      "revision_id": "gkr-bh-news-asof-v1",
+      "logical_document_id": "gkd-bh-asof",
+      "path": "sources/北方华创/北方华创_Q2前瞻报道.md",
+      "source_kind": "original_news",
+      "publisher": "合成财经媒体（fixture）",
+      "entity_hints": [
+        "北方华创",
+        "002371"
+      ],
+      "published_at": "2025-08-10",
+      "observed_at": "2025-08-10",
+      "effective_period": "2025Q2",
+      "scenario_tags": [
+        "as_of",
+        "numeric",
+        "future_leakage"
+      ],
+      "content_sha256": "a198a6193532d71698e5171ebb4fadfde693628c9c7b69f291832e99ded7500a",
+      "synthetic": true,
+      "review_status": "draft"
+    },
+    {
+      "source_id": "gk-bh-news-interview",
+      "revision_id": "gkr-bh-news-interview-v1",
+      "logical_document_id": "gkd-bh-interview",
+      "path": "sources/北方华创/北方华创_采访报道.md",
+      "source_kind": "original_news",
+      "publisher": "合成财经媒体（fixture）",
+      "entity_hints": [
+        "北方华创",
+        "002371"
+      ],
+      "published_at": "2025-05-18",
+      "observed_at": "2025-05-18",
+      "effective_period": "2025-05",
+      "scenario_tags": [
+        "original_news",
+        "interview"
+      ],
+      "content_sha256": "d1ea04e326312ef1421c2b4ac69ec92f1a3619b4972d74b04d46ba12632dd010",
+      "synthetic": true,
+      "review_status": "draft"
+    },
+    {
+      "source_id": "gk-bh-risk-warning",
+      "revision_id": "gkr-bh-risk-warning-v1",
+      "logical_document_id": "gkd-bh-risk",
+      "path": "sources/北方华创/北方华创_风险提示公告.md",
+      "source_kind": "company_announcement",
+      "publisher": "北方华创",
+      "entity_hints": [
+        "北方华创",
+        "002371"
+      ],
+      "published_at": "2025-05-20",
+      "observed_at": "2025-05-20",
+      "effective_period": "2025-05",
+      "scenario_tags": [
+        "risk_warning",
+        "geopolitical"
+      ],
+      "content_sha256": "536da0fdc7d7b3882049cd5c55941b344007bded656cc353b7b7e2dbecb8b286",
+      "synthetic": true,
+      "review_status": "draft"
+    },
+    {
+      "source_id": "gk-consumer-irrelevant3",
+      "revision_id": "gkr-consumer-irrelevant3-v1",
+      "logical_document_id": "gkd-consumer-irrelevant3",
+      "path": "sources/合成消费/合成消费新品发布.md",
+      "source_kind": "original_news",
+      "publisher": "合成消费媒体（fixture）",
+      "entity_hints": [
+        "合成消费"
+      ],
+      "published_at": "2025-07-03",
+      "observed_at": "2025-07-03",
+      "effective_period": "2025-07",
+      "scenario_tags": [
+        "irrelevant",
+        "negative",
+        "original_news"
+      ],
+      "content_sha256": "a345c0ae5b944617f1884fd53a4302f843f025fec7e2e9bee8b35d763f4580fa",
+      "synthetic": true,
+      "review_status": "draft"
+    },
+    {
+      "source_id": "gk-logistics-irrelevant4",
+      "revision_id": "gkr-logistics-irrelevant4-v1",
+      "logical_document_id": "gkd-logistics-irrelevant4",
+      "path": "sources/合成物流/合成物流仓储升级.md",
+      "source_kind": "original_news",
+      "publisher": "合成物流媒体（fixture）",
+      "entity_hints": [
+        "合成物流"
+      ],
+      "published_at": "2025-07-04",
+      "observed_at": "2025-07-04",
+      "effective_period": "2025-07",
+      "scenario_tags": [
+        "irrelevant",
+        "negative",
+        "original_news"
+      ],
+      "content_sha256": "074f682ca949632aa463937e74101e19be326d72a9d750b67d74b374db5000a0",
+      "synthetic": true,
+      "review_status": "draft"
+    },
+    {
+      "source_id": "gk-mt-irrelevant",
+      "revision_id": "gkr-mt-irrelevant-v1",
+      "logical_document_id": "gkd-mt-irrelevant",
+      "path": "sources/贵州茅台/贵州茅台_2025年报.md",
+      "source_kind": "regulatory",
+      "publisher": "贵州茅台",
+      "entity_hints": [
+        "贵州茅台",
+        "600519"
+      ],
+      "published_at": "2025-03-28",
+      "observed_at": "2025-03-29",
+      "effective_period": "2025年",
+      "scenario_tags": [
+        "irrelevant",
+        "negative"
+      ],
+      "content_sha256": "7e51ff8928ddd3049db43e8bcdf47198a40d55c540ee99234e5280f002101931",
+      "synthetic": true,
+      "review_status": "draft"
+    },
+    {
+      "source_id": "gk-news-agg-bh-reprint",
+      "revision_id": "gkr-news-agg-bh-reprint-v1",
+      "logical_document_id": "gkd-agg-reprint",
+      "path": "sources/北方华创/聚合_北方华创年报转载.md",
+      "source_kind": "aggregated_news",
+      "publisher": "合成聚合站点 A（fixture）",
+      "entity_hints": [
+        "北方华创",
+        "002371"
+      ],
+      "published_at": "2025-04-02",
+      "observed_at": "2025-04-02",
+      "effective_period": "2025-04",
+      "scenario_tags": [
+        "aggregated_news",
+        "reprint",
+        "dedup"
+      ],
+      "content_sha256": "a414c6c084242c1bc6fccfb0ec56fa25c1b34eaf0453723506c25ccf105bf736",
+      "synthetic": true,
+      "review_status": "draft"
+    },
+    {
+      "source_id": "gk-news-agg-chain",
+      "revision_id": "gkr-news-agg-chain-v1",
+      "logical_document_id": "gkd-agg-chain",
+      "path": "sources/北方华创/聚合_转载链.md",
+      "source_kind": "aggregated_news",
+      "publisher": "合成聚合站点 D（fixture）",
+      "entity_hints": [
+        "北方华创",
+        "002371"
+      ],
+      "published_at": "2025-07-05",
+      "observed_at": "2025-07-05",
+      "effective_period": "2025-07",
+      "scenario_tags": [
+        "aggregated_news",
+        "reprint_chain",
+        "dedup"
+      ],
+      "content_sha256": "22718b7237f6ce650e4c968b499ce13f5496659da0037db979c5bddd108fb2eb",
+      "synthetic": true,
+      "review_status": "draft"
+    },
+    {
+      "source_id": "gk-news-agg-exaggerated",
+      "revision_id": "gkr-news-agg-exaggerated-v1",
+      "logical_document_id": "gkd-agg-exaggerated",
+      "path": "sources/北方华创/聚合_标题夸张.md",
+      "source_kind": "aggregated_news",
+      "publisher": "合成聚合站点 B（fixture）",
+      "entity_hints": [
+        "北方华创",
+        "002371"
+      ],
+      "published_at": "2025-04-05",
+      "observed_at": "2025-04-05",
+      "effective_period": "2025-04",
+      "scenario_tags": [
+        "aggregated_news",
+        "exaggerated_title"
+      ],
+      "content_sha256": "a2b35abcece7f40c0941be5ab6d7aa970a7b05291bc2b2d716f7f6440ec49fda",
+      "synthetic": true,
+      "review_status": "draft"
+    },
+    {
+      "source_id": "gk-news-agg-syndication",
+      "revision_id": "gkr-news-agg-syndication-v1",
+      "logical_document_id": "gkd-agg-syndication",
+      "path": "sources/北方华创/聚合_同文多发.md",
+      "source_kind": "aggregated_news",
+      "publisher": "合成聚合站点 C（fixture）",
+      "entity_hints": [
+        "北方华创",
+        "002371"
+      ],
+      "published_at": "2025-05-10",
+      "observed_at": "2025-05-10",
+      "effective_period": "2025-05",
+      "scenario_tags": [
+        "aggregated_news",
+        "syndication",
+        "dedup"
+      ],
+      "content_sha256": "79580dc076777082f6ba49645fa66231076c2e0bbdf49de78b33a7b9054cc655",
+      "synthetic": true,
+      "review_status": "draft"
+    },
+    {
+      "source_id": "gk-news-ambig2",
+      "revision_id": "gkr-news-ambig2-v1",
+      "logical_document_id": "gkd-ambig2",
+      "path": "sources/北方华创/华创中微歧义报道.md",
+      "source_kind": "original_news",
+      "publisher": "合成财经媒体（fixture）",
+      "entity_hints": [
+        "北方华创",
+        "中微公司"
+      ],
+      "published_at": "2025-06-15",
+      "observed_at": "2025-06-15",
+      "effective_period": "2025-06",
+      "scenario_tags": [
+        "ambiguity",
+        "negative"
+      ],
+      "content_sha256": "ce69fd02041afec3c87d13c0989fcb46cc00c38e814843d863bf8e5eeee99573",
+      "synthetic": true,
+      "review_status": "draft"
+    },
+    {
+      "source_id": "gk-news-irr-ev",
+      "revision_id": "gkr-news-irr-ev-v1",
+      "logical_document_id": "gkd-irr-ev",
+      "path": "sources/合成新能源/合成新能源_新车发布.md",
+      "source_kind": "original_news",
+      "publisher": "合成财经媒体（fixture）",
+      "entity_hints": [
+        "合成新能源"
+      ],
+      "published_at": "2025-06-20",
+      "observed_at": "2025-06-20",
+      "effective_period": "2025-06",
+      "scenario_tags": [
+        "irrelevant",
+        "negative"
+      ],
+      "content_sha256": "792259d3b51c58d5cd9ad1ed7eb674c5bd9b2023e7a4aa94913c2da7ae79226e",
+      "synthetic": true,
+      "review_status": "draft"
+    },
+    {
+      "source_id": "gk-smic-2025q1",
+      "revision_id": "gkr-smic-2025q1-v1",
+      "logical_document_id": "gkd-smic-2025",
+      "path": "sources/中芯国际/中芯国际_2025一季报.md",
+      "source_kind": "regulatory",
+      "publisher": "中芯国际",
+      "entity_hints": [
+        "中芯国际",
+        "688981"
+      ],
+      "published_at": "2025-04-30",
+      "observed_at": "2025-05-01",
+      "effective_period": "2025Q1",
+      "scenario_tags": [
+        "numeric",
+        "quarterly"
+      ],
+      "content_sha256": "efe6281ff68ecf73e272731668f4622c74c383eb39e3613b359cd3a829837f6c",
+      "synthetic": true,
+      "review_status": "draft"
+    },
+    {
+      "source_id": "gk-smic-ambig4",
+      "revision_id": "gkr-smic-ambig4-v1",
+      "logical_document_id": "gkd-smic-ambig4",
+      "path": "sources/中芯国际/中芯简称歧义报道.md",
+      "source_kind": "original_news",
+      "publisher": "合成科技媒体（fixture）",
+      "entity_hints": [
+        "中芯国际",
+        "中芯集成"
+      ],
+      "published_at": "2025-07-02",
+      "observed_at": "2025-07-02",
+      "effective_period": "2025-07",
+      "scenario_tags": [
+        "ambiguity",
+        "original_news"
+      ],
+      "content_sha256": "c346b3a73300bc38f8d81b468f0a3e611ee8ffa97094c3e48ade9674e60ee357",
+      "synthetic": true,
+      "review_status": "draft"
+    },
+    {
+      "source_id": "gk-smic-ann-asof4",
+      "revision_id": "gkr-smic-ann-asof4-v1",
+      "logical_document_id": "gkd-smic-ann-asof4",
+      "path": "sources/中芯国际/中芯国际_十一月产能公告.md",
+      "source_kind": "company_announcement",
+      "publisher": "中芯国际",
+      "entity_hints": [
+        "中芯国际",
+        "00981"
+      ],
+      "published_at": "2025-11-05",
+      "observed_at": "2025-11-05",
+      "effective_period": "2025-11",
+      "scenario_tags": [
+        "as_of",
+        "future_leakage",
+        "company_announcement"
+      ],
+      "content_sha256": "fe7db0b2dffa503c1197824653167cfe658e51a3379330445783a7c27ae86046",
+      "synthetic": true,
+      "review_status": "draft"
+    },
+    {
+      "source_id": "gk-smic-br-quote",
+      "revision_id": "gkr-smic-br-quote-v1",
+      "logical_document_id": "gkd-smic-br-quote",
+      "path": "sources/券商研报/券商_中芯国际引用披露.md",
+      "source_kind": "broker_research",
+      "publisher": "合成券商研究所（fixture）",
+      "entity_hints": [
+        "中芯国际",
+        "688981"
+      ],
+      "published_at": "2025-05-20",
+      "observed_at": "2025-05-21",
+      "effective_period": "2025-05",
+      "scenario_tags": [
+        "broker",
+        "quoted_fact",
+        "non_independent"
+      ],
+      "content_sha256": "16c0796b1d036e88ff0455d3b0ff120e7b9d32f3254a10396ed174e98baabcf1",
+      "synthetic": true,
+      "review_status": "draft"
+    },
+    {
+      "source_id": "gk-smic-ir-capex",
+      "revision_id": "gkr-smic-ir-capex-v1",
+      "logical_document_id": "gkd-smic-ir-capex",
+      "path": "sources/中芯国际/中芯国际_2025资本开支指引.md",
+      "source_kind": "ir",
+      "publisher": "中芯国际",
+      "entity_hints": [
+        "中芯国际",
+        "688981"
+      ],
+      "published_at": "2025-05-15",
+      "observed_at": "2025-05-15",
+      "effective_period": "2025FY",
+      "scenario_tags": [
+        "prediction",
+        "capex",
+        "opinion_prediction"
+      ],
+      "content_sha256": "ef11b6b94ed1157cde1faeb2eb106b01d4f27e5984ace7e3011227f0302e3470",
+      "synthetic": true,
+      "review_status": "draft"
+    },
+    {
+      "source_id": "gk-smic-ir-control",
+      "revision_id": "gkr-smic-ir-control-v1",
+      "logical_document_id": "gkd-smic-ir-control",
+      "path": "sources/中芯国际/中芯国际_IR中性控制.md",
+      "source_kind": "ir",
+      "publisher": "中芯国际",
+      "entity_hints": [
+        "中芯国际",
+        "00981"
+      ],
+      "published_at": "2025-06-18",
+      "observed_at": "2025-06-18",
+      "effective_period": "2025-06",
+      "scenario_tags": [
+        "neutral_control",
+        "ir"
+      ],
+      "content_sha256": "ddbc3f21734085e96ad3fec5c7595b246bb7fa75ab67c723c422f79d2b07c34e",
+      "synthetic": true,
+      "review_status": "draft"
+    },
+    {
+      "source_id": "gk-smic-major-contract",
+      "revision_id": "gkr-smic-major-contract-v1",
+      "logical_document_id": "gkd-smic-contract",
+      "path": "sources/中芯国际/中芯国际_重大合同公告.md",
+      "source_kind": "company_announcement",
+      "publisher": "中芯国际",
+      "entity_hints": [
+        "中芯国际",
+        "688981"
+      ],
+      "published_at": "2025-07-08",
+      "observed_at": "2025-07-09",
+      "effective_period": "2025-07",
+      "scenario_tags": [
+        "numeric",
+        "major_contract",
+        "multi_target"
+      ],
+      "content_sha256": "7fecb725cb8e42dc9a92c9ffd54f30299eb7835aaabb1352733337956c2dfd78",
+      "synthetic": true,
+      "review_status": "draft"
+    },
+    {
+      "source_id": "gk-smic-news-asof2",
+      "revision_id": "gkr-smic-news-asof2-v1",
+      "logical_document_id": "gkd-smic-news-asof2",
+      "path": "sources/中芯国际/中芯国际_Q3后见报道.md",
+      "source_kind": "original_news",
+      "publisher": "合成科技媒体（fixture）",
+      "entity_hints": [
+        "中芯国际",
+        "00981"
+      ],
+      "published_at": "2025-09-15",
+      "observed_at": "2025-09-15",
+      "effective_period": "2025Q3",
+      "scenario_tags": [
+        "as_of",
+        "future_leakage",
+        "original_news"
+      ],
+      "content_sha256": "b372ad2bfc1ce42b9fa0467706672fc79d266aae3fde414713d8ab5baf37018b",
+      "synthetic": true,
+      "review_status": "draft"
+    },
+    {
+      "source_id": "gk-smic-supersedes2",
+      "revision_id": "gkr-smic-supersedes2-v1",
+      "logical_document_id": "gkd-smic-supersedes2",
+      "path": "sources/中芯国际/中芯国际_Q1营收更新公告.md",
+      "source_kind": "company_announcement",
+      "publisher": "中芯国际",
+      "entity_hints": [
+        "中芯国际",
+        "00981"
+      ],
+      "published_at": "2025-05-20",
+      "observed_at": "2025-05-20",
+      "effective_period": "2025Q1",
+      "scenario_tags": [
+        "supersedes",
+        "numeric",
+        "company_announcement"
+      ],
+      "content_sha256": "d069174808edc215a3aa4e8c04585842b9cd87cb4f37ebd01c618672de80d3e7",
+      "synthetic": true,
+      "review_status": "draft"
+    },
+    {
+      "source_id": "gk-zw-2023-restated",
+      "revision_id": "gkr-zw-2023-restated-v1",
+      "logical_document_id": "gkd-zw-2023-ar",
+      "path": "sources/中微公司/中微公司_2023年报重述.md",
+      "source_kind": "regulatory",
+      "publisher": "中微公司",
+      "entity_hints": [
+        "中微公司",
+        "688012"
+      ],
+      "published_at": "2024-04-26",
+      "observed_at": "2024-04-27",
+      "effective_period": "2023年",
+      "scenario_tags": [
+        "numeric",
+        "restatement"
+      ],
+      "content_sha256": "d657fb7ab6dc558ceaf83f5955682d860ee01c795f8c21b3306649d6ed964a01",
+      "synthetic": true,
+      "review_status": "draft"
+    },
+    {
+      "source_id": "gk-zw-2025-ar",
+      "revision_id": "gkr-zw-2025-ar-v1",
+      "logical_document_id": "gkd-zw-2025-ar",
+      "path": "sources/中微公司/中微公司_2025年报.md",
+      "source_kind": "regulatory",
+      "publisher": "中微公司",
+      "entity_hints": [
+        "中微公司",
+        "688012"
+      ],
+      "published_at": "2025-03-30",
+      "observed_at": "2025-03-31",
+      "effective_period": "2025年",
+      "scenario_tags": [
+        "numeric",
+        "competitor_mention"
+      ],
+      "content_sha256": "89ffaf7f1bd3e9aff61adac26f6c1a2652b40d9f884c335cc6c429cd2d87930d",
+      "synthetic": true,
+      "review_status": "draft"
+    },
+    {
+      "source_id": "gk-zw-ambig3",
+      "revision_id": "gkr-zw-ambig3-v1",
+      "logical_document_id": "gkd-zw-ambig3",
+      "path": "sources/中微公司/中微简称歧义报道.md",
+      "source_kind": "original_news",
+      "publisher": "合成财经媒体（fixture）",
+      "entity_hints": [
+        "中微公司",
+        "中微半导体"
+      ],
+      "published_at": "2025-07-01",
+      "observed_at": "2025-07-01",
+      "effective_period": "2025-07",
+      "scenario_tags": [
+        "ambiguity",
+        "original_news"
+      ],
+      "content_sha256": "96be8d219179ed74cfff8a1f7b10b7ed239d95ed788cca4c958b1de3918532d8",
+      "synthetic": true,
+      "review_status": "draft"
+    },
+    {
+      "source_id": "gk-zw-ambiguous",
+      "revision_id": "gkr-zw-ambiguous-v1",
+      "logical_document_id": "gkd-zw-ambiguous",
+      "path": "sources/中微公司/中微_歧义对比.md",
+      "source_kind": "original_news",
+      "publisher": "合成财经媒体（fixture）",
+      "entity_hints": [
+        "中微"
+      ],
+      "published_at": "2025-05-10",
+      "observed_at": "2025-05-11",
+      "effective_period": "2025-05",
+      "scenario_tags": [
+        "ambiguity",
+        "negative"
+      ],
+      "content_sha256": "dce41043a958b86f44740bdf4b02060eeb034197e3396983bb64294f189b6b8a",
+      "synthetic": true,
+      "review_status": "draft"
+    },
+    {
+      "source_id": "gk-zw-br-forecast",
+      "revision_id": "gkr-zw-br-forecast-v1",
+      "logical_document_id": "gkd-zw-br-forecast",
+      "path": "sources/券商研报/券商_中微公司盈利预测.md",
+      "source_kind": "broker_research",
+      "publisher": "合成券商研究所（fixture）",
+      "entity_hints": [
+        "中微公司",
+        "688012"
+      ],
+      "published_at": "2025-06-05",
+      "observed_at": "2025-06-06",
+      "effective_period": "2025-06",
+      "scenario_tags": [
+        "broker",
+        "forecast",
+        "prediction"
+      ],
+      "content_sha256": "08d6a2e92c5af352c78c5cf9f613d44ab44ec5019c8db0154108ae45654460dc",
+      "synthetic": true,
+      "review_status": "draft"
+    },
+    {
+      "source_id": "gk-zw-br-target",
+      "revision_id": "gkr-zw-br-target-v1",
+      "logical_document_id": "gkd-zw-br-target",
+      "path": "sources/券商研报/券商_中微公司目标价.md",
+      "source_kind": "broker_research",
+      "publisher": "合成券商研究所（fixture）",
+      "entity_hints": [
+        "中微公司",
+        "688012"
+      ],
+      "published_at": "2025-07-02",
+      "observed_at": "2025-07-03",
+      "effective_period": "2025-07",
+      "scenario_tags": [
+        "broker",
+        "target_price",
+        "prediction"
+      ],
+      "content_sha256": "6131953190297703288fe946e3e30f0c342a19f9b5edd9b03858242aab7e3d35",
+      "synthetic": true,
+      "review_status": "draft"
+    },
+    {
+      "source_id": "gk-zw-correction2",
+      "revision_id": "gkr-zw-correction2-v1",
+      "logical_document_id": "gkd-zw-correction2",
+      "path": "sources/中微公司/中微公司_2023营收二次更正.md",
+      "source_kind": "company_announcement",
+      "publisher": "中微公司",
+      "entity_hints": [
+        "中微公司",
+        "688012"
+      ],
+      "published_at": "2025-01-15",
+      "observed_at": "2025-01-15",
+      "effective_period": "2023年",
+      "scenario_tags": [
+        "correction",
+        "restatement",
+        "numeric"
+      ],
+      "content_sha256": "aeb666bf4daca4fa4782c9216ed30be28dab9f3496c910be2349676b411b1011",
+      "synthetic": true,
+      "review_status": "draft"
+    },
+    {
+      "source_id": "gk-zw-ir-qna",
+      "revision_id": "gkr-zw-ir-qna-v1",
+      "logical_document_id": "gkd-zw-ir-qna",
+      "path": "sources/中微公司/中微公司_IR毛利率问答.md",
+      "source_kind": "ir",
+      "publisher": "中微公司",
+      "entity_hints": [
+        "中微公司",
+        "688012"
+      ],
+      "published_at": "2025-05-12",
+      "observed_at": "2025-05-12",
+      "effective_period": "2025-05",
+      "scenario_tags": [
+        "opinion",
+        "margin",
+        "opinion_prediction"
+      ],
+      "content_sha256": "7838849f1c38579d443a863d8c7a4ad0366a3a5b5aa2aa0608b3893c150820e3",
+      "synthetic": true,
+      "review_status": "draft"
+    },
+    {
+      "source_id": "gk-zw-ir-view",
+      "revision_id": "gkr-zw-ir-view-v1",
+      "logical_document_id": "gkd-zw-ir-view",
+      "path": "sources/中微公司/中微公司_2024业绩说明会.md",
+      "source_kind": "ir",
+      "publisher": "中微公司",
+      "entity_hints": [
+        "中微公司",
+        "688012"
+      ],
+      "published_at": "2025-05-12",
+      "observed_at": "2025-05-12",
+      "effective_period": "2025-05",
+      "scenario_tags": [
+        "opinion",
+        "competition",
+        "opinion_prediction"
+      ],
+      "content_sha256": "6d7f56e6deb1e575c32c3ea80db05b14a99de6dbb4959f31e470b14f9ef99950",
+      "synthetic": true,
+      "review_status": "draft"
+    },
+    {
+      "source_id": "gk-zw-news-asof3",
+      "revision_id": "gkr-zw-news-asof3-v1",
+      "logical_document_id": "gkd-zw-news-asof3",
+      "path": "sources/中微公司/中微公司_Q4后见报道.md",
+      "source_kind": "original_news",
+      "publisher": "合成财经媒体（fixture）",
+      "entity_hints": [
+        "中微公司",
+        "688012"
+      ],
+      "published_at": "2025-10-20",
+      "observed_at": "2025-10-20",
+      "effective_period": "2025Q4",
+      "scenario_tags": [
+        "as_of",
+        "future_leakage",
+        "original_news"
+      ],
+      "content_sha256": "2391e545b32ea8863d83d7f92641985518c30b0ce346019f76a3beca2a4216ef",
+      "synthetic": true,
+      "review_status": "draft"
+    },
+    {
+      "source_id": "gk-zw-terminate",
+      "revision_id": "gkr-zw-terminate-v1",
+      "logical_document_id": "gkd-zw-terminate",
+      "path": "sources/中微公司/中微公司_终止事项公告.md",
+      "source_kind": "company_announcement",
+      "publisher": "中微公司",
+      "entity_hints": [
+        "中微公司",
+        "688012"
+      ],
+      "published_at": "2025-06-12",
+      "observed_at": "2025-06-12",
+      "effective_period": "2025-06",
+      "scenario_tags": [
+        "termination",
+        "negative"
+      ],
+      "content_sha256": "87d25610a824014e811fe572d0a381bb38239ee5104ddcdc391b75b864483edd",
+      "synthetic": true,
+      "review_status": "draft"
+    }
+  ]
+}

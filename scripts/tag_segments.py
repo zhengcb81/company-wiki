@@ -23,7 +23,6 @@ tag_segments.py — Layer 3: Markdown → 标签化分段
 import argparse
 import hashlib
 import json
-import re
 import sys
 import uuid
 from datetime import datetime
@@ -31,7 +30,7 @@ from pathlib import Path
 from typing import List, Dict
 
 # 公共基础设施（路径、环境、配置、LLM）
-from common import WIKI_ROOT, get_llm_client_safe
+from common import WIKI_ROOT
 
 from llm_client import get_llm_client
 from graph import Graph
@@ -191,7 +190,7 @@ def tag_segments(text: str, llm_client, doc_type: str = "") -> List[Dict]:
         try:
             segments = json.loads(content)
             if not isinstance(segments, list):
-                print(f"    -> 解析失败: 不是数组")
+                print("    -> 解析失败: 不是数组")
                 continue
 
             for seg in segments:
@@ -223,7 +222,7 @@ def tag_segments(text: str, llm_client, doc_type: str = "") -> List[Dict]:
                     seg["chunk_index"] = i
                     all_segments.append(seg)
             else:
-                print(f"    -> JSON 解析失败，无法提取对象")
+                print("    -> JSON 解析失败，无法提取对象")
             continue
         except Exception as e:
             print(f"    -> 处理失败: {e}")
@@ -400,6 +399,11 @@ def main():
         f"\n完成: {success} 成功, {skipped} 跳过, {errors} 错误, {total_segments} 总段数"
     )
     return 0
+
+
+from writer_policy import enforce_direct_cli as _enforce_legacy_writer_freeze
+
+_enforce_legacy_writer_freeze(__name__, __file__)
 
 
 if __name__ == "__main__":

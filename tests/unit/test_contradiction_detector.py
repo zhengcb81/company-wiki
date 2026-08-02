@@ -4,7 +4,6 @@
 """
 
 import pytest
-import tempfile
 from pathlib import Path
 from unittest.mock import patch
 
@@ -47,14 +46,14 @@ companies:
 title: "公司动态"
 entity: "中微公司"
 type: company_topic
-last_updated: "2026-04-17"
+last_updated: "2026-06-27"
 ---
 
 # 中微公司 — 公司动态
 
 ## 时间线
 
-### 2026-04-17 | 新闻 | 中微公司发布新品
+### 2026-06-27 | 新闻 | 中微公司发布新品
 - 刻蚀精度提升30%
 - 国产化率达到85%
 
@@ -65,14 +64,14 @@ last_updated: "2026-04-17"
 title: "相关动态"
 entity: "中微公司"
 type: company_related
-last_updated: "2026-04-16"
+last_updated: "2026-06-26"
 ---
 
 # 中微公司 — 相关动态
 
 ## 时间线
 
-### 2026-04-16 | 研报 | 中微公司深度报告
+### 2026-06-26 | 研报 | 中微公司深度报告
 - 刻蚀精度提升80%  # 与页面1的30%矛盾（差异>50%）
 - 国产化率达到40%  # 与页面1的85%矛盾（差异>50%）
 
@@ -87,19 +86,19 @@ last_updated: "2026-04-16"
 title: "财务数据"
 entity: "中微公司"
 type: company_finance
-last_updated: "2026-04-15"
+last_updated: "2026-06-25"
 ---
 
 # 中微公司 — 财务数据
 
 ## 时间线
 
-### 2026-04-15 | 财报 | 2025年年报
+### 2026-06-25 | 财报 | 2025年年报
 - 营收123.85亿元
 
 - [来源](../raw/reports/annual.md)
 
-### 2026-04-14 | 财报 | 2025年年报  # 同一事件，不同日期
+### 2026-06-24 | 财报 | 2025年年报  # 同一事件，不同日期
 - 营收120亿元
 
 - [来源](../raw/reports/annual2.md)

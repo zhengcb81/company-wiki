@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "id": "CTRL-BOOTSTRAP",
+  "implementer_id": "root-current-task",
+  "acceptance": "control/acceptance.json",
+  "acceptance_lock": "control/acceptance.lock.json",
+  "baseline_snapshot": "artifacts/gates/ctrl-bootstrap-baseline.json",
+  "allowed_paths": [
+    "artifacts/gates/**"
+  ],
+  "commands": [
+    {
+      "name": "acceptance-lock",
+      "argv": [
+        "python",
+        "scripts/gate_runner.py",
+        "verify-lock",
+        "--root",
+        ".",
+        "--lock",
+        "control/acceptance.lock.json"
+      ],
+      "timeout_s": 60
+    },
+    {
+      "name": "offline-editable-install",
+      "argv": [
+        "python",
+        "-m",
+        "pip",
+        "install",
+        "-e",
+        ".",
+        "--no-deps",
+        "--no-build-isolation"
+      ],
+      "timeout_s": 300
+    },
+    {
+      "name": "full-local-suite-after-install",
+      "argv": [
+        "python",
+        "-m",
+        "pytest",
+        "-q"
+      ],
+      "timeout_s": 300
+    }
+  ]
+}

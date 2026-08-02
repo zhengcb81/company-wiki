@@ -9,12 +9,11 @@ import math
 import re
 from pathlib import Path
 from datetime import datetime
-from typing import Dict, List, Optional
+from typing import Dict
 
 from common import WIKI_ROOT
 
 from llm_client import get_llm_client
-from prompts import build_assessment_prompt
 from graph import Graph
 
 
@@ -40,7 +39,12 @@ def has_assessment(wiki_path: Path) -> bool:
     return False
 
 
-def is_assessment_stale(wiki_path: Path, stale_days: int = 60) -> bool:
+def is_assessment_stale(
+    wiki_path: Path,
+    stale_days: int = 60,
+    *,
+    now: datetime | None = None,
+) -> bool:
     """
     检查综合评估是否过时（基于 frontmatter 的 last_updated）
 
@@ -56,7 +60,6 @@ def is_assessment_stale(wiki_path: Path, stale_days: int = 60) -> bool:
     content = wiki_path.read_text(encoding="utf-8")
 
     # 从 frontmatter 提取 last_updated
-    import re
 
     match = re.search(r'last_updated:\s*"?(\d{4}-\d{2}-\d{2})"?', content)
     if not match:
@@ -65,7 +68,8 @@ def is_assessment_stale(wiki_path: Path, stale_days: int = 60) -> bool:
     last_updated = match.group(1)
     try:
         last_date = datetime.strptime(last_updated, "%Y-%m-%d")
-        days_old = (datetime.now() - last_date).days
+        reference_time = now or datetime.now()
+        days_old = (reference_time - last_date).days
         return days_old > stale_days
     except ValueError:
         return True
@@ -109,7 +113,6 @@ def _extract_old_assessment(content: str) -> tuple:
         - old_assessment_text: 旧的评估文本（引用块格式）
         - history_entries: list of {"date": str, "text": str} 已有的历史条目
     """
-    import re
 
     pattern = r"(## 综合评估\n+)([\s\S]*?)(?=\n## |\Z)"
     match = re.search(pattern, content)
@@ -332,7 +335,6 @@ def calculate_time_weight(days_old: int, info_type: str = "general") -> float:
     Returns:
         权重值 (0.0-1.0)
     """
-    import math
 
     # 不同信息类型的半衰期（天）
     half_lives = {
@@ -533,7 +535,7 @@ def main():
 
         entries = extract_timeline_entries(wiki)
         if not entries:
-            print(f"  -> SKIP | No timeline entries")
+            print("  -> SKIP | No timeline entries")
             skipped += 1
             continue
 
@@ -571,7 +573,7 @@ def main():
                     pass
                 success += 1
             else:
-                print(f"  -> SKIP | LLM returned empty")
+                print("  -> SKIP | LLM returned empty")
                 skipped += 1
         except Exception as e:
             print(f"  -> ERR | {e}")
@@ -580,6 +582,11 @@ def main():
     print("\n" + "=" * 50)
     print(f"Done. Success:{success} Skipped:{skipped} Errors:{errors}")
     print("=" * 50)
+
+
+from writer_policy import enforce_direct_cli as _enforce_legacy_writer_freeze
+
+_enforce_legacy_writer_freeze(__name__, __file__)
 
 
 if __name__ == "__main__":

@@ -3,8 +3,6 @@ Query 模块测试
 测试 wiki 搜索、答案综合和存回功能
 """
 import pytest
-import tempfile
-import shutil
 from pathlib import Path
 
 import sys
@@ -170,6 +168,7 @@ class TestAnswerSynthesizer:
         """测试有结果时的综合"""
         searcher = WikiSearcher(test_wiki)
         synthesizer = AnswerSynthesizer(test_wiki)
+        synthesizer._llm = type("UnavailableLLM", (), {"available": False})()
         
         results = searcher.search("刻蚀设备进展")
         answer = synthesizer.synthesize("刻蚀设备进展如何？", results)
@@ -247,6 +246,9 @@ class TestAnswerSaver:
         assert "测试问题？" in content
         assert "测试答案内容" in content
         assert "query" in content
+        assert "Query answer saved: 测试问题？ -> 中微公司" in (
+            test_wiki / "log.md"
+        ).read_text(encoding="utf-8")
     
     def test_save_as_timeline_entry(self, test_wiki):
         """测试保存为时间线条目"""

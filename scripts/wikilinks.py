@@ -24,10 +24,9 @@ wikilinks.py — Wiki 页面交叉引用引擎
 """
 
 import re
-import sys
 import logging
 from pathlib import Path
-from typing import Dict, List, Set, Tuple, Optional
+from typing import Dict, List, Tuple
 from collections import defaultdict
 
 from common import WIKI_ROOT, GRAPH_YAML
@@ -417,7 +416,7 @@ def main():
         companies = engine.graph_data.get("companies", {})
         sectors = engine.graph_data.get("sectors", {})
         themes = engine.graph_data.get("themes", {})
-        print(f"\n知识图谱:")
+        print("\n知识图谱:")
         print(f"  公司: {len(companies)}")
         print(f"  行业: {len(sectors)}")
         print(f"  主题: {len(themes)}")
@@ -431,7 +430,7 @@ def main():
         return
 
     if args.backfill:
-        print(f"\n扫描所有 wiki 页面...")
+        print("\n扫描所有 wiki 页面...")
         all_pages = engine.scan_all_pages()
         print(f"找到 {len(all_pages)} 个页面")
 
@@ -445,6 +444,11 @@ def main():
         return
 
     parser.print_help()
+
+
+from writer_policy import enforce_direct_cli as _enforce_legacy_writer_freeze
+
+_enforce_legacy_writer_freeze(__name__, __file__)
 
 
 if __name__ == "__main__":

@@ -1,0 +1,2 @@
+quick_check= ok
+fk_rows= 0

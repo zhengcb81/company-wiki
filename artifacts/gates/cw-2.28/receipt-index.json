@@ -1,0 +1,48 @@
+{
+  "phases": {
+    "phase-0": {
+      "path": "phase-0-attempt-0001.json",
+      "sha256": "9e2becab51c34058a54b9bcaeb38064a93ac506209444ab19f37093954b7d853"
+    },
+    "phase-1": {
+      "path": "phase-1-attempt-0001.json",
+      "sha256": "5396b68512bde8ae143af1d1305b711f9d2af99d600e816ea8ab9ddb7785974d"
+    },
+    "phase-2": {
+      "path": "phase-2-attempt-0001.json",
+      "sha256": "71f70c1979c58fc249b80c730175d401347792785e4edc63c008e71e347b2dfc"
+    },
+    "phase-3": {
+      "path": "phase-3-attempt-0001.json",
+      "sha256": "462150f816b762d17b9b69b4d82f1e7c4215c1e7265dfc269b3cca9b87587bbe"
+    },
+    "phase-4": {
+      "path": "phase-4-attempt-0001.json",
+      "sha256": "fb70e4805fd105ab58a8a8b789e3a91e211a8d1b73dbeefbe2457809add4683b"
+    },
+    "phase-5": {
+      "path": "phase-5-attempt-0001.json",
+      "sha256": "b9871f5295ffa24016d1711612185bc9c44abd29bd9fae9fb6c0d5ba0fb23d57"
+    },
+    "phase-6": {
+      "path": "phase-6-attempt-0001.json",
+      "sha256": "e2c125f1293321d75509db6be07cc720bebd35bceddc848e20039d65d8973c99"
+    },
+    "phase-7": {
+      "path": "phase-7-attempt-0001.json",
+      "sha256": "5c778f80cbab21bc0ee1099730f1d7e1c5149d3caa3a0c1c736311e3521a49cf"
+    },
+    "phase-8": {
+      "path": "phase-8-attempt-0001.json",
+      "sha256": "d624fa25d785ad7dc009d4355278deab71e2b96fd178f0317fbf319b71b33445"
+    },
+    "phase-9": {
+      "path": "phase-9-attempt-0001.json",
+      "sha256": "615b9c4726032a4cbd1d6f2a799ec1e2c323f5c1a9417b8dcabd613ea6ad8b87"
+    },
+    "phase-10": {
+      "path": "phase-10-attempt-0001.json",
+      "sha256": "ceded467c7e479ae4c66c5f5c855414ecde756ca7fa6a11b2f3bbd7e87a83cbf"
+    }
+  }
+}

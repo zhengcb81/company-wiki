@@ -39,7 +39,6 @@ import shutil
 import subprocess
 import sys
 from datetime import datetime
-from pathlib import Path
 
 # ── 路径 ──────────────────────────────────
 from common import WIKI_ROOT, CONFIG_PATH, LOG_PATH
@@ -59,8 +58,8 @@ def get_downloader_info(config):
 
     if not os.path.isdir(tool_path):
         print(f"ERROR: StockInfoDownloader not found at: {tool_path}")
-        print(f"  请在 config.yaml -> report_downloader.tool_path 中配置正确路径")
-        print(f"  Windows 示例: C:/Users/xxx/Projects/StockInfoDownloader")
+        print("  请在 config.yaml -> report_downloader.tool_path 中配置正确路径")
+        print("  Windows 示例: C:/Users/xxx/Projects/StockInfoDownloader")
         sys.exit(1)
 
     main_py = os.path.join(tool_path, "main.py")
@@ -210,10 +209,10 @@ def run_downloader(main_py, stock_code, dl_config, tool_path):
                 for line in stderr_lines[-5:]:
                     print(f"  stderr: {line}")
         else:
-            print(f"  Success")
+            print("  Success")
         return result.returncode == 0
     except subprocess.TimeoutExpired:
-        print(f"  ERROR: Timeout (600s)")
+        print("  ERROR: Timeout (600s)")
         return False
     except Exception as e:
         print(f"  ERROR: {e}")
@@ -337,10 +336,10 @@ def main():
         print(f"\n  Config saved to: {output_path}")
         print(f"  Companies: {len(sd_config['companies'])}")
         print(f"  Page types: {[p['suffix'] for p in sd_config['pages']]}")
-        print(f"\n  To download, run:")
+        print("\n  To download, run:")
         print(f"    cd {config['report_downloader']['tool_path']}")
         print(f"    copy {output_path} config.json")
-        print(f"    python main.py --parallel --workers 2")
+        print("    python main.py --parallel --workers 2")
         return
 
     # 下载模式 — 直接下载到 wiki 的 companies/ 目录
@@ -355,14 +354,19 @@ def main():
         success = run_downloader(main_py, code, sd_config, tool_path)
 
         if not success:
-            print(f"  Download may have failed, checking for partial results...")
+            print("  Download may have failed, checking for partial results...")
 
     print(f"\n{'=' * 50}")
-    print(f"  Done. Files saved directly to wiki/companies/")
+    print("  Done. Files saved directly to wiki/companies/")
     print(f"{'=' * 50}")
 
     append_log("Ran StockInfoDownloader for reports/research")
-    print(f"\n  下一步: python3 scripts/ingest.py")
+    print("\n  下一步: python3 scripts/ingest.py")
+
+
+from writer_policy import enforce_direct_cli as _enforce_legacy_writer_freeze
+
+_enforce_legacy_writer_freeze(__name__, __file__)
 
 
 if __name__ == "__main__":

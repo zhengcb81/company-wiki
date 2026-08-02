@@ -26,6 +26,10 @@ from datetime import datetime
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
+from writer_policy import enforce_direct_cli
+
+enforce_direct_cli(__name__, __file__)
+
 # 公共基础设施（路径、环境、配置）
 from common import WIKI_ROOT
 
@@ -53,7 +57,7 @@ def _atomic_write(path: Path, content: str, encoding: str = "utf-8") -> None:
     try:
         tmp_path.write_text(content, encoding=encoding)
         os.replace(str(tmp_path), str(path))
-    except Exception as e:
+    except Exception:
         # 如果原子写入失败，回退到直接写入（好过丢数据）
         if tmp_path.exists():
             try:
@@ -1253,7 +1257,7 @@ def process_segments_file(
         "error": None,
     }
 
-    seg_path = Path(seg_file)
+    Path(seg_file)
     try:
         segments = []
         with open(seg_file, "r", encoding="utf-8") as f:
@@ -1401,7 +1405,7 @@ def main():
     llm_client._timeout = 120  # large documents may take longer
 
     if not llm_client.available:
-        print("\n  ERROR: LLM 不可用。请检查 DEEPSEEK_API_KEY 配置。")
+        print("\n  ERROR: LLM 不可用。请检查对应 API key 环境变量（默认 MINIMAX_API_KEY）。")
         sys.exit(1)
 
     # 处理指定文件
@@ -1499,7 +1503,7 @@ def main():
             print(f"       → Entries: +{result['entries_added']}")
             total_entries += result["entries_added"]
         if result["assessment_updated"]:
-            print(f"       → Assessment updated")
+            print("       → Assessment updated")
             total_assessments += 1
         if result["contradictions_found"] > 0:
             print(f"       → Contradictions: {result['contradictions_found']}")
@@ -1516,7 +1520,7 @@ def main():
             mark_ingested(fp)
 
     print(f"\n{'=' * 60}")
-    print(f"  Done.")
+    print("  Done.")
     print(f"  Entries added: {total_entries}")
     print(f"  Assessments updated: {total_assessments}")
     print(f"  Contradictions found: {total_contradictions}")

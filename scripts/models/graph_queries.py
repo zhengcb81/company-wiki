@@ -6,7 +6,7 @@ from collections import defaultdict
 from typing import List, Tuple, Dict, Any, Optional, Set
 import logging
 
-from .graph_data import GraphData, Company, Sector, Theme, Edge, EntityType
+from .graph_data import GraphData, Company, Sector, Theme
 
 logger = logging.getLogger(__name__)
 

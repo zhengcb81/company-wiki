@@ -1,0 +1,82 @@
+# 投资者关系活动记录Prompt模板
+template: |
+  你是一名资深行业研究员。以下内容是{company}的投资者关系活动记录，包含机构投资者与管理层的问答对话。
+
+  ## 分析对象
+  公司: {company}
+  文档类型: 投资者关系活动记录
+  活动日期: {period}
+
+  ## 核心追踪问题
+  {core_questions}
+
+  ## 分析框架
+  请按以下维度逐项分析：
+  {framework_description}
+
+  ## 待分析内容
+  {content}
+
+  ## 输出要求
+  1. **综合提取**（重要：一个 IR 文件只生成一个时间线条目）：
+     - 将整个 IR 活动记录作为一个整体分析
+     - 提取最重要的 3-5 个 QA 对的核心内容，合并为一个条目
+     - 不要为每个 QA 对生成独立条目（避免时间线过度膨胀）
+  2. **维度分析**：每个维度下，逐个方面提取：
+     - aspect: 具体方面（来自框架）
+     - finding: 你的发现（必须有原文依据）
+     - evidence: 原文引用
+  3. **重要规则**：
+     - 只提取原文明确信息，禁止编造
+     - 数字必须准确，不要自行计算
+
+  ## 输出格式（严格JSON）
+  {output_schema}
+
+output_schema: |
+  {
+    "document_type": "investor_relations",
+    "timeline_entries": [
+      {
+        "date": "YYYY-MM-DD",
+        "title": "IR: 活动主题概括（如'机构调研：业务进展与竞争格局'）",
+        "key_points": [
+          "要点1: 最重要的 QA 核心内容（含具体数据）",
+          "要点2: 次重要的 QA 核心内容",
+          "要点3: 管理层透露的关键洞察"
+        ],
+        "source_type": "投资者关系",
+        "importance": 0.0,
+        "sentiment": "positive/negative/neutral"
+      }
+    ],
+    "dimensions": {
+      "business_updates": {
+        "name": "业务最新进展",
+        "items": [
+          {"aspect": "订单/合同", "finding": "具体进展", "evidence": "原文依据"}
+        ]
+      },
+      "guidance": {
+        "name": "管理层指引",
+        "items": [
+          {"aspect": "业绩指引", "finding": "具体内容", "evidence": "原文依据"}
+        ]
+      },
+      "investor_concerns": {
+        "name": "投资者关切",
+        "items": [
+          {"aspect": "热点问题", "finding": "管理层回应", "evidence": "原文依据"}
+        ]
+      },
+      "key_insights": {
+        "name": "关键洞察",
+        "items": [
+          {"aspect": "非公开信息", "finding": "具体内容", "evidence": "原文依据"}
+        ]
+      }
+    },
+    "assessment": "总体评估（100字内）",
+    "key_insights": ["洞察1", "洞察2"],
+    "new_questions": ["新问题1"]
+  }

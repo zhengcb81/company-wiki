@@ -1,0 +1,92 @@
+# 招股说明书Prompt模板
+template: |
+  你是一名资深IPO分析师。请深度分析{company}的招股说明书。
+
+  ## 分析对象
+  公司: {company}
+  文档类型: 招股说明书
+  日期: {period}
+
+  ## 重点提取章节
+  请优先从以下章节提取信息（如果章节不存在，请从全文提取）：
+  {source_sections_description}
+
+  ## 核心追踪问题
+  {core_questions}
+
+  ## 分析框架
+  请按以下维度逐项分析，每个维度提取具体发现：
+  {framework_description}
+
+  ## 待分析内容
+  {content}
+
+  ## 输出要求
+  1. **时间线**：按时间顺序记录关键事件（如公司成立、产品发布、融资等）
+  2. **维度分析**：每个维度下，逐个方面提取：
+     - aspect: 具体方面（来自框架）
+     - finding: 你的发现（必须有原文依据）
+     - evidence: 原文引用（直接引用或标注"原文未直接给出"）
+  3. **重要规则**：
+     - 只提取原文明确信息，禁止编造
+     - 数字必须准确，不要自行计算
+     - 如果某方面未披露，标注"未披露"
+     - 如果需要引用"测算"数据，必须标注"（原文未直接给出，根据XX推算）"
+
+  ## 输出格式（严格JSON）
+  {output_schema}
+
+output_schema: |
+  {
+    "document_type": "prospectus",
+    "timeline_entries": [
+      {
+        "date": "YYYY-MM-DD",
+        "title": "事件标题",
+        "key_points": ["要点1", "要点2"],
+        "source_type": "招股说明书",
+        "importance": 0.0,
+        "sentiment": "positive/negative/neutral"
+      }
+    ],
+    "dimensions": {
+      "business_model": {
+        "name": "商业模式",
+        "source_section": "来源章节名称",
+        "items": [
+          {"aspect": "收入来源", "finding": "发现内容", "evidence": "原文依据"}
+        ]
+      },
+      "cost_profit_profile": {
+        "name": "费用利润特征",
+        "source_section": "来源章节名称",
+        "items": [
+          {"aspect": "盈利模式", "finding": "发现内容", "evidence": "原文依据"}
+        ]
+      },
+      "macro_factors": {
+        "name": "宏观经济关联",
+        "source_section": "来源章节名称",
+        "items": [
+          {"aspect": "政策驱动", "finding": "发现内容", "evidence": "原文依据"}
+        ]
+      },
+      "competitive_advantage": {
+        "name": "竞争优势",
+        "source_section": "来源章节名称",
+        "items": [
+          {"aspect": "技术壁垒", "finding": "发现内容", "evidence": "原文依据"}
+        ]
+      },
+      "risk_factors": {
+        "name": "风险因素",
+        "source_section": "来源章节名称",
+        "items": [
+          {"aspect": "客户集中度", "finding": "发现内容", "evidence": "原文依据"}
+        ]
+      }
+    },
+    "assessment": "总体评估（100字内）",
+    "key_insights": ["洞察1", "洞察2"],
+    "new_questions": ["新问题1"]
+  }

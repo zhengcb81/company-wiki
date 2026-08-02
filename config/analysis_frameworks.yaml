@@ -1,0 +1,183 @@
+# 分析框架配置 - 定义每种文档类型的分析维度和章节类型匹配规则
+# 版本: 1.0
+
+defaults:
+  timeline:
+    required_fields: ["date", "title", "key_points"]
+    date_format: "YYYY-MM-DD"
+  section_discovery:
+    patterns:
+      - "第.{1,3}节\\s+.+"
+      - "第.{1,3}章\\s+.+"
+      - "[一二三四五六七八九十]+、.+"
+      - "（[一二三四五六七八九十]+）.+"
+
+frameworks:
+  prospectus:
+    name: "招股说明书"
+    description: "IPO招股书分析，关注商业模式、盈利特征、宏观关联"
+    section_types:
+      business:
+        patterns: ["业务与技术", "业务和技术", "主营业务", "发行人主营业务"]
+        description: "公司业务描述"
+      financial:
+        patterns: ["财务会计信息", "管理层讨论与分析", "财务会计信息与管理层分析"]
+        description: "财务信息与分析"
+      risk:
+        patterns: ["风险因素", "风险"]
+        description: "风险因素"
+      fundraising:
+        patterns: ["募集资金", "业务发展目标"]
+        description: "募资用途"
+    dimensions:
+      - id: business_model
+        name: "商业模式"
+        section_type: "business"
+        required: true
+        aspects:
+          - "收入来源与结构"
+          - "客户结构与集中度"
+          - "定价模式与议价能力"
+          - "销售渠道与网络"
+      - id: cost_profit_profile
+        name: "费用利润特征"
+        section_type: "business"
+        required: true
+        aspects:
+          - "盈利模式类型（高毛利低销量/低毛利高销量/平台型等）"
+          - "费用结构（研发/销售/管理占比及趋势）"
+          - "盈亏平衡点与经营杠杆"
+          - "规模效应与边际成本变化"
+      - id: macro_factors
+        name: "宏观经济关联"
+        section_type: "business"
+        required: true
+        aspects:
+          - "政策驱动因素（产业政策、补贴、监管）"
+          - "行业周期性（周期阶段、驱动因素）"
+          - "供需关系（产能、库存、价格）"
+          - "技术迭代影响（替代风险、升级机会）"
+      - id: competitive_advantage
+        name: "竞争优势"
+        section_type: "business"
+        required: false
+        aspects:
+          - "技术壁垒"
+          - "客户粘性"
+          - "成本优势"
+      - id: risk_factors
+        name: "风险因素"
+        section_type: "risk"
+        required: true
+        aspects:
+          - "客户集中度风险"
+          - "技术迭代风险"
+          - "政策监管风险"
+
+  annual_report:
+    name: "年度报告"
+    description: "年报分析，关注业务线进展、财务表现、战略展望"
+    section_types:
+      management_discussion:
+        patterns: ["管理层讨论与分析", "公司业务概要", "经营情况讨论与分析"]
+        description: "管理层讨论与分析"
+      financial_report:
+        patterns: ["财务报告", "财务报表"]
+        description: "财务报告"
+      business_overview:
+        patterns: ["公司业务概要", "公司简介", "业务概要"]
+        description: "业务概述"
+    dimensions:
+      - id: business_lines
+        name: "各业务线进展"
+        section_type: "management_discussion"
+        required: true
+        aspects:
+          - "收入与增长情况"
+          - "重大进展与里程碑"
+          - "未来展望与规划"
+      - id: financial_performance
+        name: "财务表现"
+        section_type: "management_discussion"
+        required: true
+        aspects:
+          - "营收与利润"
+          - "盈利能力（毛利率、净利率、ROE）"
+          - "现金流质量"
+      - id: management_outlook
+        name: "管理层展望"
+        section_type: "management_discussion"
+        required: false
+        aspects:
+          - "战略方向"
+          - "资本开支计划"
+          - "研发重点"
+      - id: risk_factors
+        name: "风险因素"
+        section_type: "management_discussion"
+        required: false
+        aspects:
+          - "新增风险"
+          - "变化风险"
+
+  semi_annual_report:
+    name: "半年度报告"
+    inherit: "annual_report"
+
+  quarterly_report:
+    name: "季度报告"
+    description: "季报分析，关注高频数据和变化趋势"
+    section_types:
+      quarterly_highlights:
+        patterns: ["主要财务数据", "经营情况", "重要事项"]
+        description: "季度亮点"
+    dimensions:
+      - id: quarterly_highlights
+        name: "季度亮点"
+        section_type: "quarterly_highlights"
+        required: true
+        aspects:
+          - "收入与增长"
+          - "利润变化"
+          - "重大事项"
+      - id: trend_analysis
+        name: "趋势分析"
+        required: false
+        aspects:
+          - "环比变化"
+          - "同比变化"
+          - "指引与预期"
+
+  investor_relations:
+    name: "投资者关系"
+    description: "IR记录分析（全部读取，无章节区分）"
+    section_types: {}
+    dimensions:
+      - id: business_updates
+        name: "业务最新进展"
+        required: true
+        aspects:
+          - "订单/合同动态"
+          - "客户进展"
+          - "产品/技术进展"
+      - id: guidance
+        name: "管理层指引"
+        required: true
+        aspects:
+          - "业绩指引"
+          - "战略规划"
+          - "资本开支计划"
+      - id: investor_concerns
+        name: "投资者关切"
+        required: true
+        aspects:
+          - "热点问题"
+          - "管理层回应"
+          - "市场预期差"
+      - id: key_insights
+        name: "关键洞察"
+        required: false
+        aspects:
+          - "非公开信息"
+          - "前瞻判断"
+          - "风险提示"

@@ -9,7 +9,7 @@ from pathlib import Path
 # 添加 scripts 目录到路径
 sys.path.insert(0, str(Path(__file__).parent.parent.parent / "scripts"))
 
-from models import GraphData, GraphLoader, GraphQueries, Company, Sector, Theme, Edge
+from models import GraphData, GraphLoader, GraphQueries, Company, Sector, Theme
 
 
 class TestGraphDataModels:

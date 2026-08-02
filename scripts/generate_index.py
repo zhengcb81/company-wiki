@@ -8,7 +8,6 @@ generate_index.py — 自动生成 index.md 索引
     # ingest 后自动调用
 """
 
-import os
 import re
 import glob
 import yaml
@@ -267,8 +266,8 @@ def generate():
 
     lines.append("## 数据统计")
     lines.append("")
-    lines.append(f"| 指标 | 数量 |")
-    lines.append(f"|------|------|")
+    lines.append("| 指标 | 数量 |")
+    lines.append("|------|------|")
     lines.append(f"| 公司 | {len(g['companies'])} 家 |")
     lines.append(f"| 行业/主题 | {len(g['nodes'])} 个 |")
     lines.append(f"| 新闻 | {news_count} 篇 |")
@@ -281,6 +280,11 @@ def generate():
     index_path.write_text("\n".join(lines), encoding="utf-8")
     print(f"Generated: {index_path}")
     print(f"  {len(lines)} lines, {wiki_count} wiki pages indexed")
+
+
+from writer_policy import enforce_direct_cli as _enforce_legacy_writer_freeze
+
+_enforce_legacy_writer_freeze(__name__, __file__)
 
 
 if __name__ == "__main__":

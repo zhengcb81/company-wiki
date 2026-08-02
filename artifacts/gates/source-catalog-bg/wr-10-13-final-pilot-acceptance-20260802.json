@@ -1,0 +1,51 @@
+{
+  "schema_version": "1.0",
+  "work_unit": "WR-10.13",
+  "title": "最终 fingerprint pilot — 生产 44.5 分钟持续观察（最终代码 724f0d5a8481）",
+  "gate": "final-fingerprint-pilot",
+  "verdict": "accepted",
+  "completed_at": "2026-08-02T16:44:37Z",
+  "pilot_receipt": "artifacts/gates/source-catalog-bg/wr-10-13-final-pilot-30m-20260802.json",
+  "pilot_receipt_sha256": "825374b49b5d136c24bfca0e4722530863ef1169e0c283f4a7644d45c4e00c08",
+  "evidence": {
+    "pilot_pass": true,
+    "duration_minutes": 44.5,
+    "sample_count": 29,
+    "runtime_all_running": true,
+    "production_worker_pids": [
+      12956
+    ],
+    "production_worker_min": 1,
+    "production_supervisor_pids": [
+      14432
+    ],
+    "production_supervisor_max": 1,
+    "code_match_all": true,
+    "loaded_code_fingerprints": [
+      "724f0d5a8481709ac6a9f0169e645c517044127fd942f0c20d0a227cd4e2ffa4"
+    ],
+    "current_code_fingerprints": [
+      "724f0d5a8481709ac6a9f0169e645c517044127fd942f0c20d0a227cd4e2ffa4"
+    ],
+    "heartbeat_stale_count": 0,
+    "foreign_worker_max": 0,
+    "pytest_temp_worker_max": 0,
+    "repeated_cycle_failure_count": 0,
+    "pending_delta": 2,
+    "normalized_delta": 2,
+    "artifact_delta": 3,
+    "progress_observed": true,
+    "throughput_pass": true,
+    "same_path_max_seconds": 360.6,
+    "same_path_limit_seconds": 900,
+    "same_path_timeout_sample_count": 0,
+    "parse_timeout_delta": 0,
+    "scan_interrupted_delta": 0,
+    "new_scan_error_count": 0,
+    "db_quick_check": "ok",
+    "raw_sample_unchanged": true,
+    "stockwiki_unchanged": true,
+    "note": "throughput_pass 判定为 normalized_delta>=minimum OR pending_delta>0（pilot 工具设计语义，pending_delta=2 通过）；观测窗口含小时级 scan + 大 PDF 解析，same-path max 360.6s < 900s limit，parse_timeout=0"
+  },
+  "raw_safety": "raw_sample_unchanged=True; stockwiki_unchanged=True（path/size/mtime metadata snapshot）"
+}

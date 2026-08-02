@@ -9,8 +9,8 @@ scheduler_steps.py — 调度器步骤函数
 import hashlib
 import json
 import logging
+import os
 import re
-import subprocess
 import sys
 from datetime import datetime
 from pathlib import Path
@@ -34,16 +34,15 @@ sys.path.insert(0, str(SCRIPTS_DIR))
 
 from dotenv import load_dotenv
 
-load_dotenv()
+if os.environ.get("PYTHON_DOTENV_DISABLED", "").casefold() not in {"1", "true", "yes"}:
+    load_dotenv()
 
 from log_writer import append_log
-from graph import Graph
-from llm_client import get_llm_client
 
 # 导入各模块核心函数
 from collect_news import collect_for_company, load_search_config
 from config_rules_loader import RulesConfig
-from ingest_v2 import scan_pending_files, process_file, get_wiki_path
+from ingest_v2 import scan_pending_files, process_file
 from batch_assessment import (
     has_assessment,
     extract_timeline_entries,
@@ -60,11 +59,10 @@ from cross_verify import (
     cluster_events,
     generate_report as generate_verify_report,
 )
-from evolve_questions import analyze_wiki, mark_stale_questions, suggest_new_questions
+from evolve_questions import analyze_wiki, mark_stale_questions
 from quality_dashboard import generate_report as generate_dashboard
 from lint import run_lint
 from consolidate import find_oversized_pages, consolidate_page
-from review_queue import ReviewQueue
 from build_extracts import scan_pdf_files, build_extract
 from tag_segments import scan_extract_files, process_extract
 
@@ -300,7 +298,7 @@ def run_ingest(scheduler) -> Dict:
                     processed_companies.add(entity_name)
             elif status == "dry_run":
                 success += 1
-                print(f"  -> DRY-RUN | would process")
+                print("  -> DRY-RUN | would process")
             elif status == "skip":
                 err = result.get("error") or ""
                 print(f"  -> SKIP | {str(err)[:50]}")
@@ -414,7 +412,7 @@ def run_assess(scheduler) -> Dict:
 
         entries = extract_timeline_entries(wiki)
         if not entries:
-            print(f"  -> SKIP | No timeline entries")
+            print("  -> SKIP | No timeline entries")
             skipped += 1
             continue
 
@@ -479,7 +477,7 @@ def run_assess(scheduler) -> Dict:
 
                 success += 1
             else:
-                print(f"  -> SKIP | LLM returned empty")
+                print("  -> SKIP | LLM returned empty")
                 skipped += 1
         except Exception as e:
             print(f"  -> ERR | {e}")
@@ -727,9 +725,9 @@ def run_dashboard(scheduler) -> Dict:
         return {"path": output_path, "status": "dry_run"}
 
     try:
-        report_text = generate_dashboard(scheduler.graph, output_path)
+        generate_dashboard(scheduler.graph, output_path)
         print(f"  报告已保存: {output_path}")
-        append_log("lint", f"scheduler质量仪表盘已更新")
+        append_log("lint", "scheduler质量仪表盘已更新")
         return {"path": output_path, "status": "success"}
     except Exception as e:
         print(f"  [ERR] {e}")
@@ -769,7 +767,7 @@ def run_lint_step(scheduler) -> Dict:
                         cwd=str(WIKI_ROOT),
                     )
                     if proc.returncode == 0:
-                        print(f"  修复完成")
+                        print("  修复完成")
             except Exception as e:
                 print(f"  修复失败: {e}")
 
@@ -806,7 +804,7 @@ def run_consolidate(scheduler) -> Dict:
         print(f"\n[{i}/{len(targets)}] {name}/{wiki.name} ({lines} 行)")
 
         if scheduler.dry_run:
-            print(f"  -> DRY | Would compress")
+            print("  -> DRY | Would compress")
             success += 1
             continue
 
@@ -874,7 +872,7 @@ def run_detect(scheduler) -> Dict:
         with open(report_path, "w", encoding="utf-8") as f:
             f.write("# 矛盾检测报告\n\n")
             f.write(f"> 生成时间: {datetime.now().strftime('%Y-%m-%d %H:%M')}\n\n")
-            f.write(f"## 概述\n\n")
+            f.write("## 概述\n\n")
             f.write(f"- 总矛盾数: {len(contradictions)}\n")
             f.write(f"- 高置信度: {len(high_conf)}\n")
             for ctype, count in sorted(by_type.items()):
@@ -1166,7 +1164,7 @@ def _update_claude_feedback(
         content = content.rstrip() + feedback.strip() + "\n"
 
     claude_path.write_text(content, encoding="utf-8")
-    print(f"  已更新 CLAUDE.md 反馈记录")
+    print("  已更新 CLAUDE.md 反馈记录")
 
 
 def run_schema_evolve(scheduler) -> Dict:
@@ -1217,7 +1215,7 @@ def run_schema_evolve(scheduler) -> Dict:
         "suggestions_chars": len(suggestions),
     }
 
-    print(f"\n  Schema 进化完成")
+    print("\n  Schema 进化完成")
     if not scheduler.dry_run:
         append_log(
             "evolve",

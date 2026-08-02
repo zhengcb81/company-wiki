@@ -1,0 +1,39 @@
+{
+  "policy_schema_version": "1.0.0",
+  "contracts": {
+    "evidence_span": {
+      "current_version": "1.0.0",
+      "supported_versions": [
+        "1.0.0"
+      ]
+    },
+    "source_export": {
+      "current_version": "1.0.0",
+      "supported_versions": [
+        "1.0.0"
+      ]
+    },
+    "source_manifest": {
+      "current_version": "1.0.0",
+      "supported_versions": [
+        "1.0.0"
+      ]
+    }
+  },
+  "compatible_version_sets": [
+    {
+      "evidence_span": "1.0.0",
+      "source_export": "1.0.0",
+      "source_manifest": "1.0.0"
+    }
+  ],
+  "compatibility": {
+    "negotiation": "exact_highest",
+    "stable_versions_only": true,
+    "unknown_fields_fail_closed": true,
+    "breaking_changes_require_new_major": true,
+    "minimum_deprecation_notice_days": 180,
+    "minimum_minor_overlap_releases": 2
+  },
+  "deprecation_notices": []
+}

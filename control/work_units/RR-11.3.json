@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "id": "RR-11.3",
+  "implementer_id": "root-current-task",
+  "acceptance": "control/acceptance.json",
+  "acceptance_lock": "control/acceptance.lock.json",
+  "baseline_snapshot": "artifacts/gates/rr-11.3-validation-baseline.json",
+  "allowed_paths": [
+    "artifacts/gates/**"
+  ],
+  "invariants": [
+    "The current tracked deletion set equals the protected manifest exactly.",
+    "Every deleted path resolves to a HEAD blob with SHA-256 and recovery argv.",
+    "All deletion decisions remain pending independent review and unstaged.",
+    "Git index and production-data fingerprints remain unchanged."
+  ],
+  "commands": [
+    {
+      "name": "acceptance-lock",
+      "argv": [
+        "python",
+        "scripts/gate_runner.py",
+        "verify-lock",
+        "--root",
+        ".",
+        "--lock",
+        "control/acceptance.lock.json"
+      ],
+      "timeout_s": 60
+    },
+    {
+      "name": "deletion-manifest-verify",
+      "argv": [
+        "python",
+        "scripts/deletion_manifest.py",
+        "verify",
+        "--root",
+        ".",
+        "--manifest",
+        "artifacts/recovery/deletion-manifest.json"
+      ],
+      "timeout_s": 120
+    },
+    {
+      "name": "deletion-and-boundary-contracts",
+      "argv": [
+        "python",
+        "-m",
+        "pytest",
+        "tests/unit/test_deletion_manifest.py",
+        "tests/unit/test_gate_runner.py",
+        "tests/unit/test_writer_freeze.py",
+        "-q"
+      ],
+      "timeout_s": 180
+    },
+    {
+      "name": "full-local-suite",
+      "argv": [
+        "python",
+        "-m",
+        "pytest",
+        "-q"
+      ],
+      "timeout_s": 300
+    }
+  ]
+}

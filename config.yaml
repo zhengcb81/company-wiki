@@ -12,17 +12,22 @@ schedule:
   maintenance: "weekly"    # 运行 python scripts/maintenance.py --all
 
 # ── LLM 配置 ──────────────────────────────
-# api_key 从环境变量 DEEPSEEK_API_KEY 读取，不在此处设置
+# 密钥只从环境变量读取，严禁在 YAML 中设置 api_key
 llm:
-  provider: "deepseek"
-  # deepseek-v4-flash: V4 Flash 模型，支持非思考模式和思考模式
-  # 非思考模式: 默认，响应快且稳定，适合常规分析任务
-  # 思考模式: 推理能力更强，适合深度推理场景（通过 thinking 参数切换）
-  model: "deepseek-v4-flash"
-  base_url: "https://api.deepseek.com"
+  provider: "minimax"
+  model: "MiniMax-M3"
+  base_url: "https://api.minimaxi.com/v1"
   max_tokens: 8192
   max_document_chars: 800000  # ~1M tokens，用于整篇文档分析
-  temperature: 0.3
+  temperature: 1.0
+  reasoning_split: true
+  fallback:
+    provider: "mimo"
+    model: "mimo-v2.5-pro"
+    base_url: "https://token-plan-cn.xiaomimimo.com/v1"
+    enabled: true
+    # Human Owner 明确决定允许其作为通用次模型，包含研究工作负载。
+    usage_scope: "general"
 
 # ── 搜索配置 ──────────────────────────────
 # tavily_api_key 从环境变量 TAVILY_API_KEY 读取，不在此处设置

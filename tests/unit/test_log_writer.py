@@ -6,7 +6,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent / "scripts"))
 
-from log_writer import append_log, _rotate_if_needed, _clean_old_archives, LOG_HEADER
+from log_writer import append_log, _rotate_if_needed, _clean_old_archives
 
 
 class TestAppendLog:

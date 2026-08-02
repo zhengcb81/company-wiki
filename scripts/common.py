@@ -20,6 +20,9 @@ import sys
 from pathlib import Path
 from typing import Optional
 
+from writer_policy import blocked_message, legacy_script_execution_allowed
+from source_policy import assert_content_writable
+
 # ── 路径常量 ──────────────────────────────
 SCRIPTS_DIR = Path(__file__).resolve().parent
 WIKI_ROOT = SCRIPTS_DIR.parent
@@ -43,7 +46,8 @@ if sys.platform == "win32":
 try:
     from dotenv import load_dotenv
 
-    load_dotenv()
+    if os.environ.get("PYTHON_DOTENV_DISABLED", "").casefold() not in {"1", "true", "yes"}:
+        load_dotenv()
 except ImportError:
     pass
 
@@ -71,6 +75,7 @@ def load_yaml_config(path: Optional[Path] = None) -> dict:
 
 def atomic_write(path: Path, content: str, encoding: str = "utf-8") -> None:
     """原子写入文件：写临时文件然后 rename，防止崩溃导致数据丢失"""
+    assert_content_writable(path, WIKI_ROOT)
     tmp_path = path.with_suffix(path.suffix + ".tmp")
     try:
         tmp_path.write_text(content, encoding=encoding)
@@ -118,6 +123,30 @@ def setup_paths() -> tuple[Path, Path]:
     return SCRIPTS_DIR, WIKI_ROOT
 
 
+# ── Legacy Writer Kill Switch ──────────────────────
+_LEGACY_WARNING_SHOWN = False
+
+
+def require_legacy_writer_permission(script_name: str) -> bool:
+    """
+    Legacy writer kill switch：检查是否有权运行旧版写入脚本。
+
+    仅当 COMPANY_WIKI_WRITE_MODE=legacy 且
+    COMPANY_WIKI_LEGACY_WRITERS=allow 同时存在时放行。
+    否则打印警告并返回 False，调用方应退出或降级为 dry-run。
+
+    Returns:
+        True = 允许运行, False = 拒绝运行
+    """
+    global _LEGACY_WARNING_SHOWN
+    if legacy_script_execution_allowed(script_name):
+        return True
+    if not _LEGACY_WARNING_SHOWN:
+        print(blocked_message(script_name))
+        _LEGACY_WARNING_SHOWN = True
+    return False
+
+
 # ── 缓存实例 ──────────────────────────────
 _graph = None
 
@@ -159,6 +188,7 @@ def safe_read_file(file_path: Path, encoding: str = "utf-8") -> Optional[str]:
 def safe_write_file(file_path: Path, content: str, encoding: str = "utf-8") -> bool:
     """安全写入文件，返回是否成功"""
     try:
+        assert_content_writable(file_path, WIKI_ROOT)
         file_path.write_text(content, encoding=encoding)
         return True
     except Exception:

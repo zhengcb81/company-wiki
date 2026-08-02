@@ -1,0 +1,69 @@
+# 季度报告Prompt模板
+template: |
+  你是一名资深财务分析师。请深度分析{company}的{period}季度报告。
+
+  ## 分析对象
+  公司: {company}
+  文档类型: 季度报告
+  报告期: {period}
+
+  ## 重点提取章节
+  请优先从以下章节提取信息（如果章节不存在，请从全文提取）：
+  {source_sections_description}
+
+  ## 核心追踪问题
+  {core_questions}
+
+  ## 分析框架
+  请按以下维度逐项分析：
+  {framework_description}
+
+  ## 待分析内容
+  {content}
+
+  ## 输出要求
+  1. **时间线**：按时间顺序记录关键事件
+  2. **维度分析**：每个维度下，逐个方面提取
+  3. **重要规则**：
+     - 只提取原文明确信息，禁止编造
+     - 数字必须准确，不要自行计算
+
+  ## 输出格式（严格JSON）
+  {output_schema}
+
+output_schema: |
+  {
+    "document_type": "quarterly_report",
+    "timeline_entries": [
+      {
+        "date": "YYYY-MM-DD",
+        "title": "事件标题",
+        "key_points": ["要点1", "要点2"],
+        "source_type": "财报",
+        "importance": 0.0,
+        "sentiment": "positive/negative/neutral"
+      }
+    ],
+    "financial_highlights": {
+      "revenue": "营收及增速",
+      "net_profit": "净利润及增速"
+    },
+    "dimensions": {
+      "quarterly_highlights": {
+        "name": "季度亮点",
+        "source_section": "来源章节名称",
+        "items": [
+          {"aspect": "收入", "finding": "具体数据", "evidence": "原文依据"}
+        ]
+      },
+      "trend_analysis": {
+        "name": "趋势分析",
+        "source_section": "来源章节名称",
+        "items": [
+          {"aspect": "环比变化", "finding": "具体数据", "evidence": "原文依据"}
+        ]
+      }
+    },
+    "assessment": "总体评估（100字内）",
+    "key_insights": ["洞察1", "洞察2"]
+  }

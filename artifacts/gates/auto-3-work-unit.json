@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "id": "AUTO-3-PLANNER-POLICY-REGISTRY",
+  "baseline_snapshot": "artifacts/gates/auto-3-before.json",
+  "acceptance": "control/acceptance.json",
+  "acceptance_lock": "control/acceptance.lock.json",
+  "allowed_paths": [
+    "src/company_wiki/automation/registry.py",
+    "src/company_wiki/automation/policy.py",
+    "src/company_wiki/automation/planner.py",
+    "src/company_wiki/automation/cli.py",
+    "tests/unit/test_automation_planner.py",
+    "tests/contract/test_automation_store_boundary.py",
+    "tests/contract/test_automation_cli.py",
+    "artifacts/gates/auto-3-before.json",
+    "artifacts/gates/auto-3-after.json",
+    "artifacts/gates/auto-3-work-unit.json",
+    "artifacts/gates/auto-3-receipt.json",
+    "task_plan.md",
+    "findings.md",
+    "progress.md"
+  ],
+  "commands": [
+    {
+      "name": "automation-planner-tests",
+      "argv": ["python", "-m", "pytest", "-q", "tests/unit/test_automation_planner.py"],
+      "timeout_s": 120
+    },
+    {
+      "name": "automation-boundary-cli",
+      "argv": ["python", "-m", "pytest", "-q", "tests/contract/test_automation_store_boundary.py", "tests/contract/test_automation_cli.py"],
+      "timeout_s": 120
+    },
+    {
+      "name": "automation-status",
+      "argv": ["python", "-m", "company_wiki.automation.cli", "status", "--json"],
+      "timeout_s": 30
+    },
+    {
+      "name": "automation-doctor",
+      "argv": ["python", "-m", "company_wiki.automation.cli", "doctor", "--json"],
+      "timeout_s": 30
+    },
+    {
+      "name": "full-hermetic-pytest",
+      "argv": ["python", "-m", "pytest", "-q"],
+      "timeout_s": 240
+    }
+  ]
+}

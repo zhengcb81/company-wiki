@@ -122,11 +122,16 @@ def main():
     print("扫描 wiki 页面 sources_count ...")
     stats = fix_sources_count(dry_run=dry_run)
 
-    print(f"\n结果:")
+    print("\n结果:")
     print(f"  扫描: {stats['scanned']} 个文件")
     print(f"  已正确: {stats['already_correct']}")
     print(f"  修复: {stats['fixed']}")
     print(f"  无 frontmatter: {stats['no_frontmatter']}")
+
+
+from writer_policy import enforce_direct_cli as _enforce_legacy_writer_freeze
+
+_enforce_legacy_writer_freeze(__name__, __file__)
 
 
 if __name__ == "__main__":

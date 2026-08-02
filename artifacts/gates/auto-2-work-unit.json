@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "id": "AUTO-2-STORE-MIGRATIONS",
+  "baseline_snapshot": "artifacts/gates/auto-2-before.json",
+  "acceptance": "control/acceptance.json",
+  "acceptance_lock": "control/acceptance.lock.json",
+  "allowed_paths": [
+    "src/company_wiki/automation/migrations.py",
+    "src/company_wiki/automation/store.py",
+    "src/company_wiki/automation/cli.py",
+    "tests/unit/test_automation_migrations.py",
+    "tests/unit/test_automation_store.py",
+    "tests/contract/test_automation_store_boundary.py",
+    "tests/contract/test_automation_cli.py",
+    "artifacts/gates/auto-2-before.json",
+    "artifacts/gates/auto-2-after.json",
+    "artifacts/gates/auto-2-work-unit.json",
+    "artifacts/gates/auto-2-receipt.json",
+    "task_plan.md",
+    "findings.md",
+    "progress.md"
+  ],
+  "commands": [
+    {
+      "name": "automation-migrations",
+      "argv": ["python", "-m", "pytest", "-q", "tests/unit/test_automation_migrations.py"],
+      "timeout_s": 120
+    },
+    {
+      "name": "automation-store",
+      "argv": ["python", "-m", "pytest", "-q", "tests/unit/test_automation_store.py"],
+      "timeout_s": 120
+    },
+    {
+      "name": "automation-boundary-cli",
+      "argv": ["python", "-m", "pytest", "-q", "tests/contract/test_automation_store_boundary.py", "tests/contract/test_automation_cli.py"],
+      "timeout_s": 120
+    },
+    {
+      "name": "automation-status",
+      "argv": ["python", "-m", "company_wiki.automation.cli", "status", "--json"],
+      "timeout_s": 30
+    },
+    {
+      "name": "automation-doctor",
+      "argv": ["python", "-m", "company_wiki.automation.cli", "doctor", "--json"],
+      "timeout_s": 30
+    },
+    {
+      "name": "full-hermetic-pytest",
+      "argv": ["python", "-m", "pytest", "-q"],
+      "timeout_s": 240
+    }
+  ]
+}

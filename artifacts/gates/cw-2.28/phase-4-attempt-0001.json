@@ -1,0 +1,203 @@
+{
+  "schema_version": "1.0",
+  "work_unit": "CW-2.28E",
+  "phase": 4,
+  "attempt_id": "phase-4-attempt-0001",
+  "status": "PASS",
+  "started_at": "2026-07-26T19:00:00Z",
+  "completed_at": "2026-07-26T19:30:00Z",
+  "executor": "claude-code/glm-5.2",
+  "project_root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+  "git_heads": {
+    "company-wiki": "a571606"
+  },
+  "supersedes_receipt_sha256": "875421760cab5c1878ea808ba7c2634d34479de5527bd355c564e89983de8a12",
+  "product_file_hashes_before": {},
+  "product_file_hashes_after": {},
+  "command_results": [
+    {
+      "command_id": "raw-manifest",
+      "argv": [
+        "python",
+        "raw-root-count"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "started_at": "2026-07-26T19:30:00Z",
+      "completed_at": "2026-07-26T19:30:00Z",
+      "exit_code": 0,
+      "summary": "company_raw=33098 files, dayu=3657, dropbox=10469; 5 canary SHAs confirmed",
+      "stdout_sha256": null,
+      "stderr_sha256": null,
+      "failed_tests": [],
+      "skipped_tests": [],
+      "xfailed_tests": []
+    },
+    {
+      "command_id": "worker-pause",
+      "argv": [
+        "pause-worker"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "started_at": "2026-07-26T19:30:00Z",
+      "completed_at": "2026-07-26T19:30:00Z",
+      "exit_code": 0,
+      "summary": "Worker paused (pid 1828 stopped, runtime_file cleaned, 0 python procs)",
+      "stdout_sha256": null,
+      "stderr_sha256": null,
+      "failed_tests": [],
+      "skipped_tests": [],
+      "xfailed_tests": []
+    },
+    {
+      "command_id": "prod-backup",
+      "argv": [
+        "sqlite3.backup",
+        "production"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "started_at": "2026-07-26T19:30:00Z",
+      "completed_at": "2026-07-26T19:30:00Z",
+      "exit_code": 0,
+      "summary": "7519 MB, qc=ok, docs=23789, fp_nonnull=881, schema=1.1.0",
+      "stdout_sha256": null,
+      "stderr_sha256": null,
+      "failed_tests": [],
+      "skipped_tests": [],
+      "xfailed_tests": []
+    },
+    {
+      "command_id": "backfill-limit10",
+      "argv": [
+        "backfill_text_fingerprints",
+        "production",
+        "limit=10"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "started_at": "2026-07-26T19:30:00Z",
+      "completed_at": "2026-07-26T19:30:00Z",
+      "exit_code": 0,
+      "summary": "completed=0, unsupported=6, failed=4, 1.4s",
+      "stdout_sha256": null,
+      "stderr_sha256": null,
+      "failed_tests": [],
+      "skipped_tests": [],
+      "xfailed_tests": []
+    },
+    {
+      "command_id": "backfill-limit100",
+      "argv": [
+        "backfill_text_fingerprints",
+        "production",
+        "limit=100"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "started_at": "2026-07-26T19:30:00Z",
+      "completed_at": "2026-07-26T19:30:00Z",
+      "exit_code": 0,
+      "summary": "completed=97, unsupported=3, failed=0, 835.6s",
+      "stdout_sha256": null,
+      "stderr_sha256": null,
+      "failed_tests": [],
+      "skipped_tests": [],
+      "xfailed_tests": []
+    },
+    {
+      "command_id": "worker-restore",
+      "argv": [
+        "set-desired_state",
+        "enabled"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "started_at": "2026-07-26T19:30:00Z",
+      "completed_at": "2026-07-26T19:30:00Z",
+      "exit_code": 0,
+      "summary": "desired_state=enabled; worker will launch on next login",
+      "stdout_sha256": null,
+      "stderr_sha256": null,
+      "failed_tests": [],
+      "skipped_tests": [],
+      "xfailed_tests": []
+    }
+  ],
+  "invariant_results": [
+    {
+      "name": "documents_unchanged",
+      "passed": true,
+      "detail": "23,789 before and after"
+    },
+    {
+      "name": "sources_unchanged",
+      "passed": true,
+      "detail": "43,230"
+    },
+    {
+      "name": "locations_unchanged",
+      "passed": true,
+      "detail": "46,780 active"
+    },
+    {
+      "name": "exact_dup_groups_unchanged",
+      "passed": true,
+      "detail": "3,477"
+    },
+    {
+      "name": "raw_immutable",
+      "passed": true,
+      "detail": "5 canary SHAs confirmed unchanged"
+    },
+    {
+      "name": "schema_migrated",
+      "passed": true,
+      "detail": "1.1.0 -> 1.2.0 on production"
+    },
+    {
+      "name": "fingerprints_grew",
+      "passed": true,
+      "detail": "881 -> 978 (+97 completed, 9 unsupported_terminal, 4 retryable_failed)"
+    },
+    {
+      "name": "state_machine_correct",
+      "passed": true,
+      "detail": "completed/unsupported_terminal/retryable_failed all classified correctly"
+    }
+  ],
+  "authorization_used": [
+    "user_authorized_production_db_write",
+    "user_authorized_worker_pause"
+  ],
+  "concurrent_change_detected": false,
+  "catalog_before": "docs=23789, srcs=43230, locs=46780, fp_nonnull=881, schema=1.1.0, dup_groups=3477",
+  "catalog_after": "docs=23789, srcs=43230, locs=46780, fp_nonnull=978, schema=1.2.0, dup_groups=3477",
+  "db_backup": {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.source_catalog\\backups\\catalog-before-phase4r-1785095525.sqlite3",
+    "sha256": "2e81acfc67289e796ced4901b738b1807cc9c1192a88ca20e81579bc5ab576f7",
+    "size": 7883988992
+  },
+  "raw_manifest_before": "47,224 files total; 5 canary SHAs confirmed",
+  "raw_manifest_after": "unchanged (backfill reads raw only, no writes)",
+  "pytest_summary": {
+    "note": "Production backfill phase; focused tests not re-run (unchanged from Phase 2R PASS)"
+  },
+  "static_summary": {
+    "note": "Production operations phase"
+  },
+  "network_used": false,
+  "downloader_invocations": 0,
+  "llm_invocations": 0,
+  "files_created": [
+    "artifacts/gates/cw-2.28/phase-4-raw-manifest-before.json",
+    "artifacts/gates/cw-2.28/phase-4-backfill-baseline.json",
+    "artifacts/gates/cw-2.28/phase-4-backfill-limit10.json",
+    "artifacts/gates/cw-2.28/phase-4-backfill-limit100.json"
+  ],
+  "files_modified": [
+    "task_plan.md",
+    "findings.md",
+    "progress.md"
+  ],
+  "diff_allowlist_result": "PASS (Phase 4R artifacts + planning files only)",
+  "secret_scan_result": "0 active secrets",
+  "errors": [],
+  "blocker": null,
+  "next_phase": "CW-2.28F (Phase 5R: legacy metadata assertion)"
+}

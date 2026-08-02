@@ -1,0 +1,121 @@
+{
+  "schema_version": "1.0",
+  "work_unit": "CW-2.28",
+  "phase": "2-10 final",
+  "status": "candidate",
+  "completed_at": "2026-07-26T10:15:00Z",
+  "executor": "opencode/deepseek-v4-pro",
+  "project_root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+
+  "git_heads": {
+    "company-wiki": "a571606",
+    "revenue-forecast": "d5f1188",
+    "dayu-agent": "baseline unchanged (0 dirty per Phase 0)",
+    "stockinfo": "baseline unchanged (37 dirty per Phase 0, 0 new)"
+  },
+
+  "before_after_status": {
+    "catalog_documents": {"before": 11706, "after": 11706},
+    "catalog_sources": {"before": 23409, "after": 23409},
+    "catalog_locations": {"before": 23451, "after": 23451},
+    "text_fingerprint_nonNULL": {"before": 0, "after": 62},
+    "exact_groups": {"before": 42, "after": 42},
+    "semantic_groups": {"before": 0, "after": 0}
+  },
+
+  "backfill_batches": [
+    {"batch": "L10", "completed": 10, "failed": 0, "unsupported": 0, "eligible": 11706, "elapsed_s": 70},
+    {"batch": "L100_attempt", "completed": 52, "timed_out_after": 600},
+    {"total_production": 62, "remaining": 11644, "rate": "~5 docs/min", "estimate": "~38hrs backlog"},
+    {"note": "backlog delegated to worker; backfill function is idempotent and safe"}
+  ],
+
+  "assertion_events": {
+    "total_assertions": 4,
+    "by_decision": {"candidate": 1, "verified": 2, "rejected": 1},
+    "table_created": "2026-07-26 via additive migration on production catalog",
+    "schema_columns": 22,
+    "test_fixture_source": "AMD news file (b35f242d...)"
+  },
+
+  "five_company_reuse": [
+    {"company": "BYD", "status": "reused_equivalent", "capture_ready": true, "sha": "e9c2d7fd...", "adapter_calls": 0},
+    {"company": "中微公司", "status": "reused_equivalent", "capture_ready": false, "sha": "3273711f...", "missing_fields": ["https_url"], "adapter_calls": 0},
+    {"company": "宁德时代", "status": "reused_equivalent", "capture_ready": false, "sha": "b4f1713d...", "collector": "filesystem-catalog-company_raw/1.0.0", "missing_fields": ["https_url"], "adapter_calls": 0},
+    {"company": "美团", "status": "missing", "reason": "entity name mismatch in catalog", "adapter_calls": 0},
+    {"company": "NVIDIA CORP", "status": "reused_equivalent", "capture_ready": true, "sha": "dae19486...", "adapter_calls": 0}
+  ],
+
+  "market_routing": {
+    "CN": "stockinfo-cninfo (BYD, 中微, 宁德 all confirmed)",
+    "HK": "dayu-hkexnews-cli (美团, CW-2.26 verified)",
+    "US": "dayu-sec-cli (NVIDIA, CW-2.26 verified)"
+  },
+
+  "network_and_download_totals": {
+    "network_requests": 0,
+    "downloader_invocations": 0,
+    "llm_invocations": 0,
+    "raw_files_created": 0,
+    "raw_files_modified": 0,
+    "raw_files_deleted": 0
+  },
+
+  "raw_manifest_verification": {
+    "BYD_FY2024": {"sha": "e9c2d7fdd088e151ccb6c8ad3d95587b2b014b10f2c9731508d23ce07fde4de3", "verified": true},
+    "中微_FY2024": {"sha": "3273711fbb79fa6ee5e9a3b2f0eea7d5a1dfa0d305721c61e5af251f9addf399", "verified": true},
+    "宁德_FY2024": {"sha": "b4f1713d7b821eb076c102711d177fe942ccc2bc8dd171ae5d7a95799a65b0ad", "verified": true, "note": "legacy, no 1.1.0 sidecar"},
+    "美团_FY2024": {"sha": "36eae4d0397187bef187286e394b7d85421eac75f7380d1a95de9f1bfa25e70a", "verified": true},
+    "NVIDIA_FY2025_10K": {"sha": "dae19486be264fd26eb00a7f920dc641041a261c81bc8c03b678eea947de4856", "verified": true}
+  },
+
+  "pytest_summary": {
+    "new_tests": 15,
+    "focused_regression": "63 passed, 1 xfailed (worker pause)",
+    "full_regression": "1373 passed, 1 failed (pre-existing worker stop timing)",
+    "filing_fetch": "13 passed, 9 subtests",
+    "revenue_forecast": "155 passed, 102 subtests",
+    "stockinfo_focused": "102 passed, 2 failed (pre-existing browser.py cwd)"
+  },
+
+  "static_analysis": {
+    "ruff_allowlist": "all clean (7 source files + 5 test files)",
+    "compileall": "clean on all allowlist files",
+    "known_pre_existing_ruff": 14,
+    "known_pre_existing_failures": ["worker stop timing", "stockinfo browser.py cwd"]
+  },
+
+  "files_changed": {
+    "new": ["src/company_wiki/source_catalog/assertion_service.py (388 lines)", "tests/contract/test_cw_228_backfill.py (357 lines)", "tests/contract/test_assertion_service.py (227 lines)"],
+    "modified": ["src/company_wiki/source_catalog/models.py (ProcessingReport +eligible/+terminal_reasons/+pending property)", "src/company_wiki/source_catalog/normalizer.py (should_stop callback, parser isolation, eligible tracking)", "src/company_wiki/source_catalog/service.py (should_stop passthrough)", "src/company_wiki/source_catalog/store.py (source_metadata_assertions DDL + migration)", "src/company_wiki/source_catalog/cli.py (identity-enrichment preview|verify|reject)", "src/company_wiki/source_catalog/resolver.py (_verified_assertion_identity fallback)"]
+  },
+
+  "known_limitations": [
+    "Semantic fingerprint production backfill incomplete (62/11,706); backlog to worker",
+    "美团 entity name mismatch (catalog has '美團－Ｗ', resolve query for '美团' misses); pre-existing",
+    "Worker pause interruptibility not implemented (1 xfail); backfill stop-check callback exists but worker doesn't call it yet",
+    "No independent reviewer available; CW-2.28 remains candidate",
+    "宁德 FY2024 sidecar is legacy (filesystem-catalog collector v1.0.0, no https_url/provider); needs assertion enrichment"
+  ],
+
+  "rollback_steps": [
+    "1. Restore production catalog from backup: copy .source_catalog/catalog.sqlite3.bak-cw228-{ts} over catalog.sqlite3",
+    "2. Or: reverse-applied patch to remove source_metadata_assertions table, revert ProcessingReport fields",
+    "3. Raw files are untouched; no rollback needed",
+    "4. source_metadata_assertions rows can be safely ignored if unused"
+  ],
+
+  "reviewer_checklist": [
+    "1. Re-run Phase 9: python -m pytest -q tests/contract/test_source_catalog_*.py tests/contract/test_cw_228_backfill.py tests/contract/test_assertion_service.py",
+    "2. Spot-check Phase 4: verify catalog.sqlite3.bak-cw228-* exists, quick_check=ok, fp_nonnull=62",
+    "3. Spot-check exact groups: python -m company_wiki.source_catalog.cli duplicates --limit 5",
+    "4. Spot-check semantic groups: 0 groups (no matching normalized text in production yet)",
+    "5. Re-run 5-company reuse: python -m company_wiki.source_catalog.cli resolve [5 companies]",
+    "6. Audit Dayu: git status on dayu-agent repo (0 dirty from Phase 0 baseline)",
+    "7. Audit StockInfo: focused tests pass, delivery files present",
+    "8. Audit allowlist: ruff clean on all changed files",
+    "9. Write independent receipt with reviewer identity, timestamp, PASS/FAIL per item"
+  ],
+
+  "git_delivery_status": "NOT COMMITTED. All files are untracked/modified; no git stage/commit/push performed in CW-2.28 session."
+}

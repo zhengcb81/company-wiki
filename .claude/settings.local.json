@@ -2,11 +2,9 @@
   "permissions": {
     "allow": [
       "Bash(python:*)",
-      "Bash(DEEPSEEK_API_KEY=sk-27166ed345c54d19a2fa2f3041e98c4c python:*)",
       "Bash(grep:*)",
       "Bash(git checkout:*)",
       "Bash(ls:*)",
-      "Bash(DEEPSEEK_API_KEY=sk-27166ed345c54d19a2fa2f3041e98c4c PYTHONIOENCODING=utf-8 python:*)",
       "Bash(PYTHONIOENCODING=utf-8 python:*)",
       "Bash(du:*)",
       "Bash(git rm:*)",
@@ -20,7 +18,12 @@
       "Bash(for d in \"C:\\\\Users\\\\郑曾波\\\\Projects\\\\company-wiki\\\\companies\"/*/)",
       "Bash(do if [ ! -d \"$dwiki\" ])",
       "Bash(fi:*)",
-      "Bash(done)"
+      "Bash(done)",
+      "mcp__codegraph__codegraph_files",
+      "mcp__codegraph__codegraph_explore",
+      "Bash(rm -rf .source_catalog/staging/* \"C:/Users/郑曾波/AppData/Local/Temp/company-wiki-dayu/\")",
+      "Bash(PYTHONUTF8=1 timeout 300 python -m company_wiki.source_catalog.cli --config config/source_catalog.yaml ensure --company-query 美团 --market HK --document-kind annual_report --fiscal-year 2024 --as-of-date 2026-01-31 --allow-download --acquisition-config config/source_acquisition.yaml)",
+      "Bash(echo \"exit=$?\")"
     ]
   }
 }

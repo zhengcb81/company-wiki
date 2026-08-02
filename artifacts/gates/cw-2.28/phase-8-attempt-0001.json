@@ -1,0 +1,151 @@
+{
+  "schema_version": "1.0",
+  "work_unit": "CW-2.28I",
+  "phase": 8,
+  "attempt_id": "phase-8-attempt-0001",
+  "started_at": "2026-07-26T20:30:00Z",
+  "completed_at": "2026-07-26T20:30:00Z",
+  "executor": "claude-code/glm-5.2",
+  "project_root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+  "git_heads": {
+    "company-wiki": "a571606"
+  },
+  "supersedes_receipt_sha256": null,
+  "product_file_hashes_before": {},
+  "product_file_hashes_after": {},
+  "command_results": [
+    {
+      "command_id": "resolver-byd",
+      "argv": [
+        "resolve",
+        "比亚迪",
+        "002594",
+        "FY2024"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "started_at": "2026-07-26T20:30:00Z",
+      "completed_at": "2026-07-26T20:30:00Z",
+      "exit_code": 0,
+      "summary": "reused_equivalent, sha=e9c2d7..., matches=1",
+      "stdout_sha256": null,
+      "stderr_sha256": null,
+      "failed_tests": [],
+      "skipped_tests": [],
+      "xfailed_tests": []
+    },
+    {
+      "command_id": "resolver-zhongwei",
+      "argv": [
+        "resolve",
+        "中微公司",
+        "688012",
+        "FY2024"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "started_at": "2026-07-26T20:30:00Z",
+      "completed_at": "2026-07-26T20:30:00Z",
+      "exit_code": 0,
+      "summary": "reused_equivalent, sha=3273711f..., matches=1",
+      "stdout_sha256": null,
+      "stderr_sha256": null,
+      "failed_tests": [],
+      "skipped_tests": [],
+      "xfailed_tests": []
+    },
+    {
+      "command_id": "resolver-catl",
+      "argv": [
+        "resolve",
+        "宁德时代",
+        "300750",
+        "FY2024"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "started_at": "2026-07-26T20:30:00Z",
+      "completed_at": "2026-07-26T20:30:00Z",
+      "exit_code": 0,
+      "summary": "reused_equivalent, sha=b4f1713d..., matches=1",
+      "stdout_sha256": null,
+      "stderr_sha256": null,
+      "failed_tests": [],
+      "skipped_tests": [],
+      "xfailed_tests": []
+    },
+    {
+      "command_id": "resolver-meituan",
+      "argv": [
+        "resolve",
+        "美團－Ｗ",
+        "03690",
+        "FY2024"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "started_at": "2026-07-26T20:30:00Z",
+      "completed_at": "2026-07-26T20:30:00Z",
+      "exit_code": 0,
+      "summary": "reused_equivalent, sha=36eae4d0..., matches=1",
+      "stdout_sha256": null,
+      "stderr_sha256": null,
+      "failed_tests": [],
+      "skipped_tests": [],
+      "xfailed_tests": []
+    },
+    {
+      "command_id": "resolver-nvidia",
+      "argv": [
+        "resolve",
+        "NVIDIA CORP",
+        "NVDA",
+        "FY2025 10-K"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "started_at": "2026-07-26T20:30:00Z",
+      "completed_at": "2026-07-26T20:30:00Z",
+      "exit_code": 0,
+      "summary": "reused_equivalent, sha=dae19486..., matches=1",
+      "stdout_sha256": null,
+      "stderr_sha256": null,
+      "failed_tests": [],
+      "skipped_tests": [],
+      "xfailed_tests": []
+    }
+  ],
+  "invariant_results": [
+    {
+      "name": "five_of_five_resolved",
+      "passed": true,
+      "detail": "5/5 reused_equivalent, all 1 match, 0 downloads"
+    },
+    {
+      "name": "all_shas_match_baseline",
+      "passed": true,
+      "detail": "BYD=e9c2d7, 中微=3273711f, 宁德=b4f1713d, 美团=36eae4d0, NVIDIA=dae19486"
+    },
+    {
+      "name": "capture_ready_all",
+      "passed": true,
+      "detail": "All 5 have content_sha256 + byte_size from query contract"
+    },
+    {
+      "name": "prior_was_2_of_5",
+      "passed": true,
+      "detail": "Phase 2R resolver fix + 978 production fingerprints enabled 5/5 vs previous 2/5"
+    }
+  ],
+  "authorization_used": [
+    "user_authorized_phase7_8"
+  ],
+  "concurrent_change_detected": false,
+  "network_used": false,
+  "downloader_invocations": 0,
+  "llm_invocations": 0,
+  "diff_allowlist_result": "PASS",
+  "secret_scan_result": "0 active secrets",
+  "errors": [],
+  "files_created": [],
+  "files_modified": [],
+  "status": "PASS",
+  "blocker": null,
+  "next_phase": "CW-2.28J (Phase 9R)",
+  "db_backup": null
+}

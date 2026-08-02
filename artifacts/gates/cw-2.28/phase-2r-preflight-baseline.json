@@ -1,0 +1,80 @@
+{
+  "preflight": "CW-2.28 Phase 2R (§12.4.1.2) allowlist file freeze",
+  "captured_at": "2026-07-26T15:00:00Z",
+  "git_head": "a571606",
+  "prod_catalog_schema_version": "1.1.0",
+  "prod_counts": {
+    "documents": 23789,
+    "sources": 43230,
+    "locations": 46781,
+    "text_fingerprint_non_null": 689
+  },
+  "prod_quick_check": "ok",
+  "worker_runtime_state": "running (ambient, not paused)",
+  "product_file_hashes_before": {
+    "src/company_wiki/source_catalog/models.py": {
+      "sha256": "20420dfe81d5cd73a254876a8d57452f2c92b54befc80ef84cafe4d32ffbe498",
+      "size": 3737,
+      "mtime": 1785056167.5471706
+    },
+    "src/company_wiki/source_catalog/store.py": {
+      "sha256": "76e559d1aa91a53a4dba266b8e3e41bfaf1b5526310c74d80516c79e663ed792",
+      "size": 29590,
+      "mtime": 1785061314.5777988
+    },
+    "src/company_wiki/source_catalog/normalizer.py": {
+      "sha256": "36d47c1d91447d4b64a48497b4f12623efaa7bde0c505ab5cf93b9c17041f284",
+      "size": 39203,
+      "mtime": 1785056113.0209315
+    },
+    "src/company_wiki/source_catalog/service.py": {
+      "sha256": "055a3f169f45f31c0bd7007da65ae0ab28d5f072f6ab55360b323d582343b664",
+      "size": 35623,
+      "mtime": 1785056124.3447273
+    },
+    "src/company_wiki/source_catalog/cli.py": {
+      "sha256": "5dc3ca143d8e5c5cd5ce0f1c1b42018f79f6a724990e31e5bf629487f880887e",
+      "size": 31345,
+      "mtime": 1785061484.5393498
+    },
+    "src/company_wiki/source_catalog/worker.py": {
+      "sha256": "4ae4ddc661f4d1dfd4b2a1dcfcff119793c06d4b4aabedb82d1405dd5d094701",
+      "size": 30356,
+      "mtime": 1785061576.6419058
+    },
+    "src/company_wiki/source_catalog/control.py": {
+      "sha256": "be6ab3bf17129397ee6bc08611636021ac6a75c4e8c2bbf62bedcfe5546973dd",
+      "size": 22083,
+      "mtime": 1785017019.8477764
+    },
+    "src/company_wiki/source_catalog/resolver.py": {
+      "sha256": "0c412e6f2af5389fd22fecee4deb833ff3514b6de47fd08fe9e23007cecc57d1",
+      "size": 23055,
+      "mtime": 1785060128.8965092
+    },
+    "src/company_wiki/source_catalog/duplicate_cleanup.py": {
+      "sha256": "d2cf4413a8558e46c4fa2a6cf2594616d34cbb14890ccfa2b550a534440c031d",
+      "size": 24694,
+      "mtime": 1784671653.2299132
+    },
+    "config/source_catalog_worker.yaml": {
+      "sha256": "263b52c4ada6f1b19ced388f758dda419230c2d50891b0d8a94ec0190ba0d0d2",
+      "size": 1027,
+      "mtime": 1785017146.7325215
+    },
+    "scripts/source_catalog_control.ps1": {
+      "sha256": "4f643b2fbf79c17b3eea8903dbb194fba26f27b96cffd5a7991c4cb516ac659f",
+      "size": 18417,
+      "mtime": 1784969995.651992
+    },
+    "docs/contracts/cw-2.28-receipt.schema.json": {
+      "missing": true
+    },
+    "tests/contract/test_cw_228_receipt.py": {
+      "missing": true
+    },
+    "artifacts/gates/cw-2.28/receipt-index.json": {
+      "missing": true
+    }
+  }
+}

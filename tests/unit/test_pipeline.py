@@ -12,7 +12,7 @@ import pytest
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent / "scripts"))
 
-from build_extracts import file_hash, scan_pdf_files, build_extract
+from build_extracts import file_hash, build_extract
 from tag_segments import (
     split_into_chunks,
     extract_frontmatter,

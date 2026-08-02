@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "id": "AUTO-6-GOLD-REVIEW-INBOX",
+  "baseline_snapshot": "artifacts/gates/auto-6-before.json",
+  "acceptance": "control/acceptance.json",
+  "acceptance_lock": "control/acceptance.lock.json",
+  "allowed_paths": [
+    "src/company_wiki/automation/handlers/__init__.py",
+    "src/company_wiki/automation/handlers/gold_review.py",
+    "src/company_wiki/automation/human_inbox.py",
+    "src/company_wiki/automation/cli.py",
+    "tests/unit/test_automation_gold_review.py",
+    "tests/contract/test_automation_store_boundary.py",
+    "tests/contract/test_automation_cli.py",
+    "artifacts/gates/auto-6-before.json",
+    "artifacts/gates/auto-6-after.json",
+    "artifacts/gates/auto-6-work-unit.json",
+    "artifacts/gates/auto-6-receipt.json",
+    "task_plan.md",
+    "findings.md",
+    "progress.md"
+  ],
+  "commands": [
+    {
+      "name": "automation-gold-review-tests",
+      "argv": ["python", "-m", "pytest", "-q", "tests/unit/test_automation_gold_review.py"],
+      "timeout_s": 120
+    },
+    {
+      "name": "automation-boundary-cli",
+      "argv": ["python", "-m", "pytest", "-q", "tests/contract/test_automation_store_boundary.py", "tests/contract/test_automation_cli.py"],
+      "timeout_s": 120
+    },
+    {
+      "name": "automation-status",
+      "argv": ["python", "-m", "company_wiki.automation.cli", "status", "--json"],
+      "timeout_s": 30
+    },
+    {
+      "name": "automation-doctor",
+      "argv": ["python", "-m", "company_wiki.automation.cli", "doctor", "--json"],
+      "timeout_s": 30
+    },
+    {
+      "name": "full-hermetic-pytest",
+      "argv": ["python", "-m", "pytest", "-q"],
+      "timeout_s": 240
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "work_unit": "RR-12.2d-1",
+  "phase": "red",
+  "command": "python -m pytest -q tests/contract/test_gold_corpus.py --tb=line",
+  "exit_code": 1,
+  "tests": {
+    "passed": 26,
+    "failed": 21,
+    "failed_test_count": 21
+  },
+  "baseline_before": "25 passed (pre-existing weak existence checks)",
+  "failures_by_class": {
+    "TestCorpusManifest": [
+      "test_manifest_file_exists",
+      "test_manifest_top_level_fields",
+      "test_manifest_synthetic_only",
+      "test_manifest_revisions_have_required_fields",
+      "test_manifest_ids_are_layered",
+      "test_manifest_paths_resolve_to_real_files",
+      "test_manifest_content_sha256_matches_disk"
+    ],
+    "TestReferentialIntegrity": [
+      "test_no_missing_sources_referenced",
+      "test_no_orphan_spans",
+      "test_spans_claim_refs_exist",
+      "test_contradiction_claim_refs_exist"
+    ],
+    "TestEvidenceExactness": [
+      "test_span_offsets_match_source_body"
+    ],
+    "TestReadmeConsistency": [
+      "test_readme_claimed_source_dirs_exist",
+      "test_readme_claimed_annotation_files_exist",
+      "test_readme_mentions_manifest"
+    ],
+    "TestCoverageGates": [
+      "test_revision_count_at_least_30",
+      "test_source_kind_coverage",
+      "test_company_coverage_at_least_3"
+    ],
+    "TestQualityMetricsConsistency": [
+      "test_total_sources_matches_disk",
+      "test_total_material_claims_matches_annotations",
+      "test_below_threshold_implies_not_canary_ready"
+    ]
+  },
+  "defects_exposed": {
+    "TestCorpusManifest": "no corpus_manifest.json (7 schema/path/id/hash checks)",
+    "TestReferentialIntegrity::test_no_missing_sources_referenced": "4 referenced source_ids have no file: gk-zw-2025-ar, gk-zw-ambiguous, gk-mt-irrelevant, gk-bh-correction",
+    "TestReferentialIntegrity::test_no_orphan_spans": "3 orphan spans: S005, S006, S008",
+    "TestReferentialIntegrity::test_spans_claim_refs_exist": "spans reference non-existent claims C005, C006, C008",
+    "TestReferentialIntegrity::test_contradiction_claim_refs_exist": "contradictions reference non-existent claims C010, C011",
+    "TestEvidenceExactness::test_span_offsets_match_source_body": "span [start:end] offsets do not equal source body text (fabricated offsets)",
+    "TestReadmeConsistency": "README claims \u4e2d\u5fae\u516c\u53f8/\u4e2d\u82af\u56fd\u9645 source dirs + numeric_values.json that do not exist; no manifest mention",
+    "TestCoverageGates": "1 revision (<30); 1 source kind regulatory (need 6 kinds); 1 company (<3)",
+    "TestQualityMetricsConsistency": "total_sources=5 (actual 1); total_material_claims=9 (actual 6); numeric_exactness 0.857<0.95 yet all_critical_metrics_pass=true & ready_for_canary=true"
+  },
+  "passing_new_test": [
+    "TestReferentialIntegrity::test_global_id_uniqueness (IDs currently happen to be unique)"
+  ],
+  "legitimate_red": "all 21 failures are assertion failures exposing real corpus defects; 0 collection/import/path errors",
+  "next_step": "RR-12.2d-2 (schema normalize + fix existing sample) then RR-12.2d-3 (expand to 30 revisions)"
+}

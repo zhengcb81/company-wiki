@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "work_unit": "RR-12.2e-REVIEW-GATE",
+  "status": "mechanism_candidate",
+  "implementer_role": "implementation_only_not_primary_or_secondary_reviewer",
+  "base_head": "a57160646ed0d02a7d8befe2e390b523c73432c6",
+  "objective": "provide a deterministic independent-review packet, pending receipt template, and fail-closed validator without changing gold review status",
+  "red_phase": {
+    "command": "python -m pytest -q tests/contract/test_gold_review_gate.py",
+    "result": "1 collected, 1 failed",
+    "failure_type": "ordinary assertion failure for missing module",
+    "collection_errors": 0
+  },
+  "tests": {
+    "gold_review_target": "26 passed",
+    "compatibility_suite": "91 passed (26 gold review + 52 gold corpus + 13 writer freeze)",
+    "full_suite": "711 passed in 25.68s",
+    "failed": 0,
+    "collection_errors": 0,
+    "unexpected_skips": 0
+  },
+  "review_artifacts": {
+    "packet_path": "artifacts/gates/rr-12.2e-review-packet.json",
+    "packet_canonical_sha256": "8b737fc0eb9e7a7758523b884de2c7e82cdd4ced2728820a8cc95b60740502e9",
+    "packet_file_sha256": "0a2e616d9614208481798f5eba906c63f3c0896a729bd84b433ca3f79156ee93",
+    "template_path": "artifacts/gates/rr-12.2e-review-template.json",
+    "template_file_sha256": "28796e08b237ccb451104011b58755b7f193c8e52cc6489c74ef30bec7ad0dba",
+    "readiness_path": "artifacts/gates/rr-12.2e-readiness.json",
+    "readiness_file_sha256": "20552e352686b21dd6091818c0f834fab41ac40bf7f3ead116766065b779e26a",
+    "manifest_sha256": "df8913a6e13c5f1f3573c4522f6a8d1fc541b40287d9b4c3322fec6b600b3899",
+    "thresholds_sha256": "83e43db740fc93d1182ceb00c3120003f0f45e1c8b000bf0bb874f35be973876"
+  },
+  "packet_counts": {
+    "revisions": 40,
+    "primary_review_slots": 40,
+    "second_review_slots": 8,
+    "second_review_minimum_percent": 20,
+    "required_source_kinds": 6,
+    "forbidden_source_body_fields": 0
+  },
+  "actual_pending_validation": {
+    "command": "python scripts/gold_review_gate.py validate --corpus tests/fixtures/gold_corpus --packet artifacts/gates/rr-12.2e-review-packet.json --review-receipt artifacts/gates/rr-12.2e-review-template.json --output artifacts/gates/rr-12.2e-readiness.json",
+    "exit_code": 1,
+    "status": "blocked_independent_review_pending",
+    "approved": false,
+    "findings": 49,
+    "manifest_unchanged": true
+  },
+  "corpus_review_status": {
+    "draft": 40,
+    "reviewed": 0
+  },
+  "control_plane": {
+    "acceptance_lock": "pass",
+    "deletion_manifest": "pass",
+    "staged_secret_findings": 0,
+    "staged_files": 0,
+    "scoped_diff_check": "pass",
+    "git_index_unchanged": true
+  },
+  "production_data": {
+    "before": "b97f177c60da1a7f0165cba69dfc567df9edba7558001b4ba5aeddcd5361433c",
+    "after": "b97f177c60da1a7f0165cba69dfc567df9edba7558001b4ba5aeddcd5361433c",
+    "files": 16789,
+    "bytes": 25472376075,
+    "changed_paths": 0
+  },
+  "remaining_gates": [
+    "an independent primary reviewer must review all 40 revisions",
+    "a different independent secondary reviewer must review the deterministic 8 or more revisions across all six source kinds",
+    "the completed receipt must validate with exit code 0 before a separate promotion work unit may be opened",
+    "all 40 manifest entries remain draft until the promotion work unit succeeds",
+    "Phase 11 external remediation and other Phase 13 entry gates remain independent blockers"
+  ],
+  "derived_status": "mechanism candidate only; independent corpus review has not occurred"
+}

@@ -14,9 +14,8 @@ validate_companies.py — 系统性检测 companies.yaml 中的命名歧义问�
 
 import argparse
 import sys
-from pathlib import Path
 
-from common import WIKI_ROOT, COMPANIES_YAML
+from common import COMPANIES_YAML
 
 import yaml
 
@@ -147,7 +146,7 @@ def generate_fixes(conflicts, companies):
                     "company": c["company"],
                     "action": "modify_query",
                     "value": c["query"],
-                    "reason": f"查询词包含其他公司名/别名，建议加限定词",
+                    "reason": "查询词包含其他公司名/别名，建议加限定词",
                 }
             )
     return fixes

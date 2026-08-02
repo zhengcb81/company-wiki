@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "work_unit": "RR-12.2d-4R",
+  "status": "candidate",
+  "implementer_role": "implementation_only_not_independent_reviewer",
+  "base_head": "a57160646ed0d02a7d8befe2e390b523c73432c6",
+  "objective": "complete the independent gold evaluator, fixed CLI, threshold-only policy, and mutation controls",
+  "red_phase": {
+    "command": "python -m pytest -q tests/contract/test_gold_evaluator.py tests/contract/test_gold_mutations.py",
+    "result": "28 passed, 15 failed",
+    "failure_kind": "15 expected assertion failures; zero collection/import/path failures"
+  },
+  "tests": {
+    "gold_target": "90 passed",
+    "compatibility": "11 passed",
+    "writer_evaluator_mutation": "57 passed",
+    "full_suite": "680 passed in 38.37s",
+    "failed": 0,
+    "unexpected_skips": 0
+  },
+  "evaluator": {
+    "version": "1.0.0",
+    "manifest_sha256": "d546fdee7aeff45616eb22ba2a84c1442386dec23ec03f2da7a51910384c764f",
+    "thresholds_sha256": "83e43db740fc93d1182ceb00c3120003f0f45e1c8b000bf0bb874f35be973876",
+    "perfect_predictions_sha256": "65ab6b6916e7feac1b28dfa22afec5d8c78f91259f085ef53334776347187ca9",
+    "perfect_receipt_sha256": "893f102b1fafc2d390fca118fc1b253bbd3bf5ee36abc87426cb1bf4f938202e",
+    "perfect_result": "pass",
+    "perfect_failures": 0,
+    "empty_negative_receipt_sha256": "8a7aba4dfaeee85b869e8ab52a157ae1c9f2a6992a89e34a2c4350512d102d0c",
+    "empty_negative_result": "fail",
+    "empty_negative_failures": 10,
+    "mutation_contracts": 21
+  },
+  "corpus": {
+    "revisions": 30,
+    "review_status": {
+      "draft": 30,
+      "reviewed": 0
+    },
+    "gold_material_claims": 27,
+    "evidence_cases": 26,
+    "numeric_cases": 19,
+    "routes": 30,
+    "ambiguity_cases": 2,
+    "irrelevant_cases": 2,
+    "correction_cases": 2,
+    "aggregation_cases": 4
+  },
+  "control_plane": {
+    "acceptance_lock": "pass",
+    "deletion_manifest": "pass",
+    "staged_secret_findings": 0,
+    "staged_files": 0,
+    "git_index_digest_before": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "git_index_digest_after": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "scoped_diff_check": "pass",
+    "global_diff_check": "pre-existing out-of-scope whitespace findings in dashboard.md and log.md; files left untouched"
+  },
+  "production_data": {
+    "before": "b97f177c60da1a7f0165cba69dfc567df9edba7558001b4ba5aeddcd5361433c",
+    "after": "b97f177c60da1a7f0165cba69dfc567df9edba7558001b4ba5aeddcd5361433c",
+    "files": 16789,
+    "bytes": 25472376075,
+    "changed_paths": 0
+  },
+  "architecture": {
+    "receipt_writer": "scripts.common.atomic_write plus artifacts/gates path confinement",
+    "codegraph_external_production_impact": 0,
+    "real_network_or_llm": false
+  },
+  "remaining_gates": [
+    "all 30 revisions remain draft and require independent review",
+    "entity distribution exceeds the <=40% construction guideline",
+    "several scenario cohorts remain below the planning guideline",
+    "Phase 11 external remediation and independent review still block Phase 13+"
+  ],
+  "derived_status": "candidate only; not verified or completed"
+}

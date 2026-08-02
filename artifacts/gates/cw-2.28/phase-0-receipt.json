@@ -1,0 +1,215 @@
+{
+  "schema_version": "1.0",
+  "work_unit": "CW-2.28A",
+  "phase": 0,
+  "status": "PASS",
+  "started_at": "2026-07-26T08:40:00Z",
+  "completed_at": "2026-07-26T08:55:00Z",
+  "executor": "opencode/deepseek-v4-pro",
+  "project_root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+  "git_heads": {
+    "company-wiki": "a571606",
+    "revenue-forecast": "d5f1188"
+  },
+  "before_scoped_status": {
+    "company-wiki_allowlist_dirty": 26,
+    "all_untracked": true,
+    "filing-fetch_dirty": 0,
+    "revenue-forecast_dirty": 0,
+    "dayu_dirty": 1,
+    "stockinfo_dirty": 37
+  },
+  "after_scoped_status": {
+    "company-wiki_allowlist_dirty": 26,
+    "all_untracked": true,
+    "filing-fetch_dirty": 0,
+    "revenue-forecast_dirty": 0,
+    "dayu_dirty": 1,
+    "stockinfo_dirty": 37
+  },
+  "before_target_sha256": {
+    "extraction_quality.py": "not_computed",
+    "test_source_catalog_worker.py": "not_computed"
+  },
+  "after_target_sha256": {
+    "extraction_quality.py": "not_computed",
+    "test_source_catalog_worker.py": "not_computed"
+  },
+  "commands": [
+    [
+      "git rev-parse --short HEAD",
+      "0",
+      "a571606"
+    ],
+    [
+      "source catalog status (python -m company_wiki.source_catalog.cli status)",
+      "0",
+      "23451 locations / 11706 docs / 23409 sources"
+    ],
+    [
+      "worker-status",
+      "0",
+      "stopped (stale_runtime=true, PID 20848, heartbeat 5771s)"
+    ],
+    [
+      "catalog DB quick_check",
+      "0",
+      "ok"
+    ],
+    [
+      "catalog DB SHA",
+      "0",
+      "2685cc069a1632cbb5b4e8e765e8149e497d97050b8211b40d8f20c6355bee7d (77238272 bytes)"
+    ],
+    [
+      "pytest focused baseline (48 tests)",
+      "1",
+      "47 passed, 1 failed (worker stop timing, pre-existing)"
+    ],
+    [
+      "pytest full baseline (1374 tests)",
+      "1",
+      "1373 passed, 1 failed (same worker stop, pre-existing)"
+    ],
+    [
+      "ruff check allowlist",
+      "1",
+      "14 errors: E402 x1, F811 x13 (pre-existing duplicate test names)"
+    ],
+    [
+      "pytest filing-fetch",
+      "0",
+      "13 passed, 9 subtests"
+    ],
+    [
+      "pytest revenue-forecast",
+      "0",
+      "155 passed, 102 subtests"
+    ],
+    [
+      "StockInfo focused (104 tests)",
+      "1",
+      "102 passed, 2 failed (FileNotFoundError src/browser.py, pre-existing)"
+    ],
+    [
+      "duplicate CLI",
+      "0",
+      "42 exact_copy groups, 0 semantic, ~81.9MB reclaimable"
+    ]
+  ],
+  "exit_codes": {
+    "focused_baseline": 1,
+    "full_baseline": 1,
+    "ruff": 1,
+    "filing-fetch": 0,
+    "revenue-forecast": 0,
+    "stockinfo_focused": 1,
+    "duplicate_cli": 0
+  },
+  "pytest_summary": {
+    "company_focused": "48 collected, 47 passed, 1 failed (pre-existing worker stop)",
+    "company_full": "1374 collected, 1373 passed, 1 failed (same pre-existing)",
+    "filing_fetch": "13 passed, 9 subtests",
+    "revenue_forecast": "155 passed, 102 subtests",
+    "stockinfo_focused": "104 collected, 102 passed, 2 failed (pre-existing browser.py path)"
+  },
+  "static_summary": {
+    "ruff": "14 errors (E402 x1, F811 x13) — confirmed pre-existing, 1 auto-fixable",
+    "compileall": "not run in Phase 0"
+  },
+  "catalog_before": {
+    "locations": 23451,
+    "documents": 11706,
+    "sources": 23409,
+    "text_fingerprint_nonNULL": 0,
+    "exact_copy_groups": 42,
+    "semantic_copy_groups": 0,
+    "reclaimable_bytes": 81855875,
+    "db_sha256": "2685cc069a1632cbb5b4e8e765e8149e497d97050b8211b40d8f20c6355bee7d",
+    "db_size": 77238272,
+    "quick_check": "ok"
+  },
+  "catalog_after": {
+    "locations": 23451,
+    "documents": 11706,
+    "sources": 23409,
+    "text_fingerprint_nonNULL": 0,
+    "exact_copy_groups": 42,
+    "semantic_copy_groups": 0
+  },
+  "db_backup": null,
+  "raw_manifest_before": {
+    "BYD_FY2024_annual": {
+      "path": "比亚迪/raw/financial_reports/annual/2025-03-24_cninfo_1222881496_2024年年度报告.pdf",
+      "size": 10092140,
+      "sha256": "e9c2d7fdd088e151ccb6c8ad3d95587b2b014b10f2c9731508d23ce07fde4de3"
+    },
+    "中微公司_FY2024_annual": {
+      "exact_duplicate": true,
+      "paths": [
+        "中微公司/raw/financial_reports/中微公司：2024年年度报告.pdf",
+        "中微公司/raw/financial_reports/annual/2025-04-17_cninfo_1223127191_2024年年度报告.pdf"
+      ],
+      "size": 14285291,
+      "sha256": "3273711fbb79fa6ee5e9a3b2f0eea7d5a1dfa0d305721c61e5af251f9addf399"
+    },
+    "宁德时代_FY2024_annual": {
+      "path": "宁德时代/raw/financial_reports/宁德时代：2024年年度报告.pdf",
+      "size": 2070073,
+      "sha256": "b4f1713d7b821eb076c102711d177fe942ccc2bc8dd171ae5d7a95799a65b0ad",
+      "note": "legacy, no 1.1.0 sidecar"
+    },
+    "美团_FY2024_annual": {
+      "path": "美團－Ｗ/raw/financial_reports/annual/2025-04-28_hkexnews_11645024_2024年年報.pdf",
+      "size": 4386772,
+      "sha256": "36eae4d0397187bef187286e394b7d85421eac75f7380d1a95de9f1bfa25e70a"
+    },
+    "NVIDIA_FY2025_10K": {
+      "path": "NVIDIA CORP/raw/financial_reports/annual/2025-02-26_sec_0001045810-25-000023_NVIDIA CORP 10-K 2025-01-26.htm",
+      "size": 2067520,
+      "sha256": "dae19486be264fd26eb00a7f920dc641041a261c81bc8c03b678eea947de4856"
+    }
+  },
+  "raw_manifest_after": "same as before",
+  "network_used": false,
+  "downloader_invocations": 0,
+  "llm_invocations": 0,
+  "files_created": [
+    "artifacts/gates/cw-2.28/phase-0-receipt.json"
+  ],
+  "files_modified": [
+    "task_plan.md (Current Phase marker + CW-2.28 status)",
+    "progress.md (Phase 0 entry)",
+    "findings.md (Phase 0 entry)"
+  ],
+  "diff_allowlist_result": "PASS (planning files only)",
+  "secret_scan_result": "not_applicable (no new test code or fixtures)",
+  "errors": [
+    {
+      "type": "pre-existing",
+      "source": "test_source_catalog_control.py::test_real_background_worker_can_start_heartbeat_and_stop_in_a_temp_catalog",
+      "detail": "assert 'running' == 'stopped' — worker stop timing, known from Phase 10.2",
+      "verdict": "baseline accepted, not a CW-2.28 regression"
+    },
+    {
+      "type": "pre-existing",
+      "source": "Ruff F811 duplicate test names in test_source_catalog_worker.py (12 functions)",
+      "detail": "CW-2.28 allowlist Phase 4.2 covers this fix",
+      "verdict": "baseline accepted"
+    },
+    {
+      "type": "pre-existing",
+      "source": "Ruff E402 in extraction_quality.py:610",
+      "detail": "CW-2.28 allowlist Phase 4.2 covers this fix",
+      "verdict": "baseline accepted"
+    },
+    {
+      "type": "pre-existing",
+      "source": "StockInfo test_downloader.py FileNotFoundError for src/browser.py",
+      "detail": "Tests run from wrong cwd, not CW-2.28 scope",
+      "verdict": "baseline accepted"
+    }
+  ],
+  "blocker": null,
+  "next_phase": "CW-2.28B (Phase 1: semantic/backfill/UI RED contracts)"
+}

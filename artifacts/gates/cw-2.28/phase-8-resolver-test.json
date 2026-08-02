@@ -1,0 +1,32 @@
+{
+  "BYD": {
+    "status": "reused_equivalent",
+    "match_count": 1,
+    "reason": "one_existing_source_satisfies_semantic_request",
+    "sha": "e9c2d7fdd088e151..."
+  },
+  "中微公司": {
+    "status": "reused_equivalent",
+    "match_count": 1,
+    "reason": "one_existing_source_satisfies_semantic_request",
+    "sha": "3273711fbb79fa6e..."
+  },
+  "宁德时代": {
+    "status": "reused_equivalent",
+    "match_count": 1,
+    "reason": "one_existing_source_satisfies_semantic_request",
+    "sha": "b4f1713d7b821eb0..."
+  },
+  "美团": {
+    "status": "reused_equivalent",
+    "match_count": 1,
+    "reason": "one_existing_source_satisfies_semantic_request",
+    "sha": "36eae4d0397187be..."
+  },
+  "NVIDIA": {
+    "status": "reused_equivalent",
+    "match_count": 1,
+    "reason": "one_existing_source_satisfies_semantic_request",
+    "sha": "dae19486be264fd2..."
+  }
+}

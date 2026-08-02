@@ -1,0 +1,200 @@
+{
+  "all_critical_pass": false,
+  "as_of": null,
+  "counts": {
+    "aggregation_cases": 4,
+    "ambiguity_cases": 2,
+    "correction_cases": 2,
+    "evidence_cases": 26,
+    "gold_material_claims": 27,
+    "gold_routes": 30,
+    "irrelevant_cases": 2,
+    "numeric_cases": 19,
+    "predicted_claims": 0
+  },
+  "evaluator_version": "1.0.0",
+  "failures": [
+    {
+      "actual": 0.0,
+      "critical": true,
+      "metric": "material_claim_recall",
+      "operator": ">=",
+      "threshold": 0.9
+    },
+    {
+      "actual": 0.0,
+      "critical": true,
+      "metric": "evidence_exactness",
+      "operator": ">=",
+      "threshold": 0.95
+    },
+    {
+      "actual": 0.0,
+      "critical": true,
+      "metric": "numeric_exactness",
+      "operator": ">=",
+      "threshold": 1.0
+    },
+    {
+      "actual": 0.0,
+      "critical": true,
+      "metric": "claim_type_accuracy",
+      "operator": ">=",
+      "threshold": 1.0
+    },
+    {
+      "actual": 0.0,
+      "critical": true,
+      "metric": "routing_micro_recall",
+      "operator": ">=",
+      "threshold": 0.9
+    },
+    {
+      "actual": 0.0,
+      "critical": false,
+      "metric": "routing_macro_f1",
+      "operator": ">=",
+      "threshold": 0.85
+    },
+    {
+      "actual": 0.0,
+      "critical": true,
+      "metric": "irrelevant_rejection",
+      "operator": ">=",
+      "threshold": 1.0
+    },
+    {
+      "actual": 0.0,
+      "critical": true,
+      "metric": "ambiguity_detection_recall",
+      "operator": ">=",
+      "threshold": 1.0
+    },
+    {
+      "actual": 0.0,
+      "critical": true,
+      "metric": "correction_supersedes_accuracy",
+      "operator": ">=",
+      "threshold": 1.0
+    },
+    {
+      "actual": 0.0,
+      "critical": true,
+      "metric": "aggregation_dedup_accuracy",
+      "operator": ">=",
+      "threshold": 1.0
+    }
+  ],
+  "manifest_sha256": "d546fdee7aeff45616eb22ba2a84c1442386dec23ec03f2da7a51910384c764f",
+  "metrics": {
+    "aggregation_dedup_accuracy": 0.0,
+    "ambiguity_detection_recall": 0.0,
+    "as_of_leakage_rate": 0.0,
+    "claim_type_accuracy": 0.0,
+    "correction_supersedes_accuracy": 0.0,
+    "evidence_exactness": 0.0,
+    "irrelevant_rejection": 0.0,
+    "material_claim_f1": 0.0,
+    "material_claim_precision": 1.0,
+    "material_claim_recall": 0.0,
+    "numeric_exactness": 0.0,
+    "provenance_coverage": 1.0,
+    "routing_macro_f1": 0.0,
+    "routing_macro_precision": 0.0,
+    "routing_macro_recall": 0.0,
+    "routing_micro_precision": 1.0,
+    "routing_micro_recall": 0.0
+  },
+  "predictions_sha256": "52b90c609fd8a1867503547749325558ef106411af4364816edc5f33fef24bb4",
+  "receipt_sha256": "8a7aba4dfaeee85b869e8ab52a157ae1c9f2a6992a89e34a2c4350512d102d0c",
+  "schema_version": 1,
+  "threshold_policy": {
+    "aggregation_dedup_accuracy": {
+      "critical": true,
+      "operator": ">=",
+      "value": 1.0
+    },
+    "ambiguity_detection_recall": {
+      "critical": true,
+      "operator": ">=",
+      "value": 1.0
+    },
+    "as_of_leakage_rate": {
+      "critical": true,
+      "operator": "<=",
+      "value": 0.0
+    },
+    "claim_type_accuracy": {
+      "critical": true,
+      "operator": ">=",
+      "value": 1.0
+    },
+    "correction_supersedes_accuracy": {
+      "critical": true,
+      "operator": ">=",
+      "value": 1.0
+    },
+    "evidence_exactness": {
+      "critical": true,
+      "operator": ">=",
+      "value": 0.95
+    },
+    "irrelevant_rejection": {
+      "critical": true,
+      "operator": ">=",
+      "value": 1.0
+    },
+    "material_claim_precision": {
+      "critical": true,
+      "operator": ">=",
+      "value": 0.9
+    },
+    "material_claim_recall": {
+      "critical": true,
+      "operator": ">=",
+      "value": 0.9
+    },
+    "numeric_exactness": {
+      "critical": true,
+      "operator": ">=",
+      "value": 1.0
+    },
+    "provenance_coverage": {
+      "critical": true,
+      "operator": ">=",
+      "value": 1.0
+    },
+    "routing_macro_f1": {
+      "critical": false,
+      "operator": ">=",
+      "value": 0.85
+    },
+    "routing_micro_precision": {
+      "critical": true,
+      "operator": ">=",
+      "value": 0.9
+    },
+    "routing_micro_recall": {
+      "critical": true,
+      "operator": ">=",
+      "value": 0.9
+    }
+  },
+  "thresholds": {
+    "aggregation_dedup_accuracy": 1.0,
+    "ambiguity_detection_recall": 1.0,
+    "as_of_leakage_rate": 0.0,
+    "claim_type_accuracy": 1.0,
+    "correction_supersedes_accuracy": 1.0,
+    "evidence_exactness": 0.95,
+    "irrelevant_rejection": 1.0,
+    "material_claim_precision": 0.9,
+    "material_claim_recall": 0.9,
+    "numeric_exactness": 1.0,
+    "provenance_coverage": 1.0,
+    "routing_macro_f1": 0.85,
+    "routing_micro_precision": 0.9,
+    "routing_micro_recall": 0.9
+  },
+  "thresholds_sha256": "83e43db740fc93d1182ceb00c3120003f0f45e1c8b000bf0bb874f35be973876"
+}

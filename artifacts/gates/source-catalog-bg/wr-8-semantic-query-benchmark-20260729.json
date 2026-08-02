@@ -1,0 +1,26 @@
+﻿{
+  "schema_version": "1.0",
+  "status": "PASS",
+  "database_mode": "read-only",
+  "fingerprinted_documents": 1630,
+  "rows": 1630,
+  "unique_documents": 1630,
+  "elapsed_seconds": 0.465,
+  "threshold_seconds": 10,
+  "correlated_location_search": false,
+  "plan": [
+    "CO-ROUTINE ranked_locations",
+    "CO-ROUTINE (subquery-4)",
+    "SEARCH l USING INDEX idx_locations_status (location_status=?)",
+    "SEARCH r USING INDEX sqlite_autoindex_roots_1 (root_id=?)",
+    "USE TEMP B-TREE FOR ORDER BY",
+    "SCAN (subquery-4)",
+    "SCAN l",
+    "SEARCH d USING INDEX sqlite_autoindex_documents_1 (document_id=?)",
+    "SEARCH s USING INDEX sqlite_autoindex_sources_1 (source_id=?)",
+    "CORRELATED SCALAR SUBQUERY 2",
+    "SEARCH de USING COVERING INDEX sqlite_autoindex_document_entities_1 (document_id=?)",
+    "SEARCH e USING INDEX sqlite_autoindex_entities_1 (entity_id=?)",
+    "USE TEMP B-TREE FOR ORDER BY"
+  ]
+}

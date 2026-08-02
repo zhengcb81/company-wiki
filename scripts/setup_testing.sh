@@ -75,12 +75,16 @@ schedule:
   report_check: "weekly"
 
 llm:
-  provider: "deepseek"
-  api_key: "sk-test-key-12345"
-  model: "deepseek-v4-flash"
-  base_url: "https://api.deepseek.com"
-  max_tokens: 1024
-  temperature: 0.3
+  provider: "minimax"
+  model: "MiniMax-M3"
+  base_url: "https://api.minimaxi.com/v1"
+  max_tokens: 8192
+  temperature: 1.0
+  fallback:
+    provider: "mimo"
+    model: "mimo-v2.5-pro"
+    base_url: "https://token-plan-cn.xiaomimimo.com/v1"
+    usage_scope: "general"
 
 search:
   engine: "tavily"
@@ -146,7 +150,7 @@ def temp_wiki_structure(wiki_root, sample_graph_yaml, sample_config_yaml):
 def mock_env_vars(monkeypatch):
     """设置模拟环境变量"""
     monkeypatch.setenv("TAVILY_API_KEY", "test-tavily-key")
-    monkeypatch.setenv("DEEPSEEK_API_KEY", "test-deepseek-key")
+    monkeypatch.setenv("MINIMAX_API_KEY", "test-minimax-key")
     monkeypatch.setenv("WIKI_ROOT", "/tmp/test-wiki")
 EOF
 
@@ -350,8 +354,11 @@ cat > .env.example << 'EOF'
 # Tavily 搜索 API
 TAVILY_API_KEY=your_tavily_api_key_here
 
-# DeepSeek LLM API
-DEEPSEEK_API_KEY=your_deepseek_api_key_here
+# MiniMax-M3 主 LLM API
+MINIMAX_API_KEY=your_minimax_api_key_here
+
+# MiMo 2.5 Pro 通用次 LLM
+MIMO_API_KEY=your_mimo_api_key_here
 
 # Wiki 根目录（可选，默认为 ~/company-wiki）
 # WIKI_ROOT=~/company-wiki

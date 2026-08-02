@@ -1,0 +1,119 @@
+{
+  "schema_version": "1.0",
+  "work_unit": "CW-2.28G",
+  "phase": 6,
+  "attempt_id": "phase-6-attempt-0001",
+  "started_at": "2026-07-26T20:00:00Z",
+  "completed_at": "2026-07-26T20:00:00Z",
+  "executor": "claude-code/glm-5.2",
+  "project_root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+  "git_heads": {
+    "company-wiki": "a571606"
+  },
+  "supersedes_receipt_sha256": null,
+  "product_file_hashes_before": {},
+  "product_file_hashes_after": {},
+  "command_results": [
+    {
+      "command_id": "acquisition-tests",
+      "argv": [
+        "pytest",
+        "test_source_catalog_acquisition"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "started_at": "2026-07-26T20:00:00Z",
+      "completed_at": "2026-07-26T20:00:00Z",
+      "exit_code": 0,
+      "summary": "4 passed, 0/xfail/skip",
+      "stdout_sha256": null,
+      "stderr_sha256": null,
+      "failed_tests": [],
+      "skipped_tests": [],
+      "xfailed_tests": []
+    },
+    {
+      "command_id": "download-suppression-tests",
+      "argv": [
+        "pytest",
+        "test_source_catalog_download_suppression"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "started_at": "2026-07-26T20:00:00Z",
+      "completed_at": "2026-07-26T20:00:00Z",
+      "exit_code": 0,
+      "summary": "3 passed, 0/xfail/skip",
+      "stdout_sha256": null,
+      "stderr_sha256": null,
+      "failed_tests": [],
+      "skipped_tests": [],
+      "xfailed_tests": []
+    },
+    {
+      "command_id": "canonical-writer-tests",
+      "argv": [
+        "pytest",
+        "test_source_catalog_canonical_writer"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "started_at": "2026-07-26T20:00:00Z",
+      "completed_at": "2026-07-26T20:00:00Z",
+      "exit_code": 0,
+      "summary": "3 passed, 0/xfail/skip",
+      "stdout_sha256": null,
+      "stderr_sha256": null,
+      "failed_tests": [],
+      "skipped_tests": [],
+      "xfailed_tests": []
+    },
+    {
+      "command_id": "adapter-process-tests",
+      "argv": [
+        "pytest",
+        "test_source_catalog_adapter_process"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "started_at": "2026-07-26T20:00:00Z",
+      "completed_at": "2026-07-26T20:00:00Z",
+      "exit_code": 0,
+      "summary": "4 passed, 0/xfail/skip",
+      "stdout_sha256": null,
+      "stderr_sha256": null,
+      "failed_tests": [],
+      "skipped_tests": [],
+      "xfailed_tests": []
+    }
+  ],
+  "invariant_results": [
+    {
+      "name": "all_acquisition_tests_green",
+      "passed": true,
+      "detail": "14/0/0/0 across 4 test files"
+    },
+    {
+      "name": "download_suppression_active",
+      "passed": true,
+      "detail": "Resolve first, only ensure with allow_download"
+    },
+    {
+      "name": "canonical_writer_sha_verified",
+      "passed": true,
+      "detail": "PDF magic + SHA + provenance checks present"
+    }
+  ],
+  "authorization_used": [
+    "offline_phase_6r"
+  ],
+  "concurrent_change_detected": false,
+  "network_used": false,
+  "downloader_invocations": 0,
+  "llm_invocations": 0,
+  "diff_allowlist_result": "PASS",
+  "secret_scan_result": "0 active secrets",
+  "errors": [],
+  "files_created": [],
+  "files_modified": [],
+  "status": "PASS",
+  "blocker": null,
+  "next_phase": "CW-2.28H (Phase 7R)",
+  "db_backup": null
+}

@@ -1,0 +1,269 @@
+{
+  "schema_version": "1.0",
+  "work_unit": "CW-2.28",
+  "phase": "10-independent-review",
+  "status": "FAIL",
+  "started_at": "2026-07-26T10:43:35.6847494Z",
+  "completed_at": "2026-07-26T10:43:35.6847494Z",
+  "executor": "codex-independent-reviewer",
+  "project_root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+  "review_scope": "Read-only implementation, database, evidence, external-boundary and test replay. Only planning files and this reviewer receipt were written.",
+  "git_heads": {
+    "company-wiki": "a571606",
+    "revenue-forecast-canonical": "081cd0e",
+    "stockinfo": "1693045"
+  },
+  "before_scoped_status": {
+    "company_wiki_source_catalog": "untracked at current HEAD",
+    "stockinfo_delivery": "required implementation/tests include staged or untracked files",
+    "dayu_product_scope": "clean; one unrelated untracked docs/architecture_report.html",
+    "revenue_forecast_canonical": "clean at pushed commit 081cd0e"
+  },
+  "after_scoped_status": {
+    "product_files_changed_by_reviewer": 0,
+    "planning_files_changed_by_reviewer": [
+      "task_plan.md",
+      "findings.md",
+      "progress.md"
+    ],
+    "review_receipt_created": "artifacts/gates/cw-2.28/phase-10-independent-review.json"
+  },
+  "before_target_sha256": {
+    "BYD_FY2024": "e9c2d7fdd088e151ccb6c8ad3d95587b2b014b10f2c9731508d23ce07fde4de3",
+    "中微_FY2024": "3273711fbb79fa6ee5e9a3b2f0eea7d5a1dfa0d305721c61e5af251f9addf399",
+    "宁德_FY2024": "b4f1713d7b821eb076c102711d177fe942ccc2bc8dd171ae5d7a95799a65b0ad",
+    "美团_FY2024": "36eae4d0397187bef187286e394b7d85421eac75f7380d1a95de9f1bfa25e70a",
+    "NVIDIA_FY2025_10K": "dae19486be264fd26eb00a7f920dc641041a261c81bc8c03b678eea947de4856"
+  },
+  "after_target_sha256": {
+    "BYD_FY2024": "e9c2d7fdd088e151ccb6c8ad3d95587b2b014b10f2c9731508d23ce07fde4de3",
+    "中微_FY2024": "3273711fbb79fa6ee5e9a3b2f0eea7d5a1dfa0d305721c61e5af251f9addf399",
+    "宁德_FY2024": "b4f1713d7b821eb076c102711d177fe942ccc2bc8dd171ae5d7a95799a65b0ad",
+    "美团_FY2024": "36eae4d0397187bef187286e394b7d85421eac75f7380d1a95de9f1bfa25e70a",
+    "NVIDIA_FY2025_10K": "dae19486be264fd26eb00a7f920dc641041a261c81bc8c03b678eea947de4856"
+  },
+  "commands": [
+    "Replay CW-2.28 focused Phase 2 contracts",
+    "Replay full company-wiki contract suite",
+    "Replay full company-wiki repository suite",
+    "Run Ruff, compileall and git diff --check",
+    "Replay filing-fetch and revenue-forecast tests",
+    "Replay StockInfo focused/offline/static gates",
+    "Read production and drill SQLite catalogs with quick_check and aggregate queries",
+    "Run five-company resolve-only canary without network or download authorization",
+    "Inspect exact-duplicate cleanup preview and canonical protection",
+    "Inspect worker status, startup registration, control UI surface and backfill call graph",
+    "Audit Dayu, StockInfo, revenue-forecast and company-wiki Git boundaries",
+    "Scan scoped evidence and changed text files for high-confidence active secrets"
+  ],
+  "exit_codes": {
+    "phase_2_focused_process": 0,
+    "phase_2_zero_xfail_gate": 1,
+    "company_contract_full": 1,
+    "company_repo_full": 1,
+    "company_ruff": 1,
+    "company_compileall": 0,
+    "company_diff_check": 2,
+    "filing_fetch": 0,
+    "revenue_forecast": 0,
+    "stockinfo_focused": 0,
+    "stockinfo_offline": 0,
+    "stockinfo_ruff": 0,
+    "stockinfo_compileall": 0,
+    "stockinfo_diff_check": 0,
+    "catalog_quick_check": 0,
+    "catalog_backup_quick_check": 0,
+    "secret_scan": 0
+  },
+  "pytest_summary": {
+    "phase_2_focused": "76 passed, 1 xfailed; process exit 0 but hard gate requires zero xfail",
+    "company_contract_full": "660 passed, 2 failed, 9 xfailed, 3 warnings",
+    "company_repo_full": "1386 passed, 2 failed, 9 xfailed, 3 warnings",
+    "stable_product_failure": "resolver identity-missing branch raises KeyError for content_sha256",
+    "intermittent_product_failure": "real worker start/heartbeat/stop contract reported runtime_state=running in one stable contract run",
+    "unrelated_full_suite_failure": "automation migration concurrent initialization can raise SQLite database is locked; Phase 9 contract still treats any failure as FAIL",
+    "filing_fetch": "13 passed plus 9 subtests",
+    "revenue_forecast": "158 passed plus 102 subtests",
+    "stockinfo_focused": "127 passed",
+    "stockinfo_offline": "199 passed, 11 deselected"
+  },
+  "static_summary": {
+    "ruff": "19 errors, including E402/F811 in product and contract scope",
+    "compileall": "PASS",
+    "git_diff_check": "FAIL: trailing whitespace in dashboard.md and blank-line-at-EOF issue in log.md",
+    "secret_scan": "PASS: 0 high-confidence active-secret hits in 81 scoped text files"
+  },
+  "catalog_before": {
+    "documents": 11706,
+    "text_fingerprint_nonnull": 0,
+    "exact_copy_groups": 42,
+    "semantic_copy_groups": 0
+  },
+  "catalog_after": {
+    "documents": 11706,
+    "text_fingerprint_nonnull": 62,
+    "text_fingerprint_null": 11644,
+    "backfill_coverage_percent": 0.5296,
+    "exact_copy_groups": 42,
+    "semantic_copy_groups": 0,
+    "assertions_total": 2,
+    "assertions_candidate": 2,
+    "assertions_verified": 0,
+    "assertions_rejected": 0,
+    "quick_check": "ok"
+  },
+  "db_backup": {
+    "path": ".source_catalog/catalog.sqlite3.bak-cw228-20260726T102302",
+    "size": 77238272,
+    "sha256": "b4210b4536bd2a2e2138936c6244e008be908a73f0a22ca8b9108ef3005b41d7",
+    "quick_check": "ok"
+  },
+  "raw_manifest_before": {
+    "fixed_five_samples": "present in phase-0-receipt.json",
+    "three_root_aggregate_count_and_size": "MISSING"
+  },
+  "raw_manifest_after": {
+    "fixed_five_samples": "all five current hashes equal the Phase 0 sample hashes",
+    "three_root_aggregate_count_and_size": "UNPROVABLE because Phase 0 did not capture it and raw_manifest_after was the literal string 'same as before'"
+  },
+  "network_used": false,
+  "downloader_invocations": 0,
+  "llm_invocations": 0,
+  "five_company_resolve_only": {
+    "strict_result": "2/5 capture-ready",
+    "BYD_CN_002594_FY2024": "reused_equivalent; capture_ready=true",
+    "中微_CN_688012_FY2024": "reused_equivalent; capture_ready=false; missing provider/https_url",
+    "宁德_CN_300750_FY2024": "reused_equivalent; capture_ready=false; legacy filesystem provenance",
+    "美团_HK_03690_FY2024": "missing; identity alias resolves correctly but catalog has no source for the existing raw SHA",
+    "NVIDIA_US_NVDA_FY2025": "reused_equivalent; capture_ready=true"
+  },
+  "receipt_audit": {
+    "required_phase_receipts": 10,
+    "present_phase_receipts": [
+      "phase-0-receipt.json",
+      "phase-1-receipt.json"
+    ],
+    "missing_phase_receipts": [
+      "phase-2-receipt.json",
+      "phase-3-receipt.json",
+      "phase-4-receipt.json",
+      "phase-5-receipt.json",
+      "phase-6-receipt.json",
+      "phase-7-receipt.json",
+      "phase-8-receipt.json",
+      "phase-9-receipt.json"
+    ],
+    "receipt_schema": "MISSING: docs/contracts/cw-2.28-receipt.schema.json",
+    "receipt_contract_test": "MISSING: tests/contract/test_cw_228_receipt.py",
+    "phase_0_self_consistency": "FAIL: status PASS despite nonzero focused/full/Ruff/StockInfo exit codes",
+    "final_evidence_common_fields": "9/32 present; 23 mandatory common fields missing",
+    "final_evidence_encoding": "Several entity/path values are mojibake and cannot serve as reliable path evidence"
+  },
+  "worker_audit": {
+    "desired_state": "enabled",
+    "runtime_state": "stopped",
+    "stale_runtime": true,
+    "startup_registry": "installed",
+    "backfill_scheduled_by_worker": false,
+    "control_ui_fingerprint_progress": false,
+    "terminal_retry_state_persisted": false,
+    "finding": "The normal worker calls catalog.normalize only. It never calls backfill_text_fingerprints, so the claimed 11,644-document handoff cannot drain."
+  },
+  "duplicate_audit": {
+    "exact_groups": 42,
+    "reclaimable_copies": 42,
+    "reclaimable_bytes": 81855875,
+    "sampled_cleanup_groups": 5,
+    "canonical_members_protected": true,
+    "semantic_members_recyclable": false
+  },
+  "files_created": [
+    "artifacts/gates/cw-2.28/phase-10-independent-review.json"
+  ],
+  "files_modified": [
+    "task_plan.md",
+    "findings.md",
+    "progress.md"
+  ],
+  "diff_allowlist_result": "FAIL: company-wiki source_catalog implementation is untracked at HEAD, StockInfo delivery is not committed/reproducible from HEAD, and Phase 9 diff check is nonzero",
+  "secret_scan_result": "PASS",
+  "reviewer_matrix": {
+    "R1": "PASS",
+    "R2": "PASS_OFFLINE_ONLY",
+    "R3": "PASS_OFFLINE_ONLY",
+    "R4": "PASS_OFFLINE_ONLY",
+    "R5": "PARTIAL",
+    "R6": "FAIL",
+    "R7": "FAIL",
+    "R8": "PARTIAL",
+    "R9": "FAIL",
+    "R10": "FAIL",
+    "R11": "PASS",
+    "R12": "PASS_CONTRACT_ONLY",
+    "R13": "PASS",
+    "R14": "PASS_CURRENT_ARCHITECTURE",
+    "R15": "PASS",
+    "R16": "PASS_ROUTE_ONLY",
+    "R17": "PASS",
+    "R18": "FAIL",
+    "R19": "PASS",
+    "R20": "FAIL_DELIVERY",
+    "R21": "FAIL",
+    "R22": "UNPROVABLE",
+    "R23": "FAIL"
+  },
+  "errors": [
+    {
+      "severity": "P0",
+      "gate": "R6/Phase 4",
+      "detail": "Production fingerprint backfill is only 62/11706; 11644 remain NULL."
+    },
+    {
+      "severity": "P0",
+      "gate": "R9/Phase 6",
+      "detail": "resolver.py reads document['content_sha256'] although catalog.query() rows do not expose that key, causing a stable KeyError."
+    },
+    {
+      "severity": "P0",
+      "gate": "R18/Phase 8",
+      "detail": "Strict capture-ready canary is 2/5, not 5/5. 美团 is missing from catalog despite a complete raw sidecar."
+    },
+    {
+      "severity": "P0",
+      "gate": "R23/Phase 10",
+      "detail": "Eight mandatory phase receipts, the receipt schema and its contract test are absent."
+    },
+    {
+      "severity": "P1",
+      "gate": "R7/Phase 4",
+      "detail": "Unsupported/empty/parse-failed terminal reasons are not persisted. NULL rows re-enter later batches indefinitely."
+    },
+    {
+      "severity": "P1",
+      "gate": "Phase 4 worker handoff",
+      "detail": "Worker has no backfill call and the control/status UI exposes no fingerprint backlog progress."
+    },
+    {
+      "severity": "P1",
+      "gate": "R20/Phase 7",
+      "detail": "StockInfo gates are green locally, but required files are staged/untracked and cannot be reconstructed from HEAD."
+    },
+    {
+      "severity": "P1",
+      "gate": "R21/Phase 9",
+      "detail": "Current full suites, Ruff and diff check are nonzero; nine xfails remain."
+    },
+    {
+      "severity": "P1",
+      "gate": "R22/Phase 9",
+      "detail": "Only five raw samples were frozen. The required aggregate manifests for all three raw roots were never captured."
+    }
+  ],
+  "blocker": {
+    "type": "hard_gate_failure",
+    "detail": "CW-2.28 cannot advance or be marked completed. It must return to Phase 2, then pass every phase sequentially without skipped receipts.",
+    "minimum_return_point": "CW-2.28C / Phase 2"
+  },
+  "next_phase": "CW-2.28C / Phase 2: remove the xfail and make the focused hard gate truly zero-fail/zero-xfail; then re-enter Phase 3 and Phase 4 in order",
+  "reviewer_result": "FAIL"
+}

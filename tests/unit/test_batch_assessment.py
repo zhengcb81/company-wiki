@@ -2,6 +2,7 @@
 """Tests for scripts/batch_assessment.py — assessment generation functions."""
 
 import sys
+from datetime import datetime, timedelta
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent / "scripts"))
@@ -93,14 +94,16 @@ class TestHasAssessment:
 
 class TestIsAssessmentStale:
     def test_recent_is_not_stale(self, tmp_path):
+        reference_time = datetime(2026, 4, 25, 12, 0, 0)
         content = WIKI_WITH_ASSESSMENT.replace("2026-04-25", "2026-04-24")
         p = _write_wiki(tmp_path, content)
-        assert is_assessment_stale(p, stale_days=60) is False
+        assert is_assessment_stale(p, stale_days=60, now=reference_time) is False
 
     def test_old_is_stale(self, tmp_path):
+        reference_time = datetime(2026, 4, 25, 12, 0, 0)
         content = WIKI_WITH_ASSESSMENT.replace("2026-04-25", "2025-01-01")
         p = _write_wiki(tmp_path, content)
-        assert is_assessment_stale(p, stale_days=60) is True
+        assert is_assessment_stale(p, stale_days=60, now=reference_time) is True
 
     def test_missing_last_updated_is_stale(self, tmp_path):
         content = """---
@@ -116,11 +119,20 @@ type: company_topic
         assert is_assessment_stale(p, stale_days=60) is True
 
     def test_custom_stale_days(self, tmp_path):
-        content = WIKI_WITH_ASSESSMENT.replace("2026-04-25", "2026-03-01")
+        reference_time = datetime(2026, 4, 25, 12, 0, 0)
+        date_55_days_ago = (reference_time - timedelta(days=55)).strftime("%Y-%m-%d")
+        content = WIKI_WITH_ASSESSMENT.replace("2026-04-25", date_55_days_ago)
         p = _write_wiki(tmp_path, content)
-        # 55 days ago, 60-day threshold
-        assert is_assessment_stale(p, stale_days=60) is False
-        # 55 days ago, 30-day threshold
+        # 55 days ago, 60-day threshold → not stale
+        assert is_assessment_stale(p, stale_days=60, now=reference_time) is False
+
+    def test_exact_threshold_is_not_stale(self, tmp_path):
+        reference_time = datetime(2026, 4, 25, 12, 0, 0)
+        threshold_date = (reference_time - timedelta(days=60)).strftime("%Y-%m-%d")
+        content = WIKI_WITH_ASSESSMENT.replace("2026-04-25", threshold_date)
+        p = _write_wiki(tmp_path, content)
+        assert is_assessment_stale(p, stale_days=60, now=reference_time) is False
+        # 55 days ago, 30-day threshold → stale
         assert is_assessment_stale(p, stale_days=30) is True
 
 
