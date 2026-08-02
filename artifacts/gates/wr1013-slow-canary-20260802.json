@@ -1,0 +1,24 @@
+{
+ "schema_version": "1.0",
+ "work_unit": "WR-10.13",
+ "title": "长文档解析 heartbeat、超时与前进保证 — >900s slow canary",
+ "verdict": "completed",
+ "completed_at": "2026-08-02T12:50:00Z",
+ "slow_canary_method": "缩短时钟合同（禁止真实 900s sleep）：45s 慢 parser / 60s parser timeout（ratio 0.75，等价旧 900s watchdog 场景）",
+ "contracts_added": [
+  "test_slow_canary_document_under_parser_timeout_completes_with_heartbeats",
+  "test_slow_canary_document_over_parser_timeout_becomes_terminal_not_loop"
+ ],
+ "results": {
+  "parser_liveness_full": "20 passed in 69.68s",
+  "slow_under_timeout": "completed, >=3 heartbeats, single stable parser PID, elapsed>=40s, no temp leak",
+  "over_timeout": "NormalizationTimeoutError raised once, parser PID reaped, no temp leak",
+  "ruff": "All checks passed"
+ },
+ "production": {
+  "worker": "resumed PID 16516, Code MATCH eb10131da6f1",
+  "reload": "d423c7dd24c6 -> eb10131da6f1 MATCH",
+  "two_rescans": "policy 82 stable, new=0/known_quarantine=1, Markdown retryable=0"
+ },
+ "previous_evidence": "wr-10-13-post-reload-30m-20260801T182713Z.json (39.2m pilot PASS, 30 samples)"
+}

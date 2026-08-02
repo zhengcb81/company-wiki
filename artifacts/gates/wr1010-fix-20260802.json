@@ -1,0 +1,36 @@
+{
+ "schema_version": "1.0",
+ "work_unit": "WR-10.10 step-10",
+ "title": "历史 LLM summary failure 行物理修正（legacy_scope_mismatch 归零）",
+ "verdict": "accepted",
+ "completed_at": "2026-08-02T12:32:00Z",
+ "before": {
+  "failure_scope=document": 129,
+  "failure_scope=permanent_document": 4,
+  "total": 133
+ },
+ "target_definition": "generator_name=source_catalog_llm_summary AND failure_scope=document AND permanent-policy=true",
+ "permanent_policy": "llm_failure_policy.is_permanent_llm_summary_error (forbidden investment conclusion / not valid json / invalid schema)",
+ "updated_rows": 129,
+ "snapshot": {
+  "path": "artifacts/gates/wr1010-fix-20260802.jsonl",
+  "size": 61041,
+  "sha256_prefix": "d5f632afc0ac7026"
+ },
+ "transaction": "single UPDATE in one sqlite transaction",
+ "after": {
+  "failure_scope=document": 0,
+  "failure_scope=permanent_document": 133,
+  "total": 133
+ },
+ "verification": {
+  "foreign_key_check": "OK (0)",
+  "quick_check": "ok"
+ },
+ "worker": {
+  "resumed_pid": 16516,
+  "code_match": true,
+  "fingerprint": "eb10131da6f1"
+ },
+ "note": "legacy_scope_mismatch 不再存在（此前 131 行 + 2 新增均物理修正/正确写入）"
+}

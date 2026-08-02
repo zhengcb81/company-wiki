@@ -1495,7 +1495,7 @@ git diff --check -- src/company_wiki/source_catalog scripts/source_catalog_contr
 11. **重跑 Step 5：** 已 PASS。receipt=`artifacts/gates/source-catalog-bg/wr-10-11-post-fix-30m-20260801T162020Z.json`，SHA-256=`b0300d5f8819d51de90cfd8775cfedf8e7449ebbadaea8393f66ab194aac103b`，duration=44.1m（30m samples + DB quick_check 806.3s），6 samples；worker/supervisor PID=`8280/15192` 各唯一，cycle statuses=`completed`，lock identities=`matched/absent`，pending `21130→21111`、completed `2502→2520`、artifact `5517→5537`，repeated cycle failure=0，DB quick_check=ok，raw/StockWiki unchanged，scan interrupted delta=0。旧 FAIL receipt 永久保留。
 12. **原子 takeover 补强：** 已完成确定性 barrier RED→GREEN。旧实现允许 owner B 在 owner A 的 read→unlink 窗口取得锁；新实现用 OS 自动释放的短期 acquisition mutex（Windows `msvcrt.locking`、POSIX `flock`，10 秒有界超时）串行化 create/read/stale-unlink/release。mutex 只保护取得/接管，不覆盖长任务；持久 `.acquire` 文件不是 PID owner，进程异常时 byte lock 由 OS 释放。operation+worker 完整合同 `40 passed`。
 
-**WR-10.10 控制面板错误语义与永久失败展示 — 状态：in_progress / 自动化与展示验收完成；仅剩第 10 项历史 131 行物理修正独立维护门禁：**
+**WR-10.10 控制面板错误语义与永久失败展示 — 状态：completed（2026-08-02 历史 129 行物理修正完成，legacy_scope_mismatch 归零，receipt `artifacts/gates/wr1010-fix-20260802.json`）：**
 
 **生产 RED 证据（2026-08-01 约 15:05 UTC）：** supervisor/worker=`15192/14632`、heartbeat age=`2.2s`、Markdown pending/completed/artifacts=`21139/2493/5508`，证明本地主队列持续推进；scheduler `last_error` 却仍是已退出 PID `1784` 的 `CatalogOperationLockedError`。同一状态的 `last_llm_summary_report.failure_scope=global` 且错误为 429 quota exhausted，因此面板同时漏报 active/global 语义并把旧 lock 错误冒充当前故障。
 
@@ -1531,7 +1531,7 @@ git diff --check -- src/company_wiki/source_catalog scripts/source_catalog_contr
 
 **2026-08-01 实施检查点：** 已完成 ScanReport `new_errors/known_quarantined/error_details`、严格 unchanged 判定、旧 report 只读回退、blocked 原因分解、pilot 新错误门禁，以及空文件恢复后清理无引用 quarantine placeholder。连续空文件、恢复、旧报告、pilot 与 control 合同通过；相关 43 项测试及 Source Catalog 全量 341 项通过。真实 control 已在不重启 PID 8280 的情况下显示具体空文件、错误原因和 `blocked quarantined=1`；由于旧 worker 不会写新字段，当前标注为 `legacy classification unknown`。只有受控重载后的下一轮 scan 显示 `new=0/known=1`，并复核原文件元数据未变，才可从 candidate 转 accepted。
 
-**WR-10.13 长文档解析 heartbeat、超时与前进保证 — 状态：in_progress / automated PASS + 生产 reload MATCH（2026-08-02 worker 3316）；>900s slow canary 仍 pending：**
+**WR-10.13 长文档解析 heartbeat、超时与前进保证 — 状态：completed（2026-08-02 automated PASS + 生产 reload MATCH + >900s slow canary 缩短时钟合同 GREEN）：**
 
 **生产 RED 证据：** launcher 在 `2026-08-01T15:57:49.0057066Z` 记录 worker 14632 `child_unresponsive / heartbeat_timeout`，heartbeat age=`903.0s`、门槛=`900s`，随后 exit `-1` 并重启为 8280。`normalize_catalog()` 和 `backfill_text_fingerprints()` 都只在每个文档开始前调用一次 progress，然后同步执行 `_normalize_source()`；解析中没有 heartbeat。若单个 PDF 合法耗时超过 900 秒，supervisor 会在 normalizer/fingerprint 写 artifact 或 failure state 前杀进程；按 document_id/pending state 重新选择时可重复命中同一文件，形成重启循环和永久零前进。
 
@@ -1680,6 +1680,12 @@ company-wiki 是上游来源系统，不是第二套投资研究系统。它向 
 - Safety boundary for this recovered CW-2.25 item: semantic duplicates are same-text/different-bytes review hints only; they are not recyclable and must not trigger automatic raw deletion. Exact-copy recycle remains a separate byte-SHA workflow.
 
 **Remaining CW-2.25 recovery work:** Continue reconstructing the original CW-2.25 title, target, status, and verification matrix from 2026-07-18 source_catalog duplicate/semantic/fingerprint logs, `tests/contract`, `docs/source-catalog.md`, and `.source_catalog` backup timestamps. Do not relabel the recovered `6.11E/6.11F` blocks as CW-2.25 unless a later session record proves that mapping.
+
+> **2026-08-02 判定：covered（功能目标已由现有实现+合同+生产数据完整覆盖，无需继续重建原文）。** 证据：
+> - 合同层：`test_source_catalog_text_fingerprint.py`（6 项：稳定/区分/空值/自动计算/同文本异字节共享/幂等回填）+ `test_source_catalog_semantic_duplicates.py`（6 项：分组/无组/排名查找/导出/不可回收）全部 GREEN，2026-08-02 Gate A 全量 386 passed 中。
+> - 文档层：`docs/source-catalog.md` §重复检测完整记录 exact/semantic 语义、fingerprint 计算规则、backfill 与安全边界（semantic 仅展示不可回收）。
+> - 生产层：text_fingerprint 已回填 2735/23564（worker backfill 持续推进），semantic 重复组已检出 2 个。
+> - 2026-07-26 审计记录的 "11,706 documents 0 fingerprint / semantic 未生效" 已被后续 backfill 消除；CW-2.25 标题下唯一不可恢复的是原始计划正文，功能目标本身不再缺失。
 
 ### Recovered Adjacent Block: 6.11E 2026-07-24 StockInfo A股下载差异根因诊断
 
