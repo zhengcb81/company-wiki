@@ -7,7 +7,8 @@
 - 候选不能 rollout：显式 `regulatory_filing` 目前过宽，可能让普通公告进入；无严格券商证据的“年报点评/财报解读”等可能回落为财报；两者需新增 RED 合同并修复。
 - 候选 generic-directory sidecar 配对是全局行为变化，不仅限于 `重点关注`。这可能是合理的独立 bug fix，但超出本 WU 的最小作用域，必须 path-scope 或另立迁移 WU。
 - 候选 cleanup 的 DB JSONL snapshot 不包含被删 sidecar/derived 文件字节，也没有 restore 命令；对弱模型而言不可视为可靠回滚。生产必须有 SQLite online backup、文件 archive + manifest、恢复演练和磁盘空间门禁。
-- 因此当前结论为 `planning_only / candidate present / production untouched / rollout blocked`，不能写成 implemented 或 accepted。
+- 因此当时结论为 `planning_only / candidate present / production untouched / rollout blocked`，不能写成 implemented 或 accepted。
+- **2026-08-02 终态更新：** 用户解除冻结后按 runbook 全流程实施完成，WR-10.15 最终 verdict=`accepted`（receipt `artifacts/gates/wr1015-final-acceptance-20260802.json`）。上述 5 个 blockers 全部修复（含 blocker 5 经用户复核改为轻量全量快照：被删内容实测 <1MB，废弃 24.3GB 整库备份），生产 apply 已完成并验证。本节原始结论保留供审计，不再构成当前状态。
 
 ## 2026-08-01 WR-10.15 重点关注目录优先级与浪费根因
 
@@ -31,7 +32,8 @@
 - worker/supervisor 仍为 `19668/19388`，loaded/current fingerprint=`d423c7dd24c6...` MATCH，heartbeat age 5.1s，parse timeout total 0；最终 scan 于 20:29:40 完成，scan error 仍是 new 0 / known quarantine 1。
 - Markdown 已完成生产重分类：pending 21013、completed 2615、unsupported 15、failed 0、retryable 0、terminal 0。此前唯一 corrupt-XLS retryable 不再占失败队列。
 - 精确 document SQL 证明 normalized artifact=`unsupported`，error 保留 `XLRDError: Expected BOF record`，metadata 为 unsupported_format、span_count=0；不是控制面板聚合误差。
-- 同一文档 fingerprint state 仍是旧 `pending/attempt_count=0`，因为本轮当前 stage 是 summarizing，尚未进入 fingerprint backfill。只有转为 `unsupported_terminal` 后才可关闭该子门禁。
+- 同一文档 fingerprint state 当时仍是旧 `pending/attempt_count=0`，因为本轮当前 stage 是 summarizing，尚未进入 fingerprint backfill。只有转为 `unsupported_terminal` 后才可关闭该子门禁。
+- **2026-08-02 终态：** 该 corrupt-XLS location 现为 `quarantined`（error=`SourceManifestError: source file is empty`），为既有 known quarantine；WR-10.15 两轮生产 rescan（10:03/11:05）均为 `new=0/known_quarantine=1`，Markdown failed/retryable=0。fingerprint terminal 门禁已在 WR-10.13 合同层验证；生产 >900s slow canary 与 next-login 仍为独立 pending。
 - LLM 当前再次调用人民币升值 PDF；既有主提供商 422/fallback 429 属 llm_global defer，不会重新制造 Markdown blocked。
 
 ## 2026-08-01 暂停检查点：WR-10.13 最终代码已部署，仍有两个硬门禁
@@ -46,6 +48,7 @@
 - timeout 持久 code 从 Python 类名改为稳定 `document_parse_timeout`，worker 有独立合同验证 total/last document/last path 落盘。最终 Source Catalog `363 passed`，相关宽回归 `159 passed`，focused `20 passed`，Ruff/compile/严格文本/diff-check 全绿。
 - 最终代码 fingerprint `d423c7dd24c6...` 已由 worker/supervisor `19668/19388` 加载并 MATCH；暂停时 runtime 在扫描 `company_raw`、路径推进至金达莱。首轮最终 cycle 尚未完成，生产 corrupt-XLS retryable 行是否归零尚未验收。
 - 仍未完成的硬门禁只有：最终 fingerprint 的完整生产 cycle/持续观察及 >900 秒 controlled slow canary；下一次真实 Windows 登录确认控制面板不再自动空白。外部 LLM 仍有主提供商 422 sensitive 与 fallback 429 quota，当前被隔离为 llm_global defer，不阻塞 Markdown parser。
+- **2026-08-02 终态：** 生产已 reload 至 `eb10131da6f1`（worker 3316 Code MATCH），两轮完整 scan cycle 均 `new=0/known_quarantine=1`、Markdown retryable=0/terminal=0，fingerprint terminal 生产验收达成。剩余独立门禁：>900s controlled slow canary（WR-10.13）、真实 Windows 登录 Step 6（WR-10.9）。
 
 ## 2026-08-01 WR-10.13 自动化候选与生产门禁
 

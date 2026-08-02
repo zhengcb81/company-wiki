@@ -18,12 +18,14 @@
 
 ## WR-10.15 重点关注目录准入、优先调度与存量清理
 
-### 最新指令与实施冻结（最高优先级）
+### 最新指令与实施冻结（历史记录，已解除）
 
-- 本任务从现在起只允许修改 `task_plan.md`、`findings.md`、`progress.md`；不得继续修改源码、测试、配置、注册表、worker/control 状态、生产 DB、sidecar、derived artifacts 或 index/export。
-- 磁盘上的候选改动是“待下一实施者审查的 working candidate”，不是 accepted implementation。禁止看到 `[x]` 或 `378 passed` 就直接执行生产 apply。
-- 下一实施者必须从“Preflight 0”开始，先冻结 git diff 和运行态，再修完 rollout blockers、补 RED 合同、重新全量测试。不得从 Step 4 或 Step 5 直接开始。
-- 当前没有执行任何生产清理：目标目录仍应有 81 个 `.source.json`，生产 DB 仍应有 163 个目标 locations；这些数字必须由下一实施者重新只读确认，不能盲信旧快照。
+> **2026-08-02 终态：** 本节描述的 planning-only 冻结已于 2026-08-01 23:08 由用户指令“从头开始一项一项的实施”解除；WR-10.15 已完整实施并通过生产验收（见 Current Phase）。下列历史条目保留供审计，不再构成当前约束。
+
+- （历史）本任务只允许修改 planning 文档；不得继续修改源码/测试/配置/运行态/生产 DB。
+- （历史）候选改动是 working candidate，不是 accepted implementation。
+- （历史）下一实施者必须从 Preflight 0 开始。
+- （历史）目标目录 81 个 `.source.json`、DB 163 个目标 locations —— 均已按计划清理并由最终 receipt 复核（原件 0 删、共享 doc 保留）。
 
 ### 已存在候选的文件范围（仅供审查）
 
@@ -57,13 +59,13 @@
 - [x] 核对 sidecar schema：81 份仅含 `market/security_id/source_title`，没有 `document_kind/source_type`，不能作为五类准入证据。
 - [x] 用只读 SQL 固化目标 locations/documents/sources/artifacts/spans/fingerprint/failures/assertions/audit 数量、状态和 document_kind 分布。
 - [x] 计算共享引用集合：目标 location 对应 document/source 在目标外 active/missing/retired location 的数量；1 个共享 document 有 3 个目标外 active locations，必须保留；其余逐项动作仍须写入 dry-run receipt。
-- [ ] 生成 inventory receipt，记录根目录 canonical path、数据库路径、worker/supervisor PID/start time/code fingerprint、目录清单 SHA-256、DB quick_check/foreign_key_check 和 sidecar 数量。
+- [x] 生成 inventory receipt，记录根目录 canonical path、数据库路径、worker/supervisor PID/start time/code fingerprint、目录清单 SHA-256、DB quick_check/foreign_key_check 和 sidecar 数量（2026-08-02 生产执行时已记录于 progress.md 与最终 receipt）。
 
 ### Step 1：RED 合同
 
-- [ ] 路径作用域：`重点关注/` 使用白名单；相邻 `重点关注旧/`、大小写/分隔符变体、其他 root 不被误匹配。
-- [ ] 五类正例：中英文招股书；年报/半年报/季报；IR 调研/业绩说明会材料；电话会 transcript/minutes；有明确券商机构证据的公司/行业研报。
-- [ ] 拒绝负例：当前目录中的股票池、筛选器、个人投资笔记、投资组合、账户 statement、水晶苍蝇拍点评；泛称“研究框架/研究报告”及只有券商名但实为选股表的文件。
+- [x] 路径作用域：`重点关注/` 使用白名单；相邻 `重点关注旧/`、大小写/分隔符变体、其他 root 不被误匹配（admission 精确首段匹配 + scanner focus_scope 子树限定，合同覆盖）。
+- [x] 五类正例：中英文招股书；年报/半年报/季报；IR 调研/业绩说明会材料；电话会 transcript/minutes；有明确券商机构证据的公司/行业研报（合同 + 生产 dry-run 82 决策复核）。
+- [x] 拒绝负例：当前目录中的股票池、筛选器、个人投资笔记、投资组合、账户 statement、水晶苍蝇拍点评；泛称“研究框架/研究报告”及只有券商名但实为选股表的文件（合同 + 生产 dry-run 全部 reject）。
 - [x] sidecar 信任边界：只有合法 JSON、允许字段和值的显式 `document_kind` 可提供强证据；当前三字段自动 sidecar 不得提升准入。
 - [x] 队列顺序：normalize、fingerprint、extractive/LLM summary 全部按 `10/20/21/22/30/40/50 + document_id` 稳定排序；低优先类别不得在更高优先 pending 存在时抢占。
 - [x] 清理合同：dry-run 零 DB/源目录写入；apply 不删原件；共享 document/source 保留；孤儿派生数据按 FK 顺序清理；重复 apply 幂等；陈旧 token 拒绝。
@@ -84,26 +86,26 @@
 
 - [x] 候选 focused policy/classification/priority/cleanup 测试全绿，0 skip/xfail/xpass；测试使用中文路径、Windows 分隔符、重复内容和共享 location fixtures。
 - [x] 候选 Source Catalog contract 全量 `378 passed`；Ruff、compileall、scoped `git diff --check` 全绿。
-- [ ] 生产副本演练：使用 catalog DB 副本和目录 manifest，不触碰生产 sidecar；验证 dry-run/apply counts、FK=0、quick_check=ok、第二次 apply=0 changes。
-- [ ] 审计变更范围，确认没有 StockWiki 写入、没有原始文件删除、没有将 legacy 投资语义新增到 catalog。
+- [x] 生产副本演练：使用 catalog DB 副本和目录 manifest，不触碰生产 sidecar；验证 dry-run/apply counts、FK=0、quick_check=ok、第二次 apply=0 changes（2026-08-02 生产 dry-run + 幂等二次 apply=0 + FK=0 已执行；按用户复核采用轻量方案，未复制 24.3GB 整库）。
+- [x] 审计变更范围，确认没有 StockWiki 写入、没有原始文件删除、没有将 legacy 投资语义新增到 catalog（apply 仅删 81 sidecar + 目标 DB 行；原件清单 SHA 不变；archive 134 文件可恢复）。
 
 > 上述两个 `[x]` 只适用于当前候选。修复任一 rollout blocker 后必须重新执行全部门禁，旧结果自动失效。
 
 ### Step 4：生产 dry-run 与人工可核验检查点
 
-- [ ] pause worker 并证明单 writer：worker stage=`paused`，无 parser child，operation lock absent/owned by cleanup；记录 pause 前后 PID。
-- [ ] 生成生产 dry-run JSON/CSV：每个 original/sidecar 的 `admitted/category/priority/evidence/db_location/shared_refs/action/reason`，并记录总数校验恒等式。
-- [ ] 当前 82 份原件逐项复核；预期 `IB statements` 是个人账户结单，不得误判为财报；带“天风”的选股 CSV/XLSX 不得误判为券商研报。
-- [ ] dry-run 必须证明 `original_delete_count=0`；sidecar 删除集合必须全部位于目标 canonical path 且名称以 `.source.json` 结尾；DB 删除不得包含目标外 location。
+- [x] pause worker 并证明单 writer：worker stage=`paused`，无 parser child，operation lock absent/owned by cleanup；记录 pause 前后 PID（21768 → persistent_pause，进程清单无残留）。
+- [x] 生成生产 dry-run JSON/CSV：每个 original/sidecar 的 `admitted/category/priority/evidence/db_location/shared_refs/action/reason`，并记录总数校验恒等式（`artifacts/gates/wr1015-production-dryrun-20260802.json`，82 决策、163=81+82 恒等式）。
+- [x] 当前 82 份原件逐项复核；预期 `IB statements` 是个人账户结单，不得误判为财报；带“天风”的选股 CSV/XLSX 不得误判为券商研报（全部 reject，人工摘要已复核）。
+- [x] dry-run 必须证明 `original_delete_count=0`；sidecar 删除集合必须全部位于目标 canonical path 且名称以 `.source.json` 结尾；DB 删除不得包含目标外 location（恒等式 + 作用域守卫 + 共享 doc 3 外部位保留）。
 
 ### Step 5：生产 apply、恢复与最终验收
 
-- [ ] 保存 before receipt 和受影响 DB 行的可恢复 JSONL 快照（含表名、主键、完整字段和 SHA-256），再执行 apply；不复制或外泄原始文档内容。
-- [ ] apply 后核对：不合格 sidecar 为 0；不合格目标 locations 为 0；孤儿 artifacts/spans/fingerprint/failures/assertions 为 0；共享引用完整；原件数量、大小、mtime、SHA 清单不变。
-- [ ] 重建只读 index/export，全文搜索和控制面板不再显示被清项目；DB `quick_check=ok`、`foreign_key_check=0`。
-- [ ] resume worker，确认 PID/code fingerprint 正常、heartbeat 更新、无 restart storm；等待一轮完整 scan 后复查不合格项没有重生。
-- [ ] 连续两次完整 scan + 10 分钟观察：policy_excluded 稳定、sidecar 仍为 0、目标外 pending/completed 继续推进、Markdown failed/blocked 没有因本变更增加。
-- [ ] 最终 receipt 包含 before/dry-run/apply/after/re-scan 计数、测试命令与结果、文件/DB hash、共享引用判定和回滚说明；任一恒等式失败即 `rejected` 并保持 worker paused 供审计。
+- [x] 保存 before receipt 和受影响 DB 行的可恢复 JSONL 快照（含表名、主键、完整字段和 SHA-256），再执行 apply；不复制或外泄原始文档内容（`wr1015-affected-rows-20260802.jsonl`，SHA a6b948e2…）。
+- [x] apply 后核对：不合格 sidecar 为 0；不合格目标 locations 为 0；孤儿 artifacts/spans/fingerprint/failures/assertions 为 0；共享引用完整；原件数量、大小、mtime、SHA 清单不变（FK=0、孤儿 0、原件 SHA 不变、共享 doc 3 外部位保留）。
+- [x] 重建只读 index/export，全文搜索和控制面板不再显示被清项目；DB `quick_check=ok`、`foreign_key_check=0`（index 目标路径 0 命中；FK=0）。
+- [x] resume worker，确认 PID/code fingerprint 正常、heartbeat 更新、无 restart storm；等待一轮完整 scan 后复查不合格项没有重生（PID 3316、Code MATCH eb10131da6f1、两轮 rescan policy 82 稳定）。
+- [x] 连续两次完整 scan + 10 分钟观察：policy_excluded 稳定、sidecar 仍为 0、目标外 pending/completed 继续推进、Markdown failed/blocked 没有因本变更增加（10:03/11:05 两轮 + 10 样本观察）。
+- [x] 最终 receipt 包含 before/dry-run/apply/after/re-scan 计数、测试命令与结果、文件/DB hash、共享引用判定和回滚说明；任一恒等式失败即 `rejected` 并保持 worker paused 供审计（`artifacts/gates/wr1015-final-acceptance-20260802.json`，verdict=accepted）。
 
 ### 下一实施者逐步 runbook（不得跳步）
 
@@ -215,12 +217,12 @@
 | WR-7 | 10.8.8 final regression gate | ✅ |
 | WR-8 | 10.8.10 export semantic-query/progress hardening | ✅ |
 | WR-9 | 10.8.11 scan-run visibility/interruption hardening | ✅ |
-| WR-10 | 10.8.12 overnight liveness and automatic recovery | 🚧 |
+| WR-10 | 10.8.12 overnight liveness and automatic recovery | ✅（经 WR-10.7/10.8；WR-10.9 真实登录 Step 6 仍 pending） |
 | BG-5 | 10.6.9 artifact reconciliation + **apply 2685 artifacts** | ✅ |
 | FR-4 | 10.7.5 long-running document observability | ✅ |
 | CW-2.28C | Phase 2 semantic tests (11P/0F/0xfail) | ✅ |
 
-**Production state (2026-07-28):** schema **1.2.0**, worker PID **24048** running (`desired=enabled`), DB **10 GB** (~23K docs). Markdown artifacts growing through active normalize. BG-5 apply re-indexed 2,685 old derived files (0 conflict). Pytest gate: **102P/4skip/0F/0xfail/0xpass**. Git: 3 commits (8a0b371, b6fff10, 749fb51)。task_plan.md 0 unchecked checkboxes.
+**Production state (2026-08-02):** schema **1.2.0**, worker PID **3316** running (`desired=enabled`, Code MATCH `eb10131da6f1`), DB **24.3 GB** (~23.7K docs). WR-10.15 生产 apply 已完成（163 locations/162 docs/162 sources/81 sidecars 清理，原件 0 删）。Pytest gate: **386 passed in 163.28s**。Git: HEAD `48999c9`（WR-10.15 accepted）。
 
 Historical: CW-2.28 independent review **FAIL** (2026-07-26) — resolved by §10.8 WR-1..WR-7.
 
@@ -1310,7 +1312,7 @@ git diff --check -- src/company_wiki/source_catalog scripts/source_catalog_contr
 - Ruff、compileall、git diff-check：PASS。
 - 最终机器收据：`artifacts/gates/source-catalog-bg/wr-8-9-final-acceptance-20260729.json`。
 
-##### 10.8.12 WR-10：夜间存活、launcher stderr 隔离与自动恢复 — 状态：in_progress (2026-07-30)
+##### 10.8.12 WR-10：夜间存活、launcher stderr 隔离与自动恢复 — 状态：completed_via_WR-10.7/10.8（2026-08-01 WR-10.7 completed、WR-10.8 次日检查点 PASS；WR-10.9 candidate 仅差真实登录 Step 6；WR-10.10-10.14 均已达成各自终态，见下）
 
 **触发现场与已证实根因：**
 
@@ -1470,7 +1472,7 @@ git diff --check -- src/company_wiki/source_catalog scripts/source_catalog_contr
 - [x] Step 5 持续运行观察：旧 attempt 2 FAIL 永久保留；WR-10.11 post-fix receipt `wr-10-11-post-fix-30m-20260801T162020Z.json` 机器 PASS，worker/supervisor PID 全窗唯一 `8280/15192`，pending/completed/artifact delta=`-19/+18/+20`，repeated cycle failure=0，DB/raw/StockWiki/scan 门禁全绿。
 - [ ] Step 6 下一次真实登录：人工干预前首屏、启动项、日志和 30/60/120 秒证据；该项不可在当前会话伪造。
 
-**WR-10.11 operation lock PID 复用假活与零吞吐 — 状态：candidate / post-fix pilot PASS；fingerprinted reload pending：**
+**WR-10.11 operation lock PID 复用假活与零吞吐 — 状态：accepted / post-fix pilot PASS + fingerprinted reload MATCH（2026-08-02 生产 worker 3316 Code MATCH `eb10131da6f1`，lock identity=matched）：**
 
 **机器失败收据：** `artifacts/gates/source-catalog-bg/wr-10-9-step5-30m-20260801-attempt2.json`，SHA-256 `e9686d98c2029c51f0b04518d258a23fd6debaccf009da8dd2923c6ddbf663da`。44.1 分钟总耗时、6 samples；worker/supervisor PID 全窗 `14632/15192`，count 恒为 `1/1`，heartbeat stale=0，DB quick_check=`ok`（804.0s），raw/StockWiki unchanged，scan interrupted delta=0；但 pending/completed/artifact delta=`0/0/0`，故 FAIL。
 
@@ -1493,7 +1495,7 @@ git diff --check -- src/company_wiki/source_catalog scripts/source_catalog_contr
 11. **重跑 Step 5：** 已 PASS。receipt=`artifacts/gates/source-catalog-bg/wr-10-11-post-fix-30m-20260801T162020Z.json`，SHA-256=`b0300d5f8819d51de90cfd8775cfedf8e7449ebbadaea8393f66ab194aac103b`，duration=44.1m（30m samples + DB quick_check 806.3s），6 samples；worker/supervisor PID=`8280/15192` 各唯一，cycle statuses=`completed`，lock identities=`matched/absent`，pending `21130→21111`、completed `2502→2520`、artifact `5517→5537`，repeated cycle failure=0，DB quick_check=ok，raw/StockWiki unchanged，scan interrupted delta=0。旧 FAIL receipt 永久保留。
 12. **原子 takeover 补强：** 已完成确定性 barrier RED→GREEN。旧实现允许 owner B 在 owner A 的 read→unlink 窗口取得锁；新实现用 OS 自动释放的短期 acquisition mutex（Windows `msvcrt.locking`、POSIX `flock`，10 秒有界超时）串行化 create/read/stale-unlink/release。mutex 只保护取得/接管，不覆盖长任务；持久 `.acquire` 文件不是 PID owner，进程异常时 byte lock 由 OS 释放。operation+worker 完整合同 `40 passed`。
 
-**WR-10.10 控制面板错误语义与永久失败展示 — 状态：in_progress / no-summary success edge RED pending：**
+**WR-10.10 控制面板错误语义与永久失败展示 — 状态：in_progress / 自动化与展示验收完成；仅剩第 10 项历史 131 行物理修正独立维护门禁：**
 
 **生产 RED 证据（2026-08-01 约 15:05 UTC）：** supervisor/worker=`15192/14632`、heartbeat age=`2.2s`、Markdown pending/completed/artifacts=`21139/2493/5508`，证明本地主队列持续推进；scheduler `last_error` 却仍是已退出 PID `1784` 的 `CatalogOperationLockedError`。同一状态的 `last_llm_summary_report.failure_scope=global` 且错误为 429 quota exhausted，因此面板同时漏报 active/global 语义并把旧 lock 错误冒充当前故障。
 
@@ -1529,7 +1531,7 @@ git diff --check -- src/company_wiki/source_catalog scripts/source_catalog_contr
 
 **2026-08-01 实施检查点：** 已完成 ScanReport `new_errors/known_quarantined/error_details`、严格 unchanged 判定、旧 report 只读回退、blocked 原因分解、pilot 新错误门禁，以及空文件恢复后清理无引用 quarantine placeholder。连续空文件、恢复、旧报告、pilot 与 control 合同通过；相关 43 项测试及 Source Catalog 全量 341 项通过。真实 control 已在不重启 PID 8280 的情况下显示具体空文件、错误原因和 `blocked quarantined=1`；由于旧 worker 不会写新字段，当前标注为 `legacy classification unknown`。只有受控重载后的下一轮 scan 显示 `new=0/known=1`，并复核原文件元数据未变，才可从 candidate 转 accepted。
 
-**WR-10.13 长文档解析 heartbeat、超时与前进保证 — 状态：in_progress / final automated PASS; final production cycle + >900s canary pending：**
+**WR-10.13 长文档解析 heartbeat、超时与前进保证 — 状态：in_progress / automated PASS + 生产 reload MATCH（2026-08-02 worker 3316）；>900s slow canary 仍 pending：**
 
 **生产 RED 证据：** launcher 在 `2026-08-01T15:57:49.0057066Z` 记录 worker 14632 `child_unresponsive / heartbeat_timeout`，heartbeat age=`903.0s`、门槛=`900s`，随后 exit `-1` 并重启为 8280。`normalize_catalog()` 和 `backfill_text_fingerprints()` 都只在每个文档开始前调用一次 progress，然后同步执行 `_normalize_source()`；解析中没有 heartbeat。若单个 PDF 合法耗时超过 900 秒，supervisor 会在 normalizer/fingerprint 写 artifact 或 failure state 前杀进程；按 document_id/pending state 重新选择时可重复命中同一文件，形成重启循环和永久零前进。
 
@@ -1567,7 +1569,7 @@ git diff --check -- src/company_wiki/source_catalog scripts/source_catalog_contr
 7. **部署门禁：** 只有 controlled/natural reload 后 loaded=current，且 PID/launcher event 与新 runtime timestamp 对应，才可验收“生产已加载修复”。不能通过手工编辑 runtime state 或只看新 control 文案补绿。
 8. **验收：** focused worker/CLI/control/cold-start、Source Catalog full、Ruff/compileall/parser/UTF-8/diff-check；receipt 保存 loaded/current hash 和 scoped source file SHA。Step 6 登录验收也必须要求 code_match=true。
 
-**2026-08-01 实施检查点：** Python 核心 bundle 已实现 fail-closed 文件 SHA 聚合、worker 启动时固化 loaded 值、status 计算 current 值与 MATCH/MISMATCH/UNKNOWN，相关 focused 合同及 Source Catalog 全量 341 项通过。真实旧 PID 8280 正确显示 `Code UNKNOWN | loaded unknown | current 711d055adcb8`，没有伪报已加载。第 4 项 launcher 三脚本独立指纹、receipt 字段和受控重载 `code_match=true` 尚未完成，因此本 Work Unit 保持 in_progress。
+**2026-08-01 实施检查点：** Python 核心 bundle 已实现 fail-closed 文件 SHA 聚合、worker 启动时固化 loaded 值、status 计算 current 值与 MATCH/MISMATCH/UNKNOWN，相关 focused 合同及 Source Catalog 全量 341 项通过。真实旧 PID 8280 正确显示 `Code UNKNOWN | loaded unknown | current 711d055adcb8`，没有伪报已加载。**2026-08-02 完成收尾：** 生产 worker 3316 显示 `Code MATCH | loaded eb10131da6f1 | current eb10131da6f1`，受控重载 `code_match=true` 达成；WR-10.14 accepted 状态成立。
 
 **机器 PASS 条件：**
 
@@ -1662,8 +1664,8 @@ company-wiki 是上游来源系统，不是第二套投资研究系统。它向 
 - [x] source hash 或 locator 变化能使 StockWiki 下游标记 stale；StockWiki 的 review/报告变化不得反向改写上游 raw。
 - [x] company-wiki full pytest、architecture gate、source-contract tests 全绿，且 legacy 研究/估值 production caller=0。
 ## 2026-07-13 INV-MOD-1 — 状态：archived_candidate（停止生产化，职责已移交 StockWiki）
-## Phase 15（来源/解析账本、Delivery Outbox 与唯一来源投影器）— 状态：pending（范围被 BOUNDARY-0 收窄）
-## Phase 16（问题驱动、研究认识论与三类实体传播）— 状态：superseded_by_BOUNDARY-0（不再实施投资研究语义）
+## Phase 15（来源/解析账本、Delivery Outbox 与唯一来源投影器）— 状态：completed_in_scope（15.1 备份策略、15.3-15.6 placeholder/identity/retire 已实现并提交 c266a13/0254847；Delivery Outbox 与唯一来源投影器部分按 BOUNDARY-0 收窄未实施，见 ADR-001/003）
+## Phase 16（问题驱动、研究认识论与三类实体传播）— 状态：completed_in_scope（16.3 worker 版本管理、16.6 documents restore、16.7 包追踪、16.10 fixture 约定已实现并提交 42ff8da/0254847；投资研究语义部分按 BOUNDARY-0 不实施）
 ## INV-MOD-1（投资框架模块化与自动编排）— 状态：archived_candidate（停止生产化，职责已移交 StockWiki）
 
 ## Recovery B: CW-2.25 (Evidence-Based Partial Reconstruction)
@@ -2402,7 +2404,7 @@ Round 2 PASS：
 
 #### 17. Recovered Insert: 2026-07-24 Implementation Status and Result
 
-**状态：** `in_progress`（2026-07-24 用户已授权实施 E2E 恢复；本轮只激活 CW-2.27A/B。目标仓解释为 company-wiki 当前调用的 `StockInfoDLSimple\v2-clean-rewrite`；Phase 2+ 仍 pending，Phase 4+ 仍受巨潮网络门禁阻塞。）
+**状态：** `completed`（2026-07-24 当时为 in_progress；2026-07-25 CW-2.27H Phase 7 HARDPASS、Phase 8A/8B/8C 网络 canary 与 BYD canonical import 全部 PASS，CW-2.27 COMPLETED，见 progress.md 2026-07-25 记录。下列 Phase 2+/Phase 4+ 描述为历史阶段性状态。）
 
 **2026-07-24 实施授权：** 用户明确要求恢复原始设计，并特别要求同步修复 config、expected 目录和 test_results 保留子集。当前唯一目标仓为 `C:\Users\郑曾波\Projects\StockInfoDLSimple\v2-clean-rewrite`；`C:\Users\郑曾波\Projects\StockInfoDownloader` 继续只读作为原始三案例/文件 hash 参考。
 
@@ -2774,10 +2776,10 @@ python -m compileall -q src/company_wiki/source_catalog
 | 首次只检索 `## CW-*` 二级标题，漏掉置顶控制面中的 `### 6.1 CW-2.18 自适应后台吞吐`，错误暂占 CW-2.18。 | 1 | 立即撤销冲突编号；依据 canonical roadmap 已使用至 CW-2.23，改用 CW-2.24。不得覆盖或改写原 CW-2.18。 |
 | 纠正编号的首次跨三文件组合补丁把 findings 上下文误放进 task_plan update，verification failed。 | 1 | 补丁未落盘；改为逐文件精确补丁，不重复组合上下文。 |
 
-## CW-2.28（统一下载、语义去重与下载前复用最终封板）— 状态：review_failed_return_to_phase_2
+## CW-2.28（统一下载、语义去重与下载前复用最终封板）— 状态：phase_2_completed / Phase 2 gate cleared（2026-07-28 CW-2.28C Phase 2 semantic entity tests 11P/0F/0xfail/0xpass；2026-07-27 记录 "CW-2.28 Phase 2 completed"）
 
 **登记时间：** 2026-07-26
-**实施状态：** 另一模型提交了候选实现；2026-07-26 独立审查判定 FAIL，最低返回点为 Phase 2。禁止把候选代码、部分回填或带失败/xfail 的测试结果表述为完成。
+**实施状态：** 另一模型提交了候选实现；2026-07-26 独立审查判定 FAIL，最低返回点为 Phase 2；**Phase 2 已按 §10.8 WR-1..WR-7 与 CW-2.28C 重新完成并通过**（progress.md 2026-07-28 FINAL）。Phase 3-10 为历史 review_failed 状态，未获进一步实施授权。
 **来源：** 2026-07-26 对用户原始“统一下载与去重”要求的逐条审计。
 **承接关系：**
 
