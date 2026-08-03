@@ -21,6 +21,11 @@ from .evidence_query import EvidenceQueryService
 from .extraction_quality import ExtractionQualityService
 from .focus_cleanup import FocusScopeCleanupService
 from .llm_summarizer import build_configured_llm_client
+from .portfolio_promoter import (
+    PromotionIdentity,
+    promote_all_for_entity,
+    promote_from_portfolio,
+)
 from .service import SourceCatalog
 from .resolver import SourceRequest, SourceResolver
 from .security_identity import (
@@ -336,6 +341,38 @@ def _parser() -> argparse.ArgumentParser:
         type=Path,
         default=Path("config/source_catalog_worker.yaml"),
         help="control state used to refuse downloads while the worker is paused",
+    )
+
+    import_portfolio = subparsers.add_parser(
+        "import-portfolio",
+        help=(
+            "promote already-indexed dayu-portfolio documents into company_raw "
+            "canonical sources so filing-fetch reuses them without re-downloading"
+        ),
+    )
+    ip_identity = import_portfolio.add_mutually_exclusive_group(required=True)
+    ip_identity.add_argument("--entity")
+    ip_identity.add_argument("--company-query")
+    import_portfolio.add_argument("--market")
+    import_portfolio.add_argument("--exchange")
+    import_portfolio.add_argument("--security-id")
+    import_portfolio.add_argument("--document-id")
+    import_portfolio.add_argument("--document-kind")
+    import_portfolio.add_argument("--fiscal-year", type=int)
+    import_portfolio.add_argument(
+        "--as-of-date",
+        help="information date used for the SourceRequest (default: today)",
+    )
+    import_portfolio.add_argument(
+        "--all",
+        action="store_true",
+        help="promote every matching portfolio document of the entity",
+    )
+    import_portfolio.add_argument("--dry-run", action="store_true")
+    import_portfolio.add_argument(
+        "--acquisition-config",
+        type=Path,
+        default=Path("config/source_acquisition.yaml"),
     )
 
     run = subparsers.add_parser(
@@ -743,6 +780,70 @@ def main(argv: Sequence[str] | None = None) -> int:
                 if identity
                 else ensured
             )
+        elif args.command == "import-portfolio":
+            identity = identify_company() if args.company_query else None
+            resolved = identity.resolved if identity else None
+            if resolved is not None:
+                promotion_identity = PromotionIdentity(
+                    canonical_name=resolved.canonical_name,
+                    market=resolved.market,
+                    security_id=resolved.security_id,
+                )
+            else:
+                promotion_identity = PromotionIdentity(
+                    canonical_name=args.entity,
+                    market=args.market,
+                    security_id=args.security_id,
+                )
+            acquisition_config_path = args.acquisition_config
+            if not acquisition_config_path.is_absolute():
+                acquisition_config_path = project_root / acquisition_config_path
+            acquisition_config = load_acquisition_config(
+                acquisition_config_path.resolve(strict=True),
+                project_root=project_root,
+            )
+            writer = CanonicalSourceWriter(
+                get_catalog(),
+                staging_root=acquisition_config.staging_root,
+            )
+            portfolio_root = next(
+                (root.path for root in config.roots if root.kind == "dayu_portfolio"),
+                None,
+            )
+            if portfolio_root is None:
+                raise RuntimeError("no dayu_portfolio root configured")
+            as_of_date = args.as_of_date or time.strftime("%Y-%m-%d")
+            if args.document_id:
+                promotions = [
+                    promote_from_portfolio(
+                        get_catalog(),
+                        writer,
+                        portfolio_root,
+                        promotion_identity,
+                        document_id=args.document_id,
+                        as_of_date=as_of_date,
+                        dry_run=args.dry_run,
+                    )
+                ]
+            elif args.all or args.fiscal_year is not None or args.document_kind:
+                promotions = promote_all_for_entity(
+                    get_catalog(),
+                    writer,
+                    portfolio_root,
+                    promotion_identity,
+                    as_of_date=as_of_date,
+                    dry_run=args.dry_run,
+                    document_kind=args.document_kind,
+                    fiscal_year=args.fiscal_year,
+                )
+            else:
+                raise RuntimeError(
+                    "import-portfolio requires --document-id, --all, "
+                    "--fiscal-year, or --document-kind"
+                )
+            result = {"promotions": [promotion.to_dict() for promotion in promotions]}
+            if identity:
+                result["identity"] = identity.to_dict()
         elif args.command == "worker-status":
             controller = worker_controller()
             result = controller.status()

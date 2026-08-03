@@ -129,6 +129,35 @@ python scripts/run_downloader.py --company 东方电缆
 
 ---
 
+## 一点五、portfolio 提升为可复用来源（import-portfolio）
+
+> dayu-agent `workspace/portfolio` 下的财报已被 source_catalog 扫描索引（`dayu_portfolio` root，
+> 只读检索用），但 filing-fetch 的复用管线只认 `companies/` 子树（`company_raw`）。为避免重复下载，
+> 先用本命令把已索引的 portfolio 文档**提升**为规范来源（拷贝进 `companies/{entity}/raw/` + 不可变
+> `.source.json`）。设计见 `docs/adr/ADR-007-portfolio-promotion.md`。
+
+```bash
+# 单条提升（按 portfolio 文档 id）
+python -m company_wiki.source_catalog.cli import-portfolio \
+  --company-query "金山云" --market HK --document-id fil_cn_48ec0d41eb244001f0f3795438c351495c196ada
+
+# 批量提升某公司全部 portfolio 财报（幂等：已提升的返回 deduplicated）
+python -m company_wiki.source_catalog.cli import-portfolio \
+  --company-query "金山云" --market HK --all
+
+# 按年度/类型筛选；--dry-run 只预览不写盘
+python -m company_wiki.source_catalog.cli import-portfolio \
+  --company-query "金山云" --market HK --fiscal-year 2025 --document-kind annual_report --dry-run
+```
+
+- 身份（market/security_id）由 SecurityIdentityResolver 归一化（如 HK 3896 → 03896），
+  与 filing-fetch 同源，保证复用精确匹配。
+- 提升后 `filing-fetch`（revenue-forecast / invest-* / industry-research）只读请求即返回
+  `capture_ready`，不再下载。
+- 回滚：删除 `companies/{entity}/raw/` 下对应文件 + `.source.json` 并重扫即可，不影响 portfolio 原件。
+
+---
+
 ## 二、新闻采集
 
 **工具**: `scripts/collect_news.py`（Tavily API）

@@ -344,6 +344,10 @@ class CanonicalSourceWriter:
             "schema_version": CANONICAL_IMPORT_SCHEMA_VERSION,
             "request_id": request.request_id,
             "company_name": request.entity,
+            # Top-level identity field: the resolver and the scanner's
+            # prefer-new metadata merge both read market at top level, while
+            # security_id already sits here (portfolio-promotion spike).
+            "market": request.market,
             "security_id": request.security_id,
             "source_title": candidate.title,
             "provider": candidate.provider,
