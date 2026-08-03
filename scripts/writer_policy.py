@@ -30,6 +30,7 @@ CONTROL_TOOL_ALLOWLIST = frozenset(
         "secret_audit.py",
         "semantic_gate.py",
         "snapshot_manifest.py",
+        "wr109_step6_capture.py",
     }
 )
 
