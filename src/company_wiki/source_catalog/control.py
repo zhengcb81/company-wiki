@@ -110,12 +110,21 @@ def _normalize_path(value: str, project_root: Path) -> str | None:
     value = value.strip().strip("\"'")
     try:
         path = Path(value)
-        if not path.is_absolute():
+        # Windows-style ``C:/...`` paths appear in PowerShell CommandLine rows
+        # and must be treated as absolute on every host, even though
+        # Path.is_absolute() only reports True on Windows.
+        if not _looks_absolute(value) and not path.is_absolute():
             path = project_root / path
         resolved = path.resolve(strict=False)
     except (OSError, ValueError):
         return None
     return resolved.as_posix().lower()
+
+
+def _looks_absolute(value: str) -> bool:
+    """True for ``/...`` or ``<drive>:/...`` path forms regardless of host OS."""
+    stripped = value.strip()
+    return bool(re.match(r"^(?:[A-Za-z]:)?[/\\]", stripped))
 
 
 def _classify_supervisor_command(cmd: str, project_root: Path) -> str | None:
@@ -654,9 +663,7 @@ class WorkerController:
         self.runtime_path = self.catalog_dir / "worker_runtime.json"
         self.lock_path = self.catalog_dir / "worker_instance.lock"
         self.console_log_path = self.catalog_dir / "worker_console.log"
-        project_launcher = (
-            self.project_root / "scripts" / "source_catalog_worker.ps1"
-        )
+        project_launcher = self.project_root / "scripts" / "source_catalog_worker.ps1"
         package_launcher = (
             Path(__file__).resolve().parents[3]
             / "scripts"
@@ -665,7 +672,9 @@ class WorkerController:
         self.launcher_path = (
             launcher_path
             if launcher_path is not None
-            else project_launcher if project_launcher.is_file() else package_launcher
+            else project_launcher
+            if project_launcher.is_file()
+            else package_launcher
         ).resolve(strict=False)
         self.process_identity = process_identity
         self.terminate_process = terminate_process
@@ -772,17 +781,11 @@ class WorkerController:
         runtime = _read_json(self.runtime_path)
         live = self._runtime_is_live(runtime)
         current_code = source_bundle_fingerprint(self.project_root)
-        loaded_fingerprint = (
-            runtime.get("loaded_code_fingerprint") if runtime else None
-        )
-        loaded_error = (
-            runtime.get("loaded_code_fingerprint_error") if runtime else None
-        )
+        loaded_fingerprint = runtime.get("loaded_code_fingerprint") if runtime else None
+        loaded_error = runtime.get("loaded_code_fingerprint_error") if runtime else None
         current_fingerprint = current_code["fingerprint"]
         fingerprint_errors = [
-            str(value)
-            for value in (loaded_error, current_code["error"])
-            if value
+            str(value) for value in (loaded_error, current_code["error"]) if value
         ]
         result: dict[str, Any] = {
             "schema_version": "1.0",
@@ -845,12 +848,8 @@ class WorkerController:
                         "progress_percent": runtime.get("progress_percent"),
                         "progress_detail": runtime.get("progress_detail"),
                         "parser_pid": runtime.get("parser_pid"),
-                        "parser_elapsed_seconds": runtime.get(
-                            "parser_elapsed_seconds"
-                        ),
-                        "parser_timeout_seconds": runtime.get(
-                            "parser_timeout_seconds"
-                        ),
+                        "parser_elapsed_seconds": runtime.get("parser_elapsed_seconds"),
+                        "parser_timeout_seconds": runtime.get("parser_timeout_seconds"),
                         "parser_ownership": runtime.get("parser_ownership"),
                         "cycle_productive": runtime.get("cycle_productive"),
                         "next_wait_seconds": runtime.get("next_wait_seconds"),
@@ -1109,9 +1108,7 @@ class WorkerController:
                 str(self.worker_config_path),
             ]
             if startup_delay_seconds > 0:
-                command.extend(
-                    ["--startup-delay-seconds", str(startup_delay_seconds)]
-                )
+                command.extend(["--startup-delay-seconds", str(startup_delay_seconds)])
         self.console_log_path.parent.mkdir(parents=True, exist_ok=True)
         environment = os.environ.copy()
         environment["PYTHONUTF8"] = "1"

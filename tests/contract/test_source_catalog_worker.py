@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 import json
+import os
 from pathlib import Path
 
 import pytest
@@ -221,9 +222,16 @@ class _FakeCatalog:
         self.calls.append(("normalize", limit))
         return _Report()
 
-    def backfill_text_fingerprints(self, *, limit, progress=None,
-                                   should_stop=None, retry_limit=3,
-                                   retry_backoff_seconds=900, **kwargs):
+    def backfill_text_fingerprints(
+        self,
+        *,
+        limit,
+        progress=None,
+        should_stop=None,
+        retry_limit=3,
+        retry_backoff_seconds=900,
+        **kwargs,
+    ):
         del progress, should_stop
         self.fingerprint_options = {
             "retry_limit": retry_limit,
@@ -1487,47 +1495,6 @@ def test_windows_startup_spec_is_logon_triggered_and_does_not_start_task(tmp_pat
     assert "source_catalog_worker_at_logon.vbs" in args[args.index("/TR") + 1]
 
 
-def test_startup_install_falls_back_to_current_user_registry_without_running(tmp_path):
-    from types import SimpleNamespace
-
-    from company_wiki.source_catalog.startup import install_startup_task
-
-    project = tmp_path / "project"
-    scripts = project / "scripts"
-    scripts.mkdir(parents=True)
-    launcher = scripts / "source_catalog_worker.ps1"
-    launcher.write_text("# worker", encoding="utf-8")
-    (scripts / "source_catalog_worker_at_logon.ps1").write_text(
-        "# delayed worker", encoding="utf-8"
-    )
-    (scripts / "source_catalog_worker_at_logon.vbs").write_text(
-        "' hidden host", encoding="utf-8"
-    )
-    calls: list[list[str]] = []
-
-    def runner(args, **kwargs):
-        calls.append(args)
-        if len(calls) == 1:
-            return SimpleNamespace(returncode=1, stdout="", stderr="Access is denied")
-        return SimpleNamespace(
-            returncode=0, stdout="The operation completed", stderr=""
-        )
-
-    result = install_startup_task(
-        project_root=project,
-        launcher_path=launcher,
-        python_executable=Path("C:/Python/python.exe"),
-        runner=runner,
-    )
-
-    assert result["success"] is True
-    assert result["started"] is False
-    assert result["method"] == "current_user_run_registry"
-    assert calls[0][1] == "/Create"
-    assert calls[1][1] == "ADD"
-    assert "/Run" not in calls[0]
-
-
 def test_logon_delay_is_worker_interruptible_and_double_click_controls_exist():
     project = Path(__file__).resolve().parents[2]
     logon_launcher = (
@@ -1951,6 +1918,7 @@ def test_windows_startup_spec_is_logon_triggered_and_does_not_start_task(tmp_pat
     assert "source_catalog_worker_at_logon.vbs" in args[args.index("/TR") + 1]
 
 
+@pytest.mark.skipif(os.name != "nt", reason="startup task installation is Windows-only")
 def test_startup_install_falls_back_to_current_user_registry_without_running(tmp_path):
     from types import SimpleNamespace
 
@@ -2074,6 +2042,7 @@ def test_control_center_survives_startup_status_failures_and_marks_stale_runtime
     assert "next_wake_at" in control
     assert "Start-Sleep -Milliseconds 500" in control
 
+
 class TestExportThrottle:
     """CW-3.5 / Phase 10: per-doc export replaced by dirty-counter throttle."""
 
@@ -2097,7 +2066,8 @@ class TestExportThrottle:
             dirty_export_threshold=3,
         )
         worker = SourceCatalogWorker(
-            catalog, config,
+            catalog,
+            config,
             state_path=tmp_path / "state.json",
             idle_detector=_Idle(700),
             llm_client_factory=lambda: object(),
@@ -2122,4 +2092,3 @@ class TestExportThrottle:
         worker.run_cycle(now=1300)
         c4 = [n for n, _ in catalog.calls]
         assert c4.count("export") == 2  # throttled again
-

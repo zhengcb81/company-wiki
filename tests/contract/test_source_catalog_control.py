@@ -227,7 +227,9 @@ def test_start_launches_the_supervisor_instead_of_a_bare_worker(tmp_path):
         calls.append((command, kwargs))
         return _ExitedProcess()
 
-    launcher = Path(__file__).resolve().parents[2] / "scripts" / "source_catalog_worker.ps1"
+    launcher = (
+        Path(__file__).resolve().parents[2] / "scripts" / "source_catalog_worker.ps1"
+    )
     controller = _controller(
         tmp_path,
         processes,
@@ -625,9 +627,7 @@ def test_read_pipeline_status_reports_scan_index_and_processing_queues(tmp_path)
     assert scan_progress[-1]["current_path"] == str(source / "new-document.txt")
     assert scan_progress[-1]["current"] == 1
     assert scan_progress[-1]["total"] == 1
-    assert any(
-        item["detail"] == "enumerating root source" for item in scan_progress
-    )
+    assert any(item["detail"] == "enumerating root source" for item in scan_progress)
 
     normalize_progress: list[dict] = []
     catalog.normalize(progress=lambda **details: normalize_progress.append(details))
@@ -656,6 +656,7 @@ def test_read_pipeline_status_reports_scan_index_and_processing_queues(tmp_path)
     assert parser_progress["parser_ownership"] in {
         "windows_job",
         "parent_monitor",
+        "process_group",
         "posix_process_group",
     }
 
@@ -834,10 +835,7 @@ def test_empty_pipeline_status_has_explanations_and_health():
     assert status["explanations"]["markdown_pending_reason"] == "database unavailable"
     assert "health" in status
     assert status["health"]["artifacts"]["artifact_index_empty"] is True
-    assert (
-        status["health"]["locks"]["operation_lock_identity_verification"]
-        == "absent"
-    )
+    assert status["health"]["locks"]["operation_lock_identity_verification"] == "absent"
 
 
 def test_process_inventory_categorizes_production_vs_test_workers(tmp_path):

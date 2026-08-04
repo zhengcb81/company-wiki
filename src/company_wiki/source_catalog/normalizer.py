@@ -277,6 +277,15 @@ def _exit_if_parser_parent_dies(parent_liveness: Any) -> None:
     except (EOFError, OSError):
         if os.name == "nt":
             _terminate_windows_process_tree(os.getpid())
+        else:
+            # The parser called os.setsid() on startup, so it is the leader of
+            # its own process group.  Kill the whole group so descendants
+            # spawned by the parser are not left orphaned when the parent
+            # monitor crashes.
+            try:
+                os.killpg(os.getpgid(0), signal.SIGKILL)
+            except (OSError, ProcessLookupError):
+                pass
         os._exit(70)
 
 
