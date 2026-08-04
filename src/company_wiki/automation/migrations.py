@@ -23,19 +23,9 @@ import functools
 import hashlib
 import json
 import sqlite3
-import threading
 from collections.abc import Callable
 from dataclasses import dataclass
 from pathlib import Path
-
-
-# ``PRAGMA journal_mode = WAL`` needs an exclusive lock that SQLite's busy
-# timeout does NOT cover: two threads switching a fresh database to WAL at the
-# same instant fail with ``database is locked`` instead of waiting.  Serialize
-# the switch within this process so concurrent init (test M14) cannot race it.
-# Cross-process concurrency is still bounded by ``busy_timeout`` on the
-# transaction itself.
-_WAL_SWITCH_LOCK = threading.Lock()
 
 
 SCHEMA_VERSION = 1
@@ -293,18 +283,33 @@ def _configure_connection(connection: sqlite3.Connection, *, read_only: bool) ->
     connection.execute("PRAGMA foreign_keys = ON")
     connection.execute("PRAGMA busy_timeout = 5000")
     if not read_only:
-        with _WAL_SWITCH_LOCK:
-            connection.execute("PRAGMA journal_mode = WAL")
+        connection.execute("PRAGMA journal_mode = WAL")
         connection.execute("PRAGMA synchronous = FULL")
 
 
 def _open_connection(db_path: Path) -> sqlite3.Connection:
-    connection = sqlite3.connect(
-        str(db_path), timeout=_CONNECT_TIMEOUT_S, isolation_level=None
-    )
-    connection.row_factory = sqlite3.Row
-    _configure_connection(connection, read_only=False)
-    return connection
+    # ``PRAGMA journal_mode = WAL`` needs an exclusive lock that SQLite's busy
+    # timeout does NOT cover: concurrent init of the same fresh database can
+    # race the first WAL switch and raise ``database is locked``.  Because WAL
+    # mode is persisted in the database header, once a concurrent initializer
+    # completes the switch our retried ``PRAGMA journal_mode = WAL`` is a
+    # no-op.  Re-open on a lock failure instead of raising (M14 contract).
+    for attempt in range(3):
+        connection = sqlite3.connect(
+            str(db_path), timeout=_CONNECT_TIMEOUT_S, isolation_level=None
+        )
+        connection.row_factory = sqlite3.Row
+        try:
+            _configure_connection(connection, read_only=False)
+            return connection
+        except sqlite3.OperationalError as exc:
+            connection.close()
+            message = str(exc).lower()
+            if "database is locked" not in message:
+                raise
+            if attempt == 2:
+                raise
+    raise RuntimeError("unreachable: connection open loop always returns or raises")
 
 
 def _open_readonly_connection(db_path: Path) -> sqlite3.Connection:
