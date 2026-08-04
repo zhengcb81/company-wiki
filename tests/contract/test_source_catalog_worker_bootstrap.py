@@ -684,7 +684,9 @@ def _real_worker_launcher_command(
     worker_hang_timeout_seconds: float | None = None,
     child_poll_milliseconds: int | None = None,
 ) -> list[str]:
-    launcher = Path(__file__).resolve().parents[2] / "scripts" / "source_catalog_worker.ps1"
+    launcher = (
+        Path(__file__).resolve().parents[2] / "scripts" / "source_catalog_worker.ps1"
+    )
     command = [
         "powershell.exe",
         "-NoProfile",
@@ -705,9 +707,7 @@ def _real_worker_launcher_command(
         str(restart_max_seconds),
     ]
     if worker_hang_timeout_seconds is not None:
-        command.extend(
-            ["-WorkerHangTimeoutSeconds", str(worker_hang_timeout_seconds)]
-        )
+        command.extend(["-WorkerHangTimeoutSeconds", str(worker_hang_timeout_seconds)])
     if child_poll_milliseconds is not None:
         command.extend(["-ChildPollMilliseconds", str(child_poll_milliseconds)])
     return command
@@ -742,11 +742,20 @@ def _run_real_worker_launcher(
 
 def _launcher_events(project: Path) -> list[dict[str, object]]:
     path = project / ".source_catalog" / "worker_launcher_events.jsonl"
-    return [
-        json.loads(line)
-        for line in path.read_text(encoding="utf-8-sig").splitlines()
-        if line.strip()
-    ]
+    # Phase 6 C3 (F-09): under full-suite load a just-terminated launcher or its
+    # child can still hold the Windows file handle for a few ms, making a plain
+    # read raise PermissionError and turning a teardown race into a false test
+    # failure.  Retry briefly with a short backoff so the read is deterministic.
+    deadline = time.monotonic() + 3.0
+    while True:
+        try:
+            text = path.read_text(encoding="utf-8-sig")
+            break
+        except PermissionError:  # pragma: no cover - platform race
+            if time.monotonic() >= deadline:
+                raise
+            time.sleep(0.02)
+    return [json.loads(line) for line in text.splitlines() if line.strip()]
 
 
 @pytest.mark.skipif(os.name != "nt", reason="Windows PowerShell launcher integration")
@@ -766,7 +775,9 @@ def test_stderr_exit_zero_does_not_fail_launcher_and_logs_are_utf8(tmp_path):
         "child_started",
         "exited",
     ]
-    child_started = next(event for event in events if event["status"] == "child_started")
+    child_started = next(
+        event for event in events if event["status"] == "child_started"
+    )
     assert "exit_code" not in child_started
     assert "restart_delay_seconds" not in child_started
     assert child_started["worker_hang_timeout_seconds"] == 900
@@ -903,9 +914,7 @@ def test_child_without_runtime_session_is_terminated_and_restarted(tmp_path):
     restarting = next(event for event in events if event["status"] == "restarting")
     assert unresponsive["reason"] == "session_start_timeout"
     assert restarting["reason"] == "session_start_timeout"
-    assert len(
-        [event for event in events if event["status"] == "child_started"]
-    ) == 2
+    assert len([event for event in events if event["status"] == "child_started"]) == 2
 
 
 @pytest.mark.skipif(os.name != "nt", reason="Windows PowerShell launcher integration")
@@ -966,9 +975,7 @@ def test_restart_backoff_is_exponential_and_capped(tmp_path):
 
     assert completed.returncode == 0, completed.stderr
     restart_events = [
-        event
-        for event in _launcher_events(project)
-        if event["status"] == "restarting"
+        event for event in _launcher_events(project) if event["status"] == "restarting"
     ]
     assert [event["restart_delay_seconds"] for event in restart_events] == [
         0.01,
@@ -998,9 +1005,7 @@ def test_terminating_supervisor_does_not_leave_an_orphan_worker(tmp_path):
         deadline = time.monotonic() + 10
         child_pid = None
         while time.monotonic() < deadline:
-            events_path = (
-                project / ".source_catalog" / "worker_launcher_events.jsonl"
-            )
+            events_path = project / ".source_catalog" / "worker_launcher_events.jsonl"
             if events_path.exists():
                 child_events = [
                     event
@@ -1078,9 +1083,7 @@ def test_logon_wrapper_detaches_a_live_supervisor_with_quoted_paths(tmp_path):
         deadline = time.monotonic() + 15
         events = []
         while time.monotonic() < deadline:
-            events_path = (
-                project / ".source_catalog" / "worker_launcher_events.jsonl"
-            )
+            events_path = project / ".source_catalog" / "worker_launcher_events.jsonl"
             if events_path.exists():
                 events = _launcher_events(project)
                 child_events = [

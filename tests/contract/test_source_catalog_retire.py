@@ -117,7 +117,6 @@ def test_scan_does_not_revive_retired_document(tmp_path):
     is still on disk: retirement is a terminal state until the user acts
     (Phase 15.6 batch governance)."""
     from company_wiki.source_catalog.cli import main
-    from company_wiki.source_catalog.service import SourceCatalog
 
     project, config_path, catalog = _catalog(tmp_path)
     document_id = catalog.query(limit=1)[0]["document_id"]

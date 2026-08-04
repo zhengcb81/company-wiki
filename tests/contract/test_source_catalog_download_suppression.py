@@ -6,9 +6,7 @@ identity conflict → adapter=0.
 
 from __future__ import annotations
 
-import json
 from pathlib import Path
-
 
 
 class _SpyAdapter:
@@ -31,9 +29,7 @@ class _SpyAdapter:
 
 def _catalog_with_identity(tmp_path: Path):
     """Catalog with a document that has market/security_id."""
-    from company_wiki.source_catalog import CatalogConfig, RootSpec, SourceCatalog
 
-    project = tmp_path / "project"
     from helpers.source_factory import canonical_source, company_raw_catalog
 
     canonical_source(
@@ -65,6 +61,7 @@ def _catalog_empty(tmp_path: Path):
 # ---------------------------------------------------------------------------
 # RED 1: resolver hit → discover/fetch = 0
 # ---------------------------------------------------------------------------
+
 
 class TestResolverHitSuppressesDownload:
     """已有 capture-ready source 时，adapter 调用次数为 0。"""
@@ -103,6 +100,7 @@ class TestResolverHitSuppressesDownload:
 # RED 2: missing + allow_download=False → adapter = 0
 # ---------------------------------------------------------------------------
 
+
 class TestMissingNoDownload:
     """missing 且未授权下载时，adapter 调用次数为 0。"""
 
@@ -139,6 +137,7 @@ class TestMissingNoDownload:
 # ---------------------------------------------------------------------------
 # RED 3: identity conflict → adapter = 0
 # ---------------------------------------------------------------------------
+
 
 class TestIdentityConflictNoDownload:
     """identity 冲突时，adapter 不应被调用。"""
