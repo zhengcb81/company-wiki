@@ -23,17 +23,35 @@ import functools
 import hashlib
 import json
 import sqlite3
+import threading
 from collections.abc import Callable
 from dataclasses import dataclass
 from pathlib import Path
 
 
+# ``PRAGMA journal_mode = WAL`` needs an exclusive lock that SQLite's busy
+# timeout does NOT cover: two threads switching a fresh database to WAL at the
+# same instant fail with ``database is locked`` instead of waiting.  Serialize
+# the switch within this process so concurrent init (test M14) cannot race it.
+# Cross-process concurrency is still bounded by ``busy_timeout`` on the
+# transaction itself.
+_WAL_SWITCH_LOCK = threading.Lock()
+
+
 SCHEMA_VERSION = 1
 
-EXPECTED_TABLES = frozenset({
-    "events", "jobs", "job_dependencies", "attempts",
-    "approvals", "effects", "outbox", "notifications",
-})
+EXPECTED_TABLES = frozenset(
+    {
+        "events",
+        "jobs",
+        "job_dependencies",
+        "attempts",
+        "approvals",
+        "effects",
+        "outbox",
+        "notifications",
+    }
+)
 
 BackupHook = Callable[[Path, int, int], Path]
 
@@ -275,12 +293,15 @@ def _configure_connection(connection: sqlite3.Connection, *, read_only: bool) ->
     connection.execute("PRAGMA foreign_keys = ON")
     connection.execute("PRAGMA busy_timeout = 5000")
     if not read_only:
-        connection.execute("PRAGMA journal_mode = WAL")
+        with _WAL_SWITCH_LOCK:
+            connection.execute("PRAGMA journal_mode = WAL")
         connection.execute("PRAGMA synchronous = FULL")
 
 
 def _open_connection(db_path: Path) -> sqlite3.Connection:
-    connection = sqlite3.connect(str(db_path), timeout=_CONNECT_TIMEOUT_S, isolation_level=None)
+    connection = sqlite3.connect(
+        str(db_path), timeout=_CONNECT_TIMEOUT_S, isolation_level=None
+    )
     connection.row_factory = sqlite3.Row
     _configure_connection(connection, read_only=False)
     return connection
@@ -288,7 +309,9 @@ def _open_connection(db_path: Path) -> sqlite3.Connection:
 
 def _open_readonly_connection(db_path: Path) -> sqlite3.Connection:
     uri = f"file:{db_path.as_posix()}?mode=ro"
-    connection = sqlite3.connect(uri, uri=True, timeout=_CONNECT_TIMEOUT_S, isolation_level=None)
+    connection = sqlite3.connect(
+        uri, uri=True, timeout=_CONNECT_TIMEOUT_S, isolation_level=None
+    )
     connection.row_factory = sqlite3.Row
     _configure_connection(connection, read_only=True)
     return connection
@@ -314,17 +337,35 @@ def _read_structure(connection: sqlite3.Connection) -> dict:
     for table in sorted(EXPECTED_TABLES):
         columns = connection.execute(f'PRAGMA table_info("{table}")').fetchall()
         col_tuples = tuple(
-            (row["cid"], row["name"], row["type"], row["notnull"], row["dflt_value"], row["pk"])
+            (
+                row["cid"],
+                row["name"],
+                row["type"],
+                row["notnull"],
+                row["dflt_value"],
+                row["pk"],
+            )
             for row in columns
         )
         unique_indexes: list[tuple] = []
         for index in connection.execute(f'PRAGMA index_list("{table}")').fetchall():
             if index["origin"] == "u":
-                info = connection.execute(f'PRAGMA index_info("{index["name"]}")').fetchall()
+                info = connection.execute(
+                    f'PRAGMA index_info("{index["name"]}")'
+                ).fetchall()
                 unique_indexes.append(tuple(row["name"] for row in info))
-        foreign_keys = connection.execute(f'PRAGMA foreign_key_list("{table}")').fetchall()
+        foreign_keys = connection.execute(
+            f'PRAGMA foreign_key_list("{table}")'
+        ).fetchall()
         fk_tuples = tuple(
-            (row["seq"], row["from"], row["table"], row["to"], row["on_update"], row["on_delete"])
+            (
+                row["seq"],
+                row["from"],
+                row["table"],
+                row["to"],
+                row["on_update"],
+                row["on_delete"],
+            )
             for row in sorted(foreign_keys, key=lambda r: r["seq"])
         )
         structure[table] = {
@@ -355,8 +396,11 @@ def _require_expected_structure(connection: sqlite3.Connection) -> None:
         raise SchemaDriftError(f"table set mismatch; missing={missing} extra={extra}")
     actual = _read_structure(connection)
     expected = _expected_structure()
-    differences = [table for table in sorted(set(actual) | set(expected))
-                   if actual.get(table) != expected.get(table)]
+    differences = [
+        table
+        for table in sorted(set(actual) | set(expected))
+        if actual.get(table) != expected.get(table)
+    ]
     if differences:
         raise SchemaDriftError(f"schema structure drift in: {differences}")
     integrity = connection.execute("PRAGMA integrity_check").fetchone()[0]
@@ -371,12 +415,18 @@ def _require_expected_structure(connection: sqlite3.Connection) -> None:
 
 def _canonical_json(value) -> str:
     return json.dumps(
-        value, sort_keys=True, separators=(",", ":"), ensure_ascii=False, allow_nan=False
+        value,
+        sort_keys=True,
+        separators=(",", ":"),
+        ensure_ascii=False,
+        allow_nan=False,
     )
 
 
 def _fingerprint(connection: sqlite3.Connection) -> str:
-    return hashlib.sha256(_canonical_json(_read_structure(connection)).encode("utf-8")).hexdigest()
+    return hashlib.sha256(
+        _canonical_json(_read_structure(connection)).encode("utf-8")
+    ).hexdigest()
 
 
 # --------------------------------------------------------------------------- #
@@ -419,7 +469,9 @@ def _classify_existing(db_path: Path) -> str:
             return "v1"
         unknown = [name for name in tables if name not in EXPECTED_TABLES]
         if unknown:
-            raise UnknownSchemaError(f"unrecognized tables in uninitialized database: {unknown}")
+            raise UnknownSchemaError(
+                f"unrecognized tables in uninitialized database: {unknown}"
+            )
         return "v0_empty"
     finally:
         connection.close()
@@ -429,7 +481,9 @@ def _validate_v1_readonly(db_path: Path) -> MigrationReport:
     connection = _open_readonly_connection(db_path)
     try:
         _require_expected_structure(connection)
-        return MigrationReport(SCHEMA_VERSION, SCHEMA_VERSION, (), None, _fingerprint(connection))
+        return MigrationReport(
+            SCHEMA_VERSION, SCHEMA_VERSION, (), None, _fingerprint(connection)
+        )
     finally:
         connection.close()
 
@@ -445,17 +499,23 @@ def _apply_write_migration(
     if version == SCHEMA_VERSION:
         # Another worker migrated between classification and the write lock.
         _require_expected_structure(connection)
-        return MigrationReport(SCHEMA_VERSION, SCHEMA_VERSION, (), None, _fingerprint(connection))
+        return MigrationReport(
+            SCHEMA_VERSION, SCHEMA_VERSION, (), None, _fingerprint(connection)
+        )
     tables = _user_tables(connection)
     unknown = [name for name in tables if name not in EXPECTED_TABLES]
     if unknown:
-        raise UnknownSchemaError(f"unrecognized tables in uninitialized database: {unknown}")
+        raise UnknownSchemaError(
+            f"unrecognized tables in uninitialized database: {unknown}"
+        )
     try:
         for statement in _DDL_STATEMENTS:
             _execute_statement(connection, statement)
         connection.execute(f"PRAGMA user_version = {SCHEMA_VERSION}")
     except sqlite3.OperationalError as exc:
-        raise MigrationExecutionError(f"DDL execution failed and was rolled back: {exc}") from exc
+        raise MigrationExecutionError(
+            f"DDL execution failed and was rolled back: {exc}"
+        ) from exc
     _require_expected_structure(connection)
     return MigrationReport(
         0, SCHEMA_VERSION, (SCHEMA_VERSION,), backup_path_str, _fingerprint(connection)
@@ -477,7 +537,9 @@ def migrate_database(
     pre_existing = db_path.exists()
     if pre_existing:
         if not db_path.is_file():
-            raise InvalidDatabasePathError(f"target path is not a regular file: {db_path}")
+            raise InvalidDatabasePathError(
+                f"target path is not a regular file: {db_path}"
+            )
         _ensure_sqlite_file(db_path)
         classification = _classify_existing(db_path)
     else:
