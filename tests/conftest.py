@@ -1,6 +1,7 @@
 """
 pytest 配置文件
 """
+
 import os
 import sys
 import pytest
@@ -41,20 +42,27 @@ def hermetic_runtime(monkeypatch):
     monkeypatch.setenv("COMPANY_WIKI_REAL_LLM", "0")
 
     def blocked_connection(*_args, **_kwargs):
-        raise RuntimeError("HERMETIC NETWORK BLOCKED: ordinary tests cannot open sockets")
+        raise RuntimeError(
+            "HERMETIC NETWORK BLOCKED: ordinary tests cannot open sockets"
+        )
 
     monkeypatch.setattr(socket.socket, "connect", blocked_connection)
     monkeypatch.setattr(socket, "create_connection", blocked_connection)
 
+
 # 添加 scripts 目录到 Python 路径
 sys.path.insert(0, str(Path(__file__).parent.parent / "scripts"))
+# 添加 src 目录到 Python 路径（src 布局的 company_wiki 包，CI 不装 editable）
+sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 # 添加 tests 目录到 Python 路径（供 tests/helpers 等测试内部模块导入；RR-12.2d-4 evaluator）
 sys.path.insert(0, str(Path(__file__).parent))
+
 
 @pytest.fixture(scope="session")
 def wiki_root(tmp_path_factory):
     """创建临时 wiki 根目录"""
     return tmp_path_factory.mktemp("wiki")
+
 
 @pytest.fixture
 def sample_graph_yaml():
@@ -90,6 +98,7 @@ questions:
   - 先进制程设备进展？
 """
 
+
 @pytest.fixture
 def sample_config_yaml():
     """示例 config.yaml 内容"""
@@ -116,6 +125,7 @@ paths:
   wiki_root: "~/company-wiki"
 """
 
+
 @pytest.fixture
 def sample_news_content():
     """示例新闻内容"""
@@ -141,6 +151,7 @@ type: news
 公司董事长尹志尧表示，这标志着国产半导体设备在高端领域取得重要突破。
 """
 
+
 @pytest.fixture
 def temp_wiki_structure(wiki_root, sample_graph_yaml, sample_config_yaml):
     """创建临时 wiki 目录结构"""
@@ -149,21 +160,22 @@ def temp_wiki_structure(wiki_root, sample_graph_yaml, sample_config_yaml):
     (wiki_root / "sectors").mkdir(exist_ok=True)
     (wiki_root / "themes").mkdir(exist_ok=True)
     (wiki_root / "scripts").mkdir(exist_ok=True)
-    
+
     # 创建文件
     (wiki_root / "graph.yaml").write_text(sample_graph_yaml)
     (wiki_root / "config.yaml").write_text(sample_config_yaml)
     (wiki_root / "index.md").write_text("# 知识库索引\n")
     (wiki_root / "log.md").write_text("# 知识库操作日志\n")
-    
+
     # 创建公司目录
     company_dir = wiki_root / "companies" / "中微公司"
     company_dir.mkdir(exist_ok=True)
     (company_dir / "wiki").mkdir(exist_ok=True)
     (company_dir / "raw").mkdir(exist_ok=True)
     (company_dir / "raw" / "news").mkdir(exist_ok=True)
-    
+
     return wiki_root
+
 
 @pytest.fixture
 def mock_env_vars(monkeypatch):
