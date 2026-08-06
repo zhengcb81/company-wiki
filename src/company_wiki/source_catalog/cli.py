@@ -20,6 +20,7 @@ from .canonical_writer import CanonicalSourceWriter
 from .control import WorkerController
 from .duplicate_cleanup import DuplicateCleanupService
 from .evidence_query import EvidenceQueryService
+from .section_query import SectionQueryService
 from .extraction_quality import ExtractionQualityService
 from .focus_cleanup import FocusScopeCleanupService
 from .llm_summarizer import build_configured_llm_client
@@ -209,6 +210,15 @@ def _parser() -> argparse.ArgumentParser:
     )
     fingerprint_backfill.add_argument("--limit", type=int)
 
+    extract_sections = subparsers.add_parser(
+        "extract-sections",
+        help="split normalized.md into MD&A / business sections for research",
+    )
+    extract_sections.add_argument("--limit", type=int)
+    extract_sections.add_argument("--document-id")
+    extract_sections.add_argument("--document-kind")
+    extract_sections.add_argument("--force", action="store_true")
+
     subparsers.add_parser(
         "export", help="export documents.csv, artifacts.csv, and index.md"
     )
@@ -317,6 +327,12 @@ def _parser() -> argparse.ArgumentParser:
     evidence_identity.add_argument("--document-id")
     evidence_list.add_argument("--limit", type=int, default=100)
     evidence_list.add_argument("--offset", type=int, default=0)
+
+    sections_list = subparsers.add_parser(
+        "sections-list",
+        help="list extracted MD&A / business sections for one document",
+    )
+    sections_list.add_argument("--document-id", required=True)
 
     extraction_quality = subparsers.add_parser(
         "extraction-quality",
@@ -648,6 +664,13 @@ def main(argv: Sequence[str] | None = None) -> int:
             result = get_catalog().summarize(limit=args.limit, force=args.force)
         elif args.command == "fingerprint-backfill":
             result = get_catalog().backfill_text_fingerprints(limit=args.limit)
+        elif args.command == "extract-sections":
+            result = get_catalog().extract_sections(
+                limit=args.limit,
+                document_id=args.document_id,
+                document_kind=args.document_kind,
+                force=args.force,
+            )
         elif args.command == "export":
             result = get_catalog().export_indexes()
         elif args.command == "derived-audit":
@@ -795,6 +818,10 @@ def main(argv: Sequence[str] | None = None) -> int:
                 document_id=args.document_id,
                 limit=args.limit,
                 offset=args.offset,
+            )
+        elif args.command == "sections-list":
+            result = SectionQueryService(config.database_path).list_sections(
+                document_id=args.document_id,
             )
         elif args.command == "extraction-quality":
             result = ExtractionQualityService(config.database_path).assess(

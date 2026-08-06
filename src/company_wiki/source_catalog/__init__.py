@@ -11,6 +11,7 @@ from .models import (
     SCANNER_VERSION,
     SUMMARIZER_VERSION,
     ScanReport,
+    SECTION_EXTRACTOR_VERSION,
 )
 from .service import SourceCatalog
 from .resolver import (
@@ -100,6 +101,7 @@ from .extraction_quality import (
     ExtractionQualityState,
     ExtractionQualityUnavailableError,
 )
+from .section_extractor import SectionSlice
 from .scheduler_policy import (
     SOURCE_ONLY_SCHEDULER_POLICY_SCHEMA_VERSION,
     SourceOnlySchedulerPolicy,
@@ -217,6 +219,8 @@ __all__ = [
     "SOURCE_ENSURE_SCHEMA_VERSION",
     "SUMMARIZER_VERSION",
     "ScanReport",
+    "SECTION_EXTRACTOR_VERSION",
+    "SectionSlice",
     "SourceCatalog",
     "SourceOnlySchedulerPolicy",
     "SourceOnlySchedulerPolicyError",

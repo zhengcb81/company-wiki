@@ -14,6 +14,7 @@ from .acquisition_journal import AcquisitionJournal
 from .llm_summarizer import summarize_catalog_with_llm
 from .lock import CatalogOperationLock
 from .normalizer import backfill_text_fingerprints, normalize_catalog
+from .section_extractor import extract_sections_catalog
 from .scanner import scan_catalog
 from .store import CatalogStore
 from .summarizer import summarize_catalog
@@ -120,6 +121,28 @@ class SourceCatalog:
                 parser_timeout_seconds=parser_timeout_seconds,
                 parser_heartbeat_interval_seconds=parser_heartbeat_interval_seconds,
                 parser_result_max_bytes=parser_result_max_bytes,
+            )
+
+    def extract_sections(
+        self,
+        *,
+        limit: int | None = None,
+        document_id: str | None = None,
+        document_kind: str | None = None,
+        force: bool = False,
+        progress: Callable[..., None] | None = None,
+        should_stop: Callable[[], bool] | None = None,
+    ) -> ProcessingReport:
+        with CatalogOperationLock(self.config.catalog_dir, operation="extract_sections"):
+            return extract_sections_catalog(
+                self.config,
+                self.store,
+                limit=limit,
+                document_id=document_id,
+                document_kind=document_kind,
+                force=force,
+                progress=progress,
+                should_stop=should_stop,
             )
 
     def summarize(

@@ -12,6 +12,7 @@ CATALOG_SCHEMA_VERSION = "1.2.0"
 SCANNER_VERSION = "1.0.0"
 NORMALIZER_VERSION = "1.0.0"
 SUMMARIZER_VERSION = "1.0.0"
+SECTION_EXTRACTOR_VERSION = "1.0.0"
 
 
 class FingerprintStatus(str, Enum):
@@ -214,6 +215,7 @@ __all__ = [
     "ROOT_KINDS",
     "RootSpec",
     "SCANNER_VERSION",
+    "SECTION_EXTRACTOR_VERSION",
     "SUMMARIZER_VERSION",
     "ScanReport",
 ]
