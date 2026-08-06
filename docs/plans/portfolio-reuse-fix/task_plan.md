@@ -1,5 +1,9 @@
 # 修复计划 — dayu portfolio "已索引但不可被 filing-fetch 复用"
 
+> **状态：✅ 整体完成（2026-08-03，commit 7ce2774）**。Phase 0–6 全部 completed，Phase 7（Strategy B）默认跳过。
+> 决策归档：`docs/adr/ADR-007-portfolio-promotion.md` + `docs/OPERATIONS.md §一点五`；最终结果见同目录 `progress.md`。
+> 本目录原地保留作历史参考，不再作为活动任务。
+
 - **目标**：让 `filing-fetch`（及 revenue-forecast / invest-* / industry-research）能复用已在
   `dayu-agent/workspace/portfolio` 中、且已被 catalog 索引的财报，**不再重复下载**；同时不破坏
   company-wiki 的单一写者 / 不可变溯源 / 路径围栏不变量。

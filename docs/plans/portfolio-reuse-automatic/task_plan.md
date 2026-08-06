@@ -1,8 +1,10 @@
 # 改进计划 — portfolio 复用自动化（系统性修复，非手动驱动）
 
-> 状态：2026-08-04 实施完成，但**方案已按用户决策改为 Strategy B（config-driven 只读复用）**——
-> A（ensure 自动提升）实现后弃用并回滚；最终设计见 ADR-008（B 版）。
-> 2026-08-06：两项收尾候选（存量重扫 re-enrich、读连接 busy_timeout）已完成，见 progress.md。
+> **状态：✅ 整体完成（2026-08-06）**。方案已按用户决策定为 Strategy B（config-driven 只读复用，commit cb2305c）；
+> Strategy A（ensure 自动提升）实现后弃用并回滚，Phase 0–6 全部 completed。
+> 决策归档：`docs/adr/ADR-008-portfolio-auto-promotion.md` + `docs/OPERATIONS.md §一点五`；两项收尾候选
+> （存量重扫 re-enrich、读连接 busy_timeout 5000→30000）已完成，见 `progress.md`。
+> 本目录原地保留作历史参考，不再作为活动任务。
 
 创建：2026-08-04 · 关联：`findings.md`（三层根因）、`progress.md`（进度）
 前置：`../portfolio-reuse-fix/`（手动桥接，commit 7ce2774）——本计划将其**从手动升级为自动**，
