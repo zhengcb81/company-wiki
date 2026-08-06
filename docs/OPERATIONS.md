@@ -129,32 +129,35 @@ python scripts/run_downloader.py --company 东方电缆
 
 ---
 
-## 一点五、portfolio 提升为可复用来源（import-portfolio）
+## 一点五、portfolio 等已索引目录直接复用（config-driven，默认开启）
 
-> dayu-agent `workspace/portfolio` 下的财报已被 source_catalog 扫描索引（`dayu_portfolio` root，
-> 只读检索用），但 filing-fetch 的复用管线只认 `companies/` 子树（`company_raw`）。为避免重复下载，
-> 先用本命令把已索引的 portfolio 文档**提升**为规范来源（拷贝进 `companies/{entity}/raw/` + 不可变
-> `.source.json`）。设计见 `docs/adr/ADR-007-portfolio-promotion.md`。
+> dayu-agent `workspace/portfolio` 下的财报已被扫描索引（`dayu_portfolio` root）。**filing-fetch
+> 现在直接只读复用它们**（零下载、零拷贝）：只要 root 的 kind 列入 `source_catalog.yaml` 的
+> `reusable_root_kinds`（生产配置 `[company_raw, dayu_portfolio]`），且 filing-fetch 的
+> `config/company_wiki.json` 的 `allowed_handle_roots` 列出对应目录，已索引文档即返回
+> `capture_ready`。**加新目录 = 两个配置文件各加一行，代码零改动。**
+> 设计见 `docs/adr/ADR-007-portfolio-promotion.md` 与 `docs/adr/ADR-008-portfolio-auto-promotion.md`。
 
-```bash
-# 单条提升（按 portfolio 文档 id）
-python -m company_wiki.source_catalog.cli import-portfolio \
-  --company-query "金山云" --market HK --document-id fil_cn_48ec0d41eb244001f0f3795438c351495c196ada
-
-# 批量提升某公司全部 portfolio 财报（幂等：已提升的返回 deduplicated）
-python -m company_wiki.source_catalog.cli import-portfolio \
-  --company-query "金山云" --market HK --all
-
-# 按年度/类型筛选；--dry-run 只预览不写盘
-python -m company_wiki.source_catalog.cli import-portfolio \
-  --company-query "金山云" --market HK --fiscal-year 2025 --document-kind annual_report --dry-run
+```yaml
+# config/source_catalog.yaml —— 可复用 root kind 白名单
+reusable_root_kinds: [company_raw, dayu_portfolio]
 ```
 
-- 身份（market/security_id）由 SecurityIdentityResolver 归一化（如 HK 3896 → 03896），
-  与 filing-fetch 同源，保证复用精确匹配。
-- 提升后 `filing-fetch`（revenue-forecast / invest-* / industry-research）只读请求即返回
-  `capture_ready`，不再下载。
-- 回滚：删除 `companies/{entity}/raw/` 下对应文件 + `.source.json` 并重扫即可，不影响 portfolio 原件。
+```json
+// filing-fetch config/company_wiki.json —— handle 路径白名单（与上面同步）
+{ "allowed_handle_roots": ["${COMPANY_WIKI_ROOT}/companies",
+                           "${USER_PROFILE}/Projects/dayu-agent/workspace/portfolio"] }
+```
+
+- **匹配纪律**：身份（ticker 零填充归一化，如 03896 == 3896）+ document_kind（form_type 映射
+  FY/H1/Q1-Q3）+ fiscal_year + `filing_date ≤ as_of_date`；handle 必须 capture-ready
+  （https_url/published_date/哈希/文件存在）。
+- **`import-portfolio` CLI** 仍保留为"固化"工具（把 portfolio 文档拷贝为 company_raw 规范副本，
+  幂等；worker 跑批时自动退避重试锁），日常复用**不需要**它。
+- 回滚：从两个配置的列表移除该 root 即可（不改代码、不删文件）。
+- 注意：scanner 的元数据富化（身份/分类回填）对**存量**文档在下次完整重扫时自动生效——scanner 对
+  未变更文件复用 location manifest，但文档元数据每轮重建且 prefer-new 会提升更完整的富化副本；
+  无需删除 location 行。若想立即生效，手动执行一次该 root 的 `scan` 即可。
 
 ---
 

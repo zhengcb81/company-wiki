@@ -120,9 +120,7 @@ def test_healthy_report_is_usable_bounded_and_never_returns_span_bodies(tmp_path
     )
     public = _catalog_module()
     quality = _quality_module()
-    service = quality.ExtractionQualityService(
-        fixture["catalog"].config.database_path
-    )
+    service = quality.ExtractionQualityService(fixture["catalog"].config.database_path)
 
     payload = service.assess(
         document_id=fixture["document_id"], locator_limit=2
@@ -165,9 +163,11 @@ def test_partial_page_aware_pdf_requires_review_with_exact_reasons(tmp_path):
     fixture = _pdf_catalog(tmp_path)
     quality = _quality_module()
 
-    payload = quality.ExtractionQualityService(
-        fixture["catalog"].config.database_path
-    ).assess(source_id=fixture["source_id"]).to_dict()
+    payload = (
+        quality.ExtractionQualityService(fixture["catalog"].config.database_path)
+        .assess(source_id=fixture["source_id"])
+        .to_dict()
+    )
 
     assert payload["quality_state"] == "review_required"
     assert payload["reason_codes"] == [
@@ -200,9 +200,11 @@ def test_pending_or_unsupported_normalization_is_unavailable(
     )
     quality = _quality_module()
 
-    payload = quality.ExtractionQualityService(
-        fixture["catalog"].config.database_path
-    ).assess(document_id=fixture["document_id"]).to_dict()
+    payload = (
+        quality.ExtractionQualityService(fixture["catalog"].config.database_path)
+        .assess(document_id=fixture["document_id"])
+        .to_dict()
+    )
 
     assert payload["quality_state"] == "unavailable"
     assert payload["reason_codes"] == expected_reasons
@@ -222,9 +224,11 @@ def test_quarantined_source_without_active_raw_is_unavailable(tmp_path):
             (fixture["document_id"],),
         )
 
-    payload = quality.ExtractionQualityService(
-        fixture["catalog"].config.database_path
-    ).assess(document_id=fixture["document_id"]).to_dict()
+    payload = (
+        quality.ExtractionQualityService(fixture["catalog"].config.database_path)
+        .assess(document_id=fixture["document_id"])
+        .to_dict()
+    )
 
     assert payload["quality_state"] == "unavailable"
     assert payload["reason_codes"] == [
@@ -266,9 +270,7 @@ def test_corrupt_persisted_quality_inputs_fail_integrity(tmp_path, corruption):
 def test_invalid_unknown_and_ambiguous_identity_fail_closed(tmp_path):
     fixture = _catalog(tmp_path)
     quality = _quality_module()
-    service = quality.ExtractionQualityService(
-        fixture["catalog"].config.database_path
-    )
+    service = quality.ExtractionQualityService(fixture["catalog"].config.database_path)
 
     with pytest.raises(quality.ExtractionQualityInputError, match="exactly one"):
         service.assess()
@@ -279,9 +281,7 @@ def test_invalid_unknown_and_ambiguous_identity_fail_closed(tmp_path):
     with pytest.raises(quality.ExtractionQualityInputError, match="locator_limit"):
         service.assess(document_id=fixture["document_id"], locator_limit=0)
     with pytest.raises(quality.ExtractionQualityNotFoundError):
-        service.assess(
-            document_id="urn:company-wiki:document:sha256:" + "0" * 64
-        )
+        service.assess(document_id="urn:company-wiki:document:sha256:" + "0" * 64)
 
     duplicate_document_id = "urn:company-wiki:document:sha256:" + "f" * 64
     with fixture["catalog"].store.transaction() as connection:
@@ -327,13 +327,15 @@ def test_assessment_uses_mode_ro_no_write_sql_and_preserves_file_trees(
         return connection
 
     monkeypatch.setattr(quality.sqlite3, "connect", traced_connect)
-    quality.ExtractionQualityService(
-        fixture["catalog"].config.database_path
-    ).assess(document_id=fixture["document_id"])
+    quality.ExtractionQualityService(fixture["catalog"].config.database_path).assess(
+        document_id=fixture["document_id"]
+    )
 
     assert connections and all("mode=ro" in value for value in connections)
     assert not any(
-        statement.lstrip().upper().startswith(
+        statement.lstrip()
+        .upper()
+        .startswith(
             ("INSERT", "UPDATE", "DELETE", "REPLACE", "CREATE", "DROP", "ALTER")
         )
         for statement in statements
@@ -342,23 +344,49 @@ def test_assessment_uses_mode_ro_no_write_sql_and_preserves_file_trees(
     assert _tree_identity(fixture["source_root"]) == before_sources
 
 
+def test_assessment_read_connection_uses_long_busy_timeout(tmp_path, monkeypatch):
+    """The read-only connection must tolerate the worker's write bursts: the
+    busy_timeout matches the main store read connection (30s), not a shorter
+    legacy 5s value that surfaced as spurious 'database is locked' during the
+    ADR-008 portfolio E2E (worker write burst vs read-only query)."""
+    fixture = _catalog(tmp_path)
+    quality = _quality_module()
+    statements: list[str] = []
+    real_connect = sqlite3.connect
+
+    def traced_connect(database, *args, **kwargs):
+        connection = real_connect(database, *args, **kwargs)
+        connection.set_trace_callback(statements.append)
+        return connection
+
+    monkeypatch.setattr(quality.sqlite3, "connect", traced_connect)
+    quality.ExtractionQualityService(fixture["catalog"].config.database_path).assess(
+        document_id=fixture["document_id"]
+    )
+
+    assert any("busy_timeout=30000" in s for s in statements)
+
+
 def test_extraction_quality_cli_emits_machine_readable_body_free_result(
     tmp_path, capsys
 ):
     fixture = _catalog(tmp_path)
     from company_wiki.source_catalog.cli import main
 
-    assert main(
-        [
-            "--config",
-            str(fixture["config_path"]),
-            "extraction-quality",
-            "--document-id",
-            fixture["document_id"],
-            "--locator-limit",
-            "1",
-        ]
-    ) == 0
+    assert (
+        main(
+            [
+                "--config",
+                str(fixture["config_path"]),
+                "extraction-quality",
+                "--document-id",
+                fixture["document_id"],
+                "--locator-limit",
+                "1",
+            ]
+        )
+        == 0
+    )
     payload = json.loads(capsys.readouterr().out)
     assert payload["quality_state"] == "usable"
     assert len(payload["locator_references"]) == 1
@@ -405,9 +433,9 @@ roots:
 
 def test_extraction_quality_contract_documents_source_only_boundary():
     root = Path(__file__).resolve().parents[2]
-    contract = (
-        root / "docs" / "contracts" / "extraction-quality-v1.md"
-    ).read_text(encoding="utf-8")
+    contract = (root / "docs" / "contracts" / "extraction-quality-v1.md").read_text(
+        encoding="utf-8"
+    )
     operations = (root / "docs" / "source-catalog.md").read_text(encoding="utf-8")
 
     for phrase in (

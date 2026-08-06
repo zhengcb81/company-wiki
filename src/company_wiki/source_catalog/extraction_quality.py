@@ -27,9 +27,7 @@ MAX_QUALITY_LOCATOR_REFERENCES = 500
 
 _NORMALIZER_NAME = "source_catalog_normalizer"
 _SOURCE_ID_RE = re.compile(rf"^{re.escape(SOURCE_ID_PREFIX)}[0-9a-f]{{64}}$")
-_DOCUMENT_ID_RE = re.compile(
-    r"^urn:company-wiki:document:sha256:[0-9a-f]{64}$"
-)
+_DOCUMENT_ID_RE = re.compile(r"^urn:company-wiki:document:sha256:[0-9a-f]{64}$")
 _SEMVER_RE = re.compile(
     r"^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)"
     r"(?:-[0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*)?"
@@ -40,6 +38,8 @@ _SOURCE_STATUSES = frozenset(
 )
 _ARTIFACT_STATUSES = frozenset({"completed", "partial", "unsupported", "failed"})
 _BENIGN_QUALITY_FLAGS = frozenset({QualityFlag.OCR_USED.value})
+
+
 class ExtractionQualityState(str, Enum):
     """Document-level technical extraction state; never an investment decision."""
 
@@ -162,17 +162,13 @@ class ExtractionQualityReport:
             "locator_references_truncated": (
                 self.span_count > len(self.locator_references)
             ),
-            "locator_references": [
-                item.to_dict() for item in self.locator_references
-            ],
+            "locator_references": [item.to_dict() for item in self.locator_references],
         }
 
 
 def _validate_source_id(value: Any) -> str:
     if not isinstance(value, str) or not _SOURCE_ID_RE.fullmatch(value):
-        raise ExtractionQualityInputError(
-            "source_id must be the canonical SHA-256 URN"
-        )
+        raise ExtractionQualityInputError("source_id must be the canonical SHA-256 URN")
     return value
 
 
@@ -217,7 +213,11 @@ def _artifact_metadata(value: str) -> dict[str, Any]:
         raise ExtractionQualityIntegrityError("artifact parser_name is invalid")
     if not isinstance(parser_version, str) or not _SEMVER_RE.fullmatch(parser_version):
         raise ExtractionQualityIntegrityError("artifact parser_version is invalid")
-    if isinstance(span_count, bool) or not isinstance(span_count, int) or span_count < 0:
+    if (
+        isinstance(span_count, bool)
+        or not isinstance(span_count, int)
+        or span_count < 0
+    ):
         raise ExtractionQualityIntegrityError("artifact span_count is invalid")
     raw_flags = payload["quality_flags"]
     if not isinstance(raw_flags, list):
@@ -265,10 +265,10 @@ class ExtractionQualityService:
             uri += "&immutable=1"
         connection: sqlite3.Connection | None = None
         try:
-            connection = sqlite3.connect(uri, uri=True, timeout=5.0)
+            connection = sqlite3.connect(uri, uri=True, timeout=30.0)
             connection.row_factory = sqlite3.Row
             connection.execute("PRAGMA query_only=ON")
-            connection.execute("PRAGMA busy_timeout=5000")
+            connection.execute("PRAGMA busy_timeout=30000")
             yield connection
         except ExtractionQualityError:
             raise
@@ -389,7 +389,12 @@ class ExtractionQualityService:
         for row in rows:
             try:
                 span = EvidenceSpan.from_dict(json.loads(row["span_json"]))
-            except (json.JSONDecodeError, EvidenceSpanError, TypeError, ValueError) as exc:
+            except (
+                json.JSONDecodeError,
+                EvidenceSpanError,
+                TypeError,
+                ValueError,
+            ) as exc:
                 raise ExtractionQualityIntegrityError(
                     f"persisted span failed canonical validation: {type(exc).__name__}"
                 ) from exc
@@ -427,7 +432,9 @@ class ExtractionQualityService:
     ) -> tuple[tuple[str, ...], tuple[str, ...], tuple[str, ...], int | None]:
         parser_names = tuple(sorted({span.parser_name for span in spans}))
         parser_versions = tuple(sorted({span.parser_version for span in spans}))
-        span_flags = tuple(sorted({flag for span in spans for flag in span.quality_flags}))
+        span_flags = tuple(
+            sorted({flag for span in spans for flag in span.quality_flags})
+        )
         if metadata is None:
             return parser_names, parser_versions, span_flags, None
         recorded_count = int(metadata["span_count"])
@@ -607,6 +614,8 @@ __all__ = [
     "ExtractionQualityState",
     "ExtractionQualityUnavailableError",
 ]
+
+
 def detect_orphan_spans(store: Any) -> list[dict[str, Any]]:
     """Return evidence_spans whose source_id no longer exists in the sources table.
 

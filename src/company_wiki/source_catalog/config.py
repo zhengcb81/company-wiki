@@ -53,8 +53,13 @@ def load_catalog_config(path: Path, *, project_root: Path | None = None) -> Cata
         raise TypeError("path must be pathlib.Path")
     payload = yaml.safe_load(path.read_text(encoding="utf-8"))
     data = _mapping(payload, "config")
-    if set(data) != {"schema_version", "catalog_dir", "roots"}:
-        raise CatalogConfigError("config must contain exact schema_version/catalog_dir/roots fields")
+    required = {"schema_version", "catalog_dir", "roots"}
+    allowed = required | {"reusable_root_kinds"}
+    if not set(data) <= allowed or not required <= set(data):
+        raise CatalogConfigError(
+            "config must contain schema_version/catalog_dir/roots fields "
+            "(optional: reusable_root_kinds)"
+        )
     if str(data["schema_version"]) != "1.0":
         raise CatalogConfigError("schema_version must be 1.0")
     resolved_project = (project_root or path.resolve().parents[1]).resolve(strict=False)
@@ -75,10 +80,20 @@ def load_catalog_config(path: Path, *, project_root: Path | None = None) -> Cata
                 priority=int(item.get("priority", 100)),
             )
         )
+    raw_kinds = data.get("reusable_root_kinds", ["company_raw"])
+    if (
+        not isinstance(raw_kinds, list)
+        or not raw_kinds
+        or not all(isinstance(kind, str) and kind.strip() for kind in raw_kinds)
+    ):
+        raise CatalogConfigError(
+            "reusable_root_kinds must be a non-empty list of non-empty strings"
+        )
     return CatalogConfig(
         project_root=resolved_project,
         catalog_dir=_expand_path(data["catalog_dir"], project_root=resolved_project),
         roots=tuple(roots),
+        reusable_root_kinds=tuple(raw_kinds),
     )
 
 

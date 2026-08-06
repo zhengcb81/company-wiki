@@ -67,9 +67,7 @@ def evidence_catalog(tmp_path):
     document.save(pdf_path)
     document.close()
     (source_root / "report-copy.pdf").write_bytes(pdf_path.read_bytes())
-    (source_root / "other.txt").write_text(
-        "Other source paragraph.", encoding="utf-8"
-    )
+    (source_root / "other.txt").write_text("Other source paragraph.", encoding="utf-8")
     config_path = project / "config" / "source_catalog.yaml"
     config_path.parent.mkdir(parents=True)
     config_path.write_text(
@@ -162,9 +160,7 @@ def test_exact_lookup_returns_validated_span_document_source_and_locations(
         }
         assert payload["document"]["document_id"] == evidence_catalog["document_id"]
         assert len(payload["locations"]) == 2
-        assert {item["location_status"] for item in payload["locations"]} == {
-            "active"
-        }
+        assert {item["location_status"] for item in payload["locations"]} == {"active"}
         assert {Path(item["absolute_path"]).name for item in payload["locations"]} == {
             "report.pdf",
             "report-copy.pdf",
@@ -288,20 +284,46 @@ def test_runtime_queries_use_read_only_sql_and_leave_database_and_sources_unchan
     service = query.EvidenceQueryService(catalog.config.database_path)
     target = _span_by_kind(evidence_catalog, "paragraph")
 
-    service.lookup(
-        source_id=evidence_catalog["source_id"], locator=target["locator"]
-    )
+    service.lookup(source_id=evidence_catalog["source_id"], locator=target["locator"])
     service.list_spans(source_id=evidence_catalog["source_id"], limit=2)
 
     assert connections and all("mode=ro" in value for value in connections)
     assert not any(
-        statement.lstrip().upper().startswith(
+        statement.lstrip()
+        .upper()
+        .startswith(
             ("INSERT", "UPDATE", "DELETE", "REPLACE", "CREATE", "DROP", "ALTER")
         )
         for statement in statements
     )
     assert _tree_identity(catalog.config.catalog_dir) == before_database
     assert _tree_identity(evidence_catalog["source_root"]) == before_sources
+
+
+def test_runtime_queries_use_long_busy_timeout_read_connection(
+    evidence_catalog, monkeypatch
+):
+    """The read-only EvidenceSpan connection must tolerate worker write
+    bursts: its busy_timeout matches the main store read connection (30s),
+    not a shorter legacy 5s value that surfaced as spurious 'database is
+    locked' during the ADR-008 portfolio E2E."""
+    query = _query_module()
+    catalog = evidence_catalog["catalog"]
+    statements: list[str] = []
+    real_connect = sqlite3.connect
+
+    def traced_connect(database, *args, **kwargs):
+        connection = real_connect(database, *args, **kwargs)
+        connection.set_trace_callback(statements.append)
+        return connection
+
+    monkeypatch.setattr(query.sqlite3, "connect", traced_connect)
+    service = query.EvidenceQueryService(catalog.config.database_path)
+    target = _span_by_kind(evidence_catalog, "paragraph")
+
+    service.lookup(source_id=evidence_catalog["source_id"], locator=target["locator"])
+
+    assert any("busy_timeout=30000" in s for s in statements)
 
 
 def test_evidence_cli_lookup_and_list_emit_machine_readable_results(
@@ -312,28 +334,34 @@ def test_evidence_cli_lookup_and_list_emit_machine_readable_results(
     target = _span_by_kind(evidence_catalog, "table")
     common = ["--config", str(evidence_catalog["config_path"])]
 
-    assert main(
-        common
-        + [
-            "evidence",
-            "--source-id",
-            evidence_catalog["source_id"],
-            "--locator",
-            target["locator"],
-        ]
-    ) == 0
+    assert (
+        main(
+            common
+            + [
+                "evidence",
+                "--source-id",
+                evidence_catalog["source_id"],
+                "--locator",
+                target["locator"],
+            ]
+        )
+        == 0
+    )
     lookup = json.loads(capsys.readouterr().out)
     assert lookup["span"]["span_id"] == target["span_id"]
-    assert main(
-        common
-        + [
-            "evidence-list",
-            "--source-id",
-            evidence_catalog["source_id"],
-            "--limit",
-            "2",
-        ]
-    ) == 0
+    assert (
+        main(
+            common
+            + [
+                "evidence-list",
+                "--source-id",
+                evidence_catalog["source_id"],
+                "--limit",
+                "2",
+            ]
+        )
+        == 0
+    )
     listed = json.loads(capsys.readouterr().out)
     assert listed["total"] == 7
     assert len(listed["items"]) == 2

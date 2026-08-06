@@ -103,7 +103,9 @@ def test_rescan_backfills_market_and_security_id_on_existing_document(tmp_path):
     portfolio = tmp_path / "dayu" / "portfolio"
     filing = portfolio / "GOOG" / "filings" / "fil_x"
     filing.mkdir(parents=True)
-    (filing / "goog-20251231.htm").write_text("<html>GOOG 10-K</html>", encoding="utf-8")
+    (filing / "goog-20251231.htm").write_text(
+        "<html>GOOG 10-K</html>", encoding="utf-8"
+    )
     meta = {
         "ticker": "GOOG",
         "document_id": "fil_x",
@@ -148,6 +150,77 @@ def test_rescan_backfills_market_and_security_id_on_existing_document(tmp_path):
     dayu_meta = (docs[0].get("metadata") or {}).get("dayu_meta") or {}
     assert dayu_meta.get("market") == "US"
     assert dayu_meta.get("security_id") == "GOOG"
+
+
+def test_plain_rescan_re_enriches_existing_dayu_document(tmp_path):
+    """ADR-008 Strategy B: a plain rescan (no file change, no location-row
+    deletion) must re-enrich an already-indexed dayu_portfolio document with
+    the full reuse metadata — document_kind via form_type mapping, fiscal_year,
+    provider_document_id, security_id and market — so it becomes capture-ready.
+
+    Guards against the documented operational trap: the scanner reuses the
+    unchanged file's manifest for the location, but the document metadata is
+    rebuilt each scan and prefer_new promotes the richer enriched copy.
+    """
+    import sqlite3
+
+    from company_wiki.source_catalog import CatalogConfig, RootSpec, SourceCatalog
+
+    project = tmp_path / "project"
+    portfolio = tmp_path / "dayu" / "portfolio"
+    filing = portfolio / "03896" / "filings" / "fil_hk"
+    filing.mkdir(parents=True)
+    (filing / "annual.pdf").write_bytes(b"%PDF-1.7\nHK annual report bytes")
+    meta = {
+        "ticker": "3896",
+        "market": "HK",
+        "document_id": "fil_hk",
+        "source_provider": "hkex",
+        "source_id": "2026042301428",
+        "form_type": "FY",
+        "fiscal_year": 2025,
+        "fiscal_period": "FY",
+        "source_title": "Sample Co. 2025 Annual Report",
+        "source_url": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0423/2026042301428_c.pdf",
+        "filing_date": "2026-04-23",
+        "primary_document": "annual.pdf",
+        "ingest_complete": True,
+        "files": [{"name": "annual.pdf", "source": "original"}],
+    }
+    (filing / "meta.json").write_text(json.dumps(meta), encoding="utf-8")
+    config = CatalogConfig(
+        project_root=project,
+        catalog_dir=project / ".source_catalog",
+        roots=(RootSpec("dayu", portfolio, "dayu_portfolio", priority=20),),
+    )
+    catalog = SourceCatalog(config)
+    catalog.scan()
+
+    # Simulate a pre-ADR-008 ingestion: stored document metadata carries only
+    # the minimal marker (no form_type/fiscal_year/provider_document_id/
+    # security_id/market in dayu_meta).  The file on disk is untouched.
+    conn = sqlite3.connect(config.catalog_dir / "catalog.sqlite3")
+    row = conn.execute("SELECT metadata_json FROM documents LIMIT 1").fetchone()
+    old_meta = json.loads(row[0])
+    old_meta["dayu_meta"] = {
+        "source_title": "Sample Co. 2025 Annual Report",
+        "filing_date": "2026-04-23",
+    }
+    conn.execute("UPDATE documents SET metadata_json=?", (json.dumps(old_meta),))
+    conn.commit()
+    conn.close()
+
+    catalog.scan()
+
+    docs = catalog.query(limit=10)
+    assert len(docs) == 1
+    dayu_meta = (docs[0].get("metadata") or {}).get("dayu_meta") or {}
+    assert dayu_meta.get("form_type") == "FY"
+    assert dayu_meta.get("fiscal_year") == 2025
+    assert dayu_meta.get("security_id") == "3896"
+    assert dayu_meta.get("market") == "HK"
+    assert dayu_meta.get("source_url") == meta["source_url"]
+    assert docs[0]["document_kind"] == "annual_report"
 
 
 def test_company_raw_sidecar_without_url_gets_dayu_meta_url(tmp_path):
@@ -205,7 +278,10 @@ def test_company_raw_sidecar_without_url_gets_dayu_meta_url(tmp_path):
     target = next(
         d
         for d in docs
-        if "南大光电" in str((d.get("metadata") or {}).get("acquisition", {}).get("source_title") or "")
+        if "南大光电"
+        in str(
+            (d.get("metadata") or {}).get("acquisition", {}).get("source_title") or ""
+        )
     )
     acquisition = (target.get("metadata") or {}).get("acquisition") or {}
     assert acquisition.get("source_url") == (
@@ -221,15 +297,31 @@ def test_same_content_two_paths_prefers_metadata_with_url(tmp_path):
 
     project = tmp_path / "project"
     companies = project / "companies"
-    old = companies / "Acme" / "raw" / "financial_reports" / "z_old" / "2026-02-20_Acme_2025_annual.pdf"
-    new = companies / "Acme" / "raw" / "financial_reports" / "annual" / "2026-02-20_sec_1_2025_annual.pdf"
+    old = (
+        companies
+        / "Acme"
+        / "raw"
+        / "financial_reports"
+        / "z_old"
+        / "2026-02-20_Acme_2025_annual.pdf"
+    )
+    new = (
+        companies
+        / "Acme"
+        / "raw"
+        / "financial_reports"
+        / "annual"
+        / "2026-02-20_sec_1_2025_annual.pdf"
+    )
     old.parent.mkdir(parents=True)
     new.parent.mkdir(parents=True)
     payload = b"%PDF-1.7\nidentical bytes"
     old.write_bytes(payload)
     new.write_bytes(payload)
     (old.parent / (old.name + ".source.json")).write_text(
-        json.dumps({"market": "CN", "security_id": "600519", "source_title": "old sidecar"}),
+        json.dumps(
+            {"market": "CN", "security_id": "600519", "source_title": "old sidecar"}
+        ),
         encoding="utf-8",
     )
     (new.parent / (new.name + ".source.json")).write_text(
@@ -273,7 +365,9 @@ def test_company_raw_sec_sidecar_gets_market_and_security_id(tmp_path):
     company = companies / "Alphabet Inc" / "raw" / "financial_reports" / "annual"
     company.mkdir(parents=True)
     primary = "2026-02-05_sec_0001652044-26-000018_Alphabet_10K.htm"
-    (company / primary).write_text("<html>Alphabet FY2025 10-K</html>", encoding="utf-8")
+    (company / primary).write_text(
+        "<html>Alphabet FY2025 10-K</html>", encoding="utf-8"
+    )
     (company / (primary + ".source.json")).write_text(
         json.dumps(
             {

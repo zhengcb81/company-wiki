@@ -10,7 +10,7 @@ import os
 from pathlib import Path
 from typing import Any
 
-from .lock import CatalogOperationLock
+from .lock import _acquisition_mutex
 from .store import canonical_json
 
 
@@ -114,7 +114,11 @@ class AcquisitionJournal:
             recorded_at=_utc_now(),
             **values,
         )
-        with CatalogOperationLock(self.catalog_dir, operation="acquisition_journal"):
+        # Append-only with unique attempt_ids: a per-file mutex suffices.
+        # The global catalog operation lock must NOT be used here — the
+        # worker's long batches hold it for hours, and journaling every
+        # acquisition outcome (even read-only MISSING) would block on it.
+        with _acquisition_mutex(self.path):
             existing = {item.attempt_id: item for item in self.read_all()}
             if attempt.attempt_id in existing:
                 return existing[attempt.attempt_id]

@@ -1,5 +1,10 @@
 schema_version: "1.0"
 catalog_dir: "${PROJECT_ROOT}/.source_catalog"
+# Root *kinds* whose indexed documents are directly reusable by filing-fetch
+# (config-driven, ADR-008). company_raw is the default; adding a kind here
+# makes every already-indexed document under such roots reusable without a
+# download (filing-fetch path allowance must list the corresponding dirs).
+reusable_root_kinds: [company_raw, dayu_portfolio]
 roots:
   - root_id: company_raw
     kind: company_raw

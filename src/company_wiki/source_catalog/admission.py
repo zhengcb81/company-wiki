@@ -194,6 +194,13 @@ def evaluate_admission(
         )
     if folded_form in {"10-k", "20-f", "40-f", "10k", "20f", "40f"}:
         return _decision("annual_report", "focus_policy_regulatory_form", form_type)
+    # dayu portfolio form_type codes (FY/H1) — the portfolio meta.json carries
+    # these; titles are Traditional Chinese (年報 / 中期報告) which the keyword
+    # regexes below do not match (ADR-008 Strategy B).
+    if folded_form in {"fy"}:
+        return _decision("annual_report", "focus_policy_regulatory_form", form_type)
+    if folded_form in {"h1", "h2"}:
+        return _decision("semi_annual_report", "focus_policy_regulatory_form", form_type)
     if _SEMI_RE.search(text):
         return _decision(
             "semi_annual_report", "focus_policy_semi_annual_keyword", "semi_annual"

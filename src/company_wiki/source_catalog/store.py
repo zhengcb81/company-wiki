@@ -304,13 +304,13 @@ def _empty_pipeline_status(*, error: str | None = None) -> dict[str, Any]:
             "last_permanent_document_id": None,
         },
         "health": {
-                "scan": {
-                    "latest_running_scan": None,
-                    "stale_running_scan": False,
-                    "last_completed_scan": None,
-                    "recent_interrupted_count": 0,
-                    "interrupted_total": 0,
-                },
+            "scan": {
+                "latest_running_scan": None,
+                "stale_running_scan": False,
+                "last_completed_scan": None,
+                "recent_interrupted_count": 0,
+                "interrupted_total": 0,
+            },
             "locks": {
                 "operation_lock": "absent",
                 "operation_lock_pid": None,
@@ -435,11 +435,11 @@ def read_pipeline_status(database_path: Path) -> dict[str, Any]:
         connection = sqlite3.connect(
             database_path.resolve().as_uri() + "?mode=ro",
             uri=True,
-            timeout=5.0,
+            timeout=30.0,
         )
         connection.row_factory = sqlite3.Row
         connection.execute("PRAGMA query_only=ON")
-        connection.execute("PRAGMA busy_timeout=5000")
+        connection.execute("PRAGMA busy_timeout=30000")
         try:
             latest = connection.execute(
                 """SELECT run_id,started_at,completed_at,status,report_json
@@ -1219,7 +1219,7 @@ class CatalogStore:
                OR st.status='pending'
                OR (st.status='retryable_failed'
                    AND (st.next_retry_at IS NULL OR st.next_retry_at <= ?))
-            ORDER BY {processing_priority_sql('d')}, d.document_id
+            ORDER BY {processing_priority_sql("d")}, d.document_id
             """
         if limit is None:
             return self.fetchall(base_sql, (now_iso,))

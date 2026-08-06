@@ -86,6 +86,12 @@ class CatalogConfig:
     project_root: Path
     catalog_dir: Path
     roots: tuple[RootSpec, ...]
+    # Root *kinds* whose indexed documents are canonical reuse candidates for
+    # the resolve pipeline (ADR-008). Config-driven: adding a kind here makes
+    # every already-indexed document under such roots directly reusable by
+    # filing-fetch (no download), provided its location carries capture fields.
+    # Default: company_raw only (legacy behavior).
+    reusable_root_kinds: tuple[str, ...] = ("company_raw",)
 
     def __post_init__(self) -> None:
         if not isinstance(self.project_root, Path) or not isinstance(
@@ -99,6 +105,12 @@ class CatalogConfig:
         root_ids = [item.root_id for item in self.roots]
         if len(root_ids) != len(set(root_ids)):
             raise ValueError("root_id values must be unique")
+        if (
+            not isinstance(self.reusable_root_kinds, tuple)
+            or not self.reusable_root_kinds
+            or not all(isinstance(kind, str) and kind.strip() for kind in self.reusable_root_kinds)
+        ):
+            raise ValueError("reusable_root_kinds must be a non-empty tuple of non-empty strings")
 
     @property
     def database_path(self) -> Path:

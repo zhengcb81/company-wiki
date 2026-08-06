@@ -280,6 +280,11 @@ def promote_all_for_entity(
             continue
         if fiscal_year is not None and int(meta["fiscal_year"]) != fiscal_year:
             continue
+        filing_date = str(meta.get("filing_date") or "").strip()
+        if filing_date and filing_date > as_of_date:
+            # Documents filed after the information date must not be promoted
+            # (same discipline as the resolver's published-date gate).
+            continue
         results.append(
             promote_from_portfolio(
                 catalog,

@@ -22,9 +22,7 @@ EVIDENCE_QUERY_SCHEMA_VERSION = "1.0.0"
 MAX_EVIDENCE_QUERY_LIMIT = 500
 
 _SOURCE_ID_RE = re.compile(rf"^{re.escape(SOURCE_ID_PREFIX)}[0-9a-f]{{64}}$")
-_DOCUMENT_ID_RE = re.compile(
-    r"^urn:company-wiki:document:sha256:[0-9a-f]{64}$"
-)
+_DOCUMENT_ID_RE = re.compile(r"^urn:company-wiki:document:sha256:[0-9a-f]{64}$")
 _INTEGER_RE = re.compile(r"^(0|[1-9]\d*)$")
 _CHAR_RANGE_RE = re.compile(r"^(0|[1-9]\d*)-(0|[1-9]\d*)$")
 _COORDINATE_ORDER = {
@@ -176,7 +174,9 @@ def _validate_locator(value: Any) -> str:
     for segment in value.split("/")[1:]:
         key, separator, raw = segment.partition(":")
         if not separator or key not in _COORDINATE_ORDER or key in seen:
-            raise EvidenceQueryInputError("locator contains invalid coordinate segments")
+            raise EvidenceQueryInputError(
+                "locator contains invalid coordinate segments"
+            )
         order = _COORDINATE_ORDER[key]
         if order <= previous_order:
             raise EvidenceQueryInputError("locator segments must use canonical order")
@@ -224,7 +224,9 @@ class EvidenceQueryService:
     @contextmanager
     def _connection(self) -> Iterator[sqlite3.Connection]:
         if not self.database_path.is_file():
-            raise EvidenceQueryUnavailableError("source catalog database is unavailable")
+            raise EvidenceQueryUnavailableError(
+                "source catalog database is unavailable"
+            )
         wal_path = Path(str(self.database_path) + "-wal")
         shm_path = Path(str(self.database_path) + "-shm")
         if wal_path.exists() and not shm_path.is_file():
@@ -239,11 +241,11 @@ class EvidenceQueryService:
             connection = sqlite3.connect(
                 uri,
                 uri=True,
-                timeout=5.0,
+                timeout=30.0,
             )
             connection.row_factory = sqlite3.Row
             connection.execute("PRAGMA query_only=ON")
-            connection.execute("PRAGMA busy_timeout=5000")
+            connection.execute("PRAGMA busy_timeout=30000")
             yield connection
         except EvidenceQueryError:
             raise

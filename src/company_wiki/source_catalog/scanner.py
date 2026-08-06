@@ -150,16 +150,25 @@ def _classification(path: Path, *, root_kind: str, metadata: dict[str, Any]) -> 
     # 3. explicit form_type (regulatory filing)
     if form in {"10-k", "20-f", "40-f"} or "20f" in text or "10k" in text or "40f" in text:
         return "annual_report", SourceType.REGULATORY_FILING
+    # 3b. dayu portfolio form_type codes (FY/H1/Q1-Q3) — the portfolio
+    # meta.json carries these; titles are Traditional Chinese (年報 etc.).
+    if form in {"fy", "10k"}:
+        return "annual_report", SourceType.REGULATORY_FILING
+    if form in {"h1", "h2"}:
+        return "semi_annual_report", SourceType.REGULATORY_FILING
+    if form in {"q1", "q2", "q3", "q4"}:
+        return "quarterly_report", SourceType.REGULATORY_FILING
     # 4. semi-annual BEFORE annual (半年度 contains 年度)
-    if any(token in text for token in ("半年度", "半年报", "interim report")):
+    if any(token in text for token in ("半年度", "半年报", "中期報告", "中期报告", "interim report")):
         return "semi_annual_report", SourceType.REGULATORY_FILING
     # 5. quarterly
-    if form in {"10-q", "q1", "q2", "q3", "q4"} or any(
-        token in text for token in ("季度报告", "一季报", "三季报", "quarterly report")
+    if any(
+        token in text
+        for token in ("季度报告", "季度報告", "一季报", "三季报", "quarterly report")
     ):
         return "quarterly_report", SourceType.REGULATORY_FILING
     # 6. annual report (after semi/quarterly exclusion)
-    if any(token in text for token in ("年度报告", "年报", "annual report")):
+    if any(token in text for token in ("年度报告", "年报", "年報", "annual report")):
         return "annual_report", SourceType.REGULATORY_FILING
     if root_kind == "dayu_portfolio":
         return "regulatory_filing", SourceType.REGULATORY_FILING
@@ -226,6 +235,74 @@ def _load_acquisition_metadata(path: Path) -> dict[str, Any]:
     if not isinstance(value, dict):
         return {"meta_parse_error": True}
     return value
+
+
+def _enrich_dayu_portfolio_metadata(
+    path: Path, metadata: dict[str, Any]
+) -> dict[str, Any]:
+    """Merge the rich dayu filing ``meta.json`` (sibling of the primary
+    document) into the document metadata so raw portfolio documents are
+    directly reusable: document_kind via form_type mapping, fiscal_year,
+    source_url, provider, language, filing_date (ADR-008 Strategy B).
+
+    The ``.pdf.source.json`` sidecar only carries a minimal marker; the rich
+    record lives in the filing directory's ``meta.json``.
+    """
+    meta_path = path.parent / "meta.json"
+    try:
+        payload = json.loads(meta_path.read_text(encoding="utf-8"))
+    except (OSError, UnicodeError, json.JSONDecodeError, ValueError):
+        return metadata
+    if not isinstance(payload, dict):
+        return metadata
+    enriched: dict[str, Any] = {}
+    for key in (
+        "document_id",
+        "form_type",
+        "fiscal_year",
+        "fiscal_period",
+        "source_url",
+        "source_title",
+        "source_language",
+        "filing_date",
+        "source_id",
+        "provider_company_id",
+        "amended",
+    ):
+        if key in payload and payload[key] not in (None, ""):
+            enriched[key] = payload[key]
+    if "source_provider" in payload and payload["source_provider"] not in (None, ""):
+        enriched["provider"] = payload["source_provider"]
+    if "source_language" in enriched:
+        enriched["language"] = enriched["source_language"]
+    # Identity: portfolio filing meta.json carries the bare ticker only; the
+    # entity-level meta.json (portfolio/<ticker>/meta.json) carries the
+    # market. The resolver's security_id comparison normalizes leading zeros
+    # (HKEX "02020" == "2020"), so the bare ticker suffices as security_id.
+    if not enriched.get("security_id"):
+        filing_ticker = str(payload.get("ticker") or "").strip()
+        if filing_ticker:
+            enriched["security_id"] = filing_ticker
+    if not enriched.get("market"):
+        entity_meta_path = path.parents[2] / "meta.json"
+        try:
+            entity_meta = json.loads(entity_meta_path.read_text(encoding="utf-8"))
+        except (OSError, UnicodeError, json.JSONDecodeError, ValueError):
+            entity_meta = {}
+        if isinstance(entity_meta, dict):
+            market = str(entity_meta.get("market") or "").strip()
+            if market:
+                enriched["market"] = market
+            if not enriched.get("security_id"):
+                entity_ticker = str(entity_meta.get("ticker") or "").strip()
+                if entity_ticker:
+                    enriched["security_id"] = entity_ticker
+    if not enriched:
+        return metadata
+    merged = dict(metadata)
+    merged["dayu_meta"] = enriched
+    merged.update(enriched)  # top level too, so the classifier sees form_type etc.
+    return merged
 
 
 def _construct_edgar_url(metadata: dict[str, Any]) -> str | None:
@@ -467,6 +544,8 @@ def _enumerate_root(
                 relative = _relative(path, root.path)
                 sidecar = sidecars.get(str(path))
                 metadata = _load_acquisition_metadata(sidecar) if sidecar else {}
+                if root.kind == "dayu_portfolio":
+                    metadata = _enrich_dayu_portfolio_metadata(path, metadata)
                 admission = evaluate_admission(
                     root_id=root.root_id,
                     relative_path=relative,
@@ -579,6 +658,25 @@ def _enumerate_root(
                 metadata["market"] = "US"
             if not metadata.get("security_id") and metadata.get("ticker"):
                 metadata["security_id"] = str(metadata["ticker"])
+            # ADR-008 Strategy B: HK/CN dayu documents carry the bare ticker
+            # only; backfill market from the entity-level meta.json
+            # (portfolio/<ticker>/meta.json) and security_id from the ticker.
+            # The resolver normalizes leading zeros ("02020" == "2020").
+            if not metadata.get("security_id") and metadata.get("ticker"):
+                metadata["security_id"] = str(metadata["ticker"])
+            if not metadata.get("market") and ticker:
+                entity_meta_path = root.path / ticker / "meta.json"
+                if entity_meta_path.is_file():
+                    try:
+                        entity_payload = json.loads(
+                            entity_meta_path.read_text(encoding="utf-8")
+                        )
+                    except (OSError, UnicodeError, json.JSONDecodeError, ValueError):
+                        entity_payload = {}
+                    if isinstance(entity_payload, dict):
+                        market_value = str(entity_payload.get("market") or "").strip()
+                        if market_value:
+                            metadata["market"] = market_value
             names = {path.name: path for path in paths}
             selected = str(metadata.get("selected_primary_document") or "")
             primary = str(metadata.get("primary_document") or "")
@@ -1042,6 +1140,11 @@ def _scan_catalog_impl(
                     # market/security identity when the stored copy predates
                     # the identity backfill (Alphabet 10-K capture_ready
                     # deadlock).
+                    # ADR-008 Strategy B: and prefer metadata that carries a
+                    # provider document id when the stored copy lacks one —
+                    # otherwise the scanner's ticker identity backfill would
+                    # block the promotion's acquisition metadata (whose
+                    # provider identity the REUSED_EXACT assert requires).
                     prefer_new = (
                         (
                             not (existing_inner.get("source_url") or existing_inner.get("https_url"))
@@ -1050,6 +1153,10 @@ def _scan_catalog_impl(
                         or (
                             not (existing_inner.get("market") and existing_inner.get("security_id"))
                             and (new_inner.get("market") and new_inner.get("security_id"))
+                        )
+                        or (
+                            not existing_inner.get("provider_document_id")
+                            and bool(new_inner.get("provider_document_id"))
                         )
                     )
                     update_metadata = (

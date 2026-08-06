@@ -752,6 +752,46 @@ def test_read_pipeline_status_is_read_only_and_handles_a_missing_database(tmp_pa
     assert not database.exists()
 
 
+def test_read_pipeline_status_uses_long_busy_timeout_read_connection(
+    tmp_path, monkeypatch
+):
+    """read_pipeline_status opens a read-only connection that must tolerate
+    worker write bursts: busy_timeout matches the main store read connection
+    (30s), not a shorter legacy 5s value (ADR-008 portfolio E2E follow-up)."""
+    import sqlite3
+
+    from company_wiki.source_catalog import CatalogConfig, RootSpec, SourceCatalog
+    from company_wiki.source_catalog import store
+    from company_wiki.source_catalog.store import read_pipeline_status
+
+    project = tmp_path / "project"
+    source = tmp_path / "source"
+    source.mkdir()
+    (source / "doc.txt").write_text("test document", encoding="utf-8")
+    catalog = SourceCatalog(
+        CatalogConfig(
+            project_root=project,
+            catalog_dir=project / ".source_catalog",
+            roots=(RootSpec("source", source, "directory"),),
+        )
+    )
+    catalog.scan()
+
+    statements: list[str] = []
+    real_connect = sqlite3.connect
+
+    def traced_connect(database, *args, **kwargs):
+        connection = real_connect(database, *args, **kwargs)
+        connection.set_trace_callback(statements.append)
+        return connection
+
+    monkeypatch.setattr(store.sqlite3, "connect", traced_connect)
+    status = read_pipeline_status(catalog.config.database_path)
+
+    assert status["available"] is True
+    assert any("busy_timeout=30000" in s for s in statements)
+
+
 def test_pipeline_status_includes_explanations_and_health(tmp_path):
     from company_wiki.source_catalog import CatalogConfig, RootSpec, SourceCatalog
     from company_wiki.source_catalog.store import read_pipeline_status

@@ -402,13 +402,17 @@ class SourceResolver:
         # count of documents rejected at the entity gate.
         trace: list[str] = []
         entity_gate_rejected = 0
-        # Only locations under a company_raw root are canonical reuse
-        # candidates: dayu portfolio ingestion lives outside the companies/
-        # subtree, and filing-fetch rejects such handles (MongoDB finding).
-        company_raw_root_ids = frozenset(
+        # Only locations under a *reusable* root kind are canonical reuse
+        # candidates. Config-driven (CatalogConfig.reusable_root_kinds,
+        # default company_raw): adding a kind makes every already-indexed
+        # document under such roots directly reusable without a download.
+        # filing-fetch enforces its own independent path allowance
+        # (config-driven too), so the two gates stay in sync via
+        # configuration, not code.
+        reusable_root_ids = frozenset(
             root.root_id
             for root in self.catalog.config.roots
-            if root.kind == "company_raw"
+            if root.kind in set(self.catalog.config.reusable_root_kinds)
         )
         for document in self.catalog.query(limit=10_000_000):
             if not self._entity_matches(request.entity, document):
@@ -504,12 +508,13 @@ class SourceResolver:
                 and item.get("location_status") == "active"
             ]
             if not any(
-                item.get("root_id") in company_raw_root_ids
+                item.get("root_id") in reusable_root_ids
                 for item in canonical_locations
             ):
-                # No canonical company_raw location: not a reusable source
-                # (dayu portfolio documents live outside companies/).
-                trace.append(f"{document['title']}: no_canonical_company_raw_location")
+                # No canonical location under a reusable root kind: not a
+                # reusable source (add the root kind to
+                # `reusable_root_kinds` in source_catalog.yaml to reuse it).
+                trace.append(f"{document['title']}: no_reusable_root_location")
                 continue
             handle = self._handle(
                 document,
@@ -623,7 +628,18 @@ class SourceResolver:
             return "missing_fail_closed"
         if req_market and cand_market and req_market != cand_market:
             return "conflict"
-        if req_security_id and cand_security_id and req_security_id != cand_security_id:
+
+        def _ticker_norm(value: str) -> str:
+            # Exchange-style tickers compare modulo leading zeros and case:
+            # HKEX "03896" == "3896", "02020" == "2020" (ADR-008 Strategy B;
+            # same normalization as the portfolio promoter).
+            return value.strip().lstrip("0").casefold()
+
+        if (
+            req_security_id
+            and cand_security_id
+            and _ticker_norm(req_security_id) != _ticker_norm(cand_security_id)
+        ):
             # CW-2.27H: cand_security_id stored as a company name (non-numeric
             # prefix) was the default before identity normalization.  Treat as
             # unknown (match) — the remaining document-kind / fiscal-year

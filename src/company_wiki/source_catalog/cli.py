@@ -3,7 +3,9 @@
 from __future__ import annotations
 
 import argparse
+from datetime import datetime, timezone
 import json
+import os
 from pathlib import Path
 import sys
 import time
@@ -45,7 +47,73 @@ from .startup import (
     startup_task_status,
     uninstall_startup_task,
 )
+from .lock import CatalogOperationLockedError
 from .worker import SourceCatalogWorker, load_worker_config, set_low_process_priority
+
+
+def _retry_on_catalog_lock(
+    fn: Any,
+    *,
+    action: str,
+    deadline_seconds: float = 300.0,
+    base_seconds: float = 5.0,
+    factor: float = 2.0,
+) -> Any:
+    """Retry a catalog-write call with exponential backoff when the background
+    worker holds the global operation lock (ADR-008 lock robustness).
+
+    filing-fetch wraps its downloads in a worker pause-around, so this matters
+    mainly for direct CLI usage while the worker's long batch holds the lock.
+    The retry is deadline-bounded; exhaustion re-raises the lock error.
+    """
+    attempt = 1
+    backoff = base_seconds
+    deadline = time.monotonic() + max(0.0, deadline_seconds)
+    while True:
+        try:
+            return fn()
+        except CatalogOperationLockedError as exc:
+            remaining = deadline - time.monotonic()
+            if remaining <= 0:
+                raise
+            wait = min(backoff, remaining)
+            print(
+                f"[source-catalog] {action} blocked by the catalog lock "
+                f"(attempt {attempt}); retrying in {wait:.1f}s: {exc}",
+                file=sys.stderr,
+            )
+            time.sleep(wait)
+            attempt += 1
+            backoff *= factor
+
+
+def _append_paused_acquisition_audit(
+    catalog_dir: Path,
+    *,
+    entity: str | None,
+    document_kind: str,
+    pid: int,
+) -> None:
+    """Append one audit line when a download runs while the worker is paused.
+
+    Best-effort: an audit failure warns on stderr but never blocks acquisition.
+    """
+    record = {
+        "at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+        "entity": entity,
+        "document_kind": document_kind,
+        "pid": pid,
+    }
+    try:
+        path = catalog_dir / "paused_acquisition.log"
+        path.parent.mkdir(parents=True, exist_ok=True)
+        with path.open("a", encoding="utf-8") as stream:
+            stream.write(json.dumps(record, ensure_ascii=False) + "\n")
+    except OSError as exc:
+        print(
+            f"[ensure] warning: paused-acquisition audit log failed: {exc}",
+            file=sys.stderr,
+        )
 
 
 def _read_recent_worker_events(catalog_dir: Path) -> dict[str, Any]:
@@ -330,6 +398,15 @@ def _parser() -> argparse.ArgumentParser:
         "--allow-download",
         action="store_true",
         help="explicitly permit adapter discovery/fetch when the catalog has no reusable source",
+    )
+    ensure.add_argument(
+        "--allow-acquisition-while-paused",
+        action="store_true",
+        help=(
+            "permit adapter download even when the background worker is paused; "
+            "intended for orchestrators (filing-fetch) that deliberately paused the "
+            "worker to release the catalog lock and will resume it afterwards"
+        ),
     )
     ensure.add_argument(
         "--acquisition-config",
@@ -749,12 +826,21 @@ def main(argv: Sequence[str] | None = None) -> int:
             )
         elif args.command == "ensure":
             request, identity = source_request(allow_download=args.allow_download)
+            desired_state = worker_controller().status()["desired_state"]
             if (
                 args.allow_download
-                and worker_controller().status()["desired_state"] == "paused"
+                and desired_state == "paused"
+                and not args.allow_acquisition_while_paused
             ):
                 raise RuntimeError(
                     "source acquisition is paused; run worker-resume before allowing downloads"
+                )
+            if args.allow_download and desired_state == "paused":
+                _append_paused_acquisition_audit(
+                    config.catalog_dir,
+                    entity=request.entity,
+                    document_kind=request.document_kind,
+                    pid=os.getpid(),
                 )
             acquisition_config_path = args.acquisition_config
             if not acquisition_config_path.is_absolute():
@@ -763,18 +849,21 @@ def main(argv: Sequence[str] | None = None) -> int:
                 acquisition_config_path.resolve(strict=True),
                 project_root=project_root,
             )
-            ensured = SourceAcquisitionService(
-                coordinator=AcquisitionCoordinator(
-                    catalog=get_catalog(),
-                    adapters=acquisition_config.build_registry(),
-                    staging_root=acquisition_config.staging_root,
-                ),
-                writer=CanonicalSourceWriter(
-                    get_catalog(),
-                    staging_root=acquisition_config.staging_root,
-                ),
-                journal=AcquisitionJournal(config.catalog_dir),
-            ).ensure(request)
+            ensured = _retry_on_catalog_lock(
+                lambda: SourceAcquisitionService(
+                    coordinator=AcquisitionCoordinator(
+                        catalog=get_catalog(),
+                        adapters=acquisition_config.build_registry(),
+                        staging_root=acquisition_config.staging_root,
+                    ),
+                    writer=CanonicalSourceWriter(
+                        get_catalog(),
+                        staging_root=acquisition_config.staging_root,
+                    ),
+                    journal=AcquisitionJournal(config.catalog_dir),
+                ).ensure(request),
+                action="ensure",
+            )
             result = (
                 {"identity": identity.to_dict(), "source_ensure": _plain(ensured)}
                 if identity
@@ -813,34 +902,39 @@ def main(argv: Sequence[str] | None = None) -> int:
             if portfolio_root is None:
                 raise RuntimeError("no dayu_portfolio root configured")
             as_of_date = args.as_of_date or time.strftime("%Y-%m-%d")
-            if args.document_id:
-                promotions = [
-                    promote_from_portfolio(
+
+            def _run_promotions() -> list:
+                if args.document_id:
+                    return [
+                        promote_from_portfolio(
+                            get_catalog(),
+                            writer,
+                            portfolio_root,
+                            promotion_identity,
+                            document_id=args.document_id,
+                            as_of_date=as_of_date,
+                            dry_run=args.dry_run,
+                        )
+                    ]
+                if args.all or args.fiscal_year is not None or args.document_kind:
+                    return promote_all_for_entity(
                         get_catalog(),
                         writer,
                         portfolio_root,
                         promotion_identity,
-                        document_id=args.document_id,
                         as_of_date=as_of_date,
                         dry_run=args.dry_run,
+                        document_kind=args.document_kind,
+                        fiscal_year=args.fiscal_year,
                     )
-                ]
-            elif args.all or args.fiscal_year is not None or args.document_kind:
-                promotions = promote_all_for_entity(
-                    get_catalog(),
-                    writer,
-                    portfolio_root,
-                    promotion_identity,
-                    as_of_date=as_of_date,
-                    dry_run=args.dry_run,
-                    document_kind=args.document_kind,
-                    fiscal_year=args.fiscal_year,
-                )
-            else:
                 raise RuntimeError(
                     "import-portfolio requires --document-id, --all, "
                     "--fiscal-year, or --document-kind"
                 )
+
+            promotions = _retry_on_catalog_lock(
+                _run_promotions, action="import-portfolio"
+            )
             result = {"promotions": [promotion.to_dict() for promotion in promotions]}
             if identity:
                 result["identity"] = identity.to_dict()
