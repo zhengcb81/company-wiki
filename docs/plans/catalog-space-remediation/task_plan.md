@@ -32,7 +32,7 @@
 | 磁盘现状 | C: 剩 164.5 GB；D: 剩 71.8 GB；G: 镜像 C:（156.2 GB） |
 | 安全网 | D:\company-wiki-backups\catalog.sqlite3.vacuum-20260731T215307Z（19.33 GB） |
 
-## Phase 1：状态一致性治理（phase-15.6 遗留）— 状态：pending
+## Phase 1：状态一致性治理（phase-15.6 遗留）— 状态：completed ✅（2026-08-07：1.1 四路对账 + 1.2 reconcile apply——退役 9,499 / stub 物理删 77 / audit-vs-status 归零 / receipt artifacts/gates）
 
 ### 1.1 只读四路对账
 - [ ] 对账矩阵：document_retire_audit（9,578） × documents.source_status × locations.location_status × 磁盘文件是否存在
@@ -128,11 +128,11 @@
 
 | # | 决策 | 选项 | 建议 |
 |---|------|------|------|
-| D1 | B 类 9,576 份"审计但 active"文档 | 正式退役 / 正式恢复 / 按类型混合 | 先出对账分类，按类型混合 |
-| D2 | 证据粒度 | 保持单元格级 / 降为表格行级 / 降为表格级 | 先出 3.1 统计再定 |
-| D3 | Pending 新闻类（903）是否免 span | 免 / 段落级 | 段落级或免 |
-| D4 | catalog 是否迁移 D: | 迁 / 不迁 | 视 Phase 4 容量模型 |
-| D5 | retired 归档保留期 | 90 天 / 180 天 / 永久 | 90 天 |
+| D1 | B 类 9,576 份"审计但 active"文档 | 正式退役 / 正式恢复 / 按类型混合 | ✅ **全部正式退役**（2026-08-07 已实施，audit-vs-status 归零） |
+| D2 | 证据粒度 | 保持单元格级 / 降为表格行级 / 降为表格级 | ✅ **表格级**（Phase 3 提案方向） |
+| D3 | Pending 新闻类（903）是否免 span | 免 / 段落级 | ✅ **免 span**（Phase 3 提案方向） |
+| D4 | catalog 是否迁移 D: | 迁 / 不迁 | ✅ **不迁**（留 C:） |
+| D5 | retired 归档保留期 | 90 天 / 180 天 / 永久 | ✅ **90 天** |
 
 ## 风险与护栏
 

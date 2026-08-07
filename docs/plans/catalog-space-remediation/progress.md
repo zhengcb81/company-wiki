@@ -35,3 +35,9 @@
 - 新脚本 `src/company_wiki/source_catalog/reconcile_retire_state.py`（dry-run 默认 + `--apply` 显式 + receipt `artifacts/gates/*.jsonl` + 验收对账归零）+ cli 子命令 `reconcile-retire` + 3 项测试（dry-run 分类 / apply 退役+stub 删 / 幂等）。
 - **生产 apply（2026-08-07T08:08Z）**：退役 **9,499** + stub 物理删 **77**（79 中 2 个已 retired）+ **mismatch 归零**（验收 dry-run=0）。receipt：`.source_catalog/artifacts/gates/reconcile-retire-20260807T080844Z.jsonl`。
 - 软删除不碰 span：**29.5GB 证据保留**（90 天窗口内完整可查）；Phase 2.1 归档随后（在 90 天回收前完成）。
+
+## 2026-08-07 Phase 2.1 归档完成
+- `archive_retired_evidence.py`（src/company_wiki/source_catalog/）：streaming 导出 retired 文档 evidence_spans → gzip JSONL（`source_manifests/archive/{date}/retired-evidence.jsonl.gz`），keyset pagination（span_id 分批 10 万行），只读连接不取锁（retired 文档不重 normalize，span 稳定）。
+- cli 子命令 `archive-retired-evidence`；2 项测试（行数对账 / 空库）。
+- **生产导出（2026-08-07T10:15Z）**：`rows_written=25,708,956 == rows_in_catalog=25,708,956`，**ok=true**（归档完整，零丢失）。产物 4.6GB gzip（≈30GB 原始压缩至 ~15%）。
+- 剩余：Phase 2.2 生命周期（archived_at schema 提案）/ 2.3 定期回收（90 天）/ 3 粒度提案（D2 待拍板）/ 4 容量模型 / 6 验收 ADR。
