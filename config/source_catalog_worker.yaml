@@ -30,6 +30,12 @@ fingerprint_retry_backoff_seconds: 900
 # Each cycle processes at most this many normalized documents.
 section_extraction_batch_size: 5
 
+# Phase 2.3: weekly retained-evidence prune check (90-day retention default).
+# The worker auto-recycles retired evidence spans once the oldest archive
+# passes the retention window; not-due checks are no-ops.
+prune_retention_days: 90
+prune_check_interval_seconds: 604800
+
 # WR-10.13: parsing runs in one short-lived child while the parent worker owns DB writes.
 # The child reports liveness every 15s and has an independent one-hour document deadline.
 document_parse_timeout_seconds: 3600

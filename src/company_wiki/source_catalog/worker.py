@@ -49,6 +49,9 @@ class WorkerConfig:
     normalization_retry_backoff_seconds: int = 900
     # Phase 4: section extraction (MD&A / business) batch size
     section_extraction_batch_size: int = 5
+    # Phase 2.3: weekly retained-evidence prune (90-day retention default)
+    prune_retention_days: int = 90
+    prune_check_interval_seconds: int = 604800
 
     def __post_init__(self) -> None:
         if not isinstance(self.runtime_config, Path):
@@ -77,6 +80,8 @@ class WorkerConfig:
             "normalization_retry_limit",
             "normalization_retry_backoff_seconds",
             "section_extraction_batch_size",
+            "prune_retention_days",
+            "prune_check_interval_seconds",
         ):
             value = getattr(self, field_name)
             if isinstance(value, bool) or not isinstance(value, int) or value <= 0:
@@ -178,6 +183,8 @@ def load_worker_config(path: Path, *, project_root: Path) -> WorkerConfig:
             "normalize_before_scan_when_pending",
             "scan_defer_threshold",
             "section_extraction_batch_size",
+            "prune_retention_days",
+            "prune_check_interval_seconds",
         }
         require_user_idle = payload.get("require_user_idle")
         if not isinstance(require_user_idle, bool):
@@ -243,6 +250,10 @@ def load_worker_config(path: Path, *, project_root: Path) -> WorkerConfig:
         ),
         section_extraction_batch_size=int(
             payload.get("section_extraction_batch_size", 5)
+        ),
+        prune_retention_days=int(payload.get("prune_retention_days", 90)),
+        prune_check_interval_seconds=int(
+            payload.get("prune_check_interval_seconds", 604800)
         ),
     )
 
@@ -770,6 +781,28 @@ class SourceCatalogWorker:
                 3,
             )
             self.state["dirty_since_last_export"] = 0
+        # Phase 2.3: weekly retained-evidence prune check (90-day retention).
+        # The worker is the durable "memory": it checks weekly and auto-recycles
+        # once the oldest archive passes the retention window (the archive
+        # protects evidence; not-due runs are no-ops).
+        if timestamp - int(self.state.get("last_prune_check_at") or 0) >= (
+            self.config.prune_check_interval_seconds
+        ):
+            self.state["last_prune_check_at"] = int(timestamp)
+            try:
+                from .prune_retired_evidence import prune_retired_evidence
+
+                prune = prune_retired_evidence(
+                    self.catalog.config,
+                    self.project_root / "source_manifests",
+                    apply=True,
+                    retention_days=self.config.prune_retention_days,
+                )
+                self.state["last_prune_report"] = _plain(prune)
+            except Exception as exc:
+                self.state["last_prune_error"] = (
+                    f"{type(exc).__name__}: {str(exc)[:500]}"
+                )
         self.state["last_cycle_at"] = timestamp
         self.state["last_cycle_status"] = "completed"
         summary_result = result["summarize_llm"]
