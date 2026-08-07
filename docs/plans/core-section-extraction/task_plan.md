@@ -87,6 +87,6 @@
 
 ## 后续（非首版，记 ADR/TODO）
 
-- Phase 4：worker 集成（normalize 后自动产 sections，改 `scheduler_policy.py`/`worker.py` 约 7 处 + config schema 升级）
+- ~~Phase 4：worker 集成~~ — **completed ✅（2026-08-06：`scheduler_policy.py` + `worker.py` + `config/source_catalog_worker.yaml` + 测试；923 contract + 673 unit 绿；worker reload `code_match=True`）**
 - Phase 5：章节→evidence_spans 映射（PyMuPDF char 对齐，docling 退化页级）
 - "主营业务分析"子节级精度（首版产 MD&A 整节，已含主营业务分析子节）

@@ -40,6 +40,11 @@ class _FakeCatalog:
         self.calls.append(("backfill", None))
         return _FakeReport()
 
+    def extract_sections(self, *, limit, progress=None, should_stop=None, **kw):
+        del progress, should_stop, kw
+        self.calls.append(("sections", limit))
+        return _FakeReport()
+
     def summarize_with_llm(self, **kw):
         self.calls.append(("summarize", kw["limit"]))
         return _FakeReport()

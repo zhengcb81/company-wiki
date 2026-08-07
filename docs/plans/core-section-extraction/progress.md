@@ -62,6 +62,16 @@
 - 三类全部命中核心章节（MD&A / 业务概览 / 业务与技术）；产物 `sections/index.json` + 各 role.md 结构正确（含 char_start/end 边界）。
 - `worker-resume` 后 `desired=enabled, runtime=running`，已恢复。
 
+## 2026-08-06 Phase 4（worker 自动批）完成
+
+### 完成项
+- `scheduler_policy.py`：`SourceOnlyStage.SECTION_EXTRACTING = "section_extracting"` + `_STAGE_CONTRACTS` 绑定 `extract_sections`（在 FINGERPRINTING 后）。
+- `worker.py`：`WorkerConfig.section_extraction_batch_size`（默认 5）+ 正整数校验 + `load_worker_config` optional + run_cycle 在 FINGERPRINTING 后、SUMMARIZING 前插入 section 批处理步骤。
+- `config/source_catalog_worker.yaml`：`section_extraction_batch_size: 5`（schema 1.3 optional，向后兼容）。
+- 测试：scheduler_policy stage order / worker calls-sequence / stages 断言更新；`_Catalog`/`_FakeCatalog`/`_ThrowingCatalog` mock 补 `extract_sections`。
+- 回归：**923 contract + 673 unit + ruff + compileall 全绿**；config 加载验证返回 5；**worker reload `code_match=True`**（pid 25552，新代码生效）。
+- 修复过程（3-strike 记录）：① worker test mock `del limit` 后引用 limit → UnboundLocalError（改 del 不含 limit）；② background_reliability `_FakeCatalog` 缺 `extract_sections`（补方法）；③ stages 序列断言缺 `section_extracting`（补）。
+
 ### 未做（后续）
-- Phase 4 worker 自动批 / Phase 5 evidence 映射：记 task_plan.md 末尾。
-- git 提交：改动未提交，待用户决定。
+- Phase 5 evidence 映射：记 task_plan.md 末尾。
+- Phase 4 提交推送：commit 待发（CI 触发于 push master）。

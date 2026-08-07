@@ -26,6 +26,10 @@ fingerprint_retry_limit: 3
 # Seconds to wait before a retryable failure becomes eligible again.
 fingerprint_retry_backoff_seconds: 900
 
+# Phase 4: section extraction (MD&A / business) runs after fingerprint, before LLM.
+# Each cycle processes at most this many normalized documents.
+section_extraction_batch_size: 5
+
 # WR-10.13: parsing runs in one short-lived child while the parent worker owns DB writes.
 # The child reports liveness every 15s and has an independent one-hour document deadline.
 document_parse_timeout_seconds: 3600

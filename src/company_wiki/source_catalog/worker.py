@@ -47,6 +47,8 @@ class WorkerConfig:
     parser_result_max_bytes: int = 268_435_456
     normalization_retry_limit: int = 3
     normalization_retry_backoff_seconds: int = 900
+    # Phase 4: section extraction (MD&A / business) batch size
+    section_extraction_batch_size: int = 5
 
     def __post_init__(self) -> None:
         if not isinstance(self.runtime_config, Path):
@@ -74,6 +76,7 @@ class WorkerConfig:
             "parser_result_max_bytes",
             "normalization_retry_limit",
             "normalization_retry_backoff_seconds",
+            "section_extraction_batch_size",
         ):
             value = getattr(self, field_name)
             if isinstance(value, bool) or not isinstance(value, int) or value <= 0:
@@ -174,6 +177,7 @@ def load_worker_config(path: Path, *, project_root: Path) -> WorkerConfig:
         optional = {
             "normalize_before_scan_when_pending",
             "scan_defer_threshold",
+            "section_extraction_batch_size",
         }
         require_user_idle = payload.get("require_user_idle")
         if not isinstance(require_user_idle, bool):
@@ -236,6 +240,9 @@ def load_worker_config(path: Path, *, project_root: Path) -> WorkerConfig:
         normalization_retry_limit=int(payload.get("normalization_retry_limit", 3)),
         normalization_retry_backoff_seconds=int(
             payload.get("normalization_retry_backoff_seconds", 900)
+        ),
+        section_extraction_batch_size=int(
+            payload.get("section_extraction_batch_size", 5)
         ),
     )
 
@@ -651,6 +658,19 @@ class SourceCatalogWorker:
             )
             self.state["last_fingerprint_report"] = _plain(result["fingerprint"])
             _record_work("fingerprint")
+
+            # Phase 4: extract MD&A / business sections from normalized filings.
+            section_stage = self.scheduler_policy.require_dispatch(
+                SourceOnlyStage.SECTION_EXTRACTING, "extract_sections"
+            )
+            begin_stage(section_stage, detail="selecting normalized documents")
+            result["sections"] = self.catalog.extract_sections(
+                limit=self.config.section_extraction_batch_size,
+                progress=lambda **details: report_progress(section_stage, **details),
+                should_stop=should_stop or (lambda: False),
+            )
+            self.state["last_sections_report"] = _plain(result["sections"])
+            _record_work("section_extract")
 
             summarized = 0
             failed = 0

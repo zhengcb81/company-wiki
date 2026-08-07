@@ -49,6 +49,11 @@ class _Catalog:
         self.events.append(("call", "backfill_text_fingerprints"))
         return _Report()
 
+    def extract_sections(self, *, limit, progress=None, should_stop=None, **kwargs):
+        del limit, progress, should_stop, kwargs
+        self.events.append(("call", "extract_sections"))
+        return _Report()
+
     def summarize_with_llm(self, **kwargs):
         self.events.append(("call", "summarize_with_llm"))
         return _Report()
@@ -104,6 +109,7 @@ def test_public_policy_freezes_exact_source_only_stage_order_and_methods():
             {"stage": "scanning", "catalog_method": "scan"},
             {"stage": "normalizing", "catalog_method": "normalize"},
             {"stage": "fingerprinting", "catalog_method": "backfill_text_fingerprints"},
+            {"stage": "section_extracting", "catalog_method": "extract_sections"},
             {
                 "stage": "summarizing",
                 "catalog_method": "summarize_with_llm",
@@ -164,6 +170,8 @@ def test_worker_guards_each_catalog_call_in_exact_stage_order(tmp_path, monkeypa
         ("call", "normalize"),
         ("guard", "fingerprinting:backfill_text_fingerprints"),
         ("call", "backfill_text_fingerprints"),
+        ("guard", "section_extracting:extract_sections"),
+        ("call", "extract_sections"),
         ("guard", "summarizing:summarize_with_llm"),
         ("call", "summarize_with_llm"),
         ("guard", "exporting:export_indexes"),
@@ -223,6 +231,7 @@ def test_worker_has_no_dynamic_catalog_dispatch_or_legacy_scheduler_import():
         "scan",
         "normalize",
         "backfill_text_fingerprints",
+        "extract_sections",
         "summarize_with_llm",
         "export_indexes",
     }

@@ -241,6 +241,11 @@ class _FakeCatalog:
         self.calls.append(("backfill_text_fingerprints", limit))
         return _Report()
 
+    def extract_sections(self, *, limit, progress=None, should_stop=None, **kwargs):
+        del progress, should_stop, kwargs
+        self.calls.append(("extract_sections", limit))
+        return _Report()
+
     def summarize_with_llm(self, **kwargs):
         self.calls.append(("summarize_with_llm", kwargs["limit"]))
         return self.summary_report
@@ -475,6 +480,7 @@ def test_worker_processes_while_the_user_is_active_when_idle_is_not_required(tmp
         ("scan", None),
         ("normalize", 1),
         ("backfill_text_fingerprints", 3),
+        ("extract_sections", 5),
         ("summarize_with_llm", 1),
         ("export", None),
     ]
@@ -490,6 +496,7 @@ def test_worker_processes_while_the_user_is_active_when_idle_is_not_required(tmp
         "scanning",
         "normalizing",
         "fingerprinting",
+        "section_extracting",
         "summarizing",
         "exporting",
     ]
@@ -532,9 +539,10 @@ def test_worker_can_explicitly_keep_the_historical_user_idle_gate(tmp_path):
     assert inactive["processing_blocked_reason"] is None
     # CW-3.5 / Phase 10: export throttled in cycle 2 (dirty=3 < threshold=5).
     # CW-2.28 Phase 2R: fingerprint stage runs between normalize and summarize.
-    assert [name for name, _ in catalog.calls[-3:]] == [
+    assert [name for name, _ in catalog.calls[-4:]] == [
         "normalize",
         "backfill_text_fingerprints",
+        "extract_sections",
         "summarize_with_llm",
     ]
 

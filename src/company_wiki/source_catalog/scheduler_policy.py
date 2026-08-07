@@ -33,6 +33,7 @@ class SourceOnlyStage(str, Enum):
     SCANNING = "scanning"
     NORMALIZING = "normalizing"
     FINGERPRINTING = "fingerprinting"
+    SECTION_EXTRACTING = "section_extracting"
     SUMMARIZING = "summarizing"
     EXPORTING = "exporting"
 
@@ -54,6 +55,9 @@ _STAGE_CONTRACTS = (
     SourceOnlyStageContract(SourceOnlyStage.NORMALIZING, "normalize"),
     SourceOnlyStageContract(
         SourceOnlyStage.FINGERPRINTING, "backfill_text_fingerprints"
+    ),
+    SourceOnlyStageContract(
+        SourceOnlyStage.SECTION_EXTRACTING, "extract_sections"
     ),
     SourceOnlyStageContract(
         SourceOnlyStage.SUMMARIZING,
