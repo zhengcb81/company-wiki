@@ -21,6 +21,7 @@ from .control import WorkerController
 from .duplicate_cleanup import DuplicateCleanupService
 from .evidence_query import EvidenceQueryService
 from .section_query import SectionQueryService
+from .reconcile_retire_state import ReconcileRetireStateService
 from .extraction_quality import ExtractionQualityService
 from .focus_cleanup import FocusScopeCleanupService
 from .llm_summarizer import build_configured_llm_client
@@ -333,6 +334,17 @@ def _parser() -> argparse.ArgumentParser:
         help="list extracted MD&A / business sections for one document",
     )
     sections_list.add_argument("--document-id", required=True)
+
+    reconcile_retire = subparsers.add_parser(
+        "reconcile-retire",
+        help="align phase-15.6 retire-audit with document status (dry-run default)",
+    )
+    reconcile_retire.add_argument("--apply", action="store_true")
+
+    subparsers.add_parser(
+        "archive-retired-evidence",
+        help="export retired documents' evidence spans to gzip JSONL (Phase 2.1)",
+    )
 
     extraction_quality = subparsers.add_parser(
         "extraction-quality",
@@ -822,6 +834,17 @@ def main(argv: Sequence[str] | None = None) -> int:
         elif args.command == "sections-list":
             result = SectionQueryService(config.database_path).list_sections(
                 document_id=args.document_id,
+            )
+        elif args.command == "reconcile-retire":
+            result = ReconcileRetireStateService(get_catalog().config).reconcile(
+                apply=args.apply
+            )
+        elif args.command == "archive-retired-evidence":
+            from .archive_retired_evidence import archive_retired_evidence
+
+            result = archive_retired_evidence(
+                config.database_path,
+                project_root / "source_manifests",
             )
         elif args.command == "extraction-quality":
             result = ExtractionQualityService(config.database_path).assess(

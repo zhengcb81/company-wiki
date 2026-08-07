@@ -1,0 +1,37 @@
+﻿# 进度日志（catalog 空间治理）
+
+## 2026-08-06（规划日，未实施任何治理写操作）
+- 完成：G:/C: 空间排查，确认 G: 为 C: 镜像、云配额正常（发现 1–2）
+- 完成：opencode 快照成因调查（内部 git 仓库 + 中断残留，发现 3）
+- 完成：用户确认后删除 opencode 会话快照 d9d2f124（127.5 GB）
+- 完成：用户确认后清理 .source_catalog 旧备份 11.9 GB + company-wiki-backups 24.3 GB + 缓存 ~12.3 GB（uv/npm/pip/Temp）；C: 剩余 0.18 → 164.5 GB；G: 同步 156.2 GB
+- 完成：catalog.sqlite3 深度分析（发现 4–10）：43.9 GB 构成、95% span 归属 phase-15.6 审计文档、软删除不回收、归一化仅 11%、pending 构成
+- 完成：确认安全网（D: 7/31 catalog 备份 19.33 GB 有效）
+- 完成：按 planning-with-files 技能创建 task_plan.md / findings.md / progress.md（docs/plans/catalog-space-remediation/，未覆盖根目录同名旧规划文件）
+- 未做（等待用户决策）：任何 Phase 1–6 写操作；D1–D5 决策项
+- 问题记录：PowerShell 内联引号导致多次转义失败（改脚本文件解决）；sqlite3 CLI 无 dbstat 虚拟表（改抽样估算）；25.8M 行 GROUP BY 查询耗时 >3 分钟（改轻量查询）
+- 下一步：等待用户对 task_plan.md 的评审与 D1–D5 决策；Phase 1.1 只读对账可在确认后随时启动
+
+## 2026-08-06 Phase 1.1 只读四路对账完成（9,578 份审计文档）
+
+### 对账矩阵结果
+| 分类 | 数量 | 证据占用 | 说明 |
+|---|---|---|---|
+| A 真正 retired | 2 | 少量 | 已退役（source_status=retired） |
+| B 审计但 active | 9,576 | **25,425,840 span ≈ 29.5 GB** | 其中 1,686 有 span / 7,890 无 span |
+| C stub（byte_size≤200） | 79 | ≈0 | 59-byte placeholder，从未下载，可物理删 |
+| D 无 span | 7,892 | 0 | 仅需状态修正 |
+| 磁盘 | active locations 21,614 / 缺失 6 | | 本地盘(C:/D:)抽样正常；G:/网络盘路径未逐个 stat（虚拟盘慢） |
+
+### 关键结论
+- 可回收 ≈ **29.5 GB**（B 类退役）——比 task_plan 预估 20-30 GB 偏高。空间大头 = 25.4M span 行（95% 挂 audit 文档）。
+- 分类优先级：C 类（79 stub）物理删零成本；D 类（7,892）状态修正零成本；B 类（9,576）退役是主回收项（有 span 的 1,686 份退役前需 Phase 2 归档）。
+- 对账脚本 `_reconcile_audit.py`（临时）已删；结果本段为 record。
+- 待用户 D1–D5 决策后进 Phase 1.2（修复脚本 reconcile_retire_state.py）。
+
+## 2026-08-07 Phase 1.2 实施完成（用户 D1–D5 已拍板）
+
+- 决策：**D1=全部正式退役 / D3=新闻免 span / D4=不迁 D: / D5=归档保留 90 天**。
+- 新脚本 `src/company_wiki/source_catalog/reconcile_retire_state.py`（dry-run 默认 + `--apply` 显式 + receipt `artifacts/gates/*.jsonl` + 验收对账归零）+ cli 子命令 `reconcile-retire` + 3 项测试（dry-run 分类 / apply 退役+stub 删 / 幂等）。
+- **生产 apply（2026-08-07T08:08Z）**：退役 **9,499** + stub 物理删 **77**（79 中 2 个已 retired）+ **mismatch 归零**（验收 dry-run=0）。receipt：`.source_catalog/artifacts/gates/reconcile-retire-20260807T080844Z.jsonl`。
+- 软删除不碰 span：**29.5GB 证据保留**（90 天窗口内完整可查）；Phase 2.1 归档随后（在 90 天回收前完成）。
