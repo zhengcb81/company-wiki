@@ -1,6 +1,6 @@
 ﻿# catalog.sqlite3 空间治本方案（任务计划）
 
-> 状态：**规划中（未实施）** ｜ 创建：2026-08-06 ｜ 位置：docs/plans/catalog-space-remediation/
+> 状态：**全部完成 ✅（Phase 1–6，2026-08-07；D1–D5 全部拍板并落地）** ｜ 创建：2026-08-06 ｜ 位置：docs/plans/catalog-space-remediation/
 > 目标：解决 `.source_catalog/catalog.sqlite3`（43.9GB、持续增长）的空间占用与数据一致性隐患，建立证据数据生命周期管理。
 > 本方案只做规划与只读测算，**不实施**；所有写操作均需用户逐项确认。
 
