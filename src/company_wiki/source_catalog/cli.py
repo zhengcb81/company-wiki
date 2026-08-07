@@ -346,6 +346,17 @@ def _parser() -> argparse.ArgumentParser:
         help="export retired documents' evidence spans to gzip JSONL (Phase 2.1)",
     )
 
+    prune_retired = subparsers.add_parser(
+        "prune-retired-evidence",
+        help="physically delete retired evidence spans after retention window (dry-run default)",
+    )
+    prune_retired.add_argument("--apply", action="store_true")
+
+    subparsers.add_parser(
+        "size-report",
+        help="read-only catalog size / disk-health report (Phase 4 monitoring)",
+    )
+
     extraction_quality = subparsers.add_parser(
         "extraction-quality",
         help="assess deterministic source/extraction quality without span bodies",
@@ -846,6 +857,18 @@ def main(argv: Sequence[str] | None = None) -> int:
                 config.database_path,
                 project_root / "source_manifests",
             )
+        elif args.command == "prune-retired-evidence":
+            from .prune_retired_evidence import prune_retired_evidence
+
+            result = prune_retired_evidence(
+                get_catalog().config,
+                project_root / "source_manifests",
+                apply=args.apply,
+            )
+        elif args.command == "size-report":
+            from .catalog_size_report import catalog_size_report
+
+            result = catalog_size_report(config.database_path)
         elif args.command == "extraction-quality":
             result = ExtractionQualityService(config.database_path).assess(
                 source_id=args.source_id,

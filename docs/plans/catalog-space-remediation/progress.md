@@ -41,3 +41,10 @@
 - cli 子命令 `archive-retired-evidence`；2 项测试（行数对账 / 空库）。
 - **生产导出（2026-08-07T10:15Z）**：`rows_written=25,708,956 == rows_in_catalog=25,708,956`，**ok=true**（归档完整，零丢失）。产物 4.6GB gzip（≈30GB 原始压缩至 ~15%）。
 - 剩余：Phase 2.2 生命周期（archived_at schema 提案）/ 2.3 定期回收（90 天）/ 3 粒度提案（D2 待拍板）/ 4 容量模型 / 6 验收 ADR。
+
+## 2026-08-07 Phase 2.3 / 3 / 4 / 6 完成（catalog 治理收尾）
+- **Phase 2.3** `prune_retired_evidence.py`（cli `prune-retired-evidence`，dry-run 默认 + `--apply` + 保留期判断 + 分批删 + receipt）。生产 dry-run：retired 9,501 / span 25.7M / oldest 2026-08-07 / **due=false**（90 天窗口未到期，正确拒绝回收）。3 测试。
+- **Phase 3** `granularity-proposal.md`（表格级粒度 + 新闻免 span，D2/D3 决策，供上游评审）。
+- **Phase 4** `catalog_size_report.py`（cli `size-report`，只读容量/健康报告 + 30GB 告警阈值）。生产：DB **49.27GB** / pages 12.03M / spans 27.0M / docs 23,488 / retired 9,501 / disk_free 173.1GB / 无告警。2 测试。
+- **Phase 6** `ADR-009-catalog-space-governance.md`（D1–D5 决策留档 + Phase 1–2 实施记录 + 不变量）。
+- 生产 DB 已从 43.9GB 涨至 49.27GB（worker 持续 normalize 新增 span，符合预期；治理后 90 天窗口到期可回收 retired 25.7M 行）。

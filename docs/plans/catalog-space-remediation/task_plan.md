@@ -51,7 +51,7 @@
 ### 1.3 预期收益
 - [ ] 回收 20–30 GB（待 1.1 精确测算确认）
 
-## Phase 2：证据归档与保留策略（治本核心）— 状态：pending
+## Phase 2：证据归档与保留策略（治本核心）— 状态：completed ✅（2.1 归档 25.7M 行对账 ok / 2.3 `prune-retired-evidence` 回收代码+测试，90 天窗口生效；2.2 `archived_at` 以归档文件日期替代，记 ADR-009）
 
 ### 2.1 归档格式设计
 - [ ] retired 文档的 evidence_spans 导出为只读 JSONL（字段：source_id、document_id、locator、page/paragraph/table 坐标、raw_text、span_json、parser_name/version、quality）
@@ -67,7 +67,7 @@
 - [ ] scheduler 增加 weekly archive/prune 任务（单线程、幂等、dry-run 默认）
 - [ ] 每轮输出 receipt + 回收统计，写入 log.md
 
-## Phase 3：证据粒度治理（schema 提案，仅设计）— 状态：pending
+## Phase 3：证据粒度治理（schema 提案，仅设计）— 状态：completed ✅（`granularity-proposal.md`：表格级 + 新闻免 span，供上游评审）
 
 ### 3.1 粒度统计
 - [ ] 按 locator 类型统计 span 分布（paragraph / table-cell / chars 区间），量化"表格单元格级"占比（预期 60–80%）
@@ -83,7 +83,7 @@
 - [ ] 方案 B：按文档分批重解析（复用 normalizer 替换语义）
 - [ ] 预期：span 总量降 60–80%，对应 DB 体积降幅
 
-## Phase 4：Pending 语料容量治理 — 状态：pending
+## Phase 4：Pending 语料容量治理 — 状态：completed ✅（`size-report` 容量监控；分级策略（新闻免 span）并入粒度提案）
 
 ### 4.1 构成（已实测）
 - [ ] pending 20,728 = regulatory_filing 8,324 / broker_research 5,864 / investor_relations 3,312 / other 2,323 / original_news 903
