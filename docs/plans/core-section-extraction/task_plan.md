@@ -1,6 +1,6 @@
 # 核心章节提取器（section_extractor）— 实施计划
 
-> 状态：**核心三件套完成并通过真实库端到端验证（Phase 1-3 全绿，414 passed，Ruff+compileall 绿，三类真实文档 extract + sections-list 通过）** ｜ 创建：2026-08-06 ｜ 位置：docs/plans/core-section-extraction/
+> 状态：**全部完成 ✅（Phase 1–5，2026-08-07：核心三件套 + worker 自动批 + evidence 关联；935 contract 绿；三类真实文档 E2E + worker reload 验证）** ｜ 创建：2026-08-06 ｜ 位置：docs/plans/core-section-extraction/
 > 关联：`findings.md`（调研）、`progress.md`（进度）
 > plan-mode 批准原版：`C:\Users\郑曾波\.claude\plans\abstract-churning-matsumoto.md`
 
