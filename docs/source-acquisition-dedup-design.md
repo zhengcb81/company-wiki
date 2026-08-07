@@ -1,6 +1,6 @@
 # 统一来源复用、内容去重与下载路由设计
 
-状态：设计候选（CW-2.2）  
+状态：设计已实现（CW-2.2 → CW-2.24/2.28 + portfolio reuse 落地；由 resolver/ensure 下载前复用、三市场路由、duplicate 组标记与 duplicate_recycle 实现；2026-08-07 核验）  
 日期：2026-07-18
 
 ## 1. 决策摘要
