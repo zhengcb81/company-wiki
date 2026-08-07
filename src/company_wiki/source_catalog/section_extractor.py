@@ -28,6 +28,9 @@ SECTION_ARTIFACT_ROLE = "sections"
 # "第X节 标题" (annual/semi-annual reports) and "第X章 标题" (prospectuses).
 SECTION_RE = re.compile(r"^\s*(第[一二三四五六七八九十百千]+[节章])\s+(.{2,40}?)$", re.MULTILINE)
 
+# PyMuPDF-path normalized bodies delimit pages with "## Page N".
+PAGE_MARKER_RE = re.compile(r"^## Page (\d+)$", re.MULTILINE)
+
 # High-value section keywords -> role (validated on real normalized.md;
 # see docs/plans/core-section-extraction/findings.md discovery 3).
 SECTION_KEYWORDS: dict[str, str] = {
@@ -119,6 +122,30 @@ def extract_sections_from_text(text: str) -> list[SectionSlice]:
     return slices
 
 
+def chapter_page_range(
+    body: str, char_start: int, char_end: int
+) -> tuple[int, int] | None:
+    """Map a body char range to the ``## Page N`` markers it covers.
+
+    Returns ``(first_page, last_page)`` inclusive, or ``None`` when the body
+    has no page markers (docling path) so callers can degrade to no association.
+    """
+    markers = [
+        (match.start(), int(match.group(1)))
+        for match in PAGE_MARKER_RE.finditer(body)
+    ]
+    if not markers:
+        return None
+    first = markers[0][1]
+    last = markers[-1][1]
+    for position, page_no in markers:
+        if position <= char_start:
+            first = page_no
+        if position < char_end:
+            last = page_no
+    return first, last
+
+
 def _atomic_write(path: Path, text: str) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary = path.with_name(path.name + f".{os.getpid()}.tmp")
@@ -208,12 +235,24 @@ def extract_sections_catalog(
         if not slices:
             skipped += 1
             continue
+        body = _strip_frontmatter(text)
+        spans = store.fetchall(
+            "SELECT span_id, page_number FROM evidence_spans WHERE document_id=?",
+            (document["document_id"],),
+        )
         sha = document["content_sha256"]
         sections_dir = config.derived_dir / sha[:2] / sha / "sections"
         index_entries: list[dict[str, Any]] = []
         for sl in slices:
             section_path = sections_dir / f"{sl.role}.md"
             _atomic_write(section_path, sl.body)
+            page_range = chapter_page_range(body, sl.char_start, sl.char_end)
+            span_ids = [
+                row["span_id"]
+                for row in spans
+                if page_range is not None
+                and page_range[0] <= (row["page_number"] or 0) <= page_range[1]
+            ]
             index_entries.append(
                 {
                     "role": sl.role,
@@ -222,6 +261,9 @@ def extract_sections_catalog(
                     "char_start": sl.char_start,
                     "char_end": sl.char_end,
                     "path": str(section_path.resolve()),
+                    "page_start": page_range[0] if page_range else None,
+                    "page_end": page_range[1] if page_range else None,
+                    "span_ids": span_ids,
                 }
             )
         index_json = json.dumps(index_entries, ensure_ascii=False, indent=2)

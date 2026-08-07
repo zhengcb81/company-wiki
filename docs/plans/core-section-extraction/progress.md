@@ -72,6 +72,17 @@
 - 回归：**923 contract + 673 unit + ruff + compileall 全绿**；config 加载验证返回 5；**worker reload `code_match=True`**（pid 25552，新代码生效）。
 - 修复过程（3-strike 记录）：① worker test mock `del limit` 后引用 limit → UnboundLocalError（改 del 不含 limit）；② background_reliability `_FakeCatalog` 缺 `extract_sections`（补方法）；③ stages 序列断言缺 `section_extracting`（补）。
 
+## 2026-08-06 Phase 5（章节→evidence 溯源）完成
+
+### 完成项
+- **关键设计发现**（findings 发现 7）：`locator` 无 section 维度（`EvidenceSpan.__post_init__` 强校验 locator==coordinates.locator()）→ 章节溯源走**关联既有 spans**，不新建、不改 schema。
+- **char 基准不对齐**：PyMuPDF span 的 char offset 相对纯页面文本拼接（`pdf_page_aware.normalized_cursor`），章节 char 相对 normalized.md（含 `## Page N`/locator 注释）→ 改用 **`## Page N` 页级定位**。
+- `section_extractor.py`：`PAGE_MARKER_RE` + `chapter_page_range`（章节 char 区间 → 页范围）；`extract_sections_catalog` 查该文档 evidence_spans、按页过滤关联 span_ids，index.json 加 `page_start/page_end/span_ids`。
+- `section_query.py`：`SectionEntry` 加 `page_start/page_end/span_ids`（`.get` 向后兼容旧产物）。
+- 测试：11 passed（含 `chapter_page_range` 单元 + 集成字段断言）。
+- **真实验证（七一二年报，PyMuPDF 路径）**：financial_data 5-8 页 310 spans / business_overview 8-10 76 / **mda 10-21 781** / important_events 21-39 971 / financial_statements 60-159 8888。章节→evidence 溯源链路完整。
+- docling 路径退化：无 `## Page N` → page/span 关联留空（不报错）。
+
 ### 未做（后续）
-- Phase 5 evidence 映射：记 task_plan.md 末尾。
-- Phase 4 提交推送：commit 待发（CI 触发于 push master）。
+- Phase 4 已提交（c027141）；Phase 5 全量回归 + 提交待发。
+- 全功能收尾后：三件套标完成，清理 done 项。

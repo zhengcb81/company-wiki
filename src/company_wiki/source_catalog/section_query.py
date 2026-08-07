@@ -33,6 +33,9 @@ class SectionEntry:
     char_start: int
     char_end: int
     path: str
+    page_start: int | None = None
+    page_end: int | None = None
+    span_ids: tuple[str, ...] = ()
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -42,6 +45,9 @@ class SectionEntry:
             "char_start": self.char_start,
             "char_end": self.char_end,
             "path": self.path,
+            "page_start": self.page_start,
+            "page_end": self.page_end,
+            "span_ids": list(self.span_ids),
         }
 
 
@@ -113,6 +119,9 @@ class SectionQueryService:
                     char_start=e["char_start"],
                     char_end=e["char_end"],
                     path=e["path"],
+                    page_start=e.get("page_start"),
+                    page_end=e.get("page_end"),
+                    span_ids=tuple(e.get("span_ids") or ()),
                 )
                 for e in meta.get("sections", [])
             )

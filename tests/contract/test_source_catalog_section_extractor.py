@@ -5,6 +5,7 @@ from __future__ import annotations
 from company_wiki.source_catalog.section_extractor import (
     SECTION_ARTIFACT_ROLE,
     SectionSlice,
+    chapter_page_range,
     extract_sections_from_text,
 )
 
@@ -154,6 +155,12 @@ def test_extract_sections_writes_artifact_and_is_idempotent(tmp_path):
     roles = {entry["role"] for entry in meta["sections"]}
     assert "mda" in roles
     assert "business_overview" in roles
+    # Phase 5: page/span association fields present; the .txt fixture has no
+    # "## Page N" markers, so no page range or span association is expected.
+    first = meta["sections"][0]
+    assert "page_start" in first and "page_end" in first and "span_ids" in first
+    assert first["page_start"] is None
+    assert first["span_ids"] == []
 
     # Idempotent: a second run finds the artifact already present and does nothing.
     report2 = catalog.extract_sections(document_id=doc_id)
@@ -173,3 +180,26 @@ def test_extract_sections_writes_artifact_and_is_idempotent(tmp_path):
     qroles = {entry.role for entry in queried.sections}
     assert "mda" in qroles
     assert "business_overview" in qroles
+    # Phase 5: SectionEntry carries the page/span association fields.
+    qfirst = queried.sections[0]
+    assert qfirst.page_start is None
+    assert qfirst.span_ids == ()
+
+
+def test_chapter_page_range_maps_char_range_to_pages():
+    body = (
+        "## Page 1\n\n第一节 释义\n\n"
+        "## Page 2\n\n第三节 公司业务概要\n\n"
+        "## Page 3\n\n第四节 经营情况讨论与分析\n"
+    )
+    pos2 = body.find("第三节")
+    pos3 = body.find("第四节")
+    assert chapter_page_range(body, pos2, pos3) == (2, 3)
+    assert chapter_page_range(body, 0, len(body)) == (1, 3)
+    # A range strictly inside page 1 stays on page 1.
+    pos1 = body.find("第一节")
+    assert chapter_page_range(body, pos1, pos1 + 4) == (1, 1)
+
+
+def test_chapter_page_range_none_without_markers():
+    assert chapter_page_range("无页标记的纯文本", 0, 5) is None

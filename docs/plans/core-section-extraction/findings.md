@@ -58,6 +58,13 @@
 - 只读：`EvidenceQueryService` 用独立只读连接（`evidence_query.py:388`），不经 transaction、不碰锁。
 - ⇒ section_extractor 所有写走这条管道，所有读走独立只读连接，天然合规。
 
+## 发现 7（Phase 5 设计关键）：locator 无 section 维度，章节溯源应"关联既有 spans"而非新建
+
+- `EvidenceCoordinates`（`source_contract/evidence_span.py:194-279`）字段仅 page/paragraph/table/row/column/chars；`locator()` 从这些生成 `loc:v1/page:N/.../chars:S-E`。
+- `EvidenceSpan.__post_init__`（`:310-312`）强校验 `self.locator == self.coordinates.locator()`——**不能引入 `loc:v1/section:<role>` 命名空间**（Explore 早期建议不可行，除非 schema 升级）。
+- ⇒ Phase 5 正确路径：**章节区间 → 过滤文档既有 evidence_spans（char 或 page 对齐）→ 把 span_ids 关联进 sections/index.json**。不 INSERT 新 spans、不污染证据表、不改 schema。
+- char 对齐前提：PyMuPDF 路径 spans 有 char_start/end（`parser_adapters/pdf_page_aware.py:340-366`，相对拼接后 body）；docling 路径无 char（整页聚合）→ 退化 page 级或子串匹配。
+
 ## 关键模板代码引用
 
 | 用途 | file:line |
