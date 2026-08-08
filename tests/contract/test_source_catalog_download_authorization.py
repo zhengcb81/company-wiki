@@ -35,6 +35,7 @@ def _plan_hash() -> str:
 
 class _Candidate:
     def __init__(self, accession: str, fiscal_year: int, size: int = 1_000_000):
+        self.provider = "sec"
         self.provider_document_id = accession
         self.fiscal_year = fiscal_year
         self.remote_size = size
@@ -100,6 +101,19 @@ def test_validate_rejects_unknown_accession(tmp_path):
     )
     assert error is not None
     assert "accession" in error
+
+
+def test_validate_rejects_other_provider(tmp_path):
+    """Reviewer finding: a candidate whose provider differs from the receipt
+    must be rejected even when the accession collides."""
+    auth = _auth()
+    candidate = _Candidate("acc-2025", 2025)
+    candidate.provider = "hkexnews"  # receipt says "sec"
+    error = validate_download_authorization(
+        auth, candidate, plan_hash=_plan_hash(), now="2026-08-08T12:00:00Z"
+    )
+    assert error is not None
+    assert "provider" in error
 
 
 def test_validate_rejects_expired(tmp_path):

@@ -102,6 +102,9 @@ def validate_download_authorization(
         return "authorization is bound to a different gap plan"
     if now > authorization.expires_at:
         return "authorization expired"
+    provider = str(getattr(candidate, "provider", "") or "").lower()
+    if provider and authorization.provider != provider:
+        return f"provider not authorized: {provider}"
     accession = str(getattr(candidate, "provider_document_id", "") or "")
     if accession not in authorization.allowed_accessions:
         return f"accession not authorized: {accession}"
