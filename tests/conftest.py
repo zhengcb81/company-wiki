@@ -203,3 +203,27 @@ def synthetic_announcement_pdf(tmp_path):
     document.save(pdf_path)
     document.close()
     return pdf_path
+
+
+@pytest.fixture(scope="session", autouse=True)
+def production_config_integrity(tmp_path_factory):
+    """R4.1 (N-05) guard: the production source_catalog.yaml must never change
+    during a test session — tests that write configs must use tmp fixtures."""
+    from pathlib import Path
+    import hashlib
+
+    config_path = Path(__file__).resolve().parents[1] / "config" / "source_catalog.yaml"
+    if not config_path.is_file():
+        yield
+        return
+
+    def _digest() -> str:
+        return hashlib.sha256(config_path.read_bytes()).hexdigest()
+
+    before = _digest()
+    yield
+    after = _digest()
+    assert before == after, (
+        "production config/source_catalog.yaml changed during the test session "
+        "(N-05): tests must write configs to tmp fixtures, never the production file"
+    )
