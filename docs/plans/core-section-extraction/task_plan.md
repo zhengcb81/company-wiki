@@ -34,32 +34,32 @@
 
 **目标**：纯函数切片，零写盘，可独立单元测试。
 
-- [ ] 新建 `src/company_wiki/source_catalog/section_extractor.py`：
+- [x] 新建 `src/company_wiki/source_catalog/section_extractor.py`：
   - 常量 `SECTION_EXTRACTOR_NAME`/`SECTION_ARTIFACT_ROLE="sections"`/`SECTION_RE`/`SECTION_KEYWORDS`
   - `SectionSlice` dataclass（role/title/ordinal/char_start/char_end/page_start/page_end/body）
   - `extract_sections_from_text(text) -> list[SectionSlice]`（剥 frontmatter + 正则 + 关键词映射）
-- [ ] `models.py` 加 `SECTION_EXTRACTOR_VERSION = "1.0.0"`
-- [ ] 单元测试：合成文本断言（MD&A 两变体、招股书"第X章"、子节"一、"、噪音过滤）
+- [x] `models.py` 加 `SECTION_EXTRACTOR_VERSION = "1.0.0"`
+- [x] 单元测试：合成文本断言（MD&A 两变体、招股书"第X章"、子节"一、"、噪音过滤）
 - **验证**：`pytest tests/contract/test_source_catalog_section_extractor.py -k regex`
 
 ## Phase 2：写入 + service + CLI + 集成测试 — 状态：completed ✅（集成测试 + 幂等 + force 全绿）
 
-- [ ] `extract_sections_catalog(config, store, *, limit, document_id, document_kind, force, progress, should_stop) -> ProcessingReport`
+- [x] `extract_sections_catalog(config, store, *, limit, document_id, document_kind, force, progress, should_stop) -> ProcessingReport`
   - 选文档 SQL（模仿 `normalizer.py:1412-1430`）：JOIN artifacts normalized（已有）LEFT JOIN artifacts sections（无）WHERE document_kind IN (...) AND sections.artifact_id IS NULL
   - 读 normalized.md → 切片 → `_atomic_write` 产物（模仿 `normalizer.py:1359-1366`）→ `store.transaction()` INSERT artifacts role='sections'（抄 `normalizer.py:1601-1631` SQL）
-- [ ] `service.py` 加 `extract_sections(...)`，`CatalogOperationLock(operation="extract_sections")` 包装（模仿 `service.py:108-123`）
-- [ ] `__init__.py` 导出 `SectionSlice`、`SECTION_EXTRACTOR_VERSION`
-- [ ] `cli.py` 注册 `extract-sections --limit/--document-id/--document-kind/--force`（模仿 `fingerprint-backfill` :206-210/:649）
-- [ ] 集成测试（tmp_path）：scan + normalize + extract_sections；断言 artifacts role='sections' 行 + index.json + **幂等**（重跑行数不变）
+- [x] `service.py` 加 `extract_sections(...)`，`CatalogOperationLock(operation="extract_sections")` 包装（模仿 `service.py:108-123`）
+- [x] `__init__.py` 导出 `SectionSlice`、`SECTION_EXTRACTOR_VERSION`
+- [x] `cli.py` 注册 `extract-sections --limit/--document-id/--document-kind/--force`（模仿 `fingerprint-backfill` :206-210/:649）
+- [x] 集成测试（tmp_path）：scan + normalize + extract_sections；断言 artifacts role='sections' 行 + index.json + **幂等**（重跑行数不变）
 - **验证**：`pytest tests/contract/test_source_catalog_section_extractor.py`
 
 ## Phase 3：只读查询 + 回归 + 清理 — 状态：completed ✅（SectionQueryService + sections-list CLI + 414 全量回归 + 真实库三类文档端到端验证通过）
 
-- [ ] `section_query.py` `SectionQueryService.list_sections(document_id)`（模仿 `EvidenceQueryService` 只读连接）
-- [ ] `cli.py` 注册 `sections-list --document-id`（模仿 `evidence-list` :312-319/:792-798）
-- [ ] 真实文档验证：七一二年报 / 万华半年报 / 七一二招股书 `extract-sections --document-id` + `sections-list`
-- [ ] 全量回归：`pytest tests/contract/test_source_catalog_*.py` + Ruff + `compileall`
-- [ ] 清理临时脚本 `_spike_sections.py`（`_observe_backfill.py` 待后台观测结束删）
+- [x] `section_query.py` `SectionQueryService.list_sections(document_id)`（模仿 `EvidenceQueryService` 只读连接）
+- [x] `cli.py` 注册 `sections-list --document-id`（模仿 `evidence-list` :312-319/:792-798）
+- [x] 真实文档验证：七一二年报 / 万华半年报 / 七一二招股书 `extract-sections --document-id` + `sections-list`
+- [x] 全量回归：`pytest tests/contract/test_source_catalog_*.py` + Ruff + `compileall`
+- [x] 清理临时脚本 `_spike_sections.py`（`_observe_backfill.py` 待后台观测结束删）
 
 ## 复用的现有实现（不重写）
 

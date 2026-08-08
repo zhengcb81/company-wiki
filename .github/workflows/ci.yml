@@ -45,6 +45,9 @@ jobs:
       - name: Unique test symbols gate (WU-1.1)
         run: python tools/check_unique_test_symbols.py
 
+      - name: Plan claim verifier (WU-8.3)
+        run: python tools/verify_plan_claims.py --plan-dir .
+
       - name: Mutation canaries (WU-7.1)
         run: |
           python -m pytest tests/contract/test_source_catalog_artifact_handle.py tests/contract/test_source_catalog_source_bundle.py tests/contract/test_source_catalog_download_authorization.py tests/contract/test_source_catalog_gap_plan.py tests/contract/test_source_catalog_fail_closed.py tests/contract/test_source_catalog_determinism.py -q

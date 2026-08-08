@@ -42,8 +42,8 @@
 
 ### 完成项
 - **Phase 1**：`section_extractor.py` 纯函数（`SECTION_RE`/`SECTION_KEYWORDS`/`SectionSlice`/`extract_sections_from_text`）+ `models.py` `SECTION_EXTRACTOR_VERSION` + 8 单元测试。全绿。
-- **Phase 2**：`extract_sections_catalog`（选文档 SQL + 读 normalized.md + 切片 + `_atomic_write` 产物 + `store.transaction()` INSERT artifacts `role='sections'`）+ `service.py` `extract_sections`（`CatalogOperationLock` 包装）+ `__init__.py` 导出 + `cli.py` `extract-sections` 子命令 + 集成测试（写入 + 幂等 + force）。全绿。
-- **Phase 3**：`section_query.py` `SectionQueryService`（只读 `mode=ro`）+ `cli.py` `sections-list` 子命令 + 集成测试覆盖查询。全量回归 **414 passed**（含新 9 项）；Ruff All checks passed；compileall ok。
+- **Phase 2**：`extract_sections_catalog`（选文档 SQL + 读 normalized.md + 切片 + `_atomic_write` 产物 + `store.transaction()` INSERT artifacts `role='sections'`）+ `service.py` `extract_sections`（`CatalogOperationLock` 包装）+ `__init__.py` 导出 + `cli.py` `extract-sections` 子命令 + 集成测试（写入 + 幂等 + force）。全绿。2026-08-07 `python -m pytest tests/contract/test_source_catalog_section_extractor.py` 通过。
+- **Phase 3**：`section_query.py` `SectionQueryService`（只读 `mode=ro`）+ `cli.py` `sections-list` 子命令 + 集成测试覆盖查询。全量回归 **414 passed**（含新 9 项）；Ruff All checks passed；compileall ok。2026-08-07 `pytest tests/contract` 414 passed。
 - **清理**：`_spike_sections.py`（正则已移植进模块）、`_observe_backfill.py`（观测完成）已删。
 
 ### 产物
