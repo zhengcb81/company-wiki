@@ -24,6 +24,9 @@ ACQUISITION_OUTCOMES = frozenset(
         "missing",
         "ambiguous",
         "failed",
+        # WU-4.2: metadata-only outcomes (nothing downloaded).
+        "gap_plan",
+        "gap_plan_provider_unavailable",
     }
 )
 
