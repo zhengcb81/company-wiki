@@ -167,6 +167,11 @@ CREATE INDEX IF NOT EXISTS idx_locations_source ON locations(source_id);
 CREATE INDEX IF NOT EXISTS idx_locations_document ON locations(document_id);
 CREATE INDEX IF NOT EXISTS idx_locations_status ON locations(location_status);
 CREATE INDEX IF NOT EXISTS idx_documents_kind ON documents(document_kind);
+-- WU-3.2 (F-021/F-026): covering indexes for the filing-candidate pushdown.
+CREATE INDEX IF NOT EXISTS idx_documents_status_kind ON documents(source_status, document_kind);
+CREATE INDEX IF NOT EXISTS idx_document_entities_doc ON document_entities(document_id, entity_id);
+CREATE INDEX IF NOT EXISTS idx_entities_name ON entities(name);
+CREATE INDEX IF NOT EXISTS idx_locations_root_role_status ON locations(root_id, role, location_status);
 CREATE INDEX IF NOT EXISTS idx_artifacts_document ON artifacts(document_id);
 CREATE INDEX IF NOT EXISTS idx_llm_summary_failures_retry
 ON llm_summary_failures(generator_name, generator_version, retry_after);

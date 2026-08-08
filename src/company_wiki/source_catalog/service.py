@@ -176,6 +176,171 @@ class SourceCatalog:
     def status(self) -> dict[str, int]:
         return self.store.status()
 
+    def query_filing_candidates(
+        self,
+        *,
+        entity: str | None = None,
+        document_kind: str,
+        source_statuses: tuple[str, ...],
+        root_ids: tuple[str, ...] | None = None,
+        limit: int = 100,
+    ) -> list[dict[str, Any]]:
+        """WU-3.2: SQL-pushdown filing-candidate lookup (F-021/F-026).
+
+        Filters in SQL: document_kind, source_status allowlist, and (when
+        given) reusable root_ids via locations. ``entity`` is OPTIONAL and,
+        when given, narrows via exact document_entities/entities name match.
+        The resolver deliberately passes neither entity nor root_ids: its
+        per-document gates (entity anchoring, identity conflict before the
+        reusable-root check) are the authority, and a contradictory-identity
+        document must surface as IDENTITY_CONFLICT even when its root is not
+        reusable (fail-closed, Phase 15.3). This narrows the candidate set
+        from a full-table materialization to the kind/status slice while
+        keeping resolver semantics unchanged.
+        """
+        if limit <= 0:
+            raise ValueError("limit must be positive")
+        if not document_kind or not source_statuses:
+            raise ValueError("document_kind/source_statuses required")
+        placeholders = ", ".join("?" for _ in source_statuses)
+        root_clause = ""
+        root_params: tuple[str, ...] = ()
+        if root_ids:
+            root_placeholders = ", ".join("?" for _ in root_ids)
+            root_clause = (
+                "AND d.document_id IN ("
+                f"SELECT document_id FROM locations WHERE root_id IN ({root_placeholders}) "
+                "AND role = 'original_primary' AND location_status = 'active')"
+            )
+            root_params = root_ids
+        entity_clause = (
+            "AND d.document_id IN (SELECT document_id FROM document_entities de "
+            "JOIN entities e ON e.entity_id = de.entity_id WHERE e.name = ?)"
+            if entity
+            else ""
+        )
+        entity_params = (entity,) if entity else ()
+        entity_rows = self.store.fetchall(
+            f"""SELECT d.document_id, d.primary_source_id, d.title, d.source_type,
+                       d.document_kind, d.published_date, d.source_status,
+                       d.metadata_json, d.first_seen_at, d.last_seen_at,
+                       s.content_sha256, s.byte_size
+                FROM documents d
+                LEFT JOIN sources s ON s.source_id = d.primary_source_id
+                WHERE d.document_kind = ?
+                  AND d.source_status IN ({placeholders})
+                  {entity_clause}
+                  {root_clause}
+                ORDER BY d.published_date DESC, d.title, d.document_id
+                LIMIT ?
+                """,
+            (
+                document_kind,
+                *source_statuses,
+                *entity_params,
+                *root_params,
+                limit,
+            ),
+        )
+        if not entity_rows:
+            return []
+        ids = [row["document_id"] for row in entity_rows]
+        entities: dict[str, list[dict[str, Any]]] = {}
+        locations: dict[str, list[dict[str, Any]]] = {}
+        for doc_id in ids:
+            entities[doc_id] = [
+                dict(row)
+                for row in self.store.fetchall(
+                    """SELECT de.document_id, e.entity_id, e.name, e.entity_kind,
+                              de.confidence, de.method
+                       FROM document_entities de
+                       JOIN entities e ON e.entity_id = de.entity_id
+                       WHERE de.document_id = ?
+                       ORDER BY e.entity_id""",
+                    (doc_id,),
+                )
+            ]
+            locations[doc_id] = [
+                dict(row)
+                for row in self.store.fetchall(
+                    """SELECT l.location_id, l.document_id, l.root_id, l.relative_path,
+                              l.absolute_path, l.source_id, l.role, l.location_status,
+                              l.observed_size, l.observed_mtime_ns, l.error,
+                              l.manifest_json, l.metadata_json, r.priority AS root_priority
+                       FROM locations l
+                       JOIN roots r ON r.root_id = l.root_id
+                       WHERE l.document_id = ?
+                       ORDER BY r.priority, l.root_id, l.relative_path""",
+                    (doc_id,),
+                )
+            ]
+        results: list[dict[str, Any]] = []
+        for row in entity_rows:
+            document_id = row["document_id"]
+            doc_locations = self._annotate_locations(
+                document_id, locations.get(document_id, [])
+            )
+            results.append(
+                {
+                    "document_id": document_id,
+                    "source_id": row["primary_source_id"],
+                    "content_sha256": row["content_sha256"],
+                    "byte_size": row["byte_size"],
+                    "title": row["title"],
+                    "source_type": row["source_type"],
+                    "document_kind": row["document_kind"],
+                    "published_date": row["published_date"],
+                    "source_status": row["source_status"],
+                    "metadata": json.loads(row["metadata_json"]),
+                    "entities": entities.get(document_id, []),
+                    "locations": doc_locations,
+                    **self._duplicate_summary(doc_locations),
+                    "artifacts": [],
+                }
+            )
+        return results
+
+    def explain_filing_candidates_plan(
+        self,
+        *,
+        entity: str | None = None,
+        document_kind: str,
+        source_statuses: tuple[str, ...],
+        root_ids: tuple[str, ...] | None = None,
+    ) -> list[str]:
+        """WU-3.2: EXPLAIN QUERY PLAN for the pushdown query (index gate)."""
+        placeholders = ", ".join("?" for _ in source_statuses)
+        root_clause = ""
+        root_params: tuple[str, ...] = ()
+        if root_ids:
+            root_placeholders = ", ".join("?" for _ in root_ids)
+            root_clause = (
+                "AND d.document_id IN ("
+                f"SELECT document_id FROM locations WHERE root_id IN ({root_placeholders}) "
+                "AND role = 'original_primary' AND location_status = 'active')"
+            )
+            root_params = root_ids
+        entity_clause = (
+            "AND d.document_id IN (SELECT document_id FROM document_entities de "
+            "JOIN entities e ON e.entity_id = de.entity_id WHERE e.name = ?)"
+            if entity
+            else ""
+        )
+        entity_params = (entity,) if entity else ()
+        rows = self.store.fetchall(
+            f"""EXPLAIN QUERY PLAN
+                SELECT d.document_id
+                FROM documents d
+                WHERE d.document_kind = ?
+                  AND d.source_status IN ({placeholders})
+                  {entity_clause}
+                  {root_clause}
+                LIMIT 1
+                """,
+            (document_kind, *source_statuses, *entity_params, *root_params),
+        )
+        return [str(row[3]) for row in rows]
+
     def query(
         self,
         *,

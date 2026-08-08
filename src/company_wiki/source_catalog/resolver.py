@@ -414,7 +414,19 @@ class SourceResolver:
             for root in self.catalog.config.roots
             if root.kind in set(self.catalog.config.reusable_root_kinds)
         )
-        for document in self.catalog.query(limit=10_000_000):
+        # WU-3.2 (F-021/F-026): SQL-pushdown candidate lookup — the full-table
+        # Python scan is replaced by a kind/status-filtered, capped query.
+        # root_ids/entity are deliberately NOT pushed to SQL: the per-document
+        # gates below (entity anchoring, identity conflict before the
+        # reusable-root check, form/date) are the source of truth, and a
+        # contradictory-identity document must surface as IDENTITY_CONFLICT
+        # even when its root is not reusable (fail-closed, Phase 15.3).
+        candidates = self.catalog.query_filing_candidates(
+            document_kind=request.document_kind,
+            source_statuses=("active",),
+            limit=100,
+        )
+        for document in candidates:
             if not self._entity_matches(request.entity, document):
                 entity_gate_rejected += 1
                 continue
