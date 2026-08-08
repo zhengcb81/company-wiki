@@ -22,6 +22,7 @@ def _run_gate(paths: list[Path]) -> subprocess.CompletedProcess:
         [sys.executable, str(GATE), *(str(p) for p in paths)],
         capture_output=True,
         text=True,
+        encoding="utf-8",  # child prints UTF-8; Windows GBK locale would break text=True
         timeout=60,
     )
 
