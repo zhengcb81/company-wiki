@@ -33,9 +33,11 @@ def _artifact(tmp_path: Path, **overrides):
     path = tmp_path / "normalized.md"
     path.write_bytes(_BODY)
     base = dict(
+        schema_version="1.0",
         artifact_id="art-1",
         document_id="doc-1",
         source_id="src-1",
+        source_sha256="b" * 64,
         artifact_role="normalized",
         path=str(path),
         content_sha256=hashlib.sha256(_BODY).hexdigest(),
@@ -150,3 +152,50 @@ def test_rejects_outside_allowed_root(tmp_path, tmp_path_factory):
     )
     assert handle.reusable is False
     assert "root" in handle.reason
+
+
+def test_rejects_wrong_source_sha(tmp_path):
+    """Reviewer finding: artifact derived from different source bytes must be
+    rejected even with a matching source_id."""
+    handle = validate_artifact(
+        _artifact(tmp_path, source_sha256="c" * 64),
+        source=_source_document(), registry=_registry(),
+        allowed_roots=(tmp_path,), now="2026-08-08T12:00:00Z",
+    )
+    assert handle.reusable is False
+    assert "source_sha" in handle.reason
+
+
+def test_rejects_future_source_as_of(tmp_path):
+    """Reviewer finding: the source document's as_of in the future must be
+    rejected."""
+    handle = validate_artifact(
+        _artifact(tmp_path),
+        source=_source_document(as_of_date="2099-01-01"), registry=_registry(),
+        allowed_roots=(tmp_path,), now="2026-08-08T12:00:00Z",
+    )
+    assert handle.reusable is False
+    assert "as_of" in handle.reason
+
+
+def test_rejects_unknown_schema_version(tmp_path):
+    """Reviewer finding: an artifact with an unsupported schema_version must
+    be rejected."""
+    handle = validate_artifact(
+        _artifact(tmp_path, schema_version="99.0"),
+        source=_source_document(), registry=_registry(),
+        allowed_roots=(tmp_path,), now="2026-08-08T12:00:00Z",
+    )
+    assert handle.reusable is False
+    assert "schema" in handle.reason
+
+
+def test_rejects_missing_created_at(tmp_path):
+    """Reviewer finding: missing created_at must fail closed (was fail-open)."""
+    handle = validate_artifact(
+        _artifact(tmp_path, created_at=None),
+        source=_source_document(), registry=_registry(),
+        allowed_roots=(tmp_path,), now="2026-08-08T12:00:00Z",
+    )
+    assert handle.reusable is False
+    assert "created_at" in handle.reason

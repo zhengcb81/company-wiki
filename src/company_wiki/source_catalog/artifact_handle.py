@@ -86,24 +86,39 @@ def validate_artifact(
     """Return an ArtifactHandle; reusable=True only when every gate passes."""
     status = str(artifact.get("status") or "")
     if status != "completed":
-        return _reject(artifact, f"artifact_status_not_completed={status}")
+        return _reject(artifact, "artifact_status_not_completed")
+    schema = str(artifact.get("schema_version") or "")
+    if schema != ARTIFACT_HANDLE_SCHEMA_VERSION:
+        return _reject(artifact, "artifact_schema_unsupported")
     source_id = str(artifact.get("source_id") or "")
     if source_id != str(source.get("primary_source_id") or ""):
         return _reject(artifact, "artifact_source_binding_mismatch")
+    # The artifact must derive from the exact source bytes the catalog holds
+    # (wrong source_sha = stale/mismatched derivation even with matching id).
+    artifact_source_sha = str(artifact.get("source_sha256") or "")
+    if artifact_source_sha and artifact_source_sha != str(source.get("source_sha256") or ""):
+        return _reject(artifact, "artifact_source_sha_mismatch")
     path = Path(str(artifact.get("path") or ""))
     if not path.is_file():
         return _reject(artifact, "artifact_file_missing")
     expected_sha = str(artifact.get("content_sha256") or "")
+    if len(expected_sha) != 64 or not all(c in "0123456789abcdef" for c in expected_sha):
+        return _reject(artifact, "artifact_hash_malformed")
     actual_sha = hashlib.sha256(path.read_bytes()).hexdigest()
     if actual_sha != expected_sha:
         return _reject(artifact, "artifact_hash_mismatch")
     generator = str(artifact.get("generator_name") or "")
     version = str(artifact.get("generator_version") or "")
     if generator not in registry or version not in registry.get(generator, set()):
-        return _reject(artifact, f"artifact_generator_unregistered={generator}@{version}")
+        return _reject(artifact, "artifact_generator_unregistered")
     created_at = str(artifact.get("created_at") or "")
+    if not created_at or not _UTC_RE.fullmatch(created_at):
+        return _reject(artifact, "artifact_created_at_malformed")
     if created_at > now:
         return _reject(artifact, "artifact_created_at_future")
+    as_of = str(source.get("as_of_date") or "")
+    if as_of and as_of > now[:10]:
+        return _reject(artifact, "artifact_source_as_of_future")
     resolved = path.resolve(strict=False)
     if not any(
         resolved == root.resolve(strict=False)
