@@ -256,3 +256,26 @@ def test_path_exists_but_hash_mismatch_rejected(tmp_path):
     )
     assert "normalized" not in bundle.valid_handles
     assert "hash" in bundle.invalid["normalized"].reason
+
+
+def test_invalid_representative_deterministic_across_input_order(tmp_path):
+    """Reviewer suggestion: the failing handle chosen per role must not depend
+    on input order (determinism gate)."""
+    failing_a = _artifact(tmp_path, "summary", artifact_id="art-b", status="pending",
+                          created_at="2026-08-08T11:00:00Z")
+    failing_b = _artifact(tmp_path, "summary", artifact_id="art-a", status="failed",
+                          created_at="2026-08-08T09:00:00Z")
+    fwd = build_source_bundle(
+        source=_source(), artifacts=[failing_a, failing_b],
+        registry=_registry(), allowed_roots=(tmp_path,),
+        now="2026-08-08T12:00:00Z",
+    )
+    rev = build_source_bundle(
+        source=_source(), artifacts=[failing_b, failing_a],
+        registry=_registry(), allowed_roots=(tmp_path,),
+        now="2026-08-08T12:00:00Z",
+    )
+    # earliest (created_at, artifact_id) wins: art-a (09:00)
+    assert fwd.invalid["summary"].artifact_id == "art-a"
+    assert fwd.invalid["summary"].reason == "artifact_status_not_completed"
+    assert fwd.bundle_hash == rev.bundle_hash

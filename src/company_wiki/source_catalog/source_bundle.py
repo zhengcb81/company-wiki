@@ -7,7 +7,8 @@ fail-closed gates, and returns:
 - ``source``: the original handle (lineage anchor);
 - ``valid_handles``: role → ArtifactHandle for each PASSING artifact;
 - ``invalid``: role → ArtifactHandle(reusable=False) with a reason code;
-- ``bundle_hash``: deterministic binding of source + valid handles.
+- ``bundle_hash``: deterministic binding of source + valid handles +
+  invalid role/reason.
 
 An invalid artifact never contaminates a still-valid original or a sibling
 role: only the failed role is unusable. Consumers must use the bundle hash
@@ -67,6 +68,7 @@ def build_source_bundle(
     """
     valid: dict[str, ArtifactHandle] = {}
     invalid: dict[str, ArtifactHandle] = {}
+    invalid_keys: dict[str, tuple[str, str]] = {}
     valid_by_role: dict[str, list[tuple[ArtifactHandle, str]]] = {}
     for artifact in artifacts:
         role = str(artifact.get("artifact_role") or "unknown")
@@ -84,8 +86,14 @@ def build_source_bundle(
                 (handle, str(artifact.get("created_at") or ""))
             )
         else:
-            # keep the FIRST failing handle per role as the explanation
-            invalid.setdefault(role, handle)
+            # Deterministic failing-handle selection per role: the one with
+            # the earliest (created_at, artifact_id) — input order never
+            # changes which explanation the bundle carries.
+            key = (str(artifact.get("created_at") or ""), handle.artifact_id)
+            previous = invalid_keys.get(role)
+            if previous is None or key < previous:
+                invalid[role] = handle
+                invalid_keys[role] = key
     for role, entries in valid_by_role.items():
         newest, _ = max(entries, key=lambda pair: (pair[1], pair[0].content_sha256))
         valid[role] = newest
