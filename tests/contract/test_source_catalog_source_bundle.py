@@ -167,3 +167,92 @@ def test_bundle_hash_changes_when_artifact_invalidates(tmp_path):
     )
     assert valid.bundle_hash != stale.bundle_hash
     assert "normalized" not in stale.valid_handles
+
+
+def test_same_role_multiple_artifacts_newest_wins(tmp_path):
+    """Reviewer finding: same role with two valid artifacts — the newest
+    wins, the older is recorded as superseded (deterministic)."""
+    bundle = build_source_bundle(
+        source=_source(),
+        artifacts=[
+            _artifact(tmp_path, "normalized", created_at="2026-08-08T08:00:00Z"),
+            _artifact(tmp_path, "normalized", created_at="2026-08-08T11:00:00Z"),
+        ],
+        registry=_registry(),
+        allowed_roots=(tmp_path,),
+        now="2026-08-08T12:00:00Z",
+    )
+    assert "normalized" in bundle.valid_handles
+    assert bundle.invalid["normalized"].reason == "artifact_superseded_by_newer"
+    assert len(bundle.valid_handles["normalized"].path) > 0
+
+
+def test_two_generator_versions_same_role(tmp_path):
+    """Reviewer RED: two generator versions of the same role — newest
+    generator wins; older is superseded."""
+    bundle = build_source_bundle(
+        source=_source(),
+        artifacts=[
+            _artifact(tmp_path, "summary", generator_version="1.0.0",
+                      created_at="2026-08-08T08:00:00Z"),
+            _artifact(tmp_path, "summary", generator_version="2.0.0",
+                      created_at="2026-08-08T11:00:00Z"),
+        ],
+        registry={"summarizer": {"1.0.0", "2.0.0"}},
+        allowed_roots=(tmp_path,),
+        now="2026-08-08T12:00:00Z",
+    )
+    assert bundle.valid_handles["summary"].generator_version == "2.0.0"
+    assert bundle.invalid["summary"].reason == "artifact_superseded_by_newer"
+
+
+def test_old_source_new_summary_rejected(tmp_path):
+    """Reviewer RED: summary derived from a stale source revision must be
+    rejected even though the source_id matches."""
+    bundle = build_source_bundle(
+        source=_source(),
+        artifacts=[
+            _artifact(tmp_path, "summary", source_sha256="c" * 64),
+            _artifact(tmp_path, "sections"),
+        ],
+        registry=_registry(),
+        allowed_roots=(tmp_path,),
+        now="2026-08-08T12:00:00Z",
+    )
+    assert "summary" not in bundle.valid_handles
+    assert "source_sha" in bundle.invalid["summary"].reason
+    assert "sections" in bundle.valid_handles
+
+
+def test_summary_valid_but_sections_stale(tmp_path):
+    """Reviewer RED: compliant summary with stale sections — summary stays
+    valid, sections rejected, bundle hash reflects both."""
+    bundle = build_source_bundle(
+        source=_source(),
+        artifacts=[
+            _artifact(tmp_path, "summary"),
+            _artifact(tmp_path, "sections", status="stale"),
+        ],
+        registry=_registry(),
+        allowed_roots=(tmp_path,),
+        now="2026-08-08T12:00:00Z",
+    )
+    assert "summary" in bundle.valid_handles
+    assert "sections" not in bundle.valid_handles
+    assert "status" in bundle.invalid["sections"].reason
+
+
+def test_path_exists_but_hash_mismatch_rejected(tmp_path):
+    """Reviewer RED: file exists but content_sha256 does not match — rejected
+    at bundle level."""
+    bundle = build_source_bundle(
+        source=_source(),
+        artifacts=[
+            _artifact(tmp_path, "normalized", content_sha256="a" * 64),
+        ],
+        registry=_registry(),
+        allowed_roots=(tmp_path,),
+        now="2026-08-08T12:00:00Z",
+    )
+    assert "normalized" not in bundle.valid_handles
+    assert "hash" in bundle.invalid["normalized"].reason

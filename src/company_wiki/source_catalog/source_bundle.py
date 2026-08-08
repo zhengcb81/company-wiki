@@ -57,9 +57,17 @@ def build_source_bundle(
     allowed_roots: tuple[Path, ...],
     now: str,
 ) -> SourceBundle:
-    """Validate every artifact for the source; return the bundle."""
+    """Validate every artifact for the source; return the bundle.
+
+    Same-role duplicates (reviewer): when a role has several artifacts, the
+    newest VALID one wins; any other valid same-role artifact is recorded as
+    superseded in ``invalid`` (deterministic, never silent). The bundle hash
+    binds source + valid handles + invalid role/reason so a role changing
+    state is observable.
+    """
     valid: dict[str, ArtifactHandle] = {}
     invalid: dict[str, ArtifactHandle] = {}
+    valid_by_role: dict[str, list[tuple[ArtifactHandle, str]]] = {}
     for artifact in artifacts:
         role = str(artifact.get("artifact_role") or "unknown")
         handle = validate_artifact(
@@ -70,9 +78,20 @@ def build_source_bundle(
             now=now,
         )
         if handle.reusable:
-            valid[role] = handle
+            # keep (handle, created_at) so same-role selection is ordered by
+            # the artifact's actual creation time, not handle internals.
+            valid_by_role.setdefault(role, []).append(
+                (handle, str(artifact.get("created_at") or ""))
+            )
         else:
-            invalid[role] = handle
+            # keep the FIRST failing handle per role as the explanation
+            invalid.setdefault(role, handle)
+    for role, entries in valid_by_role.items():
+        newest, _ = max(entries, key=lambda pair: (pair[1], pair[0].content_sha256))
+        valid[role] = newest
+        for handle, _ in entries:
+            if handle is not newest:
+                invalid[role] = _superseded(handle)
 
     digest = hashlib.sha256()
     digest.update(SOURCE_BUNDLE_SCHEMA_VERSION.encode())
@@ -85,10 +104,33 @@ def build_source_bundle(
         digest.update(handle.content_sha256.encode())
         digest.update(handle.generator_name.encode())
         digest.update(handle.generator_version.encode())
+    for role in sorted(invalid):
+        handle = invalid[role]
+        digest.update(b"invalid:")
+        digest.update(role.encode())
+        digest.update((handle.reason or "").encode())
     return SourceBundle(
         schema_version=SOURCE_BUNDLE_SCHEMA_VERSION,
         source=source,
         valid_handles=valid,
         invalid=invalid,
         bundle_hash=digest.hexdigest(),
+    )
+
+
+def _superseded(handle: ArtifactHandle) -> ArtifactHandle:
+    """Mark an older valid same-role artifact as superseded."""
+    return ArtifactHandle(
+        schema_version=handle.schema_version,
+        artifact_id=handle.artifact_id,
+        document_id=handle.document_id,
+        source_id=handle.source_id,
+        artifact_role=handle.artifact_role,
+        path=handle.path,
+        content_sha256=handle.content_sha256,
+        generator_name=handle.generator_name,
+        generator_version=handle.generator_version,
+        reusable=False,
+        reason="artifact_superseded_by_newer",
+        as_of_date=handle.as_of_date,
     )
