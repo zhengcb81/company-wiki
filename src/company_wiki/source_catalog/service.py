@@ -251,11 +251,14 @@ class SourceCatalog:
                 continue
             if document_kind and document["document_kind"] != document_kind:
                 continue
-            if source_status and document["source_status"] != source_status:
-                continue
-            if document["source_status"] == "retired" and source_status != "retired":
-                # Retired documents are invisible by default (Phase 15.5);
-                # only an explicit source_status="retired" query sees them.
+            if source_status:
+                if document["source_status"] != source_status:
+                    continue
+            elif document["source_status"] != "active":
+                # WU-3.1 (F-024): the default view is active-only. Retired
+                # was already hidden (Phase 15.5); quarantined and
+                # upstream_rejected are now hidden too. Only an explicit
+                # source_status query sees non-active documents.
                 continue
             artifact_map = {item["artifact_role"]: dict(item) for item in artifacts}
             primary_source_id = document["primary_source_id"]

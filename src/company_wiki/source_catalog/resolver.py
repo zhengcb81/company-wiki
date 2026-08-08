@@ -421,6 +421,14 @@ class SourceResolver:
             if document["document_kind"] != request.document_kind:
                 trace.append(f"{document['title']}: document_kind_mismatch")
                 continue
+            # WU-3.1 (F-024) defense-in-depth: even if the query layer leaked
+            # a non-active document, the resolver refuses to form a handle.
+            if document["source_status"] != "active":
+                trace.append(
+                    f"{document['title']}: rejected_source_status="
+                    f"{document['source_status']}"
+                )
+                continue
             metadata = _source_metadata(document)
             # --- identity-aware market/security_id filtering ---
             market_match = self._identity_matches(request, metadata)
@@ -506,7 +514,19 @@ class SourceResolver:
                 if item.get("is_canonical")
                 and item.get("role") == "original_primary"
                 and item.get("location_status") == "active"
+                # WU-3.1: provider-rejected paths never count as canonical.
+                and ".rejections" not in item.get("relative_path", "").replace("\\", "/")
             ]
+            if not canonical_locations:
+                if any(
+                    item.get("role") == "original_primary"
+                    and ".rejections" in item.get("relative_path", "").replace("\\", "/")
+                    for item in document["locations"]
+                ):
+                    trace.append(f"{document['title']}: rejections_path")
+                else:
+                    trace.append(f"{document['title']}: no_canonical_active_location")
+                continue
             if not any(
                 item.get("root_id") in reusable_root_ids
                 for item in canonical_locations
@@ -707,6 +727,9 @@ class SourceResolver:
                 if item["is_canonical"]
                 and item["role"] == "original_primary"
                 and item["location_status"] == "active"
+                # WU-3.1: provider-rejected paths are never canonical, even
+                # when the row is still marked active.
+                and ".rejections" not in item["relative_path"].replace("\\", "/")
             ),
             None,
         )

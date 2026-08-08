@@ -273,7 +273,11 @@ def test_company_raw_sidecar_without_url_gets_dayu_meta_url(tmp_path):
     )
     catalog.scan()
 
-    docs = catalog.query(limit=10)
+    # WU-3.1: the default query is active-only; this enrichment check needs
+    # the URL-bearing dayu document even when its row is not yet active.
+    docs = catalog.query(limit=10, source_status="active") + catalog.query(
+        limit=10, source_status="incomplete"
+    )
     assert len(docs) == 2
     target = next(
         d

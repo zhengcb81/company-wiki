@@ -19,32 +19,37 @@ Identity must not depend on file-name guessing.
 
 from __future__ import annotations
 
+import hashlib
 import json
 from pathlib import Path
 
 
-FIXED_SIDECAR = {
-    "document_kind": "annual_report",
-    "source_type": "filing",
-    "company_name": "ACME Corp",
-    "ticker": "ACME",
-    "market": "US",
-    "security_id": "ACME",
-    "fiscal_year": 2025,
-    "fiscal_period": "FY",
-    "form_type": "10-K",
-    "accession_number": "0001234567-26-000001",
-    "provider": "sec",
-    "source_url": "https://www.sec.gov/Archives/edgar/data/1234567/ACME-10K-2025.pdf",
-    "filing_date": "2026-02-20",
-    "ingest_complete": True,
-    "retrieved_at": "2026-02-21T10:00:00Z",
-    "collector_name": "test-collector",
-    "collector_version": "1.0.0",
-    "mime_type": "application/pdf",
-    "byte_size": 1024,
-    "content_sha256": "a" * 64,
-}
+FIXED_BODY = b"%PDF-1.4 fake annual filing body"
+
+
+def _fixed_sidecar() -> dict:
+    return {
+        "document_kind": "annual_report",
+        "source_type": "filing",
+        "company_name": "ACME Corp",
+        "ticker": "ACME",
+        "market": "US",
+        "security_id": "ACME",
+        "fiscal_year": 2025,
+        "fiscal_period": "FY",
+        "form_type": "10-K",
+        "accession_number": "0001234567-26-000001",
+        "provider": "sec",
+        "source_url": "https://www.sec.gov/Archives/edgar/data/1234567/ACME-10K-2025.pdf",
+        "filing_date": "2026-02-20",
+        "ingest_complete": True,
+        "retrieved_at": "2026-02-21T10:00:00Z",
+        "collector_name": "test-collector",
+        "collector_version": "1.0.0",
+        "mime_type": "application/pdf",
+        "byte_size": len(FIXED_BODY),
+        "content_sha256": hashlib.sha256(FIXED_BODY).hexdigest(),
+    }
 
 
 def _dropbox_catalog(tmp_path: Path, reusable_kinds: tuple[str, ...]):
@@ -59,9 +64,9 @@ def _dropbox_catalog(tmp_path: Path, reusable_kinds: tuple[str, ...]):
     filing_dir = dropbox / "重点关注" / "ACME"
     filing_dir.mkdir(parents=True)
     primary = filing_dir / "ACME_10K_2025.pdf"
-    primary.write_bytes(b"%PDF-1.4 fake annual filing body")
+    primary.write_bytes(FIXED_BODY)
     sidecar = filing_dir / "ACME_10K_2025.pdf.source.json"
-    sidecar.write_text(json.dumps(FIXED_SIDECAR), encoding="utf-8")
+    sidecar.write_text(json.dumps(_fixed_sidecar()), encoding="utf-8")
     catalog = SourceCatalog(
         CatalogConfig(
             project_root=project,
