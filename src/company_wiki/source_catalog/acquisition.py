@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from datetime import date, datetime
+from datetime import UTC, date, datetime
 from enum import Enum
 import hashlib
 import json
@@ -11,6 +11,7 @@ from pathlib import Path
 import re
 from typing import Any, Protocol, runtime_checkable
 
+from .authorization import DownloadAuthorization
 from .gap_plan import GapPlan, build_gap_plan
 from .resolver import (
     ResolutionResult,
@@ -298,7 +299,12 @@ class AcquisitionCoordinator:
         self.adapters = adapters
         self.staging_root = staging_root
 
-    def resolve_or_stage(self, request: SourceRequest) -> AcquisitionResult:
+    def resolve_or_stage(
+        self,
+        request: SourceRequest,
+        *,
+        authorization: DownloadAuthorization | None = None,
+    ) -> AcquisitionResult:
         resolution = SourceResolver(self.catalog).resolve(request)
         if resolution.status in {
             ResolutionStatus.REUSED_EXACT,
@@ -400,6 +406,22 @@ class AcquisitionCoordinator:
                 candidate=candidate,
                 reason="existing_catalog_source_reused_after_discovery",
             )
+        if authorization is not None:
+            # WU-4.3: the downloader may only fetch what the receipt allows —
+            # the accession must be authorized and caps/expiry must hold.
+            # Fail-closed before any byte is fetched. (The plan-hash binding
+            # is enforced by the caller issuing the receipt from an actual
+            # GapPlan; the coordinator re-checks the candidate-level gates.)
+            from .authorization import validate_download_authorization
+
+            error = validate_download_authorization(
+                authorization,
+                candidate,
+                plan_hash=authorization.gap_plan_hash,
+                now=datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ"),
+            )
+            if error is not None:
+                raise AcquisitionError(f"download not authorized: {error}")
         request_directory = self.staging_root / request.request_id.rsplit(":", 1)[-1]
         request_directory.mkdir(parents=True, exist_ok=True)
         receipt = adapter.fetch(candidate, request_directory)
