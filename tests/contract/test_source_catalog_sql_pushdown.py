@@ -241,6 +241,51 @@ def test_explain_query_plan_hits_dedicated_indexes(tmp_path):
     assert "idx_" in plan_text, f"no index hit in plan: {plan_text}"
 
 
+def test_old_period_not_shadowed_by_cap(tmp_path):
+    """WU-3.2 reviewer regression: with 100 FY2025 + 50 FY2019 active
+    annuals, a FY2019 request must see the FY2019 docs (two-tier lookup).
+    The result may be AMBIGUOUS (50 same-identity docs) but must NOT be
+    MISSING with download_required=True — the 100-cap must not shadow an
+    older-period request into an unnecessary download."""
+    from company_wiki.source_catalog import (
+        ResolutionStatus,
+        SourceRequest,
+        SourceResolver,
+    )
+
+    catalog = _seed_catalog(tmp_path, n_docs=150, with_files=True, acme_only=True)
+    con = sqlite3.connect(catalog.config.database_path)
+    # 100 docs FY2025 (i<100), 50 docs FY2019 (i>=100): set fiscal_year and
+    # published_date accordingly.
+    con.execute(
+        "UPDATE documents SET published_date = CASE "
+        "WHEN substr(document_id, 5) < '100' THEN '2025-04-15' ELSE '2019-04-15' END"
+    )
+    for i in range(150):
+        fy = 2025 if i < 100 else 2019
+        con.execute(
+            "UPDATE documents SET metadata_json = json_set(metadata_json, "
+            "'$.acquisition.fiscal_year', ?) WHERE document_id = ?",
+            (fy, f"doc-{i}"),
+        )
+    con.commit()
+    con.close()
+
+    result = SourceResolver(catalog).resolve(
+        SourceRequest(
+            entity="ACME", market="US", security_id="ACME",
+            document_kind="annual_report", form_type="10-K", fiscal_year=2019,
+            as_of_date="2026-07-18",
+        )
+    )
+    assert result.status is ResolutionStatus.AMBIGUOUS, (
+        f"expected AMBIGUOUS (docs visible), got {result.status}: "
+        f"{result.debug_trace[:4]}"
+    )
+    assert result.download_required is False
+    assert len(result.matches) > 0
+
+
 def test_100k_candidate_lookup_within_slo(tmp_path):
     """Warm 100k-document lookup must meet the plan SLO: p95 ≤500ms and
     RSS increment ≤100MB (WU-3.2 gate). Timing is sampled multiple times
