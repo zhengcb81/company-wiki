@@ -11,6 +11,7 @@ from pathlib import Path
 import re
 from typing import Any, Protocol, runtime_checkable
 
+from .gap_plan import GapPlan
 from .resolver import (
     ResolutionResult,
     ResolutionStatus,
@@ -43,6 +44,7 @@ class AcquisitionStatus(str, Enum):
     MISSING = "missing"
     AMBIGUOUS = "ambiguous"
     STAGED = "staged"
+    GAP = "gap"  # WU-4.2: metadata-only plan returned, nothing downloaded
 
 
 def _text(value: Any, name: str) -> str:
@@ -261,6 +263,7 @@ class AcquisitionResult:
     candidate: DownloadCandidate | None = None
     receipt: DownloadReceipt | None = None
     reason: str | None = None
+    gap_plan: GapPlan | None = None  # WU-4.2: metadata-only plan (status GAP)
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -271,6 +274,7 @@ class AcquisitionResult:
             "candidate": self.candidate.to_dict() if self.candidate else None,
             "receipt": self.receipt.to_dict() if self.receipt else None,
             "reason": self.reason,
+            "gap_plan": self.gap_plan.to_dict() if self.gap_plan else None,
         }
 
 
@@ -300,12 +304,18 @@ class AcquisitionCoordinator:
             ResolutionStatus.REUSED_EXACT,
             ResolutionStatus.REUSED_EQUIVALENT,
         }:
-            return AcquisitionResult(
-                schema_version=ACQUISITION_SCHEMA_VERSION,
-                status=AcquisitionStatus.REUSED,
-                resolution=resolution,
-                reason="existing_catalog_source_reused_before_adapter",
-            )
+            if request.mode == "latest_as_of":
+                # WU-4.2: a local reuse is not proof of being up-to-date —
+                # the provider must be consulted (metadata only) to decide
+                # reuse vs gap. Fall through to the gap-plan path.
+                pass
+            else:
+                return AcquisitionResult(
+                    schema_version=ACQUISITION_SCHEMA_VERSION,
+                    status=AcquisitionStatus.REUSED,
+                    resolution=resolution,
+                    reason="existing_catalog_source_reused_before_adapter",
+                )
         if resolution.status is ResolutionStatus.AMBIGUOUS:
             return AcquisitionResult(
                 schema_version=ACQUISITION_SCHEMA_VERSION,
@@ -321,6 +331,8 @@ class AcquisitionCoordinator:
                 reason="identity_conflict_no_download",
             )
         if not request.allow_download:
+            if request.mode == "latest_as_of":
+                return self._gap_plan_result(request, resolution)
             return AcquisitionResult(
                 schema_version=ACQUISITION_SCHEMA_VERSION,
                 status=AcquisitionStatus.MISSING,
@@ -396,6 +408,46 @@ class AcquisitionCoordinator:
             candidate=candidate,
             receipt=receipt,
             reason="missing_source_downloaded_to_staging_pending_canonical_import",
+        )
+
+    def _gap_plan_result(
+        self, request: SourceRequest, resolution: ResolutionResult
+    ) -> AcquisitionResult:
+        """WU-4.2: metadata-only discovery for latest_as_of — discover remote
+        metadata (never fetch), align with local reusable handles, and return
+        a GapPlan. Nothing is downloaded and nothing is written."""
+        if request.market is None:
+            raise MarketRoutingError("market is required before adapter discovery")
+        adapter = self.adapters.for_market(request.market)
+        provider_error: str | None = None
+        try:
+            discovered = tuple(adapter.discover(request))
+        except Exception as exc:  # offline / rate-limit / adapter failure
+            provider_error = f"{type(exc).__name__}: {exc}"
+            discovered = ()
+        from .gap_plan import build_gap_plan
+
+        plan = build_gap_plan(
+            request_id=request.request_id,
+            as_of_date=request.as_of_date,
+            document_kind=request.document_kind,
+            entity=request.entity,
+            market=request.market,
+            local_handles=list(resolution.matches),
+            remote_candidates=list(discovered),
+            provider_error=provider_error,
+        )
+        return AcquisitionResult(
+            schema_version=ACQUISITION_SCHEMA_VERSION,
+            status=AcquisitionStatus.GAP,
+            resolution=resolution,
+            adapter_name=adapter.name,
+            gap_plan=plan,
+            reason=(
+                "metadata_only_gap_plan"
+                if provider_error is None
+                else "metadata_only_gap_plan_provider_unavailable"
+            ),
         )
 
     @staticmethod
