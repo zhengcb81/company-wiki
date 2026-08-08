@@ -93,3 +93,35 @@ def test_missing_catalog_dir_is_rejected(tmp_path: Path) -> None:
 def test_missing_config_file_is_rejected(tmp_path: Path) -> None:
     problems = diagnose(tmp_path / "nope.yaml", project_root=tmp_path)
     assert any("missing config" in problem for problem in problems)
+
+
+def test_e2e_f03_second_directory_root_fails_fast(tmp_path, monkeypatch):
+    """E2E-F03: a second kind=directory root must fail the doctor."""
+    from config_doctor import diagnose
+
+    config = tmp_path / "source_catalog.yaml"
+    config.write_text('schema_version: "1.0"\ncatalog_dir: "${PROJECT_ROOT}/.source_catalog"\nreusable_root_kinds: [company_raw, dayu_portfolio, directory]\nroots:\n  - root_id: company_raw\n    kind: company_raw\n    path: "${PROJECT_ROOT}/companies"\n    priority: 10\n  - root_id: dropbox_stock\n    kind: directory\n    path: "${USER_PROFILE}/Dropbox/Stock"\n    priority: 30\n  - root_id: other_dir\n    kind: directory\n    path: "${USER_PROFILE}/somewhere"\n    priority: 40\n', encoding='utf-8')
+    project = tmp_path / "project"
+    (project / ".source_catalog" / "security_master").mkdir(parents=True)
+    (project / ".source_catalog" / "security_master" / "us.json").write_text("{}", encoding="utf-8")
+    problems = diagnose(config, project_root=project)
+    assert any("directory roots must be exactly" in p for p in problems), problems
+
+def test_e2e_f03_filing_allowance_missing_dropbox_fails(tmp_path, monkeypatch):
+    """E2E-F03: filing-fetch allowance missing Dropbox/Stock → doctor fails."""
+    from config_doctor import diagnose
+
+    filing = tmp_path / "filing-fetch" / "config"
+    filing.mkdir(parents=True)
+    (filing / "company_wiki.json").write_text(
+        '{"schema_version": "1.0", "allowed_handle_roots": ["/companies"]}',
+        encoding="utf-8",
+    )
+    config = tmp_path / "source_catalog.yaml"
+    config.write_text('schema_version: "1.0"\ncatalog_dir: "${PROJECT_ROOT}/.source_catalog"\nreusable_root_kinds: [company_raw, dayu_portfolio, directory]\nroots:\n  - root_id: company_raw\n    kind: company_raw\n    path: "${PROJECT_ROOT}/companies"\n    priority: 10\n  - root_id: dropbox_stock\n    kind: directory\n    path: "${USER_PROFILE}/Dropbox/Stock"\n    priority: 30\n', encoding='utf-8')
+    project = tmp_path / "project"
+    (project / ".source_catalog" / "security_master").mkdir(parents=True)
+    (project / ".source_catalog" / "security_master" / "us.json").write_text("{}", encoding="utf-8")
+    problems = diagnose(config, project_root=project)
+    assert any("missing Dropbox/Stock" in p for p in problems), problems
+
