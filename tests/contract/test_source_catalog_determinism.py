@@ -149,14 +149,19 @@ def _build_catalog(tmp_path: Path, insert_order: list[int]):
 
     SAME_HASH = hashlib.sha256(b"same-bytes").hexdigest()
     OTHER_HASH = hashlib.sha256(b"other-bytes").hexdigest()
-    # 3 roots, same content hash (equivalent locations on ONE document)
-    for i, root in ((1, "company_raw"), (2, "dayu_portfolio"), (3, "dropbox_stock")):
-        insert(i, root, {"company_raw": companies, "dayu_portfolio": portfolio,
-                         "dropbox_stock": dropbox}[root], SAME_HASH, 2025,
-               document_id="doc-same")
-    # 2 docs, same period FY2024, different hash, no revision evidence
-    insert(4, "company_raw", companies, OTHER_HASH, 2024)
-    insert(5, "dayu_portfolio", portfolio, hashlib.sha256(b"third").hexdigest(), 2024)
+    # Reviewer finding (WU-3.3): the insert_order parameter must actually
+    # drive the INSERT sequence, else 100 'random' runs build identical
+    # catalogs and the determinism gate is a tautology. Each insertion is
+    # defined here; the caller's order argument reorders the executions.
+    steps = {
+        1: lambda: insert(1, "company_raw", companies, SAME_HASH, 2025, document_id="doc-same"),
+        2: lambda: insert(2, "dayu_portfolio", portfolio, SAME_HASH, 2025, document_id="doc-same"),
+        3: lambda: insert(3, "dropbox_stock", dropbox, SAME_HASH, 2025, document_id="doc-same"),
+        4: lambda: insert(4, "company_raw", companies, OTHER_HASH, 2024),
+        5: lambda: insert(5, "dayu_portfolio", portfolio, hashlib.sha256(b"third").hexdigest(), 2024),
+    }
+    for step in insert_order:
+        steps[step]()
     con.commit()
     con.close()
     return catalog
