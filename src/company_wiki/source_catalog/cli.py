@@ -413,6 +413,7 @@ def _parser() -> argparse.ArgumentParser:
     resolve.add_argument("--language")
     resolve.add_argument("--provider")
     resolve.add_argument("--provider-document-id")
+    resolve.add_argument("--mode", choices=("exact", "latest_as_of"))
 
     ensure = subparsers.add_parser(
         "ensure",
@@ -671,6 +672,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             provider=args.provider,
             provider_document_id=args.provider_document_id,
             as_of_date=args.as_of_date,
+            mode=getattr(args, "mode", None),
             allow_download=allow_download,
         )
         return request, identity

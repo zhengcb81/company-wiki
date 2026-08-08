@@ -128,6 +128,10 @@ class SourceRequest:
     language: str | None = None
     provider: str | None = None
     provider_document_id: str | None = None
+    # WU-4.1: "exact" (default) requires fiscal_year semantics; "latest_as_of"
+    # derives the latest period from as_of_date + document_kind. Legacy callers
+    # omitting mode keep exact-any-year behavior.
+    mode: str | None = None
     allow_download: bool = False
     schema_version: str = SOURCE_RESOLVER_SCHEMA_VERSION
 
@@ -177,6 +181,14 @@ class SourceRequest:
                 )
         if not isinstance(self.allow_download, bool):
             raise SourceResolutionError("allow_download must be boolean")
+        mode = self.mode
+        if mode is not None:
+            mode = str(mode).strip().lower()
+            if mode not in {"exact", "latest_as_of"}:
+                raise SourceResolutionError(
+                    f"mode must be 'exact' or 'latest_as_of': {self.mode!r}"
+                )
+            object.__setattr__(self, "mode", mode)
 
     def identity_dict(self) -> dict[str, Any]:
         return {
@@ -192,6 +204,7 @@ class SourceRequest:
             "provider": self.provider,
             "provider_document_id": self.provider_document_id,
             "as_of_date": self.as_of_date,
+            "mode": self.mode,
         }
 
     @property
@@ -416,27 +429,18 @@ class SourceResolver:
         )
         # WU-3.2 (F-021/F-026): SQL-pushdown candidate lookup — the full-table
         # Python scan is replaced by a kind/status-filtered, capped query.
-        # root_ids/entity are deliberately NOT pushed to SQL: the per-document
-        # gates below (entity anchoring, identity conflict before the
-        # reusable-root check, form/date) are the source of truth, and a
-        # contradictory-identity document must surface as IDENTITY_CONFLICT
-        # even when its root is not reusable (fail-closed, Phase 15.3).
-        # Two-tier lookup so a 100-cap cannot shadow an older-period request:
-        # first a period-targeted slice (when fiscal_year is specified), then
-        # the general slice.  The period filter is advisory (SQL can only see
-        # metadata_json); the Python _fiscal_year gate stays authoritative.
+        # root_ids/entity/fiscal_year are deliberately NOT pushed to SQL: the
+        # per-document gates below (entity anchoring, identity conflict before
+        # the reusable-root check, the authoritative _fiscal_year which also
+        # derives years from titles for old sidecars, form/date) are the
+        # source of truth. A generous cap keeps an older-period request
+        # visible (production active annuals are ~38; 1000 covers title-derived
+        # mixed catalogs without materializing the full table).
         candidates = self.catalog.query_filing_candidates(
             document_kind=request.document_kind,
             source_statuses=("active",),
-            fiscal_year=request.fiscal_year,
-            limit=100,
+            limit=1000,
         )
-        if not candidates:
-            candidates = self.catalog.query_filing_candidates(
-                document_kind=request.document_kind,
-                source_statuses=("active",),
-                limit=100,
-            )
         for document in candidates:
             if not self._entity_matches(request.entity, document):
                 entity_gate_rejected += 1
@@ -603,6 +607,16 @@ class SourceResolver:
                 debug_trace,
             )
         if len(exact) > 1:
+            if request.mode == "latest_as_of":
+                latest = self._pick_latest(exact, request.as_of_date)
+                if latest is not None:
+                    return self._result(
+                        request,
+                        ResolutionStatus.REUSED_EXACT,
+                        "latest_existing_source_matches_provider_identity",
+                        (latest,),
+                        debug_trace,
+                    )
             return self._result(
                 request,
                 ResolutionStatus.AMBIGUOUS,
@@ -619,6 +633,16 @@ class SourceResolver:
                 debug_trace,
             )
         if len(semantic) > 1:
+            if request.mode == "latest_as_of":
+                latest = self._pick_latest(semantic, request.as_of_date)
+                if latest is not None:
+                    return self._result(
+                        request,
+                        ResolutionStatus.REUSED_EQUIVALENT,
+                        "latest_existing_source_satisfies_semantic_request",
+                        (latest,),
+                        debug_trace,
+                    )
             return self._result(
                 request,
                 ResolutionStatus.AMBIGUOUS,
@@ -814,6 +838,27 @@ class SourceResolver:
             exact_duplicate_location_count=document["exact_duplicate_location_count"],
             capture_ready=not missing,
             missing_capture_fields=tuple(missing),
+        )
+
+    @staticmethod
+    def _pick_latest(
+        handles: list[SourceHandle], as_of_date: str
+    ) -> SourceHandle | None:
+        """WU-4.1: latest_as_of selection — the most recent published handle
+        not after ``as_of_date``; ties broken by provider_document_id for
+        determinism (never file mtime or scan order)."""
+        eligible = [
+            h for h in handles if h.published_date and h.published_date <= as_of_date
+        ]
+        if not eligible:
+            return None
+        return max(
+            eligible,
+            key=lambda h: (
+                h.published_date,
+                h.provider_document_id or "",
+                h.source_id,
+            ),
         )
 
     @staticmethod
