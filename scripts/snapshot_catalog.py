@@ -85,7 +85,9 @@ def _status_distributions(con: sqlite3.Connection) -> dict[str, dict[str, int]]:
 
 
 def _samples(con: sqlite3.Connection, max_samples: int) -> list[dict[str, Any]]:
-    """De-path'd sample rows: keep shape/status facts, drop any path."""
+    """De-path'd sample rows: keep shape/status facts, drop any path.
+    The cap is pushed into SQL (LIMIT) so the production 49 GB catalog is
+    never fully materialized in Python."""
     rows = con.execute(
         """
         SELECT d.document_id, d.document_kind, d.source_status,
@@ -94,25 +96,23 @@ def _samples(con: sqlite3.Connection, max_samples: int) -> list[dict[str, Any]]:
         FROM documents d
         LEFT JOIN locations l ON l.document_id = d.document_id
         ORDER BY d.document_id, l.location_id
-        """
+        LIMIT ?
+        """,
+        (max_samples,),
     ).fetchall()
-    out: list[dict[str, Any]] = []
-    for row in rows:
-        if len(out) >= max_samples:
-            break
-        out.append(
-            {
-                "document_id": row[0],
-                "document_kind": row[1],
-                "source_status": row[2],
-                "source_type": row[3],
-                "published_date": row[4],
-                "location_role": row[5],
-                "location_status": row[6],
-                "root_id": row[7],
-            }
-        )
-    return out
+    return [
+        {
+            "document_id": row[0],
+            "document_kind": row[1],
+            "source_status": row[2],
+            "source_type": row[3],
+            "published_date": row[4],
+            "location_role": row[5],
+            "location_status": row[6],
+            "root_id": row[7],
+        }
+        for row in rows
+    ]
 
 
 def snapshot(catalog: Path, max_samples: int) -> dict[str, Any]:
