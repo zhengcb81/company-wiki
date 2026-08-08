@@ -12,8 +12,6 @@ import sys
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
-import pytest
-
 
 ROOT = Path(__file__).resolve().parents[2]
 GATE = ROOT / "tools" / "check_unique_test_symbols.py"
