@@ -369,3 +369,44 @@ def test_e2e_f01_html_disguised_as_pdf_is_quarantined(tmp_path):
         assert "PDF magic" in str(exc), exc
     else:
         assert result.status is not AcquisitionStatus.STAGED, result
+
+
+def test_e2e_f02_same_accession_second_request_reuses(tmp_path):
+    """E2E-F02: two sequential ensure() calls for the same accession — the
+    first downloads once (IMPORTED), the second reuses the catalog entry
+    (fetch=0). Sequential dedup under the single-threaded architecture."""
+    from company_wiki.source_catalog import (
+        AcquisitionCoordinator,
+        AcquisitionJournal,
+        AdapterRegistry,
+        CanonicalSourceWriter,
+        SourceAcquisitionService,
+        SourceRequest,
+    )
+
+    catalog = _catalog(tmp_path, with_source=False)
+    adapter = _FakeAdapter()
+    staging_root = tmp_path / "staging"
+    coordinator = AcquisitionCoordinator(
+        catalog=catalog,
+        adapters=AdapterRegistry(cn=_ExplodingAdapter(), hk=adapter, us=_ExplodingAdapter()),
+        staging_root=staging_root,
+    )
+    journal_dir = tmp_path / "journal"
+    journal_dir.mkdir(parents=True, exist_ok=True)
+    service = SourceAcquisitionService(
+        coordinator=coordinator,
+        journal=AcquisitionJournal(journal_dir),
+        writer=CanonicalSourceWriter(catalog, staging_root=staging_root),
+    )
+    request = SourceRequest(
+        entity="ACME", market="HK", document_kind="annual_report",
+        fiscal_year=2025, as_of_date="2026-07-18", allow_download=True,
+    )
+    first = service.ensure(request)
+    assert first.status.value in {"imported", "deduplicated"}, first
+    assert adapter.fetch_calls == 1
+    # second ensure: same accession — the canonical file is now reusable
+    second = service.ensure(request)
+    assert second.status.value in {"reused", "deduplicated", "imported"}, second
+    assert adapter.fetch_calls == 1, "second request must not fetch again"
