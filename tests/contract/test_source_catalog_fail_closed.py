@@ -160,6 +160,38 @@ def test_rejections_path_not_reused(tmp_path):
     assert result.matches == ()
 
 
+def test_resolver_rejects_leaked_active_rejections_path(tmp_path, monkeypatch):
+    """Directly drive the resolver's .rejections path filter: even when the
+    document row is active AND the query layer leaks it, a canonical
+    location under .rejections must be refused with reason code
+    'rejections_path'. (The query layer normally intercepts first — this
+    test proves the resolver filter is load-bearing, not dead code.)"""
+    from company_wiki.source_catalog import ResolutionStatus, SourceResolver
+
+    catalog = _catalog(tmp_path, "active", rejections_path=True)
+    # scanner marks .rejections docs upstream_rejected; force back to active
+    # to construct the leak scenario.
+    import sqlite3
+
+    con = sqlite3.connect(f"file:{catalog.config.database_path}?mode=rw", uri=True)
+    con.execute("UPDATE documents SET source_status='active'")
+    con.commit()
+    con.close()
+
+    real_query = catalog.query
+    monkeypatch.setattr(
+        catalog,
+        "query",
+        lambda **kwargs: real_query(source_status="active", **kwargs),
+    )
+    result = SourceResolver(catalog).resolve(_request())
+    assert result.status is not ResolutionStatus.REUSED_EXACT, result.debug_trace
+    assert result.matches == ()
+    assert any("rejections_path" in item for item in result.debug_trace), (
+        result.debug_trace
+    )
+
+
 def test_resolver_defense_in_depth_rejects_leaked_document(tmp_path, monkeypatch):
     """Even if the query layer regresses and leaks a quarantined document,
     the resolver must refuse it with a stable reason code."""
