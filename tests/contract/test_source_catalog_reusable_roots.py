@@ -10,8 +10,6 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-import pytest
-
 
 def _dayu_catalog(tmp_path: Path, reusable_kinds: tuple[str, ...]):
     from company_wiki.source_catalog import CatalogConfig, RootSpec, SourceCatalog

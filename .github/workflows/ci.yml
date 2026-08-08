@@ -26,6 +26,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install -r requirements-test.txt
+          pip install ruff
+
+      - name: Ruff lint (WU-1.2)
+        run: ruff check src tests/unit tests/contract scripts
 
       - name: Unit tests
         run: python -m pytest tests/unit -q --tb=short
