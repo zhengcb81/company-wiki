@@ -355,6 +355,57 @@ class SourceCatalog:
         )
         return [str(row[3]) for row in rows]
 
+    def query_source_bundle(
+        self,
+        *,
+        document_id: str,
+        registry: dict[str, set[str]],
+        allowed_roots: tuple[Path, ...],
+        now: str,
+    ) -> dict[str, Any] | None:
+        """WU-5.3: one query returns the source document + verified artifacts
+        as a SourceBundle (None when the document is unknown)."""
+        row = self.store.fetchone(
+            "SELECT * FROM documents WHERE document_id = ?", (document_id,)
+        )
+        if row is None:
+            return None
+        document = dict(row)
+        source = dict(
+            document_id=document["document_id"],
+            primary_source_id=document["primary_source_id"] or "",
+            source_sha256="",
+            as_of_date=document["published_date"] or "",
+        )
+        if document.get("primary_source_id"):
+            src = self.store.fetchone(
+                "SELECT content_sha256 FROM sources WHERE source_id = ?",
+                (document["primary_source_id"],),
+            )
+            if src is not None:
+                source["source_sha256"] = src["content_sha256"]
+        artifacts = [
+            dict(artifact)
+            for artifact in self.store.fetchall(
+                """SELECT artifact_id,artifact_role,source_id,path,content_sha256,
+                          byte_size,mime_type,generator_name,generator_version,status,
+                          error,schema_version,source_sha256,created_at
+                   FROM artifacts WHERE document_id = ?
+                   ORDER BY artifact_role,created_at,artifact_id""",
+                (document_id,),
+            )
+        ]
+        from .source_bundle import build_source_bundle
+
+        bundle = build_source_bundle(
+            source=source,
+            artifacts=artifacts,
+            registry=registry,
+            allowed_roots=allowed_roots,
+            now=now,
+        )
+        return bundle.to_dict()
+
     def query(
         self,
         *,
@@ -384,7 +435,8 @@ class SourceCatalog:
         )
         artifact_rows = self.store.fetchall(
             """SELECT document_id,artifact_role,path,status,content_sha256,byte_size,generator_name,
-            generator_version,error FROM artifacts ORDER BY document_id,artifact_role,created_at"""
+            generator_version,error,source_id,schema_version,source_sha256,created_at
+            FROM artifacts ORDER BY document_id,artifact_role,created_at"""
         )
         source_rows = self.store.fetchall(
             "SELECT source_id,content_sha256,byte_size FROM sources"

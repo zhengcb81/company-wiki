@@ -933,6 +933,16 @@ class CatalogStore:
         }
         if "text_fingerprint" not in columns:
             connection.execute("ALTER TABLE documents ADD COLUMN text_fingerprint TEXT")
+        # WU-5.3: artifacts gain the WU-5.1 validator's binding columns so the
+        # fail-closed gates (schema_version, source_sha256) apply to real rows.
+        artifact_columns = {
+            row["name"]
+            for row in connection.execute("PRAGMA table_info(artifacts)")
+        }
+        if "schema_version" not in artifact_columns:
+            connection.execute("ALTER TABLE artifacts ADD COLUMN schema_version TEXT")
+        if "source_sha256" not in artifact_columns:
+            connection.execute("ALTER TABLE artifacts ADD COLUMN source_sha256 TEXT")
         tables = {
             row["name"]
             for row in connection.execute(
