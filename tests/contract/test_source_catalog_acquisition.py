@@ -300,3 +300,72 @@ def test_market_router_is_explicit_and_rejects_unknown_market():
     assert registry.for_market("US") is us
     with pytest.raises(MarketRoutingError, match="unsupported market"):
         registry.for_market("GB")
+
+
+def test_e2e_f01_html_disguised_as_pdf_is_quarantined(tmp_path):
+    """E2E-F01: an adapter returning HTML bytes claimed as a PDF must be
+    rejected (no PDF magic) — never a capture-ready handle."""
+    import hashlib
+
+    from company_wiki.source_catalog import (
+        AcquisitionCoordinator,
+        AcquisitionError,
+        AcquisitionStatus,
+        AdapterRegistry,
+        DownloadCandidate,
+        DownloadReceipt,
+        SourceRequest,
+    )
+
+    class _HtmlAdapter:
+        name = "fake_html"
+        version = "1.0.0"
+
+        def discover(self, request):
+            return (
+                DownloadCandidate(
+                    candidate_id="c-1", provider="sec",
+                    provider_document_id="acc-1", market="US",
+                    entity=request.entity, title="ACME annual",
+                    source_url="https://www.sec.gov/x.pdf",
+                    document_kind="annual_report", filing_date="2026-04-15",
+                    fiscal_year=2025,
+                ),
+            )
+
+        def fetch(self, candidate, staging_dir):
+            path = staging_dir / "x.pdf"
+            payload = b"<html><body>not a pdf</body></html>"
+            path.write_bytes(payload)
+            return DownloadReceipt(
+                candidate_id=candidate.candidate_id,
+                provider=candidate.provider,
+                provider_document_id=candidate.provider_document_id,
+                source_url=candidate.source_url,
+                staged_path=str(path),
+                content_sha256=hashlib.sha256(payload).hexdigest(),
+                byte_size=len(payload),
+                mime_type="application/pdf",  # claims PDF but bytes are HTML
+                retrieved_at="2026-08-08T12:00:00Z",
+                http_status=200,
+                adapter_name=self.name,
+                adapter_version=self.version,
+            )
+
+    catalog = _catalog(tmp_path, with_source=False)
+    coordinator = AcquisitionCoordinator(
+        catalog=catalog,
+        adapters=AdapterRegistry(cn=_HtmlAdapter(), hk=_HtmlAdapter(), us=_HtmlAdapter()),
+        staging_root=tmp_path / "staging",
+    )
+    request = SourceRequest(
+        entity="ACME", market="US", security_id="ACME",
+        document_kind="annual_report", as_of_date="2026-07-31",
+        allow_download=True,
+    )
+    try:
+        result = coordinator.resolve_or_stage(request)
+    except AcquisitionError as exc:
+        assert "PDF magic" in str(exc), exc
+    else:
+        assert result.status is not AcquisitionStatus.STAGED, result
