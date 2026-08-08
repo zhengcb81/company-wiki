@@ -11,7 +11,7 @@ from pathlib import Path
 import re
 from typing import Any, Protocol, runtime_checkable
 
-from .gap_plan import GapPlan
+from .gap_plan import GapPlan, build_gap_plan
 from .resolver import (
     ResolutionResult,
     ResolutionStatus,
@@ -330,9 +330,13 @@ class AcquisitionCoordinator:
                 resolution=resolution,
                 reason="identity_conflict_no_download",
             )
+        if request.mode == "latest_as_of":
+            # WU-4.2/4.3: latest_as_of ALWAYS returns the metadata-only gap
+            # plan first — even when download is allowed, fetching must be
+            # plan-driven and authorization-bound (WU-4.3). Nothing is
+            # downloaded here.
+            return self._gap_plan_result(request, resolution)
         if not request.allow_download:
-            if request.mode == "latest_as_of":
-                return self._gap_plan_result(request, resolution)
             return AcquisitionResult(
                 schema_version=ACQUISITION_SCHEMA_VERSION,
                 status=AcquisitionStatus.MISSING,
@@ -425,8 +429,6 @@ class AcquisitionCoordinator:
         except Exception as exc:  # offline / rate-limit / adapter failure
             provider_error = f"{type(exc).__name__}: {exc}"
             discovered = ()
-        from .gap_plan import build_gap_plan
-
         plan = build_gap_plan(
             request_id=request.request_id,
             as_of_date=request.as_of_date,

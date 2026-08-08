@@ -29,6 +29,7 @@ class SourceEnsureStatus(str, Enum):
     DEDUPLICATED = "deduplicated"
     MISSING = "missing"
     AMBIGUOUS = "ambiguous"
+    GAP = "gap"  # WU-4.2: metadata-only plan returned, nothing downloaded
 
 
 @dataclass(frozen=True)
@@ -128,6 +129,26 @@ class SourceAcquisitionService:
             return SourceEnsureResult(
                 schema_version=SOURCE_ENSURE_SCHEMA_VERSION,
                 status=SourceEnsureStatus.AMBIGUOUS,
+                acquisition=acquisition,
+                resolution=acquisition.resolution,
+                attempt=attempt,
+            )
+        if acquisition.status is AcquisitionStatus.GAP:
+            # WU-4.2: metadata-only plan surfaced to the caller; nothing was
+            # downloaded and nothing was written. The plan hash is the basis
+            # for any later authorized fetch (WU-4.3).
+            plan = acquisition.gap_plan
+            attempt = self.journal.record(
+                outcome=(
+                    "gap_plan_provider_unavailable"
+                    if plan is not None and plan.provider_unavailable
+                    else "gap_plan"
+                ),
+                **common,
+            )
+            return SourceEnsureResult(
+                schema_version=SOURCE_ENSURE_SCHEMA_VERSION,
+                status=SourceEnsureStatus.GAP,
                 acquisition=acquisition,
                 resolution=acquisition.resolution,
                 attempt=attempt,

@@ -163,6 +163,156 @@ def test_gap_hash_deterministic(tmp_path):
     assert len(plan1.gap_hash) == 64
 
 
+def test_gap_hash_order_independent_same_period_multi_accession(tmp_path):
+    """Reviewer finding: two local handles sharing a period with different
+    accessions must hash identically regardless of input order."""
+    a = _Local(2025, "2026-04-15", accession="acc-old")
+    b = _Local(2025, "2026-04-15", accession="acc-new")
+    remote = [_Remote(2025, "2026-04-15", "acc-new")]
+    p1 = _plan([a, b], remote)
+    p2 = _plan([b, a], remote)
+    assert p1.gap_hash == p2.gap_hash
+
+
+def test_latest_as_of_with_allow_download_still_returns_gap(tmp_path):
+    """Reviewer finding: latest_as_of + allow_download=True must NOT bypass
+    the plan — metadata-only first, nothing fetched."""
+    import hashlib
+    import json
+    import sqlite3
+
+    from company_wiki.source_catalog import (
+        AcquisitionCoordinator,
+        AcquisitionStatus,
+        AdapterRegistry,
+        CatalogConfig,
+        DownloadCandidate,
+        RootSpec,
+        SourceCatalog,
+        SourceRequest,
+    )
+
+    project = tmp_path / "project"
+    companies = project / "companies"
+    (companies / "ACME" / "raw").mkdir(parents=True)
+    catalog = SourceCatalog(
+        CatalogConfig(
+            project_root=project,
+            catalog_dir=project / ".source_catalog",
+            roots=(RootSpec("company_raw", companies, "company_raw", priority=10),),
+            reusable_root_kinds=("company_raw",),
+        )
+    )
+    catalog.store.status()
+    con = sqlite3.connect(catalog.config.database_path)
+    con.executescript(
+        """
+        CREATE TABLE IF NOT EXISTS sources (
+            source_id TEXT PRIMARY KEY, content_sha256 TEXT NOT NULL UNIQUE,
+            byte_size INTEGER NOT NULL, mime_type TEXT NOT NULL, first_seen_at TEXT NOT NULL
+        );
+        CREATE TABLE IF NOT EXISTS documents (
+            document_id TEXT PRIMARY KEY, primary_source_id TEXT, title TEXT,
+            source_type TEXT, document_kind TEXT, published_date TEXT,
+            source_status TEXT NOT NULL, metadata_priority INTEGER NOT NULL,
+            metadata_json TEXT NOT NULL, text_fingerprint TEXT,
+            first_seen_at TEXT NOT NULL, last_seen_at TEXT NOT NULL
+        );
+        CREATE TABLE IF NOT EXISTS entities (
+            entity_id TEXT PRIMARY KEY, name TEXT NOT NULL, entity_kind TEXT NOT NULL
+        );
+        CREATE TABLE IF NOT EXISTS document_entities (
+            document_id TEXT NOT NULL, entity_id TEXT NOT NULL,
+            confidence REAL NOT NULL, method TEXT NOT NULL,
+            PRIMARY KEY(document_id, entity_id)
+        );
+        CREATE TABLE IF NOT EXISTS locations (
+            location_id TEXT PRIMARY KEY, root_id TEXT NOT NULL,
+            relative_path TEXT NOT NULL, absolute_path TEXT NOT NULL,
+            source_id TEXT, document_id TEXT, role TEXT NOT NULL,
+            location_status TEXT NOT NULL, observed_size INTEGER,
+            observed_mtime_ns INTEGER, last_seen_run TEXT NOT NULL,
+            manifest_json TEXT, metadata_json TEXT NOT NULL, error TEXT
+        );
+        CREATE TABLE IF NOT EXISTS roots (
+            root_id TEXT PRIMARY KEY, path TEXT NOT NULL, kind TEXT NOT NULL,
+            priority INTEGER NOT NULL, last_scan_run TEXT, last_scanned_at TEXT
+        );
+        """
+    )
+    con.execute(
+        "INSERT INTO roots VALUES ('company_raw', ?, 'company_raw', 10, NULL, NULL)",
+        (str(companies),),
+    )
+    con.execute("INSERT INTO entities VALUES ('ticker:ACME', 'ACME', 'ticker')")
+    did, sid = "doc-0", "src-0"
+    body = b"%PDF-2024"
+    f = companies / "ACME" / "0.pdf"
+    f.write_bytes(body)
+    sha = hashlib.sha256(body).hexdigest()
+    meta = json.dumps(
+        {"acquisition": {"fiscal_year": 2024, "market": "US", "security_id": "ACME",
+         "form_type": "10-K", "source_url": "https://x/0.pdf",
+         "retrieved_at": "2025-05-01T10:00:00Z", "collector_name": "t",
+         "collector_version": "1.0.0"}}
+    )
+    manifest = json.dumps(
+        {"content_sha256": sha, "retrieved_at": "2025-05-01T10:00:00Z",
+         "collector_name": "t", "collector_version": "1.0.0",
+         "mime_type": "application/pdf", "byte_size": len(body)}
+    )
+    con.execute("INSERT INTO sources VALUES (?,?,?,?,?)", (sid, sha, len(body), "application/pdf", "2025-01-01"))
+    con.execute(
+        "INSERT INTO documents VALUES (?,?,?,?,?,?,?,?,?,?,?,?)",
+        (did, sid, "ACME 2024 annual", "filing", "annual_report", "2025-04-15",
+         "active", 1, meta, None, "2025-01-01", "2026-08-08"),
+    )
+    con.execute("INSERT INTO document_entities VALUES (?,?,?,?)", (did, "ticker:ACME", 1.0, "path_ticker"))
+    con.execute(
+        "INSERT INTO locations VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+        ("loc-0", "company_raw", "ACME/0.pdf", str(f), sid, did,
+         "original_primary", "active", len(body), 1, "scan-x", manifest, "{}", None),
+    )
+    con.commit()
+    con.close()
+
+    fetch_calls = {"n": 0}
+
+    class FakeAdapter:
+        name = "fake"
+        version = "1.0.0"
+
+        def discover(self, request):
+            return (DownloadCandidate(
+                candidate_id="c-2025", provider="sec",
+                provider_document_id="acc-2025", market="US", entity="ACME",
+                title="ACME 2025 annual",
+                source_url="https://www.sec.gov/x/2025.pdf",
+                document_kind="annual_report", filing_date="2026-04-15",
+                fiscal_year=2025,
+            ),)
+
+        def fetch(self, candidate, staging_dir):
+            fetch_calls["n"] += 1
+            raise AssertionError("fetch must not be called")
+
+    coordinator = AcquisitionCoordinator(
+        catalog=catalog,
+        adapters=AdapterRegistry(cn=FakeAdapter(), hk=FakeAdapter(), us=FakeAdapter()),
+        staging_root=tmp_path / "staging",
+    )
+    request = SourceRequest(
+        entity="ACME", market="US", security_id="ACME",
+        document_kind="annual_report", mode="latest_as_of",
+        as_of_date="2026-07-31", allow_download=True,
+    )
+    result = coordinator.resolve_or_stage(request)
+    assert result.status is AcquisitionStatus.GAP, result
+    assert result.gap_plan is not None
+    assert fetch_calls["n"] == 0
+    assert not (tmp_path / "staging").exists()
+
+
 def test_coordinator_latest_as_of_returns_gap_without_fetch(tmp_path):
     """End-to-end: latest_as_of + no allow_download → GAP status, discover=1,
     fetch=0, no files written to staging."""

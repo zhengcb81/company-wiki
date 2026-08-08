@@ -207,7 +207,13 @@ def _hash_gap(
     digest = hashlib.sha256()
     digest.update(request_id.encode())
     digest.update(as_of_date.encode())
-    for handle in sorted(reuse, key=lambda h: str(getattr(h, "fiscal_year", ""))):
+    for handle in sorted(
+        reuse,
+        key=lambda h: (
+            str(getattr(h, "fiscal_year", "")),
+            str(getattr(h, "provider_document_id", "")),
+        ),
+    ):
         digest.update(str(getattr(handle, "fiscal_year", "")).encode())
         digest.update(str(getattr(handle, "provider_document_id", "")).encode())
     for candidate in sorted(
