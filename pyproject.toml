@@ -67,7 +67,6 @@ include = ["company_wiki*"]
 
 [tool.ruff.lint.per-file-ignores]
 "scripts/*.py" = ["E402", "E741", "F401"]
-"tests/contract/test_source_catalog_worker.py" = ["F811"]
 "tests/unit/test_hermetic_runtime.py" = ["E402"]
 "tests/unit/test_secret_audit.py" = ["E402"]
 "tests/unit/test_deletion_manifest.py" = ["E402"]

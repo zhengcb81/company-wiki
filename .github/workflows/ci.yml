@@ -33,6 +33,9 @@ jobs:
       - name: Contract tests
         run: python -m pytest tests/contract -q --tb=short
 
+      - name: Unique test symbols gate (WU-1.1)
+        run: python tools/check_unique_test_symbols.py
+
   cli-smoke:
     runs-on: ubuntu-latest
     steps:
