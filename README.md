@@ -306,8 +306,9 @@ python3 -m pytest tests/ -v
 # 运行单元测试
 python3 -m pytest tests/unit/ -v
 
-# 运行端到端测试
-python3 -m pytest tests/e2e/ -v
+# 运行端到端测试（注：tests/e2e/ 目前只有 config 加载冒烟测试；
+# 真实管线覆盖在 tests/integration/ — tests/test_full_pipeline.py 等）
+python3 -m pytest tests/e2e/ tests/integration/ -v
 ```
 
 ## 文档

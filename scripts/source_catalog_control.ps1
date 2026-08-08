@@ -710,6 +710,7 @@ while ($true) {
     Write-Host '  4. Stop this run (auto-start remains enabled)'
     Write-Host '  5. Start now (only when enabled)'
     Write-Host '  6. Browse exact duplicates / recycle selected copies'
+    Write-Host '  7. Config health check (R4.1 config_doctor)'
     Write-Host '  0. Exit'
     try {
         $Choice = Read-ControlChoiceWithLiveProgress
@@ -729,6 +730,11 @@ while ($true) {
             '4' { Invoke-ControlAction -SelectedAction 'stop' }
             '5' { Invoke-ControlAction -SelectedAction 'start' }
             '6' { Show-DuplicateCenter }
+            '7' {
+                Write-Host 'Running config_doctor (R4.1)...' -ForegroundColor Cyan
+                & python (Join-Path $PSScriptRoot 'config_doctor.py')
+                Read-Host 'Press Enter to continue' | Out-Null
+            }
             '0' {
                 Write-ControlDiagnostic -Message 'Control center exited by user.'
                 exit 0

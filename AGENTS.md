@@ -26,6 +26,14 @@ StockWiki 独占投资研究语义和下游状态。company-wiki 不得生成或
 - 人工可审核来源身份与解析质量，投资研究审核由 StockWiki 完成；
 - Markdown Wiki 属 legacy 兼容层，不得成为第二套 authoritative research state。
 
+## 配置卫生（R4.1/N-05）
+
+- `config/source_catalog.yaml` 是生产配置：测试与调试**必须**使用 tmp 夹具，
+  不得写穿生产文件；会话结束前 `git status` 必须能解释每个未提交的 config 变更，
+  无法解释即事故，立即恢复并记录。
+- 怀疑配置损坏时先跑 `python scripts/config_doctor.py`（exit≠0 即有问题）；
+  控制面板菜单 7 也提供该体检。
+
 ## 目录规范
 
 - `companies/{公司名}/` — 公司所有原始文档（新闻 .md、财报/研报 .pdf 直接存放）
