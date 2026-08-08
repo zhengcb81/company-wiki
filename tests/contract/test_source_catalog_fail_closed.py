@@ -178,12 +178,15 @@ def test_resolver_rejects_leaked_active_rejections_path(tmp_path, monkeypatch):
     con.commit()
     con.close()
 
-    real_query = catalog.query
-    monkeypatch.setattr(
-        catalog,
-        "query",
-        lambda **kwargs: real_query(source_status="active", **kwargs),
-    )
+    real_qfc = catalog.query_filing_candidates
+
+    def leaked(**kwargs):
+        # bypass the active-status allowlist to simulate a query-layer leak
+        kwargs.pop("source_statuses", None)
+        kwargs["source_statuses"] = ("active", "quarantined", "upstream_rejected")
+        return real_qfc(**kwargs)
+
+    monkeypatch.setattr(catalog, "query_filing_candidates", leaked)
     result = SourceResolver(catalog).resolve(_request())
     assert result.status is not ResolutionStatus.REUSED_EXACT, result.debug_trace
     assert result.matches == ()
@@ -207,12 +210,15 @@ def test_resolver_defense_in_depth_rejects_leaked_document(tmp_path, monkeypatch
     con.commit()
     con.close()
 
-    real_query = catalog.query
-    monkeypatch.setattr(
-        catalog,
-        "query",
-        lambda **kwargs: real_query(source_status="quarantined", **kwargs),
-    )
+    real_qfc = catalog.query_filing_candidates
+
+    def leaked(**kwargs):
+        # bypass the active-status allowlist to simulate a query-layer leak
+        kwargs.pop("source_statuses", None)
+        kwargs["source_statuses"] = ("active", "quarantined")
+        return real_qfc(**kwargs)
+
+    monkeypatch.setattr(catalog, "query_filing_candidates", leaked)
     result = SourceResolver(catalog).resolve(_request())
     assert result.status is not ResolutionStatus.REUSED_EXACT
     assert result.matches == ()

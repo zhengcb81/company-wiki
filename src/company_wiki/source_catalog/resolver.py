@@ -421,11 +421,22 @@ class SourceResolver:
         # reusable-root check, form/date) are the source of truth, and a
         # contradictory-identity document must surface as IDENTITY_CONFLICT
         # even when its root is not reusable (fail-closed, Phase 15.3).
+        # Two-tier lookup so a 100-cap cannot shadow an older-period request:
+        # first a period-targeted slice (when fiscal_year is specified), then
+        # the general slice.  The period filter is advisory (SQL can only see
+        # metadata_json); the Python _fiscal_year gate stays authoritative.
         candidates = self.catalog.query_filing_candidates(
             document_kind=request.document_kind,
             source_statuses=("active",),
+            fiscal_year=request.fiscal_year,
             limit=100,
         )
+        if not candidates:
+            candidates = self.catalog.query_filing_candidates(
+                document_kind=request.document_kind,
+                source_statuses=("active",),
+                limit=100,
+            )
         for document in candidates:
             if not self._entity_matches(request.entity, document):
                 entity_gate_rejected += 1

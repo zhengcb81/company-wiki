@@ -183,6 +183,7 @@ class SourceCatalog:
         document_kind: str,
         source_statuses: tuple[str, ...],
         root_ids: tuple[str, ...] | None = None,
+        fiscal_year: int | None = None,
         limit: int = 100,
     ) -> list[dict[str, Any]]:
         """WU-3.2: SQL-pushdown filing-candidate lookup (F-021/F-026).
@@ -220,6 +221,19 @@ class SourceCatalog:
             else ""
         )
         entity_params = (entity,) if entity else ()
+        # fiscal_year lives inside metadata_json (no dedicated column); an
+        # advisory json_extract filter narrows the slice so a 100-cap cannot
+        # shadow an older-period request. The resolver's Python _fiscal_year
+        # gate remains authoritative.
+        fiscal_clause = (
+            "AND (json_extract(d.metadata_json, '$.acquisition.fiscal_year') = ?"
+            " OR json_extract(d.metadata_json, '$.dayu_meta.fiscal_year') = ?)"
+            if fiscal_year is not None
+            else ""
+        )
+        fiscal_params: tuple[int, ...] = (
+            (fiscal_year, fiscal_year) if fiscal_year is not None else ()
+        )
         entity_rows = self.store.fetchall(
             f"""SELECT d.document_id, d.primary_source_id, d.title, d.source_type,
                        d.document_kind, d.published_date, d.source_status,
@@ -231,6 +245,7 @@ class SourceCatalog:
                   AND d.source_status IN ({placeholders})
                   {entity_clause}
                   {root_clause}
+                  {fiscal_clause}
                 ORDER BY d.published_date DESC, d.title, d.document_id
                 LIMIT ?
                 """,
@@ -239,41 +254,40 @@ class SourceCatalog:
                 *source_statuses,
                 *entity_params,
                 *root_params,
+                *fiscal_params,
                 limit,
             ),
         )
         if not entity_rows:
             return []
         ids = [row["document_id"] for row in entity_rows]
+        id_placeholders = ", ".join("?" for _ in ids)
+        # WU-3.2 reviewer: batch entities/locations in 2 queries instead of
+        # N+1 per-document lookups (100-doc cap previously meant 200 queries).
         entities: dict[str, list[dict[str, Any]]] = {}
+        for row in self.store.fetchall(
+            f"""SELECT de.document_id, e.entity_id, e.name, e.entity_kind,
+                       de.confidence, de.method
+                FROM document_entities de
+                JOIN entities e ON e.entity_id = de.entity_id
+                WHERE de.document_id IN ({id_placeholders})
+                ORDER BY de.document_id, e.entity_id""",
+            tuple(ids),
+        ):
+            entities.setdefault(row["document_id"], []).append(dict(row))
         locations: dict[str, list[dict[str, Any]]] = {}
-        for doc_id in ids:
-            entities[doc_id] = [
-                dict(row)
-                for row in self.store.fetchall(
-                    """SELECT de.document_id, e.entity_id, e.name, e.entity_kind,
-                              de.confidence, de.method
-                       FROM document_entities de
-                       JOIN entities e ON e.entity_id = de.entity_id
-                       WHERE de.document_id = ?
-                       ORDER BY e.entity_id""",
-                    (doc_id,),
-                )
-            ]
-            locations[doc_id] = [
-                dict(row)
-                for row in self.store.fetchall(
-                    """SELECT l.location_id, l.document_id, l.root_id, l.relative_path,
-                              l.absolute_path, l.source_id, l.role, l.location_status,
-                              l.observed_size, l.observed_mtime_ns, l.error,
-                              l.manifest_json, l.metadata_json, r.priority AS root_priority
-                       FROM locations l
-                       JOIN roots r ON r.root_id = l.root_id
-                       WHERE l.document_id = ?
-                       ORDER BY r.priority, l.root_id, l.relative_path""",
-                    (doc_id,),
-                )
-            ]
+        for row in self.store.fetchall(
+            f"""SELECT l.location_id, l.document_id, l.root_id, l.relative_path,
+                       l.absolute_path, l.source_id, l.role, l.location_status,
+                       l.observed_size, l.observed_mtime_ns, l.error,
+                       l.manifest_json, l.metadata_json, r.priority AS root_priority
+                FROM locations l
+                JOIN roots r ON r.root_id = l.root_id
+                WHERE l.document_id IN ({id_placeholders})
+                ORDER BY l.document_id, r.priority, l.root_id, l.relative_path""",
+            tuple(ids),
+        ):
+            locations.setdefault(row["document_id"], []).append(dict(row))
         results: list[dict[str, Any]] = []
         for row in entity_rows:
             document_id = row["document_id"]

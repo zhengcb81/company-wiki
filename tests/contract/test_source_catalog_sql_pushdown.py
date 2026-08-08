@@ -242,18 +242,41 @@ def test_explain_query_plan_hits_dedicated_indexes(tmp_path):
 
 
 def test_100k_candidate_lookup_within_slo(tmp_path):
-    """Warm 100k-document lookup must complete quickly (CI SLO)."""
-    catalog = _seed_catalog(tmp_path, n_docs=100_000)
+    """Warm 100k-document lookup must meet the plan SLO: p95 ≤500ms and
+    RSS increment ≤100MB (WU-3.2 gate). Timing is sampled multiple times
+    and takes the p95; RSS is measured separately (tracemalloc skews timing)."""
+    import statistics
     import time
+    import tracemalloc
 
-    start = time.monotonic()
-    candidates = catalog.query_filing_candidates(
-        entity="ACME",
+    catalog = _seed_catalog(tmp_path, n_docs=100_000)
+    # warm the page cache / prepared statements; measure the resolver's
+    # actual path (kind/status slice — entity/root stay in Python).
+    catalog.query_filing_candidates(
         document_kind="annual_report",
         source_statuses=("active",),
-        root_ids=("company_raw",),
         limit=100,
     )
-    elapsed = time.monotonic() - start
+    samples: list[float] = []
+    for _ in range(5):
+        start = time.monotonic()
+        candidates = catalog.query_filing_candidates(
+            document_kind="annual_report",
+            source_statuses=("active",),
+            limit=100,
+        )
+        samples.append(time.monotonic() - start)
     assert candidates
-    assert elapsed < 2.0, f"100k lookup took {elapsed:.2f}s (SLO 2.0s)"
+    p95 = statistics.quantiles(samples, n=20)[18]
+    assert p95 < 0.5, (
+        f"100k lookup p95 {p95:.2f}s (SLO 500ms); samples={[round(s, 3) for s in samples]}"
+    )
+    tracemalloc.start()
+    catalog.query_filing_candidates(
+        document_kind="annual_report",
+        source_statuses=("active",),
+        limit=100,
+    )
+    _, peak = tracemalloc.get_traced_memory()
+    tracemalloc.stop()
+    assert peak < 100 * 1_000_000, f"RSS increment {peak / 1e6:.1f}MB (SLO 100MB)"
