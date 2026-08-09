@@ -25,6 +25,7 @@ CONTROL_TOOL_ALLOWLIST = frozenset(
         "deletion_manifest.py",
         "gate_runner.py",
         "gate_state.py",
+        "legacy_observer.py",
         "recovery_baseline.py",
         "reviewer_gate.py",
         "secret_audit.py",
