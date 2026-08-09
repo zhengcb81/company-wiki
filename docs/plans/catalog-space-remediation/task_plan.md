@@ -1,8 +1,19 @@
 ﻿# catalog.sqlite3 空间治本方案（任务计划）
 
-> 状态：**全部完成 ✅（Phase 1–6，2026-08-07；D1–D5 全部拍板并落地）** ｜ 创建：2026-08-06 ｜ 位置：docs/plans/catalog-space-remediation/
+> **2026-08-09 状态覆盖：`completed_historical_scope_with_transferred_monitoring`。** Phase 1–4 与 ADR/工具收尾有 progress/receipt 证据；正文相应空框是未回填的历史清单。Phase 5 因用户 D4“不迁 D:”取消；连续健康/SLO/容量观察转入 FCAP r2 FC-1302~1304/1504。本文件不再保留活动 pending 队列。
+>
+> 历史 scoped 状态：**Phase 1–4 与 Phase 6 文档/工具收尾完成；Phase 5 cancelled_by_D4；长期监控 transferred_to_FCAP-r2** ｜ 创建：2026-08-06
 > 目标：解决 `.source_catalog/catalog.sqlite3`（43.9GB、持续增长）的空间占用与数据一致性隐患，建立证据数据生命周期管理。
-> 本方案只做规划与只读测算，**不实施**；所有写操作均需用户逐项确认。
+> **原始立项边界（历史）：** 本方案初稿只做规划与只读测算，不直接授权实施；后续经用户逐项授权形成的实际结果以上方阶段处置清单和 `progress.md` 为准。
+
+## 2026-08-09 阶段处置清单
+
+- [x] Phase 1：状态一致性治理已完成并有对账/receipt 证据。
+- [x] Phase 2：证据归档与保留策略已完成；2.2 采用 ADR-009 的等价方案。
+- [x] Phase 3：证据粒度治理提案已交付，按原定“仅设计”范围完成。
+- [x] Phase 4：容量报告与监控工具已交付并在真实生产 catalog 上运行。
+- [x] Phase 5：因用户 D4 决策取消，不再作为未完成项；若未来容量/SLO 触发，重新立项。
+- [x] Phase 6：ADR/文档收尾完成；长期四周健康观察转入 FCAP r2 FC-1302~1304/1504。
 
 ## Goal
 
@@ -98,7 +109,7 @@
 - [ ] 现状 44 GB / 全量按现状粒度粗估 100 GB+ / 治理后目标值（Phase 3+4 组合测算）
 - [ ] 依据容量模型决定部署盘位（C: / D: / 外部盘），D: 现 71.8 GB 不足以容纳全量现状粒度
 
-## Phase 5：存储迁移与索引优化（工程准备，视 Phase 4 结论决定）— 状态：pending
+## Phase 5：存储迁移与索引优化 — 状态：cancelled_by_D4（用户决定不迁 D:；未来触发需重新立项）
 
 ### 5.1 catalog_dir 迁移（如需）
 - [ ] 停机窗口（worker 暂停）→ VACUUM INTO 备份 → 迁移 `.source_catalog` → 改 `config/source_catalog.yaml` 的 catalog_dir → 回滚方案
@@ -112,7 +123,7 @@
 - [ ] weekly 测量 page_count / freelist_count / span 增量 / DB 体积
 - [ ] 告警阈值：所在盘剩余 < 30 GB；spans 周增量超预期
 
-## Phase 6：验收与文档 — 状态：pending
+## Phase 6：验收与文档 — 状态：completed_historical_scope；长期四周健康观察 transferred_to_FCAP-r2
 
 ### 6.1 验收指标
 - [ ] audit vs status 对账 = 0；孤儿数据 = 0；FK check = 0

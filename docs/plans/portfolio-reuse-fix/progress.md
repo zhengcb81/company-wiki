@@ -1,5 +1,7 @@
 # 进度日志 — portfolio 复用修复
 
+> **2026-08-09 状态：`superseded_closed`。** 历史 Strategy A 记录保留；未完成/可选项不再继续，已由 Strategy B 与 FCAP r2 接管。
+
 ## 2026-08-03（Phase 1 Spike 执行 + Phase 2 内核原型）
 
 - **Phase 1 状态**：completed ✅（见 task_plan.md / findings.md 发现 8）。

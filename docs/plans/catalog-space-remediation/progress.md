@@ -1,5 +1,7 @@
 ﻿# 进度日志（catalog 空间治理）
 
+> **2026-08-09 状态：`completed_historical_scope_with_transferred_monitoring`。** Phase 1–4 与 ADR/工具收尾完成；Phase 5 因 D4 取消；长期健康/SLO/容量观察转 FCAP r2，不再从本日志维护旧 pending。
+
 ## 2026-08-06（规划日，未实施任何治理写操作）
 - 完成：G:/C: 空间排查，确认 G: 为 C: 镜像、云配额正常（发现 1–2）
 - 完成：opencode 快照成因调查（内部 git 仓库 + 中断残留，发现 3）

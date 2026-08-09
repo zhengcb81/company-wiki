@@ -1,5 +1,7 @@
 # Task Plan: 上市公司知识库系统改进
 
+> **2026-08-09 状态覆盖：`completed_historical_scope + superseded_for_six_goals`。** 本文件 272 个已勾任务保留为各自当时范围的完成记录，但不能证明当前三仓 data-lake 六目标全部达成。Dropbox 泛化、统一 resolver、latest、SourceBundle/artifact、动态审核和代码质量的唯一活动入口是 `C:/Users/郑曾波/Projects/revenue-forecast/audit_review/2026-08-09_full_completion_assurance_plan/task_plan.md`；本文件不再新增同类任务。
+
 ## Goal
 
 将知识库从"半自动研究助理"升级为"可自维持的研究助理"，并系统性修复架构债务。

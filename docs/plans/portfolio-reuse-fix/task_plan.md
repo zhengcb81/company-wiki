@@ -1,8 +1,15 @@
 # 修复计划 — dayu portfolio "已索引但不可被 filing-fetch 复用"
 
+> **2026-08-09 状态覆盖：`superseded_closed`。** Strategy A 的 Phase 0–6 历史实现/实验保留，但后续已回滚或由 Strategy B 取代。本文件所有未回填空框均不再是活动待办；Phase 7 不再 pending，已由 `portfolio-reuse-automatic` 的窄范围 Strategy B 和 FCAP r2 的通用多根方案取代。
+
 > **状态：✅ 整体完成（2026-08-03，commit 7ce2774）**。Phase 0–6 全部 completed，Phase 7（Strategy B）默认跳过。
 > 决策归档：`docs/adr/ADR-007-portfolio-promotion.md` + `docs/OPERATIONS.md §一点五`；最终结果见同目录 `progress.md`。
 > 本目录原地保留作历史参考，不再作为活动任务。
+
+## 2026-08-09 关闭处置
+
+- [x] Phase 0–6 作为 Strategy A 的历史实现/实验记录关闭；其结果后来已回滚或被替代，不代表当前生产能力。
+- [x] Phase 7 不再等待执行，已由后续 Strategy B 的窄范围实现及 FCAP r2 的通用多根方案取代。
 
 - **目标**：让 `filing-fetch`（及 revenue-forecast / invest-* / industry-research）能复用已在
   `dayu-agent/workspace/portfolio` 中、且已被 catalog 索引的财报，**不再重复下载**；同时不破坏
@@ -178,7 +185,7 @@ Strategy B（放宽 resolver + filing-fetch 契约做只读复用）记入 Phase
 
 ---
 
-## Phase 7 —（可选，默认不做）Strategy B 只读复用 — 状态：pending
+## Phase 7 —（历史可选项）Strategy B 只读复用 — 状态：superseded（由后续 Strategy B 计划与 FCAP r2 接管）
 
 > 仅当 Phase 1/2 证明磁盘拷贝成本不可接受时才启动。需跨 company-wiki + filing-fetch 两仓。
 

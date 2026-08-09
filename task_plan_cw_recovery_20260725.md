@@ -1,5 +1,7 @@
 # task_plan.md CW Recovery Draft (2026-07-25)
 
+> **2026-08-09 状态覆盖：`archived_reference`。** 这是恢复被覆盖文本的证据草稿，不是活动路线图。已恢复且仍有效的历史事实保留；文中 19 个未勾恢复/旧范围条目不进入当前 backlog，当前六目标统一由 FCAP r2 重新验证。
+
 > Source: local Codex session JSONL. Purpose: preserve overwritten uncommitted task_plan sections before merging back into `task_plan.md`.
 > Recovery confidence: BOUNDARY-0/CW-1~CW-4, CW-2.26, and CW-2.27 are extracted from session logs; CW-2.25 is evidence-based partial recovery because no full `## CW-2.25` section has been found yet.
 

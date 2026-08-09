@@ -1,5 +1,7 @@
 # 进度日志 — portfolio 复用自动化（系统化改进）
 
+> **2026-08-09 状态：`completed_historical_scope + superseded_for_generalization`。** dayu Strategy B 窄范围历史完成；未来 root/Dropbox/统一 resolver 只在 FCAP r2 更新。
+
 ## 2026-08-04（根因调查 + 方案制定，未开始实施）
 
 ### 完成

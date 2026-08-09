@@ -1,5 +1,7 @@
 # CW-2.24 验收复核计划（核实是否真的完成用户全部要求）
 
+> **2026-08-09 状态覆盖：`completed_audit_only`。** 下方真实代码/配置/生产数据/测试对照已经完成，Phase 2/3 的旧状态和复选框现已回填。该结论只证明 CW-2.24 当时的 R1/R2 窄范围，不证明最新 Dropbox、多根泛化、latest、artifact 和动态审核目标。
+
 > 目标：不信任 task_plan.md 的 `completed` 标注，直接核对真实代码/配置/测试，逐条对照用户的原始要求。
 > 用户原始要求（来自命令）：
 >   R1. 重复下载文件（如不同程序 dayu-agent 下载、文件名不同但内容相同）在**索引里标记**。
@@ -14,16 +16,16 @@
 - [x] 计划声称 status=completed，A1–A14 验收矩阵
 - [x] 关键声称：分类信任顺序重构、identity-aware resolver、下载抑制、sidecar 补全、Dayu 容错、三市场 preflight、revenue 端到端、StockInfo DNS 修复、40 新测试 + 618 contract
 
-## Phase 2（核对真实代码）— 状态：in_progress
-- [ ] R1 重复标记：scanner/duplicate 是否按 whole-file SHA 把"不同文件名同内容"归入同一组并标记？是否在索引/UI 可见？
-- [ ] R2.1 revenue-forecast 下载文档写入 company-wiki：`company_wiki_source.py` 是否写 `companies/{entity}/raw/{kind}`，遵守目录规范？
-- [ ] R2.2 复用抑制：resolver 命中已有 capture-ready → adapter 调用=0；是否有真实测试 + 生产证据？
-- [ ] R2.3 市场路由：A股→StockInfo adapter；HK/US→Dayu adapter；config/source_acquisition.yaml 是否定义此路由？
-- [ ] StockInfo adapter 是否可追踪交付（git tracked）还是 untracked？
-- [ ] 618 contract tests 是否真绿（实际跑一次）？
+## Phase 2（核对真实代码）— 状态：completed
+- [x] R1 重复标记：scanner/duplicate 是否按 whole-file SHA 把"不同文件名同内容"归入同一组并标记？是否在索引/UI 可见？
+- [x] R2.1 revenue-forecast 下载文档写入 company-wiki：`company_wiki_source.py` 是否写 `companies/{entity}/raw/{kind}`，遵守目录规范？
+- [x] R2.2 复用抑制：resolver 命中已有 capture-ready → adapter 调用=0；是否有真实测试 + 生产证据？
+- [x] R2.3 市场路由：A股→StockInfo adapter；HK/US→Dayu adapter；config/source_acquisition.yaml 是否定义此路由？
+- [x] StockInfo adapter 是否可追踪交付（git tracked）还是 untracked？
+- [x] 618 contract tests 是否真绿（实际跑一次）？
 
-## Phase 3（对照判定）
-- [ ] 逐条 R1/R2.1/R2.2/R2.3 给出：完成 / 部分 / 未完成 + 证据 + 缺口
+## Phase 3（对照判定）— 状态：completed
+- [x] 逐条 R1/R2.1/R2.2/R2.3 给出：完成 / 部分 / 未完成 + 证据 + 缺口
 
 ## Phase 2/3 核对结果（基于真实代码/配置/生产数据，非计划自述）
 
@@ -49,7 +51,6 @@ CW-2.24 **实质上正确完成了用户的全部核心要求**（R1 + R2.1/2.2/
 
 2. **人类可读的 `index.md` 没有重复标记**（仍停留在 2026-04-19）。重复标记存在于 catalog(SQLite)、`duplicates` CLI 和 `locations.csv` 导出中。若用户期望"index.md 里直接看到重复标记"，这是唯一未做的点——但它通常不是这套系统的"索引"所指。
 
-**可选后续（需用户决定，不在 CW-2.24 范围）：**
-- 把 duplicate 标记/计数同步进 `index.md` 的人类可读视图；
-- 规划 semantic/near-duplicate 检测（不同字节但同内容），需新增 normalized hash 或文本指纹方案。
-
+**可选后续的最新处置（不在 CW-2.24 范围）：**
+- `index.md` duplicate 人类可读视图：`deprioritized P3`，不阻塞六目标；如需实施必须独立立项。
+- semantic/near-duplicate：`deprioritized P2/P3`；不等同于 exact filing reuse，只有新增明确用户需求和安全场景后才立项。

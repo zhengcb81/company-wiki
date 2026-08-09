@@ -1,14 +1,31 @@
 # 改进计划 — portfolio 复用自动化（系统性修复，非手动驱动）
 
+> **2026-08-09 状态覆盖：`completed_historical_scope + superseded_for_generalization`。** Strategy B 在 dayu portfolio 的窄范围保持历史完成；正文 Phase 1–6 属于后来被取消并回滚的 Strategy A，不再代表 pending，也不得视为已实现。任意未来 root、Dropbox-only 和统一生产 resolver 的泛化目标转入 FCAP r2 FC-301~705。
+
 > **状态：✅ 整体完成（2026-08-06）**。方案已按用户决策定为 Strategy B（config-driven 只读复用，commit cb2305c）；
-> Strategy A（ensure 自动提升）实现后弃用并回滚，Phase 0–6 全部 completed。
+> Strategy A（ensure 自动提升）实现后弃用并回滚：其原 Phase 0–6 实施队列均未按该计划启动，统一标记 `cancelled_by_Strategy_B`。
 > 决策归档：`docs/adr/ADR-008-portfolio-auto-promotion.md` + `docs/OPERATIONS.md §一点五`；两项收尾候选
 > （存量重扫 re-enrich、读连接 busy_timeout 5000→30000）已完成，见 `progress.md`。
 > 本目录原地保留作历史参考，不再作为活动任务。
 
+## 2026-08-09 Strategy B 实际完成清单
+
+- [x] B1：以 `reusable_root_kinds` 配置开放 dayu portfolio 的只读复用。
+- [x] B2：补齐 dayu metadata enrichment 与 identity normalization。
+- [x] B3：filing-fetch 通过 `allowed_handle_roots` 接受合规的 dayu handle。
+- [x] 回滚 Strategy A 的自动提升 hook、flag 与相应测试；保留显式 promoter CLI 作为独立工具。
+- [x] 增加陈旧索引中文件不存在时的 fail-closed 防护。
+- [x] 完成真实 2020.HK FY2023 dayu-only、零下载、零提升 E2E。
+- [x] 完成 ADR-008、OPERATIONS 与 filing-fetch SKILL 文档收口。
+- [x] 补齐普通 rescan 可重新 enrichment 的实现与回归测试。
+- [x] 将只读连接 `busy_timeout` 从 5 秒收敛到 30 秒并补齐测试。
+- [x] 完成 406 项契约测试与 75 项聚焦验证；未来 root/Dropbox 泛化转入 FCAP r2，未宣称完成。
+
 创建：2026-08-04 · 关联：`findings.md`（三层根因）、`progress.md`（进度）
 前置：`../portfolio-reuse-fix/`（手动桥接，commit 7ce2774）——本计划将其**从手动升级为自动**，
 并补齐锁健壮性。
+
+> **历史正文警告：** 下方“目标、设计决策、Phase 0–6”保留的是被取消的 Strategy A 原始设计，只用于追溯，不得继续实施；当前有效成果只以上方 Strategy B 完成清单为准，未来泛化只从 FCAP r2 启动。
 
 ## 目标
 
@@ -43,7 +60,7 @@ document_kind 一般性生效，且锁健壮、不变量全保留。
    直接 ensure CLI 与手动 import-portfolio 用 Phase 2 的通用锁重试。
 7. **保留 import-portfolio CLI** 作为批处理/巡检工具（`--all`），但获取流程不再依赖它。
 
-## Phase 0 — 前置核查 — 状态：completed
+## Phase 0 — 前置核查 — 状态：cancelled_by_Strategy_B
 
 - [ ] 0.1 读 `acquisition_service.ensure()` 全流程：resolve MISSING 判定点、adapter 分发点、
       已有锁处理（是否已对 catalog_locked 重试）、`CanonicalImportResult` 各状态。
@@ -56,7 +73,7 @@ document_kind 一般性生效，且锁健壮、不变量全保留。
 - [ ] 0.5 核查 acquisition config 是否已有开关机制（`source_acquisition.yaml`），规划
       `auto_promote_portfolio: true` 开关的落点。
 
-## Phase 1 — 自动提升集成（核心） — 状态：completed
+## Phase 1 — 自动提升集成（核心） — 状态：cancelled_by_Strategy_B
 
 - [ ] 1.1 在 `acquisition_service.ensure()` 的 resolve-MISSING + allow_download 分支、
       adapter 分发**之前**插入 `_try_promote_portfolio(request, identity)`：
@@ -75,7 +92,7 @@ document_kind 一般性生效，且锁健壮、不变量全保留。
 **验证**：`ensure --allow-download`（filing-fetch 调用）对"portfolio 有、company_raw 无"的实体
 → 自动提升 → capture_ready、**零 adapter 调用**（spy 桩验证）；对"两者都无"→ 走 adapter（today）。
 
-## Phase 2 — 锁健壮性（一般性解决 R2） — 状态：completed
+## Phase 2 — 锁健壮性（一般性解决 R2） — 状态：cancelled_by_Strategy_B
 
 - [ ] 2.1 核查直接 ensure CLI 在锁竞争下的行为（是否已有 catalog_locked 重试）——
       若无，给 acquisition service 的 canonical_import 段加**指数退避重试**
@@ -89,7 +106,7 @@ document_kind 一般性生效，且锁健壮、不变量全保留。
 **验证**：worker 跑批时直接调 `ensure --allow-download` 与 `import-portfolio` → 退避后成功，
 不再 `CatalogOperationLockedError` 秒败。
 
-## Phase 3 — 语义与护栏 — 状态：completed
+## Phase 3 — 语义与护栏 — 状态：cancelled_by_Strategy_B
 
 - [ ] 3.1 只读 `resolve` 永不提升（resolver 过滤不动，fail-closed 语义不变）。
 - [ ] 3.2 仅显式 `--allow-download` 触发自动提升（未授权请求绝不写 companies/）。
@@ -101,7 +118,7 @@ document_kind 一般性生效，且锁健壮、不变量全保留。
 
 **验证**：上述每种情形一个用例通过；既有"仅 company_raw 可复用"护栏测试不被削弱。
 
-## Phase 4 — 测试 — 状态：completed
+## Phase 4 — 测试 — 状态：cancelled_by_Strategy_B
 
 - [ ] 4.1 `tests/contract/test_source_catalog_auto_promote.py`（新）：
       - 提升成功（spy adapter 零调用）；无匹配 → adapter 被调；匹配但提升失败 → 降级 adapter；
@@ -112,7 +129,7 @@ document_kind 一般性生效，且锁健壮、不变量全保留。
       既有测试全绿。
 - [ ] 4.4 filing-fetch 侧：契约测试零改动通过（filing-fetch 零改动原则）。
 
-## Phase 5 — 文档 — 状态：completed
+## Phase 5 — 文档 — 状态：cancelled_by_Strategy_B
 
 - [ ] 5.1 `docs/adr/ADR-008-portfolio-auto-promotion.md`（或更新 ADR-007）：记录自动提升决策、
       触发条件、降级语义、锁策略；注明 Strategy B（放宽 resolver）仍不采纳。
@@ -122,7 +139,7 @@ document_kind 一般性生效，且锁健壮、不变量全保留。
 - [ ] 5.4 本计划三件套更新（progress.md 记最终结果）。
 - [ ] 5.5 若用户希望：把本计划与 portfolio-reuse-fix 的关键内容合并进主目录三份文档。
 
-## Phase 6 — 端到端验证 — 状态：completed
+## Phase 6 — 端到端验证 — 状态：cancelled_by_Strategy_B
 
 - [ ] 6.1 挑一个"portfolio 有、company_raw 无"的实体（如金山云 FY2022 或新实体）：
       删/确认无 company_raw 副本 → filing-fetch `--allow-download` → **自动提升 + capture_ready +

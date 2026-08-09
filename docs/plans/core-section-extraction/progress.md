@@ -1,5 +1,7 @@
 # 进度日志 — 核心章节提取
 
+> **2026-08-09 状态：`completed_historical_scope / maintenance`。** 原计划已完成；仅 artifact source binding 与生产复用由 FCAP r2 FC-901~906 重新验收。
+
 ## 2026-08-06（方向澄清 + 调研 + spike + 计划批准）
 
 ### 路径演进（重要：从 backfill 转向章节提取）
