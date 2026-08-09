@@ -120,14 +120,26 @@ class RootSpec:
         normalized = relative_path.replace("\\", "/")
         for route in self.routes:
             included = any(
-                fnmatch.fnmatch(normalized, pattern) for pattern in route.include
+                _glob_matches(pattern, normalized) for pattern in route.include
             ) if route.include else False
             excluded = any(
-                fnmatch.fnmatch(normalized, pattern) for pattern in route.exclude
+                _glob_matches(pattern, normalized) for pattern in route.exclude
             )
             if included and not excluded:
                 return True
         return False
+
+
+def _glob_matches(pattern: str, path: str) -> bool:
+    """fnmatch with directory-recursive semantics: ``X/**`` also matches ``X``
+    itself (the subtree root), not only children."""
+    import fnmatch
+
+    if fnmatch.fnmatch(path, pattern):
+        return True
+    if pattern.endswith("/**") and path == pattern[:-3]:
+        return True
+    return False
 
     def __post_init__(self) -> None:
         if not isinstance(self.root_id, str) or not self.root_id.strip():
