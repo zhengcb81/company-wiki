@@ -1,4 +1,5 @@
 """WU-901 RED/audit tests: migration tool (MIG-01..08)."""
+import sqlite3
 import sys
 from pathlib import Path
 
@@ -22,6 +23,14 @@ def _catalog(tmp_path: Path, n_sources: int = 10) -> Path:
     for i in range(n_sources):
         con.execute("INSERT INTO sources VALUES (?,?,?)",
                     (f"s{i:04d}", f"{i:064x}", 100))
+    # production schema: assertions FK to documents via primary_source_id;
+    # a source without a documents row is an orphan (skipped, counted).
+    con.execute("CREATE TABLE documents (document_id TEXT PRIMARY KEY, "
+                "primary_source_id TEXT, title TEXT, source_type TEXT, "
+                "source_status TEXT)")
+    for i in range(n_sources):
+        con.execute("INSERT INTO documents VALUES (?,?,?,?,?)",
+                    (f"d{i:04d}", f"s{i:04d}", f"title-{i}", "file", "active"))
     con.execute("CREATE TABLE source_metadata_assertions (assertion_id TEXT "
                 "PRIMARY KEY, source_id TEXT, document_id TEXT, content_sha256 "
                 "TEXT, evidence_basis TEXT, evidence_json TEXT, decision TEXT, "
@@ -112,3 +121,25 @@ def test_mig08_input_output_hash_recorded(tmp_path):
     assert result.journal[0]["input_hash"]
     assert result.journal[0]["output_hash"]
     assert result.journal[0]["input_hash"] == result.journal[0]["output_hash"]
+
+
+def test_mig09_orphan_source_skipped_not_fk_crash(tmp_path):
+    """A source with no documents row cannot carry a FK-bound assertion on
+    real catalogs: it is skipped and counted, never a crash (WU-906 drill A
+    surfaced this against the production schema)."""
+    catalog = _catalog(tmp_path, n_sources=4)
+    con = sqlite3.connect(catalog)
+    # remove one document row -> s0003 becomes an orphan source
+    con.execute("DELETE FROM documents WHERE document_id='d0003'")
+    con.commit()
+    con.close()
+    result = migration_start(catalog, config=MigrationConfig("c1", "p1"),
+                             mode="apply", batch_size=4)
+    assert result.processed == 4
+    assert result.created_assertions == 3
+    assert result.skipped == 1  # the orphan, counted not crashed
+    con = sqlite3.connect(catalog)
+    n = con.execute(
+        "SELECT COUNT(*) FROM source_metadata_assertions").fetchone()[0]
+    con.close()
+    assert n == 3

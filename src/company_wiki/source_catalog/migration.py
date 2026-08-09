@@ -35,6 +35,12 @@ class MigrationResult:
     resumed_from: str | None = None
     journal: list[dict] = field(default_factory=list)
 
+    # sources without a documents row (orphans) cannot carry a FK-bound
+    # assertion on real catalogs; they are skipped and counted, never
+    # silently dropped.
+    def add_skipped_fk(self, count: int) -> None:
+        self.skipped += count
+
 
 def _connect(path: Path) -> sqlite3.Connection:
     con = sqlite3.connect(path)
@@ -103,8 +109,11 @@ def migration_start(
             result.resumed_from = last_key
 
         sources = con.execute(
-            "SELECT source_id, content_sha256, byte_size FROM sources "
-            "WHERE source_id > ? ORDER BY source_id LIMIT ?",
+            """SELECT s.source_id, s.content_sha256, s.byte_size,
+                      d.document_id
+               FROM sources s
+               LEFT JOIN documents d ON d.primary_source_id = s.source_id
+               WHERE s.source_id > ? ORDER BY s.source_id LIMIT ?""",
             (last_key or "", batch_size or config.batch_size),
         ).fetchall()
         if not sources:
@@ -113,9 +122,16 @@ def migration_start(
         input_hash = _hash_rows(sources)
 
         created: list[str] = []
+        skipped_fk = 0
         if mode in {"shadow-write", "apply"}:
-            # v2 candidate assertions for each source (one per source)
+            # v2 candidate assertions for each source (one per source).
+            # document_id is FK-constrained on real catalogs: a source with
+            # no documents row (orphan) cannot carry an assertion — skip it
+            # and count (WU-906 drill A surfaced this against production).
             for source in sources:
+                if not source["document_id"]:
+                    skipped_fk += 1
+                    continue
                 assertion_id = f"mig-{hashlib.sha256(source['source_id'].encode()).hexdigest()[:16]}"
                 exists = con.execute(
                     "SELECT 1 FROM source_metadata_assertions WHERE assertion_id=?",
@@ -129,7 +145,7 @@ def migration_start(
                          created_by, schema_version, adapter_id, adapter_version,
                          normalization_status, visibility_state)
                         VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)""",
-                        (assertion_id, source["source_id"], "",
+                        (assertion_id, source["source_id"], source["document_id"],
                          source["content_sha256"], "v2-migration", "{}",
                          "verified", "2026-08-09", "wu-901",
                          "2.0", "migration_v1", "1.0.0",
@@ -137,6 +153,7 @@ def migration_start(
                     )
                     created.append(assertion_id)
             con.commit()
+        result.add_skipped_fk(skipped_fk)
         result.created_assertions = len(created)
         output_hash = _hash_rows(sources)
 

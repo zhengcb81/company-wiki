@@ -24,6 +24,14 @@ def _catalog(tmp_path: Path, n: int = 12) -> Path:
     for i in range(n):
         con.execute("INSERT INTO sources VALUES (?,?,?)",
                     (f"s{i:04d}", f"{i:064x}", 100))
+    # production schema: assertions FK to documents via primary_source_id;
+    # a source without a documents row is an orphan (skipped, counted).
+    con.execute("CREATE TABLE documents (document_id TEXT PRIMARY KEY, "
+                "primary_source_id TEXT, title TEXT, source_type TEXT, "
+                "source_status TEXT)")
+    for i in range(n):
+        con.execute("INSERT INTO documents VALUES (?,?,?,?,?)",
+                    (f"d{i:04d}", f"s{i:04d}", f"title-{i}", "file", "active"))
     con.execute("CREATE TABLE source_metadata_assertions (assertion_id TEXT "
                 "PRIMARY KEY, source_id TEXT, document_id TEXT, content_sha256 "
                 "TEXT, evidence_basis TEXT, evidence_json TEXT, decision TEXT, "
