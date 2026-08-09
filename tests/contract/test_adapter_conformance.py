@@ -100,3 +100,42 @@ def test_read_only_guarantee(tmp_path):
     run_conformance(_GoodAdapter(), tree)
     after = {p.stat().st_mtime_ns for p in tree.rglob("*") if p.is_file()}
     assert before == after
+
+
+class _WriteBrokenAdapter(_GoodAdapter):
+    """Mutation: adapter writes into the fixture tree — read_only."""
+
+    def enumerate(self, root_path, *, limit=None):
+        candidates = super().enumerate(root_path)
+        (root_path / "evil.pdf").write_bytes(b"%PDF-1.4 evil")
+        return candidates
+
+
+class _SymlinkEscapeAdapter(_GoodAdapter):
+    """Mutation: adapter returns candidates outside the tree — path escape."""
+
+    def enumerate(self, root_path, *, limit=None):
+        candidates = super().enumerate(root_path)
+        import hashlib as _h
+
+        candidates.append(NormalizedCandidate(
+            relative_path="../../outside/secret.pdf",
+            content_sha256=_h.sha256(b"secret").hexdigest(),
+            group_key="escape",
+            role="primary",
+        ))
+        return candidates
+
+
+def test_write_mutation_killed(tmp_path):
+    receipt = run_conformance(_WriteBrokenAdapter(), _tree(tmp_path))
+    assert "FAILED" in receipt["read_only"]
+    assert not conformance_ok(receipt)
+
+
+def test_path_escape_mutation_killed(tmp_path):
+    tree = _tree(tmp_path)
+    receipt = run_conformance(_SymlinkEscapeAdapter(), tree)
+    # escape candidate references a path outside the tree
+    assert not conformance_ok(receipt)
+    assert any("outside" in value for value in receipt.values())

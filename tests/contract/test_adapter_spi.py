@@ -86,3 +86,28 @@ def test_spi01_adapter_imports_are_pure():
             imports.add(node.module.split(".")[0])
     forbidden = {"store", "resolver", "download", "parser", "llm"}
     assert not (imports & forbidden)
+
+
+# SPI-02 (reviewer F2): the scanner must never GAIN root-specific literal
+# branches.  Existing dayu branches (3) are frozen legacy — Phase 15 removes
+# them; any increase fails the gate.
+_FROZEN_SCANNER_ROOT_BRANCHES = 7
+
+
+def test_spi02_scanner_root_branch_freeze():
+    import re
+
+    source = (Path(__file__).resolve().parents[2] / "src" /
+              "company_wiki" / "source_catalog" / "scanner.py").read_text(encoding="utf-8")
+    patterns = (
+        r'kind\s*==\s*"dayu_portfolio"',
+        r'root_id\s*==\s*"dropbox_stock"',
+        r'kind\s*==\s*"directory"',
+        r'root\.kind\s*==\s*"company_raw"',
+    )
+    total = 0
+    for pattern in patterns:
+        total += len(re.findall(pattern, source))
+    assert total <= _FROZEN_SCANNER_ROOT_BRANCHES, (
+        f"scanner gained root-specific branches: {total} > {_FROZEN_SCANNER_ROOT_BRANCHES}"
+    )

@@ -20,6 +20,10 @@ def run_conformance(adapter, tree: Path) -> dict:
     machine-readable receipt {check: ok|FAILED detail}."""
     receipt: dict[str, str] = {}
 
+    # 0. read-only baseline MUST be captured before any enumerate call so an
+    #    adapter that writes during enumeration is caught (WU-502 F1)
+    baseline_fingerprint = _tree_fingerprint(tree)
+
     # 1. deterministic enumerate (twice)
     first = adapter.enumerate(tree)
     second = adapter.enumerate(tree)
@@ -47,11 +51,12 @@ def run_conformance(adapter, tree: Path) -> dict:
     ]
     receipt["role_separation"] = "ok" if not bad_roles else f"FAILED: {bad_roles}"
 
-    # 5. read-only: fixture untouched after enumerate
-    before = _tree_fingerprint(tree)
+    # 5. read-only: fixture untouched from the pre-enumerate baseline
     adapter.enumerate(tree)
     after = _tree_fingerprint(tree)
-    receipt["read_only"] = "ok" if before == after else "FAILED: fixture changed"
+    receipt["read_only"] = (
+        "ok" if baseline_fingerprint == after else "FAILED: fixture changed"
+    )
 
     # 6. candidates carry hashes matching file bytes
     hash_problems = []
