@@ -38,6 +38,81 @@ def _utc_iso_from(dt: datetime) -> str:
     return dt.astimezone(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
+
+# WU-400: single schema owner for source_metadata_assertions.  The CREATE
+# definition and the v2 migration share these constants so the two historic
+# hand-written definitions cannot drift again.
+ASSERTION_V2_COLUMNS = {
+    "published_at": "TEXT",
+    "accepted_at": "TEXT",
+    "period_end": "TEXT",
+    "language": "TEXT",
+    "is_amended": "INTEGER",
+    "revision_id": "TEXT",
+    "adapter_id": "TEXT",
+    "adapter_version": "TEXT",
+    "normalized_sha256": "TEXT",
+    "normalization_status": "TEXT",
+    "visibility_state": "TEXT NOT NULL DEFAULT 'legacy'",
+    "activation_epoch": "TEXT",
+    "cohort": "TEXT",
+}
+
+source_metadata_assertions_schema = """
+CREATE TABLE IF NOT EXISTS source_metadata_assertions (
+    assertion_id TEXT PRIMARY KEY,
+    source_id TEXT NOT NULL,
+    document_id TEXT NOT NULL,
+    entity TEXT,
+    market TEXT,
+    security_id TEXT,
+    document_kind TEXT,
+    form_type TEXT,
+    fiscal_year INTEGER,
+    fiscal_period TEXT,
+    provider TEXT,
+    provider_document_id TEXT,
+    source_url TEXT,
+    filing_date TEXT,
+    content_sha256 TEXT NOT NULL,
+    evidence_basis TEXT NOT NULL,
+    evidence_json TEXT NOT NULL,
+    decision TEXT NOT NULL,
+    supersedes_assertion_id TEXT,
+    created_at TEXT NOT NULL,
+    created_by TEXT NOT NULL,
+    schema_version TEXT NOT NULL,
+    published_at TEXT,
+    accepted_at TEXT,
+    period_end TEXT,
+    language TEXT,
+    is_amended INTEGER,
+    revision_id TEXT,
+    adapter_id TEXT,
+    adapter_version TEXT,
+    normalized_sha256 TEXT,
+    normalization_status TEXT,
+    visibility_state TEXT NOT NULL DEFAULT 'legacy',
+    activation_epoch TEXT,
+    cohort TEXT,
+    FOREIGN KEY(source_id) REFERENCES sources(source_id),
+    FOREIGN KEY(document_id) REFERENCES documents(document_id)
+);
+"""
+
+def ensure_assertion_v2_columns(connection) -> None:
+    """Additive v2 migration for existing v1 catalogs (idempotent)."""
+    existing = {
+        row[1]
+        for row in connection.execute("PRAGMA table_info(source_metadata_assertions)")
+    }
+    for column, column_type in ASSERTION_V2_COLUMNS.items():
+        if column not in existing:
+            connection.execute(
+                f"ALTER TABLE source_metadata_assertions ADD COLUMN {column} {column_type}"
+            )
+
+
 _DDL = """
 CREATE TABLE IF NOT EXISTS catalog_meta (
     key TEXT PRIMARY KEY,
@@ -176,32 +251,7 @@ CREATE INDEX IF NOT EXISTS idx_artifacts_document ON artifacts(document_id);
 CREATE INDEX IF NOT EXISTS idx_llm_summary_failures_retry
 ON llm_summary_failures(generator_name, generator_version, retry_after);
 CREATE INDEX IF NOT EXISTS idx_spans_document ON evidence_spans(document_id);
-CREATE TABLE IF NOT EXISTS source_metadata_assertions (
-    assertion_id TEXT PRIMARY KEY,
-    source_id TEXT NOT NULL,
-    document_id TEXT NOT NULL,
-    entity TEXT,
-    market TEXT,
-    security_id TEXT,
-    document_kind TEXT,
-    form_type TEXT,
-    fiscal_year INTEGER,
-    fiscal_period TEXT,
-    provider TEXT,
-    provider_document_id TEXT,
-    source_url TEXT,
-    filing_date TEXT,
-    content_sha256 TEXT NOT NULL,
-    evidence_basis TEXT NOT NULL,
-    evidence_json TEXT NOT NULL,
-    decision TEXT NOT NULL,
-    supersedes_assertion_id TEXT,
-    created_at TEXT NOT NULL,
-    created_by TEXT NOT NULL,
-    schema_version TEXT NOT NULL,
-    FOREIGN KEY(source_id) REFERENCES sources(source_id),
-    FOREIGN KEY(document_id) REFERENCES documents(document_id)
-);
+""" + source_metadata_assertions_schema + """
 CREATE TABLE IF NOT EXISTS document_fingerprint_state (
     document_id TEXT PRIMARY KEY,
     source_id TEXT NOT NULL,
@@ -950,32 +1000,7 @@ class CatalogStore:
             )
         }
         if "source_metadata_assertions" not in tables:
-            connection.execute("""CREATE TABLE IF NOT EXISTS source_metadata_assertions (
-                assertion_id TEXT PRIMARY KEY,
-                source_id TEXT NOT NULL,
-                document_id TEXT NOT NULL,
-                entity TEXT,
-                market TEXT,
-                security_id TEXT,
-                document_kind TEXT,
-                form_type TEXT,
-                fiscal_year INTEGER,
-                fiscal_period TEXT,
-                provider TEXT,
-                provider_document_id TEXT,
-                source_url TEXT,
-                filing_date TEXT,
-                content_sha256 TEXT NOT NULL,
-                evidence_basis TEXT NOT NULL,
-                evidence_json TEXT NOT NULL,
-                decision TEXT NOT NULL,
-                supersedes_assertion_id TEXT,
-                created_at TEXT NOT NULL,
-                created_by TEXT NOT NULL,
-                schema_version TEXT NOT NULL,
-                FOREIGN KEY(source_id) REFERENCES sources(source_id),
-                FOREIGN KEY(document_id) REFERENCES documents(document_id)
-            )""")
+            connection.execute(source_metadata_assertions_schema)
         if "document_fingerprint_state" not in tables:
             # _DDL normally creates this for fresh DBs; older DBs reach here via
             # executescript(_DDL) too, but keep an explicit guard for safety.

@@ -111,7 +111,7 @@ def load_catalog_config(path: Path, *, project_root: Path | None = None) -> Cata
             )
         if reusable_for_filing is True and adapter_id is not None:
             adapter = registered_adapter(str(adapter_id))
-            if adapter and not adapter.get("capabilities", "").__contains__("filing"):
+            if adapter and "filing" not in adapter.get("capabilities", ()):
                 raise CatalogConfigError(
                     f"roots[{index}] adapter {adapter_id!r} cannot serve filing "
                     "(CFG-07)"
@@ -168,8 +168,6 @@ def _unresolved_variables(raw_path) -> set[str]:
     """Variables inside ${...} that are not controlled tokens (CFG-04)."""
     if not isinstance(raw_path, str):
         return {"<non-string-path>"}
-    import re
-
     used = set(re.findall(r"\$\{([^}]+)\}", raw_path))
     return used - _CONTROLLED_PATH_TOKENS
 
