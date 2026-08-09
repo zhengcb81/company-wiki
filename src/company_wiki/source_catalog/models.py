@@ -63,11 +63,46 @@ DOCUMENT_EXTENSIONS = frozenset(
 
 
 @dataclass(frozen=True)
+class RouteSpec:
+    """WU-301: an ordered include/exclude glob route on a root.
+
+    First-match semantics; overlapping routes are rejected at load time.
+    """
+
+    include: tuple[str, ...] = ()
+    exclude: tuple[str, ...] = ()
+    adapter_id: str | None = None
+    admission_profile_id: str | None = None
+
+    def __post_init__(self) -> None:
+        if not isinstance(self.include, tuple) or not isinstance(self.exclude, tuple):
+            raise TypeError("include/exclude must be tuples of glob strings")
+        if self.include and not all(
+            isinstance(item, str) and item.strip() for item in self.include
+        ):
+            raise ValueError("include must be non-empty glob strings")
+
+
+@dataclass(frozen=True)
 class RootSpec:
     root_id: str
     path: Path
     kind: str
     priority: int = 100
+    # WU-301 RootPolicy v2 (additive; defaults preserve v1 behavior)
+    adapter_id: str | None = None
+    adapter_version_range: str | None = None
+    admission_profile_id: str | None = None
+    read_only: bool = True
+    reusable_for_filing: bool | None = None  # None = follow kind policy
+    routes: tuple[RouteSpec, ...] = ()
+    allowed_document_kinds: tuple[str, ...] = ()
+    allowed_statuses: tuple[str, ...] = ()
+    symlink_policy: str = "reject"
+    max_file_size: int | None = None
+    sidecar_suffixes: tuple[str, ...] = ()
+    encoding: str = "utf-8"
+    privacy_class: str = "public"
 
     def __post_init__(self) -> None:
         if not isinstance(self.root_id, str) or not self.root_id.strip():
@@ -80,6 +115,14 @@ class RootSpec:
             raise ValueError(f"unsupported root kind: {self.kind}")
         if isinstance(self.priority, bool) or not isinstance(self.priority, int):
             raise TypeError("priority must be an integer")
+        if self.adapter_id is not None and not isinstance(self.adapter_id, str):
+            raise TypeError("adapter_id must be a string or None")
+        if self.read_only not in (True, False):
+            raise TypeError("read_only must be a boolean")
+        if self.routes and not all(
+            isinstance(route, RouteSpec) for route in self.routes
+        ):
+            raise TypeError("routes must contain RouteSpec objects")
 
 
 @dataclass(frozen=True)
