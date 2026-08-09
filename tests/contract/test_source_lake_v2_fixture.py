@@ -3,7 +3,6 @@ import re
 import sys
 from pathlib import Path
 
-import pytest
 
 FIXTURES = Path(__file__).resolve().parents[1] / "fixtures" / "source_lake_v2"
 sys.path.insert(0, str(FIXTURES))

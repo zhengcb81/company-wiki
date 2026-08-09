@@ -85,11 +85,14 @@ def test_decision_and_visibility_independent():
 
 
 def test_schema_constant_single_source():
-    """store.py must not hand-define the assertion table twice."""
-    source = (Path(__file__).resolve().parents[2] / "src" /
-              "company_wiki" / "source_catalog" / "store.py").read_text(encoding="utf-8")
+    """store.py must not hand-define the assertion table twice — the schema
+    constant IS the single definition."""
+    store_source = (Path(__file__).resolve().parents[2] / "src" /
+                    "company_wiki" / "source_catalog" / "store.py").read_text(encoding="utf-8")
     definition = source_metadata_assertions_schema
     # the schema constant must contain the full v1+v2 column list
     assert "assertion_id TEXT PRIMARY KEY" in definition
     for column in ASSERTION_V2_COLUMNS:
         assert f"{column} " in definition, f"{column} missing from schema constant"
+    # and store.py must reference the constant, not duplicate the DDL
+    assert "source_metadata_assertions_schema" in store_source
