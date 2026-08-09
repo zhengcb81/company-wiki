@@ -56,10 +56,15 @@ def run_parity(
         left = by_path_v1.get(path)
         right = by_path_v2.get(path)
         if left is None or right is None:
+            key = (path, "presence")
+            classification = (
+                "known_bad" if known_bad and key in known_bad else "blocker"
+            )
             report.diffs.append(ParityDiff(
                 path, "presence",
                 "v1-only" if right is None else "v2-only",
                 "v1-only" if right is None else "v2-only",
+                classification,
             ))
             continue
         for field_name, getter in (
@@ -67,6 +72,7 @@ def run_parity(
             ("entity", entity_of),
             ("status", lambda c: getattr(c, "source_status",
                                          getattr(c, "normalized", {}).get("normalization_status"))),
+            ("reason", lambda c: getattr(c, "reason", None)),
         ):
             v1_value = getter(left)
             v2_value = getter(right)
