@@ -25,14 +25,8 @@ import sqlite3
 import sys
 from pathlib import Path
 
-import pytest
-
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "src"))
-from company_wiki.source_catalog.backfill_v2 import (  # noqa: E402
-    BackfillResult,
-    StrongBinding,
-    run_backfill,
-)
+from company_wiki.source_catalog.backfill_v2 import run_backfill  # noqa: E402
 
 
 def _catalog(tmp_path: Path) -> Path:
