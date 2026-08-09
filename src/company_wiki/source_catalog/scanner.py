@@ -475,10 +475,15 @@ def _scan_root_v1(
                     continue
                 supported.append(path)
             relative_dir = _relative(current_path, root.path)
-            focus_scope = root.root_id == FOCUS_ROOT_ID and (
-                relative_dir == FOCUS_RELATIVE_PREFIX
-                or relative_dir.startswith(FOCUS_RELATIVE_PREFIX + "/")
-            )
+            # WU-702: route-configured focus scope; legacy FOCUS constants
+            # remain only for v1 configs without routes
+            if root.routes:
+                focus_scope = root.route_matches(relative_dir)
+            else:
+                focus_scope = root.root_id == FOCUS_ROOT_ID and (
+                    relative_dir == FOCUS_RELATIVE_PREFIX
+                    or relative_dir.startswith(FOCUS_RELATIVE_PREFIX + "/")
+                )
             if not focus_scope:
                 # Legacy behavior for every directory outside the exact
                 # 重点关注 subtree: each supported file (including .source.json)

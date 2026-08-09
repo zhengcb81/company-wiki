@@ -104,6 +104,31 @@ class RootSpec:
     encoding: str = "utf-8"
     privacy_class: str = "public"
 
+
+
+    def route_matches(self, relative_path: str) -> bool:
+        """WU-702: first-match route semantics for a relative path.
+
+        Returns False when the root has no routes (legacy behavior).  A path
+        matches when any route's include glob matches and no exclude glob
+        matches.  Route overlap is rejected at load time (CFG-06/08).
+        """
+        if not self.routes:
+            return False
+        import fnmatch
+
+        normalized = relative_path.replace("\\", "/")
+        for route in self.routes:
+            included = any(
+                fnmatch.fnmatch(normalized, pattern) for pattern in route.include
+            ) if route.include else False
+            excluded = any(
+                fnmatch.fnmatch(normalized, pattern) for pattern in route.exclude
+            )
+            if included and not excluded:
+                return True
+        return False
+
     def __post_init__(self) -> None:
         if not isinstance(self.root_id, str) or not self.root_id.strip():
             raise ValueError("root_id must be non-empty text")
