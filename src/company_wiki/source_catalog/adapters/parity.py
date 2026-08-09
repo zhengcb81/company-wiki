@@ -62,7 +62,7 @@ def run_parity(
                 "v1-only" if right is None else "v2-only",
             ))
             continue
-        for field, getter in (
+        for field_name, getter in (
             ("role", lambda c: getattr(c, "role", None)),
             ("entity", entity_of),
             ("status", lambda c: getattr(c, "source_status",
@@ -71,11 +71,11 @@ def run_parity(
             v1_value = getter(left)
             v2_value = getter(right)
             if v1_value != v2_value:
-                key = (path, field)
+                key = (path, field_name)
                 classification = (
                     "known_bad" if known_bad and key in known_bad else "blocker"
                 )
                 report.diffs.append(ParityDiff(
-                    path, field, v1_value, v2_value, classification
+                    path, field_name, v1_value, v2_value, classification
                 ))
     return report
