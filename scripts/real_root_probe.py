@@ -71,14 +71,22 @@ def main() -> int:
     if not args.root.is_dir():
         print(f"missing root: {args.root}", file=sys.stderr)
         return 2
+    # P1: 非 ASCII 用户 profile 下 stdout 恒 UTF-8（GBK locale 会炸 JSON）
+    for stream in (sys.stdout, sys.stderr):
+        if hasattr(stream, "reconfigure"):
+            stream.reconfigure(encoding="utf-8")
     import json
 
+    import hmac as _hmac
+
+    root_token = _hmac.new(b"real-root-probe", str(args.root).encode("utf-8"),
+                           hashlib.sha256).hexdigest()[:16]
     if args.full:
         entries = probe_full(args.root)
-        print(json.dumps({"root": str(args.root), "entries": entries},
+        print(json.dumps({"root_token": root_token, "entries": entries},
                          ensure_ascii=False))
     else:
-        print(json.dumps({"root": str(args.root),
+        print(json.dumps({"root_token": root_token,
                           "fast": probe_fast(args.root)}, ensure_ascii=False))
     return 0
 
