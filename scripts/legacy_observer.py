@@ -29,11 +29,28 @@ def observe(
     *,
     sample_limit: int = 2000,
 ) -> dict:
-    """Read-only legacy bridge observation over active documents."""
+    """Read-only legacy bridge observation over active documents.
+
+    Mirrors the production resolver path: the observer is attached to a
+    v2-first read WITH the catalog store, so documents that now resolve
+    through active v2 assertions do NOT record legacy_bridge_hits.
+    """
     con = sqlite3.connect(f"file:{catalog}?mode=ro", uri=True)
     con.row_factory = sqlite3.Row
     con.execute("PRAGMA query_only = ON")
     collector = MetricsCollector()
+
+    class _StoreFacade:
+        def __init__(self, connection):
+            self._connection = connection
+
+        def fetchone(self, sql, params=()):
+            return self._connection.execute(sql, tuple(params)).fetchone()
+
+        def fetchall(self, sql, params=()):
+            return self._connection.execute(sql, tuple(params)).fetchall()
+
+    store = _StoreFacade(con)
     rows = con.execute(
         """SELECT d.document_id, d.metadata_json, d.primary_source_id
            FROM documents d
@@ -49,7 +66,8 @@ def observe(
         except json.JSONDecodeError:
             metadata = {}
         _source_metadata({"source_id": row["primary_source_id"],
-                          "metadata": metadata}, observer=collector)
+                          "metadata": metadata}, store=store,
+                         observer=collector)
     con.close()
     report = collector.snapshot()
     return {
