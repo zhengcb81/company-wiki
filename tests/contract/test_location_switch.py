@@ -9,7 +9,8 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "src"))
-from company_wiki.source_catalog.resolver import _pick_latest  # noqa: E402
+from company_wiki.source_catalog import resolver as _resolver  # noqa: E402
+_pick_latest = staticmethod(_resolver.SourceResolver._pick_latest)
 
 
 class _H:
