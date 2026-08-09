@@ -34,7 +34,7 @@ jobs:
       - name: Compileall + config doctor (WU-7.1)
         run: |
           python -m compileall -q src scripts tests
-          python scripts/config_doctor.py
+          PYTHONPATH=src python scripts/config_doctor.py
 
       - name: Unit tests
         run: python -m pytest tests/unit -q --tb=short
