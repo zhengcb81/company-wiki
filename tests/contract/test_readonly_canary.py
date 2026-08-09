@@ -40,7 +40,7 @@ def test_canary_ok_on_fixture(tmp_path):
 
 def test_canary_detects_root_change(tmp_path):
     catalog, root = _setup(tmp_path)
-    proc = subprocess.run(
+    subprocess.run(
         [sys.executable, str(CANARY), "--catalog", str(catalog),
          "--root", str(root), "--read-only"],
         capture_output=True, text=True, encoding="utf-8", check=False,
