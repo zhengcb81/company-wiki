@@ -23,25 +23,18 @@ from .admission import (
     FOCUS_ROOT_ID,
     evaluate_admission,
 )
+from .adapters.common import (
+    _ACQUISITION_SIDECAR_SUFFIX,
+    _SKIP_DIRS,
+    _load_acquisition_metadata,
+    _relative,
+    _walk_files,
+)
 from .models import CatalogConfig, DOCUMENT_EXTENSIONS, SCANNER_VERSION, RootSpec, ScanReport
 from .store import CatalogStore, canonical_json
 
 
-_SKIP_DIRS = frozenset(
-    {
-        ".git",
-        ".hg",
-        ".svn",
-        "__pycache__",
-        ".pytest_cache",
-        ".mypy_cache",
-        "node_modules",
-        ".venv",
-        "venv",
-    }
-)
 _DATE_RE = re.compile(r"(?<!\d)(20\d{2})[-_.年](0[1-9]|1[0-2]|[1-9])[-_.月](0[1-9]|[12]\d|3[01]|[1-9])")
-_ACQUISITION_SIDECAR_SUFFIX = ".source.json"
 
 
 @dataclass(frozen=True)
@@ -196,20 +189,6 @@ def _entity(entity_name: str | None, root_id: str) -> tuple[str, str, str, float
     return f"unresolved:{root_id}", f"Unresolved ({root_id})", "unresolved", 0.0, "unresolved"
 
 
-def _walk_files(root: Path) -> Iterable[Path]:
-    for current, directories, files in os.walk(root):
-        directories[:] = [name for name in directories if name not in _SKIP_DIRS]
-        current_path = Path(current)
-        for name in files:
-            path = current_path / name
-            if path.suffix.lower() in DOCUMENT_EXTENSIONS:
-                yield path
-
-
-def _relative(path: Path, root: Path) -> str:
-    return unicodedata.normalize("NFC", path.relative_to(root).as_posix())
-
-
 def _company_names(config: CatalogConfig) -> tuple[str, ...]:
     names: set[str] = set()
     for root in config.roots:
@@ -225,16 +204,6 @@ def _infer_company(relative_path: str, names: tuple[str, ...]) -> str | None:
     folded = relative_path.casefold()
     matches = [name for name in names if name.casefold() in folded]
     return matches[0] if len(matches) == 1 else None
-
-
-def _load_acquisition_metadata(path: Path) -> dict[str, Any]:
-    try:
-        value = json.loads(path.read_text(encoding="utf-8"))
-    except (OSError, UnicodeError, json.JSONDecodeError):
-        return {"meta_parse_error": True}
-    if not isinstance(value, dict):
-        return {"meta_parse_error": True}
-    return value
 
 
 def _enrich_dayu_portfolio_metadata(
