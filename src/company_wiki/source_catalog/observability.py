@@ -1,0 +1,178 @@
+"""WU-1305: versioned reason taxonomy + privacy-safe metrics collector.
+
+Every rejection/reuse/download/recompute carries a *registered* reason code
+(snake_case, versioned by REASON_TAXONOMY_VERSION).  The collector aggregates
+by root/route/adapter/version/role without ever recording company names,
+document ids, or absolute paths — those are redacted by default (REDACT).
+
+Telemetry export being off must not affect core behavior: the collector is
+pure in-memory, append-only, and thread-safe; nothing raises when the
+exporter is absent.
+"""
+
+from __future__ import annotations
+
+import math
+import re
+import threading
+from dataclasses import dataclass, field
+from typing import Any
+
+REASON_TAXONOMY_VERSION = "1.0"
+
+# Canonical reason taxonomy (additive; codes are never removed, only
+# deprecated) — kept in sync with admission/reuse/resolver/artifact codes.
+REASONS: dict[str, str] = {
+    # scan / admission
+    "admitted": "candidate facts pass the profile gate",
+    "identity_missing": "no canonical_entity_id or security_id",
+    "kind_missing": "no document_kind",
+    "period_missing": "no fiscal_year or period_end",
+    "hash_missing": "no content_sha256",
+    "content_hash_mismatch": "observed bytes differ from recorded hash",
+    "status_not_active": "source_status != active",
+    "policy_denied": "root policy does not authorize reuse",
+    "non_filing_kind": "document kind is not a filing profile",
+    "focus_policy_invalid_relative_path": "path traversal or absolute path",
+    "focus_policy_no_allowed_category_evidence": "no allowed category evidence",
+    # reuse / latest / gap
+    "download_suppressed": "reuse policy suppressed the download",
+    "download_authorized": "gap plan authorized a download",
+    "downloaded": "download executed once",
+    "gap_not_required": "no gap to close for this period",
+    "gap_authorization_expired": "download auth window expired",
+    # resolver
+    "exact_hit": "exact identity match resolved",
+    "latest_selected": "latest-as-of handle selected",
+    "ambiguous_issuer": "token shared by multiple issuers",
+    "entity_gate_rejected": "entity anchoring failed",
+    # artifacts
+    "artifact_selected": "valid artifact reused",
+    "artifact_rejected": "artifact failed validation (reason in detail)",
+    "recomputed": "artifact recompute planned",
+    "stale_bundle": "snapshot mismatch invalidates the bundle",
+    # migration / bridge
+    "legacy_bridge_hit": "legacy acquisition/dayu_meta container read",
+    "shadow_diff": "v2 shadow read differed from legacy bridge",
+    "migration_remaining": "sources still pending migration",
+    "verified_v2_assertion": "verified v2 assertion read (legacy-visible)",
+}
+
+_PATH_PATTERN = re.compile(r"[A-Za-z]:[\\/][^;,\s]+|[\\/][^;,\s]*[\\/][^;,\s]+")
+
+REDACT = "<redacted>"
+
+
+def validate_reason(code: str) -> bool:
+    """Fail closed: only registered codes may be recorded."""
+    return code in REASONS
+
+
+@dataclass
+class Metric:
+    """One observable event.  Free-form fields are redacted on export."""
+
+    dimension: str          # root_id | route | adapter_id | role | reason
+    key: str                # e.g. 'company_raw' | 'sidecar_filing_v1'
+    count: int = 1
+
+
+@dataclass
+class ObservabilityReport:
+    schema_version: str = f"reason-taxonomy-{REASON_TAXONOMY_VERSION}"
+    metrics: list[Metric] = field(default_factory=list)
+    latency_p50: float | None = None
+    latency_p95: float | None = None
+    latency_p99: float | None = None
+    db_busy: int = 0
+    db_timeout: int = 0
+    subprocess_failures: int = 0
+    legacy_bridge_hits: int = 0
+    shadow_diffs: int = 0
+    migration_remaining: int = 0
+    raw: list[dict] = field(default_factory=list)
+
+    def aggregate(self, dimension: str) -> dict[str, int]:
+        out: dict[str, int] = {}
+        for metric in self.metrics:
+            if metric.dimension == dimension:
+                out[metric.key] = out.get(metric.key, 0) + metric.count
+        return out
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "schema_version": self.schema_version,
+            "metrics": [m.__dict__ for m in self.metrics],
+            "aggregated": {
+                dim: self.aggregate(dim)
+                for dim in ("root_id", "route", "adapter_id", "role", "reason")
+            },
+            "latency_p50": self.latency_p50,
+            "latency_p95": self.latency_p95,
+            "latency_p99": self.latency_p99,
+            "db_busy": self.db_busy,
+            "db_timeout": self.db_timeout,
+            "subprocess_failures": self.subprocess_failures,
+            "legacy_bridge_hits": self.legacy_bridge_hits,
+            "shadow_diffs": self.shadow_diffs,
+            "migration_remaining": self.migration_remaining,
+        }
+
+
+class MetricsCollector:
+    """Thread-safe append-only collector.  Never raises; exporter optional."""
+
+    def __init__(self) -> None:
+        self._lock = threading.Lock()
+        self._report = ObservabilityReport()
+
+    def record(self, dimension: str, key: str, *, redact: bool = True) -> None:
+        if redact:
+            key = _PATH_PATTERN.sub(REDACT, str(key))
+        with self._lock:
+            self._report.metrics.append(Metric(dimension=dimension, key=key))
+
+    def record_reason(self, code: str) -> bool:
+        """Record a reason code; unknown codes are refused (fail closed)."""
+        if not validate_reason(code):
+            return False
+        with self._lock:
+            self._report.metrics.append(Metric(dimension="reason", key=code))
+            if code == "legacy_bridge_hit":
+                self._report.legacy_bridge_hits += 1
+            elif code == "shadow_diff":
+                self._report.shadow_diffs += 1
+            elif code == "migration_remaining":
+                self._report.migration_remaining += 1
+        return True
+
+    def record_latency(self, samples: list[float]) -> None:
+        if not samples:
+            return
+        ordered = sorted(samples)
+        n = len(ordered)
+        # nearest-rank percentiles: index = ceil(q * n) - 1
+        def pct(q: float) -> float:
+            return ordered[math.ceil(q * n) - 1]
+
+        with self._lock:
+            self._report.latency_p50 = pct(0.50)
+            self._report.latency_p95 = pct(0.95)
+            self._report.latency_p99 = pct(0.99)
+
+    def record_db(self, *, busy: int = 0, timeout: int = 0) -> None:
+        with self._lock:
+            self._report.db_busy += busy
+            self._report.db_timeout += timeout
+
+    def record_subprocess_failure(self) -> None:
+        with self._lock:
+            self._report.subprocess_failures += 1
+
+    def snapshot(self) -> ObservabilityReport:
+        with self._lock:
+            return self._report
+
+    def reset(self) -> None:
+        with self._lock:
+            self._report = ObservabilityReport()
