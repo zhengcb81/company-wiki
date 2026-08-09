@@ -26,7 +26,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install -r requirements-test.txt
-          pip install ruff
+          pip install "ruff==0.15.18"
 
       - name: Ruff lint (WU-1.2)
         run: ruff check src tests/unit tests/contract scripts
