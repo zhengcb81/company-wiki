@@ -14,6 +14,9 @@ import sqlite3
 import sys
 from pathlib import Path
 
+# 脚本可独立运行：src 在仓库根（CI subprocess 无 PYTHONPATH）
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
+
 _ARTIFACT_ROLES = {"normalized", "markdown", "summary", "sections",
                    "consumer_analysis"}
 
