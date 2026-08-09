@@ -468,3 +468,108 @@ def reject_assertion(
             ),
         )
     return rejected
+
+
+def upsert_verified_assertion(
+    store: CatalogStore,
+    *,
+    source_id: str,
+    document_id: str,
+    content_sha256: str,
+    adapter_id: str,
+    adapter_version: str,
+    metadata_hash: str,
+    normalized: dict,
+    created_by: str = "cw-2.28-automation",
+) -> dict[str, Any]:
+    """WU-402: idempotent verified-assertion upsert.
+
+    Idempotency key = (source_id, content_sha256, adapter_id, adapter_version,
+    metadata_hash).  Same key twice => return the existing assertion (no
+    duplicate active rows).  Different metadata hash for the same content =>
+    a NEW assertion is appended (conflict coexists; history is never
+    overwritten).  All writes happen inside one transaction (TX-01).
+    """
+    from .normalized_meta import canonical_hash
+
+    existing = store.fetchone(
+        """SELECT * FROM source_metadata_assertions
+        WHERE source_id=? AND content_sha256=? AND adapter_id=? AND
+              adapter_version=? AND normalized_sha256=? AND decision='verified'
+        ORDER BY created_at DESC LIMIT 1""",
+        (source_id, content_sha256, adapter_id, adapter_version, metadata_hash),
+    )
+    if existing is not None:
+        return dict(existing)
+
+    evidence = normalized.get("evidence") or {}
+    assertion = _build_assertion(
+        source_id=source_id,
+        document_id=document_id,
+        content_sha256=content_sha256,
+        entity=normalized.get("display_name"),
+        market=normalized.get("market"),
+        security_id=normalized.get("security_id"),
+        document_kind=normalized.get("document_kind"),
+        form_type=normalized.get("regulatory_form"),
+        fiscal_year=(
+            int(normalized["fiscal_year"])
+            if str(normalized.get("fiscal_year", "")).isdigit() else None
+        ),
+        fiscal_period=normalized.get("period_kind"),
+        provider=normalized.get("provider"),
+        provider_document_id=normalized.get("provider_document_id"),
+        source_url=normalized.get("source_url"),
+        filing_date=normalized.get("filed_at"),
+        evidence_basis="v2-normalized",
+        evidence_json=evidence,
+        decision="verified",
+        created_by=created_by,
+    )
+    assertion["adapter_id"] = adapter_id
+    assertion["adapter_version"] = adapter_version
+    assertion["normalized_sha256"] = canonical_hash(normalized)
+    assertion["normalization_status"] = "capture_ready"
+    assertion["visibility_state"] = "shadow"  # never active until cutover
+
+    with store.transaction() as conn:
+        conn.execute(
+            """INSERT INTO source_metadata_assertions
+            (assertion_id, source_id, document_id, entity, market, security_id,
+             document_kind, form_type, fiscal_year, fiscal_period, provider,
+             provider_document_id, source_url, filing_date, content_sha256,
+             evidence_basis, evidence_json, decision, supersedes_assertion_id,
+             created_at, created_by, schema_version, adapter_id, adapter_version,
+             normalized_sha256, normalization_status, visibility_state)
+            VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)""",
+            (
+                assertion["assertion_id"],
+                assertion["source_id"],
+                assertion["document_id"],
+                assertion["entity"],
+                assertion["market"],
+                assertion["security_id"],
+                assertion["document_kind"],
+                assertion["form_type"],
+                assertion["fiscal_year"],
+                assertion["fiscal_period"],
+                assertion["provider"],
+                assertion["provider_document_id"],
+                assertion["source_url"],
+                assertion["filing_date"],
+                assertion["content_sha256"],
+                assertion["evidence_basis"],
+                assertion["evidence_json"],
+                assertion["decision"],
+                assertion["supersedes_assertion_id"],
+                assertion["created_at"],
+                assertion["created_by"],
+                assertion["schema_version"],
+                assertion["adapter_id"],
+                assertion["adapter_version"],
+                assertion["normalized_sha256"],
+                assertion["normalization_status"],
+                assertion["visibility_state"],
+            ),
+        )
+    return assertion
