@@ -13,7 +13,7 @@ from pathlib import Path
 import re
 import unicodedata
 import uuid
-from typing import Any, Callable, Iterable
+from typing import Any, Callable
 
 from company_wiki.source_contract import SourceManifest, SourceType
 

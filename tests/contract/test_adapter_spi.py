@@ -89,9 +89,10 @@ def test_spi01_adapter_imports_are_pure():
 
 
 # SPI-02 (reviewer F2): the scanner must never GAIN root-specific literal
-# branches.  Existing dayu branches (3) are frozen legacy — Phase 15 removes
-# them; any increase fails the gate.
-_FROZEN_SCANNER_ROOT_BRANCHES = 7
+# branches.  Count ALL ``.kind == "..."`` / ``root_id == "..."`` comparisons:
+# a brand-new literal (dayu_portfolio2) increases the count and fails the
+# gate; removing legacy branches is Phase 15 work.
+_FROZEN_SCANNER_KIND_COMPARISONS = 5
 
 
 def test_spi02_scanner_root_branch_freeze():
@@ -99,15 +100,10 @@ def test_spi02_scanner_root_branch_freeze():
 
     source = (Path(__file__).resolve().parents[2] / "src" /
               "company_wiki" / "source_catalog" / "scanner.py").read_text(encoding="utf-8")
-    patterns = (
-        r'kind\s*==\s*"dayu_portfolio"',
-        r'root_id\s*==\s*"dropbox_stock"',
-        r'kind\s*==\s*"directory"',
-        r'root\.kind\s*==\s*"company_raw"',
+    total = len(re.findall(r'\.kind\s*==\s*"', source)) + len(
+        re.findall(r'root_id\s*==\s*"', source)
     )
-    total = 0
-    for pattern in patterns:
-        total += len(re.findall(pattern, source))
-    assert total <= _FROZEN_SCANNER_ROOT_BRANCHES, (
-        f"scanner gained root-specific branches: {total} > {_FROZEN_SCANNER_ROOT_BRANCHES}"
+    assert total <= _FROZEN_SCANNER_KIND_COMPARISONS, (
+        f"scanner gained root-specific branches: {total} > "
+        f"{_FROZEN_SCANNER_KIND_COMPARISONS}"
     )
