@@ -345,3 +345,10 @@ MIT License
 
 - 基于 [Karpathy LLM Wiki](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f) 概念
 - 使用 [StockInfoDownloader](https://github.com/zhengcb81/StockInfoDownloader) 下载财报
+
+
+> Indexed does not equal reusable: only active, capture-ready documents under a registered reusable root kind are reuse candidates.
+
+> Indexed does not equal reusable: only active, capture-ready documents under a registered reusable root kind are reuse candidates.
+
+> Production truth boundaries (2026-08-09): real-root probes and canaries are read-only and never write to Dropbox/dayu/companies. Production reuse of Dropbox-only filings (WU-1303), v2 backfill (WU-902), and binding-valid processed artifacts (WU-1304) is **not yet claimed**: legacy evidence lacks strong identity/period/binding (0/7712 artifacts carry source binding; 0/23513 documents carry provable period_end). Fixture-level E2E stays green; production claims stay unclaimed until observation periods and the remediation window complete. See audit_review/2026-08-09_data_lake_refactor_plan/receipts/.
