@@ -410,7 +410,7 @@ def test_enumeration_exception_persists_an_interrupted_scan_run(tmp_path, monkey
     def fail_enumeration(*_args, **_kwargs):
         raise RuntimeError("enumeration fixture failure")
 
-    monkeypatch.setattr(scanner, "_enumerate_root", fail_enumeration)
+    monkeypatch.setattr(scanner, "_scan_root_v1", fail_enumeration)
 
     with pytest.raises(RuntimeError, match="enumeration fixture failure"):
         catalog.scan()

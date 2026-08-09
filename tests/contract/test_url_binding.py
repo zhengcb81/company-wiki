@@ -71,3 +71,12 @@ def test_hash_key_binding_allowed():
 def test_no_url_no_binding():
     docs = [_doc("acc-2024"), _doc("acc-2025")]
     assert bind_url(docs) == {}
+
+
+def test_company_name_key_rejected():
+    """F-052 first gate: company_name is NEVER a valid binding key."""
+    import pytest
+
+    docs = [_doc("acc-2023", url="https://x/2023")]
+    with pytest.raises(ValueError, match="company_name"):
+        bind_url(docs, key="company_name")

@@ -492,6 +492,11 @@ def upsert_verified_assertion(
     """
     from .normalized_meta import canonical_hash
 
+    if metadata_hash != canonical_hash(normalized):
+        raise ValueError(
+            "metadata_hash does not match canonical_hash(normalized) — "
+            "idempotency key would diverge from the stored value"
+        )
     existing = store.fetchone(
         """SELECT * FROM source_metadata_assertions
         WHERE source_id=? AND content_sha256=? AND adapter_id=? AND

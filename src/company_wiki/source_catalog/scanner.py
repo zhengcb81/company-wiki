@@ -379,7 +379,7 @@ def _load_security_master_identity(catalog_dir: Path) -> dict[str, tuple[str, st
     return mapping
 
 
-def _enumerate_root(
+def _scan_root_v1(
     root: RootSpec,
     company_names: tuple[str, ...],
     *,
@@ -925,7 +925,7 @@ def _scan_catalog_impl(
                     }
                 )
             continue
-        candidates, excluded, policy_count = _enumerate_root(
+        candidates, excluded, policy_count = scan_root_strategy(
             root,
             names,
             progress=progress,
@@ -1371,3 +1371,29 @@ def scan_catalog(
 
 
 __all__ = ["scan_catalog"]
+
+
+class ScannerFacadeError(RuntimeError):
+    """WU-500: the scanner seam failed closed."""
+
+
+def scan_root_strategy(
+    root: RootSpec,
+    company_names: tuple[str, ...],
+    *,
+    progress: Callable[..., None] | None = None,
+    master_identity: dict[str, tuple[str, str]] | None = None,
+    portfolio_urls: dict[str, str] | None = None,
+    v2_scan_shadow: bool = False,
+) -> tuple[list[_Candidate], int, int]:
+    """WU-500: scanner facade seam.  Default = v1 with identical behavior;
+    the v2 shadow stub fails closed until implemented (SEAM-02)."""
+    if v2_scan_shadow:
+        raise ScannerFacadeError("v2 scanner unavailable (fail closed)")
+    return _scan_root_v1(
+        root,
+        company_names,
+        progress=progress,
+        master_identity=master_identity,
+        portfolio_urls=portfolio_urls,
+    )
