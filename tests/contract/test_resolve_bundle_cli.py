@@ -77,3 +77,19 @@ def test_cli_readonly_no_writes(tmp_path):
         capture_output=True, text=True, encoding="utf-8", check=False,
     )
     assert catalog.stat().st_mtime_ns == before  # read-only guarantee
+
+
+def test_cli_readonly_rejects_writes(tmp_path):
+    """I3: a DML attempt on the read-only connection must fail."""
+    import sqlite3
+
+    catalog = _catalog(tmp_path)
+    con = sqlite3.connect(f"file:{catalog}?mode=ro", uri=True)
+    con.execute("PRAGMA query_only = ON")
+    try:
+        con.execute("UPDATE documents SET title='x' WHERE document_id='d1'")
+        assert False, "write must be rejected on read-only connection"
+    except sqlite3.OperationalError:
+        pass
+    finally:
+        con.close()
