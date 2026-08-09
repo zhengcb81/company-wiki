@@ -37,6 +37,7 @@ def _dropbox_tree(tmp_path: Path, files: list[tuple[str, dict | None]]) -> Path:
     root.mkdir()
     for name, sidecar in files:
         primary = root / name
+        primary.parent.mkdir(parents=True, exist_ok=True)
         primary.write_bytes(b"%PDF-1.4 " + name.encode("utf-8"))
         if sidecar is not None:
             primary.with_name(primary.name + ".source.json").write_text(
