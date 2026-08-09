@@ -36,6 +36,7 @@ def _build_assertion(
     form_type: str | None = None,
     fiscal_year: int | None = None,
     fiscal_period: str | None = None,
+    period_end: str | None = None,
     provider: str | None = None,
     provider_document_id: str | None = None,
     source_url: str | None = None,
@@ -57,6 +58,7 @@ def _build_assertion(
         "form_type": form_type,
         "fiscal_year": fiscal_year,
         "fiscal_period": fiscal_period,
+        "period_end": period_end,
         "provider": provider,
         "provider_document_id": provider_document_id,
         "source_url": source_url,
@@ -346,6 +348,7 @@ def verify_assertion(
         form_type=existing["form_type"],
         fiscal_year=existing["fiscal_year"],
         fiscal_period=existing["fiscal_period"],
+        period_end=existing["period_end"] if "period_end" in existing.keys() else None,
         provider=existing["provider"],
         provider_document_id=existing["provider_document_id"],
         source_url=existing["source_url"],
@@ -361,11 +364,11 @@ def verify_assertion(
         conn.execute(
             """INSERT INTO source_metadata_assertions
             (assertion_id, source_id, document_id, entity, market, security_id,
-             document_kind, form_type, fiscal_year, fiscal_period, provider,
-             provider_document_id, source_url, filing_date, content_sha256,
-             evidence_basis, evidence_json, decision, supersedes_assertion_id,
-             created_at, created_by, schema_version)
-            VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)""",
+             document_kind, form_type, fiscal_year, fiscal_period, period_end,
+             provider, provider_document_id, source_url, filing_date,
+             content_sha256, evidence_basis, evidence_json, decision,
+             supersedes_assertion_id, created_at, created_by, schema_version)
+            VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)""",
             (
                 new["assertion_id"],
                 new["source_id"],
@@ -377,6 +380,7 @@ def verify_assertion(
                 new["form_type"],
                 new["fiscal_year"],
                 new["fiscal_period"],
+                new["period_end"],
                 new["provider"],
                 new["provider_document_id"],
                 new["source_url"],
@@ -522,6 +526,7 @@ def upsert_verified_assertion(
             if str(normalized.get("fiscal_year", "")).isdigit() else None
         ),
         fiscal_period=normalized.get("period_kind"),
+        period_end=normalized.get("period_end"),
         provider=normalized.get("provider"),
         provider_document_id=normalized.get("provider_document_id"),
         source_url=normalized.get("source_url"),
@@ -541,12 +546,13 @@ def upsert_verified_assertion(
         conn.execute(
             """INSERT INTO source_metadata_assertions
             (assertion_id, source_id, document_id, entity, market, security_id,
-             document_kind, form_type, fiscal_year, fiscal_period, provider,
-             provider_document_id, source_url, filing_date, content_sha256,
-             evidence_basis, evidence_json, decision, supersedes_assertion_id,
-             created_at, created_by, schema_version, adapter_id, adapter_version,
-             normalized_sha256, normalization_status, visibility_state)
-            VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)""",
+             document_kind, form_type, fiscal_year, fiscal_period, period_end,
+             provider, provider_document_id, source_url, filing_date,
+             content_sha256, evidence_basis, evidence_json, decision,
+             supersedes_assertion_id, created_at, created_by, schema_version,
+             adapter_id, adapter_version, normalized_sha256,
+             normalization_status, visibility_state)
+            VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)""",
             (
                 assertion["assertion_id"],
                 assertion["source_id"],
@@ -558,6 +564,7 @@ def upsert_verified_assertion(
                 assertion["form_type"],
                 assertion["fiscal_year"],
                 assertion["fiscal_period"],
+                assertion["period_end"],
                 assertion["provider"],
                 assertion["provider_document_id"],
                 assertion["source_url"],
