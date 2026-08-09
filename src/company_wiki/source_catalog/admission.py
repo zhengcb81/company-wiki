@@ -234,3 +234,43 @@ __all__ = [
     "processing_priority",
     "processing_priority_sql",
 ]
+
+
+# WU-503: root-agnostic admission profile evaluation.  The SAME candidate
+# evaluated under different root_ids yields the SAME decision; only RootPolicy
+# authorization flags change the outcome (ADM-01..10).  No root name ever
+# appears in the decision path.
+
+def evaluate_candidate(
+    candidate: dict,
+    *,
+    policy_allows_filing: bool,
+    profile_allows_filing: bool,
+    content_hash_matches: bool,
+    status: str = "active",
+) -> AdmissionDecision:
+    """Fail-closed admission over candidate facts + policy/profile flags."""
+    reasons: list[str] = []
+    if not candidate.get("canonical_entity_id") or not candidate.get("security_id"):
+        reasons.append("identity_missing")
+    if not candidate.get("document_kind"):
+        reasons.append("kind_missing")
+    if not candidate.get("fiscal_year") or not candidate.get("period_end"):
+        reasons.append("period_missing")
+    if not candidate.get("content_sha256"):
+        reasons.append("hash_missing")
+    if not content_hash_matches:
+        reasons.append("content_hash_mismatch")
+    if status != "active":
+        reasons.append("status_not_active")
+    if not policy_allows_filing:
+        reasons.append("policy_denied")
+    if not profile_allows_filing:
+        reasons.append("non_filing_kind")
+    if reasons:
+        return _rejected("|".join(reasons), *reasons)
+    return _decision(
+        str(candidate["document_kind"]),
+        "v2_profile_admitted",
+        "candidate_facts",
+    )
