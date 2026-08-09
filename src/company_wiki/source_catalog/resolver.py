@@ -285,7 +285,16 @@ class ResolutionResult:
         return payload
 
 
-def _source_metadata(document: dict[str, Any]) -> dict[str, Any]:
+def _source_metadata(
+    document: dict[str, Any], *, store=None
+) -> dict[str, Any]:
+    """WU-801: v2 normalized assertion first; legacy containers as bridge."""
+    if store is not None:
+        source_id = document.get("source_id")
+        if source_id:
+            v2 = _v2_assertion_metadata(store, str(source_id))
+            if v2:
+                return v2
     metadata = document.get("metadata")
     if not isinstance(metadata, dict):
         return {}
@@ -456,7 +465,7 @@ class SourceResolver:
                     f"{document['source_status']}"
                 )
                 continue
-            metadata = _source_metadata(document)
+            metadata = _source_metadata(document, store=self.catalog.store)
             # --- identity-aware market/security_id filtering ---
             market_match = self._identity_matches(request, metadata)
             if market_match == "conflict":
@@ -890,3 +899,44 @@ __all__ = [
     "SourceResolutionError",
     "SourceResolver",
 ]
+
+
+def _v2_assertion_metadata(store, source_id: str) -> dict[str, Any] | None:
+    """WU-801: read the newest visible verified v2 assertion for a source.
+
+    Returns None when no verified v2 assertion exists (caller falls back to
+    the legacy container bridge).  visibility_state must not be 'shadow'
+    for any active reader; this resolver consults only legacy-visible rows
+    until cutover (WU-806 flips the epoch gate).
+    """
+    row = store.fetchone(
+        """SELECT evidence_json, fiscal_year, fiscal_period, document_kind,
+                  form_type, provider, provider_document_id, source_url,
+                  security_id, market, content_sha256
+           FROM source_metadata_assertions
+           WHERE source_id=? AND decision='verified'
+             AND visibility_state IN ('legacy', 'active')
+           ORDER BY created_at DESC LIMIT 1""",
+        (source_id,),
+    )
+    if row is None:
+        return None
+    evidence = {}
+    try:
+        evidence = json.loads(row["evidence_json"] or "{}")
+    except (TypeError, ValueError):
+        evidence = {}
+    metadata = {
+        "fiscal_year": row["fiscal_year"],
+        "fiscal_period": row["fiscal_period"],
+        "form_type": row["form_type"],
+        "document_kind": row["document_kind"],
+        "provider": row["provider"],
+        "provider_document_id": row["provider_document_id"],
+        "source_url": row["source_url"],
+        "security_id": row["security_id"],
+        "market": row["market"],
+        "content_sha256": row["content_sha256"],
+        "evidence": evidence,
+    }
+    return {k: v for k, v in metadata.items() if v is not None}
