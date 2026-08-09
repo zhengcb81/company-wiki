@@ -286,9 +286,14 @@ class ResolutionResult:
 
 
 def _source_metadata(
-    document: dict[str, Any], *, store=None
+    document: dict[str, Any], *, store=None, observer=None
 ) -> dict[str, Any]:
-    """WU-801: v2 normalized assertion first; legacy containers as bridge."""
+    """WU-801: v2 normalized assertion first; legacy containers as bridge.
+
+    ``observer`` (optional MetricsCollector) records a legacy_bridge_hit
+    every time a legacy acquisition/dayu_meta container is actually read —
+    the WU-1500 observation seam.  Absent observer: behavior unchanged.
+    """
     if store is not None:
         source_id = document.get("source_id")
         if source_id:
@@ -301,6 +306,8 @@ def _source_metadata(
     for key in ("acquisition", "dayu_meta"):
         value = metadata.get(key)
         if isinstance(value, dict) and value:
+            if observer is not None:
+                observer.record_reason("legacy_bridge_hit")
             return value
     return {}
 
@@ -407,10 +414,12 @@ def _load_issuer_index(
 class SourceResolver:
     """Resolve existing catalog sources without performing acquisition side effects."""
 
-    def __init__(self, catalog: SourceCatalog):
+    def __init__(self, catalog: SourceCatalog, *, observer=None):
         if not isinstance(catalog, SourceCatalog):
             raise TypeError("catalog must be SourceCatalog")
         self.catalog = catalog
+        # WU-1500: optional legacy observation collector; absent => no-op.
+        self.observer = observer
 
     def resolve(self, request: SourceRequest) -> ResolutionResult:
         if not isinstance(request, SourceRequest):
@@ -465,7 +474,9 @@ class SourceResolver:
                     f"{document['source_status']}"
                 )
                 continue
-            metadata = _source_metadata(document, store=self.catalog.store)
+            metadata = _source_metadata(
+                document, store=self.catalog.store, observer=self.observer
+            )
             # --- identity-aware market/security_id filtering ---
             market_match = self._identity_matches(request, metadata)
             if market_match == "conflict":
