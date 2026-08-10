@@ -1,0 +1,101 @@
+{
+  "schema_version": "2.0",
+  "fc_id": "FC-604",
+  "implementer_receipt_sha256": "e1a4c86ec39c3aea6765dc86a1a5a2b1a5c9653577bde1928346a9792649143e",
+  "reviewer_identity": "reviewer-fc604-independent",
+  "clean_checkout": true,
+  "base_triplet": {
+    "revenue": "7e10ea6db90ddd2a061a1f349c63689ac6067d2f",
+    "filing": "6274be2187b450d14492defd03579d6209d1b1cc",
+    "wiki": "47a03117ada0d5b3fe33ba9ab62a6718a3efeaeb"
+  },
+  "result_triplet": {
+    "revenue": "7e10ea6db90ddd2a061a1f349c63689ac6067d2f",
+    "filing": "6274be2187b450d14492defd03579d6209d1b1cc",
+    "wiki": "5a18935c1aae4ff226e5d2de43f6ffd7b38347c7"
+  },
+  "replayed_command_ids": [
+    "fc604.wiki.contract.focused",
+    "wiki.unit.full",
+    "fc604.ruff.changed",
+    "fc604.wiki.mutation.M1",
+    "revenue.governance.receipt"
+  ],
+  "scenario_results": [
+    {
+      "id": "FC-604-consistency",
+      "status": "passed",
+      "note": "Fresh replay in the clean detached worktree (HEAD 5a18935). test_fc604_cn_consistent_across_three_roots + test_fc604_us_consistent_across_three_roots: the same request matrix (CN 601899/1225023658, US AAPL/0000320193-25-000079) resolves REUSED_EXACT with an IDENTICAL 13-field contract (document_kind, form_type, fiscal_year, published_date, provider, provider_document_id, https_url, content_sha256, snapshot_sha256, mime_type, byte_size, capture_ready, source_status) across companies-only / dayu-only / Dropbox-only catalogs; only canonical_path differs (provenance), all three paths distinct and root-appropriate. Real production path exercised: SourceCatalog.scan -> SourceResolver.resolve -> _provider_identity."
+    },
+    {
+      "id": "FC-604-no-root-branch",
+      "status": "passed",
+      "note": "test_fc604_no_root_specific_branch_in_resolver (AST gate) passed: resolver.py carries NO ast.Compare constant operand equal to dropbox_stock/company_raw/dayu_portfolio — i.e. no root_id/root_kind conditional business branch; only the config-driven reusable_root_kinds allowance exists. Independently confirmed: the entire FC-604 diff is a single production line (provider fallback) + the new test file; no root special-casing introduced."
+    },
+    {
+      "id": "FC-604-provider-fix",
+      "status": "passed",
+      "note": "Production fix verified by fault injection (mutation M1): with `metadata.get(\"provider\") or metadata.get(\"source_provider\")` reverted to `metadata.get(\"provider\")`, exactly the two consistency tests FAILED with provider drift {'provider': 'cninfo'} != {'provider': None} on the dayu leg (dayu meta.json carries source_provider, not provider); after git checkout restore, 4/4 passed again and the worktree is clean. The contract consistency test genuinely caught the root-specific provider=None inconsistency."
+    }
+  ],
+  "mutation_results": [
+    {
+      "id": "M1",
+      "killed": true,
+      "target": "resolver.py _provider_identity provider fallback removed: `metadata.get(\"provider\") or metadata.get(\"source_provider\")` -> `metadata.get(\"provider\")`",
+      "evidence": "test_fc604_cn_consistent_across_three_roots FAILED and test_fc604_us_consistent_across_three_roots FAILED (2 failed, 2 passed) with assert {'provider': 'cninfo'} != {'provider': None} on the dayu_portfolio leg (12 contract fields identical, provider drifted to None); __pycache__ cleared before the run; restored via git checkout; worktree clean; post-restore rerun 4 passed. The kill is the exact target defect (dayu provider=None gap), not a syntax/fixture/environment error."
+    }
+  ],
+  "side_effect_reconciliation": {
+    "passed": true,
+    "note": "All read-only: downloads=0, external_root_writes=0, catalog_mutations=0, llm_calls=0, parser_calls=0. The FC-604 diff touches only resolver.py (1 production line) and the new test file; every test fixture builds catalogs and source files under pytest tmp_path. My review wrote nothing to production roots or the live catalog; the only file I created is this reviewer receipt."
+  },
+  "codegraph_reachability": {
+    "passed": true,
+    "note": "company-wiki CodeGraph index queried independently: _provider_identity defined at resolver.py:373 (matches the clean worktree line 373) with exactly ONE production caller — SourceResolver.resolve; signature unchanged (metadata: dict[str, Any]) -> tuple[str | None, str | None, set[str]) — so the fix changes only the function body, producing ZERO call-edge changes (receipt claim production_callers before/after 0 confirmed). resolve's index line (492) vs worktree line 614 differs only because the main checkout sits at an older commit than the review worktree; structural facts confirmed by direct source read and fresh test execution."
+  },
+  "rollback": {
+    "required": false,
+    "passed": true,
+    "note": "1-line resolver fix + contract tests; revert = revert commit 6042f31 (and the receipt-seal commit 5a18935)."
+  },
+  "unresolved_findings": [
+    {
+      "id": "full-suite-exit-code-environment-dependent",
+      "severity": "low",
+      "note": "Implementer receipt records exit_code 0 for `python -m pytest tests/ -q` with '2146 passed / 2 pre-existing PORT-01 failures'. My fresh full-suite replay in the clean worktree gave the IDENTICAL counts (2 failed, 2146 passed, 1 skipped in 423.89s) but pytest exit code 1. The discrepancy is environmental and identical to the FC-603 review finding: the 2 failing tests (test_check_unique_test_symbols.py::test_duplicate_test_definition_fails, ::test_syntax_error_is_reported_as_failure) fail only when the gate subprocess stdout cannot be decoded as UTF-8 on a GBK Windows console (UnicodeDecodeError byte 0xd4); under a UTF-8 console/codepage they pass and the suite exits 0. Counts, failure identities, and zero-new-failures all match; not a fabrication."
+    },
+    {
+      "id": "PORT-01-pre-existing-1",
+      "severity": "pre-existing",
+      "note": "wiki tests/contract/test_check_unique_test_symbols.py::test_duplicate_test_definition_fails FAILED in my fresh full-suite replay (UTF-8 subprocess decode error on GBK Windows console — PORT-01/FC-1205 scope); file untouched by the FC-604 diff (only resolver.py + test_three_root_consistency_fc604.py changed), pre-existing and reproduced identically."
+    },
+    {
+      "id": "PORT-01-pre-existing-2",
+      "severity": "pre-existing",
+      "note": "wiki tests/contract/test_check_unique_test_symbols.py::test_syntax_error_is_reported_as_failure FAILED in my fresh full-suite replay (same PORT-01 UTF-8 subprocess decode, FC-1205 scope); file untouched by the FC-604 diff, pre-existing."
+    },
+    {
+      "id": "skip-env-symlink",
+      "severity": "info",
+      "note": "fresh full suite has exactly 1 skip: tests/contract/test_dropbox_root_policy_fc501.py 'symlinks not supported on this host' — environment platform skip in dependency FC-501 test; zero FC-604 skips (no skip/xfail/deselect markers in test_three_root_consistency_fc604.py)."
+    },
+    {
+      "id": "manifest-current-triplet-revenue-stale",
+      "severity": "info",
+      "note": "compatibility/current.json (revenue repo) still pins current_triplet revenue 4e6e6eb, refreshed at 4a31fca before the FC-604 base (7e10ea6); 7e10ea6 is a descendant of 4e6e6eb and the frozen-baseline descendant invariant holds, so the manifest gates stay green; a manifest refresh commit is pending."
+    },
+    {
+      "id": "no-remote-branch",
+      "severity": "info",
+      "note": "FC-604 result commits (6042f31, 5a18935) exist only on the local fcap branch / review worktree, not on origin; audit trail preserved locally; release wave will push."
+    },
+    {
+      "id": "codegraph-index-stale",
+      "severity": "info",
+      "note": "company-wiki CodeGraph index (main checkout) predates the review worktree HEAD; FC-604's only production change is one line inside _provider_identity whose signature and single caller are unchanged, so the pinned structural facts are unaffected; verified by direct source read + fresh test execution."
+    }
+  ],
+  "verdict": "accepted",
+  "reviewed_at": "2026-08-11"
+}
