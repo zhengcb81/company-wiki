@@ -1,0 +1,63 @@
+{
+  "schema_version": "2.0",
+  "fc_id": "FC-503",
+  "implementer_receipt_sha256": "b6c6962194075c6f132f234b6f23e8456123da25f749ee8ff19ee3c5ed38d12a",
+  "reviewer_identity": "reviewer-fc503-independent",
+  "clean_checkout": true,
+  "base_triplet": {
+    "revenue": "2a076dabc934eb223d0d514d76ba70bc06e53091",
+    "filing": "6274be2187b450d14492defd03579d6209d1b1cc",
+    "wiki": "0932f21cb9efa2a9cf1f7e65ee96e1963681039b"
+  },
+  "result_triplet": {
+    "revenue": "2a076dabc934eb223d0d514d76ba70bc06e53091",
+    "filing": "6274be2187b450d14492defd03579d6209d1b1cc",
+    "wiki": "0932f21cb9efa2a9cf1f7e65ee96e1963681039b"
+  },
+  "replayed_command_ids": [
+    "fc503.wiki.contract.focused",
+    "wiki.unit.full",
+    "fc503.ruff.changed",
+    "fc503.real_root.replay",
+    "revenue.governance.receipt",
+    "fc304.gate.future_root_config_only"
+  ],
+  "scenario_results": [
+    {"id": "DBX-06", "status": "passed", "note": "retired/revoked never revived: independently verified live catalog read-only — 中国平安 weak-identity docs retired=49 active=27, all 27 active capture-incomplete (no fiscal_year); real-root replay (two full passes, exit 0) kept every invariant and produced an identical fingerprint across runs."},
+    {"id": "FC-503-real-root", "status": "passed", "note": "independent real-root replay (tools/dropbox_governance_replay.py, executed from main company-wiki checkout at commit 0932f21 where the 49.3GB catalog resides; worktree has no .source_catalog): exit 0, identical-across-two-runs; candidates_total 7167 (original_primary 4000 / indexed_only 3167); buckets eligible=0 needs_review=0 unprovable=7167; duplicate_location_sets 2890 (matched by ACTUAL file-bytes sha256); pingan path_candidates=32 unprovable=32 eligible=0; fingerprint_sha256 86980b4965e4cefe71ce0c7f16be11d0a15354249797848ca5c2d60740c3bf91 — EXACT match to implementer-recorded digest; catalog counts 23513/43074/46573 unchanged; writes=0."},
+    {"id": "FC-503-no-delete", "status": "passed", "note": "no companies copy deleted to fabricate exclusive-source proof: production module opens the catalog mode=ro in both _catalog_counts and _duplicate_sets; fixture test asserts companies copy bytes+mtime unchanged and catalog counts unchanged; real-root catalog counts verified identical before and after my own replay (23513/43074/46573); duplicate sets are REPORTED (2890), never hidden."}
+  ],
+  "mutation_results": [
+    {"id": "M1", "killed": true, "target": "inventory_dropbox: guess security_id from filename before classify_bucket", "evidence": "injected filename 6-digit regex -> acq['security_id']; test_fc503_filename_hint_never_upgrades_pingan FAILED (exit 1); git checkout restored, worktree clean"},
+    {"id": "M2", "killed": true, "target": "inventory_dropbox: drop missing-fields accumulation", "evidence": "replaced per-field loop with '_ = missing'; test_fc503_missing_fields_reported_per_bucket FAILED (exit 1); restored, worktree clean"},
+    {"id": "M3", "killed": true, "target": "_duplicate_sets: return empty duplicate report", "evidence": "injected unconditional early return of {count:0}; test_fc503_duplicate_location_sets_reported_no_delete FAILED (exit 1); restored, worktree clean"},
+    {"id": "M4", "killed": true, "target": "inventory_dropbox: drop per-file fingerprint embedding", "evidence": "replaced fingerprint stat/sha256 block with pass; test_fc503_complete_sidecar_inventoried_as_filing FAILED (exit 1); restored, worktree clean"},
+    {"id": "M5", "killed": true, "target": "_is_pingan_candidate: always return False", "evidence": "return False; test_fc503_pingan_weak_identity_stays_unprovable FAILED (exit 1); restored, worktree clean"},
+    {"id": "M6", "killed": true, "target": "inventory_dropbox: 中国平安 eligible guard raise -> pass", "evidence": "raise GovernanceError(...) replaced with pass; test_fc503_pingan_guard_blocks_unreviewed_promotion FAILED with 'DID NOT RAISE GovernanceError' (exit 1); restored via git checkout, worktree clean; control run 7 passed"}
+  ],
+  "side_effect_reconciliation": {
+    "passed": true,
+    "note": "downloads=0 external_root_writes=0 catalog_mutations=0 llm_calls=0 parser_calls=0; real-root replay proves zero writes — two full inventory passes produced byte-identical per-file fingerprints and the digest matches the implementer's recorded 86980b49... exactly; catalog row counts unchanged (23513/43074/46573) before and after; no companies/dayu/Dropbox file touched"
+  },
+  "codegraph_reachability": {
+    "passed": true,
+    "note": "wiki CodeGraph index predates FC-503 (dropbox_governance.py not indexed; index built from an older checkout state) — reachability verified by direct full-module source read in the clean worktree: inventory_dropbox imports and calls scan_root_via_adapter (adapter_dispatch.py:79; index confirms production caller scan_root_strategy scanner.py:1413) and classify_bucket (backfill_v2.py, production); FC-304 gate re-run green (test_future_root_config_only.py 5 passed); no root-id/Dropbox hardcode tokens in module text (grep count 0)"
+  },
+  "rollback": {
+    "required": false,
+    "passed": true,
+    "note": "Additive read-only inventory + contract tests + replay tool; zero production behavior change (no production caller invokes inventory_dropbox yet; no writes); revert = revert commit 61e5526"
+  },
+  "unresolved_findings": [
+    {"id": "implementer-receipt-base-wiki-hash", "severity": "medium", "note": "FC-503 implementer receipt base_triplet.wiki = 2555633d8891ce6c10bfbe406b246f67d4ffbdb8 does NOT exist as any git object (checked worktree, main company-wiki repo, all .fcap-review worktrees, filing-fetch repo). The actual FC-502 closure-merge commit (same 7-char prefix 2555633) is 2555633856e00671baa55c8eb79e60afa5addcf9. Diff scope 2555633856..61e55267 re-verified = exactly the 3 allowed files; result triplet 61e55267 exists and is ancestor of worktree HEAD 0932f21. Receipt hash error only — no code/evidence impact; recovery: implementer should correct base_triplet.wiki in a receipt revision."},
+    {"id": "no-remote-branch", "severity": "info", "note": "fcap result commits exist only in local review worktrees / local fcap branch, not pushed to origin (git branch -a shows no origin/fcap); audit trail preserved locally; release wave will push"},
+    {"id": "PORT-01-pre-existing-1", "severity": "pre-existing", "note": "wiki tests/contract/test_check_unique_test_symbols.py::test_duplicate_test_definition_fails FAILED in full suite (TypeError: NoneType not iterable on proc.stdout — UTF-8 subprocess decode on Windows, FC-1205 scope); file untouched by FC-503 diff, pre-existing"},
+    {"id": "PORT-01-pre-existing-2", "severity": "pre-existing", "note": "wiki tests/contract/test_check_unique_test_symbols.py::test_syntax_error_is_reported_as_failure FAILED in full suite (same PORT-01 UTF-8 subprocess decode, FC-1205 scope); file untouched by FC-503 diff, pre-existing"},
+    {"id": "skip-env-symlink", "severity": "info", "note": "full suite has 1 skip: tests/contract/test_dropbox_root_policy_fc501.py (4th test, 'symlinks not supported on this host') — environment platform skip in dependency FC-501 test; no FC-503 skip"},
+    {"id": "registry-status-pending", "severity": "info", "note": "work_unit_registry.md at revenue HEAD 2a076dab still lists FC-503 'pending' while the implementer receipt states independent_review; status advancement is expected at acceptance by the closure validator — no FC-503 code impact"},
+    {"id": "codegraph-index-stale", "severity": "info", "note": "wiki CodeGraph index was built before FC-503 landed and does not index dropbox_governance.py; production-caller verification was performed by direct source read instead (documented in codegraph_reachability)"},
+    {"id": "real-root-replay-execution-location", "severity": "info", "note": "replay tool resolves CATALOG_PATH from __file__ -> repo-root/.source_catalog; the review worktree has no .source_catalog, so the replay was executed from the main company-wiki checkout at the identical commit 0932f21 (verified HEAD + byte-identical file content, CRLF/LF checkout difference only). No replay finding: exit 0, all invariants matched."}
+  ],
+  "verdict": "accepted",
+  "reviewed_at": "2026-08-10"
+}
