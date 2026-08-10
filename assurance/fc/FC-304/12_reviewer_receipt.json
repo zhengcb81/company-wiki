@@ -1,0 +1,90 @@
+{
+  "schema_version": "2.0",
+  "fc_id": "FC-304",
+  "implementer_receipt_sha256": "c45de2e97a4166dab2671b0b5bc5d904841ff676c3f7ec327bc6bca3b7c0c186",
+  "reviewer_identity": "reviewer-fc304-independent",
+  "clean_checkout": true,
+  "base_triplet": {
+    "revenue": "e05535852acf6ff691c2806b51a046964e2a2143",
+    "filing": "d5e87237bd976b61c0d41127a8090b66031d4a72",
+    "wiki": "328d694a3c7713f871e12203e914aa466340fd94"
+  },
+  "result_triplet": {
+    "revenue": "e05535852acf6ff691c2806b51a046964e2a2143",
+    "filing": "d5e87237bd976b61c0d41127a8090b66031d4a72",
+    "wiki": "328d694a3c7713f871e12203e914aa466340fd94"
+  },
+  "replayed_command_ids": [
+    "fc304.focused-contract-5",
+    "fc304.contract-subset-12",
+    "wiki.unit.full",
+    "fc304.ruff-2-changed-files",
+    "revenue.governance.receipt"
+  ],
+  "scenario_results": [
+    {
+      "id": "EX-08",
+      "status": "passed",
+      "note": "Replayed fresh in clean detached worktree at 328d694. A temp future_lake root + 2.x RootPolicy config (adapter_id sidecar_filing_v1, admission_profile_id financial_evidence_v1, read_only, reusable_for_filing, allowed_document_kinds [annual_report], priority 10, cohort future-cohort, canonical_write_target null) loads via load_root_policy_2x, produces candidates via scan_root_strategy(v2_scan_shadow=True) (candidate x.pdf found), and export_policy_2x snapshot carries root_id future_lake with explicit adapter_id/cohort. Verified end-to-end by reviewer script (load -> v2 shadow scan -> snapshot export) with ZERO product-code edits; the sealed diff (base ed3da079..result 31707093) touches no scanner.py / resolver.py / adapters code. Unregistered adapter (not_registered_v1) fails config load fail-closed."
+    },
+    {
+      "id": "POL-01",
+      "status": "passed",
+      "note": "architecture_gate no_root_specific_hardcode: gate passes on the production tree (test_gate_no_root_id_hardcode_in_production GREEN) and trips on an adversarial temp module hardcoding dropbox_stock/company_raw (test_gate_detects_root_id_hardcode GREEN). Token list = dropbox_stock, company_raw, dayu_portfolio, Dropbox; allowlist rationale documented in code: new-policy modules (registry, policy_2x, config, adapter_dispatch), adapters by contract, the gate itself, and documented legacy owners (FC-1201 backlog: scanner, models, canonical_writer, portfolio_promoter, admission, focus_cleanup, backfill_v2, entity_resolver, observability, resolver, cli). Gate scans source_catalog/ rglob(*.py), skips test_*/__* files, literal-token matching (conservative direction)."
+    }
+  ],
+  "mutation_results": [
+    {
+      "id": "FC-304-M-review-adapter-check-removed",
+      "killed": true,
+      "detail": "removed the unknown-adapter check in load_root_policy_2x (policy_2x.py:85-88: 'if adapter_id is not None and registered_adapter(...) is None: raise CatalogConfigError') -> test_ex08_future_root_requires_no_scanner_edit FAILED ('DID NOT RAISE <class Exception>'): config load silently accepted adapter_id not_registered_v1 instead of failing closed. Restored via git checkout; worktree clean."
+    },
+    {
+      "id": "FC-304-M-review-dropbox-token-removed",
+      "killed": true,
+      "detail": "removed 'dropbox_stock' from _ROOT_HARDCODE_TOKENS in architecture_gate.py -> test_gate_detects_root_id_hardcode FAILED (assert False: no violation reported for the evil module's dropbox_stock hardcode). The gate cannot silently shrink its token coverage. Restored via git checkout; worktree clean."
+    },
+    {
+      "id": "FC-304-config-only-chain-verification",
+      "killed": true,
+      "detail": "Reviewer's own independent replay (not the implementer's test): temp future_lake dir + 2.x config written from scratch -> load_root_policy_2x -> scan_root_strategy(v2_scan_shadow=True) returned candidate x.pdf -> export_policy_2x snapshot contains future_lake with adapter_id sidecar_filing_v1 and cohort future-cohort. Full chain flows with zero edits to scanner/resolver/adapters code (the sealed diff base..result contains no such files). Dispatch confirmed via existing production seams: scan_root_strategy v2_scan_shadow branch -> scan_root_via_adapter (adapter_dispatch.py:79) -> adapter_for -> registered_adapter; plus a second independent fail-closed layer at dispatch time (adapter_for raises AdapterDispatchError on unknown ids)."
+    }
+  ],
+  "side_effect_reconciliation": {
+    "passed": true,
+    "detail": "receipt claims downloads 0 / external_root_writes 0 / catalog_mutations 0 / llm_calls 0 / parser_calls 0. FC-304 diff is additive (gate function + 5 tests + receipt file); all replayed tests and the reviewer config-only chain write only to pytest tmp_path / tempdirs; llm_cost_log.csv NOT in diff (verified name-only base..HEAD, grep count 0); review worktree stayed clean at every checkpoint (git status clean after suite, after each mutation restore, and at final check)."
+  },
+  "codegraph_reachability": {
+    "passed": true,
+    "detail": "CodeGraph index at company-wiki (446 files) is a pre-FC-304 snapshot: the new symbol no_root_specific_hardcode is not yet in the index (watcher lag), so callers were verified at AST/literal level: it is called only by the two new gate tests (test_gate_no_root_id_hardcode_in_production, test_gate_detects_root_id_hardcode) and exported via __all__ — the CI gate itself is test-called, matching the receipt's note. Production seams confirmed in the index: scan_root_strategy (scanner.py:1354) -> scan_root_via_adapter (adapter_dispatch.py:79, the v2_scan_shadow branch); adapter_for callers = scan_root_via_adapter + _v2_adapter_candidates (shadow_parity.py:79, production shadow runner) + dispatch tests; load_root_policy_2x callers include the FC-304 tests (not yet indexed) and FC-301 tests. The future-root flow uses ONLY existing production seams (policy_2x loader FC-301, adapter_dispatch FC-302, scanner v2 shadow FC-303) with zero new product-code branches: the sealed diff touches no scanner/resolver/adapters file."
+  },
+  "rollback": {
+    "required": false,
+    "passed": true,
+    "detail": "Additive gate function + 5 tests (plus receipt). Revert = revert commits 31707093 (code) and 328d694 (seal), both ancestors of review HEAD 328d694. No config/DB/root writes; no runtime control-plane state involved."
+  },
+  "unresolved_findings": [
+    {
+      "id": "FIND-304-1",
+      "severity": "informational",
+      "note": "No origin/fcap remote branch exists (git branch -r empty; local branches: fcap, main, phase-14-input-build-tools, phase-19-tooling-docs). All triplet commits verified: revenue e0553585 (revenue-forecast HEAD), filing d5e87237 (filing-fetch HEAD), wiki base ed3da079 and result 31707093 both present in the worktree with 31707093 an ancestor of review HEAD 328d694. Sealing hashes recomputed in revenue repo: task_plan.md = 158fc1e1e4231e3c2dc71822a58931fdca64eff79fc0d4e27b8276a397f4c78a and compatibility/command_registry.json = 215b8077169126b2c4a5eca9d8d6237f291757c2559f6ae6e0ae8ff1c806b089 — both match the implementer receipt."
+    },
+    {
+      "id": "FIND-304-2",
+      "severity": "informational",
+      "note": "Full suite (raw pytest): collected 2060, 2058 passed / 2 failed in 533.03s. The 2 failures are tests/contract/test_check_unique_test_symbols.py::test_duplicate_test_definition_fails and ::test_syntax_error_is_reported_as_failure — PORT-01, pre-existing (subprocess reader-thread UnicodeDecodeError / PytestUnhandledThreadExceptionWarning, GBK bytes on Windows console), owned by FC-1205; they also fail standalone (2 failed, 3 passed in isolation). The implementer's 2057 vs my 2058 passed is the worker-bootstrap timing flake (test_whole_repo_passes_currently runs a whole-repo subprocess; it passed in both my isolation run and full suite). Zero FC-304 failures."
+    },
+    {
+      "id": "FIND-304-3",
+      "severity": "informational",
+      "note": "Exit-code recording convention: raw pytest exits 1 (2 pre-existing PORT-01 failures); the implementer receipt records exit_code 0 for the piped command — same convention as prior FCs (FIND-303-R2-5). The receipt's result text documents the failures accurately."
+    },
+    {
+      "id": "FIND-304-4",
+      "severity": "informational",
+      "note": "The implementer receipt file itself is part of the sealed diff (added at 31707093, triplet/results sealed at 328d694); the receipt's allowed_files/changed_files lists only the 2 code files. Scope verified: name-only diff base..result = architecture_gate.py + test_future_root_config_only.py + 11_implementer_receipt.json; llm_cost_log.csv absent. The gate scans only src/company_wiki/source_catalog/ (rglob) — consistent with sibling gates in the same module; all root-relevant production code (scanner, resolver, adapters, policy) lives there."
+    }
+  ],
+  "verdict": "accepted",
+  "reviewed_at": "2026-08-10"
+}
