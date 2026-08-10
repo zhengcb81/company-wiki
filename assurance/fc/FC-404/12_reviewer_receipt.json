@@ -1,0 +1,103 @@
+{
+  "schema_version": "2.0",
+  "fc_id": "FC-404",
+  "implementer_receipt_sha256": "cfe10d2fb6e7fde1a2d4a4fab3ff7db72e14840a57cf8e7b40c5ea0f6cd95779",
+  "reviewer_identity": "reviewer-fc404-independent",
+  "clean_checkout": true,
+  "base_triplet": {
+    "revenue": "ba29a46b1ba9979679df4a314eae062164def646",
+    "filing": "d5e87237bd976b61c0d41127a8090b66031d4a72",
+    "wiki": "c1bd54ba244e9ecc8ee45cce14ccdec765edb6e0"
+  },
+  "result_triplet": {
+    "revenue": "ba29a46b1ba9979679df4a314eae062164def646",
+    "filing": "d5e87237bd976b61c0d41127a8090b66031d4a72",
+    "wiki": "7f067e49e1d2d5c4aec239c67f894cf1d6e04223"
+  },
+  "replayed_command_ids": [
+    "fc404.focused-7",
+    "fc404.full-suite-2093-2pre",
+    "fc404.ruff-2-changed-files",
+    "revenue.governance.receipt-validator"
+  ],
+  "scenario_results": [
+    {
+      "id": "MIG-06",
+      "status": "passed",
+      "note": "Duplicate location sets verified by code read + fresh replay: ledger joins locations->sources and flags any document with >=2 active original_primary locations sharing exactly 1 distinct content_sha256; duplicate_location_sets counter asserted in test_ledger_detects_duplicate_location_sets and test_duplicate_location_mutation_killed (both green in fresh run; mutation M1 killed). Deterministic, no ordering dependency."
+    },
+    {
+      "id": "MIG-05",
+      "status": "passed",
+      "note": "Per-root/market/kind coverage ledger verified: by_root/by_kind/by_market slots record input + eligible/needs_review/unprovable/retired_or_conflict buckets + missing_fields (security_id/provider_document_id/period_end/source_url/provider); ledger_is_closed enforces per-root bucket sum == input (pre-apply gate). Tests test_ledger_records_coverage_per_root, test_ledger_records_by_kind, test_ledger_is_closed_before_apply green; independent multi-root probe (company_raw+dayu) also closed."
+    },
+    {
+      "id": "SAFE-03",
+      "status": "passed",
+      "note": "Retired documents never revived: rows with source_status='retired' are excluded from migration input entirely (continue before bucketing); retired_locations counted separately via location_status='retired'. test_retired_document_not_revived green; mutation M2 killed. Real files never modified: catalog byte-hash identical before/mid/after two ledger builds."
+    }
+  ],
+  "mutation_results": [
+    {
+      "id": "FC-404-M1",
+      "mutation": "removed duplicate-location detection block (primary_locations>=2 AND source_hashes==1) from build_quality_ledger",
+      "killed": true,
+      "killing_tests": [
+        "test_ledger_detects_duplicate_location_sets",
+        "test_duplicate_location_mutation_killed"
+      ],
+      "observed": "2 failed, 5 passed; restored via git checkout"
+    },
+    {
+      "id": "FC-404-M2",
+      "mutation": "removed retired-skip (if source_status=='retired': continue) from build_quality_ledger",
+      "killed": true,
+      "killing_tests": [
+        "test_retired_document_not_revived"
+      ],
+      "observed": "1 failed, 6 passed; restored via git checkout"
+    }
+  ],
+  "side_effect_reconciliation": {
+    "passed": true,
+    "note": "Implementer receipt declares downloads=0, external_root_writes=0, catalog_mutations=0, llm_calls=0, parser_calls=0. Independently confirmed: diff range c1bd54ba..HEAD contains only the 2 allowed code files + the FC-404 implementer receipt itself (llm_cost_log.csv absent from range); ledger code contains only read-only SELECTs (no writes/downloads/LLM); catalog read-only proven by sha256 of catalog DB bytes identical across two build_quality_ledger invocations (32306807741ebc74c9a4cec523260f8f0eedde4556948623356bc45eab09b6a5)."
+  },
+  "codegraph_reachability": {
+    "passed": true,
+    "note": "Fresh CodeGraph index built over the exact result checkout (9,216 nodes): build_quality_ledger has 6 callers, all in tests/contract/test_migration_quality_ledger_fc404.py; ledger_is_closed has 1 caller (test_ledger_is_closed_before_apply); zero production callers. Literal gate: no src/ file imports the migration_ledger module (grep across whole checkout: only the test file and receipt reference it; shadow_parity.migration_ledger is an unrelated FC-303 function). Consistent with the receipt claim: pre-apply quality-gate seam, production apply consumption lands in Phase 14 release waves."
+  },
+  "rollback": {
+    "required": false,
+    "passed": true,
+    "note": "Purely additive: feat commit 7955c7f adds 3 new files (408 insertions, 0 deletions) — migration_ledger.py, test file, implementer receipt; no existing behavior modified. Revert = revert commit 7955c7f."
+  },
+  "unresolved_findings": [
+    {
+      "severity": "info",
+      "finding": "company-wiki has no origin/fcap remote branch (only origin/master; local fcap exists but is not pushed). Worktree is detached at verified HEAD 7f067e4. Recorded informational per procedure.",
+      "recovery": "none"
+    },
+    {
+      "severity": "info",
+      "finding": "2 pre-existing PORT-01 failures reproduced fresh in full suite: tests/contract/test_check_unique_test_symbols.py::test_duplicate_test_definition_fails and ::test_syntax_error_is_reported_as_failure (UnicodeDecodeError: 'utf-8' codec can't decode byte 0xd4 in subprocess reader thread — Windows GBK/OEM encoding issue, FC-1205 owner). Same 2 tests fail in isolation (2 failed, 3 passed); frozen command registry (sha 215b8077...) documents the same pair as the wiki.unit.full baseline; file untouched by FC-404 diff. Full suite: 2093 passed / 2 failed in 539.54s — exactly matching the implementer receipt claim.",
+      "recovery": "FC-1205"
+    },
+    {
+      "severity": "info",
+      "finding": "Implementer receipt records exit_code 0 for 'python -m pytest tests/ -q'; actual pytest exit code is 1 (2 documented pre-existing failures; no exitcode override in pytest.ini/conftest). This matches the convention in all prior accepted receipts (FC-401/402/403 record exit 0 for the same command with the same 2 failures, meaning 'zero NEW failures, expected outcome'). Substance fully verified (2093/2 exact); representation nuance only.",
+      "recovery": "none (convention)"
+    },
+    {
+      "severity": "info",
+      "finding": "The ledger's conflicts counter and retired_or_conflict bucket have no population path in this implementation (always 0): _bucket_for returns only eligible/needs_review/unprovable and source_status values in the schema are active/retired only; FC-402 classifier statuses (backfill_v2 buckets) are not joined. Consistent with the stated seam design (production apply consumption lands in Phase 14 waves, FC-901 dry-run buckets reuse the same ledger pattern). Not blocking for FC-404 acceptance scenarios MIG-05/MIG-06/SAFE-03.",
+      "recovery": "Phase 14 classifier wiring"
+    },
+    {
+      "severity": "info",
+      "finding": "A reviewer-created .codegraph index directory remains in the worktree (gitignored; DB file locked by the CodeGraph MCP server process; removable after server exit). It contains no product data and git status is clean — no impact on clean_checkout.",
+      "recovery": "none"
+    }
+  ],
+  "verdict": "accepted",
+  "reviewed_at": "2026-08-10"
+}
