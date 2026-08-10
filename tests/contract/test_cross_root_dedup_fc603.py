@@ -52,6 +52,7 @@ def _same_bytes_fixture(tmp_path: Path) -> tuple[Path, list[RootSpec], bytes]:
         "schema_version": "1.0", "canonical_entity_id": "ent-acme",
         "display_name": "Acme", "market": "US", "security_id": "ACME",
         "document_kind": "annual_report", "fiscal_year": 2025,
+        "filing_date": "2026-02-20", "form_type": "10-K",
         "period_end": "2025-12-31", "provider": "sec",
         "provider_document_id": "doc-1",
         "source_url": "https://sec.gov/x/2025",

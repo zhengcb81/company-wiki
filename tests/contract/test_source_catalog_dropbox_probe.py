@@ -111,27 +111,21 @@ def test_probe_missing_when_directory_kind_not_reusable(tmp_path):
 
 
 def test_probe_reused_exact_when_directory_kind_reusable(tmp_path):
-    """KNOWN GAP (F-034 revised, user decision 2026-08-08): adding 'directory'
-    to reusable kinds is NECESSARY but NOT sufficient in the current runtime.
-
-    The scanner persists sidecar metadata only under company_raw/dayu_portfolio
-    roots (``acquisition``/``dayu_meta`` keys), so resolver._source_metadata()
-    returns {} for directory roots → form_type/identity/https_url checks fail.
-
-    This test currently asserts the ACTUAL behavior (MISSING with the gap
-    trace). AFTER the minimal scanner fix (persist directory-root sidecar
-    metadata into ``acquisition``), flip this to assert REUSED_EXACT.
-    """
+    """FC-505: the known-gap is closed — with 'directory' in reusable kinds
+    AND the scanner persisting directory-root sidecar metadata into
+    ``acquisition``, the Dropbox fixture resolves REUSED_EXACT (the Phase 5
+    exit gate's RED/GREEN flip; the resolver-MISSING green test no longer
+    exists)."""
     from company_wiki.source_catalog import ResolutionStatus, SourceResolver
 
     catalog, primary = _dropbox_catalog(
         tmp_path, ("company_raw", "dayu_portfolio", "directory")
     )
     result = SourceResolver(catalog).resolve(_request())
-    # KNOWN GAP assertion — replace with REUSED_EXACT block below after fix:
-    assert result.status is ResolutionStatus.MISSING, result.status
-    trace = list(result.debug_trace)
-    assert any("form_type_mismatch" in item or "identity" in item or "capture_incomplete" in item for item in trace), trace
+    assert result.status is ResolutionStatus.REUSED_EXACT, result.status
+    handle = result.matches[0]
+    assert handle.capture_ready is True
+    assert "dropbox" in handle.canonical_path.replace("\\", "/").casefold()
 
 
 def test_probe_broker_research_not_reused_for_annual_request(tmp_path):
