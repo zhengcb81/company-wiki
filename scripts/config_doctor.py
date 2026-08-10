@@ -65,8 +65,10 @@ def _cross_repo_checks(config, root: Path, problems: list[str]) -> None:
 
     1. kind=directory roots must be EXACTLY {dropbox_stock} (a second
        directory root would silently gain reuse rights).
-    2. The Dropbox realpath here must equal filing-fetch's allowance
-       realpath (double-config drift fail-fast).
+    2. FC-501 (CONFIG-DBX-03/04): filing-fetch holds NO independent root
+       allowance (allowed_handle_roots is rejected by its config schema);
+       the Dropbox root's single source of truth is this
+       source_catalog.yaml.  The doctor verifies the wiki side only.
     """
     directory_roots = {
         str(r.root_id) for r in config.roots if r.kind == "directory"
@@ -89,29 +91,25 @@ def _cross_repo_checks(config, root: Path, problems: list[str]) -> None:
         import os
 
         payload = json.loads(filing_config.read_text(encoding="utf-8"))
-        allowance = payload.get("allowed_handle_roots") or []
         dropbox_wiki = next(
             (r for r in config.roots if r.root_id == "dropbox_stock"), None
         )
         if dropbox_wiki is None:
             problems.append("dropbox_stock root missing from source_catalog.yaml")
             return
+        # FC-501: a filing-fetch config smuggling back an independent root
+        # allowlist is a contract violation (CONFIG-DBX-03).
+        if payload.get("allowed_handle_roots"):
+            problems.append(
+                "filing-fetch config must NOT carry allowed_handle_roots "
+                "(FC-501: the policy snapshot is the single source; the "
+                "config schema rejects it)"
+            )
         profile = os.environ.get("USERPROFILE") or str(Path.home())
         wiki_path = str(dropbox_wiki.path).replace("${USER_PROFILE}", profile)
-        filing_dropbox = next(
-            (a for a in allowance if str(a).replace("\\", "/").endswith("Dropbox/Stock")),
-            None,
-        )
-        if filing_dropbox is None:
+        if not Path(wiki_path).resolve().name == "Stock" or "Dropbox" not in str(Path(wiki_path)):
             problems.append(
-                "filing-fetch allowance is missing Dropbox/Stock "
-                f"(source_catalog.yaml lists {wiki_path})"
-            )
-            return
-        filing_path = str(filing_dropbox).replace("${USER_PROFILE}", profile)
-        if Path(wiki_path).resolve() != Path(filing_path).resolve():
-            problems.append(
-                f"Dropbox realpath drift: wiki={wiki_path} filing={filing_path}"
+                f"dropbox_stock path does not point at Dropbox/Stock: {wiki_path}"
             )
     except Exception as exc:  # noqa: BLE001 - report every failure mode
         problems.append(f"cross-repo config check failed: {exc}")
