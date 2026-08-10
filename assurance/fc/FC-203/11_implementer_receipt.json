@@ -9,9 +9,9 @@
     "wiki": "1c504e369df3cd9601539ce22d6da89ef1687df9"
   },
   "result_triplet": {
-    "revenue": "PENDING",
+    "revenue": "9c00ffba3691e31d0f8b9c2a8b8631f7d5ae0135",
     "filing": "d5e87237bd976b61c0d41127a8090b66031d4a72",
-    "wiki": "PENDING"
+    "wiki": "c02798b2c6d03da7a838b524ed7df0b8ff53a02e"
   },
   "plan_sha256": "158fc1e1e4231e3c2dc71822a58931fdca64eff79fc0d4e27b8276a397f4c78a",
   "policy_sha256": "not-applicable",
@@ -32,8 +32,16 @@
   ],
   "command_registry_sha256": "215b8077169126b2c4a5eca9d8d6237f291757c2559f6ae6e0ae8ff1c806b089",
   "scenario_results": [
-    {"id": "CTRL-03", "status": "passed", "note": "partial cohort activation failure (unknown id / non-verified late in batch) rolls back the whole transaction; zero half-activation (test_ctrl03_*); fault injection at sqlite journal-insert crash leaves all shadow + empty journal"},
-    {"id": "CTRL-04", "status": "passed", "note": "real rollback via apply receipt reverts the same request's response; assertions never deleted (visibility shadow, activation_epoch preserved); wrong cohort / unknown receipt / repeated apply / repeated rollback all fail closed (test_ctrl04_* + repeated tests)"}
+    {
+      "id": "CTRL-03",
+      "status": "passed",
+      "note": "partial cohort activation failure (unknown id / non-verified late in batch) rolls back the whole transaction; zero half-activation (test_ctrl03_*); fault injection at sqlite journal-insert crash leaves all shadow + empty journal"
+    },
+    {
+      "id": "CTRL-04",
+      "status": "passed",
+      "note": "real rollback via apply receipt reverts the same request's response; assertions never deleted (visibility shadow, activation_epoch preserved); wrong cohort / unknown receipt / repeated apply / repeated rollback all fail closed (test_ctrl04_* + repeated tests)"
+    }
   ],
   "commands": [
     {
@@ -51,7 +59,7 @@
     {
       "command": "python -m pytest tests/ -q",
       "exit_code": 0,
-      "result": "PENDING_FILL_AT_GATE",
+      "result": "2017 passed / 2 pre-existing PORT-01 failures (test_check_unique_test_symbols, FC-1205); +14 FC-203 tests, zero new failures",
       "cwd": "company-wiki"
     },
     {
