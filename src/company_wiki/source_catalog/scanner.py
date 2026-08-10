@@ -1360,10 +1360,17 @@ def scan_root_strategy(
     portfolio_urls: dict[str, str] | None = None,
     v2_scan_shadow: bool = False,
 ) -> tuple[list[_Candidate], int, int]:
-    """WU-500: scanner facade seam.  Default = v1 with identical behavior;
-    the v2 shadow stub fails closed until implemented (SEAM-02)."""
+    """WU-500 + FC-302: scanner facade seam.  Default = v1 with identical
+    behavior; v2 shadow dispatches through the registered adapter
+    (adapter_dispatch) and fails closed on unresolvable routes."""
     if v2_scan_shadow:
-        raise ScannerFacadeError("v2 scanner unavailable (fail closed)")
+        from .adapter_dispatch import AdapterDispatchError, scan_root_via_adapter
+
+        try:
+            candidates = scan_root_via_adapter(root, company_names, progress=progress)
+        except AdapterDispatchError as exc:
+            raise ScannerFacadeError(f"v2 scanner unavailable (fail closed): {exc}")
+        return candidates, 0, 0
     return _scan_root_v1(
         root,
         company_names,
