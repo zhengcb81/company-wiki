@@ -1,0 +1,108 @@
+{
+  "schema_version": "2.0",
+  "fc_id": "FC-402",
+  "status": "independent_review",
+  "mode": "honest-implementer",
+  "base_triplet": {
+    "revenue": "a9c6e5c1c770889742ffd743bf9b23e358c0615b",
+    "filing": "d5e87237bd976b61c0d41127a8090b66031d4a72",
+    "wiki": "0cdbd93e81842dd5dbfe177cf41e52a006b25817"
+  },
+  "result_triplet": {
+    "revenue": "PENDING",
+    "filing": "d5e87237bd976b61c0d41127a8090b66031d4a72",
+    "wiki": "PENDING"
+  },
+  "plan_sha256": "158fc1e1e4231e3c2dc71822a58931fdca64eff79fc0d4e27b8276a397f4c78a",
+  "policy_sha256": "not-applicable",
+  "allowed_files": [
+    "company-wiki/src/company_wiki/source_catalog/backfill_v2.py",
+    "company-wiki/tests/contract/test_backfill_buckets_fc402.py"
+  ],
+  "changed_files": [
+    "company-wiki/src/company_wiki/source_catalog/backfill_v2.py",
+    "company-wiki/tests/contract/test_backfill_buckets_fc402.py"
+  ],
+  "dependency_receipts": [
+    "company-wiki/assurance/fc/FC-401/11_implementer_receipt.json (accepted 2026-08-10)"
+  ],
+  "command_registry_sha256": "215b8077169126b2c4a5eca9d8d6237f291757c2559f6ae6e0ae8ff1c806b089",
+  "scenario_results": [
+    {
+      "id": "SAFE-01",
+      "status": "passed",
+      "note": "display-name security_id (中国平安 style) never a strong identity -> unprovable"
+    },
+    {
+      "id": "SAFE-02",
+      "status": "passed",
+      "note": "company name stored as security_id cannot soft-match into strong identity"
+    },
+    {
+      "id": "SAFE-03",
+      "status": "passed",
+      "note": "missing period_end / critical fields -> needs_review or unprovable, never capture-ready"
+    },
+    {
+      "id": "SAFE-04",
+      "status": "passed",
+      "note": "non-HTTPS source URL fails closed -> unprovable"
+    }
+  ],
+  "commands": [
+    {
+      "command": "python -m pytest tests/contract/test_backfill_buckets_fc402.py -q",
+      "exit_code": 0,
+      "result": "9 passed",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "python -m pytest tests/contract/test_backfill_v2.py tests/contract/test_backfill_buckets_fc402.py -q",
+      "exit_code": 0,
+      "result": "15 passed",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "python -m pytest tests/ -q",
+      "exit_code": 0,
+      "result": "PENDING_FILL_AT_GATE",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "ruff check src/company_wiki/source_catalog/backfill_v2.py tests/contract/test_backfill_buckets_fc402.py",
+      "exit_code": 0,
+      "result": "All checks passed",
+      "cwd": "company-wiki"
+    }
+  ],
+  "side_effect_counts": {
+    "downloads": 0,
+    "external_root_writes": 0,
+    "catalog_mutations": 0,
+    "llm_calls": 0,
+    "parser_calls": 0
+  },
+  "codegraph": {
+    "production_callers_before": 1,
+    "production_callers_after": 1,
+    "note": "classify_bucket added to backfill_v2 (existing run_backfill + WU-904 drill harness use _classify; classify_bucket is the no-guessing four-bucket seam)."
+  },
+  "mutation": {
+    "id": "FC-402-M",
+    "killed": true,
+    "details": "3 enforcement points verified: drop-https-check KILLED, drop-conflict-check KILLED, weaken-fallthrough-unprovable KILLED (weak-identity enforced via fall-through; explicit branch is defense-in-depth)."
+  },
+  "rollback": {
+    "required": false,
+    "proved": true,
+    "note": "Additive classifier + tests; revert = revert commit."
+  },
+  "review": {
+    "reviewer": "",
+    "reviewer_receipt_sha256": "",
+    "decision": "pending",
+    "reviewed_at": "",
+    "note": "honest-implementer: awaits independent reviewer per independent_review_protocol.md"
+  },
+  "provisional_note": "result_triplet to be sealed after commit."
+}

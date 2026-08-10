@@ -123,6 +123,57 @@ def _classify(acq: dict) -> StrongBinding:
     )
 
 
+def classify_bucket(
+    acq: dict,
+    *,
+    evidence_hint_only: bool = False,
+    existing_verified_hash: str | None = None,
+) -> tuple[str, list[str]]:
+    """FC-402: classify a filing into exactly one bucket.
+
+    eligible            — strong identity + provable period + HTTPS source
+                           (capture-ready candidate)
+    needs_review        — strong identity but period not provable from
+                           metadata (never guessed from the file name)
+    unprovable          — weak identity (display-name security_id, 中国平安
+                           style) or critical field missing; fails closed
+                           until evidence is completed
+    retired_or_conflict — content hash conflicts with an existing verified
+                           assertion (history coexists, never overwritten)
+
+    ``evidence_hint_only`` marks a document whose only evidence is its file
+    name/title: the name is at most a hint and NEVER makes it capture-ready.
+    """
+    if evidence_hint_only:
+        missing = ["content_sha256"]
+        if not acq.get("security_id"):
+            missing.append("security_id")
+        return "unprovable", missing
+    missing = [f for f in _REQUIRED_STRONG if not acq.get(f)]
+    security_id = acq.get("security_id")
+    if not _is_strong_security(str(security_id or ""), acq.get("company_name")):
+        missing.append("security_id")
+    source_url = str(acq.get("source_url") or "")
+    if source_url and not source_url.lower().startswith("https://"):
+        missing.append("source_url")
+    if missing:
+        # weak identity / critical field missing -> unprovable; a mere
+        # missing period keeps the strong identity but needs review
+        if "security_id" in missing or "provider_document_id" in missing:
+            return "unprovable", sorted(set(missing))
+        if "period_end" in missing:
+            return "needs_review", sorted(set(missing))
+        return "unprovable", sorted(set(missing))
+    period_end = acq.get("period_end")
+    if not period_end:
+        return "needs_review", ["period_end"]
+    if existing_verified_hash is not None:
+        declared = str(acq.get("content_sha256") or "")
+        if declared and existing_verified_hash != declared:
+            return "retired_or_conflict", []
+    return "eligible", []
+
+
 def run_backfill(
     catalog: Path,
     *,
