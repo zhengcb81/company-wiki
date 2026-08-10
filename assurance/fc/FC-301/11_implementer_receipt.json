@@ -1,0 +1,100 @@
+{
+  "schema_version": "2.0",
+  "fc_id": "FC-301",
+  "status": "independent_review",
+  "mode": "honest-implementer",
+  "base_triplet": {
+    "revenue": "bd2906954b0f23007d7ccf975b6154c9ba646182",
+    "filing": "d5e87237bd976b61c0d41127a8090b66031d4a72",
+    "wiki": "be48c87a0dc708c8422d2bbcf859f43dcfb06140"
+  },
+  "result_triplet": {
+    "revenue": "PENDING",
+    "filing": "d5e87237bd976b61c0d41127a8090b66031d4a72",
+    "wiki": "PENDING"
+  },
+  "plan_sha256": "158fc1e1e4231e3c2dc71822a58931fdca64eff79fc0d4e27b8276a397f4c78a",
+  "policy_sha256": "not-applicable",
+  "allowed_files": [
+    "company-wiki/src/company_wiki/source_catalog/policy_2x.py",
+    "company-wiki/src/company_wiki/source_catalog/models.py",
+    "company-wiki/tests/contract/test_root_policy_2x.py"
+  ],
+  "changed_files": [
+    "company-wiki/src/company_wiki/source_catalog/policy_2x.py",
+    "company-wiki/src/company_wiki/source_catalog/models.py",
+    "company-wiki/tests/contract/test_root_policy_2x.py"
+  ],
+  "dependency_receipts": [
+    "company-wiki/assurance/fc/FC-205/11_implementer_receipt.json (accepted 2026-08-10)"
+  ],
+  "command_registry_sha256": "215b8077169126b2c4a5eca9d8d6237f291757c2559f6ae6e0ae8ff1c806b089",
+  "scenario_results": [
+    {
+      "id": "EX-08",
+      "status": "passed",
+      "note": "2.x loader/doctor in place; future-root config-only proof is FC-304 (this FC adds the loader without changing production scan behavior)"
+    },
+    {
+      "id": "POL-01",
+      "status": "passed",
+      "note": "consumer-local allowance cannot widen: 2.x export snapshot carries only the config-declared roots with explicit policy fields"
+    }
+  ],
+  "commands": [
+    {
+      "command": "python -m pytest tests/contract/test_root_policy_2x.py -q",
+      "exit_code": 0,
+      "result": "11 passed",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "python -m pytest tests/contract/test_root_policy_2x.py tests/contract/test_policy_and_flags.py tests/contract/test_adapter_registry.py tests/contract/test_dropbox_config_invariants.py tests/test_config_doctor.py -q",
+      "exit_code": 0,
+      "result": "37 passed",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "python -m pytest tests/ -q",
+      "exit_code": 0,
+      "result": "PENDING_FILL_AT_GATE",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "ruff check src/company_wiki/source_catalog/policy_2x.py src/company_wiki/source_catalog/models.py tests/contract/test_root_policy_2x.py",
+      "exit_code": 0,
+      "result": "All checks passed",
+      "cwd": "company-wiki"
+    }
+  ],
+  "side_effect_counts": {
+    "downloads": 0,
+    "external_root_writes": 0,
+    "catalog_mutations": 0,
+    "llm_calls": 0,
+    "parser_calls": 0
+  },
+  "codegraph": {
+    "production_callers_before": 0,
+    "production_callers_after": 0,
+    "note": "FC-301 adds the 2.x loader/doctor/export as an additive path; production scanner still uses the 1.x loader (FC-305 cutover). doctor/export are the production-facing seams for consumers and the migration gate."
+  },
+  "mutation": {
+    "id": "FC-301-M",
+    "killed": true,
+    "details": "5 mutations all killed: drop-external-writable-check, drop-unknown-adapter-check, drop-unknown-profile-check, drop-duplicate-root-check, drop-route-widening-check."
+  },
+  "rollback": {
+    "required": false,
+    "proved": true,
+    "note": "Additive loader + model fields with defaults; revert = revert commit; 1.x loader untouched."
+  },
+  "review": {
+    "reviewer": "",
+    "reviewer_receipt_sha256": "",
+    "decision": "pending",
+    "reviewed_at": "",
+    "note": "honest-implementer: awaits independent reviewer per independent_review_protocol.md"
+  },
+  "provisional_note": "result_triplet to be sealed after commit."
+}

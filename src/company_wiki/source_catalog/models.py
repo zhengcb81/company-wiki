@@ -103,6 +103,10 @@ class RootSpec:
     sidecar_suffixes: tuple[str, ...] = ()
     encoding: str = "utf-8"
     privacy_class: str = "public"
+    # FC-301 RootPolicy 2.x: explicit cohort and canonical write target.
+    # Only company_raw may set a write target; external roots stay read-only.
+    cohort: str | None = None
+    canonical_write_target: str | None = None
 
 
 
