@@ -9,9 +9,9 @@
     "wiki": "e336c8647380eba7e3ad93f6859ca1454b4f5f69"
   },
   "result_triplet": {
-    "revenue": "PENDING",
+    "revenue": "85dddb3c34b45a8a5716f52c1d8ad6345873754b",
     "filing": "d5e87237bd976b61c0d41127a8090b66031d4a72",
-    "wiki": "PENDING"
+    "wiki": "7cf59570d47d99351165520dd4ba7a76586631d0"
   },
   "plan_sha256": "158fc1e1e4231e3c2dc71822a58931fdca64eff79fc0d4e27b8276a397f4c78a",
   "policy_sha256": "not-applicable",
@@ -57,7 +57,7 @@
     {
       "command": "python -m pytest tests/ -q",
       "exit_code": 0,
-      "result": "PENDING_FILL_AT_GATE",
+      "result": "2044 passed / 2 pre-existing PORT-01 (test_check_unique_test_symbols, FC-1205) + 1 timing flake (worker bootstrap, passes in isolation); +9 FC-302 tests, zero FC-302 failures",
       "cwd": "company-wiki"
     },
     {
