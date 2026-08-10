@@ -1,0 +1,105 @@
+{
+  "schema_version": "2.0",
+  "fc_id": "FC-503",
+  "status": "independent_review",
+  "mode": "honest-implementer",
+  "base_triplet": {
+    "revenue": "2a076dabc934eb223d0d514d76ba70bc06e53091",
+    "filing": "6274be2187b450d14492defd03579d6209d1b1cc",
+    "wiki": "2555633d8891ce6c10bfbe406b246f67d4ffbdb8"
+  },
+  "result_triplet": {
+    "revenue": "2a076dabc934eb223d0d514d76ba70bc06e53091",
+    "filing": "6274be2187b450d14492defd03579d6209d1b1cc",
+    "wiki": "61e55267c6bde968436f488041f43759f52f26b4"
+  },
+  "plan_sha256": "158fc1e1e4231e3c2dc71822a58931fdca64eff79fc0d4e27b8276a397f4c78a",
+  "policy_sha256": "not-applicable",
+  "allowed_files": [
+    "company-wiki/src/company_wiki/source_catalog/dropbox_governance.py",
+    "company-wiki/tests/contract/test_dropbox_governance_fc503.py",
+    "company-wiki/tools/dropbox_governance_replay.py"
+  ],
+  "changed_files": [
+    "company-wiki/src/company_wiki/source_catalog/dropbox_governance.py",
+    "company-wiki/tests/contract/test_dropbox_governance_fc503.py",
+    "company-wiki/tools/dropbox_governance_replay.py"
+  ],
+  "dependency_receipts": [
+    "company-wiki/assurance/fc/FC-502/11_implementer_receipt.json (accepted 2026-08-10)"
+  ],
+  "command_registry_sha256": "215b8077169126b2c4a5eca9d8d6237f291757c2559f6ae6e0ae8ff1c806b089",
+  "scenario_results": [
+    {
+      "id": "DBX-06",
+      "status": "passed",
+      "note": "retired/revoked never revived: fixture test + real-root replay proves 中国平安 retired docs (49) stay retired and active weak-identity docs (27) stay capture-incomplete (no fiscal_year) across two inventory runs"
+    },
+    {
+      "id": "FC-503-real-root",
+      "status": "passed",
+      "note": "real root read-only inventory (tools/dropbox_governance_replay.py): 7167 candidates, 4000 original_primary / 3167 indexed_only, buckets eligible=0 needs_review=0 unprovable=7167; missing fields on all 7167 (security_id/provider_document_id/source_url/form_type/fiscal_year/provider); duplicate location sets by ACTUAL bytes into other roots = 2890; pingan path_candidates=32 unprovable=32 eligible=0; fingerprint_sha256 86980b49... identical across two runs; catalog counts 23513/43074/46573 unchanged; writes=0"
+    },
+    {
+      "id": "FC-503-no-delete",
+      "status": "passed",
+      "note": "companies copies never deleted to fabricate exclusive-source proof: catalog opened mode=ro, catalog row counts unchanged, duplicate sets reported (not hidden), companies fixture file bytes/mtime unchanged"
+    }
+  ],
+  "commands": [
+    {
+      "command": "python -m pytest tests/contract/test_dropbox_governance_fc503.py -q",
+      "exit_code": 0,
+      "result": "7 passed",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "python -m pytest tests/ -q",
+      "exit_code": 0,
+      "result": "2115 passed / 2 pre-existing PORT-01 failures (test_check_unique_test_symbols, FC-1205); +7 FC-503 tests, zero new failures",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "ruff check src/company_wiki/source_catalog/dropbox_governance.py tests/contract/test_dropbox_governance_fc503.py tools/dropbox_governance_replay.py",
+      "exit_code": 0,
+      "result": "All checks passed",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "python tools/dropbox_governance_replay.py",
+      "exit_code": 0,
+      "result": "identical-across-two-runs; candidates 7167; buckets eligible=0/unprovable=7167; dup location sets=2890; pingan 32/32 unprovable/0 eligible; fingerprint_sha256 86980b4965e4cefe71ce0c7f16be11d0a15354249797848ca5c2d60740c3bf91; catalog 23513/43074/46573; pingan retired=49 active=27 capture-incomplete=27; writes=0",
+      "cwd": "company-wiki"
+    }
+  ],
+  "side_effect_counts": {
+    "downloads": 0,
+    "external_root_writes": 0,
+    "catalog_mutations": 0,
+    "llm_calls": 0,
+    "parser_calls": 0
+  },
+  "codegraph": {
+    "production_callers_before": 0,
+    "production_callers_after": 1,
+    "note": "inventory_dropbox composes scan_root_via_adapter (FC-302 registry dispatch) + classify_bucket (FC-402); FC-304 gate clean (no root-id/Dropbox hardcode — other root ids are caller-supplied); Dropbox 写=0 proven by embedded fingerprint."
+  },
+  "mutation": {
+    "id": "FC-503-M",
+    "killed": true,
+    "details": "6 mutations killed: M1 filename-security_id-guess, M2 missing-fields dropped, M3 duplicate detection disabled, M4 fingerprint dropped, M5 pingan classification bypassed, M6 pingan guard removed — each caught by test_fc503_*."
+  },
+  "rollback": {
+    "required": false,
+    "proved": true,
+    "note": "Additive inventory + tests + replay tool; zero production behavior changes; revert = revert commit."
+  },
+  "review": {
+    "reviewer": "",
+    "reviewer_receipt_sha256": "",
+    "decision": "pending",
+    "reviewed_at": "",
+    "note": "honest-implementer: awaits independent reviewer per independent_review_protocol.md"
+  },
+  "provisional_note": "result_triplet sealed at commit 61e5526."
+}
