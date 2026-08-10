@@ -1,0 +1,43 @@
+{
+  "schema_version": "2.0",
+  "fc_id": "FC-502",
+  "implementer_receipt_sha256": "f263f8b002b2990c6ab40861f527870d51a1cc97f12eccbfbed344313037cf35",
+  "reviewer_identity": "reviewer-fc502-independent",
+  "clean_checkout": true,
+  "base_triplet": {
+    "revenue": "6aadfde070cedc51d614668d6d6b72b8fd591a3f",
+    "filing": "6274be2187b450d14492defd03579d6209d1b1cc",
+    "wiki": "e03e4a3c7544ce0d1f9e2e55ee62cda798a6e6f4"
+  },
+  "result_triplet": {
+    "revenue": "6aadfde070cedc51d614668d6d6b72b8fd591a3f",
+    "filing": "6274be2187b450d14492defd03579d6209d1b1cc",
+    "wiki": "e03e4a3c7544ce0d1f9e2e55ee62cda798a6e6f4"
+  },
+  "replayed_command_ids": [
+    "fc502.wiki.contract.focused",
+    "wiki.unit.full",
+    "fc502.ruff.changed",
+    "revenue.governance.receipt"
+  ],
+  "scenario_results": [
+    {"id": "DBX-01", "status": "passed", "note": "test_fc502_dropbox_candidate_flows_full_chain: complete sidecar candidate flows scan_root_via_adapter (registry dispatch) -> SidecarFilingAdapter -> normalized group_metadata with normalization_status=capture_ready; evaluate_candidate admits. Independently re-verified chain with standalone script (temp root, production modules only): capture_ready + admitted, no legacy borrow."},
+    {"id": "DBX-03", "status": "passed", "note": "test_fc502_adapter_never_borrows_legacy_containers: sidecar with acquisition/dayu_meta poisoned fields yields normalized from pure sidecar facts (fiscal_year 2025, provider example-filing; acquisition/dayu_meta absent). Killed mutation FC-502-M (see mutation_results)."},
+    {"id": "DBX-04", "status": "passed", "note": "test_fc502_research_doc_indexable_but_not_filing: research PDF without sidecar is enumerated original_primary with empty group_metadata (indexable) but evaluate_candidate rejects as filing."},
+    {"id": "DBX-07", "status": "passed", "note": "test_fc502_rescan_does_not_modify_dropbox: two rescans leave pdf/sidecar bytes and mtime_ns untouched. Independently re-verified rescan read-only invariant with standalone script."}
+  ],
+  "mutation_results": [
+    {"id": "FC-502-M", "killed": true, "target": "src/company_wiki/source_catalog/adapters/sidecar.py _normalized_from_sidecar borrow acquisition/dayu_meta containers", "evidence": "injected {'acquisition': payload.get('acquisition'), 'dayu_meta': payload.get('dayu_meta')} into normalized -> test_fc502_adapter_never_borrows_legacy_containers FAILED (AssertionError: 'acquisition' not in normalized, exit 1, 1 failed); git checkout restored sidecar.py, worktree verified clean, control tests green (4 passed)"}
+  ],
+  "side_effect_reconciliation": {"passed": true, "note": "all replayed commands local-only on tmp_path roots; downloads=0, external_root_writes=0, catalog_mutations=0, llm_calls=0, parser_calls=0 (matches implementer side_effect_counts)"},
+  "codegraph_reachability": {"passed": true, "note": "wiki index: adapter_dispatch.py:20 imports SidecarFilingAdapter, _ADAPTER_FACTORIES (adapter_dispatch.py:29) maps 'sidecar_filing_v1' -> SidecarFilingAdapter(); production chain _scan_catalog_impl (scanner.py:859) -> scan_root_strategy (scanner.py:1413) -> scan_root_via_adapter; FC-502 tests pin the contract via scan_root_via_adapter + SidecarFilingAdapter"},
+  "rollback": {"required": false, "passed": true, "note": "test-only FC (contract pinning, additive test file); revert = revert commit 047be816"},
+  "unresolved_findings": [
+    {"id": "no-remote-branch", "severity": "info", "note": "fcap result commits exist only in local review worktrees, not pushed to origin (branch has no upstream; git branch -a shows no origin/fcap); audit trail preserved locally, release wave will push"},
+    {"id": "PORT-01-pre-existing-1", "severity": "pre-existing", "note": "wiki tests/contract/test_check_unique_test_symbols.py::test_duplicate_test_definition_fails FAILED in full suite (UTF-8 subprocess decode on Windows, FC-1205 scope); file untouched by FC-502 diff (7bcd3b25..047be816), pre-existing"},
+    {"id": "PORT-01-pre-existing-2", "severity": "pre-existing", "note": "wiki tests/contract/test_check_unique_test_symbols.py::test_syntax_error_is_reported_as_failure FAILED in full suite (same PORT-01 UTF-8 subprocess decode, FC-1205 scope); file untouched by FC-502 diff, pre-existing"},
+    {"id": "skip-env-symlink", "severity": "info", "note": "full suite has 1 skip: tests/contract/test_dropbox_root_policy_fc501.py:135 'symlinks not supported on this host' — environment platform skip in dependency FC-501 test, not an FC-502 test; no FC-502 skip"}
+  ],
+  "verdict": "accepted",
+  "reviewed_at": "2026-08-10"
+}
