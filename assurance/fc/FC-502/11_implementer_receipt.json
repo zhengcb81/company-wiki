@@ -1,0 +1,100 @@
+{
+  "schema_version": "2.0",
+  "fc_id": "FC-502",
+  "status": "independent_review",
+  "mode": "honest-implementer",
+  "base_triplet": {
+    "revenue": "6aadfde070cedc51d614668d6d6b72b8fd591a3f",
+    "filing": "6274be2187b450d14492defd03579d6209d1b1cc",
+    "wiki": "7bcd3b2556534b3c55e3a9badcf8c1c916357193"
+  },
+  "result_triplet": {
+    "revenue": "PENDING",
+    "filing": "6274be2187b450d14492defd03579d6209d1b1cc",
+    "wiki": "PENDING"
+  },
+  "plan_sha256": "158fc1e1e4231e3c2dc71822a58931fdca64eff79fc0d4e27b8276a397f4c78a",
+  "policy_sha256": "not-applicable",
+  "allowed_files": [
+    "company-wiki/tests/contract/test_sidecar_production_scan_fc502.py"
+  ],
+  "changed_files": [
+    "company-wiki/tests/contract/test_sidecar_production_scan_fc502.py"
+  ],
+  "dependency_receipts": [
+    "company-wiki/assurance/fc/FC-501/11_implementer_receipt.json (accepted 2026-08-10)"
+  ],
+  "command_registry_sha256": "215b8077169126b2c4a5eca9d8d6237f291757c2559f6ae6e0ae8ff1c806b089",
+  "scenario_results": [
+    {
+      "id": "DBX-01",
+      "status": "passed",
+      "note": "Dropbox candidate flows registry dispatch -> adapter -> normalized assertion (capture_ready); admission accepts"
+    },
+    {
+      "id": "DBX-03",
+      "status": "passed",
+      "note": "adapter never borrows acquisition/dayu_meta into normalized output (pure sidecar facts)"
+    },
+    {
+      "id": "DBX-04",
+      "status": "passed",
+      "note": "research doc without sidecar: indexable (empty normalized) but admission rejects as filing"
+    },
+    {
+      "id": "DBX-07",
+      "status": "passed",
+      "note": "two rescans leave Dropbox bytes and mtime untouched"
+    }
+  ],
+  "commands": [
+    {
+      "command": "python -m pytest tests/contract/test_sidecar_production_scan_fc502.py -q",
+      "exit_code": 0,
+      "result": "4 passed",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "python -m pytest tests/ -q",
+      "exit_code": 0,
+      "result": "PENDING_FILL_AT_GATE",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "ruff check src/company_wiki/source_catalog/adapters/sidecar.py tests/contract/test_sidecar_production_scan_fc502.py",
+      "exit_code": 0,
+      "result": "All checks passed",
+      "cwd": "company-wiki"
+    }
+  ],
+  "side_effect_counts": {
+    "downloads": 0,
+    "external_root_writes": 0,
+    "catalog_mutations": 0,
+    "llm_calls": 0,
+    "parser_calls": 0
+  },
+  "codegraph": {
+    "production_callers_before": 1,
+    "production_callers_after": 1,
+    "note": "SidecarFilingAdapter already wired via registry dispatch (FC-302); FC-502 pins the production scan contract: full chain, no legacy borrow, research docs indexable-but-not-filing, rescan read-only."
+  },
+  "mutation": {
+    "id": "FC-502-M",
+    "killed": true,
+    "details": "1 mutation killed: borrow-legacy-containers (adapter returning acquisition/dayu_meta in normalized) caught by test_fc502_adapter_never_borrows_legacy_containers."
+  },
+  "rollback": {
+    "required": false,
+    "proved": true,
+    "note": "Test-only FC (contract pinning); revert = revert commit."
+  },
+  "review": {
+    "reviewer": "",
+    "reviewer_receipt_sha256": "",
+    "decision": "pending",
+    "reviewed_at": "",
+    "note": "honest-implementer: awaits independent reviewer per independent_review_protocol.md"
+  },
+  "provisional_note": "result_triplet to be sealed after commit."
+}
