@@ -74,7 +74,7 @@
   "codegraph": {
     "production_callers_before": 0,
     "production_callers_after": 1,
-    "note": "cutover_decision/gate_production_dry_shadow/root_fingerprint called from scan_catalog (production dry-shadow gate) + tests; v1 read-only fallback unchanged."
+    "note": "gate_production_dry_shadow: 1 production caller (scan_catalog v2 dry-shadow gate). cutover_decision/root_fingerprint exercised by contract tests only (reviewer FIND-305-3 corrected at closure); the production per-cohort decision point is scan_root_strategy's v2_scan_shadow seam."
   },
   "mutation": {
     "id": "FC-305-M",
@@ -87,11 +87,11 @@
     "note": "Additive gate functions + tests; v1 scanner path untouched; revert = revert commit."
   },
   "review": {
-    "reviewer": "",
-    "reviewer_receipt_sha256": "",
-    "decision": "pending",
-    "reviewed_at": "",
-    "note": "honest-implementer: awaits independent reviewer per independent_review_protocol.md"
+    "reviewer": "reviewer-fc305-independent",
+    "reviewer_receipt_sha256": "8bdf75ae05f8b8c0f306219df45db07c6246f1c252a4288355683ff63ace4a3d",
+    "decision": "accepted",
+    "reviewed_at": "2026-08-10",
+    "note": "Independent reviewer (clean worktree c742cb2, distinct identity) verified triplets, sealing hashes, diff scope, replayed focused + full suite (2063 passed / 2 pre-existing PORT-01), 2 mutations killed (two-round gate drop, single-round acceptance), independently reproduced the fingerprint invariant on an own-constructed root; verdict accepted. Codegraph note corrected at closure per FIND-305-3 (only gate_production_dry_shadow has a production caller)."
   },
   "provisional_note": "result_triplet to be sealed after commit."
 }

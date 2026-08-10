@@ -1,0 +1,89 @@
+{
+  "schema_version": "2.0",
+  "fc_id": "FC-305",
+  "implementer_receipt_sha256": "4905b23f1f44129603fe0f475f93ab90c1ebc1293f720d120ee6ffb43d7878a8",
+  "reviewer_identity": "reviewer-fc305-independent",
+  "clean_checkout": true,
+  "base_triplet": {
+    "revenue": "bc0a0dd2f9c37002ec8f4a3762c3c0b288441d13",
+    "filing": "d5e87237bd976b61c0d41127a8090b66031d4a72",
+    "wiki": "500f79b75c4c0087780038cbfe42c22117dc86e0"
+  },
+  "result_triplet": {
+    "revenue": "bc0a0dd2f9c37002ec8f4a3762c3c0b288441d13",
+    "filing": "d5e87237bd976b61c0d41127a8090b66031d4a72",
+    "wiki": "c742cb25d828e2ca4dd7e87caf97038868912c4a"
+  },
+  "replayed_command_ids": [
+    "fc305.focused-5",
+    "fc305.full-suite",
+    "fc305.ruff-2-changed-files",
+    "revenue.governance.receipt"
+  ],
+  "scenario_results": [
+    {
+      "id": "EX-08",
+      "status": "passed",
+      "note": "Replayed fresh in clean detached worktree (fc-305, HEAD c742cb2). cutover_decision(snapshot) returns v2 iff RuntimePolicySnapshot flags.v2_scan_shadow is true, v1 otherwise; production seam scan_root_strategy dispatches v2 via adapter (fail closed, no v1 fallback) and _scan_root_v1 otherwise. Verified by reading scanner.py diff (500f79b7..34adc53a) and re-running test_cutover_decision_reads_snapshot_flag + test_v2_scan_enabled_by_snapshot_flag."
+    },
+    {
+      "id": "SPI-03",
+      "status": "passed",
+      "note": "root_fingerprint invariant verified two ways: (1) test_root_fingerprint_unchanged_across_cutover replayed and passing; (2) independent adversarial check on my OWN temp root (distinct file sizes/contents incl. nested subdir + non-filing file): v1 produced 5 candidates, v2 produced 5 candidates, root_fingerprint outputs byte-identical."
+    },
+    {
+      "id": "OPS-01",
+      "status": "passed",
+      "note": "gate_production_dry_shadow requires the last two consecutive recorded rounds to each be zero-diff: fewer than 2 rounds fails, any diff in a required round fails, rounds_required<2 fails closed. scan_catalog with dry_run+v2_scan_shadow refuses via CutoverGateError unless two rounds are recorded. Both mutations replayed and killed (see mutation_results)."
+    }
+  ],
+  "mutation_results": [
+    {
+      "id": "FC-305-M-review-1-drop-two-round-gate",
+      "killed": true,
+      "detail": "Removed the dry_run-and-v2_scan_shadow gate block (incl. the CutoverGateError raise) from scan_catalog -> test_production_dry_shadow_refused_without_gate FAILED ('Failed: DID NOT RAISE <class ...CutoverGateError>'). Tree restored with git checkout before next replay."
+    },
+    {
+      "id": "FC-305-M-review-2-gate-accepts-one-round",
+      "killed": true,
+      "detail": "Removed 'if len(round_diffs) < rounds_required: return False' from gate_production_dry_shadow -> test_two_zero_diff_rounds_required FAILED ('assert True is False': a single zero-diff round now passes the gate). Tree restored with git checkout; final git status clean."
+    }
+  ],
+  "side_effect_reconciliation": {
+    "passed": true,
+    "note": "Code-only additive FC: no downloads, no external root writes, no catalog mutations, no LLM/parser calls (receipt side_effect_counts all 0). Replays used tmp_path/tempfile only; worktree verified clean (git status empty) before and after; llm_cost_log.csv untouched (tracked, absent from diff)."
+  },
+  "codegraph_reachability": {
+    "passed": true,
+    "note": "CodeGraph re-indexed (index was stale, pre-34adc53: 446 files/9099 nodes -> 448 files/9131 nodes) then queried: gate_production_dry_shadow has production caller scan_catalog (scanner.py:1369) plus test_two_zero_diff_rounds_required; scan_catalog's callees include gate_production_dry_shadow. Literal gate (grep over src/) confirms same. cutover_decision and root_fingerprint have contract-test callers only (see FIND-305-3). _scan_root_v1 untouched by the diff and still called by scan_root_strategy (v1 read-only fallback) and shadow_parity.py."
+  },
+  "rollback": {
+    "required": false,
+    "passed": true,
+    "note": "FC-305 is purely additive: new helper functions (cutover_decision/gate_production_dry_shadow/root_fingerprint/CutoverGateError), two new optional kwargs on scan_catalog, and a new test file. No existing production path modified; v1 scanner path untouched. Revert = revert the commit."
+  },
+  "unresolved_findings": [
+    {
+      "id": "FIND-305-1",
+      "severity": "informational",
+      "note": "No origin/fcap remote branch exists (git branch -r is empty; local branches: fcap, master; origin/HEAD -> origin/master). Worktree is detached at c742cb2. All triplet commits verified present: revenue bc0a0dd2 (revenue-forecast HEAD), filing d5e87237 (filing-fetch HEAD), wiki base 500f79b7 and result 34adc53a both present in company-wiki with 34adc53a a direct ancestor of worktree HEAD c742cb2."
+    },
+    {
+      "id": "FIND-305-2",
+      "severity": "informational",
+      "note": "Full-suite raw pytest exit code is 1 due to the 2 pre-existing PORT-01 failures in tests/contract/test_check_unique_test_symbols.py (UnicodeDecodeError byte 0xd4 in subprocess reader thread, Windows GBK/OEM encoding issue, owned by FC-1205; file not in this diff). Implementer receipt records exit_code 0 for the full-suite command following the established FC-304 convention for the documented pre-existing baseline; replayed numbers match exactly (2063 passed / 2 failed). Zero new failures."
+    },
+    {
+      "id": "FIND-305-3",
+      "severity": "informational",
+      "note": "Implementer receipt codegraph note states 'cutover_decision/gate_production_dry_shadow/root_fingerprint called from scan_catalog'. CodeGraph (fresh re-index) and literal grep show only gate_production_dry_shadow has a production caller (scan_catalog, scanner.py:1369); cutover_decision and root_fingerprint are exercised by contract tests only. FC-305 acceptance criteria remain met: the production dry-shadow gate is wired into scan_catalog, the per-cohort v2_scan_shadow seam (scan_root_strategy) is the production decision point, and the fingerprint invariant holds on v1/v2 cutover."
+    },
+    {
+      "id": "FIND-305-4",
+      "severity": "informational",
+      "note": "tests/contract/test_source_catalog_worker_bootstrap.py::test_terminating_supervisor_does_not_leave_an_orphan_worker failed once in the first full-suite replay (2062 passed/3 failed) but passed in isolation and in the second full-suite replay (2063 passed/2 failed). Pre-existing flaky process-timing test on Windows; unrelated to FC-305 (scanner.py diff cannot affect worker bootstrap)."
+    }
+  ],
+  "verdict": "accepted",
+  "reviewed_at": "2026-08-10"
+}
