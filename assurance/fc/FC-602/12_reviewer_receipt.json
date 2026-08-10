@@ -1,0 +1,136 @@
+{
+  "schema_version": "2.0",
+  "fc_id": "FC-602",
+  "implementer_receipt_sha256": "e3284d096e151420195cbe093d4305ead7fba9eb55904796f64e947f4296d71a",
+  "reviewer_identity": "reviewer-fc602-independent",
+  "clean_checkout": true,
+  "base_triplet": {
+    "revenue": "2a432ada50d6551e99223ba941d92e90983d8f70",
+    "filing": "6274be2187b450d14492defd03579d6209d1b1cc",
+    "wiki": "5e188676537bfe84d9d01d1172140999c5f609e9"
+  },
+  "result_triplet": {
+    "revenue": "2a432ada50d6551e99223ba941d92e90983d8f70",
+    "filing": "6274be2187b450d14492defd03579d6209d1b1cc",
+    "wiki": "5e188676537bfe84d9d01d1172140999c5f609e9"
+  },
+  "replayed_command_ids": [
+    "fc602.wiki.contract.focused",
+    "fc602.wiki.parity.focused",
+    "wiki.unit.full",
+    "fc602.ruff.changed",
+    "fc602.ex02.reuse_replay",
+    "revenue.governance.receipt"
+  ],
+  "scenario_results": [
+    {
+      "id": "EX-02-T1",
+      "status": "passed",
+      "note": "Replayed fresh in the clean detached worktree at HEAD 5e18867 (PYTHONPATH=<worktree>/src, __pycache__ cleared before every run). Focused run 1: test_dayu_adapter_fc602.py + test_dayu_adapter.py = 10 passed exit 0 (test_fc602_adapter_enriches_dayu_metadata/edgar_url_constructed/metadata_only_group_skipped/frozen_dayu_trace_parity/ex02_dayu_only_exact_reuse/incomplete_dayu_not_reused + 4 legacy adapter tests). Focused run 2: test_trace_parity_fc601.py + test_shadow_parity_runner.py + test_shadow_parity.py + test_company_raw_adapter.py = 25 passed exit 0. Frozen-corpus v1/v2 dayu trace parity: run_trace_parity composes _scan_root_v1 vs scan_root_strategy(v2_scan_shadow=True); first-run diffs are only the registered provider-normalization rule (v2 adapter resolves provider from source_provider; v1 dayu branch carries source_provider only) and the second run is ok=True with zero blockers. Adapter group semantics verified line-for-line against the v1 scanner raw_groups branch: group_key (ticker/filings/{filing-id} + .rejections prefix), group_dir, meta.json load with meta_parse_error, EDGAR URL construction, market US / security_id ticker backfill, entity-level meta backfill, preferred-primary selection (selected_primary_document -> primary_document, never _docling.json, then .pdf, then .htm/.html, then any non-meta/manifest/docling), metadata-only groups skipped (never candidates), roles (metadata/processed_docling/original_primary/original_attachment)."
+    },
+    {
+      "id": "EX-02-T2",
+      "status": "passed",
+      "note": "Real replay executed against the LIVE catalog from the main company-wiki checkout at the identical commit (HEAD 5e18867; tools/ex02_dayu_replay.py verified byte-identical to the reviewed file at 94d3eda): 'EX-02 preconditions passed (2/2)' exit 0. Samples independently verified on disk: 1548 FY2021 fil_cn_573daaffd805c1586f66b51e111bd15fce4406eb sha256 72b3ed2565e477fd... and 1548 FY2023 fil_cn_7c1d298c2786b55140554db36b781b21533fa9de sha256 bf1d8a17d85e66f1... — both files exist (6.4MB / 14.3MB PDFs), meta complete (ingest_complete=True, fiscal_year 2021/2023, https source_url, form_type FY, source_id 10225111/11170384), content hashes exclusive (0 active locations in other roots), and both are active dayu original_primary in the live catalog. Replay read-only proven: live catalog counts identical before/after (sources 43074, documents 23513, locations 46573)."
+    },
+    {
+      "id": "FC-602-capture-incomplete",
+      "status": "passed",
+      "note": "Cause mechanism verified by code read + tests + mutation: dayu stages meta.json before bytes, so metadata-only groups (no preferred file) are never ingested (v1 Phase 15.4 rule replicated in the adapter; test_fc602_metadata_only_group_skipped green; mutation M2 that emits a metadata-only group killed). Live catalog: 221 active dayu documents confirmed exactly (SELECT COUNT(DISTINCT document_id) FROM locations WHERE root_id='dayu_portfolio' AND location_status='active' = 221). One descriptive discrepancy noted as a finding (see unresolved_findings capture-incomplete-count-unreproducible): the receipt's 'only 1 capture-incomplete (_download_rejections artifact)' is not reproducible from the live catalog status columns (0 rows with capture_incomplete anywhere; 13 _download_rejections.json locations currently active with role original_primary)."
+    }
+  ],
+  "mutation_results": [
+    {
+      "id": "M1",
+      "killed": true,
+      "target": "adapters/dayu.py: `metadata = enrich_dayu_metadata(preferred, metadata)` -> `pass  # M1` (enrichment dropped)",
+      "evidence": "test_fc602_adapter_enriches_dayu_metadata FAILED (KeyError 'provider'); pycache cleared before run; git checkout restored, worktree clean"
+    },
+    {
+      "id": "M2",
+      "killed": true,
+      "target": "adapters/dayu.py: metadata-only group emitted (`preferred = paths[0]` after the None check)",
+      "evidence": "test_fc602_metadata_only_group_skipped FAILED (all() assertion — fil_cn_empty placeholder became a candidate); pycache cleared; git checkout restored"
+    },
+    {
+      "id": "M3",
+      "killed": true,
+      "target": "adapters/dayu.py: EDGAR URL construction removed (`metadata.setdefault('source_url', edgar_url)` -> `pass  # M3`)",
+      "evidence": "test_fc602_edgar_url_constructed FAILED (KeyError 'source_url'); pycache cleared; git checkout restored"
+    },
+    {
+      "id": "M4",
+      "killed": true,
+      "target": "adapters/dayu.py: `_group_key` returns str(Path(*parts[:3])) without .as_posix() (backslashes on Windows)",
+      "evidence": "test_fc602_frozen_dayu_trace_parity FAILED (unexplainable bundles trace diff 601899/filings/fil_cn_aaa v1-only/v2-only); pycache cleared; git checkout restored"
+    },
+    {
+      "id": "M5",
+      "killed": true,
+      "target": "adapters/dayu.py: docling role changed to original_primary",
+      "evidence": "test_fc602_frozen_dayu_trace_parity FAILED (locations role diff v1='processed_docling' v2='original_primary' for fil_cn_aaa.pdf_docling.json); 5 shadow_parity golden tests still passed; pycache cleared; git checkout restored"
+    }
+  ],
+  "side_effect_reconciliation": {
+    "passed": true,
+    "note": "All read-only: downloads=0, external_root_writes=0, catalog_mutations=0, llm_calls=0, parser_calls=0. EX-02 replay against the live catalog left sources=43074/documents=23513/locations=46573 unchanged. My review wrote nothing to production: mutations applied only inside the clean worktree and restored via git checkout; the only file I created is this reviewer receipt."
+  },
+  "codegraph_reachability": {
+    "passed": true,
+    "note": "wiki CodeGraph index is STALE relative to the FC-602 result triplet: it still indexes the deleted scanner functions (_enrich_dayu_portfolio_metadata at scanner.py:209) and does not know enrich_dayu_metadata; DayuAdapter indexed at an old line. Reachability verified by direct full-source read in the clean worktree instead: enrichment move is coherent (adapter owns enrich_dayu_metadata + construct_edgar_url with identical executable bodies, AST-verified; scanner imports them aliased as _enrich_dayu_portfolio_metadata/_construct_edgar_url so v1 call sites unchanged), group semantics match the v1 raw_groups branch, and the production caller chain is scanner.scan_root_strategy(v2_scan_shadow=True) -> adapter_dispatch.scan_root_via_adapter -> adapter_for -> DayuAdapter().enumerate (adapter_dispatch.py:32/79/92; scanner.py:1347-1359). Receipt claim production_callers_after=1 consistent."
+  },
+  "rollback": {
+    "required": false,
+    "passed": true,
+    "note": "Adapter normalization + enrichment move; v1 scanner behavior preserved byte-for-byte via alias imports (AST-verified, only a local type annotation differs), so revert = revert commit 94d3eda."
+  },
+  "unresolved_findings": [
+    {
+      "id": "changed-files-over-inclusive",
+      "severity": "low",
+      "note": "Implementer receipt lists tests/contract/test_trace_parity_fc601.py in changed_files, but git diff 49c1e2c0..94d3eda shows it UNCHANGED (last modified by FC-601 commit 7f0b623). Actual diff scope = 6 files; all 6 are inside the 7-file allowlist, so no scope violation — the changed_files declaration over-reports by one file."
+    },
+    {
+      "id": "dayu-meta-count-unreproducible",
+      "severity": "low",
+      "note": "FC-602-capture-incomplete note claims '657 filing metas, ~232 without a staged primary'. Independently counted the live DAYU_ROOT: 657 reproduces only as ALL meta.json files under portfolio/ (630 filing-group + 27 entity-level = 657), not filing metas alone (441). '~232 without a staged primary' not reproducible under any definition tested: 16 groups with no document file at all, 37 without any .pdf/.htm/.html, 17 with ingest_complete != True, 0 metas lacking a primary_document key, 16 declared primaries missing on disk. The live dayu tree may have changed since the implementer measured (dayu-agent writes into it), which would explain part of the gap, but the number cannot be independently confirmed today. Mechanism itself (meta-before-bytes -> metadata-only groups skipped) is proven by code read, test_fc602_metadata_only_group_skipped, and mutation M2."
+    },
+    {
+      "id": "capture-incomplete-count-unreproducible",
+      "severity": "low",
+      "note": "The receipt's 'only 1 capture-incomplete (the _download_rejections artifact)' is not reproducible: the live catalog has ZERO rows with location_status='capture_incomplete' (locations table) and no capture_incomplete in documents.source_status; 13 _download_rejections.json locations are currently active with role original_primary (none status-marked capture_incomplete). '221 active dayu docs' verified exact. Descriptive count in the scenario note only; the gating evidence (adapter skips byte-less groups; incomplete filings not reused per test_fc602_incomplete_dayu_not_reused) is unaffected."
+    },
+    {
+      "id": "v2-adapter-master-identity-gap",
+      "severity": "low",
+      "note": "The v2 adapter path (scan_root_via_adapter) does NOT receive master_identity or portfolio_urls from scan_root_strategy (scanner.py:1347-1359), so the v1 scanner's Phase 15.4 identity propagation (provider_company_id -> security master org -> market/security_id backfill, scanner.py:532-541) is absent from the adapter. The frozen-corpus parity test never exercises this branch (run_trace_parity calls _scan_root_v1 without master_identity), so the diff is unobserved and no migration rule covers it. v1 remains the production dayu path today, so no current regression; before v2 becomes the dayu production path (R4 wave) the master_identity backfill must either be replicated in the adapter or registered as an explainable diff. Fail-closed direction: identity-less docs are not reused (no wrong reuse)."
+    },
+    {
+      "id": "no-remote-branch",
+      "severity": "info",
+      "note": "fcap result commits (94d3eda, 5e18867) exist only on the local fcap branch / review worktrees, not on origin (git branch -r shows only origin/master); audit trail preserved locally; release wave will push"
+    },
+    {
+      "id": "codegraph-index-stale",
+      "severity": "info",
+      "note": "wiki CodeGraph index predates FC-602 (indexes deleted scanner functions, lacks enrich_dayu_metadata); production-caller verification performed by direct source read + live execution instead (documented in codegraph_reachability)"
+    },
+    {
+      "id": "PORT-01-pre-existing-1",
+      "severity": "pre-existing",
+      "note": "wiki tests/contract/test_check_unique_test_symbols.py::test_duplicate_test_definition_fails FAILED in the full suite (PytestUnhandledThreadExceptionWarning: UnicodeDecodeError utf-8 on subprocess stdout, Windows GBK — FC-1205 scope); file untouched by FC-602 diff, pre-existing"
+    },
+    {
+      "id": "PORT-01-pre-existing-2",
+      "severity": "pre-existing",
+      "note": "wiki tests/contract/test_check_unique_test_symbols.py::test_syntax_error_is_reported_as_failure FAILED in the full suite (same PORT-01 UTF-8 subprocess decode, FC-1205 scope); file untouched by FC-602 diff, pre-existing"
+    },
+    {
+      "id": "skip-env-symlink",
+      "severity": "info",
+      "note": "full suite has 1 skip: tests/contract/test_dropbox_root_policy_fc501.py 'symlinks not supported on this host' — environment platform skip in dependency FC-501 test; no FC-602 skip"
+    }
+  ],
+  "verdict": "accepted",
+  "reviewed_at": "2026-08-10"
+}
