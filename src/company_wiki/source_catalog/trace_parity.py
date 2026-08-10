@@ -131,7 +131,7 @@ def _compare_section(
             field = "presence"
             value = "v1-only" if right is None else "v2-only"
             classification = (
-                "known_bad" if (key, field) in known_bad else "blocker"
+                "known_bad" if (f"{name}:{key}", field) in known_bad else "blocker"
             )
             diffs.append(ParityDiff(
                 f"{name}:{key}", field, value, value, classification
@@ -143,7 +143,7 @@ def _compare_section(
             if v1_value != v2_value:
                 classification = (
                     "known_bad"
-                    if (key, field_name) in known_bad
+                    if (f"{name}:{key}", field_name) in known_bad
                     else "blocker"
                 )
                 diffs.append(ParityDiff(
@@ -172,7 +172,8 @@ def compare_traces(
         if left is None or right is None:
             value = "v1-only" if right is None else "v2-only"
             classification = (
-                "known_bad" if (key, "presence") in known_bad else "blocker"
+                "known_bad" if (f"bundles:{key}", "presence") in known_bad
+                else "blocker"
             )
             diffs.append(ParityDiff(
                 f"bundles:{key}", "presence", value, value, classification
@@ -180,7 +181,8 @@ def compare_traces(
             continue
         if left != right:
             classification = (
-                "known_bad" if (key, "value") in known_bad else "blocker"
+                "known_bad" if (f"bundles:{key}", "value") in known_bad
+                else "blocker"
             )
             diffs.append(ParityDiff(
                 f"bundles:{key}", "value", left, right, classification

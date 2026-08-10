@@ -23,6 +23,10 @@ from .admission import (
     FOCUS_ROOT_ID,
     evaluate_admission,
 )
+from .adapters.dayu import (
+    construct_edgar_url as _construct_edgar_url,
+    enrich_dayu_metadata as _enrich_dayu_portfolio_metadata,
+)
 from .adapters.common import (
     _ACQUISITION_SIDECAR_SUFFIX,
     _SKIP_DIRS,
@@ -204,89 +208,6 @@ def _infer_company(relative_path: str, names: tuple[str, ...]) -> str | None:
     folded = relative_path.casefold()
     matches = [name for name in names if name.casefold() in folded]
     return matches[0] if len(matches) == 1 else None
-
-
-def _enrich_dayu_portfolio_metadata(
-    path: Path, metadata: dict[str, Any]
-) -> dict[str, Any]:
-    """Merge the rich dayu filing ``meta.json`` (sibling of the primary
-    document) into the document metadata so raw portfolio documents are
-    directly reusable: document_kind via form_type mapping, fiscal_year,
-    source_url, provider, language, filing_date (ADR-008 Strategy B).
-
-    The ``.pdf.source.json`` sidecar only carries a minimal marker; the rich
-    record lives in the filing directory's ``meta.json``.
-    """
-    meta_path = path.parent / "meta.json"
-    try:
-        payload = json.loads(meta_path.read_text(encoding="utf-8"))
-    except (OSError, UnicodeError, json.JSONDecodeError, ValueError):
-        return metadata
-    if not isinstance(payload, dict):
-        return metadata
-    enriched: dict[str, Any] = {}
-    for key in (
-        "document_id",
-        "form_type",
-        "fiscal_year",
-        "fiscal_period",
-        "source_url",
-        "source_title",
-        "source_language",
-        "filing_date",
-        "source_id",
-        "provider_company_id",
-        "amended",
-    ):
-        if key in payload and payload[key] not in (None, ""):
-            enriched[key] = payload[key]
-    if "source_provider" in payload and payload["source_provider"] not in (None, ""):
-        enriched["provider"] = payload["source_provider"]
-    if "source_language" in enriched:
-        enriched["language"] = enriched["source_language"]
-    # Identity: portfolio filing meta.json carries the bare ticker only; the
-    # entity-level meta.json (portfolio/<ticker>/meta.json) carries the
-    # market. The resolver's security_id comparison normalizes leading zeros
-    # (HKEX "02020" == "2020"), so the bare ticker suffices as security_id.
-    if not enriched.get("security_id"):
-        filing_ticker = str(payload.get("ticker") or "").strip()
-        if filing_ticker:
-            enriched["security_id"] = filing_ticker
-    if not enriched.get("market"):
-        entity_meta_path = path.parents[2] / "meta.json"
-        try:
-            entity_meta = json.loads(entity_meta_path.read_text(encoding="utf-8"))
-        except (OSError, UnicodeError, json.JSONDecodeError, ValueError):
-            entity_meta = {}
-        if isinstance(entity_meta, dict):
-            market = str(entity_meta.get("market") or "").strip()
-            if market:
-                enriched["market"] = market
-            if not enriched.get("security_id"):
-                entity_ticker = str(entity_meta.get("ticker") or "").strip()
-                if entity_ticker:
-                    enriched["security_id"] = entity_ticker
-    if not enriched:
-        return metadata
-    merged = dict(metadata)
-    merged["dayu_meta"] = enriched
-    merged.update(enriched)  # top level too, so the classifier sees form_type etc.
-    return merged
-
-
-def _construct_edgar_url(metadata: dict[str, Any]) -> str | None:
-    """Deterministically construct an SEC EDGAR URL from dayu SEC metadata
-    (accession_number + company_id + primary_document), Phase 16.1."""
-    acc = str(metadata.get("accession_number") or "").strip()
-    cik = str(metadata.get("company_id") or "").strip()
-    primary = str(metadata.get("primary_document") or "").strip()
-    if not (acc and cik and primary):
-        return None
-    cik10 = cik.zfill(10)
-    return (
-        f"https://www.sec.gov/Archives/edgar/data/{cik10}/"
-        f"{acc.replace('-', '')}/{primary}"
-    )
 
 
 def _load_dayu_portfolio_urls(config: CatalogConfig) -> dict[str, str]:

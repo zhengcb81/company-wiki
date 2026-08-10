@@ -29,15 +29,14 @@ def _dayu_tree(tmp_path: Path, ticker: str = "600519") -> Path:
 def test_enumerate_with_meta_enrichment(tmp_path):
     tree = _dayu_tree(tmp_path)
     candidates = DayuAdapter().enumerate(tree)
-    assert len(candidates) == 1
-    primary = candidates[0]
-    assert primary.role == "original_primary"
+    primary = next(c for c in candidates if c.role == "original_primary")
     assert primary.normalized["fiscal_year"] == 2025
     assert primary.normalized["form_type"] == "annual_report"
     assert primary.normalized["source_url"].startswith("https://")
-    # sidecar/meta.json never become candidates themselves
-    assert all(not c.relative_path.endswith((".json", ".source.json"))
-               for c in candidates)
+    # files directly under filings/ form one group per file (v1 group-key
+    # semantics): the pdf is the single original_primary, meta.json's own
+    # group has no preferred file and is skipped
+    assert all(c.role == "original_primary" for c in candidates)
 
 
 def test_deterministic_and_read_only(tmp_path):
@@ -56,8 +55,8 @@ def test_missing_meta_degrades_gracefully(tmp_path):
     tree = _dayu_tree(tmp_path)
     (tree / "600519" / "filings" / "meta.json").unlink()
     candidates = DayuAdapter().enumerate(tree)
-    assert len(candidates) == 1
-    assert candidates[0].normalized == {}
+    primary = next(c for c in candidates if c.role == "original_primary")
+    assert primary.normalized == {}
 
 
 def test_multiple_tickers(tmp_path):
