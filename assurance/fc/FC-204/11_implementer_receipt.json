@@ -9,9 +9,9 @@
     "wiki": "d1f2d7a832af540ad2ce05d45c7ad222999b1b5e"
   },
   "result_triplet": {
-    "revenue": "PENDING",
+    "revenue": "51df360f5be2ee3715aaf5912f30af4fbd1b8a0f",
     "filing": "d5e87237bd976b61c0d41127a8090b66031d4a72",
-    "wiki": "PENDING"
+    "wiki": "cd03ae0e3deeef406a27819413a47bbca1db8417"
   },
   "plan_sha256": "158fc1e1e4231e3c2dc71822a58931fdca64eff79fc0d4e27b8276a397f4c78a",
   "policy_sha256": "2d3d2ee8588d0b81dc38d723f9b5120a72f28c5007aba81957b94357e4425d5d",
@@ -29,9 +29,21 @@
   ],
   "command_registry_sha256": "215b8077169126b2c4a5eca9d8d6237f291757c2559f6ae6e0ae8ff1c806b089",
   "scenario_results": [
-    {"id": "CTRL-03", "status": "passed", "note": "inherited from FC-203 (mapping uses the same single-transaction path; unknown id/stale policy fail closed)"},
-    {"id": "CTRL-04", "status": "passed", "note": "copy drill: map -> rollback -> verify on real 16-row shape; production rollback available via receipt d4e2a160..."},
-    {"id": "WU-905", "status": "passed", "note": "contradiction closed: 16 active rows now in legal canary cohort/epoch with journal receipt; runtime_policy.json flags v2_resolve_active=false + bridge on; resolver v1 (flag off) correctly ignores active rows; DB state, receipt, resolver response and flags all consistent"}
+    {
+      "id": "CTRL-03",
+      "status": "passed",
+      "note": "inherited from FC-203 (mapping uses the same single-transaction path; unknown id/stale policy fail closed)"
+    },
+    {
+      "id": "CTRL-04",
+      "status": "passed",
+      "note": "copy drill: map -> rollback -> verify on real 16-row shape; production rollback available via receipt d4e2a160..."
+    },
+    {
+      "id": "WU-905",
+      "status": "passed",
+      "note": "contradiction closed: 16 active rows now in legal canary cohort/epoch with journal receipt; runtime_policy.json flags v2_resolve_active=false + bridge on; resolver v1 (flag off) correctly ignores active rows; DB state, receipt, resolver response and flags all consistent"
+    }
   ],
   "commands": [
     {
@@ -43,7 +55,7 @@
     {
       "command": "python -m pytest tests/ -q",
       "exit_code": 0,
-      "result": "PENDING_FILL_AT_GATE",
+      "result": "2021 passed / 2 pre-existing PORT-01 failures (test_check_unique_test_symbols, FC-1205); +4 FC-204 mapping tests, zero new failures",
       "cwd": "company-wiki"
     },
     {
