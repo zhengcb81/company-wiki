@@ -1,0 +1,39 @@
+{
+  "schema_version": "2.0",
+  "fc_id": "FC-202",
+  "implementer_receipt_sha256": "6fc4b63b6f5127e50938b1d8f5b7b8b45426bc0aa33ae510665d7a5f9aa9a7aa",
+  "reviewer_identity": "reviewer-fc202-independent",
+  "clean_checkout": true,
+  "base_triplet": {
+    "revenue": "ca3faf043e971f9edf3676718242d894b3dea651",
+    "filing": "d5e87237bd976b61c0d41127a8090b66031d4a72",
+    "wiki": "d5830bf9e1f56f2a83fa88b3be421771c92da3bc"
+  },
+  "result_triplet": {
+    "revenue": "ca3faf043e971f9edf3676718242d894b3dea651",
+    "filing": "d5e87237bd976b61c0d41127a8090b66031d4a72",
+    "wiki": "d5830bf9e1f56f2a83fa88b3be421771c92da3bc"
+  },
+  "replayed_command_ids": ["wiki.unit.full", "wiki.integration"],
+  "scenario_results": [
+    {"id": "CTRL-01", "status": "passed", "note": "fresh replay on clean worktree at result commit: test_ctrl01_v1_reader_never_returns_active_row + test_ctrl01_source_metadata_flag_off_ignores_active_row pass — flag off (v1 reader) never sees an active DB row; resolver SQL v1 branch filters visibility_state='legacy' only"},
+    {"id": "CTRL-02", "status": "passed", "note": "fresh replay: epoch mismatch and cohort mismatch hide rows (test_ctrl02_epoch_mismatch_hides_active_row, test_ctrl02_cohort_mismatch_hides_active_row); match visible; empty cohort set and missing pinned epoch fail closed; assertion-service path honors the same epoch/cohort contract"},
+    {"id": "CTRL-05", "status": "passed", "note": "CLI resolve pins RuntimePolicySnapshot at request start (cli.py resolve branch: load_runtime_policy(catalog_dir/runtime_policy.json), RuntimePolicyError -> None -> v1 + bridge default, FC-202 safe default); absent snapshot keeps pre-FC-201 behavior"}
+  ],
+  "mutation_results": [
+    {"id": "MUT-a-resolver-drop-epoch", "killed": true, "detail": "resolver.py: replaced \"AND activation_epoch=?\" with \"AND 1=1\" in v2 SQL -> test_ctrl02_epoch_mismatch_hides_active_row FAILED (plus 3 other CTRL-02 tests); worktree restored, focused suite re-green (15 passed)"},
+    {"id": "MUT-b-resolver-v1-sees-active", "killed": true, "detail": "resolver.py: v1 branch \"visibility_state='legacy'\" -> \"visibility_state IN ('legacy','active')\" -> test_ctrl01_v1_reader_never_returns_active_row FAILED (+ test_ctrl01_source_metadata_flag_off_ignores_active_row); restored"},
+    {"id": "MUT-c-assertion-service-v1-sees-active", "killed": true, "detail": "assertion_service.py _visibility_sql: \"visibility_state='legacy'\" -> \"visibility_state IN ('legacy','active')\" -> test_assertion_service_v1_reader_hides_active_row FAILED; restored"},
+    {"id": "MUT-d-assertion-service-drop-epoch", "killed": true, "detail": "assertion_service.py: \"AND activation_epoch=?\" -> \"AND 1=1\" -> test_assertion_service_v2_epoch_mismatch_hidden FAILED (+ test_assertion_service_v2_reader_epoch_cohort_match); restored; final `git status` clean, focused suite 15 passed after restore"}
+  ],
+  "side_effect_reconciliation": {"passed": true, "note": "0 downloads / 0 external root writes / 0 catalog mutations / 0 llm calls during review; all tests hermetic (fresh temp catalogs); mutation replay confined to the 2 changed source files and reverted via git checkout; llm_cost_log.csv not in diff e9c84ad..10f79354 and untouched; review created only the gitignored .codegraph index and the reviewer receipt"},
+  "codegraph_reachability": {"passed": true, "note": "fresh CodeGraph index built in the clean worktree (8941 nodes): resolver_visibility has exactly 1 production caller (SourceResolver.__init__ resolver.py:467, runtime_policy param) + 2 tests; SourceResolver constructed in cli.py resolve branch with runtime_policy (literal-verified cli.py:920-923); acquisition.py/canonical_writer.py construct without snapshot -> v1 + bridge default (safe: active rows invisible). _v2_assertion_metadata / _source_metadata / get_verified_assertion / get_verified_assertion_by_document all accept the pinned reader/epoch/cohort and filter decision+visibility+epoch+cohort. Literal grep: no other src/ occurrence of visibility_state IN ('legacy','active') and no ungated legacy container read (resolver.py:356 legacy read sits behind legacy_bridge_allowed; scripts/legacy_observer.py call unchanged from base, observation seam, out of scope)"},
+  "rollback": {"required": false, "passed": true, "note": "SQL filter + constructor parameter changes only; no DB/catalog/policy mutation; revert = revert commits 10f79354/d5830bf; runtime_policy.json remains the mutable production state under FC-201 CAS control"},
+  "unresolved_findings": [
+    {"severity": "info", "finding": "no origin/fcap remote branch exists (only origin/master; local fcap branch present at d5830bf). Triplet existence, wiki ancestry (10f79354 ancestor of d5830bf) and receipt sealing verified from local object stores only"},
+    {"severity": "info", "finding": "full suite: 2008 collected, 2006 passed, 2 failed, exit 1 — the 2 failures are test_check_unique_test_symbols.py::test_duplicate_test_definition_fails and test_syntax_error_is_reported_as_failure, both UnicodeDecodeError (0xd4/0xa1 GBK bytes, Windows PORT-01 encoding family, owned by FC-1205); file has zero references to resolver/assertion/FC-202 code and is untouched by the diff; pre-existing"},
+    {"severity": "low", "finding": "implementer receipt command counts are stale under-claims measured at intermediate working-tree states: receipt command 2 claims 27 passed (fresh replay: 31 passed), command 3 claims 32 passed (fresh replay: 35 passed), full suite claims 2003 passed (fresh replay: 2006 passed); the +3 delta is the 3 assertion-service tests added to test_resolver_activation_snapshot.py after those runs; all exit codes verified (0; full suite exit 1 solely from the 2 pre-existing PORT-01 failures) and no test regressed. Receipt codegraph note 'production_callers_before 1 / after 3' for resolver_visibility is also approximate: fresh index shows exactly 1 production caller (SourceResolver.__init__); the other 2 are tests"}
+  ],
+  "verdict": "accepted",
+  "reviewed_at": "2026-08-10"
+}
