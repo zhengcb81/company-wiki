@@ -408,9 +408,19 @@ def _scan_root_v1(
             if not focus_scope:
                 # Legacy behavior for every directory outside the exact
                 # 重点关注 subtree: each supported file (including .source.json)
-                # is a standalone primary document with no sidecar pairing.
+                # is a standalone primary document.  A primary with a sibling
+                # .source.json sidecar carries the sidecar metadata (FC-501
+                # sidecar contract; FC-505: the Dropbox root must never be
+                # resolvable-MISSING when the sidecar evidence exists).
                 for path in supported:
                     relative = _relative(path, root.path)
+                    metadata: dict[str, Any] = {}
+                    if not path.name.endswith(_ACQUISITION_SIDECAR_SUFFIX):
+                        sidecar = path.with_name(
+                            path.name + _ACQUISITION_SIDECAR_SUFFIX
+                        )
+                        if sidecar.is_file():
+                            metadata = _load_acquisition_metadata(sidecar)
                     candidates.append(
                         _Candidate(
                             root,
@@ -419,7 +429,7 @@ def _scan_root_v1(
                             relative,
                             "original_primary",
                             _infer_company(relative, company_names),
-                            {},
+                            metadata,
                             "active",
                             None,
                         )
@@ -969,7 +979,11 @@ def _scan_catalog_impl(
                 "group_key": group_key,
                 "scanner_version": SCANNER_VERSION,
                 "dayu_meta": metadata if root.kind == "dayu_portfolio" else None,
-                "acquisition": metadata if root.kind == "company_raw" and metadata else None,
+                "acquisition": (
+                    metadata
+                    if root.kind in ("company_raw", "directory") and metadata
+                    else None
+                ),
                 "admission": (
                     {
                         "reason": admission.reason,
