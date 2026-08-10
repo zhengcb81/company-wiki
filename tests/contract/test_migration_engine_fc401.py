@@ -28,6 +28,8 @@ def _catalog(tmp_path: Path, n: int = 5) -> Path:
     con.row_factory = sqlite3.Row
     con.executescript(
         """
+        CREATE TABLE catalog_meta (key TEXT PRIMARY KEY, value TEXT NOT NULL);
+        INSERT INTO catalog_meta VALUES ('schema_version','1.2.0');
         CREATE TABLE sources (
             source_id TEXT PRIMARY KEY, content_sha256 TEXT,
             byte_size INTEGER, mime_type TEXT, first_seen_at TEXT

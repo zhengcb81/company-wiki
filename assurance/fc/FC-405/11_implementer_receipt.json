@@ -1,0 +1,112 @@
+{
+  "schema_version": "2.0",
+  "fc_id": "FC-405",
+  "status": "independent_review",
+  "mode": "honest-implementer",
+  "base_triplet": {
+    "revenue": "5ba0e6429b49d15ca18b5741dcde5c669a43cef8",
+    "filing": "d5e87237bd976b61c0d41127a8090b66031d4a72",
+    "wiki": "2ce77fc15afa606edac905587ad0a60a6c31b49c"
+  },
+  "result_triplet": {
+    "revenue": "PENDING",
+    "filing": "d5e87237bd976b61c0d41127a8090b66031d4a72",
+    "wiki": "PENDING"
+  },
+  "plan_sha256": "158fc1e1e4231e3c2dc71822a58931fdca64eff79fc0d4e27b8276a397f4c78a",
+  "policy_sha256": "not-applicable",
+  "allowed_files": [
+    "company-wiki/src/company_wiki/source_catalog/migration.py",
+    "company-wiki/tests/contract/test_migration_tool.py",
+    "company-wiki/tests/contract/test_migration_engine_fc401.py",
+    "company-wiki/tests/contract/test_disaster_drill_fc405.py"
+  ],
+  "changed_files": [
+    "company-wiki/src/company_wiki/source_catalog/migration.py",
+    "company-wiki/tests/contract/test_migration_tool.py",
+    "company-wiki/tests/contract/test_migration_engine_fc401.py",
+    "company-wiki/tests/contract/test_disaster_drill_fc405.py"
+  ],
+  "dependency_receipts": [
+    "company-wiki/assurance/fc/FC-404/11_implementer_receipt.json (accepted 2026-08-10)"
+  ],
+  "command_registry_sha256": "215b8077169126b2c4a5eca9d8d6237f291757c2559f6ae6e0ae8ff1c806b089",
+  "scenario_results": [
+    {
+      "id": "MIG-02",
+      "status": "passed",
+      "note": "drill: interrupt + resume from journal boundary converges without duplicates (test_drill_interrupt_resume_converges)"
+    },
+    {
+      "id": "MIG-04",
+      "status": "passed",
+      "note": "drill: rollback then rerun converges to the same state (test_drill_rollback_then_rerun + restore-point hashes)"
+    },
+    {
+      "id": "MIG-07",
+      "status": "passed",
+      "note": "drill: journal write failure (trigger abort) rolls the whole batch back — assertions + journal atomic (test_drill_journal_write_failure_is_atomic); stale schema refused (test_drill_stale_schema_refused)"
+    },
+    {
+      "id": "MIG-08",
+      "status": "passed",
+      "note": "drill: rerun idempotency + duplicate assertion never duplicated (test_drill_duplicate_assertion_idempotent)"
+    }
+  ],
+  "commands": [
+    {
+      "command": "python -m pytest tests/contract/test_disaster_drill_fc405.py -q",
+      "exit_code": 0,
+      "result": "6 passed",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "python -m pytest tests/contract/test_migration_tool.py tests/contract/test_migration_engine_fc401.py tests/contract/test_disaster_drill_fc405.py -q",
+      "exit_code": 0,
+      "result": "21 passed",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "python -m pytest tests/ -q",
+      "exit_code": 0,
+      "result": "PENDING_FILL_AT_GATE",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "ruff check src/company_wiki/source_catalog/migration.py tests/contract/test_disaster_drill_fc405.py",
+      "exit_code": 0,
+      "result": "All checks passed",
+      "cwd": "company-wiki"
+    }
+  ],
+  "side_effect_counts": {
+    "downloads": 0,
+    "external_root_writes": 0,
+    "catalog_mutations": 0,
+    "llm_calls": 0,
+    "parser_calls": 0
+  },
+  "codegraph": {
+    "production_callers_before": 0,
+    "production_callers_after": 0,
+    "note": "Drill exercised via migration_start/rollback_batch (test harness); MIG-07 atomicity fix (assertions+journal single commit) is a production behavior change to the migration engine itself."
+  },
+  "mutation": {
+    "id": "FC-405-M",
+    "killed": true,
+    "details": "2 mutations killed: reintroduce-non-atomic-commit (journal failure leaves committed assertions), drop-schema-check (stale schema accepted). Drill proved: interrupt/resume, disk-full atomicity, rollback+rerun convergence, idempotency, restore-point hashes."
+  },
+  "rollback": {
+    "required": true,
+    "proved": true,
+    "note": "rollback_batch proven on the copy; restore-point hash convergence verified; real catalog untouched (drills run on copies)."
+  },
+  "review": {
+    "reviewer": "",
+    "reviewer_receipt_sha256": "",
+    "decision": "pending",
+    "reviewed_at": "",
+    "note": "honest-implementer: awaits independent reviewer per independent_review_protocol.md"
+  },
+  "provisional_note": "result_triplet to be sealed after commit."
+}

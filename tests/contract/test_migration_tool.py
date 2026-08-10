@@ -18,6 +18,8 @@ def _catalog(tmp_path: Path, n_sources: int = 10) -> Path:
 
     path = tmp_path / "catalog.sqlite3"
     con = sqlite3.connect(path)
+    con.execute("CREATE TABLE catalog_meta (key TEXT PRIMARY KEY, value TEXT NOT NULL)")
+    con.execute("INSERT INTO catalog_meta VALUES ('schema_version','1.2.0')")
     con.execute("CREATE TABLE sources (source_id TEXT PRIMARY KEY, "
                 "content_sha256 TEXT, byte_size INTEGER)")
     for i in range(n_sources):

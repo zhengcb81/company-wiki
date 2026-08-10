@@ -49,6 +49,25 @@ def _connect(path: Path) -> sqlite3.Connection:
     return con
 
 
+def _check_schema(con: sqlite3.Connection) -> None:
+    """FC-405: refuse catalogs whose schema_version is stale/unknown.
+
+    The catalog records its schema in catalog_meta when it exists; a
+    missing meta table or an unknown version is treated as stale and the
+    migration refuses to run (fail closed)."""
+    row = con.execute(
+        "SELECT value FROM catalog_meta WHERE key='schema_version'"
+    ).fetchone()
+    if row is None:
+        raise ValueError("catalog schema_version unknown (missing catalog_meta)")
+    version = str(row["value"])
+    if not version.startswith("1."):
+        raise ValueError(
+            f"catalog schema_version {version!r} not supported by migration "
+            f"(fail closed on stale schema)"
+        )
+
+
 ROLLBACK_JOURNAL_TABLE = "migration_rollback_journal"
 
 
@@ -135,6 +154,7 @@ def migration_start(
             target.unlink(missing_ok=True)
     con = _connect(catalog)
     _ensure_journal(con)
+    _check_schema(con)
     result = MigrationResult()
     try:
         # resume guard: a different code/plan hash must never continue an
@@ -197,11 +217,14 @@ def migration_start(
                          "capture_ready", "shadow"),
                     )
                     created.append(assertion_id)
-            con.commit()
         result.add_skipped_fk(skipped_fk)
         result.created_assertions = len(created)
         output_hash = _hash_rows(sources)
 
+        # MIG-07 atomicity: assertions and the journal row commit in ONE
+        # transaction.  A journal write failure (disk full, trigger abort)
+        # rolls the whole batch back — no committed assertions without a
+        # journal record (unresumable state is impossible).
         if mode in {"shadow-write", "apply"}:
             con.execute(
                 f"""INSERT INTO {JOURNAL_TABLE}

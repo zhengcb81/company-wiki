@@ -19,6 +19,8 @@ from company_wiki.source_catalog.migration import (  # noqa: E402
 def _catalog(tmp_path: Path, n: int = 12) -> Path:
     path = tmp_path / "copy.sqlite3"
     con = sqlite3.connect(path)
+    con.execute("CREATE TABLE catalog_meta (key TEXT PRIMARY KEY, value TEXT NOT NULL)")
+    con.execute("INSERT INTO catalog_meta VALUES ('schema_version','1.2.0')")
     con.execute("CREATE TABLE sources (source_id TEXT PRIMARY KEY, "
                 "content_sha256 TEXT, byte_size INTEGER)")
     for i in range(n):
