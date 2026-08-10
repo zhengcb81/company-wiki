@@ -1,0 +1,114 @@
+{
+  "schema_version": "2.0",
+  "fc_id": "FC-602",
+  "status": "independent_review",
+  "mode": "honest-implementer",
+  "base_triplet": {
+    "revenue": "2a432ada50d6551e99223ba941d92e90983d8f70",
+    "filing": "6274be2187b450d14492defd03579d6209d1b1cc",
+    "wiki": "49c1e2c0ee80968fc5bd784c27a4a92ac7afed2d"
+  },
+  "result_triplet": {
+    "revenue": "2a432ada50d6551e99223ba941d92e90983d8f70",
+    "filing": "6274be2187b450d14492defd03579d6209d1b1cc",
+    "wiki": "94d3edaeb2c42e92983dad915055afca889829e5"
+  },
+  "plan_sha256": "158fc1e1e4231e3c2dc71822a58931fdca64eff79fc0d4e27b8276a397f4c78a",
+  "policy_sha256": "not-applicable",
+  "allowed_files": [
+    "company-wiki/src/company_wiki/source_catalog/adapters/dayu.py",
+    "company-wiki/src/company_wiki/source_catalog/scanner.py",
+    "company-wiki/src/company_wiki/source_catalog/trace_parity.py",
+    "company-wiki/tests/contract/test_dayu_adapter_fc602.py",
+    "company-wiki/tests/contract/test_dayu_adapter.py",
+    "company-wiki/tests/contract/test_trace_parity_fc601.py",
+    "company-wiki/tools/ex02_dayu_replay.py"
+  ],
+  "changed_files": [
+    "company-wiki/src/company_wiki/source_catalog/adapters/dayu.py",
+    "company-wiki/src/company_wiki/source_catalog/scanner.py",
+    "company-wiki/src/company_wiki/source_catalog/trace_parity.py",
+    "company-wiki/tests/contract/test_dayu_adapter_fc602.py",
+    "company-wiki/tests/contract/test_dayu_adapter.py",
+    "company-wiki/tests/contract/test_trace_parity_fc601.py",
+    "company-wiki/tools/ex02_dayu_replay.py"
+  ],
+  "dependency_receipts": [
+    "company-wiki/assurance/fc/FC-601/11_implementer_receipt.json (accepted 2026-08-10)",
+    "company-wiki/assurance/fc/FC-303/11_implementer_receipt.json (accepted 2026-08-10)"
+  ],
+  "command_registry_sha256": "215b8077169126b2c4a5eca9d8d6237f291757c2559f6ae6e0ae8ff1c806b089",
+  "scenario_results": [
+    {
+      "id": "EX-02-T1",
+      "status": "passed",
+      "note": "dayu metadata normalized by the adapter (v1 group semantics + enrichment moved in as single source; scanner imports it, v1 behavior unchanged — shadow/parity regression suites green); frozen corpus v1/v2 trace parity clean after the provider-normalization rule; metadata-only groups (byte-less placeholders) never become candidates; incomplete dayu filing never reused"
+    },
+    {
+      "id": "EX-02-T2",
+      "status": "passed",
+      "note": "real dayu-only samples (tools/ex02_dayu_replay.py, read-only): 1548 FY2021 (fil_cn_573daaff..., sha 72b3ed25...) and 1548 FY2023 (fil_cn_7c1d298c..., sha bf1d8a17...) — exclusive hashes (no active location in other roots), active dayu original_primary locations, complete meta (ingest_complete + fiscal_year + https source_url)"
+    },
+    {
+      "id": "FC-602-capture-incomplete",
+      "status": "passed",
+      "note": "real capture-incomplete cause explained: dayu stages meta.json before bytes (657 filing metas, ~232 without a staged primary) — meta-only groups are never ingested (v1 Phase 15.4 rule, replicated in the adapter); live catalog has 221 active dayu docs, only 1 capture-incomplete (the _download_rejections artifact)"
+    }
+  ],
+  "commands": [
+    {
+      "command": "python -m pytest tests/contract/test_dayu_adapter_fc602.py tests/contract/test_dayu_adapter.py tests/contract/test_trace_parity_fc601.py tests/contract/test_shadow_parity_runner.py -q",
+      "exit_code": 0,
+      "result": "35 passed",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "python -m pytest tests/ -q",
+      "exit_code": 0,
+      "result": "2136 passed / 2 pre-existing PORT-01 failures (test_check_unique_test_symbols, FC-1205); zero new failures",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "ruff check src/company_wiki/source_catalog/adapters/dayu.py src/company_wiki/source_catalog/scanner.py src/company_wiki/source_catalog/trace_parity.py tests/contract/test_dayu_adapter_fc602.py tests/contract/test_dayu_adapter.py tests/contract/test_trace_parity_fc601.py tools/ex02_dayu_replay.py",
+      "exit_code": 0,
+      "result": "All checks passed",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "python tools/ex02_dayu_replay.py",
+      "exit_code": 0,
+      "result": "EX-02 preconditions passed (2/2): 1548 FY2021 + FY2023, exclusive hashes, active dayu original_primary, meta complete",
+      "cwd": "company-wiki"
+    }
+  ],
+  "side_effect_counts": {
+    "downloads": 0,
+    "external_root_writes": 0,
+    "catalog_mutations": 0,
+    "llm_calls": 0,
+    "parser_calls": 0
+  },
+  "codegraph": {
+    "production_callers_before": 1,
+    "production_callers_after": 1,
+    "note": "DayuAdapter keeps its production caller via adapter_dispatch; enrichment functions moved from scanner into the adapter (single source); scanner imports them — v1 branch behavior unchanged"
+  },
+  "mutation": {
+    "id": "FC-602-M",
+    "killed": true,
+    "details": "5 mutations killed: M1 enrichment dropped, M2 metadata-only group emitted, M3 EDGAR URL not constructed, M4 backslash group key, M5 docling role broken — each caught by a dedicated test"
+  },
+  "rollback": {
+    "required": false,
+    "proved": true,
+    "note": "Adapter normalization + enrichment move (behavior preserved for v1 via identical imported functions); revert = revert commit."
+  },
+  "review": {
+    "reviewer": "",
+    "reviewer_receipt_sha256": "",
+    "decision": "pending",
+    "reviewed_at": "",
+    "note": "honest-implementer: awaits independent reviewer per independent_review_protocol.md"
+  },
+  "provisional_note": "result_triplet sealed at commit 94d3eda."
+}
