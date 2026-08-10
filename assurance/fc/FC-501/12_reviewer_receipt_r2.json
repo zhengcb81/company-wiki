@@ -1,0 +1,49 @@
+{
+  "schema_version": "2.0",
+  "fc_id": "FC-501",
+  "implementer_receipt_sha256": "1f159567ce5bb82ee0a95ee8fef9bb1a95e803955517af2957c972c929178f3b",
+  "reviewer_identity": "reviewer-fc501-r2",
+  "clean_checkout": true,
+  "base_triplet": {
+    "revenue": "0505b2de118b245bf1cf2a96b043b3e32d020f5e",
+    "filing": "d5e87237bd976b61c0d41127a8090b66031d4a72",
+    "wiki": "1ff47fbdb82a3d394f11d41404f08b4a0bfc3b67"
+  },
+  "result_triplet": {
+    "revenue": "0505b2de118b245bf1cf2a96b043b3e32d020f5e",
+    "filing": "6274be2187b450d14492defd03579d6209d1b1cc",
+    "wiki": "23d723ca4a2b9a6ca2b1a7d688fd83264313c928"
+  },
+  "replayed_command_ids": [
+    "fc501.wiki.contract.focused",
+    "fc501.filing.containment",
+    "filing.unit.full",
+    "wiki.unit.full",
+    "fc501.ruff.changed.both_repos"
+  ],
+  "scenario_results": [
+    {"id": "DBX-02", "status": "passed", "note": "test_dbx02_no_sidecar_reuse_rejected: bare file indexable but filename alone never filing evidence"},
+    {"id": "DBX-03", "status": "passed", "note": "test_dbx03_sidecar_hash_mismatch_fails_closed: adapter content-hash check rejects mismatched sidecar; also fixture-level test_dbx_08_sidecar_hash_wrong_admission_rejects (role indexed_only, content_hash_mismatch remediation)"},
+    {"id": "DBX-04", "status": "passed", "note": "test_dbx04_broker_report_not_filing: broker report named 年报 stays broker_research"},
+    {"id": "DBX-05", "status": "passed", "note": "test_dbx05_symlink_escape_rejected: symlink escape not enumerated; 1 skip where host lacks symlink support (declared pre-existing platform skip)"},
+    {"id": "DBX-06", "status": "passed", "note": "test_dbx06_retired_not_revived: retired location stays retired through quality ledger"},
+    {"id": "POL-01", "status": "passed", "note": "filing-fetch: no independent allowed_handle_roots allowlist; config rejects it (match=exactly schema_version), policy-snapshot hash binding + reusable-root containment verified (8 tests)"}
+  ],
+  "mutation_results": [
+    {"id": "FC-501-M1", "killed": true, "target": "company-wiki sidecar.py content-hash check (DBX-03)", "evidence": "removed check -> test_dbx03_sidecar_hash_mismatch_fails_closed FAILED (assert any hash in problems); restored, control green"},
+    {"id": "FC-501-M2", "killed": true, "target": "filing_contracts.py containment raise (POL-01)", "evidence": "disabled raise -> test_handle_outside_any_reusable_root_rejected FAILED; restored, control green"},
+    {"id": "FC-501-M3", "killed": true, "target": "fetch_filing.py schema re-add allowed_handle_roots", "evidence": "re-added to allowed set -> BOTH test_no_independent_allowlist_in_config_schema AND test_config_dbx_03_no_independent_allowlist FAILED (exit 1); hardened tests make schema rejection the only possible error source; restored"},
+    {"id": "FC-501-RED-BASE", "killed": true, "target": "hardened tests RED at base commit", "evidence": "checked out d5e87237 scripts/fetch_filing.py while keeping hardened tests -> BOTH tests FAILED (exit 1, 2 failed); proves tests were RED at base"}
+  ],
+  "side_effect_reconciliation": {"passed": true, "note": "all replayed commands local-only; downloads=0, external_root_writes=0, catalog_mutations=0, llm_calls=0, parser_calls=0"},
+  "codegraph_reachability": {"passed": true, "note": "fresh worktrees have no .codegraph index; verified directly: scanner.py:1427-1430 -> scan_root_via_adapter -> SidecarFilingAdapter -> _validate_sidecar (content-hash check in production path); fetch_filing.py:722 resolve_filing -> validate_handle; load_handle_allowance zero source references"},
+  "rollback": {"required": false, "passed": true, "note": "additive checks + allowlist removal; filing config revert restores legacy behavior, wiki revert restores pre-check adapter; no stateful migration"},
+  "unresolved_findings": [
+    {"id": "no-remote-branch", "severity": "info", "note": "fcap result commits exist only in the two local review worktrees, not pushed to origin (branch has no upstream); audit trail preserved locally, release wave will push"},
+    {"id": "PORT-01-pre-existing-1", "severity": "pre-existing", "note": "wiki tests/contract/test_check_unique_test_symbols.py::test_whole_repo_passes_currently fails (unique test symbol gate, FC-1205 scope); pre-existing, unaffected by FC-501"},
+    {"id": "PORT-01-pre-existing-2", "severity": "pre-existing", "note": "second pre-existing PORT-01 failure in wiki full suite (audit_baseline, FC-1205 scope); pre-existing, unaffected by FC-501"},
+    {"id": "INFO-1", "severity": "info", "note": "implementer receipt result_triplet.wiki = 6654f8c1 (feature commit) while sealed worktree HEAD = 23d723c; seal commit is docs-only receipt update on top — ancestry verified, functional result commit intact, no impact"}
+  ],
+  "verdict": "accepted",
+  "reviewed_at": "2026-08-10"
+}

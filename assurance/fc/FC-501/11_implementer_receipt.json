@@ -130,11 +130,11 @@
     "note": "Additive checks + allowlist removal; filing config revert restores legacy behavior; wiki revert restores pre-check adapter."
   },
   "review": {
-    "reviewer": "",
-    "reviewer_receipt_sha256": "",
-    "decision": "pending",
-    "reviewed_at": "",
-    "note": "changes_required (2026-08-10, reviewer-fc501-independent, F1 high): config-schema tests used nonexistent /tmp/x root, M3 not killed, tests never RED. FIXED and resubmitted — hardened tests use real temp wiki root; M3 killed by both; RED proven at base. Old reviewer receipt superseded per protocol section 6."
+    "reviewer": "reviewer-fc501-r2",
+    "reviewer_receipt_sha256": "f0b077da696785ab6e2519b330bdcbbfac309333874204964fa1775c8a2fc35f",
+    "decision": "accepted",
+    "reviewed_at": "2026-08-10",
+    "note": "Re-review after changes_required (F1): hardened config-schema tests use a real temp wiki root; M3 (re-add allowed_handle_roots) now killed by BOTH tests; RED-at-base proven. 3 mutations killed total + RED-base proof; full filing suite 145 passed / 2 skips; wiki 2104 passed / 2 pre-existing PORT-01. Reviewer-fc501-r2 accepted."
   },
   "provisional_note": "result_triplet to be sealed after commits."
 }
