@@ -373,7 +373,7 @@ def _fiscal_year(document: dict[str, Any], metadata: dict[str, Any]) -> int | No
 def _provider_identity(
     metadata: dict[str, Any],
 ) -> tuple[str | None, str | None, set[str]]:
-    provider_value = metadata.get("provider")
+    provider_value = metadata.get("provider") or metadata.get("source_provider")
     provider = str(provider_value).strip().lower() if provider_value else None
     form_type = str(metadata.get("form_type") or "").upper()
     if provider is None and (
