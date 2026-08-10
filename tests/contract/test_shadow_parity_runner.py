@@ -225,10 +225,17 @@ def test_migration_ledger_holds_explainable_diffs(tmp_path):
 # --- EX-08: future root dispatches via adapter, never legacy fallback ------
 
 
-def test_ex08_future_root_never_falls_back_to_legacy(tmp_path):
+def test_ex08_future_root_never_falls_back_to_legacy(tmp_path, monkeypatch):
     """A future root (directory kind + sidecar adapter) must dispatch via
     the registered adapter in the v2 path; falling back to the legacy
-    kind-based v1 scanner is forbidden."""
+    kind-based v1 scanner is forbidden.
+
+    Two guards (FC-303 review F1): (1) an adapter_for invocation spy —
+    the v2 path MUST have gone through adapter dispatch, which v1 never
+    does; (2) a v2-only marker — the adapter's NormalizedCandidate
+    metadata flows into group_metadata, which the v1 scanner for a plain
+    file does not carry."""
+    from company_wiki.source_catalog import adapter_dispatch
     from company_wiki.source_catalog.scanner import scan_root_strategy
 
     root_dir = tmp_path / "future_lake"
@@ -242,8 +249,56 @@ def test_ex08_future_root_never_falls_back_to_legacy(tmp_path):
         read_only=True,
         reusable_for_filing=True,
     )
+    calls: list[str] = []
+    original = adapter_dispatch.adapter_for
+
+    def spying_adapter_for(target):
+        calls.append(target.root_id)
+        return original(target)
+
+    monkeypatch.setattr(adapter_dispatch, "adapter_for", spying_adapter_for)
     candidates, _, _ = scan_root_strategy(root, (), v2_scan_shadow=True)
+    assert calls == ["future_lake"], (
+        f"v2 path did not dispatch through the adapter (calls={calls}) — "
+        f"legacy fallback detected"
+    )
     assert any(c.relative_path.endswith("x.pdf") for c in candidates)
+
+
+def test_ex08_adapter_error_fails_closed_not_legacy_fallback(tmp_path, monkeypatch):
+    """EX-08 F1 guard 2: when the adapter itself errors, the v2 path must
+    fail closed (ScannerFacadeError) — it must NOT fall back to the legacy
+    v1 scanner."""
+    from company_wiki.source_catalog import adapter_dispatch
+    from company_wiki.source_catalog.scanner import (
+        ScannerFacadeError,
+        scan_root_strategy,
+    )
+
+    root_dir = tmp_path / "future_lake"
+    root_dir.mkdir()
+    (root_dir / "x.pdf").write_bytes(b"x")
+    root = RootSpec(
+        root_id="future_lake",
+        path=root_dir,
+        kind="directory",
+        adapter_id="sidecar_filing_v1",
+        read_only=True,
+        reusable_for_filing=True,
+    )
+
+    class _BoomAdapter:
+        adapter_id = "sidecar_filing_v1"
+        version = "1.0.0"
+
+        def enumerate(self, root_path, *, limit=None):
+            raise RuntimeError("adapter exploded")
+
+    monkeypatch.setattr(
+        adapter_dispatch, "adapter_for", lambda target: _BoomAdapter()
+    )
+    with pytest.raises(ScannerFacadeError):
+        scan_root_strategy(root, (), v2_scan_shadow=True)
 
 
 def test_ex08_future_root_unknown_adapter_blocks(tmp_path):

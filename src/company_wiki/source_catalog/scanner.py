@@ -1362,7 +1362,8 @@ def scan_root_strategy(
 ) -> tuple[list[_Candidate], int, int]:
     """WU-500 + FC-302: scanner facade seam.  Default = v1 with identical
     behavior; v2 shadow dispatches through the registered adapter
-    (adapter_dispatch) and fails closed on unresolvable routes."""
+    (adapter_dispatch) and fails closed on unresolvable routes or any
+    adapter runtime failure (FC-303 EX-08: never fall back to v1)."""
     if v2_scan_shadow:
         from .adapter_dispatch import AdapterDispatchError, scan_root_via_adapter
 
@@ -1370,6 +1371,11 @@ def scan_root_strategy(
             candidates = scan_root_via_adapter(root, company_names, progress=progress)
         except AdapterDispatchError as exc:
             raise ScannerFacadeError(f"v2 scanner unavailable (fail closed): {exc}")
+        except Exception as exc:  # adapter runtime failure -> fail closed, no v1 fallback
+            raise ScannerFacadeError(
+                f"v2 scanner failed (fail closed, no legacy fallback): "
+                f"{type(exc).__name__}: {exc}"
+            )
         return candidates, 0, 0
     return _scan_root_v1(
         root,
