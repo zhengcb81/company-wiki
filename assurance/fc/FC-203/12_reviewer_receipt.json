@@ -1,0 +1,101 @@
+{
+  "schema_version": "2.0",
+  "fc_id": "FC-203",
+  "implementer_receipt_sha256": "f018559c39145a1ec43a5f4e8b96eca23699bbac6c12181b30a0797d3035658a",
+  "reviewer_identity": "reviewer-fc203-independent",
+  "clean_checkout": true,
+  "base_triplet": {
+    "revenue": "9c00ffba3691e31d0f8b9c2a8b8631f7d5ae0135",
+    "filing": "d5e87237bd976b61c0d41127a8090b66031d4a72",
+    "wiki": "f465a5788b6c7bddcb8bf1650f4a602f74744ee9"
+  },
+  "result_triplet": {
+    "revenue": "9c00ffba3691e31d0f8b9c2a8b8631f7d5ae0135",
+    "filing": "d5e87237bd976b61c0d41127a8090b66031d4a72",
+    "wiki": "f465a5788b6c7bddcb8bf1650f4a602f74744ee9"
+  },
+  "replayed_command_ids": [
+    "wiki.unit.full",
+    "fc203.focused-test_activation_transaction",
+    "fc203.contract-set-3-files",
+    "fc203.ruff-4-changed-files",
+    "fc203.receipt-validator",
+    "fc203.fault-inject-journal-insert"
+  ],
+  "scenario_results": [
+    {
+      "id": "CTRL-03",
+      "status": "passed",
+      "note": "fresh replay on clean worktree at result commit: test_ctrl03_unknown_assertion_rolls_back_whole_transaction + test_ctrl03_apply_requires_catalog_transaction_visibility pass — partial batch failure (unknown id / non-verified late in batch) rolls back the WHOLE transaction, zero half-activation. Fault injection replayed independently: sqlite authorizer DENIES the INSERT INTO activation_journal mid-transaction (after the row UPDATEs) -> apply_activation raises DatabaseError, all assertion rows stay 'shadow', journal empty (0 rows). store.transaction() code path verified (store.py: BEGIN IMMEDIATE -> yield -> commit; except -> connection.rollback() -> raise)."
+    },
+    {
+      "id": "CTRL-04",
+      "status": "passed",
+      "note": "fresh replay: test_ctrl04_rollback_restores_prior_response proves the same request's before->after->restored trace via apply receipt (visibility flips back to shadow, assertions NOT deleted, activation_epoch preserved); wrong cohort (test_ctrl04_rollback_wrong_cohort_rejected), unknown receipt (test_ctrl04_rollback_unknown_receipt_rejected), repeated apply (test_repeated_apply_rejected), repeated rollback (test_repeated_rollback_rejected) and stale policy hash (test_apply_stale_policy_hash_rejected) all fail closed; matching policy hash accepted; CLI apply/rollback roundtrip (test_cli_activation_apply_rollback_roundtrip) binds the CURRENT RootPolicy export hash via export_policy."
+    }
+  ],
+  "mutation_results": [
+    {
+      "id": "MUT-a-drop-already-active-check",
+      "killed": true,
+      "detail": "activation.py: removed 'already = [...]' + 'if already: raise ActivationError' in apply_activation -> test_repeated_apply_rejected FAILED (DID NOT RAISE); restored via git checkout"
+    },
+    {
+      "id": "MUT-b-drop-cohort-match-in-rollback",
+      "killed": true,
+      "detail": "activation.py: removed 'if cohort is not None and apply_record[\"cohort\"] != cohort: raise ActivationError' in rollback_activation -> test_ctrl04_rollback_wrong_cohort_rejected FAILED (DID NOT RAISE); restored via git checkout"
+    },
+    {
+      "id": "MUT-c-drop-stale-policy-check",
+      "killed": true,
+      "detail": "activation.py: removed 'if current_policy_hash is not None and policy_hash != current_policy_hash: raise ActivationError' -> test_apply_stale_policy_hash_rejected FAILED (DID NOT RAISE); restored via git checkout"
+    },
+    {
+      "id": "ATOMICITY-fault-inject-journal-insert",
+      "killed": true,
+      "detail": "fault injection at the journal append (independent script, sqlite3 set_authorizer DENY on 'INSERT INTO activation_journal' inside the real store.transaction()) -> apply_activation raised sqlite3.DatabaseError('not authorized'); verified all assertion rows still 'shadow' and journal empty (0 rows): zero half-activation on process interruption. Backing proof test_ctrl03_apply_requires_catalog_transaction_visibility (batch fails on 3rd id, first two stay shadow) passes in the fresh focused replay. store.transaction() verified to rollback on exception (store.py:916-918)."
+    }
+  ],
+  "side_effect_reconciliation": {
+    "passed": true,
+    "note": "0 downloads / 0 external root writes / 0 catalog mutations / 0 llm calls during review; all tests hermetic (fresh temp catalogs); llm_cost_log.csv not in diff 1c504e3..c02798b2 and untouched; mutation replay confined to src/company_wiki/source_catalog/activation.py and reverted via git checkout each time; review created only the gitignored .codegraph index and this reviewer receipt; final git status clean"
+  },
+  "codegraph_reachability": {
+    "passed": true,
+    "note": "fresh CodeGraph index built in the clean worktree (8,981 nodes, 8,541 edges): apply_activation has exactly 1 production caller (main, cli.py:637 — the CLI activation apply branch using get_catalog().store) + 9 tests; rollback_activation 1 production caller (main cli.py:637, rollback branch) + 5 tests; preview_activation 1 production caller (main cli.py:637, preview branch). activation_journal table is in store._DDL (store.py:297-309) applied via executescript in _initialize -> fresh DBs get the table. Literal grep across src/: activation_journal referenced only in activation.py (2 INSERTs at 150/228, 3 SELECTs at 196/208/259 — append-only, no UPDATE/DELETE) and store.py DDL/FK; no other writer exists."
+  },
+  "rollback": {
+    "required": true,
+    "passed": true,
+    "note": "activation apply/rollback are themselves the rollback mechanism: same-request before->apply->after->rollback->restored trace proven by test_ctrl04_rollback_restores_prior_response (visibility flips back to shadow, assertions never deleted, activation_epoch preserved); repeated rollback of the same receipt rejected; rollback journal row links via applies_receipt_id"
+  },
+  "unresolved_findings": [
+    {
+      "severity": "informational",
+      "id": "no-remote-fcap-branch",
+      "note": "no origin/fcap branch exists (git ls-remote --heads origin fcap is empty); base/result triplet commits verified locally via git cat-file -e in each repo (revenue-forecast 9c00ffba = HEAD, filing-fetch d5e87237 = HEAD, wiki worktree 1c504e3 base exists, c02798b2 result exists and is ancestor of worktree HEAD f465a57)"
+    },
+    {
+      "severity": "informational",
+      "id": "pre-existing-port01-failures",
+      "note": "full suite on result commit: 2 failed / 2017 passed. The 2 failures are tests/contract/test_check_unique_test_symbols.py (test_duplicate_test_definition_fails, test_syntax_error_is_reported_as_failure; TypeError: argument of type 'NoneType' is not iterable — subprocess stdout None on this Windows host) — PRE-EXISTING PORT-01 encoding issue, owned by FC-1205, file untouched by the FC-203 diff (not in diff 1c504e3..c02798b2), so cannot be introduced by this FC"
+    },
+    {
+      "severity": "informational",
+      "id": "receipt-free-text-plus14-vs-11",
+      "note": "implementer receipt free text claims '+14 FC-203 tests'; actual: the FC-203 diff adds exactly 11 test functions (test_activation_transaction.py), focused run 11 passed, full-suite delta from FC-202 closure (2006) to 2017 is +11. Non-material: all hard numbers (11 passed, 42 passed, 2017 passed) verified exact"
+    },
+    {
+      "severity": "informational",
+      "id": "receipt-full-suite-exit-code",
+      "note": "implementer receipt records exit_code 0 for 'python -m pytest tests/ -q' with the 2 pre-existing PORT-01 failures documented in the result string; reviewer's fresh run exits 1 (2 failed / 2017 passed). Consistent with the FC-202 accepted convention (its full-suite entry likewise records exit 0 with '2 pre-existing PORT-01 failures' in the result string). Non-material"
+    },
+    {
+      "severity": "informational",
+      "id": "command-registry-crlf-hash",
+      "note": "command_registry.json sealed value 215b8077... equals the working-tree file hash; the canonical LF blob hashes to d290b994... — difference is purely CRLF line-ending conversion (core.autocrlf=true; converting the LF blob with CRLF endings reproduces 215b8077... exactly). task_plan.md matches 158fc1e1... in both working-tree and canonical LF blob forms"
+    }
+  ],
+  "verdict": "accepted",
+  "reviewed_at": "2026-08-10"
+}

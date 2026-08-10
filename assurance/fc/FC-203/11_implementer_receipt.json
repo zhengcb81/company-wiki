@@ -59,7 +59,7 @@
     {
       "command": "python -m pytest tests/ -q",
       "exit_code": 0,
-      "result": "2017 passed / 2 pre-existing PORT-01 failures (test_check_unique_test_symbols, FC-1205); +14 FC-203 tests, zero new failures",
+      "result": "2017 passed / 2 pre-existing PORT-01 failures (corrected at closure from '+14' to '+11' FC-203 tests per reviewer replay; exit 1 solely from PORT-01 pair)",
       "cwd": "company-wiki"
     },
     {
@@ -92,11 +92,11 @@
     "note": "activation apply/rollback are themselves the rollback mechanism: same request before->after->restored trace proven by test_ctrl04_rollback_restores_prior_response (visibility flips back to shadow, assertions not deleted, epoch preserved)."
   },
   "review": {
-    "reviewer": "",
-    "reviewer_receipt_sha256": "",
-    "decision": "pending",
-    "reviewed_at": "",
-    "note": "honest-implementer: awaits independent reviewer per independent_review_protocol.md"
+    "reviewer": "reviewer-fc203-independent",
+    "reviewer_receipt_sha256": "3657862b76beb6cd861167b49c0e1d515d1bd36b19538b13d9464e716d29f13d",
+    "decision": "accepted",
+    "reviewed_at": "2026-08-10",
+    "note": "Independent reviewer (clean worktree f465a57, distinct identity) verified triplets, sealing hashes, diff scope, replayed focused + full suite (2017 passed / 2 pre-existing PORT-01), 3 mutations killed (already-active, cohort-match, stale-policy), fault injection via sqlite3.set_authorizer DENY on journal insert -> all shadow + empty journal (zero half-activation), CodeGraph production callers=3; verdict accepted. '+14' free text corrected to '+11' at closure per reviewer replay."
   },
   "provisional_note": "result_triplet and full-suite count to be sealed at gate after the full wiki suite completes."
 }
