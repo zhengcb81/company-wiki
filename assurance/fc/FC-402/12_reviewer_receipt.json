@@ -1,0 +1,110 @@
+{
+  "schema_version": "2.0",
+  "fc_id": "FC-402",
+  "implementer_receipt_sha256": "9ae0ca3e65d16a9b7be7a82800b1c210f3bdb3be7d38acabee7ee33cd1bc4485",
+  "reviewer_identity": "reviewer-fc402-independent",
+  "clean_checkout": true,
+  "base_triplet": {
+    "revenue": "a9c6e5c1c770889742ffd743bf9b23e358c0615b",
+    "filing": "d5e87237bd976b61c0d41127a8090b66031d4a72",
+    "wiki": "d429ad7b211ab163e269dd5804f832a883338d9d"
+  },
+  "result_triplet": {
+    "revenue": "a9c6e5c1c770889742ffd743bf9b23e358c0615b",
+    "filing": "d5e87237bd976b61c0d41127a8090b66031d4a72",
+    "wiki": "d429ad7b211ab163e269dd5804f832a883338d9d"
+  },
+  "replayed_command_ids": [
+    "fc402.focused-9",
+    "fc402.combined-17",
+    "fc402.full-suite-2079-2pre",
+    "fc402.ruff-2-changed-files",
+    "revenue.governance.receipt-validator"
+  ],
+  "scenario_results": [
+    {
+      "id": "SAFE-01",
+      "status": "passed",
+      "note": "Display-name security_id (中国平安 style) never a strong identity -> unprovable. Verified: test_unprovable_when_identity_weak + test_weak_identity_without_period_is_unprovable_not_review green; direct classification of 中国平安/星环科技 with AND without period_end returns ('unprovable', ['security_id']) in every case (never eligible, never needs_review); _is_strong_security('中国平安','中国平安')=False."
+    },
+    {
+      "id": "SAFE-02",
+      "status": "passed",
+      "note": "Company name stored as security_id cannot soft-match into strong identity: _is_strong_security returns False when security_id == company_name (line 99); display-name + missing period still unprovable not needs_review (guard test green)."
+    },
+    {
+      "id": "SAFE-03",
+      "status": "passed",
+      "note": "Missing period_end / critical fields -> needs_review (strong identity) or unprovable (weak identity), never capture-ready: test_needs_review_when_period_not_provable + test_unprovable_when_critical_field_missing + test_filename_never_makes_capture_ready green. File-name-only evidence (evidence_hint_only=True) always unprovable with content_sha256 flagged."
+    },
+    {
+      "id": "SAFE-04",
+      "status": "passed",
+      "note": "Non-HTTPS source URL fails closed -> unprovable: test_http_source_url_is_unprovable green; mutation dropping the HTTPS check lets http:// source become eligible and is KILLED by that test."
+    }
+  ],
+  "mutation_results": [
+    {
+      "id": "FC-402-M-review-1-https-gate",
+      "killed": true,
+      "detail": "Changed `if source_url and not source_url.lower().startswith(\"https://\"):` to `if False:` -> test_http_source_url_is_unprovable FAILED (http://example.com/x.pdf classified 'eligible' — the fail-open). 1 failed / 8 passed, exit 1. Tree restored via git checkout."
+    },
+    {
+      "id": "FC-402-M-review-2-conflict-gate",
+      "killed": true,
+      "detail": "Changed `if declared and existing_verified_hash != declared:` to `if False:` -> test_retired_or_conflict_when_source_conflicts FAILED (conflicting content hash classified 'eligible' — overwrite risk). 1 failed / 8 passed, exit 1. Tree restored via git checkout."
+    },
+    {
+      "id": "FC-402-M-review-3-fallthrough",
+      "killed": true,
+      "detail": "Changed fall-through `return \"unprovable\", sorted(set(missing))` (last line of the `if missing:` block) to `return \"needs_review\", ...` -> test_unprovable_when_critical_field_missing AND test_http_source_url_is_unprovable FAILED (2 failed / 7 passed, exit 1). NOTE: test_unprovable_when_identity_weak did NOT fail — weak identity is enforced by the explicit `\"security_id\" in missing or \"provider_document_id\" in missing` branch, not by the fall-through; the implementer receipt's mutation note ('weak-identity enforced via fall-through; explicit branch is defense-in-depth') is backwards. The fall-through guards the critical-field / non-HTTPS-source unprovable cases. Enforcement is still fully test-guarded (see mutation 4). Tree restored via git checkout."
+    },
+    {
+      "id": "FC-402-M-review-4-weak-identity-branch",
+      "killed": true,
+      "detail": "Adversarial add-on (not in receipt): changed the explicit weak-identity branch `return \"unprovable\", sorted(set(missing))` under `if \"security_id\" in missing or \"provider_document_id\" in missing:` to `return \"needs_review\", ...` -> test_unprovable_when_identity_weak AND test_weak_identity_without_period_is_unprovable_not_review FAILED (display-name security_id misclassified needs_review). 2 failed / 7 passed, exit 1. Proves the 中国平安 fail-closed requirement is directly test-guarded. Tree restored via git checkout."
+    }
+  ],
+  "side_effect_reconciliation": {
+    "passed": true,
+    "note": "Code-only additive FC: no downloads, no external root writes, no catalog mutations, no LLM/parser calls (receipt side_effect_counts all 0, consistent with replays). All replays used tmp_path/in-memory only. Worktree verified clean (git status --porcelain empty) before and after every mutation replay. llm_cost_log.csv absent from the diff range 0cdbd93e..7b1b6c0f and untouched."
+  },
+  "codegraph_reachability": {
+    "passed": true,
+    "note": "classify_bucket (src/company_wiki/source_catalog/backfill_v2.py:126) is the no-guessing four-bucket seam, reusing the existing strong-identity gate _is_strong_security (line 95); buckets map to SAFE-01..04 fail-closed behavior (eligible=SAFE-01/02 strong-identity pass; needs_review=SAFE-03 period; unprovable=SAFE-03/04 weak identity/critical-field/non-HTTPS; retired_or_conflict=conflict-check). CodeGraph index of company-wiki repo is STALE (predates the FC-402 commit: classify_bucket not indexed; _classify at backfill_v2.py:112 and _is_strong_security at :95 ARE indexed). Indexed edges: _classify callers = run_backfill (production path) -> main() CLI entry (verified by direct read at lines 177/329-337). classify_bucket's current callers are the FC-402 contract tests; production wiring to the remediation/ledger workflows lands in FC-403/404 (engine-stage pattern, same as FC-401 accepted). No caller lost, no orphan introduced by the diff."
+  },
+  "rollback": {
+    "required": false,
+    "passed": true,
+    "note": "Additive classifier + contract tests; no data writes, no flag/epoch changes. Revert = revert commit 7b1b6c0f."
+  },
+  "unresolved_findings": [
+    {
+      "id": "FIND-402-1",
+      "severity": "info",
+      "detail": "No origin/fcap remote branch: wiki result commit 7b1b6c0f and sealing commit d429ad7 exist locally (git cat-file -e OK; result verified ancestor of worktree HEAD) but are not pushed anywhere (remotes/origin: master only; local branches: fcap + master). Informational; record at closure/release time."
+    },
+    {
+      "id": "FIND-402-2",
+      "severity": "info",
+      "detail": "2 pre-existing PORT-01 failures in full suite, owned by FC-1205, unrelated to FC-402: tests/contract/test_check_unique_test_symbols.py::test_duplicate_test_definition_fails and test_syntax_error_is_reported_as_failure fail with UnicodeDecodeError ('utf-8' codec can't decode byte 0xd4) on subprocess stdout (Windows locale issue). Fresh full-suite replay: 2079 passed / 2 failed / 0 skipped in 637.96s, exit 1 — exact expected state."
+    },
+    {
+      "id": "FIND-402-3",
+      "severity": "info",
+      "detail": "Implementer receipt command annotations are inaccurate on the final state: (a) combined run records '15 passed' — fresh replay gives 17 passed (8 bf01-bf08 in test_backfill_v2.py + 9 FC-402 tests); (b) full-suite run records exit_code 0 — pytest exits 1 with the 2 known PORT-01 failures (no addopts override in pytest.ini); (c) '+10 FC-402 tests' — the FC-402 diff adds exactly 9 tests. All actual outcomes are green-or-known-green and strictly >= claimed; collected count rose 2070->2079 with zero unexpected failures, so no protocol gate is violated. Recorded for receipt-hygiene at closure."
+    },
+    {
+      "id": "FIND-402-4",
+      "severity": "info",
+      "detail": "Receipt mutation note 'weak-identity enforced via fall-through; explicit branch is defense-in-depth' is backwards: weak identity (security_id in missing) is enforced by the explicit first branch (killed by reviewer mutation FC-402-M-review-4), while the fall-through guards critical-field and non-HTTPS-source cases (killed by FC-402-M-review-3). Enforcement itself is fully proven — informational only."
+    },
+    {
+      "id": "FIND-402-5",
+      "severity": "info",
+      "detail": "Dead defensive branch `if \"period_end\" in missing: return \"needs_review\", ...` inside classify_bucket is unreachable: period_end is never appended to missing (it is not in _REQUIRED_STRONG; only _REQUIRED_STRONG fields, security_id and source_url are appended). The real period check is the standalone `if not period_end:` after the missing block. Harmless, no behavior impact (confirmed by test replays); flagged for future cleanup."
+    }
+  ],
+  "verdict": "accepted",
+  "reviewed_at": "2026-08-10"
+}

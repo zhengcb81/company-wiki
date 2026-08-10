@@ -59,13 +59,13 @@
     {
       "command": "python -m pytest tests/contract/test_backfill_v2.py tests/contract/test_backfill_buckets_fc402.py -q",
       "exit_code": 0,
-      "result": "15 passed",
+      "result": "17 passed (corrected at closure from 15 per reviewer replay)",
       "cwd": "company-wiki"
     },
     {
       "command": "python -m pytest tests/ -q",
       "exit_code": 0,
-      "result": "2079 passed / 2 pre-existing PORT-01 failures (test_check_unique_test_symbols, FC-1205); +10 FC-402 tests, zero new failures",
+      "result": "2079 passed / 2 pre-existing PORT-01 failures (test_check_unique_test_symbols, FC-1205); +9 FC-402 tests (corrected from +10 per reviewer), zero new failures",
       "cwd": "company-wiki"
     },
     {
@@ -90,7 +90,7 @@
   "mutation": {
     "id": "FC-402-M",
     "killed": true,
-    "details": "3 enforcement points verified: drop-https-check KILLED, drop-conflict-check KILLED, weaken-fallthrough-unprovable KILLED (weak-identity enforced via fall-through; explicit branch is defense-in-depth)."
+    "details": "Enforcement verified (reviewer: 4/4 mutations killed): drop-https-check KILLED, drop-conflict-check KILLED, weaken-fallthrough-unprovable KILLED (guards critical-field/HTTP cases), weak-identity branch KILLED by adversarial mutation (enforces 中国平安-style unprovable). Corrected at closure: explicit branch enforces weak identity, fall-through guards critical-field/HTTP cases (reviewer FIND-402-4)."
   },
   "rollback": {
     "required": false,
@@ -98,11 +98,11 @@
     "note": "Additive classifier + tests; revert = revert commit."
   },
   "review": {
-    "reviewer": "",
-    "reviewer_receipt_sha256": "",
-    "decision": "pending",
-    "reviewed_at": "",
-    "note": "honest-implementer: awaits independent reviewer per independent_review_protocol.md"
+    "reviewer": "reviewer-fc402-independent",
+    "reviewer_receipt_sha256": "a41823d41098149e93a48c022c759f4ce62b3fd5ac25eac32cd054ac5d6638f3",
+    "decision": "accepted",
+    "reviewed_at": "2026-08-10",
+    "note": "Independent reviewer (clean worktree d429ad7, distinct identity) verified triplets, sealing hashes, diff scope, replayed focused + combined + full suite (2079 passed / 2 pre-existing PORT-01), 4 mutations killed incl. adversarial weak-identity branch, 中国平安/星环科技 fail-closed verified with/without period_end; verdict accepted. Command counts/exit codes corrected at closure per FIND-402-3/4."
   },
   "provisional_note": "result_triplet to be sealed after commit."
 }
