@@ -1,0 +1,113 @@
+{
+  "schema_version": "2.0",
+  "fc_id": "FC-405",
+  "implementer_receipt_sha256": "e0080e92afd05fbdc9da11db6dddf4d5540a313809f96d241b07970201477329",
+  "reviewer_identity": "reviewer-fc405-independent",
+  "clean_checkout": true,
+  "base_triplet": {
+    "revenue": "5ba0e6429b49d15ca18b5741dcde5c669a43cef8",
+    "filing": "d5e87237bd976b61c0d41127a8090b66031d4a72",
+    "wiki": "1ca4f54411cab3e4b8148e888dd3a1997cb4be7a"
+  },
+  "result_triplet": {
+    "revenue": "5ba0e6429b49d15ca18b5741dcde5c669a43cef8",
+    "filing": "d5e87237bd976b61c0d41127a8090b66031d4a72",
+    "wiki": "1ca4f54411cab3e4b8148e888dd3a1997cb4be7a"
+  },
+  "replayed_command_ids": [
+    "fc405.drill-6",
+    "fc405.migration-26",
+    "fc405.full-suite-2099-2pre",
+    "fc405.ruff-5-changed-files",
+    "revenue.governance.receipt-validator"
+  ],
+  "scenario_results": [
+    {
+      "id": "MIG-02",
+      "status": "passed",
+      "note": "Interrupt + resume from journal boundary converges without duplicates: test_drill_interrupt_resume_converges green in fresh replay (batch 1 = 5 assertions; cancel lands nothing; resume from committed boundary = +5, total 10, no dup; rerun = 0 new). Independently replayed with my own 47-source/10-batch drill: batch1+cancel left exactly the batch-1 state (10 assertions, journal=1); resume completed all remaining batches; final 47 assertions / 0 duplicate assertion_ids / 5 journal rows; idempotent rerun added 0."
+    },
+    {
+      "id": "MIG-03",
+      "status": "passed",
+      "note": "Completed migration re-run unchanged / zero duplicate binding: test_drill_duplicate_assertion_idempotent (second apply creates 0 assertions), test_mig06_repeat_apply_no_duplicates and test_mig08_input_output_hash_recorded (journal records input/output hashes; re-run produces no new rows) all green in the fresh 26-test migration suite."
+    },
+    {
+      "id": "MIG-04",
+      "status": "passed",
+      "note": "Rollback then rerun converges: test_drill_rollback_then_rerun (rollback_batch reverts 5 assertions to shadow, records kept, count stays 5) and test_drill_restore_point_hashes (table hash after rollback != applied hash; re-applied state converges to identical sha256) green. See unresolved finding on 'rerun' wording: the engine rerun after rollback is idempotent (shadow assertions exist, created=0); the test demonstrates convergence via restore-point hashes with re-activation."
+    },
+    {
+      "id": "MIG-07",
+      "status": "passed",
+      "note": "Journal write failure is atomic: test_drill_journal_write_failure_is_atomic (BEFORE-INSERT trigger RAISE ABORT 'disk full' on migration_journal) — assertions=0 and journal=0 after the failed batch, proving assertions+journal commit in one transaction. Stale schema fail-closed: test_drill_stale_schema_refused (catalog_meta.schema_version 9.9.9 refused even in dry-run). Both mutations replaying the removed fixes are killed (see mutation_results)."
+    },
+    {
+      "id": "MIG-08",
+      "status": "passed",
+      "note": "Duplicate assertion never duplicated / idempotency: test_drill_duplicate_assertion_idempotent (apply twice -> 5 assertions only) green in fresh replay. Note: compatibility/scenario_registry.json lists MIG-08 owner as FC-303 with a 1.x/2.x shadow-parity oracle (FC-303 accepted it independently); the phase-4 registry row assigns MIG-02/04/06/07/08 to FC-405 and the implementer receipt maps MIG-08 to this idempotency drill. Recorded as informational in unresolved_findings; the idempotency evidence itself is substantive and independently replayed."
+    }
+  ],
+  "mutation_results": [
+    {
+      "id": "FC-405-M1",
+      "mutation": "reintroduce the intermediate con.commit() after the assertion inserts (before the journal insert) in migration_start",
+      "killed": true,
+      "killing_tests": [
+        "test_drill_journal_write_failure_is_atomic"
+      ],
+      "observed": "1 failed in 0.65s — assert assertions == 0 failed (got 5): the committed assertions survive the journal failure, exactly the unresumable-state bug MIG-07 fixes. Restored via git checkout; worktree clean."
+    },
+    {
+      "id": "FC-405-M2",
+      "mutation": "remove the _check_schema(con) call from migration_start",
+      "killed": true,
+      "killing_tests": [
+        "test_drill_stale_schema_refused"
+      ],
+      "observed": "1 failed in 0.61s — 'Failed: DID NOT RAISE <class Exception>': stale schema_version 9.9.9 accepted, fail-closed guard gone. Restored via git checkout; worktree clean."
+    }
+  ],
+  "side_effect_reconciliation": {
+    "passed": true,
+    "note": "Implementer receipt declares downloads=0, external_root_writes=0, catalog_mutations=0, llm_calls=0, parser_calls=0. Independently confirmed: diff range 2ce77fc1..9539681f touches only the 5 in-scope code/test files + the FC-405 implementer receipt itself (llm_cost_log.csv absent from the range); all drill fixtures are tmp_path sqlite copies created inside tests; migration.py writes only the passed catalog path (no network/download/LLM/parser code); full suite runs offline. Real catalog untouched — drills run on copies."
+  },
+  "codegraph_reachability": {
+    "passed": true,
+    "note": "CodeGraph index rebuilt at the exact result checkout HEAD (455 files, 9,232 nodes): _check_schema defined at src/company_wiki/source_catalog/migration.py:52 and called from migration_start; the MIG-07 atomicity fix (assertions + journal row in ONE commit) is a production behavior change inside migration_start; all 6 tests in tests/contract/test_disaster_drill_fc405.py call migration_start (and rollback_batch) directly — the drill exercises the production function through the test harness. Production callers of migration_start = 0 (production apply consumption lands in Phase 14 release waves), consistent with the receipt's codegraph note."
+  },
+  "rollback": {
+    "required": true,
+    "passed": true,
+    "note": "rollback_batch proven on copies: test_drill_rollback_then_rerun reverts 5 assertions (records kept, visibility shadow, count stable); test_drill_restore_point_hashes shows the restore-point table hash returns to the pre-rollback applied state; my independent 47-source drill exercised apply/interrupt/resume/rerun with no duplicate rows and consistent journal (5 rows for 5 batches). No real catalog mutation anywhere — drills ran on temp copies."
+  },
+  "unresolved_findings": [
+    {
+      "severity": "info",
+      "finding": "company-wiki has no origin/fcap remote branch (only origin/master; local fcap exists at 1ca4f544 == worktree HEAD but is not pushed). Worktree detached at verified HEAD 1ca4f544. Recorded informational per procedure.",
+      "recovery": "none"
+    },
+    {
+      "severity": "info",
+      "finding": "2 pre-existing PORT-01 failures reproduced fresh in the full suite: tests/contract/test_check_unique_test_symbols.py::test_duplicate_test_definition_fails and ::test_syntax_error_is_reported_as_failure — UnicodeDecodeError ('utf-8' codec can't decode byte 0xa1/0xd4) in the test's subprocess reader thread, caused by pre-existing non-UTF8 data/log files under artifacts/, .state/ and .ingested/ (22 files repo-wide; zero among the 5 FC-405 changed files, all clean UTF-8). Same 2 tests fail in isolation (2 failed, 3 passed). Full suite: 2099 passed / 2 failed, 2101 collected in 537.26s — collected >= wiki.unit.full baseline 1977; matches the implementer receipt claim exactly. FC-1205 owner.",
+      "recovery": "FC-1205"
+    },
+    {
+      "severity": "info",
+      "finding": "Implementer receipt allowed_files/changed_files omit tests/contract/test_migration_drill.py although the base..result diff includes it (2-line catalog_meta fixture addition required by the new _check_schema guard). The validator's changed-subset-of-allowed check cannot see this (receipt lists only itself), but the actual diff is exactly the 5-file scope set required by the review procedure. Representation gap only; no scope violation.",
+      "recovery": "none (receipt representation; next FC should list all 5 files)"
+    },
+    {
+      "severity": "info",
+      "finding": "Scenario-ID bookkeeping: compatibility/scenario_registry.json assigns MIG-08 to FC-303 (1.x/2.x shadow-parity oracle) while the phase-4 work_unit_registry row and the implementer receipt record MIG-08 as FC-405's duplicate-assertion idempotency drill; the review instruction directs recording MIG-02/03/04/07/08. The drill module docstring also lists 'wrong epoch' with no dedicated epoch test among the 6 — the closest guards are the stale-schema refusal (test_drill_stale_schema_refused) and the pre-existing changed-code/plan-hash resume refusal (test_drill_e_changed_hash_refuses_resume, green in the 26-test suite). Substance of every recorded scenario is independently replayed; mapping note only.",
+      "recovery": "registry re-annotation at closure/FC-1501"
+    },
+    {
+      "severity": "info",
+      "finding": "test_drill_rollback_then_rerun docstring/name claims a 'rerun' after rollback, but the test never invokes migration_start again: convergence is demonstrated via restore-point table hashes with SQL re-activation (test_drill_restore_point_hashes). Engine semantics confirm a rerun after rollback is idempotent by design (assertions exist as shadow -> created=0); activation to active is the Phase 2 control-plane step. MIG-04 evidence (rollback effect, records kept, hash convergence) remains fully valid; wording overstates what the drill executes.",
+      "recovery": "none (test naming/docstring)"
+    }
+  ],
+  "verdict": "accepted",
+  "reviewed_at": "2026-08-10"
+}

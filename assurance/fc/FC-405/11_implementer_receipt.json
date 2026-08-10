@@ -19,12 +19,14 @@
     "company-wiki/src/company_wiki/source_catalog/migration.py",
     "company-wiki/tests/contract/test_migration_tool.py",
     "company-wiki/tests/contract/test_migration_engine_fc401.py",
+    "company-wiki/tests/contract/test_migration_drill.py",
     "company-wiki/tests/contract/test_disaster_drill_fc405.py"
   ],
   "changed_files": [
     "company-wiki/src/company_wiki/source_catalog/migration.py",
     "company-wiki/tests/contract/test_migration_tool.py",
     "company-wiki/tests/contract/test_migration_engine_fc401.py",
+    "company-wiki/tests/contract/test_migration_drill.py",
     "company-wiki/tests/contract/test_disaster_drill_fc405.py"
   ],
   "dependency_receipts": [
@@ -102,11 +104,11 @@
     "note": "rollback_batch proven on the copy; restore-point hash convergence verified; real catalog untouched (drills run on copies)."
   },
   "review": {
-    "reviewer": "",
-    "reviewer_receipt_sha256": "",
-    "decision": "pending",
-    "reviewed_at": "",
-    "note": "honest-implementer: awaits independent reviewer per independent_review_protocol.md"
+    "reviewer": "reviewer-fc405-independent",
+    "reviewer_receipt_sha256": "ed3c7f470d384cf808c4aa5ca9ab8d877c83b5aa75298ba151b93366bb5ef0f6",
+    "decision": "accepted",
+    "reviewed_at": "2026-08-10",
+    "note": "Independent reviewer (clean worktree 1ca4f54, distinct identity) verified triplets, sealing hashes, diff scope, replayed drill + migration suites + full suite (2099 passed / 2 pre-existing PORT-01), 2 mutations killed (non-atomic commit reintroduction, schema check removal), independent 47-source interrupt/resume drill converged; verdict accepted. changed_files corrected at closure to include test_migration_drill.py (reviewer finding)."
   },
   "provisional_note": "result_triplet to be sealed after commit."
 }
