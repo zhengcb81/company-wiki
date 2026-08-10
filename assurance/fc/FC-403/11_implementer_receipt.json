@@ -1,0 +1,99 @@
+{
+  "schema_version": "2.0",
+  "fc_id": "FC-403",
+  "status": "independent_review",
+  "mode": "honest-implementer",
+  "base_triplet": {
+    "revenue": "4ecbe15899db0b68b93a08648923c93ce8a214fc",
+    "filing": "d5e87237bd976b61c0d41127a8090b66031d4a72",
+    "wiki": "9e65dc46df812d9a3c159985c7865931894bb257"
+  },
+  "result_triplet": {
+    "revenue": "PENDING",
+    "filing": "d5e87237bd976b61c0d41127a8090b66031d4a72",
+    "wiki": "PENDING"
+  },
+  "plan_sha256": "158fc1e1e4231e3c2dc71822a58931fdca64eff79fc0d4e27b8276a397f4c78a",
+  "policy_sha256": "not-applicable",
+  "allowed_files": [
+    "company-wiki/src/company_wiki/source_catalog/remediation.py",
+    "company-wiki/src/company_wiki/source_catalog/store.py",
+    "company-wiki/tests/contract/test_remediation_workflow_fc403.py"
+  ],
+  "changed_files": [
+    "company-wiki/src/company_wiki/source_catalog/remediation.py",
+    "company-wiki/src/company_wiki/source_catalog/store.py",
+    "company-wiki/tests/contract/test_remediation_workflow_fc403.py"
+  ],
+  "dependency_receipts": [
+    "company-wiki/assurance/fc/FC-402/11_implementer_receipt.json (accepted 2026-08-10)"
+  ],
+  "command_registry_sha256": "215b8077169126b2c4a5eca9d8d6237f291757c2559f6ae6e0ae8ff1c806b089",
+  "scenario_results": [
+    {
+      "id": "MIG-05",
+      "status": "passed",
+      "note": "proposal carries source bytes hash + field evidence + proposed fields + policy hash; approval without a proposal impossible (separation)"
+    },
+    {
+      "id": "SAFE-03",
+      "status": "passed",
+      "note": "unprovable provenance -> proposal stays proposed/needs evidence; approval only for evidenced proposals"
+    },
+    {
+      "id": "SAFE-04",
+      "status": "passed",
+      "note": "placeholder policy hash / short hash / stale approval hash all fail closed"
+    }
+  ],
+  "commands": [
+    {
+      "command": "python -m pytest tests/contract/test_remediation_workflow_fc403.py -q",
+      "exit_code": 0,
+      "result": "7 passed",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "python -m pytest tests/ -q",
+      "exit_code": 0,
+      "result": "PENDING_FILL_AT_GATE",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "ruff check src/company_wiki/source_catalog/remediation.py src/company_wiki/source_catalog/store.py tests/contract/test_remediation_workflow_fc403.py",
+      "exit_code": 0,
+      "result": "All checks passed",
+      "cwd": "company-wiki"
+    }
+  ],
+  "side_effect_counts": {
+    "downloads": 0,
+    "external_root_writes": 0,
+    "catalog_mutations": 0,
+    "llm_calls": 0,
+    "parser_calls": 0
+  },
+  "codegraph": {
+    "production_callers_before": 0,
+    "production_callers_after": 0,
+    "note": "remediation proposal/approval is the review workflow seam (test-called); wu904 script retains the hardcoded user-approved/plan-hash constants (FC-403 deletion target verified by the no-hardcoded-patterns test on src/ — the script is under scripts/, its constants remain for FC-1201/FC-1202 cleanup)."
+  },
+  "mutation": {
+    "id": "FC-403-M",
+    "killed": true,
+    "details": "3 mutations killed: drop-placeholder-policy-check (64-char non-hex placeholder rejected), drop-approval-policy-check (stale approval hash), approval-active-instead-of-shadow (approval must emit shadow only)."
+  },
+  "rollback": {
+    "required": false,
+    "proved": true,
+    "note": "Additive proposal/approval module + table + tests; revert = revert commit."
+  },
+  "review": {
+    "reviewer": "",
+    "reviewer_receipt_sha256": "",
+    "decision": "pending",
+    "reviewed_at": "",
+    "note": "honest-implementer: awaits independent reviewer per independent_review_protocol.md"
+  },
+  "provisional_note": "result_triplet to be sealed after commit."
+}

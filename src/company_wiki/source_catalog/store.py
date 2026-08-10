@@ -308,6 +308,17 @@ CREATE TABLE IF NOT EXISTS activation_journal (
     applies_receipt_id TEXT,
     FOREIGN KEY(applies_receipt_id) REFERENCES activation_journal(receipt_id)
 );
+CREATE TABLE IF NOT EXISTS remediation_proposals (
+    proposal_id TEXT PRIMARY KEY,
+    source_id TEXT NOT NULL,
+    document_id TEXT NOT NULL,
+    content_sha256 TEXT NOT NULL,
+    proposal_json TEXT NOT NULL,
+    policy_hash TEXT NOT NULL,
+    proposed_by TEXT NOT NULL,
+    created_at TEXT NOT NULL,
+    status TEXT NOT NULL DEFAULT 'proposed'
+);
 """
 
 
