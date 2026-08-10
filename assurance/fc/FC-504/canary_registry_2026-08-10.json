@@ -1,0 +1,41 @@
+{
+ "count": 4,
+ "samples": [
+  {
+   "sample_id": "a6dbf790777c60ff99e2c6b79bbc8d3bb1d6019a02eb101700e8d7a49e175663",
+   "root_id": "dropbox_stock",
+   "relative_path": "金属及加工/有色金属/紫金矿业/紫金矿业：紫金矿业集团股份有限公司2024年年报报告.pdf",
+   "content_sha256": "004f733e709beea878229ae02b80a952c543129037fc940aaf01b77dfa977a89",
+   "expected_identity": "601899",
+   "expected_period_end": "2024-12-31",
+   "expected_provider": "cninfo"
+  },
+  {
+   "sample_id": "96537992663434bb179f4fa297458bd9bd415de671b7e986814f4827027cebac",
+   "root_id": "dropbox_stock",
+   "relative_path": "金属及加工/有色金属/紫金矿业/紫金矿业：紫金矿业集团股份有限公司2025年年度报告.pdf",
+   "content_sha256": "01819e1c7daad939d1779a8aa729f50f02151192e609cb28c2c405634a8f343d",
+   "expected_identity": "601899",
+   "expected_period_end": "2025-12-31",
+   "expected_provider": "cninfo"
+  },
+  {
+   "sample_id": "608fbc56d251686a3de67ee23580fddfe5936de3bab787bf3bbc8bf4ed3a5b1c",
+   "root_id": "dropbox_stock",
+   "relative_path": "工业与信息化/软件与自动化控制/星环科技/星环科技：2024年年度报告.pdf",
+   "content_sha256": "eb965857b1e95a9cd6ccdaa3c1e324d4d8558c924d61e9300a12b8e222676124",
+   "expected_identity": "688031",
+   "expected_period_end": "2024-12-31",
+   "expected_provider": "cninfo"
+  },
+  {
+   "sample_id": "0fc5a14b0f9054d658a5d942fa3263d923d32c74a870d3e776977c9e30513cf7",
+   "root_id": "dropbox_stock",
+   "relative_path": "工业与信息化/软件与自动化控制/星环科技/星环科技：2025年年度报告.pdf",
+   "content_sha256": "0d40d94aef8d2fa08c4c75760198be426a0b579be3d7200ec9450a7e04522b4f",
+   "expected_identity": "688031",
+   "expected_period_end": "2025-12-31",
+   "expected_provider": "cninfo"
+  }
+ ]
+}
