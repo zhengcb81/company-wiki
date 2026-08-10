@@ -1,0 +1,90 @@
+{
+  "schema_version": "2.0",
+  "fc_id": "FC-302",
+  "implementer_receipt_sha256": "91de3a4a2bd3511f13f3447d5217d55938f14536c2b0406facdf8271c59b114e",
+  "reviewer_identity": "reviewer-fc302-independent",
+  "clean_checkout": true,
+  "base_triplet": {
+    "revenue": "85dddb3c34b45a8a5716f52c1d8ad6345873754b",
+    "filing": "d5e87237bd976b61c0d41127a8090b66031d4a72",
+    "wiki": "aa9fc2d76e2bb0916a05145ea978e8170bab2ba0"
+  },
+  "result_triplet": {
+    "revenue": "85dddb3c34b45a8a5716f52c1d8ad6345873754b",
+    "filing": "d5e87237bd976b61c0d41127a8090b66031d4a72",
+    "wiki": "aa9fc2d76e2bb0916a05145ea978e8170bab2ba0"
+  },
+  "replayed_command_ids": [
+    "fc302.focused-dispatch-9",
+    "fc302.contract-subset-42",
+    "wiki.unit.full",
+    "fc302.ruff-3-changed-files",
+    "revenue.governance.receipt"
+  ],
+  "scenario_results": [
+    {
+      "id": "EX-08",
+      "status": "passed",
+      "note": "replayed in clean worktree: dispatch resolves the registered adapter by adapter_id (effective route) for sidecar_filing_v1 / company_raw_v1 / dayu_filing_v1; unknown adapter id and missing (None) adapter id both fail closed with AdapterDispatchError; v2 shadow branch of scan_root_strategy returns adapter candidates for sidecar and company_raw roots instead of raising 'v2 scanner unavailable'. Mutation replay confirmed each fail-closed gate is individually load-bearing."
+    },
+    {
+      "id": "POL-01",
+      "status": "passed",
+      "note": "adapter registry (registered_adapter) is the only resolution path in the v2 production seam: adapter_for consults REGISTERED_ADAPTERS and fails closed when the id is not registered, then constructs only from the _ADAPTER_FACTORIES table (scanner-capable adapters). No root-kind guessing in the v2 path: scanner.py contains no direct adapter-class references and no root-specific branches were added (diff -U0 scan for dropbox/dayu/company_raw/companies additions = empty); v1 path (_scan_root_v1) byte-untouched (absent from -U0 diff)."
+    }
+  ],
+  "mutation_results": [
+    {
+      "id": "FC-302-M-review-drop-missing-adapter-id-gate",
+      "killed": true,
+      "detail": "removed the 'if root.adapter_id is None: raise' gate from adapter_for -> test_dispatch_missing_adapter_id_fails_closed FAILED (AdapterDispatchError message changed to 'adapter None not registered'). Restored via git checkout; worktree clean."
+    },
+    {
+      "id": "FC-302-M-review-drop-registry-check",
+      "killed": true,
+      "detail": "removed the 'registered_adapter(...) is None -> raise' check from adapter_for -> test_dispatch_unknown_adapter_fails_closed FAILED (AdapterDispatchError message changed to 'has no scanner adapter implementation' instead of 'not registered'). Restored via git checkout; worktree clean."
+    },
+    {
+      "id": "FC-302-M-review-scanner-v2-unconditional-raise",
+      "killed": true,
+      "detail": "changed the v2 shadow branch of scan_root_strategy back to unconditional raise ScannerFacadeError('v2 scanner unavailable (fail closed)') -> test_v2_shadow_dispatch_calls_sidecar_adapter FAILED and test_v2_shadow_dispatch_company_raw_adapter FAILED (2 failed, 7 deselected). Restored via git checkout; focused suite re-ran 9 passed after restore."
+    }
+  ],
+  "side_effect_reconciliation": {
+    "passed": true,
+    "detail": "receipt claims downloads 0 / external_root_writes 0 / catalog_mutations 0 / llm_calls 0 / parser_calls 0. FC-302 diff is additive (adapter_dispatch.py new module + 3-line facade branch + new tests) with zero I/O beyond pytest tmp_path; all replayed tests write only to tmp_path; llm_cost_log.csv not in the diff (verified name-only) and untouched; worktree clean after replay; CodeGraph index rebuilt in the main company-wiki checkout (HEAD == review HEAD aa9fc2d) - no product files modified."
+  },
+  "codegraph_reachability": {
+    "passed": true,
+    "detail": "CodeGraph (re-indexed at review HEAD aa9fc2d, 444 files): scan_root_via_adapter has exactly 1 production caller - scan_root_strategy (scanner.py:1354, the v2 shadow branch); adapter_for has 1 production caller - scan_root_via_adapter (adapter_dispatch.py:79) plus 5 test callers; scan_root_strategy callees = scan_root_via_adapter + _scan_root_v1 (v1 path intact). SidecarFilingAdapter / CompanyRawAdapter / DayuAdapter each appear in the production _ADAPTER_FACTORIES table of adapter_dispatch.py and are instantiated nowhere else in src/ (literal/AST gate, protocol section 5): grep shows the only constructor sites are adapter_dispatch.py:30-32, reachable via adapter_for -> factory() from the facade. Caveat: codegraph does not emit edges for constructor calls inside dict lambdas, so class-level callers queries return empty; reachability is established by the call-chain edges above plus the literal gate."
+  },
+  "rollback": {
+    "required": false,
+    "passed": true,
+    "detail": "additive change: new adapter_dispatch module + scanner facade v2 branch swap + new tests; v1 scanner path untouched; no config/DB/root writes. Revert = revert commit 7cf59570 (ancestor of review HEAD aa9fc2d)."
+  },
+  "unresolved_findings": [
+    {
+      "id": "FIND-302-1",
+      "severity": "informational",
+      "note": "No origin/fcap remote branch exists (wiki remotes: origin/master only; local fcap branch present but worktree detached at aa9fc2d). Verified commits: revenue 85dddb3c (revenue HEAD), filing d5e87237 (filing-fetch HEAD), wiki e336c864 / 7cf59570 / aa9fc2d all present; sealed code commit 7cf59570 is ancestor of review-time HEAD aa9fc2d. Sealing hashes recomputed in revenue repo: task_plan.md = 158fc1e1e4231e3c2dc71822a58931fdca64eff79fc0d4e27b8276a397f4c78a, compatibility/command_registry.json = 215b8077169126b2c4a5eca9d8d6237f291757c2559f6ae6e0ae8ff1c806b089 - both match the implementer receipt."
+    },
+    {
+      "id": "FIND-302-2",
+      "severity": "informational",
+      "note": "Full suite: 2045 passed / 2 failed - tests/contract/test_check_unique_test_symbols.py::test_duplicate_test_definition_fails and ::test_syntax_error_is_reported_as_failure (PORT-01, owned by FC-1205, pre-existing). File blob identical at base e336c864 and result 7cf59570 (rev-parse 57a4d41e == 57a4d41e), so the failure is not introduced by FC-302. Failure mode: subprocess reader-thread raises (PytestUnhandledThreadExceptionWarning), proc.stdout stays None - Windows subprocess UTF-8/GBK gate portability, unrelated to adapter dispatch. Zero FC-302 failures."
+    },
+    {
+      "id": "FIND-302-3",
+      "severity": "informational",
+      "note": "Worker-bootstrap timing flake: implementer recorded 2044 passed + 1 extra flaky failure under full-suite load (passes in isolation); my fresh run recorded 2045 passed / 2 failed - identical 2047 total collected, the flaky test passed on my run. The flake class is the same subprocess-output-capture timing in test_check_unique_test_symbols, not FC-302 related. Additionally the implementer receipt records exit_code 0 for the full-suite command while raw pytest exits 1 due to the 2 pre-existing PORT-01 failures - bookkeeping note only; the receipt's result text itself documents the 2 pre-existing failures and zero FC-302 failures."
+    },
+    {
+      "id": "FIND-302-4",
+      "severity": "informational",
+      "note": "CodeGraph class-level callers queries for SidecarFilingAdapter / CompanyRawAdapter / DayuAdapter return no edges because tree-sitter does not record constructor calls inside dict lambdas; per protocol section 5 the production-caller conclusion is backed by the CodeGraph call-chain (facade -> scan_root_via_adapter -> adapter_for -> registered_adapter) plus the AST/literal gate (factory table lines adapter_dispatch.py:30-32 are the only instantiation sites in src/)."
+    }
+  ],
+  "verdict": "accepted",
+  "reviewed_at": "2026-08-10"
+}

@@ -90,11 +90,11 @@
     "note": "Additive dispatch module + facade branch; v1 scanner untouched; revert = revert commit."
   },
   "review": {
-    "reviewer": "",
-    "reviewer_receipt_sha256": "",
-    "decision": "pending",
-    "reviewed_at": "",
-    "note": "honest-implementer: awaits independent reviewer per independent_review_protocol.md"
+    "reviewer": "reviewer-fc302-independent",
+    "reviewer_receipt_sha256": "80c43004c3f25b98eea5c98f7d20d3a386d3eb742ebbaa0564b40adec82b830f",
+    "decision": "accepted",
+    "reviewed_at": "2026-08-10",
+    "note": "Independent reviewer (clean worktree aa9fc2d, distinct identity) verified triplets, sealing hashes, diff scope, replayed focused + 6-file subset + full suite (2045 passed / 2 pre-existing PORT-01; worker-bootstrap flake passed on reviewer run), 3 mutations killed (missing-id gate, registry check, scanner unconditional raise), codegraph: 1 production caller each for dispatch functions, 3 adapters in factory table, v1 path untouched; verdict accepted."
   },
   "provisional_note": "result_triplet to be sealed after commit."
 }
