@@ -1,0 +1,105 @@
+{
+  "schema_version": "2.0",
+  "fc_id": "FC-603",
+  "status": "independent_review",
+  "mode": "honest-implementer",
+  "base_triplet": {
+    "revenue": "dfa1edb1cf7fd9784aedf22d07e2d63931196c79",
+    "filing": "6274be2187b450d14492defd03579d6209d1b1cc",
+    "wiki": "4d1a1730aaa2c02714fa7f9862eb022a4b164ea8"
+  },
+  "result_triplet": {
+    "revenue": "dfa1edb1cf7fd9784aedf22d07e2d63931196c79",
+    "filing": "6274be2187b450d14492defd03579d6209d1b1cc",
+    "wiki": "93150ef2a0d50a9fe36629c6c2e9e933c78e4417"
+  },
+  "plan_sha256": "158fc1e1e4231e3c2dc71822a58931fdca64eff79fc0d4e27b8276a397f4c78a",
+  "policy_sha256": "not-applicable",
+  "allowed_files": [
+    "company-wiki/tests/contract/test_cross_root_dedup_fc603.py"
+  ],
+  "changed_files": [
+    "company-wiki/tests/contract/test_cross_root_dedup_fc603.py"
+  ],
+  "dependency_receipts": [
+    "company-wiki/assurance/fc/FC-602/11_implementer_receipt.json (accepted 2026-08-10)"
+  ],
+  "command_registry_sha256": "215b8077169126b2c4a5eca9d8d6237f291757c2559f6ae6e0ae8ff1c806b089",
+  "scenario_results": [
+    {
+      "id": "EX-04",
+      "status": "passed",
+      "note": "same bytes across companies/dayu/dropbox -> ONE document with 3 active original_primary locations; canonical = policy-priority winner with stable tie-break (SQL ORDER BY r.priority,l.root_id,l.relative_path + in-memory (priority, root_id, relative_path, location_id) sort + ranked_locations CTE — four independent defense layers); priority-beats-alphabetical pin (dayu p10 vs companies p30)"
+    },
+    {
+      "id": "EX-05",
+      "status": "passed",
+      "note": "same company/year with different provider_document_ids: pdoc-bound requests select exactly one document (REUSED_EXACT, len(matches)==1, correct pdoc) — no ambiguous merge"
+    },
+    {
+      "id": "EX-06",
+      "status": "passed",
+      "note": "amended + original for the same period: build_gap_plan keeps the local original reusable and flags only the newer accession as newer_revision — stable deterministic rule, reversed remote order gives the same result"
+    },
+    {
+      "id": "EX-07",
+      "status": "passed",
+      "note": "scan-order independence: separate catalogs scanned with roots forward vs reversed -> identical canonical path, duplicate_group_id and exact_duplicate_location_count; broken only by a combined 2-layer mutation (resolver query ORDER BY + in-memory sort)"
+    },
+    {
+      "id": "AR-09",
+      "status": "passed",
+      "note": "cross-root duplicate document shares the artifact: source bundle binds the document/content (artifact hash identical regardless of the canonical root)"
+    }
+  ],
+  "commands": [
+    {
+      "command": "python -m pytest tests/contract/test_cross_root_dedup_fc603.py -q",
+      "exit_code": 0,
+      "result": "6 passed",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "python -m pytest tests/ -q",
+      "exit_code": 0,
+      "result": "2142 passed / 2 pre-existing PORT-01 failures (test_check_unique_test_symbols, FC-1205); +6 FC-603 tests, zero new failures",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "ruff check tests/contract/test_cross_root_dedup_fc603.py",
+      "exit_code": 0,
+      "result": "All checks passed",
+      "cwd": "company-wiki"
+    }
+  ],
+  "side_effect_counts": {
+    "downloads": 0,
+    "external_root_writes": 0,
+    "catalog_mutations": 0,
+    "llm_calls": 0,
+    "parser_calls": 0
+  },
+  "codegraph": {
+    "production_callers_before": 0,
+    "production_callers_after": 0,
+    "note": "test-only FC: pins the existing canonical-selection machinery (service.py _annotate_locations sort + SQL ORDER BY + ranked_locations CTE + gap_plan revision rule) with zero production changes"
+  },
+  "mutation": {
+    "id": "FC-603-M",
+    "killed": true,
+    "details": "3 mutations killed: M1 in-memory sort priority dropped (priority-beats-alphabetical dies), M2 resolver-path ordering removed — query ORDER BY + in-memory sort combined (priority + scan-order tests die; single-layer mutations are masked by the other defense layers — documented), M3 gap_plan revision rule inverted (EX-06 dies)"
+  },
+  "rollback": {
+    "required": false,
+    "proved": true,
+    "note": "Test-only FC; zero production changes; revert = revert commit."
+  },
+  "review": {
+    "reviewer": "",
+    "reviewer_receipt_sha256": "",
+    "decision": "pending",
+    "reviewed_at": "",
+    "note": "honest-implementer: awaits independent reviewer per independent_review_protocol.md"
+  },
+  "provisional_note": "result_triplet sealed at commit 93150ef. Full suite: 2142 passed / 2 pre-existing PORT-01."
+}
