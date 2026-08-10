@@ -1,0 +1,110 @@
+{
+  "schema_version": "2.0",
+  "fc_id": "FC-701",
+  "implementer_receipt_sha256": "ef9478e42d2d427573cd80defc589c22cda8876e667ebcd533e91c158cb8b1b8",
+  "reviewer_identity": "reviewer-fc701-independent",
+  "clean_checkout": true,
+  "base_triplet": {
+    "revenue": "d662c825dc9123f81fb1a233cb268c2a422b3149",
+    "filing": "6274be2187b450d14492defd03579d6209d1b1cc",
+    "wiki": "f4e941a70f83a782044561d785921a92f48113af"
+  },
+  "result_triplet": {
+    "revenue": "d662c825dc9123f81fb1a233cb268c2a422b3149",
+    "filing": "6274be2187b450d14492defd03579d6209d1b1cc",
+    "wiki": "f4e941a70f83a782044561d785921a92f48113af"
+  },
+  "replayed_command_ids": [
+    "fc701.wiki.focused",
+    "wiki.unit.full",
+    "fc701.wiki.config_doctor",
+    "fc701.ruff.changed",
+    "revenue.governance.drift_patrol",
+    "fc701.wiki.mutation.M1",
+    "fc701.wiki.mutation.M2",
+    "revenue.governance.receipt"
+  ],
+  "scenario_results": [
+    {
+      "id": "FC-701-normalized-only",
+      "status": "passed",
+      "note": "Fresh replay in the clean worktree at f4e941a (7/7 focused tests passed). test_fc701_v2_reader_consumes_normalized_only: with the RuntimePolicySnapshot pinned to the v2 reader (v2_resolve_active, epoch e1, active cohort, bridge OFF), the resolver consumed the active normalized assertion (upsert_verified_assertion + apply_activation over a real scanned catalog) as REUSED_EXACT with observer.reasons == [] — zero legacy_bridge_hit. test_fc701_bridge_off_fails_closed_without_assertion: no assertion + bridge OFF resolves non-REUSED_EXACT with no legacy read. test_fc701_bridge_on_still_observable_with_v2_snapshot: bridge ON but the v2 assertion present — the v2 assertion is still read first (REUSED_EXACT, zero bridge hits); a legacy hit only occurs when no v2 assertion exists (verified by reading _source_metadata: `if v2: return v2` at resolver.py:349 precedes the bridge fallback, and the observer records legacy_bridge_hit only inside the bridge loop)."
+    },
+    {
+      "id": "FC-701-exclusions",
+      "status": "passed",
+      "note": "test_fc701_remediation_pending_excluded: a real remediation proposal (create_proposal with status='proposed', matching remediation.py line 90) on the source causes non-REUSED_EXACT with 'remediation_pending' in debug_trace — the resolver._remediation_pending SELECT (resolver.py:492-500, 558-560) reads the real remediation_proposals table (status='proposed' is the true creation status, not a hardcode). test_fc701_retired_document_excluded: document set to source_status='retired' is excluded at the candidate query level (query_filing_candidates source_statuses=('active',) at resolver.py:535-539) plus the defense-in-depth per-document gate (549-554). Unprovable evidence forms no handle — the failure paths are explicit per-candidate trace reasons."
+    },
+    {
+      "id": "FC-701-gate",
+      "status": "passed",
+      "note": "AST gate in test_normalized_resolver_fc701.py (_LEGACY_OWNERS frozen set of 7 documented owners: resolver.py, backfill_v2.py, migration_ledger.py, normalizer.py, scanner.py, visibility_bridge.py, dayu.py) parsed all production modules under src/company_wiki/source_catalog for Subscript/`.get()` reads of the 'acquisition'/'dayu_meta' containers: zero violations. test_fc701_legacy_gate_rejects_new_caller (adversarial probe): a NEW module _fc701_evil_probe.py reading metadata.get(\"acquisition\") is detected and the probe file is removed in finally. I independently re-ran the identical AST scan: VIOLATIONS=[]; _remediation_pending has exactly one production caller (resolve at resolver.py:558, confirmed by grep over src/)."
+    },
+    {
+      "id": "FC-701-doctor",
+      "status": "passed",
+      "note": "config_doctor tests: 8 passed fresh. Diff 4bdffb5 moves the Dropbox/Stock path check OUT of the filing-fetch-presence branch to run unconditionally when a dropbox_stock root exists (CONFIG-DBX-04 — the path's single source of truth is source_catalog.yaml), and the filing-fetch branch now only enforces CONFIG-DBX-03 (allowed_handle_roots smuggling = violation). Tests rewritten accordingly (test_e2e_f03_filing_allowance_smuggled_fails, test_e2e_f03_dropbox_path_not_stock_fails). Ruff clean on all 4 changed files. revenue-governance drift_patrol (tools/drift_patrol.py at revenue d662c82): version/installation/config/docs/dependencies all OK — config doctor integration green."
+    }
+  ],
+  "mutation_results": [
+    {
+      "id": "M1",
+      "killed": true,
+      "target": "resolver.py: the `if self._remediation_pending(document.get(\"source_id\")): trace.append(... remediation_pending ...); continue` block removed",
+      "evidence": "Removed the FC-701 remediation-exclusion block (restored immediately after); __pycache__ cleared before the run; focused suite: 1 failed / 6 passed — exactly test_fc701_remediation_pending_excluded FAILED (status became REUSED_EXACT, remediation_pending exclusion gone). Control rerun after restore: 7 passed, worktree clean. The kill is the exact FC-701 defect (pending-remediation sources offered for reuse), not a syntax/fixture/environment error."
+    },
+    {
+      "id": "M2",
+      "killed": true,
+      "target": "resolver.py _source_metadata: `if v2: return v2` changed to `if v2 and reader == \"v1\": return v2`",
+      "evidence": "With the v2 assertion never returned (v2 reader implies reader==\"v2\"), the v2 normalized assertion is skipped; __pycache__ cleared; focused suite: 2 failed / 5 passed — exactly test_fc701_v2_reader_consumes_normalized_only and test_fc701_bridge_on_still_observable_with_v2_snapshot FAILED (no REUSED_EXACT from the assertion). Restored after; control 7 passed, worktree clean. The kill matches the implementer's predicted pair exactly — the v2-assertion-first read is genuinely pinned."
+    }
+  ],
+  "side_effect_reconciliation": {
+    "passed": true,
+    "note": "All read-only: downloads=0, external_root_writes=0, catalog_mutations=0, llm_calls=0, parser_calls=0. FC-701 adds one SELECT-only helper (_remediation_pending), per-candidate exclusion trace lines, and read-only config_doctor path checks; no network/subprocess in the changed code (verified by read). Tests build catalogs and source files under pytest tmp_path only; the adversarial evil-probe file is written to src/ and unlinked in a finally block (verified git status clean after all runs — no residue). My review wrote nothing to production roots or the live catalog; the only file created is this reviewer receipt."
+  },
+  "codegraph_reachability": {
+    "passed": true,
+    "note": "company-wiki CodeGraph index queried independently (main checkout at f4e941a): SourceResolver.resolve has exactly two production callers (cli.py:637 main, policy_2x.py:45 load_root_policy_2x) and _source_metadata exactly two production callers, both inside resolver.py (resolve, _entity_matches) — the FC-701 diff adds ZERO production callers; receipt claim production_callers before/after 0 confirmed structurally. The index is stale w.r.t. the FC-701 commit (resolve indexed at line 492 vs 502 in the worktree — exactly the 10-line _remediation_pending insertion offset; _remediation_pending itself is not yet in the index), so the new symbol's reachability was verified by direct source read + grep over src/ (defined resolver.py:492, sole caller resolver.py:558 inside resolve) plus an independent AST gate scan (VIOLATIONS=[]) and the two AST gate tests, which passed. No call-edge changes from the FC-701 diff."
+  },
+  "rollback": {
+    "required": false,
+    "passed": true,
+    "note": "The FC-701 code diff is confined to 2 wiki commits (668db4d, 4bdffb5) touching exactly 4 files, all inside the FC-701 allowlist; revenue and filing repos are byte-identical across the triplet (d662c825 / 6274be21 unchanged). Revert = revert the two wiki commits (git revert 668db4d 4bdffb5, or reset to 4d9a5fc). Verified: code files at worktree HEAD are identical to result-triplet 4bdffb5, and `git diff 4d9a5fc..4bdffb5 | git apply --reverse --check` applies cleanly — the reverse patch reproduces the base tree."
+  },
+  "unresolved_findings": [
+    {
+      "id": "no-remote-branch",
+      "severity": "informational",
+      "note": "The wiki fcap branch carrying the FC-701 commits (668db4d, 4bdffb5, f4e941a) has NO remote counterpart — origin (github.com/zhengcb81/company-wiki) tracks only master. The sealed commits exist only locally; a later merge/push to origin is required for the closure to survive a checkout loss. Does not affect the correctness of this review's evidence."
+    },
+    {
+      "id": "PORT-01-pre-existing-1",
+      "severity": "pre-existing",
+      "note": "wiki tests/contract/test_check_unique_test_symbols.py::test_duplicate_test_definition_fails FAILED in my fresh full-suite replay (subprocess stdout NoneType: UTF-8 codec can't decode GBK byte 0xa1 on the Windows console — PORT-01/FC-1205 scope, identical to the FC-603/FC-604 findings). File untouched by the FC-701 diff; pre-existing and reproduced identically. This also explains the implementer's recorded full-suite exit_code 0 vs my exit 1: environment-dependent, counts and failure identities match exactly."
+    },
+    {
+      "id": "PORT-01-pre-existing-2",
+      "severity": "pre-existing",
+      "note": "wiki tests/contract/test_check_unique_test_symbols.py::test_syntax_error_is_reported_as_failure FAILED in my fresh full-suite replay (same GBK/UTF-8 subprocess decode failure as PORT-01-pre-existing-1). Pre-existing, outside the FC-701 diff, tracked under FC-1205."
+    },
+    {
+      "id": "full-suite-exit-code-environment-dependent",
+      "severity": "low",
+      "note": "Implementer receipt records exit_code 0 for `python -m pytest tests/ -q` with '2153 passed / 2 pre-existing PORT-01 failures'. My fresh replay gave the IDENTICAL counts (2 failed, 2153 passed, 1 skipped in 402.58s) but pytest exit code 1 (failures present). Discrepancy is environmental and matches the FC-603/FC-604 precedent: the 2 failing gate tests pass under a UTF-8 console/codepage and fail under GBK; counts, failure identities, and zero-new-failures all match — not a fabrication."
+    },
+    {
+      "id": "plan-seal-status-header-drift",
+      "severity": "informational",
+      "note": "Sealing hashes verified: command_registry.json = 215b8077...b089 matches the working tree exactly. task_plan.md seal 158fc1e1...4c78a matches the frozen plan (revenue commits 2d64186/3e805a8); the plan at current revenue HEAD d662c82 hashes to ce71c4b9 (LF) / 611f8554 (CRLF working tree, which equals the CRLF-converted HEAD blob — no uncommitted drift). The delta is exclusively Phase status-header lines (Phase 1-6 pending -> completed, FC-604 closure triplet refresh); FC-701 requirement text is byte-identical between the sealed and current versions."
+    },
+    {
+      "id": "full-suite-single-environment-skip",
+      "severity": "informational",
+      "note": "The full suite has 1 skipped test: tests/contract/test_dropbox_root_policy_fc501.py:135 'symlinks not supported on this host' — a pre-existing host-capability skip outside the FC-701 changed files; not a masked failure."
+    }
+  ],
+  "verdict": "accepted",
+  "reviewed_at": "2026-08-11"
+}
