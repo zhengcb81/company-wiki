@@ -1,0 +1,106 @@
+{
+  "schema_version": "2.0",
+  "fc_id": "FC-601",
+  "status": "independent_review",
+  "mode": "honest-implementer",
+  "base_triplet": {
+    "revenue": "0d9851627f1e638bc938d04fccb6e80d7b04a226",
+    "filing": "6274be2187b450d14492defd03579d6209d1b1cc",
+    "wiki": "651d2f6b3eca122b96745e411ac48eee9421a503"
+  },
+  "result_triplet": {
+    "revenue": "0d9851627f1e638bc938d04fccb6e80d7b04a226",
+    "filing": "6274be2187b450d14492defd03579d6209d1b1cc",
+    "wiki": "7f0b623068eb8db2449a0bd5f3d49def32dec1a9"
+  },
+  "plan_sha256": "158fc1e1e4231e3c2dc71822a58931fdca64eff79fc0d4e27b8276a397f4c78a",
+  "policy_sha256": "not-applicable",
+  "allowed_files": [
+    "company-wiki/src/company_wiki/source_catalog/trace_parity.py",
+    "company-wiki/tests/contract/test_trace_parity_fc601.py",
+    "company-wiki/tools/ex01_reuse_replay.py"
+  ],
+  "changed_files": [
+    "company-wiki/src/company_wiki/source_catalog/trace_parity.py",
+    "company-wiki/tests/contract/test_trace_parity_fc601.py",
+    "company-wiki/tools/ex01_reuse_replay.py"
+  ],
+  "dependency_receipts": [
+    "company-wiki/assurance/fc/FC-504/12_reviewer_receipt.json (mechanism accepted 2026-08-10, samples blocked)",
+    "company-wiki/assurance/fc/FC-303/11_implementer_receipt.json (accepted 2026-08-10 — migration ledger)"
+  ],
+  "command_registry_sha256": "215b8077169126b2c4a5eca9d8d6237f291757c2559f6ae6e0ae8ff1c806b089",
+  "scenario_results": [
+    {
+      "id": "EX-01-T1",
+      "status": "passed",
+      "note": "frozen CN/HK/US company_raw corpus: v1/v2 full-trace parity (sources/documents/locations/handles/bundles) clean after FC-303 explainable rules; fixture requests resolve REUSED_EXACT with download_required/download_allowed false (zero provider/canonical-write path)"
+    },
+    {
+      "id": "EX-01-T2",
+      "status": "passed",
+      "note": "real samples (tools/ex01_reuse_replay.py, read-only against live catalog): CN 紫金矿业 601899 FY2025 cninfo, HK 美团 03690 FY2024 hkexnews (form_type FY), US Apple AAPL FY2025 sec — 3/3 REUSED_EXACT, download_required false, capture_ready true"
+    },
+    {
+      "id": "FC-601-writer",
+      "status": "passed",
+      "note": "canonical writer destination unchanged: companies/<entity>/raw/<kind-subdir>/<filename> pinned by test"
+    }
+  ],
+  "commands": [
+    {
+      "command": "python -m pytest tests/contract/test_trace_parity_fc601.py -q",
+      "exit_code": 0,
+      "result": "7 passed",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "python -m pytest tests/ -q",
+      "exit_code": 0,
+      "result": "2130 passed / 2 pre-existing PORT-01 failures (test_check_unique_test_symbols, FC-1205); +7 FC-601 tests, zero new failures",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "ruff check src/company_wiki/source_catalog/trace_parity.py tests/contract/test_trace_parity_fc601.py tools/ex01_reuse_replay.py",
+      "exit_code": 0,
+      "result": "All checks passed",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "python tools/ex01_reuse_replay.py",
+      "exit_code": 0,
+      "result": "EX-01 passed (3/3 REUSED_EXACT): CN 601899/cninfo/1225023658 FY2025, HK 03690/hkexnews/11645024 FY2024, US AAPL/sec/0000320193-25-000079 FY2025; all download_required false, capture_ready true",
+      "cwd": "company-wiki"
+    }
+  ],
+  "side_effect_counts": {
+    "downloads": 0,
+    "external_root_writes": 0,
+    "catalog_mutations": 0,
+    "llm_calls": 0,
+    "parser_calls": 0
+  },
+  "codegraph": {
+    "production_callers_before": 0,
+    "production_callers_after": 0,
+    "note": "trace_parity consumed by FC-604/FC-505 parity gates; run_trace_parity composes _scan_root_v1 + scan_root_strategy(v2_scan_shadow) + migration ledger (FC-303)"
+  },
+  "mutation": {
+    "id": "FC-601-M",
+    "killed": true,
+    "details": "4 mutations killed: M1 handles section dropped, M2 bundles section dropped, M3 mime always octet-stream, M4 group_key weakened to relative — each caught by the golden trace test"
+  },
+  "rollback": {
+    "required": false,
+    "proved": true,
+    "note": "Additive trace module + tests + replay tool; zero production behavior changes; revert = revert commit."
+  },
+  "review": {
+    "reviewer": "",
+    "reviewer_receipt_sha256": "",
+    "decision": "pending",
+    "reviewed_at": "",
+    "note": "honest-implementer: awaits independent reviewer per independent_review_protocol.md"
+  },
+  "provisional_note": "result_triplet sealed at commit 7f0b623. Full suite: 2130 passed / 2 pre-existing PORT-01."
+}
