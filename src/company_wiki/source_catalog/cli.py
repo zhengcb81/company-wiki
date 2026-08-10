@@ -572,6 +572,34 @@ def _parser() -> argparse.ArgumentParser:
     )
     startup.add_argument("--task-name", default=DEFAULT_TASK_NAME)
 
+    activation = subparsers.add_parser(
+        "activation",
+        help="preview/apply/rollback cohort-epoch activation (FC-203)",
+    )
+    activation_sub = activation.add_subparsers(dest="activation_action", required=True)
+    act_preview = activation_sub.add_parser(
+        "preview", help="read-only: which assertions would flip"
+    )
+    act_preview.add_argument("--assertion-ids", required=True,
+                             help="comma-separated assertion ids")
+    act_apply = activation_sub.add_parser(
+        "apply", help="flip a batch to active inside one catalog transaction"
+    )
+    act_apply.add_argument("--epoch", required=True)
+    act_apply.add_argument("--cohort", required=True)
+    act_apply.add_argument("--assertion-ids", required=True,
+                           help="comma-separated assertion ids")
+    act_apply.add_argument("--policy-hash", required=True)
+    act_apply.add_argument("--reviewer", required=True)
+    act_apply.add_argument("--reason", required=True)
+    act_rollback = activation_sub.add_parser(
+        "rollback", help="revert a prior apply inside one catalog transaction"
+    )
+    act_rollback.add_argument("--receipt-id", required=True)
+    act_rollback.add_argument("--cohort", help="must match the apply receipt")
+    act_rollback.add_argument("--reviewer", required=True)
+    act_rollback.add_argument("--reason", required=True)
+
     runtime_policy = subparsers.add_parser(
         "runtime-policy",
         help="show or apply the persistent RuntimePolicySnapshot (FC-201)",
@@ -972,6 +1000,47 @@ def main(argv: Sequence[str] | None = None) -> int:
                 if identity
                 else ensured
             )
+        elif args.command == "activation":
+            from .activation import (
+                apply_activation,
+                preview_activation,
+                rollback_activation,
+            )
+
+            store = get_catalog().store
+            if args.activation_action == "preview":
+                result = preview_activation(
+                    store,
+                    assertion_ids=tuple(
+                        item.strip() for item in args.assertion_ids.split(",")
+                        if item.strip()
+                    ),
+                )
+            elif args.activation_action == "apply":
+                from .policy import export_policy
+
+                policy_hash, _ = export_policy(config)
+                result = apply_activation(
+                    store,
+                    epoch=args.epoch,
+                    cohort=args.cohort,
+                    assertion_ids=tuple(
+                        item.strip() for item in args.assertion_ids.split(",")
+                        if item.strip()
+                    ),
+                    policy_hash=args.policy_hash,
+                    reviewer=args.reviewer,
+                    reason=args.reason,
+                    current_policy_hash=policy_hash,
+                )
+            else:  # rollback
+                result = rollback_activation(
+                    store,
+                    receipt_id=args.receipt_id,
+                    cohort=args.cohort,
+                    reviewer=args.reviewer,
+                    reason=args.reason,
+                )
         elif args.command == "runtime-policy":
             from .runtime_policy import (
                 RuntimePolicyError,

@@ -294,6 +294,20 @@ CREATE TABLE IF NOT EXISTS document_restore_audit (
     created_at TEXT NOT NULL,
     FOREIGN KEY(document_id) REFERENCES documents(document_id)
 );
+CREATE TABLE IF NOT EXISTS activation_journal (
+    receipt_id TEXT PRIMARY KEY,
+    schema_version TEXT NOT NULL,
+    kind TEXT NOT NULL CHECK (kind IN ('apply', 'rollback')),
+    epoch TEXT NOT NULL,
+    cohort TEXT NOT NULL,
+    assertion_ids_json TEXT NOT NULL,
+    policy_hash TEXT NOT NULL,
+    reviewer TEXT NOT NULL,
+    reason TEXT NOT NULL,
+    created_at TEXT NOT NULL,
+    applies_receipt_id TEXT,
+    FOREIGN KEY(applies_receipt_id) REFERENCES activation_journal(receipt_id)
+);
 """
 
 

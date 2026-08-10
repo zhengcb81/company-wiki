@@ -1,0 +1,94 @@
+{
+  "schema_version": "2.0",
+  "fc_id": "FC-203",
+  "status": "independent_review",
+  "mode": "honest-implementer",
+  "base_triplet": {
+    "revenue": "9c00ffba3691e31d0f8b9c2a8b8631f7d5ae0135",
+    "filing": "d5e87237bd976b61c0d41127a8090b66031d4a72",
+    "wiki": "1c504e369df3cd9601539ce22d6da89ef1687df9"
+  },
+  "result_triplet": {
+    "revenue": "PENDING",
+    "filing": "d5e87237bd976b61c0d41127a8090b66031d4a72",
+    "wiki": "PENDING"
+  },
+  "plan_sha256": "158fc1e1e4231e3c2dc71822a58931fdca64eff79fc0d4e27b8276a397f4c78a",
+  "policy_sha256": "not-applicable",
+  "allowed_files": [
+    "company-wiki/src/company_wiki/source_catalog/activation.py",
+    "company-wiki/src/company_wiki/source_catalog/store.py",
+    "company-wiki/src/company_wiki/source_catalog/cli.py",
+    "company-wiki/tests/contract/test_activation_transaction.py"
+  ],
+  "changed_files": [
+    "company-wiki/src/company_wiki/source_catalog/activation.py",
+    "company-wiki/src/company_wiki/source_catalog/store.py",
+    "company-wiki/src/company_wiki/source_catalog/cli.py",
+    "company-wiki/tests/contract/test_activation_transaction.py"
+  ],
+  "dependency_receipts": [
+    "company-wiki/assurance/fc/FC-202/11_implementer_receipt.json (accepted 2026-08-10)"
+  ],
+  "command_registry_sha256": "215b8077169126b2c4a5eca9d8d6237f291757c2559f6ae6e0ae8ff1c806b089",
+  "scenario_results": [
+    {"id": "CTRL-03", "status": "passed", "note": "partial cohort activation failure (unknown id / non-verified late in batch) rolls back the whole transaction; zero half-activation (test_ctrl03_*); fault injection at sqlite journal-insert crash leaves all shadow + empty journal"},
+    {"id": "CTRL-04", "status": "passed", "note": "real rollback via apply receipt reverts the same request's response; assertions never deleted (visibility shadow, activation_epoch preserved); wrong cohort / unknown receipt / repeated apply / repeated rollback all fail closed (test_ctrl04_* + repeated tests)"}
+  ],
+  "commands": [
+    {
+      "command": "python -m pytest tests/contract/test_activation_transaction.py -q",
+      "exit_code": 0,
+      "result": "11 passed",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "python -m pytest tests/contract/test_activation_transaction.py tests/contract/test_runtime_policy.py tests/contract/test_resolver_activation_snapshot.py -q",
+      "exit_code": 0,
+      "result": "42 passed",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "python -m pytest tests/ -q",
+      "exit_code": 0,
+      "result": "PENDING_FILL_AT_GATE",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "ruff check src/company_wiki/source_catalog/activation.py src/company_wiki/source_catalog/store.py src/company_wiki/source_catalog/cli.py tests/contract/test_activation_transaction.py",
+      "exit_code": 0,
+      "result": "All checks passed",
+      "cwd": "company-wiki"
+    }
+  ],
+  "side_effect_counts": {
+    "downloads": 0,
+    "external_root_writes": 0,
+    "catalog_mutations": 0,
+    "llm_calls": 0,
+    "parser_calls": 0
+  },
+  "codegraph": {
+    "production_callers_before": 0,
+    "production_callers_after": 3,
+    "note": "apply_activation/rollback_activation/preview_activation: production callers = cli.py activation apply/rollback/preview branches (all inside get_catalog().store catalog transactions). activation_journal table in store._DDL."
+  },
+  "mutation": {
+    "id": "FC-203-M",
+    "killed": true,
+    "details": "drop-already-active-check KILLED (test_repeated_apply_rejected); drop-cohort-match-in-rollback KILLED (test_ctrl04_rollback_wrong_cohort_rejected); drop-stale-policy-check KILLED (test_apply_stale_policy_hash_rejected). Fault injection: journal-insert crash mid-transaction -> all rows shadow, journal empty (zero half-activation)."
+  },
+  "rollback": {
+    "required": true,
+    "proved": true,
+    "note": "activation apply/rollback are themselves the rollback mechanism: same request before->after->restored trace proven by test_ctrl04_rollback_restores_prior_response (visibility flips back to shadow, assertions not deleted, epoch preserved)."
+  },
+  "review": {
+    "reviewer": "",
+    "reviewer_receipt_sha256": "",
+    "decision": "pending",
+    "reviewed_at": "",
+    "note": "honest-implementer: awaits independent reviewer per independent_review_protocol.md"
+  },
+  "provisional_note": "result_triplet and full-suite count to be sealed at gate after the full wiki suite completes."
+}
