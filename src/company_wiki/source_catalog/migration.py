@@ -49,6 +49,9 @@ def _connect(path: Path) -> sqlite3.Connection:
     return con
 
 
+ROLLBACK_JOURNAL_TABLE = "migration_rollback_journal"
+
+
 def _ensure_journal(con: sqlite3.Connection) -> None:
     con.execute(
         f"""CREATE TABLE IF NOT EXISTS {JOURNAL_TABLE} (
@@ -60,6 +63,17 @@ def _ensure_journal(con: sqlite3.Connection) -> None:
             output_hash TEXT NOT NULL,
             created_assertions TEXT NOT NULL,
             committed_at TEXT NOT NULL
+        )"""
+    )
+    con.execute(
+        f"""CREATE TABLE IF NOT EXISTS {ROLLBACK_JOURNAL_TABLE} (
+            rollback_id TEXT PRIMARY KEY,
+            batch_id TEXT NOT NULL,
+            reverted_assertions TEXT NOT NULL,
+            code_hash TEXT NOT NULL,
+            plan_hash TEXT NOT NULL,
+            rolled_back_at TEXT NOT NULL,
+            FOREIGN KEY(batch_id) REFERENCES {JOURNAL_TABLE}(batch_id)
         )"""
     )
 
@@ -79,15 +93,46 @@ def migration_start(
     mode: str = "dry-run",
     last_key: str | None = None,
     batch_size: int | None = None,
+    cancel: bool = False,
+    validate_on_copy: bool = False,
+    copy_path: Path | None = None,
 ) -> MigrationResult:
     """Run one migration pass over sources in last-key order.
 
     mode: dry-run (no writes) | shadow-write (temp db) | apply | verify.
     Returns the result; an interrupted apply can be resumed by passing the
     journal's last_key.
+
+    FC-401 additions: ``cancel=True`` aborts before any batch writes land;
+    ``validate_on_copy=True`` runs the batch against a temporary copy
+    first (copy_path or a sibling .validate.sqlite3) and returns the copy
+    result without touching the source catalog.
     """
     if mode not in {"dry-run", "shadow-write", "apply", "verify"}:
         raise ValueError(f"unknown mode {mode!r}")
+    if cancel:
+        return MigrationResult(processed=0, created_assertions=0)
+    if validate_on_copy:
+        target = copy_path or catalog.with_name(
+            catalog.name + ".validate.sqlite3"
+        )
+        if not target.parent.exists():
+            raise OSError(
+                f"copy validation target parent missing: {target.parent}"
+            )
+        import shutil
+
+        shutil.copy2(catalog, target)
+        try:
+            return migration_start(
+                target,
+                config=config,
+                mode=mode,
+                last_key=last_key,
+                batch_size=batch_size,
+            )
+        finally:
+            target.unlink(missing_ok=True)
     con = _connect(catalog)
     _ensure_journal(con)
     result = MigrationResult()
@@ -170,9 +215,63 @@ def migration_start(
             )
             con.commit()
         result.journal = [
-            {"last_key": sources[-1]["source_id"], "input_hash": input_hash,
+            {"batch_id": f"batch-{sources[-1]['source_id']}",
+             "last_key": sources[-1]["source_id"], "input_hash": input_hash,
              "output_hash": output_hash, "created": len(created)}
         ]
     finally:
         con.close()
     return result
+
+
+def rollback_batch(
+    catalog: Path,
+    *,
+    config: MigrationConfig,
+    batch_id: str,
+) -> dict:
+    """FC-401 / MIG-04: revert a migrated batch.
+
+    The batch's created assertions flip to ``shadow`` (invisible to
+    resolvers) but are NOT deleted; the rollback is recorded in the
+    rollback journal.  Unknown batch id fails closed (KeyError)."""
+    con = _connect(catalog)
+    _ensure_journal(con)
+    try:
+        row = con.execute(
+            f"SELECT * FROM {JOURNAL_TABLE} WHERE batch_id=?", (batch_id,)
+        ).fetchone()
+        if row is None:
+            raise KeyError(f"unknown migration batch {batch_id}")
+        if (
+            row["code_hash"] != config.code_hash
+            or row["plan_hash"] != config.plan_hash
+        ):
+            raise ValueError(
+                "journal belongs to different code/plan hash — refusing rollback"
+            )
+        assertion_ids = json.loads(row["created_assertions"] or "[]")
+        for assertion_id in assertion_ids:
+            con.execute(
+                "UPDATE source_metadata_assertions SET visibility_state='shadow' "
+                "WHERE assertion_id=?",
+                (assertion_id,),
+            )
+        rollback_id = f"rb-{hashlib.sha256(batch_id.encode()).hexdigest()[:16]}"
+        con.execute(
+            f"""INSERT INTO {ROLLBACK_JOURNAL_TABLE}
+            (rollback_id, batch_id, reverted_assertions, code_hash, plan_hash,
+             rolled_back_at)
+            VALUES (?,?,?,?,?,?)
+            ON CONFLICT(rollback_id) DO NOTHING""",
+            (rollback_id, batch_id, json.dumps(assertion_ids),
+             config.code_hash, config.plan_hash, "2026-08-10"),
+        )
+        con.commit()
+        return {
+            "batch_id": batch_id,
+            "rollback_id": rollback_id,
+            "reverted": len(assertion_ids),
+        }
+    finally:
+        con.close()
