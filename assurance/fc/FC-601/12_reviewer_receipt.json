@@ -1,0 +1,120 @@
+{
+  "schema_version": "2.0",
+  "fc_id": "FC-601",
+  "implementer_receipt_sha256": "d7be651b0712a20d22af520d7b456841a85fe40a1e5c3135bb69caf0eac742ba",
+  "reviewer_identity": "reviewer-fc601-independent",
+  "clean_checkout": true,
+  "base_triplet": {
+    "revenue": "0d9851627f1e638bc938d04fccb6e80d7b04a226",
+    "filing": "6274be2187b450d14492defd03579d6209d1b1cc",
+    "wiki": "09af5063aa519fe04d7b40b3ca79a27dc740623e"
+  },
+  "result_triplet": {
+    "revenue": "0d9851627f1e638bc938d04fccb6e80d7b04a226",
+    "filing": "6274be2187b450d14492defd03579d6209d1b1cc",
+    "wiki": "09af5063aa519fe04d7b40b3ca79a27dc740623e"
+  },
+  "replayed_command_ids": [
+    "fc601.wiki.contract.focused",
+    "fc601.wiki.gate.future_root_config_only",
+    "wiki.unit.full",
+    "fc601.ruff.changed",
+    "fc601.ex01.reuse_replay",
+    "revenue.governance.receipt"
+  ],
+  "scenario_results": [
+    {
+      "id": "EX-01-T1",
+      "status": "passed",
+      "note": "Independently replayed in clean worktree at HEAD 09af506 (PYTHONPATH=worktree/src, __pycache__ cleared before every run): test_trace_parity_fc601.py 7 passed exit 0. Frozen CN/HK/US company_raw corpus full-trace parity: run_trace_parity composes _scan_root_v1 vs scan_root_strategy(v2_scan_shadow=True) and the first-run report has ZERO blockers on the frozen corpus (parity is exact; the FC-303 sidecar-status rule is not even needed), report.ok True. trace sections verified by direct source read to map to the live catalog record shapes: sources table (content_sha256/byte_size/mime_type), documents table (title/source_status/document_kind), locations table (relative_path/role/location_status), resolver ResolutionMatch identity fields (market/security_id/fiscal_year/period_end/provider/provider_document_id), scanner group_key logical-document grouping. candidate_trace deterministic (sorted bundles; test_fc601_trace_deterministic passes). compare_traces FC-303 semantics probed directly: unexplained diff -> classification blocker -> report.ok False (blockers stop); raw-relative-path known_bad key suppresses to known_bad; fixture EX-01 tests resolve REUSED_EXACT with download_required/download_allowed False."
+    },
+    {
+      "id": "EX-01-T2",
+      "status": "passed",
+      "note": "Real-sample replay independently re-run from the MAIN company-wiki checkout at the identical commit (HEAD 09af506, contains 7f0b6230) against the LIVE catalog: tools/ex01_reuse_replay.py printed 'EX-01 passed (3/3 REUSED_EXACT)', exit 0. CN 紫金矿业 601899/cninfo/1225023658 FY2025, HK 美团 03690/hkexnews/11645024 FY2024 (form_type FY), US Apple AAPL/sec/0000320193-25-000079 FY2025. All three download_required false, download_allowed false, capture_ready true, canonical_path under companies/<entity>/raw/financial_reports/annual/. Live catalog unchanged by the resolution: sources=43074, documents=23513, locations=46573 identical pre/post; acquisition_attempts.jsonl mtime 2026-08-08 untouched; git status only the allowlisted llm_cost_log.csv dirty; resolver.py is documented 'strict read-only' and its resolve() path contains no SQL writes; REUSED_EXACT returns before any acquisition step."
+    },
+    {
+      "id": "FC-601-writer",
+      "status": "passed",
+      "note": "test_fc601_canonical_writer_destination_unchanged passed (7 passed includes it): _destination_subdirectory('annual_report') == financial_reports/annual and the writer destination stays under companies/<entity>/raw/... on a frozen fixture; canonical writer code untouched by this diff (diff scope = exactly src/company_wiki/source_catalog/trace_parity.py + tests/contract/test_trace_parity_fc601.py + tools/ex01_reuse_replay.py; llm_cost_log.csv NOT in diff)."
+    }
+  ],
+  "mutation_results": [
+    {
+      "id": "M1",
+      "killed": true,
+      "target": "candidate_trace: `if entry['role'] == 'original_primary' and group_metadata.get('security_id'):` -> `if False:` (handles section dropped)",
+      "evidence": "test_fc601_golden_trace_values FAILED (len(trace['handles'])==0 vs expected 3, exit 1); pycache cleared before run; git checkout restored, worktree clean"
+    },
+    {
+      "id": "M2",
+      "killed": true,
+      "target": "candidate_trace: bundles.setdefault append wrapped in `if False:` (bundles section dropped)",
+      "evidence": "test_fc601_golden_trace_values FAILED (len(trace['bundles'])==0 vs expected 3, exit 1); pycache cleared before run; git checkout restored, worktree clean"
+    },
+    {
+      "id": "M3",
+      "killed": true,
+      "target": "_mime_type: always return 'application/octet-stream'",
+      "evidence": "test_fc601_golden_trace_values FAILED (mime_type assertion mismatch, exit 1); pycache cleared before run; git checkout restored, worktree clean"
+    },
+    {
+      "id": "M4",
+      "killed": true,
+      "target": "candidate_trace: `group_key = str(getattr(candidate, 'group_key', '') or relative)` -> `group_key = relative`",
+      "evidence": "test_fc601_golden_trace_values FAILED (6 bundles instead of 3, exit 1); pycache cleared before run; git checkout restored, worktree clean; control run after all restores: 7 passed exit 0"
+    }
+  ],
+  "side_effect_reconciliation": {
+    "passed": true,
+    "note": "all read-only: downloads=0, external_root_writes=0, catalog_mutations=0, llm_calls=0, parser_calls=0; EX-01-T2 replay against the live 49GB catalog left sources=43074/documents=23513/locations=46573 unchanged, acquisition_attempts.jsonl untouched since 2026-08-08, git status only the allowlisted llm_cost_log.csv; provider/canonical-write never reached for REUSED_EXACT (resolver returns before acquisition); my review wrote nothing (mutations restored via git checkout, worktree clean at HEAD 09af506)"
+  },
+  "codegraph_reachability": {
+    "passed": true,
+    "note": "wiki CodeGraph index (455 files, 9232 nodes, 20842 edges) predates the FC-601 commit: trace_parity.py and candidate_trace/compare_traces/run_trace_parity are NOT indexed (search returns nothing) — index stale, consistent with earlier FCs. Reachability verified by direct full-source read in the clean worktree plus live execution: candidate_trace/compare_traces/run_trace_parity import cleanly and pass the 7-test contract suite; run_trace_parity anchors to production scanner (_scan_root_v1, scan_root_strategy v2_scan_shadow) and the FC-303 migration ledger (shadow_parity.migration_ledger); trace sections match the real catalog record shapes (sources/documents/locations columns, resolver handle identity fields, scanner group_key bundles). No production caller by design (additive parity tooling for FC-604/FC-505 gates); receipt claim production_callers_before=0/after=0 consistent."
+  },
+  "rollback": {
+    "required": false,
+    "passed": true,
+    "note": "Additive trace module + contract tests + replay tool; zero production behavior changes (no scanner/resolver/writer edits; diff = 3 new files only); revert = revert commit 7f0b623"
+  },
+  "unresolved_findings": [
+    {
+      "id": "trace-parity-known-bad-key-space",
+      "severity": "low",
+      "note": "compare_traces looks up known_bad by RAW relative-path keys ((relative_path, field)), but the FC-601 test helper _register_explainable_rules registers keys built from diff.path which is SECTION-PREFIXED ('documents:<relative>', 'locations:<relative>'); the helper's field whitelist ('status'/'identity') also matches no trace field (traces carry source_status/location_status/role/mime_type/...). Direct probe on a synthetic sidecar status diff: no-ledger diff classified blocker with ok=False (blockers stop - correct), raw-key ledger entry reclassifies to known_bad (suppression works), prefixed-key entry does NOT match (stays blocker). Dormant today because the frozen corpus has zero diffs (ledger path never fires); fail-closed direction (unexplained diffs keep the test red, never false-green). No acceptance impact; worth aligning the helper's key convention with compare_traces before any corpus diff is expected."
+    },
+    {
+      "id": "receipt-fullsuite-exit-code",
+      "severity": "low",
+      "note": "implementer receipt records exit_code 0 for `python -m pytest tests/ -q` while the true pytest exit code is 1 (2 pre-existing PORT-01 failures recorded in the same entry). Numbers and failure identity are correct (2130 passed / 2 failed / 1 skipped); recording discrepancy only, no code or evidence impact. True exit codes independently captured: focused 7 passed=0, gate 5 passed=0, full suite=1, ruff=0, replay=0, validator=0."
+    },
+    {
+      "id": "no-remote-branch",
+      "severity": "info",
+      "note": "fcap result commits (7f0b623, 09af506) exist only on the local fcap branch / review worktrees, not on origin (git branch -r shows only origin/master); audit trail preserved locally; release wave will push"
+    },
+    {
+      "id": "PORT-01-pre-existing-1",
+      "severity": "pre-existing",
+      "note": "wiki tests/contract/test_check_unique_test_symbols.py::test_duplicate_test_definition_fails FAILED in full suite (PytestUnhandledThreadExceptionWarning: UnicodeDecodeError utf-8 on subprocess stdout, Windows GBK — FC-1205 scope); file untouched by FC-601 diff, pre-existing"
+    },
+    {
+      "id": "PORT-01-pre-existing-2",
+      "severity": "pre-existing",
+      "note": "wiki tests/contract/test_check_unique_test_symbols.py::test_syntax_error_is_reported_as_failure FAILED in full suite (same PORT-01 UTF-8 subprocess decode, FC-1205 scope); file untouched by FC-601 diff, pre-existing"
+    },
+    {
+      "id": "skip-env-symlink",
+      "severity": "info",
+      "note": "full suite has 1 skip: tests/contract/test_dropbox_root_policy_fc501.py:135 'symlinks not supported on this host' — environment platform skip in dependency FC-501 test; no FC-601 skip"
+    },
+    {
+      "id": "codegraph-index-stale",
+      "severity": "info",
+      "note": "wiki CodeGraph index was built before FC-601 and does not index trace_parity.py; production-caller verification performed by direct source read + live test execution instead (documented in codegraph_reachability)"
+    }
+  ],
+  "verdict": "accepted",
+  "reviewed_at": "2026-08-10"
+}
