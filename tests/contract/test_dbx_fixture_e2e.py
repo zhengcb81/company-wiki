@@ -14,6 +14,10 @@ from company_wiki.source_catalog.admission import evaluate_candidate  # noqa: E4
 
 
 def _sidecar(**overrides) -> dict:
+    import hashlib
+
+    name = overrides.pop("_name", "2025年报.pdf")
+    body = b"%PDF-1.4 " + name.encode("utf-8")
     payload = {
         "schema_version": "1.0",
         "canonical_entity_id": "ent-moutai",
@@ -26,7 +30,7 @@ def _sidecar(**overrides) -> dict:
         "provider": "example-filing",
         "provider_document_id": "acc-2025",
         "source_url": "https://www.example-filing.com/600519/2025",
-        "content_sha256": "c" * 64,
+        "content_sha256": hashlib.sha256(body).hexdigest(),
     }
     payload.update(overrides)
     return payload
@@ -48,18 +52,16 @@ def _dropbox_tree(tmp_path: Path, files: list[tuple[str, dict | None]]) -> Path:
 
 def test_dbx_08_sidecar_hash_wrong_admission_rejects(tmp_path):
     """DBX-08: sidecar hash 错 → 拒绝且不自动重写 sidecar。"""
-    tree = _dropbox_tree(tmp_path, [("2025年报.pdf", _sidecar())])
+    wrong_hash = "c" * 64
+    tree = _dropbox_tree(tmp_path, [("2025年报.pdf", _sidecar(
+        content_sha256=wrong_hash))])
     adapter = SidecarFilingAdapter()
     candidates = adapter.enumerate(tree)
-    primary = next(c for c in candidates if c.role == "original_primary")
-    # adapter records the sidecar hash; admission compares to file bytes
-    decision = evaluate_candidate(
-        primary.normalized,
-        policy_allows_filing=True, profile_allows_filing=True,
-        content_hash_matches=(primary.content_sha256 == "c" * 64),
-    )
-    assert not decision.admitted  # sidecar hash c*64 != actual file hash
-    assert "content_hash_mismatch" in decision.reason
+    primary = next(c for c in candidates)
+    # the adapter itself now rejects the wrong hash at role level
+    # (DBX-03 content_hash_mismatch) — never original_primary
+    assert primary.role == "indexed_only"
+    assert "content_hash_mismatch" in primary.evidence["remediation"]
 
 
 def test_dbx_09_non_focus_generic_not_filing(tmp_path):

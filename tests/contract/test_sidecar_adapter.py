@@ -10,6 +10,9 @@ from company_wiki.source_catalog.adapters.sidecar import (  # noqa: E402
 
 
 def _complete_sidecar(**overrides) -> dict:
+    import hashlib
+
+    body = overrides.pop("_body", b"%PDF-1.4 sidecar")
     payload = {
         "schema_version": "1.0",
         "canonical_entity_id": "ent-600519",
@@ -25,7 +28,7 @@ def _complete_sidecar(**overrides) -> dict:
         "published_at": "2026-04-15",
         "filed_at": "2026-04-15",
         "accepted_at": "2026-04-16",
-        "content_sha256": "c" * 64,
+        "content_sha256": hashlib.sha256(body).hexdigest(),
     }
     payload.update(overrides)
     return payload
@@ -38,6 +41,11 @@ def _tree(tmp_path: Path, sidecar: dict | None, name: str = "2025年报.pdf",
     primary = root / name
     primary.write_bytes(body)
     if sidecar is not None:
+        if "content_sha256" not in sidecar:
+            import hashlib
+
+            sidecar = dict(sidecar)
+            sidecar["content_sha256"] = hashlib.sha256(body).hexdigest()
         primary.with_name(primary.name + ".source.json").write_text(
             json.dumps(sidecar, ensure_ascii=False), encoding="utf-8"
         )

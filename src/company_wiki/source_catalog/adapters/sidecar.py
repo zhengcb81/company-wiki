@@ -93,6 +93,12 @@ def _validate_sidecar(payload: dict, primary: Path) -> list[str]:
     for field in _REQUIRED_PROVENANCE:
         if not payload.get(field):
             problems.append(f"missing_provenance:{field}")
+    # DBX-03: the declared content hash must match the primary file bytes
+    declared = payload.get("content_sha256")
+    if declared:
+        actual = _sha256_file(primary)
+        if declared != actual:
+            problems.append("content_hash_mismatch")
     # path rules: only relative paths inside the current file group
     for key in ("primary_relative_path", "canonical_path"):
         value = payload.get(key)
