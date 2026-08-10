@@ -1,0 +1,112 @@
+{
+  "schema_version": "2.0",
+  "fc_id": "FC-701",
+  "status": "independent_review",
+  "mode": "honest-implementer",
+  "base_triplet": {
+    "revenue": "d662c825dc9123f81fb1a233cb268c2a422b3149",
+    "filing": "6274be2187b450d14492defd03579d6209d1b1cc",
+    "wiki": "4d9a5fc4df6184926910363e91892bffbb9132b3"
+  },
+  "result_triplet": {
+    "revenue": "d662c825dc9123f81fb1a233cb268c2a422b3149",
+    "filing": "6274be2187b450d14492defd03579d6209d1b1cc",
+    "wiki": "4bdffb53848f1d3d156f7b29f7bb2d0e5164dd56"
+  },
+  "plan_sha256": "158fc1e1e4231e3c2dc71822a58931fdca64eff79fc0d4e27b8276a397f4c78a",
+  "policy_sha256": "not-applicable",
+  "allowed_files": [
+    "company-wiki/src/company_wiki/source_catalog/resolver.py",
+    "company-wiki/tests/contract/test_normalized_resolver_fc701.py",
+    "company-wiki/scripts/config_doctor.py",
+    "company-wiki/tests/test_config_doctor.py"
+  ],
+  "changed_files": [
+    "company-wiki/src/company_wiki/source_catalog/resolver.py",
+    "company-wiki/tests/contract/test_normalized_resolver_fc701.py",
+    "company-wiki/scripts/config_doctor.py",
+    "company-wiki/tests/test_config_doctor.py"
+  ],
+  "dependency_receipts": [
+    "company-wiki/assurance/fc/FC-604/12_reviewer_receipt.json (accepted 2026-08-11)"
+  ],
+  "command_registry_sha256": "215b8077169126b2c4a5eca9d8d6237f291757c2559f6ae6e0ae8ff1c806b089",
+  "scenario_results": [
+    {
+      "id": "FC-701-normalized-only",
+      "status": "passed",
+      "note": "v2 reader (snapshot v2_resolve_active + epoch/cohort + bridge off) consumes the active normalized assertion with ZERO legacy_bridge_hit; bridge-off without an assertion fails closed; with the bridge ON the v2 assertion is still read first (no legacy hit)"
+    },
+    {
+      "id": "FC-701-exclusions",
+      "status": "passed",
+      "note": "remediation_pending sources excluded with trace reason (evidence disputed until reviewer approval); retired documents excluded at the candidate query level; unprovable/remediation evidence never forms a handle"
+    },
+    {
+      "id": "FC-701-gate",
+      "status": "passed",
+      "note": "AST gate freezes the legacy-container owner set (resolver bridge + migration/persist seams); a NEW production caller reading acquisition/dayu_meta is rejected (adversarial probe detected)"
+    },
+    {
+      "id": "FC-701-doctor",
+      "status": "passed",
+      "note": "config_doctor updated for the FC-501/FC-701 contract: dropbox_stock path validated independently of filing-fetch presence (CONFIG-DBX-04); a filing-fetch config smuggling allowed_handle_roots is a violation (CONFIG-DBX-03); obsolete tests rewritten"
+    }
+  ],
+  "commands": [
+    {
+      "command": "python -m pytest tests/contract/test_normalized_resolver_fc701.py -q",
+      "exit_code": 0,
+      "result": "7 passed",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "python -m pytest tests/ -q",
+      "exit_code": 0,
+      "result": "2153 passed / 2 pre-existing PORT-01 failures (test_check_unique_test_symbols, FC-1205); zero new failures",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "python -m pytest tests/test_config_doctor.py -q",
+      "exit_code": 0,
+      "result": "8 passed",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "ruff check src/company_wiki/source_catalog/resolver.py tests/contract/test_normalized_resolver_fc701.py scripts/config_doctor.py tests/test_config_doctor.py",
+      "exit_code": 0,
+      "result": "All checks passed",
+      "cwd": "company-wiki"
+    }
+  ],
+  "side_effect_counts": {
+    "downloads": 0,
+    "external_root_writes": 0,
+    "catalog_mutations": 0,
+    "llm_calls": 0,
+    "parser_calls": 0
+  },
+  "codegraph": {
+    "production_callers_before": 0,
+    "production_callers_after": 0,
+    "note": "resolver gains _remediation_pending (called from resolve); legacy container read points frozen by the FC-701 AST gate"
+  },
+  "mutation": {
+    "id": "FC-701-M",
+    "killed": true,
+    "details": "2 mutations killed: M1 remediation exclusion removed (1/7 fail), M2 v2 reader never consumes assertions (2/7 fail — normalized-only + bridge-on tests)"
+  },
+  "rollback": {
+    "required": false,
+    "proved": true,
+    "note": "remediation exclusion + gate; revert = revert the two wiki commits"
+  },
+  "review": {
+    "reviewer": "",
+    "reviewer_receipt_sha256": "",
+    "decision": "pending",
+    "reviewed_at": "",
+    "note": "honest-implementer: awaits independent reviewer per independent_review_protocol.md"
+  },
+  "provisional_note": "result_triplet sealed at wiki 4bdffb5."
+}
