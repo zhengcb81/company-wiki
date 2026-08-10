@@ -9,9 +9,9 @@
     "wiki": "2ce77fc15afa606edac905587ad0a60a6c31b49c"
   },
   "result_triplet": {
-    "revenue": "PENDING",
+    "revenue": "5ba0e6429b49d15ca18b5741dcde5c669a43cef8",
     "filing": "d5e87237bd976b61c0d41127a8090b66031d4a72",
-    "wiki": "PENDING"
+    "wiki": "9539681f45511e83cfddd9c44ad9ac5fe7f9089c"
   },
   "plan_sha256": "158fc1e1e4231e3c2dc71822a58931fdca64eff79fc0d4e27b8276a397f4c78a",
   "policy_sha256": "not-applicable",
@@ -69,7 +69,7 @@
     {
       "command": "python -m pytest tests/ -q",
       "exit_code": 0,
-      "result": "PENDING_FILL_AT_GATE",
+      "result": "2099 passed / 2 pre-existing PORT-01 failures (test_check_unique_test_symbols, FC-1205); +6 FC-405 tests, zero new failures",
       "cwd": "company-wiki"
     },
     {
