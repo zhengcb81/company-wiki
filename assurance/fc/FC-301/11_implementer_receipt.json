@@ -90,11 +90,11 @@
     "note": "Additive loader + model fields with defaults; revert = revert commit; 1.x loader untouched."
   },
   "review": {
-    "reviewer": "",
-    "reviewer_receipt_sha256": "",
-    "decision": "pending",
-    "reviewed_at": "",
-    "note": "honest-implementer: awaits independent reviewer per independent_review_protocol.md"
+    "reviewer": "reviewer-fc301-independent",
+    "reviewer_receipt_sha256": "0f1dfe08378029f6b2140063c77e229d24ccea6b5573fcfdcf408ac5cefb63f0",
+    "decision": "accepted",
+    "reviewed_at": "2026-08-10",
+    "note": "Independent reviewer (clean worktree eabe2f2, distinct identity) verified triplets, sealing hashes, diff scope, replayed focused + 37-file subset + full suite (2036 passed / 2 pre-existing PORT-01), 5 mutations killed (external-writable double-guarded, unknown adapter, unknown profile, duplicate root, route widening), codegraph: zero production callers (additive, 1.x still operational); verdict accepted."
   },
   "provisional_note": "result_triplet to be sealed after commit."
 }

@@ -1,0 +1,90 @@
+{
+  "schema_version": "2.0",
+  "fc_id": "FC-301",
+  "implementer_receipt_sha256": "0ec704aa4083825a27685153b86a6b8f41adc6da6e9bc9fecb9b934f9d0a3002",
+  "reviewer_identity": "reviewer-fc301-independent",
+  "clean_checkout": true,
+  "base_triplet": {
+    "revenue": "bd2906954b0f23007d7ccf975b6154c9ba646182",
+    "filing": "d5e87237bd976b61c0d41127a8090b66031d4a72",
+    "wiki": "eabe2f2d376586971f452d9087ef216c941bcc11"
+  },
+  "result_triplet": {
+    "revenue": "bd2906954b0f23007d7ccf975b6154c9ba646182",
+    "filing": "d5e87237bd976b61c0d41127a8090b66031d4a72",
+    "wiki": "eabe2f2d376586971f452d9087ef216c941bcc11"
+  },
+  "replayed_command_ids": [
+    "fc301.focused-root-policy-2x",
+    "fc301.contract-subset-37",
+    "wiki.unit.full",
+    "fc301.ruff-3-changed-files",
+    "revenue.governance.receipt"
+  ],
+  "scenario_results": [
+    {
+      "id": "EX-08",
+      "status": "passed",
+      "note": "replayed in clean worktree: 2.x loader/doctor/export present (policy_2x.py), production scan behavior unchanged (cli.py still imports load_catalog_config from .config; zero production imports of policy_2x). Future-root config-only proof remains FC-304 per plan sequencing; FC-301 scoped to additive loader/doctor."
+    },
+    {
+      "id": "POL-01",
+      "status": "passed",
+      "note": "consumer-local allowance cannot widen: export_policy_2x emits only config-declared roots with the ten ADR-010 fields; loader rejects routes whose allowed_document_kinds exceed the root's (route-widening check verified in code and by mutation kill)."
+    }
+  ],
+  "mutation_results": [
+    {
+      "id": "FC-301-M-review-drop-external-writable-gate",
+      "killed": true,
+      "detail": "removed the full external-writable gate (kind-not-in-_WRITABLE_KINDS raise + write-target-requires-read_only=false raise) from load_root_policy_2x -> test_2x_external_root_writable_rejected FAILED (1 failed). Note verified double-guard: removing ONLY the kind check still passes the test because the read_only complement raises first (read_only defaults true) - defense in depth, fail-closed property doubly enforced. Restored via git checkout."
+    },
+    {
+      "id": "FC-301-M-review-drop-unknown-adapter-check",
+      "killed": true,
+      "detail": "removed adapter registration check (registered_adapter is None -> raise) -> test_2x_unknown_adapter_rejected FAILED. Restored via git checkout."
+    },
+    {
+      "id": "FC-301-M-review-drop-unknown-profile-check",
+      "killed": true,
+      "detail": "removed admission_profile lookup check (admission_profile is None -> raise) -> test_2x_unknown_profile_rejected FAILED. Restored via git checkout."
+    },
+    {
+      "id": "FC-301-M-review-drop-duplicate-root-check",
+      "killed": true,
+      "detail": "removed seen_root_ids duplicate detection -> test_2x_duplicate_root_rejected FAILED. Restored via git checkout."
+    },
+    {
+      "id": "FC-301-M-review-drop-route-widening-check",
+      "killed": true,
+      "detail": "removed route allowed-document-kinds subset check in _parse_route_2x -> test_2x_widening_route_rejected FAILED. Restored via git checkout."
+    }
+  ],
+  "side_effect_reconciliation": {
+    "passed": true,
+    "detail": "receipt claims downloads 0 / external_root_writes 0 / catalog_mutations 0 / llm_calls 0 / parser_calls 0; doctor_root_policy contains no write calls (grep verified); all FC-301 tests write only to pytest tmp_path; llm_cost_log.csv not in diff and unchanged; worktree clean after replay."
+  },
+  "codegraph_reachability": {
+    "passed": true,
+    "detail": "policy_2x module has zero production callers (literal gate over src/company_wiki: only policy_2x.py self-references; cli.py imports load_catalog_config from .config - 1.x loader is the operational path, untouched by FC-301 diff). CodeGraph index of company-wiki predates FC-301 (load_root_policy_2x absent from index), so reachability verified by AST/literal gate per protocol section 5."
+  },
+  "rollback": {
+    "required": false,
+    "passed": true,
+    "detail": "additive path: new module + two RootSpec fields with None defaults (1.x RootSpec construction unaffected); revert = revert commit b3e825e7; 1.x loader untouched and still production path."
+  },
+  "unresolved_findings": [
+    {
+      "id": "FIND-301-1",
+      "severity": "informational",
+      "note": "No origin/fcap remote branch exists (wiki remotes: origin/master only; local fcap branch present but worktree detached at eabe2f2; revenue repo likewise local fcap, remotes origin/main etc.). Verified commits exist: revenue bd290695 (HEAD), filing d5e87237 (filing-fetch HEAD), wiki be48c87a/b3e825e7/eabe2f2 all present, b3e825e7 ancestor of eabe2f2. Sealed code result commit is b3e825e7 (ancestor of review-time HEAD eabe2f2)."
+    },
+    {
+      "id": "FIND-301-2",
+      "severity": "informational",
+      "note": "Full suite: 2036 passed / 2 failed - tests/contract/test_check_unique_test_symbols.py::test_duplicate_test_definition_fails and ::test_syntax_error_is_reported_as_failure (PORT-01, owned by FC-1205, pre-existing). Reproduced identical 2 failed / 3 passed at base be48c87 in a separate temp worktree: failures are Windows GBK/UTF-8 gate-portability (UnicodeDecodeError on child stdout), unrelated to FC-301 changed files. Zero new failures."
+    }
+  ],
+  "verdict": "accepted",
+  "reviewed_at": "2026-08-10"
+}
