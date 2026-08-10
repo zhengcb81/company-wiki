@@ -1,0 +1,69 @@
+{
+  "schema_version": "2.0",
+  "fc_id": "FC-204",
+  "implementer_receipt_sha256": "d4a16d051fa4d4bd926b0568eb1fb7af65cc0a6d1bca9ebdecc07752df1694c6",
+  "reviewer_identity": "reviewer-fc204-independent",
+  "clean_checkout": true,
+  "base_triplet": {
+    "revenue": "51df360f5be2ee3715aaf5912f30af4fbd1b8a0f",
+    "filing": "d5e87237bd976b61c0d41127a8090b66031d4a72",
+    "wiki": "8c94834c7cbf40bb8ef57caa41a5d473230cf0fb"
+  },
+  "result_triplet": {
+    "revenue": "51df360f5be2ee3715aaf5912f30af4fbd1b8a0f",
+    "filing": "d5e87237bd976b61c0d41127a8090b66031d4a72",
+    "wiki": "8c94834c7cbf40bb8ef57caa41a5d473230cf0fb"
+  },
+  "replayed_command_ids": [
+    "fc204.focused-test_activation_transaction",
+    "wiki.unit.full",
+    "fc204.ruff-2-changed-files",
+    "revenue.governance.receipt"
+  ],
+  "scenario_results": [
+    {
+      "id": "CTRL-03",
+      "status": "passed",
+      "note": "replayed fresh: unknown-id rollback, stale-policy rejection, non-active-row rejection all fail closed in one transaction (15 contract tests green in clean worktree)"
+    },
+    {
+      "id": "CTRL-04",
+      "status": "passed",
+      "note": "production apply verified read-only: 16 rows re-tagged in ONE catalog transaction with journal receipt d4e2a160...; rollback available via rollback_activation(receipt_id) + CAS snapshot revert"
+    },
+    {
+      "id": "WU-905",
+      "status": "passed",
+      "note": "contradiction closed and independently verified: 16 active rows legally tagged epoch-canary-2026-08-10/canary-2026-08-10 (registered in runtime_policy.json), flags all v2 OFF + bridge ON, resolver v1 assertion path returns None for canary source (active row invisible), legacy bridge serves pre-existing containers; DB, receipt, flags, resolver all consistent; 13,806 legacy-only active documents unaffected"
+    }
+  ],
+  "mutation_results": [
+    {
+      "id": "FC-204-M-review",
+      "killed": true,
+      "detail": "activation.py map_existing_activation: removed the 'current_policy_hash is not None and policy_hash != current_policy_hash' stale-policy check -> test_map_existing_activation_stale_policy_hash_rejected FAILED (DID NOT RAISE ActivationError); worktree restored via backup, focused suite re-green (15 passed), git status clean"
+    }
+  ],
+  "side_effect_reconciliation": {
+    "passed": true,
+    "note": "verified read-only: 1 catalog_mutation (authorized apply) + 0 downloads/external writes/llm/parser"
+  },
+  "codegraph_reachability": {
+    "passed": true,
+    "note": "fresh index built in reviewer worktree (production index stale, activation.py absent): map_existing_activation found at src/company_wiki/source_catalog/activation.py:256 with 4 callers (all contract tests); CLI wires apply/preview/rollback only; production invocation was direct (evidenced by journal receipt d4e2a160 + fc204_apply_receipt file), matching implementer receipt note"
+  },
+  "rollback": {
+    "required": true,
+    "passed": true,
+    "note": "production rollback available via receipt d4e2a160 + CAS snapshot revert; copy-drill proved"
+  },
+  "unresolved_findings": [
+    "no origin/fcap remote branch exists (only local fcap + origin/master); verified locally per instruction, informational",
+    "2 pre-existing PORT-01 failures in tests/contract/test_check_unique_test_symbols.py (test_duplicate_test_definition_fails, test_syntax_error_is_reported_as_failure; Windows GBK/UTF-8 subprocess encoding); file and gate tool byte-identical base..result, unrelated to FC-204; full suite 2021 passed / 2 failed (exit 1)",
+    "implementer receipt records exit_code 0 for 'python -m pytest tests/ -q' but actual pytest exit is 1 (solely from the pre-existing PORT-01 pair) - same recording convention as FC-202/FC-203 receipts; result text correctly states '2021 passed / 2 pre-existing PORT-01 failures'; metadata-only, not a result discrepancy",
+    "work_unit_registry.md still lists FC-204 status 'pending' while the implementer receipt is status 'independent_review'; registry row expected to be updated at closure merge (same pattern as FC-203)",
+    "implementer receipt note 'canary source under v1 resolves {}' is wording-imprecise: with legacy_bridge_enabled=True the bridge serves pre-existing legacy containers (acquisition/dayu_meta) for canary documents; the ASSERTION path correctly returns None under v1 (CTRL-01 holds - active row invisible); {} holds when bridge is off (fail closed). Verified both behaviors against production catalog read-only; semantics consistent"
+  ],
+  "verdict": "accepted",
+  "reviewed_at": "2026-08-10"
+}

@@ -95,11 +95,11 @@
     "note": "production rollback available: rollback_activation(receipt_id=d4e2a160...) flips the 16 rows back to shadow inside one catalog transaction (copy-drill proven); runtime_policy.json can be CAS-reverted to the pre-canary snapshot (or removed -> v1+bridge default)."
   },
   "review": {
-    "reviewer": "",
-    "reviewer_receipt_sha256": "",
-    "decision": "pending",
-    "reviewed_at": "",
-    "note": "honest-implementer: awaits independent reviewer per independent_review_protocol.md"
+    "reviewer": "reviewer-fc204-independent",
+    "reviewer_receipt_sha256": "53189427fedefd11a667890c1847d7fda9d033d1d6bc5860acf31ec7725f901c",
+    "decision": "accepted",
+    "reviewed_at": "2026-08-10",
+    "note": "Independent reviewer (clean worktree 8c94834, distinct identity) verified triplets, sealing hashes, diff scope, replayed focused + full suite (2021 passed / 2 pre-existing PORT-01), production state read-only verified exactly as claimed (16 rows tagged canary-2026-08-10, journal receipt d4e2a160..., runtime_policy.json flags off + bridge on, policy hash matches export_policy, resolver v1 CTRL-01, WU-905 closed, 13,806 legacy docs unaffected), stale-policy mutation killed; verdict accepted."
   },
   "provisional_note": "result_triplet to be sealed after commit; production writes were explicitly authorized by the user via AskUserQuestion on 2026-08-10 (copy drill -> canary cohort; register cohort, keep flag off)."
 }
