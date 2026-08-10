@@ -11,7 +11,7 @@
   "result_triplet": {
     "revenue": "709119b85c8b98552d854511826cc0f5b0ba3bab",
     "filing": "d5e87237bd976b61c0d41127a8090b66031d4a72",
-    "wiki": "e64f245033dd05a492f07638add0d39eeca2327d"
+    "wiki": "bfac6f30640cf36483f95849379634d49f390622"
   },
   "plan_sha256": "158fc1e1e4231e3c2dc71822a58931fdca64eff79fc0d4e27b8276a397f4c78a",
   "policy_sha256": "not-applicable",
@@ -55,7 +55,7 @@
     {
       "command": "python -m pytest tests/ -q",
       "exit_code": 0,
-      "result": "2052 passed / 2 pre-existing PORT-01 failures (test_check_unique_test_symbols, FC-1205); +8 FC-303 tests, zero new failures",
+      "result": "2053 passed / 2 pre-existing PORT-01 failures (test_check_unique_test_symbols, FC-1205); +8 FC-303 tests +1 EX-08 guard test, zero new failures",
       "cwd": "company-wiki"
     },
     {
@@ -80,7 +80,7 @@
   "mutation": {
     "id": "FC-303-M",
     "killed": true,
-    "details": "EX-08 mutation KILLED: future root falling back to legacy v1 path -> test_ex08_* FAIL. Hash tamper (declared vs disk) caught as blocker. Migration ledger rejects phantom rules (no matching diff)."
+    "details": "EX-08 mutations KILLED (both blunt fallback to v1 AND narrow fallback on adapter error); hash tamper (declared vs disk) caught as blocker; phantom ledger rule rejected. Resubmission after reviewer changes_required (F1): adapter_for spy + adapter-error fail-closed guard added — both fallback classes now killed by the NAMED tests."
   },
   "rollback": {
     "required": false,
@@ -92,7 +92,7 @@
     "reviewer_receipt_sha256": "",
     "decision": "pending",
     "reviewed_at": "",
-    "note": "honest-implementer: awaits independent reviewer per independent_review_protocol.md"
+    "note": "changes_required (2026-08-10, reviewer-fc303-independent, F1): EX-08 named test could not discriminate v1 from v2 output; narrow fallback escaped. FIXED and resubmitted — see mutation details. Old reviewer receipt superseded per protocol section 6."
   },
   "provisional_note": "result_triplet to be sealed after commit."
 }
