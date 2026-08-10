@@ -4,14 +4,14 @@
   "status": "independent_review",
   "mode": "honest-implementer",
   "base_triplet": {
-    "revenue": "ca3faf0e5b4d2c1a9f8e7d6c5b4a3f2e1d0c9b8a7",
+    "revenue": "ca3faf043e971f9edf3676718242d894b3dea651",
     "filing": "d5e87237bd976b61c0d41127a8090b66031d4a72",
     "wiki": "e9c84ad3a317c5ea9d9e8d6c42657c9eb33ab923"
   },
   "result_triplet": {
-    "revenue": "PENDING",
+    "revenue": "ca3faf043e971f9edf3676718242d894b3dea651",
     "filing": "d5e87237bd976b61c0d41127a8090b66031d4a72",
-    "wiki": "PENDING"
+    "wiki": "10f793540c15941c21ebc5bb6177daf84f39c795"
   },
   "plan_sha256": "158fc1e1e4231e3c2dc71822a58931fdca64eff79fc0d4e27b8276a397f4c78a",
   "policy_sha256": "not-applicable",
