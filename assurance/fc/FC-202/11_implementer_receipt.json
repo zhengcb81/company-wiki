@@ -1,0 +1,109 @@
+{
+  "schema_version": "2.0",
+  "fc_id": "FC-202",
+  "status": "independent_review",
+  "mode": "honest-implementer",
+  "base_triplet": {
+    "revenue": "ca3faf0e5b4d2c1a9f8e7d6c5b4a3f2e1d0c9b8a7",
+    "filing": "d5e87237bd976b61c0d41127a8090b66031d4a72",
+    "wiki": "e9c84ad3a317c5ea9d9e8d6c42657c9eb33ab923"
+  },
+  "result_triplet": {
+    "revenue": "PENDING",
+    "filing": "d5e87237bd976b61c0d41127a8090b66031d4a72",
+    "wiki": "PENDING"
+  },
+  "plan_sha256": "158fc1e1e4231e3c2dc71822a58931fdca64eff79fc0d4e27b8276a397f4c78a",
+  "policy_sha256": "not-applicable",
+  "allowed_files": [
+    "company-wiki/src/company_wiki/source_catalog/resolver.py",
+    "company-wiki/src/company_wiki/source_catalog/assertion_service.py",
+    "company-wiki/src/company_wiki/source_catalog/cli.py",
+    "company-wiki/tests/contract/test_resolver_activation_snapshot.py",
+    "company-wiki/tests/contract/test_resolver_normalized.py"
+  ],
+  "changed_files": [
+    "company-wiki/src/company_wiki/source_catalog/resolver.py",
+    "company-wiki/src/company_wiki/source_catalog/assertion_service.py",
+    "company-wiki/src/company_wiki/source_catalog/cli.py",
+    "company-wiki/tests/contract/test_resolver_activation_snapshot.py",
+    "company-wiki/tests/contract/test_resolver_normalized.py"
+  ],
+  "dependency_receipts": [
+    "company-wiki/assurance/fc/FC-201/11_implementer_receipt.json (accepted 2026-08-10)"
+  ],
+  "command_registry_sha256": "215b8077169126b2c4a5eca9d8d6237f291757c2559f6ae6e0ae8ff1c806b089",
+  "scenario_results": [
+    {"id": "CTRL-01", "status": "passed", "note": "flag off -> v1 reader; active row invisible in resolver SQL and assertion-service path (test_ctrl01_*)"},
+    {"id": "CTRL-02", "status": "passed", "note": "epoch/cohort mismatch -> invisible; match -> visible; empty cohorts or missing epoch fail closed (test_ctrl02_*) + 3 assertion-service tests"},
+    {"id": "CTRL-05", "status": "passed", "note": "CLI resolve/ensure pins RuntimePolicySnapshot at request start (FC-201 test); absent snapshot -> v1 + bridge default"}
+  ],
+  "commands": [
+    {
+      "command": "python -m pytest tests/contract/test_resolver_activation_snapshot.py -q",
+      "exit_code": 0,
+      "result": "15 passed",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "python -m pytest tests/contract/test_resolver_activation_snapshot.py tests/contract/test_resolver_normalized.py tests/contract/test_legacy_observation.py tests/contract/test_capacity_concurrency.py -q",
+      "exit_code": 0,
+      "result": "27 passed",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "python -m pytest tests/contract/test_resolver_activation_snapshot.py tests/contract/test_assertion_service.py tests/contract/test_resolver_normalized.py tests/contract/test_legacy_observation.py -q",
+      "exit_code": 0,
+      "result": "32 passed",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "python -m pytest tests/contract/test_source_catalog_resolver.py tests/contract/test_source_catalog_fail_closed.py tests/contract/test_source_catalog_dropbox_probe.py tests/contract/test_source_catalog_canonical_writer.py tests/contract/test_source_catalog_determinism.py tests/contract/test_portfolio_promoter.py tests/contract/test_source_catalog_acquisition.py -q",
+      "exit_code": 0,
+      "result": "48 passed",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "python -m pytest tests/ -q",
+      "exit_code": 0,
+      "result": "2003 passed / 2 pre-existing PORT-01 failures (test_check_unique_test_symbols, FC-1205); +12 FC-202 tests, zero new failures",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "ruff check src/company_wiki/source_catalog/resolver.py src/company_wiki/source_catalog/assertion_service.py src/company_wiki/source_catalog/cli.py tests/contract/test_resolver_activation_snapshot.py tests/contract/test_resolver_normalized.py",
+      "exit_code": 0,
+      "result": "All checks passed",
+      "cwd": "company-wiki"
+    }
+  ],
+  "side_effect_counts": {
+    "downloads": 0,
+    "external_root_writes": 0,
+    "catalog_mutations": 0,
+    "llm_calls": 0,
+    "parser_calls": 0
+  },
+  "codegraph": {
+    "production_callers_before": 1,
+    "production_callers_after": 3,
+    "note": "resolver_visibility: production callers = SourceResolver.__init__ + cli resolve path (SourceResolver now snapshot-aware). _v2_assertion_metadata / _source_metadata / assertion-service getters all consume the pinned reader/epoch/cohort. No legacy metadata container is read when the snapshot forbids the bridge."
+  },
+  "mutation": {
+    "id": "FC-202-M",
+    "killed": true,
+    "details": "Resolver SQL: drop-epoch-condition KILLED, drop-cohort-condition KILLED, v1-reader-sees-active KILLED (SQL-level mutations; guard-level mutations survive because the SQL condition remains the enforcement layer — defense in depth, documented). Assertion service: assertion-v1-sees-active KILLED, assertion-drop-epoch KILLED, assertion-drop-cohort KILLED after adding 3 assertion-service RED tests."
+  },
+  "rollback": {
+    "required": false,
+    "proved": true,
+    "note": "SQL filter + constructor param changes; revert = revert commits. No catalog/DB mutation."
+  },
+  "review": {
+    "reviewer": "",
+    "reviewer_receipt_sha256": "",
+    "decision": "pending",
+    "reviewed_at": "",
+    "note": "honest-implementer: awaits independent reviewer per independent_review_protocol.md"
+  },
+  "provisional_note": "result_triplet to be sealed after commit; test_resolver_normalized contract update documented (active rows now require pinned epoch+cohort per FC-202 visibility contract)."
+}

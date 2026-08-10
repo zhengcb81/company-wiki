@@ -28,13 +28,19 @@ def _seed_parents(store) -> None:
 
 
 def _activate(store, assertion_id: str) -> None:
-    """Simulate R6 cutover: flip a shadow assertion to active visibility."""
+    """Simulate R6 cutover: flip a shadow assertion to active visibility
+    (FC-202: activation must carry epoch AND cohort)."""
     with store.transaction() as conn:
         conn.execute(
             "UPDATE source_metadata_assertions SET visibility_state='active', "
-            "activation_epoch='epoch-1' WHERE assertion_id=?",
+            "activation_epoch='epoch-1', cohort='cohort-a' WHERE assertion_id=?",
             (assertion_id,),
         )
+
+
+def _v2_args():
+    """FC-202 visibility contract: v2 reader requires pinned epoch + cohort."""
+    return dict(reader="v2", current_epoch="epoch-1", active_cohorts=("cohort-a",))
 
 
 def test_legacy_container_still_reads(tmp_path):
@@ -79,7 +85,7 @@ def test_v2_assertion_metadata_query(tmp_path):
         metadata_hash=canonical_hash(normalized), normalized=normalized,
     )
     _activate(store, assertion["assertion_id"])
-    metadata = _v2_assertion_metadata(store, "s1")
+    metadata = _v2_assertion_metadata(store, "s1", **_v2_args())
     assert metadata["fiscal_year"] == 2025
     assert metadata["provider"] == "example-filing"
     assert metadata["security_id"] == "US123"
@@ -90,7 +96,7 @@ def test_v2_assertion_missing_returns_none(tmp_path):
 
     store = CatalogStore(tmp_path / "catalog.sqlite3")
     _seed_parents(store)
-    assert _v2_assertion_metadata(store, "s1") is None
+    assert _v2_assertion_metadata(store, "s1", **_v2_args()) is None
 
 
 def test_v2_preferred_over_legacy(tmp_path):
@@ -122,5 +128,5 @@ def test_v2_preferred_over_legacy(tmp_path):
         metadata_hash=canonical_hash(normalized), normalized=normalized,
     )
     _activate(store, assertion["assertion_id"])
-    v2 = _v2_assertion_metadata(store, "s1")
+    v2 = _v2_assertion_metadata(store, "s1", **_v2_args())
     assert v2["fiscal_year"] == 2026  # v2 wins over any legacy container

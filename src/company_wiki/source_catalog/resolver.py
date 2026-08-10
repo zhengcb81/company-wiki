@@ -16,13 +16,21 @@ from .service import SourceCatalog
 
 
 def _verified_assertion_identity(
-    store: Any, source_id: str, content_sha256: str, document_id: str
+    store: Any,
+    source_id: str,
+    content_sha256: str,
+    document_id: str,
+    *,
+    reader: str = "v1",
+    current_epoch: str | None = None,
+    active_cohorts: tuple[str, ...] = (),
 ) -> dict[str, Any] | None:
     """Try to resolve legacy identity via a verified assertion.
 
     Phase 15.5: assertions are matched by source_id first; when the source
     path cannot match (placeholder documents surface source_id as NULL), fall
-    back to the document_id path.
+    back to the document_id path.  FC-202: reads honor the pinned
+    RuntimePolicySnapshot visibility contract.
     """
     try:
         from .assertion_service import (
@@ -30,10 +38,18 @@ def _verified_assertion_identity(
             get_verified_assertion_by_document,
         )
 
-        candidates = [get_verified_assertion(store, source_id, content_sha256)]
+        candidates = [
+            get_verified_assertion(
+                store, source_id, content_sha256, reader=reader,
+                current_epoch=current_epoch, active_cohorts=active_cohorts,
+            )
+        ]
         if source_id != document_id:
             candidates.append(
-                get_verified_assertion_by_document(store, document_id, content_sha256)
+                get_verified_assertion_by_document(
+                    store, document_id, content_sha256, reader=reader,
+                    current_epoch=current_epoch, active_cohorts=active_cohorts,
+                )
             )
         for a in candidates:
             if a is None:
@@ -285,10 +301,36 @@ class ResolutionResult:
         return payload
 
 
+def resolver_visibility(
+    snapshot: dict[str, Any],
+) -> tuple[str, str | None, tuple[str, ...], bool]:
+    """Derive (reader, current_epoch, active_cohorts, legacy_bridge_allowed)
+    from a RuntimePolicySnapshot (FC-201).  flag=false -> v1 reader, so
+    active rows are never visible (CTRL-01)."""
+    flags = snapshot.get("flags", {})
+    reader = "v2" if flags.get("v2_resolve_active") else "v1"
+    cohorts = tuple(snapshot.get("active_cohorts") or ())
+    bridge = bool(flags.get("legacy_bridge_enabled"))
+    return reader, snapshot.get("current_epoch"), cohorts, bridge
+
+
 def _source_metadata(
-    document: dict[str, Any], *, store=None, observer=None
+    document: dict[str, Any],
+    *,
+    store=None,
+    observer=None,
+    reader: str = "v1",
+    current_epoch: str | None = None,
+    active_cohorts: tuple[str, ...] = (),
+    legacy_bridge_allowed: bool = True,
 ) -> dict[str, Any]:
-    """WU-801: v2 normalized assertion first; legacy containers as bridge.
+    """WU-801 + FC-202: v2 normalized assertion first (snapshot-gated);
+    legacy containers as bridge only when the snapshot allows it.
+
+    ``reader``/``current_epoch``/``active_cohorts`` come from the pinned
+    RuntimePolicySnapshot at request start.  ``legacy_bridge_allowed`` is
+    the snapshot's ``legacy_bridge_enabled`` flag — absent snapshot keeps
+    the pre-FC-201 production default (bridge on, v1 reader).
 
     ``observer`` (optional MetricsCollector) records a legacy_bridge_hit
     every time a legacy acquisition/dayu_meta container is actually read —
@@ -297,9 +339,17 @@ def _source_metadata(
     if store is not None:
         source_id = document.get("source_id")
         if source_id:
-            v2 = _v2_assertion_metadata(store, str(source_id))
+            v2 = _v2_assertion_metadata(
+                store,
+                str(source_id),
+                reader=reader,
+                current_epoch=current_epoch,
+                active_cohorts=active_cohorts,
+            )
             if v2:
                 return v2
+    if not legacy_bridge_allowed:
+        return {}
     metadata = document.get("metadata")
     if not isinstance(metadata, dict):
         return {}
@@ -414,12 +464,30 @@ def _load_issuer_index(
 class SourceResolver:
     """Resolve existing catalog sources without performing acquisition side effects."""
 
-    def __init__(self, catalog: SourceCatalog, *, observer=None):
+    def __init__(
+        self, catalog: SourceCatalog, *, observer=None, runtime_policy: dict | None = None
+    ):
         if not isinstance(catalog, SourceCatalog):
             raise TypeError("catalog must be SourceCatalog")
         self.catalog = catalog
         # WU-1500: optional legacy observation collector; absent => no-op.
         self.observer = observer
+        # FC-202: the RuntimePolicySnapshot is pinned at request start.
+        # Absent snapshot = v1 reader with the legacy bridge on (the
+        # pre-FC-201 production default); a snapshot governs reader mode,
+        # epoch, cohorts and bridge allowance (CTRL-01/02).
+        if runtime_policy is None:
+            self.reader = "v1"
+            self.current_epoch = None
+            self.active_cohorts: tuple[str, ...] = ()
+            self.legacy_bridge_allowed = True
+        else:
+            (
+                self.reader,
+                self.current_epoch,
+                self.active_cohorts,
+                self.legacy_bridge_allowed,
+            ) = resolver_visibility(runtime_policy)
 
     def resolve(self, request: SourceRequest) -> ResolutionResult:
         if not isinstance(request, SourceRequest):
@@ -475,7 +543,13 @@ class SourceResolver:
                 )
                 continue
             metadata = _source_metadata(
-                document, store=self.catalog.store, observer=self.observer
+                document,
+                store=self.catalog.store,
+                observer=self.observer,
+                reader=self.reader,
+                current_epoch=self.current_epoch,
+                active_cohorts=self.active_cohorts,
+                legacy_bridge_allowed=self.legacy_bridge_allowed,
             )
             # --- identity-aware market/security_id filtering ---
             market_match = self._identity_matches(request, metadata)
@@ -492,6 +566,9 @@ class SourceResolver:
                     document["source_id"],
                     document.get("content_sha256") or None,
                     document["document_id"],
+                    reader=self.reader,
+                    current_epoch=self.current_epoch,
+                    active_cohorts=self.active_cohorts,
                 )
                 if assertion and request.market and request.security_id:
                     a_market = (
@@ -751,7 +828,9 @@ class SourceResolver:
             str(item.get("name") or "").casefold()
             for item in document["entities"]
         }
-        metadata = _source_metadata(document)
+        metadata = _source_metadata(
+            document, legacy_bridge_allowed=self.legacy_bridge_allowed
+        )
         doc_values.update(
             str(value).casefold()
             for value in (
@@ -912,23 +991,50 @@ __all__ = [
 ]
 
 
-def _v2_assertion_metadata(store, source_id: str) -> dict[str, Any] | None:
-    """WU-801: read the newest visible verified v2 assertion for a source.
+def _v2_assertion_metadata(
+    store,
+    source_id: str,
+    *,
+    reader: str,
+    current_epoch: str | None,
+    active_cohorts: tuple[str, ...],
+) -> dict[str, Any] | None:
+    """FC-202: read the newest visible verified v2 assertion for a source.
 
-    Returns None when no verified v2 assertion exists (caller falls back to
-    the legacy container bridge).  visibility_state must not be 'shadow'
-    for any active reader; this resolver consults only legacy-visible rows
-    until cutover (WU-806 flips the epoch gate).
+    SQL filters decision AND visibility AND epoch AND cohort:
+
+    * v1 reader (flag off): only ``visibility_state='legacy'`` rows; an
+      active row in the database is NEVER visible (CTRL-01).
+    * v2 reader (flag on): only ``visibility_state='active'`` rows whose
+      ``activation_epoch`` equals the pinned epoch and whose ``cohort`` is
+      in the active cohort set (CTRL-02).  Empty cohort set -> no row can
+      match (fail closed).
+
+    Returns None when no assertion is visible (caller falls back to the
+    legacy container bridge only if the snapshot allows it).
     """
+    if reader == "v1":
+        visibility = "visibility_state='legacy'"
+        params: tuple[Any, ...] = (source_id,)
+    elif reader == "v2":
+        if not current_epoch or not active_cohorts:
+            return None  # fail closed: epoch/cohort must be pinned
+        placeholders = ",".join("?" for _ in active_cohorts)
+        visibility = (
+            "visibility_state='active' AND activation_epoch=? "
+            f"AND cohort IN ({placeholders})"
+        )
+        params = (source_id, current_epoch, *active_cohorts)
+    else:
+        raise ValueError(f"unknown reader {reader!r}")
     row = store.fetchone(
-        """SELECT evidence_json, fiscal_year, fiscal_period, document_kind,
+        f"""SELECT evidence_json, fiscal_year, fiscal_period, document_kind,
                   form_type, provider, provider_document_id, source_url,
                   security_id, market, content_sha256
            FROM source_metadata_assertions
-           WHERE source_id=? AND decision='verified'
-             AND visibility_state IN ('legacy', 'active')
+           WHERE source_id=? AND decision='verified' AND {visibility}
            ORDER BY created_at DESC LIMIT 1""",
-        (source_id,),
+        params,
     )
     if row is None:
         return None

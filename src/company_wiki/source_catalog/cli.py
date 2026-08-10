@@ -912,8 +912,16 @@ def main(argv: Sequence[str] | None = None) -> int:
                 confirmation_token=args.confirmation_token,
             )
         elif args.command == "resolve":
+            from .runtime_policy import RuntimePolicyError, load_runtime_policy
+
             request, identity = source_request()
-            source_resolution = SourceResolver(get_catalog()).resolve(request).to_dict()
+            try:
+                policy = load_runtime_policy(config.catalog_dir / "runtime_policy.json")
+            except RuntimePolicyError:
+                policy = None  # no snapshot yet -> v1 + bridge (FC-202 default)
+            source_resolution = SourceResolver(
+                get_catalog(), runtime_policy=policy
+            ).resolve(request).to_dict()
             result = (
                 {"identity": identity.to_dict(), "source_resolution": source_resolution}
                 if identity

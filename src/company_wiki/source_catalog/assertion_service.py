@@ -74,15 +74,49 @@ def _build_assertion(
     }
 
 
+def _visibility_sql(
+    reader: str,
+    current_epoch: str | None,
+    active_cohorts: tuple[str, ...],
+) -> tuple[str, tuple[Any, ...]]:
+    """FC-202: decision AND visibility AND epoch AND cohort filter.
+
+    v1 reader sees only ``legacy`` rows (active rows never visible even when
+    present — CTRL-01).  v2 reader sees only ``active`` rows whose epoch
+    matches and whose cohort is in the active set (CTRL-02); missing epoch
+    or empty cohort set fails closed.
+    """
+    if reader == "v1":
+        return "visibility_state='legacy'", ()
+    if reader == "v2":
+        if not current_epoch or not active_cohorts:
+            return "1=0", ()  # fail closed
+        placeholders = ",".join("?" for _ in active_cohorts)
+        return (
+            "visibility_state='active' AND activation_epoch=? "
+            f"AND cohort IN ({placeholders})",
+            (current_epoch, *active_cohorts),
+        )
+    raise ValueError(f"unknown reader {reader!r}")
+
+
 def _get_active_verified_assertions(
-    store: CatalogStore, source_id: str
+    store: CatalogStore,
+    source_id: str,
+    *,
+    reader: str = "v1",
+    current_epoch: str | None = None,
+    active_cohorts: tuple[str, ...] = (),
 ) -> list[dict[str, Any]]:
-    """Return the active (non-superseded) verified assertions for a source."""
+    """Return the active (non-superseded) verified assertions for a source,
+    filtered by the pinned RuntimePolicySnapshot visibility contract
+    (FC-202)."""
+    visibility, extra = _visibility_sql(reader, current_epoch, active_cohorts)
     rows = store.fetchall(
-        """SELECT * FROM source_metadata_assertions
-        WHERE source_id=? AND decision='verified'
+        f"""SELECT * FROM source_metadata_assertions
+        WHERE source_id=? AND decision='verified' AND {visibility}
         ORDER BY created_at DESC""",
-        (source_id,),
+        (source_id, *extra),
     )
     superseded_ids = {
         r["supersedes_assertion_id"]
@@ -119,15 +153,23 @@ def get_verified_assertion(
     store: CatalogStore,
     source_id: str,
     content_sha256: str,
+    *,
+    reader: str = "v1",
+    current_epoch: str | None = None,
+    active_cohorts: tuple[str, ...] = (),
 ) -> dict[str, Any] | None:
     """Return the active verified assertion for a source, or None.
 
     Must match both source_id and current content_sha256.  Multiple verified
     assertions sharing the same evidence resolve to the latest (Phase 18.2
     correction chain); different evidence remains a conflict (None, fail
-    closed).
+    closed).  FC-202: visibility/epoch/cohort filtered by the pinned
+    RuntimePolicySnapshot.
     """
-    active = _get_active_verified_assertions(store, source_id)
+    active = _get_active_verified_assertions(
+        store, source_id, reader=reader, current_epoch=current_epoch,
+        active_cohorts=active_cohorts,
+    )
     matching = [a for a in active if a["content_sha256"] == content_sha256]
     return _resolve_active_verified(matching)
 
@@ -136,6 +178,10 @@ def get_verified_assertion_by_document(
     store: CatalogStore,
     document_id: str,
     content_sha256: str | None = None,
+    *,
+    reader: str = "v1",
+    current_epoch: str | None = None,
+    active_cohorts: tuple[str, ...] = (),
 ) -> dict[str, Any] | None:
     """Return the active verified assertion for a document, or None (Phase
     15.5).
@@ -146,13 +192,15 @@ def get_verified_assertion_by_document(
     ``content_sha256`` is given it must match.  Multiple active verified
     assertions sharing the same evidence resolve to the latest (Phase 18.2
     correction chain); different evidence is a conflict and returns None
-    (fail closed).
+    (fail closed).  FC-202: visibility/epoch/cohort filtered by the pinned
+    RuntimePolicySnapshot.
     """
+    visibility, extra = _visibility_sql(reader, current_epoch, active_cohorts)
     rows = store.fetchall(
-        """SELECT * FROM source_metadata_assertions
-        WHERE document_id=? AND decision='verified'
+        f"""SELECT * FROM source_metadata_assertions
+        WHERE document_id=? AND decision='verified' AND {visibility}
         ORDER BY created_at DESC""",
-        (document_id,),
+        (document_id, *extra),
     )
     superseded_ids = {
         r["supersedes_assertion_id"]
