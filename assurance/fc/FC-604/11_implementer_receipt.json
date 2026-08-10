@@ -1,0 +1,98 @@
+{
+  "schema_version": "2.0",
+  "fc_id": "FC-604",
+  "status": "independent_review",
+  "mode": "honest-implementer",
+  "base_triplet": {
+    "revenue": "7e10ea6db90ddd2a061a1f349c63689ac6067d2f",
+    "filing": "6274be2187b450d14492defd03579d6209d1b1cc",
+    "wiki": "47a03117ada0d5b3fe33ba9ab62a6718a3efeaeb"
+  },
+  "result_triplet": {
+    "revenue": "7e10ea6db90ddd2a061a1f349c63689ac6067d2f",
+    "filing": "6274be2187b450d14492defd03579d6209d1b1cc",
+    "wiki": "6042f31d5e5c0863f7051351e510bd33dcd863cc"
+  },
+  "plan_sha256": "158fc1e1e4231e3c2dc71822a58931fdca64eff79fc0d4e27b8276a397f4c78a",
+  "policy_sha256": "not-applicable",
+  "allowed_files": [
+    "company-wiki/src/company_wiki/source_catalog/resolver.py",
+    "company-wiki/tests/contract/test_three_root_consistency_fc604.py"
+  ],
+  "changed_files": [
+    "company-wiki/src/company_wiki/source_catalog/resolver.py",
+    "company-wiki/tests/contract/test_three_root_consistency_fc604.py"
+  ],
+  "dependency_receipts": [
+    "company-wiki/assurance/fc/FC-603/12_reviewer_receipt.json (accepted 2026-08-10)",
+    "revenue-forecast/assurance/fc/FC-505/12_reviewer_receipt.json (accepted 2026-08-10)"
+  ],
+  "command_registry_sha256": "215b8077169126b2c4a5eca9d8d6237f291757c2559f6ae6e0ae8ff1c806b089",
+  "scenario_results": [
+    {
+      "id": "FC-604-consistency",
+      "status": "passed",
+      "note": "CN + US identity: same request resolves to identical contract (document_kind/form_type/fiscal_year/published_date/provider/provider_document_id/https_url/content_sha256/snapshot_sha256/mime_type/byte_size/capture_ready/source_status) across companies-only/dayu-only/Dropbox-only; only canonical_path differs (provenance)"
+    },
+    {
+      "id": "FC-604-no-root-branch",
+      "status": "passed",
+      "note": "AST gate: resolver.py carries NO root_id/root_kind conditional business branch (only config-driven reusable_root_kinds allowances)"
+    },
+    {
+      "id": "FC-604-provider-fix",
+      "status": "passed",
+      "note": "production fix: _provider_identity now falls back to source_provider — closes the dayu provider=None gap (companies/directory returned mapped provider, dayu returned None); the contract consistency test caught this root-specific inconsistency"
+    }
+  ],
+  "commands": [
+    {
+      "command": "python -m pytest tests/contract/test_three_root_consistency_fc604.py -q",
+      "exit_code": 0,
+      "result": "4 passed",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "python -m pytest tests/ -q",
+      "exit_code": 0,
+      "result": "2146 passed / 2 pre-existing PORT-01 failures (test_check_unique_test_symbols, FC-1205); +4 FC-604 tests, zero new failures",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "ruff check src/company_wiki/source_catalog/resolver.py tests/contract/test_three_root_consistency_fc604.py",
+      "exit_code": 0,
+      "result": "All checks passed",
+      "cwd": "company-wiki"
+    }
+  ],
+  "side_effect_counts": {
+    "downloads": 0,
+    "external_root_writes": 0,
+    "catalog_mutations": 0,
+    "llm_calls": 0,
+    "parser_calls": 0
+  },
+  "codegraph": {
+    "production_callers_before": 0,
+    "production_callers_after": 0,
+    "note": "resolver _provider_identity provider fallback fix (1-line); 4 contract tests pinning three-root consistency"
+  },
+  "mutation": {
+    "id": "FC-604-M",
+    "killed": true,
+    "details": "1 mutation killed: M1 provider fallback reverted -> 2/4 tests fail (CN + US contract drift on provider=None); regression 22 passed"
+  },
+  "rollback": {
+    "required": false,
+    "proved": true,
+    "note": "1-line resolver fix + contract tests; revert = revert commit."
+  },
+  "review": {
+    "reviewer": "",
+    "reviewer_receipt_sha256": "",
+    "decision": "pending",
+    "reviewed_at": "",
+    "note": "honest-implementer: awaits independent reviewer per independent_review_protocol.md"
+  },
+  "provisional_note": "result_triplet sealed at commit 6042f31."
+}
