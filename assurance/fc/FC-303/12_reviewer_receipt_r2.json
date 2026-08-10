@@ -1,0 +1,100 @@
+{
+  "schema_version": "2.0",
+  "fc_id": "FC-303",
+  "implementer_receipt_sha256": "d5978b0f5e7b0978b1284e9929e8af615689fcaa16be716916a7781ee20023c9",
+  "reviewer_identity": "reviewer-fc303-r2",
+  "clean_checkout": true,
+  "base_triplet": {
+    "revenue": "709119b85c8b98552d854511826cc0f5b0ba3bab",
+    "filing": "d5e87237bd976b61c0d41127a8090b66031d4a72",
+    "wiki": "061302685fb946edcba1010c3b59d2adc2f61a15"
+  },
+  "result_triplet": {
+    "revenue": "709119b85c8b98552d854511826cc0f5b0ba3bab",
+    "filing": "d5e87237bd976b61c0d41127a8090b66031d4a72",
+    "wiki": "1a6ca4cddf5fea33f457d3b9fa25cbd2316017ec"
+  },
+  "replayed_command_ids": [
+    "fc303.focused-shadow-parity-8",
+    "fc303.contract-subset-41",
+    "wiki.unit.full",
+    "fc303.ruff-3-changed-files",
+    "revenue.governance.receipt"
+  ],
+  "scenario_results": [
+    {
+      "id": "EX-08",
+      "status": "passed",
+      "note": "r2 re-review (after changes_required F1): replayed fresh in clean detached worktree at 1a6ca4c. test_ex08_future_root_never_falls_back_to_legacy now carries an adapter_for invocation spy — the v2 path MUST dispatch through the registered adapter (calls == ['future_lake']), which a v1 legacy scan never does; plus a v2-only marker assertion on the adapter candidate. test_ex08_adapter_error_fails_closed_not_legacy_fallback injects a failing adapter (enumerate raises RuntimeError) and asserts ScannerFacadeError — the generic adapter runtime failure fails closed, no legacy v1 fallback. Both fallback classes (blunt and narrow) are now killed by the NAMED tests, not just a sibling. test_ex08_future_root_unknown_adapter_blocks still fails closed on unresolvable routes."
+    },
+    {
+      "id": "SPI-03",
+      "status": "passed",
+      "note": "content-hash accuracy: run_root_shadow_parity compares each v2 adapter candidate's DECLARED content_sha256 against the on-disk file hash (read-only, frozen corpus); a tampered declared hash is classified blocker unless a migration rule exists. test_parity_runner_detects_hash_tamper kills removal of the check (verified by mutation replay)."
+    }
+  ],
+  "mutation_results": [
+    {
+      "id": "FC-303-M-review-blunt-v1-fallback",
+      "killed": true,
+      "detail": "changed the v2 shadow branch of scan_root_strategy (scanner.py:1371) to call _scan_root_v1(...)[0] instead of scan_root_via_adapter -> test_ex08_future_root_never_falls_back_to_legacy FAILED (spy assertion: calls=[] != ['future_lake'], 'legacy fallback detected'). The NAMED test discriminates. Restored via git checkout; worktree clean."
+    },
+    {
+      "id": "FC-303-M-review-narrow-adapter-error-fallback",
+      "killed": true,
+      "detail": "changed the generic 'except Exception' handler in the v2 branch of scan_root_strategy to fall back to _scan_root_v1(...)[0] instead of raising ScannerFacadeError -> test_ex08_adapter_error_fails_closed_not_legacy_fallback FAILED (DID NOT RAISE ScannerFacadeError). The narrow fallback class is now killed by its NAMED test. Restored via git checkout; worktree clean."
+    },
+    {
+      "id": "FC-303-M-review-hash-tamper-check-removed",
+      "killed": true,
+      "detail": "disabled the declared-vs-disk content_sha256 comparison loop in shadow_parity.py run_root_shadow_parity (condition to 'if False') -> test_parity_runner_detects_hash_tamper FAILED (no diff with field content_sha256 found). Restored via git checkout; worktree clean."
+    },
+    {
+      "id": "FC-303-M-review-phantom-rule-rejection-removed",
+      "killed": true,
+      "detail": "disabled the phantom-rule rejection in shadow_parity.py register_migration_rule (condition to 'if False') -> test_migration_ledger_holds_explainable_diffs FAILED (DID NOT RAISE ValueError for the phantom rule). Restored via git checkout; worktree clean."
+    }
+  ],
+  "side_effect_reconciliation": {
+    "passed": true,
+    "detail": "receipt claims downloads 0 / external_root_writes 0 / catalog_mutations 0 / llm_calls 0 / parser_calls 0. FC-303 diff is additive (new shadow_parity.py module + scan_root_strategy v2-branch fail-closed handler + tests); all replayed tests write only to pytest tmp_path; llm_cost_log.csv NOT in diff (verified name-only base..bfac6f30); review worktree stayed clean through all replays and mutation restores (git status clean at every checkpoint). Main company-wiki checkout has the user's dirty llm_cost_log.csv — not part of FC-303 and untouched by the review."
+  },
+  "codegraph_reachability": {
+    "passed": true,
+    "detail": "CodeGraph indexed at company-wiki HEAD 1a6ca4c (== review HEAD): scan_root_strategy callees = scan_root_via_adapter (v2 branch, adapter_dispatch.py:79) + _scan_root_v1 (default v1 path, scanner.py:351) — both branches present, generic-exception fail-closed handler visible in the indexed source; production caller _scan_catalog_impl (scanner.py:902) calls scan_root_strategy WITHOUT v2_scan_shadow (v1 default), so the v2 branch is exercised only via the shadow seam: run_root_shadow_parity (shadow_parity.py:87) -> _v2_candidates -> scan_root_strategy(v2_scan_shadow=True); run_root_shadow_parity callers = 4 tests only (shadow-gate tool, no production callers — matches receipt's codegraph note). run_root_shadow_parity unchanged by the F1 fix (shadow_parity.py untouched in bfac6f30)."
+  },
+  "rollback": {
+    "required": false,
+    "passed": true,
+    "detail": "additive change: new shadow_parity.py module + scanner facade v2-branch fail-closed handler + tests. Revert = revert commits e64f245 + bfac6f30 (both ancestors of review HEAD 1a6ca4c). No config/DB/root writes."
+  },
+  "unresolved_findings": [
+    {
+      "id": "FIND-303-R2-1",
+      "severity": "informational",
+      "note": "No origin/fcap remote branch exists (remotes: origin only -> github.com/zhengcb81/company-wiki.git, origin/master; local fcap branch present, review worktree detached at 1a6ca4c). Verified commits: revenue 709119b8 (revenue repo HEAD, revenue-forecast), filing d5e87237 (filing-fetch repo), wiki 06130268 / e64f245 / bfac6f30 / 1a6ca4c all present in the company-wiki worktree; sealed code commits e64f245 and bfac6f30 are ancestors of review HEAD 1a6ca4c. Sealing hashes recomputed in revenue repo: task_plan.md = 158fc1e1e4231e3c2dc71822a58931fdca64eff79fc0d4e27b8276a397f4c78a, compatibility/command_registry.json = 215b8077169126b2c4a5eca9d8d6237f291757c2559f6ae6e0ae8ff1c806b089 — both match the implementer receipt."
+    },
+    {
+      "id": "FIND-303-R2-2",
+      "severity": "informational",
+      "note": "Full suite: 2053 passed / 2 failed — tests/contract/test_check_unique_test_symbols.py::test_duplicate_test_definition_fails and ::test_syntax_error_is_reported_as_failure (PORT-01, pre-existing). File introduced by commit ed325c2 'feat(wu-1.1)' which is an ancestor of base 06130268 — the failures cannot be caused by FC-303's 3 changed files. Failure mode: subprocess reader-thread UnicodeDecodeError (PytestUnhandledThreadExceptionWarning, GBK bytes on Windows console) — environment portability, unrelated to scanner/shadow code; reproduces standalone (2 failed, 3 passed in isolation). Zero FC-303 failures."
+    },
+    {
+      "id": "FIND-303-R2-3",
+      "severity": "informational",
+      "note": "Implementer receipt metadata staleness: allowed_files and changed_files list only shadow_parity.py + test_shadow_parity_runner.py, omitting scanner.py — yet the sealed code diff (base 06130268..bfac6f30, name-only) is exactly the 3 expected files: src/company_wiki/source_catalog/shadow_parity.py, src/company_wiki/source_catalog/scanner.py, tests/contract/test_shadow_parity_runner.py (F1 fix touched scanner.py + the test file; shadow_parity.py from the original e64f245). llm_cost_log.csv absent from the diff. The receipt's allowed_files list is stale rather than a scope violation — the task plan itself mandates the scanner.py change (fail-closed on adapter runtime failure). Also the receipt's contract-subset command covers 4 files/26 tests while this re-review replayed the broader 5-file/41-test set — superset, all green."
+    },
+    {
+      "id": "FIND-303-R2-4",
+      "severity": "informational",
+      "note": "Prior reviewer receipt for FC-303 (reviewer-fc303-independent, changes_required) is not present on disk in the worktree: assurance/fc/FC-303/ contains only 11_implementer_receipt.json (no 12_reviewer_receipt.json ever committed for FC-303; FC-201..FC-302 each have one). Nothing was overwritten — this r2 receipt uses the distinct filename 12_reviewer_receipt_r2.json per protocol section 6. If the prior receipt exists outside this worktree, it remains untouched."
+    },
+    {
+      "id": "FIND-303-R2-5",
+      "severity": "informational",
+      "note": "Full-suite exit-code bookkeeping: the piped command reports exit 0 (exit of tail), while raw pytest exits 1 because of the 2 pre-existing PORT-01 failures — same recording convention as prior FCs (FIND-302-3). The receipt's result text itself documents 2053 passed / 2 pre-existing failures accurately; collected total 2055."
+    }
+  ],
+  "verdict": "accepted",
+  "reviewed_at": "2026-08-10"
+}

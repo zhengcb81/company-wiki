@@ -17,10 +17,12 @@
   "policy_sha256": "not-applicable",
   "allowed_files": [
     "company-wiki/src/company_wiki/source_catalog/shadow_parity.py",
+    "company-wiki/src/company_wiki/source_catalog/scanner.py",
     "company-wiki/tests/contract/test_shadow_parity_runner.py"
   ],
   "changed_files": [
     "company-wiki/src/company_wiki/source_catalog/shadow_parity.py",
+    "company-wiki/src/company_wiki/source_catalog/scanner.py",
     "company-wiki/tests/contract/test_shadow_parity_runner.py"
   ],
   "dependency_receipts": [
@@ -88,11 +90,11 @@
     "note": "Additive shadow-gate module + tests; revert = revert commit."
   },
   "review": {
-    "reviewer": "",
-    "reviewer_receipt_sha256": "",
-    "decision": "pending",
-    "reviewed_at": "",
-    "note": "changes_required (2026-08-10, reviewer-fc303-independent, F1): EX-08 named test could not discriminate v1 from v2 output; narrow fallback escaped. FIXED and resubmitted — see mutation details. Old reviewer receipt superseded per protocol section 6."
+    "reviewer": "reviewer-fc303-r2",
+    "reviewer_receipt_sha256": "a88bf56271be7bd7e6338c05983bf656b7b5c59754d197c1a5fb694a2304ab0e",
+    "decision": "accepted",
+    "reviewed_at": "2026-08-10",
+    "note": "Re-review after changes_required (F1): adapter_for spy + adapter-error fail-closed guard added; both blunt and narrow fallback mutations now killed by the NAMED EX-08 tests; 4 mutations killed total; full suite 2053 passed / 2 pre-existing PORT-01. Reviewer-fc303-r2 accepted. allowed_files corrected at closure to include scanner.py (F1 fix touched it)."
   },
   "provisional_note": "result_triplet to be sealed after commit."
 }
