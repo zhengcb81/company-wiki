@@ -1,0 +1,78 @@
+{
+  "schema_version": "2.0",
+  "fc_id": "FC-504",
+  "implementer_receipt_sha256": "f37db5556500e8e0a1f8f8207b2ae7e658a98c69a5ffde03109cb9d99518a9da",
+  "reviewer_identity": "reviewer-fc504-r2",
+  "clean_checkout": true,
+  "base_triplet": {
+    "revenue": "2465bd7336fa6dacf64ff22d0391a3ec1d107fb3",
+    "filing": "6274be2187b450d14492defd03579d6209d1b1cc",
+    "wiki": "6401f32c087af07dfd6a01f8ec1ec31c4505ddc8"
+  },
+  "result_triplet": {
+    "revenue": "2465bd7336fa6dacf64ff22d0391a3ec1d107fb3",
+    "filing": "6274be2187b450d14492defd03579d6209d1b1cc",
+    "wiki": "6401f32c087af07dfd6a01f8ec1ec31c4505ddc8"
+  },
+  "replayed_command_ids": [
+    "fc504.r2.receipt_triplets_exist",
+    "fc504.r2.sealing_hashes_recomputed",
+    "fc504.r2.diff_scope",
+    "fc504.r2.real_root_sidecars_content_hash",
+    "fc504.r2.real_root_catalog_identity",
+    "fc504.r2.inventory_real_root",
+    "fc504.r2.focused_tests",
+    "revenue.governance.receipt"
+  ],
+  "scenario_results": [
+    {
+      "id": "FC-504-existing-samples",
+      "status": "passed",
+      "note": "4 real Dropbox canary samples independently verified in clean worktree + real root: (a) PDFs exist with sizes 32,100,114 / 79,925,886 / 1,594,399 / 1,794,755 bytes; (b) each has a .source.json sidecar whose content_sha256 equals the recomputed sha256 of the actual file bytes (4/4 match); (c) identity fields (601899/688031, fiscal_year 2024/2025, provider cninfo, provider_document_id 1222870413/1225023658/1223325316/1225028771) match the LIVE catalog records — 紫金矿业 assertions sa-ade93cf1/sa-b47b3b6c are decision=verified active canary cohort; 星环科技 fields match dayu_meta records exactly (see finding F2); (d) live inventory reports eligible=4 needs_review=0 unprovable=7167 canary_decision=selectable writes=0; the 4 eligible candidates are exactly the 4 canary PDFs"
+    },
+    {
+      "id": "FC-504-exclusivity",
+      "status": "passed",
+      "note": "user decision 2026-08-10 verified in progress.md (2026-08-09_full_completion_assurance_plan): exclusivity clause waived with quoted user instruction; same-content files across roots are recorded as duplicate locations (FC-603 EX-04 semantics); live inventory shows duplicate_location_sets=2894 (2890 pre-canary + 4 new byte-identical duplicates); all 4 hashes retain active original_primary locations in company_raw (紫金矿业 x2) and dayu_portfolio (星环科技 x2) — duplicates recorded, nothing fabricated or deleted"
+    },
+    {
+      "id": "FC-504-registry",
+      "status": "passed",
+      "note": "hashed sample IDs independently recomputed: sample_id == sha256('dropbox_stock|'+relative_path) for all 4 entries (a6dbf790/96537992/608fbc56/0fc5a14b all match); relative paths only, no drive/root/absolute leakage; registry file content matches the registry on disk and the on-disk PDF paths"
+    }
+  ],
+  "mutation_results": [
+    {
+      "id": "FC-504-M2",
+      "killed": true,
+      "note": "r1 mutations M1-M4 already killed and independently re-verified in r1 (reviewer-fc504-independent, 12_reviewer_receipt.json); r2 diff scope f58a9dfb..3aee90c = exactly assurance/fc/FC-504/canary_registry_2026-08-10.json — no mechanism code changed, so no new mutations applicable; r2 adds sample registration evidence only"
+    }
+  ],
+  "side_effect_reconciliation": {
+    "passed": true,
+    "note": "4 .source.json sidecar files written to real Dropbox root (user-authorized canary placement; implementer receipt external_root_writes=4 consistent); catalog read-only — counts unchanged (documents=23513 sources=43074 locations=46573, matching FC-503 baseline); inventory writes=0; no downloads/llm/parser calls"
+  },
+  "codegraph_reachability": {
+    "passed": true,
+    "note": "no production callers for canary_registry/dropbox_governance modules — grep-verified in the clean checkout: only tests/ and tools/ import them (mechanism is governance tooling, not yet wired into production resolution; consistent with receipt production_callers_before/after=0 and r1 acceptance). Main-checkout codegraph index predates the FC-504 files (canary_registry.py absent from index), so direct grep verification was used"
+  },
+  "rollback": {
+    "required": false,
+    "passed": true,
+    "note": "evidence-completion only (registry mechanism accepted in r1); revert = delete the 4 .source.json sidecar files from the real Dropbox root; PDFs remain user-provided"
+  },
+  "unresolved_findings": [
+    {
+      "id": "F1",
+      "severity": "low",
+      "finding": "no-remote-branch: branch fcap has no remote counterpart (origin/company-wiki only has master); FC-504 r2 evidence exists only on the local branch and cannot be pushed. Same known caveat as prior FCs; non-blocking for acceptance but the fcap branch must eventually merge to master for upstream evidence"
+    },
+    {
+      "id": "F2",
+      "severity": "low",
+      "finding": "星环科技 (688031) sidecar identity fields trace to catalog dayu_meta records, NOT to v2-normalized verified assertions — the live catalog has ZERO assertions for security_id 688031 and zero rows for provider_document_id 1223325316/1225028771 in source_metadata_assertions. The dayu_meta records match the sidecar fields exactly (security_id 688031, source_provider cninfo, source_id == provider_document_id, fiscal_year 2024/2025), and the user's 2026-08-10 decision explicitly names 'catalog 已验证 acquisition/dayu_meta 记录' as the formal source, so the canary is conformant. However the r2 implementer receipt wording 'fields from verified catalog records' overstates provenance for these two samples: fiscal_year_source=title_or_category_inferred and report_date=None (period_inferred) in dayu_meta, and the FY2025 星环 record has ingest_complete=False. The sidecar period_end 2024-12-31/2025-12-31 is a logical derivation from fiscal_year for an FY annual report. Recommend future receipts say 'catalog dayu_meta records' for such samples; no data change required"
+    }
+  ],
+  "verdict": "accepted",
+  "reviewed_at": "2026-08-10"
+}
