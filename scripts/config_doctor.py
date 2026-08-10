@@ -81,6 +81,25 @@ def _cross_repo_checks(config, root: Path, problems: list[str]) -> None:
             "kind=directory roots must be exactly {dropbox_stock}, "
             f"got {sorted(directory_roots)}"
         )
+    try:
+        import os
+
+        dropbox_wiki = next(
+            (r for r in config.roots if r.root_id == "dropbox_stock"), None
+        )
+        if dropbox_wiki is None:
+            return  # no Dropbox configured — legitimate (zero directory roots)
+        # CONFIG-DBX-04: the Dropbox root's single source of truth is this
+        # source_catalog.yaml — the path must point at Dropbox/Stock.
+        profile = os.environ.get("USERPROFILE") or str(Path.home())
+        wiki_path = str(dropbox_wiki.path).replace("${USER_PROFILE}", profile)
+        resolved = Path(wiki_path).resolve()
+        if resolved.name != "Stock" or "Dropbox" not in str(resolved):
+            problems.append(
+                f"dropbox_stock path does not point at Dropbox/Stock: {wiki_path}"
+            )
+    except Exception as exc:  # noqa: BLE001 - report every failure mode
+        problems.append(f"dropbox path check failed: {exc}")
     filing_config = (
         root.parent / "filing-fetch" / "config" / "company_wiki.json"
     )
@@ -88,15 +107,8 @@ def _cross_repo_checks(config, root: Path, problems: list[str]) -> None:
         return  # filing-fetch absent in this workspace — skip
     try:
         import json
-        import os
 
         payload = json.loads(filing_config.read_text(encoding="utf-8"))
-        dropbox_wiki = next(
-            (r for r in config.roots if r.root_id == "dropbox_stock"), None
-        )
-        if dropbox_wiki is None:
-            problems.append("dropbox_stock root missing from source_catalog.yaml")
-            return
         # FC-501: a filing-fetch config smuggling back an independent root
         # allowlist is a contract violation (CONFIG-DBX-03).
         if payload.get("allowed_handle_roots"):
@@ -104,12 +116,6 @@ def _cross_repo_checks(config, root: Path, problems: list[str]) -> None:
                 "filing-fetch config must NOT carry allowed_handle_roots "
                 "(FC-501: the policy snapshot is the single source; the "
                 "config schema rejects it)"
-            )
-        profile = os.environ.get("USERPROFILE") or str(Path.home())
-        wiki_path = str(dropbox_wiki.path).replace("${USER_PROFILE}", profile)
-        if not Path(wiki_path).resolve().name == "Stock" or "Dropbox" not in str(Path(wiki_path)):
-            problems.append(
-                f"dropbox_stock path does not point at Dropbox/Stock: {wiki_path}"
             )
     except Exception as exc:  # noqa: BLE001 - report every failure mode
         problems.append(f"cross-repo config check failed: {exc}")

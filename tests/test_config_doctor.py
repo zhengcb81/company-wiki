@@ -107,14 +107,16 @@ def test_e2e_f03_second_directory_root_fails_fast(tmp_path, monkeypatch):
     problems = diagnose(config, project_root=project)
     assert any("directory roots must be exactly" in p for p in problems), problems
 
-def test_e2e_f03_filing_allowance_missing_dropbox_fails(tmp_path, monkeypatch):
-    """E2E-F03: filing-fetch allowance missing Dropbox/Stock → doctor fails."""
+def test_e2e_f03_filing_allowance_smuggled_fails(tmp_path, monkeypatch):
+    """E2E-F03 / FC-501 (CONFIG-DBX-03): a filing-fetch config smuggling
+    back an independent allowed_handle_roots is a contract violation —
+    the policy snapshot is the single source; the doctor must fail."""
     from config_doctor import diagnose
 
     filing = tmp_path / "filing-fetch" / "config"
     filing.mkdir(parents=True)
     (filing / "company_wiki.json").write_text(
-        '{"schema_version": "1.0", "allowed_handle_roots": ["/companies"]}',
+        '{"schema_version": "1.0", "allowed_handle_roots": ["/Dropbox/Stock"]}',
         encoding="utf-8",
     )
     config = tmp_path / "source_catalog.yaml"
@@ -123,23 +125,17 @@ def test_e2e_f03_filing_allowance_missing_dropbox_fails(tmp_path, monkeypatch):
     (project / ".source_catalog" / "security_master").mkdir(parents=True)
     (project / ".source_catalog" / "security_master" / "us.json").write_text("{}", encoding="utf-8")
     problems = diagnose(config, project_root=project)
-    assert any("missing Dropbox/Stock" in p for p in problems), problems
+    assert any("allowed_handle_roots" in p for p in problems), problems
 
 
-
-def test_e2e_f03_dropbox_realpath_drift_fails(tmp_path, monkeypatch):
-    """E2E-F03: wiki and filing resolve the Dropbox path to different
-    realpaths → doctor fails (double-config drift fail-fast)."""
+def test_e2e_f03_dropbox_path_not_stock_fails(tmp_path, monkeypatch):
+    """E2E-F03 / FC-501 (CONFIG-DBX-04): the Dropbox root's single source
+    of truth is source_catalog.yaml — a path that does not point at
+    Dropbox/Stock fails the doctor."""
     from config_doctor import diagnose
 
-    filing = tmp_path / "filing-fetch" / "config"
-    filing.mkdir(parents=True)
-    # filing allowance points at a DIFFERENT Dropbox path
-    (filing / "company_wiki.json").write_text(
-        '{"schema_version": "1.0", "allowed_handle_roots": ["${USER_PROFILE}/Dropbox/Stock", "/other"]}',
-        encoding="utf-8",
-    )
-    yaml = (
+    config = tmp_path / "source_catalog.yaml"
+    config.write_text(
         'schema_version: "1.0"\n'
         'catalog_dir: "${PROJECT_ROOT}/.source_catalog"\n'
         "reusable_root_kinds: [company_raw, dayu_portfolio, directory]\n"
@@ -150,13 +146,14 @@ def test_e2e_f03_dropbox_realpath_drift_fails(tmp_path, monkeypatch):
         "    priority: 10\n"
         '  - root_id: dropbox_stock\n'
         "    kind: directory\n"
-        '    path: "${USER_PROFILE}/Dropbox/Other"\n'  # different realpath
-        "    priority: 30\n"
+        '    path: "${USER_PROFILE}/Dropbox/Other"\n'
+        "    priority: 30\n",
+        encoding="utf-8",
     )
-    config = tmp_path / "source_catalog.yaml"
-    config.write_text(yaml, encoding="utf-8")
     project = tmp_path / "project"
     (project / ".source_catalog" / "security_master").mkdir(parents=True)
     (project / ".source_catalog" / "security_master" / "us.json").write_text("{}", encoding="utf-8")
     problems = diagnose(config, project_root=project)
-    assert any("realpath drift" in p for p in problems), problems
+    assert any("Dropbox/Stock" in p for p in problems), problems
+
+
