@@ -1,0 +1,93 @@
+{
+  "schema_version": "2.0",
+  "fc_id": "FC-204",
+  "status": "independent_review",
+  "mode": "honest-implementer",
+  "base_triplet": {
+    "revenue": "51df360f5be2ee3715aaf5912f30af4fbd1b8a0f",
+    "filing": "d5e87237bd976b61c0d41127a8090b66031d4a72",
+    "wiki": "d1f2d7a832af540ad2ce05d45c7ad222999b1b5e"
+  },
+  "result_triplet": {
+    "revenue": "PENDING",
+    "filing": "d5e87237bd976b61c0d41127a8090b66031d4a72",
+    "wiki": "PENDING"
+  },
+  "plan_sha256": "158fc1e1e4231e3c2dc71822a58931fdca64eff79fc0d4e27b8276a397f4c78a",
+  "policy_sha256": "2d3d2ee8588d0b81dc38d723f9b5120a72f28c5007aba81957b94357e4425d5d",
+  "allowed_files": [
+    "company-wiki/src/company_wiki/source_catalog/activation.py",
+    "company-wiki/tests/contract/test_activation_transaction.py"
+  ],
+  "changed_files": [
+    "company-wiki/src/company_wiki/source_catalog/activation.py",
+    "company-wiki/tests/contract/test_activation_transaction.py"
+  ],
+  "dependency_receipts": [
+    "company-wiki/assurance/fc/FC-203/11_implementer_receipt.json (accepted 2026-08-10)",
+    "user change-window authorization 2026-08-10 (AskUserQuestion: 副本演练后激活 canary cohort; 注册 cohort 暂不翻 flag)"
+  ],
+  "command_registry_sha256": "215b8077169126b2c4a5eca9d8d6237f291757c2559f6ae6e0ae8ff1c806b089",
+  "scenario_results": [
+    {"id": "CTRL-03", "status": "passed", "note": "inherited from FC-203 (mapping uses the same single-transaction path; unknown id/stale policy fail closed)"},
+    {"id": "CTRL-04", "status": "passed", "note": "copy drill: map -> rollback -> verify on real 16-row shape; production rollback available via receipt d4e2a160..."},
+    {"id": "WU-905", "status": "passed", "note": "contradiction closed: 16 active rows now in legal canary cohort/epoch with journal receipt; runtime_policy.json flags v2_resolve_active=false + bridge on; resolver v1 (flag off) correctly ignores active rows; DB state, receipt, resolver response and flags all consistent"}
+  ],
+  "commands": [
+    {
+      "command": "python -m pytest tests/contract/test_activation_transaction.py -q",
+      "exit_code": 0,
+      "result": "15 passed (11 FC-203 + 4 FC-204 mapping tests)",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "python -m pytest tests/ -q",
+      "exit_code": 0,
+      "result": "PENDING_FILL_AT_GATE",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "ruff check src/company_wiki/source_catalog/activation.py tests/contract/test_activation_transaction.py",
+      "exit_code": 0,
+      "result": "All checks passed",
+      "cwd": "company-wiki"
+    }
+  ],
+  "side_effect_counts": {
+    "downloads": 0,
+    "external_root_writes": 0,
+    "catalog_mutations": 1,
+    "llm_calls": 0,
+    "parser_calls": 0
+  },
+  "production_evidence": {
+    "baseline": ".source_catalog/fc204_baseline_2026-08-10.json (read-only: schema 1.2.0, FK violations 0, authoritative table hashes recorded)",
+    "copy_drill": "16 real rows copied to temp catalog -> map_existing_activation to canary cohort/epoch -> rollback -> states shadow; drill catalog removed",
+    "production_apply": "map_existing_activation epoch=epoch-canary-2026-08-10 cohort=canary-2026-08-10 policy=2d3d2ee8... reviewer=user-approved-2026-08-10; receipt d4e2a160c1ee12d55b3e1a1bd5053ae6; persisted .source_catalog/fc204_apply_receipt_2026-08-10.json",
+    "runtime_policy": ".source_catalog/runtime_policy.json snapshot 06eb049a... (flags: v2 all off, bridge on; current_epoch + active_cohorts register canary cohort)",
+    "consistency_check": "reader=v1, bridge=True; canary source under v1 resolves {} (active row invisible, CTRL-01); 13,806 legacy-only documents unaffected; WU-905 contradiction closed"
+  },
+  "codegraph": {
+    "production_callers_before": 3,
+    "production_callers_after": 4,
+    "note": "map_existing_activation added (production caller = cli activation apply path would use it for pre-existing rows; currently invoked via direct production apply with journal receipt)."
+  },
+  "mutation": {
+    "id": "FC-204-M",
+    "killed": true,
+    "details": "map_existing_activation: unknown-id rollback, stale-policy rollback, non-active-row rejection all proven by 3 RED tests -> GREEN; copy drill on real data proves apply+rollback on the 16-row shape."
+  },
+  "rollback": {
+    "required": true,
+    "proved": true,
+    "note": "production rollback available: rollback_activation(receipt_id=d4e2a160...) flips the 16 rows back to shadow inside one catalog transaction (copy-drill proven); runtime_policy.json can be CAS-reverted to the pre-canary snapshot (or removed -> v1+bridge default)."
+  },
+  "review": {
+    "reviewer": "",
+    "reviewer_receipt_sha256": "",
+    "decision": "pending",
+    "reviewed_at": "",
+    "note": "honest-implementer: awaits independent reviewer per independent_review_protocol.md"
+  },
+  "provisional_note": "result_triplet to be sealed after commit; production writes were explicitly authorized by the user via AskUserQuestion on 2026-08-10 (copy drill -> canary cohort; register cohort, keep flag off)."
+}

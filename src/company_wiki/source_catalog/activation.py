@@ -253,6 +253,88 @@ def rollback_activation(
     }
 
 
+def map_existing_activation(
+    store: CatalogStore,
+    *,
+    epoch: str,
+    cohort: str,
+    assertion_ids: Sequence[str],
+    policy_hash: str,
+    reviewer: str,
+    reason: str,
+    current_policy_hash: str | None = None,
+) -> dict[str, Any]:
+    """FC-204: map pre-existing active rows (activated before FC-203, no
+    journal entry) to a legal cohort/epoch inside ONE catalog transaction.
+
+    The rows must already be ``active`` verified assertions; the mapping
+    re-tags activation_epoch/cohort and writes an immutable apply receipt.
+    Stale policy hash, unknown/non-active/non-verified ids fail closed and
+    the whole transaction rolls back.
+    """
+    if not (isinstance(epoch, str) and epoch.strip()):
+        raise ActivationError("epoch must be non-empty text")
+    if not (isinstance(cohort, str) and cohort.strip()):
+        raise ActivationError("cohort must be non-empty text")
+    if not (isinstance(policy_hash, str) and len(policy_hash) == 64):
+        raise ActivationError("policy_hash must be a 64-char sha256")
+    if current_policy_hash is not None and policy_hash != current_policy_hash:
+        raise ActivationError(
+            f"stale policy hash: mapping {policy_hash[:12]}... != "
+            f"current policy {current_policy_hash[:12]}... (re-load the "
+            f"RootPolicy snapshot and retry)"
+        )
+    if not (isinstance(reviewer, str) and reviewer.strip()):
+        raise ActivationError("reviewer required")
+    if not (isinstance(reason, str) and reason.strip()):
+        raise ActivationError("reason required")
+
+    rows = _validate_assertions(store, assertion_ids)
+    for record in rows:
+        if record.get("visibility_state") != "active":
+            raise ActivationError(
+                f"assertion {record['assertion_id']} is not active "
+                f"(state={record.get('visibility_state')!r}) — only "
+                f"pre-existing active rows can be mapped"
+            )
+
+    receipt_id = _receipt_id(epoch, cohort, reason)
+    created_at = _utc_iso()
+    with store.transaction() as conn:
+        for record in rows:
+            conn.execute(
+                "UPDATE source_metadata_assertions "
+                "SET activation_epoch=?, cohort=? WHERE assertion_id=?",
+                (epoch, cohort, record["assertion_id"]),
+            )
+        conn.execute(
+            "INSERT INTO activation_journal "
+            "(receipt_id, schema_version, kind, epoch, cohort, "
+            " assertion_ids_json, policy_hash, reviewer, reason, created_at, "
+            " applies_receipt_id) "
+            "VALUES (?,?,?,?,?,?,?,?,?,?,?)",
+            (
+                receipt_id, RECEIPT_SCHEMA_VERSION, "apply", epoch, cohort,
+                json.dumps([r["assertion_id"] for r in rows],
+                           ensure_ascii=False),
+                policy_hash, reviewer, reason, created_at, None,
+            ),
+        )
+    return {
+        "schema_version": RECEIPT_SCHEMA_VERSION,
+        "receipt_id": receipt_id,
+        "kind": "apply",
+        "epoch": epoch,
+        "cohort": cohort,
+        "assertion_ids": [r["assertion_id"] for r in rows],
+        "policy_hash": policy_hash,
+        "reviewer": reviewer,
+        "reason": reason,
+        "created_at": created_at,
+        "mapped_from": "pre-fc203-active",
+    }
+
+
 def journal_rows(store: CatalogStore) -> list[dict[str, Any]]:
     """Append-only journal, oldest first."""
     rows = store.fetchall(
@@ -266,6 +348,7 @@ __all__ = [
     "ActivationError",
     "apply_activation",
     "journal_rows",
+    "map_existing_activation",
     "preview_activation",
     "rollback_activation",
 ]

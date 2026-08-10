@@ -445,3 +445,116 @@ def test_journal_receipts_are_immutable(tmp_path):
     assert rows[0]["kind"] == "apply"
     assert rows[1]["kind"] == "rollback"
     assert rows[1]["applies_receipt_id"] == receipt["receipt_id"]
+
+
+# --- FC-204: map pre-existing active rows to a legal cohort/epoch ----------
+
+
+def _seed_active_legacy(store, *, epoch: str = "epoch-remediation-2026-08-09"):
+    """Rows activated before FC-203 existed (no journal entry)."""
+    ids = _seed(store)
+    with store.transaction() as conn:
+        for aid in ids:
+            conn.execute(
+                "UPDATE source_metadata_assertions SET visibility_state='active', "
+                "activation_epoch=? WHERE assertion_id=?",
+                (epoch, aid),
+            )
+    return ids
+
+
+def test_map_existing_activation_to_canary_cohort(tmp_path):
+    from company_wiki.source_catalog.activation import (
+        journal_rows,
+        map_existing_activation,
+    )
+
+    store = CatalogStore(tmp_path / "catalog.sqlite3")
+    ids = _seed_active_legacy(store)
+    receipt = map_existing_activation(
+        store,
+        epoch="epoch-canary-2026-08-10",
+        cohort="canary-2026-08-10",
+        assertion_ids=ids,
+        policy_hash=POLICY_HASH,
+        reviewer="fc204-operator",
+        reason="user change-window 2026-08-10: map remediation rows to canary cohort",
+        current_policy_hash=POLICY_HASH,
+    )
+    assert receipt["kind"] == "apply"
+    assert receipt["cohort"] == "canary-2026-08-10"
+    assert receipt["epoch"] == "epoch-canary-2026-08-10"
+    for aid in ids:
+        row = _assertion_row(store, aid)
+        assert row["visibility_state"] == "active"
+        assert row["activation_epoch"] == "epoch-canary-2026-08-10"
+        assert row["cohort"] == "canary-2026-08-10"
+    rows = journal_rows(store)
+    assert len(rows) == 1
+    assert rows[0]["cohort"] == "canary-2026-08-10"
+
+
+def test_map_existing_activation_unknown_id_fails_closed(tmp_path):
+    from company_wiki.source_catalog.activation import (
+        ActivationError,
+        map_existing_activation,
+    )
+
+    store = CatalogStore(tmp_path / "catalog.sqlite3")
+    ids = _seed_active_legacy(store)
+    with pytest.raises(ActivationError):
+        map_existing_activation(
+            store,
+            epoch="epoch-canary-2026-08-10",
+            cohort="canary-2026-08-10",
+            assertion_ids=[ids[0], "no-such-id"],
+            policy_hash=POLICY_HASH,
+            reviewer="fc204-operator",
+            reason="should fail",
+            current_policy_hash=POLICY_HASH,
+        )
+    # nothing changed
+    assert _assertion_row(store, ids[0])["activation_epoch"] == "epoch-remediation-2026-08-09"
+
+
+def test_map_existing_activation_stale_policy_hash_rejected(tmp_path):
+    from company_wiki.source_catalog.activation import (
+        ActivationError,
+        map_existing_activation,
+    )
+
+    store = CatalogStore(tmp_path / "catalog.sqlite3")
+    ids = _seed_active_legacy(store)
+    with pytest.raises(ActivationError):
+        map_existing_activation(
+            store,
+            epoch="epoch-canary-2026-08-10",
+            cohort="canary-2026-08-10",
+            assertion_ids=ids,
+            policy_hash="b" * 64,
+            reviewer="fc204-operator",
+            reason="stale",
+            current_policy_hash=POLICY_HASH,
+        )
+    assert _assertion_row(store, ids[0])["activation_epoch"] == "epoch-remediation-2026-08-09"
+
+
+def test_map_existing_activation_rejects_non_active_rows(tmp_path):
+    from company_wiki.source_catalog.activation import (
+        ActivationError,
+        map_existing_activation,
+    )
+
+    store = CatalogStore(tmp_path / "catalog.sqlite3")
+    ids = _seed(store)  # rows are shadow (never activated)
+    with pytest.raises(ActivationError):
+        map_existing_activation(
+            store,
+            epoch="epoch-canary-2026-08-10",
+            cohort="canary-2026-08-10",
+            assertion_ids=ids,
+            policy_hash=POLICY_HASH,
+            reviewer="fc204-operator",
+            reason="not active",
+            current_policy_hash=POLICY_HASH,
+        )
