@@ -1,0 +1,102 @@
+{
+  "schema_version": "2.0",
+  "fc_id": "FC-403",
+  "implementer_receipt_sha256": "d12e499ea8c0dee0afcb44d5003f27f6eb5b66fd60d822e70602906aebc9a00c",
+  "reviewer_identity": "reviewer-fc403-independent",
+  "clean_checkout": true,
+  "base_triplet": {
+    "revenue": "4ecbe15899db0b68b93a08648923c93ce8a214fc",
+    "filing": "d5e87237bd976b61c0d41127a8090b66031d4a72",
+    "wiki": "8caedf16ce2c6cd536c39aee1bc4fb027c339e09"
+  },
+  "result_triplet": {
+    "revenue": "4ecbe15899db0b68b93a08648923c93ce8a214fc",
+    "filing": "d5e87237bd976b61c0d41127a8090b66031d4a72",
+    "wiki": "8caedf16ce2c6cd536c39aee1bc4fb027c339e09"
+  },
+  "replayed_command_ids": [
+    "fc403.focused-7",
+    "fc403.full-suite-2086-2pre",
+    "fc403.ruff-3-changed-files",
+    "revenue.governance.receipt-validator"
+  ],
+  "scenario_results": [
+    {
+      "id": "MIG-05",
+      "status": "passed",
+      "note": "Proposal/approval separation verified by code read + tests: create_proposal binds source bytes hash (content_sha256), per-field evidence (origin + source_pointer), proposed_fields, and policy_hash, and writes NO assertion; approve_proposal requires an existing persisted proposal (unknown proposal_id -> RemediationError). test_approval_requires_existing_proposal and test_proposal_requires_reviewer_evidence_bundle green in fresh replay."
+    },
+    {
+      "id": "SAFE-03",
+      "status": "passed",
+      "note": "Unprovable provenance cannot be approved: create_proposal requires field_evidence with origin for every proposed field (missing entry -> RemediationError); approval consumes only the persisted evidence bundle. Tested in fresh replay (test_proposal_requires_reviewer_evidence_bundle + mutation b surviving while evidence binding unchanged)."
+    },
+    {
+      "id": "SAFE-04",
+      "status": "passed",
+      "note": "Fail-closed verified adversarially: placeholder 64-char non-hex hash, short 6-char hash, and stale approval policy hash all rejected (RemediationError). Mutation a (drop create_proposal policy check) killed by test_proposal_placeholder_policy_hash_rejected + test_proposal_short_policy_hash_rejected; mutation b (drop approval stale check) killed by test_approval_wrong_policy_hash_rejected."
+    }
+  ],
+  "mutation_results": [
+    {
+      "id": "FC-403-M1",
+      "mutation": "create_proposal policy-hash check replaced with `if False:`",
+      "killed": true,
+      "killing_tests": [
+        "test_proposal_placeholder_policy_hash_rejected",
+        "test_proposal_short_policy_hash_rejected"
+      ],
+      "observed": "2 failed, 5 passed"
+    },
+    {
+      "id": "FC-403-M2",
+      "mutation": "approve_proposal stale-policy check replaced with `if False:`",
+      "killed": true,
+      "killing_tests": [
+        "test_approval_wrong_policy_hash_rejected"
+      ],
+      "observed": "1 failed, 6 passed"
+    },
+    {
+      "id": "FC-403-M3",
+      "mutation": "approval shadow UPDATE changed visibility_state='shadow' -> 'active'",
+      "killed": true,
+      "killing_tests": [
+        "test_approval_creates_shadow_assertion_only"
+      ],
+      "observed": "1 failed, 6 passed"
+    }
+  ],
+  "side_effect_reconciliation": {
+    "passed": true,
+    "note": "FC-403 is additive code + schema (remediation_proposals table). No downloads, no external root writes, no catalog mutations, no llm/parser calls in the diff (git diff shows only the 3 allowed files + the implementer receipt itself; llm_cost_log.csv absent). Fresh-DB runtime check confirms remediation_proposals table is created at CatalogStore init."
+  },
+  "codegraph_reachability": {
+    "passed": true,
+    "note": "remediation proposal/approval is the review workflow seam: create_proposal/approve_proposal in src/company_wiki/source_catalog/remediation.py have ZERO production callers (only tests/contract/test_remediation_workflow_fc403.py imports the module; grep across src/ scripts/ tests/ confirmed). Pre-existing src/company_wiki/proposal.py contains an unrelated Proposal-class create_proposal (test-called, not part of FC-403 diff) - naming note only. CodeGraph index at main repo HEAD (same 8caedf1) has no remediation.py symbols yet (index lag); direct grep + runtime checks used."
+  },
+  "rollback": {
+    "required": false,
+  "passed": true,
+  "note": "Additive proposal/approval module + remediation_proposals table + tests; revert = revert commit 6ead9494."
+  },
+  "unresolved_findings": [
+    {
+      "severity": "info",
+      "finding": "company-wiki has no origin/fcap remote branch (only origin/master); worktree is detached at 8caedf16. Recorded informational per procedure.",
+      "recovery": "none"
+    },
+    {
+      "severity": "info",
+      "finding": "2 pre-existing PORT-01 failures reproduced fresh in full suite: tests/contract/test_check_unique_test_symbols.py::test_duplicate_test_definition_fails and ::test_syntax_error_is_reported_as_failure (UnicodeDecodeError: 'utf-8' codec can't decode byte 0xd4 in subprocess reader thread - Windows GBK/OEM encoding issue, FC-1205 owner). Same 2 tests fail at base commit 9e65dc46 in isolation; unrelated to FC-403. Full suite: 2086 passed / 2 failed (529.39s).",
+      "recovery": "FC-1205"
+    },
+    {
+      "severity": "info",
+      "finding": "scripts/wu904_remediation_restore.py retains hardcoded REVIEWER=\"user-approved-2026-08-09\" and POLICY_HASH=\"plan-hash-2026-08-09\" constants. The no-hardcoded-patterns test scopes src/ only (src_dir.rglob within <repo>/src, skipping test_/__ files) and passes; the script lives under scripts/, outside src/, so it is not covered by the FC-403 test. The docstring in remediation.py mentions the forbidden patterns with '*' suffix (documentation, not values) and does not match the test regexes which require a trailing digit.",
+      "recovery": "FC-1201/FC-1202 cleanup (hardcode removal)"
+    }
+  ],
+  "verdict": "accepted",
+  "reviewed_at": "2026-08-10"
+}
