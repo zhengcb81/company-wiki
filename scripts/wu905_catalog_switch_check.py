@@ -33,6 +33,10 @@ from company_wiki.source_catalog.flags import (  # noqa: E402
     atomic_rollback,
     validate_flag_state,
 )
+from company_wiki.source_catalog.runtime_policy import (  # noqa: E402
+    RuntimePolicyError,
+    load_runtime_policy,
+)
 
 CATALOG = Path(r"C:\Users\郑曾波\Projects\company-wiki\.source_catalog\catalog.sqlite3")
 
@@ -237,17 +241,26 @@ def main() -> int:
                 "(exact/latest/bundle) run in CI against contract fixtures.",
     }
 
-    # --- Step 7: flag rollback retention ---
-    flags = {"v2_scan_shadow": False, "v2_persist_assertions": False,
-             "v2_resolve_shadow": False, "v2_resolve_active": False,
-             "v2_bundle_active": False, "legacy_bridge_enabled": True}
-    problems = validate_flag_state(flags)
-    rolled = atomic_rollback(flags, disable=("v2_resolve_active",))
-    report["steps"]["7_flag_rollback"] = {
-        "current_flags": flags,
-        "validation_problems": problems,
-        "rollback_roundtrip_stable": rolled == flags,
-    }
+    # --- Step 7: flag rollback retention (FC-201: snapshot is the source) ---
+    try:
+        snapshot = load_runtime_policy(CATALOG.parent / "runtime_policy.json")
+    except RuntimePolicyError as exc:
+        report["steps"]["7_flag_rollback"] = {
+            "error": f"runtime policy snapshot unavailable (fail closed): {exc}",
+        }
+        problems = [f"runtime_policy_snapshot_unavailable: {exc}"]
+        rolled = None
+        flags = {}
+    else:
+        flags = snapshot["flags"]
+        problems = validate_flag_state(flags)
+        rolled = atomic_rollback(flags, disable=("v2_resolve_active",))
+        report["steps"]["7_flag_rollback"] = {
+            "current_flags": flags,
+            "snapshot_sha256": snapshot["snapshot_sha256"],
+            "validation_problems": problems,
+            "rollback_roundtrip_stable": rolled == flags,
+        }
 
     con.close()
     passed = not diffs and not problems and integrity is not None

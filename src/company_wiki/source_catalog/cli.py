@@ -571,6 +571,26 @@ def _parser() -> argparse.ArgumentParser:
         "startup-status", help="show Windows logon task status"
     )
     startup.add_argument("--task-name", default=DEFAULT_TASK_NAME)
+
+    runtime_policy = subparsers.add_parser(
+        "runtime-policy",
+        help="show or apply the persistent RuntimePolicySnapshot (FC-201)",
+    )
+    runtime_policy_sub = runtime_policy.add_subparsers(
+        dest="policy_action", required=True
+    )
+    runtime_policy_sub.add_parser(
+        "show", help="load and print the current snapshot (fails closed when absent)"
+    )
+    policy_apply = runtime_policy_sub.add_parser(
+        "apply", help="compare-and-swap apply a new snapshot payload"
+    )
+    policy_apply.add_argument(
+        "--file",
+        type=Path,
+        required=True,
+        help="path to a snapshot payload JSON (schema 1.0; snapshot_sha256 optional)",
+    )
     return parser
 
 
@@ -944,6 +964,36 @@ def main(argv: Sequence[str] | None = None) -> int:
                 if identity
                 else ensured
             )
+        elif args.command == "runtime-policy":
+            from .runtime_policy import (
+                RuntimePolicyError,
+                build_snapshot,
+                load_runtime_policy,
+                save_runtime_policy_cas,
+            )
+
+            policy_path = config.catalog_dir / "runtime_policy.json"
+            if args.policy_action == "show":
+                result = load_runtime_policy(policy_path)
+            else:  # apply
+                payload_path = args.file
+                if not payload_path.is_absolute():
+                    payload_path = project_root / payload_path
+                payload = json.loads(payload_path.read_text(encoding="utf-8"))
+                built = build_snapshot(payload)
+                try:
+                    current = load_runtime_policy(policy_path)
+                    expected = current["snapshot_sha256"]
+                except RuntimePolicyError:
+                    expected = None  # first write
+                new_hash = save_runtime_policy_cas(
+                    policy_path, built, expected_hash=expected
+                )
+                result = {
+                    "applied": True,
+                    "snapshot_sha256": new_hash,
+                    "path": str(policy_path),
+                }
         elif args.command == "import-portfolio":
             identity = identify_company() if args.company_query else None
             resolved = identity.resolved if identity else None

@@ -1,0 +1,101 @@
+{
+  "schema_version": "2.0",
+  "fc_id": "FC-201",
+  "status": "independent_review",
+  "mode": "honest-implementer",
+  "base_triplet": {
+    "revenue": "e7c8114c048be08ce35d600764d1b61511d7afc7",
+    "filing": "d5e87237bd976b61c0d41127a8090b66031d4a72",
+    "wiki": "453f9584be64b3a78606aca42c498c93a19fe95e"
+  },
+  "result_triplet": {
+    "revenue": "PENDING",
+    "filing": "d5e87237bd976b61c0d41127a8090b66031d4a72",
+    "wiki": "PENDING"
+  },
+  "plan_sha256": "158fc1e1e4231e3c2dc71822a58931fdca64eff79fc0d4e27b8276a397f4c78a",
+  "policy_sha256": "not-applicable",
+  "allowed_files": [
+    "company-wiki/src/company_wiki/source_catalog/runtime_policy.py",
+    "company-wiki/tests/contract/test_runtime_policy.py",
+    "company-wiki/src/company_wiki/source_catalog/cli.py",
+    "company-wiki/scripts/wu905_catalog_switch_check.py"
+  ],
+  "changed_files": [
+    "company-wiki/src/company_wiki/source_catalog/runtime_policy.py",
+    "company-wiki/tests/contract/test_runtime_policy.py",
+    "company-wiki/src/company_wiki/source_catalog/cli.py",
+    "company-wiki/scripts/wu905_catalog_switch_check.py"
+  ],
+  "dependency_receipts": [
+    "assurance/fc/FC-104/11_implementer_receipt.json (accepted 2026-08-10)"
+  ],
+  "command_registry_sha256": "215b8077169126b2c4a5eca9d8d6237f291757c2559f6ae6e0ae8ff1c806b089",
+  "scenario_results": [
+    {"id": "CTRL-01", "status": "passed", "note": "flag=false hides active rows at snapshot seam (test_ctrl01_flag_false_hides_active_rows); resolver SQL wiring is FC-202"},
+    {"id": "CTRL-02", "status": "passed", "note": "epoch mismatch invisible (test_ctrl02_epoch_mismatch_hides_rows)"},
+    {"id": "CTRL-05", "status": "passed", "note": "request pins stable snapshot; file change mid-request does not mutate loaded copy (test_ctrl05_request_snapshot_stable_when_file_changes)"}
+  ],
+  "commands": [
+    {
+      "command": "python -m pytest tests/contract/test_runtime_policy.py -q",
+      "exit_code": 0,
+      "result": "16 passed",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "python -m pytest tests/contract/test_runtime_policy.py tests/contract/test_policy_and_flags.py tests/contract/test_visibility_bridge.py -q",
+      "exit_code": 0,
+      "result": "29 passed",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "python -m pytest tests/integration -q",
+      "exit_code": 0,
+      "result": "10 passed",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "python -m pytest tests/ -q",
+      "exit_code": 0,
+      "result": "PENDING_FILL_AT_GATE",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "ruff check src/company_wiki/source_catalog/runtime_policy.py src/company_wiki/source_catalog/cli.py scripts/wu905_catalog_switch_check.py tests/contract/test_runtime_policy.py",
+      "exit_code": 0,
+      "result": "All checks passed",
+      "cwd": "company-wiki"
+    }
+  ],
+  "side_effect_counts": {
+    "downloads": 0,
+    "external_root_writes": 0,
+    "catalog_mutations": 0,
+    "llm_calls": 0,
+    "parser_calls": 0
+  },
+  "codegraph": {
+    "production_callers_before": 0,
+    "production_callers_after": 2,
+    "note": "load_runtime_policy/save_runtime_policy_cas: production callers = cli.py runtime-policy command + scripts/wu905_catalog_switch_check.py step 7 (was a hardcoded dict; now snapshot-driven, fail closed). Resolver/scan wiring is FC-202/FC-205."
+  },
+  "mutation": {
+    "id": "FC-201-M",
+    "killed": true,
+    "details": "M1 flag flip without rehash -> hash mismatch killed; M2 policy_hash tamper -> killed; M3 self-consistent rehash of illegal flag combo -> dependency rule killed. 14 unit tests + 2 CLI tests all green."
+  },
+  "rollback": {
+    "required": false,
+    "proved": true,
+    "note": "New module + CLI branch + wu905 step-7 rewrite; revert = remove files + revert commits. Snapshot file itself is the mutable production state; CAS protects concurrent flips."
+  },
+  "review": {
+    "reviewer": "",
+    "reviewer_receipt_sha256": "",
+    "decision": "pending",
+    "reviewed_at": "",
+    "note": "honest-implementer: awaits independent reviewer per independent_review_protocol.md"
+  },
+  "provisional_note": "result_triplet and full-suite command result to be filled at the gate after the full wiki suite completes; user dirty file llm_cost_log.csv untouched and unstaged."
+}
