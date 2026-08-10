@@ -1,0 +1,98 @@
+{
+  "schema_version": "2.0",
+  "fc_id": "FC-304",
+  "status": "independent_review",
+  "mode": "honest-implementer",
+  "base_triplet": {
+    "revenue": "e05535852acf6ff691c2806b51a046964e2a2143",
+    "filing": "d5e87237bd976b61c0d41127a8090b66031d4a72",
+    "wiki": "ed3da079bb7049c3cf00a4656054c7b166a726d9"
+  },
+  "result_triplet": {
+    "revenue": "PENDING",
+    "filing": "d5e87237bd976b61c0d41127a8090b66031d4a72",
+    "wiki": "PENDING"
+  },
+  "plan_sha256": "158fc1e1e4231e3c2dc71822a58931fdca64eff79fc0d4e27b8276a397f4c78a",
+  "policy_sha256": "not-applicable",
+  "allowed_files": [
+    "company-wiki/src/company_wiki/source_catalog/architecture_gate.py",
+    "company-wiki/tests/contract/test_future_root_config_only.py"
+  ],
+  "changed_files": [
+    "company-wiki/src/company_wiki/source_catalog/architecture_gate.py",
+    "company-wiki/tests/contract/test_future_root_config_only.py"
+  ],
+  "dependency_receipts": [
+    "company-wiki/assurance/fc/FC-303/11_implementer_receipt.json (accepted 2026-08-10)"
+  ],
+  "command_registry_sha256": "215b8077169126b2c4a5eca9d8d6237f291757c2559f6ae6e0ae8ff1c806b089",
+  "scenario_results": [
+    {
+      "id": "EX-08",
+      "status": "passed",
+      "note": "future_lake root config-only: 2.x config load -> v2 shadow scan -> candidates; snapshot export carries future_lake with explicit fields; unregistered adapter fails config load (no kind-guessing fallback)"
+    },
+    {
+      "id": "POL-01",
+      "status": "passed",
+      "note": "architecture gate no_root_specific_hardcode: no production file outside legacy owners/policy modules hardcodes root IDs/kinds/Dropbox; adversarial evil module tripped"
+    }
+  ],
+  "commands": [
+    {
+      "command": "python -m pytest tests/contract/test_future_root_config_only.py -q",
+      "exit_code": 0,
+      "result": "5 passed",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "python -m pytest tests/contract/test_future_root_config_only.py tests/contract/test_architecture_gate.py -q",
+      "exit_code": 0,
+      "result": "12 passed",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "python -m pytest tests/ -q",
+      "exit_code": 0,
+      "result": "PENDING_FILL_AT_GATE",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "ruff check src/company_wiki/source_catalog/architecture_gate.py tests/contract/test_future_root_config_only.py",
+      "exit_code": 0,
+      "result": "All checks passed",
+      "cwd": "company-wiki"
+    }
+  ],
+  "side_effect_counts": {
+    "downloads": 0,
+    "external_root_writes": 0,
+    "catalog_mutations": 0,
+    "llm_calls": 0,
+    "parser_calls": 0
+  },
+  "codegraph": {
+    "production_callers_before": 0,
+    "production_callers_after": 0,
+    "note": "no_root_specific_hardcode is the CI gate itself (test-called); config-only future root flows through existing production seams (policy_2x loader, adapter_dispatch, scanner v2 shadow) — zero product-code edits for a new root."
+  },
+  "mutation": {
+    "id": "FC-304-M",
+    "killed": true,
+    "details": "2 mutations killed: remove-unknown-adapter-check (future root with unregistered adapter must fail config load), remove-dropbox-token (gate must still catch root hardcodes)."
+  },
+  "rollback": {
+    "required": false,
+    "proved": true,
+    "note": "Additive gate function + tests; revert = revert commit."
+  },
+  "review": {
+    "reviewer": "",
+    "reviewer_receipt_sha256": "",
+    "decision": "pending",
+    "reviewed_at": "",
+    "note": "honest-implementer: awaits independent reviewer per independent_review_protocol.md"
+  },
+  "provisional_note": "result_triplet to be sealed after commit."
+}

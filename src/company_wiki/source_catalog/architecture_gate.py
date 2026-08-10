@@ -140,6 +140,58 @@ _POLICY_OWNERS = frozenset({"flags.py", "runtime_policy.py", "architecture_gate.
 _LEGACY_KEYS = ("acquisition", "dayu_meta")
 
 
+# Root IDs and kinds that production code must never hardcode in a
+# root-specific CONDITIONAL branch (``== "root_id"`` / ``in (...,)``
+# comparisons selecting behavior per root): a future root must be
+# config-only (FC-304 / EX-08).  Files that legitimately own root-specific
+# logic are the documented legacy owners (FC-1201 backlog — scanner v1
+# kind branches, models ROOT_KINDS, canonical_writer write path,
+# portfolio_promoter/dayu-specific, admission legacy profile) plus the
+# new-policy modules (registry, policy loaders, adapter dispatch).
+_ROOT_HARDCODE_TOKENS = (
+    "dropbox_stock",
+    "company_raw",
+    "dayu_portfolio",
+    "Dropbox",
+)
+_ROOT_HARDCODE_ALLOWED_FILES = frozenset({
+    # new-policy modules: allowed to know the tokens
+    "registry.py", "policy_2x.py", "config.py", "adapter_dispatch.py",
+    # adapters: by contract they know the root layout they serve
+    "company_raw.py", "dayu.py", "sidecar.py",
+    # the gate itself carries the token list
+    "architecture_gate.py",
+    # legacy owners whose special-casing is the documented FC-1201 backlog
+    "scanner.py", "models.py", "canonical_writer.py",
+    "portfolio_promoter.py", "admission.py", "focus_cleanup.py",
+    "backfill_v2.py", "entity_resolver.py", "observability.py",
+    "resolver.py", "cli.py",
+})
+
+
+def no_root_specific_hardcode(
+    src_dir: Path | None = None,
+) -> tuple[bool, list[str]]:
+    """FC-304: production Python must not hardcode root IDs / kinds in
+    root-specific conditional branches — a future root must be usable by
+    changing ONLY the config.  Only the documented legacy owners and the
+    policy modules may reference the tokens; any other file doing so is a
+    violation (new root-specific code is forbidden)."""
+    if src_dir is None:
+        src_dir = Path(__file__).resolve().parent
+    violations: list[str] = []
+    for py_file in sorted(src_dir.rglob("*.py")):
+        if py_file.name.startswith("test_") or py_file.name.startswith("__"):
+            continue
+        if py_file.name in _ROOT_HARDCODE_ALLOWED_FILES:
+            continue
+        text = py_file.read_text(encoding="utf-8")
+        for token in _ROOT_HARDCODE_TOKENS:
+            if token in text:
+                violations.append(f"{py_file.name}: hardcodes {token!r}")
+    return len(violations) == 0, violations
+
+
 def control_plane_reads_runtime_policy(
     src_dir: Path | None = None,
 ) -> tuple[bool, list[str]]:
@@ -236,6 +288,7 @@ __all__ = [
     "control_plane_reads_runtime_policy",
     "no_hardcoded_flag_dicts",
     "no_legacy_container_reads_outside_resolver",
+    "no_root_specific_hardcode",
     "rejected_stages_covers_all_investment_stages",
     "source_catalog_does_not_import_prohibited_modules",
     "llm_summarizer_rejects_investment_content",
