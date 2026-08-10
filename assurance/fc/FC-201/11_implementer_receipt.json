@@ -46,7 +46,7 @@
     {
       "command": "python -m pytest tests/contract/test_runtime_policy.py tests/contract/test_policy_and_flags.py tests/contract/test_visibility_bridge.py -q",
       "exit_code": 0,
-      "result": "29 passed",
+      "result": "31 passed (corrected at closure from 29: 2 CLI tests added after receipt authoring; reviewer replay confirmed 31, all-pass exit 0)",
       "cwd": "company-wiki"
     },
     {
@@ -91,11 +91,11 @@
     "note": "New module + CLI branch + wu905 step-7 rewrite; revert = remove files + revert commits. Snapshot file itself is the mutable production state; CAS protects concurrent flips."
   },
   "review": {
-    "reviewer": "",
-    "reviewer_receipt_sha256": "",
-    "decision": "pending",
-    "reviewed_at": "",
-    "note": "honest-implementer: awaits independent reviewer per independent_review_protocol.md"
+    "reviewer": "reviewer-fc201-independent",
+    "reviewer_receipt_sha256": "886fb62634e849c7ef0fae89db28de774ac1eb3c9ee4e5060eb705dc1b1d0bab",
+    "decision": "accepted",
+    "reviewed_at": "2026-08-10",
+    "note": "Independent reviewer (clean worktree 111891b, distinct identity) verified triplets, sealing hashes, diff scope, replayed focused + integration + full suite (1991 passed / 2 pre-existing PORT-01), 4 mutation replays killed (hash tamper, rehashed illegal combo, placeholder policy hash, CLI fail-closed), CodeGraph production callers=2; verdict accepted. Stale combined-command count (29) corrected to 31 at closure per reviewer finding."
   },
   "provisional_note": "result_triplet and full-suite command result to be filled at the gate after the full wiki suite completes; user dirty file llm_cost_log.csv untouched and unstaged."
 }

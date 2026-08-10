@@ -1,0 +1,36 @@
+{
+  "schema_version": "2.0",
+  "fc_id": "FC-201",
+  "implementer_receipt_sha256": "5c080a4aa1bd34938119fc37c253ff64790e95214e4d167769c3e22128f79735",
+  "reviewer_identity": "reviewer-fc201-independent",
+  "clean_checkout": true,
+  "base_triplet": {
+    "revenue": "e7c8114c048be08ce35d600764d1b61511d7afc7",
+    "filing": "d5e87237bd976b61c0d41127a8090b66031d4a72",
+    "wiki": "111891b7c0f4ad536d58fc8572019e03e15e173c"
+  },
+  "result_triplet": {
+    "revenue": "e7c8114c048be08ce35d600764d1b61511d7afc7",
+    "filing": "d5e87237bd976b61c0d41127a8090b66031d4a72",
+    "wiki": "111891b7c0f4ad536d58fc8572019e03e15e173c"
+  },
+  "replayed_command_ids": ["wiki.integration", "wiki.unit.full"],
+  "scenario_results": [
+    {"id": "CTRL-01", "status": "passed", "note": "fresh replay test_ctrl01_flag_false_hides_active_rows: v2_resolve_active=false -> reader_mode v1, active v2 row invisible, legacy visible; resolver SQL wiring is FC-202"},
+    {"id": "CTRL-02", "status": "passed", "note": "fresh replay test_ctrl02_epoch_mismatch_hides_rows: epoch-1 row hidden under current_epoch=epoch-2"},
+    {"id": "CTRL-05", "status": "passed", "note": "fresh replay test_ctrl05_request_snapshot_stable_when_file_changes: pinned snapshot copy survives mid-request file flip"}
+  ],
+  "mutation_results": [
+    {"id": "FC-201-M-review", "killed": true, "detail": "replayed all FC-201-M mutations plus CLI: (a) flag flip without rehash -> hash mismatch RuntimePolicyError; (b) self-consistent rehash of illegal combo v2_resolve_active without v2_resolve_shadow -> dependency rule killed at build AND at load; (c) policy_hash=placeholder -> rejected; (d) CLI show on missing snapshot exit=1 (fail closed), apply exit=0, show roundtrip exit=0 with valid 64-hex snapshot_sha256; verdict PASS"}
+  ],
+  "side_effect_reconciliation": {"passed": true, "note": "0 downloads / 0 catalog mutations / 0 llm calls during review; mutation replay confined to fresh temp dirs; live repo dirty file llm_cost_log.csv untouched (status unchanged, only .codegraph analysis cache rebuilt, gitignored); worktree left clean"},
+  "codegraph_reachability": {"passed": true, "note": "fresh CodeGraph index: load_runtime_policy/save_runtime_policy_cas production callers = cli.py runtime-policy command + scripts/wu905_catalog_switch_check.py step 7 (production_callers_after=2, matches receipt); validate_flag_state called from runtime_policy.validate_snapshot (production path); literal grep: no other scripts/ or src/ file hardcodes the six-flag dict (wu905 is the only script referencing v2_resolve_active)"},
+  "rollback": {"required": false, "passed": true, "note": "new module + CLI runtime-policy branch + wu905 step-7 rewrite; no DB or catalog mutation; revert = revert commits + remove files; snapshot file is the mutable production state, CAS-protected against concurrent flips"},
+  "unresolved_findings": [
+    {"severity": "info", "finding": "no origin/fcap remote branch exists (only origin/master at 109a1a6); triplet existence, ancestry (caac3277 ancestor of HEAD 111891b) and receipt sealing verified from local object stores only"},
+    {"severity": "info", "finding": "full suite reports 2 failed / 1991 passed: test_duplicate_test_definition_fails and test_syntax_error_is_reported_as_failure (tests/contract/test_check_unique_test_symbols.py) fail with UnicodeDecodeError 0xd4 in subprocess reader thread (Windows encoding, PORT-01 family, owned by FC-1205); file has zero references to runtime_policy/FC-201, unrelated to this FC"},
+    {"severity": "low", "finding": "implementer receipt records '29 passed' for the combined 3-file contract command; fresh replay yields 31 passed (test_runtime_policy 16 + test_policy_and_flags 10 + test_visibility_bridge 5), exit 0 — documented count is stale, outcome (all pass, exit 0) verified"}
+  ],
+  "verdict": "accepted",
+  "reviewed_at": "2026-08-10"
+}
