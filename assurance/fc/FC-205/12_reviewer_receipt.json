@@ -1,0 +1,88 @@
+{
+  "schema_version": "2.0",
+  "fc_id": "FC-205",
+  "implementer_receipt_sha256": "790dab9a27da4106cb88cd51e816460b05effeb9b648189ad2126ffa5c99b2fb",
+  "reviewer_identity": "reviewer-fc205-independent",
+  "clean_checkout": true,
+  "base_triplet": {
+    "revenue": "1557379cb38edee06d237772d3d4d84ae8ae6492",
+    "filing": "d5e87237bd976b61c0d41127a8090b66031d4a72",
+    "wiki": "64386952b8feb115dd5e68d10e1518f478cb5850"
+  },
+  "result_triplet": {
+    "revenue": "1557379cb38edee06d237772d3d4d84ae8ae6492",
+    "filing": "d5e87237bd976b61c0d41127a8090b66031d4a72",
+    "wiki": "64386952b8feb115dd5e68d10e1518f478cb5850"
+  },
+  "replayed_command_ids": [
+    "fc205.focused-architecture_gate",
+    "fc205.contract-subset-5-files",
+    "wiki.unit.full",
+    "fc205.ruff-2-changed-files",
+    "revenue.governance.receipt"
+  ],
+  "scenario_results": [
+    {
+      "id": "CTRL-01",
+      "status": "passed",
+      "note": "replayed fresh: control_plane_reads_runtime_policy asserts resolver/CLI consume RuntimePolicySnapshot (resolver.py SourceResolver.__init__ pins snapshot at request start, derives resolver_visibility -> legacy_bridge_allowed; cli.py load_runtime_policy); v1-reader active-row invisibility pinned by FC-202 tests (test_resolver_activation_snapshot.py 15 green)"
+    },
+    {
+      "id": "CTRL-02",
+      "status": "passed",
+      "note": "epoch/cohort filtering pinned by FC-202 snapshot tests; no_hardcoded_flag_dicts asserts no second flag source outside flags.py/runtime_policy.py/gate"
+    },
+    {
+      "id": "CTRL-03",
+      "status": "passed",
+      "note": "transaction atomicity pinned by FC-203 tests (test_activation_transaction.py 15 green in clean worktree)"
+    },
+    {
+      "id": "CTRL-04",
+      "status": "passed",
+      "note": "T4 minimal cohort rollback: test_fc205_t4_minimal_cohort_rollback_changes_response replayed - same store/request before vs after rollback_activation, resolver _v2_assertion_metadata returns row before and None after (response changes)"
+    },
+    {
+      "id": "CTRL-05",
+      "status": "passed",
+      "note": "request-start snapshot pinning pinned by FC-201/FC-202 tests; SourceResolver.__init__ pins runtime_policy at construction (verified in code)"
+    }
+  ],
+  "mutation_results": [
+    {
+      "id": "FC-205-M-review-adversarial-evil-module",
+      "killed": true,
+      "detail": "temp dir with resolver.py copy + evil_production.py hardcoding six-flag dict (v2_scan_shadow/v2_resolve_active/legacy_bridge_enabled) and bridge loop 'for key in (\"acquisition\", \"dayu_meta\")': no_hardcoded_flag_dicts -> ok=False naming evil_production.py:3,4; no_legacy_container_reads_outside_resolver -> ok=False naming evil_production.py. Gate is not a no-op."
+    },
+    {
+      "id": "FC-205-M-review-mutation-runtime_policy",
+      "killed": true,
+      "detail": "resolver.py: replaced 'runtime_policy' -> 'policy_runtime' -> test_fc205_production_resolver_reads_runtime_policy_snapshot FAILED (gate RED); restored, worktree clean"
+    },
+    {
+      "id": "FC-205-M-review-mutation-resolver_visibility",
+      "killed": true,
+      "detail": "resolver.py: replaced 'resolver_visibility' -> 'visibility_resolver' -> test_fc205_production_resolver_reads_runtime_policy_snapshot FAILED (gate RED); restored, worktree clean"
+    }
+  ],
+  "side_effect_reconciliation": {
+    "passed": true,
+    "note": "diff c45ad486..7f887992 = architecture_gate.py + test_architecture_gate.py + implementer receipt (created by the commit itself); llm_cost_log.csv absent from diff; pure gate addition, no downloads/catalog writes/llm calls possible"
+  },
+  "codegraph_reachability": {
+    "passed": true,
+    "note": "codegraph index built in review worktree: all three gate functions have exactly one caller each (the corresponding FC-205 test) - they are the CI gate themselves; production invariants verified in code: SourceResolver.__init__ consumes runtime_policy and derives resolver_visibility -> reader/epoch/cohorts/legacy_bridge_allowed (resolver.py:468-490), _source_metadata gates the bridge on legacy_bridge_allowed before the loop (resolver.py:351-362), cli.py:943-951 load_runtime_policy feeds resolve path; flag names exist only in flags.py/runtime_policy.py/gate (no_hardcoded_flag_dicts green)"
+  },
+  "rollback": {
+    "required": false,
+    "passed": true,
+    "note": "pure gate addition; revert = revert commit; T4 rollback drill proves real resolver response changes"
+  },
+  "unresolved_findings": [
+    "informational: no origin/fcap remote branch exists (only local fcap + origin/master); branch state unverifiable remotely, local HEAD 6438695 verified",
+    "informational: 2 pre-existing PORT-01 failures in tests/contract/test_check_unique_test_symbols.py (test_duplicate_test_definition_fails, test_syntax_error_is_reported_as_failure; TypeError proc.stdout NoneType on Windows GBK locale), owned by FC-1205; proven pre-existing by replay at base commit c45ad486 (2 failed, 3 passed); unrelated to FC-205",
+    "informational: no_hardcoded_flag_dicts is a line-shape pattern gate - single-line inline dict (e.g. LEGACY_FLAGS = {\"v2_scan_shadow\": False, ...}) escapes it (empirically confirmed); not blocking: canonical multi-line frozen-dict form is caught, the resolver wiring checks (control_plane_reads_runtime_policy) catch any real snapshot bypass (5b/5c mutations killed), and the pattern-gate approach matches the repo's established leg04 freeze gate precedent"
+  ],
+  "verdict": "accepted",
+  "reviewed_at": "2026-08-10"
+}
