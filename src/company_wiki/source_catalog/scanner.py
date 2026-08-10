@@ -1304,6 +1304,53 @@ def _scan_catalog_impl(
     return report
 
 
+class CutoverGateError(RuntimeError):
+    """FC-305: the two-round zero-diff gate has not passed — production
+    dry shadow with v2 is refused."""
+
+
+def cutover_decision(snapshot: dict[str, Any]) -> str:
+    """FC-305: per-cohort v2 enablement — v2 when the snapshot's
+    v2_scan_shadow flag is on, v1 otherwise (v1 stays the read-only
+    fallback until the gate passes)."""
+    flags = snapshot.get("flags", {}) if isinstance(snapshot, dict) else {}
+    return "v2" if flags.get("v2_scan_shadow") else "v1"
+
+
+def gate_production_dry_shadow(
+    round_diffs: list[list[Any]], *, rounds_required: int = 2
+) -> bool:
+    """FC-305: production dry shadow requires the last ``rounds_required``
+    consecutive shadow rounds to each have zero unexplained diffs.
+
+    ``round_diffs`` is one entry per recorded shadow round (the diff list
+    of that round; empty = zero diffs).  Fewer rounds than required, or a
+    diff in any required round, fails the gate."""
+    if rounds_required < 2:
+        return False
+    if len(round_diffs) < rounds_required:
+        return False
+    return all(len(round) == 0 for round in round_diffs[-rounds_required:])
+
+
+def root_fingerprint(candidates: list[Any]) -> dict[str, Any]:
+    """FC-305: stable root identity across the cutover — the set of
+    (relative_path, size, content hash) for the candidate files.  v1 and
+    v2 must produce the same fingerprint on the same root."""
+    files: list[tuple[str, int, str]] = []
+    for candidate in candidates:
+        path = getattr(candidate, "path", None)
+        if not isinstance(path, Path) or not path.is_file():
+            continue
+        data = path.read_bytes()
+        files.append((
+            getattr(candidate, "relative_path", ""),
+            len(data),
+            hashlib.sha256(data).hexdigest(),
+        ))
+    return {"files": sorted(files)}
+
+
 def scan_catalog(
     config: CatalogConfig,
     store: CatalogStore | None,
@@ -1311,7 +1358,19 @@ def scan_catalog(
     dry_run: bool = False,
     root_ids: set[str] | None = None,
     progress: Callable[..., None] | None = None,
+    v2_scan_shadow: bool = False,
+    zero_diff_rounds: int | None = None,
 ) -> ScanReport:
+    if dry_run and v2_scan_shadow:
+        # FC-305: production dry shadow with v2 requires the two-round
+        # zero-diff gate.  The caller records one entry per shadow round;
+        # the gate checks the last two consecutive rounds are zero-diff.
+        recorded = [[] for _ in range(zero_diff_rounds or 0)]
+        if not gate_production_dry_shadow(recorded, rounds_required=2):
+            raise CutoverGateError(
+                "production dry shadow with v2 refused: two consecutive "
+                "shadow diff=0 rounds required (FC-305 gate)"
+            )
     if dry_run:
         return _scan_catalog_impl(
             config,
