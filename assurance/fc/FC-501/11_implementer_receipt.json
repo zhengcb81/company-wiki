@@ -10,7 +10,7 @@
   },
   "result_triplet": {
     "revenue": "0505b2de118b245bf1cf2a96b043b3e32d020f5e",
-    "filing": "2499be3587bb0f5b38c406c7e9af20f51b6e2672",
+    "filing": "6274be2187b450d14492defd03579d6209d1b1cc",
     "wiki": "6654f8c18663b835766248cb2ab124cc56ac9f6a"
   },
   "plan_sha256": "158fc1e1e4231e3c2dc71822a58931fdca64eff79fc0d4e27b8276a397f4c78a",
@@ -122,7 +122,7 @@
   "mutation": {
     "id": "FC-501-M",
     "killed": true,
-    "details": "1 mutation killed (drop-content-hash-check); filing side: config rejects allowed_handle_roots (6 RED->GREEN)."
+    "details": "1 mutation killed (drop-content-hash-check); filing: config rejects allowed_handle_roots (M3 now killed by BOTH hardened tests — real temp wiki root, RED proven at base; resubmission after reviewer changes_required F1)."
   },
   "rollback": {
     "required": false,
@@ -134,7 +134,7 @@
     "reviewer_receipt_sha256": "",
     "decision": "pending",
     "reviewed_at": "",
-    "note": "honest-implementer: awaits independent reviewer per independent_review_protocol.md"
+    "note": "changes_required (2026-08-10, reviewer-fc501-independent, F1 high): config-schema tests used nonexistent /tmp/x root, M3 not killed, tests never RED. FIXED and resubmitted — hardened tests use real temp wiki root; M3 killed by both; RED proven at base. Old reviewer receipt superseded per protocol section 6."
   },
   "provisional_note": "result_triplet to be sealed after commits."
 }
