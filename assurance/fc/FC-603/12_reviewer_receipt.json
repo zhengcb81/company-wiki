@@ -1,0 +1,117 @@
+{
+  "schema_version": "2.0",
+  "fc_id": "FC-603",
+  "implementer_receipt_sha256": "a8423c4727dbff35a71a782ebfdaf3a999750dd43642fc5851b2d76daa7105ba",
+  "reviewer_identity": "reviewer-fc603-independent",
+  "clean_checkout": true,
+  "base_triplet": {
+    "revenue": "dfa1edb1cf7fd9784aedf22d07e2d63931196c79",
+    "filing": "6274be2187b450d14492defd03579d6209d1b1cc",
+    "wiki": "f7945a95085f5c2d8b6ab3e4b7c461848c4e1421"
+  },
+  "result_triplet": {
+    "revenue": "dfa1edb1cf7fd9784aedf22d07e2d63931196c79",
+    "filing": "6274be2187b450d14492defd03579d6209d1b1cc",
+    "wiki": "f7945a95085f5c2d8b6ab3e4b7c461848c4e1421"
+  },
+  "replayed_command_ids": [
+    "fc603.wiki.contract.focused",
+    "wiki.unit.full",
+    "fc603.ruff.changed",
+    "revenue.governance.receipt"
+  ],
+  "scenario_results": [
+    {
+      "id": "EX-04",
+      "status": "passed",
+      "note": "Replayed fresh in the clean detached worktree (HEAD f7945a9, PYTHONPATH=<worktree>/src, __pycache__ cleared before every run). test_fc603_ex04_same_bytes_one_document_canonical: same PDF bytes in companies/dayu/dropbox -> exactly ONE document (len(doc_ids)==1) with 3 active original_primary locations; resolver returns REUSED_EXACT with canonical_path under companies (priority 10) and exact_duplicate_location_count==2. test_fc603_ex04_priority_beats_alphabetical_root_id: with companies p30 / dayu p10, canonical = dayu/portfolio despite 'company_raw' sorting first alphabetically. Real production path exercised: SourceCatalog.scan -> catalog store -> SourceResolver.resolve -> query_filing_candidates (service.py:179) -> _annotate_locations."
+    },
+    {
+      "id": "EX-05",
+      "status": "passed",
+      "note": "test_fc603_ex05_same_company_year_diff_pdoc_exact_select: two documents same company/year with provider_document_ids acc-1/acc-2 -> each pdoc-bound exact request returns REUSED_EXACT with len(matches)==1 and the matching provider_document_id; no ambiguous merge."
+    },
+    {
+      "id": "EX-06",
+      "status": "passed",
+      "note": "test_fc603_ex06_amended_original_stable_revision_rule: real production build_gap_plan (gap_plan.py:85) with local original 0001-25-000001 + remote original+amended for same period -> reuse=(local original), newer_revision=['0001-25-000099'], missing=(); reversed remote order yields identical plan (deterministic, duck-typed stub candidates match the function's getattr access pattern)."
+    },
+    {
+      "id": "EX-07",
+      "status": "passed",
+      "note": "test_fc603_ex04_canonical_stable_across_scan_order: two SEPARATE catalog databases (tmp/cat_a forward root order vs tmp/cat_b reversed) each with their own source file copies, so the scans cannot share rows; resolver canonical_path + duplicate_group_id + exact_duplicate_location_count identical across scan orders and canonical remains companies. Killed by the combined 2-layer mutation M2 (resolver-path query ORDER BY removed + in-memory sort removed) - proves the test observes scan-order independence of the real machinery."
+    },
+    {
+      "id": "AR-09",
+      "status": "passed",
+      "note": "test_fc603_ar09_artifact_shared_across_roots: real production build_source_bundle (source_bundle.py:53) binds the cross-root duplicate document's artifact keyed by document_id/content_sha256 - one document_id across all three roots, bundle source.document_id == the single shared document id regardless of which root is canonical."
+    }
+  ],
+  "mutation_results": [
+    {
+      "id": "M1",
+      "killed": true,
+      "target": "service.py _annotate_locations sort key: removed `int(item[\"root_priority\"]),` (4-tuple -> 3-tuple (root_id, relative_path, location_id))",
+      "evidence": "test_fc603_ex04_priority_beats_alphabetical_root_id FAILED (1 failed, 5 passed; canonical_path resolved to companies/Acme/... instead of portfolio - alphabetical root_id beat priority); __pycache__ cleared before run; git checkout restored, worktree clean. Note: M1 alone is masked by the other defense layers for scan-order/priority-10 tests - single-layer masking is the documented property."
+    },
+    {
+      "id": "M2",
+      "killed": true,
+      "target": "service.py BOTH: resolver-path locations query ORDER BY changed to `l.document_id, l.rowid` AND _annotate_locations `ordered = sorted(...)` changed to `ordered = list(group)` (combined two-layer mutation; single-layer mutations are masked by the other defense layer)",
+      "evidence": "test_fc603_ex04_priority_beats_alphabetical_root_id FAILED AND test_fc603_ex04_canonical_stable_across_scan_order FAILED (2 failed, 4 passed) - canonical followed insertion/scan order in both catalogs; __pycache__ cleared; git checkout restored, worktree clean"
+    },
+    {
+      "id": "M3",
+      "killed": true,
+      "target": "gap_plan.py: `newest_remote = max(...)` -> `min(...)` (revision rule inverted)",
+      "evidence": "test_fc603_ex06_amended_original_stable_revision_rule FAILED (1 failed, 5 passed; assert [] == ['0001-25-000099'] - the original accession was treated as newest, no newer_revision emitted); __pycache__ cleared; git checkout restored, worktree clean"
+    }
+  ],
+  "side_effect_reconciliation": {
+    "passed": true,
+    "note": "All read-only: downloads=0, external_root_writes=0, catalog_mutations=0, llm_calls=0, parser_calls=0. Every FC-603 test uses tmp_path-only fixtures (catalog db + source files created under pytest temp dirs); nothing touched production roots, the live catalog, or any real file. My review wrote nothing to production: mutations applied only inside the clean worktree and restored via git checkout; the only file I created is this reviewer receipt."
+  },
+  "codegraph_reachability": {
+    "passed": true,
+    "note": "wiki CodeGraph index (company-wiki checkout, 455 indexed python files) verified for the four tested production symbols - all exist at line locations matching the clean worktree: service._annotate_locations (service.py:528), gap_plan.build_gap_plan (gap_plan.py:85), resolver.SourceResolver (resolver.py:464), source_bundle.build_source_bundle (source_bundle.py:53). FC-603 is a test-only FC (git diff 4d1a1730..93150ef = exactly tests/contract/test_cross_root_dedup_fc603.py, 366 insertions, zero production files), so the pinned machinery is unchanged by definition; index staleness relative to this worktree is informational only. The four defense layers verified in the clean tree: (1) resolver-path locations query `ORDER BY l.document_id, r.priority, l.root_id, l.relative_path` (service.py:287), (2) query_documents locations query same ORDER BY (service.py:434), (3) _annotate_locations in-memory `sorted(group, key=(int(root_priority), root_id, relative_path, location_id))` (service.py:550-557), (4) ranked_locations CTE `ROW_NUMBER() OVER (PARTITION BY l.document_id,l.source_id ORDER BY r.priority,l.root_id,l.relative_path,l.location_id)` (service.py:673-680). Resolver path confirmed: SourceResolver.resolve -> self.catalog.query_filing_candidates (resolver.py:525) -> locations query + _annotate_locations."
+  },
+  "rollback": {
+    "required": false,
+    "passed": true,
+    "note": "Test-only FC: zero production changes; revert = revert commit 93150ef (and the receipt-seal commit f7945a9)."
+  },
+  "unresolved_findings": [
+    {
+      "id": "full-suite-exit-code-environment-dependent",
+      "severity": "low",
+      "note": "Implementer receipt records exit_code 0 for `python -m pytest tests/ -q` with result '2142 passed / 2 pre-existing PORT-01 failures'. My fresh full-suite replay in the worktree gave the IDENTICAL counts (2 failed, 2142 passed, 1 skipped in 427.09s) but pytest exit code 1. The discrepancy is environmental: the 2 failing tests (test_check_unique_test_symbols.py::test_duplicate_test_definition_fails, ::test_syntax_error_is_reported_as_failure) fail only when the gate subprocess's stdout cannot be decoded as UTF-8 on a GBK Windows console (PytestUnhandledThreadExceptionWarning: UnicodeDecodeError byte 0xd4) - under a UTF-8 console/codepage they pass and the suite exits 0. Counts, failure identities, and 'zero new failures' all match; not a fabrication, but the exit_code field is codepage-dependent."
+    },
+    {
+      "id": "PORT-01-pre-existing-1",
+      "severity": "pre-existing",
+      "note": "wiki tests/contract/test_check_unique_test_symbols.py::test_duplicate_test_definition_fails FAILED in my fresh full-suite replay (UTF-8 subprocess decode error on GBK Windows console - FC-1205/PORT-01 scope); file untouched by FC-603 diff (only test_cross_root_dedup_fc603.py changed), pre-existing and reproduced identically"
+    },
+    {
+      "id": "PORT-01-pre-existing-2",
+      "severity": "pre-existing",
+      "note": "wiki tests/contract/test_check_unique_test_symbols.py::test_syntax_error_is_reported_as_failure FAILED in my fresh full-suite replay (same PORT-01 UTF-8 subprocess decode, FC-1205 scope); file untouched by FC-603 diff, pre-existing"
+    },
+    {
+      "id": "skip-env-symlink",
+      "severity": "info",
+      "note": "fresh full suite has exactly 1 skip: tests/contract/test_dropbox_root_policy_fc501.py 'symlinks not supported on this host' - environment platform skip in dependency FC-501 test; no FC-603 skip. test_whole_repo_passes_currently in test_check_unique_test_symbols.py PASSED, confirming FC-603 introduced no duplicate test symbols."
+    },
+    {
+      "id": "no-remote-branch",
+      "severity": "info",
+      "note": "fcap result commits (93150ef, f7945a9) exist only on the local fcap branch / review worktree, not on origin (git branch -r shows only origin/master); audit trail preserved locally; release wave will push"
+    },
+    {
+      "id": "codegraph-index-stale",
+      "severity": "info",
+      "note": "wiki CodeGraph index predates this worktree HEAD; FC-603 adds only a test file so the four pinned production symbols are unchanged (verified present at matching lines); production-caller semantics verified by direct source read + fresh test execution"
+    }
+  ],
+  "verdict": "accepted",
+  "reviewed_at": "2026-08-10"
+}
