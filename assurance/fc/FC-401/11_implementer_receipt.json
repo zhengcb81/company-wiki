@@ -90,7 +90,7 @@
   "codegraph": {
     "production_callers_before": 1,
     "production_callers_after": 1,
-    "note": "migration_start/rollback_batch: production callers unchanged (CLI migration tool); FC-401 adds cancel/copy-validation/rollback capabilities to the existing engine."
+    "note": "migration_start/rollback_batch: caller set unchanged by the FC-401 diff (WU-906 drill harness + tests; no src/ production caller at base or result — corrected at closure per reviewer FIND-401-3; production wiring deferred to Phase 4 exit gate authorization)."
   },
   "mutation": {
     "id": "FC-401-M",
@@ -103,11 +103,11 @@
     "note": "rollback_batch is itself the rollback mechanism (MIG-04): batch assertions flip to shadow, records kept, rollback journal recorded; copy-validation runs before apply."
   },
   "review": {
-    "reviewer": "",
-    "reviewer_receipt_sha256": "",
-    "decision": "pending",
-    "reviewed_at": "",
-    "note": "honest-implementer: awaits independent reviewer per independent_review_protocol.md"
+    "reviewer": "reviewer-fc401-independent",
+    "reviewer_receipt_sha256": "f6e1043291cbc12dffed342db373f70b127d3a676285df5f122c11a51ccc77b7",
+    "decision": "accepted",
+    "reviewed_at": "2026-08-10",
+    "note": "Independent reviewer (clean worktree 8bae485, distinct identity) verified triplets, sealing hashes, diff scope, replayed focused + migration suite + full suite (2070 passed / 2 pre-existing PORT-01), 3 mutations killed (cancel guard, copy validation, rollback UPDATE), codegraph note corrected at closure per FIND-401-3; verdict accepted."
   },
   "provisional_note": "result_triplet to be sealed after commit."
 }

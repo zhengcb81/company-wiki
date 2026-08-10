@@ -1,0 +1,100 @@
+{
+  "schema_version": "2.0",
+  "fc_id": "FC-401",
+  "implementer_receipt_sha256": "c39f2843848de818f1203a85b8e75e3db9cc876fea6595ffdbe56b9c3ccaab66",
+  "reviewer_identity": "reviewer-fc401-independent",
+  "clean_checkout": true,
+  "base_triplet": {
+    "revenue": "25c5435cd086af5c840671cc4a2c566fdcbcde74",
+    "filing": "d5e87237bd976b61c0d41127a8090b66031d4a72",
+    "wiki": "8bae485f985949719d10b07aaf8ace8bef5664ea"
+  },
+  "result_triplet": {
+    "revenue": "25c5435cd086af5c840671cc4a2c566fdcbcde74",
+    "filing": "d5e87237bd976b61c0d41127a8090b66031d4a72",
+    "wiki": "8bae485f985949719d10b07aaf8ace8bef5664ea"
+  },
+  "replayed_command_ids": [
+    "fc401.focused-7",
+    "fc401.migration-suite-5-files",
+    "fc401.full-suite",
+    "fc401.ruff-2-changed-files",
+    "revenue.governance.receipt"
+  ],
+  "scenario_results": [
+    {
+      "id": "MIG-01",
+      "status": "passed",
+      "note": "Dry-run unchanged (pre-existing WU-901 mode); batch bounded — test_batch_stays_bounded (100 sources, batch_size=2 -> processed==2) replayed green; no full-table Python load (SQL LIMIT ? on sources)."
+    },
+    {
+      "id": "MIG-02",
+      "status": "passed",
+      "note": "Resume unchanged (journal last_key boundary); cancel after partial batches leaves exactly the committed boundary — test_cancel_after_partial_batches_resumes_cleanly replayed green (2 assertions from batch 1, cancel of batch 2 adds 0)."
+    },
+    {
+      "id": "MIG-03",
+      "status": "passed",
+      "note": "Idempotency unchanged (ON CONFLICT DO NOTHING + assertion-id dedup); cancel=True produces zero writes — test_cancel_prevents_batch_commit replayed green (no assertions, created_assertions==0)."
+    },
+    {
+      "id": "MIG-04",
+      "status": "passed",
+      "note": "rollback_batch: assertions flip to shadow (invisible to resolvers) but are NOT deleted; rollback recorded in migration_rollback_journal; unknown batch fails closed KeyError; code/plan-hash mismatch refuses rollback (ValueError). test_rollback_reverts_batch_keeps_records + test_rollback_unknown_batch_fails_closed replayed green. Registry note: MIG-04 T1/T4 owner is FC-405; FC-401 delivers the engine-level rollback capability used there."
+    },
+    {
+      "id": "MIG-07",
+      "status": "passed",
+      "note": "cancel aborts before any batch writes land (atomic failure); copy validation runs the batch on a temp copy and fails closed (OSError) when the copy target parent is missing — test_copy_validation_runs_batch_on_copy + test_copy_validation_catches_problems replayed green. Registry note: MIG-07 T1 owner is FC-405; FC-401 delivers the engine-level abort/copy-validate capability."
+    }
+  ],
+  "mutation_results": [
+    {
+      "id": "FC-401-M-review-1-drop-cancel-guard",
+      "killed": true,
+      "detail": "Removed the 'if cancel: return MigrationResult(processed=0, created_assertions=0)' guard from migration_start -> test_cancel_prevents_batch_commit FAILED (2 assertions landed in the catalog; 'Left contains 2 more items'). Tree restored via git checkout before next replay."
+    },
+    {
+      "id": "FC-401-M-review-2-drop-copy-validation",
+      "killed": true,
+      "detail": "Removed the entire validate_on_copy block (copy-before-apply, fail-closed parent check, temp-copy recursion + unlink) from migration_start -> test_copy_validation_runs_batch_on_copy FAILED (source catalog received 2 assertions; assert _assertions(catalog) == [] failed). Tree restored via git checkout before next replay."
+    },
+    {
+      "id": "FC-401-M-review-3-drop-rollback-write",
+      "killed": true,
+      "detail": "Removed the UPDATE visibility_state='shadow' loop from rollback_batch -> test_rollback_reverts_batch_keeps_records FAILED (assert ['active','active'] == ['shadow','shadow']); records-kept and journal-row assertions remained active and did not mask the kill. Tree restored via git checkout; final git status clean."
+    }
+  ],
+  "side_effect_reconciliation": {
+    "passed": true,
+    "note": "Code-only additive FC: no downloads, no external root writes, no catalog mutations, no LLM/parser calls (receipt side_effect_counts all 0). Replays used tmp_path/tempfile only; worktree verified clean (git status empty) before and after all replays; llm_cost_log.csv absent from the diff range 36cd215b..3d00d6d4 and untouched."
+  },
+  "codegraph_reachability": {
+    "passed": true,
+    "note": "CodeGraph index fresh at HEAD 8bae485 (448 files / 9131 nodes). migration_start callers: 16 — drills/snapshots/wu906_drill.py (3 sites) + 13 contract tests; NO caller in src/ at base 36cd215b or result 3d00d6d4 (git grep on both commits). rollback_batch: new in FC-401, test-only callers (same engine-stage pattern as FC-305 accepted with findings). The implementer receipt's '(CLI migration tool)' wording is imprecise — no migration command exists in src/company_wiki/source_catalog/cli.py or scripts/; the operational harness is the WU-906 drill script, whose callers are unchanged by this diff (no caller lost, no orphan created). Rollback journal table IS created for fresh DBs: CREATE TABLE IF NOT EXISTS migration_rollback_journal in _ensure_journal, invoked by both migration_start and rollback_batch; proven by tests querying the table on fresh tmp catalogs."
+  },
+  "rollback": {
+    "required": true,
+    "passed": true,
+    "note": "rollback_batch is itself the rollback mechanism (MIG-04): batch assertions flip to shadow (invisible), records kept, rollback recorded in migration_rollback_journal, unknown batch fails closed KeyError, code/plan-hash mismatch refuses rollback; copy validation runs before apply. Verified by reading the full diff, replaying both rollback tests, and mutation-killing the shadow UPDATE loop."
+  },
+  "unresolved_findings": [
+    {
+      "id": "FIND-401-1",
+      "severity": "info",
+      "detail": "No origin/fcap remote branch: wiki code commit 3d00d6d4 and sealing commit 8bae485 exist locally (git cat-file -e OK, result is ancestor of worktree HEAD) but are not pushed anywhere (branches: local fcap + master, origin/master only). Informational; record at closure/release time."
+    },
+    {
+      "id": "FIND-401-2",
+      "severity": "info",
+      "detail": "2 pre-existing PORT-01 failures in full suite, owned by FC-1205, unrelated to FC-401: tests/contract/test_check_unique_test_symbols.py::test_duplicate_test_definition_fails and test_syntax_error_is_reported_as_failure fail with UnicodeDecodeError ('utf-8' codec can't decode byte 0xa1) on subprocess stdout (Windows locale issue in tools/check_unique_test_symbols.py). Full suite: 2070 passed / 2 failed / 0 skipped in 528.43s, exit 1."
+    },
+    {
+      "id": "FIND-401-3",
+      "severity": "info",
+      "detail": "Implementer receipt codegraph note claims 'production_callers_before/after: 1 (CLI migration tool)' — the specific 'CLI migration tool' does not exist (verified via CodeGraph + git grep at both base and result: no src/ caller, no migration command in cli.py, scripts/migrate_raw.py is a different raw-registration tool). The verifiable claim — caller set unchanged by the FC-401 diff (WU-906 drill harness + tests before; same + new FC-401 test file after; no caller lost, no orphan introduced) — holds. Engine-stage FC: production wiring of the migration engine to its CLI/journal is a later-phase concern (Phase 4 exit gate defers production apply to separate authorization)."
+    }
+  ],
+  "verdict": "accepted",
+  "reviewed_at": "2026-08-10"
+}
