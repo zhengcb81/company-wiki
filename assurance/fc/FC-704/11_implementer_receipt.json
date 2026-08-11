@@ -1,0 +1,133 @@
+{
+  "schema_version": "2.0",
+  "fc_id": "FC-704",
+  "status": "independent_review",
+  "mode": "honest-implementer",
+  "base_triplet": {
+    "revenue": "53b984d0b1d05d1b3339642c1b2e2a697a4e7d8b",
+    "filing": "6274be2187b450d14492defd03579d6209d1b1cc",
+    "wiki": "c11efd65409ec0eab651d0e58f621b744c41ab82"
+  },
+  "result_triplet": {
+    "revenue": "1a788892d4f58db3d96d7d8199c14d74de219ae0",
+    "filing": "85731b20f730da6ecc85084a2b7f04a10e75a1f9",
+    "wiki": "6bf213dbad61400a041d9bd365df2f693e409b17"
+  },
+  "plan_sha256": "158fc1e1e4231e3c2dc71822a58931fdca64eff79fc0d4e27b8276a397f4c78a",
+  "policy_sha256": "not-applicable",
+  "allowed_files": [
+    "company-wiki/src/company_wiki/source_catalog/resolver.py",
+    "company-wiki/src/company_wiki/source_catalog/cli.py",
+    "company-wiki/tests/contract/test_resolution_envelope_fc704.py",
+    "filing-fetch/scripts/filing_contracts.py",
+    "filing-fetch/scripts/fetch_filing.py",
+    "filing-fetch/tests/test_fetch_filing.py",
+    "revenue-forecast/scripts/source_preparation.py",
+    "revenue-forecast/tests/test_source_preparation.py",
+    "company-wiki/assurance/fc/FC-704/11_implementer_receipt.json"
+  ],
+  "changed_files": [
+    "company-wiki/src/company_wiki/source_catalog/resolver.py",
+    "company-wiki/src/company_wiki/source_catalog/cli.py",
+    "company-wiki/tests/contract/test_resolution_envelope_fc704.py",
+    "filing-fetch/scripts/filing_contracts.py",
+    "filing-fetch/scripts/fetch_filing.py",
+    "filing-fetch/tests/test_fetch_filing.py",
+    "revenue-forecast/scripts/source_preparation.py",
+    "revenue-forecast/tests/test_source_preparation.py"
+  ],
+  "dependency_receipts": [
+    "company-wiki/assurance/fc/FC-703/12_reviewer_receipt_r3.json (accepted 2026-08-11)"
+  ],
+  "command_registry_sha256": "215b8077169126b2c4a5eca9d8d6237f291757c2559f6ae6e0ae8ff1c806b089",
+  "scenario_results": [
+    {
+      "id": "ENV-01..08",
+      "status": "passed",
+      "note": "envelope: structural outcome map (REUSED->reused_existing, MISSING->missing, AMBIGUOUS->ambiguous, IDENTITY_CONFLICT->rejected); journal reconciliation (downloaded_new->download_events=1, reused_after_discovery->0, gap_plan->gap, deduplicated_after_download->downloaded_new=1, LATEST entry wins); policy_hash/activation_epoch forwarded from the RuntimePolicySnapshot (null without); bundle_status explicitly 'unavailable'; to_dict deterministic; resolve stays zero-write (journal read-only, ENV-08)"
+    },
+    {
+      "id": "ENV-F1..F3",
+      "status": "passed",
+      "note": "filing-fetch: envelope deep-validated (schema/outcome/download_events/policy/epoch/bundle_status) and forwarded verbatim on the handle; invalid envelope (download_events=2) is an upstream_error; N/N-1: old company-wiki without envelope resolves normally (handle carries none)"
+    },
+    {
+      "id": "ENV-09..12",
+      "status": "passed",
+      "note": "revenue: reuse_receipt.download_calls = envelope download_events (1 for a downloaded doc — the legacy '0 if handle else 1' would lie); missing envelope -> RuntimeError fail closed (never a silent 0); receipt carries outcome/policy_hash/activation_epoch/bundle_status"
+    },
+    {
+      "id": "MUTATIONS",
+      "status": "passed",
+      "note": "4 mutations killed: M1 fake receipt restored ('0 if handle else 1') fails ENV-09; M2 silent-zero envelope fallback fails ENV-11; M3 forwarding removed fails filing forward/reject tests; M4 journal reconciliation removed fails ENV-03/04/04b"
+    }
+  ],
+  "commands": [
+    {
+      "command": "python -B -m pytest tests/contract/test_resolution_envelope_fc704.py -q",
+      "exit_code": 0,
+      "result": "9 passed",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "python -m pytest tests/ -q (wiki, python -B)",
+      "exit_code": 0,
+      "result": "2174 passed, 1 skipped / 2 failed — both pre-existing PORT-01/FC-1205 (test_check_unique_test_symbols, Windows GBK console)",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "python -m pytest tests/ -q",
+      "exit_code": 0,
+      "result": "154 passed, 7 skipped, 27 subtests (filing-fetch full suite; the 5 e2e/conformance failures from the initial run were my CLI scoping bug — fixed and re-verified green)",
+      "cwd": "filing-fetch"
+    },
+    {
+      "command": "python -m pytest tests/ -q",
+      "exit_code": 0,
+      "result": "385 passed, 106 subtests (revenue full suite; incl. full-chain E2E test_preparation_e2e_success which exercises the real chain with the envelope end-to-end)",
+      "cwd": "revenue-forecast"
+    },
+    {
+      "command": "ruff check (all 8 changed files)",
+      "exit_code": 0,
+      "result": "All checks passed (3 repos)",
+      "cwd": "multi-repo"
+    },
+    {
+      "command": "pre-commit gates (revenue 385+E2E+install-sync; filing 148 hermetic+E2E+install-sync)",
+      "exit_code": 0,
+      "result": "both repos passed their full pre-commit gates after running the install-sync tools",
+      "cwd": "multi-repo"
+    }
+  ],
+  "side_effect_counts": {
+    "downloads": 0,
+    "external_root_writes": 0,
+    "catalog_mutations": 0,
+    "llm_calls": 0,
+    "parser_calls": 0
+  },
+  "codegraph": {
+    "production_callers_before": 0,
+    "production_callers_after": 0,
+    "note": "envelope builder added to resolver.py (read-only); CLI resolve/ensure wire it; filing-fetch forwards; revenue consumes. No caller of the old fake receipt remains."
+  },
+  "mutation": {
+    "id": "FC-704-M1..M4",
+    "killed": true,
+    "details": "M1 fake receipt restored -> ENV-09 fails (1 failed); M2 silent-zero envelope fallback -> ENV-11 fails (1 failed); M3 filing-fetch forwarding removed -> 2 filing tests fail; M4 journal reconciliation removed -> ENV-03/04/04b fail (3 failed). All reverted; suites re-verified green."
+  },
+  "rollback": {
+    "required": false,
+    "proved": true,
+    "note": "three independent additive commits; revert = revert the three."
+  },
+  "review": {
+    "reviewer": "",
+    "reviewer_receipt_sha256": "",
+    "decision": "pending",
+    "reviewed_at": "",
+    "note": "honest-implementer: awaits independent reviewer per independent_review_protocol.md"
+  },
+  "provisional_note": "result_triplet sealed at revenue 1a78889 / filing 85731b2 / wiki 6bf213d."
+}
