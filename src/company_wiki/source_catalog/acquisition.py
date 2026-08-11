@@ -445,9 +445,35 @@ class AcquisitionCoordinator:
         if request.market is None:
             raise MarketRoutingError("market is required before adapter discovery")
         adapter = self.adapters.for_market(request.market)
+        # FC-805: the real adapters (cninfo requires it) need a fiscal_year
+        # for discovery.  latest_as_of carries none — derive the latest
+        # completed period before as_of (December year-end calendar for
+        # annual reports; other kinds keep the caller's explicit year).
+        discovery_fiscal_year = request.fiscal_year
+        if discovery_fiscal_year is None:
+            try:
+                as_of_year = int(str(request.as_of_date)[:4])
+            except ValueError:
+                as_of_year = None
+            if as_of_year is not None:
+                discovery_fiscal_year = as_of_year - 1
+        discovery_request = SourceRequest(
+            entity=request.entity, market=request.market,
+            security_id=request.security_id,
+            document_kind=request.document_kind,
+            form_type=request.form_type,
+            fiscal_year=discovery_fiscal_year,
+            fiscal_period=request.fiscal_period,
+            language=request.language,
+            provider=request.provider,
+            provider_document_id=request.provider_document_id,
+            as_of_date=request.as_of_date,
+            mode=request.mode,
+            allow_download=request.allow_download,
+        )
         provider_error: str | None = None
         try:
-            discovered = tuple(adapter.discover(request))
+            discovered = tuple(adapter.discover(discovery_request))
         except Exception as exc:  # offline / rate-limit / adapter failure
             provider_error = f"{type(exc).__name__}: {exc}"
             discovered = ()
