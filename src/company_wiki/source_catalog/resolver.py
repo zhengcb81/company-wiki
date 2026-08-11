@@ -364,6 +364,11 @@ class ResolutionEnvelope:
     bundle_status: str
     bundle_hash: str | None = None
     bundle: dict[str, Any] | None = None
+    # FC-905-a: trusted capture/safety evidence — from the review receipt and
+    # the producer_events journal, never fabricated by consumers.
+    prompt_injection_status: str = "not_reviewed"
+    parser_calls: int | None = None
+    llm_calls: int | None = None
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -375,6 +380,9 @@ class ResolutionEnvelope:
             "bundle_status": self.bundle_status,
             "bundle_hash": self.bundle_hash,
             "bundle": self.bundle,
+            "prompt_injection_status": self.prompt_injection_status,
+            "parser_calls": self.parser_calls,
+            "llm_calls": self.llm_calls,
         }
 
 
@@ -384,9 +392,11 @@ def build_resolution_envelope(
     policy_snapshot: dict[str, Any] | None = None,
     journal: Any | None = None,
     bundle: dict[str, Any] | None = None,
+    store: Any | None = None,
 ) -> ResolutionEnvelope:
-    """FC-704 + FC-902: reconcile the resolution against the acquisition
-    journal and attach a snapshot-consistent SourceBundle when available.
+    """FC-704 + FC-902 + FC-905-a: reconcile the resolution against the
+    acquisition journal, attach a snapshot-consistent SourceBundle when
+    available, and carry trusted capture/safety evidence.
 
     Journal entry for ``request_id`` wins (the real outcome, e.g.
     downloaded_new after an ensure); without an entry the outcome is
@@ -398,6 +408,12 @@ def build_resolution_envelope(
     and carries the bundle + hash.  None keeps the honest FC-704
     ``unavailable``.  A malformed bundle (no bundle_hash) raises — fail
     closed, never a faked green.
+
+    ``store`` (FC-905-a, CatalogStore-compatible, read-only): when provided,
+    ``prompt_injection_status`` comes from the document's review receipt
+    (absent receipt -> explicit ``not_reviewed``) and ``parser_calls``/
+    ``llm_calls`` come from the producer_events journal.  Without a store
+    those stay ``not_reviewed`` / None — absent evidence is never fabricated.
     """
     if not isinstance(resolution, ResolutionResult):
         raise TypeError("resolution must be a ResolutionResult")
@@ -432,6 +448,20 @@ def build_resolution_envelope(
         bundle_status = "available"
         bundle_hash = bundle["bundle_hash"]
         bundle_dict = bundle
+    prompt_injection_status = "not_reviewed"
+    parser_calls = None
+    llm_calls = None
+    if store is not None and resolution.matches:
+        from .producer_events import count_producer_events
+        from .prompt_injection import read_prompt_injection_review
+
+        document_id = resolution.matches[0].document_id
+        review = read_prompt_injection_review(store, document_id)
+        if review is not None:
+            prompt_injection_status = review["status"]
+        counts = count_producer_events(store, document_id)
+        parser_calls = counts["parser_calls"]
+        llm_calls = counts["llm_calls"]
     return ResolutionEnvelope(
         envelope_schema_version=RESOLUTION_ENVELOPE_SCHEMA_VERSION,
         outcome=outcome,
@@ -441,6 +471,9 @@ def build_resolution_envelope(
         bundle_status=bundle_status,
         bundle_hash=bundle_hash,
         bundle=bundle_dict,
+        prompt_injection_status=prompt_injection_status,
+        parser_calls=parser_calls,
+        llm_calls=llm_calls,
     )
 
 

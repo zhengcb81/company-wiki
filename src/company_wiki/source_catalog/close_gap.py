@@ -414,7 +414,8 @@ class CloseGapTransaction:
             )
         envelope = build_resolution_envelope(
             resolution, journal=self.journal,
-            bundle=self.catalog.bundle_for_resolution(resolution))
+            bundle=self.catalog.bundle_for_resolution(resolution),
+            store=self.catalog.store)
         return CloseGapResult(
             schema_version=CLOSE_GAP_SCHEMA_VERSION,
             txn_id=txn,

@@ -1016,6 +1016,7 @@ def main(argv: Sequence[str] | None = None) -> int:
                     policy_snapshot=policy,
                     journal=AcquisitionJournal(config.catalog_dir),
                     bundle=get_catalog().bundle_for_resolution(resolution),
+                    store=get_catalog().store,
                 ).to_dict()
             )
             result = (
@@ -1087,6 +1088,7 @@ def main(argv: Sequence[str] | None = None) -> int:
                         journal=AcquisitionJournal(config.catalog_dir),
                         bundle=get_catalog().bundle_for_resolution(
                             ensured.resolution),
+                        store=get_catalog().store,
                     ).to_dict()
                 )
             result = (

@@ -319,6 +319,41 @@ CREATE TABLE IF NOT EXISTS remediation_proposals (
     created_at TEXT NOT NULL,
     status TEXT NOT NULL DEFAULT 'proposed'
 );
+CREATE TABLE IF NOT EXISTS producer_events (
+    event_id TEXT PRIMARY KEY,
+    document_id TEXT NOT NULL,
+    artifact_role TEXT NOT NULL,
+    producer_name TEXT NOT NULL,
+    producer_version TEXT NOT NULL,
+    event_type TEXT NOT NULL,
+    created_at TEXT NOT NULL
+    -- No FK on document_id: the journal is append-only history and must
+    -- NEVER block artifact writes or document cleanup (focus_cleanup deletes
+    -- orphan documents; a journal FK would raise IntegrityError).
+);
+CREATE INDEX IF NOT EXISTS idx_producer_events_document
+    ON producer_events(document_id);
+-- FC-905-a: every artifact INSERT is journaled (append-only trace) so
+-- parser/LLM counts come from events, never inferred from output.  The
+-- trigger cannot be bypassed by a producer forgetting to call a helper.
+CREATE TRIGGER IF NOT EXISTS trg_artifact_producer_event
+AFTER INSERT ON artifacts
+BEGIN
+    INSERT INTO producer_events(
+        event_id, document_id, artifact_role, producer_name,
+        producer_version, event_type, created_at)
+    VALUES (
+        'pe-' || NEW.artifact_id || '-' || hex(randomblob(8)),
+        NEW.document_id, NEW.artifact_role, NEW.generator_name,
+        NEW.generator_version,
+        CASE WHEN NEW.artifact_role IN ('normalized', 'sections')
+             THEN 'parser'
+             WHEN NEW.artifact_role IN ('summary', 'consumer_analysis')
+             THEN 'llm'
+             ELSE 'other' END,
+        datetime('now')
+    );
+END;
 """
 
 
