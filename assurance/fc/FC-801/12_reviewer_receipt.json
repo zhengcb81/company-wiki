@@ -1,0 +1,133 @@
+{
+  "schema_version": "2.0",
+  "fc_id": "FC-801",
+  "status": "accepted",
+  "reviewer": "reviewer-fc801-independent",
+  "reviewer_identity": "reviewer-fc801-independent",
+  "implementer_receipt_sha256": "21848791efadadb3fab311ceac1d36f302bd296448afca947c9ba59720e76c81",
+  "implementer_receipt_sha256_note": "on-disk (CRLF) variant per r1 convention; LF-canonical content hash is 8eab17a5070807efe11a7b9ab6902d78808d8b0a07968562a13a2b9e42a892f7",
+  "clean_checkout": true,
+  "base_triplet": {
+    "revenue": "d362a4905ffcb517ad55c950ce4702d4b764b8ce",
+    "filing": "85731b20f730da6ecc85084a2b7f04a10e75a1f9",
+    "wiki": "7e8c35f85bfdad841639c7892135907edb28c4f3"
+  },
+  "result_triplet": {
+    "revenue": "d362a4905ffcb517ad55c950ce4702d4b764b8ce",
+    "filing": "85731b20f730da6ecc85084a2b7f04a10e75a1f9",
+    "wiki": "4a444ae7a4cfbf6daa2a9ab446ff6ab9a8d6da15"
+  },
+  "replayed_command_ids": [
+    "fc801.triplet-chain",
+    "fc801.sealing-hashes",
+    "fc801.diff-scope",
+    "fc801.focused",
+    "fc801.cluster",
+    "fc801.ruff",
+    "fc801.mutation.M1",
+    "fc801.mutation.M4",
+    "revenue.governance.receipt-validator"
+  ],
+  "scenario_results": [
+    {
+      "id": "DL-03",
+      "status": "passed",
+      "note": "Fresh replay CG-01/CG-02/CG-08 (13 auth tests + 7 CG = 20 passed, python -B, pycache cleared). CG-01: policy_hash mismatch -> rejected stale_policy_hash, fetch=0, adapter.fetch_calls=0. CG-02: stale gap hash -> rejected stale_gap_hash, fetch=0. CG-08: receipt_hash binds policy_hash (different policy -> different receipt) + policy_hash mandatory (ValueError on empty). Code-read confirm: close_gap step 1 compares snapshot policy_hash vs binding (fail-closed on missing runtime_policy.json -> rejected no_runtime_policy); DownloadAuthorization.policy_hash is in the deterministic digest."
+    },
+    {
+      "id": "DL-02",
+      "status": "passed",
+      "note": "CG-03 fresh replay: expired authorization -> rejected with precise reason ('download not authorized: authorization expired'), fetch=0. Code-read confirm: coordinator raises AcquisitionError('download not authorized: {error}') from validate_download_authorization (expired/provider/accession/caps); close_gap step 3 catches, message-prefix check 'download not authorized' -> _reject (no journal entry, fetch=0), any other exception -> _fail (journaled) + staging cleanup."
+    },
+    {
+      "id": "DL-07",
+      "status": "passed",
+      "note": "CG-04 fresh replay: corrupt receipt (content_sha256 lies) -> status failed, reason contains 'SHA-256', catalog document count unchanged, staging dir empty after cleanup. Code-read confirm: coordinator._validate_receipt runs inside resolve_or_stage right after adapter.fetch (bytes/size/SHA-256/magic/http checks); exception path in close_gap step 3 -> _cleanup_staging(request.request_id) -> staging_root / request_id.rsplit(':', 1)[-1] matches the coordinator's own staging dir naming (acquisition.py line 425)."
+    },
+    {
+      "id": "DL-09",
+      "status": "passed",
+      "note": "CG-05 fresh replay: first run completed fetch_events=1; re-run completes with fetch_events=0, outcome reused_before_download, documents count stays 1 (no duplicate). Code-read confirm: re-run hits step 2 'gap already closed' (current_plan.missing empty) -> _complete_reused -> finalize; idempotency also backed by import_staged content_sha256 dedup (DEDUPLICATED_AFTER_DOWNLOAD)."
+    },
+    {
+      "id": "LT-10",
+      "status": "passed",
+      "note": "CG-06 fresh replay: fetch exception -> status failed (never completed), journal records outcome=failed under request_id with txn_id present, re-runnable. Code-read confirm of the finalize guard (close_gap.py _finalize): 'completed' is claimed ONLY when the re-resolve returns REUSED_EXACT/REUSED_EQUIVALENT; otherwise status failed with reason 're_resolve_did_not_reuse:<status>', envelope=None. The guard is load-bearing: M4 (writer bypass) empirically fails CG-07 with status 'failed' (see mutation_results)."
+    },
+    {
+      "id": "SUCCESS",
+      "status": "passed",
+      "note": "CG-07 fresh replay: downloaded_new journaled, final re-resolve REUSED_EXACT, FC-704 envelope outcome downloaded_new, download_events=1. Code-read confirm: journal.record uses binding.request_id as the envelope reconciliation key; CG-07 (and CG-03/04/06) bind request_id=_request().request_id so the envelope lookup by resolution.request_id matches. Full happy path: step order policy -> gap revalidate -> authorize+stage -> validate -> canonical commit -> journal -> finalize guard -> envelope."
+    },
+    {
+      "id": "MUTATIONS",
+      "status": "passed",
+      "note": "Implementer claims M1..M4 all killed (CG-01/CG-02/CG-04/CG-07). I independently replayed M1 (stale_policy_hash check disabled -> CG-01 FAILS, fetch=0 property unguarded) and M4 (writer.import_staged bypassed, success fabricated -> CG-07 FAILS with status 'failed' — the LT-10 finalize guard catches the commit bypass). Both reverted byte-identical; worktree git diff empty; 20 tests re-verified green after revert."
+    }
+  ],
+  "mutation_results": [
+    {
+      "id": "M1",
+      "killed": true,
+      "target": "src/company_wiki/source_catalog/close_gap.py: disable the stale_policy_hash check (if False) in execute() step 1",
+      "evidence": "Mutated in the clean review worktree at bf502af; __pycache__ cleared; python -B -m pytest tests/contract/test_close_gap_fc801.py::test_cg01_stale_policy_hash_fetch_zero -q -> 1 FAILED (a download bound to a different policy hash would proceed). Reverted; 20 focused tests re-verified green; worktree clean."
+    },
+    {
+      "id": "M4",
+      "killed": true,
+      "target": "src/company_wiki/source_catalog/close_gap.py: bypass writer.import_staged — skip the canonical commit and fabricate an imported_new success",
+      "evidence": "Mutated in the clean review worktree; python -B -m pytest tests/contract/test_close_gap_fc801.py::test_cg07_success_downloaded_new_envelope -q -> 1 FAILED: assertion shows status '- completed / + failed' — the _finalize re-resolve guard (LT-10) refused to claim complete because the document never resolved (commit was skipped). This independently proves the implementer's M4 claim: a commit-bypassing writer cannot make the transaction report completed. Reverted byte-identical; 20 tests green; worktree clean."
+    }
+  ],
+  "validator_gate": {
+    "passed": true,
+    "note": "python -B tools/receipt_validator.py --receipt C:/Users/郑曾波/Projects/company-wiki/assurance/fc/FC-801/11_implementer_receipt.json from revenue-forecast prints 'OK: 1 receipt(s) valid', exit 0."
+  },
+  "sealing_hashes": {
+    "plan_sha256": "158fc1e1e4231e3c2dc71822a58931fdca64eff79fc0d4e27b8276a397f4c78a",
+    "plan_source": "frozen task_plan.md at revenue-forecast commit 2d64186 (campaign baseline) — recomputed via 'git show 2d64186:audit_review/2026-08-09_full_completion_assurance_plan/task_plan.md | sha256sum': MATCH. Same value as FC-604/704/705 receipts (campaign-level constant).",
+    "command_registry_sha256": "215b8077169126b2c4a5eca9d8d6237f291757c2559f6ae6e0ae8ff1c806b089",
+    "registry_source": "revenue-forecast compatibility/command_registry.json at HEAD d362a4 (= base triplet revenue) — recomputed on disk: MATCH."
+  },
+  "triplet_verification": {
+    "passed": true,
+    "note": "Base wiki 7e8c35f is an ancestor of result wiki 4a444ae ('git merge-base --is-ancestor' -> ANCESTRY-OK); both commits exist in company-wiki; 4a444ae is an ancestor of company-wiki HEAD bf502af (receipt commit on top, touches only 11_implementer_receipt.json). Revenue d362a4 == revenue-forecast HEAD == base == result. Filing 85731b2 == filing-fetch HEAD == base == result. Sealed commit 4a444ae diff = 5 source/test files + IMPLEMENTATION_PLAN_FC801.md (process artifact, same convention as FC-704/FC-705 sealed commits which also carried plan files outside the receipt's file lists); zero unrelated changes. Result triplet: revenue/filing unchanged, wiki 4a444ae."
+  },
+  "side_effect_reconciliation": {
+    "passed": true,
+    "note": "This review: zero downloads, zero catalog mutations, zero journal writes. Fresh runs used tmp_path fixtures; mutation replays ran in the isolated review worktree and were reverted byte-identical (git status clean). Only files written: assurance/fc/FC-801/12_reviewer_receipt.json + REVIEWER_REPORT.md in the main company-wiki checkout."
+  },
+  "codegraph_reachability": {
+    "passed": true,
+    "note": "CloseGapTransaction has exactly 1 production caller: the new cli.py 'close-gap' subcommand handler (verified by grep in the worktree; the CodeGraph index covers the main repo and does not yet index the review worktree). authorization.policy_hash is consumed by close_gap.build_download_authorization and the transaction's step 1 policy check; the receipt hash digest includes policy_hash (CG-08)."
+  },
+  "rollback": {
+    "required": false,
+    "passed": true,
+    "note": "Additive: new module close_gap.py + DownloadAuthorization policy_hash contract extension + CLI subcommand + tests. Revert = revert 4a444ae (and drop the receipt commit). No production data or catalog mutation is performed by the transaction except through the pre-existing import_staged path."
+  },
+  "findings": [
+    {
+      "id": "F1-binding-request-id-equality",
+      "severity": "informational",
+      "status": "acknowledged-no-action",
+      "evidence": "execute() does not runtime-enforce binding.request_id == request.request_id. The journal is keyed by binding.request_id while the FC-704 envelope reconciles by resolution.request_id (the request's URN); a divergent binding id would silently degrade the envelope (structural outcome, download_events=0) while the txn still reports completed. The contract pins the equality via CG-03/04/06/07 (all pass matching ids) and the CLI reads request_id from the binding file, so no live path can diverge accidentally. Plan does not mandate the check; a defensive early-reject would harden it. No action required for acceptance."
+    },
+    {
+      "id": "F2-cli-mode-flag-inert",
+      "severity": "informational",
+      "status": "acknowledged-no-action",
+      "evidence": "cli.py close-gap accepts --mode exact|latest_as_of but the handler never reads args.mode — the transaction hard-codes latest_as_of for revalidation and exact for fetch (the fixed step sequence). Inert CLI surface; harmless. No action required."
+    },
+    {
+      "id": "F3-plan-file-outside-receipt-lists",
+      "severity": "informational",
+      "status": "acknowledged-no-action",
+      "evidence": "IMPLEMENTATION_PLAN_FC801.md ships in the sealed commit 4a444ae but is not in the receipt's allowed_files/changed_files. Identical to the FC-704/FC-705 precedent (their sealed commits carried IMPLEMENTATION_PLAN_FC*.md outside the receipt lists and were accepted). Content is a faithful FC-801 design/scenario doc matching the receipt. No action required."
+    }
+  ],
+  "unresolved_findings": [],
+  "verdict": "accepted",
+  "reviewer_receipt_sha256": "5000b858d2b09af887f270b4005659e598b21e2a21dafa8068f284ea534f3e6a",
+  "reviewed_at": "2026-08-11"
+}
