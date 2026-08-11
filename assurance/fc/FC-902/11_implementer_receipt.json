@@ -1,0 +1,126 @@
+{
+  "schema_version": "2.0",
+  "fc_id": "FC-902",
+  "status": "independent_review",
+  "mode": "honest-implementer",
+  "base_triplet": {
+    "revenue": "ca213c9c80d1ba7de1aab26fdc777ef30ac21472",
+    "filing": "81d9cd98c6c6a680c859b20917fd9d47db707564",
+    "wiki": "16bf9b2ac7c9f812d2fc207eb1fc42d309a78564"
+  },
+  "result_triplet": {
+    "revenue": "ca213c9c80d1ba7de1aab26fdc777ef30ac21472",
+    "filing": "81d9cd98c6c6a680c859b20917fd9d47db707564",
+    "wiki": "364bc5946b1f8eec57d2e195686262e94ebb085e"
+  },
+  "plan_sha256": "0bc6b9f7d6707e470e55c22759d37c18404172081ecd176d2883e184c61fafaa",
+  "policy_sha256": "not-applicable",
+  "allowed_files": [
+    "company-wiki/src/company_wiki/source_catalog/source_bundle.py",
+    "company-wiki/src/company_wiki/source_catalog/resolver.py",
+    "company-wiki/src/company_wiki/source_catalog/service.py",
+    "company-wiki/src/company_wiki/source_catalog/cli.py",
+    "company-wiki/src/company_wiki/source_catalog/close_gap.py",
+    "company-wiki/tests/contract/test_fc902_bundle_in_resolver.py",
+    "company-wiki/assurance/fc/FC-902/03_change_contract.md",
+    "company-wiki/assurance/fc/FC-902/11_implementer_receipt.json"
+  ],
+  "changed_files": [
+    "company-wiki/src/company_wiki/source_catalog/source_bundle.py",
+    "company-wiki/src/company_wiki/source_catalog/resolver.py",
+    "company-wiki/src/company_wiki/source_catalog/service.py",
+    "company-wiki/src/company_wiki/source_catalog/cli.py",
+    "company-wiki/src/company_wiki/source_catalog/close_gap.py",
+    "company-wiki/tests/contract/test_fc902_bundle_in_resolver.py",
+    "company-wiki/assurance/fc/FC-902/03_change_contract.md"
+  ],
+  "dependency_receipts": [
+    "company-wiki/assurance/fc/FC-901/12_reviewer_receipt.json (accepted 2026-08-11)"
+  ],
+  "command_registry_sha256": "215b8077169126b2c4a5eca9d8d6237f291757c2559f6ae6e0ae8ff1c806b089",
+  "scenario_results": [
+    {
+      "id": "BUNDLE-RESOLVER",
+      "status": "passed",
+      "note": "a reused document with a verified artifact yields bundle_status='available' with a bundle_hash and a bundle dict carrying source + valid handle; envelope keeps policy_hash/activation_epoch (test_b01, test_b05)."
+    },
+    {
+      "id": "BUNDLE-SNAPSHOT",
+      "status": "passed",
+      "note": "snapshot consistency fails closed: when the catalog sources.content_sha256 drifts from the handle's content_sha256, query_source_bundle returns None and the envelope stays bundle_status='unavailable' — a stale/forged bundle is never served (test_b03). Non-reuse outcomes produce no bundle (test_b06)."
+    },
+    {
+      "id": "BUNDLE-UNKNOWN-ROLE",
+      "status": "passed",
+      "note": "an artifact with a role outside the frozen known set becomes an invalid handle with reason artifact_role_unknown; it never appears in valid_handles and is never silently dropped (test_b04)."
+    },
+    {
+      "id": "BUNDLE-DETERMINISM",
+      "status": "passed",
+      "note": "the same catalog queried twice yields byte-identical bundle dicts and bundle_hash (test_b07); the FC-704 'unavailable' behavior is preserved when no bundle is provided (test_b02 + test_env06)."
+    }
+  ],
+  "commands": [
+    {
+      "command": "python -B -m ruff check (5 production modules + new test)",
+      "exit_code": 0,
+      "result": "All checks passed",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "python -B -m py_compile (5 production modules)",
+      "exit_code": 0,
+      "result": "compile OK",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "python -B -m pytest tests/contract/test_fc902_bundle_in_resolver.py -q",
+      "exit_code": 0,
+      "result": "7 passed (RED: ImportError GENERATOR_REGISTRY before implementation)",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "python -B -m pytest tests/contract/test_source_catalog_source_bundle.py tests/contract/test_resolution_envelope_fc704.py tests/contract/test_source_catalog_query_bundle.py tests/contract/test_source_catalog_artifact_handle.py -q",
+      "exit_code": 0,
+      "result": "35 passed (existing bundle/envelope/query/artifact contracts unbroken)",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "python -B -m pytest tests/ -q (full wiki suite)",
+      "exit_code": 0,
+      "result": "2216 passed, 1 skipped, 2 failed — both failures the pre-existing PORT-01/FC-1205 test_check_unique_test_symbols Windows-GBK pair (present before this FC, identical in FC-901); zero new failures; 7 new FC-902 tests included in the 2216",
+      "cwd": "company-wiki"
+    }
+  ],
+  "side_effect_counts": {
+    "downloads": 0,
+    "external_root_writes": 0,
+    "catalog_mutations": 0,
+    "llm_calls": 0,
+    "parser_calls": 0,
+    "note": "resolve/envelope/bundle paths are SELECT-only; artifact file reads only in tests. No production catalog touched."
+  },
+  "codegraph": {
+    "production_callers_before": 0,
+    "production_callers_after": 3,
+    "note": "bundle_for_resolution (new) has 3 production callers: cli resolve, cli ensure, close_gap._finalize; query_source_bundle (was test-island) now has 1 production caller via bundle_for_resolution. Verified by grep since the CodeGraph watcher lags fresh edits."
+  },
+  "mutation": {
+    "id": "FC-902-M1-M2-M3",
+    "killed": true,
+    "details": "M1: unknown-role gate disabled -> test_b04 FAILS (random_role becomes a valid handle). M2: expected_content_sha256 drift check disabled -> test_b03 FAILS (bundle served despite hash drift). M3: envelope bundle wiring disabled -> test_b01 FAILS (bundle_status never available). All three reverted; focused suite re-verified green."
+  },
+  "rollback": {
+    "required": false,
+    "proved": true,
+    "note": "additive contract fields + helpers + wiring; revert = revert commits. No data written."
+  },
+  "review": {
+    "reviewer": "reviewer-fc902-independent",
+    "reviewer_receipt_sha256": "c15a862b811580c47b975427b3d8a2455dc27d4b94d42e8149d380abf6ec1d99",
+    "decision": "accepted",
+    "reviewed_at": "2026-08-11T08:15:20Z",
+    "note": "independent reviewer replayed commands + 3 mutations from clean worktree 364bc59; verdict accepted; one pre-existing worker-bootstrap timing flake documented non-blocking; unresolved_findings=[]"
+  },
+  "provisional_note": "result_triplet sealed at wiki 364bc59 (revenue/filing unchanged). FC-902 production callers wired; FC-903 (filing-fetch N/N-1 bundle forwarding) next."
+}

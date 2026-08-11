@@ -1,0 +1,79 @@
+{
+  "schema_version": "2.0",
+  "fc_id": "FC-902",
+  "implementer_receipt_sha256": "6fdfdb35f4e328a255c2d6840a456bf7493e560bdd494139225f946bd3dc2477",
+  "reviewer_identity": "reviewer-fc902-independent",
+  "clean_checkout": true,
+  "base_triplet": {
+    "revenue": "ca213c9c80d1ba7de1aab26fdc777ef30ac21472",
+    "filing": "81d9cd98c6c6a680c859b20917fd9d47db707564",
+    "wiki": "16bf9b2ac7c9f812d2fc207eb1fc42d309a78564"
+  },
+  "result_triplet": {
+    "revenue": "ca213c9c80d1ba7de1aab26fdc777ef30ac21472",
+    "filing": "81d9cd98c6c6a680c859b20917fd9d47db707564",
+    "wiki": "364bc5946b1f8eec57d2e195686262e94ebb085e"
+  },
+  "replayed_command_ids": [
+    "wiki.unit.full",
+    "fc-902.focused.bundle_in_resolver",
+    "fc-902.sibling.contracts",
+    "fc-902.ruff.5modules_plus_test",
+    "fc-902.py_compile.5modules"
+  ],
+  "scenario_results": [
+    {
+      "id": "BUNDLE-RESOLVER",
+      "status": "passed",
+      "note": "test_b01/test_b05 green: reuse envelope reports bundle_status='available' ONLY with a real bundle dict carrying a bundle_hash (resolver.py:428-435); a malformed bundle (non-dict or no bundle_hash) raises ValueError (fail closed); None keeps honest 'unavailable' (test_b02). policy_hash/activation_epoch ride alongside."
+    },
+    {
+      "id": "BUNDLE-SNAPSHOT",
+      "status": "passed",
+      "note": "test_b03 green: query_source_bundle returns None when expected_content_sha256 != sources.content_sha256 (service.py:400-402) — no stale/forged bundle path exists; test_b06 green: non-reuse outcome (no matches) -> bundle_for_resolution None -> envelope stays 'unavailable'."
+    },
+    {
+      "id": "BUNDLE-UNKNOWN-ROLE",
+      "status": "passed",
+      "note": "test_b04 green: role gate (source_bundle.py:117) sits BEFORE validate_artifact; unknown role -> ArtifactHandle(reusable=False, reason='artifact_role_unknown') via _unknown_role, never a valid handle, never silently dropped. Verified validate_artifact itself has NO role check, so the gate is load-bearing (mutation M1 killed the test)."
+    },
+    {
+      "id": "BUNDLE-DETERMINISM",
+      "status": "passed",
+      "note": "test_b07 green: two bundle_for_resolution calls yield byte-identical bundle dicts and bundle_hash; bundle_hash binds only source+valid handles+invalid role/reason (never 'now'), so determinism holds. FC-704 'unavailable' preserved: test_b02 + test_env06 both green in the 35."
+    }
+  ],
+  "mutation_results": [
+    {
+      "id": "FC-902-M1",
+      "killed": true,
+      "note": "role gate disabled (if False and role not in KNOWN_ARTIFACT_ROLES) -> test_b04_unknown_role_fail_closed FAILS (random_role became a valid handle); reverted"
+    },
+    {
+      "id": "FC-902-M2",
+      "killed": true,
+      "note": "expected_content_sha256 drift check disabled -> test_b03_snapshot_consistency_fail_closed FAILS (bundle served despite hash drift); reverted"
+    },
+    {
+      "id": "FC-902-M3",
+      "killed": true,
+      "note": "envelope bundle wiring disabled (if False and bundle is not None) -> test_b01_available_bundle_on_reuse FAILS (bundle_status never available); reverted"
+    }
+  ],
+  "side_effect_reconciliation": {
+    "passed": true,
+    "note": "resolve/envelope/bundle paths are SELECT-only: query_source_bundle uses fetchone/fetchall only; build_resolution_envelope reads the journal via read_all() and never appends; no INSERT/UPDATE/DELETE in any changed path (the only writes in service.py are the unrelated _atomic_write/_write_csv export helpers). test_env08 (envelope build never writes the journal) green. Catalog write budget 0 confirmed."
+  },
+  "codegraph_reachability": {
+    "passed": true,
+    "note": "CodeGraph index (company-wiki, 455 files) is healthy but lags this fresh commit (bundle_for_resolution not yet indexed; watcher debounce), so literal AST-level gates were used per protocol: bundle_for_resolution has exactly 3 production callers (cli.py:1018 resolve, cli.py:1088 ensure, close_gap.py:417 _finalize) and query_source_bundle has exactly 1 production caller (service.py:456, inside bundle_for_resolution) — no longer a test island. No import cycle: service.py does not import resolver.py (status checked via status.value strings 'reused_exact'/'reused_equivalent'); resolver -> service is one-directional; source_bundle imports only artifact_dag/artifact_handle/models."
+  },
+  "rollback": {
+    "required": false,
+    "passed": true,
+    "note": "additive contract fields (bundle_status semantics, bundle_hash, bundle), new helper bundle_for_resolution, wiring only; revert = revert commit 364bc59. No data written (catalog_mutations 0)."
+  },
+  "unresolved_findings": [],
+  "verdict": "accepted",
+  "reviewed_at": "2026-08-11T08:15:20Z"
+}
