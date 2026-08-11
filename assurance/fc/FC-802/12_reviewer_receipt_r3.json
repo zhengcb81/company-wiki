@@ -1,0 +1,96 @@
+{
+  "schema_version": "2.0",
+  "fc_id": "FC-802",
+  "status": "accepted",
+  "reviewer": "reviewer-fc802-r3-independent",
+  "reviewer_identity": "reviewer-fc802-r3-independent",
+  "implementer_receipt_sha256": "7169afc7927ce590e500703d7439b016bbfd61fc8a8370ca8950e2180ce34710",
+  "implementer_receipt_sha256_note": "on-disk (CRLF) variant of 11_implementer_receipt.json per campaign convention (LF-canonical 1cd3f7ab...); r3 re-seal at filing 01cd018 verified against the receipt on wiki HEAD c6b6027",
+  "clean_checkout": true,
+  "base_triplet": {
+    "revenue": "aa12d9e712bec22047a27e024f8b1fd5b2e7b1b8",
+    "filing": "85731b20f730da6ecc85084a2b7f04a10e75a1f9",
+    "wiki": "d09243f85ed6e1140b1d14650349edaa996cb3b1"
+  },
+  "result_triplet": {
+    "revenue": "aa12d9e712bec22047a27e024f8b1fd5b2e7b1b8",
+    "filing": "01cd01826906b1545d01dbd88fe8b77fd870173f",
+    "wiki": "ca4c0b177d75b9b25f0775a4ac6ed65e2f789382"
+  },
+  "replayed_command_ids": [
+    "fc802-r3.triplet-chain",
+    "fc802-r3.sealing-hashes",
+    "fc802-r3.diff-scope",
+    "fc802-r3.relocated-test-read",
+    "fc802-r3.focused",
+    "fc802-r3.full-suite",
+    "fc802-r3.ruff",
+    "fc802-r3.mutation.gap-passthrough",
+    "revenue.governance.receipt-validator"
+  ],
+  "scenario_results": [
+    {
+      "id": "F-r2-1-CLOSED",
+      "status": "passed",
+      "note": "The r2 blocker is fully closed. test_main_passes_gap_through_unwrapped now lives INSIDE Fc802GapTests (tests/test_fc802_gap_orchestration.py:299-327), before the __main__ guard (line 330); it writes a valid request file (schema 1.2, AMD/annual_report/latest_as_of) into the setUp temp dir (mkdtemp — no repo pollution), patches fetch_filing.resolve_filing to return the structured gap, invokes main() with --request-file, and asserts rc==0, payload.status==gap, gap_plan.gap_hash passthrough, and absence of capture_ready. main() at 01cd018 reads the request file (fetch_filing.py:931-932) BEFORE resolve_filing (943) — the file now exists, so the mocked gap flows through the output branch (952-961)."
+    },
+    {
+      "id": "REG-COLLECTED",
+      "status": "passed",
+      "note": "Collect-only on tests/test_fc802_gap_orchestration.py lists tests/...::Fc802GapTests::test_main_passes_gap_through_unwrapped (verified by node-id run: 1 passed). The r2 dead-code failure mode is gone."
+    },
+    {
+      "id": "MUTATION-KILL",
+      "status": "passed",
+      "note": "Mandated mutation replayed in a temporary worktree at 01cd018: removed the gap-passthrough branch (if isinstance(handle, dict) and handle.get(\"status\") == \"gap\") leaving always-wrap output. The regression test FAILS (not errors) with AssertionError at line 325 — payload.status is capture_ready, expected gap. Precise kill: under mutation Fc802GapTests = 1 failed, 5 passed. Worktree removed; filing-fetch main checkout clean and byte-identical."
+    },
+    {
+      "id": "FRESH-RUNS",
+      "status": "passed",
+      "note": "pytest tests/test_fc802_gap_orchestration.py -q -> 109 collected, 108 passed, 1 skipped (the file also collects FilingFetchTests ~102 via import + Fc802GapTests 6); Fc802GapTests -> 6 passed; full suite tests/ -> 262 passed, 8 skipped, 54 subtests (47.6s). ruff check tests/test_fc802_gap_orchestration.py scripts/fetch_filing.py -> All checks passed. Receipt validator -> OK: 1 receipt(s) valid, exit 0."
+    }
+  ],
+  "mutation_results": [
+    {
+      "id": "M-r3-1",
+      "killed": true,
+      "target": "scripts/fetch_filing.py main(): remove the gap-passthrough branch (always wrap as capture_ready)",
+      "evidence": "Mutated in a temporary filing-fetch worktree at 01cd018 (main checkout untouched). pytest tests/test_fc802_gap_orchestration.py::Fc802GapTests -> 1 failed, 5 passed; test_main_passes_gap_through_unwrapped FAILS with AssertionError (line 325: actual status capture_ready, expected gap) — not an error. Reverted via worktree removal; main checkout clean at 01cd018."
+    }
+  ],
+  "validator_gate": {
+    "passed": true,
+    "note": "python tools/receipt_validator.py --receipt C:/Users/郑曾波/Projects/company-wiki/assurance/fc/FC-802/11_implementer_receipt.json from revenue-forecast prints OK: 1 receipt(s) valid, exit 0. (Structural gate only — hash content is this review's manual step.)"
+  },
+  "sealing_hashes": {
+    "plan_sha256": "158fc1e1e4231e3c2dc71822a58931fdca64eff79fc0d4e27b8276a397f4c78a",
+    "plan_source": "recomputed via git show 2d64186:audit_review/2026-08-09_full_completion_assurance_plan/task_plan.md | sha256sum in revenue-forecast (frozen campaign baseline, HEAD aa12d9e7, repo clean): MATCH.",
+    "command_registry_sha256": "215b8077169126b2c4a5eca9d8d6237f291757c2559f6ae6e0ae8ff1c806b089",
+    "registry_source": "recomputed on disk at revenue-forecast HEAD aa12d9e7 (compatibility/command_registry.json, CRLF working-tree bytes): MATCH."
+  },
+  "triplet_verification": {
+    "passed": true,
+    "note": "Revenue aa12d9e7 == revenue-forecast HEAD == base == result (unchanged). Filing result 01cd018 == filing-fetch HEAD; parent == 7409ad8 (r2 commit) — ANCESTRY-OK; base 85731b20 is an ancestor. Wiki result ca4c0b1 == the --mode fix commit (unchanged since r2, no wiki code delta in r3); wiki HEAD c6b6027 = ca4c0b1 + r3 receipt docs commit (touches only assurance/fc/FC-802/). Diff scope: git diff --stat 7409ad8 01cd018 in filing-fetch = ONLY tests/test_fc802_gap_orchestration.py (+18/-9) — the relocation + repair. Zero unrelated changes."
+  },
+  "side_effect_reconciliation": {
+    "passed": true,
+    "note": "Zero downloads; zero catalog mutations by the reviewer; zero writes outside 12_reviewer_receipt_r3.json + REVIEWER_REPORT_R3.md in the r3 worktree. Mutation replay ran in a temporary filing-fetch worktree at 01cd018, removed afterwards; filing-fetch and company-wiki main checkouts clean (git status empty after all runs). pytest/ruff in main checkouts produce only gitignored cache artifacts."
+  },
+  "codegraph_reachability": {
+    "passed": true,
+    "note": "r3 commit touches only a test file — no production symbol changes; code reachability unchanged from the r2-verified state (main() gap passthrough, ensure --mode)."
+  },
+  "rollback": {
+    "required": false,
+    "passed": true,
+    "note": "No outstanding findings; the r2 remediation (relocate + repair the regression test) is verified killed by the mandated mutation. Revert = revert commit 01cd018."
+  },
+  "observations": [
+    "Receipt command-result counts are stale/imprecise but non-hiding: the focused command actually yields 109 collected / 108 passed + 1 skipped on this checkout (the file also collects FilingFetchTests via import, pytest 9 *Tests default), and the full suite is 262 passed (r3 adds the now-collected regression test vs the r2 261). The receipt claims 7 passed / 261 passed. Direction and substance verified: the F1 regression test IS collected and passing — the r2 finding is closed."
+  ],
+  "findings": [],
+  "unresolved_findings": [],
+  "verdict": "accepted",
+  "reviewer_receipt_sha256": "009f9666256958152884d6c34779aa22334a67a34251264a20cc04c9ea0a5cf3",
+  "reviewed_at": "2026-08-11"
+}
