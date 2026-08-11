@@ -1,0 +1,71 @@
+{
+  "schema_version": "2.0",
+  "fc_id": "FC-901",
+  "implementer_receipt_sha256": "eee459844a0cdc654968468a4b2c4cd8504f7a8ef865e83c831c8791a8610111",
+  "reviewer_identity": "reviewer-fc901-independent",
+  "clean_checkout": true,
+  "base_triplet": {
+    "revenue": "3617335bb63c8c5c2483edf71a56c06e035cb95c",
+    "filing": "81d9cd98c6c6a680c859b20917fd9d47db707564",
+    "wiki": "9907a3b8869b8c33c520ddb25195bbc57034c8d8"
+  },
+  "result_triplet": {
+    "revenue": "3617335bb63c8c5c2483edf71a56c06e035cb95c",
+    "filing": "81d9cd98c6c6a680c859b20917fd9d47db707564",
+    "wiki": "07422f98d9946ef8a54e77a85661c3c6cb46bdf7"
+  },
+  "replayed_command_ids": [
+    "python -B -m pytest tests/contract/test_source_catalog_artifact_backfill.py -q (11 passed, 2.44s)",
+    "python -B -m ruff check src/company_wiki/source_catalog/artifact_backfill.py tests/contract/test_source_catalog_artifact_backfill.py (All checks passed, exit 0)",
+    "python -B -m pytest tests/ -q (2209 passed, 1 skipped, 2 failed in 579.20s; both failures = pre-existing PORT-01 pair test_duplicate_test_definition_fails + test_syntax_error_is_reported_as_failure, Windows GBK UnicodeDecodeError 0xd4)",
+    "python -B -m pytest tests/contract/test_source_catalog_artifact_backfill.py -q -k ab01_dry_run_writes_nothing (M2 mutation replay: FAILED bindings 1 != 0)",
+    "python -B -m pytest tests/contract/test_source_catalog_artifact_backfill.py -q -k ab07_bucket_conservation (M1 mutation replay: FAILED hash_mismatch 0 != 1)",
+    "python -B -m company_wiki.source_catalog.artifact_backfill --help (CLI entry point works, caller>=1)",
+    "python -B -m pytest tests/contract/test_source_catalog_artifact_backfill.py -q (RED replay against base 9907a3b scratch: ModuleNotFoundError: No module named 'company_wiki.source_catalog.artifact_backfill')"
+  ],
+  "scenario_results": [
+    {
+      "id": "MIG-01",
+      "status": "passed",
+      "note": "dry-run is zero-write and emits a complete proposal: test_ab01 (catalog row/byte counts unchanged, artifact_bindings stays empty, classification still computed), test_ab02 (per-bucket counts + per-bucket byte capacity + per-bindable binding proposal with bundle_hash), test_ab07/test_ab08 (input == sum of five buckets, exactly one bucket per row). Independent spot check: catalog file sha256 identical before/after dry-run at byte level."
+    },
+    {
+      "id": "MIG-03",
+      "status": "passed",
+      "note": "idempotency: test_ab03 (two dry-runs produce byte-identical result_hash and as_dict; deterministic ordering by artifact_id in SQL and in as_dict), test_ab04 (apply twice creates each binding exactly once, visibility shadow; UNIQUE(artifact_id) + INSERT OR IGNORE + pre-check skip recorded as skipped_already_bound). Independent spot check: second apply skipped_already_bound=1."
+    },
+    {
+      "id": "MIG-05",
+      "status": "passed",
+      "note": "no guessing of source_id/period/fiscal_year anywhere: null source_id / missing sources row / missing primary_source_id -> legacy_unbound 'no_provable_source_lineage' (test_ab05); source_sha lineage failure -> legacy_unbound, NOT hash_mismatch (test_ab06); proposals only carry real column values from the artifacts row, never derived from file names or paths. No path/filename parsing for provenance in the module."
+    }
+  ],
+  "mutation_results": [
+    {
+      "id": "FC-901-M1",
+      "killed": true,
+      "note": "Deleted line \"artifact_hash_mismatch\": \"hash_mismatch\", from _REASON_TO_BUCKET -> test_ab07_bucket_conservation FAILED (assert 0 == 1, hash_mismatch=0, legacy_unbound=2). Module restored from backup; focused suite re-run 11 passed."
+    },
+    {
+      "id": "FC-901-M2",
+      "killed": true,
+      "note": "Changed 'if mode == \"apply\" and result.proposals:' to 'if result.proposals:' -> test_ab01_dry_run_writes_nothing FAILED (Differing items {'bindings': 1} != {'bindings': 0}). Module restored from backup; focused suite re-run 11 passed."
+    }
+  ],
+  "side_effect_reconciliation": {
+    "passed": true,
+    "note": "Independent spot check: dry-run left catalog.sqlite3 bytes identical (sha256 before == after), no stray files in fixture dir, artifact file untouched. Full suite ran after mutation restoration with worktree verified clean (git status empty). No event journal entries are written by this FC (read-only dry-run); apply writes are confined to artifact_bindings shadow table."
+  },
+  "codegraph_reachability": {
+    "passed": true,
+    "note": "run_artifact_backfill has in-module CLI caller main() (caller>=1 per contract), verified by reading source and CLI smoke test (--help). Reuse edge: _classify calls validate_artifact from artifact_handle.py; codegraph confirms validate_artifact at src/company_wiki/source_catalog/artifact_handle.py:78 with exact signature (artifact, *, source, registry, allowed_roots, now) -> ArtifactHandle, matching the call. Reason-code strings verified against artifact_handle.py source: all 12 reject reasons map per contract (artifact_hash_mismatch/artifact_hash_malformed -> hash_mismatch; artifact_file_missing -> missing_bytes; artifact_generator_unregistered -> unknown_generator; artifact_source_sha_mismatch/artifact_source_binding_mismatch/artifact_status_not_completed/artifact_schema_unsupported/artifact_created_at_*/artifact_path_outside_allowed_root -> legacy_unbound via default). Note: the company-wiki codegraph index is stale for this commit (artifact_backfill.py not yet indexed; file confirmed present on disk in both main tree and worktree)."
+  },
+  "rollback": {
+    "required": true,
+    "passed": true,
+    "note": "test_ab10_apply_is_reversible_by_shadow_delete passed (DELETE FROM artifact_bindings WHERE created_by='fc-901' -> 0 bindings, artifacts row count unchanged). Independent spot check: apply created 1 binding, rollback removed it, artifacts table 1 row untouched. Dry-run leaves zero footprint. Legacy artifacts/documents/sources tables never UPDATEd/DELETEd (grep: no DELETE/UPDATE statement in module other than docstring)."
+  },
+  "unresolved_findings": [],
+  "verdict": "accepted",
+  "reviewed_at": "2026-08-11T07:34:38Z"
+}
