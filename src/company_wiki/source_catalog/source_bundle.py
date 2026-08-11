@@ -22,10 +22,52 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
-from .artifact_handle import ArtifactHandle, validate_artifact
+from .artifact_dag import ROLE_DEPENDENCIES
+from .artifact_handle import (
+    ARTIFACT_HANDLE_SCHEMA_VERSION,
+    ArtifactHandle,
+    validate_artifact,
+)
+from .models import (
+    NORMALIZER_VERSION,
+    SECTION_EXTRACTOR_VERSION,
+    SUMMARIZER_VERSION,
+)
 
 
 SOURCE_BUNDLE_SCHEMA_VERSION = "1.0"
+
+# FC-902: the frozen set of artifact roles the bundle may carry.  Anything
+# else fails closed (invalid handle, reason artifact_role_unknown) — an
+# unknown role is never silently dropped and never treated as valid.
+KNOWN_ARTIFACT_ROLES = frozenset(ROLE_DEPENDENCIES)
+
+# FC-902: single source of truth for the in-house generators the bundle
+# validator accepts.  Production bundle builds default to this registry;
+# tests may pass their own.  Versions come from models.py (the same
+# constants the producers write into the artifacts table).
+GENERATOR_REGISTRY: dict[str, set[str]] = {
+    "source_catalog_normalizer": {NORMALIZER_VERSION},
+    "source_catalog_llm_summary": {SUMMARIZER_VERSION},
+    "source_catalog_section_extractor": {SECTION_EXTRACTOR_VERSION},
+}
+
+
+def _unknown_role(artifact: dict[str, Any]) -> ArtifactHandle:
+    """An artifact whose role is not in the frozen known set fails closed."""
+    return ArtifactHandle(
+        schema_version=ARTIFACT_HANDLE_SCHEMA_VERSION,
+        artifact_id=str(artifact.get("artifact_id") or ""),
+        document_id=str(artifact.get("document_id") or ""),
+        source_id=str(artifact.get("source_id") or ""),
+        artifact_role=str(artifact.get("artifact_role") or ""),
+        path=str(artifact.get("path") or ""),
+        content_sha256=str(artifact.get("content_sha256") or ""),
+        generator_name=str(artifact.get("generator_name") or ""),
+        generator_version=str(artifact.get("generator_version") or ""),
+        reusable=False,
+        reason="artifact_role_unknown",
+    )
 
 
 @dataclass(frozen=True)
@@ -72,13 +114,18 @@ def build_source_bundle(
     valid_by_role: dict[str, list[tuple[ArtifactHandle, str]]] = {}
     for artifact in artifacts:
         role = str(artifact.get("artifact_role") or "unknown")
-        handle = validate_artifact(
-            artifact,
-            source=source,
-            registry=registry,
-            allowed_roots=allowed_roots,
-            now=now,
-        )
+        if role not in KNOWN_ARTIFACT_ROLES:
+            # FC-902: unknown role fails closed before any other gate —
+            # never a valid handle, never silently dropped.
+            handle = _unknown_role(artifact)
+        else:
+            handle = validate_artifact(
+                artifact,
+                source=source,
+                registry=registry,
+                allowed_roots=allowed_roots,
+                now=now,
+            )
         if handle.reusable:
             # keep (handle, created_at) so same-role selection is ordered by
             # the artifact's actual creation time, not handle internals.

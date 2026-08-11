@@ -346,12 +346,14 @@ _STRUCTURAL_OUTCOME = {
 
 @dataclass(frozen=True)
 class ResolutionEnvelope:
-    """FC-704: handle + policy/epoch + journal-reconciled outcome + trace.
+    """FC-704 + FC-902: handle + policy/epoch + journal-reconciled outcome
+    + snapshot-consistent SourceBundle.
 
     The download evidence (``download_events``) comes from the acquisition
     journal, never inferred from whether a handle was returned
-    (scenario_matrix §2).  ``bundle_status`` is explicitly "unavailable"
-    until FC-901 ships real bundles — never a faked empty-green.
+    (scenario_matrix §2).  ``bundle_status`` is "available" ONLY when a real
+    snapshot-consistent bundle dict was provided; otherwise it stays
+    "unavailable" — never a faked empty-green (FC-902 fail-closed).
     """
 
     envelope_schema_version: str
@@ -360,6 +362,8 @@ class ResolutionEnvelope:
     policy_hash: str | None
     activation_epoch: str | None
     bundle_status: str
+    bundle_hash: str | None = None
+    bundle: dict[str, Any] | None = None
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -369,6 +373,8 @@ class ResolutionEnvelope:
             "policy_hash": self.policy_hash,
             "activation_epoch": self.activation_epoch,
             "bundle_status": self.bundle_status,
+            "bundle_hash": self.bundle_hash,
+            "bundle": self.bundle,
         }
 
 
@@ -377,13 +383,21 @@ def build_resolution_envelope(
     *,
     policy_snapshot: dict[str, Any] | None = None,
     journal: Any | None = None,
+    bundle: dict[str, Any] | None = None,
 ) -> ResolutionEnvelope:
-    """FC-704: reconcile the resolution against the acquisition journal.
+    """FC-704 + FC-902: reconcile the resolution against the acquisition
+    journal and attach a snapshot-consistent SourceBundle when available.
 
     Journal entry for ``request_id`` wins (the real outcome, e.g.
     downloaded_new after an ensure); without an entry the outcome is
     structural (read-only resolve never downloads).  Reads the journal
     only — resolve stays zero-write.
+
+    ``bundle`` (a SourceBundle to_dict, FC-902): when a dict with a
+    bundle_hash is supplied the envelope reports ``bundle_status=available``
+    and carries the bundle + hash.  None keeps the honest FC-704
+    ``unavailable``.  A malformed bundle (no bundle_hash) raises — fail
+    closed, never a faked green.
     """
     if not isinstance(resolution, ResolutionResult):
         raise TypeError("resolution must be a ResolutionResult")
@@ -408,13 +422,25 @@ def build_resolution_envelope(
     if isinstance(policy_snapshot, dict):
         policy_hash = policy_snapshot.get("policy_hash")
         activation_epoch = policy_snapshot.get("current_epoch")
+    bundle_status = "unavailable"
+    bundle_hash = None
+    bundle_dict = None
+    if bundle is not None:
+        if not isinstance(bundle, dict) or not bundle.get("bundle_hash"):
+            raise ValueError(
+                "bundle must be a dict with a bundle_hash (fail closed)")
+        bundle_status = "available"
+        bundle_hash = bundle["bundle_hash"]
+        bundle_dict = bundle
     return ResolutionEnvelope(
         envelope_schema_version=RESOLUTION_ENVELOPE_SCHEMA_VERSION,
         outcome=outcome,
         download_events=download_events,
         policy_hash=policy_hash,
         activation_epoch=activation_epoch,
-        bundle_status="unavailable",
+        bundle_status=bundle_status,
+        bundle_hash=bundle_hash,
+        bundle=bundle_dict,
     )
 
 

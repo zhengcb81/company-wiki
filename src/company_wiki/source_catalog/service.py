@@ -28,6 +28,13 @@ def _exact_duplicate_group_id(document_id: str, source_id: str) -> str:
     return _EXACT_DUPLICATE_PREFIX + digest
 
 
+def _utc_now() -> str:
+    """UTC wall-clock stamp for bundle queries without an explicit ``now``."""
+    from datetime import datetime, timezone
+
+    return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+
 class SourceCatalog:
     def __init__(self, config: CatalogConfig):
         if not isinstance(config, CatalogConfig):
@@ -362,9 +369,16 @@ class SourceCatalog:
         registry: dict[str, set[str]],
         allowed_roots: tuple[Path, ...],
         now: str,
+        expected_content_sha256: str | None = None,
     ) -> dict[str, Any] | None:
-        """WU-5.3: one query returns the source document + verified artifacts
-        as a SourceBundle (None when the document is unknown)."""
+        """WU-5.3 + FC-902: one query returns the source document + verified
+        artifacts as a SourceBundle (None when the document is unknown).
+
+        ``expected_content_sha256`` (FC-902 snapshot consistency): when the
+        caller's handle claims a content hash that differs from the catalog's
+        current source bytes, NO bundle is served — a bundle built from other
+        bytes would be a stale/forged derivation.  Fail closed.
+        """
         row = self.store.fetchone(
             "SELECT * FROM documents WHERE document_id = ?", (document_id,)
         )
@@ -383,6 +397,9 @@ class SourceCatalog:
                 (document["primary_source_id"],),
             )
             if src is not None:
+                if (expected_content_sha256 is not None
+                        and expected_content_sha256 != src["content_sha256"]):
+                    return None  # fail closed: bytes drifted from the claim
                 source["source_sha256"] = src["content_sha256"]
         artifacts = [
             dict(artifact)
@@ -405,6 +422,44 @@ class SourceCatalog:
             now=now,
         )
         return bundle.to_dict()
+
+    def bundle_for_resolution(
+        self,
+        resolution: Any,
+        *,
+        registry: dict[str, set[str]] | None = None,
+        allowed_roots: tuple[Path, ...] | None = None,
+        now: str | None = None,
+    ) -> dict[str, Any] | None:
+        """FC-902: production bundle builder for the resolve/envelope path.
+
+        Returns the snapshot-consistent SourceBundle for a reuse outcome, or
+        None when no bundle can honestly be built (non-reuse outcome, unknown
+        document, or a content-hash drift vs the handle — the caller then
+        reports bundle_status=unavailable, never a faked green).
+        """
+        if not getattr(resolution, "matches", None):
+            return None
+        status = getattr(resolution, "status", None)
+        if status is None or status.value not in ("reused_exact",
+                                                  "reused_equivalent"):
+            return None
+        match = resolution.matches[0]
+        from .source_bundle import GENERATOR_REGISTRY
+
+        effective_registry = (
+            registry if registry is not None else GENERATOR_REGISTRY)
+        effective_roots = (
+            allowed_roots if allowed_roots is not None
+            else tuple(root.path for root in self.config.roots))
+        effective_now = now or _utc_now()
+        return self.query_source_bundle(
+            document_id=match.document_id,
+            registry=effective_registry,
+            allowed_roots=effective_roots,
+            now=effective_now,
+            expected_content_sha256=match.content_sha256,
+        )
 
     def query(
         self,

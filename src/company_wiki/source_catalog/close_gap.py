@@ -393,7 +393,7 @@ class CloseGapTransaction:
                               fetch_events=0)
 
     def _finalize(self, request, txn, outcome: str, *, fetch_events: int):
-        """Step 5: re-resolve and attach the FC-704 envelope.
+        """Step 5: re-resolve and attach the FC-704 envelope (+ FC-902 bundle).
 
         LT-10: ``completed`` is only claimed when the document actually
         resolves — a re-resolve that misses means the close did NOT happen.
@@ -413,7 +413,8 @@ class CloseGapTransaction:
                 resolution=resolution.to_dict(), envelope=None,
             )
         envelope = build_resolution_envelope(
-            resolution, journal=self.journal)
+            resolution, journal=self.journal,
+            bundle=self.catalog.bundle_for_resolution(resolution))
         return CloseGapResult(
             schema_version=CLOSE_GAP_SCHEMA_VERSION,
             txn_id=txn,

@@ -1008,11 +1008,14 @@ def main(argv: Sequence[str] | None = None) -> int:
             # FC-704: journal-reconciled outcome + policy/epoch + bundle
             # status ride on the resolution (read-only: the journal is read,
             # never appended, by the resolve command).
+            # FC-902: the snapshot-consistent SourceBundle rides too when a
+            # document was reused (SELECT-only; fail-closed on hash drift).
             source_resolution["resolution_envelope"] = (
                 build_resolution_envelope(
                     resolution,
                     policy_snapshot=policy,
                     journal=AcquisitionJournal(config.catalog_dir),
+                    bundle=get_catalog().bundle_for_resolution(resolution),
                 ).to_dict()
             )
             result = (
@@ -1073,6 +1076,8 @@ def main(argv: Sequence[str] | None = None) -> int:
             ensure_dict = _plain(ensured)
             # FC-704: the journal now carries the attempt — the resolution
             # sub-dict carries the journal-reconciled envelope.
+            # FC-902: the snapshot-consistent bundle rides the envelope when
+            # the ensure re-used a document.
             resolution_dict = ensure_dict.get("resolution")
             if isinstance(resolution_dict, dict):
                 resolution_dict["resolution_envelope"] = (
@@ -1080,6 +1085,8 @@ def main(argv: Sequence[str] | None = None) -> int:
                         ensured.resolution,
                         policy_snapshot=ensure_policy,
                         journal=AcquisitionJournal(config.catalog_dir),
+                        bundle=get_catalog().bundle_for_resolution(
+                            ensured.resolution),
                     ).to_dict()
                 )
             result = (
