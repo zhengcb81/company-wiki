@@ -31,22 +31,25 @@ def _parse_utc(value: str | None) -> datetime | None:
 def close_gate_allowed(periods: list[dict[str, Any]]) -> tuple[bool, list[str]]:
     """FC-705: may the legacy bridge be closed now?
 
-    Requires the last two periods (by ``period`` number) to be consecutive,
-    each completed (``ended_at`` set), each >= 24h long, and each with
-    ``legacy_bridge_hits == 0``.  Returns (allowed, reasons).  An empty or
-    malformed ledger is NOT allowed (fail closed) with an explicit reason.
+    Requires the last two COMPLETED periods (by ``period`` number) to be
+    consecutive, each >= 24h long, and each with ``legacy_bridge_hits == 0``.
+    An OPEN window (no ``ended_at``) never counts — it is still
+    accumulating.  Returns (allowed, reasons).  An empty or malformed
+    ledger is NOT allowed (fail closed) with an explicit reason.
     """
     reasons: list[str] = []
     if not isinstance(periods, list) or not periods:
         return False, ["no observation periods recorded — close gate not passed"]
     numbered = [p for p in periods if isinstance(p, dict) and isinstance(p.get("period"), int)]
-    if len(numbered) < REQUIRED_CONSECUTIVE_WINDOWS:
+    completed = [p for p in numbered if p.get("ended_at") is not None]
+    if len(completed) < REQUIRED_CONSECUTIVE_WINDOWS:
         return False, [
-            f"need {REQUIRED_CONSECUTIVE_WINDOWS} completed observation windows, "
-            f"have {len(numbered)}"
+            f"need {REQUIRED_CONSECUTIVE_WINDOWS} COMPLETED zero-hit observation "
+            f"windows, have {len(completed)} (an open window is still "
+            "accumulating and never counts)"
         ]
-    numbered.sort(key=lambda p: p["period"])
-    last_two = numbered[-REQUIRED_CONSECUTIVE_WINDOWS:]
+    completed.sort(key=lambda p: p["period"])
+    last_two = completed[-REQUIRED_CONSECUTIVE_WINDOWS:]
     if last_two[1]["period"] - last_two[0]["period"] != 1:
         reasons.append(
             f"windows {last_two[0]['period']} and {last_two[1]['period']} "

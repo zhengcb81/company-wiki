@@ -354,3 +354,25 @@ def test_leg11_canary_matrix_observation_read_only(tmp_path):
     assert result["shadow_diffs"] == 0
     after = hashlib.sha256(db_path.read_bytes()).hexdigest()
     assert before == after, "canary observation wrote to the catalog"
+
+
+def test_leg10g_gate_fires_after_two_completed_zero_hit_windows():
+    """Full main()-bookkeeping simulation (reviewer F1): an OPEN window
+    never counts — the gate fires exactly when the second zero-hit window
+    COMPLETES.  The ledger-transition flow (new period closes the previous)
+    is what production runs, so the gate must work on it."""
+    from company_wiki.source_catalog.legacy_close_gate import close_gate_allowed
+
+    periods = []
+    # run 1: period 1 opens
+    periods.append(_window(1, started_at="2026-08-09T00:00:00Z", ended_at=None))
+    assert not close_gate_allowed(periods)[0]
+    # run 2: period 2 opens -> period 1 closes (24h later, zero hits)
+    periods[0]["ended_at"] = "2026-08-10T00:00:00Z"
+    periods.append(_window(2, started_at="2026-08-10T00:00:00Z", ended_at=None))
+    assert not close_gate_allowed(periods)[0]  # only ONE completed window
+    # run 3: period 3 opens -> period 2 closes (24h later, zero hits)
+    periods[1]["ended_at"] = "2026-08-11T00:00:00Z"
+    periods.append(_window(3, started_at="2026-08-11T00:00:00Z", ended_at=None))
+    allowed, reasons = close_gate_allowed(periods)
+    assert allowed, reasons  # periods 1+2 completed, zero hits, >=24h each
