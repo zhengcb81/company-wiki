@@ -496,6 +496,21 @@ def _parser() -> argparse.ArgumentParser:
         type=Path,
         default=Path("config/source_acquisition.yaml"),
     )
+    close_gap.add_argument(
+        "--allow-acquisition-while-paused",
+        action="store_true",
+        help=(
+            "permit the close-gap download even when the background worker "
+            "is paused; intended for orchestrators (filing-fetch) that "
+            "deliberately paused the worker and will resume it afterwards"
+        ),
+    )
+    close_gap.add_argument(
+        "--worker-config",
+        type=Path,
+        default=Path("config/source_catalog_worker.yaml"),
+        help="control state used to refuse close-gap downloads while the worker is paused",
+    )
 
     import_portfolio = subparsers.add_parser(
         "import-portfolio",
@@ -1076,6 +1091,15 @@ def main(argv: Sequence[str] | None = None) -> int:
             from .acquisition_journal import AcquisitionJournal
             from .close_gap import CloseGapBinding, CloseGapTransaction
 
+            desired_state = worker_controller().status()["desired_state"]
+            if (
+                desired_state == "paused"
+                and not args.allow_acquisition_while_paused
+            ):
+                raise RuntimeError(
+                    "source acquisition is paused; run worker-resume before "
+                    "allowing close-gap downloads"
+                )
             request, identity = source_request()
             binding_payload = json.loads(
                 args.binding_file.read_text(encoding="utf-8"))

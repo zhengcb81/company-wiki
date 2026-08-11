@@ -196,6 +196,13 @@ class CloseGapTransaction:
             return _reject("stale_gap_hash")
 
         # Step 3: authorize + fetch staging (DL-02).
+        # The staging request is built PER MISSING CANDIDATE: an exact
+        # request without the missing period's fiscal_year would re-resolve
+        # an OLDER local document as reused and never stage the gap
+        # (FC-803 T1 found this against a real latest_as_of flow).
+        missing_candidate = current_plan.missing[0]
+        missing_year = getattr(missing_candidate, "fiscal_year", None)
+        missing_pdoc = getattr(missing_candidate, "provider_document_id", None)
         authorization = build_download_authorization(
             request_id=binding.request_id,
             gap_plan_hash=binding.gap_plan_hash,
@@ -212,12 +219,15 @@ class CloseGapTransaction:
                     entity=request.entity, market=request.market,
                     security_id=request.security_id,
                     document_kind=request.document_kind,
-                    form_type=request.form_type,
-                    fiscal_year=request.fiscal_year,
+                    form_type=request.form_type
+                    or getattr(missing_candidate, "form_type", None),
+                    fiscal_year=missing_year or request.fiscal_year,
                     fiscal_period=request.fiscal_period,
                     language=request.language,
-                    provider=request.provider,
-                    provider_document_id=request.provider_document_id,
+                    provider=getattr(missing_candidate, "provider", None)
+                    or request.provider,
+                    provider_document_id=missing_pdoc
+                    or request.provider_document_id,
                     as_of_date=request.as_of_date,
                     mode="exact",
                     allow_download=True,
