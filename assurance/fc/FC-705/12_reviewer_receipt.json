@@ -1,0 +1,147 @@
+{
+  "schema_version": "2.0",
+  "fc_id": "FC-705",
+  "status": "changes_required",
+  "reviewer": "reviewer-fc705-independent",
+  "reviewer_identity": "reviewer-fc705-independent",
+  "implementer_receipt_sha256": "60d16b49bf5867040bfd7893def8fd4514088f2a3d5811c3f947f544d0f6078b",
+  "clean_checkout": true,
+  "base_triplet": {
+    "revenue": "76d1602a27bb70f7d901d44a5b3775f27d0dc5b9",
+    "filing": "85731b20f730da6ecc85084a2b7f04a10e75a1f9",
+    "wiki": "f610c1a752194953ed242f5cb3e17529650d0dba"
+  },
+  "result_triplet": {
+    "revenue": "76d1602a27bb70f7d901d44a5b3775f27d0dc5b9",
+    "filing": "85731b20f730da6ecc85084a2b7f04a10e75a1f9",
+    "wiki": "5e770e202df5e1e597a506dd7171c6c3a554d9d9"
+  },
+  "replayed_command_ids": [
+    "fc705.wiki.focused",
+    "fc705.wiki.cluster",
+    "fc705.wiki.port01-spot",
+    "fc705.wiki.ruff",
+    "fc705.mutation.M1",
+    "fc705.mutation.M2",
+    "fc705.live.current",
+    "fc705.live.drill",
+    "fc705.gate-satisfiability-sim",
+    "revenue.governance.receipt-validator"
+  ],
+  "scenario_results": [
+    {
+      "id": "LEG-07",
+      "status": "passed",
+      "note": "Replayed in clean worktree (HEAD 6ada6fe, clean): legacy_bridge_allowed=False returns {} with zero hits recorded — fail-closed at the seam function level."
+    },
+    {
+      "id": "LEG-09",
+      "status": "passed",
+      "note": "Rollback drill replayed: flag back on restores the legacy read and records the hit — closable AND reversible."
+    },
+    {
+      "id": "LEG-10a..f",
+      "status": "passed",
+      "note": "close_gate_allowed replayed green: two consecutive completed >=24h zero-hit windows -> allowed; single window / hits>0 / short window / non-consecutive periods / empty ledger -> fail closed with reasons. Read the full function: _parse_utc handles Z and naive; exactly-24h passes; hits!=0 incl. None fails; last_two by period number. Tests match the function contract."
+    },
+    {
+      "id": "LEG-11",
+      "status": "passed",
+      "note": "Canary-matrix observation through the REAL resolver seam replayed green. Confirmed SourceCatalog.store is LAZY (init constructs nothing — no WAL/DDL on construction); _ReadOnlyCatalog overrides the store property with a fetchone/fetchall facade over a mode=ro + query_only connection; the fixture catalog is byte-identical before/after (sha256 equal). Drill resolves CN-601899-FY2024 reused_exact via the pinned v2 assertion, other canaries missing, hits=0, shadow_diffs=0."
+    },
+    {
+      "id": "LIVE-CURRENT",
+      "status": "passed",
+      "note": "Replayed against the LIVE production catalog (mode=ro): --period 4 with a TEMP period file outside the repo. 4/4 canaries reused_exact (CN 601899 FY24/25, HK 03690 FY24, US AAPL FY25), legacy_bridge_hits=6 under production flags (v1 reader + bridge on), shadow_diffs=0, close_gate close_allowed=false. Production legacy_periods.json untouched by this review (temp ledger contains only period 4)."
+    },
+    {
+      "id": "LIVE-DRILL",
+      "status": "passed",
+      "note": "Replayed: observe_canary_matrix(config, drill=True) on the live catalog -> 4/4 reused_exact, legacy_bridge_hits=0, shadow_diffs=0, snapshot_policy_hash preserved (2d3d2ee8...). Cutover readiness for the canary cohort CONFIRMED with fresh evidence."
+    },
+    {
+      "id": "MUTATIONS",
+      "status": "passed",
+      "note": "Both instructed mutations killed and reverted (worktree clean, git diff empty after revert): M1 single-window gate -> test_leg10b fails (IndexError on last_two[1]); M2 writable SourceCatalog in the observer -> test_leg11 fails on catalog hash change, empirically proving the read-only path is what prevents writes."
+    },
+    {
+      "id": "PORT-01",
+      "status": "passed",
+      "note": "Spot-checked tests/contract/test_check_unique_test_symbols.py in the clean worktree: 2 failed / 3 passed — reproduces the implementer's recorded pre-existing failures exactly (Windows GBK console environment artifact). File untouched by FC-705 (not in diff)."
+    }
+  ],
+  "mutation_results": [
+    {
+      "id": "M1",
+      "killed": true,
+      "target": "src/company_wiki/source_catalog/legacy_close_gate.py: change the REQUIRED_CONSECUTIVE_WINDOWS guard to accept a single window (len(numbered) < 1)",
+      "evidence": "Mutated in the clean worktree at HEAD 6ada6fe; __pycache__ cleared; python -B -m pytest tests/contract/test_legacy_observation.py -q -k leg10b -> 1 failed / 14 deselected: IndexError at last_two[1]['period'] (line 50). The two-window requirement is genuinely load-bearing. Reverted with git checkout; worktree clean."
+    },
+    {
+      "id": "M2",
+      "killed": true,
+      "target": "scripts/legacy_observer.py: replace _ReadOnlyCatalog(config, connection) with the writable SourceCatalog(config)",
+      "evidence": "Mutated in the clean worktree; __pycache__ cleared; python -B -m pytest tests/contract/test_legacy_observation.py -q -k leg11 -> 1 failed / 14 deselected: AssertionError 'canary observation wrote to the catalog' — catalog sha256 changed from cf8c85e4... to 1e7032da... The writable store runs DDL/WAL on its connection and mutates the fixture; the read-only facade prevents it. Reverted; worktree clean."
+    }
+  ],
+  "validator_gate": {
+    "passed": true,
+    "note": "'python tools/receipt_validator.py --receipt C:/Users/郑曾波/Projects/company-wiki/assurance/fc/FC-705/11_implementer_receipt.json' from revenue-forecast prints 'OK: 1 receipt(s) valid', exit 0."
+  },
+  "sealing_hashes": {
+    "plan_sha256": "158fc1e1e4231e3c2dc71822a58931fdca64eff79fc0d4e27b8276a397f4c78a",
+    "plan_source": "task_plan.md at revenue-forecast commit 2d64186 (frozen plan) — recomputed: MATCH. The on-disk plan was later refreshed by d662c82/53b984d/76d1602 (triplet/status headers) and therefore hashes differently; the sealed hash corresponds to the frozen plan, consistent with the FC-704 reviewer receipt precedent.",
+    "command_registry_sha256": "215b8077169126b2c4a5eca9d8d6237f291757c2559f6ae6e0ae8ff1c806b089",
+    "registry_source": "revenue-forecast compatibility/command_registry.json (tracked, unmodified) — recomputed on disk: MATCH."
+  },
+  "triplet_verification": {
+    "passed": true,
+    "note": "revenue HEAD 76d1602a == base == result (unchanged by FC-705); filing HEAD 85731b2 == base == result (unchanged); wiki result 5e770e2 exists, receipt commit 6ada6fe on top, 'git merge-base --is-ancestor f610c1a752 5e770e2' -> ANCESTRY-OK. DIFF SCOPE: feature commit = the 3 allowlisted files + IMPLEMENTATION_PLAN_FC705.md (plan doc, acceptable per FC-704 precedent); receipt commit touches only assurance/fc/FC-705/11_implementer_receipt.json; zero unrelated changes. IMPORTANT: the implementer receipt's base_triplet.wiki hash f610c1a4dfb84c5b2ba87eebbbc0e39a37afbf6c does NOT exist in any checkout (git cat-file -e fails in both main and worktree); the actual base commit is f610c1a752194953ed242f5cb3e17529650d0dba (same 7-char prefix). All verification was performed against the actual commit; the recorded hash is erroneous — see unresolved_findings F2."
+  },
+  "side_effect_reconciliation": {
+    "passed": true,
+    "note": "Review produced zero downloads, zero catalog mutations. Live replays ran against the production catalog with mode=ro + query_only (sqlite-enforced) and wrote only a TEMP period file outside the repo (C:/Users/郑曾波/AppData/Local/Temp/fc705-review-periods.json — deleted after; contains period 4 only). Production legacy_periods.json, runtime_policy.json, catalog.sqlite3 all untouched by this review (git status clean). The two mutation edits were reverted and verified clean. Zero-write conclusion rests on: (1) sqlite URI mode=ro + PRAGMA query_only enforcement at the connection level, (2) fixture test byte-level sha256 equality before/after, (3) M2 kill demonstrating the writable-store variant changes the hash while the read-only path does not. Catalog hash drift during live runs is the ambient background worker checkpointing WAL — not the observer."
+  },
+  "codegraph_reachability": {
+    "passed": true,
+    "note": "close_gate_allowed / legacy_close_gate referenced ONLY by scripts/legacy_observer.py and tests/contract/test_legacy_observation.py (grep sweep) — zero production callers, consistent with the receipt's codegraph note. Resolver seam wiring verified: _source_metadata and SourceResolver derive legacy_bridge_allowed from the snapshot flag legacy_bridge_enabled (present at base f610c1a752, 8 references; FC-705 did not modify resolver.py). The live drill (hits=0 with bridge off) confirms the flag is honored end-to-end."
+  },
+  "rollback": {
+    "required": false,
+    "passed": true,
+    "note": "Additive single commit (wiki 5e770e2) + receipt commit; revert = revert the commit. Bridge-off drill (LEG-11, live) proves the flag flip is reversible (LEG-09)."
+  },
+  "unresolved_findings": [
+    {
+      "id": "F1-close-gate-unsatisfiable",
+      "severity": "major",
+      "affected": "FC-705 core deliverable ('关闭条件'), Phase 7 exit gate ('可关'), Phase 14 R8 wave entry condition ('两个>=24h zero-hit')",
+      "finding": "close_gate_allowed can NEVER return True on a ledger produced by scripts/legacy_observer.py main(). main() only sets ended_at on the PREVIOUS period when a new period is opened; the newest period always has ended_at absent. close_gate_allowed evaluates the last two periods INCLUDING the open one, and 'window not completed' fails the open period. The verdict is therefore permanently close_allowed=false even after two consecutive completed >=24h zero-hit windows have elapsed. Proven empirically with the real module: simulated the exact main() flow with all-zero-hit >=24h windows for runs 1-5 — every verdict False ('need 2 completed observation windows, have 1' then 'missing started_at/ended_at (window not completed)' forever); the same ledger evaluated over the last two COMPLETED periods returns True after run 3. The unit tests (leg10a-f) only exercise the pure function with hand-crafted fully-completed ledgers; NO test covers the main() period-transition flow, so the defect is invisible to the suite. The off-by-one: at run N+1 the two completed windows are N-1 and N, but the gate evaluates [N, N+1].",
+      "recovery": "Evaluate the last two COMPLETED periods (filter periods with ended_at set before taking the tail) — the fix direction I verified returns True after run 3 — OR close the current window (set ended_at) before evaluating the verdict; add at least one test covering the main()-style ledger transition (new period closes previous; two completed zero-hit windows then authorize). Re-review must rerun the FC-705 focused suite and the ledger-transition test."
+    },
+    {
+      "id": "F2-receipt-base-wiki-hash-erroneous",
+      "severity": "minor",
+      "affected": "Implementer receipt data integrity (base_triplet.wiki)",
+      "finding": "The implementer receipt records base_triplet.wiki = f610c1a4dfb84c5b2ba87eebbbc0e39a37afbf6c; this object does not exist in the main checkout or the worktree (git cat-file -e fails). The actual base commit is f610c1a752194953ed242f5cb3e17529650d0dba (identical 7-char prefix, and the parent of the sealed result 5e770e2 — the content chain is fully verified). The hash is a truncated/corrupted transcription, not a different commit.",
+      "recovery": "Re-issue the implementer receipt (new result triplet + new receipt per protocol) with the corrected base hash f610c1a752194953ed242f5cb3e17529650d0dba, or document the correction in the re-issue."
+    },
+    {
+      "id": "F3-reason-message-wording",
+      "severity": "informational",
+      "affected": "close_gate_allowed diagnostics",
+      "finding": "The reason 'missing started_at/ended_at (window not completed)' fires when only ended_at is missing (started_at present) — message wording is broader than the condition. Cosmetic; the production verdict for period 3 shows it ('period 3: missing started_at/ended_at' while started_at exists).",
+      "recovery": "Optionally split the message into distinct started_at/ended_at reasons when next touching the gate (can ride along with F1)."
+    },
+    {
+      "id": "F4-full-suite-not-rerun",
+      "severity": "informational",
+      "affected": "Implementer claim 2183 passed / 2 pre-existing PORT-01 failures",
+      "finding": "Per review instructions the 7.5-min full wiki suite was not rerun; the PORT-01 claim was spot-checked in the clean worktree (2 failed / 3 passed — reproduced exactly; file untouched by FC-705). Focused (15), cluster (47), ruff, live replays, mutations, validator all replayed fresh.",
+      "recovery": "None required for this review; full-suite rerun remains available to the implementer during the F1 fix verification."
+    }
+  ],
+  "verdict": "changes_required",
+  "reviewer_receipt_sha256": "28cdc1b9c41adbec68ab996d3d14cb2810b70f59cbd204ba95c069a44b279d4e",
+  "reviewed_at": "2026-08-11"
+}

@@ -1,0 +1,102 @@
+{
+  "schema_version": "2.0",
+  "fc_id": "FC-802",
+  "status": "rejected",
+  "reviewer": "reviewer-fc802-r2-independent",
+  "reviewer_identity": "reviewer-fc802-r2-independent",
+  "implementer_receipt_sha256": "6f508d4661a7e013c29f02188fffd56bc17e5400559ab651d3a76f574b734e5d",
+  "implementer_receipt_sha256_note": "on-disk (CRLF) variant of 11_implementer_receipt.json per campaign convention (LF-canonical 0bd90855...); content verified against the receipt on the wiki HEAD 74f8ec0",
+  "clean_checkout": true,
+  "base_triplet": {
+    "revenue": "aa12d9e712bec22047a27e024f8b1fd5b2e7b1b8",
+    "filing": "85731b20f730da6ecc85084a2b7f04a10e75a1f9",
+    "wiki": "d09243f85ed6e1140b1d14650349edaa996cb3b1"
+  },
+  "result_triplet": {
+    "revenue": "aa12d9e712bec22047a27e024f8b1fd5b2e7b1b8",
+    "filing": "7409ad83d6a198662a37e455bc5eed524d502bf2",
+    "wiki": "ca4c0b177d75b9b25f0775a4ac6ed65e2f789382"
+  },
+  "replayed_command_ids": [
+    "fc802-r2.triplet-chain",
+    "fc802-r2.sealing-hashes",
+    "fc802-r2.diff-scope",
+    "fc802-r2.live-end-to-end",
+    "fc802-r2.focused",
+    "fc802-r2.ruff",
+    "fc802-r2.mutation.gap-passthrough",
+    "fc802-r2.mutation.full-suite",
+    "revenue.governance.receipt-validator"
+  ],
+  "scenario_results": [
+    {
+      "id": "F1-CODE",
+      "status": "passed",
+      "note": "Both halves of the r1 F1 code fix verified present and correct: (a) company-wiki ca4c0b1 — the ensure subparser gains --mode (choices exact/latest_as_of) with FC-802 help text, mirroring resolve (cli.py:415) and close-gap (cli.py:485); _parser() has exactly one call site (main, cli.py:679). (b) filing-fetch 7409ad8 — main() (fetch_filing.py:952-961) passes a {status:gap,...} dict through unwrapped; any other result keeps the capture_ready wrapper."
+    },
+    {
+      "id": "F1-LIVE-CLOSED",
+      "status": "passed",
+      "note": "LIVE end-to-end proof against the REAL CLI and the production catalog: fetch_filing.py with mode=latest_as_of, as_of_date=2026-08-11, company_query=紫金矿业 (CN, annual_report) returned rc=0 with TOP-LEVEL status=gap and a complete gap_plan (gap_hash d5d086ef..., as_of_date, entity, market, missing/future/newer_revision lists, provider_reason, provider_unavailable=true, reuse entry for the existing 2025 annual report 601899) plus resolution with resolution_envelope (policy_hash 2d3d2ee8...). NOT wrapped as capture_ready — the r1 blocking divergence is closed at runtime. The provider's metadata discovery was unavailable (fiscal_year required by stockinfo-cninfo) and the plan still returned — the exact provider-fallback the plan calls for. Note: the worker (PID 15736) held the catalog write lock for the first attempts ('database is locked' fatal) — environment contention, cleared on retry; --mode was accepted by the parser in all attempts (r1's parse-time rejection never recurred). GBK mojibake in the printed entity/titles is the expected Windows environment artifact."
+    },
+    {
+      "id": "F-r2-1-REG-TEST",
+      "status": "failed",
+      "note": "The claimed F1 regression test is non-functional. test_main_passes_gap_through_unwrapped is defined INSIDE 'if __name__ == \"__main__\":' AFTER unittest.main() (test file lines 300-323) — pytest never collects it (targeting the node: 'no tests ran' / 'not found'; collect-only: Fc802GapTests still has exactly the same 5 methods as r1). Even if relocated, its logic is broken: main() reads the request file (fetch_filing.py:931-932) BEFORE calling resolve_filing (line 943), so '--request-file missing.json' raises FileNotFoundError -> request_error response, rc=2 — the mocked gap never reaches main()'s output branch (empirically reproduced: payload.status == 'request_error'). The receipt's command claim '7 passed (6 + F1 main() passthrough regression)' is not reproducible: the fresh run of the focused command yields the pre-existing counts (107/102, 209 combined) with no regression test collected."
+    },
+    {
+      "id": "F-r2-1-MUTATION",
+      "status": "failed",
+      "note": "Mandated mutation spot-check: disabling the gap passthrough (if False and handle.get('status') == 'gap') in a temporary worktree at 7409ad8 leaves the ENTIRE suite green — focused 209 passed, full suite 261 passed, 8 skipped, 54 subtests. The mutation SURVIVED. The F1 passthrough change has zero regression protection in the sealed tree."
+    }
+  ],
+  "mutation_results": [
+    {
+      "id": "M-r2-1",
+      "killed": false,
+      "target": "scripts/fetch_filing.py main(): disable the F1 gap passthrough (if False and isinstance(handle, dict) and handle.get('status') == 'gap') — always wrap as capture_ready",
+      "evidence": "Mutated in a temporary filing-fetch worktree at 7409ad8 (main checkout untouched). pytest 'tests/test_fc802_gap_orchestration.py::test_main_passes_gap_through_unwrapped' -> 'no tests ran' (node not collectible). Full suite under mutation -> 261 passed, 8 skipped, 54 subtests — NOTHING fails. Reverted byte-identical via worktree removal; main checkout clean."
+    }
+  ],
+  "validator_gate": {
+    "passed": true,
+    "note": "python tools/receipt_validator.py --receipt C:/Users/郑曾波/Projects/company-wiki/assurance/fc/FC-802/11_implementer_receipt.json from revenue-forecast prints 'OK: 1 receipt(s) valid', exit 0. (Structural gate only — it does not verify hash content, which is this review's manual step.)"
+  },
+  "sealing_hashes": {
+    "plan_sha256": "158fc1e1e4231e3c2dc71822a58931fdca64eff79fc0d4e27b8276a397f4c78a",
+    "plan_source": "recomputed via 'git show 2d64186:audit_review/2026-08-09_full_completion_assurance_plan/task_plan.md | sha256sum' in revenue-forecast: MATCH (frozen campaign baseline, same constant as FC-801/705/604/704; FC-802 Phase 8 content confirmed present in that frozen plan). Working-tree HEAD plan is 12e6ba80... (later acceptance docs appended) — per convention the frozen baseline seals the receipt.",
+    "command_registry_sha256": "215b8077169126b2c4a5eca9d8d6237f291757c2559f6ae6e0ae8ff1c806b089",
+    "registry_source": "recomputed on disk at revenue-forecast HEAD aa12d9e7 (compatibility/command_registry.json, CRLF working-tree bytes): MATCH, repo clean."
+  },
+  "triplet_verification": {
+    "passed": true,
+    "note": "Revenue aa12d9e7 == revenue-forecast HEAD == base == result (unchanged). Filing base 85731b2 / result 7409ad8 both exist; 7409ad8 == filing-fetch HEAD; 'git merge-base --is-ancestor 85731b20 7409ad8' -> ANCESTRY-OK (r2 commit sits on r1 abde149 on base). Wiki base d09243f / result ca4c0b1: ca4c0b1 == the --mode fix commit; 'git merge-base --is-ancestor d09243f8 ca4c0b1' -> ANCESTRY-OK; wiki HEAD 74f8ec0 = ca4c0b1 + the r2 receipt docs commit (touches only assurance/fc/FC-802/11_implementer_receipt.json). Diff scope: filing 85731b20..7409ad8 = the r1 span (3 allowlisted files + IMPLEMENTATION_PLAN_FC802.md, FC-801 F3 precedent) and the r2 delta (git show 7409ad8 = fetch_filing.py +15/-5 + test file +21 only); wiki d09243f8..ca4c0b1 = receipt + cli.py +8 only. Zero unrelated changes."
+  },
+  "side_effect_reconciliation": {
+    "passed": true,
+    "note": "This review: zero downloads (no --allow-download anywhere), zero file writes outside the two deliverables (12_reviewer_receipt_r2.json + REVIEWER_REPORT_R2.md), zero catalog mutations by the reviewer (the live proof's ensure run is the product's own read-mostly metadata path; the catalog DB was only read by the reviewer's commands). Mutation replays ran in a temporary filing-fetch worktree, removed; filing-fetch and company-wiki main checkouts clean. Live proof ran the REAL CLI against the production catalog as mandated; the transient 'database is locked' (worker PID 15736 holding the write lock) cleared on retry."
+  },
+  "codegraph_reachability": {
+    "passed": true,
+    "note": "Wiki change is a single subparser argument addition inside _parser() (one call site: main, cli.py:679) — no new symbols, no production callers possible. Filing change lives in main()'s output branch. resolve_filing's structured-gap return is consumed only by main() (verified in the 7409ad8 diff)."
+  },
+  "rollback": {
+    "required": true,
+    "passed": false,
+    "note": "With a rejected verdict the remediation path is narrow and does not touch the verified code: relocate test_main_passes_gap_through_unwrapped into Fc802GapTests and fix its logic (feed a valid request via stdin or a temp request file so the mocked gap flows through main()'s output branch; assert top-level status=gap, gap_plan passthrough, and absence of capture_ready), then re-seal. The F1 code fix itself (filing 7409ad8 main() + wiki ca4c0b1 ensure --mode) is correct and live-proven and can stand unchanged."
+  },
+  "findings": [
+    {
+      "id": "F-r2-1",
+      "severity": "blocking",
+      "status": "must-fix-before-acceptance",
+      "evidence": "The r2 closure's regression test does not exist as a runnable test. (1) PLACEMENT: tests/test_fc802_gap_orchestration.py:300-323 defines test_main_passes_gap_through_unwrapped inside 'if __name__ == \"__main__\":' AFTER unittest.main() — it is never collected by pytest ('ERROR: not found' / 'no tests ran' when targeted; collect-only shows Fc802GapTests unchanged at 5 methods vs r1). (2) LOGIC: main() reads the request file at fetch_filing.py:931-932 before calling resolve_filing at 943, so the test's '--request-file missing.json' raises FileNotFoundError -> request_error, rc=2, before the mocked gap is ever consulted — reproduced empirically (payload.status == 'request_error'; the comment 'resolve_filing is mocked so no file is read' is false). (3) CONSEQUENCE: the mandated mutation spot-check (disable the gap passthrough) survives the ENTIRE suite — focused 209 passed, full 261 passed — the F1 passthrough has zero regression protection in the sealed tree. (4) RECEIPT ACCURACY: '7 passed (6 + F1 main() passthrough regression)' is not reproducible; the focused command yields the pre-existing counts with no regression test collected. The F1 code fix itself verified correct and live-closed (see F1-LIVE-CLOSED); only the test deliverable is broken."
+    }
+  ],
+  "unresolved_findings": [
+    "F-r2-1"
+  ],
+  "verdict": "rejected",
+  "reviewer_receipt_sha256": "8436bc4c143d8b7a3ed6e42ac978ea3e04c87c39f142d77689766e0fdb0490cc",
+  "reviewed_at": "2026-08-11"
+}
