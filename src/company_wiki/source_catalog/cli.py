@@ -434,6 +434,14 @@ def _parser() -> argparse.ArgumentParser:
     ensure.add_argument("--provider")
     ensure.add_argument("--provider-document-id")
     ensure.add_argument(
+        "--mode",
+        choices=("exact", "latest_as_of"),
+        help=(
+            "FC-802: latest_as_of always returns the metadata-only gap plan "
+            "(WU-4.2) — nothing is downloaded; exact keeps the legacy path"
+        ),
+    )
+    ensure.add_argument(
         "--allow-download",
         action="store_true",
         help="explicitly permit adapter discovery/fetch when the catalog has no reusable source",
