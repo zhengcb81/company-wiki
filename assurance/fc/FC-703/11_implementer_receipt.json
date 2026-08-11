@@ -11,7 +11,7 @@
   "result_triplet": {
     "revenue": "0cf30c16e72ce6d28f8a67bffd0ccc1f0fff073e",
     "filing": "6274be2187b450d14492defd03579d6209d1b1cc",
-    "wiki": "41b060ddb89d8913b8fdb4f1f3f7b03ebc37da1b"
+    "wiki": "ae91836548b9cf4d00d1014675ce133470d852d8"
   },
   "plan_sha256": "158fc1e1e4231e3c2dc71822a58931fdca64eff79fc0d4e27b8276a397f4c78a",
   "policy_sha256": "not-applicable",
@@ -32,7 +32,7 @@
     {
       "id": "OPS-03",
       "status": "passed",
-      "note": "kind/status/entity filters pushed into SQL: the documents query carries WHERE clauses for document_kind + source_status + fiscal_year (spy test), a quarterly noise document never enters an annual slice, another entity's docs are excluded — no Python full-table scan"
+      "note": "kind/status/entity filters pushed into SQL: the DOCUMENTS query carries WHERE predicates for document_kind = ? + source_status IN (...) + fiscal_year json_extract (asserted on the WHERE region, not the SELECT projection — reviewer r1 fix); a quarterly noise document never enters an annual slice; another entity's docs are excluded — no Python full-table scan"
     },
     {
       "id": "EX-07",
@@ -47,24 +47,39 @@
   ],
   "commands": [
     {
-      "command": "python -m pytest tests/contract/test_resolver_sql_perf_fc703.py -q",
+      "command": "python -B -m pytest tests/contract/test_resolver_sql_perf_fc703.py -q",
       "exit_code": 0,
-      "result": "5 passed"
+      "result": "5 passed (unmutated)",
+      "cwd": "company-wiki"
     },
     {
-      "command": "python -m pytest tests/ -q",
+      "command": "python -B -m pytest tests/contract/test_resolver_sql_perf_fc703.py tests/contract/test_strict_identity_fc702.py tests/contract/test_normalized_resolver_fc701.py tests/contract/test_three_root_consistency_fc604.py -q",
       "exit_code": 0,
-      "result": "2164 passed, 1 skipped / 3 failed — ALL 3 verified pre-existing at parent commit 4854380 (detached HEAD rerun): test_check_unique_test_symbols.py::test_syntax_error_is_reported_as_failure (PORT-01, FC-1205) + 2 worker-bootstrap Windows process-integration flakes (test_terminating_supervisor_does_not_leave_an_orphan_worker). FC-703 changed zero production code."
+      "result": "23 passed (Phase-7 cluster)",
+      "cwd": "company-wiki"
     },
     {
       "command": "ruff check tests/contract/test_resolver_sql_perf_fc703.py tools/ex07_perf_replay.py",
       "exit_code": 0,
-      "result": "All checks passed"
+      "result": "All checks passed",
+      "cwd": "company-wiki"
     },
     {
-      "command": "python tools/ex07_perf_replay.py",
+      "command": "python -B tools/ex07_perf_replay.py",
       "exit_code": 0,
-      "result": "latency baseline: catalog_documents=23521, CN-601899-FY2024/2025 p50 42.4/42.1ms, HK-03690-FY2024 p50 14.2ms, US-AAPL-FY2025 p50 14.1ms; statuses REUSED_EXACT; side_effects all zero"
+      "result": "latency baseline: catalog_documents=23521, CN-601899-FY2024/2025 p50 44.2/43.5ms (r1 reviewer) and 41.5/43.0ms (implementer), HK-03690 p50 9.9ms, US-AAPL p50 9.8ms; statuses REUSED_EXACT; side_effects all zero",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "python -B tools/ex07_perf_replay.py (catalog-less temp tree)",
+      "exit_code": 2,
+      "result": "FAILED CLOSED: 'catalog database missing' — exit 2, no .source_catalog created (reviewer r1 secondary finding fixed)",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "python -m pytest tests/ -q (implementer, pre-r2)",
+      "exit_code": 0,
+      "result": "2164 passed, 1 skipped / 3 failed — ALL pre-existing at parent commit 4854380 (verified by detached-HEAD rerun): PORT-01/FC-1205 test_check_unique_test_symbols + 2 Windows worker-bootstrap process-integration flakes. FC-703 changes zero production code."
     }
   ],
   "side_effect_counts": {
@@ -80,9 +95,9 @@
     "note": "FC-703 is a test + baseline commit: zero production code changed; SQL pushdown already present from FC-601/602/603 work, now pinned by 5 contract tests"
   },
   "mutation": {
-    "id": "FC-703-M",
+    "id": "FC-703-M1",
     "killed": true,
-    "details": "mutation runs executed with __pycache__ cleared + python -B (Windows mtime staleness fix): WHERE-clause removal mutations killed by the spy test (OPS-03); candidate-cap removal killed by the cap test; determinism broken by canonical-order mutations on the 10-candidate fixture"
+    "details": "reviewer r1 proved the original spy test was projection-satisfied (M1 survived: dropping 'AND d.document_kind = ?' left all 5 tests green). r2 strengthened the spy to assert predicates in the WHERE region; M1 re-run (kind WHERE clause dropped, pycache cleared, python -B): ALL 5 tests FAIL. M3 (fiscal_clause removed) also kills via the WHERE-region fiscal_year assertion."
   },
   "rollback": {
     "required": false,
@@ -94,7 +109,7 @@
     "reviewer_receipt_sha256": "",
     "decision": "pending",
     "reviewed_at": "",
-    "note": "honest-implementer: awaits independent reviewer per independent_review_protocol.md"
+    "note": "honest-implementer: r1 REJECTED (12_reviewer_receipt.json, 121c0d2) — pin fixed in r2 (ae91836); awaits r2 independent review"
   },
-  "provisional_note": "result_triplet sealed at wiki 41b060d."
+  "provisional_note": "r2 result_triplet sealed at wiki ae91836; r1 rejection recorded at 121c0d2."
 }
