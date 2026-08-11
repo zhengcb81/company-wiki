@@ -1,0 +1,140 @@
+{
+  "schema_version": "2.0",
+  "fc_id": "FC-803",
+  "status": "accepted",
+  "reviewer": "reviewer-fc803-independent",
+  "reviewer_identity": "reviewer-fc803-independent",
+  "implementer_receipt_sha256": "ea571d00f22ba91a02485abf5aa31b57cb53878557035503092ab5524dc0c761",
+  "implementer_receipt_sha256_note": "raw on-disk bytes of 11_implementer_receipt.json (CRLF working-tree variant per campaign convention)",
+  "clean_checkout": true,
+  "clean_checkout_note": "filing-fetch main checkout clean at 065976e throughout; wiki review worktree clean at 18a2792; company-wiki main checkout carries only pre-existing artifacts (llm_cost_log.csv modified, untracked FC-802/REVIEWER_REPORT_R2.md) that predate this review",
+  "base_triplet": {
+    "revenue": "84c9e7e4d3f738b6a1cbd2ecb08025fcb68109d6",
+    "filing": "354b171fc0f50aee0094361affb6da55192e0b17",
+    "wiki": "656adac1261f5dcf1feafece8fd0b4b1b3845d71"
+  },
+  "result_triplet": {
+    "revenue": "84c9e7e4d3f738b6a1cbd2ecb08025fcb68109d6",
+    "filing": "065976ed7c81c9112e4647592084c1b2c891aa3c",
+    "wiki": "8a2efdd84fba35074e107f5f18e3c8c9d1bd6bab"
+  },
+  "replayed_command_ids": [
+    "fc803.triplet-chain",
+    "fc803.sealing-hashes",
+    "fc803.diff-scope",
+    "fc803.t1-fresh",
+    "fc803.regression-filing",
+    "fc803.ruff-filing",
+    "fc803.wiki-contract",
+    "fc803.ruff-wiki",
+    "fc803.mutation.M1",
+    "fc803.mutation.M2b",
+    "fc803.post-revert-t1",
+    "fc803.validator"
+  ],
+  "scenario_results": [
+    {
+      "id": "LT-09/DL-04",
+      "status": "passed",
+      "note": "fresh T1: first authorized close-gap -> capture_ready, spy fetch count == 1, companies/ written; second identical request -> status gap, missing==[], fetch count still 1, companies/ byte-unchanged (zero fetch + zero write). Real cross-process chain (filing-fetch CLI -> company-wiki CLI -> spy json_command_v1 subprocess)."
+    },
+    {
+      "id": "LT-02",
+      "status": "passed",
+      "note": "FY2024 local seed + FY2025 provider candidate -> capture_ready, exactly 1 fetch for fiscal_year 2025, the 2024 document remains in companies/."
+    },
+    {
+      "id": "LT-01",
+      "status": "passed",
+      "note": "local latest: status gap, missing==[], reuse handle surfaced, fetch=0, discover=1."
+    },
+    {
+      "id": "LT-05",
+      "status": "passed",
+      "note": "SPY_ADAPTER_FAULT=provider_unavailable: status gap, provider_unavailable==True, fetch=0 - the plan is NOT claimed closed on provider outage."
+    },
+    {
+      "id": "LT-07",
+      "status": "passed",
+      "note": "candidate filed after as_of: status gap, missing==[], future surfaced, fetch=0."
+    },
+    {
+      "id": "LT-08",
+      "status": "passed",
+      "note": "verified through the lt09 first-request assertion (status capture_ready returned directly after close-gap, no manual retry) + FC-802 orchestration regression green."
+    },
+    {
+      "id": "REAL-FIX-1",
+      "status": "passed",
+      "note": "M2b kill proves the binding: with the per-candidate extraction nulled, the first close-gap re-resolves the older local document as reused and never stages the gap (fetch=0) - lt09 FAILS. Staged_request in close_gap.py carries missing_candidate fiscal_year/provider_document_id/form_type/provider."
+    },
+    {
+      "id": "REAL-FIX-2",
+      "status": "passed",
+      "note": "cli.py close-gap subparser now has --allow-acquisition-while-paused + --worker-config, and main() raises RuntimeError when worker desired_state==paused without the bypass flag (read at 8a2efdd)."
+    },
+    {
+      "id": "REAL-FIX-3",
+      "status": "passed",
+      "note": "close_gap.py failure path calls _cleanup_staging(staged_request.request_id) - the STAGING request's id (per-candidate), matching resolve_or_stage staging-dir naming; _cleanup_staging derives the dir from request_id.rsplit(':',1)[-1]."
+    },
+    {
+      "id": "MUTATIONS",
+      "status": "passed",
+      "note": "M1 (has_missing forced True) -> lt01/lt05/lt07 all FAILED; M2b (per-candidate binding nulled) -> lt09 FAILED. Both reverted; full 5-test T1 re-run green (27.5s)."
+    }
+  ],
+  "mutation_results": [
+    {
+      "id": "M1",
+      "killed": true,
+      "target": "scripts/fetch_filing.py resolve_filing(): has_missing forced to True (actionable gate removed)",
+      "evidence": "pytest tests/test_fc803_minimal_download.py -k 'lt01 or lt05 or lt07' -> 3 failed, 2 deselected (test_lt01_local_is_latest_fetch_zero, test_lt05_provider_unavailable_keeps_local_reuse, test_lt07_future_filing_never_leaks_into_gap). Reverted via git checkout; git diff HEAD empty; post-revert full T1 re-run 5 passed."
+    },
+    {
+      "id": "M2b",
+      "killed": true,
+      "target": "company-wiki close_gap.py step 3: missing_candidate/missing_year/missing_pdoc nulled (per-candidate binding removed)",
+      "evidence": "mutation applied in a temporary company-wiki worktree at 8a2efdd; lt09 run with PYTHONPATH pointing at the mutated src -> 1 failed: AssertionError 0 != 1 (spy fetch count, test_fc803_minimal_download.py:179) - the exact REAL-FIX-1 failure mode (old local doc re-resolved as reused, nothing staged). Worktree removed; main checkouts untouched."
+    }
+  ],
+  "validator_gate": {
+    "passed": true,
+    "note": "python tools/receipt_validator.py --receipt C:/Users/郑曾波/Projects/company-wiki/assurance/fc/FC-803/11_implementer_receipt.json -> OK: 1 receipt(s) valid (exit 0)."
+  },
+  "sealing_hashes": {
+    "plan_sha256": "158fc1e1e4231e3c2dc71822a58931fdca64eff79fc0d4e27b8276a397f4c78a",
+    "plan_source": "recomputed via git show 2d64186:audit_review/2026-08-09_full_completion_assurance_plan/task_plan.md | sha256sum in revenue-forecast (HEAD 84c9e7e4, clean): MATCH.",
+    "command_registry_sha256": "215b8077169126b2c4a5eca9d8d6237f291757c2559f6ae6e0ae8ff1c806b089",
+    "registry_source": "recomputed on disk at revenue-forecast HEAD 84c9e7e4 (compatibility/command_registry.json): MATCH."
+  },
+  "triplet_verification": {
+    "passed": true,
+    "note": "Revenue 84c9e7e4 == revenue-forecast HEAD == base == result (unchanged). Filing result 065976e == filing-fetch HEAD (commit 'feat(fc-803): minimal download + second-request zero fetch/write (T1 spy chain)'); base 354b171 is an ancestor (FILING-ANCESTRY-OK). Wiki result 8a2efdd (REAL-FIX-3 commit) with base 656adac an ancestor (WIKI-ANCESTRY-OK); wiki HEAD 18a2792 = 8a2efdd + receipt-docs commit touching only assurance/fc/FC-803/. Diff scope: git diff --stat 354b171 065976e = 3 files (fetch_filing.py +8/-1, spy_adapter.py +136, test_fc803_minimal_download.py +269); git diff --stat 656adac 8a2efdd = 2 files (close_gap.py, cli.py). Zero unrelated changes."
+  },
+  "side_effect_reconciliation": {
+    "passed": true,
+    "note": "No downloads (spy provider writes only into temp staging dirs under the temp wiki roots; its log is the only write). Zero writes outside this receipt + REVIEWER_REPORT.md. M1 reverted byte-identically (git diff empty); M2b ran in a temporary worktree removed afterwards. filing-fetch main checkout clean; company-wiki main checkout untouched by this review."
+  },
+  "codegraph_reachability": {
+    "passed": true,
+    "note": "The local CodeGraph index covers only revenue-forecast (123 files); FC-803's changes live in filing-fetch/company-wiki, outside the index. Reachability verified by direct code read instead: has_missing gate sits in resolve_filing (fetch_filing.py:698), called by main(); close_gap step-3 runs inside CloseGapTransaction.transaction() invoked by the cli.py close-gap command; spy_adapter.py is test-harness-only (referenced solely by test_fc803_minimal_download.py and the temp acquisition YAMLs)."
+  },
+  "rollback": {
+    "required": false,
+    "passed": true,
+    "note": "No outstanding findings; both mandated mutations killed and reverted. Revert = revert commit 065976e (filing) + 8a2efdd (wiki)."
+  },
+  "observations": [
+    "Fresh T1 runs exercised the sealed code end to end: run_fetch spawns the live filing-fetch scripts/fetch_filing.py from the checkout, which spawns the company-wiki CLI (editable install resolving to the main checkout's src at the 8a2efdd code) against a temp wiki root; the spy json_command_v1 adapter records every discover/fetch into SPY_ADAPTER_LOG. No mocks in the chain.",
+    "M1 deselected lt09/lt02 and killed exactly the three claimed tests (lt01/lt05/lt07), each asserting the structured-gap fall-through that the gate protects.",
+    "M2b's kill signature (fetch count 0 != 1 at line 179) reproduces precisely the REAL-FIX-1 bug report: an exact request without the missing period's fiscal_year re-resolves the older local document as reused and never stages the gap.",
+    "Receipt command counts are consistent with fresh runs (T1 5 passed; focused regression 210 passed + 2 skipped + 54 subtests; wiki contract 7 passed). Full-suite counts (267 filing / 2193 wiki) were not re-run per campaign convention - no code touched beyond the reviewed scope.",
+    "The wiki main checkout carries pre-existing uncommitted artifacts (llm_cost_log.csv modification, untracked FC-802/REVIEWER_REPORT_R2.md) that predate this review and were not produced by it."
+  ],
+  "findings": [],
+  "unresolved_findings": [],
+  "verdict": "accepted",
+  "reviewer_receipt_sha256": "23ee8c5e6c553cae7296c77cb4d5df4cf6039d881de7de8552e218c630491d65",
+  "reviewed_at": "2026-08-11"
+}
