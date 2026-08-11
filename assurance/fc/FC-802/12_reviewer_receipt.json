@@ -1,0 +1,132 @@
+{
+  "schema_version": "2.0",
+  "fc_id": "FC-802",
+  "status": "rejected",
+  "reviewer": "reviewer-fc802-independent",
+  "reviewer_identity": "reviewer-fc802-independent",
+  "implementer_receipt_sha256": "72a5b5929fbb9043b9fc2a6d5b85fe653e58499999b53c8178f41fb4cfe351ca",
+  "implementer_receipt_sha256_note": "on-disk (CRLF) variant per r1 convention; content verified against the receipt on the wiki HEAD e581edc",
+  "clean_checkout": true,
+  "base_triplet": {
+    "revenue": "aa12d9e712bec22047a27e024f8b1fd5b2e7b1b8",
+    "filing": "85731b20f730da6ecc85084a2b7f04a10e75a1f9",
+    "wiki": "d09243f85ed6e1140b1d14650349edaa996cb3b1"
+  },
+  "result_triplet": {
+    "revenue": "aa12d9e712bec22047a27e024f8b1fd5b2e7b1b8",
+    "filing": "abde149d1987835dabbb04e586fc858b2b91878e",
+    "wiki": "d09243f85ed6e1140b1d14650349edaa996cb3b1"
+  },
+  "replayed_command_ids": [
+    "fc802.triplet-chain",
+    "fc802.sealing-hashes",
+    "fc802.diff-scope",
+    "fc802.focused",
+    "fc802.regression",
+    "fc802.ruff",
+    "fc802.mutation.M1",
+    "fc802.mutation.M2",
+    "fc802.live-cli-argparse",
+    "revenue.governance.receipt-validator"
+  ],
+  "scenario_results": [
+    {
+      "id": "FC802-1..6",
+      "status": "mixed",
+      "note": "All 6 declared scenarios are green under mocked subprocess.run (5 new test methods in test_fc802_gap_orchestration.py + FC802-4 covered by the pre-existing test_fetch_filing suite), and ruff is clean. BUT the tests never exercise the real company-wiki CLI boundary, and a live argparse probe proves the primary path (latest_as_of -> ensure) crashes with 'unrecognized arguments: --mode latest_as_of' (see F1, blocking). Receipt accuracy note: the command recorded as '6 passed' is not reproducible — the file contains 5 Fc802GapTests methods and the recorded command actually yields '107 passed, 1 skipped, 27 subtests' (module import pulls in test_fetch_filing)."
+    },
+    {
+      "id": "FC802-3-binding",
+      "status": "passed",
+      "note": "Code-read confirm of the thin-orchestration binding: request_id and gap_plan_hash come from the ensure payload's plan (acquisition.gap_plan.request_id / .gap_hash), policy_hash from the resolution envelope (resolution.resolution_envelope.policy_hash), provider/accessions/caps/expiry from the caller authorization block. No provider/root/identity rules are re-derived. close-gap CLI (cli.py:1067+) reads the exact same binding keys via CloseGapBinding. The binding is fail-closed: a payload whose resolution lacks resolution_envelope yields policy_hash None -> str(None)='None' -> close_gap step-1 policy check rejects."
+    },
+    {
+      "id": "FC802-handle-contract",
+      "status": "passed",
+      "note": "_handle_from_resolution single-sources the handle contract for both the reuse path and the close-gap path: exactly-one match, capture_ready provenance, validate_handle containment, FC-704 envelope forwarding (explicit envelope param from the close-gap CLI output, or resolution.resolution_envelope fallback) with validate_resolution_envelope. Temp binding file lifecycle: NamedTemporaryFile(delete=False) -> json.dump -> close -> path passed to close-gap -> unlinked in finally (missing_ok=True)."
+    },
+    {
+      "id": "FC802-authorization-validation",
+      "status": "passed",
+      "note": "filing_contracts.py: authorization is optional (None -> skipped); non-dict -> request_error; missing required fields -> request_error with the field list; provider/expires_at non-empty text; allowed_accessions non-empty list of non-empty strings; max_items/max_bytes positive ints (bool excluded)."
+    },
+    {
+      "id": "FC802-structured-gap",
+      "status": "passed-in-mock-only",
+      "note": "The structured-gap branch (status=gap -> {status:gap, gap_plan, resolution}; never not_found) and the exact-mode not_found mapping are correct as code. However the branch is unreachable against the real company-wiki CLI because the ensure subparser rejects --mode (F1)."
+    }
+  ],
+  "mutation_results": [
+    {
+      "id": "M1",
+      "killed": true,
+      "target": "scripts/fetch_filing.py: disable the structured-gap branch (if False and payload.get('status') == 'gap')",
+      "evidence": "Mutated in a temporary filing-fetch worktree at abde149 (main checkout untouched). python -m pytest tests/test_fc802_gap_orchestration.py::Fc802GapTests::test_gap_structured_without_download tests/test_fc802_gap_orchestration.py::Fc802GapTests::test_allow_download_without_authorization_stays_gap -q -> 2 FAILED. Reverted byte-identical via git checkout; worktree clean; suite re-verified green (107 passed)."
+    },
+    {
+      "id": "M2",
+      "killed": true,
+      "target": "scripts/fetch_filing.py: in _close_gap_and_return_handle bind policy_hash from the REQUEST authorization block (authorization.get('policy_hash')) instead of the envelope",
+      "evidence": "Mutated in the temporary worktree. test_authorized_close_gap_returns_handle -q -> 1 FAILED (AssertionError at line 261: binding['policy_hash'] == 'b'*64). The test pins policy_hash to the envelope's b*64, so the request-derived binding cannot pass. Reverted byte-identical; worktree clean; suite re-verified green."
+    }
+  ],
+  "validator_gate": {
+    "passed": true,
+    "note": "python tools/receipt_validator.py --receipt C:/Users/郑曾波/Projects/company-wiki/assurance/fc/FC-802/11_implementer_receipt.json from revenue-forecast prints 'OK: 1 receipt(s) valid', exit 0."
+  },
+  "sealing_hashes": {
+    "plan_sha256": "158fc1e1e4231e3c2dc71822a58931fdca64eff79fc0d4e27b8276a397f4c78a",
+    "plan_source": "recomputed via 'git show 2d64186:audit_review/2026-08-09_full_completion_assurance_plan/task_plan.md | sha256sum' in revenue-forecast: MATCH (frozen campaign baseline, same constant as FC-801/604/704/705; FC-802 Phase 8 content confirmed present in that frozen plan). Revenue-forecast HEAD plan is f78b85... (later phases appended) — per convention the frozen baseline seals the receipt.",
+    "command_registry_sha256": "215b8077169126b2c4a5eca9d8d6237f291757c2559f6ae6e0ae8ff1c806b089",
+    "registry_source": "recomputed on disk at revenue-forecast HEAD aa12d9e7 (compatibility/command_registry.json): MATCH, file untracked-changes-clean."
+  },
+  "triplet_verification": {
+    "passed": true,
+    "note": "Revenue aa12d9e7 == revenue-forecast HEAD == base == result. Filing base 85731b2 and result abde149 both exist (git cat-file -e); abde149 == filing-fetch HEAD. Wiki base d09243f == result (unchanged); d09243f is an ancestor of wiki HEAD e581edc (receipt commit on top, touches only assurance/fc/FC-802/11_implementer_receipt.json). Diff 85731b20..abde149 = the 3 allowlisted files + IMPLEMENTATION_PLAN_FC802.md (process artifact, FC-801 F3 precedent; content faithfully matches the plan's design points 1-4 and scenarios FC802-1..6). Zero unrelated changes."
+  },
+  "side_effect_reconciliation": {
+    "passed": true,
+    "note": "This review: zero downloads, zero catalog mutations, zero journal writes. All test runs used mocked subprocess.run with tmp_path fixtures; mutation replays ran in a temporary filing-fetch worktree and were reverted byte-identical (git status clean, worktree removed). Live CLI probes: (a) 'ensure ... --mode latest_as_of' failed at strict argparse before any config/catalog access; (b) control 'resolve ... --mode latest_as_of' ran the read-only resolve command (never journals per FC-704) against the review worktree root — no files changed (git status clean verified). Only files written: assurance/fc/FC-802/12_reviewer_receipt.json + REVIEWER_REPORT.md."
+  },
+  "codegraph_reachability": {
+    "passed": true,
+    "note": "Wiki triplet unchanged, so no new production callers in company-wiki. _close_gap_and_return_handle has exactly one caller (resolve_filing); _handle_from_resolution has two (reuse path + close-gap path) — both within fetch_filing.py. Consumer note: fetch_filing main() wraps any handle in {status: 'capture_ready', handle: ...} without special-casing the gap result — a structured gap would surface with top-level status capture_ready while handle.status == 'gap' (F4)."
+  },
+  "rollback": {
+    "required": true,
+    "passed": false,
+    "note": "The implementer's claim 'additive orchestration; revert = revert commit' is mechanically true, but with a rejected verdict the remediation path is: either revert abde149, or extend FC-802 with the company-wiki change the defect requires (add --mode to the ensure subparser, cli.py:417-461, mirroring resolve at line 415 / close-gap at line 485) and re-seal with a wiki triplet change. The sealed triplet (wiki unchanged) cannot be correct as-is."
+  },
+  "findings": [
+    {
+      "id": "F1-ensure-rejects-mode",
+      "severity": "blocking",
+      "status": "must-fix-before-acceptance",
+      "evidence": "LIVE PROOF: 'PYTHONUTF8=1 python -m company_wiki.source_catalog.cli ensure --entity X --document-kind annual_report --as-of-date 2026-07-18 --mode latest_as_of' -> 'error: unrecognized arguments: --mode latest_as_of' (strict _parser().parse_args, cli.py:671). Control: the same command with 'resolve' is accepted and executes. Root cause: fetch_filing._command_arguments (fetch_filing.py:173-175) forwards '--mode <mode>' on every company-wiki invocation, and FC-802's new line 638-640 routes ALL latest_as_of requests through ensure ('action = ensure if (allow_download or is_latest) else resolve'); the ensure subparser defines no --mode (only resolve cli.py:415 and close-gap cli.py:485 do). So every latest_as_of request raises a FilingFetchError from _run_company_wiki_json_retry and the structured-gap result (FC802-1/2, the core of the FC) never materializes. The 5 new tests mock subprocess.run, so all pass while the production boundary fails — exactly the divergence the honest-implementer protocol exists to catch. Even if the flag were tolerated, the ensure handler reads mode via getattr(args, 'mode', None) -> None (parser lacks the attribute), so SourceRequest.mode would be silently dropped; mode is load-bearing in the coordinator (acquisition.py:313,339 and resolver.py:827,853 branch on request.mode == 'latest_as_of' for the metadata-only gap plan). Dropping the flag in filing-fetch is therefore NOT a valid fix — the company-wiki ensure parser must accept and forward --mode. Note: base 85731b20 had the same latent forwarding for the allow_download+mode combination, but FC-802's action line makes it the primary path of the feature. Also note: close-gap DOES accept --mode, so only the ensure leg is broken."
+    },
+    {
+      "id": "F2-receipt-count-mismatch",
+      "severity": "minor",
+      "status": "acknowledged-receipt-accuracy",
+      "evidence": "Receipt commands[0] records '6 passed' for 'python -m pytest tests/test_fc802_gap_orchestration.py -q'. Fresh replay: the command actually yields '107 passed, 1 skipped, 27 subtests' (the module imports FilingFetchTests from test_fetch_filing, pulling in the parent suite); Fc802GapTests alone contains 5 test methods. The 6 scenario_results map to 5 new tests (FC802-4 exact-mode-reused regression is covered only by the pre-existing suite). The test claims are all true; only the recorded count is off. Does not affect the verdict."
+    },
+    {
+      "id": "F3-plan-file-outside-receipt-lists",
+      "severity": "informational",
+      "status": "acknowledged-no-action",
+      "evidence": "IMPLEMENTATION_PLAN_FC802.md ships in the sealed commit abde149 but is not in the receipt's allowed_files/changed_files. Identical to the FC-801 F3 precedent (FC-704/FC-705 too). Content verified: a faithful FC-802 design doc matching the plan's design points 1-4 and scenarios FC802-1..6. No action required."
+    },
+    {
+      "id": "F4-main-does-not-special-case-gap",
+      "severity": "informational",
+      "status": "acknowledged-no-action",
+      "evidence": "fetch_filing main() wraps the resolve_filing result in {status: 'capture_ready', handle: ...} and has no branch for handle.status == 'gap'; a structured gap would be emitted as top-level status capture_ready with the gap marker nested in the handle. The downstream consumer contract (revenue adapter) is outside FC-802's stated scope (Phase 8 exit gate T3/T4 covers the closed loop); flagged for the follow-up that fixes F1."
+    }
+  ],
+  "unresolved_findings": [
+    "F1"
+  ],
+  "verdict": "rejected",
+  "reviewer_receipt_sha256": "210e59c2e12d880a932ff6e16be17acc23930f7a7de667bf8a04b266ee020724",
+  "reviewed_at": "2026-08-11"
+}
