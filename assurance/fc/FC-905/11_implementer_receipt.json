@@ -1,0 +1,133 @@
+{
+  "schema_version": "2.0",
+  "fc_id": "FC-905",
+  "status": "independent_review",
+  "mode": "honest-implementer",
+  "base_triplet": {
+    "revenue": "b9994dc4f67f1943379a1c830b34e0dfe307e117",
+    "filing": "959d04cdbe2115c8e01fa39a2d5dfe748cc4fedd",
+    "wiki": "fd4f50b7566bf26997062404594bc78209246a1f"
+  },
+  "result_triplet": {
+    "revenue": "b9994dc4f67f1943379a1c830b34e0dfe307e117",
+    "filing": "959d04cdbe2115c8e01fa39a2d5dfe748cc4fedd",
+    "wiki": "d76e461496e43e7696dc2dc763ec1d443f4a484e"
+  },
+  "plan_sha256": "0bc6b9f7d6707e470e55c22759d37c18404172081ecd176d2883e184c61fafaa",
+  "policy_sha256": "not-applicable",
+  "allowed_files": [
+    "company-wiki/src/company_wiki/source_catalog/store.py",
+    "company-wiki/src/company_wiki/source_catalog/prompt_injection.py",
+    "company-wiki/src/company_wiki/source_catalog/producer_events.py",
+    "company-wiki/src/company_wiki/source_catalog/resolver.py",
+    "company-wiki/src/company_wiki/source_catalog/cli.py",
+    "company-wiki/src/company_wiki/source_catalog/close_gap.py",
+    "company-wiki/tests/contract/test_fc905_receipt_envelope.py",
+    "company-wiki/assurance/fc/FC-905/03_change_contract_fc905a.md",
+    "company-wiki/assurance/fc/FC-905/11_implementer_receipt.json"
+  ],
+  "changed_files": [
+    "company-wiki/src/company_wiki/source_catalog/store.py",
+    "company-wiki/src/company_wiki/source_catalog/prompt_injection.py",
+    "company-wiki/src/company_wiki/source_catalog/producer_events.py",
+    "company-wiki/src/company_wiki/source_catalog/resolver.py",
+    "company-wiki/src/company_wiki/source_catalog/cli.py",
+    "company-wiki/src/company_wiki/source_catalog/close_gap.py",
+    "company-wiki/tests/contract/test_fc905_receipt_envelope.py",
+    "company-wiki/assurance/fc/FC-905/03_change_contract_fc905a.md"
+  ],
+  "dependency_receipts": [
+    "revenue-forecast/assurance/fc/FC-904/12_reviewer_receipt.json (accepted 2026-08-11)"
+  ],
+  "command_registry_sha256": "215b8077169126b2c4a5eca9d8d6237f291757c2559f6ae6e0ae8ff1c806b089",
+  "scenario_results": [
+    {
+      "id": "PI-REVIEW-RECEIPT",
+      "status": "passed",
+      "note": "prompt_injection_status comes from the document's review receipt (not_detected / detected_and_ignored forwarded; absent receipt -> explicit not_reviewed, never faked) — test_pi01/02/03."
+    },
+    {
+      "id": "PI-NO-STORE",
+      "status": "passed",
+      "note": "without a store the envelope reports not_reviewed and parser_calls/llm_calls None — absent evidence is never fabricated as 0 (test_pi04)."
+    },
+    {
+      "id": "PI-JOURNAL-COUNTS",
+      "status": "passed",
+      "note": "parser_calls/llm_calls come from the producer_events journal (trigger-journaled artifact inserts; role->type mapping normalized/sections->parser, summary/consumer_analysis->llm); an existing journal reporting zero is honest zero (test_pi05/06/07)."
+    },
+    {
+      "id": "PI-REVIEW-WRITE-FAIL-CLOSED",
+      "status": "passed",
+      "note": "record_prompt_injection_review rejects bad status/empty reviewer/non-sha256 evidence (test_pi08)."
+    },
+    {
+      "id": "PI-ENVELOPE-DETERMINISTIC",
+      "status": "passed",
+      "note": "the envelope to_dict carries the new fields deterministically (test_pi09)."
+    }
+  ],
+  "commands": [
+    {
+      "command": "python -B -m pytest tests/contract/test_fc905_receipt_envelope.py -q",
+      "exit_code": 0,
+      "result": "9 passed (RED: prompt_injection/producer_events modules + envelope fields missing)",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "python -B -m pytest tests/contract/test_resolution_envelope_fc704.py tests/contract/test_fc902_bundle_in_resolver.py tests/contract/test_source_catalog_query_bundle.py tests/contract/test_source_catalog_source_bundle.py -q",
+      "exit_code": 0,
+      "result": "30 passed (envelope/bundle/query contracts unbroken)",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "python -B -m pytest tests/ -q (full wiki suite)",
+      "exit_code": 0,
+      "result": "2224 passed, 1 skipped, 3 failed — the 2 pre-existing PORT-01 test_check_unique_test_symbols Windows-GBK pair + the pre-existing worker_bootstrap timing flake (proven at base in FC-902 review); zero NEW failures; the 4 focus_cleanup failures caused by the journal FK were fixed by dropping the FK (journal must never block artifact writes/cleanup); 9 new FC-905-a tests included in the 2224",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "python -B -m ruff check (6 production modules + new test)",
+      "exit_code": 0,
+      "result": "All checks passed",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "python -B -m py_compile (prompt_injection/producer_events/store)",
+      "exit_code": 0,
+      "result": "compile OK",
+      "cwd": "company-wiki"
+    }
+  ],
+  "side_effect_counts": {
+    "downloads": 0,
+    "external_root_writes": 0,
+    "catalog_mutations": 0,
+    "llm_calls": 0,
+    "parser_calls": 0,
+    "note": "envelope reads are SELECT-only. The producer_events journal grows by 1 row per artifact INSERT (trigger) — journaled in tests only; production producers gain the journal on next catalog open (idempotent DDL)."
+  },
+  "codegraph": {
+    "production_callers_before": 0,
+    "production_callers_after": 2,
+    "note": "read_prompt_injection_review + count_producer_events (new) each have 1 production caller: build_resolution_envelope (itself called by cli resolve/ensure + close-gap _finalize)."
+  },
+  "mutation": {
+    "id": "FC-905a-M1-M4",
+    "killed": true,
+    "details": "M1: review receipt read removed -> test_pi01 FAILS. M2: journal counts removed -> test_pi05 FAILS. M3: trigger DDL removed (renaming is an INVALID mutation — the renamed trigger still fires) -> test_pi07 FAILS. M4: absent review faked as not_detected -> test_pi03 FAILS (the never-fake invariant has teeth). All reverted; 9 passed restored."
+  },
+  "rollback": {
+    "required": true,
+    "proved": true,
+    "note": "DROP TRIGGER trg_artifact_producer_event; DROP TABLE producer_events; review receipts live in documents.metadata_json (reversible rewrite). Envelope field additions are revert-by-commit."
+  },
+  "review": {
+    "reviewer": "reviewer-fc905a-independent",
+    "reviewer_receipt_sha256": "6d75db46fb89e9ef8fcf5d884fff47b0563c6f85b877fd6f97180b83c6143690",
+    "decision": "accepted",
+    "reviewed_at": "2026-08-11T19:15:24Z",
+    "note": "independent reviewer replayed commands + 4 mutations from clean worktree d76e461; verdict accepted; 2 non-blocking coverage observations (role->type mapping tests cover normalized/summary only; malformed-receipt reader path code-guarded but not directly test-covered) documented in REVIEWER_REPORT.md; unresolved_findings=[]"
+  },
+  "provisional_note": "FC-905-a (producer-side infrastructure) sealed at wiki d76e461 (revenue/filing unchanged). FC-905-b (revenue/filing consumer side: de-hardcode prompt_injection_status/parser/llm counts, not_reviewed blocking, tamper mutation suite) pending — registry advances FC-905 to accepted only after both parts."
+}

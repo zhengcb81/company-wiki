@@ -1,0 +1,90 @@
+{
+  "schema_version": "2.0",
+  "fc_id": "FC-905",
+  "implementer_receipt_sha256": "ba4c98c68de16f45e2b81e9a12d83b38bbbbe405f84de3150a686279df3376ca",
+  "reviewer_identity": "reviewer-fc905a-independent",
+  "clean_checkout": true,
+  "base_triplet": {
+    "revenue": "b9994dc4f67f1943379a1c830b34e0dfe307e117",
+    "filing": "959d04cdbe2115c8e01fa39a2d5dfe748cc4fedd",
+    "wiki": "fd4f50b7566bf26997062404594bc78209246a1f"
+  },
+  "result_triplet": {
+    "revenue": "b9994dc4f67f1943379a1c830b34e0dfe307e117",
+    "filing": "959d04cdbe2115c8e01fa39a2d5dfe748cc4fedd",
+    "wiki": "d76e461496e43e7696dc2dc763ec1d443f4a484e"
+  },
+  "replayed_command_ids": [
+    "fc905.contract.focused",
+    "fc905.contract.sibling",
+    "fc905.contract.focus_cleanup",
+    "fc905.ruff",
+    "fc905.red.replay",
+    "wiki.unit.full"
+  ],
+  "scenario_results": [
+    {
+      "id": "PI-REVIEW-RECEIPT",
+      "status": "passed",
+      "note": "prompt_injection_status forwarded from documents.metadata_json['prompt_injection_review'] (test_pi01 not_detected, test_pi02 detected_and_ignored, test_pi03 absent receipt -> explicit not_reviewed). Replayed 3/3 passed. Reader fails closed on malformed receipt (schema_version + status guards -> None -> not_reviewed, verified by code reading)."
+    },
+    {
+      "id": "PI-NO-STORE",
+      "status": "passed",
+      "note": "Without a store the envelope reports not_reviewed and parser_calls/llm_calls None (test_pi04, replayed passed) — absent evidence is never fabricated as 0. Verified in resolver.py: defaults only replaced inside 'if store is not None and resolution.matches'."
+    },
+    {
+      "id": "PI-JOURNAL-COUNTS",
+      "status": "passed",
+      "note": "parser_calls/llm_calls come from producer_events SELECT COUNT (test_pi05 journal tallies 1/1, test_pi06 honest zero, test_pi07 trigger journals ('normalized','parser')). Replayed 3/3 passed. Role->type CASE in trigger matches contract exactly (normalized/sections->parser, summary/consumer_analysis->llm, else->other); tests exercise normalized and summary, remaining branches verified by code reading."
+    },
+    {
+      "id": "PI-REVIEW-WRITE-FAIL-CLOSED",
+      "status": "passed",
+      "note": "record_prompt_injection_review rejects bad status enum, empty reviewer, non-sha256 evidence (test_pi08, replayed passed). Code reading confirms additionally: schema_version pin, non-empty document_id, unknown document raise. Writer has zero production callers (test-only helper)."
+    },
+    {
+      "id": "PI-ENVELOPE-DETERMINISTIC",
+      "status": "passed",
+      "note": "envelope to_dict carries prompt_injection_status/parser_calls/llm_calls deterministically (test_pi09, replayed passed)."
+    }
+  ],
+  "mutation_results": [
+    {
+      "id": "FC-905a-M1",
+      "killed": true,
+      "note": "resolver.py review read forced to None -> test_pi01_reviewed_not_detected_forwarded FAILS. Restored; focused suite re-pass 9/9."
+    },
+    {
+      "id": "FC-905a-M2",
+      "killed": true,
+      "note": "resolver.py journal counts forced to {parser_calls: None, llm_calls: None} -> test_pi05_counts_from_journal_not_output FAILS. Restored; focused suite re-pass 9/9."
+    },
+    {
+      "id": "FC-905a-M3",
+      "killed": true,
+      "note": "store.py trigger DDL block removed entirely (875 chars, comment through END;) -> test_pi07_trigger_journals_artifact_insert FAILS. Store pyc cleared between DDL changes. Restored; focused suite re-pass 9/9."
+    },
+    {
+      "id": "FC-905a-M4",
+      "killed": true,
+      "note": "resolver.py added else: prompt_injection_status = 'not_detected' after the review read -> test_pi03_no_review_is_explicit_not_reviewed FAILS (never-fake invariant has teeth). Restored; focused suite re-pass 9/9."
+    }
+  ],
+  "side_effect_reconciliation": {
+    "passed": true,
+    "note": "Envelope path is SELECT-only: build_resolution_envelope -> read_prompt_injection_review (store.fetchone SELECT) + count_producer_events (store.fetchone SELECT COUNT); no execute/UPDATE anywhere in the resolve/ensure/close-gap envelope path (verified by diff + grep). record_prompt_injection_review (the only writer) has zero production callers. Journal rows originate exclusively from trg_artifact_producer_event (AFTER INSERT ON artifacts); no other INSERT INTO producer_events exists. Producer code (normalizer/llm_summarizer/section_extractor) untouched — diff stat shows exactly the 8 allowlisted files."
+  },
+  "codegraph_reachability": {
+    "passed": true,
+    "note": "company-wiki is not in the local codegraph index (index covers revenue-forecast, 124 files); call edges verified by literal grep in the clean checkout instead (AST-equivalent evidence per protocol section 5): read_prompt_injection_review and count_producer_events each have exactly one production caller — build_resolution_envelope (resolver.py:455-462), which is itself called by cli resolve/ensure and close_gap._finalize; record_prompt_injection_review has zero production callers. Matches implementer receipt claim (production_callers_after=2). No contradicting edges."
+  },
+  "rollback": {
+    "required": true,
+    "passed": true,
+    "note": "DROP TRIGGER trg_artifact_producer_event; DROP TABLE producer_events; plus revert-by-commit for envelope fields; review receipts live in documents.metadata_json (reversible rewrite). DDL is self-contained CREATE IF NOT EXISTS statements whose inverse is exactly the documented DROP pair; trigger removal proven harmless by M3 (test suite unaffected)."
+  },
+  "unresolved_findings": [],
+  "verdict": "accepted",
+  "reviewed_at": "2026-08-11T19:15:24Z"
+}
