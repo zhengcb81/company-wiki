@@ -1,0 +1,130 @@
+{
+  "schema_version": "2.0",
+  "fc_id": "FC-801",
+  "status": "independent_review",
+  "mode": "honest-implementer",
+  "base_triplet": {
+    "revenue": "d362a4905ffcb517ad55c950ce4702d4b764b8ce",
+    "filing": "85731b20f730da6ecc85084a2b7f04a10e75a1f9",
+    "wiki": "7e8c35f85bfdad841639c7892135907edb28c4f3"
+  },
+  "result_triplet": {
+    "revenue": "d362a4905ffcb517ad55c950ce4702d4b764b8ce",
+    "filing": "85731b20f730da6ecc85084a2b7f04a10e75a1f9",
+    "wiki": "4a444ae7a4cfbf6daa2a9ab446ff6ab9a8d6da15"
+  },
+  "plan_sha256": "158fc1e1e4231e3c2dc71822a58931fdca64eff79fc0d4e27b8276a397f4c78a",
+  "policy_sha256": "not-applicable",
+  "allowed_files": [
+    "company-wiki/src/company_wiki/source_catalog/close_gap.py",
+    "company-wiki/src/company_wiki/source_catalog/authorization.py",
+    "company-wiki/src/company_wiki/source_catalog/cli.py",
+    "company-wiki/tests/contract/test_close_gap_fc801.py",
+    "company-wiki/tests/contract/test_source_catalog_download_authorization.py",
+    "company-wiki/assurance/fc/FC-801/11_implementer_receipt.json"
+  ],
+  "changed_files": [
+    "company-wiki/src/company_wiki/source_catalog/close_gap.py",
+    "company-wiki/src/company_wiki/source_catalog/authorization.py",
+    "company-wiki/src/company_wiki/source_catalog/cli.py",
+    "company-wiki/tests/contract/test_close_gap_fc801.py",
+    "company-wiki/tests/contract/test_source_catalog_download_authorization.py"
+  ],
+  "dependency_receipts": [
+    "company-wiki/assurance/fc/FC-705/12_reviewer_receipt_r2.json (accepted 2026-08-11)"
+  ],
+  "command_registry_sha256": "215b8077169126b2c4a5eca9d8d6237f291757c2559f6ae6e0ae8ff1c806b089",
+  "scenario_results": [
+    {
+      "id": "DL-03",
+      "status": "passed",
+      "note": "stale policy hash -> rejected stale_policy_hash, fetch=0 (CG-01); stale gap hash -> rejected stale_gap_hash, fetch=0 (CG-02); DownloadAuthorization now binds policy_hash in the receipt hash (CG-08)"
+    },
+    {
+      "id": "DL-02",
+      "status": "passed",
+      "note": "expired authorization -> rejected with precise reason, fetch=0 (CG-03)"
+    },
+    {
+      "id": "DL-07",
+      "status": "passed",
+      "note": "receipt SHA-256 lies about staged bytes -> failed, no commit, staging directory cleaned up, catalog unchanged (CG-04)"
+    },
+    {
+      "id": "DL-09",
+      "status": "passed",
+      "note": "re-run after a successful close -> reused_before_download, fetch=0, no duplicate document (CG-05)"
+    },
+    {
+      "id": "LT-10",
+      "status": "passed",
+      "note": "fetch exception -> failed with txn id journaled, never completed (CG-06); the finalize guard rejects a re-resolve that misses (completed is only claimed when the document actually resolves)"
+    },
+    {
+      "id": "SUCCESS",
+      "status": "passed",
+      "note": "full happy path: downloaded_new journaled, re-resolve REUSED, FC-704 envelope outcome downloaded_new download_events=1 (CG-07)"
+    },
+    {
+      "id": "MUTATIONS",
+      "status": "passed",
+      "note": "4 mutations killed: M1 policy check removed -> CG-01; M2 gap revalidation removed -> CG-02; M3 staging cleanup removed -> CG-04; M4 commit bypass -> CG-07 (LT-10 guard)"
+    }
+  ],
+  "commands": [
+    {
+      "command": "python -B -m pytest tests/contract/test_close_gap_fc801.py tests/contract/test_source_catalog_download_authorization.py -q",
+      "exit_code": 0,
+      "result": "20 passed (7 CG + 13 authorization)",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "python -B -m pytest tests/ -q (full wiki suite)",
+      "exit_code": 0,
+      "result": "2193 passed, 1 skipped / 2 failed — both pre-existing PORT-01/FC-1205 (test_check_unique_test_symbols, Windows GBK console)",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "ruff check (5 changed files)",
+      "exit_code": 0,
+      "result": "All checks passed",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "python -m company_wiki.source_catalog.cli --help (close-gap smoke)",
+      "exit_code": 0,
+      "result": "close-gap subcommand present",
+      "cwd": "company-wiki"
+    }
+  ],
+  "side_effect_counts": {
+    "downloads": 0,
+    "external_root_writes": 0,
+    "catalog_mutations": 0,
+    "llm_calls": 0,
+    "parser_calls": 0
+  },
+  "codegraph": {
+    "production_callers_before": 0,
+    "production_callers_after": 1,
+    "note": "CloseGapTransaction is called by the new CLI close-gap command (production caller); authorization.policy_hash consumed by close_gap"
+  },
+  "mutation": {
+    "id": "FC-801-M1..M4",
+    "killed": true,
+    "details": "M1 policy binding removed -> CG-01 fails; M2 gap revalidation removed -> CG-02 fails; M3 staging cleanup removed -> CG-04 fails; M4 commit bypass -> CG-07 fails via the LT-10 finalize guard. All reverted; 20 tests re-verified green."
+  },
+  "rollback": {
+    "required": false,
+    "proved": true,
+    "note": "additive module + contract extension; revert = revert commit."
+  },
+  "review": {
+    "reviewer": "",
+    "reviewer_receipt_sha256": "",
+    "decision": "pending",
+    "reviewed_at": "",
+    "note": "honest-implementer: awaits independent reviewer per independent_review_protocol.md"
+  },
+  "provisional_note": "result_triplet sealed at wiki 4a444ae (revenue/filing unchanged)."
+}
