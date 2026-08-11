@@ -10,7 +10,7 @@
   },
   "result_triplet": {
     "revenue": "aa12d9e712bec22047a27e024f8b1fd5b2e7b1b8",
-    "filing": "7409ad83d6a198662a37e455bc5eed524d502bf2",
+    "filing": "01cd01826906b1545d01dbd88fe8b77fd870173f",
     "wiki": "ca4c0b177d75b9b25f0775a4ac6ed65e2f789382"
   },
   "plan_sha256": "158fc1e1e4231e3c2dc71822a58931fdca64eff79fc0d4e27b8276a397f4c78a",
@@ -70,13 +70,18 @@
       "id": "F1-CLOSED",
       "status": "passed",
       "note": "reviewer r1 F1 (CLI boundary): the ensure subparser lacked --mode so every latest_as_of call failed at parse; fixed in company-wiki cli.py (ca4c0b1). Additionally main() wrapped the structured gap as a capture_ready handle; fixed to pass {status:gap,...} through unwrapped (filing 7409ad8) with a regression test. Live-verified end-to-end against the production catalog: latest_as_of 紫金矿业 returns the structured gap (plan missing=0, provider confirms local is latest)."
+    },
+    {
+      "id": "F-r2-1-CLOSED",
+      "status": "passed",
+      "note": "reviewer r2 F-r2-1: the F1 regression test was dead code (appended after unittest.main(), never collected; wrong logic). Relocated into Fc802GapTests with a valid request file (filing 01cd018); the gap-passthrough mutation now KILLS it (always-wrap -> FAILS)."
     }
   ],
   "commands": [
     {
       "command": "python -m pytest tests/test_fc802_gap_orchestration.py -q",
       "exit_code": 0,
-      "result": "7 passed (6 + F1 main() passthrough regression)",
+      "result": "7 passed (6 + F1 main() passthrough regression, now collected)",
       "cwd": "filing-fetch"
     },
     {
@@ -125,7 +130,7 @@
     "reviewer_receipt_sha256": "",
     "decision": "pending",
     "reviewed_at": "",
-    "note": "honest-implementer: r1 REJECTED (reviewer-fc802-independent — F1: the primary path was unreachable against the real CLI) — fixed in r2 (wiki ca4c0b1 ensure --mode + filing 7409ad8 main() passthrough, live-verified); awaits r2 review"
+    "note": "honest-implementer: r1 REJECTED (F1 CLI boundary) -> r2 REJECTED (F-r2-1 dead-code regression test) -> r3 fixed (01cd018 relocated test, mutation kills); awaits r3 review"
   },
-  "provisional_note": "r2 result_triplet sealed at filing 7409ad8 / wiki ca4c0b1 (revenue unchanged)."
+  "provisional_note": "r3 result_triplet sealed at filing 01cd018 / wiki ca4c0b1 (revenue unchanged)."
 }
