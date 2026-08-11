@@ -1,0 +1,107 @@
+{
+  "schema_version": "2.0",
+  "fc_id": "FC-703",
+  "implementer_receipt_sha256": "e9e7799b433d921f3b7047b2ff44c3da7eb67f6f05b7bac8a57fee514e2dfc3a",
+  "reviewer_identity": "reviewer-fc703-independent",
+  "clean_checkout": true,
+  "base_triplet": {
+    "revenue": "0cf30c16e72ce6d28f8a67bffd0ccc1f0fff073e",
+    "filing": "6274be2187b450d14492defd03579d6209d1b1cc",
+    "wiki": "4854380b53166292184bda41dd913ffe6d496885"
+  },
+  "result_triplet": {
+    "revenue": "0cf30c16e72ce6d28f8a67bffd0ccc1f0fff073e",
+    "filing": "6274be2187b450d14492defd03579d6209d1b1cc",
+    "wiki": "41b060ddb89d8913b8fdb4f1f3f7b03ebc37da1b"
+  },
+  "replayed_command_ids": [
+    "fc703.wiki.focused",
+    "fc703.wiki.cluster",
+    "fc703.ruff.changed",
+    "fc703.replay.live",
+    "fc703.replay.worktree",
+    "fc703.mutation.M1",
+    "fc703.mutation.M2",
+    "fc703.mutation.M3",
+    "revenue.governance.receipt"
+  ],
+  "scenario_results": [
+    {
+      "id": "OPS-03",
+      "status": "failed",
+      "note": "The committed production code DOES push document_kind/source_status/fiscal_year into SQL (verified by source read of service.py query_filing_candidates and by captured-SQL probe: WHERE d.document_kind = ? AND d.source_status IN (?) AND (json_extract(...fiscal_year...))). BUT the claim that the tests PIN the kind/status WHERE pushdown is FALSE: removing the document_kind WHERE clause (mutation M1, live code, __pycache__-free, python -B) leaves all 5 tests GREEN — the spy test's substring assertions are satisfied by the SELECT projection (d.document_kind, d.source_status columns). A regression moving kind/status filtering into Python (full-table scan + post-filter) would pass all 5 committed tests; 'no Python full-table scan' is NOT pinned."
+    },
+    {
+      "id": "EX-07",
+      "status": "passed",
+      "note": "test_fc703_deterministic_across_calls passes fresh (REUSED_EXACT with identical canonical_path/document_id across repeated calls on the 10-candidate fixture); survived M1 and M3 — determinism pinned at the behavior level."
+    },
+    {
+      "id": "PERF",
+      "status": "passed",
+      "note": "Replay tool reproduced against the LIVE catalog at the main checkout: catalog_documents=23521 (exact match with receipt), all 4 requests REUSED_EXACT, side_effects downloads/catalog_writes/provider_calls/llm_calls all zero, p50 44.2/43.5/13.7/14.1ms vs receipt 42.4/42.1/14.2/14.1ms (jitter). Candidate cap genuinely pinned by test_fc703_candidate_cap_enforced (limit=10 -> <=10; limit=1000 -> >=50)."
+    }
+  ],
+  "mutation_results": [
+    {
+      "id": "M1",
+      "killed": false,
+      "target": "service.py query_filing_candidates: `AND d.document_kind = ?` WHERE clause + its bound parameter removed (SQL stays valid)",
+      "evidence": "Mutation verified live (git diff shows the removal; captured-SQL probe confirms the executed query lost the kind predicate but kept the SELECT projection). `python -B -m pytest tests/contract/test_resolver_sql_perf_fc703.py -q` -> 5 passed (1.34s). NOT KILLED. The spy test test_fc703_query_uses_where_clauses asserts `'document_kind' in docs_sql` / `'source_status' in docs_sql` on the full SQL text, and both tokens remain in the SELECT column list (d.document_kind, d.source_status). This directly contradicts the implementer receipt's mutation claim 'WHERE-clause removal mutations killed by the spy test (OPS-03)' — that claim is NOT reproducible. Root cause of survival: (a) projection tokens satisfy the substring assertions; (b) behavioral tests (kind_status_filtered, entity_filtered) also survive because resolver.py has Python-side defense-in-depth gates (document_kind_mismatch, rejected_source_status) that keep outcomes correct without SQL pushdown."
+    },
+    {
+      "id": "M2",
+      "killed": true,
+      "target": "full SQL pushdown removal: document_kind/source_status removed from BOTH the SELECT projection and the WHERE clause (WHERE 1 = 1)",
+      "evidence": "5 failed. Kill mechanism is NOT the WHERE-clause assertions: every failure is `IndexError: No item with that key` — the store row-mapping crashes because the projection columns are gone. Proves the committed tests only pin that the query SELECTs the kind/status columns (i.e., not a bare full-table SELECT), not that the filtering happens in SQL."
+    },
+    {
+      "id": "M3",
+      "killed": true,
+      "target": "fiscal_clause (json_extract fiscal_year predicates) + fiscal_params removed",
+      "evidence": "1 failed / 4 passed — the ONLY clean assertion kill: `assert 'fiscal_year' in 'SELECT d.document_id, ...'` FAILED. The fiscal_year token appears in the SQL only inside the WHERE clause, so the spy test genuinely pins the fiscal_year WHERE pushdown. This delimits the actual pin: fiscal_year yes, document_kind/source_status no."
+    }
+  ],
+  "side_effect_reconciliation": {
+    "passed": true,
+    "note": "The replay tool's own code path is read-only: resolver.py contains zero write statements; store read path uses mode=ro + PRAGMA query_only=ON; the tool's document count opens the DB via mode=ro URI; output reports all-zero side_effects. catalog.sqlite3 hash changed during my replay window, but I attributed this to an AMBIENT concurrent writer: the file changed repeatedly with NO tool running (4 distinct hashes observed over minutes; mtime updated while idle; worker_state.json/worker_runs.jsonl newer than the DB before my run). Caveat (informational): running the replay tool in an environment WITHOUT a catalog (the clean FC-703 worktree) does NOT fail closed — sqlite3.connect creates an empty .source_catalog DB (catalog.sqlite3/-wal/-shm) and the tool exits 0 with a bogus baseline (0 documents) instead of an error. I deleted the artifacts my worktree test created; worktree is clean again. My review wrote no files outside assurance/fc/FC-703/."
+  },
+  "codegraph_reachability": {
+    "passed": true,
+    "note": "FC-703 is test-only: zero production code changed (diff = 2 files, 256 insertions). query_filing_candidates has exactly one production caller (resolver.py:535). CodeGraph index healthy (123 files / 2165 nodes / 4926 edges). No call-edge changes possible from this diff."
+  },
+  "rollback": {
+    "required": false,
+    "passed": true,
+    "note": "Additive test commit (no production code); revert = revert wiki commit 41b060d. Revenue 0cf30c16 and filing 6274be21 byte-identical across the triplet (verified at HEAD, clean)."
+  },
+  "unresolved_findings": [
+    {
+      "id": "FC-703-M1-survives",
+      "severity": "critical",
+      "note": "The core acceptance claim of this TEST-ONLY FC is not met: the committed tests do NOT pin document_kind/source_status SQL pushdown. Dropping the kind WHERE clause (M1) leaves all 5 tests green; the spy test's substring assertions are satisfied by the SELECT projection columns, and the behavioral tests are masked by the resolver's Python-side kind/status gates (defense in depth). The implementer receipt's mutation claim ('WHERE-clause removal mutations killed by the spy test (OPS-03)') is not reproducible. Only the fiscal_year WHERE pushdown is genuinely pinned (M3 clean kill). OPS-03's 'no Python full-table scan' property is unpinned: a regression to Python-side kind/status post-filtering would pass the entire FC-703 suite. Recovery: strengthen test_fc703_query_uses_where_clauses to assert the kind/status predicates within the WHERE region of the SQL text (e.g., regex on the section after 'WHERE': `document_kind\\s*=\\s*\\?` and `source_status\\s*IN`), re-run M1 (must fail), re-run the focused suite, and re-seal with a new result triplet + updated receipt."
+    },
+    {
+      "id": "FC-703-replay-not-fail-closed",
+      "severity": "low",
+      "note": "tools/ex07_perf_replay.py is __file__-relative (PROJECT_ROOT = its repo location), so a run inside the clean FC-703 worktree targets the nonexistent worktree catalog, CREATES an empty .source_catalog DB (a write), and exits 0 with a 0-document baseline instead of failing. The implementer's PERF numbers reproduce only from the main checkout (where the live catalog lives) — I verified them there. The tool should either fail when catalog.sqlite3 is absent or make read-only explicit (mode=ro) for the resolve path too. Does not affect the PERF evidence I reproduced, but contradicts the task instruction's assumption that a worktree run touches the live catalog."
+    },
+    {
+      "id": "ambient-catalog-writer",
+      "severity": "informational",
+      "note": "The main checkout's .source_catalog/catalog.sqlite3 is being modified continuously by an external process (worker_state.json / worker_runs.jsonl rotate; DB hash changed 4 times during review with no tool running). Anyone re-running latency baselines should be aware p50/p95 can be skewed by concurrent writers (my run observed a 239ms p95 outlier on CN-601899-FY2024)."
+    },
+    {
+      "id": "no-remote-branch",
+      "severity": "informational",
+      "note": "The wiki fcap branch carrying FC-703 commits has no remote counterpart (origin tracks only master) — same as FC-701/702. Sealed commits exist only locally."
+    },
+    {
+      "id": "full-suite-not-rerun",
+      "severity": "informational",
+      "note": "Per review instructions I did not rerun the 6.5-minute full suite; the implementer's 3 failures (test_check_unique_test_symbols.py::test_syntax_error_is_reported_as_failure — PORT-01/FC-1205 known; 2x test_source_catalog_worker_bootstrap.py Windows process-integration flakes) are consistent with the FC-701/FC-702 precedent and outside the FC-703 changed files. No new-failure signal in the focused + cluster runs."
+    }
+  ],
+  "verdict": "rejected",
+  "reviewed_at": "2026-08-11"
+}
