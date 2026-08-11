@@ -1,0 +1,133 @@
+{
+  "schema_version": "2.0",
+  "fc_id": "FC-705",
+  "status": "independent_review",
+  "mode": "honest-implementer",
+  "base_triplet": {
+    "revenue": "76d1602a27bb70f7d901d44a5b3775f27d0dc5b9",
+    "filing": "85731b20f730da6ecc85084a2b7f04a10e75a1f9",
+    "wiki": "f610c1a4dfb84c5b2ba87eebbbc0e39a37afbf6c"
+  },
+  "result_triplet": {
+    "revenue": "76d1602a27bb70f7d901d44a5b3775f27d0dc5b9",
+    "filing": "85731b20f730da6ecc85084a2b7f04a10e75a1f9",
+    "wiki": "5e770e202df5e1e597a506dd7171c6c3a554d9d9"
+  },
+  "plan_sha256": "158fc1e1e4231e3c2dc71822a58931fdca64eff79fc0d4e27b8276a397f4c78a",
+  "policy_sha256": "not-applicable",
+  "allowed_files": [
+    "company-wiki/src/company_wiki/source_catalog/legacy_close_gate.py",
+    "company-wiki/scripts/legacy_observer.py",
+    "company-wiki/tests/contract/test_legacy_observation.py",
+    "company-wiki/assurance/fc/FC-705/11_implementer_receipt.json"
+  ],
+  "changed_files": [
+    "company-wiki/src/company_wiki/source_catalog/legacy_close_gate.py",
+    "company-wiki/scripts/legacy_observer.py",
+    "company-wiki/tests/contract/test_legacy_observation.py"
+  ],
+  "dependency_receipts": [
+    "company-wiki/assurance/fc/FC-704/12_reviewer_receipt.json (accepted 2026-08-11)",
+    "revenue-forecast/audit_review/2026-08-09_data_lake_refactor_plan/receipts/WU-1500-legacy-observation.json (WU-1500 seam baseline)"
+  ],
+  "command_registry_sha256": "215b8077169126b2c4a5eca9d8d6237f291757c2559f6ae6e0ae8ff1c806b089",
+  "scenario_results": [
+    {
+      "id": "LEG-07",
+      "status": "passed",
+      "note": "bridge-off fail-closed at the seam function level: legacy_bridge_allowed=False returns {} without reading the container and records zero hits"
+    },
+    {
+      "id": "LEG-09",
+      "status": "passed",
+      "note": "rollback drill: flag back on restores the legacy read (closable AND reversible)"
+    },
+    {
+      "id": "LEG-10a..f",
+      "status": "passed",
+      "note": "close_gate_allowed: two consecutive completed >=24h zero-hit windows -> allowed; single window / hits>0 / short window / non-consecutive periods / empty ledger -> fail closed with reasons"
+    },
+    {
+      "id": "LEG-11",
+      "status": "passed",
+      "note": "canary-matrix observation through the REAL resolver seam (SourceResolver + pinned snapshot) over a mode=ro + query_only connection; fixture catalog byte-identical before/after (zero-write)"
+    },
+    {
+      "id": "LIVE-CURRENT",
+      "status": "passed",
+      "note": "live production current-state pass (period 3): all 4 canaries REUSED_EXACT via the legacy bridge under production flags; legacy_bridge_hits=6; close_gate=not allowed (period 2 had 46, period 3 has 6) — honest, not passed"
+    },
+    {
+      "id": "LIVE-DRILL",
+      "status": "passed",
+      "note": "cutover drill (v2_resolve_active + bridge off, pinned epoch/cohort): all 4 canaries (CN 601899 FY24/25, HK 03690 FY24, US AAPL FY25) REUSED_EXACT with legacy_bridge_hits=0 — the cutover is READY for the canary cohort"
+    },
+    {
+      "id": "MUTATIONS",
+      "status": "passed",
+      "note": "3 mutations killed: M1 single-window gate fails LEG-10b; M2 bridge-off gate removed fails LEG-07/09; M3 writable CatalogStore in the observer fails LEG-11 (hash change)"
+    }
+  ],
+  "commands": [
+    {
+      "command": "python -B -m pytest tests/contract/test_legacy_observation.py -q",
+      "exit_code": 0,
+      "result": "15 passed (6 WU-1500 + 9 FC-705)",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "python -B -m pytest tests/ -q (full wiki suite)",
+      "exit_code": 0,
+      "result": "2183 passed, 1 skipped / 2 failed — both pre-existing PORT-01/FC-1205 (test_check_unique_test_symbols, Windows GBK console)",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "python -B scripts/legacy_observer.py --catalog ... --config ... --period 3 --period-file ... --read-only --canary-matrix",
+      "exit_code": 0,
+      "result": "LIVE current-state: 4/4 canaries reused_exact, legacy_bridge_hits=6, close_gate not allowed (honest)",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "observe_canary_matrix(config, drill=True) (read-only)",
+      "exit_code": 0,
+      "result": "LIVE drill: 4/4 canaries reused_exact, legacy_bridge_hits=0, shadow_diffs=0 — cutover ready for the cohort",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "ruff check (3 changed files)",
+      "exit_code": 0,
+      "result": "All checks passed",
+      "cwd": "company-wiki"
+    }
+  ],
+  "side_effect_counts": {
+    "downloads": 0,
+    "external_root_writes": 0,
+    "catalog_mutations": 0,
+    "llm_calls": 0,
+    "parser_calls": 0
+  },
+  "codegraph": {
+    "production_callers_before": 0,
+    "production_callers_after": 0,
+    "note": "new legacy_close_gate module (pure function, no production callers needed — it is the gate); observer is a tool script"
+  },
+  "mutation": {
+    "id": "FC-705-M1..M3",
+    "killed": true,
+    "details": "M1 single-window gate -> LEG-10b fails; M2 bridge-off early-return removed -> LEG-07+09 fail; M3 writable store -> LEG-11 hash check fails. All reverted; suites re-verified green. Live catalog hash drift attributed to the ambient background worker (3 samples with no tool running changed the hash) — the observer connection is sqlite-enforced read-only and the fixture test proves byte-level zero-write."
+  },
+  "rollback": {
+    "required": false,
+    "proved": true,
+    "note": "additive: new module + tool upgrade + tests; revert = revert commit."
+  },
+  "review": {
+    "reviewer": "",
+    "reviewer_receipt_sha256": "",
+    "decision": "pending",
+    "reviewed_at": "",
+    "note": "honest-implementer: awaits independent reviewer per independent_review_protocol.md"
+  },
+  "provisional_note": "result_triplet sealed at wiki 5e770e2 (revenue/filing unchanged)."
+}
