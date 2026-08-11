@@ -6,12 +6,12 @@
   "base_triplet": {
     "revenue": "76d1602a27bb70f7d901d44a5b3775f27d0dc5b9",
     "filing": "85731b20f730da6ecc85084a2b7f04a10e75a1f9",
-    "wiki": "f610c1a4dfb84c5b2ba87eebbbc0e39a37afbf6c"
+    "wiki": "f610c1a752194953ed242f5cb3e17529650d0dba"
   },
   "result_triplet": {
     "revenue": "76d1602a27bb70f7d901d44a5b3775f27d0dc5b9",
     "filing": "85731b20f730da6ecc85084a2b7f04a10e75a1f9",
-    "wiki": "5e770e202df5e1e597a506dd7171c6c3a554d9d9"
+    "wiki": "2735afdfac9a80b1c7c8fc02014da3cb43bd8179"
   },
   "plan_sha256": "158fc1e1e4231e3c2dc71822a58931fdca64eff79fc0d4e27b8276a397f4c78a",
   "policy_sha256": "not-applicable",
@@ -66,6 +66,11 @@
       "id": "MUTATIONS",
       "status": "passed",
       "note": "3 mutations killed: M1 single-window gate fails LEG-10b; M2 bridge-off gate removed fails LEG-07/09; M3 writable CatalogStore in the observer fails LEG-11 (hash change)"
+    },
+    {
+      "id": "LEG-10g",
+      "status": "passed",
+      "note": "reviewer F1 fix: the gate evaluates COMPLETED windows only (an open window is still accumulating and never counts); leg10g simulates the real main() bookkeeping — new period closes the previous — and proves the gate fires exactly when the second zero-hit window completes"
     }
   ],
   "commands": [
@@ -115,7 +120,7 @@
   "mutation": {
     "id": "FC-705-M1..M3",
     "killed": true,
-    "details": "M1 single-window gate -> LEG-10b fails; M2 bridge-off early-return removed -> LEG-07+09 fail; M3 writable store -> LEG-11 hash check fails. All reverted; suites re-verified green. Live catalog hash drift attributed to the ambient background worker (3 samples with no tool running changed the hash) — the observer connection is sqlite-enforced read-only and the fixture test proves byte-level zero-write."
+    "details": "3 mutations killed: M1 single-window gate fails LEG-10b; M2 bridge-off gate removed fails LEG-07/09; M3 writable CatalogStore in the observer fails LEG-11 (hash change). r1 reviewer F1 (gate could never fire on main()-produced ledgers) fixed in r2: completed-windows-only evaluation + leg10g bookkeeping test; M1 re-run kills leg10b+leg10g. Live catalog hash drift attributed to the ambient background worker (hash changed with no tool running) — the observer connection is sqlite-enforced read-only and the fixture test proves byte-level zero-write."
   },
   "rollback": {
     "required": false,
@@ -127,7 +132,7 @@
     "reviewer_receipt_sha256": "",
     "decision": "pending",
     "reviewed_at": "",
-    "note": "honest-implementer: awaits independent reviewer per independent_review_protocol.md"
+    "note": "honest-implementer: r1 CHANGES_REQUIRED (reviewer-fc705-independent; F1 gate off-by-one + F2 receipt base hash) — fixed in r2 (2735afd); awaits r2 review"
   },
-  "provisional_note": "result_triplet sealed at wiki 5e770e2 (revenue/filing unchanged)."
+  "provisional_note": "r2 result_triplet sealed at wiki 2735afd (F1 gate fix); F2 base hash corrected to f610c1a752."
 }
