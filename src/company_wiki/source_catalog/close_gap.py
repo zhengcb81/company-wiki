@@ -213,34 +213,35 @@ class CloseGapTransaction:
             max_bytes=binding.max_bytes,
             expires_at=binding.expires_at,
         )
+        staged_request = SourceRequest(
+            entity=request.entity, market=request.market,
+            security_id=request.security_id,
+            document_kind=request.document_kind,
+            form_type=request.form_type
+            or getattr(missing_candidate, "form_type", None),
+            fiscal_year=missing_year or request.fiscal_year,
+            fiscal_period=request.fiscal_period,
+            language=request.language,
+            provider=getattr(missing_candidate, "provider", None)
+            or request.provider,
+            provider_document_id=missing_pdoc
+            or request.provider_document_id,
+            as_of_date=request.as_of_date,
+            mode="exact",
+            allow_download=True,
+        )
         try:
             staged = self.coordinator.resolve_or_stage(
-                SourceRequest(
-                    entity=request.entity, market=request.market,
-                    security_id=request.security_id,
-                    document_kind=request.document_kind,
-                    form_type=request.form_type
-                    or getattr(missing_candidate, "form_type", None),
-                    fiscal_year=missing_year or request.fiscal_year,
-                    fiscal_period=request.fiscal_period,
-                    language=request.language,
-                    provider=getattr(missing_candidate, "provider", None)
-                    or request.provider,
-                    provider_document_id=missing_pdoc
-                    or request.provider_document_id,
-                    as_of_date=request.as_of_date,
-                    mode="exact",
-                    allow_download=True,
-                ),
-                authorization=authorization,
-            )
+                staged_request, authorization=authorization)
         except Exception as exc:
             if str(exc).startswith("download not authorized"):
                 # DL-02: authorization failures are REJECTIONS (fetch=0).
                 return _reject(str(exc))
             # DL-07 / LT-10: staging validation or fetch failures are
-            # system failures — never committed, staging cleaned.
-            self._cleanup_staging(request.request_id)
+            # system failures — never committed, staging cleaned.  The
+            # staging dir is named by the STAGING request's id, not the
+            # caller's original request (per-candidate identity).
+            self._cleanup_staging(staged_request.request_id)
             return _fail(str(exc), error_type=type(exc).__name__)
 
         if staged.status is AcquisitionStatus.REUSED:
