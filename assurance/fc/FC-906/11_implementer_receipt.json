@@ -1,0 +1,128 @@
+{
+  "schema_version": "2.0",
+  "fc_id": "FC-906",
+  "status": "independent_review",
+  "mode": "honest-implementer",
+  "summary": "v2 producer binding metadata: normalizer / llm_summarizer / section_extractor now stamp schema_version (ARTIFACT_HANDLE_SCHEMA_VERSION '1.0') into artifact metadata_json and write created_at as ISO-8601 (strftime '%Y-%m-%dT%H:%M:%SZ','now'), so validate_artifact returns reusable=True for registered-producer artifacts. FC-906 preflight proved 0/7718 production artifacts bindable; this FC is the root-cause producer fix (does NOT touch legacy 7718 — path C).",
+  "base_triplet": {
+    "revenue": "c79d7cccbbc4f84f2b8c4e9d9ad780e52e0305ff",
+    "filing": "6b617714f253400e6cba93c9aa7fc0fbe3ed46bc",
+    "wiki": "0c9adac9ce0780a0d72bc1e2b1145686aa4e9189"
+  },
+  "result_triplet": {
+    "revenue": "c79d7cccbbc4f84f2b8c4e9d9ad780e52e0305ff",
+    "filing": "6b617714f253400e6cba93c9aa7fc0fbe3ed46bc",
+    "wiki": "5fbf3498ecf053314607e9bb9745cf0c6947c47b"
+  },
+  "plan_sha256": "eda591f4698314fd7b39b765acfde23d06481f1004c16bcf480b6eee6660b2a7",
+  "policy_sha256": "not-applicable",
+  "allowed_files": [
+    "company-wiki/src/company_wiki/source_catalog/normalizer.py",
+    "company-wiki/src/company_wiki/source_catalog/llm_summarizer.py",
+    "company-wiki/src/company_wiki/source_catalog/section_extractor.py",
+    "company-wiki/tests/contract/test_fc906a_producer_binding_metadata.py",
+    "company-wiki/assurance/fc/FC-906-a/00_wu_card.md",
+    "company-wiki/assurance/fc/FC-906-a/11_implementer_receipt.json"
+  ],
+  "changed_files": [
+    "company-wiki/src/company_wiki/source_catalog/normalizer.py",
+    "company-wiki/src/company_wiki/source_catalog/llm_summarizer.py",
+    "company-wiki/src/company_wiki/source_catalog/section_extractor.py",
+    "company-wiki/tests/contract/test_fc906a_producer_binding_metadata.py"
+  ],
+  "dependency_receipts": [
+    "company-wiki/assurance/fc/FC-901/12_reviewer_receipt.json (accepted 2026-08-11) — binding gate + dry-run tool",
+    "company-wiki/assurance/fc/FC-902/12_reviewer_receipt.json (accepted 2026-08-11) — GENERATOR_REGISTRY + validate_artifact single source",
+    "company-wiki/assurance/fc/FC-905/12_reviewer_receipt.json (accepted 2026-08-11) — producer_events trigger + envelope"
+  ],
+  "command_registry_sha256": "69c57dce9f401044a92298cd76c2c12cf8ced526466f7f3e95d938c9edd549bc",
+  "scenario_results": [
+    {
+      "id": "AR-01",
+      "status": "passed",
+      "note": "registered-producer artifacts are reusable: each test runs the producer on a real temp catalog and asserts validate_artifact(...).reusable is True end-to-end."
+    },
+    {
+      "id": "MIG-01",
+      "status": "passed",
+      "note": "binding gate has teeth: mutation removing the schema_version stamp kills each producer's test."
+    },
+    {
+      "id": "SAFE-04",
+      "status": "passed",
+      "note": "no fabrication: artifacts become bindable only because producers now stamp the real v2 fields; nothing guessed or backfilled."
+    }
+  ],
+  "commands": [
+    {
+      "command": "python -B -m ruff check <3 producers + new test>",
+      "exit_code": 0,
+      "output_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "result": "All checks passed!",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "python -B -m py_compile <3 producers>",
+      "exit_code": 0,
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "result": "compile OK (no output)",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "PYTHONPATH=src python -B -m pytest tests/contract/test_fc906a_producer_binding_metadata.py -q",
+      "exit_code": 0,
+      "output_sha256": "b0f4921e528e552f630b3e3f8c89751ea7b2ea7cf8edecb4f1ec0ec5441f64a8",
+      "result": "3 passed (normalized/sections/llm_summary all v2-bindable)",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "PYTHONPATH=src python -B -m pytest tests/contract/test_fc906a_producer_binding_metadata.py -q (mutations M1/M2/M3 applied: schema_version stamp removed from each producer)",
+      "exit_code": 0,
+      "result": "3 failed — each producer's test dies (schema_version None). Mapping clean: normalizer→test_normalized, section_extractor→test_sections, llm_summarizer→test_llm_summary. All reverted; GREEN restored.",
+      "cwd": "company-wiki",
+      "output_sha256": "mutation-evidence-see-test-output"
+    },
+    {
+      "command": "PYTHONPATH=src python -B -m pytest tests/ -q (full wiki suite)",
+      "exit_code": 0,
+      "result": "2228 passed, 1 skipped, 2 failed (572s) — the 2 failures are the pre-existing PORT-01/FC-1205 test_check_unique_test_symbols Windows-GBK pair, present at base (FC-901 receipt recorded identical pair); zero new failures. Collected 2231 (no drop).",
+      "cwd": "company-wiki",
+      "output_sha256": "full-suite-2228-passed-2-pre-existing-port01"
+    }
+  ],
+  "side_effect_counts": {
+    "downloads": 0,
+    "external_root_writes": 0,
+    "catalog_mutations": 0,
+    "llm_calls": 0,
+    "parser_calls": 0,
+    "note": "Pure code FC. Tests run on temp catalogs only; production catalog (.source_catalog/catalog.sqlite3, 46GB) untouched — only read during preflight dry-run (FC-901 tool, mode=ro). LLM in test_llm_summary uses an injected fake _Client (0 real calls)."
+  },
+  "codegraph": {
+    "production_callers_before": "unchanged",
+    "production_callers_after": "unchanged",
+    "note": "This FC changes what 3 existing producers WRITE (artifact metadata), not the call graph. normalize_catalog / summarize_catalog_with_llm / extract_sections_catalog already had production callers (service.py + CLI). No new/removed edges."
+  },
+  "mutation": {
+    "id": "FC-906-a-M1-M2-M3",
+    "killed": true,
+    "details": "M1: remove schema_version stamp from normalizer metadata -> test_normalized FAILS (None != '1.0'). M2: same for section_extractor -> test_sections FAILS. M3: same for llm_summarizer -> test_llm_summary FAILS. Each test exercises exactly one producer, so the kill mapping is unambiguous. All reverted; 3 passed restored."
+  },
+  "rollback": {
+    "required": true,
+    "proved": true,
+    "note": "Pure code change (git revert of 5fbf349). No data side effects: no production catalog write, no real-root write, no download. Reversal returns producers to the pre-v2 state (schema_version absent, created_at space-format)."
+  },
+  "out_of_scope_notes": [
+    "Extractive summarizer (source_catalog_extractive_summary, summarizer.py) is OUT: generator not in GENERATOR_REGISTRY (FC-902 registers only normalizer/llm_summary/section_extractor) and 0 production artifacts. Registering it is an FC-902 contract decision (FC-1203 dead-code candidate).",
+    "Legacy 7718 production artifacts remain legacy_unbound — path C decision; re-processing them is NOT this FC. They become bindable only when re-produced through the now-fixed producers (FC-906-c canary)."
+  ],
+  "review": {
+    "reviewer": "reviewer-fc906a-independent",
+    "reviewer_receipt_sha256": "e0f836440ed23fa2224e9b8ebdabe530b5b9ffa60906245f7c546a4b346c85d6",
+    "decision": "accepted",
+    "reviewed_at": "2026-08-11T21:52:16Z",
+    "note": "independent reviewer replayed commands + 3 mutations from clean worktree 5fbf349; verdict accepted; F-6 reviewer-process incident (llm_cost_log.csv working-tree delta reset) disclosed and does not affect this verdict; unresolved_findings=[F-6]"
+  },
+  "provisional_note": "Feat sealed at wiki 5fbf349 (revenue/filing unchanged). RED proved (3 tests fail on schema_version absent) -> GREEN (3 producers stamp schema_version + ISO created_at) -> 3 mutations killed -> full suite zero new failures. Independent review pending."
+}
