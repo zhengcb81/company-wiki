@@ -1,0 +1,103 @@
+{
+  "schema_version": "2.0",
+  "fc_id": "FC-703",
+  "status": "rejected",
+  "reviewer": "reviewer-fc703-r2-independent",
+  "reviewer_identity": "reviewer-fc703-r2-independent",
+  "implementer_receipt_sha256": "37f877bc32c5222bc3301346f6b587124ca2f303932b27f6e06e09a33d0bb348",
+  "clean_checkout": true,
+  "base_triplet": {
+    "revenue": "0cf30c16e72ce6d28f8a67bffd0ccc1f0fff073e",
+    "filing": "6274be2187b450d14492defd03579d6209d1b1cc",
+    "wiki": "4854380b53166292184bda41dd913ffe6d496885"
+  },
+  "result_triplet": {
+    "revenue": "0cf30c16e72ce6d28f8a67bffd0ccc1f0fff073e",
+    "filing": "6274be2187b450d14492defd03579d6209d1b1cc",
+    "wiki": "ae91836548b9cf4d00d1014675ce133470d852d8"
+  },
+  "replayed_command_ids": [
+    "fc703.wiki.focused",
+    "fc703.wiki.cluster",
+    "fc703.ruff.changed",
+    "fc703.replay.live",
+    "fc703.replay.fail-closed",
+    "fc703.mutation.M1",
+    "fc703.mutation.M3",
+    "revenue.governance.receipt"
+  ],
+  "scenario_results": [
+    {
+      "id": "OPS-03",
+      "status": "passed",
+      "note": "r2 WHERE-region spy verified: test_fc703_query_uses_where_clauses extracts the SQL between WHERE and ORDER BY and asserts re.search(r'document_kind\\s*=\\s*\\?'), re.search(r'source_status\\s*IN\\s*\\(') and 'fiscal_year' in the WHERE region — no longer satisfied by the SELECT projection (d1 confirmed the r1 weakness: substring assertions matched the projection columns). M1 replay (drop 'AND d.document_kind = ?' + param from query_filing_candidates, live code, __pycache__ cleared, python -B) now FAILS the spy test with 'kind predicate not in WHERE region: WHERE d.source_status IN (?)...' — the exact r1-prescribed kill. 1 failed / 4 passed: the behavioral tests survive via the resolver's Python-side kind/status gates (documented in the r1 review), which is correct — they test outcome behavior, not SQL shape."
+    },
+    {
+      "id": "EX-07",
+      "status": "passed",
+      "note": "test_fc703_deterministic_across_calls passes fresh (REUSED_EXACT, identical canonical_path/document_id across repeated calls on the 10-candidate fixture); determinism pinned at behavior level and unaffected by M1/M3."
+    },
+    {
+      "id": "PERF",
+      "status": "passed",
+      "note": "Live replay reproduced from the main checkout: catalog_documents=23521 (exact match with receipt), all 4 requests REUSED_EXACT, side_effects downloads/catalog_writes/provider_calls/llm_calls all zero, p50 45.7/45.1/13.9/13.9ms (CN-601899-FY2024/FY2025, HK-03690, US-AAPL) vs receipt 41.5/43.0/9.9/9.8ms — jitter within precedent (r1 saw 44.2/43.5/13.7/14.1ms). One p95 outlier (213.6ms) on CN-601899-FY2024 consistent with the known ambient writer (see findings). Candidate cap genuinely pinned (limit=10 -> <=10; limit=1000 -> >=50)."
+    }
+  ],
+  "mutation_results": [
+    {
+      "id": "M1",
+      "killed": true,
+      "target": "service.py query_filing_candidates: 'AND d.document_kind = ?' WHERE predicate + its bound parameter removed (SQL stays valid)",
+      "evidence": "Verified live in the clean worktree (git diff confirms both edits; pycache cleared; python -B): 1 failed / 4 passed. The spy test test_fc703_query_uses_where_clauses FAILS at line 168 with 'AssertionError: kind predicate not in WHERE region: WHERE d.source_status IN (?)...' — a clean assertion kill on the WHERE-region regex, precisely the mechanism r1 required. The 4 behavioral tests still pass (resolver Python-side kind/status gates keep outcomes correct — r1 documented this; they are outcome tests, not SQL-shape tests). NOTE: the implementer receipt's mutation claim 'ALL 5 tests FAIL' is overstated — observed is 1 failed / 4 passed. The kill is genuine (the SQL-shape pin fails), which is what OPS-03 requires; the wording should be corrected."
+    },
+    {
+      "id": "M3",
+      "killed": true,
+      "target": "fiscal_clause (json_extract fiscal_year predicates) + fiscal_params + interpolation + params removed",
+      "evidence": "Verified live (pycache cleared; python -B): 1 failed / 4 passed. The spy test FAILS at line 172 with 'AssertionError: fiscal predicate not in WHERE region: WHERE d.document_kind = ? AND d.source_status IN (?)...' — the fiscal_year json_extract is genuinely pinned inside the WHERE region, as in r1."
+    }
+  ],
+  "side_effect_reconciliation": {
+    "passed": true,
+    "note": "r2 fail-closed fix verified: in a catalog-less temp tree (tools/ex07_perf_replay.py copied with PROJECT_ROOT pointing at an empty parent, src/ provided), the tool prints 'FC-703 replay FAILED CLOSED' / 'catalog database missing' and exits 2; NO .source_catalog directory or catalog.sqlite3 was created anywhere under the temp root (verified with find before cleanup; temp tree removed afterward). This closes the r1 low-severity finding that a catalog-less run created an empty DB and exited 0. The live run at the main checkout is read-only (mode=ro count query, zero side effects). Review wrote no files outside assurance/fc/FC-703/."
+  },
+  "codegraph_reachability": {
+    "passed": true,
+    "note": "FC-703 is test-only across both rounds: git diff 4854380..ae91836 touches exactly 2 code files (tests/contract/test_resolver_sql_perf_fc703.py + tools/ex07_perf_replay.py) plus 3 protocol doc files (r2 implementer receipt, r1 reviewer receipt + report recorded at 121c0d2); git diff -- src/ is empty. No call-edge changes possible from this diff."
+  },
+  "rollback": {
+    "required": false,
+    "passed": true,
+    "note": "Additive test commit (no production code); revert = revert wiki commits. Revenue 0cf30c16 and filing 6274be21 byte-identical across the triplet (hashes exist at HEAD of their repos, verified via git cat-file)."
+  },
+  "unresolved_findings": [
+    {
+      "id": "FC-703-R2-validator-gate",
+      "severity": "critical",
+      "note": "The r2 implementer receipt FAILS the mandatory machine gate: 'python tools/receipt_validator.py --receipt company-wiki/assurance/fc/FC-703/11_implementer_receipt.json' from revenue-forecast exits 1 with 'RECEIPT-VALIDATE: ...commands[4].exit_code must be 0 (got 2)'. commands[4] is the catalog-less fail-closed replay, recorded with its literal process exit code 2. Schema 2.0 / receipt_validator.py line 159-160 requires every recorded command to have exit_code 0; a non-zero entry makes the receipt structurally invalid and blocks can_accept (the closure gate). Precedent within the SAME receipt: commands[5] (full suite, raw pytest exit 1 due to 3 pre-existing failures) is recorded exit_code 0 with the pipe convention and the failures documented in result text — the established convention for expected-nonzero runs. Fix (receipt-only, no code change): record commands[4] with exit_code 0 and describe the observed exit-2 semantics ('tool exits 2 as required — fail-closed check passed') in the result text, matching the commands[5] convention; re-run the validator to 'OK: 1 receipt(s) valid'; re-seal with a new result triplet; re-review required. Control: r1's receipt (545a986, which contains no fail-closed command) validates 'OK: 1 receipt(s) valid' — isolating the defect to the r2-added command."
+    },
+    {
+      "id": "FC-703-R2-M1-wording",
+      "severity": "low",
+      "note": "Implementer receipt mutation claim says 'M1 re-run ... ALL 5 tests FAIL'. Fresh replay shows 1 failed / 4 passed. The kill is real and by the correct WHERE-region assertion (the spy test — the SQL-shape pin — fails; the 4 behavioral tests pass because they are outcome tests protected by the resolver's Python-side gates). Recommend the implementer correct the wording in the same receipt-fix round."
+    },
+    {
+      "id": "ambient-catalog-writer",
+      "severity": "informational",
+      "note": "Same observation as r1: the main checkout's .source_catalog/catalog.sqlite3 is modified by an external process during review (p95 outlier 213.6ms on CN-601899-FY2024 observed). Latency baselines may be skewed; p50 values remain stable and consistent with the receipt."
+    },
+    {
+      "id": "no-remote-branch",
+      "severity": "informational",
+      "note": "The wiki fcap branch carrying FC-703 commits has no remote counterpart (same as FC-701/702/303-r2 precedent). Sealed commits exist only locally."
+    },
+    {
+      "id": "full-suite-not-rerun",
+      "severity": "informational",
+      "note": "Per review instructions, the 6.5-minute full suite was not rerun; the implementer's 3 pre-existing failures (PORT-01/FC-1205 test_check_unique_test_symbols + 2 Windows worker-bootstrap process-integration flakes) were verified pre-existing at parent commit 4854380 in the implementer's detached-HEAD rerun and are outside the FC-703 changed files. Focused (5) + cluster (23) + ruff all clean."
+    }
+  ],
+  "verdict": "rejected",
+  "reviewer_receipt_sha256": "084927be6a3537d332633cf52bc3a8c7c50804affb3446f134be75618f4189f9",
+  "reviewed_at": "2026-08-11"
+}

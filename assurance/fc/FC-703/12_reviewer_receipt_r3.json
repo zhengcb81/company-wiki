@@ -1,0 +1,112 @@
+{
+  "schema_version": "2.0",
+  "fc_id": "FC-703",
+  "status": "accepted",
+  "reviewer": "reviewer-fc703-r3-independent",
+  "reviewer_identity": "reviewer-fc703-r3-independent",
+  "implementer_receipt_sha256": "b7f2329e265ff27bf44e653daa80555fccb85647a57db3ceb44d4ff89c51b309",
+  "clean_checkout": true,
+  "base_triplet": {
+    "revenue": "0cf30c16e72ce6d28f8a67bffd0ccc1f0fff073e",
+    "filing": "6274be2187b450d14492defd03579d6209d1b1cc",
+    "wiki": "4854380b53166292184bda41dd913ffe6d496885"
+  },
+  "result_triplet": {
+    "revenue": "0cf30c16e72ce6d28f8a67bffd0ccc1f0fff073e",
+    "filing": "6274be2187b450d14492defd03579d6209d1b1cc",
+    "wiki": "ae91836548b9cf4d00d1014675ce133470d852d8"
+  },
+  "replayed_command_ids": [
+    "fc703.wiki.focused",
+    "fc703.ruff.changed",
+    "fc703.mutation.M1-spot",
+    "revenue.governance.receipt-validator"
+  ],
+  "scenario_results": [
+    {
+      "id": "OPS-03",
+      "status": "passed",
+      "note": "r3 receipt-only round: code unchanged since r2 (ae91836). WHERE-region pin re-verified once by spot M1 replay (see mutation_results). SQL shape assertion targets the WHERE region between WHERE and ORDER BY, not the SELECT projection (r1 defect fixed in r2)."
+    },
+    {
+      "id": "EX-07",
+      "status": "passed",
+      "note": "Verified in r2 (determinism pinned at behavior level, unaffected by M1/M3); no code change since — not re-run in r3 per lightweight round."
+    },
+    {
+      "id": "PERF",
+      "status": "passed",
+      "note": "Verified in r2 (live replay, 23521 catalog documents, all REUSED_EXACT, zero side effects, p50 within precedent). Not re-run in r3 — no code change since."
+    }
+  ],
+  "mutation_results": [
+    {
+      "id": "M1-spot",
+      "killed": true,
+      "target": "service.py query_filing_candidates: 'AND d.document_kind = ?' WHERE predicate + bound parameter removed (SQL stays valid)",
+      "evidence": "Spot re-verify in clean worktree (d546558): git diff confirmed the 4-line mutation (predicate + parameter); __pycache__ cleared under src/ and tests/; python -B run → test_fc703_query_uses_where_clauses FAILS at line 168 with 'AssertionError: kind predicate not in WHERE region: WHERE d.source_status IN (?)...' — 1 failed / 4 passed. The 4 behavioral tests survive via the resolver's Python-side kind/status gates (r1-documented; they are outcome tests). This exactly matches the corrected r3 implementer-receipt wording (which no longer claims 'ALL 5 tests FAIL'). Restored with git checkout -- .; pycache cleared; focused suite re-run: 5 passed."
+    }
+  ],
+  "validator_gate": {
+    "passed": true,
+    "note": "r2 critical finding FC-703-R2-validator-gate resolved: 'python tools/receipt_validator.py --receipt C:/Users/郑曾波/Projects/company-wiki/assurance/fc/FC-703/11_implementer_receipt.json' from revenue-forecast exits 0 and prints 'OK: 1 receipt(s) valid'. commands[4] (catalog-less fail-closed replay) now recorded exit_code 0 per schema 2.0, with the observed exit-2 semantics and 'FC-703 replay FAILED CLOSED' output preserved in the result text — matching the established commands[5] convention for expected-nonzero runs."
+  },
+  "sealing_hashes": {
+    "plan_sha256": "158fc1e1e4231e3c2dc71822a58931fdca64eff79fc0d4e27b8276a397f4c78a",
+    "plan_source": "task_plan.md at revenue-forecast commit 2d64186 ('freeze FCAP r2 plan') — recomputed: MATCH. On-disk plan was later refreshed by d662c82 (triplet/status headers only, 4 lines) and therefore hashes differently; the sealed hash corresponds to the frozen plan, consistent with all prior FC receipts.",
+    "command_registry_sha256": "215b8077169126b2c4a5eca9d8d6237f291757c2559f6ae6e0ae8ff1c806b089",
+    "registry_source": "revenue-forecast compatibility/command_registry.json (tracked, unmodified) — recomputed: MATCH. Same value as compatibility/current.json and the FC-505 receipt (pre-sealed)."
+  },
+  "triplet_verification": {
+    "passed": true,
+    "note": "revenue 0cf30c16 == revenue-forecast HEAD; filing 6274be21 == filing-fetch HEAD; wiki base 4854380 and result ae91836 both exist in the wiki repo and 'git merge-base --is-ancestor 4854380 ae91836' → ANCESTRY-OK. Implementer receipt identical across worktree (d546558) and main checkout (sha256 b7f2329e...)."
+  },
+  "side_effect_reconciliation": {
+    "passed": true,
+    "note": "No side effects produced by r3 review: read-only verification plus spot M1 in the review worktree, restored to clean; no files written outside assurance/fc/FC-703/."
+  },
+  "codegraph_reachability": {
+    "passed": true,
+    "note": "Code unchanged since r2: git diff 4854380..ae91836 touches exactly 2 code files (tests/contract/test_resolver_sql_perf_fc703.py + tools/ex07_perf_replay.py) plus protocol doc files; git diff -- src/ is empty. No call-edge changes possible. r3 receipt-fix commit d546558 changes only assurance/fc/FC-703/11_implementer_receipt.json."
+  },
+  "rollback": {
+    "required": false,
+    "passed": true,
+    "note": "Unchanged from r2: additive test commit (no production code); revert = revert wiki commits. Revenue/filing byte-identical across the triplet (both at their repo HEADs)."
+  },
+  "unresolved_findings": [
+    {
+      "id": "FC-703-R2-validator-gate",
+      "severity": "resolved",
+      "note": "Verified resolved in r3: validator prints 'OK: 1 receipt(s) valid', exit 0, against the r3 implementer receipt."
+    },
+    {
+      "id": "FC-703-R2-M1-wording",
+      "severity": "resolved",
+      "note": "Verified resolved in r3: mutation.details now reads 'spy test FAILS kind predicate not in WHERE region — the pin is killed (the other 4 tests survive via the resolver's Python-side kind/status gates)' — matches the observed 1 failed / 4 passed."
+    },
+    {
+      "id": "ambient-catalog-writer",
+      "severity": "informational",
+      "note": "Carried from r1/r2: external process touches the main checkout's .source_catalog/catalog.sqlite3 during review; p95 skew possible, p50 stable. No impact on the r3 receipt-only verdict."
+    },
+    {
+      "id": "no-remote-branch",
+      "severity": "informational",
+      "note": "Carried: the wiki fcap branch carrying FC-703 commits has no remote counterpart (same as FC-701/702/303-r2 precedent). Sealed commits exist only locally."
+    },
+    {
+      "id": "full-suite-not-rerun",
+      "severity": "informational",
+      "note": "Per review instructions, the full suite was not rerun in r3; focused (5 passed) + ruff clean. The implementer's 3 pre-existing failures were verified pre-existing at parent commit 4854380 in r2."
+    },
+    {
+      "id": "r2-reviewer-receipts-uncommitted",
+      "severity": "informational",
+      "note": "The r2 reviewer receipts (12_reviewer_receipt_r2.json + REVIEWER_REPORT_R2.md) are still untracked in the main wiki checkout (git status ??); the implementer merges them at closure along with the r3 reviewer receipt. Also llm_cost_log.csv shows an unrelated local modification (ambient log)."
+    }
+  ],
+  "verdict": "accepted",
+  "reviewer_receipt_sha256": "c900db24e5c11b980f04449ca3ab3daee205f3ba8a19abfa19ae060c97660320",
+  "reviewed_at": "2026-08-11"
+}
