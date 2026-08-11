@@ -14,7 +14,6 @@ from typing import Any, Sequence
 from .config import load_catalog_config
 from .acquisition import AcquisitionCoordinator
 from .acquisition_config import load_acquisition_config
-from .acquisition_journal import AcquisitionJournal
 from .acquisition_service import SourceAcquisitionService
 from .canonical_writer import CanonicalSourceWriter
 from .control import WorkerController
@@ -940,6 +939,8 @@ def main(argv: Sequence[str] | None = None) -> int:
                 confirmation_token=args.confirmation_token,
             )
         elif args.command == "resolve":
+            from .acquisition_journal import AcquisitionJournal
+            from .resolver import build_resolution_envelope
             from .runtime_policy import RuntimePolicyError, load_runtime_policy
 
             request, identity = source_request()
@@ -947,9 +948,20 @@ def main(argv: Sequence[str] | None = None) -> int:
                 policy = load_runtime_policy(config.catalog_dir / "runtime_policy.json")
             except RuntimePolicyError:
                 policy = None  # no snapshot yet -> v1 + bridge (FC-202 default)
-            source_resolution = SourceResolver(
-                get_catalog(), runtime_policy=policy
-            ).resolve(request).to_dict()
+            resolution = SourceResolver(get_catalog(), runtime_policy=policy).resolve(
+                request
+            )
+            source_resolution = resolution.to_dict()
+            # FC-704: journal-reconciled outcome + policy/epoch + bundle
+            # status ride on the resolution (read-only: the journal is read,
+            # never appended, by the resolve command).
+            source_resolution["resolution_envelope"] = (
+                build_resolution_envelope(
+                    resolution,
+                    policy_snapshot=policy,
+                    journal=AcquisitionJournal(config.catalog_dir),
+                ).to_dict()
+            )
             result = (
                 {"identity": identity.to_dict(), "source_resolution": source_resolution}
                 if identity
@@ -980,6 +992,10 @@ def main(argv: Sequence[str] | None = None) -> int:
                 acquisition_config_path.resolve(strict=True),
                 project_root=project_root,
             )
+            from .acquisition_journal import AcquisitionJournal
+            from .resolver import build_resolution_envelope
+            from .runtime_policy import RuntimePolicyError, load_runtime_policy
+
             ensured = _retry_on_catalog_lock(
                 lambda: SourceAcquisitionService(
                     coordinator=AcquisitionCoordinator(
@@ -995,10 +1011,28 @@ def main(argv: Sequence[str] | None = None) -> int:
                 ).ensure(request),
                 action="ensure",
             )
+
+            try:
+                ensure_policy = load_runtime_policy(
+                    config.catalog_dir / "runtime_policy.json")
+            except RuntimePolicyError:
+                ensure_policy = None
+            ensure_dict = _plain(ensured)
+            # FC-704: the journal now carries the attempt — the resolution
+            # sub-dict carries the journal-reconciled envelope.
+            resolution_dict = ensure_dict.get("resolution")
+            if isinstance(resolution_dict, dict):
+                resolution_dict["resolution_envelope"] = (
+                    build_resolution_envelope(
+                        ensured.resolution,
+                        policy_snapshot=ensure_policy,
+                        journal=AcquisitionJournal(config.catalog_dir),
+                    ).to_dict()
+                )
             result = (
-                {"identity": identity.to_dict(), "source_ensure": _plain(ensured)}
+                {"identity": identity.to_dict(), "source_ensure": ensure_dict}
                 if identity
-                else ensured
+                else ensure_dict
             )
         elif args.command == "activation":
             from .activation import (

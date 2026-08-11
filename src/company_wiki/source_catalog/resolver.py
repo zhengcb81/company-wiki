@@ -314,6 +314,110 @@ def resolver_visibility(
     return reader, snapshot.get("current_epoch"), cohorts, bridge
 
 
+# --- FC-704: ResolutionEnvelope + AcquisitionTrace -----------------------------
+
+RESOLUTION_ENVELOPE_SCHEMA_VERSION = "1.0"
+
+# Journal outcomes that actually fetched bytes: a download happened.
+_ENVELOPE_DOWNLOAD_OUTCOMES = frozenset({"downloaded_new", "deduplicated_after_download"})
+
+# Normalize journal outcomes to the envelope taxonomy (FC-704).
+_ENVELOPE_OUTCOME_BY_JOURNAL = {
+    "reused_before_download": "reused_existing",
+    "reused_after_discovery": "reused_after_discovery",
+    "downloaded_new": "downloaded_new",
+    "deduplicated_after_download": "downloaded_new",
+    "missing": "missing",
+    "ambiguous": "ambiguous",
+    "failed": "failed",
+    "gap_plan": "gap",
+    "gap_plan_provider_unavailable": "gap",
+}
+
+# Read-only resolve performs no acquisition: the outcome is structural.
+_STRUCTURAL_OUTCOME = {
+    ResolutionStatus.REUSED_EXACT: "reused_existing",
+    ResolutionStatus.REUSED_EQUIVALENT: "reused_existing",
+    ResolutionStatus.AMBIGUOUS: "ambiguous",
+    ResolutionStatus.MISSING: "missing",
+    ResolutionStatus.IDENTITY_CONFLICT: "rejected",
+}
+
+
+@dataclass(frozen=True)
+class ResolutionEnvelope:
+    """FC-704: handle + policy/epoch + journal-reconciled outcome + trace.
+
+    The download evidence (``download_events``) comes from the acquisition
+    journal, never inferred from whether a handle was returned
+    (scenario_matrix §2).  ``bundle_status`` is explicitly "unavailable"
+    until FC-901 ships real bundles — never a faked empty-green.
+    """
+
+    envelope_schema_version: str
+    outcome: str
+    download_events: int
+    policy_hash: str | None
+    activation_epoch: str | None
+    bundle_status: str
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "envelope_schema_version": self.envelope_schema_version,
+            "outcome": self.outcome,
+            "download_events": self.download_events,
+            "policy_hash": self.policy_hash,
+            "activation_epoch": self.activation_epoch,
+            "bundle_status": self.bundle_status,
+        }
+
+
+def build_resolution_envelope(
+    resolution: ResolutionResult,
+    *,
+    policy_snapshot: dict[str, Any] | None = None,
+    journal: Any | None = None,
+) -> ResolutionEnvelope:
+    """FC-704: reconcile the resolution against the acquisition journal.
+
+    Journal entry for ``request_id`` wins (the real outcome, e.g.
+    downloaded_new after an ensure); without an entry the outcome is
+    structural (read-only resolve never downloads).  Reads the journal
+    only — resolve stays zero-write.
+    """
+    if not isinstance(resolution, ResolutionResult):
+        raise TypeError("resolution must be a ResolutionResult")
+    outcome = _STRUCTURAL_OUTCOME.get(resolution.status)
+    if outcome is None:
+        raise ValueError(f"no structural outcome for {resolution.status}")
+    download_events = 0
+    if journal is not None:
+        # Append-only journal: the LATEST entry for the request_id is the
+        # effective outcome (later attempts supersede earlier ones).
+        for attempt in journal.read_all():
+            if attempt.request_id != resolution.request_id:
+                continue
+            outcome = _ENVELOPE_OUTCOME_BY_JOURNAL.get(
+                attempt.outcome, attempt.outcome
+            )
+            download_events = (
+                1 if attempt.outcome in _ENVELOPE_DOWNLOAD_OUTCOMES else 0
+            )
+    policy_hash = None
+    activation_epoch = None
+    if isinstance(policy_snapshot, dict):
+        policy_hash = policy_snapshot.get("policy_hash")
+        activation_epoch = policy_snapshot.get("current_epoch")
+    return ResolutionEnvelope(
+        envelope_schema_version=RESOLUTION_ENVELOPE_SCHEMA_VERSION,
+        outcome=outcome,
+        download_events=download_events,
+        policy_hash=policy_hash,
+        activation_epoch=activation_epoch,
+        bundle_status="unavailable",
+    )
+
+
 def _source_metadata(
     document: dict[str, Any],
     *,
