@@ -15,6 +15,7 @@ from typing import Any, Callable
 import yaml
 
 from .admission import processing_priority_sql
+from .artifact_handle import ARTIFACT_HANDLE_SCHEMA_VERSION
 from .models import CatalogConfig, ProcessingReport, SUMMARIZER_VERSION
 from .store import CatalogStore, canonical_json
 from .llm_failure_policy import is_permanent_llm_summary_error
@@ -413,7 +414,7 @@ def summarize_catalog_with_llm(
                 connection.execute(
                     """INSERT INTO artifacts(artifact_id,document_id,source_id,artifact_role,path,
                     content_sha256,byte_size,mime_type,generator_name,generator_version,status,error,
-                    metadata_json,created_at) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,datetime('now'))""",
+                    metadata_json,created_at) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,strftime('%Y-%m-%dT%H:%M:%SZ','now'))""",
                     (
                         artifact_id,
                         row["document_id"],
@@ -429,6 +430,7 @@ def summarize_catalog_with_llm(
                         None,
                         canonical_json(
                             {
+                                "schema_version": ARTIFACT_HANDLE_SCHEMA_VERSION,
                                 "summary_method": "llm",
                                 "prompt_version": _PROMPT_VERSION,
                                 "provider": provider,

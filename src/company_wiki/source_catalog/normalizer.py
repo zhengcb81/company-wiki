@@ -37,6 +37,7 @@ from company_wiki.source_contract import (
 )
 
 from .admission import processing_priority_sql
+from .artifact_handle import ARTIFACT_HANDLE_SCHEMA_VERSION
 from .models import CatalogConfig, NORMALIZER_VERSION, ProcessingReport
 from .store import CatalogStore, canonical_json
 
@@ -1601,7 +1602,7 @@ def normalize_catalog(
             connection.execute(
                 """INSERT INTO artifacts(artifact_id,document_id,source_id,artifact_role,path,content_sha256,
                 byte_size,mime_type,generator_name,generator_version,status,error,metadata_json,created_at)
-                VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,datetime('now'))
+                VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,strftime('%Y-%m-%dT%H:%M:%SZ','now'))
                 ON CONFLICT(document_id,artifact_role,generator_name,generator_version) DO UPDATE SET
                 path=excluded.path,content_sha256=excluded.content_sha256,byte_size=excluded.byte_size,
                 status=excluded.status,error=excluded.error,metadata_json=excluded.metadata_json,created_at=excluded.created_at""",
@@ -1620,6 +1621,7 @@ def normalize_catalog(
                     normalized.error,
                     canonical_json(
                         {
+                            "schema_version": ARTIFACT_HANDLE_SCHEMA_VERSION,
                             "parser_name": normalized.parser_name,
                             "parser_version": normalized.parser_version,
                             "quality_flags": list(normalized.quality_flags),

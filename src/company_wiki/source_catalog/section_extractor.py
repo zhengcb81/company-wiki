@@ -17,6 +17,7 @@ from pathlib import Path
 from typing import Any, Callable
 
 from .admission import processing_priority_sql
+from .artifact_handle import ARTIFACT_HANDLE_SCHEMA_VERSION
 from .models import CatalogConfig, ProcessingReport, SECTION_EXTRACTOR_VERSION
 from .store import CatalogStore, canonical_json
 
@@ -283,7 +284,7 @@ def extract_sections_catalog(
                 """INSERT INTO artifacts(artifact_id,document_id,source_id,artifact_role,path,
                 content_sha256,byte_size,mime_type,generator_name,generator_version,status,error,
                 metadata_json,created_at)
-                VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,datetime('now'))
+                VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,strftime('%Y-%m-%dT%H:%M:%SZ','now'))
                 ON CONFLICT(document_id,artifact_role,generator_name,generator_version) DO UPDATE SET
                 path=excluded.path,content_sha256=excluded.content_sha256,byte_size=excluded.byte_size,
                 status=excluded.status,error=excluded.error,metadata_json=excluded.metadata_json,
@@ -302,7 +303,7 @@ def extract_sections_catalog(
                     "completed",
                     None,
                     canonical_json(
-                        {"sections": index_entries, "count": len(index_entries)}
+                        {"schema_version": ARTIFACT_HANDLE_SCHEMA_VERSION, "sections": index_entries, "count": len(index_entries)}
                     ),
                 ),
             )
