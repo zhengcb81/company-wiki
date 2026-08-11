@@ -1,0 +1,129 @@
+{
+  "schema_version": "2.0",
+  "fc_id": "FC-704",
+  "status": "accepted",
+  "reviewer": "reviewer-fc704-independent",
+  "reviewer_identity": "reviewer-fc704-independent",
+  "implementer_receipt_sha256": "db6c72f1c244faae130911838676f86613aabc9c19879c05bc16277b67460855",
+  "clean_checkout": true,
+  "base_triplet": {
+    "revenue": "53b984d0b1d05d1b3339642c1b2e2a697a4e7d8b",
+    "filing": "6274be2187b450d14492defd03579d6209d1b1cc",
+    "wiki": "c11efd65409ec0eab651d0e58f621b744c41ab82"
+  },
+  "result_triplet": {
+    "revenue": "1a788892d4f58db3d96d7d8199c14d74de219ae0",
+    "filing": "85731b20f730da6ecc85084a2b7f04a10e75a1f9",
+    "wiki": "6bf213dbad61400a041d9bd365df2f693e409b17"
+  },
+  "replayed_command_ids": [
+    "fc704.wiki.focused",
+    "fc704.wiki.cluster",
+    "fc704.filing.envelope",
+    "fc704.revenue.source-preparation",
+    "fc704.revenue.e2e",
+    "fc704.ruff.all",
+    "fc704.mutation.M1",
+    "fc704.mutation.M2",
+    "fc704.zero-write",
+    "revenue.governance.receipt-validator"
+  ],
+  "scenario_results": [
+    {
+      "id": "ENV-01..08",
+      "status": "passed",
+      "note": "Replayed in clean worktree (HEAD c3fd9c4, worktree clean): 9 passed. Read the full diff of resolver.py build_resolution_envelope: journal reconciliation iterates read_all() in append order so the LATEST entry for the request_id wins (ENV-04b proves supersede: gap_plan then deduplicated_after_download -> downloaded_new, download_events=1); download_events derives only from journal outcomes in {downloaded_new, deduplicated_after_download}, never from handle presence; all 9 ACQUISITION_OUTCOMES mapped; policy_hash/activation_epoch come from the RuntimePolicySnapshot dict only (null without, never fabricated); bundle_status hardcoded 'unavailable'; to_dict deterministic. CLI: resolve attaches the envelope from a read-only journal read; ensure builds the envelope AFTER the ensure call so the attempt is already journaled (no double-write — record() has no callers in cli.py/resolver.py); _plain() builds fresh dicts so envelope attach cannot alias; SourceEnsureResult.resolution exists."
+    },
+    {
+      "id": "ENV-F1..F3",
+      "status": "passed",
+      "note": "Replayed filing-fetch at result HEAD 85731b2: 'python -m pytest tests/test_fetch_filing.py -q -k envelope' -> 3 passed. validate_resolution_envelope deep-checks schema version, outcome taxonomy (8 values), download_events (0/1, bool rejected via isinstance), policy_hash (64-hex or null), activation_epoch (text or null), bundle_status enum; anything outside is upstream_error. Forwarded verbatim as handle['resolution_envelope'] (shallow copy). N/N-1 test confirms an envelope-less old company-wiki resolves normally with no envelope on the handle."
+    },
+    {
+      "id": "ENV-09..12",
+      "status": "passed",
+      "note": "Replayed revenue at result HEAD 1a78889: 'python -m pytest tests/test_source_preparation.py -q' -> 9 passed. prepare_source fail-closes with RuntimeError when the envelope is missing or download_events is not 0/1 (bool rejected); receipt download_calls = envelope download_events; outcome/policy_hash/activation_epoch/bundle_status carried into the receipt. Grep sweep: no '0 if handle else 1' fake remains anywhere in revenue scripts."
+    },
+    {
+      "id": "E2E-chain",
+      "status": "passed",
+      "note": "'python -m pytest tests/test_preparation_e2e_success.py -q' -> 1 passed (1.39s). The test spawns the REAL chain (revenue source_preparation -> filing_fetch_client -> company-wiki resolve CLI) and asserts download_calls == 0; since prepare_source raises RuntimeError without an envelope, the pass itself proves the envelope flows end-to-end. I additionally ran the chain manually with the fixture and read the produced receipt: outcome reused_existing, download_calls 0, policy_hash null, activation_epoch null, bundle_status unavailable — envelope evidence visible in the real receipt, and policy fields null because the fixture has no runtime_policy.json (not fabricated)."
+    },
+    {
+      "id": "Phase-7-cluster",
+      "status": "passed",
+      "note": "fc704+fc703+fc702+fc701+fc604 contract tests replayed in the clean worktree: 32 passed (5.10s). ruff check on all 8 changed files (3 repos): all passed."
+    },
+    {
+      "id": "PORT-01-spot-check",
+      "status": "passed",
+      "note": "Did not rerun the 6.5-min full wiki suite. Spot-checked tests/contract/test_check_unique_test_symbols.py at the result commit: 2 failed / 3 passed — reproduces the implementer's recorded pre-existing failures exactly (test_duplicate_test_definition_fails, test_syntax_error_is_reported_as_failure; Windows GBK console environment artifact). The file is untouched by FC-704 (not in the wiki diff c11efd6..6bf213d), so the failures are definitionally pre-existing."
+    }
+  ],
+  "mutation_results": [
+    {
+      "id": "M1",
+      "killed": true,
+      "target": "revenue scripts/source_preparation.py: restore the legacy fake '\"download_calls\": 0 if handle else 1' in reuse_receipt",
+      "evidence": "Mutated in the revenue main checkout at HEAD 1a78889; __pycache__ cleared under scripts/ and tests/; python -B -m pytest tests/test_source_preparation.py -q -k env09 -> 1 failed / 8 deselected, AssertionError at test_env09_download_calls_from_envelope_events line 130 (expected download_calls 1 for a handle carrying a downloaded document). The legacy inference lies exactly as scenario_matrix §2 forbids. Reverted with git checkout -- scripts/source_preparation.py; git status clean."
+    },
+    {
+      "id": "M2",
+      "killed": true,
+      "target": "wiki resolver.py build_resolution_envelope: replace the journal read loop with a no-op (structural outcome only, download_events stays 0)",
+      "evidence": "Mutated in the clean worktree at HEAD c3fd9c4; __pycache__ cleared; python -B -m pytest tests/contract/test_resolution_envelope_fc704.py -> 3 failed / 6 passed: test_env03_journal_downloaded_new_reconciled, test_env04_journal_reused_after_discovery, test_env04b_gap_and_dedup_mapped — exactly the implementer's recorded M4 kill set. The reconciliation is genuinely load-bearing: without it a downloaded document reports outcome reused_existing and download_events 0. Reverted with git checkout -- src/company_wiki/source_catalog/resolver.py; worktree clean."
+    }
+  ],
+  "validator_gate": {
+    "passed": true,
+    "note": "'python tools/receipt_validator.py --receipt C:/Users/郑曾波/Projects/company-wiki/assurance/fc/FC-704/11_implementer_receipt.json' from revenue-forecast prints 'OK: 1 receipt(s) valid', exit 0."
+  },
+  "sealing_hashes": {
+    "plan_sha256": "158fc1e1e4231e3c2dc71822a58931fdca64eff79fc0d4e27b8276a397f4c78a",
+    "plan_source": "task_plan.md at revenue-forecast commit 2d64186 (frozen plan) — recomputed: MATCH. The on-disk plan was later refreshed by d662c82/53b984d (triplet/status headers) and therefore hashes differently; the sealed hash corresponds to the frozen plan, consistent with FC-703 r3 precedent.",
+    "command_registry_sha256": "215b8077169126b2c4a5eca9d8d6237f291757c2559f6ae6e0ae8ff1c806b089",
+    "registry_source": "revenue-forecast compatibility/command_registry.json (tracked, unmodified) — recomputed on disk: MATCH."
+  },
+  "triplet_verification": {
+    "passed": true,
+    "note": "revenue HEAD 1a78889 == result; filing HEAD 85731b2 == result; wiki worktree HEAD c3fd9c4 (implementer receipt commit) on top of 6bf213d == result. All base triplet commits exist in their repos (git cat-file -e). 'git merge-base --is-ancestor c11efd6 6bf213d' -> ANCESTRY-OK. Diff scope: 2 revenue + 3 filing + 3 wiki code/test files = 8 files, all in the receipt allowlist, zero unrelated changes; IMPLEMENTATION_PLAN_FC704.md committed in the wiki commit is a plan doc (acceptable). Receipt commit c3fd9c4 touches only assurance/fc/FC-704/11_implementer_receipt.json."
+  },
+  "side_effect_reconciliation": {
+    "passed": true,
+    "note": "Review produced zero downloads and zero catalog mutations. Only writes: the two mutation edits (each reverted and verified clean via git status) and this reviewer receipt + REVIEWER_REPORT.md under assurance/fc/FC-704/. Zero-write check: built the envelope over an EXISTING journal (recorded downloaded_new) and confirmed the journal file is byte-, hash-, and mtime-identical after the build — resolve's envelope path reads the journal and never writes it (ENV-08 covers the not-created case; this covers the not-modified case)."
+  },
+  "codegraph_reachability": {
+    "passed": true,
+    "note": "Grep/structural sweep instead of CodeGraph (envelope code lives in the wiki worktree, outside the revenue-forecast index): build_resolution_envelope has exactly 2 production call sites, both in cli.py (resolve + ensure branches); validate_resolution_envelope is called only by resolve_filing; no '0 if handle else 1' fake remains in revenue scripts; no stray callers of the old receipt logic."
+  },
+  "rollback": {
+    "required": false,
+    "passed": true,
+    "note": "Three independent additive commits (wiki 6bf213d, filing 85731b2, revenue 1a78889); revert = revert the three. No data migration or destructive change."
+  },
+  "unresolved_findings": [
+    {
+      "id": "full-suite-not-rerun",
+      "severity": "informational",
+      "note": "Per review instructions the 6.5-min full wiki suite was not rerun; focused (9), cluster (32), filing (3), revenue (9+1 E2E) replayed fresh. The PORT-01 2-failure claim was spot-checked and reproduced in the clean worktree, with the file untouched by FC-704."
+    },
+    {
+      "id": "no-remote-branch",
+      "severity": "informational",
+      "note": "Carried precedent from FC-703 r3: the wiki fcap branch carrying the FC-704 commits has no remote counterpart; sealed commits exist only locally."
+    },
+    {
+      "id": "ensure-policy-load-extra-read",
+      "severity": "informational",
+      "note": "The ensure CLI branch now loads runtime_policy.json a second time (after SourceAcquisitionService.ensure) purely to feed the envelope; wrapped in RuntimePolicyError -> None, no behavior change beyond an extra file read. Acceptable; noted for completeness."
+    },
+    {
+      "id": "envelope-fields-not-revalidated-at-revenue",
+      "severity": "informational",
+      "note": "Revenue validates only download_events (0/1, bool rejected) and dict-ness; the deeper taxonomy check happens once at the filing-fetch boundary (upstream_error). Defense-in-depth is acceptable for the current chain, whose only company-wiki producer is the validated resolve/ensure CLI."
+    }
+  ],
+  "verdict": "accepted",
+  "reviewer_receipt_sha256": "ea7af062b799a699a32b2d6547cf4bf36db99f6c0d64df54b1b7cf9e8cfe395c",
+  "reviewed_at": "2026-08-11"
+}
