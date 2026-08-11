@@ -1,0 +1,60 @@
+{
+  "base_triplet": {
+    "filing": "6b617714f253400e6cba93c9aa7fc0fbe3ed46bc",
+    "revenue": "c79d7cccbbc4f84f2b8c4e9d9ad780e52e0305ff",
+    "wiki": "5fbf3498ecf053314607e9bb9745cf0c6947c47b"
+  },
+  "clean_checkout": true,
+  "codegraph_reachability": {
+    "note": "Zero production code changed (docs + guard tests only) — no call-graph delta. GENERATOR_REGISTRY / ROLE_DEPENDENCIES / validate_artifact frozen per contract §4 (FC-1203 deferred).",
+    "passed": true
+  },
+  "commands_replayed": [
+    {"command": "git worktree add --detach C:/Users/郑曾波/Projects/.fcap-review/fc-906-b 28eb841fd78627ce0fb9741c21256fb61fe2d4bb", "exit_code": 0, "result": "clean detached review worktree at feat commit"},
+    {"command": "git worktree add --detach C:/Users/郑曾波/Projects/.fcap-review/fc-906-b-base 5fbf3498ecf053314607e9bb9745cf0c6947c47b", "exit_code": 0, "result": "clean detached base worktree at FC-906-a commit"},
+    {"command": "git diff 5fbf349..28eb841 --stat / -- src/ / git show --stat 28eb841", "exit_code": 0, "result": "feat commit = EXACTLY 3 files (test_fc906b_role_producer_contract.py + 03_change_contract_fc906b.md + fc_906b_spec_gap.md, 191 insertions); src/ diff EMPTY (zero production code change). 3 extra files in the 5fbf349..28eb841 range belong to f6df002 (FC-906-a docs acceptance) — expected."},
+    {"command": "python -B -m ruff check tests/contract/test_fc906b_role_producer_contract.py", "exit_code": 0, "result": "All checks passed!"},
+    {"command": "PYTHONPATH=src python -B -m pytest tests/contract/test_fc906b_role_producer_contract.py -q", "exit_code": 0, "result": "3 passed in 1.70s (GREEN)"},
+    {"command": "M1: section_extractor.py INSERT arg SECTION_ARTIFACT_ROLE, -> \"markdown\", + focused guard test", "exit_code": 1, "result": "test_catalog_producers_write_only_registered_roles FAILED: '\"markdown\",' is contained in the INSERT position (banned role detected); reverted via git checkout, worktree clean"},
+    {"command": "M2: delete heading '## 2. `consumer_analysis` 角色 — 不适用（消费者侧生产）' from contract + focused doc test", "exit_code": 1, "result": "test_role_contract_document_is_valid FAILED: 'contract must carry an applicability ruling for consumer_analysis' — table row alone insufficient (weak-check confirmed); reverted, worktree clean"},
+    {"command": "M3: delete whole contract file + focused doc test", "exit_code": 1, "result": "test_role_contract_document_is_valid FAILED: role contract missing; restored, worktree clean"},
+    {"command": "PYTHONPATH=src python -B -m pytest tests/contract/test_fc906b_role_producer_contract.py -q (post-revert)", "exit_code": 0, "result": "3 passed in 0.53s — GREEN restored, worktree git status clean"},
+    {"command": "PYTHONPATH=src python -B -m pytest tests/contract/ -q (full contract suite)", "exit_code": 1, "result": "1493 passed, 1 skipped, 2 failed in 478.56s — 2 failures = pre-existing PORT-01 test_check_unique_test_symbols pair (GBK UnicodeDecodeError in subprocess capture); zero new failures; .pytest_cache/lastfailed contains ONLY those 2 items"},
+    {"command": "PYTHONPATH=src python -B -m pytest tests/contract/test_check_unique_test_symbols.py -q at base 5fbf349 (base worktree)", "exit_code": 1, "result": "2 failed, 3 passed — identical PORT-01 pair reproduces at base (pre-existing, not introduced by FC-906-b)"},
+    {"command": "Honesty gates: git show --stat 28eb841; csv grep in commit; contract factual claims vs source", "exit_code": 0, "result": "feat commit = 3 files only; NO llm_cost_log.csv / no csv of any kind; no src/ change; no LLM calls (tests read source files + registry only); no catalog/root writes. Claims verified: artifact_dag.py:12 markdown->[normalized], :15 consumer_analysis->[summary]; source_bundle.py:49 GENERATOR_REGISTRY = exactly the 3 producers; store.py:351 trigger maps consumer_analysis to llm event."}
+  ],
+  "decision": "accepted",
+  "fc_id": "FC-906",
+  "findings": [
+    {"detail": "Diff scope exact: feat commit 28eb841 (parent f6df002) contains exactly the 3 allowed files (guard test 124 lines + change contract 39 + spec gap 28, 191 insertions). git diff 5fbf349..28eb841 -- src/ is EMPTY — zero production code change, as required. The 3 extra files in the full range (00_wu_card_a.md, 11_implementer_receipt.json, 12_reviewer_receipt.json) were added by the intermediate docs commit f6df002 (FC-906-a acceptance) — expected, not part of FC-906-b.", "id": "F-1", "severity": "info"},
+    {"detail": "GREEN replay clean: ruff All checks passed; focused pytest 3 passed (1.70s). Test file has no skip/xfail/importorskip/env gating; no test-specific production islands (reads GENERATOR_REGISTRY + producer module text only).", "id": "F-2", "severity": "info"},
+    {"detail": "Mutations killed 3/3 with clean mapping: M1 (\"markdown\", in section_extractor INSERT) -> test_catalog_producers_write_only_registered_roles FAILS on banned-role literal; M2 (deleting consumer_analysis ruling heading) -> test_role_contract_document_is_valid FAILS — table row alone does NOT satisfy the ruling check (confirms implementer's M2b weak-check fix); M3 (contract file deleted) -> doc test FAILS. All reverted; focused suite restored to 3 passed; worktree git status clean after each.", "id": "F-3", "severity": "info"},
+    {"detail": "Regression at result 28eb841: contract suite 1493 passed, 1 skipped, 2 failed in 478.56s. The 2 failures are the pre-existing PORT-01 pair (test_duplicate_test_definition_fails, test_syntax_error_is_reported_as_failure — Windows GBK UnicodeDecodeError in subprocess capture), reproduced identically at base 5fbf349 (2 failed, 3 passed). The 1 skip is a pre-existing Windows-PowerShell skipif in worker tests; FC-906-b tests contribute 3 passed, 0 skipped. .pytest_cache/lastfailed contains only the PORT-01 pair. 1490 -> 1493 passed vs FC-906-a review: exactly the 3 new tests.", "id": "F-4", "severity": "info"},
+    {"detail": "Honesty gates pass: no llm_cost_log.csv or any csv in the commit; no src/ change in the range; no real LLM calls (FC-906-b tests are pure code/registry reads); no catalog or root writes (worktree git status fully clean after full suite). Main checkout untouched (HEAD still 28eb841; only pre-existing untracked 11_implementer_receipt_b.json). Review protocol executed entirely in worktrees — no git checkout -- in the main checkout (FC-906-a F-6 rule honored).", "id": "F-5", "severity": "info"},
+    {"detail": "Contract factual claims independently verified against source (no fabrication, SAFE-04): ROLE_DEPENDENCIES['markdown']=['normalized'] at artifact_dag.py:12 and ['consumer_analysis']=['summary'] at :15; GENERATOR_REGISTRY at source_bundle.py:49 contains exactly source_catalog_normalizer/llm_summary/section_extractor; store.py:351 trigger maps consumer_analysis to the llm event class. markdown redundancy claim (normalized INSERT mime_type='text/markdown') consistent with normalizer.py:1613 'normalized' role INSERT.", "id": "F-6", "severity": "info"}
+  ],
+  "implementer_receipt_sha256": "3105ca94fcf22676a4243d7f2ca27f6f207ee2f44401a049132fd60f64e92266",
+  "mutations_killed": {
+    "M1": {"killed": true, "mutation": "section_extractor.py INSERT argument SECTION_ARTIFACT_ROLE, -> \"markdown\",", "evidence": "test_catalog_producers_write_only_registered_roles FAILED: '\"markdown\",' contained in INSERT position (banned role detected); reverted, worktree clean"},
+    "M2": {"killed": true, "mutation": "deleted heading '## 2. `consumer_analysis` 角色 — 不适用（消费者侧生产）' from 03_change_contract_fc906b.md", "evidence": "test_role_contract_document_is_valid FAILED: 'contract must carry an applicability ruling for consumer_analysis' — summary-table row alone insufficient (weak-check confirmed); reverted, worktree clean"},
+    "M3": {"killed": true, "mutation": "deleted entire contract file 03_change_contract_fc906b.md", "evidence": "test_role_contract_document_is_valid FAILED: 'role contract missing'; restored via git checkout, worktree clean"}
+  },
+  "result_triplet": {
+    "filing": "6b617714f253400e6cba93c9aa7fc0fbe3ed46bc",
+    "revenue": "c79d7cccbbc4f84f2b8c4e9d9ad780e52e0305ff",
+    "wiki": "28eb841fd78627ce0fb9741c21256fb61fe2d4bb"
+  },
+  "reviewed_at": "2026-08-11T22:25:22Z",
+  "reviewer": "reviewer-fc906b-independent",
+  "reviewer_receipt_sha256": "466622fef2d924b981a2aa22fe01bbbbfafa5815852df3304981de3e6b5defb8",
+  "rollback": {"note": "Docs + guard tests only; git revert of 28eb841 removes them with zero data side effects (replay wrote no catalog/root files).", "passed": true, "required": true},
+  "schema_version": "2.0",
+  "side_effect_reconciliation": {
+    "catalog_mutations": 0,
+    "downloads": 0,
+    "external_root_writes": 0,
+    "llm_calls": 0,
+    "note": "FC-906-b tests read GENERATOR_REGISTRY + producer module text + contract doc only; no LLM, no catalog DB, no root writes. Worktree clean after full suite.",
+    "passed": true
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "schema_version": "2.0",
+  "fc_id": "FC-906",
+  "fc_suffix": "-b",
+  "status": "independent_review",
+  "mode": "honest-implementer",
+  "summary": "Role-applicability contract (FC-906-b, sub-chain 2/4): markdown and consumer_analysis are NOT produced by the catalog side. markdown is redundant with normalized (already text/markdown); consumer_analysis is consumer-side (E2E-D06 provenance contract engine/model/prompt/input_bundle_hash). Ruling documented in assurance/fc/FC-906/03_change_contract_fc906b.md; pinned by 3 guard tests. Zero production code change (user decision A 2026-08-12).",
+  "base_triplet": {
+    "revenue": "c79d7cccbbc4f84f2b8c4e9d9ad780e52e0305ff",
+    "filing": "6b617714f253400e6cba93c9aa7fc0fbe3ed46bc",
+    "wiki": "0c9adac9ce0780a0d72bc1e2b1145686aa4e9189"
+  },
+  "result_triplet": {
+    "revenue": "c79d7cccbbc4f84f2b8c4e9d9ad780e52e0305ff",
+    "filing": "6b617714f253400e6cba93c9aa7fc0fbe3ed46bc",
+    "wiki": "28eb841fd78627ce0fb9741c21256fb61fe2d4bb"
+  },
+  "plan_sha256": "eda591f4698314fd7b39b765acfde23d06481f1004c16bcf480b6eee6660b2a7",
+  "policy_sha256": "not-applicable",
+  "allowed_files": [
+    "company-wiki/tests/contract/test_fc906b_role_producer_contract.py",
+    "company-wiki/assurance/fc/FC-906/03_change_contract_fc906b.md",
+    "company-wiki/assurance/fc/FC-906/fc_906b_spec_gap.md",
+    "company-wiki/assurance/fc/FC-906/11_implementer_receipt_b.json",
+    "company-wiki/assurance/fc/FC-906/12_reviewer_receipt_b.json"
+  ],
+  "changed_files": [
+    "company-wiki/tests/contract/test_fc906b_role_producer_contract.py",
+    "company-wiki/assurance/fc/FC-906/03_change_contract_fc906b.md",
+    "company-wiki/assurance/fc/FC-906/fc_906b_spec_gap.md"
+  ],
+  "dependency_receipts": [
+    "company-wiki/assurance/fc/FC-906/11_implementer_receipt.json + 12_reviewer_receipt.json (FC-906-a accepted 2026-08-12; reviewer-fc906a-independent) — v2 producer binding metadata",
+    "company-wiki/assurance/fc/FC-902/12_reviewer_receipt.json (accepted) — GENERATOR_REGISTRY single source of truth"
+  ],
+  "command_registry_sha256": "69c57dce9f401044a92298cd76c2c12cf8ced526466f7f3e95d938c9edd549bc",
+  "scenario_results": [
+    {
+      "id": "AR-01",
+      "status": "passed",
+      "note": "role applicability ruling: guard test asserts the 3 registered producers write exactly normalized/summary/sections; no catalog write path for markdown/consumer_analysis (M1 kill proves the guard)."
+    },
+    {
+      "id": "SAFE-04",
+      "status": "passed",
+      "note": "no fabrication: absence of the two roles is documented as a contract decision with evidence (redundancy + consumer provenance contract), not silently missing."
+    }
+  ],
+  "commands": [
+    {
+      "command": "PYTHONPATH=src python -B -m pytest tests/contract/test_fc906b_role_producer_contract.py -q",
+      "exit_code": 0,
+      "result": "3 passed (GREEN; RED proved by temporarily removing the contract file -> test_role_contract_document_is_valid fails)",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "python -B -m ruff check tests/contract/test_fc906b_role_producer_contract.py",
+      "exit_code": 0,
+      "result": "All checks passed!",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "PYTHONPATH=src python -B -m pytest tests/contract/ -q (full contract suite)",
+      "exit_code": 0,
+      "result": "1493 passed, 1 skipped, 2 failed (458s) — the 2 failures are the pre-existing PORT-01 test_check_unique_test_symbols pair; zero new failures; 3 new FC-906-b tests included.",
+      "cwd": "company-wiki"
+    }
+  ],
+  "side_effect_counts": {
+    "downloads": 0,
+    "external_root_writes": 0,
+    "catalog_mutations": 0,
+    "llm_calls": 0,
+    "parser_calls": 0,
+    "note": "Zero production code change; docs + guard tests only. Production catalog untouched."
+  },
+  "codegraph": {
+    "production_callers_before": "unchanged",
+    "production_callers_after": "unchanged",
+    "note": "No production code changed; no call-graph delta. GENERATOR_REGISTRY / ROLE_DEPENDENCIES / validate_artifact frozen (removal deferred to FC-1203)."
+  },
+  "mutation": {
+    "id": "FC-906-b-M1-M2",
+    "killed": true,
+    "details": "M1: injected a 'markdown' role literal into section_extractor's INSERT (simulated illegal producer write path) -> test_catalog_producers_write_only_registered_roles FAILS (banned role detected). M2: deleted the consumer_analysis ruling heading from the contract -> test_role_contract_document_is_valid FAILS (ruling required). M2b (weak-check fix): first M2 attempt (deleting only the table row) did NOT kill the test — the heading still carried the role name; test strengthened to require the ruling heading itself. Both reverted; 3 passed restored."
+  },
+  "rollback": {
+    "required": true,
+    "proved": true,
+    "note": "Docs + tests only; git revert of 28eb841 removes them with no data side effects."
+  },
+  "review": {
+    "reviewer": "reviewer-fc906b-independent",
+    "reviewer_receipt_sha256": "466622fef2d924b981a2aa22fe01bbbbfafa5815852df3304981de3e6b5defb8",
+    "decision": "accepted",
+    "reviewed_at": "2026-08-11T22:25:22Z",
+    "note": "independent reviewer replayed diff + focused + M1/M2/M3 from clean worktree 28eb841 (base repro in a second worktree — F-6 rule honored); verdict accepted; unresolved_findings=[]"
+  },
+  "provisional_note": "Feat sealed at wiki 28eb841 (revenue/filing unchanged). RED (contract missing) -> GREEN (contract + 3 guards) -> M1/M2 killed -> contract suite zero new failures. Independent review pending."
+}
