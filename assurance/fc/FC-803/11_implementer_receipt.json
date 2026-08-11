@@ -1,0 +1,151 @@
+{
+  "schema_version": "2.0",
+  "fc_id": "FC-803",
+  "status": "independent_review",
+  "mode": "honest-implementer",
+  "base_triplet": {
+    "revenue": "84c9e7e4d3f738b6a1cbd2ecb08025fcb68109d6",
+    "filing": "354b171fc0f50aee0094361affb6da55192e0b17",
+    "wiki": "656adac1261f5dcf1feafece8fd0b4b1b3845d71"
+  },
+  "result_triplet": {
+    "revenue": "84c9e7e4d3f738b6a1cbd2ecb08025fcb68109d6",
+    "filing": "065976ed7c81c9112e4647592084c1b2c891aa3c",
+    "wiki": "8a2efdd84fba35074e107f5f18e3c8c9d1bd6bab"
+  },
+  "plan_sha256": "158fc1e1e4231e3c2dc71822a58931fdca64eff79fc0d4e27b8276a397f4c78a",
+  "policy_sha256": "not-applicable",
+  "allowed_files": [
+    "filing-fetch/scripts/fetch_filing.py",
+    "filing-fetch/tests/e2e_support/spy_adapter.py",
+    "filing-fetch/tests/test_fc803_minimal_download.py",
+    "company-wiki/src/company_wiki/source_catalog/close_gap.py",
+    "company-wiki/src/company_wiki/source_catalog/cli.py",
+    "company-wiki/assurance/fc/FC-803/11_implementer_receipt.json"
+  ],
+  "changed_files": [
+    "filing-fetch/scripts/fetch_filing.py",
+    "filing-fetch/tests/e2e_support/spy_adapter.py",
+    "filing-fetch/tests/test_fc803_minimal_download.py",
+    "company-wiki/src/company_wiki/source_catalog/close_gap.py",
+    "company-wiki/src/company_wiki/source_catalog/cli.py"
+  ],
+  "dependency_receipts": [
+    "company-wiki/assurance/fc/FC-802/12_reviewer_receipt_r3.json (accepted 2026-08-11)"
+  ],
+  "command_registry_sha256": "215b8077169126b2c4a5eca9d8d6237f291757c2559f6ae6e0ae8ff1c806b089",
+  "scenario_results": [
+    {
+      "id": "LT-09/DL-04",
+      "status": "passed",
+      "note": "T1 cross-process: after the first authorized close-gap the second identical request reports the gap closed — provider fetch=0, canonical write=0 (spy log + companies dir unchanged)"
+    },
+    {
+      "id": "LT-02",
+      "status": "passed",
+      "note": "old period reused, ONLY the missing new period downloaded (one fetch for fiscal_year 2025); the old file remains"
+    },
+    {
+      "id": "LT-01",
+      "status": "passed",
+      "note": "local is latest: discover=1, fetch=0, structured gap with the reuse handle surfaced"
+    },
+    {
+      "id": "LT-05",
+      "status": "passed",
+      "note": "provider unavailable: retryable gap (provider_unavailable=true), local reuse preserved, fetch=0"
+    },
+    {
+      "id": "LT-07",
+      "status": "passed",
+      "note": "a filing dated after as_of is excluded from the gap (missing=[]) and surfaced in future — nothing downloaded"
+    },
+    {
+      "id": "LT-08",
+      "status": "passed",
+      "note": "after a successful close-gap the capture-ready handle with the FC-704 envelope (downloaded_new, download_events=1) is returned directly — no manual retry"
+    },
+    {
+      "id": "REAL-FIX-1",
+      "status": "passed",
+      "note": "close-gap step-3 now binds the MISSING CANDIDATE (fiscal_year + provider_document_id + form_type + provider): an exact request without the missing period's fiscal_year re-resolved an older local document as reused and never staged the gap (found by the T1 tests against the real latest_as_of flow)"
+    },
+    {
+      "id": "REAL-FIX-2",
+      "status": "passed",
+      "note": "the close-gap subparser lacked --allow-acquisition-while-paused + --worker-config (parse-time break); added both + the paused guard"
+    },
+    {
+      "id": "REAL-FIX-3",
+      "status": "passed",
+      "note": "staging cleanup uses the per-candidate request id (DL-07 leftovers — FC-801 cg04 regression caught by the full wiki suite)"
+    },
+    {
+      "id": "MUTATIONS",
+      "status": "passed",
+      "note": "M1 actionable-gate removed -> lt01/05/07 fail; M2b per-candidate binding removed -> lt09 fails"
+    }
+  ],
+  "commands": [
+    {
+      "command": "python -m pytest tests/test_fc803_minimal_download.py -q",
+      "exit_code": 0,
+      "result": "5 passed (real cross-process, spy provider)",
+      "cwd": "filing-fetch"
+    },
+    {
+      "command": "python -m pytest tests/ -q (full filing suite)",
+      "exit_code": 0,
+      "result": "267 passed, 8 skipped, 54 subtests",
+      "cwd": "filing-fetch"
+    },
+    {
+      "command": "python -B -m pytest tests/ -q (full wiki suite)",
+      "exit_code": 0,
+      "result": "2193 passed, 1 skipped / 2 failed — both pre-existing PORT-01/FC-1205 (test_check_unique_test_symbols, Windows GBK); cg04 regression from REAL-FIX-3 fixed",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "ruff check (5 changed files, 2 repos)",
+      "exit_code": 0,
+      "result": "All checks passed",
+      "cwd": "multi-repo"
+    },
+    {
+      "command": "pre-commit gates (filing hermetic 261 + E2E + install-sync)",
+      "exit_code": 0,
+      "result": "all passed; E2E golden identical",
+      "cwd": "filing-fetch"
+    }
+  ],
+  "side_effect_counts": {
+    "downloads": 0,
+    "external_root_writes": 0,
+    "catalog_mutations": 0,
+    "llm_calls": 0,
+    "parser_calls": 0
+  },
+  "codegraph": {
+    "production_callers_before": 0,
+    "production_callers_after": 0,
+    "note": "test harness + orchestration changes; close_gap step-3 fix touches the FC-801 transaction"
+  },
+  "mutation": {
+    "id": "FC-803-M1..M2b",
+    "killed": true,
+    "details": "M1 actionable-gate removed -> lt01/05/07 fail (3 failed); M2b per-candidate binding removed -> lt09 fails. Reverted; 5 tests re-verified green."
+  },
+  "rollback": {
+    "required": false,
+    "proved": true,
+    "note": "additive tests + orchestration fixes; revert = revert commits."
+  },
+  "review": {
+    "reviewer": "",
+    "reviewer_receipt_sha256": "",
+    "decision": "pending",
+    "reviewed_at": "",
+    "note": "honest-implementer: awaits independent reviewer per independent_review_protocol.md"
+  },
+  "provisional_note": "result_triplet sealed at filing 065976e / wiki 8a2efdd (revenue unchanged)."
+}
