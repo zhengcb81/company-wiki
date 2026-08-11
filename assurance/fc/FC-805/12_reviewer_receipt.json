@@ -1,0 +1,119 @@
+{
+  "schema_version": "2.0",
+  "fc_id": "FC-805",
+  "status": "accepted",
+  "reviewer": "reviewer-fc805-independent",
+  "reviewer_identity": "reviewer-fc805-independent",
+  "implementer_receipt_sha256": "df20d170cebe29c926a6104155550fcf9acd6966364a1f8cb3fd75e94a13625c",
+  "implementer_receipt_sha256_note": "raw on-disk bytes of 11_implementer_receipt.json (CRLF working-tree variant per campaign convention)",
+  "clean_checkout": true,
+  "clean_checkout_note": "review worktree clean at 9587cb4 throughout (git diff HEAD empty before and after the M1 mutation; only my 12_reviewer_receipt.json + REVIEWER_REPORT.md added at the end). filing-fetch main checkout (81d9cd9) read-only, status clean after all test runs. company-wiki main checkout at 9587cb4 = sealed 44d8098 + implementer-receipt commit, untouched (only pre-existing llm_cost_log.csv modification + untracked FC-802 report, both predate this review). revenue-forecast read-only at 170ab3e.",
+  "base_triplet": {
+    "revenue": "170ab3e27a930efb109dcc21499a847bd994f14f",
+    "filing": "065976ed7c81c9112e4647592084c1b2c891aa3c",
+    "wiki": "cb04bf3cfb52bf3478714b974ffcfd6c442c5703"
+  },
+  "result_triplet": {
+    "revenue": "170ab3e27a930efb109dcc21499a847bd994f14f",
+    "filing": "81d9cd98c6c6a680c859b20917fd9d47db707564",
+    "wiki": "44d8098af8ff6d00216025f83e3630e72e2dd3cd"
+  },
+  "replayed_command_ids": [
+    "fc805.triplet-chain",
+    "fc805.sealing-hashes",
+    "fc805.diff-scope",
+    "fc805.skip-gate",
+    "fc805.regression-fc803-fc802",
+    "fc805.wiki-contracts",
+    "fc805.ruff",
+    "fc805.live-t3-cn",
+    "fc805.mutation-M1",
+    "fc805.post-revert-live",
+    "fc805.validator"
+  ],
+  "scenario_results": [
+    {
+      "id": "T3-CN-LIVE",
+      "status": "passed",
+      "note": "LIVE spot-check reproduced by reviewer: FC805_REAL_DOWNLOAD=1 python -m pytest tests/test_fc805_real_download_t3.py::Fc805RealDownloadT3::test_cn_real_provider_download -> 1 passed in 61.17s. Real cninfo download of 紫金矿业's latest annual report into an ISOLATED temp wiki; all three steps asserted: structured gap with gap_hash (= gap_plan.gap_hash from provider metadata), authorized close-gap capture_ready with snapshot_sha256 == sha256 of the on-disk canonical file (bytes verified), second identical request -> gap closed with missing==[] and zero new files, journal exactly one downloaded_new. Same evidence the implementer sealed; reproducible."
+    },
+    {
+      "id": "POST-REVERT-LIVE",
+      "status": "passed",
+      "note": "After M1 revert (git diff HEAD empty; sealed blob 44d8098 sha ead304244d9143d95be628524cef188f1d3b0ed2df382d9c909fa1768a1070fd == main-checkout file sha; worktree file is the CRLF working-tree variant - environment artifact), the same live CN test passed again in 57.72s - byte-identical restoration proven end-to-end."
+    },
+    {
+      "id": "AUTH-GATE",
+      "status": "passed",
+      "note": "python -m pytest tests/test_fc805_real_download_t3.py -q WITHOUT FC805_REAL_DOWNLOAD -> 3 skipped in 0.07s (skipUnless at class level, blocked, never counted as pass - matches scenario_matrix T3 rule that unauthorized status is blocked, not pass)."
+    },
+    {
+      "id": "REGRESSION",
+      "status": "passed",
+      "note": "python -m pytest tests/test_fc803_minimal_download.py tests/test_fc802_gap_orchestration.py -q -> 113 passed, 1 skipped, 27 subtests passed (28.22s). Includes the LT-07 fixture updated for the year-scoped discovery."
+    },
+    {
+      "id": "WIKI-CONTRACTS",
+      "status": "passed",
+      "note": "python -B -m pytest tests/contract/test_close_gap_fc801.py tests/contract/test_close_gap_concurrency_fc804.py -q -> 12 passed (8.80s); ruff check on acquisition.py -> All checks passed."
+    },
+    {
+      "id": "REAL-FIX",
+      "status": "passed",
+      "note": "Code read confirms the defect and the fix: the cninfo adapter (StockInfoDLSimple/v2-clean-rewrite/src/company_wiki_adapter.py) requires fiscal_year for discovery - passes it to discover_announcements and re-filters candidates (kind != document_kind or year != fiscal_year -> continue). The gap-plan discovery (_gap_plan_result) derives discovery_fiscal_year = as_of.year - 1 only when request.fiscal_year is None (graceful when as_of_date is unparsable); the download path is unaffected (close-gap uses plan candidates, not the hint); the original request_id is preserved in the gap plan."
+    },
+    {
+      "id": "MUTATION-M1",
+      "status": "passed",
+      "note": "Killed: with the derivation removed (discovery_fiscal_year = request.fiscal_year only, PYTHONPATH-shadowed from the review worktree so the main checkout stayed read-only), the real CN T3 test FAILED in 3.42s - gap_plan showed provider_unavailable: True, missing: [], provider_reason 'AdapterProcessError: adapter stockinfo-cninfo discover exited 1: ... \"fiscal_year is required for CN discovery\" ... \"type\": \"ValueError\"' -> test helper assertion 'no missing period to download'. No download happened. Fail-closed LT-05 semantics hold against the live provider."
+    }
+  ],
+  "mutation_results": [
+    {
+      "id": "M1",
+      "killed": true,
+      "target": "acquisition.py _gap_plan_result: discovery-year derivation removed (discovery_fiscal_year = request.fiscal_year only)",
+      "evidence": "FC805_REAL_DOWNLOAD=1 PYTHONPATH=worktree/src python -m pytest tests/test_fc805_real_download_t3.py::Fc805RealDownloadT3::test_cn_real_provider_download -> 1 failed in 3.42s: AssertionError 'no missing period to download' with gap_plan provider_unavailable=True, provider_reason 'fiscal_year is required for CN discovery' (ValueError). Reverted via git checkout; git diff HEAD empty; sealed blob (44d8098) sha ead304244d9143d95be628524cef188f1d3b0ed2df382d9c909fa1768a1070fd == main-checkout file sha. Post-revert live CN T3 re-run green (57.72s)."
+    }
+  ],
+  "validator_gate": {
+    "passed": true,
+    "note": "python tools/receipt_validator.py --receipt C:/Users/郑曾波/Projects/company-wiki/assurance/fc/FC-805/11_implementer_receipt.json -> OK: 1 receipt(s) valid (exit 0)"
+  },
+  "sealing_hashes": {
+    "plan_sha256": "158fc1e1e4231e3c2dc71822a58931fdca64eff79fc0d4e27b8276a397f4c78a",
+    "plan_source": "recomputed via git show 2d64186:audit_review/2026-08-09_full_completion_assurance_plan/task_plan.md | sha256sum in revenue-forecast: MATCH (2d64186 = freeze FCAP r2 plan, same source as FC-803/FC-804 reviewers).",
+    "command_registry_sha256": "215b8077169126b2c4a5eca9d8d6237f291757c2559f6ae6e0ae8ff1c806b089",
+    "registry_source": "recomputed on disk at revenue-forecast HEAD 170ab3e (compatibility/command_registry.json): MATCH."
+  },
+  "triplet_verification": {
+    "passed": true,
+    "note": "Revenue 170ab3e == revenue-forecast HEAD == base == result (unchanged). Filing result 81d9cd9 == filing-fetch HEAD; base 065976e is an ancestor (FILING-ANCESTRY-OK via git merge-base --is-ancestor); diff --stat 065976e..81d9cd9 = exactly 2 files: tests/test_fc805_real_download_t3.py (+186), tests/test_fc803_minimal_download.py (+6/-2), single commit 81d9cd9. Wiki result 44d8098 is the sealed fix commit; base cb04bf3 is an ancestor (WIKI-ANCESTRY-OK); diff --stat cb04bf3..44d8098 = exactly 1 file: src/company_wiki/source_catalog/acquisition.py (+27/-1). Wiki HEAD 9587cb4 = 44d8098 + implementer-receipt-only commit (same pattern as FC-804). Zero unrelated changes."
+  },
+  "side_effect_reconciliation": {
+    "passed": true,
+    "note": "My two live T3 runs (61.17s, 57.72s) performed REAL cninfo downloads into TEMP isolated wikis only (TemporaryDirectory, torn down by the test); the mutation run made no download (provider_unavailable in 3.42s). No writes outside the review worktree (my receipt + report) and gitignored pytest caches in filing-fetch. All three main checkouts byte-untouched (verified git status clean except pre-existing company-wiki artifacts)."
+  },
+  "codegraph_reachability": {
+    "passed": true,
+    "note": "The local CodeGraph index covers only revenue-forecast (123 files); FC-805's changes live in filing-fetch (tests) and company-wiki (acquisition.py), outside the index. Reachability verified by direct code read: _gap_plan_result is reached exclusively from resolve_or_stage's latest_as_of branch (always returns the metadata-only gap plan, nothing downloaded); the derived discovery_request is passed only to adapter.discover(); no new public callers; test-only additions in filing-fetch."
+  },
+  "rollback": {
+    "required": false,
+    "passed": true,
+    "note": "No outstanding findings; the mandated mutation M1 killed and reverted byte-identically. Revert = revert commit 44d8098 (wiki) / 81d9cd9 (filing)."
+  },
+  "observations": [
+    "The mutation kill produced the strongest possible evidence of the REAL defect: the live provider error is literally 'fiscal_year is required for CN discovery' (ValueError, retryable=false) - the year-less discovery path never worked against the real cninfo adapter, exactly as the receipt's REAL-FIX scenario claims. The gap plan failed closed (provider_unavailable=True, missing=[]) instead of fabricating a gap - LT-05 semantics confirmed against the live provider.",
+    "The discovery-year hint is load-bearing at TWO levels in the CN adapter: the API client receives fiscal_year, and the adapter re-filters candidates (year != request.fiscal_year -> drop). Removing the hint kills discovery before any download, which is why the mutation fails in 3.42s with zero bytes fetched.",
+    "The hint cannot widen or narrow downloads: it lives only in _gap_plan_result (metadata-only discovery). The authorized close-gap path downloads from gap-plan candidates; the second-request zero-download invariant is enforced by the coordinator (journal exactly one downloaded_new, files_after_first == files_after_second asserted live).",
+    "The derivation is narrowly guarded: applies only when request.fiscal_year is None (explicit-year callers untouched), and an unparsable as_of_date falls back to year-less discovery (pre-fix behavior) rather than raising. The original request_id is preserved in the gap plan; the rebuilt discovery_request derives its own deterministic id (request_id is a hash of identity including fiscal_year) - no identity collisions.",
+    "The T3 tests as shipped are structurally sound: skipUnless evaluated at import (unset env -> 's' not '.', never counted as pass), temp-wiki isolation per test (setUp/tearDown TemporaryDirectory + cleanup_temporary), byte-level hash verification of the downloaded file against snapshot_sha256, and journal-count assertions rather than result-shape inferences (scenario_matrix: counts must come from events/journal, not outcomes).",
+    "EOL note: the review worktree's checked-out files are CRLF (Windows autocrlf), while the main checkout holds LF; git diff HEAD is empty for both, and both live T3 runs passed - purely an environment artifact, no content difference."
+  ],
+  "findings": [],
+  "unresolved_findings": [],
+  "verdict": "accepted",
+  "reviewer_receipt_sha256": "862d2ab856d78fd79c6857c7a1f85797c423a7ee16395e3069e3dc6dbe7067bd",
+  "reviewed_at": "2026-08-11"
+}
