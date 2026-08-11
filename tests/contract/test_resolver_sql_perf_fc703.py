@@ -122,9 +122,22 @@ def test_fc703_deterministic_across_calls(tmp_path):
             == second.matches[0].document_id)
 
 
+def _where_region(sql: str) -> str:
+    """The text between the first WHERE and ORDER BY (or end) — the region
+    that must carry the pushed-down predicates."""
+    where_idx = sql.find("WHERE")
+    assert where_idx != -1, f"no WHERE clause in: {sql[:200]}"
+    end = sql.find("ORDER BY", where_idx)
+    if end == -1:
+        end = len(sql)
+    return sql[where_idx:end]
+
+
 def test_fc703_query_uses_where_clauses(tmp_path):
-    """The generated SQL carries WHERE clauses for kind + status + fiscal
-    year (advisory) — the pushdown is real, not a Python post-filter."""
+    """The DOCUMENTS query carries WHERE predicates for kind + status +
+    fiscal year — the pushdown is real (rows filtered in SQL), not a
+    Python post-filter.  Assertions target the WHERE region, not the
+    SELECT projection: dropping any predicate must fail this test."""
     tree = _seed_company(tmp_path, "Acme", "doc", "annual_report", n=3)
     catalog = _catalog(tmp_path, tree)
     catalog.scan()
@@ -141,10 +154,25 @@ def test_fc703_query_uses_where_clauses(tmp_path):
         catalog.query_filing_candidates(
             document_kind="annual_report", source_statuses=("active",),
             fiscal_year=2024, limit=100)
+        # second call without fiscal_year — kind+status must still be SQL
+        catalog.query_filing_candidates(
+            document_kind="annual_report", source_statuses=("active",),
+            limit=100)
     finally:
         store.fetchall = original
-    # the DOCUMENTS query carries the SQL pushdown (kind + status + fiscal)
-    docs_sql = next(s for s in captured if "FROM documents" in s)
-    assert "document_kind" in docs_sql, f"no kind pushdown: {docs_sql[:200]}"
-    assert "source_status" in docs_sql, f"no status pushdown: {docs_sql[:200]}"
-    assert "fiscal_year" in docs_sql, f"no fiscal pushdown: {docs_sql[:200]}"
+    docs_sqls = [s for s in captured if "FROM documents" in s]
+    assert len(docs_sqls) >= 2, f"expected 2 documents queries, got {len(docs_sqls)}"
+    where = _where_region(docs_sqls[0])
+    import re
+
+    assert re.search(r"document_kind\s*=\s*\?", where), (
+        f"kind predicate not in WHERE region: {where[:300]}")
+    assert re.search(r"source_status\s*IN\s*\(", where), (
+        f"status predicate not in WHERE region: {where[:300]}")
+    assert "fiscal_year" in where, (
+        f"fiscal predicate not in WHERE region: {where[:300]}")
+    # without fiscal_year the kind+status predicates must still be pushed
+    # down (a Python post-filter would leave the WHERE region empty)
+    where2 = _where_region(docs_sqls[1])
+    assert re.search(r"document_kind\s*=\s*\?", where2)
+    assert re.search(r"source_status\s*IN\s*\(", where2)

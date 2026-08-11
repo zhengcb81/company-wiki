@@ -47,10 +47,20 @@ def _percentile(values, pct: float) -> float:
 
 
 def main() -> int:
+    catalog_dir = PROJECT_ROOT / ".source_catalog"
+    db_path = catalog_dir / "catalog.sqlite3"
+    if not db_path.exists():
+        print(json.dumps({
+            "result": "FC-703 replay FAILED CLOSED",
+            "error": f"catalog database missing: {db_path}",
+            "hint": "run 'python -m company_wiki.source_catalog scan' "
+                    "(or the catalog bootstrap) first",
+        }, ensure_ascii=False, indent=1))
+        return 2
     catalog = SourceCatalog(
         CatalogConfig(
             project_root=PROJECT_ROOT,
-            catalog_dir=PROJECT_ROOT / ".source_catalog",
+            catalog_dir=catalog_dir,
             reusable_root_kinds=("company_raw", "dayu_portfolio", "directory"),
             roots=(
                 RootSpec("company_raw", PROJECT_ROOT / "companies", "company_raw"),
