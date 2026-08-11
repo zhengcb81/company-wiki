@@ -1,0 +1,130 @@
+{
+  "schema_version": "2.0",
+  "fc_id": "FC-705",
+  "status": "accepted",
+  "reviewer": "reviewer-fc705-r2-independent",
+  "reviewer_identity": "reviewer-fc705-r2-independent",
+  "implementer_receipt_sha256": "901bd9975ed699f92c58f6a3f57deee5f7b8757558e7aafa6a8b5a9f59bd8087",
+  "implementer_receipt_sha256_note": "on-disk (CRLF) variant per r1 convention; LF-canonical git content hash is e63bc9fcdc9615509a3b2ef3999af3e7e22df0f8f20651f175242c6dcb2a9374 (live file equals f20a64f content after CRLF stripping)",
+  "clean_checkout": true,
+  "base_triplet": {
+    "revenue": "76d1602a27bb70f7d901d44a5b3775f27d0dc5b9",
+    "filing": "85731b20f730da6ecc85084a2b7f04a10e75a1f9",
+    "wiki": "f610c1a752194953ed242f5cb3e17529650d0dba"
+  },
+  "result_triplet": {
+    "revenue": "76d1602a27bb70f7d901d44a5b3775f27d0dc5b9",
+    "filing": "85731b20f730da6ecc85084a2b7f04a10e75a1f9",
+    "wiki": "2735afdfac9a80b1c7c8fc02014da3cb43bd8179"
+  },
+  "replayed_command_ids": [
+    "fc705.r2.receipt-chain",
+    "fc705.r2.focused",
+    "fc705.r2.ruff",
+    "fc705.r2.mutation.M1",
+    "fc705.r2.live.current",
+    "fc705.r2.live.drill",
+    "revenue.governance.receipt-validator"
+  ],
+  "scenario_results": [
+    {
+      "id": "LEG-10g",
+      "status": "passed",
+      "note": "r1 F1 fix verified by CODE READ + FRESH RUN: close_gate_allowed now filters completed = [p for p in numbered if p.get('ended_at') is not None]; an OPEN window never counts ('it is still accumulating'); the count gate, the last-two slice, and the reasons all operate on completed windows. leg10g simulates the real main() bookkeeping (run N+1 closes run N): period 1 opens -> not allowed; period 2 opens/closes 1 -> not allowed (only ONE completed); period 3 opens/closes 2 -> ALLOWED exactly when the second zero-hit window completes. Suite: 16 passed fresh (python -B, pycache cleared)."
+    },
+    {
+      "id": "LEG-10a..f",
+      "status": "passed",
+      "note": "Replayed fresh in the clean worktree at HEAD f20a64f: 16/16 passed (leg10a..g + WU-1500 baseline + leg11). leg10b still asserts single window fails with 'need 2'; the r2 count reason reads 'need 2 COMPLETED zero-hit observation windows, have N (an open window is still accumulating and never counts)'."
+    },
+    {
+      "id": "LEG-11",
+      "status": "passed",
+      "note": "Zero-write proof unchanged and re-verified: fixture catalog byte-identical before/after; live runs on sqlite mode=ro + query_only (r1 M2 kill empirically proved the writable variant changes the hash while the read-only path does not)."
+    },
+    {
+      "id": "LIVE-CURRENT",
+      "status": "passed",
+      "note": "Replayed against the LIVE production catalog from the main checkout (branch fcap @ f20a64f, the reviewed code verified on disk): --period 4, temp period file in %TEMP% outside the repo, --read-only --canary-matrix. Result: 4/4 canaries reused_exact, legacy_bridge_hits=6, shadow_diffs=0, close_gate close_allowed=false with the NEW r2 reason string ('need 2 COMPLETED zero-hit observation windows, have 0 (an open window is still accumulating and never counts)') — the live binary runs the fixed gate. Honest: not passed."
+    },
+    {
+      "id": "LIVE-DRILL",
+      "status": "passed",
+      "note": "Replayed: observe_canary_matrix(Path('config/source_catalog.yaml'), drill=True) on the live catalog -> 4/4 reused_exact (CN-601899-FY2024, CN-601899-FY2025, HK-03690-FY2024, US-AAPL-FY2025), legacy_bridge_hits=0, shadow_diffs=0, snapshot_policy_hash 2d3d2ee8... preserved. Cutover remains READY for the canary cohort."
+    },
+    {
+      "id": "MUTATIONS",
+      "status": "passed",
+      "note": "M1 replayed against the r2 code: completed-count guard mutated from 'len(completed) < REQUIRED_CONSECUTIVE_WINDOWS' to 'len(completed) < 1' -> BOTH test_leg10b AND test_leg10g FAIL (IndexError at last_two[1] — single-window acceptance lets a 1-element tail through). Mutation reverted (byte-identical restore); 16/16 green again; worktree git diff empty."
+    },
+    {
+      "id": "RECEIPT-CHAINS",
+      "status": "passed",
+      "note": "F2 verified CLOSED: r2 receipt base_triplet.wiki == f610c1a752194953ed242f5cb3e17529650d0dba == actual base commit (git cat-file -e OK; git rev-parse f610c1a expands to it; it is the parent of 5e770e2). Result wiki 2735afdfac9a80b1c7c8fc02014da3cb43bd8179 resolves; 'git merge-base --is-ancestor f610c1a752 2735afd' -> ANCESTRY-OK. plan_sha256 158fc1e1... recomputed MATCH (frozen task_plan at revenue 2d64186); command_registry_sha256 215b8077... recomputed MATCH (compatibility/command_registry.json). F1 fix commit 2735afd changed EXACTLY 2 files (legacy_close_gate.py + test_legacy_observation.py, 34 insertions / 9 deletions); receipt commit f20a64f touched only 11_implementer_receipt.json. revenue 76d1602a == repo HEAD == base == result; filing 85731b2 == repo HEAD == base == result."
+    },
+    {
+      "id": "PORT-01",
+      "status": "passed",
+      "note": "Not rerun (unchanged from r1); the pre-existing Windows GBK failures recorded in r1 (2 failed / 3 passed, file untouched by FC-705) carry forward; the focused suite is the FC-705 gate."
+    }
+  ],
+  "mutation_results": [
+    {
+      "id": "M1-r2",
+      "killed": true,
+      "target": "src/company_wiki/source_catalog/legacy_close_gate.py: change the completed-count guard from '< REQUIRED_CONSECUTIVE_WINDOWS' to '< 1'",
+      "evidence": "Mutated in the clean worktree (HEAD f20a64f); __pycache__ cleared; python -B -m pytest tests/contract/test_legacy_observation.py -q -k 'leg10b or leg10g' -> 2 failed / 14 deselected: BOTH test_leg10b_single_window_not_allowed AND test_leg10g_gate_fires_after_two_completed_zero_hit_windows fail with IndexError at last_two[1]['period'] (line 53). Proves the two-COMPLETED-window requirement is load-bearing for both the pure-function contract AND the main()-bookkeeping flow (r1 F1 demand). Reverted byte-identical; full focused suite 16 passed; worktree clean."
+    }
+  ],
+  "validator_gate": {
+    "passed": true,
+    "note": "'python tools/receipt_validator.py --receipt C:/Users/郑曾波/Projects/company-wiki/assurance/fc/FC-705/11_implementer_receipt.json' from revenue-forecast prints 'OK: 1 receipt(s) valid', exit 0."
+  },
+  "sealing_hashes": {
+    "plan_sha256": "158fc1e1e4231e3c2dc71822a58931fdca64eff79fc0d4e27b8276a397f4c78a",
+    "plan_source": "task_plan.md at revenue-forecast commit 2d64186 (frozen plan) — recomputed via 'git show 2d64186:...task_plan.md | sha256sum': MATCH (on-disk plan was later refreshed by status-header commits and hashes differently; sealed hash = frozen plan, FC-704 precedent).",
+    "command_registry_sha256": "215b8077169126b2c4a5eca9d8d6237f291757c2559f6ae6e0ae8ff1c806b089",
+    "registry_source": "revenue-forecast compatibility/command_registry.json (tracked, unmodified) — recomputed on disk: MATCH."
+  },
+  "triplet_verification": {
+    "passed": true,
+    "note": "Chain f610c1a752 (base wiki) -> 5e770e2 (r1 code) -> 6ada6fe (r1 receipt) -> 2735afd (F1 fix) -> f20a64f (r2 receipt): all commits exist, ANCESTRY-OK. F1 fix scope = exactly 2 files (gate + tests); r2 receipt commit = exactly 1 file (receipt). The r2 receipt diff vs r1 shows ONLY: corrected base wiki hash (F2), updated result triplet, LEG-10g scenario added, mutation/note/provisional text — no evidence rewrites. revenue and filing repos untouched (HEAD == base == result)."
+  },
+  "side_effect_reconciliation": {
+    "passed": true,
+    "note": "This review: zero downloads, zero catalog mutations. Live replays ran with mode=ro + query_only; only a temp period file in %TEMP% (fc705-r2-periods.json, outside the repo) was written. Main checkout git status after the live runs shows no NEW modifications (llm_cost_log.csv modification and r1 reviewer's untracked files pre-date this review). Catalog hash drift is the ambient background worker checkpointing WAL — not the observer (documented r1: hash changed with no tool running)."
+  },
+  "codegraph_reachability": {
+    "passed": true,
+    "note": "legacy_close_gate is a pure function with zero production callers (it IS the gate); the observer is a tool script. Seam wiring unchanged from r1: legacy_bridge_allowed derives from the snapshot flag legacy_bridge_enabled; the live drill (hits=0 with bridge off) confirms the flag is honored end-to-end."
+  },
+  "rollback": {
+    "required": false,
+    "passed": true,
+    "note": "Additive: new module + observer upgrade + tests. Revert = revert 2735afd (or the feature commit). LEG-09 drill (r1) proved the flag flip is reversible."
+  },
+  "findings_r1": [
+    {
+      "id": "F1-close-gate-unsatisfiable",
+      "severity": "major",
+      "status": "CLOSED",
+      "evidence": "2735afd filters to completed windows only (ended_at set) before counting/slicing; the open window never counts. leg10g (added) simulates the real main() ledger transition and proves the gate fires exactly when the second zero-hit window completes. Fresh suite: 16 passed. M1 replay on the r2 code kills leg10b AND leg10g — the two-completed-window requirement is now load-bearing on the real bookkeeping flow. Live current-state output carries the new COMPLETED-windows reason string, proving the fix is deployed in the main checkout."
+    },
+    {
+      "id": "F2-receipt-base-wiki-hash-erroneous",
+      "severity": "minor",
+      "status": "CLOSED",
+      "evidence": "r2 receipt records base_triplet.wiki = f610c1a752194953ed242f5cb3e17529650d0dba; git cat-file -e OK; rev-parse f610c1a -> f610c1a752...; it is the actual parent of the sealed result chain. No other receipt fields changed beyond result triplet / scenario / note text (verified via git diff 2735afd f20a64f)."
+    },
+    {
+      "id": "F3-reason-message-wording",
+      "severity": "informational",
+      "status": "acknowledged-no-action",
+      "evidence": "r1 labeled optional ('can ride along with F1'). The new count reason ('an open window is still accumulating and never counts') is accurate; the remaining 'missing started_at/ended_at (window not completed)' branch now only fires for completed-but-unparseable dates. No change required."
+    }
+  ],
+  "unresolved_findings": [],
+  "verdict": "accepted",
+  "reviewer_receipt_sha256": "c84b85062828b2b0e5854948c2d727ebf24a4c599f1e191906af6c9c0e830372",
+  "reviewed_at": "2026-08-11"
+}
