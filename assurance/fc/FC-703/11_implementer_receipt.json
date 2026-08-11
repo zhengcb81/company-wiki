@@ -1,0 +1,100 @@
+{
+  "schema_version": "2.0",
+  "fc_id": "FC-703",
+  "status": "independent_review",
+  "mode": "honest-implementer",
+  "base_triplet": {
+    "revenue": "0cf30c16e72ce6d28f8a67bffd0ccc1f0fff073e",
+    "filing": "6274be2187b450d14492defd03579d6209d1b1cc",
+    "wiki": "4854380b53166292184bda41dd913ffe6d496885"
+  },
+  "result_triplet": {
+    "revenue": "0cf30c16e72ce6d28f8a67bffd0ccc1f0fff073e",
+    "filing": "6274be2187b450d14492defd03579d6209d1b1cc",
+    "wiki": "41b060ddb89d8913b8fdb4f1f3f7b03ebc37da1b"
+  },
+  "plan_sha256": "158fc1e1e4231e3c2dc71822a58931fdca64eff79fc0d4e27b8276a397f4c78a",
+  "policy_sha256": "not-applicable",
+  "allowed_files": [
+    "company-wiki/tests/contract/test_resolver_sql_perf_fc703.py",
+    "company-wiki/tools/ex07_perf_replay.py",
+    "company-wiki/assurance/fc/FC-703/11_implementer_receipt.json"
+  ],
+  "changed_files": [
+    "company-wiki/tests/contract/test_resolver_sql_perf_fc703.py",
+    "company-wiki/tools/ex07_perf_replay.py"
+  ],
+  "dependency_receipts": [
+    "company-wiki/assurance/fc/FC-702/12_reviewer_receipt.json (accepted 2026-08-11)"
+  ],
+  "command_registry_sha256": "215b8077169126b2c4a5eca9d8d6237f291757c2559f6ae6e0ae8ff1c806b089",
+  "scenario_results": [
+    {
+      "id": "OPS-03",
+      "status": "passed",
+      "note": "kind/status/entity filters pushed into SQL: the documents query carries WHERE clauses for document_kind + source_status + fiscal_year (spy test), a quarterly noise document never enters an annual slice, another entity's docs are excluded — no Python full-table scan"
+    },
+    {
+      "id": "EX-07",
+      "status": "passed",
+      "note": "resolver-level determinism: same request resolves to the same canonical handle across repeated calls (pdoc-pinned fixture, 10 candidates)"
+    },
+    {
+      "id": "PERF",
+      "status": "passed",
+      "note": "candidate cap enforced (limit=10 never exceeds); replay against the live catalog (23521 documents): CN 601899 p50 ~42ms, HK 03690 ~14ms, US AAPL ~14ms, all REUSED_EXACT, zero side effects (0 downloads / 0 catalog writes / 0 provider calls / 0 llm calls)"
+    }
+  ],
+  "commands": [
+    {
+      "command": "python -m pytest tests/contract/test_resolver_sql_perf_fc703.py -q",
+      "exit_code": 0,
+      "result": "5 passed"
+    },
+    {
+      "command": "python -m pytest tests/ -q",
+      "exit_code": 0,
+      "result": "2164 passed, 1 skipped / 3 failed — ALL 3 verified pre-existing at parent commit 4854380 (detached HEAD rerun): test_check_unique_test_symbols.py::test_syntax_error_is_reported_as_failure (PORT-01, FC-1205) + 2 worker-bootstrap Windows process-integration flakes (test_terminating_supervisor_does_not_leave_an_orphan_worker). FC-703 changed zero production code."
+    },
+    {
+      "command": "ruff check tests/contract/test_resolver_sql_perf_fc703.py tools/ex07_perf_replay.py",
+      "exit_code": 0,
+      "result": "All checks passed"
+    },
+    {
+      "command": "python tools/ex07_perf_replay.py",
+      "exit_code": 0,
+      "result": "latency baseline: catalog_documents=23521, CN-601899-FY2024/2025 p50 42.4/42.1ms, HK-03690-FY2024 p50 14.2ms, US-AAPL-FY2025 p50 14.1ms; statuses REUSED_EXACT; side_effects all zero"
+    }
+  ],
+  "side_effect_counts": {
+    "downloads": 0,
+    "external_root_writes": 0,
+    "catalog_mutations": 0,
+    "llm_calls": 0,
+    "parser_calls": 0
+  },
+  "codegraph": {
+    "production_callers_before": 0,
+    "production_callers_after": 0,
+    "note": "FC-703 is a test + baseline commit: zero production code changed; SQL pushdown already present from FC-601/602/603 work, now pinned by 5 contract tests"
+  },
+  "mutation": {
+    "id": "FC-703-M",
+    "killed": true,
+    "details": "mutation runs executed with __pycache__ cleared + python -B (Windows mtime staleness fix): WHERE-clause removal mutations killed by the spy test (OPS-03); candidate-cap removal killed by the cap test; determinism broken by canonical-order mutations on the 10-candidate fixture"
+  },
+  "rollback": {
+    "required": false,
+    "proved": true,
+    "note": "additive test commit (no production code); revert = revert commit."
+  },
+  "review": {
+    "reviewer": "",
+    "reviewer_receipt_sha256": "",
+    "decision": "pending",
+    "reviewed_at": "",
+    "note": "honest-implementer: awaits independent reviewer per independent_review_protocol.md"
+  },
+  "provisional_note": "result_triplet sealed at wiki 41b060d."
+}
