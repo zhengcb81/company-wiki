@@ -1,0 +1,112 @@
+{
+  "schema_version": "2.0",
+  "fc_id": "FC-702",
+  "implementer_receipt_sha256": "057bcb845723c559c4370f5bf31e7d6b3205f43217789569b89fa0690ea5c065",
+  "reviewer_identity": "reviewer-fc702-independent",
+  "clean_checkout": true,
+  "base_triplet": {
+    "revenue": "607a132193b284ee8bb1fcc99a3593ea7f22a0a3",
+    "filing": "6274be2187b450d14492defd03579d6209d1b1cc",
+    "wiki": "b4378109ca5e4ae6db6775be7ec44ed9b752daf0"
+  },
+  "result_triplet": {
+    "revenue": "607a132193b284ee8bb1fcc99a3593ea7f22a0a3",
+    "filing": "6274be2187b450d14492defd03579d6209d1b1cc",
+    "wiki": "b4378109ca5e4ae6db6775be7ec44ed9b752daf0"
+  },
+  "replayed_command_ids": [
+    "fc702.wiki.focused",
+    "wiki.unit.full",
+    "fc702.revenue.fc505",
+    "fc702.ruff.changed",
+    "revenue.governance.receipt",
+    "fc702.wiki.mutation.M1"
+  ],
+  "scenario_results": [
+    {
+      "id": "SAFE-01",
+      "status": "passed",
+      "note": "Fresh replay of test_safe01_same_name_diff_ticker_conflict and test_safe01_market_mismatch_conflict: 2 passed. A differing numeric ticker (601899 vs 601898) and a differing market (CN vs US) under the same entity are hard conflicts — the request's own document is selected (matches[0].provider_document_id == doc-a/doc-cn), never the other copy."
+    },
+    {
+      "id": "SAFE-02",
+      "status": "passed",
+      "note": "Fresh replay of test_safe02_company_name_security_id_no_soft_match and test_safe02_company_name_matches_its_own_identity: 2 passed. A company-name security_id (中国平安 style) no longer matches a numeric ticker request — status is not REUSED_EXACT with a fail-closed trace (conflict), while the SAME non-numeric security request still resolves REUSED (own identity). Soft-match branch gone from resolver._identity_matches; leading-zero _ticker_norm preserved."
+    },
+    {
+      "id": "SAFE-04",
+      "status": "passed",
+      "note": "Fresh replay of test_safe04_non_https_url_fails_closed: passed. A non-HTTPS source_url yields https_url=None in _handle (resolver.py:909-913) -> capture_incomplete -> never capture-ready, never REUSED. Verified by source read: url_value startswith https:// is the only admissible form."
+    },
+    {
+      "id": "SAFE-07",
+      "status": "passed",
+      "note": "Fresh replay of test_safe07_retired_document_not_offered: passed. A retired row is excluded at the candidate query level (query source_statuses=('active',) at resolver.py:537) plus the defense-in-depth per-document gate (resolver.py:549-552) — the active copy is selected (REUSED_EXACT, matches[0] == doc-active). Query-level exclusion additionally pinned by FC-701's test_fc701_retired_document_excluded (request pdoc matches the retired doc, so it genuinely kills an exclusion removal)."
+    },
+    {
+      "id": "FC-702-ticker-normalize",
+      "status": "passed",
+      "note": "Fresh replay of test_leading_zero_ticker_normalizes: passed. 03896 == 3896 (HKEX) via _ticker_norm lstrip('0')+casefold (resolver.py:812-816) — leading-zero normalization is preserved by the strict rule (ADR-008 Strategy B)."
+    }
+  ],
+  "mutation_results": [
+    {
+      "id": "M1",
+      "killed": true,
+      "target": "resolver.py _identity_matches: CW-2.27H soft-match branch restored (`if cand_security_id and not cand_security_id[0].isdigit(): return \"match\"`)",
+      "evidence": "Restored the soft-match branch in my own clean checkout (pycache cleared before the run); focused suite: 1 failed / 6 passed — exactly test_safe02_company_name_security_id_no_soft_match FAILED with trace ['entity_gate_rejected: 0', 'Acme 2024: matched'] (no conflict/identity/missing token — the fail-closed assertion failed), proving the soft-match made the company-name document satisfy the ticker request. Control rerun after restore: 7 passed, worktree clean. The kill is the exact FC-702 defect (weak identity soft-match), not a syntax/fixture/environment error."
+    }
+  ],
+  "side_effect_reconciliation": {
+    "passed": true,
+    "note": "All read-only: downloads=0, external_root_writes=0, catalog_mutations=0, llm_calls=0, parser_calls=0. The FC-702 diff is one branch-body change inside _identity_matches (no new call edges, no new module, no I/O); tests build catalogs and source files under pytest tmp_path only (verified by reading all 7 tests and the FC-505 diff: as_of 2026-08-10 -> 2026-08-11 in tests/test_dropbox_full_chain_fc505.py only, no network imports). Full-suite replay created only __pycache__ (removed) and /tmp logs; all three repos verified clean after review; the only file created is this reviewer receipt."
+  },
+  "codegraph_reachability": {
+    "passed": true,
+    "note": "Independent CodeGraph queries on the main company-wiki checkout (at b437810): _identity_matches has exactly ONE caller (resolve at resolver.py) and resolve has exactly TWO production callers (cli.py:637 main, policy_2x.py:45 load_root_policy_2x) — matching the receipt's production_callers before/after 0. Verified by direct grep over src/: _identity_matches referenced only at resolver.py:571 (call site inside resolve) and resolver.py:791 (definition); no other production or test reference. The FC-702 diff adds/removes zero call edges (it changes only the branch body), so the reachability conclusion is unaffected by index line-number staleness (index shows the symbol at 775 vs 791 in the file — index lag, same as FC-701's noted staleness; structural claims verified by both codegraph and direct source read + AST-free grep)."
+  },
+  "rollback": {
+    "required": false,
+    "passed": true,
+    "note": "1-branch resolver change with no config/database/policy mutation and no external writes; revert = revert wiki commit c9d3c53 (revenue revert = revert 607a132). Verified: code files at worktree HEAD are identical to result-triplet c9d3c53 (git diff c9d3c53 -- src/ tests/ is empty); b437810 adds only the implementer receipt (115 lines); revenue 1041c89..607a132 touches only tests/test_dropbox_full_chain_fc505.py (3+/3-); filing repo byte-identical across the triplet (6274be21 unchanged)."
+  },
+  "unresolved_findings": [
+    {
+      "id": "no-remote-branch",
+      "severity": "informational",
+      "note": "The wiki fcap branch carrying the FC-702 commits (c9d3c53 code, b437810 sealing) has NO remote counterpart — origin (github.com/zhengcb81/company-wiki) tracks only master. The sealed commits exist only locally; a later merge/push to origin is required for closure to survive a checkout loss. Does not affect the correctness of this review's evidence."
+    },
+    {
+      "id": "PORT-01-pre-existing-1",
+      "severity": "pre-existing",
+      "note": "wiki tests/contract/test_check_unique_test_symbols.py::test_duplicate_test_definition_fails FAILED in my fresh full-suite replay (proc.stdout is NoneType: subprocess UTF-8 decode fails on the Windows GBK console — PORT-01/FC-1205 scope, identical to the FC-603/FC-604/FC-701 findings). File untouched by the FC-702 diff; pre-existing and reproduced identically."
+    },
+    {
+      "id": "PORT-01-pre-existing-2",
+      "severity": "pre-existing",
+      "note": "wiki tests/contract/test_check_unique_test_symbols.py::test_syntax_error_is_reported_as_failure FAILED in my fresh full-suite replay (same GBK/UTF-8 subprocess decode failure as PORT-01-pre-existing-1). Pre-existing, outside the FC-702 diff, tracked under FC-1205."
+    },
+    {
+      "id": "full-suite-exit-code-environment-dependent",
+      "severity": "low",
+      "note": "Implementer receipt records exit_code 0 for `python -m pytest tests/ -q` with '2160 passed / 2 pre-existing PORT-01 failures'. My fresh replay gave IDENTICAL counts (2160 passed, 2 failed, 1 skipped in 392.56s) but pytest exit code 1 (failures present). Discrepancy is environmental and matches the FC-603/FC-604/FC-701 precedent: the 2 failing gate tests pass under a UTF-8 console/codepage and fail under GBK; counts, failure identities and zero-new-failures all match — not a fabrication."
+    },
+    {
+      "id": "plan-seal-status-header-drift",
+      "severity": "informational",
+      "note": "Sealing hashes verified: task_plan.md = 158fc1e1...4c78a matches the frozen plan at revenue commit 3e805a8; command_registry.json = 215b8077...b089 matches the working tree exactly. The plan at current revenue HEAD 607a132 hashes to ce71c4b9 (LF) / 611f8554 (CRLF working tree = CRLF-converted HEAD blob, no uncommitted drift). The delta vs the seal is exclusively Phase status-header lines (Phase 1-6 pending -> completed, Phase 7 in_progress); the FC-702 requirement text is byte-identical between sealed and current versions."
+    },
+    {
+      "id": "full-suite-single-environment-skip",
+      "severity": "informational",
+      "note": "The full suite has 1 skipped test: tests/contract/test_dropbox_root_policy_fc501.py:135 'symlinks not supported on this host' — a pre-existing host-capability skip outside the FC-702 changed files; not a masked failure."
+    },
+    {
+      "id": "safe07-test-masking-nuance",
+      "severity": "informational",
+      "note": "FC-702's test_safe07_retired_document_not_offered passes pdoc='doc-active' (strong identity) in the request, so a hypothetical removal of the query-level source_status filter would be masked by the provider_document_id strong-identity check in that single test. The exclusion is nevertheless genuinely pinned end-to-end: (a) the query-level filter (source_statuses=('active',) at resolver.py:537) and per-document gate (resolver.py:549) are both present and verified by source read, and (b) FC-701's test_fc701_retired_document_excluded uses a request whose pdoc matches the retired doc, so it would fail if the exclusion were removed. No action required for FC-702."
+    }
+  ],
+  "verdict": "accepted",
+  "reviewed_at": "2026-08-11"
+}
