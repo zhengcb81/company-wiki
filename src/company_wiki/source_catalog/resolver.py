@@ -820,12 +820,11 @@ class SourceResolver:
             and cand_security_id
             and _ticker_norm(req_security_id) != _ticker_norm(cand_security_id)
         ):
-            # CW-2.27H: cand_security_id stored as a company name (non-numeric
-            # prefix) was the default before identity normalization.  Treat as
-            # unknown (match) — the remaining document-kind / fiscal-year
-            # filters still guarantee precision.
-            if cand_security_id and not cand_security_id[0].isdigit():
-                return "match"
+            # FC-702: no soft-match — a security_id that differs after
+            # normalization is a hard identity conflict, even when the
+            # candidate stores a company name (中国平安 style) instead of a
+            # ticker.  Issuer anchoring happens at the entity layer
+            # (_entity_matches / security_master), never here.
             return "conflict"
         return "match"
 
