@@ -132,3 +132,225 @@ def test_leg06_period_baseline_recordable():
     payload = _json.dumps(period, ensure_ascii=False)
     assert '"period": 1' in payload
     assert '"status": "observing"' in payload
+
+
+# --- FC-705: close gate + bridge-off drill ------------------------------------
+
+
+def _window(period, *, hits=0, started_at, ended_at):
+    return {
+        "period": period,
+        "started_at": started_at,
+        "ended_at": ended_at,
+        "legacy_bridge_hits": hits,
+        "status": "completed",
+    }
+
+
+def test_leg10_close_gate_two_zero_hit_24h_windows():
+    """FC-705: two consecutive completed >=24h zero-hit windows allow the
+    legacy bridge to close."""
+    from company_wiki.source_catalog.legacy_close_gate import close_gate_allowed
+
+    allowed, reasons = close_gate_allowed([
+        _window(1, started_at="2026-08-09T00:00:00Z",
+                ended_at="2026-08-10T00:00:00Z"),
+        _window(2, started_at="2026-08-10T00:00:00Z",
+                ended_at="2026-08-11T00:00:00Z"),
+    ])
+    assert allowed, reasons
+    assert reasons == []
+
+
+def test_leg10b_single_window_not_allowed():
+    """One zero-hit window is not enough — the close stays locked."""
+    from company_wiki.source_catalog.legacy_close_gate import close_gate_allowed
+
+    allowed, reasons = close_gate_allowed([
+        _window(1, started_at="2026-08-09T00:00:00Z",
+                ended_at="2026-08-10T00:00:00Z"),
+    ])
+    assert not allowed
+    assert any("need 2" in r for r in reasons)
+
+
+def test_leg10c_hits_in_window_blocks_close():
+    """Any hit in either of the last two windows blocks the close."""
+    from company_wiki.source_catalog.legacy_close_gate import close_gate_allowed
+
+    allowed, reasons = close_gate_allowed([
+        _window(1, hits=0, started_at="2026-08-09T00:00:00Z",
+                ended_at="2026-08-10T00:00:00Z"),
+        _window(2, hits=3, started_at="2026-08-10T00:00:00Z",
+                ended_at="2026-08-11T00:00:00Z"),
+    ])
+    assert not allowed
+    assert any("legacy_bridge_hits=3" in r for r in reasons)
+
+
+def test_leg10d_short_window_blocks_close():
+    """A window shorter than 24h never counts — even with zero hits."""
+    from company_wiki.source_catalog.legacy_close_gate import close_gate_allowed
+
+    allowed, reasons = close_gate_allowed([
+        _window(1, started_at="2026-08-09T00:00:00Z",
+                ended_at="2026-08-09T10:00:00Z"),
+        _window(2, started_at="2026-08-09T10:00:00Z",
+                ended_at="2026-08-10T10:00:00Z"),
+    ])
+    assert not allowed
+    assert any("shorter than 24h" in r for r in reasons)
+
+
+def test_leg10e_gap_in_period_numbers_blocks_close():
+    """Non-consecutive period numbers are not consecutive windows."""
+    from company_wiki.source_catalog.legacy_close_gate import close_gate_allowed
+
+    allowed, reasons = close_gate_allowed([
+        _window(1, started_at="2026-08-09T00:00:00Z",
+                ended_at="2026-08-10T00:00:00Z"),
+        _window(3, started_at="2026-08-11T00:00:00Z",
+                ended_at="2026-08-12T00:00:00Z"),
+    ])
+    assert not allowed
+    assert any("not consecutive" in r for r in reasons)
+
+
+def test_leg10f_empty_ledger_fails_closed():
+    """No periods => fail closed with an explicit reason."""
+    from company_wiki.source_catalog.legacy_close_gate import close_gate_allowed
+
+    allowed, reasons = close_gate_allowed([])
+    assert not allowed
+    assert reasons and "no observation periods" in reasons[0]
+
+
+# --- FC-705: function-level bridge-off/rollback + canary seam -----------------
+
+
+def test_leg07_bridge_off_fails_closed_no_container_read():
+    """FC-705: legacy_bridge_allowed=False returns {} WITHOUT reading the
+    container and records no hit — the fail-closed gate exists even at the
+    seam function level."""
+    collector = MetricsCollector()
+    document = {"metadata": {"acquisition": {"market": "US"}}}
+    result = _source_metadata(
+        document, observer=collector, legacy_bridge_allowed=False)
+    assert result == {}
+    assert collector.snapshot().legacy_bridge_hits == 0
+
+
+def test_leg09_rollback_restores_bridge():
+    """FC-705: rolling the flag back on restores the legacy read — the
+    bridge is closable AND reversible."""
+    collector = MetricsCollector()
+    document = {"metadata": {"dayu_meta": {"provider": "sec"}}}
+    assert _source_metadata(
+        document, observer=collector, legacy_bridge_allowed=False) == {}
+    assert collector.snapshot().legacy_bridge_hits == 0
+    # rollback: flag back on -> legacy payload readable again
+    restored = _source_metadata(document, observer=collector)
+    assert restored["provider"] == "sec"
+    assert collector.snapshot().legacy_bridge_hits == 1
+
+
+def test_leg11_canary_matrix_observation_read_only(tmp_path):
+    """FC-705: the canary-matrix observation resolves through the REAL
+    resolver seam (v2 drill: active assertion + bridge off) and never
+    writes the catalog."""
+    import hashlib
+    import json as _json
+
+    sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "scripts"))
+    from legacy_observer import observe_canary_matrix  # noqa: E402
+
+    from company_wiki.source_catalog.models import RootSpec  # noqa: E402
+
+    raw = tmp_path / "companies" / "紫金矿业" / "raw" / "financial_reports" / "annual"
+    raw.mkdir(parents=True)
+    body = b"%PDF-1.4 canary"
+    (raw / "1222870413.pdf").write_bytes(body)
+    (raw / "1222870413.pdf.source.json").write_text(_json.dumps({
+        "market": "CN", "security_id": "601899",
+        "source_title": "紫金矿业 2024", "fiscal_year": 2024,
+        "filing_date": "2025-03-20", "form_type": "annual_report",
+        "document_kind": "annual_report", "provider": "cninfo",
+        "provider_document_id": "1222870413",
+        "source_url": "https://provider.example/1222870413",
+    }, ensure_ascii=False), encoding="utf-8")
+    from company_wiki.source_catalog import CatalogConfig, SourceCatalog
+
+    catalog = SourceCatalog(
+        CatalogConfig(
+            project_root=tmp_path,
+            catalog_dir=tmp_path / ".source_catalog",
+            reusable_root_kinds=("company_raw",),
+            roots=(RootSpec("company_raw", tmp_path / "companies", "company_raw",
+                            priority=10, adapter_id="company_raw_v1",
+                            read_only=False, reusable_for_filing=True,
+                            canonical_write_target="companies"),),
+        )
+    )
+    catalog.scan()
+    row = catalog.store.fetchone(
+        "SELECT document_id, primary_source_id FROM documents LIMIT 1")
+    assert row is not None
+    with catalog.store.transaction() as conn:
+        conn.execute(
+            """INSERT INTO source_metadata_assertions (
+                assertion_id, source_id, document_id, decision,
+                visibility_state, activation_epoch, cohort, created_at,
+                evidence_json, fiscal_year, fiscal_period, document_kind,
+                form_type, provider, provider_document_id, source_url,
+                security_id, market, content_sha256, normalization_status,
+                evidence_basis, created_by, schema_version)
+               VALUES (?, ?, ?, 'verified', 'active', 'e1', 'c1',
+                       '2026-08-10T00:00:00Z', '{}', 2024, 'FY2024',
+                       'annual_report', 'annual_report', 'cninfo',
+                       '1222870413', 'https://provider.example/1222870413',
+                       '601899', 'CN', ?, 'capture_ready',
+                       'sidecar', 'fc705-test', '1.0')""",
+            ("a-canary", row["primary_source_id"], row["document_id"],
+             hashlib.sha256(body).hexdigest()))
+    config = tmp_path / "config"
+    config.mkdir()
+    config_path = config / "source_catalog.yaml"
+    config_path.write_text(_json.dumps({
+        "schema_version": "1.0",
+        "catalog_dir": str(tmp_path / ".source_catalog"),
+        "roots": [{"root_id": "company_raw",
+                   "path": str(tmp_path / "companies"),
+                   "kind": "company_raw"}],
+    }), encoding="utf-8")
+    from company_wiki.source_catalog.runtime_policy import (  # noqa: E402
+        snapshot_hash,
+    )
+
+    policy = {
+        "schema_version": "1.0",
+        "policy_hash": "c" * 64,
+        "flags": {"v2_resolve_active": True, "legacy_bridge_enabled": False,
+                  "v2_bundle_active": False, "v2_persist_assertions": True,
+                  "v2_resolve_shadow": True, "v2_scan_shadow": True},
+        "current_epoch": "e1",
+        "active_cohorts": ["c1"],
+        "updated_at": "2026-08-11T00:00:00Z",
+    }
+    policy["snapshot_sha256"] = snapshot_hash(policy)
+    (tmp_path / ".source_catalog" / "runtime_policy.json").write_text(
+        _json.dumps(policy, ensure_ascii=False), encoding="utf-8")
+    db_path = tmp_path / ".source_catalog" / "catalog.sqlite3"
+    before = hashlib.sha256(db_path.read_bytes()).hexdigest()
+
+    result = observe_canary_matrix(config_path, drill=True)
+
+    assert result["mode"] == "drill"
+    by_name = {r["name"]: r["status"] for r in result["requests"]}
+    assert by_name["CN-601899-FY2024"] == "reused_exact", by_name
+    assert by_name["CN-601899-FY2025"] == "missing"  # no FY2025 doc
+    assert by_name["HK-03690-FY2024"] == "missing"
+    assert by_name["US-AAPL-FY2025"] == "missing"
+    assert result["legacy_bridge_hits"] == 0
+    assert result["shadow_diffs"] == 0
+    after = hashlib.sha256(db_path.read_bytes()).hexdigest()
+    assert before == after, "canary observation wrote to the catalog"
