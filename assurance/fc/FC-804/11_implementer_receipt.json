@@ -1,0 +1,62 @@
+{
+  "schema_version": "2.0",
+  "fc_id": "FC-804",
+  "status": "independent_review",
+  "mode": "honest-implementer",
+  "base_triplet": {
+    "revenue": "f7eef71b1be722a0670eae4288382ea9dead345e",
+    "filing": "065976ed7c81c9112e4647592084c1b2c891aa3c",
+    "wiki": "f99e0fa874ab6967eec4d04c8f61f603e8174f32"
+  },
+  "result_triplet": {
+    "revenue": "f7eef71b1be722a0670eae4288382ea9dead345e",
+    "filing": "065976ed7c81c9112e4647592084c1b2c891aa3c",
+    "wiki": "d96e6720cbfa6f8b3aecc7f54df4732c09f117df"
+  },
+  "plan_sha256": "158fc1e1e4231e3c2dc71822a58931fdca64eff79fc0d4e27b8276a397f4c78a",
+  "policy_sha256": "not-applicable",
+  "allowed_files": [
+    "company-wiki/src/company_wiki/source_catalog/close_gap.py",
+    "company-wiki/tests/contract/test_close_gap_concurrency_fc804.py",
+    "company-wiki/assurance/fc/FC-804/11_implementer_receipt.json"
+  ],
+  "changed_files": [
+    "company-wiki/src/company_wiki/source_catalog/close_gap.py",
+    "company-wiki/tests/contract/test_close_gap_concurrency_fc804.py"
+  ],
+  "dependency_receipts": [
+    "company-wiki/assurance/fc/FC-803/12_reviewer_receipt.json (accepted 2026-08-11)"
+  ],
+  "command_registry_sha256": "215b8077169126b2c4a5eca9d8d6237f291757c2559f6ae6e0ae8ff1c806b089",
+  "scenario_results": [
+    {"id": "DL-08", "status": "passed",
+     "note": "single-flight: two concurrent executions of the same binding perform ONE provider fetch + ONE canonical commit — the loser waits on the per-transaction file lock (close_gap_locks/<txn>.lock, acquisition-mutex pattern) and completes as reused with fetch=0"},
+    {"id": "OPS-02", "status": "passed",
+     "note": "bounded retry: retryable staging failures (AdapterProcessError.retryable) retried up to 3 attempts with exponential backoff; non-retryable fails immediately (1 attempt)"},
+    {"id": "DL-09", "status": "passed",
+     "note": "idempotent recovery: a re-run after a successful close reuses — one document, no extra locations (writer content-hash dedupe pinned)"},
+    {"id": "LOCK-TIMEOUT", "status": "passed",
+     "note": "the single-flight lock wait is bounded by the coordinator timeout + grace; lock exhaustion is a failed (retryable) result, never a hang"},
+    {"id": "MUTATIONS", "status": "passed",
+     "note": "M1 single-flight lock removed -> CG-C1 fails (2 fetches); M2 retry disabled -> CG-C2 fails"}
+  ],
+  "commands": [
+    {"command": "python -B -m pytest tests/contract/test_close_gap_concurrency_fc804.py tests/contract/test_close_gap_fc801.py -q",
+     "exit_code": 0, "result": "12 passed (5 FC-804 + 7 FC-801 regression)", "cwd": "company-wiki"},
+    {"command": "python -B -m pytest tests/ -q (full wiki suite)",
+     "exit_code": 0, "result": "2198 passed, 1 skipped / 2 failed — both pre-existing PORT-01/FC-1205 (test_check_unique_test_symbols, Windows GBK)", "cwd": "company-wiki"},
+    {"command": "ruff check src/company_wiki/source_catalog/close_gap.py tests/contract/test_close_gap_concurrency_fc804.py",
+     "exit_code": 0, "result": "All checks passed", "cwd": "company-wiki"}
+  ],
+  "side_effect_counts": {"downloads": 0, "external_root_writes": 0, "catalog_mutations": 0,
+                         "llm_calls": 0, "parser_calls": 0},
+  "codegraph": {"production_callers_before": 0, "production_callers_after": 0,
+                "note": "close_gap transaction internals only; no new public callers"},
+  "mutation": {"id": "FC-804-M1..M2", "killed": true,
+               "details": "M1 lock removed -> CG-C1 fails; M2 retry disabled -> CG-C2 fails. Reverted; 12 tests re-verified green."},
+  "rollback": {"required": false, "proved": true, "note": "additive transaction hardening; revert = revert commit."},
+  "review": {"reviewer": "", "reviewer_receipt_sha256": "", "decision": "pending",
+             "reviewed_at": "",
+             "note": "honest-implementer: awaits independent reviewer per independent_review_protocol.md"},
+  "provisional_note": "result_triplet sealed at wiki d96e672 (revenue/filing unchanged)."
+}
