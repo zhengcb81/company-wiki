@@ -1,0 +1,137 @@
+{
+  "schema_version": "2.0",
+  "fc_id": "FC-905",
+  "status": "independent_review",
+  "mode": "honest-implementer",
+  "base_triplet": {
+    "revenue": "4ff3d2e17e81fd0c8421768e035bdf3bda30dc0b",
+    "filing": "959d04cdbe2115c8e01fa39a2d5dfe748cc4fedd",
+    "wiki": "fbb482891776a1e4fceab1c97be882ea5bee4604"
+  },
+  "result_triplet": {
+    "revenue": "b5c4dfd8073335344c0b94590701de1e6e288998",
+    "filing": "6b617714f253400e6cba93c9aa7fc0fbe3ed46bc",
+    "wiki": "fbb482891776a1e4fceab1c97be882ea5bee4604"
+  },
+  "plan_sha256": "0bc6b9f7d6707e470e55c22759d37c18404172081ecd176d2883e184c61fafaa",
+  "policy_sha256": "not-applicable",
+  "allowed_files": [
+    "revenue-forecast/scripts/source_preparation.py",
+    "revenue-forecast/tests/test_fc905b_trusted_receipt.py",
+    "revenue-forecast/tests/test_fc904_artifact_selection.py",
+    "revenue-forecast/tests/test_source_preparation.py",
+    "revenue-forecast/tests/test_preparation_e2e_success.py",
+    "filing-fetch/scripts/filing_contracts.py",
+    "filing-fetch/tests/test_fc905b_envelope_fields.py",
+    "filing-fetch/tests/test_fc903_bundle_contract.py",
+    "filing-fetch/tests/test_fetch_filing.py",
+    "company-wiki/assurance/fc/FC-905/11_implementer_receipt_b.json"
+  ],
+  "changed_files": [
+    "revenue-forecast/scripts/source_preparation.py",
+    "revenue-forecast/tests/test_fc905b_trusted_receipt.py",
+    "revenue-forecast/tests/test_fc904_artifact_selection.py",
+    "revenue-forecast/tests/test_source_preparation.py",
+    "revenue-forecast/tests/test_preparation_e2e_success.py",
+    "filing-fetch/scripts/filing_contracts.py",
+    "filing-fetch/tests/test_fc905b_envelope_fields.py",
+    "filing-fetch/tests/test_fc903_bundle_contract.py",
+    "filing-fetch/tests/test_fetch_filing.py"
+  ],
+  "dependency_receipts": [
+    "company-wiki/assurance/fc/FC-905/12_reviewer_receipt.json (FC-905-a, accepted 2026-08-11)",
+    "revenue-forecast/assurance/fc/FC-904/12_reviewer_receipt.json (accepted 2026-08-11)"
+  ],
+  "command_registry_sha256": "215b8077169126b2c4a5eca9d8d6237f291757c2559f6ae6e0ae8ff1c806b089",
+  "scenario_results": [
+    {
+      "id": "PI-CONSUME-STATUS",
+      "status": "passed",
+      "note": "source_preparation consumes prompt_injection_status from the envelope (hardcoded not_detected removed); reviewed status forwards to the capture record; not_reviewed (or a defensively-missing field) BLOCKS with RuntimeError (test_b1/b2/b3)."
+    },
+    {
+      "id": "PI-CONSUME-COUNTS",
+      "status": "passed",
+      "note": "parser_calls/llm_calls come from the envelope into the reuse_receipt; absent (None) counts fail closed — never fabricated as 0 (test_b4/b5)."
+    },
+    {
+      "id": "PI-FILING-VALIDATE",
+      "status": "passed",
+      "note": "validate_resolution_envelope validates prompt_injection_status enum and non-negative integer-or-null counts fail closed; N-1 envelopes missing the fields normalize to explicit not_reviewed/None (filing test_b1..b7)."
+    },
+    {
+      "id": "PI-TAMPER-MINIMAL",
+      "status": "passed",
+      "note": "hash/model/prompt/schema tampering each trigger minimal invalidation — the tampered role is never read and only its DAG closure is produced; malformed bundles are never trusted (test_b6)."
+    }
+  ],
+  "commands": [
+    {
+      "command": "python -B -m pytest tests/test_fc905b_trusted_receipt.py -q",
+      "exit_code": 0,
+      "result": "6 passed (RED: hardcoded status/counts remained)",
+      "cwd": "revenue-forecast"
+    },
+    {
+      "command": "python -B -m pytest tests/test_fc905b_envelope_fields.py -q",
+      "exit_code": 0,
+      "result": "7 passed (RED: new fields unvalidated, N-1 unnormalized)",
+      "cwd": "filing-fetch"
+    },
+    {
+      "command": "python -B -m pytest tests/ -q (full revenue suite)",
+      "exit_code": 0,
+      "result": "402 passed, 106 subtests — zero failures (E2E chain fixture now carries a review receipt to pass the policy gate)",
+      "cwd": "revenue-forecast"
+    },
+    {
+      "command": "python -B -m pytest tests/ -q (full filing suite)",
+      "exit_code": 0,
+      "result": "283 passed, 11 skipped (3 T3 without env), 54 subtests — zero failures",
+      "cwd": "filing-fetch"
+    },
+    {
+      "command": "python -B -m ruff check + py_compile (changed files, both repos)",
+      "exit_code": 0,
+      "result": "All checks passed / compile OK",
+      "cwd": "multi-repo"
+    },
+    {
+      "command": "pre-commit gates (R4.2 install-sync both repos)",
+      "exit_code": 0,
+      "result": "revenue sync_installations.py --apply MATCH 99 files; filing sync_installs_b3.py MATCH 27 files",
+      "cwd": "multi-repo"
+    }
+  ],
+  "side_effect_counts": {
+    "downloads": 0,
+    "external_root_writes": 0,
+    "catalog_mutations": 0,
+    "llm_calls": 0,
+    "parser_calls": 0,
+    "note": "consumers read the envelope only; no catalog/root writes. The E2E chain test ran the real three-repo chain (zero downloads, fixture reuse)."
+  },
+  "codegraph": {
+    "production_callers_before": 1,
+    "production_callers_after": 1,
+    "note": "prepare_source keeps its single production entry; the envelope evidence fields flow through the existing validate/forward path."
+  },
+  "mutation": {
+    "id": "FC-905b-M1-M4",
+    "killed": true,
+    "details": "M1: not_reviewed blocking removed (revenue) -> test_b1 FAILS. M2: absent counts fabricated as 0 (revenue) -> test_b5 FAILS. M3: prompt_injection_status validation removed (filing) -> filing test_b5 FAILS. M4: N-1 normalization removed (filing) -> filing test_b1 FAILS. All reverted; suites re-passed."
+  },
+  "rollback": {
+    "required": false,
+    "proved": true,
+    "note": "consumer-side consumption + validation; revert = revert commits. Blocking behavior is the intended policy (reviews recorded per FC-905-a)."
+  },
+  "review": {
+    "reviewer": "reviewer-fc905b-independent",
+    "reviewer_receipt_sha256": "0fef0c6b4b33307e85c86c7422c2214b5f8422018f4ec797a08a98773316aef2",
+    "decision": "accepted",
+    "reviewed_at": "2026-08-11T19:38:15Z",
+    "note": "independent reviewer replayed commands + 4 mutations from clean worktrees b5c4dfd/6b61771; verdict accepted; 2 non-blocking environment observations (stale installed skill copies pre-existing; revenue quality sync --check flag unimplemented) documented in REVIEWER_REPORT_b.md; unresolved_findings=[]"
+  },
+  "provisional_note": "FC-905-b (consumer side) sealed at revenue b5c4dfd / filing 6b61771 (wiki unchanged). FC-905 complete pending closure: registry advances FC-905 to accepted after this receipt + FC-905-a are both reviewed."
+}

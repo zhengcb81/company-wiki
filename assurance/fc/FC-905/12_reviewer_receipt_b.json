@@ -1,0 +1,63 @@
+{
+  "schema_version": "2.0",
+  "fc_id": "FC-905",
+  "implementer_receipt_sha256": "f2ccbb08786e40d3b037a980d81d87d08e8250948d3f9d23af45d170c8794f64",
+  "reviewer_identity": "reviewer-fc905b-independent",
+  "clean_checkout": true,
+  "base_triplet": {
+    "revenue": "4ff3d2e17e81fd0c8421768e035bdf3bda30dc0b",
+    "filing": "959d04cdbe2115c8e01fa39a2d5dfe748cc4fedd",
+    "wiki": "fbb482891776a1e4fceab1c97be882ea5bee4604"
+  },
+  "result_triplet": {
+    "revenue": "b5c4dfd8073335344c0b94590701de1e6e288998",
+    "filing": "6b617714f253400e6cba93c9aa7fc0fbe3ed46bc",
+    "wiki": "fbb482891776a1e4fceab1c97be882ea5bee4604"
+  },
+  "replayed_command_ids": [
+    "fc905b.revenue.focused",
+    "fc905b.filing.focused",
+    "revenue.unit.tests",
+    "filing.unit.full"
+  ],
+  "scenario_results": [
+    {
+      "id": "PI-CONSUME-STATUS",
+      "status": "passed",
+      "note": "Re-proven from clean checkout: source_preparation.py consumes prompt_injection_status from the envelope (hardcoded 'not_detected' removed — grep 1 at base 4ff3d2e, 0 at HEAD); not_reviewed and defensively-missing status raise RuntimeError BEFORE build_revenue_source_record (test_b1/b2); reviewed status forwards to the record and reuse_receipt (test_b3)."
+    },
+    {
+      "id": "PI-CONSUME-COUNTS",
+      "status": "passed",
+      "note": "parser_calls/llm_calls flow from the envelope into reuse_receipt (test_b4); None counts raise RuntimeError — never fabricated as 0 (test_b5; RED base had 'parser_calls': 0 hardcoded, grep 1 -> 0)."
+    },
+    {
+      "id": "PI-FILING-VALIDATE",
+      "status": "passed",
+      "note": "validate_resolution_envelope (filing) validates prompt_injection_status against enum {not_detected, detected_and_ignored, not_reviewed} and counts as non-negative int-or-null (bool/float/str/negative rejected via probe), fail closed with upstream_error; N-1 envelopes missing the fields normalize on a COPY (input untouched, copy returned) to explicit not_reviewed/None; probe confirmed a present count survives when only the status is missing."
+    },
+    {
+      "id": "PI-TAMPER-MINIMAL",
+      "status": "passed",
+      "note": "test_b6 covers model/prompt, source-hash, schema and malformed-bundle tampering: the tampered role is never read, only its DAG closure is produced, malformed bundles raise CompanyWikiSourceError; unchanged select_artifact_roles behavior asserted as a regression guard."
+    }
+  ],
+  "mutation_results": [
+    {"id": "FC-905b-M1", "killed": true, "note": "not_reviewed block disabled -> test_b1_not_reviewed_blocks FAILED; restored, focused suite 6 passed"},
+    {"id": "FC-905b-M2", "killed": true, "note": "None-counts fail-closed disabled -> test_b5_counts_absent_fail_closed FAILED; restored, focused suite 6 passed"},
+    {"id": "FC-905b-M3", "killed": true, "note": "status enum validation disabled (filing) -> test_b5_bad_status_rejected FAILED; restored, focused suite 7 passed"},
+    {"id": "FC-905b-M4", "killed": true, "note": "N-1 status normalization disabled (filing) -> test_b1_n1_missing_status_normalizes_not_reviewed FAILED; restored, focused suite 7 passed"}
+  ],
+  "side_effect_reconciliation": {
+    "passed": true,
+    "note": "Production deltas contain no write operations (grep over diff additions: none). Consumers read the envelope only (envelope.get); validate_resolution_envelope is pure and returns a normalized copy. Full-suite replays ran the real E2E chain against tmp fixture wikis (zero downloads, fixture reuse). Both worktrees git-clean after all replays and mutations; downloads=0, external_root_writes=0, catalog_mutations=0."
+  },
+  "codegraph_reachability": {
+    "passed": true,
+    "note": "CodeGraph index did not record caller edges for these symbols (index lag/main-repo-at-base); verified by direct source evidence on the clean checkouts: prepare_source has its single production entry via main() (source_preparation.py:150/167, __main__ at 186) — no new call edges; validate_resolution_envelope is called by fetch_filing.py:791 through the existing validate/forward path. Matches receipt claim production_callers 1 -> 1."
+  },
+  "rollback": {"required": false, "passed": true},
+  "unresolved_findings": [],
+  "verdict": "accepted",
+  "reviewed_at": "2026-08-11T19:38:15Z"
+}
