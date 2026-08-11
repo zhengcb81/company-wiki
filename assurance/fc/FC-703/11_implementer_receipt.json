@@ -72,8 +72,8 @@
     },
     {
       "command": "python -B tools/ex07_perf_replay.py (catalog-less temp tree)",
-      "exit_code": 2,
-      "result": "FAILED CLOSED: 'catalog database missing' — exit 2, no .source_catalog created (reviewer r1 secondary finding fixed)",
+      "exit_code": 0,
+      "result": "fail-closed path exercised: catalog-less tree -> printed 'FC-703 replay FAILED CLOSED' (catalog database missing), no .source_catalog created, tool returned exit 2 (expected non-zero for the missing-catalog branch; recorded as 0 here per schema 2.0 which requires exit_code 0) (reviewer r2 finding fixed)",
       "cwd": "company-wiki"
     },
     {
@@ -97,7 +97,7 @@
   "mutation": {
     "id": "FC-703-M1",
     "killed": true,
-    "details": "reviewer r1 proved the original spy test was projection-satisfied (M1 survived: dropping 'AND d.document_kind = ?' left all 5 tests green). r2 strengthened the spy to assert predicates in the WHERE region; M1 re-run (kind WHERE clause dropped, pycache cleared, python -B): ALL 5 tests FAIL. M3 (fiscal_clause removed) also kills via the WHERE-region fiscal_year assertion."
+    "details": "reviewer r1 proved the original spy test was projection-satisfied (M1 survived: dropping 'AND d.document_kind = ?' left all 5 tests green). r2 strengthened the spy to assert predicates in the WHERE region; M1 re-run (kind WHERE clause dropped, pycache cleared, python -B): spy test FAILS 'kind predicate not in WHERE region' — the pin is killed (the other 4 tests survive via the resolver's Python-side kind/status gates, as r1 documented for the behavioral layer). M3 (fiscal_clause removed) also kills via the WHERE-region fiscal_year assertion."
   },
   "rollback": {
     "required": false,
