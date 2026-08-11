@@ -33,6 +33,10 @@ def _plan_hash() -> str:
     return "a" * 64
 
 
+def _policy_hash() -> str:
+    return "b" * 64
+
+
 class _Candidate:
     def __init__(self, accession: str, fiscal_year: int, size: int = 1_000_000):
         self.provider = "sec"
@@ -49,6 +53,7 @@ def _auth(**overrides):
     base = dict(
         request_id="req-1",
         gap_plan_hash=_plan_hash(),
+        policy_hash=_policy_hash(),
         provider="sec",
         allowed_accessions=("acc-2025",),
         max_items=1,
@@ -223,6 +228,7 @@ def test_coordinator_authorized_download_proceeds(tmp_path):
     auth = build_download_authorization(
         request_id="req-1",
         gap_plan_hash=_plan_hash(),
+        policy_hash=_policy_hash(),
         provider="sec",
         allowed_accessions=("acc-2025",),
         max_items=1,
@@ -290,6 +296,7 @@ def test_coordinator_rejects_unauthorized_accession(tmp_path):
     auth = build_download_authorization(
         request_id="req-1",
         gap_plan_hash=_plan_hash(),
+        policy_hash=_policy_hash(),
         provider="sec",
         allowed_accessions=("acc-9999",),  # NOT the discovered one
         max_items=1,
@@ -307,3 +314,29 @@ def test_coordinator_rejects_unauthorized_accession(tmp_path):
         coordinator.resolve_or_stage(request, authorization=auth)
     assert "not authorized" in str(exc.value)
     assert not (tmp_path / "staging").exists()
+
+
+def test_receipt_hash_binds_policy_hash():
+    """FC-801 (CG-08): the receipt hash binds the policy_hash — a download
+    authorized under a different policy has a different receipt."""
+    a1 = _auth()
+    a2 = _auth(policy_hash="c" * 64)
+    assert a1.receipt_hash != a2.receipt_hash
+    assert a2.policy_hash == "c" * 64
+
+
+def test_build_requires_policy_hash():
+    """FC-801: policy_hash is mandatory — a receipt without it is invalid."""
+    import pytest
+
+    with pytest.raises(ValueError, match="policy_hash"):
+        build_download_authorization(
+            request_id="req-1",
+            gap_plan_hash=_plan_hash(),
+            policy_hash="",
+            provider="sec",
+            allowed_accessions=("acc",),
+            max_items=1,
+            max_bytes=1_000_000,
+            expires_at="2099-01-01T00:00:00Z",
+        )

@@ -1,11 +1,12 @@
-"""WU-4.3: authorization-bound minimal download.
+"""WU-4.3 + FC-801: authorization-bound minimal download.
 
 A ``DownloadAuthorization`` receipt binds the download decision to the
-exact GapPlan (via its hash), the exact provider + accessions, item/byte
-caps, and an expiry. The downloader validates every candidate against the
-receipt before fetching; anything not in the plan or not allowed by the
-receipt is rejected. The receipt hash is deterministic so the same
-authorization is reproducible for audit.
+exact GapPlan (via its hash), the RuntimePolicySnapshot (via its hash),
+the exact provider + accessions, item/byte caps, and an expiry. The
+downloader validates every candidate against the receipt before fetching;
+anything not in the plan, under a stale policy, or not allowed by the
+receipt is rejected (DL-03: fetch=0). The receipt hash is deterministic so
+the same authorization is reproducible for audit.
 """
 
 from __future__ import annotations
@@ -23,6 +24,9 @@ class DownloadAuthorization:
     schema_version: str
     request_id: str
     gap_plan_hash: str
+    # FC-801 (DL-03): the RuntimePolicySnapshot hash the download is bound
+    # to — a download authorized under a different policy is not reusable.
+    policy_hash: str
     provider: str
     allowed_accessions: tuple[str, ...]
     max_items: int
@@ -35,6 +39,7 @@ class DownloadAuthorization:
             "schema_version": self.schema_version,
             "request_id": self.request_id,
             "gap_plan_hash": self.gap_plan_hash,
+            "policy_hash": self.policy_hash,
             "provider": self.provider,
             "allowed_accessions": list(self.allowed_accessions),
             "max_items": self.max_items,
@@ -48,6 +53,7 @@ def build_download_authorization(
     *,
     request_id: str,
     gap_plan_hash: str,
+    policy_hash: str,
     provider: str,
     allowed_accessions: tuple[str, ...],
     max_items: int,
@@ -55,10 +61,12 @@ def build_download_authorization(
     expires_at: str,
 ) -> DownloadAuthorization:
     """Create a deterministic download authorization receipt."""
-    if not request_id or not gap_plan_hash or not provider:
-        raise ValueError("request_id/gap_plan_hash/provider required")
+    if not request_id or not gap_plan_hash or not policy_hash or not provider:
+        raise ValueError("request_id/gap_plan_hash/policy_hash/provider required")
     if len(gap_plan_hash) != 64:
         raise ValueError("gap_plan_hash must be a SHA-256 hex digest")
+    if len(policy_hash) != 64:
+        raise ValueError("policy_hash must be a SHA-256 hex digest")
     if max_items <= 0 or max_bytes <= 0:
         raise ValueError("max_items/max_bytes must be positive")
     if not allowed_accessions or not all(a for a in allowed_accessions):
@@ -67,6 +75,7 @@ def build_download_authorization(
     digest.update(AUTHORIZATION_SCHEMA_VERSION.encode())
     digest.update(request_id.encode())
     digest.update(gap_plan_hash.encode())
+    digest.update(policy_hash.encode())
     digest.update(provider.encode())
     for accession in sorted(allowed_accessions):
         digest.update(accession.encode())
@@ -77,6 +86,7 @@ def build_download_authorization(
         schema_version=AUTHORIZATION_SCHEMA_VERSION,
         request_id=request_id,
         gap_plan_hash=gap_plan_hash,
+        policy_hash=policy_hash,
         provider=provider,
         allowed_accessions=tuple(allowed_accessions),
         max_items=max_items,

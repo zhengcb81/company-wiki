@@ -459,6 +459,36 @@ def _parser() -> argparse.ArgumentParser:
         help="control state used to refuse downloads while the worker is paused",
     )
 
+    close_gap = subparsers.add_parser(
+        "close-gap",
+        help=(
+            "FC-801: execute one authorized close-gap transaction — binding "
+            "from a JSON file, request from the shared identity/period args"
+        ),
+    )
+    close_gap_identity = close_gap.add_mutually_exclusive_group(required=True)
+    close_gap_identity.add_argument("--entity")
+    close_gap_identity.add_argument("--company-query")
+    close_gap.add_argument("--binding-file", type=Path, required=True)
+    close_gap.add_argument("--document-kind", required=True)
+    close_gap.add_argument("--as-of-date", required=True)
+    close_gap.add_argument("--market")
+    close_gap.add_argument("--exchange")
+    close_gap.add_argument("--security-id")
+    close_gap.add_argument("--identity-cache-dir", type=Path)
+    close_gap.add_argument("--form-type")
+    close_gap.add_argument("--fiscal-year", type=int)
+    close_gap.add_argument("--fiscal-period")
+    close_gap.add_argument("--language")
+    close_gap.add_argument("--provider")
+    close_gap.add_argument("--provider-document-id")
+    close_gap.add_argument("--mode", choices=("exact", "latest_as_of"))
+    close_gap.add_argument(
+        "--acquisition-config",
+        type=Path,
+        default=Path("config/source_acquisition.yaml"),
+    )
+
     import_portfolio = subparsers.add_parser(
         "import-portfolio",
         help=(
@@ -1033,6 +1063,51 @@ def main(argv: Sequence[str] | None = None) -> int:
                 {"identity": identity.to_dict(), "source_ensure": ensure_dict}
                 if identity
                 else ensure_dict
+            )
+        elif args.command == "close-gap":
+            from .acquisition_journal import AcquisitionJournal
+            from .close_gap import CloseGapBinding, CloseGapTransaction
+
+            request, identity = source_request()
+            binding_payload = json.loads(
+                args.binding_file.read_text(encoding="utf-8"))
+            binding = CloseGapBinding(
+                request_id=str(binding_payload["request_id"]),
+                gap_plan_hash=str(binding_payload["gap_plan_hash"]),
+                policy_hash=str(binding_payload["policy_hash"]),
+                provider=str(binding_payload["provider"]),
+                allowed_accessions=tuple(binding_payload["allowed_accessions"]),
+                max_items=int(binding_payload["max_items"]),
+                max_bytes=int(binding_payload["max_bytes"]),
+                expires_at=str(binding_payload["expires_at"]),
+            )
+            acquisition_config_path = args.acquisition_config
+            if not acquisition_config_path.is_absolute():
+                acquisition_config_path = project_root / acquisition_config_path
+            acquisition_config = load_acquisition_config(
+                acquisition_config_path.resolve(strict=True),
+                project_root=project_root,
+            )
+            closed = _retry_on_catalog_lock(
+                lambda: CloseGapTransaction(
+                    catalog=get_catalog(),
+                    coordinator=AcquisitionCoordinator(
+                        catalog=get_catalog(),
+                        adapters=acquisition_config.build_registry(),
+                        staging_root=acquisition_config.staging_root,
+                    ),
+                    writer=CanonicalSourceWriter(
+                        get_catalog(),
+                        staging_root=acquisition_config.staging_root,
+                    ),
+                    journal=AcquisitionJournal(config.catalog_dir),
+                ).execute(binding, request),
+                action="close-gap",
+            )
+            result = (
+                {"identity": identity.to_dict(), "close_gap": closed.to_dict()}
+                if identity
+                else closed.to_dict()
             )
         elif args.command == "activation":
             from .activation import (
