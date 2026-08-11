@@ -1,0 +1,115 @@
+{
+  "schema_version": "2.0",
+  "fc_id": "FC-702",
+  "status": "independent_review",
+  "mode": "honest-implementer",
+  "base_triplet": {
+    "revenue": "1041c899ecbda22a011cc041404b6fa4ad6f6ae4",
+    "filing": "6274be2187b450d14492defd03579d6209d1b1cc",
+    "wiki": "04d9a3337988d8bba6e3c737c50f84451ec6ef96"
+  },
+  "result_triplet": {
+    "revenue": "607a132193b284ee8bb1fcc99a3593ea7f22a0a3",
+    "filing": "6274be2187b450d14492defd03579d6209d1b1cc",
+    "wiki": "c9d3c534f5188a194c719022d7438ba2b4605f37"
+  },
+  "plan_sha256": "158fc1e1e4231e3c2dc71822a58931fdca64eff79fc0d4e27b8276a397f4c78a",
+  "policy_sha256": "not-applicable",
+  "allowed_files": [
+    "company-wiki/src/company_wiki/source_catalog/resolver.py",
+    "company-wiki/tests/contract/test_strict_identity_fc702.py",
+    "revenue-forecast/tests/test_dropbox_full_chain_fc505.py"
+  ],
+  "changed_files": [
+    "company-wiki/src/company_wiki/source_catalog/resolver.py",
+    "company-wiki/tests/contract/test_strict_identity_fc702.py",
+    "revenue-forecast/tests/test_dropbox_full_chain_fc505.py"
+  ],
+  "dependency_receipts": [
+    "company-wiki/assurance/fc/FC-701/12_reviewer_receipt.json (accepted 2026-08-11)"
+  ],
+  "command_registry_sha256": "215b8077169126b2c4a5eca9d8d6237f291757c2559f6ae6e0ae8ff1c806b089",
+  "scenario_results": [
+    {
+      "id": "SAFE-01",
+      "status": "passed",
+      "note": "same company name with a different security_id is a hard identity conflict (never merged); a market mismatch is a hard conflict — the request picks exactly its own document"
+    },
+    {
+      "id": "SAFE-02",
+      "status": "passed",
+      "note": "CW-2.27H soft-match removed: a company-name security_id (中国平安 style) no longer matches a numeric ticker request (fail closed with trace); it still matches its OWN identity request"
+    },
+    {
+      "id": "SAFE-04",
+      "status": "passed",
+      "note": "non-HTTPS source URL never capture-ready — the handle is refused (trace capture_incomplete), never REUSED"
+    },
+    {
+      "id": "SAFE-07",
+      "status": "passed",
+      "note": "a retired document never satisfies a request — the active copy is selected, the retired one excluded at query level"
+    },
+    {
+      "id": "FC-702-ticker-normalize",
+      "status": "passed",
+      "note": "leading-zero ticker normalization preserved by the strict rule (03896 == 3896, ADR-008 Strategy B)"
+    }
+  ],
+  "commands": [
+    {
+      "command": "python -m pytest tests/contract/test_strict_identity_fc702.py -q",
+      "exit_code": 0,
+      "result": "7 passed",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "python -m pytest tests/ -q",
+      "exit_code": 0,
+      "result": "2160 passed / 2 pre-existing PORT-01 failures (test_check_unique_test_symbols, FC-1205); zero new failures",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "python -m pytest tests/test_dropbox_full_chain_fc505.py -q",
+      "exit_code": 0,
+      "result": "4 passed (as_of rolled to 2026-08-11 — capture window)",
+      "cwd": "revenue-forecast"
+    },
+    {
+      "command": "ruff check src/company_wiki/source_catalog/resolver.py tests/contract/test_strict_identity_fc702.py",
+      "exit_code": 0,
+      "result": "All checks passed",
+      "cwd": "company-wiki"
+    }
+  ],
+  "side_effect_counts": {
+    "downloads": 0,
+    "external_root_writes": 0,
+    "catalog_mutations": 0,
+    "llm_calls": 0,
+    "parser_calls": 0
+  },
+  "codegraph": {
+    "production_callers_before": 0,
+    "production_callers_after": 0,
+    "note": "resolver._identity_matches soft-match branch removed; leading-zero normalization + issuer anchoring preserved"
+  },
+  "mutation": {
+    "id": "FC-702-M",
+    "killed": true,
+    "details": "1 mutation killed: M1 soft-match restored -> test_safe02_company_name_security_id_no_soft_match FAILS"
+  },
+  "rollback": {
+    "required": false,
+    "proved": true,
+    "note": "1-branch resolver change; revert = revert commit."
+  },
+  "review": {
+    "reviewer": "",
+    "reviewer_receipt_sha256": "",
+    "decision": "pending",
+    "reviewed_at": "",
+    "note": "honest-implementer: awaits independent reviewer per independent_review_protocol.md"
+  },
+  "provisional_note": "result_triplet sealed at wiki c9d3c53."
+}
