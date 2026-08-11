@@ -1417,11 +1417,20 @@ def normalize_catalog(
         AND existing.artifact_role='normalized' AND existing.generator_name=?
         AND existing.generator_version=?"""
     params: tuple[Any, ...] = (_NORMALIZER_NAME, NORMALIZER_VERSION)
+    # FC-906-c: a document without an active original_primary location cannot
+    # be parsed — it used to sit at the queue head forever and fail with no
+    # artifact row and no last_failed diagnostic (production: 9506/23521 docs).
+    # Exclude them from the queue (in force and non-force runs alike) so real
+    # documents behind them are never starved.
+    sql += """ WHERE EXISTS (
+            SELECT 1 FROM locations lp JOIN roots rp ON rp.root_id=lp.root_id
+            WHERE lp.document_id=d.document_id AND lp.role='original_primary'
+              AND lp.location_status='active')"""
     if not force:
-        sql += """ WHERE existing.artifact_id IS NULL OR (
+        sql += """ AND (existing.artifact_id IS NULL OR (
             existing.status='failed'
             AND COALESCE(json_extract(existing.metadata_json,'$.terminal'),0)=0
-            AND COALESCE(json_extract(existing.metadata_json,'$.next_retry_epoch'),0)<=?
+            AND COALESCE(json_extract(existing.metadata_json,'$.next_retry_epoch'),0)<=?)
         )"""
         params += (now_epoch,)
     sql += f" ORDER BY {processing_priority_sql('d')}, d.document_id"
@@ -1453,7 +1462,16 @@ def normalize_catalog(
             None,
         )
         if primary is None:
+            # FC-906-c defense in depth: a document slipping past the queue
+            # filter must be VISIBLE in the report (reason + id + path), not a
+            # silent failure count.
             failed += 1
+            last_failure_code = "no_active_primary_location"
+            last_failed_document_id = document["document_id"]
+            last_failed_path = ""
+            failure_reasons[last_failure_code] = (
+                failure_reasons.get(last_failure_code, 0) + 1
+            )
             continue
         source_path = Path(primary["absolute_path"])
         if progress is not None:
