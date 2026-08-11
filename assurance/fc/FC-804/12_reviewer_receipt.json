@@ -1,0 +1,117 @@
+{
+  "schema_version": "2.0",
+  "fc_id": "FC-804",
+  "status": "accepted",
+  "reviewer": "reviewer-fc804-independent",
+  "reviewer_identity": "reviewer-fc804-independent",
+  "implementer_receipt_sha256": "a037592c269c06776da4d5d1d78f6e6837958e96411c15c6ec26acb29d8fa350",
+  "implementer_receipt_sha256_note": "raw on-disk bytes of 11_implementer_receipt.json (CRLF working-tree variant per campaign convention)",
+  "clean_checkout": true,
+  "clean_checkout_note": "review worktree clean at 7d9f40c throughout (git diff HEAD empty after both mutations); company-wiki main checkout at 7d9f40c carries only pre-existing artifacts (llm_cost_log.csv modified, untracked FC-802/REVIEWER_REPORT_R2.md) that predate this review; revenue-forecast + filing-fetch read-only",
+  "base_triplet": {
+    "revenue": "f7eef71b1be722a0670eae4288382ea9dead345e",
+    "filing": "065976ed7c81c9112e4647592084c1b2c891aa3c",
+    "wiki": "f99e0fa874ab6967eec4d04c8f61f603e8174f32"
+  },
+  "result_triplet": {
+    "revenue": "f7eef71b1be722a0670eae4288382ea9dead345e",
+    "filing": "065976ed7c81c9112e4647592084c1b2c891aa3c",
+    "wiki": "d96e6720cbfa6f8b3aecc7f54df4732c09f117df"
+  },
+  "replayed_command_ids": [
+    "fc804.triplet-chain",
+    "fc804.sealing-hashes",
+    "fc804.diff-scope",
+    "fc804.concurrency-fresh",
+    "fc804.regression-fc801",
+    "fc804.ruff",
+    "fc804.mutation.M1",
+    "fc804.mutation.M2",
+    "fc804.post-revert",
+    "fc804.lock-timeout-probe",
+    "fc804.reuse-reason-probe",
+    "fc804.validator"
+  ],
+  "scenario_results": [
+    {
+      "id": "DL-08",
+      "status": "passed",
+      "note": "fresh CG-C1: two threads, same binding, spy fetch_sleep=0.5 -> spy fetch_calls==1, one completed/downloaded_new (fetch_events=1) + one completed/reused (fetch_events=0), documents==1; journal proves the loser's reason is 'gap_closed_by_concurrent' — the in-lock re-check path, not the step-2 pre-lock shortcut"
+    },
+    {
+      "id": "OPS-02",
+      "status": "passed",
+      "note": "fresh CG-C2: 2 retryable AdapterProcessError failures then success -> 3 attempts, completed, fetch_events==1 (backoff 1s/2s verified by code read); fresh CG-C2b: non-retryable -> failed after exactly 1 attempt"
+    },
+    {
+      "id": "DL-09",
+      "status": "passed",
+      "note": "fresh CG-C3: second execute after a successful close completes with fetch_events==0; docs==1, locations==2 (normal PDF+sidecar indexing), no duplicates added"
+    },
+    {
+      "id": "LOCK-TIMEOUT",
+      "status": "passed",
+      "note": "independently proven, not just by the shipped test: CG-C4 as shipped is sequential and never contends for the lock; a reviewer contention probe held the per-txn lock in one thread and contended from another with timeout_seconds=0.3 -> CatalogOperationLockedError after ~0.6s (bounded, no hang); execute maps it to status failed / reason close_gap_lock_timeout with journal error_type CatalogOperationLockedError (code read)"
+    },
+    {
+      "id": "MUTATIONS",
+      "status": "passed",
+      "note": "M1 (lock disabled) -> CG-C1 FAILED 'single-flight violated: 2 fetches'; M2 (retryable=False) -> CG-C2 FAILED (status failed != completed); both reverted via git checkout; post-revert 12 tests green"
+    }
+  ],
+  "mutation_results": [
+    {
+      "id": "M1",
+      "killed": true,
+      "target": "close_gap.py step 3: single-flight lock bypassed (with-block gated behind if False, fall-through to _fetch_and_commit)",
+      "evidence": "python -B -m pytest tests/contract/test_close_gap_concurrency_fc804.py::test_cg_c1_single_flight_one_fetch -> 1 failed: AssertionError 'single-flight violated: 2 fetches' (assert 2 == 1 at line 214). Reverted via git checkout; git diff HEAD empty."
+    },
+    {
+      "id": "M2",
+      "killed": true,
+      "target": "close_gap.py retry loop: retryable forced False (retry classification disabled)",
+      "evidence": "python -B -m pytest tests/contract/test_close_gap_concurrency_fc804.py::test_cg_c2_retryable_failures_retried -> 1 failed: AssertionError 'spy provider is busy (retryable)' / assert 'failed' == 'completed' (line 238). Reverted via git checkout; post-revert full 12-test rerun green (7.38s)."
+    }
+  ],
+  "validator_gate": {
+    "passed": true,
+    "note": "python tools/receipt_validator.py --receipt C:/Users/郑曾波/Projects/company-wiki/assurance/fc/FC-804/11_implementer_receipt.json -> OK: 1 receipt(s) valid (exit 0)"
+  },
+  "sealing_hashes": {
+    "plan_sha256": "158fc1e1e4231e3c2dc71822a58931fdca64eff79fc0d4e27b8276a397f4c78a",
+    "plan_source": "recomputed via git show 2d64186:audit_review/2026-08-09_full_completion_assurance_plan/task_plan.md | sha256sum in revenue-forecast: MATCH (2d64186 = freeze FCAP r2 plan; the on-disk plan at current HEAD f7eef71 has been advanced by later doc commits, same source as FC-803's reviewer).",
+    "command_registry_sha256": "215b8077169126b2c4a5eca9d8d6237f291757c2559f6ae6e0ae8ff1c806b089",
+    "registry_source": "recomputed on disk at revenue-forecast HEAD f7eef71 (compatibility/command_registry.json): MATCH."
+  },
+  "triplet_verification": {
+    "passed": true,
+    "note": "Revenue f7eef71 == revenue-forecast HEAD == base == result (unchanged). Filing 065976e == filing-fetch HEAD (unchanged from base). Wiki result d96e672 == the sealed feat(fc-804) commit; base f99e0fa is an ancestor (WIKI-ANCESTRY-OK via git merge-base --is-ancestor); wiki HEAD 7d9f40c = d96e672 + receipt-only commit (62 insertions, 1 file: assurance/fc/FC-804/11_implementer_receipt.json). Diff scope git diff --stat f99e0fa d96e672 = exactly 3 files: IMPLEMENTATION_PLAN_FC804.md (+39), close_gap.py (+130/-13), tests/contract/test_close_gap_concurrency_fc804.py (+314). Zero unrelated changes."
+  },
+  "side_effect_reconciliation": {
+    "passed": true,
+    "note": "No downloads: all runs used the in-process spy; reviewer probes wrote only under C:/tmp scratch dirs (removed afterwards). Zero writes outside this receipt + REVIEWER_REPORT.md. M1/M2 reverted byte-identically (git diff HEAD empty after each). Revenue-forecast and filing-fetch checkouts never modified; company-wiki main checkout untouched (only pre-existing llm_cost_log.csv modification + untracked FC-802 report, both predating this review)."
+  },
+  "codegraph_reachability": {
+    "passed": true,
+    "note": "The local CodeGraph index covers only revenue-forecast (123 files); FC-804's changes live in company-wiki, outside the index. Reachability verified by direct code read: _acquisition_mutex/CatalogOperationLockedError from .lock (existing module), AdapterProcessError from .adapter_process (existing); CloseGapTransaction.execute is invoked by the cli.py close-gap command (FC-801); no new public callers added."
+  },
+  "rollback": {
+    "required": false,
+    "passed": true,
+    "note": "No outstanding findings; both mandated mutations killed and reverted. Revert = revert commit d96e672 (wiki)."
+  },
+  "observations": [
+    "Journal evidence: the CG-C1 loser records outcome reused_before_download with reason 'gap_closed_by_concurrent' — direct proof the in-lock re-check (not the pre-lock step-2 shortcut) is the mechanism completing the loser with fetch=0.",
+    "Lock-wait boundedness proven under real contention: reviewer probe held the lock in thread A (1.5s) while thread B contended with timeout_seconds=0.3 -> CatalogOperationLockedError('timed out serializing catalog lock acquisition') after ~0.6s; no hang. execute() converts it to a failed result (reason close_gap_lock_timeout: ...) that callers may retry (DL-09-safe).",
+    "CG-C4 as shipped does NOT exercise lock contention: both executes are sequential (the first finishes before the second starts), so it only re-tests the rerun-dedupe path; the bounded-timeout behavior it names was verified by the reviewer probe instead. Recommend a contention-based CG-C4 follow-up.",
+    "CG-C1 uses two THREADS rather than the plan's two subprocesses; msvcrt.locking byte-range locks do serialize same-process threads (fetch==1 proves it) and the same primitive is used cross-process, so the single-flight property holds at the file-lock level regardless of caller topology.",
+    "Docstring/code mismatch in _is_retryable_staging_error: its docstring and IMPLEMENTATION_PLAN_FC804.md design say provider_unavailable is retryable, but the code returns False for RuntimeError('provider unavailable...'). No code path raises that RuntimeError today (provider_unavailable is a GapPlan status field — gap_plan.py/acquisition.py — not an exception), so the branch is dead code with a stale docstring: no live-path impact, and the receipt's OPS-02 claim (AdapterProcessError.retryable only) is accurate as implemented.",
+    "DL-02 authorization rejection still short-circuits before retry classification: the 'download not authorized' check runs on every attempt before _is_retryable_staging_error, preserving FC-801 semantics (code read + 7-test FC-801 regression green).",
+    "Retry loop hygiene: on final failure (exhausted or non-retryable) the staging dir is cleaned via _cleanup_staging(staged_request.request_id) — the STAGING request's per-candidate id, matching FC-803 REAL-FIX-3; failures are journaled (outcome failed, error_type set); rejections (stale_gap_hash, DL-02, stage_status) are not journaled, consistent with pre-FC-804 behavior."
+  ],
+  "findings": [],
+  "unresolved_findings": [],
+  "verdict": "accepted",
+  "reviewer_receipt_sha256": "00581f6b925bded4ebdee9a6791279c78a8eb845496bec36f4ada96210b4eff4",
+  "reviewed_at": "2026-08-11"
+}
