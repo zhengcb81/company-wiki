@@ -73,7 +73,7 @@ class Metric:
     """One observable event.  Free-form fields are redacted on export."""
 
     dimension: str          # root_id | route | adapter_id | role | reason
-    key: str                # e.g. 'company_raw' | 'sidecar_filing_v1'
+    key: str                # e.g. a root_id | an adapter_id
     count: int = 1
 
 

@@ -676,8 +676,9 @@ class SourceResolver:
         entity_gate_rejected = 0
         # Only locations under a *reusable* root kind are canonical reuse
         # candidates. Config-driven (CatalogConfig.reusable_root_kinds,
-        # default company_raw): adding a kind makes every already-indexed
-        # document under such roots directly reusable without a download.
+        # default: the canonical write-root kind): adding a kind makes every
+        # already-indexed document under such roots directly reusable
+        # without a download.
         # filing-fetch enforces its own independent path allowance
         # (config-driven too), so the two gates stay in sync via
         # configuration, not code.

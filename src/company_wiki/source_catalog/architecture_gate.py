@@ -154,6 +154,12 @@ _ROOT_HARDCODE_TOKENS = (
     "dayu_portfolio",
     "Dropbox",
 )
+# FC-1201: this allowlist is a FROZEN RATCHET — the bounded set of files
+# permitted to reference root tokens.  Adding a file requires updating the
+# FC_1201_FROZEN_ALLOWLIST baseline in test_fc1201_root_hardcode_gate.py
+# (= deliberate review).  Shrinking is encouraged.  Files whose only token
+# mention was a comment/docstring (resolver.py, observability.py,
+# entity_resolver.py) were cleaned and left the allowlist in FC-1201.
 _ROOT_HARDCODE_ALLOWED_FILES = frozenset({
     # new-policy modules: allowed to know the tokens
     "registry.py", "policy_2x.py", "config.py", "adapter_dispatch.py",
@@ -161,11 +167,17 @@ _ROOT_HARDCODE_ALLOWED_FILES = frozenset({
     "company_raw.py", "dayu.py", "sidecar.py",
     # the gate itself carries the token list
     "architecture_gate.py",
-    # legacy owners whose special-casing is the documented FC-1201 backlog
+    # v1 / loader-blocked backlog (R9 cutover or FC-1201 follow-up):
+    #   scanner.py = v1 production fallback (7 root branches; R9 deletion)
+    #   models.py = ROOT_KINDS enum owner (legitimate single source)
+    #   canonical_writer.py = write-root selection (FC-1201 follow-up: needs
+    #       production 1.x loader to accept canonical_write_target)
+    #   portfolio_promoter.py / backfill_v2.py = v1 legacy tools (R9)
+    #   admission.py / focus_cleanup.py = Dropbox canary (FC-501)
+    #   cli.py = portfolio root identity lookup (literal is inherent)
     "scanner.py", "models.py", "canonical_writer.py",
     "portfolio_promoter.py", "admission.py", "focus_cleanup.py",
-    "backfill_v2.py", "entity_resolver.py", "observability.py",
-    "resolver.py", "cli.py",
+    "backfill_v2.py", "cli.py",
 })
 
 

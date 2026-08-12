@@ -1,4 +1,4 @@
-"""WU-703: entity resolution independent of company_raw directories.
+"""WU-703: entity resolution independent of the canonical write-root directories.
 
 Identity comes from security_id + market via a controlled entity registry;
 display_name is only a hint.  A company that never appears under
