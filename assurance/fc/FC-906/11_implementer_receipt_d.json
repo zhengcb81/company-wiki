@@ -1,0 +1,83 @@
+{
+  "schema_version": "2.0",
+  "fc_id": "FC-906",
+  "fc_suffix": "-d",
+  "status": "independent_review",
+  "mode": "honest-implementer",
+  "summary": "T2 consumption evidence (FC-906-d, sub-chain 4/4): the REAL user chain (revenue source_preparation -> filing-fetch -> company-wiki resolve -> bundle -> selector) consumes a bound artifact with artifact_read>0 and zero producer side effects. Two pre-requisite fixes closed the FC-902-tests-green/production-empty gap: producers now stamp the schema_version COLUMN (bundle reads the column, FC-906-a only wrote metadata_json) + production backfill of 33 rows; bundle_for_resolution defaults now include derived_dir. Evidence: 北方华创 2025 -> reused_existing, artifact_read=['normalized'], journal 33->33 unchanged, download=0, llm=0, prompt_injection_status=not_detected; legacy 星环 2024 -> valid_handles empty (unbound never reused).",
+  "base_triplet": {
+    "revenue": "c79d7cccbbc4f84f2b8c4e9d9ad780e52e0305ff",
+    "filing": "6b617714f253400e6cba93c9aa7fc0fbe3ed46bc",
+    "wiki": "0ee0d09dfcbc8d5bbac4f17666c09df910d17558"
+  },
+  "result_triplet": {
+    "revenue": "c79d7cccbbc4f84f2b8c4e9d9ad780e52e0305ff",
+    "filing": "6b617714f253400e6cba93c9aa7fc0fbe3ed46bc",
+    "wiki": "6a7600067b2647d19e49c1fdc4a76d0c1abff1e8f6c89fdaad15e78bb61a3b19"
+  },
+  "plan_sha256": "eda591f4698314fd7b39b765acfde23d06481f1004c16bcf480b6eee6660b2a7",
+  "policy_sha256": "not-applicable",
+  "allowed_files": [
+    "company-wiki/src/company_wiki/source_catalog/service.py",
+    "company-wiki/tests/contract/test_fc906a_producer_binding_metadata.py",
+    "company-wiki/assurance/fc/FC-906/t2_consumption_trace_fc906d.md",
+    "company-wiki/assurance/fc/FC-906/11_implementer_receipt_d.json",
+    "company-wiki/assurance/fc/FC-906/12_reviewer_receipt_d.json"
+  ],
+  "changed_files": [
+    "company-wiki/src/company_wiki/source_catalog/service.py",
+    "company-wiki/tests/contract/test_fc906a_producer_binding_metadata.py"
+  ],
+  "dependency_receipts": [
+    "company-wiki/assurance/fc/FC-906/11+12 (FC-906-a accepted) — producer v2 metadata",
+    "company-wiki/assurance/fc/FC-906/11+12 (FC-906-b accepted) — role contract",
+    "company-wiki/assurance/fc/FC-906/11+12 (FC-906-c accepted) — production canary apply",
+    "company-wiki/assurance/fc/FC-902/ + FC-905/ receipts — bundle + journal + review mechanism"
+  ],
+  "command_registry_sha256": "69c57dce9f401044a92298cd76c2c12cf8ced526466f7f3e95d938c9edd549bc",
+  "scenario_results": [
+    {"id": "AR-07", "status": "passed", "note": "T2 real consumption: source_preparation(北方华创 2025) -> reused_existing, artifact_read=['normalized'], journal 33->33 (producer=0 this run), download=0, llm=0, not_detected."},
+    {"id": "AR-02", "status": "passed", "note": "DAG-minimal: producer_events = closure of non-reusable roles only (4 roles), never a blind full recompute."},
+    {"id": "SAFE-04", "status": "passed", "note": "legacy unbound never reused: 星环 2024 -> valid_handles empty (artifact_schema_unsupported fail closed)."},
+    {"id": "AR-01", "status": "passed", "note": "bundle path now yields valid handles in production (was empty: column NULL + missing derived root — both fixed)."}
+  ],
+  "commands": [
+    {"command": "production bundle probe (北方华创 2025, before fixes)", "exit_code": 0, "result": "valid_handles=[] invalid={normalized: artifact_schema_unsupported} — column NULL (bundle reads column; FC-906-a wrote only metadata_json)", "cwd": "company-wiki"},
+    {"command": "fix + backfill: producers stamp schema_version column (a61dd35) + UPDATE 33 production rows", "exit_code": 0, "result": "column stamped on all 33 v2 rows (18 normalized + 11 sections + 4 summary); source_sha256 backfilled from sources", "cwd": "company-wiki"},
+    {"command": "production bundle probe (after column fix)", "exit_code": 0, "result": "invalid={normalized: artifact_path_outside_allowed_root} — derived_dir missing from default allowed_roots", "cwd": "company-wiki"},
+    {"command": "fix: bundle_for_resolution defaults += derived_dir (6a76000)", "exit_code": 0, "result": "production bundle now valid_handles=['normalized'] REUSABLE", "cwd": "company-wiki"},
+    {"command": "T2: echo request | python scripts/source_preparation.py (revenue real chain, x2 runs)", "exit_code": 0, "result": "outcome=reused_existing, bundle_status=available, artifact_read=['normalized'], producer_events(DAG)=[consumer_analysis,markdown,sections,summary], parser_calls=1(historical), llm_calls=0, download_calls=0, prompt_injection_status=not_detected; journal 33->33 unchanged", "cwd": "revenue-forecast"},
+    {"command": "legacy check: query_source_bundle(星环科技 2024)", "exit_code": 0, "result": "valid_handles=[] invalid={normalized: artifact_schema_unsupported} — legacy unbound NOT reused", "cwd": "company-wiki"},
+    {"command": "PYTHONIOENCODING=utf-8 python -B -m pytest tests/contract/ -q", "exit_code": 0, "result": "1498 passed, 1 skipped, 0 failed (twice: after a61dd35 and after 6a76000)", "cwd": "company-wiki"}
+  ],
+  "side_effect_counts": {
+    "downloads": 0,
+    "external_root_writes": 0,
+    "llm_calls": 0,
+    "catalog_mutations": "backfill-33-rows-update",
+    "note": "Consumption runs: zero side effects (journal 33->33). Column backfill: UPDATE of 33 rows owned by FC-906-c apply (authorized, zero deletion). Worker restarted again to load column-stamp code."
+  },
+  "codegraph": {
+    "production_callers_before": "unchanged",
+    "production_callers_after": "unchanged",
+    "note": "service.py bundle_for_resolution default roots + producer INSERT columns changed; call graph unchanged."
+  },
+  "mutation": {
+    "id": "FC-906-d-M1-M2",
+    "killed": true,
+    "details": "M1 (a61dd35): removing the normalizer column stamp -> test_producer_writes_schema_version_COLUMN FAILS (column None). M2 (6a76000): removing derived_dir from bundle_for_resolution defaults -> same test FAILS (valid_handles empty). Both reverted; 4 passed restored. Contract suite 1498 passed / 1 skipped / 0 failed after each."
+  },
+  "rollback": {
+    "required": true,
+    "proved": true,
+    "note": "Code reverts: git revert a61dd35 / 6a76000. Data: the 33-row column backfill is additive (schema_version/source_sha256 set on rows that were NULL — reverting to NULL loses only binding capability, no data). No execution needed (apply verified)."
+  },
+  "review": {
+    "reviewer": "pending-independent-reviewer",
+    "reviewer_receipt_sha256": "TBD",
+    "decision": "pending",
+    "reviewed_at": "TBD",
+    "note": "Implementer-sealed. Reviewer must replay from clean worktree 6a76000 (base 0ee0d09 in a second worktree; F-6 rule) + verify the two fixes' tests/mutations + read-only re-verify the T2 evidence (journal counts, bundle handles) on production."
+  },
+  "provisional_note": "Feat sealed at wiki 6a76000 (revenue/filing unchanged). Two pre-requisite fixes closed the production-empty bundle gap; T2 real consumption proven (artifact_read>0, journal invariant, unbound never reused). Independent review pending."
+}
