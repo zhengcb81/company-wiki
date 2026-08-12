@@ -1,0 +1,174 @@
+{
+  "schema_version": "2.0",
+  "fc_id": "FC-1203",
+  "reviewer": "reviewer-fc1203-independent",
+  "implementer": "honest-implementer",
+  "decision": "accepted",
+  "status": "accepted",
+  "base_triplet": {
+    "revenue": "5ef1079fcd7be4770c1870014242545875132dcc",
+    "filing": "b7ef9cca0747b108184f00e3e519aeb046be9d2b",
+    "wiki": "a6937f34081cdc928704d511e0b011f71b061a90"
+  },
+  "result_triplet": {
+    "revenue": "fb77fe1b982d378d7c7af2e98d79f842ee8be930",
+    "filing": "b7ef9cca0747b108184f00e3e519aeb046be9d2b",
+    "wiki": "460d2730719acb6e4fdf59886c568c847d10d028"
+  },
+  "reviewed_at": "2026-08-12T22:14:31Z",
+  "replay_note": "All replay performed in clean git worktrees under C:/Users/郑曾波/Projects/.fcap-review/fc-1203/ (result-wiki @ 460d273 full hash, base-wiki @ a6937f3 full hash; F-6 rule honored: zero git checkout <rev> -- <paths> in any checkout; all mutation revert by rm / reverse edits / git show redirects). Main checkouts' working files untouched throughout. All triplet hashes obtained via git rev-parse (never hand-written).",
+  "commands": [
+    {
+      "command": "git worktree add .fcap-review/fc-1203/result-wiki 460d273; git worktree add .fcap-review/fc-1203/base-wiki a6937f3",
+      "exit_code": 0,
+      "result": "Two clean detached worktrees created; rev-parsed full hashes verified for base/result of all three repos (filing unchanged b7ef9cc base=result).",
+      "cwd": "company-wiki (main checkout)"
+    },
+    {
+      "command": "git show f58b52e / c91b066 / 90102c2 / 460d273 (per-commit --stat + full diff)",
+      "exit_code": 0,
+      "result": "4 commits on fcap (task listed 3; c91b066 comment-only commit not separately listed but its architecture_gate.py comment note IS in the expected changes). f58b52e: 16 files +267/-850 — deletions of validate_normalized_filing (normalized_meta), entity_resolver.py, reuse_latest_policy.py, flags.atomic_rollback, scripts/wu905_catalog_switch_check.py, 4 deleted test files, policy_and_flags -2 tests, fc1201 gate loop drops entity_resolver, +2 new test files, source_bundle registry entry, summarizer v2 stamps, 03_change_contract. 90102c2: FC-906-b amendment + contract Addendum. 460d273: receipt only. Insert arity manually verified: 16 cols = 15 placeholders + strftime(created_at), tuple 15 values. EXACT match, no extra code change.",
+      "cwd": "company-wiki (main checkout)"
+    },
+    {
+      "command": "git diff --name-status a6937f3 90102c2 (wiki changed-file cross-check vs receipt)",
+      "exit_code": 0,
+      "result": "19 files — EXACT match to receipt changed_files wiki entries (19/19). 90102c2..460d273 = receipt json only.",
+      "cwd": "company-wiki (main checkout)"
+    },
+    {
+      "command": "git show fb77fe1 --stat (revenue docs commit)",
+      "exit_code": 0,
+      "result": "2 files changed (+8/-1): progress.md + work_unit_registry.md only. Receipt changed_files over-lists 3 revenue files (findings.md, task_plan.md, 00_wu_card.md — last touched in base 5ef1079). Info finding F1: over-listing, not under-listing; all within allowed_files.",
+      "cwd": "revenue-forecast (main checkout)"
+    },
+    {
+      "command": "Focused: python -B -m pytest tests/contract/test_fc1203_dead_helpers_absent.py tests/contract/test_fc1203_extractive_summary_binding.py tests/contract/test_fc906b_role_producer_contract.py tests/contract/test_policy_and_flags.py tests/contract/test_fc1201_root_hardcode_gate.py -q",
+      "exit_code": 0,
+      "result": "22 passed in 5.33s = 3+3+3+8+5 per file (task's '12 passed (3+3+3+1+2)' is stale arithmetic; its own stated per-file counts 8 and 5 confirm 22).",
+      "cwd": "result-wiki worktree"
+    },
+    {
+      "command": "RED-at-base: cp two new test files into base-wiki; fc906b test backed up (.fc1203-review.bak) then overwritten with amended version; run trio",
+      "exit_code": 0,
+      "result": "7 failed / 2 passed — every failure for the right reason: modules importable, attributes present, wu905 exists, generator unregistered, metadata schema_version None, column None, FC-906-b registry drift (proves amendment necessary). Reverted via rm + mv backup; git status --porcelain empty.",
+      "cwd": "base-wiki worktree"
+    },
+    {
+      "command": "M-revive-1..3: git show a6937f3:<path> > <path> to revive entity_resolver.py / reuse_latest_policy.py / scripts/wu905_catalog_switch_check.py",
+      "exit_code": 0,
+      "result": "KILL CONFIRMED each — gate 2 failed (test_deleted_modules_are_unimportable + test_deleted_files_are_gone), attributes test still green (correct). Reverted by rm; clean.",
+      "cwd": "result-wiki worktree"
+    },
+    {
+      "command": "M-revive-4: re-append atomic_rollback to flags.py (original function text)",
+      "exit_code": 0,
+      "result": "KILL CONFIRMED — test_deleted_attributes_are_absent FAILS (hasattr True). Reverted by reverse slice; CRLF endings restored (git show writes LF vs autocrlf worktree), diff zeroed.",
+      "cwd": "result-wiki worktree"
+    },
+    {
+      "command": "M-revive-5: re-append validate_normalized_filing to normalized_meta.py (original function text extracted from base blob)",
+      "exit_code": 0,
+      "result": "KILL CONFIRMED — test_deleted_attributes_are_absent FAILS. Reverted by reverse slice + CRLF restore; clean, gate re-green 3 passed.",
+      "cwd": "result-wiki worktree"
+    },
+    {
+      "command": "M-unregister: Edit-remove source_catalog_extractive_summary entry from GENERATOR_REGISTRY",
+      "exit_code": 0,
+      "result": "KILL CONFIRMED — 2 FAILS: registered assertion + v2-bindable with reusable=False reason='artifact_generator_unregistered' (exact right reason); column test stays green (column stamping untouched). Reverted via Edit; focused 22 passed, clean.",
+      "cwd": "result-wiki worktree"
+    },
+    {
+      "command": "Full suite: python -B -m pytest tests/ -q",
+      "exit_code": 0,
+      "result": "2215 passed / 2 failed / 1 skipped (506.92s). 2 failed = pre-existing PORT-01 test_check_unique_test_symbols pair (GBK subprocess UnicodeDecodeError 0xd4). Reproduced identically at base worktree (same pair, same decode-error class 0xa1/0xd4; file not in FC-1203 diff). Zero new failures.",
+      "cwd": "result-wiki worktree"
+    },
+    {
+      "command": "PORT-01 pair at base: python -B -m pytest tests/contract/test_check_unique_test_symbols.py -q",
+      "exit_code": 0,
+      "result": "2 failed / 3 passed — identical failing test names, same GBK decode failure class as result run. Pre-existing confirmed.",
+      "cwd": "base-wiki worktree"
+    },
+    {
+      "command": "Residual sweep: grep -rn for entity_resolver|reuse_latest_policy|atomic_rollback|validate_normalized_filing|wu905_catalog_switch (excl .git, __pycache__, FC-1203, gate test itself)",
+      "exit_code": 0,
+      "result": "Zero live imports. 8 .py hits = architecture_gate comments (2), fc1201 gate docstring/allowlist strings (3), identity_resolver substring false positives (3). Non-py hits = historical FC-1201/FC-201 docs+receipts and gate logs (immutable records).",
+      "cwd": "result-wiki worktree"
+    },
+    {
+      "command": "KEPT claims spot-check: validate_flag_state / restore_asset / evaluate_candidate callers",
+      "exit_code": 0,
+      "result": "validate_flag_state: runtime_policy.py L24/L64 production caller. restore_asset: scripts/wu904_remediation_restore.py L31/L135 production tool. evaluate_candidate: sealed FC-502 tests (test_sidecar_production_scan_fc502.py, test_dbx_fixture_e2e.py) + admission tests. close_gap owns gap_hash policy binding (L217/L323) per contract claim. All true.",
+      "cwd": "result-wiki worktree"
+    },
+    {
+      "command": "python tools/receipt_validator.py --receipt company-wiki/assurance/fc/FC-1203/11_implementer_receipt.json",
+      "exit_code": 0,
+      "result": "OK: 1 receipt(s) valid. Dependency receipt FC-906/12_reviewer_receipt.json exists on disk. Implementer self-reported full-suite history (2214/1/3 incl fc906b drift -> 2215/1/2 after amendment) matches this review's independent 2215/2/1.",
+      "cwd": "revenue-forecast (main checkout)"
+    },
+    {
+      "command": "Post-review hygiene: git status --porcelain in result-wiki, base-wiki, company-wiki, revenue-forecast",
+      "exit_code": 0,
+      "result": "Both worktrees empty; main checkouts untouched by this review (read-only git show/log/diff + validator).",
+      "cwd": "all"
+    }
+  ],
+  "mutation_results": [
+    {
+      "id": "FC-1203-M-revive-1",
+      "killed": true,
+      "detail": "entity_resolver.py revived -> gate test_deleted_modules_are_unimportable FAILS. Prevents dead-module resurrection."
+    },
+    {
+      "id": "FC-1203-M-revive-2",
+      "killed": true,
+      "detail": "reuse_latest_policy.py revived -> gate test_deleted_modules_are_unimportable FAILS."
+    },
+    {
+      "id": "FC-1203-M-revive-3",
+      "killed": true,
+      "detail": "wu905_catalog_switch_check.py revived -> gate test_deleted_files_are_gone FAILS."
+    },
+    {
+      "id": "FC-1203-M-revive-4",
+      "killed": true,
+      "detail": "atomic_rollback re-added to flags.py -> gate test_deleted_attributes_are_absent FAILS."
+    },
+    {
+      "id": "FC-1203-M-revive-5",
+      "killed": true,
+      "detail": "validate_normalized_filing re-added to normalized_meta.py -> gate test_deleted_attributes_are_absent FAILS."
+    },
+    {
+      "id": "FC-1203-M-unregister",
+      "killed": true,
+      "detail": "extractive generator removed from GENERATOR_REGISTRY -> binding registered + v2-bindable tests FAIL (artifact_generator_unregistered). Prevents silent registry regression."
+    }
+  ],
+  "unresolved_findings": [
+    {
+      "id": "FC-1203-F1",
+      "severity": "info",
+      "file": "company-wiki/assurance/fc/FC-1203/11_implementer_receipt.json",
+      "issue": "changed_files over-lists 3 revenue files (findings.md, task_plan.md, assurance/fc/FC-1203/00_wu_card.md) — revenue fb77fe1 actually changed only progress.md + work_unit_registry.md; the 3 were last touched in base commit 5ef1079. Validator only checks changed⊆allowed, so it passes.",
+      "disposition": "Non-blocking. Over-listing (not under-listing): zero unlisted changes in the real delta; all listed files within allowed_files."
+    },
+    {
+      "id": "FC-1203-F2",
+      "severity": "info",
+      "file": "company-wiki fcap branch",
+      "issue": "Task brief listed 3 wiki commits; actual series has a 4th (c91b066, architecture_gate comment note). Its content is included in the brief's expected-changes list (item 1: 'architecture_gate.py: comment note only').",
+      "disposition": "Non-blocking. Comment-only, reviewed, no code change."
+    },
+    {
+      "id": "FC-1203-F3",
+      "severity": "info",
+      "file": "review brief",
+      "issue": "Brief expected '12 passed' for the focused set with breakdown 3+3+3+1+2, but its own per-file counts (policy_and_flags 8, fc1201 gate 5) sum to 22 — which is what actually ran.",
+      "disposition": "Non-blocking. Brief arithmetic stale; 22 passed matches the brief's per-file counts exactly."
+    }
+  ],
+  "summary": "ACCEPTED. Per-commit diffs reviewed across the wiki result series (f58b52e + c91b066 comment + 90102c2 + 460d273 receipt) and revenue fb77fe1 (docs-only): deletions, registration, v2 stamps, FC-906-b amendment and contract addendum all match the FC-1203 description exactly; changed-file set (19 wiki files) matches the implementer receipt 19/19. Focused suite 22/22 green (3+3+3+8+5). RED-at-base in a separate base worktree: 7 failures with correct causes, including FC-906-b registry drift proving the amendment was necessary. All 6 mutations (5 revive + 1 unregister) killed with the right assertion and cleanly reverted (rm / reverse edits / git show redirects; CRLF drift repaired); worktrees re-green and status-clean. Full wiki suite reproduces exactly: 2215 passed / 2 failed / 1 skipped, the 2 being the pre-existing PORT-01 pair verified identical at base. Residual-reference sweep: zero live imports of any deleted symbol. Implementer receipt passes the structural validator (OK). Three info-level findings (receipt over-listing 3 revenue doc files, 4th comment-only commit, brief count arithmetic) — none blocking."
+}

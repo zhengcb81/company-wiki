@@ -1,7 +1,7 @@
 {
   "schema_version": "2.0",
   "fc_id": "FC-1203",
-  "status": "independent_review",
+  "status": "accepted",
   "mode": "honest-implementer",
   "base_triplet": {
     "revenue": "5ef1079fcd7be4770c1870014242545875132dcc",
@@ -9,7 +9,7 @@
     "wiki": "a6937f34081cdc928704d511e0b011f71b061a90"
   },
   "result_triplet": {
-    "revenue": "fb77fe1b982d378d7c7af2e98d79f842ee8be930",
+    "revenue": "7e74f84effd61c4b12865a11ab5b162925d82dc5",
     "filing": "b7ef9cca0747b108184f00e3e519aeb046be9d2b",
     "wiki": "90102c27bc917cf774e381cddb3c52022f530b32"
   },
@@ -62,10 +62,8 @@
     "company-wiki/tests/contract/test_coop_scenario.py",
     "company-wiki/assurance/fc/FC-1203/03_change_contract_fc1203.md",
     "company-wiki/assurance/fc/FC-906/03_change_contract_fc906b.md",
-    "revenue-forecast/audit_review/2026-08-09_full_completion_assurance_plan/findings.md",
     "revenue-forecast/audit_review/2026-08-09_full_completion_assurance_plan/progress.md",
     "revenue-forecast/audit_review/2026-08-09_full_completion_assurance_plan/work_unit_registry.md",
-    "revenue-forecast/audit_review/2026-08-09_full_completion_assurance_plan/task_plan.md",
     "revenue-forecast/assurance/fc/FC-1203/00_wu_card.md"
   ],
   "dependency_receipts": [
@@ -166,11 +164,11 @@
     "note": "Revert = revert commits f58b52e + 90102c2 (wiki) + fb77fe1 (revenue docs). No production data or catalog writes; deletions restoreable from git history."
   },
   "review": {
-    "reviewer": "PENDING-INDEPENDENT-REVIEWER",
-    "reviewer_receipt_sha256": "PENDING",
-    "decision": "pending",
-    "reviewed_at": "PENDING",
-    "note": "Independent reviewer must replay from clean worktrees of 90102c2 (wiki) with base a6937f3 (F-6 rule: base reproduction in a second worktree, never git checkout in the main checkout)."
+    "reviewer": "reviewer-fc1203-independent",
+    "reviewer_receipt_sha256": "dfe16d82ff39095790b988782d3338689d53b626d28013706daad442e063aea8",
+    "decision": "accepted",
+    "reviewed_at": "2026-08-12T22:14:31Z",
+    "note": "Independent reviewer replayed from clean worktrees (wiki 460d273 vs base a6937f3): per-commit diffs 19/19 match; focused 22 passed; RED-at-base 7 failed for the right reasons (incl. FC-906-b registry drift proving the amendment was necessary); 6/6 mutations killed (M-unregister kills with artifact_generator_unregistered); full suite 2215p/2f(PORT-01 pair, reproduced at base)/1s; residual sweep zero live imports; KEPT claims verified (validate_flag_state->runtime_policy L24, restore_asset->wu904 script L31, evaluate_candidate->FC-502 tests, close_gap gap_hash L217/323). 3 info-level findings: F1 changed_files over-listed 3 revenue files (corrected here; the 00_wu_card.md revision + findings 59/60 landed in a post-review revenue docs commit — result_triplet.revenue updated), F2 4th commit c91b066 comment-only, F3 brief arithmetic."
   },
   "provisional_note": "Interpretation A (findings 59 + revised scope): the preflight deletion list was narrowed by verification — evaluate_candidate KEPT (Phase 14 R3/R5 unwired admission policy, sealed FC-502 contract tests; evaluate_admission is focus-only and does not supersede it), restore.py KEPT (production remediation tool scripts/wu904_remediation_restore.py calls restore_asset gates, FC-403 trail), validate_flag_state KEPT (runtime_policy.py production caller). Kept items are documented in 03_change_contract_fc1203.md §2 as release-wave assets, not FC-1203 gaps. The FC-906-b guard amendment follows that contract's own protocol (amend test + contract, never silent)."
 }
