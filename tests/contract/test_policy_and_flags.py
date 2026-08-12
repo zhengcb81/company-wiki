@@ -5,10 +5,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "src"))
 from company_wiki.source_catalog.config import load_catalog_config  # noqa: E402
-from company_wiki.source_catalog.flags import (  # noqa: E402
-    atomic_rollback,
-    validate_flag_state,
-)
+from company_wiki.source_catalog.flags import validate_flag_state  # noqa: E402
 from company_wiki.source_catalog.policy import (  # noqa: E402
     export_policy,
     policy_authorizes_root,
@@ -111,21 +108,3 @@ def test_flag_bridge_conflicts_with_active():
     assert any("legacy_bridge_enabled" in p for p in problems)
 
 
-def test_atomic_rollback_cascades_downstream():
-    flags = {
-        "v2_scan_shadow": True,
-        "v2_persist_assertions": True,
-        "v2_resolve_shadow": True,
-        "v2_resolve_active": True,
-        "v2_bundle_active": True,
-    }
-    # breaker disables the root of the chain: everything cascades off
-    rolled = atomic_rollback(flags, disable=("v2_scan_shadow",))
-    assert not any(rolled.values())
-
-
-def test_atomic_rollback_never_touches_catalog():
-    flags = {"v2_scan_shadow": True, "v2_persist_assertions": True}
-    rolled = atomic_rollback(flags, disable=("v2_scan_shadow",))
-    # pure dict operation — no side effects by construction
-    assert rolled == {"v2_scan_shadow": False, "v2_persist_assertions": False}

@@ -94,7 +94,9 @@ def test_fc1201_cleaned_files_are_token_free():
     from company_wiki.source_catalog import architecture_gate as gate
 
     src_dir = Path(gate.__file__).resolve().parent
-    for cleaned in ("resolver.py", "observability.py", "entity_resolver.py"):
+    # entity_resolver.py was DELETED in FC-1203 (dead module) — deletion is
+    # the strongest form of token-free; only surviving files are read here.
+    for cleaned in ("resolver.py", "observability.py"):
         text = (src_dir / cleaned).read_text(encoding="utf-8")
         for token in gate._ROOT_HARDCODE_TOKENS:
             assert token not in text, (

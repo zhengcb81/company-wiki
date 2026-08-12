@@ -56,22 +56,3 @@ def validate_flag_state(flags: dict[str, bool]) -> list[str]:
     return problems
 
 
-def atomic_rollback(
-    flags: dict[str, bool], disable: tuple[str, ...]
-) -> dict[str, bool]:
-    """Breaker rollback: disable the given flags atomically; everything that
-    requires a disabled flag cascades off.  Pure dict operation — never
-    touches the catalog or files."""
-    rolled = dict(flags)
-    for flag in disable:
-        rolled[flag] = False
-    changed = True
-    while changed:
-        changed = False
-        for flag, required in REQUIRES.items():
-            if not rolled.get(flag, False):
-                continue
-            if not all(rolled.get(r, False) for r in required):
-                rolled[flag] = False
-                changed = True
-    return rolled

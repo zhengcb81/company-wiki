@@ -50,6 +50,10 @@ GENERATOR_REGISTRY: dict[str, set[str]] = {
     "source_catalog_normalizer": {NORMALIZER_VERSION},
     "source_catalog_llm_summary": {SUMMARIZER_VERSION},
     "source_catalog_section_extractor": {SECTION_EXTRACTOR_VERSION},
+    # FC-1203: the extractive summarizer has a production entry
+    # (SourceCatalog.summarize -> CLI summarize + run pipeline); its
+    # artifacts must be bindable like the other in-house generators.
+    "source_catalog_extractive_summary": {SUMMARIZER_VERSION},
 }
 
 
