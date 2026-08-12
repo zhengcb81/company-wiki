@@ -451,7 +451,8 @@ class SourceCatalog:
             registry if registry is not None else GENERATOR_REGISTRY)
         effective_roots = (
             allowed_roots if allowed_roots is not None
-            else tuple(root.path for root in self.config.roots))
+            else tuple(root.path for root in self.config.roots)
+            + (self.config.derived_dir,))
         effective_now = now or _utc_now()
         return self.query_source_bundle(
             document_id=match.document_id,

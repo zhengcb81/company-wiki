@@ -253,3 +253,20 @@ def test_producer_writes_schema_version_COLUMN(tmp_path: Path):
         f"bundle must carry at least one valid handle for a produced artifact, "
         f"got invalid={sorted((bundle.get('invalid') or {}).keys())}"
     )
+    # FC-906-d: bundle_for_resolution DEFAULT allowed_roots must include the
+    # derived dir (artifacts live there; config.roots alone => every artifact
+    # is path_outside_allowed_root and the resolve envelope carries no valid
+    # handles in production — exactly the FC-902-tests-green/production-empty
+    # gap this FC closes).
+    from types import SimpleNamespace
+
+    fake_resolution = SimpleNamespace(
+        matches=[SimpleNamespace(document_id=doc_id, content_sha256=None)],
+        status=SimpleNamespace(value="reused_equivalent"),
+    )
+    envelope_bundle = catalog.bundle_for_resolution(fake_resolution)
+    assert envelope_bundle is not None
+    assert (envelope_bundle.get("valid_handles") or {}), (
+        "bundle_for_resolution defaults must include derived_dir; "
+        f"got invalid={sorted((envelope_bundle.get('invalid') or {}).keys())}"
+    )
