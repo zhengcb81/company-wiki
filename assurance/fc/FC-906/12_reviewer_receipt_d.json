@@ -1,0 +1,49 @@
+{
+  "schema_version": "2.0",
+  "fc_id": "FC-906",
+  "fc_suffix": "-d",
+  "reviewer": "reviewer-fc906d-independent",
+  "implementer_receipt_sha256": "1ec9fac945938f1f0a051dd04d9323a2bd94b4ad4d6e910e4bb05643ca7819b8",
+  "clean_checkout": true,
+  "base_triplet": {"revenue": "c79d7cccbbc4f84f2b8c4e9d9ad780e52e0305ff", "filing": "6b617714f253400e6cba93c9aa7fc0fbe3ed46bc", "wiki": "0ee0d09dfcbc8d5bbac4f17666c09df910d17558"},
+  "result_triplet": {"revenue": "c79d7cccbbc4f84f2b8c4e9d9ad780e52e0305ff", "filing": "6b617714f253400e6cba93c9aa7fc0fbe3ed46bc", "wiki": "6a7600027137c38ad4cb7bfea1844a16030081cb"},
+  "commands_replayed": [
+    "git worktree add review@6a76000 (C:/Users/郑曾波/Projects/.fcap-review/fc-906-d-review) + base@0ee0d09 (.../fc-906-d-base)",
+    "git diff 0ee0d09..6a76000 --stat -> src surface EXACTLY 2 fix commits: a61dd35 (llm_summarizer.py +5/-1, normalizer.py +11/-2, section_extractor.py +10/-2, test +38) + 6a76000 (service.py +3/-1, test +17)",
+    "git show a61dd35/6a76000 -> producers INSERT carries schema_version,source_sha256 columns; ON CONFLICT refreshes both; service.py effective_roots default = config.roots + derived_dir",
+    "ruff check 5 touched files -> All checks passed (exit 0)",
+    "pytest tests/contract/test_fc906a_producer_binding_metadata.py -q -> 4 passed (4.68s)",
+    "RED-at-base: new test run against base worktree 0ee0d09 -> FAILS, column None vs '1.0' (exact pre-fix defect)",
+    "pytest tests/contract/ -q -> 1498 passed, 1 skipped, 0 failed (418.11s, exit 0)",
+    "production READ-ONLY queries (mode=ro) on .source_catalog/catalog.sqlite3 -> see side_effect_reconciliation"
+  ],
+  "scenario_results": [
+    {"id": "AR-07", "status": "passed", "note": "v2-window artifacts all carry schema_version='1.0' COLUMN (34/34, 0 unstamped); journal 33->34 (+1 ambient worker artifact, documented)"},
+    {"id": "AR-02", "status": "passed", "note": "DAG-minimal semantics unchanged; diff touches only producer INSERT columns + default roots"},
+    {"id": "SAFE-04", "status": "passed", "note": "legacy unbound fail-closed: 4797/4797 legacy normalized rows still schema_version NULL; artifact_schema_unsupported reproduced by M1 replay"},
+    {"id": "AR-01", "status": "passed", "note": "bundle_for_resolution defaults yield valid handles; M2 replay proves derived_dir fix load-bearing"}
+  ],
+  "mutations_killed": {
+    "M1": "normalizer.py column value -> \"\": test FAILS ('' == '1.0') — exact pre-fix symptom artifact_schema_unsupported",
+    "M2": "service.py minus (derived_dir,): test FAILS (valid_handles empty, invalid={'normalized': path_outside_allowed_root}) — exact pre-fix symptom",
+    "post_revert": "both reverted -> 4 passed restored; git status clean; ruff clean"
+  },
+  "side_effect_reconciliation": {
+    "passed": true,
+    "note": "(a) v2-window artifacts (created_at>'2026-08-11T23:40:00Z'): 34 live vs 33 at seal (+1 normalized by ambient worker; roles 19/11/4), 34/34 schema_version='1.0' column + metadata_json 1.0 + source_sha256 non-empty; (b) producer_events 34 (33 at seal +1); (c) legacy normalized NULL schema_version unchanged 4797/4797 (zero deletion, no backfill); (d) pre-window stamped rows: 0"
+  },
+  "codegraph_reachability": {
+    "passed": true,
+    "note": "bundle_for_resolution service.py:426; production callers unchanged (cli.py:1018, cli.py:1089, close_gap.py:417); bundle consumer reads schema_version/source_sha256 COLUMNs (service.py:409, 494)"
+  },
+  "rollback": {"required": true, "passed": true, "note": "documented only; git revert a61dd35+6a76000; backfill additive, no data loss"},
+  "findings": [
+    {"id": "F1", "severity": "low", "scope": "implementer receipt metadata", "detail": "receipt result_triplet.wiki is a 64-hex string resolving to no git object; correct = 6a7600027137c38ad4cb7bfea1844a16030081cb. Recommend erratum; does not affect replayed evidence."},
+    {"id": "F2", "severity": "low", "scope": "chain-wide receipt field", "detail": "command_registry_sha256 69c57dce... unreproducible (live file d290b994/215b8077; no historical match); identical in all 4 FC-906 receipts, pre-existing template field."},
+    {"id": "F3", "severity": "info", "scope": "T2 live drift", "detail": "live 34 vs seal 33 (+1 artifact, +1 event) — ambient worker, all stamped; documented, not a defect."},
+    {"id": "F4", "severity": "info", "scope": "diff range", "detail": "range 0ee0d09..6a76000 spans 5 commits (2 fixes + 3 fc-906-c doc commits incl. llm_cost_log.csv); src surface exactly the 2 intended fixes, no unrelated src, no dirty paths."}
+  ],
+  "decision": "accepted",
+  "reviewed_at": "2026-08-12T01:33:30Z",
+  "reviewer_receipt_sha256": "786c3d28b4df97030daa144af2a6ea9211907db9613d3d9e68467ae753b8c434"
+}

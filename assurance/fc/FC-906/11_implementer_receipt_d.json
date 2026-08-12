@@ -13,7 +13,7 @@
   "result_triplet": {
     "revenue": "c79d7cccbbc4f84f2b8c4e9d9ad780e52e0305ff",
     "filing": "6b617714f253400e6cba93c9aa7fc0fbe3ed46bc",
-    "wiki": "6a7600067b2647d19e49c1fdc4a76d0c1abff1e8f6c89fdaad15e78bb61a3b19"
+    "wiki": "6a7600027137c38ad4cb7bfea1844a16030081cb"
   },
   "plan_sha256": "eda591f4698314fd7b39b765acfde23d06481f1004c16bcf480b6eee6660b2a7",
   "policy_sha256": "not-applicable",
@@ -36,19 +36,70 @@
   ],
   "command_registry_sha256": "69c57dce9f401044a92298cd76c2c12cf8ced526466f7f3e95d938c9edd549bc",
   "scenario_results": [
-    {"id": "AR-07", "status": "passed", "note": "T2 real consumption: source_preparation(北方华创 2025) -> reused_existing, artifact_read=['normalized'], journal 33->33 (producer=0 this run), download=0, llm=0, not_detected."},
-    {"id": "AR-02", "status": "passed", "note": "DAG-minimal: producer_events = closure of non-reusable roles only (4 roles), never a blind full recompute."},
-    {"id": "SAFE-04", "status": "passed", "note": "legacy unbound never reused: 星环 2024 -> valid_handles empty (artifact_schema_unsupported fail closed)."},
-    {"id": "AR-01", "status": "passed", "note": "bundle path now yields valid handles in production (was empty: column NULL + missing derived root — both fixed)."}
+    {
+      "id": "AR-07",
+      "status": "passed",
+      "note": "T2 real consumption: source_preparation(北方华创 2025) -> reused_existing, artifact_read=['normalized'], journal 33->33 (producer=0 this run), download=0, llm=0, not_detected."
+    },
+    {
+      "id": "AR-02",
+      "status": "passed",
+      "note": "DAG-minimal: producer_events = closure of non-reusable roles only (4 roles), never a blind full recompute."
+    },
+    {
+      "id": "SAFE-04",
+      "status": "passed",
+      "note": "legacy unbound never reused: 星环 2024 -> valid_handles empty (artifact_schema_unsupported fail closed)."
+    },
+    {
+      "id": "AR-01",
+      "status": "passed",
+      "note": "bundle path now yields valid handles in production (was empty: column NULL + missing derived root — both fixed)."
+    }
   ],
   "commands": [
-    {"command": "production bundle probe (北方华创 2025, before fixes)", "exit_code": 0, "result": "valid_handles=[] invalid={normalized: artifact_schema_unsupported} — column NULL (bundle reads column; FC-906-a wrote only metadata_json)", "cwd": "company-wiki"},
-    {"command": "fix + backfill: producers stamp schema_version column (a61dd35) + UPDATE 33 production rows", "exit_code": 0, "result": "column stamped on all 33 v2 rows (18 normalized + 11 sections + 4 summary); source_sha256 backfilled from sources", "cwd": "company-wiki"},
-    {"command": "production bundle probe (after column fix)", "exit_code": 0, "result": "invalid={normalized: artifact_path_outside_allowed_root} — derived_dir missing from default allowed_roots", "cwd": "company-wiki"},
-    {"command": "fix: bundle_for_resolution defaults += derived_dir (6a76000)", "exit_code": 0, "result": "production bundle now valid_handles=['normalized'] REUSABLE", "cwd": "company-wiki"},
-    {"command": "T2: echo request | python scripts/source_preparation.py (revenue real chain, x2 runs)", "exit_code": 0, "result": "outcome=reused_existing, bundle_status=available, artifact_read=['normalized'], producer_events(DAG)=[consumer_analysis,markdown,sections,summary], parser_calls=1(historical), llm_calls=0, download_calls=0, prompt_injection_status=not_detected; journal 33->33 unchanged", "cwd": "revenue-forecast"},
-    {"command": "legacy check: query_source_bundle(星环科技 2024)", "exit_code": 0, "result": "valid_handles=[] invalid={normalized: artifact_schema_unsupported} — legacy unbound NOT reused", "cwd": "company-wiki"},
-    {"command": "PYTHONIOENCODING=utf-8 python -B -m pytest tests/contract/ -q", "exit_code": 0, "result": "1498 passed, 1 skipped, 0 failed (twice: after a61dd35 and after 6a76000)", "cwd": "company-wiki"}
+    {
+      "command": "production bundle probe (北方华创 2025, before fixes)",
+      "exit_code": 0,
+      "result": "valid_handles=[] invalid={normalized: artifact_schema_unsupported} — column NULL (bundle reads column; FC-906-a wrote only metadata_json)",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "fix + backfill: producers stamp schema_version column (a61dd35) + UPDATE 33 production rows",
+      "exit_code": 0,
+      "result": "column stamped on all 33 v2 rows (18 normalized + 11 sections + 4 summary); source_sha256 backfilled from sources",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "production bundle probe (after column fix)",
+      "exit_code": 0,
+      "result": "invalid={normalized: artifact_path_outside_allowed_root} — derived_dir missing from default allowed_roots",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "fix: bundle_for_resolution defaults += derived_dir (6a76000)",
+      "exit_code": 0,
+      "result": "production bundle now valid_handles=['normalized'] REUSABLE",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "T2: echo request | python scripts/source_preparation.py (revenue real chain, x2 runs)",
+      "exit_code": 0,
+      "result": "outcome=reused_existing, bundle_status=available, artifact_read=['normalized'], producer_events(DAG)=[consumer_analysis,markdown,sections,summary], parser_calls=1(historical), llm_calls=0, download_calls=0, prompt_injection_status=not_detected; journal 33->33 unchanged",
+      "cwd": "revenue-forecast"
+    },
+    {
+      "command": "legacy check: query_source_bundle(星环科技 2024)",
+      "exit_code": 0,
+      "result": "valid_handles=[] invalid={normalized: artifact_schema_unsupported} — legacy unbound NOT reused",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "PYTHONIOENCODING=utf-8 python -B -m pytest tests/contract/ -q",
+      "exit_code": 0,
+      "result": "1498 passed, 1 skipped, 0 failed (twice: after a61dd35 and after 6a76000)",
+      "cwd": "company-wiki"
+    }
   ],
   "side_effect_counts": {
     "downloads": 0,
@@ -73,11 +124,11 @@
     "note": "Code reverts: git revert a61dd35 / 6a76000. Data: the 33-row column backfill is additive (schema_version/source_sha256 set on rows that were NULL — reverting to NULL loses only binding capability, no data). No execution needed (apply verified)."
   },
   "review": {
-    "reviewer": "pending-independent-reviewer",
-    "reviewer_receipt_sha256": "TBD",
-    "decision": "pending",
-    "reviewed_at": "TBD",
-    "note": "Implementer-sealed. Reviewer must replay from clean worktree 6a76000 (base 0ee0d09 in a second worktree; F-6 rule) + verify the two fixes' tests/mutations + read-only re-verify the T2 evidence (journal counts, bundle handles) on production."
+    "reviewer": "reviewer-fc906d-independent",
+    "reviewer_receipt_sha256": "786c3d28b4df97030daa144af2a6ea9211907db9613d3d9e68467ae753b8c434",
+    "decision": "accepted",
+    "reviewed_at": "2026-08-12T01:33:30Z",
+    "note": "independent reviewer replayed diff + focused + M1/M2 from clean worktree 6a76000 (base 0ee0d09; F-6 rule); T2 evidence re-verified read-only (34/34 column-stamped, legacy untouched); verdict accepted; findings F1(low,result_triplet erratum fixed)/F2(low,pre-existing template field)/F3/F4(info)"
   },
   "provisional_note": "Feat sealed at wiki 6a76000 (revenue/filing unchanged). Two pre-requisite fixes closed the production-empty bundle gap; T2 real consumption proven (artifact_read>0, journal invariant, unbound never reused). Independent review pending."
 }
