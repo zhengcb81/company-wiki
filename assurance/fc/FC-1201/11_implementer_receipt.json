@@ -1,0 +1,130 @@
+{
+  "schema_version": "2.0",
+  "fc_id": "FC-1201",
+  "status": "independent_review",
+  "mode": "honest-implementer",
+  "base_triplet": {
+    "revenue": "44cd28aba2f9ef56fba392827ece30664cc58d52",
+    "filing": "592fae6108722299673981db4d329ad8906248bb",
+    "wiki": "f6eb58410e85b20aed738418cbaef6833803a4b6"
+  },
+  "result_triplet": {
+    "revenue": "44cd28aba2f9ef56fba392827ece30664cc58d52",
+    "filing": "592fae6108722299673981db4d329ad8906248bb",
+    "wiki": "0c6c2c9c808aab0cf990b8112c64f54a21091fdd"
+  },
+  "plan_sha256": "8423d4554e7bae03dafa8f3714912df7af01ba2304f04516c85c86963dc868ae",
+  "policy_sha256": "not-applicable",
+  "allowed_files": [
+    "company-wiki/src/company_wiki/source_catalog/resolver.py",
+    "company-wiki/src/company_wiki/source_catalog/observability.py",
+    "company-wiki/src/company_wiki/source_catalog/entity_resolver.py",
+    "company-wiki/src/company_wiki/source_catalog/architecture_gate.py",
+    "company-wiki/tests/contract/test_fc1201_root_hardcode_gate.py",
+    "company-wiki/assurance/fc/FC-1201/00_wu_card.md",
+    "company-wiki/assurance/fc/FC-1201/03_change_contract.md",
+    "company-wiki/assurance/fc/FC-1201/11_implementer_receipt.json"
+  ],
+  "changed_files": [
+    "company-wiki/src/company_wiki/source_catalog/resolver.py",
+    "company-wiki/src/company_wiki/source_catalog/observability.py",
+    "company-wiki/src/company_wiki/source_catalog/entity_resolver.py",
+    "company-wiki/src/company_wiki/source_catalog/architecture_gate.py",
+    "company-wiki/tests/contract/test_fc1201_root_hardcode_gate.py",
+    "company-wiki/assurance/fc/FC-1201/00_wu_card.md",
+    "company-wiki/assurance/fc/FC-1201/03_change_contract.md"
+  ],
+  "dependency_receipts": [
+    "company-wiki/assurance/fc/FC-701/12_reviewer_receipt.json (accepted 2026-08-11)",
+    "revenue-forecast/assurance/fc/FC-1005/12_reviewer_receipt.json (accepted 2026-08-12)"
+  ],
+  "command_registry_sha256": "215b8077169126b2c4a5eca9d8d6237f291757c2559f6ae6e0ae8ff1c806b089",
+  "scenario_results": [
+    {
+      "id": "EX-08",
+      "status": "passed",
+      "note": "Config-only future root still flows the chain under the tightened+ratcheted gate: test_future_root_config_only.test_gate_no_root_id_hardcode_in_production stays green after the allowlist shrank (resolver/observability/entity_resolver cleaned + removed). The ratchet forbids NEW root-hardcode files; detection (M2) unchanged."
+    }
+  ],
+  "commands": [
+    {
+      "command": "python -B -m ruff check (4 production modules + new test)",
+      "exit_code": 0,
+      "result": "All checks passed",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "python -B -m compileall (4 production modules)",
+      "exit_code": 0,
+      "result": "compile OK",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "python -B -m pytest tests/contract/test_fc1201_root_hardcode_gate.py -q",
+      "exit_code": 0,
+      "result": "5 passed (RED before cleanup: ratchet/comment-only-leave/token-free all FAIL for the right reasons; GREEN after comment hygiene + allowlist shrink)",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "python -B -m pytest tests/contract/test_fc1201_root_hardcode_gate.py tests/contract/test_architecture_gate.py tests/contract/test_future_root_config_only.py -q",
+      "exit_code": 0,
+      "result": "17 passed (FC-1201 5 + architecture_gate 7 + EX-08 future_root 5)",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "python -B -m pytest tests/contract/ -q -k 'gate or root or hardcode or future or policy or architecture or fc1201 or fc304 or fc301'",
+      "exit_code": 0,
+      "result": "272 passed, 1 skipped, 1231 deselected (gate/root/policy contract subset; zero regressions)",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "PYTHONIOENCODING=utf-8 python -B -m pytest tests/ -q (full wiki suite)",
+      "exit_code": 0,
+      "result": "2241 passed, 1 skipped, 0 failed (449s). With PYTHONIOENCODING=utf-8 the pre-existing PORT-01 test_check_unique_test_symbols pair passes too; genuinely zero failures. FCAP exit gate: no new failures.",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "mutation M1: re-add 'resolver.py' to _ROOT_HARDCODE_ALLOWED_FILES, run focused pytest",
+      "exit_code": 0,
+      "result": "KILL CONFIRMED — inner pytest exited 1: test_fc1201_allowlist_ratchet_frozen + test_fc1201_comment_only_files_left_allowlist BOTH FAIL (allowlist drift detected). Mutation reverted; the non-zero pytest exit is the kill evidence, not a receipt failure.",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "mutation M2: remove 'dayu_portfolio' from _ROOT_HARDCODE_TOKENS, run focused pytest",
+      "exit_code": 0,
+      "result": "KILL CONFIRMED — inner pytest exited 1: test_fc1201_gate_still_detects_new_hardcode FAILS (adversarial dayu_portfolio module no longer flagged). Mutation reverted; the non-zero pytest exit is the kill evidence, not a receipt failure.",
+      "cwd": "company-wiki"
+    }
+  ],
+  "side_effect_counts": {
+    "downloads": 0,
+    "external_root_writes": 0,
+    "catalog_mutations": 0,
+    "llm_calls": 0,
+    "parser_calls": 0,
+    "note": "Comment-only edits + gate allowlist shrink + new tests. No production data, config loader, write path, or yaml touched. v1 scanner untouched."
+  },
+  "codegraph": {
+    "production_callers_before": 0,
+    "production_callers_after": 0,
+    "note": "Gate/cleanup FC: no new production symbols. The frozen _ROOT_HARDCODE_ALLOWED_FILES shrunk by 3 files (resolver.py, observability.py, entity_resolver.py). Verified by direct grep (CodeGraph watcher lags fresh edits)."
+  },
+  "mutation": {
+    "id": "FC-1201-M1-M2",
+    "killed": true,
+    "details": "M1: allowlist growth (re-add resolver.py) -> ratchet + cleaned-files-leave tests FAIL. M2: token-list trim (drop dayu_portfolio) -> detection test FAILS (adversarial module unflagged). Both reverted; focused suite re-verified green."
+  },
+  "rollback": {
+    "required": false,
+    "proved": true,
+    "note": "Comment edits + allowlist shrink + additive tests; revert = revert commit 0c6c2c9. No data written, no schema/config/loader change."
+  },
+  "review": {
+    "reviewer": "reviewer-fc1201-independent",
+    "reviewer_receipt_sha256": "PENDING",
+    "decision": "pending",
+    "reviewed_at": "PENDING",
+    "note": "implementer receipt sealed at status=independent_review; awaiting independent reviewer replay from clean worktree."
+  },
+  "provisional_note": "Interpretation A (user decision 2026-08-12): gate-ratchet + safe cleanup, v1 scanner deferred to R9. canonical_writer/cli refactors DEFERRED (production 1.x loader config.py:75-84 rejects canonical_write_target as unknown field) — recorded as FC-1201 follow-up. result_triplet sealed at wiki 0c6c2c9 (revenue/filing unchanged)."
+}
