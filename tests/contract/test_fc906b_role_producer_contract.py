@@ -21,6 +21,12 @@ PRODUCER_ROLE_VALUES = {
     "summary": "source_catalog_llm_summary",
     "sections": "source_catalog_section_extractor",
 }
+# FC-1203 (assurance/fc/FC-1203/03_change_contract_fc1203.md): the
+# extractive summarizer is a deliberate SECOND producer of the summary role
+# (production CLI entry SourceCatalog.summarize).  Per this contract's own
+# protocol, adding a producer requires amending this test + the role
+# contract — never silently.
+EXTRA_PRODUCER_GENERATORS = ("source_catalog_extractive_summary",)
 
 # Roles that MUST never gain a catalog producer while this contract holds.
 NON_CATALOG_ROLES = ("markdown", "consumer_analysis")
@@ -47,9 +53,11 @@ def test_catalog_producers_write_only_registered_roles():
     this test + the role contract — never silently.
     """
     # Registry is the single source of truth for producers (FC-902).
-    assert set(GENERATOR_REGISTRY) == set(PRODUCER_ROLE_VALUES.values()), (
+    assert set(GENERATOR_REGISTRY) == (
+        set(PRODUCER_ROLE_VALUES.values()) | set(EXTRA_PRODUCER_GENERATORS)
+    ), (
         "GENERATOR_REGISTRY drift: registered generators no longer match the "
-        f"known producer set {sorted(PRODUCER_ROLE_VALUES.values())}"
+        f"known producer set {sorted(set(PRODUCER_ROLE_VALUES.values()) | set(EXTRA_PRODUCER_GENERATORS))}"
     )
     # The registry contains no generator for the non-catalog roles — binding
     # gate (validate_artifact) would fail them closed anyway.
@@ -63,6 +71,7 @@ def test_catalog_producers_write_only_registered_roles():
         "normalizer.py": ("normalized", "source_catalog_normalizer"),
         "llm_summarizer.py": ("summary", "source_catalog_llm_summary"),
         "section_extractor.py": ("sections", "source_catalog_section_extractor"),
+        "summarizer.py": ("summary", "source_catalog_extractive_summary"),
     }
     src = _repo_root() / "src" / "company_wiki" / "source_catalog"
     for module, (role, generator) in producer_modules.items():

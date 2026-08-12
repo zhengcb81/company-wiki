@@ -37,3 +37,14 @@
 1. catalog producer 写路径只产出 `normalized` / `summary` / `sections` 三角色（钉住，防回归）。
 2. `markdown` / `consumer_analysis` 角色在 catalog 侧无 producer（合同说明 + GENERATOR_REGISTRY 无 generator 共同背书）。
 3. 冻结契约不动：`ROLE_DEPENDENCIES`、`GENERATOR_REGISTRY`、`validate_artifact`、revenue `select_artifact_roles` 默认元组均不改（移除属 FC-1203）。
+
+---
+
+## Addendum（2026-08-12，FC-1203）
+
+> FC-1203 裁决（findings 59 + `assurance/fc/FC-1203/03_change_contract_fc1203.md`）：**extractive summarizer 注册为 summary 角色的第二个 generator**（`source_catalog_extractive_summary`）。
+>
+> 依据：`summarize_catalog` 有生产入口（`SourceCatalog.summarize` → CLI `summarize` + run pipeline），其产物此前因 schema_version 列 NULL / generator 未注册 / created_at 非 ISO-Z 而**永不可绑定**——「有生产入口但产物必然 rejected」比「无 producer」更坏。注册 + v2 元数据修复使其与 llm_summarizer 同构可绑定。
+>
+> 本合同 §1 的「markdown / consumer_analysis 不产」裁决不变；summary 角色允许多 generator（validate_artifact 按 generator 注册表校验，角色-生成器非一一映射）。守卫测试按本合同协议修订（EXTRA_PRODUCER_GENERATORS + summarizer.py 入 producer_modules）。
+
