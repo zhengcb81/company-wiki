@@ -1,4 +1,5 @@
 """FC-801 RED/acceptance tests: CloseGap transaction contract.
+SCENARIO: DL-02 DL-03 DL-07 DL-09 LT-10
 
 The transaction binds request_id + gap hash + policy hash + provider +
 allowed accessions + caps + expiry, and walks the FIXED steps

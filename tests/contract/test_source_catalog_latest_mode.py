@@ -1,4 +1,5 @@
 """WU-4.1: explicit mode semantics in the resolver.
+SCENARIO: LT-01 LT-03 LT-04 LT-06 LT-07
 
 - ``mode="latest_as_of"`` with multiple periods → the most recent published
   handle (≤ as_of_date) is reused, NOT AMBIGUOUS.

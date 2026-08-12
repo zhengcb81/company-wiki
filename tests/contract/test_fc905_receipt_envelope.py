@@ -1,4 +1,5 @@
 """FC-905-a RED/acceptance tests: trusted capture/safety evidence on the
+SCENARIO: SAFE-04 SAFE-05 SAFE-06
 resolution envelope.
 
 The envelope must NEVER fabricate capture/safety counts:

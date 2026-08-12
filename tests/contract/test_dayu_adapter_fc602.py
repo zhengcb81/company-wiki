@@ -1,4 +1,5 @@
 """FC-602 RED/acceptance tests: DayuAdapter 等价 — dayu metadata normalized
+SCENARIO: EX-02
 by the adapter, not special-cased by the scanner.
 
 The adapter enumerates dayu groups (portfolio/{ticker}/filings/...),
