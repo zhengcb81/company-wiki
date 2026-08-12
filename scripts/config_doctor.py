@@ -21,9 +21,18 @@ CONFIG_PATH = ROOT / "config" / "source_catalog.yaml"
 
 
 def diagnose(
-    config_path: Path | None = None, project_root: Path | None = None
+    config_path: Path | None = None,
+    project_root: Path | None = None,
+    filing_fetch_config: Path | None = None,
 ) -> list[str]:
-    """Return a list of config problems (empty = healthy)."""
+    """Return a list of config problems (empty = healthy).
+
+    ``filing_fetch_config``: optional explicit path to filing-fetch's
+    ``config/company_wiki.json`` for the cross-repo check.  When omitted the
+    cross-repo check is skipped (FC-1202: no implicit sibling-directory
+    lookup); the three-repo doctor lives in filing-fetch's CI
+    (``filing-fetch/tools/config_doctor.py``).
+    """
     path = config_path or CONFIG_PATH
     root = project_root or ROOT
     problems: list[str] = []
@@ -56,11 +65,16 @@ def diagnose(
                 f"no security_master/*.json under {config.catalog_dir} "
                 "(filing-fetch identity lookups will fail)"
             )
-    _cross_repo_checks(config, root, problems)
+    _cross_repo_checks(config, root, problems, filing_fetch_config)
     return problems
 
 
-def _cross_repo_checks(config, root: Path, problems: list[str]) -> None:
+def _cross_repo_checks(
+    config,
+    root: Path,
+    problems: list[str],
+    filing_fetch_config: Path | None,
+) -> None:
     """E2E-F03: cross-repo config drift must fail fast at doctor time.
 
     1. kind=directory roots must be EXACTLY {dropbox_stock} (a second
@@ -81,30 +95,37 @@ def _cross_repo_checks(config, root: Path, problems: list[str]) -> None:
             "kind=directory roots must be exactly {dropbox_stock}, "
             f"got {sorted(directory_roots)}"
         )
-    try:
-        import os
-
-        dropbox_wiki = next(
-            (r for r in config.roots if r.root_id == "dropbox_stock"), None
-        )
-        if dropbox_wiki is None:
-            return  # no Dropbox configured — legitimate (zero directory roots)
+    dropbox_wiki = next(
+        (r for r in config.roots if r.root_id == "dropbox_stock"), None
+    )
+    if dropbox_wiki is not None:
         # CONFIG-DBX-04: the Dropbox root's single source of truth is this
         # source_catalog.yaml — the path must point at Dropbox/Stock.
-        profile = os.environ.get("USERPROFILE") or str(Path.home())
-        wiki_path = str(dropbox_wiki.path).replace("${USER_PROFILE}", profile)
-        resolved = Path(wiki_path).resolve()
-        if resolved.name != "Stock" or "Dropbox" not in str(resolved):
-            problems.append(
-                f"dropbox_stock path does not point at Dropbox/Stock: {wiki_path}"
-            )
-    except Exception as exc:  # noqa: BLE001 - report every failure mode
-        problems.append(f"dropbox path check failed: {exc}")
-    filing_config = (
-        root.parent / "filing-fetch" / "config" / "company_wiki.json"
-    )
+        try:
+            import os
+
+            profile = os.environ.get("USERPROFILE") or str(Path.home())
+            wiki_path = str(dropbox_wiki.path).replace("${USER_PROFILE}", profile)
+            resolved = Path(wiki_path).resolve()
+            if resolved.name != "Stock" or "Dropbox" not in str(resolved):
+                problems.append(
+                    f"dropbox_stock path does not point at Dropbox/Stock: {wiki_path}"
+                )
+        except Exception as exc:  # noqa: BLE001 - report every failure mode
+            problems.append(f"dropbox path check failed: {exc}")
+    # Zero directory roots / no dropbox_stock is fine (no Dropbox configured);
+    # the filing-fetch cross-repo check below must still run.
+    if filing_fetch_config is None:
+        # FC-1202: no implicit sibling-directory lookup — the cross-repo
+        # check runs only when the caller passes an explicit path (the
+        # three-repo doctor lives in filing-fetch's CI).
+        return
+    filing_config = Path(filing_fetch_config)
     if not filing_config.is_file():
-        return  # filing-fetch absent in this workspace — skip
+        problems.append(
+            f"filing-fetch config does not exist: {filing_config}"
+        )
+        return
     try:
         import json
 
@@ -121,8 +142,21 @@ def _cross_repo_checks(config, root: Path, problems: list[str]) -> None:
         problems.append(f"cross-repo config check failed: {exc}")
 
 
-def main() -> int:
-    problems = diagnose()
+def main(argv: list[str] | None = None) -> int:
+    import argparse
+
+    parser = argparse.ArgumentParser(
+        description="Production-config doctor (R4.1, roadmap RC-4 / N-05)."
+    )
+    parser.add_argument(
+        "--filing-fetch-config",
+        type=Path,
+        default=None,
+        help="explicit path to filing-fetch's config/company_wiki.json for "
+        "the cross-repo check (FC-1202: skipped when omitted)",
+    )
+    args = parser.parse_args(argv)
+    problems = diagnose(filing_fetch_config=args.filing_fetch_config)
     for problem in problems:
         print(f"CONFIG-PROBLEM: {problem}")
     if not problems:

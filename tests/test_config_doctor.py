@@ -110,7 +110,33 @@ def test_e2e_f03_second_directory_root_fails_fast(tmp_path, monkeypatch):
 def test_e2e_f03_filing_allowance_smuggled_fails(tmp_path, monkeypatch):
     """E2E-F03 / FC-501 (CONFIG-DBX-03): a filing-fetch config smuggling
     back an independent allowed_handle_roots is a contract violation —
-    the policy snapshot is the single source; the doctor must fail."""
+    the policy snapshot is the single source; the doctor must fail when
+    given the filing config explicitly (FC-1202)."""
+    from config_doctor import diagnose
+
+    filing = tmp_path / "filing-fetch" / "config"
+    filing.mkdir(parents=True)
+    filing_config = filing / "company_wiki.json"
+    filing_config.write_text(
+        '{"schema_version": "1.0", "allowed_handle_roots": ["/Dropbox/Stock"]}',
+        encoding="utf-8",
+    )
+    config = tmp_path / "source_catalog.yaml"
+    config.write_text('schema_version: "1.0"\ncatalog_dir: "${PROJECT_ROOT}/.source_catalog"\nreusable_root_kinds: [company_raw, dayu_portfolio, directory]\nroots:\n  - root_id: company_raw\n    kind: company_raw\n    path: "${PROJECT_ROOT}/companies"\n    priority: 10\n  - root_id: dropbox_stock\n    kind: directory\n    path: "${USER_PROFILE}/Dropbox/Stock"\n    priority: 30\n', encoding='utf-8')
+    project = tmp_path / "project"
+    (project / ".source_catalog" / "security_master").mkdir(parents=True)
+    (project / ".source_catalog" / "security_master" / "us.json").write_text("{}", encoding="utf-8")
+    problems = diagnose(
+        config, project_root=project, filing_fetch_config=filing_config
+    )
+    assert any("allowed_handle_roots" in p for p in problems), problems
+
+
+def test_no_implicit_sibling_lookup_without_arg(tmp_path, monkeypatch):
+    """FC-1202: without an explicit --filing-fetch-config the doctor must
+    NOT look up a sibling filing-fetch directory — even a smuggled sibling
+    config is out of this doctor's sight (the three-repo check lives in
+    filing-fetch's CI doctor)."""
     from config_doctor import diagnose
 
     filing = tmp_path / "filing-fetch" / "config"
@@ -120,12 +146,30 @@ def test_e2e_f03_filing_allowance_smuggled_fails(tmp_path, monkeypatch):
         encoding="utf-8",
     )
     config = tmp_path / "source_catalog.yaml"
-    config.write_text('schema_version: "1.0"\ncatalog_dir: "${PROJECT_ROOT}/.source_catalog"\nreusable_root_kinds: [company_raw, dayu_portfolio, directory]\nroots:\n  - root_id: company_raw\n    kind: company_raw\n    path: "${PROJECT_ROOT}/companies"\n    priority: 10\n  - root_id: dropbox_stock\n    kind: directory\n    path: "${USER_PROFILE}/Dropbox/Stock"\n    priority: 30\n', encoding='utf-8')
+    config.write_text('schema_version: "1.0"\ncatalog_dir: "${PROJECT_ROOT}/.source_catalog"\nreusable_root_kinds: [company_raw]\nroots:\n  - root_id: company_raw\n    kind: company_raw\n    path: "${PROJECT_ROOT}/companies"\n    priority: 10\n', encoding='utf-8')
     project = tmp_path / "project"
     (project / ".source_catalog" / "security_master").mkdir(parents=True)
     (project / ".source_catalog" / "security_master" / "us.json").write_text("{}", encoding="utf-8")
     problems = diagnose(config, project_root=project)
-    assert any("allowed_handle_roots" in p for p in problems), problems
+    assert problems == [], problems
+
+
+def test_explicit_missing_filing_config_is_reported(tmp_path, monkeypatch):
+    """FC-1202: an explicit --filing-fetch-config that does not exist is a
+    problem (fail closed), not a silent skip."""
+    from config_doctor import diagnose
+
+    config = tmp_path / "source_catalog.yaml"
+    config.write_text('schema_version: "1.0"\ncatalog_dir: "${PROJECT_ROOT}/.source_catalog"\nreusable_root_kinds: [company_raw]\nroots:\n  - root_id: company_raw\n    kind: company_raw\n    path: "${PROJECT_ROOT}/companies"\n    priority: 10\n', encoding='utf-8')
+    project = tmp_path / "project"
+    (project / ".source_catalog" / "security_master").mkdir(parents=True)
+    (project / ".source_catalog" / "security_master" / "us.json").write_text("{}", encoding="utf-8")
+    problems = diagnose(
+        config,
+        project_root=project,
+        filing_fetch_config=tmp_path / "nope" / "company_wiki.json",
+    )
+    assert any("does not exist" in p for p in problems), problems
 
 
 def test_e2e_f03_dropbox_path_not_stock_fails(tmp_path, monkeypatch):
