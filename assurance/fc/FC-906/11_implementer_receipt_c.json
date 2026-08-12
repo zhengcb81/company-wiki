@@ -35,20 +35,76 @@
   ],
   "command_registry_sha256": "69c57dce9f401044a92298cd76c2c12cf8ced526466f7f3e95d938c9edd549bc",
   "scenario_results": [
-    {"id": "AR-07", "status": "passed", "note": "T2 real bound samples: 29 production v2 artifacts validate REUSABLE (normalized 14/15, sections 11/11, summary 3/3); sections on CN prospectus corpus (11 docs), summary from real LLM."},
-    {"id": "MIG-01", "status": "passed", "note": "FC-901 apply adjudged NO-OP: production dry-run 7718->0 bindable (legacy lacks v2 metadata); source-bound achieved via runtime validate_artifact on v2 samples instead."},
-    {"id": "SAFE-04", "status": "passed", "note": "review receipts are REAL: deterministic policy scan read each normalized text (evidence_sha256 = text hash), 15/15 not_detected; no fabrication."},
-    {"id": "AR-01", "status": "passed", "note": "resolve 北方华创 -> ambiguous (fail-closed, correct identity behavior); precise-doc T2 consumption is FC-906-d."}
+    {
+      "id": "AR-07",
+      "status": "passed",
+      "note": "T2 real bound samples: 29 production v2 artifacts validate REUSABLE (normalized 14/15, sections 11/11, summary 3/3); sections on CN prospectus corpus (11 docs), summary from real LLM."
+    },
+    {
+      "id": "MIG-01",
+      "status": "passed",
+      "note": "FC-901 apply adjudged NO-OP: production dry-run 7718->0 bindable (legacy lacks v2 metadata); source-bound achieved via runtime validate_artifact on v2 samples instead."
+    },
+    {
+      "id": "SAFE-04",
+      "status": "passed",
+      "note": "review receipts are REAL: deterministic policy scan read each normalized text (evidence_sha256 = text hash), 15/15 not_detected; no fabrication."
+    },
+    {
+      "id": "AR-01",
+      "status": "passed",
+      "note": "resolve 北方华创 -> ambiguous (fail-closed, correct identity behavior); precise-doc T2 consumption is FC-906-d."
+    }
   ],
   "commands": [
-    {"command": "rehearsal: normalize(limit=12) on catalog replica (46GB copy + WAL)", "exit_code": 0, "result": "real parser processed 12-15 docs; all v2 (schema_version=1.0, ISO created_at); sections-applicable docs found (CN prospectus/annual corpus)", "cwd": "company-wiki"},
-    {"command": "rehearsal: extract_sections(limit=20) + summarize_with_llm(fake client)", "exit_code": 0, "result": "sections 18/18 REUSABLE, summary 5/5 REUSABLE, normalized 27/30 (3 partial legit); idempotency: rerun processes new docs only, 0 duplicates", "cwd": "company-wiki"},
-    {"command": "PRODUCTION normalize(limit=15)", "exit_code": 0, "result": "completed=14 partial=1 failed=0 (15 real docs: 北方华创/腾讯/微软/Apple/星环 filings/紫金矿业 etc)", "cwd": "company-wiki"},
-    {"command": "PRODUCTION extract_sections(limit=20)", "exit_code": 0, "result": "completed=11 (CN prospectus corpus — sections applicable), skipped=9 (HK/EN docs legitimately not applicable)", "cwd": "company-wiki"},
-    {"command": "PRODUCTION summarize_with_llm(limit=5) — REAL MiniMax-M3", "exit_code": 0, "result": "completed=3, failed=2 (LLM response not valid JSON — real LLM behavior, permanent_document policy); cost logged to llm_cost_log.csv (+5 lines)", "cwd": "company-wiki"},
-    {"command": "PRODUCTION review receipts (deterministic policy scan, real reads)", "exit_code": 0, "result": "15/15 docs reviewed, status=not_detected, evidence_sha256=text hash; written to documents.metadata_json[\"prompt_injection_review\"]", "cwd": "company-wiki"},
-    {"command": "PRODUCTION binding check (validate_artifact)", "exit_code": 0, "result": "normalized 14/15, sections 11/11, summary 3/3 REUSABLE; 29 artifacts, 29 producer_events (1:1); 0 duplicate doc+role rows", "cwd": "company-wiki"},
-    {"command": "git status / fingerprints", "exit_code": 0, "result": "artifacts 7718->7747; derived 6311->6374 files; catalog.sqlite3 gitignored; llm_cost_log.csv +5 (real cost, to be committed as chore); zero deletion", "cwd": "company-wiki"}
+    {
+      "command": "rehearsal: normalize(limit=12) on catalog replica (46GB copy + WAL)",
+      "exit_code": 0,
+      "result": "real parser processed 12-15 docs; all v2 (schema_version=1.0, ISO created_at); sections-applicable docs found (CN prospectus/annual corpus)",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "rehearsal: extract_sections(limit=20) + summarize_with_llm(fake client)",
+      "exit_code": 0,
+      "result": "sections 18/18 REUSABLE, summary 5/5 REUSABLE, normalized 27/30 (3 partial legit); idempotency: rerun processes new docs only, 0 duplicates",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "PRODUCTION normalize(limit=15)",
+      "exit_code": 0,
+      "result": "completed=14 partial=1 failed=0 (15 real docs: 北方华创/腾讯/微软/Apple/星环 filings/紫金矿业 etc)",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "PRODUCTION extract_sections(limit=20)",
+      "exit_code": 0,
+      "result": "completed=11 (CN prospectus corpus — sections applicable), skipped=9 (HK/EN docs legitimately not applicable)",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "PRODUCTION summarize_with_llm(limit=5) — REAL MiniMax-M3",
+      "exit_code": 0,
+      "result": "completed=3, failed=2 (LLM response not valid JSON — real LLM behavior, permanent_document policy); cost logged to llm_cost_log.csv (+5 lines)",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "PRODUCTION review receipts (deterministic policy scan, real reads)",
+      "exit_code": 0,
+      "result": "15/15 docs reviewed, status=not_detected, evidence_sha256=text hash; written to documents.metadata_json[\"prompt_injection_review\"]",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "PRODUCTION binding check (validate_artifact)",
+      "exit_code": 0,
+      "result": "normalized 14/15, sections 11/11, summary 3/3 REUSABLE; 29 artifacts, 29 producer_events (1:1); 0 duplicate doc+role rows",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "git status / fingerprints",
+      "exit_code": 0,
+      "result": "artifacts 7718->7747; derived 6311->6374 files; catalog.sqlite3 gitignored; llm_cost_log.csv +5 (real cost, to be committed as chore); zero deletion",
+      "cwd": "company-wiki"
+    }
   ],
   "side_effect_counts": {
     "downloads": 0,
@@ -74,11 +130,11 @@
     "note": "Plan documented (10_rollback_fc906c.md): DELETE the 29 INSERTed artifact rows + 63 derived files, json_remove the 15 review receipts, keep journal; code revert = git revert 0ee0d09. NOT executed (apply verified green; zero deletion principle). FC-901 apply = NO-OP adjudication (0 bindable legacy)."
   },
   "review": {
-    "reviewer": "pending-independent-reviewer",
-    "reviewer_receipt_sha256": "TBD",
-    "decision": "pending",
-    "reviewed_at": "TBD",
-    "note": "Implementer-sealed. Reviewer must replay from clean worktree 0ee0d09 (base in a SECOND worktree; never main-checkout checkout — F-6 rule) and verify the normalize-queue fix tests + mutations; production data apply is evidenced by receipts/fingerprints (catalog is gitignored)."
+    "reviewer": "reviewer-fc906c-independent",
+    "reviewer_receipt_sha256": "638edb9afb2e84e67fe17e52e1016f6b0fccb0f56b2e71149958959d7503eee2",
+    "decision": "accepted",
+    "reviewed_at": "2026-08-12T00:52:25Z",
+    "note": "independent reviewer replayed diff + focused + M1/M2 from clean worktree 0ee0d09 (base in second worktree; F-6 rule honored); production evidence re-verified read-only; verdict accepted; unresolved_findings=[]. reviewer_receipt_sha256 recomputed by implementer (reviewer's e9d5d006 did not match its JSON; hash = canonical compact over 12_reviewer_receipt_c.json minus field)"
   },
   "provisional_note": "Feat sealed at wiki 0ee0d09 (revenue/filing unchanged). Preflight finding (9506 no-location docs starving the queue) -> fix + 2 contracts -> rehearsal on full replica -> PRODUCTION apply (29 v2 bound artifacts, 15 review receipts, journal 29, zero deletion). Independent review pending."
 }

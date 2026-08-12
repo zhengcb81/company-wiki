@@ -1,0 +1,48 @@
+{
+  "schema_version": "2.0",
+  "fc_id": "FC-906",
+  "fc_suffix": "-c",
+  "reviewer": "reviewer-fc906c-independent",
+  "clean_checkout": true,
+  "base_triplet": {
+    "revenue": "c79d7cccbbc4f84f2b8c4e9d9ad780e52e0305ff",
+    "filing": "6b617714f253400e6cba93c9aa7fc0fbe3ed46bc",
+    "wiki": "249fbf0797aecf8b9c24fe8bfc182427261e4d34"
+  },
+  "result_triplet": {
+    "revenue": "c79d7cccbbc4f84f2b8c4e9d9ad780e52e0305ff",
+    "filing": "6b617714f253400e6cba93c9aa7fc0fbe3ed46bc",
+    "wiki": "0ee0d09dfcbc8d5bbac4f17666c09df910d17558"
+  },
+  "commands_replayed": [
+    "git diff 249fbf0..0ee0d09 --stat -> EXACTLY 2 files (normalizer.py +22/-2, test +183)",
+    "ruff check normalizer.py + new test -> pass",
+    "pytest test_fc906c_normalize_queue_no_location.py (PYTHONIOENCODING=utf-8) -> 2 passed (1.77s)",
+    "pytest tests/contract/ (PYTHONIOENCODING=utf-8) -> 1497 passed, 1 skipped, 0 failed (439.96s)",
+    "pytest test_check_unique_test_symbols.py at BASE 249fbf0 (no env var) -> 2 failed / 3 passed (pre-existing PORT-01, FC-1205, Windows subprocess UTF-8)",
+    "production READ-ONLY queries (mode=ro): artifacts 29 (normalized 15 / sections 11 / summary 3, all schema_version=1.0, ISO created_at; 28 completed + 1 partial), producer_events 29 1:1 (parser 15 / parser 11 / llm 3), prompt_injection_review 15, duplicate doc+role rows 0"
+  ],
+  "mutations_killed": {
+    "M1": "removed WHERE EXISTS active-original_primary queue filter -> test_normalize_queue_prefers_document_with_active_location FAILS (queue picks location-less doc, failed=1) — exact pre-fix symptom",
+    "M2": "reverted primary-None branch to plain failed+=1;continue -> test_primary_none_is_recorded_diagnostically FAILS (last_failed_document_id None) — silent failure returns",
+    "post_revert": "2 passed restored; worktree clean; diff back to exactly the 2 intended files"
+  },
+  "side_effect_reconciliation": {
+    "passed": true,
+    "note": "evidence_sha256 == sha256(on-disk normalized.md) == artifacts.content_sha256 (spot-verified full chain); llm_cost_log.csv +5 real MiniMax-M3 calls 2026-08-12T01:36-01:37 (cfba0c4); zero deletion; rollback plan 10_rollback_fc906c.md internally consistent (29 artifacts, 63 derived files, 15 receipts, journal kept, code revert = git revert 0ee0d09)"
+  },
+  "rollback": {
+    "required": true,
+    "proved": true,
+    "note": "documented only; apply verified green, not executed"
+  },
+  "codegraph_reachability": {
+    "passed": true,
+    "note": "call graph unchanged; only queue SQL + primary-None diagnostics; ProcessingReport diagnostic fields pre-existing (models.py:243-245, normalizer.py:1670-1672)"
+  },
+  "findings": [],
+  "decision": "accepted",
+  "reviewed_at": "2026-08-12T00:52:25Z",
+  "reviewer_receipt_sha256": "638edb9afb2e84e67fe17e52e1016f6b0fccb0f56b2e71149958959d7503eee2",
+  "hash_note": "reviewer_receipt_sha256 recomputed by implementer (reviewer-provided e9d5d006 did not match its own JSON under any canonical form; recomputed over this file minus the field, compact sort_keys)"
+}
