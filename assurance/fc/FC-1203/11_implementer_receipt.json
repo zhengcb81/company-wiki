@@ -1,0 +1,176 @@
+{
+  "schema_version": "2.0",
+  "fc_id": "FC-1203",
+  "status": "independent_review",
+  "mode": "honest-implementer",
+  "base_triplet": {
+    "revenue": "5ef1079fcd7be4770c1870014242545875132dcc",
+    "filing": "b7ef9cca0747b108184f00e3e519aeb046be9d2b",
+    "wiki": "a6937f34081cdc928704d511e0b011f71b061a90"
+  },
+  "result_triplet": {
+    "revenue": "fb77fe1b982d378d7c7af2e98d79f842ee8be930",
+    "filing": "b7ef9cca0747b108184f00e3e519aeb046be9d2b",
+    "wiki": "90102c27bc917cf774e381cddb3c52022f530b32"
+  },
+  "plan_sha256": "9fbe278566555ee80f999a8b8078a0f21b699e83eff8cdcca0e07b7a512f6015",
+  "policy_sha256": "not-applicable",
+  "allowed_files": [
+    "company-wiki/src/company_wiki/source_catalog/normalized_meta.py",
+    "company-wiki/src/company_wiki/source_catalog/flags.py",
+    "company-wiki/src/company_wiki/source_catalog/entity_resolver.py",
+    "company-wiki/src/company_wiki/source_catalog/reuse_latest_policy.py",
+    "company-wiki/src/company_wiki/source_catalog/source_bundle.py",
+    "company-wiki/src/company_wiki/source_catalog/summarizer.py",
+    "company-wiki/src/company_wiki/source_catalog/architecture_gate.py",
+    "company-wiki/scripts/wu905_catalog_switch_check.py",
+    "company-wiki/tests/contract/test_fc1203_dead_helpers_absent.py",
+    "company-wiki/tests/contract/test_fc1203_extractive_summary_binding.py",
+    "company-wiki/tests/contract/test_policy_and_flags.py",
+    "company-wiki/tests/contract/test_fc1201_root_hardcode_gate.py",
+    "company-wiki/tests/contract/test_fc906b_role_producer_contract.py",
+    "company-wiki/tests/contract/test_entity_resolver.py",
+    "company-wiki/tests/contract/test_rollback_drills.py",
+    "company-wiki/tests/contract/test_latest_gap_closure.py",
+    "company-wiki/tests/contract/test_coop_scenario.py",
+    "company-wiki/assurance/fc/FC-1203/03_change_contract_fc1203.md",
+    "company-wiki/assurance/fc/FC-1203/11_implementer_receipt.json",
+    "company-wiki/assurance/fc/FC-906/03_change_contract_fc906b.md",
+    "revenue-forecast/audit_review/2026-08-09_full_completion_assurance_plan/findings.md",
+    "revenue-forecast/audit_review/2026-08-09_full_completion_assurance_plan/progress.md",
+    "revenue-forecast/audit_review/2026-08-09_full_completion_assurance_plan/work_unit_registry.md",
+    "revenue-forecast/audit_review/2026-08-09_full_completion_assurance_plan/task_plan.md",
+    "revenue-forecast/assurance/fc/FC-1203/00_wu_card.md"
+  ],
+  "changed_files": [
+    "company-wiki/src/company_wiki/source_catalog/normalized_meta.py",
+    "company-wiki/src/company_wiki/source_catalog/flags.py",
+    "company-wiki/src/company_wiki/source_catalog/entity_resolver.py",
+    "company-wiki/src/company_wiki/source_catalog/reuse_latest_policy.py",
+    "company-wiki/src/company_wiki/source_catalog/source_bundle.py",
+    "company-wiki/src/company_wiki/source_catalog/summarizer.py",
+    "company-wiki/src/company_wiki/source_catalog/architecture_gate.py",
+    "company-wiki/scripts/wu905_catalog_switch_check.py",
+    "company-wiki/tests/contract/test_fc1203_dead_helpers_absent.py",
+    "company-wiki/tests/contract/test_fc1203_extractive_summary_binding.py",
+    "company-wiki/tests/contract/test_policy_and_flags.py",
+    "company-wiki/tests/contract/test_fc1201_root_hardcode_gate.py",
+    "company-wiki/tests/contract/test_fc906b_role_producer_contract.py",
+    "company-wiki/tests/contract/test_entity_resolver.py",
+    "company-wiki/tests/contract/test_rollback_drills.py",
+    "company-wiki/tests/contract/test_latest_gap_closure.py",
+    "company-wiki/tests/contract/test_coop_scenario.py",
+    "company-wiki/assurance/fc/FC-1203/03_change_contract_fc1203.md",
+    "company-wiki/assurance/fc/FC-906/03_change_contract_fc906b.md",
+    "revenue-forecast/audit_review/2026-08-09_full_completion_assurance_plan/findings.md",
+    "revenue-forecast/audit_review/2026-08-09_full_completion_assurance_plan/progress.md",
+    "revenue-forecast/audit_review/2026-08-09_full_completion_assurance_plan/work_unit_registry.md",
+    "revenue-forecast/audit_review/2026-08-09_full_completion_assurance_plan/task_plan.md",
+    "revenue-forecast/assurance/fc/FC-1203/00_wu_card.md"
+  ],
+  "dependency_receipts": [
+    "revenue-forecast/assurance/fc/FC-1202/12_reviewer_receipt.json (accepted 2026-08-12)",
+    "company-wiki/assurance/fc/FC-906/12_reviewer_receipt.json (accepted 2026-08-12 — guard-test amendment protocol)"
+  ],
+  "command_registry_sha256": "215b8077169126b2c4a5eca9d8d6237f291757c2559f6ae6e0ae8ff1c806b089",
+  "scenario_results": [
+    {
+      "id": "AR-01",
+      "status": "passed",
+      "note": "Bindability coverage EXTENDED to the fourth generator: the extractive summarizer's artifacts now pass validate_artifact (REUSABLE) with schema_version column + metadata + ISO created_at — the same AR-01 bindability contract FC-906-a established for the other three producers. AR-01's original owner-fc coverage (FC-904 tests) untouched."
+    }
+  ],
+  "commands": [
+    {
+      "command": "python -B -m pytest tests/contract/test_fc1203_dead_helpers_absent.py tests/contract/test_fc1203_extractive_summary_binding.py -q (RED)",
+      "exit_code": 0,
+      "result": "6 failed for the right reasons: deleted modules still importable, attributes still present, wu905 file exists, extractive generator unregistered + artifacts not bindable + column NULL. Non-zero inner pytest exit is the RED evidence, not a receipt failure.",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "python -B -m pytest tests/contract/test_fc1203_dead_helpers_absent.py tests/contract/test_fc1203_extractive_summary_binding.py -q (GREEN)",
+      "exit_code": 0,
+      "result": "6 passed after deletions + registration + v2 stamps",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "python -B -m pytest tests/contract/test_policy_and_flags.py tests/contract/test_fc1201_root_hardcode_gate.py tests/contract/test_sidecar_production_scan_fc502.py tests/contract/test_dbx_fixture_e2e.py tests/contract/test_restore_flow.py tests/contract/test_admission_profile.py tests/contract/test_source_catalog_focus_admission.py tests/contract/test_fc906b_role_producer_contract.py -q (neighbor)",
+      "exit_code": 0,
+      "result": "56 passed (53 neighbor + 3 fc906b after amendment)",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "ruff check (4 src modules + 4 test files)",
+      "exit_code": 0,
+      "result": "All checks passed",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "python -m compileall -q src scripts tests",
+      "exit_code": 0,
+      "result": "compile OK",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "python -B -m pytest tests/ -q (full suite, run 1)",
+      "exit_code": 0,
+      "result": "2214 passed, 1 skipped, 3 failed (432.69s). 2 = pre-existing PORT-01 pair; 1 NEW = test_fc906b_role_producer_contract::test_catalog_producers_write_only_registered_roles (registry drift from the deliberate extractive registration). Honest record: the FC-906-b guard's own protocol ('adding a producer requires amending this test + the role contract') was applied — test amended + contract addendum, never silent.",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "python -B -m pytest tests/ -q (full suite, run 2 after amendment)",
+      "exit_code": 0,
+      "result": "2215 passed, 1 skipped, 2 failed (471.45s). 2 = pre-existing PORT-01 test_check_unique_test_symbols pair. Zero new failures.",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "mutation M-revive-1..3: re-materialize entity_resolver.py / reuse_latest_policy.py / scripts/wu905_catalog_switch_check.py from HEAD, run gate test",
+      "exit_code": 0,
+      "result": "KILL CONFIRMED each (inner pytest exited 1: gate test test_deleted_modules_are_unimportable / test_deleted_files_are_gone FAILS). Reverted by deleting the re-materialized files.",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "mutation M-revive-4..5: re-add atomic_rollback to flags.py and validate_normalized_filing to normalized_meta.py, run gate test",
+      "exit_code": 0,
+      "result": "KILL CONFIRMED (inner pytest exited 1: test_deleted_attributes_are_absent FAILS). Reverted via reverse edits; gate re-green 3 passed.",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "mutation M-unregister: remove source_catalog_extractive_summary from GENERATOR_REGISTRY, run binding test",
+      "exit_code": 0,
+      "result": "KILL CONFIRMED (inner pytest exited 1: test_extractive_summary_generator_is_registered + test_extractive_summary_artifact_is_v2_bindable FAIL — artifact_generator_unregistered). Reverted via reverse edit; 6 passed.",
+      "cwd": "company-wiki"
+    }
+  ],
+  "side_effect_counts": {
+    "downloads": 0,
+    "external_root_writes": 0,
+    "catalog_mutations": 0,
+    "llm_calls": 0,
+    "parser_calls": 0,
+    "note": "Deletions of zero-production-caller symbols + test-fixture-only catalog writes (temp catalogs in contract tests). No production catalog touched; worker restart not required (summarizer is CLI/run-invoked, not worker-invoked)."
+  },
+  "codegraph": {
+    "production_callers_before": 0,
+    "production_callers_after": 0,
+    "note": "All deleted symbols verified zero-production-callers via AST sweep + grep cross-check (CodeGraph index has known gaps: omits close_gap/artifact_backfill/canary_registry/dropbox_governance/prompt_injection/trace_parity, misreports bundle_for_resolution and SidecarFilingAdapter callers — findings 59). The summarizer gains a binding-registry entry; its production entry (SourceCatalog.summarize) pre-existed."
+  },
+  "mutation": {
+    "id": "FC-1203-M-revive-x5-M-unregister",
+    "killed": true,
+    "details": "5 revive mutations (3 files from HEAD, 2 attributes via reverse edits) each killed by the dead-helper gate; 1 unregister mutation killed by the binding test. All reverted; gate + binding suites re-verified green."
+  },
+  "rollback": {
+    "required": false,
+    "proved": true,
+    "note": "Revert = revert commits f58b52e + 90102c2 (wiki) + fb77fe1 (revenue docs). No production data or catalog writes; deletions restoreable from git history."
+  },
+  "review": {
+    "reviewer": "PENDING-INDEPENDENT-REVIEWER",
+    "reviewer_receipt_sha256": "PENDING",
+    "decision": "pending",
+    "reviewed_at": "PENDING",
+    "note": "Independent reviewer must replay from clean worktrees of 90102c2 (wiki) with base a6937f3 (F-6 rule: base reproduction in a second worktree, never git checkout in the main checkout)."
+  },
+  "provisional_note": "Interpretation A (findings 59 + revised scope): the preflight deletion list was narrowed by verification — evaluate_candidate KEPT (Phase 14 R3/R5 unwired admission policy, sealed FC-502 contract tests; evaluate_admission is focus-only and does not supersede it), restore.py KEPT (production remediation tool scripts/wu904_remediation_restore.py calls restore_asset gates, FC-403 trail), validate_flag_state KEPT (runtime_policy.py production caller). Kept items are documented in 03_change_contract_fc1203.md §2 as release-wave assets, not FC-1203 gaps. The FC-906-b guard amendment follows that contract's own protocol (amend test + contract, never silent)."
+}
