@@ -1,7 +1,7 @@
 {
   "schema_version": "2.0",
   "fc_id": "FC-1201",
-  "status": "independent_review",
+  "status": "accepted",
   "mode": "honest-implementer",
   "base_triplet": {
     "revenue": "44cd28aba2f9ef56fba392827ece30664cc58d52",
@@ -121,10 +121,10 @@
   },
   "review": {
     "reviewer": "reviewer-fc1201-independent",
-    "reviewer_receipt_sha256": "PENDING",
-    "decision": "pending",
-    "reviewed_at": "PENDING",
-    "note": "implementer receipt sealed at status=independent_review; awaiting independent reviewer replay from clean worktree."
+    "reviewer_receipt_sha256": "309f926bd02a4806603e0c2bfdb8792a0d310d69aea9128948df9806f5418f8d",
+    "decision": "accepted",
+    "reviewed_at": "2026-08-12T12:55:00Z",
+    "note": "independent reviewer replayed from clean worktree 8817521 (RED-at-base proven in a separate worktree — F-6 rule honored; M1 allowlist-growth + M2 token-trim both killed; full wiki suite 2241 passed / 0 failed). Verdict accepted; 3 non-blocking findings (F1 deferral info, F2 substring-match info, F3 test-isolation low); zero blocking unresolved_findings."
   },
   "provisional_note": "Interpretation A (user decision 2026-08-12): gate-ratchet + safe cleanup, v1 scanner deferred to R9. canonical_writer/cli refactors DEFERRED (production 1.x loader config.py:75-84 rejects canonical_write_target as unknown field) — recorded as FC-1201 follow-up. result_triplet sealed at wiki 0c6c2c9 (revenue/filing unchanged)."
 }

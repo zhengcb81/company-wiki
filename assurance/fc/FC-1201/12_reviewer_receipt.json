@@ -1,0 +1,128 @@
+{
+  "schema_version": "2.0",
+  "fc_id": "FC-1201",
+  "reviewer": "reviewer-fc1201-independent",
+  "decision": "accepted",
+  "base_triplet": {
+    "revenue": "44cd28aba2f9ef56fba392827ece30664cc58d52",
+    "filing": "592fae6108722299673981db4d329ad8906248bb",
+    "wiki": "f6eb58410e85b20aed738418cbaef6833803a4b6"
+  },
+  "reviewed_triplet": {
+    "revenue": "44cd28aba2f9ef56fba392827ece30664cc58d52",
+    "filing": "592fae6108722299673981db4d329ad8906248bb",
+    "wiki": "88175217fe66b32ead96319479727b78c764037c"
+  },
+  "reviewed_at": "2026-08-12T20:55:00+08:00",
+  "replay_note": "All replay performed in clean git worktree C:/Users/郑曾波/Projects/.fcap-review/fc-1201 at reviewed wiki HEAD (now removed). RED-at-base proof used a separate base worktree (also removed). Main company-wiki checkout git state untouched.",
+  "commands": [
+    {
+      "command": "git worktree add .fcap-review/fc-1201 88175217fe66b32ead96319479727b78c764037c",
+      "exit_code": 0,
+      "result": "Clean review worktree created at review HEAD.",
+      "cwd": "company-wiki"
+    },
+    {
+      "command": "git diff f6eb584..0c6c2c9 --stat (feat vs base)",
+      "exit_code": 0,
+      "result": "7 files: architecture_gate.py (+18/-7 lines), entity_resolver.py (2), observability.py (2), resolver.py (5), test_fc1201_root_hardcode_gate.py (+128 new), assurance/fc/FC-1201/00_wu_card.md (+60 new), 03_change_contract.md (+34 new). EXACT match to receipt changed_files. NO scanner.py / config.py / canonical_writer.py / cli.py / production yaml touched.",
+      "cwd": "fc-1201 worktree"
+    },
+    {
+      "command": "git diff 0c6c2c9..8817521 --stat (review HEAD vs feat)",
+      "exit_code": 0,
+      "result": "1 file: assurance/fc/FC-1201/11_implementer_receipt.json (+130 new). Receipt-seal only, no code change.",
+      "cwd": "fc-1201 worktree"
+    },
+    {
+      "command": "PYTHONIOENCODING=utf-8 python -B -m pytest tests/contract/test_fc1201_root_hardcode_gate.py -q",
+      "exit_code": 0,
+      "result": "5 passed in 2.72s. Tests: ratchet_frozen / comment_only_files_left_allowlist / cleaned_files_are_token_free / gate_green_after_cleanup / gate_still_detects_new_hardcode.",
+      "cwd": "fc-1201 worktree"
+    },
+    {
+      "command": "PYTHONIOENCODING=utf-8 python -B -m pytest tests/contract/test_architecture_gate.py tests/contract/test_future_root_config_only.py -q",
+      "exit_code": 0,
+      "result": "12 passed in 1.11s (architecture_gate 7 + future_root_config_only 5). EX-08 stays green after allowlist shrink.",
+      "cwd": "fc-1201 worktree"
+    },
+    {
+      "command": "RED-at-base proof: git worktree add .fcap-review/fc-1201-base f6eb584 (SEPARATE worktree), copy in test_fc1201_root_hardcode_gate.py, run pytest",
+      "exit_code": 0,
+      "result": "KILL CONFIRMED — inner pytest exited 1 (3 failed, 2 passed). test_fc1201_allowlist_ratchet_frozen FAILS (base allowlist had 19 files incl resolver/observability/entity_resolver; added=['entity_resolver.py','observability.py','resolver.py']). test_fc1201_comment_only_files_left_allowlist FAILS (3 files in base allowlist). test_fc1201_cleaned_files_are_token_free FAILS (resolver.py still contains 'company_raw' comment at L679). The 2 passing (gate-green, detection) are expected to pass at base too. Tests have teeth; base genuinely had 3 files in allowlist + token comments. Base worktree removed afterward.",
+      "cwd": "fc-1201-base worktree"
+    },
+    {
+      "command": "Mutation M1: re-add 'resolver.py' to _ROOT_HARDCODE_ALLOWED_FILES, run focused pytest",
+      "exit_code": 0,
+      "result": "KILL CONFIRMED — inner pytest exited 1 (2 failed, 3 passed). test_fc1201_allowlist_ratchet_frozen + test_fc1201_comment_only_files_left_allowlist BOTH FAIL (allowlist drift detected). Mutation reverted; worktree clean, focused suite green again.",
+      "cwd": "fc-1201 worktree"
+    },
+    {
+      "command": "Mutation M2: remove 'dayu_portfolio' from _ROOT_HARDCODE_TOKENS, run focused pytest",
+      "exit_code": 0,
+      "result": "KILL CONFIRMED — inner pytest exited 1 (1 failed, 4 passed). test_fc1201_gate_still_detects_new_hardcode FAILS (adversarial dayu_portfolio module no longer flagged). Detection not weakened by ratchet. Mutation reverted; worktree clean, focused suite green again.",
+      "cwd": "fc-1201 worktree"
+    },
+    {
+      "command": "PYTHONIOENCODING=utf-8 python -B -m pytest tests/ -q (full wiki suite)",
+      "exit_code": 0,
+      "result": "2241 passed, 1 skipped, 0 failed in 433.58s (7m13s). Zero new failures vs receipt. Pre-existing PORT-01 (test_check_unique_test_symbols) passes under utf-8. No worker_bootstrap flake observed. FCAP exit gate cleared.",
+      "cwd": "fc-1201 worktree"
+    },
+    {
+      "command": "Gate integrity probe: _ROOT_HARDCODE_ALLOWED_FILES membership + 3 cleaned files token-free + no_root_specific_hardcode() ok",
+      "exit_code": 0,
+      "result": "resolver.py/observability.py/entity_resolver.py NOT in allowlist (all False). None of the 3 contain any of 4 tokens (dropbox_stock/company_raw/dayu_portfolio/Dropbox). no_root_specific_hardcode() returns ok=True, 0 violations. Frozen backlog (8 files: canonical_writer/cli/scanner/models/portfolio_promoter/backfill_v2/admission/focus_cleanup) verified to still carry tokens — allowlist load-bearing.",
+      "cwd": "fc-1201 worktree"
+    },
+    {
+      "command": "python -B -m ruff check (4 production modules + new test)",
+      "exit_code": 0,
+      "result": "All checks passed.",
+      "cwd": "fc-1201 worktree"
+    },
+    {
+      "command": "git worktree remove .fcap-review/fc-1201 --force; git worktree remove .fcap-review/fc-1201-base --force",
+      "exit_code": 0,
+      "result": "Both review worktrees removed. Main company-wiki checkout git state untouched (still at 88175217, no checkout/reset/commit performed there).",
+      "cwd": "company-wiki"
+    }
+  ],
+  "mutation_results": [
+    {
+      "id": "FC-1201-M1",
+      "killed": true,
+      "detail": "Re-adding resolver.py to allowlist trips ratchet_frozen + comment_only_files_left_allowlist. Prevents silent allowlist growth."
+    },
+    {
+      "id": "FC-1201-M2",
+      "killed": true,
+      "detail": "Removing dayu_portfolio from token list trips gate_still_detects_new_hardcode. Confirms ratchet shrinks allowlist without weakening detection."
+    }
+  ],
+  "unresolved_findings": [
+    {
+      "id": "FC-1201-F1",
+      "severity": "info",
+      "file": "src/company_wiki/source_catalog/architecture_gate.py",
+      "issue": "canonical_writer.py and cli.py remain in the frozen allowlist (loader-blocked / inherent-identity deferral). WU card §1 and change contract §2 document this honestly as an FC-1201 follow-up / R9 prep item requiring a production 1.x loader change (config.py:75-84 rejects canonical_write_target as unknown field).",
+      "disposition": "Non-blocking. Deferral is explicit, bounded, and contractually recorded; frozen allowlist + ratchet make re-entry impossible without deliberate review. No silent drop."
+    },
+    {
+      "id": "FC-1201-F2",
+      "severity": "info",
+      "file": "src/company_wiki/source_catalog/architecture_gate.py",
+      "issue": "Gate does raw substring matching on full file text (no AST); comment-only mentions of tokens count as violations unless allowlisted. This is why comment hygiene was load-bearing for leaving the allowlist. Not a regression introduced by this FC — pre-existing FC-304 design.",
+      "disposition": "Non-blocking. FC-1201 works within the existing gate design and adds tests that pin its behavior. A v1 scanner / AST-based gate is explicitly R9 backlog."
+    },
+    {
+      "id": "FC-1201-F3",
+      "severity": "low",
+      "file": "tests/contract/test_fc1201_root_hardcode_gate.py",
+      "issue": "Test loads production code via sys.path.insert(0, .../src). Because company_wiki is also pip-installed (editable) pointing at the main checkout, a test run that does NOT insert the src path would silently test the main checkout's version instead of the worktree's. This is a repo-wide test convention, not specific to FC-1201, and the FC-1201 test file does insert correctly.",
+      "disposition": "Non-blocking. Reviewer verified the worktree's own architecture_gate.py was loaded during the focused run. Flagging for awareness — the worktree isolation relies on every test file doing the sys.path insert itself."
+    }
+  ],
+  "summary": "ACCEPTED. Diff is surgical and matches receipt exactly (4 src comment/gate edits + 1 new test + 2 assurance docs; receipt JSON added at review HEAD). Focused suite 5/5 green; architecture_gate + future_root_config_only 12/12 green. RED-at-base proven in a separate worktree (3/5 tests RED for the right reasons). Both mutations (M1 allowlist growth, M2 token trim) killed and cleanly reverted. Full wiki suite 2241 passed / 1 skipped / 0 failed, zero new failures. Gate integrity holds (3 cleaned files out of allowlist + token-free; gate ok=True). Deferred canonical_writer/cli honestly documented as loader-blocked FC-1201 follow-up, not silently dropped; frozen allowlist + ratchet make the backlog bounded and auditable. Findings F1-F3 are all non-blocking info/low."
+}
