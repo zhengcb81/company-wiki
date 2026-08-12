@@ -159,7 +159,8 @@ _ROOT_HARDCODE_TOKENS = (
 # FC_1201_FROZEN_ALLOWLIST baseline in test_fc1201_root_hardcode_gate.py
 # (= deliberate review).  Shrinking is encouraged.  Files whose only token
 # mention was a comment/docstring (resolver.py, observability.py,
-# entity_resolver.py) were cleaned and left the allowlist in FC-1201.
+# entity_resolver.py) were cleaned and left the allowlist in FC-1201;
+# entity_resolver.py was deleted outright in FC-1203 (dead module).
 _ROOT_HARDCODE_ALLOWED_FILES = frozenset({
     # new-policy modules: allowed to know the tokens
     "registry.py", "policy_2x.py", "config.py", "adapter_dispatch.py",
