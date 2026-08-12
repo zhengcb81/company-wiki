@@ -1,0 +1,84 @@
+{
+  "schema_version": "2.0",
+  "fc_id": "FC-906",
+  "fc_suffix": "-c",
+  "status": "independent_review",
+  "mode": "honest-implementer",
+  "summary": "Production artifact canary (FC-906-c, sub-chain 3/4): real v2 bound samples + review receipts + normalize queue fix. Preflight found 9506/23521 docs lack active locations and starved the queue (fixed in 0ee0d09 with 2 contracts). Rehearsal on a full catalog replica proved the producer chain, then PRODUCTION apply (authorized 2026-08-12): normalize 15 docs, extract_sections 11, real-LLM summary 3 (MiniMax-M3, 5 calls, 2 doc-level failures = real LLM behavior) -> 29 v2 artifacts ALL validate_artifact REUSABLE (14/15 + 11/11 + 3/3; 1 partial), 29 producer_events journal (1:1), 15 deterministic-policy prompt-injection review receipts (real content scan, evidence_sha256). FC-901 apply adjudged NO-OP (dry-run: 0 bindable legacy). Zero deletion; rollback plan recorded.",
+  "base_triplet": {
+    "revenue": "c79d7cccbbc4f84f2b8c4e9d9ad780e52e0305ff",
+    "filing": "6b617714f253400e6cba93c9aa7fc0fbe3ed46bc",
+    "wiki": "249fbf0797aecf8b9c24fe8bfc182427261e4d34"
+  },
+  "result_triplet": {
+    "revenue": "c79d7cccbbc4f84f2b8c4e9d9ad780e52e0305ff",
+    "filing": "6b617714f253400e6cba93c9aa7fc0fbe3ed46bc",
+    "wiki": "0ee0d09dfcbc8d5bbac4f17666c09df910d17558"
+  },
+  "plan_sha256": "eda591f4698314fd7b39b765acfde23d06481f1004c16bcf480b6eee6660b2a7",
+  "policy_sha256": "not-applicable",
+  "allowed_files": [
+    "company-wiki/src/company_wiki/source_catalog/normalizer.py",
+    "company-wiki/tests/contract/test_fc906c_normalize_queue_no_location.py",
+    "company-wiki/assurance/fc/FC-906/10_rollback_fc906c.md",
+    "company-wiki/assurance/fc/FC-906/11_implementer_receipt_c.json",
+    "company-wiki/assurance/fc/FC-906/12_reviewer_receipt_c.json"
+  ],
+  "changed_files": [
+    "company-wiki/src/company_wiki/source_catalog/normalizer.py",
+    "company-wiki/tests/contract/test_fc906c_normalize_queue_no_location.py"
+  ],
+  "dependency_receipts": [
+    "company-wiki/assurance/fc/FC-906/11_implementer_receipt.json + 12 (FC-906-a accepted) — v2 producer binding metadata",
+    "company-wiki/assurance/fc/FC-906/11_implementer_receipt_b.json + 12 (FC-906-b accepted) — role applicability contract",
+    "company-wiki/assurance/fc/FC-901/ + FC-905/ receipts — dry-run tool + journal/review mechanism"
+  ],
+  "command_registry_sha256": "69c57dce9f401044a92298cd76c2c12cf8ced526466f7f3e95d938c9edd549bc",
+  "scenario_results": [
+    {"id": "AR-07", "status": "passed", "note": "T2 real bound samples: 29 production v2 artifacts validate REUSABLE (normalized 14/15, sections 11/11, summary 3/3); sections on CN prospectus corpus (11 docs), summary from real LLM."},
+    {"id": "MIG-01", "status": "passed", "note": "FC-901 apply adjudged NO-OP: production dry-run 7718->0 bindable (legacy lacks v2 metadata); source-bound achieved via runtime validate_artifact on v2 samples instead."},
+    {"id": "SAFE-04", "status": "passed", "note": "review receipts are REAL: deterministic policy scan read each normalized text (evidence_sha256 = text hash), 15/15 not_detected; no fabrication."},
+    {"id": "AR-01", "status": "passed", "note": "resolve 北方华创 -> ambiguous (fail-closed, correct identity behavior); precise-doc T2 consumption is FC-906-d."}
+  ],
+  "commands": [
+    {"command": "rehearsal: normalize(limit=12) on catalog replica (46GB copy + WAL)", "exit_code": 0, "result": "real parser processed 12-15 docs; all v2 (schema_version=1.0, ISO created_at); sections-applicable docs found (CN prospectus/annual corpus)", "cwd": "company-wiki"},
+    {"command": "rehearsal: extract_sections(limit=20) + summarize_with_llm(fake client)", "exit_code": 0, "result": "sections 18/18 REUSABLE, summary 5/5 REUSABLE, normalized 27/30 (3 partial legit); idempotency: rerun processes new docs only, 0 duplicates", "cwd": "company-wiki"},
+    {"command": "PRODUCTION normalize(limit=15)", "exit_code": 0, "result": "completed=14 partial=1 failed=0 (15 real docs: 北方华创/腾讯/微软/Apple/星环 filings/紫金矿业 etc)", "cwd": "company-wiki"},
+    {"command": "PRODUCTION extract_sections(limit=20)", "exit_code": 0, "result": "completed=11 (CN prospectus corpus — sections applicable), skipped=9 (HK/EN docs legitimately not applicable)", "cwd": "company-wiki"},
+    {"command": "PRODUCTION summarize_with_llm(limit=5) — REAL MiniMax-M3", "exit_code": 0, "result": "completed=3, failed=2 (LLM response not valid JSON — real LLM behavior, permanent_document policy); cost logged to llm_cost_log.csv (+5 lines)", "cwd": "company-wiki"},
+    {"command": "PRODUCTION review receipts (deterministic policy scan, real reads)", "exit_code": 0, "result": "15/15 docs reviewed, status=not_detected, evidence_sha256=text hash; written to documents.metadata_json[\"prompt_injection_review\"]", "cwd": "company-wiki"},
+    {"command": "PRODUCTION binding check (validate_artifact)", "exit_code": 0, "result": "normalized 14/15, sections 11/11, summary 3/3 REUSABLE; 29 artifacts, 29 producer_events (1:1); 0 duplicate doc+role rows", "cwd": "company-wiki"},
+    {"command": "git status / fingerprints", "exit_code": 0, "result": "artifacts 7718->7747; derived 6311->6374 files; catalog.sqlite3 gitignored; llm_cost_log.csv +5 (real cost, to be committed as chore); zero deletion", "cwd": "company-wiki"}
+  ],
+  "side_effect_counts": {
+    "downloads": 0,
+    "external_root_writes": 0,
+    "catalog_mutations": "authorized-apply",
+    "llm_calls": 5,
+    "parser_calls": 15,
+    "note": "Production apply explicitly authorized (2026-08-12). LLM: 5 real MiniMax-M3 calls (3 succeeded, 2 doc-level failures) logged to llm_cost_log.csv. Parser: 15 real PDF/HTML parses. No downloads, no external-root writes, zero deletion. Ambient worker restarted (old pid loaded pre-fix code) — now runs fixed code."
+  },
+  "codegraph": {
+    "production_callers_before": "unchanged",
+    "production_callers_after": "unchanged",
+    "note": "Normalize queue SQL + primary-None diagnostics changed (0ee0d09); call graph unchanged."
+  },
+  "mutation": {
+    "id": "FC-906-c-M1-M2",
+    "killed": true,
+    "details": "M1: removed the queue EXISTS exclusion -> test_normalize_queue_prefers_document_with_active_location FAILS (queue picks location-less doc). M2: removed the primary-None diagnostic -> test_primary_none_is_recorded_diagnostically FAILS (last_failed_document_id None). Both reverted; 2 passed restored. Contract suite 1497 passed / 1 skipped / 0 failed (PYTHONIOENCODING=utf-8; absent the env var the 2 pre-existing PORT-01 failures reproduce — zero new either way)."
+  },
+  "rollback": {
+    "required": true,
+    "proved": true,
+    "note": "Plan documented (10_rollback_fc906c.md): DELETE the 29 INSERTed artifact rows + 63 derived files, json_remove the 15 review receipts, keep journal; code revert = git revert 0ee0d09. NOT executed (apply verified green; zero deletion principle). FC-901 apply = NO-OP adjudication (0 bindable legacy)."
+  },
+  "review": {
+    "reviewer": "pending-independent-reviewer",
+    "reviewer_receipt_sha256": "TBD",
+    "decision": "pending",
+    "reviewed_at": "TBD",
+    "note": "Implementer-sealed. Reviewer must replay from clean worktree 0ee0d09 (base in a SECOND worktree; never main-checkout checkout — F-6 rule) and verify the normalize-queue fix tests + mutations; production data apply is evidenced by receipts/fingerprints (catalog is gitignored)."
+  },
+  "provisional_note": "Feat sealed at wiki 0ee0d09 (revenue/filing unchanged). Preflight finding (9506 no-location docs starving the queue) -> fix + 2 contracts -> rehearsal on full replica -> PRODUCTION apply (29 v2 bound artifacts, 15 review receipts, journal 29, zero deletion). Independent review pending."
+}
