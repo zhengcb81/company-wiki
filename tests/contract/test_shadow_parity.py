@@ -1,5 +1,7 @@
-"""WU-603 RED/audit tests: v1/v2 shadow parity diff gate."""
+"""WU-603 RED/audit tests: v1/v2 shadow parity diff gate.
+
 SCENARIO: IDX-01 IDX-02 IDX-03 IDX-04 IDX-05 IDX-06 IDX-07 IDX-08
+"""
 import sys
 from pathlib import Path
 
