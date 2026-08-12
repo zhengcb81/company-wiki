@@ -31,6 +31,9 @@ jobs:
       - name: Ruff lint (WU-1.2)
         run: ruff check src tests/unit tests/contract scripts
 
+      - name: Strict type check on contract modules (FC-1204-c)
+        run: python -m mypy src/company_wiki/source_catalog/artifact_handle.py src/company_wiki/source_catalog/source_bundle.py src/company_wiki/source_catalog/runtime_policy.py src/company_wiki/source_catalog/activation.py src/company_wiki/source_catalog/close_gap.py src/company_wiki/source_catalog/policy_2x.py src/company_wiki/source_catalog/canary_registry.py src/company_wiki/source_catalog/normalized_meta.py src/company_wiki/source_catalog/flags.py src/company_wiki/source_catalog/policy.py src/company_wiki/source_catalog/restore.py
+
       - name: Compileall + config doctor (WU-7.1)
         run: |
           python -m compileall -q src scripts tests
@@ -42,6 +45,10 @@ jobs:
       - name: Contract tests
         run: python -m pytest tests/contract -q --tb=short
 
+      - name: Branch coverage ratchet (FC-1204-a, fresh measurement)
+        run: |
+          python -m pytest tests/ -q --tb=short --cov=src/company_wiki/source_catalog --cov-branch --cov-report=json || true
+          FC1204_COVERAGE_GATE=1 python -m pytest tests/contract/test_fc1204_coverage_ratchet.py -q
       - name: Unique test symbols gate (WU-1.1)
         run: python tools/check_unique_test_symbols.py
 
