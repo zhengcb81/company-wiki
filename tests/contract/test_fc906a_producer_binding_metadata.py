@@ -215,3 +215,41 @@ def test_llm_summary_artifact_is_v2_bindable(tmp_path: Path):
     handle, meta = _binding_handle(catalog, "summary", tmp_path)
     assert meta.get("schema_version") == ARTIFACT_HANDLE_SCHEMA_VERSION
     assert handle.reusable is True, f"llm summary artifact not bindable: {handle.reason}"
+
+
+def test_producer_writes_schema_version_COLUMN(tmp_path: Path):
+    """FC-906-d RED: producers must also write the artifacts.schema_version
+    COLUMN (not just metadata_json).
+
+    FC-906-a wrote schema_version into artifact metadata_json, but the
+    FC-902 production bundle consumer (query_source_bundle) reads the COLUMN —
+    which stayed NULL on every row.  With the column NULL, every bundle
+    reports artifact_schema_unsupported and valid_handles is empty even for
+    REUSABLE artifacts: the real consumption chain (revenue source_preparation)
+    could never read a bound artifact.  This contract pins the column write.
+    """
+    catalog = _external_catalog(tmp_path)
+    row = catalog.store.fetchone(
+        "SELECT schema_version, source_sha256 FROM artifacts "
+        "WHERE artifact_role='normalized' LIMIT 1"
+    )
+    assert row is not None, "no normalized artifact produced"
+    assert row["schema_version"] == ARTIFACT_HANDLE_SCHEMA_VERSION, (
+        "artifacts.schema_version column must be stamped by the producer "
+        f"(got {row['schema_version']!r}) — the bundle consumer reads this column"
+    )
+    # And the FC-902 bundle path (query_source_bundle — what the resolve
+    # envelope rides on) must yield a valid handle for the produced artifact.
+    doc_id = catalog.store.fetchone("SELECT document_id FROM documents")["document_id"]
+    bundle = catalog.query_source_bundle(
+        document_id=doc_id,
+        registry=GENERATOR_REGISTRY,
+        allowed_roots=(tmp_path,),
+        now=_NOW,
+    )
+    assert bundle is not None
+    handles = (bundle.get("valid_handles") or {})
+    assert handles, (
+        f"bundle must carry at least one valid handle for a produced artifact, "
+        f"got invalid={sorted((bundle.get('invalid') or {}).keys())}"
+    )

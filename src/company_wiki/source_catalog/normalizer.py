@@ -1619,11 +1619,14 @@ def normalize_catalog(
                 )
             connection.execute(
                 """INSERT INTO artifacts(artifact_id,document_id,source_id,artifact_role,path,content_sha256,
-                byte_size,mime_type,generator_name,generator_version,status,error,metadata_json,created_at)
-                VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,strftime('%Y-%m-%dT%H:%M:%SZ','now'))
+                byte_size,mime_type,generator_name,generator_version,status,error,
+                schema_version,source_sha256,metadata_json,created_at)
+                VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,strftime('%Y-%m-%dT%H:%M:%SZ','now'))
                 ON CONFLICT(document_id,artifact_role,generator_name,generator_version) DO UPDATE SET
                 path=excluded.path,content_sha256=excluded.content_sha256,byte_size=excluded.byte_size,
-                status=excluded.status,error=excluded.error,metadata_json=excluded.metadata_json,created_at=excluded.created_at""",
+                status=excluded.status,error=excluded.error,
+                schema_version=excluded.schema_version,source_sha256=excluded.source_sha256,
+                metadata_json=excluded.metadata_json,created_at=excluded.created_at""",
                 (
                     artifact_id,
                     document["document_id"],
@@ -1637,6 +1640,8 @@ def normalize_catalog(
                     NORMALIZER_VERSION,
                     normalized.status,
                     normalized.error,
+                    ARTIFACT_HANDLE_SCHEMA_VERSION,
+                    str(document["content_sha256"] or ""),
                     canonical_json(
                         {
                             "schema_version": ARTIFACT_HANDLE_SCHEMA_VERSION,
