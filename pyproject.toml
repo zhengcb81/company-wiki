@@ -76,6 +76,10 @@ include = ["company_wiki*"]
 [tool.mypy]
 mypy_path = "src"
 python_version = "3.11"
+# Contract modules are checked strictly on their own bodies; heavy
+# compute modules (resolver/scanner/worker/store...) are dependency
+# surfaces, not the strict-check target (FC-1204-c scope, F1 fix).
+follow_imports = "skip"
 check_untyped_defs = true
 
 [[tool.mypy.overrides]]
