@@ -587,6 +587,8 @@ def _load_issuer_index(
     token shared by two different issuers maps to ``_AMBIGUOUS_ISSUER`` and
     never anchors (fail-closed).
     """
+    from .security_identity import _normalize_text
+
     token_to_issuer: dict[str, str] = {}
     issuer_tokens: dict[str, set[str]] = {}
     root = Path(catalog_dir) / "security_master"
@@ -602,16 +604,16 @@ def _load_issuer_index(
             canonical = str(record.get("canonical_name") or "").strip()
             if not canonical:
                 continue
-            issuer = canonical.casefold()
+            issuer = _normalize_text(canonical)  # Phase 14 R8: same normalization as the entity gate
             tokens = {issuer}
             for alias in record.get("aliases") or []:
                 alias_text = str(alias).strip()
                 if alias_text:
-                    tokens.add(alias_text.casefold())
+                    tokens.add(_normalize_text(alias_text))
             for key in ("ticker", "security_id", "canonical_name"):
                 value = str(record.get(key) or "").strip()
                 if value:
-                    tokens.add(value.casefold())
+                    tokens.add(_normalize_text(value))
             issuer_tokens.setdefault(issuer, set()).update(tokens)
             for token in tokens:
                 existing = token_to_issuer.get(token)
