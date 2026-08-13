@@ -30,8 +30,8 @@
   "scenario_results": [
     {
       "id": "FC-504-existing-samples",
-      "status": "blocked",
-      "note": "FC-503 real-root replay proved eligible=0 (no strong-provenance filing exists in the real root); canary_decision(FC-503 report) = needs_user_samples. Per plan: stop at blocked and request a user-provided canary file/sidecar."
+      "status": "passed",
+      "note": "FC-503 real-root replay proved eligible=0 (no strong-provenance filing exists in the real root); canary_decision(FC-503 report) = needs_user_samples. Per plan: stop at blocked and request a user-provided canary file/sidecar. RESOLVED at r2: the user provided 4 real canary files (紫金矿业 FY2024/2025 + 星环科技 FY2024/2025); reviewer-fc504-r2 accepted with the samples registered — the r1 blocked note is historical."
     },
     {
       "id": "FC-504-registry",
