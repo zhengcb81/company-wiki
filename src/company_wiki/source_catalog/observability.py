@@ -18,7 +18,7 @@ import threading
 from dataclasses import dataclass, field
 from typing import Any
 
-REASON_TAXONOMY_VERSION = "1.0"
+REASON_TAXONOMY_VERSION = "1.1"
 
 # Canonical reason taxonomy (additive; codes are never removed, only
 # deprecated) — kept in sync with admission/reuse/resolver/artifact codes.
@@ -56,6 +56,64 @@ REASONS: dict[str, str] = {
     "shadow_diff": "v2 shadow read differed from legacy bridge",
     "migration_remaining": "sources still pending migration",
     "verified_v2_assertion": "verified v2 assertion read (legacy-visible)",
+    # FC-1301 additions (1.1) — every emitted reason literal must be
+    # registered; the audit gate below fails closed on unregistered codes.
+    # adapters / acquisition
+    "adapter_discovery_returned_multiple_candidates": "adapter saw >1 candidate",
+    "adapter_discovery_returned_no_candidate": "adapter saw no candidates",
+    "adapter_or_staging_failed": "adapter fetch or staging failed",
+    "existing_catalog_source_reused_before_adapter": "catalog hit before adapter",
+    "existing_catalog_source_reused_after_discovery": "catalog hit after discovery",
+    "missing_source_downloaded_to_staging_pending_canonical_import": "staged download awaiting canonical import",
+    "canonical_copy": "canonical writer copied bytes",
+    "canonical_import_failed": "canonical import failed",
+    "identity_conflict_no_download": "identity conflict suppresses download",
+    "explicit_security_id_conflicts_with_verified_identity": "explicit id conflicts with verified identity",
+    "download_required_but_not_allowed": "gap exists but download is not allowed",
+    "only_sources_published_after_as_of_date": "all candidates publish after as-of",
+    "no_existing_source_satisfies_request": "no catalog source satisfies the request",
+    "reused_after_discovery": "catalog hit after provider discovery",
+    # artifact binding gate
+    "artifact_schema_unsupported": "artifact schema version unknown",
+    "artifact_status_not_completed": "artifact status is not completed",
+    "artifact_source_binding_mismatch": "artifact source does not match lineage",
+    "artifact_hash_malformed": "artifact hash is not lowercase hex",
+    "artifact_hash_mismatch": "artifact hash differs from bytes",
+    "artifact_file_missing": "artifact file is missing on disk",
+    "artifact_generator_unregistered": "generator not in GENERATOR_REGISTRY",
+    "artifact_created_at_malformed": "created_at is not ISO-8601 Z",
+    "artifact_created_at_future": "created_at is in the future",
+    "artifact_path_outside_allowed_root": "artifact path outside allowed roots",
+    "artifact_role_unknown": "artifact role not in KNOWN_ARTIFACT_ROLES",
+    "artifact_source_sha_mismatch": "artifact source sha differs from source",
+    "artifact_source_as_of_future": "artifact source as-of is in the future",
+    "artifact_superseded_by_newer": "a newer artifact exists for the role",
+    # worker / control plane
+    "unhandled_exception": "worker cycle hit an unhandled exception",
+    "cycle_failed": "worker cycle failed",
+    "productive_cycle": "worker cycle made progress",
+    "already_running": "operation already running",
+    "control_request": "control-plane request processed",
+    "persistent_pause": "worker paused persistently",
+    "semantic_review_only": "semantic review path only",
+    "clean_exit": "process exited cleanly",
+    "no_output": "no output produced",
+    # latest / gap
+    "gap_already_closed": "gap closed by an earlier transaction",
+    "gap_closed_by_concurrent": "gap closed by a concurrent transaction",
+    # documents / scanning
+    "document_not_in_catalog": "document missing from catalog",
+    "source_not_in_catalog": "source missing from catalog",
+    "no_original_location": "document has no original_primary location",
+    "empty_text": "source text is empty",
+    "unsupported_document": "document kind unsupported",
+    "cannot_parse_yaml": "yaml payload cannot be parsed",
+    "unexpected_path_pattern": "path pattern outside expectations",
+    "focus_policy_orphan_sidecar": "sidecar without its primary file",
+    # llm pipeline
+    "llm_deferred": "llm summary deferred",
+    "llm_global_failure": "llm pipeline failed globally",
+    "fiscal_year": "fiscal-year filter applied",
 }
 
 _PATH_PATTERN = re.compile(r"[A-Za-z]:[\\/][^;,\s]+|[\\/][^;,\s]*[\\/][^;,\s]+")
