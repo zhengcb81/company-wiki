@@ -47,6 +47,18 @@ def duplicates_in_file(path: Path) -> list[tuple[str, int, int]]:
 
 
 def main() -> int:
+    # FC-1205 (PORT-01): Windows pipes decode with the locale codepage (GBK
+    # on Chinese systems) while the parent reads UTF-8 — paths containing
+    # non-ASCII user names mojibake/crash the reader.  Force UTF-8 on the
+    # child side (the fetch_filing.py pattern); the contract tests stay UTF-8.
+    # FC-1205 (PORT-01): Windows pipes decode with the locale codepage (GBK
+    # on Chinese systems) while the parent reads UTF-8 — paths containing
+    # non-ASCII user names mojibake/crash the reader.  Force UTF-8 on the
+    # child side (the fetch_filing.py pattern); the contract tests stay UTF-8.
+    for stream in (sys.stdout, sys.stderr):
+        if hasattr(stream, "reconfigure"):
+            stream.reconfigure(encoding="utf-8", errors="strict")
+
     parser = argparse.ArgumentParser(description="Forbid duplicate test_* definitions")
     parser.add_argument(
         "paths",
