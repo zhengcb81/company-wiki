@@ -999,19 +999,28 @@ class SourceResolver:
         return _load_issuer_index(str(catalog_dir))
 
     def _entity_matches(self, entity: str, document: dict[str, Any]) -> bool:
-        wanted = entity.casefold()
+        # Phase 14 R8 fix: the entity gate must use the SAME canonical
+        # normalization as the identity layer (NFKC + casefold + alnum-only —
+        # security_identity._normalize_text).  Plain casefold left "Apple Inc."
+        # (SEC canonical, trailing period) failing against "Apple Inc", which
+        # would drop every period-terminated US issuer under bridge-off.
+        # This is normalization, not soft-matching (FC-702 semantics intact:
+        # company-name-vs-ticker still conflicts).
+        from .security_identity import _normalize_text
+
+        wanted = _normalize_text(entity)
         doc_values = {
-            str(item.get("entity_id") or "").casefold()
+            _normalize_text(str(item.get("entity_id") or ""))
             for item in document["entities"]
         } | {
-            str(item.get("name") or "").casefold()
+            _normalize_text(str(item.get("name") or ""))
             for item in document["entities"]
         }
         metadata = _source_metadata(
             document, legacy_bridge_allowed=self.legacy_bridge_allowed
         )
         doc_values.update(
-            str(value).casefold()
+            _normalize_text(str(value))
             for value in (
                 metadata.get("ticker"),
                 metadata.get("security_id"),
