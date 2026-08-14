@@ -632,15 +632,17 @@ def _parser() -> argparse.ArgumentParser:
     act_preview = activation_sub.add_parser(
         "preview", help="read-only: which assertions would flip"
     )
-    act_preview.add_argument("--assertion-ids", required=True,
-                             help="comma-separated assertion ids")
+    act_preview.add_argument(
+        "--assertion-ids", required=True, help="comma-separated assertion ids"
+    )
     act_apply = activation_sub.add_parser(
         "apply", help="flip a batch to active inside one catalog transaction"
     )
     act_apply.add_argument("--epoch", required=True)
     act_apply.add_argument("--cohort", required=True)
-    act_apply.add_argument("--assertion-ids", required=True,
-                           help="comma-separated assertion ids")
+    act_apply.add_argument(
+        "--assertion-ids", required=True, help="comma-separated assertion ids"
+    )
     act_apply.add_argument("--policy-hash", required=True)
     act_apply.add_argument("--reviewer", required=True)
     act_apply.add_argument("--reason", required=True)
@@ -1010,21 +1012,23 @@ def main(argv: Sequence[str] | None = None) -> int:
             # never appended, by the resolve command).
             # FC-902: the snapshot-consistent SourceBundle rides too when a
             # document was reused (SELECT-only; fail-closed on hash drift).
-            source_resolution["resolution_envelope"] = (
-                build_resolution_envelope(
-                    resolution,
-                    policy_snapshot=policy,
-                    journal=AcquisitionJournal(config.catalog_dir),
-                    bundle=get_catalog().bundle_for_resolution(resolution),
-                    store=get_catalog().store,
-                ).to_dict()
-            )
+            source_resolution["resolution_envelope"] = build_resolution_envelope(
+                resolution,
+                policy_snapshot=policy,
+                journal=AcquisitionJournal(config.catalog_dir),
+                bundle=get_catalog().bundle_for_resolution(resolution),
+                store=get_catalog().reader,
+            ).to_dict()
             result = (
                 {"identity": identity.to_dict(), "source_resolution": source_resolution}
                 if identity
                 else source_resolution
             )
         elif args.command == "ensure":
+            # ZR-203: acquisition commands are WRITE entrypoints — the
+            # writer initializer may create the catalog so the read-only
+            # resolver (reader) can then read an existing database.
+            _ = get_catalog().store
             request, identity = source_request(allow_download=args.allow_download)
             desired_state = worker_controller().status()["desired_state"]
             if (
@@ -1071,7 +1075,8 @@ def main(argv: Sequence[str] | None = None) -> int:
 
             try:
                 ensure_policy = load_runtime_policy(
-                    config.catalog_dir / "runtime_policy.json")
+                    config.catalog_dir / "runtime_policy.json"
+                )
             except RuntimePolicyError:
                 ensure_policy = None
             ensure_dict = _plain(ensured)
@@ -1081,16 +1086,13 @@ def main(argv: Sequence[str] | None = None) -> int:
             # the ensure re-used a document.
             resolution_dict = ensure_dict.get("resolution")
             if isinstance(resolution_dict, dict):
-                resolution_dict["resolution_envelope"] = (
-                    build_resolution_envelope(
-                        ensured.resolution,
-                        policy_snapshot=ensure_policy,
-                        journal=AcquisitionJournal(config.catalog_dir),
-                        bundle=get_catalog().bundle_for_resolution(
-                            ensured.resolution),
-                        store=get_catalog().store,
-                    ).to_dict()
-                )
+                resolution_dict["resolution_envelope"] = build_resolution_envelope(
+                    ensured.resolution,
+                    policy_snapshot=ensure_policy,
+                    journal=AcquisitionJournal(config.catalog_dir),
+                    bundle=get_catalog().bundle_for_resolution(ensured.resolution),
+                    store=get_catalog().store,
+                ).to_dict()
             result = (
                 {"identity": identity.to_dict(), "source_ensure": ensure_dict}
                 if identity
@@ -1100,18 +1102,17 @@ def main(argv: Sequence[str] | None = None) -> int:
             from .acquisition_journal import AcquisitionJournal
             from .close_gap import CloseGapBinding, CloseGapTransaction
 
+            # ZR-203: write entrypoint — writer initializer may create the
+            # catalog before the read-only resolver reads it.
+            _ = get_catalog().store
             desired_state = worker_controller().status()["desired_state"]
-            if (
-                desired_state == "paused"
-                and not args.allow_acquisition_while_paused
-            ):
+            if desired_state == "paused" and not args.allow_acquisition_while_paused:
                 raise RuntimeError(
                     "source acquisition is paused; run worker-resume before "
                     "allowing close-gap downloads"
                 )
             request, identity = source_request()
-            binding_payload = json.loads(
-                args.binding_file.read_text(encoding="utf-8"))
+            binding_payload = json.loads(args.binding_file.read_text(encoding="utf-8"))
             binding = CloseGapBinding(
                 request_id=str(binding_payload["request_id"]),
                 gap_plan_hash=str(binding_payload["gap_plan_hash"]),
@@ -1162,7 +1163,8 @@ def main(argv: Sequence[str] | None = None) -> int:
                 result = preview_activation(
                     store,
                     assertion_ids=tuple(
-                        item.strip() for item in args.assertion_ids.split(",")
+                        item.strip()
+                        for item in args.assertion_ids.split(",")
                         if item.strip()
                     ),
                 )
@@ -1175,7 +1177,8 @@ def main(argv: Sequence[str] | None = None) -> int:
                     epoch=args.epoch,
                     cohort=args.cohort,
                     assertion_ids=tuple(
-                        item.strip() for item in args.assertion_ids.split(",")
+                        item.strip()
+                        for item in args.assertion_ids.split(",")
                         if item.strip()
                     ),
                     policy_hash=args.policy_hash,

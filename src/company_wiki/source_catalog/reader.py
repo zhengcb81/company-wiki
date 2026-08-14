@@ -164,7 +164,13 @@ class ReadOnlyCatalogReader:
             )
         uri = f"file:{database_path.resolve().as_posix()}?mode=ro"
         try:
-            self._connection = sqlite3.connect(uri, uri=True, timeout=5.0)
+            # check_same_thread=False is safe here: mode=ro + query_only mean
+            # there is no transaction state to corrupt, and SQLite serializes
+            # the underlying reads itself.  Long-lived reader instances are
+            # shared across worker threads.
+            self._connection = sqlite3.connect(
+                uri, uri=True, timeout=5.0, check_same_thread=False
+            )
         except sqlite3.Error as exc:
             raise CatalogReaderUnavailable(
                 f"cannot open catalog read-only: {database_path}: {exc}"

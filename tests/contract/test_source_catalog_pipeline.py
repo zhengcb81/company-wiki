@@ -75,7 +75,9 @@ def _config(module, *, project: Path, company: Path, dropbox: Path, portfolio: P
     )
 
 
-def test_scan_deduplicates_content_but_preserves_every_location_and_dayu_bundle(tmp_path):
+def test_scan_deduplicates_content_but_preserves_every_location_and_dayu_bundle(
+    tmp_path,
+):
     module = _catalog_module()
     project = tmp_path / "project"
     company = project / "companies"
@@ -83,7 +85,9 @@ def test_scan_deduplicates_content_but_preserves_every_location_and_dayu_bundle(
     portfolio = tmp_path / "dayu" / "portfolio"
     company_file = company / "Acme" / "raw" / "reports" / "2025 annual.txt"
     company_file.parent.mkdir(parents=True)
-    company_file.write_text("ACME annual source text. Revenue was 100.", encoding="utf-8")
+    company_file.write_text(
+        "ACME annual source text. Revenue was 100.", encoding="utf-8"
+    )
     dropbox.mkdir(parents=True)
     (dropbox / "Acme duplicate.txt").write_bytes(company_file.read_bytes())
     (dropbox / "tool.py").write_text("raise SystemExit", encoding="utf-8")
@@ -134,7 +138,12 @@ def test_repeated_empty_source_is_a_known_quarantine_and_recovers(tmp_path):
     company.mkdir(parents=True)
     dropbox.mkdir(parents=True)
     portfolio.mkdir(parents=True)
-    source = dropbox / "医疗器械选股20250622" / "data" / "Product_Revenue_Forecast_Model.xlsx"
+    source = (
+        dropbox
+        / "医疗器械选股20250622"
+        / "data"
+        / "Product_Revenue_Forecast_Model.xlsx"
+    )
     source.parent.mkdir(parents=True)
     source.write_bytes(b"")
     catalog = module.SourceCatalog(
@@ -212,7 +221,9 @@ def test_exact_duplicate_index_marks_canonical_and_extra_original_locations(tmp_
     company = project / "companies"
     dropbox = tmp_path / "Dropbox" / "Stock"
     portfolio = tmp_path / "dayu" / "portfolio"
-    company_file = company / "Acme" / "raw" / "financial_reports" / "annual" / "2025 annual.txt"
+    company_file = (
+        company / "Acme" / "raw" / "financial_reports" / "annual" / "2025 annual.txt"
+    )
     company_file.parent.mkdir(parents=True)
     company_file.write_text("ACME FY2025 audited annual report.", encoding="utf-8")
     dropbox.mkdir(parents=True)
@@ -243,7 +254,11 @@ def test_exact_duplicate_index_marks_canonical_and_extra_original_locations(tmp_
         item for item in document["locations"] if item["role"] == "original_primary"
     ]
     canonical = [item for item in original_locations if item["is_canonical"]]
-    copies = [item for item in original_locations if item["duplicate_relation"] == "exact_copy"]
+    copies = [
+        item
+        for item in original_locations
+        if item["duplicate_relation"] == "exact_copy"
+    ]
     assert len(canonical) == 1
     assert canonical[0]["root_id"] == "company_raw"
     assert canonical[0]["canonical_location_id"] == canonical[0]["location_id"]
@@ -293,7 +308,9 @@ def test_exact_duplicate_index_marks_canonical_and_extra_original_locations(tmp_
     assert {row["duplicate_relation"] for row in location_rows} == {"", "exact_copy"}
     with exported["duplicates_csv"].open(encoding="utf-8-sig", newline="") as stream:
         assert len(list(csv.DictReader(stream))) == 1
-    assert "Exact duplicate groups: 1" in exported["index_md"].read_text(encoding="utf-8")
+    assert "Exact duplicate groups: 1" in exported["index_md"].read_text(
+        encoding="utf-8"
+    )
     assert (_snapshot(company), _snapshot(dropbox), _snapshot(portfolio)) == before
 
 
@@ -325,7 +342,9 @@ def test_shared_sidecar_blob_is_not_an_exact_document_duplicate(tmp_path):
     assert catalog.duplicate_groups() == []
 
 
-def test_scan_is_idempotent_and_tombstones_missing_locations_without_deleting_sources(tmp_path):
+def test_scan_is_idempotent_and_tombstones_missing_locations_without_deleting_sources(
+    tmp_path,
+):
     module = _catalog_module()
     project = tmp_path / "project"
     source_root = tmp_path / "sources"
@@ -349,9 +368,12 @@ def test_scan_is_idempotent_and_tombstones_missing_locations_without_deleting_so
     assert second.files_reused == 1
     assert catalog.status()["sources"] == 1
     assert first.locations_active == second.locations_active == 1
-    assert catalog.store.fetchone(
-        "SELECT status FROM scan_runs WHERE run_id='stale-run'"
-    )["status"] == "interrupted"
+    assert (
+        catalog.store.fetchone("SELECT status FROM scan_runs WHERE run_id='stale-run'")[
+            "status"
+        ]
+        == "interrupted"
+    )
 
     source.unlink()
     third = catalog.scan()
@@ -423,7 +445,9 @@ def test_enumeration_exception_persists_an_interrupted_scan_run(tmp_path, monkey
     assert run["completed_at"]
 
 
-def test_normalize_summarize_and_export_index_every_original_and_derived_artifact(tmp_path):
+def test_normalize_summarize_and_export_index_every_original_and_derived_artifact(
+    tmp_path,
+):
     module = _catalog_module()
     project = tmp_path / "project"
     source_root = tmp_path / "sources"
@@ -479,9 +503,9 @@ def test_normalize_summarize_and_export_index_every_original_and_derived_artifac
         assert "目标价" not in content
         assert "买入评级" not in content
     brief_summary = next(row for row in summary_rows if row["title"] == "brief")
-    assert "First material fact about operations" in Path(brief_summary["path"]).read_text(
-        encoding="utf-8"
-    )
+    assert "First material fact about operations" in Path(
+        brief_summary["path"]
+    ).read_text(encoding="utf-8")
     assert _snapshot(source_root) == before
 
 
@@ -577,25 +601,31 @@ def test_page_aware_pdf_and_office_adapters_emit_markdown_or_truthful_stub(tmp_p
     assert result.unsupported == 1
     assert result.failed == 0
     by_title = {row["title"]: row for row in rows}
-    pdf_content = Path(by_title["annual_report"]["normalized_path"]).read_text(encoding="utf-8")
+    pdf_content = Path(by_title["annual_report"]["normalized_path"]).read_text(
+        encoding="utf-8"
+    )
     assert "## Page 1" in pdf_content
     assert "## Page 2" in pdf_content
     assert "loc:v1/page:1" in pdf_content
     assert "Capacity reached 100 units" in Path(
         by_title["investor_relations"]["normalized_path"]
     ).read_text(encoding="utf-8")
-    assert "| Metric | Value |" in Path(by_title["financials"]["normalized_path"]).read_text(
-        encoding="utf-8"
-    )
+    assert "| Metric | Value |" in Path(
+        by_title["financials"]["normalized_path"]
+    ).read_text(encoding="utf-8")
     assert "## Slide 1" in Path(by_title["roadshow"]["normalized_path"]).read_text(
         encoding="utf-8"
     )
-    legacy_content = Path(by_title["legacy"]["normalized_path"]).read_text(encoding="utf-8")
+    legacy_content = Path(by_title["legacy"]["normalized_path"]).read_text(
+        encoding="utf-8"
+    )
     assert "normalization_status: unsupported" in legacy_content
     assert "unsupported_format" in legacy_content
 
 
-def test_config_templates_resolve_without_embedding_machine_specific_absolute_paths(tmp_path, monkeypatch):
+def test_config_templates_resolve_without_embedding_machine_specific_absolute_paths(
+    tmp_path, monkeypatch
+):
     module = _catalog_module()
     project = tmp_path / "project"
     profile = tmp_path / "profile"
@@ -631,7 +661,9 @@ def test_cli_dry_run_is_read_only_and_real_scan_is_queryable(tmp_path, capsys):
     project = tmp_path / "project"
     source_root = tmp_path / "sources"
     source_root.mkdir()
-    (source_root / "report.txt").write_text("Source-only report text.", encoding="utf-8")
+    (source_root / "report.txt").write_text(
+        "Source-only report text.", encoding="utf-8"
+    )
     config_path = project / "config" / "source_catalog.yaml"
     config_path.parent.mkdir(parents=True)
     config_path.write_text(
@@ -646,7 +678,10 @@ roots:
         encoding="utf-8",
     )
 
-    assert main(["--config", str(config_path), "scan", "--dry-run", "--root-id", "source"]) == 0
+    assert (
+        main(["--config", str(config_path), "scan", "--dry-run", "--root-id", "source"])
+        == 0
+    )
     dry_payload = json.loads(capsys.readouterr().out)
     assert dry_payload["files_seen"] == 1
     assert not (project / ".source_catalog").exists()
@@ -712,7 +747,8 @@ def test_large_index_export_uses_bounded_bulk_queries(tmp_path, monkeypatch):
         )
     )
     catalog.scan()
-    fetchall = catalog.store.fetchall
+    # ZR-203: export_indexes' catalog reads run on the zero-write reader.
+    fetchall = catalog.reader.fetchall
     calls = 0
 
     def counted(sql, params=()):
@@ -720,7 +756,7 @@ def test_large_index_export_uses_bounded_bulk_queries(tmp_path, monkeypatch):
         calls += 1
         return fetchall(sql, params)
 
-    monkeypatch.setattr(catalog.store, "fetchall", counted)
+    monkeypatch.setattr(catalog.reader, "fetchall", counted)
     exported = catalog.export_indexes()
 
     # Bounded bulk queries: documents, entities, locations, artifacts, plus one

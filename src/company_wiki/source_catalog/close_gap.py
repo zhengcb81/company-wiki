@@ -103,15 +103,23 @@ class CloseGapResult:
 
 def _txn_id(binding: CloseGapBinding) -> str:
     payload = json.dumps(binding.to_dict(), sort_keys=True, ensure_ascii=False)
-    return "urn:company-wiki:close-gap:sha256:" + hashlib.sha256(
-        payload.encode("utf-8")).hexdigest()
+    return (
+        "urn:company-wiki:close-gap:sha256:"
+        + hashlib.sha256(payload.encode("utf-8")).hexdigest()
+    )
 
 
 def _reject_result(txn: str, reason: str) -> CloseGapResult:
     return CloseGapResult(
         schema_version=CLOSE_GAP_SCHEMA_VERSION,
-        txn_id=txn, status="rejected", reason=reason,
-        fetch_events=0, outcome=None, resolution=None, envelope=None)
+        txn_id=txn,
+        status="rejected",
+        reason=reason,
+        fetch_events=0,
+        outcome=None,
+        resolution=None,
+        envelope=None,
+    )
 
 
 def _is_retryable_staging_error(exc: Exception) -> bool:
@@ -148,6 +156,9 @@ class CloseGapTransaction:
         self.coordinator = coordinator
         self.writer = writer
         self.journal = journal
+        # ZR-203: close-gap is a WRITE flow — the writer initializer may
+        # create the catalog before the read-only resolver reads it.
+        _ = getattr(self.catalog, "store", None)
 
     def execute(
         self,
@@ -160,8 +171,9 @@ class CloseGapTransaction:
             raise TypeError("request must be a SourceRequest")
         txn = _txn_id(binding)
 
-        def _fail(reason: str, *, error: str | None = None,
-                  error_type: str | None = None) -> CloseGapResult:
+        def _fail(
+            reason: str, *, error: str | None = None, error_type: str | None = None
+        ) -> CloseGapResult:
             self.journal.record(
                 request_id=binding.request_id,
                 outcome="failed",
@@ -171,21 +183,32 @@ class CloseGapTransaction:
             )
             return CloseGapResult(
                 schema_version=CLOSE_GAP_SCHEMA_VERSION,
-                txn_id=txn, status="failed", reason=reason,
-                fetch_events=0, outcome=None, resolution=None, envelope=None,
+                txn_id=txn,
+                status="failed",
+                reason=reason,
+                fetch_events=0,
+                outcome=None,
+                resolution=None,
+                envelope=None,
             )
 
         def _reject(reason: str) -> CloseGapResult:
             return CloseGapResult(
                 schema_version=CLOSE_GAP_SCHEMA_VERSION,
-                txn_id=txn, status="rejected", reason=reason,
-                fetch_events=0, outcome=None, resolution=None, envelope=None,
+                txn_id=txn,
+                status="rejected",
+                reason=reason,
+                fetch_events=0,
+                outcome=None,
+                resolution=None,
+                envelope=None,
             )
 
         # Step 1: policy binding (DL-03) — fail closed without a snapshot.
         try:
             snapshot = load_runtime_policy(
-                self.catalog.config.catalog_dir / "runtime_policy.json")
+                self.catalog.config.catalog_dir / "runtime_policy.json"
+            )
         except RuntimePolicyError:
             return _reject("no_runtime_policy")
         if snapshot.get("policy_hash") != binding.policy_hash:
@@ -194,7 +217,8 @@ class CloseGapTransaction:
         # Step 2: gap revalidation (DL-03) — metadata only, nothing fetched.
         rediscovered = self.coordinator.resolve_or_stage(
             SourceRequest(
-                entity=request.entity, market=request.market,
+                entity=request.entity,
+                market=request.market,
                 security_id=request.security_id,
                 document_kind=request.document_kind,
                 form_type=request.form_type,
@@ -205,15 +229,17 @@ class CloseGapTransaction:
                 provider_document_id=request.provider_document_id,
                 as_of_date=request.as_of_date,
                 mode="latest_as_of",
-            ))
+            )
+        )
         if rediscovered.status is not AcquisitionStatus.GAP:
             return _reject(f"gap_revalidated_status:{rediscovered.status.value}")
         current_plan = rediscovered.gap_plan
         if not current_plan.missing:
             # The gap is already closed (local is latest): complete as
             # reused with zero fetches — idempotent recovery (DL-09).
-            return self._complete_reused(request, txn, binding,
-                                         reason="gap_already_closed")
+            return self._complete_reused(
+                request, txn, binding, reason="gap_already_closed"
+            )
         if current_plan.gap_hash != binding.gap_plan_hash:
             return _reject("stale_gap_hash")
 
@@ -236,7 +262,8 @@ class CloseGapTransaction:
             expires_at=binding.expires_at,
         )
         staged_request = SourceRequest(
-            entity=request.entity, market=request.market,
+            entity=request.entity,
+            market=request.market,
             security_id=request.security_id,
             document_kind=request.document_kind,
             form_type=request.form_type
@@ -244,10 +271,8 @@ class CloseGapTransaction:
             fiscal_year=missing_year or request.fiscal_year,
             fiscal_period=request.fiscal_period,
             language=request.language,
-            provider=getattr(missing_candidate, "provider", None)
-            or request.provider,
-            provider_document_id=missing_pdoc
-            or request.provider_document_id,
+            provider=getattr(missing_candidate, "provider", None) or request.provider,
+            provider_document_id=missing_pdoc or request.provider_document_id,
             as_of_date=request.as_of_date,
             mode="exact",
             allow_download=True,
@@ -266,12 +291,18 @@ class CloseGapTransaction:
         try:
             with _acquisition_mutex(lock_path, timeout_seconds=lock_timeout):
                 return self._fetch_and_commit(
-                    request, staged_request, authorization, txn,
-                    binding, missing_candidate)
+                    request,
+                    staged_request,
+                    authorization,
+                    txn,
+                    binding,
+                    missing_candidate,
+                )
         except CatalogOperationLockedError as exc:
             return _fail(
                 f"close_gap_lock_timeout: {exc}",
-                error_type="CatalogOperationLockedError")
+                error_type="CatalogOperationLockedError",
+            )
 
     def _lock_timeout_seconds(self) -> float:
         """Lock wait bound: the adapter timeout plus a small grace."""
@@ -291,18 +322,29 @@ class CloseGapTransaction:
     ) -> CloseGapResult:
         def _fail(reason, *, error=None, error_type=None):
             self.journal.record(
-                request_id=binding.request_id, outcome="failed",
-                reason=reason, error_type=error_type, error=error)
+                request_id=binding.request_id,
+                outcome="failed",
+                reason=reason,
+                error_type=error_type,
+                error=error,
+            )
             return CloseGapResult(
                 schema_version=CLOSE_GAP_SCHEMA_VERSION,
-                txn_id=txn, status="failed", reason=reason,
-                fetch_events=0, outcome=None, resolution=None, envelope=None)
+                txn_id=txn,
+                status="failed",
+                reason=reason,
+                fetch_events=0,
+                outcome=None,
+                resolution=None,
+                envelope=None,
+            )
 
         # Re-check the gap INSIDE the lock (FC-804 DL-08): the first caller
         # may have closed it while we waited.
         rediscovered = self.coordinator.resolve_or_stage(
             SourceRequest(
-                entity=request.entity, market=request.market,
+                entity=request.entity,
+                market=request.market,
                 security_id=request.security_id,
                 document_kind=request.document_kind,
                 form_type=request.form_type,
@@ -313,13 +355,15 @@ class CloseGapTransaction:
                 provider_document_id=request.provider_document_id,
                 as_of_date=request.as_of_date,
                 mode="latest_as_of",
-            ))
+            )
+        )
         if rediscovered.status is AcquisitionStatus.GAP:
             current = rediscovered.gap_plan
             if not current.missing:
                 # single-flight win: the other caller downloaded it
                 return self._complete_reused(
-                    request, txn, binding, reason="gap_closed_by_concurrent")
+                    request, txn, binding, reason="gap_closed_by_concurrent"
+                )
             if current.gap_hash != binding.gap_plan_hash:
                 return _reject_result(txn, "stale_gap_hash")
 
@@ -330,7 +374,8 @@ class CloseGapTransaction:
             attempts += 1
             try:
                 staged = self.coordinator.resolve_or_stage(
-                    staged_request, authorization=authorization)
+                    staged_request, authorization=authorization
+                )
                 break
             except Exception as exc:
                 if str(exc).startswith("download not authorized"):
@@ -341,23 +386,24 @@ class CloseGapTransaction:
                     # DL-07 / LT-10: never committed, staging cleaned.  The
                     # staging dir is named by the STAGING request's id.
                     self._cleanup_staging(staged_request.request_id)
-                    return _fail(
-                        str(exc), error_type=type(exc).__name__)
+                    return _fail(str(exc), error_type=type(exc).__name__)
                 import time
 
                 time.sleep(backoff)
                 backoff *= 2.0
 
         if staged.status is AcquisitionStatus.REUSED:
-            return self._complete_reused(request, txn, binding,
-                                         reason="reused_after_discovery")
+            return self._complete_reused(
+                request, txn, binding, reason="reused_after_discovery"
+            )
         if staged.status is not AcquisitionStatus.STAGED:
             return _reject_result(txn, f"stage_status:{staged.status.value}")
 
         # Step 4: canonical commit (DL-09 — idempotent by content hash).
         try:
             imported = self.writer.import_staged(
-                request, staged.candidate, staged.receipt)
+                request, staged.candidate, staged.receipt
+            )
         except Exception as exc:
             return _fail(
                 f"canonical_import_failed: {type(exc).__name__}: {exc}",
@@ -389,8 +435,7 @@ class CloseGapTransaction:
             outcome="reused_before_download",
             reason=reason,
         )
-        return self._finalize(request, txn, "reused_before_download",
-                              fetch_events=0)
+        return self._finalize(request, txn, "reused_before_download", fetch_events=0)
 
     def _finalize(self, request, txn, outcome: str, *, fetch_events: int):
         """Step 5: re-resolve and attach the FC-704 envelope (+ FC-902 bundle).
@@ -407,15 +452,20 @@ class CloseGapTransaction:
         ):
             return CloseGapResult(
                 schema_version=CLOSE_GAP_SCHEMA_VERSION,
-                txn_id=txn, status="failed",
+                txn_id=txn,
+                status="failed",
                 reason=f"re_resolve_did_not_reuse:{resolution.status.value}",
-                fetch_events=fetch_events, outcome=None,
-                resolution=resolution.to_dict(), envelope=None,
+                fetch_events=fetch_events,
+                outcome=None,
+                resolution=resolution.to_dict(),
+                envelope=None,
             )
         envelope = build_resolution_envelope(
-            resolution, journal=self.journal,
+            resolution,
+            journal=self.journal,
             bundle=self.catalog.bundle_for_resolution(resolution),
-            store=self.catalog.store)
+            store=self.catalog.store,
+        )
         return CloseGapResult(
             schema_version=CLOSE_GAP_SCHEMA_VERSION,
             txn_id=txn,

@@ -68,13 +68,14 @@ def test_semantic_location_lookup_is_ranked_once_not_correlated_per_document(
         {"a.txt": "Revenue 100.", "b.txt": "Revenue   100."},
     )
     queries = []
-    fetchall = catalog.store.fetchall
+    # ZR-203: semantic_duplicate_groups reads through the zero-write reader.
+    fetchall = catalog.reader.fetchall
 
     def recording_fetchall(sql, params=()):
         queries.append(sql)
         return fetchall(sql, params)
 
-    monkeypatch.setattr(catalog.store, "fetchall", recording_fetchall)
+    monkeypatch.setattr(catalog.reader, "fetchall", recording_fetchall)
 
     catalog.semantic_duplicate_groups()
 
@@ -106,7 +107,9 @@ def test_duplicate_cleanup_lists_semantic_as_non_recyclable(tmp_path):
     service = module.DuplicateCleanupService(catalog, recycler=lambda path: None)
     inventory = service.list_groups(limit=50, include_semantic=True)
 
-    semantic_groups = [g for g in inventory["groups"] if g["relation_type"] == "semantic_copy"]
+    semantic_groups = [
+        g for g in inventory["groups"] if g["relation_type"] == "semantic_copy"
+    ]
     assert len(semantic_groups) == 1
     group = semantic_groups[0]
     assert group["copy_count"] == 2
@@ -137,7 +140,9 @@ def test_semantic_member_is_not_recyclable(tmp_path):
     service = module.DuplicateCleanupService(catalog, recycler=lambda path: None)
     inventory = service.list_groups(limit=50, include_semantic=True)
     semantic = next(
-        group for group in inventory["groups"] if group["relation_type"] == "semantic_copy"
+        group
+        for group in inventory["groups"]
+        if group["relation_type"] == "semantic_copy"
     )
 
     duplicate_member_id = semantic["duplicates"][0]["location_id"]

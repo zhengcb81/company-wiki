@@ -186,7 +186,11 @@ class DownloadReceipt:
             raise ValueError("source_url must be HTTPS")
         if not _SHA256_RE.fullmatch(self.content_sha256):
             raise ValueError("content_sha256 must be lowercase SHA-256")
-        if isinstance(self.byte_size, bool) or not isinstance(self.byte_size, int) or self.byte_size <= 0:
+        if (
+            isinstance(self.byte_size, bool)
+            or not isinstance(self.byte_size, int)
+            or self.byte_size <= 0
+        ):
             raise ValueError("byte_size must be a positive integer")
         if (
             isinstance(self.http_status, bool)
@@ -298,6 +302,10 @@ class AcquisitionCoordinator:
         self.catalog = catalog
         self.adapters = adapters
         self.staging_root = staging_root
+        # ZR-203: this coordinator is a WRITE flow — the writer initializer
+        # may create the catalog, so the resolver's read-only reader then
+        # opens an existing database (read paths never create it).
+        _ = self.catalog.store
 
     def resolve_or_stage(
         self,
@@ -357,11 +365,20 @@ class AcquisitionCoordinator:
             if not isinstance(candidate, DownloadCandidate):
                 raise AcquisitionError("adapter returned a non-DownloadCandidate value")
             if candidate.market != request.market:
-                raise AcquisitionError("adapter candidate market does not match request")
+                raise AcquisitionError(
+                    "adapter candidate market does not match request"
+                )
             if candidate.document_kind != request.document_kind:
-                raise AcquisitionError("adapter candidate document_kind does not match request")
-            if request.fiscal_year is not None and candidate.fiscal_year != request.fiscal_year:
-                raise AcquisitionError("adapter candidate fiscal_year does not match request")
+                raise AcquisitionError(
+                    "adapter candidate document_kind does not match request"
+                )
+            if (
+                request.fiscal_year is not None
+                and candidate.fiscal_year != request.fiscal_year
+            ):
+                raise AcquisitionError(
+                    "adapter candidate fiscal_year does not match request"
+                )
         if not candidates:
             return AcquisitionResult(
                 schema_version=ACQUISITION_SCHEMA_VERSION,
@@ -458,7 +475,8 @@ class AcquisitionCoordinator:
             if as_of_year is not None:
                 discovery_fiscal_year = as_of_year - 1
         discovery_request = SourceRequest(
-            entity=request.entity, market=request.market,
+            entity=request.entity,
+            market=request.market,
             security_id=request.security_id,
             document_kind=request.document_kind,
             form_type=request.form_type,
@@ -513,7 +531,9 @@ class AcquisitionCoordinator:
         if receipt.provider != candidate.provider:
             raise AcquisitionError("receipt provider does not match candidate")
         if receipt.provider_document_id != candidate.provider_document_id:
-            raise AcquisitionError("receipt provider_document_id does not match candidate")
+            raise AcquisitionError(
+                "receipt provider_document_id does not match candidate"
+            )
         if receipt.source_url != candidate.source_url:
             raise AcquisitionError("receipt source_url does not match candidate")
         path = Path(receipt.staged_path).resolve(strict=True)
@@ -533,7 +553,10 @@ class AcquisitionCoordinator:
                 digest.update(chunk)
         if digest.hexdigest() != receipt.content_sha256:
             raise AcquisitionError("receipt SHA-256 does not match staged file")
-        if receipt.mime_type == "application/pdf" and not path.read_bytes()[:5] == b"%PDF-":
+        if (
+            receipt.mime_type == "application/pdf"
+            and not path.read_bytes()[:5] == b"%PDF-"
+        ):
             raise AcquisitionError("staged PDF does not have PDF magic")
         if not 200 <= receipt.http_status < 300:
             raise AcquisitionError("receipt HTTP status is not successful")

@@ -40,15 +40,23 @@ def _verified_assertion_identity(
 
         candidates = [
             get_verified_assertion(
-                store, source_id, content_sha256, reader=reader,
-                current_epoch=current_epoch, active_cohorts=active_cohorts,
+                store,
+                source_id,
+                content_sha256,
+                reader=reader,
+                current_epoch=current_epoch,
+                active_cohorts=active_cohorts,
             )
         ]
         if source_id != document_id:
             candidates.append(
                 get_verified_assertion_by_document(
-                    store, document_id, content_sha256, reader=reader,
-                    current_epoch=current_epoch, active_cohorts=active_cohorts,
+                    store,
+                    document_id,
+                    content_sha256,
+                    reader=reader,
+                    current_epoch=current_epoch,
+                    active_cohorts=active_cohorts,
                 )
             )
         for a in candidates:
@@ -319,7 +327,9 @@ def resolver_visibility(
 RESOLUTION_ENVELOPE_SCHEMA_VERSION = "1.0"
 
 # Journal outcomes that actually fetched bytes: a download happened.
-_ENVELOPE_DOWNLOAD_OUTCOMES = frozenset({"downloaded_new", "deduplicated_after_download"})
+_ENVELOPE_DOWNLOAD_OUTCOMES = frozenset(
+    {"downloaded_new", "deduplicated_after_download"}
+)
 
 # Normalize journal outcomes to the envelope taxonomy (FC-704).
 _ENVELOPE_OUTCOME_BY_JOURNAL = {
@@ -427,12 +437,8 @@ def build_resolution_envelope(
         for attempt in journal.read_all():
             if attempt.request_id != resolution.request_id:
                 continue
-            outcome = _ENVELOPE_OUTCOME_BY_JOURNAL.get(
-                attempt.outcome, attempt.outcome
-            )
-            download_events = (
-                1 if attempt.outcome in _ENVELOPE_DOWNLOAD_OUTCOMES else 0
-            )
+            outcome = _ENVELOPE_OUTCOME_BY_JOURNAL.get(attempt.outcome, attempt.outcome)
+            download_events = 1 if attempt.outcome in _ENVELOPE_DOWNLOAD_OUTCOMES else 0
     policy_hash = None
     activation_epoch = None
     if isinstance(policy_snapshot, dict):
@@ -443,8 +449,7 @@ def build_resolution_envelope(
     bundle_dict = None
     if bundle is not None:
         if not isinstance(bundle, dict) or not bundle.get("bundle_hash"):
-            raise ValueError(
-                "bundle must be a dict with a bundle_hash (fail closed)")
+            raise ValueError("bundle must be a dict with a bundle_hash (fail closed)")
         bundle_status = "available"
         bundle_hash = bundle["bundle_hash"]
         bundle_dict = bundle
@@ -604,7 +609,9 @@ def _load_issuer_index(
             canonical = str(record.get("canonical_name") or "").strip()
             if not canonical:
                 continue
-            issuer = _normalize_text(canonical)  # Phase 14 R8: same normalization as the entity gate
+            issuer = _normalize_text(
+                canonical
+            )  # Phase 14 R8: same normalization as the entity gate
             tokens = {issuer}
             for alias in record.get("aliases") or []:
                 alias_text = str(alias).strip()
@@ -630,7 +637,11 @@ class SourceResolver:
     """Resolve existing catalog sources without performing acquisition side effects."""
 
     def __init__(
-        self, catalog: SourceCatalog, *, observer=None, runtime_policy: dict | None = None
+        self,
+        catalog: SourceCatalog,
+        *,
+        observer=None,
+        runtime_policy: dict | None = None,
     ):
         if not isinstance(catalog, SourceCatalog):
             raise TypeError("catalog must be SourceCatalog")
@@ -659,9 +670,11 @@ class SourceResolver:
         source (evidence disputed; not offered for reuse)."""
         if not source_id:
             return False
-        row = self.catalog.store.fetchone(
+        row = self.catalog.reader.fetchone(
             "SELECT 1 FROM remediation_proposals WHERE source_id=? "
-            "AND status='proposed' LIMIT 1", (source_id,))
+            "AND status='proposed' LIMIT 1",
+            (source_id,),
+        )
         return row is not None
 
     def resolve(self, request: SourceRequest) -> ResolutionResult:
@@ -726,7 +739,7 @@ class SourceResolver:
                 continue
             metadata = _source_metadata(
                 document,
-                store=self.catalog.store,
+                store=self.catalog.reader,
                 observer=self.observer,
                 reader=self.reader,
                 current_epoch=self.current_epoch,
@@ -744,7 +757,7 @@ class SourceResolver:
             if market_match == "missing_fail_closed":
                 # Try verified assertion as fallback identity source (CW-2.28 T2-11).
                 assertion = _verified_assertion_identity(
-                    self.catalog.store,
+                    self.catalog.reader,
                     document["source_id"],
                     document.get("content_sha256") or None,
                     document["document_id"],
@@ -821,12 +834,14 @@ class SourceResolver:
                 and item.get("role") == "original_primary"
                 and item.get("location_status") == "active"
                 # WU-3.1: provider-rejected paths never count as canonical.
-                and ".rejections" not in item.get("relative_path", "").replace("\\", "/")
+                and ".rejections"
+                not in item.get("relative_path", "").replace("\\", "/")
             ]
             if not canonical_locations:
                 if any(
                     item.get("role") == "original_primary"
-                    and ".rejections" in item.get("relative_path", "").replace("\\", "/")
+                    and ".rejections"
+                    in item.get("relative_path", "").replace("\\", "/")
                     for item in document["locations"]
                 ):
                     trace.append(f"{document['title']}: rejections_path")
@@ -834,8 +849,7 @@ class SourceResolver:
                     trace.append(f"{document['title']}: no_canonical_active_location")
                 continue
             if not any(
-                item.get("root_id") in reusable_root_ids
-                for item in canonical_locations
+                item.get("root_id") in reusable_root_ids for item in canonical_locations
             ):
                 # No canonical location under a reusable root kind: not a
                 # reusable source (add the root kind to
@@ -949,9 +963,7 @@ class SourceResolver:
             )
         else:
             reason = "no_existing_source_satisfies_request"
-        return self._result(
-            request, ResolutionStatus.MISSING, reason, (), debug_trace
-        )
+        return self._result(request, ResolutionStatus.MISSING, reason, (), debug_trace)
 
     @staticmethod
     def _identity_matches(request: SourceRequest, metadata: dict[str, Any]) -> str:

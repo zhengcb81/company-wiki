@@ -17,6 +17,7 @@ from .normalizer import backfill_text_fingerprints, normalize_catalog
 from .section_extractor import extract_sections_catalog
 from .scanner import scan_catalog
 from .store import CatalogStore
+from .reader import ReadOnlyCatalogReader
 from .summarizer import summarize_catalog
 
 
@@ -41,12 +42,22 @@ class SourceCatalog:
             raise TypeError("config must be CatalogConfig")
         self.config = config
         self._store: CatalogStore | None = None
+        self._reader: ReadOnlyCatalogReader | None = None
 
     @property
     def store(self) -> CatalogStore:
         if self._store is None:
             self._store = CatalogStore(self.config.database_path)
         return self._store
+
+    @property
+    def reader(self) -> ReadOnlyCatalogReader:
+        """Zero-write read model (ZR-203): read entrypoints use this reader,
+        never the writable store.  Opening the real catalog is therefore
+        possible under OS-read-only permissions."""
+        if self._reader is None:
+            self._reader = ReadOnlyCatalogReader(self.config.database_path)
+        return self._reader
 
     def scan(
         self,
@@ -140,7 +151,9 @@ class SourceCatalog:
         progress: Callable[..., None] | None = None,
         should_stop: Callable[[], bool] | None = None,
     ) -> ProcessingReport:
-        with CatalogOperationLock(self.config.catalog_dir, operation="extract_sections"):
+        with CatalogOperationLock(
+            self.config.catalog_dir, operation="extract_sections"
+        ):
             return extract_sections_catalog(
                 self.config,
                 self.store,
@@ -181,7 +194,7 @@ class SourceCatalog:
             )
 
     def status(self) -> dict[str, int]:
-        return self.store.status()
+        return self.reader.status()
 
     def query_filing_candidates(
         self,
@@ -241,7 +254,7 @@ class SourceCatalog:
         fiscal_params: tuple[int, ...] = (
             (fiscal_year, fiscal_year) if fiscal_year is not None else ()
         )
-        entity_rows = self.store.fetchall(
+        entity_rows = self.reader.fetchall(
             f"""SELECT d.document_id, d.primary_source_id, d.title, d.source_type,
                        d.document_kind, d.published_date, d.source_status,
                        d.metadata_json, d.first_seen_at, d.last_seen_at,
@@ -272,7 +285,7 @@ class SourceCatalog:
         # WU-3.2 reviewer: batch entities/locations in 2 queries instead of
         # N+1 per-document lookups (100-doc cap previously meant 200 queries).
         entities: dict[str, list[dict[str, Any]]] = {}
-        for row in self.store.fetchall(
+        for row in self.reader.fetchall(
             f"""SELECT de.document_id, e.entity_id, e.name, e.entity_kind,
                        de.confidence, de.method
                 FROM document_entities de
@@ -283,7 +296,7 @@ class SourceCatalog:
         ):
             entities.setdefault(row["document_id"], []).append(dict(row))
         locations: dict[str, list[dict[str, Any]]] = {}
-        for row in self.store.fetchall(
+        for row in self.reader.fetchall(
             f"""SELECT l.location_id, l.document_id, l.root_id, l.relative_path,
                        l.absolute_path, l.source_id, l.role, l.location_status,
                        l.observed_size, l.observed_mtime_ns, l.error,
@@ -348,7 +361,7 @@ class SourceCatalog:
             else ""
         )
         entity_params = (entity,) if entity else ()
-        rows = self.store.fetchall(
+        rows = self.reader.fetchall(
             f"""EXPLAIN QUERY PLAN
                 SELECT d.document_id
                 FROM documents d
@@ -379,7 +392,7 @@ class SourceCatalog:
         current source bytes, NO bundle is served — a bundle built from other
         bytes would be a stale/forged derivation.  Fail closed.
         """
-        row = self.store.fetchone(
+        row = self.reader.fetchone(
             "SELECT * FROM documents WHERE document_id = ?", (document_id,)
         )
         if row is None:
@@ -392,18 +405,20 @@ class SourceCatalog:
             as_of_date=document["published_date"] or "",
         )
         if document.get("primary_source_id"):
-            src = self.store.fetchone(
+            src = self.reader.fetchone(
                 "SELECT content_sha256 FROM sources WHERE source_id = ?",
                 (document["primary_source_id"],),
             )
             if src is not None:
-                if (expected_content_sha256 is not None
-                        and expected_content_sha256 != src["content_sha256"]):
+                if (
+                    expected_content_sha256 is not None
+                    and expected_content_sha256 != src["content_sha256"]
+                ):
                     return None  # fail closed: bytes drifted from the claim
                 source["source_sha256"] = src["content_sha256"]
         artifacts = [
             dict(artifact)
-            for artifact in self.store.fetchall(
+            for artifact in self.reader.fetchall(
                 """SELECT artifact_id,artifact_role,source_id,path,content_sha256,
                           byte_size,mime_type,generator_name,generator_version,status,
                           error,schema_version,source_sha256,created_at
@@ -441,18 +456,18 @@ class SourceCatalog:
         if not getattr(resolution, "matches", None):
             return None
         status = getattr(resolution, "status", None)
-        if status is None or status.value not in ("reused_exact",
-                                                  "reused_equivalent"):
+        if status is None or status.value not in ("reused_exact", "reused_equivalent"):
             return None
         match = resolution.matches[0]
         from .source_bundle import GENERATOR_REGISTRY
 
-        effective_registry = (
-            registry if registry is not None else GENERATOR_REGISTRY)
+        effective_registry = registry if registry is not None else GENERATOR_REGISTRY
         effective_roots = (
-            allowed_roots if allowed_roots is not None
+            allowed_roots
+            if allowed_roots is not None
             else tuple(root.path for root in self.config.roots)
-            + (self.config.derived_dir,))
+            + (self.config.derived_dir,)
+        )
         effective_now = now or _utc_now()
         return self.query_source_bundle(
             document_id=match.document_id,
@@ -473,15 +488,15 @@ class SourceCatalog:
     ) -> list[dict[str, Any]]:
         if limit <= 0:
             raise ValueError("limit must be positive")
-        documents = self.store.fetchall(
+        documents = self.reader.fetchall(
             "SELECT * FROM documents ORDER BY published_date DESC,title,document_id"
         )
-        entity_rows = self.store.fetchall(
+        entity_rows = self.reader.fetchall(
             """SELECT de.document_id,e.entity_id,e.name,e.entity_kind,de.confidence,de.method
             FROM document_entities de JOIN entities e ON e.entity_id=de.entity_id
             ORDER BY de.document_id,e.entity_id"""
         )
-        location_rows = self.store.fetchall(
+        location_rows = self.reader.fetchall(
             """SELECT l.location_id,l.document_id,l.root_id,l.relative_path,l.absolute_path,
             l.source_id,l.role,l.location_status,l.observed_size,l.observed_mtime_ns,l.error,l.manifest_json,
             l.metadata_json,r.priority AS root_priority
@@ -489,12 +504,12 @@ class SourceCatalog:
             WHERE l.document_id IS NOT NULL
             ORDER BY l.document_id,r.priority,l.root_id,l.relative_path"""
         )
-        artifact_rows = self.store.fetchall(
+        artifact_rows = self.reader.fetchall(
             """SELECT document_id,artifact_role,path,status,content_sha256,byte_size,generator_name,
             generator_version,error,source_id,schema_version,source_sha256,created_at
             FROM artifacts ORDER BY document_id,artifact_role,created_at"""
         )
-        source_rows = self.store.fetchall(
+        source_rows = self.reader.fetchall(
             "SELECT source_id,content_sha256,byte_size FROM sources"
         )
         source_by_id = {row["source_id"]: row for row in source_rows}
@@ -725,7 +740,7 @@ class SourceCatalog:
         ``content_sha256`` values. Members carry their canonical primary location
         so the same public shape as exact-copy groups can be derived downstream.
         """
-        rows = self.store.fetchall(
+        rows = self.reader.fetchall(
             """WITH ranked_locations AS (
                    SELECT l.location_id,l.document_id,l.source_id,l.root_id,
                           l.relative_path,l.absolute_path,l.observed_size,
