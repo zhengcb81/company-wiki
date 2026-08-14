@@ -123,7 +123,9 @@ def test_identity_resolver_handles_three_markets_and_ticker_variants(tmp_path):
     assert us.resolved.match_basis == "ticker_exact"
 
 
-def test_identity_resolver_is_fail_closed_for_ambiguity_conflict_and_low_confidence(tmp_path):
+def test_identity_resolver_is_fail_closed_for_ambiguity_conflict_and_low_confidence(
+    tmp_path,
+):
     from company_wiki.source_catalog import IdentityStatus, SecurityIdentityResolver
 
     resolver = SecurityIdentityResolver(_master(tmp_path).load())
@@ -196,7 +198,7 @@ def test_cross_market_identify_refuses_an_incomplete_master(tmp_path, capsys):
     assert main(["--cache-dir", str(store.cache_dir), "AMD"]) == 1
 
     error = json.loads(capsys.readouterr().err)
-    assert error["error_type"] == "SecurityMasterUnavailableError"
+    assert error["error_type"] == "fatal"
     assert "CN" in error["error"] and "HK" in error["error"]
 
 
@@ -239,7 +241,7 @@ roots:
 
     error = json.loads(capsys.readouterr().err)
     assert exit_code == 1
-    assert error["error_type"] == "SecurityIdentityResolutionError"
+    assert error["error_type"] == "fatal"
     assert "ambiguous" in error["error"]
     assert not (project / ".source_catalog" / "catalog.sqlite3").exists()
 
@@ -252,13 +254,17 @@ def _workbook_bytes() -> bytes:
     sheet.append(["List of Securities"])
     sheet.append(["Stock Code", "Name of Securities", "Category", "Sub-Category"])
     sheet.append([1810, "XIAOMI-W", "Equity", "Equity Securities (Main Board)"])
-    sheet.append([2800, "TRACKER FUND", "Exchange Traded Products", "Exchange Traded Funds"])
+    sheet.append(
+        [2800, "TRACKER FUND", "Exchange Traded Products", "Exchange Traded Funds"]
+    )
     buffer = io.BytesIO()
     workbook.save(buffer)
     return buffer.getvalue()
 
 
-def test_refresh_is_market_isolated_filters_hk_non_equity_and_preserves_stale_cache(tmp_path):
+def test_refresh_is_market_isolated_filters_hk_non_equity_and_preserves_stale_cache(
+    tmp_path,
+):
     from company_wiki.source_catalog import (
         CNINFO_STOCK_URL,
         HKEX_ACTIVE_STOCK_URL,
@@ -300,9 +306,7 @@ def test_refresh_is_market_isolated_filters_hk_non_equity_and_preserves_stale_ca
         store,
         fetch_bytes=fetch,
         minimum_records={"CN": 1, "HK": 1, "US": 1},
-    ).refresh(
-        markets=("CN", "HK", "US")
-    )
+    ).refresh(markets=("CN", "HK", "US"))
 
     assert report["CN"]["status"] == "stale_cache"
     assert report["HK"]["status"] == "refreshed"
@@ -329,7 +333,11 @@ def test_refresh_below_market_floor_preserves_existing_snapshot(tmp_path):
     def fetch(url: str) -> bytes:
         assert url == CNINFO_STOCK_URL
         return json.dumps(
-            {"stockList": [{"code": "600000", "zwjc": "PFBANK", "orgId": "gssz0000001"}]}
+            {
+                "stockList": [
+                    {"code": "600000", "zwjc": "PFBANK", "orgId": "gssz0000001"}
+                ]
+            }
         ).encode()
 
     report = OfficialSecurityMasterRefresher(
@@ -343,7 +351,9 @@ def test_refresh_below_market_floor_preserves_existing_snapshot(tmp_path):
     assert existing_path.read_bytes() == existing_payload
 
 
-def test_hk_refresh_uses_standard_transfer_fallback_and_english_aliases(tmp_path, monkeypatch):
+def test_hk_refresh_uses_standard_transfer_fallback_and_english_aliases(
+    tmp_path, monkeypatch
+):
     from company_wiki.source_catalog import (
         HKEX_ACTIVE_STOCK_URL,
         HKEX_INACTIVE_STOCK_URL,

@@ -403,7 +403,7 @@ roots:
 
     assert result == 1
     error = json.loads(capsys.readouterr().err)
-    assert error["error_type"] == "EvidenceQueryUnavailableError"
+    assert error["error_type"] == "fatal"
     assert not (project / ".source_catalog").exists()
 
 

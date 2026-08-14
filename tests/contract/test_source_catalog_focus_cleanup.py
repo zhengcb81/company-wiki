@@ -28,9 +28,7 @@ def _legacy_catalog(tmp_path: Path):
     shared_target.write_text("same bytes outside focus", encoding="utf-8")
     shared_sidecar = shared_target.with_name(shared_target.name + ".source.json")
     shared_sidecar.write_text(
-        json.dumps(
-            {"market": "HK", "security_id": "ACME", "source_title": "投资笔记"}
-        ),
+        json.dumps({"market": "HK", "security_id": "ACME", "source_title": "投资笔记"}),
         encoding="utf-8",
     )
     shared_outside = outside / "copy.txt"
@@ -40,9 +38,7 @@ def _legacy_catalog(tmp_path: Path):
     orphan.write_text("target-only source", encoding="utf-8")
     orphan_sidecar = orphan.with_name(orphan.name + ".source.json")
     orphan_sidecar.write_text(
-        json.dumps(
-            {"market": "HK", "security_id": "ACME", "source_title": "股票池"}
-        ),
+        json.dumps({"market": "HK", "security_id": "ACME", "source_title": "股票池"}),
         encoding="utf-8",
     )
 
@@ -87,8 +83,12 @@ def _legacy_catalog(tmp_path: Path):
                 (relative, str(absolute), row["location_id"]),
             )
 
-    originals = [focus / name for name in ("投资笔记.txt", "股票池.txt", "Acme招股说明书.txt")]
-    original_manifest = {str(path): (_sha(path), path.stat().st_mtime_ns) for path in originals}
+    originals = [
+        focus / name for name in ("投资笔记.txt", "股票池.txt", "Acme招股说明书.txt")
+    ]
+    original_manifest = {
+        str(path): (_sha(path), path.stat().st_mtime_ns) for path in originals
+    }
     orphan_document = catalog.store.fetchone(
         """SELECT document_id FROM locations
         WHERE root_id='dropbox_stock' AND relative_path='重点关注/股票池.txt'"""
@@ -117,7 +117,13 @@ def test_focus_cleanup_preview_is_read_only_and_reference_aware(tmp_path: Path):
     catalog = fixture["catalog"]
     before = {
         table: catalog.store.fetchone(f"SELECT count(*) AS n FROM {table}")["n"]
-        for table in ("locations", "documents", "sources", "artifacts", "evidence_spans")
+        for table in (
+            "locations",
+            "documents",
+            "sources",
+            "artifacts",
+            "evidence_spans",
+        )
     }
 
     preview = FocusScopeCleanupService(catalog).preview(
@@ -186,9 +192,7 @@ def test_focus_cleanup_apply_dedupes_duplicate_artifact_paths(tmp_path: Path):
     assert result["filesystem_errors"] == []
     assert result["archived_files"] >= 1
     assert not duplicate_path.exists()
-    manifest = json.loads(
-        (archive_dir / "manifest.json").read_text(encoding="utf-8")
-    )
+    manifest = json.loads((archive_dir / "manifest.json").read_text(encoding="utf-8"))
     paths = [entry["original_path"] for entry in manifest["files"]]
     assert paths.count(str(duplicate_path)) == 1
 
@@ -214,7 +218,8 @@ def test_focus_cleanup_apply_preserves_originals_and_shared_document(tmp_path: P
     assert snapshot.is_file() and receipt.is_file()
     assert all(path.is_file() for path in fixture["originals"])
     assert {
-        str(path): (_sha(path), path.stat().st_mtime_ns) for path in fixture["originals"]
+        str(path): (_sha(path), path.stat().st_mtime_ns)
+        for path in fixture["originals"]
     } == fixture["original_manifest"]
     assert not (fixture["focus"] / "投资笔记.txt.source.json").exists()
     assert not (fixture["focus"] / "股票池.txt.source.json").exists()
@@ -230,11 +235,14 @@ def test_focus_cleanup_apply_preserves_originals_and_shared_document(tmp_path: P
     )
     assert shared is not None
     assert orphan is None
-    assert catalog.store.fetchone(
-        """SELECT count(*) AS n FROM locations
+    assert (
+        catalog.store.fetchone(
+            """SELECT count(*) AS n FROM locations
         WHERE document_id=? AND relative_path='其他/copy.txt'""",
-        (fixture["shared_document"],),
-    )["n"] == 1
+            (fixture["shared_document"],),
+        )["n"]
+        == 1
+    )
     assert all(not path.exists() for path in fixture["orphan_artifact_paths"])
     assert catalog.store.fetchone("PRAGMA foreign_key_check") is None
 
@@ -277,7 +285,9 @@ def test_focus_cleanup_two_rescans_do_not_recreate_rejected_catalog_state(
         WHERE l.root_id='dropbox_stock' AND l.relative_path LIKE '重点关注/%'
         ORDER BY l.relative_path"""
     )
-    assert [(row["relative_path"], row["role"], row["document_kind"]) for row in target_rows] == [
+    assert [
+        (row["relative_path"], row["role"], row["document_kind"]) for row in target_rows
+    ] == [
         ("重点关注/Acme招股说明书.txt", "original_primary", "prospectus"),
         ("重点关注/Acme招股说明书.txt.source.json", "metadata", "prospectus"),
     ]
@@ -370,9 +380,9 @@ def test_focus_cleanup_apply_archives_deleted_files_and_restores(tmp_path: Path)
     for original_path, entry in archived.items():
         assert entry["content_sha256"] == before_sha[original_path]
         member = archive_dir / entry["archive_member"]
-        assert hashlib.sha256(member.read_bytes()).hexdigest() == entry[
-            "content_sha256"
-        ]
+        assert (
+            hashlib.sha256(member.read_bytes()).hexdigest() == entry["content_sha256"]
+        )
 
     # Restore drill: bytes come back identical.
     restore_dir = tmp_path / "restored"
@@ -472,6 +482,6 @@ def test_focus_cleanup_cli_defaults_to_dry_run_and_apply_requires_all_guards(
     )
     error = json.loads(capsys.readouterr().err)
     assert exit_code == 1
-    assert error["error_type"] == "ValueError"
+    assert error["error_type"] == "fatal"
     assert "requires" in error["error"]
     assert catalog.store.fetchone("SELECT count(*) AS n FROM locations")["n"] == before

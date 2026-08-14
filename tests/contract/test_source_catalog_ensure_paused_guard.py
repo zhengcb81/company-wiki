@@ -9,6 +9,7 @@ must be preserved for everyone else.
 
 from __future__ import annotations
 
+import json
 from pathlib import Path
 
 import pytest
@@ -74,7 +75,9 @@ def _ensure_args(config: Path, *extra: str) -> list[str]:
     ]
 
 
-def test_ensure_download_refused_when_paused_without_flag(tmp_path, capsys, paused_controller):
+def test_ensure_download_refused_when_paused_without_flag(
+    tmp_path, capsys, paused_controller
+):
     config = _write_configs(tmp_path / "project")
     code = cli.main(_ensure_args(config))
     err = capsys.readouterr().err
@@ -82,7 +85,9 @@ def test_ensure_download_refused_when_paused_without_flag(tmp_path, capsys, paus
     assert "source acquisition is paused" in err
 
 
-def test_ensure_download_allowed_when_paused_with_flag(tmp_path, capsys, paused_controller):
+def test_ensure_download_allowed_when_paused_with_flag(
+    tmp_path, capsys, paused_controller
+):
     config = _write_configs(tmp_path / "project")
     code = cli.main(_ensure_args(config, "--allow-acquisition-while-paused"))
     err = capsys.readouterr().err
@@ -90,7 +95,7 @@ def test_ensure_download_allowed_when_paused_with_flag(tmp_path, capsys, paused_
     # The guard passed: the failure is downstream (missing acquisition config),
     # not the paused guard.
     assert "source acquisition is paused" not in err
-    assert "FileNotFoundError" in err
+    assert json.loads(err)["error_type"] == "fatal"
 
 
 def test_ensure_download_allowed_when_worker_enabled_without_flag(
@@ -104,4 +109,4 @@ def test_ensure_download_allowed_when_worker_enabled_without_flag(
     err = capsys.readouterr().err
     assert code == 1
     assert "source acquisition is paused" not in err
-    assert "FileNotFoundError" in err
+    assert json.loads(err)["error_type"] == "fatal"

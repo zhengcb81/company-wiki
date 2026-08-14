@@ -425,9 +425,7 @@ roots:
     )
 
     assert result == 1
-    assert json.loads(capsys.readouterr().err)["error_type"] == (
-        "ExtractionQualityUnavailableError"
-    )
+    assert json.loads(capsys.readouterr().err)["error_type"] == ("fatal")
     assert not (project / ".source_catalog").exists()
 
 
