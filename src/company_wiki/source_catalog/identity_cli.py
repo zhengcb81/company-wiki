@@ -52,7 +52,9 @@ def main(argv: Sequence[str] | None = None) -> int:
         refresh = None
         if args.refresh:
             refresh_markets = (args.market,) if args.market else SECURITY_MARKETS
-            refresh = OfficialSecurityMasterRefresher(store).refresh(markets=refresh_markets)
+            refresh = OfficialSecurityMasterRefresher(store).refresh(
+                markets=refresh_markets
+            )
         result = SecurityIdentityResolver(
             load_identity_master(store, market=args.market)
         ).identify(
@@ -64,12 +66,11 @@ def main(argv: Sequence[str] | None = None) -> int:
         if refresh is not None:
             payload["refresh"] = refresh
     except Exception as exc:
+        # ZR-204: unified error taxonomy emission (canonical code + retryable).
+        from .error_taxonomy import structured_error
+
         print(
-            json.dumps(
-                {"status": "failed", "error_type": type(exc).__name__, "error": str(exc)},
-                ensure_ascii=False,
-                sort_keys=True,
-            ),
+            json.dumps(structured_error(exc), ensure_ascii=False, sort_keys=True),
             file=sys.stderr,
         )
         return 1
