@@ -59,6 +59,14 @@ class SourceCatalog:
             self._reader = ReadOnlyCatalogReader(self.config.database_path)
         return self._reader
 
+    def close(self) -> None:
+        """Release the cached reader connection (ZR-203).  Callers that keep
+        a SourceCatalog alive across temp-directory teardown (tests, runners)
+        must close it so Windows can delete the catalog file."""
+        if self._reader is not None:
+            self._reader.close()
+            self._reader = None
+
     def scan(
         self,
         *,
