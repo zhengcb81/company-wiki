@@ -1440,16 +1440,11 @@ def main(argv: Sequence[str] | None = None) -> int:
                 "status": get_catalog().status(),
             }
     except Exception as exc:
+        # ZR-204: unified error taxonomy — canonical code + retryable flag.
+        from .error_taxonomy import structured_error
+
         print(
-            json.dumps(
-                {
-                    "status": "failed",
-                    "error_type": type(exc).__name__,
-                    "error": str(exc),
-                },
-                ensure_ascii=False,
-                sort_keys=True,
-            ),
+            json.dumps(structured_error(exc), ensure_ascii=False, sort_keys=True),
             file=sys.stderr,
         )
         return 1
