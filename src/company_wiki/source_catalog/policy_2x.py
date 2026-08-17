@@ -43,11 +43,16 @@ def _mapping(value: Any, field_name: str) -> dict[str, Any]:
 
 
 def load_root_policy_2x(
-    path: Path, *, project_root: Path | None = None
+    path: Path, *, project_root: Path | None = None, yaml_schema_version: str = "1.0"
 ) -> CatalogConfig:
     """Load a RootPolicy 2.x config: per-root explicit policy fields,
     fail-closed on external-writable roots, unknown adapter/profile,
-    widening routes and duplicate roots."""
+    widening routes and duplicate roots.
+
+    ``yaml_schema_version`` is the YAML ``schema_version`` accepted by the
+    shared loader (default "1.0" = 2.x semantics; the ZR-401 3.0 loader
+    passes "3.0" so the shared surface checks apply unchanged).
+    """
     if not isinstance(path, Path):
         raise TypeError("path must be pathlib.Path")
     payload = yaml.safe_load(path.read_text(encoding="utf-8"))
@@ -55,8 +60,10 @@ def load_root_policy_2x(
     required = {"schema_version", "catalog_dir", "roots"}
     if not set(data) <= (required | {"reusable_root_kinds"}):
         raise CatalogConfigError("2.x config must contain only schema_version/catalog_dir/roots")
-    if str(data["schema_version"]) != "1.0":
-        raise CatalogConfigError("2.x config YAML schema_version must be 1.0 (additive)")
+    if str(data["schema_version"]) != yaml_schema_version:
+        raise CatalogConfigError(
+            f"2.x config YAML schema_version must be {yaml_schema_version} (additive)"
+        )
     resolved_project = (project_root or path.resolve().parents[1]).resolve(strict=False)
     raw_roots = data["roots"]
     if not isinstance(raw_roots, list) or not raw_roots:

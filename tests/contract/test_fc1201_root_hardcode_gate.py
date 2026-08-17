@@ -36,6 +36,7 @@ FC_1201_FROZEN_ALLOWLIST = frozenset(
         # policy modules — own the tokens
         "registry.py",
         "policy_2x.py",
+        "policy_3x.py",
         "config.py",
         "adapter_dispatch.py",
         # adapters — know the root layout they serve

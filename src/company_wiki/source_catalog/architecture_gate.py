@@ -163,7 +163,8 @@ _ROOT_HARDCODE_TOKENS = (
 # entity_resolver.py was deleted outright in FC-1203 (dead module).
 _ROOT_HARDCODE_ALLOWED_FILES = frozenset({
     # new-policy modules: allowed to know the tokens
-    "registry.py", "policy_2x.py", "config.py", "adapter_dispatch.py",
+    "registry.py", "policy_2x.py", "policy_3x.py", "config.py",
+    "adapter_dispatch.py",
     # adapters: by contract they know the root layout they serve
     "company_raw.py", "dayu.py", "sidecar.py",
     # the gate itself carries the token list
