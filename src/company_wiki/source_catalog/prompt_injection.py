@@ -29,6 +29,42 @@ class PromptInjectionReviewError(ValueError):
     """Raised when a review receipt cannot be written (fail closed)."""
 
 
+def _require_sha256(value: str, field: str, *, optional: bool = False) -> None:
+    if optional and value is None:
+        return
+    if not _SHA256_RE.fullmatch(value):
+        raise PromptInjectionReviewError(
+            f"{field} must be a lowercase SHA-256" + (" or None" if optional else ""))
+
+
+def _validate_review_inputs(
+    *,
+    document_id: str,
+    status: str,
+    reviewer: str,
+    evidence_sha256: str,
+    schema_version: str,
+    source_sha256: str | None,
+    policy_hash: str | None,
+) -> None:
+    """Fail-closed validation shared by the receipt writer (ZR-302)."""
+    if not document_id or not document_id.strip():
+        raise PromptInjectionReviewError("document_id must be non-empty")
+    if status not in PROMPT_INJECTION_REVIEW_STATUSES:
+        raise PromptInjectionReviewError(
+            f"status must be one of "
+            f"{sorted(PROMPT_INJECTION_REVIEW_STATUSES)}, got {status!r}")
+    if not reviewer or not reviewer.strip():
+        raise PromptInjectionReviewError("reviewer must be non-empty")
+    if schema_version != PROMPT_INJECTION_REVIEW_SCHEMA_VERSION:
+        raise PromptInjectionReviewError(
+            f"schema_version must be "
+            f"{PROMPT_INJECTION_REVIEW_SCHEMA_VERSION!r}")
+    _require_sha256(evidence_sha256, "evidence_sha256")
+    _require_sha256(source_sha256, "source_sha256", optional=True)
+    _require_sha256(policy_hash, "policy_hash", optional=True)
+
+
 def record_prompt_injection_review(
     connection: Any,
     document_id: str,
@@ -38,28 +74,30 @@ def record_prompt_injection_review(
     evidence_sha256: str,
     now: str,
     schema_version: str = PROMPT_INJECTION_REVIEW_SCHEMA_VERSION,
+    source_sha256: str | None = None,
+    policy_hash: str | None = None,
 ) -> dict[str, str]:
     """Write (or overwrite) the document's prompt-injection review receipt.
 
     ``connection`` must be a sqlite3.Connection (caller owns commit).
     Validates fail-closed: status enum, non-empty reviewer, sha256 evidence,
     non-empty document_id, schema version.
+
+    ZR-302 (additive, N-1 compatible): ``source_sha256`` and ``policy_hash``
+    are optional binding fields — when provided both must be lowercase
+    SHA-256; they are recorded in the receipt so a later cache evaluation
+    can distinguish a fresh review (hit) from an ignored/expired/tampered
+    one.  Callers that do not provide them keep the legacy FC-905 behavior.
     """
-    if not document_id or not document_id.strip():
-        raise PromptInjectionReviewError("document_id must be non-empty")
-    if status not in PROMPT_INJECTION_REVIEW_STATUSES:
-        raise PromptInjectionReviewError(
-            f"status must be one of "
-            f"{sorted(PROMPT_INJECTION_REVIEW_STATUSES)}, got {status!r}")
-    if not reviewer or not reviewer.strip():
-        raise PromptInjectionReviewError("reviewer must be non-empty")
-    if not _SHA256_RE.fullmatch(evidence_sha256):
-        raise PromptInjectionReviewError(
-            "evidence_sha256 must be a lowercase SHA-256")
-    if schema_version != PROMPT_INJECTION_REVIEW_SCHEMA_VERSION:
-        raise PromptInjectionReviewError(
-            f"schema_version must be "
-            f"{PROMPT_INJECTION_REVIEW_SCHEMA_VERSION!r}")
+    _validate_review_inputs(
+        document_id=document_id,
+        status=status,
+        reviewer=reviewer,
+        evidence_sha256=evidence_sha256,
+        schema_version=schema_version,
+        source_sha256=source_sha256,
+        policy_hash=policy_hash,
+    )
     row = connection.execute(
         "SELECT metadata_json FROM documents WHERE document_id=?",
         (document_id,),
@@ -72,13 +110,17 @@ def record_prompt_injection_review(
             metadata = {}
     except json.JSONDecodeError:
         metadata = {}
-    receipt = {
+    receipt: dict[str, str] = {
         "schema_version": schema_version,
         "status": status,
         "reviewer": reviewer,
         "reviewed_at": now,
         "evidence_sha256": evidence_sha256,
     }
+    if source_sha256 is not None:
+        receipt["source_sha256"] = source_sha256
+    if policy_hash is not None:
+        receipt["policy_hash"] = policy_hash
     metadata[PROMPT_INJECTION_REVIEW_KEY] = receipt
     connection.execute(
         "UPDATE documents SET metadata_json=? WHERE document_id=?",
