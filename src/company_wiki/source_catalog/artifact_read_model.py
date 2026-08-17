@@ -25,11 +25,10 @@ from .reader import CatalogReader
 ARTIFACT_READ_MODEL_SCHEMA_VERSION = "1.0"
 ARTIFACT_READ_MODEL_SCHEMA = "artifact-read-model-1.0"
 
-# Canonical artifact roles (mirrors source_bundle's KNOWN_ARTIFACT_ROLES):
-# an unknown role is never silently read — fail closed.
-KNOWN_ARTIFACT_ROLES = frozenset({
-    "normalized", "summary", "sections", "consumer_analysis", "transcript",
-})
+# Canonical artifact roles come from the frozen source_bundle taxonomy
+# (single source of truth — never re-declared here): an unknown role is
+# never silently read — fail closed.
+from .source_bundle import KNOWN_ARTIFACT_ROLES  # noqa: E402
 
 
 @dataclass(frozen=True)
