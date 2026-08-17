@@ -29,10 +29,10 @@ class PromptInjectionReviewError(ValueError):
     """Raised when a review receipt cannot be written (fail closed)."""
 
 
-def _require_sha256(value: str, field: str, *, optional: bool = False) -> None:
+def _require_sha256(value: str | None, field: str, *, optional: bool = False) -> None:
     if optional and value is None:
         return
-    if not _SHA256_RE.fullmatch(value):
+    if value is None or not _SHA256_RE.fullmatch(value):
         raise PromptInjectionReviewError(
             f"{field} must be a lowercase SHA-256" + (" or None" if optional else ""))
 

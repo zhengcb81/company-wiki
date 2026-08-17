@@ -218,6 +218,20 @@ def test_evaluate_expired(db) -> None:
     assert result.cache_state == "expired"
 
 
+def test_evaluate_ttl_boundary_equality_is_still_hit(db) -> None:
+    """TTL boundary: now - reviewed_at == ttl_seconds exactly is NOT
+    expired (the check is strict >), so the receipt stays a hit."""
+    con = db
+    _write_receipt(con, reviewed_at="2026-08-01T00:00:00Z")
+    result = evaluate_review(
+        _Store(con), "d1",
+        source_sha256="a" * 64, policy_hash=RULESET_HASH,
+        now="2026-08-02T00:00:00Z", ttl_seconds=86400,  # exactly 1 day
+    )
+    assert result.cache_state == "hit"
+    assert result.status == "not_detected"
+
+
 def test_evaluate_tampered_when_source_changed(db) -> None:
     con = db
     _write_receipt(con)
