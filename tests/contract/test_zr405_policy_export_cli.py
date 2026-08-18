@@ -1,10 +1,12 @@
 """ZR-405 acceptance tests: read-only ``policy-export`` CLI endpoint.
 
-The endpoint emits the root policy snapshot for consumers (filing-fetch
+The endpoint emits the root policy for consumers (filing-fetch
 containment): ``policy_hash`` must equal ``export_policy_2x``'s canonical
-hash, roots must carry the contract fields, and ``path_ref`` values under
-the project root must be ``${PROJECT_ROOT}``-tokenized (never absolute
-user paths).  Read-only: the command touches no catalog/database.
+hash, consumers can re-compute the hash over the payload bytes
+(excluding the ``policy_hash`` envelope key), and roots carry the
+contract fields with absolute path_refs (the byte-for-byte hash contract
+forbids reshaping; the local wiki->filing channel is trusted).  Read-only:
+the command touches no catalog/database.
 """
 
 from __future__ import annotations
@@ -79,16 +81,28 @@ def _run_export(config_path: Path) -> dict:
 
 def test_zr405_policy_export_hash_matches_export_policy_2x(tmp_path):
     """The endpoint's policy_hash is the SAME canonical hash as
-    export_policy_2x(config) — consumers verify against the frozen hash."""
+    export_policy_2x(config), and consumers can re-compute it over the
+    payload bytes (excluding the policy_hash envelope key) — the byte
+    contract holds."""
+    import hashlib
+
     from company_wiki.source_catalog.config import load_catalog_config
     from company_wiki.source_catalog.policy_2x import export_policy_2x
 
     config_path = _config_path(tmp_path)
     config = load_catalog_config(config_path, project_root=tmp_path)
-    expected_hash, _ = export_policy_2x(config)
+    expected_hash, policy = export_policy_2x(config)
     payload = _run_export(config_path)
     assert payload["policy_hash"] == expected_hash
-    assert payload["schema_version"] == "1.0"
+    recomputed = hashlib.sha256(
+        json.dumps(
+            {k: v for k, v in payload.items() if k != "policy_hash"},
+            sort_keys=True,
+            ensure_ascii=False,
+        ).encode("utf-8")
+    ).hexdigest()
+    assert recomputed == expected_hash
+    assert payload["schema_version"] == policy["schema_version"]
 
 
 def test_zr405_policy_export_roots_contract_fields(tmp_path):
@@ -111,18 +125,13 @@ def test_zr405_policy_export_roots_contract_fields(tmp_path):
             assert key in entry, entry
 
 
-def test_zr405_policy_export_paths_are_tokenized(tmp_path):
-    """path_ref values under the project root are ${PROJECT_ROOT}-tokenized;
-    the payload contains no absolute project path."""
+def test_zr405_policy_export_paths_are_absolute_and_consistent(tmp_path):
+    """path_ref values are the verbatim absolute root paths from the
+    export (the byte-for-byte hash contract forbids reshaping them)."""
     payload = _run_export(_config_path(tmp_path))
-    dumped = json.dumps(payload)
-    assert str(tmp_path.resolve()).replace("\\", "/") not in dumped
     for entry in payload["roots"]:
-        assert entry["path_ref"].startswith("${PROJECT_ROOT}"), entry
-    # token + remainder preserves the sub-path (filing re-expands it)
-    assert any(
-        entry["path_ref"].endswith("/Dropbox/Stock") for entry in payload["roots"]
-    )
+        assert Path(entry["path_ref"]).is_absolute(), entry
+        assert str(tmp_path.resolve()) in entry["path_ref"], entry
 
 
 def test_zr405_policy_export_deterministic(tmp_path):

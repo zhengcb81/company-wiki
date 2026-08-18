@@ -695,6 +695,31 @@ def _plain(value: Any) -> Any:
     return value
 
 
+def _policy_export_payload(config) -> dict[str, Any]:
+    """ZR-405: the root policy export payload (policy_hash + roots),
+    shared by the ``policy-export`` command and the resolve/ensure response
+    bodies so consumers validate containment against exactly what the wiki
+    exports.
+
+    The payload is the verbatim ``export_policy_2x`` document plus its
+    canonical hash: consumers re-compute the hash over the SAME bytes
+    (excluding the ``policy_hash`` envelope key) — tokenizing or reshaping
+    the roots here would break the byte-for-byte hash contract.  Paths are
+    absolute by construction (the wiki->filing channel is a local
+    subprocess; the RESOLUTION ENVELOPE carries the redacted copies for
+    any external output).
+    """
+    from .policy_2x import export_policy_2x
+
+    policy_hash, policy = export_policy_2x(config)
+    return {
+        "schema_version": policy["schema_version"],
+        "policy_hash": policy_hash,
+        "reusable_root_kinds": list(policy["reusable_root_kinds"]),
+        "roots": policy["roots"],
+    }
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8", errors="replace")
@@ -813,24 +838,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             # artifact never leaks absolute user paths (same discipline as
             # policy_3x export); consumers re-expand against their known
             # wiki root.
-            from .policy_2x import export_policy_2x
-
-            _policy_hash, policy = export_policy_2x(config)
-            project_resolved = str(config.project_root.resolve())
-            token_roots = []
-            for root_entry in policy["roots"]:
-                entry = dict(root_entry)
-                path = str(entry["path_ref"]).replace("\\", "/")
-                if path.startswith(project_resolved.replace("\\", "/")):
-                    entry["path_ref"] = (
-                        "${PROJECT_ROOT}" + path[len(project_resolved.replace("\\", "/")):]
-                    )
-                token_roots.append(entry)
-            result = {
-                "schema_version": "1.0",
-                "policy_hash": _policy_hash,
-                "roots": token_roots,
-            }
+            result = _policy_export_payload(config)
         elif args.command == "derived-audit":
             from .reconciliation import reconcile_artifacts
 
@@ -1038,6 +1046,10 @@ def main(argv: Sequence[str] | None = None) -> int:
                 request
             )
             source_resolution = resolution.to_dict()
+            # ZR-405: the response carries the root policy export so the
+            # filing consumer can validate handle containment against the
+            # SAME policy the wiki exported (no independent allowlist).
+            source_resolution["policy_export"] = _policy_export_payload(config)
             # FC-704: journal-reconciled outcome + policy/epoch + bundle
             # status ride on the resolution (read-only: the journal is read,
             # never appended, by the resolve command).
@@ -1118,6 +1130,9 @@ def main(argv: Sequence[str] | None = None) -> int:
             # the ensure re-used a document.
             resolution_dict = ensure_dict.get("resolution")
             if isinstance(resolution_dict, dict):
+                # ZR-405: the ensure response carries the root policy export
+                # for consumer containment (same payload as policy-export).
+                resolution_dict["policy_export"] = _policy_export_payload(config)
                 resolution_dict["resolution_envelope"] = build_resolution_envelope(
                     ensured.resolution,
                     policy_snapshot=ensure_policy,

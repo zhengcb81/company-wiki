@@ -30,21 +30,31 @@ def export_policy(config, *, project_root: Path | None = None) -> tuple[str, dic
     root = project_root or config.project_root
     roots = []
     for spec in config.roots:
-        roots.append({
-            "root_id": spec.root_id,
-            "path": _redact_path(spec.path, root),
-            "kind": spec.kind,
-            "priority": spec.priority,
-            "adapter_id": spec.adapter_id,
-            "admission_profile_id": spec.admission_profile_id,
-            "read_only": spec.read_only,
-            "reusable_for_filing": spec.reusable_for_filing,
-            "routes": [
-                {"include": list(route.include), "exclude": list(route.exclude),
-                 "adapter_id": route.adapter_id}
-                for route in spec.routes
-            ],
-        })
+        roots.append(
+            {
+                "root_id": spec.root_id,
+                "path": _redact_path(spec.path, root),
+                "kind": spec.kind,
+                "priority": spec.priority,
+                "adapter_id": spec.adapter_id,
+                "admission_profile_id": spec.admission_profile_id,
+                "read_only": spec.read_only,
+                # ZR-405: the export reflects the RESOLVER's effective
+                # reusability — an unset per-root flag follows the kind-level
+                # reusable_root_kinds allowance (the resolver's gate), so a
+                # consumer containment check can never diverge from what the
+                # wiki would actually reuse.
+                "reusable_for_filing": _effective_reusable(spec, config),
+                "routes": [
+                    {
+                        "include": list(route.include),
+                        "exclude": list(route.exclude),
+                        "adapter_id": route.adapter_id,
+                    }
+                    for route in spec.routes
+                ],
+            }
+        )
     policy = {
         "schema_version": POLICY_SCHEMA_VERSION,
         "reusable_root_kinds": list(config.reusable_root_kinds),
@@ -52,6 +62,14 @@ def export_policy(config, *, project_root: Path | None = None) -> tuple[str, dic
     }
     payload = json.dumps(policy, sort_keys=True, ensure_ascii=False)
     return hashlib.sha256(payload.encode("utf-8")).hexdigest(), policy
+
+
+def _effective_reusable(spec, config) -> bool:
+    """Per-root reusable_for_filing if set, else the kind-level
+    reusable_root_kinds allowance (resolver-consistent)."""
+    if spec.reusable_for_filing is not None:
+        return bool(spec.reusable_for_filing)
+    return spec.kind in config.reusable_root_kinds
 
 
 def validate_policy_hash(expected: str, actual: str) -> list[str]:
@@ -62,5 +80,7 @@ def validate_policy_hash(expected: str, actual: str) -> list[str]:
 
 def policy_authorizes_root(policy: dict, root_id: str) -> bool:
     """POL-01: a consumer-local allowance can never widen the policy."""
-    return any(r.get("root_id") == root_id and r.get("reusable_for_filing")
-               for r in policy.get("roots", []))
+    return any(
+        r.get("root_id") == root_id and r.get("reusable_for_filing")
+        for r in policy.get("roots", [])
+    )

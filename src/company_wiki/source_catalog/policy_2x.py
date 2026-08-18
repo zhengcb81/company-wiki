@@ -24,11 +24,24 @@ from .models import ROOT_KINDS, CatalogConfig, RootSpec, RouteSpec
 
 POLICY_2X_SCHEMA_VERSION = "2.0"
 ALLOWED_ROOT_FIELDS_2X = {
-    "root_id", "path", "kind", "priority", "adapter_id",
-    "adapter_version_range", "admission_profile_id", "read_only",
-    "reusable_for_filing", "routes", "allowed_document_kinds",
-    "allowed_statuses", "symlink_policy", "max_file_size",
-    "sidecar_suffixes", "encoding", "privacy_class", "cohort",
+    "root_id",
+    "path",
+    "kind",
+    "priority",
+    "adapter_id",
+    "adapter_version_range",
+    "admission_profile_id",
+    "read_only",
+    "reusable_for_filing",
+    "routes",
+    "allowed_document_kinds",
+    "allowed_statuses",
+    "symlink_policy",
+    "max_file_size",
+    "sidecar_suffixes",
+    "encoding",
+    "privacy_class",
+    "cohort",
     "canonical_write_target",
 }
 # Only the canonical write root may be writable; external roots (directory /
@@ -59,7 +72,9 @@ def load_root_policy_2x(
     data = _mapping(payload, "config")
     required = {"schema_version", "catalog_dir", "roots"}
     if not set(data) <= (required | {"reusable_root_kinds"}):
-        raise CatalogConfigError("2.x config must contain only schema_version/catalog_dir/roots")
+        raise CatalogConfigError(
+            "2.x config must contain only schema_version/catalog_dir/roots"
+        )
     if str(data["schema_version"]) != yaml_schema_version:
         raise CatalogConfigError(
             f"2.x config YAML schema_version must be {yaml_schema_version} (additive)"
@@ -74,7 +89,9 @@ def load_root_policy_2x(
         item = _mapping(raw, f"roots[{index}]")
         unknown = set(item) - ALLOWED_ROOT_FIELDS_2X
         if unknown:
-            raise CatalogConfigError(f"roots[{index}] unknown fields: {sorted(unknown)}")
+            raise CatalogConfigError(
+                f"roots[{index}] unknown fields: {sorted(unknown)}"
+            )
         root_id = str(item.get("root_id", ""))
         if root_id in seen_root_ids:
             raise CatalogConfigError(f"duplicate root_id: {root_id}")
@@ -181,7 +198,10 @@ def _parse_route_2x(
 ) -> RouteSpec:
     item = _mapping(raw, f"roots[{root_index}].routes[{route_index}]")
     unknown = set(item) - {
-        "include", "exclude", "adapter_id", "admission_profile_id",
+        "include",
+        "exclude",
+        "adapter_id",
+        "admission_profile_id",
         "allowed_document_kinds",
     }
     if unknown:
@@ -260,18 +280,22 @@ def export_policy_2x(config: CatalogConfig) -> tuple[str, dict[str, Any]]:
     """
     roots = []
     for spec in config.roots:
-        roots.append({
-            "root_id": spec.root_id,
-            "path_ref": str(spec.path),
-            "adapter_id": spec.adapter_id,
-            "admission_profile_id": spec.admission_profile_id,
-            "read_only": spec.read_only,
-            "reusable_for_filing": spec.reusable_for_filing,
-            "allowed_document_kinds": list(spec.allowed_document_kinds),
-            "canonical_write_target": getattr(spec, "canonical_write_target", None),
-            "priority": spec.priority,
-            "cohort": getattr(spec, "cohort", None),
-        })
+        roots.append(
+            {
+                "root_id": spec.root_id,
+                "path_ref": str(spec.path),
+                "adapter_id": spec.adapter_id,
+                "admission_profile_id": spec.admission_profile_id,
+                "read_only": spec.read_only,
+                # ZR-405: resolver-consistent reusability — an unset per-root
+                # flag follows the kind-level reusable_root_kinds allowance.
+                "reusable_for_filing": _effective_reusable_2x(spec, config),
+                "allowed_document_kinds": list(spec.allowed_document_kinds),
+                "canonical_write_target": getattr(spec, "canonical_write_target", None),
+                "priority": spec.priority,
+                "cohort": getattr(spec, "cohort", None),
+            }
+        )
     policy = {
         "schema_version": POLICY_2X_SCHEMA_VERSION,
         "reusable_root_kinds": list(config.reusable_root_kinds),
@@ -279,6 +303,13 @@ def export_policy_2x(config: CatalogConfig) -> tuple[str, dict[str, Any]]:
     }
     payload = json.dumps(policy, sort_keys=True, ensure_ascii=False)
     return hashlib.sha256(payload.encode("utf-8")).hexdigest(), policy
+
+
+def _effective_reusable_2x(spec, config) -> bool:
+    """Per-root reusable_for_filing if set, else the kind-level allowance."""
+    if spec.reusable_for_filing is not None:
+        return bool(spec.reusable_for_filing)
+    return spec.kind in config.reusable_root_kinds
 
 
 __all__ = [
