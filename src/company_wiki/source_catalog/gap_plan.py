@@ -54,14 +54,18 @@ class GapPlan:
             "entity": self.entity,
             "market": self.market,
             "reuse": [h.to_dict() if hasattr(h, "to_dict") else h for h in self.reuse],
-            "missing": [c.to_dict() if hasattr(c, "to_dict") else c for c in self.missing],
+            "missing": [
+                c.to_dict() if hasattr(c, "to_dict") else c for c in self.missing
+            ],
             "newer_revision": [
                 c.to_dict() if hasattr(c, "to_dict") else c for c in self.newer_revision
             ],
             "not_published": self.not_published,
             "provider_unavailable": self.provider_unavailable,
             "provider_reason": self.provider_reason,
-            "future": [c.to_dict() if hasattr(c, "to_dict") else c for c in self.future],
+            "future": [
+                c.to_dict() if hasattr(c, "to_dict") else c for c in self.future
+            ],
             "gap_hash": self.gap_hash,
         }
 
@@ -82,6 +86,12 @@ def _candidate_amended(candidate: Any) -> bool:
     return bool(getattr(candidate, "amended", False))
 
 
+def _usable_handles(handles: list[Any]) -> list[Any]:
+    """ZR-406: keep only capture-ready (reusable) local handles — a
+    capture-incomplete handle is never reusable evidence."""
+    return [h for h in handles if getattr(h, "capture_ready", True) is not False]
+
+
 def build_gap_plan(
     *,
     request_id: str,
@@ -94,6 +104,12 @@ def build_gap_plan(
     provider_error: str | None = None,
 ) -> GapPlan:
     """Align local reusable handles with remote provider metadata."""
+    # ZR-406 (defense-in-depth): a capture-incomplete local handle is NOT
+    # reusable evidence — it is never offered as reuse and never flips
+    # not_published, in EVERY outcome branch (including provider_error).
+    # The resolver already gates capture_ready upstream; this keeps the
+    # pure planner safe even for direct callers.
+    local_handles = _usable_handles(local_handles)
     if provider_error:
         return GapPlan(
             schema_version=GAP_PLAN_SCHEMA_VERSION,
@@ -118,7 +134,9 @@ def build_gap_plan(
 
     # Remote metadata filed after as_of is excluded from the gap.
     eligible_remote = [
-        c for c in remote_candidates if not _candidate_filed(c) or _candidate_filed(c) <= as_of_date
+        c
+        for c in remote_candidates
+        if not _candidate_filed(c) or _candidate_filed(c) <= as_of_date
     ]
     future = [c for c in remote_candidates if c not in eligible_remote]
 

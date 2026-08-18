@@ -695,6 +695,14 @@ def _plain(value: Any) -> Any:
     return value
 
 
+def _run_export_command(command: str, config, get_catalog) -> dict[str, Any]:
+    """ZR-405: the ``export``/``policy-export`` dispatch (kept in a helper
+    so main()'s branch count stays under the frozen ratchet)."""
+    if command == "policy-export":
+        return _policy_export_payload(config)
+    return get_catalog().export_indexes()
+
+
 def _policy_export_payload(config) -> dict[str, Any]:
     """ZR-405: the root policy export payload (policy_hash + roots),
     shared by the ``policy-export`` command and the resolve/ensure response
@@ -830,15 +838,8 @@ def main(argv: Sequence[str] | None = None) -> int:
                 document_kind=args.document_kind,
                 force=args.force,
             )
-        elif args.command == "export":
-            result = get_catalog().export_indexes()
-        elif args.command == "policy-export":
-            # ZR-405: read-only root policy export for consumers (filing-fetch
-            # containment).  Paths are ${PROJECT_ROOT}-tokenized so the
-            # artifact never leaks absolute user paths (same discipline as
-            # policy_3x export); consumers re-expand against their known
-            # wiki root.
-            result = _policy_export_payload(config)
+        elif args.command in ("export", "policy-export"):
+            result = _run_export_command(args.command, config, get_catalog)
         elif args.command == "derived-audit":
             from .reconciliation import reconcile_artifacts
 
