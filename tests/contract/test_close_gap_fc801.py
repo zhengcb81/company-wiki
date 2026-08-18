@@ -12,6 +12,7 @@ never reports complete).
 import hashlib
 import json
 import sys
+from types import SimpleNamespace
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "src"))
@@ -56,8 +57,14 @@ def _policy_file(catalog, policy_hash: str) -> None:
         json.dumps(policy, ensure_ascii=False), encoding="utf-8")
 
 
-def _binding(gap_hash: str, *, policy_hash: str, request_id: str = "req-1",
-             expires_at: str = "2099-01-01T00:00:00Z"):
+def _binding(
+    gap_hash: str,
+    *,
+    policy_hash: str,
+    request_id: str = "req-1",
+    expires_at: str = "2099-01-01T00:00:00Z",
+    accessions: tuple[str, ...] = ("acc-2025",),
+):
     from company_wiki.source_catalog.close_gap import CloseGapBinding
 
     return CloseGapBinding(
@@ -65,7 +72,7 @@ def _binding(gap_hash: str, *, policy_hash: str, request_id: str = "req-1",
         gap_plan_hash=gap_hash,
         policy_hash=policy_hash,
         provider="sec",
-        allowed_accessions=("acc-2025",),
+        allowed_accessions=accessions,
         max_items=1,
         max_bytes=5_000_000,
         expires_at=expires_at,
@@ -334,3 +341,88 @@ def test_cg07_success_downloaded_new_envelope(tmp_path):
     assert result.resolution["status"] in (
         ResolutionStatus.REUSED_EXACT.value,
         ResolutionStatus.REUSED_EQUIVALENT.value)
+
+
+def test_zr407_newer_revision_is_actionable_authorized_candidate(tmp_path):
+    """ZR-407: a same-period amendment is an actionable gap, not an
+    already-closed plan.  The transaction must stage exactly that candidate
+    under the pre-bound authorization."""
+    from company_wiki.source_catalog import AcquisitionStatus, DownloadCandidate
+    from company_wiki.source_catalog.close_gap import CloseGapResult
+
+    catalog = _catalog(tmp_path)
+    _policy_file(catalog, "a" * 64)
+    candidate = DownloadCandidate(
+        candidate_id="c-2025-amend",
+        provider="sec",
+        provider_document_id="acc-2025-amend",
+        market="US",
+        entity="ACME",
+        title="ACME 2025 annual amendment",
+        source_url="https://www.sec.gov/x/2025-amend.pdf",
+        document_kind="annual_report",
+        form_type="annual_report",
+        filing_date="2026-05-01",
+        fiscal_year=2025,
+    )
+    plan = SimpleNamespace(missing=(), newer_revision=(candidate,), gap_hash="r" * 64)
+    calls = []
+
+    class _RevisionCoordinator:
+        timeout_seconds = 1
+
+        def resolve_or_stage(self, request, *, authorization=None):
+            calls.append((request, authorization))
+            if request.mode == "latest_as_of":
+                return SimpleNamespace(
+                    status=AcquisitionStatus.GAP, gap_plan=plan
+                )
+            assert request.mode == "exact"
+            assert request.provider_document_id == "acc-2025-amend"
+            assert authorization is not None
+            return SimpleNamespace(
+                status=AcquisitionStatus.STAGED,
+                candidate=candidate,
+                receipt=SimpleNamespace(content_sha256="f" * 64),
+                adapter_name="fake",
+                reason="staged",
+            )
+
+    class _Writer:
+        def import_staged(self, request, staged_candidate, receipt):
+            assert staged_candidate is candidate
+            return SimpleNamespace(status=SimpleNamespace(value="imported_new"))
+
+    txn = _txn(tmp_path, _FakeAdapter(), catalog)
+    txn.coordinator = _RevisionCoordinator()
+    txn.writer = _Writer()
+
+    def _finalize(request, txn_id, outcome, *, fetch_events):
+        return CloseGapResult(
+            schema_version="1.0",
+            txn_id=txn_id,
+            status="completed",
+            reason="test",
+            fetch_events=fetch_events,
+            outcome=outcome,
+            resolution={},
+            envelope={},
+        )
+
+    txn._finalize = _finalize
+
+    result = txn.execute(
+        _binding(
+            "r" * 64,
+            policy_hash="a" * 64,
+            request_id=_request().request_id,
+            accessions=("acc-2025-amend",),
+        ),
+        _request(),
+    )
+
+    assert result.status == "completed"
+    assert result.fetch_events == 1
+    staged_calls = [call for call in calls if call[0].mode == "exact"]
+    assert len(staged_calls) == 1
+    assert staged_calls[0][1].allowed_accessions == ("acc-2025-amend",)

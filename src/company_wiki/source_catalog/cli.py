@@ -30,7 +30,7 @@ from .portfolio_promoter import (
     promote_from_portfolio,
 )
 from .service import SourceCatalog
-from .resolver import SourceRequest, SourceResolver
+from .resolver import ResolutionResult, ResolutionStatus, SourceRequest, SourceResolver
 from .security_identity import (
     IdentityResult,
     IdentityStatus,
@@ -695,6 +695,135 @@ def _plain(value: Any) -> Any:
     return value
 
 
+def _read_only_ensure_result(resolution: ResolutionResult) -> dict[str, Any]:
+    """Render an ``ensure``-compatible envelope without a write attempt.
+
+    An exact request without ``--allow-download`` cannot stage, import, or
+    journal anything. Keeping it on the reader avoids forcing a writable
+    catalog merely to report a reusable or missing source.
+    """
+    if resolution.status in {
+        ResolutionStatus.REUSED_EXACT,
+        ResolutionStatus.REUSED_EQUIVALENT,
+    }:
+        status = "reused"
+        reason = "existing_catalog_source_reused_before_adapter"
+    elif resolution.status is ResolutionStatus.AMBIGUOUS:
+        status = "ambiguous"
+        reason = resolution.reason
+    else:
+        status = "missing"
+        reason = (
+            "identity_conflict_no_download"
+            if resolution.status is ResolutionStatus.IDENTITY_CONFLICT
+            else "download_required_but_not_allowed"
+        )
+    resolution_dict = resolution.to_dict()
+    acquisition = {
+        "schema_version": "1.0",
+        "status": status,
+        "resolution": resolution_dict,
+        "adapter_name": None,
+        "candidate": None,
+        "receipt": None,
+        "reason": reason,
+        "gap_plan": None,
+    }
+    return {
+        "schema_version": "1.0",
+        "status": status,
+        "acquisition": acquisition,
+        "resolution": resolution_dict,
+        "attempt": None,
+        "canonical_import": None,
+    }
+
+
+def _run_ensure_command(
+    args: argparse.Namespace,
+    config: Any,
+    project_root: Path,
+    get_catalog: Any,
+    worker_controller: Any,
+    source_request: Any,
+) -> dict[str, Any]:
+    """Execute the read-only or acquisition-capable ``ensure`` command."""
+    request, identity = source_request(allow_download=args.allow_download)
+    if not args.allow_download and request.mode != "latest_as_of":
+        result = _read_only_ensure_result(SourceResolver(get_catalog()).resolve(request))
+        return (
+            {"identity": identity.to_dict(), "source_ensure": result}
+            if identity
+            else result
+        )
+
+    # Download-capable and latest-as-of ensure remain write flows: the writer
+    # initializer may create the catalog before staging.
+    _ = get_catalog().store
+    desired_state = worker_controller().status()["desired_state"]
+    if (
+        args.allow_download
+        and desired_state == "paused"
+        and not args.allow_acquisition_while_paused
+    ):
+        raise RuntimeError(
+            "source acquisition is paused; run worker-resume before allowing downloads"
+        )
+    if args.allow_download and desired_state == "paused":
+        _append_paused_acquisition_audit(
+            config.catalog_dir,
+            entity=request.entity,
+            document_kind=request.document_kind,
+            pid=os.getpid(),
+        )
+    acquisition_config_path = args.acquisition_config
+    if not acquisition_config_path.is_absolute():
+        acquisition_config_path = project_root / acquisition_config_path
+    acquisition_config = load_acquisition_config(
+        acquisition_config_path.resolve(strict=True), project_root=project_root
+    )
+    from .acquisition_journal import AcquisitionJournal
+    from .resolver import build_resolution_envelope
+    from .runtime_policy import RuntimePolicyError, load_runtime_policy
+
+    ensured = _retry_on_catalog_lock(
+        lambda: SourceAcquisitionService(
+            coordinator=AcquisitionCoordinator(
+                catalog=get_catalog(),
+                adapters=acquisition_config.build_registry(),
+                staging_root=acquisition_config.staging_root,
+            ),
+            writer=CanonicalSourceWriter(
+                get_catalog(), staging_root=acquisition_config.staging_root
+            ),
+            journal=AcquisitionJournal(config.catalog_dir),
+        ).ensure(request),
+        action="ensure",
+    )
+
+    try:
+        ensure_policy = load_runtime_policy(config.catalog_dir / "runtime_policy.json")
+    except RuntimePolicyError:
+        ensure_policy = None
+    ensure_dict = _plain(ensured)
+    resolution_dict = ensure_dict.get("resolution")
+    if isinstance(resolution_dict, dict):
+        resolution_dict["policy_export"] = _policy_export_payload(config)
+        resolution_dict["resolution_envelope"] = build_resolution_envelope(
+            ensured.resolution,
+            policy_snapshot=ensure_policy,
+            journal=AcquisitionJournal(config.catalog_dir),
+            bundle=get_catalog().bundle_for_resolution(ensured.resolution),
+            store=get_catalog().store,
+            project_root=project_root,
+        ).to_dict()
+    return (
+        {"identity": identity.to_dict(), "source_ensure": ensure_dict}
+        if identity
+        else ensure_dict
+    )
+
+
 def _run_export_command(command: str, config, get_catalog) -> dict[str, Any]:
     """ZR-405: the ``export``/``policy-export`` dispatch (kept in a helper
     so main()'s branch count stays under the frozen ratchet)."""
@@ -1070,82 +1199,13 @@ def main(argv: Sequence[str] | None = None) -> int:
                 else source_resolution
             )
         elif args.command == "ensure":
-            # ZR-203: acquisition commands are WRITE entrypoints — the
-            # writer initializer may create the catalog so the read-only
-            # resolver (reader) can then read an existing database.
-            _ = get_catalog().store
-            request, identity = source_request(allow_download=args.allow_download)
-            desired_state = worker_controller().status()["desired_state"]
-            if (
-                args.allow_download
-                and desired_state == "paused"
-                and not args.allow_acquisition_while_paused
-            ):
-                raise RuntimeError(
-                    "source acquisition is paused; run worker-resume before allowing downloads"
-                )
-            if args.allow_download and desired_state == "paused":
-                _append_paused_acquisition_audit(
-                    config.catalog_dir,
-                    entity=request.entity,
-                    document_kind=request.document_kind,
-                    pid=os.getpid(),
-                )
-            acquisition_config_path = args.acquisition_config
-            if not acquisition_config_path.is_absolute():
-                acquisition_config_path = project_root / acquisition_config_path
-            acquisition_config = load_acquisition_config(
-                acquisition_config_path.resolve(strict=True),
-                project_root=project_root,
-            )
-            from .acquisition_journal import AcquisitionJournal
-            from .resolver import build_resolution_envelope
-            from .runtime_policy import RuntimePolicyError, load_runtime_policy
-
-            ensured = _retry_on_catalog_lock(
-                lambda: SourceAcquisitionService(
-                    coordinator=AcquisitionCoordinator(
-                        catalog=get_catalog(),
-                        adapters=acquisition_config.build_registry(),
-                        staging_root=acquisition_config.staging_root,
-                    ),
-                    writer=CanonicalSourceWriter(
-                        get_catalog(),
-                        staging_root=acquisition_config.staging_root,
-                    ),
-                    journal=AcquisitionJournal(config.catalog_dir),
-                ).ensure(request),
-                action="ensure",
-            )
-
-            try:
-                ensure_policy = load_runtime_policy(
-                    config.catalog_dir / "runtime_policy.json"
-                )
-            except RuntimePolicyError:
-                ensure_policy = None
-            ensure_dict = _plain(ensured)
-            # FC-704: the journal now carries the attempt — the resolution
-            # sub-dict carries the journal-reconciled envelope.
-            # FC-902: the snapshot-consistent bundle rides the envelope when
-            # the ensure re-used a document.
-            resolution_dict = ensure_dict.get("resolution")
-            if isinstance(resolution_dict, dict):
-                # ZR-405: the ensure response carries the root policy export
-                # for consumer containment (same payload as policy-export).
-                resolution_dict["policy_export"] = _policy_export_payload(config)
-                resolution_dict["resolution_envelope"] = build_resolution_envelope(
-                    ensured.resolution,
-                    policy_snapshot=ensure_policy,
-                    journal=AcquisitionJournal(config.catalog_dir),
-                    bundle=get_catalog().bundle_for_resolution(ensured.resolution),
-                    store=get_catalog().store,
-                    project_root=project_root,
-                ).to_dict()
-            result = (
-                {"identity": identity.to_dict(), "source_ensure": ensure_dict}
-                if identity
-                else ensure_dict
+            result = _run_ensure_command(
+                args,
+                config,
+                project_root,
+                get_catalog,
+                worker_controller,
+                source_request,
             )
         elif args.command == "close-gap":
             from .acquisition_journal import AcquisitionJournal

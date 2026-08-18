@@ -141,6 +141,17 @@ def _utc_now() -> str:
     return datetime.now(UTC).replace(microsecond=0).isoformat().replace("+00:00", "Z")
 
 
+def _actionable_candidates(gap_plan: Any) -> tuple[Any, ...]:
+    """Return the exact remote candidates an authorized close-gap may fetch.
+
+    A same-period amendment is a real freshness gap even when a local filing
+    already exists, so ``newer_revision`` is actionable alongside ``missing``.
+    The plan hash binds this ordered set; the acquisition coordinator still
+    validates provider, accession, caps, and expiry before it fetches bytes.
+    """
+    return tuple(gap_plan.missing) + tuple(gap_plan.newer_revision)
+
+
 class CloseGapTransaction:
     """FC-801: execute one authorized close-gap download, journaled."""
 
@@ -234,7 +245,8 @@ class CloseGapTransaction:
         if rediscovered.status is not AcquisitionStatus.GAP:
             return _reject(f"gap_revalidated_status:{rediscovered.status.value}")
         current_plan = rediscovered.gap_plan
-        if not current_plan.missing:
+        actionable = _actionable_candidates(current_plan)
+        if not actionable:
             # The gap is already closed (local is latest): complete as
             # reused with zero fetches — idempotent recovery (DL-09).
             return self._complete_reused(
@@ -244,11 +256,11 @@ class CloseGapTransaction:
             return _reject("stale_gap_hash")
 
         # Step 3: authorize + fetch staging (DL-02).
-        # The staging request is built PER MISSING CANDIDATE: an exact
-        # request without the missing period's fiscal_year would re-resolve
-        # an OLDER local document as reused and never stage the gap
-        # (FC-803 T1 found this against a real latest_as_of flow).
-        missing_candidate = current_plan.missing[0]
+        # The staging request is built per exact actionable candidate: an
+        # exact request without its fiscal_year would re-resolve an older
+        # local document as reused and never stage a missing period or a
+        # same-period newer revision.
+        missing_candidate = actionable[0]
         missing_year = getattr(missing_candidate, "fiscal_year", None)
         missing_pdoc = getattr(missing_candidate, "provider_document_id", None)
         authorization = build_download_authorization(
@@ -359,7 +371,7 @@ class CloseGapTransaction:
         )
         if rediscovered.status is AcquisitionStatus.GAP:
             current = rediscovered.gap_plan
-            if not current.missing:
+            if not _actionable_candidates(current):
                 # single-flight win: the other caller downloaded it
                 return self._complete_reused(
                     request, txn, binding, reason="gap_closed_by_concurrent"
