@@ -222,6 +222,13 @@ def _parser() -> argparse.ArgumentParser:
     subparsers.add_parser(
         "export", help="export documents.csv, artifacts.csv, and index.md"
     )
+    subparsers.add_parser(
+        "policy-export",
+        help=(
+            "export the root policy snapshot (policy_hash + roots with "
+            "${PROJECT_ROOT}-tokenized path_refs) for consumers"
+        ),
+    )
     derived_audit = subparsers.add_parser(
         "derived-audit", help="audit detached derived files against current catalog"
     )
@@ -800,6 +807,30 @@ def main(argv: Sequence[str] | None = None) -> int:
             )
         elif args.command == "export":
             result = get_catalog().export_indexes()
+        elif args.command == "policy-export":
+            # ZR-405: read-only root policy export for consumers (filing-fetch
+            # containment).  Paths are ${PROJECT_ROOT}-tokenized so the
+            # artifact never leaks absolute user paths (same discipline as
+            # policy_3x export); consumers re-expand against their known
+            # wiki root.
+            from .policy_2x import export_policy_2x
+
+            _policy_hash, policy = export_policy_2x(config)
+            project_resolved = str(config.project_root.resolve())
+            token_roots = []
+            for root_entry in policy["roots"]:
+                entry = dict(root_entry)
+                path = str(entry["path_ref"]).replace("\\", "/")
+                if path.startswith(project_resolved.replace("\\", "/")):
+                    entry["path_ref"] = (
+                        "${PROJECT_ROOT}" + path[len(project_resolved.replace("\\", "/")):]
+                    )
+                token_roots.append(entry)
+            result = {
+                "schema_version": "1.0",
+                "policy_hash": _policy_hash,
+                "roots": token_roots,
+            }
         elif args.command == "derived-audit":
             from .reconciliation import reconcile_artifacts
 
