@@ -1,12 +1,10 @@
 """ZR-406 acceptance tests: orthogonal local-match x provider
 freshness/coverage planner matrix (WU-4.2 build_gap_plan).
 
-Pins the full matrix the card requires:
-
-  C1  local-match state (no-local / matched-exact / matched-equivalent /
-      multiple-ambiguous / capture-incomplete-unusable) x provider state
-      (current / newer_period / newer_revision / not_published /
-      unknown-error / future) — five-tuple outcome + gap_hash determinism.
+  C1  data-driven FULL matrix: 5 local-match states x 6 provider states =
+      30 cells, every cell asserted with its outcome signature
+      (reuse / missing / newer_revision / not_published /
+      provider_unavailable / future).
   C2  as_of anti-leakage: future-dated candidates go to ``future`` and
       never enter the gap; candidates WITHOUT a filing_date are treated as
       ELIGIBLE (conservative gap — never silently dropped); not_published
@@ -17,13 +15,18 @@ Pins the full matrix the card requires:
       newer_revision (newest accession); a local that already holds the
       newest accession reuses with download=0.
 
-Product code is NOT modified by this card (mechanism already implemented).
+Product hardening covered here: build_gap_plan filters capture-incomplete
+local handles (``_usable_handles``) in EVERY outcome branch — an unusable
+local never enters reuse and never flips not_published.
 """
 
 from __future__ import annotations
 
+import itertools
 import sys
 from pathlib import Path
+
+import pytest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "src"))
 
@@ -112,152 +115,144 @@ def _sig(plan) -> tuple:
 
 
 # ---------------------------------------------------------------------------
-# C1 — orthogonal matrix: local-match state x provider state
+# C1 — FULL orthogonality matrix (5 local states x 6 provider states = 30)
 # ---------------------------------------------------------------------------
 
-# Provider fixtures for the matrix rows.
-_CURRENT = [_Remote(2025, "2026-04-15", "acc-2025")]  # local holds newest
-_NEWER_PERIOD = [_Remote(2026, "2026-04-15", "acc-2026")]  # beyond local 2025
-_NEWER_REV = [_Remote(2025, "2026-04-15", "acc-2025-new")]  # same period, newer
-_NOT_PUBLISHED = [_Remote(2025, "2026-04-15", "acc-2025")]  # nothing beyond local
-_FUTURE = [_Remote(2026, "2026-08-15", "acc-2026-future")]  # filed after as_of
-
-# Local fixtures for the matrix rows.
-_LOCAL_EXACT = [_Local(2025, "2026-04-15", "acc-2025")]  # holds newest accession
-_LOCAL_EQUIV = [_Local(2025, "2026-04-15", "acc-2025")]  # equivalent reuse
-_LOCAL_AMBIGUOUS = [  # two locals, one period
+# Local-state fixtures.
+_L_NO = []
+_L_EXACT = [_Local(2025, "2026-04-15", "acc-2025")]
+_L_EQUIV = [_Local(2025, "2026-04-15", "acc-2025")]  # semantic reuse, same shape
+_L_AMBIGUOUS = [
     _Local(2025, "2026-04-15", "acc-2025-a"),
     _Local(2025, "2026-04-15", "acc-2025-b"),
 ]
-_LOCAL_UNUSABLE = [
-    _Local(2025, "2026-04-15", "acc-2025", capture_ready=False)
-]  # capture-incomplete
-_NO_LOCAL = []
+_L_UNUSABLE = [_Local(2025, "2026-04-15", "acc-2025", capture_ready=False)]
 
 
-def test_c1_matrix_no_local():
-    """No local handle: provider-current/newer_period -> missing; provider
-    knows nothing -> not_published; unknown -> unavailable; future ->
-    future + not_published (nothing eligible)."""
-    missing_plan = _plan(_NO_LOCAL, _CURRENT)
-    assert _sig(missing_plan) == ((), ("acc-2025",), (), False, False, ())
-    missing_plan2 = _plan(_NO_LOCAL, _NEWER_PERIOD)
-    assert _sig(missing_plan2) == ((), ("acc-2026",), (), False, False, ())
-    np_plan = _plan(_NO_LOCAL, [])
-    assert _sig(np_plan) == ((), (), (), True, False, ())
-    unavail = _plan(_NO_LOCAL, [], provider_error="rate_limit")
-    assert _sig(unavail) == ((), (), (), False, True, ())
-    future_plan = _plan(_NO_LOCAL, _FUTURE)
-    assert _sig(future_plan) == ((), (), (), True, False, ("acc-2026-future",))
+def _matrix_cell(
+    local_key: str, provider_key: str
+) -> tuple[list, list, tuple, str | None]:
+    """(locals, remotes, expected_sig, provider_error) for one matrix cell.
+    Provider fixtures are chosen per cell so the semantics of each column
+    hold for every local row."""
+    locals_map = {
+        "no_local": _L_NO,
+        "exact": _L_EXACT,
+        "equivalent": _L_EQUIV,
+        "ambiguous": _L_AMBIGUOUS,
+        "unusable": _L_UNUSABLE,
+    }
+    locals_list = locals_map[local_key]
+    usable = [h for h in locals_list if getattr(h, "capture_ready", True) is not False]
+    has_usable = bool(usable)
+    reuse = tuple(sorted(h.provider_document_id for h in usable))
+
+    if provider_key == "current":
+        # provider holds the same period; the accession matches a usable
+        # local when one exists (else the period is genuinely missing)
+        if has_usable:
+            remote = [
+                _Remote(
+                    2025,
+                    "2026-04-15",
+                    "acc-2025-b" if local_key == "ambiguous" else "acc-2025",
+                )
+            ]
+            expected = (reuse, (), (), True, False, ())
+        else:
+            remote = [_Remote(2025, "2026-04-15", "acc-2025")]
+            expected = ((), ("acc-2025",), (), False, False, ())
+        return locals_list, remote, expected, None
+
+    if provider_key == "newer_period":
+        remote = [_Remote(2026, "2026-04-15", "acc-2026")]
+        expected = (reuse, ("acc-2026",), (), False, False, ())
+        return locals_list, remote, expected, None
+
+    if provider_key == "newer_revision":
+        # same period, provider accession differs from a usable local:
+        # newer_revision; with NO usable local the period is simply missing
+        remote = [_Remote(2025, "2026-04-15", "acc-2025-new")]
+        if has_usable:
+            expected = (reuse, (), ("acc-2025-new",), False, False, ())
+        else:
+            expected = ((), ("acc-2025-new",), (), False, False, ())
+        return locals_list, remote, expected, None
+
+    if provider_key == "not_published":
+        expected = (reuse, (), (), True, False, ())
+        return locals_list, [], expected, None
+
+    if provider_key == "unknown":
+        expected = (reuse, (), (), False, True, ())
+        return locals_list, [], expected, "rate_limit_exceeded"
+
+    if provider_key == "future":
+        remote = [_Remote(2026, "2026-08-15", "acc-2026-future")]
+        expected = (reuse, (), (), True, False, ("acc-2026-future",))
+        return locals_list, remote, expected, None
+
+    raise AssertionError(f"unknown provider_key {provider_key!r}")
 
 
-def test_c1_matrix_matched_exact():
-    """Matched exact local x provider states."""
-    plan = _plan(_LOCAL_EXACT, _CURRENT)
-    assert _sig(plan) == (("acc-2025",), (), (), True, False, ())
-    plan = _plan(_LOCAL_EXACT, _NEWER_PERIOD)
-    assert _sig(plan) == (("acc-2025",), ("acc-2026",), (), False, False, ())
-    plan = _plan(_LOCAL_EXACT, _NEWER_REV)
-    assert _sig(plan) == (("acc-2025",), (), ("acc-2025-new",), False, False, ())
-    plan = _plan(_LOCAL_EXACT, _NOT_PUBLISHED)
-    assert _sig(plan) == (("acc-2025",), (), (), True, False, ())
-    plan = _plan(_LOCAL_EXACT, [], provider_error="rate_limit")
-    assert _sig(plan) == (("acc-2025",), (), (), False, True, ())
-    plan = _plan(_LOCAL_EXACT, _FUTURE)
-    assert _sig(plan) == (("acc-2025",), (), (), True, False, ("acc-2026-future",))
+_LOCAL_KEYS = ("no_local", "exact", "equivalent", "ambiguous", "unusable")
+_PROVIDER_KEYS = (
+    "current",
+    "newer_period",
+    "newer_revision",
+    "not_published",
+    "unknown",
+    "future",
+)
 
 
-def test_c1_matrix_matched_equivalent():
-    """Equivalent local (semantic reuse) behaves like exact in the planner."""
-    plan = _plan(_LOCAL_EQUIV, _CURRENT)
-    assert _sig(plan) == (("acc-2025",), (), (), True, False, ())
-    plan = _plan(_LOCAL_EQUIV, _NEWER_PERIOD)
-    assert _sig(plan) == (("acc-2025",), ("acc-2026",), (), False, False, ())
-    plan = _plan(_LOCAL_EQUIV, _NEWER_REV)
-    assert _sig(plan) == (("acc-2025",), (), ("acc-2025-new",), False, False, ())
-    plan = _plan(_LOCAL_EQUIV, _FUTURE)
-    assert _sig(plan) == (("acc-2025",), (), (), True, False, ("acc-2026-future",))
-
-
-def test_c1_matrix_multiple_local_ambiguous():
-    """Two locals for one period: the newest accession aligns with the
-    provider; ambiguous locals stay in reuse (provenance), no phantom
-    missing; a provider accession the locals do not hold is honestly
-    reported as newer_revision; a provider current matching one local
-    keeps not_published."""
-    # provider current matches the newest local accession -> up to date
-    plan = _plan(_LOCAL_AMBIGUOUS, [_Remote(2025, "2026-04-15", "acc-2025-b")])
-    assert _sig(plan) == (("acc-2025-a", "acc-2025-b"), (), (), True, False, ())
-    # provider accession differs from every local -> honest newer_revision
-    plan = _plan(_LOCAL_AMBIGUOUS, [_Remote(2025, "2026-04-15", "acc-2025-x")])
-    assert _sig(plan) == (
-        ("acc-2025-a", "acc-2025-b"),
-        (),
-        ("acc-2025-x",),
-        False,
-        False,
-        (),
+@pytest.mark.parametrize("local_key", _LOCAL_KEYS)
+@pytest.mark.parametrize("provider_key", _PROVIDER_KEYS)
+def test_c1_matrix_cell(local_key: str, provider_key: str):
+    """C1: every one of the 5x6=30 matrix cells is asserted (the planner's
+    outcome is a pure function of the local/provider inputs)."""
+    locals_list, remote, expected, provider_error = _matrix_cell(
+        local_key, provider_key
     )
-    plan = _plan(_LOCAL_AMBIGUOUS, _NEWER_PERIOD)
-    assert _sig(plan) == (
-        ("acc-2025-a", "acc-2025-b"),
-        ("acc-2026",),
-        (),
-        False,
-        False,
-        (),
-    )
-    plan = _plan(_LOCAL_AMBIGUOUS, _NEWER_REV)
-    assert _sig(plan) == (
-        ("acc-2025-a", "acc-2025-b"),
-        (),
-        ("acc-2025-new",),
-        False,
-        False,
-        (),
-    )
-    plan = _plan(_LOCAL_AMBIGUOUS, _FUTURE)
-    assert _sig(plan) == (
-        ("acc-2025-a", "acc-2025-b"),
-        (),
-        (),
-        True,
-        False,
-        ("acc-2026-future",),
+    plan = _plan(locals_list, remote, provider_error=provider_error)
+    assert _sig(plan) == expected, (
+        f"cell local={local_key} x provider={provider_key} "
+        f"expected {expected} got {_sig(plan)}"
     )
 
 
-def test_c1_matrix_unusable_local_never_faked():
-    """A capture-incomplete local handle is not reusable evidence: it never
-    enters reuse and never flips not_published.  With the unusable local
-    filtered out, a provider listing for the same period is GENUINELY
-    missing (not a fake up-to-date); an empty provider still reports
-    not_published; a provider error stays unavailable."""
-    plan = _plan(_LOCAL_UNUSABLE, _NOT_PUBLISHED)
-    assert plan.reuse == ()
-    # provider HAS 2025 but the local is unusable -> real missing
-    assert tuple(c.provider_document_id for c in plan.missing) == ("acc-2025",)
-    assert plan.not_published is False
-    plan = _plan(_LOCAL_UNUSABLE, _NEWER_PERIOD)
-    assert plan.reuse == ()
-    assert tuple(c.provider_document_id for c in plan.missing) == ("acc-2026",)
-    plan = _plan(_LOCAL_UNUSABLE, [])
-    assert plan.reuse == ()
-    assert plan.not_published is True  # nothing on the provider side either
-    plan = _plan(_LOCAL_UNUSABLE, [], provider_error="rate_limit")
+def test_c1_matrix_cells_are_distinct():
+    """Sanity: the 30 cells exercise distinct (local, provider) pairs and
+    each column/row combination is present exactly once (the parametrized
+    matrix is complete, not sampled)."""
+    cells = list(itertools.product(_LOCAL_KEYS, _PROVIDER_KEYS))
+    assert len(cells) == 30
+    assert len(set(cells)) == 30
+
+
+def test_c1_gap_hash_deterministic_and_discriminating():
+    """Every matrix cell's gap_hash is deterministic (same inputs -> same
+    hash) and distinct outcomes differ."""
+    for local_key, provider_key in itertools.product(_LOCAL_KEYS, _PROVIDER_KEYS):
+        locals_list, remote, _expected, provider_error = _matrix_cell(
+            local_key, provider_key
+        )
+        first = _plan(locals_list, remote, provider_error=provider_error)
+        second = _plan(locals_list, remote, provider_error=provider_error)
+        assert first.gap_hash == second.gap_hash
+        assert len(first.gap_hash) == 64
+    different = _plan(_L_EXACT, [_Remote(2026, "2026-04-15", "acc-2026")])
+    same = _plan(_L_EXACT, [_Remote(2025, "2026-04-15", "acc-2025")])
+    assert different.gap_hash != same.gap_hash
+
+
+def test_c1_unusable_local_in_provider_error_branch():
+    """The capture_ready filter applies in the provider_error branch too:
+    an unusable local is never offered as reuse even when the provider is
+    unavailable."""
+    plan = _plan(_L_UNUSABLE, [], provider_error="rate_limit")
     assert plan.reuse == ()
     assert plan.provider_unavailable is True
-
-
-def test_c1_matrix_gap_hash_deterministic_across_cells():
-    """Every matrix cell's gap_hash is deterministic (same inputs -> same
-    hash; distinct outcomes -> distinct hashes in the sampled cells)."""
-    first = _plan(_LOCAL_EXACT, _NEWER_REV)
-    second = _plan(_LOCAL_EXACT, _NEWER_REV)
-    assert first.gap_hash == second.gap_hash
-    assert len(first.gap_hash) == 64
-    different = _plan(_LOCAL_EXACT, _CURRENT)
-    assert first.gap_hash != different.gap_hash
 
 
 # ---------------------------------------------------------------------------
@@ -269,14 +264,14 @@ def test_c2_unknown_filing_date_is_eligible_conservative():
     """A remote candidate WITHOUT a filing_date cannot be proven future:
     it stays ELIGIBLE for the gap (conservative direction — never silently
     dropped, never leaked out of the gap without evidence)."""
-    plan = _plan(_NO_LOCAL, [_Remote(2026, None, "acc-2026-unknown")])
+    plan = _plan(_L_NO, [_Remote(2026, None, "acc-2026-unknown")])
     assert tuple(c.provider_document_id for c in plan.missing) == ("acc-2026-unknown",)
     assert plan.future == ()
     assert plan.not_published is False
 
 
 def test_c2_future_never_enters_gap_and_does_not_negate_not_published():
-    plan = _plan(_LOCAL_EXACT, [_Remote(2026, "2026-09-01", "acc-2026-f")])
+    plan = _plan(_L_EXACT, [_Remote(2026, "2026-09-01", "acc-2026-f")])
     assert tuple(c.provider_document_id for c in plan.future) == ("acc-2026-f",)
     assert plan.missing == ()
     assert plan.not_published is True
@@ -286,7 +281,7 @@ def test_c2_mixed_eligible_and_future():
     """Eligible newer period + future candidate: only the eligible one is
     missing; the future one is excluded and does not change the gap."""
     plan = _plan(
-        _LOCAL_EXACT,
+        _L_EXACT,
         [
             _Remote(2026, "2026-04-15", "acc-2026-eligible"),
             _Remote(2027, "2026-09-01", "acc-2027-future"),
