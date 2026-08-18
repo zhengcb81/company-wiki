@@ -9,6 +9,7 @@ after a successful close deduplicates (idempotent, no duplicate docs).
 """
 import hashlib
 import json
+import multiprocessing
 import sys
 import threading
 import time
@@ -25,7 +26,7 @@ def _catalog(tmp_path: Path):
 
     project = tmp_path / "project"
     companies = project / "companies"
-    (companies / "ACME" / "raw").mkdir(parents=True)
+    (companies / "ACME" / "raw").mkdir(parents=True, exist_ok=True)
     return SourceCatalog(
         CatalogConfig(
             project_root=project,
@@ -183,6 +184,33 @@ def _binding(gap_hash: str, request_id: str):
     )
 
 
+class _CrossProcessSpyAdapter(_SpyAdapter):
+    """A process-local adapter whose append-only log is the fetch oracle."""
+
+    def __init__(self, fetch_log: Path):
+        super().__init__(fetch_sleep=0.5)
+        self.fetch_log = fetch_log
+
+    def fetch(self, candidate, staging_dir):
+        with self.fetch_log.open("ab") as stream:
+            stream.write(b"fetch\n")
+            stream.flush()
+        return super().fetch(candidate, staging_dir)
+
+
+def _run_cross_process_close_gap(tmp_path_text, binding, result_queue, fetch_log):
+    """Spawn target: execute through a fresh catalog and transaction object."""
+    try:
+        tmp_path = Path(tmp_path_text)
+        adapter = _CrossProcessSpyAdapter(Path(fetch_log))
+        catalog = _catalog(tmp_path)
+        txn, _ = _txn(tmp_path, adapter, catalog)
+        result = txn.execute(binding, _request())
+        result_queue.put(("result", result.status, result.fetch_events, result.reason))
+    except Exception as exc:  # pragma: no cover - reported to parent assertion
+        result_queue.put(("error", type(exc).__name__, str(exc)))
+
+
 # --- DL-08: single-flight ------------------------------------------------------
 
 
@@ -221,6 +249,44 @@ def test_cg_c1_single_flight_one_fetch(tmp_path):
         f"expected 1 download + 1 reuse, got {[r.fetch_events for r in results.values()]}")
     docs = catalog.store.fetchall("SELECT COUNT(*) c FROM documents")[0]["c"]
     assert docs == 1, "single-flight committed twice"
+
+
+def test_cg_c1b_cross_process_single_flight_one_fetch(tmp_path):
+    """DL-08: process isolation still permits only one fetch and commit.
+
+    The historical thread test proves the transaction sequence.  This test
+    exercises the actual file-lock protocol used by separate CLI processes:
+    both children reconstruct their own catalog/coordinator/writer around a
+    shared temp root and use an append-only adapter log as the independent
+    fetch oracle.
+    """
+    catalog = _catalog(tmp_path)
+    _policy_file(catalog)
+    gap_hash, request_id = _gap_hash(catalog, _SpyAdapter())
+    binding = _binding(gap_hash, request_id)
+    fetch_log = tmp_path / "cross-process-fetch.log"
+    context = multiprocessing.get_context("spawn")
+    result_queue = context.Queue()
+    processes = [
+        context.Process(
+            target=_run_cross_process_close_gap,
+            args=(str(tmp_path), binding, result_queue, str(fetch_log)),
+        )
+        for _ in range(2)
+    ]
+    for process in processes:
+        process.start()
+    for process in processes:
+        process.join(timeout=45)
+    assert all(process.exitcode == 0 for process in processes), [
+        (process.pid, process.exitcode) for process in processes
+    ]
+    results = [result_queue.get(timeout=5) for _ in processes]
+    assert not [result for result in results if result[0] == "error"], results
+    assert fetch_log.read_bytes().splitlines() == [b"fetch"]
+    assert sorted(result[2] for result in results) == [0, 1]
+    docs = catalog.store.fetchall("SELECT COUNT(*) c FROM documents")[0]["c"]
+    assert docs == 1
 
 
 # --- OPS-02: bounded retry ----------------------------------------------------
