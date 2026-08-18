@@ -1018,6 +1018,7 @@ def main(argv: Sequence[str] | None = None) -> int:
                 journal=AcquisitionJournal(config.catalog_dir),
                 bundle=get_catalog().bundle_for_resolution(resolution),
                 store=get_catalog().reader,
+                project_root=project_root,
             ).to_dict()
             result = (
                 {"identity": identity.to_dict(), "source_resolution": source_resolution}
@@ -1092,6 +1093,7 @@ def main(argv: Sequence[str] | None = None) -> int:
                     journal=AcquisitionJournal(config.catalog_dir),
                     bundle=get_catalog().bundle_for_resolution(ensured.resolution),
                     store=get_catalog().store,
+                    project_root=project_root,
                 ).to_dict()
             result = (
                 {"identity": identity.to_dict(), "source_ensure": ensure_dict}

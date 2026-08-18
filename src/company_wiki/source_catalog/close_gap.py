@@ -465,6 +465,7 @@ class CloseGapTransaction:
             journal=self.journal,
             bundle=self.catalog.bundle_for_resolution(resolution),
             store=self.catalog.store,
+            project_root=self.catalog.config.project_root,
         )
         return CloseGapResult(
             schema_version=CLOSE_GAP_SCHEMA_VERSION,

@@ -8,6 +8,7 @@ from enum import Enum
 from functools import lru_cache
 import hashlib
 import json
+import os
 from pathlib import Path
 import re
 from typing import Any
@@ -356,7 +357,7 @@ _STRUCTURAL_OUTCOME = {
 
 @dataclass(frozen=True)
 class ResolutionEnvelope:
-    """FC-704 + FC-902: handle + policy/epoch + journal-reconciled outcome
+    """FC-704 + FC-902 + FC-905-a: handle + policy/epoch + journal-reconciled outcome
     + snapshot-consistent SourceBundle.
 
     The download evidence (``download_events``) comes from the acquisition
@@ -364,6 +365,13 @@ class ResolutionEnvelope:
     (scenario_matrix §2).  ``bundle_status`` is "available" ONLY when a real
     snapshot-consistent bundle dict was provided; otherwise it stays
     "unavailable" — never a faked empty-green (FC-902 fail-closed).
+
+    ZR-404 (additive): the envelope also carries the request-pinned
+    policy/epoch/cohort consistency evidence, the per-candidate exclusion
+    trace, the canonical-location rationale (path-redacted) and the source
+    content hash.  All new fields are optional with honest defaults so
+    pre-ZR-404 consumers (filing validate_resolution_envelope N/N-1) keep
+    working; envelope_schema_version stays "1.0" (additive contract).
     """
 
     envelope_schema_version: str
@@ -379,6 +387,13 @@ class ResolutionEnvelope:
     prompt_injection_status: str = "not_reviewed"
     parser_calls: int | None = None
     llm_calls: int | None = None
+    # ZR-404: candidate exclusion trace (why candidates were not reused),
+    # canonical-location rationale (winner + redacted path + rule), the
+    # policy-snapshot cohorts, and the matched source content hash.
+    candidate_exclusion_trace: tuple[str, ...] = ()
+    canonical_location_rationale: dict[str, Any] | None = None
+    cohorts: tuple[str, ...] | None = None
+    source_sha256: str | None = None
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -393,6 +408,10 @@ class ResolutionEnvelope:
             "prompt_injection_status": self.prompt_injection_status,
             "parser_calls": self.parser_calls,
             "llm_calls": self.llm_calls,
+            "candidate_exclusion_trace": list(self.candidate_exclusion_trace),
+            "canonical_location_rationale": self.canonical_location_rationale,
+            "cohorts": list(self.cohorts) if self.cohorts is not None else None,
+            "source_sha256": self.source_sha256,
         }
 
 
@@ -403,6 +422,7 @@ def build_resolution_envelope(
     journal: Any | None = None,
     bundle: dict[str, Any] | None = None,
     store: Any | None = None,
+    project_root: Path | None = None,
 ) -> ResolutionEnvelope:
     """FC-704 + FC-902 + FC-905-a: reconcile the resolution against the
     acquisition journal, attach a snapshot-consistent SourceBundle when
@@ -424,6 +444,16 @@ def build_resolution_envelope(
     (absent receipt -> explicit ``not_reviewed``) and ``parser_calls``/
     ``llm_calls`` come from the producer_events journal.  Without a store
     those stay ``not_reviewed`` / None — absent evidence is never fabricated.
+
+    ZR-404 (additive): ``policy_snapshot`` is validated fail-closed (dict
+    with a 64-hex ``policy_hash``, text ``current_epoch``, list/tuple-of-str
+    ``active_cohorts`` when present) and its cohorts ride the envelope;
+    ``candidate_exclusion_trace`` comes from the resolution's debug trace;
+    ``canonical_location_rationale`` records the winning canonical
+    location with a path-redacted copy (``project_root`` is replaced by
+    ``${PROJECT_ROOT}``, ``USERPROFILE`` by ``${USER_PROFILE}``);
+    ``source_sha256`` is the matched handle's content hash.  All additive —
+    pre-ZR-404 consumers keep working on the old keys.
     """
     if not isinstance(resolution, ResolutionResult):
         raise TypeError("resolution must be a ResolutionResult")
@@ -441,9 +471,32 @@ def build_resolution_envelope(
             download_events = 1 if attempt.outcome in _ENVELOPE_DOWNLOAD_OUTCOMES else 0
     policy_hash = None
     activation_epoch = None
-    if isinstance(policy_snapshot, dict):
+    cohorts = None
+    if policy_snapshot is not None:
+        if not isinstance(policy_snapshot, dict):
+            raise ValueError("policy_snapshot must be a dict or None (fail closed)")
         policy_hash = policy_snapshot.get("policy_hash")
+        if policy_hash is not None and not (
+            isinstance(policy_hash, str) and re.fullmatch(r"[0-9a-f]{64}", policy_hash)
+        ):
+            raise ValueError(
+                "policy_snapshot policy_hash must be a lowercase SHA-256 or null"
+            )
         activation_epoch = policy_snapshot.get("current_epoch")
+        if activation_epoch is not None and not (
+            isinstance(activation_epoch, str) and activation_epoch.strip()
+        ):
+            raise ValueError("policy_snapshot current_epoch must be text or null")
+        cohorts_value = policy_snapshot.get("active_cohorts")
+        if cohorts_value is not None:
+            if not isinstance(cohorts_value, (list, tuple)) or not all(
+                isinstance(cohort, str) for cohort in cohorts_value
+            ):
+                raise ValueError(
+                    "policy_snapshot active_cohorts must be a list/tuple of "
+                    "strings or null"
+                )
+            cohorts = tuple(cohorts_value)
     bundle_status = "unavailable"
     bundle_hash = None
     bundle_dict = None
@@ -467,6 +520,17 @@ def build_resolution_envelope(
         counts = count_producer_events(store, document_id)
         parser_calls = counts["parser_calls"]
         llm_calls = counts["llm_calls"]
+    source_sha256 = None
+    canonical_rationale: dict[str, Any] | None = None
+    if resolution.matches:
+        handle = resolution.matches[0]
+        source_sha256 = handle.content_sha256
+        canonical_rationale = {
+            "canonical_location_id": handle.canonical_location_id,
+            "canonical_path": _redact_path(handle.canonical_path, project_root),
+            "selection": "lowest_priority_active_original_primary_then_tiebreak",
+            "source_sha256": handle.content_sha256,
+        }
     return ResolutionEnvelope(
         envelope_schema_version=RESOLUTION_ENVELOPE_SCHEMA_VERSION,
         outcome=outcome,
@@ -479,7 +543,25 @@ def build_resolution_envelope(
         prompt_injection_status=prompt_injection_status,
         parser_calls=parser_calls,
         llm_calls=llm_calls,
+        candidate_exclusion_trace=tuple(resolution.debug_trace),
+        canonical_location_rationale=canonical_rationale,
+        cohorts=cohorts,
+        source_sha256=source_sha256,
     )
+
+
+def _redact_path(path: str, project_root: Path | None) -> str:
+    """ZR-404: replace the project root and the user profile prefix with
+    stable tokens so the envelope never leaks absolute user paths."""
+    if project_root is not None:
+        try:
+            path = path.replace(str(project_root.resolve()), "${PROJECT_ROOT}")
+        except OSError:
+            path = path.replace(str(project_root), "${PROJECT_ROOT}")
+    user_profile = os.environ.get("USERPROFILE")
+    if user_profile:
+        path = path.replace(user_profile, "${USER_PROFILE}")
+    return path
 
 
 def _source_metadata(
