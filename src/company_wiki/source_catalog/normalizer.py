@@ -1419,6 +1419,14 @@ def _frontmatter(document: Any, normalized: _Normalized) -> str:
         detect_entities,
         multi_entity_quality_flag,
     )
+    # ZR-506: section / chunk / fact assertion — structural layer over the
+    # flat locator stream (ZR-504/505).
+    from .section_chunk_fact import (
+        chunk_spans,
+        content_line_count,
+        detect_sections,
+        extract_facts,
+    )
 
     # document may be a sqlite3.Row (normalize_catalog) or a plain dict
     # (tests/fixtures): .get only exists on the dict, index access works on
@@ -1450,6 +1458,20 @@ def _frontmatter(document: Any, normalized: _Normalized) -> str:
     entity_flag = multi_entity_quality_flag(entity_verdict)
     if entity_flag and entity_flag not in flags:
         flags.append(entity_flag)
+    # ZR-506: structural assertions over the rendered body — sections
+    # (chapter headings), chunks (section line ranges), facts
+    # ("指标名：数字+单位").  Empty results stay honest (never fabricated).
+    structure_sections = detect_sections(normalized.body)
+    structure_chunks = chunk_spans(
+        content_line_count(normalized.body), structure_sections
+    )
+    structure_facts = extract_facts(normalized.body)
+    document_structure = {
+        "schema_version": "1.0",
+        "sections": structure_sections,
+        "chunk_count": len(structure_chunks),
+        "facts": structure_facts,
+    }
     payload = {
         "schema_version": "1.0.0",
         "artifact_role": "normalized",
@@ -1472,6 +1494,8 @@ def _frontmatter(document: Any, normalized: _Normalized) -> str:
         # unverifiable) with extracted company-name phrases; multi_entity
         # flags for attribution (fail-closed, zero hardcoded names).
         "detected_entities": entity_detection,
+        # ZR-506: structural assertions — sections, chunk_count, facts.
+        "document_structure": document_structure,
     }
     return (
         "---\n"
