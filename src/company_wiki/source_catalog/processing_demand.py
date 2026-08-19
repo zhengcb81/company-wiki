@@ -103,18 +103,32 @@ class DemandQueue:
             raise DemandNotFoundError(f"no demand {demand_id!r}")
         return demand
 
-    def claim(self, *, owner: str, now: float) -> ProcessingDemand:
-        """Claim the highest-priority ready demand and grant a lease."""
-        ready = [
-            demand
-            for demand in self._demands.values()
-            if demand.status in ("pending", "failed")
-            and (demand.retry_at is None or demand.retry_at <= now)
-            and (demand.lease_until is None or demand.lease_until < now)
-        ]
-        if not ready:
-            raise DemandStateError("no ready demand to claim")
-        chosen = min(ready, key=lambda item: (-item.priority, item.created_at))
+    def claim(
+        self, *, owner: str, now: float, demand_id: str | None = None
+    ) -> ProcessingDemand:
+        """Claim the highest-priority ready demand and grant a lease.
+
+        `demand_id` (additive, ZR-508): claim a specific ready demand —
+        used by the scheduler after its own fairness selection; the
+        default (None) keeps the strict priority-desc/created-asc order.
+        """
+        if demand_id is not None:
+            chosen = self._demand(demand_id)
+            if chosen.status not in ("pending", "failed"):
+                raise DemandStateError(f"demand {demand_id!r} is not claimable")
+            if chosen.retry_at is not None and chosen.retry_at > now:
+                raise DemandStateError(f"demand {demand_id!r} is in backoff")
+        else:
+            ready = [
+                demand
+                for demand in self._demands.values()
+                if demand.status in ("pending", "failed")
+                and (demand.retry_at is None or demand.retry_at <= now)
+                and (demand.lease_until is None or demand.lease_until < now)
+            ]
+            if not ready:
+                raise DemandStateError("no ready demand to claim")
+            chosen = min(ready, key=lambda item: (-item.priority, item.created_at))
         claimed = ProcessingDemand(
             demand_id=chosen.demand_id,
             key=chosen.key,
