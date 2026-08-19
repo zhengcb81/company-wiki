@@ -18,3 +18,13 @@ roots:
     kind: directory
     path: "${USER_PROFILE}/Dropbox/Stock"
     priority: 30
+  # ZR-409 (EX-08): a future root joins by CONFIG ONLY — kind directory +
+  # registered sidecar adapter, read-only, reusable.  No product code change
+  # is needed for a new root (the whole point of the adapter registry).
+  - root_id: future_lake
+    kind: directory
+    path: "${PROJECT_ROOT}/future_lake"
+    adapter_id: sidecar_filing_v1
+    read_only: true
+    reusable_for_filing: true
+    priority: 40
