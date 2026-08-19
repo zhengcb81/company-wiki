@@ -176,6 +176,45 @@ def test_c2_page_count_lands_in_normalized_artifact():
     assert payload["document_kind"] == "broker_research"
 
 
+def test_c2_page_count_survives_isolated_parser_envelope():
+    """REV-001 fix: page_count must ride the isolated-parser IPC envelope
+    (to_payload -> from_payload round-trip), so production normalization
+    (which always goes through _run_parser_isolated) keeps it — never
+    silently dropped to null."""
+    from company_wiki.source_catalog import normalizer as module
+
+    norm = module._Normalized(
+        body="# b",
+        parser_results=(),
+        parser_name="pdf_page_aware_core",
+        parser_version="1.0.0",
+        status="completed",
+        quality_flags=(),
+        error=None,
+        page_count=3,
+    )
+    payload = module._normalized_to_payload(norm, expected_source_id="src-1")
+    assert payload["page_count"] == 3
+    restored = module._normalized_from_payload(payload, expected_source_id="src-1")
+    assert restored.page_count == 3
+    # and a null page_count round-trips as null (no fabrication)
+    norm_none = module._Normalized(
+        body="# b",
+        parser_results=(),
+        parser_name="fixture",
+        parser_version="1.0.0",
+        status="completed",
+        quality_flags=(),
+        error=None,
+        page_count=None,
+    )
+    payload_none = module._normalized_to_payload(norm_none, expected_source_id="src-1")
+    restored_none = module._normalized_from_payload(
+        payload_none, expected_source_id="src-1"
+    )
+    assert restored_none.page_count is None
+
+
 def test_c2_page_count_none_when_unknown():
     """A non-PDF normalized path keeps page_count null/honest (no
     fabricated count)."""

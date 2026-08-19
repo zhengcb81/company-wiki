@@ -151,6 +151,9 @@ def _normalized_to_payload(
         "status": normalized.status,
         "quality_flags": list(normalized.quality_flags),
         "error": normalized.error,
+        # ZR-501: page count travels the isolated-parser envelope so the
+        # normalized artifact frontmatter carries it end-to-end.
+        "page_count": normalized.page_count,
     }
 
 
@@ -167,6 +170,7 @@ def _normalized_from_payload(payload: Any, *, expected_source_id: str) -> _Norma
         "status",
         "quality_flags",
         "error",
+        "page_count",
     }
     if set(payload) != expected_fields or payload.get("schema_version") != "1.0":
         raise ParserResultProtocolError("parser result payload schema is invalid")
@@ -185,6 +189,13 @@ def _normalized_from_payload(payload: Any, *, expected_source_id: str) -> _Norma
         raise ParserResultProtocolError("quality_flags must be an array of text")
     if payload["error"] is not None and not isinstance(payload["error"], str):
         raise ParserResultProtocolError("error must be text or null")
+    page_count = payload.get("page_count")
+    if page_count is not None and (
+        isinstance(page_count, bool)
+        or not isinstance(page_count, int)
+        or page_count < 1
+    ):
+        raise ParserResultProtocolError("page_count must be a positive integer or null")
     raw_results = payload.get("parser_results")
     if not isinstance(raw_results, list):
         raise ParserResultProtocolError("parser_results must be an array")
@@ -221,6 +232,7 @@ def _normalized_from_payload(payload: Any, *, expected_source_id: str) -> _Norma
             status=payload["status"],
             quality_flags=tuple(payload["quality_flags"]),
             error=payload["error"],
+            page_count=page_count,
         )
     except (TypeError, ValueError) as exc:
         raise ParserResultProtocolError(
