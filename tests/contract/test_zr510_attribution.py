@@ -204,5 +204,41 @@ def test_c4_zero_hardcoded_names_in_product_module():
         assert name not in source
 
 
+def test_c4_locator_bearing_body_offsets_stay_aligned():
+    """REV-002 fix: production bodies carry '## Page N' and
+    '<!-- locator: ... -->' lines — the content-line universe used by
+    chunk offsets must match attribute_document's slicing exactly."""
+    body = (
+        "## Page 1\n\n"
+        "<!-- locator: loc:v1/page:1/paragraph:0 -->\n\n"
+        "一、紫金矿业分析\n\n"
+        "<!-- locator: loc:v1/page:1/paragraph:1 -->\n\n"
+        "紫金矿业集团股份有限公司的资源禀赋良好。\n\n"
+        "## Page 2\n\n"
+        "<!-- locator: loc:v1/page:2/paragraph:0 -->\n\n"
+        "二、陕西煤业分析\n\n"
+        "<!-- locator: loc:v1/page:2/paragraph:1 -->\n\n"
+        "陕西煤业股份有限公司的成本曲线有竞争力。\n\n"
+        "三、风险提示\n\n"
+        "本报告仅供内部参考。\n"
+    )
+    from company_wiki.source_catalog.section_chunk_fact import (  # noqa: F811
+        chunk_spans,
+        content_line_count,
+        detect_sections,
+    )
+
+    sections = detect_sections(body)
+    chunks = chunk_spans(content_line_count(body), sections)
+    result = attribute_document(
+        body, chunks, ["紫金矿业集团股份有限公司", "陕西煤业股份有限公司"]
+    )
+    by_index = {item["chunk_index"]: item for item in result}
+    # chunk 1 = 一、紫金矿业分析 section content; chunk 2 = 二、陕西煤业分析
+    assert by_index[1]["attribution"] == "紫金矿业集团股份有限公司"
+    assert by_index[2]["attribution"] == "陕西煤业股份有限公司"
+    assert by_index[3]["attribution"] == "unattributed"
+
+
 if __name__ == "__main__":
     pytest.main([__file__, "-q"])

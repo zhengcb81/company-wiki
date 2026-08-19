@@ -1480,14 +1480,27 @@ def _frontmatter(document: Any, normalized: _Normalized) -> str:
     # single-entity documents stay concise (no key).
     chunk_attribution = None
     if entity_verdict == "multi_entity":
-        candidates = list(
+        # Candidate set = declared identity + page phrases, with
+        # proper-substring candidates dropped (longest-first): noisy
+        # fragments like "股份有限公司" must not shadow the full name.
+        raw_candidates = list(
             dict.fromkeys(
                 [inner.get("canonical_entity_id"), inner.get("display_name")]
                 + list(entity_detection["evidence"].get("company_phrases") or [])
             )
         )
+        candidates = [
+            candidate
+            for candidate in raw_candidates
+            if candidate
+            and not any(
+                candidate != other
+                and candidate in (other or "")
+                for other in raw_candidates
+            )
+        ]
         chunk_attribution = attribute_document(
-            normalized.body, structure_chunks, [c for c in candidates if c]
+            normalized.body, structure_chunks, candidates
         )
     payload = {
         "schema_version": "1.0.0",

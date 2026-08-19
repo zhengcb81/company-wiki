@@ -47,6 +47,23 @@ def _related(phrase: str, declared: list[str]) -> str | None:
     return None
 
 
+def _content_lines(text: str) -> list[str]:
+    """Content lines with the ZR-506 convention: blank lines, page/table
+    headers ("## ", "# ") and locator comments ("<!--") excluded — the
+    same universe chunk offsets are defined against."""
+    lines: list[str] = []
+    for line in (text or "").splitlines():
+        stripped = line.strip()
+        if not stripped:
+            continue
+        if stripped.startswith("## ") or stripped.startswith("<!--"):
+            continue
+        if stripped.startswith("# "):
+            continue
+        lines.append(stripped)
+    return lines
+
+
 def attribute_document(
     text: str | None,
     chunks: list[list[int]],
@@ -55,9 +72,9 @@ def attribute_document(
     """Attribute every chunk by the entity phrases its own text names.
 
     Chunk offsets are CONTENT-line offsets (the ZR-506 convention: blank
-    lines and page/locator headers excluded), so the same filtering is
-    applied here before slicing."""
-    lines = [line for line in (text or "").splitlines() if line.strip()]
+    lines, page headers and locator comments excluded), so the same
+    filtering is applied here before slicing."""
+    lines = _content_lines(text)
     attributed: list[dict[str, object]] = []
     for chunk_index, (start, end) in enumerate(chunks):
         segment = "\n".join(lines[start:end])
