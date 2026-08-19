@@ -61,6 +61,10 @@ REASONS: dict[str, str] = {
     "artifact_rejected": "artifact failed validation (reason in detail)",
     "recomputed": "artifact recompute planned",
     "stale_bundle": "snapshot mismatch invalidates the bundle",
+    # ZR-502 homepage identity — verdict evidence codes
+    "no_first_page_text": "no first-page text was extracted",
+    "no_declared_identity_on_cover": "cover contradicts declared identity",
+    "no_strong_cover_framing": "page is not recognizably a cover",
     # migration / bridge
     "legacy_bridge_hit": "legacy acquisition/dayu_meta container read",
     "shadow_diff": "v2 shadow read differed from legacy bridge",
@@ -245,6 +249,10 @@ STAGES_BY_REASON: dict[str, tuple[str, ...]] = {
     "cannot_parse_yaml": ("semantic",),
     "llm_deferred": ("semantic",),
     "llm_global_failure": ("semantic",),
+    # ZR-502 homepage identity — content-level verdict evidence
+    "no_first_page_text": ("semantic",),
+    "no_declared_identity_on_cover": ("semantic",),
+    "no_strong_cover_framing": ("semantic",),
     # consumer
     "status_not_active": ("consumer",),
     "policy_denied": ("consumer",),

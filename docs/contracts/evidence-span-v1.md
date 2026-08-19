@@ -48,7 +48,7 @@ loc:v1/chars:144-172
 - `failed`：不得伪造输出，两个输出字段均为 `null`，且必须提供错误 flag。
 - `quarantined`：可以保留可疑输出，但必须提供至少一个 flag，消费者不得把它当作已通过解析质检。
 
-v1 flags 包括 OCR 使用/低置信度、布局或表结构歧义、截断、编码修复、单位或日期推断、locator 不稳定、parser warning/error、不支持格式、密码保护和空输出。它们只描述 extraction quality；不允许使用 `accepted`、`rejected`、`buy`、`sell`、`rating`、`valuation` 等研究语义。
+v1 flags 包括 OCR 使用/低置信度、布局或表结构歧义、截断、编码修复、单位或日期推断、locator 不稳定、parser warning/error、不支持格式、密码保护、空输出和首页身份矛盾（`homepage_identity_contradiction`——PDF 首页与 sidecar 声明的 title/publisher 冲突的 review 信号）。它们只描述 extraction quality；不允许使用 `accepted`、`rejected`、`buy`、`sell`、`rating`、`valuation` 等研究语义。
 
 ## 职责边界
 

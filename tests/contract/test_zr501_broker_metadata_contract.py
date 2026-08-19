@@ -169,6 +169,7 @@ def test_c2_page_count_lands_in_normalized_artifact():
         parser_version = "1.0.0"
         quality_flags = ()
         page_count = 3
+        first_page_text = "紫金矿业集团股份有限公司 2025年年度报告"
 
     frontmatter = module._frontmatter(document, _Norm())
     payload = yaml.safe_load(frontmatter.split("---\n", 2)[1])
@@ -237,6 +238,7 @@ def test_c2_page_count_none_when_unknown():
         parser_version = "1.0.0"
         quality_flags = ()
         page_count = None
+        first_page_text = None
 
     frontmatter = module._frontmatter(document, _Norm())
     payload = yaml.safe_load(frontmatter.split("---\n", 2)[1])

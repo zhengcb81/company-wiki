@@ -83,6 +83,8 @@ class _Normalized:
     # ZR-501: broker_research metadata contract — page count known by the
     # page-aware parser (None when unknown; never invented).
     page_count: int | None = None
+    # ZR-502: raw first-page text for homepage identity verification.
+    first_page_text: str | None = None
 
 
 class NormalizationProcessError(RuntimeError):
@@ -154,6 +156,8 @@ def _normalized_to_payload(
         # ZR-501: page count travels the isolated-parser envelope so the
         # normalized artifact frontmatter carries it end-to-end.
         "page_count": normalized.page_count,
+        # ZR-502: first-page text travels too (homepage identity check).
+        "first_page_text": normalized.first_page_text,
     }
 
 
@@ -171,6 +175,7 @@ def _normalized_from_payload(payload: Any, *, expected_source_id: str) -> _Norma
         "quality_flags",
         "error",
         "page_count",
+        "first_page_text",
     }
     if set(payload) != expected_fields or payload.get("schema_version") != "1.0":
         raise ParserResultProtocolError("parser result payload schema is invalid")
@@ -196,6 +201,9 @@ def _normalized_from_payload(payload: Any, *, expected_source_id: str) -> _Norma
         or page_count < 1
     ):
         raise ParserResultProtocolError("page_count must be a positive integer or null")
+    first_page_text = payload.get("first_page_text")
+    if first_page_text is not None and not isinstance(first_page_text, str):
+        raise ParserResultProtocolError("first_page_text must be text or null")
     raw_results = payload.get("parser_results")
     if not isinstance(raw_results, list):
         raise ParserResultProtocolError("parser_results must be an array")
@@ -233,6 +241,7 @@ def _normalized_from_payload(payload: Any, *, expected_source_id: str) -> _Norma
             quality_flags=tuple(payload["quality_flags"]),
             error=payload["error"],
             page_count=page_count,
+            first_page_text=first_page_text,
         )
     except (TypeError, ValueError) as exc:
         raise ParserResultProtocolError(
@@ -909,7 +918,20 @@ def _pdf_markdown(path: Path, manifest: SourceManifest) -> _Normalized:
         status=status,
         quality_flags=flags,
         page_count=result.page_count,
+        first_page_text=_first_page_text(result),
     )
+
+
+def _first_page_text(result: PageAwarePDFResult) -> str | None:
+    """ZR-502: the raw text of page 1 (for homepage identity checks)."""
+    page_one = tuple(
+        item
+        for item in result.parser_results
+        if item.coordinates.page_number == 1 and item.raw_text
+    )
+    if not page_one:
+        return None
+    return "\n".join(str(item.raw_text) for item in page_one)
 
 
 def _docling_markdown(path: Path, source_id: str) -> _Normalized:
@@ -1384,6 +1406,34 @@ def _atomic_write(path: Path, text: str) -> None:
 
 
 def _frontmatter(document: Any, normalized: _Normalized) -> str:
+    # ZR-502: homepage identity verification — first-page text against the
+    # declared title/publisher; contradiction flags the artifact for review.
+    from .homepage_identity import (
+        assess_homepage_identity,
+        homepage_identity_quality_flag,
+    )
+
+    # document may be a sqlite3.Row (normalize_catalog) or a plain dict
+    # (tests/fixtures): .get only exists on the dict, index access works on
+    # both but only when the key is present.
+    if isinstance(document, dict):
+        metadata = document.get("metadata_json") or {}
+    else:
+        # sqlite3.Row: metadata_json is a JSON string column.
+        metadata = (
+            json.loads(document["metadata_json"]) if document["metadata_json"] else {}
+        )
+    inner = metadata.get("acquisition") or metadata.get("dayu_meta") or {}
+    identity = assess_homepage_identity(
+        normalized.first_page_text,
+        title=document["title"],
+        publisher=inner.get("publisher"),
+    )
+    identity_verdict = str(identity["verdict"])
+    identity_flag = homepage_identity_quality_flag(identity_verdict)
+    flags = list(normalized.quality_flags)
+    if identity_flag and identity_flag not in flags:
+        flags.append(identity_flag)
     payload = {
         "schema_version": "1.0.0",
         "artifact_role": "normalized",
@@ -1396,9 +1446,12 @@ def _frontmatter(document: Any, normalized: _Normalized) -> str:
         "normalization_status": normalized.status,
         "parser_name": normalized.parser_name,
         "parser_version": normalized.parser_version,
-        "quality_flags": list(normalized.quality_flags),
+        "quality_flags": flags,
         # ZR-501: page count from the page-aware parser (None stays honest).
         "page_count": normalized.page_count,
+        # ZR-502: homepage identity verdict (consistent / contradiction /
+        # unverifiable) with evidence; never a fabricated pass.
+        "homepage_identity": identity,
     }
     return (
         "---\n"

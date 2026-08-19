@@ -59,6 +59,9 @@ class QualityFlag(str, Enum):
     UNSUPPORTED_FORMAT = "unsupported_format"
     PASSWORD_PROTECTED = "password_protected"
     EMPTY_OUTPUT = "empty_output"
+    # ZR-502: the PDF first page contradicts the sidecar-declared identity
+    # (title/publisher) — review signal, never a research decision.
+    HOMEPAGE_IDENTITY_CONTRADICTION = "homepage_identity_contradiction"
 
 
 def _require_text(value: Any, field_name: str) -> str:

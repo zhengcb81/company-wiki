@@ -128,6 +128,7 @@ def _normalized_from_sidecar(payload: dict, primary: Path) -> dict:
         "document_kind": payload.get("document_kind"),
         "fiscal_year": str(payload.get("fiscal_year", "")) or None,
         "period_end": payload.get("period_end"),
+        "filing_date": payload.get("published_at"),
         "provider": payload.get("provider"),
         "provider_document_id": payload.get("provider_document_id"),
         "source_url": payload.get("source_url"),
