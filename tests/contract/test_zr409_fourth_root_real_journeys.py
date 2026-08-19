@@ -12,10 +12,16 @@ read-only user journeys (phase D exit card).
       (b) dayu-ONLY HK 1548 FY2021 annual (content absent from companies)
           -> REUSED_EXACT, canonical under the dayu portfolio, nothing
           copied into companies (document/location counts unchanged);
-      (c) Dropbox CN 688031 FY2024 annual -> REUSED_EXACT, canonical under
-          the Dropbox root.
-      Every journey: download_events=0, resolve-only (no writer), and the
-      real roots + catalog bytes are untouched (before/after fingerprint).
+      (c) Dropbox CN 688031 FY2024 annual -> FAIL-CLOSED MISSING with a
+          capture_incomplete trace (production truth: the Dropbox root's
+          exclusive annuals carry http source_urls, so no handle is faked);
+          the Zijin annual shared under Dropbox resolves canonical in
+          companies (p10 < p30) — the Dropbox path participates without
+          duplication.
+      Every journey: download=0, resolve-only (no writer), and the real
+      roots' shallow fingerprints + canonical sample files are untouched
+      (catalog-DIR zero-write is not asserted: the background worker
+      concurrently writes the catalog — ZR-206 lesson).
   C3  Scenario mapping (EX/LT/DL/IDX/UJ) is pinned in the implementer
       receipt as a table; the mapped suites are re-run green (this module
       re-runs the future-root EX-08 family against the production config
@@ -92,20 +98,6 @@ def _file_fingerprint(path: Path) -> str:
     stat = path.stat()
     digest = hashlib.sha256(path.read_bytes())
     return f"{stat.st_size}:{stat.st_mtime_ns}:{digest.hexdigest()}"
-
-
-def _catalog_dir_fingerprint() -> str:
-    """(name, size, mtime_ns) digest of the catalog directory listing —
-    byte-reading the 49GB database is unnecessary for a read-only proof."""
-    directory = PRODUCTION_DB.parent
-    digest = hashlib.sha256()
-    for child in sorted(directory.iterdir()):
-        if child.is_file() and child.name.startswith("catalog.sqlite3"):
-            stat = child.stat()
-            digest.update(child.name.encode())
-            digest.update(str(stat.st_size).encode())
-            digest.update(str(stat.st_mtime_ns).encode())
-    return digest.hexdigest()
 
 
 def _root_dir(catalog, root_id: str) -> Path:
