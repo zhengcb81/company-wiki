@@ -1412,6 +1412,13 @@ def _frontmatter(document: Any, normalized: _Normalized) -> str:
         assess_homepage_identity,
         homepage_identity_quality_flag,
     )
+    # ZR-503: multi-entity attribution guard — full text against the
+    # declared entity; multi-entity content flags for attribution, never a
+    # silent single-entity pass.
+    from .entity_detection import (
+        detect_entities,
+        multi_entity_quality_flag,
+    )
 
     # document may be a sqlite3.Row (normalize_catalog) or a plain dict
     # (tests/fixtures): .get only exists on the dict, index access works on
@@ -1434,6 +1441,15 @@ def _frontmatter(document: Any, normalized: _Normalized) -> str:
     flags = list(normalized.quality_flags)
     if identity_flag and identity_flag not in flags:
         flags.append(identity_flag)
+    entity_detection = detect_entities(
+        normalized.body,
+        declared_entity=inner.get("canonical_entity_id") or inner.get("display_name"),
+        declared_security_ids=tuple(inner.get("security_ids") or ()),
+    )
+    entity_verdict = str(entity_detection["verdict"])
+    entity_flag = multi_entity_quality_flag(entity_verdict)
+    if entity_flag and entity_flag not in flags:
+        flags.append(entity_flag)
     payload = {
         "schema_version": "1.0.0",
         "artifact_role": "normalized",
@@ -1452,6 +1468,10 @@ def _frontmatter(document: Any, normalized: _Normalized) -> str:
         # ZR-502: homepage identity verdict (consistent / contradiction /
         # unverifiable) with evidence; never a fabricated pass.
         "homepage_identity": identity,
+        # ZR-503: multi-entity detection verdict (single / multi_entity /
+        # unverifiable) with extracted company-name phrases; multi_entity
+        # flags for attribution (fail-closed, zero hardcoded names).
+        "detected_entities": entity_detection,
     }
     return (
         "---\n"

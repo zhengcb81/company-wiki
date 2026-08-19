@@ -62,6 +62,9 @@ class QualityFlag(str, Enum):
     # ZR-502: the PDF first page contradicts the sidecar-declared identity
     # (title/publisher) — review signal, never a research decision.
     HOMEPAGE_IDENTITY_CONTRADICTION = "homepage_identity_contradiction"
+    # ZR-503: the text names more than one company — attribution needed,
+    # never a silent single-entity pass.
+    MULTI_ENTITY_ATTRIBUTION_NEEDED = "multi_entity_attribution_needed"
 
 
 def _require_text(value: Any, field_name: str) -> str:
