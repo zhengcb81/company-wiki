@@ -80,6 +80,9 @@ class _Normalized:
     status: str
     quality_flags: tuple[str, ...]
     error: str | None = None
+    # ZR-501: broker_research metadata contract — page count known by the
+    # page-aware parser (None when unknown; never invented).
+    page_count: int | None = None
 
 
 class NormalizationProcessError(RuntimeError):
@@ -893,6 +896,7 @@ def _pdf_markdown(path: Path, manifest: SourceManifest) -> _Normalized:
         parser_version=parser_version,
         status=status,
         quality_flags=flags,
+        page_count=result.page_count,
     )
 
 
@@ -1381,6 +1385,8 @@ def _frontmatter(document: Any, normalized: _Normalized) -> str:
         "parser_name": normalized.parser_name,
         "parser_version": normalized.parser_version,
         "quality_flags": list(normalized.quality_flags),
+        # ZR-501: page count from the page-aware parser (None stays honest).
+        "page_count": normalized.page_count,
     }
     return (
         "---\n"

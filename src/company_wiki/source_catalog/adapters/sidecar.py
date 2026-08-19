@@ -35,7 +35,9 @@ class SidecarFilingAdapter:
     def __init__(self, *, sidecar_suffix: str = ".source.json"):
         self._suffix = sidecar_suffix
 
-    def enumerate(self, root_path: Path, *, limit: int | None = None) -> list[NormalizedCandidate]:
+    def enumerate(
+        self, root_path: Path, *, limit: int | None = None
+    ) -> list[NormalizedCandidate]:
         candidates: list[NormalizedCandidate] = []
         for path in sorted(root_path.rglob("*")):
             if not path.is_file():
@@ -44,26 +46,30 @@ class SidecarFilingAdapter:
                 continue
             sidecar = path.with_name(path.name + self._suffix)
             if not sidecar.is_file():
-                candidates.append(NormalizedCandidate(
-                    relative_path=path.relative_to(root_path).as_posix(),
-                    content_sha256=_sha256_file(path),
-                    group_key=path.relative_to(root_path).as_posix(),
-                    role="original_primary",
-                    normalized={},
-                    evidence={"remediation": "missing_sidecar"},
-                ))
+                candidates.append(
+                    NormalizedCandidate(
+                        relative_path=path.relative_to(root_path).as_posix(),
+                        content_sha256=_sha256_file(path),
+                        group_key=path.relative_to(root_path).as_posix(),
+                        role="original_primary",
+                        normalized={},
+                        evidence={"remediation": "missing_sidecar"},
+                    )
+                )
                 continue
             sidecar_payload = _parse_sidecar(sidecar)
             problems = _validate_sidecar(sidecar_payload, path)
             role = "original_primary" if not problems else "indexed_only"
-            candidates.append(NormalizedCandidate(
-                relative_path=path.relative_to(root_path).as_posix(),
-                content_sha256=_sha256_file(path),
-                group_key=path.relative_to(root_path).as_posix(),
-                role=role,
-                normalized=_normalized_from_sidecar(sidecar_payload, path),
-                evidence={"remediation": ";".join(problems)} if problems else {},
-            ))
+            candidates.append(
+                NormalizedCandidate(
+                    relative_path=path.relative_to(root_path).as_posix(),
+                    content_sha256=_sha256_file(path),
+                    group_key=path.relative_to(root_path).as_posix(),
+                    role=role,
+                    normalized=_normalized_from_sidecar(sidecar_payload, path),
+                    evidence={"remediation": ";".join(problems)} if problems else {},
+                )
+            )
             if limit is not None and len(candidates) >= limit:
                 break
         return candidates
@@ -134,6 +140,11 @@ def _normalized_from_sidecar(payload: dict, primary: Path) -> dict:
         "adapter_id": "sidecar_filing_v1",
         "adapter_version": "1.0.0",
         "normalization_status": "capture_ready",
+        # ZR-501: broker_research metadata contract — additive passthrough;
+        # absent keys stay absent (never invented from the filename).
+        "publisher": payload.get("publisher"),
+        "authors": tuple(payload.get("authors") or ()),
+        "security_ids": tuple(payload.get("security_ids") or ()),
     }
 
 
