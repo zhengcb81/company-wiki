@@ -1427,6 +1427,8 @@ def _frontmatter(document: Any, normalized: _Normalized) -> str:
         detect_sections,
         extract_facts,
     )
+    # ZR-510: per-chunk attribution for multi-entity documents.
+    from .attribution import attribute_document
 
     # document may be a sqlite3.Row (normalize_catalog) or a plain dict
     # (tests/fixtures): .get only exists on the dict, index access works on
@@ -1472,6 +1474,21 @@ def _frontmatter(document: Any, normalized: _Normalized) -> str:
         "chunk_count": len(structure_chunks),
         "facts": structure_facts,
     }
+    # ZR-510: chunk attribution for multi-entity documents — the page's own
+    # company phrases are the candidate set (declared first, then any other
+    # phrase found), so each chunk is attributed to what it actually names;
+    # single-entity documents stay concise (no key).
+    chunk_attribution = None
+    if entity_verdict == "multi_entity":
+        candidates = list(
+            dict.fromkeys(
+                [inner.get("canonical_entity_id"), inner.get("display_name")]
+                + list(entity_detection["evidence"].get("company_phrases") or [])
+            )
+        )
+        chunk_attribution = attribute_document(
+            normalized.body, structure_chunks, [c for c in candidates if c]
+        )
     payload = {
         "schema_version": "1.0.0",
         "artifact_role": "normalized",
@@ -1496,6 +1513,8 @@ def _frontmatter(document: Any, normalized: _Normalized) -> str:
         "detected_entities": entity_detection,
         # ZR-506: structural assertions — sections, chunk_count, facts.
         "document_structure": document_structure,
+        # ZR-510: per-chunk attribution (multi-entity documents only).
+        **({"chunk_attribution": chunk_attribution} if chunk_attribution is not None else {}),
     }
     return (
         "---\n"
