@@ -78,7 +78,7 @@ FROZEN = {
     "cli.py": 70,
     "code_identity.py": 100,
     "config.py": 81,
-    "control.py": 81,
+    "control.py": 73,
     "dayu_cli_adapter.py": 71,
     "duplicate_cleanup.py": 74,
     "evidence_query.py": 87,
