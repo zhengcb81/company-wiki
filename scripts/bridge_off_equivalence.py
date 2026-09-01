@@ -102,7 +102,7 @@ def main(argv: list[str] | None = None) -> int:
     bridge_off["flags"]["v2_resolve_shadow"] = True
     bridge_off["flags"]["v2_resolve_active"] = True
 
-    rng = random.Random(20260813)
+    random.Random(20260813)
     db = sqlite3.connect(f"file:{args.catalog}?mode=ro", uri=True)
     legacy_docs = [
         (r[0], r[1], r[2], r[3])

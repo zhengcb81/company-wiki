@@ -30,11 +30,10 @@ from typing import Any
 
 import yaml
 
-from .config import CatalogConfigError, _expand_path, _unresolved_variables
-from .models import ROOT_KINDS, CatalogConfig, RootSpec
+from .config import CatalogConfigError
+from .models import CatalogConfig
 from .policy_2x import (
     ALLOWED_ROOT_FIELDS_2X,
-    _WRITABLE_KINDS,
     load_root_policy_2x,
 )
 

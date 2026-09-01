@@ -12,14 +12,12 @@ import sqlite3
 import sys
 from pathlib import Path
 
-import pytest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "src"))
 
 from company_wiki.source_catalog.prompt_injection import (  # noqa: E402
     PROMPT_INJECTION_REVIEW_KEY,
     PROMPT_INJECTION_REVIEW_SCHEMA_VERSION,
-    record_prompt_injection_review,
 )
 from company_wiki.source_catalog.prompt_injection_guard import RULESET_HASH  # noqa: E402
 from company_wiki.source_catalog.reader import ReadOnlyCatalogReader  # noqa: E402

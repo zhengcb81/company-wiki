@@ -1,0 +1,77 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"urn:company-wiki:source-catalog-worker-recovery:plan-manifest:v4",
+  "title":"Immutable worker-recovery plan freeze manifest",
+  "type":"object",
+  "additionalProperties":false,
+  "$defs":{
+    "sha256":{"type":"string","pattern":"^[0-9a-f]{64}$"},
+    "utc":{"type":"string","format":"date-time","pattern":"^[0-9]{4}-(0[1-9]|1[0-2])-([0-2][0-9]|3[01])T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]{1,9})?Z$"},
+    "file":{
+      "type":"object","additionalProperties":false,
+      "required":["path","sha256","size_bytes"],
+      "properties":{
+        "path":{"type":"string","pattern":"^[A-Za-z0-9][A-Za-z0-9._/-]*$"},
+        "sha256":{"$ref":"#/$defs/sha256"},
+        "size_bytes":{"type":"integer","minimum":1}
+      }
+    }
+  },
+  "required":[
+    "schema_version","plan_revision","frozen_at","plan_directory","plan_freeze_git_head",
+    "review_state_at_freeze","investigation_source","normative_file_count","normative_files",
+    "coverage_counts","excluded_dynamic_or_historical_paths","pre_freeze_check",
+    "immutability_policy"
+  ],
+  "properties":{
+    "schema_version":{"const":2},
+    "plan_revision":{"const":"v4"},
+    "frozen_at":{"$ref":"#/$defs/utc"},
+    "plan_directory":{"const":"docs/plans/source-catalog-worker-recovery-2026-08-22"},
+    "plan_freeze_git_head":{"type":"string","pattern":"^[0-9a-f]{40}$"},
+    "review_state_at_freeze":{"const":"FROZEN_FOR_INDEPENDENT_REVIEW"},
+    "investigation_source":{
+      "type":"object","additionalProperties":false,
+      "required":["path","sha256"],
+      "properties":{
+        "path":{"const":"docs/worker-investigation-2026-08-20.md"},
+        "sha256":{"const":"8e6166ba063bc281ca1fa5da3c0743b895e4d93b6f2957de3cbd0b6938a95be6"}
+      }
+    },
+    "normative_file_count":{"type":"integer","minimum":20,"maximum":100},
+    "normative_files":{"type":"array","minItems":20,"maxItems":100,"uniqueItems":true,"items":{"$ref":"#/$defs/file"}},
+    "coverage_counts":{
+      "type":"object","additionalProperties":false,
+      "required":["fixed_dag_nodes","stable_test_ids","validator_vector_groups","validator_vector_cases","schemas","requirements","risks","plan_review_findings"],
+      "properties":{
+        "fixed_dag_nodes":{"type":"integer","minimum":100},
+        "stable_test_ids":{"type":"integer","minimum":250},
+        "validator_vector_groups":{"type":"integer","minimum":18},
+        "validator_vector_cases":{"type":"integer","minimum":18},
+        "schemas":{"type":"integer","minimum":15},
+        "requirements":{"type":"integer","minimum":40},
+        "risks":{"type":"integer","minimum":25},
+        "plan_review_findings":{"type":"integer","minimum":70}
+      }
+    },
+    "excluded_dynamic_or_historical_paths":{"type":"array","minItems":5,"uniqueItems":true,"items":{"type":"string","minLength":1,"maxLength":300}},
+    "pre_freeze_check":{
+      "type":"object","additionalProperties":false,
+      "required":["command","exit_code","reported_check_count","stdout_sha256","read_only_confirmed"],
+      "properties":{
+        "command":{"const":"python docs/plans/source-catalog-worker-recovery-2026-08-22/plan_consistency_check.py"},
+        "exit_code":{"const":0},
+        "reported_check_count":{"type":"integer","minimum":1000},
+        "stdout_sha256":{"$ref":"#/$defs/sha256"},
+        "read_only_confirmed":{"const":true}
+      }
+    },
+    "immutability_policy":{"const":"Do not overwrite or append to this file. A semantic plan change requires a new plan_manifest.vN.json filename and independent re-review."}
+  },
+  "x-semantic-rules":[
+    "normative_file_count equals the number of normative_files",
+    "normative file paths are unique after Windows case-folding and resolve beneath plan_directory without symlink or reparse traversal",
+    "every normative file hash and size is recomputed from exact bytes after the final successful pre-freeze check",
+    "plan_manifest.v4.json is excluded from its own normative_files and becomes immutable immediately after creation"
+  ]
+}

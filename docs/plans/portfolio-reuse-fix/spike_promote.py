@@ -1,3 +1,4 @@
+﻿# ruff: noqa: E402
 """Spike (Phase 1): promote one dayu-portfolio doc into company_raw via import_staged.
 
 Throwaway proof that "copy portfolio PDF -> staging -> import_staged -> resolve REUSED_EXACT"
@@ -130,7 +131,7 @@ def main() -> int:
         print(f"[spike] handle.https_url     = {h.https_url}")
     else:
         print("[spike] NO MATCHES returned")
-    print(f"[spike] debug_trace (tail):\n  " + "\n  ".join(resolution.debug_trace[-12:]))
+    print("[spike] debug_trace (tail):\n  " + "\n  ".join(resolution.debug_trace[-12:]))
 
     # cleanup stray staged file if import left it
     if staged.exists():

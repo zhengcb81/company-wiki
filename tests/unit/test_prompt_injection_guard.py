@@ -19,7 +19,6 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "src"))
 
 from company_wiki.source_catalog.prompt_injection import (  # noqa: E402
     PROMPT_INJECTION_REVIEW_KEY,
-    PROMPT_INJECTION_REVIEW_SCHEMA_VERSION,
     PromptInjectionReviewError,
     read_prompt_injection_review,
     record_prompt_injection_review,

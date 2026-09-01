@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:company-wiki:source-catalog-worker-recovery:review-result:v4",
+  "title": "Independent Gate review machine payload",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "node_id",
+    "reviewer_agent_id",
+    "reviewer_role",
+    "input_ledger_head_sha256",
+    "plan_manifest_sha256",
+    "gate_dag_sha256",
+    "validator_release_manifest_sha256",
+    "evidence_manifest_path",
+    "evidence_manifest_sha256",
+    "evidence_report_sha256",
+    "verdict",
+    "reason_code",
+    "findings",
+    "counterexample_attempted",
+    "counterexample_result",
+    "independence_confirmed",
+    "independence_statement",
+    "reviewed_at"
+  ],
+  "properties": {
+    "node_id": {"allOf":[{"$ref":"gate_ledger.schema.json#/$defs/nodeId"},{"type":"string","pattern":"^[DG]"}]},
+    "reviewer_agent_id": {"type":"string","minLength":1,"maxLength":160},
+    "reviewer_role": {"enum":["design_correctness","test_correctness","ledger_schema","dag_adversarial","sql_performance","control_security","test_operations","data_integrity","runtime_operations","storage_recovery","llm_data_governance","windows_startup","release_security","rollback_operations","parser_performance","scanner_performance","evidence_privacy"]},
+    "input_ledger_head_sha256": {
+      "anyOf": [
+        {"type":"null"},
+        {"type":"string","pattern":"^[0-9a-f]{64}$"}
+      ]
+    },
+    "plan_manifest_sha256": {"type":"string","pattern":"^[0-9a-f]{64}$"},
+    "gate_dag_sha256": {"type":"string","pattern":"^[0-9a-f]{64}$"},
+    "validator_release_manifest_sha256": {"anyOf":[{"type":"null"},{"type":"string","pattern":"^[0-9a-f]{64}$"}]},
+    "evidence_manifest_path": {"type":"string","pattern":"^evidence/[A-Za-z0-9][A-Za-z0-9._-]*/manifest\\.json$"},
+    "evidence_manifest_sha256": {"type":"string","pattern":"^[0-9a-f]{64}$"},
+    "evidence_report_sha256": {"type":"string","pattern":"^[0-9a-f]{64}$"},
+    "verdict": {"enum":["PASS","PASS_WITH_NONBLOCKING_FINDINGS","FAIL"]},
+    "reason_code": {
+      "anyOf": [
+        {"type":"null"},
+        {"enum":["EVIDENCE_DRIFT","NO_INDEPENDENT_REVIEW","MISSING_AUTHORIZATION","ENVIRONMENT_UNAVAILABLE","OPEN_P0_P1","SCOPE_DRIFT","COUNTEREXAMPLE_FAILED","CONTRACT_MISMATCH"]}
+      ]
+    },
+    "findings": {
+      "type":"array",
+      "items": {
+        "type":"object",
+        "additionalProperties":false,
+        "required":["finding_id","priority","summary","owner","due_node"],
+        "properties": {
+          "finding_id":{"type":"string","minLength":1,"maxLength":80},
+          "priority":{"enum":["P0","P1","P2","P3"]},
+          "summary":{"type":"string","minLength":1,"maxLength":2000},
+          "owner":{"type":"string","minLength":1,"maxLength":160},
+          "due_node":{"$ref":"gate_ledger.schema.json#/$defs/nodeId"}
+        }
+      }
+    },
+    "counterexample_attempted":{"const":true},
+    "counterexample_result":{"type":"string","minLength":1,"maxLength":4000},
+    "independence_confirmed":{"const":true},
+    "independence_statement":{"type":"string","minLength":20,"maxLength":2000},
+    "reviewed_at":{"type":"string","format":"date-time","pattern":"^[0-9]{4}-(0[1-9]|1[0-2])-([0-2][0-9]|3[01])T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]{1,9})?Z$"}
+  },
+  "allOf": [
+    {
+      "if":{"properties":{"node_id":{"const":"D00L"}},"required":["node_id"]},
+      "then":{"properties":{"input_ledger_head_sha256":{"type":"null"},"validator_release_manifest_sha256":{"type":"null"}}},
+      "else":{"properties":{"input_ledger_head_sha256":{"type":"string","pattern":"^[0-9a-f]{64}$"},"validator_release_manifest_sha256":{"type":"string","pattern":"^[0-9a-f]{64}$"}}}
+    },
+    {
+      "if":{"properties":{"verdict":{"enum":["PASS","PASS_WITH_NONBLOCKING_FINDINGS"]}},"required":["verdict"]},
+      "then":{"properties":{"reason_code":{"const":null}}}
+    },
+    {
+      "if":{"properties":{"verdict":{"const":"PASS"}},"required":["verdict"]},
+      "then":{"properties":{"findings":{"maxItems":0}}}
+    },
+    {
+      "if":{"properties":{"verdict":{"const":"PASS_WITH_NONBLOCKING_FINDINGS"}},"required":["verdict"]},
+      "then":{
+        "properties":{
+          "findings":{
+            "minItems":1,
+            "items":{
+              "properties":{"priority":{"enum":["P2","P3"]}},
+              "required":["priority"]
+            }
+          }
+        }
+      }
+    },
+    {
+      "if":{"properties":{"verdict":{"const":"FAIL"}},"required":["verdict"]},
+      "then":{"properties":{"reason_code":{"type":"string"}}}
+    }
+  ]
+}

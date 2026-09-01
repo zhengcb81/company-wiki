@@ -1,0 +1,5942 @@
+{
+  "schema_id": "urn:company-wiki:source-catalog-worker-recovery:test-id-registry-instance:v4",
+  "contract": "source-catalog-worker-recovery-stable-test-id-registry",
+  "plan_revision": "v4",
+  "uniqueness_rule": "Every concrete test ID has one authoritative per-ID lifecycle mapping; condition_id references the closed condition_definitions catalog, and branch cases select one exact lifecycle without forming owner/due Cartesian products.",
+  "condition_contract": {
+    "free_text_conditions_allowed": false,
+    "undefined_condition_ids_allowed": false,
+    "null_means_unconditional": true,
+    "branch_definition_arrays_are_exact_case_union": true,
+    "selected_case_is_only_runtime_lifecycle": true,
+    "unselected_case_ledger_records_allowed": false,
+    "evaluation_inputs_and_hashes_must_be_evidence": true
+  },
+  "condition_definitions": {
+    "MEASUREMENT_VM_STEP_EXACT": {
+      "kind": "PREDICATE",
+      "selector_path": "/measurement_manifest/measurement_mode",
+      "operator": "EQUALS",
+      "allowed_values": ["STMTSTATUS_VM_STEP_EXACT"],
+      "selected_value": "STMTSTATUS_VM_STEP_EXACT",
+      "false_lifecycle": "OMIT_ALL_LIFECYCLE_RECORDS"
+    },
+    "ADR02_SELECTED_BRANCH_LIFECYCLE": {
+      "kind": "BRANCH_LIFECYCLE",
+      "selector_path": "/adr/ADR-02/decision",
+      "operator": "SELECT_EXACTLY_ONE",
+      "allowed_values": ["NO_INDEX", "INDEX"],
+      "unselected_branch_lifecycle": "OMIT_ALL_LIFECYCLE_RECORDS",
+      "cases": {
+        "NO_INDEX": {
+          "introduced_at": ["T02B-NI"],
+          "variant_at": [],
+          "expected_red_at": ["T02B-NI"],
+          "required_green_at": ["G02B-NI"],
+          "revalidate_at": ["G10C"]
+        },
+        "INDEX": {
+          "introduced_at": ["T02B-IDX"],
+          "variant_at": [],
+          "expected_red_at": ["T02B-IDX"],
+          "required_green_at": ["G02B-IDX"],
+          "revalidate_at": ["G10C"]
+        }
+      }
+    },
+    "ADR02_NO_INDEX": {
+      "kind": "PREDICATE",
+      "selector_path": "/adr/ADR-02/decision",
+      "operator": "EQUALS",
+      "allowed_values": ["NO_INDEX", "INDEX"],
+      "selected_value": "NO_INDEX",
+      "false_lifecycle": "OMIT_ALL_LIFECYCLE_RECORDS"
+    },
+    "ADR02_INDEX": {
+      "kind": "PREDICATE",
+      "selector_path": "/adr/ADR-02/decision",
+      "operator": "EQUALS",
+      "allowed_values": ["NO_INDEX", "INDEX"],
+      "selected_value": "INDEX",
+      "false_lifecycle": "OMIT_ALL_LIFECYCLE_RECORDS"
+    },
+    "ADR11_LLM_ENABLED": {
+      "kind": "PREDICATE",
+      "selector_path": "/adr/ADR-11/decision",
+      "operator": "EQUALS",
+      "allowed_values": ["LLM_ENABLED", "LLM_OFF"],
+      "selected_value": "LLM_ENABLED",
+      "false_lifecycle": "OMIT_ALL_LIFECYCLE_RECORDS"
+    },
+    "ADR11_SELECTED_PROFILE_LIFECYCLE": {
+      "kind": "BRANCH_LIFECYCLE",
+      "selector_path": "/adr/ADR-11/decision",
+      "operator": "SELECT_EXACTLY_ONE",
+      "allowed_values": ["LLM_ENABLED", "LLM_OFF"],
+      "unselected_branch_lifecycle": "OMIT_ALL_LIFECYCLE_RECORDS",
+      "cases": {
+        "LLM_ENABLED": {
+          "introduced_at": ["T07E"],
+          "variant_at": [],
+          "expected_red_at": ["T07E"],
+          "required_green_at": ["G07E"],
+          "revalidate_at": ["G09", "G10R"]
+        },
+        "LLM_OFF": {
+          "introduced_at": ["T07O"],
+          "variant_at": [],
+          "expected_red_at": ["T07O"],
+          "required_green_at": ["G07O"],
+          "revalidate_at": ["G09", "G10R"]
+        }
+      }
+    },
+    "ADR11_LLM_ENABLED_ADR13_REVALIDATION": {
+      "kind": "PREDICATE_WITH_REVALIDATION_BRANCH",
+      "activation_selector_path": "/adr/ADR-11/decision",
+      "activation_value": "LLM_ENABLED",
+      "false_lifecycle": "OMIT_ALL_LIFECYCLE_RECORDS",
+      "base_lifecycle": {
+        "introduced_at": ["T07E"],
+        "variant_at": ["T09"],
+        "expected_red_at": ["T07E", "T09"],
+        "required_green_at": ["G07E", "G09"]
+      },
+      "revalidation_selector_path": "/adr/ADR-13/decision",
+      "revalidation_cases": {
+        "NO_SCHEMA_DELTA": ["G11M-L-ADR", "G10R"],
+        "SCHEMA_DELTA": ["G11M-L-ADR", "G11M-L", "G10R"]
+      }
+    },
+    "PARSER_ROUTE_MEDIUM_ENABLED": {
+      "kind": "DERIVED_ROUTE_PREDICATE",
+      "test_id_pattern": "^P-FMT(?P<route>01|02|03H|03T|04P|04D|05|06|07|08|09|10J|10X)-M$",
+      "selector_path_template": "/parser_route_manifest/routes/<route>/medium_policy",
+      "operator": "EQUALS",
+      "allowed_values": ["ENABLED", "DISABLED_HARD_LIMIT"],
+      "selected_value": "ENABLED",
+      "selected_lifecycle": {
+        "introduced_at": ["T06P"],
+        "variant_at": [],
+        "expected_red_at": ["T06P"],
+        "required_green_at": ["G06P"],
+        "revalidate_at": ["G10R"]
+      },
+      "false_lifecycle": "OMIT_FIXED_TEST_AND_REQUIRE_P-DIS-<route>-M_IN_EXPANDED_TEST_IDS"
+    }
+  },
+  "tests": [
+    {
+      "id": "SAFE-S01",
+      "group": "global_safety",
+      "introduced_at": [
+        "T09P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T09P"
+      ],
+      "required_green_at": [
+        "G09P"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C",
+        "G10R",
+        "G12A",
+        "G12B-POST",
+        "G12C"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "SAFE-S02",
+      "group": "global_safety",
+      "introduced_at": [
+        "T09P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T09P"
+      ],
+      "required_green_at": [
+        "G09P"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C",
+        "G10R",
+        "G12A",
+        "G12B-POST",
+        "G12C"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "SAFE-S03",
+      "group": "global_safety",
+      "introduced_at": [
+        "T09P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T09P"
+      ],
+      "required_green_at": [
+        "G09P"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C",
+        "G10R",
+        "G12A",
+        "G12B-POST",
+        "G12C"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "SAFE-S04",
+      "group": "global_safety",
+      "introduced_at": [
+        "T09P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T09P"
+      ],
+      "required_green_at": [
+        "G09P"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C",
+        "G10R",
+        "G12A",
+        "G12B-POST",
+        "G12C"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "SAFE-S05",
+      "group": "global_safety",
+      "introduced_at": [
+        "T09P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T09P"
+      ],
+      "required_green_at": [
+        "G09P"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C",
+        "G10R",
+        "G12A",
+        "G12B-POST",
+        "G12C"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "SAFE-S06",
+      "group": "global_safety",
+      "introduced_at": [
+        "T09P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T09P"
+      ],
+      "required_green_at": [
+        "G09P"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C",
+        "G10R",
+        "G12A",
+        "G12B-POST",
+        "G12C"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "SAFE-S07",
+      "group": "global_safety",
+      "introduced_at": [
+        "T09P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T09P"
+      ],
+      "required_green_at": [
+        "G09P"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C",
+        "G10R",
+        "G12A",
+        "G12B-POST",
+        "G12C"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "SAFE-S08",
+      "group": "global_safety",
+      "introduced_at": [
+        "T09P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T09P"
+      ],
+      "required_green_at": [
+        "G09P"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C",
+        "G10R",
+        "G12A",
+        "G12B-POST",
+        "G12C"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "SAFE-S09",
+      "group": "global_safety",
+      "introduced_at": [
+        "T09P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T09P"
+      ],
+      "required_green_at": [
+        "G09P"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C",
+        "G10R",
+        "G12A",
+        "G12B-POST",
+        "G12C"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "GL-S01",
+      "group": "ledger_validator",
+      "introduced_at": [
+        "T00L"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T00L"
+      ],
+      "required_green_at": [
+        "G00L"
+      ],
+      "revalidate_at": [
+        "G00"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "GL-S02",
+      "group": "ledger_validator",
+      "introduced_at": [
+        "T00L"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T00L"
+      ],
+      "required_green_at": [
+        "G00L"
+      ],
+      "revalidate_at": [
+        "G00"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "GL-S03",
+      "group": "ledger_validator",
+      "introduced_at": [
+        "T00L"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T00L"
+      ],
+      "required_green_at": [
+        "G00L"
+      ],
+      "revalidate_at": [
+        "G00"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "GL-S04",
+      "group": "ledger_validator",
+      "introduced_at": [
+        "T00L"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T00L"
+      ],
+      "required_green_at": [
+        "G00L"
+      ],
+      "revalidate_at": [
+        "G00"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "GL-S05",
+      "group": "ledger_validator",
+      "introduced_at": [
+        "T00L"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T00L"
+      ],
+      "required_green_at": [
+        "G00L"
+      ],
+      "revalidate_at": [
+        "G00"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "GL-S06",
+      "group": "ledger_validator",
+      "introduced_at": [
+        "T00L"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T00L"
+      ],
+      "required_green_at": [
+        "G00L"
+      ],
+      "revalidate_at": [
+        "G00"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "GL-F01",
+      "group": "ledger_validator",
+      "introduced_at": [
+        "T00L"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T00L"
+      ],
+      "required_green_at": [
+        "G00L"
+      ],
+      "revalidate_at": [
+        "G00"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "GL-F02",
+      "group": "ledger_validator",
+      "introduced_at": [
+        "T00L"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T00L"
+      ],
+      "required_green_at": [
+        "G00L"
+      ],
+      "revalidate_at": [
+        "G00"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "GL-F03",
+      "group": "ledger_validator",
+      "introduced_at": [
+        "T00L"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T00L"
+      ],
+      "required_green_at": [
+        "G00L"
+      ],
+      "revalidate_at": [
+        "G00"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "GL-F04",
+      "group": "ledger_validator",
+      "introduced_at": [
+        "T00L"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T00L"
+      ],
+      "required_green_at": [
+        "G00L"
+      ],
+      "revalidate_at": [
+        "G00"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "GL-F05",
+      "group": "ledger_validator",
+      "introduced_at": [
+        "T00L"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T00L"
+      ],
+      "required_green_at": [
+        "G00L"
+      ],
+      "revalidate_at": [
+        "G00"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "GL-F06",
+      "group": "ledger_validator",
+      "introduced_at": [
+        "T00L"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T00L"
+      ],
+      "required_green_at": [
+        "G00L"
+      ],
+      "revalidate_at": [
+        "G00"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "GL-F07",
+      "group": "ledger_validator",
+      "introduced_at": [
+        "T00L"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T00L"
+      ],
+      "required_green_at": [
+        "G00L"
+      ],
+      "revalidate_at": [
+        "G00"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "GL-F08",
+      "group": "ledger_validator",
+      "introduced_at": [
+        "T00L"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T00L"
+      ],
+      "required_green_at": [
+        "G00L"
+      ],
+      "revalidate_at": [
+        "G00"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "GL-F09",
+      "group": "ledger_validator",
+      "introduced_at": [
+        "T00L"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T00L"
+      ],
+      "required_green_at": [
+        "G00L"
+      ],
+      "revalidate_at": [
+        "G00"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "GL-F10",
+      "group": "ledger_validator",
+      "introduced_at": [
+        "T00L"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T00L"
+      ],
+      "required_green_at": [
+        "G00L"
+      ],
+      "revalidate_at": [
+        "G00"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "GL-F11",
+      "group": "ledger_validator",
+      "introduced_at": [
+        "T00L"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T00L"
+      ],
+      "required_green_at": [
+        "G00L"
+      ],
+      "revalidate_at": [
+        "G00"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "GL-F12",
+      "group": "ledger_validator",
+      "introduced_at": [
+        "T00L"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T00L"
+      ],
+      "required_green_at": [
+        "G00L"
+      ],
+      "revalidate_at": [
+        "G00"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "TESTID-S01",
+      "group": "ledger_validator",
+      "introduced_at": [
+        "T00L"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T00L"
+      ],
+      "required_green_at": [
+        "G00L"
+      ],
+      "revalidate_at": [
+        "G00"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "Q-S01",
+      "group": "queue_semantics",
+      "introduced_at": [
+        "T01"
+      ],
+      "variant_at": [
+        "T02A"
+      ],
+      "expected_red_at": [
+        "T01",
+        "T02A"
+      ],
+      "required_green_at": [
+        "G02A"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "Q-S02",
+      "group": "queue_semantics",
+      "introduced_at": [
+        "T01"
+      ],
+      "variant_at": [
+        "T02A"
+      ],
+      "expected_red_at": [
+        "T01",
+        "T02A"
+      ],
+      "required_green_at": [
+        "G02A"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "Q-S03",
+      "group": "queue_semantics",
+      "introduced_at": [
+        "T01"
+      ],
+      "variant_at": [
+        "T02A"
+      ],
+      "expected_red_at": [
+        "T01",
+        "T02A"
+      ],
+      "required_green_at": [
+        "G02A"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "Q-S04",
+      "group": "queue_semantics",
+      "introduced_at": [
+        "T01"
+      ],
+      "variant_at": [
+        "T02A"
+      ],
+      "expected_red_at": [
+        "T01",
+        "T02A"
+      ],
+      "required_green_at": [
+        "G02A"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "Q-S05",
+      "group": "queue_semantics",
+      "introduced_at": [
+        "T01"
+      ],
+      "variant_at": [
+        "T02A"
+      ],
+      "expected_red_at": [
+        "T01",
+        "T02A"
+      ],
+      "required_green_at": [
+        "G02A"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "Q-S06",
+      "group": "queue_semantics",
+      "introduced_at": [
+        "T01"
+      ],
+      "variant_at": [
+        "T02A"
+      ],
+      "expected_red_at": [
+        "T01",
+        "T02A"
+      ],
+      "required_green_at": [
+        "G02A"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "Q-S07",
+      "group": "queue_semantics",
+      "introduced_at": [
+        "T01"
+      ],
+      "variant_at": [
+        "T02A"
+      ],
+      "expected_red_at": [
+        "T01",
+        "T02A"
+      ],
+      "required_green_at": [
+        "G02A"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "Q-S08",
+      "group": "queue_semantics",
+      "introduced_at": [
+        "T01"
+      ],
+      "variant_at": [
+        "T02A"
+      ],
+      "expected_red_at": [
+        "T01",
+        "T02A"
+      ],
+      "required_green_at": [
+        "G02A"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "Q-S09",
+      "group": "queue_semantics",
+      "introduced_at": [
+        "T01"
+      ],
+      "variant_at": [
+        "T02A"
+      ],
+      "expected_red_at": [
+        "T01",
+        "T02A"
+      ],
+      "required_green_at": [
+        "G02A"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "Q-S10",
+      "group": "queue_semantics",
+      "introduced_at": [
+        "T01"
+      ],
+      "variant_at": [
+        "T02A"
+      ],
+      "expected_red_at": [
+        "T01",
+        "T02A"
+      ],
+      "required_green_at": [
+        "G02A"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "Q-S11",
+      "group": "queue_semantics",
+      "introduced_at": [
+        "T01"
+      ],
+      "variant_at": [
+        "T02A"
+      ],
+      "expected_red_at": [
+        "T01",
+        "T02A"
+      ],
+      "required_green_at": [
+        "G02A"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "Q-S12",
+      "group": "queue_semantics",
+      "introduced_at": [
+        "T01"
+      ],
+      "variant_at": [
+        "T02A"
+      ],
+      "expected_red_at": [
+        "T01",
+        "T02A"
+      ],
+      "required_green_at": [
+        "G02A"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "Q-S13",
+      "group": "queue_semantics",
+      "introduced_at": [
+        "T01"
+      ],
+      "variant_at": [
+        "T02A"
+      ],
+      "expected_red_at": [
+        "T01",
+        "T02A"
+      ],
+      "required_green_at": [
+        "G02A"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "Q-S14",
+      "group": "queue_semantics",
+      "introduced_at": [
+        "T01"
+      ],
+      "variant_at": [
+        "T02A"
+      ],
+      "expected_red_at": [
+        "T01",
+        "T02A"
+      ],
+      "required_green_at": [
+        "G02A"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "Q-S15",
+      "group": "queue_semantics",
+      "introduced_at": [
+        "T01"
+      ],
+      "variant_at": [
+        "T02A"
+      ],
+      "expected_red_at": [
+        "T01",
+        "T02A"
+      ],
+      "required_green_at": [
+        "G02A"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "Q-S16",
+      "group": "queue_semantics",
+      "introduced_at": [
+        "T01"
+      ],
+      "variant_at": [
+        "T02A"
+      ],
+      "expected_red_at": [
+        "T01",
+        "T02A"
+      ],
+      "required_green_at": [
+        "G02A"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "Q-S17",
+      "group": "queue_semantics",
+      "introduced_at": [
+        "T01"
+      ],
+      "variant_at": [
+        "T02A"
+      ],
+      "expected_red_at": [
+        "T01",
+        "T02A"
+      ],
+      "required_green_at": [
+        "G02A"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "Q-P01",
+      "group": "queue_performance",
+      "introduced_at": [
+        "T01"
+      ],
+      "variant_at": [
+        "T02A"
+      ],
+      "expected_red_at": [
+        "T01",
+        "T02A"
+      ],
+      "required_green_at": [
+        "G02A"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "Q-P02",
+      "group": "queue_performance",
+      "introduced_at": [
+        "T01"
+      ],
+      "variant_at": [
+        "T02A"
+      ],
+      "expected_red_at": [
+        "T01",
+        "T02A"
+      ],
+      "required_green_at": [
+        "G02A"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "Q-P03",
+      "group": "queue_performance",
+      "introduced_at": [
+        "T01"
+      ],
+      "variant_at": [
+        "T02A"
+      ],
+      "expected_red_at": [
+        "T01",
+        "T02A"
+      ],
+      "required_green_at": [
+        "G02A"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "Q-P04",
+      "group": "queue_performance",
+      "introduced_at": [
+        "T01"
+      ],
+      "variant_at": [
+        "T02A"
+      ],
+      "expected_red_at": [
+        "T01",
+        "T02A"
+      ],
+      "required_green_at": [
+        "G02A"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "Q-P05",
+      "group": "queue_performance",
+      "introduced_at": [
+        "T01"
+      ],
+      "variant_at": [
+        "T02A"
+      ],
+      "expected_red_at": [
+        "T01",
+        "T02A"
+      ],
+      "required_green_at": [
+        "G02A"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "Q-P06",
+      "group": "queue_performance",
+      "introduced_at": [
+        "T01"
+      ],
+      "variant_at": [
+        "T02A"
+      ],
+      "expected_red_at": [
+        "T01",
+        "T02A"
+      ],
+      "required_green_at": [
+        "G02A"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "Q-P07",
+      "group": "queue_performance",
+      "introduced_at": [
+        "T01"
+      ],
+      "variant_at": [
+        "T02A"
+      ],
+      "expected_red_at": [
+        "T01",
+        "T02A"
+      ],
+      "required_green_at": [
+        "G02A"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C"
+      ],
+      "condition_id": "MEASUREMENT_VM_STEP_EXACT"
+    },
+    {
+      "id": "M-COM-S01",
+      "group": "schema_lifecycle_shared",
+      "introduced_at": [
+        "T02B-NI",
+        "T02B-IDX"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T02B-NI",
+        "T02B-IDX"
+      ],
+      "required_green_at": [
+        "G02B-NI",
+        "G02B-IDX"
+      ],
+      "revalidate_at": [
+        "G10C"
+      ],
+      "condition_id": "ADR02_SELECTED_BRANCH_LIFECYCLE"
+    },
+    {
+      "id": "M-COM-S02",
+      "group": "schema_lifecycle_shared",
+      "introduced_at": [
+        "T02B-NI",
+        "T02B-IDX"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T02B-NI",
+        "T02B-IDX"
+      ],
+      "required_green_at": [
+        "G02B-NI",
+        "G02B-IDX"
+      ],
+      "revalidate_at": [
+        "G10C"
+      ],
+      "condition_id": "ADR02_SELECTED_BRANCH_LIFECYCLE"
+    },
+    {
+      "id": "M-COM-S03",
+      "group": "schema_lifecycle_shared",
+      "introduced_at": [
+        "T02B-NI",
+        "T02B-IDX"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T02B-NI",
+        "T02B-IDX"
+      ],
+      "required_green_at": [
+        "G02B-NI",
+        "G02B-IDX"
+      ],
+      "revalidate_at": [
+        "G10C"
+      ],
+      "condition_id": "ADR02_SELECTED_BRANCH_LIFECYCLE"
+    },
+    {
+      "id": "M-COM-S04",
+      "group": "schema_lifecycle_shared",
+      "introduced_at": [
+        "T02B-NI",
+        "T02B-IDX"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T02B-NI",
+        "T02B-IDX"
+      ],
+      "required_green_at": [
+        "G02B-NI",
+        "G02B-IDX"
+      ],
+      "revalidate_at": [
+        "G10C"
+      ],
+      "condition_id": "ADR02_SELECTED_BRANCH_LIFECYCLE"
+    },
+    {
+      "id": "M-COM-S05",
+      "group": "schema_lifecycle_shared",
+      "introduced_at": [
+        "T02B-NI",
+        "T02B-IDX"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T02B-NI",
+        "T02B-IDX"
+      ],
+      "required_green_at": [
+        "G02B-NI",
+        "G02B-IDX"
+      ],
+      "revalidate_at": [
+        "G10C"
+      ],
+      "condition_id": "ADR02_SELECTED_BRANCH_LIFECYCLE"
+    },
+    {
+      "id": "M-COM-S06",
+      "group": "schema_lifecycle_shared",
+      "introduced_at": [
+        "T02B-NI",
+        "T02B-IDX"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T02B-NI",
+        "T02B-IDX"
+      ],
+      "required_green_at": [
+        "G02B-NI",
+        "G02B-IDX"
+      ],
+      "revalidate_at": [
+        "G10C"
+      ],
+      "condition_id": "ADR02_SELECTED_BRANCH_LIFECYCLE"
+    },
+    {
+      "id": "M-COM-F01",
+      "group": "schema_lifecycle_shared",
+      "introduced_at": [
+        "T02B-NI",
+        "T02B-IDX"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T02B-NI",
+        "T02B-IDX"
+      ],
+      "required_green_at": [
+        "G02B-NI",
+        "G02B-IDX"
+      ],
+      "revalidate_at": [
+        "G10C"
+      ],
+      "condition_id": "ADR02_SELECTED_BRANCH_LIFECYCLE"
+    },
+    {
+      "id": "M-COM-F02",
+      "group": "schema_lifecycle_shared",
+      "introduced_at": [
+        "T02B-NI",
+        "T02B-IDX"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T02B-NI",
+        "T02B-IDX"
+      ],
+      "required_green_at": [
+        "G02B-NI",
+        "G02B-IDX"
+      ],
+      "revalidate_at": [
+        "G10C"
+      ],
+      "condition_id": "ADR02_SELECTED_BRANCH_LIFECYCLE"
+    },
+    {
+      "id": "M-NI-S01",
+      "group": "no_index_branch",
+      "introduced_at": [
+        "T02B-NI"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T02B-NI"
+      ],
+      "required_green_at": [
+        "G02B-NI"
+      ],
+      "revalidate_at": [
+        "G10C"
+      ],
+      "condition_id": "ADR02_NO_INDEX"
+    },
+    {
+      "id": "M-NI-S02",
+      "group": "no_index_branch",
+      "introduced_at": [
+        "T02B-NI"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T02B-NI"
+      ],
+      "required_green_at": [
+        "G02B-NI"
+      ],
+      "revalidate_at": [
+        "G10C"
+      ],
+      "condition_id": "ADR02_NO_INDEX"
+    },
+    {
+      "id": "M-NI-P01",
+      "group": "no_index_branch",
+      "introduced_at": [
+        "T02B-NI"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T02B-NI"
+      ],
+      "required_green_at": [
+        "G02B-NI"
+      ],
+      "revalidate_at": [
+        "G10C"
+      ],
+      "condition_id": "ADR02_NO_INDEX"
+    },
+    {
+      "id": "M-IDX-S01",
+      "group": "index_branch",
+      "introduced_at": [
+        "T02B-IDX"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T02B-IDX"
+      ],
+      "required_green_at": [
+        "G02B-IDX"
+      ],
+      "revalidate_at": [
+        "G11M",
+        "G10R"
+      ],
+      "condition_id": "ADR02_INDEX"
+    },
+    {
+      "id": "M-IDX-S02",
+      "group": "index_branch",
+      "introduced_at": [
+        "T02B-IDX"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T02B-IDX"
+      ],
+      "required_green_at": [
+        "G02B-IDX"
+      ],
+      "revalidate_at": [
+        "G11M",
+        "G10R"
+      ],
+      "condition_id": "ADR02_INDEX"
+    },
+    {
+      "id": "M-IDX-S03",
+      "group": "index_branch",
+      "introduced_at": [
+        "T02B-IDX"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T02B-IDX"
+      ],
+      "required_green_at": [
+        "G02B-IDX"
+      ],
+      "revalidate_at": [
+        "G11M",
+        "G10R"
+      ],
+      "condition_id": "ADR02_INDEX"
+    },
+    {
+      "id": "M-IDX-F01",
+      "group": "index_branch",
+      "introduced_at": [
+        "T02B-IDX"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T02B-IDX"
+      ],
+      "required_green_at": [
+        "G02B-IDX"
+      ],
+      "revalidate_at": [
+        "G11M",
+        "G10R"
+      ],
+      "condition_id": "ADR02_INDEX"
+    },
+    {
+      "id": "M-IDX-F02",
+      "group": "index_branch",
+      "introduced_at": [
+        "T02B-IDX"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T02B-IDX"
+      ],
+      "required_green_at": [
+        "G02B-IDX"
+      ],
+      "revalidate_at": [
+        "G11M",
+        "G10R"
+      ],
+      "condition_id": "ADR02_INDEX"
+    },
+    {
+      "id": "M-IDX-F03",
+      "group": "index_branch",
+      "introduced_at": [
+        "T02B-IDX"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T02B-IDX"
+      ],
+      "required_green_at": [
+        "G02B-IDX"
+      ],
+      "revalidate_at": [
+        "G11M",
+        "G10R"
+      ],
+      "condition_id": "ADR02_INDEX"
+    },
+    {
+      "id": "M-IDX-P01",
+      "group": "index_branch",
+      "introduced_at": [
+        "T02B-IDX"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T02B-IDX"
+      ],
+      "required_green_at": [
+        "G02B-IDX"
+      ],
+      "revalidate_at": [
+        "G11M",
+        "G10R"
+      ],
+      "condition_id": "ADR02_INDEX"
+    },
+    {
+      "id": "M-IDX-P02",
+      "group": "index_branch",
+      "introduced_at": [
+        "T02B-IDX"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T02B-IDX"
+      ],
+      "required_green_at": [
+        "G02B-IDX"
+      ],
+      "revalidate_at": [
+        "G11M",
+        "G10R"
+      ],
+      "condition_id": "ADR02_INDEX"
+    },
+    {
+      "id": "M-IDX-M01",
+      "group": "index_branch",
+      "introduced_at": [
+        "T02B-IDX"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T02B-IDX"
+      ],
+      "required_green_at": [
+        "G02B-IDX"
+      ],
+      "revalidate_at": [
+        "G11M",
+        "G10R"
+      ],
+      "condition_id": "ADR02_INDEX"
+    },
+    {
+      "id": "M-L-EDGE-S01",
+      "group": "request_ledger_migration",
+      "introduced_at": [
+        "T07E"
+      ],
+      "variant_at": [
+        "T09"
+      ],
+      "expected_red_at": [
+        "T07E",
+        "T09"
+      ],
+      "required_green_at": [
+        "G07E",
+        "G09"
+      ],
+      "revalidate_at": [
+        "G11M-L-ADR",
+        "G11M-L",
+        "G10R"
+      ],
+      "condition_id": "ADR11_LLM_ENABLED_ADR13_REVALIDATION"
+    },
+    {
+      "id": "M-L-EDGE-S02",
+      "group": "request_ledger_migration",
+      "introduced_at": [
+        "T07E"
+      ],
+      "variant_at": [
+        "T09"
+      ],
+      "expected_red_at": [
+        "T07E",
+        "T09"
+      ],
+      "required_green_at": [
+        "G07E",
+        "G09"
+      ],
+      "revalidate_at": [
+        "G11M-L-ADR",
+        "G11M-L",
+        "G10R"
+      ],
+      "condition_id": "ADR11_LLM_ENABLED_ADR13_REVALIDATION"
+    },
+    {
+      "id": "M-L-EDGE-S03",
+      "group": "request_ledger_migration",
+      "introduced_at": [
+        "T07E"
+      ],
+      "variant_at": [
+        "T09"
+      ],
+      "expected_red_at": [
+        "T07E",
+        "T09"
+      ],
+      "required_green_at": [
+        "G07E",
+        "G09"
+      ],
+      "revalidate_at": [
+        "G11M-L-ADR",
+        "G11M-L",
+        "G10R"
+      ],
+      "condition_id": "ADR11_LLM_ENABLED_ADR13_REVALIDATION"
+    },
+    {
+      "id": "M-L-S01",
+      "group": "request_ledger_migration",
+      "introduced_at": [
+        "T07E"
+      ],
+      "variant_at": [
+        "T09"
+      ],
+      "expected_red_at": [
+        "T07E",
+        "T09"
+      ],
+      "required_green_at": [
+        "G07E",
+        "G09"
+      ],
+      "revalidate_at": [
+        "G11M-L-ADR",
+        "G11M-L",
+        "G10R"
+      ],
+      "condition_id": "ADR11_LLM_ENABLED_ADR13_REVALIDATION"
+    },
+    {
+      "id": "M-L-S02",
+      "group": "request_ledger_migration",
+      "introduced_at": [
+        "T07E"
+      ],
+      "variant_at": [
+        "T09"
+      ],
+      "expected_red_at": [
+        "T07E",
+        "T09"
+      ],
+      "required_green_at": [
+        "G07E",
+        "G09"
+      ],
+      "revalidate_at": [
+        "G11M-L-ADR",
+        "G11M-L",
+        "G10R"
+      ],
+      "condition_id": "ADR11_LLM_ENABLED_ADR13_REVALIDATION"
+    },
+    {
+      "id": "M-L-F01",
+      "group": "request_ledger_migration",
+      "introduced_at": [
+        "T07E"
+      ],
+      "variant_at": [
+        "T09"
+      ],
+      "expected_red_at": [
+        "T07E",
+        "T09"
+      ],
+      "required_green_at": [
+        "G07E",
+        "G09"
+      ],
+      "revalidate_at": [
+        "G11M-L-ADR",
+        "G11M-L",
+        "G10R"
+      ],
+      "condition_id": "ADR11_LLM_ENABLED_ADR13_REVALIDATION"
+    },
+    {
+      "id": "C-S01",
+      "group": "checkpoint",
+      "introduced_at": [
+        "T03"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T03"
+      ],
+      "required_green_at": [
+        "G03"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "C-S02",
+      "group": "checkpoint",
+      "introduced_at": [
+        "T03"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T03"
+      ],
+      "required_green_at": [
+        "G03"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "C-S03",
+      "group": "checkpoint",
+      "introduced_at": [
+        "T03"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T03"
+      ],
+      "required_green_at": [
+        "G03"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "C-S04",
+      "group": "checkpoint",
+      "introduced_at": [
+        "T03"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T03"
+      ],
+      "required_green_at": [
+        "G03"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "C-S05",
+      "group": "checkpoint",
+      "introduced_at": [
+        "T03"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T03"
+      ],
+      "required_green_at": [
+        "G03"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "C-S06",
+      "group": "checkpoint",
+      "introduced_at": [
+        "T03"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T03"
+      ],
+      "required_green_at": [
+        "G03"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "C-S07",
+      "group": "checkpoint",
+      "introduced_at": [
+        "T03"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T03"
+      ],
+      "required_green_at": [
+        "G03"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "C-S08",
+      "group": "checkpoint",
+      "introduced_at": [
+        "T03"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T03"
+      ],
+      "required_green_at": [
+        "G03"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "C-S09",
+      "group": "checkpoint",
+      "introduced_at": [
+        "T03"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T03"
+      ],
+      "required_green_at": [
+        "G03"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "C-S10",
+      "group": "checkpoint",
+      "introduced_at": [
+        "T03"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T03"
+      ],
+      "required_green_at": [
+        "G03"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "C-S11",
+      "group": "checkpoint",
+      "introduced_at": [
+        "T03"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T03"
+      ],
+      "required_green_at": [
+        "G03"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "C-S12",
+      "group": "checkpoint",
+      "introduced_at": [
+        "T03"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T03"
+      ],
+      "required_green_at": [
+        "G03"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "C-S13",
+      "group": "checkpoint",
+      "introduced_at": [
+        "T03"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T03"
+      ],
+      "required_green_at": [
+        "G03"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "C-S14",
+      "group": "checkpoint",
+      "introduced_at": [
+        "T03"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T03"
+      ],
+      "required_green_at": [
+        "G03"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "O-S01",
+      "group": "observability_cancel",
+      "introduced_at": [
+        "T04"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T04"
+      ],
+      "required_green_at": [
+        "G04"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "O-S02",
+      "group": "observability_cancel",
+      "introduced_at": [
+        "T04"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T04"
+      ],
+      "required_green_at": [
+        "G04"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "O-S03",
+      "group": "observability_cancel",
+      "introduced_at": [
+        "T04"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T04"
+      ],
+      "required_green_at": [
+        "G04"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "O-S04",
+      "group": "observability_cancel",
+      "introduced_at": [
+        "T04"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T04"
+      ],
+      "required_green_at": [
+        "G04"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "O-S05",
+      "group": "observability_cancel",
+      "introduced_at": [
+        "T04"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T04"
+      ],
+      "required_green_at": [
+        "G04"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "O-S06",
+      "group": "observability_cancel",
+      "introduced_at": [
+        "T04"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T04"
+      ],
+      "required_green_at": [
+        "G04"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "O-S07",
+      "group": "observability_cancel",
+      "introduced_at": [
+        "T04"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T04"
+      ],
+      "required_green_at": [
+        "G04"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "O-S08",
+      "group": "observability_cancel",
+      "introduced_at": [
+        "T04"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T04"
+      ],
+      "required_green_at": [
+        "G04"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "O-S09",
+      "group": "observability_cancel",
+      "introduced_at": [
+        "T04"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T04"
+      ],
+      "required_green_at": [
+        "G04"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "O-S10",
+      "group": "observability_cancel",
+      "introduced_at": [
+        "T04"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T04"
+      ],
+      "required_green_at": [
+        "G04"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "O-S11",
+      "group": "observability_cancel",
+      "introduced_at": [
+        "T04"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T04"
+      ],
+      "required_green_at": [
+        "G04"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "S-S01",
+      "group": "supervisor_control",
+      "introduced_at": [
+        "T05"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T05"
+      ],
+      "required_green_at": [
+        "G05"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "S-S02",
+      "group": "supervisor_control",
+      "introduced_at": [
+        "T05"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T05"
+      ],
+      "required_green_at": [
+        "G05"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "S-S03",
+      "group": "supervisor_control",
+      "introduced_at": [
+        "T05"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T05"
+      ],
+      "required_green_at": [
+        "G05"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "S-S04",
+      "group": "supervisor_control",
+      "introduced_at": [
+        "T05"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T05"
+      ],
+      "required_green_at": [
+        "G05"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "S-S05",
+      "group": "supervisor_control",
+      "introduced_at": [
+        "T05"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T05"
+      ],
+      "required_green_at": [
+        "G05"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "S-S06",
+      "group": "supervisor_control",
+      "introduced_at": [
+        "T05"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T05"
+      ],
+      "required_green_at": [
+        "G05"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "S-S07",
+      "group": "supervisor_control",
+      "introduced_at": [
+        "T05"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T05"
+      ],
+      "required_green_at": [
+        "G05"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "S-S08",
+      "group": "supervisor_control",
+      "introduced_at": [
+        "T05"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T05"
+      ],
+      "required_green_at": [
+        "G05"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "S-S09",
+      "group": "supervisor_control",
+      "introduced_at": [
+        "T05"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T05"
+      ],
+      "required_green_at": [
+        "G05"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "S-S10",
+      "group": "supervisor_control",
+      "introduced_at": [
+        "T05"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T05"
+      ],
+      "required_green_at": [
+        "G05"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "S-S11",
+      "group": "supervisor_control",
+      "introduced_at": [
+        "T05"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T05"
+      ],
+      "required_green_at": [
+        "G05"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "S-S12",
+      "group": "supervisor_control",
+      "introduced_at": [
+        "T05"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T05"
+      ],
+      "required_green_at": [
+        "G05"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "S-S13",
+      "group": "supervisor_control",
+      "introduced_at": [
+        "T05"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T05"
+      ],
+      "required_green_at": [
+        "G05"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "S-S14",
+      "group": "supervisor_control",
+      "introduced_at": [
+        "T05"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T05"
+      ],
+      "required_green_at": [
+        "G05"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "S-S15",
+      "group": "supervisor_control",
+      "introduced_at": [
+        "T05"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T05"
+      ],
+      "required_green_at": [
+        "G05"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "S-S16",
+      "group": "supervisor_control",
+      "introduced_at": [
+        "T05"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T05"
+      ],
+      "required_green_at": [
+        "G05"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "S-S17",
+      "group": "supervisor_control",
+      "introduced_at": [
+        "T05"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T05"
+      ],
+      "required_green_at": [
+        "G05"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "S-S18",
+      "group": "supervisor_control",
+      "introduced_at": [
+        "T05"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T05"
+      ],
+      "required_green_at": [
+        "G05"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "SC-S01",
+      "group": "scanner_correctness",
+      "introduced_at": [
+        "T06"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T06"
+      ],
+      "required_green_at": [
+        "G06"
+      ],
+      "revalidate_at": [
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "SC-S02",
+      "group": "scanner_correctness",
+      "introduced_at": [
+        "T06"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T06"
+      ],
+      "required_green_at": [
+        "G06"
+      ],
+      "revalidate_at": [
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "SC-S03",
+      "group": "scanner_correctness",
+      "introduced_at": [
+        "T06"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T06"
+      ],
+      "required_green_at": [
+        "G06"
+      ],
+      "revalidate_at": [
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "SC-S04",
+      "group": "scanner_correctness",
+      "introduced_at": [
+        "T06"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T06"
+      ],
+      "required_green_at": [
+        "G06"
+      ],
+      "revalidate_at": [
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "SC-S05",
+      "group": "scanner_correctness",
+      "introduced_at": [
+        "T06"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T06"
+      ],
+      "required_green_at": [
+        "G06"
+      ],
+      "revalidate_at": [
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "SC-S06",
+      "group": "scanner_correctness",
+      "introduced_at": [
+        "T06"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T06"
+      ],
+      "required_green_at": [
+        "G06"
+      ],
+      "revalidate_at": [
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "SC-S07",
+      "group": "scanner_correctness",
+      "introduced_at": [
+        "T06"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T06"
+      ],
+      "required_green_at": [
+        "G06"
+      ],
+      "revalidate_at": [
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "SC-S08",
+      "group": "scanner_correctness",
+      "introduced_at": [
+        "T06"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T06"
+      ],
+      "required_green_at": [
+        "G06"
+      ],
+      "revalidate_at": [
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "SC-S09",
+      "group": "scanner_correctness",
+      "introduced_at": [
+        "T06"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T06"
+      ],
+      "required_green_at": [
+        "G06"
+      ],
+      "revalidate_at": [
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "SC-S10",
+      "group": "scanner_correctness",
+      "introduced_at": [
+        "T06"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T06"
+      ],
+      "required_green_at": [
+        "G06"
+      ],
+      "revalidate_at": [
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "SC-S11",
+      "group": "scanner_correctness",
+      "introduced_at": [
+        "T06"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T06"
+      ],
+      "required_green_at": [
+        "G06"
+      ],
+      "revalidate_at": [
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "SC-S12",
+      "group": "scanner_correctness",
+      "introduced_at": [
+        "T06"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T06"
+      ],
+      "required_green_at": [
+        "G06"
+      ],
+      "revalidate_at": [
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "SC-S13",
+      "group": "scanner_correctness",
+      "introduced_at": [
+        "T06"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T06"
+      ],
+      "required_green_at": [
+        "G06"
+      ],
+      "revalidate_at": [
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "SC-P01",
+      "group": "scanner_performance",
+      "introduced_at": [
+        "T06"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T06"
+      ],
+      "required_green_at": [
+        "G06"
+      ],
+      "revalidate_at": [
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "SC-P02",
+      "group": "scanner_performance",
+      "introduced_at": [
+        "T06"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T06"
+      ],
+      "required_green_at": [
+        "G06"
+      ],
+      "revalidate_at": [
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "SC-P03",
+      "group": "scanner_performance",
+      "introduced_at": [
+        "T06"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T06"
+      ],
+      "required_green_at": [
+        "G06"
+      ],
+      "revalidate_at": [
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "SC-P04",
+      "group": "scanner_performance",
+      "introduced_at": [
+        "T06"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T06"
+      ],
+      "required_green_at": [
+        "G06"
+      ],
+      "revalidate_at": [
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "L-S01",
+      "group": "llm",
+      "introduced_at": [
+        "T07E"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T07E"
+      ],
+      "required_green_at": [
+        "G07E"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10R"
+      ],
+      "condition_id": "ADR11_LLM_ENABLED"
+    },
+    {
+      "id": "L-S02",
+      "group": "llm",
+      "introduced_at": [
+        "T07E"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T07E"
+      ],
+      "required_green_at": [
+        "G07E"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10R"
+      ],
+      "condition_id": "ADR11_LLM_ENABLED"
+    },
+    {
+      "id": "L-S03",
+      "group": "llm",
+      "introduced_at": [
+        "T07E"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T07E"
+      ],
+      "required_green_at": [
+        "G07E"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10R"
+      ],
+      "condition_id": "ADR11_LLM_ENABLED"
+    },
+    {
+      "id": "L-S04",
+      "group": "llm",
+      "introduced_at": [
+        "T07E"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T07E"
+      ],
+      "required_green_at": [
+        "G07E"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10R"
+      ],
+      "condition_id": "ADR11_LLM_ENABLED"
+    },
+    {
+      "id": "L-S05",
+      "group": "llm",
+      "introduced_at": [
+        "T07E"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T07E"
+      ],
+      "required_green_at": [
+        "G07E"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10R"
+      ],
+      "condition_id": "ADR11_LLM_ENABLED"
+    },
+    {
+      "id": "L-S06",
+      "group": "llm",
+      "introduced_at": [
+        "T07E"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T07E"
+      ],
+      "required_green_at": [
+        "G07E"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10R"
+      ],
+      "condition_id": "ADR11_LLM_ENABLED"
+    },
+    {
+      "id": "L-S07",
+      "group": "llm",
+      "introduced_at": [
+        "T07E"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T07E"
+      ],
+      "required_green_at": [
+        "G07E"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10R"
+      ],
+      "condition_id": "ADR11_LLM_ENABLED"
+    },
+    {
+      "id": "L-S08",
+      "group": "llm",
+      "introduced_at": [
+        "T07E"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T07E"
+      ],
+      "required_green_at": [
+        "G07E"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10R"
+      ],
+      "condition_id": "ADR11_LLM_ENABLED"
+    },
+    {
+      "id": "L-S09",
+      "group": "llm",
+      "introduced_at": [
+        "T07E",
+        "T07O"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T07E",
+        "T07O"
+      ],
+      "required_green_at": [
+        "G07E",
+        "G07O"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10R"
+      ],
+      "condition_id": "ADR11_SELECTED_PROFILE_LIFECYCLE"
+    },
+    {
+      "id": "L-S10",
+      "group": "llm",
+      "introduced_at": [
+        "T07E"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T07E"
+      ],
+      "required_green_at": [
+        "G07E"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10R"
+      ],
+      "condition_id": "ADR11_LLM_ENABLED"
+    },
+    {
+      "id": "L-S11",
+      "group": "llm",
+      "introduced_at": [
+        "T07E"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T07E"
+      ],
+      "required_green_at": [
+        "G07E"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10R"
+      ],
+      "condition_id": "ADR11_LLM_ENABLED"
+    },
+    {
+      "id": "L-S12",
+      "group": "llm",
+      "introduced_at": [
+        "T07E"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T07E"
+      ],
+      "required_green_at": [
+        "G07E"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10R"
+      ],
+      "condition_id": "ADR11_LLM_ENABLED"
+    },
+    {
+      "id": "L-S13",
+      "group": "llm",
+      "introduced_at": [
+        "T07E"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T07E"
+      ],
+      "required_green_at": [
+        "G07E"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10R"
+      ],
+      "condition_id": "ADR11_LLM_ENABLED"
+    },
+    {
+      "id": "L-S14",
+      "group": "llm",
+      "introduced_at": [
+        "T07E"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T07E"
+      ],
+      "required_green_at": [
+        "G07E"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10R"
+      ],
+      "condition_id": "ADR11_LLM_ENABLED"
+    },
+    {
+      "id": "L-S15",
+      "group": "llm",
+      "introduced_at": [
+        "T07E",
+        "T07O"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T07E",
+        "T07O"
+      ],
+      "required_green_at": [
+        "G07E",
+        "G07O"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10R"
+      ],
+      "condition_id": "ADR11_SELECTED_PROFILE_LIFECYCLE"
+    },
+    {
+      "id": "L-S16",
+      "group": "llm",
+      "introduced_at": [
+        "T07E"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T07E"
+      ],
+      "required_green_at": [
+        "G07E"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10R"
+      ],
+      "condition_id": "ADR11_LLM_ENABLED"
+    },
+    {
+      "id": "L-S17",
+      "group": "llm",
+      "introduced_at": [
+        "T07E",
+        "T07O"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T07E",
+        "T07O"
+      ],
+      "required_green_at": [
+        "G07E",
+        "G07O"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10R"
+      ],
+      "condition_id": "ADR11_SELECTED_PROFILE_LIFECYCLE"
+    },
+    {
+      "id": "L-S18",
+      "group": "llm",
+      "introduced_at": [
+        "T07E"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T07E"
+      ],
+      "required_green_at": [
+        "G07E"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10R"
+      ],
+      "condition_id": "ADR11_LLM_ENABLED"
+    },
+    {
+      "id": "L-S19",
+      "group": "llm",
+      "introduced_at": [
+        "T07E"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T07E"
+      ],
+      "required_green_at": [
+        "G07E"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10R"
+      ],
+      "condition_id": "ADR11_LLM_ENABLED"
+    },
+    {
+      "id": "L-S20",
+      "group": "llm",
+      "introduced_at": [
+        "T07E"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T07E"
+      ],
+      "required_green_at": [
+        "G07E"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10R"
+      ],
+      "condition_id": "ADR11_LLM_ENABLED"
+    },
+    {
+      "id": "L-S21",
+      "group": "llm",
+      "introduced_at": [
+        "T07E"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T07E"
+      ],
+      "required_green_at": [
+        "G07E"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10R"
+      ],
+      "condition_id": "ADR11_LLM_ENABLED"
+    },
+    {
+      "id": "R-S01",
+      "group": "retention_capacity",
+      "introduced_at": [
+        "T08"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T08"
+      ],
+      "required_green_at": [
+        "G08"
+      ],
+      "revalidate_at": [
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "R-S02",
+      "group": "retention_capacity",
+      "introduced_at": [
+        "T08"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T08"
+      ],
+      "required_green_at": [
+        "G08"
+      ],
+      "revalidate_at": [
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "R-S03",
+      "group": "retention_capacity",
+      "introduced_at": [
+        "T08"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T08"
+      ],
+      "required_green_at": [
+        "G08"
+      ],
+      "revalidate_at": [
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "R-S04",
+      "group": "retention_capacity",
+      "introduced_at": [
+        "T08"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T08"
+      ],
+      "required_green_at": [
+        "G08"
+      ],
+      "revalidate_at": [
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "R-S05",
+      "group": "retention_capacity",
+      "introduced_at": [
+        "T08"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T08"
+      ],
+      "required_green_at": [
+        "G08"
+      ],
+      "revalidate_at": [
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "R-S06",
+      "group": "retention_capacity",
+      "introduced_at": [
+        "T08"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T08"
+      ],
+      "required_green_at": [
+        "G08"
+      ],
+      "revalidate_at": [
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "R-S07",
+      "group": "retention_capacity",
+      "introduced_at": [
+        "T08"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T08"
+      ],
+      "required_green_at": [
+        "G08"
+      ],
+      "revalidate_at": [
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "R-S08",
+      "group": "retention_capacity",
+      "introduced_at": [
+        "T08"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T08"
+      ],
+      "required_green_at": [
+        "G08"
+      ],
+      "revalidate_at": [
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "R-S10",
+      "group": "retention_capacity",
+      "introduced_at": [
+        "T08"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T08"
+      ],
+      "required_green_at": [
+        "G08"
+      ],
+      "revalidate_at": [
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "R-S11",
+      "group": "retention_capacity",
+      "introduced_at": [
+        "T08"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T08"
+      ],
+      "required_green_at": [
+        "G08"
+      ],
+      "revalidate_at": [
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "R-S12",
+      "group": "retention_capacity",
+      "introduced_at": [
+        "T08"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T08"
+      ],
+      "required_green_at": [
+        "G08"
+      ],
+      "revalidate_at": [
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "R-S14",
+      "group": "retention_capacity",
+      "introduced_at": [
+        "T08"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T08"
+      ],
+      "required_green_at": [
+        "G08"
+      ],
+      "revalidate_at": [
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "EV-S01",
+      "group": "evidence_lifecycle",
+      "introduced_at": [
+        "T08"
+      ],
+      "variant_at": [
+        "T09P"
+      ],
+      "expected_red_at": [
+        "T08",
+        "T09P"
+      ],
+      "required_green_at": [
+        "G08",
+        "G09P"
+      ],
+      "revalidate_at": [
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "EV-S02",
+      "group": "evidence_lifecycle",
+      "introduced_at": [
+        "T08"
+      ],
+      "variant_at": [
+        "T09P"
+      ],
+      "expected_red_at": [
+        "T08",
+        "T09P"
+      ],
+      "required_green_at": [
+        "G08",
+        "G09P"
+      ],
+      "revalidate_at": [
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "EV-S03",
+      "group": "evidence_lifecycle",
+      "introduced_at": [
+        "T08"
+      ],
+      "variant_at": [
+        "T09P"
+      ],
+      "expected_red_at": [
+        "T08",
+        "T09P"
+      ],
+      "required_green_at": [
+        "G08",
+        "G09P"
+      ],
+      "revalidate_at": [
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "PX-S01",
+      "group": "production_wrapper",
+      "introduced_at": [
+        "T09P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T09P"
+      ],
+      "required_green_at": [
+        "G09P"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C",
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "PX-S02",
+      "group": "production_wrapper",
+      "introduced_at": [
+        "T09P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T09P"
+      ],
+      "required_green_at": [
+        "G09P"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C",
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "PX-S03",
+      "group": "production_wrapper",
+      "introduced_at": [
+        "T09P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T09P"
+      ],
+      "required_green_at": [
+        "G09P"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C",
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "PX-S04",
+      "group": "production_wrapper",
+      "introduced_at": [
+        "T09P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T09P"
+      ],
+      "required_green_at": [
+        "G09P"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C",
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "PX-S05",
+      "group": "production_wrapper",
+      "introduced_at": [
+        "T09P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T09P"
+      ],
+      "required_green_at": [
+        "G09P"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C",
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "PX-S06",
+      "group": "production_wrapper",
+      "introduced_at": [
+        "T09P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T09P"
+      ],
+      "required_green_at": [
+        "G09P"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C",
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "PX-S07",
+      "group": "production_wrapper",
+      "introduced_at": [
+        "T09P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T09P"
+      ],
+      "required_green_at": [
+        "G09P"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C",
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "PX-S08",
+      "group": "production_wrapper",
+      "introduced_at": [
+        "T09P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T09P"
+      ],
+      "required_green_at": [
+        "G09P"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C",
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "PX-S09",
+      "group": "production_wrapper",
+      "introduced_at": [
+        "T09P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T09P"
+      ],
+      "required_green_at": [
+        "G09P"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C",
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "PX-S10",
+      "group": "production_wrapper",
+      "introduced_at": [
+        "T09P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T09P"
+      ],
+      "required_green_at": [
+        "G09P"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C",
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "PX-S11",
+      "group": "production_wrapper",
+      "introduced_at": [
+        "T09P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T09P"
+      ],
+      "required_green_at": [
+        "G09P"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C",
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "PX-S12",
+      "group": "production_wrapper",
+      "introduced_at": [
+        "T09P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T09P"
+      ],
+      "required_green_at": [
+        "G09P"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C",
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "PX-S13",
+      "group": "production_wrapper",
+      "introduced_at": [
+        "T09P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T09P"
+      ],
+      "required_green_at": [
+        "G09P"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C",
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "PX-S14",
+      "group": "production_wrapper",
+      "introduced_at": [
+        "T09P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T09P"
+      ],
+      "required_green_at": [
+        "G09P"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C",
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "PX-S15",
+      "group": "production_wrapper",
+      "introduced_at": [
+        "T09P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T09P"
+      ],
+      "required_green_at": [
+        "G09P"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C",
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "PX-S16",
+      "group": "production_wrapper",
+      "introduced_at": [
+        "T09P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T09P"
+      ],
+      "required_green_at": [
+        "G09P"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C",
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "PX-S17",
+      "group": "production_wrapper",
+      "introduced_at": [
+        "T09P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T09P"
+      ],
+      "required_green_at": [
+        "G09P"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C",
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "PX-S18",
+      "group": "production_wrapper",
+      "introduced_at": [
+        "T09P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T09P"
+      ],
+      "required_green_at": [
+        "G09P"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C",
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "PX-S19",
+      "group": "production_wrapper",
+      "introduced_at": [
+        "T09P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T09P"
+      ],
+      "required_green_at": [
+        "G09P"
+      ],
+      "revalidate_at": [
+        "G09",
+        "G10C",
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "E2E-S01",
+      "group": "end_to_end",
+      "introduced_at": [
+        "T09"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T09"
+      ],
+      "required_green_at": [
+        "G09"
+      ],
+      "revalidate_at": [
+        "G10C"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "E2E-F01",
+      "group": "end_to_end",
+      "introduced_at": [
+        "T09"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T09"
+      ],
+      "required_green_at": [
+        "G09"
+      ],
+      "revalidate_at": [
+        "G10C"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "E2E-F02",
+      "group": "end_to_end",
+      "introduced_at": [
+        "T09"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T09"
+      ],
+      "required_green_at": [
+        "G09"
+      ],
+      "revalidate_at": [
+        "G10C"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "E2E-M01",
+      "group": "end_to_end",
+      "introduced_at": [
+        "T09"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T09"
+      ],
+      "required_green_at": [
+        "G09"
+      ],
+      "revalidate_at": [
+        "G10C"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "CAN-A1-S01",
+      "group": "canary_a",
+      "introduced_at": [
+        "T09P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T09P"
+      ],
+      "required_green_at": [
+        "G09P"
+      ],
+      "revalidate_at": [
+        "G11B-A1",
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "CAN-A1-S02",
+      "group": "canary_a",
+      "introduced_at": [
+        "T09P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T09P"
+      ],
+      "required_green_at": [
+        "G09P"
+      ],
+      "revalidate_at": [
+        "G11B-A1",
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "CAN-A1-S03",
+      "group": "canary_a",
+      "introduced_at": [
+        "T09P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T09P"
+      ],
+      "required_green_at": [
+        "G09P"
+      ],
+      "revalidate_at": [
+        "G11B-A1",
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "CAN-A2-S01",
+      "group": "canary_a",
+      "introduced_at": [
+        "T09P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T09P"
+      ],
+      "required_green_at": [
+        "G09P"
+      ],
+      "revalidate_at": [
+        "G11B-A2",
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "CAN-A2-S02",
+      "group": "canary_a",
+      "introduced_at": [
+        "T09P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T09P"
+      ],
+      "required_green_at": [
+        "G09P"
+      ],
+      "revalidate_at": [
+        "G11B-A2",
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "CAN-A2-S03",
+      "group": "canary_a",
+      "introduced_at": [
+        "T09P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T09P"
+      ],
+      "required_green_at": [
+        "G09P"
+      ],
+      "revalidate_at": [
+        "G11B-A2",
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "CAN-A3-S01",
+      "group": "canary_a",
+      "introduced_at": [
+        "T09P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T09P"
+      ],
+      "required_green_at": [
+        "G09P"
+      ],
+      "revalidate_at": [
+        "G11B-A3",
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "CAN-A3-S02",
+      "group": "canary_a",
+      "introduced_at": [
+        "T09P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T09P"
+      ],
+      "required_green_at": [
+        "G09P"
+      ],
+      "revalidate_at": [
+        "G11B-A3",
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "CAN-A3-S03",
+      "group": "canary_a",
+      "introduced_at": [
+        "T09P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T09P"
+      ],
+      "required_green_at": [
+        "G09P"
+      ],
+      "revalidate_at": [
+        "G11B-A3",
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "CAN-BP-S01",
+      "group": "canary_b",
+      "introduced_at": [
+        "T09P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T09P"
+      ],
+      "required_green_at": [
+        "G09P"
+      ],
+      "revalidate_at": [
+        "G11B-BP",
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "CAN-BP-S02",
+      "group": "canary_b",
+      "introduced_at": [
+        "T09P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T09P"
+      ],
+      "required_green_at": [
+        "G09P"
+      ],
+      "revalidate_at": [
+        "G11B-BP",
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "CAN-BP-S03",
+      "group": "canary_b",
+      "introduced_at": [
+        "T09P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T09P"
+      ],
+      "required_green_at": [
+        "G09P"
+      ],
+      "revalidate_at": [
+        "G11B-BP",
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "CAN-BF-S01",
+      "group": "canary_b",
+      "introduced_at": [
+        "T09P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T09P"
+      ],
+      "required_green_at": [
+        "G09P"
+      ],
+      "revalidate_at": [
+        "G11B-BFnn",
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "CAN-BF-S02",
+      "group": "canary_b",
+      "introduced_at": [
+        "T09P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T09P"
+      ],
+      "required_green_at": [
+        "G09P"
+      ],
+      "revalidate_at": [
+        "G11B-BFnn",
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "CAN-BF-S03",
+      "group": "canary_b",
+      "introduced_at": [
+        "T09P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T09P"
+      ],
+      "required_green_at": [
+        "G09P"
+      ],
+      "revalidate_at": [
+        "G11B-BFnn",
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "CAN-BP-W01",
+      "group": "canary_b",
+      "introduced_at": [
+        "T09P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T09P"
+      ],
+      "required_green_at": [
+        "G09P"
+      ],
+      "revalidate_at": [
+        "G11B-BP",
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "CAN-BF-W01",
+      "group": "canary_b",
+      "introduced_at": [
+        "T09P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T09P"
+      ],
+      "required_green_at": [
+        "G09P"
+      ],
+      "revalidate_at": [
+        "G11B-BFnn",
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "CAN-B-W02",
+      "group": "canary_b",
+      "introduced_at": [
+        "T09P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T09P"
+      ],
+      "required_green_at": [
+        "G09P"
+      ],
+      "revalidate_at": [
+        "G11B-BP",
+        "G11B-BFnn",
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "WRITE-F01",
+      "group": "bounded_write_faults",
+      "introduced_at": [
+        "T09P"
+      ],
+      "variant_at": [
+        "T09"
+      ],
+      "expected_red_at": [
+        "T09P",
+        "T09"
+      ],
+      "required_green_at": [
+        "G09"
+      ],
+      "revalidate_at": [
+        "G11B-A2",
+        "G11B-A3",
+        "G11B-BP",
+        "G11B-BFnn",
+        "G12A"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "WRITE-F02",
+      "group": "bounded_write_faults",
+      "introduced_at": [
+        "T09P"
+      ],
+      "variant_at": [
+        "T09"
+      ],
+      "expected_red_at": [
+        "T09P",
+        "T09"
+      ],
+      "required_green_at": [
+        "G09"
+      ],
+      "revalidate_at": [
+        "G11B-A2",
+        "G11B-A3",
+        "G11B-BP",
+        "G11B-BFnn",
+        "G12A"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "WRITE-F03",
+      "group": "bounded_write_faults",
+      "introduced_at": [
+        "T09P"
+      ],
+      "variant_at": [
+        "T09"
+      ],
+      "expected_red_at": [
+        "T09P",
+        "T09"
+      ],
+      "required_green_at": [
+        "G09"
+      ],
+      "revalidate_at": [
+        "G11B-A2",
+        "G11B-A3",
+        "G11B-BP",
+        "G11B-BFnn",
+        "G12A"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "WRITE-F04",
+      "group": "bounded_write_faults",
+      "introduced_at": [
+        "T09P"
+      ],
+      "variant_at": [
+        "T09"
+      ],
+      "expected_red_at": [
+        "T09P",
+        "T09"
+      ],
+      "required_green_at": [
+        "G09"
+      ],
+      "revalidate_at": [
+        "G11B-A2",
+        "G11B-A3",
+        "G11B-BP",
+        "G11B-BFnn",
+        "G12A"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "OBS-S01",
+      "group": "observation",
+      "introduced_at": [
+        "T09P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T09P"
+      ],
+      "required_green_at": [
+        "G09P"
+      ],
+      "revalidate_at": [
+        "G12A"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "OBS-S02",
+      "group": "observation",
+      "introduced_at": [
+        "T09P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T09P"
+      ],
+      "required_green_at": [
+        "G09P"
+      ],
+      "revalidate_at": [
+        "G12A"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "OBS-S03",
+      "group": "observation",
+      "introduced_at": [
+        "T09P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T09P"
+      ],
+      "required_green_at": [
+        "G09P"
+      ],
+      "revalidate_at": [
+        "G12A"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "OBS-S04",
+      "group": "observation",
+      "introduced_at": [
+        "T09P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T09P"
+      ],
+      "required_green_at": [
+        "G09P"
+      ],
+      "revalidate_at": [
+        "G12A"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "OBS-S05",
+      "group": "observation",
+      "introduced_at": [
+        "T09P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T09P"
+      ],
+      "required_green_at": [
+        "G09P"
+      ],
+      "revalidate_at": [
+        "G12A"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "OBS-S06",
+      "group": "observation",
+      "introduced_at": [
+        "T09P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T09P"
+      ],
+      "required_green_at": [
+        "G09P"
+      ],
+      "revalidate_at": [
+        "G12A"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "OBS-W01",
+      "group": "observation",
+      "introduced_at": [
+        "T09P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T09P"
+      ],
+      "required_green_at": [
+        "G09P"
+      ],
+      "revalidate_at": [
+        "G12A"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "OBS-W02",
+      "group": "observation",
+      "introduced_at": [
+        "T09P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T09P"
+      ],
+      "required_green_at": [
+        "G09P"
+      ],
+      "revalidate_at": [
+        "G12A"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "OBS-W03",
+      "group": "observation",
+      "introduced_at": [
+        "T09P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T09P"
+      ],
+      "required_green_at": [
+        "G09P"
+      ],
+      "revalidate_at": [
+        "G12A"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "START-S01",
+      "group": "prelogin",
+      "introduced_at": [
+        "T09P"
+      ],
+      "variant_at": [
+        "T09"
+      ],
+      "expected_red_at": [
+        "T09P",
+        "T09"
+      ],
+      "required_green_at": [
+        "G09"
+      ],
+      "revalidate_at": [
+        "G12B-ARM",
+        "G12B-CAS",
+        "G12B-POST",
+        "G12B-RB"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "START-S02",
+      "group": "prelogin",
+      "introduced_at": [
+        "T09P"
+      ],
+      "variant_at": [
+        "T09"
+      ],
+      "expected_red_at": [
+        "T09P",
+        "T09"
+      ],
+      "required_green_at": [
+        "G09"
+      ],
+      "revalidate_at": [
+        "G12B-ARM",
+        "G12B-CAS",
+        "G12B-POST",
+        "G12B-RB"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "START-S03",
+      "group": "prelogin",
+      "introduced_at": [
+        "T09P"
+      ],
+      "variant_at": [
+        "T09"
+      ],
+      "expected_red_at": [
+        "T09P",
+        "T09"
+      ],
+      "required_green_at": [
+        "G09"
+      ],
+      "revalidate_at": [
+        "G12B-ARM",
+        "G12B-CAS",
+        "G12B-POST",
+        "G12B-RB"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "START-S04",
+      "group": "prelogin",
+      "introduced_at": [
+        "T09P"
+      ],
+      "variant_at": [
+        "T09"
+      ],
+      "expected_red_at": [
+        "T09P",
+        "T09"
+      ],
+      "required_green_at": [
+        "G09"
+      ],
+      "revalidate_at": [
+        "G12B-ARM",
+        "G12B-CAS",
+        "G12B-POST",
+        "G12B-RB"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "START-S05",
+      "group": "prelogin",
+      "introduced_at": [
+        "T09P"
+      ],
+      "variant_at": [
+        "T09"
+      ],
+      "expected_red_at": [
+        "T09P",
+        "T09"
+      ],
+      "required_green_at": [
+        "G09"
+      ],
+      "revalidate_at": [
+        "G12B-ARM",
+        "G12B-CAS",
+        "G12B-POST",
+        "G12B-RB"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "START-S06",
+      "group": "prelogin",
+      "introduced_at": [
+        "T09P"
+      ],
+      "variant_at": [
+        "T09"
+      ],
+      "expected_red_at": [
+        "T09P",
+        "T09"
+      ],
+      "required_green_at": [
+        "G09"
+      ],
+      "revalidate_at": [
+        "G12B-ARM",
+        "G12B-CAS",
+        "G12B-POST",
+        "G12B-RB"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "START-S07",
+      "group": "prelogin",
+      "introduced_at": [
+        "T09P"
+      ],
+      "variant_at": [
+        "T09"
+      ],
+      "expected_red_at": [
+        "T09P",
+        "T09"
+      ],
+      "required_green_at": [
+        "G09"
+      ],
+      "revalidate_at": [
+        "G12B-ARM",
+        "G12B-CAS",
+        "G12B-POST",
+        "G12B-RB"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "START-S08",
+      "group": "prelogin",
+      "introduced_at": [
+        "T09P"
+      ],
+      "variant_at": [
+        "T09"
+      ],
+      "expected_red_at": [
+        "T09P",
+        "T09"
+      ],
+      "required_green_at": [
+        "G09"
+      ],
+      "revalidate_at": [
+        "G12B-ARM",
+        "G12B-CAS",
+        "G12B-POST",
+        "G12B-RB"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "START-S09",
+      "group": "prelogin",
+      "introduced_at": [
+        "T09P"
+      ],
+      "variant_at": [
+        "T09"
+      ],
+      "expected_red_at": [
+        "T09P",
+        "T09"
+      ],
+      "required_green_at": [
+        "G09"
+      ],
+      "revalidate_at": [
+        "G12B-ARM",
+        "G12B-CAS",
+        "G12B-POST",
+        "G12B-RB"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "START-S10",
+      "group": "prelogin",
+      "introduced_at": [
+        "T09P"
+      ],
+      "variant_at": [
+        "T09"
+      ],
+      "expected_red_at": [
+        "T09P",
+        "T09"
+      ],
+      "required_green_at": [
+        "G09"
+      ],
+      "revalidate_at": [
+        "G12B-ARM",
+        "G12B-CAS",
+        "G12B-POST",
+        "G12B-RB"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "RST-S01",
+      "group": "reset",
+      "introduced_at": [
+        "T05"
+      ],
+      "variant_at": [
+        "T09P",
+        "T09"
+      ],
+      "expected_red_at": [
+        "T05",
+        "T09P",
+        "T09"
+      ],
+      "required_green_at": [
+        "G05",
+        "G09"
+      ],
+      "revalidate_at": [
+        "G05Rnn"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "RST-S02",
+      "group": "reset",
+      "introduced_at": [
+        "T05"
+      ],
+      "variant_at": [
+        "T09P",
+        "T09"
+      ],
+      "expected_red_at": [
+        "T05",
+        "T09P",
+        "T09"
+      ],
+      "required_green_at": [
+        "G05",
+        "G09"
+      ],
+      "revalidate_at": [
+        "G05Rnn"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "RST-S03",
+      "group": "reset",
+      "introduced_at": [
+        "T05"
+      ],
+      "variant_at": [
+        "T09P",
+        "T09"
+      ],
+      "expected_red_at": [
+        "T05",
+        "T09P",
+        "T09"
+      ],
+      "required_green_at": [
+        "G05",
+        "G09"
+      ],
+      "revalidate_at": [
+        "G05Rnn"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "RST-S04",
+      "group": "reset",
+      "introduced_at": [
+        "T05"
+      ],
+      "variant_at": [
+        "T09P",
+        "T09"
+      ],
+      "expected_red_at": [
+        "T05",
+        "T09P",
+        "T09"
+      ],
+      "required_green_at": [
+        "G05",
+        "G09"
+      ],
+      "revalidate_at": [
+        "G05Rnn"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "RST-S05",
+      "group": "reset",
+      "introduced_at": [
+        "T05"
+      ],
+      "variant_at": [
+        "T09P",
+        "T09"
+      ],
+      "expected_red_at": [
+        "T05",
+        "T09P",
+        "T09"
+      ],
+      "required_green_at": [
+        "G05",
+        "G09"
+      ],
+      "revalidate_at": [
+        "G05Rnn"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "RST-S06",
+      "group": "reset",
+      "introduced_at": [
+        "T05"
+      ],
+      "variant_at": [
+        "T09P",
+        "T09"
+      ],
+      "expected_red_at": [
+        "T05",
+        "T09P",
+        "T09"
+      ],
+      "required_green_at": [
+        "G05",
+        "G09"
+      ],
+      "revalidate_at": [
+        "G05Rnn"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "RST-S07",
+      "group": "reset",
+      "introduced_at": [
+        "T05"
+      ],
+      "variant_at": [
+        "T09P",
+        "T09"
+      ],
+      "expected_red_at": [
+        "T05",
+        "T09P",
+        "T09"
+      ],
+      "required_green_at": [
+        "G05",
+        "G09"
+      ],
+      "revalidate_at": [
+        "G05Rnn"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "RST-S08",
+      "group": "reset",
+      "introduced_at": [
+        "T05"
+      ],
+      "variant_at": [
+        "T09P",
+        "T09"
+      ],
+      "expected_red_at": [
+        "T05",
+        "T09P",
+        "T09"
+      ],
+      "required_green_at": [
+        "G05",
+        "G09"
+      ],
+      "revalidate_at": [
+        "G05Rnn"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "RST-S09",
+      "group": "reset",
+      "introduced_at": [
+        "T05"
+      ],
+      "variant_at": [
+        "T09P",
+        "T09"
+      ],
+      "expected_red_at": [
+        "T05",
+        "T09P",
+        "T09"
+      ],
+      "required_green_at": [
+        "G05",
+        "G09"
+      ],
+      "revalidate_at": [
+        "G05Rnn"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "ACT-S01",
+      "group": "final_activation",
+      "introduced_at": [
+        "T09P"
+      ],
+      "variant_at": [
+        "T09"
+      ],
+      "expected_red_at": [
+        "T09P",
+        "T09"
+      ],
+      "required_green_at": [
+        "G09"
+      ],
+      "revalidate_at": [
+        "G12C-PRE",
+        "G12C",
+        "G12C-RB"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "ACT-S02",
+      "group": "final_activation",
+      "introduced_at": [
+        "T09P"
+      ],
+      "variant_at": [
+        "T09"
+      ],
+      "expected_red_at": [
+        "T09P",
+        "T09"
+      ],
+      "required_green_at": [
+        "G09"
+      ],
+      "revalidate_at": [
+        "G12C-PRE",
+        "G12C",
+        "G12C-RB"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "ACT-S03",
+      "group": "final_activation",
+      "introduced_at": [
+        "T09P"
+      ],
+      "variant_at": [
+        "T09"
+      ],
+      "expected_red_at": [
+        "T09P",
+        "T09"
+      ],
+      "required_green_at": [
+        "G09"
+      ],
+      "revalidate_at": [
+        "G12C-PRE",
+        "G12C",
+        "G12C-RB"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "ACT-S04",
+      "group": "final_activation",
+      "introduced_at": [
+        "T09P"
+      ],
+      "variant_at": [
+        "T09"
+      ],
+      "expected_red_at": [
+        "T09P",
+        "T09"
+      ],
+      "required_green_at": [
+        "G09"
+      ],
+      "revalidate_at": [
+        "G12C-PRE",
+        "G12C",
+        "G12C-RB"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "ACT-S05",
+      "group": "final_activation",
+      "introduced_at": [
+        "T09P"
+      ],
+      "variant_at": [
+        "T09"
+      ],
+      "expected_red_at": [
+        "T09P",
+        "T09"
+      ],
+      "required_green_at": [
+        "G09"
+      ],
+      "revalidate_at": [
+        "G12C-PRE",
+        "G12C",
+        "G12C-RB"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "ACT-S06",
+      "group": "final_activation",
+      "introduced_at": [
+        "T09P"
+      ],
+      "variant_at": [
+        "T09"
+      ],
+      "expected_red_at": [
+        "T09P",
+        "T09"
+      ],
+      "required_green_at": [
+        "G09"
+      ],
+      "revalidate_at": [
+        "G12C-PRE",
+        "G12C",
+        "G12C-RB"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "ACT-S07",
+      "group": "final_activation",
+      "introduced_at": [
+        "T09P"
+      ],
+      "variant_at": [
+        "T09"
+      ],
+      "expected_red_at": [
+        "T09P",
+        "T09"
+      ],
+      "required_green_at": [
+        "G09"
+      ],
+      "revalidate_at": [
+        "G12C-PRE",
+        "G12C",
+        "G12C-RB"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "ACT-S08",
+      "group": "final_activation",
+      "introduced_at": [
+        "T09P"
+      ],
+      "variant_at": [
+        "T09"
+      ],
+      "expected_red_at": [
+        "T09P",
+        "T09"
+      ],
+      "required_green_at": [
+        "G09"
+      ],
+      "revalidate_at": [
+        "G12C-PRE",
+        "G12C",
+        "G12C-RB"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "ACT-S09",
+      "group": "final_activation",
+      "introduced_at": [
+        "T09P"
+      ],
+      "variant_at": [
+        "T09"
+      ],
+      "expected_red_at": [
+        "T09P",
+        "T09"
+      ],
+      "required_green_at": [
+        "G09"
+      ],
+      "revalidate_at": [
+        "G12C-PRE",
+        "G12C",
+        "G12C-RB"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "ACT-S10",
+      "group": "final_activation",
+      "introduced_at": [
+        "T09P"
+      ],
+      "variant_at": [
+        "T09"
+      ],
+      "expected_red_at": [
+        "T09P",
+        "T09"
+      ],
+      "required_green_at": [
+        "G09"
+      ],
+      "revalidate_at": [
+        "G12C-PRE",
+        "G12C",
+        "G12C-RB"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "P-FMT00-ROUTE",
+      "group": "parser_route_fixed",
+      "introduced_at": [
+        "T06P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T06P"
+      ],
+      "required_green_at": [
+        "G06P"
+      ],
+      "revalidate_at": [
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "P-FMT01-S",
+      "group": "parser_route_fixed",
+      "introduced_at": [
+        "T06P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T06P"
+      ],
+      "required_green_at": [
+        "G06P"
+      ],
+      "revalidate_at": [
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "P-FMT01-M",
+      "group": "parser_route_fixed",
+      "introduced_at": [
+        "T06P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T06P"
+      ],
+      "required_green_at": [
+        "G06P"
+      ],
+      "revalidate_at": [
+        "G10R"
+      ],
+      "condition_id": "PARSER_ROUTE_MEDIUM_ENABLED"
+    },
+    {
+      "id": "P-FMT02-S",
+      "group": "parser_route_fixed",
+      "introduced_at": [
+        "T06P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T06P"
+      ],
+      "required_green_at": [
+        "G06P"
+      ],
+      "revalidate_at": [
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "P-FMT02-M",
+      "group": "parser_route_fixed",
+      "introduced_at": [
+        "T06P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T06P"
+      ],
+      "required_green_at": [
+        "G06P"
+      ],
+      "revalidate_at": [
+        "G10R"
+      ],
+      "condition_id": "PARSER_ROUTE_MEDIUM_ENABLED"
+    },
+    {
+      "id": "P-FMT03H-S",
+      "group": "parser_route_fixed",
+      "introduced_at": [
+        "T06P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T06P"
+      ],
+      "required_green_at": [
+        "G06P"
+      ],
+      "revalidate_at": [
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "P-FMT03H-M",
+      "group": "parser_route_fixed",
+      "introduced_at": [
+        "T06P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T06P"
+      ],
+      "required_green_at": [
+        "G06P"
+      ],
+      "revalidate_at": [
+        "G10R"
+      ],
+      "condition_id": "PARSER_ROUTE_MEDIUM_ENABLED"
+    },
+    {
+      "id": "P-FMT03T-S",
+      "group": "parser_route_fixed",
+      "introduced_at": [
+        "T06P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T06P"
+      ],
+      "required_green_at": [
+        "G06P"
+      ],
+      "revalidate_at": [
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "P-FMT03T-M",
+      "group": "parser_route_fixed",
+      "introduced_at": [
+        "T06P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T06P"
+      ],
+      "required_green_at": [
+        "G06P"
+      ],
+      "revalidate_at": [
+        "G10R"
+      ],
+      "condition_id": "PARSER_ROUTE_MEDIUM_ENABLED"
+    },
+    {
+      "id": "P-FMT04P-S",
+      "group": "parser_route_fixed",
+      "introduced_at": [
+        "T06P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T06P"
+      ],
+      "required_green_at": [
+        "G06P"
+      ],
+      "revalidate_at": [
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "P-FMT04P-M",
+      "group": "parser_route_fixed",
+      "introduced_at": [
+        "T06P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T06P"
+      ],
+      "required_green_at": [
+        "G06P"
+      ],
+      "revalidate_at": [
+        "G10R"
+      ],
+      "condition_id": "PARSER_ROUTE_MEDIUM_ENABLED"
+    },
+    {
+      "id": "P-FMT04D-S",
+      "group": "parser_route_fixed",
+      "introduced_at": [
+        "T06P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T06P"
+      ],
+      "required_green_at": [
+        "G06P"
+      ],
+      "revalidate_at": [
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "P-FMT04D-M",
+      "group": "parser_route_fixed",
+      "introduced_at": [
+        "T06P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T06P"
+      ],
+      "required_green_at": [
+        "G06P"
+      ],
+      "revalidate_at": [
+        "G10R"
+      ],
+      "condition_id": "PARSER_ROUTE_MEDIUM_ENABLED"
+    },
+    {
+      "id": "P-FMT05-S",
+      "group": "parser_route_fixed",
+      "introduced_at": [
+        "T06P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T06P"
+      ],
+      "required_green_at": [
+        "G06P"
+      ],
+      "revalidate_at": [
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "P-FMT05-M",
+      "group": "parser_route_fixed",
+      "introduced_at": [
+        "T06P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T06P"
+      ],
+      "required_green_at": [
+        "G06P"
+      ],
+      "revalidate_at": [
+        "G10R"
+      ],
+      "condition_id": "PARSER_ROUTE_MEDIUM_ENABLED"
+    },
+    {
+      "id": "P-FMT06-S",
+      "group": "parser_route_fixed",
+      "introduced_at": [
+        "T06P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T06P"
+      ],
+      "required_green_at": [
+        "G06P"
+      ],
+      "revalidate_at": [
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "P-FMT06-M",
+      "group": "parser_route_fixed",
+      "introduced_at": [
+        "T06P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T06P"
+      ],
+      "required_green_at": [
+        "G06P"
+      ],
+      "revalidate_at": [
+        "G10R"
+      ],
+      "condition_id": "PARSER_ROUTE_MEDIUM_ENABLED"
+    },
+    {
+      "id": "P-FMT07-S",
+      "group": "parser_route_fixed",
+      "introduced_at": [
+        "T06P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T06P"
+      ],
+      "required_green_at": [
+        "G06P"
+      ],
+      "revalidate_at": [
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "P-FMT07-M",
+      "group": "parser_route_fixed",
+      "introduced_at": [
+        "T06P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T06P"
+      ],
+      "required_green_at": [
+        "G06P"
+      ],
+      "revalidate_at": [
+        "G10R"
+      ],
+      "condition_id": "PARSER_ROUTE_MEDIUM_ENABLED"
+    },
+    {
+      "id": "P-FMT08-S",
+      "group": "parser_route_fixed",
+      "introduced_at": [
+        "T06P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T06P"
+      ],
+      "required_green_at": [
+        "G06P"
+      ],
+      "revalidate_at": [
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "P-FMT08-M",
+      "group": "parser_route_fixed",
+      "introduced_at": [
+        "T06P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T06P"
+      ],
+      "required_green_at": [
+        "G06P"
+      ],
+      "revalidate_at": [
+        "G10R"
+      ],
+      "condition_id": "PARSER_ROUTE_MEDIUM_ENABLED"
+    },
+    {
+      "id": "P-FMT09-S",
+      "group": "parser_route_fixed",
+      "introduced_at": [
+        "T06P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T06P"
+      ],
+      "required_green_at": [
+        "G06P"
+      ],
+      "revalidate_at": [
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "P-FMT09-M",
+      "group": "parser_route_fixed",
+      "introduced_at": [
+        "T06P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T06P"
+      ],
+      "required_green_at": [
+        "G06P"
+      ],
+      "revalidate_at": [
+        "G10R"
+      ],
+      "condition_id": "PARSER_ROUTE_MEDIUM_ENABLED"
+    },
+    {
+      "id": "P-FMT10J-S",
+      "group": "parser_route_fixed",
+      "introduced_at": [
+        "T06P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T06P"
+      ],
+      "required_green_at": [
+        "G06P"
+      ],
+      "revalidate_at": [
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "P-FMT10J-M",
+      "group": "parser_route_fixed",
+      "introduced_at": [
+        "T06P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T06P"
+      ],
+      "required_green_at": [
+        "G06P"
+      ],
+      "revalidate_at": [
+        "G10R"
+      ],
+      "condition_id": "PARSER_ROUTE_MEDIUM_ENABLED"
+    },
+    {
+      "id": "P-FMT10X-S",
+      "group": "parser_route_fixed",
+      "introduced_at": [
+        "T06P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T06P"
+      ],
+      "required_green_at": [
+        "G06P"
+      ],
+      "revalidate_at": [
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "P-FMT10X-M",
+      "group": "parser_route_fixed",
+      "introduced_at": [
+        "T06P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T06P"
+      ],
+      "required_green_at": [
+        "G06P"
+      ],
+      "revalidate_at": [
+        "G10R"
+      ],
+      "condition_id": "PARSER_ROUTE_MEDIUM_ENABLED"
+    },
+    {
+      "id": "P-FMT99-U",
+      "group": "parser_route_fixed",
+      "introduced_at": [
+        "T06P"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T06P"
+      ],
+      "required_green_at": [
+        "G06P"
+      ],
+      "revalidate_at": [
+        "G10R"
+      ],
+      "condition_id": null
+    },
+    {
+      "id": "G10-PROMPT-S01",
+      "group": "plan_contract",
+      "introduced_at": [
+        "T00L"
+      ],
+      "variant_at": [],
+      "expected_red_at": [
+        "T00L"
+      ],
+      "required_green_at": [
+        "G00L"
+      ],
+      "revalidate_at": [
+        "G10C",
+        "G10R"
+      ],
+      "condition_id": null
+    }
+  ],
+  "templates": [
+    {
+      "template_id": "parser_medium_disabled",
+      "pattern": "^P-DIS-(01|02|03H|03T|04P|04D|05|06|07|08|09|10J|10X)-M$",
+      "introduced_at": "T06P",
+      "required_green_at": "G06P",
+      "revalidate_at": [
+        "G10R"
+      ],
+      "expansion_manifest_schema": "parser_route_manifest.schema.json",
+      "expansion_manifest_due_node": "G06P",
+      "expanded_ids_field": "expanded_test_ids",
+      "profile_path_field": "release_profile_path",
+      "profile_sha256_field": "release_profile_sha256",
+      "minimum_samples_field": "minimum_samples_medium_or_disabled"
+    },
+    {
+      "template_id": "parser_oversized",
+      "pattern": "^P-LIMIT-(01|02|03H|03T|04P|04D|05|06|07|08|09|10J|10X)-O$",
+      "introduced_at": "T06P",
+      "required_green_at": "G06P",
+      "revalidate_at": [
+        "G10R"
+      ],
+      "expansion_manifest_schema": "parser_route_manifest.schema.json",
+      "expansion_manifest_due_node": "G06P",
+      "expanded_ids_field": "expanded_test_ids",
+      "profile_path_field": "release_profile_path",
+      "profile_sha256_field": "release_profile_sha256",
+      "minimum_samples_field": "minimum_samples_oversize"
+    },
+    {
+      "template_id": "parser_corrupt_or_encrypted",
+      "pattern": "^P-ERR-(01|02|03H|03T|04P|04D|05|06|07|08|09|10J|10X)-(C|E)$",
+      "introduced_at": "T06P",
+      "required_green_at": "G06P",
+      "revalidate_at": [
+        "G10R"
+      ],
+      "expansion_manifest_schema": "parser_route_manifest.schema.json",
+      "expansion_manifest_due_node": "G06P",
+      "expanded_ids_field": "expanded_test_ids",
+      "profile_path_field": "release_profile_path",
+      "profile_sha256_field": "release_profile_sha256",
+      "minimum_samples_field": "minimum_samples_error"
+    },
+    {
+      "template_id": "parser_not_applicable_error",
+      "pattern": "^P-NA-(01|02|03H|03T|04P|04D|05|06|07|08|09|10J|10X)-(C|E)$",
+      "introduced_at": "T06P",
+      "required_green_at": "G06P",
+      "revalidate_at": [
+        "G10R"
+      ],
+      "expansion_manifest_schema": "parser_route_manifest.schema.json",
+      "expansion_manifest_due_node": "G06P",
+      "expanded_ids_field": "expanded_test_ids",
+      "profile_path_field": "release_profile_path",
+      "profile_sha256_field": "release_profile_sha256",
+      "minimum_samples_field": "minimum_samples_error"
+    },
+    {
+      "template_id": "parser_pause_cleanup",
+      "pattern": "^P-PAUSE-(01|02|03H|03T|04P|04D|05|06|07|08|09|10J|10X)$",
+      "introduced_at": "T06P",
+      "required_green_at": "G06P",
+      "revalidate_at": [
+        "G10R"
+      ],
+      "expansion_manifest_schema": "parser_route_manifest.schema.json",
+      "expansion_manifest_due_node": "G06P",
+      "expanded_ids_field": "expanded_test_ids",
+      "profile_path_field": "release_profile_path",
+      "profile_sha256_field": "release_profile_sha256",
+      "minimum_samples_field": "minimum_pause_sequences"
+    }
+  ],
+  "reference_extraction": {
+    "active_sources": [
+      "task_plan.md",
+      "execution_playbook.md",
+      "test_acceptance_plan.md",
+      "agent_review_gates.md",
+      "gate_state_machine.md",
+      "acceptance_thresholds.md",
+      "rollout_rollback_runbook.md",
+      "traceability_matrix.md",
+      "implementation_agent_prompts.md",
+      "ledger_validator_contract.md",
+      "operation_contracts.v4.json",
+      "gate_dag.v4.json"
+    ],
+    "token_regex": "(?<![A-Z0-9])(?:SAFE-S\\d{2}|GL-[SF]\\d{2}|TESTID-S01|G10-PROMPT-S01|Q-[SP]\\d{2}|M-(?:COM|NI|IDX|L)-(?:EDGE-)?[SFPM]\\d{2}|C-S\\d{2}|O-S\\d{2}|S-S\\d{2}|SC-[SP]\\d{2}|L-S\\d{2}|R-S\\d{2}|EV-S\\d{2}|PX-S\\d{2}|E2E-[SFM]\\d{2}|CAN-[A-Z0-9]+-[SW]\\d{2}|WRITE-F\\d{2}|OBS-[SW]\\d{2}|START-S\\d{2}|RST-S\\d{2}|ACT-S\\d{2}|P-FMT00-ROUTE|P-FMT[A-Z0-9]+-[SMU]|P-(?:DIS|LIMIT|ERR|NA|PAUSE)-[A-Z0-9]+(?:-[A-Z])?)(?![A-Z0-9])",
+    "ignore_sections": [
+      "plan_review_findings.md",
+      "progress.md",
+      "historical manifests",
+      "JSON Schema regex and pattern fields",
+      "negative mutation values"
+    ],
+    "placeholder_tokens_are_references": false,
+    "range_abbreviations_allowed": false,
+    "negative_fixture_tokens_are_references": false
+  },
+  "gate_forbidden_tokens": [
+    "BF00",
+    "NOT_SELECTED"
+  ],
+  "validation": {
+    "duplicate_concrete_ids_allowed": false,
+    "unresolved_references_allowed": false,
+    "unexpanded_enabled_templates_allowed": false,
+    "all_nodes_must_resolve_in_dag": true,
+    "condition_ids_must_resolve": true,
+    "free_text_conditions_allowed": false,
+    "branch_lifecycle_arrays_must_equal_case_union": true,
+    "only_selected_branch_records_allowed": true,
+    "registry_test_id": "TESTID-S01"
+  }
+}

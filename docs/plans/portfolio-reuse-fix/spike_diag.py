@@ -1,6 +1,8 @@
+﻿# ruff: noqa: E402
 """Diagnostic: why does resolve not return REUSED_EXACT after the spike import?"""
 from __future__ import annotations
-import json, sys
+import json
+import sys
 from pathlib import Path
 CW_ROOT = Path(r"C:\Users\郑曾波\Projects\company-wiki")
 sys.path.insert(0, str(CW_ROOT / "src"))

@@ -16,7 +16,6 @@ from __future__ import annotations
 
 import argparse
 import json
-import shutil
 import sys
 import time
 from pathlib import Path
@@ -25,7 +24,7 @@ from typing import Any
 PROJECT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(PROJECT / "src"))
 
-from company_wiki.source_catalog import CatalogConfig, RootSpec, SourceCatalog
+from company_wiki.source_catalog import CatalogConfig, RootSpec, SourceCatalog  # noqa: E402
 
 
 def main() -> int:

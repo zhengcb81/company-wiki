@@ -1,0 +1,135 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:company-wiki:source-catalog-worker-recovery:evidence-manifest:v4",
+  "title": "Machine-verifiable gate evidence manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "utcTimestamp": {
+      "type": "string", "format": "date-time",
+      "pattern": "^[0-9]{4}-(0[1-9]|1[0-2])-([0-2][0-9]|3[01])T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]{1,9})?Z$"
+    },
+    "nodeId": {
+      "type": "string",
+      "pattern": "^(T00L|D00L|I00L|G00L|D00|OP00|G00|T01|D01|G01|T02A|D02A|I02A|G02A|G02B-ADR|(T|D|I|G)02B-(NI|IDX)|(T|D|I|G)(03|04|05|06|06P|07E|07O|08|09P|09)|G07-ADR|G10C|D11A|OP11A|G11A|D11M|OP11M|G11M|D11J|OP11J|G11J|G11M-L-ADR|D11M-L|OP11M-L|G11M-L|(D|OP|G)11B-A[123]|(D|OP|G)11B-BP|(D|OP|G)11B-BF(0[1-9]|[1-9][0-9])|G10R|D12A|OP12A|G12A|G12B-PRE|D12B-ARM|OP12B-ARM|G12B-ARM|D12B-RB|OP12B-RB|G12B-RB|D12B-CAS|OP12B-CAS|G12B-CAS|D12B-LOGIN|OP12B-LOGIN|G12B-POST|D12C|G12C-PRE|OP12C|G12C|OP12C-RB|G12C-RB|(D|OP|G)05R(0[1-9]|[1-9][0-9]))$"
+    },
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "artifact_id", "artifact_type", "storage_kind", "repo_relative_path", "opaque_sink_id",
+        "digest_kind", "digest", "hmac_key_id", "size_bytes", "media_type", "sensitivity",
+        "acl_snapshot_sha256", "encryption", "reparse_point_observed", "created_at", "expires_at",
+        "contains_secret", "producer_identity_sha256"
+      ],
+      "properties": {
+        "artifact_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,159}$"},
+        "artifact_type": {"enum": ["COMMAND_OUTPUT", "TEST_RESULT", "PROFILE", "TRACE", "DATABASE_SNAPSHOT", "FILE_SNAPSHOT", "REGISTRY_SNAPSHOT", "CONTROL_STATE", "AUTHORIZATION", "OPERATION_CONTRACT", "OPERATION_INTENT", "JOURNAL", "REVIEW_PAYLOAD", "OTHER_STRUCTURED"]},
+        "storage_kind": {"enum": ["REPO_RELATIVE", "APPROVED_OPAQUE_SINK"]},
+        "repo_relative_path": {"anyOf": [{"type": "null"}, {"type": "string", "pattern": "^(evidence|reviews|test-results)/[A-Za-z0-9][A-Za-z0-9._/-]{0,498}$"}]},
+        "opaque_sink_id": {"anyOf": [{"type": "null"}, {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,159}$"}]},
+        "digest_kind": {"enum": ["SHA-256", "HMAC-SHA-256"]},
+        "digest": {"$ref": "#/$defs/sha256"},
+        "hmac_key_id": {"anyOf": [{"type": "null"}, {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,159}$"}]},
+        "size_bytes": {"type": "integer", "minimum": 0},
+        "media_type": {"type": "string", "pattern": "^[a-z0-9][a-z0-9.+-]*/[a-zA-Z0-9][a-zA-Z0-9.+-]*$"},
+        "sensitivity": {"enum": ["PUBLIC", "INTERNAL", "RESTRICTED_DERIVED"]},
+        "acl_snapshot_sha256": {"$ref": "#/$defs/sha256"},
+        "encryption": {"enum": ["NONE", "OS_USER_PROTECTED", "AEAD_APPROVED_KEY"]},
+        "reparse_point_observed": {"const": false},
+        "created_at": {"$ref": "#/$defs/utcTimestamp"},
+        "expires_at": {"$ref": "#/$defs/utcTimestamp"},
+        "contains_secret": {"const": false},
+        "producer_identity_sha256": {"$ref": "#/$defs/sha256"}
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"storage_kind": {"const": "REPO_RELATIVE"}}, "required": ["storage_kind"]},
+          "then": {"properties": {"repo_relative_path": {"type": "string"}, "opaque_sink_id": {"type": "null"}, "digest_kind": {"const": "SHA-256"}, "hmac_key_id": {"type": "null"}}}
+        },
+        {
+          "if": {"properties": {"storage_kind": {"const": "APPROVED_OPAQUE_SINK"}}, "required": ["storage_kind"]},
+          "then": {"properties": {"repo_relative_path": {"type": "null"}, "opaque_sink_id": {"type": "string"}, "digest_kind": {"const": "HMAC-SHA-256"}, "hmac_key_id": {"type": "string"}, "encryption": {"enum": ["OS_USER_PROTECTED", "AEAD_APPROVED_KEY"]}}}
+        },
+        {
+          "if": {"properties": {"sensitivity": {"const": "RESTRICTED_DERIVED"}}, "required": ["sensitivity"]},
+          "then": {"properties": {"storage_kind": {"const": "APPROVED_OPAQUE_SINK"}, "encryption": {"enum": ["OS_USER_PROTECTED", "AEAD_APPROVED_KEY"]}}}
+        }
+      ]
+    }
+  },
+  "required": [
+    "schema_version", "evidence_id", "node_id", "node_type", "recorded_at", "plan_revision",
+    "plan_manifest_sha256", "gate_dag_sha256", "validator_version", "validator_release_manifest_sha256",
+    "validator_fixture_manifest_sha256", "base_commit", "test_commit", "implementation_commit",
+    "operation_run_id", "operation_intent_path", "operation_intent_sha256", "authorization_manifest_path",
+    "authorization_manifest_sha256", "operation_contract_path", "operation_contract_sha256",
+    "human_report_path", "human_report_sha256", "artifacts", "secret_scan_result", "sealed"
+  ],
+  "properties": {
+    "schema_version": {"const": "evidence-manifest-v1"},
+    "evidence_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,159}$"},
+    "node_id": {"$ref": "#/$defs/nodeId"},
+    "node_type": {"enum": ["T", "D", "I", "OP", "G"]},
+    "recorded_at": {"$ref": "#/$defs/utcTimestamp"},
+    "plan_revision": {"const": "v4"},
+    "plan_manifest_sha256": {"$ref": "#/$defs/sha256"},
+    "gate_dag_sha256": {"$ref": "#/$defs/sha256"},
+    "validator_version": {"type": "string", "pattern": "^gate-ledger-validator-v[1-9][0-9]*$"},
+    "validator_release_manifest_sha256": {"$ref": "#/$defs/sha256"},
+    "validator_fixture_manifest_sha256": {"$ref": "#/$defs/sha256"},
+    "base_commit": {"$ref": "#/$defs/commit"},
+    "test_commit": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/commit"}]},
+    "implementation_commit": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/commit"}]},
+    "operation_run_id": {"anyOf": [{"type": "null"}, {"type": "string", "minLength": 8, "maxLength": 160}]},
+    "operation_intent_path": {"anyOf": [{"type": "null"}, {"type": "string", "pattern": "^evidence/[A-Za-z0-9][A-Za-z0-9._-]*/operation_intent_manifest\\.json$"}]},
+    "operation_intent_sha256": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/sha256"}]},
+    "authorization_manifest_path": {"anyOf": [{"type": "null"}, {"type": "string", "pattern": "^evidence/[A-Za-z0-9][A-Za-z0-9._-]*/authorization_manifest\\.json$"}]},
+    "authorization_manifest_sha256": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/sha256"}]},
+    "operation_contract_path": {"anyOf": [{"type": "null"}, {"type": "string", "pattern": "^evidence/[A-Za-z0-9][A-Za-z0-9._-]*/operation_contract\\.json$"}]},
+    "operation_contract_sha256": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/sha256"}]},
+    "human_report_path": {"type": "string", "pattern": "^evidence/[A-Za-z0-9][A-Za-z0-9._-]*/report\\.md$"},
+    "human_report_sha256": {"$ref": "#/$defs/sha256"},
+    "artifacts": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/artifact"}},
+    "secret_scan_result": {"const": "PASS_NO_SECRETS"},
+    "sealed": {"const": true}
+  },
+  "allOf": [
+    {"if": {"properties": {"node_id": {"pattern": "^T"}}, "required": ["node_id"]}, "then": {"properties": {"node_type": {"const": "T"}, "test_commit": {"$ref": "#/$defs/commit"}}}},
+    {"if": {"properties": {"node_id": {"pattern": "^D"}}, "required": ["node_id"]}, "then": {"properties": {"node_type": {"const": "D"}}}},
+    {"if": {"properties": {"node_id": {"pattern": "^I"}}, "required": ["node_id"]}, "then": {"properties": {"node_type": {"const": "I"}, "implementation_commit": {"$ref": "#/$defs/commit"}}}},
+    {"if": {"properties": {"node_id": {"pattern": "^G"}}, "required": ["node_id"]}, "then": {"properties": {"node_type": {"const": "G"}}}},
+    {
+      "if": {"properties": {"node_id": {"pattern": "^OP"}}, "required": ["node_id"]},
+      "then": {"properties": {"node_type": {"const": "OP"}, "operation_run_id": {"type": "string"}, "operation_intent_path": {"type": "string"}, "operation_intent_sha256": {"$ref": "#/$defs/sha256"}, "operation_contract_path": {"type": "string"}, "operation_contract_sha256": {"$ref": "#/$defs/sha256"}}}
+    },
+    {
+      "if": {"properties": {"operation_run_id": {"type": "null"}}, "required": ["operation_run_id"]},
+      "then": {"properties": {"operation_intent_path": {"type": "null"}, "operation_intent_sha256": {"type": "null"}, "authorization_manifest_path": {"type": "null"}, "authorization_manifest_sha256": {"type": "null"}, "operation_contract_path": {"type": "null"}, "operation_contract_sha256": {"type": "null"}}}
+    },
+    {
+      "if": {"properties": {"operation_intent_path": {"type": "string"}}, "required": ["operation_intent_path"]},
+      "then": {"properties": {"operation_intent_sha256": {"$ref": "#/$defs/sha256"}}}
+    },
+    {
+      "if": {"properties": {"authorization_manifest_path": {"type": "string"}}, "required": ["authorization_manifest_path"]},
+      "then": {"properties": {"authorization_manifest_sha256": {"$ref": "#/$defs/sha256"}}}
+    },
+    {
+      "if": {"properties": {"operation_contract_path": {"type": "string"}}, "required": ["operation_contract_path"]},
+      "then": {"properties": {"operation_contract_sha256": {"$ref": "#/$defs/sha256"}}}
+    }
+  ],
+  "x-semantic-rules": [
+    "The gate ledger evidence_manifest_path is exactly evidence/<evidence-id>/manifest.json and hashes these canonical JSON bytes. human_report_path is exactly the sibling report.md; reviewers consume both and confirm their stored hashes.",
+    "All manifest, DAG, validator release, validator fixture, commit, authorization, intent, and operation-contract hashes must equal the artifacts used by this node. A path and hash pair is all-null or all-present.",
+    "Artifact IDs and resolved storage identities are unique. Repo-relative paths contain no dot segments, backslashes, drive prefixes, ADS syntax, symlink or reparse traversal, or case-fold collision; approved sinks are selected only from the frozen sink catalog and never reveal raw paths.",
+    "For SHA-256 artifacts, digest hashes exact stored bytes. For HMAC-SHA-256 artifacts, digest is computed with the named approved evidence key over canonical metadata plus exact stored bytes; the key itself is never evidence.",
+    "created_at <= recorded_at < expires_at for each artifact and TTL matches the evidence-retention policy for its sensitivity. Expired evidence cannot support a new PASS gate.",
+    "RESTRICTED_DERIVED evidence is encrypted in an approved opaque sink. No artifact contains credentials, tokens, API keys, user authorization secrets, source document contents beyond approved redaction, or absolute sensitive paths.",
+    "ACL, encryption, no-reparse status, size, media type, producer identity, and digest are verified after final storage and immediately before independent review. Any storage drift invalidates the node.",
+    "node_type, test_commit, implementation_commit, and OP bindings must match node_id and the gate ledger record exactly; semantic mismatches fail even when both JSON documents separately satisfy their schemas."
+  ]
+}

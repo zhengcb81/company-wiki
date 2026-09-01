@@ -27,15 +27,15 @@ sys.path.insert(0, str(CW_ROOT / "src"))
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
-from company_wiki.source_catalog.config import load_catalog_config
-from company_wiki.source_catalog.acquisition_config import load_acquisition_config
-from company_wiki.source_catalog.service import SourceCatalog
-from company_wiki.source_catalog.canonical_writer import CanonicalSourceWriter
-from company_wiki.source_catalog.resolver import (
+from company_wiki.source_catalog.config import load_catalog_config  # noqa: E402
+from company_wiki.source_catalog.acquisition_config import load_acquisition_config  # noqa: E402
+from company_wiki.source_catalog.service import SourceCatalog  # noqa: E402
+from company_wiki.source_catalog.canonical_writer import CanonicalSourceWriter  # noqa: E402
+from company_wiki.source_catalog.resolver import (  # noqa: E402
     SourceRequest, SourceResolver, ResolutionStatus,
 )
-from company_wiki.source_catalog.acquisition import DownloadCandidate, DownloadReceipt
-from company_wiki.source_catalog.security_identity import (
+from company_wiki.source_catalog.acquisition import DownloadCandidate, DownloadReceipt  # noqa: E402
+from company_wiki.source_catalog.security_identity import (  # noqa: E402
     SecurityIdentityResolver, SecurityMasterStore, load_identity_master,
     IdentityStatus, SecurityIdentityResolutionError,
 )
@@ -62,7 +62,8 @@ def main(argv: list[str] | None = None) -> int:
     doc_dir = next((p for p in portfolio.rglob("meta.json")
                     if p.parent.name == args.doc_id), None)
     if doc_dir is None:
-        print(f"ERROR: portfolio doc {args.doc_id} not found"); return 2
+        print(f"ERROR: portfolio doc {args.doc_id} not found")
+        return 2
     doc_dir = doc_dir.parent
     meta = json.loads((doc_dir / "meta.json").read_text(encoding="utf-8"))
     pdf = doc_dir / f"{args.doc_id}.pdf"
@@ -81,7 +82,8 @@ def main(argv: list[str] | None = None) -> int:
 
     config = load_catalog_config(CW_ROOT / "config" / "source_catalog.yaml", project_root=CW_ROOT)
     acq = load_acquisition_config(CW_ROOT / "config" / "source_acquisition.yaml", project_root=CW_ROOT)
-    staging_root = Path(acq.staging_root); staging_root.mkdir(parents=True, exist_ok=True)
+    staging_root = Path(acq.staging_root)
+    staging_root.mkdir(parents=True, exist_ok=True)
     catalog = SourceCatalog(config)
     writer = CanonicalSourceWriter(catalog, staging_root=staging_root)
 
@@ -106,7 +108,8 @@ def main(argv: list[str] | None = None) -> int:
         dest = (config.roots[0].path / identity.canonical_name / "raw" /
                 "financial_reports" / "annual")
         print(f"[proto] DRY-RUN: would promote {pdf.name} -> {dest}/ "
-              f"content_sha={content_sha[:12]}"); return 0
+              f"content_sha={content_sha[:12]}")
+        return 0
 
     staged = staging_root / f"promote-{request.request_id.rsplit(':',1)[-1][:16]}.pdf"
     shutil.copyfile(pdf, staged)

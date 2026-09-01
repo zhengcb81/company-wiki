@@ -1,0 +1,175 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:company-wiki:source-catalog-worker-recovery:operation-intent-template:v4",
+  "title": "Long-lived runtime authorization template",
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "utcTimestamp": {
+      "type": "string", "format": "date-time",
+      "pattern": "^[0-9]{4}-(0[1-9]|1[0-2])-([0-2][0-9]|3[01])T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]{1,9})?Z$"
+    },
+    "providerScope": {
+      "type": "object", "additionalProperties": false,
+      "required": ["provider_id", "model_id", "destination_id", "retention_class", "jurisdiction", "billing_currency", "max_documents", "max_characters", "max_input_tokens", "max_output_tokens", "max_cost_minor_units", "max_requests", "max_retries"],
+      "properties": {
+        "provider_id": {"type": "string", "minLength": 1, "maxLength": 120},
+        "model_id": {"type": "string", "minLength": 1, "maxLength": 160},
+        "destination_id": {"type": "string", "minLength": 1, "maxLength": 160},
+        "retention_class": {"type": "string", "minLength": 1, "maxLength": 120},
+        "jurisdiction": {"type": "string", "minLength": 1, "maxLength": 120},
+        "billing_currency": {"type": "string", "pattern": "^[A-Z]{3}$"},
+        "max_documents": {"type": "integer", "minimum": 0},
+        "max_characters": {"type": "integer", "minimum": 0},
+        "max_input_tokens": {"type": "integer", "minimum": 0},
+        "max_output_tokens": {"type": "integer", "minimum": 0},
+        "max_cost_minor_units": {"type": "integer", "minimum": 0},
+        "max_requests": {"type": "integer", "minimum": 0},
+        "max_retries": {"type": "integer", "minimum": 0}
+      }
+    }
+  },
+  "required": [
+    "schema_version", "template_id", "operation_policy_id", "stage_node_id", "action_id", "action_class",
+    "required_authorization_kind", "authorization_intent_binding_mode", "created_at", "expires_at",
+    "plan_manifest_sha256", "gate_dag_sha256", "release_manifest_sha256", "operation_catalog_sha256",
+    "runtime_policy_sha256", "cycle_contract_schema_sha256", "intent_specialization_validator_sha256",
+    "config_fingerprint", "routing_fingerprint", "data_root_fingerprint", "control_generation", "circuit_generation",
+    "data_scope_templates", "provider_scope_templates", "effect_scope", "registry_ownership_binding",
+    "journal_manifest_sha256", "durable_budget_ids", "budget_policy_sha256", "budget_currency", "budget_accounting_scope", "per_cycle_maxima",
+    "action_template_sha256", "effect_template_sha256", "operation_contract_template_sha256", "forbidden_action_classes",
+    "specialization_rules", "authorization_refresh_triggers", "sealed"
+  ],
+  "properties": {
+    "schema_version": {"const": "operation-intent-template-v1"},
+    "template_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,159}$"},
+    "operation_policy_id": {"const": "OP-RUNTIME-CYCLE"},
+    "stage_node_id": {"const": "OP-RUNTIME-CYCLE"},
+    "action_id": {"const": "ORDINARY_AUTOSTART_CYCLE"},
+    "action_class": {"const": "CYCLE_EXECUTION"},
+    "required_authorization_kind": {"const": "STAGE_BOUND_OPERATION"},
+    "authorization_intent_binding_mode": {"const": "RUNTIME_TEMPLATE_SPECIALIZATION"},
+    "created_at": {"$ref": "#/$defs/utcTimestamp"},
+    "expires_at": {"$ref": "#/$defs/utcTimestamp"},
+    "plan_manifest_sha256": {"$ref": "#/$defs/sha256"},
+    "gate_dag_sha256": {"$ref": "#/$defs/sha256"},
+    "release_manifest_sha256": {"$ref": "#/$defs/sha256"},
+    "operation_catalog_sha256": {"$ref": "#/$defs/sha256"},
+    "runtime_policy_sha256": {"$ref": "#/$defs/sha256"},
+    "cycle_contract_schema_sha256": {"$ref": "#/$defs/sha256"},
+    "intent_specialization_validator_sha256": {"$ref": "#/$defs/sha256"},
+    "config_fingerprint": {"$ref": "#/$defs/sha256"},
+    "routing_fingerprint": {"$ref": "#/$defs/sha256"},
+    "data_root_fingerprint": {"$ref": "#/$defs/sha256"},
+    "control_generation": {"type": "integer", "minimum": 0},
+    "circuit_generation": {"type": "integer", "minimum": 0},
+    "data_scope_templates": {
+      "type": "array", "minItems": 1, "uniqueItems": true,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["scope_id", "candidate_kind", "opaque_root_ids", "allowed_fields", "excluded_fields"],
+        "properties": {
+          "scope_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,159}$"},
+          "candidate_kind": {"const": "ROOT_DISCOVERY_TEMPLATE"},
+          "opaque_root_ids": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1, "maxLength": 160}},
+          "allowed_fields": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1, "maxLength": 120}},
+          "excluded_fields": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1, "maxLength": 120}}
+        }
+      }
+    },
+    "provider_scope_templates": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/providerScope"}},
+    "effect_scope": {
+      "type": "object", "additionalProperties": false,
+      "required": ["allowed_database_ids", "allowed_table_columns", "allowed_output_root_ids", "network_mode", "max_db_rows", "max_files", "max_bytes"],
+      "properties": {
+        "allowed_database_ids": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1, "maxLength": 160}},
+        "allowed_table_columns": {
+          "type": "array", "minItems": 1, "uniqueItems": true,
+          "items": {
+            "type": "object", "additionalProperties": false,
+            "required": ["database_id", "table", "allowed_operations", "allowed_columns"],
+            "properties": {
+              "database_id": {"type": "string", "minLength": 1, "maxLength": 160},
+              "table": {"type": "string", "pattern": "^[A-Za-z_][A-Za-z0-9_]*$"},
+              "allowed_operations": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"enum": ["INSERT", "UPDATE", "DELETE"]}},
+              "allowed_columns": {"type": "array", "uniqueItems": true, "items": {"type": "string", "pattern": "^[A-Za-z_][A-Za-z0-9_]*$"}}
+            }
+          }
+        },
+        "allowed_output_root_ids": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1, "maxLength": 160}},
+        "network_mode": {"enum": ["DENY_ALL", "ALLOW_LISTED_PROVIDERS"]},
+        "max_db_rows": {"type": "integer", "minimum": 0},
+        "max_files": {"type": "integer", "minimum": 0},
+        "max_bytes": {"type": "integer", "minimum": 0}
+      }
+    },
+    "registry_ownership_binding": {
+      "type": "object", "additionalProperties": false,
+      "required": ["subject_user_sid", "registry_view", "value_sha256", "value_byte_length", "ownership_run_nonce_sha256", "verification_only"],
+      "properties": {
+        "subject_user_sid": {"type": "string", "pattern": "^S-[0-9]+(?:-[0-9]+)+$"},
+        "registry_view": {"enum": ["NATIVE_64", "WOW64_32"]},
+        "value_sha256": {"$ref": "#/$defs/sha256"},
+        "value_byte_length": {"type": "integer", "minimum": 2, "maximum": 65534, "multipleOf": 2},
+        "ownership_run_nonce_sha256": {"$ref": "#/$defs/sha256"},
+        "verification_only": {"const": true}
+      }
+    },
+    "journal_manifest_sha256": {"$ref": "#/$defs/sha256"},
+    "durable_budget_ids": {
+      "type": "object", "additionalProperties": false,
+      "required": ["daily_provider_requests", "daily_provider_cost", "monthly_provider_requests", "monthly_provider_cost"],
+      "properties": {
+        "daily_provider_requests": {"type": "string", "minLength": 8, "maxLength": 160},
+        "daily_provider_cost": {"type": "string", "minLength": 8, "maxLength": 160},
+        "monthly_provider_requests": {"type": "string", "minLength": 8, "maxLength": 160},
+        "monthly_provider_cost": {"type": "string", "minLength": 8, "maxLength": 160}
+      }
+    },
+    "budget_policy_sha256": {"$ref": "#/$defs/sha256"},
+    "budget_currency": {"type": "string", "pattern": "^[A-Z]{3}$"},
+    "budget_accounting_scope": {"const": "GLOBAL_AGGREGATE_ACROSS_ALL_AUTHORIZED_PROVIDERS"},
+    "per_cycle_maxima": {
+      "type": "object", "additionalProperties": false,
+      "required": ["max_documents", "max_characters", "max_input_tokens", "max_output_tokens", "max_cost_minor_units", "max_provider_requests", "max_retries"],
+      "properties": {
+        "max_documents": {"type": "integer", "minimum": 0},
+        "max_characters": {"type": "integer", "minimum": 0},
+        "max_input_tokens": {"type": "integer", "minimum": 0},
+        "max_output_tokens": {"type": "integer", "minimum": 0},
+        "max_cost_minor_units": {"type": "integer", "minimum": 0},
+        "max_provider_requests": {"type": "integer", "minimum": 0},
+        "max_retries": {"type": "integer", "minimum": 0}
+      }
+    },
+    "action_template_sha256": {"$ref": "#/$defs/sha256"},
+    "effect_template_sha256": {"$ref": "#/$defs/sha256"},
+    "operation_contract_template_sha256": {"$ref": "#/$defs/sha256"},
+    "forbidden_action_classes": {"const": ["STARTUP_ARM", "REGISTRY_CREATE_IF_ABSENT", "LOGIN_LOGOFF", "FINAL_ACTIVATION", "ROLLBACK", "CIRCUIT_RESET"]},
+    "specialization_rules": {"const": ["FRESH_EXACT_DOCUMENT_TUPLES", "ROOTS_FIELDS_PROVIDERS_DESTINATIONS_SUBSET", "EFFECTS_SUBSET_OF_CATALOG_AND_TEMPLATE", "PER_CYCLE_MAXIMA_NOT_EXCEEDED", "FOUR_DURABLE_BUDGET_BINDINGS", "NO_RUNTIME_SCOPE_EXPANSION"]},
+    "authorization_refresh_triggers": {"const": ["RELEASE_HASH_DRIFT", "CONFIG_HASH_DRIFT", "ROUTING_HASH_DRIFT", "DATA_ROOT_HASH_DRIFT", "CONTROL_GENERATION_DRIFT", "CIRCUIT_GENERATION_DRIFT", "TEMPLATE_HASH_DRIFT", "AUTHORIZATION_EXPIRY_OR_REVOCATION"]},
+    "sealed": {"const": true}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"effect_scope": {"properties": {"network_mode": {"const": "DENY_ALL"}}, "required": ["network_mode"]}}, "required": ["effect_scope"]},
+      "then": {"properties": {"provider_scope_templates": {"maxItems": 0}, "per_cycle_maxima": {"properties": {"max_input_tokens": {"const": 0}, "max_output_tokens": {"const": 0}, "max_cost_minor_units": {"const": 0}, "max_provider_requests": {"const": 0}, "max_retries": {"const": 0}}}}}
+    },
+    {
+      "if": {"properties": {"effect_scope": {"properties": {"network_mode": {"const": "ALLOW_LISTED_PROVIDERS"}}, "required": ["network_mode"]}}, "required": ["effect_scope"]},
+      "then": {"properties": {"provider_scope_templates": {"minItems": 1}}}
+    }
+  ],
+  "x-semantic-rules": [
+    "D12C freezes these exact canonical bytes before final runtime authorization. The authorization manifest repeats and hash-binds the same template scopes; disagreement is a hard failure.",
+    "created_at < expires_at. The template and authorization are accepted only while current time is before both expiries and after an immediate revocation check.",
+    "Data scope IDs, opaque roots, provider tuples, database IDs, table keys, output roots, and four durable budget IDs are unique after their declared canonicalization. allowed_fields and excluded_fields are disjoint.",
+    "The template contains no future document_id, source_id, source hash, request ID, primary key value, output filename, or concrete effect. Those appear only in the fresh per-cycle intent and contract.",
+    "A cycle specialization replaces approved root discovery templates with indivisible exact DOCUMENT tuples and may only narrow fields, provider/model/destination, effects, maxima, and budgets. Empty allowed fields authorize no field.",
+    "Every DB write references an allowed database/table/operation/column and exact candidate; every file write remains under an allowed output root. Source roots are read-only and can never be output roots.",
+    "DENY_ALL has no provider scope and zero token/cost/request/retry maxima. ALLOW_LISTED_PROVIDERS permits only listed provider tuples; every billing currency equals budget_currency, and all per-cycle totals remain within both template and provider maxima. The four budget IDs are global aggregates across all authorized providers.",
+    "Registry ownership is verification-only for runtime cycles. Any value or ownership drift yields PAUSED/REGISTRY_CONFLICT and no registry mutation.",
+    "Any authorization_refresh_triggers condition invalidates the template authorization before child launch, cycle preflight, budget reservation, journal INTENT, DB/file mutation, or network egress."
+  ]
+}

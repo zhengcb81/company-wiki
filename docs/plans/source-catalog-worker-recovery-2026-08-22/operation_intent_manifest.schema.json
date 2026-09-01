@@ -1,0 +1,176 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:company-wiki:source-catalog-worker-recovery:operation-intent-manifest:v4",
+  "title": "Pre-authorization immutable operation intent",
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "utcTimestamp": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "^[0-9]{4}-(0[1-9]|1[0-2])-([0-2][0-9]|3[01])T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]{1,9})?Z$"
+    },
+    "opNodeId": {
+      "type": "string",
+      "pattern": "^(OP00|OP11A|OP11M|OP11J|OP11M-L|OP11B-A[123]|OP11B-BP|OP11B-BF(?:0[1-9]|[1-9][0-9])|OP12A|OP12B-ARM|OP12B-CAS|OP12B-LOGIN|OP12B-RB|OP12C|OP12C-RB|OP05R(?:0[1-9]|[1-9][0-9])|OP-RUNTIME-CYCLE)$"
+    },
+    "registryCreate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "hive", "subject_user_sid", "registry_view", "key_path", "value_name", "value_type",
+        "expected_prior_state", "desired_value_utf16le_base64", "desired_value_sha256",
+        "desired_value_byte_length", "includes_terminal_nul", "ownership_run_nonce_sha256",
+        "existing_same_bytes_outcome", "conflict_outcome"
+      ],
+      "properties": {
+        "hive": {"const": "HKEY_CURRENT_USER"},
+        "subject_user_sid": {"type": "string", "pattern": "^S-[0-9]+(?:-[0-9]+)+$"},
+        "registry_view": {"enum": ["NATIVE_64", "WOW64_32"]},
+        "key_path": {"const": "Software\\Microsoft\\Windows\\CurrentVersion\\Run"},
+        "value_name": {"const": "CompanyWikiSourceCatalog"},
+        "value_type": {"const": "REG_SZ"},
+        "expected_prior_state": {"const": "ABSENT"},
+        "desired_value_utf16le_base64": {"type": "string", "minLength": 4, "pattern": "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$"},
+        "desired_value_sha256": {"$ref": "#/$defs/sha256"},
+        "desired_value_byte_length": {"type": "integer", "minimum": 2, "maximum": 65534, "multipleOf": 2},
+        "includes_terminal_nul": {"const": true},
+        "ownership_run_nonce_sha256": {"$ref": "#/$defs/sha256"},
+        "existing_same_bytes_outcome": {"const": "REGISTRY_CONFLICT"},
+        "conflict_outcome": {"const": "PAUSED/REGISTRY_CONFLICT"}
+      }
+    },
+    "action": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "action_id", "operation_node_id", "stage_node_id", "action_class", "effect_digest_sha256",
+        "operation_contract_template_sha256", "control_generation", "circuit_generation",
+        "registry_create_if_absent"
+      ],
+      "properties": {
+        "action_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,159}$"},
+        "operation_node_id": {"$ref": "#/$defs/opNodeId"},
+        "stage_node_id": {"type": "string", "pattern": "^(D|OP|G)[A-Za-z0-9-]{1,31}$"},
+        "action_class": {
+          "enum": [
+            "READ_ONLY", "DB_WRITE", "FILE_WRITE", "NETWORK_EGRESS", "STARTUP_ARM",
+            "REGISTRY_CREATE_IF_ABSENT", "LOGIN_LOGOFF", "FINAL_ACTIVATION",
+            "ROLLBACK", "CIRCUIT_RESET", "CYCLE_EXECUTION"
+          ]
+        },
+        "effect_digest_sha256": {"$ref": "#/$defs/sha256"},
+        "operation_contract_template_sha256": {"$ref": "#/$defs/sha256"},
+        "control_generation": {"type": "integer", "minimum": 0},
+        "circuit_generation": {"type": "integer", "minimum": 0},
+        "registry_create_if_absent": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/registryCreate"}]}
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"action_class": {"const": "REGISTRY_CREATE_IF_ABSENT"}}, "required": ["action_class"]},
+          "then": {"properties": {"operation_node_id": {"const": "OP12B-CAS"}, "registry_create_if_absent": {"$ref": "#/$defs/registryCreate"}}}
+        },
+        {
+          "if": {"properties": {"action_class": {"not": {"const": "REGISTRY_CREATE_IF_ABSENT"}}}, "required": ["action_class"]},
+          "then": {"properties": {"registry_create_if_absent": {"type": "null"}}}
+        },
+        {
+          "if": {"properties": {"action_class": {"const": "CIRCUIT_RESET"}}, "required": ["action_class"]},
+          "then": {"properties": {"operation_node_id": {"pattern": "^OP05R(?:0[1-9]|[1-9][0-9])$"}}}
+        },
+        {
+          "if": {"properties": {"action_class": {"const": "ROLLBACK"}}, "required": ["action_class"]},
+          "then": {"properties": {"operation_node_id": {"enum": ["OP12B-RB", "OP12C-RB"]}}}
+        }
+      ]
+    }
+  },
+  "required": [
+    "schema_version", "intent_id", "producer_gate_node_id", "operation_node_id", "stage_node_id",
+    "required_authorization_kind", "authorization_intent_binding_mode", "created_at", "expires_at", "plan_manifest_sha256", "gate_dag_sha256",
+    "release_manifest_sha256", "operation_catalog_sha256", "config_fingerprint", "routing_fingerprint",
+    "data_root_fingerprint", "control_generation", "circuit_generation", "candidate_sources_sha256",
+    "db_effects_sha256", "file_effects_sha256", "registry_effects_sha256", "state_transitions_sha256",
+    "network_destinations_sha256", "budget_effects_sha256", "journal_policy", "actions", "preauthorized_compensations", "forbidden_action_classes", "sealed"
+  ],
+  "properties": {
+    "schema_version": {"const": "operation-intent-manifest-v1"},
+    "intent_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,159}$"},
+    "producer_gate_node_id": {"type": "string", "pattern": "^(?:D[A-Za-z0-9-]{1,31}|RUNTIME_POLICY_AFTER_G12C)$"},
+    "operation_node_id": {"$ref": "#/$defs/opNodeId"},
+    "stage_node_id": {"type": "string", "pattern": "^(D|OP|G)[A-Za-z0-9-]{1,31}$"},
+    "required_authorization_kind": {"enum": ["NOT_APPLICABLE_LOCAL_READ_ONLY", "STAGE_BOUND_OPERATION", "BOUND_COMPENSATION", "CIRCUIT_RESET"]},
+    "authorization_intent_binding_mode": {"enum": ["EXACT_INTENT", "RUNTIME_TEMPLATE_SPECIALIZATION"]},
+    "created_at": {"$ref": "#/$defs/utcTimestamp"},
+    "expires_at": {"$ref": "#/$defs/utcTimestamp"},
+    "plan_manifest_sha256": {"$ref": "#/$defs/sha256"},
+    "gate_dag_sha256": {"$ref": "#/$defs/sha256"},
+    "release_manifest_sha256": {"$ref": "#/$defs/sha256"},
+    "operation_catalog_sha256": {"$ref": "#/$defs/sha256"},
+    "config_fingerprint": {"$ref": "#/$defs/sha256"},
+    "routing_fingerprint": {"$ref": "#/$defs/sha256"},
+    "data_root_fingerprint": {"$ref": "#/$defs/sha256"},
+    "control_generation": {"type": "integer", "minimum": 0},
+    "circuit_generation": {"type": "integer", "minimum": 0},
+    "candidate_sources_sha256": {"$ref": "#/$defs/sha256"},
+    "db_effects_sha256": {"$ref": "#/$defs/sha256"},
+    "file_effects_sha256": {"$ref": "#/$defs/sha256"},
+    "registry_effects_sha256": {"$ref": "#/$defs/sha256"},
+    "state_transitions_sha256": {"$ref": "#/$defs/sha256"},
+    "network_destinations_sha256": {"$ref": "#/$defs/sha256"},
+    "budget_effects_sha256": {"$ref": "#/$defs/sha256"},
+    "journal_policy": {"enum": ["NOT_APPLICABLE", "INITIALIZE", "REQUIRED_INTENT_FINALIZE"]},
+    "actions": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/action"}},
+    "preauthorized_compensations": {"type": "array", "uniqueItems": true, "items": {"allOf": [{"$ref": "#/$defs/action"}, {"properties": {"operation_node_id": {"enum": ["OP12B-RB", "OP12C-RB"]}, "action_class": {"const": "ROLLBACK"}}}]}},
+    "forbidden_action_classes": {
+      "type": "array", "uniqueItems": true,
+      "items": {"enum": ["READ_ONLY", "DB_WRITE", "FILE_WRITE", "NETWORK_EGRESS", "STARTUP_ARM", "REGISTRY_CREATE_IF_ABSENT", "LOGIN_LOGOFF", "FINAL_ACTIVATION", "ROLLBACK", "CIRCUIT_RESET", "CYCLE_EXECUTION"]}
+    },
+    "sealed": {"const": true}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"operation_node_id": {"const": "OP-RUNTIME-CYCLE"}}, "required": ["operation_node_id"]},
+      "then": {
+        "properties": {
+          "producer_gate_node_id":{"const":"RUNTIME_POLICY_AFTER_G12C"},
+          "stage_node_id":{"const":"OP-RUNTIME-CYCLE"},
+          "required_authorization_kind":{"const":"STAGE_BOUND_OPERATION"},
+          "authorization_intent_binding_mode":{"const":"RUNTIME_TEMPLATE_SPECIALIZATION"},
+          "journal_policy":{"const":"REQUIRED_INTENT_FINALIZE"},
+          "preauthorized_compensations":{"maxItems":0},
+          "forbidden_action_classes":{"const":["STARTUP_ARM","REGISTRY_CREATE_IF_ABSENT","LOGIN_LOGOFF","FINAL_ACTIVATION","ROLLBACK","CIRCUIT_RESET"]},
+          "actions":{"minItems":1,"maxItems":1,"items":{"allOf":[{"$ref":"#/$defs/action"},{"properties":{"action_id":{"const":"ORDINARY_AUTOSTART_CYCLE"},"operation_node_id":{"const":"OP-RUNTIME-CYCLE"},"stage_node_id":{"const":"OP-RUNTIME-CYCLE"},"action_class":{"const":"CYCLE_EXECUTION"}}}]}}
+        }
+      }
+    },
+    {
+      "if": {"properties": {"operation_node_id": {"not":{"const": "OP-RUNTIME-CYCLE"}}}, "required": ["operation_node_id"]},
+      "then": {"properties":{"producer_gate_node_id":{"pattern":"^D[A-Za-z0-9-]{1,31}$"},"authorization_intent_binding_mode":{"const":"EXACT_INTENT"}}}
+    },
+    {
+      "if": {"properties": {"required_authorization_kind": {"const": "NOT_APPLICABLE_LOCAL_READ_ONLY"}}, "required": ["required_authorization_kind"]},
+      "then": {"properties": {"operation_node_id": {"enum": ["OP00", "OP11A"]}, "preauthorized_compensations": {"maxItems": 0}, "actions": {"items": {"allOf": [{"$ref": "#/$defs/action"}, {"properties": {"action_class": {"const": "READ_ONLY"}}}]}}, "forbidden_action_classes": {"contains": {"const": "DB_WRITE"}, "minContains": 1}}}
+    },
+    {
+      "if": {"properties": {"required_authorization_kind": {"const": "BOUND_COMPENSATION"}}, "required": ["required_authorization_kind"]},
+      "then": {"properties": {"operation_node_id": {"enum": ["OP12B-RB", "OP12C-RB"]}, "preauthorized_compensations": {"maxItems": 0}, "actions": {"items": {"allOf": [{"$ref": "#/$defs/action"}, {"properties": {"action_class": {"const": "ROLLBACK"}}}]}}}}
+    },
+    {
+      "if": {"properties": {"required_authorization_kind": {"const": "CIRCUIT_RESET"}}, "required": ["required_authorization_kind"]},
+      "then": {"properties": {"operation_node_id": {"pattern": "^OP05R(?:0[1-9]|[1-9][0-9])$"}, "preauthorized_compensations": {"maxItems": 0}, "actions": {"minItems": 1, "maxItems": 1, "items": {"allOf": [{"$ref": "#/$defs/action"}, {"properties": {"action_class": {"const": "CIRCUIT_RESET"}}}]}}, "forbidden_action_classes": {"allOf": [{"contains": {"const": "STARTUP_ARM"}, "minContains": 1}, {"contains": {"const": "LOGIN_LOGOFF"}, "minContains": 1}, {"contains": {"const": "FINAL_ACTIVATION"}, "minContains": 1}, {"contains": {"const": "CYCLE_EXECUTION"}, "minContains": 1}]}}}
+    }
+  ],
+  "x-semantic-rules": [
+    "For finite OP/reset/compensation stages this manifest is produced and hash-sealed by the D gate before authorization is requested. OP-RUNTIME-CYCLE is the sole exception: the already authorized G12C runtime policy produces a fresh per-cycle intent before side effects, and both authorization revalidation and the dynamic cycle contract bind those canonical bytes.",
+    "created_at must be earlier than expires_at; authorization and execution must both occur before expiry and after a fresh revocation check.",
+    "operation_node_id, stage_node_id, and required_authorization_kind must exactly match the static operation catalog. Every action must repeat that same operation and stage unless the catalog explicitly defines a multi-action stage.",
+    "action_id values are unique, and action effect digests are canonical hashes over the exact proposed DB, file, registry, state, network, durable-budget reservation or snapshot, journal, and candidate-source subsets. Empty-effect canonical hashes are still mandatory.",
+    "operation_contract_template_sha256 hashes a canonical contract template with only explicitly enumerated runtime fields open; the final contract must be a permitted specialization and cannot expand any effect.",
+    "For registry creation, decoded UTF-16LE bytes, length, SHA-256, terminal NUL, target, subject SID, view, expected absence, ownership nonce hash, and conflict behavior are exact authorization inputs.",
+    "forbidden_action_classes is disjoint from forward actions and includes every class prohibited by the operation catalog. Preauthorized rollback descriptors are separate and never become forward actions. A CIRCUIT_RESET or runtime-cycle intent must prohibit resume-equivalent cycle as applicable, arm, login, registry-create, and final-activation behavior.",
+    "A finite stage whose static contract_requires includes compensation_binding contains each exact rollback descriptor once in preauthorized_compensations; all other stages keep that array empty. Authorization copies the descriptors byte-for-byte and a later BOUND_COMPENSATION authorization may only select one of them.",
+    "Generations and all plan, DAG, release, catalog, config, routing, and data-root hashes are immutable bindings. Any drift requires a new D gate intent and new authorization; it cannot be patched in place."
+  ]
+}

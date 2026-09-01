@@ -1,0 +1,112 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:company-wiki:source-catalog-worker-recovery:validator-fixture-manifest:v4",
+  "title": "Frozen canonical validator fixture and mutation catalog",
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "utcTimestamp": {
+      "type": "string", "format": "date-time",
+      "pattern": "^[0-9]{4}-(0[1-9]|1[0-2])-([0-2][0-9]|3[01])T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]{1,9})?Z$"
+    },
+    "jsonPointer": {"type": "string", "pattern": "^(?:|/(?:[^~/]|~[01])*(?:/(?:[^~/]|~[01])*)*)$"},
+    "reasonCode": {"type": "string", "pattern": "^GLV-E[0-9]{3}$"},
+    "validationStage": {"enum": ["ACCEPT", "FIXTURE_EXPANSION", "DOCUMENT_SHAPE", "SCHEMA", "HASH_CHAIN", "DAG", "REVIEW_POLICY", "ARTIFACT_INTEGRITY", "OPERATION_POLICY", "AUTHORIZATION_POLICY", "STATE_MACHINE", "COMPENSATION_POLICY", "TEST_REGISTRY_POLICY"]},
+    "schemaBinding": {
+      "type": "object", "additionalProperties": false,
+      "required": ["schema_id", "schema_path", "schema_sha256"],
+      "properties": {
+        "schema_id": {"type": "string", "pattern": "^urn:company-wiki:source-catalog-worker-recovery:[a-z0-9-]+:v(?:1|4)$"},
+        "schema_path": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*\\.schema\\.json$"},
+        "schema_sha256": {"$ref": "#/$defs/sha256"}
+      }
+    }
+  },
+  "required": [
+    "schema_version", "fixture_manifest_id", "generated_at", "generator_commit", "generator_script_sha256",
+    "plan_manifest_sha256", "gate_dag_sha256", "validator_contract_sha256", "schema_bindings",
+    "reason_rule_catalog", "base_fixtures", "mutation_fixtures", "sealed"
+  ],
+  "properties": {
+    "schema_version": {"const": "validator-fixture-manifest-v1"},
+    "fixture_manifest_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,159}$"},
+    "generated_at": {"$ref": "#/$defs/utcTimestamp"},
+    "generator_commit": {"$ref": "#/$defs/commit"},
+    "generator_script_sha256": {"$ref": "#/$defs/sha256"},
+    "plan_manifest_sha256": {"$ref": "#/$defs/sha256"},
+    "gate_dag_sha256": {"$ref": "#/$defs/sha256"},
+    "validator_contract_sha256": {"$ref": "#/$defs/sha256"},
+    "schema_bindings": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/schemaBinding"}},
+    "reason_rule_catalog": {
+      "type": "array", "minItems": 1, "uniqueItems": true,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["rule_id", "reason_code", "validation_stage", "instance_pointer_pattern", "schema_pointer", "precedence"],
+        "properties": {
+          "rule_id": {"type": "string", "pattern": "^[A-Z][A-Z0-9._-]{3,79}$"},
+          "reason_code": {"$ref": "#/$defs/reasonCode"},
+          "validation_stage": {"$ref": "#/$defs/validationStage"},
+          "instance_pointer_pattern": {"type": "string", "minLength": 1, "maxLength": 500},
+          "schema_pointer": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/jsonPointer"}]},
+          "precedence": {"type": "integer", "minimum": 1}
+        }
+      }
+    },
+    "base_fixtures": {
+      "type": "array", "minItems": 1, "uniqueItems": true,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["fixture_id", "artifact_kind", "schema_id", "artifact_path", "artifact_sha256", "expected_result", "coverage_role"],
+        "properties": {
+          "fixture_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,159}$"},
+          "artifact_kind": {"enum": ["GATE_LEDGER", "GATE_DAG", "TEST_ID_REGISTRY", "VALIDATOR_VECTORS", "VALIDATOR_FIXTURE_MANIFEST", "VALIDATOR_RELEASE_MANIFEST", "OPERATION_CATALOG", "OPERATION_CONTRACT", "OPERATION_INTENT", "AUTHORIZATION_MANIFEST", "JOURNAL_MANIFEST", "EVIDENCE_MANIFEST", "PARSER_ROUTE_MANIFEST", "REVIEW_RESULT", "REVIEW_CONFIRMATION"]},
+          "schema_id": {"type": "string", "pattern": "^urn:company-wiki:source-catalog-worker-recovery:[a-z0-9-]+:v(?:1|4)$"},
+          "artifact_path": {"type": "string", "pattern": "^validator-fixtures/base/[A-Za-z0-9][A-Za-z0-9._/-]{0,498}\\.json$"},
+          "artifact_sha256": {"$ref": "#/$defs/sha256"},
+          "expected_result": {"const": "OK"},
+          "coverage_role": {"type": "string", "pattern": "^[A-Z][A-Z0-9_]{2,79}$"}
+        }
+      }
+    },
+    "mutation_fixtures": {
+      "type": "array", "minItems": 1, "uniqueItems": true,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": [
+          "case_id", "base_fixture_id", "mutations", "mutated_artifact_path", "mutated_artifact_sha256",
+          "expected_primary_rule_id", "expected_primary_reason_code", "expected_validation_stage",
+          "expected_instance_pointer", "expected_schema_pointer", "violated_primary_rule_count",
+          "secondary_errors_allowed"
+        ],
+        "properties": {
+          "case_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,159}$"},
+          "base_fixture_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,159}$"},
+          "mutations": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "gate_ledger_validator_vectors.schema.json#/$defs/mutation"}},
+          "mutated_artifact_path": {"type": "string", "pattern": "^validator-fixtures/mutated/[A-Za-z0-9][A-Za-z0-9._/-]{0,498}\\.json$"},
+          "mutated_artifact_sha256": {"$ref": "#/$defs/sha256"},
+          "expected_primary_rule_id": {"type": "string", "pattern": "^[A-Z][A-Z0-9._-]{3,79}$"},
+          "expected_primary_reason_code": {"$ref": "#/$defs/reasonCode"},
+          "expected_validation_stage": {"$ref": "#/$defs/validationStage"},
+          "expected_instance_pointer": {"$ref": "#/$defs/jsonPointer"},
+          "expected_schema_pointer": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/jsonPointer"}]},
+          "violated_primary_rule_count": {"const": 1},
+          "secondary_errors_allowed": {"const": false}
+        }
+      }
+    },
+    "sealed": {"const": true}
+  },
+  "x-semantic-rules": [
+    "T00L creates canonical base and mutated artifacts; D00L validates and freezes this manifest before I00L implements the validator. The validator release manifest later binds this fixture-manifest hash without changing it.",
+    "schema_bindings are unique by schema_id and schema_path and include every schema used by a base fixture. Each binding hash equals exact schema bytes in the frozen plan manifest.",
+    "Base fixture IDs and paths are unique. Every base artifact validates as OK under the frozen schemas plus all semantic rules; a base failure blocks I00L.",
+    "Mutation array order is the exact deterministic application order and every mutation validates against the single typed DSL in gate_ledger_validator_vectors.schema.json. JSON Pointer resolution uses RFC 6901 and a source value is read immediately before that mutation is applied.",
+    "Every mutation case references one existing base fixture and one existing reason rule. Applying the mutation yields bytes whose SHA-256 equals mutated_artifact_sha256 and violates exactly the declared primary rule with no secondary error.",
+    "Reason-rule IDs are unique; each maps deterministically to one reason code, validation stage, instance-pointer pattern, schema pointer, and precedence. Unknown structural JSON failures alone map to the generic parse or schema reason; known semantic failures cannot be reclassified as unknown shape.",
+    "expected_instance_pointer must match the rule pattern and actual validator pointer. expected_schema_pointer is exact for schema failures and null for semantic-only rules unless the rule catalog declares otherwise.",
+    "A fixture that accidentally copies a null executor or reviewer identifier and therefore fails structurally is not valid evidence for a role-reuse rule; fixture construction must use a prior non-null executor or reviewer ID that reaches the intended semantic check.",
+    "The fixture manifest, generator script, all base and mutated artifacts, and the final reason catalog are immutable hashed release inputs."
+  ]
+}

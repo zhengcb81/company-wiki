@@ -1,0 +1,109 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:company-wiki:source-catalog-worker-recovery:journal-manifest:v4",
+  "title": "Protected write-intent journal identity and recovery manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "utcTimestamp": {
+      "type": "string", "format": "date-time",
+      "pattern": "^[0-9]{4}-(0[1-9]|1[0-2])-([0-2][0-9]|3[01])T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]{1,9})?Z$"
+    }
+  },
+  "required": [
+    "schema_version", "journal_id", "journal_path_id", "target_root_identity", "owner_user_sid",
+    "file_identity", "security_descriptor_sddl_sha256", "security_descriptor_binary_sha256",
+    "acl_policy", "reparse_point_forbidden", "append_only", "record_format", "durability_protocol",
+    "recovery_protocol", "head_sequence", "head_sha256", "journal_generation", "created_at",
+    "initialized_by_operation_intent_sha256", "initializer_operation_run_id", "plan_manifest_sha256", "release_manifest_sha256", "sealed"
+  ],
+  "properties": {
+    "schema_version": {"const": "journal-manifest-v1"},
+    "journal_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,159}$"},
+    "journal_path_id": {"type": "string", "minLength": 8, "maxLength": 240},
+    "target_root_identity": {"type": "string", "minLength": 8, "maxLength": 200},
+    "owner_user_sid": {"type": "string", "pattern": "^S-[0-9]+(?:-[0-9]+)+$"},
+    "file_identity": {
+      "type": "object", "additionalProperties": false,
+      "required": ["volume_serial_hex", "file_id_hex", "creation_time_utc"],
+      "properties": {
+        "volume_serial_hex": {"type": "string", "pattern": "^[0-9A-F]{8,16}$"},
+        "file_id_hex": {"type": "string", "pattern": "^[0-9A-F]{16,32}$"},
+        "creation_time_utc": {"$ref": "#/$defs/utcTimestamp"}
+      }
+    },
+    "security_descriptor_sddl_sha256": {"$ref": "#/$defs/sha256"},
+    "security_descriptor_binary_sha256": {"$ref": "#/$defs/sha256"},
+    "acl_policy": {
+      "type": "object", "additionalProperties": false,
+      "required": ["inheritance_disabled", "owner_full_control", "system_full_control", "administrators_read_only", "other_principals_denied"],
+      "properties": {
+        "inheritance_disabled": {"const": true},
+        "owner_full_control": {"const": true},
+        "system_full_control": {"const": true},
+        "administrators_read_only": {"const": true},
+        "other_principals_denied": {"const": true}
+      }
+    },
+    "reparse_point_forbidden": {"const": true},
+    "append_only": {"const": true},
+    "record_format": {
+      "type": "object", "additionalProperties": false,
+      "required": ["container", "canonicalization", "encoding", "line_termination", "hash_algorithm", "record_types", "max_record_bytes"],
+      "properties": {
+        "container": {"const": "JSON_LINES"},
+        "canonicalization": {"const": "RFC8785_JCS"},
+        "encoding": {"const": "UTF-8"},
+        "line_termination": {"const": "LF"},
+        "hash_algorithm": {"const": "SHA-256"},
+        "record_types": {"type": "array", "const": ["INTENT", "FINALIZE", "RECONCILE"]},
+        "max_record_bytes": {"type": "integer", "minimum": 1024, "maximum": 1048576}
+      }
+    },
+    "durability_protocol": {
+      "type": "object", "additionalProperties": false,
+      "required": ["exclusive_append_handle", "write_through", "flush_file_buffers_after_each_record", "flush_parent_directory_after_create_or_replace", "finalize_only_after_effect_verification"],
+      "properties": {
+        "exclusive_append_handle": {"const": true},
+        "write_through": {"const": true},
+        "flush_file_buffers_after_each_record": {"const": true},
+        "flush_parent_directory_after_create_or_replace": {"const": true},
+        "finalize_only_after_effect_verification": {"const": true}
+      }
+    },
+    "recovery_protocol": {
+      "type": "object", "additionalProperties": false,
+      "required": [
+        "validate_chain_from_genesis", "reject_interior_corruption", "partial_tail_policy",
+        "unfinalized_intent_policy", "reconcile_before_new_write", "unknown_effect_policy"
+      ],
+      "properties": {
+        "validate_chain_from_genesis": {"const": true},
+        "reject_interior_corruption": {"const": true},
+        "partial_tail_policy": {"const": "TRUNCATE_ONLY_TO_LAST_HASH_VERIFIED_BOUNDARY_WITH_EVIDENCE"},
+        "unfinalized_intent_policy": {"const": "EXACT_RECONCILE_USING_SEALED_CONTRACT"},
+        "reconcile_before_new_write": {"const": true},
+        "unknown_effect_policy": {"const": "PAUSE_AND_OPEN_CIRCUIT"}
+      }
+    },
+    "head_sequence": {"type": "integer", "minimum": 0},
+    "head_sha256": {"$ref": "#/$defs/sha256"},
+    "journal_generation": {"type": "integer", "minimum": 0},
+    "created_at": {"$ref": "#/$defs/utcTimestamp"},
+    "initialized_by_operation_intent_sha256": {"$ref": "#/$defs/sha256"},
+    "initializer_operation_run_id": {"type": "string", "minLength": 8, "maxLength": 160},
+    "plan_manifest_sha256": {"$ref": "#/$defs/sha256"},
+    "release_manifest_sha256": {"$ref": "#/$defs/sha256"},
+    "sealed": {"const": true}
+  },
+  "x-semantic-rules": [
+    "The manifest canonical bytes are stored separately from the journal and hash-bound by every operation after initialization. The OP11J initializer binds a pre-sealed manifest template and operation-intent hash, then its evidence binds the observed final manifest hash; this avoids a contract-manifest hash cycle. journal_path_id and target_root_identity resolve through the frozen opaque-root map; absolute paths are not embedded in portable evidence.",
+    "The no-follow canonical journal path must remain inside its approved root, have the exact volume and file ID, contain no reparse component, and retain both exact security-descriptor hashes before every append.",
+    "Record sequence begins at one; each record contains journal_id, journal_generation, sequence, prior_record_sha256, operation contract hash, operation intent hash, record type, and payload digest. The record SHA-256 is over RFC 8785 canonical bytes excluding only its own hash field.",
+    "An INTENT is durable before any DB, file, registry, control-state, token, or network side effect. FINALIZE is durable only after exact post-state verification. A RECONCILE identifies the abandoned intent and exact observed and restored states.",
+    "Every normal mutating operation advances the head by exactly INTENT plus FINALIZE. Recovery may add RECONCILE only under the declared protocol; it never deletes, rewrites, or silently skips an existing record.",
+    "A partial final line may be removed only when all preceding records hash-verify, its bytes are preserved as evidence, and the removal plus directory durability is journaled externally. Interior corruption, ACL drift, identity drift, sequence gaps, or unknown effects pause execution and open the circuit.",
+    "The implementation must prove crash behavior at every boundary between intent durability, individual effects, post-read verification, finalize durability, and control-state publication."
+  ]
+}
