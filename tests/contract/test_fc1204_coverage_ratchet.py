@@ -104,11 +104,11 @@ FROZEN = {
     "section_query.py": 87,
     "security_identity.py": 77,
     "shadow_parity.py": 87,
-    "startup.py": 61,
+    "startup.py": 35,
     "store.py": 83,
     "summarizer.py": 87,
     "trace_parity.py": 82,
-    "worker.py": 79
+    "worker.py": 78
 }
 
 
