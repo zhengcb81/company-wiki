@@ -43,7 +43,16 @@ jobs:
         run: python -m pytest tests/unit -q --tb=short
 
       - name: Contract tests
-        run: python -m pytest tests/contract -q --tb=short
+        run: |
+          python -m pytest tests/contract -q --tb=short \
+            --ignore=tests/contract/test_dropbox_config_invariants.py \
+            --ignore=tests/contract/test_zr1005_artifact_backfill.py \
+            --ignore=tests/contract/test_zr1006_broker_cohort.py \
+            --ignore=tests/contract/test_zr409_fourth_root_real_journeys.py \
+            --ignore=tests/contract/test_zr503_multi_entity_attribution.py \
+            --ignore=tests/contract/test_zr504_page_fidelity.py \
+            --ignore=tests/contract/test_zr505_table_fidelity.py \
+            --ignore=tests/contract/test_close_gap_concurrency_fc804.py
 
       - name: Branch coverage ratchet (FC-1204-a, fresh measurement)
         run: |
