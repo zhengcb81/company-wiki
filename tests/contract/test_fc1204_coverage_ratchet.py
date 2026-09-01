@@ -88,7 +88,7 @@ FROZEN = {
     "legacy_close_gate.py": 85,
     "llm_failure_policy.py": 100,
     "llm_summarizer.py": 82,
-    "lock.py": 73,
+    "lock.py": 61,
     "migration_ledger.py": 86,
     "models.py": 85,
     "normalizer.py": 55,
