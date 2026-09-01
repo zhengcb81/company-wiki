@@ -88,11 +88,13 @@ def _cross_repo_checks(
         str(r.root_id) for r in config.roots if r.kind == "directory"
     }
     # Zero directory roots is fine (no Dropbox configured); if any exist they
-    # must be EXACTLY {dropbox_stock} (a second directory root would silently
-    # gain reuse rights under kind-level authorization).
-    if directory_roots and directory_roots != {"dropbox_stock"}:
+    # must be a subset of the allowlist (a second directory root would silently
+    # gain reuse rights under kind-level authorization).  ``future_lake`` is
+    # read-only and explicitly ``reusable_for_filing``.
+    _ALLOWED_DIRECTORY_ROOTS = {"dropbox_stock", "future_lake"}
+    if directory_roots and not directory_roots.issubset(_ALLOWED_DIRECTORY_ROOTS):
         problems.append(
-            "kind=directory roots must be exactly {dropbox_stock}, "
+            f"kind=directory roots must be a subset of {_ALLOWED_DIRECTORY_ROOTS}, "
             f"got {sorted(directory_roots)}"
         )
     dropbox_wiki = next(
