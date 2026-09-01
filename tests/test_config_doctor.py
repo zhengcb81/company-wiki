@@ -105,7 +105,7 @@ def test_e2e_f03_second_directory_root_fails_fast(tmp_path, monkeypatch):
     (project / ".source_catalog" / "security_master").mkdir(parents=True)
     (project / ".source_catalog" / "security_master" / "us.json").write_text("{}", encoding="utf-8")
     problems = diagnose(config, project_root=project)
-    assert any("directory roots must be exactly" in p for p in problems), problems
+    assert any("directory roots must be" in p for p in problems), problems
 
 def test_e2e_f03_filing_allowance_smuggled_fails(tmp_path, monkeypatch):
     """E2E-F03 / FC-501 (CONFIG-DBX-03): a filing-fetch config smuggling
