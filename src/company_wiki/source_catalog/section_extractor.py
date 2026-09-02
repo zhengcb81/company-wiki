@@ -196,11 +196,13 @@ def extract_sections_catalog(
 
     sql = (
         "SELECT d.document_id, d.primary_source_id, d.document_kind, d.title, "
-        "norm.path AS normalized_path, norm.content_sha256 AS content_sha256 "
+        "norm.path AS normalized_path, norm.content_sha256 AS content_sha256, "
+        "s.content_sha256 AS source_sha256 "
         "FROM documents d "
         "JOIN artifacts norm ON norm.document_id=d.document_id "
         "AND norm.artifact_role='normalized' "
         "AND norm.generator_name='source_catalog_normalizer' "
+        "JOIN sources s ON s.source_id=d.primary_source_id "
         "LEFT JOIN artifacts sec ON sec.document_id=d.document_id "
         "AND sec.artifact_role=? AND sec.generator_name=? "
         "WHERE " + " AND ".join(where_clauses)
@@ -305,7 +307,7 @@ def extract_sections_catalog(
                     "completed",
                     None,
                     ARTIFACT_HANDLE_SCHEMA_VERSION,
-                    "",
+                    document["source_sha256"] if "source_sha256" in document.keys() else "",
                     canonical_json(
                         {"schema_version": ARTIFACT_HANDLE_SCHEMA_VERSION, "sections": index_entries, "count": len(index_entries)}
                     ),

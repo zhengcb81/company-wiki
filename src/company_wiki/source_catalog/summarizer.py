@@ -251,7 +251,7 @@ def summarize_catalog(
                     summary_status,
                     None,
                     ARTIFACT_HANDLE_SCHEMA_VERSION,
-                    "",
+                    row["source_sha256"] if "source_sha256" in row.keys() else "",
                     canonical_json(
                         {
                             "schema_version": ARTIFACT_HANDLE_SCHEMA_VERSION,

@@ -141,8 +141,8 @@ def _binding_handle(catalog: SourceCatalog, role: str, allowed_root: Path):
         "generator_version": row["generator_version"],
         "status": row["status"],
         "created_at": row["created_at"],
-        "schema_version": meta.get("schema_version", ""),
-        "source_sha256": meta.get("source_sha256", ""),
+        "schema_version": row["schema_version"] or meta.get("schema_version", ""),
+        "source_sha256": row["source_sha256"] or meta.get("source_sha256", ""),
     }
     source = {
         "document_id": row["document_id"],
