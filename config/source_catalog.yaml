@@ -10,14 +10,17 @@ roots:
     kind: company_raw
     path: "${PROJECT_ROOT}/companies"
     priority: 10
+    privacy_class: public
   - root_id: dayu_portfolio
     kind: dayu_portfolio
     path: "${PROJECT_ROOT}/../dayu-agent/workspace/portfolio"
     priority: 20
+    privacy_class: private_user
   - root_id: dropbox_stock
     kind: directory
     path: "${USER_PROFILE}/Dropbox/Stock"
     priority: 30
+    privacy_class: private_user
   # ZR-409 (EX-08): a future root joins by CONFIG ONLY — kind directory +
   # registered sidecar adapter, read-only, reusable.  No product code change
   # is needed for a new root (the whole point of the adapter registry).
@@ -28,3 +31,4 @@ roots:
     read_only: true
     reusable_for_filing: true
     priority: 40
+    privacy_class: private_user
