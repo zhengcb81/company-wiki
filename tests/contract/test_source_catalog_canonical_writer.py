@@ -69,7 +69,15 @@ def _catalog(tmp_path: Path):
         CatalogConfig(
             project_root=project,
             catalog_dir=project / ".source_catalog",
-            roots=(RootSpec("company_raw", companies, "company_raw", priority=10),),
+            roots=(
+                RootSpec(
+                    "company_raw",
+                    companies,
+                    "company_raw",
+                    priority=10,
+                    adapter_id="company_raw_v1",
+                ),
+            ),
         )
     )
     catalog.scan()
@@ -400,3 +408,59 @@ def test_ensure_service_records_download_and_later_zero_call_reuse(tmp_path):
     )
     assert "downloaded_new" in attempts_csv
     assert "reused_before_download" in attempts_csv
+
+
+def test_writer_post_import_rescan_follows_snapshot_v2_flag(tmp_path, monkeypatch):
+    """GP-002 O1: the post-import rescan inside CanonicalSourceWriter must
+    follow the activation snapshot's v2_scan_shadow — once v2 is activated
+    there must not be a second catalog writer still scanning v1 semantics
+    (a v1-only scan inside a v2-activated directory would be a parity
+    blind spot)."""
+    import json
+
+    from company_wiki.source_catalog import (
+        CanonicalImportStatus,
+        CanonicalSourceWriter,
+    )
+    from company_wiki.source_catalog import canonical_writer as cw_module
+    from company_wiki.source_catalog.runtime_policy import snapshot_hash
+
+    catalog = _catalog(tmp_path)
+    project = tmp_path / "project"
+    payload = {
+        "schema_version": "1.0",
+        "policy_hash": "d" * 64,
+        "flags": {
+            "v2_scan_shadow": True,
+            "v2_persist_assertions": True,
+            "v2_resolve_shadow": True,
+            "v2_resolve_active": True,
+            "v2_bundle_active": False,
+            "legacy_bridge_enabled": False,
+        },
+        "current_epoch": "e1",
+        "active_cohorts": ["c1"],
+        "updated_at": "2026-09-02T00:00:00Z",
+    }
+    payload["snapshot_sha256"] = snapshot_hash(payload)
+    (project / ".source_catalog" / "runtime_policy.json").write_text(
+        json.dumps(payload, ensure_ascii=False), encoding="utf-8"
+    )
+    request, candidate, receipt, staged = _staged_contract(tmp_path)
+
+    observed: list[bool | None] = []
+    original = cw_module.scan_catalog
+
+    def spy(*args, **kwargs):
+        observed.append(kwargs.get("v2_scan_shadow"))
+        return original(*args, **kwargs)
+
+    monkeypatch.setattr(cw_module, "scan_catalog", spy)
+    imported = CanonicalSourceWriter(catalog).import_staged(
+        request, candidate, receipt
+    )
+    assert imported.status is CanonicalImportStatus.IMPORTED_NEW
+    assert observed and all(flag is True for flag in observed), (
+        f"canonical writer rescan must follow snapshot v2_scan_shadow "
+        f"(got {observed})"
+    )

@@ -794,6 +794,7 @@ def _scan_catalog_impl(
     dry_run: bool = False,
     root_ids: set[str] | None = None,
     progress: Callable[..., None] | None = None,
+    v2_scan_shadow: bool = False,
     run_id: str | None = None,
     scan_time: str | None = None,
     selected_roots: tuple[RootSpec, ...] | None = None,
@@ -836,6 +837,7 @@ def _scan_catalog_impl(
             progress=progress,
             master_identity=master_identity,
             portfolio_urls=portfolio_urls,
+            v2_scan_shadow=v2_scan_shadow,
         )
         files_seen += len(candidates)
         files_excluded += excluded
@@ -1252,6 +1254,24 @@ def cutover_decision(snapshot: dict[str, Any]) -> str:
     return "v2" if flags.get("v2_scan_shadow") else "v1"
 
 
+def v2_scan_shadow_from_snapshot(catalog_dir: Path | str) -> bool:
+    """GP-002: resolve the physical scan mode from the activation snapshot
+    (``catalog_dir/runtime_policy.json``) for every scan entry that writes
+    the catalog.
+
+    No snapshot file = v1 (the legacy default — temp projects and tooling
+    never activated a snapshot).  A present-but-invalid snapshot is
+    fail-closed: the ``RuntimePolicyError`` from ``load_runtime_policy``
+    propagates instead of silently degrading to v1.
+    """
+    from .runtime_policy import load_runtime_policy
+
+    snapshot_path = Path(catalog_dir) / "runtime_policy.json"
+    if not snapshot_path.is_file():
+        return False
+    return cutover_decision(load_runtime_policy(snapshot_path)) == "v2"
+
+
 def gate_production_dry_shadow(
     round_diffs: list[list[Any]], *, rounds_required: int = 2
 ) -> bool:
@@ -1313,6 +1333,7 @@ def scan_catalog(
             dry_run=True,
             root_ids=root_ids,
             progress=progress,
+            v2_scan_shadow=v2_scan_shadow,
         )
     if store is None:
         raise TypeError("store is required for a non-dry-run scan")
@@ -1328,6 +1349,7 @@ def scan_catalog(
                 dry_run=False,
                 root_ids=root_ids,
                 progress=progress,
+                v2_scan_shadow=v2_scan_shadow,
                 run_id=run_id,
                 scan_time=scan_time,
                 selected_roots=selected_roots,

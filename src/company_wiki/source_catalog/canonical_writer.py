@@ -17,7 +17,7 @@ from company_wiki.source_contract import source_id_for_sha256
 from .acquisition import DownloadCandidate, DownloadReceipt
 from .lock import CatalogOperationLock
 from .resolver import ResolutionResult, ResolutionStatus, SourceRequest, SourceResolver
-from .scanner import scan_catalog
+from .scanner import scan_catalog, v2_scan_shadow_from_snapshot
 from .service import SourceCatalog
 from .store import canonical_json
 
@@ -187,6 +187,9 @@ class CanonicalSourceWriter:
                 self.catalog.store,
                 dry_run=False,
                 root_ids={self.company_root.root_id},
+                v2_scan_shadow=v2_scan_shadow_from_snapshot(
+                    self.catalog.config.catalog_dir
+                ),
             )
             exact_request = SourceRequest(
                 entity=request.entity,

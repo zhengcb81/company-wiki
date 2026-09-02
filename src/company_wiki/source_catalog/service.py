@@ -15,7 +15,7 @@ from .llm_summarizer import summarize_catalog_with_llm
 from .lock import CatalogOperationLock
 from .normalizer import backfill_text_fingerprints, normalize_catalog
 from .section_extractor import extract_sections_catalog
-from .scanner import scan_catalog
+from .scanner import scan_catalog, v2_scan_shadow_from_snapshot
 from .store import CatalogStore
 from .reader import ReadOnlyCatalogReader
 from .summarizer import summarize_catalog
@@ -73,7 +73,19 @@ class SourceCatalog:
         dry_run: bool = False,
         root_ids: set[str] | None = None,
         progress: Callable[..., None] | None = None,
+        v2_scan_shadow: bool | None = None,
     ) -> ScanReport:
+        if v2_scan_shadow is None:
+            # Follow the activation snapshot (GP-002) on REAL scans: v2 when
+            # the runtime policy's v2_scan_shadow is on, v1 when no snapshot
+            # exists.  A plain dry-run stays v1 unless the caller explicitly
+            # requests v2 — a v2 DRY shadow is a gated FC-305 operation that
+            # records zero-diff rounds, not an ordinary CLI diagnostic.
+            v2_scan_shadow = (
+                False
+                if dry_run
+                else v2_scan_shadow_from_snapshot(self.config.catalog_dir)
+            )
         if dry_run:
             return scan_catalog(
                 self.config,
@@ -81,6 +93,7 @@ class SourceCatalog:
                 dry_run=True,
                 root_ids=root_ids,
                 progress=progress,
+                v2_scan_shadow=v2_scan_shadow,
             )
         with CatalogOperationLock(self.config.catalog_dir, operation="scan"):
             return scan_catalog(
@@ -89,6 +102,7 @@ class SourceCatalog:
                 dry_run=False,
                 root_ids=root_ids,
                 progress=progress,
+                v2_scan_shadow=v2_scan_shadow,
             )
 
     def normalize(
