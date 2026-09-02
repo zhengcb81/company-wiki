@@ -1,0 +1,48 @@
+# Local pre-commit gate mirroring the CI quality workflow's fast checks.
+# Pins match CI exactly (ruff 0.15.18, mypy 1.19.0 via the local system).
+# Full regression stays manual: run the affected pytest suites before push.
+#
+#   pre-commit install   # once per clone (installs .git/hooks/pre-commit)
+#   pre-commit run --all-files   # full gate on demand
+repos:
+  - repo: local
+    hooks:
+      - id: ruff
+        name: ruff check (WU-1.2, mirrors CI)
+        entry: ruff check
+        language: system
+        types: [python]
+        # CI scope: ruff check src tests/unit tests/contract scripts
+        files: ^(src/|tests/unit/|tests/contract/|scripts/).*\.py$
+
+      - id: mypy-contract
+        name: mypy contract modules (FC-1204-c, mirrors CI)
+        entry: >-
+          python -m mypy
+          src/company_wiki/source_catalog/artifact_handle.py
+          src/company_wiki/source_catalog/source_bundle.py
+          src/company_wiki/source_catalog/runtime_policy.py
+          src/company_wiki/source_catalog/activation.py
+          src/company_wiki/source_catalog/close_gap.py
+          src/company_wiki/source_catalog/policy_2x.py
+          src/company_wiki/source_catalog/canary_registry.py
+          src/company_wiki/source_catalog/normalized_meta.py
+          src/company_wiki/source_catalog/flags.py
+          src/company_wiki/source_catalog/policy.py
+          src/company_wiki/source_catalog/restore.py
+        language: system
+        pass_filenames: false
+        # Run only when one of the checked modules is staged.
+        files: >-
+          ^src/company_wiki/source_catalog/
+          (artifact_handle|source_bundle|runtime_policy|activation|close_gap|
+          policy_2x|canary_registry|normalized_meta|flags|policy|restore)\.py$
+
+      - id: config-doctor
+        name: config doctor (WU-7.1, mirrors CI)
+        entry: >-
+          python -c "import sys, runpy; sys.path.insert(0, 'src');
+          runpy.run_path('scripts/config_doctor.py', run_name='__main__')"
+        language: system
+        pass_filenames: false
+        always_run: true
