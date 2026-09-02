@@ -326,7 +326,7 @@ def _llm_exit_gate_roots(
     Allowlist rule: a root feeds the LLM unless it EXPLICITLY declares
     privacy_class='private_user'.  Unknown/future vocabulary values stay
     selectable on purpose: the 3.x loader forces the closed vocabulary
-    (company_raw -> public, external -> private_user), while 2.x/legacy
+    (company kind -> public, external -> private_user), while 2.x/legacy
     configs carry no privacy field and must keep their historical
     summarizable behavior until GP-007 upgrades the production config.
     """
