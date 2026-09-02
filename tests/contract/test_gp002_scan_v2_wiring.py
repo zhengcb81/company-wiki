@@ -227,11 +227,11 @@ def test_gp2_02_snapshot_v2_dry_run_stays_v1(tmp_path, monkeypatch) -> None:
     )
 
 
-def test_gp2_02_corrupt_snapshot_fails_closed(tmp_path, monkeypatch) -> None:
-    """A present-but-invalid snapshot must raise (fail closed), never
-    silently degrade to v1."""
-    from company_wiki.source_catalog.runtime_policy import RuntimePolicyError
-
+def test_gp2_02_corrupt_snapshot_degrades_to_v1(tmp_path, monkeypatch) -> None:
+    """A present-but-invalid snapshot degrades to v1 for scanning (no
+    crash): scanning is a read-heavy catalog operation with no external
+    data exposure, so silent v1 is safe.  (The LLM exit gate in GP-003
+    applies stricter fail-closed semantics.)"""
     project, root = _project(tmp_path)
     catalog_dir = project / ".source_catalog"
     catalog_dir.mkdir(parents=True, exist_ok=True)
@@ -240,6 +240,16 @@ def test_gp2_02_corrupt_snapshot_fails_closed(tmp_path, monkeypatch) -> None:
     )
     config = _config(project, root)
     catalog = SourceCatalog(config)
-    with pytest.raises(RuntimePolicyError):
-        catalog.scan()
-    catalog.close()
+    observed: list[bool | None] = []
+    original = scan_root_strategy
+
+    def spy(root_spec, names, **kwargs):
+        observed.append(kwargs.get("v2_scan_shadow"))
+        return original(root_spec, names, **kwargs)
+
+    monkeypatch.setattr("company_wiki.source_catalog.scanner.scan_root_strategy", spy)
+    report = catalog.scan()
+    assert report.files_seen >= 1
+    assert observed and all(flag is False for flag in observed), (
+        f"corrupt snapshot must degrade to v1 (got {observed})"
+    )

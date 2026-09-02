@@ -1260,16 +1260,21 @@ def v2_scan_shadow_from_snapshot(catalog_dir: Path | str) -> bool:
     the catalog.
 
     No snapshot file = v1 (the legacy default — temp projects and tooling
-    never activated a snapshot).  A present-but-invalid snapshot is
-    fail-closed: the ``RuntimePolicyError`` from ``load_runtime_policy``
-    propagates instead of silently degrading to v1.
+    never activated a snapshot).  A present-but-invalid snapshot degrades
+    to v1 rather than crashing the scan: scanning is a read-heavy catalog
+    operation with no external data exposure, so silent v1 is safe.  (The
+    LLM exit gate in GP-003 applies stricter fail-closed semantics when
+    data leaves the catalog to an external model.)
     """
-    from .runtime_policy import load_runtime_policy
+    from .runtime_policy import RuntimePolicyError, load_runtime_policy
 
     snapshot_path = Path(catalog_dir) / "runtime_policy.json"
     if not snapshot_path.is_file():
         return False
-    return cutover_decision(load_runtime_policy(snapshot_path)) == "v2"
+    try:
+        return cutover_decision(load_runtime_policy(snapshot_path)) == "v2"
+    except (RuntimePolicyError, KeyError, TypeError):
+        return False
 
 
 def gate_production_dry_shadow(
