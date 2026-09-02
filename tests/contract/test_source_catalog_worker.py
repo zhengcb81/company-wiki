@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -30,6 +31,34 @@ def _catalog(tmp_path: Path):
     catalog.scan()
     catalog.normalize()
     return catalog, sources
+
+
+def _review_all(catalog) -> None:
+    """GP-003: give every catalog document a valid source-bound
+    prompt-injection review receipt — the LLM exit gate (D-2) requires
+    one before any document may be sent to the external LLM."""
+    from company_wiki.source_catalog.prompt_injection import (
+        record_prompt_injection_review,
+    )
+
+    rows = catalog.store.fetchall(
+        "SELECT d.document_id, s.content_sha256 FROM documents d "
+        "JOIN sources s ON s.source_id = d.primary_source_id"
+    )
+    with catalog.store.transaction() as connection:
+        for row in rows:
+            record_prompt_injection_review(
+                connection,
+                str(row["document_id"]),
+                status="not_detected",
+                reviewer="gp003-test-fixture",
+                evidence_sha256=hashlib.sha256(
+                    str(row["content_sha256"]).encode()
+                ).hexdigest(),
+                now="2026-09-02T12:00:00Z",
+                source_sha256=str(row["content_sha256"]),
+                policy_hash="c" * 64,
+            )
 
 
 def test_worker_config_is_versioned_and_resolves_project_paths(tmp_path):
@@ -1205,6 +1234,7 @@ def test_llm_summary_is_source_bound_auditable_and_replaces_extractive_summary(
     catalog, source_root = _catalog(tmp_path)
     before = source_root.joinpath("meeting.txt").read_bytes()
     catalog.summarize()
+    _review_all(catalog)
     client = _FakeLLM(
         json.dumps(
             {
@@ -1257,6 +1287,7 @@ def test_llm_summary_is_source_bound_auditable_and_replaces_extractive_summary(
 
 def test_llm_summary_deterministically_bounds_overlong_lists(tmp_path):
     catalog, _ = _catalog(tmp_path)
+    _review_all(catalog)
     client = _FakeLLM(
         json.dumps(
             {
@@ -1288,6 +1319,7 @@ def test_llm_summary_deterministically_bounds_overlong_lists(tmp_path):
 
 def test_llm_summary_rejects_generated_investment_conclusions(tmp_path):
     catalog, _ = _catalog(tmp_path)
+    _review_all(catalog)
     client = _FakeLLM(
         json.dumps(
             {
@@ -1335,6 +1367,7 @@ def test_document_scoped_llm_failure_does_not_block_the_next_document(tmp_path):
     from company_wiki.source_catalog.store import read_pipeline_status
 
     catalog, source_root = _catalog(tmp_path)
+    _review_all(catalog)
     bad_client = _FakeLLM(
         json.dumps(
             {
@@ -1359,6 +1392,7 @@ def test_document_scoped_llm_failure_does_not_block_the_next_document(tmp_path):
     )
     catalog.scan()
     catalog.normalize()
+    _review_all(catalog)
     good_client = _FakeLLM(
         json.dumps(
             {
@@ -1400,6 +1434,7 @@ def test_document_scoped_llm_failure_does_not_block_the_next_document(tmp_path):
 
 def test_provider_failure_requests_global_retry_without_document_quarantine(tmp_path):
     catalog, _ = _catalog(tmp_path)
+    _review_all(catalog)
     client = _ProviderFailingLLM("")
 
     report = catalog.summarize_with_llm(

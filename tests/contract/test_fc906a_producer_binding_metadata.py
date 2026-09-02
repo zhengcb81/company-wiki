@@ -15,6 +15,7 @@ artifacts (FC-1203 candidate).
 
 from __future__ import annotations
 
+import hashlib
 import json
 from pathlib import Path
 
@@ -114,6 +115,34 @@ def _focus_catalog(tmp_path: Path) -> SourceCatalog:
     return catalog
 
 
+def _review_documents(catalog: SourceCatalog) -> None:
+    """GP-003: give every document a valid source-bound prompt-injection
+    review receipt (the LLM exit gate requires one before the LLM sees a
+    document)."""
+    from company_wiki.source_catalog.prompt_injection import (
+        record_prompt_injection_review,
+    )
+
+    rows = catalog.store.fetchall(
+        "SELECT d.document_id, s.content_sha256 FROM documents d "
+        "JOIN sources s ON s.source_id = d.primary_source_id"
+    )
+    with catalog.store.transaction() as connection:
+        for row in rows:
+            record_prompt_injection_review(
+                connection,
+                str(row["document_id"]),
+                status="not_detected",
+                reviewer="gp003-test-fixture",
+                evidence_sha256=hashlib.sha256(
+                    str(row["content_sha256"]).encode()
+                ).hexdigest(),
+                now="2026-09-02T12:00:00Z",
+                source_sha256=str(row["content_sha256"]),
+                policy_hash="c" * 64,
+            )
+
+
 def _binding_handle(catalog: SourceCatalog, role: str, allowed_root: Path):
     """Run the produced artifact + its source lineage through the binding gate."""
     row = catalog.store.fetchone(
@@ -182,6 +211,7 @@ def test_sections_artifact_is_v2_bindable(tmp_path: Path):
 
 def test_llm_summary_artifact_is_v2_bindable(tmp_path: Path):
     catalog = _focus_catalog(tmp_path)
+    _review_documents(catalog)
 
     class _Response:
         success = True

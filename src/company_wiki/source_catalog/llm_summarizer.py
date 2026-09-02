@@ -1,4 +1,20 @@
-"""Auditable, source-only LLM summaries for normalized catalog documents."""
+"""Auditable, source-only LLM summaries for normalized catalog documents.
+
+GP-003 (D-2) LLM exit gate: the external LLM only ever sees documents that
+(a) carry a valid prompt-injection review receipt bound to the CURRENT
+source bytes (json receipt in documents.metadata_json; source_sha256 must
+equal sources.content_sha256 — no receipt / mismatched receipt fail
+closed) and (b) have NO active location under a ``private_user`` root
+(review authorizes absence of injection, never exfiltration of private
+content; privacy gate dominates).
+
+Scope note: this batch gate checks receipt presence + status + byte
+binding.  Freshness (reviewed_at TTL) and ruleset binding (policy_hash)
+are enforced per document by the readiness graph's evaluate_review 'hit'
+path (ZR-302) when a consumer requires them; the LLM exit selection
+guarantees no un-reviewed or byte-unbound document is ever offered to the
+model.
+"""
 
 from __future__ import annotations
 
@@ -17,8 +33,21 @@ import yaml
 from .admission import processing_priority_sql
 from .artifact_handle import ARTIFACT_HANDLE_SCHEMA_VERSION
 from .models import CatalogConfig, ProcessingReport, SUMMARIZER_VERSION
+from .prompt_injection import (
+    PROMPT_INJECTION_REVIEW_KEY,
+    PROMPT_INJECTION_REVIEW_SCHEMA_VERSION,
+    PROMPT_INJECTION_REVIEW_STATUSES,
+)
 from .store import CatalogStore, canonical_json
 from .llm_failure_policy import is_permanent_llm_summary_error
+
+
+_PRIVATE_PRIVACY_CLASS = "private_user"
+
+# GP-003 receipt-gate constants: the review receipt lives under this key in
+# documents.metadata_json; allowed statuses come from the taxonomy enum.
+_REVIEW_STATUSES = tuple(sorted(PROMPT_INJECTION_REVIEW_STATUSES))
+_REVIEW_STATUS_SQL = ",".join("?" for _ in _REVIEW_STATUSES)
 
 
 _GENERATOR_NAME = "source_catalog_llm_summary"
@@ -271,6 +300,47 @@ def build_configured_llm_client(project_root: Path, runtime_config: Path):
     return client
 
 
+def _validate_summary_limits(
+    *,
+    limit: int,
+    max_input_chars: int,
+    max_output_tokens: int,
+    retry_backoff_seconds: int,
+) -> None:
+    if (
+        limit <= 0
+        or max_input_chars <= 0
+        or max_output_tokens <= 0
+        or retry_backoff_seconds <= 0
+    ):
+        raise ValueError("LLM summary limits must be positive")
+
+
+def _llm_exit_gate_roots(
+    config: CatalogConfig,
+) -> tuple[str, tuple[str, ...]] | None:
+    """GP-003 privacy gate: (root placeholders, public root ids) for the
+    LLM exit selection — None when every root is private_user (fail
+    closed: no document may reach the external LLM).
+
+    Allowlist rule: a root feeds the LLM unless it EXPLICITLY declares
+    privacy_class='private_user'.  Unknown/future vocabulary values stay
+    selectable on purpose: the 3.x loader forces the closed vocabulary
+    (company_raw -> public, external -> private_user), while 2.x/legacy
+    configs carry no privacy field and must keep their historical
+    summarizable behavior until GP-007 upgrades the production config.
+    """
+    public_root_ids = tuple(
+        str(root.root_id)
+        for root in config.roots
+        if str(getattr(root, "privacy_class", "public") or "public")
+        != _PRIVATE_PRIVACY_CLASS
+    )
+    if not public_root_ids:
+        return None
+    return ",".join("?" for _ in public_root_ids), public_root_ids
+
+
 def summarize_catalog_with_llm(
     config: CatalogConfig,
     store: CatalogStore,
@@ -282,13 +352,16 @@ def summarize_catalog_with_llm(
     retry_backoff_seconds: int = 3600,
     progress: Callable[..., None] | None = None,
 ) -> LLMSummaryReport:
-    if (
-        limit <= 0
-        or max_input_chars <= 0
-        or max_output_tokens <= 0
-        or retry_backoff_seconds <= 0
-    ):
-        raise ValueError("LLM summary limits must be positive")
+    _validate_summary_limits(
+        limit=limit,
+        max_input_chars=max_input_chars,
+        max_output_tokens=max_output_tokens,
+        retry_backoff_seconds=retry_backoff_seconds,
+    )
+    gate = _llm_exit_gate_roots(config)
+    if gate is None:
+        return LLMSummaryReport("summarize_llm", skipped=0)
+    allowed_root_sql, public_root_ids = gate
     batch_time = time.time()
     rows = store.fetchall(
         f"""SELECT d.*,a.path AS normalized_path,a.status AS normalized_status,
@@ -312,8 +385,28 @@ def summarize_catalog_with_llm(
             AND failure.generator_name=? AND failure.generator_version=?
             AND failure.retry_after>?
         )
+        AND json_extract(d.metadata_json, '$.{PROMPT_INJECTION_REVIEW_KEY}.schema_version') = ?
+        AND json_extract(d.metadata_json, '$.{PROMPT_INJECTION_REVIEW_KEY}.status')
+            IN ({_REVIEW_STATUS_SQL})
+        AND json_extract(d.metadata_json, '$.{PROMPT_INJECTION_REVIEW_KEY}.source_sha256')
+            = s.content_sha256
+        AND NOT EXISTS (
+            SELECT 1 FROM locations private_loc
+            WHERE private_loc.document_id=d.document_id
+            AND private_loc.location_status='active'
+            AND private_loc.root_id NOT IN ({allowed_root_sql})
+        )
         ORDER BY {processing_priority_sql('d')}, d.document_id LIMIT ?""",
-        (_GENERATOR_NAME, _GENERATOR_NAME, SUMMARIZER_VERSION, batch_time, limit),
+        (
+            _GENERATOR_NAME,
+            _GENERATOR_NAME,
+            SUMMARIZER_VERSION,
+            batch_time,
+            PROMPT_INJECTION_REVIEW_SCHEMA_VERSION,
+            *_REVIEW_STATUSES,
+            *public_root_ids,
+            limit,
+        ),
     )
     if not rows:
         return LLMSummaryReport("summarize_llm", skipped=0)
