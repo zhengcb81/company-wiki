@@ -4,9 +4,14 @@ Lock the two production config entries so a future drift is caught in CI:
 
 - CONFIG-DBX-01: production YAML loads; ``dropbox_stock`` kind/path/priority
   unchanged; ``directory`` is listed in ``reusable_root_kinds``.
-- CONFIG-DBX-02: every root with ``kind=directory`` has root_id EXACTLY
-  ``{dropbox_stock}``; adding ANY second directory root must fail (the
-  kind-level grant would otherwise auto-whitelist the new root).
+- CONFIG-DBX-02: kind=directory roots are EXACTLY the allowlisted pair
+  ``{dropbox_stock, future_lake}``. dropbox_stock alone since WU-2A.1;
+  ``future_lake`` was added deliberately by ZR-409 (commit eb3aa79 — fourth
+  root by CONFIG ONLY, kind ``directory`` + sidecar adapter, pinned by
+  tests/contract/test_zr409_fourth_root_real_journeys.py), so the invariant
+  now locks the pair.  Any OTHER directory root must fail: the kind-level
+  grant in ``reusable_root_kinds`` would otherwise auto-whitelist the new
+  root, which is exactly the drift this gate exists to catch.
 
 CONFIG-DBX-03/04 (filing-fetch side) live in the filing-fetch repo.
 """
@@ -18,6 +23,9 @@ from pathlib import Path
 
 WIKI_ROOT = Path(__file__).resolve().parents[2]
 CONFIG_PATH = WIKI_ROOT / "config" / "source_catalog.yaml"
+
+# The only directory-kind roots the production grant may whitelist.
+_ALLOWED_DIRECTORY_ROOTS = frozenset({"dropbox_stock", "future_lake"})
 
 
 def _load_config() -> dict:
@@ -50,19 +58,22 @@ def test_config_dbx_01_dropbox_reusable_and_fields_frozen() -> None:
         assert entry["kind"] == kind and entry["priority"] == priority
 
 
-def test_config_dbx_02_only_dropbox_is_directory_kind() -> None:
+def test_config_dbx_02_directory_kinds_are_exactly_allowlisted() -> None:
     data = _load_config()
     directory_roots = {
         str(r.get("root_id")) for r in data["roots"] if r.get("kind") == "directory"
     }
-    assert directory_roots == {"dropbox_stock"}, (
-        f"kind=directory roots must be exactly {{dropbox_stock}}, got {directory_roots}"
+    assert directory_roots == _ALLOWED_DIRECTORY_ROOTS, (
+        "kind=directory roots must be exactly the allowlisted set "
+        f"{sorted(_ALLOWED_DIRECTORY_ROOTS)}, got {sorted(directory_roots)}"
     )
 
 
-def test_config_dbx_02_fixture_second_directory_root_fails() -> None:
-    """A second directory root in a fixture config must be rejected by the
-    same invariant — proves the check can catch a future drift."""
+def test_config_dbx_02_fixture_third_directory_root_is_caught() -> None:
+    """A THIRD directory root — outside the allowlisted pair — in a fixture
+    config must be caught by the same invariant: proves the gate detects a
+    future drift (an unapproved root would otherwise be auto-whitelisted by
+    the kind-level grant)."""
     import yaml
 
     data = _load_config()
@@ -81,5 +92,5 @@ def test_config_dbx_02_fixture_second_directory_root_fails() -> None:
         for r in yaml.safe_load(raw)["roots"]
         if r.get("kind") == "directory"
     }
-    assert directory_roots != {"dropbox_stock"}, "fixture must introduce a 2nd directory root"
-    assert len(directory_roots) == 2
+    assert "other_dir" in directory_roots, "fixture must introduce a 3rd directory root"
+    assert len(directory_roots) == len(_ALLOWED_DIRECTORY_ROOTS) + 1
