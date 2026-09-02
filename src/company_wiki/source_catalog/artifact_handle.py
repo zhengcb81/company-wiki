@@ -95,8 +95,12 @@ def validate_artifact(
         return _reject(artifact, "artifact_source_binding_mismatch")
     # The artifact must derive from the exact source bytes the catalog holds
     # (wrong source_sha = stale/mismatched derivation even with matching id).
+    # A missing source_sha is also rejected (fail-closed): an artifact that
+    # cannot prove its source-byte binding must never be reusable.
     artifact_source_sha = str(artifact.get("source_sha256") or "")
-    if artifact_source_sha and artifact_source_sha != str(source.get("source_sha256") or ""):
+    if not artifact_source_sha:
+        return _reject(artifact, "artifact_source_sha_missing")
+    if artifact_source_sha != str(source.get("source_sha256") or ""):
         return _reject(artifact, "artifact_source_sha_mismatch")
     path = Path(str(artifact.get("path") or ""))
     if not path.is_file():
