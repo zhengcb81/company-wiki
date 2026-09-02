@@ -24,8 +24,6 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-import pytest
-
 from company_wiki.source_catalog import CatalogConfig, RootSpec, SourceCatalog
 from company_wiki.source_catalog.scanner import scan_catalog, scan_root_strategy
 from company_wiki.source_catalog.store import CatalogStore
