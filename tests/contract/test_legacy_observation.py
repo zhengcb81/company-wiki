@@ -376,3 +376,128 @@ def test_leg10g_gate_fires_after_two_completed_zero_hit_windows():
     periods.append(_window(3, started_at="2026-08-11T00:00:00Z", ended_at=None))
     allowed, reasons = close_gate_allowed(periods)
     assert allowed, reasons  # periods 1+2 completed, zero hits, >=24h each
+
+
+# --- GP-008: sample pass must be snapshot-gated (mirror the resolver) --------
+
+
+def _sample_catalog(tmp_path, *, policy: dict | None, keep_policy: bool = True):
+    """Build a tiny catalog with ONE regulatory_filing document whose
+    metadata_json contains an acquisition container, plus an optional
+    runtime_policy snapshot — the observe() sample-pass fixture."""
+    import json as _json
+
+    from company_wiki.source_catalog import CatalogConfig, SourceCatalog
+    from company_wiki.source_catalog.models import RootSpec
+
+    raw = tmp_path / "companies" / "紫金矿业" / "raw" / "financial_reports" / "annual"
+    raw.mkdir(parents=True)
+    body = b"%PDF-1.4 sample"
+    (raw / "1222870413.pdf").write_bytes(body)
+    (raw / "1222870413.pdf.source.json").write_text(_json.dumps({
+        "market": "CN", "security_id": "601899",
+        "source_title": "紫金矿业 2024", "fiscal_year": 2024,
+        "filing_date": "2025-03-20", "form_type": "annual_report",
+        "document_kind": "annual_report", "provider": "cninfo",
+        "provider_document_id": "1222870413",
+        "source_url": "https://provider.example/1222870413",
+    }, ensure_ascii=False), encoding="utf-8")
+    catalog = SourceCatalog(
+        CatalogConfig(
+            project_root=tmp_path,
+            catalog_dir=tmp_path / ".source_catalog",
+            reusable_root_kinds=("company_raw",),
+            roots=(RootSpec("company_raw", tmp_path / "companies", "company_raw",
+                            priority=10, adapter_id="company_raw_v1",
+                            read_only=False, reusable_for_filing=True,
+                            canonical_write_target="companies"),),
+        )
+    )
+    catalog.scan()
+    db_path = tmp_path / ".source_catalog" / "catalog.sqlite3"
+    # inject the acquisition container + regulatory_filing identity exactly
+    # like the acquisition pipeline would (direct tmp write is fine)
+    import sqlite3 as _sqlite3
+
+    wcon = _sqlite3.connect(str(db_path))
+    row = wcon.execute(
+        "SELECT document_id, primary_source_id FROM documents LIMIT 1").fetchone()
+    assert row is not None
+    wcon.execute(
+        "UPDATE documents SET source_type='regulatory_filing', "
+        "source_status='active', metadata_json=? WHERE document_id=?",
+        (_json.dumps({"acquisition": {"fiscal_year": 2025, "market": "CN"}},
+                     ensure_ascii=False), row[0]))
+    wcon.commit()
+    wcon.close()
+    if policy is not None:
+        from company_wiki.source_catalog.runtime_policy import snapshot_hash
+
+        policy = dict(policy)
+        policy["snapshot_sha256"] = snapshot_hash(policy)
+        (tmp_path / ".source_catalog" / "runtime_policy.json").write_text(
+            _json.dumps(policy, ensure_ascii=False), encoding="utf-8")
+    elif not keep_policy:
+        (tmp_path / ".source_catalog" / "runtime_policy.json").unlink(
+            missing_ok=True)
+    return db_path
+
+
+def _observe_sample(db_path):
+    sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "scripts"))
+    from legacy_observer import observe  # noqa: E402
+
+    return observe(db_path)
+
+
+def test_leg12_sample_pass_snapshot_bridge_off_zero_hits(tmp_path):
+    """GP-008: the sample pass mirrors the production resolver — when the
+    pinned snapshot disables the legacy bridge (production state), reading
+    an acquisition container is NOT allowed, so no legacy_bridge_hit is
+    recorded.  Previously the sample pass used legacy defaults (reader=v1,
+    bridge on) and over-counted hits for documents production resolves
+    bridge-free (measured 54/62 on the real catalog vs canary 0)."""
+    policy = {
+        "schema_version": "1.0",
+        "policy_hash": "a" * 64,
+        "flags": {"v2_resolve_active": True, "legacy_bridge_enabled": False,
+                  "v2_bundle_active": False, "v2_persist_assertions": True,
+                  "v2_resolve_shadow": True, "v2_scan_shadow": True},
+        "current_epoch": "e1",
+        "active_cohorts": ["c1"],
+        "updated_at": "2026-09-01T00:00:00Z",
+    }
+    db = _sample_catalog(tmp_path, policy=policy)
+    result = _observe_sample(db)
+    assert result["sampled_documents"] == 1
+    assert result["legacy_bridge_hits"] == 0, result
+    assert result["legacy_bridge_enabled"] is False
+    assert result["reader"] == "v2"
+
+
+def test_leg12b_sample_pass_snapshot_bridge_on_records_hit(tmp_path):
+    """The gate is real, not hardcoded: with the bridge ENABLED in the
+    snapshot, the same container read records exactly one hit."""
+    policy = {
+        "schema_version": "1.0",
+        "policy_hash": "b" * 64,
+        "flags": {"v2_resolve_active": True, "legacy_bridge_enabled": True,
+                  "v2_bundle_active": False, "v2_persist_assertions": True,
+                  "v2_resolve_shadow": True, "v2_scan_shadow": True},
+        "current_epoch": "e1",
+        "active_cohorts": ["c1"],
+        "updated_at": "2026-09-01T00:00:00Z",
+    }
+    db = _sample_catalog(tmp_path, policy=policy)
+    result = _observe_sample(db)
+    assert result["legacy_bridge_hits"] == 1, result
+    assert result["legacy_bridge_enabled"] is True
+
+
+def test_leg12c_sample_pass_absent_snapshot_keeps_legacy_default(tmp_path):
+    """Absent snapshot = the pre-FC-201 production default (bridge on) —
+    the sample pass behaves exactly like the resolver in that state."""
+    db = _sample_catalog(tmp_path, policy=None)
+    result = _observe_sample(db)
+    assert result["legacy_bridge_hits"] == 1, result
+    assert result["snapshot_policy_hash"] is None

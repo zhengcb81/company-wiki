@@ -28,7 +28,10 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 from company_wiki.source_catalog.observability import MetricsCollector  # noqa: E402
-from company_wiki.source_catalog.resolver import _source_metadata  # noqa: E402
+from company_wiki.source_catalog.resolver import (  # noqa: E402
+    _source_metadata,
+    resolver_visibility,
+)
 from company_wiki.source_catalog.service import SourceCatalog  # noqa: E402
 
 
@@ -42,11 +45,31 @@ def observe(
     Mirrors the production resolver path: the observer is attached to a
     v2-first read WITH the catalog store, so documents that now resolve
     through active v2 assertions do NOT record legacy_bridge_hits.
+
+    Snapshot-gated (GP-008): a pinned runtime-policy snapshot governs
+    reader / epoch / cohorts / legacy_bridge_allowed exactly like
+    SourceResolver — absent snapshot keeps the pre-FC-201 production
+    default (bridge on, v1 reader).  Under the production snapshot
+    (bridge disabled) no container read is allowed, so a zero-hit window
+    reflects real production semantics instead of legacy-default
+    over-counting.
     """
     con = sqlite3.connect(f"file:{catalog}?mode=ro", uri=True)
     con.row_factory = sqlite3.Row
     con.execute("PRAGMA query_only = ON")
     collector = MetricsCollector()
+
+    snapshot = _load_policy(catalog.parent)
+    if snapshot is None:
+        # pre-FC-201 production default (mirrors SourceResolver)
+        reader: str = "v1"
+        epoch: str | None = None
+        cohorts: tuple[str, ...] = ()
+        bridge = True
+        policy_hash = None
+    else:
+        reader, epoch, cohorts, bridge = resolver_visibility(snapshot)
+        policy_hash = snapshot.get("policy_hash")
 
     class _StoreFacade:
         def __init__(self, connection):
@@ -75,7 +98,9 @@ def observe(
             metadata = {}
         _source_metadata({"source_id": row["primary_source_id"],
                           "metadata": metadata}, store=store,
-                         observer=collector)
+                         observer=collector, reader=reader,
+                         current_epoch=epoch, active_cohorts=cohorts,
+                         legacy_bridge_allowed=bridge)
     con.close()
     report = collector.snapshot()
     return {
@@ -83,6 +108,10 @@ def observe(
         "legacy_bridge_hits": report.legacy_bridge_hits,
         "shadow_diffs": report.shadow_diffs,
         "reasons": report.aggregate("reason"),
+        "mode": "sample",
+        "reader": reader,
+        "legacy_bridge_enabled": bridge,
+        "snapshot_policy_hash": policy_hash,
     }
 
 
