@@ -4,6 +4,12 @@ catalog_dir: "${PROJECT_ROOT}/.source_catalog"
 # (config-driven, ADR-008). company_raw is the default; adding a kind here
 # makes every already-indexed document under such roots reusable without a
 # download (filing-fetch path allowance must list the corresponding dirs).
+#
+# Privacy decision (2026-09-03, repo owner): the private_user classification
+# is retired for the production catalog — all roots are public and their
+# documents may be sent to external LLMs (after the GP-003 review-receipt
+# gate).  The LLM exit gate code still enforces privacy_class=private_user
+# when a root explicitly declares it (defense in depth for future roots).
 reusable_root_kinds: [company_raw, dayu_portfolio, directory]
 roots:
   - root_id: company_raw
@@ -15,12 +21,12 @@ roots:
     kind: dayu_portfolio
     path: "${PROJECT_ROOT}/../dayu-agent/workspace/portfolio"
     priority: 20
-    privacy_class: private_user
+    privacy_class: public
   - root_id: dropbox_stock
     kind: directory
     path: "${USER_PROFILE}/Dropbox/Stock"
     priority: 30
-    privacy_class: private_user
+    privacy_class: public
   # ZR-409 (EX-08): a future root joins by CONFIG ONLY — kind directory +
   # registered sidecar adapter, read-only, reusable.  No product code change
   # is needed for a new root (the whole point of the adapter registry).
@@ -31,4 +37,4 @@ roots:
     read_only: true
     reusable_for_filing: true
     priority: 40
-    privacy_class: private_user
+    privacy_class: public
