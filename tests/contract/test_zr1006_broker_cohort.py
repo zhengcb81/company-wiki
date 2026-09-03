@@ -8,9 +8,12 @@ DemandQueue/DemandScheduler plus a temp catalog for artifact-write
 semantics (C2-C5).  Zero product changes, zero LLM calls, zero network.
 
   C1  production snapshot (read-only): the seven golden-corpus Zijin
-      broker samples are all active in the production catalog with ZERO
-      artifacts (honest "pending processing" state) — the minimal cohort
-      the card must handle first.
+      broker samples are all active in the production catalog and, since
+      the owner-approved GP-010 processing (2026-09-03), carry completed
+      v2 normalized artifacts (6/7 additionally carry LLM summaries —
+      zijin_broker_20260324_glms was correctly rejected by the
+      _FORBIDDEN_OUTPUT safety gate, fail-closed) — the processed state
+      the cohort pipeline must never re-do.
   C2  ramp 1 -> 3 -> 7: a broker-processing scheduler built on
       DemandQueue + DemandScheduler processes the cohort in growing
       canary waves; per-wave completed sets are exactly the cohort
@@ -136,9 +139,11 @@ def _table_count(path: Path, table: str) -> int:
 # ---------------------------------------------------------------------------
 
 
-def test_c1_seven_zijin_brokers_active_zero_artifacts():
+def test_c1_seven_zijin_brokers_active_with_processed_artifacts():
     """The minimal cohort exists in the production catalog as active docs
-    with no artifacts — honest 'pending processing' state (read-only)."""
+    whose owner-approved processing (GP-010, 2026-09-03) is on disk: every
+    broker has >=1 completed 'normalized' artifact, and every artifact row
+    present is completed (no half-written state).  Read-only snapshot."""
     samples = _golden_broker_samples()
     con = sqlite3.connect(f"file:{PRODUCTION_CATALOG}?mode=ro", uri=True, timeout=30)
     try:
@@ -146,7 +151,9 @@ def test_c1_seven_zijin_brokers_active_zero_artifacts():
             row = con.execute(
                 "SELECT s.source_id, d.document_id, d.document_kind, "
                 "d.source_status, "
-                "(SELECT COUNT(*) FROM artifacts a WHERE a.document_id=d.document_id) "
+                "(SELECT COUNT(*) FROM artifacts a WHERE a.document_id=d.document_id), "
+                "(SELECT COUNT(*) FROM artifacts a WHERE a.document_id=d.document_id "
+                "  AND a.artifact_role='normalized' AND a.status='completed') "
                 "FROM sources s LEFT JOIN documents d "
                 "ON d.primary_source_id = s.source_id WHERE s.content_sha256=?",
                 (sample["sha256"],),
@@ -154,7 +161,18 @@ def test_c1_seven_zijin_brokers_active_zero_artifacts():
             assert row is not None, f"{sample['sample_id']} missing in catalog"
             assert row[2] == "broker_research", row
             assert row[3] == "active", row
-            assert row[4] == 0, f"{sample['sample_id']} already has artifacts: {row[4]}"
+            assert row[4] >= 1, (
+                f"{sample['sample_id']} has no artifacts "
+                f"(GP-010 processed state expected): {row[4]}")
+            assert row[5] >= 1, (
+                f"{sample['sample_id']} missing a completed normalized artifact: {row[5]}")
+            incomplete = con.execute(
+                "SELECT COUNT(*) FROM artifacts a WHERE a.document_id=? "
+                "AND a.status != 'completed'",
+                (row[1],),
+            ).fetchone()[0]
+            assert incomplete == 0, (
+                f"{sample['sample_id']} has non-completed artifact rows: {incomplete}")
     finally:
         con.close()
 
