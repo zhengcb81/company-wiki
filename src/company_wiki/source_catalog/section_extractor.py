@@ -52,7 +52,34 @@ SECTION_KEYWORDS_LOW: dict[str, str] = {
 }
 
 # Document kinds that carry the section structure this module targets.
-TARGET_DOCUMENT_KINDS = ("annual_report", "semi_annual_report", "prospectus")
+TARGET_DOCUMENT_KINDS = ("annual_report", "semi_annual_report", "prospectus",
+                         "broker_research")
+
+# Broker research reports use standalone investment keywords as section
+# boundaries (not the "第X节/章" convention).  These keywords appear at
+# the start of a line and map to semantic roles for investment analysis.
+BROKER_INVESTMENT_KEYWORDS: dict[str, str] = {
+    "报告要点": "investment_highlights",
+    "核心看点": "investment_highlights",
+    "投资要点": "investment_highlights",
+    "投资建议": "earnings_forecast",
+    "投资评级": "earnings_forecast",
+    "风险提示": "risk_warning",
+    "盈利预测": "financial_forecast",
+    "盈利预测与财务指标": "financial_forecast",
+}
+
+# Broker heading regex: standalone investment keywords at line start,
+# optionally preceded by a Chinese/Arabic number prefix (一、 or 1、 etc.)
+# and optionally followed by a colon.  Annual/semi-annual anchors do not
+# apply; broker reports' keyword lines are the primary structure.
+_KEYWORDS_RE = "|".join(re.escape(k) for k in BROKER_INVESTMENT_KEYWORDS)
+BROKER_SECTION_RE = re.compile(
+    r"^\s*(?:[一二三四五六七八九十百千]+\s*[、.．]\s*|"
+    r"\d+\s*[、.．]\s*)?"
+    "(" + _KEYWORDS_RE + r")[：:]?[ \t]*$",
+    re.MULTILINE,
+)
 
 
 @dataclass(frozen=True)
@@ -115,6 +142,63 @@ def extract_sections_from_text(text: str) -> list[SectionSlice]:
                 role=role,
                 title=title,
                 ordinal=ordinal,
+                char_start=start,
+                char_end=char_end,
+                body=body[start:char_end],
+            )
+        )
+    return slices
+
+
+def _classify_broker(title: str) -> str | None:
+    """Map a broker section title to a role via keyword containment."""
+    # Check keywords longest-first to prefer longer matches
+    # (盈利预测与财务指标 before 盈利预测)
+    for keyword, role in sorted(BROKER_INVESTMENT_KEYWORDS.items(),
+                                key=lambda kv: -len(kv[0])):
+        if keyword in title:
+            return role
+    return None
+
+
+def extract_broker_sections_from_text(text: str) -> list[SectionSlice]:
+    """Split a normalized broker research report into high-value sections.
+
+    Broker reports use standalone investment keywords (投资建议/风险提示/
+    盈利预测/报告要点 etc.) as section headings, optionally prefixed with
+    Chinese/Arabic numbering.  The regex matches these keyword lines; only
+    titles mapping to a known role are emitted, but every matched keyword
+    line still serves as a boundary so slice bodies are contiguous and
+    non-overlapping.
+
+    Cover-page exclusion: broker report cover pages carry keyword-like
+    labels (投资评级 / 盈利预测与财务指标 as cover fields, not sections).
+    When ``## Page`` markers exist, matching starts after the first page
+    marker (page 1 = cover); bodies without markers match from the start.
+    """
+    body = _strip_frontmatter(text)
+    search_from = 0
+    page_markers = list(PAGE_MARKER_RE.finditer(body))
+    if len(page_markers) >= 2:
+        # Page 1 is the cover: keyword hits on it are labels (投资评级 as
+        # a cover field), not sections.  Start matching at the page-2
+        # marker so cover content is excluded entirely.
+        search_from = page_markers[1].start()
+    headings = [
+        (m.group(1).strip(), m.start())
+        for m in BROKER_SECTION_RE.finditer(body, search_from)
+    ]
+    slices: list[SectionSlice] = []
+    for index, (title, start) in enumerate(headings):
+        role = _classify_broker(title)
+        if role is None:
+            continue
+        char_end = headings[index + 1][1] if index + 1 < len(headings) else len(body)
+        slices.append(
+            SectionSlice(
+                role=role,
+                title=title,
+                ordinal="",
                 char_start=start,
                 char_end=char_end,
                 body=body[start:char_end],
@@ -234,7 +318,10 @@ def extract_sections_catalog(
             last_failed_document_id = document["document_id"]
             last_failed_path = str(normalized_path.resolve(strict=False))
             continue
-        slices = extract_sections_from_text(text)
+        if document["document_kind"] == "broker_research":
+            slices = extract_broker_sections_from_text(text)
+        else:
+            slices = extract_sections_from_text(text)
         if not slices:
             skipped += 1
             continue
