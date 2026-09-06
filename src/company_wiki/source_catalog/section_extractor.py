@@ -241,6 +241,13 @@ def _atomic_write(path: Path, text: str) -> None:
         temporary.unlink(missing_ok=True)
 
 
+def _extract_sections_for_kind(text: str, kind: str) -> list[SectionSlice]:
+    """Dispatch section extraction by document kind (broker vs annual/prospectus)."""
+    if kind == "broker_research":
+        return extract_broker_sections_from_text(text)
+    return extract_sections_from_text(text)
+
+
 def extract_sections_catalog(
     config: CatalogConfig,
     store: CatalogStore,
@@ -318,10 +325,7 @@ def extract_sections_catalog(
             last_failed_document_id = document["document_id"]
             last_failed_path = str(normalized_path.resolve(strict=False))
             continue
-        if document["document_kind"] == "broker_research":
-            slices = extract_broker_sections_from_text(text)
-        else:
-            slices = extract_sections_from_text(text)
+        slices = _extract_sections_for_kind(text, document["document_kind"])
         if not slices:
             skipped += 1
             continue

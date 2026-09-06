@@ -85,6 +85,12 @@ def _external_catalog(tmp_path: Path) -> SourceCatalog:
     source_root = tmp_path / "sources"
     source_root.mkdir()
     (source_root / "annual.txt").write_text(_SOURCE_TEXT, encoding="utf-8")
+    # Explicit sidecar: directory-root files default to broker_research;
+    # this fixture IS an annual report (section headings use 第X节).
+    (source_root / "annual.txt.source.json").write_text(
+        json.dumps({"document_kind": "annual_report"}, ensure_ascii=False),
+        encoding="utf-8",
+    )
     catalog = SourceCatalog(
         CatalogConfig(
             project_root=project,
