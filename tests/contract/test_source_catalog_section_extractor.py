@@ -147,7 +147,14 @@ def test_extract_sections_writes_artifact_and_is_idempotent(tmp_path):
     )
     catalog.scan()
     catalog.normalize()
-    doc_id = catalog.store.fetchone("SELECT document_id FROM documents")["document_id"]
+    # Deterministic selection: for a generic "directory" root the legacy
+    # scanner ALSO registers the .source.json sidecar file as its own
+    # standalone document (kind=broker_research), so a bare first-row
+    # fetch is OS-dependent (directory enumeration order).  The fixture's
+    # intent is the annual_report document — select it by kind.
+    doc_id = catalog.store.fetchone(
+        "SELECT document_id FROM documents WHERE document_kind='annual_report'"
+    )["document_id"]
 
     report = catalog.extract_sections(document_id=doc_id)
     assert report.completed == 1
