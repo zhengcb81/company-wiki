@@ -358,3 +358,32 @@ def test_broker_skips_cover_page_matches():
     assert "盈利预测与财务指标" not in risk.body
     # Char offsets must remain body-relative (start after the cover text).
     assert risk.char_start > 0
+
+
+def test_c9_dispatch_broker_kind_routes_to_broker_extraction():
+    """_extract_sections_for_kind dispatches by document kind: broker_research
+    goes through extract_broker_sections_from_text (broker keywords), all
+    other kinds go through extract_sections_from_text (第X节 headings).
+    This covers the dispatch branch that integration tests miss (they call
+    catalog.extract_sections which routes internally)."""
+    from company_wiki.source_catalog.section_extractor import (
+        _extract_sections_for_kind,
+    )
+
+    broker_text = "投资建议\n\n维持买入评级。\n\n风险提示\n\n铜价波动。"
+    annual_text = "第一节 释义\n\n内容。\n\n第四节 经营情况讨论与分析\n\nMD&A。"
+
+    broker_slices = _extract_sections_for_kind(broker_text, "broker_research")
+    assert broker_slices, "broker kind must route to broker extraction"
+    assert broker_slices[0].role == "earnings_forecast"
+    assert any(s.role == "risk_warning" for s in broker_slices)
+
+    annual_slices = _extract_sections_for_kind(annual_text, "annual_report")
+    assert annual_slices, "annual kind must route to 第X节 extraction"
+    assert any(s.role == "mda" for s in annual_slices)
+
+    # broker text through the ANNUAL path yields nothing (no 第X节)
+    assert _extract_sections_for_kind(broker_text, "annual_report") == []
+    # annual text through the BROKER path yields nothing (no broker keywords
+    # as standalone lines)
+    assert _extract_sections_for_kind(annual_text, "broker_research") == []
