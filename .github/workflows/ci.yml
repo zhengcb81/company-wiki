@@ -10,6 +10,10 @@ jobs:
   test:
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false  # root-fix: all 3 Python versions run to completion —
+      # one failure no longer cancels the others, so a single run exposes
+      # ALL failures (previously 3.11 failing cancelled 3.12/3.13, hiding
+      # whether they also had issues)
       matrix:
         python-version: ["3.11", "3.12", "3.13"]
 
