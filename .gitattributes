@@ -1,0 +1,4 @@
+# Hook scripts must stay LF on every platform: a CRLF shebang line
+# (#!/usr/bin/env bash\r) breaks git's hook spawn on Windows
+# ("cannot spawn .githooks/pre-push: No such file or directory").
+/.githooks/** text eol=lf
