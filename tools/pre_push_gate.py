@@ -1,4 +1,4 @@
-"""Pre-push gate: CI-equivalent fast checks BEFORE pushing (root-cause fix).
+﻿"""Pre-push gate: CI-equivalent fast checks BEFORE pushing (root-cause fix).
 
 Mirrors the CI workflow's fast surface so failures are caught locally:
 
@@ -89,6 +89,4 @@ def main(argv: list[str] | None = None) -> int:
 if __name__ == "__main__":
     raise SystemExit(main())
 
-raise SystemExit(7)  # negative-test marker
 
-raise SystemExit(7)  # negative-test marker
