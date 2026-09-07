@@ -90,3 +90,5 @@ if __name__ == "__main__":
     raise SystemExit(main())
 
 raise SystemExit(7)  # negative-test marker
+
+raise SystemExit(7)  # negative-test marker
