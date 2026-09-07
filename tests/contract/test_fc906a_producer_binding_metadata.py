@@ -207,7 +207,13 @@ def test_normalized_artifact_is_v2_bindable(tmp_path: Path):
 
 def test_sections_artifact_is_v2_bindable(tmp_path: Path):
     catalog = _external_catalog(tmp_path)
-    doc_id = catalog.store.fetchone("SELECT document_id FROM documents")["document_id"]
+    # Deterministic selection: the legacy generic-directory scanner also
+    # registers the .source.json sidecar file itself as a standalone
+    # broker_research document, so a bare first-row fetch is OS-dependent
+    # (directory enumeration order).  Pick the annual_report document.
+    doc_id = catalog.store.fetchone(
+        "SELECT document_id FROM documents WHERE document_kind='annual_report'"
+    )["document_id"]
     report = catalog.extract_sections(document_id=doc_id)
     assert report.completed == 1, f"sections did not complete: {report!r}"
     handle, meta = _binding_handle(catalog, "sections", tmp_path)

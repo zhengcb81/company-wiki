@@ -150,15 +150,22 @@ def extract_sections_from_text(text: str) -> list[SectionSlice]:
     return slices
 
 
-def _classify_broker(title: str) -> str | None:
-    """Map a broker section title to a role via keyword containment."""
-    # Check keywords longest-first to prefer longer matches
-    # (盈利预测与财务指标 before 盈利预测)
+def _classify_broker(title: str) -> str:
+    """Map a broker section title to a role via keyword containment.
+
+    The regex (BROKER_SECTION_RE) only matches lines that contain one of
+    the keywords from BROKER_INVESTMENT_KEYWORDS, so classification is
+    guaranteed to succeed — this function never returns None for any
+    regex-matched title (verified empirically).  The longest-first sort
+    prefers 盈利预测与财务指标 over 盈利预测.
+    """
     for keyword, role in sorted(BROKER_INVESTMENT_KEYWORDS.items(),
                                 key=lambda kv: -len(kv[0])):
         if keyword in title:
             return role
-    return None
+    # Unreachable for regex-matched titles (regex and classifier share the
+    # same keyword dict); kept as a defensive assertion.
+    raise ValueError(f"broker section title matched regex but no keyword: {title!r}")
 
 
 def extract_broker_sections_from_text(text: str) -> list[SectionSlice]:
@@ -190,9 +197,7 @@ def extract_broker_sections_from_text(text: str) -> list[SectionSlice]:
     ]
     slices: list[SectionSlice] = []
     for index, (title, start) in enumerate(headings):
-        role = _classify_broker(title)
-        if role is None:
-            continue
+        role = _classify_broker(title)  # never None for regex-matched titles
         char_end = headings[index + 1][1] if index + 1 < len(headings) else len(body)
         slices.append(
             SectionSlice(
