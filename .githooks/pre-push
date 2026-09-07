@@ -1,0 +1,40 @@
+#!/usr/bin/env python3
+"""Pre-push gate hook (root-cause fix, 2026-09-07): BLOCKS any push that
+fails the CI-equivalent fast surface.  See revenue-forecast
+assurance/runs/2026-09-02_remaining-gap-closure/ci_root_fix.md.
+
+Installed as .githooks/pre-push (git config core.hooksPath .githooks).
+Every `git push` runs tools/pre_push_gate.py first; a red gate aborts
+the push BEFORE anything reaches GitHub CI.  This closes the loop that
+previously let local-green/CI-red commits through repeatedly.
+
+To install on a fresh clone:
+    git config core.hooksPath .githooks
+"""
+
+from __future__ import annotations
+
+import subprocess
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+
+
+def main() -> int:
+    gate = ROOT / "tools" / "pre_push_gate.py"
+    if not gate.is_file():
+        print("pre-push gate: tools/pre_push_gate.py missing — skipping", file=sys.stderr)
+        return 0
+    proc = subprocess.run(
+        [sys.executable, str(gate)],
+        cwd=str(ROOT),
+    )
+    if proc.returncode != 0:
+        print("\nPUSH BLOCKED by pre-push gate (CI root-fix protocol). "
+              "Fix the root cause; do not bypass.", file=sys.stderr)
+    return proc.returncode
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
