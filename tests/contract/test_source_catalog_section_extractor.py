@@ -360,6 +360,116 @@ def test_broker_skips_cover_page_matches():
     assert risk.char_start > 0
 
 
+# ---------------------------------------------------------------------------
+# List-style broker reports (GP-010 sections gap): numbered headings whose
+# title carries a descriptive suffix, e.g. "9  盈利预测与投资建议" and
+# "10  风险提示" (Arabic numeral + whitespace, no 、/． separator).  The
+# original broker regex only accepted a bare keyword line optionally
+# prefixed by "N、" / "N." and therefore extracted ZERO sections for these
+# reports (real docs: 民生证券 20250323, 国联民生 20260324).
+# ---------------------------------------------------------------------------
+
+
+BROKER_LIST_STYLE = """\
+---
+artifact_role: normalized
+document_id: urn:test:broker-list-style
+---
+
+# 某公司2025年年报深度点评
+
+1  事件：公司发布2025年年报
+
+2025年公司实现营业收入3490.8亿元，同比增长14.96%。
+
+9  盈利预测与投资建议
+
+我们预计2026-2028年公司归母净利润分别为...
+
+10  风险提示
+
+项目进度不及预期，铜金锂等金属价格下跌，地缘政治风险。
+"""
+
+
+def test_broker_list_style_numbered_headings_extracted():
+    """Numbered broker headings with a whitespace separator and a
+    descriptive suffix must be recognized as section boundaries."""
+    from company_wiki.source_catalog.section_extractor import (
+        extract_broker_sections_from_text,
+    )
+
+    slices = extract_broker_sections_from_text(BROKER_LIST_STYLE)
+    roles = [s.role for s in slices]
+    assert roles == ["earnings_forecast", "risk_warning"], roles
+    # The title is the heading text WITHOUT the numbering token.
+    assert slices[0].title == "盈利预测与投资建议"
+    assert slices[1].title == "风险提示"
+    assert "归母净利润" in slices[0].body
+    assert "项目进度不及预期" in slices[1].body
+
+
+def test_broker_list_style_slices_are_contiguous():
+    from company_wiki.source_catalog.section_extractor import (
+        extract_broker_sections_from_text,
+    )
+
+    slices = extract_broker_sections_from_text(BROKER_LIST_STYLE)
+    for s in slices:
+        assert s.char_end > s.char_start
+        assert len(s.body) == s.char_end - s.char_start
+    # The second slice runs to end of body.
+    assert slices[-1].body.rstrip().endswith("地缘政治风险。")
+
+
+def test_broker_chinese_numbered_heading_with_suffix():
+    """The same suffix shape appears with Chinese numbering ("四、 盈利预测
+    与投资建议"), including when the keyword sits on the next line."""
+    from company_wiki.source_catalog.section_extractor import (
+        extract_broker_sections_from_text,
+    )
+
+    text = "四、 \n盈利预测与投资建议 \n\n我们预计2026年归母净利500亿元。\n\n五、 风险提示 \n\n铜价下跌。"
+    slices = extract_broker_sections_from_text(text)
+    assert [s.role for s in slices] == ["earnings_forecast", "risk_warning"]
+    assert slices[0].title == "盈利预测与投资建议"
+
+
+def test_broker_unnumbered_suffix_lines_are_not_headings():
+    """Fail-closed guard for the suffix relaxation: only NUMBERED headings
+    may carry a descriptive suffix.  Un-numbered lines that merely start
+    with a keyword are body text (inline 风险提示：... sentences) or
+    back-matter headings (投资评级说明), never sections."""
+    from company_wiki.source_catalog.section_extractor import (
+        extract_broker_sections_from_text,
+    )
+
+    text = (
+        "报告正文。\n\n"
+        "投资建议：考虑到公司铜金产量持续增长，铜金价格上涨\n\n"
+        "风险提示：项目进度不及预期，铜金锂等金属价格下跌\n\n"
+        "投资评级说明\n\n"
+        "本报告评级标准如下。\n"
+    )
+    assert extract_broker_sections_from_text(text) == []
+
+
+def test_broker_numbered_non_keyword_headings_still_not_boundaries():
+    """The list-style extension must not turn arbitrary numbered lines into
+    boundaries: only numbered lines whose title STARTS with a known keyword
+    qualify (a numbered 事件：/财务分析 heading stays body text)."""
+    from company_wiki.source_catalog.section_extractor import (
+        extract_broker_sections_from_text,
+    )
+
+    text = "9  盈利预测与投资建议\n\n预测正文。\n\n10  风险提示\n\n风险正文。\n\n11  附录：财务分析\n\n附录正文。\n"
+    slices = extract_broker_sections_from_text(text)
+    assert [s.role for s in slices] == ["earnings_forecast", "risk_warning"]
+    # "11  附录：财务分析" is not a keyword heading -> absorbed into the
+    # preceding slice, exactly like the pre-existing non-keyword behaviour.
+    assert "附录正文" in slices[-1].body
+
+
 def test_c9_dispatch_broker_kind_routes_to_broker_extraction():
     """_extract_sections_for_kind dispatches by document kind: broker_research
     goes through extract_broker_sections_from_text (broker keywords), all

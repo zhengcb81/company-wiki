@@ -69,15 +69,29 @@ BROKER_INVESTMENT_KEYWORDS: dict[str, str] = {
     "盈利预测与财务指标": "financial_forecast",
 }
 
-# Broker heading regex: standalone investment keywords at line start,
-# optionally preceded by a Chinese/Arabic number prefix (一、 or 1、 etc.)
-# and optionally followed by a colon.  Annual/semi-annual anchors do not
-# apply; broker reports' keyword lines are the primary structure.
+# Broker heading regex.  Two accepted shapes:
+#   1. bare keyword line, optionally numbered with an explicit separator —
+#      "报告要点" / "五、风险提示" / "6. 风险提示";
+#   2. list-style numbered heading whose title carries a descriptive
+#      suffix — "9  盈利预测与投资建议" / "10  风险提示" (GP-010 sections
+#      gap: 民生证券 20250323 and 国联民生 20260324 deep dives number their
+#      sections with an ordinal + whitespace and no 、/． separator, so the
+#      separator-only form extracted ZERO sections for them).
+# The descriptive suffix is accepted ONLY on a numbered heading; an
+# un-numbered line must still be a bare keyword line.  That keeps inline
+# body sentences ("风险提示：项目进度不及预期，...") and back-matter
+# headings ("投资评级说明") out of the section index, and excluding
+# dot-leaders keeps a table-of-contents line ("10 风险提示 ...... 20")
+# from masquerading as a heading.
 _KEYWORDS_RE = "|".join(re.escape(k) for k in BROKER_INVESTMENT_KEYWORDS)
+_BROKER_ORDINAL_RE = r"(?:[一二三四五六七八九十百千]+|\d{1,3})"
+_BROKER_NUMBERING_RE = _BROKER_ORDINAL_RE + r"\s*(?:[、.．]\s*|\s+)"
+_BROKER_TITLE_SUFFIX_RE = r"[：:、]?[^。，；！？.．\n]{0,20}"
 BROKER_SECTION_RE = re.compile(
-    r"^\s*(?:[一二三四五六七八九十百千]+\s*[、.．]\s*|"
-    r"\d+\s*[、.．]\s*)?"
-    "(" + _KEYWORDS_RE + r")[：:]?[ \t]*$",
+    r"^\s*(?P<number>" + _BROKER_NUMBERING_RE + r")?"
+    r"(?P<title>" + _KEYWORDS_RE + r")"
+    r"(?(number)(?P<suffix>" + _BROKER_TITLE_SUFFIX_RE + r")|[：:]?[ \t]*)"
+    r"$",
     re.MULTILINE,
 )
 
@@ -153,8 +167,8 @@ def extract_sections_from_text(text: str) -> list[SectionSlice]:
 def _classify_broker(title: str) -> str:
     """Map a broker section title to a role via keyword containment.
 
-    The regex (BROKER_SECTION_RE) only matches lines that contain one of
-    the keywords from BROKER_INVESTMENT_KEYWORDS, so classification is
+    The regex (BROKER_SECTION_RE) only matches lines whose title starts with
+    one of the keywords from BROKER_INVESTMENT_KEYWORDS, so classification is
     guaranteed to succeed — this function never returns None for any
     regex-matched title (verified empirically).  The longest-first sort
     prefers 盈利预测与财务指标 over 盈利预测.
@@ -168,15 +182,28 @@ def _classify_broker(title: str) -> str:
     raise ValueError(f"broker section title matched regex but no keyword: {title!r}")
 
 
+def _broker_heading_title(match: re.Match[str]) -> str:
+    """Full heading text: matched keyword plus its descriptive suffix.
+
+    List-style headings carry the section title inline
+    ("9  盈利预测与投资建议").  The ``suffix`` group only participates in
+    the numbered shape, so bare keyword headings yield the keyword alone.
+    """
+    keyword = match.group("title").strip()
+    suffix = (match.group("suffix") or "").strip("：:、 \t")
+    return keyword + suffix
+
+
 def extract_broker_sections_from_text(text: str) -> list[SectionSlice]:
     """Split a normalized broker research report into high-value sections.
 
     Broker reports use standalone investment keywords (投资建议/风险提示/
     盈利预测/报告要点 etc.) as section headings, optionally prefixed with
-    Chinese/Arabic numbering.  The regex matches these keyword lines; only
-    titles mapping to a known role are emitted, but every matched keyword
-    line still serves as a boundary so slice bodies are contiguous and
-    non-overlapping.
+    Chinese/Arabic numbering.  List-style reports instead number the heading
+    with the title inline ("9  盈利预测与投资建议", "10  风险提示"); both
+    shapes are matched by BROKER_SECTION_RE.  Only titles mapping to a known
+    role are emitted, but every matched heading line still serves as a
+    boundary so slice bodies are contiguous and non-overlapping.
 
     Cover-page exclusion: broker report cover pages carry keyword-like
     labels (投资评级 / 盈利预测与财务指标 as cover fields, not sections).
@@ -192,7 +219,7 @@ def extract_broker_sections_from_text(text: str) -> list[SectionSlice]:
         # marker so cover content is excluded entirely.
         search_from = page_markers[1].start()
     headings = [
-        (m.group(1).strip(), m.start())
+        (_broker_heading_title(m), m.start())
         for m in BROKER_SECTION_RE.finditer(body, search_from)
     ]
     slices: list[SectionSlice] = []
