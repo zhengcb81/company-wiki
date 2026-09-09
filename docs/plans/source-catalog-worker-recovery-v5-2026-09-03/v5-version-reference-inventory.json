@@ -14,22 +14,6 @@
         "v5": 1
       }
     },
-    "README.md": {
-      "checker_refs": 0,
-      "cli_commands": [],
-      "filename_version": null,
-      "id_values": [],
-      "old_dir_refs": 2,
-      "plan_revision_values": [],
-      "schema_version_values": [],
-      "sha256": "a83c3b2f8e3f9e2b2fcee9ad469d7cb41a5f1b602e77c438c6877217c8598604",
-      "size_bytes": 4307,
-      "version_tokens": {
-        "v3": 1,
-        "v4": 5,
-        "v5": 6
-      }
-    },
     "baseline/history/plan_manifest.v3.json": {
       "checker_refs": 0,
       "cli_commands": [],
@@ -862,56 +846,26 @@
       "size_bytes": 7507,
       "version_tokens": {}
     },
-    "findings.md": {
+    "plan_manifest.schema.v5.json": {
       "checker_refs": 0,
       "cli_commands": [],
-      "filename_version": null,
-      "id_values": [],
-      "old_dir_refs": 1,
-      "plan_revision_values": [],
-      "schema_version_values": [],
-      "sha256": "5fab9190a5e44e48d492d5908a15131a7b04e7b74126025e4122b2b50cb3ad21",
-      "size_bytes": 4689,
-      "version_tokens": {
-        "v4": 2,
-        "v5": 10
-      }
-    },
-    "progress.md": {
-      "checker_refs": 0,
-      "cli_commands": [],
-      "filename_version": null,
-      "id_values": [],
-      "old_dir_refs": 2,
-      "plan_revision_values": [],
-      "schema_version_values": [],
-      "sha256": "d2a997e992abbfb4f9344a97db88f976b5052aafc8fb13b36b44abd45270d876",
-      "size_bytes": 9581,
-      "version_tokens": {
-        "v3": 1,
-        "v4": 8,
-        "v5": 30
-      }
-    },
-    "task_plan.md": {
-      "checker_refs": 0,
-      "cli_commands": [],
-      "filename_version": null,
-      "id_values": [],
+      "filename_version": "5",
+      "id_values": [
+        "urn:company-wiki:source-catalog-worker-recovery:plan-manifest:v5"
+      ],
       "old_dir_refs": 0,
       "plan_revision_values": [],
       "schema_version_values": [],
-      "sha256": "a3426da8a55e6bff9008841f915fab89c53e36c04bfad9b068426709d4038756",
-      "size_bytes": 5789,
+      "sha256": "aa3897a007086e5138408919b9a4d8db62cf4a051b72e29e9cb1d3e7bd6da359",
+      "size_bytes": 6486,
       "version_tokens": {
-        "v3": 1,
-        "v4": 7,
-        "v5": 13
+        "v4": 2,
+        "v5": 9
       }
     }
   },
   "generated_at_utc": "2026-09-09",
-  "scope": "baseline/** + v5 root planning docs (excl. reviews/, tools/, import manifest, verify_import.py)",
+  "scope": "baseline/** + v5 root frozen inputs (.gitattributes, plan_manifest.schema.v5.json); excludes reviews/, tools/, active planning docs, v5-freeze-* records, freeze products, import manifest, verify_import.py",
   "totals": {
     "baseline_files": 54,
     "distinct_ids": [
@@ -934,6 +888,7 @@
       "urn:company-wiki:source-catalog-worker-recovery:operation-policy-instance:v4",
       "urn:company-wiki:source-catalog-worker-recovery:parser-route-manifest:v4",
       "urn:company-wiki:source-catalog-worker-recovery:plan-manifest:v4",
+      "urn:company-wiki:source-catalog-worker-recovery:plan-manifest:v5",
       "urn:company-wiki:source-catalog-worker-recovery:review-result:v4",
       "urn:company-wiki:source-catalog-worker-recovery:review-storage-confirmation:v4",
       "urn:company-wiki:source-catalog-worker-recovery:schema-registry:v1",
@@ -946,15 +901,15 @@
       "urn:company-wiki:source-catalog-worker-recovery:validator-vectors-instance:v4"
     ],
     "files_referencing_old_checker": 9,
-    "files_referencing_old_dir": 11,
-    "files_scanned": 59,
-    "files_with_v3": 14,
-    "files_with_v4": 44,
+    "files_referencing_old_dir": 8,
+    "files_scanned": 56,
+    "files_with_v3": 11,
+    "files_with_v4": 41,
     "id_suffix_counts": {
       "v1": 12,
       "v2": 1,
       "v4": 14,
-      "v5": 2
+      "v5": 3
     },
     "plan_revision_values": [
       "v3",
@@ -964,6 +919,6 @@
       "1",
       "2"
     ],
-    "v5_root_files": 5
+    "v5_root_files": 2
   }
 }

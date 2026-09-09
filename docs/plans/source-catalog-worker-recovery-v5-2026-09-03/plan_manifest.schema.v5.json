@@ -1,0 +1,163 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:company-wiki:source-catalog-worker-recovery:plan-manifest:v5",
+  "title": "Worker-recovery plan v5 freeze manifest (protocol_revision v4 / freeze_generation v5)",
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "utc": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "^[0-9]{4}-(0[1-9]|1[0-2])-([0-2][0-9]|3[01])T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]{1,9})?Z$"
+    },
+    "file": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256", "size_bytes"],
+      "properties": {
+        "path": { "type": "string", "pattern": "^[A-Za-z0-9._][A-Za-z0-9._/-]*$" },
+        "sha256": { "$ref": "#/$defs/sha256" },
+        "size_bytes": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "normative_file": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256", "size_bytes", "equivalence"],
+      "properties": {
+        "path": { "type": "string", "pattern": "^[A-Za-z0-9._][A-Za-z0-9._/-]*$" },
+        "sha256": { "$ref": "#/$defs/sha256" },
+        "size_bytes": { "type": "integer", "minimum": 1 },
+        "equivalence": {
+          "enum": ["v4_exact", "crlf_only", "unproven_new_baseline", "v5_own"]
+        }
+      }
+    }
+  },
+  "required": [
+    "schema_version", "protocol_revision", "freeze_generation", "capture_manifest",
+    "frozen_at", "plan_directory", "plan_freeze_git_head", "review_state_at_freeze",
+    "supersedes", "investigation_source", "normative_file_count", "normative_files",
+    "frozen_set_composition", "equivalence_summary", "coverage_counts",
+    "pre_freeze_check", "evidence_tools", "self_exclusion", "immutability_policy"
+  ],
+  "properties": {
+    "schema_version": { "const": 3 },
+    "protocol_revision": { "const": "v4" },
+    "freeze_generation": { "const": "v5" },
+    "capture_manifest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": { "const": "import_manifest.v5.json" },
+        "sha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "frozen_at": { "$ref": "#/$defs/utc" },
+    "plan_directory": { "const": "docs/plans/source-catalog-worker-recovery-v5-2026-09-03" },
+    "plan_freeze_git_head": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+    "review_state_at_freeze": { "const": "FROZEN_FOR_INDEPENDENT_REVIEW" },
+    "supersedes": {
+      "type": "array",
+      "minItems": 2,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "sha256"],
+        "properties": {
+          "path": { "type": "string", "minLength": 1, "maxLength": 300 },
+          "sha256": { "$ref": "#/$defs/sha256" }
+        }
+      }
+    },
+    "investigation_source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": { "const": "baseline/investigation/worker-investigation-2026-08-20.md" },
+        "sha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "normative_file_count": { "type": "integer", "minimum": 40, "maximum": 120 },
+    "normative_files": {
+      "type": "array",
+      "minItems": 40,
+      "maxItems": 120,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/normative_file" }
+    },
+    "frozen_set_composition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["imported", "v5_own_governing", "total", "self_excluded"],
+      "properties": {
+        "imported": { "const": 48 },
+        "v5_own_governing": { "const": 3 },
+        "total": { "const": 51 },
+        "self_excluded": { "const": 1 }
+      }
+    },
+    "equivalence_summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["v4_exact", "crlf_only", "unproven_new_baseline"],
+      "properties": {
+        "v4_exact": { "const": 21 },
+        "crlf_only": { "const": 17 },
+        "unproven_new_baseline": { "const": 10 }
+      }
+    },
+    "coverage_counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "fixed_dag_nodes", "stable_test_ids", "validator_vector_groups",
+        "validator_vector_cases", "schemas", "requirements", "risks",
+        "plan_review_findings"
+      ],
+      "properties": {
+        "fixed_dag_nodes": { "type": "integer", "minimum": 100 },
+        "stable_test_ids": { "type": "integer", "minimum": 250 },
+        "validator_vector_groups": { "type": "integer", "minimum": 18 },
+        "validator_vector_cases": { "type": "integer", "minimum": 18 },
+        "schemas": { "type": "integer", "minimum": 15 },
+        "requirements": { "type": "integer", "minimum": 40 },
+        "risks": { "type": "integer", "minimum": 25 },
+        "plan_review_findings": { "type": "integer", "minimum": 70 }
+      }
+    },
+    "pre_freeze_check": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["command", "exit_code", "reported_check_count", "stdout_sha256", "read_only_confirmed"],
+      "properties": {
+        "command": { "type": "string", "pattern": "v5_plan_consistency_check\\.py" },
+        "exit_code": { "const": 0 },
+        "reported_check_count": { "type": "integer", "minimum": 1000 },
+        "stdout_sha256": { "$ref": "#/$defs/sha256" },
+        "read_only_confirmed": { "const": true }
+      }
+    },
+    "evidence_tools": {
+      "type": "array",
+      "minItems": 2,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/file" }
+    },
+    "self_exclusion": { "const": "plan_manifest.v5.json" },
+    "immutability_policy": {
+      "const": "Do not overwrite or append to this file. A semantic plan change requires a new plan_manifest.vN.json filename and independent re-review."
+    }
+  },
+  "x-semantic-rules": [
+    "normative_file_count equals the number of normative_files and equals frozen_set_composition.total",
+    "imported = entries whose equivalence is not v5_own; v5_own_governing = entries whose equivalence is v5_own",
+    "the v5 checker entry is the script named in pre_freeze_check.command and is one of the v5_own entries",
+    "plan_manifest.v5.json is self_exclusion and never appears in normative_files",
+    "equivalence_summary equals the per-class counts recomputed from normative_files"
+  ]
+}

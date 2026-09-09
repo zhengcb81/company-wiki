@@ -1,9 +1,19 @@
 """V5 evidence tool: scan every version reference in the v5 baseline.
 
-Reproduces v5-version-reference-inventory.{json,md}. Scope = baseline/** (54
-files) + the v5 root planning documents present at scan time; v5-owned metadata
-(reviews/, tools/, import manifest, verify_import.py, this tool, the contract
-and the review records) is excluded.
+Reproduces v5-version-reference-inventory.{json,md}. Scope = `baseline/**`
+(48 plan inputs + 5 history records + 1 investigation report) + the v5-root
+files that are immutable after the freeze (`.gitattributes`,
+`plan_manifest.schema.v5.json`).
+
+Deliberately excluded, so that the frozen evidence stays reproducible forever:
+  * v5-owned metadata: reviews/, tools/, import manifest, verify_import.py,
+    the contract, the contract review records;
+  * active planning documents (README.md, task_plan.md, findings.md,
+    progress.md), which contract §88 declares updatable - including them would
+    invalidate the frozen evidence on every status update;
+  * freeze/meta records and reviews named `v5-freeze-*`;
+  * the freeze products `plan_manifest.v5.json` / `plan_freeze_check.v5.txt`;
+  * `__pycache__`, so loading the baseline checker can never change the set.
 
 Modes:
   (default)  write the two evidence files
@@ -31,8 +41,16 @@ EXCLUDE = {
     "v5-version-reference-inventory.md",
     "v5-baseline-equivalence.json",
     "v5-version-contract.md",
+    "plan_manifest.v5.json",       # freeze product (does not exist pre-freeze)
+    "plan_freeze_check.v5.txt",    # freeze product (captured checker stdout)
+    # active planning documents (contract §88: updatable) - keeping them in the
+    # scope would invalidate the frozen evidence on every status update
+    "README.md",
+    "task_plan.md",
+    "findings.md",
+    "progress.md",
 }
-EXCLUDE_PREFIX = "v5-version-contract-review"  # review records grow per round
+EXCLUDE_PREFIXES = ("v5-version-contract-review", "v5-freeze-")  # review/meta records
 
 
 def sha(b: bytes) -> str:
@@ -70,8 +88,9 @@ def build() -> tuple[dict, dict[str, str]]:
             continue
         rel = p.relative_to(V5).as_posix()
         if (rel.startswith(("reviews/", "tools/"))
+                or "__pycache__" in p.parts
                 or rel in EXCLUDE
-                or rel.startswith(EXCLUDE_PREFIX)):
+                or rel.startswith(EXCLUDE_PREFIXES)):
             continue
         files[rel] = scan(p)
 
@@ -82,6 +101,12 @@ def build() -> tuple[dict, dict[str, str]]:
     for i in ids:
         suffix = i.rsplit(":", 1)[-1]
         suffixes[suffix] = suffixes.get(suffix, 0) + 1
+    schema_ids = sorted({i for rel, v in files.items() if rel.endswith(".schema.json")
+                         for i in v["id_values"]})
+    schema_suffixes: dict[str, int] = {}
+    for i in schema_ids:
+        suffix = i.rsplit(":", 1)[-1]
+        schema_suffixes[suffix] = schema_suffixes.get(suffix, 0) + 1
     totals = {
         "files_scanned": len(files),
         "baseline_files": len(baseline),
@@ -97,16 +122,22 @@ def build() -> tuple[dict, dict[str, str]]:
     }
     json_payload = json.dumps(
         {"generated_at_utc": "2026-09-09",
-         "scope": "baseline/** + v5 root planning docs "
-                  "(excl. reviews/, tools/, import manifest, verify_import.py)",
+         "scope": "baseline/** + v5 root frozen inputs (.gitattributes, "
+                  "plan_manifest.schema.v5.json); excludes reviews/, tools/, active "
+                  "planning docs, v5-freeze-* records, freeze products, import manifest, "
+                  "verify_import.py",
          "totals": totals, "files": files},
         ensure_ascii=False, indent=2, sort_keys=True) + "\n"
 
     lines = [
         "# V5 版本引用枚举（V5-1 第 2 项）",
         "",
-        "日期：2026-09-09。状态：PLAN_ONLY。范围：`baseline/**`（54 份）＋ v5 根目录规划文档（5 份）＝ **59 份**；"
-        "排除 `reviews/`、`tools/`、`import_manifest.v5.json`、`verify_import.py` 与 v5 自有元数据。",
+        "日期：2026-09-09。状态：PLAN_ONLY。"
+        f"范围：`baseline/**`（{totals['baseline_files']} 份）＋ v5 根目录冻结输入（{totals['v5_root_files']} 份）"
+        f"＝ **{totals['files_scanned']} 份**；"
+        "排除 `reviews/`、`tools/`、`import_manifest.v5.json`、`verify_import.py`、"
+        "活动文档（`README.md`/`task_plan.md`/`findings.md`/`progress.md`）、`v5-freeze-*` 记录、"
+        "两个冻结产物（`plan_manifest.v5.json`、`plan_freeze_check.v5.txt`）、`__pycache__` 与 v5 自有元数据。",
         "机器明细见 [v5-version-reference-inventory.json](v5-version-reference-inventory.json)；"
         "可用 [tools/v5_version_reference_scan.py](tools/v5_version_reference_scan.py) 复现"
         "（`--check` 为只读校验）。",
@@ -126,7 +157,9 @@ def build() -> tuple[dict, dict[str, str]]:
         "| 类别 | 现状 | 影响 |",
         "|---|---|---|",
         "| 冻结 manifest 常量 | `plan_revision: \"v4\"`、`plan_directory: 旧目录`、`investigation_source.path` 旧路径、`pre_freeze_check.command` 旧目录 checker | 照抄会指向已退役目录；由合同 §5 的 v5 schema 定义新取值 |",
-        "| schema `$id` | 29 个，后缀 `:v4`=14、`:v1`=12、`:v5`=2、`:v2`=1 | 新 manifest schema 必须自带 `:v5` 且不与既有 `:v5` 撞名 |",
+        f"| schema `$id` | {len(schema_ids)} 个，后缀 "
+        + "、".join(f"`:{k}`={v}" for k, v in sorted(schema_suffixes.items()))
+        + " | 新 manifest schema 必须自带 `:v5` 且不与既有 `:v5` 撞名 |",
         "| 文件名内嵌版本 | `gate_dag.v4.json`、`operation_contracts.v4.json`、`test_id_registry.v4.json`、`gate_ledger_validator_vectors.v4.json`、`plan_freeze_check.v4.txt` | 命名即版本声明；合同裁定**不改名**（协议线标识） |",
         "| 正文/命令引用旧目录 | 见上表计数 | 合同 §6 给出取代映射；旧引用只作历史 |",
         "| 机器实例内版本字段 | 4 个 `.v4.json` 实例的内部 `$id`/`schema_version` | 只改 manifest 不改实例即构成混合版本，由 N3/N7 拒绝 |",
