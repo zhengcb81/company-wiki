@@ -33,10 +33,10 @@ import sys as _sys
 # check runs. Only sys (builtin) is touched before the guard.
 _FIRST = (_sys.path[0] if _sys.path else "").replace("\\", "/").rstrip("/")
 _HERE_DIR = __file__.replace("\\", "/").rsplit("/", 1)[0]
-if _FIRST and _FIRST == _HERE_DIR:
+if not getattr(_sys.flags, "isolated", 0) or (_FIRST and _FIRST == _HERE_DIR):
     _sys.stderr.write(
         "FAIL: run with an isolated interpreter - `python -I <checker>`.\n"
-        "The script directory on sys.path[0] would allow stdlib shadowing.\n")
+        "Without -I, sys.path[0] (script dir or cwd under -m) can shadow the stdlib.\n")
     raise SystemExit(1)
 
 import sys  # noqa: E402
@@ -443,9 +443,12 @@ def verify_manifest(base, ctx: Ctx, entries) -> None:
         check(base, rel in equivalence.get(label, []), "N6",
               f"{rel}: label {label} contradicts v5-baseline-equivalence.json")
     summary = manifest.get("equivalence_summary", {})
-    check(base, all(summary.get(key) == counted[key]
-                    for key in ("v4_exact", "crlf_only", "unproven_new_baseline")), "N6",
-          f"equivalence_summary {summary} != recomputed {counted}")
+    if set(declared) == expected:
+        # Only meaningful when the declared set matches the frozen set; a path
+        # mismatch is already reported by N13 and must not be misattributed here.
+        check(base, all(summary.get(key) == counted[key]
+                        for key in ("v4_exact", "crlf_only", "unproven_new_baseline")), "N6",
+              f"equivalence_summary {summary} != recomputed {counted}")
 
     # N7: imported artifacts are anchored to the capture record AND to the v4
     # frozen manifest (an independent, non-regenerable source).
@@ -1128,9 +1131,24 @@ def self_test(base) -> int:
             failures.append("GUARD-I")
             print(f"SELF-TEST GUARD-I FAIL: rc={guarded.returncode} "
                   f"tools_check={b'V5-TOOLS-EXACT' in guarded.stdout}")
+        # `python -m tools.<checker>` puts the cwd on sys.path[0]; the guard must
+        # also refuse that (isolated flag is absent).
+        (root / "json.py").write_text(
+            "import sys\n"
+            "sys.stdout.buffer.write(" + repr(FORGED_PASS) + ")\n"
+            "raise SystemExit(0)\n", encoding="utf-8")
+        module_run = subprocess.run([sys.executable, "-m", "tools." + Path(CHECKER_REL).stem],
+                                    cwd=str(root), capture_output=True, timeout=600)
+        if module_run.returncode != 0 and FORGED_PASS not in module_run.stdout:
+            print("SELF-TEST GUARD-M PASS: `python -m tools.<checker>` is refused "
+                  "(cwd plant cannot forge a PASS)")
+        else:
+            failures.append("GUARD-M")
+            print(f"SELF-TEST GUARD-M FAIL: rc={module_run.returncode} "
+                  f"forged={FORGED_PASS in module_run.stdout}")
     print(f"SELF-TEST: {len(N_CASES)} cases / "
           f"{sum(len(m) for _, _, m in N_CASES)} mutations + "
-          f"{len(V5_CHECK_CASES)} default-mode checks + 2 guard checks; "
+          f"{len(V5_CHECK_CASES)} default-mode checks + 3 guard checks; "
           f"failures={failures or 'none'}")
     return 1 if failures else 0
 

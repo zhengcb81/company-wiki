@@ -1,26 +1,27 @@
-# V5-2 冻结记录（2026-09-09；V5-2.3 三轮复审整改后）
+# V5-2 冻结记录（2026-09-09；V5-2.4 四轮复审整改后）
 
 状态：**FROZEN_FOR_INDEPENDENT_REVIEW**（PLAN_ONLY，未实施；本记录不构成实施授权）
-冻结时点 HEAD：`9418e725929c6b7879b6955ded8eff9ae5887638`（冻结产物随后入库）
+冻结时点 HEAD：`89c0862d9a8b0fc9cc1edb0e243aa6aa39845b40`（冻结产物随后入库）
 本记录本身**不是冻结锚**：它承载"实测值"与偏差说明，可在同一 generation 内更正；锚点是 manifest + 冻结集 + 冻结内代码钉扎 + Git 提交。
 
-冻结共四轮：
+冻结共五轮：
 
 | 轮次 | 提交 | 触发 | 结果 |
 |---|---|---|---|
 | 首轮 | `454f632` | V5-2 初冻结 | 预冻结 7658、verify 8866、自测 17/17 |
 | V5-2.1 | `917b8d8` | 三路审查共 9 条 P1 | 预冻结 7710、verify 9174、自测 17 例/27 变异全拒 |
 | V5-2.2 | `9418e72` | 二轮复审 2 条新 P1（N8 子进程劫持、v4 锚未锚定） | 预冻结 7720、verify 9188、自测 17/31+3 全拒 |
-| V5-2.3 | 本轮 | 三轮复审 3 条新 P1（父进程 import 劫持、N10 退化为索引比对） | 预冻结 **7720**（stdout 与上轮逐字节相同）、verify **9188**、自测 **17 例/32 变异 + 4 默认模式检查 + 2 守卫检查**全拒 |
+| V5-2.3 | `89c0862` | 三轮复审 3 条新 P1（父进程 import 劫持、N10 退化为索引比对） | 预冻结 **7720**（stdout 与上轮逐字节相同）、verify **9188**、自测 17/32+4+2 全拒 |
+| V5-2.4 | 本轮 | 四轮复审 3 条 P2（`python -m` 绕过守卫、N6 汇总误报、记录措辞） | 同上产物计数；自测 **17 例/32 变异 + 4 默认模式检查 + 3 守卫检查**全拒 |
 
-## 1. 冻结产物与哈希（V5-2.3）
+## 1. 冻结产物与哈希（V5-2.4）
 
 | 文件 | sha256 | 字节 | 角色 |
 |---|---|---|---|
-| `plan_manifest.v5.json` | `55a2d2cb452a7620cd3c9d8b60ffecd54df7272feee4db7e571b40ec305f3d4e` | 14125 | 冻结 manifest（自排除） |
+| `plan_manifest.v5.json` | `f9735eb8e3128f8920c5bdd1a45d434428afa48d4c334fc7b7731a4e1bc252d3` | 14125 | 冻结 manifest（自排除） |
 | `plan_freeze_check.v5.txt` | `5e60611c82e42924705c3eaeec066ecfe48a620e4370ac55fe924c8fc4e2ad83` | 172 | 预冻结检查 stdout（0 个 CR） |
 | `plan_manifest.schema.v5.json` | `d7218d36e0e5134699581f136995e18b7483406befadc8b5f5b0fa738733c1e0` | 7327 | 治理件（冻结集） |
-| `tools/v5_plan_consistency_check.py` | `90050800e72488ef805831d592ffe5a1c4ef1e1ea871a17472eb4f9e524f2ced` | 56883 | 治理件（冻结集） |
+| `tools/v5_plan_consistency_check.py` | `b5b2da6caa5531a7ca2a3fa0793b3053cb88b699a934100a96e729183796ea38` | 58055 | 治理件（冻结集） |
 | `.gitattributes` | 见 manifest 首项 | 172 | 治理件（冻结集） |
 | `tools/v5_freeze_manifest_build.py` | `5ece62bc9c4a07fbed8c5f254efea983c7790b196f5fefb20ad77e18390ad459` | 6586 | 生成器（**不入冻结集**） |
 | `tools/v5_version_reference_scan.py` | 见 manifest `evidence_tools` | 10057 | 证据工具（manifest 绑定） |
@@ -28,7 +29,7 @@
 | `v5-version-reference-inventory.json` | `72db3a1ac13c0e94a6448852de7b2873b12896ca958d5d39db18d146d640b70b` | 29973 | 证据（manifest `evidence` 绑定） |
 | `v5-baseline-equivalence.json` | `79ac6ca49ad7a7085cefcceeded65cc9d7fe2ae9f4bfcb26d608f20d867a0c67` | 2970 | 证据（manifest `evidence` 绑定） |
 | `import_manifest.v5.json` | 见 manifest `capture_manifest` | 34238 | 捕获记录（manifest 绑定） |
-| `v5-freeze-boundary.md` | `69db267e16cef004c3049960e7fa58724f5f0c8afa00dd38cc21e59c605e9255` | 6954 | 边界记录 + N9 载荷 + 调用方式要求（manifest `boundary_record` 绑定） |
+| `v5-freeze-boundary.md` | `5e939d4646d233506447e6ca545c293347a9cfc86a62fe45b22f4b0ee9e47906` | 7262 | 边界记录 + N9 载荷 + 调用方式要求（manifest `boundary_record` 绑定） |
 
 冻结集构成：**51** = 导入计划输入 48（`baseline/plan/**`，递归枚举，含空目录检测）＋ v5 自有治理件 3；自排除 1。
 等价性（逐件按字节复算，并与 v4 冻结 manifest、`v5-baseline-equivalence.json` 三方交叉核对）：`v4_exact` 21 / `crlf_only` 17 / `unproven_new_baseline` 10。
@@ -75,7 +76,7 @@
 | V5-TOOLS-EXACT | 2 | 植入 `tools/json.py`；植入 `tools/json.pyc`（非 `.py`） |
 | V5-SET-NESTED | 1 | `baseline/plan/nested/` 空目录 |
 | V5-PATH-SAFETY | 1 | `tools/` 换成指向外部的 junction |
-| GUARD / GUARD-I | 2 | 不带 `-I` 时植入的 `tools/json.py` 无法伪造 PASS；带 `-I` 时该植入被 `V5-TOOLS-EXACT` 报出 |
+| GUARD / GUARD-I / GUARD-M | 3 | 不带 `-I` 时植入的 `tools/json.py` 无法伪造 PASS；带 `-I` 时该植入被 `V5-TOOLS-EXACT` 报出；`python -m tools.<checker>` 被守卫拒绝（cwd 植入无法伪造） |
 
 ## 4. 与合同/既有语料的偏差与决策
 
@@ -97,6 +98,7 @@
 | D14 | N8 子进程以 `-I` 隔离 + 枚举 `tools/` | 复审 NEW-P1-1 证明子进程 `sys.path[0]=tools/` 可被植入模块劫持。子进程加 `-I`；新增 `V5-TOOLS-EXACT`。 |
 | D15 | **调用方式强制 `-I` + 启动守卫 + 全文件枚举** | 复审 NEW-P1-1-R / SQL-P1-3 证明**父进程**同样可被 `tools/json.py` 或 `tools/json.pyc` 在 import 期劫持并伪造 PASS。现：① checker 在任何标准库/第三方导入之前只用内建 `sys` 自检 `sys.path[0]`，不满足即 FAIL 退出；② 文档化命令、schema `const`、生成器调用、N8 重跑、两个证据工具子进程全部带 `-I`；③ `V5-TOOLS-EXACT` 枚举 `tools/` 下全部文件（含 `.pyc`，仅豁免 `__pycache__`）。自测含 GUARD/GUARD-I 两项。 |
 | D16 | **N10 改比 HEAD 而非索引** | 复审 SQL-P1-2 证明批量化的 `git ls-files -s` 读的是**索引** blob，故"改写冻结文件 + `git add`（未提交）"可绕过。现改用 `git ls-tree -r HEAD -- <paths>`（仍为 1 次调用）与工作树 blob 比对；自测新增 N10.3「提交后改写并暂存」。 |
+| D17 | **守卫改为要求隔离解释器（覆盖 `-m`）** | 复审 NEW-P2-C 证明 `python -m tools.<checker>` 时 `sys.path[0]` 是当前目录而非脚本目录，仅比较脚本目录会被绕过。现守卫直接要求 `sys.flags.isolated` 为真（并保留 `sys.path[0]` 比对），覆盖 `python <script>`、相对路径与 `-m` 三种形态；自测新增 GUARD-M。 |
 
 ## 5. 复现命令
 
@@ -121,7 +123,7 @@ python -I docs/plans/source-catalog-worker-recovery-v5-2026-09-03/tools/v5_equiv
 6. 本记录、审查记录与边界记录本身不在冻结集与证据范围内（避免自指）；边界记录另由 manifest `boundary_record` 绑定。
 7. `.githooks/pre-commit` 仍会整仓 checkout + patch 恢复（v4 漂移事故的机制）。冻结窗口内 51 项零变化已实测，但该机制仍是并发写风险。
 8. `reviews/old-plan-retirement-inventory.json` 含绝对个人路径（用户名 + 盘符）。该文件是历史记录，合同 §6.2 的 `reviews/` 行（合同文本第 91 行）规定「历史；不改字节」，故**按设计保留**；其中不含任何凭据。
-9. 启动守卫与 `V5-TOOLS-EXACT` 只在 checker 真的被运行时生效；若有人用**另一个**解释器包装脚本运行，防御不覆盖（调用方须遵守 §5/§6 的 `-I` 约定）。
+9. 启动守卫与 `V5-TOOLS-EXACT` 只在 checker 真的被运行时生效；若有人用**另一个**解释器包装脚本运行（如 `runpy.run_path` 且未把计划目录放进 `sys.path`），防御不覆盖（调用方须遵守 §5/§6 的 `-I` 约定）。守卫覆盖 `python <script>`、相对路径与 `python -m tools.<checker>` 三种形态；其它平台/解释器需重跑 `GUARD*` 自测确认。
 
 ## 7. V5-2.1 复审整改（9 条首轮 P1）
 
@@ -162,3 +164,6 @@ python -I docs/plans/source-catalog-worker-recovery-v5-2026-09-03/tools/v5_equiv
 | N2 子串误报 | 已修（`docs/plans/<name>` 前缀） |
 | verify/self-test 耗时 | N10 的 156 次 git 子进程合并为 5 次；self-test 成本如实记录（一次性门禁） |
 | `V5_PREFREEZE_CHILD` 死代码 | 已删除（改用 `-I`） |
+| **NEW-P2-C（四轮）** `python -m` 绕过守卫 | 已修（D17：要求 `sys.flags.isolated`；自测 GUARD-M） |
+| **NEW-P2-D（四轮）** N6 汇总误报 | 已修（仅当声明集等于冻结集时才比较 `equivalence_summary`；路径错配由 N13 报告） |
+| **NEW-P2-E（四轮）** §6.9 未提 `-m` | 已修（§6.9 明确三种调用形态与平台前提） |

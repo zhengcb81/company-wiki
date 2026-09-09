@@ -67,13 +67,13 @@
 
 ## 6. 调用方式要求（V5-2.3）
 
-checker **必须在隔离解释器下运行**：`python -I <checker>`。理由：不带 `-I` 时解释器把 `tools/` 放进 `sys.path[0]`，植入 `tools/json.py` 或 `tools/json.pyc` 可在任何检查执行之前遮蔽标准库并伪造 PASS（实测：不带 `-I` 时 3 行 `.pyc` 可让进程输出与冻结产物逐字节相同的内容并以 0 退出）。三重防护：
+checker **必须在隔离解释器下运行**：`python -I <checker>`。理由：不带 `-I` 时解释器把脚本目录（或 `-m` 时的当前目录）放进 `sys.path[0]`，植入 `tools/json.py`、`tools/json.pyc` 或 `<plan>/json.py` 可在任何检查执行之前遮蔽标准库并伪造 PASS（实测：不带 `-I` 时 3 行 `.pyc` 可让进程输出与冻结产物逐字节相同的内容并以 0 退出）。三重防护：
 
-1. checker 在**任何标准库/第三方导入之前**自检 `sys.path[0]`（只用内建 `sys`），不满足即 FAIL 退出；
-2. `V5-TOOLS-EXACT` 精确枚举 `tools/` 下**全部文件**（含 `.pyc`，仅豁免 `__pycache__`）；
+1. checker 在**任何标准库/第三方导入之前**只用内建 `sys` 自检：`sys.flags.isolated` 必须为真，且 `sys.path[0]` 不得等于自身目录；不满足即 FAIL 退出（覆盖 `python <script>`、相对路径、`python -m tools.<checker>` 三种调用形态）；
+2. `V5-TOOLS-EXACT` 精确枚举 `tools/` 下**全部文件**（含 `.pyc`/`.pyd`，仅豁免 `__pycache__`）；
 3. manifest 的 `pre_freeze_check.command` 与 schema `const` 均带 `-I`，N8 以此命令重跑并逐字节比对。
 
-自测覆盖：`GUARD`（不带 `-I` 时拒绝运行，植入的 `tools/json.py` 无法伪造 PASS）与 `GUARD-I`（带 `-I` 时植入被 `V5-TOOLS-EXACT` 报出）。
+自测覆盖：`GUARD`（不带 `-I` 时拒绝运行，植入的 `tools/json.py` 无法伪造 PASS）、`GUARD-I`（带 `-I` 时植入被 `V5-TOOLS-EXACT` 报出）、`GUARD-M`（`python -m tools.<checker>` 被拒绝，`<plan>/json.py` 无法伪造 PASS）。
 
 ## 冻结时点复验（2026-09-09，B1–B6 实测）
 
