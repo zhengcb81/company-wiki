@@ -33,7 +33,7 @@ R4已获[独立修订复核](r4-independent-review.md)：修正VR/AR互等、本
 | 收入、矿业、合并、发布与回测 | [revenue-audit.md](revenue-audit.md) |
 | 旧空间治理/section/portfolio/v5 | [historical-projects-audit.md](historical-projects-audit.md)、[legacy-inheritance.md](legacy-inheritance.md) |
 | GP10及上游资产601–604补核 | [gp-audit.md](gp-audit.md)、[upstream-asset-audit.md](upstream-asset-audit.md) |
-| 独立审查与纠偏轨迹 | [证据门复核](assurance-independent-review.md)、[回收风险复核](retention-independent-review.md)、[计划复核](remediation-plan-independent-review.md) |
+| 独立审查与纠偏轨迹 | [证据门复核](assurance-independent-review.md)、[回收风险复核](retention-independent-review.md)、[计划复核](remediation-plan-independent-review.md)、[细化文档复核](r4-remediation-detail-review.md) |
 | 过程、限制及下一步 | [task_plan.md](task_plan.md)、[findings.md](findings.md)、[progress.md](progress.md) |
 
 ## 覆盖与证据强度
