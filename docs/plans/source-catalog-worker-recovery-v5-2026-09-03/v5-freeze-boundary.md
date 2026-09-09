@@ -65,6 +65,16 @@
 
 判据含义：该目录及其自带的一整套 manifest/schema/checker 载体**不构成任何权威**；冻结集、取代链、`plan_directory`、`investigation_source` 均不得指向它（N2/N11/N9 机器检查）。
 
+## 6. 调用方式要求（V5-2.3）
+
+checker **必须在隔离解释器下运行**：`python -I <checker>`。理由：不带 `-I` 时解释器把 `tools/` 放进 `sys.path[0]`，植入 `tools/json.py` 或 `tools/json.pyc` 可在任何检查执行之前遮蔽标准库并伪造 PASS（实测：不带 `-I` 时 3 行 `.pyc` 可让进程输出与冻结产物逐字节相同的内容并以 0 退出）。三重防护：
+
+1. checker 在**任何标准库/第三方导入之前**自检 `sys.path[0]`（只用内建 `sys`），不满足即 FAIL 退出；
+2. `V5-TOOLS-EXACT` 精确枚举 `tools/` 下**全部文件**（含 `.pyc`，仅豁免 `__pycache__`）；
+3. manifest 的 `pre_freeze_check.command` 与 schema `const` 均带 `-I`，N8 以此命令重跑并逐字节比对。
+
+自测覆盖：`GUARD`（不带 `-I` 时拒绝运行，植入的 `tools/json.py` 无法伪造 PASS）与 `GUARD-I`（带 `-I` 时植入被 `V5-TOOLS-EXACT` 报出）。
+
 ## 冻结时点复验（2026-09-09，B1–B6 实测）
 
 - 冻结时点 HEAD：`436ecd38509ef87199b2a3133f08994bfdaec18f`；v5 目录冻结前已跟踪 74 个文件。

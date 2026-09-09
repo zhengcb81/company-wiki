@@ -51,7 +51,7 @@ def entry(rel: str, path: Path, equivalence: str) -> dict:
 
 
 def main() -> int:
-    run = subprocess.run([sys.executable, str(CHECKER)], cwd=str(REPO),
+    run = subprocess.run([sys.executable, "-I", str(CHECKER)], cwd=str(REPO),
                          capture_output=True)
     payload = run.stdout
     if run.returncode != 0:
@@ -113,7 +113,7 @@ def main() -> int:
             for name in ("v4_exact", "crlf_only", "unproven_new_baseline")},
         "coverage_counts": coverage,
         "pre_freeze_check": {
-            "command": "python docs/plans/source-catalog-worker-recovery-v5-2026-09-03/"
+            "command": "python -I docs/plans/source-catalog-worker-recovery-v5-2026-09-03/"
                        "tools/v5_plan_consistency_check.py",
             "exit_code": 0,
             "reported_check_count": reported,

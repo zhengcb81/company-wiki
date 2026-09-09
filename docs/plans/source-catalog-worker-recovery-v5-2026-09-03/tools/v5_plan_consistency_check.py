@@ -25,18 +25,32 @@ exclude `__pycache__` either way.
 
 from __future__ import annotations
 
-import hashlib
-import importlib.util
-import json
-import os
-import re
-import shutil
-import stat
-import subprocess
-import sys
-import tempfile
-from dataclasses import dataclass
-from pathlib import Path, PurePosixPath
+import sys as _sys
+
+# Import-time guard (V5-2.3): when this file is executed without -I/-P, the
+# interpreter puts tools/ on sys.path[0], so a planted tools/json.py (or .pyc)
+# would be imported by the statements below and could forge a PASS before any
+# check runs. Only sys (builtin) is touched before the guard.
+_FIRST = (_sys.path[0] if _sys.path else "").replace("\\", "/").rstrip("/")
+_HERE_DIR = __file__.replace("\\", "/").rsplit("/", 1)[0]
+if _FIRST and _FIRST == _HERE_DIR:
+    _sys.stderr.write(
+        "FAIL: run with an isolated interpreter - `python -I <checker>`.\n"
+        "The script directory on sys.path[0] would allow stdlib shadowing.\n")
+    raise SystemExit(1)
+
+import sys  # noqa: E402
+import hashlib  # noqa: E402
+import importlib.util  # noqa: E402
+import json  # noqa: E402
+import os  # noqa: E402
+import re  # noqa: E402
+import shutil  # noqa: E402
+import stat  # noqa: E402
+import subprocess  # noqa: E402
+import tempfile  # noqa: E402
+from dataclasses import dataclass  # noqa: E402
+from pathlib import Path, PurePosixPath  # noqa: E402
 
 sys.dont_write_bytecode = True
 try:  # deterministic LF/UTF-8 stdout: the captured artifact must contain no CR
@@ -54,7 +68,7 @@ EXPECTED_IMPORTED = 48
 EXPECTED_GOVERNING = 3
 EXPECTED_TOTAL = 51
 CHECKER_REL = "tools/v5_plan_consistency_check.py"
-EXPECTED_COMMAND = ("python docs/plans/source-catalog-worker-recovery-v5-2026-09-03/"
+EXPECTED_COMMAND = ("python -I docs/plans/source-catalog-worker-recovery-v5-2026-09-03/"
                     + CHECKER_REL)
 EXPECTED_SUPERSEDES = ("baseline/history/plan_manifest.v4.json",
                        "baseline/history/plan_manifest.v3.json")
@@ -280,13 +294,13 @@ def v5_checks(base, ctx: Ctx, entries, before) -> None:
     for rel in ctx.governing:
         check(base, (ctx.root / rel).is_file(), "V5-SET-GOVERNING",
               f"missing governing artifact: {rel}")
-    # tools/ must contain exactly the four expected scripts: an extra module here
-    # would be importable by the N8 child process (sys.path[0]).
+    # tools/ must contain exactly the four expected files: any extra file here
+    # (including a .pyc) would sit on sys.path[0] and could shadow the stdlib.
     tools_present = sorted(p.relative_to(ctx.root).as_posix()
-                           for p in (ctx.root / "tools").rglob("*.py")
-                           if "__pycache__" not in p.parts)
+                           for p in (ctx.root / "tools").rglob("*")
+                           if p.is_file() and "__pycache__" not in p.parts)
     check(base, tuple(tools_present) == TOOLS_EXPECTED, "V5-TOOLS-EXACT",
-          f"tools/ scripts must be exactly {list(TOOLS_EXPECTED)}, found {tools_present}")
+          f"tools/ must be exactly {list(TOOLS_EXPECTED)}, found {tools_present}")
     check(base, len(entries) == EXPECTED_TOTAL, "V5-SET-TOTAL",
           f"expected {EXPECTED_TOTAL} frozen entries, found {len(entries)}")
     for rel, path in entries:
@@ -321,7 +335,7 @@ def v5_checks(base, ctx: Ctx, entries, before) -> None:
             tool = ctx.root / rel
             check(base, tool.is_file(), "V5-EVIDENCE", f"missing evidence tool: {rel}")
             if tool.is_file():
-                run = subprocess.run([sys.executable, str(tool), "--check"],
+                run = subprocess.run([sys.executable, "-I", str(tool), "--check"],
                                      capture_output=True, text=True, encoding="utf-8",
                                      errors="replace", timeout=600)
                 check(base, run.returncode == 0, "V5-EVIDENCE-CHECK",
@@ -568,15 +582,18 @@ def verify_manifest(base, ctx: Ctx, entries) -> None:
                     rels.append(target.relative_to(repo_root).as_posix())
                 except ValueError:
                     check(base, False, "N10", f"frozen path outside the repository: {target}")
-            listed = subprocess.run(["git", "-C", str(repo_root), "ls-files", "-s", "--", *rels],
-                                    capture_output=True, text=True, encoding="utf-8",
-                                    errors="replace", timeout=120)
+            # HEAD blobs (not the index): `ls-files -s` would compare against
+            # staged content and miss a "rewrite + git add" of a frozen file.
+            listed = subprocess.run(
+                ["git", "-C", str(repo_root), "ls-tree", "-r", "HEAD", "--", *rels],
+                capture_output=True, text=True, encoding="utf-8", errors="replace",
+                timeout=120)
             tracked: dict[str, str] = {}
             for line in (listed.stdout or "").splitlines():
                 meta, _, path = line.partition("\t")
                 fields = meta.split()
-                if path and len(fields) >= 2:
-                    tracked[path] = fields[1]
+                if path and len(fields) >= 3:
+                    tracked[path] = fields[2]
             missing = [rel for rel in rels if rel not in tracked]
             check(base, not missing, "N10",
                   f"not tracked at HEAD, so immutability is unverifiable: {missing[:3]}")
@@ -818,6 +835,20 @@ def _n10_git_rewrite(ctx: Ctx, manifest: dict) -> None:
     (ctx.baseline / "README.md").write_bytes(b"tampered after commit\n")
 
 
+def _n10_staged_rewrite(ctx: Ctx, manifest: dict) -> None:
+    """Commit, rewrite a frozen file, stage it but do not commit: N10 must fire."""
+    repo = ctx.root.parents[2]
+    git = ["git", "-C", str(repo), "-c", "user.email=probe@example.invalid",
+           "-c", "user.name=probe"]
+    subprocess.run([*git, "add", "-A"], capture_output=True, timeout=120)
+    subprocess.run([*git, "commit", "-q", "-m", "probe baseline"], capture_output=True, timeout=120)
+    head = subprocess.run([*git, "rev-parse", "HEAD"], capture_output=True, text=True,
+                          encoding="utf-8", errors="replace", timeout=60).stdout.strip()
+    manifest["plan_freeze_git_head"] = head
+    (ctx.baseline / "README.md").write_bytes(b"staged rewrite\n")
+    subprocess.run([*git, "add", "docs"], capture_output=True, timeout=120)
+
+
 def _n11_retired(ctx: Ctx, manifest: dict) -> None:
     manifest["supersedes"].append(
         {"path": "docs/plans/source-catalog-worker-recovery-2026-08-22/plan_manifest.v4.json",
@@ -891,7 +922,7 @@ N_CASES = (
      ((_n9_undeclared, False), (_n9_flip, False), (_n9_missing, False),
       (_n9_sync, False), (_n9_marker_rename, False))),
     ("N10", "manifest 自身进入 normative 集 / 冻结后改写已跟踪文件",
-     ((_n10, False), (_n10_git_rewrite, True))),
+     ((_n10, False), (_n10_git_rewrite, True), (_n10_staged_rewrite, True))),
     ("N11", "取代链指向旧目录或形近路径",
      ((_n11_retired, False), (_n11_lookalike, False))),
     ("N12", "investigation_source 不在 v5 目录内", ((_n12, False),)),
@@ -909,6 +940,10 @@ def _plant_tool(ctx: Ctx) -> None:
     (ctx.root / "tools" / "json.py").write_text("x = 1\n", encoding="utf-8")
 
 
+def _plant_pyc(ctx: Ctx) -> None:
+    (ctx.root / "tools" / "json.pyc").write_bytes(b"\x00\x00\x00\x00")
+
+
 def _nested_dir(ctx: Ctx) -> None:
     (ctx.baseline / "nested").mkdir(parents=True, exist_ok=True)
 
@@ -924,10 +959,14 @@ def _junction_tools(ctx: Ctx) -> None:
 
 
 V5_CHECK_CASES = (
-    ("V5-TOOLS-EXACT", _plant_tool),
-    ("V5-SET-NESTED", _nested_dir),
-    ("V5-PATH-SAFETY", _junction_tools),
+    ("V5-TOOLS-EXACT", "py", _plant_tool),
+    ("V5-TOOLS-EXACT", "pyc", _plant_pyc),
+    ("V5-SET-NESTED", "dir", _nested_dir),
+    ("V5-PATH-SAFETY", "junction", _junction_tools),
 )
+
+FORGED_PASS = (b'PASS: 9188 checks; {"fixed_nodes": 115, "schemas": 29, "tests": 315, '
+               b'"vectors": 18}\nREAD_ONLY: forged\n')
 
 
 def rmtree_force(path: Path) -> None:
@@ -1011,7 +1050,7 @@ def self_test(base) -> int:
                     print(f"SELF-TEST {tag} FAIL: full={fired[0]} isolated={fired[1]} - {label}")
 
         # Default-mode checks that N1-N17 do not cover.
-        for code, mutate in V5_CHECK_CASES:
+        for code, tag, mutate in V5_CHECK_CASES:
             repo = Path(tmp) / "repo"
             if repo.exists():
                 rmtree_force(repo)
@@ -1048,13 +1087,51 @@ def self_test(base) -> int:
             finally:
                 base.ERRORS, base.CHECKS = saved
             if code in codes:
-                print(f"SELF-TEST {code} PASS: default-mode check rejects the mutation")
+                print(f"SELF-TEST {code}.{tag} PASS: default-mode check rejects the mutation")
             else:
-                failures.append(code)
-                print(f"SELF-TEST {code} FAIL: codes={sorted(codes)}")
+                failures.append(f"{code}.{tag}")
+                print(f"SELF-TEST {code}.{tag} FAIL: codes={sorted(codes)}")
+
+        # Import-time guard: without -I a planted tools/json.py must not be able
+        # to forge a PASS; with -I the checker must still run and report it.
+        repo = Path(tmp) / "repo"
+        if repo.exists():
+            rmtree_force(repo)
+        root = repo / "docs" / "plans" / REAL.root.name
+        shutil.copytree(REAL.root / "baseline", root / "baseline")
+        shutil.copytree(REAL.root / "tools", root / "tools")
+        for name in (".gitattributes", "plan_manifest.v5.json", "plan_manifest.schema.v5.json",
+                     "plan_freeze_check.v5.txt", "import_manifest.v5.json",
+                     "v5-baseline-equivalence.json", "v5-version-reference-inventory.json",
+                     "v5-freeze-boundary.md"):
+            source = REAL.root / name
+            if source.is_file():
+                (root / name).write_bytes(source.read_bytes())
+        (root / "tools" / "json.py").write_text(
+            "import sys\n"
+            "sys.stdout.buffer.write(" + repr(FORGED_PASS) + ")\n"
+            "raise SystemExit(0)\n", encoding="utf-8")
+        unguarded = subprocess.run([sys.executable, str(root / CHECKER_REL)],
+                                   capture_output=True, timeout=600)
+        guarded = subprocess.run([sys.executable, "-I", str(root / CHECKER_REL)],
+                                 capture_output=True, timeout=600)
+        if unguarded.returncode != 0 and FORGED_PASS not in unguarded.stdout:
+            print("SELF-TEST GUARD PASS: without -I the checker refuses to run "
+                  "(planted tools/json.py cannot forge a PASS)")
+        else:
+            failures.append("GUARD")
+            print(f"SELF-TEST GUARD FAIL: rc={unguarded.returncode} "
+                  f"forged={FORGED_PASS in unguarded.stdout}")
+        if guarded.returncode != 0 and b"V5-TOOLS-EXACT" in guarded.stdout:
+            print("SELF-TEST GUARD-I PASS: with -I the plant is reported by V5-TOOLS-EXACT")
+        else:
+            failures.append("GUARD-I")
+            print(f"SELF-TEST GUARD-I FAIL: rc={guarded.returncode} "
+                  f"tools_check={b'V5-TOOLS-EXACT' in guarded.stdout}")
     print(f"SELF-TEST: {len(N_CASES)} cases / "
           f"{sum(len(m) for _, _, m in N_CASES)} mutations + "
-          f"{len(V5_CHECK_CASES)} default-mode checks; failures={failures or 'none'}")
+          f"{len(V5_CHECK_CASES)} default-mode checks + 2 guard checks; "
+          f"failures={failures or 'none'}")
     return 1 if failures else 0
 
 

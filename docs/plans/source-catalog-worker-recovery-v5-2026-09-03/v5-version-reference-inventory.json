@@ -848,9 +848,7 @@
     },
     "plan_manifest.schema.v5.json": {
       "checker_refs": 1,
-      "cli_commands": [
-        "python docs/plans/source-catalog-worker-recovery-v5-2026-09-03/tools/v5_plan_consistency_check.py"
-      ],
+      "cli_commands": [],
       "filename_version": "5",
       "id_values": [
         "urn:company-wiki:source-catalog-worker-recovery:plan-manifest:v5"
@@ -858,8 +856,8 @@
       "old_dir_refs": 0,
       "plan_revision_values": [],
       "schema_version_values": [],
-      "sha256": "ebc6c904fb06f2d857610638d9c172de0b3ab078155182857ec2b0c38cafce9a",
-      "size_bytes": 7324,
+      "sha256": "d7218d36e0e5134699581f136995e18b7483406befadc8b5f5b0fa738733c1e0",
+      "size_bytes": 7327,
       "version_tokens": {
         "v3": 1,
         "v4": 3,

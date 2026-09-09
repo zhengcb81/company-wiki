@@ -6,9 +6,9 @@
     "path": "import_manifest.v5.json",
     "sha256": "da7d116e8c692d6311411c7390bec4278b59666a771823672f53e9b0f6567e4a"
   },
-  "frozen_at": "2026-09-09T21:16:29.072489Z",
+  "frozen_at": "2026-09-09T21:27:19.554057Z",
   "plan_directory": "docs/plans/source-catalog-worker-recovery-v5-2026-09-03",
-  "plan_freeze_git_head": "85044ed8ced021eeb77565564e455274d0a2a5ad",
+  "plan_freeze_git_head": "9418e725929c6b7879b6955ded8eff9ae5887638",
   "review_state_at_freeze": "FROZEN_FOR_INDEPENDENT_REVIEW",
   "supersedes": [
     {
@@ -322,14 +322,14 @@
     },
     {
       "path": "plan_manifest.schema.v5.json",
-      "sha256": "ebc6c904fb06f2d857610638d9c172de0b3ab078155182857ec2b0c38cafce9a",
-      "size_bytes": 7324,
+      "sha256": "d7218d36e0e5134699581f136995e18b7483406befadc8b5f5b0fa738733c1e0",
+      "size_bytes": 7327,
       "equivalence": "v5_own"
     },
     {
       "path": "tools/v5_plan_consistency_check.py",
-      "sha256": "252c44a2d9dbe120f6982737ddbc614cd98cdfe3f962985ebd8d76fcca96a342",
-      "size_bytes": 52485,
+      "sha256": "90050800e72488ef805831d592ffe5a1c4ef1e1ea871a17472eb4f9e524f2ced",
+      "size_bytes": 56883,
       "equivalence": "v5_own"
     }
   ],
@@ -355,7 +355,7 @@
     "plan_review_findings": 105
   },
   "pre_freeze_check": {
-    "command": "python docs/plans/source-catalog-worker-recovery-v5-2026-09-03/tools/v5_plan_consistency_check.py",
+    "command": "python -I docs/plans/source-catalog-worker-recovery-v5-2026-09-03/tools/v5_plan_consistency_check.py",
     "exit_code": 0,
     "reported_check_count": 7720,
     "stdout_sha256": "5e60611c82e42924705c3eaeec066ecfe48a620e4370ac55fe924c8fc4e2ad83",
@@ -364,8 +364,8 @@
   "evidence": {
     "v5-version-reference-inventory.json": {
       "path": "v5-version-reference-inventory.json",
-      "sha256": "c0a165bb1ccc12f891626faad8d7fa6a3242d9bf808d038c599530432ef601ad",
-      "size_bytes": 30088
+      "sha256": "72db3a1ac13c0e94a6448852de7b2873b12896ca958d5d39db18d146d640b70b",
+      "size_bytes": 29973
     },
     "v5-baseline-equivalence.json": {
       "path": "v5-baseline-equivalence.json",
@@ -375,7 +375,7 @@
   },
   "boundary_record": {
     "path": "v5-freeze-boundary.md",
-    "sha256": "b5a8a67a2c7c0b8f654a95e07a787c59dc102f5dd100a9ac14f962caabbe9720"
+    "sha256": "69db267e16cef004c3049960e7fa58724f5f0c8afa00dd38cc21e59c605e9255"
   },
   "evidence_tools": [
     {
