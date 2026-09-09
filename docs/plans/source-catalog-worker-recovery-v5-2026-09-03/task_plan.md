@@ -45,23 +45,21 @@
 - [x] 建立版本一致性负例：旧 manifest、新 manifest、错 schema、混合节点、错路径一律拒绝。
   → N1–N17（[版本合同 §7](v5-version-contract.md)），待 V5-2 以机器检查实现。
 
-## Phase V5-2（冻结与独立审查）— 状态：in_progress（V5-2.3 整改冻结已入库；待四轮复审确认）
+## Phase V5-2（冻结与独立审查）— 状态：completed（2026-09-09；三轴复审全部 `accepted`）
 
 - [x] 明确稳定审查边界；不把仅有前后 hash 或 .gitattributes 当作不可变性证明。
-  → [v5-freeze-boundary.md](v5-freeze-boundary.md) 协议 B1–B6 + 机器可读处置块（manifest `boundary_record` 绑定）+ 调用方式要求（`python -I`）；[v5-freeze-record.md](v5-freeze-record.md)。
+  → [v5-freeze-boundary.md](v5-freeze-boundary.md) 协议 B1–B6 + 机器可读处置块（manifest `boundary_record` 绑定）+ 调用方式要求（`python -I`，三种调用形态守卫）；[v5-freeze-record.md](v5-freeze-record.md)。
 - [x] 重跑计划一致性、schema/实例、DAG、测试 registry、vectors、prose 全套检查。
   → 预冻结 `PASS: 7720 checks`（fixed_nodes 115/schemas 29/tests 315/vectors 18）。
 - [x] 冻结前保存精确输出，生成新的正式 plan_manifest.v5.json，再做冻结后逐字节核验。
   → [plan_manifest.v5.json](plan_manifest.v5.json)（51 项）+ [plan_freeze_check.v5.txt](plan_freeze_check.v5.txt)（172 字节、0 CR）；`--verify-manifest` 9188 checks 通过。
 - [x] 以机器检查 + 测试 ID 实现 N1–N17，并证明每条负例都被拒。
-  → `--self-test` **17 例 / 32 变异 + 4 项默认模式检查 + 2 项守卫检查**，全检查与隔离两种模式全拒。
-- [x] 三路独立 agent 从零审查 + 两轮复审；每路绑定同一冻结输入。
-  → 九份审查/关闭记录已入库；三路均无 P0、无未闭 P1（待四轮确认）。
-- [x] 关闭首轮 9 条 P1（V5-2.1）与二轮 2 条新 P1（V5-2.2）。
-  → 整改表见 [v5-freeze-record.md](v5-freeze-record.md) §7/§8。
-- [x] 关闭三轮 3 条新 P1（V5-2.3：父进程 import 劫持、N10 索引比对回归）。
-  → 启动守卫 + 全链路 `-I` + `tools/` 全文件枚举 + `git ls-tree -r HEAD` 比对；见 §8。
-- [ ] 四轮复审各自确认后，标记计划可作未来实施输入；这仍不授权启动 worker。
+  → `--self-test` **17 例 / 32 变异 + 4 项默认模式检查 + 3 项守卫检查**，全检查与隔离两种模式全拒。
+- [x] 三路独立 agent 从零审查 + 四轮复审；每路绑定同一冻结输入、独立复算。
+  → 审查与关闭记录共 13 份；SQL/性能 `accepted`、生命周期/安全 `accepted`、测试/DAG `accepted`，均无 P0/P1。
+- [x] 关闭首轮 9 条 P1、二轮 2 条新 P1、三轮 3 条新 P1、四轮 3 条 P2。
+  → 整改表见 [v5-freeze-record.md](v5-freeze-record.md) §7/§8；共 17 条（P1 14 + P2 3）逐条有复现与验证。
+- [x] 结论：本计划可作为未来实施的**输入**（仍不授权启动 worker、不改协议语义、不实施任何修复）。
 
 ## Phase V5-3（交接）— 状态：pending
 

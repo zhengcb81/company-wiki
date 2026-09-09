@@ -92,3 +92,12 @@
 - V5-2.1 整改冻结 `917b8d8`（`85044ed` 提交记录）：逐条修根因 → 预冻结 **7710** checks、`--verify-manifest` **9174** 通过、`--self-test` **17 例 / 27 变异**在「全检查」与「仅该编码」两种模式下全部被拒；新增 manifest `evidence` 字段绑定两份证据输出、N9 机器可读处置载荷（`NON_AUTHORITATIVE` + 目录清单摘要复算）、`V5-PATH-SAFETY`、`V5-SET-NESTED`、N10 fail-closed（未跟踪或改写即 red）、N8 在真实树重跑默认模式逐字节比对。
 - 逐条整改与验证见 [v5-freeze-record.md](v5-freeze-record.md) §7；偏差 D1–D11 与残余风险 §6 如实记录（含未删除未加锁的旧目录、pre-commit hook 机制、活动文档引用不受覆盖、`reviews/` 绝对路径按设计保留）。
 - 状态：`FROZEN_FOR_INDEPENDENT_REVIEW`；待三路复审各自确认其 P1 已闭。**未实施任何 worker 修复，未触碰源码/配置/数据库/任务，未恢复 worker。**
+
+## 2026-09-09：V5-2 完成（三轴复审全部 accepted）
+
+- 整改共四轮：V5-2.1（9 条 P1）→ V5-2.2（2 条新 P1）→ V5-2.3（3 条新 P1）→ V5-2.4（3 条 P2），每轮都由三路独立审查以**自己的复现脚本**复核，不采信作者记录。
+- 关键整改（全部根因级）：N6 逐件按字节复算等价类别；N7 增补 v4 冻结 manifest 锚并由**冻结内代码**钉扎 6 份历史文件；N8 以 manifest 命令（含 `-I`）重跑并逐字节比对；N9 改为候选枚举 + 机器载荷 + manifest 绑定；N10 比 **HEAD** blob（非索引）且未跟踪即 red；N11 取代链恰好两条；N13/`V5-SET-NESTED` 递归含空目录；`V5-PATH-SAFETY` 恢复 reparse 不变量；`V5-TOOLS-EXACT` 枚举 `tools/` 全部文件；启动守卫要求隔离解释器（覆盖 `script`/相对路径/`-m` 三形态）。
+- 最终冻结（提交 `4f4dea1`）：预冻结 **7720** checks、`--verify-manifest` **9188** 通过、`--self-test` **17 例/32 变异 + 4 默认模式 + 3 守卫**全拒；51/51 冻结项哈希与字节一致；`plan_freeze_check.v5.txt` 172 字节、0 CR。
+- 三轴结论：SQL/性能 `accepted`、生命周期/安全 `accepted`、测试/DAG `accepted`（均无 P0/P1；剩余项为记录已声明的残余风险 §6.3/§6.4/§6.9）。
+- 已知非阻断后续（V5-3 移交项）：`--self-test` 墙钟随轮次增长（11s→89s），可选"复制一次 + 逐例回滚"优化；`frozen_at` 无法机器锚定；`reviews/` 历史文件按合同不改字节（含绝对个人路径）。
+- **V5-2 完成不授权实施**：本计划仅可作为未来实施的输入；worker 仍暂停，源码/配置/数据库/任务未动。
