@@ -61,7 +61,14 @@
   → 整改表见 [v5-freeze-record.md](v5-freeze-record.md) §7/§8；共 17 条（P1 14 + P2 3）逐条有复现与验证。
 - [x] 结论：本计划可作为未来实施的**输入**（仍不授权启动 worker、不改协议语义、不实施任何修复）。
 
-## Phase V5-3（交接）— 状态：pending
+## Phase V5-3（交接）— 状态：completed（2026-09-09）
+
+- [x] 更新新目录的 findings/progress，给出清晰活动入口、历史索引、剩余风险与实施顺序。
+  → [README.md](README.md) §1–§7；findings §9、progress 末节同步。
+- [x] 只读复核 worker 暂停和已知自启动入口关闭。
+  → `worker_control.json` `desired_state=paused`；启动器末条事件 `exited/persistent_pause`（2026-08-20T21:43:37Z）；无运行进程；无相关计划任务（`CompanyWiki Source Catalog` 未注册）；HKCU/HKLM Run 与启动文件夹无条目；自启动脚本存在但未被引用。
+- [x] 保持与现有主线计划隔离，等待用户以后决定并入或实施。
+  → README §6/§7 明确隔离与不授权；R4 衔接由主线 C/D 段负责。
 
 - [ ] 更新新目录的 findings/progress，给出清晰活动入口、历史索引、剩余风险与实施顺序。
 - [ ] 只读复核 worker 暂停和已知自启动入口关闭。

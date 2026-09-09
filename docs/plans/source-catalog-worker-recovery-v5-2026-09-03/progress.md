@@ -101,3 +101,10 @@
 - 三轴结论：SQL/性能 `accepted`、生命周期/安全 `accepted`、测试/DAG `accepted`（均无 P0/P1；剩余项为记录已声明的残余风险 §6.3/§6.4/§6.9）。
 - 已知非阻断后续（V5-3 移交项）：`--self-test` 墙钟随轮次增长（11s→89s），可选"复制一次 + 逐例回滚"优化；`frozen_at` 无法机器锚定；`reviews/` 历史文件按合同不改字节（含绝对个人路径）。
 - **V5-2 完成不授权实施**：本计划仅可作为未来实施的输入；worker 仍暂停，源码/配置/数据库/任务未动。
+
+## 2026-09-09：V5-3 交接完成
+
+- [README.md](README.md) 重写为唯一活动入口：阅读顺序、冻结与验证命令（含期望输出与 `-I` 要求）、历史索引（13 份审查/关闭记录）、只读复核结果、残余风险、实施顺序指向冻结语料、明确不授权。
+- 只读复核 worker 状态：`worker_control.json` `desired_state=paused`；启动器末条事件 `exited/persistent_pause`（2026-08-20T21:43:37Z）；无 worker 进程；无相关计划任务（`CompanyWiki Source Catalog` 未注册）；HKCU/HKLM `Run` 与启动文件夹无条目；`scripts/source_catalog_worker_at_logon.{ps1,vbs}` 存在但未被任何入口引用。
+- 活动文档（README/task_plan/findings/progress）更新后 `--verify-manifest` 仍为 `PASS: 9188 checks` —— 证明 D4 的"证据范围只含冻结后不变文件"设计有效。
+- V5-0/V5-R/V5-1/V5-2/V5-3 全部完成；本目录进入**等待用户决定并入或实施**的稳定状态。
