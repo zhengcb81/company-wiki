@@ -1,8 +1,23 @@
 # 审计发现
 
+> 2026-09-09 最新状态请先读 [current-delta-2026-09-09.md](current-delta-2026-09-09.md)：worker v5 独立轨道全部完成（冻结 51 项 + 三轴审查 accepted）、FC-705 门仍 false（差一晚）、R9 批 3 范围失真（仅 `artifact_backfill.py` 零生产读者）。下方 9/5～9/7 观测保留为当时快照，不重写、不当新 HEAD 全量验收。
+
 > 2026-09-07最新状态请先读current-delta-2026-09-07.md：其他任务已推进R9删除/daily修复并产生失败run；下方9/5～9/6观测不重写，也不当新HEAD全量验收。同步23活动文档及执行手册R3已经独立审查；产品整改仍未实施于本任务。
 
 > 按时间保留的发现日志；最终范围与结论见README及各分报告。下方“初步/待验证”是发现当时状态，后续条目与分报告提供核验结果。新审计不修改任何原计划。
+
+## F009：R9 批 3 的"无生产读者"口径已失真（2026-09-09 深夜实测）
+
+- 证据（逐符号 grep，wiki 源码）：`backfill_v2` ← `dropbox_governance.py:22`（生产治理链导入 `classify_bucket`）；`portfolio_promoter` ← `cli.py:27`（CLI 面）；`_scan_root_v1` ← `scanner.py:1401`（生产分派）+ `shadow_parity.py:94`/`trace_parity.py:206`（对账）；`legacy_bridge_enabled` ← `resolver.py:322`、`architecture_gate.py:127/139/278`。仅 `artifact_backfill.py` 无 src/scripts 生产导入。
+- 推理：09-02 授权申请把批 3 描述为"无生产读者 backfill/promoter"，若照此机械删除会破坏生产治理/CLI/对账/回滚路径。批 3 的实质是"退役 v1 扫描路径与迁移期机制"的架构清理，必须先有替代路径与回滚，再谈删除。
+- 影响：R9 批 3 需**技术门（FC-705）+ owner 政策门（2026-09-06 延后至 v2 迁移稳定）**双重满足，并重新拆分（3a `artifact_backfill` 最小步 / 3b `_scan_root_v1`+parity / 3c bridge+flags+resolver）。清单见 revenue 侧 `r9_batch3_checklist.md`。
+- 边界：本轮只做只读 grep 与文档记录，未删除、未改产品代码。
+
+## F008：worker v5 的"完成"只覆盖规划文档完整性（2026-09-09）
+
+- 证据：v5 冻结集 51 项 + `--verify-manifest` 9188 + `--self-test` 17/32+4+3 全拒 + 三轴独立审查 accepted（见同仓 v5 目录）。
+- 推理：冻结证明的是"规划文档完整、可复现、未被静默改写"，**不证明** worker 实现、配置、数据库、任务健康，也不授权恢复 worker。
+- 影响：R4 中 worker 相关 WP 可把 v5 冻结作为**版本合同输入**，但 H01 风险、隔离验证、持久领取/失败恢复仍必须各自取证。
 
 ## F001：文档同步并不等于原始痛点消除
 

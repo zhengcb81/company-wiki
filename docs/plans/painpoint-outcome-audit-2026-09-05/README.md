@@ -1,5 +1,7 @@
 # 三仓原始痛点审计与独立修复计划
 
+> **2026-09-09 深夜并发状态（只读核对，覆盖 9/7 观测）**：请先读 [current-delta-2026-09-09.md](current-delta-2026-09-09.md)。要点：① worker v5 独立轨道全部完成（冻结 51 项 + 三轴独立审查 accepted，仍 PLAN_ONLY、不授权实施）；② FC-705 门仍 `close_gate_allowed=false`（last-two = P7 23:59:41 ✗ / P8 24:00:11 ✓），预计 **2026-09-10 22:00 运行后**转 true；③ **R9 批 3 范围失真**——实测仅 `artifact_backfill.py` 零生产读者，`backfill_v2`/`portfolio_promoter`/`_scan_root_v1`/`legacy_bridge_enabled` 均有活跃调用者，批 3 需技术门 + owner 政策门并重新拆分（清单见 revenue `r9_batch3_checklist.md`）；④ 本轮未运行产品测试、未改产品代码/配置/DB/任务/worker。下方 9/7～9/8 内容保留为当时交付记录。
+
 > **2026-09-08六类问题实施细化**：在既有R4下使用[逐步实施与关闭条件](r4-remediation-steps.md)和[117项逐行修复映射](r4-unit-remediation-map.md)。显式覆盖H01、WP02–10、FC-903、117目标、旧95门处置、9处架构泄漏与7类真实验收；只细化文档，不代表产品修复或真实测试完成。原R4两核心文档及历史独立签署保持原字节；本次补充另做审查。
 
 > **当前执行路线：R4（2026-09-07制定，09-08复核）**。用户批准按虚拟数据湖减法调整规划。请从[R4详细实施计划](simplified-execution-plan.md)开始，再读[36组真实测试与审计矩阵](simplified-test-matrix.md)及[旧15包完整迁移表](r4-transition.md)。主线为A合同、B位置透明读取、C瘦消费者/唯一生产入口、D安全运维；收入M独立。原117项、GP和历史目标保留，不再叠加旧95门。全部仍PLAN_ONLY，未授权产品实施。下方R2/R3的编排和review说明仅是历史交付记录，不覆盖R4。

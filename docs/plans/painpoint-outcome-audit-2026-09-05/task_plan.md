@@ -17,6 +17,13 @@
 
 等待精确实施授权（DEV/数据/运行各自批准），从 R4 A01 重锁三仓输入开始。Phase 7 只完成规划细化，不构成产品实施或真实测试结果；原R4两份被审核心文档及历史签署字节不变。
 
+### 2026-09-09 深夜并发状态核对（只读 + 文档）
+
+- **Worker v5 独立轨道已全部完成**（同仓 `source-catalog-worker-recovery-v5-2026-09-03`，提交 `6559075`）：V5-0/R/1/2/3 completed，冻结 51 项，三轴独立审查 `accepted`（SQL/性能、生命周期/安全、测试/DAG）。它是 R4 中 worker 相关 WP 的**版本合同/冻结输入**，但不改变 R4 的 `NOT_IMPLEMENTATION_AUTHORIZED`，也不替代 H01 前置。
+- **FC-705 门**：09-09 22:00 daily 成功、开 period 9（hits=0）；last-two = P7（23:59:41 ✗）+ P8（24:00:11 ✓）→ 仍 false，预计 **2026-09-10 22:00 运行后**转 true。见 [current-delta-2026-09-09.md](current-delta-2026-09-09.md)。
+- **R9 批 3 范围修正**：实测仅 `artifact_backfill.py` 零生产读者，其余候选（`backfill_v2`/`portfolio_promoter`/`_scan_root_v1`/`legacy_bridge_enabled`）均有活跃调用者 → 批 3 需技术门 + owner 政策门并重新拆分；`r4-unit-remediation-map.md` 的 CA-304/ZR-1009 行按此理解（清单见 revenue `r9_batch3_checklist.md`）。
+- 本轮未运行产品测试、未改产品代码/配置/DB/任务/worker。
+
 ## Phase 6：按虚拟数据湖减法调整为R4 — completed（仅规划交付）
 
 用户已要求依据简化建议调整规划，授权仍仅文档。R4以四个增量为主路线：统一只读合同、位置透明读取、消费/生产解耦、受控运维收尾；收入模型单独轨道。保留原始发现/测试，不再把R3的95门当全部工作的共同前置。
