@@ -4,7 +4,7 @@
 
 - 版本合同经 **rev1→rev4 四轮**：rev1 独立设计审查 **rejected**（2×P0/4×P1/4×P2，见 [rev1](v5-version-contract-review.md)）→ rev2 **accepted_with_findings**（[rev2](v5-version-contract-review-rev2.md)，F1–F6 全闭、新增 G1 阻断）→ rev3/rev4 闭合 G1 与 H1–H3（[rev3](v5-version-contract-review-rev3.md) / [rev4](v5-version-contract-review-rev4.md)）→ **rev4 复审 verdict = accepted，V5-1 关闭，V5-2 可开始**。
 - 最终交付：`v5-version-contract.md`（rev4；§5.1 19 项必填字段含 `evidence_tools[]`；§5.2 冻结集合 = 48 导入 + 3 v5 自有治理件 = **51**，含派生规则与 checker 路径规则；§7 N1–N17）、两份证据（可字节复现）、两个证据工具（含只读 `--check`，**字节级**比较，EOL 漂移即失败）、四份独立审查记录。
-- 复审独立复现：三个证据文件与提交字节逐一相同（inventory.json `b7612e0f…`、inventory.md `0240a85f…`、equivalence.json `79ac6ca4…`），两工具 `--check` 退出 0 且不写盘。
+- 复审独立复现：三个证据文件与提交字节逐一相同（inventory.json `b7612e0f…`、inventory.md `0240a85f…`、equivalence.json `79ac6ca4…`）——**这三个哈希是 V5-1 时点（提交 `2fbbe5e`）的值**，V5-2 冻结时证据已按 D4 重生成（现行值见 [v5-freeze-record.md](v5-freeze-record.md) §1 与 manifest `evidence`）；两工具 `--check` 退出 0 且不写盘。
 - 遗留（非阻断 P3，已修）：K1 `evidence_tools[]` 条目类型补为 `{path, sha256, size_bytes}`；K2 `--check` 改为 `read_bytes()` 字节比较（EOL 漂移必失败）。
 - 本轮只写 v5 目录文档与只读证据工具：未改协议语义、未生成正式 manifest、未运行旧 checker、未触碰 worker/配置/数据库/任务。
 
@@ -83,3 +83,12 @@
   没有正式plan_manifest.v5.json，没有三路正式技术审查PASS，更没有实施或worker恢复授权。
 - 本轮写入全部在新v5目录；原v4目录/manifest/报告、项目源码/配置/数据库、主线计划与worker不动。
 - 下一次从本目录README→task_plan→findings→progress恢复；先运行verify_import.py，再进入V5-1。
+
+## 2026-09-09：V5-2 冻结 + 三路独立审查 + V5-2.1 整改
+
+- V5-2 冻结：新建 `tools/v5_plan_consistency_check.py`（复用导入基线全套检查 + v5 检查 + N1–N17 机器检查 + `--self-test`）与 `tools/v5_freeze_manifest_build.py`（生成器，**不入冻结集**）；生成 `plan_manifest.v5.json`（51 项 = 48 导入 + 3 治理件）与 `plan_freeze_check.v5.txt`（172 字节、0 个 CR）。
+- 首轮冻结 `454f632`：预冻结 7658 checks、`--verify-manifest` 8866、`--self-test` 17/17；边界 B1–B6 逐项实测（204 行属性全 unset、旧目录 38 文件干净）。
+- 三路独立审查（SQL/性能、生命周期/安全、测试/DAG）各自只读、独立复算 51/51 哈希与 B1–B6，不共享快照：三份均 `accepted_with_findings`，**无 P0**，共 **9 条 P1**（N6 只核对标签不复算、导入字节只锚在可写捕获记录、N8 未绑定本 checker 真实运行、command 子串匹配、`baseline/plan/*` 非递归、N11 后缀匹配+静默回退、N9 判据只认路径存在、v4 的 reparse/包含路径安全不变量被整体丢弃）。
+- V5-2.1 整改冻结 `917b8d8`（`85044ed` 提交记录）：逐条修根因 → 预冻结 **7710** checks、`--verify-manifest` **9174** 通过、`--self-test` **17 例 / 27 变异**在「全检查」与「仅该编码」两种模式下全部被拒；新增 manifest `evidence` 字段绑定两份证据输出、N9 机器可读处置载荷（`NON_AUTHORITATIVE` + 目录清单摘要复算）、`V5-PATH-SAFETY`、`V5-SET-NESTED`、N10 fail-closed（未跟踪或改写即 red）、N8 在真实树重跑默认模式逐字节比对。
+- 逐条整改与验证见 [v5-freeze-record.md](v5-freeze-record.md) §7；偏差 D1–D11 与残余风险 §6 如实记录（含未删除未加锁的旧目录、pre-commit hook 机制、活动文档引用不受覆盖、`reviews/` 绝对路径按设计保留）。
+- 状态：`FROZEN_FOR_INDEPENDENT_REVIEW`；待三路复审各自确认其 P1 已闭。**未实施任何 worker 修复，未触碰源码/配置/数据库/任务，未恢复 worker。**

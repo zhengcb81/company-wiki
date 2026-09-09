@@ -858,12 +858,12 @@
       "old_dir_refs": 0,
       "plan_revision_values": [],
       "schema_version_values": [],
-      "sha256": "4e7ce1e6c983b0f3461ccd7a16c51dfeb0b0be05205d39258032e9b626d36dfd",
-      "size_bytes": 7039,
+      "sha256": "ebc6c904fb06f2d857610638d9c172de0b3ab078155182857ec2b0c38cafce9a",
+      "size_bytes": 7324,
       "version_tokens": {
         "v3": 1,
         "v4": 3,
-        "v5": 14
+        "v5": 15
       }
     }
   },

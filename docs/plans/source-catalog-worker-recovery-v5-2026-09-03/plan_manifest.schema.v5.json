@@ -40,7 +40,8 @@
     "frozen_at", "plan_directory", "plan_freeze_git_head", "review_state_at_freeze",
     "supersedes", "investigation_source", "normative_file_count", "normative_files",
     "frozen_set_composition", "equivalence_summary", "coverage_counts",
-    "pre_freeze_check", "evidence", "evidence_tools", "self_exclusion", "immutability_policy"
+    "pre_freeze_check", "evidence", "boundary_record", "evidence_tools", "self_exclusion",
+    "immutability_policy"
   ],
   "properties": {
     "schema_version": { "const": 3 },
@@ -157,6 +158,15 @@
       "properties": {
         "v5-version-reference-inventory.json": { "$ref": "#/$defs/file" },
         "v5-baseline-equivalence.json": { "$ref": "#/$defs/file" }
+      }
+    },
+    "boundary_record": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": { "const": "v5-freeze-boundary.md" },
+        "sha256": { "$ref": "#/$defs/sha256" }
       }
     },
     "evidence_tools": {

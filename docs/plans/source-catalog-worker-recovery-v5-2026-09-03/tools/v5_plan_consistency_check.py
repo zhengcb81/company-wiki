@@ -31,6 +31,7 @@ import json
 import os
 import re
 import shutil
+import stat
 import subprocess
 import sys
 import tempfile
@@ -58,7 +59,29 @@ EXPECTED_COMMAND = ("python docs/plans/source-catalog-worker-recovery-v5-2026-09
 EXPECTED_SUPERSEDES = ("baseline/history/plan_manifest.v4.json",
                        "baseline/history/plan_manifest.v3.json")
 RETIRED_MARKERS = ("plan_consistency_check.py", "gate_dag.v4.json", "plan_manifest.v3.json")
+RETIRED_NAME = "source-catalog-worker-recovery"
 MARKER_BLOCK = re.compile(r"```json\s*(\{.*?\})\s*```", re.S)
+TOOLS_EXPECTED = ("tools/v5_equivalence_check.py", "tools/v5_freeze_manifest_build.py",
+                  "tools/v5_plan_consistency_check.py", "tools/v5_version_reference_scan.py")
+
+# Frozen-in-code anchors: these six history/source files are NOT in the 51-file
+# frozen set, so their bytes are pinned here instead (same pattern as the
+# baseline IMMUTABLE_HISTORY_SHA256 pin). Without this, the v4 manifest - which
+# N7 uses as an anchor for the imported corpus - would itself be rewritable.
+PINNED_HISTORY_SHA256 = {
+    "baseline/history/plan_manifest.v3.json":
+        "9ee84acdbe65a294925de004125f37b62b9e4b1c95655a04cd2344bc6bd270cc",
+    "baseline/history/plan_manifest.v4.json":
+        "c34b849475f1efeb0a3237af2d4a748a6e36c276f7c91b6ad07cae8ea3004711",
+    "baseline/history/plan_review_revision.v4.md":
+        "7b489b8fb81e25297136da00a9124d7d3ae6edd3b995d91df56a5d7c689e79cf",
+    "baseline/history/progress.v4.md":
+        "6c34d6da016241a8dd5f8d662b776a76b814e58c46d4f4b3d606503757ee2b50",
+    "baseline/history/v4-freeze-integrity-incident-2026-09-03.md":
+        "ede40ac40f7afa35fbc27d00fd7aff6441cc54a9875b041dd6b1d82dd3306a6d",
+    "baseline/investigation/worker-investigation-2026-08-20.md":
+        "8e6166ba063bc281ca1fa5da3c0743b895e4d93b6f2957de3cbd0b6938a95be6",
+}
 
 # Self-test isolation: when set, only these codes are recorded.
 ONLY: set[str] | None = None
@@ -131,8 +154,15 @@ def frozen_entries(ctx: Ctx) -> list[tuple[str, Path]]:
 
 
 def nested_plan_files(ctx: Ctx) -> list[str]:
-    return sorted(p.relative_to(ctx.baseline).as_posix()
-                  for p in ctx.baseline.rglob("*") if p.is_file() and p.parent != ctx.baseline)
+    """Any file below baseline/plan/** plus any subdirectory (even an empty one)."""
+    found = []
+    for path in ctx.baseline.rglob("*"):
+        rel = path.relative_to(ctx.baseline).as_posix()
+        if path.is_dir():
+            found.append(rel + "/")
+        elif path.parent != ctx.baseline:
+            found.append(rel)
+    return sorted(found)
 
 
 def snapshot(entries) -> dict[str, tuple[str, int]]:
@@ -156,12 +186,21 @@ def reparse_chain(path: Path, stop: Path) -> list[str]:
 
 
 def retired_candidates(ctx: Ctx) -> list[Path]:
-    """Any sibling plan directory carrying worker-recovery plan markers."""
+    """Any sibling plan directory that looks like a worker-recovery plan copy.
+
+    A candidate is either (a) named like the retired plan directory, or
+    (b) carrying one of the plan marker files. Renaming the directory therefore
+    does not hide it, and renaming the markers of a name-matching copy does not
+    hide it either.
+    """
     found = []
     if not ctx.plans_root.is_dir():
         return found
     for candidate in sorted(p for p in ctx.plans_root.iterdir() if p.is_dir()):
         if candidate.resolve() == ctx.root.resolve():
+            continue
+        if RETIRED_NAME in candidate.name:
+            found.append(candidate)
             continue
         if any((candidate / marker).exists() or list(candidate.rglob(marker))
                for marker in RETIRED_MARKERS):
@@ -217,6 +256,14 @@ def baseline_suite(base, ctx: Ctx) -> None:
                    "IMMUTABLE-HISTORY",
                    f"{name}: expected {expected}, got "
                    f"{sha(found.read_bytes()) if found else 'MISSING'}")
+    # Frozen-in-code pins for the six history/source files outside the 51-file
+    # frozen set: without these, the v4 manifest used as N7's anchor would be
+    # rewritable and the anchor would be circular.
+    for rel, expected in PINNED_HISTORY_SHA256.items():
+        path = ctx.root / rel
+        base.check(path.is_file() and sha(path.read_bytes()) == expected, "PINNED-HISTORY",
+                   f"{rel}: expected {expected}, got "
+                   f"{sha(path.read_bytes()) if path.is_file() else 'MISSING'}")
 
 
 def v5_checks(base, ctx: Ctx, entries, before) -> None:
@@ -227,8 +274,19 @@ def v5_checks(base, ctx: Ctx, entries, before) -> None:
     imported_count = sum(1 for rel, _ in entries if rel.startswith("baseline/plan/"))
     check(base, imported_count == EXPECTED_IMPORTED, "V5-SET-IMPORTED",
           f"expected {EXPECTED_IMPORTED} imported plan inputs, found {imported_count}")
-    check(base, len(ctx.governing) == EXPECTED_GOVERNING, "V5-SET-GOVERNING",
-          f"expected {EXPECTED_GOVERNING} v5-own governing artifacts")
+    check(base, tuple(ctx.governing) == GOVERNING and len(GOVERNING) == EXPECTED_GOVERNING
+          and len(set(ctx.governing)) == EXPECTED_GOVERNING, "V5-SET-GOVERNING",
+          f"governing artifacts must be exactly {GOVERNING}")
+    for rel in ctx.governing:
+        check(base, (ctx.root / rel).is_file(), "V5-SET-GOVERNING",
+              f"missing governing artifact: {rel}")
+    # tools/ must contain exactly the four expected scripts: an extra module here
+    # would be importable by the N8 child process (sys.path[0]).
+    tools_present = sorted(p.relative_to(ctx.root).as_posix()
+                           for p in (ctx.root / "tools").rglob("*.py")
+                           if "__pycache__" not in p.parts)
+    check(base, tuple(tools_present) == TOOLS_EXPECTED, "V5-TOOLS-EXACT",
+          f"tools/ scripts must be exactly {list(TOOLS_EXPECTED)}, found {tools_present}")
     check(base, len(entries) == EXPECTED_TOTAL, "V5-SET-TOTAL",
           f"expected {EXPECTED_TOTAL} frozen entries, found {len(entries)}")
     for rel, path in entries:
@@ -298,11 +356,13 @@ def verify_manifest(base, ctx: Ctx, entries) -> None:
     declared = {entry["path"]: entry for entry in manifest.get("normative_files", [])}
     expected = {rel for rel, _ in entries}
 
-    # N2: no axis may point at the retired directory.
+    # N2: no axis may point at a retired plan directory (repo-relative prefixes,
+    # so an unrelated sibling directory name can never cause a false positive).
     retired_names = [d.name for d in retired_candidates(ctx)]
+    retired_refs = [f"docs/plans/{name}" for name in retired_names]
     blob = json.dumps(manifest, ensure_ascii=False)
-    check(base, not any(name in blob for name in retired_names), "N2",
-          f"manifest references a retired plan directory: {retired_names}")
+    check(base, not any(ref in blob for ref in retired_refs), "N2",
+          f"manifest references a retired plan directory: {retired_refs}")
 
     # N3: the two axes must not be mixed.
     check(base, manifest.get("protocol_revision") == "v4"
@@ -357,14 +417,15 @@ def verify_manifest(base, ctx: Ctx, entries) -> None:
         raw = path.read_bytes()
         name = Path(rel).name
         historical = (captured.get(rel) or {}).get("historical_v4_sha256")
+        if historical is None:
+            continue  # N7 reports the missing capture record
         recomputed = ("v4_exact" if historical == sha(raw)
                       else "crlf_only" if historical == sha(raw.replace(b"\r\n", b"\n"))
                       else "unproven_new_baseline")
         check(base, recomputed == label, "N6",
               f"{rel}: declared {label}, recomputed {recomputed} from bytes")
-        if historical is not None:
-            check(base, v4_files.get(name) == historical, "N6",
-                  f"{rel}: capture historical hash != the v4 frozen manifest entry")
+        check(base, v4_files.get(name) == historical, "N6",
+              f"{rel}: capture historical hash != the v4 frozen manifest entry")
         check(base, rel in equivalence.get(label, []), "N6",
               f"{rel}: label {label} contradicts v5-baseline-equivalence.json")
     summary = manifest.get("equivalence_summary", {})
@@ -435,9 +496,10 @@ def verify_manifest(base, ctx: Ctx, entries) -> None:
                   and pre.get("reported_check_count") == reported, "N8",
                   "manifest does not bind the pre-freeze output bytes and count")
         if ctx.external:
-            env = dict(os.environ, V5_PREFREEZE_CHILD="1")
-            rerun = subprocess.run([sys.executable, str(ctx.root / CHECKER_REL)],
-                                   capture_output=True, timeout=600, env=env)
+            # -I (isolated) implies -P: the child must not put tools/ on
+            # sys.path[0], otherwise a planted tools/json.py could hijack it.
+            rerun = subprocess.run([sys.executable, "-I", str(ctx.root / CHECKER_REL)],
+                                   capture_output=True, timeout=600)
             check(base, rerun.stdout == payload, "N8",
                   "a fresh default-mode run does not reproduce plan_freeze_check.v5.txt")
     else:
@@ -478,6 +540,13 @@ def verify_manifest(base, ctx: Ctx, entries) -> None:
                   f"frozen entry resolves inside the retired copy: {rel_path}")
     check(base, len(declared_dirs) == len(candidates), "N9",
           f"declared {len(declared_dirs)} retired dirs but found {len(candidates)}")
+    # The disposition payload itself must be anchored by the manifest, otherwise
+    # a tampered retired copy could be re-declared consistently.
+    boundary = manifest.get("boundary_record", {})
+    check(base, boundary.get("path") == "v5-freeze-boundary.md"
+          and ctx.boundary_record.is_file()
+          and boundary.get("sha256") == sha(ctx.boundary_record.read_bytes()), "N9",
+          "manifest does not bind v5-freeze-boundary.md bytes")
 
     # N10: self-exclusion plus git-backed immutability of the manifest AND of
     # every frozen entry (fail-closed when the manifest is not tracked).
@@ -493,28 +562,45 @@ def verify_manifest(base, ctx: Ctx, entries) -> None:
             check(base, False, "N10", "cannot resolve the git repository root")
         else:
             targets = [ctx.manifest] + [path for _, path in entries]
+            rels = []
             for target in targets:
                 try:
-                    rel = target.relative_to(repo_root).as_posix()
+                    rels.append(target.relative_to(repo_root).as_posix())
                 except ValueError:
                     check(base, False, "N10", f"frozen path outside the repository: {target}")
-                    continue
-                tracked = subprocess.run(
-                    ["git", "-C", str(repo_root), "ls-files", "--error-unmatch", rel],
-                    capture_output=True, text=True, encoding="utf-8", errors="replace",
-                    timeout=60)
-                if tracked.returncode != 0:
-                    check(base, False, "N10",
-                          f"not tracked at HEAD, so immutability is unverifiable: {rel}")
-                    continue
-                head = subprocess.run(["git", "-C", str(repo_root), "rev-parse", f"HEAD:{rel}"],
-                                      capture_output=True, text=True, encoding="utf-8",
-                                      errors="replace", timeout=60).stdout.strip()
-                blob = subprocess.run(["git", "-C", str(repo_root), "hash-object", rel],
-                                      capture_output=True, text=True, encoding="utf-8",
-                                      errors="replace", timeout=60).stdout.strip()
-                check(base, bool(head) and head == blob, "N10",
-                      f"tracked file was rewritten after freeze: {rel}")
+            listed = subprocess.run(["git", "-C", str(repo_root), "ls-files", "-s", "--", *rels],
+                                    capture_output=True, text=True, encoding="utf-8",
+                                    errors="replace", timeout=120)
+            tracked: dict[str, str] = {}
+            for line in (listed.stdout or "").splitlines():
+                meta, _, path = line.partition("\t")
+                fields = meta.split()
+                if path and len(fields) >= 2:
+                    tracked[path] = fields[1]
+            missing = [rel for rel in rels if rel not in tracked]
+            check(base, not missing, "N10",
+                  f"not tracked at HEAD, so immutability is unverifiable: {missing[:3]}")
+            if not missing:
+                computed = subprocess.run(
+                    ["git", "-C", str(repo_root), "hash-object", "--stdin-paths"],
+                    input="\n".join(rels) + "\n", capture_output=True, text=True,
+                    encoding="utf-8", errors="replace", timeout=120)
+                blobs = (computed.stdout or "").split()
+                for rel, blob in zip(rels, blobs):
+                    check(base, blob == tracked[rel], "N10",
+                          f"tracked file was rewritten after freeze: {rel}")
+            # The recorded freeze HEAD must be a real ancestor of HEAD that
+            # already contains the imported corpus.
+            head = str(manifest.get("plan_freeze_git_head", ""))
+            ancestor = subprocess.run(
+                ["git", "-C", str(repo_root), "merge-base", "--is-ancestor", head, "HEAD"],
+                capture_output=True, timeout=60)
+            probe = subprocess.run(
+                ["git", "-C", str(repo_root), "cat-file", "-e",
+                 f"{head}:docs/plans/{ctx.root.name}/baseline/plan/README.md"],
+                capture_output=True, timeout=60)
+            check(base, bool(head) and ancestor.returncode == 0 and probe.returncode == 0, "N10",
+                  f"plan_freeze_git_head {head!r} is not an ancestor of HEAD containing the corpus")
 
     # N11: the supersession chain is exactly the two history manifests.
     superseded = manifest.get("supersedes", [])
@@ -555,8 +641,11 @@ def verify_manifest(base, ctx: Ctx, entries) -> None:
         check(base, entry is not None and entry.get("equivalence") == "v5_own", "N16",
               f"governing artifact not bound as v5_own: {rel}")
 
-    # N17: evidence tools and evidence outputs are hash-bound.
+    # N17: evidence tools and evidence outputs are hash-bound, and the tool set
+    # is exactly the two expected entries (an extra tool would be unbound code).
     tools = {entry.get("path"): entry for entry in manifest.get("evidence_tools", [])}
+    check(base, set(tools) == set(ctx.evidence_tools), "N17",
+          f"evidence_tools must be exactly {list(ctx.evidence_tools)}, got {sorted(tools)}")
     for rel in ctx.evidence_tools:
         entry = tools.get(rel)
         path = ctx.root / rel
@@ -677,6 +766,24 @@ def _n8_comment(ctx: Ctx, manifest: dict) -> None:
                                                "# v5_plan_consistency_check.py")
 
 
+def _n9_sync(ctx: Ctx, manifest: dict) -> None:
+    """Tamper with the retired copy and re-declare it consistently."""
+    target = next(p for p in ctx.old_dir.rglob("*") if p.is_file())
+    target.write_bytes(b"tampered\n")
+    count, digest = inventory_digest(ctx.old_dir)
+    text = ctx.boundary_record.read_text(encoding="utf-8")
+    text = re.sub(r'"file_count": \d+', f'"file_count": {count}', text)
+    text = re.sub(r'"inventory_sha256": "[0-9a-f]{64}"', f'"inventory_sha256": "{digest}"', text)
+    ctx.boundary_record.write_text(text, encoding="utf-8", newline="\n")
+
+
+def _n9_marker_rename(ctx: Ctx, manifest: dict) -> None:
+    """A name-matching copy whose marker files were renamed is still a candidate."""
+    fake = ctx.plans_root / "source-catalog-worker-recovery-2027-01-01"
+    fake.mkdir(parents=True, exist_ok=True)
+    (fake / "gate_dag_v4.json").write_text("{}\n", encoding="utf-8")
+
+
 def _n9_undeclared(ctx: Ctx, manifest: dict) -> None:
     fake = ctx.plans_root / "source-catalog-worker-recovery-2027-01-01"
     fake.mkdir(parents=True, exist_ok=True)
@@ -696,6 +803,19 @@ def _n9_missing(ctx: Ctx, manifest: dict) -> None:
 def _n10(ctx: Ctx, manifest: dict) -> None:
     manifest["normative_files"].append({"path": "plan_manifest.v5.json", "sha256": "0" * 64,
                                         "size_bytes": 1, "equivalence": "v5_own"})
+
+
+def _n10_git_rewrite(ctx: Ctx, manifest: dict) -> None:
+    """Commit the tree, then rewrite a frozen file: the git arm must fire."""
+    repo = ctx.root.parents[2]
+    git = ["git", "-C", str(repo), "-c", "user.email=probe@example.invalid",
+           "-c", "user.name=probe"]
+    subprocess.run([*git, "add", "-A"], capture_output=True, timeout=120)
+    subprocess.run([*git, "commit", "-q", "-m", "probe baseline"], capture_output=True, timeout=120)
+    head = subprocess.run([*git, "rev-parse", "HEAD"], capture_output=True, text=True,
+                          encoding="utf-8", errors="replace", timeout=60).stdout.strip()
+    manifest["plan_freeze_git_head"] = head
+    (ctx.baseline / "README.md").write_bytes(b"tampered after commit\n")
 
 
 def _n11_retired(ctx: Ctx, manifest: dict) -> None:
@@ -723,6 +843,10 @@ def _n13_nested(ctx: Ctx, manifest: dict) -> None:
     nested = ctx.baseline / "nested"
     nested.mkdir(parents=True, exist_ok=True)
     (nested / "plan_manifest.v4.json").write_text("{}\n", encoding="utf-8")
+
+
+def _n13_empty_dir(ctx: Ctx, manifest: dict) -> None:
+    (ctx.baseline / "empty").mkdir(parents=True, exist_ok=True)
 
 
 def _n14(ctx: Ctx, manifest: dict) -> None:
@@ -763,20 +887,62 @@ N_CASES = (
      ((_n7_tamper, False), (_n7_v4_rewrite, False), (_n7_rename, False))),
     ("N8", "用伪造或旧 checker 输出冒充 v5 预冻结检查",
      ((_n8_fake, False), (_n8_consistent, True), (_n8_comment, False))),
-    ("N9", "旧目录复活/未申报/处置被翻转",
-     ((_n9_undeclared, False), (_n9_flip, False), (_n9_missing, False))),
-    ("N10", "manifest 自身进入 normative 集", ((_n10, False),)),
+    ("N9", "旧目录复活/未申报/处置被翻转/摘要同步改写",
+     ((_n9_undeclared, False), (_n9_flip, False), (_n9_missing, False),
+      (_n9_sync, False), (_n9_marker_rename, False))),
+    ("N10", "manifest 自身进入 normative 集 / 冻结后改写已跟踪文件",
+     ((_n10, False), (_n10_git_rewrite, True))),
     ("N11", "取代链指向旧目录或形近路径",
      ((_n11_retired, False), (_n11_lookalike, False))),
     ("N12", "investigation_source 不在 v5 目录内", ((_n12, False),)),
-    ("N13", "normative 集缺项/计数不符/嵌套文件",
-     ((_n13_drop, False), (_n13_nested, False))),
+    ("N13", "normative 集缺项/计数不符/嵌套文件或空目录",
+     ((_n13_drop, False), (_n13_nested, False), (_n13_empty_dir, False))),
     ("N14", ".gitattributes 不在冻结集内", ((_n14, False),)),
     ("N15", "generation 与 capture manifest 不符", ((_n15, False),)),
     ("N16", "v5 治理件未绑定为 v5_own", ((_n16, False),)),
     ("N17", "证据工具/证据输出哈希不符",
      ((_n17_tool, False), (_n17_evidence, False))),
 )
+
+
+def _plant_tool(ctx: Ctx) -> None:
+    (ctx.root / "tools" / "json.py").write_text("x = 1\n", encoding="utf-8")
+
+
+def _nested_dir(ctx: Ctx) -> None:
+    (ctx.baseline / "nested").mkdir(parents=True, exist_ok=True)
+
+
+def _junction_tools(ctx: Ctx) -> None:
+    outside = ctx.root.parent / "outside_tools"
+    outside.mkdir(parents=True, exist_ok=True)
+    for path in (ctx.root / "tools").iterdir():
+        shutil.copy2(path, outside / path.name)
+    shutil.rmtree(ctx.root / "tools")
+    subprocess.run(["cmd", "/c", "mklink", "/J", str(ctx.root / "tools"), str(outside)],
+                   capture_output=True, timeout=60)
+
+
+V5_CHECK_CASES = (
+    ("V5-TOOLS-EXACT", _plant_tool),
+    ("V5-SET-NESTED", _nested_dir),
+    ("V5-PATH-SAFETY", _junction_tools),
+)
+
+
+def rmtree_force(path: Path) -> None:
+    """Remove a temp tree, clearing the read-only bit git sets on Windows."""
+    def fix(func, target, _exc):
+        try:
+            os.chmod(target, stat.S_IWRITE)
+            func(target)
+        except OSError:
+            pass
+
+    try:
+        shutil.rmtree(path, onexc=fix)
+    except TypeError:  # pragma: no cover - Python < 3.12
+        shutil.rmtree(path, onerror=fix)
 
 
 def self_test(base) -> int:
@@ -791,7 +957,7 @@ def self_test(base) -> int:
                 tag = f"{code}.{index}" if len(mutations) > 1 else code
                 repo = Path(tmp) / "repo"
                 if repo.exists():
-                    shutil.rmtree(repo)
+                    rmtree_force(repo)
                 root = repo / "docs" / "plans" / REAL.root.name
                 plans_root = root.parent
                 old_dir = plans_root / REAL.old_dir.name
@@ -829,7 +995,11 @@ def self_test(base) -> int:
                     saved = (base.ERRORS, base.CHECKS)
                     base.ERRORS, base.CHECKS = [], 0
                     try:
-                        verify_manifest(base, ctx, frozen_entries(ctx))
+                        try:
+                            verify_manifest(base, ctx, frozen_entries(ctx))
+                        except Exception as exc:  # noqa: BLE001 - reported as N4
+                            check(base, False, "N4",
+                                  f"verification crashed: {type(exc).__name__}: {exc}")
                         fired.append(code in {e.split(":", 1)[0] for e in base.ERRORS})
                     finally:
                         base.ERRORS, base.CHECKS = saved
@@ -839,8 +1009,52 @@ def self_test(base) -> int:
                 else:
                     failures.append(tag)
                     print(f"SELF-TEST {tag} FAIL: full={fired[0]} isolated={fired[1]} - {label}")
+
+        # Default-mode checks that N1-N17 do not cover.
+        for code, mutate in V5_CHECK_CASES:
+            repo = Path(tmp) / "repo"
+            if repo.exists():
+                rmtree_force(repo)
+            root = repo / "docs" / "plans" / REAL.root.name
+            shutil.copytree(REAL.root / "baseline", root / "baseline")
+            shutil.copytree(REAL.root / "tools", root / "tools")
+            for name in (".gitattributes", "plan_manifest.v5.json",
+                         "plan_manifest.schema.v5.json", "plan_freeze_check.v5.txt",
+                         "import_manifest.v5.json", "v5-baseline-equivalence.json",
+                         "v5-version-reference-inventory.json", "v5-freeze-boundary.md"):
+                source = REAL.root / name
+                if source.is_file():
+                    (root / name).write_bytes(source.read_bytes())
+            shutil.copytree(REAL.old_dir, root.parent / REAL.old_dir.name)
+            ctx = Ctx(
+                root=root, baseline=root / "baseline" / "plan",
+                manifest=root / "plan_manifest.v5.json",
+                schema=root / "plan_manifest.schema.v5.json",
+                freeze_output=root / "plan_freeze_check.v5.txt",
+                import_manifest=root / "import_manifest.v5.json",
+                boundary_record=root / "v5-freeze-boundary.md",
+                v4_manifest=root / "baseline" / "history" / "plan_manifest.v4.json",
+                plans_root=root.parent, old_dir=root.parent / REAL.old_dir.name,
+                governing=GOVERNING, evidence_tools=EVIDENCE_TOOLS,
+                evidence_files=EVIDENCE_FILES, external=False,
+            )
+            mutate(ctx)
+            entries = frozen_entries(ctx)
+            saved = (base.ERRORS, base.CHECKS)
+            base.ERRORS, base.CHECKS = [], 0
+            try:
+                v5_checks(base, ctx, entries, snapshot(entries))
+                codes = {e.split(":", 1)[0] for e in base.ERRORS}
+            finally:
+                base.ERRORS, base.CHECKS = saved
+            if code in codes:
+                print(f"SELF-TEST {code} PASS: default-mode check rejects the mutation")
+            else:
+                failures.append(code)
+                print(f"SELF-TEST {code} FAIL: codes={sorted(codes)}")
     print(f"SELF-TEST: {len(N_CASES)} cases / "
-          f"{sum(len(m) for _, _, m in N_CASES)} mutations; failures={failures or 'none'}")
+          f"{sum(len(m) for _, _, m in N_CASES)} mutations + "
+          f"{len(V5_CHECK_CASES)} default-mode checks; failures={failures or 'none'}")
     return 1 if failures else 0
 
 
@@ -855,7 +1069,10 @@ def main() -> int:
     baseline_suite(base, ctx)
     v5_checks(base, ctx, entries, before)
     if "--verify-manifest" in sys.argv:
-        verify_manifest(base, ctx, entries)
+        try:
+            verify_manifest(base, ctx, entries)
+        except Exception as exc:  # noqa: BLE001 - a malformed manifest is an N4 failure
+            check(base, False, "N4", f"manifest verification crashed: {type(exc).__name__}: {exc}")
     return report(base)
 
 

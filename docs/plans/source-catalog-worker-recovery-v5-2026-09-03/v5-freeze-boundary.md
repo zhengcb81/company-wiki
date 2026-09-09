@@ -42,7 +42,13 @@
 
 ## 5. 机器可验的旧目录处置（N9 载荷）
 
-退役副本不是靠"路径存在 + 有一个文件"判定的，而是靠下面这个 **机器可读块**：checker 会解析它、按 `inventory_sha256`（对全部文件**按相对路径的 case-sensitive 排序**后，逐条拼接 `相对路径\0sha256\n` 再取 SHA-256）与 `file_count` 复算，并要求 `docs/plans/` 下**任何**含 worker-recovery 计划标记（`plan_consistency_check.py` / `gate_dag.v4.json` / `plan_manifest.v3.json`）的目录都出现在 `retired_dirs` 中——改名、复制、新建副本都会触发 N9。
+退役副本不是靠"路径存在 + 有一个文件"判定的，而是靠下面这个 **机器可读块**：checker 会解析它、按 `inventory_sha256`（对全部文件**按相对路径的 case-sensitive 排序**后，逐条拼接 `相对路径\0sha256\n` 再取 SHA-256）与 `file_count` 复算，并要求 `docs/plans/` 下**任何**候选目录都出现在 `retired_dirs` 中。候选判据（两条任一）：
+1. 目录名含 `source-catalog-worker-recovery`（改名后仍会被认出）；
+2. 目录内（含子目录）存在计划标记文件 `plan_consistency_check.py` / `gate_dag.v4.json` / `plan_manifest.v3.json`（改名标记但保留目录名仍会被认出）。
+
+本文件自身的字节由 manifest 的 `boundary_record.sha256` 绑定，因此"改写退役副本 + 同步改写申报摘要"会同时触发 N9 与 manifest 绑定失败。
+
+**判据边界（如实声明）**：目录名与标记同时被改写的副本、以及放在 `docs/plans/` 之外的副本不在机器判据范围内（见 `v5-freeze-record.md` §6 残余风险）。
 
 ```json
 {

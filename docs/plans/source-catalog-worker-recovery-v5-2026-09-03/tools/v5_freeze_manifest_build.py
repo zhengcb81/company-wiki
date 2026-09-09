@@ -124,6 +124,10 @@ def main() -> int:
             rel: {"path": rel, "sha256": sha((V5 / rel).read_bytes()),
                   "size_bytes": (V5 / rel).stat().st_size}
             for rel in ("v5-version-reference-inventory.json", "v5-baseline-equivalence.json")},
+        "boundary_record": {
+            "path": "v5-freeze-boundary.md",
+            "sha256": sha((V5 / "v5-freeze-boundary.md").read_bytes()),
+        },
         "evidence_tools": [
             {"path": rel, "sha256": sha((V5 / rel).read_bytes()),
              "size_bytes": (V5 / rel).stat().st_size} for rel in EVIDENCE_TOOLS],

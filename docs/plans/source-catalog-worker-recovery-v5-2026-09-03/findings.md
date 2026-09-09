@@ -57,3 +57,13 @@ baseline 中的 schema/protocol 仍是旧版历史输入；不会直接把它们
 53份计划/审查文件在v5有精确副本；额外1份pyc是生成缓存，未污染固定导入manifest。
 独立预检从缓存缺口BLOCK，经显式例外记录与复核关闭为SAFE_TO_RECYCLE；无reparse或保留目录重叠。
 删除后v5检查54/54 PASS、原调查报告hash未变。旧source路径是历史元数据，不是v5校验运行依赖。
+
+## 8. V5-2 冻结与三路独立审查（2026-09-09）
+
+- **冻结集 = 51**：48 份导入计划输入（`baseline/plan/**`，递归枚举）＋ 3 份 v5 自有治理件（`plan_manifest.schema.v5.json`、v5 checker 入口、`.gitattributes`）；manifest 自排除。证据工具与证据输出分别由 `evidence_tools[]`、`evidence` 绑定，不进入 normative。
+- **等价性以字节复算为准**（不采信标签）：21 `v4_exact` / 17 `crlf_only` / 10 `unproven_new_baseline`；`crlf_only` 的判据是「LF 归一化后等于 v4 冻结哈希」，且经 v4 冻结 manifest 二次锚定。
+- **三路审查结论**：SQL/性能、生命周期/安全、测试/DAG 各自独立复算，均 `accepted_with_findings`、**无 P0**、共 **9 条 P1**；复现配方与证据命令保存在三份 `v5-freeze-review-*.md`。
+- **P1 全部关闭（V5-2.1）**：N6 逐件复算等价类别；N7 增补 v4 冻结 manifest 锚；N8 重跑默认模式逐字节比对且命令为 schema `const`；N11 取代链恰好两条且禁止形近/旧目录路径；N13 与 `V5-SET-NESTED` 递归枚举；N9 改为机器可读处置载荷 + 目录清单摘要复算；`V5-PATH-SAFETY` 恢复 v4 的 reparse/包含不变量；N10 fail-closed 覆盖 manifest 与 51 个冻结项的 Git blob。
+- **自测强度**：`--self-test` 17 例 / 27 变异，每条都在「全检查」与「仅该编码」两种模式下被拒——后者排除「别的检查顺手拦住」的假阳性。
+- **仍存的风险**（见记录 §6）：旧目录未删除未加锁；不可变性最终依赖 Git 提交历史；活动文档中的旧目录引用不受机器检查覆盖；`reviews/` 历史记录按合同不改字节。
+- 本目录仍是 PLAN_ONLY：没有实施 worker 修复，没有触碰源码/配置/数据库/任务，没有恢复 worker 自启动。
