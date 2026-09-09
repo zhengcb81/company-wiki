@@ -19,15 +19,15 @@
       "cli_commands": [],
       "filename_version": null,
       "id_values": [],
-      "old_dir_refs": 1,
+      "old_dir_refs": 2,
       "plan_revision_values": [],
       "schema_version_values": [],
-      "sha256": "a9d6756b4c80c23b07cd98fa744579a69b20f5be7903638c4655c8c9e4e1d3ee",
-      "size_bytes": 3970,
+      "sha256": "55d697f240ec824b1844e7777e2100c35811c3c6309f2830ed1f8f0786419eb6",
+      "size_bytes": 4303,
       "version_tokens": {
         "v3": 1,
         "v4": 5,
-        "v5": 5
+        "v5": 6
       }
     },
     "baseline/history/plan_manifest.v3.json": {
@@ -867,14 +867,14 @@
       "cli_commands": [],
       "filename_version": null,
       "id_values": [],
-      "old_dir_refs": 0,
+      "old_dir_refs": 1,
       "plan_revision_values": [],
       "schema_version_values": [],
-      "sha256": "9d50073ccf28c59c7e1eef38daf7b1bae9c1417673c174ede4170e8104906ab2",
-      "size_bytes": 3861,
+      "sha256": "f77cf78783148b0468273ec086ac1b01d3d33e3fd1c2dc94a3ad11c2af12d557",
+      "size_bytes": 4618,
       "version_tokens": {
         "v4": 2,
-        "v5": 6
+        "v5": 10
       }
     },
     "progress.md": {
@@ -882,14 +882,15 @@
       "cli_commands": [],
       "filename_version": null,
       "id_values": [],
-      "old_dir_refs": 1,
+      "old_dir_refs": 2,
       "plan_revision_values": [],
       "schema_version_values": [],
-      "sha256": "da25ec6bdd601a5f3f49c3fbc5258540a50368f131fcf9488bcc890fbe9d6fb0",
-      "size_bytes": 5461,
+      "sha256": "b746df95e8b361d7bb8abeaa217af73b940ea5e2c16d780c84fbe2a5de1ae129",
+      "size_bytes": 7478,
       "version_tokens": {
-        "v4": 2,
-        "v5": 3
+        "v3": 1,
+        "v4": 8,
+        "v5": 20
       }
     },
     "task_plan.md": {
@@ -900,18 +901,19 @@
       "old_dir_refs": 0,
       "plan_revision_values": [],
       "schema_version_values": [],
-      "sha256": "dfaaaaf639d4e9331f1adee4b1e014da760ff1acf1723acbc4d1281378115c6e",
-      "size_bytes": 5184,
+      "sha256": "f4985efe44b8ec3d0fbad8e485b5635a1f6bb39afbe13904145fe0ab79ec007f",
+      "size_bytes": 5915,
       "version_tokens": {
         "v3": 1,
         "v4": 6,
-        "v5": 6
+        "v5": 13
       }
     }
   },
   "generated_at_utc": "2026-09-09",
-  "scope": "v5 baseline (excl. reviews/, import manifest, verify_import.py)",
+  "scope": "baseline/** + v5 root planning docs (excl. reviews/, tools/, import manifest, verify_import.py)",
   "totals": {
+    "baseline_files": 54,
     "distinct_ids": [
       "urn:company-wiki:source-catalog-worker-recovery:authorization-manifest:v4",
       "urn:company-wiki:source-catalog-worker-recovery:authorization-revalidation-receipt:v1",
@@ -944,10 +946,16 @@
       "urn:company-wiki:source-catalog-worker-recovery:validator-vectors-instance:v4"
     ],
     "files_referencing_old_checker": 9,
-    "files_referencing_old_dir": 10,
+    "files_referencing_old_dir": 11,
     "files_scanned": 59,
-    "files_with_v3": 13,
+    "files_with_v3": 14,
     "files_with_v4": 44,
+    "id_suffix_counts": {
+      "v1": 12,
+      "v2": 1,
+      "v4": 14,
+      "v5": 2
+    },
     "plan_revision_values": [
       "v3",
       "v4"
@@ -955,6 +963,7 @@
     "schema_version_values": [
       "1",
       "2"
-    ]
+    ],
+    "v5_root_files": 5
   }
 }

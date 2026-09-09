@@ -27,7 +27,7 @@
 - 当前新目录**已于 2026-09-09 被 Git 跟踪**（随 R4 语料入库 wiki `f23ad1b`）；此前它未被跟踪，
   因此现有 pre-commit 的 tracked-file checkout 不会碰到它。按本页自己的约定，**被加入 index 后必须
   重验审查边界**（V5-2 第一项）。另：旧目录 `source-catalog-worker-recovery-2026-08-22/` 实测已复活
-  （38 文件、tracked、mtime 2026-09-07T19:08:52Z），与下方「已移入回收站」表述不符，处置见
+  （38 文件、tracked、mtime 2026-09-07T18:08:52Z UTC），与下方「已移入回收站」表述不符，处置见
   [版本合同 §6.1](v5-version-contract.md)。
 - 本目录的 `.gitattributes` 只为本目录禁用 Git EOL/filter/encoding 转换；不能独自提供文件锁或
   对抗共享工作树的修改。正式审查前必须再次验证 index 状态与稳定输入。

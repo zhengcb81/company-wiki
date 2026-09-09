@@ -1,9 +1,9 @@
 {
   "counts": {
     "crlf_only": 17,
-    "exact": 21,
-    "unproven": 10,
-    "unresolved": 0
+    "unproven_new_baseline": 10,
+    "unresolved": 0,
+    "v4_exact": 21
   },
   "generated_at_utc": "2026-09-09",
   "groups": {
@@ -26,7 +26,20 @@
       "baseline/plan/test_id_registry.v4.json",
       "baseline/plan/traceability_matrix.md"
     ],
-    "exact": [
+    "unproven_new_baseline": [
+      "baseline/plan/README.md",
+      "baseline/plan/authorization_manifest.schema.json",
+      "baseline/plan/evidence_manifest.schema.json",
+      "baseline/plan/findings.md",
+      "baseline/plan/operation_contract.schema.json",
+      "baseline/plan/operation_contracts.schema.json",
+      "baseline/plan/operation_contracts.v4.json",
+      "baseline/plan/operation_intent_manifest.schema.json",
+      "baseline/plan/operation_intent_template.schema.json",
+      "baseline/plan/plan_consistency_check.py"
+    ],
+    "unresolved": [],
+    "v4_exact": [
       "baseline/plan/authorization_revalidation_receipt.schema.json",
       "baseline/plan/bootstrap_verifier_manifest.schema.json",
       "baseline/plan/budget_reservation_bundle.schema.json",
@@ -48,20 +61,7 @@
       "baseline/plan/validator_release_manifest.schema.json",
       "baseline/plan/validator_request.schema.json",
       "baseline/plan/validator_scenario_fixture.schema.json"
-    ],
-    "unproven": [
-      "baseline/plan/README.md",
-      "baseline/plan/authorization_manifest.schema.json",
-      "baseline/plan/evidence_manifest.schema.json",
-      "baseline/plan/findings.md",
-      "baseline/plan/operation_contract.schema.json",
-      "baseline/plan/operation_contracts.schema.json",
-      "baseline/plan/operation_contracts.v4.json",
-      "baseline/plan/operation_intent_manifest.schema.json",
-      "baseline/plan/operation_intent_template.schema.json",
-      "baseline/plan/plan_consistency_check.py"
-    ],
-    "unresolved": []
+    ]
   },
   "method": "compare imported baseline bytes against import_manifest.v5.json historical_v4_sha256; crlf_only means sha256(LF-normalized bytes) equals the v4 frozen hash"
 }
