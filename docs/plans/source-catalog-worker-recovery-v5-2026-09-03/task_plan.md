@@ -33,14 +33,20 @@
 
 证据：`reviews/old-plan-retirement-inventory.json`、`reviews/old-plan-retirement-result.md`。
 
-## Phase V5-1（版本合同）— 状态：pending
+## Phase V5-1（版本合同）— 状态：in_progress（rev2 待独立设计审查）
 
 - [ ] 独立设计审查选择一种一致方案：完整 plan revision v5 迁移，或明确拆分协议 revision 与
   冻结 generation。不能只改 manifest 文件名或只改少数 JSON 实例。
+  → rev1 已获独立设计审查 **rejected**（2×P0/4×P1）；rev2 已按 F1–F10 修订，待复审。
 - [ ] 枚举全部 schema 常量、机器实例、活动文档、CLI、validator、路径和版本引用。
-- [ ] 将 11 份未证明与原 v4 等价的输入作为新基线，从零内容审查，不声称是 v4 字节恢复。
+  → 已交付 [v5-version-reference-inventory.json](v5-version-reference-inventory.json) / [.md](v5-version-reference-inventory.md)。
+- [ ] 将 10 份未证明与原 v4 等价的输入作为新基线，从零内容审查，不声称是 v4 字节恢复。
+  → 2026-09-09 更正：原写 11 份；权威分类为 21 exact / 17 crlf_only / **10** unproven
+  （[v5-baseline-equivalence.json](v5-baseline-equivalence.json)，独立复算与事故报告表格一致）。
 - [ ] 新活动入口必须明确取代哪些旧入口；历史文件保留在 baseline，不能并列作为权威。
+  → 已交付映射（[版本合同 §6](v5-version-contract.md)）；并实测旧目录已复活，列入 V5-2 重验。
 - [ ] 建立版本一致性负例：旧 manifest、新 manifest、错 schema、混合节点、错路径一律拒绝。
+  → 已交付 N1–N15（[版本合同 §7](v5-version-contract.md)），待 V5-2 以机器检查实现。
 
 ## Phase V5-2（冻结与独立审查）— 状态：pending
 

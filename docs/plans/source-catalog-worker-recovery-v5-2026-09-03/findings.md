@@ -6,7 +6,7 @@
 
 - 用户明确同意“开一个新目录放 v5”。
 - 原 v4 manifest 自身 SHA-256 未变，但 48 份当前文件中 27 份与冻结 raw hash 不符。
-- 16 份已证明仅 CRLF/LF 差异；11 份不能证明与原冻结字节等价。
+- **17 份已证明仅 CRLF/LF 差异；10 份不能证明与原冻结字节等价**（2026-09-09 更正：本页原写 16/11，与本目录事故报告 §4 表格及独立复算不一致；权威分类见 [v5-baseline-equivalence.json](v5-baseline-equivalence.json) 与 [版本合同 §4](v5-version-contract.md)）。
 - 因此用户批准的是以当前保留内容建立**新基线**，不是覆盖 v4 或伪称旧审查通过。
 
 ## 2. 并行工作树风险
@@ -36,8 +36,12 @@ baseline 中的 schema/protocol 仍是旧版历史输入；不会直接把它们
 - 对漂移文件使用已独立回读诊断报告记录的当前hash作复制前锚点，拒绝超出该已知状态的变动。
 - 导入manifest SHA-256：`da7d116e8c692d6311411c7390bec4278b59666a771823672f53e9b0f6567e4a`。
 - 只读verify_import.py通过54/54文件、精确baseline文件集合、无reparse、路径负例及历史计数检查。
-- 61个当前文件路径的244项Git属性均为unset，Git tracked路径=0。这里只证明当前Git边界，
+- 61个当前文件路径的244项Git属性均为unset，Git tracked路径=0。这里只证明当时Git边界，
   不是永久文件锁，不授权以后把新目录随意加入共享index。
+- **2026-09-09 更正**：本目录已随 R4 规划语料入库（wiki `f23ad1b`），`git ls-files` = 64（另 5 份 V5-1 新文件随后提交）。
+  「tracked=0」不再是现状；按 README 自己的约定，V5-2 必须先重验 index/属性/并发写边界再冻结。
+  同时实测**旧目录 `source-catalog-worker-recovery-2026-08-22/` 已复活**（38 文件、tracked、clean、
+  mtime 2026-09-07T19:08:52Z），与 README「已回收」表述不符——见[版本合同 §6.1](v5-version-contract.md)。
 
 ## 6. 独立导入审查完成
 

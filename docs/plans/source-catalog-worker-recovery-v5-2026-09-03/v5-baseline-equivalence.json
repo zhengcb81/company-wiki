@@ -1,0 +1,67 @@
+{
+  "counts": {
+    "crlf_only": 17,
+    "exact": 21,
+    "unproven": 10,
+    "unresolved": 0
+  },
+  "generated_at_utc": "2026-09-09",
+  "groups": {
+    "crlf_only": [
+      "baseline/plan/acceptance_thresholds.md",
+      "baseline/plan/agent_review_gates.md",
+      "baseline/plan/execution_playbook.md",
+      "baseline/plan/gate_dag.v4.json",
+      "baseline/plan/gate_ledger.schema.json",
+      "baseline/plan/gate_ledger_validator_vectors.schema.json",
+      "baseline/plan/gate_ledger_validator_vectors.v4.json",
+      "baseline/plan/gate_state_machine.md",
+      "baseline/plan/implementation_agent_prompts.md",
+      "baseline/plan/ledger_validator_contract.md",
+      "baseline/plan/plan_review_findings.md",
+      "baseline/plan/rollout_rollback_runbook.md",
+      "baseline/plan/task_plan.md",
+      "baseline/plan/test_acceptance_plan.md",
+      "baseline/plan/test_id_registry.schema.json",
+      "baseline/plan/test_id_registry.v4.json",
+      "baseline/plan/traceability_matrix.md"
+    ],
+    "exact": [
+      "baseline/plan/authorization_revalidation_receipt.schema.json",
+      "baseline/plan/bootstrap_verifier_manifest.schema.json",
+      "baseline/plan/budget_reservation_bundle.schema.json",
+      "baseline/plan/budget_settlement_receipt.schema.json",
+      "baseline/plan/gate_dag.schema.json",
+      "baseline/plan/gate_ledger_transcript.schema.json",
+      "baseline/plan/journal_manifest.schema.json",
+      "baseline/plan/journal_record.schema.json",
+      "baseline/plan/ledger_head_anchor.schema.json",
+      "baseline/plan/operation_execution_receipt.schema.json",
+      "baseline/plan/parser_route_manifest.schema.json",
+      "baseline/plan/plan_freeze_check.v4.txt",
+      "baseline/plan/plan_manifest.schema.json",
+      "baseline/plan/review_confirmation.schema.json",
+      "baseline/plan/review_result.schema.json",
+      "baseline/plan/schema_registry.schema.json",
+      "baseline/plan/user_approval_receipt.schema.json",
+      "baseline/plan/validator_fixture_manifest.schema.json",
+      "baseline/plan/validator_release_manifest.schema.json",
+      "baseline/plan/validator_request.schema.json",
+      "baseline/plan/validator_scenario_fixture.schema.json"
+    ],
+    "unproven": [
+      "baseline/plan/README.md",
+      "baseline/plan/authorization_manifest.schema.json",
+      "baseline/plan/evidence_manifest.schema.json",
+      "baseline/plan/findings.md",
+      "baseline/plan/operation_contract.schema.json",
+      "baseline/plan/operation_contracts.schema.json",
+      "baseline/plan/operation_contracts.v4.json",
+      "baseline/plan/operation_intent_manifest.schema.json",
+      "baseline/plan/operation_intent_template.schema.json",
+      "baseline/plan/plan_consistency_check.py"
+    ],
+    "unresolved": []
+  },
+  "method": "compare imported baseline bytes against import_manifest.v5.json historical_v4_sha256; crlf_only means sha256(LF-normalized bytes) equals the v4 frozen hash"
+}

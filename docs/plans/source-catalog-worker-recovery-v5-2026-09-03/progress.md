@@ -1,5 +1,19 @@
 # Worker v5 — 进度日志
 
+## 2026-09-09：V5-1 版本合同（rev2，待独立复审）
+
+- 交付 [v5-version-contract.md](v5-version-contract.md)（rev2）、[版本引用枚举](v5-version-reference-inventory.json)、[基线等价性](v5-baseline-equivalence.json)：
+  - **方案裁决**：拆分 `protocol_revision`（v4）与 `freeze_generation`（v5）两轴，不整体升 v5——依据 29 个 `$id` 的后缀分布 `:v4`=14/`:v1`=12/`:v5`=2/`:v2`=1（整体升版会与既有 `journal-manifest:v5` 撞名）。
+  - **引用枚举**：59 个文件（baseline 54 + v5 根 5）；44 份含 `v4`、13 份含 `v3`；10 份引用已退役旧目录、9 份引用旧 checker。
+  - **基线等价**：**21 exact / 17 crlf_only / 10 unproven**。本页与 `findings.md`、`task_plan.md` 原写的「16/11」为笔误，已更正；`baseline/history/progress.v4.md` 属冻结历史，保留原字并在此披露。
+  - **v5 manifest schema**：新建 `plan_manifest.schema.v5.json`（`$id …:plan-manifest:v5`、`schema_version 3`），字段见合同 §5；导入的 v4 manifest schema 不校验 v5。
+  - **负例**：N1–N15，待 V5-2 以机器检查 + 测试 ID 实现。
+- 独立设计审查 rev1 结论 **rejected**（2×P0、4×P1、4×P2），审查文件 [v5-version-contract-review.md](v5-version-contract-review.md)；rev2 已逐条修订，待复审。
+- **两项现状更正（实测）**：
+  1. 本目录已随 R4 语料入库（wiki `f23ad1b`），`git ls-files`=64；README/findings 的「未被 Git 跟踪/tracked=0」不再成立，V5-2 必须先重验 Git/index/属性/并发写边界。
+  2. **旧目录 `source-catalog-worker-recovery-2026-08-22/` 已复活**：38 文件、tracked、clean、mtime `2026-09-07T19:08:52Z`，字节与 v4 冻结 0/38、与 v5 基线 0/38 相同——与「已移入回收站」表述不符，按合同 N9 处理（并列权威风险）。
+- 本轮只写 v5 目录文档：未改协议语义、未生成正式 manifest、未运行旧 checker、未触碰 worker/配置/数据库/任务。
+
 > 2026-09-06文档同步记录：只更新本目录活动README及三件套的跨计划路由，baseline54份/import manifest/reviews保持原字节；没有新增正式plan_manifest，没有推进V5-1/2/3或实施worker。当前统一依赖见[整改总计划](../painpoint-outcome-audit-2026-09-05/remediation-plan.md)。
 
 ## 2026-09-03：用户授权退役旧 v1–v4 目录（已完成）
