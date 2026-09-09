@@ -1,5 +1,7 @@
 # 诊断发现
 
+> **2026-09-09 深夜状态**：本诊断结论不变；下游事实更新——`legacy_bridge_enabled`/`_scan_root_v1`/`backfill_v2` 均有活跃调用者（详见 R4 [current-delta-2026-09-09.md](../painpoint-outcome-audit-2026-09-05/current-delta-2026-09-09.md)），"缩减迁移模式"属 R9 批 3 架构清理，需 FC-705 技术门 + owner 政策门。worker v5 已完成冻结（51 项 + 三轴审查 accepted），仅作输入、不授权实施。
+
 先分离三个问题：文件能否读取、文档内容能否对外发送、开发变更怎样验收。它们不应被一个root kind或一个accepted状态绑在一起。待当前代码核实。
 
 ## 已核实配置与初始实现
