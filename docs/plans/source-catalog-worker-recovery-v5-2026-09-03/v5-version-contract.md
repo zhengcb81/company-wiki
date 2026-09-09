@@ -63,7 +63,7 @@
 
 - `frozen_set_composition` 字段显式记录 `{imported: 48, v5_own_governing: 3, total: 51, self_excluded: 1}`，并与 `normative_file_count` 一致。**派生规则（可机器校验）**：`imported` = `equivalence ∈ {v4_exact, crlf_only, unproven_new_baseline}` 的条目数；`v5_own_governing` = `equivalence == v5_own` 的条目数；`total` = `normative_file_count`；`self_excluded` = 1（`plan_manifest.v5.json` 自身）。
 - **v5 checker 入口的路径规则**：其路径**必须等于** `pre_freeze_check.command` 中调用的脚本路径，`equivalence = v5_own`；V5-2 定名后由 N13/N16 用该规则（而非字面清单）判定，避免「名字未定则无法校验」的空档。
-- **证据工具不进入 normative 集**：`tools/v5_version_reference_scan.py`、`tools/v5_equivalence_check.py` 记为 `evidence_tools[]`（各自 hash 绑定），只复现证据，不是计划输入。
+- **证据工具不进入 normative 集**：`tools/v5_version_reference_scan.py`、`tools/v5_equivalence_check.py` 记为 `evidence_tools[]`，条目类型 `{path, sha256, size_bytes}`（与 normative 条目同形但不带 `equivalence`），只复现证据，不是计划输入；两工具均支持只读 `--check`（**字节级**比较，EOL 漂移即失败——v4 事故即此类）。
 - `plan_manifest.schema.v5.json` 与 v5 checker 必须**同时**出现在 normative 集与 `pre_freeze_check.command` 中，避免「治理件无哈希锚」的空档。
 - `N13` 判据改为：`normative_files` 必须**恰好等于**上述 51 项集合（缺/多/重复/casefold 冲突即拒绝）；`N14` 判据改为：`.gitattributes` 必须在集合内且其哈希与冻结记录一致。
 

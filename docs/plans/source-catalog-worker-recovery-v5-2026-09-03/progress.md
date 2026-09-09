@@ -1,5 +1,13 @@
 # Worker v5 — 进度日志
 
+## 2026-09-09：V5-1 完成（版本合同 rev4 获独立复审 accepted）
+
+- 版本合同经 **rev1→rev4 四轮**：rev1 独立设计审查 **rejected**（2×P0/4×P1/4×P2，见 [rev1](v5-version-contract-review.md)）→ rev2 **accepted_with_findings**（[rev2](v5-version-contract-review-rev2.md)，F1–F6 全闭、新增 G1 阻断）→ rev3/rev4 闭合 G1 与 H1–H3（[rev3](v5-version-contract-review-rev3.md) / [rev4](v5-version-contract-review-rev4.md)）→ **rev4 复审 verdict = accepted，V5-1 关闭，V5-2 可开始**。
+- 最终交付：`v5-version-contract.md`（rev4；§5.1 19 项必填字段含 `evidence_tools[]`；§5.2 冻结集合 = 48 导入 + 3 v5 自有治理件 = **51**，含派生规则与 checker 路径规则；§7 N1–N17）、两份证据（可字节复现）、两个证据工具（含只读 `--check`，**字节级**比较，EOL 漂移即失败）、四份独立审查记录。
+- 复审独立复现：三个证据文件与提交字节逐一相同（inventory.json `b7612e0f…`、inventory.md `0240a85f…`、equivalence.json `79ac6ca4…`），两工具 `--check` 退出 0 且不写盘。
+- 遗留（非阻断 P3，已修）：K1 `evidence_tools[]` 条目类型补为 `{path, sha256, size_bytes}`；K2 `--check` 改为 `read_bytes()` 字节比较（EOL 漂移必失败）。
+- 本轮只写 v5 目录文档与只读证据工具：未改协议语义、未生成正式 manifest、未运行旧 checker、未触碰 worker/配置/数据库/任务。
+
 ## 2026-09-09：V5-1 版本合同（rev2，待独立复审）
 
 - 交付 [v5-version-contract.md](v5-version-contract.md)（rev2）、[版本引用枚举](v5-version-reference-inventory.json)、[基线等价性](v5-baseline-equivalence.json)：

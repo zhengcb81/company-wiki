@@ -885,12 +885,12 @@
       "old_dir_refs": 2,
       "plan_revision_values": [],
       "schema_version_values": [],
-      "sha256": "d410ba9ee679564f8cdee6217dfe02366413cf73ff42c7dde8ed88d0d0ac86cf",
-      "size_bytes": 8091,
+      "sha256": "d2a997e992abbfb4f9344a97db88f976b5052aafc8fb13b36b44abd45270d876",
+      "size_bytes": 9581,
       "version_tokens": {
         "v3": 1,
         "v4": 8,
-        "v5": 23
+        "v5": 30
       }
     },
     "task_plan.md": {
@@ -901,11 +901,11 @@
       "old_dir_refs": 0,
       "plan_revision_values": [],
       "schema_version_values": [],
-      "sha256": "f4985efe44b8ec3d0fbad8e485b5635a1f6bb39afbe13904145fe0ab79ec007f",
-      "size_bytes": 5915,
+      "sha256": "a3426da8a55e6bff9008841f915fab89c53e36c04bfad9b068426709d4038756",
+      "size_bytes": 5789,
       "version_tokens": {
         "v3": 1,
-        "v4": 6,
+        "v4": 7,
         "v5": 13
       }
     }

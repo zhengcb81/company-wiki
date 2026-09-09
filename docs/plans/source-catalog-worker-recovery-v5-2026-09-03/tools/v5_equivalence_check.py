@@ -66,8 +66,10 @@ def main() -> int:
     payload = json.dumps(out, ensure_ascii=False, indent=2, sort_keys=True) + "\n"
     target = V5 / "v5-baseline-equivalence.json"
     if "--check" in sys.argv:
-        actual = target.read_text(encoding="utf-8") if target.is_file() else ""
-        if actual != payload:
+        # Byte-strict comparison: a CRLF/LF drift must fail (the v4 incident
+        # was exactly an EOL-drift class), so never use text-mode reads here.
+        actual = target.read_bytes() if target.is_file() else b""
+        if actual != payload.encode("utf-8"):
             print(f"CHECK FAIL: {target.name} differs from the recomputation", file=sys.stderr)
             return 1
         print(f"CHECK OK: {target.name} reproduces byte-for-byte")

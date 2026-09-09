@@ -31,10 +31,8 @@ EXCLUDE = {
     "v5-version-reference-inventory.md",
     "v5-baseline-equivalence.json",
     "v5-version-contract.md",
-    "v5-version-contract-review.md",
-    "v5-version-contract-review-rev2.md",
-    "v5-version-contract-review-rev3.md",
 }
+EXCLUDE_PREFIX = "v5-version-contract-review"  # review records grow per round
 
 
 def sha(b: bytes) -> str:
@@ -71,7 +69,9 @@ def build() -> tuple[dict, dict[str, str]]:
         if not p.is_file():
             continue
         rel = p.relative_to(V5).as_posix()
-        if rel.startswith(("reviews/", "tools/")) or rel in EXCLUDE:
+        if (rel.startswith(("reviews/", "tools/"))
+                or rel in EXCLUDE
+                or rel.startswith(EXCLUDE_PREFIX)):
             continue
         files[rel] = scan(p)
 
@@ -153,8 +153,10 @@ def main() -> int:
     for name, payload in payloads.items():
         path = V5 / name
         if check:
-            actual = path.read_text(encoding="utf-8") if path.is_file() else ""
-            if actual != payload:
+            # Byte-strict: EOL drift must fail (v4 incident class), so compare
+            # bytes rather than text-mode reads.
+            actual = path.read_bytes() if path.is_file() else b""
+            if actual != payload.encode("utf-8"):
                 bad.append(name)
         else:
             path.write_text(payload, encoding="utf-8", newline="\n")
