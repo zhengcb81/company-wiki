@@ -34,6 +34,7 @@
 | B6 记录 HEAD / index | HEAD 见上；v5 目录冻结前已跟踪 74 个文件，冻结产物随后入库 |
 
 后冻结复验：`--verify-manifest` → `PASS: 8866 checks; {"fixed_nodes":115,"schemas":29,"tests":315,"vectors":18}`；`--self-test` → **17/17** 负例被拒。
+入库后复验（manifest 成为已跟踪文件、N10 的 Git 不可变性分支激活）：`--verify-manifest` → `PASS: 8867 checks`；`git rev-parse HEAD:<manifest>` 与 `git hash-object` 一致（`0150f4ea…`）。
 
 ## 3. 负例 N1–N17 自测（`--self-test`）
 

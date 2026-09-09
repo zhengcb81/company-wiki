@@ -120,6 +120,10 @@ def main() -> int:
             "stdout_sha256": sha(payload),
             "read_only_confirmed": True,
         },
+        "evidence": {
+            rel: {"path": rel, "sha256": sha((V5 / rel).read_bytes()),
+                  "size_bytes": (V5 / rel).stat().st_size}
+            for rel in ("v5-version-reference-inventory.json", "v5-baseline-equivalence.json")},
         "evidence_tools": [
             {"path": rel, "sha256": sha((V5 / rel).read_bytes()),
              "size_bytes": (V5 / rel).stat().st_size} for rel in EVIDENCE_TOOLS],

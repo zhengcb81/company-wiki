@@ -37,7 +37,7 @@
 
 - [x] 独立设计审查选择一种一致方案：明确拆分协议 revision 与冻结 generation（rev1 rejected → rev2 accepted_with_findings → rev3/rev4 闭合 G1 → rev4 复审 `accepted`）。
 - [x] 枚举全部 schema 常量、机器实例、活动文档、CLI、validator、路径和版本引用。
-  → [v5-version-reference-inventory.json](v5-version-reference-inventory.json) / [.md](v5-version-reference-inventory.md)（59 文件；`:v4`=14/`:v1`=12/`:v5`=2/`:v2`=1）。
+  → [v5-version-reference-inventory.json](v5-version-reference-inventory.json) / [.md](v5-version-reference-inventory.md)（V5-2 冻结时点 56 文件；范围与计数偏差见 [v5-freeze-record.md](v5-freeze-record.md) §4 D4）。
 - [x] 将 10 份未证明与原 v4 等价的输入作为新基线，从零内容审查，不声称是 v4 字节恢复。
   → [v5-baseline-equivalence.json](v5-baseline-equivalence.json)：21 v4_exact / 17 crlf_only / **10 unproven_new_baseline**；逐件从零审查在 V5-2 三路审查中执行。
 - [x] 新活动入口必须明确取代哪些旧入口；历史文件保留在 baseline，不能并列作为权威。
@@ -45,12 +45,18 @@
 - [x] 建立版本一致性负例：旧 manifest、新 manifest、错 schema、混合节点、错路径一律拒绝。
   → N1–N17（[版本合同 §7](v5-version-contract.md)），待 V5-2 以机器检查实现。
 
-## Phase V5-2（冻结与独立审查）— 状态：pending
+## Phase V5-2（冻结与独立审查）— 状态：in_progress（冻结已完成并入库 454f632；三路审查进行中）
 
-- [ ] 明确稳定审查边界；不把仅有前后 hash 或 .gitattributes 当作不可变性证明。
-- [ ] 重跑计划一致性、schema/实例、DAG、测试 registry、vectors、prose 全套检查。
-- [ ] 冻结前保存精确输出，生成新的正式 plan_manifest.v5.json，再做冻结后逐字节核验。
+- [x] 明确稳定审查边界；不把仅有前后 hash 或 .gitattributes 当作不可变性证明。
+  → [v5-freeze-boundary.md](v5-freeze-boundary.md) 协议 B1–B6 + 冻结时点实测；[v5-freeze-record.md](v5-freeze-record.md)。
+- [x] 重跑计划一致性、schema/实例、DAG、测试 registry、vectors、prose 全套检查。
+  → `tools/v5_plan_consistency_check.py` 预冻结 `PASS: 7658 checks`（fixed_nodes 115/schemas 29/tests 315/vectors 18）。
+- [x] 冻结前保存精确输出，生成新的正式 plan_manifest.v5.json，再做冻结后逐字节核验。
+  → [plan_manifest.v5.json](plan_manifest.v5.json)（51 项）+ [plan_freeze_check.v5.txt](plan_freeze_check.v5.txt)（172 字节、0 CR）；`--verify-manifest` 8867 checks 通过。
+- [x] 以机器检查 + 测试 ID 实现 N1–N17，并证明每条负例都被拒。
+  → `--self-test` 在临时副本上逐条变异：**17/17 被拒**。
 - [ ] 三路独立 agent 从零审查 SQL/性能、生命周期/安全、测试/DAG 可实施性。
+  → 三路审查已启动（各自只读、独立复算、自写审查文件）。
 - [ ] 每路都绑定同一冻结输入；无完整 verdict、额度中止、路径漂移一律不计 PASS。
 - [ ] 所有 P0/P1 关闭才可标记计划可作未来实施输入；这仍不授权启动 worker。
 

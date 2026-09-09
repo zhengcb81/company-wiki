@@ -28,10 +28,10 @@
 
 扫描范围（V5-2 冻结后以证据为准）：`baseline/**`（54 份）＋ v5 根冻结输入 `.gitattributes`、`plan_manifest.schema.v5.json`（2 份）＝ **56 份**；排除 `reviews/`、`tools/`、活动文档（`README.md`/`task_plan.md`/`findings.md`/`progress.md`）、`v5-freeze-*` 记录与两份冻结产物、`import_manifest.v5.json`、`verify_import.py`、本页与两份审查/证据文件（避免自指）。冻结时点计数见 [v5-version-reference-inventory.json](v5-version-reference-inventory.json) 的 `totals`；偏差与理由见 [v5-freeze-record.md](v5-freeze-record.md) §4 D4。
 
-- **44 份含 `v4`、14 份含 `v3`**（含本轮更正文本）；**11 份引用已退役旧目录**；**9 份引用旧 checker**；
-- `$id` 后缀分布 `:v4`=14、`:v1`=12、`:v5`=2、`:v2`=1；`plan_revision` ∈ {v3,v4}；`schema_version` ∈ {1,2}。
+- **41 份含 `v4`、11 份含 `v3`**；**8 份引用已退役旧目录**；**9 份引用旧 checker**；
+- `$id` 共 30 个，后缀分布 `:v4`=14、`:v1`=12、`:v5`=3、`:v2`=1（`:v5` 的第三项是 V5-2 新增的 `plan-manifest:v5`）；`plan_revision` ∈ {v3,v4}；`schema_version` ∈ {1,2,3}。
 
-> 计数随活动文档编辑漂移，**以扫描时点为准**；V5-2 冻结前重新生成并与 manifest 绑定。
+> 以上计数是**冻结时点**的实测值（V5-2.1 复审后按冻结证据同步）；后续漂移以 [v5-version-reference-inventory.json](v5-version-reference-inventory.json) 的 `totals` 为准，该文件已由 manifest 的 `evidence` 字段做哈希绑定（N17）。
 
 ## 4. 新基线：10 份不可证等价文件（V5-1 第 3 项）
 

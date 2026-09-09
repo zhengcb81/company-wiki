@@ -40,12 +40,31 @@
 - 冻结后立即重跑 `--verify-manifest`，并把两次输出都留档；任一 red 则冻结作废。
 - 三路独立审查（SQL/性能、生命周期/安全、测试/DAG）各自独立重跑 B1–B3，不共享同一份哈希快照。
 
+## 5. 机器可验的旧目录处置（N9 载荷）
+
+退役副本不是靠"路径存在 + 有一个文件"判定的，而是靠下面这个 **机器可读块**：checker 会解析它、按 `inventory_sha256`（对全部文件**按相对路径的 case-sensitive 排序**后，逐条拼接 `相对路径\0sha256\n` 再取 SHA-256）与 `file_count` 复算，并要求 `docs/plans/` 下**任何**含 worker-recovery 计划标记（`plan_consistency_check.py` / `gate_dag.v4.json` / `plan_manifest.v3.json`）的目录都出现在 `retired_dirs` 中——改名、复制、新建副本都会触发 N9。
+
+```json
+{
+  "disposition": "NON_AUTHORITATIVE",
+  "retired_dirs": [
+    {
+      "path": "docs/plans/source-catalog-worker-recovery-2026-08-22",
+      "file_count": 38,
+      "inventory_sha256": "da927ee294978a2578d459e285bbd00f7e7abea87ae6e42a0294a588f9a8c81b"
+    }
+  ]
+}
+```
+
+判据含义：该目录及其自带的一整套 manifest/schema/checker 载体**不构成任何权威**；冻结集、取代链、`plan_directory`、`investigation_source` 均不得指向它（N2/N11/N9 机器检查）。
+
 ## 冻结时点复验（2026-09-09，B1–B6 实测）
 
 - 冻结时点 HEAD：`436ecd38509ef87199b2a3133f08994bfdaec18f`；v5 目录冻结前已跟踪 74 个文件。
-- 旧目录：**仍存在**，38 个已跟踪文件、工作树干净、mtime `2026-09-07T18:08:52.8971277Z`；本文件即其显式处置记录（非权威副本，见 `v5-freeze-record.md` §6 残余风险 2）。
+- 旧目录：**仍存在**，38 个文件、工作树干净、mtime `2026-09-07T18:08:52.8971277Z`；处置载荷见上（NON_AUTHORITATIVE）。
 - 属性：`git check-attr text eol filter working-tree-encoding` 对 51 个冻结项共 204 行，全部 `unset`。
-- B3 重哈希：51/51 哈希与字节数一致；`baseline/plan/__pycache__` 不存在（checker 置 `sys.dont_write_bytecode`，见记录 D2）。
-- 预冻结输出：`PASS: 7658 checks; {"fixed_nodes":115,"schemas":29,"tests":315,"vectors":18}`（172 字节、0 个 CR）。
-- 后冻结复验：`--verify-manifest` 8866 checks 通过；`--self-test` 17/17 负例被拒。
-- 本文件在冻结后不再修改；后续状态与结论记入 `v5-freeze-record.md` 与三份独立审查。
+- B3 重哈希：51/51 哈希与字节数一致；`baseline/plan/__pycache__` 与 `tools/__pycache__` 均不存在（见记录 D2/D8）。
+- 预冻结输出：`PASS: <n> checks; {"fixed_nodes":115,"schemas":29,"tests":315,"vectors":18}`（LF、0 个 CR，字节哈希由 manifest 绑定）。
+- 后冻结复验：`--verify-manifest` 全绿；`--self-test` 17 例 / 27 个变异全部被拒（含隔离模式）。
+- 本文件在冻结后不再修改（其处置载荷是 N9 的判据输入）；后续状态与结论记入 `v5-freeze-record.md` 与三份独立审查。

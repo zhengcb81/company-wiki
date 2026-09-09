@@ -6,9 +6,9 @@
 ## 汇总
 
 - 扫描文件：**56**（baseline 54 + 根 2）
-- 含 `v4` token：**41**；含 `v3`：**11**
+- 含 `v4` token：**41**；含 `v3`：**12**
 - 引用已退役旧目录 `source-catalog-worker-recovery-2026-08-22`：**8**
-- 引用旧 checker `plan_consistency_check.py`：**9**
+- 引用旧 checker `plan_consistency_check.py`：**10**
 - `$id` 总数：**30**；后缀分布：`:v1`=12、`:v2`=1、`:v4`=14、`:v5`=3
 - `plan_revision`：['v3', 'v4']；`schema_version`：['1', '2']
 
