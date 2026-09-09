@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:company-wiki:source-catalog-worker-recovery:budget-reservation-bundle:v1",
+  "title": "Atomic four-counter provider budget reservation bundle",
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "utc": {"type": "string", "format": "date-time", "pattern": "^[0-9]{4}-(0[1-9]|1[0-2])-([0-2][0-9]|3[01])T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]{1,9})?Z$"},
+    "counter": {
+      "type": "object", "additionalProperties": false,
+      "required": ["budget_id", "budget_kind", "window_start_utc", "window_end_utc", "generation_before", "expected_generation_after_reservation", "hard_limit_units", "consumed_units_before", "outstanding_reserved_units_before", "reserved_units", "expected_consumed_plus_outstanding_after", "state_sha256_before", "expected_state_sha256_after_reservation"],
+      "properties": {
+        "budget_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,159}$"},
+        "budget_kind": {"enum": ["DAILY_PROVIDER_REQUESTS", "DAILY_PROVIDER_COST_MINOR_UNITS", "MONTHLY_PROVIDER_REQUESTS", "MONTHLY_PROVIDER_COST_MINOR_UNITS"]},
+        "window_start_utc": {"$ref": "#/$defs/utc"},
+        "window_end_utc": {"$ref": "#/$defs/utc"},
+        "generation_before": {"type": "integer", "minimum": 0},
+        "expected_generation_after_reservation": {"type": "integer", "minimum": 0},
+        "hard_limit_units": {"type": "integer", "minimum": 0},
+        "consumed_units_before": {"type": "integer", "minimum": 0},
+        "outstanding_reserved_units_before": {"type": "integer", "minimum": 0},
+        "reserved_units": {"type": "integer", "minimum": 0},
+        "expected_consumed_plus_outstanding_after": {"type": "integer", "minimum": 0},
+        "state_sha256_before": {"$ref": "#/$defs/sha256"},
+        "expected_state_sha256_after_reservation": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "request": {
+      "type": "object", "additionalProperties": false,
+      "required": ["request_id", "provider_id", "model_id", "destination_id", "request_payload_sha256", "idempotency_key_sha256", "maximum_attempts", "maximum_cost_minor_units", "billing_currency"],
+      "properties": {
+        "request_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,159}$"},
+        "provider_id": {"type": "string", "minLength": 1, "maxLength": 120},
+        "model_id": {"type": "string", "minLength": 1, "maxLength": 160},
+        "destination_id": {"type": "string", "minLength": 1, "maxLength": 160},
+        "request_payload_sha256": {"$ref": "#/$defs/sha256"},
+        "idempotency_key_sha256": {"$ref": "#/$defs/sha256"},
+        "maximum_attempts": {"type": "integer", "minimum": 1, "maximum": 16},
+        "maximum_cost_minor_units": {"type": "integer", "minimum": 0},
+        "billing_currency": {"type": "string", "pattern": "^[A-Z]{3}$"}
+      }
+    }
+  },
+  "required": ["schema_version", "bundle_id", "operation_run_id", "budget_store_id", "budget_store_manifest_sha256", "head_anchor_before_sha256", "store_generation_before", "outstanding_reservation_set_sha256_before", "currency", "provider_scope_sha256", "network_request_plan_sha256", "network_requests", "counters", "reservation_disposition", "reservation_payload_commitment_sha256", "atomic_commit_policy", "cas_primitive_proof_sha256", "settlement_policy", "issued_at", "expires_at", "sealed"],
+  "properties": {
+    "schema_version": {"const": "budget-reservation-bundle-v1"},
+    "bundle_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,159}$"},
+    "operation_run_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,159}$"},
+    "budget_store_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,159}$"},
+    "budget_store_manifest_sha256": {"$ref": "#/$defs/sha256"},
+    "head_anchor_before_sha256": {"$ref": "#/$defs/sha256"},
+    "store_generation_before": {"type": "integer", "minimum": 0},
+    "outstanding_reservation_set_sha256_before": {"$ref": "#/$defs/sha256"},
+    "currency": {"type": "string", "pattern": "^[A-Z]{3}$"},
+    "provider_scope_sha256": {"$ref": "#/$defs/sha256"},
+    "network_request_plan_sha256": {"$ref": "#/$defs/sha256"},
+    "network_requests": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/request"}},
+    "counters": {
+      "type": "object", "additionalProperties": false,
+      "required": ["daily_provider_requests", "daily_provider_cost", "monthly_provider_requests", "monthly_provider_cost"],
+      "properties": {
+        "daily_provider_requests": {"allOf": [{"$ref": "#/$defs/counter"}, {"properties": {"budget_kind": {"const": "DAILY_PROVIDER_REQUESTS"}}}]},
+        "daily_provider_cost": {"allOf": [{"$ref": "#/$defs/counter"}, {"properties": {"budget_kind": {"const": "DAILY_PROVIDER_COST_MINOR_UNITS"}}}]},
+        "monthly_provider_requests": {"allOf": [{"$ref": "#/$defs/counter"}, {"properties": {"budget_kind": {"const": "MONTHLY_PROVIDER_REQUESTS"}}}]},
+        "monthly_provider_cost": {"allOf": [{"$ref": "#/$defs/counter"}, {"properties": {"budget_kind": {"const": "MONTHLY_PROVIDER_COST_MINOR_UNITS"}}}]}
+      }
+    },
+    "reservation_disposition": {"enum": ["NO_EGRESS_SNAPSHOT", "ATOMIC_RESERVED_BEFORE_EGRESS"]},
+    "reservation_payload_commitment_sha256": {"$ref": "#/$defs/sha256"},
+    "atomic_commit_policy": {"const": "ONE_TRANSACTION_FOUR_COUNTERS_ONE_OUTSTANDING_RECORD_ONE_HEAD_CAS"},
+    "cas_primitive_proof_sha256": {"$ref": "#/$defs/sha256"},
+    "settlement_policy": {"const": "EXACTLY_ONCE_IDEMPOTENT_CONSERVATION_UNKNOWN_COST_RETAINED"},
+    "issued_at": {"$ref": "#/$defs/utc"},
+    "expires_at": {"$ref": "#/$defs/utc"},
+    "sealed": {"const": true}
+  },
+  "allOf": [
+    {"if": {"properties": {"reservation_disposition": {"const": "NO_EGRESS_SNAPSHOT"}}, "required": ["reservation_disposition"]}, "then": {"properties": {"network_requests": {"maxItems": 0}}}},
+    {"if": {"properties": {"reservation_disposition": {"const": "ATOMIC_RESERVED_BEFORE_EGRESS"}}, "required": ["reservation_disposition"]}, "then": {"properties": {"network_requests": {"minItems": 1}}}}
+  ],
+  "x-semantic-rules": [
+    "The four budget IDs are distinct and fixed by the runtime authorization. All windows contain issued_at, daily and monthly windows use the frozen UTC boundary policy, and every cost counter uses currency.",
+    "For each counter, expected_generation_after_reservation = generation_before + 1 for a reservation and equals generation_before for NO_EGRESS_SNAPSHOT. expected_consumed_plus_outstanding_after = consumed_before + outstanding_before + reserved and never exceeds hard_limit_units.",
+    "Request IDs and idempotency keys are unique. The sum of maximum attempts and maximum costs is covered by both daily and monthly request/cost reservations; every provider/model/destination/currency is an exact authorized specialization.",
+    "The reservation payload commitment hashes the exact four counters, request plan and expected head transition but no future actual reservation record, avoiding a contract hash cycle.",
+    "The store commits all four counters plus one outstanding-reservation record under one transaction and one protected head generation CAS before any network byte is sent. Partial commit, stale head or concurrent oversubscription fails closed."
+  ]
+}

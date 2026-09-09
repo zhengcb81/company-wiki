@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:company-wiki:source-catalog-worker-recovery:ledger-head-anchor:v1",
+  "title": "Protected append-ledger head anchor",
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "utc": {"type": "string", "format": "date-time", "pattern": "^[0-9]{4}-(0[1-9]|1[0-2])-([0-2][0-9]|3[01])T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]{1,9})?Z$"}
+  },
+  "required": ["schema_version", "anchor_id", "anchor_kind", "ledger_id", "identity_manifest_sha256", "anchor_generation", "head_sequence", "head_sha256", "previous_anchor_sha256", "anchor_path_id", "file_identity_sha256", "volume_identity_sha256", "security_descriptor_binary_sha256", "reparse_point_observed", "writer_lease_receipt_sha256", "plan_manifest_sha256", "release_manifest_sha256", "updated_at", "update_protocol", "anchor_sha256", "sealed"],
+  "properties": {
+    "schema_version": {"const": "ledger-head-anchor-v1"},
+    "anchor_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,159}$"},
+    "anchor_kind": {"enum": ["GATE_LEDGER", "WRITE_JOURNAL", "BUDGET_STORE"]},
+    "ledger_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,159}$"},
+    "identity_manifest_sha256": {"$ref": "#/$defs/sha256"},
+    "anchor_generation": {"type": "integer", "minimum": 0},
+    "head_sequence": {"type": "integer", "minimum": 0},
+    "head_sha256": {"$ref": "#/$defs/sha256"},
+    "previous_anchor_sha256": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/sha256"}]},
+    "anchor_path_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,199}$"},
+    "file_identity_sha256": {"$ref": "#/$defs/sha256"},
+    "volume_identity_sha256": {"$ref": "#/$defs/sha256"},
+    "security_descriptor_binary_sha256": {"$ref": "#/$defs/sha256"},
+    "reparse_point_observed": {"const": false},
+    "writer_lease_receipt_sha256": {"$ref": "#/$defs/sha256"},
+    "plan_manifest_sha256": {"$ref": "#/$defs/sha256"},
+    "release_manifest_sha256": {"$ref": "#/$defs/sha256"},
+    "updated_at": {"$ref": "#/$defs/utc"},
+    "update_protocol": {"const": "EXCLUSIVE_LEASE_APPEND_FLUSH_VERIFY_THEN_ATOMIC_REPLACE_ANCHOR_CAS_GENERATION"},
+    "anchor_sha256": {"$ref": "#/$defs/sha256"},
+    "sealed": {"const": true}
+  },
+  "x-semantic-rules": [
+    "anchor_sha256 hashes RFC 8785 canonical bytes excluding only anchor_sha256. anchor_generation increments exactly one and previous_anchor_sha256 equals the prior protected anchor for non-genesis updates.",
+    "The validator reads the protected anchor itself using anchor_path_id and frozen root policy. A caller-supplied naked expected head is never authoritative.",
+    "The ledger append is durable and hash-verified before anchor replacement. A crash before replacement leaves at most one recoverable, fully verified unanchored tail; a crash after replacement must reveal the new exact file identity, sequence and head.",
+    "Stale, ahead, behind, rewritten, ACL-drifted, reparse-linked or wrong-release anchors fail closed. A self-consistent rewritten ledger plus a caller-provided rewritten head still fails against this anchor chain.",
+    "Two writers must contend on the same protected exclusive lease and anchor generation CAS; no lost update or split-brain anchor is permitted."
+  ]
+}

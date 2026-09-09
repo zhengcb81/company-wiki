@@ -1,0 +1,1562 @@
+{
+  "total": 117,
+  "missing": [],
+  "rows": [
+    {
+      "unit": "CA-001",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "assurance-audit.md",
+          "line": 62,
+          "row": "| CA-001 | HISTORICAL_ONLY | manifest/CAS/TTL工具与历史50测试收据；未本轮重放并发安全 | 在新隔离夹具重放CAS冲突/锁过期与漂移，不能改旧输入 |"
+        }
+      ],
+      "audit_verdict": "HISTORICAL_ONLY",
+      "pain": "P01/P10"
+    },
+    {
+      "unit": "CA-002",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "assurance-audit.md",
+          "line": 63,
+          "row": "| CA-002 | PARTIAL | envfreeze/精确基线工具存在；daily与终审未消费完整当前绑定，A04 | 所有最终门统一比较当前三仓+dirty+config/data |"
+        }
+      ],
+      "audit_verdict": "PARTIAL",
+      "pain": "P01/P10"
+    },
+    {
+      "unit": "CA-003",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "assurance-audit.md",
+          "line": 64,
+          "row": "| CA-003 | PARTIAL | 历史index freeze已记录BYPASS/MISSING；新模块当前索引覆盖有限，旁路未闭 | 针对实际HEAD的只读caller证据与真实进程trace |"
+        }
+      ],
+      "audit_verdict": "PARTIAL",
+      "pain": "P01/P10"
+    },
+    {
+      "unit": "CA-004",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "assurance-audit.md",
+          "line": 65,
+          "row": "| CA-004 | HISTORICAL_ONLY | legacy_disposition机器迁移资产存在，不能借successor accepted证明原功能 | 每旧项关联本次真实结果，历史字节不改 |"
+        }
+      ],
+      "audit_verdict": "HISTORICAL_ONLY",
+      "pain": "P01/P10"
+    },
+    {
+      "unit": "CA-101",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "assurance-audit.md",
+          "line": 66,
+          "row": "| CA-101 | PARTIAL | 枚举/依赖/身份字符串门存在；可triplet_green直接independent_review，缺按required tier门 | 状态迁移必须查询证据/未关闭finding |"
+        }
+      ],
+      "audit_verdict": "PARTIAL",
+      "pain": "P01/P10"
+    },
+    {
+      "unit": "CA-102",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "assurance-audit.md",
+          "line": 67,
+          "row": "| CA-102 | PARTIAL | canonical hash和字段格式校验有效；triplet缺键、commands内容和policy遗漏等未充分强制 | typed内容、三键、真实执行/策略和授权绑定 |"
+        }
+      ],
+      "audit_verdict": "PARTIAL",
+      "pain": "P01/P10"
+    },
+    {
+      "unit": "CA-103",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "assurance-audit.md",
+          "line": 68,
+          "row": "| CA-103 | CONTRADICTED | 最新rejected pair仍无问题；successor不查状态，A02 | latest非accepted一律阻断，独立审查字节绑定 |"
+        }
+      ],
+      "audit_verdict": "CONTRADICTED",
+      "pain": "P01/P10"
+    },
+    {
+      "unit": "CA-104",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "assurance-audit.md",
+          "line": 69,
+          "row": "| CA-104 | PARTIAL | 命令执行和stdout hash存在；success_markers不消费、expected collected/budget不强制；scenario另走rc | 独立result schema+完整采集/skip/业务门 |"
+        }
+      ],
+      "audit_verdict": "PARTIAL",
+      "pain": "P01/P10"
+    },
+    {
+      "unit": "CA-105",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "assurance-audit.md",
+          "line": 70,
+          "row": "| CA-105 | CONTRADICTED | 缺T2证据也closure_ready，A03 | 每sid×tier×triplet独立必填结果 |"
+        }
+      ],
+      "audit_verdict": "CONTRADICTED",
+      "pain": "P01/P10"
+    },
+    {
+      "unit": "CA-106",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "assurance-audit.md",
+          "line": 71,
+          "row": "| CA-106 | PARTIAL | ledger/OS快照helper存在；fingerprint差异只计路径/总字节，mtime不参与unchanged；真实call journal未接 | 同大小文件改动红、失败调用也记attempt |"
+        }
+      ],
+      "audit_verdict": "PARTIAL",
+      "pain": "P01/P10"
+    },
+    {
+      "unit": "CA-107",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "assurance-audit.md",
+          "line": 72,
+          "row": "| CA-107 | CONTRADICTED | 扫三仓+receipt格式资产；硬编码old_plan=incomplete不是新closure，拒绝pair/缺tier仍不足 | 从完整required set推导，缺一项红 |"
+        }
+      ],
+      "audit_verdict": "CONTRADICTED",
+      "pain": "P01/P10"
+    },
+    {
+      "unit": "CA-108",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "assurance-audit.md",
+          "line": 73,
+          "row": "| CA-108 | CONTRADICTED | 有mutation套件；本轮多项critical反例仍存活 | 把本报告负例加入必杀矩阵，杀死率实测 |"
+        }
+      ],
+      "audit_verdict": "CONTRADICTED",
+      "pain": "P01/P10"
+    },
+    {
+      "unit": "CA-109",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "assurance-audit.md",
+          "line": 74,
+          "row": "| CA-109 | CONTRADICTED | 扫caller并指向CA-201，旧gate仍在CI | 重接线后旧工具限历史reader且required CI实际调用新门 |"
+        }
+      ],
+      "audit_verdict": "CONTRADICTED",
+      "pain": "P01/P11"
+    },
+    {
+      "unit": "CA-201",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "assurance-audit.md",
+          "line": 75,
+          "row": "| CA-201 | CONTRADICTED | 只验证吸收/缺口映射，非真正fanout，A06 | 三仓任一candidate变化触发精确同组合 |"
+        }
+      ],
+      "audit_verdict": "CONTRADICTED",
+      "pain": "P01/P10"
+    },
+    {
+      "unit": "CA-202",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "assurance-audit.md",
+          "line": 76,
+          "row": "| CA-202 | CONTRADICTED | 有真实SQL报表，不是原要求T2用户路径/SLO，A04 | unique-root请求+真实分位数+零写+独立触发 |"
+        }
+      ],
+      "audit_verdict": "CONTRADICTED",
+      "pain": "P01/P10"
+    },
+    {
+      "unit": "CA-203",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "assurance-audit.md",
+          "line": 77,
+          "row": "| CA-203 | PARTIAL | 有T3桥接测试和scheduler；skip/输出/双runner/真实市场未闭，A05 | 按三市场required cases强制非skip+授权 |"
+        }
+      ],
+      "audit_verdict": "PARTIAL",
+      "pain": "P01/P10"
+    },
+    {
+      "unit": "CA-204",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "assurance-audit.md",
+          "line": 78,
+          "row": "| CA-204 | CONTRADICTED | monthly测试为样本/合成旅程；无当前自然月实际报告 | 轮换真实broker/异构矿企/非矿企 |"
+        }
+      ],
+      "audit_verdict": "CONTRADICTED",
+      "pain": "P01/P10"
+    },
+    {
+      "unit": "CA-205",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "assurance-audit.md",
+          "line": 79,
+          "row": "| CA-205 | CONTRADICTED | 原子publish helper未被daily接入；不完整release仍ready，A05 | 单一报告schema和原子发布、所有消费者同门 |"
+        }
+      ],
+      "audit_verdict": "CONTRADICTED",
+      "pain": "P01/P10"
+    },
+    {
+      "unit": "CA-206",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "assurance-audit.md",
+          "line": 80,
+          "row": "| CA-206 | CONTRADICTED | accepted时实际soak延后；7同刻也complete | 可信run provenance/不同自然周期，未满pending |"
+        }
+      ],
+      "audit_verdict": "CONTRADICTED",
+      "pain": "P01/P10"
+    },
+    {
+      "unit": "CA-301",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "assurance-audit.md",
+          "line": 81,
+          "row": "| CA-301 | CONTRADICTED | 11收据明示真实clean-checkout独立重放为之后部署 | 当前组合干净三checkout全部required结果 |"
+        }
+      ],
+      "audit_verdict": "CONTRADICTED",
+      "pain": "P01/P10"
+    },
+    {
+      "unit": "CA-302",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "assurance-audit.md",
+          "line": 82,
+          "row": "| CA-302 | CONTRADICTED | 三公司测试复用合成紫金；自勾稽，见revenue-audit | 三个实际source到输出旅程与独立oracle |"
+        },
+        {
+          "document": "revenue-audit.md",
+          "line": 140,
+          "row": "| CA302 | 真实三公司要求被同一合成document替代 | RF-A01，CONTRADICTED |"
+        }
+      ],
+      "audit_verdict": "CONTRADICTED",
+      "pain": "P01/P10"
+    },
+    {
+      "unit": "CA-303",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "assurance-audit.md",
+          "line": 83,
+          "row": "| CA-303 | PARTIAL | ratchet/扫描资产存在，扫描范围/工具失败/递减性不足 | 全三仓AST与工具错误红、债务实际下降 |"
+        }
+      ],
+      "audit_verdict": "PARTIAL",
+      "pain": "P01/P11"
+    },
+    {
+      "unit": "CA-304",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "assurance-audit.md",
+          "line": 84,
+          "row": "| CA-304 | CONTRADICTED | 收据明确零真实删除；当前legacy窗口不放行 | 自然门满足后另授权分批删除/真实回滚 |"
+        }
+      ],
+      "audit_verdict": "CONTRADICTED",
+      "pain": "P01/P11"
+    },
+    {
+      "unit": "CA-305",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "assurance-audit.md",
+          "line": 85,
+          "row": "| CA-305 | CONTRADICTED | 以accepted/文件存在/字符串长度代替六结果，A01 | 每问由实际结果派生、不得读取主张自证 |"
+        }
+      ],
+      "audit_verdict": "CONTRADICTED",
+      "pain": "P01/P10"
+    },
+    {
+      "unit": "CA-306",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "assurance-audit.md",
+          "line": 86,
+          "row": "| CA-306 | PARTIAL | 部分terminal notice后来已写；历史关闭合法，但successor未实际完成 | 历史superseded与当前未完成分开显示 |"
+        }
+      ],
+      "audit_verdict": "PARTIAL",
+      "pain": "P01/P10"
+    },
+    {
+      "unit": "ZR-001",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "assurance-audit.md",
+          "line": 92,
+          "row": "| ZR-001 | HISTORICAL_ONLY | 原漂移重放账本有资产；只是当时故障复现，不证明后来修复 |"
+        }
+      ],
+      "audit_verdict": "HISTORICAL_ONLY",
+      "pain": "P01/P11"
+    },
+    {
+      "unit": "ZR-002",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "assurance-audit.md",
+          "line": 93,
+          "row": "| ZR-002 | HISTORICAL_ONLY | 合同锁/allowlist存在；后续单卡缩减需目标不可弱化门 |"
+        }
+      ],
+      "audit_verdict": "HISTORICAL_ONLY",
+      "pain": "P01/P11"
+    },
+    {
+      "unit": "ZR-003",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "assurance-audit.md",
+          "line": 94,
+          "row": "| ZR-003 | HISTORICAL_ONLY | golden corpus有冻结hash；当前真实/轮换样本验收不能靠corpus存在 |"
+        }
+      ],
+      "audit_verdict": "HISTORICAL_ONLY",
+      "pain": "P01/P11"
+    },
+    {
+      "unit": "ZR-004",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "assurance-audit.md",
+          "line": 95,
+          "row": "| ZR-004 | HISTORICAL_ONLY | legacy处置映射可保留；删除与运行效果需CA-304实际证据 |"
+        }
+      ],
+      "audit_verdict": "HISTORICAL_ONLY",
+      "pain": "P01/P11"
+    },
+    {
+      "unit": "ZR-1001",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "assurance-audit.md",
+          "line": 111,
+          "row": "| ZR-1001 | PARTIAL | release preflight/dry-run资产；真实回滚及完整当前证据仍缺 |"
+        }
+      ],
+      "audit_verdict": "PARTIAL",
+      "pain": "P01/P10/P11"
+    },
+    {
+      "unit": "ZR-1002",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "wiki-audit.md",
+          "line": 117,
+          "row": "| ZR-1002 | PARTIAL | Reader在service已实际接；test_zr1002 temp activation/rollback/SLO | 测试明确hermetic，无当前生产release/rollout/caller完整证明；不得由临时activate表断言零写生产恢复 |"
+        }
+      ],
+      "audit_verdict": "PARTIAL",
+      "pain": "P01/P10/P11"
+    },
+    {
+      "unit": "ZR-1003",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "wiki-audit.md",
+          "line": 118,
+          "row": "| ZR-1003 | CONTRADICTED（观察周期） | temp assertion activation/rollback，safety receipt与flag测试 | “two dynamic cycles”实际两次同一catalog shadow读相等，非两个自然周期；graph仍未守生产出口 |"
+        }
+      ],
+      "audit_verdict": "CONTRADICTED",
+      "pain": "P01/P10/P11"
+    },
+    {
+      "unit": "ZR-1004",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "wiki-audit.md",
+          "line": 119,
+          "row": "| ZR-1004 | PARTIAL（跨仓详审） | receipt：7 tests真实roots只读resolve+浅fingerprint+重复request；产品零改动 | 原逐root T2/UJ cohort rollout/同request rollback不等于重跑read结果一致；由多root子审计验证 |"
+        }
+      ],
+      "audit_verdict": "PARTIAL",
+      "pain": "P01/P10/P11"
+    },
+    {
+      "unit": "ZR-1005",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "wiki-audit.md",
+          "line": 120,
+          "row": "| ZR-1005 | PARTIAL | test宣称C1生产dry-run>10min；C2–C4 tmp shadow binding apply幂等 | 生产small-cohort apply并服务消费无此测试证明，W03；不得为本审计重跑全库 |"
+        }
+      ],
+      "audit_verdict": "PARTIAL",
+      "pain": "P01/P10/P11"
+    },
+    {
+      "unit": "ZR-1006",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "wiki-audit.md",
+          "line": 121,
+          "row": "| ZR-1006 | CONTRADICTED（实际worker） | C1生产7份normalized快照；C2–C5内存cohort1→3→7机制 | 生产GP010是人工调用且超cohort，未提交持久demand/真实公平调度/自然resume；W04/W09 |"
+        }
+      ],
+      "audit_verdict": "CONTRADICTED",
+      "pain": "P01/P10/P11"
+    },
+    {
+      "unit": "ZR-1007",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "wiki-audit.md",
+          "line": 122,
+          "row": "| ZR-1007 | PARTIAL（revenue详审） | receipt12 tests mine shadow vs legacy公式、reconcile/backtest、零run_forecast | 无生产mine事实消费/真实cutover结果；此项具体模型由revenue子审计负责 |"
+        }
+      ],
+      "audit_verdict": "PARTIAL",
+      "pain": "P01/P10/P11"
+    },
+    {
+      "unit": "ZR-1008",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "wiki-audit.md",
+          "line": 123,
+          "row": "| ZR-1008 | PARTIAL（revenue详审） | receipt10 tests draft/formal/replay/rollback/3cycle，1.22s执行 | 1.22秒的3cycle不可替代自然观察期；source前端demand/安全/worker仍W03–05缺口 |"
+        }
+      ],
+      "audit_verdict": "PARTIAL",
+      "pain": "P01/P10/P11"
+    },
+    {
+      "unit": "ZR-1009",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "assurance-audit.md",
+          "line": 112,
+          "row": "| ZR-1009 | CONTRADICTED | R9真实删除未发生，不能以门机制接受替代 |"
+        }
+      ],
+      "audit_verdict": "CONTRADICTED",
+      "pain": "P01/P10/P11"
+    },
+    {
+      "unit": "ZR-101",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "assurance-audit.md",
+          "line": 96,
+          "row": "| ZR-101 | PARTIAL | 8stage taxonomy有效资产；实际所有路径是否输出完整事件仍有P02/P03旁路 |"
+        }
+      ],
+      "audit_verdict": "PARTIAL",
+      "pain": "P01/P11"
+    },
+    {
+      "unit": "ZR-102",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "assurance-audit.md",
+          "line": 97,
+          "row": "| ZR-102 | PARTIAL | 临时三根+真实子进程+spy是有效T1；不是实际T2/T3/provider |"
+        }
+      ],
+      "audit_verdict": "PARTIAL",
+      "pain": "P01/P11"
+    },
+    {
+      "unit": "ZR-103",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "assurance-audit.md",
+          "line": 98,
+          "row": "| ZR-103 | CONTRADICTED | closure validator不足，A02/A03；不可用schema合法代业务通过 |"
+        }
+      ],
+      "audit_verdict": "CONTRADICTED",
+      "pain": "P01/P11"
+    },
+    {
+      "unit": "ZR-104",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "assurance-audit.md",
+          "line": 99,
+          "row": "| ZR-104 | PARTIAL | 冻结quality维度保留；CI接线、全域扫描/下降目标未闭 |"
+        }
+      ],
+      "audit_verdict": "PARTIAL",
+      "pain": "P01/P11"
+    },
+    {
+      "unit": "ZR-105",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "assurance-audit.md",
+          "line": 100,
+          "row": "| ZR-105 | CONTRADICTED | 合同评估器诚实报gap，successor CA-201并没实现fanout |"
+        }
+      ],
+      "audit_verdict": "CONTRADICTED",
+      "pain": "P01/P11"
+    },
+    {
+      "unit": "ZR-1101",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "assurance-audit.md",
+          "line": 113,
+          "row": "| ZR-1101 | CONTRADICTED | 117 accepted不能推出原目标闭环，A01–06 |"
+        }
+      ],
+      "audit_verdict": "CONTRADICTED",
+      "pain": "P01/P10/P11"
+    },
+    {
+      "unit": "ZR-1102",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "assurance-audit.md",
+          "line": 114,
+          "row": "| ZR-1102 | CONTRADICTED | anti-falsegreen复核没发现本轮critical反例 |"
+        }
+      ],
+      "audit_verdict": "CONTRADICTED",
+      "pain": "P01/P10/P11"
+    },
+    {
+      "unit": "ZR-1103",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "assurance-audit.md",
+          "line": 115,
+          "row": "| ZR-1103 | CONTRADICTED | 重验多为既有合成/临时场景；实际三类旅程仍缺 |"
+        }
+      ],
+      "audit_verdict": "CONTRADICTED",
+      "pain": "P01/P10/P11"
+    },
+    {
+      "unit": "ZR-1104",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "assurance-audit.md",
+          "line": 116,
+          "row": "| ZR-1104 | CONTRADICTED | 不可豁免自然窗口未满足，代码同刻负例 |"
+        }
+      ],
+      "audit_verdict": "CONTRADICTED",
+      "pain": "P01/P10/P11"
+    },
+    {
+      "unit": "ZR-1105",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "assurance-audit.md",
+          "line": 117,
+          "row": "| ZR-1105 | CONTRADICTED | 六成功问题没有真实逐子项pass，A01 |"
+        }
+      ],
+      "audit_verdict": "CONTRADICTED",
+      "pain": "P01/P10/P11"
+    },
+    {
+      "unit": "ZR-201",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "wiki-audit.md",
+          "line": 94,
+          "row": "| ZR-201 | PARTIAL | reader.py mode=ro/query_only、不存在路径不mkdir；test_catalog_reader覆盖缺失/OS只读 | WAL缺sidecar仍可创建文件；零数据写≠零文件写。真实live-WAL只读/sidecar缺失/目录ACL matrix需分别验收 |"
+        },
+        {
+          "document": "filing-audit.md",
+          "line": 35,
+          "row": "| ZR-201 | P02，无写 Reader 工厂 | PARTIAL | `reader.py:157–181` 不存在 DB 先拒绝，URI mode=ro/query_only；没有 mkdir/DDL/commit。原 implementer 明确 WAL 协议可能创建空 side 文件，验收已从绝对“零文件写”收窄为 DB/WAL 字节及 SHM协议例外。本次未做真实库只读连接，不能覆盖 OS/WAL 全状态。 |"
+        }
+      ],
+      "audit_verdict": "PARTIAL",
+      "pain": "P02"
+    },
+    {
+      "unit": "ZR-202",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "wiki-audit.md",
+          "line": 95,
+          "row": "| ZR-202 | PARTIAL | typed document/source/artifact/query/status/health方法存在 | status/health全量COUNT约秒级历史证据；未验证当前triplet全部schema/pressure；不得说全查询低延迟 |"
+        },
+        {
+          "document": "filing-audit.md",
+          "line": 36,
+          "row": "| ZR-202 | P02，typed reader 和 schema 门 | PARTIAL | reader 有 typed查询和 schema 检查；通用 `fetchone/fetchall(sql)` 仍暴露，SQLite query_only 拒绝写 SQL。静态存在 ≠ 所有生产调用 schema 门完整；生产接线问题由 ZR-203 判。 |"
+        }
+      ],
+      "audit_verdict": "PARTIAL",
+      "pain": "P02"
+    },
+    {
+      "unit": "ZR-203",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "wiki-audit.md",
+          "line": 96,
+          "row": "| ZR-203 | PARTIAL | SourceCatalog lazy writer，status/query/resolve/bundle用reader；test_zr203读路由/CLI门 | AST gate只查直接CatalogStore调用，不能证明所有间接写无副作用；artifact unique read view仍未接，W03 |"
+        },
+        {
+          "document": "filing-audit.md",
+          "line": 37,
+          "row": "| ZR-203 | P02，所有只读生产入口无 writer initializer | CONTRADICTED（完整用户语义） | `cli.py:753` exact no-download ensure 已只读；`:760–762` latest no-download ensure 却显式初始化 store，且走 journal。filing latest 未授权下载也调用 ensure，因此“只查询最新资料”仍非全程只读。原收据还移交 duplicate-preview store 遗留，本次不以未复查该遗留作新反证。 |"
+        }
+      ],
+      "audit_verdict": "CONTRADICTED",
+      "pain": "P02"
+    },
+    {
+      "unit": "ZR-204",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "wiki-audit.md",
+          "line": 97,
+          "row": "| ZR-204 | CONTRADICTED | cli/identity_cli使用structured_error，锁分类机制存在 | 全ProgrammingError可重试违反非锁不重试，W07 |"
+        },
+        {
+          "document": "filing-audit.md",
+          "line": 38,
+          "row": "| ZR-204 | P02，锁/超时错误分类 | PARTIAL | filing `_classify_wiki_error` 消费 canonical catalog_locked/busy/db_timeout，未知形态 fatal；旧 raw OperationalError 类名兼容仍不识别，只有当前 wiki canonical 路径受支持。锁分类已改进；不得把完整 retry/outcome 算此项独立完成。 |"
+        }
+      ],
+      "audit_verdict": "CONTRADICTED",
+      "pain": "P02"
+    },
+    {
+      "unit": "ZR-205",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "wiki-audit.md",
+          "line": 98,
+          "row": "| ZR-205 | PARTIAL（跨仓详审） | ZR307卡及实现收据承认filing已有deadline/attempt/stage | revenue source_preparation仍generic RuntimeError并失trace；错误taxonomy误重试影响；由filing子审计补精确retry断言 |"
+        },
+        {
+          "document": "filing-audit.md",
+          "line": 39,
+          "row": "| ZR-205 | P02/P10，deadline+阶段事实 | CONTRADICTED | 纯 clock 探针：10秒期限，子调用耗9秒后 busy，仍 sleep5秒，总14秒。使用子调用前 remaining；结构化 gap main 输出不含 calls/downloads；close-gap失败及handle验证失败的计数仍可丢失。见 F-F05/F-F06。 |"
+        }
+      ],
+      "audit_verdict": "CONTRADICTED",
+      "pain": "P02"
+    },
+    {
+      "unit": "ZR-206",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "wiki-audit.md",
+          "line": 99,
+          "row": "| ZR-206 | HISTORICAL_ONLY/PARTIAL | t2/evidence/zr206_t2_probe.json 8/17真49.62GB/27178657spans；status p95=5755ms health=6148ms，unit livewriter/temp机制 | 当前未重测；reader查询SLO不是worker normalize queue SLO，W01不能被此通过覆盖 |"
+        },
+        {
+          "document": "filing-audit.md",
+          "line": 40,
+          "row": "| ZR-206 | P02，49GB/live-writer SLO | HISTORICAL_ONLY / PARTIAL | 历史收据真实49.62GB T2在 worker暂停窗口执行；live writer为合成T1，不能拼成“真实49GB live writer全链”。历史 status/health p95约6.3秒、query约1.2ms是typed方法，不含三进程、完整SHA读取、provider、重试。当前未重测。 |"
+        }
+      ],
+      "audit_verdict": "PARTIAL",
+      "pain": "P02"
+    },
+    {
+      "unit": "ZR-301",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "wiki-audit.md",
+          "line": 100,
+          "row": "| ZR-301 | PARTIAL | 八stage ConsumerRequirements/evaluator及9测试；明确shadow | stage satisfied标准过弱、无真实consumer强合同，W06 |"
+        }
+      ],
+      "audit_verdict": "PARTIAL",
+      "pain": "P05/P06"
+    },
+    {
+      "unit": "ZR-302",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "wiki-audit.md",
+          "line": 101,
+          "row": "| ZR-302 | PARTIAL | scan_text/RULESET_HASH/evaluate_review缓存、TTL/source/policy负例；生产7 receipts历史 | helper安全门未真正守所有LLM入口；W05 |"
+        }
+      ],
+      "audit_verdict": "PARTIAL",
+      "pain": "P05/P06"
+    },
+    {
+      "unit": "ZR-303",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "wiki-audit.md",
+          "line": 102,
+          "row": "| ZR-303 | CONTRADICTED | graph合成35-test suite中的9graph测试 | 仍shadow且LLM注释误称已接；并未形成一个生产machine decision graph，W05/W06 |"
+        }
+      ],
+      "audit_verdict": "CONTRADICTED",
+      "pain": "P05/P06"
+    },
+    {
+      "unit": "ZR-304",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "wiki-audit.md",
+          "line": 103,
+          "row": "| ZR-304 | CONTRADICTED | attempt/read_model函数、mandatory sourceSHA验证存在，9夹具测试 | producer无attempt接线、service不读unique view、resolver数成功artifact全历史，W03 |"
+        }
+      ],
+      "audit_verdict": "CONTRADICTED",
+      "pain": "P05/P06"
+    },
+    {
+      "unit": "ZR-305",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "wiki-audit.md",
+          "line": 104,
+          "row": "| ZR-305 | CONTRADICTED | 五桶dry-run/apply幂等、保留legacy rows；5测试 | 测试手工merge字段直接builder，并非production service消费bindings；W03 |"
+        }
+      ],
+      "audit_verdict": "CONTRADICTED",
+      "pain": "P05/P06"
+    },
+    {
+      "unit": "ZR-306",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "wiki-audit.md",
+          "line": 105,
+          "row": "| ZR-306 | PARTIAL | artifact_dag角色闭包、6property tests | 真producer选择仍按artifact存在跳过，prompt/model/config变化并未真实触发工作队列最小重算；W04；手工oracle算法形似实现需不同表达复核 |"
+        }
+      ],
+      "audit_verdict": "PARTIAL",
+      "pain": "P05/P06"
+    },
+    {
+      "unit": "ZR-307",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "wiki-audit.md",
+          "line": 106,
+          "row": "| ZR-307 | PARTIAL | 原卡目标/receipt实现filing resolution_trace透传（非debug） | safety graph仍future接线；revenue prepare_source在非0处RuntimeError，只保留stderr尾800字符，无法算全程8stage证据。filing子审计单独核 |"
+        }
+      ],
+      "audit_verdict": "PARTIAL",
+      "pain": "P05/P06"
+    },
+    {
+      "unit": "ZR-401",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "filing-audit.md",
+          "line": 41,
+          "row": "| ZR-401 | P03，严格RootPolicy3.0/no隐式权限 | CONTRADICTED（接线）；部分SUPERSEDED | 3.0 loader存在但 `config.py:64–65` 生产只接受1.0，`:144` privacy默认为public，CLI policy export用2x，非3x。生产Dropbox private要求已被9/3 owner的全roots public决策取代，不能当安全违例；但是严格loader、必填权限、单一snapshot接线目标未因此自动实现。 |"
+        }
+      ],
+      "audit_verdict": "CONTRADICTED",
+      "pain": "P03/P04"
+    },
+    {
+      "unit": "ZR-402",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "filing-audit.md",
+          "line": 42,
+          "row": "| ZR-402 | P03，adapter通用路由 | PARTIAL | registry/dispatch按adapter_id失败封闭可保留；`adapter_dispatch._to_scanner_candidate` 仍调用 scanner._infer_company按路径推断实体。receipt称移交ZR403，而ZR403纯测试无产品修改。v2 facade只在flag开启才执行；未知/缺runtime snapshot fallback v1，非通用loader全链闭环。 |"
+        }
+      ],
+      "audit_verdict": "PARTIAL",
+      "pain": "P03/P04"
+    },
+    {
+      "unit": "ZR-403",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "filing-audit.md",
+          "line": 43,
+          "row": "| ZR-403 | P03，global canonical与eligible location分离 | CONTRADICTED | `service.py:621–665` 先按健康active/priority选全局canonical；`resolver.py:912–939` 只筛is_canonical，再验root kind。高优先级禁用root的canonical可遮蔽低优先级可用副本；per-root reusable=false未参与resolver。原7测试多为全root获准/健康排序，并不证明目标顺序policy→health→priority。 |"
+        }
+      ],
+      "audit_verdict": "CONTRADICTED",
+      "pain": "P03/P04"
+    },
+    {
+      "unit": "ZR-404",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "filing-audit.md",
+          "line": 44,
+          "row": "| ZR-404 | P03，一致policy/epoch/cohort与解释 | CONTRADICTED | CLI resolve传runtime_policy；acquisition及close-gap finalize未传，默认v1/bridge。ensure事后读runtime policy贴envelope，实际选择与标签可能不同；close-gap finalize连policy_snapshot与policy_export都未带。新增4字段/格式校验不证明选择一致。 |"
+        }
+      ],
+      "audit_verdict": "CONTRADICTED",
+      "pain": "P03/P04"
+    },
+    {
+      "unit": "ZR-405",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "filing-audit.md",
+          "line": 45,
+          "row": "| ZR-405 | P03，filing任意获准root | PARTIAL | `filing_contracts.py:449–497` policy自校验和真实path containment可保留；外部root纯handle测试存在。上游close-gap缺policy_export会落N-1 companies回退；resolver若先选禁用canonical，filing安全拒绝而非尝试可用副本。当前真实three-repo journey未得到证明。 |"
+        }
+      ],
+      "audit_verdict": "PARTIAL",
+      "pain": "P03/P04"
+    },
+    {
+      "unit": "ZR-406",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "filing-audit.md",
+          "line": 46,
+          "row": "| ZR-406 | P04，正交freshness与修订 | CONTRADICTED | 当前纯函数4个探针反证，见F-F03；year-only分桶忽略季度/半年期间键，accession词序仍代替时序；39测试收据甚至记录把fixture accession改成递增词序以通过。 |"
+        }
+      ],
+      "audit_verdict": "CONTRADICTED",
+      "pain": "P03/P04"
+    },
+    {
+      "unit": "ZR-407",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "filing-audit.md",
+          "line": 47,
+          "row": "| ZR-407 | P04，授权bound缺口补齐 | PARTIAL / CONTRADICTED（完整范围） | `newer_revision` 已被纳入actionable是真修复；但close-gap仅actionable[0]、hash不绑定完整候选；exact allow_download路径authorization=None仍可fetch。后者可能是旧CLI显式flag授权语义，却与原ZR-407无authorization discover/fetch=0及scope/hash/TTL要求不一致，必须作契约决策而非自称已满足。 |"
+        }
+      ],
+      "audit_verdict": "CONTRADICTED",
+      "pain": "P03/P04"
+    },
+    {
+      "unit": "ZR-408",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "filing-audit.md",
+          "line": 48,
+          "row": "| ZR-408 | P04，staging/commit/单飞/恢复 | PARTIAL | 同一binding事务hash锁与进程级测试是有效资产；不同合法authorization绑定同一候选→不同锁，未证明单候选跨binding至多一次。commit失败结果fetch_events=0可与实际fetch冲突；多gap只提交一项后仍可completed。未运行故障提交，不宣称已发生生产重复下载。 |"
+        }
+      ],
+      "audit_verdict": "PARTIAL",
+      "pain": "P03/P04"
+    },
+    {
+      "unit": "ZR-409",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "filing-audit.md",
+          "line": 49,
+          "row": "| ZR-409 | P03/P10，第四根与真实三仓旅程 | PARTIAL | 卡片实际C2只调用wiki resolve；将三仓用户旅程缩成三root resolver样本，T3移交后续且3.0loader再延期。future_lake为空占位+合成测试不等于真实第四root从revenue入口消费。filing已纠偏E2E设计明确synthetic companies-root reuse-only。 |"
+        }
+      ],
+      "audit_verdict": "PARTIAL",
+      "pain": "P03/P04"
+    },
+    {
+      "unit": "ZR-501",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "wiki-audit.md",
+          "line": 107,
+          "row": "| ZR-501 | PARTIAL | sidecar元数据不按filename编事实、非filing拒绝、page_count进入normalizer | 七真研报publisher/author/date/security/page独立golden核对缺口，不能从sidecar夹具推全覆盖 |"
+        }
+      ],
+      "audit_verdict": "PARTIAL",
+      "pain": "P07"
+    },
+    {
+      "unit": "ZR-502",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "wiki-audit.md",
+          "line": 108,
+          "row": "| ZR-502 | PARTIAL | sidecar不成primary；homepage identity写frontmatter与质量flag | contradiction flag是否拦截真实consumer/LLM无闭环证据，W05/W08 |"
+        }
+      ],
+      "audit_verdict": "PARTIAL",
+      "pain": "P07"
+    },
+    {
+      "unit": "ZR-503",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "wiki-audit.md",
+          "line": 109,
+          "row": "| ZR-503 | PARTIAL | entity检测与multi_entity_attribution_needed接frontmatter | 文档多实体flag≠各fact实体精确归属，W08 |"
+        }
+      ],
+      "audit_verdict": "PARTIAL",
+      "pain": "P07"
+    },
+    {
+      "unit": "ZR-504",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "wiki-audit.md",
+          "line": 110,
+          "row": "| ZR-504 | PARTIAL | adapter物理页与paragraph/offset顺序，normalizer render接线 | 测试已构造pages数据；真PDF parser页序、双栏读序golden尚未由这些测试证实 |"
+        }
+      ],
+      "audit_verdict": "PARTIAL",
+      "pain": "P07"
+    },
+    {
+      "unit": "ZR-505",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "wiki-audit.md",
+          "line": 111,
+          "row": "| ZR-505 | PARTIAL | typed cell矩阵及locator/render负例 | adapter单测不测真实PDF表格识别/跨页/单位精度；不能宣称真实broker table artifact闭环 |"
+        }
+      ],
+      "audit_verdict": "PARTIAL",
+      "pain": "P07"
+    },
+    {
+      "unit": "ZR-506",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "wiki-audit.md",
+          "line": 112,
+          "row": "| ZR-506 | PARTIAL | regex detect_sections/chunk_spans/extract_facts、frontmatter真实接线 | 没完整tag/FactAssertion/source locator/period合同，列表研报5/7问题仍在，W08 |"
+        }
+      ],
+      "audit_verdict": "PARTIAL",
+      "pain": "P07"
+    },
+    {
+      "unit": "ZR-507",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "wiki-audit.md",
+          "line": 113,
+          "row": "| ZR-507 | CONTRADICTED | 纯内存enqueue/lease/retry/dedupe14 tests | 不持久化、不worker消费、不跨CLI幂等，W04 |"
+        }
+      ],
+      "audit_verdict": "CONTRADICTED",
+      "pain": "P07"
+    },
+    {
+      "unit": "ZR-508",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "wiki-audit.md",
+          "line": 114,
+          "row": "| ZR-508 | CONTRADICTED（生产目标） | pure DemandScheduler aging/deadline/cost预算11tests | 实际worker用另一scheduler_policy，不能证明真实fairness/budget运行，W04 |"
+        }
+      ],
+      "audit_verdict": "CONTRADICTED",
+      "pain": "P07"
+    },
+    {
+      "unit": "ZR-509",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "wiki-audit.md",
+          "line": 115,
+          "row": "| ZR-509 | PARTIAL | parse/validate_html_capture纯函数12tests，wrong-strategy合成HTML拒绝 | 无生产引用/两份真实HTML抓取消费链，W08 |"
+        }
+      ],
+      "audit_verdict": "PARTIAL",
+      "pain": "P07"
+    },
+    {
+      "unit": "ZR-510",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "wiki-audit.md",
+          "line": 116,
+          "row": "| ZR-510 | CONTRADICTED（原范围） | 长江形状合成文本多实体attribution + normalizer接线9tests | 原7PDF+2HTML全chain验收被缩成shape test，W08 |"
+        }
+      ],
+      "audit_verdict": "CONTRADICTED",
+      "pain": "P07"
+    },
+    {
+      "unit": "ZR-601",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "revenue-audit.md",
+          "line": 114,
+          "row": "| ZR601 | 原owner AssetFact schema/type/alias；revenue测试只测resource/reserve stock-flow，模型算术确有实现 | 上游schema/alias待总审；收入侧未显示source资产绑定。PARTIAL，不能由同号算术tests关闭原卡 |"
+        }
+      ],
+      "audit_verdict": "PARTIAL",
+      "pain": "P09"
+    },
+    {
+      "unit": "ZR-602",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "revenue-audit.md",
+          "line": 115,
+          "row": "| ZR602 | 原basis必填/单位归一；收入validate_parameter_basis是可选加性，缺basis放行；MineYearOperation也不补强 | RF-A02，PARTIAL；错单位可能通过七字段入口 |"
+        }
+      ],
+      "audit_verdict": "PARTIAL",
+      "pain": "P09"
+    },
+    {
+      "unit": "ZR-603",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "revenue-audit.md",
+          "line": 116,
+          "row": "| ZR603 | timeline/链式份额/geography helper已实现，但年度apply只用期末 | RF-A03实测反证；CONTRADICTED |"
+        }
+      ],
+      "audit_verdict": "CONTRADICTED",
+      "pain": "P09"
+    },
+    {
+      "unit": "ZR-604",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "revenue-audit.md",
+          "line": 117,
+          "row": "| ZR604 | 保留多parameter+status、最多1 accepted；all pending也通过，parameter_index仍全保留 | 缺提取/人工review来源与被消费参数accepted门；PARTIAL，待上游合流 |"
+        }
+      ],
+      "audit_verdict": "PARTIAL",
+      "pain": "P09"
+    },
+    {
+      "unit": "ZR-605",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "revenue-audit.md",
+          "line": 118,
+          "row": "| ZR605 | 七字段校验+乘积helper；schema3.8验证后丢弃结果 | RF-A02/A04：单位/finite/basis/主引擎消费缺口；CONTRADICTED |"
+        }
+      ],
+      "audit_verdict": "CONTRADICTED",
+      "pain": "P09"
+    },
+    {
+      "unit": "ZR-606",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "revenue-audit.md",
+          "line": 119,
+          "row": "| ZR606 | 商业条款helper可复算，但TC/RC单位/FX基础/payability语义缺失 | RF-A02实测；CONTRADICTED |"
+        }
+      ],
+      "audit_verdict": "CONTRADICTED",
+      "pain": "P09"
+    },
+    {
+      "unit": "ZR-607",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "revenue-audit.md",
+          "line": 120,
+          "row": "| ZR607 | internal gross/net显示桥存在；非真实合并/双边消重算法 | RF-A03；PARTIAL，不能宣称集团外部收入已正确 |"
+        }
+      ],
+      "audit_verdict": "PARTIAL",
+      "pain": "P09"
+    },
+    {
+      "unit": "ZR-608",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "revenue-audit.md",
+          "line": 121,
+          "row": "| ZR608 | 容差与gap helper存在；没有强制source-bound独立reference | RF-A03+自比较验收；PARTIAL |"
+        }
+      ],
+      "audit_verdict": "PARTIAL",
+      "pain": "P09"
+    },
+    {
+      "unit": "ZR-609",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "revenue-audit.md",
+          "line": 122,
+          "row": "| ZR609 | synthetic Zijin shapes+匿名pure-gold helper | 真实主要资产/第二真实矿企未验证；CONTRADICTED |"
+        }
+      ],
+      "audit_verdict": "CONTRADICTED",
+      "pain": "P09"
+    },
+    {
+      "unit": "ZR-610",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "revenue-audit.md",
+          "line": 123,
+          "row": "| ZR610 | 独立accounting reviewer JSON存在且accepted；ADR正文§9仍accepted待确认；明确单位转换和内供移交后续 | HISTORICAL_ONLY/PARTIAL；不否认独立review存在，但未验收后续实际模型且ADR期内变动已违背 |"
+        }
+      ],
+      "audit_verdict": "PARTIAL",
+      "pain": "P09"
+    },
+    {
+      "unit": "ZR-611",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "revenue-audit.md",
+          "line": 124,
+          "row": "| ZR611 | 合成8类helper组合符合T1方向，数据明确合成 | 不要求真实本身合理，但单位/内供错误被复用oracle锁绿；PARTIAL |"
+        }
+      ],
+      "audit_verdict": "PARTIAL",
+      "pain": "P09"
+    },
+    {
+      "unit": "ZR-701",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "revenue-audit.md",
+          "line": 125,
+          "row": "| ZR701 | version/capture常量若干统一，四组linter字段表已迁移；同号测试实际跑draft/formal与memory demand | 原“所有schema machine truth”未完整实现；PARTIAL |"
+        }
+      ],
+      "audit_verdict": "PARTIAL",
+      "pain": "P08/P09"
+    },
+    {
+      "unit": "ZR-702",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "revenue-audit.md",
+          "line": 126,
+          "row": "| ZR702 | build_template存在但维度/monetary结构错、无矿业模板 | full-chain测试换用forecast_document；CONTRADICTED |"
+        }
+      ],
+      "audit_verdict": "CONTRADICTED",
+      "pain": "P08/P09"
+    },
+    {
+      "unit": "ZR-703",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "revenue-audit.md",
+          "line": 127,
+          "row": "| ZR703 | 旧版本字样清理/allowlist已有 | 未证明linter子集负例和docs示例自动执行；PARTIAL |"
+        }
+      ],
+      "audit_verdict": "PARTIAL",
+      "pain": "P08/P09"
+    },
+    {
+      "unit": "ZR-704",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "revenue-audit.md",
+          "line": 128,
+          "row": "| ZR704 | CLI validate-only走draft/提前return，历史专测registry bytes不变；prepare默认formal仍注册 | 狭义CLI改进真实，整卡纯prepare不满足；PARTIAL |"
+        }
+      ],
+      "audit_verdict": "PARTIAL",
+      "pain": "P08/P09"
+    },
+    {
+      "unit": "ZR-705",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "revenue-audit.md",
+          "line": 129,
+          "row": "| ZR705 | draft可render路径/receipt mode+payload防篡改专测存在；formal注册 | 局部可用，历史T1未重跑当前；N/N-1与后续事务链未独立复验。PARTIAL/HISTORICAL_ONLY |"
+        }
+      ],
+      "audit_verdict": "PARTIAL",
+      "pain": "P08/P09"
+    },
+    {
+      "unit": "ZR-706",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "revenue-audit.md",
+          "line": 130,
+          "row": "| ZR706 | 来源链消费envelope+selector，但失败RuntimeError、仅成功后memory demand | RF-A07；CONTRADICTED |"
+        }
+      ],
+      "audit_verdict": "CONTRADICTED",
+      "pain": "P08/P09"
+    },
+    {
+      "unit": "ZR-707",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "revenue-audit.md",
+          "line": 131,
+          "row": "| ZR707 | mixed_recognition模块只枚举/name uniqueness；既有segment引擎仍主路径 | 不等于mine×commodity×product/accounting bridge；PARTIAL |"
+        }
+      ],
+      "audit_verdict": "PARTIAL",
+      "pain": "P08/P09"
+    },
+    {
+      "unit": "ZR-708",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "revenue-audit.md",
+          "line": 132,
+          "row": "| ZR708 | snapshot/hash/metric→historical_accuracy→confidence接线真实存在，主校验会重算record hash | 仅合成历史专测；公司/日期/外部链真实性仍不足，PARTIAL |"
+        }
+      ],
+      "audit_verdict": "PARTIAL",
+      "pain": "P08/P09"
+    },
+    {
+      "unit": "ZR-709",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "revenue-audit.md",
+          "line": 133,
+          "row": "| ZR709 | 五年合成F2+fixture三进程各子旅程存在 | J1 company_release代替broker_research；missing后另造队列；J2数据非J1抽取，非真正连续链。CONTRADICTED |"
+        }
+      ],
+      "audit_verdict": "CONTRADICTED",
+      "pain": "P08/P09"
+    },
+    {
+      "unit": "ZR-710",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "revenue-audit.md",
+          "line": 134,
+          "row": "| ZR710 | 单文件atomic-write已实现，registry先append | 多资源事务/恢复/精确一次未实现，RF-A05；CONTRADICTED |"
+        }
+      ],
+      "audit_verdict": "CONTRADICTED",
+      "pain": "P08/P09"
+    },
+    {
+      "unit": "ZR-711",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "revenue-audit.md",
+          "line": 135,
+          "row": "| ZR711 | 3.7↔3.8 converter可逆，加空units不猜数正确 | units仅校验不进计算，consolidation结构未体现；PARTIAL |"
+        }
+      ],
+      "audit_verdict": "PARTIAL",
+      "pain": "P08/P09"
+    },
+    {
+      "unit": "ZR-712",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "revenue-audit.md",
+          "line": 136,
+          "row": "| ZR712 | 新policy纯helper可测，但主confidence没有消费；伪hash/one-observation门无效 | RF-A08；CONTRADICTED |"
+        }
+      ],
+      "audit_verdict": "CONTRADICTED",
+      "pain": "P08/P09"
+    },
+    {
+      "unit": "ZR-713",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "revenue-audit.md",
+          "line": 137,
+          "row": "| ZR713 | 多窗口包装与hash存在；mine仅actual分解、重复窗口解除cap | 真实rolling-origin/no-lookahead与评分接线不满足；CONTRADICTED |"
+        }
+      ],
+      "audit_verdict": "CONTRADICTED",
+      "pain": "P08/P09"
+    },
+    {
+      "unit": "ZR-801",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "assurance-audit.md",
+          "line": 101,
+          "row": "| ZR-801 | PARTIAL | 197注册ID可追溯；实际tier结果不完整，A03 |"
+        }
+      ],
+      "audit_verdict": "PARTIAL",
+      "pain": "P10"
+    },
+    {
+      "unit": "ZR-802",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "revenue-audit.md",
+          "line": 138,
+          "row": "| ZR802 | 真实三进程fixture覆盖状态，有价值T1 | 再次parser/LLM0和精确预算未测，失败stage链仍字符串；PARTIAL |"
+        }
+      ],
+      "audit_verdict": "PARTIAL",
+      "pain": "P10"
+    },
+    {
+      "unit": "ZR-803",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "assurance-audit.md",
+          "line": 102,
+          "row": "| ZR-803 | PARTIAL | 隔离chaos测试资产；生产超时/停跑/报告中断及调度真实故障未完整覆盖 |"
+        }
+      ],
+      "audit_verdict": "PARTIAL",
+      "pain": "P10"
+    },
+    {
+      "unit": "ZR-804",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "assurance-audit.md",
+          "line": 103,
+          "row": "| ZR-804 | PARTIAL | Windows/sibling测试存在；非阻断CI、installed实际组合未重验 |"
+        }
+      ],
+      "audit_verdict": "PARTIAL",
+      "pain": "P10"
+    },
+    {
+      "unit": "ZR-805",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "filing-audit.md",
+          "line": 50,
+          "row": "| ZR-805 | P10，真实CN/HK/US首次+复用 | HISTORICAL_ONLY / CONTRADICTED（完成证据） | 11receipt新增3个授权/静态测试，明确真实T3“需用户网络授权=blocked/opt-in”，side_effect downloads=0/real_catalog_access=0。旧filing v1.3三市场下载成功是旧版本历史，不是当前triplet T3结果。此处不是网络故障认定，是完成主张范围不足。 |"
+        }
+      ],
+      "audit_verdict": "CONTRADICTED",
+      "pain": "P10"
+    },
+    {
+      "unit": "ZR-806",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "revenue-audit.md",
+          "line": 139,
+          "row": "| ZR806 | 真生产raw/sidecar/resolver样本T2历史证据 | artifact/mine/forecast没消费；当前全旅程不成立，CONTRADICTED |"
+        }
+      ],
+      "audit_verdict": "CONTRADICTED",
+      "pain": "P10"
+    },
+    {
+      "unit": "ZR-901",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "assurance-audit.md",
+          "line": 104,
+          "row": "| ZR-901 | CONTRADICTED | PR门未统一required范围，旧closure仍执行，A06 |"
+        }
+      ],
+      "audit_verdict": "CONTRADICTED",
+      "pain": "P10/P11"
+    },
+    {
+      "unit": "ZR-902",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "assurance-audit.md",
+          "line": 105,
+          "row": "| ZR-902 | PARTIAL | scheduler当前参数修复；实际T2内容/丢run告警/Action来源未闭 |"
+        }
+      ],
+      "audit_verdict": "PARTIAL",
+      "pain": "P10/P11"
+    },
+    {
+      "unit": "ZR-903",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "assurance-audit.md",
+          "line": 106,
+          "row": "| ZR-903 | PARTIAL | 注册/执行框架有资产，市场skip语义与两套runner有缺陷 |"
+        }
+      ],
+      "audit_verdict": "PARTIAL",
+      "pain": "P10/P11"
+    },
+    {
+      "unit": "ZR-904",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "assurance-audit.md",
+          "line": 107,
+          "row": "| ZR-904 | CONTRADICTED | SLI用同一ok复制，缺项/失败report仍ready |"
+        }
+      ],
+      "audit_verdict": "CONTRADICTED",
+      "pain": "P10/P11"
+    },
+    {
+      "unit": "ZR-905",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "assurance-audit.md",
+          "line": 108,
+          "row": "| ZR-905 | CONTRADICTED | selftests未杀未来时间/同刻soak等反例 |"
+        }
+      ],
+      "audit_verdict": "CONTRADICTED",
+      "pain": "P10/P11"
+    },
+    {
+      "unit": "ZR-906",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "assurance-audit.md",
+          "line": 109,
+          "row": "| ZR-906 | PARTIAL | 69错误冻结/词扫描不等于完整质量成功 |"
+        }
+      ],
+      "audit_verdict": "PARTIAL",
+      "pain": "P10/P11"
+    },
+    {
+      "unit": "ZR-907",
+      "old_state": "accepted",
+      "evidence": [
+        {
+          "document": "assurance-audit.md",
+          "line": 110,
+          "row": "| ZR-907 | PARTIAL | drift patrol存在；旧当前页与新HEAD/报告漂移未自动关闭或纠正 |"
+        }
+      ],
+      "audit_verdict": "PARTIAL",
+      "pain": "P10/P11"
+    }
+  ]
+}

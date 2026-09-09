@@ -1,0 +1,332 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:company-wiki:source-catalog-worker-recovery:evidence-manifest:v4",
+  "title": "Machine-verifiable gate evidence manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "utcTimestamp": {
+      "type": "string", "format": "date-time",
+      "pattern": "^[0-9]{4}-(0[1-9]|1[0-2])-([0-2][0-9]|3[01])T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]{1,9})?Z$"
+    },
+    "nodeId": {
+      "type": "string",
+      "pattern": "^(T00L|D00L|I00L|G00L|D00|OP00|G00|T01|D01|G01|T02A|D02A|I02A|G02A|G02B-ADR|(T|D|I|G)02B-(NI|IDX)|(T|D|I|G)(03|04|05|06|06P|07E|07O|08|09P|09)|G07-ADR|G10C|D11A|OP11A|G11A|D11M|OP11M|G11M|D11J|OP11J|G11J|G11M-L-ADR|D11M-L|OP11M-L|G11M-L|(D|OP|G)11B-A[123]|(D|OP|G)11B-BP|(D|OP|G)11B-BF(0[1-9]|[1-9][0-9])|G10R|D12A|OP12A|G12A|G12B-PRE|D12B-ARM|OP12B-ARM|G12B-ARM|D12B-RB|OP12B-RB|G12B-RB|D12B-CAS|OP12B-CAS|G12B-CAS|D12B-LOGIN|OP12B-LOGIN|G12B-POST|D12C-RT|G12C-RT|D12C|G12C-PRE|OP12C|G12C|OP12C-RB|G12C-RB|OP-RUNTIME-CYCLE|(D|OP|G)05R(0[1-9]|[1-9][0-9]))$"
+    },
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "artifact_id", "artifact_type", "storage_kind", "repo_relative_path", "opaque_sink_id", "sink_object_id",
+        "digest_kind", "digest", "hmac_key_id", "size_bytes", "media_type", "sensitivity",
+        "acl_snapshot_sha256", "file_identity_sha256", "volume_identity_sha256", "retention_policy_sha256", "encryption", "reparse_point_observed", "created_at", "expires_at",
+        "contains_secret", "producer_identity_sha256"
+      ],
+      "properties": {
+        "artifact_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,159}$"},
+        "artifact_type": {"enum": ["COMMAND_OUTPUT", "TEST_RESULT", "PROFILE", "TRACE", "DATABASE_SNAPSHOT", "FILE_SNAPSHOT", "REGISTRY_SNAPSHOT", "CONTROL_STATE", "AUTHORIZATION", "AUTHORIZATION_REVALIDATION_RECEIPT", "USER_APPROVAL_RECEIPT", "OPERATION_CONTRACT", "OPERATION_INTENT", "OPERATION_INTENT_TEMPLATE", "JOURNAL_MANIFEST", "JOURNAL_RECORD", "JOURNAL_HEAD_ANCHOR", "OPERATION_EXECUTION_RECEIPT", "BUDGET_SETTLEMENT_RECEIPT", "BOOTSTRAP_MANIFEST", "BOOTSTRAP_RECEIPT", "REVIEW_PAYLOAD", "OTHER_STRUCTURED"]},
+        "storage_kind": {"enum": ["REPO_RELATIVE", "APPROVED_OPAQUE_SINK"]},
+        "repo_relative_path": {"anyOf": [{"type": "null"}, {"type": "string", "pattern": "^(evidence|reviews|test-results)/(?:[A-Za-z0-9][A-Za-z0-9._-]{0,99}/)*[A-Za-z0-9][A-Za-z0-9._-]{0,99}$"}]},
+        "opaque_sink_id": {"anyOf": [{"type": "null"}, {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,159}$"}]},
+        "sink_object_id": {"anyOf": [{"type": "null"}, {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,199}$"}]},
+        "digest_kind": {"enum": ["SHA-256", "HMAC-SHA-256"]},
+        "digest": {"$ref": "#/$defs/sha256"},
+        "hmac_key_id": {"anyOf": [{"type": "null"}, {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,159}$"}]},
+        "size_bytes": {"type": "integer", "minimum": 0},
+        "media_type": {"type": "string", "pattern": "^[a-z0-9][a-z0-9.+-]*/[a-zA-Z0-9][a-zA-Z0-9.+-]*$"},
+        "sensitivity": {"enum": ["PUBLIC", "INTERNAL", "RESTRICTED_DERIVED"]},
+        "acl_snapshot_sha256": {"$ref": "#/$defs/sha256"},
+        "file_identity_sha256": {"$ref": "#/$defs/sha256"},
+        "volume_identity_sha256": {"$ref": "#/$defs/sha256"},
+        "retention_policy_sha256": {"$ref": "#/$defs/sha256"},
+        "encryption": {"enum": ["NONE", "OS_USER_PROTECTED", "AEAD_APPROVED_KEY"]},
+        "reparse_point_observed": {"const": false},
+        "created_at": {"$ref": "#/$defs/utcTimestamp"},
+        "expires_at": {"$ref": "#/$defs/utcTimestamp"},
+        "contains_secret": {"const": false},
+        "producer_identity_sha256": {"$ref": "#/$defs/sha256"}
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"storage_kind": {"const": "REPO_RELATIVE"}}, "required": ["storage_kind"]},
+          "then": {"properties": {"repo_relative_path": {"type": "string"}, "opaque_sink_id": {"type": "null"}, "sink_object_id": {"type": "null"}, "digest_kind": {"const": "SHA-256"}, "hmac_key_id": {"type": "null"}}}
+        },
+        {
+          "if": {"properties": {"storage_kind": {"const": "APPROVED_OPAQUE_SINK"}}, "required": ["storage_kind"]},
+          "then": {"properties": {"repo_relative_path": {"type": "null"}, "opaque_sink_id": {"type": "string"}, "sink_object_id": {"type": "string"}, "digest_kind": {"const": "HMAC-SHA-256"}, "hmac_key_id": {"type": "string"}, "encryption": {"enum": ["OS_USER_PROTECTED", "AEAD_APPROVED_KEY"]}}}
+        },
+        {
+          "if": {"properties": {"sensitivity": {"const": "RESTRICTED_DERIVED"}}, "required": ["sensitivity"]},
+          "then": {"properties": {"storage_kind": {"const": "APPROVED_OPAQUE_SINK"}, "encryption": {"enum": ["OS_USER_PROTECTED", "AEAD_APPROVED_KEY"]}}}
+        }
+      ]
+    },
+    "journalEvidence": {
+      "type": "object", "additionalProperties": false,
+      "required": ["policy", "journal_manifest_path", "journal_manifest_sha256", "head_anchor_before_path", "head_anchor_before_sha256", "intent_record_path", "intent_record_sha256", "terminal_record_type", "terminal_record_path", "terminal_record_sha256", "head_anchor_after_path", "head_anchor_after_sha256", "execution_receipt_path", "execution_receipt_sha256"],
+      "properties": {
+        "policy": {"enum": ["NOT_APPLICABLE", "INITIALIZE", "REQUIRED_INTENT_FINALIZE"]},
+        "journal_manifest_path": {"anyOf": [{"type": "null"}, {"type": "string", "pattern": "^evidence/[A-Za-z0-9][A-Za-z0-9._-]*/journal_manifest\\.json$"}]},
+        "journal_manifest_sha256": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/sha256"}]},
+        "head_anchor_before_path": {"anyOf": [{"type": "null"}, {"type": "string", "pattern": "^evidence/[A-Za-z0-9][A-Za-z0-9._-]*/journal_head_before\\.json$"}]},
+        "head_anchor_before_sha256": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/sha256"}]},
+        "intent_record_path": {"anyOf": [{"type": "null"}, {"type": "string", "pattern": "^evidence/[A-Za-z0-9][A-Za-z0-9._-]*/journal_intent_record\\.json$"}]},
+        "intent_record_sha256": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/sha256"}]},
+        "terminal_record_type": {"enum": [null, "FINALIZE", "RECONCILE"]},
+        "terminal_record_path": {"anyOf": [{"type": "null"}, {"type": "string", "pattern": "^evidence/[A-Za-z0-9][A-Za-z0-9._-]*/journal_(?:finalize|reconcile)_record\\.json$"}]},
+        "terminal_record_sha256": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/sha256"}]},
+        "head_anchor_after_path": {"anyOf": [{"type": "null"}, {"type": "string", "pattern": "^evidence/[A-Za-z0-9][A-Za-z0-9._-]*/journal_head_after\\.json$"}]},
+        "head_anchor_after_sha256": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/sha256"}]},
+        "execution_receipt_path": {"anyOf": [{"type": "null"}, {"type": "string", "pattern": "^evidence/[A-Za-z0-9][A-Za-z0-9._-]*/operation_execution_receipt\\.json$"}]},
+        "execution_receipt_sha256": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/sha256"}]}
+      },
+      "allOf": [
+        {"if": {"properties": {"policy": {"const": "NOT_APPLICABLE"}}, "required": ["policy"]}, "then": {"properties": {"journal_manifest_path": {"type": "null"}, "journal_manifest_sha256": {"type": "null"}, "head_anchor_before_path": {"type": "null"}, "head_anchor_before_sha256": {"type": "null"}, "intent_record_path": {"type": "null"}, "intent_record_sha256": {"type": "null"}, "terminal_record_type": {"type": "null"}, "terminal_record_path": {"type": "null"}, "terminal_record_sha256": {"type": "null"}, "head_anchor_after_path": {"type": "null"}, "head_anchor_after_sha256": {"type": "null"}, "execution_receipt_path": {"type": "null"}, "execution_receipt_sha256": {"type": "null"}}}},
+        {"if": {"properties": {"policy": {"const": "INITIALIZE"}}, "required": ["policy"]}, "then": {"properties": {"journal_manifest_path": {"type": "string"}, "journal_manifest_sha256": {"$ref": "#/$defs/sha256"}, "head_anchor_before_path": {"type": "null"}, "head_anchor_before_sha256": {"type": "null"}, "intent_record_path": {"type": "null"}, "intent_record_sha256": {"type": "null"}, "terminal_record_type": {"type": "null"}, "terminal_record_path": {"type": "null"}, "terminal_record_sha256": {"type": "null"}, "head_anchor_after_path": {"type": "string"}, "head_anchor_after_sha256": {"$ref": "#/$defs/sha256"}, "execution_receipt_path": {"type": "string"}, "execution_receipt_sha256": {"$ref": "#/$defs/sha256"}}}},
+        {"if": {"properties": {"policy": {"const": "REQUIRED_INTENT_FINALIZE"}}, "required": ["policy"]}, "then": {"properties": {"journal_manifest_path": {"type": "string"}, "journal_manifest_sha256": {"$ref": "#/$defs/sha256"}, "head_anchor_before_path": {"type": "string"}, "head_anchor_before_sha256": {"$ref": "#/$defs/sha256"}, "intent_record_path": {"type": "string"}, "intent_record_sha256": {"$ref": "#/$defs/sha256"}, "terminal_record_type": {"enum": ["FINALIZE", "RECONCILE"]}, "terminal_record_path": {"type": "string"}, "terminal_record_sha256": {"$ref": "#/$defs/sha256"}, "head_anchor_after_path": {"type": "string"}, "head_anchor_after_sha256": {"$ref": "#/$defs/sha256"}, "execution_receipt_path": {"type": "string"}, "execution_receipt_sha256": {"$ref": "#/$defs/sha256"}}}}
+      ]
+    },
+    "runtimeCycleEvidence": {
+      "type": "object", "additionalProperties": false,
+      "required": ["parent_gate_node_id", "cycle_id", "previous_cycle_evidence_sha256", "budget_settlement_receipt_path", "budget_settlement_receipt_sha256"],
+      "properties": {
+        "parent_gate_node_id": {"const": "G12C"},
+        "cycle_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,159}$"},
+        "previous_cycle_evidence_sha256": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/sha256"}]},
+        "budget_settlement_receipt_path": {"type": "string", "pattern": "^evidence/[A-Za-z0-9][A-Za-z0-9._-]*/budget_settlement_receipt\\.json$"},
+        "budget_settlement_receipt_sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "activationAuthorityChain": {
+      "type": "object", "additionalProperties": false,
+      "required": ["phase", "runtime_template_path", "runtime_template_sha256", "runtime_authorization_manifest_path", "runtime_authorization_manifest_sha256", "runtime_authorization_revalidation_receipt_path", "runtime_authorization_revalidation_receipt_sha256", "runtime_template_user_approval_receipt_path", "runtime_template_user_approval_receipt_sha256", "g12c_rt_evidence_sha256", "final_activation_intent_path", "final_activation_intent_sha256", "final_activation_contract_template_path", "final_activation_contract_template_sha256", "final_activation_authorization_manifest_path", "final_activation_authorization_manifest_sha256", "final_activation_authorization_revalidation_receipt_path", "final_activation_authorization_revalidation_receipt_sha256", "final_activation_user_approval_receipt_path", "final_activation_user_approval_receipt_sha256", "dual_approval_distinctness_verified"],
+      "properties": {
+        "phase": {"enum": ["RUNTIME_PREPARED", "RUNTIME_APPROVED", "FINAL_PREPARED", "DUAL_APPROVED"]},
+        "runtime_template_path": {"anyOf": [{"type": "null"}, {"type": "string", "pattern": "^evidence/[A-Za-z0-9][A-Za-z0-9._-]*/operation_intent_template\\.json$"}]},
+        "runtime_template_sha256": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/sha256"}]},
+        "runtime_authorization_manifest_path": {"anyOf": [{"type": "null"}, {"type": "string", "pattern": "^evidence/[A-Za-z0-9][A-Za-z0-9._-]*/runtime_authorization_manifest\\.json$"}]},
+        "runtime_authorization_manifest_sha256": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/sha256"}]},
+        "runtime_authorization_revalidation_receipt_path": {"anyOf": [{"type": "null"}, {"type": "string", "pattern": "^evidence/[A-Za-z0-9][A-Za-z0-9._-]*/runtime_authorization_revalidation_receipt\\.json$"}]},
+        "runtime_authorization_revalidation_receipt_sha256": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/sha256"}]},
+        "runtime_template_user_approval_receipt_path": {"anyOf": [{"type": "null"}, {"type": "string", "pattern": "^evidence/[A-Za-z0-9][A-Za-z0-9._-]*/runtime_template_user_approval_receipt\\.json$"}]},
+        "runtime_template_user_approval_receipt_sha256": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/sha256"}]},
+        "g12c_rt_evidence_sha256": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/sha256"}]},
+        "final_activation_intent_path": {"anyOf": [{"type": "null"}, {"type": "string", "pattern": "^evidence/D12C/[A-Za-z0-9][A-Za-z0-9._-]*/operation_intent_manifest\\.json$"}]},
+        "final_activation_intent_sha256": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/sha256"}]},
+        "final_activation_contract_template_path": {"anyOf": [{"type": "null"}, {"type": "string", "pattern": "^evidence/[A-Za-z0-9][A-Za-z0-9._-]*/final_activation_contract_template\\.json$"}]},
+        "final_activation_contract_template_sha256": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/sha256"}]},
+        "final_activation_authorization_manifest_path": {"anyOf": [{"type": "null"}, {"type": "string", "pattern": "^evidence/D12C/[A-Za-z0-9][A-Za-z0-9._-]*/authorization_manifest\\.json$"}]},
+        "final_activation_authorization_manifest_sha256": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/sha256"}]},
+        "final_activation_authorization_revalidation_receipt_path": {"anyOf": [{"type": "null"}, {"type": "string", "pattern": "^evidence/[A-Za-z0-9][A-Za-z0-9._-]*/final_activation_authorization_revalidation_receipt\\.json$"}]},
+        "final_activation_authorization_revalidation_receipt_sha256": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/sha256"}]},
+        "final_activation_user_approval_receipt_path": {"anyOf": [{"type": "null"}, {"type": "string", "pattern": "^evidence/[A-Za-z0-9][A-Za-z0-9._-]*/final_activation_user_approval_receipt\\.json$"}]},
+        "final_activation_user_approval_receipt_sha256": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/sha256"}]},
+        "dual_approval_distinctness_verified": {"type": "boolean"}
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"phase": {"const": "RUNTIME_PREPARED"}}, "required": ["phase"]},
+          "then": {"properties": {
+            "runtime_template_path": {"type": "string"}, "runtime_template_sha256": {"$ref": "#/$defs/sha256"},
+            "runtime_authorization_manifest_path": {"type": "string"}, "runtime_authorization_manifest_sha256": {"$ref": "#/$defs/sha256"},
+            "runtime_authorization_revalidation_receipt_path": {"type": "null"}, "runtime_authorization_revalidation_receipt_sha256": {"type": "null"},
+            "runtime_template_user_approval_receipt_path": {"type": "null"}, "runtime_template_user_approval_receipt_sha256": {"type": "null"},
+            "g12c_rt_evidence_sha256": {"type": "null"},
+            "final_activation_intent_path": {"type": "null"}, "final_activation_intent_sha256": {"type": "null"},
+            "final_activation_contract_template_path": {"type": "null"}, "final_activation_contract_template_sha256": {"type": "null"},
+            "final_activation_authorization_manifest_path": {"type": "null"}, "final_activation_authorization_manifest_sha256": {"type": "null"},
+            "final_activation_authorization_revalidation_receipt_path": {"type": "null"}, "final_activation_authorization_revalidation_receipt_sha256": {"type": "null"},
+            "final_activation_user_approval_receipt_path": {"type": "null"}, "final_activation_user_approval_receipt_sha256": {"type": "null"},
+            "dual_approval_distinctness_verified": {"const": false}
+          }}
+        },
+        {
+          "if": {"properties": {"phase": {"const": "RUNTIME_APPROVED"}}, "required": ["phase"]},
+          "then": {"properties": {
+            "runtime_template_path": {"type": "string"}, "runtime_template_sha256": {"$ref": "#/$defs/sha256"},
+            "runtime_authorization_manifest_path": {"type": "string"}, "runtime_authorization_manifest_sha256": {"$ref": "#/$defs/sha256"},
+            "runtime_authorization_revalidation_receipt_path": {"type": "string"}, "runtime_authorization_revalidation_receipt_sha256": {"$ref": "#/$defs/sha256"},
+            "runtime_template_user_approval_receipt_path": {"type": "string"}, "runtime_template_user_approval_receipt_sha256": {"$ref": "#/$defs/sha256"},
+            "g12c_rt_evidence_sha256": {"type": "null"},
+            "final_activation_intent_path": {"type": "null"}, "final_activation_intent_sha256": {"type": "null"},
+            "final_activation_contract_template_path": {"type": "null"}, "final_activation_contract_template_sha256": {"type": "null"},
+            "final_activation_authorization_manifest_path": {"type": "null"}, "final_activation_authorization_manifest_sha256": {"type": "null"},
+            "final_activation_authorization_revalidation_receipt_path": {"type": "null"}, "final_activation_authorization_revalidation_receipt_sha256": {"type": "null"},
+            "final_activation_user_approval_receipt_path": {"type": "null"}, "final_activation_user_approval_receipt_sha256": {"type": "null"},
+            "dual_approval_distinctness_verified": {"const": false}
+          }}
+        },
+        {
+          "if": {"properties": {"phase": {"const": "FINAL_PREPARED"}}, "required": ["phase"]},
+          "then": {"properties": {
+            "runtime_template_path": {"type": "string"}, "runtime_template_sha256": {"$ref": "#/$defs/sha256"},
+            "runtime_authorization_manifest_path": {"type": "string"}, "runtime_authorization_manifest_sha256": {"$ref": "#/$defs/sha256"},
+            "runtime_authorization_revalidation_receipt_path": {"type": "string"}, "runtime_authorization_revalidation_receipt_sha256": {"$ref": "#/$defs/sha256"},
+            "runtime_template_user_approval_receipt_path": {"type": "string"}, "runtime_template_user_approval_receipt_sha256": {"$ref": "#/$defs/sha256"},
+            "g12c_rt_evidence_sha256": {"$ref": "#/$defs/sha256"},
+            "final_activation_intent_path": {"type": "string"}, "final_activation_intent_sha256": {"$ref": "#/$defs/sha256"},
+            "final_activation_contract_template_path": {"type": "string"}, "final_activation_contract_template_sha256": {"$ref": "#/$defs/sha256"},
+            "final_activation_authorization_manifest_path": {"type": "string"}, "final_activation_authorization_manifest_sha256": {"$ref": "#/$defs/sha256"},
+            "final_activation_authorization_revalidation_receipt_path": {"type": "null"}, "final_activation_authorization_revalidation_receipt_sha256": {"type": "null"},
+            "final_activation_user_approval_receipt_path": {"type": "null"}, "final_activation_user_approval_receipt_sha256": {"type": "null"},
+            "dual_approval_distinctness_verified": {"const": false}
+          }}
+        },
+        {
+          "if": {"properties": {"phase": {"const": "DUAL_APPROVED"}}, "required": ["phase"]},
+          "then": {"properties": {
+            "runtime_template_path": {"type": "string"}, "runtime_template_sha256": {"$ref": "#/$defs/sha256"},
+            "runtime_authorization_manifest_path": {"type": "string"}, "runtime_authorization_manifest_sha256": {"$ref": "#/$defs/sha256"},
+            "runtime_authorization_revalidation_receipt_path": {"type": "string"}, "runtime_authorization_revalidation_receipt_sha256": {"$ref": "#/$defs/sha256"},
+            "runtime_template_user_approval_receipt_path": {"type": "string"}, "runtime_template_user_approval_receipt_sha256": {"$ref": "#/$defs/sha256"},
+            "g12c_rt_evidence_sha256": {"$ref": "#/$defs/sha256"},
+            "final_activation_intent_path": {"type": "string"}, "final_activation_intent_sha256": {"$ref": "#/$defs/sha256"},
+            "final_activation_contract_template_path": {"type": "string"}, "final_activation_contract_template_sha256": {"$ref": "#/$defs/sha256"},
+            "final_activation_authorization_manifest_path": {"type": "string"}, "final_activation_authorization_manifest_sha256": {"$ref": "#/$defs/sha256"},
+            "final_activation_authorization_revalidation_receipt_path": {"type": "string"}, "final_activation_authorization_revalidation_receipt_sha256": {"$ref": "#/$defs/sha256"},
+            "final_activation_user_approval_receipt_path": {"type": "string"}, "final_activation_user_approval_receipt_sha256": {"$ref": "#/$defs/sha256"},
+            "dual_approval_distinctness_verified": {"const": true}
+          }}
+        }
+      ]
+    }
+  },
+  "required": [
+    "schema_version", "evidence_id", "node_id", "node_type", "recorded_at", "plan_revision",
+    "plan_manifest_sha256", "gate_dag_sha256", "validation_authority", "bootstrap_verifier_manifest_path", "bootstrap_verifier_manifest_sha256", "bootstrap_verification_receipt_path", "bootstrap_verification_receipt_sha256", "validator_version", "validator_release_manifest_sha256",
+    "validator_fixture_manifest_sha256", "base_commit", "test_commit", "implementation_commit",
+    "operation_run_id", "operation_intent_path", "operation_intent_sha256", "authorization_manifest_path",
+    "authorization_manifest_sha256", "authorization_revalidation_receipt_path", "authorization_revalidation_receipt_sha256", "operation_contract_path", "operation_contract_sha256", "journal_evidence", "runtime_cycle_evidence", "activation_authority_chain",
+    "human_report_path", "human_report_sha256", "artifacts", "secret_scan_result", "sealed"
+  ],
+  "properties": {
+    "schema_version": {"const": "evidence-manifest-v1"},
+    "evidence_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,159}$"},
+    "node_id": {"$ref": "#/$defs/nodeId"},
+    "node_type": {"enum": ["T", "D", "I", "OP", "G"]},
+    "recorded_at": {"$ref": "#/$defs/utcTimestamp"},
+    "plan_revision": {"const": "v4"},
+    "plan_manifest_sha256": {"$ref": "#/$defs/sha256"},
+    "gate_dag_sha256": {"$ref": "#/$defs/sha256"},
+    "validation_authority": {"enum": ["BOOTSTRAP_REVIEW_QUORUM", "VALIDATOR_RELEASE"]},
+    "bootstrap_verifier_manifest_path": {"anyOf": [{"type": "null"}, {"type": "string", "pattern": "^evidence/[A-Za-z0-9][A-Za-z0-9._-]*/bootstrap_verifier_manifest\\.json$"}]},
+    "bootstrap_verifier_manifest_sha256": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/sha256"}]},
+    "bootstrap_verification_receipt_path": {"anyOf": [{"type": "null"}, {"type": "string", "pattern": "^evidence/[A-Za-z0-9][A-Za-z0-9._-]*/bootstrap_verification_receipt\\.json$"}]},
+    "bootstrap_verification_receipt_sha256": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/sha256"}]},
+    "validator_version": {"anyOf": [{"type": "null"}, {"type": "string", "pattern": "^gate-ledger-validator-v[1-9][0-9]*$"}]},
+    "validator_release_manifest_sha256": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/sha256"}]},
+    "validator_fixture_manifest_sha256": {"$ref": "#/$defs/sha256"},
+    "base_commit": {"$ref": "#/$defs/commit"},
+    "test_commit": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/commit"}]},
+    "implementation_commit": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/commit"}]},
+    "operation_run_id": {"anyOf": [{"type": "null"}, {"type": "string", "minLength": 8, "maxLength": 160}]},
+    "operation_intent_path": {"anyOf": [{"type": "null"}, {"type": "string", "pattern": "^evidence/[A-Za-z0-9][A-Za-z0-9._-]*/operation_intent_manifest\\.json$"}]},
+    "operation_intent_sha256": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/sha256"}]},
+    "authorization_manifest_path": {"anyOf": [{"type": "null"}, {"type": "string", "pattern": "^evidence/[A-Za-z0-9][A-Za-z0-9._-]*/authorization_manifest\\.json$"}]},
+    "authorization_manifest_sha256": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/sha256"}]},
+    "authorization_revalidation_receipt_path": {"anyOf": [{"type": "null"}, {"type": "string", "pattern": "^evidence/[A-Za-z0-9][A-Za-z0-9._-]*/authorization_revalidation_receipt\\.json$"}]},
+    "authorization_revalidation_receipt_sha256": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/sha256"}]},
+    "operation_contract_path": {"anyOf": [{"type": "null"}, {"type": "string", "pattern": "^evidence/[A-Za-z0-9][A-Za-z0-9._-]*/operation_contract\\.json$"}]},
+    "operation_contract_sha256": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/sha256"}]},
+    "journal_evidence": {"$ref": "#/$defs/journalEvidence"},
+    "runtime_cycle_evidence": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/runtimeCycleEvidence"}]},
+    "activation_authority_chain": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/activationAuthorityChain"}]},
+    "human_report_path": {"type": "string", "pattern": "^evidence/[A-Za-z0-9][A-Za-z0-9._-]*/report\\.md$"},
+    "human_report_sha256": {"$ref": "#/$defs/sha256"},
+    "artifacts": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/artifact"}},
+    "secret_scan_result": {"const": "PASS_NO_SECRETS"},
+    "sealed": {"const": true}
+  },
+  "allOf": [
+    {"if": {"properties": {"node_id": {"pattern": "^T"}}, "required": ["node_id"]}, "then": {"properties": {"node_type": {"const": "T"}, "test_commit": {"$ref": "#/$defs/commit"}}}},
+    {"if": {"properties": {"node_id": {"pattern": "^D"}}, "required": ["node_id"]}, "then": {"properties": {"node_type": {"const": "D"}}}},
+    {"if": {"properties": {"node_id": {"pattern": "^I"}}, "required": ["node_id"]}, "then": {"properties": {"node_type": {"const": "I"}, "implementation_commit": {"$ref": "#/$defs/commit"}}}},
+    {"if": {"properties": {"node_id": {"pattern": "^G"}}, "required": ["node_id"]}, "then": {"properties": {"node_type": {"const": "G"}}}},
+    {
+      "if": {"properties": {"node_id": {"pattern": "^OP"}}, "required": ["node_id"]},
+      "then": {"properties": {"node_type": {"const": "OP"}, "operation_run_id": {"type": "string"}, "operation_intent_path": {"type": "string"}, "operation_intent_sha256": {"$ref": "#/$defs/sha256"}, "authorization_manifest_path": {"type": "string"}, "authorization_manifest_sha256": {"$ref": "#/$defs/sha256"}, "authorization_revalidation_receipt_path": {"type": "string"}, "authorization_revalidation_receipt_sha256": {"$ref": "#/$defs/sha256"}, "operation_contract_path": {"type": "string"}, "operation_contract_sha256": {"$ref": "#/$defs/sha256"}, "artifacts": {"allOf": [{"contains": {"properties": {"artifact_type": {"const": "OPERATION_INTENT"}}, "required": ["artifact_type"]}, "minContains": 1, "maxContains": 1}, {"contains": {"properties": {"artifact_type": {"const": "AUTHORIZATION"}}, "required": ["artifact_type"]}, "minContains": 1, "maxContains": 1}, {"contains": {"properties": {"artifact_type": {"const": "AUTHORIZATION_REVALIDATION_RECEIPT"}}, "required": ["artifact_type"]}, "minContains": 1, "maxContains": 1}, {"contains": {"properties": {"artifact_type": {"const": "OPERATION_CONTRACT"}}, "required": ["artifact_type"]}, "minContains": 1, "maxContains": 1}]}}}
+    },
+    {
+      "if": {"properties": {"operation_run_id": {"type": "null"}}, "required": ["operation_run_id"]},
+      "then": {"properties": {"operation_intent_path": {"type": "null"}, "operation_intent_sha256": {"type": "null"}, "authorization_manifest_path": {"type": "null"}, "authorization_manifest_sha256": {"type": "null"}, "authorization_revalidation_receipt_path": {"type": "null"}, "authorization_revalidation_receipt_sha256": {"type": "null"}, "operation_contract_path": {"type": "null"}, "operation_contract_sha256": {"type": "null"}, "journal_evidence": {"allOf": [{"$ref": "#/$defs/journalEvidence"}, {"properties": {"policy": {"const": "NOT_APPLICABLE"}}}]}, "runtime_cycle_evidence": {"type": "null"}}}
+    },
+    {
+      "if": {"properties": {"operation_intent_path": {"type": "string"}}, "required": ["operation_intent_path"]},
+      "then": {"properties": {"operation_intent_sha256": {"$ref": "#/$defs/sha256"}}}
+    },
+    {
+      "if": {"properties": {"authorization_manifest_path": {"type": "string"}}, "required": ["authorization_manifest_path"]},
+      "then": {"properties": {"authorization_manifest_sha256": {"$ref": "#/$defs/sha256"}}}
+    },
+    {
+      "if": {"properties": {"operation_contract_path": {"type": "string"}}, "required": ["operation_contract_path"]},
+      "then": {"properties": {"operation_contract_sha256": {"$ref": "#/$defs/sha256"}}}
+    },
+    {
+      "if": {"properties": {"node_id": {"enum": ["T00L", "D00L"]}}, "required": ["node_id"]},
+      "then": {"properties": {"validation_authority": {"const": "BOOTSTRAP_REVIEW_QUORUM"}, "bootstrap_verifier_manifest_path": {"type": "string"}, "bootstrap_verifier_manifest_sha256": {"$ref": "#/$defs/sha256"}, "bootstrap_verification_receipt_path": {"type": "string"}, "bootstrap_verification_receipt_sha256": {"$ref": "#/$defs/sha256"}, "validator_version": {"type": "null"}, "validator_release_manifest_sha256": {"type": "null"}}}
+    },
+    {
+      "if": {"properties": {"node_id": {"not": {"enum": ["T00L", "D00L"]}}}, "required": ["node_id"]},
+      "then": {"properties": {"validation_authority": {"const": "VALIDATOR_RELEASE"}, "bootstrap_verifier_manifest_path": {"type": "string"}, "bootstrap_verifier_manifest_sha256": {"$ref": "#/$defs/sha256"}, "bootstrap_verification_receipt_path": {"type": "string"}, "bootstrap_verification_receipt_sha256": {"$ref": "#/$defs/sha256"}, "validator_version": {"type": "string"}, "validator_release_manifest_sha256": {"$ref": "#/$defs/sha256"}}}
+    },
+    {
+      "if": {"properties": {"node_id": {"enum": ["OP00", "OP11A"]}}, "required": ["node_id"]},
+      "then": {"properties": {"journal_evidence": {"allOf": [{"$ref": "#/$defs/journalEvidence"}, {"properties": {"policy": {"const": "NOT_APPLICABLE"}}}]}}}
+    },
+    {
+      "if": {"properties": {"node_id": {"const": "OP11J"}}, "required": ["node_id"]},
+      "then": {"properties": {"journal_evidence": {"allOf": [{"$ref": "#/$defs/journalEvidence"}, {"properties": {"policy": {"const": "INITIALIZE"}}}]}}}
+    },
+    {
+      "if": {"properties": {"node_id": {"allOf": [{"pattern": "^OP"}, {"not": {"enum": ["OP00", "OP11A", "OP11J"]}}]}}, "required": ["node_id"]},
+      "then": {"properties": {"journal_evidence": {"allOf": [{"$ref": "#/$defs/journalEvidence"}, {"properties": {"policy": {"const": "REQUIRED_INTENT_FINALIZE"}}}]}}}
+    },
+    {
+      "if": {"properties": {"node_id": {"const": "OP-RUNTIME-CYCLE"}}, "required": ["node_id"]},
+      "then": {"properties": {"runtime_cycle_evidence": {"$ref": "#/$defs/runtimeCycleEvidence"}}}
+    },
+    {
+      "if": {"properties": {"node_id": {"not": {"const": "OP-RUNTIME-CYCLE"}}}, "required": ["node_id"]},
+      "then": {"properties": {"runtime_cycle_evidence": {"type": "null"}}}
+    },
+    {
+      "if": {"properties": {"node_id": {"not": {"enum": ["D12C-RT", "G12C-RT", "D12C", "G12C-PRE", "OP12C", "G12C"]}}}, "required": ["node_id"]},
+      "then": {"properties": {"activation_authority_chain": {"type": "null"}}}
+    },
+    {
+      "if": {"properties": {"node_id": {"enum": ["D12C-RT", "G12C-RT", "D12C", "G12C-PRE", "OP12C", "G12C"]}}, "required": ["node_id"]},
+      "then": {"properties": {"activation_authority_chain": {"$ref": "#/$defs/activationAuthorityChain"}}}
+    },
+    {
+      "if": {"properties": {"node_id": {"const": "D12C-RT"}}, "required": ["node_id"]},
+      "then": {"properties": {"activation_authority_chain": {"allOf": [{"$ref": "#/$defs/activationAuthorityChain"}, {"properties": {"phase": {"const": "RUNTIME_PREPARED"}}}]}, "artifacts": {"allOf": [{"contains": {"properties": {"artifact_type": {"const": "OPERATION_INTENT_TEMPLATE"}}, "required": ["artifact_type"]}, "minContains": 1, "maxContains": 1}, {"contains": {"properties": {"artifact_type": {"const": "AUTHORIZATION"}}, "required": ["artifact_type"]}, "minContains": 1, "maxContains": 1}]}}}
+    },
+    {
+      "if": {"properties": {"node_id": {"const": "G12C-RT"}}, "required": ["node_id"]},
+      "then": {"properties": {"activation_authority_chain": {"allOf": [{"$ref": "#/$defs/activationAuthorityChain"}, {"properties": {"phase": {"const": "RUNTIME_APPROVED"}}}]}, "artifacts": {"allOf": [{"contains": {"properties": {"artifact_type": {"const": "USER_APPROVAL_RECEIPT"}}, "required": ["artifact_type"]}, "minContains": 1, "maxContains": 1}, {"contains": {"properties": {"artifact_type": {"const": "AUTHORIZATION_REVALIDATION_RECEIPT"}}, "required": ["artifact_type"]}, "minContains": 1, "maxContains": 1}]}}}
+    },
+    {
+      "if": {"properties": {"node_id": {"const": "D12C"}}, "required": ["node_id"]},
+      "then": {"properties": {"activation_authority_chain": {"allOf": [{"$ref": "#/$defs/activationAuthorityChain"}, {"properties": {"phase": {"const": "FINAL_PREPARED"}}}]}, "artifacts": {"allOf": [{"contains": {"properties": {"artifact_type": {"const": "OPERATION_INTENT"}}, "required": ["artifact_type"]}, "minContains": 1, "maxContains": 1}, {"contains": {"properties": {"artifact_type": {"const": "OPERATION_CONTRACT"}}, "required": ["artifact_type"]}, "minContains": 1, "maxContains": 1}, {"contains": {"properties": {"artifact_type": {"const": "AUTHORIZATION"}}, "required": ["artifact_type"]}, "minContains": 1}]}}}
+    },
+    {
+      "if": {"properties": {"node_id": {"enum": ["G12C-PRE", "OP12C", "G12C"]}}, "required": ["node_id"]},
+      "then": {"properties": {"activation_authority_chain": {"allOf": [{"$ref": "#/$defs/activationAuthorityChain"}, {"properties": {"phase": {"const": "DUAL_APPROVED"}}}]}, "artifacts": {"allOf": [{"contains": {"properties": {"artifact_type": {"const": "USER_APPROVAL_RECEIPT"}}, "required": ["artifact_type"]}, "minContains": 2, "maxContains": 2}, {"contains": {"properties": {"artifact_type": {"const": "AUTHORIZATION_REVALIDATION_RECEIPT"}}, "required": ["artifact_type"]}, "minContains": 2, "maxContains": 2}]}}}
+    }
+  ],
+  "x-semantic-rules": [
+    "The gate ledger evidence_manifest_path is exactly evidence/<evidence-id>/manifest.json and hashes these canonical JSON bytes. human_report_path is exactly the sibling report.md; reviewers consume both and confirm their stored hashes.",
+    "All manifest, DAG, validator release, validator fixture, commit, authorization, intent, and operation-contract hashes must equal the artifacts used by this node. A path and hash pair is all-null or all-present.",
+    "Artifact IDs and resolved storage identities are unique. Repo-relative paths contain no dot segments, backslashes, drive prefixes, ADS syntax, symlink or reparse traversal, or case-fold collision; approved sinks are selected only from the frozen sink catalog and never reveal raw paths.",
+    "For SHA-256 artifacts, digest hashes exact stored bytes. For HMAC-SHA-256 artifacts, digest is computed with the named approved evidence key over canonical metadata plus exact stored bytes; the key itself is never evidence.",
+    "created_at <= recorded_at < expires_at for each artifact and TTL matches the evidence-retention policy for its sensitivity. Expired evidence cannot support a new PASS gate.",
+    "RESTRICTED_DERIVED evidence is encrypted in an approved opaque sink. No artifact contains credentials, tokens, API keys, user authorization secrets, source document contents beyond approved redaction, or absolute sensitive paths.",
+    "ACL, encryption, no-reparse status, size, media type, producer identity, and digest are verified after final storage and immediately before independent review. Any storage drift invalidates the node.",
+    "node_type, test_commit, implementation_commit, and OP bindings must match node_id and the gate ledger record exactly; semantic mismatches fail even when both JSON documents separately satisfy their schemas.",
+    "D12C-RT has only runtime template and runtime authorization prepared; G12C-RT additionally binds the distinct runtime-template user approval and its revalidation; D12C additionally binds G12C-RT evidence plus final exact intent/contract/authorization but not final approval; G12C-PRE, OP12C and G12C bind both distinct approval receipts and both fresh revalidation receipts.",
+    "For OP12C, root operation intent/authorization/revalidation hashes equal the final-activation entries, the operation contract equals the same entire chain, and dual_approval_distinctness_verified is true before any effect."
+  ]
+}

@@ -1,0 +1,793 @@
+{
+  "schema": "planning-gates-v1",
+  "status": "NOT_IMPLEMENTATION_AUTHORIZED",
+  "purpose": "Static plan dependency expansion only; not runtime authorization validator",
+  "gates": {
+    "WP00.G0": {
+      "requires": [],
+      "independent_role": "Reviewer-A",
+      "state": "pending"
+    },
+    "WP00.G1": {
+      "requires": [
+        "WP00.G0"
+      ],
+      "independent_role": "Reviewer-B",
+      "state": "pending"
+    },
+    "WP00.G2": {
+      "requires": [
+        "WP00.G1"
+      ],
+      "independent_role": "Reviewer-A",
+      "state": "pending"
+    },
+    "WP00.G3": {
+      "requires": [
+        "WP00.G2"
+      ],
+      "independent_role": "Test-Agent",
+      "state": "pending"
+    },
+    "WP00.G4": {
+      "requires": [
+        "WP00.G3"
+      ],
+      "independent_role": "Ops/Safety-Agent",
+      "state": "pending"
+    },
+    "WP00.G5": {
+      "requires": [
+        "WP00.G4"
+      ],
+      "independent_role": "Reviewer-C",
+      "state": "pending"
+    },
+    "WP01.G0": {
+      "requires": [
+        "WP00.G1"
+      ],
+      "independent_role": "Reviewer-A",
+      "state": "pending"
+    },
+    "WP01.G1": {
+      "requires": [
+        "WP01.G0"
+      ],
+      "independent_role": "Reviewer-B",
+      "state": "pending"
+    },
+    "WP01.G2": {
+      "requires": [
+        "WP01.G1"
+      ],
+      "independent_role": "Reviewer-A",
+      "state": "pending"
+    },
+    "WP01.G3": {
+      "requires": [
+        "WP01.G2",
+        "WP00.G3"
+      ],
+      "independent_role": "Test-Agent",
+      "state": "pending"
+    },
+    "WP01.G4": {
+      "requires": [
+        "WP01.G3"
+      ],
+      "independent_role": "Ops/Safety-Agent",
+      "state": "pending"
+    },
+    "WP01.G5": {
+      "requires": [
+        "WP01.G4"
+      ],
+      "independent_role": "Reviewer-C",
+      "state": "pending"
+    },
+    "WP02.G0": {
+      "requires": [
+        "WP00.G1"
+      ],
+      "independent_role": "Reviewer-A",
+      "state": "pending"
+    },
+    "WP02.G1": {
+      "requires": [
+        "WP02.G0"
+      ],
+      "independent_role": "Reviewer-B",
+      "state": "pending"
+    },
+    "WP02.G2": {
+      "requires": [
+        "WP02.G1"
+      ],
+      "independent_role": "Reviewer-A",
+      "state": "pending"
+    },
+    "WP02.G3": {
+      "requires": [
+        "WP02.G2",
+        "WP00.G3"
+      ],
+      "independent_role": "Test-Agent",
+      "state": "pending"
+    },
+    "WP02.G4": {
+      "requires": [
+        "WP02.G3"
+      ],
+      "independent_role": "Ops/Safety-Agent",
+      "state": "pending"
+    },
+    "WP02.G5": {
+      "requires": [
+        "WP02.G4"
+      ],
+      "independent_role": "Reviewer-C",
+      "state": "pending"
+    },
+    "WP03.G0": {
+      "requires": [
+        "WP02.G1"
+      ],
+      "independent_role": "Reviewer-A",
+      "state": "pending"
+    },
+    "WP03.G1": {
+      "requires": [
+        "WP03.G0"
+      ],
+      "independent_role": "Reviewer-B",
+      "state": "pending"
+    },
+    "WP03.G2": {
+      "requires": [
+        "WP03.G1"
+      ],
+      "independent_role": "Reviewer-A",
+      "state": "pending"
+    },
+    "WP03.G3": {
+      "requires": [
+        "WP03.G2",
+        "WP02.G3"
+      ],
+      "independent_role": "Test-Agent",
+      "state": "pending"
+    },
+    "WP03.G4": {
+      "requires": [
+        "WP03.G3"
+      ],
+      "independent_role": "Ops/Safety-Agent",
+      "state": "pending"
+    },
+    "WP03.G5": {
+      "requires": [
+        "WP03.G4"
+      ],
+      "independent_role": "Reviewer-C",
+      "state": "pending"
+    },
+    "WP04.G0": {
+      "requires": [
+        "WP02.G1"
+      ],
+      "independent_role": "Reviewer-A",
+      "state": "pending"
+    },
+    "WP04.G1": {
+      "requires": [
+        "WP04.G0"
+      ],
+      "independent_role": "Reviewer-B",
+      "state": "pending"
+    },
+    "WP04.G2": {
+      "requires": [
+        "WP04.G1"
+      ],
+      "independent_role": "Reviewer-A",
+      "state": "pending"
+    },
+    "WP04.G3": {
+      "requires": [
+        "WP04.G2",
+        "WP02.G3"
+      ],
+      "independent_role": "Test-Agent",
+      "state": "pending"
+    },
+    "WP04.G4": {
+      "requires": [
+        "WP04.G3"
+      ],
+      "independent_role": "Ops/Safety-Agent",
+      "state": "pending"
+    },
+    "WP04.G5": {
+      "requires": [
+        "WP04.G4"
+      ],
+      "independent_role": "Reviewer-C",
+      "state": "pending"
+    },
+    "WP05.G0": {
+      "requires": [
+        "WP02.G1",
+        "WP04.G1"
+      ],
+      "independent_role": "Reviewer-A",
+      "state": "pending"
+    },
+    "WP05.G1": {
+      "requires": [
+        "WP05.G0"
+      ],
+      "independent_role": "Reviewer-B",
+      "state": "pending"
+    },
+    "WP05.G2": {
+      "requires": [
+        "WP05.G1"
+      ],
+      "independent_role": "Reviewer-A",
+      "state": "pending"
+    },
+    "WP05.G3": {
+      "requires": [
+        "WP05.G2",
+        "WP02.G3",
+        "WP04.G3"
+      ],
+      "independent_role": "Test-Agent",
+      "state": "pending"
+    },
+    "WP05.G4": {
+      "requires": [
+        "WP05.G3"
+      ],
+      "independent_role": "Ops/Safety-Agent",
+      "state": "pending"
+    },
+    "WP05.G5": {
+      "requires": [
+        "WP05.G4"
+      ],
+      "independent_role": "Reviewer-C",
+      "state": "pending"
+    },
+    "WP06.G0": {
+      "requires": [
+        "WP01.G1",
+        "WP02.G1",
+        "WP04.G1",
+        "WP05.G1"
+      ],
+      "independent_role": "Reviewer-A",
+      "state": "pending"
+    },
+    "WP06.G1": {
+      "requires": [
+        "WP06.G0"
+      ],
+      "independent_role": "Reviewer-B",
+      "state": "pending"
+    },
+    "WP06.G2": {
+      "requires": [
+        "WP06.G1"
+      ],
+      "independent_role": "Reviewer-A",
+      "state": "pending"
+    },
+    "WP06.G3": {
+      "requires": [
+        "WP06.G2",
+        "WP01.G3",
+        "WP02.G3",
+        "WP04.G3",
+        "WP05.G3"
+      ],
+      "independent_role": "Test-Agent",
+      "state": "pending"
+    },
+    "WP06.G4": {
+      "requires": [
+        "WP06.G3"
+      ],
+      "independent_role": "Ops/Safety-Agent",
+      "state": "pending"
+    },
+    "WP06.G5": {
+      "requires": [
+        "WP06.G4"
+      ],
+      "independent_role": "Reviewer-C",
+      "state": "pending"
+    },
+    "WP07.G0": {
+      "requires": [
+        "WP04.G1",
+        "WP05.G1",
+        "WP06.G1"
+      ],
+      "independent_role": "Reviewer-A",
+      "state": "pending"
+    },
+    "WP07.G1": {
+      "requires": [
+        "WP07.G0"
+      ],
+      "independent_role": "Reviewer-B",
+      "state": "pending"
+    },
+    "WP07.G2": {
+      "requires": [
+        "WP07.G1"
+      ],
+      "independent_role": "Reviewer-A",
+      "state": "pending"
+    },
+    "WP07.G3": {
+      "requires": [
+        "WP07.G2",
+        "WP04.G3",
+        "WP05.G3",
+        "WP06.G3"
+      ],
+      "independent_role": "Test-Agent",
+      "state": "pending"
+    },
+    "WP07.G4": {
+      "requires": [
+        "WP07.G3"
+      ],
+      "independent_role": "Ops/Safety-Agent",
+      "state": "pending"
+    },
+    "WP07.G5": {
+      "requires": [
+        "WP07.G4"
+      ],
+      "independent_role": "Reviewer-C",
+      "state": "pending"
+    },
+    "WP08.G0": {
+      "requires": [
+        "WP02.G1",
+        "WP07.G1"
+      ],
+      "independent_role": "Reviewer-A",
+      "state": "pending"
+    },
+    "WP08.G1": {
+      "requires": [
+        "WP08.G0"
+      ],
+      "independent_role": "Reviewer-B",
+      "state": "pending"
+    },
+    "WP08.G2": {
+      "requires": [
+        "WP08.G1"
+      ],
+      "independent_role": "Reviewer-A",
+      "state": "pending"
+    },
+    "WP08.G3": {
+      "requires": [
+        "WP08.G2",
+        "WP02.G3",
+        "WP07.G3"
+      ],
+      "independent_role": "Test-Agent",
+      "state": "pending"
+    },
+    "WP08.G4": {
+      "requires": [
+        "WP08.G3"
+      ],
+      "independent_role": "Ops/Safety-Agent",
+      "state": "pending"
+    },
+    "WP08.G5": {
+      "requires": [
+        "WP08.G4"
+      ],
+      "independent_role": "Reviewer-C",
+      "state": "pending"
+    },
+    "WP09.G0": {
+      "requires": [
+        "WP00.G1"
+      ],
+      "independent_role": "Reviewer-A",
+      "state": "pending"
+    },
+    "WP09.G1": {
+      "requires": [
+        "WP09.G0"
+      ],
+      "independent_role": "Reviewer-B",
+      "state": "pending"
+    },
+    "WP09.G2": {
+      "requires": [
+        "WP09.G1"
+      ],
+      "independent_role": "Reviewer-A",
+      "state": "pending"
+    },
+    "WP09.G3": {
+      "requires": [
+        "WP09.G2",
+        "WP00.G3"
+      ],
+      "independent_role": "Test-Agent",
+      "state": "pending"
+    },
+    "WP09.G4": {
+      "requires": [
+        "WP09.G3"
+      ],
+      "independent_role": "Ops/Safety-Agent",
+      "state": "pending"
+    },
+    "WP09.G5": {
+      "requires": [
+        "WP09.G4"
+      ],
+      "independent_role": "Reviewer-C",
+      "state": "pending"
+    },
+    "WP10.G0": {
+      "requires": [
+        "WP08.G1",
+        "WP09.G1"
+      ],
+      "independent_role": "Reviewer-A",
+      "state": "pending"
+    },
+    "WP10.G1": {
+      "requires": [
+        "WP10.G0"
+      ],
+      "independent_role": "Reviewer-B",
+      "state": "pending"
+    },
+    "WP10.G2": {
+      "requires": [
+        "WP10.G1"
+      ],
+      "independent_role": "Reviewer-A",
+      "state": "pending"
+    },
+    "WP10.G3": {
+      "requires": [
+        "WP10.G2",
+        "WP08.G3",
+        "WP09.G3"
+      ],
+      "independent_role": "Test-Agent",
+      "state": "pending"
+    },
+    "WP10.G4": {
+      "requires": [
+        "WP10.G3"
+      ],
+      "independent_role": "Ops/Safety-Agent",
+      "state": "pending"
+    },
+    "WP10.G5": {
+      "requires": [
+        "WP10.G4"
+      ],
+      "independent_role": "Reviewer-C",
+      "state": "pending"
+    },
+    "WP11.G0": {
+      "requires": [
+        "WP00.G1"
+      ],
+      "independent_role": "Reviewer-A",
+      "state": "pending"
+    },
+    "WP11.G1": {
+      "requires": [
+        "WP11.G0"
+      ],
+      "independent_role": "Reviewer-B",
+      "state": "pending"
+    },
+    "WP11.G2": {
+      "requires": [
+        "WP11.G1"
+      ],
+      "independent_role": "Reviewer-A",
+      "state": "pending"
+    },
+    "WP11.G3": {
+      "requires": [
+        "WP11.G2",
+        "WP00.G3"
+      ],
+      "independent_role": "Test-Agent",
+      "state": "pending"
+    },
+    "WP11.G4": {
+      "requires": [
+        "WP11.G3"
+      ],
+      "independent_role": "Ops/Safety-Agent",
+      "state": "pending"
+    },
+    "WP11.G5": {
+      "requires": [
+        "WP11.G4"
+      ],
+      "independent_role": "Reviewer-C",
+      "state": "pending"
+    },
+    "WP12.G0": {
+      "requires": [
+        "WP00.G1",
+        "WP03.G1",
+        "WP04.G1",
+        "WP11.G1"
+      ],
+      "independent_role": "Reviewer-A",
+      "state": "pending"
+    },
+    "WP12.G1": {
+      "requires": [
+        "WP12.G0"
+      ],
+      "independent_role": "Reviewer-B",
+      "state": "pending"
+    },
+    "WP12.G2": {
+      "requires": [
+        "WP12.G1"
+      ],
+      "independent_role": "Reviewer-A",
+      "state": "pending"
+    },
+    "WP12.G3": {
+      "requires": [
+        "WP12.G2",
+        "WP00.G3",
+        "WP03.G3",
+        "WP04.G3",
+        "WP11.G3"
+      ],
+      "independent_role": "Test-Agent",
+      "state": "pending"
+    },
+    "WP12.G4": {
+      "requires": [
+        "WP12.G3",
+        "WP13.G5"
+      ],
+      "independent_role": "Ops/Safety-Agent",
+      "state": "pending"
+    },
+    "WP12.G5": {
+      "requires": [
+        "WP12.G4"
+      ],
+      "independent_role": "Reviewer-C",
+      "state": "pending"
+    },
+    "WP13.G0": {
+      "requires": [
+        "WP01.G1",
+        "WP02.G1",
+        "WP03.G1",
+        "WP04.G1",
+        "WP05.G1",
+        "WP06.G1",
+        "WP07.G1",
+        "WP08.G1",
+        "WP09.G1",
+        "WP10.G1",
+        "WP11.G1",
+        "WP12.G1"
+      ],
+      "independent_role": "Reviewer-A",
+      "state": "pending"
+    },
+    "WP13.G1": {
+      "requires": [
+        "WP13.G0"
+      ],
+      "independent_role": "Reviewer-B",
+      "state": "pending"
+    },
+    "WP13.G2": {
+      "requires": [
+        "WP13.G1"
+      ],
+      "independent_role": "Reviewer-A",
+      "state": "pending"
+    },
+    "WP13.G3": {
+      "requires": [
+        "WP13.G2",
+        "WP01.G3",
+        "WP02.G3",
+        "WP03.G3",
+        "WP04.G3",
+        "WP05.G3",
+        "WP06.G3",
+        "WP07.G3",
+        "WP08.G3",
+        "WP09.G3",
+        "WP10.G3",
+        "WP11.G3",
+        "WP12.G3"
+      ],
+      "independent_role": "Test-Agent",
+      "state": "pending"
+    },
+    "WP13.G4": {
+      "requires": [
+        "WP13.G3"
+      ],
+      "independent_role": "Ops/Safety-Agent",
+      "state": "pending"
+    },
+    "WP13.G5": {
+      "requires": [
+        "WP13.G4"
+      ],
+      "independent_role": "Reviewer-C",
+      "state": "pending"
+    },
+    "WP14.G0": {
+      "requires": [
+        "WP13.G1",
+        "WP12.G1"
+      ],
+      "independent_role": "Reviewer-A",
+      "state": "pending"
+    },
+    "WP14.G1": {
+      "requires": [
+        "WP14.G0"
+      ],
+      "independent_role": "Reviewer-B",
+      "state": "pending"
+    },
+    "WP14.G2": {
+      "requires": [
+        "WP14.G1"
+      ],
+      "independent_role": "Reviewer-A",
+      "state": "pending"
+    },
+    "WP14.G3": {
+      "requires": [
+        "WP14.G2",
+        "WP13.G3",
+        "WP12.G3"
+      ],
+      "independent_role": "Test-Agent",
+      "state": "pending"
+    },
+    "WP14.G4": {
+      "requires": [
+        "WP14.G3",
+        "WP13.G5",
+        "WP12.G5",
+        "S01",
+        "S02",
+        "S04",
+        "S05",
+        "S06"
+      ],
+      "independent_role": "Ops/Safety-Agent",
+      "state": "pending"
+    },
+    "WP14.G5": {
+      "requires": [
+        "WP14.G4"
+      ],
+      "independent_role": "Reviewer-C",
+      "state": "pending"
+    },
+    "S01": {
+      "requires": [
+        "WP01.G3"
+      ],
+      "independent_role": "Ops/Safety-Agent",
+      "state": "pending"
+    },
+    "S02": {
+      "requires": [
+        "WP02.G3"
+      ],
+      "independent_role": "Ops/Safety-Agent",
+      "state": "pending"
+    },
+    "S04": {
+      "requires": [
+        "WP04.G3"
+      ],
+      "independent_role": "Ops/Safety-Agent",
+      "state": "pending"
+    },
+    "S05": {
+      "requires": [
+        "WP05.G3"
+      ],
+      "independent_role": "Ops/Safety-Agent",
+      "state": "pending"
+    },
+    "S06": {
+      "requires": [
+        "WP06.G3"
+      ],
+      "independent_role": "Ops/Safety-Agent",
+      "state": "pending"
+    }
+  },
+  "scope_rules": {
+    "authorized_canary_common": [
+      "WP00.G3",
+      "WP11.G3"
+    ],
+    "archive_prune": [
+      "S01"
+    ],
+    "cross_root": [
+      "S02"
+    ],
+    "provider": [
+      "S02",
+      "WP03.G3"
+    ],
+    "worker_pipeline": [
+      "S01",
+      "S02",
+      "S04",
+      "S05",
+      "S06"
+    ],
+    "llm": [
+      "S02",
+      "S04",
+      "S05"
+    ],
+    "broker": [
+      "S01",
+      "S02",
+      "S04",
+      "S05",
+      "S06",
+      "WP07.G3"
+    ],
+    "model_publication": [
+      "WP09.G3"
+    ],
+    "mining": [
+      "WP08.G3",
+      "WP09.G3"
+    ],
+    "backtest": [
+      "WP10.G3"
+    ],
+    "schedule_watchdog": [
+      "WP12.G3"
+    ],
+    "legacy": [
+      "WP14.G3",
+      "WP13.G5",
+      "WP12.G5"
+    ]
+  },
+  "scope_semantics": "Take union for all actual actions plus own G3, exact live authorization, approved command card and independent Ops approval; unknown action is denied. schedule stays disabled until WP12.G4 entry. No grants stored here."
+}

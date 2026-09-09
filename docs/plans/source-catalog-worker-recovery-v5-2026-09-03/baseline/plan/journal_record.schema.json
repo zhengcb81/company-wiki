@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:company-wiki:source-catalog-worker-recovery:journal-record:v1",
+  "title": "Protected write-intent journal record",
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "utc": {"type": "string", "format": "date-time", "pattern": "^[0-9]{4}-(0[1-9]|1[0-2])-([0-2][0-9]|3[01])T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]{1,9})?Z$"},
+    "state": {"enum": ["PAUSED/OFF", "PAUSED/ON", "PAUSED/REGISTRY_CONFLICT", "ARMED_PRELOGIN/OFF", "ARMED_ON_PRELOGIN/ON", "LOGIN_COMMITTED/ON", "RUNNING_LOGIN_VALIDATION/ON", "LOGIN_VALIDATED_PAUSED/ON", "ENABLED_IDLE/ON", "RUNNING_AUTOSTART/ON"]},
+    "intentPayload": {
+      "type": "object", "additionalProperties": false,
+      "required": ["payload_type", "head_anchor_before_sha256", "pre_state_sha256", "effect_commitment_sha256", "authorization_revalidation_receipt_sha256", "budget_reservation_payload_commitment_sha256", "operation_lease_receipt_sha256"],
+      "properties": {
+        "payload_type": {"const": "INTENT"},
+        "head_anchor_before_sha256": {"$ref": "#/$defs/sha256"},
+        "pre_state_sha256": {"$ref": "#/$defs/sha256"},
+        "effect_commitment_sha256": {"$ref": "#/$defs/sha256"},
+        "authorization_revalidation_receipt_sha256": {"$ref": "#/$defs/sha256"},
+        "budget_reservation_payload_commitment_sha256": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/sha256"}]},
+        "operation_lease_receipt_sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "finalizePayload": {
+      "type": "object", "additionalProperties": false,
+      "required": ["payload_type", "intent_record_id", "intent_record_sha256", "outcome", "actual_effect_digest_sha256", "post_state_sha256", "budget_settlement_receipt_sha256"],
+      "properties": {
+        "payload_type": {"const": "FINALIZE"},
+        "intent_record_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,159}$"},
+        "intent_record_sha256": {"$ref": "#/$defs/sha256"},
+        "outcome": {"enum": ["SUCCESS", "FAILURE_NO_EFFECT", "FAILURE_ROLLED_BACK", "FAILURE_SAFE_PAUSED"]},
+        "actual_effect_digest_sha256": {"$ref": "#/$defs/sha256"},
+        "post_state_sha256": {"$ref": "#/$defs/sha256"},
+        "budget_settlement_receipt_sha256": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/sha256"}]}
+      }
+    },
+    "reconcilePayload": {
+      "type": "object", "additionalProperties": false,
+      "required": ["payload_type", "abandoned_intent_record_id", "abandoned_intent_record_sha256", "observed_state_sha256", "compensation_contract_sha256", "terminal_state", "terminal_state_sha256", "reconcile_outcome", "budget_settlement_receipt_sha256"],
+      "properties": {
+        "payload_type": {"const": "RECONCILE"},
+        "abandoned_intent_record_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,159}$"},
+        "abandoned_intent_record_sha256": {"$ref": "#/$defs/sha256"},
+        "observed_state_sha256": {"$ref": "#/$defs/sha256"},
+        "compensation_contract_sha256": {"$ref": "#/$defs/sha256"},
+        "terminal_state": {"$ref": "#/$defs/state"},
+        "terminal_state_sha256": {"$ref": "#/$defs/sha256"},
+        "reconcile_outcome": {"enum": ["EXACT_RESTORED", "SAFE_PAUSED_PRESERVED_CONFLICT", "SAFE_OFF_REGISTRY_ABSENT", "UNKNOWN_EFFECT_CIRCUIT_OPEN"]},
+        "budget_settlement_receipt_sha256": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/sha256"}]}
+      }
+    }
+  },
+  "required": ["schema_version", "record_type", "record_id", "journal_id", "journal_manifest_sha256", "journal_generation", "sequence", "prior_record_sha256", "operation_run_id", "operation_contract_sha256", "operation_intent_sha256", "authorization_manifest_sha256", "process_generation", "control_generation", "circuit_generation", "recorded_at", "payload", "record_sha256"],
+  "properties": {
+    "schema_version": {"const": "journal-record-v1"},
+    "record_type": {"enum": ["INTENT", "FINALIZE", "RECONCILE"]},
+    "record_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,159}$"},
+    "journal_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,159}$"},
+    "journal_manifest_sha256": {"$ref": "#/$defs/sha256"},
+    "journal_generation": {"type": "integer", "minimum": 0},
+    "sequence": {"type": "integer", "minimum": 1},
+    "prior_record_sha256": {"$ref": "#/$defs/sha256"},
+    "operation_run_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,159}$"},
+    "operation_contract_sha256": {"$ref": "#/$defs/sha256"},
+    "operation_intent_sha256": {"$ref": "#/$defs/sha256"},
+    "authorization_manifest_sha256": {"$ref": "#/$defs/sha256"},
+    "process_generation": {"type": "integer", "minimum": 0},
+    "control_generation": {"type": "integer", "minimum": 0},
+    "circuit_generation": {"type": "integer", "minimum": 0},
+    "recorded_at": {"$ref": "#/$defs/utc"},
+    "payload": {"oneOf": [{"$ref": "#/$defs/intentPayload"}, {"$ref": "#/$defs/finalizePayload"}, {"$ref": "#/$defs/reconcilePayload"}]},
+    "record_sha256": {"$ref": "#/$defs/sha256"}
+  },
+  "allOf": [
+    {"if": {"properties": {"record_type": {"const": "INTENT"}}, "required": ["record_type"]}, "then": {"properties": {"payload": {"$ref": "#/$defs/intentPayload"}}}},
+    {"if": {"properties": {"record_type": {"const": "FINALIZE"}}, "required": ["record_type"]}, "then": {"properties": {"payload": {"$ref": "#/$defs/finalizePayload"}}}},
+    {"if": {"properties": {"record_type": {"const": "RECONCILE"}}, "required": ["record_type"]}, "then": {"properties": {"payload": {"$ref": "#/$defs/reconcilePayload"}}}}
+  ],
+  "x-semantic-rules": [
+    "record_sha256 is SHA-256 over RFC 8785 canonical record bytes excluding only record_sha256. Record IDs and (journal_id,journal_generation,sequence) tuples never repeat.",
+    "sequence equals the prior anchor sequence plus one and prior_record_sha256 equals the prior anchor head. FINALIZE or RECONCILE references the unique immediately preceding unclosed INTENT for the same operation run, contract, intent and authorization.",
+    "INTENT is durable before any declared effect. FINALIZE is created only after exact post-state and budget settlement verification. RECONCILE is the only legal close for an abandoned INTENT.",
+    "No record hashes an operation execution receipt or future head anchor; this preserves the acyclic dependency contract -> INTENT -> effects -> FINALIZE/RECONCILE -> head anchor -> execution receipt."
+  ]
+}

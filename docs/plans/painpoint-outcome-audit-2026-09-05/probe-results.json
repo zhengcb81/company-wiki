@@ -1,0 +1,27 @@
+{
+  "future_timestamp": [
+    "fresh",
+    "latest run ok, -38037780m old"
+  ],
+  "missing_t2_evidence": {
+    "total_scenarios": 1,
+    "unsatisfied": 0,
+    "unsatisfied_ids": [],
+    "closure_ready": true
+  },
+  "permission_denied_schedule": [
+    "missing",
+    "no scheduled task registered"
+  ],
+  "weekly_partial_skip": [
+    true,
+    "ok",
+    "T3 suite passed"
+  ],
+  "weekly_empty_output": [
+    true,
+    "ok",
+    "T3 suite passed"
+  ],
+  "safety": "AST pure functions only; no DB/network/task/product writes"
+}

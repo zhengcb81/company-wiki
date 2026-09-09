@@ -1,0 +1,53 @@
+{
+  "future_timestamp": [
+    "fresh",
+    "latest run ok, -38037780m old"
+  ],
+  "missing_t2_evidence": {
+    "total_scenarios": 1,
+    "unsatisfied": 0,
+    "unsatisfied_ids": [],
+    "closure_ready": true
+  },
+  "release_not_ok_bad_commits_one_sli_no_ledger": [
+    true,
+    [
+      "ready"
+    ]
+  ],
+  "rejected_latest_pair": [
+    {
+      "revisions": [
+        "11.json"
+      ],
+      "latest_revision": "11.json",
+      "latest_canonical_hash": "h",
+      "implementer": "alice",
+      "reviewer": "bob",
+      "verdict": "rejected",
+      "reviewer_receipt": "12.json",
+      "findings": []
+    },
+    []
+  ],
+  "soak_seven_runs_same_instant": {
+    "complete": true,
+    "count": 7,
+    "pending": false
+  },
+  "permission_denied_schedule": [
+    "missing",
+    "no scheduled task registered"
+  ],
+  "weekly_partial_skip": [
+    true,
+    "ok",
+    "T3 suite passed"
+  ],
+  "weekly_empty_output": [
+    true,
+    "ok",
+    "T3 suite passed"
+  ],
+  "safety": "AST pure functions only; no DB/network/task/product writes"
+}

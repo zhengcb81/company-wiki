@@ -1,0 +1,77 @@
+*** Begin Patch
+*** Update File: C:/Users/郑曾波/Projects/filing-fetch/e2e/E2E_DESIGN.md
+@@
+-# filing-fetch 全链路 E2E —— 对抗式审查与设计
++# filing-fetch companies-root reuse-only E2E —— 设计与当前边界
+@@
+-日期：2026-08-07 ｜ 状态：定稿，harness 已实现（`run_companies_reuse_only_e2e.py` + `expected/`）
++原始设计：2026-08-07 ｜ 状态核对：2026-09-04 ｜ harness 已实现；本次仅静态核对，未重新执行 E2E。
++
++当前仅覆盖 synthetic companies-root 复用路径，不覆盖 dayu/Dropbox roots、latest_as_of gap plans、artifact bundles 或 consumer parser/LLM zero-call reuse，不能据此宣称三仓全链路验收完成。当前规划路由见 [PLANNING_STATUS](../PLANNING_STATUS.md)。
+@@
+-**结论**：❌ 原 seed 依赖生产状态。✅ 新 harness **自建 synthetic seeds**（3 个市场，几 KB 文本文件），
+-完全 hermetic；每次全新临时 wiki + 单调递增运行号；退出码 0/1/2。
++**当前结论**：文档 seed 已改为 synthetic，不再从生产 companies/ 复制；每次建立新的隔离状态目录。仍读取本地 company-wiki 代码、worker 配置；security-master 存在时优先复制本地快照，缺失时生成 synthetic fallback。不能把全部输入描述为完全独立于本地环境。
+@@
+-**结论**：✅ 步骤断言覆盖全链路：
++**当前范围**：断言覆盖 companies-root reuse-only 路径：
+@@
+-5. 双跑确定性（两次运行 handle 逐字段一致）
+-6. golden 比对（全字段）
++5. 双跑比较 request_id 与 snapshot_sha256
++6. 首轮结果与 golden 比较 status、request_id、snapshot_sha256、https_url、canonical_tail、missing 六项投影字段
+@@
+-**实测**：改 US seed 字节 → golden 键变化 → "seed changed" 显式失败 ✓。
++**历史记录（2026-08-07）**：改 US seed 字节使 golden 键变化并显式失败；本次未复跑该变异实验。
+@@
+-| company-wiki 运行时 | 本地 `Projects/company-wiki`；CI clone 到 `$HOME/Projects/company-wiki`（IsolatedWiki 的 PRODUCTION_WIKI 路径约定） |
++| company-wiki 运行时 | 本地 `Projects/company-wiki`；CI 通过 revenue-forecast compatibility manifest 和 `ci_checkout_siblings.py` 准备 sibling runtime |
+@@
+-| 确定性 | 双跑断言 handle 逐字段一致 |
++| 确定性 | 双跑比较 request_id 与 snapshot_sha256；golden 比较六项结果投影 |
+@@
+-| 网络 | 无（hermetic；真实下载/live 一致性测试保持 opt-in，另行运行） |
++| 网络与环境 | reuse-only harness 无下载动作；隔离 fixture 仍读取本地 worker 配置及可用 security-master，缺失 master 时使用 synthetic fallback |
+@@
+-输入/环境失败（exit 2）、步骤断言失败（exit 1）、golden 键缺失（exit 2）分开报错；
+-golden 不匹配时打印字段级 diff。
++harness 显式返回：断言/golden 不匹配为 exit 1，缺少 golden 为 exit 2；其他环境异常可能抛出异常退出，不能保证全部输入/环境错误都稳定归类为 exit 2。golden 不匹配时打印字段级 diff。
+@@
+-- 改 US seed 字节 → golden 键变化 → 显式失败（EXIT=2）✓；恢复 → 全绿 ✓。
++- 历史记录（2026-08-07）：改 US seed 字节 → golden 键变化 → 显式失败（EXIT=2）；恢复后通过。本次未重验。
+@@
+-- `tests/test_e2e_isolated_wiki.py`（pytest 内，15 场景）继续覆盖行为细节；其 `seed_market`
+-  仍依赖生产 seed 文件——若生产文件被治理删除会挂，**候选改进**：迁移到 synthetic seed。
++- `tests/test_e2e_isolated_wiki.py` 继续覆盖隔离实例行为细节；`IsolatedWiki.seed_market` 已改用 `SYNTHETIC_SEEDS` 写文档和 sidecar，旧“迁移 synthetic seed”候选已由代码演化实现。这里不据此声明当前测试已经运行通过。
+@@
+-- `.githooks/pre-commit`：pytest 套件 + 本 E2E（每次提交）
+-- `.github/workflows/quality.yml`：clone company-wiki 到 $HOME/Projects + pytest + E2E（push/PR）
++- 当前本地 `.git/hooks/pre-commit` 调用 `.pre-commit-config.yaml`，执行 ruff 与两个公开契约模块的 mypy；完整回归需另行执行。`.githooks/pre-commit` 保留旧 pytest/E2E/install-sync 脚本，但本次查询 `core.hooksPath` 未设置，不能称其每次提交自动执行。
++- `.github/workflows/quality.yml` 在 push/PR 配置 manifest-driven sibling runtime、静态检查、类型检查、测试/coverage、config doctor、reuse-only E2E、install-sync 和 plan verifier；本次仅核对配置，未查询远端运行结果。
+*** Add File: C:/Users/郑曾波/Projects/filing-fetch/PLANNING_STATUS.md
++# filing-fetch 当前规划状态
++
++核对日期：2026-09-04。范围：计划、Git、静态实现及历史收据；未重新运行业务测试、E2E、下载或CI。
++代码基线：`89c8bdb2cfba4d88720d005d0558f422957e8ade`；审计前工作区干净。
++
++## 状态入口与全部规划文件处置
++
++- 根 `task_plan.md`、`findings.md`、`progress.md` 由 [TERMINAL_NOTICE](TERMINAL_NOTICE.json) 标为 `closed_superseded_incomplete`，原文保留，不是活动队列。旧8/9 FCAP是中间接管入口。
++- [统一机器账本](../revenue-forecast/assurance/unified_completion/state.json) 当前记录 `plan_status=completed`、`implementation_status=completed`、117/117 units accepted；只是账本读取，不是本次复跑117项及全部依赖收据验收。
++- 后续活动余项在 [GP计划](../revenue-forecast/assurance/runs/2026-09-02_remaining-gap-closure/task_plan.md)：GP-008启动参数问题、GP-006真实roots CI范围、GP-010生产产物等不能被旧账本完成状态掩盖。
++- [E2E设计](e2e/E2E_DESIGN.md) 已按当前 companies-root reuse-only 实现收窄；它不是完整三仓全链路保证。
++- `assurance/fc/FC-903/03_change_contract.md`、`REVIEWER_REPORT.md`及两个receipt为历史审查证据，保持原字节；其范围不覆盖当前HEAD所有后续变更。
++- 递归源码目录与Git清单仅发现一组三件套；缓存/运行生成物不是活动规划。完整9份732行阅读覆盖和支持代码证据见 [独立审计](../company-wiki/docs/plans/planning-sync-2026-09-04/filing-fetch-audit.md)。
++
++## 历史矛盾的当前解释
++
++根文档的66/113 tests、96% coverage、未提交、无pyproject、当前基线及D1–D15缺陷清单均属历史。HK早期阻断已在后文追记FY2025修正后跑通；不重复记为当前阻断，也不把旧成功当今天已通过。
++
++FC-903存在 `receipt_binding_mismatch`：reviewer所指implementer SHA256为 `010d0b9e9f4547ef2a71d9e7b47a90eb768744c8dca4825fe6b32ea157bdb3df`，当前文件为 `010699cab407eb20aafd7f985ed494e262d84f2fd0c3c479e83c2c1ed96f089d`。CRLF转LF后仍不匹配；原因与原始签署字节需后续独立核对。本次不改收据、重签或撤销旧verdict，不能声称当前两文件形成完整互证链。
++
++## 校验与限制
++
++- 只读 `python -B tools/verify_plan_claims.py --plan task_plan.md --progress progress.md --json` 返回exit 0、ok=true，但只识别Phase 1/2/3/5/6，漏掉带HK环境阻断后缀的Phase 4；不是全面闭环证明。
++- 本地pre-commit现用ruff/mypy轻量检查，旧`.githooks`全量脚本未被core.hooksPath选用；完整测试另行执行。
++- 本次不修改代码、安装镜像、生产配置或机器任务，不启动worker，不更改Git全局设置。源项目下一步修复需另外授权；本页不是重开旧计划的指令。
+*** End Patch

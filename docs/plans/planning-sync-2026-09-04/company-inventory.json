@@ -1,0 +1,457 @@
+{
+  "date": "2026-09-04",
+  "semantic_read_status_updated": "2026-09-05",
+  "hashes_are_source_baseline_snapshots": true,
+  "scope": "planning-name discovery plus docs/plans; archive companions separately recorded in audit",
+  "generated_read_not_semantic_read": true,
+  "files": [
+    {
+      "path": ".recover-task_plan-before-cw-merge-20260725-115819.md",
+      "bytes": 13240,
+      "lines": 183,
+      "sha256": "bc73a980ac565a603bd7d2d8f95aafd54e4db5c34c9551b0c7219bafee9bbf76",
+      "disposition": "historical_root",
+      "read_status": "full"
+    },
+    {
+      "path": ".recover-task_plan-current-20260725-114504.md",
+      "bytes": 13240,
+      "lines": 183,
+      "sha256": "bc73a980ac565a603bd7d2d8f95aafd54e4db5c34c9551b0c7219bafee9bbf76",
+      "disposition": "historical_root",
+      "read_status": "full"
+    },
+    {
+      "path": "docs/plans/source-catalog-worker-recovery-v5-2026-09-03/task_plan.md",
+      "bytes": 4644,
+      "lines": 65,
+      "sha256": "ae2a8670f346ed8d0a0339793a55c8b7ca2078a82b611d9592c30493849fc21b",
+      "disposition": "v5_current_or_review",
+      "read_status": "full"
+    },
+    {
+      "path": "docs/plans/source-catalog-worker-recovery-v5-2026-09-03/reviews/old-plan-retirement-result.md",
+      "bytes": 2911,
+      "lines": 54,
+      "sha256": "b27a428ff32ed9aa81d0090a2e8de30efc1193121725e1ab43d28f37370cb423",
+      "disposition": "v5_current_or_review",
+      "read_status": "full"
+    },
+    {
+      "path": "docs/plans/source-catalog-worker-recovery-v5-2026-09-03/reviews/import-review-2026-09-03.md",
+      "bytes": 2486,
+      "lines": 48,
+      "sha256": "baa64f7b4749c13b4f8188e4982a9e3fa907f692e776c37014f4dd2e57490e43",
+      "disposition": "v5_current_or_review",
+      "read_status": "full"
+    },
+    {
+      "path": "docs/plans/source-catalog-worker-recovery-v5-2026-09-03/README.md",
+      "bytes": 3360,
+      "lines": 48,
+      "sha256": "23290db748a739190049c3a81a46867ec64686505be69a5394b94f6e01458057",
+      "disposition": "v5_current_or_review",
+      "read_status": "full"
+    },
+    {
+      "path": "docs/plans/source-catalog-worker-recovery-v5-2026-09-03/progress.md",
+      "bytes": 5136,
+      "lines": 60,
+      "sha256": "24052c0e5cd74666bdcb5403d699f48396bed541fa6f5b6bf85528aaf56fb0c4",
+      "disposition": "v5_current_or_review",
+      "read_status": "full"
+    },
+    {
+      "path": "docs/plans/source-catalog-worker-recovery-v5-2026-09-03/findings.md",
+      "bytes": 3420,
+      "lines": 52,
+      "sha256": "0021ec59b006d1ee97f216868df543c7878ea1f0600be8877407718852297a2b",
+      "disposition": "v5_current_or_review",
+      "read_status": "full"
+    },
+    {
+      "path": "docs/archive/REFACTORING_PLAN.md",
+      "bytes": 18271,
+      "lines": 709,
+      "sha256": "23a29c52f01cc7603e6b09bb6f4c4023a1d00a31bef2b76c13e27bef1110ac03",
+      "disposition": "legacy_archive",
+      "read_status": "full"
+    },
+    {
+      "path": "docs/archive/PLAN.md",
+      "bytes": 16275,
+      "lines": 460,
+      "sha256": "64bd3ac9ebab3820c7e6bebb124556c02e858217a679a669c8671949f3b250ba",
+      "disposition": "legacy_archive",
+      "read_status": "full"
+    },
+    {
+      "path": "docs/archive/LLM_INTEGRATION_PLAN.md",
+      "bytes": 14838,
+      "lines": 416,
+      "sha256": "5909ca65211c7a6c1936b5e0c7cfec2cf23349608f0d0823c92f18be755b6d5d",
+      "disposition": "legacy_archive",
+      "read_status": "full"
+    },
+    {
+      "path": "docs/archive/KARPATHY_GAPS_PLAN.md",
+      "bytes": 1784,
+      "lines": 72,
+      "sha256": "dc319bd322491b40629f3129de97c178d675ead81154d5c3c0ae4e407c60ffb4",
+      "disposition": "legacy_archive",
+      "read_status": "full"
+    },
+    {
+      "path": "docs/archive/IMPROVEMENT_PLAN.md",
+      "bytes": 7980,
+      "lines": 310,
+      "sha256": "95c19c93fea5a6b18aa5a0d23cf0417f1f672871e7ab371ddc41b5e3980fc3bd",
+      "disposition": "legacy_archive",
+      "read_status": "full"
+    },
+    {
+      "path": "docs/archive/GAP_FIX_PLAN.md",
+      "bytes": 1945,
+      "lines": 72,
+      "sha256": "98e35ab74ba799a852dea4692a4c9db73a8674609e11100b46385a0d364469d4",
+      "disposition": "legacy_archive",
+      "read_status": "full"
+    },
+    {
+      "path": "docs/plans/catalog-space-remediation/task_plan.md",
+      "bytes": 10759,
+      "lines": 163,
+      "sha256": "ec6268929a18f732093269834619b587af079bd51c313320932729f9c6faf8c8",
+      "disposition": "historical_subplan",
+      "read_status": "full"
+    },
+    {
+      "path": "docs/plans/catalog-space-remediation/progress.md",
+      "bytes": 5418,
+      "lines": 52,
+      "sha256": "22dddc0b7838658dee7ed7addd73cddfde31db0b01f261a6a35e3d20b5ebeb8c",
+      "disposition": "historical_subplan",
+      "read_status": "full"
+    },
+    {
+      "path": "docs/plans/catalog-space-remediation/granularity-proposal.md",
+      "bytes": 2895,
+      "lines": 41,
+      "sha256": "4455fef5185b823a3d26352a2043c67157c6d97407aa96c78bb33a5b7aebfe5e",
+      "disposition": "historical_subplan",
+      "read_status": "full"
+    },
+    {
+      "path": "docs/plans/catalog-space-remediation/findings.md",
+      "bytes": 6383,
+      "lines": 63,
+      "sha256": "d707f7af9031891111751a7aad67ffb72a8ad7517b66b34a43bbd06e8e524b9f",
+      "disposition": "historical_subplan",
+      "read_status": "full"
+    },
+    {
+      "path": "docs/plans/catalog-space-remediation/CURRENT_STATUS.md",
+      "bytes": 1147,
+      "lines": 9,
+      "sha256": "0c8ec7558d0233301c31c56070ce464e3a385a40992e9f1eb47d71fe704786df",
+      "disposition": "historical_subplan",
+      "read_status": "full"
+    },
+    {
+      "path": "docs/plans/core-section-extraction/task_plan.md",
+      "bytes": 7114,
+      "lines": 94,
+      "sha256": "ef39ffa4bc291132279f53f8ea7f628cf9ff4e5ff917da6a1ac8a9c7500b1e19",
+      "disposition": "historical_subplan",
+      "read_status": "full"
+    },
+    {
+      "path": "docs/plans/core-section-extraction/progress.md",
+      "bytes": 8549,
+      "lines": 90,
+      "sha256": "ddaab8a9e4411cc88a16087fb08b101c80bd1266880f355426acd1afdac6ac2f",
+      "disposition": "historical_subplan",
+      "read_status": "full"
+    },
+    {
+      "path": "docs/plans/core-section-extraction/findings.md",
+      "bytes": 7576,
+      "lines": 80,
+      "sha256": "5be80b582eceb3fffa36fd9b86e139c1fd06b6a2ef4a66271a05a427186c3248",
+      "disposition": "historical_subplan",
+      "read_status": "full"
+    },
+    {
+      "path": "docs/plans/core-section-extraction/CURRENT_STATUS.md",
+      "bytes": 1112,
+      "lines": 9,
+      "sha256": "a2c1262ecca5d5ae6a60a64d698bcec99cf9ded6963bf64952ffc28fc1253e15",
+      "disposition": "historical_subplan",
+      "read_status": "full"
+    },
+    {
+      "path": "docs/plans/portfolio-reuse-fix/task_plan.md",
+      "bytes": 14998,
+      "lines": 225,
+      "sha256": "681978e3ac1ccc4f1f078ebc3d2d79baee7b2f6037af4ae939edfa777d1387c4",
+      "disposition": "historical_subplan",
+      "read_status": "full"
+    },
+    {
+      "path": "docs/plans/portfolio-reuse-fix/progress.md",
+      "bytes": 6909,
+      "lines": 89,
+      "sha256": "7241861894c251bad314909d7efce5fdb9d512a90a2c0b7bd22df6fdf0ace446",
+      "disposition": "historical_subplan",
+      "read_status": "full"
+    },
+    {
+      "path": "docs/plans/portfolio-reuse-fix/findings.md",
+      "bytes": 10105,
+      "lines": 114,
+      "sha256": "fc87e6e90b840d2c65021cda25613e1571b62f9b16805863c4b8cfd4be294c02",
+      "disposition": "historical_subplan",
+      "read_status": "full"
+    },
+    {
+      "path": "docs/plans/portfolio-reuse-fix/CURRENT_STATUS.md",
+      "bytes": 1139,
+      "lines": 9,
+      "sha256": "0e52a283dbd136d14c1880632e4ec92fd158bc5909a459bad8efa6a021ad421f",
+      "disposition": "historical_subplan",
+      "read_status": "full"
+    },
+    {
+      "path": "docs/plans/portfolio-reuse-automatic/task_plan.md",
+      "bytes": 13719,
+      "lines": 180,
+      "sha256": "e2a7c4305a26393518b786b82c627afdbb9eac6a42273c97722fec1ee6efc456",
+      "disposition": "historical_subplan",
+      "read_status": "full"
+    },
+    {
+      "path": "docs/plans/portfolio-reuse-automatic/progress.md",
+      "bytes": 7305,
+      "lines": 101,
+      "sha256": "3d484428e75fcb523b4004126b5356c9bd28b047af23fab23a8f0334f6974b67",
+      "disposition": "historical_subplan",
+      "read_status": "full"
+    },
+    {
+      "path": "docs/plans/portfolio-reuse-automatic/findings.md",
+      "bytes": 4928,
+      "lines": 70,
+      "sha256": "ca39586613990b556a43cdb35dca61aaf555b4a8d7dc99460b4bdda6c0de63ac",
+      "disposition": "historical_subplan",
+      "read_status": "full"
+    },
+    {
+      "path": "docs/plans/portfolio-reuse-automatic/CURRENT_STATUS.md",
+      "bytes": 914,
+      "lines": 8,
+      "sha256": "6a9ca0e8db528f2b9f5deb2733679b17beb829e7dc514ed0131d457126a408ec",
+      "disposition": "historical_subplan",
+      "read_status": "full"
+    },
+    {
+      "path": "PLANNING_STATUS.md",
+      "bytes": 4731,
+      "lines": 36,
+      "sha256": "ff16f8bf81667f4a308cbf4df4d1aca2ef09c57dd4af9ef01ea86b63c64768fc",
+      "disposition": "current_router",
+      "read_status": "full"
+    },
+    {
+      "path": "docs/plans/source-catalog-worker-recovery-v5-2026-09-03/baseline/investigation/worker-investigation-2026-08-20.md",
+      "bytes": 36300,
+      "lines": 875,
+      "sha256": "8e6166ba063bc281ca1fa5da3c0743b895e4d93b6f2957de3cbd0b6938a95be6",
+      "disposition": "immutable_import_history",
+      "read_status": "full"
+    },
+    {
+      "path": "docs/plans/source-catalog-worker-recovery-v5-2026-09-03/baseline/history/v4-freeze-integrity-incident-2026-09-03.md",
+      "bytes": 14704,
+      "lines": 178,
+      "sha256": "ede40ac40f7afa35fbc27d00fd7aff6441cc54a9875b041dd6b1d82dd3306a6d",
+      "disposition": "immutable_import_history",
+      "read_status": "full"
+    },
+    {
+      "path": "docs/plans/source-catalog-worker-recovery-v5-2026-09-03/baseline/history/progress.v4.md",
+      "bytes": 53424,
+      "lines": 526,
+      "sha256": "6c34d6da016241a8dd5f8d662b776a76b814e58c46d4f4b3d606503757ee2b50",
+      "disposition": "immutable_import_history",
+      "read_status": "full"
+    },
+    {
+      "path": "docs/plans/source-catalog-worker-recovery-v5-2026-09-03/baseline/history/plan_review_revision.v4.md",
+      "bytes": 9379,
+      "lines": 147,
+      "sha256": "7b489b8fb81e25297136da00a9124d7d3ae6edd3b995d91df56a5d7c689e79cf",
+      "disposition": "immutable_import_history",
+      "read_status": "full"
+    },
+    {
+      "path": "findings.md",
+      "bytes": 173223,
+      "lines": 892,
+      "sha256": "a45b89d5e801a5c7584e93e77453ba743b9280ce09fa4bb50bf98429273d9f5f",
+      "disposition": "historical_root",
+      "read_status": "full"
+    },
+    {
+      "path": "progress.md",
+      "bytes": 170324,
+      "lines": 1348,
+      "sha256": "80ca072916744c19be4ddd8d6dbabf422674054872b36d83a8801d7bc47d721f",
+      "disposition": "historical_root",
+      "read_status": "full"
+    },
+    {
+      "path": "review_plan.md",
+      "bytes": 1461,
+      "lines": 42,
+      "sha256": "767218b2668ceea722f0deafac39cd0f4170cb17eca198393cb54152072e6fb9",
+      "disposition": "historical_root",
+      "read_status": "full"
+    },
+    {
+      "path": "verification_CW-2.24_plan.md",
+      "bytes": 5763,
+      "lines": 56,
+      "sha256": "083a7c8a19050e7a22a017fd8ca013079630c159e6d0305c58ab155fca128b12",
+      "disposition": "historical_root",
+      "read_status": "full"
+    },
+    {
+      "path": "docs/plans/source-catalog-worker-recovery-v5-2026-09-03/baseline/plan/acceptance_thresholds.md",
+      "bytes": 23396,
+      "lines": 336,
+      "sha256": "d6f3068498c8c6d8064c0babae809afbb320916da240567805f9a4cab20c96af",
+      "disposition": "immutable_import_history",
+      "read_status": "full"
+    },
+    {
+      "path": "docs/plans/source-catalog-worker-recovery-v5-2026-09-03/baseline/plan/agent_review_gates.md",
+      "bytes": 33410,
+      "lines": 567,
+      "sha256": "bbab56f39b7a9392295bca855f65ad99c5f7372dc54f4d4039adf909a3641a26",
+      "disposition": "immutable_import_history",
+      "read_status": "full"
+    },
+    {
+      "path": "docs/plans/source-catalog-worker-recovery-v5-2026-09-03/baseline/plan/plan_review_findings.md",
+      "bytes": 32595,
+      "lines": 187,
+      "sha256": "17206a816de688afa29bfeff734e0abc79954cef7964f0d4de568f6e07dd9559",
+      "disposition": "immutable_import_history",
+      "read_status": "full"
+    },
+    {
+      "path": "docs/plans/source-catalog-worker-recovery-v5-2026-09-03/baseline/plan/ledger_validator_contract.md",
+      "bytes": 20105,
+      "lines": 249,
+      "sha256": "c5b94e63b055ef6a989cb77282e2ade13cd5ae330899c90ee32567fbcf877978",
+      "disposition": "immutable_import_history",
+      "read_status": "full"
+    },
+    {
+      "path": "docs/plans/source-catalog-worker-recovery-v5-2026-09-03/baseline/plan/implementation_agent_prompts.md",
+      "bytes": 20526,
+      "lines": 388,
+      "sha256": "ab5c2fbc28996f5d501fff39e2a314030886857b5f246db58293df283f00c73d",
+      "disposition": "immutable_import_history",
+      "read_status": "full"
+    },
+    {
+      "path": "docs/plans/source-catalog-worker-recovery-v5-2026-09-03/baseline/plan/gate_state_machine.md",
+      "bytes": 28269,
+      "lines": 453,
+      "sha256": "49940700b4ee117211bbafef50b8d0c55c2f1045a324a29f06bfce2fea3b3c47",
+      "disposition": "immutable_import_history",
+      "read_status": "full"
+    },
+    {
+      "path": "docs/plans/source-catalog-worker-recovery-v5-2026-09-03/baseline/plan/findings.md",
+      "bytes": 59304,
+      "lines": 768,
+      "sha256": "e246b222fac6da7682f6af680029eb8d5dc9e36a05714eae15ea5f6074e090f1",
+      "disposition": "immutable_import_history",
+      "read_status": "full"
+    },
+    {
+      "path": "docs/plans/source-catalog-worker-recovery-v5-2026-09-03/baseline/plan/execution_playbook.md",
+      "bytes": 68362,
+      "lines": 1171,
+      "sha256": "14bfca6216acc8f4de49ec59b58e11906f40dd9d416e9da15493322e8696ecba",
+      "disposition": "immutable_import_history",
+      "read_status": "full"
+    },
+    {
+      "path": "docs/plans/source-catalog-worker-recovery-v5-2026-09-03/baseline/plan/task_plan.md",
+      "bytes": 57300,
+      "lines": 829,
+      "sha256": "46634bec14cf3046c30b4b0159413b91ea66e00fb8833c3ab046dc7b14f2e336",
+      "disposition": "immutable_import_history",
+      "read_status": "full"
+    },
+    {
+      "path": "docs/plans/source-catalog-worker-recovery-v5-2026-09-03/baseline/plan/rollout_rollback_runbook.md",
+      "bytes": 32836,
+      "lines": 515,
+      "sha256": "2728be56f758a53d9a91631707909ff88e0a5d394760bccdbbaaed67c64786a4",
+      "disposition": "immutable_import_history",
+      "read_status": "full"
+    },
+    {
+      "path": "docs/plans/source-catalog-worker-recovery-v5-2026-09-03/baseline/plan/README.md",
+      "bytes": 18875,
+      "lines": 208,
+      "sha256": "200e618179a360bc558b8c0e50140cca2b4858a846b3172d9fb0bcb229567e7e",
+      "disposition": "immutable_import_history",
+      "read_status": "full"
+    },
+    {
+      "path": "docs/plans/source-catalog-worker-recovery-v5-2026-09-03/baseline/plan/test_acceptance_plan.md",
+      "bytes": 54832,
+      "lines": 793,
+      "sha256": "8f0a86919e60d1cac6b022cb2bb26a284748c707bdf35972a0938a8a609bffc3",
+      "disposition": "immutable_import_history",
+      "read_status": "full"
+    },
+    {
+      "path": "docs/plans/source-catalog-worker-recovery-v5-2026-09-03/baseline/plan/traceability_matrix.md",
+      "bytes": 23780,
+      "lines": 227,
+      "sha256": "7a6865532489f8783b34cd62e138f4f2de8ce8fb89bbf56d819a7c3567626ef4",
+      "disposition": "immutable_import_history",
+      "read_status": "full"
+    },
+    {
+      "path": "task_plan_v2.md",
+      "bytes": 15856,
+      "lines": 313,
+      "sha256": "acf03f6ed32804021235c60754d5e572e59e9390e1a5c28629bd305c9b37fc42",
+      "disposition": "historical_root",
+      "read_status": "full"
+    },
+    {
+      "path": "task_plan_cw_recovery_20260725.md",
+      "bytes": 89721,
+      "lines": 1166,
+      "sha256": "962a8d0a78b1fafdb2b6a529a21a03da5daf49c7725433bf8cb8126adafe168d",
+      "disposition": "historical_root",
+      "read_status": "full"
+    },
+    {
+      "path": "task_plan.md",
+      "bytes": 370251,
+      "lines": 4417,
+      "sha256": "69d941cd174589563b567d48343a76a10e4d5a691d66466504a167a0cda1809a",
+      "disposition": "historical_root",
+      "read_status": "full"
+    }
+  ]
+}

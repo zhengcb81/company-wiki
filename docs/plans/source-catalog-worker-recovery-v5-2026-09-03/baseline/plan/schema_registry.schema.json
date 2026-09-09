@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:company-wiki:source-catalog-worker-recovery:schema-registry:v1",
+  "title": "Closed in-memory JSON Schema registry",
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "entry": {
+      "type": "object", "additionalProperties": false,
+      "required": ["schema_id", "repo_relative_path", "sha256", "size_bytes", "draft", "media_type"],
+      "properties": {
+        "schema_id": {"type": "string", "pattern": "^urn:company-wiki:source-catalog-worker-recovery:[a-z0-9-]+:v[1-9][0-9]*$"},
+        "repo_relative_path": {"type": "string", "pattern": "^docs/plans/source-catalog-worker-recovery-2026-08-22/[A-Za-z0-9][A-Za-z0-9._-]*\\.schema\\.json$"},
+        "sha256": {"$ref": "#/$defs/sha256"},
+        "size_bytes": {"type": "integer", "minimum": 2},
+        "draft": {"const": "https://json-schema.org/draft/2020-12/schema"},
+        "media_type": {"const": "application/schema+json"}
+      }
+    }
+  },
+  "required": ["schema_version", "registry_id", "plan_revision", "entries", "registry_tree_sha256", "retrieval_policy", "duplicate_id_policy", "sealed"],
+  "properties": {
+    "schema_version": {"const": "schema-registry-v1"},
+    "registry_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,159}$"},
+    "plan_revision": {"const": "v4"},
+    "entries": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/entry"}},
+    "registry_tree_sha256": {"$ref": "#/$defs/sha256"},
+    "retrieval_policy": {"const": "IN_MEMORY_EXACT_ID_ONLY_NO_NETWORK_NO_FILESYSTEM_FALLBACK"},
+    "duplicate_id_policy": {"const": "FAIL_ON_ANY_DUPLICATE_EVEN_IF_BYTES_EQUAL"},
+    "sealed": {"const": true}
+  },
+  "x-semantic-rules": [
+    "Entry schema_id values and case-folded paths are unique. Each schema's embedded $id equals schema_id and each canonical byte length/hash equals the entry.",
+    "The entry set is exactly the transitive closure of every normative schema referenced by the plan, catalog, fixtures, vectors, evidence, reviews, journal, release and runtime contracts; no orphan normative schema and no undeclared dependency is allowed.",
+    "All external $ref values use a complete registered URN. Relative external references, retrieval callbacks, network access and ambient CWD lookup fail before instance validation.",
+    "registry_tree_sha256 hashes the entries sorted by schema_id using RFC 8785 JCS and excludes only registry_tree_sha256 itself."
+  ]
+}

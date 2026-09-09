@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:company-wiki:source-catalog-worker-recovery:bootstrap-verifier-manifest:v1",
+  "title": "Detached pre-entry bootstrap verifier trust manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "utc": {"type": "string", "format": "date-time", "pattern": "^[0-9]{4}-(0[1-9]|1[0-2])-([0-2][0-9]|3[01])T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]{1,9})?Z$"},
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["role", "path_id", "sha256", "size_bytes", "file_identity_sha256", "security_descriptor_binary_sha256", "authenticode_status", "reparse_point_observed"],
+      "properties": {
+        "role": {"enum": ["POWERSHELL_HOST", "BOOTSTRAP_SCRIPT", "TRUST_ANCHOR", "VALIDATOR_ENTRYPOINT", "PYTHON_EXE", "PYTHON_DLL", "STDLIB_TREE", "VENDOR_TREE", "RELEASE_MANIFEST", "SCHEMA_REGISTRY", "LOCK_ARTIFACT"]},
+        "path_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,199}$"},
+        "sha256": {"$ref": "#/$defs/sha256"},
+        "size_bytes": {"type": "integer", "minimum": 1},
+        "file_identity_sha256": {"$ref": "#/$defs/sha256"},
+        "security_descriptor_binary_sha256": {"$ref": "#/$defs/sha256"},
+        "authenticode_status": {"enum": ["VALID_MICROSOFT_WINDOWS", "VALID_APPROVED_PUBLISHER", "NOT_APPLICABLE_HASH_PINNED_DATA"]},
+        "reparse_point_observed": {"const": false}
+      }
+    }
+  },
+  "required": [
+    "schema_version", "bootstrap_id", "generated_at", "expires_at", "host_os_family", "host_os_build",
+    "subject_user_sid", "external_trust_anchor_id", "external_trust_anchor_sha256", "artifacts",
+    "powershell_flags", "python_flags", "environment_allowlist", "working_directory_policy",
+    "pre_entry_checks", "launch_protocol", "detached_review_quorum", "sealed"
+  ],
+  "properties": {
+    "schema_version": {"const": "bootstrap-verifier-manifest-v1"},
+    "bootstrap_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,159}$"},
+    "generated_at": {"$ref": "#/$defs/utc"},
+    "expires_at": {"$ref": "#/$defs/utc"},
+    "host_os_family": {"const": "WINDOWS"},
+    "host_os_build": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:\\.[0-9]+)?$"},
+    "subject_user_sid": {"type": "string", "pattern": "^S-[0-9]+(?:-[0-9]+)+$"},
+    "external_trust_anchor_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,159}$"},
+    "external_trust_anchor_sha256": {"$ref": "#/$defs/sha256"},
+    "artifacts": {
+      "type": "array", "minItems": 3, "uniqueItems": true, "items": {"$ref": "#/$defs/artifact"},
+      "allOf": [
+        {"contains": {"properties": {"role": {"const": "POWERSHELL_HOST"}}, "required": ["role"]}, "minContains": 1, "maxContains": 1},
+        {"contains": {"properties": {"role": {"const": "BOOTSTRAP_SCRIPT"}}, "required": ["role"]}, "minContains": 1, "maxContains": 1},
+        {"contains": {"properties": {"role": {"const": "TRUST_ANCHOR"}}, "required": ["role"]}, "minContains": 1, "maxContains": 1}
+      ]
+    },
+    "powershell_flags": {"const": ["-NoLogo", "-NoProfile", "-NonInteractive", "-ExecutionPolicy", "Bypass"]},
+    "python_flags": {"const": ["-I", "-S", "-B"]},
+    "environment_allowlist": {"const": ["SYSTEMROOT", "WINDIR", "TEMP", "TMP"]},
+    "working_directory_policy": {"const": "EMPTY_NON_REPARSE_TEMP_DIRECTORY_OUTSIDE_PROJECT"},
+    "pre_entry_checks": {"const": ["EXTERNAL_ANCHOR_MATCH", "EXACT_ARTIFACT_ROLE_SET", "HASH_SIZE_FILE_ID_ACL_MATCH", "NO_REPARSE_OR_LINK_SWAP", "WINDOWS_SIGNATURE_POLICY", "EMPTY_CWD", "ENV_ALLOWLIST_EXACT", "NO_PYTHONPATH_OR_PYTHONHOME", "SCHEMA_REGISTRY_CLOSED", "LOCK_AND_RELEASE_CLOSURE", "TOCTOU_HANDLES_HELD_THROUGH_LAUNCH"]},
+    "launch_protocol": {"const": "VERIFY_WITH_OS_PRIMITIVES_HOLD_HANDLES_THEN_CREATE_CHILD_PYTHON_I_S_B"},
+    "detached_review_quorum": {
+      "type": "object", "additionalProperties": false,
+      "required": ["minimum_reviewers", "required_roles", "same_author_forbidden", "candidate_code_execution_forbidden"],
+      "properties": {
+        "minimum_reviewers": {"const": 2},
+        "required_roles": {"const": ["BOOTSTRAP_SECURITY_REVIEWER", "VALIDATOR_TEST_REVIEWER"]},
+        "same_author_forbidden": {"const": true},
+        "candidate_code_execution_forbidden": {"const": true}
+      }
+    },
+    "sealed": {"const": true}
+  },
+  "x-semantic-rules": [
+    "generated_at < expires_at. T00L and D00L evidence may bind this bootstrap identity only while it is current and independently anchored.",
+    "Before I00L, artifacts contain only POWERSHELL_HOST, BOOTSTRAP_SCRIPT and TRUST_ANCHOR. For I00L/G00L launch, the exact role set additionally contains validator entrypoint, Python exe/DLL/stdlib, vendor tree, release manifest, schema registry and lock artifact.",
+    "The bootstrap script uses only pinned Windows/.NET primitives. It never imports project Python, invokes the candidate validator to validate itself, reads a caller-supplied replacement anchor, or follows a reparse point.",
+    "The bootstrap process retains verified file handles or equivalent immutable file identities through child creation; verify-then-path-open races fail closed.",
+    "The child starts with python -I -S -B. Only the already verified entrypoint may insert the already verified vendor directory into sys.path; site.addsitedir, .pth, sitecustomize, usercustomize, CWD imports, bytecode fallback and network retrieval are forbidden."
+  ]
+}

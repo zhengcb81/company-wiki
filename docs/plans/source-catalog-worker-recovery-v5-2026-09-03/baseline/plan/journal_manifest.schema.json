@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:company-wiki:source-catalog-worker-recovery:journal-manifest:v5",
+  "title": "Immutable protected write-journal identity manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "utc": {"type": "string", "format": "date-time", "pattern": "^[0-9]{4}-(0[1-9]|1[0-2])-([0-2][0-9]|3[01])T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]{1,9})?Z$"}
+  },
+  "required": [
+    "schema_version", "journal_id", "journal_path_id", "head_anchor_path_id", "lease_path_id",
+    "target_root_identity", "owner_user_sid", "journal_file_identity_sha256", "volume_identity_sha256",
+    "security_descriptor_sddl_sha256", "security_descriptor_binary_sha256", "expected_ace_policy_sha256",
+    "reparse_point_forbidden", "hard_link_count", "record_format", "journal_record_schema_sha256",
+    "head_anchor_schema_sha256", "execution_receipt_schema_sha256", "durability_protocol", "lease_policy",
+    "recovery_protocol", "initial_head_sequence", "genesis_head_sha256", "identity_generation", "created_at",
+    "initialized_by_operation_intent_sha256", "initializer_operation_run_id", "filesystem_capability_report_sha256",
+    "plan_manifest_sha256", "release_manifest_sha256", "sealed"
+  ],
+  "properties": {
+    "schema_version": {"const": "journal-manifest-v2"},
+    "journal_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,159}$"},
+    "journal_path_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,199}$"},
+    "head_anchor_path_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,199}$"},
+    "lease_path_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,199}$"},
+    "target_root_identity": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,199}$"},
+    "owner_user_sid": {"type": "string", "pattern": "^S-[0-9]+(?:-[0-9]+)+$"},
+    "journal_file_identity_sha256": {"$ref": "#/$defs/sha256"},
+    "volume_identity_sha256": {"$ref": "#/$defs/sha256"},
+    "security_descriptor_sddl_sha256": {"$ref": "#/$defs/sha256"},
+    "security_descriptor_binary_sha256": {"$ref": "#/$defs/sha256"},
+    "expected_ace_policy_sha256": {"$ref": "#/$defs/sha256"},
+    "reparse_point_forbidden": {"const": true},
+    "hard_link_count": {"const": 1},
+    "record_format": {
+      "type": "object", "additionalProperties": false,
+      "required": ["container", "canonicalization", "encoding", "line_termination", "hash_algorithm", "record_types", "max_record_bytes", "schema_id"],
+      "properties": {
+        "container": {"const": "JSON_LINES"},
+        "canonicalization": {"const": "RFC8785_JCS"},
+        "encoding": {"const": "UTF-8"},
+        "line_termination": {"const": "LF"},
+        "hash_algorithm": {"const": "SHA-256"},
+        "record_types": {"const": ["INTENT", "FINALIZE", "RECONCILE"]},
+        "max_record_bytes": {"type": "integer", "minimum": 1024, "maximum": 1048576},
+        "schema_id": {"const": "urn:company-wiki:source-catalog-worker-recovery:journal-record:v1"}
+      }
+    },
+    "journal_record_schema_sha256": {"$ref": "#/$defs/sha256"},
+    "head_anchor_schema_sha256": {"$ref": "#/$defs/sha256"},
+    "execution_receipt_schema_sha256": {"$ref": "#/$defs/sha256"},
+    "durability_protocol": {"const": ["ACQUIRE_EXCLUSIVE_LEASE", "OPEN_NOFOLLOW_HELD_FILE_ID", "APPEND_SINGLE_CANONICAL_RECORD", "FLUSH_FILE_BUFFERS", "VERIFY_APPENDED_BYTES", "ATOMIC_REPLACE_HEAD_ANCHOR_CAS_GENERATION", "FLUSH_PARENT_DIRECTORY", "VERIFY_HEAD_AND_IDENTITIES", "RELEASE_LEASE"]},
+    "lease_policy": {
+      "type": "object", "additionalProperties": false,
+      "required": ["primitive", "owner_fields", "ttl_seconds", "heartbeat_seconds", "stale_break_policy", "generation_cas_required"],
+      "properties": {
+        "primitive": {"const": "WIN32_CREATE_NEW_NO_SHARE_DELETE"},
+        "owner_fields": {"const": ["USER_SID", "PROCESS_ID", "PROCESS_START_TIME", "PROCESS_GENERATION", "NONCE", "LEASE_GENERATION"]},
+        "ttl_seconds": {"type": "integer", "minimum": 30, "maximum": 300},
+        "heartbeat_seconds": {"type": "integer", "minimum": 5, "maximum": 60},
+        "stale_break_policy": {"const": "VERIFY_OWNER_DEAD_FILE_ID_UNCHANGED_AND_RECORD_BREAK_RECEIPT"},
+        "generation_cas_required": {"const": true}
+      }
+    },
+    "recovery_protocol": {
+      "type": "object", "additionalProperties": false,
+      "required": ["validate_chain_from_genesis", "reject_interior_corruption", "partial_tail_policy", "unanchored_tail_policy", "unfinalized_intent_policy", "reconcile_before_new_write", "unknown_effect_policy", "maximum_unanchored_records"],
+      "properties": {
+        "validate_chain_from_genesis": {"const": true},
+        "reject_interior_corruption": {"const": true},
+        "partial_tail_policy": {"const": "PRESERVE_BYTES_THEN_TRUNCATE_ONLY_TO_LAST_HASH_VERIFIED_BOUNDARY_WITH_RECEIPT"},
+        "unanchored_tail_policy": {"const": "ALLOW_ONE_FULLY_VALID_RECORD_ONLY_UNDER_EXCLUSIVE_RECOVERY_LEASE"},
+        "unfinalized_intent_policy": {"const": "EXACT_RECONCILE_USING_SEALED_CONTRACT"},
+        "reconcile_before_new_write": {"const": true},
+        "unknown_effect_policy": {"const": "PAUSE_AND_OPEN_CIRCUIT"},
+        "maximum_unanchored_records": {"const": 1}
+      }
+    },
+    "initial_head_sequence": {"const": 0},
+    "genesis_head_sha256": {"$ref": "#/$defs/sha256"},
+    "identity_generation": {"const": 0},
+    "created_at": {"$ref": "#/$defs/utc"},
+    "initialized_by_operation_intent_sha256": {"$ref": "#/$defs/sha256"},
+    "initializer_operation_run_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,159}$"},
+    "filesystem_capability_report_sha256": {"$ref": "#/$defs/sha256"},
+    "plan_manifest_sha256": {"$ref": "#/$defs/sha256"},
+    "release_manifest_sha256": {"$ref": "#/$defs/sha256"},
+    "sealed": {"const": true}
+  },
+  "x-semantic-rules": [
+    "This manifest is immutable identity/genesis metadata. Live head sequence/hash/generation exist only in protected ledger_head_anchor instances; appending never rewrites this manifest.",
+    "journal_path_id, anchor_path_id and lease_path_id resolve through the frozen root catalog to distinct no-follow sibling objects under one approved volume. Their identities, ACLs, no-reparse status and hard-link count are reverified while held open.",
+    "filesystem_capability_report proves write-through, FlushFileBuffers, atomic same-volume replace, directory durability, no-follow identity checks and exclusive lease semantics on this exact volume/OS. Missing capability yields BLOCKED, not a boolean assertion.",
+    "Each record validates against the frozen journal-record schema. The protected head anchor validates against the frozen anchor schema. Every actual operation closes with an operation execution receipt.",
+    "Recovery tests inject crashes at lease acquisition, partial/full append, file flush, anchor replace, directory flush, effect boundary and terminal record boundary, plus two-writer contention and stale lease break."
+  ]
+}

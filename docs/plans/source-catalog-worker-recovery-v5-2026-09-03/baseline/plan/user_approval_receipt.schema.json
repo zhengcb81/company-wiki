@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:company-wiki:source-catalog-worker-recovery:user-approval-receipt:v1",
+  "title": "Purpose-bound external user approval receipt",
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "utc": {"type": "string", "format": "date-time", "pattern": "^[0-9]{4}-(0[1-9]|1[0-2])-([0-2][0-9]|3[01])T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]{1,9})?Z$"},
+    "runtimeTemplateBinding": {
+      "type": "object", "additionalProperties": false,
+      "required": ["d12c_rt_evidence_sha256", "template_id", "template_path", "template_sha256", "runtime_policy_sha256", "scope_and_cap_digest_sha256", "runtime_authorization_id", "runtime_authorization_manifest_path", "runtime_authorization_manifest_sha256"],
+      "properties": {
+        "d12c_rt_evidence_sha256": {"$ref": "#/$defs/sha256"},
+        "template_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,159}$"},
+        "template_path": {"type": "string", "pattern": "^evidence/D12C-RT/[A-Za-z0-9][A-Za-z0-9._-]*/operation_intent_template\\.json$"},
+        "template_sha256": {"$ref": "#/$defs/sha256"},
+        "runtime_policy_sha256": {"$ref": "#/$defs/sha256"},
+        "scope_and_cap_digest_sha256": {"$ref": "#/$defs/sha256"},
+        "runtime_authorization_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,159}$"},
+        "runtime_authorization_manifest_path": {"type": "string", "pattern": "^evidence/D12C-RT/[A-Za-z0-9][A-Za-z0-9._-]*/runtime_authorization_manifest\\.json$"},
+        "runtime_authorization_manifest_sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "finalActivationBinding": {
+      "type": "object", "additionalProperties": false,
+      "required": ["d12c_evidence_sha256", "operation_intent_id", "operation_intent_path", "operation_intent_sha256", "operation_contract_template_sha256", "compensation_contract_template_sha256", "final_activation_authorization_id", "final_activation_authorization_manifest_path", "final_activation_authorization_manifest_sha256", "final_approval_subject_digest_sha256", "runtime_template_gate_evidence_sha256", "runtime_authorization_id", "runtime_authorization_manifest_sha256", "runtime_template_approval_id", "runtime_template_approval_receipt_sha256", "expected_source_state", "expected_terminal_state"],
+      "properties": {
+        "d12c_evidence_sha256": {"$ref": "#/$defs/sha256"},
+        "operation_intent_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,159}$"},
+        "operation_intent_path": {"type": "string", "pattern": "^evidence/D12C/[A-Za-z0-9][A-Za-z0-9._-]*/operation_intent_manifest\\.json$"},
+        "operation_intent_sha256": {"$ref": "#/$defs/sha256"},
+        "operation_contract_template_sha256": {"$ref": "#/$defs/sha256"},
+        "compensation_contract_template_sha256": {"$ref": "#/$defs/sha256"},
+        "final_activation_authorization_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,159}$"},
+        "final_activation_authorization_manifest_path": {"type": "string", "pattern": "^evidence/D12C/[A-Za-z0-9][A-Za-z0-9._-]*/authorization_manifest\\.json$"},
+        "final_activation_authorization_manifest_sha256": {"$ref": "#/$defs/sha256"},
+        "final_approval_subject_digest_sha256": {"$ref": "#/$defs/sha256"},
+        "runtime_template_gate_evidence_sha256": {"$ref": "#/$defs/sha256"},
+        "runtime_authorization_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,159}$"},
+        "runtime_authorization_manifest_sha256": {"$ref": "#/$defs/sha256"},
+        "runtime_template_approval_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,159}$"},
+        "runtime_template_approval_receipt_sha256": {"$ref": "#/$defs/sha256"},
+        "expected_source_state": {"const": "LOGIN_VALIDATED_PAUSED/ON"},
+        "expected_terminal_state": {"const": "ENABLED_IDLE/ON"}
+      }
+    }
+  },
+  "required": ["schema_version", "receipt_id", "approval_id", "purpose", "subject_user_sid", "requested_by_node_id", "approval_gate_node_id", "approval_evidence_id", "approval_evidence_sha256", "explicit_confirmation_digest_sha256", "plan_manifest_sha256", "gate_dag_sha256", "approved_at", "expires_at", "runtime_template_binding", "final_activation_binding", "distinct_from_approval_ids", "receipt_sha256", "sealed"],
+  "properties": {
+    "schema_version": {"const": "user-approval-receipt-v1"},
+    "receipt_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,159}$"},
+    "approval_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,159}$"},
+    "purpose": {"enum": ["RUNTIME_TEMPLATE_AUTHORIZATION", "FINAL_AUTOSTART_ACTIVATION"]},
+    "subject_user_sid": {"type": "string", "pattern": "^S-1-[0-9]+(?:-[0-9]+)+$"},
+    "requested_by_node_id": {"enum": ["D12C-RT", "D12C"]},
+    "approval_gate_node_id": {"enum": ["G12C-RT", "G12C-PRE"]},
+    "approval_evidence_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,159}$"},
+    "approval_evidence_sha256": {"$ref": "#/$defs/sha256"},
+    "explicit_confirmation_digest_sha256": {"$ref": "#/$defs/sha256"},
+    "plan_manifest_sha256": {"$ref": "#/$defs/sha256"},
+    "gate_dag_sha256": {"$ref": "#/$defs/sha256"},
+    "approved_at": {"$ref": "#/$defs/utc"},
+    "expires_at": {"$ref": "#/$defs/utc"},
+    "runtime_template_binding": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/runtimeTemplateBinding"}]},
+    "final_activation_binding": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/finalActivationBinding"}]},
+    "distinct_from_approval_ids": {"type": "array", "uniqueItems": true, "items": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,159}$"}},
+    "receipt_sha256": {"$ref": "#/$defs/sha256"},
+    "sealed": {"const": true}
+  },
+  "allOf": [
+    {"if": {"properties": {"purpose": {"const": "RUNTIME_TEMPLATE_AUTHORIZATION"}}, "required": ["purpose"]}, "then": {"properties": {"requested_by_node_id": {"const": "D12C-RT"}, "approval_gate_node_id": {"const": "G12C-RT"}, "runtime_template_binding": {"$ref": "#/$defs/runtimeTemplateBinding"}, "final_activation_binding": {"type": "null"}, "distinct_from_approval_ids": {"maxItems": 0}}}},
+    {"if": {"properties": {"purpose": {"const": "FINAL_AUTOSTART_ACTIVATION"}}, "required": ["purpose"]}, "then": {"properties": {"requested_by_node_id": {"const": "D12C"}, "approval_gate_node_id": {"const": "G12C-PRE"}, "runtime_template_binding": {"type": "null"}, "final_activation_binding": {"$ref": "#/$defs/finalActivationBinding"}, "distinct_from_approval_ids": {"minItems": 1, "maxItems": 1}}}}
+  ],
+  "x-semantic-rules": [
+    "expires_at is after approved_at. receipt_sha256 is RFC 8785 JCS SHA-256 of the object excluding receipt_sha256.",
+    "The two purposes require distinct approval_id, receipt_id, approval_evidence_id, approval_evidence_sha256 and explicit confirmation digest. A receipt can authorize exactly one purpose and cannot be widened or reused.",
+    "The final receipt's single distinct_from_approval_ids item and runtime_template_approval_id equal the runtime-template approval ID; its runtime authorization/template hashes equal the G12C-RT-approved artifacts. Its final authorization ID/hash, exact intent hash, contract-template hash and final_approval_subject_digest_sha256 equal the D12C-frozen values.",
+    "The user-facing confirmation is rendered from the exact bound object before approval. Missing, expired, revoked, swapped or mismatched receipts leave LOGIN_VALIDATED_PAUSED/ON and permit no OP12C side effect."
+  ]
+}

@@ -1,0 +1,408 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:company-wiki:source-catalog-worker-recovery:authorization-manifest:v4",
+  "title": "Intent-bound production authorization manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "utcTimestamp": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "^[0-9]{4}-(0[1-9]|1[0-2])-([0-2][0-9]|3[01])T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]{1,9})?Z$"
+    },
+    "opNodeId": {
+      "type": "string",
+      "pattern": "^(OP00|OP11A|OP11M|OP11J|OP11M-L|OP11B-A[123]|OP11B-BP|OP11B-BF(?:0[1-9]|[1-9][0-9])|OP12A|OP12B-ARM|OP12B-CAS|OP12B-LOGIN|OP12B-RB|OP12C|OP12C-RB|OP05R(?:0[1-9]|[1-9][0-9])|OP-RUNTIME-CYCLE)$"
+    },
+    "productionState": {
+      "enum": ["PAUSED/OFF", "PAUSED/ON", "PAUSED/REGISTRY_CONFLICT", "ARMED_PRELOGIN/OFF", "ARMED_ON_PRELOGIN/ON", "LOGIN_COMMITTED/ON", "RUNNING_LOGIN_VALIDATION/ON", "LOGIN_VALIDATED_PAUSED/ON", "ENABLED_IDLE/ON"]
+    },
+    "candidateSource": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["candidate_kind", "document_id", "source_id", "source_sha256", "opaque_root_id"],
+      "properties": {
+        "candidate_kind": {"enum": ["DOCUMENT", "ROOT_ONLY"]},
+        "document_id": {"anyOf": [{"type": "null"}, {"type": "string", "minLength": 1, "maxLength": 160}]},
+        "source_id": {"anyOf": [{"type": "null"}, {"type": "string", "minLength": 1, "maxLength": 160}]},
+        "source_sha256": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/sha256"}]},
+        "opaque_root_id": {"type": "string", "minLength": 1, "maxLength": 160}
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"candidate_kind": {"const": "DOCUMENT"}}, "required": ["candidate_kind"]},
+          "then": {"properties": {"document_id": {"type": "string"}, "source_id": {"type": "string"}, "source_sha256": {"$ref": "#/$defs/sha256"}}}
+        },
+        {
+          "if": {"properties": {"candidate_kind": {"const": "ROOT_ONLY"}}, "required": ["candidate_kind"]},
+          "then": {"properties": {"document_id": {"type": "null"}, "source_id": {"type": "null"}, "source_sha256": {"type": "null"}}}
+        }
+      ]
+    },
+    "authorizedAction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "action_id", "operation_node_id", "stage_node_id", "action_class", "effect_binding_mode", "effect_digest_sha256", "operation_intent_action_sha256",
+        "operation_contract_template_sha256", "process_generation_binding_mode", "process_generation", "process_generation_policy_sha256", "control_generation", "circuit_generation",
+        "registry_value_sha256", "registry_value_byte_length"
+      ],
+      "properties": {
+        "action_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,159}$"},
+        "operation_node_id": {"$ref": "#/$defs/opNodeId"},
+        "stage_node_id": {"type": "string", "pattern": "^(D|OP|G)[A-Za-z0-9-]{1,31}$"},
+        "action_class": {
+          "enum": [
+            "READ_ONLY", "DB_WRITE", "FILE_WRITE", "NETWORK_EGRESS", "STARTUP_ARM",
+            "REGISTRY_CREATE_IF_ABSENT", "LOGIN_LOGOFF", "FINAL_ACTIVATION",
+            "ROLLBACK", "CIRCUIT_RESET", "CYCLE_EXECUTION"
+          ]
+        },
+        "effect_binding_mode": {"enum": ["EXACT_EFFECT", "TEMPLATE_MAXIMA"]},
+        "effect_digest_sha256": {"$ref": "#/$defs/sha256"},
+        "operation_intent_action_sha256": {"$ref": "#/$defs/sha256"},
+        "operation_contract_template_sha256": {"$ref": "#/$defs/sha256"},
+        "process_generation_binding_mode": {"enum": ["EXACT", "MONOTONIC_CURRENT_PROTECTED_STATE"]},
+        "process_generation": {"anyOf": [{"type": "null"}, {"type": "integer", "minimum": 0}]},
+        "process_generation_policy_sha256": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/sha256"}]},
+        "control_generation": {"type": "integer", "minimum": 0},
+        "circuit_generation": {"type": "integer", "minimum": 0},
+        "registry_value_sha256": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/sha256"}]},
+        "registry_value_byte_length": {"anyOf": [{"type": "null"}, {"type": "integer", "minimum": 2, "maximum": 65534, "multipleOf": 2}]}
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"action_class": {"const": "REGISTRY_CREATE_IF_ABSENT"}}, "required": ["action_class"]},
+          "then": {"properties": {"operation_node_id": {"const": "OP12B-CAS"}, "registry_value_sha256": {"$ref": "#/$defs/sha256"}, "registry_value_byte_length": {"type": "integer"}}}
+        },
+        {
+          "if": {"properties": {"action_class": {"not": {"const": "REGISTRY_CREATE_IF_ABSENT"}}}, "required": ["action_class"]},
+          "then": {"properties": {"registry_value_sha256": {"type": "null"}, "registry_value_byte_length": {"type": "null"}}}
+        },
+        {
+          "if": {"properties": {"action_class": {"const": "CIRCUIT_RESET"}}, "required": ["action_class"]},
+          "then": {"properties": {"operation_node_id": {"pattern": "^OP05R(?:0[1-9]|[1-9][0-9])$"}}}
+        },
+        {
+          "if": {"properties": {"action_class": {"const": "ROLLBACK"}}, "required": ["action_class"]},
+          "then": {"properties": {"operation_node_id": {"enum": ["OP12B-RB", "OP12C-RB"]}}}
+        },
+        {
+          "if": {"properties": {"action_class": {"const": "CYCLE_EXECUTION"}}, "required": ["action_class"]},
+          "then": {"properties": {"action_id": {"const": "ORDINARY_AUTOSTART_CYCLE"}, "operation_node_id": {"const": "OP-RUNTIME-CYCLE"}, "stage_node_id": {"const": "OP-RUNTIME-CYCLE"}, "effect_binding_mode": {"const": "TEMPLATE_MAXIMA"}, "process_generation_binding_mode": {"const": "MONOTONIC_CURRENT_PROTECTED_STATE"}, "process_generation": {"type": "null"}, "process_generation_policy_sha256": {"$ref": "#/$defs/sha256"}}}
+        },
+        {
+          "if": {"properties": {"action_class": {"not": {"const": "CYCLE_EXECUTION"}}}, "required": ["action_class"]},
+          "then": {"properties": {"effect_binding_mode": {"const": "EXACT_EFFECT"}, "process_generation_binding_mode": {"const": "EXACT"}, "process_generation": {"type": "integer"}, "process_generation_policy_sha256": {"type": "null"}}}
+        }
+      ]
+    },
+    "compensationAuthorizedAction": {
+      "type": "object", "additionalProperties": false,
+      "required": ["action_id", "operation_node_id", "stage_node_id", "action_class", "effect_binding_mode", "effect_digest_sha256", "action_projection_sha256", "operation_contract_template_sha256", "process_generation_binding_mode", "process_generation_policy_sha256", "control_generation", "circuit_generation", "registry_value_sha256", "registry_value_byte_length"],
+      "properties": {
+        "action_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,159}$"},
+        "operation_node_id": {"enum": ["OP12B-RB", "OP12C-RB"]},
+        "stage_node_id": {"enum": ["D12B-RB", "D12C"]},
+        "action_class": {"const": "ROLLBACK"},
+        "effect_binding_mode": {"const": "EXACT_EFFECT"},
+        "effect_digest_sha256": {"$ref": "#/$defs/sha256"},
+        "action_projection_sha256": {"$ref": "#/$defs/sha256"},
+        "operation_contract_template_sha256": {"$ref": "#/$defs/sha256"},
+        "process_generation_binding_mode": {"const": "TRIGGER_EVIDENCE_CURRENT_PROTECTED_STATE"},
+        "process_generation_policy_sha256": {"$ref": "#/$defs/sha256"},
+        "control_generation": {"type": "integer", "minimum": 0},
+        "circuit_generation": {"type": "integer", "minimum": 0},
+        "registry_value_sha256": {"type": "null"},
+        "registry_value_byte_length": {"type": "null"}
+      }
+    },
+    "compensationBranchGrant": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["branch", "authorized_trigger_node_ids", "allowed_source_states", "terminal_state", "forward_effect_status", "expected_generation_delta", "registry_observation", "required_registry_operation", "control_effect", "max_file_writes", "expected_registry_values_touched"],
+      "properties": {
+        "branch": {"enum": ["12B_PRE_EFFECT_NOOP", "12B_PRE_CAS_ABSENT", "12B_POST_CAS_OWNED_PRESERVE_SAFE_PAUSED", "12B_POST_CAS_ABSENT_SAFE_OFF", "12B_THIRD_PARTY_CONFLICT_PRESERVE", "12C_PRE_CONTROL_WRITE_NOOP", "12C_POST_CONTROL_WRITE_ROLLBACK", "12C_REGISTRY_ABSENT_SAFE_OFF", "12C_THIRD_PARTY_CONFLICT_PRESERVE"]},
+        "authorized_trigger_node_ids": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"enum": ["OP12B-ARM", "G12B-ARM", "D12B-CAS", "OP12B-CAS", "G12B-CAS", "D12B-LOGIN", "OP12B-LOGIN", "G12B-POST", "G12C-PRE", "OP12C", "G12C"]}},
+        "allowed_source_states": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/productionState"}},
+        "terminal_state": {"$ref": "#/$defs/productionState"},
+        "forward_effect_status": {"enum": ["NO_FORWARD_EFFECT_DURABLE", "ARM_TOKEN_ONLY", "REGISTRY_EXACT_OWNED", "CONTROL_STATE_ACTIVATED", "REGISTRY_ABSENT_AFTER_FORWARD_EFFECT", "THIRD_PARTY_OR_DRIFT_OBSERVED"]},
+        "expected_generation_delta": {"type": "integer", "minimum": 0, "maximum": 1},
+        "registry_observation": {"enum": ["ABSENT", "EXACT_OWNED", "THIRD_PARTY_OR_DRIFT"]},
+        "required_registry_operation": {"enum": ["VERIFY_ABSENT", "VERIFY_EXACT", "VERIFY_OWNED_PRESERVE", "VERIFY_CONFLICT_PRESERVE"]},
+        "control_effect": {"enum": ["NO_CHANGE", "INVALIDATE_PRELOGIN_TOKENS", "ROLLBACK_EXACT_CONTROL_STATE", "SET_PAUSED_OFF", "SET_CONFLICT_PAUSE"]},
+        "max_file_writes": {"type": "integer", "minimum": 0, "maximum": 8},
+        "expected_registry_values_touched": {"type": "integer", "minimum": 0, "maximum": 1}
+      },
+      "allOf": [
+        {"if": {"properties": {"branch": {"const": "12B_PRE_EFFECT_NOOP"}}, "required": ["branch"]}, "then": {"properties": {"authorized_trigger_node_ids": {"items": {"const": "OP12B-ARM"}}, "allowed_source_states": {"const": ["PAUSED/OFF"]}, "terminal_state": {"const": "PAUSED/OFF"}, "forward_effect_status": {"const": "NO_FORWARD_EFFECT_DURABLE"}, "expected_generation_delta": {"const": 0}, "registry_observation": {"const": "ABSENT"}, "required_registry_operation": {"const": "VERIFY_ABSENT"}, "control_effect": {"const": "NO_CHANGE"}, "max_file_writes": {"const": 0}, "expected_registry_values_touched": {"const": 0}}}},
+        {"if": {"properties": {"branch": {"const": "12B_PRE_CAS_ABSENT"}}, "required": ["branch"]}, "then": {"properties": {"authorized_trigger_node_ids": {"items": {"enum": ["G12B-ARM", "D12B-CAS", "OP12B-CAS"]}}, "allowed_source_states": {"const": ["ARMED_PRELOGIN/OFF"]}, "terminal_state": {"const": "PAUSED/OFF"}, "forward_effect_status": {"const": "ARM_TOKEN_ONLY"}, "expected_generation_delta": {"const": 1}, "registry_observation": {"const": "ABSENT"}, "required_registry_operation": {"const": "VERIFY_ABSENT"}, "control_effect": {"const": "INVALIDATE_PRELOGIN_TOKENS"}, "max_file_writes": {"minimum": 1}, "expected_registry_values_touched": {"const": 0}}}},
+        {"if": {"properties": {"branch": {"const": "12B_POST_CAS_OWNED_PRESERVE_SAFE_PAUSED"}}, "required": ["branch"]}, "then": {"properties": {"authorized_trigger_node_ids": {"items": {"enum": ["OP12B-CAS", "G12B-CAS", "D12B-LOGIN", "OP12B-LOGIN", "G12B-POST"]}}, "allowed_source_states": {"items": {"enum": ["ARMED_ON_PRELOGIN/ON", "LOGIN_COMMITTED/ON", "RUNNING_LOGIN_VALIDATION/ON", "LOGIN_VALIDATED_PAUSED/ON"]}}, "terminal_state": {"const": "PAUSED/ON"}, "forward_effect_status": {"const": "REGISTRY_EXACT_OWNED"}, "expected_generation_delta": {"const": 1}, "registry_observation": {"const": "EXACT_OWNED"}, "required_registry_operation": {"const": "VERIFY_OWNED_PRESERVE"}, "control_effect": {"const": "INVALIDATE_PRELOGIN_TOKENS"}, "max_file_writes": {"minimum": 1}, "expected_registry_values_touched": {"const": 0}}}},
+        {"if": {"properties": {"branch": {"const": "12B_POST_CAS_ABSENT_SAFE_OFF"}}, "required": ["branch"]}, "then": {"properties": {"authorized_trigger_node_ids": {"items": {"enum": ["OP12B-CAS", "G12B-CAS", "D12B-LOGIN", "OP12B-LOGIN", "G12B-POST"]}}, "allowed_source_states": {"items": {"enum": ["ARMED_ON_PRELOGIN/ON", "LOGIN_COMMITTED/ON", "RUNNING_LOGIN_VALIDATION/ON", "LOGIN_VALIDATED_PAUSED/ON"]}}, "terminal_state": {"const": "PAUSED/OFF"}, "forward_effect_status": {"const": "REGISTRY_ABSENT_AFTER_FORWARD_EFFECT"}, "expected_generation_delta": {"const": 1}, "registry_observation": {"const": "ABSENT"}, "required_registry_operation": {"const": "VERIFY_ABSENT"}, "control_effect": {"const": "INVALIDATE_PRELOGIN_TOKENS"}, "max_file_writes": {"minimum": 1}, "expected_registry_values_touched": {"const": 0}}}},
+        {"if": {"properties": {"branch": {"const": "12B_THIRD_PARTY_CONFLICT_PRESERVE"}}, "required": ["branch"]}, "then": {"properties": {"authorized_trigger_node_ids": {"items": {"enum": ["OP12B-CAS", "G12B-CAS", "D12B-LOGIN", "OP12B-LOGIN", "G12B-POST"]}}, "allowed_source_states": {"items": {"enum": ["ARMED_PRELOGIN/OFF", "ARMED_ON_PRELOGIN/ON", "LOGIN_COMMITTED/ON", "RUNNING_LOGIN_VALIDATION/ON", "LOGIN_VALIDATED_PAUSED/ON"]}}, "terminal_state": {"const": "PAUSED/REGISTRY_CONFLICT"}, "forward_effect_status": {"const": "THIRD_PARTY_OR_DRIFT_OBSERVED"}, "expected_generation_delta": {"const": 1}, "registry_observation": {"const": "THIRD_PARTY_OR_DRIFT"}, "required_registry_operation": {"const": "VERIFY_CONFLICT_PRESERVE"}, "control_effect": {"const": "SET_CONFLICT_PAUSE"}, "max_file_writes": {"minimum": 1}, "expected_registry_values_touched": {"const": 0}}}},
+        {"if": {"properties": {"branch": {"const": "12C_PRE_CONTROL_WRITE_NOOP"}}, "required": ["branch"]}, "then": {"properties": {"authorized_trigger_node_ids": {"items": {"enum": ["G12C-PRE", "OP12C"]}}, "allowed_source_states": {"const": ["LOGIN_VALIDATED_PAUSED/ON"]}, "terminal_state": {"const": "LOGIN_VALIDATED_PAUSED/ON"}, "forward_effect_status": {"const": "NO_FORWARD_EFFECT_DURABLE"}, "expected_generation_delta": {"const": 0}, "registry_observation": {"const": "EXACT_OWNED"}, "required_registry_operation": {"const": "VERIFY_EXACT"}, "control_effect": {"const": "NO_CHANGE"}, "max_file_writes": {"const": 0}, "expected_registry_values_touched": {"const": 0}}}},
+        {"if": {"properties": {"branch": {"const": "12C_POST_CONTROL_WRITE_ROLLBACK"}}, "required": ["branch"]}, "then": {"properties": {"authorized_trigger_node_ids": {"items": {"enum": ["OP12C", "G12C"]}}, "allowed_source_states": {"const": ["ENABLED_IDLE/ON"]}, "terminal_state": {"const": "LOGIN_VALIDATED_PAUSED/ON"}, "forward_effect_status": {"const": "CONTROL_STATE_ACTIVATED"}, "expected_generation_delta": {"const": 1}, "registry_observation": {"const": "EXACT_OWNED"}, "required_registry_operation": {"const": "VERIFY_EXACT"}, "control_effect": {"const": "ROLLBACK_EXACT_CONTROL_STATE"}, "max_file_writes": {"const": 1}, "expected_registry_values_touched": {"const": 0}}}},
+        {"if": {"properties": {"branch": {"const": "12C_REGISTRY_ABSENT_SAFE_OFF"}}, "required": ["branch"]}, "then": {"properties": {"authorized_trigger_node_ids": {"items": {"enum": ["G12C-PRE", "OP12C", "G12C"]}}, "allowed_source_states": {"items": {"enum": ["LOGIN_VALIDATED_PAUSED/ON", "ENABLED_IDLE/ON"]}}, "terminal_state": {"const": "PAUSED/OFF"}, "forward_effect_status": {"const": "REGISTRY_ABSENT_AFTER_FORWARD_EFFECT"}, "expected_generation_delta": {"const": 1}, "registry_observation": {"const": "ABSENT"}, "required_registry_operation": {"const": "VERIFY_ABSENT"}, "control_effect": {"const": "SET_PAUSED_OFF"}, "max_file_writes": {"const": 1}, "expected_registry_values_touched": {"const": 0}}}},
+        {"if": {"properties": {"branch": {"const": "12C_THIRD_PARTY_CONFLICT_PRESERVE"}}, "required": ["branch"]}, "then": {"properties": {"authorized_trigger_node_ids": {"items": {"enum": ["OP12C", "G12C"]}}, "allowed_source_states": {"items": {"enum": ["LOGIN_VALIDATED_PAUSED/ON", "ENABLED_IDLE/ON"]}}, "terminal_state": {"const": "PAUSED/REGISTRY_CONFLICT"}, "forward_effect_status": {"const": "THIRD_PARTY_OR_DRIFT_OBSERVED"}, "expected_generation_delta": {"const": 1}, "registry_observation": {"const": "THIRD_PARTY_OR_DRIFT"}, "required_registry_operation": {"const": "VERIFY_CONFLICT_PRESERVE"}, "control_effect": {"const": "SET_CONFLICT_PAUSE"}, "max_file_writes": {"const": 1}, "expected_registry_values_touched": {"const": 0}}}}
+      ]
+    },
+    "compensationGrant": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["grant_id", "grant_sha256", "action", "branch_contract", "issued_at", "valid_until", "child_authorization_kind"],
+      "properties": {
+        "grant_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,159}$"},
+        "grant_sha256": {"$ref": "#/$defs/sha256"},
+        "action": {"$ref": "#/$defs/compensationAuthorizedAction"},
+        "branch_contract": {"$ref": "#/$defs/compensationBranchGrant"},
+        "issued_at": {"$ref": "#/$defs/utcTimestamp"},
+        "valid_until": {"$ref": "#/$defs/utcTimestamp"},
+        "child_authorization_kind": {"const": "BOUND_COMPENSATION"}
+      },
+      "allOf": [
+        {"if": {"properties": {"action": {"properties": {"operation_node_id": {"const": "OP12B-RB"}}, "required": ["operation_node_id"]}}, "required": ["action"]}, "then": {"properties": {"branch_contract": {"properties": {"branch": {"pattern": "^12B_"}}}}}},
+        {"if": {"properties": {"action": {"properties": {"operation_node_id": {"const": "OP12C-RB"}}, "required": ["operation_node_id"]}}, "required": ["action"]}, "then": {"properties": {"branch_contract": {"properties": {"branch": {"pattern": "^12C_"}}}}}}
+      ]
+    },
+    "runtimeAuthorizationScope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "operation_policy_id", "runtime_policy_sha256", "cycle_contract_schema_sha256",
+        "intent_specialization_validator_sha256", "process_generation_policy_sha256", "process_generation_state_id", "process_generation_minimum", "process_generation_anchor_sha256_at_issue", "budget_policy_sha256", "durable_budget_ids",
+        "per_cycle_maxima", "budget_currency", "budget_accounting_scope", "fresh_cycle_intent_required", "strict_specialization_required",
+        "revocation_check_every_cycle", "authorization_refresh_triggers"
+      ],
+      "properties": {
+        "operation_policy_id": {"const": "OP-RUNTIME-CYCLE"},
+        "runtime_policy_sha256": {"$ref": "#/$defs/sha256"},
+        "cycle_contract_schema_sha256": {"$ref": "#/$defs/sha256"},
+        "intent_specialization_validator_sha256": {"$ref": "#/$defs/sha256"},
+        "process_generation_policy_sha256": {"$ref": "#/$defs/sha256"},
+        "process_generation_state_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,159}$"},
+        "process_generation_minimum": {"type": "integer", "minimum": 0},
+        "process_generation_anchor_sha256_at_issue": {"$ref": "#/$defs/sha256"},
+        "budget_policy_sha256": {"$ref": "#/$defs/sha256"},
+        "durable_budget_ids": {
+          "type": "object", "additionalProperties": false,
+          "required": ["daily_provider_requests", "daily_provider_cost", "monthly_provider_requests", "monthly_provider_cost"],
+          "properties": {
+            "daily_provider_requests": {"type": "string", "minLength": 8, "maxLength": 160},
+            "daily_provider_cost": {"type": "string", "minLength": 8, "maxLength": 160},
+            "monthly_provider_requests": {"type": "string", "minLength": 8, "maxLength": 160},
+            "monthly_provider_cost": {"type": "string", "minLength": 8, "maxLength": 160}
+          }
+        },
+        "per_cycle_maxima": {
+          "type": "object", "additionalProperties": false,
+          "required": ["max_documents", "max_characters", "max_input_tokens", "max_output_tokens", "max_cost_minor_units", "max_provider_requests", "max_retries"],
+          "properties": {
+            "max_documents": {"type": "integer", "minimum": 0},
+            "max_characters": {"type": "integer", "minimum": 0},
+            "max_input_tokens": {"type": "integer", "minimum": 0},
+            "max_output_tokens": {"type": "integer", "minimum": 0},
+            "max_cost_minor_units": {"type": "integer", "minimum": 0},
+            "max_provider_requests": {"type": "integer", "minimum": 0},
+            "max_retries": {"type": "integer", "minimum": 0}
+          }
+        },
+        "budget_currency": {"type": "string", "pattern": "^[A-Z]{3}$"},
+        "budget_accounting_scope": {"const": "GLOBAL_AGGREGATE_ACROSS_ALL_AUTHORIZED_PROVIDERS"},
+        "fresh_cycle_intent_required": {"const": true},
+        "strict_specialization_required": {"const": true},
+        "revocation_check_every_cycle": {"const": true},
+        "authorization_refresh_triggers": {"const": ["RELEASE_HASH_DRIFT", "CONFIG_HASH_DRIFT", "ROUTING_HASH_DRIFT", "DATA_ROOT_HASH_DRIFT", "CONTROL_GENERATION_DRIFT", "CIRCUIT_GENERATION_DRIFT", "TEMPLATE_HASH_DRIFT", "AUTHORIZATION_EXPIRY_OR_REVOCATION"]}
+      }
+    },
+    "approvalRequirement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["purpose", "subject_digest_sha256", "receipt_schema_sha256", "receipt_required_before_effect", "receipt_must_bind_this_authorization_hash", "distinct_from_approval_ids"],
+      "properties": {
+        "purpose": {"enum": ["SYSTEM_READ_ONLY_POLICY", "GENERAL_EXPLICIT_OPERATION", "RUNTIME_TEMPLATE_AUTHORIZATION", "FINAL_AUTOSTART_ACTIVATION", "PARENT_PREAUTHORIZED_COMPENSATION"]},
+        "subject_digest_sha256": {"$ref": "#/$defs/sha256"},
+        "receipt_schema_sha256": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/sha256"}]},
+        "receipt_required_before_effect": {"type": "boolean"},
+        "receipt_must_bind_this_authorization_hash": {"type": "boolean"},
+        "distinct_from_approval_ids": {"type": "array", "uniqueItems": true, "items": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,159}$"}}
+      },
+      "allOf": [
+        {"if": {"properties": {"purpose": {"enum": ["RUNTIME_TEMPLATE_AUTHORIZATION", "FINAL_AUTOSTART_ACTIVATION", "GENERAL_EXPLICIT_OPERATION"]}}, "required": ["purpose"]}, "then": {"properties": {"receipt_schema_sha256": {"$ref": "#/$defs/sha256"}, "receipt_required_before_effect": {"const": true}, "receipt_must_bind_this_authorization_hash": {"const": true}}}},
+        {"if": {"properties": {"purpose": {"enum": ["SYSTEM_READ_ONLY_POLICY", "PARENT_PREAUTHORIZED_COMPENSATION"]}}, "required": ["purpose"]}, "then": {"properties": {"receipt_schema_sha256": {"type": "null"}, "receipt_required_before_effect": {"const": false}, "receipt_must_bind_this_authorization_hash": {"const": false}, "distinct_from_approval_ids": {"maxItems": 0}}}},
+        {"if": {"properties": {"purpose": {"const": "RUNTIME_TEMPLATE_AUTHORIZATION"}}, "required": ["purpose"]}, "then": {"properties": {"distinct_from_approval_ids": {"maxItems": 0}}}},
+        {"if": {"properties": {"purpose": {"const": "FINAL_AUTOSTART_ACTIVATION"}}, "required": ["purpose"]}, "then": {"properties": {"distinct_from_approval_ids": {"minItems": 1, "maxItems": 1}}}}
+      ]
+    }
+  },
+  "required": [
+    "schema_version", "authorization_id", "authorization_kind", "authorization_source",
+    "intent_binding_mode", "operation_intent_path", "operation_intent_sha256", "operation_intent_id",
+    "operation_intent_template_path", "operation_intent_template_sha256", "operation_intent_template_id",
+    "runtime_authorization_scope", "authorized_actions", "preauthorized_compensations",
+    "parent_authorization_id", "parent_authorization_sha256", "parent_compensation_grant_id", "parent_compensation_grant_sha256", "approval_evidence_id", "approval_evidence_sha256", "approval_requirement", "authorization_ttl_seconds",
+    "subject_user_sid", "plan_manifest_sha256", "gate_dag_sha256", "release_manifest_sha256",
+    "operation_catalog_sha256", "config_fingerprint", "routing_fingerprint", "data_root_fingerprint",
+    "provider_scopes", "data_scopes", "revocation_authority_id", "revocation_anchor_path_id", "revocation_receipt_schema_sha256", "maximum_revalidation_age_seconds", "issued_at", "expires_at", "issuance_revocation_status", "issuance_revocation_checked_at", "issuance_revocation_anchor_generation", "issuance_revocation_anchor_sha256"
+  ],
+  "properties": {
+    "schema_version": {"const": "authorization-manifest-v3"},
+    "authorization_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,159}$"},
+    "authorization_kind": {
+      "enum": ["NOT_APPLICABLE_LOCAL_READ_ONLY", "STAGE_BOUND_OPERATION", "BOUND_COMPENSATION", "CIRCUIT_RESET"]
+    },
+    "authorization_source": {"enum": ["SYSTEM_READ_ONLY_POLICY", "EXPLICIT_USER_APPROVAL", "PARENT_PREAUTHORIZED_COMPENSATION"]},
+    "intent_binding_mode": {"enum": ["EXACT_INTENT", "RUNTIME_TEMPLATE_SPECIALIZATION"]},
+    "operation_intent_path": {"anyOf": [{"type": "null"}, {"type": "string", "pattern": "^evidence/[A-Za-z0-9][A-Za-z0-9._-]*/operation_intent_manifest\\.json$"}]},
+    "operation_intent_sha256": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/sha256"}]},
+    "operation_intent_id": {"anyOf": [{"type": "null"}, {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,159}$"}]},
+    "operation_intent_template_path": {"anyOf": [{"type": "null"}, {"type": "string", "pattern": "^evidence/[A-Za-z0-9][A-Za-z0-9._-]*/operation_intent_template\\.json$"}]},
+    "operation_intent_template_sha256": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/sha256"}]},
+    "operation_intent_template_id": {"anyOf": [{"type": "null"}, {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,159}$"}]},
+    "runtime_authorization_scope": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/runtimeAuthorizationScope"}]},
+    "authorized_actions": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/authorizedAction"}},
+    "preauthorized_compensations": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/compensationGrant"}},
+    "parent_authorization_id": {"anyOf": [{"type": "null"}, {"type": "string", "minLength": 8, "maxLength": 160}]},
+    "parent_authorization_sha256": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/sha256"}]},
+    "parent_compensation_grant_id": {"anyOf": [{"type": "null"}, {"type": "string", "minLength": 8, "maxLength": 160}]},
+    "parent_compensation_grant_sha256": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/sha256"}]},
+    "approval_evidence_id": {"type": "string", "minLength": 8, "maxLength": 160},
+    "approval_evidence_sha256": {"$ref": "#/$defs/sha256"},
+    "approval_requirement": {"$ref": "#/$defs/approvalRequirement"},
+    "authorization_ttl_seconds": {"type": "integer", "minimum": 1, "maximum": 2592000},
+    "subject_user_sid": {"type": "string", "pattern": "^S-[0-9]+(?:-[0-9]+)+$"},
+    "plan_manifest_sha256": {"$ref": "#/$defs/sha256"},
+    "gate_dag_sha256": {"$ref": "#/$defs/sha256"},
+    "release_manifest_sha256": {"$ref": "#/$defs/sha256"},
+    "operation_catalog_sha256": {"$ref": "#/$defs/sha256"},
+    "config_fingerprint": {"$ref": "#/$defs/sha256"},
+    "routing_fingerprint": {"$ref": "#/$defs/sha256"},
+    "data_root_fingerprint": {"$ref": "#/$defs/sha256"},
+    "provider_scopes": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["provider_id", "model_id", "destination_id", "retention_class", "jurisdiction", "billing_currency", "max_documents", "max_characters", "max_input_tokens", "max_output_tokens", "max_cost_minor_units", "max_requests", "max_retries"],
+        "properties": {
+          "provider_id": {"type": "string", "minLength": 1, "maxLength": 120},
+          "model_id": {"type": "string", "minLength": 1, "maxLength": 160},
+          "destination_id": {"type": "string", "minLength": 1, "maxLength": 160},
+          "retention_class": {"type": "string", "minLength": 1, "maxLength": 120},
+          "jurisdiction": {"type": "string", "minLength": 1, "maxLength": 120},
+          "billing_currency": {"type": "string", "pattern": "^[A-Z]{3}$"},
+          "max_documents": {"type": "integer", "minimum": 0},
+          "max_characters": {"type": "integer", "minimum": 0},
+          "max_input_tokens": {"type": "integer", "minimum": 0},
+          "max_output_tokens": {"type": "integer", "minimum": 0},
+          "max_cost_minor_units": {"type": "integer", "minimum": 0},
+          "max_requests": {"type": "integer", "minimum": 0},
+          "max_retries": {"type": "integer", "minimum": 0}
+        }
+      }
+    },
+    "data_scopes": {
+      "type": "array", "uniqueItems": true,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["scope_id", "candidate_sources", "allowed_fields", "excluded_fields"],
+        "properties": {
+          "scope_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,159}$"},
+          "candidate_sources": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/candidateSource"}},
+          "allowed_fields": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1, "maxLength": 120}},
+          "excluded_fields": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1, "maxLength": 120}}
+        }
+      }
+    },
+    "revocation_authority_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,159}$"},
+    "revocation_anchor_path_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,199}$"},
+    "revocation_receipt_schema_sha256": {"$ref": "#/$defs/sha256"},
+    "maximum_revalidation_age_seconds": {"type": "integer", "minimum": 1, "maximum": 300},
+    "issued_at": {"$ref": "#/$defs/utcTimestamp"},
+    "expires_at": {"$ref": "#/$defs/utcTimestamp"},
+    "issuance_revocation_status": {"const": "VALID_NOT_REVOKED_AT_ISSUE"},
+    "issuance_revocation_checked_at": {"$ref": "#/$defs/utcTimestamp"},
+    "issuance_revocation_anchor_generation": {"type": "integer", "minimum": 0},
+    "issuance_revocation_anchor_sha256": {"$ref": "#/$defs/sha256"}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"intent_binding_mode": {"const": "EXACT_INTENT"}}, "required": ["intent_binding_mode"]},
+      "then": {"properties": {
+        "operation_intent_path": {"type": "string"}, "operation_intent_sha256": {"$ref": "#/$defs/sha256"}, "operation_intent_id": {"type": "string"},
+        "operation_intent_template_path": {"type": "null"}, "operation_intent_template_sha256": {"type": "null"}, "operation_intent_template_id": {"type": "null"},
+        "runtime_authorization_scope": {"type": "null"},
+        "authorization_ttl_seconds": {"maximum": 14400},
+        "authorized_actions": {"items": {"allOf": [{"$ref": "#/$defs/authorizedAction"}, {"properties": {"effect_binding_mode": {"const": "EXACT_EFFECT"}}}]}}
+      }}
+    },
+    {
+      "if": {"properties": {"intent_binding_mode": {"const": "RUNTIME_TEMPLATE_SPECIALIZATION"}}, "required": ["intent_binding_mode"]},
+      "then": {"properties": {
+        "authorization_kind": {"const": "STAGE_BOUND_OPERATION"}, "authorization_source": {"const": "EXPLICIT_USER_APPROVAL"},
+        "operation_intent_path": {"type": "null"}, "operation_intent_sha256": {"type": "null"}, "operation_intent_id": {"type": "null"},
+        "operation_intent_template_path": {"type": "string"}, "operation_intent_template_sha256": {"$ref": "#/$defs/sha256"}, "operation_intent_template_id": {"type": "string"},
+        "runtime_authorization_scope": {"$ref": "#/$defs/runtimeAuthorizationScope"},
+        "authorization_ttl_seconds": {"maximum": 2592000}, "maximum_revalidation_age_seconds": {"maximum": 60},
+        "approval_requirement": {"allOf": [{"$ref": "#/$defs/approvalRequirement"}, {"properties": {"purpose": {"const": "RUNTIME_TEMPLATE_AUTHORIZATION"}}}]},
+        "parent_authorization_id": {"type": "null"}, "parent_authorization_sha256": {"type": "null"}, "parent_compensation_grant_id": {"type": "null"}, "parent_compensation_grant_sha256": {"type": "null"},
+        "preauthorized_compensations": {"maxItems": 0},
+        "authorized_actions": {"minItems": 1, "maxItems": 1, "items": {"allOf": [{"$ref": "#/$defs/authorizedAction"}, {"properties": {"operation_node_id": {"const": "OP-RUNTIME-CYCLE"}, "stage_node_id": {"const": "OP-RUNTIME-CYCLE"}, "action_class": {"const": "CYCLE_EXECUTION"}, "effect_binding_mode": {"const": "TEMPLATE_MAXIMA"}}}]}}
+      }}
+    },
+    {
+      "if": {"properties": {"authorization_kind": {"const": "NOT_APPLICABLE_LOCAL_READ_ONLY"}}, "required": ["authorization_kind"]},
+      "then": {
+        "properties": {
+          "authorization_source": {"const": "SYSTEM_READ_ONLY_POLICY"},
+          "parent_authorization_id": {"type": "null"}, "parent_authorization_sha256": {"type": "null"}, "parent_compensation_grant_id": {"type": "null"}, "parent_compensation_grant_sha256": {"type": "null"},
+          "provider_scopes": {"maxItems": 0},
+          "preauthorized_compensations": {"maxItems": 0},
+          "approval_requirement": {"allOf": [{"$ref": "#/$defs/approvalRequirement"}, {"properties": {"purpose": {"const": "SYSTEM_READ_ONLY_POLICY"}}}]},
+          "authorized_actions": {"items": {"allOf": [{"$ref": "#/$defs/authorizedAction"}, {"properties": {"action_class": {"const": "READ_ONLY"}, "operation_node_id": {"enum": ["OP00", "OP11A"]}}}]}}
+        }
+      }
+    },
+    {
+      "if": {"properties": {"authorization_kind": {"const": "STAGE_BOUND_OPERATION"}}, "required": ["authorization_kind"]},
+      "then": {"properties": {"authorization_source": {"const": "EXPLICIT_USER_APPROVAL"}, "parent_authorization_id": {"type": "null"}, "parent_authorization_sha256": {"type": "null"}, "parent_compensation_grant_id": {"type": "null"}, "parent_compensation_grant_sha256": {"type": "null"}, "authorized_actions": {"items": {"allOf": [{"$ref": "#/$defs/authorizedAction"}, {"properties": {"action_class": {"not": {"enum": ["READ_ONLY", "ROLLBACK", "CIRCUIT_RESET"]}}, "operation_node_id": {"not": {"anyOf": [{"enum": ["OP00", "OP11A", "OP12B-RB", "OP12C-RB"]}, {"pattern": "^OP05R"}]}}}}]}}}}
+    },
+    {
+      "if": {"properties": {"authorization_kind": {"const": "BOUND_COMPENSATION"}}, "required": ["authorization_kind"]},
+      "then": {"properties": {"authorization_source": {"const": "PARENT_PREAUTHORIZED_COMPENSATION"}, "parent_authorization_id": {"type": "string"}, "parent_authorization_sha256": {"$ref": "#/$defs/sha256"}, "parent_compensation_grant_id": {"type": "string"}, "parent_compensation_grant_sha256": {"$ref": "#/$defs/sha256"}, "maximum_revalidation_age_seconds": {"maximum": 60}, "provider_scopes": {"maxItems": 0}, "data_scopes": {"maxItems": 0}, "preauthorized_compensations": {"maxItems": 0}, "approval_requirement": {"allOf": [{"$ref": "#/$defs/approvalRequirement"}, {"properties": {"purpose": {"const": "PARENT_PREAUTHORIZED_COMPENSATION"}}}]}, "authorized_actions": {"minItems": 1, "maxItems": 1, "items": {"allOf": [{"$ref": "#/$defs/authorizedAction"}, {"properties": {"action_class": {"const": "ROLLBACK"}}}]}}}}
+    },
+    {
+      "if": {"properties": {"authorization_kind": {"const": "CIRCUIT_RESET"}}, "required": ["authorization_kind"]},
+      "then": {"properties": {"authorization_source": {"const": "EXPLICIT_USER_APPROVAL"}, "parent_authorization_id": {"type": "null"}, "parent_authorization_sha256": {"type": "null"}, "parent_compensation_grant_id": {"type": "null"}, "parent_compensation_grant_sha256": {"type": "null"}, "provider_scopes": {"maxItems": 0}, "data_scopes": {"maxItems": 0}, "preauthorized_compensations": {"maxItems": 0}, "approval_requirement": {"allOf": [{"$ref": "#/$defs/approvalRequirement"}, {"properties": {"purpose": {"const": "GENERAL_EXPLICIT_OPERATION"}}}]}, "authorized_actions": {"minItems": 1, "maxItems": 1, "items": {"allOf": [{"$ref": "#/$defs/authorizedAction"}, {"properties": {"action_class": {"const": "CIRCUIT_RESET"}}}]}}}}
+    },
+    {
+      "if": {"properties": {"intent_binding_mode": {"const": "EXACT_INTENT"}, "authorization_kind": {"const": "STAGE_BOUND_OPERATION"}, "authorized_actions": {"contains": {"properties": {"operation_node_id": {"const": "OP12C"}}, "required": ["operation_node_id"]}}}, "required": ["intent_binding_mode", "authorization_kind", "authorized_actions"]},
+      "then": {"properties": {"authorized_actions": {"minItems": 1, "maxItems": 1}, "approval_requirement": {"allOf": [{"$ref": "#/$defs/approvalRequirement"}, {"properties": {"purpose": {"const": "FINAL_AUTOSTART_ACTIVATION"}}}]}}}
+    },
+    {
+      "if": {"properties": {"intent_binding_mode": {"const": "EXACT_INTENT"}, "authorization_kind": {"const": "STAGE_BOUND_OPERATION"}, "authorized_actions": {"not": {"contains": {"properties": {"operation_node_id": {"const": "OP12C"}}, "required": ["operation_node_id"]}}}}, "required": ["intent_binding_mode", "authorization_kind", "authorized_actions"]},
+      "then": {"properties": {"approval_requirement": {"allOf": [{"$ref": "#/$defs/approvalRequirement"}, {"properties": {"purpose": {"const": "GENERAL_EXPLICIT_OPERATION"}}}]}}}
+    }
+  ],
+  "x-semantic-rules": [
+    "Validate with Draft 2020-12 and a format checker; every timestamp must be a real UTC instant using the terminal Z form.",
+    "For EXACT_INTENT, canonical bytes at operation_intent_path hash to operation_intent_sha256 and contain operation_intent_id. operation_intent_action_sha256 hashes the exact canonical intent action bytes; the authorization repeats only the security-critical projection and every repeated field must match that action. The two JSON objects are not required to have identical shapes.",
+    "For RUNTIME_TEMPLATE_SPECIALIZATION, canonical template bytes hash to operation_intent_template_sha256. The template contains no candidate-specific future effect. Before every cycle, a fresh exact intent is sealed and must be a strict subset of the authorized roots, fields, providers, destinations, action class, per-cycle maxima, fingerprints, generations, and forbidden classes; the cycle contract binds that exact intent hash. No runtime field may widen the template.",
+    "approval_evidence_id/sha256 identify the pre-approval proposal or policy evidence, never a future user-approval receipt. approval_requirement freezes the exact purpose and approval-subject digest and declares that a later receipt must bind this authorization hash. The later purpose-bound receipt points one-way to this manifest; the manifest never points to that receipt, preventing an authorization/receipt hash cycle.",
+    "authorization_kind must equal the operation catalog required_authorization_kind for every authorized operation node; no other kind is interchangeable.",
+    "Action IDs, operation-node and stage-node pairs, and scope IDs are unique. Multiple structurally distinct entries with the same semantic key are rejected.",
+    "Each finite forward action binds the exact process generation and effect digest. The runtime action binds a canonical maxima/template digest plus the monotonic protected process-generation policy. Every action also binds the operation-contract template, control generation and circuit generation; registry creation additionally binds exact decoded Run bytes.",
+    "For a catalog operation that requires compensation, its STAGE_BOUND_OPERATION authorization copies the intent's compensation grants byte-for-byte, one grant per failure-window branch. grant_sha256 hashes canonical grant bytes excluding only grant_sha256; action_projection_sha256 hashes the compensation action projection excluding only that field. Each grant binds one exact effect/branch/trigger/state/generation/registry/control/file bound and a protected trigger-current process-generation policy.",
+    "A BOUND_COMPENSATION manifest identifies one immutable parent and grant. Its fresh exact child action binds the current process generation proven by trigger evidence and otherwise matches the grant action projection/effect exactly; its receipt revalidates child, parent and grant. Self-parenting, ancestry cycles, substitutions, branch widening and unrelated authorizations are rejected.",
+    "issued_at <= issuance_revocation_checked_at < expires_at and the issuance status/anchor are historical evidence only. Every operation contract carries a fresh receipt validating against the frozen revocation authority ID, protected anchor path, receipt schema and maximum age; the caller cannot substitute a source or extend valid_until. This immutable manifest cannot self-prove that it remains unrevoked.",
+    "For each data scope, DOCUMENT candidate tuples are indivisible and document_id, source_id, and binding tuple keys are unique. ROOT_ONLY is allowed only for an explicitly declared A1 discovery action or a runtime template root; the fresh cycle intent must replace it with exact DOCUMENT tuples before document processing or egress.",
+    "allowed_fields and excluded_fields are disjoint after exact case-sensitive canonicalization. Empty allowed_fields authorizes no field, not all fields.",
+    "Provider scopes are unique by (provider_id, model_id, destination_id); duplicate or conflicting caps are invalid. max_requests includes initial and retry calls as declared by the request policy, max_retries cannot imply more requests than max_requests, and all providers in one runtime authorization use billing_currency equal to runtime budget_currency. Runtime template per-cycle maxima cannot exceed provider maxima, and global aggregate durable daily/monthly counters may only reduce what remains authorized.",
+    "The union of data and provider scopes must be sufficient for every authorized action but must not include an unused document, root, provider, destination, field, or operation.",
+    "CIRCUIT_RESET authorizes only its single reset action and can never authorize resume, arm, login, registry creation, final activation, a worker cycle, or egress.",
+    "NOT_APPLICABLE_LOCAL_READ_ONLY still binds an exact intent and action; approval_evidence identifies the frozen system policy rather than a user approval. It permits only OP00 or OP11A read-only effects and never grants an implicit production mutation.",
+    "Only RUNTIME_TEMPLATE_SPECIALIZATION may authorize OP-RUNTIME-CYCLE. Its template validates against operation_intent_template.schema.json; repeated data/provider/maxima/budget/currency/refresh and process-generation-policy fields plus the action template hash exactly match. The runtime action uses MONOTONIC_CURRENT_PROTECTED_STATE rather than a reusable exact generation. Its four global aggregate durable budget IDs are distinct, maxima do not exceed provider/data scopes, and any listed refresh trigger invalidates authorization before preflight or side effects.",
+    "expires_at - issued_at equals authorization_ttl_seconds. EXACT_INTENT authorization TTL is at most four hours and may be narrowed by its operation policy; runtime template TTL is at most 30 days. A compensation never outlives its parent authorization or compensation grant.",
+    "Forward action IDs, compensation grant IDs, grant action IDs and branch keys are unique both within and across arrays. Only a catalog operation whose contract_requires includes compensation_binding may have grants; the exact required branch set is present once each and no extra branch is allowed."
+  ]
+}

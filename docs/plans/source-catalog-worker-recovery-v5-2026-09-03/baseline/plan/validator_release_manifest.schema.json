@@ -1,0 +1,130 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:company-wiki:source-catalog-worker-recovery:validator-release-manifest:v2",
+  "title": "Hermetic gate-ledger validator release manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "utc": {"type": "string", "format": "date-time", "pattern": "^[0-9]{4}-(0[1-9]|1[0-2])-([0-2][0-9]|3[01])T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]{1,9})?Z$"},
+    "artifact": {
+      "type": "object", "additionalProperties": false,
+      "required": ["artifact_id", "path_id", "sha256", "size_bytes", "file_identity_sha256", "security_descriptor_binary_sha256", "reparse_point_observed"],
+      "properties": {
+        "artifact_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,159}$"},
+        "path_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,239}$"},
+        "sha256": {"$ref": "#/$defs/sha256"},
+        "size_bytes": {"type": "integer", "minimum": 1},
+        "file_identity_sha256": {"$ref": "#/$defs/sha256"},
+        "security_descriptor_binary_sha256": {"$ref": "#/$defs/sha256"},
+        "reparse_point_observed": {"const": false}
+      }
+    }
+  },
+  "required": [
+    "schema_version", "release_id", "plan_revision", "generated_at", "implementation_commit",
+    "plan_manifest_sha256", "gate_dag_sha256", "bootstrap_verifier_manifest", "bootstrap_verifier_manifest_sha256",
+    "validator_entrypoint", "validator_tests", "interpreter", "dependency_lock", "distributions",
+    "environment_policy", "schema_registry", "schema_registry_tree_sha256", "normative_inputs",
+    "fixture_tree_sha256", "vector_catalog_sha256", "cli_contract", "runtime_probe_report",
+    "self_test_report", "import_trace_report", "launch_handle_report", "sealed"
+  ],
+  "properties": {
+    "schema_version": {"const": "validator-release-manifest-v2"},
+    "release_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,159}$"},
+    "plan_revision": {"const": "v4"},
+    "generated_at": {"$ref": "#/$defs/utc"},
+    "implementation_commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "plan_manifest_sha256": {"$ref": "#/$defs/sha256"},
+    "gate_dag_sha256": {"$ref": "#/$defs/sha256"},
+    "bootstrap_verifier_manifest": {"allOf": [{"$ref": "#/$defs/artifact"}, {"properties": {"path_id": {"const": "PLAN_BOOTSTRAP_VERIFIER_MANIFEST"}}}]},
+    "bootstrap_verifier_manifest_sha256": {"$ref": "#/$defs/sha256"},
+    "validator_entrypoint": {"allOf": [{"$ref": "#/$defs/artifact"}, {"properties": {"path_id": {"const": "VALIDATOR_ENTRYPOINT"}}}]},
+    "validator_tests": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/artifact"}},
+    "interpreter": {
+      "type": "object", "additionalProperties": false,
+      "required": ["version", "executable", "python_dll", "stdlib_tree", "encodings_tree", "pyvenv_cfg", "launch_flags", "isolated_mode", "site_enabled", "bytecode_writes_enabled", "expected_sys_path_ids", "vendor_injection_policy", "startup_modules_forbidden"],
+      "properties": {
+        "version": {"type": "string", "pattern": "^3\\.[0-9]+\\.[0-9]+$"},
+        "executable": {"$ref": "#/$defs/artifact"},
+        "python_dll": {"$ref": "#/$defs/artifact"},
+        "stdlib_tree": {"$ref": "#/$defs/artifact"},
+        "encodings_tree": {"$ref": "#/$defs/artifact"},
+        "pyvenv_cfg": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/artifact"}]},
+        "launch_flags": {"const": ["-I", "-S", "-B"]},
+        "isolated_mode": {"const": true},
+        "site_enabled": {"const": false},
+        "bytecode_writes_enabled": {"const": false},
+        "expected_sys_path_ids": {"const": ["VERIFIED_STDLIB", "VERIFIED_VENDOR"]},
+        "vendor_injection_policy": {"const": "ENTRYPOINT_INSERT_EXACT_VERIFIED_VENDOR_PATH_NO_SITE_ADDSITEDIR"},
+        "startup_modules_forbidden": {"const": ["site", "sitecustomize", "usercustomize"]}
+      }
+    },
+    "dependency_lock": {"$ref": "#/$defs/artifact"},
+    "distributions": {
+      "type": "array", "minItems": 1, "uniqueItems": true,
+      "contains": {"properties": {"name": {"const": "jsonschema"}}, "required": ["name"]}, "minContains": 1,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["name", "version", "source_wheel_sha256", "installed_tree", "import_modules"],
+        "properties": {
+          "name": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$"},
+          "version": {"type": "string", "minLength": 1, "maxLength": 80},
+          "source_wheel_sha256": {"$ref": "#/$defs/sha256"},
+          "installed_tree": {"$ref": "#/$defs/artifact"},
+          "import_modules": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "object", "additionalProperties": false, "required": ["module", "resolved_path_id", "sha256"], "properties": {"module": {"type": "string", "pattern": "^[A-Za-z_][A-Za-z0-9_.]*$"}, "resolved_path_id": {"type": "string", "minLength": 8, "maxLength": 240}, "sha256": {"$ref": "#/$defs/sha256"}}}}
+        }
+      }
+    },
+    "environment_policy": {
+      "type": "object", "additionalProperties": false,
+      "required": ["network_allowed", "dynamic_import_allowed", "project_business_import_allowed", "plugin_loading_allowed", "cwd_import_allowed", "environment_allowlist", "unexpected_distribution_count", "unexpected_sys_path_count", "unexpected_import_count"],
+      "properties": {
+        "network_allowed": {"const": false},
+        "dynamic_import_allowed": {"const": false},
+        "project_business_import_allowed": {"const": false},
+        "plugin_loading_allowed": {"const": false},
+        "cwd_import_allowed": {"const": false},
+        "environment_allowlist": {"const": ["SYSTEMROOT", "WINDIR", "TEMP", "TMP"]},
+        "unexpected_distribution_count": {"const": 0},
+        "unexpected_sys_path_count": {"const": 0},
+        "unexpected_import_count": {"const": 0}
+      }
+    },
+    "schema_registry": {"$ref": "#/$defs/artifact"},
+    "schema_registry_tree_sha256": {"$ref": "#/$defs/sha256"},
+    "normative_inputs": {
+      "type": "array", "minItems": 12, "uniqueItems": true, "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["role", "artifact"],
+        "properties": {
+          "role": {"enum": ["PLAN_MANIFEST", "GATE_DAG", "OPERATION_CATALOG", "FIXTURE_MANIFEST_SCHEMA", "FIXTURE_MANIFEST_INSTANCE", "SCENARIO_FIXTURE_SCHEMA", "VECTOR_SCHEMA", "VECTOR_INSTANCE", "OPAQUE_ROOT_CATALOG", "EVIDENCE_SINK_CATALOG", "JOURNAL_RECORD_SCHEMA", "EXECUTION_RECEIPT_SCHEMA", "LEDGER_HEAD_ANCHOR_SCHEMA", "BUDGET_BUNDLE_SCHEMA", "BUDGET_SETTLEMENT_SCHEMA", "REVIEW_SCHEMA", "REVIEW_CONFIRMATION_SCHEMA"]},
+          "artifact": {"$ref": "#/$defs/artifact"}
+        }
+      }
+    },
+    "fixture_tree_sha256": {"$ref": "#/$defs/sha256"},
+    "vector_catalog_sha256": {"$ref": "#/$defs/sha256"},
+    "cli_contract": {
+      "type": "object", "additionalProperties": false,
+      "required": ["required_arguments", "forbidden_ambient_inputs", "clock_policy"],
+      "properties": {
+        "required_arguments": {"const": ["--ledger", "--ledger-schema", "--dag", "--operation-catalog", "--schema-registry", "--release-manifest", "--fixture-manifest", "--scenario", "--vectors", "--vector-schema", "--head-anchor", "--clock"]},
+        "forbidden_ambient_inputs": {"const": ["NETWORK", "CWD_SCHEMA", "CWD_FIXTURE", "USER_SITE", "SYSTEM_SITE", "PYTHONPATH", "PYTHONHOME", "PROJECT_BUSINESS_IMPORT"]},
+        "clock_policy": {"const": "EXPLICIT_UTC_FIXTURE_OR_PROTECTED_SYSTEM_CLOCK"}
+      }
+    },
+    "runtime_probe_report": {"$ref": "#/$defs/artifact"},
+    "self_test_report": {"$ref": "#/$defs/artifact"},
+    "import_trace_report": {"$ref": "#/$defs/artifact"},
+    "launch_handle_report": {"$ref": "#/$defs/artifact"},
+    "sealed": {"const": true}
+  },
+  "x-semantic-rules": [
+    "The bootstrap verifier validates this manifest and every pre-entry artifact before Python starts, retains immutable identities through launch, and rejects any missing, extra, moved, reparse-linked or ACL-drifted artifact.",
+    "bootstrap_verifier_manifest_sha256 equals bootstrap_verifier_manifest.sha256. schema_registry_tree_sha256 and all normative inputs equal the closed registry and exact CLI files; network/filesystem fallback is impossible.",
+    "Distribution names, modules, artifact IDs and path IDs are unique after Windows case folding. distributions are the complete transitive vendor closure and exactly match dependency_lock.",
+    "runtime_probe_report, self_test_report, import_trace_report and launch_handle_report are immutable result artifacts, not self-reported booleans. Their exact tests include malicious .pth/sitecustomize, CWD shadowing, DLL/stdlib/vendor drift, reparse/TOCTOU, missing schema/fixture/vector/lock and unexpected import.",
+    "This release is created after I00L bytes exist. G00L reviewers recompute all hashes from held file identities and confirm successful -I -S -B launch in an empty non-reparse directory."
+  ]
+}

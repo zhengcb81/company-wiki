@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "plan_revision": "v3",
+  "frozen_at": "2026-08-22T17:47:50.6068420+01:00",
+  "plan_directory": "docs/plans/source-catalog-worker-recovery-2026-08-22",
+  "plan_freeze_git_head": "26a6b22f80ae964892d3f3f44fab364e65276583",
+  "review_state_at_freeze": "FROZEN_FOR_INDEPENDENT_REVIEW",
+  "investigation_source": {
+    "path": "docs/worker-investigation-2026-08-20.md",
+    "sha256": "8e6166ba063bc281ca1fa5da3c0743b895e4d93b6f2957de3cbd0b6938a95be6"
+  },
+  "core_file_count": 13,
+  "core_files": [
+    {
+      "path": "README.md",
+      "sha256": "a360bbe723b7561ec944b408a74d79f985f85600d4dd0bce79083d76137b8c1d"
+    },
+    {
+      "path": "task_plan.md",
+      "sha256": "d228803078ba11343ee14feccf017a263f80bfeb0507740f625241fa8bb4d2d1"
+    },
+    {
+      "path": "findings.md",
+      "sha256": "3e9a808bfe181cd32b1d517cc315938a91a218c8ec6bfe8290c7f24140607911"
+    },
+    {
+      "path": "execution_playbook.md",
+      "sha256": "93098ef834d3d94e9334618aba422f86a901250492af0951fce0cb3f93e98fd7"
+    },
+    {
+      "path": "test_acceptance_plan.md",
+      "sha256": "6762ec2a5ad3892bb17ca7d611536763b6ee3bc532aa36648b98f56538c1a818"
+    },
+    {
+      "path": "agent_review_gates.md",
+      "sha256": "6d137f3e0ce159c42c78372d301d0f7ae14a7e37b3ed118309c5d60c1bfe4cb0"
+    },
+    {
+      "path": "gate_state_machine.md",
+      "sha256": "c403970a49b3e5d4a487220e57288ec6b167d6814041b89c5dbda0525c4cef32"
+    },
+    {
+      "path": "acceptance_thresholds.md",
+      "sha256": "05f758f9e28f4ed0214d711792d839792330626f2d96dfdde22537471ec4054c"
+    },
+    {
+      "path": "rollout_rollback_runbook.md",
+      "sha256": "6a397e8b6ed29810d7aef8685ba49715b6e6f264d80ce5fac7dfab3184443fb5"
+    },
+    {
+      "path": "traceability_matrix.md",
+      "sha256": "46997a9279ec5b5cb591b87453f9abcfa91779f216529717d3bd36ee50bb3fbc"
+    },
+    {
+      "path": "implementation_agent_prompts.md",
+      "sha256": "3e2e70231be2aa35c8b233dc793d0c08f08132b2a0f6017a0254ecd777467b35"
+    },
+    {
+      "path": "plan_review_findings.md",
+      "sha256": "4ac22fa52c31a6b627b56527c99ba9e2a6873775cfa39e171ce34c2b9c2fe52c"
+    },
+    {
+      "path": "gate_ledger.schema.json",
+      "sha256": "b0f672e1e9a12ecd1539b9e9553ea255ba9ac99ce0b6e400fe0d1b5810e3fd26"
+    }
+  ],
+  "coverage_counts": {
+    "stable_test_ids": 189,
+    "requirements": 46,
+    "risks": 30,
+    "plan_review_findings": 53
+  },
+  "excluded_dynamic_or_self_referential_paths": [
+    "plan_manifest.v3.json",
+    "plan_review_revision.md",
+    "progress.md",
+    "gate_ledger.jsonl",
+    "evidence/",
+    "reviews/",
+    "decisions/"
+  ],
+  "immutability_policy": "Do not overwrite or append to this file. A semantic plan change requires a new plan_manifest.vN.json filename and independent re-review."
+}

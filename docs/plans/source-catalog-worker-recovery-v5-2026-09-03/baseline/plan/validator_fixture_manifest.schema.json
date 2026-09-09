@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:company-wiki:source-catalog-worker-recovery:validator-fixture-manifest:v5",
+  "title": "Frozen composite validator scenario and mutation catalog",
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "utc": {"type": "string", "format": "date-time", "pattern": "^[0-9]{4}-(0[1-9]|1[0-2])-([0-2][0-9]|3[01])T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]{1,9})?Z$"},
+    "pointer": {"type": "string", "pattern": "^(?:/(?:[^~/]|~0|~1)*)*$"},
+    "schemaBinding": {
+      "type": "object", "additionalProperties": false,
+      "required": ["schema_id", "schema_path", "schema_sha256", "size_bytes"],
+      "properties": {
+        "schema_id": {"type": "string", "pattern": "^urn:company-wiki:source-catalog-worker-recovery:[a-z0-9-]+:v[1-9][0-9]*$"},
+        "schema_path": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*\\.schema\\.json$"},
+        "schema_sha256": {"$ref": "#/$defs/sha256"},
+        "size_bytes": {"type": "integer", "minimum": 2}
+      }
+    }
+  },
+  "required": ["schema_version", "fixture_manifest_id", "generated_at", "generator_commit", "generator_script_sha256", "plan_manifest_sha256", "gate_dag_sha256", "validator_contract_sha256", "schema_registry_sha256", "scenario_schema_sha256", "schema_bindings", "reason_rule_catalog", "base_scenarios", "mutation_cases", "fixture_tree_sha256", "sealed"],
+  "properties": {
+    "schema_version": {"const": "validator-fixture-manifest-v2"},
+    "fixture_manifest_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,159}$"},
+    "generated_at": {"$ref": "#/$defs/utc"},
+    "generator_commit": {"$ref": "#/$defs/commit"},
+    "generator_script_sha256": {"$ref": "#/$defs/sha256"},
+    "plan_manifest_sha256": {"$ref": "#/$defs/sha256"},
+    "gate_dag_sha256": {"$ref": "#/$defs/sha256"},
+    "validator_contract_sha256": {"$ref": "#/$defs/sha256"},
+    "schema_registry_sha256": {"$ref": "#/$defs/sha256"},
+    "scenario_schema_sha256": {"$ref": "#/$defs/sha256"},
+    "schema_bindings": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/schemaBinding"}},
+    "reason_rule_catalog": {
+      "type": "array", "minItems": 1, "uniqueItems": true,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["rule_id", "reason_code", "validation_stage", "instance_pointer_pattern", "schema_pointer", "precedence"],
+        "properties": {
+          "rule_id": {"type": "string", "pattern": "^[A-Z][A-Z0-9._-]{3,79}$"},
+          "reason_code": {"type": "string", "pattern": "^GLV-E[0-9]{3}$"},
+          "validation_stage": {"enum": ["ACCEPT", "FIXTURE_EXPANSION", "DOCUMENT_SHAPE", "SCHEMA", "HASH_DEPENDENCY", "HASH_CHAIN", "DAG", "REVIEW_POLICY", "ARTIFACT_INTEGRITY", "BOOTSTRAP_POLICY", "OPERATION_POLICY", "AUTHORIZATION_POLICY", "JOURNAL_POLICY", "BUDGET_POLICY", "STATE_MACHINE", "COMPENSATION_POLICY", "TEST_REGISTRY_POLICY"]},
+          "instance_pointer_pattern": {"type": "string", "minLength": 1, "maxLength": 500},
+          "schema_pointer": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/pointer"}]},
+          "precedence": {"type": "integer", "minimum": 1}
+        }
+      }
+    },
+    "base_scenarios": {
+      "type": "array", "minItems": 1, "uniqueItems": true,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["scenario_id", "scenario_kind", "scenario_path", "scenario_sha256", "tree_root_sha256", "expected_result", "coverage_role"],
+        "properties": {
+          "scenario_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,159}$"},
+          "scenario_kind": {"enum": ["SINGLE_ARTIFACT", "LEDGER_TRANSCRIPT", "BOOTSTRAP_TRANSCRIPT", "OPERATION_BUNDLE", "JOURNAL_RECOVERY", "RUNTIME_CYCLE"]},
+          "scenario_path": {"type": "string", "pattern": "^validator-fixtures/base/[A-Za-z0-9][A-Za-z0-9._-]{0,99}/scenario\\.json$"},
+          "scenario_sha256": {"$ref": "#/$defs/sha256"},
+          "tree_root_sha256": {"$ref": "#/$defs/sha256"},
+          "expected_result": {"const": "OK"},
+          "coverage_role": {"type": "string", "pattern": "^[A-Z][A-Z0-9_]{2,79}$"}
+        }
+      }
+    },
+    "mutation_cases": {
+      "type": "array", "minItems": 1, "uniqueItems": true,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["case_id", "base_scenario_id", "mutation_id", "materialized_scenario_path", "materialized_scenario_sha256", "materialized_tree_root_sha256", "expected_primary_rule_id", "expected_primary_reason_code", "expected_validation_stage", "expected_instance_pointer", "expected_schema_pointer", "violated_primary_rule_count", "secondary_errors_allowed"],
+        "properties": {
+          "case_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,159}$"},
+          "base_scenario_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,159}$"},
+          "mutation_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,159}$"},
+          "materialized_scenario_path": {"type": "string", "pattern": "^validator-fixtures/mutated/[A-Za-z0-9][A-Za-z0-9._-]{0,99}/scenario\\.json$"},
+          "materialized_scenario_sha256": {"$ref": "#/$defs/sha256"},
+          "materialized_tree_root_sha256": {"$ref": "#/$defs/sha256"},
+          "expected_primary_rule_id": {"type": "string", "pattern": "^[A-Z][A-Z0-9._-]{3,79}$"},
+          "expected_primary_reason_code": {"type": "string", "pattern": "^GLV-E[0-9]{3}$"},
+          "expected_validation_stage": {"type": "string", "minLength": 2, "maxLength": 80},
+          "expected_instance_pointer": {"$ref": "#/$defs/pointer"},
+          "expected_schema_pointer": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/pointer"}]},
+          "violated_primary_rule_count": {"const": 1},
+          "secondary_errors_allowed": {"const": false}
+        }
+      }
+    },
+    "fixture_tree_sha256": {"$ref": "#/$defs/sha256"},
+    "sealed": {"const": true}
+  },
+  "x-semantic-rules": [
+    "T00L builds all complete scenarios and materialized mutations; D00L validates and freezes this manifest before I00L. The release later binds the unchanged manifest/tree hashes.",
+    "schema_bindings exactly equal the scenario member schema closure and the closed schema registry. Schema IDs and case-folded paths are unique; every external reference resolves only through the registry.",
+    "Every base scenario validates against the scenario schema, every member validates against its own schema and an actual validator run returns OK. A base failure blocks I00L.",
+    "Each mutation case selects one mutation declared inside its base scenario. Pointer existence/type, recomputation closure/order and exact resulting bytes/tree are verified during materialization; missing/stale pointers or earlier errors fail construction.",
+    "Actual primary rule/code/stage/pointer exactly equals the case. Secondary errors are forbidden. Case IDs, scenario IDs, mutation IDs, paths and final tree roots are unique under their declared identity rules.",
+    "All scenario execution uses new empty tmp roots with audited denial of production filesystem, DB, registry, process, config, journal, budget store and network access."
+  ]
+}

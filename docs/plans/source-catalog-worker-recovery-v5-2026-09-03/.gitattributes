@@ -1,0 +1,4 @@
+# Preserve exact bytes only within this v5 planning directory.
+# This does not lock files or replace a stable review boundary.
+* -text -eol -filter -working-tree-encoding
+

@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:company-wiki:source-catalog-worker-recovery:gate-ledger-transcript:v1",
+  "title": "Ordered gate-ledger transcript fixture and validation input",
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  },
+  "required": ["schema_version", "transcript_id", "plan_manifest_sha256", "gate_dag_sha256", "records", "transcript_sha256", "sealed"],
+  "properties": {
+    "schema_version": {"const": "gate-ledger-transcript-v1"},
+    "transcript_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,159}$"},
+    "plan_manifest_sha256": {"$ref": "#/$defs/sha256"},
+    "gate_dag_sha256": {"$ref": "#/$defs/sha256"},
+    "records": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "urn:company-wiki:source-catalog-worker-recovery:gate-ledger:v4"}},
+    "transcript_sha256": {"$ref": "#/$defs/sha256"},
+    "sealed": {"const": true}
+  },
+  "x-semantic-rules": [
+    "records are the exact ordered ledger JSONL records represented as parsed objects; seq starts at one and increases by one, each prev_record_sha256 matches the prior canonical record, and supersession never rewrites history.",
+    "Every record repeats the same plan_manifest_sha256 and gate_dag_sha256 as this wrapper. transcript_sha256 is RFC 8785 JCS SHA-256 of this object excluding transcript_sha256.",
+    "This wrapper exists so composite validator fixtures can address /records deterministically. Production storage remains append-only JSONL plus its protected head anchor; the wrapper is not a second mutable ledger."
+  ]
+}

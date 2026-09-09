@@ -1,0 +1,123 @@
+{
+  "observed_utc": "2026-09-07T06:49:45.8566392Z",
+  "synced_document_count": 23,
+  "links_checked": 251,
+  "missing_links": [],
+  "documents": [
+    {
+      "path": "C:/Users/郑曾波/Projects/company-wiki/PLANNING_STATUS.md",
+      "sha256": "191c9e421ec8aef8e073b6a920d7b32798ce321f76d2ef5a48a9482d0aa59137"
+    },
+    {
+      "path": "C:/Users/郑曾波/Projects/revenue-forecast/PLANNING_STATUS.md",
+      "sha256": "99c31a37742068f35a8b5684203417fca8316f6a93e0ca22a0b5a12fd52060da"
+    },
+    {
+      "path": "C:/Users/郑曾波/Projects/filing-fetch/PLANNING_STATUS.md",
+      "sha256": "21b9c28e4f5a5e7790b2f3e0b3136063ed2cb337ee5cf7ecb0ca130ef5b6550c"
+    },
+    {
+      "path": "C:/Users/郑曾波/Projects/filing-fetch/e2e/E2E_DESIGN.md",
+      "sha256": "b805bbfdac660f9c4c2434510c615eb1ce7a3f413106ac70be6957706930cdbc"
+    },
+    {
+      "path": "C:/Users/郑曾波/Projects/revenue-forecast/assurance/runs/2026-09-02_remaining-gap-closure/task_plan.md",
+      "sha256": "b33b1159a4650b9211e7d7d5992d70eb586186b7de72148b3d37166373dd7073"
+    },
+    {
+      "path": "C:/Users/郑曾波/Projects/revenue-forecast/assurance/runs/2026-09-02_remaining-gap-closure/findings.md",
+      "sha256": "0a89e154042aaeac22228a269f61f48930dd62cda12140cbd93b5edbec909256"
+    },
+    {
+      "path": "C:/Users/郑曾波/Projects/revenue-forecast/assurance/runs/2026-09-02_remaining-gap-closure/progress.md",
+      "sha256": "98a02d096d4eeb32808c76a7d82cb8c4b02f36f2fe815c327d1179b4d3c5405d"
+    },
+    {
+      "path": "C:/Users/郑曾波/Projects/revenue-forecast/assurance/runs/2026-09-02_remaining-gap-closure/gp008_009_deployment_guide.md",
+      "sha256": "ffb7e1a0222a1aef70b13bf107795a7887e46a95793f89b6c831f9be1e0972c2"
+    },
+    {
+      "path": "C:/Users/郑曾波/Projects/revenue-forecast/assurance/runs/2026-09-02_remaining-gap-closure/gp010_cohort_cutover_request.md",
+      "sha256": "0fe1b571b07f7e0fdd680cd80c17d560eb2676c979512f658076f6c54af742be"
+    },
+    {
+      "path": "C:/Users/郑曾波/Projects/revenue-forecast/assurance/runs/2026-09-02_remaining-gap-closure/n1_r9_removal_request.md",
+      "sha256": "6e390036a5ca9ce06080c209f8545121c5805c2289825dedf7bd9f737a12a416"
+    },
+    {
+      "path": "C:/Users/郑曾波/Projects/revenue-forecast/assurance/runs/2026-09-02_remaining-gap-closure/ci_root_fix.md",
+      "sha256": "fb907234b22d2452c76a9f65c924cc98dd4ef221a84a3f6cbd5e538c7c33e91b"
+    },
+    {
+      "path": "C:/Users/郑曾波/Projects/company-wiki/docs/plans/catalog-space-remediation/CURRENT_STATUS.md",
+      "sha256": "505d5c33051dba2e83f8adc0973b1b9e04f4f83ea78e08f402b7d83ce6b08fa2"
+    },
+    {
+      "path": "C:/Users/郑曾波/Projects/company-wiki/docs/plans/core-section-extraction/CURRENT_STATUS.md",
+      "sha256": "a6bda9ed63db6dc9d559642b1c0ff0eb4bbf4911b72eb3d176fb8474cfe8f350"
+    },
+    {
+      "path": "C:/Users/郑曾波/Projects/company-wiki/docs/plans/portfolio-reuse-automatic/CURRENT_STATUS.md",
+      "sha256": "1a9523abeea7ae56a7e7e27fc07529e3f09b1783bc66d86689b59c9186701ce2"
+    },
+    {
+      "path": "C:/Users/郑曾波/Projects/company-wiki/docs/plans/portfolio-reuse-fix/CURRENT_STATUS.md",
+      "sha256": "4932808ef52ef62fcc319ecf21f77a3d3a879727cda692f655ee965b7ac35043"
+    },
+    {
+      "path": "C:/Users/郑曾波/Projects/company-wiki/docs/archive/CURRENT_STATUS.md",
+      "sha256": "05d545d6c6eb96a842905a3026dd311ad6021f788bce98184f27fc9aaf7ab7fb"
+    },
+    {
+      "path": "C:/Users/郑曾波/Projects/company-wiki/docs/plans/source-catalog-worker-recovery-v5-2026-09-03/README.md",
+      "sha256": "52f96eaac24b41179727dc79e01cef59b09c7b2f2f92547f2ba0c0645e5949b1"
+    },
+    {
+      "path": "C:/Users/郑曾波/Projects/company-wiki/docs/plans/source-catalog-worker-recovery-v5-2026-09-03/task_plan.md",
+      "sha256": "194e0dfd2a9512218181b57df84b1eca4baadd54e780e7dbd2744b7fd67d2a19"
+    },
+    {
+      "path": "C:/Users/郑曾波/Projects/company-wiki/docs/plans/source-catalog-worker-recovery-v5-2026-09-03/findings.md",
+      "sha256": "9d50073ccf28c59c7e1eef38daf7b1bae9c1417673c174ede4170e8104906ab2"
+    },
+    {
+      "path": "C:/Users/郑曾波/Projects/company-wiki/docs/plans/source-catalog-worker-recovery-v5-2026-09-03/progress.md",
+      "sha256": "da25ec6bdd601a5f3f49c3fbc5258540a50368f131fcf9488bcc890fbe9d6fb0"
+    },
+    {
+      "path": "C:/Users/郑曾波/Projects/company-wiki/docs/plans/planning-sync-2026-09-04/task_plan.md",
+      "sha256": "87da3e556135419ed0494ad70ae9a679acea12d84e38b3107b7f1c30ccd5eff8"
+    },
+    {
+      "path": "C:/Users/郑曾波/Projects/company-wiki/docs/plans/planning-sync-2026-09-04/findings.md",
+      "sha256": "8827b7eb7744002f111bbc54ae8f5d60908bec387a5d15fddbaf60faea74f5e2"
+    },
+    {
+      "path": "C:/Users/郑曾波/Projects/company-wiki/docs/plans/planning-sync-2026-09-04/progress.md",
+      "sha256": "293afa2451fdd5640e3d114ac4abf37c8ca3bae7fec536b1a9e4f9531d2d42ca"
+    }
+  ],
+  "scope": "23 authorized current planning documents; frozen history intentionally not rewritten. Link check includes current audit markdown. This is not product validation.",
+  "frozen_inputs": {
+    "entries": 44,
+    "sources": 3,
+    "unique_files": 46,
+    "hash_errors": []
+  },
+  "v5_import": {
+    "files": 54,
+    "verified": true,
+    "formal_freeze": false
+  },
+  "plan_validation": {
+    "gates": 95,
+    "work_packages": 15,
+    "negative_cases_rejected": [
+      "cycle",
+      "unknown",
+      "empty"
+    ],
+    "passed": true,
+    "product_execution": false
+  }
+}

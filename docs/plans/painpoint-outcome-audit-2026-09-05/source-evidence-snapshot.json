@@ -1,0 +1,216 @@
+{
+  "observed_utc": "2026-09-06T14:18:59.9810402Z",
+  "scope": "selected diagnostic source bytes; excludes production DB hashes and full repository enumeration",
+  "files": [
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\worker.py",
+      "bytes": 48075,
+      "mtime_utc": "2026-08-07T09:45:08.5121617Z",
+      "sha256": "e83179915333eb472807b15a0580d93dcf280caadc31b0099988a3b744c469c6"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\normalizer.py",
+      "bytes": 80019,
+      "mtime_utc": "2026-08-19T20:53:17.4939959Z",
+      "sha256": "5015486e7a322914a9f3acb5d011e9d0b9fd5ed8350eb2eb459b41ac865e13c8"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\llm_summarizer.py",
+      "bytes": 24572,
+      "mtime_utc": "2026-09-02T23:21:25.5153889Z",
+      "sha256": "13ff33b76547d39dc72e33c55fda6fb397aad59646daa3afa17b474098c27f12"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\section_extractor.py",
+      "bytes": 17019,
+      "mtime_utc": "2026-09-04T20:57:00.0717554Z",
+      "sha256": "4a39ac9f9da61f2d66630bc8168f37c56f09d519568dd9e4799f8dfdcf17f72c"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\prune_retired_evidence.py",
+      "bytes": 4658,
+      "mtime_utc": "2026-08-07T09:24:57.3806294Z",
+      "sha256": "2358c73b82da65e5292998e3dba71c6132eebab1ab6c88a224a736c1e5a8ae46"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\archive_retired_evidence.py",
+      "bytes": 3291,
+      "mtime_utc": "2026-08-07T08:15:49.2886967Z",
+      "sha256": "143fef01fade43a5e6ae5c733d86e5ea6081482547c2560fc872990a9d8f53e0"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\resolver.py",
+      "bytes": 56769,
+      "mtime_utc": "2026-08-18T18:54:08.2611640Z",
+      "sha256": "6962b258ce198f1927fb2a63205e3c2f3572f5571089038ec33939dc188b7cec"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\acquisition.py",
+      "bytes": 22808,
+      "mtime_utc": "2026-08-14T09:57:12.1758437Z",
+      "sha256": "c68a1c14b8bc2117fb89c6a46283116d6792c26a8278fbde9c3b141dccb24067"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\close_gap.py",
+      "bytes": 19872,
+      "mtime_utc": "2026-08-18T21:17:28.3284881Z",
+      "sha256": "117c8166a6c26f3462574b787e0db79c419e00c8b18287f25738948032f475c3"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\gap_plan.py",
+      "bytes": 8892,
+      "mtime_utc": "2026-08-18T20:25:04.8365723Z",
+      "sha256": "d18391b7fa7adf06bf882d013cd9ccae48b9fad24429c3ac66d61b68d907c79f"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\service.py",
+      "bytes": 55519,
+      "mtime_utc": "2026-09-02T20:35:20.4203966Z",
+      "sha256": "6412b19e8e9a3073b2b74f298f1d43c7848bd12eda9df5b657a26cfb94161f96"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\processing_demand.py",
+      "bytes": 8939,
+      "mtime_utc": "2026-08-19T20:30:27.2799185Z",
+      "sha256": "90f232edb7804f78a16c6b4e865255cd607a1d0dc30384fc1cd6faa1833ac88b"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\producer_journal.py",
+      "bytes": 5845,
+      "mtime_utc": "2026-08-17T20:39:46.4905563Z",
+      "sha256": "d32767d9b44cbff26054b606c1ae13c0d65510ba18ae4505df295c8b2965202e"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\scripts\\source_catalog_worker.ps1",
+      "bytes": 18002,
+      "mtime_utc": "2026-08-01T17:55:27.6237530Z",
+      "sha256": "5c12cd740cc36abf95f3b9559485472d9d9a760143d27de46e3aaa7b4bbbc311"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\fetch_filing.py",
+      "bytes": 48392,
+      "mtime_utc": "2026-09-01T19:54:21.9513216Z",
+      "sha256": "046cc7dc4e3ff2f4f59be05def8961a85a12e6290adef43a3c53103c63b9d088"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\filing_contracts.py",
+      "bytes": 22631,
+      "mtime_utc": "2026-08-18T19:55:26.2156587Z",
+      "sha256": "2d1b2e3374f1d0c255f94303d208f8657f54c9c32b3428e424f43e6a81ddc457"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\source_preparation.py",
+      "bytes": 9605,
+      "mtime_utc": "2026-08-19T22:02:26.1462108Z",
+      "sha256": "5ec16eaf0fe480126b680f6e069717ebfc218ae39531372a380cfcc9b91bce46"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\mine_year_operation.py",
+      "bytes": 4670,
+      "mtime_utc": "2026-08-21T20:23:28.8772252Z",
+      "sha256": "602255c766897dcabf8c5107c0ba3116686aab7dca683066fdffc70b88628986"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\commercial_terms.py",
+      "bytes": 4795,
+      "mtime_utc": "2026-08-21T21:02:58.5103117Z",
+      "sha256": "6596d4492fcfb31cb73efaf75fb482d90156f2fbc91ab29be272e24745546005"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\asset_ownership.py",
+      "bytes": 10622,
+      "mtime_utc": "2026-08-21T18:49:07.3819651Z",
+      "sha256": "2dc8931451b88f410de5011bac2e80cc74f838e11e94c5627170a6e0ab891ed0"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\publication_registry.py",
+      "bytes": 10860,
+      "mtime_utc": "2026-08-19T20:58:03.2378775Z",
+      "sha256": "446627442500001e955a4c132f9c288524f3949d7cf94c1cb9b957fd6ad2d0aa"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\revenue_forecast.py",
+      "bytes": 5460,
+      "mtime_utc": "2026-08-20T21:27:40.5643083Z",
+      "sha256": "6b3d960e63d09bff681be9823c163c303152fa15824699b650560b5e1977babc"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\tools\\daily_t2_runner.py",
+      "bytes": 10739,
+      "mtime_utc": "2026-08-13T02:45:38.2051503Z",
+      "sha256": "47c2bf9bd3251d7a28e6a2aa38e8674b4224ba0cd2ca4999161497a9b37de144"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\tools\\daily_t2_schedule.py",
+      "bytes": 14228,
+      "mtime_utc": "2026-09-05T19:40:24.7041503Z",
+      "sha256": "09340d2eaea6aef76cc816fb6275d4068f04bee0f7406858546d3ba8930d3bef"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\tools\\weekly_t3_schedule.py",
+      "bytes": 7028,
+      "mtime_utc": "2026-09-05T08:48:01.7046118Z",
+      "sha256": "3ad81d5ebb34a8f759516e0302777f63dd8a136433540ce9871dc4714b6e3f8f"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\tools\\release_gate.py",
+      "bytes": 9183,
+      "mtime_utc": "2026-08-23T00:09:39.9457293Z",
+      "sha256": "5cb85d532768d398c244934bbb45bae0ef10ea351f4d547b6db3d320a1a4c2fe"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\tools\\scenario_runner.py",
+      "bytes": 25824,
+      "mtime_utc": "2026-09-03T19:10:08.2549754Z",
+      "sha256": "62b6a0b5f646753bb078feaa98e8dbef70ce6e5dc0a77d00bb3c54151d607c72"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\.github\\workflows\\quality.yml",
+      "bytes": 8695,
+      "mtime_utc": "2026-09-02T23:28:55.4284224Z",
+      "sha256": "2865a04eef5d8992b69c72f26d38b2f5301cec2ecd33718885b1c1f411e8a8a3"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\unified_completion\\uc\\receipt.py",
+      "bytes": 5729,
+      "mtime_utc": "2026-08-14T01:09:39.9695977Z",
+      "sha256": "4de291c769984168e29aac20d3f2c4b55670cb7315dc415f91a0ad68e2799c37"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\unified_completion\\uc\\revision.py",
+      "bytes": 6324,
+      "mtime_utc": "2026-08-14T00:08:04.5300141Z",
+      "sha256": "482ba16d06eaa5a4890bd4828d1ba536c96e5ef2795d334a5b892a94eee16231"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\unified_completion\\uc\\closure.py",
+      "bytes": 5567,
+      "mtime_utc": "2026-08-14T01:10:40.2328917Z",
+      "sha256": "952abfe0ea39ced076e3b83090de79e90ee95e5a39d94d8711377f65a446300e"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\unified_completion\\uc\\scenarios.py",
+      "bytes": 6037,
+      "mtime_utc": "2026-08-14T00:40:07.9015848Z",
+      "sha256": "524fc1e6d6ba6a841e36f339c1aaf4e14bd7f26ec3ed6f04c83669d082544f29"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\unified_completion\\state.json",
+      "bytes": 50339,
+      "mtime_utc": "2026-09-01T20:07:31.6273658Z",
+      "sha256": "82ad3600a8a64cab52e049fa2232b9e248966f80af31adf566f8991b504451f7"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\daily_manifest.json",
+      "bytes": 456,
+      "mtime_utc": "2026-09-05T19:41:05.9206986Z",
+      "sha256": "7d0a1fd703d8965b973af8628e0b5537b5ade2ffcd8a2c0569710a83bd5e1616"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\legacy_periods.json",
+      "bytes": 904,
+      "mtime_utc": "2026-09-05T19:41:05.7469158Z",
+      "sha256": "85d79d3e12cdd96e5ffda427bf7dc96ddaf305a9ae29877e37c8d057bc497a50"
+    }
+  ]
+}

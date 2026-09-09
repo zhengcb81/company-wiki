@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:company-wiki:source-catalog-worker-recovery:budget-settlement-receipt:v1",
+  "title": "Exactly-once provider budget settlement receipt",
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "utc": {"type": "string", "format": "date-time", "pattern": "^[0-9]{4}-(0[1-9]|1[0-2])-([0-2][0-9]|3[01])T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]{1,9})?Z$"},
+    "settlement": {
+      "type": "object", "additionalProperties": false,
+      "required": ["budget_id", "budget_kind", "reserved_units", "consumed_delta_units", "released_units", "retained_units", "generation_before_settlement", "generation_after_settlement", "state_sha256_before", "state_sha256_after"],
+      "properties": {
+        "budget_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,159}$"},
+        "budget_kind": {"enum": ["DAILY_PROVIDER_REQUESTS", "DAILY_PROVIDER_COST_MINOR_UNITS", "MONTHLY_PROVIDER_REQUESTS", "MONTHLY_PROVIDER_COST_MINOR_UNITS"]},
+        "reserved_units": {"type": "integer", "minimum": 0},
+        "consumed_delta_units": {"type": "integer", "minimum": 0},
+        "released_units": {"type": "integer", "minimum": 0},
+        "retained_units": {"type": "integer", "minimum": 0},
+        "generation_before_settlement": {"type": "integer", "minimum": 0},
+        "generation_after_settlement": {"type": "integer", "minimum": 0},
+        "state_sha256_before": {"$ref": "#/$defs/sha256"},
+        "state_sha256_after": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "attempt": {
+      "type": "object", "additionalProperties": false,
+      "required": ["request_id", "attempt_number", "idempotency_key_sha256", "provider_receipt_sha256", "outcome", "billed_cost_minor_units", "response_known"],
+      "properties": {
+        "request_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,159}$"},
+        "attempt_number": {"type": "integer", "minimum": 1, "maximum": 16},
+        "idempotency_key_sha256": {"$ref": "#/$defs/sha256"},
+        "provider_receipt_sha256": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/sha256"}]},
+        "outcome": {"enum": ["SUCCEEDED", "DEFINITIVE_FAILURE", "NOT_SENT", "OUTCOME_UNKNOWN"]},
+        "billed_cost_minor_units": {"anyOf": [{"type": "null"}, {"type": "integer", "minimum": 0}]},
+        "response_known": {"type": "boolean"}
+      }
+    }
+  },
+  "required": ["schema_version", "receipt_id", "settlement_idempotency_key_sha256", "operation_run_id", "reservation_bundle_sha256", "budget_store_id", "reservation_record_sha256", "head_anchor_after_reservation_sha256", "attempts", "operation_outcome", "settlements", "outstanding_reservation_removed", "head_anchor_after_settlement_sha256", "settlement_record_sha256", "settled_at", "receipt_sha256", "sealed"],
+  "properties": {
+    "schema_version": {"const": "budget-settlement-receipt-v1"},
+    "receipt_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,159}$"},
+    "settlement_idempotency_key_sha256": {"$ref": "#/$defs/sha256"},
+    "operation_run_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,159}$"},
+    "reservation_bundle_sha256": {"$ref": "#/$defs/sha256"},
+    "budget_store_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,159}$"},
+    "reservation_record_sha256": {"$ref": "#/$defs/sha256"},
+    "head_anchor_after_reservation_sha256": {"$ref": "#/$defs/sha256"},
+    "attempts": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/attempt"}},
+    "operation_outcome": {"enum": ["SUCCESS", "DEFINITIVE_FAILURE", "NO_EGRESS", "PARTIAL_KNOWN", "OUTCOME_UNKNOWN"]},
+    "settlements": {
+      "type": "object", "additionalProperties": false,
+      "required": ["daily_provider_requests", "daily_provider_cost", "monthly_provider_requests", "monthly_provider_cost"],
+      "properties": {
+        "daily_provider_requests": {"allOf": [{"$ref": "#/$defs/settlement"}, {"properties": {"budget_kind": {"const": "DAILY_PROVIDER_REQUESTS"}}}]},
+        "daily_provider_cost": {"allOf": [{"$ref": "#/$defs/settlement"}, {"properties": {"budget_kind": {"const": "DAILY_PROVIDER_COST_MINOR_UNITS"}}}]},
+        "monthly_provider_requests": {"allOf": [{"$ref": "#/$defs/settlement"}, {"properties": {"budget_kind": {"const": "MONTHLY_PROVIDER_REQUESTS"}}}]},
+        "monthly_provider_cost": {"allOf": [{"$ref": "#/$defs/settlement"}, {"properties": {"budget_kind": {"const": "MONTHLY_PROVIDER_COST_MINOR_UNITS"}}}]}
+      }
+    },
+    "outstanding_reservation_removed": {"type": "boolean"},
+    "head_anchor_after_settlement_sha256": {"$ref": "#/$defs/sha256"},
+    "settlement_record_sha256": {"$ref": "#/$defs/sha256"},
+    "settled_at": {"$ref": "#/$defs/utc"},
+    "receipt_sha256": {"$ref": "#/$defs/sha256"},
+    "sealed": {"const": true}
+  },
+  "x-semantic-rules": [
+    "For every counter, reserved_units = consumed_delta_units + released_units + retained_units. Settlement generation increments exactly once and replay with the same idempotency key returns the same receipt without a second state change.",
+    "Request counters consume according to the frozen attempt policy. Any OUTCOME_UNKNOWN attempt retains its maximum possible cost reservation; it cannot be released until a later explicit reconciliation receipt proves the provider outcome.",
+    "outstanding_reservation_removed is true only when all retained_units are zero. Otherwise the exact outstanding record remains protected and survives circuit reset, restart and day/month rollover reconciliation.",
+    "Attempts match the exact reservation request plan and cannot add provider, destination, idempotency key or attempt number. Known billed cost is never greater than the reserved bound.",
+    "The four settlements plus outstanding-record update commit in one transaction and one head CAS. receipt_sha256 hashes RFC 8785 canonical bytes excluding only receipt_sha256."
+  ]
+}
