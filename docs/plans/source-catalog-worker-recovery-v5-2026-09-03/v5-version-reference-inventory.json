@@ -22,8 +22,8 @@
       "old_dir_refs": 2,
       "plan_revision_values": [],
       "schema_version_values": [],
-      "sha256": "55d697f240ec824b1844e7777e2100c35811c3c6309f2830ed1f8f0786419eb6",
-      "size_bytes": 4303,
+      "sha256": "a83c3b2f8e3f9e2b2fcee9ad469d7cb41a5f1b602e77c438c6877217c8598604",
+      "size_bytes": 4307,
       "version_tokens": {
         "v3": 1,
         "v4": 5,
@@ -870,8 +870,8 @@
       "old_dir_refs": 1,
       "plan_revision_values": [],
       "schema_version_values": [],
-      "sha256": "f77cf78783148b0468273ec086ac1b01d3d33e3fd1c2dc94a3ad11c2af12d557",
-      "size_bytes": 4618,
+      "sha256": "5fab9190a5e44e48d492d5908a15131a7b04e7b74126025e4122b2b50cb3ad21",
+      "size_bytes": 4689,
       "version_tokens": {
         "v4": 2,
         "v5": 10
@@ -885,12 +885,12 @@
       "old_dir_refs": 2,
       "plan_revision_values": [],
       "schema_version_values": [],
-      "sha256": "b746df95e8b361d7bb8abeaa217af73b940ea5e2c16d780c84fbe2a5de1ae129",
-      "size_bytes": 7478,
+      "sha256": "d410ba9ee679564f8cdee6217dfe02366413cf73ff42c7dde8ed88d0d0ac86cf",
+      "size_bytes": 8091,
       "version_tokens": {
         "v3": 1,
         "v4": 8,
-        "v5": 20
+        "v5": 23
       }
     },
     "task_plan.md": {

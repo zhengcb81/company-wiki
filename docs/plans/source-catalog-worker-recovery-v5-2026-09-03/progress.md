@@ -10,7 +10,7 @@
   - **负例**：N1–N15，待 V5-2 以机器检查 + 测试 ID 实现。
 - 独立设计审查 rev1 结论 **rejected**（2×P0、4×P1、4×P2），审查文件 [v5-version-contract-review.md](v5-version-contract-review.md)；rev2 已逐条修订，待复审。
 - **两项现状更正（实测）**：
-  1. 本目录已随 R4 语料入库（wiki `f23ad1b`），`git ls-files`=64；README/findings 的「未被 Git 跟踪/tracked=0」不再成立，V5-2 必须先重验 Git/index/属性/并发写边界。
+  1. 本目录已随 R4 语料入库（wiki `f23ad1b`）；README/findings 的「未被 Git 跟踪/tracked=0」不再成立（精确 tracked 数以 `git ls-files` 实时查询为准，本页不写死），V5-2 必须先重验 Git/index/属性/并发写边界。
   2. **旧目录 `source-catalog-worker-recovery-2026-08-22/` 已复活**：38 文件、tracked、clean、mtime `2026-09-07T18:08:52Z` UTC（本地 19:08:52+01:00），字节与 v4 冻结 0/38、与 v5 基线 0/38 相同——与「已移入回收站」表述不符，按合同 N9 处理（并列权威风险）。
 - **rev3（同日）**：按 rev2 复审的 G1 修订**冻结集合定义**（`normative_files` = 48 导入 + 3 个 v5 自有治理件 `plan_manifest.schema.v5.json`/v5 checker/`.gitattributes` = **51**；`frozen_set_composition` 显式记录；证据工具记入 `evidence_tools[]` 而非 normative；新增 N16/N17），并统一 `equivalence` 枚举为 `v4_exact/crlf_only/unproven_new_baseline/v5_own`（证据 JSON 同步重生成）、把旧目录 mtime 改为 UTC、不再在正文写死 tracked 数（G2–G4）。
 - 本轮只写 v5 目录文档：未改协议语义、未生成正式 manifest、未运行旧 checker、未触碰 worker/配置/数据库/任务。

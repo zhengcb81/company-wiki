@@ -1,8 +1,13 @@
-"""V5 evidence tool: scan every version reference in the v5 baseline (read-only).
+"""V5 evidence tool: scan every version reference in the v5 baseline.
 
 Reproduces v5-version-reference-inventory.{json,md}. Scope = baseline/** (54
 files) + the v5 root planning documents present at scan time; v5-owned metadata
-(reviews/, import manifest, verify_import.py, this tool) is excluded.
+(reviews/, tools/, import manifest, verify_import.py, this tool, the contract
+and the review records) is excluded.
+
+Modes:
+  (default)  write the two evidence files
+  --check    read-only: exit 1 if either on-disk evidence file differs
 """
 
 from __future__ import annotations
@@ -10,6 +15,7 @@ from __future__ import annotations
 import hashlib
 import json
 import re
+import sys
 from pathlib import Path
 
 V5 = Path(__file__).resolve().parents[1]
@@ -27,6 +33,7 @@ EXCLUDE = {
     "v5-version-contract.md",
     "v5-version-contract-review.md",
     "v5-version-contract-review-rev2.md",
+    "v5-version-contract-review-rev3.md",
 }
 
 
@@ -58,7 +65,7 @@ def scan(path: Path) -> dict:
     }
 
 
-def main() -> None:
+def build() -> tuple[dict, dict[str, str]]:
     files: dict[str, dict] = {}
     for p in sorted(V5.rglob("*")):
         if not p.is_file():
@@ -88,12 +95,12 @@ def main() -> None:
         "plan_revision_values": sorted({p for v in files.values() for p in v["plan_revision_values"]}),
         "schema_version_values": sorted({s for v in files.values() for s in v["schema_version_values"]}),
     }
-    (V5 / "v5-version-reference-inventory.json").write_text(
-        json.dumps({"generated_at_utc": "2026-09-09", "scope": "baseline/** + v5 root planning docs "
-                    "(excl. reviews/, tools/, import manifest, verify_import.py)",
-                    "totals": totals, "files": files},
-                   ensure_ascii=False, indent=2, sort_keys=True) + "\n",
-        encoding="utf-8", newline="\n")
+    json_payload = json.dumps(
+        {"generated_at_utc": "2026-09-09",
+         "scope": "baseline/** + v5 root planning docs "
+                  "(excl. reviews/, tools/, import manifest, verify_import.py)",
+         "totals": totals, "files": files},
+        ensure_ascii=False, indent=2, sort_keys=True) + "\n"
 
     lines = [
         "# V5 版本引用枚举（V5-1 第 2 项）",
@@ -101,7 +108,8 @@ def main() -> None:
         "日期：2026-09-09。状态：PLAN_ONLY。范围：`baseline/**`（54 份）＋ v5 根目录规划文档（5 份）＝ **59 份**；"
         "排除 `reviews/`、`tools/`、`import_manifest.v5.json`、`verify_import.py` 与 v5 自有元数据。",
         "机器明细见 [v5-version-reference-inventory.json](v5-version-reference-inventory.json)；"
-        "可用 [tools/v5_version_reference_scan.py](tools/v5_version_reference_scan.py) 复现。",
+        "可用 [tools/v5_version_reference_scan.py](tools/v5_version_reference_scan.py) 复现"
+        "（`--check` 为只读校验）。",
         "",
         "## 汇总",
         "",
@@ -132,10 +140,33 @@ def main() -> None:
         lines.append(
             f"| `{rel}` | {v['version_tokens'].get('v4', 0)} | {v['version_tokens'].get('v3', 0)} | "
             f"{v['old_dir_refs']} | {v['checker_refs']} | {','.join(v['plan_revision_values']) or '-'} |")
-    (V5 / "v5-version-reference-inventory.md").write_text("\n".join(lines) + "\n",
-                                                          encoding="utf-8", newline="\n")
+    return totals, {
+        "v5-version-reference-inventory.json": json_payload,
+        "v5-version-reference-inventory.md": "\n".join(lines) + "\n",
+    }
+
+
+def main() -> int:
+    totals, payloads = build()
+    check = "--check" in sys.argv
+    bad = []
+    for name, payload in payloads.items():
+        path = V5 / name
+        if check:
+            actual = path.read_text(encoding="utf-8") if path.is_file() else ""
+            if actual != payload:
+                bad.append(name)
+        else:
+            path.write_text(payload, encoding="utf-8", newline="\n")
+    if check:
+        if bad:
+            print(f"CHECK FAIL: {bad} differ from the recomputation", file=sys.stderr)
+            return 1
+        print("CHECK OK: inventory .json and .md reproduce byte-for-byte")
+        return 0
     print(json.dumps(totals, ensure_ascii=False)[:600])
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

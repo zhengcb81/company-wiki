@@ -38,8 +38,9 @@ baseline 中的 schema/protocol 仍是旧版历史输入；不会直接把它们
 - 只读verify_import.py通过54/54文件、精确baseline文件集合、无reparse、路径负例及历史计数检查。
 - 61个当前文件路径的244项Git属性均为unset，Git tracked路径=0。这里只证明当时Git边界，
   不是永久文件锁，不授权以后把新目录随意加入共享index。
-- **2026-09-09 更正**：本目录已随 R4 规划语料入库（wiki `f23ad1b`），`git ls-files` = 64（另 5 份 V5-1 新文件随后提交）。
-  「tracked=0」不再是现状；按 README 自己的约定，V5-2 必须先重验 index/属性/并发写边界再冻结。
+- **2026-09-09 更正**：本目录已随 R4 规划语料入库（wiki `f23ad1b`），另加 V5-1 交付文件；精确 tracked 数以
+  `git ls-files` 实时查询为准（本页不写死）。「tracked=0」不再是现状；按 README 自己的约定，V5-2 必须先重验
+  index/属性/并发写边界再冻结。
   同时实测**旧目录 `source-catalog-worker-recovery-2026-08-22/` 已复活**（38 文件、tracked、clean、
   mtime 2026-09-07T18:08:52Z UTC＝本地 19:08:52+01:00），与 README「已回收」表述不符——见[版本合同 §6.1](v5-version-contract.md)。
 

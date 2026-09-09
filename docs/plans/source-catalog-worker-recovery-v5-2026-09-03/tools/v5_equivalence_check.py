@@ -4,12 +4,17 @@ Reproduces v5-baseline-equivalence.json. Enum matches the version contract:
   v4_exact               current bytes == v4 freeze
   crlf_only              LF-normalized current bytes == v4 freeze
   unproven_new_baseline  neither (new baseline; review from zero)
+
+Modes:
+  (default)  write the evidence file
+  --check    read-only: exit 1 if the on-disk evidence file differs
 """
 
 from __future__ import annotations
 
 import hashlib
 import json
+import sys
 from pathlib import Path
 
 V5 = Path(__file__).resolve().parents[1]
@@ -28,7 +33,7 @@ def resolve(target: str) -> Path | None:
     return None
 
 
-def main() -> None:
+def main() -> int:
     man = json.loads(MANIFEST.read_text(encoding="utf-8"))
     groups: dict[str, list[str]] = {
         "v4_exact": [], "crlf_only": [], "unproven_new_baseline": [], "unresolved": [],
@@ -58,11 +63,19 @@ def main() -> None:
         "counts": {k: len(v) for k, v in groups.items()},
         "groups": {k: sorted(v) for k, v in groups.items()},
     }
-    (V5 / "v5-baseline-equivalence.json").write_text(
-        json.dumps(out, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
-        encoding="utf-8", newline="\n")
+    payload = json.dumps(out, ensure_ascii=False, indent=2, sort_keys=True) + "\n"
+    target = V5 / "v5-baseline-equivalence.json"
+    if "--check" in sys.argv:
+        actual = target.read_text(encoding="utf-8") if target.is_file() else ""
+        if actual != payload:
+            print(f"CHECK FAIL: {target.name} differs from the recomputation", file=sys.stderr)
+            return 1
+        print(f"CHECK OK: {target.name} reproduces byte-for-byte")
+        return 0
+    target.write_text(payload, encoding="utf-8", newline="\n")
     print(json.dumps(out["counts"], ensure_ascii=False))
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

@@ -1,7 +1,7 @@
 # V5 版本引用枚举（V5-1 第 2 项）
 
 日期：2026-09-09。状态：PLAN_ONLY。范围：`baseline/**`（54 份）＋ v5 根目录规划文档（5 份）＝ **59 份**；排除 `reviews/`、`tools/`、`import_manifest.v5.json`、`verify_import.py` 与 v5 自有元数据。
-机器明细见 [v5-version-reference-inventory.json](v5-version-reference-inventory.json)；可用 [tools/v5_version_reference_scan.py](tools/v5_version_reference_scan.py) 复现。
+机器明细见 [v5-version-reference-inventory.json](v5-version-reference-inventory.json)；可用 [tools/v5_version_reference_scan.py](tools/v5_version_reference_scan.py) 复现（`--check` 为只读校验）。
 
 ## 汇总
 

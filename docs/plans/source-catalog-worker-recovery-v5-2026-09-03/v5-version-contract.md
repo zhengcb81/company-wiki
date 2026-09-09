@@ -48,7 +48,7 @@
 导入的 `baseline/plan/plan_manifest.schema.json` 是 **v4 的**冻结 manifest schema（`additionalProperties:false`、`schema_version const 2`、`plan_revision const v4`、`plan_directory` 指向已退役目录），**不能校验 v5 manifest**。故 V5-2 新建：
 
 - 文件 `plan_manifest.schema.v5.json`；`$id` `urn:company-wiki:source-catalog-worker-recovery:plan-manifest:v5`（已核实不在现有 29 个 `$id` 中）；`schema_version` **const 3**；`additionalProperties` **false**。
-- 必填字段 17 项：`schema_version`、`protocol_revision`(const v4)、`freeze_generation`(const v5)、`capture_manifest{path,sha256}`、`frozen_at`、`plan_directory`(const v5 目录)、`plan_freeze_git_head`、`review_state_at_freeze`、`supersedes[]`、`investigation_source{path,sha256}`、`normative_file_count`、`normative_files[]`、`frozen_set_composition`、`equivalence_summary`、`coverage_counts`、`pre_freeze_check`、`self_exclusion`、`immutability_policy`。
+- 必填字段 **19 项**：`schema_version`、`protocol_revision`(const v4)、`freeze_generation`(const v5)、`capture_manifest{path,sha256}`、`frozen_at`、`plan_directory`(const v5 目录)、`plan_freeze_git_head`、`review_state_at_freeze`、`supersedes[]`、`investigation_source{path,sha256}`、`normative_file_count`、`normative_files[]`、`frozen_set_composition`、`equivalence_summary`、`coverage_counts`、`pre_freeze_check`、`evidence_tools[]`、`self_exclusion`、`immutability_policy`。
 - **N7 的适用边界**：N7 只约束**导入的** artifact（不得被 generation 改名/改 `$id`）；v5 manifest schema 与 v5 checker 是**新增的 v5 自有件**（`v5_own`），其 `:v5` 后缀不冲突。
 
 ### 5.2 冻结集合的精确组成（G1 修正）
@@ -61,7 +61,8 @@
 | v5 自有治理件 | 3 | `plan_manifest.schema.v5.json`、**v5 checker 入口**（V5-2 定名，落在 `tools/`）、`.gitattributes` | `v5_own` |
 | 冻结 manifest 自身 | 0（排除） | `plan_manifest.v5.json` | `self_exclusion` |
 
-- `frozen_set_composition` 字段显式记录 `{imported: 48, v5_own_governing: 3, total: 51, self_excluded: 1}`，并与 `normative_file_count` 一致。
+- `frozen_set_composition` 字段显式记录 `{imported: 48, v5_own_governing: 3, total: 51, self_excluded: 1}`，并与 `normative_file_count` 一致。**派生规则（可机器校验）**：`imported` = `equivalence ∈ {v4_exact, crlf_only, unproven_new_baseline}` 的条目数；`v5_own_governing` = `equivalence == v5_own` 的条目数；`total` = `normative_file_count`；`self_excluded` = 1（`plan_manifest.v5.json` 自身）。
+- **v5 checker 入口的路径规则**：其路径**必须等于** `pre_freeze_check.command` 中调用的脚本路径，`equivalence = v5_own`；V5-2 定名后由 N13/N16 用该规则（而非字面清单）判定，避免「名字未定则无法校验」的空档。
 - **证据工具不进入 normative 集**：`tools/v5_version_reference_scan.py`、`tools/v5_equivalence_check.py` 记为 `evidence_tools[]`（各自 hash 绑定），只复现证据，不是计划输入。
 - `plan_manifest.schema.v5.json` 与 v5 checker 必须**同时**出现在 normative 集与 `pre_freeze_check.command` 中，避免「治理件无哈希锚」的空档。
 - `N13` 判据改为：`normative_files` 必须**恰好等于**上述 51 项集合（缺/多/重复/casefold 冲突即拒绝）；`N14` 判据改为：`.gitattributes` 必须在集合内且其哈希与冻结记录一致。
@@ -77,12 +78,14 @@
 
 **结论**：README/findings/progress 原「已回收/未被跟踪」表述与当前树不符，已在原处更正；旧目录是**独立第三份副本**，V5-2 必须按 N9 处理。
 
-### 6.2 角色映射（v5 目录 71 文件 = 12 根 + 54 baseline + 3 reviews + 2 tools）
+### 6.2 角色映射
+
+> 文件总数以 `git ls-files`/`Get-ChildItem` **实时查询**为准（本页不写死，避免陈旧计数）；下表按角色穷举当前目录内的每一类文件。
 
 | 角色 | 文件 | 权威性 |
 |---|---|---|
 | 冻结 manifest（待生成） | `plan_manifest.v5.json` + `plan_manifest.schema.v5.json` | **唯一权威** |
-| v5 自有规划/记录 | `README.md`、`task_plan.md`、`findings.md`、`progress.md`、本页、两份审查记录 | 活动，可更新 |
+| v5 自有规划/记录 | `README.md`、`task_plan.md`、`findings.md`、`progress.md`、本页、`v5-version-contract-review*.md`（审查记录，逐轮追加） | 活动，可更新 |
 | 证据工具 | `tools/v5_version_reference_scan.py`、`tools/v5_equivalence_check.py` | 复现证据；hash 绑定但非 normative |
 | 导入元数据 | `import_manifest.v5.json`、`verify_import.py` | 只证明导入；不改字节 |
 | 导入审查记录 | `reviews/`（3 份） | 历史；不改字节 |
