@@ -50,7 +50,7 @@
 |---|---|---|
 | 原三仓统一 DAG | [机器账本](../revenue-forecast/assurance/unified_completion/state.json) | 历史登记117/117 accepted；新审计发现范围缩减与实质反例，不证明117个原完整目标已解决，不重写历史收据 |
 | 后续 GP 余项 | [活动计划](../revenue-forecast/assurance/runs/2026-09-02_remaining-gap-closure/task_plan.md) | 存在代码、部署和生产验收余项；不能只等时间就宣称完成 |
-| worker 恢复规划 | [v5 独立入口](docs/plans/source-catalog-worker-recovery-v5-2026-09-03/README.md) | V5_BASELINE_READY / VERSION_CONTRACT_PENDING / NOT_IMPLEMENTATION_AUTHORIZED |
+| worker 恢复规划 | [v5 独立入口](docs/plans/source-catalog-worker-recovery-v5-2026-09-03/README.md) | V5_3_COMPLETED / PLAN_ONLY / NOT_IMPLEMENTATION_AUTHORIZED（冻结 51 项 + 三轴审查 accepted + 交接双审） |
 | 历史文档同步 | [9/4同步记录](docs/plans/planning-sync-2026-09-04/task_plan.md) | 当时canonical范围阅读已完成；历史hash库存不是今天所有文件不许更新的合同 |
 | 原痛点与后续整改 | [9/6审计及详细计划](docs/plans/painpoint-outcome-audit-2026-09-05/README.md) | 限定只读审计已交付；117项索引完整不等于生产重跑，15包整改仍未实施 |
 

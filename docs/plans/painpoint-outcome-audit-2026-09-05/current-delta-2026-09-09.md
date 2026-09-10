@@ -13,7 +13,7 @@
 | FC-705 门 | `close_allowed=false`，reason `period 7: window 23:59:41 is shorter than 24h`（last-two = P7 ✗ / P8 24:00:11 ✓） |
 | 预期关闭 | **2026-09-10 22:00 运行后**（P8+P9 连续两个 ≥24h 零 hit）→ true；若 P9 <24h 则顺延一天 |
 | GP-009 累积 | Daily **4/7**（09-06/07/08/09）、Weekly 0/2（下次 2026-09-13 04:30）、Monthly 1/1、alert drill 1/1 |
-| 三仓工作树 | company-wiki 干净；filing-fetch 干净；revenue 仅 3 个 ACL 受限空目录（`.tmp-zr408-unit*`）未清理 |
+| 三仓工作树 | company-wiki **提交时点干净**（2026-09-10 交接复核时 v5 冻结记录尚有一行未提交的 §8 决策，现已随 V5-3 交接提交入库）；filing-fetch 干净；revenue 仅 3 个 ACL 受限空目录（`.tmp-zr408-unit*`）未清理 |
 
 **不可做的动作**：今晚**不要**手动跑 `legacy_observer`/`run-daily`——会把 period 9 提前结束（<24h），反而把门关闭时点推后一天。
 

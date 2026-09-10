@@ -43,16 +43,16 @@
 | B3 冻结后重哈希 | 51/51 哈希与字节数一致；`baseline/plan/__pycache__` 与 `tools/__pycache__` 均不存在 |
 | B4 `.gitattributes` 入集且属性全 unset | `git check-attr text eol filter working-tree-encoding` × 51 路径 = 204 行，全部 `unset` |
 | B5 旧目录检查 | 机器载荷声明 `NON_AUTHORITATIVE`、38 文件、inventory `da927ee2…`；候选判据 = 目录名含 `source-catalog-worker-recovery` **或**含计划标记文件；载荷字节由 manifest 绑定 |
-| B6 记录 HEAD / index | 冻结时点 HEAD `9418e72`；`plan_freeze_git_head` 由 N10 校验为「HEAD 的祖先且已包含导入语料」 |
+| B6 记录 HEAD / index | 冻结时点 HEAD **`89c0862d`**（= manifest 的 `plan_freeze_git_head`，由 N10 校验为「HEAD 的祖先且已包含导入语料」）；冻结**产物**提交为 `4f4dea1`。两者不同：前者是生成 manifest 时的仓库 HEAD，后者是产物入库的提交 |
 
 后冻结复验（入库后）：`--verify-manifest` → `PASS: 9188 checks; {"fixed_nodes":115,"schemas":29,"tests":315,"vectors":18}`。
-`--self-test` → **17 例 / 32 变异 + 4 默认模式检查 + 2 守卫检查**，全部被拒。
+`--self-test` → **17 例 / 32 变异 + 4 默认模式检查 + 3 守卫检查**，全部被拒。
 
 > 计数是**运行环境相关的观测值**，不是冻结断言：`--verify-manifest` 的计数取决于 manifest 与 51 个冻结项是否已被 Git 跟踪（未跟踪时 N10 fail-closed 会 red）。**唯一的冻结断言**是 `plan_freeze_check.v5.txt` 的字节与哈希（172 字节、0 CR、`5e60611c…`），且 N8 以 manifest 记录的命令（含 `-I`）重跑并逐字节比对。
 
 ## 3. 负例 N1–N17 自测（`--self-test`）
 
-每条负例在临时副本上施加一个或多个定向变异，并断言对应编码在**全检查**与**仅该编码**两种模式下都被拒（隔离模式排除"别的检查顺手拦住"的假阳性）；另有 4 项默认模式检查与 2 项守卫检查单独自测。
+每条负例在临时副本上施加一个或多个定向变异，并断言对应编码在**全检查**与**仅该编码**两种模式下都被拒（隔离模式排除"别的检查顺手拦住"的假阳性）；另有 4 项默认模式检查与 3 项守卫检查（GUARD / GUARD-I / GUARD-M）单独自测。
 
 | 编码 | 变异数 | 覆盖的复现配方 |
 |---|---|---|
@@ -167,3 +167,25 @@ python -I docs/plans/source-catalog-worker-recovery-v5-2026-09-03/tools/v5_equiv
 | **NEW-P2-C（四轮）** `python -m` 绕过守卫 | 已修（D17：要求 `sys.flags.isolated`；自测 GUARD-M） |
 | **NEW-P2-D（四轮）** N6 汇总误报 | 已修（仅当声明集等于冻结集时才比较 `equivalence_summary`；路径错配由 N13 报告） |
 | **NEW-P2-E（四轮）** §6.9 未提 `-m` | 已修（§6.9 明确三种调用形态与平台前提） |
+| **SQL-OBS-3（P3）** `--self-test` 墙钟随变异数增长（11s→50s→55s→89s） | **结构性搁置（2026-09-10 决策）**：优化（"复制一次 + 逐例回滚"）必须修改冻结 checker 或向 `tools/` 增加文件——前者破坏冻结集哈希（N5 red），后者破坏 `V5-TOOLS-EXACT`；在 generation v5 内不可行。属非阻断一次性门禁成本（~90s、零仓库写、全在 %TEMP%）。若未来负例继续增长，在**下一个 generation（v6）** 连同 manifest/schema 一起重设计 |
+
+## 9. V5-3 交接审查整改（2026-09-10，两名非作者独立审查）
+
+两轴结论：**冻结态保真度** `accepted_with_findings`（无 P0/P1；3×P2 + 3×P3，独立复现 51/51 哈希、52/52 blob、三模式输出与零仓库写）、**交接文档与运维状态** `accepted_with_findings`（无 P0；5 条 P1）。审查文件：[v5-freeze-review-handover-state.md](v5-freeze-review-handover-state.md)、[v5-freeze-review-handover-docs.md](v5-freeze-review-handover-docs.md)。
+
+| 编号 | 轴/级别 | 发现 | 处置 |
+|---|---|---|---|
+| HDD-P1-1 | 文档 P1 | 工作树不干净：本记录 §8 的 SQL-OBS-3 行未提交，故"company-wiki 干净"表述失真 | 本记录与两份审查文件随本次提交入库；R4 `current-delta-2026-09-09.md` 的"干净"标注为**提交时点**事实 |
+| HDD-P1-2 | 文档 P1 | README §5 只列 8 条风险，缺 §6.6 / §6.9 | README §5 重写为与 §6 九条**一一对应**，并补成本项 |
+| HDD-P1-3 | 文档 P1 | README §5.8 与 progress 仍建议"复制一次 + 逐例回滚"优化，与新判定矛盾（照做会破坏冻结） | 两处改为"结构性搁置"，指向 §8 SQL-OBS-3 行与本节 v6 清单 |
+| HDD-P1-4 | 文档 P1 | `task_plan.md` 的 V5-3 三项目标重复出现（已勾 + 未勾各一份） | 删除未勾的重复块，并新增"交接双审"已完成条目 |
+| HDD-P1-5 | 文档 P1 | 根 `PLANNING_STATUS.md` 仍留旧 token `V5_BASELINE_READY / VERSION_CONTRACT_PENDING` | 两仓 PLANNING_STATUS 统一为 `V5_3_COMPLETED / PLAN_ONLY / NOT_IMPLEMENTATION_AUTHORIZED` |
+| HDS-P2-1 | 状态 P2 | README §2 引用的 PASS 行非字面（引文冒号后无空格）却声称逐字节 | §2 改按实际字节书写，并注明边界文档中的旧渲染边界 |
+| HDS-P2-2 | 状态 P2 | §2/B6 把冻结 HEAD 写成 `9418e72`（实为 V5-2.2 提交），与 line 4 及 manifest `89c0862d` 矛盾 | B6 已更正，并加"冻结时点 HEAD vs 产物提交 `4f4dea1`"说明 |
+| HDS-P2-3 | 状态 P2 | §2/§3 写"2 项守卫检查"（实为 3；V5-2.4 增 GUARD-M） | 两处改为 3 |
+| HDD-P2-* | 文档 P2 | README §7 缺 H01 硬前置；§4 缺审计边界（提权不可见的 hive/受保护任务）与"在库重挂路径" | §7 增 H01 条目；§4 增审计边界声明 + `startup.py::install_startup_task` 重挂路径说明，并扩展扫描面 |
+| HDS-P3-1 | 状态 P3 | `v5-freeze-boundary.md`（manifest 绑定字节）含旧数值（27 变异、HEAD `436ecd3`、tracked 74） | **v5 内不可修**（改它即破 `boundary_record` 绑定）→ 列入 v6 待办；读者以 README §2 为准 |
+| HDS-P3-2 | 状态 P3 | §8 行"任何新文件"措辞：`tools/__pycache__` 被显式豁免；把 TEMP 指到 RAM 盘可在不动冻结字节的前提下缩短墙钟 | 措辞已在 §8 行内限定为**代码级**优化；RAM 盘属环境手段，不影响判定 |
+| HDS-P3-3 | 状态 P3 | SQL closure3 记录变异数 27→31→34，而冻结代码的 AST 计数为 32 | 不影响 §8 行（只引墙钟）；此处如实记录差异 |
+
+**v6 待办清单（仅下一个 generation 可做）**：① 边界文档数值刷新（变异数 / HEAD / tracked 数）；② `--self-test`"复制一次 + 逐例回滚"优化；③ `frozen_at` 的机器可锚定化探索；④ 变异数与墙钟的自动登记。

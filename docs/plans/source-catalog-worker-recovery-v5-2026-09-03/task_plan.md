@@ -69,10 +69,8 @@
   → `worker_control.json` `desired_state=paused`；启动器末条事件 `exited/persistent_pause`（2026-08-20T21:43:37Z）；无运行进程；无相关计划任务（`CompanyWiki Source Catalog` 未注册）；HKCU/HKLM Run 与启动文件夹无条目；自启动脚本存在但未被引用。
 - [x] 保持与现有主线计划隔离，等待用户以后决定并入或实施。
   → README §6/§7 明确隔离与不授权；R4 衔接由主线 C/D 段负责。
-
-- [ ] 更新新目录的 findings/progress，给出清晰活动入口、历史索引、剩余风险与实施顺序。
-- [ ] 只读复核 worker 暂停和已知自启动入口关闭。
-- [ ] 保持与现有主线计划隔离，等待用户以后决定并入或实施。
+- [x] 两名非作者独立审查（冻结态保真度 / 交接文档与运维状态）复核本阶段交付。
+  → [v5-freeze-review-handover-state.md](v5-freeze-review-handover-state.md)（无 P0/P1）、[v5-freeze-review-handover-docs.md](v5-freeze-review-handover-docs.md)（无 P0，5 条 P1 已按 §9 关闭）。
 
 ## Errors Encountered
 

@@ -99,7 +99,7 @@
 - 关键整改（全部根因级）：N6 逐件按字节复算等价类别；N7 增补 v4 冻结 manifest 锚并由**冻结内代码**钉扎 6 份历史文件；N8 以 manifest 命令（含 `-I`）重跑并逐字节比对；N9 改为候选枚举 + 机器载荷 + manifest 绑定；N10 比 **HEAD** blob（非索引）且未跟踪即 red；N11 取代链恰好两条；N13/`V5-SET-NESTED` 递归含空目录；`V5-PATH-SAFETY` 恢复 reparse 不变量；`V5-TOOLS-EXACT` 枚举 `tools/` 全部文件；启动守卫要求隔离解释器（覆盖 `script`/相对路径/`-m` 三形态）。
 - 最终冻结（提交 `4f4dea1`）：预冻结 **7720** checks、`--verify-manifest` **9188** 通过、`--self-test` **17 例/32 变异 + 4 默认模式 + 3 守卫**全拒；51/51 冻结项哈希与字节一致；`plan_freeze_check.v5.txt` 172 字节、0 CR。
 - 三轴结论：SQL/性能 `accepted`、生命周期/安全 `accepted`、测试/DAG `accepted`（均无 P0/P1；剩余项为记录已声明的残余风险 §6.3/§6.4/§6.9）。
-- 已知非阻断后续（V5-3 移交项）：`--self-test` 墙钟随轮次增长（11s→89s），可选"复制一次 + 逐例回滚"优化；`frozen_at` 无法机器锚定；`reviews/` 历史文件按合同不改字节（含绝对个人路径）。
+- 已知非阻断后续（V5-3 移交项）：`--self-test` 墙钟随轮次增长（11s→89s）——**在 generation v5 内结构性不可行**（改 checker 破 N5 哈希绑定、加 `tools/` 文件破 `V5-TOOLS-EXACT`），已搁置至 v6（见冻结记录 §8 SQL-OBS-3 与 §9 v6 清单）；`frozen_at` 无法机器锚定（§6.4）；`reviews/old-plan-retirement-inventory.json` 按合同 §6.2 不改字节（含绝对个人路径，无凭据）。
 - **V5-2 完成不授权实施**：本计划仅可作为未来实施的输入；worker 仍暂停，源码/配置/数据库/任务未动。
 
 ## 2026-09-09：V5-3 交接完成
@@ -108,3 +108,12 @@
 - 只读复核 worker 状态：`worker_control.json` `desired_state=paused`；启动器末条事件 `exited/persistent_pause`（2026-08-20T21:43:37Z）；无 worker 进程；无相关计划任务（`CompanyWiki Source Catalog` 未注册）；HKCU/HKLM `Run` 与启动文件夹无条目；`scripts/source_catalog_worker_at_logon.{ps1,vbs}` 存在但未被任何入口引用。
 - 活动文档（README/task_plan/findings/progress）更新后 `--verify-manifest` 仍为 `PASS: 9188 checks` —— 证明 D4 的"证据范围只含冻结后不变文件"设计有效。
 - V5-0/V5-R/V5-1/V5-2/V5-3 全部完成；本目录进入**等待用户决定并入或实施**的稳定状态。
+
+## 2026-09-10：V5-3 交接双审 + P1 关闭（本阶段收尾）
+
+- **两名非作者独立审查并行复核**（互不共享结论）：
+  - **冻结态保真度轴** → `accepted_with_findings`，**无 P0/P1**：独立复现默认 7720（stdout 172B/0 CR/sha `5e60611c…` 与产物逐字节相同）、`--verify-manifest` 9188、`--self-test` 17/32+4+3（73.6s/72.4s）、无 `-I` 时 exit 1 且 stdout 0 字节；51/51 哈希+字节、52/52 worktree↔HEAD blob、evidence/evidence_tools/capture/supersedes/investigation/boundary 绑定全对；N9 摘要复算 38/`da927ee2…`；证据工具 `--check` 均 OK；全盘 57878 文件前后对比**零仓库写**。审查文件 [v5-freeze-review-handover-state.md](v5-freeze-review-handover-state.md)。
+  - **交接文档与运维状态轴** → `accepted_with_findings`，**无 P0、5 条 P1**：16 个 README 链接与全部计数（48/5/1/3/13/4/51/115/315）准确；worker 暂停结论**复现并扩展**（全部 Task Scheduler 文件夹、服务、WMI `root\subscription`、GPO 登录脚本、Active Setup、IFEO/AppInit_DLLs、Winlogon、HKCU/HKLM/WOW6432Node/HKU Run、两个启动文件夹）未发现被漏掉的自启动路径；§7 与全目录无任何"已实施/可恢复"表述。审查文件 [v5-freeze-review-handover-docs.md](v5-freeze-review-handover-docs.md)。
+- **5 条 P1 + 5 条 P2 已关闭**（逐条见 [冻结记录 §9](v5-freeze-record.md)）：① §8 决策与记录随本次提交入库（工作树回到干净）；② README §5 重写为与 §6 九条一一对应（补 §6.6/§6.9）；③ 撤掉与新判定矛盾的 self-test 优化建议，改为结构性搁置 + v6 清单；④ 删除 task_plan 中 V5-3 的重复未勾块并登记交接双审；⑤ 两仓 PLANNING_STATUS 统一为 `V5_3_COMPLETED`；另修 §2 引文按实际字节、§2/B6 冻结 HEAD 更正为 `89c0862d`（并与产物提交 `4f4dea1` 区分）、守卫检查数 2→3、README §4 审计边界与 `startup.py::install_startup_task` 重挂路径、§7 增 H01 硬前置。
+- **v6 待办（仅下一代可做）**：边界文档数值刷新（改它即破 `boundary_record` 绑定）、`--self-test` 优化、`frozen_at` 机器锚定探索、变异数/墙钟自动登记。
+- 本轮仍只写文档 + 只读复核：未改产品代码/配置/DB/任务，未恢复 worker，未删任何文件。
