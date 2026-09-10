@@ -14,7 +14,7 @@
 最新状态核对：2026-09-06。用户本次批准跨仓规划文档同步和步骤细化，不批准产品修复或真实运行；worker v5与主线仍不合并。当前效果判定以[原始痛点审计](docs/plans/painpoint-outcome-audit-2026-09-05/README.md)为准；修复编排以该目录[总计划](docs/plans/painpoint-outcome-audit-2026-09-05/remediation-plan.md)及执行手册为准，全部WP仍NOT_IMPLEMENTATION_AUTHORIZED。
 观测HEAD：`853dca2d30bc2b85dc95e3117a6afc3b448daec7`；源码存在其他任务未提交改动，未来实施需重核精确输入。9/4～9/5同步为历史快照，不能覆盖下述9/6审计结果。
 
-> **2026-09-08 最新观测修正（本地只读核对）**：调度已连续触发成功——09-06 22:00（P3 开启、P2 关闭 25.3h）、09-07 22:00（P7 开启、P6 关闭 25 天零 hit）；最新 daily=`20260907T210001Z`、period=7。`--run-daily` 参数错误已在 revenue `2ff20d9` 修复并经真实触发验证；manifest `cat-file` 的 `safe.directory` 缺失已在 revenue `56ba0eb` 修复（SYSTEM 上下文）。**FC-705 门仍为 close_allowed=false**：权威账本（wiki `.source_catalog/legacy_periods.json`）last-two = P5（hits=6、1.75h 短窗，历史遗留）+ P6（合格），需 P7 于 09-08 22:00 完成后才满足两个连续 ≥24h 零 hit 窗口。上方 9/07 段中的 HEAD/daily 数值为当时快照，实施前仍须重锁输入。
+> **2026-09-08 观测快照（历史，已被上方 09-09/09-10 段覆盖）**：调度已连续触发成功——09-06 22:00（P3 开启、P2 关闭 25.3h）、09-07 22:00（P7 开启、P6 关闭 25 天零 hit）；最新 daily=`20260907T210001Z`、period=7。`--run-daily` 参数错误已在 revenue `2ff20d9` 修复并经真实触发验证；manifest `cat-file` 的 `safe.directory` 缺失已在 revenue `56ba0eb` 修复（SYSTEM 上下文）。**FC-705 门当时为 close_allowed=false**（权威账本 last-two = P5 短窗 + P6）。上方 9/07 段中的 HEAD/daily 数值为当时快照。**保留原文以便追溯；当前状态与门判定以本页顶部 09-09/09-10 段为准。**
 
 ## 活动计划全量索引（2026-09-08，防遗漏路由）
 
@@ -64,12 +64,14 @@
 
 ## 本次已经查出的跨仓风险
 
-- GP-008：当前revenue `2ff20d9`已将daily注册参数修复为`run-daily`；实际Action/自然触发独立证明仍不足。latest观测manifest `20260905T194055Z`绑定旧`2cbd585`，不能证明当前组合通过。
-- GP-006：Windows sibling CI接线存在，但job为非阻断且不包含生产catalog真实roots测试；原真实roots CI目标不能标完整关闭。
-- GP-010：已有owner批准与执行记录；normalized及receipt各7/7，summary6/7，sections=5/7，2份列表式缺口，安全拒绝不得绕过。kind宽范围历史处理与精确7份cohort不同；已产出的214份按owner处置保留，不擅自删除。机器T1不代真实语义闭环。
-- H01：自动prune按旧归档目录日期判due，却覆盖全部retired EvidenceSpan，未证明逐条可信归档与恢复。独立核验确认代码风险但没有实际误删证据；WP01为worker恢复前置，不可仅修SQL即启动。
-- WP02–10：policy/eligible、修订补缺、持久需求/attempt、真实语义与模型发布仍有实质缺口，详见分报告；不是单纯等待观察时间即可关闭。
-- filing FC-903：reviewer所绑定implementer SHA与当前文件不一致；保留收据并披露，不修改签署字节来制造通过。
+> **2026-09-06/07 审计快照 + 2026-09-10 状态标注**：下列前三项已于 2026-09-08 关闭/推进（逐项证据见 revenue [gp_tail_closure_2026-09-08.md](../revenue-forecast/assurance/runs/2026-09-02_remaining-gap-closure/gp_tail_closure_2026-09-08.md)）；保留原文并就地标注，不删除历史判断。仍开放的是 H01、WP02–10、filing FC-903。
+
+- GP-008：当前revenue `2ff20d9`已将daily注册参数修复为`run-daily`；实际Action/自然触发独立证明仍不足。latest观测manifest `20260905T194055Z`绑定旧`2cbd585`，不能证明当前组合通过。 → **2026-09-10 标注：已关闭**（09-06 22:00 起调度自然触发连续成功，09-08 起 daily 连续 ok=true；见 gp_tail §2）
+- GP-006：Windows sibling CI接线存在，但job为非阻断且不包含生产catalog真实roots测试；原真实roots CI目标不能标完整关闭。 → **2026-09-10 标注：已关闭**（real-roots job 已改为阻断且绿，含生产 catalog 真实 roots；见 gp_tail §1）
+- GP-010：已有owner批准与执行记录；normalized及receipt各7/7，summary6/7，sections=5/7，2份列表式缺口，安全拒绝不得绕过。kind宽范围历史处理与精确7份cohort不同；已产出的214份按owner处置保留，不擅自删除。机器T1不代真实语义闭环。 → **2026-09-10 标注：sections 已 7/7**（wiki `623e831` 列表式标题修复 + 09-08 欠抽取刷新 5 份；summary 6/7 的 1 份为 `_FORBIDDEN_OUTPUT` 正确拒绝，**不是缺陷**；见 gp_tail §5）
+- H01：自动prune按旧归档目录日期判due，却覆盖全部retired EvidenceSpan，未证明逐条可信归档与恢复。独立核验确认代码风险但没有实际误删证据；WP01为worker恢复前置，不可仅修SQL即启动。 → **仍开放**（worker 恢复硬前置）
+- WP02–10：policy/eligible、修订补缺、持久需求/attempt、真实语义与模型发布仍有实质缺口，详见分报告；不是单纯等待观察时间即可关闭。 → **仍开放**（R4 待授权）
+- filing FC-903：reviewer所绑定implementer SHA与当前文件不一致；保留收据并披露，不修改签署字节来制造通过。 → **仍开放**（按 R4/审计处理）
 
 最新证据与后续检查见 [审计入口](docs/plans/painpoint-outcome-audit-2026-09-05/README.md)。9/4同步分报告保留为历史观测；本次仍不修代码或改机器配置。
 
