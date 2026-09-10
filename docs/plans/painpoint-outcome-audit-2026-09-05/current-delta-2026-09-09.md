@@ -36,7 +36,7 @@
 | `portfolio_promoter` | `cli.py:27`（CLI 导入） | **有 CLI 读者** |
 | `_scan_root_v1` | `scanner.py:1401`（生产分派）、`shadow_parity.py:94`、`trace_parity.py:206` | **非死代码** |
 | `legacy_bridge_enabled` | `resolver.py:322`、`architecture_gate.py:127/139/278` | **非死代码**（迁移期 bridge/回滚） |
-| `artifact_backfill` | **自带运维 CLI**（`--mode dry-run\|apply`；FC-901 收据记载 production caller 即同模块 CLI main()）；3 个契约测试导入（zr305/zr1005/test_source_catalog_artifact_backfill）；FC-906 卡片标注 Forbidden「FC-901 工具，不改」；冻结 v5 基线有 ZR1005-C1~C4 验收行 | 🔴 **2026-09-10 更正：不是零读者**。先前"唯一零生产读者"基于过窄 grep（只查 import），已证伪；**不予删除**，退役属能力退役另议 |
+| `artifact_backfill` | **自带运维 CLI**（`--mode dry-run\|apply`；FC-901 收据记载 production caller 即同模块 CLI main()）；3 个契约测试导入（zr305/zr1005/test_source_catalog_artifact_backfill）；FC-906 卡片标注 Forbidden「FC-901 工具，不改」；冻结 v5 基线有 ZR1005-C1~C4 验收行 | 🔴 **2026-09-10 更正：不是零读者**。先前"唯一零生产读者"基于过窄 grep（只查 import），已证伪；**3a 已由 owner 同日正式撤销**，未删除任何文件；若将来退役该能力属"能力退役"另议 |
 
 影响：
 - `r4-unit-remediation-map.md` 中 CA-304 / ZR-1009 行的「R9 批3（已批准待 FC-705 门）」应理解为**尚需 owner 重新确认范围**；技术门（FC-705）+ 政策门（2026-09-06 owner 延后至 v2 迁移稳定）双重满足后才可能执行。

@@ -36,7 +36,7 @@
 | CA-301 | P01/P10 | CONTRADICTED | 干净旅程/三公司/ratchet/legacy 退出 | WP13/WP14 | X + D（放量与退出） | X02–X04、D09/D10 | X02–X04、O08 | 待取证 |
 | CA-302 | P01/P10 | CONTRADICTED | 干净旅程/三公司/ratchet/legacy 退出 | WP13/WP14 | X + D（放量与退出） | X02–X04、D09/D10 | X02–X04、O08 | 待取证 |
 | CA-303 | P01/P11 | PARTIAL | 干净旅程/三公司/ratchet/legacy 退出 | WP13/WP14 | X + D（放量与退出） | X02–X04、D09/D10 | X02–X04、O08 | 待取证 |
-| CA-304 | P01/P11 | CONTRADICTED | 干净旅程/三公司/ratchet/legacy 退出 | WP14 | D（legacy 删除门） | R9 批3（已批准待 FC-705 门）+ O08 | O01/O02/O08 | 待取证 |
+| CA-304 | P01/P11 | CONTRADICTED | 干净旅程/三公司/ratchet/legacy 退出 | WP14 | D（legacy 删除门） | R9 批3（3a 已撤销 2026-09-10；仅剩 3b/3c，需替代路径 + FC-705 门）+ O08 | O01/O02/O08 | 待取证 |
 | CA-305 | P01/P10 | CONTRADICTED | 干净旅程/三公司/ratchet/legacy 退出 | WP13/WP14 | X + D（放量与退出） | X02–X04、D09/D10 | X02–X04、O08 | 待取证 |
 | CA-306 | P01/P10 | PARTIAL | 干净旅程/三公司/ratchet/legacy 退出 | WP13/WP14 | X + D（放量与退出） | X02–X04、D09/D10 | X02–X04、O08 | 待取证 |
 | ZR-001 | P01/P11 | HISTORICAL_ONLY | 完成资格（registry 基础） | WP00 | A08 + U117 | A08、U117.01–.04 | U117.05 | 待取证 |
@@ -164,4 +164,8 @@
 - D06/D08（调度与账本）: 1 项
 - D07: 1 项
 - D07（drift patrol）: 1 项
+
+## 2026-09-10 注（R9 批 3 范围）
+
+CA-304 行中的「R9 批3」**不再包含原 3a**：owner 于 2026-09-10 正式撤销 3a（`src/company_wiki/source_catalog/artifact_backfill.py` 经完整依赖扫描定性为**受 FC-906 卡片保护的运维工具**——自带 `--mode dry-run|apply` CLI、FC-901 收据记载其 production caller 即该 CLI、被 3 个契约测试导入、冻结 v5 基线有 ZR1005-C1~C4 验收行），**未删除任何文件**。批 3 只剩 3b（`_scan_root_v1` + shadow/trace parity）与 3c（`legacy_bridge_enabled` + flags/resolver/architecture_gate），二者均需先给出替代路径与回滚，且仍需 FC-705 门 + owner 政策门。详见 revenue 侧 [r9_batch3_checklist.md](../../../../revenue-forecast/assurance/runs/2026-09-02_remaining-gap-closure/r9_batch3_checklist.md)。
 
