@@ -5,7 +5,7 @@
 
 ## 1. 机器观测（2026-09-09 22:00 运行后）
 
-> **2026-09-10 22:00 运行更新（实测）**：`run_id=20260910T210001Z`、`ok=true`、`problems=[]`、`legacy_hits=[]`；账本开 **period 10**（`2026-09-10T21:00:13Z`），P9 关闭为 **23:59:52（差 8 秒，SHORT）** → `close_gate_allowed` 仍 **false**。**机制级根因**：窗口时长 = 相邻两次 daily 的间隔，任务按 22:00 触发但有 ±20 秒抖动 → 约一半夜晚 <24h（P7 −19s、P8 +11s、P9 −8s；零 hit 实质条件每晚均满足）。可选根治需 owner 授权（runner 在调用 observer 前补足不足的秒数，真实等待、不放宽 24h 阈值）。GP-009 累积更新为 Daily **5/7**、Weekly 0/2。详见 revenue 侧 [gp_tail_closure_2026-09-08.md](../../../../revenue-forecast/assurance/runs/2026-09-02_remaining-gap-closure/gp_tail_closure_2026-09-08.md) §6.4。
+> **2026-09-10 22:00 运行更新（实测）**：`run_id=20260910T210001Z`、`ok=true`、`problems=[]`、`legacy_hits=[]`；账本开 **period 10**（`2026-09-10T21:00:13Z`），P9 关闭为 **23:59:52（差 8 秒，SHORT）** → `close_gate_allowed` 仍 **false**。**机制级根因**：窗口时长 = 相邻两次 daily 的间隔，任务按 22:00 触发但有 ±20 秒抖动 → 约一半夜晚 <24h（P7 −19s、P8 +11s、P9 −8s；零 hit 实质条件每晚均满足）。**根治已由 owner 授权并实施**（revenue `41117ce`）：`run_daily` 在调用 observer 前真实等待补足到 24h（上限 180 秒；不放宽阈值、不回溯时间戳；提前的手动重跑不补）。**生效时点**：2026-09-11 22:00 起；**门预计 2026-09-12 22:00 确定性打开**（P10+P11 均 ≥24h）。GP-009 累积更新为 Daily **5/7**、Weekly 0/2。详见 revenue 侧 [gp_tail_closure_2026-09-08.md](../../../../revenue-forecast/assurance/runs/2026-09-02_remaining-gap-closure/gp_tail_closure_2026-09-08.md) §6.4。
 
 | 项 | 实测 |
 |---|---|
