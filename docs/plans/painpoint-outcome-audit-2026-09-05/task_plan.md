@@ -20,8 +20,8 @@
 ### 2026-09-09 深夜并发状态核对（只读 + 文档）
 
 - **Worker v5 独立轨道已全部完成**（同仓 `source-catalog-worker-recovery-v5-2026-09-03`，提交 `6559075`）：V5-0/R/1/2/3 completed，冻结 51 项，三轴独立审查 `accepted`（SQL/性能、生命周期/安全、测试/DAG）。它是 R4 中 worker 相关 WP 的**版本合同/冻结输入**，但不改变 R4 的 `NOT_IMPLEMENTATION_AUTHORIZED`，也不替代 H01 前置。
-- **FC-705 门**：09-09 22:00 daily 成功、开 period 9（hits=0）；last-two = P7（23:59:41 ✗）+ P8（24:00:11 ✓）→ 仍 false，预计 **2026-09-10 22:00 运行后**转 true。见 [current-delta-2026-09-09.md](current-delta-2026-09-09.md)。
-- **R9 批 3 范围修正**：实测仅 `artifact_backfill.py` 零生产读者，其余候选（`backfill_v2`/`portfolio_promoter`/`_scan_root_v1`/`legacy_bridge_enabled`）均有活跃调用者 → 批 3 需技术门 + owner 政策门并重新拆分；`r4-unit-remediation-map.md` 的 CA-304/ZR-1009 行按此理解（清单见 revenue `r9_batch3_checklist.md`）。
+- **FC-705 门**：09-10 22:00 daily 成功但 P9 窗口 **23:59:52（差 8 秒）** → 仍 false；owner 已授权根治（revenue `41117ce`：runner 真实等待补足 24h），**门预计 2026-09-12 22:00 确定性打开**。见 [current-delta-2026-09-09.md](current-delta-2026-09-09.md)。
+- **R9 批 3 范围修正**：~~实测仅 `artifact_backfill.py` 零生产读者~~ → 🔴 **2026-09-10 更正：该结论已证伪**（该模块自带运维 CLI、被 3 个契约测试导入、FC-906 卡片标注「FC-901 工具，不改」、冻结 v5 基线有 ZR1005-C1~C4 验收行）。其余候选（`backfill_v2`/`portfolio_promoter`/`_scan_root_v1`/`legacy_bridge_enabled`）均有活跃调用者 → 批 3 需技术门 + owner 政策门并重新拆分（**3a 作废**，只剩 3b/3c，二者均需先给出替代路径与回滚，当前**没有任何小批满足机械删除条件**）；`r4-unit-remediation-map.md` 的 CA-304/ZR-1009 行按此理解（清单见 revenue `r9_batch3_checklist.md`）。
 - 本轮未运行产品测试、未改产品代码/配置/DB/任务/worker。
 
 ## Phase 6：按虚拟数据湖减法调整为R4 — completed（仅规划交付）

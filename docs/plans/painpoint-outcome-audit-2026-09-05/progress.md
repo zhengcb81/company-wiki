@@ -4,8 +4,8 @@
 
 - **Worker v5 独立轨道全部完成**（同仓 `docs/plans/source-catalog-worker-recovery-v5-2026-09-03/`，提交 `6559075`）：V5-0/V5-R/V5-1/V5-2/V5-3 全部 completed；正式冻结 51 项（48 导入 + 3 治理件）+ 三轴独立审查 `accepted`（SQL/性能、生命周期/安全、测试/DAG，共 13 份审查/关闭记录）；四轮整改关闭 **14 条 P1 + 3 条 P2**；`--verify-manifest` 9188 通过、`--self-test` 17 例/32 变异 + 4 默认模式 + 3 守卫全拒。**仍 PLAN_ONLY，不构成实施授权，不改变 R4 的 WP 授权状态。**
 - **FC-705 门**：09-09 22:00 daily 触发成功（`20260909T210001Z`、ok=true、`legacy_hits=[]`），权威账本开 **period 9**（hits=0）；last-two = P7（23:59:41 ✗）+ P8（24:00:11 ✓）→ 仍 `close_gate_allowed=false`，**预计 2026-09-10 22:00 运行后**转 true。
-- **R9 批 3 范围修正（本目录相关）**：09-02 口径「无生产读者 backfill/promoter」已失真——实测仅 `artifact_backfill.py` 零生产读者，`backfill_v2`/`portfolio_promoter`/`_scan_root_v1`/`legacy_bridge_enabled` 均有活跃调用者；批 3 需技术门 + owner 政策门并重新拆分。清单见 revenue 侧 [r9_batch3_checklist.md](../../../../revenue-forecast/assurance/runs/2026-09-02_remaining-gap-closure/r9_batch3_checklist.md)。对 R4 的影响：`r4-unit-remediation-map.md` 中 CA-304/ZR-1009 的"R9 批3（已批准待 FC-705 门）"应理解为**尚需 owner 重新确认范围**，不能按旧清单机械执行。
-- **GP-009 累积**：Daily **4/7**、Weekly 0/2（下次 09-13 04:30）、Monthly 1/1、drill 1/1。
+- **R9 批 3 范围修正（本目录相关）**：09-02 口径「无生产读者 backfill/promoter」已失真——~~实测仅 `artifact_backfill.py` 零生产读者~~ 🔴 **2026-09-10 再更正：这一条也错了**。`artifact_backfill.py` 实为**自带运维 CLI**（`--mode dry-run|apply`）、被 3 个契约测试导入、FC-906 卡片标注「FC-901 工具，**不改**」、冻结 v5 基线有 ZR1005-C1~C4 验收行 → **当前没有任何候选满足"零读者 + 无冻结约束"的机械删除条件**；owner 2026-09-10 的"执行 3a"指令因前提证伪而**暂停执行，未删除任何文件**。其余候选（`backfill_v2`/`portfolio_promoter`/`_scan_root_v1`/`legacy_bridge_enabled`）均有活跃调用者。批 3 需技术门 + owner 政策门并重新拆分（3a 作废，仅剩 3b/3c）。清单见 revenue 侧 [r9_batch3_checklist.md](../../../../revenue-forecast/assurance/runs/2026-09-02_remaining-gap-closure/r9_batch3_checklist.md)。对 R4 的影响：`r4-unit-remediation-map.md` 中 CA-304/ZR-1009 的"R9 批3（已批准待 FC-705 门）"应理解为**尚需 owner 重新确认范围**，不能按旧清单机械执行。
+- **GP-009 累积**：Daily **5/7**（09-06~09-10）、Weekly 0/2（下次 09-13 04:30）、Monthly 1/1、drill 1/1。
 - **本轮边界**：只写文档 + 只读核对；未运行产品测试、未改产品代码/配置/DB/任务/worker，未下载/LLM/删除。详见 [current-delta-2026-09-09.md](current-delta-2026-09-09.md)。
 
 ## 2026-09-09：Phase 7 收尾（117 逐行映射 + 独立复核）

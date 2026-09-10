@@ -8,9 +8,10 @@
 
 ## F009：R9 批 3 的"无生产读者"口径已失真（2026-09-09 深夜实测）
 
-- 证据（逐符号 grep，wiki 源码）：`backfill_v2` ← `dropbox_governance.py:22`（生产治理链导入 `classify_bucket`）；`portfolio_promoter` ← `cli.py:27`（CLI 面）；`_scan_root_v1` ← `scanner.py:1401`（生产分派）+ `shadow_parity.py:94`/`trace_parity.py:206`（对账）；`legacy_bridge_enabled` ← `resolver.py:322`、`architecture_gate.py:127/139/278`。仅 `artifact_backfill.py` 无 src/scripts 生产导入。
+- 证据（逐符号 grep，wiki 源码）：`backfill_v2` ← `dropbox_governance.py:22`（生产治理链导入 `classify_bucket`）；`portfolio_promoter` ← `cli.py:27`（CLI 面）；`_scan_root_v1` ← `scanner.py:1401`（生产分派）+ `shadow_parity.py:94`/`trace_parity.py:206`（对账）；`legacy_bridge_enabled` ← `resolver.py:322`、`architecture_gate.py:127/139/278`。
+- 🔴 **2026-09-10 更正（本条部分作废）**：当时写"仅 `artifact_backfill.py` 无 src/scripts 生产导入 → 零生产读者"是**基于过窄的 grep**，**已证伪**。完整扫描显示：① 该模块自带**运维 CLI**（`artifact_backfill.py:305 main()` → `python -m …artifact_backfill --catalog … --mode dry-run|apply`），`assurance/fc/FC-901/11_implementer_receipt.json` 明确记载「run_artifact_backfill 的 production caller 就是**同模块的 CLI main()**」；② 被 3 个契约测试导入（`test_zr305_legacy_migration.py`、`test_zr1005_artifact_backfill.py`、`test_source_catalog_artifact_backfill.py`）；③ **FC-906 工作单元卡把它列为 Forbidden files**（`assurance/fc/FC-906/00_wu_card_a.md:24`「`artifact_backfill.py`（FC-901 工具，**不改**）」）；④ 冻结 v5 基线 `baseline/plan/test_acceptance_plan.md` 有 ZR1005-C1~C4 验收行；⑤ ratchet 登记 `37`/`79`。→ **它不构成"最小死代码步"**：owner 2026-09-10 的"执行 3a"指令因前提证伪而暂停，**未删除任何文件**。
 - 推理：09-02 授权申请把批 3 描述为"无生产读者 backfill/promoter"，若照此机械删除会破坏生产治理/CLI/对账/回滚路径。批 3 的实质是"退役 v1 扫描路径与迁移期机制"的架构清理，必须先有替代路径与回滚，再谈删除。
-- 影响：R9 批 3 需**技术门（FC-705）+ owner 政策门（2026-09-06 延后至 v2 迁移稳定）**双重满足，并重新拆分（3a `artifact_backfill` 最小步 / 3b `_scan_root_v1`+parity / 3c bridge+flags+resolver）。清单见 revenue 侧 `r9_batch3_checklist.md`。
+- 影响：R9 批 3 需**技术门（FC-705）+ owner 政策门（2026-09-06 延后至 v2 迁移稳定）**双重满足；拆分后 **3a 已作废**，只剩 3b（`_scan_root_v1`+parity）与 3c（bridge+flags+resolver），二者均需先给出替代路径与回滚，**当前没有任何小批满足机械删除条件**。清单见 revenue 侧 `r9_batch3_checklist.md`。
 - 边界：本轮只做只读 grep 与文档记录，未删除、未改产品代码。
 
 ## F008：worker v5 的"完成"只覆盖规划文档完整性（2026-09-09）
