@@ -5,13 +5,15 @@
 
 ## 1. 机器观测（2026-09-09 22:00 运行后）
 
+> **2026-09-10 22:00 运行更新（实测）**：`run_id=20260910T210001Z`、`ok=true`、`problems=[]`、`legacy_hits=[]`；账本开 **period 10**（`2026-09-10T21:00:13Z`），P9 关闭为 **23:59:52（差 8 秒，SHORT）** → `close_gate_allowed` 仍 **false**。**机制级根因**：窗口时长 = 相邻两次 daily 的间隔，任务按 22:00 触发但有 ±20 秒抖动 → 约一半夜晚 <24h（P7 −19s、P8 +11s、P9 −8s；零 hit 实质条件每晚均满足）。可选根治需 owner 授权（runner 在调用 observer 前补足不足的秒数，真实等待、不放宽 24h 阈值）。GP-009 累积更新为 Daily **5/7**、Weekly 0/2。详见 revenue 侧 [gp_tail_closure_2026-09-08.md](../../../../revenue-forecast/assurance/runs/2026-09-02_remaining-gap-closure/gp_tail_closure_2026-09-08.md) §6.4。
+
 | 项 | 实测 |
 |---|---|
 | daily run | `run_id=20260909T210001Z`（22:00:20 本地）、`ok=true`、`problems=[]`、`legacy_hits=[]`、`resolve_sample_sec=0.0066` |
 | daily manifest | `observation_period=9`；triplet revenue `218ba7e` / filing `bb8d485` / wiki `454f632`（运行时刻快照，非当前 HEAD） |
 | 权威账本 | `.source_catalog/legacy_periods.json`（22:00:21 写入）→ period 9 `started_at 2026-09-09T21:00:21Z`、`legacy_bridge_hits=0`、`mode=sample`、`sampled_documents=62` |
 | FC-705 门 | `close_allowed=false`，reason `period 7: window 23:59:41 is shorter than 24h`（last-two = P7 ✗ / P8 24:00:11 ✓） |
-| 预期关闭 | **2026-09-10 22:00 运行后**（P8+P9 连续两个 ≥24h 零 hit）→ true；若 P9 <24h 则顺延一天 |
+| 预期关闭 | ~~2026-09-10 22:00 运行后~~ → **2026-09-10 22:00 实测：仍未开**（P9 = 23:59:52，差 8 秒）；按 last-two 规则**最早 2026-09-12 22:00 后**，每次短窗再顺延一天 |
 | GP-009 累积 | Daily **4/7**（09-06/07/08/09）、Weekly 0/2（下次 2026-09-13 04:30）、Monthly 1/1、alert drill 1/1 |
 | 三仓工作树 | company-wiki **提交时点干净**（2026-09-10 交接复核时 v5 冻结记录尚有一行未提交的 §8 决策，现已随 V5-3 交接提交入库）；filing-fetch 干净；revenue 仅 3 个 ACL 受限空目录（`.tmp-zr408-unit*`）未清理 |
 
