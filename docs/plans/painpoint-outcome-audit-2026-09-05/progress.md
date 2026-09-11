@@ -15,7 +15,7 @@
   7. A04 规则 R4（路径不入身份）与现行 `is_canonical` 选择键（含 `priority`/`root_id`/`relative_path`）**相矛盾** → R4 重述为**目标**并点名残留；
   8. 边界声明被文件系统证据挑战：生产库 `catalog.sqlite3-shm` 在 run 窗口内被写入（21:18:15）——**已归因**（v0.2 定案）：本会话**推送前的强制 gate**（revenue `tools/pre_push_gate.py` 的 real-data 套件对生产 catalog 只读跑 pytest）在 21:18:15 / 21:26:47 / 22:05:03 / 22:10:11 四处开库，另 22:00:02/18 两处为 22:00 每日任务；主库与 `-wal` 全程未变（无逻辑写入）。逐条证据见 revenue 侧 `assurance/runs/2026-09-11_r4-phase-a/boundary-audit.md` §1–§3。v0.1 的"零副作用"快照**未覆盖 `-shm`/`-wal`** → 覆盖盲区已修复；"独立边界观测"仍登记为**操作员动作**（作者不代签）。**同时更正**：v0.1 中"本会话未运行任何会打开 catalog 的代码路径"的更强说法**已撤回**——push 协议本身就会（只读）打开它。
 - **v0.2 新增产物**：`inputs.json`（依赖/lockfile 哈希 + schema 常量）、`boundary-audit.md`（shm 证据/受控实验/归因限制）、被动观测脚本与产物（**不开库、不执行 CLI**）、快照覆盖扩展后的 manifest 证据。
-- **阻塞项（需 owner/操作员）**：① **6 项 owner 裁定**（`symlink_policy`、`reusable_for_filing`、两套准入实现收敛、`privacy_class` 缺省、R6 owner、R4 严格读法）；A.DR 明确要求**先裁定再冻结 A02**。② 独立边界观测与 reviewer 身份戳记（需操作员）。③ A05/A06 的样本清单与**隔离副本**（生产 catalog **49,677,344,768 B**，禁止行为探针）。
+- **阻塞项（需 owner/操作员）**：① ~~6 项 owner 裁定~~ → **2026-09-11 当夜已裁定（G2）**：owner 回"按你建议办"，六条全部按建议定案（`symlink_policy` 按假保证字段处置、`reusable_for_filing: false` 必须生效、两套准入实现收敛到生效的 `config.py`、`privacy_class` 缺省改为默认不外发、A04 R6 指派 `identity-enrichment`+`security_identity`、A04 R4 保持目标并登记 9 处整改）→ **A02 据此封版为 root-contract v0.4**；裁定只定方向与登记，未改产品代码。逐条见 revenue 侧 `assurance/runs/2026-09-11_r4-phase-a/owner-rulings-2026-09-11.md`。② 独立边界观测与 reviewer 身份戳记（需操作员）。③ A05/A06 的样本清单与**隔离副本**（生产 catalog **49,677,344,768 B**，禁止行为探针）。
 - **边界**：本轮只写文档 + `--help` 探针；未运行产品测试、未改产品代码/配置/DB/任务/worker，未下载/LLM/删除；R4 整体仍 **NOT_IMPLEMENTATION_AUTHORIZED**。
 
 ## 2026-09-09 深夜：并发状态核对（V5 完成 / FC-705 门 / R9 批 3 范围修正）

@@ -22,6 +22,7 @@
 - **owner 三项批准**：① A 阶段精确 DEV/数据读取许可；② `--help`-only command manifest；③ VR reviewer 指派。→ A01–A04 的只读设计**已执行**（`--help` 探针 52 次全绿），A05/A06 仍被"样本清单 + 隔离副本"阻塞。
 - **A.DR 首轮 verdict = rejected**（独立非作者会话；8×P1/5×P2/3×P3），更正已就地完成（v0.2）。逐条映射见 [progress.md](progress.md) 顶部条目与 revenue 侧 `assurance/runs/2026-09-11_r4-phase-a/{progress,findings}.md`。
 - **上一条 Next Step 的措辞据此细化**：A01 已重锁三仓输入（`inputs.json`：12 输入哈希 + 依赖/lockfile 哈希 + schema 常量），但 **A02 冻结被 A.DR 明确拦下**，需先取得 owner 对 6 项开放问题的裁定（`symlink_policy` 假保证、`reusable_for_filing` fail-open、两套 root 准入实现分叉、`privacy_class` 缺省 public、R6 owner、R4 严格读法）。
+  → **2026-09-11 当夜更新**：**owner 已裁定（G2，"按你建议办"）**，六条全部按建议定案，**A02 已封版为 root-contract v0.4**；R-1…R-4/R-6 进入 B/C 整改范围（实施前需精确 DEV 工作包），R-5 已指派 owner。裁定记录：revenue `assurance/runs/2026-09-11_r4-phase-a/owner-rulings-2026-09-11.md`。此后阶段 A 的剩余阻塞只在 owner/操作员侧（A05 样本清单、隔离副本、G5/G6 独立观测与指派原件）。
 - **状态口径**：A 阶段设计**完成到 v0.2 草案并已更正**，**不是** accepted，**不**构成任何实施授权；R4 整体仍 `NOT_IMPLEMENTATION_AUTHORIZED`。
 
 ### 2026-09-09 深夜并发状态核对（只读 + 文档）
