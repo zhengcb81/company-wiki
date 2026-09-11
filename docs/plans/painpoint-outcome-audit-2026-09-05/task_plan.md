@@ -17,6 +17,13 @@
 
 等待精确实施授权（DEV/数据/运行各自批准），从 R4 A01 重锁三仓输入开始。Phase 7 只完成规划细化，不构成产品实施或真实测试结果；原R4两份被审核心文档及历史签署字节不变。
 
+### 2026-09-11 夜：阶段 A 授权落位与首轮 A.DR（**rejected** → v0.2）
+
+- **owner 三项批准**：① A 阶段精确 DEV/数据读取许可；② `--help`-only command manifest；③ VR reviewer 指派。→ A01–A04 的只读设计**已执行**（`--help` 探针 52 次全绿），A05/A06 仍被"样本清单 + 隔离副本"阻塞。
+- **A.DR 首轮 verdict = rejected**（独立非作者会话；8×P1/5×P2/3×P3），更正已就地完成（v0.2）。逐条映射见 [progress.md](progress.md) 顶部条目与 revenue 侧 `assurance/runs/2026-09-11_r4-phase-a/{progress,findings}.md`。
+- **上一条 Next Step 的措辞据此细化**：A01 已重锁三仓输入（`inputs.json`：12 输入哈希 + 依赖/lockfile 哈希 + schema 常量），但 **A02 冻结被 A.DR 明确拦下**，需先取得 owner 对 6 项开放问题的裁定（`symlink_policy` 假保证、`reusable_for_filing` fail-open、两套 root 准入实现分叉、`privacy_class` 缺省 public、R6 owner、R4 严格读法）。
+- **状态口径**：A 阶段设计**完成到 v0.2 草案并已更正**，**不是** accepted，**不**构成任何实施授权；R4 整体仍 `NOT_IMPLEMENTATION_AUTHORIZED`。
+
 ### 2026-09-09 深夜并发状态核对（只读 + 文档）
 
 - **Worker v5 独立轨道已全部完成**（同仓 `source-catalog-worker-recovery-v5-2026-09-03`，提交 `6559075`）：V5-0/R/1/2/3 completed，冻结 51 项，三轴独立审查 `accepted`（SQL/性能、生命周期/安全、测试/DAG）。它是 R4 中 worker 相关 WP 的**版本合同/冻结输入**，但不改变 R4 的 `NOT_IMPLEMENTATION_AUTHORIZED`，也不替代 H01 前置。

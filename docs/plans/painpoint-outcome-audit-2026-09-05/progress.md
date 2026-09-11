@@ -1,5 +1,23 @@
 # 审计进度
 
+## 2026-09-11 夜：R4 阶段 A 首轮设计审查（A.DR **rejected** → v0.2 更正完成）
+
+- **运行目录**：`revenue-forecast/assurance/runs/2026-09-11_r4-phase-a/`（在审计证据目录**之外**，符合 handbook §2.5/§3）。
+- **owner 三项批准**：① A 阶段精确 DEV/数据读取许可；② `--help`-only command manifest；③ VR reviewer 指派。据此执行 **52 次 `--help` 探针**（全部 rc=0），把 CLI 表面积从"源码 grep 的 47"更正为 **41 顶层 + 10 嵌套 = 51 节点 / 47 叶子**。**未**越界：产品写入、`--dry-run`、真实数据命令、网络、删除、worker 恢复均未发生。
+- **A01–A04 草案 v0.1 送 A.DR** → 独立复审（非作者会话）**verdict = rejected**：**8×P1 / 5×P2 / 3×P3**。复审确认的正向事实：12/12 输入哈希与字节数、三仓 HEAD、root 配置表、51 节点 CLI 结构、checkpoint 产物哈希、跨仓 spawn 引用、仓库/目录边界隔离。记录见 revenue 侧 `reviews/A.DR.json`。
+- **P1 实质问题（均已就地更正为 v0.2）**：
+  1. `symlink_policy` 被当作"已强制 fail-closed"——实际**只解析、从不读取**（全库 `is_symlink|reparse` 命中 0）＝**假保证字段**；
+  2. 冻结的复用链 `reusable_root_kinds → is_canonical → priority` **不存在**：复用只看 `root.kind`（`resolver.py:782-786/933-940`），**显式 `reusable_for_filing: false` 无法关闭复用（fail-open）**；所谓 `priority` 分支其实是字符串字面量（`resolver.py:531`），真实排序在 SQL（`service.py:329/527`、`:643-653`）；
+  3. `canonical_write_target` 的"无校验"结论**错误**：校验存在于 `policy_2x.py:49/121-131`，但**该 loader 无生产调用者**，而现行 `config.py` 直接**拒绝该字段** → **两套分叉的 root 准入实现**；
+  4. `identify` 被列入只读面——`--refresh` 实为**网络 + 本地写**（`cli.py:1080-1087`、`security_identity.py:1007/348`）；
+  5. 命令清单**漏 7 个叶子**（`worker-status/start/resume/pause/stop`、`derived-audit`、`import-portfolio`）——其中 `worker-pause` 正是该契约规则 R3 点名要防的动作；
+  6. A01 的子进程面被**严重低估**（真实为 **7 模块 / 12 个 spawn 点**，含 `dayu_cli_adapter`/`adapter_process` 的**外部 provider 边界**），且 F-A01-2 引用了 `company_wiki_source.py` 的 **docstring 文本**当代码证据（已删）；
+  7. A04 规则 R4（路径不入身份）与现行 `is_canonical` 选择键（含 `priority`/`root_id`/`relative_path`）**相矛盾** → R4 重述为**目标**并点名残留；
+  8. 边界声明被文件系统证据挑战：生产库 `catalog.sqlite3-shm` 在 run 窗口内被写入（21:18:15），**归属未知**；v0.1 的"零副作用"快照**未覆盖 `-shm`/`-wal`** → 覆盖盲区已修复，并把"独立边界观测"登记为**操作员动作**（作者不代签）。
+- **v0.2 新增产物**：`inputs.json`（依赖/lockfile 哈希 + schema 常量）、`boundary-audit.md`（shm 证据/受控实验/归因限制）、被动观测脚本与产物（**不开库、不执行 CLI**）、快照覆盖扩展后的 manifest 证据。
+- **阻塞项（需 owner/操作员）**：① **6 项 owner 裁定**（`symlink_policy`、`reusable_for_filing`、两套准入实现收敛、`privacy_class` 缺省、R6 owner、R4 严格读法）；A.DR 明确要求**先裁定再冻结 A02**。② 独立边界观测与 reviewer 身份戳记（需操作员）。③ A05/A06 的样本清单与**隔离副本**（生产 catalog **49,677,344,768 B**，禁止行为探针）。
+- **边界**：本轮只写文档 + `--help` 探针；未运行产品测试、未改产品代码/配置/DB/任务/worker，未下载/LLM/删除；R4 整体仍 **NOT_IMPLEMENTATION_AUTHORIZED**。
+
 ## 2026-09-09 深夜：并发状态核对（V5 完成 / FC-705 门 / R9 批 3 范围修正）
 
 - **Worker v5 独立轨道全部完成**（同仓 `docs/plans/source-catalog-worker-recovery-v5-2026-09-03/`，提交 `6559075`）：V5-0/V5-R/V5-1/V5-2/V5-3 全部 completed；正式冻结 51 项（48 导入 + 3 治理件）+ 三轴独立审查 `accepted`（SQL/性能、生命周期/安全、测试/DAG，共 13 份审查/关闭记录）；四轮整改关闭 **14 条 P1 + 3 条 P2**；`--verify-manifest` 9188 通过、`--self-test` 17 例/32 变异 + 4 默认模式 + 3 守卫全拒。**仍 PLAN_ONLY，不构成实施授权，不改变 R4 的 WP 授权状态。**
