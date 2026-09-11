@@ -42,6 +42,10 @@
 - `r4-unit-remediation-map.md` 中 CA-304 / ZR-1009 行的「R9 批3（已批准待 FC-705 门）」应理解为**尚需 owner 重新确认范围**；技术门（FC-705）+ 政策门（2026-09-06 owner 延后至 v2 迁移稳定）双重满足后才可能执行。
 - 执行清单（含门、范围、验证、回滚、冻结边界）见 revenue 侧 [r9_batch3_checklist.md](../../../../revenue-forecast/assurance/runs/2026-09-02_remaining-gap-closure/r9_batch3_checklist.md)。
 
+### 3.1 R9 批 3 的权威范围已定位（2026-09-11）
+
+门测试 `tests/contract/test_r9_v1_removal_gate.py:6` 引用的执行包 `assurance/fc/Phase-14/01_r9_packet.md` **不在本仓**，实际位于 revenue 仓同路径。**批 3 的权威范围 = 包 §1 的 7 项**（v1 scanner + 分支、facade v1 默认、`backfill_v2`、`portfolio_promoter` + CLI、`visibility_bridge`、`legacy_close_gate` + observer、`flags.legacy_bridge_enabled` 链），**不含 `artifact_backfill.py`**（印证 3a 撤销正确）。逐项前置（今日实测调用者 → 替代/级联 → 回滚 → 验证）与包的三处缺陷（跨仓指针、过期进入条件、过期行号）见 revenue 侧 [r9_batch3_prerequisites.md](../../../../revenue-forecast/assurance/runs/2026-09-02_remaining-gap-closure/r9_batch3_prerequisites.md)。门测试 docstring 的跨仓指针属**产品文件改动，待授权**，本轮未改。
+
 ## 4. 本轮未验证/未授权
 
 - 未复核 9/7 之前的旧反证在当前 HEAD 下是否仍成立（须实施时重锁输入）。
