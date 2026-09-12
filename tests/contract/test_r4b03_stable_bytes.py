@@ -486,20 +486,28 @@ def test_r4b03_cancellation_stops_the_read_early(tmp_path, monkeypatch):
     assert calls["n"] <= 1, f"kept reading after cancellation: {calls['n']} reads"
 
 
-def test_r4b03_a_drive_root_configured_root_contains_its_files(tmp_path):
+def test_r4b03_a_volume_root_configured_root_contains_its_files(tmp_path):
     """Edge found while reading the B03 review's path probe.
 
-    With a root configured as a drive root ("C:\\\\"), string-prefix
-    containment compared against ``"C:\\\\\\\\"`` and refused EVERY file on the
-    drive: fail-closed, but wrong.  Containment now uses ``commonpath``, which
-    keeps a drive root working while a textual-prefix sibling still fails."""
+    With a root configured as a VOLUME root, string-prefix containment compared
+    against ``base + os.sep`` - ``"C:\\\\"`` on Windows - and refused EVERY file
+    under that root: fail-closed, but wrong.  Containment now uses
+    ``commonpath``, which keeps a volume root working while a textual-prefix
+    sibling still fails.
+
+    The case uses the CURRENT platform's own volume anchor (``C:\\\\`` on
+    Windows, ``/`` elsewhere) instead of a hard-coded Windows path: the first
+    version hard-coded ``C:\\Windows\\win.ini`` and failed on Linux CI, where
+    that name is relative and the containment answer is legitimately False."""
     from types import SimpleNamespace
 
     from company_wiki.source_catalog.resolver import _inside_configured_roots
 
-    drive_root = SimpleNamespace(path="C:\\")
-    assert _inside_configured_roots(Path(r"C:\Windows\win.ini"), (drive_root,))
-    assert _inside_configured_roots(Path("C:\\"), (drive_root,))
+    volume_root = tmp_path.anchor  # "C:\\" on Windows, "/" on POSIX
+    assert volume_root, "the platform must expose a volume anchor"
+    anchored = SimpleNamespace(path=volume_root)
+    assert _inside_configured_roots(tmp_path, (anchored,))
+    assert _inside_configured_roots(Path(volume_root), (anchored,))
 
     sibling = SimpleNamespace(path=tmp_path / "companies")
     assert _inside_configured_roots(tmp_path / "companies" / "2025.pdf", (sibling,))
