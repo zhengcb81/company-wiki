@@ -82,6 +82,23 @@ def _verified_assertion_identity(
         return None
 
 
+# B07 - the read contract's version policy, stated where the contract lives.
+#
+#   * This interface accepts EXACTLY this version.  An unknown version is
+#     refused EXPLICITLY: there is no N-1 rule on either side (that is a
+#     cross-repo protocol item, deliberately outside phase B) and no silent
+#     downgrade or "best effort" parse.
+#   * Failures are expressed with the operation contract's five error values
+#     (not_found / not_indexed / unavailable / blocked / ambiguous) plus a
+#     reason - never with a new status, and never with a fabricated success.
+#   * This interface has NO directory-level fallback: when no qualified copy of
+#     the REQUESTED version exists, the answer is an explicit failure
+#     (missing / not_found).  It never substitutes another revision, and it never
+#     reads a copy outside the configured roots.
+#
+# The consumer-side adapter conversion and the removal of any consumer-side
+# `companies` fallback are NOT part of this repository's contract (design B07
+# scope table: they belong to phase C).
 SOURCE_RESOLVER_SCHEMA_VERSION = "1.0"
 _YEAR_RE = re.compile(r"(?<!\d)(19\d{2}|20\d{2}|21\d{2})(?!\d)")
 
@@ -903,6 +920,15 @@ def build_resolution_envelope(
     """
     if not isinstance(resolution, ResolutionResult):
         raise TypeError("resolution must be a ResolutionResult")
+    if resolution.schema_version != SOURCE_RESOLVER_SCHEMA_VERSION:
+        # B07: unknown versions are refused explicitly rather than parsed
+        # leniently - the envelope is additive WITHIN a version, not across
+        # versions (no N-1 rule exists on either side).
+        raise ValueError(
+            "resolution schema_version must be "
+            f"{SOURCE_RESOLVER_SCHEMA_VERSION!r}, got {resolution.schema_version!r} "
+            "(unknown versions are refused; B07)"
+        )
     outcome = _STRUCTURAL_OUTCOME.get(resolution.status)
     if outcome is None:
         raise ValueError(f"no structural outcome for {resolution.status}")
