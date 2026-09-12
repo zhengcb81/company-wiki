@@ -1275,6 +1275,7 @@ def _merge_metadata_json(
     *,
     prefer_new: bool,
     provenance_fields: dict[str, Any],
+    aligned_columns: dict[str, Any] | None = None,
 ) -> str:
     """Read-modify-write the ``documents.metadata_json`` column (B05).
 
@@ -1296,11 +1297,46 @@ def _merge_metadata_json(
     merged = dict(stored)
     if prefer_new:
         merged.update(incoming)
+    # Keep each container's DECLARING keys consistent with the merged columns
+    # (B-VR05-01): otherwise a later scan reads a container value the merge
+    # already refused to adopt, the next capture is judged against the wrong
+    # "stored declaration", and the outcome depends on scan order.  Only keys
+    # the container already has are aligned - B05 never invents a declaration.
+    if aligned_columns:
+        for container in ("acquisition", "dayu_meta"):
+            payload = merged.get(container)
+            if not isinstance(payload, dict):
+                continue
+            for column, keys in _DECLARING_KEYS.items():
+                value = aligned_columns.get(column)
+                if value in (None, ""):
+                    continue
+                for key in keys:
+                    if key in payload:
+                        payload[key] = value
     previous = stored.get(R4_PROVENANCE_KEY)
     fields: dict[str, Any] = {}
     if isinstance(previous, dict) and isinstance(previous.get("fields"), dict):
         fields.update(previous["fields"])
-    fields.update(provenance_fields)
+    # Field-wise merge (B-VR05-01): progress already recorded must survive a
+    # later capture.  A capture that AGREES adds its source to the agreeing
+    # list; a capture that disagrees adds a candidate — neither erases a
+    # recorded conflict, so the outcome no longer depends on scan order.
+    for name, record in provenance_fields.items():
+        old = fields.get(name) if isinstance(fields.get(name), dict) else {}
+        sources = [dict(item) for item in (old.get("sources") or [])]
+        for source in record.get("sources") or []:
+            if source not in sources:
+                sources.append(dict(source))
+        conflicts = [dict(item) for item in (old.get("conflicts") or [])]
+        for candidate in record.get("conflicts") or []:
+            if candidate not in conflicts:
+                conflicts.append(dict(candidate))
+        fields[name] = {
+            "value": record.get("value"),
+            "sources": sources,
+            "conflicts": conflicts,
+        }
     merged[R4_PROVENANCE_KEY] = {
         "schema_version": R4_PROVENANCE_SCHEMA_VERSION,
         "fields": fields,
@@ -1321,6 +1357,61 @@ def _provenance_record(
     return {"value": value_hash, "sources": sources, "conflicts": conflicts}
 
 
+def _previous_provenance_fields(stored_json: Any) -> dict[str, Any]:
+    """The reserved block's ``fields`` from a stored column (empty when the row
+    predates B05, which is the only case that falls back to reading the
+    container)."""
+    try:
+        stored = json.loads(stored_json or "{}")
+    except json.JSONDecodeError:
+        return {}
+    if not isinstance(stored, dict):
+        return {}
+    reserved = stored.get(R4_PROVENANCE_KEY)
+    if isinstance(reserved, dict) and isinstance(reserved.get("fields"), dict):
+        return reserved["fields"]
+    return {}
+
+
+def _source_record(
+    *,
+    source_id: str | None,
+    observed_at: str | None,
+    role: str,
+    declared: bool,
+) -> dict[str, Any]:
+    """One candidate source of a field's value.  ``declared`` records that the
+    capture explicitly declared the column (rather than the scanner deriving it
+    from a file name) so a later scan can judge the STORED value from what was
+    recorded about it instead of from whatever container happens to be stored
+    now (B-VR05-02)."""
+    return {
+        "source_id": source_id,
+        "observed_at": observed_at,
+        "role": role,
+        "declared": bool(declared),
+    }
+
+
+def _recorded_source(
+    previous_fields: dict[str, Any] | None, column: str
+) -> dict[str, Any]:
+    """The source recorded for the stored value, if any (else unknown = null)."""
+    record = (previous_fields or {}).get(column)
+    if isinstance(record, dict):
+        for source in record.get("sources") or []:
+            if isinstance(source, dict) and source.get("source_id"):
+                return _source_record(
+                    source_id=source.get("source_id"),
+                    observed_at=source.get("observed_at"),
+                    role="stored",
+                    declared=bool(source.get("declared")),
+                )
+    return _source_record(
+        source_id=None, observed_at=None, role="stored", declared=False
+    )
+
+
 def _merge_columns(
     stored: dict[str, Any],
     *,
@@ -1330,7 +1421,9 @@ def _merge_columns(
     fields: dict[str, Any],
     incoming_declared: dict[str, bool] | None = None,
     stored_declared: dict[str, bool] | None = None,
+    previous_fields: dict[str, Any] | None = None,
     always_incoming: tuple[str, ...] = ("source_status", "primary_source_id"),
+    fill_requires_declared: tuple[str, ...] = ("published_date",),
 ) -> tuple[dict[str, Any], dict[str, Any], list[str]]:
     """Per-column merge rules (design §B05), replacing the old "winner takes the
     whole row" UPDATE.
@@ -1355,6 +1448,9 @@ def _merge_columns(
         stored_value = stored.get(column)
         has_stored = stored_value not in (None, "")
         has_new = new_value not in (None, "")
+        new_declares = bool((incoming_declared or {}).get(column))
+        stored_declares = bool((stored_declared or {}).get(column))
+        stored_source = _recorded_source(previous_fields, column)
         if column in always_incoming:
             # `source_status` follows the latest real observation and
             # `primary_source_id` is re-elected by every scan (the group's first
@@ -1362,26 +1458,38 @@ def _merge_columns(
             winner = new_value if has_new else stored_value
             fields[column] = _provenance_record(
                 value_hash=_short_value_hash(winner),
-                sources=[{
-                    "source_id": source_id if has_new else None,
-                    "observed_at": observed_at if has_new else None,
-                    "role": "incoming" if has_new else "stored",
-                }],
+                sources=[_source_record(
+                    source_id=source_id if has_new else stored_source["source_id"],
+                    observed_at=observed_at if has_new else stored_source["observed_at"],
+                    role="incoming" if has_new else "stored",
+                    declared=new_declares if has_new else stored_source["declared"],
+                )],
                 conflicts=[],
             )
             merged[column] = winner
             continue
+        if not has_stored and has_new and column in fill_requires_declared and not new_declares:
+            # The design lets only a DECLARING source write these columns, even
+            # when filling a gap: a file-name-derived guess never becomes the
+            # stored value (B-VR05-07).
+            fields[column] = _provenance_record(
+                value_hash=_short_value_hash(stored_value),
+                sources=[stored_source],
+                conflicts=[],
+            )
+            merged[column] = stored_value
+            continue
         if has_stored and has_new and stored_value != new_value:
-            new_declares = bool((incoming_declared or {}).get(column))
-            stored_declares = bool((stored_declared or {}).get(column))
             if new_declares and not stored_declares:
                 # A declared value replaces one the scanner had only derived
                 # (for example a file-name-derived document_kind).  Not a
                 # conflict: the derived value never was a declaration.
                 fields[column] = _provenance_record(
                     value_hash=_short_value_hash(new_value),
-                    sources=[{"source_id": source_id, "observed_at": observed_at,
-                              "role": "incoming"}],
+                    sources=[_source_record(
+                        source_id=source_id, observed_at=observed_at,
+                        role="incoming", declared=True,
+                    )],
                     conflicts=[],
                 )
                 merged[column] = new_value
@@ -1391,7 +1499,7 @@ def _merge_columns(
                 # derived one.
                 fields[column] = _provenance_record(
                     value_hash=_short_value_hash(stored_value),
-                    sources=[{"source_id": None, "observed_at": None, "role": "stored"}],
+                    sources=[stored_source],
                     conflicts=[],
                 )
                 merged[column] = stored_value
@@ -1399,9 +1507,10 @@ def _merge_columns(
             conflicted.append(column)
             fields[column] = _provenance_record(
                 value_hash=_short_value_hash(stored_value),
-                sources=[{"source_id": None, "observed_at": None, "role": "stored"}],
+                sources=[stored_source],
                 conflicts=[
-                    {"source_id": None, "observed_at": None,
+                    {"source_id": stored_source["source_id"],
+                     "observed_at": stored_source["observed_at"],
                      "value_hash": _short_value_hash(stored_value)},
                     {"source_id": source_id, "observed_at": observed_at,
                      "value_hash": _short_value_hash(new_value)},
@@ -1410,16 +1519,21 @@ def _merge_columns(
             merged[column] = stored_value
             continue
         winner = stored_value if has_stored else new_value
-        winner_role = "stored" if has_stored else "incoming"
-        fields[column] = _provenance_record(
-            value_hash=_short_value_hash(winner),
-            sources=[{
-                "source_id": None if winner_role == "stored" else source_id,
-                "observed_at": None if winner_role == "stored" else observed_at,
-                "role": winner_role,
-            }],
-            conflicts=[],
-        )
+        if has_stored:
+            fields[column] = _provenance_record(
+                value_hash=_short_value_hash(winner),
+                sources=[stored_source],
+                conflicts=[],
+            )
+        else:
+            fields[column] = _provenance_record(
+                value_hash=_short_value_hash(winner),
+                sources=[_source_record(
+                    source_id=source_id, observed_at=observed_at,
+                    role="incoming", declared=new_declares,
+                )],
+                conflicts=[],
+            )
         merged[column] = winner
     return merged, fields, conflicted
 
@@ -1448,20 +1562,65 @@ def _merge_document_row(
     block) instead of being replaced wholesale on ``prefer_new``.
     """
     if existing_document is None:
+        # A brand-new row records its provenance too (B-VR05-02): without it the
+        # FIRST capture's declarations are never written down, so a later
+        # capture that replaces the metadata container without declaring the
+        # column would silently turn a declared value into an apparently
+        # derived one — and the capture after that could overwrite it unseen.
+        new_inner = document_metadata.get("dayu_meta") or document_metadata.get("acquisition") or {}
+        source_id = primary.source_id if primary else None
+        insert_columns = {
+            "title": title,
+            "source_type": source_type,
+            "document_kind": document_kind,
+            "published_date": published,
+            "source_status": source_status,
+            "primary_source_id": source_id,
+        }
+        provenance_fields: dict[str, Any] = {}
+        for column, value in insert_columns.items():
+            provenance_fields[column] = _provenance_record(
+                value_hash=_short_value_hash(value),
+                sources=[_source_record(
+                    source_id=source_id,
+                    observed_at=scan_time,
+                    role="incoming",
+                    declared=bool(_declared_columns(new_inner).get(column)),
+                )],
+                conflicts=[],
+            )
+        container_name = "dayu_meta" if document_metadata.get("dayu_meta") else "acquisition"
+        if isinstance(new_inner, dict):
+            for key, value in new_inner.items():
+                provenance_fields[f"{container_name}.{key}"] = _provenance_record(
+                    value_hash=_short_value_hash(value),
+                    sources=[_source_record(
+                        source_id=source_id, observed_at=scan_time,
+                        role="incoming", declared=True,
+                    )],
+                    conflicts=[],
+                )
+        insert_metadata = _merge_metadata_json(
+            "{}",
+            document_metadata,
+            prefer_new=True,
+            provenance_fields=provenance_fields,
+            aligned_columns=insert_columns,
+        )
         connection.execute(
             """INSERT INTO documents(document_id,primary_source_id,title,source_type,document_kind,
             published_date,source_status,metadata_priority,metadata_json,first_seen_at,last_seen_at)
             VALUES(?,?,?,?,?,?,?,?,?,?,?)""",
             (
                 document_id,
-                primary.source_id if primary else None,
+                source_id,
                 title,
                 source_type,
                 document_kind,
                 published,
                 source_status,
                 priority,
-                canonical_json(document_metadata),
+                insert_metadata,
                 scan_time,
                 scan_time,
             ),
@@ -1517,6 +1676,21 @@ def _merge_document_row(
         # Per-column merge (design §B05): priority only ranks candidates now, it
         # no longer decides which truth is written, and a real disagreement is
         # recorded instead of silently resolved.
+        previous_fields = _previous_provenance_fields(existing_document["metadata_json"])
+        container_declared = _declared_columns(existing_inner)
+        stored_declared: dict[str, bool] = {}
+        for column in _DECLARING_KEYS:
+            record = previous_fields.get(column)
+            bound: bool | None = None
+            if isinstance(record, dict):
+                sources = [s for s in (record.get("sources") or []) if isinstance(s, dict)]
+                if sources:
+                    bound = any(bool(source.get("declared")) for source in sources)
+            # A recorded declaration is authoritative; only a row written before
+            # B05 falls back to reading the stored container (B-VR05-02).
+            stored_declared[column] = (
+                container_declared.get(column, False) if bound is None else bound
+            )
         stored_columns = {
             "title": existing_document["title"],
             "source_type": existing_document["source_type"],
@@ -1540,7 +1714,8 @@ def _merge_document_row(
             observed_at=scan_time,
             fields={},
             incoming_declared=_declared_columns(new_inner),
-            stored_declared=_declared_columns(existing_inner),
+            stored_declared=stored_declared,
+            previous_fields=previous_fields,
         )
         # The business container follows the pre-B05 `prefer_new` rule; every
         # key it holds is recorded with the same per-field provenance shape.
@@ -1556,11 +1731,12 @@ def _merge_document_row(
             for key, value in winning_inner.items():
                 provenance_fields[f"{container_name}.{key}"] = _provenance_record(
                     value_hash=_short_value_hash(value),
-                    sources=[{
-                        "source_id": source_id if prefer_new else None,
-                        "observed_at": scan_time if prefer_new else None,
-                        "role": "incoming" if prefer_new else "stored",
-                    }],
+                    sources=[_source_record(
+                        source_id=source_id if prefer_new else None,
+                        observed_at=scan_time if prefer_new else None,
+                        role="incoming" if prefer_new else "stored",
+                        declared=prefer_new,
+                    )],
                     conflicts=[],
                 )
         update_metadata = _merge_metadata_json(
@@ -1568,6 +1744,7 @@ def _merge_document_row(
             document_metadata,
             prefer_new=prefer_new,
             provenance_fields=provenance_fields,
+            aligned_columns=merged_columns,
         )
         connection.execute(
             """UPDATE documents SET primary_source_id=?,title=?,source_type=?,

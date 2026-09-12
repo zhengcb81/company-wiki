@@ -47,13 +47,13 @@ def _sidecar(
     security_id: str | None = "ACME",
     provider_document_id: str | None = "doc-1",
     fiscal_year: int | None = 2025,
+    document_kind: str | None = "annual_report",
     extra: dict | None = None,
 ) -> dict:
     payload = {
         "schema_version": "1.0",
         "canonical_entity_id": "ent-acme",
         "display_name": "Acme",
-        "document_kind": "annual_report",
         "fiscal_year": fiscal_year,
         "period_end": "2025-12-31",
         "filing_date": "2026-02-20",
@@ -61,6 +61,8 @@ def _sidecar(
         "provider": "sec",
         "content_sha256": DIGEST,
     }
+    if document_kind is not None:
+        payload["document_kind"] = document_kind
     if url is not None:
         payload["source_url"] = url
     if market is not None:
@@ -213,7 +215,12 @@ def test_r4b05_merge_records_provenance_without_replacing_the_column(tmp_path):
         assert isinstance(record["value"], str) and record["value"], record
         assert isinstance(record["sources"], list), (name, record)
         for source in record["sources"]:
-            assert set(source) == {"source_id", "observed_at", "role"}, source
+            assert set(source) == {
+                "source_id",
+                "observed_at",
+                "role",
+                "declared",
+            }, source
     # 4. hashes only: the unrelated canary text is nowhere in the provenance
     assert CANARY not in json.dumps(provenance, ensure_ascii=False)
 
@@ -326,6 +333,121 @@ def test_r4b05_later_capture_fills_a_missing_column(tmp_path):
     assert row["published_date"] == "2026-02-20", row
     metadata = _metadata(catalog, document_id)
     assert metadata["r4_provenance"]["fields"]["published_date"]["value"], metadata
+
+
+def test_r4b05_conflict_record_survives_scan_order_and_agreement(tmp_path):
+    """B-VR05-01 (P1): conflict preservation must not depend on scan order, and
+    a later capture that AGREES must not erase a recorded conflict."""
+    def build(base: Path, order: tuple[str, str]) -> dict:
+        companies = base / "companies"
+        dropbox = base / "Dropbox" / "Stock"
+        third = base / "future_lake"
+        specs = {
+            "company_raw": ("company_raw", companies, 10),
+            "dropbox_stock": ("dropbox_stock", dropbox, 10),
+            "future_lake": ("future_lake", third, 10),
+        }
+        # all three roots are configured up front; only the first two hold a copy
+        # for the first scan, the third one gets its copy before the rescan
+        roots = _roots(specs[order[0]], specs[order[1]], specs["future_lake"])
+        _write_copy(
+            companies / "Acme" / "raw" / "financial_reports" / "annual",
+            _sidecar(),
+            "acme-2025-annual.pdf",
+        )
+        _write_copy(dropbox, _sidecar(), "acme-2025-annual-restated.pdf")
+        catalog = _catalog(base, roots)
+        catalog.scan()
+        document_id = _sole_document_id(catalog)
+        # a THIRD capture that agrees with whichever title was stored first
+        return {
+            "catalog": catalog,
+            "document_id": document_id,
+            "third": third,
+            "stored_title": _fetchone(
+                catalog, "SELECT title FROM documents WHERE document_id=?", (document_id,)
+            )["title"],
+        }
+
+    built = []
+    for base, order in (
+        (tmp_path / "order_a", ("company_raw", "dropbox_stock")),
+        (tmp_path / "order_b", ("dropbox_stock", "company_raw")),
+    ):
+        entry = build(base, order)
+        record = _metadata(entry["catalog"], entry["document_id"])[
+            "r4_provenance"
+        ]["fields"]["title"]
+        assert len(record["conflicts"]) == 2, record
+        entry["conflict_hashes"] = sorted(
+            item["value_hash"] for item in record["conflicts"]
+        )
+        candidate = entry["catalog"].query_filing_candidates(
+            document_kind="annual_report", source_statuses=("active",)
+        )[0]
+        assert candidate["metadata_status"] == "blocked", candidate["conflicts"]
+        built.append(entry)
+
+    # the conflict record is IDENTICAL in both scan orders.  Which value was
+    # stored first is inherently order-dependent: the design keeps a confirmed
+    # value instead of re-electing it, so only the conflict is order-invariant.
+    assert built[0]["conflict_hashes"] == built[1]["conflict_hashes"], built
+
+    # an agreeing capture must not erase the recorded conflict
+    first = built[0]
+    _write_copy(first["third"], _sidecar(), f"{first['stored_title']}.pdf")
+    first["catalog"].scan()
+    record = _metadata(first["catalog"], first["document_id"])[
+        "r4_provenance"
+    ]["fields"]["title"]
+    assert len(record["conflicts"]) == 2, record
+
+
+def test_r4b05_declaration_is_bound_to_the_value_it_labels(tmp_path):
+    """B-VR05-02 (P1): a capture that replaces the metadata container without
+    declaring a column must not turn the stored declared value into a "derived"
+    one, which would let a later capture silently overwrite it."""
+    companies = tmp_path / "companies"
+    neutral = tmp_path / "neutral"
+    quarterly = tmp_path / "quarterly"
+    _write_copy(
+        companies / "Acme" / "raw" / "financial_reports" / "annual",
+        _sidecar(document_kind="annual_report"),
+    )
+    catalog = _catalog(
+        tmp_path,
+        _roots(
+            ("company_raw", companies, 10),
+            ("neutral", neutral, 10),
+            ("quarterly", quarterly, 10),
+        ),
+    )
+    catalog.scan()
+    document_id = _sole_document_id(catalog)
+    assert _fetchone(
+        catalog, "SELECT document_kind FROM documents WHERE document_id=?", (document_id,)
+    )["document_kind"] == "annual_report"
+
+    # a capture that triggers prefer_new (richer identity) but declares NO kind
+    _write_copy(neutral, _sidecar(document_kind=None, extra={"note": "no kind here"}))
+    catalog.scan()
+    assert _fetchone(
+        catalog, "SELECT document_kind FROM documents WHERE document_id=?", (document_id,)
+    )["document_kind"] == "annual_report"
+
+    # now a genuinely declared, DIFFERENT kind: it must not win silently
+    _write_copy(quarterly, _sidecar(document_kind="quarterly_report"))
+    catalog.scan()
+    row = _fetchone(
+        catalog, "SELECT document_kind FROM documents WHERE document_id=?", (document_id,)
+    )
+    record = _metadata(catalog, document_id)["r4_provenance"]["fields"]["document_kind"]
+    assert row["document_kind"] == "annual_report", record
+    assert len(record["conflicts"]) == 2, record
+    candidate = catalog.query_filing_candidates(
+        document_kind="annual_report", source_statuses=("active",)
+    )[0]
+    assert candidate["metadata_status"] == "blocked", candidate["conflicts"]
 
 
 # ---------------------------------------------------------------------------
