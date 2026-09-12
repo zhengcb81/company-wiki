@@ -1006,97 +1006,20 @@ def _scan_catalog_impl(
                 existing_document = connection.execute(
                     "SELECT metadata_priority, source_status, metadata_json FROM documents WHERE document_id=?", (document_id,)
                 ).fetchone()
-                if existing_document is None:
-                    connection.execute(
-                        """INSERT INTO documents(document_id,primary_source_id,title,source_type,document_kind,
-                        published_date,source_status,metadata_priority,metadata_json,first_seen_at,last_seen_at)
-                        VALUES(?,?,?,?,?,?,?,?,?,?,?)""",
-                        (
-                            document_id,
-                            primary.source_id if primary else None,
-                            title,
-                            source_type.value,
-                            document_kind,
-                            published,
-                            source_status,
-                            root.priority,
-                            canonical_json(document_metadata),
-                            scan_time,
-                            scan_time,
-                        ),
-                    )
-                elif existing_document["source_status"] == "retired":
-                    # Retirement is terminal: a rescan must never revive a
-                    # retired document even while its files remain on disk
-                    # (Phase 15.6 batch governance).  Its locations stay
-                    # retired as well, so a partially-active location can
-                    # never exist (see the location_status computation below).
-                    connection.execute(
-                        "UPDATE documents SET last_seen_at=? WHERE document_id=?",
-                        (scan_time, document_id),
-                    )
-                elif root.priority <= existing_document["metadata_priority"]:
-                    existing_meta = {}
-                    try:
-                        existing_meta = json.loads(existing_document["metadata_json"] or "{}")
-                    except json.JSONDecodeError:
-                        pass
-                    existing_inner = existing_meta.get("dayu_meta") or existing_meta.get("acquisition") or {}
-                    new_inner = document_metadata.get("dayu_meta") or document_metadata.get("acquisition") or {}
-                    # Phase 16.5: when the same content-addressed document is
-                    # re-ingested from another path, prefer the metadata that
-                    # carries a source URL (an old bare sidecar must not
-                    # overwrite a complete one).
-                    # Phase 17 pilot: likewise prefer metadata that carries
-                    # market/security identity when the stored copy predates
-                    # the identity backfill (Alphabet 10-K capture_ready
-                    # deadlock).
-                    # ADR-008 Strategy B: and prefer metadata that carries a
-                    # provider document id when the stored copy lacks one —
-                    # otherwise the scanner's ticker identity backfill would
-                    # block the promotion's acquisition metadata (whose
-                    # provider identity the REUSED_EXACT assert requires).
-                    prefer_new = (
-                        (
-                            not (existing_inner.get("source_url") or existing_inner.get("https_url"))
-                            and (new_inner.get("source_url") or new_inner.get("https_url"))
-                        )
-                        or (
-                            not (existing_inner.get("market") and existing_inner.get("security_id"))
-                            and (new_inner.get("market") and new_inner.get("security_id"))
-                        )
-                        or (
-                            not existing_inner.get("provider_document_id")
-                            and bool(new_inner.get("provider_document_id"))
-                        )
-                    )
-                    update_metadata = (
-                        canonical_json(document_metadata)
-                        if prefer_new
-                        else existing_document["metadata_json"]
-                    )
-                    connection.execute(
-                        """UPDATE documents SET primary_source_id=COALESCE(?,primary_source_id),title=?,source_type=?,
-                        document_kind=?,published_date=COALESCE(?,published_date),source_status=?,metadata_priority=?,
-                        metadata_json=?,last_seen_at=? WHERE document_id=?""",
-                        (
-                            primary.source_id if primary else None,
-                            title,
-                            source_type.value,
-                            document_kind,
-                            published,
-                            source_status,
-                            root.priority,
-                            update_metadata,
-                            scan_time,
-                            document_id,
-                        ),
-                    )
-                else:
-                    connection.execute(
-                        "UPDATE documents SET last_seen_at=? WHERE document_id=?",
-                        (scan_time, document_id),
-                    )
+                _merge_document_row(
+                    connection,
+                    document_id=document_id,
+                    existing_document=existing_document,
+                    primary=primary,
+                    title=title,
+                    source_type=source_type.value,
+                    document_kind=document_kind,
+                    published=published,
+                    source_status=source_status,
+                    priority=root.priority,
+                    document_metadata=document_metadata,
+                    scan_time=scan_time,
+                )
                 connection.execute(
                     "INSERT OR IGNORE INTO entities(entity_id,name,entity_kind) VALUES(?,?,?)",
                     (entity_id, entity_label, entity_kind),
@@ -1309,6 +1232,124 @@ def root_fingerprint(candidates: list[Any]) -> dict[str, Any]:
             hashlib.sha256(data).hexdigest(),
         ))
     return {"files": sorted(files)}
+
+
+def _merge_document_row(
+    connection: Any,
+    *,
+    document_id: str,
+    existing_document: Any,
+    primary: Any,
+    title: str,
+    source_type: str,
+    document_kind: str,
+    published: str | None,
+    source_status: str,
+    priority: int,
+    document_metadata: dict[str, Any],
+    scan_time: str,
+) -> None:
+    """Write ONE document row: insert, retirement, winner merge or touch.
+
+    Extracted verbatim from ``scan_catalog`` so that step B05 can extend the
+    merge without adding decision points to a function that is ALREADY at its
+    frozen complexity ceiling (FC-1204 ratchet: scanner.py 140/140).  The
+    behaviour of this function is the behaviour the loop had inline before the
+    extraction — the extraction itself changes nothing.
+    """
+    if existing_document is None:
+        connection.execute(
+            """INSERT INTO documents(document_id,primary_source_id,title,source_type,document_kind,
+            published_date,source_status,metadata_priority,metadata_json,first_seen_at,last_seen_at)
+            VALUES(?,?,?,?,?,?,?,?,?,?,?)""",
+            (
+                document_id,
+                primary.source_id if primary else None,
+                title,
+                source_type,
+                document_kind,
+                published,
+                source_status,
+                priority,
+                canonical_json(document_metadata),
+                scan_time,
+                scan_time,
+            ),
+        )
+        return
+    if existing_document["source_status"] == "retired":
+        # Retirement is terminal: a rescan must never revive a
+        # retired document even while its files remain on disk
+        # (Phase 15.6 batch governance).  Its locations stay
+        # retired as well, so a partially-active location can
+        # never exist (see the location_status computation below).
+        connection.execute(
+            "UPDATE documents SET last_seen_at=? WHERE document_id=?",
+            (scan_time, document_id),
+        )
+        return
+    if priority <= existing_document["metadata_priority"]:
+        existing_meta = {}
+        try:
+            existing_meta = json.loads(existing_document["metadata_json"] or "{}")
+        except json.JSONDecodeError:
+            pass
+        existing_inner = existing_meta.get("dayu_meta") or existing_meta.get("acquisition") or {}
+        new_inner = document_metadata.get("dayu_meta") or document_metadata.get("acquisition") or {}
+        # Phase 16.5: when the same content-addressed document is
+        # re-ingested from another path, prefer the metadata that
+        # carries a source URL (an old bare sidecar must not
+        # overwrite a complete one).
+        # Phase 17 pilot: likewise prefer metadata that carries
+        # market/security identity when the stored copy predates
+        # the identity backfill (Alphabet 10-K capture_ready
+        # deadlock).
+        # ADR-008 Strategy B: and prefer metadata that carries a
+        # provider document id when the stored copy lacks one —
+        # otherwise the scanner's ticker identity backfill would
+        # block the promotion's acquisition metadata (whose
+        # provider identity the REUSED_EXACT assert requires).
+        prefer_new = (
+            (
+                not (existing_inner.get("source_url") or existing_inner.get("https_url"))
+                and (new_inner.get("source_url") or new_inner.get("https_url"))
+            )
+            or (
+                not (existing_inner.get("market") and existing_inner.get("security_id"))
+                and (new_inner.get("market") and new_inner.get("security_id"))
+            )
+            or (
+                not existing_inner.get("provider_document_id")
+                and bool(new_inner.get("provider_document_id"))
+            )
+        )
+        update_metadata = (
+            canonical_json(document_metadata)
+            if prefer_new
+            else existing_document["metadata_json"]
+        )
+        connection.execute(
+            """UPDATE documents SET primary_source_id=COALESCE(?,primary_source_id),title=?,source_type=?,
+            document_kind=?,published_date=COALESCE(?,published_date),source_status=?,metadata_priority=?,
+            metadata_json=?,last_seen_at=? WHERE document_id=?""",
+            (
+                primary.source_id if primary else None,
+                title,
+                source_type,
+                document_kind,
+                published,
+                source_status,
+                priority,
+                update_metadata,
+                scan_time,
+                document_id,
+            ),
+        )
+        return
+    connection.execute(
+        "UPDATE documents SET last_seen_at=? WHERE document_id=?",
+        (scan_time, document_id),
+    )
 
 
 def scan_catalog(
