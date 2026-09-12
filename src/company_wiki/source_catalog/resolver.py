@@ -1342,14 +1342,16 @@ class SourceResolver:
         1. **a verified copy always wins**: the first candidate whose bytes
            really are the requested version is served, whatever its rank;
         2. only when NO candidate verifies may ONE row be served on the
-           catalog's claim: the row the pre-B02 resolver would have selected —
-           the legacy canonical (``is_canonical``) that is active,
-           ``original_primary`` and not under ``.rejections`` — provided it is
-           locally present and belongs to the document's own version.  That
-           anchoring is what makes "no wider than pre-B02" true *by
-           construction*: pre-B02 served exactly that row, and served nothing
-           when it was unusable.  The reason is recorded as
-           ``unverified_<status>_on_pre_b02_canonical`` — never silent;
+           catalog's claim: the legacy canonical, provided it is a qualified
+           candidate of the document's own version.  The reason records why
+           that row failed (``unverified_<status>_on_pre_b02_canonical``) and
+           the per-candidate diagnostics are in ``tried`` — never silent.
+           **Documented differences from pre-B02** (S-10): pre-B02 matched
+           ``.rejections`` as a substring and did not restrict the election to
+           the document's own source group, so the claim-trusted row is *not*
+           bit-for-bit the row pre-B02 would have served — it is that row
+           minus two defects (segment matching instead of substring, own
+           version only);
         3. **every other copy needs verified bytes**; otherwise the answer is
            no handle at all (unavailable -> MISSING), which is what keeps
            "do not take another revision" true;
@@ -1377,21 +1379,24 @@ class SourceResolver:
             return None, "placeholder_no_handle", ()
         # The row pre-B02 would have served: the legacy canonical, filtered by
         # the very same conditions the pre-B02 resolver applied to it.
+        # The claim-trusted row: the legacy canonical, IF it is a qualified
+        # candidate of the document's own version.  `ordered` already carries
+        # role/status/.rejections/own-source, so membership is the whole test.
+        # Two differences from pre-B02 are deliberate and documented (S-10):
+        # pre-B02 matched ".rejections" as a SUBSTRING (so an unrelated name
+        # such as `my.rejections_backup` was refused) and did not restrict to
+        # the document's own source group (so it could elect another version's
+        # row).  Both were defects; neither is restored here, so this row is
+        # NOT bit-for-bit "the row pre-B02 would have served".
         pre_b02_canonical = next(
-            (
-                item
-                for item in ordered
-                if item.get("is_canonical")
-                and item["role"] == "original_primary"
-                and item["location_status"] == "active"
-                and not _is_rejections_path(item["relative_path"])
-            ),
+            (item for item in ordered if item.get("is_canonical")),
             None,
         )
         expected_sha256 = str(document.get("content_sha256") or "")
         tried: list[str] = []
         stop_status = ""
         claimed_fallback: dict[str, Any] | None = None
+        claimed_fallback_status = ""
         for location in ordered:
             probe_status, _probe_detail, size = _local_copy_probe(location)
             if probe_status:
@@ -1413,8 +1418,11 @@ class SourceResolver:
                 f"{location['location_id']}:{status}" + (f":{detail}" if detail else "")
             )
             if location is pre_b02_canonical:
-                # Remember it; a later VERIFIED copy still wins (rule 1).
+                # Remember it; a later VERIFIED copy still wins (rule 1).  The
+                # reason reports why THIS row failed, not why the walk stopped
+                # (B-VR02R3-06).
                 claimed_fallback = location
+                claimed_fallback_status = status
             if status in ("budget_exceeded", "cancelled"):
                 # A resource stop or a cancellation ends the walk: no further
                 # candidate bytes are read.
@@ -1425,8 +1433,7 @@ class SourceResolver:
         if claimed_fallback is not None:
             return (
                 claimed_fallback,
-                f"unverified_{stop_status or 'content_sha256_mismatch'}"
-                "_on_pre_b02_canonical",
+                f"unverified_{claimed_fallback_status}_on_pre_b02_canonical",
                 tuple(tried),
             )
         if stop_status == "budget_exceeded":

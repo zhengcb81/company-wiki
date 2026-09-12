@@ -902,6 +902,91 @@ def test_r4b02_recall_on_open_placeholders_are_detected() -> None:
     assert _needs_hydration(types.SimpleNamespace(st_file_attributes=0x20)) is False
 
 
+def test_r4b02_cancel_during_the_last_candidate_read(tmp_path, monkeypatch):
+    """B-VR02R3-02 (P3): cancelling while the LAST candidate's digest is being
+    read must also revoke the answer — the end-of-walk guard is load-bearing,
+    not dead code (all copies drifted, so the walk ends with an anchor in
+    hand and the cancellation is the only thing standing between the caller
+    and an unverified handle)."""
+    paths = _three_copy_fixture(tmp_path)
+    catalog = _scan(tmp_path, _roots(paths))
+    from company_wiki.source_catalog import resolver as resolver_module
+
+    for name in ("companies", "dropbox", "future_lake"):
+        (paths[name] / "2025.pdf").write_bytes(BODY + b"# drifted")
+    budget = _ReadBudget()
+    real_sha256_of_file = resolver_module._sha256_of_file
+    seen: list[str] = []
+
+    def cancel_on_last(path):
+        seen.append(str(path))
+        digest = real_sha256_of_file(path)
+        if len(seen) == 3:
+            budget.cancel()
+        return digest
+
+    monkeypatch.setattr(resolver_module, "_sha256_of_file", cancel_on_last)
+    result = SourceResolver(catalog, read_budget=budget).resolve(_request())
+    assert len(seen) == 3, seen
+    assert budget.cancelled is True
+    assert result.matches == (), result.debug_trace
+    assert any(
+        "candidate_verification_cancelled" in item for item in result.debug_trace
+    ), result.debug_trace
+
+
+def test_r4b02_claim_reason_names_the_anchor_failure(tmp_path):
+    """B-VR02R3-06 (P3): the reason must say why the claim-trusted row failed,
+    not why the walk stopped (a later candidate can stop on budget)."""
+    paths = _three_copy_fixture(tmp_path)
+    catalog = _scan(tmp_path, _roots(paths))
+    for name in ("companies", "dropbox"):
+        (paths[name] / "2025.pdf").write_bytes(BODY + b"# drifted")
+    budget = _ReadBudget(max_candidates=2, max_bytes=64 * len(BODY))
+    result = SourceResolver(catalog, read_budget=budget).resolve(_request())
+    assert result.status is ResolutionStatus.REUSED_EXACT, result.debug_trace
+    assert any(
+        "unverified_content_sha256_mismatch_on_pre_b02_canonical" in item
+        for item in result.debug_trace
+    ), result.debug_trace
+    assert any("budget_exceeded" in item for item in result.debug_trace), (
+        result.debug_trace
+    )
+
+
+def test_r4b02_documented_difference_from_pre_b02_is_pinned(tmp_path):
+    """S-10 difference #1, pinned so nobody "restores" it silently: pre-B02
+    matched `.rejections` as a SUBSTRING, so a copy under
+    `my.rejections_backup/` was refused; rev3 follows the adapters' SEGMENT
+    convention, so that copy is a normal candidate.  With its bytes drifted it
+    is served on the catalog's claim (rule 2) and the trace says so."""
+    root = tmp_path / "future_lake"
+    _write_copy(root / "my.rejections_backup")
+    catalog = _scan(
+        tmp_path,
+        [
+            RootSpec(
+                "future_lake",
+                root,
+                "directory",
+                priority=40,
+                adapter_id="sidecar_filing_v1",
+                read_only=True,
+                reusable_for_filing=True,
+            )
+        ],
+    )
+    (root / "my.rejections_backup" / "2025.pdf").write_bytes(BODY + b"# drifted")
+
+    result = _resolve(catalog)
+    assert result.status is ResolutionStatus.REUSED_EXACT, result.debug_trace
+    assert any(
+        "unverified_content_sha256_mismatch_on_pre_b02_canonical" in item
+        for item in result.debug_trace
+    ), result.debug_trace
+    assert "my.rejections_backup" in result.matches[0].canonical_path
+
+
 # ---------------------------------------------------------------------------
 # S-7 guard: the complexity ratchet table itself is frozen
 # ---------------------------------------------------------------------------
