@@ -1260,13 +1260,31 @@ _DECLARING_KEYS: dict[str, tuple[str, ...]] = {
 }
 
 
-def _declared_columns(container: Any) -> dict[str, bool]:
-    """Which of the merged columns this capture DECLARES (rather than derives)."""
+def _declared_columns(
+    container: Any, values: dict[str, Any] | None = None
+) -> dict[str, bool]:
+    """Which of the merged columns this capture DECLARES (rather than derives).
+
+    A key alone is not a declaration (B-VR05-04): the capture declares a column
+    only when the value the scanner actually USED for that column is the value
+    that key carries.  A sidecar saying ``document_kind: "10-K"`` - which the
+    classifier ignores - therefore counts as derived, not as a declaration.
+    """
     payload = container if isinstance(container, dict) else {}
-    return {
-        column: any(str(payload.get(key) or "").strip() for key in keys)
-        for column, keys in _DECLARING_KEYS.items()
-    }
+    used_values = values or {}
+    declared: dict[str, bool] = {}
+    for column, keys in _DECLARING_KEYS.items():
+        used = used_values.get(column)
+        hit = False
+        for key in keys:
+            raw = payload.get(key)
+            if raw in (None, "") or used in (None, ""):
+                continue
+            if str(raw).strip() == str(used).strip():
+                hit = True
+                break
+        declared[column] = hit
+    return declared
 
 
 def _merge_metadata_json(
@@ -1451,6 +1469,7 @@ def _merge_columns(
         new_declares = bool((incoming_declared or {}).get(column))
         stored_declares = bool((stored_declared or {}).get(column))
         stored_source = _recorded_source(previous_fields, column)
+        provided_sources = [stored_source]
         if column in always_incoming:
             # `source_status` follows the latest real observation and
             # `primary_source_id` is re-elected by every scan (the group's first
@@ -1520,9 +1539,18 @@ def _merge_columns(
             continue
         winner = stored_value if has_stored else new_value
         if has_stored:
+            agreeing = list(provided_sources)
+            if has_new and new_value == stored_value:
+                # An agreeing capture is evidence the value is not disputed:
+                # record it alongside the source that wrote the value
+                # (B-VR05-05).
+                agreeing.append(_source_record(
+                    source_id=source_id, observed_at=observed_at,
+                    role="incoming", declared=new_declares,
+                ))
             fields[column] = _provenance_record(
                 value_hash=_short_value_hash(winner),
-                sources=[stored_source],
+                sources=agreeing,
                 conflicts=[],
             )
         else:
@@ -1578,6 +1606,7 @@ def _merge_document_row(
             "primary_source_id": source_id,
         }
         provenance_fields: dict[str, Any] = {}
+        declared_columns = _declared_columns(new_inner, insert_columns)
         for column, value in insert_columns.items():
             provenance_fields[column] = _provenance_record(
                 value_hash=_short_value_hash(value),
@@ -1585,7 +1614,7 @@ def _merge_document_row(
                     source_id=source_id,
                     observed_at=scan_time,
                     role="incoming",
-                    declared=bool(_declared_columns(new_inner).get(column)),
+                    declared=bool(declared_columns.get(column)),
                 )],
                 conflicts=[],
             )
@@ -1677,7 +1706,15 @@ def _merge_document_row(
         # no longer decides which truth is written, and a real disagreement is
         # recorded instead of silently resolved.
         previous_fields = _previous_provenance_fields(existing_document["metadata_json"])
-        container_declared = _declared_columns(existing_inner)
+        stored_columns = {
+            "title": existing_document["title"],
+            "source_type": existing_document["source_type"],
+            "document_kind": existing_document["document_kind"],
+            "published_date": existing_document["published_date"],
+            "source_status": existing_document["source_status"],
+            "primary_source_id": existing_document["primary_source_id"],
+        }
+        container_declared = _declared_columns(existing_inner, stored_columns)
         stored_declared: dict[str, bool] = {}
         for column in _DECLARING_KEYS:
             record = previous_fields.get(column)
@@ -1691,14 +1728,6 @@ def _merge_document_row(
             stored_declared[column] = (
                 container_declared.get(column, False) if bound is None else bound
             )
-        stored_columns = {
-            "title": existing_document["title"],
-            "source_type": existing_document["source_type"],
-            "document_kind": existing_document["document_kind"],
-            "published_date": existing_document["published_date"],
-            "source_status": existing_document["source_status"],
-            "primary_source_id": existing_document["primary_source_id"],
-        }
         incoming_columns = {
             "title": title,
             "source_type": source_type,
@@ -1713,7 +1742,7 @@ def _merge_document_row(
             source_id=source_id,
             observed_at=scan_time,
             fields={},
-            incoming_declared=_declared_columns(new_inner),
+            incoming_declared=_declared_columns(new_inner, incoming_columns),
             stored_declared=stored_declared,
             previous_fields=previous_fields,
         )

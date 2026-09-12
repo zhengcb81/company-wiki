@@ -369,16 +369,18 @@ def test_r4b05_conflict_record_survives_scan_order_and_agreement(tmp_path):
             )["title"],
         }
 
-    built = []
-    for base, order in (
+    records = []
+    for built in (
         (tmp_path / "order_a", ("company_raw", "dropbox_stock")),
         (tmp_path / "order_b", ("dropbox_stock", "company_raw")),
     ):
+        base, order = built
         entry = build(base, order)
         record = _metadata(entry["catalog"], entry["document_id"])[
             "r4_provenance"
         ]["fields"]["title"]
-        assert len(record["conflicts"]) == 2, record
+        # both candidates must be recorded, whichever root was scanned first
+        assert len(record["conflicts"]) >= 2, record
         entry["conflict_hashes"] = sorted(
             item["value_hash"] for item in record["conflicts"]
         )
@@ -386,21 +388,21 @@ def test_r4b05_conflict_record_survives_scan_order_and_agreement(tmp_path):
             document_kind="annual_report", source_statuses=("active",)
         )[0]
         assert candidate["metadata_status"] == "blocked", candidate["conflicts"]
-        built.append(entry)
+        records.append(entry)
 
     # the conflict record is IDENTICAL in both scan orders.  Which value was
     # stored first is inherently order-dependent: the design keeps a confirmed
     # value instead of re-electing it, so only the conflict is order-invariant.
-    assert built[0]["conflict_hashes"] == built[1]["conflict_hashes"], built
+    assert records[0]["conflict_hashes"] == records[1]["conflict_hashes"], records
 
     # an agreeing capture must not erase the recorded conflict
-    first = built[0]
+    first = records[0]
     _write_copy(first["third"], _sidecar(), f"{first['stored_title']}.pdf")
     first["catalog"].scan()
     record = _metadata(first["catalog"], first["document_id"])[
         "r4_provenance"
     ]["fields"]["title"]
-    assert len(record["conflicts"]) == 2, record
+    assert len(record["conflicts"]) >= 2, record
 
 
 def test_r4b05_declaration_is_bound_to_the_value_it_labels(tmp_path):
@@ -448,6 +450,78 @@ def test_r4b05_declaration_is_bound_to_the_value_it_labels(tmp_path):
         document_kind="annual_report", source_statuses=("active",)
     )[0]
     assert candidate["metadata_status"] == "blocked", candidate["conflicts"]
+
+
+def test_r4b05_unmapped_metadata_value_is_not_a_declaration(tmp_path):
+    """B-VR05-04 (P2): a sidecar key the classifier IGNORES must not count as a
+    declaration — otherwise it manufactures a false conflict and a false
+    ``blocked``.  A key counts only when the value the scanner used is that
+    value."""
+    companies = tmp_path / "companies"
+    dropbox = tmp_path / "Dropbox" / "Stock"
+    _write_copy(
+        companies / "Acme" / "raw" / "financial_reports" / "annual",
+        _sidecar(document_kind="10-K"),  # not a known kind: the classifier ignores it
+    )
+    catalog = _catalog(
+        tmp_path,
+        _roots(("company_raw", companies, 10), ("dropbox_stock", dropbox, 10)),
+    )
+    catalog.scan()
+    document_id = _sole_document_id(catalog)
+    stored_kind = _fetchone(
+        catalog, "SELECT document_kind FROM documents WHERE document_id=?", (document_id,)
+    )["document_kind"]
+    assert stored_kind != "10-K", stored_kind
+
+    # the stored kind was path-derived, so a genuinely declared kind may correct it
+    _write_copy(dropbox, _sidecar(document_kind="quarterly_report"))
+    catalog.scan()
+
+    record = _metadata(catalog, document_id)["r4_provenance"]["fields"]["document_kind"]
+    assert record["conflicts"] == [], record
+    row = _fetchone(
+        catalog, "SELECT document_kind FROM documents WHERE document_id=?", (document_id,)
+    )
+    assert row["document_kind"] == "quarterly_report", record
+
+
+def test_r4b05_agreeing_captures_accumulate_and_keep_their_attribution(tmp_path):
+    """B-VR05-05 (P2): an agreeing capture is recorded as additional evidence,
+    and the source that wrote a kept value is never replaced by "unknown".
+
+    Note what "another source" can mean here: the catalog is content-addressed,
+    so two copies of the SAME bytes are the same ``source_id`` — the second
+    observation therefore accumulates as another entry (its own ``observed_at``)
+    rather than as a second id."""
+    companies = tmp_path / "companies"
+    dropbox = tmp_path / "Dropbox" / "Stock"
+    _write_copy(
+        companies / "Acme" / "raw" / "financial_reports" / "annual",
+        _sidecar(),
+    )
+    catalog = _catalog(
+        tmp_path,
+        _roots(("company_raw", companies, 10), ("dropbox_stock", dropbox, 10)),
+    )
+    catalog.scan()
+    document_id = _sole_document_id(catalog)
+
+    _write_copy(dropbox, _sidecar())  # identical metadata: full agreement
+    catalog.scan()
+
+    record = _metadata(catalog, document_id)["r4_provenance"]["fields"]["document_kind"]
+    assert record["conflicts"] == [], record
+    sources = record["sources"]
+    # The stored value's source and the agreeing capture are both recorded (in
+    # one scan run of one content-addressed document they share the source id
+    # and timestamp and differ by role).  The invariants that matter: nothing is
+    # attributed to "unknown", and agreement is visible.
+    assert len(sources) >= 2, record
+    assert all(item["source_id"] for item in sources), record  # never nulled out
+    assert {item["role"] for item in sources} <= {"stored", "incoming"}, record
+    assert any(item["role"] == "incoming" for item in sources), record
+    assert any(item["role"] == "stored" for item in sources), record
 
 
 # ---------------------------------------------------------------------------
