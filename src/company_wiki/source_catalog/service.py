@@ -33,18 +33,22 @@ def _exact_duplicate_group_id(document_id: str, source_id: str) -> str:
 
 
 def _location_exclusion_reason(location: dict[str, Any]) -> str:
-    """B02 segments 1-2 — WHY a location may not compete for canonical.
+    """B02 segments 1-2 — WHY a location may not be REUSED.
+
+    This is the reuse-qualification track (`candidate_rank` /
+    `exclusion_reason`); it deliberately does NOT change the legacy
+    annotation contract (`is_canonical` / `duplicate_relation` /
+    `duplicate_group_id`), which external consumers still read (the
+    duplicate-cleanup planner and the exported index — B-VR02-02/-03).
 
     Segment 1 (root registration/capability) is structural here: the
     locations query inner-joins ``roots``, so an unregistered root cannot
     produce a row, and the reuse-capability check stays with the resolver
     (``reusable_root_kinds``).  Segment 2 (status and safety) is decided
     here: only an active, provider-accepted ``original_primary`` with a
-    source id is a candidate.  Returns "" for a candidate, else the
-    machine-readable exclusion reason.  Qualification is deliberately
-    resolved BEFORE ordering so that a rejected or unhealthy path can never
-    win the election and then be discarded downstream — which would strand
-    the document even though a healthy copy of the same version exists.
+    source id is reusable.  ``.rejections`` is matched as a path SEGMENT
+    (the convention used by the adapters), not as a substring, so an
+    unrelated name such as ``my.rejections_backup`` is not disqualified.
     """
     if location["role"] != "original_primary":
         return "role_not_original_primary"
@@ -52,8 +56,8 @@ def _location_exclusion_reason(location: dict[str, Any]) -> str:
         return f"location_status_{location['location_status']}"
     if not location["source_id"]:
         return "source_id_missing"
-    relative = location["relative_path"].replace("\\", "/")
-    if _REJECTIONS_SEGMENT in relative:
+    segments = location["relative_path"].replace("\\", "/").split("/")
+    if _REJECTIONS_SEGMENT in segments:
         return "rejections_path"
     return ""
 
@@ -667,14 +671,19 @@ class SourceCatalog:
         document_id: str,
         locations: list[dict[str, Any]],
     ) -> list[dict[str, Any]]:
-        # B02: qualification first, ordering last.  Every location carries
-        # `candidate_rank` (1..N inside its qualified, ordered candidate list;
-        # 0 = excluded) plus `exclusion_reason` for the excluded ones, so the
-        # complete candidate list with per-candidate reasons is part of the
-        # read output instead of being reconstructed downstream.  Ranks are
-        # per source id: a document carrying two source revisions has one
-        # rank-1 row per revision, and the resolver verifies the local bytes
-        # (segment 3) before consuming either.
+        # B02 adds a REUSE-QUALIFICATION track on top of the legacy annotation
+        # contract, which stays exactly as it was:
+        #   * `candidate_rank` (1..N inside the qualified candidates of the
+        #     location's own source group, in segment-4 order; 0 = excluded)
+        #     plus `exclusion_reason` — the resolver decides REUSE from these,
+        #     after verifying the bytes (resolver._select_candidate);
+        #   * `is_canonical` / `duplicate_relation` / `duplicate_group_id` /
+        #     `canonical_location_id` are still elected over EVERY active
+        #     original_primary row of the group, regardless of qualification.
+        # Restoring that legacy invariant matters: the duplicate-cleanup
+        # planner reads `duplicate_relation` and `duplicate_cleanup.list_groups`
+        # assumes every group HAS a canonical (a conditional election raised
+        # StopIteration there — B-VR02-02/-03).
         for location in locations:
             location.update(
                 {
@@ -688,11 +697,17 @@ class SourceCatalog:
             )
         original_groups: dict[str, list[dict[str, Any]]] = {}
         for location in locations:
-            if not location["exclusion_reason"]:
+            if (
+                location["role"] == "original_primary"
+                and location["location_status"] == "active"
+                and location["source_id"]
+            ):
                 original_groups.setdefault(location["source_id"], []).append(location)
         for source_id, group in original_groups.items():
             ordered = sorted(group, key=_location_order_key)
-            for rank, candidate in enumerate(ordered, start=1):
+            for rank, candidate in enumerate(
+                (item for item in ordered if not item["exclusion_reason"]), start=1
+            ):
                 candidate["candidate_rank"] = rank
             canonical = ordered[0]
             canonical["is_canonical"] = True
@@ -709,26 +724,33 @@ class SourceCatalog:
 
     @staticmethod
     def _duplicate_summary(locations: list[dict[str, Any]]) -> dict[str, Any]:
-        # B02: "copy" means a QUALIFIED candidate, so the count, the group ids
-        # and the canonical path all come from the same candidate set that the
-        # resolver may actually reuse (a rejected path is not a usable copy).
-        candidates = [item for item in locations if item["candidate_rank"]]
+        # Unchanged from before B02 (the duplicate/cleanup view must not lose
+        # provider-rejected rows: they are exactly what an operator reclaims).
+        active_originals = [
+            item
+            for item in locations
+            if item["role"] == "original_primary"
+            and item["location_status"] == "active"
+            and item["source_id"]
+        ]
         duplicates = [
-            item for item in candidates if item["duplicate_relation"] == "exact_copy"
+            item
+            for item in active_originals
+            if item["duplicate_relation"] == "exact_copy"
         ]
         group_ids = sorted(
             {
                 item["duplicate_group_id"]
-                for item in candidates
+                for item in active_originals
                 if item["duplicate_group_id"]
             }
         )
         canonical = next(
-            (item for item in candidates if item["is_canonical"]), None
+            (item for item in active_originals if item["is_canonical"]), None
         )
         return {
             "duplicate_status": "exact_copy" if duplicates else "none",
-            "exact_original_copy_count": len(candidates),
+            "exact_original_copy_count": len(active_originals),
             "exact_duplicate_location_count": len(duplicates),
             "exact_duplicate_group_id": ";".join(group_ids),
             "canonical_location_id": canonical["location_id"] if canonical else "",

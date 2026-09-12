@@ -342,11 +342,15 @@ def test_r4b02_l04_rejected_copy_with_best_priority_is_not_a_candidate(tmp_path)
     rejected = by_path[rejected_key]
     assert rejected["candidate_rank"] == 0, rejected
     assert rejected["exclusion_reason"] == "rejections_path", rejected
-    assert rejected["is_canonical"] is False
     healthy = [item for item in candidates[0]["locations"] if item["candidate_rank"]]
     assert healthy and all(item["candidate_rank"] == 1 for item in healthy)
-    assert candidates[0]["exact_duplicate_location_count"] == 0
-    assert candidates[0]["exact_original_copy_count"] == len(healthy)
+    # The LEGACY annotation contract is deliberately unchanged (B-VR02-02/-03):
+    # the rejected copy is still part of the duplicate/cleanup view, so the
+    # planner keeps offering it for reclaiming and no consumer loses its
+    # invariant that every group has a canonical.
+    assert candidates[0]["exact_original_copy_count"] == 2
+    assert candidates[0]["exact_duplicate_location_count"] == 1
+    assert rejected["is_canonical"] is True
 
     result = _resolve(catalog)
     assert result.status is ResolutionStatus.REUSED_EXACT, result.debug_trace
@@ -384,8 +388,8 @@ def _service(catalog):
 
 def test_r4b02_budget_counters_bound_candidate_reads(tmp_path):
     """A one-byte ceiling stops the read BEFORE any byte is read; the request
-    keeps its documented reuse decision and says so in the trace (never a
-    silent unverified reuse)."""
+    keeps the pre-B02 trust level for the PREFERRED copy and says so in the
+    trace (never a silent unverified reuse)."""
     paths = _three_copy_fixture(tmp_path)
     catalog = _scan(tmp_path, _roots(paths))
     budget = _ReadBudget(max_candidates=4, max_bytes=1)
@@ -397,8 +401,30 @@ def test_r4b02_budget_counters_bound_candidate_reads(tmp_path):
     assert any("budget_exceeded" in item for item in result.debug_trace), (
         result.debug_trace
     )
-    assert any("unverified_bytes" in item for item in result.debug_trace), (
+    assert any("unverified_preferred_copy" in item for item in result.debug_trace), (
         result.debug_trace
+    )
+
+
+def test_r4b02_injected_budget_is_per_request(tmp_path):
+    """B-VR02-04: the ceilings are PER REQUEST.  Reusing one injected budget
+    (or one resolver) must not silently un-verify the next request."""
+    paths = _three_copy_fixture(tmp_path)
+    catalog = _scan(tmp_path, _roots(paths))
+    budget = _ReadBudget(max_candidates=4, max_bytes=4 * len(BODY))
+    resolver = SourceResolver(catalog, read_budget=budget)
+
+    first = resolver.resolve(_request())
+    assert first.status is ResolutionStatus.REUSED_EXACT, first.debug_trace
+    assert budget.bytes_read == len(BODY), budget
+    assert not any("unverified" in item for item in first.debug_trace)
+
+    second = resolver.resolve(_request())
+    assert second.status is ResolutionStatus.REUSED_EXACT, second.debug_trace
+    assert budget.candidates == 1, budget
+    assert budget.bytes_read == len(BODY), budget
+    assert not any("unverified" in item for item in second.debug_trace), (
+        second.debug_trace
     )
 
 
@@ -522,6 +548,216 @@ def test_r4b02_only_placeholder_copy_is_unavailable(tmp_path, monkeypatch):
     assert any("hydration_required" in item for item in result.debug_trace), (
         result.debug_trace
     )
+
+
+# ---------------------------------------------------------------------------
+# B-VR02-01/-02/-03 regressions: a non-preferred copy is never served
+# unverified, and the legacy annotation contract is untouched
+# ---------------------------------------------------------------------------
+
+
+def test_r4b02_different_bytes_copy_is_never_served_as_the_same_version(tmp_path):
+    """B-VR02-01 (P1): withdraw the preferred copy AND the third copy, then
+    rewrite the surviving copy with DIFFERENT bytes.  The bytes are provably
+    not the requested version, so the answer must be unavailable (no reuse, no
+    download authorization) — exactly what pre-B02 did.  Serving it would be
+    the "take another revision" that L03 forbids."""
+    paths = _three_copy_fixture(tmp_path)
+    catalog = _scan(tmp_path, _roots(paths))
+    before = _resolve(catalog).matches[0]
+    preferred = Path(before.canonical_path)
+    assert "companies" in preferred.as_posix()
+    preferred.unlink()
+    third = paths["future_lake"] / "2025.pdf"
+    third.unlink()
+    survivor = paths["dropbox"] / "2025.pdf"
+    survivor.write_bytes(BODY + b"# a different revision")
+
+    result = _resolve(catalog)
+    assert result.matches == (), result.debug_trace
+    assert result.status is ResolutionStatus.MISSING, result.debug_trace
+    assert result.download_required is True
+    assert not any("unverified" in item for item in result.debug_trace), (
+        result.debug_trace
+    )
+    assert any("content_sha256_mismatch" in item for item in result.debug_trace), (
+        result.debug_trace
+    )
+
+
+def test_r4b02_rejected_only_document_still_lists_for_cleanup(tmp_path):
+    """B-VR02-02 (P1): two provider-rejected copies of one document (the
+    scanner's own layout) must not break the duplicate-cleanup listing.  The
+    legacy annotation contract keeps electing a canonical over the group's
+    active originals, so `list_groups()` cannot hit StopIteration."""
+    from company_wiki.source_catalog.duplicate_cleanup import DuplicateCleanupService
+
+    company_root = tmp_path / "companies"
+    rejected_a = company_root / "Acme" / "raw" / "financial_reports" / ".rejections" / "123"
+    rejected_b = company_root / "Acme" / "raw" / "financial_reports" / ".rejections" / "456"
+    _write_copy(rejected_a)
+    _write_copy(rejected_b)
+    catalog = _scan(
+        tmp_path,
+        [
+            RootSpec(
+                "company_raw",
+                company_root,
+                "company_raw",
+                priority=10,
+                adapter_id="company_raw_v1",
+                read_only=False,
+                reusable_for_filing=True,
+                canonical_write_target="companies",
+            )
+        ],
+    )
+    _force_active(catalog)
+
+    service = _service(catalog)
+    candidates = service.query_filing_candidates(
+        document_kind="annual_report", source_statuses=("active",)
+    )
+    assert len(candidates) == 1, candidates
+    assert all(item["candidate_rank"] == 0 for item in candidates[0]["locations"])
+    assert [item for item in candidates[0]["locations"] if item["is_canonical"]]
+
+    groups = DuplicateCleanupService(catalog).list_groups()
+    assert groups["total_groups"] >= 1, groups
+    assert groups["total_reclaimable_copies"] >= 1, groups
+    assert all(group["copy_count"] >= 2 for group in groups["groups"]), groups
+
+    # and no reuse: a rejected path is never a reusable candidate (L04)
+    result = _resolve(catalog)
+    assert result.matches == (), result.debug_trace
+    assert any("rejections_path" in item for item in result.debug_trace), (
+        result.debug_trace
+    )
+
+
+def test_r4b02_rejected_copy_stays_reclaimable_next_to_healthy_copies(tmp_path):
+    """B-VR02-03 (P2): with a rejected copy at the BEST priority plus two
+    healthy copies, the cleanup planner must still offer the rejected copy
+    (the operator's reclaim target) — pre-B02 it offered three copies."""
+    from company_wiki.source_catalog.duplicate_cleanup import DuplicateCleanupService
+
+    company_root = tmp_path / "companies"
+    rejected = company_root / "Acme" / "raw" / "financial_reports" / ".rejections"
+    dropbox = tmp_path / "Dropbox" / "Stock"
+    future = tmp_path / "future_lake"
+    _write_copy(rejected)
+    _write_copy(dropbox)
+    _write_copy(future)
+    catalog = _scan(
+        tmp_path,
+        [
+            RootSpec(
+                "company_raw",
+                company_root,
+                "company_raw",
+                priority=10,
+                adapter_id="company_raw_v1",
+                read_only=False,
+                reusable_for_filing=True,
+                canonical_write_target="companies",
+            ),
+            RootSpec(
+                "dropbox_stock",
+                dropbox,
+                "directory",
+                priority=30,
+                adapter_id="sidecar_filing_v1",
+                read_only=True,
+                reusable_for_filing=True,
+            ),
+            RootSpec(
+                "future_lake",
+                future,
+                "directory",
+                priority=40,
+                adapter_id="sidecar_filing_v1",
+                read_only=True,
+                reusable_for_filing=True,
+            ),
+        ],
+    )
+    _force_active(catalog)
+
+    groups = DuplicateCleanupService(catalog).list_groups()
+    # pre-B02 measurement (B-VR02-03): 3 reclaimable copies over 2 groups, and
+    # the rejected copy is one of the rows the planner knows about.
+    assert groups["total_groups"] == 2, groups
+    assert groups["total_reclaimable_copies"] == 3, groups
+    listed_paths = [
+        item["relative_path"]
+        for group in groups["groups"]
+        for item in (group["canonical"], *group["duplicates"])
+    ]
+    assert any(
+        ".rejections" in path.replace("\\", "/") for path in listed_paths
+    ), listed_paths
+
+
+# ---------------------------------------------------------------------------
+# B-VR02-04/-05/-07 regressions: budget reset, unambiguous reasons, matching
+# ---------------------------------------------------------------------------
+
+
+def test_r4b02_selection_reason_names_the_source_group(tmp_path):
+    """B-VR02-05: a bare rank is ambiguous, and `tried` must be emitted
+    whenever it is non-empty."""
+    paths = _three_copy_fixture(tmp_path)
+    catalog = _scan(tmp_path, _roots(paths))
+    result = _resolve(catalog)
+    assert result.status is ResolutionStatus.REUSED_EXACT, result.debug_trace
+    trace = list(result.debug_trace)
+    assert "2025: matched" in trace
+    # the ordinary case (preferred copy, nothing tried) keeps the legacy shape
+    assert not any("verified_candidate_rank" in item for item in trace), trace
+
+    preferred = Path(result.matches[0].canonical_path)
+    preferred.unlink()
+    fallthrough = _resolve(catalog)
+    trace = list(fallthrough.debug_trace)
+    assert any(
+        item.startswith("2025: verified_candidate_rank_2:") for item in trace
+    ), trace
+    assert any("2025: candidate " in item for item in trace), trace
+
+
+def test_r4b02_rejections_is_matched_as_a_path_segment() -> None:
+    """B-VR02-07: a substring match disqualified unrelated names."""
+    from company_wiki.source_catalog.service import _location_exclusion_reason
+
+    def location(relative_path: str) -> dict:
+        return {
+            "role": "original_primary",
+            "location_status": "active",
+            "source_id": "urn:company-wiki:source:sha256:" + "a" * 64,
+            "relative_path": relative_path,
+        }
+
+    assert _location_exclusion_reason(location("annual/my.rejections_backup/2025.pdf")) == ""
+    assert (
+        _location_exclusion_reason(location("annual/my.rejections_backup/2025.pdf"))
+        != "rejections_path"
+    )
+    assert (
+        _location_exclusion_reason(location("Acme/raw/.rejections/2025.pdf"))
+        == "rejections_path"
+    )
+    assert (
+        _location_exclusion_reason(location(r"Acme\raw\.rejections\2025.pdf"))
+        == "rejections_path"
+    )
+
+
+def test_r4b02_recall_on_open_placeholders_are_detected() -> None:
+    """B-VR02-07: RECALL_ON_OPEN (0x40000) also hydrates on open."""
+    assert _needs_hydration(types.SimpleNamespace(st_file_attributes=0x40000)) is True
+    assert _needs_hydration(types.SimpleNamespace(st_file_attributes=0x400000)) is True
+    assert _needs_hydration(types.SimpleNamespace(st_file_attributes=0x1000)) is True
+    assert _needs_hydration(types.SimpleNamespace(st_file_attributes=0x20)) is False
 
 
 # ---------------------------------------------------------------------------

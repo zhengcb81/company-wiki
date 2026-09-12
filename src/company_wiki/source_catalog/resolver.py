@@ -143,18 +143,19 @@ def _json_hash(value: dict[str, Any]) -> str:
 
 # --- B02 segment 3: bounded, no-network candidate verification --------------
 #
-# A03 §2.4 keeps the error model at exactly five values.  Nothing below
-# invents a sixth state: an unverified candidate (over the per-candidate cap,
-# over the per-request budget, cancelled, unreadable, or hash-mismatched) is
-# simply NOT reusable, is reported per candidate in the diagnostics, and the
-# request keeps its existing MISSING/placeholder semantics — it never silently
-# reuses bytes that were not verified.
+# Status model (unchanged, five values - see the note in _select_candidate for
+# the exact reuse rule): nothing below invents a sixth state.  A candidate
+# whose bytes cannot be verified is either the REQUESTED version's preferred
+# copy (served on the catalog's claim, exactly as before B02, with the reason
+# recorded) or it is not served at all — a non-preferred copy is served only
+# when its bytes really are the requested version.
 _CANDIDATE_BYTES_CAP = 256 * 1024 * 1024
 _REQUEST_MAX_CANDIDATES = 64
 _REQUEST_MAX_BYTES = 2 * 1024 * 1024 * 1024
-# Windows cloud placeholders: FILE_ATTRIBUTE_RECALL_ON_DATA_ACCESS | OFFLINE.
+# Windows cloud placeholders: FILE_ATTRIBUTE_RECALL_ON_DATA_ACCESS (0x400000),
+# FILE_ATTRIBUTE_RECALL_ON_OPEN (0x40000) and FILE_ATTRIBUTE_OFFLINE (0x1000).
 # Opening such a file downloads it; the query path must not trigger that.
-_HYDRATION_ATTRIBUTES = 0x400000 | 0x1000
+_HYDRATION_ATTRIBUTES = 0x400000 | 0x40000 | 0x1000
 
 
 def _sha256_of_file(path: Path) -> str:
@@ -191,6 +192,17 @@ class _ReadBudget:
     def cancel(self) -> None:
         """Caller-side cancellation: no further candidate byte is read."""
         self.cancelled = True
+
+    def begin_request(self) -> None:
+        """Start a request on this budget.
+
+        The ceilings are PER REQUEST (design B02 rule 3), so the counters
+        restart here: a caller that injects one budget (or resolves twice on
+        one resolver) must not silently lose verification for the second
+        request.  Cancellation is sticky — it is explicit caller intent.
+        """
+        self.candidates = 0
+        self.bytes_read = 0
 
     def take_candidate(self) -> str:
         if self.cancelled:
@@ -232,7 +244,6 @@ def _verify_candidate(
     location: dict[str, Any],
     *,
     expected_sha256: str,
-    expected_size: int | None,
     size: int,
     budget: _ReadBudget,
 ) -> tuple[str, str]:
@@ -244,8 +255,6 @@ def _verify_candidate(
     qualifying decision is always a full-file digest, and sampling is never
     used to claim equality.
     """
-    if expected_size and size != expected_size:
-        return "size_mismatch", f"{size}!={expected_size}"
     stop = budget.take_candidate()
     if stop:
         return stop, ""
@@ -264,6 +273,13 @@ def _verify_candidate(
     # against (read-path annotation only — never persisted).
     location["verified_sha256"] = digest
     return "", digest
+
+
+def _candidate_reason(location: dict[str, Any]) -> str:
+    """Name the copy AND its source group: a bare rank is ambiguous when a
+    document carries more than one source entry (B-VR02-05)."""
+    source = str(location.get("source_id") or "")
+    return f"verified_candidate_rank_{location['candidate_rank']}:{source.rsplit(':', 1)[-1][:12]}"
 
 
 @dataclass(frozen=True)
@@ -944,7 +960,11 @@ class SourceResolver:
             limit=1000,
         )
         # B02 段 3 预算（v0.1.3）：有限资源 + 可取消，且计数留在证据里。
+        # The ceilings are per request: begin_request() restarts the counters so
+        # an injected/reused budget cannot silently un-verify later requests
+        # (B-VR02-04).
         budget = self.read_budget or _ReadBudget()
+        budget.begin_request()
         for document in candidates:
             if not self._entity_matches(request.entity, document):
                 entity_gate_rejected += 1
@@ -1056,15 +1076,12 @@ class SourceResolver:
                 future_matches += 1
                 trace.append(f"{document['title']}: published_after_as_of_date")
                 continue
+            # B02: REUSE eligibility is the qualification track, not the legacy
+            # canonical election (which may legitimately point at a
+            # provider-rejected row).  An un-annotated/legacy candidate list
+            # therefore has no reusable location at all — fail closed.
             canonical_locations = [
-                item
-                for item in document["locations"]
-                if item.get("is_canonical")
-                and item.get("role") == "original_primary"
-                and item.get("location_status") == "active"
-                # WU-3.1: provider-rejected paths never count as canonical.
-                and ".rejections"
-                not in item.get("relative_path", "").replace("\\", "/")
+                item for item in document["locations"] if item.get("candidate_rank")
             ]
             if not canonical_locations:
                 if any(
@@ -1102,11 +1119,13 @@ class SourceResolver:
                 for attempted in selection.tried:
                     trace.append(f"{document['title']}: candidate {attempted}")
                 continue
-            if selection.reason != "verified_candidate_rank_1":
-                # Serving a copy other than the preferred one — a fall-through
-                # to an equivalent copy, bytes that could not be verified, or a
-                # resource stop — is never silent.  The common case keeps its
-                # existing trace shape.
+            if selection.tried or not selection.reason.startswith(
+                "verified_candidate_rank_1:"
+            ):
+                # Serving anything other than the preferred copy's verified
+                # bytes — a fall-through, a claim-only preferred copy, or a
+                # resource stop — is never silent.  `tried` is emitted whenever
+                # it is non-empty, whatever the reason (B-VR02-05).
                 trace.append(f"{document['title']}: {selection.reason}")
                 for attempted in selection.tried:
                     trace.append(f"{document['title']}: candidate {attempted}")
@@ -1303,61 +1322,81 @@ class SourceResolver:
         *,
         budget: _ReadBudget,
     ) -> tuple[dict[str, Any] | None, str, tuple[str, ...]]:
-        """B02 段 3/4 — walk the ordered qualified candidates, verify each,
-        and return the FIRST one whose local bytes are the requested version.
+        """B02 段 3/4 — walk the ordered qualified candidates of the REQUESTED
+        version and return the copy to serve.
 
-        The order comes from ``service._annotate_locations`` (``candidate_rank``
-        = segment 4 within the qualified set), so priority/churn can only
-        decide *which copy is tried first* — never *whether a copy qualifies*.
-        Only an exhausted list returns None (unavailable), which is what makes
-        "withdraw the preferred copy" fall through to the next equivalent copy
-        instead of failing the whole document.
+        Candidates are restricted to the document's own source entry (its
+        version), ordered by ``candidate_rank`` (stamped by
+        ``service._annotate_locations``), so priority/churn can only decide
+        *which copy is tried first* — never *whether a copy qualifies*.
 
-        Byte-level refusal note: when NO candidate's bytes match the claimed
-        version but a locally readable copy of it exists, resolve still points
-        at that copy and reports ``unverified_bytes`` — the byte-level
-        hard gate belongs to the read path (B03: serve verified bytes or fail
-        explicitly).  Resolve never silently upgrades such a copy to
-        "verified": the reason and the per-candidate diagnostics are recorded.
+        Serving rule (narrowed after B-VR02-01, which proved that serving any
+        readable copy could hand out a DIFFERENT revision):
+
+        1. the first candidate whose bytes verify IS served (that is the
+           fall-through that makes "preferred copy withdrawn" work);
+        2. the preferred copy (rank 1) is served on the catalog's claim when
+           its bytes cannot be verified — this is exactly the pre-B02 trust
+           level for the elected copy, and it is why the A-side frozen
+           fixtures (whose synthetic bytes never match their declared hash)
+           still resolve.  The reason is recorded as
+           ``unverified_preferred_copy`` — never silent;
+        3. **no other candidate is ever served unverified**: a non-preferred
+           copy with different bytes yields no handle (unavailable ->
+           MISSING), which is what keeps "do not take another revision" true.
+
+        The byte-level hard gate for case 2 (serve verified bytes or fail
+        explicitly) belongs to the read path (B03) and is registered as the
+        S-10 deviation until then.
         """
+        own_source_id = str(document.get("source_id") or "")
         ordered = sorted(
-            (item for item in document["locations"] if item.get("candidate_rank")),
+            (
+                item
+                for item in document["locations"]
+                if item.get("candidate_rank")
+                and (
+                    not own_source_id
+                    or str(item.get("source_id") or "") == own_source_id
+                )
+            ),
             key=lambda item: (int(item["candidate_rank"]), str(item["location_id"])),
         )
         if not ordered:
             return None, "placeholder_no_handle", ()
         expected_sha256 = str(document.get("content_sha256") or "")
-        expected_size = document.get("byte_size")
         tried: list[str] = []
-        fallback: dict[str, Any] | None = None
         stop_status = ""
         for location in ordered:
-            probe_status, probe_detail, size = _local_copy_probe(location)
+            rank = int(location["candidate_rank"])
+            probe_status, _probe_detail, size = _local_copy_probe(location)
             if probe_status:
                 tried.append(f"{location['location_id']}:{probe_status}")
                 continue
-            if fallback is None:
-                fallback = location
             status, detail = _verify_candidate(
                 location,
                 expected_sha256=expected_sha256,
-                expected_size=expected_size,
                 size=size,
                 budget=budget,
             )
             if not status:
-                reason = f"verified_candidate_rank_{location['candidate_rank']}"
-                return location, reason, tuple(tried)
+                return location, _candidate_reason(location), tuple(tried)
             tried.append(
                 f"{location['location_id']}:{status}" + (f":{detail}" if detail else "")
             )
-            if status in ("budget_exceeded", "cancelled"):
+            if status == "cancelled":
+                # A cancelled request is never answered — not even with the
+                # preferred copy's claim.
                 stop_status = status
                 break
-        if fallback is not None and stop_status != "cancelled":
-            return fallback, "unverified_bytes", tuple(tried)
+            if rank == 1:
+                # Pre-B02 trust level for the elected copy (the A-side frozen
+                # fixtures rely on it); recorded, never silent.
+                return location, "unverified_preferred_copy", tuple(tried)
+            if status == "budget_exceeded":
+                stop_status = status
+                break
         if stop_status == "cancelled":
-            # A cancelled request must not be answered with unverified bytes.
             return None, "candidate_verification_cancelled", tuple(tried)
         if stop_status == "budget_exceeded":
             return None, "candidate_budget_exceeded", tuple(tried)
