@@ -95,6 +95,16 @@ def _verified_assertion_identity(
 #     the REQUESTED version exists, the answer is an explicit failure
 #     (missing / not_found).  It never substitutes another revision, and it never
 #     reads a copy outside the configured roots.
+#     ONE EXCEPTION, named here because it is a real gap in the sentence above
+#     (B-VR07-01): a VERIFIED copy is required for every non-preferred copy, but
+#     the preferred one may be served on the catalog's claim (owner decision S-10
+#     rule 2: "only when no copy passes verification may ONE row be served on the
+#     catalog's declaration").  So "no qualified copy -> explicit failure" holds
+#     for *another revision* and for *out-of-root* copies, but a
+#     claimed-but-drifted preferred copy is served with an
+#     `unverified_<status>_on_pre_b02_canonical` trace entry instead of failing -
+#     read this sentence with that exception, and use read_verified_bytes when
+#     verified bytes are required.
 #
 # The consumer-side adapter conversion and the removal of any consumer-side
 # `companies` fallback are NOT part of this repository's contract (design B07
@@ -309,8 +319,10 @@ B03_ERROR_UNAVAILABLE = "unavailable"
 # to match against).
 B03_BYTES_VERIFIED = "verified"
 # The refusal of a caller-supplied ``expected_content_sha256`` that contradicts
-# the handle's own version (B-VR03-01).
+# the handle's own version (B-VR03-01), and of a handle stamped with a version
+# this entry point does not implement (B-VR07-02).
 B03_REASON_EXPECTED_VERSION_MISMATCH = "expected_version_mismatch"
+B03_REASON_UNSUPPORTED_VERSION = "unsupported_version"
 
 # Which object the returned bytes came from.  Only "handle" is reachable today:
 # the design's middle tier reads an EXISTING controlled snapshot of the source
@@ -1956,6 +1968,21 @@ class SourceResolver:
         """
         if not isinstance(handle, SourceHandle):
             raise TypeError("handle must be a SourceHandle")
+        if handle.schema_version != SOURCE_RESOLVER_SCHEMA_VERSION:
+            # B-VR07-02: a handle stamped with another version must not be read
+            # through this contract at all - the bytes would be "verified"
+            # against a version semantic this entry point does not implement.
+            return ByteReadResult(
+                document_id=handle.document_id,
+                content_sha256=handle.content_sha256,
+                status=B03_ERROR_UNAVAILABLE,
+                reason=B03_REASON_UNSUPPORTED_VERSION,
+                detail=str(handle.schema_version),
+                data=None,
+                byte_size=0,
+                bytes_source=B03_BYTES_SOURCE_NONE,
+                read_at=datetime.now(UTC).isoformat(),
+            )
         expected = expected_content_sha256 or handle.content_sha256
         read_at = datetime.now(UTC).isoformat()
         if expected_content_sha256 and expected_content_sha256 != handle.content_sha256:

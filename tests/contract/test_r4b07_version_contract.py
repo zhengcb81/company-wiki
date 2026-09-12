@@ -192,10 +192,47 @@ def test_r4b07_the_contract_declares_the_version_policy_and_no_fallback():
 # ---------------------------------------------------------------------------
 
 
+def test_r4b07_the_read_entry_point_refuses_a_foreign_version_handle(tmp_path):
+    """B-VR07-02: the refusal had to reach the READ entry point too.
+
+    `build_resolution_envelope` was the only place checking the version, so a
+    handle stamped "2.0" could be handed to `read_verified_bytes` and came back
+    `verified` with bytes - verifying against a version semantic this package
+    does not implement.  Dataclass construction itself stays unchecked (no
+    in-repo producer can stamp a foreign version); the read path no longer
+    trusts it."""
+    from dataclasses import replace
+
+    companies = tmp_path / "companies"
+    _write_copy(companies / "Acme" / "raw" / "financial_reports" / "annual")
+    catalog = _catalog(tmp_path, [_root("company_raw", companies, "company_raw", 10)])
+    resolution = SourceResolver(catalog).resolve(_request())
+    assert resolution.matches, resolution.debug_trace
+    handle = resolution.matches[0]
+
+    out = SourceResolver(catalog).read_verified_bytes(
+        replace(handle, schema_version="2.0")
+    )
+    assert out.data is None, out
+    assert out.status == "unavailable", out
+    assert out.reason == "unsupported_version", out
+    assert out.detail == "2.0", out
+    # the current version still reads
+    ok = SourceResolver(catalog).read_verified_bytes(handle)
+    assert ok.ok and ok.data, ok
+
+
 def test_r4b07_no_substitute_revision_or_directory(tmp_path):
-    """The requested version does not exist; the same entity HAS another
-    version under another root.  The answer must be an explicit failure - never
-    the other revision, never a path outside the configured roots."""
+    """The requested version does not exist; the same entity HAS another revision
+    under another root.  The answer must be an explicit failure - never the other
+    revision, never a path outside the configured roots.
+
+    Boundary, stated because the contract sentence has one exception
+    (B-VR07-01): decision S-10 rule 2 lets ONE row be served on the catalog's
+    declaration when no copy passes verification, marked with an
+    `unverified_<status>_on_pre_b02_canonical` trace entry.  This case is about
+    substitute REVISIONS, which are never served; callers that need verified
+    bytes must use `read_verified_bytes`."""
     companies = tmp_path / "companies"
     dropbox = tmp_path / "Dropbox" / "Stock"
     _write_copy(companies / "Acme" / "raw" / "financial_reports" / "annual")
@@ -223,7 +260,11 @@ def test_r4b07_no_substitute_revision_or_directory(tmp_path):
     assert resolution.matches == (), resolution.debug_trace
     assert resolution.status is ResolutionStatus.MISSING, resolution.debug_trace
     assert resolution.download_required is True
-    # nothing from the other revision leaked into the trace as a served copy
-    assert not any("served" in item for item in resolution.debug_trace), (
-        resolution.debug_trace
-    )
+    # The refusal must be EXPLAINED, and the explanation must name a version
+    # reason (B-VR07-05: the previous assertion searched the trace for the word
+    # "served", which no code path ever writes, so it could never fail).
+    assert resolution.debug_trace, "an explicit refusal must be explained"
+    assert any(
+        "fiscal_year" in item or "no_canonical" in item or "rejected" in item
+        for item in resolution.debug_trace
+    ), resolution.debug_trace
