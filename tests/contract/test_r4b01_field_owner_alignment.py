@@ -483,3 +483,44 @@ def test_r4b01_quoted_boolean_is_refused_by_the_admission_point(tmp_path):
         else:  # pragma: no cover - the admission point must refuse this
             raise AssertionError(f"a quoted {field_name} was accepted")
 
+
+def test_r4b01_null_boolean_is_refused_where_the_field_is_not_nullable(tmp_path):
+    """CFG-08 edge: `read_only` is annotated plain ``bool``, so a
+    present-but-empty value must be REFUSED - storing None would be falsy while
+    the absent-field default is True.  `reusable_for_filing` is
+    ``bool | None``, where None legitimately means "follow the kind list"."""
+    from company_wiki.source_catalog.config import CatalogConfigError, load_catalog_config
+
+    config_dir = tmp_path / "config"
+    config_dir.mkdir()
+
+    def write(name: str, line: str):
+        path = config_dir / f"{name}.yaml"
+        path.write_text(
+            "\n".join(
+                [
+                    'schema_version: "1.0"',
+                    'catalog_dir: "${PROJECT_ROOT}/.source_catalog"',
+                    "reusable_root_kinds: [directory]",
+                    "roots:",
+                    "  - root_id: probe",
+                    "    kind: directory",
+                    '    path: "${PROJECT_ROOT}"',
+                    f"    {line}",
+                ]
+            ),
+            encoding="utf-8",
+        )
+        return path
+
+    try:
+        load_catalog_config(write("read_only_null", "read_only:"))
+    except CatalogConfigError as exc:
+        assert "CFG-08" in str(exc) and "read_only" in str(exc), exc
+    else:  # pragma: no cover - the admission point must refuse this
+        raise AssertionError("a null read_only was accepted")
+
+    config = load_catalog_config(write("reusable_null", "reusable_for_filing:"))
+    assert config.roots[0].reusable_for_filing is None, config.roots[0]
+    assert config.roots[0].read_only is True, config.roots[0]
+
