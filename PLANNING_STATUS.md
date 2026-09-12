@@ -1,12 +1,14 @@
 # company-wiki 当前规划状态
 
-> **2026-09-12 上午最新覆盖（R4 阶段 A 收口 v0.4.2 / 阶段 B 设计 v0.1.3 / A06 首个真实基线）**：
-> 🔴 **需要 owner 决定的 6 项 B 边界问题（其余工作已到边界，详见 revenue 侧 `assurance/runs/2026-09-11_r4-phase-b/task_plan.md` §5）**：**S-1** B 是否可新增测试文件（`tests/contract/**`，只新增不改既有）；**S-2** owner R-1（假保证字段）/R-4（外发门）的整改是否纳入 B；**S-3** 是否连在产的 `export_policy_2x` 一并收敛（需跨仓 policy_hash 迁移）；**S-4** B07 的消费者侧最小协议适配归谁（B 还是 C）；**S-5** G8 隔离副本是否按"两级"做（机制层小 catalog 可立即开工）；**S-6** 是否需要第四轮 `B.DR`。
-> **① 阶段 A 合同 → v0.4.2**：A07=`accepted_with_findings`（22 条负例 + 五值错误模型）、A08=`rejected`（117 行映射：98 直连 / 6 桥接 / 13 无法指派，**桥接表已补**）。三份独立复审命中同一 P0：**`export_policy_2x` 在产**（`cli.py:835/849-851`，是 filing-fetch **FC-501 containment / ZR-405 policy_hash 唯一来源**）→ **owner R-3 范围收窄为"仅准入 loader"**。另：`reusable_for_filing` 实为**三处活实现**；**owner R-4 在现网惰性**（四个 root 都显式声明 `privacy_class: public`，受影响集合 = 0）；`read_only` 亦为假保证字段候选。
-> **② 阶段 B 设计 → v0.1.3**（`B.DR` 三轮 rejected：round-1 14/20、round-2 6/15 闭环）：R-1/R-4 整改**移出 B**（无 allowed 落点即不可实施）；B05 补**逐列合并规则**（冲突 → `ambiguous`，不得按 priority 择一）并保留 `capture_ready` 恢复路径；B02 预算改为**必须全量 hash**且撤销五值外的 `unknown`；新增 **F10 测试落点**与 F11；checkpoint 生成器改为**真断言**（`reviewed_commit` 必须解析、清单不完整拒绝写出、`--verify-only` 按被审修订比对，实测 12/12 + 完整）。**产品代码未改动**。
-> **③ A06 首个真实基线（机制层）**：unit **787 passed**；contract **1748 passed / 7 skipped / 0 failed**（junit 入账）。其中 `test_dbx05_symlink_escape_rejected` 因 **宿主不支持 symlink** 跳过 → **symlink 逃逸控制在本机从未执行**（与 R-1 直接相关，须在支持 symlink 的环境验证）。
-> **④ 边界新事实**：**本机跑 CI 等价测试套件会打开生产 catalog（只读）**——`tests/contract/test_lt_uj_real_e2e.py` 硬编码生产路径且收集期即连接，**不在 CI 的 8 个 `--ignore` 内**。开库者清单因此为**四类**；主库与 `-wal` 全程未变（无逻辑写入）。
-> **⑤ GP-009 与门**：FC-705 预计 **今晚 22:00** 转 true（P10 24:00:05 + P11）；Daily 6/7→7/7、Weekly 0/2（09-13 04:30）、Monthly 1/1。下表 09-11 段落保留为当时观测。
+> **2026-09-12 上午最新覆盖（R4 阶段 A 收口 v0.4.2 / 阶段 B 边界已定案 v0.1.4 / A06 首个真实基线）**：
+> ✅ **owner 已就 6 项 B 边界定案（2026-09-12，"全按推荐来"）**，权威记录：revenue 侧 `assurance/runs/2026-09-11_r4-phase-b/owner-scope-decisions-2026-09-12.md`：
+> **S-1** B **可以新增**测试文件（`tests/contract/**`，仅新增、不改既有断言）→ **F10/F11 已批准**；**S-2** owner **R-1/R-4** 整改**不纳入 B**（另立工作包）；**S-3** **不动**在产 `export_policy_2x`（跨仓 policy_hash 契约保持，`B-payload-hash` 逐次验证）；**S-4** 消费者侧（filing/revenue）**归 C**，B 不签；**S-5** G8 隔离副本**两级**（L1 机制层可立即开工）；**S-6** 需要**第四轮** `B.DR`（本轮更正后已提交 `B.DR-rev4`）。
+> ⏳ **仍未批准**：**"开始实施"本身**（handbook §1 第 5 项）——边界与文件范围已按裁定更新，改产品代码待 owner 一句确认；建议顺序 B02 → B04 → B05 → B01 → B03 → B06 → B07（每步独立 commit + 独立复审）。
+> **① 阶段 A 合同 → v0.4.2**：A07=`accepted_with_findings`（22 条负例 + 五值错误模型）、A08=`rejected`（117 行映射 + **桥接表已补**：13 行无法指派 → O06/D07/A08/FC903）。三份独立复审命中同一 P0：**`export_policy_2x` 在产**（filing-fetch **FC-501 containment / ZR-405 policy_hash 唯一来源**）→ **owner R-3 范围收窄为"仅准入 loader"**。另：`reusable_for_filing` 实为**三处活实现**；**owner R-4 在现网惰性**（四个 root 都显式声明 `privacy_class: public`）；`read_only` 亦为假保证字段候选。
+> **② 阶段 B 设计 → v0.1.4**（`B.DR` 前三轮 rejected：round-1 14/20、round-2 6/15 闭环）：R-1/R-4 移出 B；B05 补**逐列合并规则**（冲突 → `ambiguous`，不得按 priority 择一）并保留 `capture_ready` 恢复路径；B02 预算改为**必须全量 hash**且撤销五值外的 `unknown`；F10/F11 落点；checkpoint 生成器改为**真断言**（实测 14/14 + 完整）。**产品代码零改动**。
+> **③ A06 首个真实基线（机制层）**：unit **787 passed**；contract **1748 passed / 7 skipped / 0 failed**。其中 `test_dbx05_symlink_escape_rejected` 因 **宿主不支持 symlink** 跳过 → **symlink 逃逸控制在本机从未执行**（须在支持 symlink 的环境验证）。
+> **④ 边界新事实**：**本机跑 CI 等价测试套件会打开生产 catalog（只读）**——`tests/contract/test_lt_uj_real_e2e.py` 硬编码生产路径且收集期即连接，**不在 CI 的 8 个 `--ignore` 内**；开库者清单因此为**四类**；主库与 `-wal` 全程未变。
+> **⑤ GP-009 与门**：FC-705 预计 **今晚 22:00** 转 true（P10 24:00:05 + P11）；Daily 6/7→7/7、Weekly 0/2（09-13 04:30）、Monthly 1/1。CI：revenue #151、wiki #105 全 success。
 
 > **2026-09-11 夜最新覆盖（22:00 运行后实测；R4 阶段 A 首轮 A.DR）**：
 > **① FC-705 窗口修复已被真实运行验证**：`run_id=20260911T210001Z`、`ok=true`、`problems=[]`、`legacy_hits=[]`；权威账本关 **period 10 = 2026-09-10T21:00:13Z → 2026-09-11T21:00:18Z = 24:00:05（首个真正 ≥24h 的窗口）**，hits=0；开 period 11。**门仍 `close_allowed=false`，但唯一原因只剩历史窗口**：reasons=`["period 9: window 23:59:52 is shorter than 24h"]`（P9 已无法补救）→ **预计 2026-09-12 22:00 运行后确定性转 true**（last-two = P10 + P11，两者均 ≥24h 且零 hit）。修复机制见 revenue `41117ce`（runner 在调用观测器前补足窗口缺口；本次实际等待 ~5 s）。
