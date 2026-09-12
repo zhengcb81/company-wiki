@@ -209,8 +209,11 @@ def test_r4b05_merge_records_provenance_without_replacing_the_column(tmp_path):
     fields = provenance["fields"]
     assert fields, provenance
     for name, record in fields.items():
-        assert set(record) == {"source_id", "observed_at", "value_hash"}, (name, record)
-        assert isinstance(record["value_hash"], str) and record["value_hash"], record
+        assert set(record) == {"value", "sources", "conflicts"}, (name, record)
+        assert isinstance(record["value"], str) and record["value"], record
+        assert isinstance(record["sources"], list), (name, record)
+        for source in record["sources"]:
+            assert set(source) == {"source_id", "observed_at", "role"}, source
     # 4. hashes only: the unrelated canary text is nowhere in the provenance
     assert CANARY not in json.dumps(provenance, ensure_ascii=False)
 
@@ -238,6 +241,91 @@ def test_r4b05_merge_without_prefer_new_still_records_provenance(tmp_path):
     metadata = _metadata(catalog, document_id)
     assert metadata["acquisition"]["source_url"] == "https://sec.gov/x/2025", metadata
     assert metadata.get("r4_provenance", {}).get("schema_version") == "1.0", metadata
+
+
+# ---------------------------------------------------------------------------
+# A real disagreement is kept, never resolved by priority
+# ---------------------------------------------------------------------------
+
+
+def test_r4b05_true_conflict_keeps_every_candidate_and_blocks_the_read_side(tmp_path):
+    """Two captures of the same bytes disagree on ``title`` (different file
+    names, same priority tier).  The stored value stays as the single value,
+    BOTH candidates are recorded under the field, and the read contract reports
+    the document as blocked instead of quietly preferring one side."""
+    companies = tmp_path / "companies"
+    dropbox = tmp_path / "Dropbox" / "Stock"
+    _write_copy(
+        companies / "Acme" / "raw" / "financial_reports" / "annual",
+        _sidecar(),
+        "acme-2025-annual.pdf",
+    )
+    catalog = _catalog(
+        tmp_path,
+        _roots(("company_raw", companies, 10), ("dropbox_stock", dropbox, 10)),
+    )
+    catalog.scan()
+    document_id = _sole_document_id(catalog)
+    stored_title = _fetchone(
+        catalog, "SELECT title FROM documents WHERE document_id=?", (document_id,)
+    )["title"]
+
+    # same bytes, same tier, but the file name says something else
+    _write_copy(dropbox, _sidecar(), "acme-2025-annual-restated.pdf")
+    catalog.scan()
+
+    metadata = _metadata(catalog, document_id)
+    title_record = metadata["r4_provenance"]["fields"]["title"]
+    assert title_record["conflicts"], title_record
+    hashes = {item["value_hash"] for item in title_record["conflicts"]}
+    assert len(hashes) == 2, title_record
+    # the stored single value did not flip, and it is still the document title
+    row = _fetchone(
+        catalog, "SELECT title FROM documents WHERE document_id=?", (document_id,)
+    )
+    assert row["title"] == stored_title, row
+
+    candidate = catalog.query_filing_candidates(
+        document_kind="annual_report", source_statuses=("active",)
+    )[0]
+    assert candidate["metadata_status"] == "blocked", candidate["conflicts"]
+    assert candidate["conflicts"] == ["title"], candidate["conflicts"]
+    assert candidate["provenance"]["title"]["conflicts"], candidate["provenance"]
+
+
+def test_r4b05_later_capture_fills_a_missing_column(tmp_path):
+    """The capture_ready recovery path must survive: a column the stored row does
+    NOT have yet is filled by a later capture (fill a gap, never overwrite)."""
+    companies = tmp_path / "companies"
+    dropbox = tmp_path / "Dropbox" / "Stock"
+    _write_copy(
+        companies / "Acme" / "raw" / "financial_reports" / "annual",
+        _sidecar(fiscal_year=None),
+    )
+    catalog = _catalog(
+        tmp_path,
+        _roots(("company_raw", companies, 10), ("dropbox_stock", dropbox, 10)),
+    )
+    catalog.scan()
+    document_id = _sole_document_id(catalog)
+    con = sqlite3.connect(f"file:{catalog.config.database_path}?mode=rw", uri=True)
+    con.execute(
+        "UPDATE documents SET published_date=NULL WHERE document_id=?", (document_id,)
+    )
+    con.commit()
+    con.close()
+
+    _write_copy(dropbox, _sidecar(), "acme-2025-annual.pdf")
+    catalog.scan()
+
+    row = _fetchone(
+        catalog,
+        "SELECT published_date, title FROM documents WHERE document_id=?",
+        (document_id,),
+    )
+    assert row["published_date"] == "2026-02-20", row
+    metadata = _metadata(catalog, document_id)
+    assert metadata["r4_provenance"]["fields"]["published_date"]["value"], metadata
 
 
 # ---------------------------------------------------------------------------

@@ -15,7 +15,7 @@ from .llm_summarizer import summarize_catalog_with_llm
 from .lock import CatalogOperationLock
 from .normalizer import backfill_text_fingerprints, normalize_catalog
 from .section_extractor import extract_sections_catalog
-from .scanner import scan_catalog, v2_scan_shadow_from_snapshot
+from .scanner import R4_PROVENANCE_KEY, scan_catalog, v2_scan_shadow_from_snapshot
 from .store import CatalogStore
 from .reader import ReadOnlyCatalogReader
 from .summarizer import summarize_catalog
@@ -385,6 +385,20 @@ class SourceCatalog:
             doc_locations = self._annotate_locations(
                 document_id, locations.get(document_id, [])
             )
+            metadata = json.loads(row["metadata_json"])
+            reserved = metadata.get(R4_PROVENANCE_KEY)
+            provenance_fields = (
+                reserved.get("fields", {}) if isinstance(reserved, dict) else {}
+            )
+            # B05 read contract: the per-field provenance travels with the
+            # metadata, field-level conflicts are named, and a document whose
+            # merged columns disagree is reported as `blocked` — never silently
+            # resolved by priority.
+            conflicted_fields = sorted(
+                name
+                for name, record in provenance_fields.items()
+                if isinstance(record, dict) and record.get("conflicts")
+            )
             results.append(
                 {
                     "document_id": document_id,
@@ -396,7 +410,10 @@ class SourceCatalog:
                     "document_kind": row["document_kind"],
                     "published_date": row["published_date"],
                     "source_status": row["source_status"],
-                    "metadata": json.loads(row["metadata_json"]),
+                    "metadata": metadata,
+                    "provenance": provenance_fields,
+                    "conflicts": conflicted_fields,
+                    "metadata_status": "blocked" if conflicted_fields else "ok",
                     "entities": entities.get(document_id, []),
                     "locations": doc_locations,
                     **self._duplicate_summary(doc_locations),

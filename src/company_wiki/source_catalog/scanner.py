@@ -1004,7 +1004,9 @@ def _scan_catalog_impl(
                             (item.source_id, item.content_sha256, item.size, item.mime_type, scan_time),
                         )
                 existing_document = connection.execute(
-                    "SELECT metadata_priority, source_status, metadata_json FROM documents WHERE document_id=?", (document_id,)
+                    "SELECT metadata_priority, source_status, metadata_json, title, source_type,"
+                    " document_kind, published_date, primary_source_id"
+                    " FROM documents WHERE document_id=?", (document_id,)
                 ).fetchone()
                 _merge_document_row(
                     connection,
@@ -1245,21 +1247,45 @@ def _short_value_hash(value: Any) -> str:
     return hashlib.sha256(payload.encode("utf-8")).hexdigest()[:12]
 
 
+# Which metadata key DECLARES a column (design §B05: "take the value that
+# declares the column and whose source is traceable").  A value the scanner had
+# to derive from a file name is not a declaration, so a derived value never wins
+# against a declared one — and a disagreement between two declared values is the
+# "real conflict" the design wants preserved instead of resolved by priority.
+_DECLARING_KEYS: dict[str, tuple[str, ...]] = {
+    "title": ("source_title",),
+    "document_kind": ("document_kind",),
+    "source_type": ("source_type",),
+    "published_date": ("filing_date", "published_date"),
+}
+
+
+def _declared_columns(container: Any) -> dict[str, bool]:
+    """Which of the merged columns this capture DECLARES (rather than derives)."""
+    payload = container if isinstance(container, dict) else {}
+    return {
+        column: any(str(payload.get(key) or "").strip() for key in keys)
+        for column, keys in _DECLARING_KEYS.items()
+    }
+
+
 def _merge_metadata_json(
     stored_json: Any,
     incoming: dict[str, Any],
     *,
     prefer_new: bool,
-    source_id: str | None,
-    observed_at: str,
+    provenance_fields: dict[str, Any],
 ) -> str:
     """Read-modify-write the ``documents.metadata_json`` column (B05).
 
     Never replaces the column wholesale: keys written by other modules (for
     example the ``prompt_injection_review`` receipt that ``resolver`` exposes as
     ``prompt_injection_status``) survive every merge, and the reserved
-    ``r4_provenance`` block records, per field, which source wrote the value,
-    when, and a short hash of it.  Raw text fragments are never stored here.
+    ``r4_provenance`` block records, per field, the hash of the stored value,
+    the sources that agreed on it and — where they disagreed — every candidate.
+
+    The business values follow the pre-B05 ``prefer_new`` rule; ``priority`` is
+    no longer consulted here (it only ranks candidates, see ``_merge_columns``).
     """
     try:
         stored = json.loads(stored_json or "{}")
@@ -1267,49 +1293,135 @@ def _merge_metadata_json(
             stored = {}
     except json.JSONDecodeError:
         stored = {}
-    # Business selection stays exactly what it was before B05: on `prefer_new`
-    # the incoming capture wins, otherwise the stored values stay untouched.
-    # What changes is that the column is never REPLACED: unrelated keys (for
-    # example another module's `prompt_injection_review` receipt) survive, and
-    # the reserved provenance block is (re)written.
     merged = dict(stored)
     if prefer_new:
         merged.update(incoming)
-    provenance = stored.get(R4_PROVENANCE_KEY)
-    if not isinstance(provenance, dict):
-        provenance = {}
-    fields = provenance.get("fields")
-    if not isinstance(fields, dict):
-        fields = {}
-    # Which capture supplied the business metadata: the incoming one when
-    # `prefer_new` fired, otherwise whatever the previous record names (None
-    # means "written before provenance existed" - recorded as unknown, never
-    # guessed).
-    winner_source = source_id if prefer_new else None
-    for container in ("acquisition", "dayu_meta"):
-        payload = merged.get(container)
-        if isinstance(payload, dict):
-            for key, value in payload.items():
-                name = f"{container}.{key}"
-                previous = fields.get(name) if isinstance(fields.get(name), dict) else {}
-                fields[name] = {
-                    "source_id": winner_source if prefer_new else previous.get("source_id"),
-                    "observed_at": observed_at if prefer_new else previous.get("observed_at"),
-                    "value_hash": _short_value_hash(value),
-                }
-    for key in ("root_id", "group_key", "scanner_version"):
-        if key in merged:
-            previous = fields.get(key) if isinstance(fields.get(key), dict) else {}
-            fields[key] = {
-                "source_id": winner_source if prefer_new else previous.get("source_id"),
-                "observed_at": observed_at if prefer_new else previous.get("observed_at"),
-                "value_hash": _short_value_hash(merged[key]),
-            }
+    previous = stored.get(R4_PROVENANCE_KEY)
+    fields: dict[str, Any] = {}
+    if isinstance(previous, dict) and isinstance(previous.get("fields"), dict):
+        fields.update(previous["fields"])
+    fields.update(provenance_fields)
     merged[R4_PROVENANCE_KEY] = {
         "schema_version": R4_PROVENANCE_SCHEMA_VERSION,
         "fields": fields,
     }
     return canonical_json(merged)
+
+
+def _provenance_record(
+    *,
+    value_hash: str,
+    sources: list[dict[str, Any]],
+    conflicts: list[dict[str, Any]],
+) -> dict[str, Any]:
+    """One field's provenance entry (design §B05): the hash of the value that is
+    actually stored, the candidate sources that agreed on it, and — when they
+    did not agree — every candidate with its own hash.  Values themselves are
+    never stored here."""
+    return {"value": value_hash, "sources": sources, "conflicts": conflicts}
+
+
+def _merge_columns(
+    stored: dict[str, Any],
+    *,
+    incoming: dict[str, Any],
+    source_id: str | None,
+    observed_at: str,
+    fields: dict[str, Any],
+    incoming_declared: dict[str, bool] | None = None,
+    stored_declared: dict[str, bool] | None = None,
+    always_incoming: tuple[str, ...] = ("source_status", "primary_source_id"),
+) -> tuple[dict[str, Any], dict[str, Any], list[str]]:
+    """Per-column merge rules (design §B05), replacing the old "winner takes the
+    whole row" UPDATE.
+
+    Rules, per the reviewed table:
+
+    * a column that is empty in the stored row and declared by this capture is
+      FILLED (this is the capture_ready recovery path that must survive);
+    * a column the stored row already has is KEPT, even when this capture
+      disagrees — ``priority`` no longer decides truth, it only ranks;
+    * a real disagreement (both sides non-empty and different) is recorded as a
+      field-level CONFLICT holding every candidate, never silently resolved;
+    * ``source_status`` follows the latest real observation (this capture);
+    * ``primary_source_id`` only fills a gap (the scan already elected the
+      group's first copy by the B02 ordering).
+
+    Returns ``(merged_columns, provenance_fields, conflicted_fields)``.
+    """
+    merged: dict[str, Any] = {}
+    conflicted: list[str] = []
+    for column, new_value in incoming.items():
+        stored_value = stored.get(column)
+        has_stored = stored_value not in (None, "")
+        has_new = new_value not in (None, "")
+        if column in always_incoming:
+            # `source_status` follows the latest real observation and
+            # `primary_source_id` is re-elected by every scan (the group's first
+            # copy by the B02 ordering) — the design allows ordering here only.
+            winner = new_value if has_new else stored_value
+            fields[column] = _provenance_record(
+                value_hash=_short_value_hash(winner),
+                sources=[{
+                    "source_id": source_id if has_new else None,
+                    "observed_at": observed_at if has_new else None,
+                    "role": "incoming" if has_new else "stored",
+                }],
+                conflicts=[],
+            )
+            merged[column] = winner
+            continue
+        if has_stored and has_new and stored_value != new_value:
+            new_declares = bool((incoming_declared or {}).get(column))
+            stored_declares = bool((stored_declared or {}).get(column))
+            if new_declares and not stored_declares:
+                # A declared value replaces one the scanner had only derived
+                # (for example a file-name-derived document_kind).  Not a
+                # conflict: the derived value never was a declaration.
+                fields[column] = _provenance_record(
+                    value_hash=_short_value_hash(new_value),
+                    sources=[{"source_id": source_id, "observed_at": observed_at,
+                              "role": "incoming"}],
+                    conflicts=[],
+                )
+                merged[column] = new_value
+                continue
+            if stored_declares and not new_declares:
+                # The mirror rule: a declared value is never overwritten by a
+                # derived one.
+                fields[column] = _provenance_record(
+                    value_hash=_short_value_hash(stored_value),
+                    sources=[{"source_id": None, "observed_at": None, "role": "stored"}],
+                    conflicts=[],
+                )
+                merged[column] = stored_value
+                continue
+            conflicted.append(column)
+            fields[column] = _provenance_record(
+                value_hash=_short_value_hash(stored_value),
+                sources=[{"source_id": None, "observed_at": None, "role": "stored"}],
+                conflicts=[
+                    {"source_id": None, "observed_at": None,
+                     "value_hash": _short_value_hash(stored_value)},
+                    {"source_id": source_id, "observed_at": observed_at,
+                     "value_hash": _short_value_hash(new_value)},
+                ],
+            )
+            merged[column] = stored_value
+            continue
+        winner = stored_value if has_stored else new_value
+        winner_role = "stored" if has_stored else "incoming"
+        fields[column] = _provenance_record(
+            value_hash=_short_value_hash(winner),
+            sources=[{
+                "source_id": None if winner_role == "stored" else source_id,
+                "observed_at": None if winner_role == "stored" else observed_at,
+                "role": winner_role,
+            }],
+            conflicts=[],
+        )
+        merged[column] = winner
+    return merged, fields, conflicted
 
 
 def _merge_document_row(
@@ -1401,24 +1513,73 @@ def _merge_document_row(
                 and bool(new_inner.get("provider_document_id"))
             )
         )
+        source_id = primary.source_id if primary else None
+        # Per-column merge (design §B05): priority only ranks candidates now, it
+        # no longer decides which truth is written, and a real disagreement is
+        # recorded instead of silently resolved.
+        stored_columns = {
+            "title": existing_document["title"],
+            "source_type": existing_document["source_type"],
+            "document_kind": existing_document["document_kind"],
+            "published_date": existing_document["published_date"],
+            "source_status": existing_document["source_status"],
+            "primary_source_id": existing_document["primary_source_id"],
+        }
+        incoming_columns = {
+            "title": title,
+            "source_type": source_type,
+            "document_kind": document_kind,
+            "published_date": published,
+            "source_status": source_status,
+            "primary_source_id": source_id,
+        }
+        merged_columns, provenance_fields, _conflicted = _merge_columns(
+            stored_columns,
+            incoming=incoming_columns,
+            source_id=source_id,
+            observed_at=scan_time,
+            fields={},
+            incoming_declared=_declared_columns(new_inner),
+            stored_declared=_declared_columns(existing_inner),
+        )
+        # The business container follows the pre-B05 `prefer_new` rule; every
+        # key it holds is recorded with the same per-field provenance shape.
+        winning_inner = (
+            (document_metadata if prefer_new else existing_meta).get("dayu_meta")
+            or (document_metadata if prefer_new else existing_meta).get("acquisition")
+            or {}
+        )
+        if isinstance(winning_inner, dict):
+            container_name = (
+                "dayu_meta" if document_metadata.get("dayu_meta") else "acquisition"
+            )
+            for key, value in winning_inner.items():
+                provenance_fields[f"{container_name}.{key}"] = _provenance_record(
+                    value_hash=_short_value_hash(value),
+                    sources=[{
+                        "source_id": source_id if prefer_new else None,
+                        "observed_at": scan_time if prefer_new else None,
+                        "role": "incoming" if prefer_new else "stored",
+                    }],
+                    conflicts=[],
+                )
         update_metadata = _merge_metadata_json(
             existing_document["metadata_json"],
             document_metadata,
             prefer_new=prefer_new,
-            source_id=primary.source_id if primary else None,
-            observed_at=scan_time,
+            provenance_fields=provenance_fields,
         )
         connection.execute(
-            """UPDATE documents SET primary_source_id=COALESCE(?,primary_source_id),title=?,source_type=?,
-            document_kind=?,published_date=COALESCE(?,published_date),source_status=?,metadata_priority=?,
+            """UPDATE documents SET primary_source_id=?,title=?,source_type=?,
+            document_kind=?,published_date=?,source_status=?,metadata_priority=?,
             metadata_json=?,last_seen_at=? WHERE document_id=?""",
             (
-                primary.source_id if primary else None,
-                title,
-                source_type,
-                document_kind,
-                published,
-                source_status,
+                merged_columns["primary_source_id"],
+                merged_columns["title"],
+                merged_columns["source_type"],
+                merged_columns["document_kind"],
+                merged_columns["published_date"],
+                merged_columns["source_status"],
                 priority,
                 update_metadata,
                 scan_time,
