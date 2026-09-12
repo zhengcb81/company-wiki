@@ -737,10 +737,14 @@ _QUALIFICATION_BLOCKING_GAPS = ("identity_missing", "period_missing", "source_mi
 def _qualification_gaps(handle: Any) -> list[str]:
     """B06: which facts a FORMAL capture is missing, in a stable order.
 
-    Identity comes from the handle's entity ids; the period is known when the
-    fiscal year OR a published date is present; the remaining gaps are the
-    handle's own ``missing_capture_fields`` (url / capture trace / source id and
-    bytes hash).
+    Identity comes from the handle's entity ids.  The PERIOD is known only from a
+    period fact - ``fiscal_year`` or ``fiscal_period`` (B-VR06-01): a
+    ``published_date`` says when the filing was published, NOT which period it
+    covers, so a handle carrying only a filing date is period-unknown.  That
+    state is reachable through the real pipeline (``latest_as_of`` may serve a
+    document whose source carries no fiscal year, measured), so the gap code is
+    not vacuous.  The remaining gaps come from the handle's own
+    ``missing_capture_fields`` (url / capture trace / source id and bytes hash).
     """
     gaps: list[str] = []
     missing = [_GAP_BY_MISSING_FIELD.get(str(name), "") for name in
@@ -749,7 +753,7 @@ def _qualification_gaps(handle: Any) -> list[str]:
         gaps.append("identity_missing")
     if (
         getattr(handle, "fiscal_year", None) is None
-        and not str(getattr(handle, "published_date", "") or "").strip()
+        and not str(getattr(handle, "fiscal_period", "") or "").strip()
         and "period_missing" not in missing
     ):
         gaps.append("period_missing")
@@ -1014,6 +1018,10 @@ def build_resolution_envelope(
             "label": label,
             "gaps": gaps,
             "reason": explanation,
+            # Whether the conflict evidence was actually consulted (B-VR06-02):
+            # without a store the envelope cannot see B05's reserved key, and
+            # saying so is more useful than implying the check happened.
+            "conflict_check": "store" if store is not None else "not_available",
         }
     return ResolutionEnvelope(
         envelope_schema_version=RESOLUTION_ENVELOPE_SCHEMA_VERSION,

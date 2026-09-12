@@ -234,23 +234,28 @@ def test_r4b06_unknown_identity_blocks_the_formal_contract(tmp_path):
 
 
 def test_r4b06_unknown_period_blocks_the_formal_contract(tmp_path):
+    """B-VR06-01: the PERIOD is a period fact, not a filing date.
+
+    A `published_date` says when the filing was PUBLISHED, so a handle carrying
+    only that is period-unknown and the formal contract is blocked - which is
+    what the plan always said and what the first version of the code got wrong
+    (it accepted the date as the period, which made `period_missing`
+    unreachable).  `fiscal_period` is a period fact in its own right."""
     handle, _ = _qualified(tmp_path, _sidecar())
     from company_wiki.source_catalog.resolver import (
         _qualification_gaps,
         _qualification_label,
     )
 
-    # a published date alone still counts as a known period
     date_only = replace(handle, fiscal_year=None, published_date="2026-02-20")
-    assert "period_missing" not in _qualification_gaps(date_only)
-
-    # neither a fiscal year nor a published date: blocked
-    unknown = replace(handle, fiscal_year=None, published_date="")
-    gaps = _qualification_gaps(unknown)
-    label, reason = _qualification_label(gaps, "")
+    gaps = _qualification_gaps(date_only)
     assert "period_missing" in gaps, gaps
-    assert label == QUALIFICATION_BLOCKED, (label, gaps)
-    assert reason, reason
+    assert _qualification_label(gaps, "")[0] == QUALIFICATION_BLOCKED, gaps
+
+    period_only = replace(handle, fiscal_year=None, fiscal_period="H1")
+    assert "period_missing" not in _qualification_gaps(period_only)
+
+    assert "period_missing" not in _qualification_gaps(handle)
 
 
 def test_r4b06_missing_source_identity_blocks_the_formal_contract(tmp_path):
@@ -393,6 +398,76 @@ def test_r4b06_malformed_shared_metadata_is_not_a_crash(tmp_path):
     assert "title" in reason, reason
 
 
+def test_r4b06_an_envelope_labels_a_handle_that_carries_gaps(tmp_path):
+    """B-VR06-02/03 (kills the reviewer's surviving mutant M6): the GAP RULE must
+    actually reach the envelope.  Nothing in the pipeline-produced fixtures
+    carries a URL/capture gap (such a handle is refused by `capture_incomplete`),
+    so the wiring is exercised with a hand-built resolution whose handle carries
+    one - an envelope that ignores the rule answers `verified_input` here."""
+    from dataclasses import replace as dataclass_replace
+
+    from company_wiki.source_catalog.resolver import (
+        ResolutionResult,
+        ResolutionStatus,
+    )
+
+    _, envelope = _qualified(tmp_path, _sidecar())
+    assert envelope.qualification["label"] == QUALIFICATION_VERIFIED_INPUT
+
+    handle, _ = _qualified(tmp_path, _sidecar())
+    gapped = dataclass_replace(handle, https_url=None, missing_capture_fields=("https_url",))
+    resolution = ResolutionResult(
+        schema_version="1.0",
+        request_id="urn:test:gapped",
+        status=ResolutionStatus.REUSED_EXACT,
+        reason="r",
+        download_required=False,
+        download_allowed=False,
+        matches=(gapped,),
+        debug_trace=(),
+    )
+    built = build_resolution_envelope(resolution)
+    qualification = built.qualification
+    assert qualification is not None, built.to_dict()
+    assert qualification["label"] == QUALIFICATION_PREVIEW, qualification
+    assert "url_missing" in qualification["gaps"], qualification
+    # and the conflict check says whether it could run at all
+    assert qualification["conflict_check"] == "not_available", qualification
+
+
+def test_r4b06_the_conflict_check_reports_that_it_ran(tmp_path):
+    """B-VR06-02: with a store the envelope consulted B05's reserved key; the
+    qualification says so instead of implying the check happened either way."""
+    _, envelope = _qualified(tmp_path, _sidecar())
+    assert envelope.qualification["conflict_check"] == "store", envelope.qualification
+
+
+def test_r4b06_a_served_document_without_a_period_is_blocked(tmp_path):
+    """B-VR06-01 end to end: `latest_as_of` really serves a document whose source
+    carries no fiscal year (measured), so the period gap is reachable through the
+    pipeline - not only through the rule."""
+    from company_wiki.source_catalog.resolver import SourceRequest
+
+    root = tmp_path / "companies"
+    # the title must not carry a year either: the resolver DERIVES a fiscal year
+    # from the title/file name, so "Acme 2025 Report" would yield fiscal_year=2025
+    # and the case would quietly stop testing the gap
+    _write_copy(root / "Acme" / "raw" / "financial_reports" / "annual",
+                _sidecar(fiscal_year=None, source_title="Acme report"))
+    catalog = _catalog(tmp_path, [_root("company_raw", root, "company_raw", 10)])
+    resolution = SourceResolver(catalog).resolve(SourceRequest(
+        entity="Acme", market="US", security_id="ACME", document_kind="annual_report",
+        provider="sec", provider_document_id="doc-1", as_of_date="2026-08-10",
+        mode="latest_as_of"))
+    assert resolution.matches, resolution.debug_trace
+    assert resolution.matches[0].fiscal_year is None, resolution.matches[0].fiscal_year
+    envelope = build_resolution_envelope(resolution, store=catalog.store,
+                                         project_root=tmp_path)
+    qualification = envelope.qualification
+    assert qualification["label"] == QUALIFICATION_BLOCKED, qualification
+    assert "period_missing" in qualification["gaps"], qualification
+
+
 def test_r4b06_qualification_is_additive_for_pre_b06_consumers(tmp_path):
     """The consumer's validator tolerates unknown keys and keeps the schema
     version, so the new field must not move either."""
@@ -400,4 +475,4 @@ def test_r4b06_qualification_is_additive_for_pre_b06_consumers(tmp_path):
     payload = envelope.to_dict()
     assert payload["envelope_schema_version"] == "1.0", payload["envelope_schema_version"]
     assert "qualification" in payload
-    assert set(payload["qualification"]) == {"label", "gaps", "reason"}
+    assert set(payload["qualification"]) == {"label", "gaps", "reason", "conflict_check"}
