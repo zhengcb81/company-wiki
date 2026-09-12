@@ -486,6 +486,42 @@ def test_r4b05_unmapped_metadata_value_is_not_a_declaration(tmp_path):
     assert row["document_kind"] == "quarterly_report", record
 
 
+def test_r4b05_case_variant_declared_kind_is_still_a_declaration(tmp_path):
+    """B-VR01-03 (P2): the declaration test must normalise the way the
+    CLASSIFIER normalises.  ``_classification`` lower-cases the sidecar's
+    ``document_kind`` before mapping it, so ``"Annual_Report"`` really is that
+    declaration; comparing raw strings downgraded it to "derived", which
+    dropped "declared beats derived" and manufactured a conflict + ``blocked``."""
+    companies = tmp_path / "companies"
+    dropbox = tmp_path / "Dropbox" / "Stock"
+    _write_copy(
+        companies / "Acme" / "raw" / "financial_reports" / "annual",
+        _sidecar(document_kind="10-K"),  # unmapped: the kind stays DERIVED
+    )
+    catalog = _catalog(
+        tmp_path,
+        _roots(("company_raw", companies, 10), ("dropbox_stock", dropbox, 10)),
+    )
+    catalog.scan()
+    document_id = _sole_document_id(catalog)
+    stored = _fetchone(
+        catalog, "SELECT document_kind FROM documents WHERE document_id=?", (document_id,)
+    )["document_kind"]
+    assert stored == "annual_report", stored  # derived from form_type, not declared
+
+    # a mapped kind in a different CASE is still that declaration
+    _write_copy(dropbox, _sidecar(document_kind="Semi_Annual_Report"))
+    catalog.scan()
+
+    record = _metadata(catalog, document_id)["r4_provenance"]["fields"]["document_kind"]
+    assert record["conflicts"] == [], record
+    assert any(source.get("declared") for source in record["sources"]), record
+    row = _fetchone(
+        catalog, "SELECT document_kind FROM documents WHERE document_id=?", (document_id,)
+    )
+    assert row["document_kind"] == "semi_annual_report", record
+
+
 def test_r4b05_agreeing_captures_accumulate_and_keep_their_attribution(tmp_path):
     """B-VR05-05 (P2): an agreeing capture is recorded as additional evidence,
     and the source that wrote a kept value is never replaced by "unknown".

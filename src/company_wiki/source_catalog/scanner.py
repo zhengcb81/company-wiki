@@ -1269,6 +1269,14 @@ def _declared_columns(
     only when the value the scanner actually USED for that column is the value
     that key carries.  A sidecar saying ``document_kind: "10-K"`` - which the
     classifier ignores - therefore counts as derived, not as a declaration.
+
+    The comparison is per column (B-VR01-03): the classifier itself casefolds
+    the sidecar's ``document_kind`` before mapping it to its canonical name
+    (``:125``), so ``"Annual_Report"`` IS that declaration and must not be
+    downgraded to derived - doing so would drop "declared beats derived" and
+    manufacture a conflict.  Free-text and date columns are compared exactly:
+    the scanner stores those declaring values verbatim, and a case-insensitive
+    match there would let a file-name-derived value pass as declared.
     """
     payload = container if isinstance(container, dict) else {}
     used_values = values or {}
@@ -1280,11 +1288,23 @@ def _declared_columns(
             raw = payload.get(key)
             if raw in (None, "") or used in (None, ""):
                 continue
-            if str(raw).strip() == str(used).strip():
+            if _declaration_matches(column, raw, used):
                 hit = True
                 break
         declared[column] = hit
     return declared
+
+
+# Columns whose producer normalises the declaring key before using it.  Only
+# `document_kind` is listed: `_classification` lower-cases exactly that key.
+_DECLARATION_CASEFOLDED = frozenset({"document_kind"})
+
+
+def _declaration_matches(column: str, raw: Any, used: Any) -> bool:
+    left, right = str(raw).strip(), str(used).strip()
+    if column in _DECLARATION_CASEFOLDED:
+        return left.casefold() == right.casefold()
+    return left == right
 
 
 def _merge_metadata_json(

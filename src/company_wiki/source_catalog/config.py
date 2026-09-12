@@ -49,6 +49,22 @@ def _expand_path(value: Any, *, project_root: Path) -> Path:
     return path.resolve(strict=False)
 
 
+def _require_boolean(index: int, fields: tuple[tuple[str, Any], ...]) -> None:
+    """CFG-08 (B01 review B-VR01-04): the root's BOOLEAN fields must really be
+    booleans.  A quoted literal is a silent trap in both directions:
+    ``bool("false")`` is True, so a declared ``false`` would still be reused
+    (fail-open), while ``"true" is not True`` makes the CFG-05/CFG-07 checks
+    skip the root entirely.  YAML quoting is a common slip, and this is the only
+    place that can refuse it.  Kept as its own function because the frozen
+    complexity table for this module may not grow."""
+    for field_name, field_value in fields:
+        if field_value is not None and not isinstance(field_value, bool):
+            raise CatalogConfigError(
+                f"roots[{index}] {field_name} must be a boolean or null, got "
+                f"{type(field_value).__name__} {field_value!r} (CFG-08)"
+            )
+
+
 def load_catalog_config(path: Path, *, project_root: Path | None = None) -> CatalogConfig:
     if not isinstance(path, Path):
         raise TypeError("path must be pathlib.Path")
@@ -105,6 +121,16 @@ def load_catalog_config(path: Path, *, project_root: Path | None = None) -> Cata
             )
         read_only = item.get("read_only", True)
         reusable_for_filing = item.get("reusable_for_filing")
+        # CFG-08 (B01 review B-VR01-04): these two are BOOLEAN fields, and a
+        # quoted literal is a silent trap in BOTH directions - `bool("false")`
+        # is True (the declared `false` would be reused, fail-open) and
+        # `"true" is not True` skips the CFG-05/CFG-07 checks below.  The
+        # admission point is the only place that can refuse it.  The check lives
+        # in its own function so the frozen complexity table stays untouched.
+        _require_boolean(
+            index,
+            (("read_only", read_only), ("reusable_for_filing", reusable_for_filing)),
+        )
         if reusable_for_filing is True and read_only is not True:
             raise CatalogConfigError(
                 f"roots[{index}] reusable external root must be read_only (CFG-05)"

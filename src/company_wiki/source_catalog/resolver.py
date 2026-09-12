@@ -1370,10 +1370,12 @@ class SourceResolver:
             # B01: a root whose effective `reusable_for_filing` is false is not
             # offered for reuse AT ALL — the group-level gate alone was not
             # enough, because the winner could still be that root's copy.
-            and (
-                not reusable_root_ids
-                or str(item.get("root_id") or "") in reusable_root_ids
-            )
+            # Membership is REQUIRED, with no empty-set escape (B-VR01-05): an
+            # omitted or empty set has to mean "nothing qualifies", never "no
+            # filtering", or a future direct caller would silently get the
+            # fail-open behaviour back.  `resolve` guarantees a non-empty set
+            # here — its document gate rejects every candidate otherwise.
+            and str(item.get("root_id") or "") in reusable_root_ids
             and (
                 not own_source_id
                 or str(item.get("source_id") or "") == own_source_id
