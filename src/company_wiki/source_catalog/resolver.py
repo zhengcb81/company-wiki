@@ -14,6 +14,7 @@ import re
 import stat
 from typing import Any
 
+from .policy import _effective_reusable
 from .service import SourceCatalog
 
 
@@ -939,18 +940,16 @@ class SourceResolver:
         # count of documents rejected at the entity gate.
         trace: list[str] = []
         entity_gate_rejected = 0
-        # Only locations under a *reusable* root kind are canonical reuse
-        # candidates. Config-driven (CatalogConfig.reusable_root_kinds,
-        # default: the canonical write-root kind): adding a kind makes every
-        # already-indexed document under such roots directly reusable
-        # without a download.
-        # filing-fetch enforces its own independent path allowance
-        # (config-driven too), so the two gates stay in sync via
-        # configuration, not code.
+        # Which roots offer their already-indexed documents for reuse.  B01:
+        # this uses the SAME function the cross-repo policy export uses
+        # (`policy._effective_reusable`) rather than a second copy of the rule,
+        # so an explicit `reusable_for_filing: false` is honoured here too
+        # (owner R-2 / design P-7) and the resolver can never disagree with the
+        # exported containment policy.  `None` keeps following the kind-level
+        # `reusable_root_kinds` allowance.
+        config = self.catalog.config
         reusable_root_ids = frozenset(
-            root.root_id
-            for root in self.catalog.config.roots
-            if root.kind in set(self.catalog.config.reusable_root_kinds)
+            root.root_id for root in config.roots if _effective_reusable(root, config)
         )
         # WU-3.2 (F-021/F-026): SQL-pushdown candidate lookup — the full-table
         # Python scan is replaced by a kind/status-filtered, capped query.
@@ -1118,6 +1117,7 @@ class SourceResolver:
                 provider=provider,
                 provider_document_id=provider_document_id,
                 budget=budget,
+                reusable_root_ids=reusable_root_ids,
             )
             handle = selection.handle
             if handle is None:
@@ -1327,6 +1327,7 @@ class SourceResolver:
         document: dict[str, Any],
         *,
         budget: _ReadBudget,
+        reusable_root_ids: frozenset[str] = frozenset(),
     ) -> tuple[dict[str, Any] | None, str, tuple[str, ...]]:
         """B02 段 3/4 — walk the ordered qualified candidates of the REQUESTED
         version and return the copy to serve.
@@ -1366,6 +1367,13 @@ class SourceResolver:
             item
             for item in document["locations"]
             if item.get("candidate_rank")
+            # B01: a root whose effective `reusable_for_filing` is false is not
+            # offered for reuse AT ALL — the group-level gate alone was not
+            # enough, because the winner could still be that root's copy.
+            and (
+                not reusable_root_ids
+                or str(item.get("root_id") or "") in reusable_root_ids
+            )
             and (
                 not own_source_id
                 or str(item.get("source_id") or "") == own_source_id
@@ -1454,13 +1462,14 @@ class SourceResolver:
         provider: str | None,
         provider_document_id: str | None,
         budget: _ReadBudget,
+        reusable_root_ids: frozenset[str] = frozenset(),
     ) -> _Selection:
         # B02: qualification (segments 1-3) is decided on the ordered
         # candidate list; the pre-B02 code took the elected canonical and
         # returned None when that single path was unreadable, so an
         # equivalent copy could not take over.
         canonical, selection_reason, tried = SourceResolver._select_candidate(
-            document, budget=budget
+            document, budget=budget, reusable_root_ids=reusable_root_ids
         )
         if canonical is None:
             return _Selection(None, selection_reason, tried)
