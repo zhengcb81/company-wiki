@@ -1,12 +1,12 @@
 # company-wiki 当前规划状态
 
-> **2026-09-12 上午最新覆盖（R4 阶段 A 收口 v0.4.2 / 阶段 B 设计三轮复审 / A06 首个真实基线）**：
-> **① 阶段 A 合同 → v0.4.2**：A07=`accepted_with_findings`（22 条负例 + 五值错误模型）、A08=`rejected`（117 行映射：98 直连 / 6 桥接 / **13 无法指派**）。三份独立复审命中同一 P0：**`export_policy_2x` 在产**（`cli.py:835/849-851`，由 `:811`/`:831`/`:1182` 调用，是 filing-fetch **FC-501 containment / ZR-405 policy_hash 唯一来源**）→ **owner R-3 范围收窄为"仅准入 loader"**，导出路径保持。另：`reusable_for_filing` 实为**三处活实现**；**owner R-4 在现网惰性**（四个 root 都显式声明 `privacy_class: public`，受影响集合 = 0）；`read_only` 亦为假保证字段候选。
-> **② 阶段 B 设计 → v0.1.2**（`B.DR` rev1/rev2 两次 rejected，已逐条更正；rev3 复审中）：B05 改为"停止销毁落选值 + provenance 存既有 `metadata_json` 列（无需 DDL）"；`_handle` 合格清单入参写死；B06 承载=`ResolutionEnvelope.qualification`；B07 划分 B 可签/不可签；新增读取预算与取消、`B-payload-hash` 必测项；checkpoint 生成器强制 `--reviewed-commit` + 完整性断言。**产品代码未改动**。
-> **③ A06 首个真实基线（机制层）**：unit **787 passed**；contract **1748 passed / 7 skipped / 0 failed**（junit 入账）。其中 `test_dbx05_symlink_escape_rejected` 因 **宿主不支持 symlink** 跳过 → **symlink 逃逸控制在本机从未执行**（与 R-1 直接相关）。
+> **2026-09-12 上午最新覆盖（R4 阶段 A 收口 v0.4.2 / 阶段 B 设计 v0.1.3 / A06 首个真实基线）**：
+> 🔴 **需要 owner 决定的 6 项 B 边界问题（其余工作已到边界，详见 revenue 侧 `assurance/runs/2026-09-11_r4-phase-b/task_plan.md` §5）**：**S-1** B 是否可新增测试文件（`tests/contract/**`，只新增不改既有）；**S-2** owner R-1（假保证字段）/R-4（外发门）的整改是否纳入 B；**S-3** 是否连在产的 `export_policy_2x` 一并收敛（需跨仓 policy_hash 迁移）；**S-4** B07 的消费者侧最小协议适配归谁（B 还是 C）；**S-5** G8 隔离副本是否按"两级"做（机制层小 catalog 可立即开工）；**S-6** 是否需要第四轮 `B.DR`。
+> **① 阶段 A 合同 → v0.4.2**：A07=`accepted_with_findings`（22 条负例 + 五值错误模型）、A08=`rejected`（117 行映射：98 直连 / 6 桥接 / 13 无法指派，**桥接表已补**）。三份独立复审命中同一 P0：**`export_policy_2x` 在产**（`cli.py:835/849-851`，是 filing-fetch **FC-501 containment / ZR-405 policy_hash 唯一来源**）→ **owner R-3 范围收窄为"仅准入 loader"**。另：`reusable_for_filing` 实为**三处活实现**；**owner R-4 在现网惰性**（四个 root 都显式声明 `privacy_class: public`，受影响集合 = 0）；`read_only` 亦为假保证字段候选。
+> **② 阶段 B 设计 → v0.1.3**（`B.DR` 三轮 rejected：round-1 14/20、round-2 6/15 闭环）：R-1/R-4 整改**移出 B**（无 allowed 落点即不可实施）；B05 补**逐列合并规则**（冲突 → `ambiguous`，不得按 priority 择一）并保留 `capture_ready` 恢复路径；B02 预算改为**必须全量 hash**且撤销五值外的 `unknown`；新增 **F10 测试落点**与 F11；checkpoint 生成器改为**真断言**（`reviewed_commit` 必须解析、清单不完整拒绝写出、`--verify-only` 按被审修订比对，实测 12/12 + 完整）。**产品代码未改动**。
+> **③ A06 首个真实基线（机制层）**：unit **787 passed**；contract **1748 passed / 7 skipped / 0 failed**（junit 入账）。其中 `test_dbx05_symlink_escape_rejected` 因 **宿主不支持 symlink** 跳过 → **symlink 逃逸控制在本机从未执行**（与 R-1 直接相关，须在支持 symlink 的环境验证）。
 > **④ 边界新事实**：**本机跑 CI 等价测试套件会打开生产 catalog（只读）**——`tests/contract/test_lt_uj_real_e2e.py` 硬编码生产路径且收集期即连接，**不在 CI 的 8 个 `--ignore` 内**。开库者清单因此为**四类**；主库与 `-wal` 全程未变（无逻辑写入）。
-> **⑤ 待 owner**：批准 B 的 DEV 工作包与文件范围（[file-scope](assurance/runs/2026-09-11_r4-phase-b/file-scope.md)，在 revenue 侧）；确认 A05 样本清单 + 只读命令 manifest；可选新裁定（是否连导出路径一并收敛）。
-> **⑥ GP-009 与门**：FC-705 预计 **今晚 22:00** 转 true（P10 24:00:05 + P11）；Daily 6/7→7/7、Weekly 0/2（09-13 04:30）、Monthly 1/1。下表 09-11 段落保留为当时观测。
+> **⑤ GP-009 与门**：FC-705 预计 **今晚 22:00** 转 true（P10 24:00:05 + P11）；Daily 6/7→7/7、Weekly 0/2（09-13 04:30）、Monthly 1/1。下表 09-11 段落保留为当时观测。
 
 > **2026-09-11 夜最新覆盖（22:00 运行后实测；R4 阶段 A 首轮 A.DR）**：
 > **① FC-705 窗口修复已被真实运行验证**：`run_id=20260911T210001Z`、`ok=true`、`problems=[]`、`legacy_hits=[]`；权威账本关 **period 10 = 2026-09-10T21:00:13Z → 2026-09-11T21:00:18Z = 24:00:05（首个真正 ≥24h 的窗口）**，hits=0；开 period 11。**门仍 `close_allowed=false`，但唯一原因只剩历史窗口**：reasons=`["period 9: window 23:59:52 is shorter than 24h"]`（P9 已无法补救）→ **预计 2026-09-12 22:00 运行后确定性转 true**（last-two = P10 + P11，两者均 ≥24h 且零 hit）。修复机制见 revenue `41117ce`（runner 在调用观测器前补足窗口缺口；本次实际等待 ~5 s）。
