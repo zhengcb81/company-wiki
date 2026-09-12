@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from datetime import date
+from datetime import UTC, date, datetime
 from enum import Enum
 from functools import lru_cache
 import hashlib
@@ -274,6 +274,139 @@ def _verify_candidate(
     # against (read-path annotation only — never persisted).
     location["verified_sha256"] = digest
     return "", digest
+
+
+# B03 (stable read bytes) — landing point for the byte-level hard gate that
+# decision S-10 deferred to the read path: "serve the verified version's bytes
+# or fail explicitly".  The error values below are the five-value model of the
+# operation contract (A03 section 2.4: not_found / not_indexed / unavailable /
+# blocked / ambiguous).  Nothing new is invented here: retryability, budget and
+# cancellation are NOT states, so a resource stop reports `unavailable` with
+# its own reason instead of a sixth value.
+B03_ERROR_NOT_FOUND = "not_found"
+B03_ERROR_UNAVAILABLE = "unavailable"
+
+# Which object the returned bytes came from.  Only "handle" is reachable today:
+# the design's middle tier reads an EXISTING controlled snapshot of the source
+# bytes, and this repository has no such object (every `snapshot` in it is a
+# runtime-policy / quality / page / DB-row snapshot).  Creating one is a write
+# path and is explicitly out of scope, so the tier is registered in the run
+# directory rather than faked here.
+B03_BYTES_SOURCE_HANDLE = "handle"
+B03_BYTES_SOURCE_SNAPSHOT = "snapshot"
+
+_BYTE_READ_CHUNK = 1024 * 1024
+
+
+@dataclass(frozen=True)
+class ByteReadResult:
+    """B03 — the bytes of ONE requested version, or an explicit failure.
+
+    When ``ok`` is true, ``data`` is byte-for-byte the buffer the digest in
+    ``content_sha256`` was computed over: the file is read ONCE, the digest is
+    taken over that same buffer, and only then is the buffer returned.  That is
+    what a "verify the path, then let the caller open it again" design cannot
+    promise — on Windows a shared-mode open only arbitrates at open time, and an
+    existing writer handle is unaffected by a later read-only open (B-DR-07).
+    """
+
+    document_id: str
+    content_sha256: str
+    status: str
+    reason: str
+    detail: str
+    data: bytes | None
+    byte_size: int
+    bytes_source: str
+    read_at: str
+
+    @property
+    def ok(self) -> bool:
+        return self.data is not None
+
+
+def _inside_configured_roots(path: Path, roots: tuple[Any, ...]) -> bool:
+    """B03/L05 — a locator may not lead the read path out of the configured
+    roots.  Compared on REAL paths (so a symlink that points outside its root is
+    refused before any byte is read) and case-insensitively on Windows."""
+    target = os.path.normcase(os.path.realpath(path))
+    for root in roots:
+        root_path = getattr(root, "path", None)
+        if not root_path:
+            continue
+        base = os.path.normcase(os.path.realpath(root_path))
+        if target == base or target.startswith(base + os.sep):
+            return True
+    return False
+
+
+def _read_verified_bytes(
+    path: Path,
+    *,
+    expected_sha256: str,
+    budget: _ReadBudget | None,
+) -> tuple[bytes | None, str, str, str]:
+    """B03 rules R1-R4/R6: read the file ONCE and digest exactly what is
+    returned.
+
+    Returns ``(data, "", "", digest)`` on success, else
+    ``(None, status, reason, detail)``.  Every refusal happens BEFORE any byte
+    is handed out, and none of them is a status value of its own (see the error
+    model note above).
+    """
+    if budget is not None and budget.cancelled:
+        return None, B03_ERROR_UNAVAILABLE, "cancelled", ""
+    try:
+        before = path.stat()
+    except OSError as exc:
+        return None, B03_ERROR_UNAVAILABLE, "read_failed", exc.__class__.__name__
+    if not stat.S_ISREG(before.st_mode):
+        return None, B03_ERROR_UNAVAILABLE, "not_regular_file", ""
+    if _needs_hydration(before):
+        # Bytes are not local: opening it downloads them.  Refuse WITHOUT
+        # reading, exactly as the resolver's eligibility probe does.
+        return None, B03_ERROR_UNAVAILABLE, "placeholder_not_hydrated", ""
+    size = int(before.st_size)
+    if size > _CANDIDATE_BYTES_CAP:
+        return None, B03_ERROR_UNAVAILABLE, "exceeds_candidate_cap", str(size)
+    if budget is not None:
+        stop = budget.take_candidate() or budget.charge(size)
+        if stop:
+            return None, B03_ERROR_UNAVAILABLE, stop, str(size)
+    digest = hashlib.sha256()
+    chunks: list[bytes] = []
+    read = 0
+    try:
+        with path.open("rb") as handle:
+            while True:
+                if budget is not None and budget.cancelled:
+                    # Cancellation is sticky caller intent: never answer, even
+                    # with bytes that are already in hand.
+                    return None, B03_ERROR_UNAVAILABLE, "cancelled", str(read)
+                chunk = handle.read(_BYTE_READ_CHUNK)
+                if not chunk:
+                    break
+                digest.update(chunk)
+                chunks.append(chunk)
+                read += len(chunk)
+                if read > _CANDIDATE_BYTES_CAP:
+                    # Grew past the ceiling while reading: stop and refuse.
+                    return None, B03_ERROR_UNAVAILABLE, "exceeds_candidate_cap", str(read)
+    except OSError as exc:
+        return None, B03_ERROR_UNAVAILABLE, "read_failed", exc.__class__.__name__
+    try:
+        after = path.stat()
+    except OSError as exc:
+        return None, B03_ERROR_UNAVAILABLE, "read_failed", exc.__class__.__name__
+    if int(after.st_size) != size or int(after.st_mtime_ns) != int(before.st_mtime_ns):
+        # The buffer may mix two revisions: refuse it even if the digest of
+        # what we happened to read looks right.
+        return None, B03_ERROR_UNAVAILABLE, "changed_during_read", str(read)
+    computed = digest.hexdigest()
+    if not expected_sha256 or computed != expected_sha256:
+        # "Another revision" is not this version: no handle, no bytes.
+        return None, B03_ERROR_UNAVAILABLE, "content_sha256_mismatch", computed[:12]
+    return b"".join(chunks), "", "", computed
 
 
 def _is_rejections_path(relative_path: Any) -> bool:
@@ -1582,8 +1715,79 @@ class SourceResolver:
             debug_trace=debug_trace,
         )
 
+    def read_verified_bytes(
+        self,
+        handle: SourceHandle,
+        *,
+        expected_content_sha256: str | None = None,
+        budget: _ReadBudget | None = None,
+    ) -> ByteReadResult:
+        """B03 — the read path's verified-byte entry point.
+
+        Serving the bytes means: read the file once, digest exactly the buffer
+        that is returned, compare it with the requested version's
+        ``content_sha256``, and only then hand the buffer over.  A copy that is
+        served on the catalog's claim (the pre-B02 trust level kept for the
+        preferred copy by decision S-10) therefore cannot leak drifted bytes
+        through this entry point: its digest will not match, and the answer is
+        an explicit ``unavailable`` with reason ``content_sha256_mismatch``.
+
+        Scope note, stated precisely: this is the gate for callers that ask this
+        resolver for bytes.  A consumer that keeps opening
+        ``SourceHandle.canonical_path`` by itself still bypasses it — replacing
+        those call sites is the versioned read contract's job (B07), not this
+        step's, so B03 delivers the primitive plus its acceptance and registers
+        the wiring as B07's.
+
+        Refusals before any read: a locator that resolves outside the configured
+        roots (``not_found`` / ``path_outside_configured_roots``) and a cloud
+        placeholder whose bytes are not local
+        (``unavailable`` / ``placeholder_not_hydrated`` — opening it would
+        download).  Refusals during the read: interruption (``read_failed``),
+        the size ceiling (``exceeds_candidate_cap``), a size or mtime change
+        (``changed_during_read``) and caller cancellation (``cancelled``).
+
+        Passing the request's ``_ReadBudget`` keeps the per-request resource
+        ceiling and cancellation semantics of ``resolve``; without one the byte
+        cap still applies.
+        """
+        expected = expected_content_sha256 or handle.content_sha256
+        read_at = datetime.now(UTC).isoformat()
+        path = Path(str(handle.canonical_path))
+        if not _inside_configured_roots(path, tuple(self.catalog.config.roots)):
+            return ByteReadResult(
+                document_id=handle.document_id,
+                content_sha256=expected,
+                status=B03_ERROR_NOT_FOUND,
+                reason="path_outside_configured_roots",
+                detail=str(handle.canonical_location_id),
+                data=None,
+                byte_size=0,
+                bytes_source="",
+                read_at=read_at,
+            )
+        data, status, reason, detail = _read_verified_bytes(
+            path, expected_sha256=expected, budget=budget
+        )
+        return ByteReadResult(
+            document_id=handle.document_id,
+            content_sha256=expected,
+            status=status or "verified",
+            reason=reason,
+            detail=detail,
+            data=data,
+            byte_size=len(data) if data is not None else 0,
+            bytes_source=B03_BYTES_SOURCE_HANDLE if data is not None else "",
+            read_at=read_at,
+        )
+
 
 __all__ = [
+    "B03_BYTES_SOURCE_HANDLE",
+    "B03_BYTES_SOURCE_SNAPSHOT",
+    "B03_ERROR_NOT_FOUND",
+    "B03_ERROR_UNAVAILABLE",
+    "ByteReadResult",
     "ResolutionResult",
     "ResolutionStatus",
     "SOURCE_RESOLVER_SCHEMA_VERSION",
