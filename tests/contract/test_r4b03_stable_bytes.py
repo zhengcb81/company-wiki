@@ -219,14 +219,18 @@ def test_r4b03_placeholder_is_refused_without_hydrating(tmp_path, monkeypatch):
 
 def test_r4b03_locator_outside_the_roots_is_not_found(tmp_path):
     """A stale absolute path / symlink escape is refused as an out-of-bounds
-    locator: NOT_FOUND, with nothing read."""
+    locator: NOT_FOUND, with nothing read.
+
+    The reason is the REGISTERED taxonomy code for "path outside the allowed
+    roots" (the FC-1301 gate refuses unregistered ``reason="..."`` literals and a
+    new code would need a registry edit plus a version bump outside this step)."""
     resolver, handle, _ = _served(tmp_path)
     outside = tmp_path.parent / "outside-the-roots.pdf"
     outside.write_bytes(BODY)  # the right bytes, but the wrong place
     out = resolver.read_verified_bytes(replace(handle, canonical_path=str(outside)))
     assert out.data is None
     assert out.status == "not_found"
-    assert out.reason == "path_outside_configured_roots"
+    assert out.reason == "artifact_path_outside_allowed_root"
 
 
 def test_r4b03_missing_file_is_unavailable_not_a_crash(tmp_path):
@@ -363,7 +367,14 @@ def test_r4b03_change_during_read_is_refused(tmp_path, monkeypatch):
 
 
 def test_r4b03_symlink_escape_is_refused_where_symlinks_exist(tmp_path):
-    """A symlink inside a root that points outside it must not be followed.
+    """A symlink inside a root that points outside it must not become readable
+    through this entry point.
+
+    The property is "the out-of-root bytes are never handed out", and it may be
+    enforced at either layer: the scan can refuse to index a symlinked file at
+    all (which is what happens on Linux, where this case really runs - the first
+    version asserted a served handle and failed in CI), or the read refuses the
+    out-of-root locator.  Both satisfy the property; leaking bytes does not.
 
     Skipped where the host cannot create symlinks (this Windows host does not,
     which is registered as a limitation of the local measurements).
@@ -384,7 +395,10 @@ def test_r4b03_symlink_escape_is_refused_where_symlinks_exist(tmp_path):
     )
     catalog = _scan(tmp_path, [_company_root(root)])
     result = SourceResolver(catalog).resolve(_request())
-    assert len(result.matches) == 1, result.debug_trace
+    if not result.matches:
+        # refused even earlier: the scan does not index an out-of-root symlink
+        return
     out = SourceResolver(catalog).read_verified_bytes(result.matches[0])
-    assert out.data is None
-    assert out.status in {"not_found", "unavailable"}
+    assert out.data is None, out
+    assert out.status in {"not_found", "unavailable"}, out
+    assert out.reason, out

@@ -55,9 +55,10 @@ SHIPPED_CONFIG = REPO_ROOT / "config" / "source_catalog.yaml"
 SHIPPED_POLICY_SHA256 = (
     "cf0ac2adf9714fe003eb1d1497d678877840e35a6a6c32bc65aa7e5d0c0e1626"
 )
-SHIPPED_CONSUMER_POLICY_SHA256 = (
-    "c773099b3dcfa2cc0f8e4b1c3e2f783f9c8f9715a415ba708c12bf79398675dd"
-)
+# The consumer payload's hash is NOT pinned: it embeds each root's absolute
+# `path_ref`, so it is machine-dependent (this host: c773099b...; CI on Linux:
+# ca3b7f5d...).  Its schema version and reusable-root set are pinned instead.
+CONSUMER_PAYLOAD_SCHEMA_VERSION = "2.0"
 
 BODY = b"%PDF-1.4 r4b01-field-owner"
 DIGEST = hashlib.sha256(BODY).hexdigest()
@@ -283,16 +284,23 @@ def test_r4b01_unknown_root_field_is_rejected_by_the_single_admission_point(tmp_
 
 
 def test_r4b01_shipped_policy_hash_is_frozen(tmp_path):
-    """Two exports, two roles — and the CROSS-REPO one is the one to freeze.
+    """Two exports, two roles - and only ONE of them is portable enough to pin.
 
-    The artifact filing-fetch pins for its FC-501 containment is what
+    The artifact filing-fetch pins for FC-501 containment is what
     ``cli._policy_export_payload`` produces, i.e. ``policy_2x.export_policy_2x``
     (the ZR-405 payload); ``policy.export_policy`` is the resolver-side export.
-    B01 originally froze the second one and called it cross-repo, which was
-    wrong (review B-VR01-01): a change to the artifact the consumer actually
-    reads would not have failed this case.  Both are frozen here, each with its
-    own role, and the consumer payload's reusable set is checked against the
-    resolver's rule."""
+    B01 originally froze the second and called it cross-repo, which was wrong
+    (review B-VR01-01).
+
+    Measured while fixing the review: the CONSUMER payload embeds each root's
+    absolute ``path_ref``, so its hash is MACHINE-DEPENDENT - this host computes
+    c773099b... while CI (Linux) computes ca3b7f5d... for the same config, and
+    the first version of this case therefore failed in CI.  So the portable
+    assertions are pinned here (the resolver-side hash, which is path-redacted,
+    plus the consumer payload's STRUCTURE and its agreement with the resolver),
+    and the consumer hash is deliberately NOT pinned: it can only be asserted
+    per machine, which is exactly why pinning it in a repository test is wrong.
+    """
     config = load_catalog_config(SHIPPED_CONFIG)
     sha, policy = export_policy(config)
     assert sha == SHIPPED_POLICY_SHA256, (
@@ -310,10 +318,12 @@ def test_r4b01_shipped_policy_hash_is_frozen(tmp_path):
     from company_wiki.source_catalog.cli import _policy_export_payload
 
     consumer = _policy_export_payload(config)
-    assert consumer["policy_hash"] == SHIPPED_CONSUMER_POLICY_SHA256, (
-        "the payload filing-fetch consumes changed - its FC-501 containment "
-        "expects this hash; migrate it in the same change or revert"
-    )
+    assert consumer["schema_version"] == CONSUMER_PAYLOAD_SCHEMA_VERSION, consumer
+    assert consumer["reusable_root_kinds"] == [
+        "company_raw",
+        "dayu_portfolio",
+        "directory",
+    ], consumer
     assert {
         item["root_id"] for item in consumer["roots"] if item["reusable_for_filing"]
     } == {
@@ -321,6 +331,11 @@ def test_r4b01_shipped_policy_hash_is_frozen(tmp_path):
         for spec in config.roots
         if _effective_reusable(spec, config)
     }
+    # ... and the hash is a function of the payload, not a constant of the repo
+    assert consumer["policy_hash"] != SHIPPED_POLICY_SHA256, (
+        "the two exports are distinct artifacts; if they ever coincide, the "
+        "roles in this file and in the run directory need re-checking"
+    )
 
 
 def _observed_reusable(tmp_path: Path, *, kind: str, flag, kinds) -> bool:

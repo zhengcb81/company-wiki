@@ -1740,7 +1740,8 @@ class SourceResolver:
         the wiring as B07's.
 
         Refusals before any read: a locator that resolves outside the configured
-        roots (``not_found`` / ``path_outside_configured_roots``) and a cloud
+        roots (``not_found`` / ``artifact_path_outside_allowed_root`` - the
+        registered taxonomy code for a path outside the allowed roots) and a cloud
         placeholder whose bytes are not local
         (``unavailable`` / ``placeholder_not_hydrated`` — opening it would
         download).  Refusals during the read: interruption (``read_failed``),
@@ -1755,11 +1756,18 @@ class SourceResolver:
         read_at = datetime.now(UTC).isoformat()
         path = Path(str(handle.canonical_path))
         if not _inside_configured_roots(path, tuple(self.catalog.config.roots)):
+            # The reason code is the ALREADY REGISTERED one for this meaning
+            # ("artifact path outside allowed roots"), not a new one: the
+            # FC-1301 taxonomy gate fails closed on any unregistered
+            # ``reason="..."`` literal, and adding a code needs a registry edit
+            # plus a taxonomy-version bump in observability.py, which is outside
+            # this step's file scope.  The B03 plan's working name for this
+            # outcome was `path_outside_configured_roots`.
             return ByteReadResult(
                 document_id=handle.document_id,
                 content_sha256=expected,
                 status=B03_ERROR_NOT_FOUND,
-                reason="path_outside_configured_roots",
+                reason="artifact_path_outside_allowed_root",
                 detail=str(handle.canonical_location_id),
                 data=None,
                 byte_size=0,
