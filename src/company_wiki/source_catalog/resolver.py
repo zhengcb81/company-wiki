@@ -15,6 +15,7 @@ import stat
 from typing import Any
 
 from .policy import _effective_reusable
+from .scanner import R4_PROVENANCE_KEY
 from .service import SourceCatalog
 
 
@@ -688,6 +689,113 @@ _STRUCTURAL_OUTCOME = {
 }
 
 
+# B06 (design section B06): the qualification label separates "locally readable"
+# from "a formally captured filing".  It is an ADDITIVE envelope field - the
+# consumer's validator (filing-fetch/filing_contracts.validate_resolution_envelope)
+# tolerates unknown keys and keeps envelope_schema_version "1.0".  It is also
+# where the response-level `blocked` lives: that validator's own `outcome`
+# taxonomy has no `blocked` value, so expressing it there would be an
+# upstream_error for the consumer (decision S-13 assigns this verdict here).
+QUALIFICATION_VERIFIED_INPUT = "verified_input"
+QUALIFICATION_PREVIEW = "preview"
+QUALIFICATION_BLOCKED = "blocked"
+
+# The handle's ``missing_capture_fields`` -> the qualification gap codes.  These
+# are qualification labels, NOT FC-1301 reason codes: that taxonomy gate scans
+# ``reason="..."`` literals, and this mapping is deliberately not one, so no
+# registry edit (outside this step's file scope) is needed.
+_GAP_BY_MISSING_FIELD = {
+    "https_url": "url_missing",
+    "published_date": "period_missing",
+    "snapshot_sha256": "source_missing",
+    "capture_trace": "capture_log_missing",
+}
+# A gap that makes the FORMAL contract blocked rather than merely preview.
+# "preview" is defined for a locally readable copy whose PROVENANCE has gaps -
+# it still carries a local bytes hash - so a missing identity, period or
+# source/bytes identity is blocking instead.
+_QUALIFICATION_BLOCKING_GAPS = ("identity_missing", "period_missing", "source_missing")
+
+
+def _qualification_gaps(handle: Any) -> list[str]:
+    """B06: which facts a FORMAL capture is missing, in a stable order.
+
+    Identity comes from the handle's entity ids; the period is known when the
+    fiscal year OR a published date is present; the remaining gaps are the
+    handle's own ``missing_capture_fields`` (url / capture trace / source id and
+    bytes hash).
+    """
+    gaps: list[str] = []
+    missing = [_GAP_BY_MISSING_FIELD.get(str(name), "") for name in
+               tuple(getattr(handle, "missing_capture_fields", ()) or ())]
+    if not tuple(getattr(handle, "entity_ids", ()) or ()):
+        gaps.append("identity_missing")
+    if (
+        getattr(handle, "fiscal_year", None) is None
+        and not str(getattr(handle, "published_date", "") or "").strip()
+        and "period_missing" not in missing
+    ):
+        gaps.append("period_missing")
+    for code in missing:
+        if code and code not in gaps:
+            gaps.append(code)
+    return gaps
+
+
+def _qualification_label(gaps: list[str], conflict_reason: str) -> tuple[str, str]:
+    """B06: label + human-readable reason for one served handle.
+
+    ``conflict_reason`` carries the B05 field-level conflict fact (S-13: a real
+    metadata conflict is a response-level ``blocked``, not a second opinion).
+    """
+    if conflict_reason:
+        return QUALIFICATION_BLOCKED, conflict_reason
+    if any(gap in _QUALIFICATION_BLOCKING_GAPS for gap in gaps):
+        return QUALIFICATION_BLOCKED, "identity or period is unknown: " + ", ".join(gaps)
+    if gaps:
+        return QUALIFICATION_PREVIEW, "locally readable; provenance gaps: " + ", ".join(gaps)
+    return QUALIFICATION_VERIFIED_INPUT, ""
+
+
+def _metadata_conflict_reason(store: Any, document_id: str) -> str:
+    """B06 + S-13: does the document carry a field-level conflict?
+
+    Reads B05's reserved provenance key from the shared ``metadata_json`` column
+    (read-only) and returns a reason when any field recorded a conflict - the
+    same fact the read side reports as ``metadata_status="blocked"``.
+
+    The shared column is written by several modules, so its shape is not this
+    function's to assume: a non-object payload, a non-object reserved key or a
+    non-object field record mean "no readable conflict evidence", never a crash
+    while building a response.
+    """
+    if store is None or not document_id:
+        return ""
+    row = store.fetchone(
+        "SELECT metadata_json FROM documents WHERE document_id=?", (document_id,)
+    )
+    if row is None:
+        return ""
+    try:
+        payload = json.loads(row["metadata_json"] or "{}")
+    except (TypeError, ValueError):
+        return ""
+    if not isinstance(payload, dict):
+        return ""
+    reserved = payload.get(R4_PROVENANCE_KEY)
+    fields = reserved.get("fields") if isinstance(reserved, dict) else None
+    if not isinstance(fields, dict):
+        return ""
+    conflicted = sorted(
+        str(name)
+        for name, record in fields.items()
+        if isinstance(record, dict) and record.get("conflicts")
+    )
+    if not conflicted:
+        return ""
+    return "field conflict recorded for: " + ", ".join(conflicted)
+
+
 @dataclass(frozen=True)
 class ResolutionEnvelope:
     """FC-704 + FC-902 + FC-905-a: handle + policy/epoch + journal-reconciled outcome
@@ -727,6 +835,10 @@ class ResolutionEnvelope:
     canonical_location_rationale: dict[str, Any] | None = None
     cohorts: tuple[str, ...] | None = None
     source_sha256: str | None = None
+    # B06: "locally readable" vs "formally captured" qualification, plus the
+    # gaps behind it.  None when there is no served handle to qualify (an
+    # MISSING/rejected answer has nothing to label) - honest default, additive.
+    qualification: dict[str, Any] | None = None
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -745,6 +857,7 @@ class ResolutionEnvelope:
             "canonical_location_rationale": self.canonical_location_rationale,
             "cohorts": list(self.cohorts) if self.cohorts is not None else None,
             "source_sha256": self.source_sha256,
+            "qualification": self.qualification,
         }
 
 
@@ -855,6 +968,7 @@ def build_resolution_envelope(
         llm_calls = counts["llm_calls"]
     source_sha256 = None
     canonical_rationale: dict[str, Any] | None = None
+    qualification: dict[str, Any] | None = None
     if resolution.matches:
         handle = resolution.matches[0]
         source_sha256 = handle.content_sha256
@@ -863,6 +977,17 @@ def build_resolution_envelope(
             "canonical_path": _redact_path(handle.canonical_path, project_root),
             "selection": "lowest_priority_active_original_primary_then_tiebreak",
             "source_sha256": handle.content_sha256,
+        }
+        # B06: qualify the served handle.  The conflict read is the S-13 wiring:
+        # a real field conflict (B05's reserved key) blocks the formal contract
+        # instead of being a second, weaker opinion.
+        gaps = _qualification_gaps(handle)
+        conflict_reason = _metadata_conflict_reason(store, handle.document_id)
+        label, explanation = _qualification_label(gaps, conflict_reason)
+        qualification = {
+            "label": label,
+            "gaps": gaps,
+            "reason": explanation,
         }
     return ResolutionEnvelope(
         envelope_schema_version=RESOLUTION_ENVELOPE_SCHEMA_VERSION,
@@ -880,6 +1005,7 @@ def build_resolution_envelope(
         canonical_location_rationale=canonical_rationale,
         cohorts=cohorts,
         source_sha256=source_sha256,
+        qualification=qualification,
     )
 
 
