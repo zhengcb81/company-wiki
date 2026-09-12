@@ -11,6 +11,7 @@ import json
 import os
 from pathlib import Path
 import re
+import stat
 from typing import Any
 
 from .service import SourceCatalog
@@ -138,6 +139,131 @@ def _json_hash(value: dict[str, Any]) -> str:
         allow_nan=False,
     )
     return hashlib.sha256(payload.encode("utf-8")).hexdigest()
+
+
+# --- B02 segment 3: bounded, no-network candidate verification --------------
+#
+# A03 §2.4 keeps the error model at exactly five values.  Nothing below
+# invents a sixth state: an unverified candidate (over the per-candidate cap,
+# over the per-request budget, cancelled, unreadable, or hash-mismatched) is
+# simply NOT reusable, is reported per candidate in the diagnostics, and the
+# request keeps its existing MISSING/placeholder semantics — it never silently
+# reuses bytes that were not verified.
+_CANDIDATE_BYTES_CAP = 256 * 1024 * 1024
+_REQUEST_MAX_CANDIDATES = 64
+_REQUEST_MAX_BYTES = 2 * 1024 * 1024 * 1024
+# Windows cloud placeholders: FILE_ATTRIBUTE_RECALL_ON_DATA_ACCESS | OFFLINE.
+# Opening such a file downloads it; the query path must not trigger that.
+_HYDRATION_ATTRIBUTES = 0x400000 | 0x1000
+
+
+def _sha256_of_file(path: Path) -> str:
+    """Stream EVERY byte of the candidate: a sampled digest can only ever
+    exclude a candidate, never prove `content_sha256` equality (B-DR3-03)."""
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def _needs_hydration(stat_result: os.stat_result) -> bool:
+    """True for a cloud placeholder whose bytes are not local (a synced vendor
+    root that materialises files on access).  `stat` reports this without
+    reading data, so the resolver can refuse the candidate BEFORE any network
+    I/O happens — root ids stay configuration, never code (FC-1201)."""
+    attributes = getattr(stat_result, "st_file_attributes", 0)
+    return bool(attributes & _HYDRATION_ATTRIBUTES)
+
+
+@dataclass
+class _ReadBudget:
+    """Per-request read budget (L06/L12): finite resource ceiling plus
+    cancellation, with the counters kept as evidence.  One instance serves
+    exactly one ``resolve`` call."""
+
+    max_candidates: int = _REQUEST_MAX_CANDIDATES
+    max_bytes: int = _REQUEST_MAX_BYTES
+    candidates: int = 0
+    bytes_read: int = 0
+    cancelled: bool = False
+
+    def cancel(self) -> None:
+        """Caller-side cancellation: no further candidate byte is read."""
+        self.cancelled = True
+
+    def take_candidate(self) -> str:
+        if self.cancelled:
+            return "cancelled"
+        if self.candidates >= self.max_candidates:
+            return "budget_exceeded"
+        self.candidates += 1
+        return ""
+
+    def charge(self, size: int) -> str:
+        if self.cancelled:
+            return "cancelled"
+        if self.bytes_read + size > self.max_bytes:
+            return "budget_exceeded"
+        self.bytes_read += size
+        return ""
+
+
+def _local_copy_probe(location: dict[str, Any]) -> tuple[str, str, int]:
+    """Cheap eligibility probe for one candidate: ``stat`` only, never a byte
+    is read (so it can neither hydrate a cloud placeholder nor meet the read
+    budget).  Returns ``("", "", size)`` for a locally readable regular file,
+    else ``(reason, detail, 0)``."""
+    path = Path(str(location["absolute_path"]))
+    try:
+        stat_result = path.stat()
+    except OSError as exc:
+        return "not_readable", exc.__class__.__name__, 0
+    if not stat.S_ISREG(stat_result.st_mode):
+        return "not_regular_file", "", 0
+    if _needs_hydration(stat_result):
+        # Bytes are not local: opening it downloads them, and segment 3
+        # forbids network I/O in the query path.
+        return "hydration_required", "", 0
+    return "", "", int(stat_result.st_size)
+
+
+def _verify_candidate(
+    location: dict[str, Any],
+    *,
+    expected_sha256: str,
+    expected_size: int | None,
+    size: int,
+    budget: _ReadBudget,
+) -> tuple[str, str]:
+    """B02 segment 3 — verify the candidate's LOCAL bytes against the
+    requested version.
+
+    Returns ``("", digest)`` when the bytes ARE the requested version, else
+    ``(reason, detail)``.  Cheap checks first (they may only exclude); the
+    qualifying decision is always a full-file digest, and sampling is never
+    used to claim equality.
+    """
+    if expected_size and size != expected_size:
+        return "size_mismatch", f"{size}!={expected_size}"
+    stop = budget.take_candidate()
+    if stop:
+        return stop, ""
+    if size > _CANDIDATE_BYTES_CAP:
+        return "exceeds_candidate_cap", str(size)
+    stop = budget.charge(size)
+    if stop:
+        return stop, str(size)
+    try:
+        digest = _sha256_of_file(Path(str(location["absolute_path"])))
+    except OSError as exc:
+        return "read_failed", exc.__class__.__name__
+    if not expected_sha256 or digest != expected_sha256:
+        return "content_sha256_mismatch", digest[:12]
+    # Evidence for the consumer: this is the digest the bytes were verified
+    # against (read-path annotation only — never persisted).
+    location["verified_sha256"] = digest
+    return "", digest
 
 
 @dataclass(frozen=True)
@@ -280,6 +406,21 @@ class SourceHandle:
             "entity_ids": list(self.entity_ids),
             "missing_capture_fields": list(self.missing_capture_fields),
         }
+
+
+@dataclass(frozen=True)
+class _Selection:
+    """B02: which candidate was selected, and why (the fall-through across
+    equivalent copies must never be a silent substitution).
+
+    ``handle`` is None when no qualified candidate could be verified; the
+    caller keeps its existing placeholder semantics, and ``reason`` plus the
+    per-candidate ``tried`` diagnostics stay in the debug trace.
+    """
+
+    handle: SourceHandle | None
+    reason: str
+    tried: tuple[str, ...] = ()
 
 
 @dataclass(frozen=True)
@@ -724,12 +865,16 @@ class SourceResolver:
         *,
         observer=None,
         runtime_policy: dict | None = None,
+        read_budget: "_ReadBudget | None" = None,
     ):
         if not isinstance(catalog, SourceCatalog):
             raise TypeError("catalog must be SourceCatalog")
         self.catalog = catalog
         # WU-1500: optional legacy observation collector; absent => no-op.
         self.observer = observer
+        # B02: optional injected read budget (tests / caller cancellation).
+        # It is consumed by ONE resolve() call — counters are per request.
+        self.read_budget = read_budget
         # FC-202: the RuntimePolicySnapshot is pinned at request start.
         # Absent snapshot = v1 reader with the legacy bridge on (the
         # pre-FC-201 production default); a snapshot governs reader mode,
@@ -798,6 +943,8 @@ class SourceResolver:
             source_statuses=("active",),
             limit=1000,
         )
+        # B02 段 3 预算（v0.1.3）：有限资源 + 可取消，且计数留在证据里。
+        budget = self.read_budget or _ReadBudget()
         for document in candidates:
             if not self._entity_matches(request.entity, document):
                 entity_gate_rejected += 1
@@ -938,7 +1085,7 @@ class SourceResolver:
                 # `reusable_root_kinds` in source_catalog.yaml to reuse it).
                 trace.append(f"{document['title']}: no_reusable_root_location")
                 continue
-            handle = self._handle(
+            selection = self._handle(
                 document,
                 metadata=metadata,
                 fiscal_year=year,
@@ -947,10 +1094,22 @@ class SourceResolver:
                 language=language,
                 provider=provider,
                 provider_document_id=provider_document_id,
+                budget=budget,
             )
+            handle = selection.handle
             if handle is None:
-                trace.append(f"{document['title']}: placeholder_no_handle")
+                trace.append(f"{document['title']}: {selection.reason}")
+                for attempted in selection.tried:
+                    trace.append(f"{document['title']}: candidate {attempted}")
                 continue
+            if selection.reason != "verified_candidate_rank_1":
+                # Serving a copy other than the preferred one — a fall-through
+                # to an equivalent copy, bytes that could not be verified, or a
+                # resource stop — is never silent.  The common case keeps its
+                # existing trace shape.
+                trace.append(f"{document['title']}: {selection.reason}")
+                for attempted in selection.tried:
+                    trace.append(f"{document['title']}: candidate {attempted}")
             if market_match == "missing_fail_closed":
                 # Reusable, but identity is unverifiable (no metadata, no
                 # assertion): stay fail-closed for reuse (CW-3.5 strict).
@@ -1139,6 +1298,72 @@ class SourceResolver:
         return bool(issuer_tokens.get(issuer, frozenset()) & doc_values)
 
     @staticmethod
+    def _select_candidate(
+        document: dict[str, Any],
+        *,
+        budget: _ReadBudget,
+    ) -> tuple[dict[str, Any] | None, str, tuple[str, ...]]:
+        """B02 段 3/4 — walk the ordered qualified candidates, verify each,
+        and return the FIRST one whose local bytes are the requested version.
+
+        The order comes from ``service._annotate_locations`` (``candidate_rank``
+        = segment 4 within the qualified set), so priority/churn can only
+        decide *which copy is tried first* — never *whether a copy qualifies*.
+        Only an exhausted list returns None (unavailable), which is what makes
+        "withdraw the preferred copy" fall through to the next equivalent copy
+        instead of failing the whole document.
+
+        Byte-level refusal note: when NO candidate's bytes match the claimed
+        version but a locally readable copy of it exists, resolve still points
+        at that copy and reports ``unverified_bytes`` — the byte-level
+        hard gate belongs to the read path (B03: serve verified bytes or fail
+        explicitly).  Resolve never silently upgrades such a copy to
+        "verified": the reason and the per-candidate diagnostics are recorded.
+        """
+        ordered = sorted(
+            (item for item in document["locations"] if item.get("candidate_rank")),
+            key=lambda item: (int(item["candidate_rank"]), str(item["location_id"])),
+        )
+        if not ordered:
+            return None, "placeholder_no_handle", ()
+        expected_sha256 = str(document.get("content_sha256") or "")
+        expected_size = document.get("byte_size")
+        tried: list[str] = []
+        fallback: dict[str, Any] | None = None
+        stop_status = ""
+        for location in ordered:
+            probe_status, probe_detail, size = _local_copy_probe(location)
+            if probe_status:
+                tried.append(f"{location['location_id']}:{probe_status}")
+                continue
+            if fallback is None:
+                fallback = location
+            status, detail = _verify_candidate(
+                location,
+                expected_sha256=expected_sha256,
+                expected_size=expected_size,
+                size=size,
+                budget=budget,
+            )
+            if not status:
+                reason = f"verified_candidate_rank_{location['candidate_rank']}"
+                return location, reason, tuple(tried)
+            tried.append(
+                f"{location['location_id']}:{status}" + (f":{detail}" if detail else "")
+            )
+            if status in ("budget_exceeded", "cancelled"):
+                stop_status = status
+                break
+        if fallback is not None and stop_status != "cancelled":
+            return fallback, "unverified_bytes", tuple(tried)
+        if stop_status == "cancelled":
+            # A cancelled request must not be answered with unverified bytes.
+            return None, "candidate_verification_cancelled", tuple(tried)
+        if stop_status == "budget_exceeded":
+            return None, "candidate_budget_exceeded", tuple(tried)
+        return None, "no_verifiable_candidate", tuple(tried)
+
+    @staticmethod
     def _handle(
         document: dict[str, Any],
         *,
@@ -1149,29 +1374,30 @@ class SourceResolver:
         language: str | None,
         provider: str | None,
         provider_document_id: str | None,
-    ) -> SourceHandle | None:
-        canonical = next(
-            (
-                item
-                for item in document["locations"]
-                if item["is_canonical"]
-                and item["role"] == "original_primary"
-                and item["location_status"] == "active"
-                # WU-3.1: provider-rejected paths are never canonical, even
-                # when the row is still marked active.
-                and ".rejections" not in item["relative_path"].replace("\\", "/")
-            ),
-            None,
+        budget: _ReadBudget,
+    ) -> _Selection:
+        # B02: qualification (segments 1-3) is decided on the ordered
+        # candidate list; the pre-B02 code took the elected canonical and
+        # returned None when that single path was unreadable, so an
+        # equivalent copy could not take over.
+        canonical, selection_reason, tried = SourceResolver._select_candidate(
+            document, budget=budget
         )
-        if canonical is None or not Path(canonical["absolute_path"]).is_file():
-            return None
+        if canonical is None:
+            return _Selection(None, selection_reason, tried)
         try:
             manifest = json.loads(canonical["manifest_json"] or "{}")
         except json.JSONDecodeError:
             manifest = {}
         source_id = str(canonical["source_id"] or document["source_id"] or "")
+        # B02: the handle reports the digest of the bytes that were actually
+        # verified.  It equals the manifest claim in the normal case (so the
+        # resolve payload is unchanged); when a manifest claim disagrees with
+        # the bytes, the verified digest is the honest one.
         content_sha256 = str(
-            manifest.get("content_sha256") or source_id.rsplit(":", 1)[-1]
+            canonical.get("verified_sha256")
+            or manifest.get("content_sha256")
+            or source_id.rsplit(":", 1)[-1]
         )
         url_value = metadata.get("source_url") or metadata.get("https_url")
         https_url = str(url_value).strip() if url_value else None
@@ -1189,7 +1415,7 @@ class SourceResolver:
         collector_version = str(manifest.get("collector_version") or "")
         if not retrieved_at or not collector_name or not collector_version:
             missing.append("capture_trace")
-        return SourceHandle(
+        built = SourceHandle(
             schema_version=SOURCE_RESOLVER_SCHEMA_VERSION,
             document_id=document["document_id"],
             source_id=source_id,
@@ -1222,6 +1448,9 @@ class SourceResolver:
             capture_ready=not missing,
             missing_capture_fields=tuple(missing),
         )
+        # B02 requirement: the result names WHICH copy was chosen (the handle
+        # fields above) and WHY it was chosen (the selection reason).
+        return _Selection(handle=built, reason=selection_reason, tried=tried)
 
     @staticmethod
     def _pick_latest(
