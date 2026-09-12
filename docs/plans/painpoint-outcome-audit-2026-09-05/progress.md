@@ -1,5 +1,18 @@
 # 审计进度
 
+## 2026-09-12 上午：R4 阶段 A 收口为 v0.4.2、阶段 B 设计三轮复审、A06 首个真实基线
+
+- **阶段 A（合同/基线）**：A07（A.VR）**`accepted_with_findings`**（6×P1/3×P2/2×P3；交付 **22 条负例 VR-N01–N22** + **五值错误模型** `not_found/not_indexed/unavailable/blocked/ambiguous`）；A08（A.AR）**`rejected`**（**117 行逐行映射已产出**：98 行可直连、6 行经 AC 桥接、**13 行无法指派**）；A.DR rev3 `accepted_with_findings`。三份复审**独立命中同一 P0**：
+  - **`policy_2x.py` 并非"整体无生产调用者"**：无调用者的只有 **loader**；**`export_policy_2x` 在产**（`cli.py:835 _policy_export_payload` → `:849-851`，由 `:811` ensure / `:831` policy-export / `:1182` **resolve** 调用），其 payload 是 filing-fetch **FC-501 containment / ZR-405 policy_hash 的唯一来源**（`filing_contracts.py:450/461-497`）。
+  - → owner 裁定 **R-3 的适用范围收窄为"仅准入 loader"**；导出路径**保持现状**（若要一并收敛，属新裁定 + 跨仓 policy_hash 迁移）。
+  - 另两条更正：**`reusable_for_filing` 有"三处活实现"**（`resolver.py` fail-open / `policy.py:67-72` fail-closed / `policy_2x.py:308-312` 经在产导出）；**owner R-4 在现网是惰性的**（四个 root 全部显式声明 `privacy_class: public` → 受影响集合 = 0，其验收只能靠合成配置）；`read_only` 亦为**假保证字段候选**（写轴实由 `kind == 'company_raw'` 决定）。
+  - 合同已就地更正为 **v0.4.2**；`boundary-audit` 增加第四类开库者（见下）。
+- **阶段 B（位置透明索引/读取）**：设计 **v0.1** → `B.DR` **rejected**（1×P0+7×P1+9×P2+3×P3）→ **v0.1.1** → `B.DR-rev2` **rejected**（round-1 的 20 条中 **7 条闭环**、新增 15 条）→ **v0.1.2**（B05 改为"停止销毁落选值、provenance 存进既有 `metadata_json` 列、无需 `store.py`"；`_handle` 的合格清单入参写死；B06 承载 = `ResolutionEnvelope` 新增 `qualification` 字段；B07 划分"B 可签/不可签"；补读取预算与取消；新增 `B-payload-hash` 必测项；checkpoint 生成器强制 `--reviewed-commit` + 完整性断言）→ **`B.DR-rev3` 复审中**。**产品代码未改动**，实施仍需 owner 批准文件范围。
+- **A06 首个真实基线（机制层 D0）**：CI 等价命令实跑 —— **unit 787 passed / 37.5 s**；**contract 1748 passed / 7 skipped / 0 failed / 0 errors / 11 min 47 s**（junit 逐例证据入 run 目录）。7 个 skip 的原文原因已记录，其中一条重要：`test_dbx05_symlink_escape_rejected` 因 **`symlinks not supported on this host`** 跳过 → **symlink 逃逸控制在本机从未执行**（与 owner R-1、A07/L05 负例直接相关）。
+- **边界新发现（本目录相关）**：**本机跑"CI 等价测试套件"会打开生产 catalog（只读）** —— `tests/contract/test_lt_uj_real_e2e.py` 硬编码生产路径（`:36/39/40`），其模块级 skipif 在**收集阶段**即连接（`:70-73`），且**不在 CI 的 8 个 `--ignore` 之列**（`.github/workflows/ci.yml:51-59`）。→ **开库者清单第四类**（前三类：22:00 每日任务、推送前 gate、未推送的手动 gate）；`-shm` 在 08:11:45 / 08:13:46 的两次前移即由本次基线运行造成。主库与 `-wal` 全程未变（无逻辑写入）。
+- **CI**：revenue #145/#146/#147 全 success（对应提交 `1b4bab4`…`8e3396b`）；wiki #103 success。
+- **FC-705 门**：预计 **2026-09-12 22:00** 运行后转 true（last-two = P10（24:00:05）+ P11，均 ≥24h 且零 hit）。GP-009：Daily 6/7（今晚后 7/7）、Weekly 0/2（下次 09-13 04:30）、Monthly 1/1。
+
 ## 2026-09-11 夜：R4 阶段 A 首轮设计审查（A.DR **rejected** → v0.2 更正完成）
 
 - **运行目录**：`revenue-forecast/assurance/runs/2026-09-11_r4-phase-a/`（在审计证据目录**之外**，符合 handbook §2.5/§3）。

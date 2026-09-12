@@ -1,5 +1,13 @@
 # company-wiki 当前规划状态
 
+> **2026-09-12 上午最新覆盖（R4 阶段 A 收口 v0.4.2 / 阶段 B 设计三轮复审 / A06 首个真实基线）**：
+> **① 阶段 A 合同 → v0.4.2**：A07=`accepted_with_findings`（22 条负例 + 五值错误模型）、A08=`rejected`（117 行映射：98 直连 / 6 桥接 / **13 无法指派**）。三份独立复审命中同一 P0：**`export_policy_2x` 在产**（`cli.py:835/849-851`，由 `:811`/`:831`/`:1182` 调用，是 filing-fetch **FC-501 containment / ZR-405 policy_hash 唯一来源**）→ **owner R-3 范围收窄为"仅准入 loader"**，导出路径保持。另：`reusable_for_filing` 实为**三处活实现**；**owner R-4 在现网惰性**（四个 root 都显式声明 `privacy_class: public`，受影响集合 = 0）；`read_only` 亦为假保证字段候选。
+> **② 阶段 B 设计 → v0.1.2**（`B.DR` rev1/rev2 两次 rejected，已逐条更正；rev3 复审中）：B05 改为"停止销毁落选值 + provenance 存既有 `metadata_json` 列（无需 DDL）"；`_handle` 合格清单入参写死；B06 承载=`ResolutionEnvelope.qualification`；B07 划分 B 可签/不可签；新增读取预算与取消、`B-payload-hash` 必测项；checkpoint 生成器强制 `--reviewed-commit` + 完整性断言。**产品代码未改动**。
+> **③ A06 首个真实基线（机制层）**：unit **787 passed**；contract **1748 passed / 7 skipped / 0 failed**（junit 入账）。其中 `test_dbx05_symlink_escape_rejected` 因 **宿主不支持 symlink** 跳过 → **symlink 逃逸控制在本机从未执行**（与 R-1 直接相关）。
+> **④ 边界新事实**：**本机跑 CI 等价测试套件会打开生产 catalog（只读）**——`tests/contract/test_lt_uj_real_e2e.py` 硬编码生产路径且收集期即连接，**不在 CI 的 8 个 `--ignore` 内**。开库者清单因此为**四类**；主库与 `-wal` 全程未变（无逻辑写入）。
+> **⑤ 待 owner**：批准 B 的 DEV 工作包与文件范围（[file-scope](assurance/runs/2026-09-11_r4-phase-b/file-scope.md)，在 revenue 侧）；确认 A05 样本清单 + 只读命令 manifest；可选新裁定（是否连导出路径一并收敛）。
+> **⑥ GP-009 与门**：FC-705 预计 **今晚 22:00** 转 true（P10 24:00:05 + P11）；Daily 6/7→7/7、Weekly 0/2（09-13 04:30）、Monthly 1/1。下表 09-11 段落保留为当时观测。
+
 > **2026-09-11 夜最新覆盖（22:00 运行后实测；R4 阶段 A 首轮 A.DR）**：
 > **① FC-705 窗口修复已被真实运行验证**：`run_id=20260911T210001Z`、`ok=true`、`problems=[]`、`legacy_hits=[]`；权威账本关 **period 10 = 2026-09-10T21:00:13Z → 2026-09-11T21:00:18Z = 24:00:05（首个真正 ≥24h 的窗口）**，hits=0；开 period 11。**门仍 `close_allowed=false`，但唯一原因只剩历史窗口**：reasons=`["period 9: window 23:59:52 is shorter than 24h"]`（P9 已无法补救）→ **预计 2026-09-12 22:00 运行后确定性转 true**（last-two = P10 + P11，两者均 ≥24h 且零 hit）。修复机制见 revenue `41117ce`（runner 在调用观测器前补足窗口缺口；本次实际等待 ~5 s）。
 > **② R4 阶段 A 首轮 A.DR = rejected（8×P1/5×P2/3×P3）**，更正已就地完成为 v0.2；运行目录在 revenue `assurance/runs/2026-09-11_r4-phase-a/`（**不在本审计证据目录内**）。**6 项 owner 裁定仍待决**（`symlink_policy` 假保证、`reusable_for_filing` fail-open、两套 root 准入实现分叉、`privacy_class` 缺省 public、R6 owner、R4 严格读法），A.DR 明确要求先裁定再冻结 A02。逐条见本仓 [progress.md](docs/plans/painpoint-outcome-audit-2026-09-05/progress.md) 顶部条目。
