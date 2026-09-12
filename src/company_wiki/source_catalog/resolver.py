@@ -1377,17 +1377,19 @@ class SourceResolver:
         )
         if not ordered:
             return None, "placeholder_no_handle", ()
-        # The row pre-B02 would have served: the legacy canonical, filtered by
-        # the very same conditions the pre-B02 resolver applied to it.
         # The claim-trusted row: the legacy canonical, IF it is a qualified
         # candidate of the document's own version.  `ordered` already carries
         # role/status/.rejections/own-source, so membership is the whole test.
-        # Two differences from pre-B02 are deliberate and documented (S-10):
-        # pre-B02 matched ".rejections" as a SUBSTRING (so an unrelated name
-        # such as `my.rejections_backup` was refused) and did not restrict to
-        # the document's own source group (so it could elect another version's
-        # row).  Both were defects; neither is restored here, so this row is
-        # NOT bit-for-bit "the row pre-B02 would have served".
+        # It is NOT "the row pre-B02 would have served": the authoritative list
+        # of the deliberate differences lives in the phase-B run directory
+        # (assurance/runs/2026-09-11_r4-phase-b/evidence/b02-implementation.md
+        # section 3, decision S-10) — (a) ".rejections" is matched as a path
+        # SEGMENT, not a substring; (b) the election is restricted to the
+        # document's own source group (conditionally: see the guard above);
+        # (c) this row must additionally pass the local probe, so a cloud
+        # placeholder is refused where pre-B02 checked only `is_file()`.
+        # (a) is wider, (b) and (c) are stricter; none of them restores a
+        # defect.  Do not restate this list elsewhere — point at it.
         pre_b02_canonical = next(
             (item for item in ordered if item.get("is_canonical")),
             None,

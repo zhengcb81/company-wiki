@@ -26,7 +26,7 @@ Acceptance covered here (see assurance/.../test-acceptance-map.md):
   no-net   a candidate whose bytes are not local (cloud placeholder) is
            refused without reading it: the query path performs no network I/O.
 
-Scope note (B02, rev3): the serving rule is exactly two clauses, and the cases
+Scope note (B02, rev5): the serving rule is exactly two clauses, and the cases
 below pin both:
 
   1. **a verified copy always wins** — the first candidate whose bytes really
@@ -34,13 +34,21 @@ below pin both:
      corrupting the preferred copy still yields the same version from another
      copy);
   2. only when NO candidate verifies may ONE row be served on the catalog's
-     claim: the row the pre-B02 resolver would have served (the legacy
-     ``is_canonical``, active, ``original_primary``, not under ``.rejections``,
-     still the document's own version).  That anchoring is what keeps this
-     strictly no wider than pre-B02; it is the S-10 deviation until B03 owns a
-     byte-level hard gate on the read path.  It is never silent: the reason is
+     claim: the legacy ``is_canonical`` row among the qualified candidates of
+     the document's own version.  It is never silent (the reason is
      ``unverified_<status>_on_pre_b02_canonical`` and the per-candidate reasons
-     are in the debug trace.
+     are in the debug trace).
+
+Clause 2 is NOT equivalent to what pre-B02 served.  The authoritative list of
+the deliberate differences — (a) ``.rejections`` matched as a path SEGMENT
+instead of a substring (wider on names such as ``my.rejections_backup``),
+(b) the election restricted to the document's own source group (conditionally;
+stricter), (c) the row must additionally pass the local probe, so a cloud
+placeholder is refused where pre-B02 only checked ``is_file()`` (stricter) — is
+maintained in ONE place and must not be restated here:
+
+  revenue-forecast/assurance/runs/2026-09-11_r4-phase-b/evidence/
+      b02-implementation.md   section 3  (decision S-10)
 
 A-side frozen fixtures (determinism / sql pushdown) build catalogs whose files
 deliberately do not contain the bytes their metadata claims, which is why
