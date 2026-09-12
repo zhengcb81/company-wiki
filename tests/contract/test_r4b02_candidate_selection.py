@@ -26,14 +26,25 @@ Acceptance covered here (see assurance/.../test-acceptance-map.md):
   no-net   a candidate whose bytes are not local (cloud placeholder) is
            refused without reading it: the query path performs no network I/O.
 
-Scope note (B02): byte-equality with the claimed ``content_sha256`` is a
-PREFERENCE plus per-candidate diagnostics here, not the hard gate — the
-byte-level refusal belongs to the read path (B03: serve verified bytes or fail
-explicitly), and the A-side frozen fixtures (determinism / sql pushdown) build
-catalogs whose files deliberately do not contain the bytes their metadata
-claims, so a hard gate inside ``resolve`` would contradict those assertions.
-What B02 guarantees is that a candidate is never *silently* unverified: the
-selection reason and the per-candidate reasons are in the debug trace.
+Scope note (B02, rev3): the serving rule is exactly two clauses, and the cases
+below pin both:
+
+  1. **a verified copy always wins** — the first candidate whose bytes really
+     are the requested version is served, whatever its rank (so withdrawing or
+     corrupting the preferred copy still yields the same version from another
+     copy);
+  2. only when NO candidate verifies may ONE row be served on the catalog's
+     claim: the row the pre-B02 resolver would have served (the legacy
+     ``is_canonical``, active, ``original_primary``, not under ``.rejections``,
+     still the document's own version).  That anchoring is what keeps this
+     strictly no wider than pre-B02; it is the S-10 deviation until B03 owns a
+     byte-level hard gate on the read path.  It is never silent: the reason is
+     ``unverified_<status>_on_pre_b02_canonical`` and the per-candidate reasons
+     are in the debug trace.
+
+A-side frozen fixtures (determinism / sql pushdown) build catalogs whose files
+deliberately do not contain the bytes their metadata claims, which is why
+clause 2 exists at all; clause 1 is a strict improvement over pre-B02.
 
 Product code is NOT modified by this file (file-scope F10: new tests only).
 """
@@ -401,9 +412,140 @@ def test_r4b02_budget_counters_bound_candidate_reads(tmp_path):
     assert any("budget_exceeded" in item for item in result.debug_trace), (
         result.debug_trace
     )
-    assert any("unverified_preferred_copy" in item for item in result.debug_trace), (
+    assert any(
+        "unverified_budget_exceeded_on_pre_b02_canonical" in item
+        for item in result.debug_trace
+    ), result.debug_trace
+
+
+def test_r4b02_verified_copy_wins_over_the_claim_trusted_one(tmp_path):
+    """B-VR02R2-01 (P2): when the pre-B02 canonical's bytes have drifted but
+    another copy of the SAME version still verifies, the verified copy must be
+    served — the claim-trusted fallback may not short-circuit the walk."""
+    paths = _three_copy_fixture(tmp_path)
+    catalog = _scan(tmp_path, _roots(paths))
+    preferred = _resolve(catalog).matches[0]
+    drifted = Path(preferred.canonical_path)
+    assert "companies" in drifted.as_posix()
+    drifted.write_bytes(BODY + b"# drifted after ingest")
+
+    result = _resolve(catalog)
+    assert result.status is ResolutionStatus.REUSED_EXACT, result.debug_trace
+    handle = result.matches[0]
+    assert Path(handle.canonical_path) != drifted
+    assert "companies" not in handle.canonical_path.replace("\\", "/")
+    assert handle.content_sha256 == DIGEST
+    assert any(
+        item.startswith("2025: verified_candidate_rank_2:") for item in result.debug_trace
+    ), result.debug_trace
+
+
+def test_r4b02_rejected_best_priority_plus_drifted_copy_is_unavailable(tmp_path):
+    """B-VR02R2-02 (P2): the pre-B02 canonical is the provider-rejected row, so
+    pre-B02 answered MISSING.  With the surviving qualified copy's bytes
+    drifted, rev2 may not answer with that copy either — the claim-trusted
+    fallback is anchored to the row pre-B02 would have served."""
+    company_root = tmp_path / "companies"
+    rejected = company_root / "Acme" / "raw" / "financial_reports" / ".rejections"
+    dropbox = tmp_path / "Dropbox" / "Stock"
+    _write_copy(rejected)
+    _write_copy(dropbox)
+    catalog = _scan(
+        tmp_path,
+        [
+            RootSpec(
+                "company_raw",
+                company_root,
+                "company_raw",
+                priority=10,
+                adapter_id="company_raw_v1",
+                read_only=False,
+                reusable_for_filing=True,
+                canonical_write_target="companies",
+            ),
+            RootSpec(
+                "dropbox_stock",
+                dropbox,
+                "directory",
+                priority=30,
+                adapter_id="sidecar_filing_v1",
+                read_only=True,
+                reusable_for_filing=True,
+            ),
+        ],
+    )
+    _force_active(catalog)
+    (dropbox / "2025.pdf").write_bytes(BODY + b"# drifted after ingest")
+
+    result = _resolve(catalog)
+    assert result.matches == (), result.debug_trace
+    assert result.status is ResolutionStatus.MISSING, result.debug_trace
+    assert not any("unverified" in item for item in result.debug_trace), (
         result.debug_trace
     )
+    assert any("content_sha256_mismatch" in item for item in result.debug_trace), (
+        result.debug_trace
+    )
+
+
+def test_r4b02_mid_read_cancellation_returns_no_handle(tmp_path, monkeypatch):
+    """B-VR02R2-03 (P3): cancelling while the digest is being read must still
+    revoke the answer."""
+    paths = _three_copy_fixture(tmp_path)
+    catalog = _scan(tmp_path, _roots(paths))
+    from company_wiki.source_catalog import resolver as resolver_module
+
+    budget = _ReadBudget()
+    real_sha256_of_file = resolver_module._sha256_of_file
+
+    def cancel_then_hash(path):
+        budget.cancel()
+        return real_sha256_of_file(path)
+
+    monkeypatch.setattr(resolver_module, "_sha256_of_file", cancel_then_hash)
+    result = SourceResolver(catalog, read_budget=budget).resolve(_request())
+    assert budget.cancelled is True
+    assert result.matches == (), result.debug_trace
+    assert any(
+        "candidate_verification_cancelled" in item for item in result.debug_trace
+    ), result.debug_trace
+
+
+def test_r4b02_other_source_group_is_never_served(tmp_path):
+    """B-VR02R2-04 (P3): the candidate set is restricted to the document's own
+    source entry.  A foreign source group attached to the same document must
+    never be served — not even when every own copy is unusable."""
+    paths = _three_copy_fixture(tmp_path)
+    catalog = _scan(tmp_path, _roots(paths))
+    first = _resolve(catalog)
+    assert first.status is ResolutionStatus.REUSED_EXACT, first.debug_trace
+    own_source = first.matches[0].source_id
+    foreign_source = "urn:company-wiki:source:sha256:" + "f" * 64
+
+    con = sqlite3.connect(f"file:{catalog.config.database_path}?mode=rw", uri=True)
+    con.execute(
+        "INSERT OR IGNORE INTO sources(source_id,content_sha256,byte_size,mime_type,"
+        "first_seen_at) VALUES(?,?,?,?,?)",
+        (foreign_source, "f" * 64, len(BODY), "application/pdf", "2025-01-01"),
+    )
+    con.execute(
+        "UPDATE locations SET source_id=? WHERE root_id='future_lake'", (foreign_source,)
+    )
+    con.commit()
+    con.close()
+    assert own_source != foreign_source
+
+    # every own-source copy disappears; only the foreign group's copy is left
+    for row in _locations(catalog):
+        candidate_file = Path(row["absolute_path"])
+        if row["role"] == "original_primary" and candidate_file.is_file():
+            candidate_file.unlink()
+    foreign = paths["future_lake"] / "2025.pdf"
+    foreign.write_bytes(BODY)
+
+    after = _resolve(catalog)
+    assert after.matches == (), after.debug_trace
+    assert after.status is ResolutionStatus.MISSING, after.debug_trace
 
 
 def test_r4b02_injected_budget_is_per_request(tmp_path):

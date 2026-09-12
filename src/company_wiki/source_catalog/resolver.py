@@ -275,6 +275,13 @@ def _verify_candidate(
     return "", digest
 
 
+def _is_rejections_path(relative_path: Any) -> bool:
+    """Provider-rejected paths are matched as a path SEGMENT (the adapters'
+    convention), so an unrelated name such as ``my.rejections_backup`` is not
+    treated as a rejection (B-VR02-07)."""
+    return ".rejections" in str(relative_path).replace("\\", "/").split("/")
+
+
 def _candidate_reason(location: dict[str, Any]) -> str:
     """Name the copy AND its source group: a bare rank is ambiguous when a
     document carries more than one source entry (B-VR02-05)."""
@@ -1086,8 +1093,7 @@ class SourceResolver:
             if not canonical_locations:
                 if any(
                     item.get("role") == "original_primary"
-                    and ".rejections"
-                    in item.get("relative_path", "").replace("\\", "/")
+                    and _is_rejections_path(item.get("relative_path", ""))
                     for item in document["locations"]
                 ):
                     trace.append(f"{document['title']}: rejections_path")
@@ -1330,45 +1336,63 @@ class SourceResolver:
         ``service._annotate_locations``), so priority/churn can only decide
         *which copy is tried first* — never *whether a copy qualifies*.
 
-        Serving rule (narrowed after B-VR02-01, which proved that serving any
-        readable copy could hand out a DIFFERENT revision):
+        Serving rule (narrowed twice by independent review: B-VR02-01 then
+        B-VR02R2-01/-02):
 
-        1. the first candidate whose bytes verify IS served (that is the
-           fall-through that makes "preferred copy withdrawn" work);
-        2. the preferred copy (rank 1) is served on the catalog's claim when
-           its bytes cannot be verified — this is exactly the pre-B02 trust
-           level for the elected copy, and it is why the A-side frozen
-           fixtures (whose synthetic bytes never match their declared hash)
-           still resolve.  The reason is recorded as
-           ``unverified_preferred_copy`` — never silent;
-        3. **no other candidate is ever served unverified**: a non-preferred
-           copy with different bytes yields no handle (unavailable ->
-           MISSING), which is what keeps "do not take another revision" true.
+        1. **a verified copy always wins**: the first candidate whose bytes
+           really are the requested version is served, whatever its rank;
+        2. only when NO candidate verifies may ONE row be served on the
+           catalog's claim: the row the pre-B02 resolver would have selected —
+           the legacy canonical (``is_canonical``) that is active,
+           ``original_primary`` and not under ``.rejections`` — provided it is
+           locally present and belongs to the document's own version.  That
+           anchoring is what makes "no wider than pre-B02" true *by
+           construction*: pre-B02 served exactly that row, and served nothing
+           when it was unusable.  The reason is recorded as
+           ``unverified_<status>_on_pre_b02_canonical`` — never silent;
+        3. **every other copy needs verified bytes**; otherwise the answer is
+           no handle at all (unavailable -> MISSING), which is what keeps
+           "do not take another revision" true;
+        4. a cancelled request is never answered, even mid-read.
 
         The byte-level hard gate for case 2 (serve verified bytes or fail
         explicitly) belongs to the read path (B03) and is registered as the
         S-10 deviation until then.
         """
         own_source_id = str(document.get("source_id") or "")
+        candidates = [
+            item
+            for item in document["locations"]
+            if item.get("candidate_rank")
+            and (
+                not own_source_id
+                or str(item.get("source_id") or "") == own_source_id
+            )
+        ]
         ordered = sorted(
-            (
-                item
-                for item in document["locations"]
-                if item.get("candidate_rank")
-                and (
-                    not own_source_id
-                    or str(item.get("source_id") or "") == own_source_id
-                )
-            ),
+            candidates,
             key=lambda item: (int(item["candidate_rank"]), str(item["location_id"])),
         )
         if not ordered:
             return None, "placeholder_no_handle", ()
+        # The row pre-B02 would have served: the legacy canonical, filtered by
+        # the very same conditions the pre-B02 resolver applied to it.
+        pre_b02_canonical = next(
+            (
+                item
+                for item in ordered
+                if item.get("is_canonical")
+                and item["role"] == "original_primary"
+                and item["location_status"] == "active"
+                and not _is_rejections_path(item["relative_path"])
+            ),
+            None,
+        )
         expected_sha256 = str(document.get("content_sha256") or "")
         tried: list[str] = []
         stop_status = ""
+        claimed_fallback: dict[str, Any] | None = None
         for location in ordered:
-            rank = int(location["candidate_rank"])
             probe_status, _probe_detail, size = _local_copy_probe(location)
             if probe_status:
                 tried.append(f"{location['location_id']}:{probe_status}")
@@ -1380,24 +1404,31 @@ class SourceResolver:
                 budget=budget,
             )
             if not status:
+                if budget.cancelled:
+                    # Cancelled while reading: the bytes are complete but the
+                    # caller revoked the request (B-VR02R2-03).
+                    return None, "candidate_verification_cancelled", tuple(tried)
                 return location, _candidate_reason(location), tuple(tried)
             tried.append(
                 f"{location['location_id']}:{status}" + (f":{detail}" if detail else "")
             )
-            if status == "cancelled":
-                # A cancelled request is never answered — not even with the
-                # preferred copy's claim.
+            if location is pre_b02_canonical:
+                # Remember it; a later VERIFIED copy still wins (rule 1).
+                claimed_fallback = location
+            if status in ("budget_exceeded", "cancelled"):
+                # A resource stop or a cancellation ends the walk: no further
+                # candidate bytes are read.
                 stop_status = status
                 break
-            if rank == 1:
-                # Pre-B02 trust level for the elected copy (the A-side frozen
-                # fixtures rely on it); recorded, never silent.
-                return location, "unverified_preferred_copy", tuple(tried)
-            if status == "budget_exceeded":
-                stop_status = status
-                break
-        if stop_status == "cancelled":
+        if stop_status == "cancelled" or budget.cancelled:
             return None, "candidate_verification_cancelled", tuple(tried)
+        if claimed_fallback is not None:
+            return (
+                claimed_fallback,
+                f"unverified_{stop_status or 'content_sha256_mismatch'}"
+                "_on_pre_b02_canonical",
+                tuple(tried),
+            )
         if stop_status == "budget_exceeded":
             return None, "candidate_budget_exceeded", tuple(tried)
         return None, "no_verifiable_candidate", tuple(tried)
