@@ -366,6 +366,148 @@ def test_r4b03_change_during_read_is_refused(tmp_path, monkeypatch):
     assert out.reason == "changed_during_read"
 
 
+def test_r4b03_caller_supplied_version_is_pinned_to_the_handle(tmp_path):
+    """B-VR03-01 (P1): `expected_content_sha256` may only REPEAT the version the
+    handle already names.
+
+    Otherwise the result carries one version's `document_id` next to another
+    version's bytes and digest while calling itself verified - and the same
+    parameter in `reader.resolve_handle` / `reader.bundle` fails closed on a
+    mismatch, so not binding it here was an inconsistency, not a feature."""
+    resolver, handle, path = _served(tmp_path)
+    other = b"%PDF-1.4 some-other-version-entirely"
+    other_digest = hashlib.sha256(other).hexdigest()
+    path.write_bytes(other)
+
+    out = resolver.read_verified_bytes(handle, expected_content_sha256=other_digest)
+    assert out.data is None, out
+    assert out.status == "unavailable", out
+    assert out.reason == "expected_version_mismatch", out
+    assert out.content_sha256 == other_digest and out.document_id == handle.document_id
+    assert path.read_bytes() == other  # nothing was read out of either version
+
+    # repeating the handle's own version is allowed, and then the digest gate runs
+    out = resolver.read_verified_bytes(handle, expected_content_sha256=handle.content_sha256)
+    assert out.data is None and out.reason == "content_sha256_mismatch", out
+
+
+def test_r4b03_a_wrong_argument_type_is_refused_not_crashed(tmp_path):
+    """B-VR03-08: `resolve` type-checks its request; this entry point now does
+    the same instead of failing later with an AttributeError."""
+    resolver, handle, _ = _served(tmp_path)
+    with pytest.raises(TypeError):
+        resolver.read_verified_bytes("not-a-handle")
+    out = resolver.read_verified_bytes(handle)
+    assert out.bytes_source == "handle"
+
+
+def test_r4b03_cancellation_inside_the_last_read_is_honoured(tmp_path, monkeypatch):
+    """B-VR03-04 (P2): the in-loop check runs BEFORE each read, so a
+    cancellation that lands inside the read that ENDS the loop (the one
+    returning b"") is never seen by it.  This case cancels exactly there, so
+    only the tail guard can refuse it (checked by mutation: removing the tail
+    guard makes this case fail)."""
+    resolver, handle, path = _served(tmp_path)
+    budget = _ReadBudget()
+    real_open = Path.open
+    calls = {"n": 0}
+
+    class CancellingHandle:
+        def __init__(self, stream):
+            self._stream = stream
+
+        def read(self, size=-1):
+            calls["n"] += 1
+            if calls["n"] == 2:
+                # the SECOND read is the one that returns b"" and ends the loop:
+                # cancelling here is invisible to the check before read #1
+                budget.cancel()
+            return self._stream.read(size)
+
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *exc):
+            return self._stream.__exit__(*exc)
+
+    def fake_open(self, *args, **kwargs):
+        mode = args[0] if args else kwargs.get("mode", "r")
+        stream = real_open(self, *args, **kwargs)
+        if str(self) == str(path) and mode == "rb":
+            return CancellingHandle(stream)
+        return stream
+
+    monkeypatch.setattr(Path, "open", fake_open)
+    out = resolver.read_verified_bytes(handle, budget=budget)
+    assert calls["n"] >= 2, calls
+    assert out.data is None, out
+    assert out.status == "unavailable" and out.reason == "cancelled", out
+    assert out.bytes_source == "", out
+
+
+def test_r4b03_cancellation_stops_the_read_early(tmp_path, monkeypatch):
+    """Kills the mutant that drops the IN-LOOP cancellation check (the
+    reviewer's M4 survived the original cases): cancellation must stop reading,
+    not merely refuse after the whole file has been consumed."""
+    resolver, handle, path = _served(tmp_path)
+    path.write_bytes(BODY * 4)  # several chunks once the chunk size is small
+    monkeypatch.setattr(resolver_module, "_BYTE_READ_CHUNK", 8)
+
+    budget = _ReadBudget()
+    real_open = Path.open
+    calls = {"n": 0}
+
+    class CancellingHandle:
+        def __init__(self, stream):
+            self._stream = stream
+
+        def read(self, size=-1):
+            calls["n"] += 1
+            if calls["n"] == 1:
+                budget.cancel()
+            return self._stream.read(size)
+
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *exc):
+            return self._stream.__exit__(*exc)
+
+    def fake_open(self, *args, **kwargs):
+        mode = args[0] if args else kwargs.get("mode", "r")
+        stream = real_open(self, *args, **kwargs)
+        if str(self) == str(path) and mode == "rb":
+            return CancellingHandle(stream)
+        return stream
+
+    monkeypatch.setattr(Path, "open", fake_open)
+    out = resolver.read_verified_bytes(handle, budget=budget)
+    assert out.data is None and out.reason == "cancelled", out
+    assert calls["n"] <= 1, f"kept reading after cancellation: {calls['n']} reads"
+
+
+def test_r4b03_a_drive_root_configured_root_contains_its_files(tmp_path):
+    """Edge found while reading the B03 review's path probe.
+
+    With a root configured as a drive root ("C:\\\\"), string-prefix
+    containment compared against ``"C:\\\\\\\\"`` and refused EVERY file on the
+    drive: fail-closed, but wrong.  Containment now uses ``commonpath``, which
+    keeps a drive root working while a textual-prefix sibling still fails."""
+    from types import SimpleNamespace
+
+    from company_wiki.source_catalog.resolver import _inside_configured_roots
+
+    drive_root = SimpleNamespace(path="C:\\")
+    assert _inside_configured_roots(Path(r"C:\Windows\win.ini"), (drive_root,))
+    assert _inside_configured_roots(Path("C:\\"), (drive_root,))
+
+    sibling = SimpleNamespace(path=tmp_path / "companies")
+    assert _inside_configured_roots(tmp_path / "companies" / "2025.pdf", (sibling,))
+    assert not _inside_configured_roots(
+        tmp_path / "companies_x" / "2025.pdf", (sibling,)
+    )
+
+
 def test_r4b03_symlink_escape_is_refused_where_symlinks_exist(tmp_path):
     """A symlink inside a root that points outside it must not become readable
     through this entry point.

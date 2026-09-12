@@ -286,6 +286,14 @@ def _verify_candidate(
 B03_ERROR_NOT_FOUND = "not_found"
 B03_ERROR_UNAVAILABLE = "unavailable"
 
+# The success value, named like the error values it sits next to (B-VR03-08:
+# a bare "verified" literal left consumers switching on this status with nothing
+# to match against).
+B03_BYTES_VERIFIED = "verified"
+# The refusal of a caller-supplied ``expected_content_sha256`` that contradicts
+# the handle's own version (B-VR03-01).
+B03_REASON_EXPECTED_VERSION_MISMATCH = "expected_version_mismatch"
+
 # Which object the returned bytes came from.  Only "handle" is reachable today:
 # the design's middle tier reads an EXISTING controlled snapshot of the source
 # bytes, and this repository has no such object (every `snapshot` in it is a
@@ -294,6 +302,9 @@ B03_ERROR_UNAVAILABLE = "unavailable"
 # directory rather than faked here.
 B03_BYTES_SOURCE_HANDLE = "handle"
 B03_BYTES_SOURCE_SNAPSHOT = "snapshot"
+# Named sentinel for "no bytes were produced, so there is no source to name"
+# (B-VR03-08: the refusal path used a bare "" literal).
+B03_BYTES_SOURCE_NONE = ""
 
 _BYTE_READ_CHUNK = 1024 * 1024
 
@@ -327,16 +338,29 @@ class ByteReadResult:
 
 def _inside_configured_roots(path: Path, roots: tuple[Any, ...]) -> bool:
     """B03/L05 — a locator may not lead the read path out of the configured
-    roots.  Compared on REAL paths (so a symlink that points outside its root is
-    refused before any byte is read) and case-insensitively on Windows."""
-    target = os.path.normcase(os.path.realpath(path))
+    roots.  Compared on REAL paths (so a symlink or a junction that points
+    outside its root is refused before any byte is read) and case-insensitively
+    on Windows.
+
+    Containment uses ``commonpath``, not string prefixing: with a root
+    configured as a drive root, prefixing compares against ``"C:\\\\"`` and
+    refuses every file on that drive.  Hardlinks are NOT distinguished (the path
+    is inside the root and the bytes are still verified against the requested
+    digest) - recorded as a boundary rather than papered over.
+    """
+    target = os.path.normcase(os.path.normpath(os.path.realpath(path)))
     for root in roots:
         root_path = getattr(root, "path", None)
         if not root_path:
             continue
-        base = os.path.normcase(os.path.realpath(root_path))
-        if target == base or target.startswith(base + os.sep):
+        base = os.path.normcase(os.path.normpath(os.path.realpath(root_path)))
+        if target == base:
             return True
+        try:
+            if os.path.commonpath([target, base]) == base:
+                return True
+        except ValueError:
+            continue  # different drives (or mixed absolute/relative): not inside
     return False
 
 
@@ -394,13 +418,24 @@ def _read_verified_bytes(
                     return None, B03_ERROR_UNAVAILABLE, "exceeds_candidate_cap", str(read)
     except OSError as exc:
         return None, B03_ERROR_UNAVAILABLE, "read_failed", exc.__class__.__name__
+    if budget is not None and budget.cancelled:
+        # TAIL GUARD (B-VR03-04): the in-loop check runs BEFORE each read, so a
+        # cancellation that lands inside the read that ends the loop - the one
+        # returning b"" - was never seen and the bytes were handed over anyway.
+        # `_select_candidate` has the equivalent guard; this mirrors it.
+        return None, B03_ERROR_UNAVAILABLE, "cancelled", str(read)
     try:
         after = path.stat()
     except OSError as exc:
         return None, B03_ERROR_UNAVAILABLE, "read_failed", exc.__class__.__name__
     if int(after.st_size) != size or int(after.st_mtime_ns) != int(before.st_mtime_ns):
-        # The buffer may mix two revisions: refuse it even if the digest of
-        # what we happened to read looks right.
+        # The file moved under the reader.  This re-check is NOT the integrity
+        # mechanism - it can be defeated (restoring mtime with os.utime was
+        # measured by the reviewer), and whenever it fires the digest comparison
+        # below would have refused the buffer anyway.  Its job is to label the
+        # refusal precisely ("the file changed while it was being read") instead
+        # of reporting a generic mismatch.  Integrity rests on the digest of the
+        # buffer that is returned (B-VR03-06).
         return None, B03_ERROR_UNAVAILABLE, "changed_during_read", str(read)
     computed = digest.hexdigest()
     if not expected_sha256 or computed != expected_sha256:
@@ -1751,10 +1786,36 @@ class SourceResolver:
         Passing the request's ``_ReadBudget`` keeps the per-request resource
         ceiling and cancellation semantics of ``resolve``; without one the byte
         cap still applies.
+
+        ``expected_content_sha256`` is PINNED to the handle (B-VR03-01): it may
+        only repeat the version the handle already names.  Anything else is
+        refused, because otherwise the result would carry one version's
+        ``document_id`` next to another version's bytes and digest while calling
+        itself verified - the same fail-closed rule ``reader.resolve_handle``
+        and ``reader.bundle`` apply to this parameter.
         """
+        if not isinstance(handle, SourceHandle):
+            raise TypeError("handle must be a SourceHandle")
         expected = expected_content_sha256 or handle.content_sha256
         read_at = datetime.now(UTC).isoformat()
+        if expected_content_sha256 and expected_content_sha256 != handle.content_sha256:
+            return ByteReadResult(
+                document_id=handle.document_id,
+                content_sha256=expected,
+                status=B03_ERROR_UNAVAILABLE,
+                reason=B03_REASON_EXPECTED_VERSION_MISMATCH,
+                detail=str(handle.content_sha256)[:12],
+                data=None,
+                byte_size=0,
+                bytes_source=B03_BYTES_SOURCE_NONE,
+                read_at=read_at,
+            )
         path = Path(str(handle.canonical_path))
+        # Read the path the containment check RESOLVED, not the raw locator: the
+        # check and the open must look at the same object, otherwise a link
+        # swapped in between them is never seen (B-VR03-07).  The hardlink case
+        # stays a registered limitation - realpath does not resolve hardlinks.
+        resolved = Path(os.path.realpath(path))
         if not _inside_configured_roots(path, tuple(self.catalog.config.roots)):
             # The reason code is the ALREADY REGISTERED one for this meaning
             # ("artifact path outside allowed roots"), not a new one: the
@@ -1762,7 +1823,8 @@ class SourceResolver:
             # ``reason="..."`` literal, and adding a code needs a registry edit
             # plus a taxonomy-version bump in observability.py, which is outside
             # this step's file scope.  The B03 plan's working name for this
-            # outcome was `path_outside_configured_roots`.
+            # outcome was `path_outside_configured_roots`, and B-VR03-05 asks for
+            # the borrow to be recorded in the taxonomy follow-up (registered).
             return ByteReadResult(
                 document_id=handle.document_id,
                 content_sha256=expected,
@@ -1771,30 +1833,35 @@ class SourceResolver:
                 detail=str(handle.canonical_location_id),
                 data=None,
                 byte_size=0,
-                bytes_source="",
+                bytes_source=B03_BYTES_SOURCE_NONE,
                 read_at=read_at,
             )
         data, status, reason, detail = _read_verified_bytes(
-            path, expected_sha256=expected, budget=budget
+            resolved, expected_sha256=expected, budget=budget
         )
         return ByteReadResult(
             document_id=handle.document_id,
             content_sha256=expected,
-            status=status or "verified",
+            status=status or B03_BYTES_VERIFIED,
             reason=reason,
             detail=detail,
             data=data,
             byte_size=len(data) if data is not None else 0,
-            bytes_source=B03_BYTES_SOURCE_HANDLE if data is not None else "",
+            bytes_source=(
+                B03_BYTES_SOURCE_HANDLE if data is not None else B03_BYTES_SOURCE_NONE
+            ),
             read_at=read_at,
         )
 
 
 __all__ = [
     "B03_BYTES_SOURCE_HANDLE",
+    "B03_BYTES_SOURCE_NONE",
     "B03_BYTES_SOURCE_SNAPSHOT",
+    "B03_BYTES_VERIFIED",
     "B03_ERROR_NOT_FOUND",
     "B03_ERROR_UNAVAILABLE",
+    "B03_REASON_EXPECTED_VERSION_MISMATCH",
     "ByteReadResult",
     "ResolutionResult",
     "ResolutionStatus",
