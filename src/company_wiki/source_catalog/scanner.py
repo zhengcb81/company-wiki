@@ -1234,6 +1234,84 @@ def root_fingerprint(candidates: list[Any]) -> dict[str, Any]:
     return {"files": sorted(files)}
 
 
+R4_PROVENANCE_KEY = "r4_provenance"
+R4_PROVENANCE_SCHEMA_VERSION = "1.0"
+
+
+def _short_value_hash(value: Any) -> str:
+    """12-hex digest of a value's canonical JSON — provenance records the fact
+    that a value was written, never the value's text (B-DR5-05)."""
+    payload = json.dumps(value, ensure_ascii=False, sort_keys=True, default=str)
+    return hashlib.sha256(payload.encode("utf-8")).hexdigest()[:12]
+
+
+def _merge_metadata_json(
+    stored_json: Any,
+    incoming: dict[str, Any],
+    *,
+    prefer_new: bool,
+    source_id: str | None,
+    observed_at: str,
+) -> str:
+    """Read-modify-write the ``documents.metadata_json`` column (B05).
+
+    Never replaces the column wholesale: keys written by other modules (for
+    example the ``prompt_injection_review`` receipt that ``resolver`` exposes as
+    ``prompt_injection_status``) survive every merge, and the reserved
+    ``r4_provenance`` block records, per field, which source wrote the value,
+    when, and a short hash of it.  Raw text fragments are never stored here.
+    """
+    try:
+        stored = json.loads(stored_json or "{}")
+        if not isinstance(stored, dict):
+            stored = {}
+    except json.JSONDecodeError:
+        stored = {}
+    # Business selection stays exactly what it was before B05: on `prefer_new`
+    # the incoming capture wins, otherwise the stored values stay untouched.
+    # What changes is that the column is never REPLACED: unrelated keys (for
+    # example another module's `prompt_injection_review` receipt) survive, and
+    # the reserved provenance block is (re)written.
+    merged = dict(stored)
+    if prefer_new:
+        merged.update(incoming)
+    provenance = stored.get(R4_PROVENANCE_KEY)
+    if not isinstance(provenance, dict):
+        provenance = {}
+    fields = provenance.get("fields")
+    if not isinstance(fields, dict):
+        fields = {}
+    # Which capture supplied the business metadata: the incoming one when
+    # `prefer_new` fired, otherwise whatever the previous record names (None
+    # means "written before provenance existed" - recorded as unknown, never
+    # guessed).
+    winner_source = source_id if prefer_new else None
+    for container in ("acquisition", "dayu_meta"):
+        payload = merged.get(container)
+        if isinstance(payload, dict):
+            for key, value in payload.items():
+                name = f"{container}.{key}"
+                previous = fields.get(name) if isinstance(fields.get(name), dict) else {}
+                fields[name] = {
+                    "source_id": winner_source if prefer_new else previous.get("source_id"),
+                    "observed_at": observed_at if prefer_new else previous.get("observed_at"),
+                    "value_hash": _short_value_hash(value),
+                }
+    for key in ("root_id", "group_key", "scanner_version"):
+        if key in merged:
+            previous = fields.get(key) if isinstance(fields.get(key), dict) else {}
+            fields[key] = {
+                "source_id": winner_source if prefer_new else previous.get("source_id"),
+                "observed_at": observed_at if prefer_new else previous.get("observed_at"),
+                "value_hash": _short_value_hash(merged[key]),
+            }
+    merged[R4_PROVENANCE_KEY] = {
+        "schema_version": R4_PROVENANCE_SCHEMA_VERSION,
+        "fields": fields,
+    }
+    return canonical_json(merged)
+
+
 def _merge_document_row(
     connection: Any,
     *,
@@ -1251,11 +1329,11 @@ def _merge_document_row(
 ) -> None:
     """Write ONE document row: insert, retirement, winner merge or touch.
 
-    Extracted verbatim from ``scan_catalog`` so that step B05 can extend the
-    merge without adding decision points to a function that is ALREADY at its
-    frozen complexity ceiling (FC-1204 ratchet: scanner.py 140/140).  The
-    behaviour of this function is the behaviour the loop had inline before the
-    extraction — the extraction itself changes nothing.
+    Extracted from ``scan_catalog`` (step B05) so the metadata merge can grow
+    and be tested on its own.  The decision table is unchanged from the inline
+    version except for the merge itself: ``metadata_json`` is now produced by
+    ``_merge_metadata_json`` (read-modify-write with the reserved provenance
+    block) instead of being replaced wholesale on ``prefer_new``.
     """
     if existing_document is None:
         connection.execute(
@@ -1323,10 +1401,12 @@ def _merge_document_row(
                 and bool(new_inner.get("provider_document_id"))
             )
         )
-        update_metadata = (
-            canonical_json(document_metadata)
-            if prefer_new
-            else existing_document["metadata_json"]
+        update_metadata = _merge_metadata_json(
+            existing_document["metadata_json"],
+            document_metadata,
+            prefer_new=prefer_new,
+            source_id=primary.source_id if primary else None,
+            observed_at=scan_time,
         )
         connection.execute(
             """UPDATE documents SET primary_source_id=COALESCE(?,primary_source_id),title=?,source_type=?,
