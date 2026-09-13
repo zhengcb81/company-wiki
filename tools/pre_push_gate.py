@@ -1,4 +1,4 @@
-﻿"""Pre-push gate: CI-equivalent fast checks BEFORE pushing (root-cause fix).
+"""Pre-push gate: CI-equivalent fast checks BEFORE pushing (root-cause fix).
 
 Mirrors the CI workflow's fast surface so failures are caught locally:
 
@@ -64,6 +64,8 @@ def main(argv: list[str] | None = None) -> int:
         ([sys.executable, "-m", "pytest",
           "tests/contract/test_fc1204_complexity_ratchet.py", "-q"],
          "FC-1204 complexity ratchet (CI meta-gate)", None),
+        ([sys.executable, "scripts/host_assumption_guard.py"],
+         "host assumption guard (FC-1307-a; the class that broke CI in F-B01-9)", None),
     ]
     if not args.skip_contract:
         gates.append((

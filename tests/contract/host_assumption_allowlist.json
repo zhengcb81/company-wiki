@@ -1,0 +1,30 @@
+{
+  "note": "Registered 64-hex digests for scripts/host_assumption_guard.py. A frozen digest must be HOST-INDEPENDENT to belong here: a fixture body's content hash, a synthetic placeholder, or a value whose producer excludes absolute paths. A digest computed over a payload that embeds host paths (e.g. cli._policy_export_payload, whose policy_hash changes with each root's absolute path_ref - findings F-B01-9) must NOT be registered: assert a platform-independent property instead.",
+  "registered_hashes": {
+    "cf0ac2adf9714fe003eb1d1497d678877840e35a6a6c32bc65aa7e5d0c0e1626": {
+      "where": "tests/contract/test_r4b01_field_owner_alignment.py (SHIPPED_POLICY_SHA256)",
+      "rationale": "The SHIPPED resolver-side policy export (policy.export_policy). Its payload is path-redacted by design, so the hash is identical on every host and in CI; freezing it is the point of the case. Contrast with the consumer payload (cli._policy_export_payload -> policy_2x), whose policy_hash embeds each root's absolute path_ref and is therefore NOT registered - the B01 case asserts structure and cross-export agreement for it instead.",
+      "registered_by": "author, while adding this gate (2026-09-12)"
+    },
+    "273d450887eff7c079b28f394c4831092fa3abbb81db86f2544cab425c2719d7": {
+      "where": "tests/contract/test_zr503_multi_entity_attribution.py (_CHANGJIANG_SHA256), test_zr504_page_fidelity.py, test_zr505_table_fidelity.py",
+      "rationale": "Content hash of a fixture body (a synthetic document), identical on every host.",
+      "registered_by": "author, while adding this gate (2026-09-12)"
+    },
+    "efe2ccd923b744eb69166aebf5f9b32ab7560efe3f6c44f2c6bcf4672fec1fa8": {
+      "where": "tests/contract/test_portfolio_promoter.py (SHA, with a fixed PromotionIdentity and AS_OF)",
+      "rationale": "Fixture digest for promotion identity tests; derived from fixture bytes, not from any host path.",
+      "registered_by": "author, while adding this gate (2026-09-12)"
+    },
+    "888f427abdb31cb5b284b73263d6b0aebf08f0e5e75814268cea85139857fc87": {
+      "where": "tests/acceptance/test_cw1_source_contract_receipt.py (expected announcement content_sha256)",
+      "rationale": "Fixture body digest asserted in an acceptance receipt test; host-independent.",
+      "registered_by": "author, while adding this gate (2026-09-12)"
+    },
+    "abcd1234abcd1234abcd1234abcd1234abcd1234abcd1234abcd1234abcd1234": {
+      "where": "tests/contract/test_source_catalog_artifact_reconciliation.py (SHA, interpolated into URNs)",
+      "rationale": "Synthetic placeholder digest used only to build well-formed URNs; never compared against computed bytes.",
+      "registered_by": "author, while adding this gate (2026-09-12)"
+    }
+  }
+}
