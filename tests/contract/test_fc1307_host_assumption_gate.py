@@ -106,3 +106,84 @@ def test_fc1307a_every_registered_digest_carries_a_rationale():
         assert len(digest) == 64 and digest == digest.lower(), digest
         assert entry.get("where"), digest
         assert len(entry.get("rationale", "")) > 40, digest
+
+
+def test_fc1307a_product_code_may_branch_on_the_host(tmp_path):
+    """Rule A judges TESTS only, on purpose: product code legitimately detects the
+    host (``lock.py`` reads ``/proc/stat``, ``startup.py`` probes ``C:/Windows``).
+    Widening the scan to ``src/`` would drown the gate in deliberate platform
+    branches, so that decision is pinned here."""
+    src = tmp_path / "src" / "platform_probe.py"
+    src.parent.mkdir(parents=True)
+    src.write_text(
+        'PROC = "/proc/stat"\nWIN = "C:/Windows"\nUNC = "\\\\\\\\?\\\\C:"\n',
+        encoding="utf-8",
+    )
+    rules = [item["rule"] for item in guard.scan_file(src)]
+    assert guard.RULE_PATHS not in rules, rules
+
+
+def _fake_repo(tmp_path, monkeypatch, case_body: str):
+    """A throwaway repo whose paths look real (``tests/`` in the parts), with the
+    guard's three module-level paths redirected into it.
+
+    ``resolve()`` matters: the guard compares a resolved violation path against
+    REPO, so a tmp root that is itself a symlink (macOS ``/tmp``) would otherwise
+    make the comparison raise instead of report - a portability landmine inside
+    the portability gate.
+    """
+    repo = (tmp_path / "repo").resolve()
+    contract = repo / "tests" / "contract"
+    contract.mkdir(parents=True)
+    case = repo / "tests" / "baselined_case.py"
+    case.write_text(case_body, encoding="utf-8")
+    baseline = contract / "host_assumption_baseline.json"
+    registry = contract / "host_assumption_allowlist.json"
+    monkeypatch.setattr(guard, "REPO", repo)
+    monkeypatch.setattr(guard, "BASELINE", baseline)
+    monkeypatch.setattr(guard, "REGISTRY", registry)
+    return repo, case, baseline
+
+
+def test_fc1307a_the_ratchet_is_value_level_not_file_level(tmp_path, monkeypatch, capsys):
+    """The baseline must excuse the EXACT recorded offender only.  A file-keyed
+    baseline would let a fresh defect hide in an already-baselined file - which is
+    how a ratchet silently becomes a rubber stamp."""
+    repo, case, baseline = _fake_repo(
+        tmp_path, monkeypatch, 'HOST = "C:/Windows/win.ini"\n'
+    )
+    assert guard.main(["--roots", "tests"]) == 1, "an unbaselined path must fail"
+    capsys.readouterr()  # drain the violation report: only the NEXT call's stdout is JSON
+
+    assert guard.main(["--emit-baseline", "--roots", "tests"]) == 0
+    baseline.write_text(capsys.readouterr().out, encoding="utf-8")
+    assert guard.main(["--roots", "tests"]) == 0, "the recorded offender is accepted"
+
+    case.write_text(
+        'HOST = "C:/Windows/win.ini"\nOTHER = "/etc/passwd"\n', encoding="utf-8"
+    )
+    assert guard.main(["--roots", "tests"]) == 1, (
+        "a SECOND, different absolute path in the same file is a new violation"
+    )
+    assert repo.is_dir()
+
+
+def test_fc1307a_emit_baseline_only_prints_and_never_writes(tmp_path, monkeypatch, capsys):
+    """Regression test for the defect that made the gate itself fail CI: the guard
+    used to have a mode that WROTE the baseline, which put it under the frozen
+    writer-CLI inventory.  A checker must not write into the tree it checks, so the
+    emitting mode prints and leaves every byte (and the file list) alone."""
+    repo, _case, baseline = _fake_repo(
+        tmp_path, monkeypatch, 'HOST = "C:/Windows/win.ini"\n'
+    )
+    baseline.write_text('{"baseline": []}\n', encoding="utf-8")
+    before_files = sorted(p.relative_to(repo).as_posix() for p in repo.rglob("*"))
+    before_bytes = baseline.read_bytes()
+
+    assert guard.main(["--emit-baseline", "--roots", "tests"]) == 0
+
+    assert baseline.read_bytes() == before_bytes, "the emitting mode modified the tree"
+    assert sorted(p.relative_to(repo).as_posix() for p in repo.rglob("*")) == before_files
+    payload = json.loads(capsys.readouterr().out)
+    assert payload["baseline"], "the emitted baseline must contain the offender"
+
