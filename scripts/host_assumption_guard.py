@@ -20,7 +20,15 @@ paths (the fix notes do), so only runtime string literals count.
 Usage:
     python scripts/host_assumption_guard.py            # report and exit 1 on violations
     python scripts/host_assumption_guard.py --report   # report only (exit 0)
+    python scripts/host_assumption_guard.py --emit-baseline   # print the baseline JSON
     python scripts/host_assumption_guard.py --roots tests src
+
+READ-ONLY by design: a checker that rewrites the tree it is checking is a smell, and
+`tests/unit/test_writer_freeze.py` requires every writing script CLI in this
+directory to carry the legacy-writer freeze - a gate has no business holding that
+authorization.  To accept today's offenders as the ratchet baseline, run
+`--emit-baseline`, paste the output into
+``tests/contract/host_assumption_baseline.json``, and say why in the commit.
 """
 
 from __future__ import annotations
@@ -138,9 +146,9 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--roots", nargs="*", default=list(DEFAULT_ROOTS))
     parser.add_argument("--report", action="store_true", help="report only, never fail")
-    parser.add_argument("--write-baseline", action="store_true",
-                        help="record the CURRENT violations as the ratchet baseline "
-                             "(pre-existing offenders only; new ones still fail)")
+    parser.add_argument("--emit-baseline", action="store_true",
+                        help="PRINT the current violations as a baseline JSON for a human to "
+                             "paste (this script never writes into the tree)")
     args = parser.parse_args(argv)
 
     registry = load_json(REGISTRY, {"registered_hashes": {}})
@@ -159,27 +167,23 @@ def main(argv: list[str] | None = None) -> int:
         rel = Path(item["file"]).resolve().relative_to(REPO).as_posix()
         return f"{item['rule']}|{rel}|{item['value'][:40]}"
 
-    if args.write_baseline:
+    if args.emit_baseline:
         recorded = sorted(
             {key(item) for item in violations if item["rule"] in (RULE_PATHS, RULE_CAPABILITY)}
             | baseline
         )
-        BASELINE.write_text(
-            json.dumps(
-                {
-                    "note": ("Ratchet baseline for the host-assumption guard.  These entries are "
-                             "PRE-EXISTING: absolute-path literals in tests that are deliberate "
-                             "inputs (a path that must be rejected) and capability uses that already "
-                             "skip.  The gate fails on anything NEW, so a new absolute path or an "
-                             "un-skipped capability use must be fixed rather than silently added."),
-                    "baseline": recorded,
-                },
-                ensure_ascii=False,
-                indent=2,
-            ) + "\n",
-            encoding="utf-8",
-        )
-        print(f"wrote {BASELINE.relative_to(REPO).as_posix()} with {len(recorded)} entries")
+        print(json.dumps(
+            {
+                "note": ("Ratchet baseline for the host-assumption guard.  These entries are "
+                         "PRE-EXISTING: absolute-path literals in tests that are deliberate "
+                         "inputs (a path that must be rejected) and capability uses that already "
+                         "skip.  The gate fails on anything NEW, so a new absolute path or an "
+                         "un-skipped capability use must be fixed rather than silently added."),
+                "baseline": recorded,
+            },
+            ensure_ascii=False,
+            indent=2,
+        ))
         return 0
 
     new: list[dict[str, Any]] = []
