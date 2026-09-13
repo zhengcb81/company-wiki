@@ -47,10 +47,12 @@ repos:
         pass_filenames: false
         always_run: true
 
-      # FC-1307-a: the three defect classes that passed every local hook and broke
-      # CI (findings F-B01-9) - a host path baked into a test, a capability used
-      # without a skip, a machine-scoped digest frozen as a constant.  The guard
-      # scans the whole tree, so it takes no filenames.
+      # FC-1307-a: the host-assumption classes that passed every local hook and
+      # broke CI (findings F-B01-9) - a host path baked into a test, an unguarded
+      # capability call, a machine-scoped digest frozen as a constant.  It scans
+      # tests/ and src/ (not the whole tree) and takes no filenames; rule 1 is
+      # scoped to tests/ on purpose, see the script's docstring for the honest
+      # scope (it does NOT cover assertion-layer host dependence).
       - id: host-assumption-guard
         name: host assumption guard (FC-1307-a, mirrors the CI contract test)
         entry: python scripts/host_assumption_guard.py
