@@ -6,8 +6,18 @@ Mirrors the CI workflow's fast surface so failures are caught locally:
   2. compileall src scripts tests                        (CI WU-7.1)
   3. config_doctor                                       (CI WU-7.1)
   4. FC-1204 complexity ratchet                          (CI meta-gate)
-  5. Section-extractor + binding + observation contract tests
+  5. host-assumption guard                              (CI meta-gate, FC-1307-a)
+  6. Section-extractor + binding + observation contract tests
      (the surfaces most often broken by cross-repo changes)
+     plus the META tests about our own tooling: the frozen writer
+     inventory (tests/unit/test_writer_freeze.py) and the host-assumption
+     guard's own regression test.
+
+Step 6's meta pair is the fix for the second-order F-B01-9 lesson: on CI run
+34751519232 the NEW guard step itself failed `test_writer_freeze.py`, a test
+class the local gate never ran - the gate must run the tests that judge the
+gate.  Add a new `scripts/*.py` CLI and this step tells you locally whether it
+needs the legacy-writer freeze.
 
 Exit non-zero on the first red check.  Full pytest + coverage ratchet
 stay in CI (too slow for a pre-push gate on Windows).
@@ -73,8 +83,10 @@ def main(argv: list[str] | None = None) -> int:
              "tests/contract/test_source_catalog_section_extractor.py",
              "tests/contract/test_fc906a_producer_binding_metadata.py",
              "tests/contract/test_legacy_observation.py",
-             "tests/contract/test_zr506_section_chunk_fact.py"],
-            "contract tests (extractor + binding + observation + chunk)",
+             "tests/contract/test_zr506_section_chunk_fact.py",
+             "tests/unit/test_writer_freeze.py",
+             "tests/contract/test_fc1307_host_assumption_gate.py"],
+            "contract tests (extractor + binding + observation + chunk) + meta gates",
             None,
         ))
 
