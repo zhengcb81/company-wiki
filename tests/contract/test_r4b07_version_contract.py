@@ -17,6 +17,11 @@ conversion and any consumer `companies` fallback belong to phase C):
      the phase-B run directory, which compares the payload byte for byte against
      the phase-A frozen revision and reports ``identical``.
 
+Matrix items: L11 (phase-B acceptance map, reverse-coverage
+L12 (query zero-write) has NO case here on purpose: its independent
+observation belongs to B08 (B-VR07-06), and this file only signs the wiki-side
+contract.  section; step B07 claims these, and the cases below are what exercises them).
+
 Product code is NOT modified by this file (file-scope F10: new tests only).
 """
 

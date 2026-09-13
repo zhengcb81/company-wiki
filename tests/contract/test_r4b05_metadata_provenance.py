@@ -15,7 +15,10 @@ captures of the same content-addressed document.  It must
      ``json_extract(metadata_json, '$.acquisition.fiscal_year')`` keep working.
 
 Cases below are RED until the merge implements the reserved key; they are the
-F10 landing point for the step.  Product code is NOT modified by this file.
+F10 landing point for the step.  Matrix items: L08 (phase-B acceptance map, reverse-coverage
+section; step B05 claims these, and the cases below are what exercises them).
+
+Product code is NOT modified by this file.
 """
 
 from __future__ import annotations

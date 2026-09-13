@@ -54,6 +54,9 @@ A-side frozen fixtures (determinism / sql pushdown) build catalogs whose files
 deliberately do not contain the bytes their metadata claims, which is why
 clause 2 exists at all; clause 1 is a strict improvement over pre-B02.
 
+Matrix items: L01, L02, L03, L04 (phase-B acceptance map, reverse-coverage
+section; step B02 claims these, and the cases below are what exercises them).
+
 Product code is NOT modified by this file (file-scope F10: new tests only).
 """
 

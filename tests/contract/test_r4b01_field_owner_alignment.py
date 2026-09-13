@@ -20,6 +20,9 @@ set equals the resolver's, on configs where an explicit flag contradicts the
 kind list.  B01's first version froze only the resolver-side hash and called it
 cross-repo, which review B-VR01-01 falsified.
 
+Matrix items: L04, L11 (phase-B acceptance map, reverse-coverage
+section; step B01 claims these, and the cases below are what exercises them).
+
 Product code is NOT modified by this file (file-scope F10: new tests only).
 """
 

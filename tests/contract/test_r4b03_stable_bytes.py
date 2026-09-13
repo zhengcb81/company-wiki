@@ -19,6 +19,9 @@ Design §B03, with the rule list of
   outside the configured roots (no symlink escape / stale absolute path), and
   never a partial buffer.
 
+Matrix items: L05, L06 (phase-B acceptance map, reverse-coverage
+section; step B03 claims these, and the cases below are what exercises them).
+
 Product code is NOT modified by this file (file-scope F10: new tests only).
 """
 

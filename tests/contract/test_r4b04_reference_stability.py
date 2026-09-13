@@ -24,6 +24,9 @@ Acceptance covered here:
        loses its locator.  That file is outside this step's allowed set, so the
        behaviour is PINNED here and registered as a finding instead of fixed.
 
+Matrix items: L03, L07 (phase-B acceptance map, reverse-coverage
+section; step B04 claims these, and the cases below are what exercises them).
+
 Product code is NOT modified by this file (file-scope F10: new tests only).
 """
 

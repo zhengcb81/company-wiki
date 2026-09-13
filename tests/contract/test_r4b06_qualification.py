@@ -16,6 +16,9 @@ Design §B06 (with decision S-13 and the F-B01-7 acceptance item):
 * B06 only provides FACTS: the consumer's own permission gate
   (``revenue-forecast/scripts/company_wiki_source.py``) is not changed here.
 
+Matrix items: L09, L10 (phase-B acceptance map, reverse-coverage
+section; step B06 claims these, and the cases below are what exercises them).
+
 Product code is NOT modified by this file (file-scope F10: new tests only).
 """
 
