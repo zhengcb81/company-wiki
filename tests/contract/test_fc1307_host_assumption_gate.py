@@ -184,6 +184,22 @@ def test_fc1307a_a_module_level_pytestmark_skipif_does_exempt(tmp_path):
     assert guard.scan_file(_write(tmp_path, "module_marked.py", source)) == []
 
 
+def test_fc1307a_a_unittest_skiptest_guard_does_exempt(tmp_path):
+    """The false positive measured before extending the gate to filing-fetch: a
+    unittest-style case guards its symlink call with
+    ``try/except OSError: self.skipTest(...)`` and must therefore be clean."""
+    source = (
+        "import unittest\nfrom pathlib import Path\n\n\n"
+        "class T(unittest.TestCase):\n"
+        "    def test_symlink_escape_rejected(self):\n"
+        "        link = Path('a')\n"
+        "        try:\n            link.symlink_to('b')\n"
+        "        except (OSError, NotImplementedError) as exc:\n"
+        "            self.skipTest(f'cannot create symlink: {exc}')\n"
+    )
+    assert guard.scan_file(_write(tmp_path, "unittest_style.py", source)) == []
+
+
 def test_fc1307a_a_helper_called_link_is_not_a_capability(tmp_path):
     """B-VR1307-02's false positive: matching on the last dotted component flagged
     any ``link()`` helper.  Only the exact APIs count now."""

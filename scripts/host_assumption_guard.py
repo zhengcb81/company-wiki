@@ -97,8 +97,12 @@ CAPABILITY_FUNCTIONS = ("os.symlink", "os.link", "os.mkfifo")
 CAPABILITY_METHODS = ("symlink_to", "hardlink_to")
 # Guard detection is AST-level (B.VR1307-02): the WORD appearing in a comment, a
 # docstring or a variable name must not exempt a file, so only real calls and real
-# decorators count.
-SKIP_CALLS = ("pytest.skip", "pytest.importorskip")
+# decorators count.  `self.skipTest` is unittest's spelling of the same guard, and
+# leaving it out was a measured FALSE POSITIVE of the first version: filing-fetch
+# tests/test_zr405_policy_roots.py:290-293 guards its symlink call with
+# `try/except OSError: self.skipTest(...)`.
+SKIP_CALLS = ("pytest.skip", "pytest.importorskip", "self.skipTest", "self.skip_test",
+              "skipTest", "skip_test")
 SKIP_DECORATOR_ATTRS = ("skipif", "skip")
 MODULE_SKIP_NAMES = ("pytestmark",)
 
