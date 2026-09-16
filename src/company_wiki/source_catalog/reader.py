@@ -176,6 +176,13 @@ class ReadOnlyCatalogReader:
                 f"cannot open catalog read-only: {database_path}: {exc}"
             ) from exc
         self._connection.row_factory = sqlite3.Row
+        # B-VR05M-03: the driver must not be the thing that crashes on undecodable TEXT.
+        # Without this the read path raised `sqlite3.OperationalError: Could not decode
+        # to UTF-8 column ...` from inside the fetch, i.e. before any caller guard - so
+        # the envelope was fixed first and the read side still died on the same row.
+        from .store import _tolerate_undecodable_text  # local import: avoids a cycle
+
+        _tolerate_undecodable_text(self._connection)
         # The connection can only ever read; a write attempt raises
         # sqlite3.OperationalError('attempt to write a readonly database').
         self._connection.execute("PRAGMA query_only=ON")

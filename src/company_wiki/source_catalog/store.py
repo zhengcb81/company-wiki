@@ -917,6 +917,20 @@ def read_pipeline_status(database_path: Path) -> dict[str, Any]:
         return _empty_pipeline_status(error=f"{type(exc).__name__}: {str(exc)[:500]}")
 
 
+def _tolerate_undecodable_text(connection: sqlite3.Connection) -> None:
+    """Decode TEXT with replacement characters instead of raising from the driver.
+
+    B-VR05M-03 (P1): with bytes that are not valid UTF-8 in a TEXT column, the sqlite3
+    driver raises `sqlite3.OperationalError: Could not decode to UTF-8 column ...` from
+    INSIDE the fetch - before any caller's own guard can run, so catching
+    UnicodeDecodeError in the callers was not enough (measured).  A catalog that must
+    never crash on data decodes visibly: the replacement character ends up in the value,
+    and the JSON guard upstream reports the document as unreadable metadata instead of
+    the process dying.
+    """
+    connection.text_factory = lambda raw: raw.decode("utf-8", "replace")
+
+
 class CatalogStore:
     def __init__(self, database_path: Path):
         if not isinstance(database_path, Path):
@@ -930,6 +944,7 @@ class CatalogStore:
 
     def _connect(self) -> sqlite3.Connection:
         connection = sqlite3.connect(self.database_path, timeout=30.0)
+        _tolerate_undecodable_text(connection)
         connection.row_factory = sqlite3.Row
         connection.execute("PRAGMA foreign_keys=ON")
         connection.execute("PRAGMA busy_timeout=30000")

@@ -78,6 +78,24 @@ def _location_order_key(location: dict[str, Any]) -> tuple[int, str, str, str]:
     )
 
 
+def _read_shared_metadata(raw: Any) -> dict[str, Any]:
+    """Parse the shared ``documents.metadata_json`` column without ever raising.
+
+    The column is written by several modules, so its shape is not this module's to
+    assume (work package b05-read-side-malformed-columns).  Malformed content becomes an
+    empty object here; the *state* is reported by the caller that also reads the reserved
+    provenance key (`metadata_problem="unreadable_metadata"`), which is how a malformed
+    document is distinguished from one that simply carries no metadata.  Fixes
+    B-VR05M-04's `SourceCatalog.query()` site, which raised JSONDecodeError for invalid
+    JSON and for the empty string.
+    """
+    try:
+        payload = json.loads(raw or "{}")
+    except (TypeError, ValueError, RecursionError):
+        return {}
+    return payload if isinstance(payload, dict) else {}
+
+
 def _utc_now() -> str:
     """UTC wall-clock stamp for bundle queries without an explicit ``now``."""
     from datetime import datetime, timezone
@@ -316,8 +334,18 @@ class SourceCatalog:
         # advisory json_extract filter narrows the slice so a 100-cap cannot
         # shadow an older-period request. The resolver's Python _fiscal_year
         # gate remains authoritative.
+        #
+        # json_valid() guard (B-VR05M-01, P0): without it, json_extract on a malformed
+        # value raises `sqlite3.OperationalError: malformed JSON` IN SQL, before the
+        # Python guard below can turn it into a state - measured for `{not json` AND for
+        # the empty string.  Malformed rows are deliberately KEPT (`NOT json_valid(...)`)
+        # rather than filtered out: hiding a document whose metadata is unreadable would
+        # make the blocked state unreachable for exactly the filtered queries that
+        # requested a period, i.e. it would re-open the gap this package repairs.  The
+        # caller sees the document, marked blocked.
         fiscal_clause = (
-            "AND (json_extract(d.metadata_json, '$.acquisition.fiscal_year') = ?"
+            "AND (NOT json_valid(d.metadata_json)"
+            " OR json_extract(d.metadata_json, '$.acquisition.fiscal_year') = ?"
             " OR json_extract(d.metadata_json, '$.dayu_meta.fiscal_year') = ?)"
             if fiscal_year is not None
             else ""
@@ -398,7 +426,10 @@ class SourceCatalog:
             provenance_fields: dict[str, Any] = {}
             try:
                 payload = json.loads(row["metadata_json"] or "{}")
-            except (TypeError, ValueError):
+            except (TypeError, ValueError, RecursionError):
+                # RecursionError is a RuntimeError, NOT a ValueError (B-VR05M-02):
+                # deeply nested JSON raised straight past the first version of this
+                # guard, so "never a crash" was literally false for that shape.
                 payload = None
             if not isinstance(payload, dict):
                 metadata_problem = "unreadable_metadata"
@@ -696,7 +727,7 @@ class SourceCatalog:
                     "document_kind": document["document_kind"],
                     "published_date": document["published_date"],
                     "source_status": document["source_status"],
-                    "metadata": json.loads(document["metadata_json"]),
+                    "metadata": _read_shared_metadata(document["metadata_json"]),
                     "entities": [dict(item) for item in entities],
                     "locations": locations,
                     **self._duplicate_summary(locations),

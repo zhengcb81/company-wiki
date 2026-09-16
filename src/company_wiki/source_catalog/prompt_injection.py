@@ -156,5 +156,11 @@ def read_prompt_injection_review(
         if receipt.get("status") not in PROMPT_INJECTION_REVIEW_STATUSES:
             return None
         return receipt
-    except json.JSONDecodeError:
+    except (json.JSONDecodeError, TypeError, RecursionError, UnicodeDecodeError):
+        # B-VR05M-03 (P1): the shared column is written by several modules and can be
+        # malformed in more ways than one.  Catching only JSONDecodeError let a
+        # non-UTF-8 byte sequence - and deeply nested JSON, since RecursionError is a
+        # RuntimeError - escape this function, which the envelope calls BEFORE the
+        # conflict check, so the read side said "blocked" while the envelope crashed on
+        # the same document.  A malformed receipt is not-reviewed, never a crash.
         return None

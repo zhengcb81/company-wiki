@@ -814,7 +814,9 @@ def _metadata_conflict_reason(store: Any, document_id: str) -> str:
         return ""
     try:
         payload = json.loads(row["metadata_json"] or "{}")
-    except (TypeError, ValueError):
+    except (TypeError, ValueError, RecursionError):
+        # RecursionError is a RuntimeError and escaped the first version of this guard
+        # (B-VR05M-02): a deeply nested payload raised out of the envelope builder.
         return "shared metadata column is not readable JSON"
     if not isinstance(payload, dict):
         return "shared metadata column is not a JSON object"

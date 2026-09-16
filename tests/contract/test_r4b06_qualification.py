@@ -398,6 +398,9 @@ def test_r4b06_malformed_shared_metadata_blocks_instead_of_staying_silent(tmp_pa
         "{not json",
         '{"r4_provenance": "not an object"}',
         '{"r4_provenance": {"fields": []}}',
+        # RecursionError is a RuntimeError and escaped the first version of the guard
+        # (B-VR05M-02): valid JSON that json.loads cannot decode must also answer, not raise.
+        "[" * 5000,
     )
     for payload in malformed:
         reason = _metadata_conflict_reason(_Store(payload), "doc-1")
@@ -458,6 +461,69 @@ def test_r4b06_a_malformed_shared_column_blocks_the_envelope(tmp_path):
         document_kind="annual_report", source_statuses=("active",)
     )
     assert candidates and candidates[0]["metadata_status"] == "blocked", candidates
+
+
+def test_r4b06_the_prompt_injection_reader_tolerates_malformed_shapes():
+    """B-VR05M-03: this reader runs BEFORE the conflict check, so anything it raises
+    escapes the envelope.  It caught only JSONDecodeError; deep nesting (RecursionError,
+    a RuntimeError) and a non-object payload must answer "not reviewed" instead."""
+    from company_wiki.source_catalog.prompt_injection import read_prompt_injection_review
+
+    class _Store:
+        def __init__(self, payload: object):
+            self._payload = payload
+
+        def fetchone(self, sql, params=()):  # noqa: ANN001
+            # the reader indexes the row by position (`row[0]`), like sqlite3.Row would
+            return (self._payload,)
+
+    for label, payload in (
+        ("deeply nested JSON", "[" * 5000),
+        ("invalid JSON", "{not json"),
+        ("payload is a list", "[]"),
+        ("payload is None", None),
+        ("payload is bytes", b"\xff\xfe"),
+    ):
+        assert read_prompt_injection_review(_Store(payload), "doc-1") is None, label
+
+
+def test_r4b06_non_utf8_bytes_block_both_sides_not_just_the_read_side(tmp_path):
+    """B-VR05M-03 (P1): the shared column can hold bytes that are not valid UTF-8, and
+    the envelope calls the prompt-injection reader BEFORE the conflict check.  That
+    reader caught only JSONDecodeError, so the read side answered "blocked" while
+    `build_resolution_envelope` raised UnicodeDecodeError - the two sides disagreeing
+    about the same document is exactly the state this package claims to have closed.
+    (Measured later: the driver itself raised `sqlite3.OperationalError: Could not decode
+    to UTF-8 column ...`, from inside the fetch, so the tolerance had to be set on the
+    connection - store/reader - not only in the callers.)"""
+    import sqlite3
+
+    root = tmp_path / "companies"
+    _write_copy(root / "Acme" / "raw" / "financial_reports" / "annual", _sidecar())
+    catalog = _catalog(tmp_path, [_root("company_raw", root, "company_raw", 10)])
+    resolution = SourceResolver(catalog).resolve(_request())
+    assert resolution.matches, resolution.debug_trace
+    document_id = resolution.matches[0].document_id
+
+    con = sqlite3.connect(f"file:{catalog.config.database_path}?mode=rw", uri=True)
+    try:
+        con.execute(
+            "UPDATE documents SET metadata_json=CAST(? AS TEXT) WHERE document_id=?",
+            (b"\xff\xfe{not utf8}", document_id),
+        )
+        con.commit()
+    finally:
+        con.close()
+
+    envelope = build_resolution_envelope(
+        resolution, store=catalog.store, project_root=tmp_path
+    )
+    assert envelope.qualification["label"] == QUALIFICATION_BLOCKED, envelope.qualification
+    candidates = catalog.query_filing_candidates(
+        document_kind="annual_report", source_statuses=("active",)
+    )
+    assert candidates and candidates[0]["metadata_status"] == "blocked", candidates
+    assert candidates[0]["metadata_problem"] == "unreadable_metadata", candidates[0]
 
 
 def test_r4b06_an_envelope_labels_a_handle_that_carries_gaps(tmp_path):

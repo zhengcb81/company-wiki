@@ -279,6 +279,9 @@ MALFORMED_SHARED_COLUMNS = (
     ("provenance fields as a list", json.dumps({"r4_provenance": {"fields": ["title"]}})),
     ("provenance key as a list", json.dumps({"r4_provenance": ["title"]})),
     ("payload is a JSON array", json.dumps(["r4_provenance"])),
+    # RecursionError is a RuntimeError, so it escaped the first version of the guard
+    # (B-VR05M-02): 5000 nested arrays is valid JSON that json.loads cannot decode.
+    ("deeply nested JSON", "[" * 5000),
     # NOTE: a NULL column is NOT a reachable shape - `documents.metadata_json` is
     # declared NOT NULL (sqlite3.IntegrityError on an UPDATE attempt, measured), so the
     # reachable "empty" form is the empty string, which the read side maps to {}.
@@ -337,6 +340,127 @@ def test_r4b05_a_well_formed_column_reports_no_problem(tmp_path):
     )[0]
     assert candidate["metadata_status"] == "ok", candidate
     assert candidate["metadata_problem"] is None, candidate
+
+
+def test_r4b05_a_rescan_survives_a_malformed_existing_column(tmp_path):
+    """B-VR05M-04: the ingest path merges metadata on a re-scan, and it caught only
+    JSONDecodeError - so a VALID-JSON non-object payload (an array) fell through and
+    `existing_meta.get(...)` raised AttributeError inside the scanner.  A malformed
+    column means "nothing to merge", never a crash while re-indexing."""
+    companies = tmp_path / "companies"
+    _write_copy(
+        companies / "Acme" / "raw" / "financial_reports" / "annual",
+        _sidecar(),
+        "acme-2025-annual.pdf",
+    )
+    catalog = _catalog(tmp_path, _roots(("company_raw", companies, 10)))
+    catalog.scan()
+    document_id = _sole_document_id(catalog)
+
+    for label, raw in (("payload is an array", "[]"), ("deeply nested", "[" * 5000)):
+        _corrupt_metadata(catalog, document_id, raw)
+        catalog.scan()  # must not raise
+        rows = _fetchall(
+            catalog, "SELECT document_id FROM documents WHERE document_id=?", (document_id,)
+        )
+        assert rows, label
+
+
+def test_r4b05_a_field_conflict_is_named_as_such(tmp_path):
+    """B-VR05M-05 (P3): `metadata_problem="field_conflicts"` was asserted by nothing, so
+    a change that collapsed the two blocked reasons would have gone unnoticed.  A real
+    conflict must be distinguishable from an unreadable column."""
+    companies = tmp_path / "companies"
+    dropbox = tmp_path / "Dropbox" / "Stock"
+    _write_copy(
+        companies / "Acme" / "raw" / "financial_reports" / "annual",
+        _sidecar(),
+        "acme-2025-annual.pdf",
+    )
+    catalog = _catalog(
+        tmp_path,
+        _roots(("company_raw", companies, 10), ("dropbox_stock", dropbox, 10)),
+    )
+    catalog.scan()
+    _write_copy(dropbox, _sidecar(), "acme-2025-annual-restated.pdf")
+    catalog.scan()
+
+    candidate = catalog.query_filing_candidates(
+        document_kind="annual_report", source_statuses=("active",)
+    )[0]
+    assert candidate["metadata_status"] == "blocked", candidate
+    assert candidate["metadata_problem"] == "field_conflicts", candidate
+    assert candidate["conflicts"] == ["title"], candidate
+
+
+def test_r4b05_malformed_column_survives_the_fiscal_year_filter(tmp_path):
+    """B-VR05M-01 (P0): the SQL `json_extract` period filter runs BEFORE the Python
+    guard, so `query_filing_candidates(fiscal_year=...)` raised
+    `sqlite3.OperationalError: malformed JSON` for `{not json` - and even for the empty
+    string the same commit called legitimate.
+
+    The FILTERED call must now survive every shape, with the behaviour split by what the
+    filter can legitimately do:
+      * a column that is not valid JSON is kept VISIBLE and blocked (`NOT json_valid`):
+        silently dropping it would make the blocked state unreachable for exactly the
+        period queries that asked for one;
+      * a column that IS valid JSON but carries malformed provenance is simply not a
+        match for the requested period, so the filter excludes it - the pre-existing
+        filter semantics, unchanged for well-formed rows too.
+    """
+    companies = tmp_path / "companies"
+    _write_copy(
+        companies / "Acme" / "raw" / "financial_reports" / "annual",
+        _sidecar(),
+        "acme-2025-annual.pdf",
+    )
+    catalog = _catalog(tmp_path, _roots(("company_raw", companies, 10)))
+    catalog.scan()
+    document_id = _sole_document_id(catalog)
+
+    not_valid_json = (
+        ("invalid JSON", "{not json"),
+        ("deeply nested JSON", "[" * 5000),
+        ("empty string", ""),
+    )
+    for label, raw in not_valid_json:
+        _corrupt_metadata(catalog, document_id, raw)
+        candidates = catalog.query_filing_candidates(
+            document_kind="annual_report", source_statuses=("active",), fiscal_year=2025
+        )
+        assert candidates, f"{label}: the unreadable document vanished from the result"
+        if raw == "":
+            assert candidates[0]["metadata_status"] == "ok", (label, candidates[0])
+        else:
+            assert candidates[0]["metadata_status"] == "blocked", (label, candidates[0])
+
+    valid_json_malformed_provenance = (
+        ("provenance fields as a list", json.dumps({"r4_provenance": {"fields": ["title"]}})),
+        ("provenance key as a list", json.dumps({"r4_provenance": ["title"]})),
+        ("payload is a JSON array", json.dumps(["r4_provenance"])),
+    )
+    for label, raw in valid_json_malformed_provenance:
+        _corrupt_metadata(catalog, document_id, raw)
+        candidates = catalog.query_filing_candidates(
+            document_kind="annual_report", source_statuses=("active",), fiscal_year=2025
+        )
+        assert candidates == [], f"{label}: a document with no matching period was returned"
+        # ... and without the period filter it is visible and blocked (other cases)
+        unfiltered = catalog.query_filing_candidates(
+            document_kind="annual_report", source_statuses=("active",)
+        )
+        assert unfiltered and unfiltered[0]["metadata_status"] == "blocked", (label, unfiltered)
+
+    # the period filter still filters a WELL-FORMED column by period
+    _corrupt_metadata(
+        catalog, document_id, json.dumps({"acquisition": {"fiscal_year": 2024}})
+    )
+    assert (
+        catalog.query_filing_candidates(
+            document_kind="annual_report", source_statuses=("active",), fiscal_year=2025
+        )
+        == []
+    ), "the fiscal_year filter stopped filtering"
 
 
 def test_r4b05_true_conflict_keeps_every_candidate_and_blocks_the_read_side(tmp_path):

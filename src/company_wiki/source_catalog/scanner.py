@@ -1330,7 +1330,9 @@ def _merge_metadata_json(
         stored = json.loads(stored_json or "{}")
         if not isinstance(stored, dict):
             stored = {}
-    except json.JSONDecodeError:
+    except (json.JSONDecodeError, TypeError, RecursionError):
+        # B-VR05M-02/-04: RecursionError (deeply nested JSON) is a RuntimeError and
+        # escaped the original guard, so a re-scan could still die on a malformed column.
         stored = {}
     merged = dict(stored)
     if prefer_new:
@@ -1401,7 +1403,10 @@ def _previous_provenance_fields(stored_json: Any) -> dict[str, Any]:
     container)."""
     try:
         stored = json.loads(stored_json or "{}")
-    except json.JSONDecodeError:
+    except (json.JSONDecodeError, TypeError, RecursionError):
+        # B-VR05M-04/-02: RecursionError is a RuntimeError (deeply nested JSON) and
+        # TypeError covers a non-string payload, so catching only JSONDecodeError let a
+        # re-scan die here.  A malformed column has no previous provenance to report.
         return {}
     if not isinstance(stored, dict):
         return {}
@@ -1690,8 +1695,14 @@ def _merge_document_row(
         existing_meta = {}
         try:
             existing_meta = json.loads(existing_document["metadata_json"] or "{}")
-        except json.JSONDecodeError:
-            pass
+        except (json.JSONDecodeError, TypeError, RecursionError):
+            # B-VR05M-04: only JSONDecodeError was caught, so a VALID-JSON non-object
+            # payload (e.g. an array) fell through and `existing_meta.get(...)` raised
+            # AttributeError during a re-scan.  Malformed means "no mergeable metadata",
+            # never a crash in the ingest path.
+            existing_meta = {}
+        if not isinstance(existing_meta, dict):
+            existing_meta = {}
         existing_inner = existing_meta.get("dayu_meta") or existing_meta.get("acquisition") or {}
         new_inner = document_metadata.get("dayu_meta") or document_metadata.get("acquisition") or {}
         # Phase 16.5: when the same content-addressed document is
