@@ -798,9 +798,12 @@ def _metadata_conflict_reason(store: Any, document_id: str) -> str:
     same fact the read side reports as ``metadata_status="blocked"``.
 
     The shared column is written by several modules, so its shape is not this
-    function's to assume: a non-object payload, a non-object reserved key or a
-    non-object field record mean "no readable conflict evidence", never a crash
-    while building a response.
+    function's to assume.  MALFORMED content is a reason, not silence
+    (b05-read-side-malformed-columns, B-VR06-02's second half): this function used to
+    answer "no conflict evidence" for unparseable JSON, a non-object payload or a
+    non-object ``fields``, which made the envelope label the document
+    ``verified_input`` while the read side raised on the very same row - the two sides
+    disagreed and this side was the fail-open one.  Both now say blocked.
     """
     if store is None or not document_id:
         return ""
@@ -812,13 +815,19 @@ def _metadata_conflict_reason(store: Any, document_id: str) -> str:
     try:
         payload = json.loads(row["metadata_json"] or "{}")
     except (TypeError, ValueError):
-        return ""
+        return "shared metadata column is not readable JSON"
     if not isinstance(payload, dict):
-        return ""
+        return "shared metadata column is not a JSON object"
     reserved = payload.get(R4_PROVENANCE_KEY)
-    fields = reserved.get("fields") if isinstance(reserved, dict) else None
-    if not isinstance(fields, dict):
+    if reserved is None:
         return ""
+    if not isinstance(reserved, dict):
+        return "reserved provenance key is not an object"
+    fields = reserved.get("fields")
+    if fields is None:
+        return ""
+    if not isinstance(fields, dict):
+        return "reserved provenance fields are not an object"
     conflicted = sorted(
         str(name)
         for name, record in fields.items()

@@ -258,6 +258,87 @@ def test_r4b05_merge_without_prefer_new_still_records_provenance(tmp_path):
 # ---------------------------------------------------------------------------
 
 
+def _corrupt_metadata(catalog, document_id: str, raw: str | None) -> None:
+    """Overwrite the shared column in the TEMP catalog (never a production catalog).
+
+    The column is written by several modules, so a caller-visible malformed shape is a
+    legitimate input to test - that is exactly the case B-VR06-02's second half found
+    (work package b05-read-side-malformed-columns)."""
+    con = sqlite3.connect(f"file:{catalog.config.database_path}?mode=rw", uri=True)
+    try:
+        con.execute(
+            "UPDATE documents SET metadata_json=? WHERE document_id=?", (raw, document_id)
+        )
+        con.commit()
+    finally:
+        con.close()
+
+
+MALFORMED_SHARED_COLUMNS = (
+    ("invalid JSON", "{not json"),
+    ("provenance fields as a list", json.dumps({"r4_provenance": {"fields": ["title"]}})),
+    ("provenance key as a list", json.dumps({"r4_provenance": ["title"]})),
+    ("payload is a JSON array", json.dumps(["r4_provenance"])),
+    # NOTE: a NULL column is NOT a reachable shape - `documents.metadata_json` is
+    # declared NOT NULL (sqlite3.IntegrityError on an UPDATE attempt, measured), so the
+    # reachable "empty" form is the empty string, which the read side maps to {}.
+    ("empty string", ""),
+)
+
+
+def test_r4b05_malformed_shared_column_is_blocked_never_a_crash(tmp_path):
+    """B-VR06-02's second half: the READ side must not assume the shared column's shape.
+
+    Before this case `query_filing_candidates` raised straight out of the read path -
+    JSONDecodeError for invalid JSON, AttributeError when `r4_provenance.fields` was a
+    list (and for a list payload) - so a data problem became a process failure, and the
+    read side and the B06 envelope disagreed about the same document (the envelope
+    answered "no conflict" and labelled it verified_input, the fail-open direction)."""
+    companies = tmp_path / "companies"
+    _write_copy(
+        companies / "Acme" / "raw" / "financial_reports" / "annual",
+        _sidecar(),
+        "acme-2025-annual.pdf",
+    )
+    catalog = _catalog(tmp_path, _roots(("company_raw", companies, 10)))
+    catalog.scan()
+    document_id = _sole_document_id(catalog)
+
+    for label, raw in MALFORMED_SHARED_COLUMNS:
+        _corrupt_metadata(catalog, document_id, raw)
+        candidates = catalog.query_filing_candidates(
+            document_kind="annual_report", source_statuses=("active",)
+        )
+        assert candidates, label
+        candidate = candidates[0]
+        if raw == "":
+            # an empty column is "no metadata", not a malformed one
+            assert candidate["metadata_status"] == "ok", (label, candidate)
+            assert candidate["metadata_problem"] is None, (label, candidate)
+            continue
+        assert candidate["metadata_status"] == "blocked", (label, candidate)
+        assert candidate["metadata_problem"] == "unreadable_metadata", (label, candidate)
+        assert candidate["provenance"] == {}, (label, candidate)
+
+
+def test_r4b05_a_well_formed_column_reports_no_problem(tmp_path):
+    """The explicit problem field must stay empty for a normal document, or the new
+    state would be noise instead of a signal."""
+    companies = tmp_path / "companies"
+    _write_copy(
+        companies / "Acme" / "raw" / "financial_reports" / "annual",
+        _sidecar(),
+        "acme-2025-annual.pdf",
+    )
+    catalog = _catalog(tmp_path, _roots(("company_raw", companies, 10)))
+    catalog.scan()
+    candidate = catalog.query_filing_candidates(
+        document_kind="annual_report", source_statuses=("active",)
+    )[0]
+    assert candidate["metadata_status"] == "ok", candidate
+    assert candidate["metadata_problem"] is None, candidate
+
+
 def test_r4b05_true_conflict_keeps_every_candidate_and_blocks_the_read_side(tmp_path):
     """Two captures of the same bytes disagree on ``title`` (different file
     names, same priority tier).  The stored value stays as the single value,

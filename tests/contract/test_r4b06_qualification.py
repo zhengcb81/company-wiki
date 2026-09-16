@@ -369,10 +369,19 @@ def test_r4b06_an_unanswered_request_carries_no_qualification(tmp_path):
     assert envelope.qualification is None, envelope.to_dict()
 
 
-def test_r4b06_malformed_shared_metadata_is_not_a_crash(tmp_path):
-    """The `metadata_json` column is SHARED: several modules write it, so its
-    shape cannot be assumed.  A non-object payload (or a non-object reserved
-    key) means "no readable conflict evidence" - the envelope still builds."""
+def test_r4b06_malformed_shared_metadata_blocks_instead_of_staying_silent(tmp_path):
+    """DIRECTION CHANGED 2026-09-16 (work package b05-read-side-malformed-columns,
+    B-VR06-02's second half).  The `metadata_json` column is SHARED, so its shape cannot
+    be assumed - but the earlier version of this case pinned "answer '' and let the
+    envelope call it verified_input", which an independent review identified as the
+    FAIL-OPEN side: the read side raised on the very same row while this side said
+    "no conflict evidence", so the two disagreed about the same document.
+
+    Now malformed content is a REASON (the envelope blocks), and only a well-formed
+    column with no conflicts answers "".  `{"fields": {"title": "not a record"}}` stays
+    silent on purpose: the field IS a record slot, it just carries no conflict list, so
+    there is nothing to report.
+    """
     from company_wiki.source_catalog.resolver import _metadata_conflict_reason
 
     class _Store:
@@ -382,16 +391,24 @@ def test_r4b06_malformed_shared_metadata_is_not_a_crash(tmp_path):
         def fetchone(self, sql, params=()):  # noqa: ANN001
             return {"metadata_json": self._payload}
 
-    for payload in (
+    malformed = (
         "[]",
         '"a string"',
         "null",
         "{not json",
         '{"r4_provenance": "not an object"}',
         '{"r4_provenance": {"fields": []}}',
-        '{"r4_provenance": {"fields": {"title": "not a record"}}}',
-    ):
-        assert _metadata_conflict_reason(_Store(payload), "doc-1") == "", payload
+    )
+    for payload in malformed:
+        reason = _metadata_conflict_reason(_Store(payload), "doc-1")
+        assert reason, f"malformed column must block, not stay silent: {payload}"
+
+    # a field slot without a conflict list is well-formed and reports nothing
+    assert _metadata_conflict_reason(
+        _Store('{"r4_provenance": {"fields": {"title": "not a record"}}}'), "doc-1"
+    ) == ""
+    # ... and so is an empty column ("no metadata").
+    assert _metadata_conflict_reason(_Store(""), "doc-1") == ""
 
     real = (
         '{"r4_provenance": {"schema_version": "1.0", "fields": '
@@ -399,6 +416,48 @@ def test_r4b06_malformed_shared_metadata_is_not_a_crash(tmp_path):
     )
     reason = _metadata_conflict_reason(_Store(real), "doc-1")
     assert "title" in reason, reason
+
+
+def test_r4b06_a_malformed_shared_column_blocks_the_envelope(tmp_path):
+    """The two sides must agree: a document whose shared column is unreadable is
+    BLOCKED in the envelope exactly as it is blocked on the read side
+    (`metadata_status="blocked"`, `metadata_problem="unreadable_metadata"`)."""
+    import sqlite3
+
+    root = tmp_path / "companies"
+    _write_copy(root / "Acme" / "raw" / "financial_reports" / "annual", _sidecar())
+    catalog = _catalog(tmp_path, [_root("company_raw", root, "company_raw", 10)])
+    resolution = SourceResolver(catalog).resolve(_request())
+    assert resolution.matches, resolution.debug_trace
+    document_id = resolution.matches[0].document_id
+
+    for label, raw in (
+        ("invalid JSON", "{not json"),
+        ("fields as a list", '{"r4_provenance": {"fields": ["title"]}}'),
+        ("payload is an array", "[]"),
+    ):
+        con = sqlite3.connect(f"file:{catalog.config.database_path}?mode=rw", uri=True)
+        try:
+            con.execute(
+                "UPDATE documents SET metadata_json=? WHERE document_id=?",
+                (raw, document_id),
+            )
+            con.commit()
+        finally:
+            con.close()
+        envelope = build_resolution_envelope(
+            resolution, store=catalog.store, project_root=tmp_path
+        )
+        qualification = envelope.qualification
+        assert qualification["label"] == QUALIFICATION_BLOCKED, (label, qualification)
+        assert "shared metadata" in qualification["reason"] or "provenance" in (
+            qualification["reason"]
+        ), (label, qualification)
+
+    candidates = catalog.query_filing_candidates(
+        document_kind="annual_report", source_statuses=("active",)
+    )
+    assert candidates and candidates[0]["metadata_status"] == "blocked", candidates
 
 
 def test_r4b06_an_envelope_labels_a_handle_that_carries_gaps(tmp_path):

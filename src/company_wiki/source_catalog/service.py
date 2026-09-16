@@ -385,20 +385,45 @@ class SourceCatalog:
             doc_locations = self._annotate_locations(
                 document_id, locations.get(document_id, [])
             )
-            metadata = json.loads(row["metadata_json"])
-            reserved = metadata.get(R4_PROVENANCE_KEY)
-            provenance_fields = (
-                reserved.get("fields", {}) if isinstance(reserved, dict) else {}
-            )
-            # B05 read contract: the per-field provenance travels with the
-            # metadata, field-level conflicts are named, and a document whose
-            # merged columns disagree is reported as `blocked` — never silently
-            # resolved by priority.
+            # B05 read contract (work package b05-read-side-malformed-columns, from
+            # B-VR06-02's second half): the shared column is written by several modules,
+            # so the READ side must not assume its shape.  It used to raise straight out
+            # of here - JSONDecodeError for invalid JSON, TypeError for NULL,
+            # AttributeError when `r4_provenance.fields` was a list - turning a data
+            # problem into a process failure and disagreeing with the B06 envelope,
+            # which called the same document verified_input.  Malformed content is now a
+            # named state (`metadata_problem`), blocked, with no provenance claims.
+            metadata: Any = {}
+            metadata_problem: str | None = None
+            provenance_fields: dict[str, Any] = {}
+            try:
+                payload = json.loads(row["metadata_json"] or "{}")
+            except (TypeError, ValueError):
+                payload = None
+            if not isinstance(payload, dict):
+                metadata_problem = "unreadable_metadata"
+            else:
+                metadata = payload
+                reserved = metadata.get(R4_PROVENANCE_KEY)
+                if reserved is not None and not isinstance(reserved, dict):
+                    metadata_problem = "unreadable_metadata"
+                else:
+                    candidate_fields = (
+                        reserved.get("fields") if isinstance(reserved, dict) else None
+                    )
+                    if candidate_fields is None:
+                        provenance_fields = {}
+                    elif isinstance(candidate_fields, dict):
+                        provenance_fields = candidate_fields
+                    else:
+                        metadata_problem = "unreadable_metadata"
             conflicted_fields = sorted(
                 name
                 for name, record in provenance_fields.items()
                 if isinstance(record, dict) and record.get("conflicts")
             )
+            if conflicted_fields and metadata_problem is None:
+                metadata_problem = "field_conflicts"
             results.append(
                 {
                     "document_id": document_id,
@@ -413,7 +438,8 @@ class SourceCatalog:
                     "metadata": metadata,
                     "provenance": provenance_fields,
                     "conflicts": conflicted_fields,
-                    "metadata_status": "blocked" if conflicted_fields else "ok",
+                    "metadata_status": "blocked" if metadata_problem else "ok",
+                    "metadata_problem": metadata_problem,
                     "entities": entities.get(document_id, []),
                     "locations": doc_locations,
                     **self._duplicate_summary(doc_locations),
