@@ -89,6 +89,59 @@ CONFIRMED_DIRECT_READERS: tuple[str, ...] = (
     "source_lifecycle.py::_safety_receipt",
 )
 
+#: The column's VALUE being passed into a call.  A parse-by-helper indirection is invisible
+#: to the `json.loads` scan above - measured, not theorised: I built a probe with a generic
+#: helper (`_parse(raw)`) called as `_parse(row["metadata_json"])` in a temp copy and the
+#: whole gate passed.  Building this list then showed that THREE REAL sites already parse
+#: that way (`extraction_quality._artifact_metadata`, `scanner._previous_provenance_fields`,
+#: `scanner._merge_metadata_json`) - i.e. the confirmed list above is a ratchet over the
+#: common shape, NOT a completeness proof.  This second ratchet closes the indirection: any
+#: NEW place that hands the column's value into a call fails the gate.
+#:
+#: The scan looks for a SUBSCRIPT/`.get()` of the column INSIDE the call's arguments, so the
+#: SQL text that merely mentions the column name (the majority of the 37 name matches) is not
+#: counted.  `metadata_object(...)`/`_read_shared_metadata(...)` call sites appear here too,
+#: and that is intended: they are the chain and its adapter, and they must not grow either.
+COLUMN_VALUE_HANDOFFS: tuple[str, ...] = (
+    "artifact_backfill.py::_classify",
+    "artifact_read_model.py::_artifact_row",
+    "backfill_v2.py::run_backfill",
+    "extraction_quality.py::ExtractionQualityService",
+    "migration_ledger.py::build_quality_ledger",
+    "normalizer.py::_frontmatter",
+    "normalizer.py::normalize_catalog",
+    "resolver.py::_metadata_conflict_reason",
+    "scanner.py::_merge_document_row",
+    "section_query.py::SectionQueryService",
+    "service.py::SourceCatalog",
+    "source_lifecycle.py::_safety_receipt",
+)
+
+#: What the two ratchets above do NOT catch, MEASURED on temp copies rather than assumed.
+#: Written into the product so nobody trusts the gate beyond its reach: it recognises two
+#: common SYNTACTIC shapes, it is not a dataflow analysis and not a completeness proof.
+#: Each entry was built as a probe and RUN against the gate; the verdict is recorded.
+GATE_BOUNDARIES: dict[str, str] = {
+    "intermediate_variable": (
+        "`raw = row[\"metadata_json\"]` followed by `parse(raw)`: the column never appears "
+        "in a call argument. PROBED: the gate passed (still open)."
+    ),
+    "subscript_inside_the_callee": (
+        "`def f(obj): ... obj[\"metadata_json\"] ...` called as `f(row)`: the subscript is "
+        "an assignment inside the callee, not a call argument. PROBED: the gate passed."
+    ),
+    "third_party_or_alternative_parser": (
+        "`json.JSONDecoder().decode(...)`, orjson/ujson, or any wrapper whose call site and "
+        "parameter both avoid the column name. PROBED BY CONSTRUCTION (not run): the scans "
+        "key on the `json.loads` name and on `[" + "\"metadata_json\"" + "]`/`.get(...)`."
+    ),
+    "closed_helper_at_call_site": (
+        "`_parse(row[\"metadata_json\"])` with a GENERIC helper was the first bypass found "
+        "(probe passed, and three production sites already had that shape); "
+        "COLUMN_VALUE_HANDOFFS closes it. PROBED: now caught."
+    ),
+}
+
 #: Sites whose enclosing symbol merely MENTIONS the column.  Reported, never enforced.
 #: Kept here (with the machine-derived values, not from memory - the first version of this
 #: tuple was written from memory and named four symbols that do not exist) so the

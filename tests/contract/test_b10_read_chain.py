@@ -90,6 +90,93 @@ def _function_nodes(path: Path, symbol: str) -> list[ast.AST]:
     return nodes
 
 
+def _reads_column_as_value(node: ast.AST) -> bool:
+    """True when the expression reads the column as a VALUE (not a SQL string literal)."""
+    for sub in ast.walk(node):
+        if (isinstance(sub, ast.Subscript) and isinstance(sub.slice, ast.Constant)
+                and sub.slice.value == COLUMN):
+            return True
+        if (isinstance(sub, ast.Call) and isinstance(sub.func, ast.Attribute)
+                and sub.func.attr == "get" and sub.args
+                and isinstance(sub.args[0], ast.Constant) and sub.args[0].value == COLUMN):
+            return True
+    return False
+
+
+def _scan_column_value_handoffs() -> set[str]:
+    """`relative/path.py::symbol` for every call that RECEIVES the column's value.
+
+    The `json.loads` scan can be walked around: a generic helper called as
+    `_parse(row["metadata_json"])` names the column at the call site (whose callee is not
+    `loads`) and passes a parameter (which is not the column) to `json.loads`.  I measured
+    that in a temp copy - the whole gate passed - and then found the same shape in three
+    production sites, so the first ratchet is a ratchet over the COMMON shape, not a
+    completeness proof.  This scan closes the indirection and keeps the SQL text that merely
+    mentions the column name out of the count.
+    """
+    found: set[str] = set()
+    for path in sorted(SOURCE.rglob("*.py")):
+        tree = ast.parse(path.read_text(encoding="utf-8"))
+        owner = _enclosing_symbols(tree)
+        for node in ast.walk(tree):
+            if not isinstance(node, ast.Call):
+                continue
+            if not any(_reads_column_as_value(argument) for argument in node.args):
+                continue
+            symbol = owner.get(id(node))
+            relative = path.relative_to(SOURCE).as_posix()
+            found.add(f"{relative}::{getattr(symbol, 'name', '<module>')}")
+    return found
+
+
+def test_b10_handoff_scan_is_not_vacuous() -> None:
+    handoffs = _scan_column_value_handoffs()
+    assert handoffs, "the handoff scan found nothing - it would prove nothing"
+    assert handoffs & set(read_chain.COLUMN_VALUE_HANDOFFS), (
+        "no scanned handoff matches the baseline: this ratchet is not measuring anything"
+    )
+
+
+def test_b10_no_new_column_value_handoff() -> None:
+    handoffs = _scan_column_value_handoffs()
+    baseline = set(read_chain.COLUMN_VALUE_HANDOFFS)
+    new = sorted(handoffs - baseline)
+    assert not new, (
+        "new places hand the shared column's value into a call: " + ", ".join(new) +
+        " - if that call parses the column, converge it onto store.metadata_object; if it "
+        "does not, register it in read_chain.COLUMN_VALUE_HANDOFFS with the reason "
+        "(the ratchet may only shrink)"
+    )
+
+
+def test_b10_handoff_baseline_has_no_stale_entry() -> None:
+    handoffs = _scan_column_value_handoffs()
+    stale = sorted(set(read_chain.COLUMN_VALUE_HANDOFFS) - handoffs)
+    assert not stale, (
+        "the handoff baseline still lists sites that no longer pass the column: " +
+        ", ".join(stale) + " - remove them so the ratchet keeps meaning something"
+    )
+
+
+def test_b10_gate_boundaries_stay_documented() -> None:
+    """The gate's measured limits must stay written down next to the gate.
+
+    A gate whose reach is not documented gets trusted beyond it.  Each of these shapes was
+    PROBED against the gate; deleting one from the record would silently turn a known limit
+    into an assumed guarantee, so the ids are pinned.
+    """
+    assert read_chain.GATE_BOUNDARIES, "the measured gate boundaries were removed"
+    assert set(read_chain.GATE_BOUNDARIES) == {
+        "intermediate_variable",
+        "subscript_inside_the_callee",
+        "third_party_or_alternative_parser",
+        "closed_helper_at_call_site",
+    }, "the documented boundary set changed without updating this test"
+    assert "PROBED" in read_chain.GATE_BOUNDARIES["intermediate_variable"], (
+        "each boundary must say whether it was actually probed"
+    )
+
+
 def test_b10_scan_is_not_vacuous() -> None:
     confirmed = _scan_confirmed_direct_readers()
     assert confirmed, "the AST scan found nothing - the test would prove nothing"
