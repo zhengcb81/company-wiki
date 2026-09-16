@@ -43,6 +43,7 @@ LEGACY_READ_ADAPTERS: dict[str, dict[str, object]] = {
         "version": "1",
         "semantics": "same contract as the single chain; name kept as the v1 adapter",
         "byte_level": False,
+        "reads_files": False,
         "removal_condition": (
             "no caller outside this registered adapter for two consecutive R4 cycles, "
             "and the call sites use store.metadata_object directly"
@@ -55,6 +56,7 @@ LEGACY_READ_ADAPTERS: dict[str, dict[str, object]] = {
             "file, so it must not be quietly re-pointed at the byte-level chain"
         ),
         "byte_level": False,
+        "reads_files": False,
         "removal_condition": (
             "the callers move to SourceResolver.resolve + read_verified_bytes (the "
             "byte-level chain) and the entry point has no caller in src/, adapters/ or the "
@@ -64,9 +66,14 @@ LEGACY_READ_ADAPTERS: dict[str, dict[str, object]] = {
     "company_wiki.source_catalog.reader.ReadOnlyCatalogReader.bundle": {
         "version": "1",
         "semantics": (
-            "CLAIM-level, same rule as resolve_handle, plus SourceBundle assembly"
+            "CLAIM-level for the DOCUMENT version (it compares the claimed content_sha256) "
+            "but NOT file-free: build_source_bundle -> artifact_handle.validate_artifact "
+            "hashes each artifact file on disk. CORRECTED after B-VR-B10-01 (P1): this entry "
+            "previously claimed 'never opens a file', which the reviewer refuted by corrupting "
+            "an artifact and watching the verdict flip to artifact_hash_mismatch."
         ),
-        "byte_level": False,
+        "byte_level": False,   # the DOCUMENT's bytes are not read
+        "reads_files": True,   # artifact files ARE read - do not restate the old claim
         "removal_condition": (
             "same as resolve_handle; the bundle assembly itself is owned by "
             "source_bundle.build_source_bundle and is not affected"

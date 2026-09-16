@@ -231,7 +231,7 @@ def test_b10_baseline_has_no_stale_entry() -> None:
 
 
 def test_b10_registered_adapters_are_complete_and_importable() -> None:
-    required = {"version", "semantics", "byte_level", "removal_condition"}
+    required = {"version", "semantics", "byte_level", "reads_files", "removal_condition"}
     assert read_chain.LEGACY_READ_ADAPTERS, "the registry is empty - nothing is declared"
     for dotted, entry in read_chain.LEGACY_READ_ADAPTERS.items():
         missing = required - set(entry)
@@ -263,6 +263,13 @@ def test_b10_registered_adapters_are_complete_and_importable() -> None:
 
 @pytest.mark.parametrize("symbol", ["resolve_handle", "bundle"])
 def test_b10_claim_level_adapters_never_read_bytes(symbol: str) -> None:
+    """The function BODY must not open files.  Transitive access is NOT covered here.
+
+    B-VR-B10-01 (P1) is exactly that gap: `reader.bundle`'s body only calls
+    build_source_bundle, yet the bundle path hashes artifact files through
+    artifact_handle.validate_artifact.  So this test is a SYNTACTIC check on the body, and
+    the registry must carry the transitive truth separately - which the next test pins.
+    """
     forbidden = {"open", "read_bytes", "read_text", "read_verified_bytes", "_read_verified_bytes"}
     nodes = _function_nodes(SOURCE / "reader.py", symbol)
     for node in nodes:
@@ -272,7 +279,26 @@ def test_b10_claim_level_adapters_never_read_bytes(symbol: str) -> None:
             for child in ast.walk(node) if isinstance(child, ast.Call)
         }
         assert not (used & forbidden), (
-            f"reader.{symbol} is registered as CLAIM-level but now uses "
+            f"reader.{symbol} is registered as CLAIM-level but its body now uses "
             f"{sorted(used & forbidden)}: re-pointing it at the byte chain changes its failure "
             "semantics, which B10 explicitly refuses to do silently"
         )
+
+
+def test_b10_registry_states_transitive_file_access_truthfully() -> None:
+    """`bundle` reads artifact files through the bundle path - the registry must say so.
+
+    The reviewer refuted the earlier 'never opens a file' claim by corrupting an artifact and
+    watching the verdict flip.  Pinning `reads_files` means the corrected fact cannot quietly
+    revert, and the two entries that really are file-free stay pinned as such.
+    """
+    adapters = read_chain.LEGACY_READ_ADAPTERS
+    bundle = adapters["company_wiki.source_catalog.reader.ReadOnlyCatalogReader.bundle"]
+    assert bundle["reads_files"] is True, (
+        "bundle reaches artifact_handle.validate_artifact, which hashes artifact files: "
+        "reads_files must stay True (B-VR-B10-01)"
+    )
+    for dotted in ("company_wiki.source_catalog.reader.ReadOnlyCatalogReader.resolve_handle",
+                   "company_wiki.source_catalog.service._read_shared_metadata"):
+        assert adapters[dotted]["reads_files"] is False, f"{dotted} is file-free"
+        assert adapters[dotted]["byte_level"] is False, f"{dotted} is not the byte chain"
