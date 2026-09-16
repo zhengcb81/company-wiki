@@ -46,9 +46,15 @@ def _enclosing_symbols(tree: ast.AST) -> dict[int, ast.AST]:
 
 
 def _scan_confirmed_direct_readers() -> set[str]:
-    """`module.py::symbol` for every `json.loads(...)` whose ARGUMENT names the column."""
+    """`relative/path.py::symbol` for every `json.loads(...)` whose ARGUMENT names the column.
+
+    RECURSIVE on purpose: `source_catalog/adapters/` holds 8 modules of its own, and the
+    first version of this scan used ``glob("*.py")``, so a direct reader added there would
+    have passed the gate unnoticed.  The key keeps the relative path so two files with the
+    same basename cannot collide.
+    """
     found: set[str] = set()
-    for path in sorted(SOURCE.glob("*.py")):
+    for path in sorted(SOURCE.rglob("*.py")):
         tree = ast.parse(path.read_text(encoding="utf-8"))
         owner = _enclosing_symbols(tree)
         for node in ast.walk(tree):
@@ -62,7 +68,8 @@ def _scan_confirmed_direct_readers() -> set[str]:
             if COLUMN not in argument:
                 continue
             symbol = owner.get(id(node))
-            found.add(f"{path.name}::{getattr(symbol, 'name', '<module>')}")
+            relative = path.relative_to(SOURCE).as_posix()
+            found.add(f"{relative}::{getattr(symbol, 'name', '<module>')}")
     return found
 
 
