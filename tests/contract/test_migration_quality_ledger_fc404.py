@@ -40,6 +40,34 @@ def _seed(store: CatalogStore, *, retired: bool = False):
 # --- quality ledger per root/market/kind ------------------------------------
 
 
+def test_ledger_survives_a_malformed_shared_column(tmp_path):
+    """B-VR05M2-02 (P2, found by the verifier): the ledger reads the SHARED
+    ``documents.metadata_json`` column - not the artifacts one an earlier residual list
+    claimed - and caught only JSONDecodeError, so a JSON array raised AttributeError and
+    deep nesting RecursionError out of the ledger build."""
+    import sqlite3
+
+    from company_wiki.source_catalog.migration_ledger import build_quality_ledger
+
+    store = CatalogStore(tmp_path / "c.sqlite3")
+    _seed(store)
+    for label, raw in (
+        ("payload is a JSON array", "[]"),
+        ("deeply nested JSON", "[" * 5000),
+        ("invalid JSON", "{not json"),
+        ("empty string", ""),
+    ):
+        con = sqlite3.connect(tmp_path / "c.sqlite3")
+        try:
+            con.execute("UPDATE documents SET metadata_json=? WHERE document_id='d1'", (raw,))
+            con.commit()
+        finally:
+            con.close()
+        ledger = build_quality_ledger(store)
+        assert "company_raw" in ledger["by_root"], label
+        assert ledger["by_root"]["company_raw"]["input"] == 1, label
+
+
 def test_ledger_records_coverage_per_root(tmp_path):
     """The ledger must record per-root coverage: input count, eligible /
     needs_review / unprovable / retired_or_conflict buckets, missing

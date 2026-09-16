@@ -425,14 +425,22 @@ def test_r4b05_malformed_column_survives_the_fiscal_year_filter(tmp_path):
     )
     for label, raw in not_valid_json:
         _corrupt_metadata(catalog, document_id, raw)
-        candidates = catalog.query_filing_candidates(
-            document_kind="annual_report", source_statuses=("active",), fiscal_year=2025
+        # B-VR05M2-05 correction: under a PERIOD filter an unreadable row is not a match
+        # (its period cannot be established).  It must not be returned - keeping it
+        # visible let a corrupted row take the limit and shadow a genuine match - and it
+        # must still be reported as blocked by the UNFILTERED read.
+        assert (
+            catalog.query_filing_candidates(
+                document_kind="annual_report", source_statuses=("active",), fiscal_year=2025
+            )
+            == []
+        ), f"{label}: an unreadable row was returned as a period match"
+        unfiltered = catalog.query_filing_candidates(
+            document_kind="annual_report", source_statuses=("active",)
         )
-        assert candidates, f"{label}: the unreadable document vanished from the result"
-        if raw == "":
-            assert candidates[0]["metadata_status"] == "ok", (label, candidates[0])
-        else:
-            assert candidates[0]["metadata_status"] == "blocked", (label, candidates[0])
+        assert unfiltered, f"{label}: the document vanished from the unfiltered read"
+        expected_status = "ok" if raw == "" else "blocked"
+        assert unfiltered[0]["metadata_status"] == expected_status, (label, unfiltered[0])
 
     valid_json_malformed_provenance = (
         ("provenance fields as a list", json.dumps({"r4_provenance": {"fields": ["title"]}})),
@@ -461,6 +469,57 @@ def test_r4b05_malformed_column_survives_the_fiscal_year_filter(tmp_path):
         )
         == []
     ), "the fiscal_year filter stopped filtering"
+
+
+def test_r4b05_an_unreadable_row_cannot_shadow_a_genuine_period_match(tmp_path):
+    """B-VR05M2-05 (P3, measured by the verifier): with `NOT json_valid(...)` in the
+    clause, a corrupted row could occupy `limit` and the genuine period match was
+    omitted - a lost answer, worse than a row that cannot be shown to match.  Here two
+    documents exist (one corrupted, one genuine 2025) and a limit=1 period query must
+    return the genuine one."""
+    companies = tmp_path / "companies"
+    _write_copy(
+        companies / "Acme" / "raw" / "financial_reports" / "annual",
+        _sidecar(),
+        "acme-2025-annual.pdf",
+    )
+    # a SECOND filing with different bytes, so it is its own document
+    other_body = b"%PDF-1.4 r4b05-provenance-second-filing"
+    other = companies / "Beta" / "raw" / "financial_reports" / "annual"
+    other.mkdir(parents=True, exist_ok=True)
+    (other / "beta-2025-annual.pdf").write_bytes(other_body)
+    (other / "beta-2025-annual.pdf.source.json").write_text(
+        json.dumps(
+            _sidecar(
+                security_id="BETA",
+                provider_document_id="doc-2",
+                extra={
+                    "canonical_entity_id": "ent-beta",
+                    "display_name": "Beta",
+                    "content_sha256": hashlib.sha256(other_body).hexdigest(),
+                },
+            ),
+            ensure_ascii=False,
+        ),
+        encoding="utf-8",
+    )
+
+    catalog = _catalog(tmp_path, _roots(("company_raw", companies, 10)))
+    catalog.scan()
+    rows = _fetchall(catalog, "SELECT document_id, metadata_json FROM documents")
+    assert len(rows) == 2, rows
+    corrupted = sorted(row["document_id"] for row in rows)[0]
+    _corrupt_metadata(catalog, corrupted, "{not json")
+
+    candidates = catalog.query_filing_candidates(
+        document_kind="annual_report", source_statuses=("active",), fiscal_year=2025,
+        limit=1,
+    )
+    assert len(candidates) == 1, candidates
+    assert candidates[0]["document_id"] != corrupted, (
+        "the corrupted row was returned as the period match and shadowed the genuine one"
+    )
+    assert candidates[0]["metadata_status"] == "ok", candidates[0]
 
 
 def test_r4b05_true_conflict_keeps_every_candidate_and_blocks_the_read_side(tmp_path):

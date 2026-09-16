@@ -108,7 +108,10 @@ def record_prompt_injection_review(
         metadata = json.loads(row[0] or "{}")
         if not isinstance(metadata, dict):
             metadata = {}
-    except json.JSONDecodeError:
+    except (json.JSONDecodeError, TypeError, RecursionError):
+        # B-VR05M2-04: the WRITE-side sibling of the reader fixed above; it also caught
+        # only JSONDecodeError, so deep nesting raised RecursionError out of the receipt
+        # writer (tests only today, but the same class of defect).
         metadata = {}
     receipt: dict[str, str] = {
         "schema_version": schema_version,

@@ -385,6 +385,12 @@ def summarize_catalog_with_llm(
             AND failure.generator_name=? AND failure.generator_version=?
             AND failure.retry_after>?
         )
+        -- json_valid guard (B-VR05M2-01, P1: the same P0 failure mode as
+        -- query_filing_candidates): json_extract on an unreadable column raises
+        -- sqlite3.OperationalError("malformed JSON") from INSIDE the query, so a batch
+        -- selection over the shared column died instead of simply not matching.  A row
+        -- whose receipt cannot be read is not eligible for summarization.
+        AND json_valid(d.metadata_json)
         AND json_extract(d.metadata_json, '$.{PROMPT_INJECTION_REVIEW_KEY}.schema_version') = ?
         AND json_extract(d.metadata_json, '$.{PROMPT_INJECTION_REVIEW_KEY}.status')
             IN ({_REVIEW_STATUS_SQL})

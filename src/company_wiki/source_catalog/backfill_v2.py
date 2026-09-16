@@ -19,6 +19,11 @@ import uuid
 from dataclasses import dataclass, field
 from pathlib import Path
 
+# B-VR05M2-03: module level on purpose - the shared tolerant TEXT factory and the shared
+# metadata reader, so neither the driver nor a malformed column can break this module's
+# fetch.  (Both are branches the FC-1204 ratchet refused inline: 26 > 25 frozen.)
+from .store import _tolerate_undecodable_text, metadata_object
+
 STRONG_FIELDS = (
     "provider_document_id",
     "source_url",
@@ -87,6 +92,7 @@ class BackfillResult:
 
 def _connect(path: Path) -> sqlite3.Connection:
     con = sqlite3.connect(path)
+    _tolerate_undecodable_text(con)
     con.row_factory = sqlite3.Row
     con.execute("PRAGMA foreign_keys = ON")
     return con
@@ -208,10 +214,7 @@ def run_backfill(
 
     for row in docs:
         result.input += 1
-        try:
-            metadata = json.loads(row["metadata_json"] or "{}")
-        except json.JSONDecodeError:
-            metadata = {}
+        metadata = metadata_object(row["metadata_json"])
         acq = metadata.get("acquisition") or {}
         binding = _classify(acq)
         record = {

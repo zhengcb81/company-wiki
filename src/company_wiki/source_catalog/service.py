@@ -338,15 +338,19 @@ class SourceCatalog:
         # json_valid() guard (B-VR05M-01, P0): without it, json_extract on a malformed
         # value raises `sqlite3.OperationalError: malformed JSON` IN SQL, before the
         # Python guard below can turn it into a state - measured for `{not json` AND for
-        # the empty string.  Malformed rows are deliberately KEPT (`NOT json_valid(...)`)
-        # rather than filtered out: hiding a document whose metadata is unreadable would
-        # make the blocked state unreachable for exactly the filtered queries that
-        # requested a period, i.e. it would re-open the gap this package repairs.  The
-        # caller sees the document, marked blocked.
+        # the empty string.
+        #
+        # The row is EXCLUDED when filtered (B-VR05M2-05, correction): an earlier attempt
+        # kept unreadable rows visible via `NOT json_valid(...) OR ...`, and a verifier
+        # then measured that a corrupted row could occupy the `limit` and SHADOW a genuine
+        # period match - losing a valid answer is worse than not listing a row whose
+        # period cannot be established.  An unreadable row cannot be shown to match a
+        # period, so it is not a match; the UNFILTERED read still reports it as
+        # blocked/unreadable_metadata.
         fiscal_clause = (
-            "AND (NOT json_valid(d.metadata_json)"
-            " OR json_extract(d.metadata_json, '$.acquisition.fiscal_year') = ?"
-            " OR json_extract(d.metadata_json, '$.dayu_meta.fiscal_year') = ?)"
+            "AND (json_valid(d.metadata_json)"
+            " AND (json_extract(d.metadata_json, '$.acquisition.fiscal_year') = ?"
+            " OR json_extract(d.metadata_json, '$.dayu_meta.fiscal_year') = ?))"
             if fiscal_year is not None
             else ""
         )

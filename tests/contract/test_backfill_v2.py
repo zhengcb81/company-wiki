@@ -134,6 +134,44 @@ STRONG = {
 }
 
 
+def test_backfill_survives_a_malformed_shared_column(tmp_path):
+    """B-VR05M2-03 (P2, found by the verifier): the backfill reads the SHARED
+    ``documents.metadata_json`` column and caught only JSONDecodeError, so a JSON array
+    raised AttributeError, deep nesting RecursionError, and undecodable bytes raised
+    `sqlite3.OperationalError` from inside the fetch (its raw connection had no tolerant
+    text_factory)."""
+    path = _catalog(tmp_path)
+    _add_doc(path, acquisition=dict(STRONG))
+
+    for label, raw in (
+        ("payload is a JSON array", "[]"),
+        ("deeply nested JSON", "[" * 5000),
+        ("invalid JSON", "{not json"),
+    ):
+        con = sqlite3.connect(path)
+        try:
+            con.execute("UPDATE documents SET metadata_json=? WHERE document_id='d1'", (raw,))
+            con.commit()
+        finally:
+            con.close()
+        result = run_backfill(path, roots=("company_raw", "dayu_portfolio"))
+        assert result.input == 1, (label, result)
+
+    # undecodable TEXT: CAST keeps the bytes in a TEXT column, which the driver used to
+    # refuse to hand over at all
+    con = sqlite3.connect(path)
+    try:
+        con.execute(
+            "UPDATE documents SET metadata_json=CAST(? AS TEXT) WHERE document_id='d1'",
+            (b"\xff\xfe{not utf8}",),
+        )
+        con.commit()
+    finally:
+        con.close()
+    result = run_backfill(path, roots=("company_raw", "dayu_portfolio"))
+    assert result.input == 1, result
+
+
 def test_bf01_strong_doc_constructs_verified_shadow_assertion(tmp_path):
     """A doc with all strong fields + provable period_end yields exactly one
     verified shadow assertion; reader visibility stays legacy."""
@@ -156,7 +194,7 @@ def test_bf01_strong_doc_constructs_verified_shadow_assertion(tmp_path):
 
 def test_bf02_missing_period_end_goes_to_remediation_not_success(tmp_path):
     """M-01 guard: a doc with strong binding but NO provable period_end must
-    NOT produce a verified assertion — it lands in the remediation queue
+    NOT produce a verified assertion 鈥?it lands in the remediation queue
     with 'period_end' as the exact missing field.  Guessing the period from
     the title/file name is a mutation that this test kills."""
     path = _catalog(tmp_path)
@@ -189,11 +227,11 @@ def test_bf03_missing_source_url_goes_to_remediation_not_success(tmp_path):
 
 
 def test_bf04_weak_identity_goes_to_remediation(tmp_path):
-    """security_id that is a display name (e.g. 中国平安) is not strong
+    """security_id that is a display name (e.g. 涓浗骞冲畨) is not strong
     identity; the doc goes to remediation, never to a verified assertion."""
     path = _catalog(tmp_path)
     acq = dict(STRONG)
-    acq["security_id"] = "中国平安"
+    acq["security_id"] = "涓浗骞冲畨"
     _add_doc(path, acquisition=acq)
     result = run_backfill(path, roots=("company_raw", "dayu_portfolio"))
     assert result.success == 0
@@ -224,7 +262,7 @@ def test_bf05_reconciliation_closes_exactly(tmp_path):
 
 def test_bf06_conflict_is_never_success(tmp_path):
     """M-02 guard: an existing verified assertion with a DIFFERENT content
-    hash for the same document is a conflict — counting it as success is a
+    hash for the same document is a conflict 鈥?counting it as success is a
     mutation this test kills."""
     path = _catalog(tmp_path)
     _add_doc(path, acquisition=STRONG)

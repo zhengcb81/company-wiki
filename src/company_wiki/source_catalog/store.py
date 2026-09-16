@@ -931,6 +931,25 @@ def _tolerate_undecodable_text(connection: sqlite3.Connection) -> None:
     connection.text_factory = lambda raw: raw.decode("utf-8", "replace")
 
 
+def metadata_object(raw: Any) -> dict[str, Any]:
+    """The shared ``documents.metadata_json`` column as an object, never raising.
+
+    One implementation for every reader of that column (B-VR05M2-02/-03, work package
+    b05-read-side-malformed-columns): a JSON array used to raise AttributeError, deep
+    nesting RecursionError, an unreadable value JSONDecodeError, and each caller carried
+    its own partial guard.  Malformed content means "no readable metadata" - the caller
+    that also REPORTS state (``metadata_status``/``metadata_problem``) is the one that
+    says so.  A function rather than inline branches because the FC-1204 complexity
+    ratchet is frozen per file and inline copies pushed two modules over it (26 > 25 and
+    22 > 21), which is the sanctioned "new judgement, new function" split.
+    """
+    try:
+        value = json.loads(raw or "{}")
+    except (json.JSONDecodeError, TypeError, RecursionError, UnicodeDecodeError):
+        return {}
+    return value if isinstance(value, dict) else {}
+
+
 class CatalogStore:
     def __init__(self, database_path: Path):
         if not isinstance(database_path, Path):

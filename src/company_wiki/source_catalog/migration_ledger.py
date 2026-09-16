@@ -10,10 +10,9 @@ or any real file; retired documents are counted but never revived.
 
 from __future__ import annotations
 
-import json
 from typing import Any
 
-from .store import CatalogStore
+from .store import CatalogStore, metadata_object
 
 BUCKETS = ("eligible", "needs_review", "unprovable", "retired_or_conflict")
 
@@ -72,10 +71,11 @@ def build_quality_ledger(store: CatalogStore) -> dict[str, Any]:
         if row["source_status"] == "retired":
             continue
         total_input += 1
-        try:
-            metadata = json.loads(row["metadata_json"] or "{}")
-        except json.JSONDecodeError:
-            metadata = {}
+        # B-VR05M2-02: documents.metadata_json is the SHARED column (not the artifacts one
+        # an earlier residual list claimed); the shared reader never raises and returns an
+        # object, replacing the previous JSONDecodeError-only guard that let a JSON array
+        # raise AttributeError on the next line.
+        metadata = metadata_object(row["metadata_json"])
         acq = metadata.get("acquisition") or {}
         market = str(acq.get("market") or "(none)")
         for dim_name, dim in (("by_root", root_ids), ("by_kind", [row["document_kind"]]),
