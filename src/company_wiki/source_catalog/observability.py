@@ -28,7 +28,7 @@ from datetime import datetime, timezone
 from enum import Enum
 from typing import Any
 
-REASON_TAXONOMY_VERSION = "1.1"
+REASON_TAXONOMY_VERSION = "1.2"
 
 # Canonical reason taxonomy (additive; codes are never removed, only
 # deprecated) — kept in sync with admission/reuse/resolver/artifact codes.
@@ -45,6 +45,25 @@ REASONS: dict[str, str] = {
     "non_filing_kind": "document kind is not a filing profile",
     "focus_policy_invalid_relative_path": "path traversal or absolute path",
     "focus_policy_no_allowed_category_evidence": "no allowed category evidence",
+    # Focus/admission decisions that were emitted POSITIONALLY and were therefore
+    # invisible to the FC-1301 gate until it was widened to AST (work package
+    # fc1301-taxonomy-coverage; inventory: 17 code-like sites, 15 distinct codes).
+    # Registered 2026-09-15 - additive, with the meaning the call sites give them.
+    "focus_policy_explicit_document_kind": "metadata declares an allowed source document kind",
+    "focus_policy_explicit_kind_not_allowed": "declared document_kind is neither regulatory_filing nor allowed",
+    "focus_policy_announcement_or_notice": "title or path looks like an announcement/regulatory notice",
+    "focus_policy_prospectus_keyword": "prospectus keyword in title or path",
+    "focus_policy_call_transcript_keyword": "investor call transcript keyword in title or path",
+    "focus_policy_strict_broker_evidence": "broker institution AND research-report semantics both present",
+    "focus_policy_commentary_without_broker_evidence": "commentary/recap without strict broker evidence",
+    "focus_policy_regulatory_form": "explicit regulatory form code (10-K/20-F/40-F, dayu FY/H1/H2)",
+    "focus_policy_semi_annual_keyword": "semi-annual keyword in title or path",
+    "focus_policy_quarterly_keyword": "quarterly keyword or Q1-Q4 form code",
+    "focus_policy_annual_keyword": "annual keyword in title or path",
+    "focus_policy_financial_report_keyword": "financial-report keyword, kind left as regulatory_filing",
+    "focus_policy_investor_relations_keyword": "investor-relations keyword in title or path",
+    "v2_profile_admitted": "candidate facts pass the v2 profile gate",
+    "stale_gap_hash": "gap plan hash moved on since the binding was written",
     # reuse / latest / gap
     "download_suppressed": "reuse policy suppressed the download",
     "download_authorized": "gap plan authorized a download",
@@ -244,6 +263,23 @@ STAGES_BY_REASON: dict[str, tuple[str, ...]] = {
     "artifact_superseded_by_newer": ("artifact",),
     "unexpected_path_pattern": ("artifact",),
     "focus_policy_orphan_sidecar": ("artifact",),
+    # registered 2026-09-15 with the focus/admission block above (same stage as the
+    # sibling focus_policy_* codes: the decision is made while admitting an artifact)
+    "focus_policy_explicit_document_kind": ("artifact",),
+    "focus_policy_explicit_kind_not_allowed": ("artifact",),
+    "focus_policy_announcement_or_notice": ("artifact",),
+    "focus_policy_prospectus_keyword": ("artifact",),
+    "focus_policy_call_transcript_keyword": ("artifact",),
+    "focus_policy_strict_broker_evidence": ("artifact",),
+    "focus_policy_commentary_without_broker_evidence": ("artifact",),
+    "focus_policy_regulatory_form": ("artifact",),
+    "focus_policy_semi_annual_keyword": ("artifact",),
+    "focus_policy_quarterly_keyword": ("artifact",),
+    "focus_policy_annual_keyword": ("artifact",),
+    "focus_policy_financial_report_keyword": ("artifact",),
+    "focus_policy_investor_relations_keyword": ("artifact",),
+    "v2_profile_admitted": ("artifact",),
+    "stale_gap_hash": ("acquisition",),
     # semantic
     "non_filing_kind": ("semantic",),
     "focus_policy_no_allowed_category_evidence": ("semantic",),
