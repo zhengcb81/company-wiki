@@ -153,6 +153,28 @@ REASONS: dict[str, str] = {
     "cannot_parse_yaml": "yaml payload cannot be parsed",
     "unexpected_path_pattern": "path pattern outside expectations",
     "focus_policy_orphan_sidecar": "sidecar without its primary file",
+    # identity resolution + source-reuse decisions that were emitted POSITIONALLY and
+    # stayed invisible until the FC-1301 gate resolved callees by ALL their definitions
+    # (B-VR1301-01, P0: bare-name first-definition-wins mapped them onto the wrong
+    # parameter list, so a brand-new code at close_gap.py:256 passed the gate GREEN).
+    # Registered 2026-09-15/16 with the meaning their call sites give them.
+    "one_verified_exact_identity": "exactly one verified exact identity candidate",
+    "multiple_verified_exact_identities": "more than one verified exact identity candidate",
+    "exact_identity_conflicts_with_market_or_exchange_hint": "exact identity contradicts the market/exchange hint",
+    "no_verified_identity_candidate": "no identity candidate could be verified",
+    "one_unique_strong_fuzzy_identity": "exactly one unique strong fuzzy identity match",
+    "fuzzy_candidates_require_user_selection": "several fuzzy identity candidates need a human choice",
+    "one_existing_source_matches_provider_identity": "exactly one source matches the provider identity",
+    "latest_existing_source_matches_provider_identity": "several match; latest_as_of selected one by provider identity",
+    "multiple_existing_sources_match_provider_identity": "several sources match the provider identity; ambiguous",
+    "one_existing_source_satisfies_semantic_request": "exactly one source satisfies the semantic request",
+    "latest_existing_source_satisfies_semantic_request": "several satisfy; latest_as_of selected one",
+    "multiple_existing_sources_match_semantic_request": "several sources satisfy the semantic request; ambiguous",
+    "identity_mismatch_market_or_security_id": "explicit market or security_id identity conflict",
+    "matching_sources_have_unknown_published_date": "matching sources carry no published date to pick a latest",
+    # gap-plan policy binding (close_gap)
+    "no_runtime_policy": "no runtime policy snapshot could be loaded; fail closed",
+    "stale_policy_hash": "policy snapshot hash differs from the binding's",
     # llm pipeline
     "llm_deferred": "llm summary deferred",
     "llm_global_failure": "llm pipeline failed globally",
@@ -270,23 +292,46 @@ STAGES_BY_REASON: dict[str, tuple[str, ...]] = {
     "artifact_superseded_by_newer": ("artifact",),
     "unexpected_path_pattern": ("artifact",),
     "focus_policy_orphan_sidecar": ("artifact",),
-    # registered 2026-09-15 with the focus/admission block above (same stage as the
-    # sibling focus_policy_* codes: the decision is made while admitting an artifact)
-    "focus_policy_explicit_document_kind": ("artifact",),
-    "focus_policy_explicit_kind_not_allowed": ("artifact",),
-    "focus_policy_announcement_or_notice": ("artifact",),
-    "focus_policy_prospectus_keyword": ("artifact",),
-    "focus_policy_call_transcript_keyword": ("artifact",),
-    "focus_policy_strict_broker_evidence": ("artifact",),
-    "focus_policy_commentary_without_broker_evidence": ("artifact",),
-    "focus_policy_regulatory_form": ("artifact",),
-    "focus_policy_semi_annual_keyword": ("artifact",),
-    "focus_policy_quarterly_keyword": ("artifact",),
-    "focus_policy_annual_keyword": ("artifact",),
-    "focus_policy_financial_report_keyword": ("artifact",),
-    "focus_policy_investor_relations_keyword": ("artifact",),
-    "v2_profile_admitted": ("artifact",),
-    "stale_gap_hash": ("acquisition",),
+    # STAGE PLACEMENT CORRECTED 2026-09-16 (B-VR1301-03): the first registration put the
+    # 13 focus_policy_* decision codes under "artifact", contradicting this map's own
+    # rules - their sibling focus_policy_no_allowed_category_evidence is "semantic"
+    # (they decide the document KIND from title/path/form evidence), v2_profile_admitted
+    # mirrors "admitted" (identity), and stale_gap_hash mirrors gap_not_required /
+    # gap_authorization_expired / gap_already_closed (freshness).  A wrong stage is not
+    # cosmetic: record_stage_event drops mismatched events fail-closed.
+    "focus_policy_explicit_document_kind": ("semantic",),
+    "focus_policy_explicit_kind_not_allowed": ("semantic",),
+    "focus_policy_announcement_or_notice": ("semantic",),
+    "focus_policy_prospectus_keyword": ("semantic",),
+    "focus_policy_call_transcript_keyword": ("semantic",),
+    "focus_policy_strict_broker_evidence": ("semantic",),
+    "focus_policy_commentary_without_broker_evidence": ("semantic",),
+    "focus_policy_regulatory_form": ("semantic",),
+    "focus_policy_semi_annual_keyword": ("semantic",),
+    "focus_policy_quarterly_keyword": ("semantic",),
+    "focus_policy_annual_keyword": ("semantic",),
+    "focus_policy_financial_report_keyword": ("semantic",),
+    "focus_policy_investor_relations_keyword": ("semantic",),
+    "v2_profile_admitted": ("identity",),
+    "stale_gap_hash": ("freshness",),
+    # the 16 codes B-VR1301-01 found still invisible (same placement rules: identity
+    # resolution -> identity, reuse decisions -> resolution, policy binding -> freshness)
+    "one_verified_exact_identity": ("identity",),
+    "multiple_verified_exact_identities": ("identity",),
+    "exact_identity_conflicts_with_market_or_exchange_hint": ("identity",),
+    "no_verified_identity_candidate": ("identity",),
+    "one_unique_strong_fuzzy_identity": ("identity",),
+    "fuzzy_candidates_require_user_selection": ("identity",),
+    "identity_mismatch_market_or_security_id": ("identity",),
+    "one_existing_source_matches_provider_identity": ("resolution",),
+    "latest_existing_source_matches_provider_identity": ("resolution",),
+    "multiple_existing_sources_match_provider_identity": ("resolution",),
+    "one_existing_source_satisfies_semantic_request": ("resolution",),
+    "latest_existing_source_satisfies_semantic_request": ("resolution",),
+    "multiple_existing_sources_match_semantic_request": ("resolution",),
+    "matching_sources_have_unknown_published_date": ("freshness",),
+    "no_runtime_policy": ("freshness",),
+    "stale_policy_hash": ("freshness",),
     # semantic
     "non_filing_kind": ("semantic",),
     "focus_policy_no_allowed_category_evidence": ("semantic",),
