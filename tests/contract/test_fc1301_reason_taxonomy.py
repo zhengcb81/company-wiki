@@ -124,11 +124,39 @@ def emitted_codes(root: Path = SRC) -> dict[str, list[str]]:
     return found
 
 
-def test_taxonomy_version_current() -> None:
-    assert REASON_TAXONOMY_VERSION == "1.2", (
-        "taxonomy version must be bumped when codes are added (1.2 added the 15 "
-        "focus/admission codes registered on 2026-09-15)"
+def test_taxonomy_version_is_the_frozen_n1_contract() -> None:
+    """The flat taxonomy version is FROZEN, not bumped per code addition.
+
+    Learned the hard way on 2026-09-16: this gate's first widening bumped 1.1 -> 1.2
+    while adding the 15 previously invisible codes, and CI run 35130154115 went red on
+    `tests/unit/test_stage_taxonomy.py`, which pins 1.1 as the N-1 compatibility
+    contract ("N-1 compat: the v1.1 flat taxonomy constant is untouched") while the
+    cross-repo event schema is `stage-taxonomy-2.0`.  Consumers key off this value, so
+    a bump is a cross-repo contract decision; registering codes is additive and does
+    not need one.  This case exists so the next author cannot repeat the mistake.
+    """
+    assert REASON_TAXONOMY_VERSION == "1.1", (
+        "the flat reason taxonomy is the frozen N-1 contract (see "
+        "tests/unit/test_stage_taxonomy.py); adding codes is additive and must NOT "
+        "bump it - a bump is a cross-repo contract change"
     )
+
+
+def test_the_newly_registered_codes_are_present() -> None:
+    """The 15 codes that were invisible to the regex-era gate must stay registered
+    (additive: a later edit may not quietly drop them)."""
+    expected = {
+        "focus_policy_explicit_document_kind", "focus_policy_explicit_kind_not_allowed",
+        "focus_policy_announcement_or_notice", "focus_policy_prospectus_keyword",
+        "focus_policy_call_transcript_keyword", "focus_policy_strict_broker_evidence",
+        "focus_policy_commentary_without_broker_evidence", "focus_policy_regulatory_form",
+        "focus_policy_semi_annual_keyword", "focus_policy_quarterly_keyword",
+        "focus_policy_annual_keyword", "focus_policy_financial_report_keyword",
+        "focus_policy_investor_relations_keyword", "v2_profile_admitted",
+        "stale_gap_hash",
+    }
+    missing = sorted(code for code in expected if code not in REASONS)
+    assert not missing, f"registered 2026-09-15 but now missing: {missing}"
 
 
 def test_every_emitted_reason_is_registered() -> None:

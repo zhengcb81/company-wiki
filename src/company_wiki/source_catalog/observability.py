@@ -28,7 +28,14 @@ from datetime import datetime, timezone
 from enum import Enum
 from typing import Any
 
-REASON_TAXONOMY_VERSION = "1.2"
+# FROZEN N-1 FLAT TAXONOMY (do not bump when codes are added).
+# tests/unit/test_stage_taxonomy.py pins this string as the N-1 compatibility contract
+# ("N-1 compat: the v1.1 flat taxonomy constant is untouched") while the cross-repo
+# event schema is `stage-taxonomy-2.0`; consumers of the flat taxonomy key off this
+# value, so changing it is a cross-repo contract decision, NOT something a code
+# addition may do on its own.  The registry itself is additive: new codes are appended
+# (2026-09-15 added the 15 focus/admission codes that were previously invisible).
+REASON_TAXONOMY_VERSION = "1.1"
 
 # Canonical reason taxonomy (additive; codes are never removed, only
 # deprecated) — kept in sync with admission/reuse/resolver/artifact codes.
