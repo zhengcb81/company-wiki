@@ -16,7 +16,7 @@ from .lock import CatalogOperationLock
 from .normalizer import backfill_text_fingerprints, normalize_catalog
 from .section_extractor import extract_sections_catalog
 from .scanner import R4_PROVENANCE_KEY, scan_catalog, v2_scan_shadow_from_snapshot
-from .store import CatalogStore
+from .store import CatalogStore, metadata_object
 from .reader import ReadOnlyCatalogReader
 from .summarizer import summarize_catalog
 
@@ -79,21 +79,23 @@ def _location_order_key(location: dict[str, Any]) -> tuple[int, str, str, str]:
 
 
 def _read_shared_metadata(raw: Any) -> dict[str, Any]:
-    """Parse the shared ``documents.metadata_json`` column without ever raising.
+    """The v1 adapter NAME for the single read chain (B10), not a second implementation.
 
     The column is written by several modules, so its shape is not this module's to
     assume (work package b05-read-side-malformed-columns).  Malformed content becomes an
     empty object here; the *state* is reported by the caller that also reads the reserved
     provenance key (`metadata_problem="unreadable_metadata"`), which is how a malformed
-    document is distinguished from one that simply carries no metadata.  Fixes
-    B-VR05M-04's `SourceCatalog.query()` site, which raised JSONDecodeError for invalid
-    JSON and for the empty string.
+    document is distinguished from one that simply carries no metadata.
+
+    B10 converged this function onto ``store.metadata_object``: the two were separate
+    implementations of the SAME contract (both return ``{}`` for anything that is not a JSON
+    object, and their catch sets are equivalent - ``json.JSONDecodeError`` and
+    ``UnicodeDecodeError`` are both ``ValueError`` subclasses).  The name stays because
+    callers use it, and it is registered in ``read_chain.LEGACY_READ_ADAPTERS`` with its
+    removal condition; what must NOT come back is a second parse here, which
+    ``tests/contract/test_b10_read_chain.py`` now refuses.
     """
-    try:
-        payload = json.loads(raw or "{}")
-    except (TypeError, ValueError, RecursionError):
-        return {}
-    return payload if isinstance(payload, dict) else {}
+    return metadata_object(raw)
 
 
 def _utc_now() -> str:
