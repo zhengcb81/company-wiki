@@ -21,6 +21,7 @@ from typing import Any
 
 from .artifact_handle import ArtifactHandle, validate_artifact
 from .reader import CatalogReader
+from .store import metadata_object
 
 ARTIFACT_READ_MODEL_SCHEMA_VERSION = "1.0"
 ARTIFACT_READ_MODEL_SCHEMA = "artifact-read-model-1.0"
@@ -99,17 +100,12 @@ def _artifact_row(reader: CatalogReader, artifact_id: str) -> dict[str, Any] | N
     artifact = dict(row)
     # schema_version + source_sha256 live in the producer metadata; the
     # artifacts table has no such columns (same convention as backfill).
-    import json
-
-    try:
-        metadata = json.loads(str(artifact.get("metadata_json") or "{}"))
-        if isinstance(metadata, dict):
-            if "schema_version" in metadata:
-                artifact["schema_version"] = metadata["schema_version"]
-            if "source_sha256" in metadata:
-                artifact["source_sha256"] = metadata["source_sha256"]
-    except json.JSONDecodeError:
-        pass
+    # B10-3: the parse is the single chain's (store.metadata_object).
+    metadata = metadata_object(artifact.get("metadata_json"))
+    if "schema_version" in metadata:
+        artifact["schema_version"] = metadata["schema_version"]
+    if "source_sha256" in metadata:
+        artifact["source_sha256"] = metadata["source_sha256"]
     return artifact
 
 

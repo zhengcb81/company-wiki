@@ -33,6 +33,7 @@ from .observability import (
     stage_sequence,
 )
 from .reader import CatalogReader
+from .store import metadata_object
 
 LIFECYCLE_SCHEMA_VERSION = "1.0"
 LIFECYCLE_SCHEMA = "source-lifecycle-1.0"
@@ -145,14 +146,9 @@ def _safety_receipt(reader: CatalogReader, source_id: str) -> dict | None:
     )
     if row is None:
         return None
-    import json
-
-    try:
-        metadata = json.loads(str(row["metadata_json"] or "{}"))
-    except json.JSONDecodeError:
-        return None
-    if not isinstance(metadata, dict):
-        return None
+    # B10-3: the parse is the single chain's (store.metadata_object); a malformed column
+    # means "no receipt" (the chain degrades to {} and the lookup below returns None).
+    metadata = metadata_object(row["metadata_json"])
     receipt = metadata.get(PROMPT_INJECTION_REVIEW_KEY)
     if not isinstance(receipt, dict):
         return None

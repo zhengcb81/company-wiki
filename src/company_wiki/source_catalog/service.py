@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import csv
 import hashlib
-import json
 import os
 from pathlib import Path
 from typing import Any, Callable
@@ -16,7 +15,7 @@ from .lock import CatalogOperationLock
 from .normalizer import backfill_text_fingerprints, normalize_catalog
 from .section_extractor import extract_sections_catalog
 from .scanner import R4_PROVENANCE_KEY, scan_catalog, v2_scan_shadow_from_snapshot
-from .store import CatalogStore, metadata_object
+from .store import CatalogStore, metadata_object, metadata_state
 from .reader import ReadOnlyCatalogReader
 from .summarizer import summarize_catalog
 
@@ -434,14 +433,14 @@ class SourceCatalog:
             metadata: Any = {}
             metadata_problem: str | None = None
             provenance_fields: dict[str, Any] = {}
-            try:
-                payload = json.loads(row["metadata_json"] or "{}")
-            except (TypeError, ValueError, RecursionError):
-                # RecursionError is a RuntimeError, NOT a ValueError (B-VR05M-02):
-                # deeply nested JSON raised straight past the first version of this
-                # guard, so "never a crash" was literally false for that shape.
-                payload = None
-            if not isinstance(payload, dict):
+            # B10-3: the parse is the single chain's reporting half (store.metadata_state);
+            # both of its states map to this caller's named state below.  History
+            # (B-VR05M-02): RecursionError is a RuntimeError, NOT a ValueError - deeply
+            # nested JSON raised straight past the first version of this guard, so "never a
+            # crash" was literally false for that shape.  The chain's catch set covers it
+            # now (and is narrower than the old bare ValueError - B-VR-B10-07).
+            payload, parse_state = metadata_state(row["metadata_json"])
+            if parse_state is not None:
                 metadata_problem = "unreadable_metadata"
             else:
                 metadata = payload

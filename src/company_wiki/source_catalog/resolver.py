@@ -17,6 +17,7 @@ from typing import Any
 from .policy import _effective_reusable
 from .scanner import R4_PROVENANCE_KEY
 from .service import SourceCatalog
+from .store import metadata_state
 
 
 def _verified_assertion_identity(
@@ -812,13 +813,17 @@ def _metadata_conflict_reason(store: Any, document_id: str) -> str:
     )
     if row is None:
         return ""
-    try:
-        payload = json.loads(row["metadata_json"] or "{}")
-    except (TypeError, ValueError, RecursionError):
-        # RecursionError is a RuntimeError and escaped the first version of this guard
-        # (B-VR05M-02): a deeply nested payload raised out of the envelope builder.
+    # B10-3: the parse is the single chain's reporting half (store.metadata_state), which
+    # keeps the two named states this caller reports.
+    payload, state = metadata_state(row["metadata_json"])
+    if state == "unreadable":
+        # B-VR05M-02 history: RecursionError is a RuntimeError and escaped the first
+        # version of this guard, so a deeply nested payload raised out of the envelope
+        # builder.  The chain's catch set is narrower than the old bare ValueError - the
+        # delta is documented at service._read_shared_metadata (B-VR-B10-07) and is
+        # unreachable for sqlite TEXT.
         return "shared metadata column is not readable JSON"
-    if not isinstance(payload, dict):
+    if state == "not_object":
         return "shared metadata column is not a JSON object"
     reserved = payload.get(R4_PROVENANCE_KEY)
     if reserved is None:

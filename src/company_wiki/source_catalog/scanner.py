@@ -35,7 +35,7 @@ from .adapters.common import (
     _walk_files,
 )
 from .models import CatalogConfig, DOCUMENT_EXTENSIONS, SCANNER_VERSION, RootSpec, ScanReport
-from .store import CatalogStore, canonical_json
+from .store import CatalogStore, canonical_json, metadata_object
 
 
 _DATE_RE = re.compile(r"(?<!\d)(20\d{2})[-_.年](0[1-9]|1[0-2]|[1-9])[-_.月](0[1-9]|[12]\d|3[01]|[1-9])")
@@ -1400,16 +1400,11 @@ def _provenance_record(
 def _previous_provenance_fields(stored_json: Any) -> dict[str, Any]:
     """The reserved block's ``fields`` from a stored column (empty when the row
     predates B05, which is the only case that falls back to reading the
-    container)."""
-    try:
-        stored = json.loads(stored_json or "{}")
-    except (json.JSONDecodeError, TypeError, RecursionError):
-        # B-VR05M-04/-02: RecursionError is a RuntimeError (deeply nested JSON) and
-        # TypeError covers a non-string payload, so catching only JSONDecodeError let a
-        # re-scan die here.  A malformed column has no previous provenance to report.
-        return {}
-    if not isinstance(stored, dict):
-        return {}
+    container).
+
+    B10-3: the parse is the single chain's (store.metadata_object); a malformed
+    column has no previous provenance to report (B-VR05M-04/-02 history)."""
+    stored = metadata_object(stored_json)
     reserved = stored.get(R4_PROVENANCE_KEY)
     if isinstance(reserved, dict) and isinstance(reserved.get("fields"), dict):
         return reserved["fields"]
@@ -1692,17 +1687,11 @@ def _merge_document_row(
         )
         return
     if priority <= existing_document["metadata_priority"]:
-        existing_meta = {}
-        try:
-            existing_meta = json.loads(existing_document["metadata_json"] or "{}")
-        except (json.JSONDecodeError, TypeError, RecursionError):
-            # B-VR05M-04: only JSONDecodeError was caught, so a VALID-JSON non-object
-            # payload (e.g. an array) fell through and `existing_meta.get(...)` raised
-            # AttributeError during a re-scan.  Malformed means "no mergeable metadata",
-            # never a crash in the ingest path.
-            existing_meta = {}
-        if not isinstance(existing_meta, dict):
-            existing_meta = {}
+        # B10-3: the parse is the single chain's (store.metadata_object).  Malformed means
+        # "no mergeable metadata", never a crash in the ingest path (B-VR05M-04 history:
+        # only JSONDecodeError was caught here, so a valid-JSON non-object payload fell
+        # through and `.get(...)` raised AttributeError during a re-scan).
+        existing_meta = metadata_object(existing_document["metadata_json"])
         existing_inner = existing_meta.get("dayu_meta") or existing_meta.get("acquisition") or {}
         new_inner = document_metadata.get("dayu_meta") or document_metadata.get("acquisition") or {}
         # Phase 16.5: when the same content-addressed document is

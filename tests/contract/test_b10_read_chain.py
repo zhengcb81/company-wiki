@@ -294,6 +294,31 @@ def test_b10_baseline_declares_which_table_each_reader_reads() -> None:
         )
 
 
+def test_b10_explicit_non_chain_readers_are_declared_and_real() -> None:
+    """A reader that deliberately RAISES on malformed content must stay declared.
+
+    section_query's contract is a named error, not a silent {} - so it is NOT converged,
+    and that decision is registered (the B10 rule: no permanent silent double-run).  The
+    declaration must point at code that exists, and the site must still be a direct reader
+    (otherwise the declaration describes something that is gone).
+    """
+    assert read_chain.EXPLICIT_NON_CHAIN_READERS, "nothing is declared as non-chain"
+    for key, reason in read_chain.EXPLICIT_NON_CHAIN_READERS.items():
+        assert reason.strip(), f"{key} has an empty reason"
+        module_rel, _, symbol = key.split("::")[0], "::", key.split("::")[1]
+        module_file = SOURCE / module_rel
+        assert module_file.is_file(), f"{key}: {module_rel} does not exist"
+        source = module_file.read_text(encoding="utf-8")
+        short = symbol.rsplit(".", 1)[-1]
+        assert short in source, f"{key}: symbol {short} not found in {module_rel}"
+        assert key in read_chain.CONFIRMED_DIRECT_READERS, (
+            f"{key} is declared non-chain but no longer appears among the direct readers"
+        )
+    assert "section_query.py::SectionQueryService.list_sections" in (
+        read_chain.EXPLICIT_NON_CHAIN_READERS
+    ), "the known deliberate-raise reader must stay declared"
+
+
 def test_b10_registered_adapters_are_complete_and_importable() -> None:
     required = {"version", "semantics", "byte_level", "reads_files", "removal_condition"}
     assert read_chain.LEGACY_READ_ADAPTERS, "the registry is empty - nothing is declared"

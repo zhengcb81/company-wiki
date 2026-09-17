@@ -931,6 +931,26 @@ def _tolerate_undecodable_text(connection: sqlite3.Connection) -> None:
     connection.text_factory = lambda raw: raw.decode("utf-8", "replace")
 
 
+def metadata_state(raw: Any) -> tuple[dict[str, Any], str | None]:
+    """The reporting half of the single chain: the column as ``(object, state)``.
+
+    ``metadata_object`` is the plain half; this adds WHY the content is not a usable object,
+    so the callers that report state (``service.metadata_problem``, the resolver's conflict
+    reasons) can share the ONE parse implementation instead of keeping their own guards
+    (B10-3).  ``state`` is ``None`` when the content parsed into a JSON object, otherwise:
+
+    * ``"unreadable"`` - not valid JSON, not decodable, too deeply nested, or not a string;
+    * ``"not_object"`` - valid JSON that is not an object (an array, a number, a string).
+    """
+    try:
+        value = json.loads(raw or "{}")
+    except (json.JSONDecodeError, TypeError, RecursionError, UnicodeDecodeError):
+        return {}, "unreadable"
+    if isinstance(value, dict):
+        return value, None
+    return {}, "not_object"
+
+
 def metadata_object(raw: Any) -> dict[str, Any]:
     """The shared ``documents.metadata_json`` column as an object, never raising.
 
@@ -942,12 +962,11 @@ def metadata_object(raw: Any) -> dict[str, Any]:
     says so.  A function rather than inline branches because the FC-1204 complexity
     ratchet is frozen per file and inline copies pushed two modules over it (26 > 25 and
     22 > 21), which is the sanctioned "new judgement, new function" split.
+
+    B10: this is the plain half of the single chain - the reporting half is
+    ``metadata_state`` (same parse, one implementation).
     """
-    try:
-        value = json.loads(raw or "{}")
-    except (json.JSONDecodeError, TypeError, RecursionError, UnicodeDecodeError):
-        return {}
-    return value if isinstance(value, dict) else {}
+    return metadata_state(raw)[0]
 
 
 class CatalogStore:

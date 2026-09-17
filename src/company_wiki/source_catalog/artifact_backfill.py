@@ -45,6 +45,7 @@ from pathlib import Path
 from typing import Any
 
 from .artifact_handle import ArtifactHandle, validate_artifact
+from .store import metadata_object
 
 ARTIFACT_BINDING_SCHEMA_VERSION = "1.0"
 ARTIFACT_BINDING_EVIDENCE_BASIS = "legacy-artifact-backfill"
@@ -171,17 +172,15 @@ def _classify(row: sqlite3.Row, *, registry: dict[str, set[str]],
         "status": str(row["status"] or ""),
         "created_at": str(row["created_at"] or ""),
     }
-    try:
-        metadata = json.loads(row["metadata_json"] or "{}")
-        if isinstance(metadata, dict):
-            # schema_version + source_sha256 live in the producer metadata; the
-            # artifacts table has no such columns.
-            if "schema_version" in metadata:
-                artifact["schema_version"] = metadata["schema_version"]
-            if "source_sha256" in metadata:
-                artifact["source_sha256"] = metadata["source_sha256"]
-    except (json.JSONDecodeError, TypeError):
-        pass
+    # B10-3: the parse is the single chain's (store.metadata_object) - malformed content
+    # degrades to no metadata instead of raising out of the backfill.
+    metadata = metadata_object(row["metadata_json"])
+    # schema_version + source_sha256 live in the producer metadata; the
+    # artifacts table has no such columns.
+    if "schema_version" in metadata:
+        artifact["schema_version"] = metadata["schema_version"]
+    if "source_sha256" in metadata:
+        artifact["source_sha256"] = metadata["source_sha256"]
 
     primary_source_id = str(row["primary_source_id"] or "")
     source_sha = str(row["source_content_sha256"] or "")

@@ -81,60 +81,52 @@ LEGACY_READ_ADAPTERS: dict[str, dict[str, object]] = {
     },
 }
 
-#: The convergence ratchet.  ``module.py::Class.method`` -> which TABLE the column belongs
-#: to.  Keys are qualified (B-VR-B10-03: a bare class key collapsed every method of the
-#: class into one entry, so a new method was invisible), and each entry names the table it
-#: reads - the `artifacts` table has a column with the SAME name, and the first flat list
-#: mixed the two (B-VR-B10-02): three keys were artifacts-only and `normalize_catalog` reads
-#: both.  ``scanner._previous_provenance_fields`` is the reader the first list MISSED
-#: entirely (B-VR-B10-04): its parameter is renamed, so it is recorded here as a blind spot.
+#: The convergence ratchet after B10-3 batch 1.  ``module.py::Class.method`` -> which TABLE
+#: the column belongs to.  Keys are qualified (B-VR-B10-03: a bare class key collapsed every
+#: method of the class into one entry, so a new method was invisible), and each entry names
+#: the table it reads - the `artifacts` table has a column with the SAME name, and the first
+#: flat list mixed the two (B-VR-B10-02).
+#:
+#: Batch 1 converged seven sites onto the chain (artifact_backfill._classify,
+#: artifact_read_model._artifact_row, scanner._merge_document_row,
+#: scanner._previous_provenance_fields, source_lifecycle._safety_receipt,
+#: service.SourceCatalog.query_filing_candidates via metadata_state, and
+#: resolver._metadata_conflict_reason via metadata_state).  What REMAINS here and why:
+#:
+#: * ``normalizer`` (both) - the parse sits in normalize_catalog's FAILURE path (a malformed
+#:   column currently produces a per-document normalization-failure record with attempt
+#:   counting); converging it to {} would change those records.  Needs its own analysis.
+#: * ``section_query`` - declared in EXPLICIT_NON_CHAIN_READERS: its contract is to RAISE a
+#:   named error on malformed artifact metadata.
+#:
 #: The set of keys may only shrink; a site that disappears must be deleted here in the same
 #: change, or the gate reports the stale entry.
 CONFIRMED_DIRECT_READERS: dict[str, dict[str, str]] = {
-    "artifact_backfill.py::_classify": {
-        "table": "artifacts",
-        "note": "row comes from the artifacts table (B-VR-B10-02)",
-    },
-    "artifact_read_model.py::_artifact_row": {
-        "table": "artifacts",
-        "note": "artifact.get('metadata_json') - the artifacts column (B-VR-B10-02)",
-    },
     "normalizer.py::_frontmatter": {
         "table": "documents",
-        "note": "document row of normalize_catalog (sqlite3.Row of the documents query)",
+        "note": "document row of normalize_catalog (sqlite3.Row of the documents query); "
+                "deferred: failure-path semantics",
     },
     "normalizer.py::normalize_catalog": {
-        "table": "documents+artifacts",
-        "note": (":1633 parses the documents column, :1684 an artifacts column "
-                 "(B-VR-B10-02: one symbol, two tables)"),
-    },
-    "resolver.py::_metadata_conflict_reason": {
         "table": "documents",
-        "note": "SELECT metadata_json FROM documents",
-    },
-    "scanner.py::_merge_document_row": {
-        "table": "documents",
-        "note": "existing_document comes from the documents query",
-    },
-    "scanner.py::_previous_provenance_fields": {
-        "table": "documents",
-        "visible_to_scan": "False",
-        "note": ("json.loads(stored_json) at :1405 - renamed parameter, invisible to the "
-                 "argument scan; fed by existing_document['metadata_json'] at :1739 "
-                 "(B-VR-B10-04, the reader the first list missed)"),
+        "note": ":1633 in normalize_catalog's per-document loop; deferred: a malformed column "
+                "currently becomes a normalization-failure record, and {} would change that",
     },
     "section_query.py::SectionQueryService.list_sections": {
         "table": "artifacts",
-        "note": "SELECT a...., a.metadata_json FROM artifacts a (B-VR-B10-02)",
+        "note": "deliberate raise - see EXPLICIT_NON_CHAIN_READERS",
     },
-    "service.py::SourceCatalog.query_filing_candidates": {
-        "table": "documents",
-        "note": "entity_rows = SELECT d.metadata_json FROM documents d",
-    },
-    "source_lifecycle.py::_safety_receipt": {
-        "table": "documents",
-        "note": "SELECT metadata_json FROM documents WHERE primary_source_id ...",
-    },
+}
+
+#: Readers that deliberately do NOT go through the chain because their contract is to RAISE
+#: a named error on malformed content - converting them to {} would hide the failure from
+#: the caller.  Declared so "not on the chain" is a stated decision, never a silent
+#: double-run (the B10 acceptance rule).
+EXPLICIT_NON_CHAIN_READERS: dict[str, str] = {
+    "section_query.py::SectionQueryService.list_sections": (
+        "raises SectionQueryError('sections artifact metadata is not valid JSON') on "
+        "malformed artifact metadata - degrading to {} would hide that error"
+    ),
 }
 
 #: The column's VALUE being passed into a call.  A parse-by-helper indirection is invisible
