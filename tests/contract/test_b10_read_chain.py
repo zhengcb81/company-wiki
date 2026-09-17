@@ -34,29 +34,60 @@ SOURCE = Path(__file__).resolve().parents[2] / "src" / "company_wiki" / "source_
 COLUMN = "metadata_json"
 
 
-def _enclosing_symbols(tree: ast.AST) -> dict[int, ast.AST]:
-    owner: dict[int, ast.AST] = {}
-    for node in ast.walk(tree):
-        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
-            for child in ast.walk(node):
-                if isinstance(child, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
-                    continue
-                owner.setdefault(id(child), node)
-    return owner
+class _ScopeVisitor(ast.NodeVisitor):
+    """Maps every call node to its QUALIFIED scope: `Class.method`, not just the class.
+
+    The first version mapped a call to its OUTERMOST container, so every method of
+    `SourceCatalog` collapsed into the one key `service.py::SourceCatalog` - which the
+    review exploited: adding a NEW method that reads the column still resolved to the
+    baselined class key and passed (B-VR-B10-03).  Qualified keys give every method its own
+    identity, so a new method is a new key and the ratchet sees it.
+    """
+
+    def __init__(self) -> None:
+        self._stack: list[str] = []
+        self.scopes: dict[int, str] = {}
+
+    def _enter(self, node: ast.AST) -> None:
+        self._stack.append(getattr(node, "name", "?"))
+        self.generic_visit(node)
+        self._stack.pop()
+
+    visit_FunctionDef = _enter
+    visit_AsyncFunctionDef = _enter
+    visit_ClassDef = _enter
+
+    def visit_Call(self, node: ast.Call) -> None:
+        if self._stack:
+            self.scopes[id(node)] = ".".join(self._stack)
+        self.generic_visit(node)
+
+
+def _names_exact_column(node: ast.AST) -> bool:
+    """True only when the expression references the column EXACTLY.
+
+    A substring match made the gate red for OTHER tables' columns: the review built
+    `json.loads(row["acquisition_metadata_json"])` and the gate demanded convergence onto the
+    documents column (B-VR-B10-05).  Only an exact `metadata_json` constant counts.
+    """
+    for sub in ast.walk(node):
+        if isinstance(sub, ast.Constant) and sub.value == COLUMN:
+            return True
+    return False
 
 
 def _scan_confirmed_direct_readers() -> set[str]:
-    """`relative/path.py::symbol` for every `json.loads(...)` whose ARGUMENT names the column.
+    """`relative/path.py::Class.method` for every `json.loads(...)` that names the column.
 
-    RECURSIVE on purpose: `source_catalog/adapters/` holds 8 modules of its own, and the
-    first version of this scan used ``glob("*.py")``, so a direct reader added there would
-    have passed the gate unnoticed.  The key keeps the relative path so two files with the
-    same basename cannot collide.
+    RECURSIVE on purpose (`source_catalog/adapters/` holds 8 modules of its own), and the
+    scope is the qualified `Class.method` so a new method cannot hide behind its class.
     """
     found: set[str] = set()
     for path in sorted(SOURCE.rglob("*.py")):
-        tree = ast.parse(path.read_text(encoding="utf-8"))
-        owner = _enclosing_symbols(tree)
+        source = path.read_text(encoding="utf-8")
+        tree = ast.parse(source)
+        visitor = _ScopeVisitor()
+        visitor.visit(tree)
         for node in ast.walk(tree):
             if not isinstance(node, ast.Call):
                 continue
@@ -64,12 +95,10 @@ def _scan_confirmed_direct_readers() -> set[str]:
             name = func.attr if isinstance(func, ast.Attribute) else getattr(func, "id", "")
             if name != "loads":
                 continue
-            argument = " ".join(ast.unparse(item) for item in node.args)
-            if COLUMN not in argument:
+            if not any(_names_exact_column(argument) for argument in node.args):
                 continue
-            symbol = owner.get(id(node))
             relative = path.relative_to(SOURCE).as_posix()
-            found.add(f"{relative}::{getattr(symbol, 'name', '<module>')}")
+            found.add(f"{relative}::{visitor.scopes.get(id(node), '<module>')}")
     return found
 
 
@@ -104,7 +133,7 @@ def _reads_column_as_value(node: ast.AST) -> bool:
 
 
 def _scan_column_value_handoffs() -> set[str]:
-    """`relative/path.py::symbol` for every call that RECEIVES the column's value.
+    """`relative/path.py::Class.method` for every call that RECEIVES the column's value.
 
     The `json.loads` scan can be walked around: a generic helper called as
     `_parse(row["metadata_json"])` names the column at the call site (whose callee is not
@@ -116,16 +145,17 @@ def _scan_column_value_handoffs() -> set[str]:
     """
     found: set[str] = set()
     for path in sorted(SOURCE.rglob("*.py")):
-        tree = ast.parse(path.read_text(encoding="utf-8"))
-        owner = _enclosing_symbols(tree)
+        source = path.read_text(encoding="utf-8")
+        tree = ast.parse(source)
+        visitor = _ScopeVisitor()
+        visitor.visit(tree)
         for node in ast.walk(tree):
             if not isinstance(node, ast.Call):
                 continue
             if not any(_reads_column_as_value(argument) for argument in node.args):
                 continue
-            symbol = owner.get(id(node))
             relative = path.relative_to(SOURCE).as_posix()
-            found.add(f"{relative}::{getattr(symbol, 'name', '<module>')}")
+            found.add(f"{relative}::{visitor.scopes.get(id(node), '<module>')}")
     return found
 
 
@@ -223,11 +253,45 @@ def test_b10_no_new_confirmed_direct_reader() -> None:
 
 def test_b10_baseline_has_no_stale_entry() -> None:
     confirmed = _scan_confirmed_direct_readers()
-    stale = sorted(set(read_chain.CONFIRMED_DIRECT_READERS) - confirmed)
+    baseline = read_chain.CONFIRMED_DIRECT_READERS
+    stale = sorted(
+        key for key, annotation in baseline.items()
+        if annotation.get("visible_to_scan") != "False" and key not in confirmed
+    )
     assert not stale, (
         "the baseline still lists sites that no longer parse the column: " + ", ".join(stale) +
         " - remove them so the ratchet keeps meaning something"
     )
+    # Blind spots are invisible to the scan BY CONSTRUCTION (renamed parameter), so they are
+    # exempt from the staleness check - but their code must still exist, or the entry lies.
+    for key, annotation in baseline.items():
+        if annotation.get("visible_to_scan") != "False":
+            continue
+        module_file = SOURCE / key.split("::")[0]
+        symbol = key.split("::")[1].rsplit(".", 1)[-1]
+        assert f"def {symbol}" in module_file.read_text(encoding="utf-8"), (
+            f"the blind spot {key} no longer exists - remove it from the baseline"
+        )
+
+
+def test_b10_baseline_declares_which_table_each_reader_reads() -> None:
+    """B-VR-B10-02: the flat list mixed the documents column with the artifacts column.
+
+    Both tables have a column named `metadata_json`, so every confirmed reader must say
+    WHICH table it reads - otherwise the B10-3 convergence list is scoped to the wrong
+    rows.
+    """
+    allowed = {"documents", "artifacts", "documents+artifacts"}
+    assert read_chain.CONFIRMED_DIRECT_READERS, "the baseline is empty"
+    for key, annotation in read_chain.CONFIRMED_DIRECT_READERS.items():
+        assert annotation.get("table") in allowed, (
+            f"{key} does not declare which table its column belongs to"
+        )
+        assert annotation.get("note"), f"{key} has no note explaining the classification"
+        assert annotation.get("visible_to_scan") in (None, "True", "False"), (
+            f"{key}.visible_to_scan must be 'True' or 'False' (as a string, like the rest "
+            "of the registry)"
+        )
 
 
 def test_b10_registered_adapters_are_complete_and_importable() -> None:

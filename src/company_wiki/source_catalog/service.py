@@ -88,12 +88,16 @@ def _read_shared_metadata(raw: Any) -> dict[str, Any]:
     document is distinguished from one that simply carries no metadata.
 
     B10 converged this function onto ``store.metadata_object``: the two were separate
-    implementations of the SAME contract (both return ``{}`` for anything that is not a JSON
-    object, and their catch sets are equivalent - ``json.JSONDecodeError`` and
-    ``UnicodeDecodeError`` are both ``ValueError`` subclasses).  The name stays because
-    callers use it, and it is registered in ``read_chain.LEGACY_READ_ADAPTERS`` with its
-    removal condition; what must NOT come back is a second parse here, which
-    ``tests/contract/test_b10_read_chain.py`` now refuses.
+    implementations of the SAME contract for every input the column can actually hold (both
+    return ``{}`` for anything that is not a JSON object; equivalence measured on 24 inputs
+    including deep-nesting ``RecursionError`` and non-UTF-8 bytes).  The catch sets are NOT
+    identical - the chain catches ``json.JSONDecodeError``/``UnicodeDecodeError`` where this
+    function caught the wider ``ValueError`` - so a hypothetical object whose ``__bool__``
+    raises a bare ``ValueError`` would now propagate instead of degrading to ``{}``
+    (B-VR-B10-07); the only caller passes sqlite TEXT, where that difference is unreachable.
+    The name stays because callers use it, and it is registered in
+    ``read_chain.LEGACY_READ_ADAPTERS`` with its removal condition; what must NOT come back
+    is a second parse here, which ``tests/contract/test_b10_read_chain.py`` now refuses.
     """
     return metadata_object(raw)
 

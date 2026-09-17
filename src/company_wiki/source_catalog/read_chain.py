@@ -81,20 +81,61 @@ LEGACY_READ_ADAPTERS: dict[str, dict[str, object]] = {
     },
 }
 
-#: The convergence ratchet.  ``module.py::symbol`` pairs that still parse the shared column
-#: directly.  Derived from the AST inventory; it may only shrink.  A site that disappears
-#: must be deleted here in the same change, or the gate reports the stale entry.
-CONFIRMED_DIRECT_READERS: tuple[str, ...] = (
-    "artifact_backfill.py::_classify",
-    "artifact_read_model.py::_artifact_row",
-    "normalizer.py::_frontmatter",
-    "normalizer.py::normalize_catalog",
-    "resolver.py::_metadata_conflict_reason",
-    "scanner.py::_merge_document_row",
-    "section_query.py::SectionQueryService",
-    "service.py::SourceCatalog",
-    "source_lifecycle.py::_safety_receipt",
-)
+#: The convergence ratchet.  ``module.py::Class.method`` -> which TABLE the column belongs
+#: to.  Keys are qualified (B-VR-B10-03: a bare class key collapsed every method of the
+#: class into one entry, so a new method was invisible), and each entry names the table it
+#: reads - the `artifacts` table has a column with the SAME name, and the first flat list
+#: mixed the two (B-VR-B10-02): three keys were artifacts-only and `normalize_catalog` reads
+#: both.  ``scanner._previous_provenance_fields`` is the reader the first list MISSED
+#: entirely (B-VR-B10-04): its parameter is renamed, so it is recorded here as a blind spot.
+#: The set of keys may only shrink; a site that disappears must be deleted here in the same
+#: change, or the gate reports the stale entry.
+CONFIRMED_DIRECT_READERS: dict[str, dict[str, str]] = {
+    "artifact_backfill.py::_classify": {
+        "table": "artifacts",
+        "note": "row comes from the artifacts table (B-VR-B10-02)",
+    },
+    "artifact_read_model.py::_artifact_row": {
+        "table": "artifacts",
+        "note": "artifact.get('metadata_json') - the artifacts column (B-VR-B10-02)",
+    },
+    "normalizer.py::_frontmatter": {
+        "table": "documents",
+        "note": "document row of normalize_catalog (sqlite3.Row of the documents query)",
+    },
+    "normalizer.py::normalize_catalog": {
+        "table": "documents+artifacts",
+        "note": (":1633 parses the documents column, :1684 an artifacts column "
+                 "(B-VR-B10-02: one symbol, two tables)"),
+    },
+    "resolver.py::_metadata_conflict_reason": {
+        "table": "documents",
+        "note": "SELECT metadata_json FROM documents",
+    },
+    "scanner.py::_merge_document_row": {
+        "table": "documents",
+        "note": "existing_document comes from the documents query",
+    },
+    "scanner.py::_previous_provenance_fields": {
+        "table": "documents",
+        "visible_to_scan": "False",
+        "note": ("json.loads(stored_json) at :1405 - renamed parameter, invisible to the "
+                 "argument scan; fed by existing_document['metadata_json'] at :1739 "
+                 "(B-VR-B10-04, the reader the first list missed)"),
+    },
+    "section_query.py::SectionQueryService.list_sections": {
+        "table": "artifacts",
+        "note": "SELECT a...., a.metadata_json FROM artifacts a (B-VR-B10-02)",
+    },
+    "service.py::SourceCatalog.query_filing_candidates": {
+        "table": "documents",
+        "note": "entity_rows = SELECT d.metadata_json FROM documents d",
+    },
+    "source_lifecycle.py::_safety_receipt": {
+        "table": "documents",
+        "note": "SELECT metadata_json FROM documents WHERE primary_source_id ...",
+    },
+}
 
 #: The column's VALUE being passed into a call.  A parse-by-helper indirection is invisible
 #: to the `json.loads` scan above - measured, not theorised: I built a probe with a generic
@@ -113,14 +154,15 @@ COLUMN_VALUE_HANDOFFS: tuple[str, ...] = (
     "artifact_backfill.py::_classify",
     "artifact_read_model.py::_artifact_row",
     "backfill_v2.py::run_backfill",
-    "extraction_quality.py::ExtractionQualityService",
+    "extraction_quality.py::ExtractionQualityService._artifact",
     "migration_ledger.py::build_quality_ledger",
     "normalizer.py::_frontmatter",
     "normalizer.py::normalize_catalog",
     "resolver.py::_metadata_conflict_reason",
     "scanner.py::_merge_document_row",
-    "section_query.py::SectionQueryService",
-    "service.py::SourceCatalog",
+    "section_query.py::SectionQueryService.list_sections",
+    "service.py::SourceCatalog.query",
+    "service.py::SourceCatalog.query_filing_candidates",
     "source_lifecycle.py::_safety_receipt",
 )
 
@@ -158,7 +200,7 @@ GATE_BOUNDARIES: dict[str, str] = {
 #:   * ``scanner.py::_merge_metadata_json``  - a true reader under a renamed argument;
 #:   * ``store.py::read_pipeline_status``    - a FALSE POSITIVE (parses ``report_json``).
 HEURISTIC_READER_CANDIDATES: tuple[str, ...] = (
-    "extraction_quality.py::ExtractionQualityService",
+    "extraction_quality.py::ExtractionQualityService._artifact",
     "normalizer.py::normalize_catalog",
     "prompt_injection.py::read_prompt_injection_review",
     "prompt_injection.py::record_prompt_injection_review",
