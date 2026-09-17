@@ -81,23 +81,28 @@ LEGACY_READ_ADAPTERS: dict[str, dict[str, object]] = {
     },
 }
 
-#: The convergence ratchet after B10-3 batch 1.  ``module.py::Class.method`` -> which TABLE
-#: the column belongs to.  Keys are qualified (B-VR-B10-03: a bare class key collapsed every
-#: method of the class into one entry, so a new method was invisible), and each entry names
-#: the table it reads - the `artifacts` table has a column with the SAME name, and the first
-#: flat list mixed the two (B-VR-B10-02).
+#: The convergence ratchet.  ``module.py::Class.method`` -> which TABLE the column belongs to.
+#: Keys are qualified (B-VR-B10-03: a bare class key collapsed every method of the class into
+#: one entry, so a new method was invisible), and each entry names the table it reads - the
+#: `artifacts` table has a column with the SAME name, and the first flat list mixed the two
+#: (B-VR-B10-02).
 #:
-#: Batch 1 converged seven sites onto the chain (artifact_backfill._classify,
+#: Converged so far: batch 1's seven sites (artifact_backfill._classify,
 #: artifact_read_model._artifact_row, scanner._merge_document_row,
 #: scanner._previous_provenance_fields, source_lifecycle._safety_receipt,
 #: service.SourceCatalog.query_filing_candidates via metadata_state, and
-#: resolver._metadata_conflict_reason via metadata_state).  What REMAINS here and why:
+#: resolver._metadata_conflict_reason via metadata_state), then batch 2's
+#: normalizer._frontmatter, then normalizer.normalize_catalog in the P0 fix
+#: (B-VR-B10R2-01).  What REMAINS here and why:
 #:
-#: * ``normalizer`` (both) - the parse sits in normalize_catalog's FAILURE path (a malformed
-#:   column currently produces a per-document normalization-failure record with attempt
-#:   counting); converging it to {} would change those records.  Needs its own analysis.
 #: * ``section_query`` - declared in EXPLICIT_NON_CHAIN_READERS: its contract is to RAISE a
 #:   named error on malformed artifact metadata.
+#:
+#: CORRECTION (B-VR-B10R3-03): this comment used to claim that the normalizer parses "sit in
+#: normalize_catalog's FAILURE path ... a per-document normalization-failure record with
+#: attempt counting".  The r2 review proved that FALSE - those parses were OUTSIDE the
+#: per-document try, and a malformed column aborted the WHOLE run (measured, P0).  The claim
+#: is withdrawn, not reworded: there was no failure record to protect.
 #:
 #: The set of keys may only shrink; a site that disappears must be deleted here in the same
 #: change, or the gate reports the stale entry.
@@ -114,8 +119,9 @@ CONFIRMED_DIRECT_READERS: dict[str, dict[str, str]] = {
 #: an already-baselined scope kept the same qualified key and passed (probe: exit code 0,
 #: "1 passed").  The count closes that: one more site in a known scope is a new violation,
 #: and one fewer means the baseline must be lowered.  The counts are MACHINE-DERIVED from the
-#: tree (13 scopes / 16 sites); my first hand-written version under-counted two of them,
-#: which is exactly why they are derived now.
+#: tree (12 scopes / 15 sites after the batch-2 and P0 convergences; the earlier 13/16 reading
+#: was stale text in this comment - B-VR-B10R3-03); my first hand-written version
+#: under-counted two of them, which is exactly why they are derived now.
 COLUMN_VALUE_HANDOFFS: dict[str, str] = {
     "artifact_backfill.py::_classify": "1",
     "artifact_read_model.py::_artifact_row": "1",
@@ -188,11 +194,13 @@ GATE_BOUNDARIES: dict[str, str] = {
     ),
     "readers_outside_the_scanned_roots": (
         "the ratchet scans `src/company_wiki/source_catalog/**`; a second hard rule covers "
-        "the REST of the product package and currently finds ZERO readers there. MEASURED "
-        "elsewhere (2026-09-17): `scripts/` has 2 direct readers of this column "
-        "(legacy_observer.py:96, wu904_remediation_restore.py:65), `tools/` has 0 and "
-        "`tests/` has 10 (fixtures - legitimately constructing the column). The scripts/ "
-        "pair is a declared out-of-scope follow-up, NOT covered by any ratchet here."
+        "the REST of the PRODUCT package (`src/company_wiki/**` minus source_catalog) and "
+        "currently finds ZERO readers there - that rule is ENFORCED. MEASURED OUTSIDE IT "
+        "(2026-09-17): `scripts/` has 2 direct readers of this column (legacy_observer.py:96, "
+        "wu904_remediation_restore.py:65) and `tests/` has 10 (fixtures), while `tools/` has "
+        "0 - but tools/ and scripts/ are OUTSIDE the rule's root, so those numbers are "
+        "OBSERVATIONS, not enforcement (B-VR-B10R3-02: injecting a reader into either place "
+        "leaves the gate green). The scripts/ pair is a declared out-of-scope follow-up."
     ),
 }
 

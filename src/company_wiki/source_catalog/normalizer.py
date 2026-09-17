@@ -1717,8 +1717,15 @@ def normalize_catalog(
                 manifest=manifest, parser_results=()
             )
         except Exception as exc:
-            existing_metadata = json.loads(
-                document["normalization_metadata_json"] or "{}"
+            # B-VR-B10R3-01 (P2, live): this parse sits INSIDE the handler but OUTSIDE every
+            # try, so a document whose parse failed AND whose existing normalized-artifact row
+            # carries malformed metadata used to escape here and abort the WHOLE run - the
+            # same defect shape as the P0, on the sibling `normalization_metadata_json`
+            # column (measured by the reviewer: two documents seeded, the second healthy and
+            # queued behind, still `escaped=true` with zero normalized.md on disk).  The chain
+            # parses it now; the retry bookkeeping simply starts from "no previous attempt".
+            existing_metadata, _ = metadata_state(
+                document["normalization_metadata_json"]
             )
             next_attempt = int(existing_metadata.get("attempt_count") or 0) + 1
             terminal = next_attempt >= retry_limit
