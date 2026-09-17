@@ -50,6 +50,30 @@ DOCUMENT_PARSE_TIMEOUT_CODE = "document_parse_timeout"
 #: against - so the frontmatter carries this flag AND an "unverifiable" identity verdict
 #: instead of the "consistent" one that a title-only comparison would produce.
 METADATA_UNREADABLE_FLAG = "metadata_unreadable"
+
+
+def _manifest_from_column(raw: Any) -> tuple[SourceManifest | None, str | None]:
+    """``(manifest, problem_code)`` from a ``manifest_json`` column - never raises.
+
+    B-VR-B10R4-01 (P2, measured by the review): ``SourceManifest.from_dict(json.loads(column))``
+    sat in the MAIN path of ``normalize_catalog`` AND of ``backfill_text_fingerprints`` with no
+    enclosing try, so a damaged manifest column aborted the WHOLE run and starved every document
+    queued behind it - and unlike the metadata parse it needed no parser failure to fire
+    (measured: bad JSON -> JSONDecodeError, ``"{}"`` -> SourceManifestError, NULL -> TypeError).
+
+    The broad ``except`` is deliberate and is the point: this is a DATA boundary, and its
+    contract is "a bad row is a bad row, never a dead run".  Callers record ``problem_code`` as
+    a per-document failure, so the damage stays visible in the report.
+    """
+    payload, state = metadata_state(raw)
+    if state is not None:
+        return None, f"manifest_column_{state}"
+    try:
+        return SourceManifest.from_dict(payload), None
+    except Exception:  # data boundary: any parse/validation failure is a bad row
+        return None, "manifest_invalid"
+
+
 _UNSUPPORTED_CHILD_ERROR_TYPES = {
     "BadZipFile",
     "EmptyFileError",
@@ -1657,7 +1681,18 @@ def normalize_catalog(
                 total=len(documents),
                 detail="extracting Markdown",
             )
-        manifest = SourceManifest.from_dict(json.loads(primary["manifest_json"]))
+        # B-VR-B10R4-01 (P2): the manifest parse is in the MAIN path with no enclosing try, so a
+        # damaged manifest column used to abort the WHOLE run and starve every document behind
+        # it.  It is now a per-document failure, recorded and skipped, exactly like the
+        # missing-primary-location branch above.
+        manifest, manifest_problem = _manifest_from_column(primary["manifest_json"])
+        if manifest_problem is not None:
+            failed += 1
+            last_failure_code = manifest_problem
+            last_failed_document_id = document["document_id"]
+            last_failed_path = str(source_path.resolve(strict=False))
+            failure_reasons[manifest_problem] = failure_reasons.get(manifest_problem, 0) + 1
+            continue
         docling_path: Path | None = None
         # B-VR-B10R2-01 (P0): this statement is NOT inside the per-document try below (that
         # try starts at the parser call and covers only 1665-1679), so `json.loads` here used
@@ -1959,7 +1994,25 @@ def backfill_text_fingerprints(
                 total=len(batch),
                 detail="backfilling text fingerprint",
             )
-        manifest = SourceManifest.from_dict(json.loads(locations[0]["manifest_json"]))
+        # B-VR-B10R4-01 (P2): same shape, same treatment as in normalize_catalog - a damaged
+        # manifest column is a per-document outcome, never a dead run.
+        manifest, manifest_problem = _manifest_from_column(locations[0]["manifest_json"])
+        if manifest_problem is not None:
+            store.record_fingerprint_outcome(
+                document_id=document_id,
+                source_id=source_id,
+                source_sha256=source_sha256,
+                fingerprint=None,
+                status="unsupported_terminal",
+                attempt_count=attempt_count + 1,
+                terminal_reason=manifest_problem,
+                updated_at=now_iso,
+            )
+            unsupported += 1
+            terminal_reasons[manifest_problem] = (
+                terminal_reasons.get(manifest_problem, 0) + 1
+            )
+            continue
 
         def parser_progress(details: dict[str, Any]) -> None:
             if progress is not None:
