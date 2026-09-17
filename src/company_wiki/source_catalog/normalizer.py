@@ -39,7 +39,7 @@ from company_wiki.source_contract import (
 from .admission import processing_priority_sql
 from .artifact_handle import ARTIFACT_HANDLE_SCHEMA_VERSION
 from .models import CatalogConfig, NORMALIZER_VERSION, ProcessingReport
-from .store import CatalogStore, canonical_json
+from .store import CatalogStore, canonical_json, metadata_object
 
 
 _NORMALIZER_NAME = "source_catalog_normalizer"
@@ -1433,13 +1433,18 @@ def _frontmatter(document: Any, normalized: _Normalized) -> str:
     # document may be a sqlite3.Row (normalize_catalog) or a plain dict
     # (tests/fixtures): .get only exists on the dict, index access works on
     # both but only when the key is present.
-    if isinstance(document, dict):
-        metadata = document.get("metadata_json") or {}
-    else:
-        # sqlite3.Row: metadata_json is a JSON string column.
-        metadata = (
-            json.loads(document["metadata_json"]) if document["metadata_json"] else {}
-        )
+    #
+    # B10-3 batch 2: both branches now go through the single chain.  Before this, a
+    # malformed `metadata_json` raised JSONDecodeError out of the sqlite3.Row branch, and
+    # _frontmatter is called OUTSIDE normalize_catalog's per-document try (normalizer.py
+    # :1726), so ONE unreadable column aborted the WHOLE normalization run instead of
+    # degrading that document - the same "malformed must never crash the ingest path"
+    # contract B05 established everywhere else.  A dict whose value is still a JSON string
+    # also used to reach `metadata.get(...)` and die with AttributeError.
+    metadata = metadata_object(
+        document.get("metadata_json") if isinstance(document, dict)
+        else document["metadata_json"]
+    )
     inner = metadata.get("acquisition") or metadata.get("dayu_meta") or {}
     identity = assess_homepage_identity(
         normalized.first_page_text,

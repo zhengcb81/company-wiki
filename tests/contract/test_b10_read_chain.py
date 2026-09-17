@@ -24,6 +24,7 @@ from __future__ import annotations
 
 import ast
 import importlib
+from collections import Counter
 from pathlib import Path
 
 import pytest
@@ -76,13 +77,18 @@ def _names_exact_column(node: ast.AST) -> bool:
     return False
 
 
-def _scan_confirmed_direct_readers() -> set[str]:
-    """`relative/path.py::Class.method` for every `json.loads(...)` that names the column.
+def _scan_confirmed_direct_readers() -> Counter[str]:
+    """`relative/path.py::Class.method` -> how many direct parses live in that scope.
+
+    A COUNT, not a key set: the review measured that adding a SECOND direct reader inside an
+    already-baselined scope kept the same qualified key and passed the gate (probe: 1
+    passed on exit code 0).  Counting sites per scope closes that hole in both directions -
+    one more site is a violation, one fewer means the baseline must be lowered.
 
     RECURSIVE on purpose (`source_catalog/adapters/` holds 8 modules of its own), and the
     scope is the qualified `Class.method` so a new method cannot hide behind its class.
     """
-    found: set[str] = set()
+    found: Counter[str] = Counter()
     for path in sorted(SOURCE.rglob("*.py")):
         source = path.read_text(encoding="utf-8")
         tree = ast.parse(source)
@@ -98,7 +104,7 @@ def _scan_confirmed_direct_readers() -> set[str]:
             if not any(_names_exact_column(argument) for argument in node.args):
                 continue
             relative = path.relative_to(SOURCE).as_posix()
-            found.add(f"{relative}::{visitor.scopes.get(id(node), '<module>')}")
+            found[f"{relative}::{visitor.scopes.get(id(node), '<module>')}"] += 1
     return found
 
 
@@ -132,18 +138,12 @@ def _reads_column_as_value(node: ast.AST) -> bool:
     return False
 
 
-def _scan_column_value_handoffs() -> set[str]:
-    """`relative/path.py::Class.method` for every call that RECEIVES the column's value.
+def _scan_column_value_handoffs() -> Counter[str]:
+    """`relative/path.py::Class.method` -> how many times that scope hands the value out.
 
-    The `json.loads` scan can be walked around: a generic helper called as
-    `_parse(row["metadata_json"])` names the column at the call site (whose callee is not
-    `loads`) and passes a parameter (which is not the column) to `json.loads`.  I measured
-    that in a temp copy - the whole gate passed - and then found the same shape in three
-    production sites, so the first ratchet is a ratchet over the COMMON shape, not a
-    completeness proof.  This scan closes the indirection and keeps the SQL text that merely
-    mentions the column name out of the count.
+    Counted for the same measured reason as the direct-reader scan above.
     """
-    found: set[str] = set()
+    found: Counter[str] = Counter()
     for path in sorted(SOURCE.rglob("*.py")):
         source = path.read_text(encoding="utf-8")
         tree = ast.parse(source)
@@ -155,36 +155,56 @@ def _scan_column_value_handoffs() -> set[str]:
             if not any(_reads_column_as_value(argument) for argument in node.args):
                 continue
             relative = path.relative_to(SOURCE).as_posix()
-            found.add(f"{relative}::{visitor.scopes.get(id(node), '<module>')}")
+            found[f"{relative}::{visitor.scopes.get(id(node), '<module>')}"] += 1
     return found
+
+
+def _expected(registry: dict[str, object], key: str) -> int:
+    """The baseline count for a key: an int for the handoff dict, a `sites` string here."""
+    value = registry[key]
+    if isinstance(value, dict):
+        return int(str(value["sites"]))
+    return int(str(value))
 
 
 def test_b10_handoff_scan_is_not_vacuous() -> None:
     handoffs = _scan_column_value_handoffs()
     assert handoffs, "the handoff scan found nothing - it would prove nothing"
-    assert handoffs & set(read_chain.COLUMN_VALUE_HANDOFFS), (
+    assert set(handoffs) & set(read_chain.COLUMN_VALUE_HANDOFFS), (
         "no scanned handoff matches the baseline: this ratchet is not measuring anything"
     )
 
 
 def test_b10_no_new_column_value_handoff() -> None:
-    handoffs = _scan_column_value_handoffs()
-    baseline = set(read_chain.COLUMN_VALUE_HANDOFFS)
-    new = sorted(handoffs - baseline)
+    scanned = _scan_column_value_handoffs()
+    baseline = read_chain.COLUMN_VALUE_HANDOFFS
+    new = sorted(set(scanned) - set(baseline))
     assert not new, (
         "new places hand the shared column's value into a call: " + ", ".join(new) +
         " - if that call parses the column, converge it onto store.metadata_object; if it "
         "does not, register it in read_chain.COLUMN_VALUE_HANDOFFS with the reason "
         "(the ratchet may only shrink)"
     )
+    grew = sorted(key for key, count in scanned.items()
+                  if count > _expected(baseline, key))
+    assert not grew, (
+        "an ADDITIONAL handoff of the column appeared inside an already-baselined scope: " +
+        ", ".join(f"{key} ({scanned[key]} > {_expected(baseline, key)})" for key in grew)
+    )
 
 
 def test_b10_handoff_baseline_has_no_stale_entry() -> None:
-    handoffs = _scan_column_value_handoffs()
-    stale = sorted(set(read_chain.COLUMN_VALUE_HANDOFFS) - handoffs)
+    scanned = _scan_column_value_handoffs()
+    baseline = read_chain.COLUMN_VALUE_HANDOFFS
+    stale = sorted(key for key in baseline if key not in scanned)
     assert not stale, (
         "the handoff baseline still lists sites that no longer pass the column: " +
         ", ".join(stale) + " - remove them so the ratchet keeps meaning something"
+    )
+    shrank = sorted(key for key in baseline if scanned.get(key, 0) < _expected(baseline, key))
+    assert not shrank, (
+        "fewer handoffs than the baseline records: " + ", ".join(shrank) +
+        " - lower the recorded count so the ratchet keeps meaning something"
     )
 
 
@@ -214,7 +234,7 @@ def test_b10_scan_is_not_vacuous() -> None:
         "the single chain parses the column through a helper, not a literal json.loads "
         "argument - if this fires, the scan and the chain have both changed"
     )
-    assert confirmed & set(read_chain.CONFIRMED_DIRECT_READERS), (
+    assert set(confirmed) & set(read_chain.CONFIRMED_DIRECT_READERS), (
         "no scanned site matches the baseline: the ratchet is no longer measuring anything"
     )
 
@@ -241,13 +261,21 @@ def test_b10_v1_adapter_delegates_to_the_single_chain() -> None:
 
 
 def test_b10_no_new_confirmed_direct_reader() -> None:
-    confirmed = _scan_confirmed_direct_readers()
-    baseline = set(read_chain.CONFIRMED_DIRECT_READERS)
-    new = sorted(confirmed - baseline)
+    scanned = _scan_confirmed_direct_readers()
+    baseline = read_chain.CONFIRMED_DIRECT_READERS
+    new = sorted(set(scanned) - set(baseline))
     assert not new, (
         "new direct readers of the shared column: " + ", ".join(new) +
         " - converge them onto store.metadata_object, or register and justify them in "
         "read_chain.CONFIRMED_DIRECT_READERS (the ratchet may only shrink)"
+    )
+    grew = sorted(key for key, count in scanned.items()
+                  if count > _expected(baseline, key))
+    assert not grew, (
+        "an ADDITIONAL direct reader appeared inside an already-baselined scope: " +
+        ", ".join(f"{key} ({scanned[key]} > {_expected(baseline, key)})" for key in grew) +
+        " - the ratchet counts sites per scope, so a second parse in the same method is a "
+        "new violation (this hole was measured by the review: it used to pass)"
     )
 
 
@@ -261,6 +289,15 @@ def test_b10_baseline_has_no_stale_entry() -> None:
     assert not stale, (
         "the baseline still lists sites that no longer parse the column: " + ", ".join(stale) +
         " - remove them so the ratchet keeps meaning something"
+    )
+    shrank = sorted(
+        key for key, annotation in baseline.items()
+        if annotation.get("visible_to_scan") != "False"
+        and confirmed.get(key, 0) < _expected(baseline, key)
+    )
+    assert not shrank, (
+        "fewer direct readers than the baseline records: " + ", ".join(shrank) +
+        " - lower the recorded count so a stale allowance cannot hide a future one"
     )
     # Blind spots are invisible to the scan BY CONSTRUCTION (renamed parameter), so they are
     # exempt from the staleness check - but their code must still exist, or the entry lies.
@@ -317,6 +354,17 @@ def test_b10_explicit_non_chain_readers_are_declared_and_real() -> None:
     assert "section_query.py::SectionQueryService.list_sections" in (
         read_chain.EXPLICIT_NON_CHAIN_READERS
     ), "the known deliberate-raise reader must stay declared"
+    assert "normalizer.py::normalize_catalog" in read_chain.EXPLICIT_NON_CHAIN_READERS, (
+        "normalize_catalog:1633 raises with a type that becomes the recorded "
+        "failure_reasons key - it must stay declared as non-chain (behaviour unchanged)"
+    )
+    assert set(read_chain.CONFIRMED_DIRECT_READERS) == set(
+        read_chain.EXPLICIT_NON_CHAIN_READERS
+    ), (
+        "every remaining direct reader is now declared non-chain on purpose; if the two sets "
+        "diverge, either a convergence landed without updating the registry or a declaration "
+        "was dropped"
+    )
 
 
 def test_b10_registered_adapters_are_complete_and_importable() -> None:

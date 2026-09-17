@@ -102,61 +102,74 @@ LEGACY_READ_ADAPTERS: dict[str, dict[str, object]] = {
 #: The set of keys may only shrink; a site that disappears must be deleted here in the same
 #: change, or the gate reports the stale entry.
 CONFIRMED_DIRECT_READERS: dict[str, dict[str, str]] = {
-    "normalizer.py::_frontmatter": {
-        "table": "documents",
-        "note": "document row of normalize_catalog (sqlite3.Row of the documents query); "
-                "deferred: failure-path semantics",
-    },
     "normalizer.py::normalize_catalog": {
         "table": "documents",
-        "note": ":1633 in normalize_catalog's per-document loop; deferred: a malformed column "
-                "currently becomes a normalization-failure record, and {} would change that",
+        "sites": "1",
+        "note": "deliberate raise - see EXPLICIT_NON_CHAIN_READERS (its exception TYPE is "
+                "recorded data)",
     },
     "section_query.py::SectionQueryService.list_sections": {
         "table": "artifacts",
+        "sites": "1",
         "note": "deliberate raise - see EXPLICIT_NON_CHAIN_READERS",
     },
 }
 
-#: Readers that deliberately do NOT go through the chain because their contract is to RAISE
-#: a named error on malformed content - converting them to {} would hide the failure from
-#: the caller.  Declared so "not on the chain" is a stated decision, never a silent
-#: double-run (the B10 acceptance rule).
+#: ``module.py::Class.method`` -> how many calls in that scope hand the column's value out.
+#: A COUNT, not just a key set: the review measured that a SECOND direct reader added inside
+#: an already-baselined scope kept the same qualified key and passed (probe: exit code 0,
+#: "1 passed").  The count closes that: one more site in a known scope is a new violation,
+#: and one fewer means the baseline must be lowered.  The counts are MACHINE-DERIVED from the
+#: tree (13 scopes / 16 sites); my first hand-written version under-counted two of them,
+#: which is exactly why they are derived now.
+COLUMN_VALUE_HANDOFFS: dict[str, str] = {
+    "artifact_backfill.py::_classify": "1",
+    "artifact_read_model.py::_artifact_row": "1",
+    "backfill_v2.py::run_backfill": "1",
+    "extraction_quality.py::ExtractionQualityService._artifact": "1",
+    "migration_ledger.py::build_quality_ledger": "1",
+    "normalizer.py::_frontmatter": "1",
+    "normalizer.py::normalize_catalog": "1",
+    "resolver.py::_metadata_conflict_reason": "1",
+    "scanner.py::_merge_document_row": "3",
+    "section_query.py::SectionQueryService.list_sections": "1",
+    "service.py::SourceCatalog.query": "2",
+    "service.py::SourceCatalog.query_filing_candidates": "1",
+    "source_lifecycle.py::_safety_receipt": "1",
+}
+
+#: Readers that deliberately do NOT go through the chain.  Declared so "not on the chain" is
+#: a stated decision, never a silent double-run (the B10 acceptance rule: if it cannot be
+#: made compatible, STOP the switch - do not convert it quietly).
 EXPLICIT_NON_CHAIN_READERS: dict[str, str] = {
     "section_query.py::SectionQueryService.list_sections": (
         "raises SectionQueryError('sections artifact metadata is not valid JSON') on "
         "malformed artifact metadata - degrading to {} would hide that error"
+    ),
+    "normalizer.py::normalize_catalog": (
+        "the parse at :1633 sits in normalize_catalog's per-document try, and the handler at "
+        ":1689 records `error_code = type(exc).__name__` into normalization_metadata_json "
+        "and the report's failure_reasons. Its exception TYPE is therefore recorded DATA "
+        "(today: JSONDecodeError for malformed, TypeError for NULL, AttributeError for a "
+        "non-object payload). The chain never raises, so converging this site would "
+        "silently change those codes - unifying them is a data-semantics decision for the "
+        "owner, not a mechanical convergence. Behaviour is UNCHANGED here."
     ),
 }
 
 #: The column's VALUE being passed into a call.  A parse-by-helper indirection is invisible
 #: to the `json.loads` scan above - measured, not theorised: I built a probe with a generic
 #: helper (`_parse(raw)`) called as `_parse(row["metadata_json"])` in a temp copy and the
-#: whole gate passed.  Building this list then showed that THREE REAL sites already parse
-#: that way (`extraction_quality._artifact_metadata`, `scanner._previous_provenance_fields`,
-#: `scanner._merge_metadata_json`) - i.e. the confirmed list above is a ratchet over the
-#: common shape, NOT a completeness proof.  This second ratchet closes the indirection: any
-#: NEW place that hands the column's value into a call fails the gate.
+#: whole gate passed.  Building this list then showed that REAL sites already parse that way
+#: (`extraction_quality._artifact`, `scanner._merge_document_row` via
+#: `_previous_provenance_fields`/`_merge_metadata_json`), i.e. the confirmed list above is a
+#: ratchet over the common shape, NOT a completeness proof.  This second ratchet closes the
+#: indirection: any NEW place that hands the column's value into a call fails the gate.
 #:
 #: The scan looks for a SUBSCRIPT/`.get()` of the column INSIDE the call's arguments, so the
-#: SQL text that merely mentions the column name (the majority of the 37 name matches) is not
-#: counted.  `metadata_object(...)`/`_read_shared_metadata(...)` call sites appear here too,
-#: and that is intended: they are the chain and its adapter, and they must not grow either.
-COLUMN_VALUE_HANDOFFS: tuple[str, ...] = (
-    "artifact_backfill.py::_classify",
-    "artifact_read_model.py::_artifact_row",
-    "backfill_v2.py::run_backfill",
-    "extraction_quality.py::ExtractionQualityService._artifact",
-    "migration_ledger.py::build_quality_ledger",
-    "normalizer.py::_frontmatter",
-    "normalizer.py::normalize_catalog",
-    "resolver.py::_metadata_conflict_reason",
-    "scanner.py::_merge_document_row",
-    "section_query.py::SectionQueryService.list_sections",
-    "service.py::SourceCatalog.query",
-    "service.py::SourceCatalog.query_filing_candidates",
-    "source_lifecycle.py::_safety_receipt",
-)
+#: SQL text that merely mentions the column name (the majority of the name matches) is not
+#: counted.  `metadata_object(...)`/`metadata_state(...)` call sites appear here too, and
+#: that is intended: they are the chain, and they must not grow either.
 
 #: What the two ratchets above do NOT catch, MEASURED on temp copies rather than assumed.
 #: Written into the product so nobody trusts the gate beyond its reach: it recognises two
