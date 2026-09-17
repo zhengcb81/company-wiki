@@ -941,6 +941,12 @@ def metadata_state(raw: Any) -> tuple[dict[str, Any], str | None]:
 
     * ``"unreadable"`` - not valid JSON, not decodable, too deeply nested, or not a string;
     * ``"not_object"`` - valid JSON that is not an object (an array, a number, a string).
+
+    FALSY contract (measured, and stated here because the first version left it implicit):
+    ``None``, ``""``, ``0``, ``[]`` and ``False`` all take the ``raw or "{}"`` path, so they
+    come back as ``({}, None)`` - "no metadata", NOT "unreadable metadata".  A caller that
+    must distinguish "absent" from "broken" has to test the raw value itself, which is what
+    ``normalizer._frontmatter`` does for its quality flag (B-VR-B10R2-03).
     """
     try:
         value = json.loads(raw or "{}")

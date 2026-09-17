@@ -208,6 +208,46 @@ def test_b10_handoff_baseline_has_no_stale_entry() -> None:
     )
 
 
+PACKAGE = Path(__file__).resolve().parents[2] / "src" / "company_wiki"
+
+
+def _scan_outside_source_catalog() -> set[str]:
+    """Direct readers of the column anywhere in the PRODUCT package outside source_catalog.
+
+    B-VR-B10R2-06 (P3): the ratchet only looked at `source_catalog/`, so a reader added
+    elsewhere in the product would not have been seen.  Measured when this was added: ZERO
+    such readers exist, so this is a hard "none" rule rather than a baseline.
+    """
+    found: set[str] = set()
+    for path in sorted(PACKAGE.rglob("*.py")):
+        if "source_catalog" in path.relative_to(PACKAGE).parts:
+            continue
+        try:
+            tree = ast.parse(path.read_text(encoding="utf-8"))
+        except SyntaxError:  # pragma: no cover - a broken product file fails other gates
+            continue
+        for node in ast.walk(tree):
+            if not isinstance(node, ast.Call):
+                continue
+            func = node.func
+            name = func.attr if isinstance(func, ast.Attribute) else getattr(func, "id", "")
+            if name != "loads":
+                continue
+            if any(_names_exact_column(argument) for argument in node.args):
+                found.add(f"{path.relative_to(PACKAGE).as_posix()}:{node.lineno}")
+    return found
+
+
+def test_b10_no_direct_reader_outside_source_catalog() -> None:
+    outside = sorted(_scan_outside_source_catalog())
+    assert not outside, (
+        "product code outside source_catalog parses the shared column directly: " +
+        ", ".join(outside) + " - route it through store.metadata_object/metadata_state, or "
+        "extend the ratchet deliberately (the gate's scope is a measured boundary, not an "
+        "accident)"
+    )
+
+
 def test_b10_gate_boundaries_stay_documented() -> None:
     """The gate's measured limits must stay written down next to the gate.
 
@@ -221,6 +261,7 @@ def test_b10_gate_boundaries_stay_documented() -> None:
         "subscript_inside_the_callee",
         "third_party_or_alternative_parser",
         "closed_helper_at_call_site",
+        "readers_outside_the_scanned_roots",
     }, "the documented boundary set changed without updating this test"
     assert "PROBED" in read_chain.GATE_BOUNDARIES["intermediate_variable"], (
         "each boundary must say whether it was actually probed"
@@ -354,10 +395,11 @@ def test_b10_explicit_non_chain_readers_are_declared_and_real() -> None:
     assert "section_query.py::SectionQueryService.list_sections" in (
         read_chain.EXPLICIT_NON_CHAIN_READERS
     ), "the known deliberate-raise reader must stay declared"
-    assert "normalizer.py::normalize_catalog" in read_chain.EXPLICIT_NON_CHAIN_READERS, (
-        "normalize_catalog:1633 raises with a type that becomes the recorded "
-        "failure_reasons key - it must stay declared as non-chain (behaviour unchanged)"
-    )
+    # HISTORY (B-VR-B10R2-02, P1): this test used to REQUIRE
+    # `normalizer.py::normalize_catalog` here, pinning a declaration whose stated reason the
+    # review proved false (the parse was never inside the per-document try). Pinning a WRONG
+    # declaration made the gate protect the bug, so the entry is gone and the test now only
+    # requires that the remaining declarations are real.
     assert set(read_chain.CONFIRMED_DIRECT_READERS) == set(
         read_chain.EXPLICIT_NON_CHAIN_READERS
     ), (

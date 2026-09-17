@@ -84,3 +84,41 @@ def test_b10_frontmatter_tolerates_malformed_metadata() -> None:
                 "degraded metadata must not invent the declared identity"
             )
             assert "declared_security_ids_count: 1" not in rendered
+
+
+def test_b10_frontmatter_marks_unreadable_metadata_visibly() -> None:
+    """B-VR-B10R2-03 (P1): degraded metadata must NOT be recorded as a passing identity.
+
+    With nothing readable to verify against, the homepage check still says "consistent"
+    because the only value left to compare is the document's own title.  Missing evidence
+    must not read as a pass, so the flag is added and the verdict is downgraded.
+
+    NOTE the boundary: an EMPTY or NULL column is "no metadata" in the chain's contract
+    (`json.loads(raw or "{}")`), not "unreadable metadata", so it carries no flag - the
+    distinction is deliberate and is asserted in both directions here.
+    """
+    for bad in ("not json at all", "[1, 2, 3]", '"a string"', "123", b"\xff\xfe"):
+        rendered = _frontmatter(_document(bad, as_row=True), _normalized())
+        assert "metadata_unreadable" in rendered, (
+            f"an unreadable column ({bad!r}) must add the metadata_unreadable quality flag"
+        )
+        assert "verdict: consistent" not in rendered, (
+            "an unreadable column must not keep the consistent identity verdict"
+        )
+        assert "verdict: unverifiable" in rendered
+
+
+def test_b10_frontmatter_distinguishes_empty_from_unreadable() -> None:
+    """The chain's documented falsy contract: empty/NULL is "no metadata", not "unreadable"."""
+    for empty in ("", None):
+        rendered = _frontmatter(_document(empty, as_row=True), _normalized())
+        assert "metadata_unreadable" not in rendered, (
+            f"{empty!r} is the chain's 'no metadata' case, not an unreadable one"
+        )
+
+
+def test_b10_frontmatter_keeps_consistent_verdict_for_readable_metadata() -> None:
+    """Control: readable metadata keeps the normal verdict (no false downgrade)."""
+    rendered = _frontmatter(_document(READABLE, as_row=True), _normalized())
+    assert "metadata_unreadable" not in rendered
+    assert "verdict: consistent" in rendered

@@ -102,12 +102,6 @@ LEGACY_READ_ADAPTERS: dict[str, dict[str, object]] = {
 #: The set of keys may only shrink; a site that disappears must be deleted here in the same
 #: change, or the gate reports the stale entry.
 CONFIRMED_DIRECT_READERS: dict[str, dict[str, str]] = {
-    "normalizer.py::normalize_catalog": {
-        "table": "documents",
-        "sites": "1",
-        "note": "deliberate raise - see EXPLICIT_NON_CHAIN_READERS (its exception TYPE is "
-                "recorded data)",
-    },
     "section_query.py::SectionQueryService.list_sections": {
         "table": "artifacts",
         "sites": "1",
@@ -128,7 +122,6 @@ COLUMN_VALUE_HANDOFFS: dict[str, str] = {
     "backfill_v2.py::run_backfill": "1",
     "extraction_quality.py::ExtractionQualityService._artifact": "1",
     "migration_ledger.py::build_quality_ledger": "1",
-    "normalizer.py::_frontmatter": "1",
     "normalizer.py::normalize_catalog": "1",
     "resolver.py::_metadata_conflict_reason": "1",
     "scanner.py::_merge_document_row": "3",
@@ -141,19 +134,18 @@ COLUMN_VALUE_HANDOFFS: dict[str, str] = {
 #: Readers that deliberately do NOT go through the chain.  Declared so "not on the chain" is
 #: a stated decision, never a silent double-run (the B10 acceptance rule: if it cannot be
 #: made compatible, STOP the switch - do not convert it quietly).
+#:
+#: HISTORY, kept because it is the lesson: this registry once also listed
+#: `normalizer.py::normalize_catalog` with the reason "its exception TYPE is recorded data
+#: (error_code = type(exc).__name__), so converging it would change failure_reasons".  The
+#: review (B-VR-B10R2-02, P1) proved that reason FALSE: the per-document handler covers only
+#: the parser call, so the parse at :1638 was not inside it at all, no error code was ever
+#: recorded for it, and the "deliberate" declaration was really an unguarded crash path.  It
+#: is converged now (B-VR-B10R2-01, P0) and must not come back as a "declared exception".
 EXPLICIT_NON_CHAIN_READERS: dict[str, str] = {
     "section_query.py::SectionQueryService.list_sections": (
         "raises SectionQueryError('sections artifact metadata is not valid JSON') on "
         "malformed artifact metadata - degrading to {} would hide that error"
-    ),
-    "normalizer.py::normalize_catalog": (
-        "the parse at :1633 sits in normalize_catalog's per-document try, and the handler at "
-        ":1689 records `error_code = type(exc).__name__` into normalization_metadata_json "
-        "and the report's failure_reasons. Its exception TYPE is therefore recorded DATA "
-        "(today: JSONDecodeError for malformed, TypeError for NULL, AttributeError for a "
-        "non-object payload). The chain never raises, so converging this site would "
-        "silently change those codes - unifying them is a data-semantics decision for the "
-        "owner, not a mechanical convergence. Behaviour is UNCHANGED here."
     ),
 }
 
@@ -193,6 +185,14 @@ GATE_BOUNDARIES: dict[str, str] = {
         "`_parse(row[\"metadata_json\"])` with a GENERIC helper was the first bypass found "
         "(probe passed, and three production sites already had that shape); "
         "COLUMN_VALUE_HANDOFFS closes it. PROBED: now caught."
+    ),
+    "readers_outside_the_scanned_roots": (
+        "the ratchet scans `src/company_wiki/source_catalog/**`; a second hard rule covers "
+        "the REST of the product package and currently finds ZERO readers there. MEASURED "
+        "elsewhere (2026-09-17): `scripts/` has 2 direct readers of this column "
+        "(legacy_observer.py:96, wu904_remediation_restore.py:65), `tools/` has 0 and "
+        "`tests/` has 10 (fixtures - legitimately constructing the column). The scripts/ "
+        "pair is a declared out-of-scope follow-up, NOT covered by any ratchet here."
     ),
 }
 
