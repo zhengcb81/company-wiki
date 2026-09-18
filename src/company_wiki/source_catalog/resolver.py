@@ -367,6 +367,20 @@ class ByteReadResult:
         return self.data is not None
 
 
+def _owning_root(path: Path, roots: tuple[Any, ...]) -> Any | None:
+    """The configured root that CONTAINS ``path``, longest match winning.
+
+    The byte entry point receives a HANDLE (a path plus a digest), not a location row, so it
+    has no ``root_id`` to consult.  This derives the owning root from the path with the same
+    containment helper the rest of the read path uses (``_inside_configured_roots``), and the
+    longest configured base wins so a nested root is attributed to the more specific one.
+    """
+    candidates = [root for root in roots if _inside_configured_roots(path, (root,))]
+    if not candidates:
+        return None
+    return max(candidates, key=lambda root: len(str(getattr(root, "path", "") or "")))
+
+
 def _inside_configured_roots(path: Path, roots: tuple[Any, ...]) -> bool:
     """B03/L05 — a locator may not lead the read path out of the configured
     roots.  Compared on REAL paths (so a symlink or a junction that points
@@ -888,6 +902,16 @@ class ResolutionEnvelope:
     # gaps behind it.  None when there is no served handle to qualify (an
     # MISSING/rejected answer has nothing to label) - honest default, additive.
     qualification: dict[str, Any] | None = None
+    # F-BAR-12 fix (owner instruction 2026-09-18): `bundle_status` answers "was a real,
+    # snapshot-consistent bundle provided" - and a measured production case had it read as
+    # "the artifacts are usable" while `bundle.valid_handles` was EMPTY (every derived
+    # artifact invalid: `normalized` not completed, `summary` missing its source sha).
+    # These three fields state the artifact side explicitly instead of leaving a consumer to
+    # reach into the bundle, and they are ADDITIVE (envelope_schema_version stays "1.0", so
+    # an N-1 consumer that only knows bundle_status keeps working).
+    bundle_valid_handle_count: int = 0
+    bundle_invalid_roles: tuple[str, ...] = ()
+    bundle_usable: bool = False
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -899,6 +923,9 @@ class ResolutionEnvelope:
             "bundle_status": self.bundle_status,
             "bundle_hash": self.bundle_hash,
             "bundle": self.bundle,
+            "bundle_valid_handle_count": self.bundle_valid_handle_count,
+            "bundle_invalid_roles": list(self.bundle_invalid_roles),
+            "bundle_usable": self.bundle_usable,
             "prompt_injection_status": self.prompt_injection_status,
             "parser_calls": self.parser_calls,
             "llm_calls": self.llm_calls,
@@ -1004,12 +1031,23 @@ def build_resolution_envelope(
     bundle_status = "unavailable"
     bundle_hash = None
     bundle_dict = None
+    bundle_valid_handle_count = 0
+    bundle_invalid_roles: tuple[str, ...] = ()
+    bundle_usable = False
     if bundle is not None:
         if not isinstance(bundle, dict) or not bundle.get("bundle_hash"):
             raise ValueError("bundle must be a dict with a bundle_hash (fail closed)")
         bundle_status = "available"
         bundle_hash = bundle["bundle_hash"]
         bundle_dict = bundle
+        # F-BAR-12: "available" is about the bundle being present and snapshot-consistent;
+        # usability is a separate, measured fact.  `valid_handles` empty means NO derived
+        # artifact may be reused, even though the bundle itself is available.
+        valid_handles = bundle.get("valid_handles") or {}
+        invalid = bundle.get("invalid") or {}
+        bundle_valid_handle_count = len(valid_handles)
+        bundle_invalid_roles = tuple(sorted(invalid))
+        bundle_usable = bundle_valid_handle_count > 0
     prompt_injection_status = "not_reviewed"
     parser_calls = None
     llm_calls = None
@@ -1060,6 +1098,9 @@ def build_resolution_envelope(
         bundle_status=bundle_status,
         bundle_hash=bundle_hash,
         bundle=bundle_dict,
+        bundle_valid_handle_count=bundle_valid_handle_count,
+        bundle_invalid_roles=bundle_invalid_roles,
+        bundle_usable=bundle_usable,
         prompt_injection_status=prompt_injection_status,
         parser_calls=parser_calls,
         llm_calls=llm_calls,
@@ -2034,6 +2075,33 @@ class SourceResolver:
                 status=B03_ERROR_NOT_FOUND,
                 reason="artifact_path_outside_allowed_root",
                 detail=str(handle.canonical_location_id),
+                data=None,
+                byte_size=0,
+                bytes_source=B03_BYTES_SOURCE_NONE,
+                read_at=read_at,
+            )
+        # F-BAR-11 fix (owner instruction 2026-09-18): the deny a root can carry must bind
+        # THIS entry point too.  The decision path already refuses a root whose policy does
+        # not authorize reuse (`no_reusable_root_location`), but this primitive used to gate
+        # on containment only, so a caller that built its own handle could still be served
+        # the bytes of a denied root - measured, and registered as F-BAR-11.  The rule is the
+        # SAME function the decision path and the policy export use (``_effective_reusable``),
+        # so the three can never disagree; the reason code is the already-registered
+        # ``policy_denied`` ("root policy does not authorize reuse", observability.py:51) and
+        # no new taxonomy entry is invented here.
+        roots = tuple(self.catalog.config.roots)
+        owning_root = _owning_root(path, roots)
+        reusable_root_ids = frozenset(
+            root.root_id for root in roots if _effective_reusable(root, self.catalog.config)
+        )
+        if owning_root is None or owning_root.root_id not in reusable_root_ids:
+            return ByteReadResult(
+                document_id=handle.document_id,
+                content_sha256=expected,
+                status=B03_ERROR_NOT_FOUND,
+                reason="policy_denied",
+                detail=str(owning_root.root_id if owning_root is not None
+                           else handle.canonical_location_id),
                 data=None,
                 byte_size=0,
                 bytes_source=B03_BYTES_SOURCE_NONE,

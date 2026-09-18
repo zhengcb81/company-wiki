@@ -837,10 +837,20 @@ def test_r4b02_rejected_copy_stays_reclaimable_next_to_healthy_copies(tmp_path):
     _force_active(catalog)
 
     groups = DuplicateCleanupService(catalog).list_groups()
-    # pre-B02 measurement (B-VR02-03): 3 reclaimable copies over 2 groups, and
-    # the rejected copy is one of the rows the planner knows about.
-    assert groups["total_groups"] == 2, groups
-    assert groups["total_reclaimable_copies"] == 3, groups
+    # F-BAR-10 (2026-09-18) changed the COUNT, not the intent.  The earlier measurement was
+    # "3 reclaimable copies over 2 groups" - and the second group existed only because the
+    # legacy walk indexed `2025.pdf.source.json` as a document of its own, so the three
+    # identical SIDECARS formed a duplicate group of their own.  Adapter-declared roots now
+    # dispatch through their adapter, the sidecar is a location of the group instead of a
+    # document, and one real group remains: 3 copies of the same bytes = 1 canonical + 2
+    # reclaimable.  Measured both ways on this fixture (adapters declared vs not):
+    # groups 2 -> 1, reclaimable 3 -> 2, documents ['2025', '2025.pdf.source'] -> ['2025'].
+    assert groups["total_groups"] == 1, groups
+    assert groups["total_reclaimable_copies"] == 2, groups
+    # The sidecar must NOT be a document any more - that is what the removed group was.
+    titles = [row["title"] for row in catalog.reader.fetchall(
+        "SELECT title FROM documents")]
+    assert not [title for title in titles if title.endswith(".source")], titles
     listed_paths = [
         item["relative_path"]
         for group in groups["groups"]

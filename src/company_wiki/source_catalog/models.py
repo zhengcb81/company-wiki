@@ -223,9 +223,17 @@ class ScanReport:
     known_quarantined: int = 0
     error_details: tuple[dict[str, Any], ...] = ()
     dry_run: bool = False
+    #: root_id -> "adapter" | "legacy".  Reported so the dispatch decision is OBSERVABLE
+    #: rather than inferred from the resulting document set (F-BAR-10: a root that declares
+    #: an adapter used to be walked by the legacy path whenever no activation snapshot
+    #: existed, and the only way to notice was that `.source.json` sidecars appeared as
+    #: documents).
+    strategy: tuple[tuple[str, str], ...] = ()
 
     def to_dict(self) -> dict[str, Any]:
-        return dict(self.__dict__)
+        payload = dict(self.__dict__)
+        payload["strategy"] = dict(self.strategy)
+        return payload
 
 
 @dataclass(frozen=True)

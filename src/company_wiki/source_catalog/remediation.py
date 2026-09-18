@@ -17,7 +17,7 @@ import hashlib
 import json
 from typing import Any
 
-from .store import CatalogStore
+from .store import CatalogStore, metadata_state
 
 REMEDIATION_SCHEMA_VERSION = "1.0"
 _HEX = set("0123456789abcdef")
@@ -146,7 +146,22 @@ def approve_proposal(
     )
     if row is None:
         raise RemediationError(f"unknown proposal {proposal_id}")
-    proposal = json.loads(row["proposal_json"])
+    # F-B10R2-MISSINGFILE family, site 3 (owner instruction 2026-09-18): a malformed
+    # `proposal_json` used to escape as a bare JSONDecodeError from an approval path whose
+    # contract is a NAMED RemediationError.  The value is required (the approval binds to the
+    # proposal's policy hash and to the proposal's own contents), so this fails closed BY NAME
+    # instead of aborting with an exception type the caller cannot switch on.
+    proposal_payload, proposal_state = metadata_state(row["proposal_json"])
+    if proposal_state is not None or not proposal_payload:
+        raise RemediationError(
+            f"proposal {proposal_id} is unreadable ({proposal_state or 'empty'}); "
+            "refusing to approve against unreadable evidence"
+        )
+    proposal = proposal_payload
+    if "policy_hash" not in proposal:
+        raise RemediationError(
+            f"proposal {proposal_id} has no policy_hash; refusing to approve"
+        )
     if proposal["policy_hash"] != policy_hash:
         raise RemediationError(
             f"stale policy hash: proposal {proposal['policy_hash'][:12]}... "

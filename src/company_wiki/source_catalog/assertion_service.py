@@ -18,6 +18,29 @@ from typing import Any
 
 from .store import CatalogStore, canonical_json
 
+
+def _evidence_payload(raw: Any, assertion_id: str) -> dict[str, Any]:
+    """F-B10R2-MISSINGFILE family, site 2 (owner instruction 2026-09-18).
+
+    `upsert_verified_assertion` copies an existing assertion's evidence forward, and the
+    parse used to be bare: a malformed `evidence_json` column escaped as a JSONDecodeError
+    from a service whose refusals are named `ValueError`s.  Copying a value we cannot read
+    would also be wrong - the new assertion would carry evidence nobody verified - so this
+    fails closed by name, and it never raises an unnamed parse error.
+    """
+    try:
+        payload = json.loads(raw or "{}")
+    except (json.JSONDecodeError, TypeError, RecursionError, UnicodeDecodeError) as exc:
+        raise ValueError(
+            f"assertion {assertion_id} has an unreadable evidence_json "
+            f"({type(exc).__name__}); refusing to copy unverified evidence forward"
+        ) from exc
+    if not isinstance(payload, dict):
+        raise ValueError(
+            f"assertion {assertion_id} evidence_json is not an object; refusing to copy it"
+        )
+    return payload
+
 ASSERTION_SCHEMA_VERSION = "1.0.0"
 ASSERTION_REQUIRED_FIELDS = frozenset(
     {"source_id", "document_id", "content_sha256", "evidence_basis", "decision"}
@@ -402,7 +425,7 @@ def verify_assertion(
         source_url=existing["source_url"],
         filing_date=existing["filing_date"],
         evidence_basis=existing["evidence_basis"],
-        evidence_json=json.loads(existing["evidence_json"]),
+        evidence_json=_evidence_payload(existing["evidence_json"], assertion_id),
         decision="verified",
         supersedes_assertion_id=supersedes,
         created_by=confirmed_by,

@@ -33,6 +33,7 @@ from company_wiki.source_catalog.resolver import (  # noqa: E402
     resolver_visibility,
 )
 from company_wiki.source_catalog.service import SourceCatalog  # noqa: E402
+from company_wiki.source_catalog.store import metadata_object  # noqa: E402
 
 
 def observe(
@@ -92,10 +93,11 @@ def observe(
         (sample_limit,),
     ).fetchall()
     for row in rows:
-        try:
-            metadata = json.loads(row["metadata_json"] or "{}")
-        except json.JSONDecodeError:
-            metadata = {}
+        # Converged on the single read chain (owner instruction 2026-09-18, closing the
+        # GATE_BOUNDARIES entry `readers_outside_the_scanned_roots`): `metadata_object` is the
+        # ONE parse implementation and never raises, so a deeply nested or undecodable value
+        # degrades to "no metadata" instead of escaping this loop.
+        metadata = metadata_object(row["metadata_json"])
         _source_metadata({"source_id": row["primary_source_id"],
                           "metadata": metadata}, store=store,
                          observer=collector, reader=reader,

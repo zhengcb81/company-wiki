@@ -212,7 +212,23 @@ def rollback_activation(
     if already_rolled is not None:
         raise ActivationError(f"receipt {receipt_id} already rolled back")
 
-    assertion_ids = json.loads(apply_record["assertion_ids_json"] or "[]")
+    # F-B10R2-MISSINGFILE family, site 1 (owner instruction 2026-09-18): an unreadable
+    # `assertion_ids_json` used to escape as a bare JSONDecodeError.  This column legitimately
+    # holds a JSON ARRAY (not the object `store.metadata_state` reports on), so the guard is a
+    # named, never-escaping parse of its own.  Treating a bad value as an empty list would be
+    # WORSE than failing: the rollback would silently restore nothing while reporting success,
+    # so the operation refuses before touching any row.
+    try:
+        assertion_ids = json.loads(apply_record["assertion_ids_json"] or "[]")
+    except (json.JSONDecodeError, TypeError, RecursionError, UnicodeDecodeError) as exc:
+        raise ActivationError(
+            f"receipt {receipt_id} has an unreadable assertion_ids_json "
+            f"({type(exc).__name__}); refusing to roll back without the assertion list"
+        ) from exc
+    if not isinstance(assertion_ids, list):
+        raise ActivationError(
+            f"receipt {receipt_id} assertion_ids_json is not a list; refusing to roll back"
+        )
     rollback_id = _receipt_id(
         apply_record["epoch"], apply_record["cohort"], f"rollback:{reason}"
     )

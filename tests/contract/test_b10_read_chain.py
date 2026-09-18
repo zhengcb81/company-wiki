@@ -248,13 +248,17 @@ def test_b10_no_direct_reader_outside_source_catalog() -> None:
     )
 
 
-def test_b10_scripts_reader_count_stable() -> None:
-    """R2: scripts/ has direct readers of the shared column - measured at 2.
+def test_b10_scripts_have_no_direct_reader() -> None:
+    """R5(a): `scripts/` has ZERO direct readers of the shared column - now ENFORCED.
 
-    The product-package rule (`test_b10_no_direct_reader_outside_source_catalog`) does NOT
-    cover scripts/ or tests/ because those are not product code.  This test pins the CURRENT
-    count so new additions are caught without a ratchet on scripts/ itself (the existing two
-    are registered in GATE_BOUNDARIES as a declared out-of-scope follow-up).
+    History, kept because the boundary must not be re-widened silently: this started as a
+    PIN on a measured count of 2 (`legacy_observer.py:96`, `wu904_remediation_restore.py:65`)
+    because `scripts/` was outside every rule's root, and `GATE_BOUNDARIES`
+    (`readers_outside_the_scanned_roots`) recorded it as a declared follow-up.  The owner
+    instructed the convergence on 2026-09-18, both sites now call
+    `store.metadata_object(...)`, and the pin is replaced by a HARD ZERO over `scripts/` -
+    a strengthening, not a relaxation: a new direct reader anywhere under scripts/ fails
+    this test instead of merely changing a number.
     """
     scripts = Path(__file__).resolve().parents[2] / "scripts"
     found: list[str] = []
@@ -272,10 +276,10 @@ def test_b10_scripts_reader_count_stable() -> None:
                 continue
             if any(_names_exact_column(argument) for argument in node.args):
                 found.append(f"{path.name}:{node.lineno}")
-    assert len(found) == 2, (
-        f"scripts/ had 2 direct readers (legacy_observer.py:96, wu904_remediation_restore.py:65); "
-        f"now {len(found)}: {found} - register new ones in GATE_BOUNDARIES, or converge them "
-        "if the owner agrees (this test pins the boundary, it does not decide what to do with it)"
+    assert not found, (
+        "scripts/ parses the shared column directly: " + ", ".join(found) +
+        " - route it through store.metadata_object/metadata_state (the two historical sites "
+        "were converged on 2026-09-18; this rule is a hard zero for scripts/)"
     )
 
 

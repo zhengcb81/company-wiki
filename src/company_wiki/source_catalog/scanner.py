@@ -35,7 +35,7 @@ from .adapters.common import (
     _walk_files,
 )
 from .models import CatalogConfig, DOCUMENT_EXTENSIONS, SCANNER_VERSION, RootSpec, ScanReport
-from .store import CatalogStore, canonical_json, metadata_object
+from .store import CatalogStore, canonical_json, metadata_object, metadata_state
 
 
 _DATE_RE = re.compile(r"(?<!\d)(20\d{2})[-_.年](0[1-9]|1[0-2]|[1-9])[-_.月](0[1-9]|[12]\d|3[01]|[1-9])")
@@ -665,19 +665,32 @@ def _observe_file(
         and existing["observed_size"] == stat.st_size
         and existing["observed_mtime_ns"] == stat.st_mtime_ns
     ):
-        manifest = SourceManifest.from_dict(json.loads(existing["manifest_json"]))
-        return _ObservedFile(
-            candidate,
-            manifest.source_id,
-            manifest.content_sha256,
-            stat.st_size,
-            stat.st_mtime_ns,
-            manifest.mime_type,
-            manifest.canonical_json(),
-            True,
-            None,
-            False,
-        )
+        # F-B10R2-MISSINGFILE family, site 4 (scanner, owner instruction 2026-09-18): the
+        # size+mtime shortcut used to parse the stored manifest UNGUARDED, so ONE damaged
+        # manifest column aborted the whole scan.  A manifest that cannot be read is simply
+        # not a reuse candidate: fall through and re-hash the file, which rewrites a fresh
+        # manifest and leaves the scan running.  Both failure shapes are covered - a value
+        # that is not a JSON object (`metadata_state` reports why) and an object that is
+        # missing a required field (`SourceManifest.from_dict` raises).
+        manifest_payload, manifest_state = metadata_state(existing["manifest_json"])
+        if manifest_state is None:
+            try:
+                manifest = SourceManifest.from_dict(manifest_payload)
+            except (KeyError, TypeError, ValueError):
+                manifest = None
+            if manifest is not None:
+                return _ObservedFile(
+                    candidate,
+                    manifest.source_id,
+                    manifest.content_sha256,
+                    stat.st_size,
+                    stat.st_mtime_ns,
+                    manifest.mime_type,
+                    manifest.canonical_json(),
+                    True,
+                    None,
+                    False,
+                )
     mime_type = _mime_type(candidate.path)
     try:
         collector_name = f"filesystem-catalog-{candidate.root.root_id}"
@@ -817,6 +830,7 @@ def _scan_catalog_impl(
 
     master_identity = _load_security_master_identity(config.catalog_dir)
     portfolio_urls = _load_dayu_portfolio_urls(config)
+    strategies: list[tuple[str, str]] = []
     for root in selected_roots:
         if not root.path.is_dir():
             errors += 1
@@ -831,13 +845,22 @@ def _scan_catalog_impl(
                     }
                 )
             continue
+        # F-BAR-10 fix (owner instruction 2026-09-18): a root that DECLARES an adapter is
+        # scanned THROUGH it, snapshot or not.  The declaration is the instruction - "a future
+        # root joins by CONFIG ONLY: kind directory + registered sidecar adapter" - and the
+        # legacy directory walk is simply the wrong reader for such a root: measured, it
+        # indexed `.source.json` sidecars as documents of their own.  The activation snapshot
+        # keeps controlling the roots that declare NO adapter (company_raw / dayu_portfolio /
+        # the plain directory roots), so the v1/v2 cutover for those is unchanged.
+        use_adapter = v2_scan_shadow or root.adapter_id is not None
+        strategies.append((root.root_id, "adapter" if use_adapter else "legacy"))
         candidates, excluded, policy_count = scan_root_strategy(
             root,
             names,
             progress=progress,
             master_identity=master_identity,
             portfolio_urls=portfolio_urls,
-            v2_scan_shadow=v2_scan_shadow,
+            v2_scan_shadow=use_adapter,
         )
         files_seen += len(candidates)
         files_excluded += excluded
@@ -1140,6 +1163,7 @@ def _scan_catalog_impl(
             new_errors=new_errors,
             known_quarantined=known_quarantined,
             error_details=tuple(error_details),
+            strategy=tuple(strategies),
         )
     active = store.fetchone("SELECT COUNT(*) AS count FROM locations WHERE location_status='active'")["count"]
     missing = store.fetchone("SELECT COUNT(*) AS count FROM locations WHERE location_status='missing'")["count"]
@@ -1156,6 +1180,7 @@ def _scan_catalog_impl(
         new_errors=new_errors,
         known_quarantined=known_quarantined,
         error_details=tuple(error_details),
+        strategy=tuple(strategies),
     )
     with store.transaction() as connection:
         completed_at = _utc_now()

@@ -32,6 +32,7 @@ from company_wiki.source_catalog.restore import restore_asset  # noqa: E402
 from company_wiki.source_catalog.store import (  # noqa: E402
     CatalogStore,
     ensure_assertion_v2_columns,
+    metadata_object,
 )
 
 REVIEWER = "user-approved-2026-08-09"
@@ -60,11 +61,11 @@ def _document_row(con, provider_document_id: str) -> sqlite3.Row | None:
 def _normalized(candidate: dict, row) -> dict:
     import json as _json
 
-    acq = {}
-    try:
-        acq = _json.loads(row["metadata_json"] or "{}").get("acquisition") or {}
-    except _json.JSONDecodeError:
-        acq = {}
+    # Converged on the single read chain (owner instruction 2026-09-18, closing the
+    # GATE_BOUNDARIES entry `readers_outside_the_scanned_roots`): `metadata_object` is the ONE
+    # parse implementation and never raises, so an unreadable column degrades to {} here
+    # instead of escaping with a RecursionError/TypeError the old except-clause did not catch.
+    acq = metadata_object(row["metadata_json"]).get("acquisition") or {}
     cand_payload = acq.get("candidate") or {}
     if isinstance(cand_payload, str):
         try:

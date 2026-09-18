@@ -31,6 +31,29 @@ from company_wiki.source_catalog.store import CatalogStore
 # --- GP2-01: scan_catalog forwards the flag into scan_root_strategy --------
 
 
+def _plain_root(tmp_path: Path) -> tuple[Path, RootSpec]:
+    """A root that declares NO adapter.
+
+    F-BAR-10 (owner instruction 2026-09-18) made adapter-DECLARED roots dispatch through
+    their adapter regardless of the activation snapshot, so the snapshot's flag now governs
+    exactly the roots that declare no adapter - which is what the GP-002 forwarding contract
+    is about.  The adapter-declared case is pinned separately below.
+    """
+    project = tmp_path / "plain_project"
+    directory = project / "archive"
+    directory.mkdir(parents=True)
+    (directory / "2025.pdf").write_bytes(b"pdf-2025-plain")
+    root = RootSpec(
+        root_id="plain_archive",
+        path=directory,
+        kind="directory",
+        priority=50,
+        read_only=True,
+        reusable_for_filing=True,
+    )
+    return project, root
+
+
 def _project(tmp_path: Path) -> tuple[Path, RootSpec]:
     project = tmp_path / "project"
     companies = project / "companies" / "Acme" / "raw"
@@ -106,8 +129,13 @@ def test_gp2_01_dry_run_forwards_v2_flag(tmp_path, monkeypatch) -> None:
 
 
 def test_gp2_01_flag_off_forwards_false(tmp_path, monkeypatch) -> None:
-    """v2_scan_shadow=False (explicit) stays v1 through the seam."""
-    project, root = _project(tmp_path)
+    """v2_scan_shadow=False (explicit) stays v1 through the seam.
+
+    F-BAR-10 note: this now uses a root WITHOUT an adapter.  An adapter-declared root
+    forwards True even with the flag off - deliberately, and pinned by
+    `test_gp2_01_adapter_declared_root_wins_over_the_flag` below.
+    """
+    project, root = _plain_root(tmp_path)
     config = _config(project, root)
     store = CatalogStore(config.database_path)
     observed: list[bool | None] = []
@@ -122,6 +150,32 @@ def test_gp2_01_flag_off_forwards_false(tmp_path, monkeypatch) -> None:
     assert observed and all(flag is False for flag in observed), (
         f"v1 scan must forward v2_scan_shadow=False (got {observed})"
     )
+
+
+def test_gp2_01_adapter_declared_root_wins_over_the_flag(tmp_path, monkeypatch) -> None:
+    """F-BAR-10: with the flag OFF, an adapter-declared root still dispatches by adapter.
+
+    The declaration is the instruction ("a future root joins by CONFIG ONLY: kind directory +
+    registered sidecar adapter"), and the legacy walk was measured to index `.source.json`
+    sidecars as documents on such a root.  The snapshot therefore cannot turn it back into a
+    v1 scan - which is what this pins, in the same seam the two cases above use.
+    """
+    project, root = _project(tmp_path)  # declares adapter_id="company_raw_v1"
+    config = _config(project, root)
+    store = CatalogStore(config.database_path)
+    observed: list[bool | None] = []
+    original = scan_root_strategy
+
+    def spy(root_spec, names, **kwargs):
+        observed.append(kwargs.get("v2_scan_shadow"))
+        return original(root_spec, names, **kwargs)
+
+    monkeypatch.setattr("company_wiki.source_catalog.scanner.scan_root_strategy", spy)
+    report = scan_catalog(config, store, v2_scan_shadow=False)
+    assert observed and all(flag is True for flag in observed), (
+        f"an adapter-declared root must dispatch through its adapter (got {observed})"
+    )
+    assert dict(report.strategy) == {"company_raw": "adapter"}, report.strategy
 
 
 # --- GP2-02: SourceCatalog.scan() follows the activation snapshot ----------
@@ -186,8 +240,13 @@ def test_gp2_02_snapshot_v2_on_routes_real_scan_to_v2(tmp_path, monkeypatch) -> 
 
 def test_gp2_02_no_snapshot_stays_v1(tmp_path, monkeypatch) -> None:
     """No runtime policy file = legacy default v1 (backward compatible for
-    temp projects and tooling that never activated a snapshot)."""
-    project, root = _project(tmp_path)
+    temp projects and tooling that never activated a snapshot).
+
+    F-BAR-10: the fixture declares no adapter, because an adapter-declared root dispatches
+    through its adapter regardless of the snapshot (pinned separately in
+    `test_gp2_01_adapter_declared_root_wins_over_the_flag`).
+    """
+    project, root = _plain_root(tmp_path)
     observed = _scan_with_spy(project, root, monkeypatch)
     assert observed == [False], (
         f"SourceCatalog.scan() without a snapshot must stay v1 (got {observed})"
@@ -229,8 +288,11 @@ def test_gp2_02_corrupt_snapshot_degrades_to_v1(tmp_path, monkeypatch) -> None:
     """A present-but-invalid snapshot degrades to v1 for scanning (no
     crash): scanning is a read-heavy catalog operation with no external
     data exposure, so silent v1 is safe.  (The LLM exit gate in GP-003
-    applies stricter fail-closed semantics.)"""
-    project, root = _project(tmp_path)
+    applies stricter fail-closed semantics.)
+
+    F-BAR-10: adapter-free root, since the snapshot no longer governs adapter-declared roots.
+    """
+    project, root = _plain_root(tmp_path)
     catalog_dir = project / ".source_catalog"
     catalog_dir.mkdir(parents=True, exist_ok=True)
     (catalog_dir / "runtime_policy.json").write_text(

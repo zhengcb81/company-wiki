@@ -196,11 +196,15 @@ GATE_BOUNDARIES: dict[str, str] = {
         "the ratchet scans `src/company_wiki/source_catalog/**`; a second hard rule covers "
         "the REST of the PRODUCT package (`src/company_wiki/**` minus source_catalog) and "
         "currently finds ZERO readers there - that rule is ENFORCED. MEASURED OUTSIDE IT "
-        "(2026-09-17): `scripts/` has 2 direct readers of this column (legacy_observer.py:96, "
-        "wu904_remediation_restore.py:65) and `tests/` has 10 (fixtures), while `tools/` has "
-        "0 - but tools/ and scripts/ are OUTSIDE the rule's root, so those numbers are "
+        "(2026-09-17): `scripts/` had 2 direct readers of this column (legacy_observer.py:96, "
+        "wu904_remediation_restore.py:65) and `tests/` had 10 (fixtures), while `tools/` had "
+        "0 - tools/ and scripts/ were OUTSIDE the rule's root, so those numbers were "
         "OBSERVATIONS, not enforcement (B-VR-B10R3-02: injecting a reader into either place "
-        "leaves the gate green). The scripts/ pair is a declared out-of-scope follow-up."
+        "left the gate green). CONVERGED 2026-09-18 (owner instruction): both `scripts/` sites "
+        "now call `store.metadata_object`, and `tests/contract/test_b10_read_chain.py::"
+        "test_b10_scripts_have_no_direct_reader` enforces a HARD ZERO over `scripts/` - the "
+        "follow-up this boundary registered is closed. What remains outside every rule is "
+        "`tests/` (fixtures, reported not enforced) and any code outside the three roots."
     ),
 }
 
