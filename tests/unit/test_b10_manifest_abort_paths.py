@@ -112,3 +112,65 @@ def test_b10_damaged_manifest_is_a_per_document_failure(tmp_path: Path) -> None:
     )
     artifacts = store.fetchall("SELECT COUNT(*) AS n FROM artifacts WHERE artifact_role='normalized'")
     assert artifacts[0]["n"] >= 1, "no normalized artifact row was written"
+
+
+def test_b10_missing_primary_file_is_a_per_document_failure(tmp_path: Path) -> None:
+    """R1 / F-B10R2-MISSINGFILE: a document whose primary file is missing on disk must be
+    recorded as a per-document failure, not abort the whole run and starve the healthy
+    document behind it (the reviewer measured the escape: SourceManifestMismatchError from
+    IngestService.ingest -> manifest.verify_file)."""
+    (tmp_path / "raw" / "reports").mkdir(parents=True, exist_ok=True)
+    # Write ONLY the healthy document's file; the damaged one's file does not exist.
+    (tmp_path / "raw" / "reports" / "healthy.md").write_bytes(BODY)
+    config = CatalogConfig(
+        project_root=tmp_path, catalog_dir=tmp_path / "catalog",
+        roots=(RootSpec(root_id=ROOT, path=tmp_path / "raw", kind="company_raw", priority=1),),
+    )
+    store = CatalogStore(tmp_path / "catalog.sqlite3")
+    with store.transaction() as connection:
+        _insert(connection, "roots", {"root_id": ROOT, "path": str(tmp_path / "raw"),
+                                      "kind": "company_raw", "priority": 1})
+        _insert(connection, "sources", {
+            "source_id": SRC, "content_sha256": SHA, "byte_size": len(BODY),
+            "mime_type": "text/markdown", "relative_path": "reports/healthy.md",
+            "root_id": ROOT, "source_type": "regulatory_filing", "source_status": "active",
+            "first_seen_at": "2026-01-01T00:00:00Z", "last_seen_at": "2026-01-01T00:00:00Z"})
+        _insert(connection, "sources", {
+            "source_id": "urn:company-wiki:source:sha256:" + "d" * 64,
+            "content_sha256": "d" * 64, "byte_size": 10, "mime_type": "text/markdown",
+            "relative_path": "reports/missing.md", "root_id": ROOT,
+            "source_type": "regulatory_filing", "source_status": "active",
+            "first_seen_at": "2026-01-01T00:00:00Z", "last_seen_at": "2026-01-01T00:00:00Z"})
+        manifest_healthy = _manifest(SHA, "reports/healthy.md")
+        for suffix, source_id, manifest_json in (
+            ("missing", "urn:company-wiki:source:sha256:" + "d" * 64,
+             json.dumps(_manifest("d" * 64, "reports/missing.md"))),
+            ("healthy", SRC, json.dumps(manifest_healthy)),
+        ):
+            document_id = "urn:company-wiki:document:sha256:" + (suffix * 64)
+            _insert(connection, "documents", {
+                "document_id": document_id, "primary_source_id": source_id,
+                "title": "Test Filing", "source_type": "regulatory_filing",
+                "document_kind": "annual_report", "published_date": "2026-06-18",
+                "source_status": "active", "metadata_priority": 1, "metadata_json": "{}",
+                "first_seen_at": "2026-01-01T00:00:00Z", "last_seen_at": "2026-01-01T00:00:00Z"})
+            _insert(connection, "locations", {
+                "location_id": f"loc-{suffix}", "root_id": ROOT,
+                "relative_path": f"reports/{suffix}.md",
+                "absolute_path": str(tmp_path / "raw" / "reports" / f"{suffix}.md"),
+                "source_id": source_id, "document_id": document_id,
+                "role": "original_primary", "location_status": "active",
+                "last_seen_run": "run-1", "manifest_json": manifest_json, "metadata_json": "{}"})
+    report = normalize_catalog(config, store, force=True, retry_limit=3)
+    reasons = dict(getattr(report, "terminal_reasons", {}) or {})
+    missing_reasons = {key: value for key, value in reasons.items()
+                       if key == "primary_file_missing"}
+    assert missing_reasons, (
+        f"the missing-file document must be recorded as primary_file_missing; got {reasons}"
+    )
+    assert getattr(report, "completed", 0) >= 1, (
+        "the HEALTHY document queued behind the missing one must still be normalized - a "
+        "run abort would leave it unprocessed (R1 / F-B10R2-MISSINGFILE)"
+    )
+    artifacts = store.fetchall("SELECT COUNT(*) AS n FROM artifacts WHERE artifact_role='normalized'")
+    assert artifacts[0]["n"] >= 1, "no normalized artifact row was written"

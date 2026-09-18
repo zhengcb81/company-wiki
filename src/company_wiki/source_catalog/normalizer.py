@@ -1674,6 +1674,23 @@ def normalize_catalog(
             )
             continue
         source_path = Path(primary["absolute_path"])
+        # R1 / F-B10R2-MISSINGFILE: the source file may have vanished since the scan; the
+        # existing check only tests whether the document has a location row, not whether the
+        # file on disk still exists.  A missing file causes manifest.verify_file() inside
+        # IngestService.ingest() to raise SourceManifestMismatchError, which - inside the
+        # except-Exception handler below - escapes and aborts the WHOLE run (the reviewer
+        # proved this with two documents, the second healthy and queued behind, still
+        # starved).  The file-not-found check is the cheapest way to make this a per-document
+        # outcome instead, using the same bookkeeping as the missing-location branch above.
+        if not source_path.is_file():
+            failed += 1
+            last_failure_code = "primary_file_missing"
+            last_failed_document_id = document["document_id"]
+            last_failed_path = str(source_path.resolve(strict=False))
+            failure_reasons["primary_file_missing"] = (
+                failure_reasons.get("primary_file_missing", 0) + 1
+            )
+            continue
         if progress is not None:
             progress(
                 current_path=str(source_path.resolve(strict=False)),

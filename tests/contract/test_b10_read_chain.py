@@ -248,6 +248,37 @@ def test_b10_no_direct_reader_outside_source_catalog() -> None:
     )
 
 
+def test_b10_scripts_reader_count_stable() -> None:
+    """R2: scripts/ has direct readers of the shared column - measured at 2.
+
+    The product-package rule (`test_b10_no_direct_reader_outside_source_catalog`) does NOT
+    cover scripts/ or tests/ because those are not product code.  This test pins the CURRENT
+    count so new additions are caught without a ratchet on scripts/ itself (the existing two
+    are registered in GATE_BOUNDARIES as a declared out-of-scope follow-up).
+    """
+    scripts = Path(__file__).resolve().parents[2] / "scripts"
+    found: list[str] = []
+    for path in sorted(scripts.rglob("*.py")):
+        try:
+            tree = ast.parse(path.read_text(encoding="utf-8"))
+        except SyntaxError:
+            continue
+        for node in ast.walk(tree):
+            if not isinstance(node, ast.Call):
+                continue
+            func = node.func
+            name = func.attr if isinstance(func, ast.Attribute) else getattr(func, "id", "")
+            if name != "loads":
+                continue
+            if any(_names_exact_column(argument) for argument in node.args):
+                found.append(f"{path.name}:{node.lineno}")
+    assert len(found) == 2, (
+        f"scripts/ had 2 direct readers (legacy_observer.py:96, wu904_remediation_restore.py:65); "
+        f"now {len(found)}: {found} - register new ones in GATE_BOUNDARIES, or converge them "
+        "if the owner agrees (this test pins the boundary, it does not decide what to do with it)"
+    )
+
+
 def test_b10_gate_boundaries_stay_documented() -> None:
     """The gate's measured limits must stay written down next to the gate.
 
