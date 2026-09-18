@@ -138,6 +138,22 @@ def test_rollback_refuses_by_name_on_an_unreadable_assertion_list(tmp_path: Path
     assert "unreadable" in str(excinfo.value), str(excinfo.value)
 
 
+def test_rollback_refuses_a_readable_value_that_is_not_a_list(tmp_path: Path) -> None:
+    """Readable JSON that is the WRONG SHAPE is refused too - `{"a": 1}` is not a list."""
+    store = _store(tmp_path)
+    with store.transaction() as connection:
+        connection.execute(
+            "INSERT INTO activation_journal (receipt_id,schema_version,kind,epoch,cohort,"
+            "assertion_ids_json,policy_hash,reviewer,reason,created_at) "
+            "VALUES (?,?,?,?,?,?,?,?,?,?)",
+            ("apply-2", "1.0", "apply", "epoch-1", "cohort-1", '{"a": 1}', POLICY_HASH,
+             "reviewer", "apply", "2026-09-18"),
+        )
+    with pytest.raises(ActivationError) as excinfo:
+        rollback_activation(store, receipt_id="apply-2", reviewer="owner", reason="test")
+    assert "not a list" in str(excinfo.value), str(excinfo.value)
+
+
 def test_verify_refuses_by_name_on_unreadable_evidence(tmp_path: Path) -> None:
     store = _store(tmp_path)
     with store.transaction() as connection:

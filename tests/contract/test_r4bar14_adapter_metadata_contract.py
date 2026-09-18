@@ -110,3 +110,104 @@ def test_the_sql_fiscal_year_filter_matches_an_adapter_root(tmp_path: Path) -> N
     )
     assert len(candidates) == 1, candidates
     assert candidates[0]["metadata"]["acquisition"]["fiscal_year"] == 2025
+
+
+# ---------------------------------------------------------------------------
+# The mapping's own branches (the coverage ratchet requires >= 95 on this module, and every
+# arm below is a real input shape a sidecar can have)
+# ---------------------------------------------------------------------------
+
+
+def _adapter():
+    from company_wiki.source_catalog.adapters.sidecar import SidecarFilingAdapter
+
+    return SidecarFilingAdapter()
+
+
+def _payload(tmp_path: Path, **overrides) -> dict:
+    directory = tmp_path / "branch"
+    directory.mkdir(parents=True, exist_ok=True)
+    body = b"%PDF-1.4 branch"
+    (directory / "2025.pdf").write_bytes(body)
+    payload = {
+        "schema_version": "1.0",
+        "canonical_entity_id": "ent-branch",
+        "display_name": "Branch Co",
+        "market": "US",
+        "security_id": "BRANCH",
+        "document_kind": "annual_report",
+        "fiscal_year": 2025,
+        "period_end": "2025-12-31",
+        "published_at": "2026-02-20",
+        "provider": "sec",
+        "provider_document_id": "branch-1",
+        "content_sha256": hashlib.sha256(body).hexdigest(),
+    }
+    payload.update(overrides)
+    for key in overrides.get("_drop", ()):  # explicit removal support
+        payload.pop(key, None)
+    payload.pop("_drop", None)
+    (directory / "2025.pdf.source.json").write_text(
+        json.dumps(payload, ensure_ascii=False), encoding="utf-8")
+    return {"directory": directory, "payload": payload, "body": body}
+
+
+def _normalized(tmp_path: Path, **overrides) -> dict:
+    fixture = _payload(tmp_path, **overrides)
+    candidates = _adapter().enumerate(fixture["directory"])
+    # An INCOMPLETE sidecar degrades to `indexed_only` (the adapter's own rule), and the
+    # normalized payload is still built - which is exactly what several branch arms below
+    # assert, so fall back instead of requiring `original_primary`.
+    primary = next((item for item in candidates if item.role == "original_primary"),
+                   candidates[0])
+    return primary.normalized
+
+
+def test_fiscal_year_arms(tmp_path: Path) -> None:
+    """Every arm of the fiscal-year coercion, including the ones that yield None."""
+    assert _normalized(tmp_path / "int")["fiscal_year"] == 2025
+    assert _normalized(tmp_path / "digits", fiscal_year="2024")["fiscal_year"] == 2024
+    # a non-digit spelling is carried verbatim rather than invented
+    assert _normalized(tmp_path / "text", fiscal_year="FY2023")["fiscal_year"] == "FY2023"
+    assert _normalized(tmp_path / "empty", fiscal_year="")["fiscal_year"] is None
+    assert _normalized(tmp_path / "none", fiscal_year=None)["fiscal_year"] is None
+    # bool is an int subclass and is never a year
+    assert _normalized(tmp_path / "bool", fiscal_year=True)["fiscal_year"] is None
+    assert _normalized(tmp_path / "blank", fiscal_year="   ")["fiscal_year"] is None
+
+
+def test_date_and_name_alias_arms(tmp_path: Path) -> None:
+    """`published_at`/`filing_date` and `company_name`/`display_name` are both accepted."""
+    legacy = _normalized(tmp_path / "legacy-date",
+                         _drop=("published_at",), filing_date="2025-11-05")
+    assert legacy["filing_date"] == "2025-11-05"
+    assert legacy["published_at"] == "2025-11-05"
+    fallback_name = _normalized(tmp_path / "display-name", _drop=("company_name",))
+    assert fallback_name["company_name"] == "Branch Co"
+    both = _normalized(tmp_path / "both-names", company_name="Declared Name")
+    assert both["company_name"] == "Declared Name"
+
+
+def test_legacy_containers_are_never_borrowed(tmp_path: Path) -> None:
+    """FC-502, restated where the passthrough lives: the denylist must hold."""
+    normalized = _normalized(
+        tmp_path / "containers",
+        acquisition={"fiscal_year": 1999, "provider": "wrong"},
+        dayu_meta={"security_id": "000001"},
+    )
+    assert "acquisition" not in normalized
+    assert "dayu_meta" not in normalized
+    assert normalized["fiscal_year"] == 2025
+    assert normalized["provider"] == "sec"
+
+
+def test_an_unparseable_sidecar_yields_an_empty_mapping(tmp_path: Path) -> None:
+    directory = tmp_path / "broken"
+    directory.mkdir(parents=True)
+    (directory / "2025.pdf").write_bytes(b"%PDF-1.4 broken")
+    (directory / "2025.pdf.source.json").write_text("{not json", encoding="utf-8")
+    candidates = _adapter().enumerate(directory)
+    primary = next((item for item in candidates if item.role == "original_primary"),
+                   candidates[0])
+    assert primary.normalized == {}
+    assert primary.role == "indexed_only"
