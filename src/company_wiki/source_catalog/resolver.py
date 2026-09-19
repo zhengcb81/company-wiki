@@ -370,15 +370,42 @@ class ByteReadResult:
 def _owning_root(path: Path, roots: tuple[Any, ...]) -> Any | None:
     """The configured root that CONTAINS ``path``, longest match winning.
 
-    The byte entry point receives a HANDLE (a path plus a digest), not a location row, so it
-    has no ``root_id`` to consult.  This derives the owning root from the path with the same
-    containment helper the rest of the read path uses (``_inside_configured_roots``), and the
-    longest configured base wins so a nested root is attributed to the more specific one.
+    Used as the FALLBACK when the handle's location row is no longer readable: the byte entry
+    point receives a HANDLE (a path plus a digest), not always a live location row, so the
+    owning root has to be derivable from the path with the same containment helper the rest of
+    the read path uses (``_inside_configured_roots``), longest configured base winning so a
+    nested root is attributed to the more specific one.
     """
     candidates = [root for root in roots if _inside_configured_roots(path, (root,))]
     if not candidates:
         return None
     return max(candidates, key=lambda root: len(str(getattr(root, "path", "") or "")))
+
+
+def _handle_owning_root(handle: Any, path: Path, roots: tuple[Any, ...],
+                        reader: Any | None = None) -> Any | None:
+    """The root that owns the handle's LOCATION ROW, falling back to the path.
+
+    B.VR-ba1 F-BA1-03 (P2) measured that the first version of the F-BAR-11 gate keyed on the
+    PATH-owning root while the decision path keys on the location's ``root_id``: with NESTED
+    roots holding the same file, the two disagreed and a handle the decision path elects was
+    refused ``policy_denied`` - while the code comment claimed they "can never disagree".
+
+    The authoritative key is therefore the same one the decision path uses: the root_id
+    recorded on the location the handle names.  The path is only a fallback for the case where
+    that row is gone (a handle can outlive its row); if neither resolves, the caller refuses.
+    """
+    location_id = str(getattr(handle, "canonical_location_id", "") or "")
+    if location_id and reader is not None:
+        row = reader.fetchone(
+            "SELECT root_id FROM locations WHERE location_id=?", (location_id,)
+        )
+        if row is not None:
+            root_id = str(row["root_id"])
+            for root in roots:
+                if root.root_id == root_id:
+                    return root
+    return _owning_root(path, roots)
 
 
 def _inside_configured_roots(path: Path, roots: tuple[Any, ...]) -> bool:
@@ -1872,10 +1899,13 @@ class SourceResolver:
         )
         if canonical is None:
             return _Selection(None, selection_reason, tried)
-        try:
-            manifest = json.loads(canonical["manifest_json"] or "{}")
-        except json.JSONDecodeError:
-            manifest = {}
+        # B.VR-ba1 F-BA1-06: this guard caught only JSONDecodeError, so a DEEPLY NESTED value
+        # (RecursionError) or a non-text one (TypeError) escaped the read path - the same
+        # partial-guard shape the B10 rounds fixed elsewhere.  `metadata_state` is the single
+        # chain's parse and never raises; a value that is not an object simply means "no
+        # manifest claims to compare against", which is exactly what the old `{}` fallback
+        # meant.
+        manifest, _manifest_state = metadata_state(canonical["manifest_json"])
         source_id = str(canonical["source_id"] or document["source_id"] or "")
         # B02: the handle reports the digest of the bytes that were actually
         # verified.  It equals the manifest claim in the normal case (so the
@@ -2086,11 +2116,14 @@ class SourceResolver:
         # on containment only, so a caller that built its own handle could still be served
         # the bytes of a denied root - measured, and registered as F-BAR-11.  The rule is the
         # SAME function the decision path and the policy export use (``_effective_reusable``),
-        # so the three can never disagree; the reason code is the already-registered
-        # ``policy_denied`` ("root policy does not authorize reuse", observability.py:51) and
-        # no new taxonomy entry is invented here.
+        # and the root is resolved with the SAME key the decision path uses (the location's
+        # root_id, with the path only as a fallback - B.VR-ba1 F-BA1-03), so the layers cannot
+        # disagree.  The reason code is the already-registered `policy_denied` ("root policy
+        # does not authorize reuse", observability.py:51) and no new taxonomy entry is invented.
         roots = tuple(self.catalog.config.roots)
-        owning_root = _owning_root(path, roots)
+        owning_root = _handle_owning_root(
+            handle, path, roots, getattr(self.catalog, "reader", None)
+        )
         reusable_root_ids = frozenset(
             root.root_id for root in roots if _effective_reusable(root, self.catalog.config)
         )
@@ -2191,11 +2224,10 @@ def _v2_assertion_metadata(
     )
     if row is None:
         return None
-    evidence = {}
-    try:
-        evidence = json.loads(row["evidence_json"] or "{}")
-    except (TypeError, ValueError):
-        evidence = {}
+    # B.VR-ba1 F-BA1-06: `except (TypeError, ValueError)` left RecursionError (a deeply nested
+    # value) and UnicodeDecodeError escaping; the single chain's parse never raises, so an
+    # unreadable row degrades to "no evidence metadata" exactly as the old fallback intended.
+    evidence, _evidence_state = metadata_state(row["evidence_json"])
     metadata = {
         "fiscal_year": row["fiscal_year"],
         "fiscal_period": row["fiscal_period"],

@@ -11,6 +11,7 @@ import json
 import math
 import multiprocessing
 import os
+import sqlite3
 from pathlib import Path
 import re
 import signal
@@ -1589,6 +1590,59 @@ def _frontmatter(document: Any, normalized: _Normalized) -> str:
     )
 
 
+def _stop_requested(should_stop: Any | None) -> bool:
+    """`should_stop is not None and should_stop()` as one call (the BoolOp lives here)."""
+    return should_stop is not None and bool(should_stop())
+
+
+def _docling_sidecar_path(source_path: Path, metadata: dict[str, Any],
+                          content_sha256: str, locations: Any) -> Path | None:
+    """The `processed_docling` sidecar for a PDF whose dayu metadata pins the pdf hash.
+
+    Takes the ALREADY PARSED metadata on purpose: handing the raw column to a helper would just
+    move the handoff the ratchet records at the call site.  Returns None whenever the linkage
+    does not apply, which is the common case.  See the call site for why this is a function and
+    not an inline block (FC-1204 / S-7).
+    """
+    expected_pdf_sha = (metadata.get("dayu_meta") or {}).get("pdf_sha256")
+    if source_path.suffix.lower() != ".pdf":
+        return None
+    if expected_pdf_sha != content_sha256:
+        return None
+    sidecar = next(
+        (item for item in locations if item["role"] == "processed_docling"), None
+    )
+    if sidecar is None:
+        return None
+    possible = Path(sidecar["absolute_path"])
+    if not possible.is_file():
+        return None
+    return possible
+
+
+def _ingest_without_raising(root_path: str, manifest: Any) -> tuple[Any | None, str | None]:
+    """Ingest an EMPTY parse result for a document that already failed - never raising.
+
+    F-B10R2-MISSINGFILE family (owner instruction 2026-09-18).  Both calls sit inside
+    `except` handlers, where nothing encloses them: a manifest that no longer matches the
+    bytes on disk (the file was replaced after the scan) makes `IngestService.ingest` raise
+    `SourceManifestMismatchError`, which escaped the handler and aborted the WHOLE
+    normalization run - every document queued behind it was starved.  A handler is the one
+    place where a single bad row must stay a single bad row.
+
+    Returns ``(bundle, problem_code)``; ``problem_code`` is None on success.  The exception
+    class is part of the code (``ingest_failed:SourceManifestMismatchError``) so the report
+    says WHAT went wrong instead of counting an anonymous failure.
+    """
+    try:
+        bundle = IngestService(root=Path(root_path)).ingest(
+            manifest=manifest, parser_results=()
+        )
+    except Exception as exc:  # noqa: BLE001 - reported as a per-document outcome
+        return None, f"ingest_failed:{type(exc).__name__}"
+    return bundle, None
+
+
 def normalize_catalog(
     config: CatalogConfig,
     store: CatalogStore,
@@ -1644,15 +1698,28 @@ def normalize_catalog(
     last_failed_document_id: str | None = None
     last_failed_path: str | None = None
     for document_index, document in enumerate(documents, start=1):
-        if should_stop is not None and should_stop():
+        if _stop_requested(should_stop):
             partial += max(0, len(documents) - document_index + 1)
             break
         source_id = document["primary_source_id"]
-        locations = store.fetchall(
-            """SELECT l.*,r.path AS root_path,r.priority FROM locations l JOIN roots r ON r.root_id=l.root_id
-            WHERE l.document_id=? AND l.location_status='active' ORDER BY r.priority,l.relative_path""",
-            (document["document_id"],),
-        )
+        # F-B10R2-MISSINGFILE family (owner instruction 2026-09-18): this per-document read was
+        # unguarded, so ONE failing statement (locked database, damaged row) aborted the whole
+        # run.  It is now a per-document failure like the branches below.
+        try:
+            locations = store.fetchall(
+                """SELECT l.*,r.path AS root_path,r.priority FROM locations l JOIN roots r ON r.root_id=l.root_id
+                WHERE l.document_id=? AND l.location_status='active' ORDER BY r.priority,l.relative_path""",
+                (document["document_id"],),
+            )
+        except sqlite3.Error as exc:
+            failed += 1
+            last_failure_code = f"locations_read_failed:{type(exc).__name__}"
+            last_failed_document_id = document["document_id"]
+            last_failed_path = ""
+            failure_reasons[last_failure_code] = (
+                failure_reasons.get(last_failure_code, 0) + 1
+            )
+            continue
         primary = next(
             (
                 item
@@ -1710,29 +1777,22 @@ def normalize_catalog(
             last_failed_path = str(source_path.resolve(strict=False))
             failure_reasons[manifest_problem] = failure_reasons.get(manifest_problem, 0) + 1
             continue
-        docling_path: Path | None = None
-        # B-VR-B10R2-01 (P0): this statement is NOT inside the per-document try below (that
-        # try starts at the parser call and covers only 1665-1679), so `json.loads` here used
-        # to let ONE malformed column abort the WHOLE normalization run.  The parse goes
-        # through the chain now; an unreadable column simply means "no dayu/pdf linkage" for
-        # this document and the run continues.  The document is not silently blessed - the
-        # frontmatter records the unreadable metadata as a quality flag and downgrades the
-        # identity verdict (B-VR-B10R2-03).
-        metadata, metadata_problem = metadata_state(document["metadata_json"])
-        dayu_meta = metadata.get("dayu_meta") or {}
-        expected_pdf_sha = dayu_meta.get("pdf_sha256")
-        if (
-            source_path.suffix.lower() == ".pdf"
-            and expected_pdf_sha == document["content_sha256"]
-        ):
-            sidecar = next(
-                (item for item in locations if item["role"] == "processed_docling"),
-                None,
-            )
-            if sidecar is not None:
-                possible = Path(sidecar["absolute_path"])
-                if possible.is_file():
-                    docling_path = possible
+        # B-VR-B10R2-01 (P0): this parse is NOT inside the per-document try below (that try
+        # starts at the parser call), so `json.loads` here used to let ONE malformed column
+        # abort the WHOLE normalization run.  It goes through the chain now; an unreadable
+        # column simply means "no dayu/pdf linkage" for this document and the run continues.
+        # The document is not silently blessed - the frontmatter records the unreadable
+        # metadata as a quality flag and downgrades the identity verdict (B-VR-B10R2-03).
+        #
+        # FC-1204 / S-7: the BRANCHING that consumes it moved into `_docling_sidecar_path`
+        # (the frozen complexity table may only ratchet DOWN, so new decision points belong in
+        # a helper).  The PARSE stays here on purpose: the handoff ratchet records this
+        # function as the place the column value is handed to the chain, and moving the parse
+        # would only rename that site instead of converging it.
+        metadata, _metadata_problem = metadata_state(document["metadata_json"])
+        docling_path = _docling_sidecar_path(
+            source_path, metadata, str(document["content_sha256"] or ""), locations
+        )
 
         def parser_progress(details: dict[str, Any]) -> None:
             if progress is not None:
@@ -1765,9 +1825,21 @@ def normalize_catalog(
             break
         except UnsupportedDocumentError as exc:
             normalized = _unsupported(source_path, str(exc)[:500])
-            bundle = IngestService(root=Path(primary["root_path"])).ingest(
-                manifest=manifest, parser_results=()
+            bundle, ingest_problem = _ingest_without_raising(
+                primary["root_path"], manifest
             )
+            if ingest_problem is not None:
+                # The document's outcome cannot be recorded at all (its bytes no longer match
+                # the manifest), so this is a FAILURE rather than an "unsupported" that would
+                # pretend the artifact exists.
+                failed += 1
+                last_failure_code = ingest_problem
+                last_failed_document_id = document["document_id"]
+                last_failed_path = str(source_path.resolve(strict=False))
+                failure_reasons[ingest_problem] = (
+                    failure_reasons.get(ingest_problem, 0) + 1
+                )
+                continue
         except Exception as exc:
             # B-VR-B10R3-01 (P2, live): this parse sits INSIDE the handler but OUTSIDE every
             # try, so a document whose parse failed AND whose existing normalized-artifact row
@@ -1788,9 +1860,6 @@ def normalize_catalog(
             )
             error_text = f"{error_code}: {str(exc)[:500]}"
             normalized = _failed(source_path, error_text)
-            bundle = IngestService(root=Path(primary["root_path"])).ingest(
-                manifest=manifest, parser_results=()
-            )
             failure_metadata = {
                 "attempt_count": next_attempt,
                 "terminal": terminal,
@@ -1802,11 +1871,22 @@ def normalize_catalog(
                 ),
                 "error_code": error_code,
             }
+            # The bookkeeping happens BEFORE the ingest, and the ingest cannot raise, so a
+            # document whose failure artifact cannot be written keeps the PARSE failure as its
+            # recorded reason (the real cause) while the write problem is counted beside it.
             failed += 1
             last_failure_code = error_code
             last_failed_document_id = document["document_id"]
             last_failed_path = str(source_path.resolve(strict=False))
             failure_reasons[error_code] = failure_reasons.get(error_code, 0) + 1
+            bundle, ingest_problem = _ingest_without_raising(
+                primary["root_path"], manifest
+            )
+            if ingest_problem is not None:
+                failure_reasons[ingest_problem] = (
+                    failure_reasons.get(ingest_problem, 0) + 1
+                )
+                continue
         raw_text = "\n\n".join(
             result.raw_text or "" for result in normalized.parser_results
         )
@@ -1822,8 +1902,24 @@ def normalize_catalog(
             + f"# {document['title']}\n\n"
             + normalized.body
         )
-        _atomic_write(output_path, content)
-        artifact_hash = _sha256_file(output_path)
+        # F-BAR-B10R2 family (owner instruction 2026-09-18): the derived-file write used to
+        # sit outside every guard, so ONE unwritable artifact (full disk, revoked permission,
+        # a directory where the file belongs) aborted the whole normalization run and starved
+        # every document behind it.  It is a per-document failure now, and the byte size is
+        # taken from the file we just hashed, so the artifact row and the bytes cannot drift.
+        try:
+            _atomic_write(output_path, content)
+            artifact_hash = _sha256_file(output_path)
+            artifact_byte_size = output_path.stat().st_size
+        except OSError as exc:
+            failed += 1
+            last_failure_code = f"artifact_write_failed:{type(exc).__name__}"
+            last_failed_document_id = document["document_id"]
+            last_failed_path = str(output_path.resolve(strict=False))
+            failure_reasons[last_failure_code] = (
+                failure_reasons.get(last_failure_code, 0) + 1
+            )
+            continue
         artifact_id = (
             "urn:company-wiki:artifact:sha256:"
             + hashlib.sha256(
@@ -1832,74 +1928,87 @@ def normalize_catalog(
                 ).encode("utf-8")
             ).hexdigest()
         )
-        with store.transaction() as connection:
-            connection.execute(
-                "DELETE FROM evidence_spans WHERE document_id=?",
-                (document["document_id"],),
-            )
-            for span in bundle.evidence_spans:
-                data = span.to_dict()
-                coordinates = data["coordinates"]
+        # F-BAR-B10R2 family: the record transaction is a per-document step too - a failing
+        # statement here (locked database, damaged index, disk full) must not abort the run.
+        try:
+            with store.transaction() as connection:
                 connection.execute(
-                    """INSERT INTO evidence_spans(span_id,document_id,source_id,locator,page_number,
-                    paragraph_index,table_index,raw_text,span_json,parser_name,parser_version,parse_status)
-                    VALUES(?,?,?,?,?,?,?,?,?,?,?,?)""",
+                    "DELETE FROM evidence_spans WHERE document_id=?",
+                    (document["document_id"],),
+                )
+                for span in bundle.evidence_spans:
+                    data = span.to_dict()
+                    coordinates = data["coordinates"]
+                    connection.execute(
+                        """INSERT INTO evidence_spans(span_id,document_id,source_id,locator,page_number,
+                        paragraph_index,table_index,raw_text,span_json,parser_name,parser_version,parse_status)
+                        VALUES(?,?,?,?,?,?,?,?,?,?,?,?)""",
+                        (
+                            span.span_id,
+                            document["document_id"],
+                            span.source_id,
+                            span.locator,
+                            coordinates["page_number"],
+                            coordinates["paragraph_index"],
+                            coordinates["table_index"],
+                            span.raw_text,
+                            span.canonical_json(),
+                            span.parser_name,
+                            span.parser_version,
+                            span.parse_status.value,
+                        ),
+                    )
+                connection.execute(
+                    """INSERT INTO artifacts(artifact_id,document_id,source_id,artifact_role,path,content_sha256,
+                    byte_size,mime_type,generator_name,generator_version,status,error,
+                    schema_version,source_sha256,metadata_json,created_at)
+                    VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,strftime('%Y-%m-%dT%H:%M:%SZ','now'))
+                    ON CONFLICT(document_id,artifact_role,generator_name,generator_version) DO UPDATE SET
+                    path=excluded.path,content_sha256=excluded.content_sha256,byte_size=excluded.byte_size,
+                    status=excluded.status,error=excluded.error,
+                    schema_version=excluded.schema_version,source_sha256=excluded.source_sha256,
+                    metadata_json=excluded.metadata_json,created_at=excluded.created_at""",
                     (
-                        span.span_id,
+                        artifact_id,
                         document["document_id"],
-                        span.source_id,
-                        span.locator,
-                        coordinates["page_number"],
-                        coordinates["paragraph_index"],
-                        coordinates["table_index"],
-                        span.raw_text,
-                        span.canonical_json(),
-                        span.parser_name,
-                        span.parser_version,
-                        span.parse_status.value,
+                        source_id,
+                        "normalized",
+                        str(output_path.resolve()),
+                        artifact_hash,
+                        artifact_byte_size,
+                        "text/markdown",
+                        _NORMALIZER_NAME,
+                        NORMALIZER_VERSION,
+                        normalized.status,
+                        normalized.error,
+                        ARTIFACT_HANDLE_SCHEMA_VERSION,
+                        str(document["content_sha256"] or ""),
+                        canonical_json(
+                            {
+                                "schema_version": ARTIFACT_HANDLE_SCHEMA_VERSION,
+                                "parser_name": normalized.parser_name,
+                                "parser_version": normalized.parser_version,
+                                "quality_flags": list(normalized.quality_flags),
+                                "span_count": len(bundle.evidence_spans),
+                                **(failure_metadata or {}),
+                            }
+                        ),
                     ),
                 )
-            connection.execute(
-                """INSERT INTO artifacts(artifact_id,document_id,source_id,artifact_role,path,content_sha256,
-                byte_size,mime_type,generator_name,generator_version,status,error,
-                schema_version,source_sha256,metadata_json,created_at)
-                VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,strftime('%Y-%m-%dT%H:%M:%SZ','now'))
-                ON CONFLICT(document_id,artifact_role,generator_name,generator_version) DO UPDATE SET
-                path=excluded.path,content_sha256=excluded.content_sha256,byte_size=excluded.byte_size,
-                status=excluded.status,error=excluded.error,
-                schema_version=excluded.schema_version,source_sha256=excluded.source_sha256,
-                metadata_json=excluded.metadata_json,created_at=excluded.created_at""",
-                (
-                    artifact_id,
-                    document["document_id"],
-                    source_id,
-                    "normalized",
-                    str(output_path.resolve()),
-                    artifact_hash,
-                    output_path.stat().st_size,
-                    "text/markdown",
-                    _NORMALIZER_NAME,
-                    NORMALIZER_VERSION,
-                    normalized.status,
-                    normalized.error,
-                    ARTIFACT_HANDLE_SCHEMA_VERSION,
-                    str(document["content_sha256"] or ""),
-                    canonical_json(
-                        {
-                            "schema_version": ARTIFACT_HANDLE_SCHEMA_VERSION,
-                            "parser_name": normalized.parser_name,
-                            "parser_version": normalized.parser_version,
-                            "quality_flags": list(normalized.quality_flags),
-                            "span_count": len(bundle.evidence_spans),
-                            **(failure_metadata or {}),
-                        }
-                    ),
-                ),
+                connection.execute(
+                    "UPDATE documents SET text_fingerprint=? WHERE document_id=?",
+                    (text_fingerprint, document["document_id"]),
+                )
+        except sqlite3.Error as exc:
+            failed += 1
+            last_failure_code = f"artifact_record_failed:{type(exc).__name__}"
+            last_failed_document_id = document["document_id"]
+            last_failed_path = str(output_path.resolve(strict=False))
+            failure_reasons[last_failure_code] = (
+                failure_reasons.get(last_failure_code, 0) + 1
             )
-            connection.execute(
-                "UPDATE documents SET text_fingerprint=? WHERE document_id=?",
-                (text_fingerprint, document["document_id"]),
-            )
+            continue
+
         if normalized.status == "completed":
             completed += 1
         elif normalized.status == "partial":

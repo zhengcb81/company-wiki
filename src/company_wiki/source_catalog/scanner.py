@@ -854,14 +854,34 @@ def _scan_catalog_impl(
         # the plain directory roots), so the v1/v2 cutover for those is unchanged.
         use_adapter = v2_scan_shadow or root.adapter_id is not None
         strategies.append((root.root_id, "adapter" if use_adapter else "legacy"))
-        candidates, excluded, policy_count = scan_root_strategy(
-            root,
-            names,
-            progress=progress,
-            master_identity=master_identity,
-            portfolio_urls=portfolio_urls,
-            v2_scan_shadow=use_adapter,
-        )
+        try:
+            candidates, excluded, policy_count = scan_root_strategy(
+                root,
+                names,
+                progress=progress,
+                master_identity=master_identity,
+                portfolio_urls=portfolio_urls,
+                v2_scan_shadow=use_adapter,
+            )
+        except ScannerFacadeError as exc:
+            # B.VR-ba1 F-BA1-04 (P2): now that an adapter-declared root ALWAYS dispatches
+            # (F-BAR-10), a root whose adapter is registered but unimplemented would abort the
+            # WHOLE scan and starve every healthy root behind it.  Fail-closed stays per ROOT:
+            # this root contributes nothing, the reason is recorded, and the batch continues.
+            # No silent v1 fallback - the root declared an adapter and does not get a different
+            # reader behind its back (FC-303 EX-08).
+            errors += 1
+            new_errors += 1
+            if len(error_details) < 5:
+                error_details.append(
+                    {
+                        "root_id": root.root_id,
+                        "relative_path": "",
+                        "error": f"scan_root_strategy: {exc}",
+                        "unchanged": False,
+                    }
+                )
+            continue
         files_seen += len(candidates)
         files_excluded += excluded
         policy_excluded += policy_count

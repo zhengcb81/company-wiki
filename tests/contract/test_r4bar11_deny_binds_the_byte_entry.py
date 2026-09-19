@@ -99,10 +99,10 @@ def _catalog(tmp_path: Path, *, denied: bool) -> SourceCatalog:
 def _handle(catalog: SourceCatalog, root_id: str):
     """Resolve the filing (it comes from the reusable root) and point it at `root_id`.
 
-    No `form_type` in the request: the sidecar adapter does not map that key into the
-    document's metadata (measured while writing this test - the request came back with
-    `form_type_mismatch`), and this test is about the byte entry point, not about form
-    matching.
+    No `form_type` in the request.  The historical reason was that the adapter did not map
+    that key (the request came back `form_type_mismatch`); F-BAR-14 fixed that, so the reason
+    now is simply that this test is about the byte entry point, not about form matching - and
+    the request stays as it was so the case remains comparable with the recorded evidence.
     """
     resolver = SourceResolver(catalog)
     resolution = resolver.resolve(SourceRequest(
