@@ -2090,12 +2090,57 @@ def backfill_text_fingerprints(
         source_id = document["source_id"]
         source_sha256 = document["source_sha256"]
         attempt_count = int(document["attempt_count"])
-        locations = store.fetchall(
-            """SELECT l.*,r.path AS root_path FROM locations l JOIN roots r ON r.root_id=l.root_id
-            WHERE l.document_id=? AND l.location_status='active' AND l.role='original_primary'
-            AND l.source_id=? ORDER BY r.priority,l.relative_path""",
-            (document_id, source_id),
-        )
+        # F-B10R2-MISSINGFILE family (owner instruction 2026-09-18, "the two fetchall calls"):
+        # this is the SECOND of the two per-document reads and it was still unguarded, so one
+        # failing statement (locked database, damaged index) aborted the whole backfill batch
+        # and starved every document behind it.  A READ failure says nothing about the
+        # document, so it is RETRYABLE here - recorded with backoff, terminal only once the
+        # attempt budget is spent - exactly the shape the parser-failure branch below uses.
+        #
+        # Registered limit: the recording call itself is not guarded.  A database that cannot
+        # even accept the outcome row is a hard stop, not a per-document condition, and
+        # swallowing it would silently drop the record.
+        try:
+            locations = store.fetchall(
+                """SELECT l.*,r.path AS root_path FROM locations l JOIN roots r ON r.root_id=l.root_id
+                WHERE l.document_id=? AND l.location_status='active' AND l.role='original_primary'
+                AND l.source_id=? ORDER BY r.priority,l.relative_path""",
+                (document_id, source_id),
+            )
+        except sqlite3.Error as exc:
+            next_attempt = attempt_count + 1
+            error_code = f"locations_read_failed:{type(exc).__name__}"
+            if next_attempt >= retry_limit:
+                store.record_fingerprint_outcome(
+                    document_id=document_id,
+                    source_id=source_id,
+                    source_sha256=source_sha256,
+                    fingerprint=None,
+                    status="failed_terminal",
+                    attempt_count=next_attempt,
+                    terminal_reason=f"retry_exhausted:{error_code}",
+                    error_code=error_code,
+                    error_message=str(exc),
+                    updated_at=now_iso,
+                )
+                terminal_reasons[f"retry_exhausted:{error_code}"] = (
+                    terminal_reasons.get(f"retry_exhausted:{error_code}", 0) + 1
+                )
+            else:
+                store.record_fingerprint_outcome(
+                    document_id=document_id,
+                    source_id=source_id,
+                    source_sha256=source_sha256,
+                    fingerprint=None,
+                    status="retryable_failed",
+                    attempt_count=next_attempt,
+                    error_code=error_code,
+                    error_message=str(exc),
+                    next_retry_at=_utc_iso(now + retry_backoff_seconds),
+                    updated_at=now_iso,
+                )
+            failed += 1
+            continue
         if not locations:
             store.record_fingerprint_outcome(
                 document_id=document_id,
