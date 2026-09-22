@@ -185,6 +185,289 @@ _PATH_PATTERN = re.compile(r"[A-Za-z]:[\\/][^;,\s]+|[\\/][^;,\s]*[\\/][^;,\s]+")
 
 REDACT = "<redacted>"
 
+# ---------------------------------------------------------------------------
+# I-14-C: credential-shaped values in free-form text (exception messages).
+#
+# Before this, the only content-aware cleaner was ``_PATH_PATTERN`` and it was
+# applied to ``StageEvent.detail`` only; ``str(exc)`` reached both
+# ``worker_process_events.jsonl`` and the CLI's stderr envelope verbatim.
+#
+# r3 (F-I14C-07): the key is matched by a SINGLE-PASS SCANNER, not by a regex with
+# nested quantifiers.  The r2 expression
+# ``(?:[A-Za-z0-9]+[_-])*<atom>(?:[_-][A-Za-z0-9]+)*`` was quadratic in the number
+# of ``_``/``-`` separated segments (measured: 8000 segments -> 8.9 s, 16000 ->
+# >20 s), and a "linear key candidate" regex turns out to be quadratic too
+# (``[A-Za-z0-9_-]+`` still backtracks once per start position when the value
+# cannot match: measured 8000 -> 2.7 s, 16000 -> >20 s).  The scanner visits every
+# character once, so cost is O(len(text)).
+#
+# A key is credential-shaped when, split on ``_``/``-``, one of its components is a
+# single atom (token, secret, password, passwd, pwd, apikey, credential,
+# passphrase) or two adjacent components form a known pair (api_key, access_key,
+# private_key, secret_key, auth_token, access_token, session_token, bot_token,
+# refresh_token, id_token, api_token, client_secret).  This covers env-var style
+# names such as GITHUB_TOKEN, SLACK_BOT_TOKEN, AWS_SECRET_ACCESS_KEY and
+# AWS_ACCESS_KEY_ID.  A value is redacted only when such a key precedes it; no
+# claim is made about a secret with no credential-like key anywhere near it.
+# ---------------------------------------------------------------------------
+
+_SINGLE_ATOMS = frozenset({
+    "token",
+    "secret",
+    "password",
+    "passwd",
+    "pwd",
+    "apikey",
+    "credential",
+    "passphrase",
+})
+
+_PAIR_ATOMS = frozenset({
+    ("api", "key"),
+    ("api", "token"),
+    ("access", "key"),
+    ("access", "token"),
+    ("secret", "key"),
+    ("private", "key"),
+    ("auth", "token"),
+    ("session", "token"),
+    ("bot", "token"),
+    ("refresh", "token"),
+    ("id", "token"),
+    ("client", "secret"),
+})
+
+_KEY_COMPONENT_SPLIT = re.compile(r"[_-]+")
+_KEY_CHARS = frozenset(
+    "abcdefghijklmnopqrstuvwxyz"
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    "0123456789_-"
+)
+_ASSIGNMENT_CHARS = frozenset(":=")
+_INLINE_SPACE = frozenset(" \t")
+# same value semantics as the r1/r2 regex: a quoted string (same line), or a run of
+# non-delimiter tokens (delimiters: any whitespace, , ; & " ' |)
+_VALUE_STOP_CHARS = frozenset(",;&\"'|")
+_QUOTES = frozenset("\"'")
+
+
+def key_is_credential(key: str) -> bool:
+    """True when *key* (as written in the text) is a credential-shaped name."""
+    parts = [part for part in _KEY_COMPONENT_SPLIT.split(key.lower()) if part]
+    if not parts:
+        return False
+    if any(part in _SINGLE_ATOMS for part in parts):
+        return True
+    return any(
+        (parts[index], parts[index + 1]) in _PAIR_ATOMS
+        for index in range(len(parts) - 1)
+    )
+
+
+# authorization / bearer: redact everything after the key (scheme included, so a
+# scheme-less "Authorization: <value>" cannot slip through).  These keys are
+# fixed literals, so the pattern has no nested quantifier over the KEY and stays
+# linear; its timing is measured in r3/bench_*.json alongside the scanner.
+_LEFT_ANCHOR = r"(?<![A-Za-z0-9])"
+
+# A value is a quoted string, or - since I-14-D narrowed the r1 greedy rule - a
+# BOUNDED run of non-delimiter tokens (delimiters: any whitespace, , ; & " ' |):
+#   _BARE_VALUE      ONE token: the assignment scanner stops at ANY whitespace,
+#                    including newlines (C13: the r1 rule crossed newlines and
+#                    deleted the whole remaining diagnostic block, 112 in -> 34 out).
+#   _AUTH_BARE_VALUE the authorization/bearer value: tokens joined by INLINE
+#                    whitespace only, so it still carries one scheme word
+#                    ("Bearer <secret>", "token <secret>") but can no longer
+#                    swallow a multi-line diagnostic block either.
+# Declared residual: a bare secret containing whitespace is redacted only up to
+# its first token ("password: iron steel" -> "password: <redacted> steel");
+# quote the value ("password: 'iron steel'") for full coverage.
+_QUOTED_VALUE = r"\"[^\"\r\n]*\"|'[^'\r\n]*'"
+_BARE_VALUE = r"[^\s,;&\"'|]+"
+_VALUE = r"(?P<value>" + _QUOTED_VALUE + r"|" + _BARE_VALUE + r")"
+_AUTH_BARE_VALUE = r"[^\s,;&\"'|]+(?:[ \t]+[^\s,;&\"'|]+)*"
+
+# A value may still cross line breaks, but only behind one PRE-BREAK TOKEN.  That
+# token has been widened four times, each time because a measured family leaked:
+#   r2  a nine-word enumeration of scheme words (F-REV-R2-01: coverage was exactly
+#       as wide as the list);
+#   r3  one RFC 7235 scheme token, `[A-Za-z]...` (F-REV-R3-01: the after-break
+#       quoted alternatives carried an optional-CR form inside a character class,
+#       where `?` is a literal member of the negated set);
+#   r4  the full RFC 7230 tchar class (F-REV-R3-04: a non-letter-initial scheme
+#       leaked where the base tree redacted);
+#   r5  the VALUE-TOKEN class (F-REV-R4-05: a token containing a non-tchar character,
+#       e.g. `Bo?t`, leaked too) -- but that was a SWAP, not a widening: it closed `?`
+#       and re-opened `&`, `'` and `|`, which r4 had redacted (F-REV-R5-01);
+#   r6  ANY NON-WHITESPACE RUN, `[^\s]+`.
+# Every widening before r6 was judged by "does the character that was pointed at now
+# pass", which is only one of the two differences that matter.  The criterion is BOTH:
+# what the new class closes that the old one did not, AND what it re-opens that the old
+# one caught.  Swept over every printable ASCII at this position, `[^\s]+` closes every
+# character r4 or r5 closed and every character either of them leaked, EXCEPT the space --
+# and a space here means the value is a multi-token run, which is the registered OPEN
+# shape below, not a token-class question at all.
+# A wrapped header (`Authorization: Bearer` then the secret on the next line) or an
+# RFC-7230 obs-fold puts the secret on a line that carries no `key=` prefix, so once
+# the pre-break token alone is consumed neither this pattern nor the assignment
+# scanner can see it.  Fail CLOSED: after that token and one or more line breaks (a
+# blank line included), the next token - or a quoted string reached through the same
+# break run - is redacted.  Measured as F-REV-D-01 / F-REV-R2-01 / F-REV-R3-01:
+# without this branch the full credential is persisted in the append-only event log.
+# Deliberate, registered cost (F-REV-R2-02): it cannot tell a wrapped credential from
+# a diagnostic key, so `Authorization: Bearer` + newline DELETES `doc=17`.  The
+# breaks are consumed by the match; the indentation and the keys on the lines AFTER
+# the redacted one are not.
+# One shape stays OPEN and is registered rather than hidden: a TWO-token value that
+# then wraps (`Authorization: Bearer abc` + newline + secret) -- the space is exactly
+# what a non-whitespace run stops at.  Closing it needs the whole first line consumed
+# as a run of tokens (spaces included), which deletes `doc=17` from
+# `Authorization: Bearer <marker>` + newline + `doc=17` + newline + `stage=` -
+# reproduced in `_r3_design_reprobe_20260922/`.  The companion that reproduction
+# names, `r3_fix_record.md`, was never written and is deliberately NOT substituted
+# for; the reproduction is where the substance lives.
+_AUTH_PREBREAK_TOKEN = r"[^\s]+"
+_AUTH_SCHEME_SPLIT = (r"(?:" + _AUTH_PREBREAK_TOKEN + r")[ \t]*"
+                      r"(?:(?:\r?\n)[ \t]*)+"
+                      r"(?:" + _AUTH_BARE_VALUE + r"+|\"[^\"\r\n]*\"|'[^'\r\n]*')")
+_AUTH_PATTERN = re.compile(
+    r"(?i)(?P<key>" + _LEFT_ANCHOR + r"authorization\s*[:=]\s*|"
+    + _LEFT_ANCHOR + r"bearer\s+)(?P<value>" + _QUOTED_VALUE + r"|" + _AUTH_SCHEME_SPLIT + r"|" + _AUTH_BARE_VALUE + r")"
+)
+
+# key=value / key: value forms are handled by `_redact_assignments` (single-pass
+# scanner), NOT by a regex: see the F-I14C-07 note at the top of this block.
+
+MAX_REDACTED_MESSAGE_CHARS = 200
+
+
+def redact_text(text: Any) -> Any:
+    """Replace credential-shaped values in free-form *text* with ``REDACT``.
+
+    Content-aware counterpart of ``_PATH_PATTERN`` for text that is not a path:
+    exception messages, CLI error envelopes and any future free-form field.
+    Never raises; non-strings pass through unchanged.  Redaction happens
+    *before* any truncation, so a length cut can never be the only protection.
+
+    Cost is O(len(text)): one regex pass with fixed literals for
+    ``authorization``/``bearer``, then one scanner pass over the assignment
+    separators.  No nesting-dependent quantifier sees the message.
+    """
+    if not isinstance(text, str) or not text:
+        return text
+    redacted = _AUTH_PATTERN.sub(lambda m: m.group("key") + REDACT, text)
+    return _redact_assignments(redacted)
+
+
+def _redact_assignments(text: str) -> str:
+    """Single pass over ``key = value`` / ``key: value`` forms.
+
+    For every ``:``/``=`` the scanner walks back over whitespace and key characters,
+    validates the key against the atom tables and, on a match, replaces the value.
+    A rejected key does NOT consume the rest of the assignment, so a later genuine
+    credential pair in the same text is still redacted (e.g. a `url=...?token=...`
+    or `cmd: --token=...` shape, which the previous regex skipped).
+    """
+    out: list[str] = []
+    index = 0
+    length = len(text)
+    while index < length:
+        char = text[index]
+        if char not in _ASSIGNMENT_CHARS:
+            out.append(char)
+            index += 1
+            continue
+
+        # walk back over optional whitespace, then over the key characters
+        cursor = index
+        while cursor > 0 and text[cursor - 1] in _INLINE_SPACE:
+            cursor -= 1
+        key_end = cursor
+        while cursor > 0 and text[cursor - 1] in _KEY_CHARS:
+            cursor -= 1
+        key = text[cursor:key_end]
+        boundary_ok = cursor == 0 or text[cursor - 1] not in _KEY_CHARS
+        if not (key and boundary_ok and key_is_credential(key)):
+            out.append(char)
+            index += 1
+            continue
+
+        # the value: a quoted string, or a run of non-delimiter tokens
+        value_start = index + 1
+        while value_start < length and text[value_start] in _INLINE_SPACE:
+            value_start += 1
+        if value_start < length and text[value_start] in _QUOTES:
+            closing = _find_closing_quote(text, value_start)
+            if closing == -1:                      # unterminated quote: redact the tail
+                value_end = length
+            else:
+                value_end = closing + 1
+        else:
+            # I-14-D (C13 narrowing): the value is ONE token.  It stops at any
+            # whitespace INCLUDING newlines, so a diagnostic key after the
+            # credential (`doc=17`, `stage=...` on the next line) survives.
+            # value_end == value_start after the loop means "no value at all";
+            # the `value_end <= value_start` guard below leaves the text alone,
+            # exactly as before.
+            value_end = value_start
+            while (value_end < length
+                   and text[value_end] not in _VALUE_STOP_CHARS
+                   and not text[value_end].isspace()):
+                value_end += 1
+        if value_end <= value_start:
+            out.append(char)
+            index += 1
+            continue
+
+        # Everything before `index` is already in `out`: the loop emitted the key and
+        # any whitespace between the key and the separator one character at a time.
+        # Only the separator, the whitespace after it and the value remain to be written.
+        # (F-I14C-08: re-appending the key here duplicated it, e.g. `tokentoken=<redacted>`.)
+        out.append(char)                           # the separator
+        out.append(text[index + 1:value_start])    # whitespace after the separator
+        out.append(REDACT)
+        index = value_end
+    return "".join(out)
+
+
+def _find_closing_quote(text: str, quote_at: int) -> int:
+    quote = text[quote_at]
+    cursor = quote_at + 1
+    while cursor < len(text) and text[cursor] != quote:
+        if text[cursor] in "\r\n":
+            return -1
+        cursor += 1
+    return cursor if cursor < len(text) else -1
+
+
+def redact_and_truncate(text: Any, limit: int = MAX_REDACTED_MESSAGE_CHARS) -> Any:
+    """``redact_text`` first, then truncate to *limit* characters."""
+    redacted = redact_text(text)
+    if not isinstance(redacted, str):
+        return redacted
+    return redacted[:limit]
+
+
+def exception_cause_types(exc: BaseException) -> list[str]:
+    """Exception class names along the ``__cause__``/``__context__`` chain.
+
+    Only the *type names* are reported as diagnostics; no cause message is
+    returned, so a credential inside a nested cause cannot be persisted by
+    accident (the nested message itself is still redacted by callers that
+    choose to render it).
+    """
+    names: list[str] = []
+    seen: set[int] = set()
+    current = exc
+    while True:
+        nxt = current.__cause__ or current.__context__
+        if nxt is None or id(nxt) in seen:
+            break
+        seen.add(id(nxt))
+        names.append(type(nxt).__name__)
+        current = nxt
+    return names
+
 
 def validate_reason(code: str) -> bool:
     """Fail closed: only registered codes may be recorded."""
