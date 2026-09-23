@@ -8,6 +8,7 @@ green.
 """
 from __future__ import annotations
 
+import hashlib
 import json
 import sqlite3
 import sys
@@ -33,6 +34,18 @@ from company_wiki.source_catalog.prompt_injection_guard import (  # noqa: E402
     evaluate_review,
     scan_text,
 )
+
+
+# FIX-W06-GAPS P5-a payload binding: every receipt write must carry the
+# scanned evidence bytes, evidence_sha256 must be sha256 of exactly those
+# bytes, and the payload is re-scanned against the declared status — so this
+# text is clean (no ruleset hit) and every write in this file declares
+# status="not_detected".
+_EVIDENCE_PAYLOAD = "zr-302 receipt evidence payload for this test file."
+
+
+def _evidence_sha256(payload: str = _EVIDENCE_PAYLOAD) -> str:
+    return hashlib.sha256(payload.encode("utf-8")).hexdigest()
 
 
 class _Store:
@@ -76,10 +89,11 @@ def _write_receipt(
         "d1",
         status=status,
         reviewer="zr302-probe",
-        evidence_sha256="e" * 64,
+        evidence_sha256=_evidence_sha256(),
         now=reviewed_at,
         source_sha256=source_sha256,
         policy_hash=policy_hash,
+        evidence_payload=_EVIDENCE_PAYLOAD,
     )
     con.commit()
 
@@ -141,20 +155,34 @@ def test_record_with_binding_fields(db) -> None:
     assert receipt["policy_hash"] == RULESET_HASH
 
 
-def test_record_without_binding_keeps_legacy_shape(db) -> None:
-    """N-1: a receipt written without binding fields stays readable and
-    keeps the legacy FC-905 shape."""
+def test_record_without_binding_rejected(db) -> None:
+    """P5-c / OPEN-6 C2: a receipt without source/policy binding is
+    refused — the write side of the fail-closed contract."""
+    # Replaces test_record_without_binding_keeps_legacy_shape: P5-c made dual
+    # binding MANDATORY, so the legacy "keeps the FC-905 shape" expectation is
+    # invalid BY DESIGN (there is no longer any way to write an unbound receipt).
     con = db
-    record_prompt_injection_review(
-        con, "d1", status="not_detected", reviewer="r",
-        evidence_sha256="e" * 64, now="2026-08-01T00:00:00Z",
-    )
+    with pytest.raises(
+        PromptInjectionReviewError,
+        match="source_sha256 must be a lowercase SHA-256",
+    ):
+        record_prompt_injection_review(
+            con, "d1", status="not_detected", reviewer="r",
+            evidence_sha256=_evidence_sha256(), now="2026-08-01T00:00:00Z",
+            evidence_payload=_EVIDENCE_PAYLOAD,
+        )
+    with pytest.raises(
+        PromptInjectionReviewError,
+        match="policy_hash must be a lowercase SHA-256",
+    ):
+        record_prompt_injection_review(
+            con, "d1", status="not_detected", reviewer="r",
+            evidence_sha256=_evidence_sha256(), now="2026-08-01T00:00:00Z",
+            evidence_payload=_EVIDENCE_PAYLOAD,
+            source_sha256="a" * 64,
+        )
     con.commit()
-    receipt = read_prompt_injection_review(_Store(con), "d1")
-    assert receipt is not None
-    assert "source_sha256" not in receipt
-    assert "policy_hash" not in receipt
-    assert receipt["status"] == "not_detected"
+    assert read_prompt_injection_review(_Store(con), "d1") is None
 
 
 def test_record_bad_binding_hash_rejected(db) -> None:
@@ -162,13 +190,18 @@ def test_record_bad_binding_hash_rejected(db) -> None:
     with pytest.raises(PromptInjectionReviewError, match="source_sha256"):
         record_prompt_injection_review(
             con, "d1", status="not_detected", reviewer="r",
-            evidence_sha256="e" * 64, now="2026-08-01T00:00:00Z",
+            evidence_sha256=_evidence_sha256(), now="2026-08-01T00:00:00Z",
+            evidence_payload=_EVIDENCE_PAYLOAD,
             source_sha256="not-hex",
         )
+    # P5-c: a VALID source_sha256 is supplied here, otherwise the mandatory
+    # source binding would raise first and mask the policy_hash rejection.
     with pytest.raises(PromptInjectionReviewError, match="policy_hash"):
         record_prompt_injection_review(
             con, "d1", status="not_detected", reviewer="r",
-            evidence_sha256="e" * 64, now="2026-08-01T00:00:00Z",
+            evidence_sha256=_evidence_sha256(), now="2026-08-01T00:00:00Z",
+            evidence_payload=_EVIDENCE_PAYLOAD,
+            source_sha256="a" * 64,
             policy_hash="nope",
         )
 
@@ -188,6 +221,7 @@ def test_evaluate_hit(db) -> None:
     )
     assert result == ReviewEvaluation(
         status="not_detected", cache_state="hit",
+        state_domain="cache",
         reason="receipt fresh and bound",
     )
 
@@ -252,7 +286,8 @@ def test_evaluate_absent(db) -> None:
         source_sha256="a" * 64, policy_hash=RULESET_HASH,
         now="2026-08-02T00:00:00Z", ttl_seconds=3600,
     )
-    assert result == ReviewEvaluation(status="not_reviewed", cache_state="absent")
+    assert result == ReviewEvaluation(
+        status="not_reviewed", cache_state="absent", state_domain="cache")
 
 
 def test_evaluate_malformed_receipt_fails_closed(db) -> None:
@@ -275,9 +310,28 @@ def test_evaluate_legacy_unbound_receipt_is_tampered_not_hit(db) -> None:
     """N-1: a legacy receipt without binding fields can never be a hit —
     without a source binding it cannot be proven fresh (fail closed)."""
     con = db
-    record_prompt_injection_review(
-        con, "d1", status="not_detected", reviewer="r",
-        evidence_sha256="e" * 64, now="2026-08-01T00:00:00Z",
+    # P5-c: the writer now REFUSES unbound receipts, so the N-1 row is planted
+    # directly (same technique as the malformed-row test above); the status /
+    # cache_state expectations below are unchanged.  The row carries the C7
+    # domain tag so it passes the read gate and reaches the binding-mismatch
+    # path this test is named for; a pre-C7 row WITHOUT the tag reads as
+    # `absent` instead (GUARD-MERGE handoff unproven[2], not asserted here).
+    con.execute(
+        "UPDATE documents SET metadata_json=? WHERE document_id='d1'",
+        (
+            json.dumps(
+                {
+                    PROMPT_INJECTION_REVIEW_KEY: {
+                        "schema_version": "1.0",
+                        "status": "not_detected",
+                        "reviewer": "legacy",
+                        "reviewed_at": "2026-08-01T00:00:00Z",
+                        "evidence_sha256": "e" * 64,
+                        "state_domain": "review",
+                    }
+                }
+            ),
+        ),
     )
     con.commit()
     result = evaluate_review(

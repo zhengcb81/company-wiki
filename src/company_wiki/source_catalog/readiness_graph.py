@@ -15,6 +15,11 @@ prompt-injection guard into ONE machine decision graph:
 Shadow only: reads exclusively through the zero-write ``CatalogReader``
 (plus the guard's store-compatible reads); no catalog writes, no
 production wiring (production entrypoints land in later cards).
+
+FIX-W06-GAPS C7 (oracle.md; COPIES ONLY): an unrecognized safety
+cache_state is now fail-closed to the strictest verdict ("unsatisfied"
+with a frozen next action) instead of a bare KeyError — ambiguity must
+never pass and the decision graph has no crash-only dead end.
 """
 
 from __future__ import annotations
@@ -43,6 +48,10 @@ _SAFETY_MAP: dict[str, tuple[str, str]] = {
     "tampered": ("unsatisfied", "verify source bytes and re-run the prompt-injection review"),
     "absent": ("unknown", "run the prompt-injection scanner and record a review receipt"),
 }
+
+# FIX-W06-GAPS C7: fail-closed fallback for unknown/illegal cache_state.
+_UNRECOGNIZED_SAFETY_NEXT = (
+    "unrecognized safety cache_state — fail closed (ambiguity is never defaulted)")
 
 # Blocker -> next action for the seven non-safety stages (from ZR-301).
 _STAGE_NEXT_ACTIONS: dict[str, str] = {
@@ -101,7 +110,10 @@ def _safety_verdict(
         now=now,
         ttl_seconds=ttl_seconds,
     )
-    verdict, next_action = _SAFETY_MAP[evaluation.cache_state]
+    verdict, next_action = _SAFETY_MAP.get(
+        evaluation.cache_state,
+        ("unsatisfied", _UNRECOGNIZED_SAFETY_NEXT),
+    )
     return verdict, evaluation.cache_state, next_action
 
 

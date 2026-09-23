@@ -123,6 +123,7 @@ def _seed(path: Path, *, safety_status: str | None = "not_detected") -> Path:
                         "evidence_sha256": "e" * 64,
                         "source_sha256": S1,
                         "policy_hash": RULESET_HASH,
+                        "state_domain": "review",
                     }
                 }
             ),
