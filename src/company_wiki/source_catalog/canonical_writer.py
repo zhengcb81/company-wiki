@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from enum import Enum
 import hashlib
 import os
@@ -205,11 +205,28 @@ class CanonicalSourceWriter:
                 as_of_date=request.as_of_date,
                 allow_download=request.allow_download,
             )
-            resolution = SourceResolver(self.catalog).resolve(exact_request)
-            if resolution.status is not ResolutionStatus.REUSED_EXACT:
+            exact_resolution = SourceResolver(self.catalog).resolve(exact_request)
+            if exact_resolution.status is not ResolutionStatus.REUSED_EXACT:
                 raise CanonicalImportError(
                     "canonical file was written but exact provider identity did not resolve"
                 )
+            # F-EE1: exact_request above is only the post-write VERIFICATION
+            # probe (it pins the candidate's provider identity).  The result
+            # this import RETURNS answers the CALLER's request: the journal
+            # row for this operation is keyed request.request_id
+            # (acquisition_service.common), the provenance sidecar records it
+            # (_write_provenance), and CanonicalImportResult.request_id below
+            # already claims it.  Returning the exact-keyed resolution broke
+            # that chain: the FC-704 envelope's journal loop skipped the
+            # downloaded_new row (resolver.py:1026
+            # attempt.request_id != resolution.request_id) and faked
+            # outcome=reused_existing / download_events=0 after a committed
+            # download (FC-704; FF READ-10; RF ENV-11).  Status, matches and
+            # reason stay the verified exact resolution — only the answering
+            # request identity is corrected, matching the dedup branch above,
+            # which already re-resolves with the caller's request.
+            resolution = replace(
+                exact_resolution, request_id=request.request_id)
             self._remove_staged(staged)
             return CanonicalImportResult(
                 schema_version=CANONICAL_IMPORT_SCHEMA_VERSION,
