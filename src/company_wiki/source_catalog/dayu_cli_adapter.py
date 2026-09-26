@@ -26,6 +26,12 @@ _SAFE_COMPONENT_RE = re.compile(r"[^A-Za-z0-9._-]+")
 _SHA256_RE = re.compile(r"[0-9a-f]{64}")
 _US_ANNUAL_FORMS = ("10-K", "20-F")
 _US_QUARTERLY_FORMS = ("10-Q", "10-Q/A")
+# OWNER_DECISIONS §三十 B2（owner 原话「授权扩闸到 8-K（建议）」）：SEC filing 的
+# exhibit 资产复制闸门。6-K 不在其中 —— 改动前本适配器对任何 form 都只复制
+# primary_document，把 6-K 放进新复制逻辑会改变 6-K 的既有行为（本卡第一不变量）。
+_US_EXHIBIT_FORMS = frozenset({"8-K"})
+# 对应 dayu `list_filing_files(include_exhibits=...)` 同名参数的默认值。
+_INCLUDE_EXHIBITS = True
 
 
 class DayuCliAdapterError(RuntimeError):
@@ -80,6 +86,32 @@ def _mime_type(filename: str, configured: Any) -> str:
         return configured.strip().lower().split(";", 1)[0]
     guessed, _encoding = mimetypes.guess_type(filename)
     return guessed or "application/octet-stream"
+
+
+def _stage_asset(asset: _DownloadedAsset, allocated: Path) -> None:
+    """把 exhibit 资产复制进已分配的 staging 目录（与 primary 同样的校验强度）。
+
+    Args:
+        asset: discover 阶段登记的 exhibit 资产。
+        allocated: 已解析的 staging 目录。
+
+    Raises:
+        DayuCliAdapterError: 源字节与 meta 不符或落盘副本哈希不符。
+    """
+
+    source = asset.source_path
+    if _sha256_file(source) != asset.content_sha256:
+        raise DayuCliAdapterError("Dayu exhibit source no longer matches its meta")
+    destination = (allocated / _safe_component(source.name)).resolve(strict=False)
+    destination.relative_to(allocated)
+    temporary = destination.with_name(destination.name + f".{os.getpid()}.tmp")
+    try:
+        shutil.copyfile(source, temporary)
+        if _sha256_file(temporary) != asset.content_sha256:
+            raise DayuCliAdapterError("staged exhibit copy hash differs from Dayu source")
+        os.replace(temporary, destination)
+    finally:
+        temporary.unlink(missing_ok=True)
 
 
 def _forms_for_request(request: SourceRequest) -> tuple[str, ...]:
@@ -148,6 +180,8 @@ class DayuCliDownloadAdapter:
         self._temporary: TemporaryDirectory[str] | None = None
         self._workspace: Path | None = None
         self._assets: dict[str, _DownloadedAsset] = {}
+        # §三十 B2：授权 form（8-K）登记的 exhibit 资产，fetch() 时随 primary 一并复制
+        self._exhibit_assets: dict[str, tuple[_DownloadedAsset, ...]] = {}
 
     def discover(self, request: SourceRequest) -> tuple[DownloadCandidate, ...]:
         if not isinstance(request, SourceRequest):
@@ -278,6 +312,10 @@ class DayuCliDownloadAdapter:
                 os.replace(temporary, destination)
             finally:
                 temporary.unlink(missing_ok=True)
+            # §三十 B2：授权 form（8-K）的 exhibit 资产随 primary 一并复制到同一
+            # staging 目录；receipt 仍只描述 primary（单 receipt 契约不变）。
+            for exhibit in self._exhibit_assets.get(candidate.candidate_id, ()):
+                _stage_asset(exhibit, allocated)
             return DownloadReceipt(
                 candidate_id=candidate.candidate_id,
                 provider=candidate.provider,
@@ -299,6 +337,7 @@ class DayuCliDownloadAdapter:
 
     def close(self) -> None:
         self._assets.clear()
+        self._exhibit_assets.clear()
         self._workspace = None
         temporary, self._temporary = self._temporary, None
         if temporary is not None:
@@ -410,10 +449,31 @@ class DayuCliDownloadAdapter:
         )
         mime_type = _mime_type(filename, file_entry.get("content_type"))
         candidate_id = f"{provider}:{provider_document_id}"
+        # §三十 B2：只对授权 form（8-K）且 include_exhibits 为真时登记 exhibit 资产
+        exhibit_assets: tuple[_DownloadedAsset, ...] = ()
+        if self.market == "US" and _INCLUDE_EXHIBITS and form_type in _US_EXHIBIT_FORMS:
+            exhibit_assets = self._us_exhibit_assets(value, filing_dir, filename, candidate_id)
+            for exhibit in exhibit_assets:
+                try:
+                    exhibit.source_path.relative_to(self._workspace)
+                except ValueError as exc:
+                    raise DayuCliAdapterError(
+                        f"Dayu exhibit source escapes the workspace: {exhibit.source_path.name}"
+                    ) from exc
         title = (
             _optional_text(value.get("source_title"))
             or f"{request.entity} {form_type} {value.get('report_date') or filing_date}"
         )
+        adapter_payload: dict[str, Any] = {
+            "dayu_document_id": value.get("document_id"),
+            "primary_filename": filename,
+            "content_sha256": content_sha256,
+        }
+        if exhibit_assets:
+            # 仅在登记到 exhibit 时加键：非授权 form / 无 exhibit 的 payload 字节不变
+            adapter_payload["exhibit_filenames"] = [
+                asset.source_path.name for asset in exhibit_assets
+            ]
         candidate = DownloadCandidate(
             candidate_id=candidate_id,
             provider=provider,
@@ -432,13 +492,7 @@ class DayuCliDownloadAdapter:
             etag=_optional_text(file_entry.get("http_etag")),
             last_modified=_optional_text(file_entry.get("http_last_modified")),
             remote_size=byte_size,
-            adapter_payload_json=canonical_json(
-                {
-                    "dayu_document_id": value.get("document_id"),
-                    "primary_filename": filename,
-                    "content_sha256": content_sha256,
-                }
-            ),
+            adapter_payload_json=canonical_json(adapter_payload),
         )
         self._assets[candidate_id] = _DownloadedAsset(
             candidate_id=candidate_id,
@@ -447,6 +501,7 @@ class DayuCliDownloadAdapter:
             byte_size=byte_size,
             mime_type=mime_type,
         )
+        self._exhibit_assets[candidate_id] = exhibit_assets
         return candidate
 
     @staticmethod
@@ -488,6 +543,65 @@ class DayuCliDownloadAdapter:
         if entry is None:
             raise DayuCliAdapterError("Dayu SEC primary document is missing from files")
         return entry
+
+    @staticmethod
+    def _us_exhibit_assets(
+        meta: dict[str, Any],
+        filing_dir: Path,
+        primary_document: str,
+        candidate_id: str,
+    ) -> tuple[_DownloadedAsset, ...]:
+        """SEC filing 的 exhibit 资产（§三十 B2：闸门含 8-K）。
+
+        判定与 dayu `pick_exhibit_files` 同构：`.htm/.html` 且文件名含 `dex99`/`ex99`，
+        并排除 primary 自身。文件在 meta 里声明却不在磁盘上即失败（fail-closed）。
+
+        Args:
+            meta: filing 的 meta.json 对象。
+            filing_dir: meta 所在的 filing 目录。
+            primary_document: primary 文件名（排除项）。
+            candidate_id: 所属 candidate（写入资产元数据）。
+
+        Returns:
+            按文件名排序的 exhibit 资产元组；无 exhibit 时为空。
+
+        Raises:
+            DayuCliAdapterError: files 不是数组，或声明的 exhibit 不在磁盘上。
+        """
+
+        files = meta.get("files")
+        if not isinstance(files, list):
+            raise DayuCliAdapterError("Dayu SEC meta files must be an array")
+        assets: list[_DownloadedAsset] = []
+        for item in files:
+            if not isinstance(item, dict):
+                continue
+            name = _optional_text(item.get("name"))
+            if name is None or name == primary_document:
+                continue
+            lowered = name.lower()
+            if not lowered.endswith((".htm", ".html")):
+                continue
+            if "dex99" not in lowered and "ex99" not in lowered:
+                continue
+            source = (filing_dir / name).resolve(strict=False)
+            if not source.is_file():
+                raise DayuCliAdapterError(f"Dayu exhibit source is missing: {name}")
+            configured_hash = str(item.get("sha256") or "").strip().lower()
+            assets.append(
+                _DownloadedAsset(
+                    candidate_id=candidate_id,
+                    source_path=source,
+                    content_sha256=(
+                        configured_hash
+                        if _SHA256_RE.fullmatch(configured_hash)
+                        else _sha256_file(source)
+                    ),
+                    byte_size=source.stat().st_size,
+                    mime_type=_mime_type(name, item.get("content_type")),
+                )
+            )
+        return tuple(sorted(assets, key=lambda asset: asset.source_path.name))
 
 
 __all__ = [
