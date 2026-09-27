@@ -74,6 +74,16 @@ class CatalogReader(Protocol):
         """Typed: content_sha256 for a source id."""
         ...
 
+    def exact_source_version(self, document_id: str) -> sqlite3.Row | None:
+        """Typed: document identity joined to its primary source version."""
+        ...
+
+    def exact_source_locations(
+        self, document_id: str, source_id: str
+    ) -> list[sqlite3.Row]:
+        """Typed: indexed locations for exactly one document/source pair."""
+        ...
+
     def artifacts_for(self, document_id: str) -> list[sqlite3.Row]:
         """Typed: artifacts for a document, ordered by role/created_at/id."""
         ...
@@ -224,6 +234,32 @@ class ReadOnlyCatalogReader:
             (source_id,),
         )
         return None if row is None else str(row["content_sha256"])
+
+    def exact_source_version(self, document_id: str) -> sqlite3.Row | None:
+        """Catalog identity for a specified document and its primary byte version."""
+        return self.fetchone(
+            """SELECT d.document_id, d.primary_source_id AS source_id,
+                      d.source_status, d.title, d.document_kind,
+                      d.published_date, d.metadata_json,
+                      s.content_sha256, s.byte_size, s.mime_type
+               FROM documents d
+               LEFT JOIN sources s ON s.source_id=d.primary_source_id
+               WHERE d.document_id=?""",
+            (document_id,),
+        )
+
+    def exact_source_locations(
+        self, document_id: str, source_id: str
+    ) -> list[sqlite3.Row]:
+        """Indexed locations only; current root paths come from configuration."""
+        return self.fetchall(
+            """SELECT location_id, document_id, source_id, root_id,
+                      relative_path, role, location_status, manifest_json
+               FROM locations
+               WHERE document_id=? AND source_id=?
+               ORDER BY root_id, relative_path, location_id""",
+            (document_id, source_id),
+        )
 
     def artifacts_for(self, document_id: str) -> list[sqlite3.Row]:
         return self.fetchall(

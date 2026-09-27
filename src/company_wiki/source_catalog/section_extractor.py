@@ -19,6 +19,11 @@ from typing import Any, Callable
 from .admission import processing_priority_sql
 from .artifact_handle import ARTIFACT_HANDLE_SCHEMA_VERSION
 from .models import CatalogConfig, ProcessingReport, SECTION_EXTRACTOR_VERSION
+from .normalized_artifact_reader import (
+    NormalizedArtifactReadError,
+    preferred_normalized_artifact_predicate,
+    read_verified_normalized_text,
+)
 from .store import CatalogStore, canonical_json
 
 
@@ -319,12 +324,18 @@ def extract_sections_catalog(
 
     sql = (
         "SELECT d.document_id, d.primary_source_id, d.document_kind, d.title, "
-        "norm.path AS normalized_path, norm.content_sha256 AS content_sha256, "
+        "norm.path AS normalized_path, norm.content_sha256 AS normalized_sha256, "
+        "norm.status AS normalized_status, "
+        "norm.source_id AS normalized_source_id, "
+        "norm.source_sha256 AS normalized_source_sha256, "
+        "norm.generator_name AS normalized_generator_name, "
+        "norm.generator_version AS normalized_generator_version, "
+        "norm.metadata_json AS normalized_metadata_json, "
         "s.content_sha256 AS source_sha256 "
         "FROM documents d "
         "JOIN artifacts norm ON norm.document_id=d.document_id "
         "AND norm.artifact_role='normalized' "
-        "AND norm.generator_name='source_catalog_normalizer' "
+        f"AND {preferred_normalized_artifact_predicate('norm')} "
         "JOIN sources s ON s.source_id=d.primary_source_id "
         "LEFT JOIN artifacts sec ON sec.document_id=d.document_id "
         "AND sec.artifact_role=? AND sec.generator_name=? "
@@ -351,8 +362,8 @@ def extract_sections_catalog(
                 detail="extracting sections",
             )
         try:
-            text = normalized_path.read_text(encoding="utf-8")
-        except OSError:
+            text = read_verified_normalized_text(document)
+        except (OSError, UnicodeError, NormalizedArtifactReadError):
             failed += 1
             last_failed_document_id = document["document_id"]
             last_failed_path = str(normalized_path.resolve(strict=False))
@@ -366,7 +377,7 @@ def extract_sections_catalog(
             "SELECT span_id, page_number FROM evidence_spans WHERE document_id=?",
             (document["document_id"],),
         )
-        sha = document["content_sha256"]
+        sha = document["normalized_sha256"]
         sections_dir = config.derived_dir / sha[:2] / sha / "sections"
         index_entries: list[dict[str, Any]] = []
         for sl in slices:

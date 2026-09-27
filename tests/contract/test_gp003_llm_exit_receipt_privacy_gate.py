@@ -1,32 +1,14 @@
-"""GP-003 RED/acceptance: LLM exit gate — receipt + privacy filters on the
-summarize_catalog_with_llm selection (D-2 gap closure).
+"""GP-003 acceptance: LLM selection requires source-bound review receipts.
 
-Review finding D-2: the selection SQL has no receipt/privacy/root filter,
-so documents without a prompt-injection review receipt — and documents
-from private_user roots — can still be sent to the external LLM.  The
-production catalog confirms it: 122 current LLM candidates (all
-dayu_portfolio) carry no receipt; only 15 documents in the whole catalog
-have one.
-
-Gate semantics (fail closed, consistent with ZR-302 / readiness safety):
-
-  GP3-01  A private_user-root document is NEVER selected — the review
-          receipt authorizes absence of injection, not exfiltration of
-          private content (even with a valid receipt).
-  GP3-02  A public-root document WITHOUT a valid bound receipt is never
-          selected (no receipt = not_reviewed).
-  GP3-03  A public-root document WITH a valid source-bound receipt IS
-          selected.
-  GP3-04  A receipt whose source_sha256 does not match the current source
-          bytes (tampered/stale) blocks selection.
-  GP3-05  private_user + valid receipt is still blocked (privacy gate
-          dominates).
+All configured roots may feed the LLM regardless of historical privacy labels.
+The receipt must still bind to the current source SHA-256 before text leaves.
 """
 
 from __future__ import annotations
 
 import hashlib
 import json
+from dataclasses import replace
 from pathlib import Path
 
 from company_wiki.source_catalog import CatalogConfig, RootSpec, SourceCatalog
@@ -44,18 +26,16 @@ def _seed(root_dir: Path, name: str, body: str) -> None:
     (root_dir / name).write_text(body, encoding="utf-8")
 
 
-def _catalog(tmp_path: Path, *, private_root: bool = False):
+def _catalog(
+    tmp_path: Path, *, private_root: bool = False, public_root: bool = True
+):
     project = tmp_path / "project"
     sources = tmp_path / "sources"
     _seed(sources, "public.txt", "2025年公开公司收入增长20%，产能达到100万台。")
-    roots = [
-        RootSpec(
-            "public_root",
-            sources,
-            "directory",
-            priority=10,
-        )
-    ]
+    roots = (
+        [RootSpec("public_root", sources, "directory", priority=10)]
+        if public_root else []
+    )
     if private_root:
         private = tmp_path / "private"
         _seed(private, "private.txt", "用户私有研究笔记：某公司尚未公开的产能计划。")
@@ -141,6 +121,7 @@ def _review(catalog, document_id: str, *, source_sha256: str | None = None) -> N
             status="not_detected",
             reviewer="gp003-test",
             evidence_sha256=hashlib.sha256(binding.encode()).hexdigest(),
+            evidence_payload=binding,
             now="2026-09-02T12:00:00Z",
             source_sha256=binding,
             policy_hash="c" * 64,
@@ -157,17 +138,16 @@ def _summarize(catalog, client: _FakeLLM):
 
 
 # ---------------------------------------------------------------------------
-# GP3-01 / GP3-02 / GP3-04 / GP3-05: RED at HEAD (documents are selected
-# today regardless of receipt or privacy); GP3-03 pins the allowed case.
+# Historical root labels do not bypass the review and SHA checks.
 # ---------------------------------------------------------------------------
 
 
-def test_gp3_01_private_user_doc_never_selected(tmp_path) -> None:
+def test_gp3_01_configured_roots_without_receipts_not_selected(tmp_path) -> None:
     catalog = _catalog(tmp_path, private_root=True)
     client = _FakeLLM()
     report = _summarize(catalog, client)
     assert report.completed == 0, (
-        "a private_user-root document must never reach the LLM exit "
+        "documents without source-bound review receipts must not reach the LLM "
         f"(completed={report.completed}, prompts={len(client.prompts)})"
     )
     assert client.prompts == []
@@ -211,20 +191,162 @@ def test_gp3_04_receipt_source_mismatch_blocks(tmp_path) -> None:
     assert client.prompts == []
 
 
-def test_gp3_05_private_user_with_valid_receipt_still_blocked(tmp_path) -> None:
-    """The privacy gate dominates: a review receipt proves no injection
-    but never authorizes sending private_user content to an external LLM.
-    The public document in the same catalog stays selectable."""
+def test_gp3_05_all_configured_roots_with_bound_receipts_are_selected(tmp_path) -> None:
+    """A historical private_user label does not veto reviewed content."""
     catalog = _catalog(tmp_path, private_root=True)
     for document_id in _document_ids(catalog):
         _review(catalog, document_id)
     client = _FakeLLM()
     report = _summarize(catalog, client)
-    assert report.completed == 1, (
-        "only the public document may be selected "
+    assert report.completed == 2, (
+        "both reviewed configured-root documents must be selectable "
         f"(completed={report.completed}, prompts={len(client.prompts)})"
     )
+    assert len(client.prompts) == 2
+    assert any("私有研究笔记" in prompt for prompt in client.prompts)
+
+
+def test_gp3_06_private_labeled_root_alone_with_bound_receipt_is_selected(
+    tmp_path,
+) -> None:
+    catalog = _catalog(tmp_path, private_root=True, public_root=False)
+    for document_id in _document_ids(catalog):
+        _review(catalog, document_id)
+    client = _FakeLLM()
+    report = _summarize(catalog, client)
+    assert report.completed == 1
     assert len(client.prompts) == 1
-    assert "私有研究笔记" not in client.prompts[0], (
-        "private_user content must never reach the LLM prompt"
+    assert "私有研究笔记" in client.prompts[0]
+
+
+def test_gp3_07_changed_normalized_bytes_never_leave_for_llm(tmp_path) -> None:
+    catalog = _catalog(tmp_path)
+    document_id = _document_ids(catalog)[0]
+    _review(catalog, document_id)
+    artifact = catalog.store.fetchone(
+        "SELECT path FROM artifacts WHERE document_id=? AND artifact_role='normalized'",
+        (document_id,),
     )
+    assert artifact is not None
+    Path(artifact["path"]).write_text("未审查的替换内容", encoding="utf-8")
+
+    client = _FakeLLM()
+    report = _summarize(catalog, client)
+    assert report.completed == 0
+    assert report.failed == 1
+    assert client.prompts == []
+    assert "normalized" in str(report.error).lower()
+
+
+def test_gp3_08_old_root_location_does_not_hide_current_copy(tmp_path) -> None:
+    catalog = _catalog(tmp_path, private_root=True)
+    current = catalog.store.fetchone(
+        "SELECT * FROM locations WHERE root_id='public_root'"
+    )
+    assert current is not None
+    _review(catalog, str(current["document_id"]))
+    old_copy = tmp_path / "private" / "old-copy.txt"
+    old_copy.write_bytes(Path(current["absolute_path"]).read_bytes())
+    location = dict(current)
+    location["location_id"] = str(location["location_id"]) + ":old-copy"
+    location["root_id"] = "private_root"
+    location["relative_path"] = "old-copy.txt"
+    location["absolute_path"] = str(old_copy)
+    with catalog.store.transaction() as connection:
+        connection.execute(
+            f"INSERT INTO locations ({','.join(location)}) "
+            f"VALUES ({','.join('?' for _ in location)})",
+            tuple(location.values()),
+        )
+    catalog.config = replace(
+        catalog.config, roots=(catalog.config.roots[0],)
+    )
+
+    client = _FakeLLM()
+    report = _summarize(catalog, client)
+    assert report.completed == 1
+    assert len(client.prompts) == 1
+    assert "公开公司" in client.prompts[0]
+
+
+def test_gp3_09_normalized_lineage_mismatch_never_leaves_for_llm(tmp_path) -> None:
+    catalog = _catalog(tmp_path)
+    document_id = _document_ids(catalog)[0]
+    _review(catalog, document_id)
+    with catalog.store.transaction() as connection:
+        connection.execute(
+            "UPDATE artifacts SET source_sha256=? WHERE document_id=? "
+            "AND artifact_role='normalized'",
+            ("f" * 64, document_id),
+        )
+
+    client = _FakeLLM()
+    report = _summarize(catalog, client)
+    assert report.completed == 0
+    assert report.failed == 1
+    assert client.prompts == []
+    assert "normalized" in str(report.error).lower()
+
+
+def _add_legacy_normalized(catalog, document_id: str, *, path: Path | None = None) -> Path:
+    modern = catalog.store.fetchone(
+        "SELECT path FROM artifacts WHERE document_id=? "
+        "AND artifact_role='normalized' AND generator_name='source_catalog_normalizer'",
+        (document_id,),
+    )
+    assert modern is not None
+    modern_path = Path(modern["path"])
+    with catalog.store.transaction() as connection:
+        connection.execute(
+            """INSERT INTO artifacts(artifact_id,document_id,source_id,artifact_role,path,
+                content_sha256,byte_size,mime_type,generator_name,generator_version,
+                status,error,metadata_json,created_at,schema_version,source_sha256)
+                SELECT artifact_id || ':legacy',document_id,source_id,artifact_role,?,
+                content_sha256,byte_size,mime_type,'plain_text',generator_version,
+                status,error,'{}','2099-01-01T00:00:00Z',NULL,NULL
+                FROM artifacts WHERE document_id=? AND artifact_role='normalized'
+                AND generator_name='source_catalog_normalizer'""",
+            (str(path or modern_path), document_id),
+        )
+    return modern_path
+
+
+def test_gp3_10_two_normalized_artifacts_send_one_llm_request(tmp_path) -> None:
+    catalog = _catalog(tmp_path)
+    document_id = _document_ids(catalog)[0]
+    _review(catalog, document_id)
+    _add_legacy_normalized(catalog, document_id)
+
+    client = _FakeLLM()
+    report = _summarize(catalog, client)
+    assert report.completed == 1
+    assert len(client.prompts) == 1
+    assert catalog.store.fetchone(
+        "SELECT COUNT(*) AS n FROM artifacts WHERE document_id=? "
+        "AND artifact_role='summary'",
+        (document_id,),
+    )["n"] == 1
+
+
+def test_gp3_11_bad_modern_artifact_does_not_send_legacy_copy(tmp_path) -> None:
+    catalog = _catalog(tmp_path)
+    document_id = _document_ids(catalog)[0]
+    _review(catalog, document_id)
+    modern = catalog.store.fetchone(
+        "SELECT path FROM artifacts WHERE document_id=? "
+        "AND artifact_role='normalized' AND generator_name='source_catalog_normalizer'",
+        (document_id,),
+    )
+    assert modern is not None
+    modern_path = Path(modern["path"])
+    legacy_path = tmp_path / "legacy-normalized.md"
+    legacy_path.write_bytes(modern_path.read_bytes())
+    _add_legacy_normalized(catalog, document_id, path=legacy_path)
+    modern_path.write_bytes(modern_path.read_bytes() + b"\nTampered modern bytes.\n")
+
+    client = _FakeLLM()
+    report = _summarize(catalog, client)
+    assert report.completed == 0
+    assert report.failed == 1
+    assert client.prompts == []
+    assert "normalized" in str(report.error).lower()

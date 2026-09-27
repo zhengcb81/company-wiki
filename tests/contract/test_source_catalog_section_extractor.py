@@ -200,6 +200,152 @@ def test_extract_sections_writes_artifact_and_is_idempotent(tmp_path):
     assert qfirst.span_ids == ()
 
 
+def test_section_extractor_refuses_tampered_normalized_bytes(tmp_path):
+    import json
+    from pathlib import Path
+
+    import company_wiki.source_catalog as module
+
+    source_root = tmp_path / "sources"
+    source_root.mkdir()
+    (source_root / "annual.txt").write_text(ANNUAL, encoding="utf-8")
+    (source_root / "annual.txt.source.json").write_text(
+        json.dumps({"document_kind": "annual_report"}), encoding="utf-8"
+    )
+    project = tmp_path / "project"
+    catalog = module.SourceCatalog(
+        module.CatalogConfig(
+            project_root=project,
+            catalog_dir=project / ".source_catalog",
+            roots=(module.RootSpec("external", source_root, "directory"),),
+        )
+    )
+    catalog.scan()
+    catalog.normalize()
+    normalized = catalog.store.fetchone(
+        "SELECT a.document_id,a.path FROM artifacts a JOIN documents d "
+        "ON d.document_id=a.document_id WHERE a.artifact_role='normalized' "
+        "AND d.document_kind='annual_report'"
+    )
+    assert normalized is not None
+    path = Path(normalized["path"])
+    path.write_bytes(path.read_bytes() + b"\nTampered section body.\n")
+
+    report = catalog.extract_sections(document_id=normalized["document_id"])
+    assert report.completed == 0
+    assert report.failed == 1
+    assert catalog.store.fetchone(
+        "SELECT artifact_id FROM artifacts WHERE document_id=? "
+        "AND artifact_role='sections'",
+        (normalized["document_id"],),
+    ) is None
+
+
+def test_section_extractor_accepts_hash_bound_legacy_normalized(tmp_path):
+    import json
+
+    import company_wiki.source_catalog as module
+
+    source_root = tmp_path / "sources"
+    source_root.mkdir()
+    (source_root / "annual.txt").write_text(ANNUAL, encoding="utf-8")
+    (source_root / "annual.txt.source.json").write_text(
+        json.dumps({"document_kind": "annual_report"}), encoding="utf-8"
+    )
+    project = tmp_path / "project"
+    catalog = module.SourceCatalog(
+        module.CatalogConfig(
+            project_root=project,
+            catalog_dir=project / ".source_catalog",
+            roots=(module.RootSpec("external", source_root, "directory"),),
+        )
+    )
+    catalog.scan()
+    catalog.normalize()
+    doc_id = catalog.store.fetchone(
+        "SELECT document_id FROM documents WHERE document_kind='annual_report'"
+    )["document_id"]
+    with catalog.store.transaction() as connection:
+        connection.execute(
+            "UPDATE artifacts SET source_sha256=NULL, generator_name='plain_text', "
+            "metadata_json='{}' WHERE document_id=? AND artifact_role='normalized'",
+            (doc_id,),
+        )
+
+    report = catalog.extract_sections(document_id=doc_id)
+    assert report.completed == 1
+    assert catalog.store.fetchone(
+        "SELECT artifact_id FROM artifacts WHERE document_id=? "
+        "AND artifact_role='sections'",
+        (doc_id,),
+    ) is not None
+
+
+def test_section_extractor_selects_one_deterministic_legacy_artifact(tmp_path):
+    import hashlib
+    import json
+    from pathlib import Path
+
+    import company_wiki.source_catalog as module
+
+    source_root = tmp_path / "sources"
+    source_root.mkdir()
+    (source_root / "annual.txt").write_text(ANNUAL, encoding="utf-8")
+    (source_root / "annual.txt.source.json").write_text(
+        json.dumps({"document_kind": "annual_report"}), encoding="utf-8"
+    )
+    project = tmp_path / "project"
+    catalog = module.SourceCatalog(
+        module.CatalogConfig(
+            project_root=project,
+            catalog_dir=project / ".source_catalog",
+            roots=(module.RootSpec("external", source_root, "directory"),),
+        )
+    )
+    catalog.scan()
+    catalog.normalize()
+    doc_id = catalog.store.fetchone(
+        "SELECT document_id FROM documents WHERE document_kind='annual_report'"
+    )["document_id"]
+    original = catalog.store.fetchone(
+        "SELECT path FROM artifacts WHERE document_id=? AND artifact_role='normalized'",
+        (doc_id,),
+    )
+    assert original is not None
+    original_bytes = Path(original["path"]).read_bytes()
+    second_bytes = original_bytes.replace(b"parser_name: plain_text", b"parser_name: structured_text", 1)
+    assert second_bytes != original_bytes
+    second_path = tmp_path / "second-normalized.md"
+    second_path.write_bytes(second_bytes)
+    second_sha = hashlib.sha256(second_bytes).hexdigest()
+    with catalog.store.transaction() as connection:
+        connection.execute(
+            "UPDATE artifacts SET source_sha256=NULL, generator_name='plain_text', "
+            "metadata_json='{}' WHERE document_id=? AND artifact_role='normalized'",
+            (doc_id,),
+        )
+        connection.execute(
+            """INSERT INTO artifacts(artifact_id,document_id,source_id,artifact_role,path,
+                content_sha256,byte_size,mime_type,generator_name,generator_version,
+                status,error,metadata_json,created_at,schema_version,source_sha256)
+                SELECT artifact_id || ':second',document_id,source_id,artifact_role,?,
+                ?,?,mime_type,'structured_text',generator_version,
+                status,error,'{}','2099-01-01T00:00:00Z',NULL,NULL
+                FROM artifacts WHERE document_id=? AND artifact_role='normalized'""",
+            (str(second_path), second_sha, len(second_bytes), doc_id),
+        )
+
+    report = catalog.extract_sections(document_id=doc_id)
+    assert report.completed == 1
+    assert report.failed == 0
+    sections = catalog.store.fetchone(
+        "SELECT path FROM artifacts WHERE document_id=? AND artifact_role='sections'",
+        (doc_id,),
+    )
+    assert sections is not None
+    assert second_sha in sections["path"]
+
+
 def test_chapter_page_range_maps_char_range_to_pages():
     body = (
         "## Page 1\n\n第一节 释义\n\n"

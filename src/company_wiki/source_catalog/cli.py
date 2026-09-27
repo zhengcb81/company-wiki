@@ -30,6 +30,7 @@ from .portfolio_promoter import (
     promote_from_portfolio,
 )
 from .service import SourceCatalog
+from .source_read_policy import source_read_policy_sha256
 from .resolver import ResolutionResult, ResolutionStatus, SourceRequest, SourceResolver
 from .security_identity import (
     IdentityResult,
@@ -449,6 +450,11 @@ def _parser() -> argparse.ArgumentParser:
         ),
     )
     ensure.add_argument(
+        "--source-ref-v2",
+        action="store_true",
+        help="emit a pathless versioned operation result for consumer processes",
+    )
+    ensure.add_argument(
         "--allow-download",
         action="store_true",
         help="explicitly permit adapter discovery/fetch when the catalog has no reusable source",
@@ -498,6 +504,8 @@ def _parser() -> argparse.ArgumentParser:
     close_gap.add_argument("--provider")
     close_gap.add_argument("--provider-document-id")
     close_gap.add_argument("--mode", choices=("exact", "latest_as_of"))
+    close_gap.add_argument("--source-ref-v2", action="store_true",
+                           help="emit a pathless versioned operation result for consumer processes")
     close_gap.add_argument(
         "--acquisition-config",
         type=Path,
@@ -809,6 +817,9 @@ def _run_ensure_command(
     resolution_dict = ensure_dict.get("resolution")
     if isinstance(resolution_dict, dict):
         resolution_dict["policy_export"] = _policy_export_payload(config)
+        resolution_dict["source_read_policy_sha256"] = source_read_policy_sha256(
+            config, ensure_policy
+        )
         resolution_dict["resolution_envelope"] = build_resolution_envelope(
             ensured.resolution,
             policy_snapshot=ensure_policy,
@@ -1180,6 +1191,9 @@ def main(argv: Sequence[str] | None = None) -> int:
             # filing consumer can validate handle containment against the
             # SAME policy the wiki exported (no independent allowlist).
             source_resolution["policy_export"] = _policy_export_payload(config)
+            source_resolution["source_read_policy_sha256"] = source_read_policy_sha256(
+                config, policy
+            )
             # FC-704: journal-reconciled outcome + policy/epoch + bundle
             # status ride on the resolution (read-only: the journal is read,
             # never appended, by the resolve command).
@@ -1557,6 +1571,22 @@ def main(argv: Sequence[str] | None = None) -> int:
             file=sys.stderr,
         )
         return 1
+    if getattr(args, "source_ref_v2", False):
+        try:
+            from .source_operation import project_operation_result
+            from .source_reader import SourceVersionReader
+            result = project_operation_result(
+                result, operation=args.command,
+                reader=SourceVersionReader(get_catalog()),
+            )
+        except Exception as exc:
+            from .error_taxonomy import structured_error
+
+            print(
+                json.dumps(structured_error(exc), ensure_ascii=False, sort_keys=True),
+                file=sys.stderr,
+            )
+            return 1
     print(json.dumps(_plain(result), ensure_ascii=False, sort_keys=True))
     return 0
 

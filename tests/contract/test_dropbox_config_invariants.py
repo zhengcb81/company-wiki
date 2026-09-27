@@ -1,96 +1,63 @@
-"""WU-2A.1: Dropbox config-only invariants (CONFIG-DBX-01/02).
+"""Registered roots stay usable when a new directory joins the data lake.
 
-Lock the two production config entries so a future drift is caught in CI:
-
-- CONFIG-DBX-01: production YAML loads; ``dropbox_stock`` kind/path/priority
-  unchanged; ``directory`` is listed in ``reusable_root_kinds``.
-- CONFIG-DBX-02: kind=directory roots are EXACTLY the allowlisted pair
-  ``{dropbox_stock, future_lake}``. dropbox_stock alone since WU-2A.1;
-  ``future_lake`` was added deliberately by ZR-409 (commit eb3aa79 — fourth
-  root by CONFIG ONLY, kind ``directory`` + sidecar adapter, pinned by
-  tests/contract/test_zr409_fourth_root_real_journeys.py), so the invariant
-  now locks the pair.  Any OTHER directory root must fail: the kind-level
-  grant in ``reusable_root_kinds`` would otherwise auto-whitelist the new
-  root, which is exactly the drift this gate exists to catch.
-
-CONFIG-DBX-03/04 (filing-fetch side) live in the filing-fetch repo.
+The root IDs and physical paths are production configuration, not a Python
+allowlist.  This test keeps the historical Dropbox registration visible while
+proving that an additional well-formed root passes the same doctor.
 """
 
 from __future__ import annotations
 
 from pathlib import Path
+import sys
+
+import yaml
 
 
 WIKI_ROOT = Path(__file__).resolve().parents[2]
 CONFIG_PATH = WIKI_ROOT / "config" / "source_catalog.yaml"
+sys.path.insert(0, str(WIKI_ROOT / "scripts"))
 
-# The only directory-kind roots the production grant may whitelist.
-_ALLOWED_DIRECTORY_ROOTS = frozenset({"dropbox_stock", "future_lake"})
+from config_doctor import diagnose  # noqa: E402
 
 
 def _load_config() -> dict:
-    import yaml
-
     return yaml.safe_load(CONFIG_PATH.read_text(encoding="utf-8"))
 
 
-def test_config_dbx_01_dropbox_reusable_and_fields_frozen() -> None:
+def _diagnose_fixture(tmp_path: Path, data: dict) -> list[str]:
+    master = tmp_path / ".source_catalog" / "security_master"
+    master.mkdir(parents=True)
+    (master / "us.json").write_text("{}", encoding="utf-8")
+    fixture = tmp_path / "source_catalog.yaml"
+    fixture.write_text(yaml.safe_dump(data, sort_keys=False), encoding="utf-8")
+    return diagnose(fixture, project_root=tmp_path)
+
+
+def test_historical_dropbox_root_is_registered() -> None:
     data = _load_config()
-    kinds = data["reusable_root_kinds"]
-    assert isinstance(kinds, list), "reusable_root_kinds must be a list"
-    assert "directory" in kinds, "directory must be in reusable_root_kinds (CONFIG-DBX-01)"
     dropbox = next(
         (r for r in data["roots"] if r.get("root_id") == "dropbox_stock"), None
     )
     assert dropbox is not None, "dropbox_stock root missing"
     assert dropbox["kind"] == "directory", "dropbox_stock kind must stay directory"
-    assert dropbox["path"] == "${USER_PROFILE}/Dropbox/Stock", (
-        "dropbox_stock path must stay ${USER_PROFILE}/Dropbox/Stock"
-    )
-    assert dropbox["priority"] == 30, "dropbox_stock priority must stay 30"
-    # companies/dayu grants unchanged
-    for root_id, kind, priority in (
-        ("company_raw", "company_raw", 10),
-        ("dayu_portfolio", "dayu_portfolio", 20),
-    ):
-        entry = next((r for r in data["roots"] if r.get("root_id") == root_id), None)
-        assert entry is not None, f"{root_id} root missing"
-        assert entry["kind"] == kind and entry["priority"] == priority
+    assert isinstance(dropbox["path"], str) and dropbox["path"]
 
 
-def test_config_dbx_02_directory_kinds_are_exactly_allowlisted() -> None:
+def test_configured_roots_pass_generic_doctor(tmp_path: Path) -> None:
     data = _load_config()
-    directory_roots = {
-        str(r.get("root_id")) for r in data["roots"] if r.get("kind") == "directory"
-    }
-    assert directory_roots == _ALLOWED_DIRECTORY_ROOTS, (
-        "kind=directory roots must be exactly the allowlisted set "
-        f"{sorted(_ALLOWED_DIRECTORY_ROOTS)}, got {sorted(directory_roots)}"
-    )
+    assert _diagnose_fixture(tmp_path, data) == []
 
 
-def test_config_dbx_02_fixture_third_directory_root_is_caught() -> None:
-    """A THIRD directory root — outside the allowlisted pair — in a fixture
-    config must be caught by the same invariant: proves the gate detects a
-    future drift (an unapproved root would otherwise be auto-whitelisted by
-    the kind-level grant)."""
-    import yaml
-
+def test_additional_directory_root_passes_doctor(tmp_path: Path) -> None:
     data = _load_config()
     fixture = dict(data)
     fixture["roots"] = list(data["roots"]) + [
         {
             "root_id": "other_dir",
             "kind": "directory",
-            "path": "${USER_PROFILE}/somewhere",
+            "path": "${PROJECT_ROOT}/another_lake",
             "priority": 40,
         }
     ]
-    raw = yaml.safe_dump(fixture, sort_keys=False)
-    directory_roots = {
-        str(r.get("root_id"))
-        for r in yaml.safe_load(raw)["roots"]
-        if r.get("kind") == "directory"
-    }
-    assert "other_dir" in directory_roots, "fixture must introduce a 3rd directory root"
-    assert len(directory_roots) == len(_ALLOWED_DIRECTORY_ROOTS) + 1
+    (tmp_path / "another_lake").mkdir()
+    assert _diagnose_fixture(tmp_path, fixture) == []

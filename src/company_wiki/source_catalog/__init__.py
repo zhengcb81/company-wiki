@@ -23,6 +23,14 @@ from .resolver import (
     SourceResolutionError,
     SourceResolver,
 )
+from .source_reader import (
+    SOURCE_REF_SCHEMA_VERSION,
+    SourceQueryResult,
+    SourceReadError,
+    SourceRef,
+    SourceVersionReader,
+    VerifiedContent,
+)
 from .lock import CatalogOperationLockedError
 from .llm_summarizer import LLMSummaryError
 from .acquisition import (
@@ -215,6 +223,7 @@ __all__ = [
     "SCANNER_VERSION",
     "SEC_TICKER_URL",
     "SOURCE_RESOLVER_SCHEMA_VERSION",
+    "SOURCE_REF_SCHEMA_VERSION",
     "SOURCE_ONLY_SCHEDULER_POLICY_SCHEMA_VERSION",
     "SOURCE_ENSURE_SCHEMA_VERSION",
     "SUMMARIZER_VERSION",
@@ -233,6 +242,11 @@ __all__ = [
     "SourceRequest",
     "SourceResolutionError",
     "SourceResolver",
+    "SourceQueryResult",
+    "SourceReadError",
+    "SourceRef",
+    "SourceVersionReader",
+    "VerifiedContent",
     "SecurityIdentityError",
     "SecurityIdentityResolutionError",
     "SecurityIdentityResolver",

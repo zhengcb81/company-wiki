@@ -135,17 +135,23 @@ def _review_documents(catalog: SourceCatalog) -> None:
     )
     with catalog.store.transaction() as connection:
         for row in rows:
+            normalized = catalog.store.fetchone(
+                "SELECT path FROM artifacts WHERE document_id=? "
+                "AND artifact_role='normalized'",
+                (row["document_id"],),
+            )
+            assert normalized is not None
+            evidence_payload = Path(normalized["path"]).read_bytes()
             record_prompt_injection_review(
                 connection,
                 str(row["document_id"]),
                 status="not_detected",
                 reviewer="gp003-test-fixture",
-                evidence_sha256=hashlib.sha256(
-                    str(row["content_sha256"]).encode()
-                ).hexdigest(),
+                evidence_sha256=hashlib.sha256(evidence_payload).hexdigest(),
                 now="2026-09-02T12:00:00Z",
                 source_sha256=str(row["content_sha256"]),
                 policy_hash="c" * 64,
+                evidence_payload=evidence_payload,
             )
 
 

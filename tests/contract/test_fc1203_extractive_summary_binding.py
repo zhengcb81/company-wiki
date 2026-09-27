@@ -152,3 +152,94 @@ def test_extractive_summary_writes_schema_version_column(tmp_path: Path) -> None
         "artifacts.schema_version column must be stamped by the summarizer "
         f"(got {row['schema_version']!r})"
     )
+
+
+def test_extractive_summary_refuses_tampered_normalized_bytes(tmp_path: Path) -> None:
+    catalog = _external_catalog(tmp_path)
+    normalized = catalog.store.fetchone(
+        "SELECT document_id,path FROM artifacts WHERE artifact_role='normalized' "
+        "AND generator_name='source_catalog_normalizer' LIMIT 1"
+    )
+    assert normalized is not None
+    path = Path(normalized["path"])
+    path.write_bytes(path.read_bytes() + b"\nTampered content outside the recorded digest.\n")
+
+    report = catalog.summarize()
+    assert report.failed >= 1
+    assert catalog.store.fetchone(
+        "SELECT artifact_id FROM artifacts WHERE document_id=? "
+        "AND artifact_role='summary'",
+        (normalized["document_id"],),
+    ) is None
+
+
+def test_extractive_summary_accepts_hash_bound_legacy_normalized(tmp_path: Path) -> None:
+    catalog = _external_catalog(tmp_path)
+    with catalog.store.transaction() as connection:
+        connection.execute(
+            "UPDATE artifacts SET source_sha256=NULL, generator_name='plain_text', "
+            "metadata_json='{}' WHERE artifact_role='normalized'"
+        )
+
+    report = catalog.summarize()
+    assert report.completed >= 1
+    assert catalog.store.fetchone(
+        "SELECT artifact_id FROM artifacts WHERE artifact_role='summary' LIMIT 1"
+    ) is not None
+
+
+def _add_legacy_normalized(catalog: SourceCatalog, *, path: Path | None = None) -> Path:
+    modern = catalog.store.fetchone(
+        "SELECT path FROM artifacts WHERE artifact_role='normalized' "
+        "AND generator_name='source_catalog_normalizer' LIMIT 1"
+    )
+    assert modern is not None
+    modern_path = Path(modern["path"])
+    with catalog.store.transaction() as connection:
+        connection.execute(
+            """INSERT INTO artifacts(artifact_id,document_id,source_id,artifact_role,path,
+                content_sha256,byte_size,mime_type,generator_name,generator_version,
+                status,error,metadata_json,created_at,schema_version,source_sha256)
+                SELECT artifact_id || ':legacy',document_id,source_id,artifact_role,?,
+                content_sha256,byte_size,mime_type,'plain_text',generator_version,
+                status,error,'{}','2099-01-01T00:00:00Z',NULL,NULL
+                FROM artifacts WHERE artifact_role='normalized'
+                AND generator_name='source_catalog_normalizer'""",
+            (str(path or modern_path),),
+        )
+    return modern_path
+
+
+def test_extractive_summary_selects_one_modern_artifact_per_document(tmp_path: Path) -> None:
+    catalog = _external_catalog(tmp_path)
+    _add_legacy_normalized(catalog)
+
+    report = catalog.summarize()
+    assert report.completed == 1
+    assert report.failed == 0
+    assert catalog.store.fetchone(
+        "SELECT COUNT(*) AS n FROM artifacts WHERE artifact_role='summary'"
+    )["n"] == 1
+
+
+def test_extractive_summary_does_not_fallback_after_modern_digest_failure(
+    tmp_path: Path,
+) -> None:
+    catalog = _external_catalog(tmp_path)
+    modern = catalog.store.fetchone(
+        "SELECT path FROM artifacts WHERE artifact_role='normalized' "
+        "AND generator_name='source_catalog_normalizer' LIMIT 1"
+    )
+    assert modern is not None
+    modern_path = Path(modern["path"])
+    legacy_path = tmp_path / "legacy-normalized.md"
+    legacy_path.write_bytes(modern_path.read_bytes())
+    _add_legacy_normalized(catalog, path=legacy_path)
+    modern_path.write_bytes(modern_path.read_bytes() + b"\nTampered modern bytes.\n")
+
+    report = catalog.summarize()
+    assert report.completed == 0
+    assert report.failed == 1
+    assert catalog.store.fetchone(
+        "SELECT artifact_id FROM artifacts WHERE artifact_role='summary' LIMIT 1"
+    ) is None

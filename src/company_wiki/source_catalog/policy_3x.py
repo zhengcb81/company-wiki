@@ -1,13 +1,11 @@
 """ZR-401: RootPolicy 3.0 — strict loader + versioned snapshot export.
 
-3.0 removes every implicit permission expansion the 2.x loader tolerated:
+The loader validates root shape without deriving access rights from location:
 
 - schema_version MUST be "3.0" (an N-1 1.x/2.x config is rejected with a
   migration hint — never silently upgraded);
-- ``privacy_class`` is REQUIRED per root (no default): an external root
-  (kind != company_raw) must be ``private_user``; a company_raw root must
-  be ``public`` — a private company root or a public external root is a
-  config error (load fails);
+- ``privacy_class`` remains an optional legacy label for wire compatibility;
+  every configured root is readable regardless of that label;
 - external roots can never be a canonical write target (kind !=
   company_raw + canonical_write_target -> load fails);
 - unknown root fields fail closed (strict allowlist);
@@ -40,32 +38,8 @@ from .policy_2x import (
 ROOT_POLICY_3X_SCHEMA_VERSION = "3.0"
 ROOT_POLICY_3X_SCHEMA = "root-policy-3.0"
 
-# 3.0 allowlist = 2.x fields + privacy_class (required) + symlink/max/sidecar
-# (already in 2.x).  We reuse the 2.x allowlist so the field vocabulary is
-# single-sourced, and enforce 3.0-specific rules on top.
-ALLOWED_ROOT_FIELDS_3X = ALLOWED_ROOT_FIELDS_2X | {"privacy_class"}
-
-# External roots must be private; company_raw is the only public root kind.
-_PUBLIC_KIND = "company_raw"
-_PRIVATE_PRIVACY = "private_user"
-_PUBLIC_PRIVACY = "public"
-
-
-def _privacy_rule(kind: str, privacy: str) -> str | None:
-    """Return a violation message for a (kind, privacy) pair, or None."""
-    if kind == _PUBLIC_KIND:
-        if privacy != _PUBLIC_PRIVACY:
-            return (
-                f"company_raw root must be privacy_class='public' "
-                f"(got {privacy!r})"
-            )
-        return None
-    if privacy != _PRIVATE_PRIVACY:
-        return (
-            f"external root (kind={kind!r}) must be privacy_class="
-            f"'private_user' (got {privacy!r}) — no implicit public"
-        )
-    return None
+# Reuse the 2.x vocabulary, including the legacy informational privacy label.
+ALLOWED_ROOT_FIELDS_3X = ALLOWED_ROOT_FIELDS_2X
 
 
 def load_root_policy_3x(
@@ -75,8 +49,8 @@ def load_root_policy_3x(
 
     Loads via the 2.x loader (which enforces the shared field/vocabulary
     checks: unknown fields, duplicate roots, external write targets,
-    unknown adapter/profile, widening routes) and then applies the 3.0
-    schema/privacy gates on top.  Any violation raises CatalogConfigError.
+    unknown adapter/profile, widening routes).  Location does not grant or
+    remove read access.
     """
     if not isinstance(path, Path):
         raise TypeError("path must be pathlib.Path")
@@ -96,17 +70,6 @@ def load_root_policy_3x(
         path, project_root=project_root,
         yaml_schema_version=ROOT_POLICY_3X_SCHEMA_VERSION,
     )
-    # 3.0 privacy gates (no implicit permission expansion).
-    for spec in config.roots:
-        privacy = getattr(spec, "privacy_class", None)
-        if privacy is None or not privacy:
-            raise CatalogConfigError(
-                f"roots[{spec.root_id}] privacy_class is required in 3.0 "
-                f"(no implicit default)"
-            )
-        violation = _privacy_rule(spec.kind, privacy)
-        if violation is not None:
-            raise CatalogConfigError(f"roots[{spec.root_id}] {violation}")
     return config
 
 
