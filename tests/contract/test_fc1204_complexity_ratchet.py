@@ -99,7 +99,6 @@ FROZEN_MAX = {
     "shadow_parity.py": 12,
     "source_bundle.py": 26,
     "source_export_v2_cli.py": 15,
-    "source_operation.py": 51,
     "startup.py": 13,
     "store.py": 30,
     "summarizer.py": 23,

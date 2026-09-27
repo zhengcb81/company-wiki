@@ -94,18 +94,36 @@ def _fixture(tmp_path: Path) -> tuple[Path, Path, dict[str, str]]:
 
 
 def _snapshot(directory: Path) -> dict[str, tuple]:
-    """Detect created, removed, or modified files anywhere in the fixture."""
+    """Detect created, removed, or content-modified fixture files.
+
+    SQLite may touch the mtime of an unchanged ``-shm`` file while opening a
+    read-only connection.  Path membership plus file size/content hash is the
+    durable-state assertion this suite needs; directory mtimes are likewise
+    runtime metadata rather than source content.
+    """
     result = {}
     for path in directory.rglob("*"):
         key = path.relative_to(directory).as_posix()
         if path.is_file():
             result[key] = (
                 "file", hashlib.sha256(path.read_bytes()).hexdigest(),
-                path.stat().st_mtime_ns,
+                path.stat().st_size,
             )
         else:
-            result[key] = ("directory", path.stat().st_mtime_ns)
+            result[key] = ("directory",)
     return result
+
+
+def _contains_physical_key(value: object) -> bool:
+    if isinstance(value, dict):
+        return any(
+            any(token in str(key).lower() for token in ("path", "root", "location", "bundle"))
+            or _contains_physical_key(child)
+            for key, child in value.items()
+        )
+    if isinstance(value, list):
+        return any(_contains_physical_key(child) for child in value)
+    return False
 
 
 def _run_cli(
@@ -152,7 +170,17 @@ def _run_query_cli(config_path: Path, cwd: Path) -> subprocess.CompletedProcess[
 
 
 def _run_ensure_cli(
-    config_path: Path, cwd: Path, *, source_ref_v2: bool,
+    config_path: Path,
+    cwd: Path,
+    *,
+    source_ref_v2: bool,
+    mode: str = "exact",
+    market: str = "US",
+    form_type: str = "10-K",
+    entity: str = "Acme",
+    security_id: str = "ACME",
+    acquisition_config: Path | None = None,
+    worker_config: Path | None = None,
 ) -> subprocess.CompletedProcess[bytes]:
     env = os.environ.copy()
     env["PYTHONPATH"] = str(ROOT / "src") + os.pathsep + env.get("PYTHONPATH", "")
@@ -160,17 +188,129 @@ def _run_ensure_cli(
     command = [
         sys.executable, "-m", "company_wiki.source_catalog.cli",
         "--config", str(config_path), "ensure",
-        "--entity", "Acme", "--document-kind", "annual_report",
-        "--as-of-date", "2026-08-10", "--market", "US",
-        "--security-id", "ACME", "--form-type", "10-K",
-        "--fiscal-year", "2025", "--mode", "exact",
+        "--entity", entity, "--document-kind", "annual_report",
+        "--as-of-date", "2026-08-10", "--market", market,
+        "--security-id", security_id, "--form-type", form_type,
+        "--fiscal-year", "2025", "--mode", mode,
     ]
+    if acquisition_config is not None:
+        command.extend(("--acquisition-config", str(acquisition_config)))
+    if worker_config is not None:
+        command.extend(("--worker-config", str(worker_config)))
     if source_ref_v2:
         command.append("--source-ref-v2")
     return subprocess.run(
         command, cwd=cwd, env=env, stdout=subprocess.PIPE,
         stderr=subprocess.PIPE, check=False, timeout=30,
     )
+
+
+def _fake_latest_as_of_configs(
+    tmp_path: Path,
+    config_path: Path,
+    *,
+    provider_unavailable: bool = False,
+) -> tuple[Path, Path, Path]:
+    config_dir = tmp_path / "config"
+    config_dir.mkdir(exist_ok=True)
+    cli_config = config_dir / "source_catalog.yaml"
+    catalog_config = json.loads(config_path.read_text(encoding="utf-8"))
+    canonical_raw = tmp_path / "canonical-raw"
+    canonical_raw.mkdir()
+    catalog_config["roots"].append({
+        "root_id": "company_raw",
+        "path": str(canonical_raw),
+        "kind": "company_raw",
+        "priority": 5,
+        "adapter_id": "sidecar_filing_v1",
+        "read_only": False,
+    })
+    cli_config.write_text(json.dumps(catalog_config), encoding="utf-8")
+    (tmp_path / "config.yaml").write_text("{}\n", encoding="utf-8")
+    worker_config = config_dir / "source_catalog_worker.yaml"
+    worker_config.write_text(json.dumps({
+        "schema_version": "1.0",
+        "runtime_config": "${PROJECT_ROOT}/config.yaml",
+        "scan_interval_minutes": 60,
+        "export_interval_minutes": 60,
+        "poll_interval_seconds": 30,
+        "idle_seconds_required": 600,
+        "normalize_batch_size": 1,
+        "llm_summary_batch_size": 1,
+        "llm_max_input_chars": 1000,
+        "llm_max_output_tokens": 100,
+        "llm_retry_backoff_minutes": 1,
+        "allow_processing_on_battery": False,
+    }), encoding="utf-8")
+
+    fake_adapter = tmp_path / "fake_adapter.py"
+    fake_adapter.write_text(
+        """from __future__ import annotations
+import json
+from pathlib import Path
+import sys
+
+action = sys.argv[1]
+with Path(__file__).with_name('adapter-actions.jsonl').open('a', encoding='utf-8') as log:
+    log.write(json.dumps({'action': action}) + '\\n')
+if action == 'fetch':
+    raise SystemExit('fetch must not run during latest_as_of discovery')
+if Path(__file__).with_name('provider-unavailable').exists():
+    raise SystemExit('simulated provider outage')
+request = json.load(sys.stdin)
+response = {
+    'schema_version': '1.0',
+    'status': 'ok',
+    'adapter': {'name': 'fake-cn', 'version': '1.0'},
+    'candidates': [{
+        'candidate_id': 'candidate-2025',
+        'provider': 'cninfo',
+        'provider_document_id': 'announcement-2025',
+        'market': 'CN',
+        'title': 'Acme 2025 annual report',
+        'source_url': 'https://example.test/acme-2025.pdf',
+        'document_kind': request['document_kind'],
+        'form_type': request.get('form_type'),
+        'filing_date': '2026-04-15',
+        'fiscal_year': 2025,
+        'language': 'zh',
+    }],
+}
+print(json.dumps(response))
+""",
+        encoding="utf-8",
+    )
+    if provider_unavailable:
+        (tmp_path / "provider-unavailable").write_text("1\n", encoding="utf-8")
+    acquisition_config = config_dir / "source_acquisition.yaml"
+    acquisition_config.write_text(json.dumps({
+        "schema_version": "1.1",
+        "staging_root": "${PROJECT_ROOT}/staging",
+        "timeout_seconds": 30,
+        "adapters": {
+            "cn": {
+                "name": "fake-cn", "version": "1.0",
+                "interface": "json_command_v1",
+                "project_root": "${PROJECT_ROOT}", "config_root": None,
+                "command": [str(Path(sys.executable).resolve()), str(fake_adapter)],
+            },
+            "hk": {
+                "name": "unused-hk", "version": "1.0",
+                "interface": "dayu_cli_v1",
+                "project_root": "${PROJECT_ROOT}",
+                "config_root": "${PROJECT_ROOT}/config",
+                "command": [str(Path(sys.executable).resolve()), str(fake_adapter)],
+            },
+            "us": {
+                "name": "unused-us", "version": "1.0",
+                "interface": "dayu_cli_v1",
+                "project_root": "${PROJECT_ROOT}",
+                "config_root": "${PROJECT_ROOT}/config",
+                "command": [str(Path(sys.executable).resolve()), str(fake_adapter)],
+            },
+        },
+    }), encoding="utf-8")
+    return cli_config, acquisition_config, worker_config
 
 
 def test_query_cli_returns_db_only_pathless_reviewed_candidate(tmp_path: Path):
@@ -262,6 +402,111 @@ def test_ensure_cli_v2_is_pathless_and_legacy_output_stays_compatible(
     assert "operation_schema_version" not in legacy_payload
     assert "canonical_path" in legacy.stdout.decode("utf-8")
     assert _snapshot(tmp_path / "lake") == before
+
+
+def test_ensure_cli_latest_as_of_projects_gap_without_fetch_or_raw_change(
+    tmp_path: Path,
+):
+    config_path, raw_path, _ = _fixture(tmp_path)
+    cli_config, acquisition_config, worker_config = _fake_latest_as_of_configs(
+        tmp_path, config_path
+    )
+    raw_before = _snapshot(tmp_path / "lake")
+    raw_sha_before = hashlib.sha256(raw_path.read_bytes()).hexdigest()
+
+    projected = _run_ensure_cli(
+        cli_config,
+        tmp_path,
+        source_ref_v2=True,
+        mode="latest_as_of",
+        market="CN",
+        form_type="annual_report",
+        entity="Beta",
+        security_id="BETA",
+        acquisition_config=acquisition_config,
+        worker_config=worker_config,
+    )
+
+    assert projected.returncode == 0, projected.stderr
+    result = json.loads(projected.stdout)
+    assert result["operation_schema_version"] == "1.0"
+    assert result["operation"] == "ensure"
+    assert result["status"] == "gap", result
+    assert result["request_id"].startswith("urn:company-wiki:source-request:sha256:")
+    assert result["download_events"] == 0
+    assert result["source_ref"] is None
+    assert result["candidate"] is None
+    assert result["gap_plan"]["request_id"] == result["request_id"]
+    assert result["gap_plan"]["missing"] == [{
+        "provider": "cninfo",
+        "provider_document_id": "announcement-2025",
+        "source_url": "https://example.test/acme-2025.pdf",
+        "filing_date": "2026-04-15",
+        "form_type": "annual_report",
+        "fiscal_year": 2025,
+        "fiscal_period": None,
+    }]
+    assert not _contains_physical_key(result)
+    assert str(tmp_path) not in projected.stdout.decode("utf-8")
+    actions = [
+        json.loads(line)["action"]
+        for line in (tmp_path / "adapter-actions.jsonl").read_text(
+            encoding="utf-8"
+        ).splitlines()
+    ]
+    assert actions == ["discover"]
+    assert not (tmp_path / "staging").exists()
+    assert _snapshot(tmp_path / "lake") == raw_before
+    assert hashlib.sha256(raw_path.read_bytes()).hexdigest() == raw_sha_before
+
+
+def test_ensure_cli_latest_as_of_preserves_provider_unavailable_gap(
+    tmp_path: Path,
+):
+    config_path, raw_path, _ = _fixture(tmp_path)
+    cli_config, acquisition_config, worker_config = _fake_latest_as_of_configs(
+        tmp_path, config_path, provider_unavailable=True
+    )
+    raw_before = _snapshot(tmp_path / "lake")
+    raw_sha_before = hashlib.sha256(raw_path.read_bytes()).hexdigest()
+
+    projected = _run_ensure_cli(
+        cli_config,
+        tmp_path,
+        source_ref_v2=True,
+        mode="latest_as_of",
+        market="CN",
+        form_type="annual_report",
+        entity="Beta",
+        security_id="BETA",
+        acquisition_config=acquisition_config,
+        worker_config=worker_config,
+    )
+
+    assert projected.returncode == 0, projected.stderr
+    result = json.loads(projected.stdout)
+    assert result["status"] == "gap", result
+    assert result["download_events"] == 0
+    assert result["source_ref"] is None
+    assert result["candidate"] is None
+    assert result["gap_plan"]["provider_unavailable"] is True
+    # Raw adapter exceptions may contain local paths or process details.  The
+    # stable cross-process operation contract exposes the availability fact,
+    # while keeping the diagnostic inside the producer/journal boundary.
+    assert "provider_reason" not in result["gap_plan"]
+    assert result["gap_plan"]["missing"] == []
+    assert not _contains_physical_key(result)
+    assert str(tmp_path) not in projected.stdout.decode("utf-8")
+    actions = [
+        json.loads(line)["action"]
+        for line in (tmp_path / "adapter-actions.jsonl").read_text(
+            encoding="utf-8"
+        ).splitlines()
+    ]
+    assert actions == ["discover"]
+    assert not (tmp_path / "staging").exists()
+    assert _snapshot(tmp_path / "lake") == raw_before
+    assert hashlib.sha256(raw_path.read_bytes()).hexdigest() == raw_sha_before
 
 
 def test_final_reader_receipt_reflects_review_removed_after_candidate_query(

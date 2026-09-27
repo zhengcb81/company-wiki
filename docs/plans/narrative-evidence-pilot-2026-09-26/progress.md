@@ -502,3 +502,13 @@
 - RF 阶段边界只读核对：远端 `origin/main=3a69f9c5b`；本地 `fcap=ee0a82bfd`，仍有其既有 planning/assurance 未提交改动与一次性运行目录。本项目没有写入、清理或切换 RF。
 - 工具调查中曾错误假设 `gap_plan.py` 存在 `GapItem`，import 失败后直接读取正式 `GapPlan` 和 `DownloadCandidate` 定义修正；没有文件改动或测试副作用。追加 planning 日志的首个补丁也因锚点标题不匹配安全失败，随后按文件真实尾部重试。
 - 下一步严格从总图 Phase B 开始：先提交 producer→contract 和 latest-as-of fake-provider CLI 的 RED tests，再实施 typed operation contract、纯 projection 与 reader facade；不能用一行字段修补代替重构。
+
+## Session: Phase B / M1 来源读取与 acquisition operation 重构（2026-09-27）
+
+- 先提交清洁架构与 TDD 总图，再开始产品实现。正式 producer 红测首先得到 4 failed / 2 passed，真实 latest-as-of fake-provider CLI 也复现 `gap_plan=None`；没有用一行字段补丁掩盖断裂。
+- 新增 `operation_contract.py` 与 `operation_projection.py`，把 producer schema/request identity/状态校验和 pathless 投影分开；`source_operation.py` 只编排 parse → project。错误 `acquisition_result`、未知 schema、非法 policy hash、负下载计数、大小/MIME 漂移和路径字段均失败关闭。
+- read-only ensure 改用真实 `AcquisitionResult` + `SourceEnsureResult.to_dict()`；`attempt=None` 明确表示没有 acquisition attempt，避免 CLI 手写第二套 envelope。
+- fake provider E2E 覆盖最新期次与 provider unavailable。两者均只 discover 一次、fetch 为 0、staging 不存在、fixture raw 文件树与 SHA 不变。provider 的底层异常原因可能含路径/进程信息，因此跨进程 DTO 只公开 `provider_unavailable=true`，不公开 `provider_reason`。
+- 跨 root/版本/导出验收：SourceVersionReader 24 passed；export/location/r4b07 33 passed。M1 合并门覆盖 operation、CLI、gap/acquisition、read chain、复杂度、reader、export、位置切换和版本合同，共 **115 passed in 38.25s**。
+- 静态门：修改文件 Ruff 通过；三个新边界模块 strict mypy 通过；`source_operation.py` 从复杂度冻结表移除；`git diff --check` 通过。所有 pytest 使用 `%TEMP%/cw-m1-*` 独立根并清理，没有写生产 raw、catalog、Worker、RF 或其他仓库。
+- 测试校正：SQLite 可在只读打开期间改变 `-shm` mtime，因此快照改为目录成员 + 文件大小/内容 SHA，不再把运行时 mtime 当持久数据变化；provider unavailable 红测最初要求公开异常字符串，经合同审查后改为明确禁止公开。

@@ -294,3 +294,11 @@
 - “每层对本层负责”可落成七个单向层：raw、catalog、read、acquire、derive、evidence、export/jobs。Worker 只调 application ports；consumer 不导入 store/resolver/DAG；selector 不打开任意路径；read broker 不下载或生成摘要。
 - 当前几个新模块被加入高额 `FROZEN_MAX` 只说明不会继续恶化，不说明架构达标。按生产启用顺序，operation/read、provider/transcript、narrative selector 和 Worker 必须在对应 M1–M3 前拆分并下调/移除豁免。
 - 为避免审查拖慢，后续只在 M1 读取/acquisition、M2 派生/evidence/provider、M3 Worker、M4 跨仓/清理做集中验收；小步骤只保留 TDD 红/绿、Ruff 和 diff check。
+
+## 2026-09-27 — M1 实施后的架构结论
+
+- 正式 producer→serializer→operation adapter→reader 的真实链路证明，原缺陷位于 transport contract，而不在 catalog/raw。拆开 parser 与 projection 后，producer 字段漂移、request ID 冲突和状态矛盾在读取字节前即可失败关闭。
+- read-only ensure 过去手写第二套 JSON 是相同概念的第二事实来源；改为构造正式 `AcquisitionResult` / `SourceEnsureResult` 后，latest-as-of gap 与普通 ensure 使用同一 schema owner。
+- provider unavailable 的稳定事实是布尔状态；底层 exception 字符串可能包含命令、路径和进程细节。公开 pathless DTO 不携带 `provider_reason`，详细诊断留在 producer/journal 边界。
+- 测试目录“恢复原样”应比较持久内容与成员关系。SQLite `-shm` 的 mtime 会因只读连接活动变化，mtime 不是业务状态；文件内容 SHA、大小、路径集合和 raw SHA 才是本节点应验证的不变量。
+- M1 的 115 项门覆盖同 SHA 跨 root 回退、错误 SHA 拒绝、版本/导出合同和两个 fake-provider gap 分支。该结果只验收 L1–L3 与 operation/read adapter，不外推到叙述选择、电话会议、Worker、跨仓消费者或 46 GiB 清理。

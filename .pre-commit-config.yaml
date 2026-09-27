@@ -30,13 +30,17 @@ repos:
           src/company_wiki/source_catalog/flags.py
           src/company_wiki/source_catalog/policy.py
           src/company_wiki/source_catalog/restore.py
+          src/company_wiki/source_catalog/operation_contract.py
+          src/company_wiki/source_catalog/operation_projection.py
+          src/company_wiki/source_catalog/source_operation.py
         language: system
         pass_filenames: false
         # Run only when one of the checked modules is staged.
         files: >-
           ^src/company_wiki/source_catalog/
           (artifact_handle|source_bundle|runtime_policy|activation|close_gap|
-          policy_2x|canary_registry|normalized_meta|flags|policy|restore)\.py$
+          policy_2x|canary_registry|normalized_meta|flags|policy|restore|
+          operation_contract|operation_projection|source_operation)\.py$
 
       - id: config-doctor
         name: config doctor (WU-7.1, mirrors CI)

@@ -284,6 +284,8 @@ company-wiki 只负责来源、解析质量、证据定位、检索和来源摘�
 - [x] 为 operation/read、叙述证据/provider、Worker、跨仓消费与派生清理写出 Phase A–G 的输入、允许修改、停止条件和完成门。
 - [x] 建立 U/C/I/E/X/P 分层测试体系和 M1–M4 四次集中验收；正式 producer 生成正例，手写 JSON 只做畸形负例。
 - [x] 本轮曾用红测确认正式 `acquisition` producer 与 consumer 的断裂，并验证重构思路；按用户“先计划后实施”要求，所有未提交产品/测试试验已恢复到 HEAD。
-- [ ] 按总图 Phase B 先写 producer/CLI 红测，再实施 typed operation contract、projection 与 reader facade；不以一行字段修补结束。
+- [x] 按总图 Phase B 完成 producer/CLI 红测、typed operation contract、projection 与薄 facade；read-only ensure 复用正式 producer serializer。
+- [x] 完成 M1 大节点：正式 producer/consumer 合同、latest-as-of/provider-unavailable CLI E2E、跨 root 同 SHA 回退、错误 SHA 拒绝、复杂度与严格类型门，共 115 项测试通过。
+- [ ] 按总图 Phase C 先冻结 12 件样本与反例的 DocumentStructure/selector/coverage/locator/空间行为，再拆分叙述证据实现。
 
-**Status:** planning complete；implementation pending。
+**Status:** Phase B / M1 complete；Phase C / M2 pending。

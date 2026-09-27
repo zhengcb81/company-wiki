@@ -1,6 +1,6 @@
 # company-wiki 清洁架构与 TDD 实施总图（2026-09-27）
 
-> **状态：计划已冻结，产品实施尚未开始。** 本页把 R4 数据湖、叙述证据、电话会议、Worker、跨仓消费和空间治理收束成一个施工顺序。历史计划保留证据价值；发生冲突时，以本页的层次、门禁和顺序为准。company-wiki 当前没有生产流量，允许重构内部接口、模块和派生 schema；财报、公告、招股书、再融资文件、投资者关系资料和电话会议原件不得丢失。
+> **状态：计划已冻结；Phase B / M1 已完成，下一步为 Phase C / M2。** 本页把 R4 数据湖、叙述证据、电话会议、Worker、跨仓消费和空间治理收束成一个施工顺序。历史计划保留证据价值；发生冲突时，以本页的层次、门禁和顺序为准。company-wiki 当前没有生产流量，允许重构内部接口、模块和派生 schema；财报、公告、招股书、再融资文件、投资者关系资料和电话会议原件不得丢失。
 
 ## 1. 第一性原理与不可破坏条件
 
@@ -338,4 +338,12 @@ git diff --check
 
 ## 13. 当前下一步
 
-从 **Phase B / M1** 开始，先写正式 producer→operation contract 红测和真实 latest-as-of fake-provider CLI 红测；随后重构 operation contract/projection/read facade。不得先恢复之前的一行字段补丁，也不得只把 `acquisition_result` 改回 `acquisition` 后结束。
+进入 **Phase C / M2**：先用现有 12 件样本和反例冻结 `DocumentStructure`、路由、选择、coverage、locator replay 和空间预算的行为测试，再拆分 `narrative_evidence.py`。先不接生产 catalog、Worker 或真实下载。
+
+### M1 完成收据（2026-09-27）
+
+- 正式 `SourceEnsureResult` / `CloseGapResult` 生成正例，错误别名、未知 schema、request ID 漂移、哈希/大小/MIME 漂移均失败关闭。
+- `operation_contract.py` 负责边界校验，`operation_projection.py` 负责纯 pathless 投影，`source_operation.py` 缩为 parse → project facade；新模块复杂度上限为 10，未加入冻结豁免。
+- read-only ensure 改为复用正式 `SourceEnsureResult.to_dict()`，不再手写第二套 acquisition envelope。
+- latest-as-of fake provider E2E 覆盖发现新期次和 provider unavailable：均为零 fetch、零 staging、原件 SHA 不变；底层异常文本不进入公开 DTO。
+- M1 合并门共 **115 passed in 38.25s**；另有 Ruff、strict mypy、`git diff --check` 全绿。测试只使用 `%TEMP%/cw-m1-*` 独立根并在 finally 中清理。

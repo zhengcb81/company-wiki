@@ -12,9 +12,19 @@ import time
 from typing import Any, Sequence
 
 from .config import load_catalog_config
-from .acquisition import AcquisitionCoordinator
+from .acquisition import (
+    ACQUISITION_SCHEMA_VERSION,
+    AcquisitionCoordinator,
+    AcquisitionResult,
+    AcquisitionStatus,
+)
 from .acquisition_config import load_acquisition_config
-from .acquisition_service import SourceAcquisitionService
+from .acquisition_service import (
+    SOURCE_ENSURE_SCHEMA_VERSION,
+    SourceAcquisitionService,
+    SourceEnsureResult,
+    SourceEnsureStatus,
+)
 from .canonical_writer import CanonicalSourceWriter
 from .control import WorkerController
 from .duplicate_cleanup import DuplicateCleanupService
@@ -714,37 +724,33 @@ def _read_only_ensure_result(resolution: ResolutionResult) -> dict[str, Any]:
         ResolutionStatus.REUSED_EXACT,
         ResolutionStatus.REUSED_EQUIVALENT,
     }:
-        status = "reused"
+        ensure_status = SourceEnsureStatus.REUSED
+        acquisition_status = AcquisitionStatus.REUSED
         reason = "existing_catalog_source_reused_before_adapter"
     elif resolution.status is ResolutionStatus.AMBIGUOUS:
-        status = "ambiguous"
+        ensure_status = SourceEnsureStatus.AMBIGUOUS
+        acquisition_status = AcquisitionStatus.AMBIGUOUS
         reason = resolution.reason
     else:
-        status = "missing"
+        ensure_status = SourceEnsureStatus.MISSING
+        acquisition_status = AcquisitionStatus.MISSING
         reason = (
             "identity_conflict_no_download"
             if resolution.status is ResolutionStatus.IDENTITY_CONFLICT
             else "download_required_but_not_allowed"
         )
-    resolution_dict = resolution.to_dict()
-    acquisition = {
-        "schema_version": "1.0",
-        "status": status,
-        "resolution": resolution_dict,
-        "adapter_name": None,
-        "candidate": None,
-        "receipt": None,
-        "reason": reason,
-        "gap_plan": None,
-    }
-    return {
-        "schema_version": "1.0",
-        "status": status,
-        "acquisition": acquisition,
-        "resolution": resolution_dict,
-        "attempt": None,
-        "canonical_import": None,
-    }
+    return SourceEnsureResult(
+        schema_version=SOURCE_ENSURE_SCHEMA_VERSION,
+        status=ensure_status,
+        acquisition=AcquisitionResult(
+            schema_version=ACQUISITION_SCHEMA_VERSION,
+            status=acquisition_status,
+            resolution=resolution,
+            reason=reason,
+        ),
+        resolution=resolution,
+        attempt=None,
+    ).to_dict()
 
 
 def _run_ensure_command(

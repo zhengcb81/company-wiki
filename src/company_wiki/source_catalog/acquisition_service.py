@@ -38,7 +38,7 @@ class SourceEnsureResult:
     status: SourceEnsureStatus
     acquisition: AcquisitionResult
     resolution: ResolutionResult
-    attempt: AcquisitionAttempt
+    attempt: AcquisitionAttempt | None
     canonical_import: CanonicalImportResult | None = None
 
     def to_dict(self) -> dict[str, Any]:
@@ -47,7 +47,7 @@ class SourceEnsureResult:
             "status": self.status.value,
             "acquisition": self.acquisition.to_dict(),
             "resolution": self.resolution.to_dict(),
-            "attempt": self.attempt.to_dict(),
+            "attempt": self.attempt.to_dict() if self.attempt else None,
             "canonical_import": (
                 self.canonical_import.to_dict() if self.canonical_import else None
             ),
