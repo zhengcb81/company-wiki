@@ -231,12 +231,14 @@ artifact_id = hash(source_id, source_sha256, artifact_role,
 
 ### Phase D：电话会议与 provider adapter（M2 同批）
 
+详细施工、测试矩阵和收据格式见 [Phase D / M2-provider 实施细则](phase_d_m2_provider_implementation_spec_2026-09-28.md)。该施工卡先于代码冻结，Phase D 实施不得绕过其依赖方向和停止条件。
+
 1. 把 provider discovery、candidate authorization、fetch、result validation、canonical admission 分为不同端口。
 2. `earnings-transcripts` 保持英文原文、翻译默认关闭；filing-fetch 只编排显式 companion request。
 3. company-wiki importer 只接收 schema `/2` provider 原件并重算 SHA/MIME/URL/FY/Q；长期 raw 只保存一份。
 4. fake provider 子进程 E2E 覆盖 discover→授权→fetch-candidate→stdin import→reader replay，拒绝和超时均零残留。
 
-**完成条件**：无真实付费 provider 依赖；不新增 Koyfin/SA；`provider_use_policy.py`、`transcript_import.py`、`transcript_material.py` 的临时复杂度豁免下调或移除。
+**完成条件**：无真实付费 provider 依赖；不新增 Koyfin/SA；`provider_use_policy.py`、`transcript_import.py`、`transcript_import_cli.py`、`transcript_material.py` 的 38/41/23/19 临时复杂度豁免移除，或全部下调至实际不高于 10；fake provider 全链必须通过正式 verified reader，而不是直接打开 canonical path。
 
 ### Phase E：重构 Worker 为多文档并发、单文档有序（M3）
 
@@ -338,7 +340,7 @@ git diff --check
 
 ## 13. 当前下一步
 
-进入 **Phase C / M2**：先用现有 12 件样本和反例冻结 `DocumentStructure`、路由、选择、coverage、locator replay 和空间预算的行为测试，再拆分 `narrative_evidence.py`。先不接生产 catalog、Worker 或真实下载。
+进入 **Phase D / M2-provider**：先按施工卡 D0–D1 冻结现有合同、复杂度和完整链 RED 测试，再拆 provider policy、prefetch/postfetch、`/2` transport、canonical admission、material replay 与 CLI。先不改 revenue-forecast/filing-fetch，不接真实付费 provider、Worker 或历史派生清理。
 
 ### M1 完成收据（2026-09-27）
 

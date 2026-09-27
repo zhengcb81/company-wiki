@@ -530,3 +530,11 @@
 - `narrative_evidence.py` 的最大 custom complexity 已由 363 降至 **10**，从 `FROZEN_MAX` 删除；11 个叙述模块全部纳入 CI/pre-commit mypy。大节点门：相关单元/检索/复杂度 **72 passed**，CI 同款 25 模块 mypy、全范围 Ruff、config doctor、pre-commit config 与 diff check 全绿。
 - 节点提交钩子首次显示 mypy `no files to check`，进一步检查发现既有多行 `files` 正则由 YAML folded scalar 插入空格，实际不会匹配。已加 `(?x)` extended mode，并以 `pre-commit run mypy-contract --files .../narrative_evidence.py` 实测钩子执行且通过；不把手工 mypy 绿灯误当成钩子已生效。
 - Phase 边界只读复核 RF：本地 `fcap=ee0a82bfd`、`origin/main=3a69f9c5b`，既有 planning/assurance dirty 与一次性目录仍在；本项目未写入、清理或切换 RF。下一步只进入 Phase D provider/transcript adapter，不启动 Worker，不删除原件。
+
+## Session: Phase D / M2-provider 实施细则冻结（2026-09-28）
+
+- 先只读核查现有 `provider_use_policy`、transcript importer/material/CLI、三个合同测试和 E-T 工具边界，没有修改产品代码。确认已有局部 preflight、`/2` import 和内存 fake-provider 测试，但没有 provider 子进程 → CWP stdin importer → 正式 verified reader 的完整链；现有 `/2` E2E 由测试手写结果，另一 fake provider 测试直接操作 staging/writer。
+- 新增 [Phase D / M2-provider 实施细则](phase_d_m2_provider_implementation_spec_2026-09-28.md)，冻结六层拆分、D0–D7 TDD 顺序、拒绝矩阵、短路径测试根、空间计量、集中验收和停止条件。company-wiki 不承担 filing + transcript partial-success 编排；跨仓 caller 仍放 Phase F。
+- 本阶段目标明确为移除或降至实际 `<=10` 的四项复杂度 freeze：`provider_use_policy.py=38`、`transcript_import.py=41`、`transcript_import_cli.py=23`、`transcript_material.py=19`。不得只迁移巨函数或放宽 ratchet。
+- E-T 只读状态为本地 `codex/transcript-companion-adapter`，工具/API/测试仍是未提交文件；`transcript_tool.py` 已是无翻译 JSON 子进程，旧 scraper 有 `--disable-translation`。Phase D 用冻结 JSON schema 的 fake subprocess，不把未提交外仓实现作为生产依赖；正式提交和 filing-fetch 互操作留 Phase F。
+- RF 阶段边界只读复核：`fcap=ee0a82bfd1eec935cf4e567eb42f0ef79efa0226`、`origin/main=3a69f9c5b6516ebc949d1c95bd50965f9112b7ad`，原 planning/assurance dirty 与一次性目录仍在。本阶段零写入、零清理、零切换 RF。

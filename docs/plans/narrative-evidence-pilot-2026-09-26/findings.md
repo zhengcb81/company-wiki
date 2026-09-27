@@ -311,3 +311,12 @@
 - 12 件真实资料的 52,196,853 bytes 原件只产生 549,768 bytes selected bundle，实测比率 1.0533%。大型 PDF 的逐件比率约为 0.59%–2.02%，季报因原件很短为 4.77%，两份 TXT 电话会因原件本身较小为 16.83%/23.73%；这说明应按文档类型分别设上限，不能用一个百分比误判短文本。
 - P09 投资者关系管理办法和 P10 业绩说明会通知完整扫描后分别只保存 326/331 bytes 跳过收据，验证“低价值格式文档判断后不切片”可显著降低长期派生空间。原件仍保留，未来策略变化可重算。
 - 当前 Phase C 证明的是确定性 parse→select→summary-input→retrieval/replay 链。它没有证明真实 provider 权利、电话会 fetch/import、LLM 摘要语义质量、Worker 并发、跨仓 consumer 或 46 GiB 生产派生清理；这些仍按 Phase D–G 大节点验收。
+
+## 2026-09-28 — M2-provider 实施前缺口结论
+
+- 当前 transcript 测试形成了三段互不完整的证据：CLI preflight 是跨进程但不调用 provider；stdin importer 跨进程但 `/2` payload 由测试手写；fake provider 能验证 postfetch/replay，但在同进程内直接调用 writer 并直接读 canonical path。三者全绿仍不能证明 provider subprocess、importer 与 verified reader 可互操作。
+- provider policy 本身和 transcript use admission 是不同变化原因。前者只拥有 rule/hash/URL/action decision；后者拥有 request/candidate/security/download authorization。把两者放在一个模块造成 38 的复杂度和反向依赖，拆分后应保留稳定 reason code，而不是重写政策语义。
+- `/2` JSON 是不可信 transport；解码和 identity 校验应在纯 contract 层结束，返回 bounded bytes typed value。临时路径、writer 和 catalog 不能进入 transport parser，否则测试无法分别证明“错误输入零写入”和“合法输入唯一提交”。
+- postfetch validator 与 canonical writer 也必须分开：validator 验证 fresh policy、effective URL、receipt、staging containment、真实 size/SHA；application service 才拥有唯一临时文件和 `finally` 清理。这样 timeout、坏 JSON、redirect 和政策变化才能逐层断言零残留。
+- transcript selector 是通用 narrative selector 的消费者，不能把 provider 权利逻辑塞回 Phase C 模块。应用层在调用 selector/summarizer 前分别检查 `select_evidence`/`generate_summary`；动作不传递。该门是来源使用权，不是此前已取消的 private/public 分类或个人项目文件权限。
+- Phase D 的完整链必须通过 `SourceVersionReader.open_version()` 或 reader CLI 读回原件；直接使用 importer 返回的 canonical path 会重新把存储目录暴露给上层，也无法验证迁移/同 SHA 副本回退后的抽象有效性。
