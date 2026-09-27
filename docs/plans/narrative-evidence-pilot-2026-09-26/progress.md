@@ -492,3 +492,13 @@
 - Ruff C901 对八个新增模块报告 13 个高复杂函数；非增长 baseline 是临时 waiver，不是修复。下一步完成各失败类别影响结论和当前相关回归，然后向用户报告修复优先级；未恢复 Worker、未写 RF。
 - 当前八个相关测试文件重跑 **88 passed in 44.01s**，独立 `%TEMP%/cw-audit-current-b` 测试根已核实并清理。该绿灯与正式 producer 反例并存，确认缺少 latest-as-of/gap 的 producer→CLI→projection E2E。
 - Phase 22 完成：不把问题归结为单纯“测试错了”或“仓库整体坏了”。当前阻断是新 v2 抽象层的 DTO 断链；安全夹具/Windows harness 应调整测试；复杂度属于未解决的生产化风险。产品实现本轮未改，Worker/RF 未触碰。
+
+## Session: Phase 23 清洁架构与 TDD 总图（2026-09-27）
+
+- 用户明确最终安全底线：下载的财报、公告、招股/再融资、投资者关系和电话会议原件不得丢失；normalized、spans、摘要、索引、缓存、staging 等中间产物可删除重建；项目未投产，允许大规模重构内部代码和派生 schema。
+- 新增 [清洁架构与 TDD 实施总图](clean_architecture_tdd_execution_plan_2026-09-27.md)，把 catalog/read/acquisition/derive/evidence/export/jobs 分成 L0–L7 单向依赖，并把现有 R4、叙述证据、transcript、Worker、跨仓和空间计划收束为 Phase A–G、M1–M4 四个大节点。
+- 测试体系明确为 U/C/I/E/X/P：正式 producer/service/CLI 生成正例，手写 JSON 只做畸形负例；真实 CLI 使用独立 run root，前后哈希快照和 finally 清理；大节点才跑受影响全集，避免每个小步骤反复全验。
+- 在写计划前做了一个未提交 TDD spike：正式 `SourceEnsureResult.to_dict()` gap 测试首先按预期失败（`gap_plan=None`）；一行恢复 `acquisition` 后 3 项通过；再加未知 schema、错误别名和 request ID 漂移三项红测后，重构原型达到 6 项通过。这些结果只用于验证施工方向。用户要求“先计划后实施”后，`source_operation.py` 与对应测试已全部 `git restore` 到 HEAD，工作树只保留规划文档改动。
+- RF 阶段边界只读核对：远端 `origin/main=3a69f9c5b`；本地 `fcap=ee0a82bfd`，仍有其既有 planning/assurance 未提交改动与一次性运行目录。本项目没有写入、清理或切换 RF。
+- 工具调查中曾错误假设 `gap_plan.py` 存在 `GapItem`，import 失败后直接读取正式 `GapPlan` 和 `DownloadCandidate` 定义修正；没有文件改动或测试副作用。追加 planning 日志的首个补丁也因锚点标题不匹配安全失败，随后按文件真实尾部重试。
+- 下一步严格从总图 Phase B 开始：先提交 producer→contract 和 latest-as-of fake-provider CLI 的 RED tests，再实施 typed operation contract、纯 projection 与 reader facade；不能用一行字段修补代替重构。

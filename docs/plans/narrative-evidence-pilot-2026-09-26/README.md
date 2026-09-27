@@ -6,23 +6,23 @@
 
 ## 先读顺序
 
-1. [findings.md](findings.md)：10 PDF + 2 TXT 的真实样本、11 个正例、2 个负例及已验证边界。
-2. [implementation_plan.md](implementation_plan.md)：项目目标、来源/证据/摘要/跨仓合同和 W0–W7 总顺序。
-3. [milestone_review_cadence.md](milestone_review_cadence.md)：**现行审查节奏**，只在 G0–G4 大节点集中审查；覆盖旧文档的逐卡签收频率。
-4. [execution_cards.md](execution_cards.md)：W/N/D 实现范围与失败关闭断言。
-5. [worker_parallel_execution_plan.md](worker_parallel_execution_plan.md)：**Worker 多文档并发的唯一详细实施入口**。它取代 [worker_parallel_recovery.md](worker_parallel_recovery.md) 中的早期概念性事务建议；旧文仅留故障背景。
-6. [test_acceptance_plan.md](test_acceptance_plan.md) 和 [review_protocol.md](review_protocol.md)：测试分母、对抗场景、独立审查和放行证据。
-7. [task_plan.md](task_plan.md)、[progress.md](progress.md)：本计划状态与本轮调查记录。
-8. [g1_summary_source_support_audit_v1.md](g1_summary_source_support_audit_v1.md)：13 条人工摘要逐条来源支持、时点、语气、角色审查；不构成独立审稿签字。
-9. [end_to_end_test_plan.md](end_to_end_test_plan.md)：G1 来源到包、filing-fetch transcript 获取、G2 消费者、G3 Worker 并发、G4 scratch 处置的关键路径 E2E；明确隔离 run-id 目录、只删本次新增内容并核对测试目录恢复基线。
-10. [early_catalog_retirement.md](early_catalog_retirement.md)：46 GiB 旧主库提前退役的活跃子集、完整压缩备份、服务差分和文件级清理门禁；需要尽早释放空间时先读此卡。
-11. [raw_disposition_plan.md](raw_disposition_plan.md)：被新方法跳过的旧来源如何判定可删除，逐件清理原文/重复副本、保留处置记录及故障恢复的 D0–D5 门禁。
-11. [stepwise_space_budget.md](stepwise_space_budget.md)：逐步新增/释放空间、临时峰值、完整旧库只读压缩计数与仍待试点的 raw/派生文件收益变量。
-12. [implementation_run_2026-09-26.md](implementation_run_2026-09-26.md)：本轮开始实施的 I0–I6 运行卡；按用户要求以完整解压流 SHA 验证备份，取消落盘完整恢复演练。
-13. [end_to_end_test_plan.md](end_to_end_test_plan.md)：G1–G4 关键端到端链路、隔离运行目录、崩溃清理和测试后目录恢复基线要求。
-13. [cross_project_coordination_2026-09-26.md](cross_project_coordination_2026-09-26.md)：与 revenue-forecast 三项目大计划的源码/数据交叉、F4/F5 代码与消费者 SHA 门禁，以及 W0/W6 的唯一 owner 约束。
-14. [d0_inventory_receipt_2026-09-27.md](d0_inventory_receipt_2026-09-27.md)：D0 本地只读文件与旧引用盘点；区分实际路径字节、登记 SHA 重复候选和待合同确认的跨仓消费。
-15. [provider_cost_and_capability_2026-09-27.md](provider_cost_and_capability_2026-09-27.md)：SEC/FMP/Koyfin/Seeking Alpha 的来源与授权比较、按 246 个本地目录做的月调用压力预算及先不购买的采购闸门。
+1. [clean_architecture_tdd_execution_plan_2026-09-27.md](clean_architecture_tdd_execution_plan_2026-09-27.md)：**当前唯一实施顺序**；定义不可丢失原件、可重建派生、L0–L7 分层、Phase A–G、TDD 和 M1–M4 大节点。
+2. [findings.md](findings.md)：10 PDF + 2 TXT 的真实样本、11 个正例、2 个负例及已验证边界。
+3. [implementation_plan.md](implementation_plan.md)：项目目标、来源/证据/摘要/跨仓合同和 W0–W7 历史工作包。
+4. [milestone_review_cadence.md](milestone_review_cadence.md)：现行集中审查节奏；由重构总图收束为 M1–M4。
+5. [execution_cards.md](execution_cards.md)：W/N/D 实现范围与失败关闭断言。
+6. [worker_parallel_execution_plan.md](worker_parallel_execution_plan.md)：Worker 多文档并发的详细实施入口；[worker_parallel_recovery.md](worker_parallel_recovery.md) 只留故障背景。
+7. [test_acceptance_plan.md](test_acceptance_plan.md) 和 [review_protocol.md](review_protocol.md)：测试分母、对抗场景、独立审查和放行证据。
+8. [task_plan.md](task_plan.md)、[progress.md](progress.md)：本计划状态与本轮调查记录。
+9. [g1_summary_source_support_audit_v1.md](g1_summary_source_support_audit_v1.md)：13 条人工摘要逐条来源支持、时点、语气、角色审查；不构成独立审稿签字。
+10. [end_to_end_test_plan.md](end_to_end_test_plan.md)：G1–G4 关键端到端链路、隔离运行目录、崩溃清理和测试后目录恢复基线要求。
+11. [early_catalog_retirement.md](early_catalog_retirement.md)：46 GiB 旧主库提前退役的活跃子集、完整压缩备份、服务差分和文件级清理门禁。
+12. [raw_disposition_plan.md](raw_disposition_plan.md)：被新方法跳过的旧来源如何判定、逐件处置与 D0–D5 恢复门禁；重构总图已将 canonical raw 默认改为保留。
+13. [stepwise_space_budget.md](stepwise_space_budget.md)：逐步新增/释放空间、临时峰值、旧库压缩计数与待试点变量。
+14. [implementation_run_2026-09-26.md](implementation_run_2026-09-26.md)：F0–F5 实际运行卡和空间释放收据。
+15. [cross_project_coordination_2026-09-26.md](cross_project_coordination_2026-09-26.md)：与 revenue-forecast 的源码/数据交叉、消费者 SHA 门禁和唯一 owner 约束。
+16. [d0_inventory_receipt_2026-09-27.md](d0_inventory_receipt_2026-09-27.md)：D0 本地只读文件与旧引用盘点。
+17. [provider_cost_and_capability_2026-09-27.md](provider_cost_and_capability_2026-09-27.md)：SEC/FMP/Koyfin/Seeking Alpha 的来源、月调用预算及采购闸门。
 
 ## 实施时的硬边界
 

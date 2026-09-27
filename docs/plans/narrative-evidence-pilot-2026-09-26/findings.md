@@ -284,3 +284,13 @@
 - 影响半径：旧 legacy ensure 输出、exact reuse 的 v2 投影、close-gap 完成路径和底层 catalog bytes 不受这次字段断链影响；受影响的是 opt-in `ensure --source-ref-v2` 的 gap/latest-as-of 结果，会输出 `status=gap` 却丢请求和 gap plan。它尚未造成数据删除或错误写入，但正好位于 R4 跨仓抽象接口上，因此对当前优先级属于阻断级缺陷。
 - narrative E2E 的 UTF-8/replacement 改动只作用于 subprocess stdout/stderr 捕获；测试的业务断言读取生成 JSON/文件，不用 replacement 后的输出作事实，因此归类为 Windows harness 修复。normalized reader 是保持行为的函数拆分，原测试未随实现改写，归类为有效复杂度修复。
 - 第一性原理分类：FC-1301 是生产 registry 漏接且已正确修；B10 是正确共享 parser 上的新调用登记；FC905 三项是旧夹具；stage semantic 是 registry 扩展后的合理测试更新；source-operation 是测试与 consumer 一起偏离正式 producer，当前未修；FC-1204 是正确发现架构债，但加入高上限属于临时 waiver；narrative decode 是平台测试问题。
+
+## 2026-09-27 — 大重构的第一性原理边界
+
+- 真正不可替代的资产不是 SQLite、切片或摘要，而是原始来源字节、来源捕获事实和版本身份。只要 canonical raw、SHA、manifest、URL/时间/版本关系完整，绝大多数派生层都可重算；因此后续架构应围绕“原件不可丢、派生可删除重建”设计，而不是继续保护 46 GiB 旧中间结构。
+- `reader` 是来源版本的只读交付端口：按 `document_id + source_id + content_sha256` 选择已登记的同 SHA 可读副本并验证实际字节。它不是 PDF parser、摘要器或 downloader；消费者依赖它的 ID/hash/bytes 合同后，company/dayu/Dropbox 的目录差异才能真正降为存储细节。
+- 大重构不能只把 `acquisition_result` 改回 `acquisition`。当前 `source_operation.py` 同时承担 wrapper 猜测、schema 解码、状态机、reader I/O、路径过滤和 DTO 组装，并用 `_acquisition` 隐藏键跨 helper 传状态；这正是 producer/test 能一起漂移的结构原因。目标必须拆成 typed operation contract、纯 projection、reader port 和薄 facade。
+- 正例测试若手写复制 JSON schema，会让测试和错误实现同时变绿。正式合同测试必须从 `SourceEnsureResult`、`CloseGapResult` 或真实 CLI 产生输入；手写 payload 只适合未知 schema、缺字段、request ID 冲突、路径泄露等负例。
+- “每层对本层负责”可落成七个单向层：raw、catalog、read、acquire、derive、evidence、export/jobs。Worker 只调 application ports；consumer 不导入 store/resolver/DAG；selector 不打开任意路径；read broker 不下载或生成摘要。
+- 当前几个新模块被加入高额 `FROZEN_MAX` 只说明不会继续恶化，不说明架构达标。按生产启用顺序，operation/read、provider/transcript、narrative selector 和 Worker 必须在对应 M1–M3 前拆分并下调/移除豁免。
+- 为避免审查拖慢，后续只在 M1 读取/acquisition、M2 派生/evidence/provider、M3 Worker、M4 跨仓/清理做集中验收；小步骤只保留 TDD 红/绿、Ruff 和 diff check。

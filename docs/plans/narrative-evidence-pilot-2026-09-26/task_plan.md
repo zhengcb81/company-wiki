@@ -8,7 +8,9 @@
 
 ## Next Step
 
-**2026-09-27 Phase 22 阻断结论：**暂停 R4 consumer/跨仓接线。下一步必须先按 TDD 增加“正式 `SourceEnsureResult.to_dict()` / CLI latest-as-of gap payload → v2 projection”红测，再让 consumer 恢复读取既有 schema 的 `acquisition`（若要改名，必须做 schema 升版和兼容迁移，不能单改 consumer/test）。随后为复杂度临时豁免建立 G0/G1e/G2 硬阻断并按生产启用顺序分解；现有 390/88 项绿灯不能覆盖这个 producer/consumer 反例。
+**2026-09-27 Phase 23 重构总图：**后续实施统一按[清洁架构与 TDD 实施总图](clean_architecture_tdd_execution_plan_2026-09-27.md)的 Phase A–G / M1–M4 执行。内部代码和派生 schema 允许破坏式重构；canonical raw 原件、来源 SHA/manifest 和版本事实不得丢失。下一步不是对 `source_operation` 做一行字段补丁，而是先完成 Phase B 的正式 producer/CLI 红测，再拆分 typed operation contract、纯 projection 和 read facade，最后以真实 latest-as-of fake-provider CLI E2E 验收。随后按生产启用顺序分解 narrative/provider/transcript 的复杂度豁免，最后才接 Worker、跨仓 consumer 和派生清理。
+
+**Phase 22 阻断结论（保留证据）：**暂停 R4 consumer/跨仓接线。正式 `SourceEnsureResult.to_dict()` 输出 `acquisition`，当前 consumer/test 同步漂移到不存在的 `acquisition_result`；现有 390/88 项绿灯不能覆盖这个 producer/consumer 反例。
 
 **2026-09-27 最新优先级（优先于下方历史实施快照）：**先按[数据湖边界复核](data_lake_boundary_review_2026-09-27.md)与[R4 数据湖实施卡](../painpoint-outcome-audit-2026-09-05/r4-data-lake-priority-rollout-2026-09-27.md)实施来源身份、受控读取、跨进程交付和各仓责任；RF 远端 main 已并入 `3a69f9c5`。R4 基础 reader 的真实 B/C.local E2E 通过后，再把本计划 selected evidence package 接到 G2a；已有离线 G1e 代码在自己的隔离工作树保留，合同时整合。生产 Worker 与原文处置仍待各自大节点；试点 `source_id → raw path` 映射不能成为正式 G2 消费者合同。
 
@@ -26,7 +28,7 @@ Phase 17 的 F0–F5 已完成。G1 离线主样本和回归集已经复跑：12
 
 ## Current Phase
 
-Phase 18：隔离 G1 离线选择/摘要、两文档检索 smoke、12 件样本已选锚点和 package→raw 回放回归已完成；G0 跨项目消费合同未冻结；G1e 的 E-T 与 CWP 上游隔离接口已实现，filing-fetch companion 及跨仓 E2E 在推进；G2 consumer、G3 Worker、G4 原文处置均待各自门禁。
+Phase 23：大重构的第一性原理、分层、原件/派生边界、TDD 矩阵、M1–M4 大节点和 Phase A–G 施工顺序已冻结；产品代码尚未实施。下一实施阶段为总图 Phase B / M1。Phase 18 的样本证据仍作为 M2 回归输入；G2 consumer、G3 Worker 和 G4 派生清理继续等待各自大节点。
 
 外部来源采购补充：FMP Basic key 实测 profile/有效 SEC 检索 200，press releases/transcript dates 402；SEC 原生 API 无 key。以 246 个本地公司目录作保守分母，Basic 补充 SEC 检索约 2,076 calls/30 日，纯 SEC/IR 路径为 0 FMP calls；Koyfin 无用户 API，Seeking Alpha 个人订阅不授权自动抓取；Motley Fool 官方条款也禁止自动访问/采集，现有适配器不得接通生产。详细价格、假设、权利分级和 30 日试点见 [外部数据源与成本卡](provider_cost_and_capability_2026-09-27.md)。采购结论为先不买，且不改变 G0/G1e 门禁。
 
@@ -274,3 +276,14 @@ company-wiki 只负责来源、解析质量、证据定位、检索和来源摘�
 - [x] 把证据和结论写入 findings/progress；本阶段没有修改产品实现。R4 继续实施被 `acquisition` DTO 断链阻断。
 
 **Status:** complete；结论为“局部真实合同缺陷 + 测试盲区 + 尚未解决的复杂度债”，先修合同再继续。
+
+## Phase 23：清洁架构与 TDD 重构总图（2026-09-27）
+
+- [x] 明确 canonical raw、来源 SHA/manifest 和版本事实为不可丢失层；normalized、spans、摘要、索引、缓存和 staging 为可重建层。
+- [x] 将 catalog、read broker、acquisition、deterministic derivation、evidence、export/consumer、durable jobs 分成单向依赖的 L0–L7。
+- [x] 为 operation/read、叙述证据/provider、Worker、跨仓消费与派生清理写出 Phase A–G 的输入、允许修改、停止条件和完成门。
+- [x] 建立 U/C/I/E/X/P 分层测试体系和 M1–M4 四次集中验收；正式 producer 生成正例，手写 JSON 只做畸形负例。
+- [x] 本轮曾用红测确认正式 `acquisition` producer 与 consumer 的断裂，并验证重构思路；按用户“先计划后实施”要求，所有未提交产品/测试试验已恢复到 HEAD。
+- [ ] 按总图 Phase B 先写 producer/CLI 红测，再实施 typed operation contract、projection 与 reader facade；不以一行字段修补结束。
+
+**Status:** planning complete；implementation pending。
