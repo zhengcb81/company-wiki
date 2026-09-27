@@ -48,7 +48,7 @@ repos:
         pass_filenames: false
         # Run only when one of the checked modules is staged.
         files: >-
-          ^src/company_wiki/source_catalog/
+          (?x)^src/company_wiki/source_catalog/
           (artifact_handle|source_bundle|runtime_policy|activation|close_gap|
           policy_2x|canary_registry|normalized_meta|flags|policy|restore|
           operation_contract|operation_projection|source_operation|

@@ -528,4 +528,5 @@
 - 12 件真实样本覆盖年报、半年报、季报、IPO 招股书、定增/可转债募集说明书、两类投资者关系文件、两份低价值格式文档和两份英文电话会 TXT：业务锚点失败 0，locator 回放 **1,289/1,289**，2 个低价值文档生成跳过收据，原件只读复制且测试树恢复。
 - 空间实测：12 件原件合计 **52,196,853 bytes**；selected evidence bundle **549,768 bytes**，为原件的 **1.0533%**。两个跳过文档的 summary input 分别仅 326/331 bytes；没有默认持久化全量 spans。该比例是样本逻辑字节，不含未来数据库索引和文件系统 allocation rounding。
 - `narrative_evidence.py` 的最大 custom complexity 已由 363 降至 **10**，从 `FROZEN_MAX` 删除；11 个叙述模块全部纳入 CI/pre-commit mypy。大节点门：相关单元/检索/复杂度 **72 passed**，CI 同款 25 模块 mypy、全范围 Ruff、config doctor、pre-commit config 与 diff check 全绿。
+- 节点提交钩子首次显示 mypy `no files to check`，进一步检查发现既有多行 `files` 正则由 YAML folded scalar 插入空格，实际不会匹配。已加 `(?x)` extended mode，并以 `pre-commit run mypy-contract --files .../narrative_evidence.py` 实测钩子执行且通过；不把手工 mypy 绿灯误当成钩子已生效。
 - Phase 边界只读复核 RF：本地 `fcap=ee0a82bfd`、`origin/main=3a69f9c5b`，既有 planning/assurance dirty 与一次性目录仍在；本项目未写入、清理或切换 RF。下一步只进入 Phase D provider/transcript adapter，不启动 Worker，不删除原件。
