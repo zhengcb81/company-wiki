@@ -478,3 +478,6 @@
 - 集成后的跨分支合同修复和测试夹具改动已完成；36 个受影响测试模块共 **390 passed**。全仓 3,108 项测试曾在约 40% 时中止，不能作为全仓通过。当前剩余工作树包含 9 个产品/测试路径和本计划 task_plan 改动；本轮还需完成 findings/progress 收据、diff/Ruff/常规 commit hooks，再安全 fast-forward 本地 `master` 并把主工作树切回 `master`。不推送远端。
 - `.tmp-pytest-narrative-cap`、`.tmp-pytest-narrative-g1` 和先前一次长路径 basetemp 的访问权限问题仍是历史环境残留；本轮未改 ACL、未扩大删除范围。本轮确切 pytest 临时目录已核实并清理。
 - 此次只完成分支集成回归，不代表 R4 reader 全面位置透明、filing-fetch/RF/StockWiki 消费者 E2E、G0/G1e、Worker 或旧 46G 退役计划完成。RF 工作树保持未触碰。
+- 后续非沙箱只读复核发现 `cw-b06-wt` 只有 1,645 个 tracked deletions，无 untracked/ignored 数据；`r4b06-wip` 无独有提交（相对 master 落后 46 commits）。依照“本地未提交恢复到主线”的既有授权，将该临时 worktree `reset --hard master` 至 `2ecb6f8`，恢复约 69 MB tracked files，复核干净。
+- `git fetch origin master` 在非沙箱执行成功并刷新 `.git/FETCH_HEAD`；`FETCH_HEAD` 无只读属性/锁，ACL 未拒当前 Windows 用户。故先前“无法写 FETCH_HEAD”由沙箱文件系统边界导致的判断有实际成功 fetch 验证；本次 fetch 仅更新本地远端跟踪状态，没有 push。
+- 跨 worktree 边界复核：reader 与 transcript-companion 工作树干净，其提交均已在集成历史中；RF 工作树仅运行 `git status` 读取，看到的本地 dirty 内容未触碰。旧 `.tmp-pytest-*` 两目录仍有历史 ACL 访问警告，没有改 ACL 或动它们。

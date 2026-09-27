@@ -256,8 +256,10 @@ company-wiki 只负责来源、解析质量、证据定位、检索和来源摘�
 - [x] 复杂度新文件阈值仍为 10；只对本轮已纳入且实测超限的模块记录不增长上限。摘要选择器 363、source operation 51、transcript importer 41、provider policy 38、transcript CLI 23、material 19、export CLI 15；这些模块仍须在 G0 生产放行前拆分/降复杂度。Worker/G0 当前关闭，本登记不代表已进入生产。
 - [x] 全量 3,108 项测试曾运行到约 40% 后按效率要求停止，不能声称全库通过；已发现的 8 个直接失败均在后续受影响模块回归中修复并通过。最终 390 项测试覆盖相应合同和真实数据 E2E。
 - [x] 清理本轮创建的 pytest 临时根 `pytest-6997/7002/7003/7004`（精确路径位于 `%TEMP%/pytest-of-郑曾波`，逐根确认无 reparse point 后移除）；E2E 样本/输出测试根由其自身前后快照断言恢复。
-- [ ] 将剩余测试与计划收据提交到本地 fcap；正常 pre-commit 必须通过。
-- [ ] 确认 `origin/master` 仍是 fcap 祖先后，将本地 master fast-forward 到最终 fcap 集成提交，并把主工作树切到 master；只做本地操作，不 push。
-- [ ] 最后复核本地 master、fcap/reader/transcript worktree 干净状态及 RF 只读边界；RF 的本地未提交改动保持不动。
+- [x] 将剩余回归修复与计划收据提交为 `2ecb6f8`；标准 pre-commit 的 Ruff、config doctor、host assumption guard 全部通过。
+- [x] 非沙箱执行 `git fetch origin master` 成功，`FETCH_HEAD` 已刷新；远端 master 仍为 `f39bd5a`，本地 master 已从该提交 fast-forward 到集成提交。当前不 push。
+- [x] 复核 `FETCH_HEAD`：文件存在且可写、无只读属性和锁文件，ACL 给当前用户完整权限；之前写入失败与沙箱文件系统拦截一致，不是仓库 ACL 配置错误。
+- [x] 将旧 `cw-b06-wt` 工作树恢复到主线：`r4b06-wip` 原有提交已是祖先（无独有提交），工作树仅有 1,645 个 tracked deletions、无 untracked/ignored 文件；重置后 HEAD 为 `2ecb6f8` 且干净。
+- [x] reader/transcript 功能 worktree 均干净，其已审阅提交包含于主线；RF 状态仅只读核对，保留其原有未提交工作，本轮未写入或清理 RF。主工作树已切至本地 master；本地变更未推送。
 
-**Status:** in progress
+**Status:** 本地分支整合与状态恢复完成；R4 B/C、G0/G1e、Worker、G4 空间退役等产品阶段仍待执行。
