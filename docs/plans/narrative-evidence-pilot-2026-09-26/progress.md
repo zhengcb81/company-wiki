@@ -481,3 +481,14 @@
 - 后续非沙箱只读复核发现 `cw-b06-wt` 只有 1,645 个 tracked deletions，无 untracked/ignored 数据；`r4b06-wip` 无独有提交（相对 master 落后 46 commits）。依照“本地未提交恢复到主线”的既有授权，将该临时 worktree `reset --hard master` 至 `2ecb6f8`，恢复约 69 MB tracked files，复核干净。
 - `git fetch origin master` 在非沙箱执行成功并刷新 `.git/FETCH_HEAD`；`FETCH_HEAD` 无只读属性/锁，ACL 未拒当前 Windows 用户。故先前“无法写 FETCH_HEAD”由沙箱文件系统边界导致的判断有实际成功 fetch 验证；本次 fetch 仅更新本地远端跟踪状态，没有 push。
 - 跨 worktree 边界复核：reader 与 transcript-companion 工作树干净，其提交均已在集成历史中；RF 工作树仅运行 `git status` 读取，看到的本地 dirty 内容未触碰。旧 `.tmp-pytest-*` 两目录仍有历史 ACL 访问警告，没有改 ACL 或动它们。
+
+## Session: 集成测试失败第一性原理审计（2026-09-27）
+
+- 启动 Phase 22，只读检查修复提交、CodeGraph 索引和 pytest 历史缓存；不修改产品代码。
+- 历史缓存含 30 个 node ID，不能等同于计划中修复的 8 个直接失败。第一次直接展开缓存重跑因 22 个过期 node ID/Windows 路径编码而 pytest exit 4，未执行断言；本次错误已记录，独立 `%TEMP%/cw-failure-audit-20260927-a` 已清理。
+- 下一步按当前可收集测试和 `251805c..2ecb6f8` 精确差异重建失败分类，再选择当前仍存在且能回答架构风险的最小回归。
+- `git archive | tar` 的历史快照提取因中文路径被 Windows tar 错误解码而失败，未执行测试；finally 已删除精确 archive/root。改用临时 detached worktree 成功：修复前六个合同文件为 **6 failed, 53 passed**，pytest 重定位的 basetemp 收据为 `removed=true`，临时 worktree 已由 Git 删除。
+- 对正式 producer/consumer 做独立复核发现当前缺陷：producer 仍输出 `acquisition`，consumer 与测试被同步改成 `acquisition_result`。正式 payload 最小复现返回 gap 状态却丢 `gap_plan` 和 `request_id`。因此 390 项绿灯不能作为 R4 继续依据；当前暂停在诊断阶段，不修改产品实现。
+- Ruff C901 对八个新增模块报告 13 个高复杂函数；非增长 baseline 是临时 waiver，不是修复。下一步完成各失败类别影响结论和当前相关回归，然后向用户报告修复优先级；未恢复 Worker、未写 RF。
+- 当前八个相关测试文件重跑 **88 passed in 44.01s**，独立 `%TEMP%/cw-audit-current-b` 测试根已核实并清理。该绿灯与正式 producer 反例并存，确认缺少 latest-as-of/gap 的 producer→CLI→projection E2E。
+- Phase 22 完成：不把问题归结为单纯“测试错了”或“仓库整体坏了”。当前阻断是新 v2 抽象层的 DTO 断链；安全夹具/Windows harness 应调整测试；复杂度属于未解决的生产化风险。产品实现本轮未改，Worker/RF 未触碰。

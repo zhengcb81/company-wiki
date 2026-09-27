@@ -269,3 +269,18 @@
 - 集成合同修复了 normalized reader 的复杂度、canonical stage/reason 注册、SourceVersionReader 的 metadata handoff 计数，以及 `SourceOperationV2Input.acquisition_result` 命名；FC905 测试夹具恢复真实 SHA、规则哈希和签名 disposition，没有放宽生产验收。Windows narrative E2E 子进程输出使用 replacement 解码，避免 GBK 环境误报。
 - 当前复杂度 ratchet 对新文件仍为 10；几个已并入的遗留复杂模块采用明确的非增长基线，作为 G0 前分解技术债，而不是视为已满足生产复杂度门。Worker/G0 仍关闭。
 - 受影响回归为 **36 个测试模块、390 项通过**。全仓 3,108 项运行曾在约 40% 时因串行耗时被停止，因此不记为全仓通过；390 项是本次可声明的回归范围。
+
+## 2026-09-27 — 集成失败审计的证据边界
+
+- `.pytest_cache/v/cache/lastfailed` 当前保存 30 个历史 node ID，明显多于计划所述“8 个直接失败”；其中多项测试名在当前文件已不存在或已改名。该缓存是跨运行残留，不能证明当前仍有 30 个失败。
+- 首次尝试把缓存 JSON 的 30 个属性名直接展开给 pytest，结果只有 7 项被收集，22 个 node ID 报 `not found`，同时 Windows 输出中的中文工作目录发生编码失真；pytest exit 4，未运行任何断言。独立 basetemp 已在 finally 中清理。后续不再复用这种重跑方式，改从当前测试收集和 Git 差异建立清单。
+- 修复提交的差异已经显示至少四类性质不同的问题：observability/read-chain/source-operation 属生产合同整合；FC905 属安全夹具不再满足已加强的真实签名/哈希合同；narrative subprocess 属 Windows 解码测试环境；复杂度 ratchet 属架构债门禁，不能因登记非增长基线就称为已解决。
+- 用 Git detached worktree 在修复前 `251805c` 重跑 6 个相关合同文件，得到 **6 failed / 53 passed**：FC-1301 未注册 38 个新 reason（1）、B10 新增两个 raw-column handoff 未登记（1）、FC905 旧夹具缺 mandatory source/policy/evidence binding（3）、FC-1204 新文件复杂度首先报 `narrative_evidence.py=363>10`（1）。`source_operation_v2` 和旧 stage taxonomy 在该提交均通过；计划中的“8”是后续修复时又引入/触发的合同失配累计数，不是一个时点的 8 个独立生产故障。
+- `SourceEnsureResult.to_dict()` 与 `_read_only_ensure_result()` 的正式 schema 都输出键 `acquisition`；`source_operation._result_and_resolution()` 却在 `2ecb6f8` 改为只读 `acquisition_result`，而仓库除该实现和同步修改的单测外没有任何 producer 输出新键。内存复现用正式字段得到 `status=gap`，但 `gap_plan=null`、`request_id=null`。这是当前真实生产合同缺陷，测试与实现一起偏离 producer，现有绿灯是假阴性；R4 consumer 接线必须暂停到修复并加入真实 producer/CLI gap E2E。
+- B10 failure 不表示 reader 自行解析 metadata：两处新调用和 scanner 新计数最终都进入共享 `store.metadata_state`，登记 handoff 是审计基线更新，不是数据行为修复。FC905 三项是测试夹具过期，生产 writer 的 mandatory SHA/payload/policy/signature fail-closed 逻辑正确；更新夹具不应放宽生产代码。
+- 复杂度门禁揭示的风险仍未解决。Ruff C901 在新增模块中发现 13 个 >10 的函数；最严重为 `select_narrative_evidence=181`（仓库自定义 ratchet 为 363），其次 transcript/provider 权限路径达 22/20/18，`project_operation_result=12`。把文件加入 `FROZEN_MAX` 只阻止继续增长，实际绕过了“新文件 <=10”门。narrative 目前仅 pilot/retrieval 路径，transcript/provider 尚未接真实 provider/Worker，故不是已发生生产数据破坏；但 G0/G1e/G2 放行前必须有不可绕过的分解门。
+- 修复前快照的 `git archive | tar` 方案因 Windows `tar.exe` 无法提取仓库中文路径而失败，测试未启动、临时目录已清理；改用 Git detached worktree 后成功复现并由 `git worktree remove --force` 清理。历史 pytest cache 及 tar 输出均不能作为产品失败证据。
+- 当前相关范围重跑 **88 passed**，包括 reason taxonomy、read-chain、source operation 单测、真实 CLI exact-reuse、FC905、复杂度 ratchet、stage taxonomy 和 normalized reader。它与正式 producer gap 反例同时成立，证明问题是覆盖盲区：当前 E2E 只走 exact reuse，没有走 latest-as-of/gap；source-operation 单测手写了仓库中不存在的 `acquisition_result` producer。
+- 影响半径：旧 legacy ensure 输出、exact reuse 的 v2 投影、close-gap 完成路径和底层 catalog bytes 不受这次字段断链影响；受影响的是 opt-in `ensure --source-ref-v2` 的 gap/latest-as-of 结果，会输出 `status=gap` 却丢请求和 gap plan。它尚未造成数据删除或错误写入，但正好位于 R4 跨仓抽象接口上，因此对当前优先级属于阻断级缺陷。
+- narrative E2E 的 UTF-8/replacement 改动只作用于 subprocess stdout/stderr 捕获；测试的业务断言读取生成 JSON/文件，不用 replacement 后的输出作事实，因此归类为 Windows harness 修复。normalized reader 是保持行为的函数拆分，原测试未随实现改写，归类为有效复杂度修复。
+- 第一性原理分类：FC-1301 是生产 registry 漏接且已正确修；B10 是正确共享 parser 上的新调用登记；FC905 三项是旧夹具；stage semantic 是 registry 扩展后的合理测试更新；source-operation 是测试与 consumer 一起偏离正式 producer，当前未修；FC-1204 是正确发现架构债，但加入高上限属于临时 waiver；narrative decode 是平台测试问题。

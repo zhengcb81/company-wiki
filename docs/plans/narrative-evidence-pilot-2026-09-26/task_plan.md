@@ -8,6 +8,8 @@
 
 ## Next Step
 
+**2026-09-27 Phase 22 阻断结论：**暂停 R4 consumer/跨仓接线。下一步必须先按 TDD 增加“正式 `SourceEnsureResult.to_dict()` / CLI latest-as-of gap payload → v2 projection”红测，再让 consumer 恢复读取既有 schema 的 `acquisition`（若要改名，必须做 schema 升版和兼容迁移，不能单改 consumer/test）。随后为复杂度临时豁免建立 G0/G1e/G2 硬阻断并按生产启用顺序分解；现有 390/88 项绿灯不能覆盖这个 producer/consumer 反例。
+
 **2026-09-27 最新优先级（优先于下方历史实施快照）：**先按[数据湖边界复核](data_lake_boundary_review_2026-09-27.md)与[R4 数据湖实施卡](../painpoint-outcome-audit-2026-09-05/r4-data-lake-priority-rollout-2026-09-27.md)实施来源身份、受控读取、跨进程交付和各仓责任；RF 远端 main 已并入 `3a69f9c5`。R4 基础 reader 的真实 B/C.local E2E 通过后，再把本计划 selected evidence package 接到 G2a；已有离线 G1e 代码在自己的隔离工作树保留，合同时整合。生产 Worker 与原文处置仍待各自大节点；试点 `source_id → raw path` 映射不能成为正式 G2 消费者合同。
 
 **并线前执行快照（已由上方最新优先级覆盖）：**当时 RF `main`/`fcap` 同为 `ee0a82bfd`，后续工作仍在本地未提交，故 G0 与产品接线暂停。保留的事实是 RF Phase 7 计数不等于 CWP 来源接口已完成；I-05-C 的真实 producer/consumer/event 及 I-06-A/B 的 caller/跨进程 claim 尚需按新 reader 合同验证。E-T `discover`/`fetch-candidate` 与隔离 importer/preflight 有历史离线收据；CWP 主树与 transcript 分支的 `canonical_writer.py` provenance 调用点有 diff，整合时逐 hunk 联合回归。Worker、生产 SourceBundle/DAG/consumer 和原文处置不由 RF 并线自动放行；实施前按[跨项目协调](cross_project_coordination_2026-09-26.md)重锁当前状态。
@@ -254,7 +256,7 @@ company-wiki 只负责来源、解析质量、证据定位、检索和来源摘�
 - [x] 解决 transcript 合并中 `canonical_writer.py` 的冲突：保留既有不可变 provenance 校验/重导入语义，同时允许首次 import 写 namespaced transcript provenance extension；43 项 writer/transcript 契约先行通过。
 - [x] 修复并复验跨分支契约：reader metadata handoff、reason/stage 注册、source-operation DTO 命名、review receipt 的真实哈希/签名夹具、Windows subprocess 编码；normalized artifact reader 降复杂度后，36 个直接受影响模块共 **390 passed**，Ruff 通过。
 - [x] 复杂度新文件阈值仍为 10；只对本轮已纳入且实测超限的模块记录不增长上限。摘要选择器 363、source operation 51、transcript importer 41、provider policy 38、transcript CLI 23、material 19、export CLI 15；这些模块仍须在 G0 生产放行前拆分/降复杂度。Worker/G0 当前关闭，本登记不代表已进入生产。
-- [x] 全量 3,108 项测试曾运行到约 40% 后按效率要求停止，不能声称全库通过；已发现的 8 个直接失败均在后续受影响模块回归中修复并通过。最终 390 项测试覆盖相应合同和真实数据 E2E。
+- [x] 全量 3,108 项测试曾运行到约 40% 后按效率要求停止，不能声称全库通过；当时记录的失败在 390 项受影响回归中转绿。Phase 22 的生产者/消费者复核随后证明 `source_operation` 的 `acquisition_result` 改名使真实 `SourceEnsureResult.acquisition` 断链，因此“全部修复”的旧结论已撤回，须先修该合同再继续 R4。
 - [x] 清理本轮创建的 pytest 临时根 `pytest-6997/7002/7003/7004`（精确路径位于 `%TEMP%/pytest-of-郑曾波`，逐根确认无 reparse point 后移除）；E2E 样本/输出测试根由其自身前后快照断言恢复。
 - [x] 将剩余回归修复与计划收据提交为 `2ecb6f8`；标准 pre-commit 的 Ruff、config doctor、host assumption guard 全部通过。
 - [x] 非沙箱执行 `git fetch origin master` 成功，`FETCH_HEAD` 已刷新；远端 master 仍为 `f39bd5a`，本地 master 已从该提交 fast-forward 到集成提交。当前不 push。
@@ -263,3 +265,12 @@ company-wiki 只负责来源、解析质量、证据定位、检索和来源摘�
 - [x] reader/transcript 功能 worktree 均干净，其已审阅提交包含于主线；RF 状态仅只读核对，保留其原有未提交工作，本轮未写入或清理 RF。主工作树已切至本地 master；本地变更未推送。
 
 **Status:** 本地分支整合与状态恢复完成；R4 B/C、G0/G1e、Worker、G4 空间退役等产品阶段仍待执行。
+
+## Phase 22：集成测试失败第一性原理审计（2026-09-27）
+
+- [x] 从当前可收集测试、修复前后代码和生产合同三方重建失败，不把过期 `.pytest_cache/lastfailed` 当事实。
+- [x] 逐项归类为生产代码缺陷、测试合同/夹具缺陷、Windows 测试环境缺陷或复杂度架构债，并判断影响半径。
+- [x] 重跑修复前合同快照（6 failed/53 passed）与当前相关范围（88 passed），并用正式 producer payload 构造现存反例。
+- [x] 把证据和结论写入 findings/progress；本阶段没有修改产品实现。R4 继续实施被 `acquisition` DTO 断链阻断。
+
+**Status:** complete；结论为“局部真实合同缺陷 + 测试盲区 + 尚未解决的复杂度债”，先修合同再继续。
