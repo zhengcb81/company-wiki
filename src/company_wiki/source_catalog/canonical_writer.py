@@ -10,7 +10,7 @@ from pathlib import Path
 import re
 import shutil
 import unicodedata
-from typing import Any
+from typing import Any, Mapping
 
 from company_wiki.source_contract import source_id_for_sha256
 
@@ -23,6 +23,7 @@ from .store import canonical_json
 
 
 CANONICAL_IMPORT_SCHEMA_VERSION = "1.0"
+MAX_PROVENANCE_EXTENSIONS_BYTES = 16 * 1024
 _INVALID_WINDOWS_CHARS = re.compile(r'[<>:"/\\|?*\x00-\x1f]+')
 _SAFE_EXTENSION = re.compile(r"^\.[a-z0-9]{1,10}$")
 _RESERVED_WINDOWS_NAMES = {
@@ -96,6 +97,7 @@ def _destination_subdirectory(document_kind: str) -> Path:
         "broker_research": Path("research"),
         "research": Path("research"),
         "investor_relations": Path("investor_relations"),
+        "investor_call_transcript": Path("investor_relations") / "transcripts",
         "news": Path("news"),
     }
     return mapping.get(document_kind, Path("other"))
@@ -108,6 +110,7 @@ def _extension(receipt: DownloadReceipt) -> str:
     by_mime = {
         "application/pdf": ".pdf",
         "text/html": ".html",
+        "application/xhtml+xml": ".html",
         "text/plain": ".txt",
         "application/json": ".json",
     }
@@ -138,6 +141,8 @@ class CanonicalSourceWriter:
         request: SourceRequest,
         candidate: DownloadCandidate,
         receipt: DownloadReceipt,
+        *,
+        provenance_extensions: Mapping[str, Any] | None = None,
     ) -> CanonicalImportResult:
         if not isinstance(request, SourceRequest):
             raise TypeError("request must be SourceRequest")
@@ -145,6 +150,21 @@ class CanonicalSourceWriter:
             raise TypeError("candidate must be DownloadCandidate")
         if not isinstance(receipt, DownloadReceipt):
             raise TypeError("receipt must be DownloadReceipt")
+        if provenance_extensions is not None:
+            if not isinstance(provenance_extensions, Mapping):
+                raise TypeError("provenance_extensions must be a mapping or null")
+            if any(
+                not isinstance(key, str)
+                or not re.fullmatch(r"[a-z][a-z0-9_]{1,63}", key)
+                for key in provenance_extensions
+            ):
+                raise CanonicalImportError("invalid provenance extension name")
+            try:
+                extension_size = len(canonical_json(dict(provenance_extensions)).encode("utf-8"))
+            except (TypeError, ValueError) as exc:
+                raise CanonicalImportError("provenance extensions must be canonical JSON") from exc
+            if extension_size > MAX_PROVENANCE_EXTENSIONS_BYTES:
+                raise CanonicalImportError("provenance extensions exceed byte limit")
         staged = self._validate_staged(request, candidate, receipt)
         with CatalogOperationLock(
             self.catalog.config.catalog_dir,
@@ -181,7 +201,13 @@ class CanonicalSourceWriter:
             if not destination.exists():
                 self._atomic_copy(staged, destination, receipt)
             provenance = destination.with_name(destination.name + ".source.json")
-            self._write_provenance(provenance, request, candidate, receipt)
+            self._write_provenance(
+                provenance,
+                request,
+                candidate,
+                receipt,
+                provenance_extensions=provenance_extensions,
+            )
             scan_catalog(
                 self.catalog.config,
                 self.catalog.store,
@@ -317,14 +343,25 @@ class CanonicalSourceWriter:
         receipt: DownloadReceipt,
     ) -> Path:
         company = _safe_component(request.entity, limit=80)
-        filename = "_".join(
-            (
-                candidate.filing_date,
-                _safe_component(candidate.provider, limit=24),
-                _safe_component(candidate.provider_document_id, limit=64),
-                _safe_component(candidate.title, limit=90),
+        if candidate.document_kind == "investor_call_transcript":
+            # Keep the full provider title/ID in the immutable sidecar. A long
+            # transcript title otherwise exceeds the Windows path budget in
+            # nested company directories and unique pytest run roots.
+            filename = (
+                f"{candidate.filing_date}_"
+                f"{_safe_component(candidate.provider, limit=24)}_"
+                f"{receipt.content_sha256[:16]}"
+                f"{_extension(receipt)}"
             )
-        ) + _extension(receipt)
+        else:
+            filename = "_".join(
+                (
+                    candidate.filing_date,
+                    _safe_component(candidate.provider, limit=24),
+                    _safe_component(candidate.provider_document_id, limit=64),
+                    _safe_component(candidate.title, limit=90),
+                )
+            ) + _extension(receipt)
         return (
             self.company_root.path
             / company
@@ -359,6 +396,8 @@ class CanonicalSourceWriter:
         request: SourceRequest,
         candidate: DownloadCandidate,
         receipt: DownloadReceipt,
+        *,
+        provenance_extensions: Mapping[str, Any] | None = None,
     ) -> None:
         payload = {
             "schema_version": CANONICAL_IMPORT_SCHEMA_VERSION,
@@ -392,6 +431,8 @@ class CanonicalSourceWriter:
             "candidate": candidate.to_dict(),
             "receipt": receipt.to_dict(),
         }
+        if provenance_extensions is not None:
+            payload["provenance_extensions"] = dict(provenance_extensions)
         encoded = (canonical_json(payload) + "\n").encode("utf-8")
         if path.exists():
             if path.read_bytes() != encoded:

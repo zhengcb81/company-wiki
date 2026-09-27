@@ -18,6 +18,7 @@ company-wiki-source-export = "company_wiki.source_contract.cli:main"
 company-wiki-collect-announcement = "company_wiki.source_contract.announcement_cli:main"
 company-wiki-source-catalog = "company_wiki.source_catalog.cli:main"
 company-wiki-identify = "company_wiki.source_catalog.identity_cli:main"
+company-wiki-transcript-import = "company_wiki.source_catalog.transcript_import_cli:main"
 
 [project.optional-dependencies]
 pdf = ["PyMuPDF>=1.23.0"]
