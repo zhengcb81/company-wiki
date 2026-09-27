@@ -117,6 +117,8 @@ def test_g1_source_to_summary_pipeline_is_confined_and_cleans_up(tmp_path: Path)
             env=env,
             capture_output=True,
             text=True,
+            encoding="utf-8",
+            errors="replace",
             check=False,
         )
         assert metrics_result.returncode == 0, metrics_result.stdout + metrics_result.stderr
@@ -141,6 +143,8 @@ def test_g1_source_to_summary_pipeline_is_confined_and_cleans_up(tmp_path: Path)
             env=env,
             capture_output=True,
             text=True,
+            encoding="utf-8",
+            errors="replace",
             check=False,
         )
         assert summary_result.returncode == 0, summary_result.stdout + summary_result.stderr
@@ -227,6 +231,8 @@ def test_g1_source_to_summary_pipeline_is_confined_and_cleans_up(tmp_path: Path)
             env=env,
             capture_output=True,
             text=True,
+            encoding="utf-8",
+            errors="replace",
             check=False,
         )
         assert escaped_metrics_result.returncode != 0
@@ -244,6 +250,8 @@ def test_g1_source_to_summary_pipeline_is_confined_and_cleans_up(tmp_path: Path)
             env=env,
             capture_output=True,
             text=True,
+            encoding="utf-8",
+            errors="replace",
             check=False,
         )
         assert escaped_package_result.returncode != 0
@@ -258,6 +266,8 @@ def test_g1_source_to_summary_pipeline_is_confined_and_cleans_up(tmp_path: Path)
             env=env,
             capture_output=True,
             text=True,
+            encoding="utf-8",
+            errors="replace",
             check=False,
         )
         assert escaped_summary_result.returncode != 0
@@ -323,6 +333,8 @@ def test_selected_evidence_search_recovers_g1_anchors_across_all_samples(
             env=env,
             capture_output=True,
             text=True,
+            encoding="utf-8",
+            errors="replace",
             check=False,
         )
         assert result.returncode == 0, result.stdout + result.stderr

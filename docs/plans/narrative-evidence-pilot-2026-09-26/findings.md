@@ -262,3 +262,10 @@
 - 用户提出的“目录是底层细节”在**业务身份与消费者读取**层成立；生产 CWP 已有 `sources/documents/locations`、多 root 配置和同 SHA 候选回退。`canonical_writer` 固定 company_raw 写目标与外部只读根属于写入所有权，不应为追求表面平权而取消。Dropbox 占位、来源权利/公开时间和外发许可仍须按具体来源/动作处理。
 - 2026-09-07 旧诊断有两处时效变化：resolver 已逐份验证同 SHA 副本并回退，且调用统一 reusable policy。仍存在 scanner 旧版按 root kind 选择文档默认类型/元数据容器与按 priority 合并、normalizer 自行选路径、`SourceHandle.canonical_path` 外泄。filing-fetch 与 RF 又直接读绝对路径；RF 导入 CWP 内部 DAG，CWP DAG 反含 `consumer_analysis`。这是跨仓职责耦合，不能以“所有文件搬到 company 目录”解决。
 - `resolver.read_verified_bytes` 是进程内原语，尚无等价跨进程读取合同。正式 reader 需要 ID/版本定位、受控字节交付或短期物化、同版本校验、云占位/撤回/权限状态与清理；pilot 的调用方 raw-path map 是隔离试验的临时接缝。确切代码证据、责任表、R4 复用和大节点测试见[数据湖边界复核](data_lake_boundary_review_2026-09-27.md)。本轮未证明 scanner 的 root priority 在真实同 SHA 样本上已造成输出差异，列为隔离验证问题。
+
+## 2026-09-27 — RF/CWP 集成分支合同与回归
+
+- `fcap` 原工作树含 9 个相对 `origin/master` 的提交；本轮把已审阅的 reader 和 transcript-companion 两条 CWP 功能分支并入本地集成分支，未推送。transcript writer 冲突以保留 immutable provenance、重复导入不重写现有来源 sidecar 为准，同时纳入首写 transcript acquisition 扩展。
+- 集成合同修复了 normalized reader 的复杂度、canonical stage/reason 注册、SourceVersionReader 的 metadata handoff 计数，以及 `SourceOperationV2Input.acquisition_result` 命名；FC905 测试夹具恢复真实 SHA、规则哈希和签名 disposition，没有放宽生产验收。Windows narrative E2E 子进程输出使用 replacement 解码，避免 GBK 环境误报。
+- 当前复杂度 ratchet 对新文件仍为 10；几个已并入的遗留复杂模块采用明确的非增长基线，作为 G0 前分解技术债，而不是视为已满足生产复杂度门。Worker/G0 仍关闭。
+- 受影响回归为 **36 个测试模块、390 项通过**。全仓 3,108 项运行曾在约 40% 时因串行耗时被停止，因此不记为全仓通过；390 项是本次可声明的回归范围。

@@ -75,7 +75,10 @@ def _result_and_resolution(
     envelope = _mapping(result.get("envelope"))
     if not envelope:
         envelope = _mapping(resolution.get("resolution_envelope"))
-    acquisition = _mapping(result.get("acquisition"))
+    # This is the public acquisition result DTO, not the legacy metadata_json
+    # identity container. Keep the input field explicit to avoid overloading
+    # that legacy name at the source-operation boundary.
+    acquisition = _mapping(result.get("acquisition_result"))
     return result, resolution, {**envelope, "_acquisition": acquisition}
 
 

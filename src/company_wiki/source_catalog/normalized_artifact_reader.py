@@ -53,25 +53,37 @@ def _legacy_frontmatter(text: str) -> dict[str, str]:
         raise NormalizedArtifactReadError("normalized_frontmatter_invalid")
     fields: dict[str, str] = {}
     for line in text[4:end].splitlines():
-        key, separator, value = line.partition(":")
-        if not separator or key not in _LEGACY_FIELDS:
-            continue
-        if key in fields:
-            raise NormalizedArtifactReadError("normalized_frontmatter_invalid")
-        try:
-            parsed = yaml.safe_load(value.strip())
-        except yaml.YAMLError:
-            raise NormalizedArtifactReadError("normalized_frontmatter_invalid") from None
-        if not isinstance(parsed, str) or not parsed:
-            raise NormalizedArtifactReadError("normalized_frontmatter_invalid")
-        fields[key] = parsed
+        _add_legacy_frontmatter_field(fields, line)
     if fields.keys() != _LEGACY_FIELDS:
         raise NormalizedArtifactReadError("normalized_frontmatter_invalid")
     return fields
 
 
+def _add_legacy_frontmatter_field(fields: dict[str, str], line: str) -> None:
+    key, separator, value = line.partition(":")
+    if not separator or key not in _LEGACY_FIELDS:
+        return
+    if key in fields:
+        raise NormalizedArtifactReadError("normalized_frontmatter_invalid")
+    try:
+        parsed = yaml.safe_load(value.strip())
+    except yaml.YAMLError:
+        raise NormalizedArtifactReadError("normalized_frontmatter_invalid") from None
+    if not isinstance(parsed, str) or not parsed:
+        raise NormalizedArtifactReadError("normalized_frontmatter_invalid")
+    fields[key] = parsed
+
+
 def _verify_legacy_lineage(row: Any, text: str, source_sha: str) -> None:
     frontmatter = _legacy_frontmatter(text)
+    _verify_legacy_source_bindings(frontmatter, row, source_sha)
+    metadata = _normalized_metadata(row)
+    _verify_legacy_parser_bindings(frontmatter, row, metadata)
+
+
+def _verify_legacy_source_bindings(
+    frontmatter: dict[str, str], row: Any, source_sha: str
+) -> None:
     if frontmatter["artifact_role"] != "normalized":
         raise NormalizedArtifactReadError("normalized_frontmatter_invalid")
     if frontmatter["document_id"] != _field(row, "document_id"):
@@ -83,29 +95,57 @@ def _verify_legacy_lineage(row: Any, text: str, source_sha: str) -> None:
         raise NormalizedArtifactReadError("normalized_frontmatter_source_mismatch")
     if frontmatter["normalization_status"] != _field(row, "normalized_status"):
         raise NormalizedArtifactReadError("normalized_frontmatter_status_mismatch")
+
+
+def _normalized_metadata(row: Any) -> dict[str, Any]:
     try:
         metadata = json.loads(_field(row, "normalized_metadata_json"))
     except json.JSONDecodeError:
         raise NormalizedArtifactReadError("normalized_parser_binding_missing") from None
     if not isinstance(metadata, dict):
         raise NormalizedArtifactReadError("normalized_parser_binding_missing")
-    generator_name = _field(row, "normalized_generator_name")
-    generator_version = _field(row, "normalized_generator_version")
+    return metadata
+
+
+def _verify_legacy_parser_bindings(
+    frontmatter: dict[str, str], row: Any, metadata: dict[str, Any]
+) -> None:
+    generator_name, generator_version = _required_generator(row, metadata)
     parser_name = frontmatter["parser_name"]
     parser_version = frontmatter["parser_version"]
-    if not generator_name or not generator_version:
-        raise NormalizedArtifactReadError("normalized_parser_binding_missing")
-    if generator_name == "source_catalog_normalizer":
-        if not metadata.get("parser_name") or not metadata.get("parser_version"):
-            raise NormalizedArtifactReadError("normalized_parser_binding_missing")
-    elif (
-        parser_name != _LEGACY_PARSER_ALIASES.get(generator_name, generator_name)
-        or parser_version != generator_version
-    ):
-        raise NormalizedArtifactReadError("normalized_parser_binding_mismatch")
+    _verify_frontmatter_generator_binding(
+        parser_name, parser_version, generator_name, generator_version
+    )
     if metadata.get("parser_name", parser_name) != parser_name or metadata.get(
         "parser_version", parser_version
     ) != parser_version:
+        raise NormalizedArtifactReadError("normalized_parser_binding_mismatch")
+
+
+def _required_generator(row: Any, metadata: dict[str, Any]) -> tuple[str, str]:
+    generator_name = _field(row, "normalized_generator_name")
+    generator_version = _field(row, "normalized_generator_version")
+    if not generator_name or not generator_version:
+        raise NormalizedArtifactReadError("normalized_parser_binding_missing")
+    if generator_name == "source_catalog_normalizer" and not (
+        metadata.get("parser_name") and metadata.get("parser_version")
+    ):
+        raise NormalizedArtifactReadError("normalized_parser_binding_missing")
+    return generator_name, generator_version
+
+
+def _verify_frontmatter_generator_binding(
+    parser_name: str,
+    parser_version: str,
+    generator_name: str,
+    generator_version: str,
+) -> None:
+    if generator_name == "source_catalog_normalizer":
+        return
+    if (
+        parser_name != _LEGACY_PARSER_ALIASES.get(generator_name, generator_name)
+        or parser_version != generator_version
+    ):
         raise NormalizedArtifactReadError("normalized_parser_binding_mismatch")
 
 
@@ -132,6 +172,23 @@ def preferred_normalized_artifact_predicate(alias: str) -> str:
 
 def read_verified_normalized_text(row: Any) -> str:
     """Verify one joined catalog row and return its exact UTF-8 text."""
+    source_sha, legacy = _verified_normalized_source(row)
+    expected_sha = _field(row, "normalized_sha256")
+    if not _SHA256.fullmatch(expected_sha):
+        raise NormalizedArtifactReadError("normalized_digest_invalid")
+    text = _read_verified_normalized_bytes(row, expected_sha)
+    if legacy:
+        _verify_legacy_lineage(row, text, source_sha)
+    return text
+
+
+def _verified_normalized_source(row: Any) -> tuple[str, bool]:
+    source_sha = _verified_source_identity(row)
+    legacy = _verify_artifact_source_binding(row, source_sha)
+    return source_sha, legacy
+
+
+def _verified_source_identity(row: Any) -> str:
     if _field(row, "normalized_status") not in _READABLE_STATUSES:
         raise NormalizedArtifactReadError("normalized_status_unusable")
     source_id = _field(row, "primary_source_id")
@@ -140,19 +197,28 @@ def read_verified_normalized_text(row: Any) -> str:
     source_sha = _field(row, "source_sha256")
     if not _SHA256.fullmatch(source_sha):
         raise NormalizedArtifactReadError("normalized_source_sha_mismatch")
+    return source_sha
+
+
+def _verify_artifact_source_binding(row: Any, source_sha: str) -> bool:
     artifact_source_sha = _field(row, "normalized_source_sha256")
     legacy = not artifact_source_sha
     if not legacy:
         if artifact_source_sha != source_sha:
             raise NormalizedArtifactReadError("normalized_source_sha_mismatch")
-        if (
-            _field(row, "normalized_generator_name") != "source_catalog_normalizer"
-            or _field(row, "normalized_generator_version") != NORMALIZER_VERSION
-        ):
-            raise NormalizedArtifactReadError("normalized_generator_unsupported")
-    expected_sha = _field(row, "normalized_sha256")
-    if not _SHA256.fullmatch(expected_sha):
-        raise NormalizedArtifactReadError("normalized_digest_invalid")
+        _verify_supported_generator(row)
+    return legacy
+
+
+def _verify_supported_generator(row: Any) -> None:
+    if (
+        _field(row, "normalized_generator_name") != "source_catalog_normalizer"
+        or _field(row, "normalized_generator_version") != NORMALIZER_VERSION
+    ):
+        raise NormalizedArtifactReadError("normalized_generator_unsupported")
+
+
+def _read_verified_normalized_bytes(row: Any, expected_sha: str) -> str:
     path_value = _field(row, "normalized_path")
     if not path_value:
         raise NormalizedArtifactReadError("normalized_path_missing")
@@ -166,8 +232,6 @@ def read_verified_normalized_text(row: Any) -> str:
         text = data.decode("utf-8")
     except UnicodeDecodeError:
         raise NormalizedArtifactReadError("normalized_utf8_invalid") from None
-    if legacy:
-        _verify_legacy_lineage(row, text, source_sha)
     return text
 
 

@@ -471,3 +471,10 @@
 - 首次长路径 basetemp（requested path 100 chars）被 `conftest.py` 重定位到 `%TEMP%/cw-pytest-basetemp/20260927-185414-83e4572c`；测试 133 项通过但清理回执 `removed=false`。该唯一目录仍存在且当前命令返回 Access Denied；没有改 ACL 或删除其他 temp。故该次 E2E 的全局 cleanup gate **未通过**，需用户/环境 owner 清理这个 exact run-id 后才能把测试环境声明为完全恢复。
 - 为避免复现，已把 Windows basetemp 短路径规则补进 [端到端测试恢复协议](end_to_end_test_plan.md) §2。相同 133 项随后以仓库 `tmp/r4-<8 hex>` 短路径（解析后 50 chars、`relocated=false`）再次运行：**133 passed in 110.00s**，该 run-id 目录确认不存在，测试 worktree 状态前后相同。此轮直接 reader 真实字节回归仅是 B 的一个实样本子门，不等于 B.AR 四根验收、C.local filing-fetch/RF/StockWiki consumer E2E、OS 文件打开次数计数或 full-scope 位置透明通过。
 - CodeGraph 已在 company-wiki 主工作树可用，但 `data-lake-reader` linked worktree 没有 `.codegraph`；已依 AGENTS.md 向用户询问是否初始化。等待答复期间只做了已知文件定向阅读与测试，没有在该 worktree 修改代码。
+
+## Session: CWP 本地集成分支回归收尾（2026-09-27）
+
+- 在用户授权的非沙箱仓库操作下复核 `fcap`：reader、transcript-companion 与此前 selective narrative changes 均已通过本地提交并入；本地 HEAD 相对 `origin/master` 为 9 commits ahead，未 push。transcript writer 唯一冲突已按 immutable provenance 语义解决。
+- 集成后的跨分支合同修复和测试夹具改动已完成；36 个受影响测试模块共 **390 passed**。全仓 3,108 项测试曾在约 40% 时中止，不能作为全仓通过。当前剩余工作树包含 9 个产品/测试路径和本计划 task_plan 改动；本轮还需完成 findings/progress 收据、diff/Ruff/常规 commit hooks，再安全 fast-forward 本地 `master` 并把主工作树切回 `master`。不推送远端。
+- `.tmp-pytest-narrative-cap`、`.tmp-pytest-narrative-g1` 和先前一次长路径 basetemp 的访问权限问题仍是历史环境残留；本轮未改 ACL、未扩大删除范围。本轮确切 pytest 临时目录已核实并清理。
+- 此次只完成分支集成回归，不代表 R4 reader 全面位置透明、filing-fetch/RF/StockWiki 消费者 E2E、G0/G1e、Worker 或旧 46G 退役计划完成。RF 工作树保持未触碰。

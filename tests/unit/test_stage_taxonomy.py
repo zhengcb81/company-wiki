@@ -159,10 +159,14 @@ def test_stage_attribution_semantic_spots() -> None:
     assert stages_for_reason("recomputed") == ("consumer",)
     assert stages_for_reason("migration_remaining") == ("consumer",)
     assert stages_for_reason("legacy_bridge_hit") == ("consumer",)
-    # safety stage exists but currently has no registered codes.
+    # Provider-use policy now emits explicit safety-stage decisions.
     assert is_registered_stage("safety")
     attributed = {s for stages in STAGES_BY_REASON.values() for s in stages}
-    assert "safety" not in attributed
+    assert "safety" in attributed
+    assert stages_for_reason("provider_site_automation_blocked") == ("safety",)
+    assert stages_for_reason("downloaded_bytes_exceed_authorized_cap") == (
+        "acquisition", "safety",
+    )
 
 
 def test_stages_for_reason_fail_closed() -> None:

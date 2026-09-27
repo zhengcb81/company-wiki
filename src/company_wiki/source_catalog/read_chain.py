@@ -130,10 +130,14 @@ COLUMN_VALUE_HANDOFFS: dict[str, str] = {
     "migration_ledger.py::build_quality_ledger": "1",
     "normalizer.py::normalize_catalog": "1",
     "resolver.py::_metadata_conflict_reason": "1",
-    "scanner.py::_merge_document_row": "3",
+    "scanner.py::_merge_document_row": "4",
     "section_query.py::SectionQueryService.list_sections": "1",
     "service.py::SourceCatalog.query": "2",
     "service.py::SourceCatalog.query_filing_candidates": "1",
+    # SourceVersionReader uses the reporting half of the shared metadata chain
+    # so malformed metadata stays distinguishable from an empty object.
+    "source_reader.py::SourceVersionReader._verified_version": "1",
+    "source_reader.py::SourceVersionReader.describe_version": "1",
     "source_lifecycle.py::_safety_receipt": "1",
 }
 

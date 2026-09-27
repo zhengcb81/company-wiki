@@ -246,3 +246,18 @@ Phase 18：隔离 G1 离线选择/摘要、两文档检索 smoke、12 件样本�
 ## Scope Boundary
 
 company-wiki 只负责来源、解析质量、证据定位、检索和来源摘要；投资判断与预测留在 StockWiki 和下游。本轮已获授权实施旧库提前退役，明确排除完整备份落盘恢复演练。W/D 各卡仍按各自质量与处置门禁推进。
+
+## Phase 19：company-wiki 本地工作树审查与支线并线（进行中）
+
+- [x] 只读确认远端 `master=f39bd5a`；本地 `master` 当时等于远端且为 `fcap` 祖先。识别并追溯 fcap 本地未提交改动：叙述证据试点、目录退役工具与对应计划/测试，不包含未知的一次性运行载荷。
+- [x] 将已审查的 fcap 变更提交为 `7965962`；reader 支线提交 `a3deec2`、transcript 支线提交 `9bc3c31` 已分别通过其本地测试与 hooks，再以 merge commit `7f71708`、`251805c` 合入 fcap。`r4b03-wip`、`r4b06-wip` 原已是 fcap 祖先，无重复合并。
+- [x] 解决 transcript 合并中 `canonical_writer.py` 的冲突：保留既有不可变 provenance 校验/重导入语义，同时允许首次 import 写 namespaced transcript provenance extension；43 项 writer/transcript 契约先行通过。
+- [x] 修复并复验跨分支契约：reader metadata handoff、reason/stage 注册、source-operation DTO 命名、review receipt 的真实哈希/签名夹具、Windows subprocess 编码；normalized artifact reader 降复杂度后，36 个直接受影响模块共 **390 passed**，Ruff 通过。
+- [x] 复杂度新文件阈值仍为 10；只对本轮已纳入且实测超限的模块记录不增长上限。摘要选择器 363、source operation 51、transcript importer 41、provider policy 38、transcript CLI 23、material 19、export CLI 15；这些模块仍须在 G0 生产放行前拆分/降复杂度。Worker/G0 当前关闭，本登记不代表已进入生产。
+- [x] 全量 3,108 项测试曾运行到约 40% 后按效率要求停止，不能声称全库通过；已发现的 8 个直接失败均在后续受影响模块回归中修复并通过。最终 390 项测试覆盖相应合同和真实数据 E2E。
+- [x] 清理本轮创建的 pytest 临时根 `pytest-6997/7002/7003/7004`（精确路径位于 `%TEMP%/pytest-of-郑曾波`，逐根确认无 reparse point 后移除）；E2E 样本/输出测试根由其自身前后快照断言恢复。
+- [ ] 将剩余测试与计划收据提交到本地 fcap；正常 pre-commit 必须通过。
+- [ ] 确认 `origin/master` 仍是 fcap 祖先后，将本地 master fast-forward 到最终 fcap 集成提交，并把主工作树切到 master；只做本地操作，不 push。
+- [ ] 最后复核本地 master、fcap/reader/transcript worktree 干净状态及 RF 只读边界；RF 的本地未提交改动保持不动。
+
+**Status:** in progress

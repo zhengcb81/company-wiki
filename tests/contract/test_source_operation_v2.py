@@ -105,7 +105,7 @@ def test_ensure_v2_preserves_metadata_gap_without_paths_or_false_not_found(tmp_p
     payload = {
         "status": "gap",
         "request_id": "urn:req:latest",
-        "acquisition": {
+        "acquisition_result": {
             "gap_plan": {
                 "schema_version": "1.0",
                 "request_id": "urn:req:latest",
