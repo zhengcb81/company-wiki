@@ -1,6 +1,8 @@
 from __future__ import annotations
 
+import hashlib
 import re
+from pathlib import Path
 
 import pytest
 
@@ -16,8 +18,22 @@ from company_wiki.source_catalog.narrative_context import (
     ContextRules,
     build_section_context,
 )
-from company_wiki.source_catalog.narrative_document import DocumentStructure
+from company_wiki.source_catalog.narrative_document import DocumentStructure, NarrativeUnit
 from company_wiki.source_catalog.narrative_evidence import NarrativeParseResult, _make_unit
+from company_wiki.source_catalog.narrative_group_candidates import (
+    GroupCandidateRules,
+    enrich_context_groups,
+)
+from company_wiki.source_catalog.narrative_neighbors import (
+    NeighborRules,
+    enrich_neighbor_context,
+)
+from company_wiki.source_catalog.narrative_pdf_groups import (
+    PdfGroupRules,
+    build_pdf_context_groups,
+)
+from company_wiki.source_catalog.narrative_replay import prepare_pdf_replay
+from company_wiki.source_catalog.narrative_finalize import finalize_selection
 from company_wiki.source_catalog.narrative_routing import route_document
 from company_wiki.source_contract import EvidenceCoordinates, source_id_for_sha256
 
@@ -80,6 +96,94 @@ def test_route_document_keeps_explicit_budget_and_rejects_invalid_values() -> No
         route_document("2025年度报告.pdf", max_selected=0)
 
 
+def test_pdf_groups_join_visual_continuations_but_isolate_headings() -> None:
+    source_id = source_id_for_sha256("a" * 64)
+
+    def unit(text: str, paragraph: int, bbox: tuple[float, ...]) -> NarrativeUnit:
+        return _make_unit(
+            source_id=source_id,
+            parser_version="0.1.0",
+            coordinates=EvidenceCoordinates(page_number=7, paragraph_index=paragraph),
+            raw_text=text,
+            unit_kind="pdf_text_block",
+            source_role="company_filing",
+            language="zh",
+            metadata={"pdf_block": paragraph, "bbox": bbox},
+        )
+
+    heading = unit("项目建设的必要性", 0, (100.0, 50.0, 260.0, 64.0))
+    first = unit("本项目将建设新产线，", 1, (100.0, 80.0, 460.0, 94.0))
+    second = unit("并拓展海外客户。", 2, (95.0, 102.0, 460.0, 116.0))
+
+    groups = build_pdf_context_groups(
+        (heading, first, second),
+        PdfGroupRules(
+            project_heading=re.compile(r"项目建设的必要性"),
+            business_heading=re.compile(r"(?!x)x"),
+            heading_only=re.compile(r"项目建设的必要性"),
+        ),
+    )
+
+    assert [group[1] for group in groups] == [(heading,), (first, second)]
+    assert groups[1][2] == first.raw_text + second.raw_text
+
+
+def test_pdf_replay_plan_binds_hash_source_version_and_table_pages(tmp_path: Path) -> None:
+    raw = b"immutable-pdf-fixture"
+    path = tmp_path / "source.pdf"
+    path.write_bytes(raw)
+    source_sha = hashlib.sha256(raw).hexdigest()
+    source_id = source_id_for_sha256(source_sha)
+    unit = _make_unit(
+        source_id=source_id,
+        parser_version="0.1.0",
+        coordinates=EvidenceCoordinates(page_number=11, table_index=2, row_index=3),
+        raw_text="新业务已进入客户验证阶段。",
+        unit_kind="pdf_table_row",
+        source_role="company_filing",
+        language="zh",
+        metadata={},
+    )
+    span = unit.to_evidence_span(
+        topics=("new_business",),
+        selection_reasons=("specific_business_event",),
+    )
+
+    plan = prepare_pdf_replay(
+        path,
+        source_id=source_id,
+        source_sha256=source_sha,
+        evidence_spans=(span,),
+        default_parser_version="9.9.9",
+    )
+
+    assert plan.parser_version == "0.1.0"
+    assert plan.table_pages == (11,)
+
+    other_unit = _make_unit(
+        source_id=source_id,
+        parser_version="0.2.0",
+        coordinates=EvidenceCoordinates(page_number=12, paragraph_index=0),
+        raw_text="海外客户订单已开始交付。",
+        unit_kind="pdf_text_block",
+        source_role="company_filing",
+        language="zh",
+        metadata={},
+    )
+    other_span = other_unit.to_evidence_span(
+        topics=("overseas",),
+        selection_reasons=("specific_business_event",),
+    )
+    with pytest.raises(ValueError, match="one parser version"):
+        prepare_pdf_replay(
+            path,
+            source_id=source_id,
+            source_sha256=source_sha,
+            evidence_spans=(span, other_span),
+            default_parser_version="9.9.9",
+        )
+
+
 def _budget_item(
     item_id: str,
     *,
@@ -91,8 +195,9 @@ def _budget_item(
     return BudgetItem(
         item_id=item_id,
         group_id=group_id,
-        page_key=("page", str(page)),
-        locator=(page, item_id),
+        page_key=("page", page),
+        locator=f"loc:v1/page:{page}/paragraph:0",
+        order_key=(page, 0),
         reasons=reasons,
         score=score,
         is_heading=False,
@@ -132,6 +237,37 @@ def test_budget_reserves_high_value_extension_before_round_robin() -> None:
     assert len(selected_ids) == 2
 
 
+def test_reserved_budget_uses_numeric_page_order_not_locator_lexicography() -> None:
+    items = (
+        BudgetItem(
+            item_id="page-10",
+            group_id=None,
+            page_key=("page", 10),
+            locator="loc:v1/page:10/paragraph:0",
+            order_key=(10, 0),
+            reasons=("downstream_center_certification_timeline",),
+            score=5,
+            is_heading=False,
+            payload="page-10",
+        ),
+        BudgetItem(
+            item_id="page-2",
+            group_id=None,
+            page_key=("page", 2),
+            locator="loc:v1/page:2/paragraph:0",
+            order_key=(2, 0),
+            reasons=("downstream_center_certification_timeline",),
+            score=5,
+            is_heading=False,
+            payload="page-2",
+        ),
+    )
+
+    selected = select_budget_items(items, limit=1)
+
+    assert tuple(item.payload for item in selected) == ("page-2",)
+
+
 def test_budget_rejects_duplicate_ids_and_non_positive_limit() -> None:
     duplicate = _budget_item("same", page=1)
     with pytest.raises(ValueError, match="item_id values must be unique"):
@@ -159,7 +295,7 @@ def test_candidate_engine_returns_typed_reasoned_candidate() -> None:
     digest = "b" * 64
     unit = _make_unit(
         source_id=source_id_for_sha256(digest),
-        parser_version="test",
+        parser_version="0.1.0",
         coordinates=EvidenceCoordinates(page_number=1, paragraph_index=0),
         raw_text="The company launched a new overseas product platform this quarter.",
         unit_kind="pdf_text_block",
@@ -188,7 +324,7 @@ def test_candidate_engine_reports_financial_drop_without_candidate() -> None:
     digest = "c" * 64
     unit = _make_unit(
         source_id=source_id_for_sha256(digest),
-        parser_version="test",
+        parser_version="0.1.0",
         coordinates=EvidenceCoordinates(page_number=1, table_index=0, row_index=0),
         raw_text="Revenue | 100 | 120",
         unit_kind="pdf_table_row",
@@ -241,4 +377,154 @@ def test_section_context_is_bounded_by_the_next_heading() -> None:
 
     assert context.project_scores == {"body": 120}
     assert "outside" not in context.project_scores
+
+
+def test_context_group_emits_one_atomic_quantified_target() -> None:
+    digest = "e" * 64
+    source_id = source_id_for_sha256(digest)
+
+    def unit(text: str, paragraph: int):
+        return _make_unit(
+            source_id=source_id,
+            parser_version="test",
+            coordinates=EvidenceCoordinates(page_number=1, paragraph_index=paragraph),
+            raw_text=text,
+            unit_kind="pdf_text_block",
+            source_role="company_filing",
+            language="zh",
+            metadata={},
+        )
+
+    members = (unit("公司计划未来市场覆盖超", 0), unit("过60%的区域。", 1))
+    rules = GroupCandidateRules(
+        topics=lambda _text: ("core_business",),
+        quantified_market_coverage_target=re.compile(r"覆盖超过60%"),
+        window_finder=lambda _members, _pattern: ((0, 1),),
+    )
+
+    result = enrich_context_groups(
+        (("visual", members, "公司计划未来市场覆盖超过60%的区域。"),),
+        initial_candidates=(),
+        initial_group_ids={},
+        project_scores={},
+        business_scores={},
+        rules=rules,
+    )
+
+    assert len(result.candidates) == 2
+    group_ids = {result.group_ids[item.unit.unit_id] for item in result.candidates}
+    assert group_ids == {"visual:market-coverage-target:0"}
+    assert all(
+        "quantified_market_coverage_target" in item.reasons
+        for item in result.candidates
+    )
+
+
+def test_adjacent_named_product_context_is_grouped_with_event() -> None:
+    digest = "f" * 64
+    source_id = source_id_for_sha256(digest)
+
+    def unit(text: str, paragraph: int):
+        return _make_unit(
+            source_id=source_id,
+            parser_version="test",
+            coordinates=EvidenceCoordinates(page_number=1, paragraph_index=paragraph),
+            raw_text=text,
+            unit_kind="pdf_text_block",
+            source_role="company_filing",
+            language="zh",
+            metadata={},
+        )
+
+    subject = unit("新一代海外检测设备产品系列", 0)
+    event = unit("上述产品已经取得客户验证并开始批量交付。", 1)
+    initial = (
+        assess_unit(
+            event,
+            CandidateRules(
+                topics=lambda _text: ("new_business",),
+                high_value_event=re.compile(r"验证|批量交付"),
+            ),
+        ).candidate,
+    )
+    assert initial[0] is not None
+
+    result = enrich_neighbor_context(
+        (subject, event),
+        initial_candidates=(initial[0],),
+        initial_group_ids={},
+        rules=NeighborRules(
+            topics=lambda text: ("new_business",) if "产品" in text else (),
+            high_value_event=re.compile(r"验证|批量交付"),
+            named_product_context=re.compile(r"设备产品系列"),
+        ),
+    )
+
+    assert {item.unit.unit_id for item in result.candidates} == {
+        subject.unit_id,
+        event.unit_id,
+    }
+    assert result.group_ids[subject.unit_id] == result.group_ids[event.unit_id]
+
+
+def test_finalize_deduplicates_pdf_views_and_prefers_table_locator() -> None:
+    digest = "1" * 64
+    source_id = source_id_for_sha256(digest)
+    text_unit = _make_unit(
+        source_id=source_id,
+        parser_version="0.1.0",
+        coordinates=EvidenceCoordinates(page_number=1, paragraph_index=0),
+        raw_text="新产品已经取得客户验证并开始批量交付。",
+        unit_kind="pdf_text_block",
+        source_role="company_filing",
+        language="zh",
+        metadata={},
+    )
+    table_unit = _make_unit(
+        source_id=source_id,
+        parser_version="0.1.0",
+        coordinates=EvidenceCoordinates(page_number=1, table_index=0, row_index=0),
+        raw_text=text_unit.raw_text,
+        unit_kind="pdf_table_row",
+        source_role="company_filing",
+        language="zh",
+        metadata={},
+    )
+    structure = DocumentStructure(
+        source_id=source_id,
+        source_sha256=digest,
+        language="zh",
+        units=(text_unit, table_unit),
+        page_count=1,
+        pages_read=1,
+    )
+    candidates = (
+        assess_unit(
+            text_unit,
+            CandidateRules(
+                topics=lambda _text: ("products_rd",),
+                high_value_event=re.compile(r"客户验证|批量交付"),
+            ),
+        ).candidate,
+        assess_unit(
+            table_unit,
+            CandidateRules(
+                topics=lambda _text: ("products_rd",),
+                high_value_event=re.compile(r"客户验证|批量交付"),
+            ),
+        ).candidate,
+    )
+    assert all(candidate is not None for candidate in candidates)
+
+    package = finalize_selection(
+        structure,
+        route_document("2025年度报告.pdf", max_selected=1),
+        tuple(candidate for candidate in candidates if candidate is not None),
+        group_ids={},
+        heading_pattern=re.compile(r"a^"),
+        dropped_financial_count=0,
+    )
+
+    assert len(package.evidence_spans) == 1
+    assert package.evidence_spans[0].structured_value["unit_kind"] == "pdf_table_row"
 

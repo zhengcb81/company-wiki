@@ -7,8 +7,9 @@ from typing import Any, Generic, TypeVar
 
 
 PayloadT = TypeVar("PayloadT")
-Priority = tuple[int, int, tuple[int | str, ...], str]
-PageKey = tuple[str, str]
+OrderKey = tuple[int, ...]
+Priority = tuple[int, int, OrderKey, str]
+PageKey = tuple[str, int | str]
 
 _REASON_PRIORITY = (
     ("downstream_center_certification_timeline", -2),
@@ -72,7 +73,8 @@ class BudgetItem(Generic[PayloadT]):
     item_id: str
     group_id: str | None
     page_key: PageKey
-    locator: tuple[int | str, ...]
+    locator: str
+    order_key: OrderKey
     reasons: tuple[str, ...]
     score: int
     is_heading: bool
@@ -111,7 +113,7 @@ def _priority(item: BudgetItem[Any]) -> Priority:
     rank = _reason_value(frozenset(item.reasons), _REASON_PRIORITY)
     if item.is_heading:
         rank += 2
-    return (rank, -item.score, item.locator, item.item_id)
+    return (rank, -item.score, item.order_key, item.item_id)
 
 
 def _make_bundle(
@@ -144,7 +146,7 @@ def _bundle_sort_key(bundle: _Bundle[Any]) -> tuple[object, ...]:
     return (
         bundle.priority[0],
         -bundle.score,
-        first.locator,
+        first.order_key,
         first.item_id,
         bundle.key,
     )
@@ -175,10 +177,15 @@ def _page_order(by_page: dict[PageKey, list[_Bundle[PayloadT]]]) -> tuple[PageKe
         key=lambda key: (
             min(CATEGORY_ORDER.index(bundle.category) for bundle in by_page[key]),
             -max(bundle.score for bundle in by_page[key]),
-            0 if key[0] == "page" else 1,
-            key[1],
+            *_page_sort_key(key),
         ),
     ))
+
+
+def _page_sort_key(key: PageKey) -> tuple[int, int, str]:
+    if key[0] == "page" and isinstance(key[1], int):
+        return (0, key[1], "")
+    return (1, 0, str(key[1]))
 
 
 def _page_queue(bundles: list[_Bundle[PayloadT]]) -> list[_Bundle[PayloadT]]:

@@ -19,13 +19,25 @@ import unicodedata
 
 from company_wiki.source_contract import EvidenceCoordinates, EvidenceSpan
 
-from .narrative_budget import BudgetItem, select_budget_items
-from .narrative_candidates import CandidateRules, assess_unit
+from .narrative_candidates import CandidateRules, EvidenceCandidate, assess_unit
 from .narrative_context import ContextRules, build_section_context
 from .narrative_document import (
     NarrativeEvidencePackage,
     NarrativeParseResult,
     NarrativeUnit,
+)
+from .narrative_group_candidates import (
+    GroupCandidateRules,
+    enrich_context_groups,
+)
+from .narrative_finalize import finalize_selection
+from .narrative_neighbors import NeighborRules, enrich_neighbor_context
+from .narrative_pdf_groups import PdfGroupRules, build_pdf_context_groups
+from .narrative_replay import (
+    prepare_pdf_replay,
+    span_roundtrip_key as _span_roundtrip_key,
+    unit_roundtrip_key as _unit_roundtrip_key,
+    verify_replayed_pdf_spans,
 )
 from .narrative_routing import (
     classify_document_kind as _classify_document_kind,
@@ -724,7 +736,7 @@ def parse_pdf(
     reported as deferred, so the selector cannot auto-skip that document.
     """
     try:
-        import fitz
+        import fitz  # type: ignore[import-untyped]
     except ImportError as exc:  # pragma: no cover - environment-specific
         raise RuntimeError("PDF parsing requires the optional PyMuPDF dependency") from exc
 
@@ -868,22 +880,47 @@ def _consume_transcript_line(
     state: _TranscriptParseState, line_number: int, line: str
 ) -> None:
     stripped = line.strip()
-    if not stripped:
-        if state.active is not None:
-            state.active["lines"].append("")
-        return
-    if _QA_HEADING.match(stripped):
-        state.qa_mode = True
-        state.active = None
+    if _consume_transcript_control_line(state, stripped):
         return
     transition_after_line = bool(_QA_TRANSITION.search(stripped))
     name, title, body = _transcript_speaker_fields(stripped)
     if _is_transcript_speaker(name):
+        assert name is not None
         _begin_transcript_speaker(state, line_number, name, title or "", body or "")
-        if transition_after_line:
-            state.qa_mode = True
+        _enable_transcript_qa(state, transition_after_line)
         return
-    if _append_transcript_unattributed(state, line_number, line, stripped) and transition_after_line:
+    appended = _append_transcript_unattributed(state, line_number, line, stripped)
+    _enable_transcript_qa(state, appended and transition_after_line)
+
+
+def _consume_transcript_control_line(
+    state: _TranscriptParseState, stripped: str
+) -> bool:
+    if _consume_transcript_blank(state, stripped):
+        return True
+    return _consume_transcript_qa_heading(state, stripped)
+
+
+def _consume_transcript_blank(state: _TranscriptParseState, stripped: str) -> bool:
+    if stripped:
+        return False
+    if state.active is not None:
+        state.active["lines"].append("")
+    return True
+
+
+def _consume_transcript_qa_heading(
+    state: _TranscriptParseState, stripped: str
+) -> bool:
+    if _QA_HEADING.match(stripped) is None:
+        return False
+    state.qa_mode = True
+    state.active = None
+    return True
+
+
+def _enable_transcript_qa(state: _TranscriptParseState, enabled: bool) -> None:
+    if enabled:
         state.qa_mode = True
 
 
@@ -933,7 +970,8 @@ def _analyst_question_pieces(
 def _transcript_piece_group(
     block: Mapping[str, Any], pieces: Sequence[tuple[int, int, str]], question_index: int
 ) -> int | str | None:
-    parent_group = block["qa_group_id"]
+    raw_group = block["qa_group_id"]
+    parent_group = raw_group if isinstance(raw_group, (int, str)) else None
     if block["role"] == "analyst" and len(pieces) > 1 and parent_group is not None:
         return f"{parent_group}:q{question_index}"
     return parent_group
@@ -1021,35 +1059,6 @@ def parse_transcript_text(
     )
 
 
-def _roundtrip_key(
-    *, locator: str, raw_text: str, role: str, unit_kind: str
-) -> tuple[str, str, str, str]:
-    return (
-        locator,
-        hashlib.sha256(raw_text.encode("utf-8")).hexdigest(),
-        role,
-        unit_kind,
-    )
-
-
-def _unit_roundtrip_key(unit: NarrativeUnit) -> tuple[str, str, str, str]:
-    return _roundtrip_key(
-        locator=unit.coordinates.locator(),
-        raw_text=unit.raw_text,
-        role=unit.source_role,
-        unit_kind=unit.unit_kind,
-    )
-
-
-def _span_roundtrip_key(span: EvidenceSpan) -> tuple[str, str, str, str]:
-    return _roundtrip_key(
-        locator=span.coordinates.locator(),
-        raw_text=span.raw_text or "",
-        role=str(span.structured_value.get("source_role", "unknown")),
-        unit_kind=str(span.structured_value.get("unit_kind", "")),
-    )
-
-
 def verify_pdf_evidence_spans(
     path: Path,
     *,
@@ -1058,57 +1067,21 @@ def verify_pdf_evidence_spans(
     evidence_spans: Sequence[EvidenceSpan],
 ) -> tuple[tuple[str, ...], tuple[str, ...]]:
     """Re-read the hashed PDF and verify selected page/table snippets exactly."""
-    digest = hashlib.sha256()
-    with path.open("rb") as stream:
-        for chunk in iter(lambda: stream.read(1024 * 1024), b""):
-            digest.update(chunk)
-    if digest.hexdigest() != source_sha256:
-        raise ValueError("PDF changed before evidence locator round-trip")
-    if any(span.source_id != source_id for span in evidence_spans):
-        raise ValueError("evidence source_id does not match the requested PDF")
-    versions = {span.parser_version for span in evidence_spans}
-    if len(versions) > 1:
-        raise ValueError("round-trip verification requires one parser version")
-    parser_version = next(iter(versions), NARRATIVE_PARSER_VERSION)
-    table_pages = sorted(
-        {
-            span.coordinates.page_number
-            for span in evidence_spans
-            if span.coordinates.table_index is not None
-            and span.coordinates.page_number is not None
-        }
+    plan = prepare_pdf_replay(
+        path,
+        source_id=source_id,
+        source_sha256=source_sha256,
+        evidence_spans=evidence_spans,
+        default_parser_version=NARRATIVE_PARSER_VERSION,
     )
     replay = parse_pdf(
         path,
         source_id=source_id,
         source_sha256=source_sha256,
-        parser_version=parser_version,
-        table_pages=table_pages,
+        parser_version=plan.parser_version,
+        table_pages=plan.table_pages,
     )
-    available: dict[tuple[str, str, str, str], list[NarrativeUnit]] = {}
-    for unit in replay.units:
-        available.setdefault(_unit_roundtrip_key(unit), []).append(unit)
-
-    verified: list[str] = []
-    failed: list[str] = []
-    for span in evidence_spans:
-        matches = available.get(_span_roundtrip_key(span), [])
-        if not matches:
-            failed.append(span.span_id)
-            continue
-        if span.structured_value.get("unit_kind") == "pdf_table_qa_fragment":
-            expected = span.structured_value
-            if not any(
-                unit.metadata.get("cell_sha256") == expected.get("cell_sha256")
-                and unit.metadata.get("cell_fragment_start")
-                == expected.get("cell_fragment_start")
-                and unit.metadata.get("cell_fragment_end") == expected.get("cell_fragment_end")
-                for unit in matches
-            ):
-                failed.append(span.span_id)
-                continue
-        verified.append(span.span_id)
-    return tuple(verified), tuple(failed)
+    return verify_replayed_pdf_spans(evidence_spans, replay.units)
 
 
 def verify_transcript_evidence_spans(
@@ -1172,13 +1145,25 @@ def _financial_table(unit: NarrativeUnit, topics: Sequence[str]) -> bool:
     if unit.unit_kind != "pdf_table_row":
         return False
     numeric_cells, financial_label, financial_header, event_signal = _financial_row_signals(unit)
-    if numeric_cells >= 2 and not event_signal:
+    if _numeric_financial_row(numeric_cells, event_signal):
         return True
-    if not topics and (financial_label or financial_header):
+    if _unclassified_financial_row(topics, financial_label, financial_header):
         return True
-    if not financial_label or numeric_cells < 1:
+    if not financial_label:
+        return False
+    if numeric_cells < 1:
         return False
     return not _has_business_table_topics(topics)
+
+
+def _numeric_financial_row(numeric_cells: int, event_signal: bool) -> bool:
+    return numeric_cells >= 2 and not event_signal
+
+
+def _unclassified_financial_row(
+    topics: Sequence[str], financial_label: bool, financial_header: bool
+) -> bool:
+    return not topics and (financial_label or financial_header)
 
 
 def _financial_row_signals(unit: NarrativeUnit) -> tuple[int, bool, bool, bool]:
@@ -1228,13 +1213,8 @@ def _candidate_rules() -> CandidateRules:
 
 def _base_candidates(
     parsed: NarrativeParseResult,
-) -> tuple[
-    list[tuple[NarrativeUnit, tuple[str, ...], tuple[str, ...], int]],
-    int,
-]:
-    candidates: list[
-        tuple[NarrativeUnit, tuple[str, ...], tuple[str, ...], int]
-    ] = []
+) -> tuple[list[EvidenceCandidate], int]:
+    candidates: list[EvidenceCandidate] = []
     dropped_financial = 0
     rules = _candidate_rules()
     for unit in parsed.units:
@@ -1243,112 +1223,22 @@ def _base_candidates(
             dropped_financial += 1
         candidate = assessment.candidate
         if candidate is not None:
-            candidates.append(
-                (candidate.unit, candidate.topics, candidate.reasons, candidate.score)
-            )
+            candidates.append(candidate)
     return candidates, dropped_financial
 
 
 def _pdf_context_groups(
     units: Sequence[NarrativeUnit],
 ) -> tuple[tuple[str, tuple[NarrativeUnit, ...], str], ...]:
-    """Reassemble visually continuous PDF line fragments for selection only.
-
-    Evidence remains stored as independently replayable source spans. These
-    transient groups let the selector recognize a sentence split across PDF
-    text blocks without inventing a cross-block locator.
-    """
-    by_page: dict[int, list[NarrativeUnit]] = {}
-    for unit in units:
-        if unit.unit_kind != "pdf_text_block" or unit.source_role == "qa_text_shadow":
-            continue
-        page = unit.coordinates.page_number
-        if page is not None:
-            by_page.setdefault(page, []).append(unit)
-
-    result: list[tuple[str, tuple[NarrativeUnit, ...], str]] = []
-    for page, page_units in sorted(by_page.items()):
-        ordered = sorted(
-            page_units,
-            key=lambda unit: (
-                unit.coordinates.paragraph_index or 0,
-                unit.coordinates.char_start or 0,
-            ),
-        )
-        clusters: list[list[NarrativeUnit]] = []
-
-        def visual_continuation(previous: NarrativeUnit, current: NarrativeUnit) -> bool:
-            if previous.source_role != current.source_role:
-                return False
-            if (
-                _PROJECT_SECTION_HEADING.search(previous.raw_text)
-                or _BUSINESS_SECTION_HEADING.search(previous.raw_text)
-                or _HEADING_ONLY.search(previous.raw_text)
-            ):
-                return False
-            if (
-                _PROJECT_SECTION_HEADING.search(current.raw_text)
-                or _BUSINESS_SECTION_HEADING.search(current.raw_text)
-                or _HEADING_ONLY.search(current.raw_text)
-            ):
-                return False
-            previous_block = previous.metadata.get("pdf_block")
-            current_block = current.metadata.get("pdf_block")
-            if previous_block is not None and previous_block == current_block:
-                return True
-            previous_bbox = previous.metadata.get("bbox")
-            current_bbox = current.metadata.get("bbox")
-            if not (
-                isinstance(previous_bbox, Sequence)
-                and isinstance(current_bbox, Sequence)
-                and len(previous_bbox) == 4
-                and len(current_bbox) == 4
-            ):
-                return False
-            vertical_gap = float(current_bbox[1]) - float(previous_bbox[3])
-            if vertical_gap < -1.0 or vertical_gap > 16.0:
-                return False
-            horizontal_overlap = max(
-                0.0,
-                min(float(previous_bbox[2]), float(current_bbox[2]))
-                - max(float(previous_bbox[0]), float(current_bbox[0])),
-            )
-            narrower_width = min(
-                float(previous_bbox[2]) - float(previous_bbox[0]),
-                float(current_bbox[2]) - float(current_bbox[0]),
-            )
-            return narrower_width > 0 and horizontal_overlap / narrower_width >= 0.60
-
-        for unit in ordered:
-            if clusters and visual_continuation(clusters[-1][-1], unit):
-                clusters[-1].append(unit)
-            else:
-                clusters.append([unit])
-
-        for cluster in clusters:
-            members = tuple(cluster)
-            pieces: list[str] = []
-            previous: NarrativeUnit | None = None
-            for unit in members:
-                if previous is None:
-                    pieces.append(unit.raw_text)
-                else:
-                    same_block = previous.metadata.get("pdf_block") == unit.metadata.get("pdf_block")
-                    contiguous = (
-                        same_block
-                        and previous.metadata.get("block_char_end")
-                        == unit.metadata.get("block_char_start")
-                    )
-                    separator = "" if contiguous or unit.language.startswith("zh") else " "
-                    pieces.append(separator + unit.raw_text)
-                previous = unit
-            text = "".join(pieces)
-            member_key = "|".join(unit.unit_id for unit in members)
-            identity = hashlib.sha256(
-                f"{members[0].source_id}:{page}:{member_key}".encode("utf-8")
-            ).hexdigest()
-            result.append((f"urn:company-wiki:context-group:sha256:{identity}", members, text))
-    return tuple(result)
+    """Compatibility seam for tests while grouping lives in its own layer."""
+    return build_pdf_context_groups(
+        units,
+        PdfGroupRules(
+            project_heading=_PROJECT_SECTION_HEADING,
+            business_heading=_BUSINESS_SECTION_HEADING,
+            heading_only=_HEADING_ONLY,
+        ),
+    )
 
 
 def _minimal_matching_unit_windows(
@@ -1391,8 +1281,6 @@ def select_narrative_evidence(
     route = route_document(
         title, existing_kind=existing_kind, max_selected=max_selected
     )
-    document_kind = route.document_kind
-    max_selected = route.selection_limit
     candidates, dropped_financial = _base_candidates(parsed)
     selection_group_ids: dict[str, str] = {}
 
@@ -1402,7 +1290,7 @@ def select_narrative_evidence(
     # sections also supply local context for their following body paragraphs.
     pdf_groups = _pdf_context_groups(parsed.units)
     section_context = build_section_context(
-        document_kind,
+        route.document_kind,
         pdf_groups,
         ContextRules(
             project_heading=_PROJECT_SECTION_HEADING,
@@ -1410,602 +1298,64 @@ def select_narrative_evidence(
             heading_only=_HEADING_ONLY,
         ),
     )
-    project_context_group_ids = set(section_context.project_scores)
     project_context_scores = section_context.project_scores
-    business_context_group_ids = set(section_context.business_scores)
     business_context_scores = section_context.business_scores
 
-    candidate_unit_ids_before_context = {item[0].unit_id for item in candidates}
-    for group_id, members, group_text in pdf_groups:
-        topics = _topics(group_text)
-        if _PROJECT_SECTION_HEADING.search(group_text) or _BUSINESS_SECTION_HEADING.search(group_text):
-            continue
-        in_project_context = group_id in project_context_group_ids
-        in_business_context = group_id in business_context_group_ids
-        in_context = in_project_context or in_business_context
-        has_event = bool(_HIGH_VALUE_EVENT.search(group_text))
-        has_positioning = bool(_SPECIFIC_BUSINESS_POSITIONING.search(group_text))
-        has_business_risk = bool(_BUSINESS_RISK_SIGNAL.search(group_text))
-        has_direct_capacity_constraint = bool(
-            _DIRECT_CAPACITY_CONSTRAINT.search(group_text)
-        )
-        has_long_customer_qualification = bool(
-            _LONG_CUSTOMER_QUALIFICATION.search(group_text)
-        )
-        has_project_certification_timeline = bool(
-            _PROJECT_CERTIFICATION_TIMELINE.search(group_text)
-        )
-        has_quantified_market_coverage_target = bool(
-            _QUANTIFIED_MARKET_COVERAGE_TARGET.search(group_text)
-        )
-        has_permit_milestone = bool(_PERMIT_ACQUIRED_MILESTONE.search(group_text))
-        has_new_product_milestone = bool(
-            _NEW_PRODUCT_COMMERCIALIZATION.search(group_text)
-        )
-        has_project_rationale = bool(_PROJECT_RATIONALE_SIGNAL.search(group_text))
-        timeline_window_unit_ids: set[str] = set()
-        if has_project_certification_timeline:
-            # A PDF text block can contain a whole risk subsection. Keep only
-            # each certification duration sentence and a necessary short name
-            # prefix; promoting the whole block can displace specific evidence.
-            windows = _minimal_matching_unit_windows(
-                members, _PROJECT_CERTIFICATION_TIMELINE
-            )
-            expanded_windows: list[tuple[int, int]] = []
-            for start, end in windows:
-                if start > 0:
-                    prefix = members[start - 1]
-                    prefix_text = prefix.raw_text.strip()
-                    if (
-                        prefix.source_role == members[start].source_role
-                        and len(prefix_text) <= 12
-                        and not re.search(r"[。！？!?；;]$", prefix_text)
-                    ):
-                        start -= 1
-                expanded_windows.append((start, end))
-            for window_index, (start, end) in enumerate(expanded_windows):
-                timeline_group_id = f"{group_id}:certification-timeline:{window_index}"
-                window_members = members[start : end + 1]
-                window_text = "".join(unit.raw_text for unit in window_members)
-                is_downstream_center_timeline = bool(
-                    _DOWNSTREAM_CENTER_CERTIFICATION_TIMELINE.search(window_text)
-                )
-                for unit in window_members:
-                    if unit.source_role in {
-                        "analyst", "investor_question", "operator", "editorial", "qa_text_shadow"
-                    }:
-                        continue
-                    if _TABLE_OF_CONTENTS.search(unit.raw_text):
-                        continue
-                    selection_group_ids[unit.unit_id] = timeline_group_id
-                    timeline_window_unit_ids.add(unit.unit_id)
-                    existing_index = next(
-                        (
-                            index
-                            for index, candidate in enumerate(candidates)
-                            if candidate[0].unit_id == unit.unit_id
-                        ),
-                        None,
-                    )
-                    if existing_index is not None:
-                        if is_downstream_center_timeline:
-                            existing = candidates[existing_index]
-                            reasons = tuple(
-                                dict.fromkeys(
-                                    (*existing[2], "downstream_center_certification_timeline")
-                                )
-                            )
-                            candidates[existing_index] = (
-                                existing[0],
-                                existing[1],
-                                reasons,
-                                existing[3] + 2,
-                            )
-                        continue
-                    unit_topics = _topics(unit.raw_text) or topics or ("capacity_projects",)
-                    unit_reasons = [
-                        "business_narrative_signal",
-                        "project_certification_timeline",
-                        "project_plan_or_status",
-                        "pdf_visual_context_group",
-                    ]
-                    if is_downstream_center_timeline:
-                        unit_reasons.append("downstream_center_certification_timeline")
-                    if len(unit.raw_text.strip()) <= 12:
-                        unit_reasons.append("short_fragment_continuation")
-                    if unit.source_role == "management":
-                        unit_reasons.append("management_statement")
-                    candidates.append(
-                        (unit, unit_topics, tuple(unit_reasons), len(unit_topics) + 4)
-                    )
-        extension_window_unit_ids: set[str] = set()
-        has_downstream_extension = bool(
-            _DOWNSTREAM_BUSINESS_EXTENSION.search(group_text)
-        )
-        if has_downstream_extension:
-            windows = _minimal_matching_unit_windows(
-                members, _DOWNSTREAM_BUSINESS_EXTENSION
-            )
-            for window_index, (start, end) in enumerate(windows):
-                if start > 0:
-                    prefix = members[start - 1]
-                    prefix_text = prefix.raw_text.strip()
-                    if (
-                        prefix.source_role == members[start].source_role
-                        and len(prefix_text) <= 160
-                        and not re.search(r"[。！？!?；;]$", prefix_text)
-                    ):
-                        start -= 1
-                if end + 1 < len(members):
-                    final_text = members[end].raw_text.strip()
-                    continuation = members[end + 1]
-                    continuation_text = continuation.raw_text.strip()
-                    if (
-                        continuation.source_role == members[end].source_role
-                        and len(continuation_text) <= 160
-                        and not re.search(r"[。！？!?；;]$", final_text)
-                    ):
-                        end += 1
-                extension_group_id = f"{group_id}:downstream-extension:{window_index}"
-                for unit in members[start : end + 1]:
-                    if unit.source_role in {
-                        "analyst", "investor_question", "operator", "editorial", "qa_text_shadow"
-                    }:
-                        continue
-                    if _TABLE_OF_CONTENTS.search(unit.raw_text):
-                        continue
-                    selection_group_ids[unit.unit_id] = extension_group_id
-                    extension_window_unit_ids.add(unit.unit_id)
-                    existing_index = next(
-                        (
-                            index
-                            for index, candidate in enumerate(candidates)
-                            if candidate[0].unit_id == unit.unit_id
-                        ),
-                        None,
-                    )
-                    if existing_index is not None:
-                        existing = candidates[existing_index]
-                        reasons = tuple(
-                            dict.fromkeys((*existing[2], "downstream_business_extension"))
-                        )
-                        candidates[existing_index] = (
-                            existing[0],
-                            existing[1],
-                            reasons,
-                            existing[3] + 3,
-                        )
-                        continue
-                    unit_topics = _topics(unit.raw_text) or topics or ("capacity_projects",)
-                    candidates.append(
-                        (
-                            unit,
-                            unit_topics,
-                            (
-                                "business_narrative_signal",
-                                "downstream_business_extension",
-                                "project_plan_or_status",
-                                "pdf_visual_context_group",
-                            ),
-                            len(unit_topics) + 3,
-                        )
-                    )
-        market_coverage_window_unit_ids: set[str] = set()
-        if has_quantified_market_coverage_target:
-            windows = _minimal_matching_unit_windows(
-                members, _QUANTIFIED_MARKET_COVERAGE_TARGET
-            )
-            for window_index, (start, end) in enumerate(windows):
-                coverage_group_id = f"{group_id}:market-coverage-target:{window_index}"
-                for unit in members[start : end + 1]:
-                    if unit.source_role in {
-                        "analyst", "investor_question", "operator", "editorial", "qa_text_shadow"
-                    }:
-                        continue
-                    if _TABLE_OF_CONTENTS.search(unit.raw_text):
-                        continue
-                    selection_group_ids[unit.unit_id] = coverage_group_id
-                    market_coverage_window_unit_ids.add(unit.unit_id)
-                    existing_index = next(
-                        (
-                            index
-                            for index, candidate in enumerate(candidates)
-                            if candidate[0].unit_id == unit.unit_id
-                        ),
-                        None,
-                    )
-                    if existing_index is not None:
-                        existing = candidates[existing_index]
-                        reasons = tuple(
-                            dict.fromkeys((*existing[2], "quantified_market_coverage_target"))
-                        )
-                        candidates[existing_index] = (
-                            existing[0], existing[1], reasons, existing[3] + 4
-                        )
-                        continue
-                    unit_topics = _topics(unit.raw_text) or topics or ("core_business",)
-                    unit_reasons = [
-                        "business_narrative_signal",
-                        "quantified_market_coverage_target",
-                        "project_plan_or_status",
-                        "pdf_visual_context_group",
-                    ]
-                    if len(unit.raw_text.strip()) <= 12:
-                        unit_reasons.append("short_fragment_continuation")
-                    candidates.append(
-                        (unit, unit_topics, tuple(unit_reasons), len(unit_topics) + 4)
-                    )
-        has_project_certification_timeline = False
-        has_downstream_extension = False
-        has_project_signal = bool(
-            _PROJECT_PLAN.search(group_text)
-            or _STRATEGIC_PLAN.search(group_text)
-        )
-        if (
-            not topics
-            and not in_context
-            and not has_event
-            and not has_positioning
-            and not has_business_risk
-            and not has_project_rationale
-            and not has_new_product_milestone
-            and not has_project_signal
-            and not has_project_certification_timeline
-            and not has_quantified_market_coverage_target
-        ):
-            continue
-        if len(group_text) < 12 or _TABLE_OF_CONTENTS.search(group_text):
-            continue
-        if _ACCOUNTING_CONTEXT.search(group_text) or _STATIC_DEFINITION.search(group_text):
-            continue
-        has_progress = bool(_PROGRESS.search(group_text))
-        has_current_industry_signal = (
-            "industry_dynamics" in topics and bool(_RECENCY.search(group_text))
-        )
-        if not (
-            has_event
-            or has_positioning
-            or has_business_risk
-            or has_project_rationale
-            or has_new_product_milestone
-            or has_project_signal
-            or has_project_certification_timeline
-            or has_quantified_market_coverage_target
-            or (has_progress and has_current_industry_signal)
-            or in_context
-        ):
-            continue
-        if not topics:
-            if (
-                in_project_context
-                or has_project_signal
-                or has_business_risk
-                or has_quantified_market_coverage_target
-            ):
-                topics = ("capacity_projects",)
-            elif in_business_context:
-                topics = ("core_business",)
-            else:
-                topics = ("new_business",)
-        reasons = ["business_narrative_signal", "pdf_visual_context_group"]
-        if has_progress:
-            reasons.append("progress_or_change_language")
-        if has_event:
-            reasons.append("specific_business_event")
-        if has_positioning:
-            reasons.append("specific_emerging_business_positioning")
-        if has_business_risk:
-            reasons.append("business_risk_or_constraint")
-        if has_direct_capacity_constraint:
-            reasons.append("direct_capacity_constraint")
-        if has_long_customer_qualification:
-            reasons.append("long_customer_qualification_cycle")
-        if has_project_certification_timeline:
-            reasons.append("project_certification_timeline")
-        if has_quantified_market_coverage_target:
-            reasons.append("quantified_market_coverage_target")
-        if has_permit_milestone:
-            reasons.append("permit_acquired_milestone")
-        if has_new_product_milestone:
-            reasons.append("new_product_commercialization_milestone")
-        if has_project_rationale:
-            reasons.append("specific_project_rationale")
-        if has_project_signal or in_project_context:
-            reasons.append("project_plan_or_status")
-        if in_project_context:
-            reasons.append("project_section_context")
-        if in_business_context:
-            reasons.append("business_section_context")
-        if has_current_industry_signal:
-            reasons.append("current_industry_context")
-        score = (
-            8
-            + len(topics)
-            + (2 if has_progress else 0)
-            + (3 if has_event else 0)
-            + (2 if has_positioning else 0)
-            + (2 if has_business_risk else 0)
-            + (2 if has_direct_capacity_constraint else 0)
-            + (2 if has_long_customer_qualification else 0)
-            + (4 if has_project_certification_timeline else 0)
-            + (2 if has_permit_milestone else 0)
-            + (2 if has_new_product_milestone else 0)
-            + (4 if has_project_rationale else 0)
-            + (4 if has_quantified_market_coverage_target else 0)
-        )
-        if in_project_context:
-            score += project_context_scores.get(group_id, 40)
-        if in_business_context:
-            score += business_context_scores.get(group_id, 80)
-        if not in_context and any(
-            unit.unit_id in candidate_unit_ids_before_context for unit in members
-        ):
-            # Existing sentence-level candidates already carry the signal. Do
-            # not expand every such group into all of its line fragments; the
-            # context group is expanded only when selection depends on joined
-            # text that no individual member exposes.
-            continue
-        for unit in members:
-            if unit.source_role in {
-                "analyst", "investor_question", "operator", "editorial", "qa_text_shadow"
-            }:
-                continue
-            if unit.unit_id in timeline_window_unit_ids:
-                continue
-            if unit.unit_id in extension_window_unit_ids:
-                continue
-            if unit.unit_id in market_coverage_window_unit_ids:
-                continue
-            if _TABLE_OF_CONTENTS.search(unit.raw_text):
-                continue
-            page_y = unit.metadata.get("bbox")
-            if (
-                isinstance(page_y, Sequence)
-                and len(page_y) == 4
-                and (float(page_y[1]) < 60.0 or float(page_y[1]) > 750.0)
-            ):
-                continue
-            selection_group_ids[unit.unit_id] = group_id
-            member_topics = _topics(unit.raw_text) or topics
-            member_reasons = list(reasons)
-            if unit.source_role == "management":
-                member_reasons.append("management_statement")
-            candidates.append((unit, member_topics, tuple(member_reasons), score))
-
-    # Keep an immediately preceding product/new-business phrase when an event
-    # sentence starts with a connector such as “and these four products...”.
-    unit_by_location = {
-        (unit.coordinates.page_number, unit.coordinates.paragraph_index): unit
-        for unit in parsed.units
-        if unit.unit_kind == "pdf_text_block"
-    }
-    candidate_unit_ids = {item[0].unit_id for item in candidates}
-    for unit, _topics_for_event, _reasons, _score in tuple(candidates):
-        if unit.unit_kind != "pdf_text_block" or not _HIGH_VALUE_EVENT.search(unit.raw_text):
-            continue
-        page = unit.coordinates.page_number
-        paragraph = unit.coordinates.paragraph_index
-        previous = unit_by_location.get((page, paragraph - 1))
-        if (
-            previous is None
-            or previous.unit_id in candidate_unit_ids
-            or previous.source_role != unit.source_role
-            or not (
-                set(_topics(previous.raw_text)) & {"new_business", "products_rd", "core_business"}
-                or _NAMED_PRODUCT_CONTEXT.search(previous.raw_text)
-            )
-            or len(previous.raw_text) < 12
-            or _ACCOUNTING_CONTEXT.search(previous.raw_text)
-        ):
-            continue
-        current_group = selection_group_ids.get(unit.unit_id)
-        previous_group = selection_group_ids.get(previous.unit_id)
-        if current_group is not None and previous_group is not None and current_group != previous_group:
-            continue
-        has_named_product_context = bool(_NAMED_PRODUCT_CONTEXT.search(previous.raw_text))
-        adjacent_group_id = current_group or previous_group
-        if adjacent_group_id is None:
-            pair_key = "|".join(sorted((unit.unit_id, previous.unit_id)))
-            pair_sha = hashlib.sha256(
-                f"{unit.source_id}:adjacent-context:{pair_key}".encode("utf-8")
-            ).hexdigest()
-            adjacent_group_id = f"urn:company-wiki:context-group:sha256:{pair_sha}"
-        selection_group_ids[unit.unit_id] = adjacent_group_id
-        selection_group_ids[previous.unit_id] = adjacent_group_id
-        if has_named_product_context:
-            for index, item in enumerate(candidates):
-                if item[0].unit_id == unit.unit_id:
-                    reasons = tuple(
-                        dict.fromkeys((*item[2], "named_product_milestone_context"))
-                    )
-                    candidates[index] = (item[0], item[1], reasons, item[3] + 4)
-        candidates.append(
-            (
-                previous,
-                _topics(previous.raw_text),
-                (
-                    ("adjacent_subject_context", "named_product_milestone_context")
-                    if has_named_product_context
-                    else ("adjacent_subject_context",)
-                ),
-                0,
-            )
-        )
-        candidate_unit_ids.add(previous.unit_id)
-
-    # Numbered project-rationale headings can be split by the PDF parser so
-    # the final few characters land in a tiny next-paragraph unit (for
-    # example, “外协需” + “求旺盛”). Preserve that fragment with its heading
-    # instead of dropping it under the normal short-unit filter.
-    for unit, _topics_for_heading, _reasons, _score in tuple(candidates):
-        if (
-            unit.unit_kind != "pdf_text_block"
-            or not _PROJECT_RATIONALE_SIGNAL.search(unit.raw_text)
-        ):
-            continue
-        page = unit.coordinates.page_number
-        paragraph = unit.coordinates.paragraph_index
-        continuation = unit_by_location.get((page, paragraph + 1))
-        if (
-            continuation is None
-            or continuation.unit_id in candidate_unit_ids
-            or continuation.source_role != unit.source_role
-            or not 1 <= len(continuation.raw_text) < 12
-            or not re.search(r"[\u3400-\u9fffA-Za-z0-9]", continuation.raw_text)
-            or _TABLE_OF_CONTENTS.search(continuation.raw_text)
-            or _ACCOUNTING_CONTEXT.search(continuation.raw_text)
-        ):
-            continue
-        current_group = selection_group_ids.get(unit.unit_id)
-        continuation_group = selection_group_ids.get(continuation.unit_id)
-        if (
-            current_group is not None
-            and continuation_group is not None
-            and current_group != continuation_group
-        ):
-            continue
-        group_id = current_group or continuation_group
-        if group_id is None:
-            pair_key = "|".join(sorted((unit.unit_id, continuation.unit_id)))
-            pair_sha = hashlib.sha256(
-                f"{unit.source_id}:heading-continuation:{pair_key}".encode("utf-8")
-            ).hexdigest()
-            group_id = f"urn:company-wiki:context-group:sha256:{pair_sha}"
-        selection_group_ids[unit.unit_id] = group_id
-        selection_group_ids[continuation.unit_id] = group_id
-        for index, item in enumerate(candidates):
-            if item[0].unit_id == unit.unit_id:
-                reasons = tuple(
-                    dict.fromkeys((*item[2], "short_fragment_continuation"))
-                )
-                candidates[index] = (item[0], item[1], reasons, item[3])
-        candidates.append(
-            (
-                continuation,
-                _topics(continuation.raw_text),
-                ("adjacent_subject_context", "short_fragment_continuation"),
-                0,
-            )
-        )
-        candidate_unit_ids.add(continuation.unit_id)
-
-    # A selected management answer can carry its linked analyst/investor
-    # question as
-    # context. Questions remain separately role-tagged and never support facts.
-    selected_ids = {item[0].unit_id for item in candidates}
-    qa_groups = {
-        item[0].metadata.get("qa_group_id")
-        for item in candidates
-        if item[0].metadata.get("qa_group_id") is not None
-    }
-    for unit in parsed.units:
-        question_group = unit.metadata.get("qa_group_id")
-        linked = any(
-            question_group == answer_group
-            or (
-                question_group is not None
-                and answer_group is not None
-                and str(question_group).startswith(f"{answer_group}:q")
-            )
-            for answer_group in qa_groups
-        )
-        if (
-            unit.source_role in {"analyst", "investor_question"}
-            and linked
-            and unit.unit_id not in selected_ids
-        ):
-            if not (
-                _topics(unit.raw_text)
-                or _HIGH_VALUE_EVENT.search(unit.raw_text)
-                or "?" in unit.raw_text
-                or "？" in unit.raw_text
-            ):
-                continue
-            candidates.append((unit, (), ("linked_question_context",), 0))
-            selected_ids.add(unit.unit_id)
-
-    # Keep the best locator when the PDF exposes identical text in both views.
-    by_text: dict[tuple[str, int | None, str], tuple[NarrativeUnit, tuple[str, ...], tuple[str, ...], int]] = {}
-    for item in candidates:
-        unit = item[0]
-        text_key = hashlib.sha256(" ".join(unit.raw_text.split()).encode("utf-8")).hexdigest()
-        # Suppress duplicate text/table views on the same page while retaining
-        # repeated statements on different pages or by different speakers.
-        key = (text_key, unit.coordinates.page_number, unit.source_role)
-        previous = by_text.get(key)
-        if previous is None or (unit.unit_kind == "pdf_table_row" and previous[0].unit_kind != "pdf_table_row"):
-            by_text[key] = item
-    candidates = sorted(
-        by_text.values(),
-        key=lambda item: (-item[3], item[0].coordinates.locator(), item[0].unit_id),
+    enriched = enrich_context_groups(
+        pdf_groups,
+        initial_candidates=candidates,
+        initial_group_ids=selection_group_ids,
+        project_scores=project_context_scores,
+        business_scores=business_context_scores,
+        rules=GroupCandidateRules(
+            topics=_topics,
+            window_finder=_minimal_matching_unit_windows,
+            project_heading=_PROJECT_SECTION_HEADING,
+            business_heading=_BUSINESS_SECTION_HEADING,
+            high_value_event=_HIGH_VALUE_EVENT,
+            positioning=_SPECIFIC_BUSINESS_POSITIONING,
+            business_risk=_BUSINESS_RISK_SIGNAL,
+            direct_capacity_constraint=_DIRECT_CAPACITY_CONSTRAINT,
+            long_customer_qualification=_LONG_CUSTOMER_QUALIFICATION,
+            project_certification_timeline=_PROJECT_CERTIFICATION_TIMELINE,
+            quantified_market_coverage_target=_QUANTIFIED_MARKET_COVERAGE_TARGET,
+            permit_milestone=_PERMIT_ACQUIRED_MILESTONE,
+            new_product_milestone=_NEW_PRODUCT_COMMERCIALIZATION,
+            project_rationale=_PROJECT_RATIONALE_SIGNAL,
+            downstream_extension=_DOWNSTREAM_BUSINESS_EXTENSION,
+            project_plan=_PROJECT_PLAN,
+            strategic_plan=_STRATEGIC_PLAN,
+            table_of_contents=_TABLE_OF_CONTENTS,
+            accounting_context=_ACCOUNTING_CONTEXT,
+            static_definition=_STATIC_DEFINITION,
+            progress=_PROGRESS,
+            recency=_RECENCY,
+            downstream_center_timeline=_DOWNSTREAM_CENTER_CERTIFICATION_TIMELINE,
+        ),
     )
-    budget_items = tuple(
-        BudgetItem(
-            item_id=item[0].unit_id,
-            group_id=selection_group_ids.get(item[0].unit_id),
-            page_key=(
-                ("page", str(item[0].coordinates.page_number))
-                if item[0].coordinates.page_number is not None
-                else (
-                    "locator",
-                    json.dumps(item[0].coordinates.locator(), sort_keys=True),
-                )
-            ),
-            locator=item[0].coordinates.locator(),
-            reasons=item[2],
-            score=item[3],
-            is_heading=bool(_HEADING_ONLY.search(item[0].raw_text)),
-            payload=item,
-        )
-        for item in candidates
-    )
-    kept = [
-        budget_item.payload
-        for budget_item in select_budget_items(budget_items, limit=max_selected)
-    ]
-    omitted = max(0, len(candidates) - len(kept))
-    kept.sort(key=lambda item: (item[0].coordinates.locator(), item[0].unit_id))
-    spans = tuple(
-        unit.to_evidence_span(
-            topics=topics,
-            selection_reasons=reasons,
-            selection_group_id=selection_group_ids.get(unit.unit_id),
-        )
-        for unit, topics, reasons, _score in kept
-    )
+    candidates = list(enriched.candidates)
+    selection_group_ids = dict(enriched.group_ids)
 
-    if spans:
-        if any("locator_unstable" in span.quality_flags for span in spans):
-            status: Literal[
-                "selected",
-                "partial",
-                "skipped_no_narrative",
-                "needs_review",
-                "blocked",
-            ] = "needs_review"
-        else:
-            status = "selected" if parsed.coverage_complete and omitted == 0 else "partial"
-    elif parsed.errors:
-        status = "blocked"
-    elif not parsed.coverage_complete:
-        status = "needs_review"
-    elif route.empty_result_may_skip:
-        status = "skipped_no_narrative"
-    else:
-        status = "needs_review"
-
-    return NarrativeEvidencePackage(
-        source_id=parsed.source_id,
-        source_sha256=parsed.source_sha256,
-        document_kind=document_kind,
-        status=status,
-        evidence_spans=spans,
-        selection_limit=max_selected,
-        candidate_count=len(candidates),
+    neighbors = enrich_neighbor_context(
+        parsed.units,
+        initial_candidates=candidates,
+        initial_group_ids=selection_group_ids,
+        rules=NeighborRules(
+            topics=_topics,
+            high_value_event=_HIGH_VALUE_EVENT,
+            named_product_context=_NAMED_PRODUCT_CONTEXT,
+            accounting_context=_ACCOUNTING_CONTEXT,
+            project_rationale=_PROJECT_RATIONALE_SIGNAL,
+            table_of_contents=_TABLE_OF_CONTENTS,
+        ),
+    )
+    return finalize_selection(
+        parsed,
+        route,
+        neighbors.candidates,
+        group_ids=neighbors.group_ids,
+        heading_pattern=_HEADING_ONLY,
         dropped_financial_count=dropped_financial,
-        source_units=len(parsed.units),
-        omitted_candidate_count=omitted,
-        coverage_complete=parsed.coverage_complete,
     )
 
 

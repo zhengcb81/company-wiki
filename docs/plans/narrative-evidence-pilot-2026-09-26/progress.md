@@ -519,3 +519,13 @@
 - `narrative_evidence` 保留兼容 facade；parse result 是 `DocumentStructure` 的同一类型，现有导入无需双轨对象转换。基础候选、章节上下文和预算已经改为调用新层；原件、catalog、Worker 和消费者未接线。
 - 新架构红测分别以缺模块失败后转绿。当前合并回归为 **66 passed**（架构、selector、retrieval、复杂度）；五个新模块 strict mypy 和 Ruff 通过，新文件复杂度均不高于 10。
 - `narrative_evidence.py` 的最大 custom complexity 从 363 降至 220；M2 尚未完成，仍须拆 PDF context enrichment、相邻/问答补充、locator replay，以及 12 件样本/空间 E2E，故不下调最终 gate、不宣称可投产。
+
+## Session: Phase C / M2-derive 大节点完成（2026-09-28）
+
+- 延续 TDD 拆分，新增 `narrative_group_candidates`、`narrative_neighbors`、`narrative_finalize`、`narrative_pdf_groups` 与 `narrative_replay`。候选组扩展、相邻上下文、去重/预算/封装、PDF 视觉连续组和版本绑定 locator 回放分别归属独立层；`narrative_evidence` 只保留解析兼容面与编排。
+- 新增数值坐标排序合同。真实 P06 E2E 首次进入业务断言后发现：预算层曾按 locator 字符串排序，使 `page:161` 排在 `page:3` 前，重复披露保留了后出现位置，导致第 3 页锚点缺失。先加入红测复现 `page:10` 错排在 `page:2` 前，再为 `BudgetItem` 增加显式 `order_key`，locator 只负责回放；真实锚点恢复。
+- Windows 默认 pytest 临时路径叠加中文用户名和长 PDF 文件名，首次 E2E 在复制测试夹具前触发路径长度错误；测试 `finally` 已清理。随后统一使用经 `Resolve-Path` 和 `C:\cwt\` containment 校验的短 run root，两个 E2E **2 passed in 102.93s**，结束后精确目录不存在。
+- 12 件真实样本覆盖年报、半年报、季报、IPO 招股书、定增/可转债募集说明书、两类投资者关系文件、两份低价值格式文档和两份英文电话会 TXT：业务锚点失败 0，locator 回放 **1,289/1,289**，2 个低价值文档生成跳过收据，原件只读复制且测试树恢复。
+- 空间实测：12 件原件合计 **52,196,853 bytes**；selected evidence bundle **549,768 bytes**，为原件的 **1.0533%**。两个跳过文档的 summary input 分别仅 326/331 bytes；没有默认持久化全量 spans。该比例是样本逻辑字节，不含未来数据库索引和文件系统 allocation rounding。
+- `narrative_evidence.py` 的最大 custom complexity 已由 363 降至 **10**，从 `FROZEN_MAX` 删除；11 个叙述模块全部纳入 CI/pre-commit mypy。大节点门：相关单元/检索/复杂度 **72 passed**，CI 同款 25 模块 mypy、全范围 Ruff、config doctor、pre-commit config 与 diff check 全绿。
+- Phase 边界只读复核 RF：本地 `fcap=ee0a82bfd`、`origin/main=3a69f9c5b`，既有 planning/assurance dirty 与一次性目录仍在；本项目未写入、清理或切换 RF。下一步只进入 Phase D provider/transcript adapter，不启动 Worker，不删除原件。

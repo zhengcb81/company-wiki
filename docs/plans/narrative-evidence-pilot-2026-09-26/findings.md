@@ -302,3 +302,12 @@
 - provider unavailable 的稳定事实是布尔状态；底层 exception 字符串可能包含命令、路径和进程细节。公开 pathless DTO 不携带 `provider_reason`，详细诊断留在 producer/journal 边界。
 - 测试目录“恢复原样”应比较持久内容与成员关系。SQLite `-shm` 的 mtime 会因只读连接活动变化，mtime 不是业务状态；文件内容 SHA、大小、路径集合和 raw SHA 才是本节点应验证的不变量。
 - M1 的 115 项门覆盖同 SHA 跨 root 回退、错误 SHA 拒绝、版本/导出合同和两个 fake-provider gap 分支。该结果只验收 L1–L3 与 operation/read adapter，不外推到叙述选择、电话会议、Worker、跨仓消费者或 46 GiB 清理。
+
+## 2026-09-28 — M2-derive 实施后的架构与空间结论
+
+- locator 是稳定回放标识，不能兼任业务排序键。`loc:v1/page:161/...` 的字典序早于 `loc:v1/page:3/...`，会改变重复披露的保留位置。预算策略必须显式接收数值 `order_key`；测试同时覆盖两位数页码反例和 P06 真实文档。
+- 真实 E2E 表明 P06 的“预计需要 4-9 个月”在物理第 3 页和第 161 页重复出现。选择任一处都能回放事实，但既定样本要求首个关键上下文位置；修复后保留第 3 页。该失败属于重构引入的排序语义漂移，不是放宽测试即可解决的夹具问题。
+- 视觉分组只在内存中帮助识别跨块句子；持久证据仍是一组各自可回放的 span，并由 `selection_group_id` 保持原子性。PDF table/text 双视图去重优先保留表定位；回放计划绑定原件 SHA、source ID、单一 parser version 和必要 table pages。
+- 12 件真实资料的 52,196,853 bytes 原件只产生 549,768 bytes selected bundle，实测比率 1.0533%。大型 PDF 的逐件比率约为 0.59%–2.02%，季报因原件很短为 4.77%，两份 TXT 电话会因原件本身较小为 16.83%/23.73%；这说明应按文档类型分别设上限，不能用一个百分比误判短文本。
+- P09 投资者关系管理办法和 P10 业绩说明会通知完整扫描后分别只保存 326/331 bytes 跳过收据，验证“低价值格式文档判断后不切片”可显著降低长期派生空间。原件仍保留，未来策略变化可重算。
+- 当前 Phase C 证明的是确定性 parse→select→summary-input→retrieval/replay 链。它没有证明真实 provider 权利、电话会 fetch/import、LLM 摘要语义质量、Worker 并发、跨仓 consumer 或 46 GiB 生产派生清理；这些仍按 Phase D–G 大节点验收。

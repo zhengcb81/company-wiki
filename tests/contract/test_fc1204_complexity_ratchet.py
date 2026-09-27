@@ -68,9 +68,6 @@ FROZEN_MAX = {
     "migration.py": 23,
     "migration_ledger.py": 21,
     "models.py": 18,
-    # G1 pilot selector is currently a large, rule-dense pipeline. Freeze its
-    # measured baseline until the planned selector decomposition; never let it grow.
-    "narrative_evidence.py": 363,
     "normalized_meta.py": 5,
     "normalizer.py": 47,
     "observability.py": 6,
