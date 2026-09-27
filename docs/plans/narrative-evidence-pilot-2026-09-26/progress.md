@@ -512,3 +512,10 @@
 - 跨 root/版本/导出验收：SourceVersionReader 24 passed；export/location/r4b07 33 passed。M1 合并门覆盖 operation、CLI、gap/acquisition、read chain、复杂度、reader、export、位置切换和版本合同，共 **115 passed in 38.25s**。
 - 静态门：修改文件 Ruff 通过；三个新边界模块 strict mypy 通过；`source_operation.py` 从复杂度冻结表移除；`git diff --check` 通过。所有 pytest 使用 `%TEMP%/cw-m1-*` 独立根并清理，没有写生产 raw、catalog、Worker、RF 或其他仓库。
 - 测试校正：SQLite 可在只读打开期间改变 `-shm` mtime，因此快照改为目录成员 + 文件大小/内容 SHA，不再把运行时 mtime 当持久数据变化；provider unavailable 红测最初要求公开异常字符串，经合同审查后改为明确禁止公开。
+
+## Session: Phase C / M2 叙述证据分层重构，节点 1（2026-09-27）
+
+- 按 TDD 先增加架构测试，再新增五个小模块：`narrative_document` 持有 `DocumentStructure`/unit/package，`narrative_routing` 持有文档类型、默认预算和空结果策略，`narrative_candidates` 负责单 unit typed assessment，`narrative_context` 负责招股/再融资章节边界，`narrative_budget` 负责原子组与跨页预算。
+- `narrative_evidence` 保留兼容 facade；parse result 是 `DocumentStructure` 的同一类型，现有导入无需双轨对象转换。基础候选、章节上下文和预算已经改为调用新层；原件、catalog、Worker 和消费者未接线。
+- 新架构红测分别以缺模块失败后转绿。当前合并回归为 **66 passed**（架构、selector、retrieval、复杂度）；五个新模块 strict mypy 和 Ruff 通过，新文件复杂度均不高于 10。
+- `narrative_evidence.py` 的最大 custom complexity 从 363 降至 220；M2 尚未完成，仍须拆 PDF context enrichment、相邻/问答补充、locator replay，以及 12 件样本/空间 E2E，故不下调最终 gate、不宣称可投产。

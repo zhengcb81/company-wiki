@@ -14,19 +14,29 @@ import hashlib
 import json
 from pathlib import Path
 import re
-from types import MappingProxyType
 from typing import Any, Literal
 import unicodedata
 
-from company_wiki.source_contract import EvidenceCoordinates, EvidenceSpan, ParseStatus
+from company_wiki.source_contract import EvidenceCoordinates, EvidenceSpan
+
+from .narrative_budget import BudgetItem, select_budget_items
+from .narrative_candidates import CandidateRules, assess_unit
+from .narrative_context import ContextRules, build_section_context
+from .narrative_document import (
+    NarrativeEvidencePackage,
+    NarrativeParseResult,
+    NarrativeUnit,
+)
+from .narrative_routing import (
+    classify_document_kind as _classify_document_kind,
+    route_document,
+)
 
 
 NARRATIVE_PARSER_NAME = "selective_narrative_parser"
 NARRATIVE_PARSER_VERSION = "0.1.0"
 NARRATIVE_SELECTOR_NAME = "select_narrative_evidence"
 NARRATIVE_SELECTOR_VERSION = "0.1.0"
-_DEFAULT_MAX_SELECTED = 160
-_PROSPECTUS_MAX_SELECTED = 320
 _FINANCIAL_TERMS = re.compile(
     r"资产负债表|利润表|现金流量表|每股收益|归母净利润|营业收入|营业成本|"
     r"货币资金|应收账款|存货|固定资产|加权平均|基本每股|稀释每股|"
@@ -256,182 +266,6 @@ _EDITORIAL = re.compile(
     r"forward-looking statements|copyright|motley fool",
     re.IGNORECASE,
 )
-
-
-@dataclass(frozen=True)
-class NarrativeUnit:
-    """One transient text block or table row with a replayable source locator."""
-
-    unit_id: str
-    source_id: str
-    parser_name: str
-    parser_version: str
-    coordinates: EvidenceCoordinates
-    raw_text: str
-    unit_kind: str
-    source_role: str
-    language: str
-    quality_flags: tuple[str, ...] = ()
-    metadata: Mapping[str, Any] = field(default_factory=dict)
-
-    def __post_init__(self) -> None:
-        if not self.raw_text or self.raw_text != self.raw_text.strip():
-            raise ValueError("narrative unit text must be non-empty and trimmed")
-        if unicodedata.normalize("NFC", self.raw_text) != self.raw_text:
-            raise ValueError("narrative unit text must use NFC")
-        if not self.unit_id.startswith("urn:company-wiki:narrative-unit:sha256:"):
-            raise ValueError("unit_id must be a canonical narrative-unit SHA-256")
-        if not isinstance(self.coordinates, EvidenceCoordinates):
-            raise TypeError("coordinates must be EvidenceCoordinates")
-        # Copy so callers cannot mutate source context after a unit is hashed.
-        object.__setattr__(self, "metadata", MappingProxyType(dict(self.metadata)))
-
-    @property
-    def text_sha256(self) -> str:
-        return hashlib.sha256(self.raw_text.encode("utf-8")).hexdigest()
-
-    def to_evidence_span(
-        self,
-        *,
-        topics: Sequence[str],
-        selection_reasons: Sequence[str],
-        selection_group_id: str | None = None,
-    ) -> EvidenceSpan:
-        structured = dict(self.metadata)
-        structured.update(
-            {
-                "language": self.language,
-                "selection_reasons": list(selection_reasons),
-                "source_role": self.source_role,
-                "text_sha256": self.text_sha256,
-                "topics": list(topics),
-                "unit_kind": self.unit_kind,
-            }
-        )
-        if selection_group_id is not None:
-            structured["selection_group_id"] = selection_group_id
-        return EvidenceSpan.create(
-            source_id=self.source_id,
-            coordinates=self.coordinates,
-            raw_text=self.raw_text,
-            structured_value=structured,
-            parser_name=self.parser_name,
-            parser_version=self.parser_version,
-            parse_status=ParseStatus.PARSED,
-            quality_flags=self.quality_flags,
-        )
-
-
-@dataclass(frozen=True)
-class NarrativeParseResult:
-    source_id: str
-    source_sha256: str
-    language: str
-    units: tuple[NarrativeUnit, ...]
-    page_count: int = 0
-    pages_read: int = 0
-    opaque_pages: tuple[int, ...] = ()
-    table_scan_pages: tuple[int, ...] = ()
-    deferred_table_pages: tuple[int, ...] = ()
-    line_count: int = 0
-    errors: tuple[str, ...] = ()
-
-    @property
-    def coverage_complete(self) -> bool:
-        if self.errors or self.opaque_pages or self.deferred_table_pages:
-            return False
-        if self.page_count:
-            return self.pages_read == self.page_count
-        return self.line_count > 0
-
-
-@dataclass(frozen=True)
-class NarrativeEvidencePackage:
-    source_id: str
-    source_sha256: str
-    document_kind: str
-    status: Literal["selected", "partial", "skipped_no_narrative", "needs_review", "blocked"]
-    evidence_spans: tuple[EvidenceSpan, ...]
-    selection_limit: int
-    candidate_count: int
-    dropped_financial_count: int
-    source_units: int
-    omitted_candidate_count: int
-    coverage_complete: bool
-
-    @property
-    def selected_text_bytes(self) -> int:
-        return sum(len((span.raw_text or "").encode("utf-8")) for span in self.evidence_spans)
-
-    def summary_input(self) -> dict[str, Any]:
-        """Return selected evidence only; the full document is never included."""
-        grouped: dict[str, list[EvidenceSpan]] = {}
-        for span in self.evidence_spans:
-            group_id = span.structured_value.get("selection_group_id")
-            key = str(group_id) if group_id is not None else span.span_id
-            grouped.setdefault(key, []).append(span)
-
-        evidence: list[dict[str, Any]] = []
-        for group_id, members in grouped.items():
-            members.sort(
-                key=lambda span: (
-                    span.coordinates.page_number or 0,
-                    span.coordinates.paragraph_index or 0,
-                    span.coordinates.table_index or 0,
-                    span.coordinates.row_index or 0,
-                    span.coordinates.column_index or 0,
-                )
-            )
-            member_ids = [span.span_id for span in members]
-            member_texts = [span.raw_text or "" for span in members]
-            language = str(members[0].structured_value.get("language", "zh"))
-            separator = " " if language.startswith("en") else ""
-            raw_text = separator.join(member_texts)
-            topics = sorted(
-                {
-                    str(topic)
-                    for span in members
-                    for topic in span.structured_value.get("topics", ())
-                }
-            )
-            reasons = sorted(
-                {
-                    str(reason)
-                    for span in members
-                    for reason in span.structured_value.get("selection_reasons", ())
-                }
-            )
-            quality_flags = sorted(
-                {flag for span in members for flag in span.quality_flags}
-            )
-            row: dict[str, Any] = {
-                "evidence_ids": member_ids,
-                "locators": [span.locator for span in members],
-                "source_role": members[0].structured_value.get("source_role", "unknown"),
-                "topics": topics,
-                "selection_reasons": reasons,
-                "raw_text_sha256": hashlib.sha256(raw_text.encode("utf-8")).hexdigest(),
-                "raw_text": raw_text,
-                "quality_flags": quality_flags,
-                "parser_name": members[0].parser_name,
-                "parser_version": members[0].parser_version,
-            }
-            if len(members) == 1:
-                row["evidence_id"] = members[0].span_id
-                row["locator"] = members[0].locator
-            else:
-                row["context_group_id"] = group_id
-                row["context_member_count"] = len(members)
-            evidence.append(row)
-
-        return {
-            "schema_version": "narrative-summary-input/0.2.0",
-            "source_id": self.source_id,
-            "source_sha256": self.source_sha256,
-            "document_kind": self.document_kind,
-            "summary_scope": "selected_evidence_only",
-            "evidence": evidence,
-        }
 
 
 @dataclass(frozen=True)
@@ -1310,24 +1144,8 @@ def verify_transcript_evidence_spans(
 
 
 def classify_document_kind(title: str, existing_kind: str = "unknown") -> str:
-    # Order is significant: offering documents outrank a generic prospectus,
-    # and a half-year report outranks the broader annual-report expression.
-    patterns = (
-        (r"可转换公司债券|可转债", "convertible_bond_prospectus"),
-        (r"向特定对象发行股票|定向增发|增发新股|非公开发行股票", "equity_offering_prospectus"),
-        (r"投资者关系管理办法|投资者关系管理制度", "ir_policy"),
-        (r"关于召开.*(?:业绩说明会|投资者说明会)|会议通知", "meeting_notice"),
-        (r"招股说明书", "prospectus"),
-        (r"半年度报告|半年报", "semi_annual_report"),
-        (r"年度报告|年报", "annual_report"),
-        (r"季度报告|季报", "quarterly_report"),
-        (r"投资者关系|活动记录", "investor_relations"),
-        (r"earnings_call|transcript", "investor_call_transcript"),
-    )
-    for pattern, kind in patterns:
-        if re.search(pattern, title.casefold()):
-            return kind
-    return existing_kind
+    """Compatibility facade for the document-routing layer."""
+    return _classify_document_kind(title, existing_kind)
 
 
 def _topics(text: str) -> tuple[str, ...]:
@@ -1381,6 +1199,54 @@ def _numeric_financial_cells(cells: Sequence[Any]) -> int:
 
 def _has_business_table_topics(topics: Sequence[str]) -> bool:
     return any(topic in topics for topic in ("products_rd", "capacity_projects"))
+
+
+def _candidate_rules() -> CandidateRules:
+    return CandidateRules(
+        topics=_topics,
+        financial_table=_financial_table,
+        high_value_event=_HIGH_VALUE_EVENT,
+        project_plan=_PROJECT_PLAN,
+        strategic_plan=_STRATEGIC_PLAN,
+        downstream_extension=_DOWNSTREAM_BUSINESS_EXTENSION,
+        positioning=_SPECIFIC_BUSINESS_POSITIONING,
+        business_risk=_BUSINESS_RISK_SIGNAL,
+        project_rationale=_PROJECT_RATIONALE_SIGNAL,
+        progress=_PROGRESS,
+        direct_capacity_constraint=_DIRECT_CAPACITY_CONSTRAINT,
+        long_customer_qualification=_LONG_CUSTOMER_QUALIFICATION,
+        project_certification_timeline=_PROJECT_CERTIFICATION_TIMELINE,
+        permit_milestone=_PERMIT_ACQUIRED_MILESTONE,
+        new_product_milestone=_NEW_PRODUCT_COMMERCIALIZATION,
+        recency=_RECENCY,
+        table_of_contents=_TABLE_OF_CONTENTS,
+        accounting_context=_ACCOUNTING_CONTEXT,
+        heading_only=_HEADING_ONLY,
+        static_definition=_STATIC_DEFINITION,
+    )
+
+
+def _base_candidates(
+    parsed: NarrativeParseResult,
+) -> tuple[
+    list[tuple[NarrativeUnit, tuple[str, ...], tuple[str, ...], int]],
+    int,
+]:
+    candidates: list[
+        tuple[NarrativeUnit, tuple[str, ...], tuple[str, ...], int]
+    ] = []
+    dropped_financial = 0
+    rules = _candidate_rules()
+    for unit in parsed.units:
+        assessment = assess_unit(unit, rules)
+        if assessment.dropped_financial:
+            dropped_financial += 1
+        candidate = assessment.candidate
+        if candidate is not None:
+            candidates.append(
+                (candidate.unit, candidate.topics, candidate.reasons, candidate.score)
+            )
+    return candidates, dropped_financial
 
 
 def _pdf_context_groups(
@@ -1522,210 +1388,32 @@ def select_narrative_evidence(
     max_selected: int | None = None,
 ) -> NarrativeEvidencePackage:
     """Select compact narrative spans; incomplete scans can never auto-skip."""
-    document_kind = classify_document_kind(title, existing_kind)
-    if max_selected is None:
-        max_selected = (
-            _PROSPECTUS_MAX_SELECTED
-            if document_kind
-            in {"prospectus", "convertible_bond_prospectus", "equity_offering_prospectus"}
-            else _DEFAULT_MAX_SELECTED
-        )
-    if max_selected < 1:
-        raise ValueError("max_selected must be positive")
-    candidates: list[tuple[NarrativeUnit, tuple[str, ...], tuple[str, ...], int]] = []
+    route = route_document(
+        title, existing_kind=existing_kind, max_selected=max_selected
+    )
+    document_kind = route.document_kind
+    max_selected = route.selection_limit
+    candidates, dropped_financial = _base_candidates(parsed)
     selection_group_ids: dict[str, str] = {}
-    dropped_financial = 0
-    for unit in parsed.units:
-        if unit.source_role in {
-            "analyst", "investor_question", "operator", "editorial", "qa_text_shadow"
-        }:
-            continue
-        topics = _topics(unit.raw_text)
-        if _financial_table(unit, topics):
-            dropped_financial += 1
-            continue
-        unit_event_signal = bool(_HIGH_VALUE_EVENT.search(unit.raw_text))
-        unit_project_rationale_signal = bool(_PROJECT_RATIONALE_SIGNAL.search(unit.raw_text))
-        unit_project_signal = bool(
-            _PROJECT_PLAN.search(unit.raw_text)
-            or _STRATEGIC_PLAN.search(unit.raw_text)
-            or _DOWNSTREAM_BUSINESS_EXTENSION.search(unit.raw_text)
-        )
-        unit_positioning_signal = bool(_SPECIFIC_BUSINESS_POSITIONING.search(unit.raw_text))
-        unit_risk_signal = bool(_BUSINESS_RISK_SIGNAL.search(unit.raw_text))
-        if not topics and not unit_event_signal and not unit_project_signal and not (
-            unit_positioning_signal or unit_risk_signal or unit_project_rationale_signal
-        ):
-            continue
-        if not topics:
-            topics = (
-                ("new_business",)
-                if unit_event_signal or unit_positioning_signal
-                else ("capacity_projects",)
-            )
-        if len(unit.raw_text) < 12 or _TABLE_OF_CONTENTS.search(unit.raw_text):
-            continue
-        if _ACCOUNTING_CONTEXT.search(unit.raw_text) or _HEADING_ONLY.search(unit.raw_text):
-            continue
-        has_progress = bool(_PROGRESS.search(unit.raw_text))
-        has_event = bool(_HIGH_VALUE_EVENT.search(unit.raw_text))
-        has_positioning = bool(_SPECIFIC_BUSINESS_POSITIONING.search(unit.raw_text))
-        has_business_risk = bool(_BUSINESS_RISK_SIGNAL.search(unit.raw_text))
-        has_direct_capacity_constraint = bool(
-            _DIRECT_CAPACITY_CONSTRAINT.search(unit.raw_text)
-        )
-        has_long_customer_qualification = bool(
-            _LONG_CUSTOMER_QUALIFICATION.search(unit.raw_text)
-        )
-        has_project_certification_timeline = bool(
-            _PROJECT_CERTIFICATION_TIMELINE.search(unit.raw_text)
-        )
-        has_permit_milestone = bool(_PERMIT_ACQUIRED_MILESTONE.search(unit.raw_text))
-        has_new_product_milestone = bool(
-            _NEW_PRODUCT_COMMERCIALIZATION.search(unit.raw_text)
-        )
-        has_project_rationale = bool(_PROJECT_RATIONALE_SIGNAL.search(unit.raw_text))
-        has_downstream_extension = bool(
-            _DOWNSTREAM_BUSINESS_EXTENSION.search(unit.raw_text)
-        )
-        has_current_industry_signal = (
-            "industry_dynamics" in topics and bool(_RECENCY.search(unit.raw_text))
-        )
-        has_project_signal = bool(
-            _PROJECT_PLAN.search(unit.raw_text)
-            or _STRATEGIC_PLAN.search(unit.raw_text)
-            or has_project_certification_timeline
-        )
-        # Topic words alone are too broad (for example, a static list of
-        # products or generic R&D language). Require evidence of a change,
-        # project, or current industry development before selecting a unit.
-        if not (
-            has_event
-            or has_project_signal
-            or has_positioning
-            or has_business_risk
-            or has_project_rationale
-            or has_project_certification_timeline
-            or (has_progress and has_current_industry_signal)
-        ):
-            continue
-        if _STATIC_DEFINITION.search(unit.raw_text):
-            continue
-        reasons = ["business_narrative_signal"]
-        if has_progress:
-            reasons.append("progress_or_change_language")
-        if has_event:
-            reasons.append("specific_business_event")
-        if has_positioning:
-            reasons.append("specific_emerging_business_positioning")
-        if has_business_risk:
-            reasons.append("business_risk_or_constraint")
-        if has_direct_capacity_constraint:
-            reasons.append("direct_capacity_constraint")
-        if has_long_customer_qualification:
-            reasons.append("long_customer_qualification_cycle")
-        if has_project_certification_timeline:
-            reasons.append("project_certification_timeline")
-        if has_permit_milestone:
-            reasons.append("permit_acquired_milestone")
-        if has_new_product_milestone:
-            reasons.append("new_product_commercialization_milestone")
-        if has_project_rationale:
-            reasons.append("specific_project_rationale")
-        if has_downstream_extension:
-            reasons.append("downstream_business_extension")
-        if has_project_signal:
-            reasons.append("project_plan_or_status")
-        if has_current_industry_signal:
-            reasons.append("current_industry_context")
-        if unit.source_role == "management":
-            reasons.append("management_statement")
-        score = (
-            len(topics)
-            + (2 if has_progress else 0)
-            + (3 if has_event else 0)
-            + (2 if has_positioning else 0)
-            + (2 if has_business_risk else 0)
-            + (2 if has_direct_capacity_constraint else 0)
-            + (2 if has_long_customer_qualification else 0)
-            + (4 if has_project_certification_timeline else 0)
-            + (2 if has_permit_milestone else 0)
-            + (2 if has_new_product_milestone else 0)
-            + (4 if has_project_rationale else 0)
-            + (3 if has_downstream_extension else 0)
-        )
-        if unit.unit_kind == "pdf_table_row":
-            score += 1
-        candidates.append((unit, topics, tuple(reasons), score))
 
     # PDF layout extraction often separates one logical sentence into several
     # adjacent text blocks. Evaluate those fragments together, then retain the
     # original locators as a grouped set of evidence spans. Prospectus project
     # sections also supply local context for their following body paragraphs.
     pdf_groups = _pdf_context_groups(parsed.units)
-    project_context_group_ids: set[str] = set()
-    project_context_scores: dict[str, int] = {}
-    business_context_group_ids: set[str] = set()
-    business_context_scores: dict[str, int] = {}
-    if document_kind in {
-        "convertible_bond_prospectus",
-        "equity_offering_prospectus",
-    }:
-        groups_by_page: dict[int, list[tuple[str, tuple[NarrativeUnit, ...], str]]] = {}
-        for group in pdf_groups:
-            page = group[1][0].coordinates.page_number
-            if page is not None:
-                groups_by_page.setdefault(page, []).append(group)
-        for page_groups in groups_by_page.values():
-            active_project_context = False
-            remaining_context_chars = 0
-            active_context_score = 0
-            for group_id, _members, group_text in page_groups:
-                if _PROJECT_SECTION_HEADING.search(group_text):
-                    active_project_context = True
-                    remaining_context_chars = 1_600
-                    active_context_score = 120 if re.search(
-                        r"项目建设.{0,8}必要性|项目建设必要性", group_text
-                    ) else 80
-                    continue
-                if active_project_context and _HEADING_ONLY.search(group_text):
-                    active_project_context = False
-                    remaining_context_chars = 0
-                    active_context_score = 0
-                    continue
-                if active_project_context:
-                    if remaining_context_chars <= 0:
-                        active_project_context = False
-                        continue
-                    project_context_group_ids.add(group_id)
-                    project_context_scores[group_id] = active_context_score
-                    remaining_context_chars -= len(group_text)
-
-    if document_kind == "prospectus":
-        groups_by_page = {}
-        for group in pdf_groups:
-            page = group[1][0].coordinates.page_number
-            if page is not None:
-                groups_by_page.setdefault(page, []).append(group)
-        for page_groups in groups_by_page.values():
-            active_business_context = False
-            remaining_context_chars = 0
-            for group_id, _members, group_text in page_groups:
-                if _BUSINESS_SECTION_HEADING.search(group_text):
-                    active_business_context = True
-                    remaining_context_chars = 1_200
-                    continue
-                if active_business_context and _HEADING_ONLY.search(group_text):
-                    active_business_context = False
-                    remaining_context_chars = 0
-                    continue
-                if active_business_context:
-                    if remaining_context_chars <= 0:
-                        active_business_context = False
-                        continue
-                    business_context_group_ids.add(group_id)
-                    business_context_scores[group_id] = 140
-                    remaining_context_chars -= len(group_text)
+    section_context = build_section_context(
+        document_kind,
+        pdf_groups,
+        ContextRules(
+            project_heading=_PROJECT_SECTION_HEADING,
+            business_heading=_BUSINESS_SECTION_HEADING,
+            heading_only=_HEADING_ONLY,
+        ),
+    )
+    project_context_group_ids = set(section_context.project_scores)
+    project_context_scores = section_context.project_scores
+    business_context_group_ids = set(section_context.business_scores)
+    business_context_scores = section_context.business_scores
 
     candidate_unit_ids_before_context = {item[0].unit_id for item in candidates}
     for group_id, members, group_text in pdf_groups:
@@ -2251,234 +1939,30 @@ def select_narrative_evidence(
         by_text.values(),
         key=lambda item: (-item[3], item[0].coordinates.locator(), item[0].unit_id),
     )
-    if len(candidates) > max_selected:
-        # A long document may contain more high-scoring spans than the budget.
-        # Treat each visual context group as one indivisible selection unit:
-        # selecting only some line fragments can make a sentence misleading,
-        # while appending the rest after the budget is reached violates the
-        # caller's hard storage limit.
-        def budget_priority(
-            item: tuple[NarrativeUnit, tuple[str, ...], tuple[str, ...], int]
-        ) -> tuple[int, int, tuple[int | str, ...], str]:
-            reasons = set(item[2])
-            if reasons & {
-                "direct_capacity_constraint",
-                "long_customer_qualification_cycle",
-            }:
-                priority = -1
-            elif "downstream_business_extension" in reasons:
-                priority = -1
-            elif "downstream_center_certification_timeline" in reasons:
-                priority = -2
-            elif "quantified_market_coverage_target" in reasons:
-                priority = -1
-            elif "project_certification_timeline" in reasons:
-                priority = 0
-            elif "named_product_milestone_context" in reasons:
-                priority = -1
-            elif "permit_acquired_milestone" in reasons:
-                priority = 0
-            elif "new_product_commercialization_milestone" in reasons:
-                priority = 0
-            elif "business_risk_or_constraint" in reasons:
-                priority = 1
-            elif "specific_project_rationale" in reasons:
-                priority = 2
-            elif "specific_business_event" in reasons:
-                priority = 3
-            elif "specific_emerging_business_positioning" in reasons:
-                priority = 4
-            elif "project_plan_or_status" in reasons:
-                priority = 5
-            elif "current_industry_context" in reasons:
-                priority = 6
-            else:
-                priority = 7
-            if _HEADING_ONLY.search(item[0].raw_text):
-                priority += 2
-            return (
-                priority,
-                -item[3],
-                item[0].coordinates.locator(),
-                item[0].unit_id,
-            )
-
-        category_order = (
-            "critical_risk", "business_extension", "market_coverage_target", "milestone", "project_timeline",
-            "named_product_milestone", "product_milestone",
-            "risk", "rationale", "event", "positioning", "project", "industry", "other"
-        )
-
-        def item_category(
-            item: tuple[NarrativeUnit, tuple[str, ...], tuple[str, ...], int]
-        ) -> str:
-            reasons = set(item[2])
-            if reasons & {
-                "direct_capacity_constraint",
-                "long_customer_qualification_cycle",
-            }:
-                return "critical_risk"
-            if "downstream_business_extension" in reasons:
-                return "business_extension"
-            if "quantified_market_coverage_target" in reasons:
-                return "market_coverage_target"
-            if "permit_acquired_milestone" in reasons:
-                return "milestone"
-            if "project_certification_timeline" in reasons:
-                return "project_timeline"
-            if "named_product_milestone_context" in reasons:
-                return "named_product_milestone"
-            if "new_product_commercialization_milestone" in reasons:
-                return "product_milestone"
-            if "business_risk_or_constraint" in reasons:
-                return "risk"
-            if "specific_project_rationale" in reasons:
-                return "rationale"
-            if "specific_business_event" in reasons:
-                return "event"
-            if "specific_emerging_business_positioning" in reasons:
-                return "positioning"
-            if "project_plan_or_status" in reasons:
-                return "project"
-            if "current_industry_context" in reasons:
-                return "industry"
-            return "other"
-
-        # Build atomic bundles after text deduplication so the budget is
-        # measured in the exact spans that will be emitted.
-        bundles_by_key: dict[str, dict[str, Any]] = {}
-        for item in candidates:
-            unit = item[0]
-            group_id = selection_group_ids.get(unit.unit_id)
-            bundle_key = group_id or f"unit:{unit.unit_id}"
-            bundle = bundles_by_key.setdefault(bundle_key, {"items": [], "group_id": group_id})
-            bundle["items"].append(item)
-
-        bundles: list[dict[str, Any]] = []
-        for bundle_key, bundle in bundles_by_key.items():
-            bundle_items = sorted(bundle["items"], key=budget_priority)
-            first = bundle_items[0]
-            page_number = first[0].coordinates.page_number
-            page_key = (
-                ("page", str(page_number))
-                if page_number is not None
-                else ("locator", json.dumps(first[0].coordinates.locator(), sort_keys=True))
-            )
-            categories = {item_category(item) for item in bundle_items}
-            category = min(categories, key=category_order.index)
-            bundles.append(
-                {
-                    "key": bundle_key,
-                    "items": bundle_items,
-                    "group_id": bundle["group_id"],
-                    "page_key": page_key,
-                    "category": category,
-                    "priority": min(budget_priority(item) for item in bundle_items),
-                    "score": max(item[3] for item in bundle_items),
-                }
-            )
-
-        reserved_bundles: list[dict[str, Any]] = []
-        reserved_bundle_keys: set[str] = set()
-        for required_reason in (
-            "downstream_center_certification_timeline",
-            "downstream_business_extension",
-        ):
-            options = [
-                bundle
-                for bundle in bundles
-                if bundle["key"] not in reserved_bundle_keys
-                and any(
-                    required_reason in item[2]
-                    for item in bundle["items"]
+    budget_items = tuple(
+        BudgetItem(
+            item_id=item[0].unit_id,
+            group_id=selection_group_ids.get(item[0].unit_id),
+            page_key=(
+                ("page", str(item[0].coordinates.page_number))
+                if item[0].coordinates.page_number is not None
+                else (
+                    "locator",
+                    json.dumps(item[0].coordinates.locator(), sort_keys=True),
                 )
-            ]
-            options.sort(
-                key=lambda bundle: (
-                    bundle["priority"][0],
-                    -bundle["score"],
-                    bundle["items"][0][0].coordinates.page_number or 0,
-                    bundle["items"][0][0].coordinates.paragraph_index or 0,
-                    bundle["items"][0][0].unit_id,
-                    bundle["key"],
-                )
-            )
-            if options:
-                candidate = options[0]
-                if (
-                    sum(len(bundle["items"]) for bundle in reserved_bundles)
-                    + len(candidate["items"])
-                    <= max_selected
-                ):
-                    reserved_bundles.append(candidate)
-                    reserved_bundle_keys.add(candidate["key"])
-
-        by_page: dict[tuple[str, str], list[dict[str, Any]]] = {}
-        for bundle in bundles:
-            if bundle["key"] not in reserved_bundle_keys:
-                by_page.setdefault(bundle["page_key"], []).append(bundle)
-        page_order = sorted(
-            by_page,
-            key=lambda key: (
-                min(category_order.index(bundle["category"]) for bundle in by_page[key]),
-                -max(bundle["score"] for bundle in by_page[key]),
-                0 if key[0] == "page" else 1,
-                key[1],
             ),
+            locator=item[0].coordinates.locator(),
+            reasons=item[2],
+            score=item[3],
+            is_heading=bool(_HEADING_ONLY.search(item[0].raw_text)),
+            payload=item,
         )
-        page_bundles: dict[tuple[str, str], list[dict[str, Any]]] = {}
-        for page_key, page_items in by_page.items():
-            # On each page, preserve one span from each available evidence
-            # class before spending the remaining slots on another span of a
-            # class already represented. A single risk-plus-event passage is
-            # treated as risk first; a separate product milestone can then
-            # remain available beside it.
-            buckets: dict[str, list[dict[str, Any]]] = {name: [] for name in category_order}
-            for bundle in page_items:
-                buckets[bundle["category"]].append(bundle)
-            for values in buckets.values():
-                values.sort(
-                    key=lambda bundle: (
-                        bundle["priority"],
-                        len(bundle["items"]),
-                        bundle["key"],
-                    )
-                )
-            staged = [
-                values[0]
-                for values in buckets.values()
-                if values
-            ]
-            staged_keys = {bundle["key"] for bundle in staged}
-            remainder = [bundle for bundle in page_items if bundle["key"] not in staged_keys]
-            remainder.sort(
-                key=lambda bundle: (
-                    category_order.index(bundle["category"]),
-                    bundle["priority"],
-                    len(bundle["items"]),
-                    bundle["key"],
-                )
-            )
-            page_bundles[page_key] = [*staged, *remainder]
-
-        kept = [
-            item
-            for bundle in reserved_bundles
-            for item in bundle["items"]
-        ]
-        if page_bundles:
-            for rank in range(max(len(items) for items in page_bundles.values())):
-                for page_key in page_order:
-                    page_items = page_bundles.get(page_key, [])
-                    if rank < len(page_items):
-                        bundle = page_items[rank]
-                        bundle_cost = len(bundle["items"])
-                        if len(kept) + bundle_cost <= max_selected:
-                            kept.extend(bundle["items"])
-                        # Oversized bundles are skipped whole. Later smaller
-                        # bundles can still use the remaining budget.
-    else:
-        kept = candidates[:max_selected]
+        for item in candidates
+    )
+    kept = [
+        budget_item.payload
+        for budget_item in select_budget_items(budget_items, limit=max_selected)
+    ]
     omitted = max(0, len(candidates) - len(kept))
     kept.sort(key=lambda item: (item[0].coordinates.locator(), item[0].unit_id))
     spans = tuple(
@@ -2492,14 +1976,20 @@ def select_narrative_evidence(
 
     if spans:
         if any("locator_unstable" in span.quality_flags for span in spans):
-            status: Literal["selected", "partial", "skipped_no_narrative", "needs_review", "blocked"] = "needs_review"
+            status: Literal[
+                "selected",
+                "partial",
+                "skipped_no_narrative",
+                "needs_review",
+                "blocked",
+            ] = "needs_review"
         else:
             status = "selected" if parsed.coverage_complete and omitted == 0 else "partial"
     elif parsed.errors:
         status = "blocked"
     elif not parsed.coverage_complete:
         status = "needs_review"
-    elif document_kind in {"ir_policy", "meeting_notice"}:
+    elif route.empty_result_may_skip:
         status = "skipped_no_narrative"
     else:
         status = "needs_review"
