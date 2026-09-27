@@ -1,12 +1,10 @@
 """Auditable, source-only LLM summaries for normalized catalog documents.
 
-GP-003 (D-2) LLM exit gate: the external LLM only ever sees documents that
-(a) carry a valid prompt-injection review receipt bound to the CURRENT
-source bytes (json receipt in documents.metadata_json; source_sha256 must
-equal sources.content_sha256 — no receipt / mismatched receipt fail
-closed) and (b) have NO active location under a ``private_user`` root
-(review authorizes absence of injection, never exfiltration of private
-content; privacy gate dominates).
+GP-003 (D-2) LLM exit gate: the external LLM only sees documents carrying
+a valid prompt-injection review receipt bound to the CURRENT source bytes
+(json receipt in documents.metadata_json; source_sha256 must equal
+sources.content_sha256 — no receipt / mismatched receipt fail closed).
+Every active source location must still belong to a currently configured root.
 
 Scope note: this batch gate checks receipt presence + status + byte
 binding.  Freshness (reviewed_at TTL) and ruleset binding (policy_hash)
@@ -33,6 +31,10 @@ import yaml
 from .admission import processing_priority_sql
 from .artifact_handle import ARTIFACT_HANDLE_SCHEMA_VERSION
 from .models import CatalogConfig, ProcessingReport, SUMMARIZER_VERSION
+from .normalized_artifact_reader import (
+    preferred_normalized_artifact_predicate,
+    read_verified_normalized_text,
+)
 from .prompt_injection import (
     PROMPT_INJECTION_REVIEW_KEY,
     PROMPT_INJECTION_REVIEW_SCHEMA_VERSION,
@@ -41,8 +43,6 @@ from .prompt_injection import (
 from .store import CatalogStore, canonical_json
 from .llm_failure_policy import is_permanent_llm_summary_error
 
-
-_PRIVATE_PRIVACY_CLASS = "private_user"
 
 # GP-003 receipt-gate constants: the review receipt lives under this key in
 # documents.metadata_json; allowed statuses come from the taxonomy enum.
@@ -318,27 +318,10 @@ def _validate_summary_limits(
 
 def _llm_exit_gate_roots(
     config: CatalogConfig,
-) -> tuple[str, tuple[str, ...]] | None:
-    """GP-003 privacy gate: (root placeholders, public root ids) for the
-    LLM exit selection — None when every root is private_user (fail
-    closed: no document may reach the external LLM).
-
-    Allowlist rule: a root feeds the LLM unless it EXPLICITLY declares
-    privacy_class='private_user'.  Unknown/future vocabulary values stay
-    selectable on purpose: the 3.x loader forces the closed vocabulary
-    (company kind -> public, external -> private_user), while 2.x/legacy
-    configs carry no privacy field and must keep their historical
-    summarizable behavior until GP-007 upgrades the production config.
-    """
-    public_root_ids = tuple(
-        str(root.root_id)
-        for root in config.roots
-        if str(getattr(root, "privacy_class", "public") or "public")
-        != _PRIVATE_PRIVACY_CLASS
-    )
-    if not public_root_ids:
-        return None
-    return ",".join("?" for _ in public_root_ids), public_root_ids
+) -> tuple[str, tuple[str, ...]]:
+    """Return current configured root IDs for the LLM source-scope check."""
+    root_ids = tuple(str(root.root_id) for root in config.roots)
+    return ",".join("?" for _ in root_ids), root_ids
 
 
 def summarize_catalog_with_llm(
@@ -358,14 +341,17 @@ def summarize_catalog_with_llm(
         max_output_tokens=max_output_tokens,
         retry_backoff_seconds=retry_backoff_seconds,
     )
-    gate = _llm_exit_gate_roots(config)
-    if gate is None:
-        return LLMSummaryReport("summarize_llm", skipped=0)
-    allowed_root_sql, public_root_ids = gate
+    allowed_root_sql, configured_root_ids = _llm_exit_gate_roots(config)
     batch_time = time.time()
     rows = store.fetchall(
         f"""SELECT d.*,a.path AS normalized_path,a.status AS normalized_status,
-        a.content_sha256 AS normalized_sha256,s.content_sha256 AS source_sha256,
+        a.content_sha256 AS normalized_sha256,
+        a.source_id AS normalized_source_id,
+        a.source_sha256 AS normalized_source_sha256,
+        a.generator_name AS normalized_generator_name,
+        a.generator_version AS normalized_generator_version,
+        a.metadata_json AS normalized_metadata_json,
+        s.content_sha256 AS source_sha256,
         (SELECT l.absolute_path FROM locations l
          WHERE l.document_id=d.document_id AND l.location_status='active'
          ORDER BY CASE WHEN l.role='original_primary' THEN 0 ELSE 1 END,l.relative_path
@@ -373,6 +359,7 @@ def summarize_catalog_with_llm(
         FROM documents d JOIN artifacts a ON a.document_id=d.document_id
         JOIN sources s ON s.source_id=d.primary_source_id
         WHERE a.artifact_role='normalized'
+        AND {preferred_normalized_artifact_predicate('a')}
         AND NOT EXISTS (
             SELECT 1 FROM artifacts existing
             WHERE existing.document_id=d.document_id
@@ -396,11 +383,11 @@ def summarize_catalog_with_llm(
             IN ({_REVIEW_STATUS_SQL})
         AND json_extract(d.metadata_json, '$.{PROMPT_INJECTION_REVIEW_KEY}.source_sha256')
             = s.content_sha256
-        AND NOT EXISTS (
-            SELECT 1 FROM locations private_loc
-            WHERE private_loc.document_id=d.document_id
-            AND private_loc.location_status='active'
-            AND private_loc.root_id NOT IN ({allowed_root_sql})
+        AND EXISTS (
+            SELECT 1 FROM locations configured_loc
+            WHERE configured_loc.document_id=d.document_id
+            AND configured_loc.location_status='active'
+            AND configured_loc.root_id IN ({allowed_root_sql})
         )
         ORDER BY {processing_priority_sql('d')}, d.document_id LIMIT ?""",
         (
@@ -410,7 +397,7 @@ def summarize_catalog_with_llm(
             batch_time,
             PROMPT_INJECTION_REVIEW_SCHEMA_VERSION,
             *_REVIEW_STATUSES,
-            *public_root_ids,
+            *configured_root_ids,
             limit,
         ),
     )
@@ -433,7 +420,7 @@ def summarize_catalog_with_llm(
             )
         try:
             normalized_path = Path(row["normalized_path"])
-            markdown = normalized_path.read_text(encoding="utf-8")
+            markdown = read_verified_normalized_text(row)
             body = _body(markdown)
             input_truncated = len(body) > max_input_chars
             if input_truncated:

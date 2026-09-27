@@ -1,10 +1,9 @@
 """ZR-401 gate tests: RootPolicy 3.0 strict loader + snapshot export.
 
-3.0 removes implicit permission expansion:
+3.0 validates source-root shape:
 - schema_version MUST be "3.0"; an N-1 1.x/2.x config is rejected with a
   migration hint (never silently upgraded);
-- privacy_class is REQUIRED per root (no default): external roots
-  (kind != company_raw) must be private_user; company_raw must be public;
+- privacy_class is a legacy informational label, not an access rule;
 - external roots can never be a canonical write target;
 - unknown root fields fail closed;
 - reusable external roots must be read_only.
@@ -93,20 +92,17 @@ def test_nn1_rejects_1x_and_2x_schema(tmp_path) -> None:
             _load3x(tmp_path, text)
 
 
-# --- privacy_class: no implicit permission expansion --------------------
+# --- legacy privacy labels do not control access -------------------------
 
 
-def test_3x_missing_privacy_class_fails(tmp_path) -> None:
+def test_3x_missing_privacy_class_uses_compatible_default(tmp_path) -> None:
     text = _config_text("root_a").replace('    privacy_class: "private_user"\n', "")
-    with pytest.raises(CatalogConfigError, match="privacy_class"):
-        _load3x(tmp_path, text)
+    assert _load3x(tmp_path, text).roots[0].privacy_class == "public"
 
 
-def test_3x_external_root_public_fails(tmp_path) -> None:
-    """An external root declared public is a config error — no implicit
-    public for private data."""
-    with pytest.raises(CatalogConfigError, match="private_user"):
-        _load3x(tmp_path, _config_text("root_a", privacy_class='"public"'))
+def test_3x_external_root_public_loads(tmp_path) -> None:
+    cfg = _load3x(tmp_path, _config_text("root_a", privacy_class='"public"'))
+    assert cfg.roots[0].privacy_class == "public"
 
 
 def test_3x_company_raw_public_loads(tmp_path) -> None:
@@ -124,19 +120,16 @@ def test_3x_company_raw_public_loads(tmp_path) -> None:
     assert cfg.roots[0].privacy_class == "public"
 
 
-def test_3x_company_raw_private_fails(tmp_path) -> None:
-    """company_raw declared private is a config error (inverted)."""
-    with pytest.raises(CatalogConfigError, match="public"):
-        _load3x(
-            tmp_path,
-            _config_text(
-                "company_raw",
-                kind='"company_raw"',
-                privacy_class='"private_user"',
-                canonical_write_target='"/tmp/companies"',
-                read_only="false",
-            ),
-        )
+def test_3x_company_raw_legacy_private_label_loads(tmp_path) -> None:
+    cfg = _load3x(
+        tmp_path,
+        _config_text(
+            "company_raw", kind='"company_raw"',
+            privacy_class='"private_user"',
+            canonical_write_target='"/tmp/companies"', read_only="false",
+        ),
+    )
+    assert cfg.roots[0].privacy_class == "private_user"
 
 
 # --- external write target / unknown fields / read_only ----------------
@@ -185,7 +178,7 @@ def test_export_3x_snapshot_privacy_redacted_and_deterministic(tmp_path) -> None
     assert root["privacy_class"] == "private_user"
 
 
-def test_export_3x_hash_changes_when_privacy_changes(tmp_path) -> None:
+def test_export_3x_hash_changes_when_write_target_changes(tmp_path) -> None:
     public_cfg = _load3x(
         tmp_path,
         _config_text(

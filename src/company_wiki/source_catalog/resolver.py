@@ -441,10 +441,14 @@ def _read_verified_bytes(
     *,
     expected_sha256: str,
     budget: _ReadBudget | None,
+    retain_bytes: bool = True,
+    expected_byte_size: int | None = None,
 ) -> tuple[bytes | None, str, str, str]:
-    """B03 rules R1-R4/R6: read the file ONCE and digest exactly what is
-    returned.
+    """B03 rules R1-R4/R6: read once and verify the exact source version.
 
+    A streaming caller sets ``retain_bytes=False`` and receives ``None`` for
+    data on success; the empty status still distinguishes it from refusal.
+    The same size, mtime, hydration, budget and digest checks serve both modes.
     Returns ``(data, "", "", digest)`` on success, else
     ``(None, status, reason, detail)``.  Every refusal happens BEFORE any byte
     is handed out, and none of them is a status value of its own (see the error
@@ -465,12 +469,14 @@ def _read_verified_bytes(
     size = int(before.st_size)
     if size > _CANDIDATE_BYTES_CAP:
         return None, B03_ERROR_UNAVAILABLE, "exceeds_candidate_cap", str(size)
+    if expected_byte_size is not None and size != expected_byte_size:
+        return None, B03_ERROR_UNAVAILABLE, "byte_size_mismatch", str(size)
     if budget is not None:
         stop = budget.take_candidate() or budget.charge(size)
         if stop:
             return None, B03_ERROR_UNAVAILABLE, stop, str(size)
     digest = hashlib.sha256()
-    chunks: list[bytes] = []
+    chunks: list[bytes] | None = [] if retain_bytes else None
     read = 0
     try:
         with path.open("rb") as handle:
@@ -483,7 +489,8 @@ def _read_verified_bytes(
                 if not chunk:
                     break
                 digest.update(chunk)
-                chunks.append(chunk)
+                if chunks is not None:
+                    chunks.append(chunk)
                 read += len(chunk)
                 if read > _CANDIDATE_BYTES_CAP:
                     # Grew past the ceiling while reading: stop and refuse.
@@ -513,7 +520,7 @@ def _read_verified_bytes(
     if not expected_sha256 or computed != expected_sha256:
         # "Another revision" is not this version: no handle, no bytes.
         return None, B03_ERROR_UNAVAILABLE, "content_sha256_mismatch", computed[:12]
-    return b"".join(chunks), "", "", computed
+    return (b"".join(chunks) if chunks is not None else None), "", "", computed
 
 
 def _is_rejections_path(relative_path: Any) -> bool:

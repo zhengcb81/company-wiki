@@ -155,12 +155,18 @@ def _fetchall(catalog, sql: str, params: tuple = ()):
 def _receipt(catalog, document_id: str) -> None:
     con = sqlite3.connect(f"file:{catalog.config.database_path}?mode=rw", uri=True)
     try:
+        evidence_payload = "This is ordinary annual-report source text."
         record_prompt_injection_review(
             con,
             document_id,
             status="not_detected",
             reviewer="r4b05-test",
-            evidence_sha256="a" * 64,
+            evidence_sha256=hashlib.sha256(
+                evidence_payload.encode("utf-8")
+            ).hexdigest(),
+            evidence_payload=evidence_payload,
+            source_sha256=DIGEST,
+            policy_hash="b" * 64,
             now="2026-09-12T00:00:00Z",
         )
         con.commit()

@@ -65,58 +65,30 @@ def diagnose(
                 f"no security_master/*.json under {config.catalog_dir} "
                 "(filing-fetch identity lookups will fail)"
             )
-    _cross_repo_checks(config, root, problems, filing_fetch_config)
+    _cross_repo_checks(config, problems, filing_fetch_config)
     return problems
 
 
 def _cross_repo_checks(
     config,
-    root: Path,
     problems: list[str],
     filing_fetch_config: Path | None,
 ) -> None:
-    """E2E-F03: cross-repo config drift must fail fast at doctor time.
+    """Check root path shape and the optional filing-fetch config contract.
 
-    1. kind=directory roots must be EXACTLY {dropbox_stock} (a second
-       directory root would silently gain reuse rights).
-    2. FC-501 (CONFIG-DBX-03/04): filing-fetch holds NO independent root
-       allowance (allowed_handle_roots is rejected by its config schema);
-       the Dropbox root's single source of truth is this
-       source_catalog.yaml.  The doctor verifies the wiki side only.
+    Root IDs and physical locations are configuration, not an allowlist in
+    Python.  The config loader already rejects duplicate IDs and invalid path
+    tokens; an existing path that is a file cannot serve as a scan root.
     """
-    directory_roots = {
-        str(r.root_id) for r in config.roots if r.kind == "directory"
-    }
-    # Zero directory roots is fine (no Dropbox configured); if any exist they
-    # must be a subset of the allowlist (a second directory root would silently
-    # gain reuse rights under kind-level authorization).  ``future_lake`` is
-    # read-only and explicitly ``reusable_for_filing``.
-    _ALLOWED_DIRECTORY_ROOTS = {"dropbox_stock", "future_lake"}
-    if directory_roots and not directory_roots.issubset(_ALLOWED_DIRECTORY_ROOTS):
-        problems.append(
-            f"kind=directory roots must be a subset of {_ALLOWED_DIRECTORY_ROOTS}, "
-            f"got {sorted(directory_roots)}"
-        )
-    dropbox_wiki = next(
-        (r for r in config.roots if r.root_id == "dropbox_stock"), None
-    )
-    if dropbox_wiki is not None:
-        # CONFIG-DBX-04: the Dropbox root's single source of truth is this
-        # source_catalog.yaml — the path must point at Dropbox/Stock.
+    for configured_root in config.roots:
         try:
-            import os
-
-            profile = os.environ.get("USERPROFILE") or str(Path.home())
-            wiki_path = str(dropbox_wiki.path).replace("${USER_PROFILE}", profile)
-            resolved = Path(wiki_path).resolve()
-            if resolved.name != "Stock" or "Dropbox" not in str(resolved):
+            if configured_root.path.exists() and not configured_root.path.is_dir():
                 problems.append(
-                    f"dropbox_stock path does not point at Dropbox/Stock: {wiki_path}"
+                    f"root {configured_root.root_id} path is not a directory: "
+                    f"{configured_root.path}"
                 )
-        except Exception as exc:  # noqa: BLE001 - report every failure mode
-            problems.append(f"dropbox path check failed: {exc}")
-    # Zero directory roots / no dropbox_stock is fine (no Dropbox configured);
-    # the filing-fetch cross-repo check below must still run.
+        except OSError as exc:
+            problems.append(f"root {configured_root.root_id} path check failed: {exc}")
     if filing_fetch_config is None:
         # FC-1202: no implicit sibling-directory lookup — the cross-repo
         # check runs only when the caller passes an explicit path (the

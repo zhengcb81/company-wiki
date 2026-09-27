@@ -52,6 +52,11 @@ from .source_export import (
     SourceExportConflictError,
     SourceExportError,
 )
+from .source_export_v2 import (
+    SOURCE_EXPORT_V2_SCHEMA_VERSION,
+    SOURCE_MANIFEST_V2_SCHEMA_VERSION,
+    SourceExportBundleV2,
+)
 from .source_manifest import (
     SOURCE_MANIFEST_SCHEMA_VERSION,
     ImmutableStatus,
@@ -76,6 +81,8 @@ __all__ = [
     "SOURCE_MANIFEST_SCHEMA_VERSION",
     "SOURCE_EXPORT_ID_PREFIX",
     "SOURCE_EXPORT_SCHEMA_VERSION",
+    "SOURCE_EXPORT_V2_SCHEMA_VERSION",
+    "SOURCE_MANIFEST_V2_SCHEMA_VERSION",
     "DEFAULT_MAX_BYTES",
     "OFFICIAL_EXCHANGE_DOMAINS",
     "AnnouncementCollectionError",
@@ -97,6 +104,7 @@ __all__ = [
     "SourceManifestMismatchError",
     "SourceType",
     "SourceExportBundle",
+    "SourceExportBundleV2",
     "SourceExportConflictError",
     "SourceExportError",
     "SourceContractCompatibilityError",

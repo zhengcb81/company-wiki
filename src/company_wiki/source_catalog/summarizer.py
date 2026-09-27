@@ -13,6 +13,11 @@ import yaml
 from .admission import processing_priority_sql
 from .artifact_handle import ARTIFACT_HANDLE_SCHEMA_VERSION
 from .models import CatalogConfig, ProcessingReport, SUMMARIZER_VERSION
+from .normalized_artifact_reader import (
+    NormalizedArtifactReadError,
+    preferred_normalized_artifact_predicate,
+    read_verified_normalized_text,
+)
 from .store import CatalogStore, canonical_json
 
 
@@ -141,11 +146,18 @@ def summarize_catalog(
 ) -> ProcessingReport:
     if limit is not None and limit <= 0:
         raise ValueError("limit must be positive")
-    sql = """SELECT d.*,a.path AS normalized_path,a.status AS normalized_status,
-        a.content_sha256 AS normalized_sha256,s.content_sha256 AS source_sha256
+    sql = f"""SELECT d.*,a.path AS normalized_path,a.status AS normalized_status,
+        a.content_sha256 AS normalized_sha256,
+        a.source_id AS normalized_source_id,
+        a.source_sha256 AS normalized_source_sha256,
+        a.generator_name AS normalized_generator_name,
+        a.generator_version AS normalized_generator_version,
+        a.metadata_json AS normalized_metadata_json,
+        s.content_sha256 AS source_sha256
         FROM documents d JOIN artifacts a ON a.document_id=d.document_id
         JOIN sources s ON s.source_id=d.primary_source_id
-        WHERE a.artifact_role='normalized'"""
+        WHERE a.artifact_role='normalized'
+        AND {preferred_normalized_artifact_predicate('a')}"""
     params: tuple[Any, ...] = ()
     if not force:
         sql += """ AND NOT EXISTS (
@@ -160,12 +172,12 @@ def summarize_catalog(
     rows = store.fetchall(sql, params)
     completed = skipped = partial = failed = 0
     for row in rows:
-        normalized_path = Path(row["normalized_path"])
         try:
-            markdown = normalized_path.read_text(encoding="utf-8")
+            markdown = read_verified_normalized_text(row)
+            normalized_path = Path(row["normalized_path"])
             points = _extract_points(markdown)
             headings = _headings(markdown)
-        except (OSError, UnicodeError):
+        except (OSError, UnicodeError, NormalizedArtifactReadError):
             failed += 1
             continue
         summary_status = "completed" if points else "partial"

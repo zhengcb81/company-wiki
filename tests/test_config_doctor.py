@@ -95,17 +95,65 @@ def test_missing_config_file_is_rejected(tmp_path: Path) -> None:
     assert any("missing config" in problem for problem in problems)
 
 
-def test_e2e_f03_second_directory_root_fails_fast(tmp_path, monkeypatch):
-    """E2E-F03: a second kind=directory root must fail the doctor."""
-    from config_doctor import diagnose
+def test_new_directory_root_is_accepted_without_root_id_allowlist(sandbox: Path) -> None:
+    (sandbox / "lake" / "filings").mkdir(parents=True)
+    config = _write_config(
+        sandbox,
+        'schema_version: "1.0"\n'
+        'catalog_dir: "${PROJECT_ROOT}/.source_catalog"\n'
+        'reusable_root_kinds: [company_raw, directory]\n'
+        'roots:\n'
+        '  - root_id: company_raw\n'
+        '    kind: company_raw\n'
+        '    path: "${PROJECT_ROOT}/companies"\n'
+        '  - root_id: arbitrary_lake\n'
+        '    kind: directory\n'
+        '    path: "${PROJECT_ROOT}/lake/filings"\n',
+    )
+    assert diagnose(config, project_root=sandbox) == []
 
-    config = tmp_path / "source_catalog.yaml"
-    config.write_text('schema_version: "1.0"\ncatalog_dir: "${PROJECT_ROOT}/.source_catalog"\nreusable_root_kinds: [company_raw, dayu_portfolio, directory]\nroots:\n  - root_id: company_raw\n    kind: company_raw\n    path: "${PROJECT_ROOT}/companies"\n    priority: 10\n  - root_id: dropbox_stock\n    kind: directory\n    path: "${USER_PROFILE}/Dropbox/Stock"\n    priority: 30\n  - root_id: other_dir\n    kind: directory\n    path: "${USER_PROFILE}/somewhere"\n    priority: 40\n', encoding='utf-8')
-    project = tmp_path / "project"
-    (project / ".source_catalog" / "security_master").mkdir(parents=True)
-    (project / ".source_catalog" / "security_master" / "us.json").write_text("{}", encoding="utf-8")
-    problems = diagnose(config, project_root=project)
-    assert any("directory roots must be" in p for p in problems), problems
+
+def test_duplicate_root_id_is_rejected(sandbox: Path) -> None:
+    config = _write_config(
+        sandbox,
+        'schema_version: "1.0"\n'
+        'catalog_dir: "${PROJECT_ROOT}/.source_catalog"\n'
+        'roots:\n'
+        '  - root_id: duplicated\n'
+        '    kind: company_raw\n'
+        '    path: "${PROJECT_ROOT}/companies"\n'
+        '  - root_id: duplicated\n'
+        '    kind: directory\n'
+        '    path: "${PROJECT_ROOT}/other"\n',
+    )
+    assert any("duplicate root_id" in problem for problem in diagnose(config, project_root=sandbox))
+
+
+def test_unresolved_root_path_is_rejected(sandbox: Path) -> None:
+    config = _write_config(
+        sandbox,
+        'schema_version: "1.0"\n'
+        'catalog_dir: "${PROJECT_ROOT}/.source_catalog"\n'
+        'roots:\n'
+        '  - root_id: bad_path\n'
+        '    kind: directory\n'
+        '    path: "${UNKNOWN_ROOT}/filings"\n',
+    )
+    assert any("unresolved variable" in problem for problem in diagnose(config, project_root=sandbox))
+
+
+def test_existing_root_path_must_be_directory(sandbox: Path) -> None:
+    (sandbox / "lake_file").write_text("not a directory", encoding="utf-8")
+    config = _write_config(
+        sandbox,
+        'schema_version: "1.0"\n'
+        'catalog_dir: "${PROJECT_ROOT}/.source_catalog"\n'
+        'roots:\n'
+        '  - root_id: lake_file\n'
+        '    kind: directory\n'
+        '    path: "${PROJECT_ROOT}/lake_file"\n',
+    )
+    assert any("not a directory" in problem for problem in diagnose(config, project_root=sandbox))
 
 def test_e2e_f03_filing_allowance_smuggled_fails(tmp_path, monkeypatch):
     """E2E-F03 / FC-501 (CONFIG-DBX-03): a filing-fetch config smuggling
@@ -172,32 +220,17 @@ def test_explicit_missing_filing_config_is_reported(tmp_path, monkeypatch):
     assert any("does not exist" in p for p in problems), problems
 
 
-def test_e2e_f03_dropbox_path_not_stock_fails(tmp_path, monkeypatch):
-    """E2E-F03 / FC-501 (CONFIG-DBX-04): the Dropbox root's single source
-    of truth is source_catalog.yaml — a path that does not point at
-    Dropbox/Stock fails the doctor."""
-    from config_doctor import diagnose
-
-    config = tmp_path / "source_catalog.yaml"
-    config.write_text(
+def test_historical_dropbox_root_id_may_point_to_a_new_directory(sandbox: Path) -> None:
+    (sandbox / "archive" / "reports").mkdir(parents=True)
+    config = _write_config(
+        sandbox,
         'schema_version: "1.0"\n'
         'catalog_dir: "${PROJECT_ROOT}/.source_catalog"\n'
-        "reusable_root_kinds: [company_raw, dayu_portfolio, directory]\n"
-        "roots:\n"
-        '  - root_id: company_raw\n'
-        "    kind: company_raw\n"
-        '    path: "${PROJECT_ROOT}/companies"\n'
-        "    priority: 10\n"
+        'roots:\n'
         '  - root_id: dropbox_stock\n'
-        "    kind: directory\n"
-        '    path: "${USER_PROFILE}/Dropbox/Other"\n'
-        "    priority: 30\n",
-        encoding="utf-8",
+        '    kind: directory\n'
+        '    path: "${PROJECT_ROOT}/archive/reports"\n',
     )
-    project = tmp_path / "project"
-    (project / ".source_catalog" / "security_master").mkdir(parents=True)
-    (project / ".source_catalog" / "security_master" / "us.json").write_text("{}", encoding="utf-8")
-    problems = diagnose(config, project_root=project)
-    assert any("Dropbox/Stock" in p for p in problems), problems
+    assert diagnose(config, project_root=sandbox) == []
 
 

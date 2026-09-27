@@ -25,6 +25,16 @@
       "where": "tests/contract/test_source_catalog_artifact_reconciliation.py (SHA, interpolated into URNs)",
       "rationale": "Synthetic placeholder digest used only to build well-formed URNs; never compared against computed bytes.",
       "registered_by": "author, while adding this gate (2026-09-12)"
+    },
+    "cd803fe9528f4646f8f29b518a450ae4bd5b5968c482eb49789f9786b523595b": {
+      "where": "tests/e2e/test_source_version_reader_real_bytes.py (P06_SHA)",
+      "rationale": "Content SHA-256 of the real P06 prospectus bytes used by the isolated reader E2E; it is intentionally pinned to detect source mutation and does not include a path.",
+      "registered_by": "company-wiki R4 integration audit (2026-09-27)"
+    },
+    "0d40d94aef8d2fa08c4c75760198be426a0b579be3d7200ec9450a7e04522b4f": {
+      "where": "tests/e2e/test_source_version_reader_real_bytes.py (STAR_SHA)",
+      "rationale": "Content SHA-256 of the real StarRing annual-report bytes used by the isolated reader E2E; it is intentionally pinned to detect source mutation and does not include a path.",
+      "registered_by": "company-wiki R4 integration audit (2026-09-27)"
     }
   }
 }

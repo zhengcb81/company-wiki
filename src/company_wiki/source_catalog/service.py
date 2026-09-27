@@ -298,7 +298,9 @@ class SourceCatalog:
         source_statuses: tuple[str, ...],
         root_ids: tuple[str, ...] | None = None,
         fiscal_year: int | None = None,
+        published_on_or_before: str | None = None,
         limit: int = 100,
+        offset: int = 0,
     ) -> list[dict[str, Any]]:
         """WU-3.2: SQL-pushdown filing-candidate lookup (F-021/F-026).
 
@@ -315,6 +317,8 @@ class SourceCatalog:
         """
         if limit <= 0:
             raise ValueError("limit must be positive")
+        if offset < 0:
+            raise ValueError("offset must be non-negative")
         if not document_kind or not source_statuses:
             raise ValueError("document_kind/source_statuses required")
         placeholders = ", ".join("?" for _ in source_statuses)
@@ -362,6 +366,12 @@ class SourceCatalog:
         fiscal_params: tuple[int, ...] = (
             (fiscal_year, fiscal_year) if fiscal_year is not None else ()
         )
+        published_clause = (
+            "AND d.published_date <= ?" if published_on_or_before is not None else ""
+        )
+        published_params = (
+            (published_on_or_before,) if published_on_or_before is not None else ()
+        )
         entity_rows = self.reader.fetchall(
             f"""SELECT d.document_id, d.primary_source_id, d.title, d.source_type,
                        d.document_kind, d.published_date, d.source_status,
@@ -374,8 +384,9 @@ class SourceCatalog:
                   {entity_clause}
                   {root_clause}
                   {fiscal_clause}
+                  {published_clause}
                 ORDER BY d.published_date DESC, d.title, d.document_id
-                LIMIT ?
+                LIMIT ? OFFSET ?
                 """,
             (
                 document_kind,
@@ -383,7 +394,9 @@ class SourceCatalog:
                 *entity_params,
                 *root_params,
                 *fiscal_params,
+                *published_params,
                 limit,
+                offset,
             ),
         )
         if not entity_rows:

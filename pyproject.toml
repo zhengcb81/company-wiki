@@ -17,6 +17,9 @@ dependencies = [
 company-wiki-source-export = "company_wiki.source_contract.cli:main"
 company-wiki-collect-announcement = "company_wiki.source_contract.announcement_cli:main"
 company-wiki-source-catalog = "company_wiki.source_catalog.cli:main"
+company-wiki-source-read = "company_wiki.source_catalog.source_reader_cli:main"
+company-wiki-source-query = "company_wiki.source_catalog.source_query_cli:main"
+company-wiki-source-export-v2 = "company_wiki.source_catalog.source_export_v2_cli:main"
 company-wiki-identify = "company_wiki.source_catalog.identity_cli:main"
 
 [project.optional-dependencies]

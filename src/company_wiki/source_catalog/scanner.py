@@ -1731,14 +1731,43 @@ def _merge_document_row(
             (scan_time, document_id),
         )
         return
+    existing_meta = metadata_object(existing_document["metadata_json"])
+    existing_inner = existing_meta.get("dayu_meta") or existing_meta.get("acquisition") or {}
+    new_inner = document_metadata.get("dayu_meta") or document_metadata.get("acquisition") or {}
+    capture_conflicts: dict[str, Any] = {}
+    if isinstance(existing_inner, dict) and isinstance(new_inner, dict):
+        # Same bytes do not prove that two complete sidecars describe the same
+        # filing.  Preserve critical disagreements even when the incoming
+        # root has lower metadata priority and cannot replace the winner.
+        for key in (
+            "canonical_entity_id", "market", "security_id", "document_kind",
+            "fiscal_year", "fiscal_period", "period_end", "form_type",
+            "provider", "provider_document_id", "source_url", "https_url",
+            "source_title", "language",
+        ):
+            stored_value = existing_inner.get(key)
+            incoming_value = new_inner.get(key)
+            if stored_value in (None, "") or incoming_value in (None, ""):
+                continue
+            if str(stored_value).strip() == str(incoming_value).strip():
+                continue
+            capture_conflicts[f"capture.{key}"] = _provenance_record(
+                value_hash=_short_value_hash(stored_value),
+                sources=[],
+                conflicts=[
+                    {"source_id": primary.source_id if primary else None,
+                     "observed_at": scan_time,
+                     "value_hash": _short_value_hash(stored_value)},
+                    {"source_id": primary.source_id if primary else None,
+                     "observed_at": scan_time,
+                     "value_hash": _short_value_hash(incoming_value)},
+                ],
+            )
     if priority <= existing_document["metadata_priority"]:
         # B10-3: the parse is the single chain's (store.metadata_object).  Malformed means
         # "no mergeable metadata", never a crash in the ingest path (B-VR05M-04 history:
         # only JSONDecodeError was caught here, so a valid-JSON non-object payload fell
         # through and `.get(...)` raised AttributeError during a re-scan).
-        existing_meta = metadata_object(existing_document["metadata_json"])
-        existing_inner = existing_meta.get("dayu_meta") or existing_meta.get("acquisition") or {}
-        new_inner = document_metadata.get("dayu_meta") or document_metadata.get("acquisition") or {}
         # Phase 16.5: when the same content-addressed document is
         # re-ingested from another path, prefer the metadata that
         # carries a source URL (an old bare sidecar must not
@@ -1811,6 +1840,7 @@ def _merge_document_row(
             stored_declared=stored_declared,
             previous_fields=previous_fields,
         )
+        provenance_fields.update(capture_conflicts)
         # The business container follows the pre-B05 `prefer_new` rule; every
         # key it holds is recorded with the same per-field provenance shape.
         winning_inner = (
@@ -1858,10 +1888,20 @@ def _merge_document_row(
             ),
         )
         return
-    connection.execute(
-        "UPDATE documents SET last_seen_at=? WHERE document_id=?",
-        (scan_time, document_id),
-    )
+    if capture_conflicts:
+        updated_metadata = _merge_metadata_json(
+            existing_document["metadata_json"], {}, prefer_new=False,
+            provenance_fields=capture_conflicts,
+        )
+        connection.execute(
+            "UPDATE documents SET metadata_json=?,last_seen_at=? WHERE document_id=?",
+            (updated_metadata, scan_time, document_id),
+        )
+    else:
+        connection.execute(
+            "UPDATE documents SET last_seen_at=? WHERE document_id=?",
+            (scan_time, document_id),
+        )
 
 
 def scan_catalog(
