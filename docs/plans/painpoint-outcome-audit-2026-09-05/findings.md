@@ -1,5 +1,36 @@
 # 审计发现
 
+## 2026-09-27：全仓结构简化审查与实测反例
+
+- CodeGraph 当前索引 559 个 Python 文件、`source_catalog` 83 个；审查覆盖结构、主要入口与热点实现，未逐行签收全部文件。`source_catalog/worker.py:441–696` 仍按周期串行调用 scan/normalize/sections/LLM/export，`automation/worker.py:56–100,286` 则已有独立 job lease/reap，两套状态机制并存。`scripts/scheduler.py:167–177,453` 的 legacy 默认流程仍列投资评估/判断，与当前 AGENTS 职责边界不合；需核真实启动入口后退役，不能仅删文件。
+- `normalizer.py:1317–1341,1392` 可将 PDF 整篇转 Markdown；`section_extractor.py:294–297,370–398` 再写各章节正文和索引；`summarizer.py:163–225` 与 `llm_summarizer.py:411–471` 又分别读全文、写摘要。`narrative_evidence.py:1517` 已有精选逻辑，但主要由试点/检索入口调用，尚未取代生产整篇链。空间收益须先量 raw/MD/章节/摘要/索引/重复的真实字节占比。
+- 隔离 CWP 反例：LLM 入口仅凭源 SHA 绑定 review receipt，规范化文件被替换后仍会发送未审文本；新增篡改测试先红后绿，发送前现核实际 normalized SHA。旧 active 根位置曾否决有当前根同 SHA 副本；新增根迁移反例先红后绿。`config_doctor.py` 的两个目录名/Dropbox 路径硬编码已 TDD 泛化，21 项相关测试通过。
+- **统一工件读取器的旧数据兼容风险**：对现行库只读 SQL，`normalized` 共 4,984 行，其中 **4,797 行的 DB `source_sha256` 为空**；仅 3,507 行由 `source_catalog_normalizer` 命名，其余有 pdf/page-aware、docling、HTML、Office 等旧解析器名称。按各生成器抽一件现存文件核对，大多实际工件 SHA 与记录一致且 frontmatter 含当前 source ID/SHA；`plain_text` 与 `pymupdf_page_text` 的所抽样本实际 SHA 不一致，应拒绝，不能由此推断各生成器总体坏件比例。若新 helper 只收现代 DB lineage，旧文档会大面积假失败。S2 改为一个受控 legacy fallback：工件本身 digest 必须通过，再从 frontmatter 验来源与 parser；现代行继续严格 DB 绑定。不为迁就旧资料跳过工件实际 SHA。
+- 只读查询进一步核实旧工件重复：`normalized` 4,984 行/3,507 文档，completed/partial 4,969 行/3,500 文档；其中 1,469 个文档各有两条可读工件。当前 22 个有 review 收据的文档没有双行，因而现有 LLM 测试没暴露，但 S7 自动扫描扩大覆盖后，若摘要查询不先按 source/version 选一条，会让同文档同批次重复调用 LLM。S2 新增“modern 优先、否则 legacy、同文档一次加工”的 TDD；坏的首选不能在同批次隐式退到另一工件并外发。
+- 隔离 CWP `SourceExportBundleV2.build` 对纯 PDF manifest 曾先读入并保留整份原文。16 MiB PDF 实测 tracemalloc 峰值 33,598,348 B；共享规则的 streaming `verify_version` 后为 2,144,131 B，相关 76 passed/1 skipped。结论只覆盖此操作与该样本，不能外推到 46 GB 总体或生产 Worker 吞吐。
+- 空间基线复核：[F0–F5 收据](../narrative-evidence-pilot-2026-09-26/stepwise_space_budget.md)已记录旧 46.266 GiB 主库删除及同卷净释放 37.630 GiB；[D0 盘点](../narrative-evidence-pilot-2026-09-26/d0_inventory_receipt_2026-09-27.md)记录剩余三自有目录 39.744 GiB、完整备份 5.773 GiB、退休归档 4.850 GiB、raw 23.460 GiB、derived 2.632 GiB。本轮只读 stat 现行 DB 为 3,055,800,320 B；并未重算整个目录。52 组同 SHA 本地双路径的理论重复差额 98,845,393 B 是候选上限，不是已核准可删量。
+- 旧 46.266 GiB 库的主要成因是全量 `evidence_spans` 行与索引膨胀，而不只是整篇 Markdown 重复：[空间调查](../narrative-evidence-pilot-2026-09-26/space_reduction_upgrade.md)记录约 2720 万旧 span；1000 条抽样里 820 条为 table cell、496 条 `raw_text` 为空，平均 `span_json` 812.6 B。第二组 1200 条样本中，重复于关系列的 JSON 字段及正文复制有可复核分项，但只代表样本；尚无全库各表/索引的精确体积分解。当前 active 库仍有 1,490,530 span，所以阻止新 DAG 继续生成全量旧式 span 比删除 2.632 GiB 的 derived 文件更先要验证。
+- D0 在 `future_lake` 登记一件 545 B 原文，因此旧实施卡“只有 README”的说法已过时。该一件尚不足证明原生第四根的文档/sidecar 适配；保留 `pending/limited_scope`，不夸大覆盖。最小目标结构为唯一来源读取、唯一工件读取、选择性叙述 DAG、唯一持久 Worker 队列和统一处置 ledger，见更新后的实施卡。
+- 对当前生产 catalog 的 `immutable=1` 只读查询：共有 23,530 个 document，3,500 个有 completed/partial normalized 工件的不同文档；只有 22 个 document 有 `prompt_injection_review` 收据，且这 22 个都在已规范化集。旧库另有 2,734 件 `source_catalog_llm_summary` completed 产物，不能据此认定新入队也能通过当前收据门。需把干净输入的确定性扫描与 source/实际输入字节绑定写收据自动化，只对命中和错误待人工；否则新 Worker 并发也只会更快地发现绝大部分文档不合格。
+- 三仓隔离真实 E2E 的首轮版本由 FF legacy `resolve` 和 RF final open 各读一次原文。后续显式 v2 opt-in 已改由 CWP `source_query_cli` 查 DB 候选，FF↔CWP 真实集成 11/11 绿，三仓真实 E2E 也已绿，零下载；同尺寸篡改文件时 DB 候选仍返回、RF 最终 open 拒绝，证明候选查询没有重验全文、最终验真没有被省略。此结果不覆盖旧默认入口或 StockWiki 正式切换，尚无 OS 级精确文件打开计数。`retrieved_at` 的 FF 位置观察与 CWP 共享版本记录不是同一时间事实；RF 只硬比稳定身份字段，两个观测保留 trace。
+- 新读链曾有审查状态 TOCTOU：DB-only candidate 的 `capture_ready` 由查询时的 `prompt_injection_review` 计算，query 后撤回收据时 RF 可沿用旧 `not_detected`。撤回红测复现后，隔离 CWP 在原文字节验真后读取当时可见 review 并在同次回执带 source/evidence/rule hash；隔离 RF 只接受最终回执中与 source SHA 绑定的 `not_detected`。真实三仓撤回 E2E 已绿。该回执是读取时点的观测，不是长期数据库锁；默认/StockWiki 路由仍未切换。
+- FF→CWP 请求模式复核发现：exact 无下载已走 DB-only v2 query；`latest_as_of` 在 CWP 侧调用 `SourceAcquisitionService.ensure` 以取得 provider freshness/gap，显式授权下载走 `ensure/close-gap`。这两种请求不能用本地 query 代替，但其 v1 subprocess JSON 仍把 `canonical_path/source_bundle` 送给 FF，FF 仅在构造最终 handle 时删去字段。跨进程仍有路径耦合；已在 R4 明确下一切片为 CWP-owned pathless ensure/close-gap 输出和对应真实 E2E，当前不能记抽象验收通过。
+- 为避免新增回执字段被旧客户端静默误读，最终二进制读取回执采用独立 schema `2.1`，而 `SourceRef` 与 query candidate 保持 `2.0`；RF transport 与 record builder 都拒绝 `2.0` 的成功 read receipt。版本边界负例和三仓 E2E 已通过；这是隔离契约证据，尚不能签收生产默认路由。
+- CI workflow 原文核实三版本重复 unit/contract/full coverage/6 组 canary，且 `--cov ... || true`、CLI smoke `collect_news.py --help || true` 可吞失败；`pyproject.toml` 的 extras 与 `requirements.txt`/CI 全量安装不匹配。StockWiki `pipeline_source_provider.py` 当前 disabled/not_configured 时会转排 Tavily，现行配置明确 disabled 是 legacy 模式；将来 v2 激活后需显式模式，防配置漂移触发双采集/费用。S8–S10 的实施与验收已写入 R4 卡，依赖与来源模式均不在当前 C.local 之前抢改。
+- S1–S10 的落地行动、层级责任、TDD 与大节点 E2E 已写入 [R4 实施卡](r4-data-lake-priority-rollout-2026-09-27.md#全仓结构审查后的进一步简化2026-09-27-增量)。RF/StockWiki 正式合同、生产进程清单、完整空间分类和多类文档召回仍待验证。
+
+## 2026-09-27 实时仓库状态核对：技术前置改为冻结候选
+
+- 只读 `git ls-remote` 核 company-wiki 远端仅 `master=f39bd5a64224cd0c7aa098f23f64bf3811fa8939`、`fcap=8665c8c47c020cde7dcf683ee8e6389ead77f282`，远端 HEAD 为 master。本地主工作树在 `fcap=dbe474504a6187e22c37918743d17fe59c85a0a8`，是远端 master 的后代并多 4 个提交、比远端 fcap 多 8 个；本地 `master=109a1a6` 陈旧，不能当远端状态。主工作树有 24 个 tracked 修改和 16 个 untracked 条目；其中包括早已在飞的产品代码和本轮规划文件，未改/清理他人的修改。
+- revenue-forecast 远端 `main=fcap=ee0a82bfd1eec935cf4e567eb42f0ef79efa0226`，其 Round 122 进度也记此前 `fcap → main`；用户澄清暂缓并入的是**本地未提交后续工作**。远端 SHA 只代表已推送基线，不能替后续候选作版本身份。后续跨仓 RF 消费者 E2E 须由 RF owner 固定包含运行依赖的不可变工作树快照或支线提交，不要求合并 main；CWP 产品代码暂停仍另行有效。
+- 初次沙箱内 `git ls-remote` 因 443 连接限制失败，使用只读、经审批的同一查询成功；全程未 fetch/pull/merge/push、切分支或修改 Git refs。以上是核对时刻快照，实施前重锁。
+
+## 2026-09-27 补充：路径抽象必须跨仓闭环
+
+- StockWiki 当前 v1 manifest 强制 `original_path`，该字段参与 `export_id` 哈希，v1 sync 又按 `source_root/original_path` 打开原文；RF 与 filing-fetch 也读取 CWP 的 `canonical_path`。因此 CWP 内部副本回退即使修好，跨仓身份和使用方式仍依赖目录。具体版本化合同与迁移路线见 [R4 优先实施卡](r4-data-lake-priority-rollout-2026-09-27.md)；旧 v1 历史引用须保持可读，不能直接删字段或把 full sync 视为本地读验收。
+- 真正的验收需两个独立问题：同一真实字节跨四个隔离根的位置等价；各原生根的真实目录/sidecar adapter 覆盖。catalog 所载完整 SHA 尚需对隔离副本重算。`future_lake` 无原生样本，三角防务 2023 年报原版/更正版缺权威修订链，分别记有限覆盖/hold；不使用改名副本或篡改夹具冒充真实事实。
+- 本轮只读代码与 catalog/stat、修订计划；未运行新的产品端到端测试，未实施 CWP/StockWiki/RF/filing-fetch 代码改动。下方历史发现按其原时间保留。
+
 > 2026-09-09 最新状态请先读 [current-delta-2026-09-09.md](current-delta-2026-09-09.md)：worker v5 独立轨道全部完成（冻结 51 项 + 三轴审查 accepted）、FC-705 门仍 false（差一晚）、R9 批 3 范围失真（仅 `artifact_backfill.py` 零生产读者）。下方 9/5～9/7 观测保留为当时快照，不重写、不当新 HEAD 全量验收。
 
 > 2026-09-07最新状态请先读current-delta-2026-09-07.md：其他任务已推进R9删除/daily修复并产生失败run；下方9/5～9/6观测不重写，也不当新HEAD全量验收。同步23活动文档及执行手册R3已经独立审查；产品整改仍未实施于本任务。

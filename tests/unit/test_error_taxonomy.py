@@ -14,6 +14,7 @@ from company_wiki.source_catalog.error_taxonomy import (
     ERROR_TAXONOMY_SCHEMA,
     ERROR_TAXONOMY_VERSION,
     FATAL,
+    LEGACY_EVIDENCE_ARCHIVED,
     WORKER_PAUSED,
     classify_error_type,
     classify_exception,
@@ -91,6 +92,18 @@ def test_unknown_error_type_fails_closed() -> None:
     assert code == FATAL and retryable is False
 
 
+def test_archived_legacy_evidence_is_explicit_and_non_retryable() -> None:
+    from company_wiki.source_catalog.evidence_query import EvidenceQueryArchivedError
+
+    exc = EvidenceQueryArchivedError("legacy_evidence_archived")
+    assert classify_exception(exc) == (LEGACY_EVIDENCE_ARCHIVED, False)
+    assert classify_error_type("EvidenceQueryArchivedError") == (
+        LEGACY_EVIDENCE_ARCHIVED,
+        False,
+    )
+    assert structured_error(exc)["error_type"] == LEGACY_EVIDENCE_ARCHIVED
+
+
 def test_operational_error_without_lock_text_fatal() -> None:
     assert classify_error_type("OperationalError", "no such table: x") == (FATAL, False)
 
@@ -111,8 +124,8 @@ def test_structured_error_emission_shape() -> None:
 
 
 def test_taxonomy_versioned_and_retryable_set() -> None:
-    assert ERROR_TAXONOMY_VERSION == "1.0"
-    assert ERROR_TAXONOMY_SCHEMA == "error-taxonomy-1.0"
+    assert ERROR_TAXONOMY_VERSION == "1.1"
+    assert ERROR_TAXONOMY_SCHEMA == "error-taxonomy-1.1"
     assert is_retryable(CATALOG_BUSY)
     assert is_retryable(CATALOG_LOCKED)
     assert is_retryable(DB_TIMEOUT)

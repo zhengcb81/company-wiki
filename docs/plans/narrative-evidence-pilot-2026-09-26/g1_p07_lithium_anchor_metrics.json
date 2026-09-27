@@ -1,0 +1,279 @@
+{
+  "schema_version": "narrative-g1-pilot/0.1.0",
+  "runner": "scripts/narrative_evidence_pilot.py",
+  "read_only_roots": [
+    "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\transcripts"
+  ],
+  "generated_from_manifest": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\narrative-evidence-pilot-2026-09-26\\g1_sample_manifest.json",
+  "elapsed_seconds": 0.276,
+  "samples": [
+    {
+      "sample_id": "P07",
+      "title": "万润股份：投资者关系活动记录表20260515.pdf",
+      "source_sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+      "source_file_bytes": 153851,
+      "document_kind": "investor_relations",
+      "status": "needs_review",
+      "coverage_complete": false,
+      "page_count": 6,
+      "pages_read": 6,
+      "opaque_pages": [],
+      "table_scan_page_count": 2,
+      "deferred_table_pages": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "focus_pages": [
+        5,
+        6
+      ],
+      "selected_focus_pages": [
+        5,
+        6
+      ],
+      "line_count": 0,
+      "parse_errors": [],
+      "source_units": 233,
+      "candidate_count": 7,
+      "selected_span_count": 7,
+      "locator_roundtrip_verified_count": 7,
+      "locator_roundtrip_failed_count": 0,
+      "locator_roundtrip_failed_span_ids": [],
+      "dropped_financial_count": 0,
+      "omitted_candidate_count": 0,
+      "selected_text_bytes": 1619,
+      "summary_input_bytes": 6767,
+      "summary_input_to_source_ratio": 0.043984,
+      "anchor_checks": [
+        {
+          "check_id": "C07-lithium-sulfide-pilot-line",
+          "page_number": 6,
+          "source_role": "management",
+          "passed": true,
+          "matched_term": "硫化锂的中试线建设工作正在按计划推进",
+          "required_any": [
+            "硫化锂的中试线建设工作正在按计划推进"
+          ],
+          "evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:8af8274dafc6fc9f88b2842401a2c410cdbc740cec4a4fd8d5b4d73ab79abda9",
+            "urn:company-wiki:evidence-span:sha256:174a1dbc2dd333bf4c47be03ae46290f7d6cc16fd2a56c3a211935d68df93640"
+          ]
+        },
+        {
+          "check_id": "C08-cross-page-zeolite-answer",
+          "page_number": 6,
+          "source_role": "management",
+          "passed": true,
+          "matched_term": "现已有产品实现销售",
+          "required_any": [
+            "已实现销售",
+            "现已有产品实现销售"
+          ],
+          "evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:8af8274dafc6fc9f88b2842401a2c410cdbc740cec4a4fd8d5b4d73ab79abda9",
+            "urn:company-wiki:evidence-span:sha256:174a1dbc2dd333bf4c47be03ae46290f7d6cc16fd2a56c3a211935d68df93640"
+          ]
+        }
+      ],
+      "anchor_check_failure_count": 0,
+      "elapsed_seconds": 0.274,
+      "selected_evidence_preview": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:eadcc6c7293898f799336440fee8045022530396ac94fef9143a1e01d4b97019",
+          "locator_v1": "loc:v1/page:5/table:0/row:0/column:1",
+          "coordinates": {
+            "page_number": 5,
+            "paragraph_index": null,
+            "table_index": 0,
+            "row_index": 0,
+            "column_index": 1,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [
+            "locator_unstable"
+          ],
+          "topics": [],
+          "selection_reasons": [
+            "linked_question_context"
+          ],
+          "source_role": "investor_question",
+          "excerpt": "15、问：看市场信息，公司在主要产品沸石的市场开拓上的有想法，\n但是市场好像并不是很认可:这一块业务的估值比建龙微纳低。请问董事\n长，在柴油车排放标准短期不提高的情况下，我们的沸石业务开拓有哪"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:ff74052044250bcd6f218dacc6cbcbb15d4e890ad9e7f1fa93e24ef0981c4b47",
+          "locator_v1": "loc:v1/page:5/table:0/row:0/column:1",
+          "coordinates": {
+            "page_number": 5,
+            "paragraph_index": null,
+            "table_index": 0,
+            "row_index": 0,
+            "column_index": 1,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [
+            "locator_unstable"
+          ],
+          "topics": [
+            "orders_customers",
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "progress_or_change_language",
+            "project_plan_or_status",
+            "management_statement"
+          ],
+          "source_role": "management",
+          "excerpt": "答：您好！目前公司在半导体制造材料领域已销售的产品主要为光刻\n胶单体、树脂、光酸以及半导体制程中清洗剂添加材料等，现已开发了超\n300 种化合物，在所涉足的产品方面技术已经处于国内领先水平。公司结\n合实际情况与下游客户需求，在新产能方面积极布局，2025 年公司启动\n了万润工业园二期 C05 建设项目，该项目包含半导体光刻胶用相关材料产\n能约 751 吨/年，项目建成后将为公司半导体制造材料业务发展提供产能\n保障。谢谢！"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:9505d17135d846485481c2786ce346f5b0aea7de06b0b0a2aaefcab0c5f3a9e5",
+          "locator_v1": "loc:v1/page:5/table:0/row:0/column:1",
+          "coordinates": {
+            "page_number": 5,
+            "paragraph_index": null,
+            "table_index": 0,
+            "row_index": 0,
+            "column_index": 1,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [
+            "locator_unstable"
+          ],
+          "topics": [],
+          "selection_reasons": [
+            "linked_question_context"
+          ],
+          "source_role": "investor_question",
+          "excerpt": "13、问：公司预计半导体制造等相关材料，何时能为公司贡献 10 以\n上收益？"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:8af8274dafc6fc9f88b2842401a2c410cdbc740cec4a4fd8d5b4d73ab79abda9",
+          "locator_v1": "loc:v1/page:6/table:0/row:0/column:1",
+          "coordinates": {
+            "page_number": 6,
+            "paragraph_index": null,
+            "table_index": 0,
+            "row_index": 0,
+            "column_index": 1,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [
+            "locator_unstable"
+          ],
+          "topics": [
+            "capacity_projects",
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "progress_or_change_language",
+            "specific_business_event",
+            "management_statement"
+          ],
+          "source_role": "management",
+          "excerpt": "答：您好！公司固态电池材料硫化锂的中试线建设工作正在按计划推\n进中，根据目前情况看可以在 6 月底之前完成建设并投入开展中试工作。\n感谢您对公司的关注！"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:18f7c39011969e5422e34a79c2616b20487c28143caf75da65f5834c01b08aeb",
+          "locator_v1": "loc:v1/page:6/table:0/row:0/column:1",
+          "coordinates": {
+            "page_number": 6,
+            "paragraph_index": null,
+            "table_index": 0,
+            "row_index": 0,
+            "column_index": 1,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [
+            "locator_unstable"
+          ],
+          "topics": [],
+          "selection_reasons": [
+            "linked_question_context"
+          ],
+          "source_role": "investor_question",
+          "excerpt": "16、问：请问我们的硫化锂中试线建设有多大概率在 6 月底完成并\n投入使用？谢谢。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:c52adc6e38d5f5610d5daa96004e005c1ba08a292ab00006517acda188477695",
+          "locator_v1": "loc:v1/page:6/table:0/row:0/column:1",
+          "coordinates": {
+            "page_number": 6,
+            "paragraph_index": null,
+            "table_index": 0,
+            "row_index": 0,
+            "column_index": 1,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [
+            "locator_unstable"
+          ],
+          "topics": [],
+          "selection_reasons": [
+            "linked_question_context"
+          ],
+          "source_role": "investor_question",
+          "excerpt": "些安排？谢谢。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:174a1dbc2dd333bf4c47be03ae46290f7d6cc16fd2a56c3a211935d68df93640",
+          "locator_v1": "loc:v1/page:6/table:0/row:0/column:1",
+          "coordinates": {
+            "page_number": 6,
+            "paragraph_index": null,
+            "table_index": 0,
+            "row_index": 0,
+            "column_index": 1,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [
+            "locator_unstable"
+          ],
+          "topics": [
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "progress_or_change_language",
+            "specific_business_event",
+            "management_statement"
+          ],
+          "source_role": "management",
+          "excerpt": "答：您好！公司近年来为应对车用沸石分子筛产品下游需求波动产生\n的影响，公司积极开发并推广石油化工催化领域的沸石分子筛产品，2025\n年公司与中国石化催化剂有限公司签署《项目合作意向书》，现已有产品\n实现销售。谢谢！"
+        }
+      ]
+    }
+  ],
+  "totals": {
+    "documents": 1,
+    "source_file_bytes": 153851,
+    "summary_input_bytes": 6767,
+    "selected_span_count": 7,
+    "locator_roundtrip_verified_count": 7,
+    "locator_roundtrip_failed_count": 0,
+    "selected_documents": 0,
+    "partial_documents": 0,
+    "skipped_documents": 0,
+    "needs_review_documents": 1,
+    "blocked_documents": 0,
+    "anchor_check_failure_count": 0
+  },
+  "limitations": [
+    "This is a 12-document pilot, not a corpus recall estimate.",
+    "The selector uses deterministic candidate rules; a model did not generate summaries.",
+    "summary_input_bytes excludes database indexes, filesystem allocation and future exports.",
+    "A status of selected means the parser covered the file, not that a human approved every candidate.",
+    "Locator round-trip verifies same-parser extraction; it does not certify downstream support for table-cell sub-locators."
+  ]
+}

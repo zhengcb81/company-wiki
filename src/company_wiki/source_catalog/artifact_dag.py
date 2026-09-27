@@ -9,8 +9,8 @@ from __future__ import annotations
 
 ROLE_DEPENDENCIES: dict[str, list[str]] = {
     "normalized": [],
-    "markdown": ["normalized"],
-    "summary": ["markdown"],
+    "markdown": ["normalized"],   # historical compatibility only
+    "summary": ["normalized"],    # D-W05: direct from normalized, not markdown
     "sections": ["normalized"],
     "consumer_analysis": ["summary"],
 }

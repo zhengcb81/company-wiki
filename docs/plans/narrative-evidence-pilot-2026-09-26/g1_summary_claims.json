@@ -1,0 +1,111 @@
+{
+  "schema_version": "narrative-g1-summary-claims/0.1.0",
+  "authorship": "human-authored pilot drafts derived from findings.md; not model output",
+  "claims": [
+    {
+      "id": "C01-summary",
+      "sample_id": "P01",
+      "anchor_check_ids": ["C01-EPI-validation"],
+      "text": "年报称，EPI 设备已进入客户端量产验证阶段；这表示验证推进到量产验证，不等于已完成量产。",
+      "claim_type": "company_statement",
+      "modality": "actual"
+    },
+    {
+      "id": "C02-summary",
+      "sample_id": "P02",
+      "anchor_check_ids": ["C02-five-to-ten-year-plan", "C02-more-than-60-percent-market"],
+      "text": "半年报预计，未来五至十年通过自主研发和产业合作，覆盖集成电路关键领域超过60%的设备市场；这是前瞻目标，不代表已经实现。",
+      "claim_type": "company_statement",
+      "modality": "forecast"
+    },
+    {
+      "id": "C03-summary",
+      "sample_id": "P03",
+      "anchor_check_ids": ["C03-four-new-MOCVD-products", "C03-batch-orders"],
+      "text": "季报称四款面向 SiC、GaN 功率器件和 Micro LED 等应用的 MOCVD 新产品进入客户验证，其中部分产品取得批量订货。",
+      "claim_type": "company_statement",
+      "modality": "actual"
+    },
+    {
+      "id": "C04-summary",
+      "sample_id": "P04",
+      "anchor_check_ids": ["C04-business-baseline"],
+      "text": "招股书披露时，公司称其 MOCVD 设备已在领先客户生产线上规模量产；该内容只作招股时点的历史基线。",
+      "claim_type": "company_statement",
+      "modality": "actual"
+    },
+    {
+      "id": "C05-summary",
+      "sample_id": "P05",
+      "anchor_check_ids": ["C05-project-extension-rationale"],
+      "text": "可转债募集说明书将从锻件向零件、组件及部件延伸列为项目建设理由；这是项目论证，不能当作已实现交付或产能。",
+      "claim_type": "company_statement",
+      "modality": "planned"
+    },
+    {
+      "id": "C06-certification-summary",
+      "sample_id": "P06",
+      "anchor_check_ids": ["C06-downstream-extension", "C06-certification-requirements", "C06-digital-center-certification-window"],
+      "text": "定增注册稿称，航空数字化集成中心项目从锻件制造向下游装配延伸，需要进行合格供应商与产品认证；申报材料预计认证周期为4至9个月，属于预计安排而非已经通过认证。",
+      "claim_type": "company_statement",
+      "modality": "planned"
+    },
+    {
+      "id": "C06-rationale-summary",
+      "sample_id": "P06",
+      "anchor_check_ids": ["C06-project-necessity-industry-rationale", "C06-project-necessity-demand-complete"],
+      "text": "注册稿以航空产业协作格局及外协需求论证项目必要性；属于发行文件的行业背景和建设理由，不证明需求或项目效益已经兑现。",
+      "claim_type": "company_statement",
+      "modality": "planned"
+    },
+    {
+      "id": "C07-summary",
+      "sample_id": "P07",
+      "anchor_check_ids": ["C07-lithium-sulfide-pilot-line"],
+      "text": "2026 年 5 月 15 日 IR 记录称，管理层表示硫化锂中试线建设按计划推进，并按当时情况预计 6 月底前建成、开展中试；该样本不能证明后来按期完成。",
+      "claim_type": "company_statement",
+      "modality": "planned"
+    },
+    {
+      "id": "C08-summary",
+      "sample_id": "P07",
+      "anchor_check_ids": ["C08-cross-page-zeolite-answer"],
+      "text": "同一 IR 记录称，公司正推广面向石化催化的沸石分子筛产品，且当时已有产品实现销售；合作意向书本身不等于新增销售。",
+      "claim_type": "company_statement",
+      "modality": "actual"
+    },
+    {
+      "id": "C09-investor-question-summary",
+      "sample_id": "P08",
+      "anchor_check_ids": ["C09-investor-premise"],
+      "text": "投资者问题称 OLED 材料、半导体光刻胶等新兴业务 2024 年营收占比不足 5%，并询问其产能释放与客户认证进展。",
+      "claim_type": "analyst_question",
+      "modality": "question"
+    },
+    {
+      "id": "C09-management-answer-summary",
+      "sample_id": "P08",
+      "anchor_check_ids": ["C09-management-correction"],
+      "response_to_claim_id": "C09-investor-question-summary",
+      "text": "管理层答复称，三月科技与九目化学两个 OLED 业务主体 2024 年收入占公司整体收入比例已超过 25%，并提示以公司公告为准。",
+      "claim_type": "company_statement",
+      "modality": "actual"
+    },
+    {
+      "id": "C10-summary",
+      "sample_id": "T01",
+      "anchor_check_ids": ["C10-demand-exceeds-capacity"],
+      "text": "During the call, management said demand exceeded available supply and described the situation as a relatively extreme moment.",
+      "claim_type": "company_statement",
+      "modality": "actual"
+    },
+    {
+      "id": "C11-summary",
+      "sample_id": "T02",
+      "anchor_check_ids": ["C11-too-early-to-speculate"],
+      "text": "Management said it was too early to speculate and that the data would need to be awaited; the answer does not establish superiority.",
+      "claim_type": "company_statement",
+      "modality": "uncertain"
+    }
+  ]
+}

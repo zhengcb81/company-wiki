@@ -213,6 +213,96 @@ def _resolve_archive_path(manifest: Mapping[str, Any],
     return None
 
 
+# ---------------------------------------------------------------------------
+# Complexity ratchet (FC-1204, owner §四十二 裁定一, 2026-09-27): split only;
+# behaviour unchanged.
+#   * _load_verified_archives 16 -> 4 (frozen 12): the verification ladder
+#     became one top-level function per concern — same check order, same
+#     problem strings, nothing dropped.
+#   * prune_retired_evidence 27 -> 6 (frozen 12): plan selection, due/oldest
+#     and the locked apply (pre-delete re-verify, pending receipt, batch
+#     delete) each moved into their own top-level function; the entry point
+#     only dispatches.
+# ---------------------------------------------------------------------------
+
+
+def _verify_one_manifest(
+        manifest_path: Path) -> tuple[VerifiedArchive | None, str | None]:
+    """Verify one manifest end to end (W15-R1/D1).
+
+    Returns ``(archive, None)`` when every check passes, else
+    ``(None, problem)`` with the exact problem string the ladder used to
+    append — in the exact order it used to run the checks.
+    """
+    try:
+        data = json.loads(manifest_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        return None, f"{manifest_path}: unreadable manifest ({exc})"
+    problem = _manifest_decl_problem(manifest_path, data)
+    if problem is not None:
+        return None, problem
+    archive_path = _resolve_archive_path(data, manifest_path)
+    if archive_path is None:
+        return None, f"{manifest_path}: archive file missing"
+    actual_sha, problem = _archive_bytes_problem(manifest_path, archive_path, data)
+    if problem is not None:
+        return None, problem
+    return _verified_archive(manifest_path, archive_path, data, actual_sha)
+
+
+def _manifest_decl_problem(manifest_path: Path, data: Any) -> str | None:
+    """Declaration checks: the manifest's schema and ok flag (D1)."""
+    if data.get("schema_version") != MANIFEST_SCHEMA:
+        return f"{manifest_path}: unsupported schema_version"
+    if data.get("ok") is not True:
+        return f"{manifest_path}: manifest not ok"
+    return None
+
+
+def _archive_bytes_problem(manifest_path: Path, archive_path: Path,
+                           data: Any) -> tuple[str | None, str | None]:
+    """Byte checks: declared size, then sha256 of the archive bytes (D1).
+
+    Returns ``(actual_sha256, None)`` on success, ``(None, problem)`` on the
+    first mismatch.
+    """
+    if archive_path.stat().st_size != data.get("archive_bytes"):
+        return None, f"{manifest_path}: archive size mismatch"
+    try:
+        actual_sha = _sha256_file(archive_path)
+    except OSError as exc:
+        return None, f"{manifest_path}: archive unreadable ({exc})"
+    if actual_sha != data.get("archive_sha256"):
+        return None, f"{manifest_path}: archive sha256 mismatch"
+    return actual_sha, None
+
+
+def _verified_archive(manifest_path: Path, archive_path: Path, data: Any,
+                      actual_sha: str) -> tuple[VerifiedArchive | None,
+                                                str | None]:
+    """Snapshot checks: row count, per-row digests, verified clock (D1/D3)."""
+    try:
+        ids, digests = _read_snapshot(archive_path)
+    except (OSError, EOFError, ValueError, json.JSONDecodeError) as exc:
+        return None, f"{manifest_path}: archive corrupt ({exc})"
+    if len(ids) != data.get("rows_in_archive"):
+        return None, f"{manifest_path}: row count mismatch"
+    if dict(digests) != dict(data.get("row_digests") or {}):
+        return None, f"{manifest_path}: row digest mismatch"
+    completed_at = data.get("verified_completed_at")
+    try:
+        _parse_utc(completed_at)
+    except (TypeError, ValueError):
+        return None, f"{manifest_path}: bad verified_completed_at"
+    return VerifiedArchive(
+        manifest_path=str(manifest_path),
+        archive_path=str(archive_path),
+        archive_sha256=actual_sha,
+        verified_completed_at=completed_at,
+        row_digests=dict(digests),
+    ), None
+
+
 def _load_verified_archives(
         archive_root: Path) -> tuple[list[VerifiedArchive], list[str]]:
     """Verify every manifest under ``archive_root/archive`` (W15-R1).
@@ -226,56 +316,11 @@ def _load_verified_archives(
     if not base.exists():
         return verified, problems
     for manifest_path in sorted(base.rglob("*.manifest.json")):
-        try:
-            data = json.loads(manifest_path.read_text(encoding="utf-8"))
-        except (OSError, json.JSONDecodeError) as exc:
-            problems.append(f"{manifest_path}: unreadable manifest ({exc})")
+        archive, problem = _verify_one_manifest(manifest_path)
+        if problem is not None:
+            problems.append(problem)
             continue
-        if data.get("schema_version") != MANIFEST_SCHEMA:
-            problems.append(f"{manifest_path}: unsupported schema_version")
-            continue
-        if data.get("ok") is not True:
-            problems.append(f"{manifest_path}: manifest not ok")
-            continue
-        archive_path = _resolve_archive_path(data, manifest_path)
-        if archive_path is None:
-            problems.append(f"{manifest_path}: archive file missing")
-            continue
-        if archive_path.stat().st_size != data.get("archive_bytes"):
-            problems.append(f"{manifest_path}: archive size mismatch")
-            continue
-        try:
-            actual_sha = _sha256_file(archive_path)
-        except OSError as exc:
-            problems.append(f"{manifest_path}: archive unreadable ({exc})")
-            continue
-        if actual_sha != data.get("archive_sha256"):
-            problems.append(f"{manifest_path}: archive sha256 mismatch")
-            continue
-        try:
-            ids, digests = _read_snapshot(archive_path)
-        except (OSError, EOFError, ValueError, json.JSONDecodeError) as exc:
-            problems.append(f"{manifest_path}: archive corrupt ({exc})")
-            continue
-        if len(ids) != data.get("rows_in_archive"):
-            problems.append(f"{manifest_path}: row count mismatch")
-            continue
-        if dict(digests) != dict(data.get("row_digests") or {}):
-            problems.append(f"{manifest_path}: row digest mismatch")
-            continue
-        completed_at = data.get("verified_completed_at")
-        try:
-            _parse_utc(completed_at)
-        except (TypeError, ValueError):
-            problems.append(f"{manifest_path}: bad verified_completed_at")
-            continue
-        verified.append(VerifiedArchive(
-            manifest_path=str(manifest_path),
-            archive_path=str(archive_path),
-            archive_sha256=actual_sha,
-            verified_completed_at=completed_at,
-            row_digests=dict(digests),
-        ))
+        verified.append(archive)
     return verified, problems
 
 
@@ -417,27 +462,10 @@ def prune_retired_evidence(
             "now: a timezone-aware datetime is required (no system-clock fallback)")
     archive_root = Path(archive_root)
     retired, span_rows = _counts(config.database_path)
+    active_plan, verified, manifest_problems = _select_plan(
+        config, archive_root, now, retention_days, plan)
 
-    manifest_problems: list[str] = []
-    if plan is None:
-        built_plan, verified, manifest_problems = _build_plan(
-            config, archive_root, now, retention_days)
-        active_plan = built_plan
-    else:
-        if PrunePlan.compute_hash(plan.span_ids, plan.row_digests,
-                                  plan.archives, plan.retention_days
-                                  ) != plan.plan_hash:
-            raise PruneRefused("frozen plan hash does not match its contents")
-        verified, manifest_problems = _load_verified_archives(archive_root)
-        active_plan = plan
-
-    due = bool(active_plan.archives) and any(
-        _is_due(va, now, active_plan.retention_days)
-        for va in active_plan.archives)
-    oldest: str | None = None
-    if verified:
-        oldest = min(verified, key=lambda va: (
-            _parse_utc(va.verified_completed_at), va.archive_path)).archive_path
+    due, oldest = _due_and_oldest(active_plan, verified, now)
 
     base_report = dict(
         retired_documents=retired,
@@ -456,7 +484,52 @@ def prune_retired_evidence(
         return PruneReport(dry_run=True, **base_report)
     if not due:
         return PruneReport(dry_run=False, deleted_rows=0, **base_report)
+    return _apply_prune(config, now, active_plan, base_report)
 
+
+def _select_plan(config: CatalogConfig, archive_root: Path, now: datetime,
+                 retention_days: int,
+                 plan: PrunePlan | None,
+                 ) -> tuple[PrunePlan, list[VerifiedArchive], list[str]]:
+    """Freeze this run's plan: build it from verified due archives, or verify
+    the caller-supplied frozen plan against its own hash and use it as-is.
+    The verified archives (and manifest problems) are loaded either way.
+    """
+    if plan is None:
+        built_plan, verified, problems = _build_plan(
+            config, archive_root, now, retention_days)
+        return built_plan, verified, problems
+    if PrunePlan.compute_hash(plan.span_ids, plan.row_digests,
+                              plan.archives, plan.retention_days
+                              ) != plan.plan_hash:
+        raise PruneRefused("frozen plan hash does not match its contents")
+    verified, problems = _load_verified_archives(archive_root)
+    return plan, verified, problems
+
+
+def _due_and_oldest(active_plan: PrunePlan,
+                    verified: Sequence[VerifiedArchive],
+                    now: datetime) -> tuple[bool, str | None]:
+    """Is any planned archive past retention, and which verified archive is
+    the oldest one (for the report)?"""
+    due = bool(active_plan.archives) and any(
+        _is_due(va, now, active_plan.retention_days)
+        for va in active_plan.archives)
+    oldest: str | None = None
+    if verified:
+        oldest = min(verified, key=lambda va: (
+            _parse_utc(va.verified_completed_at), va.archive_path)).archive_path
+    return due, oldest
+
+
+def _apply_prune(config: CatalogConfig, now: datetime,
+                 active_plan: PrunePlan,
+                 base_report: dict[str, Any]) -> PruneReport:
+    """Apply side of ``prune_retired_evidence``: take the operation lock,
+    re-verify the frozen plan against the live state before the first delete
+    (D4), publish the pending receipt naming the FULL plan (D5), delete in
+    batches (each re-verified inside its own transaction), finalize.
+    """
     receipt_path: str | None = None
     deleted = 0
     already_absent: tuple[str, ...] = ()
@@ -464,37 +537,11 @@ def prune_retired_evidence(
                               operation="prune_retired_evidence"):
         # ---- D4: re-verify plan vs. current state before the first delete ----
         _verify_archives_on_disk(active_plan)
-        states = _span_states(config.database_path, active_plan.span_ids)
-        todo: list[str] = []
-        absent: list[str] = []
-        for span_id in active_plan.span_ids:
-            state = states.get(span_id)
-            if state is None:
-                absent.append(span_id)          # already deleted: idempotent, not drift
-                continue
-            live_digest, status = state
-            if status != "retired":
-                raise PruneRefused(
-                    f"document of {span_id} is no longer retired; whole apply refused")
-            if live_digest != active_plan.row_digests[span_id]:
-                raise PruneRefused(
-                    f"row {span_id} changed since the plan was frozen; whole apply refused")
+        states, absent = _pre_delete_check(config, active_plan)
         already_absent = tuple(absent)
 
         # ---- D5: pending receipt naming the FULL plan, before any delete ----
-        receipt: dict[str, Any] = {
-            "schema_version": RECEIPT_SCHEMA,
-            "status": "pending",
-            "now": now.astimezone(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
-            "retention_days": active_plan.retention_days,
-            "plan_hash": active_plan.plan_hash,
-            "span_ids": list(active_plan.span_ids),
-            "row_digests": dict(active_plan.row_digests),
-            "archives": [va.to_dict() for va in active_plan.archives],
-            "already_absent": list(already_absent),
-            "committed_ids": [],
-            "deleted_rows": 0,
-        }
+        receipt = _pending_receipt(now, active_plan, already_absent)
         receipt_file = config.catalog_dir / "artifacts" / "gates" / (
             f"prune-retired-{uuid.uuid4().hex[:16]}.json")
         receipt_file.parent.mkdir(parents=True, exist_ok=True)
@@ -504,30 +551,7 @@ def prune_retired_evidence(
         store = CatalogStore(config.database_path)
         todo = _plan_todo(active_plan, states, absent)
         for batch in _chunks(todo, BATCH_SIZE):
-            with store.transaction() as connection:
-                # atomic re-verification WITH the delete (D4)
-                placeholders = ",".join("?" * len(batch))
-                rows = {row["span_id"]: row for row in connection.execute(
-                    _SPAN_STATE.format(placeholders=placeholders), batch)}
-                for span_id in batch:
-                    row = rows.get(span_id)
-                    if row is None:
-                        raise PruneRefused(
-                            f"row {span_id} vanished mid-apply; whole apply refused")
-                    digest_row = {key: row[key] for key in row.keys()
-                                  if key != "__source_status"}
-                    if row["__source_status"] != "retired":
-                        raise PruneRefused(
-                            f"document of {span_id} reactivated mid-apply; "
-                            "whole apply refused")
-                    if _row_digest(digest_row) != active_plan.row_digests[span_id]:
-                        raise PruneRefused(
-                            f"row {span_id} changed mid-apply; whole apply refused")
-                cursor = connection.execute(
-                    f"DELETE FROM evidence_spans WHERE span_id IN ({placeholders})",
-                    batch)
-                batch_rows = cursor.rowcount
-            deleted += max(batch_rows, 0)
+            deleted += _delete_batch(store, active_plan, batch)
             receipt["committed_ids"] = list(
                 dict.fromkeys(receipt["committed_ids"] + batch))
             receipt["deleted_rows"] = deleted
@@ -544,6 +568,84 @@ def prune_retired_evidence(
         **{k: v for k, v in base_report.items() if k != "plan"},
         plan=active_plan,
     )
+
+
+def _pre_delete_check(
+        config: CatalogConfig,
+        active_plan: PrunePlan) -> tuple[dict[str, tuple[str, str]], list[str]]:
+    """D4: re-read every planned row under the lock before the first delete.
+
+    Refuses the WHOLE apply (``PruneRefused``, 0 rows deleted) on any drift;
+    ids whose rows are already gone are returned as ``absent`` (idempotent,
+    not drift).
+    """
+    states = _span_states(config.database_path, active_plan.span_ids)
+    absent: list[str] = []
+    for span_id in active_plan.span_ids:
+        state = states.get(span_id)
+        if state is None:
+            absent.append(span_id)          # already deleted: idempotent, not drift
+            continue
+        live_digest, status = state
+        if status != "retired":
+            raise PruneRefused(
+                f"document of {span_id} is no longer retired; whole apply refused")
+        if live_digest != active_plan.row_digests[span_id]:
+            raise PruneRefused(
+                f"row {span_id} changed since the plan was frozen; whole apply refused")
+    return states, absent
+
+
+def _delete_batch(store: CatalogStore, active_plan: PrunePlan,
+                  batch: list[str]) -> int:
+    """Delete one batch: re-read and re-verify every planned row INSIDE the
+    same transaction that deletes them (D4); any drift raises ``PruneRefused``
+    and aborts the whole apply.  Returns the rows deleted by this batch.
+    """
+    placeholders = ",".join("?" * len(batch))
+    with store.transaction() as connection:
+        # atomic re-verification WITH the delete (D4)
+        rows = {row["span_id"]: row for row in connection.execute(
+            _SPAN_STATE.format(placeholders=placeholders), batch)}
+        for span_id in batch:
+            row = rows.get(span_id)
+            if row is None:
+                raise PruneRefused(
+                    f"row {span_id} vanished mid-apply; whole apply refused")
+            digest_row = {key: row[key] for key in row.keys()
+                          if key != "__source_status"}
+            if row["__source_status"] != "retired":
+                raise PruneRefused(
+                    f"document of {span_id} reactivated mid-apply; "
+                    "whole apply refused")
+            if _row_digest(digest_row) != active_plan.row_digests[span_id]:
+                raise PruneRefused(
+                    f"row {span_id} changed mid-apply; whole apply refused")
+        cursor = connection.execute(
+            f"DELETE FROM evidence_spans WHERE span_id IN ({placeholders})",
+            batch)
+        batch_rows = cursor.rowcount
+    return max(batch_rows, 0)
+
+
+def _pending_receipt(now: datetime, active_plan: PrunePlan,
+                     already_absent: Sequence[str]) -> dict[str, Any]:
+    """D5: the receipt payload naming the FULL plan, published atomically
+    BEFORE the first delete (the caller updates it after every commit and
+    finalizes it to ``complete``)."""
+    return {
+        "schema_version": RECEIPT_SCHEMA,
+        "status": "pending",
+        "now": now.astimezone(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "retention_days": active_plan.retention_days,
+        "plan_hash": active_plan.plan_hash,
+        "span_ids": list(active_plan.span_ids),
+        "row_digests": dict(active_plan.row_digests),
+        "archives": [va.to_dict() for va in active_plan.archives],
+        "already_absent": list(already_absent),
+        "committed_ids": [],
+        "deleted_rows": 0,
+    }
 
 
 def _plan_todo(plan: PrunePlan, states: Mapping[str, tuple[str, str]],

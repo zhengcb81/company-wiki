@@ -231,6 +231,49 @@ def test_invalid_unknown_and_source_locator_mismatch_fail_closed(evidence_catalo
         service.list_spans(source_id=evidence_catalog["source_id"], limit=0)
 
 
+def test_active_only_catalog_identifies_archived_legacy_evidence(
+    evidence_catalog, capsys
+):
+    from company_wiki.source_catalog.cli import main
+
+    query = _query_module()
+    catalog = evidence_catalog["catalog"]
+    target = _span_by_kind(evidence_catalog, "table")
+    with catalog.store.transaction() as connection:
+        connection.execute(
+            "UPDATE documents SET source_status='retired' WHERE document_id=?",
+            (evidence_catalog["document_id"],),
+        )
+        connection.execute(
+            "DELETE FROM evidence_spans WHERE document_id=?",
+            (evidence_catalog["document_id"],),
+        )
+        connection.execute(
+            "INSERT INTO catalog_meta(key,value) VALUES(?,?)",
+            ("legacy_evidence_retention", "active_only"),
+        )
+    service = query.EvidenceQueryService(catalog.config.database_path)
+    with pytest.raises(query.EvidenceQueryArchivedError, match="archived"):
+        service.lookup(
+            source_id=evidence_catalog["source_id"], locator=target["locator"]
+        )
+    with pytest.raises(query.EvidenceQueryArchivedError, match="archived"):
+        service.list_spans(document_id=evidence_catalog["document_id"])
+    with pytest.raises(query.EvidenceQueryArchivedError, match="archived"):
+        service.list_spans(source_id=evidence_catalog["source_id"])
+    with pytest.raises(query.EvidenceQueryNotFoundError):
+        service.list_spans(source_id="urn:company-wiki:source:sha256:" + "0" * 64)
+
+    assert main([
+        "--config", str(evidence_catalog["config_path"]),
+        "evidence", "--source-id", evidence_catalog["source_id"],
+        "--locator", target["locator"],
+    ]) == 1
+    error = json.loads(capsys.readouterr().err)
+    assert error["error_type"] == "legacy_evidence_archived"
+    assert error["retryable"] is False
+
+
 def test_missing_database_is_unavailable_without_creating_parent(tmp_path):
     query = _query_module()
     database = tmp_path / "missing" / "catalog.sqlite3"

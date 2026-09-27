@@ -1,0 +1,1858 @@
+{
+  "schema_version": "narrative-g1-pilot/0.1.0",
+  "runner": "scripts/narrative_evidence_pilot.py",
+  "read_only_roots": [
+    "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\transcripts"
+  ],
+  "generated_from_manifest": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\narrative-evidence-pilot-2026-09-26\\g1_sample_manifest.json",
+  "elapsed_seconds": 3.803,
+  "samples": [
+    {
+      "sample_id": "P02",
+      "title": "中微公司：2025年半年度报告.pdf",
+      "source_sha256": "91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+      "source_file_bytes": 6361468,
+      "document_kind": "semi_annual_report",
+      "status": "partial",
+      "coverage_complete": false,
+      "page_count": 188,
+      "pages_read": 188,
+      "opaque_pages": [],
+      "table_scan_page_count": 1,
+      "deferred_table_pages": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83,
+        84,
+        85,
+        86,
+        87,
+        88,
+        89,
+        90,
+        91,
+        92,
+        93,
+        94,
+        95,
+        96,
+        97,
+        98,
+        99,
+        100,
+        101,
+        102,
+        103,
+        104,
+        105,
+        106,
+        107,
+        108,
+        109,
+        110,
+        111,
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119,
+        120,
+        121,
+        122,
+        123,
+        124,
+        125,
+        126,
+        127,
+        128,
+        129,
+        130,
+        131,
+        132,
+        133,
+        134,
+        135,
+        136,
+        137,
+        138,
+        139,
+        140,
+        141,
+        142,
+        143,
+        144,
+        145,
+        146,
+        147,
+        148,
+        149,
+        150,
+        151,
+        152,
+        153,
+        154,
+        155,
+        156,
+        157,
+        158,
+        159,
+        160,
+        161,
+        162,
+        163,
+        164,
+        165,
+        166,
+        167,
+        168,
+        169,
+        170,
+        171,
+        172,
+        173,
+        174,
+        175,
+        176,
+        177,
+        178,
+        179,
+        180,
+        181,
+        182,
+        183,
+        184,
+        185,
+        186,
+        187,
+        188
+      ],
+      "focus_pages": [
+        21
+      ],
+      "selected_focus_pages": [
+        21
+      ],
+      "line_count": 0,
+      "parse_errors": [],
+      "source_units": 4694,
+      "candidate_count": 37,
+      "selected_span_count": 37,
+      "locator_roundtrip_verified_count": 37,
+      "locator_roundtrip_failed_count": 0,
+      "locator_roundtrip_failed_span_ids": [],
+      "dropped_financial_count": 0,
+      "omitted_candidate_count": 0,
+      "selected_text_bytes": 4340,
+      "summary_input_bytes": 48378,
+      "summary_input_to_source_ratio": 0.007605,
+      "elapsed_seconds": 2.347,
+      "selected_evidence_preview": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:ba2fe9e077ff52230e24932028de17714887b3c5d33874ebb0831c360b6bd742",
+          "locator_v1": "loc:v1/page:23/paragraph:11",
+          "coordinates": {
+            "page_number": 23,
+            "paragraph_index": 11,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "core_business",
+            "orders_customers",
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "的研发投入，与国内外一流客户保持紧密合作，相关设备产品研发进展顺利、客户端验证情况良"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:7b45aeaf603a160dbbf88577bda9c5da3c70ddac2161f8684ff0a39ab761aa7c",
+          "locator_v1": "loc:v1/page:36/paragraph:5",
+          "coordinates": {
+            "page_number": 36,
+            "paragraph_index": 5,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers",
+            "capacity_projects",
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "刻蚀设备，并积累了大量的芯片生产线量产数据和客户验证数据。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:dedc7f2db06c8331f5932eb7750a15f7557b4ebfc5649c1550c6a1740fb875bd",
+          "locator_v1": "loc:v1/page:40/paragraph:29",
+          "coordinates": {
+            "page_number": 40,
+            "paragraph_index": 29,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers",
+            "capacity_projects",
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "2.21\n-\n1.83\nBeta 机在3D NAND 和DRAM 存储\n客户的产线上的通过多个技术节点\n上的多个刻蚀工艺验证，部分工艺\n取得重复订单并投入大规模量产。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:75e4ec167669beeb5a615a851c3e4c004672440ecc3f0c7de249cae107d2d241",
+          "locator_v1": "loc:v1/page:15/paragraph:17",
+          "coordinates": {
+            "page_number": 15,
+            "paragraph_index": 17,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers",
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "公司针对先进逻辑和存储器件制造中关键刻蚀工艺的高端产品新增\n付运量显著提升，在先进逻辑器件和先进存储器件中多种关键刻蚀工艺实现大规模量产。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:caa2cce8e9029cb579201fae0fd6a8b7c612d7a404f243ff99839ee5d199295d",
+          "locator_v1": "loc:v1/page:18/paragraph:25",
+          "coordinates": {
+            "page_number": 18,
+            "paragraph_index": 25,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects",
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "公司的MOCVD 设备在行业领先客户的生产线上大规模投入量产，"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:bcfc351d9809b8feec1ef40c522c98680533fe4e7a365e08b68b595834d94429",
+          "locator_v1": "loc:v1/page:23/paragraph:23",
+          "coordinates": {
+            "page_number": 23,
+            "paragraph_index": 23,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects",
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "场竞争力，拓宽机台的生产能力并赢得更多的量产机会。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:714a15ea374dcfd2fc5f3983a1467ab8871a47a83652946c787de988ed035eec",
+          "locator_v1": "loc:v1/page:25/paragraph:14",
+          "coordinates": {
+            "page_number": 25,
+            "paragraph_index": 14,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects",
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "电机系统等芯片和器件的50 多个客户的生产线上大规模量产，并继续验证更多ICP 刻蚀工艺。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:d92023b015526d0490cf1e2e5606004fc32c2b9cbf28d9ab109c5b20b536f2f1",
+          "locator_v1": "loc:v1/page:26/paragraph:6",
+          "coordinates": {
+            "page_number": 26,
+            "paragraph_index": 6,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects",
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "管Micro-LED、AR 和VR 智能眼镜用的超透镜（Metalens）等特色器件的产线上实现量产，并取"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:48ac7e87c8583115596f2f5d61f32d8f34692359cee09d4d6d446a52af24bd59",
+          "locator_v1": "loc:v1/page:29/paragraph:8",
+          "coordinates": {
+            "page_number": 29,
+            "paragraph_index": 8,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers",
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "量产验证，并已经进入先进制程工艺验证和客户验证阶段；"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:fe2746092c3fcefa72dff3e42794f794d967f62e4ee4514098ff05a2968f0be5",
+          "locator_v1": "loc:v1/page:37/paragraph:25",
+          "coordinates": {
+            "page_number": 37,
+            "paragraph_index": 25,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers",
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "与8 英寸工艺的便捷切换，PRISMO PD5 设备已在客户生产线上验证通过并获得重复订单。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:d58eb7f103e1200429de96fd90fb4262c747870757c7690afa2145ef89a3365a",
+          "locator_v1": "loc:v1/page:38/paragraph:17",
+          "coordinates": {
+            "page_number": 38,
+            "paragraph_index": 17,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers",
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "量产验证，并已经进入先进制程工艺验证和客户验证阶段；"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:6b3bacefa9bef9a40b83e8496cf57f767fd4f52caab95708689ad4af30b886da",
+          "locator_v1": "loc:v1/page:40/paragraph:36",
+          "coordinates": {
+            "page_number": 40,
+            "paragraph_index": 36,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers",
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "4.50\n0.66\n3.32\n客户端验证阶段，客户端Beta 机\n28nm/22nm 成熟制程量产验证，7nm\n及以下先进制程客户工艺验证。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:37bfe367f2d2e78f11341f59998cb5e9ff306ce944d3c9fda6a44d0c189cba60",
+          "locator_v1": "loc:v1/page:40/paragraph:42",
+          "coordinates": {
+            "page_number": 40,
+            "paragraph_index": 42,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers",
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "国内头部存储芯\n片生产客户已完成量产验证，并收\n到批量订单。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:291440e5eab7eb8ed2809d32fed8723b9dd9014cab60f6d8c7d583d6876f8828",
+          "locator_v1": "loc:v1/page:41/paragraph:17",
+          "coordinates": {
+            "page_number": 41,
+            "paragraph_index": 17,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers",
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "4.30\n0.43\n0.95\nBeta 机客户端验证中\n通过工艺、硬件、控制等的持续优化\n使产品性能满足客户全部spec 要求，\n2025 年底前完成（STR）小批量试产"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:e64f374b60ea5913fe5f6b6599b9e14d3f72c729296a48e500ff5340252c70a7",
+          "locator_v1": "loc:v1/page:18/paragraph:28",
+          "coordinates": {
+            "page_number": 18,
+            "paragraph_index": 28,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "ALD 薄膜设备，目前已有多款产品进入市场并获得大批量重复性订单。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:60eea541fe31f2ef22013217f0537e9a5823f79b35743db3fca9a362403eda09",
+          "locator_v1": "loc:v1/page:20/paragraph:11",
+          "coordinates": {
+            "page_number": 20,
+            "paragraph_index": 11,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "在与客户签订订单后，根据订单情况进行定制化设计及生产制造，以应对客户的差异化需求。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:39a59520d0308c31e4de81e486ec8f3c376dfdafa22e21b3abaa8d0673e48100",
+          "locator_v1": "loc:v1/page:24/paragraph:10",
+          "coordinates": {
+            "page_number": 24,
+            "paragraph_index": 10,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "的客户提供了均衡的解决方案，持续获得批量订单，截至2025 年上半年累计装机突破了3300 个"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:2fe1079602eacb81e828b4df9f17588941c5f347533ba9d78282ff6ba446dfea",
+          "locator_v1": "loc:v1/page:26/paragraph:2",
+          "coordinates": {
+            "page_number": 26,
+            "paragraph_index": 2,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "报告期内，公司Nanova LUX-Cryo 在客户端认证通过，并取得重复订单。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:31db206412935a53fd36b59fec0c06bdf477aecd61d84f05c9fcbd00ee7e83d8",
+          "locator_v1": "loc:v1/page:27/paragraph:4",
+          "coordinates": {
+            "page_number": 27,
+            "paragraph_index": 4,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "报告期内样机验证顺利，满足客户小批量生产要求，并已取得客户重复订单。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:3737dfb7b715e44be0ee91f579cf76b965f71630d2df80f7949f148088de1faa",
+          "locator_v1": "loc:v1/page:28/paragraph:12",
+          "coordinates": {
+            "page_number": 28,
+            "paragraph_index": 12,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "（包含高深宽比金属互联应用）及三维存储器件字线应用各项性能指标，并获得客户重复量产订"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:ea107cdf13e7d9cbb73867d57fc3b2da2d857fff881b982ae5092209c78a4242",
+          "locator_v1": "loc:v1/page:29/paragraph:10",
+          "coordinates": {
+            "page_number": 29,
+            "paragraph_index": 10,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "工艺的需求，已顺利付运先进制程客户端，进入工艺验证和客户验证阶段；"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:278d4ad45c86684d765b73eafae33f1753b159b01c77bc2a3b6250cbdaa26dfe",
+          "locator_v1": "loc:v1/page:30/paragraph:25",
+          "coordinates": {
+            "page_number": 30,
+            "paragraph_index": 25,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "成果均取得行业主流客户的认可，客户验证情况良好，巩固了公司产品的竞争优势。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:8f7eff1de1ffea4f2c05b27d818a8475360777f1887a2c986cc5330f367a5709",
+          "locator_v1": "loc:v1/page:32/paragraph:14",
+          "coordinates": {
+            "page_number": 32,
+            "paragraph_index": 14,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "new_business"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "公司不断践行外延式发展策略，公司下属的中微汇链、中微惠创、芯汇康在新业务拓展领域"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:1ffdff1db111c5b64cd4f47e24ae87e33d319a40a2a52d5fdbe25c2dbd3b622e",
+          "locator_v1": "loc:v1/page:36/paragraph:10",
+          "coordinates": {
+            "page_number": 36,
+            "paragraph_index": 10,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "艺的设备在客户的产线验证进展顺利，CCP 和ICP 设备中的部分先进机型成为先进器件生产中关"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:2633259fb5fb89756361f92feaf1f7ac383f5dabae35770b47a3e42f2cc265e4",
+          "locator_v1": "loc:v1/page:36/paragraph:32",
+          "coordinates": {
+            "page_number": 36,
+            "paragraph_index": 32,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "统等领域不断拓展应用，持续获得订单。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:9106b6982f96800b1c02b8c114f4ee2edee101a75b8627f6733ea308139b064b",
+          "locator_v1": "loc:v1/page:37/paragraph:22",
+          "coordinates": {
+            "page_number": 37,
+            "paragraph_index": 22,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "长维护周期等竞争优势，已在行业领先客户端用于Micro-LED 的小批量生产验证并获得重复订单。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:9112e3d05c97891465dd5b1f22f47fe7f50ef655961017dedcf9202a8d4ed768",
+          "locator_v1": "loc:v1/page:38/paragraph:19",
+          "coordinates": {
+            "page_number": 38,
+            "paragraph_index": 19,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "工艺的需求，已顺利付运先进制程客户端，进入工艺验证和客户验证阶段；"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:207b6a4b06395a1b62b6a4baae6184d8b20783c907291d38076bdb0bec0a9f34",
+          "locator_v1": "loc:v1/page:39/paragraph:10",
+          "coordinates": {
+            "page_number": 39,
+            "paragraph_index": 10,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "new_business"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "公司研发新产品的速度显著加快，过去通常需要三到五年开发一款新设\n备，现在只需两年或更短时间就能开发出有竞争力的新设备，并顺利进入市场，公司有望在未来\n几年更大规模地推出新产品。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:bb42c602c9e2b9eaab6c90906d511b412707127294d01868f8b6f250e9f1c5af",
+          "locator_v1": "loc:v1/page:40/paragraph:12",
+          "coordinates": {
+            "page_number": 40,
+            "paragraph_index": 12,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "4.24\n0.40\n3.87\n工艺开发阶段,多台Beta 机已交付客\n户并通过了客户验证。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:81450645a18772f57746b1d0dbcb759e38d812be10b7b08c5235cd2edf80c3e5",
+          "locator_v1": "loc:v1/page:40/paragraph:23",
+          "coordinates": {
+            "page_number": 40,
+            "paragraph_index": 23,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "成功研制适用于5 纳米逻辑芯片制造\n用的的ICP 刻蚀工艺的刻蚀设备，并\n完成在先进逻辑芯片生产厂家的评\n估，实现销售。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:8a006f8f8b85a86321d669f6d6209ae6819775e8bde4baea5c13cacd6d6001a7",
+          "locator_v1": "loc:v1/page:40/paragraph:41",
+          "coordinates": {
+            "page_number": 40,
+            "paragraph_index": 41,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "2.46\n0.44\n2.09\n客户端验证阶段；"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:278e3a2c6668a9d106df597f5f026d7e179dfe679b0fdf78069a06a7184d6544",
+          "locator_v1": "loc:v1/page:40/paragraph:44",
+          "coordinates": {
+            "page_number": 40,
+            "paragraph_index": 44,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "进一步实现在逻辑客户和功能性芯片\n客户的量产验证，基本实现高阶半导\n体生产CVD 金属钨工艺的全覆盖"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:1928460e6035bc5dad114002c5cd311189c07cd44cd646b64d7f857d8f48e199",
+          "locator_v1": "loc:v1/page:56/paragraph:22",
+          "coordinates": {
+            "page_number": 56,
+            "paragraph_index": 22,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "new_business"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "2、大力拓展现有业务，开拓新市场和新领域；"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:d3ee1cd0c6b4eb2b85fd492597d967aedd8e126ed50185a6a0ec0e1ed533a5e6",
+          "locator_v1": "loc:v1/page:26/paragraph:9",
+          "coordinates": {
+            "page_number": 26,
+            "paragraph_index": 9,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers",
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "先进封装、2.5D 封装和微机电系统芯片生产线等成熟市场继续获得重复订单的同时，在12 英寸"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:13367855eb68c8006126eb7b81c21895e39e45333b4de106c57fe64175554ee3",
+          "locator_v1": "loc:v1/page:21/paragraph:3",
+          "coordinates": {
+            "page_number": 21,
+            "paragraph_index": 3,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "new_business"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "progress_or_change_language",
+            "project_plan_or_status"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "预计未来五到十年，中微公司将通过自主研发以及携手行业合作伙伴，覆盖集成电路关键领域超"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:5a64dbeaa17e21de5abeacc1469e2b604ce6c95e415da91cd33f0b939ba0a0ae",
+          "locator_v1": "loc:v1/page:21/paragraph:2",
+          "coordinates": {
+            "page_number": 21,
+            "paragraph_index": 2,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "new_business"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "project_plan_or_status"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "司将整合产业链上下游和相关资源作为另一发力点，积极考虑投资和并购，推动公司更快发展。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:846337a5c8efdf552a8270c195d61d57ade32be954ed39334e4a6d1b95911c93",
+          "locator_v1": "loc:v1/page:40/paragraph:22",
+          "coordinates": {
+            "page_number": 40,
+            "paragraph_index": 22,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "adjacent_subject_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "4.06\n0.31\n3.94\nBeta 机台在多个先进逻辑客户的产\n线上开展更多刻蚀工艺的验证，部\n分工艺投入在客户的研发线上串线\n和小量产。"
+        }
+      ]
+    },
+    {
+      "sample_id": "P03",
+      "title": "中微公司：2026年第一季度报告.pdf",
+      "source_sha256": "ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+      "source_file_bytes": 217264,
+      "document_kind": "quarterly_report",
+      "status": "partial",
+      "coverage_complete": false,
+      "page_count": 15,
+      "pages_read": 15,
+      "opaque_pages": [],
+      "table_scan_page_count": 1,
+      "deferred_table_pages": [
+        1,
+        2,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "focus_pages": [
+        3
+      ],
+      "selected_focus_pages": [
+        3
+      ],
+      "line_count": 0,
+      "parse_errors": [],
+      "source_units": 516,
+      "candidate_count": 7,
+      "selected_span_count": 7,
+      "locator_roundtrip_verified_count": 7,
+      "locator_roundtrip_failed_count": 0,
+      "locator_roundtrip_failed_span_ids": [],
+      "dropped_financial_count": 0,
+      "omitted_candidate_count": 0,
+      "selected_text_bytes": 801,
+      "summary_input_bytes": 9319,
+      "summary_input_to_source_ratio": 0.042893,
+      "elapsed_seconds": 0.629,
+      "selected_evidence_preview": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:89a8fb065aa476baa61d1153db1eec44bb90cfbd0a9a6f7694288430529ea749",
+          "locator_v1": "loc:v1/page:2/paragraph:34",
+          "coordinates": {
+            "page_number": 2,
+            "paragraph_index": 34,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects",
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "公司累计已有超过8300 个反应台在国内外180 余条客户芯片及LED 生产线全面量产。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:4d04046407b50faaaeb65ee87ee209c355582b14ddedf114d6cda698503df1db",
+          "locator_v1": "loc:v1/page:5/paragraph:12",
+          "coordinates": {
+            "page_number": 5,
+            "paragraph_index": 12,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers",
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "公司针对先进逻辑和存储器件制造中关键刻蚀工艺的高\n端产品新增付运量显著提升，先进逻辑器件中段关键刻\n蚀工艺和先进存储器件超高深宽比刻蚀工艺实现量产。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:a4fd693ed979ef889de904adfe90425fdb587ecbedec812f8bdda7cd2350ae56",
+          "locator_v1": "loc:v1/page:2/paragraph:43",
+          "coordinates": {
+            "page_number": 2,
+            "paragraph_index": 43,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "公司针对先进逻辑和存储器件制造中关键刻蚀工艺的高端产品新增付运量显著提升。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:f828a926ffe8572f96ee17250700314c2b6decaca983c42d749b2e888020197c",
+          "locator_v1": "loc:v1/page:2/paragraph:46",
+          "coordinates": {
+            "page_number": 2,
+            "paragraph_index": 46,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "器实现了稳定可靠的大规模量产。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:0c8909f6c75b3b3849f40725c57f25ed87663c0e9ab1ae5e3ec20ce047167236",
+          "locator_v1": "loc:v1/page:3/paragraph:19",
+          "coordinates": {
+            "page_number": 3,
+            "paragraph_index": 19,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "公司的减压EPI 设备已在成熟制程客户端验证成功，也已付运先进制程客户端，部分先进工"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:3b71a4f81337cc7c130f69fe2afec759b3d44c4db86cbb0b4841d20e74881c28",
+          "locator_v1": "loc:v1/page:3/paragraph:25",
+          "coordinates": {
+            "page_number": 3,
+            "paragraph_index": 25,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "和用于红黄光LED 的GaAs MOCVD 设备已进入客户端验证阶段，并且部分得到批量订货。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:8ac36fbb470406c354cc1c9e0fcbac3948feb3c27ee08690e966f4026badf7e5",
+          "locator_v1": "loc:v1/page:3/paragraph:24",
+          "coordinates": {
+            "page_number": 3,
+            "paragraph_index": 24,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "new_business"
+          ],
+          "selection_reasons": [
+            "adjacent_subject_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "四款MOCVD 新产品包括用于SiC 和GaN 功率器件的MOCVD，用于Micro LED 的GaN MOCVD"
+        }
+      ]
+    },
+    {
+      "sample_id": "P07",
+      "title": "万润股份：投资者关系活动记录表20260515.pdf",
+      "source_sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+      "source_file_bytes": 153851,
+      "document_kind": "investor_relations",
+      "status": "needs_review",
+      "coverage_complete": false,
+      "page_count": 6,
+      "pages_read": 6,
+      "opaque_pages": [],
+      "table_scan_page_count": 2,
+      "deferred_table_pages": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "focus_pages": [
+        5,
+        6
+      ],
+      "selected_focus_pages": [
+        5,
+        6
+      ],
+      "line_count": 0,
+      "parse_errors": [],
+      "source_units": 233,
+      "candidate_count": 5,
+      "selected_span_count": 5,
+      "locator_roundtrip_verified_count": 5,
+      "locator_roundtrip_failed_count": 0,
+      "locator_roundtrip_failed_span_ids": [],
+      "dropped_financial_count": 0,
+      "omitted_candidate_count": 0,
+      "selected_text_bytes": 1290,
+      "summary_input_bytes": 25223,
+      "summary_input_to_source_ratio": 0.163944,
+      "elapsed_seconds": 0.64,
+      "selected_evidence_preview": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:174a1dbc2dd333bf4c47be03ae46290f7d6cc16fd2a56c3a211935d68df93640",
+          "locator_v1": "loc:v1/page:6/table:0/row:0/column:1",
+          "coordinates": {
+            "page_number": 6,
+            "paragraph_index": null,
+            "table_index": 0,
+            "row_index": 0,
+            "column_index": 1
+          },
+          "quality_flags": [
+            "locator_unstable"
+          ],
+          "topics": [
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "progress_or_change_language",
+            "specific_business_event",
+            "management_statement"
+          ],
+          "source_role": "management",
+          "excerpt": "答：您好！公司近年来为应对车用沸石分子筛产品下游需求波动产生\n的影响，公司积极开发并推广石油化工催化领域的沸石分子筛产品，2025\n年公司与中国石化催化剂有限公司签署《项目合作意向书》，现已有产品\n实现销售。谢谢！"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:ff74052044250bcd6f218dacc6cbcbb15d4e890ad9e7f1fa93e24ef0981c4b47",
+          "locator_v1": "loc:v1/page:5/table:0/row:0/column:1",
+          "coordinates": {
+            "page_number": 5,
+            "paragraph_index": null,
+            "table_index": 0,
+            "row_index": 0,
+            "column_index": 1
+          },
+          "quality_flags": [
+            "locator_unstable"
+          ],
+          "topics": [
+            "orders_customers",
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "progress_or_change_language",
+            "project_plan_or_status",
+            "management_statement"
+          ],
+          "source_role": "management",
+          "excerpt": "答：您好！目前公司在半导体制造材料领域已销售的产品主要为光刻\n胶单体、树脂、光酸以及半导体制程中清洗剂添加材料等，现已开发了超\n300 种化合物，在所涉足的产品方面技术已经处于国内领先水平。公司结\n合实际情况与下游客户需求，在新产能方面积极布局，2025 年公司启动\n了万润工业园二期 C05 建设项目，该项目包含半导体光刻胶用相关材料产\n能约 751 吨/年，项目建成后将为公司半导体制造材料业务发展提供产能\n保障。谢谢！"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:eadcc6c7293898f799336440fee8045022530396ac94fef9143a1e01d4b97019",
+          "locator_v1": "loc:v1/page:5/table:0/row:0/column:1",
+          "coordinates": {
+            "page_number": 5,
+            "paragraph_index": null,
+            "table_index": 0,
+            "row_index": 0,
+            "column_index": 1
+          },
+          "quality_flags": [
+            "locator_unstable"
+          ],
+          "topics": [],
+          "selection_reasons": [
+            "linked_question_context"
+          ],
+          "source_role": "investor_question",
+          "excerpt": "15、问：看市场信息，公司在主要产品沸石的市场开拓上的有想法，\n但是市场好像并不是很认可:这一块业务的估值比建龙微纳低。请问董事\n长，在柴油车排放标准短期不提高的情况下，我们的沸石业务开拓有哪"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:9505d17135d846485481c2786ce346f5b0aea7de06b0b0a2aaefcab0c5f3a9e5",
+          "locator_v1": "loc:v1/page:5/table:0/row:0/column:1",
+          "coordinates": {
+            "page_number": 5,
+            "paragraph_index": null,
+            "table_index": 0,
+            "row_index": 0,
+            "column_index": 1
+          },
+          "quality_flags": [
+            "locator_unstable"
+          ],
+          "topics": [],
+          "selection_reasons": [
+            "linked_question_context"
+          ],
+          "source_role": "investor_question",
+          "excerpt": "13、问：公司预计半导体制造等相关材料，何时能为公司贡献 10 以\n上收益？"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:c52adc6e38d5f5610d5daa96004e005c1ba08a292ab00006517acda188477695",
+          "locator_v1": "loc:v1/page:6/table:0/row:0/column:1",
+          "coordinates": {
+            "page_number": 6,
+            "paragraph_index": null,
+            "table_index": 0,
+            "row_index": 0,
+            "column_index": 1
+          },
+          "quality_flags": [
+            "locator_unstable"
+          ],
+          "topics": [],
+          "selection_reasons": [
+            "linked_question_context"
+          ],
+          "source_role": "investor_question",
+          "excerpt": "些安排？谢谢。"
+        }
+      ]
+    },
+    {
+      "sample_id": "T01",
+      "title": "MSFT_Q4_2026_earnings_call.txt",
+      "source_sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+      "source_file_bytes": 66324,
+      "document_kind": "investor_call_transcript",
+      "status": "selected",
+      "coverage_complete": true,
+      "page_count": 0,
+      "pages_read": 0,
+      "opaque_pages": [],
+      "table_scan_page_count": 0,
+      "deferred_table_pages": [],
+      "focus_pages": [],
+      "selected_focus_pages": [],
+      "line_count": 340,
+      "parse_errors": [],
+      "source_units": 32,
+      "candidate_count": 9,
+      "selected_span_count": 9,
+      "locator_roundtrip_verified_count": 9,
+      "locator_roundtrip_failed_count": 0,
+      "locator_roundtrip_failed_span_ids": [],
+      "dropped_financial_count": 0,
+      "omitted_candidate_count": 0,
+      "selected_text_bytes": 41277,
+      "summary_input_bytes": 51819,
+      "summary_input_to_source_ratio": 0.781301,
+      "elapsed_seconds": 0.084,
+      "selected_evidence_preview": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:0247c0da98cfccf1a50d331c960b0dbcdedec0be35321c56bc29558ae46d8e4d",
+          "locator_v1": "loc:v1/paragraph:135",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 135,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "new_business",
+            "orders_customers",
+            "capacity_projects",
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "progress_or_change_language",
+            "specific_business_event",
+            "management_statement"
+          ],
+          "source_role": "management",
+          "excerpt": "Thank you very much, Jonathan. It was a very strong close to what was a record fiscal year for us. All up, our annual revenue surpassed $331 billion, up 18%. Microsoft Cloud surpassed $214 billion, up 27%, and Azure surpassed $100 billion, "
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:e7cd29531ee803f7cb052a598b0c1d66a3b2dba327fd40b6763d7a8fa06b9adb",
+          "locator_v1": "loc:v1/paragraph:263",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 263,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "industry_dynamics",
+            "orders_customers",
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "progress_or_change_language",
+            "specific_business_event",
+            "current_industry_context",
+            "management_statement"
+          ],
+          "source_role": "management",
+          "excerpt": "Thanks, Mark. The questions are a little bit related, but I'll start with maybe the first. Currently, the situation is obviously that demand exceeds available supply in a sort of relatively extreme moment. But when you start to think about "
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:03a7e659c363ca599d93d729f1b8970cba77c69005b619c1b8277ea93c61cb4f",
+          "locator_v1": "loc:v1/paragraph:181",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 181,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "industry_dynamics",
+            "orders_customers",
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "progress_or_change_language",
+            "current_industry_context",
+            "management_statement"
+          ],
+          "source_role": "management",
+          "excerpt": "Thank you, Satya, and good afternoon, everyone. This fiscal year, we delivered over $331 billion in revenue, with growth accelerating to 18%, driven by strong demand across both the Azure platform and our first-party AI applications and ser"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:fc0e2787b84150aab14aea148d513bdc7f92f43bd57885dceac00d39a90ba052",
+          "locator_v1": "loc:v1/paragraph:237",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 237,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "new_business",
+            "orders_customers"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "specific_business_event",
+            "management_statement"
+          ],
+          "source_role": "management",
+          "excerpt": "Thank you, Karl. So the way we are coming at this is, at the end of the day, the goal is to have the firm be in control of their own destiny in terms of what I describe as building their human capital and their token capital, right? So at t"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:d3f798175e3e84b30846a050eff653921d1ce3133016e30abd8f6310bd80468b",
+          "locator_v1": "loc:v1/paragraph:253",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 253,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "industry_dynamics"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "specific_business_event",
+            "current_industry_context",
+            "management_statement"
+          ],
+          "source_role": "management",
+          "excerpt": "Thanks, Brent. First, there are still constraints in the system. I think we've continued to say, I think, now for a number of quarters that demand continues to exceed available supply. And that certainly remains true. You can even see it, I"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:d3eca034d75387cb40aafbaa21e776fe09e10f6f667fc1ec6fc15bc851dfbd4c",
+          "locator_v1": "loc:v1/paragraph:235",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 235,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null
+          },
+          "quality_flags": [],
+          "topics": [],
+          "selection_reasons": [
+            "linked_question_context"
+          ],
+          "source_role": "analyst",
+          "excerpt": "And secondly, how exactly does Microsoft benefit from this shift knowing that you've also got fairly large frontier lab exposure?"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:d9ae6d5ebf72edd28f9ba6a6b56dc209d1d2a01b23ebc5598c8c69b4891c6987",
+          "locator_v1": "loc:v1/paragraph:235",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 235,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null
+          },
+          "quality_flags": [],
+          "topics": [],
+          "selection_reasons": [
+            "linked_question_context"
+          ],
+          "source_role": "analyst",
+          "excerpt": "Okay. Great. Satya, maybe I'll start away from the numbers and ask if you could spend a minute and elaborate on your opening comments about model choice and the protection of corporate IP. Maybe I could ask this in 2 parts. First, how mater"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:25b7ae75f236bc7e1dd078d9ff192ebd40ec1650e3020e2a4828d3e6704ec0cf",
+          "locator_v1": "loc:v1/paragraph:251",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 251,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null
+          },
+          "quality_flags": [],
+          "topics": [],
+          "selection_reasons": [
+            "linked_question_context"
+          ],
+          "source_role": "analyst",
+          "excerpt": "Amy, impressive acceleration in Azure up to 43% going to mid-40s. I guess the questions around the underlying drivers, what you and Satya are seeing in terms of just what's driving this and mainly the question is around capacity constraints"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:9cd90ba918fe95c6c355eb16772448a2f028f807a7e4647928f9ae6ceb1f6f02",
+          "locator_v1": "loc:v1/paragraph:261",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 261,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null
+          },
+          "quality_flags": [],
+          "topics": [],
+          "selection_reasons": [
+            "linked_question_context"
+          ],
+          "source_role": "analyst",
+          "excerpt": "Congratulations on the solid -- really great quarter. Satya, Amy, sentiment around AI remains incredibly volatile with concerns about oversupply coming as well as concerns about component pricing increasing impacting margins. Amy, 2 related"
+        }
+      ]
+    },
+    {
+      "sample_id": "T02",
+      "title": "NVO_Q4_2024_earnings_call.txt",
+      "source_sha256": "d00e2a4537b86628ef019180e27de5ae0a57e715770ddf15135bd75627a6d59e",
+      "source_file_bytes": 66597,
+      "document_kind": "investor_call_transcript",
+      "status": "selected",
+      "coverage_complete": true,
+      "page_count": 0,
+      "pages_read": 0,
+      "opaque_pages": [],
+      "table_scan_page_count": 0,
+      "deferred_table_pages": [],
+      "focus_pages": [],
+      "selected_focus_pages": [],
+      "line_count": 604,
+      "parse_errors": [],
+      "source_units": 77,
+      "candidate_count": 7,
+      "selected_span_count": 7,
+      "locator_roundtrip_verified_count": 7,
+      "locator_roundtrip_failed_count": 0,
+      "locator_roundtrip_failed_span_ids": [],
+      "dropped_financial_count": 0,
+      "omitted_candidate_count": 0,
+      "selected_text_bytes": 16466,
+      "summary_input_bytes": 25043,
+      "summary_input_to_source_ratio": 0.376038,
+      "elapsed_seconds": 0.079,
+      "selected_evidence_preview": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:fcd928627e8bd55cb92f30bacc47f381501419808283bfb3765c724888dc7fcc",
+          "locator_v1": "loc:v1/paragraph:67",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 67,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "industry_dynamics",
+            "overseas",
+            "orders_customers",
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "progress_or_change_language",
+            "specific_business_event",
+            "current_industry_context",
+            "management_statement"
+          ],
+          "source_role": "management",
+          "excerpt": "Thank you, Camilla. Please turn to the next slide. Sales of GLP-1 diabetes care products in the U.S. increased by 24%.\n\nThe sales increase was mainly driven by the continued uptake of Ozempic and the GLP-1 class growth. Novo Nordisk remains"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:261d815cf72cb6d3f6f55efd7591b453ac084525826747dcd43cf762e83fc95d",
+          "locator_v1": "loc:v1/paragraph:193",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 193,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "industry_dynamics",
+            "orders_customers"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "progress_or_change_language",
+            "specific_business_event",
+            "current_industry_context",
+            "management_statement"
+          ],
+          "source_role": "management",
+          "excerpt": "Thank you, Richard, for the question. I think it's important to remember that the total market for anti-obesity medicines grew in the U.S. last year by 160%. And so the story continues to be about market expansion for obesity.\n\nAnd for our "
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:31eab969f04b7c8858f25856b4f5769364d79bf9957d9067bba11d912c3a4414",
+          "locator_v1": "loc:v1/paragraph:81",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 81,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "new_business",
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "progress_or_change_language",
+            "specific_business_event",
+            "management_statement"
+          ],
+          "source_role": "management",
+          "excerpt": "Thank you, Dave. Please turn to the next slide. In December, Novo Nordisk released the headline results from the first pivotal trial with CagriSema REDEFINE 1 in people living with obesity or overweight. Before getting into the results, I w"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:7225272fec3a57b0c4a84f51a9ad2ed5e3d0dd7842901609a6d2a0ebfaefffca",
+          "locator_v1": "loc:v1/paragraph:189",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 189,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "industry_dynamics"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "specific_business_event",
+            "management_statement"
+          ],
+          "source_role": "management",
+          "excerpt": "Thank you, Richard, for those two questions. On the first one, on Wegovy prescription trends, we'll turn to you, David."
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:4e6403add4491516aca209ee984c301ead7fbaf0a5da66689a7c9f08bdcbd79e",
+          "locator_v1": "loc:v1/paragraph:207",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 207,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "specific_business_event",
+            "management_statement"
+          ],
+          "source_role": "management",
+          "excerpt": "Yeah. Thank you very much, Richard. So REDEFINE 4, as you rightly mentioned, this had trial CagriSema versus semaglutide. The first statistical testing will be non-inferiority and based on what we've seen with REDEFINE 1, there's a good ass"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:f57a7c625cb5c31632641e33d85b85aacce7c386c2ce22b649da242ad819de19",
+          "locator_v1": "loc:v1/paragraph:183",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 183,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null
+          },
+          "quality_flags": [],
+          "topics": [],
+          "selection_reasons": [
+            "linked_question_context"
+          ],
+          "source_role": "analyst",
+          "excerpt": "And second question, just thanks for all the dosing data. But based on that, and what you've seen in REDEFINE 1 and the tolerability that you've shown, how do you think the profile of CagriSema will stack up versus rebound in REDEFINE 4? Th"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:4226090436d49a88fa6b6420fd48deb4e22c977d87ef7a448e551112d07eb08b",
+          "locator_v1": "loc:v1/paragraph:183",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 183,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null
+          },
+          "quality_flags": [],
+          "topics": [],
+          "selection_reasons": [
+            "linked_question_context"
+          ],
+          "source_role": "analyst",
+          "excerpt": "Hi. Thanks for taking my questions. Two questions, please. Firstly, on Wegovy, could you give us some more details of what's holding back the U.S.\n\nprescriptions in the last quarter of '24 and the early part of '25? What can you do about it"
+        }
+      ]
+    }
+  ],
+  "totals": {
+    "documents": 5,
+    "source_file_bytes": 6865504,
+    "summary_input_bytes": 159782,
+    "selected_span_count": 65,
+    "locator_roundtrip_verified_count": 65,
+    "locator_roundtrip_failed_count": 0,
+    "selected_documents": 2,
+    "partial_documents": 2,
+    "skipped_documents": 0,
+    "needs_review_documents": 1,
+    "blocked_documents": 0
+  },
+  "limitations": [
+    "This is a 12-document pilot, not a corpus recall estimate.",
+    "The selector uses deterministic candidate rules; a model did not generate summaries.",
+    "summary_input_bytes excludes database indexes, filesystem allocation and future exports.",
+    "A status of selected means the parser covered the file, not that a human approved every candidate.",
+    "Locator round-trip verifies same-parser extraction; it does not certify downstream support for table-cell sub-locators."
+  ]
+}

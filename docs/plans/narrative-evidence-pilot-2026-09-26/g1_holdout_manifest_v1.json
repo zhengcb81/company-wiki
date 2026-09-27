@@ -1,0 +1,74 @@
+{
+  "schema_version": "narrative-g1-holdout/0.1.0",
+  "purpose": "small cross-company/type holdout; not used to tune selector rules",
+  "samples": [
+    {
+      "id": "H01",
+      "title": "中航光电：2025年年度报告.pdf",
+      "path": "companies/中航光电/raw/financial_reports/中航光电：2025年年度报告.pdf",
+      "sha256_prefix": "4174e45ed9b6",
+      "language": "zh",
+      "existing_kind": "annual_report",
+      "table_pages": [15, 16, 17],
+      "anchor_checks": [
+        {
+          "id": "H01-low-altitude-business-expansion",
+          "page_number": 16,
+          "source_role": "company_filing",
+          "any_of": ["拓展低空经济产业链"]
+        }
+      ]
+    },
+    {
+      "id": "H02",
+      "title": "世华科技：2026年第一季度报告.pdf",
+      "path": "companies/世华科技/raw/financial_reports/世华科技：2026年第一季度报告.pdf",
+      "sha256_prefix": "a230adbc91f9",
+      "language": "zh",
+      "existing_kind": "quarterly_report",
+      "full_table_scan": true,
+      "expected_disposition": "human_review_financial_only_skip_candidate",
+      "review_reason": "10 pages are fully readable; first-page disclosures and remaining financial statements/tables contain no selected business-narrative candidate. Keep as a negative holdout; do not auto-delete raw."
+    },
+    {
+      "id": "H03",
+      "title": "华特气体：科创板首次公开发行股票招股说明书.pdf",
+      "path": "companies/华特气体/raw/prospectus/华特气体：科创板首次公开发行股票招股说明书.pdf",
+      "sha256_prefix": "15cbab19549d",
+      "language": "zh",
+      "existing_kind": "prospectus",
+      "table_pages": [33, 295],
+      "anchor_checks": [
+        {
+          "id": "H03-new-gas-products-and-certification",
+          "page_number": 295,
+          "source_role": "company_filing",
+          "any_of": ["高纯三氟甲烷", "终端客户的认证"]
+        },
+        {
+          "id": "H03-capacity-and-permit-risk",
+          "page_number": 33,
+          "source_role": "company_filing",
+          "any_of": ["氟碳类产品的产能已趋饱和"]
+        }
+      ]
+    },
+    {
+      "id": "H04",
+      "title": "中航光电：2026年5月18日投资者关系活动记录表.pdf",
+      "path": "companies/中航光电/raw/research/中航光电：2026年5月18日中航光电投资者关系活动记录表.pdf",
+      "sha256_prefix": "9055c79d15df",
+      "language": "zh",
+      "existing_kind": "investor_relations",
+      "table_pages": [2],
+      "anchor_checks": [
+        {
+          "id": "H04-CPO-product-roadmap",
+          "page_number": 2,
+          "source_role": "management",
+          "any_of": ["CPO全光互连链路产品的解决方案"]
+        }
+      ]
+    }
+  ]
+}

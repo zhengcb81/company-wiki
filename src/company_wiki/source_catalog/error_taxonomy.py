@@ -18,8 +18,8 @@ from __future__ import annotations
 import sqlite3
 from typing import Any
 
-ERROR_TAXONOMY_VERSION = "1.0"
-ERROR_TAXONOMY_SCHEMA = "error-taxonomy-1.0"
+ERROR_TAXONOMY_VERSION = "1.1"
+ERROR_TAXONOMY_SCHEMA = "error-taxonomy-1.1"
 
 # Canonical codes.  Retryable codes are bounded by the consumer's deadline
 # (ZR-205); everything else is fatal and must never be retried.
@@ -27,6 +27,7 @@ CATALOG_BUSY = "catalog_busy"  # raw SQLite busy/locked
 CATALOG_LOCKED = "catalog_locked"  # operation lock (exclusive writer)
 DB_TIMEOUT = "db_timeout"  # sqlite timeout / deadline
 WORKER_PAUSED = "worker_paused"  # persistent worker pause
+LEGACY_EVIDENCE_ARCHIVED = "legacy_evidence_archived"  # explicit cold-only evidence
 FATAL = "fatal"  # everything else (fail closed)
 
 RETRYABLE_CODES = frozenset({CATALOG_BUSY, CATALOG_LOCKED, DB_TIMEOUT, WORKER_PAUSED})
@@ -60,6 +61,8 @@ def _code_for_text(text: str) -> str | None:
 
 def classify_exception(exc: BaseException) -> tuple[str, bool]:
     """Classify a raised exception into ``(code, retryable)``."""
+    if type(exc).__name__ == "EvidenceQueryArchivedError":
+        return LEGACY_EVIDENCE_ARCHIVED, False
     exact = _STRUCTURED_TYPES.get(type(exc).__name__)
     if exact is not None:
         return exact, True
@@ -77,6 +80,8 @@ def classify_exception(exc: BaseException) -> tuple[str, bool]:
 def classify_error_type(error_type: str, error_text: str = "") -> tuple[str, bool]:
     """Classify a serialized ``error_type`` (+ optional error text) —
     the N-1/raw form: unknown types fail closed to fatal."""
+    if error_type == "EvidenceQueryArchivedError":
+        return LEGACY_EVIDENCE_ARCHIVED, False
     exact = _STRUCTURED_TYPES.get(error_type)
     if exact is not None:
         return exact, True
@@ -113,6 +118,7 @@ __all__ = [
     "CATALOG_LOCKED",
     "DB_TIMEOUT",
     "WORKER_PAUSED",
+    "LEGACY_EVIDENCE_ARCHIVED",
     "FATAL",
     "RETRYABLE_CODES",
     "classify_exception",

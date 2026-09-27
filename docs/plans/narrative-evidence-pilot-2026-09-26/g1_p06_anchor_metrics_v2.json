@@ -1,0 +1,5324 @@
+{
+  "schema_version": "narrative-g1-pilot/0.1.0",
+  "runner": "scripts/narrative_evidence_pilot.py",
+  "read_only_roots": [
+    "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\transcripts"
+  ],
+  "generated_from_manifest": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\narrative-evidence-pilot-2026-09-26\\g1_sample_manifest.json",
+  "elapsed_seconds": 2.157,
+  "samples": [
+    {
+      "sample_id": "P06",
+      "title": "三角防务：西安三角防务股份有限公司向特定对象发行股票并在创业板上市募集说明书（注册稿）.PDF",
+      "source_sha256": "cd803fe9528f4646f8f29b518a450ae4bd5b5968c482eb49789f9786b523595b",
+      "source_file_bytes": 5595592,
+      "document_kind": "equity_offering_prospectus",
+      "status": "partial",
+      "coverage_complete": false,
+      "page_count": 191,
+      "pages_read": 191,
+      "opaque_pages": [],
+      "table_scan_page_count": 2,
+      "deferred_table_pages": [
+        1,
+        2,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83,
+        84,
+        85,
+        86,
+        87,
+        88,
+        89,
+        90,
+        91,
+        92,
+        93,
+        94,
+        95,
+        96,
+        97,
+        98,
+        99,
+        100,
+        102,
+        103,
+        104,
+        105,
+        106,
+        107,
+        108,
+        109,
+        110,
+        111,
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119,
+        120,
+        121,
+        122,
+        123,
+        124,
+        125,
+        126,
+        127,
+        128,
+        129,
+        130,
+        131,
+        132,
+        133,
+        134,
+        135,
+        136,
+        137,
+        138,
+        139,
+        140,
+        141,
+        142,
+        143,
+        144,
+        145,
+        146,
+        147,
+        148,
+        149,
+        150,
+        151,
+        152,
+        153,
+        154,
+        155,
+        156,
+        157,
+        158,
+        159,
+        160,
+        161,
+        162,
+        163,
+        164,
+        165,
+        166,
+        167,
+        168,
+        169,
+        170,
+        171,
+        172,
+        173,
+        174,
+        175,
+        176,
+        177,
+        178,
+        179,
+        180,
+        181,
+        182,
+        183,
+        184,
+        185,
+        186,
+        187,
+        188,
+        189,
+        190,
+        191
+      ],
+      "focus_pages": [
+        3,
+        101
+      ],
+      "selected_focus_pages": [
+        3,
+        101
+      ],
+      "line_count": 0,
+      "parse_errors": [],
+      "source_units": 5976,
+      "candidate_count": 819,
+      "selected_span_count": 187,
+      "locator_roundtrip_verified_count": 187,
+      "locator_roundtrip_failed_count": 0,
+      "locator_roundtrip_failed_span_ids": [],
+      "dropped_financial_count": 0,
+      "omitted_candidate_count": 632,
+      "selected_text_bytes": 13648,
+      "summary_input_bytes": 52440,
+      "summary_input_to_source_ratio": 0.009372,
+      "anchor_checks": [
+        {
+          "check_id": "C06-certification-requirements",
+          "page_number": 3,
+          "source_role": "company_filing",
+          "passed": true,
+          "matched_term": "向下游装配产业领域的延伸",
+          "required_any": [
+            "向下游装配产业领域的延伸"
+          ],
+          "evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:c290a7e3fb3c09f2a77dbfb2e0b4155324456ebc3a18f9d727ee47c237dec608",
+            "urn:company-wiki:evidence-span:sha256:a241678bc6d00d680e3e59eddbc56dcc48f3802b6e8a86ed484bd27b8101fcd1",
+            "urn:company-wiki:evidence-span:sha256:55a7fd19bc205d649a0fd861c5cc1241f7cc29b10e8442b18030d99277365d87",
+            "urn:company-wiki:evidence-span:sha256:80097a195adb232817f6d0890097694de68db5e45b3ffc1b1773f41db5a0b477",
+            "urn:company-wiki:evidence-span:sha256:e950e560bbece0b5d467d5ea17820ab03c633f684137e4b77d6cc04cc6266696",
+            "urn:company-wiki:evidence-span:sha256:a4c2be7acf4396f2f92e45b9927b4c0015831af64ccc68a2114d6332c911510d",
+            "urn:company-wiki:evidence-span:sha256:2ccd7a9721e85dac94b803120f130abfaa0b2e33438cafdc6aabc453a509d332",
+            "urn:company-wiki:evidence-span:sha256:c7b0c09e1f04f0eaa9b51c9c70e50a15da0658d37c2aaaf446b6b5e5ca6192b5",
+            "urn:company-wiki:evidence-span:sha256:71d011ab7d033c32e3f6b4af1843e1e5c10cbc4c81c8d939e55bc20a05ceece2",
+            "urn:company-wiki:evidence-span:sha256:cf4d9ca4d52780521d7151789dc3a3bf3502baa7505623d179640f87d39ba06b",
+            "urn:company-wiki:evidence-span:sha256:b9706ab3c4253661d6628f1a2a47deca01b1076816fb45ac63445e38096cfab2",
+            "urn:company-wiki:evidence-span:sha256:a74991d744448eb305fb3bb5e2b60472fec28cfa96f86b79d90800623062a853",
+            "urn:company-wiki:evidence-span:sha256:5c7d5f21bc4cbb733eab13d32a0d87504e82a49b284c870e092916bd493cbff4",
+            "urn:company-wiki:evidence-span:sha256:fdcbf773e4c8658aae226e69f1026aa31d84a4d6f7e15628a018726496c2fa50",
+            "urn:company-wiki:evidence-span:sha256:19309de8857d7037b78be3e1a7cdcb9abd98e70b38866bd91325721e50e5d002",
+            "urn:company-wiki:evidence-span:sha256:6c6ced51e377dbeec0fa931d573e981b23d6fe0880121b2eeeed90bf6d6b1cf3",
+            "urn:company-wiki:evidence-span:sha256:f2f7350a93452b6a99515cc86f2a308b503ddf98f0acd39e6abe755452d3e43f",
+            "urn:company-wiki:evidence-span:sha256:0917bb0ff2efa8b06bfb51f440e2f968190ecb07a3402659aafd71c9815c254b",
+            "urn:company-wiki:evidence-span:sha256:4d4a222511a570406c1ef0779a8b8ff066d7da3d736173bd6dc81682dbff5d46",
+            "urn:company-wiki:evidence-span:sha256:6176656e74b7167e2ee75afcbdbbf24396d55e27ebd5861462c4ed8da39f3a70",
+            "urn:company-wiki:evidence-span:sha256:3c3a2e9800dd4a0bd020c4e366ecbe79afcf9382fbd64e5db88b5f750139b7be",
+            "urn:company-wiki:evidence-span:sha256:5082a1f15d777799d8e7bd20ec3222e28ffaff8244115bf32b69ab0b8e93cf92",
+            "urn:company-wiki:evidence-span:sha256:e23f696c698345cbd629258fa18a2bbbd42e3ef544bb26dfaa6332aabc63308b",
+            "urn:company-wiki:evidence-span:sha256:ea4830776736a1696bf0ab130dd3341bb5b0959a082ed4b34c3dee6a58fe70f9",
+            "urn:company-wiki:evidence-span:sha256:4924dad5c25d54e493e4dd7d650c58232afcb6d1f00fde4999c46b3b8ab6ea7f",
+            "urn:company-wiki:evidence-span:sha256:1dab9eaa0da4c6366aa6492030ff24f7bc285b77d54be9c3655e9b7e8524ab34",
+            "urn:company-wiki:evidence-span:sha256:773f65695092e073e548f698b06b627361f81b168dd6936aa2dc2767d19eef24",
+            "urn:company-wiki:evidence-span:sha256:e2ee7a0aa4a7639cef420c470f496a188e04eea2f4511406cd7697b83239326a",
+            "urn:company-wiki:evidence-span:sha256:06e8dbfedd87335ec045559698e2d382c6793d4e0bd629c13c9332d5f7e91e4c",
+            "urn:company-wiki:evidence-span:sha256:94969043c1d0fb034356789443b53a740560e320f7fd0db6f9e12237bcdb78e1",
+            "urn:company-wiki:evidence-span:sha256:3dc8e12542ca127f6b5cf5d6327c8e7e51452b88eefd4695f9f7163d443652c5",
+            "urn:company-wiki:evidence-span:sha256:b77b71250dc850efaa6ba75ba3a70414f29893f15bbe28c607c56f62cb71c9d1",
+            "urn:company-wiki:evidence-span:sha256:db5bb56fa1d3adf3b35a3fc93697fa5b46cd331c27caf28f9a14e79ebdf9187c"
+          ]
+        },
+        {
+          "check_id": "C06-project-necessity-industry-rationale",
+          "page_number": 101,
+          "source_role": "company_filing",
+          "passed": true,
+          "matched_term": "航空产业形成",
+          "required_any": [
+            "航空产业形成",
+            "外协需求旺盛"
+          ],
+          "evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:c29d7a487e2099f16a362864b541486fe6b414123f0ab3c39904c3b0db4464f2",
+            "urn:company-wiki:evidence-span:sha256:1b928b399b1d66ca20dd011af3e28f2105db7da9aaac21247a66df052a7084ff",
+            "urn:company-wiki:evidence-span:sha256:134898cfdaef151227b709c7f0cc8a1fae20726acdb297c9881910c09d5cce2d",
+            "urn:company-wiki:evidence-span:sha256:6329d1478e320d51eab007702798c5cfb310cccca805c2d0cff18c03f6fa8511",
+            "urn:company-wiki:evidence-span:sha256:38d10e6ca838729e4dff3345a7b24ec37659881f7e25b8bb3910eee039279d95",
+            "urn:company-wiki:evidence-span:sha256:796df784962c3527ea06bd82e41221364f4da6ebd56120d02208ff5ae8047715",
+            "urn:company-wiki:evidence-span:sha256:7ca5545793dc240c99bb127af96034d8d0734ab80afb6b2b24b662738ec1b4e4",
+            "urn:company-wiki:evidence-span:sha256:9dd0ee10d7c5abb03c80967a0c93f827aebbdb04c3acfa1729ee09f12a2569a4",
+            "urn:company-wiki:evidence-span:sha256:09733cbc601996555d5ff17ecc529eb81315df9d43496d0e19a4264f5ac03f9a",
+            "urn:company-wiki:evidence-span:sha256:d551514717c37d846bf5120a18e2b2b82a560bc4954bb49590865986379c1627",
+            "urn:company-wiki:evidence-span:sha256:5300abd754d1684506c43f40cb97c0a8bf75891826e06df506c2c68c71720802",
+            "urn:company-wiki:evidence-span:sha256:7e59107983f22a7b114b6d83faeb53f1d31684dbacec59c872dd948f3df23ccf",
+            "urn:company-wiki:evidence-span:sha256:03cfd051b5b00f1db45383cab0295883eb79b902cf20ae3d872e3f582d954eec",
+            "urn:company-wiki:evidence-span:sha256:810f972fbdb6aa933f347954babbb36f8f8665f7da7bf35de003574978ca95fe",
+            "urn:company-wiki:evidence-span:sha256:feb8c474441e1b6f0a2e9ac09257ca199d2ea1d22bfb966c8ac0cb029814dea0",
+            "urn:company-wiki:evidence-span:sha256:5db3beb88f6a0611d0f3c1684829779e3730243981f4b90962e1ed1cd9c0e1d9",
+            "urn:company-wiki:evidence-span:sha256:37186990dabc406180ca9f83f83c41f9f7f94ef1e39f97e12aad9fef44f201e8",
+            "urn:company-wiki:evidence-span:sha256:1bd3678e032b7be3b81ee836b17a5294ed24e627519df0c9c40e760c59df196d",
+            "urn:company-wiki:evidence-span:sha256:914a30b24f524f77f963c7329ed732fcbea3ffb27731b5da04cc1ca2047495ed",
+            "urn:company-wiki:evidence-span:sha256:3bfe9ff33dec1db59abb2583c7f45b36659bc1a518a5d4f88bfc93069ab3837a",
+            "urn:company-wiki:evidence-span:sha256:d8b3809f42ff0e0f10a7ccda8e2765995ab7ab3f451ea05c0513fe18f651a9ab",
+            "urn:company-wiki:evidence-span:sha256:a8411b2402b30f9b44532001e077ab95a1b2750864219d1b568e96deaef0093e",
+            "urn:company-wiki:evidence-span:sha256:17402573ab91f9fdc84953e25a861de97c38283d73a60c725f1a59d81f7ef268",
+            "urn:company-wiki:evidence-span:sha256:03a89d0ff0314a7bcd9c26fba97791515a5b3bf8d85e58bd54f5975759306131",
+            "urn:company-wiki:evidence-span:sha256:c19e77a42710f00b2687f3746ca23b41fcf9f94b678cda7aacd42846dd539dc7",
+            "urn:company-wiki:evidence-span:sha256:da25b438b212e9de4ef30bf3734b0d7b45566eba1434fe5cb3a4fb1ab788dc22",
+            "urn:company-wiki:evidence-span:sha256:487d01c1b2102451cd66f950b3a24e9997e042b3359ac9e48e06e727f1044339",
+            "urn:company-wiki:evidence-span:sha256:010a44a6dbf9b9ba935a8c3314c55ea4bf09dca247f4f0d42a45f3fe8698b54c",
+            "urn:company-wiki:evidence-span:sha256:713df6e1d356fdc7de45dd339858fa2747dbee799f4a50e1f7c6decafe3f1508",
+            "urn:company-wiki:evidence-span:sha256:a208de22e13b3ac2696baa69c85d8e90262f43cef973cefec9ee12782fe905ba",
+            "urn:company-wiki:evidence-span:sha256:fcb2e8d6a1d4ecdee53007d262d70157548a320af0ca13bd57f2010b6574505e",
+            "urn:company-wiki:evidence-span:sha256:23fb26fbae1820ca65bcd369a67f1d00f7ab61b0cbe77e20a4fb6cec5e84c2bb"
+          ]
+        }
+      ],
+      "anchor_check_failure_count": 0,
+      "elapsed_seconds": 2.152,
+      "selected_evidence_preview": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:c29d7a487e2099f16a362864b541486fe6b414123f0ab3c39904c3b0db4464f2",
+          "locator_v1": "loc:v1/page:101/paragraph:10",
+          "coordinates": {
+            "page_number": 101,
+            "paragraph_index": 10,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "件、零部件甚至更上游的锻铸件的生产主要由主机厂系统内部工厂负责，随着商"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:1b928b399b1d66ca20dd011af3e28f2105db7da9aaac21247a66df052a7084ff",
+          "locator_v1": "loc:v1/page:101/paragraph:11",
+          "coordinates": {
+            "page_number": 101,
+            "paragraph_index": 11,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "业航空产业规模的持续扩大，现代航空业规模化生产对成本和效率的敏感度提"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:134898cfdaef151227b709c7f0cc8a1fae20726acdb297c9881910c09d5cce2d",
+          "locator_v1": "loc:v1/page:101/paragraph:12",
+          "coordinates": {
+            "page_number": 101,
+            "paragraph_index": 12,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "升，过去由各大主机厂自主承担的零部件配套形式已无法适应专业化和标准化的"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:6329d1478e320d51eab007702798c5cfb310cccca805c2d0cff18c03f6fa8511",
+          "locator_v1": "loc:v1/page:101/paragraph:13",
+          "coordinates": {
+            "page_number": 101,
+            "paragraph_index": 13,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "行业发展趋势。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:38d10e6ca838729e4dff3345a7b24ec37659881f7e25b8bb3910eee039279d95",
+          "locator_v1": "loc:v1/page:101/paragraph:14",
+          "coordinates": {
+            "page_number": 101,
+            "paragraph_index": 14,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "另一方面，国产大飞机产业化的起航将带来新的万亿规模市场，"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:796df784962c3527ea06bd82e41221364f4da6ebd56120d02208ff5ae8047715",
+          "locator_v1": "loc:v1/page:101/paragraph:15",
+          "coordinates": {
+            "page_number": 101,
+            "paragraph_index": 15,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "在未来配套需求大幅扩张的预期下，诸多细分领域将具备产业化的基础，逐步由"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:7ca5545793dc240c99bb127af96034d8d0734ab80afb6b2b24b662738ec1b4e4",
+          "locator_v1": "loc:v1/page:101/paragraph:16",
+          "coordinates": {
+            "page_number": 101,
+            "paragraph_index": 16,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "以往半研发性质的生产模式转变为现代化的流水生产，并形成系列化的产品型"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:9dd0ee10d7c5abb03c80967a0c93f827aebbdb04c3acfa1729ee09f12a2569a4",
+          "locator_v1": "loc:v1/page:101/paragraph:17",
+          "coordinates": {
+            "page_number": 101,
+            "paragraph_index": 17,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "谱。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:09733cbc601996555d5ff17ecc529eb81315df9d43496d0e19a4264f5ac03f9a",
+          "locator_v1": "loc:v1/page:101/paragraph:18",
+          "coordinates": {
+            "page_number": 101,
+            "paragraph_index": 18,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "在此背景下，当外部协作达到理想状态后，主机厂理论上将仅仅保留设计、"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:d551514717c37d846bf5120a18e2b2b82a560bc4954bb49590865986379c1627",
+          "locator_v1": "loc:v1/page:101/paragraph:19",
+          "coordinates": {
+            "page_number": 101,
+            "paragraph_index": 19,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "总装和试飞三大核心环节，更多的配套需求逐渐从内部扩散出来，航空零部件业"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:5300abd754d1684506c43f40cb97c0a8bf75891826e06df506c2c68c71720802",
+          "locator_v1": "loc:v1/page:101/paragraph:20",
+          "coordinates": {
+            "page_number": 101,
+            "paragraph_index": 20,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "务将采用分包外部协作的形式交由体系外的专业化企业代工。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:7e59107983f22a7b114b6d83faeb53f1d31684dbacec59c872dd948f3df23ccf",
+          "locator_v1": "loc:v1/page:101/paragraph:21",
+          "coordinates": {
+            "page_number": 101,
+            "paragraph_index": 21,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "在此背景下，主机"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:03cfd051b5b00f1db45383cab0295883eb79b902cf20ae3d872e3f582d954eec",
+          "locator_v1": "loc:v1/page:101/paragraph:22",
+          "coordinates": {
+            "page_number": 101,
+            "paragraph_index": 22,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "厂中小锻件的生产将主要通过外协形式完成，航空锻件产品具有小批量、多品种、"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:810f972fbdb6aa933f347954babbb36f8f8665f7da7bf35de003574978ca95fe",
+          "locator_v1": "loc:v1/page:101/paragraph:23",
+          "coordinates": {
+            "page_number": 101,
+            "paragraph_index": 23,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "多规格的特点，随着航空及其他军品市场、高端民品市场、外贸市场的不断扩大，"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:feb8c474441e1b6f0a2e9ac09257ca199d2ea1d22bfb966c8ac0cb029814dea0",
+          "locator_v1": "loc:v1/page:101/paragraph:24",
+          "coordinates": {
+            "page_number": 101,
+            "paragraph_index": 24,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "中小型飞机锻件业务亦有广阔的市场空间。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:5db3beb88f6a0611d0f3c1684829779e3730243981f4b90962e1ed1cd9c0e1d9",
+          "locator_v1": "loc:v1/page:101/paragraph:25",
+          "coordinates": {
+            "page_number": 101,
+            "paragraph_index": 25,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "（2）夯实公司主业，形成全品类生产能力，提升公司持续盈利能力"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:37186990dabc406180ca9f83f83c41f9f7f94ef1e39f97e12aad9fef44f201e8",
+          "locator_v1": "loc:v1/page:101/paragraph:26",
+          "coordinates": {
+            "page_number": 101,
+            "paragraph_index": 26,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "公司现有的大中型模锻件生产线主要由400MN、300MN 液压机以及配套的"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:1bd3678e032b7be3b81ee836b17a5294ed24e627519df0c9c40e760c59df196d",
+          "locator_v1": "loc:v1/page:101/paragraph:27",
+          "coordinates": {
+            "page_number": 101,
+            "paragraph_index": 27,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "31.5MN 快锻机、2500mm 环轧机组成，主要生产投影面积在0.5m2 以上，锻件"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:914a30b24f524f77f963c7329ed732fcbea3ffb27731b5da04cc1ca2047495ed",
+          "locator_v1": "loc:v1/page:101/paragraph:28",
+          "coordinates": {
+            "page_number": 101,
+            "paragraph_index": 28,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "重量在200Kg 以上的模锻件，以及直径在500mm 以上的环件。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:3bfe9ff33dec1db59abb2583c7f45b36659bc1a518a5d4f88bfc93069ab3837a",
+          "locator_v1": "loc:v1/page:101/paragraph:29",
+          "coordinates": {
+            "page_number": 101,
+            "paragraph_index": 29,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "现有的大中型模"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:d8b3809f42ff0e0f10a7ccda8e2765995ab7ab3f451ea05c0513fe18f651a9ab",
+          "locator_v1": "loc:v1/page:101/paragraph:3",
+          "coordinates": {
+            "page_number": 101,
+            "paragraph_index": 3,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "（1）航空产业形成“小核心、大协作”的发展格局，主机厂中小锻件外协需"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:a8411b2402b30f9b44532001e077ab95a1b2750864219d1b568e96deaef0093e",
+          "locator_v1": "loc:v1/page:101/paragraph:30",
+          "coordinates": {
+            "page_number": 101,
+            "paragraph_index": 30,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "锻生产线不能满足中小型航空精密模锻件的生产需求，主要在于：（1）中小型"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:17402573ab91f9fdc84953e25a861de97c38283d73a60c725f1a59d81f7ef268",
+          "locator_v1": "loc:v1/page:101/paragraph:31",
+          "coordinates": {
+            "page_number": 101,
+            "paragraph_index": 31,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "航空精密模锻件具有单架飞机图号规格多、数量多的特点，按现有大吨位锻压设"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:03a89d0ff0314a7bcd9c26fba97791515a5b3bf8d85e58bd54f5975759306131",
+          "locator_v1": "loc:v1/page:101/paragraph:32",
+          "coordinates": {
+            "page_number": 101,
+            "paragraph_index": 32,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "备生产中小型航空精密模锻件，效率低；"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:c19e77a42710f00b2687f3746ca23b41fcf9f94b678cda7aacd42846dd539dc7",
+          "locator_v1": "loc:v1/page:101/paragraph:33",
+          "coordinates": {
+            "page_number": 101,
+            "paragraph_index": 33,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "（2）按现有大吨位锻压设备生产中小"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:da25b438b212e9de4ef30bf3734b0d7b45566eba1434fe5cb3a4fb1ab788dc22",
+          "locator_v1": "loc:v1/page:101/paragraph:34",
+          "coordinates": {
+            "page_number": 101,
+            "paragraph_index": 34,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "型航空精密模锻件，单件产品设备折旧高，成本高，经济性差，不具有竞争优势；"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:487d01c1b2102451cd66f950b3a24e9997e042b3359ac9e48e06e727f1044339",
+          "locator_v1": "loc:v1/page:101/paragraph:35",
+          "coordinates": {
+            "page_number": 101,
+            "paragraph_index": 35,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "（3）按现有大吨位锻压设备生产中小型航空精密模锻件，所生产锻件的精度差、"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:010a44a6dbf9b9ba935a8c3314c55ea4bf09dca247f4f0d42a45f3fe8698b54c",
+          "locator_v1": "loc:v1/page:101/paragraph:5",
+          "coordinates": {
+            "page_number": 101,
+            "paragraph_index": 5,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "我国航空产业链以航空工业集团等下属主机厂为主导，配套单位以航空工业"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:713df6e1d356fdc7de45dd339858fa2747dbee799f4a50e1f7c6decafe3f1508",
+          "locator_v1": "loc:v1/page:101/paragraph:6",
+          "coordinates": {
+            "page_number": 101,
+            "paragraph_index": 6,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "集团下属单位为主和以部分民营企业为辅，形成“小核心、大协作”的发展格局。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:a208de22e13b3ac2696baa69c85d8e90262f43cef973cefec9ee12782fe905ba",
+          "locator_v1": "loc:v1/page:101/paragraph:7",
+          "coordinates": {
+            "page_number": 101,
+            "paragraph_index": 7,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "在航空工业集团“小核心、大协作”的发展思路指引下，随着产品标准化、规模化"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:fcb2e8d6a1d4ecdee53007d262d70157548a320af0ca13bd57f2010b6574505e",
+          "locator_v1": "loc:v1/page:101/paragraph:8",
+          "coordinates": {
+            "page_number": 101,
+            "paragraph_index": 8,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "要求提升，中上游零部件配套逐步由内部配套转向外部协作。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:23fb26fbae1820ca65bcd369a67f1d00f7ab61b0cbe77e20a4fb6cec5e84c2bb",
+          "locator_v1": "loc:v1/page:101/paragraph:9",
+          "coordinates": {
+            "page_number": 101,
+            "paragraph_index": 9,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "一方面，过去结构"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:3afec31a754d14e2863153c4d681ff14918a38ba6fff3cd73e24d0506f8facce",
+          "locator_v1": "loc:v1/page:113/paragraph:18",
+          "coordinates": {
+            "page_number": 113,
+            "paragraph_index": 18,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "（1）“十四五”航发大放量，叶片加工领域迎来快速发展机遇"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:423fa30183c4935a4dae559682d25fa12bbe71411489074d600faebaad2dba53",
+          "locator_v1": "loc:v1/page:113/paragraph:19",
+          "coordinates": {
+            "page_number": 113,
+            "paragraph_index": 19,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "①军机放量、练兵备战消耗增大双重提振航发市场"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:e2175785cdf9b408525462bb597de99b4b6422eddc0a1597f741d6f81e054c84",
+          "locator_v1": "loc:v1/page:113/paragraph:20",
+          "coordinates": {
+            "page_number": 113,
+            "paragraph_index": 20,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "我国“十四五规划”指出“2027 年实现建军百年奋斗目标”，2021 年8 月18 日"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:6ca059a626e6e1f0029f8b1592a7f7b86aeefd913118a7a3df801d6baa2f7bbe",
+          "locator_v1": "loc:v1/page:113/paragraph:21",
+          "coordinates": {
+            "page_number": 113,
+            "paragraph_index": 21,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "人民日报发文《必须加快国防和军队现代化》。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:8262cad500efbf0f51fdfb94e21e526433fdace917a57496156e167492e4ed3e",
+          "locator_v1": "loc:v1/page:113/paragraph:22",
+          "coordinates": {
+            "page_number": 113,
+            "paragraph_index": 22,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "未来我国战机更新换代与列装加"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:de3b58c2d4a2a3cc6407c70d3c9ef22802eb421d159c618bacc04f6cff3f0cf4",
+          "locator_v1": "loc:v1/page:113/paragraph:23",
+          "coordinates": {
+            "page_number": 113,
+            "paragraph_index": 23,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "速将拉动军用航空发动机市场景气向上，同时航空发动机作为易耗品在“练兵备"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:74180cbe02fff7963994f03de603c92df30e96ac4362915443274e196036caff",
+          "locator_v1": "loc:v1/page:113/paragraph:24",
+          "coordinates": {
+            "page_number": 113,
+            "paragraph_index": 24,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "战”部队训练量大增的背景下其需求将进一步扩大。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:14c9055fc0a2ee75565af55b9140d26654caad17204d5666d99c6af5a2f36357",
+          "locator_v1": "loc:v1/page:113/paragraph:25",
+          "coordinates": {
+            "page_number": 113,
+            "paragraph_index": 25,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "财信证券预计2021-2027 年"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:4e7be8546d2c5da4f4cee08944db0148e58fcbd4e50a4991603d9e484cfcc43f",
+          "locator_v1": "loc:v1/page:113/paragraph:26",
+          "coordinates": {
+            "page_number": 113,
+            "paragraph_index": 26,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "我国军用航空发动机市场总规模约为4927 亿元，年均复合增速10.20%。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:8a421b663a5a0a2461ca73c8ba2f3e9db477ebf952a5bec32b5d59196561c13d",
+          "locator_v1": "loc:v1/page:113/paragraph:27",
+          "coordinates": {
+            "page_number": 113,
+            "paragraph_index": 27,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "②国产替代势在必行，“十四五”期间有望突破"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:7ad35073a8480d6325e50ffce2c5ec287680e4feec52243d40bf950e4c6ea7b1",
+          "locator_v1": "loc:v1/page:113/paragraph:28",
+          "coordinates": {
+            "page_number": 113,
+            "paragraph_index": 28,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "new_business"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "航空发动机是国家安全与战略的保障，关键产品技术绝不能受制于人，自主"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:30209a37c37b17637674dbaa7c75bf1b50d53e16bd8000bd1795e7490b74a9ce",
+          "locator_v1": "loc:v1/page:113/paragraph:29",
+          "coordinates": {
+            "page_number": 113,
+            "paragraph_index": 29,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "new_business"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "研发是必然选择。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:c9c03e8ee9088e6872239f02b9d87a9ff75d21c3d6a014bdfd9ee9c4358fa23c",
+          "locator_v1": "loc:v1/page:113/paragraph:30",
+          "coordinates": {
+            "page_number": 113,
+            "paragraph_index": 30,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "new_business"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "目前我国依旧有20%左右的军用航空发动机需依赖进口，预计"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:6d0d46d95edd0ac57b5d5feb0df731387d40039e960a729e711a81f302ee547d",
+          "locator_v1": "loc:v1/page:113/paragraph:31",
+          "coordinates": {
+            "page_number": 113,
+            "paragraph_index": 31,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "new_business"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "相关型号将在“十四五”期间完成突破，在“十五五”期间有望开启批产放量，届时"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:7bb225eedb6ac2285b425c79469666bf20ecd3186488d84e678cdee726414a83",
+          "locator_v1": "loc:v1/page:113/paragraph:32",
+          "coordinates": {
+            "page_number": 113,
+            "paragraph_index": 32,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "new_business"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "将全面替代进口发动机，我国航空发动机先进型号长期依赖进口的状况将成为历"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:6a57eed00f3e8892bbcd6c8bbd4b1723596a234a5c8522784b7896980fe9949b",
+          "locator_v1": "loc:v1/page:128/paragraph:10",
+          "coordinates": {
+            "page_number": 128,
+            "paragraph_index": 10,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "根据《国务院关于进一步加强淘汰落后产能工作的通知》（国发〔2010〕7"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:ebb01f1d0c45cb4c9feca00b4c0eed61940fa1f53ef5ef8d340507813948d39a",
+          "locator_v1": "loc:v1/page:128/paragraph:11",
+          "coordinates": {
+            "page_number": 128,
+            "paragraph_index": 11,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "号）、\n《关于印发淘汰落后产能工作考核实施方案的通知》\n（工信部联产业[2011]46"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:a7522249b25c0c8d3d8e16377ab3f6b591cf4af0f85fa3d1fa5679c55b9a98fd",
+          "locator_v1": "loc:v1/page:128/paragraph:12",
+          "coordinates": {
+            "page_number": 128,
+            "paragraph_index": 12,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "号）以及《2015 年各地区淘汰落后和过剩产能目标任务完成情况》（工业和信"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:86a59c240e621b415a24a5ff96f75d60a28b07b626dd662d2e470b12e498dcba",
+          "locator_v1": "loc:v1/page:128/paragraph:13",
+          "coordinates": {
+            "page_number": 128,
+            "paragraph_index": 13,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "息化部、国家能源局公告2016 年第50 号）等规范性文件，国家淘汰落后和过剩"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:4ffa872caf2d202d151f12a60a9322dc5f29126bee8349956e74ee649b48f63c",
+          "locator_v1": "loc:v1/page:128/paragraph:14",
+          "coordinates": {
+            "page_number": 128,
+            "paragraph_index": 14,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "产能行业为：炼铁、炼钢、焦炭、铁合金、电石、电解铝、铜冶炼、铅冶炼、水"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:aee2f62f13a9efab68bbff2528875f61006563431045b5b8cd8a3e743bad7c20",
+          "locator_v1": "loc:v1/page:128/paragraph:15",
+          "coordinates": {
+            "page_number": 128,
+            "paragraph_index": 15,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "泥（熟料及磨机）、平板玻璃、造纸、制革、印染、铅蓄电池（极板及组装）、"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:91f50532eec87db76971828a7df5d5aa13923f5dffeab0403097d72f1b18a75f",
+          "locator_v1": "loc:v1/page:128/paragraph:16",
+          "coordinates": {
+            "page_number": 128,
+            "paragraph_index": 16,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "电力、煤炭。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:bd73ff84d29f9592e1fa636e274f89f1c0ddd393f7c8f128d13299bb534bf8d7",
+          "locator_v1": "loc:v1/page:131/paragraph:10",
+          "coordinates": {
+            "page_number": 131,
+            "paragraph_index": 10,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "overseas"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "International 发布的《World Air Forces 2021》，截至2020 年底，我国现役四代机"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:2fbc0d72737d001dc19079e9206284ae1b195e421e480b1e894915af36fc4a99",
+          "locator_v1": "loc:v1/page:131/paragraph:11",
+          "coordinates": {
+            "page_number": 131,
+            "paragraph_index": 11,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "overseas"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "仅19 架（占比2%），先进战机的已交付数量占比较小，先进战机列装有望加速。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:52fc1896375b3ad1bedb68e83443b583f73b4e3cc4acb85b7e69e9adda05d723",
+          "locator_v1": "loc:v1/page:131/paragraph:12",
+          "coordinates": {
+            "page_number": 131,
+            "paragraph_index": 12,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "overseas"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "根据安信证券发布的研究报告《先进战机产业链深度：先进战机列装加速是航空"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:c2a125f4afb482d144806d42439a39219f8e26b7fbfb3ea26f487bd3da19de3b",
+          "locator_v1": "loc:v1/page:131/paragraph:13",
+          "coordinates": {
+            "page_number": 131,
+            "paragraph_index": 13,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "overseas"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "装备最景气方向，产业链持续彰显业绩高增长》，预计十四五末我国战斗机数量"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:a2024bb949e8af9de2f48ba9c09f832139a595a1edd24e100bd3c0434ae5d19b",
+          "locator_v1": "loc:v1/page:131/paragraph:14",
+          "coordinates": {
+            "page_number": 131,
+            "paragraph_index": 14,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "overseas"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "及四代机占比可达美国当前水平，按照构建四代机为骨干、三代机为主体的武器"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:c614b25c4ace37f8e85409f04d7d67eecaf4224f0600dd9e997b65f8c02abf89",
+          "locator_v1": "loc:v1/page:131/paragraph:15",
+          "coordinates": {
+            "page_number": 131,
+            "paragraph_index": 15,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "overseas"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "装备体系，预计四代机十四五新增数量约300-400 架，四代机十四五市场空间达"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:184987f2d3565ded4c452e5876643d1652fdd7e40784e4ac3f5aaa7f412ec434",
+          "locator_v1": "loc:v1/page:131/paragraph:16",
+          "coordinates": {
+            "page_number": 131,
+            "paragraph_index": 16,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "overseas"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "2250 亿元以上。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:852c4bc44abc775320e67a3d75aa528c3f701ee0e8394f2eefab7f327b2057a4",
+          "locator_v1": "loc:v1/page:131/paragraph:17",
+          "coordinates": {
+            "page_number": 131,
+            "paragraph_index": 17,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "overseas"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "因此，在国防安全和周边局势的背景下，我国军用航空制造业"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:53582ae3f734837fe9e2130a8fdbed7b3409371fbbc3d4b0deeeb75b6195f7c2",
+          "locator_v1": "loc:v1/page:131/paragraph:18",
+          "coordinates": {
+            "page_number": 131,
+            "paragraph_index": 18,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "overseas"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "将在十四五期间加速发展。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:079461aefd7b54ba2aa929120ff4966a24679a37aa6a98bdb682d86a9367d71d",
+          "locator_v1": "loc:v1/page:131/paragraph:19",
+          "coordinates": {
+            "page_number": 131,
+            "paragraph_index": 19,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "根据中国商用飞机有限责任公司发布的《中国商飞公司市场预测年报"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:d2279d3bb9563877689de9cb9d280eb4555bc6500dc8b88949db0b2ff6783498",
+          "locator_v1": "loc:v1/page:131/paragraph:20",
+          "coordinates": {
+            "page_number": 131,
+            "paragraph_index": 20,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "progress_or_change_language",
+            "project_plan_or_status"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "（2020-2039）》，预计未来20 年将有8,725 架飞机交付中国市场，市场价值约"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:e44f0a0be25bd52356342ffeb37710fa113acc6986c2da66a2f78b8664ef6d8f",
+          "locator_v1": "loc:v1/page:131/paragraph:21",
+          "coordinates": {
+            "page_number": 131,
+            "paragraph_index": 21,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "1.3 万亿美元，到2039 年我国占全球客机机队比例将从现在的16.2%增长到"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:25152f0d5d094e4723ef6d31356b0446b6c44247d4dc1a763d622f06d91c3af0",
+          "locator_v1": "loc:v1/page:131/paragraph:22",
+          "coordinates": {
+            "page_number": 131,
+            "paragraph_index": 22,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "21.7%。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:c8fdd2039f776b1b00adc9ce63df4da00a421ac2aef6d0c113779f2e5086eb04",
+          "locator_v1": "loc:v1/page:131/paragraph:23",
+          "coordinates": {
+            "page_number": 131,
+            "paragraph_index": 23,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "根据《中华人民共和国国民经济和社会发展第十四个五年规划和2035"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:f7446c7fb868a3fc43816db35a40d27fb9743469e5b4f197a14e417e0834463a",
+          "locator_v1": "loc:v1/page:131/paragraph:24",
+          "coordinates": {
+            "page_number": 131,
+            "paragraph_index": 24,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "年远期目标纲要》，明确我国将重点推动C919 大型客机示范运营和ARJ21 支线"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:a8db62c899808886179be64bf59e1112072b119b4d2dbf342bd9234ee5d56a80",
+          "locator_v1": "loc:v1/page:131/paragraph:25",
+          "coordinates": {
+            "page_number": 131,
+            "paragraph_index": 25,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "客机系列化发展。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:4bbf1d56b0f37c8d3f2e62d8d72967df1daa0e17b073392529a9f8803b74eaa2",
+          "locator_v1": "loc:v1/page:131/paragraph:26",
+          "coordinates": {
+            "page_number": 131,
+            "paragraph_index": 26,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "2021 年3 月，C919 飞机首批5 架购机订单合同正式签署，标"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:8d86829b36e2b7b099ef9493f5ac530cd64f08d63ee607d04a6927e6eda22e8c",
+          "locator_v1": "loc:v1/page:131/paragraph:27",
+          "coordinates": {
+            "page_number": 131,
+            "paragraph_index": 27,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "志着该机型即将进入商业化运行阶段，中国商用飞机有限责任公司营销委主任表"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:cca6a91b2d77781bca48a975b29ddd8461cf186b66a66b408e8fb6e28f5c8a7f",
+          "locator_v1": "loc:v1/page:131/paragraph:28",
+          "coordinates": {
+            "page_number": 131,
+            "paragraph_index": 28,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "示C919 已累积有815 架的确认订单和意向订单，后续将陆续落实确认订单。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:13edefb9d411a38c5ff2bcdfb8524c3f90dd4585c56fe2c6f8c473fdc3002056",
+          "locator_v1": "loc:v1/page:131/paragraph:29",
+          "coordinates": {
+            "page_number": 131,
+            "paragraph_index": 29,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "近"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:69eee44ff0e0313d52724995060d6c917162388adabf8f25f752182968c30679",
+          "locator_v1": "loc:v1/page:131/paragraph:3",
+          "coordinates": {
+            "page_number": 131,
+            "paragraph_index": 3,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "（1）十四五期间我国军民机需求将加速上量，目前部件装配是主机厂主要"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:d09e8ea1b1f5375e22fb6e84390fb6bd66b65cbcf486d25f3897c306f99d323d",
+          "locator_v1": "loc:v1/page:131/paragraph:30",
+          "coordinates": {
+            "page_number": 131,
+            "paragraph_index": 30,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "年来中国支线机队逐步形成以ARJ21-700 和CRJ900 飞机为涡扇支线客机主力机"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:1663e43b2bf6a3bb2f2be720d92a1619d111321c02a1341ad08b9c22f72981aa",
+          "locator_v1": "loc:v1/page:131/paragraph:31",
+          "coordinates": {
+            "page_number": 131,
+            "paragraph_index": 31,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "型的状态，伴随着中国三大航购买ARJ21-700 飞机协议的签订和首架飞机的交"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:28676cbaa880a83db986e4e02c040cfeedf24591ec9e4305b6217282413617b6",
+          "locator_v1": "loc:v1/page:131/paragraph:32",
+          "coordinates": {
+            "page_number": 131,
+            "paragraph_index": 32,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "付，ARJ21-700 飞机在中国支线机队中的占比将持续提高。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:c29d67ebeac02298216931c5505e20e9bbc2a3071faed8088317ca133ddca379",
+          "locator_v1": "loc:v1/page:131/paragraph:33",
+          "coordinates": {
+            "page_number": 131,
+            "paragraph_index": 33,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "因此，在国内民航市"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:f6a687407ada8246ba330be3c4bc9694cb21d6542296ede5ea99073113a99b74",
+          "locator_v1": "loc:v1/page:131/paragraph:34",
+          "coordinates": {
+            "page_number": 131,
+            "paragraph_index": 34,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "场需求强劲的背景下，我国民用航空制造业将迎来蓬勃发展时机。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:62119c6d4c51c20c283c73df80321d0b55e7d8604f441897bc959b426ae556cd",
+          "locator_v1": "loc:v1/page:131/paragraph:35",
+          "coordinates": {
+            "page_number": 131,
+            "paragraph_index": 35,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "部件装配是航空产业链较为重要的环节。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:cb434e1064e211f8cec9f715f861983481a6e16ae6f62f0909d4ad3d67dc2832",
+          "locator_v1": "loc:v1/page:131/paragraph:36",
+          "coordinates": {
+            "page_number": 131,
+            "paragraph_index": 36,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "根据安信证券发布的研究报告《先"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:d6cc5e6a52f461dc1dad6735240306aff8a0059a7cedd01229283d16056a2afc",
+          "locator_v1": "loc:v1/page:131/paragraph:37",
+          "coordinates": {
+            "page_number": 131,
+            "paragraph_index": 37,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "进战机产业链深度：先进战机列装加速是航空装备最景气方向，产业链持续彰显"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:6770a30d091734ee445a92f395581c8ccc5f816fade89dcb7ad15e78991d92cb",
+          "locator_v1": "loc:v1/page:131/paragraph:4",
+          "coordinates": {
+            "page_number": 131,
+            "paragraph_index": 4,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "产能瓶颈之一，部件装配外协比例提升成为航空产业十四五发展趋势"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:deb37f57b6edd2521f541138fd2072a2fbcf46df8caf329fde8403291602806d",
+          "locator_v1": "loc:v1/page:131/paragraph:5",
+          "coordinates": {
+            "page_number": 131,
+            "paragraph_index": 5,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "overseas"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "航空产业是关系国家安全和国民经济命脉的战略产业之一，也是国家综合国"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:fbdd4215c8364e77bf74cb4364b19dab42205cd214adc841e2f6c5f120a4c563",
+          "locator_v1": "loc:v1/page:131/paragraph:6",
+          "coordinates": {
+            "page_number": 131,
+            "paragraph_index": 6,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "overseas"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "力的集中体现和重要标志。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:f6b05ccb39db9212ef3c376ef43f7c22b0560736d00f9d7637f72a2939bf4591",
+          "locator_v1": "loc:v1/page:131/paragraph:7",
+          "coordinates": {
+            "page_number": 131,
+            "paragraph_index": 7,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "overseas"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "鉴于我国周边局势紧张成为新常态，我国对新一代先"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:cb65b17ed35a8867d825651aa33663ec0d26000246c28755f2b570782d0f4219",
+          "locator_v1": "loc:v1/page:131/paragraph:8",
+          "coordinates": {
+            "page_number": 131,
+            "paragraph_index": 8,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "overseas"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "进战机的需求迫切程度日益加深，目前正处于爬坡上量阶段。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:e47ec3b4b63c093b81b760e7930a77d5080163d98d37d7f7420eef911037221b",
+          "locator_v1": "loc:v1/page:131/paragraph:9",
+          "coordinates": {
+            "page_number": 131,
+            "paragraph_index": 9,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "overseas"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "根据Flight"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:76a6163904d25e8e3e58480161ca970f0b22d3b42c34acaabcdae86d9af06c96",
+          "locator_v1": "loc:v1/page:146/paragraph:14",
+          "coordinates": {
+            "page_number": 146,
+            "paragraph_index": 14,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "根据《国务院关于进一步加强淘汰落后产能工作的通知》（国发〔2010〕7"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:f9d9b36883c0da7f574d0f32cd5d0be8dc05ccf14044a5bfe5890f4b10b7a3ce",
+          "locator_v1": "loc:v1/page:146/paragraph:15",
+          "coordinates": {
+            "page_number": 146,
+            "paragraph_index": 15,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "号）、\n《关于印发淘汰落后产能工作考核实施方案的通知》\n（工信部联产业[2011]46"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:0bb9db28bae4b4122cd7f9ad52518026d3652c5463fc3285ad1d01259ed9e0c6",
+          "locator_v1": "loc:v1/page:146/paragraph:16",
+          "coordinates": {
+            "page_number": 146,
+            "paragraph_index": 16,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "号）以及《2015 年各地区淘汰落后和过剩产能目标任务完成情况》（工业和信"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:6a7bdb84e546bf779ddf0c8ea8e18e68d61d2340b35a34fdecf7523a5d46480f",
+          "locator_v1": "loc:v1/page:146/paragraph:17",
+          "coordinates": {
+            "page_number": 146,
+            "paragraph_index": 17,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "息化部、国家能源局公告2016 年第50 号）等规范性文件，国家淘汰落后和过剩"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:4c84fd029ebf447bc53861f8195552e2abf6d41fc34733acbf9f6741454f5c57",
+          "locator_v1": "loc:v1/page:146/paragraph:18",
+          "coordinates": {
+            "page_number": 146,
+            "paragraph_index": 18,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "产能行业为：炼铁、炼钢、焦炭、铁合金、电石、电解铝、铜冶炼、铅冶炼、水"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:d6a8625585a062f47cba56120041fad14035e25f1362c122ea65f3c35b162162",
+          "locator_v1": "loc:v1/page:146/paragraph:19",
+          "coordinates": {
+            "page_number": 146,
+            "paragraph_index": 19,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "泥（熟料及磨机）、平板玻璃、造纸、制革、印染、铅蓄电池（极板及组装）、"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:c7b4878569ebc680fa8faa48b16bd94e059393a726fe1866d410db43195e9fba",
+          "locator_v1": "loc:v1/page:146/paragraph:20",
+          "coordinates": {
+            "page_number": 146,
+            "paragraph_index": 20,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "电力、煤炭。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:b95d85429b57642acaf0e572a53c2aba8e256ebfce408f5ef43b33242e5ce0ee",
+          "locator_v1": "loc:v1/page:160/paragraph:30",
+          "coordinates": {
+            "page_number": 160,
+            "paragraph_index": 30,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "本次募投项目拟生产的产品分别为中小型锻件、发动机压气机叶片以及飞"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:37daa5dc8145759451338bf8b90d591b85562af4ad0e0df4923777b41efd686b",
+          "locator_v1": "loc:v1/page:160/paragraph:31",
+          "coordinates": {
+            "page_number": 160,
+            "paragraph_index": 31,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "new_business",
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "机部组件装配业务。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:a2f1027c490299658ebbb3eeb35431a9721c6d0ccbd15897c6ef90b126a6f97e",
+          "locator_v1": "loc:v1/page:160/paragraph:32",
+          "coordinates": {
+            "page_number": 160,
+            "paragraph_index": 32,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "new_business",
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "航空精密模锻产业深化提升项目和航空发动机叶片精锻项"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:63de1b5ec631bbb5e6bae83e2146a86cd2e81908ce2f44a0fc202059647794a6",
+          "locator_v1": "loc:v1/page:160/paragraph:33",
+          "coordinates": {
+            "page_number": 160,
+            "paragraph_index": 33,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "new_business",
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "目属于公司现有飞机机体结构件和发动机结构件锻造业务范畴，无须进行合格"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:89412080003c41bd52571b7a9b5896af918a9b1eef1f3c35b7e5c52406af7d2d",
+          "locator_v1": "loc:v1/page:160/paragraph:34",
+          "coordinates": {
+            "page_number": 160,
+            "paragraph_index": 34,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "new_business"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "供应商认证，仅需就新产品申请产品认证。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:9331601d69107055b699694885415b0c7aca8038c9b772df7e339f6c52c86f7f",
+          "locator_v1": "loc:v1/page:160/paragraph:35",
+          "coordinates": {
+            "page_number": 160,
+            "paragraph_index": 35,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "new_business",
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "航空数字化集成中心项目属于在公"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:27ad36107288cfb9e9111bec5f5ca2c66bfa408aa2b2edc43dea9c47fdaf568b",
+          "locator_v1": "loc:v1/page:160/paragraph:36",
+          "coordinates": {
+            "page_number": 160,
+            "paragraph_index": 36,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "new_business",
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "司现有业务锻件制造的基础上，向下游装配产业领域的延伸和拓展，需要进行"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:664c16f0ddd57d70c162fea04b8c3e0e1a67bf19927bec912f42f698f03b5dd1",
+          "locator_v1": "loc:v1/page:163/paragraph:31",
+          "coordinates": {
+            "page_number": 163,
+            "paragraph_index": 31,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "公司具备实施本次募投项目所需的全部资质，包括武器装备科研生产许可"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:d53edfd7ff8795f7d473af7dd9fb6cafef96b4d56efddded0e94ad60336e2f76",
+          "locator_v1": "loc:v1/page:163/paragraph:32",
+          "coordinates": {
+            "page_number": 163,
+            "paragraph_index": 32,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers",
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "证、装备承制单位资格证书、国军标质量管理体系认证证书和保密资格单位证"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:4443b666d8bb7b77476f4ed6d990722c5777fa329b06499be802da6f94243ead",
+          "locator_v1": "loc:v1/page:163/paragraph:33",
+          "coordinates": {
+            "page_number": 163,
+            "paragraph_index": 33,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers",
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "书等。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:360473dfa4a27d6bf57c1f558f2443885e4fc6bcf889cbeb90fafbe783ffacb1",
+          "locator_v1": "loc:v1/page:163/paragraph:34",
+          "coordinates": {
+            "page_number": 163,
+            "paragraph_index": 34,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers",
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "其中，航空数字化集成中心项目定位于民机的部组件装配外协配套业务，"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:7b50a618da19ecb1d8151c4f09ef8f82334f448fad692b724873c9f5cd40e76d",
+          "locator_v1": "loc:v1/page:163/paragraph:35",
+          "coordinates": {
+            "page_number": 163,
+            "paragraph_index": 35,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers",
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "仅需针对公司的经营范围进行扩项，待该项目正式实施时，公司将向工商部门"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:eb52f3c4f1ec81f88b7ab11bd1a062962dd7d7e5384a708ff83509c0121c742e",
+          "locator_v1": "loc:v1/page:163/paragraph:36",
+          "coordinates": {
+            "page_number": 163,
+            "paragraph_index": 36,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers",
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "申请营业执照的经营范围扩项，预计不会存在障碍。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:e31a6d39a6c892f17b080d31c4a6dbb7b5bf65daea8b13929cb8ae4f94e1725d",
+          "locator_v1": "loc:v1/page:163/paragraph:37",
+          "coordinates": {
+            "page_number": 163,
+            "paragraph_index": 37,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers",
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "公司在供应商资质、质量"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:3cb28615a12f56fea89e9dfce0adf143cb92a653f74e1c595f501551dc8a097a",
+          "locator_v1": "loc:v1/page:163/paragraph:38",
+          "coordinates": {
+            "page_number": 163,
+            "paragraph_index": 38,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "管理能力、产品工艺设计等方面已经积累相关经验和水平，本次募投项目产品"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:4bba9943e2e046ea76f975e8a701b07de6cca57afc790020c817c2963489565f",
+          "locator_v1": "loc:v1/page:163/paragraph:39",
+          "coordinates": {
+            "page_number": 163,
+            "paragraph_index": 39,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers",
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "将在公司进行合格供应商认证（仅限于航空数字化集成中心项目）和产品认证"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:414b3cea98554fb98ec5b6a87ba5b3329c3407393be9e3945bf88f14f0323cc0",
+          "locator_v1": "loc:v1/page:163/paragraph:40",
+          "coordinates": {
+            "page_number": 163,
+            "paragraph_index": 40,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "后获得订单或意向性合同。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:f221d75643b0ca3ff060ee369ee54b99832db8e8dd5db2eecc4edeb1f98f8c6b",
+          "locator_v1": "loc:v1/page:163/paragraph:41",
+          "coordinates": {
+            "page_number": 163,
+            "paragraph_index": 41,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers",
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "鉴于我国航空制造业持续发展带来的市场放量需求，"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:a93f244d861346c100bc49685e67a0b04cee75d6016f5340dce1187db42e5f34",
+          "locator_v1": "loc:v1/page:166/paragraph:33",
+          "coordinates": {
+            "page_number": 166,
+            "paragraph_index": 33,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "本次募投项目拟采购设备均有多家供应商，公司前期已根据拟采购设备的"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:59bead9b6fb46577e0e8f0466cd04f4b150f29ccfdcac0c3d3a015e0393ef2c3",
+          "locator_v1": "loc:v1/page:166/paragraph:34",
+          "coordinates": {
+            "page_number": 166,
+            "paragraph_index": 34,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "设备参数、性能等指标向多家供应商进行询价和比价，募投项目拟采购设备的"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:55b8355f296e608b4cfe68cc0b8e7eb80bd751a2928e00bfa6af8f3e115c1247",
+          "locator_v1": "loc:v1/page:166/paragraph:35",
+          "coordinates": {
+            "page_number": 166,
+            "paragraph_index": 35,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "价格根据询价情况合理确定。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:8665f5d0c3120f3b89b6de330ae21550e5d437b513a5e763b5985f827f213daa",
+          "locator_v1": "loc:v1/page:166/paragraph:36",
+          "coordinates": {
+            "page_number": 166,
+            "paragraph_index": 36,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "本次募投项目设备采购的不确定性较小，若募投"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:81d0bd924006e363c31406db3b9a578bfe7f806bf182d3144876168e7547a78d",
+          "locator_v1": "loc:v1/page:166/paragraph:37",
+          "coordinates": {
+            "page_number": 166,
+            "paragraph_index": 37,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "项目实施后公司意向的设备供应商不能如期交付设备，公司将向其他供应商进"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:f1a0a270192b3767f0f3f4732cec3504a70e86bb78c92010e60b6add6a2cf999",
+          "locator_v1": "loc:v1/page:166/paragraph:38",
+          "coordinates": {
+            "page_number": 166,
+            "paragraph_index": 38,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "project_plan_or_status"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "行替代采购，届时可能对募投项目的实施进度造成不利影响。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:c290a7e3fb3c09f2a77dbfb2e0b4155324456ebc3a18f9d727ee47c237dec608",
+          "locator_v1": "loc:v1/page:3/paragraph:10",
+          "coordinates": {
+            "page_number": 3,
+            "paragraph_index": 10,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "new_business",
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "目属于公司现有飞机机体结构件和发动机结构件锻造业务范畴，无须进行合格"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:a241678bc6d00d680e3e59eddbc56dcc48f3802b6e8a86ed484bd27b8101fcd1",
+          "locator_v1": "loc:v1/page:3/paragraph:11",
+          "coordinates": {
+            "page_number": 3,
+            "paragraph_index": 11,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "new_business"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "供应商认证，仅需就新产品申请产品认证。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:55a7fd19bc205d649a0fd861c5cc1241f7cc29b10e8442b18030d99277365d87",
+          "locator_v1": "loc:v1/page:3/paragraph:12",
+          "coordinates": {
+            "page_number": 3,
+            "paragraph_index": 12,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "new_business",
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "航空数字化集成中心项目属于在公"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:80097a195adb232817f6d0890097694de68db5e45b3ffc1b1773f41db5a0b477",
+          "locator_v1": "loc:v1/page:3/paragraph:13",
+          "coordinates": {
+            "page_number": 3,
+            "paragraph_index": 13,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "new_business",
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "司现有业务锻件制造的基础上，向下游装配产业领域的延伸和拓展，需要进行"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:e950e560bbece0b5d467d5ea17820ab03c633f684137e4b77d6cc04cc6266696",
+          "locator_v1": "loc:v1/page:3/paragraph:14",
+          "coordinates": {
+            "page_number": 3,
+            "paragraph_index": 14,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "new_business",
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "合格供应商认证和产品认证。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:a4c2be7acf4396f2f92e45b9927b4c0015831af64ccc68a2114d6332c911510d",
+          "locator_v1": "loc:v1/page:3/paragraph:15",
+          "coordinates": {
+            "page_number": 3,
+            "paragraph_index": 15,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "new_business",
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "合格供应商认证和产品认证，仅需由主机厂客户"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:2ccd7a9721e85dac94b803120f130abfaa0b2e33438cafdc6aabc453a509d332",
+          "locator_v1": "loc:v1/page:3/paragraph:16",
+          "coordinates": {
+            "page_number": 3,
+            "paragraph_index": 16,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "new_business",
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "完成即可，不需军工行业相关有权部门的审批或核准。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:c7b0c09e1f04f0eaa9b51c9c70e50a15da0658d37c2aaaf446b6b5e5ca6192b5",
+          "locator_v1": "loc:v1/page:3/paragraph:17",
+          "coordinates": {
+            "page_number": 3,
+            "paragraph_index": 17,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "供应商认证关注供应商的资质、装备能力、技术水平、质量管理能力等，"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:71d011ab7d033c32e3f6b4af1843e1e5c10cbc4c81c8d939e55bc20a05ceece2",
+          "locator_v1": "loc:v1/page:3/paragraph:18",
+          "coordinates": {
+            "page_number": 3,
+            "paragraph_index": 18,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "new_business"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "完成认证之后可以纳入合格供应商目录。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:cf4d9ca4d52780521d7151789dc3a3bf3502baa7505623d179640f87d39ba06b",
+          "locator_v1": "loc:v1/page:3/paragraph:19",
+          "coordinates": {
+            "page_number": 3,
+            "paragraph_index": 19,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "产品认证是对具体产品质量的认证，"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:b9706ab3c4253661d6628f1a2a47deca01b1076816fb45ac63445e38096cfab2",
+          "locator_v1": "loc:v1/page:3/paragraph:20",
+          "coordinates": {
+            "page_number": 3,
+            "paragraph_index": 20,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "符合质量条件可以开始供货。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:a74991d744448eb305fb3bb5e2b60472fec28cfa96f86b79d90800623062a853",
+          "locator_v1": "loc:v1/page:3/paragraph:21",
+          "coordinates": {
+            "page_number": 3,
+            "paragraph_index": 21,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "供应商认证一般需要1-3 个月，具体根据客户要"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:5c7d5f21bc4cbb733eab13d32a0d87504e82a49b284c870e092916bd493cbff4",
+          "locator_v1": "loc:v1/page:3/paragraph:22",
+          "coordinates": {
+            "page_number": 3,
+            "paragraph_index": 22,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "求及项目情况而定；"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:fdcbf773e4c8658aae226e69f1026aa31d84a4d6f7e15628a018726496c2fa50",
+          "locator_v1": "loc:v1/page:3/paragraph:23",
+          "coordinates": {
+            "page_number": 3,
+            "paragraph_index": 23,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "产品认证一般需要3-6 个月，具体根据客户要求及产品加"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:19309de8857d7037b78be3e1a7cdcb9abd98e70b38866bd91325721e50e5d002",
+          "locator_v1": "loc:v1/page:3/paragraph:24",
+          "coordinates": {
+            "page_number": 3,
+            "paragraph_index": 24,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "工难度而定。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:6c6ced51e377dbeec0fa931d573e981b23d6fe0880121b2eeeed90bf6d6b1cf3",
+          "locator_v1": "loc:v1/page:3/paragraph:25",
+          "coordinates": {
+            "page_number": 3,
+            "paragraph_index": 25,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "公司现有的锻造业务已与各大主机厂形成深度的配套关系，公司"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:f2f7350a93452b6a99515cc86f2a308b503ddf98f0acd39e6abe755452d3e43f",
+          "locator_v1": "loc:v1/page:3/paragraph:26",
+          "coordinates": {
+            "page_number": 3,
+            "paragraph_index": 26,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "已多年被航空工业集团和主机厂评为“优秀供应商”，2021 年被航空工业集团"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:0917bb0ff2efa8b06bfb51f440e2f968190ecb07a3402659aafd71c9815c254b",
+          "locator_v1": "loc:v1/page:3/paragraph:27",
+          "coordinates": {
+            "page_number": 3,
+            "paragraph_index": 27,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "评为最高级别的“金牌供应商”。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:4d4a222511a570406c1ef0779a8b8ff066d7da3d736173bd6dc81682dbff5d46",
+          "locator_v1": "loc:v1/page:3/paragraph:28",
+          "coordinates": {
+            "page_number": 3,
+            "paragraph_index": 28,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "公司在供应商资质、质量管理能力、产品工"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:6176656e74b7167e2ee75afcbdbbf24396d55e27ebd5861462c4ed8da39f3a70",
+          "locator_v1": "loc:v1/page:3/paragraph:29",
+          "coordinates": {
+            "page_number": 3,
+            "paragraph_index": 29,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "艺设计等方面已经积累相关经验和水平。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:3c3a2e9800dd4a0bd020c4e366ecbe79afcf9382fbd64e5db88b5f750139b7be",
+          "locator_v1": "loc:v1/page:3/paragraph:30",
+          "coordinates": {
+            "page_number": 3,
+            "paragraph_index": 30,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "progress_or_change_language",
+            "project_plan_or_status"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "本次募投项目的建设周期均为36 个月，"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:5082a1f15d777799d8e7bd20ec3222e28ffaff8244115bf32b69ab0b8e93cf92",
+          "locator_v1": "loc:v1/page:3/paragraph:31",
+          "coordinates": {
+            "page_number": 3,
+            "paragraph_index": 31,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "建设周期较长，投产后第一年达产50%，第二年达产80%，第三年达产100%。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:e23f696c698345cbd629258fa18a2bbbd42e3ef544bb26dfaa6332aabc63308b",
+          "locator_v1": "loc:v1/page:3/paragraph:32",
+          "coordinates": {
+            "page_number": 3,
+            "paragraph_index": 32,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "公"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:ea4830776736a1696bf0ab130dd3341bb5b0959a082ed4b34c3dee6a58fe70f9",
+          "locator_v1": "loc:v1/page:3/paragraph:33",
+          "coordinates": {
+            "page_number": 3,
+            "paragraph_index": 33,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "new_business"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "司拥有较好的经验水平和足够的时间来完成相关供应商认证和产品认证的工"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:4924dad5c25d54e493e4dd7d650c58232afcb6d1f00fde4999c46b3b8ab6ea7f",
+          "locator_v1": "loc:v1/page:3/paragraph:34",
+          "coordinates": {
+            "page_number": 3,
+            "paragraph_index": 34,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "progress_or_change_language",
+            "project_plan_or_status"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "作，预计不会对募投项目实施构成重大影响。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:1dab9eaa0da4c6366aa6492030ff24f7bc285b77d54be9c3655e9b7e8524ab34",
+          "locator_v1": "loc:v1/page:3/paragraph:35",
+          "coordinates": {
+            "page_number": 3,
+            "paragraph_index": 35,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "航空精密模锻产业深化提升项目"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:773f65695092e073e548f698b06b627361f81b168dd6936aa2dc2767d19eef24",
+          "locator_v1": "loc:v1/page:3/paragraph:36",
+          "coordinates": {
+            "page_number": 3,
+            "paragraph_index": 36,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "和航空发动机叶片精锻项目需要进行产品认证，预计需要3-6 个月。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:e2ee7a0aa4a7639cef420c470f496a188e04eea2f4511406cd7697b83239326a",
+          "locator_v1": "loc:v1/page:3/paragraph:37",
+          "coordinates": {
+            "page_number": 3,
+            "paragraph_index": 37,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "航空数字"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:06e8dbfedd87335ec045559698e2d382c6793d4e0bd629c13c9332d5f7e91e4c",
+          "locator_v1": "loc:v1/page:3/paragraph:38",
+          "coordinates": {
+            "page_number": 3,
+            "paragraph_index": 38,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "化集成中心项目需要进行合格供应商认证和产品认证，预计需要4-9 个月。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:94969043c1d0fb034356789443b53a740560e320f7fd0db6f9e12237bcdb78e1",
+          "locator_v1": "loc:v1/page:3/paragraph:39",
+          "coordinates": {
+            "page_number": 3,
+            "paragraph_index": 39,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "如"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:3dc8e12542ca127f6b5cf5d6327c8e7e51452b88eefd4695f9f7163d443652c5",
+          "locator_v1": "loc:v1/page:3/paragraph:7",
+          "coordinates": {
+            "page_number": 3,
+            "paragraph_index": 7,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "本次募投项目拟生产的产品分别为中小型锻件、发动机压气机叶片以及飞"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:b77b71250dc850efaa6ba75ba3a70414f29893f15bbe28c607c56f62cb71c9d1",
+          "locator_v1": "loc:v1/page:3/paragraph:8",
+          "coordinates": {
+            "page_number": 3,
+            "paragraph_index": 8,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "new_business",
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "机部组件装配业务。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:db5bb56fa1d3adf3b35a3fc93697fa5b46cd331c27caf28f9a14e79ebdf9187c",
+          "locator_v1": "loc:v1/page:3/paragraph:9",
+          "coordinates": {
+            "page_number": 3,
+            "paragraph_index": 9,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "new_business",
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "航空精密模锻产业深化提升项目和航空发动机叶片精锻项"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:46acaf1bbbc7247cbc02962886648d27cc46f3448919ed2ec3641840f4dd7633",
+          "locator_v1": "loc:v1/page:6/paragraph:10",
+          "coordinates": {
+            "page_number": 6,
+            "paragraph_index": 10,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "公司具备实施本次募投项目所需的全部资质，包括武器装备科研生产许可"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:3a2d8993e58eb6fa488c2f613796b029f71df430869ed777745239547a0b7e44",
+          "locator_v1": "loc:v1/page:6/paragraph:11",
+          "coordinates": {
+            "page_number": 6,
+            "paragraph_index": 11,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers",
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "证、装备承制单位资格证书、国军标质量管理体系认证证书和保密资格单位证"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:e12e52bfaa884dfdc35a2aa5ae4ff9db8a0d9f37ebaf03a134b7b19bed4517b7",
+          "locator_v1": "loc:v1/page:6/paragraph:12",
+          "coordinates": {
+            "page_number": 6,
+            "paragraph_index": 12,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers",
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "书等。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:bc1513f3591edc1889ad87d8a32924e8f4969b7d285d13bb64956a245ba16ca0",
+          "locator_v1": "loc:v1/page:6/paragraph:13",
+          "coordinates": {
+            "page_number": 6,
+            "paragraph_index": 13,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers",
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "其中，航空数字化集成中心项目定位于民机的部组件装配外协配套业务，"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:4fda7d82f7ff3a09cc587acd29a25e0884e7dacea5cb5d3f81db4e39466f29e6",
+          "locator_v1": "loc:v1/page:6/paragraph:14",
+          "coordinates": {
+            "page_number": 6,
+            "paragraph_index": 14,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers",
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "仅需针对公司的经营范围进行扩项，待该项目正式实施时，公司将向工商部门"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:b7d23852d3023f22e72bf308eb1f7845a6e284937f5a307762478e569aec8ea4",
+          "locator_v1": "loc:v1/page:6/paragraph:15",
+          "coordinates": {
+            "page_number": 6,
+            "paragraph_index": 15,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers",
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "申请营业执照的经营范围扩项，预计不会存在障碍。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:f6fcac91b7274ba41c2bc6fe1bb53243a3c2e1a7819ace6d63f3ea17a317d79a",
+          "locator_v1": "loc:v1/page:6/paragraph:16",
+          "coordinates": {
+            "page_number": 6,
+            "paragraph_index": 16,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers",
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "公司在供应商资质、质量"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:d8112cd6fcbd8db9028238f066f2fcb62eaf6952d153d05d89e636d102efcfcd",
+          "locator_v1": "loc:v1/page:6/paragraph:17",
+          "coordinates": {
+            "page_number": 6,
+            "paragraph_index": 17,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "管理能力、产品工艺设计等方面已经积累相关经验和水平，本次募投项目产品"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:dc45b28f775b4d5aa27ac3fc7cb7a5ad823e183545ae62a7255898a63d62979a",
+          "locator_v1": "loc:v1/page:6/paragraph:18",
+          "coordinates": {
+            "page_number": 6,
+            "paragraph_index": 18,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers",
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "将在公司进行合格供应商认证（仅限于航空数字化集成中心项目）和产品认证"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:dcaedffc5dec02d93a160a016eb061ac669c5a3123002cf9303118289d8852da",
+          "locator_v1": "loc:v1/page:6/paragraph:19",
+          "coordinates": {
+            "page_number": 6,
+            "paragraph_index": 19,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "后获得订单或意向性合同。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:272bbaf311a8b60b81d43efb0b9917a8c06729917b9e16b1d1df69874d41ca8a",
+          "locator_v1": "loc:v1/page:6/paragraph:20",
+          "coordinates": {
+            "page_number": 6,
+            "paragraph_index": 20,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers",
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "鉴于我国航空制造业持续发展带来的市场放量需求，"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:312b73f315e485469675d3305cb5fac8df89e34bb272980995a515090fba7156",
+          "locator_v1": "loc:v1/page:6/paragraph:21",
+          "coordinates": {
+            "page_number": 6,
+            "paragraph_index": 21,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "project_plan_or_status"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "本次募投项目产品的市场空间较大，本次募投项目产能能够得到有效消化。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:206df95c4b82f36fe7bf1ddd32f62ed69d64caf1340ff645d14c3ac6a676ca73",
+          "locator_v1": "loc:v1/page:6/paragraph:22",
+          "coordinates": {
+            "page_number": 6,
+            "paragraph_index": 22,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers",
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "但"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:f73b1497eac2618020988a0ab0883b0fa21a0d9a8aa06b70b918d8f6c32146df",
+          "locator_v1": "loc:v1/page:6/paragraph:23",
+          "coordinates": {
+            "page_number": 6,
+            "paragraph_index": 23,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "与此同时，本次募投项目产品存在市场竞争对手，若投产后产品交付质量或交"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:6eccf53aca2f61021f7f4409caf25c1f462fc38985628eb9ebdb27528e99237e",
+          "locator_v1": "loc:v1/page:6/paragraph:24",
+          "coordinates": {
+            "page_number": 6,
+            "paragraph_index": 24,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers",
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "付进度达不到客户要求，相关产品将面临被市场竞争对手替代的风险。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:12fbc7cc8c77c21ee488c9a13c5a06fbf8746d73c646ff6091eea5823d64baf1",
+          "locator_v1": "loc:v1/page:8/paragraph:19",
+          "coordinates": {
+            "page_number": 8,
+            "paragraph_index": 19,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers",
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "公司预计，航空精密模锻产业深化提升项目正常运行可实现年营业收入"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:3be6d683d254aad567113aeb77575229998360868322b85ec042a170f9185517",
+          "locator_v1": "loc:v1/page:8/paragraph:20",
+          "coordinates": {
+            "page_number": 8,
+            "paragraph_index": 20,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers",
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "28,000.00 万元和净利润7,088.51 万元；"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:64e4e70994af871063f17f6cf67891a0ba212b106b595ddcbf40524e9d7f4c9a",
+          "locator_v1": "loc:v1/page:8/paragraph:21",
+          "coordinates": {
+            "page_number": 8,
+            "paragraph_index": 21,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers",
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "航空发动机叶片精锻项目正常运行可"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:4cd7079d359613a3f507ec490b18825db04df44941acead194c914983e67f62e",
+          "locator_v1": "loc:v1/page:8/paragraph:22",
+          "coordinates": {
+            "page_number": 8,
+            "paragraph_index": 22,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers",
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "实现年营业收入36,000.00 万元和净利润9,010.42 万元；"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:b7b298033b3abc87e143e61476036c069f8961d400ce44898dbec462a5eeb5b3",
+          "locator_v1": "loc:v1/page:8/paragraph:23",
+          "coordinates": {
+            "page_number": 8,
+            "paragraph_index": 23,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers",
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "航空数字化集成中心"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:ecf217c84782ff79f91cec88b45e8ff45fb32b99bc2bc8a7ab77bce6c579bf30",
+          "locator_v1": "loc:v1/page:8/paragraph:24",
+          "coordinates": {
+            "page_number": 8,
+            "paragraph_index": 24,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers",
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "项目正常运行可实现年营业收入29,760.00 万元和净利润9,802.22 万元。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:8291063323ed1cf706e42bf66a307922fa253c3c7ea2169cefc03b38f6eb8b83",
+          "locator_v1": "loc:v1/page:8/paragraph:25",
+          "coordinates": {
+            "page_number": 8,
+            "paragraph_index": 25,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers",
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "本次"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:58e7e9ba2da42673c3b0122f2f0c3a7f4fe13da7dcf4e6f4564e6447a5993667",
+          "locator_v1": "loc:v1/page:8/paragraph:26",
+          "coordinates": {
+            "page_number": 8,
+            "paragraph_index": 26,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "募投项目航空数字化集成中心项目是公司现有业务的产业链延伸。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:5a83fe4315d22c39ee4b289681537d8e9b0784cbfd13dbe05c1f5fa154706287",
+          "locator_v1": "loc:v1/page:8/paragraph:27",
+          "coordinates": {
+            "page_number": 8,
+            "paragraph_index": 27,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers",
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "公司后续会着"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:001d3b2a782a46b76231bd77796e71d13404ead1ad7b28f26f330ee157779395",
+          "locator_v1": "loc:v1/page:8/paragraph:28",
+          "coordinates": {
+            "page_number": 8,
+            "paragraph_index": 28,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "力吸引专业人员，引入相应管理体系，增加专业设施设备，为后续获取业务订单"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:aa820dc68d699d263c1293d9c18ceb47ee4e1193cd6929fc3130e79137f02bcd",
+          "locator_v1": "loc:v1/page:8/paragraph:29",
+          "coordinates": {
+            "page_number": 8,
+            "paragraph_index": 29,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers",
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "奠定坚实基础。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:7b5c00d6c37e6779171edbac18fd6dfe220f5a08d7b14be27d42cdfc66965776",
+          "locator_v1": "loc:v1/page:8/paragraph:30",
+          "coordinates": {
+            "page_number": 8,
+            "paragraph_index": 30,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers",
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "同时，公司积极与主机厂对接，计划开展相关专业培训，以拓展"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:5b5b28ea224388fdf5b4b5dfa1c1a04253906c2193ef001b65c702b908823479",
+          "locator_v1": "loc:v1/page:8/paragraph:31",
+          "coordinates": {
+            "page_number": 8,
+            "paragraph_index": 31,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "业务订单。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:071575013a97a0663b7db39c54a85709426078120ac9071608574533771b8257",
+          "locator_v1": "loc:v1/page:8/paragraph:32",
+          "coordinates": {
+            "page_number": 8,
+            "paragraph_index": 32,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "本次募投项目航空数字化集成中心业务的目标客户与公司现有客户重"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:bb4c41035b36bf58f320fbffc4e7020ba6de8896c989c3d454451183cf76c6b2",
+          "locator_v1": "loc:v1/page:8/paragraph:33",
+          "coordinates": {
+            "page_number": 8,
+            "paragraph_index": 33,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers",
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "合度较高，主要承接主机厂部组件装配的外协业务，与主机厂形成业务的配套关"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:057eb1c89e7646038450cdbf58d7b2723e926d8b81fc468d87e4d58872eb40b3",
+          "locator_v1": "loc:v1/page:8/paragraph:34",
+          "coordinates": {
+            "page_number": 8,
+            "paragraph_index": 34,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers",
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "系。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:6df68fcb06bbfe3d0b818a3106a9b6db9ba71488ca4f4a2b9717be3234879f60",
+          "locator_v1": "loc:v1/page:8/paragraph:35",
+          "coordinates": {
+            "page_number": 8,
+            "paragraph_index": 35,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "progress_or_change_language",
+            "project_plan_or_status"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "考虑到航空数字化集成中心业务是现有业务产业链的下游业务，项目建成后"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:3fc89fadf107a5c577b9ee6da98fc1cdcbda37e24567a4369d60af7f4d1885f8",
+          "locator_v1": "loc:v1/page:8/paragraph:36",
+          "coordinates": {
+            "page_number": 8,
+            "paragraph_index": 36,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers",
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "可能面临短期内无法盈利或者盈利不达预期的风险，届时公司的盈利情况可能会"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:c61be7f5d51e03ce8fd2502a53589c69145f32ff9b5f9273837c1b45381593b4",
+          "locator_v1": "loc:v1/page:8/paragraph:37",
+          "coordinates": {
+            "page_number": 8,
+            "paragraph_index": 37,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers",
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "受到一定程度的影响。"
+        }
+      ]
+    }
+  ],
+  "totals": {
+    "documents": 1,
+    "source_file_bytes": 5595592,
+    "summary_input_bytes": 52440,
+    "selected_span_count": 187,
+    "locator_roundtrip_verified_count": 187,
+    "locator_roundtrip_failed_count": 0,
+    "selected_documents": 0,
+    "partial_documents": 1,
+    "skipped_documents": 0,
+    "needs_review_documents": 0,
+    "blocked_documents": 0,
+    "anchor_check_failure_count": 0
+  },
+  "limitations": [
+    "This is a 12-document pilot, not a corpus recall estimate.",
+    "The selector uses deterministic candidate rules; a model did not generate summaries.",
+    "summary_input_bytes excludes database indexes, filesystem allocation and future exports.",
+    "A status of selected means the parser covered the file, not that a human approved every candidate.",
+    "Locator round-trip verifies same-parser extraction; it does not certify downstream support for table-cell sub-locators."
+  ]
+}

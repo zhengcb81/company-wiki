@@ -1,0 +1,436 @@
+{
+  "schema_version": "narrative-g1-summary-validation/0.1.0",
+  "source_metrics": "g1_pilot_metrics_v6.json",
+  "claim_spec": "g1_summary_claims.json",
+  "authorship": "human-authored pilot drafts derived from findings.md; not model output",
+  "execution_scope": "offline validation only; no LLM/API, catalog writer, or worker",
+  "semantic_review": "not_performed; all drafts remain needs_review",
+  "sample_count": 10,
+  "claim_count": 13,
+  "status": "citation_and_role_checks_passed",
+  "drafts": [
+    {
+      "sample_id": "P01",
+      "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "source_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "document_kind": "annual_report",
+      "draft_status": "needs_review",
+      "automated_citation_role_validation": "passed",
+      "semantic_review": "not_performed",
+      "claims": [
+        {
+          "claim_id": "C01-summary",
+          "response_to_claim_id": null,
+          "qa_group_link_verified": false,
+          "text": "年报称，EPI 设备已进入客户端量产验证阶段；这表示验证推进到量产验证，不等于已完成量产。",
+          "claim_type": "company_statement",
+          "modality": "actual",
+          "needs_review": true,
+          "evidence": [
+            {
+              "evidence_id": "urn:company-wiki:evidence-span:sha256:820e282582bf069349d3f3347da711aa6755bbf66fc728c35b4451e6c21cca5c",
+              "locator_v1": "loc:v1/page:40/paragraph:8",
+              "source_role": "company_filing",
+              "qa_group_id": null,
+              "selection_group_id": null,
+              "quality_flags": [],
+              "excerpt": "公司EPI 设备已进入客户端量产验证阶段。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sample_id": "P02",
+      "source_id": "urn:company-wiki:source:sha256:91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+      "source_sha256": "91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+      "document_kind": "semi_annual_report",
+      "draft_status": "needs_review",
+      "automated_citation_role_validation": "passed",
+      "semantic_review": "not_performed",
+      "claims": [
+        {
+          "claim_id": "C02-summary",
+          "response_to_claim_id": null,
+          "qa_group_link_verified": false,
+          "text": "半年报预计，未来五至十年通过自主研发和产业合作，覆盖集成电路关键领域超过60%的设备市场；这是前瞻目标，不代表已经实现。",
+          "claim_type": "company_statement",
+          "modality": "forecast",
+          "needs_review": true,
+          "evidence": [
+            {
+              "evidence_id": "urn:company-wiki:evidence-span:sha256:e3ac0d9553f7299115932630275a7d9b0827588ae03943739e1c73be34168cec",
+              "locator_v1": "loc:v1/page:21/paragraph:3",
+              "source_role": "company_filing",
+              "qa_group_id": null,
+              "selection_group_id": "urn:company-wiki:context-group:sha256:9b1a6beea8aa960161481211bec8f77cda96ac651af216723c4ea0ae3397f934:market-coverage-target:0",
+              "quality_flags": [],
+              "excerpt": "预计未来五到十年，中微公司将通过自主研发以及携手行业合作伙伴，覆盖集成电路关键领域超"
+            },
+            {
+              "evidence_id": "urn:company-wiki:evidence-span:sha256:cb4e8542055b772089f9cf047f4306b0a9106ddb3ce4d0910716727206de3ff1",
+              "locator_v1": "loc:v1/page:21/paragraph:4",
+              "source_role": "company_filing",
+              "qa_group_id": null,
+              "selection_group_id": "urn:company-wiki:context-group:sha256:9b1a6beea8aa960161481211bec8f77cda96ac651af216723c4ea0ae3397f934:market-coverage-target:0",
+              "quality_flags": [],
+              "excerpt": "过60%的设备市场。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sample_id": "P03",
+      "source_id": "urn:company-wiki:source:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+      "source_sha256": "ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+      "document_kind": "quarterly_report",
+      "draft_status": "needs_review",
+      "automated_citation_role_validation": "passed",
+      "semantic_review": "not_performed",
+      "claims": [
+        {
+          "claim_id": "C03-summary",
+          "response_to_claim_id": null,
+          "qa_group_link_verified": false,
+          "text": "季报称四款面向 SiC、GaN 功率器件和 Micro LED 等应用的 MOCVD 新产品进入客户验证，其中部分产品取得批量订货。",
+          "claim_type": "company_statement",
+          "modality": "actual",
+          "needs_review": true,
+          "evidence": [
+            {
+              "evidence_id": "urn:company-wiki:evidence-span:sha256:a075acb5eab59d4833e836bb89e164cb15517d7ff7f36118a27d76af8613c5ca",
+              "locator_v1": "loc:v1/page:3/paragraph:24",
+              "source_role": "company_filing",
+              "qa_group_id": null,
+              "selection_group_id": "urn:company-wiki:context-group:sha256:0adef080ac27fa45cc518cccfc4b628bdf75c7fbaebc001f9ee4aa9bbc503fbc",
+              "quality_flags": [],
+              "excerpt": "四款MOCVD 新产品包括用于SiC 和GaN 功率器件的MOCVD，用于Micro LED 的GaN MOCVD"
+            },
+            {
+              "evidence_id": "urn:company-wiki:evidence-span:sha256:3d10451a5b5c6296c7edba01614c9a24a2295b9527aa0358cc6b47b960d4d96d",
+              "locator_v1": "loc:v1/page:3/paragraph:25",
+              "source_role": "company_filing",
+              "qa_group_id": null,
+              "selection_group_id": "urn:company-wiki:context-group:sha256:0adef080ac27fa45cc518cccfc4b628bdf75c7fbaebc001f9ee4aa9bbc503fbc",
+              "quality_flags": [],
+              "excerpt": "和用于红黄光LED 的GaAs MOCVD 设备已进入客户端验证阶段，并且部分得到批量订货。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sample_id": "P04",
+      "source_id": "urn:company-wiki:source:sha256:19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+      "source_sha256": "19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+      "document_kind": "prospectus",
+      "draft_status": "needs_review",
+      "automated_citation_role_validation": "passed",
+      "semantic_review": "not_performed",
+      "claims": [
+        {
+          "claim_id": "C04-summary",
+          "response_to_claim_id": null,
+          "qa_group_link_verified": false,
+          "text": "招股书披露时，公司称其 MOCVD 设备已在领先客户生产线上规模量产；该内容只作招股时点的历史基线。",
+          "claim_type": "company_statement",
+          "modality": "actual",
+          "needs_review": true,
+          "evidence": [
+            {
+              "evidence_id": "urn:company-wiki:evidence-span:sha256:fee3bd0d3d187df4de31fcc7554d0827d6c33be8002c61802c76e5f96714dcd6",
+              "locator_v1": "loc:v1/page:114/paragraph:16",
+              "source_role": "company_filing",
+              "qa_group_id": null,
+              "selection_group_id": "urn:company-wiki:context-group:sha256:48658e15a0d05922f54f755cb1e0dbb749ddb6fae98dedafb729daa6efcaecca",
+              "quality_flags": [],
+              "excerpt": "公司的MOCVD 设备在行业领先客户的生产线上大规模投入量产，"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sample_id": "P05",
+      "source_id": "urn:company-wiki:source:sha256:2ea34bcb188f137edf45541b3b11dd314e3301ff48f9f73a78cf8c4abd310c56",
+      "source_sha256": "2ea34bcb188f137edf45541b3b11dd314e3301ff48f9f73a78cf8c4abd310c56",
+      "document_kind": "convertible_bond_prospectus",
+      "draft_status": "needs_review",
+      "automated_citation_role_validation": "passed",
+      "semantic_review": "not_performed",
+      "claims": [
+        {
+          "claim_id": "C05-summary",
+          "response_to_claim_id": null,
+          "qa_group_link_verified": false,
+          "text": "可转债募集说明书将从锻件向零件、组件及部件延伸列为项目建设理由；这是项目论证，不能当作已实现交付或产能。",
+          "claim_type": "company_statement",
+          "modality": "planned",
+          "needs_review": true,
+          "evidence": [
+            {
+              "evidence_id": "urn:company-wiki:evidence-span:sha256:af283085e2745629b08fcd18be4533a1cb010eecea82769c050163df2199d807",
+              "locator_v1": "loc:v1/page:231/paragraph:27",
+              "source_role": "company_filing",
+              "qa_group_id": null,
+              "selection_group_id": "urn:company-wiki:context-group:sha256:f225a89817b5f8679322da6de9d6ec0fda7a53644e138502a4082c893370918b",
+              "quality_flags": [],
+              "excerpt": "本项目的建设充"
+            },
+            {
+              "evidence_id": "urn:company-wiki:evidence-span:sha256:ae3e4a45edfefce7554276a935a359fdd3a79d697309a7b61fa6445f42576d2e",
+              "locator_v1": "loc:v1/page:231/paragraph:28",
+              "source_role": "company_filing",
+              "qa_group_id": null,
+              "selection_group_id": "urn:company-wiki:context-group:sha256:f225a89817b5f8679322da6de9d6ec0fda7a53644e138502a4082c893370918b",
+              "quality_flags": [],
+              "excerpt": "分结合行业“锻件-零件-组件-部件”的发展趋势以及三角防务自身的迫切需求，"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sample_id": "P06",
+      "source_id": "urn:company-wiki:source:sha256:cd803fe9528f4646f8f29b518a450ae4bd5b5968c482eb49789f9786b523595b",
+      "source_sha256": "cd803fe9528f4646f8f29b518a450ae4bd5b5968c482eb49789f9786b523595b",
+      "document_kind": "equity_offering_prospectus",
+      "draft_status": "needs_review",
+      "automated_citation_role_validation": "passed",
+      "semantic_review": "not_performed",
+      "claims": [
+        {
+          "claim_id": "C06-certification-summary",
+          "response_to_claim_id": null,
+          "qa_group_link_verified": false,
+          "text": "定增注册稿称，航空数字化集成中心项目从锻件制造向下游装配延伸，需要进行合格供应商与产品认证；申报材料预计认证周期为4至9个月，属于预计安排而非已经通过认证。",
+          "claim_type": "company_statement",
+          "modality": "planned",
+          "needs_review": true,
+          "evidence": [
+            {
+              "evidence_id": "urn:company-wiki:evidence-span:sha256:c0836b8ef6c7b1dae701adc5f81c99625150b4faa9ba920e170550d06e397051",
+              "locator_v1": "loc:v1/page:3/paragraph:13",
+              "source_role": "company_filing",
+              "qa_group_id": null,
+              "selection_group_id": "urn:company-wiki:context-group:sha256:d479a6a2cf8bb136e5b7bbc9cc5e8b6824b87c0ef0678a46a5c6e87cfb2cda3b:downstream-extension:0",
+              "quality_flags": [],
+              "excerpt": "司现有业务锻件制造的基础上，向下游装配产业领域的延伸和拓展，需要进行"
+            },
+            {
+              "evidence_id": "urn:company-wiki:evidence-span:sha256:71497a1eb1410dc541778ff33ae70f0de403732cb8d595002a95571962d4d4a3",
+              "locator_v1": "loc:v1/page:3/paragraph:38",
+              "source_role": "company_filing",
+              "qa_group_id": null,
+              "selection_group_id": "urn:company-wiki:context-group:sha256:ef1dabf119f683b653908e7a3352fef0dfb436a44e1d605cb42bfd9d31d96ad5:certification-timeline:1",
+              "quality_flags": [],
+              "excerpt": "化集成中心项目需要进行合格供应商认证和产品认证，预计需要4-9 个月。"
+            }
+          ]
+        },
+        {
+          "claim_id": "C06-rationale-summary",
+          "response_to_claim_id": null,
+          "qa_group_link_verified": false,
+          "text": "注册稿以航空产业协作格局及外协需求论证项目必要性；属于发行文件的行业背景和建设理由，不证明需求或项目效益已经兑现。",
+          "claim_type": "company_statement",
+          "modality": "planned",
+          "needs_review": true,
+          "evidence": [
+            {
+              "evidence_id": "urn:company-wiki:evidence-span:sha256:a63177581631b0e1d79a3a259ab2993037f8fe3e7783da20b61df257d1cfe1d3",
+              "locator_v1": "loc:v1/page:101/paragraph:3",
+              "source_role": "company_filing",
+              "qa_group_id": null,
+              "selection_group_id": "urn:company-wiki:context-group:sha256:78904189fbc45aa4b382d0f7a739c8b4518edf52cab0e8fe499b30914737bde4",
+              "quality_flags": [],
+              "excerpt": "（1）航空产业形成“小核心、大协作”的发展格局，主机厂中小锻件外协需"
+            },
+            {
+              "evidence_id": "urn:company-wiki:evidence-span:sha256:0e529d85094c6a8b6667a80fbf09b773549ba0857196c0f587ad078dc279b7e3",
+              "locator_v1": "loc:v1/page:101/paragraph:4",
+              "source_role": "company_filing",
+              "qa_group_id": null,
+              "selection_group_id": "urn:company-wiki:context-group:sha256:78904189fbc45aa4b382d0f7a739c8b4518edf52cab0e8fe499b30914737bde4",
+              "quality_flags": [],
+              "excerpt": "求旺盛"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sample_id": "P07",
+      "source_id": "urn:company-wiki:source:sha256:221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+      "source_sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+      "document_kind": "investor_relations",
+      "draft_status": "needs_review",
+      "automated_citation_role_validation": "passed",
+      "semantic_review": "not_performed",
+      "claims": [
+        {
+          "claim_id": "C07-summary",
+          "response_to_claim_id": null,
+          "qa_group_link_verified": false,
+          "text": "2026 年 5 月 15 日 IR 记录称，管理层表示硫化锂中试线建设按计划推进，并按当时情况预计 6 月底前建成、开展中试；该样本不能证明后来按期完成。",
+          "claim_type": "company_statement",
+          "modality": "planned",
+          "needs_review": true,
+          "evidence": [
+            {
+              "evidence_id": "urn:company-wiki:evidence-span:sha256:8af8274dafc6fc9f88b2842401a2c410cdbc740cec4a4fd8d5b4d73ab79abda9",
+              "locator_v1": "loc:v1/page:6/table:0/row:0/column:1",
+              "source_role": "management",
+              "qa_group_id": "p6:t0:r0:c1:q1",
+              "selection_group_id": null,
+              "quality_flags": [
+                "locator_unstable"
+              ],
+              "excerpt": "答：您好！公司固态电池材料硫化锂的中试线建设工作正在按计划推\n进中，根据目前情况看可以在 6 月底之前完成建设并投入开展中试工作。\n感谢您对公司的关注！"
+            }
+          ]
+        },
+        {
+          "claim_id": "C08-summary",
+          "response_to_claim_id": null,
+          "qa_group_link_verified": false,
+          "text": "同一 IR 记录称，公司正推广面向石化催化的沸石分子筛产品，且当时已有产品实现销售；合作意向书本身不等于新增销售。",
+          "claim_type": "company_statement",
+          "modality": "actual",
+          "needs_review": true,
+          "evidence": [
+            {
+              "evidence_id": "urn:company-wiki:evidence-span:sha256:174a1dbc2dd333bf4c47be03ae46290f7d6cc16fd2a56c3a211935d68df93640",
+              "locator_v1": "loc:v1/page:6/table:0/row:0/column:1",
+              "source_role": "management",
+              "qa_group_id": "p5:t0:r0:c1:q4",
+              "selection_group_id": null,
+              "quality_flags": [
+                "locator_unstable"
+              ],
+              "excerpt": "答：您好！公司近年来为应对车用沸石分子筛产品下游需求波动产生\n的影响，公司积极开发并推广石油化工催化领域的沸石分子筛产品，2025\n年公司与中国石化催化剂有限公司签署《项目合作意向书》，现已有产品\n实现销售。谢谢！"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sample_id": "P08",
+      "source_id": "urn:company-wiki:source:sha256:4455d6f099f5f1051fc5daad32a6db1564bb6e8cbd7584637388e42ba0163a32",
+      "source_sha256": "4455d6f099f5f1051fc5daad32a6db1564bb6e8cbd7584637388e42ba0163a32",
+      "document_kind": "investor_relations",
+      "draft_status": "needs_review",
+      "automated_citation_role_validation": "passed",
+      "semantic_review": "not_performed",
+      "claims": [
+        {
+          "claim_id": "C09-investor-question-summary",
+          "response_to_claim_id": null,
+          "qa_group_link_verified": false,
+          "text": "投资者问题称 OLED 材料、半导体光刻胶等新兴业务 2024 年营收占比不足 5%，并询问其产能释放与客户认证进展。",
+          "claim_type": "analyst_question",
+          "modality": "question",
+          "needs_review": true,
+          "evidence": [
+            {
+              "evidence_id": "urn:company-wiki:evidence-span:sha256:e27dfc969422a07821fe6e405a2915fe58cb9743e4693528c404b23198a3b945",
+              "locator_v1": "loc:v1/page:2/table:0/row:0/column:1",
+              "source_role": "investor_question",
+              "qa_group_id": "p2:t0:r0:c1:q2",
+              "selection_group_id": null,
+              "quality_flags": [
+                "locator_unstable"
+              ],
+              "excerpt": "3、问：OLED 材料、半导体光刻胶等新兴业务 2024 年营收占比不足\n5%，但研发投入占比超 10%。请量化说明这些业务的产能释放时间表及客\n户认证进展（如是否进入京东方、中芯国际供应链），怎么让研发投入\n有价值，打消投资者的顾虑？"
+            }
+          ]
+        },
+        {
+          "claim_id": "C09-management-answer-summary",
+          "response_to_claim_id": "C09-investor-question-summary",
+          "qa_group_link_verified": true,
+          "text": "管理层答复称，三月科技与九目化学两个 OLED 业务主体 2024 年收入占公司整体收入比例已超过 25%，并提示以公司公告为准。",
+          "claim_type": "company_statement",
+          "modality": "actual",
+          "needs_review": true,
+          "evidence": [
+            {
+              "evidence_id": "urn:company-wiki:evidence-span:sha256:69d82699d44320e2df8795f96271e422675a296bf4d613e2480913099b9b7341",
+              "locator_v1": "loc:v1/page:2/table:0/row:0/column:1",
+              "source_role": "management",
+              "qa_group_id": "p2:t0:r0:c1:q2",
+              "selection_group_id": null,
+              "quality_flags": [
+                "locator_unstable"
+              ],
+              "excerpt": "答：您好，仅以公司已披露的从事 OLED 材料的业务主体（三月科技\n与九目化学）营收计算 2024 年度占公司整体营收比例已超过 25%，相关\n公司信息请以公司公告为准，公司的研发投入为按照公司发展规划开展，\n在半导体制造材料、OLED 材料、聚酰亚胺材料、其他高性能聚合物等多\n类材料方面持续投入研发，争取为公司赢得更多市场机会。在国内产业合\n作方面，2025 年 3 月公司与中国石化催化剂有限公司签署了《项目合作\n意向书》，有望为公司模板剂、分子筛等产品带来发展机遇；202"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sample_id": "T01",
+      "source_id": "urn:company-wiki:source:sha256:4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+      "source_sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+      "document_kind": "investor_call_transcript",
+      "draft_status": "needs_review",
+      "automated_citation_role_validation": "passed",
+      "semantic_review": "not_performed",
+      "claims": [
+        {
+          "claim_id": "C10-summary",
+          "response_to_claim_id": null,
+          "qa_group_link_verified": false,
+          "text": "During the call, management said demand exceeded available supply and described the situation as a relatively extreme moment.",
+          "claim_type": "company_statement",
+          "modality": "actual",
+          "needs_review": true,
+          "evidence": [
+            {
+              "evidence_id": "urn:company-wiki:evidence-span:sha256:95e5afd04cccd8b3ec8e40ded2604d3396cb97c3030e98bca270b856af96d2d5",
+              "locator_v1": "loc:v1/paragraph:263/chars:91-205",
+              "source_role": "management",
+              "qa_group_id": 3,
+              "selection_group_id": null,
+              "quality_flags": [],
+              "excerpt": "Currently, the situation is obviously that demand exceeds available supply in a sort of relatively extreme moment."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sample_id": "T02",
+      "source_id": "urn:company-wiki:source:sha256:d00e2a4537b86628ef019180e27de5ae0a57e715770ddf15135bd75627a6d59e",
+      "source_sha256": "d00e2a4537b86628ef019180e27de5ae0a57e715770ddf15135bd75627a6d59e",
+      "document_kind": "investor_call_transcript",
+      "draft_status": "needs_review",
+      "automated_citation_role_validation": "passed",
+      "semantic_review": "not_performed",
+      "claims": [
+        {
+          "claim_id": "C11-summary",
+          "response_to_claim_id": null,
+          "qa_group_link_verified": false,
+          "text": "Management said it was too early to speculate and that the data would need to be awaited; the answer does not establish superiority.",
+          "claim_type": "company_statement",
+          "modality": "uncertain",
+          "needs_review": true,
+          "evidence": [
+            {
+              "evidence_id": "urn:company-wiki:evidence-span:sha256:00870b3350067d5356519b85f6b0af751856656d3ce609046263b7b8012ea516",
+              "locator_v1": "loc:v1/paragraph:207/chars:331-455",
+              "source_role": "management",
+              "qa_group_id": 1,
+              "selection_group_id": null,
+              "quality_flags": [],
+              "excerpt": "And again, I think it's too early to speculate, but we will see the data when we will see them, but that is test number two."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

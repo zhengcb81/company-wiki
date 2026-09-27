@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import gzip
+from datetime import datetime, timezone
 from pathlib import Path
 
 from company_wiki.source_catalog.archive_retired_evidence import (
@@ -24,6 +25,8 @@ ANNUAL = """\
 
 经营情况：报告期内公司营业收入稳步增长，主要得益于先进制程设备出货量提升与国产替代进程加速。
 """
+
+NOW = datetime(2026, 8, 15, tzinfo=timezone.utc)
 
 
 def _catalog_with_retired_doc(tmp_path: Path):
@@ -55,7 +58,9 @@ def _catalog_with_retired_doc(tmp_path: Path):
 def test_archive_exports_retired_evidence_with_row_reconciliation(tmp_path):
     catalog = _catalog_with_retired_doc(tmp_path)
     manifests = tmp_path / "manifests"
-    report = archive_retired_evidence(catalog.config.database_path, manifests)
+    report = archive_retired_evidence(
+        catalog.config.database_path, manifests, now=NOW
+    )
 
     assert report.ok
     assert report.rows_written == report.rows_in_catalog
@@ -63,7 +68,8 @@ def test_archive_exports_retired_evidence_with_row_reconciliation(tmp_path):
 
     path = Path(report.archive_path)
     assert path.exists()
-    assert path.name == "retired-evidence.jsonl.gz"
+    assert path.name.startswith("retired-evidence-")
+    assert path.name.endswith(".jsonl.gz")
     assert "archive" in str(path)
 
     with gzip.open(path, "rt", encoding="utf-8") as fh:
@@ -106,6 +112,8 @@ def test_archive_empty_when_no_retired_documents(tmp_path):
         )
     )
     catalog.scan()
-    report = archive_retired_evidence(catalog.config.database_path, tmp_path / "manifests")
+    report = archive_retired_evidence(
+        catalog.config.database_path, tmp_path / "manifests", now=NOW
+    )
     assert report.ok
     assert report.rows_written == 0

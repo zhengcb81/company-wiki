@@ -1,0 +1,4676 @@
+{
+  "schema_version": "narrative-g1-pilot/0.1.0",
+  "runner": "scripts/narrative_evidence_pilot.py",
+  "read_only_roots": [
+    "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\transcripts"
+  ],
+  "generated_from_manifest": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\narrative-evidence-pilot-2026-09-26\\g1_sample_manifest.json",
+  "elapsed_seconds": 12.71,
+  "samples": [
+    {
+      "sample_id": "P04",
+      "title": "中微公司：首次公开发行股票并在科创板上市招股说明书.pdf",
+      "source_sha256": "19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+      "source_file_bytes": 11211796,
+      "document_kind": "prospectus",
+      "status": "partial",
+      "coverage_complete": false,
+      "page_count": 429,
+      "pages_read": 429,
+      "opaque_pages": [],
+      "table_scan_page_count": 1,
+      "deferred_table_pages": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83,
+        84,
+        85,
+        86,
+        87,
+        88,
+        89,
+        90,
+        91,
+        92,
+        93,
+        94,
+        95,
+        96,
+        97,
+        98,
+        99,
+        100,
+        101,
+        102,
+        103,
+        104,
+        105,
+        106,
+        107,
+        108,
+        109,
+        110,
+        111,
+        112,
+        113,
+        115,
+        116,
+        117,
+        118,
+        119,
+        120,
+        121,
+        122,
+        123,
+        124,
+        125,
+        126,
+        127,
+        128,
+        129,
+        130,
+        131,
+        132,
+        133,
+        134,
+        135,
+        136,
+        137,
+        138,
+        139,
+        140,
+        141,
+        142,
+        143,
+        144,
+        145,
+        146,
+        147,
+        148,
+        149,
+        150,
+        151,
+        152,
+        153,
+        154,
+        155,
+        156,
+        157,
+        158,
+        159,
+        160,
+        161,
+        162,
+        163,
+        164,
+        165,
+        166,
+        167,
+        168,
+        169,
+        170,
+        171,
+        172,
+        173,
+        174,
+        175,
+        176,
+        177,
+        178,
+        179,
+        180,
+        181,
+        182,
+        183,
+        184,
+        185,
+        186,
+        187,
+        188,
+        189,
+        190,
+        191,
+        192,
+        193,
+        194,
+        195,
+        196,
+        197,
+        198,
+        199,
+        200,
+        201,
+        202,
+        203,
+        204,
+        205,
+        206,
+        207,
+        208,
+        209,
+        210,
+        211,
+        212,
+        213,
+        214,
+        215,
+        216,
+        217,
+        218,
+        219,
+        220,
+        221,
+        222,
+        223,
+        224,
+        225,
+        226,
+        227,
+        228,
+        229,
+        230,
+        231,
+        232,
+        233,
+        234,
+        235,
+        236,
+        237,
+        238,
+        239,
+        240,
+        241,
+        242,
+        243,
+        244,
+        245,
+        246,
+        247,
+        248,
+        249,
+        250,
+        251,
+        252,
+        253,
+        254,
+        255,
+        256,
+        257,
+        258,
+        259,
+        260,
+        261,
+        262,
+        263,
+        264,
+        265,
+        266,
+        267,
+        268,
+        269,
+        270,
+        271,
+        272,
+        273,
+        274,
+        275,
+        276,
+        277,
+        278,
+        279,
+        280,
+        281,
+        282,
+        283,
+        284,
+        285,
+        286,
+        287,
+        288,
+        289,
+        290,
+        291,
+        292,
+        293,
+        294,
+        295,
+        296,
+        297,
+        298,
+        299,
+        300,
+        301,
+        302,
+        303,
+        304,
+        305,
+        306,
+        307,
+        308,
+        309,
+        310,
+        311,
+        312,
+        313,
+        314,
+        315,
+        316,
+        317,
+        318,
+        319,
+        320,
+        321,
+        322,
+        323,
+        324,
+        325,
+        326,
+        327,
+        328,
+        329,
+        330,
+        331,
+        332,
+        333,
+        334,
+        335,
+        336,
+        337,
+        338,
+        339,
+        340,
+        341,
+        342,
+        343,
+        344,
+        345,
+        346,
+        347,
+        348,
+        349,
+        350,
+        351,
+        352,
+        353,
+        354,
+        355,
+        356,
+        357,
+        358,
+        359,
+        360,
+        361,
+        362,
+        363,
+        364,
+        365,
+        366,
+        367,
+        368,
+        369,
+        370,
+        371,
+        372,
+        373,
+        374,
+        375,
+        376,
+        377,
+        378,
+        379,
+        380,
+        381,
+        382,
+        383,
+        384,
+        385,
+        386,
+        387,
+        388,
+        389,
+        390,
+        391,
+        392,
+        393,
+        394,
+        395,
+        396,
+        397,
+        398,
+        399,
+        400,
+        401,
+        402,
+        403,
+        404,
+        405,
+        406,
+        407,
+        408,
+        409,
+        410,
+        411,
+        412,
+        413,
+        414,
+        415,
+        416,
+        417,
+        418,
+        419,
+        420,
+        421,
+        422,
+        423,
+        424,
+        425,
+        426,
+        427,
+        428,
+        429
+      ],
+      "focus_pages": [
+        114
+      ],
+      "selected_focus_pages": [
+        114
+      ],
+      "line_count": 0,
+      "parse_errors": [],
+      "source_units": 14027,
+      "candidate_count": 347,
+      "selected_span_count": 166,
+      "locator_roundtrip_verified_count": 166,
+      "locator_roundtrip_failed_count": 0,
+      "locator_roundtrip_failed_span_ids": [],
+      "dropped_financial_count": 0,
+      "omitted_candidate_count": 181,
+      "selected_text_bytes": 10533,
+      "summary_input_bytes": 50692,
+      "summary_input_to_source_ratio": 0.004521,
+      "elapsed_seconds": 12.698,
+      "selected_evidence_preview": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:ef5e76709ef6949bfb8b0cd0a9747c86c625a91fba28478119f1ad5ab9b3481f",
+          "locator_v1": "loc:v1/page:114/paragraph:10",
+          "coordinates": {
+            "page_number": 114,
+            "paragraph_index": 10,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects",
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "business_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "中微公司基于在半导体制造设备产业多年积累的专业技术，涉足半导体集成"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:576e23df2dbfc3c5f850b8ba965953534e3527de3ecfbd19840da38fd79a9475",
+          "locator_v1": "loc:v1/page:114/paragraph:11",
+          "coordinates": {
+            "page_number": 114,
+            "paragraph_index": 11,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects",
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "business_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "电路制造、先进封装、LED 生产、MEMS 制造以及其他微观工艺的高端设备领"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:100e8017bb95de16bc5561c6a969c91e0341194a4ff782252a09da3eb066b757",
+          "locator_v1": "loc:v1/page:114/paragraph:12",
+          "coordinates": {
+            "page_number": 114,
+            "paragraph_index": 12,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects",
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "business_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "域，瞄准世界科技前沿，坚持自主创新。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:0b15d92f0570cc748a1f400ed71481f8b0122d1398d994d5a56c260396115a66",
+          "locator_v1": "loc:v1/page:114/paragraph:13",
+          "coordinates": {
+            "page_number": 114,
+            "paragraph_index": 13,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects",
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "business_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "公司的等离子体刻蚀设备已在国际一线"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:62acb3598c6cdcf99aae94376d8f4a1a29f449544f3ba9f1673b0578422161dd",
+          "locator_v1": "loc:v1/page:114/paragraph:14",
+          "coordinates": {
+            "page_number": 114,
+            "paragraph_index": 14,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects",
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "business_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "客户从65 纳米到14 纳米、7 纳米和5 纳米的集成电路加工制造及先进封装中有"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:5ed1b3dcd90cf22386fc954a35fe1fb1baf3855db5dff84d4b0cbd9e5e38852f",
+          "locator_v1": "loc:v1/page:114/paragraph:15",
+          "coordinates": {
+            "page_number": 114,
+            "paragraph_index": 15,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects",
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "business_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "具体应用。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:fee3bd0d3d187df4de31fcc7554d0827d6c33be8002c61802c76e5f96714dcd6",
+          "locator_v1": "loc:v1/page:114/paragraph:16",
+          "coordinates": {
+            "page_number": 114,
+            "paragraph_index": 16,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects",
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "公司的MOCVD 设备在行业领先客户的生产线上大规模投入量产，"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:54f725ce995e272d8d73f38b0815c564ceb10bc6015d79f4e00ca8f9088593e5",
+          "locator_v1": "loc:v1/page:114/paragraph:17",
+          "coordinates": {
+            "page_number": 114,
+            "paragraph_index": 17,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects",
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "business_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "公司已成为世界排名前列、国内占领先地位的氮化镓基LED 设备制造商。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:c0745ed4078ae22c71d3e8b15aeca61fb1bc3b47da2efd1bf8ad087860b1fa46",
+          "locator_v1": "loc:v1/page:114/paragraph:19",
+          "coordinates": {
+            "page_number": 114,
+            "paragraph_index": 19,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "core_business"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "business_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "公司主要为集成电路、LED 芯片、MEMS 等半导体产品的制造企业提供刻"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:c12301aff9c0a780501cee34e0ef0717b53fc1d91f6b30219287d068159e7e28",
+          "locator_v1": "loc:v1/page:114/paragraph:20",
+          "coordinates": {
+            "page_number": 114,
+            "paragraph_index": 20,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "core_business"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "business_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "蚀设备、MOCVD 设备及其他设备，其中主要产品的具体情况如下："
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:da5ed1f6ff7f92b6f03eda573313b063fddafe7cb1cb363d7e9bef7c52e6ce74",
+          "locator_v1": "loc:v1/page:114/paragraph:22",
+          "coordinates": {
+            "page_number": 114,
+            "paragraph_index": 22,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "core_business"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "business_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "产品类别 \n图示 \n应用领域"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:087988eb184fc423955da2ac4c347fa2f8dff92eedd9f5caeec41775e94376b9",
+          "locator_v1": "loc:v1/page:114/paragraph:25",
+          "coordinates": {
+            "page_number": 114,
+            "paragraph_index": 25,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "core_business"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "business_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "主要应用于集成电路制造中"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:ec611fa54d2a40ba7b280709ef4add955aaab92a13dafa94469ae97a023edc12",
+          "locator_v1": "loc:v1/page:114/paragraph:26",
+          "coordinates": {
+            "page_number": 114,
+            "paragraph_index": 26,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "core_business"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "business_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "氧化硅、氮化硅及低介电系数"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:0f5b5cb86c6b5ed6f9c3dcf85c145b99aae46ba62b344706c3344909233eaadd",
+          "locator_v1": "loc:v1/page:114/paragraph:27",
+          "coordinates": {
+            "page_number": 114,
+            "paragraph_index": 27,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "core_business"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "business_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "膜层等电介质材料的刻蚀"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:592c8934dba953a13c450d48aa3d3dd06485ec9eea025844d5413686b3e506d0",
+          "locator_v1": "loc:v1/page:114/paragraph:3",
+          "coordinates": {
+            "page_number": 114,
+            "paragraph_index": 3,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "core_business"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "business_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "一、发行人主营业务及主要产品和服务情况"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:1e0d1e5be34cdb32b74c799675d4c4c9d3936fee927b66724478fae972dd8c72",
+          "locator_v1": "loc:v1/page:114/paragraph:5",
+          "coordinates": {
+            "page_number": 114,
+            "paragraph_index": 5,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "core_business"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "business_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "中微公司是一家以中国为基地、面向全球的高端半导体微观加工设备公司。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:dafdbd457f0bfef557db38df78b59a6e8972ea47d278e19ed040764e00826d58",
+          "locator_v1": "loc:v1/page:114/paragraph:6",
+          "coordinates": {
+            "page_number": 114,
+            "paragraph_index": 6,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "core_business"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "business_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "公司主要从事半导体设备的研发、生产和销售，通过向全球集成电路和LED 芯"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:8847ac90fcb2b4e0691e312a53778f29224310ef12e1dde4a9e29bc19587d5c0",
+          "locator_v1": "loc:v1/page:114/paragraph:7",
+          "coordinates": {
+            "page_number": 114,
+            "paragraph_index": 7,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "core_business"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "business_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "片制造商提供极具竞争力的高端设备和高质量服务，为全球半导体制造商及其相"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:0b56b2082f9ee9632d8a10b381ef4cc85e26735e5ac6a3ecda3d8a97310fab0c",
+          "locator_v1": "loc:v1/page:114/paragraph:8",
+          "coordinates": {
+            "page_number": 114,
+            "paragraph_index": 8,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "core_business"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "business_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "关的高科技新兴产业公司提供加工设备和工艺技术解决方案，助力他们提升技术"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:43a1a5b0de756f46f4c40ed41d3c9c4976d1fb910f1a126e7196d596262d183b",
+          "locator_v1": "loc:v1/page:114/paragraph:9",
+          "coordinates": {
+            "page_number": 114,
+            "paragraph_index": 9,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "core_business"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "business_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "水平、提高生产效率、降低生产成本。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:5b3eb0bde7fafd9804cb57ba5418143926078c60a3da2ac8401722f659bd689f",
+          "locator_v1": "loc:v1/page:117/paragraph:2",
+          "coordinates": {
+            "page_number": 117,
+            "paragraph_index": 2,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "本阶段的成功完成意味着技术开发已经成熟、机台开发成功，Beta 机可进入"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:22d66b70dfc464c6e26d70346389fb9d2418ecc8c2bdcfc71c304c91a49322e9",
+          "locator_v1": "loc:v1/page:117/paragraph:3",
+          "coordinates": {
+            "page_number": 117,
+            "paragraph_index": 3,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "量产阶段。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:e05d9388f046e5bd2a870c32a4c7c069d2d0cbf7f31f97693145f30c02f44cfe",
+          "locator_v1": "loc:v1/page:123/paragraph:10",
+          "coordinates": {
+            "page_number": 123,
+            "paragraph_index": 10,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "模投入量产，成为世界排名前列、国内占领先地位的氮化镓基LED MOCVD 设"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:84c30c4cdaaef44ea19190a9b24730eff5980c2dc8a1e0c7f5e3395afc68dcfb",
+          "locator_v1": "loc:v1/page:123/paragraph:11",
+          "coordinates": {
+            "page_number": 123,
+            "paragraph_index": 11,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "core_business",
+            "capacity_projects",
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "备。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:3494703cf0cf5ba7294596b6724f9a47efaec17aaea72846cae9cc7c17bc6847",
+          "locator_v1": "loc:v1/page:123/paragraph:12",
+          "coordinates": {
+            "page_number": 123,
+            "paragraph_index": 12,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "core_business"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "MOCVD 设备市场有广阔的增长空间，包括红黄光LED、紫外光LED、功"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:2f94bb9562f222aec1f0a53c48d397a9a8e9ef84b22bd5663eee0940492547d9",
+          "locator_v1": "loc:v1/page:123/paragraph:13",
+          "coordinates": {
+            "page_number": 123,
+            "paragraph_index": 13,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "core_business",
+            "capacity_projects",
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "率器件和正在推动显示技术革命的Mini LED、Micro LED 等。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:2e7fbc9d2b336980a65452d68d4a43a5b4eb9922c3118b672102a588479d3ac6",
+          "locator_v1": "loc:v1/page:123/paragraph:5",
+          "coordinates": {
+            "page_number": 123,
+            "paragraph_index": 5,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "core_business",
+            "capacity_projects",
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "中微公司瞄准世界科技前沿，坚持自主创新。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:9bf74db2ac49f914254b6825a7c03be611c36e31e1f997107008aa9b4346c32f",
+          "locator_v1": "loc:v1/page:123/paragraph:6",
+          "coordinates": {
+            "page_number": 123,
+            "paragraph_index": 6,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "core_business",
+            "capacity_projects",
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "目前，公司的等离子体刻蚀设"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:1b3cc2257e4e627f7ccb9f7b8bd1547a8340527f803f2c8d3f58798c481a2859",
+          "locator_v1": "loc:v1/page:123/paragraph:7",
+          "coordinates": {
+            "page_number": 123,
+            "paragraph_index": 7,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "core_business",
+            "capacity_projects",
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "备已在国际一线客户从65 纳米到14 纳米、7 纳米和5 纳米的集成电路加工制造"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:e84a6151e80dd3e99ed7167b4489efeabd5239d020639ba1c809cc3c925b19c3",
+          "locator_v1": "loc:v1/page:123/paragraph:8",
+          "coordinates": {
+            "page_number": 123,
+            "paragraph_index": 8,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "core_business",
+            "capacity_projects",
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "及先进封装中有具体应用。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:61adc9fe0114d665f08ee943cd32afef5895f9c53ee7ff4c5981c385867a8740",
+          "locator_v1": "loc:v1/page:123/paragraph:9",
+          "coordinates": {
+            "page_number": 123,
+            "paragraph_index": 9,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "公司的MOCVD 设备在行业领先客户生产线上大规"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:e899482f553b1cfded64b183239096a1db38282470f3def9735b0c539623e531",
+          "locator_v1": "loc:v1/page:133/paragraph:55",
+          "coordinates": {
+            "page_number": 133,
+            "paragraph_index": 55,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "提出应重点突破LED 外延生长和芯片制造关键"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:4521508de4a477175f9e35879173d5832e9ad9762e19c3484bddd0a1701ff283",
+          "locator_v1": "loc:v1/page:133/paragraph:56",
+          "coordinates": {
+            "page_number": 133,
+            "paragraph_index": 56,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "技术，提高外延片和高端芯片的国内保障水平。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:2ac902593453cf47349ca4b402ad3717f9f87d62b017d562b71c2adc38c1fe3d",
+          "locator_v1": "loc:v1/page:133/paragraph:57",
+          "coordinates": {
+            "page_number": 133,
+            "paragraph_index": 57,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "增强功率型LED 器件封装能力，加大对封装结"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:4cdab67616e1f13d7fa06b5f7acf30111a46c0d3f91098b55af7b5bef2a711c1",
+          "locator_v1": "loc:v1/page:133/paragraph:58",
+          "coordinates": {
+            "page_number": 133,
+            "paragraph_index": 58,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "构设计、新型封装材料及新工艺的研究与开发。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:0e384a1a115f0f76d64ef9f8b0c4e7ad28382aee2d93d74e0d9cda48eb356c84",
+          "locator_v1": "loc:v1/page:133/paragraph:59",
+          "coordinates": {
+            "page_number": 133,
+            "paragraph_index": 59,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "加快实现金属有机化合物化学气相淀积"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:46b514cd032966f6d9f8aba20c9d4010945e81988705d41e9e98ee02893f7c73",
+          "locator_v1": "loc:v1/page:133/paragraph:60",
+          "coordinates": {
+            "page_number": 133,
+            "paragraph_index": 60,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "（MOCVD）设备的量产，推进衬底材料、高纯"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:712bc3d06b2c5787b3c1cf20c4af5ee2e335704ee8676bdf570d521f7b3ac849",
+          "locator_v1": "loc:v1/page:134/paragraph:38",
+          "coordinates": {
+            "page_number": 134,
+            "paragraph_index": 38,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "提出“大型MOCVD 装备、关键原材料实现国产"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:1d6238af23409eef4a8b0bf1d5c85c0ef2385df489428d5d9e2657dccf3d4f56",
+          "locator_v1": "loc:v1/page:134/paragraph:39",
+          "coordinates": {
+            "page_number": 134,
+            "paragraph_index": 39,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "化，检测设备国产化率达70%以上。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:d6271fac590ce9d5a2428bcfaa9b095b17f6dc51f5155e352772d87dffef3679",
+          "locator_v1": "loc:v1/page:134/paragraph:40",
+          "coordinates": {
+            "page_number": 134,
+            "paragraph_index": 40,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "建立具有世"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:07139ff97eff8cb8906466774b31529be4c6bc0387e3963930662bc2db0d8606",
+          "locator_v1": "loc:v1/page:134/paragraph:41",
+          "coordinates": {
+            "page_number": 134,
+            "paragraph_index": 41,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "界先进水平的研发、检测平台和标准、认证体系”"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:171b2582b2e3cc97532919a696a9e3b07ce816f8875ae52aa20f0428ec3858af",
+          "locator_v1": "loc:v1/page:134/paragraph:42",
+          "coordinates": {
+            "page_number": 134,
+            "paragraph_index": 42,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "的发展目标。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:7c56072c39e44a1b3252cec717f49271a5826ecaf2aa8d611e8442509bdd042f",
+          "locator_v1": "loc:v1/page:134/paragraph:43",
+          "coordinates": {
+            "page_number": 134,
+            "paragraph_index": 43,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "将“着力推进核心装备的引进消化"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:04f39ea4f9c9710cd84940be4c8a670672c52fda8b0a12358a339d4863115526",
+          "locator_v1": "loc:v1/page:134/paragraph:44",
+          "coordinates": {
+            "page_number": 134,
+            "paragraph_index": 44,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "吸收和再创新，力争实现生产型 MOCVD 设备"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:74f9407a71cc76beec9b949e169ed140e7a93881b10ba3a7dac8a463a03d85af",
+          "locator_v1": "loc:v1/page:134/paragraph:45",
+          "coordinates": {
+            "page_number": 134,
+            "paragraph_index": 45,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "量产”作为重点任务推动。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:c65dbd14805e63dda9eb90c1c645ca4fd4fb70535a2e785bbf075e462a6b7868",
+          "locator_v1": "loc:v1/page:163/paragraph:34",
+          "coordinates": {
+            "page_number": 163,
+            "paragraph_index": 34,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "公司等离子体刻蚀设备通过采用双反应台技术增加了产能输出，有效降低客"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:68caf05cd1538518bede80563bdfe6c99ca964920a9c52c2e3b3ce4a449614fa",
+          "locator_v1": "loc:v1/page:163/paragraph:35",
+          "coordinates": {
+            "page_number": 163,
+            "paragraph_index": 35,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "户的成本。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:b70b369b024354a66057b1bf4870df44ad1ce5d6f5f90eb533de1a577b1ccfa7",
+          "locator_v1": "loc:v1/page:163/paragraph:36",
+          "coordinates": {
+            "page_number": 163,
+            "paragraph_index": 36,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "公司的MOCVD 设备Prismo A7 可配置多达4 个反应腔，可以同时加"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:eadfc7b04b9bf4cd019dc50f309b302ec80afde40faeb6dbbb0fdee58afe34dd",
+          "locator_v1": "loc:v1/page:172/paragraph:13",
+          "coordinates": {
+            "page_number": 172,
+            "paragraph_index": 13,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "报告期内，公司的深硅刻蚀设备的累计产量和销量分别为14 腔、10 腔，已"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:0c7d2b77a102cf2c9a669fc42d3c57f97bbdc7d18d1ff55044f53bd6f83934e9",
+          "locator_v1": "loc:v1/page:172/paragraph:14",
+          "coordinates": {
+            "page_number": 172,
+            "paragraph_index": 14,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "实现量产。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:f4d333fbb1d2d50bdb04501860931b03567558a19c8ecc7cf36b98cdd66f72d0",
+          "locator_v1": "loc:v1/page:172/paragraph:15",
+          "coordinates": {
+            "page_number": 172,
+            "paragraph_index": 15,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "公司产品已经进入国际主流MEMS 生产厂，与国际同类设备商的对"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:4233efab7f4eaa8d33f5409bd9412ba1969aab2ccb9e0621b94351588a624f22",
+          "locator_v1": "loc:v1/page:172/paragraph:16",
+          "coordinates": {
+            "page_number": 172,
+            "paragraph_index": 16,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "比情况如下："
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:172e06b1932759eb1dd2794336e441c6e9acf97107279eff50fe8f0695734bc1",
+          "locator_v1": "loc:v1/page:216/paragraph:10",
+          "coordinates": {
+            "page_number": 216,
+            "paragraph_index": 10,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "industry_dynamics",
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "current_industry_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "系公司向华灿浙江销售多台MOCVD 设备，并于2017 年完成交付验收，实现收"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:4356cf8a817a08efbbb56f071ef2bdee17d9502177d76efc33a12a147f57c4e2",
+          "locator_v1": "loc:v1/page:216/paragraph:11",
+          "coordinates": {
+            "page_number": 216,
+            "paragraph_index": 11,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "industry_dynamics",
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "current_industry_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "入金额33,994.60 万元所致。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:5f12af979736060d6869c7e465f4c3c9095e21388304b3c0eb1dab595359e557",
+          "locator_v1": "loc:v1/page:216/paragraph:12",
+          "coordinates": {
+            "page_number": 216,
+            "paragraph_index": 12,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "industry_dynamics",
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "current_industry_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "公司向关联方销售商品及提供服务收入的规模主要"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:1f20c97c448a1e38107ae3958fccc7dbe038dfb1107848159cace4f488c6863e",
+          "locator_v1": "loc:v1/page:216/paragraph:13",
+          "coordinates": {
+            "page_number": 216,
+            "paragraph_index": 13,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "current_industry_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "与下游行业波动、关联方新建或扩建生产线计划、建设周期、公司产品结构等因"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:2d27ed17cabfea9368f7c3e579bbdbc018c37e408eb55d93fe12e1d2ed3c5efe",
+          "locator_v1": "loc:v1/page:216/paragraph:14",
+          "coordinates": {
+            "page_number": 216,
+            "paragraph_index": 14,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "industry_dynamics"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "current_industry_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "素相关，关联交易金额根据下游市场需求变化而出现波动。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:b38601b221bc240c7eb09fafc57133a7788caf5a81d928946a275979b8048bbc",
+          "locator_v1": "loc:v1/page:216/paragraph:9",
+          "coordinates": {
+            "page_number": 216,
+            "paragraph_index": 9,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "industry_dynamics",
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "current_industry_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "2017 年，公司向关联方销售商品及提供服务金额较2016 年明显上升，主要"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:85723aa0bc00a36585139ecd035de4e30c61823761dc7f3a8d5f07d8956f0746",
+          "locator_v1": "loc:v1/page:242/paragraph:15",
+          "coordinates": {
+            "page_number": 242,
+            "paragraph_index": 15,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "core_business"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "公司采用以销定产的业务模式，生产经营的核心在于产品的研发、设计、供"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:615643e5b5ac70892a256c64c0978c383ee96ed5632f5a57a4cdb75b17295c9c",
+          "locator_v1": "loc:v1/page:242/paragraph:16",
+          "coordinates": {
+            "page_number": 242,
+            "paragraph_index": 16,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "core_business"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "应链管理、销售以及售后服务等环节。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:09bbaff7da8f075bafd0d4cb271ade6b855d796982a176797ff72e2d86e0baf5",
+          "locator_v1": "loc:v1/page:242/paragraph:17",
+          "coordinates": {
+            "page_number": 242,
+            "paragraph_index": 17,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "core_business"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "公司一贯注重研发，并且主要通过直销方"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:d10e9a869ebafcf3a071fdd7d5f2e5b176498d82d6685a686da8c8ace80a0a5f",
+          "locator_v1": "loc:v1/page:242/paragraph:18",
+          "coordinates": {
+            "page_number": 242,
+            "paragraph_index": 18,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "core_business"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "式为客户提供产品和服务。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:1f28fd0d6fbb87f513943f65cc12f9f7ec4d340b9fd74a57adad03774373882e",
+          "locator_v1": "loc:v1/page:242/paragraph:19",
+          "coordinates": {
+            "page_number": 242,
+            "paragraph_index": 19,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "core_business"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "经过多年积累，公司已形成了可持续盈利的业务模式。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:224289ed1fbd5141f5483ea505ae24721a4826c44b36465a3312174a5c165f5a",
+          "locator_v1": "loc:v1/page:242/paragraph:20",
+          "coordinates": {
+            "page_number": 242,
+            "paragraph_index": 20,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "公司所属半导体设备行业属于典型技术密集型行业，产品技术含量高、附加"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:6f22a587d2f52de934b369741d8b273004a965ca5074bd1d69601f22dbf38310",
+          "locator_v1": "loc:v1/page:242/paragraph:21",
+          "coordinates": {
+            "page_number": 242,
+            "paragraph_index": 21,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "值高、进入壁垒高。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:fffee3742b683537d0ae6d1d60f2024d73ac1c469d60aa51fa079e9c818ae69f",
+          "locator_v1": "loc:v1/page:242/paragraph:22",
+          "coordinates": {
+            "page_number": 242,
+            "paragraph_index": 22,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "半导体设备企业注重研发投入、对配套产业要求高、客户认"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:7b3d6c7e38d2f0801517161a80dc05fdcae5bf2b2222a171663a61fa63116eab",
+          "locator_v1": "loc:v1/page:242/paragraph:23",
+          "coordinates": {
+            "page_number": 242,
+            "paragraph_index": 23,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "证周期长，对研发、采购、销售等业务管理能力提出了较高的要求。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:05d9d7ac125003e60a1d82175d2174e8fb1f92686a4b01d4bb3d39bf6377dd11",
+          "locator_v1": "loc:v1/page:242/paragraph:24",
+          "coordinates": {
+            "page_number": 242,
+            "paragraph_index": 24,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "在研发环节，"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:98daf2b7d6d2af5c5f69eabbc3e197dab0ac48cb5299b8e5c289395ec9ce53f4",
+          "locator_v1": "loc:v1/page:242/paragraph:25",
+          "coordinates": {
+            "page_number": 242,
+            "paragraph_index": 25,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "半导体设备企业需要加大研发投入、持续进行技术创新，才能把握新技术、新应"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:ce8b3ec0ccdf20039a00fdf29382cb9a04698f3283c8368bfaed56328546b6bd",
+          "locator_v1": "loc:v1/page:242/paragraph:26",
+          "coordinates": {
+            "page_number": 242,
+            "paragraph_index": 26,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "用催生的市场机会；"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:5b3ec50bd156fa5c27aa45513ea3c60bff4f4938c8a982b36ea5ba3eb04bad3a",
+          "locator_v1": "loc:v1/page:242/paragraph:27",
+          "coordinates": {
+            "page_number": 242,
+            "paragraph_index": 27,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "在采购环节，半导体设备企业需要根据订单情况，合理预计"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:3832d939dd15d90429194a5652a12cdb3d8fe6042b9d28f7c347969026bee4ff",
+          "locator_v1": "loc:v1/page:242/paragraph:28",
+          "coordinates": {
+            "page_number": 242,
+            "paragraph_index": 28,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "零部件采购总量、采购进度，并建立完善的供应链体系，保证关键零部件的稳定"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:23dfc8028d3bfe2323fe3ef53f353fb9fbb91706bd819729e44e5adfd2504eb2",
+          "locator_v1": "loc:v1/page:242/paragraph:29",
+          "coordinates": {
+            "page_number": 242,
+            "paragraph_index": 29,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "供应；"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:fd2e2a819f9f9f98b49be6bf3be1c8bb8d615ff23c327a53f8a59d17c7804e7e",
+          "locator_v1": "loc:v1/page:242/paragraph:30",
+          "coordinates": {
+            "page_number": 242,
+            "paragraph_index": 30,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "在销售环节，半导体设备企业需要在产品技术验证及售后服务等方面持续"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:71ac01e29fd9e0cb993a235728dba7cc6f816533348e5d1fa0223de360c2f8fb",
+          "locator_v1": "loc:v1/page:242/paragraph:31",
+          "coordinates": {
+            "page_number": 242,
+            "paragraph_index": 31,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "加大投入。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:c0cb013d98ae72087e0cfe9ab6e4596e4c374fae774a8f0e0b977fcd2d228c54",
+          "locator_v1": "loc:v1/page:267/paragraph:30",
+          "coordinates": {
+            "page_number": 267,
+            "paragraph_index": 30,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "core_business"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "报告期内，公司主营业务产品的定制化程度较高，下游客户对规格型号、产"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:7970a1880fb6cc5b1ce1e6aba707f36a9fdc2f37744a5bdd8673d12882ab67e7",
+          "locator_v1": "loc:v1/page:267/paragraph:31",
+          "coordinates": {
+            "page_number": 267,
+            "paragraph_index": 31,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "core_business"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "品标准、技术参数等方面的要求不尽相同，产品结构和功能存在差异，公司不同"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:f51ab6942f4bb52e529af8a4b18051a9b12ca2dba844d1da4affcb5e78bca287",
+          "locator_v1": "loc:v1/page:267/paragraph:32",
+          "coordinates": {
+            "page_number": 267,
+            "paragraph_index": 32,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "core_business"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "机台、与不同客户的交付时间、验收通过确认收入时间差异较大，报告期内，不"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:4f692a6467cc58ef5e1f66c74224efc9126b01921012b5836908d2b1fdf8dccf",
+          "locator_v1": "loc:v1/page:267/paragraph:33",
+          "coordinates": {
+            "page_number": 267,
+            "paragraph_index": 33,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "core_business"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "同产品的总产量、平均交付时间和平均验收通过确认收入的时间如下："
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:4ad5d9f1c801c7aa0506d85d487e6ec6067d8b386de74f5f1285a69daee44593",
+          "locator_v1": "loc:v1/page:273/paragraph:12",
+          "coordinates": {
+            "page_number": 273,
+            "paragraph_index": 12,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "core_business"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "business_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "报告期内，公司主营业务毛利构成如下："
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:ddb24b95d3f4c449b9879a7c37d31a6fded88a3b797253baac250da50ebbad98",
+          "locator_v1": "loc:v1/page:273/paragraph:15",
+          "coordinates": {
+            "page_number": 273,
+            "paragraph_index": 15,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "core_business"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "business_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "2018 年度 \n2017 年度 \n2016 年度"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:d28c3524d47e1c2a106fac4ab58b315b64ddc5385b50139851d30ff9af043922",
+          "locator_v1": "loc:v1/page:273/paragraph:16",
+          "coordinates": {
+            "page_number": 273,
+            "paragraph_index": 16,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "core_business"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "business_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "金额 \n占比 \n金额 \n占比 \n金额 \n占比"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:d5b78699c14b001e2a1e835167e077d6fef506c070e27011f44401d453c3db62",
+          "locator_v1": "loc:v1/page:273/paragraph:17",
+          "coordinates": {
+            "page_number": 273,
+            "paragraph_index": 17,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "core_business"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "business_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "专用设备 \n48,786.38 \n83.86% \n31,572.39 \n84.21% \n20,948.69 \n80.83%"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:ab39b7e350278b19314b76a3b4c2d1a43df455f848a9840b2a5dca79e98f7301",
+          "locator_v1": "loc:v1/page:273/paragraph:18",
+          "coordinates": {
+            "page_number": 273,
+            "paragraph_index": 18,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "core_business"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "business_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "其中：刻蚀设备 \n26,875.22 \n46.19% \n11,087.12 \n29.57% \n20,285.61 \n78.27%"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:2cd25cd61943ad7470aa4c6a0008495c98603d57c92fc26bf4da03e6ed6ff31f",
+          "locator_v1": "loc:v1/page:273/paragraph:19",
+          "coordinates": {
+            "page_number": 273,
+            "paragraph_index": 19,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "core_business"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "business_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "MOCVD \n21,911.16 \n37.66% \n20,220.11 \n53.93% \n526.76 \n2.03%"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:19e4f630ee52025d7c1f38fc87ae3a4c5ff8651292e11e9cb89e5054313d2c7c",
+          "locator_v1": "loc:v1/page:273/paragraph:20",
+          "coordinates": {
+            "page_number": 273,
+            "paragraph_index": 20,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "core_business"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "business_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "备品备件 \n8,451.28 \n14.53% \n5,277.32 \n14.08% \n4,643.79 \n17.92%"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:b3a7b16f28640dcd068dc0d4936d60f2301e85ccb547c5a637fe0ff9dec3c6f7",
+          "locator_v1": "loc:v1/page:273/paragraph:21",
+          "coordinates": {
+            "page_number": 273,
+            "paragraph_index": 21,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "core_business"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "business_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "设备维护 \n940.42 \n1.62% \n642.01 \n1.71% \n323.58 \n1.25%"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:c143e9b061242cf7f2a182dd0262c616c2e0dd3ce47eebb0e9237452c523f80a",
+          "locator_v1": "loc:v1/page:273/paragraph:22",
+          "coordinates": {
+            "page_number": 273,
+            "paragraph_index": 22,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "core_business"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "business_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "合计 \n58,178.07 \n100.00% \n37,491.72 \n100.00% \n25,916.06 \n100.00%"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:5957a6308c4ef7970bc397c1425592393bfb3f629b2bb18cca8b7fdabddece95",
+          "locator_v1": "loc:v1/page:273/paragraph:23",
+          "coordinates": {
+            "page_number": 273,
+            "paragraph_index": 23,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "core_business"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "business_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "报告期内，随着公司经营规模扩大，公司主营业务毛利逐年增加。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:900ad4a63bd338f167dfaee597ecfa7fdb476a606676fbb294ad6757d74043d9",
+          "locator_v1": "loc:v1/page:273/paragraph:24",
+          "coordinates": {
+            "page_number": 273,
+            "paragraph_index": 24,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "core_business"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "business_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "2016 年、"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:857e49f153b33bc8a6726b34ce12c16d8a5fcf9608e97c58f28316d1972d7f37",
+          "locator_v1": "loc:v1/page:273/paragraph:25",
+          "coordinates": {
+            "page_number": 273,
+            "paragraph_index": 25,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "core_business"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "business_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "2017 年和2018 年，公司主营业务毛利分别为25,916.06 万元、37,491.72 万元和"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:fd123596d4ec13f789ac8d44906c3fa0d3977c460abf31575b0eeb7bb01bb428",
+          "locator_v1": "loc:v1/page:273/paragraph:26",
+          "coordinates": {
+            "page_number": 273,
+            "paragraph_index": 26,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "core_business"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "business_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "58,178.07 万元，2017 年和2018 年分别较上年度增长44.67%和55.18%，呈逐年"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:0f10b07ca1173a728b8feea235b6ac8177fafe82f949e9f8c09328bea3f35a71",
+          "locator_v1": "loc:v1/page:273/paragraph:27",
+          "coordinates": {
+            "page_number": 273,
+            "paragraph_index": 27,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "core_business"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "business_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "增长趋势。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:fb428f8c97a4d12f2f63ad6273fba27da6036646a744abe7e8aa439e513ddd30",
+          "locator_v1": "loc:v1/page:273/paragraph:28",
+          "coordinates": {
+            "page_number": 273,
+            "paragraph_index": 28,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "core_business"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "business_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "公司主营业务毛利主要来源于专用设备和备品备件。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:0fc4b73aeada0179b7cf9e84c96ba485e836c86a110db8bd2968c6cdc1ea27a0",
+          "locator_v1": "loc:v1/page:273/paragraph:30",
+          "coordinates": {
+            "page_number": 273,
+            "paragraph_index": 30,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "core_business"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "business_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "2016 年、2017 年和2018 年，公司专用设备毛利分别为20,948.69 万元、"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:7658b78d887961bb11ca66f3d4602db09b2a37fae3f30f2ac07bef3df00d9244",
+          "locator_v1": "loc:v1/page:273/paragraph:4",
+          "coordinates": {
+            "page_number": 273,
+            "paragraph_index": 4,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "core_business"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "business_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "2016 年、2017 年和2018 年，公司直接人工成本分别为765.98 万元、1,009.39"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:15d64bb1e8a85b795e7e8484c54be804ded63b69eb67814275aae7a700e1d3b4",
+          "locator_v1": "loc:v1/page:273/paragraph:5",
+          "coordinates": {
+            "page_number": 273,
+            "paragraph_index": 5,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "core_business"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "business_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "万元和1,707.37 万元，占各期主营业务成本的比例分别为2.19%、1.69%和1.62%，"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:853b81df02f36f7c73fbaddb96ab7ece34699768d7f1c840437d31ea28c6c760",
+          "locator_v1": "loc:v1/page:273/paragraph:6",
+          "coordinates": {
+            "page_number": 273,
+            "paragraph_index": 6,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "core_business"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "business_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "主要由生产人员工资薪酬构成。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:fe6f8ca1e407680c4c5e819586f35c30e3e3f0486f2f402d5256dfa8b7070ad3",
+          "locator_v1": "loc:v1/page:273/paragraph:7",
+          "coordinates": {
+            "page_number": 273,
+            "paragraph_index": 7,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "core_business"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "business_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "2016 年、2017 年和2018 年，公司制造费用分别为2,476.14 万元、2,912.98"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:61744ba78c03583f153005e1dfccef2593a18f693d12e73ad0bd307562036e8a",
+          "locator_v1": "loc:v1/page:273/paragraph:8",
+          "coordinates": {
+            "page_number": 273,
+            "paragraph_index": 8,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "core_business"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "business_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "万元和3,595.07 万元，占各期主营业务成本的比例分别为7.07%、4.88%和3.40%，"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:8ada4166ab6e8c2396263c8f603c9eac6e2c2439466a28aa787e3f3a6abed718",
+          "locator_v1": "loc:v1/page:273/paragraph:9",
+          "coordinates": {
+            "page_number": 273,
+            "paragraph_index": 9,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "core_business"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "business_section_context"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "主要由辅助材料成本、物流及仓储费用及折旧摊销等构成。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:07091939247824cb0f37b9dee8860ea3f2b6b3612110e61c56c5ffefe5ef2163",
+          "locator_v1": "loc:v1/page:283/paragraph:17",
+          "coordinates": {
+            "page_number": 283,
+            "paragraph_index": 17,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "overseas"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "报告期内，公司的销售费用率分别为21.71%、16.66%和13.21%，逐年降低。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:f95b581d5bea39567ef3f553279a7c1ee2eecc37bb1437d557390b8fb65e3a94",
+          "locator_v1": "loc:v1/page:283/paragraph:18",
+          "coordinates": {
+            "page_number": 283,
+            "paragraph_index": 18,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "overseas"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "公司的销售费用率高于同行业可比公司水平，主要系：同行业可比公司的营业收"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:71c067330b11c277b839adebd988076fc7017d484515c7bb5272e57b4130ca67",
+          "locator_v1": "loc:v1/page:283/paragraph:19",
+          "coordinates": {
+            "page_number": 283,
+            "paragraph_index": 19,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "overseas"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "入规模均高于公司水平，报告期内，随着发行人的营业收入的高速增长，销售费"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:98c650839b558ad8b10b0fe683e5861da60c1a3f5b54a79766d4f3e79278d698",
+          "locator_v1": "loc:v1/page:283/paragraph:20",
+          "coordinates": {
+            "page_number": 283,
+            "paragraph_index": 20,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "overseas"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "用率已逐年降低；"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:34140996f3305f138c42404bd7eb0fee9aca36e9db20f02188fa8dc3ebe270d1",
+          "locator_v1": "loc:v1/page:283/paragraph:21",
+          "coordinates": {
+            "page_number": 283,
+            "paragraph_index": 21,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "overseas"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "公司的销售市场覆盖中国台湾、韩国等海外地区，境外市场的"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:bad5dfe4df28401ac123f8cce27f52ae4bce805211ca74e5c14f4a7808d4ccfe",
+          "locator_v1": "loc:v1/page:283/paragraph:22",
+          "coordinates": {
+            "page_number": 283,
+            "paragraph_index": 22,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "overseas"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "开拓和维护导致销售费用较高；"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:ba86f28050e586202c717411404e54002dd09a39b17674e029b973257bf65d49",
+          "locator_v1": "loc:v1/page:283/paragraph:23",
+          "coordinates": {
+            "page_number": 283,
+            "paragraph_index": 23,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "overseas"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "2018 年公司的一次性股份支付费用发生额较高。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:ceaef8649662be225157c142a8793e5763c18426dad6ce6e19a74b2aa3676956",
+          "locator_v1": "loc:v1/page:290/paragraph:10",
+          "coordinates": {
+            "page_number": 290,
+            "paragraph_index": 10,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "求，确定最适合客户需求的包括反应腔和主机的设备开发方案。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:04f2cb32dedc8d31ab30cdae49d0daa522d323add63e6171c1e664b180ede97a",
+          "locator_v1": "loc:v1/page:290/paragraph:11",
+          "coordinates": {
+            "page_number": 290,
+            "paragraph_index": 11,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "new_business",
+            "orders_customers"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "公司会按照市场"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:e32b643ed66491045b17f798f7edd987aa5405981369c85d47819e83a9e4d6bd",
+          "locator_v1": "loc:v1/page:290/paragraph:12",
+          "coordinates": {
+            "page_number": 290,
+            "paragraph_index": 12,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "new_business",
+            "orders_customers"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "需求规范（MRS - Market Requirement Spec）的要求，综合比对多种技术方案以"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:48499aa2a82d8755c8626e853299ec07969315d7353a2c2bd1e11d87a03839bd",
+          "locator_v1": "loc:v1/page:290/paragraph:13",
+          "coordinates": {
+            "page_number": 290,
+            "paragraph_index": 13,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "确定最适合客户需求的包括反应腔和主机的设备开发方案。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:806f5d3bcfafd18eb3b84f99ffc0a0c33982c6572df5f22e207cf1edfa85c79e",
+          "locator_v1": "loc:v1/page:290/paragraph:14",
+          "coordinates": {
+            "page_number": 290,
+            "paragraph_index": 14,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "new_business",
+            "orders_customers"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "市场需求规范的指标"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:d9fbebf9e0cf3c0d62746719f38e74e7e6af9c05034a7f3b58e5aee94f01fa91",
+          "locator_v1": "loc:v1/page:290/paragraph:15",
+          "coordinates": {
+            "page_number": 290,
+            "paragraph_index": 15,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "是公司基于市场和客户需求形成的技术规格。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:792b94e1c5eebe7afbf88bb350a09aa5129db0de39ed4d5f9decb9367c570edf",
+          "locator_v1": "loc:v1/page:290/paragraph:8",
+          "coordinates": {
+            "page_number": 290,
+            "paragraph_index": 8,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "new_business"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "在概念与可行性阶段，公司针对行业技术动态或市场需求来设定新产品定位"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:5554626508865684a29d044e2f16aea8492b9f9d91f841b71c72acd7274c2e66",
+          "locator_v1": "loc:v1/page:290/paragraph:9",
+          "coordinates": {
+            "page_number": 290,
+            "paragraph_index": 9,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "与构想，确定最适合客户需求的研发方案，并按照市场需求规范（MRS）的要"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:25db5af6981bcb4d1abecc4c77af1fbe84a37e27ce0ba3d784e44183b9149078",
+          "locator_v1": "loc:v1/page:292/paragraph:63",
+          "coordinates": {
+            "page_number": 292,
+            "paragraph_index": 63,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects",
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "研发产品已与客户"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:bb53b6c67879d114c509fc5cdea6e6f35ca932774d96f381922d135b818205f3",
+          "locator_v1": "loc:v1/page:292/paragraph:64",
+          "coordinates": {
+            "page_number": 292,
+            "paragraph_index": 64,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects",
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "达成采购意向，投"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:e599396076b5f6bcef0fa4eb3ab74f054f555d53714195dc76651f985a2d77e6",
+          "locator_v1": "loc:v1/page:292/paragraph:65",
+          "coordinates": {
+            "page_number": 292,
+            "paragraph_index": 65,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects",
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "产后将以销售产品"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:b3e45a0c2d35064d98f0e71d20ddfa3ee8322fb8375b23cda989afeec842e00e",
+          "locator_v1": "loc:v1/page:292/paragraph:66",
+          "coordinates": {
+            "page_number": 292,
+            "paragraph_index": 66,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects",
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "的形式获利；"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:70ae355c8f1c35cce622ad6f7379f0910e1965fb62fc264a5a33b584b78d7049",
+          "locator_v1": "loc:v1/page:292/paragraph:67",
+          "coordinates": {
+            "page_number": 292,
+            "paragraph_index": 67,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects",
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "或者"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:c65409cb59617de5366773723fae26f581e587cb962cb22001e600ae439a9dc7",
+          "locator_v1": "loc:v1/page:292/paragraph:68",
+          "coordinates": {
+            "page_number": 292,
+            "paragraph_index": 68,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "研发项目将形成公"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:8e71d4935c7db11a5f1b4e39dde9296c12cfedc741c5611f47f967322fded672",
+          "locator_v1": "loc:v1/page:292/paragraph:69",
+          "coordinates": {
+            "page_number": 292,
+            "paragraph_index": 69,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects",
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "司自有的核心技"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:cc833a86d4e40f6b29f71ac5a70370c042164fae7cc39c698b7917f4a33489b2",
+          "locator_v1": "loc:v1/page:292/paragraph:70",
+          "coordinates": {
+            "page_number": 292,
+            "paragraph_index": 70,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects",
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "术，可应用于现有"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:8bbf33c172b764c6a5558c6fd5a0b89a3faa8b2c74e7ed0b74b90223140dc13a",
+          "locator_v1": "loc:v1/page:292/paragraph:71",
+          "coordinates": {
+            "page_number": 292,
+            "paragraph_index": 71,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects",
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "产品工艺技术的提"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:9aeed9c46957fa8aaefd2688daec4cb978982607bc9f033d07526b037f2a27f9",
+          "locator_v1": "loc:v1/page:292/paragraph:72",
+          "coordinates": {
+            "page_number": 292,
+            "paragraph_index": 72,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects",
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "高或完善"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:5e0f5883800c3ab8533226572771b6bafe45b95496633ada872a3a53b6b023a0",
+          "locator_v1": "loc:v1/page:293/paragraph:2",
+          "coordinates": {
+            "page_number": 293,
+            "paragraph_index": 2,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers",
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "行综合分析；"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:1d3e9a7cd30e2f1d548849f72b73ecff697c91d2eb5d7a754327bdebc796d2e5",
+          "locator_v1": "loc:v1/page:293/paragraph:3",
+          "coordinates": {
+            "page_number": 293,
+            "paragraph_index": 3,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers",
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "结合研发产品的正在进行的客户验"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:f95610aa4d669a9699fc0019b78fa513f82431e112e8456b0feeef885ac18593",
+          "locator_v1": "loc:v1/page:293/paragraph:4",
+          "coordinates": {
+            "page_number": 293,
+            "paragraph_index": 4,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers",
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "证情况、评估情况，分析产品成功后将形成销售"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:025baac7e2a8d07d66c8859b3528e136dd113c5ea7c78b2d354335bf08d32e9f",
+          "locator_v1": "loc:v1/page:293/paragraph:5",
+          "coordinates": {
+            "page_number": 293,
+            "paragraph_index": 5,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers",
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "的情况；"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:080850f5a52091cc6a1c9ee3c78d030fc6abcdce0b24c6e428bd82072bd43528",
+          "locator_v1": "loc:v1/page:293/paragraph:6",
+          "coordinates": {
+            "page_number": 293,
+            "paragraph_index": 6,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "研发项目将形成公司自有的核心技术，"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:28fda7d877ee7a028b5d74f544c149ae3c9cf6b9090530bc27a26e1143f50f95",
+          "locator_v1": "loc:v1/page:293/paragraph:7",
+          "coordinates": {
+            "page_number": 293,
+            "paragraph_index": 7,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers",
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "可应用于现有产品工艺技术的提高及升级"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:b85c4f69eba2e2b172e73b2a780f5d00967ab6ab5241e8eaed7cfbae3c2e3afe",
+          "locator_v1": "loc:v1/page:302/paragraph:10",
+          "coordinates": {
+            "page_number": 302,
+            "paragraph_index": 10,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "研任务完成后由主管机关组织验收。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:53e99e3c048fd86e0560f53430c8188af7307d54252ca0de12d30f6a4d4c5520",
+          "locator_v1": "loc:v1/page:302/paragraph:11",
+          "coordinates": {
+            "page_number": 302,
+            "paragraph_index": 11,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "公司报告期内承担科研项目所获得政府补助"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:4cd9bbd78976e1251a6f2e239eadc7ff08b69518c3d49f2c5913e36ed92b3bc3",
+          "locator_v1": "loc:v1/page:302/paragraph:12",
+          "coordinates": {
+            "page_number": 302,
+            "paragraph_index": 12,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "的资金来源主要为国家专项经费、地方政府经费等。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:c11c902c88f304782a5df5652877e7ad1cdcfe41a59b71d011f3720b5354b255",
+          "locator_v1": "loc:v1/page:302/paragraph:13",
+          "coordinates": {
+            "page_number": 302,
+            "paragraph_index": 13,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "报告期内，公司主要承担的"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:3750429292cc0e765c0cd2d6c540738655682c6b29d35dbc39111f1c635de675",
+          "locator_v1": "loc:v1/page:302/paragraph:14",
+          "coordinates": {
+            "page_number": 302,
+            "paragraph_index": 14,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "国家重大专项等科研项目与《“十三五”国家科技创新规划》中提出的内容相符，"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:8988d86a192f418582858ffad1dea1b63acd6d6c4f8f74ce53e609d878ad936d",
+          "locator_v1": "loc:v1/page:302/paragraph:15",
+          "coordinates": {
+            "page_number": 302,
+            "paragraph_index": 15,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "公司承担的科研项目符合国家科技创新规划。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:f888a821b65577f4a0e8d886897baff90d542f09ca4f8b78370fd84cba4b8c03",
+          "locator_v1": "loc:v1/page:302/paragraph:6",
+          "coordinates": {
+            "page_number": 302,
+            "paragraph_index": 6,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "报告期内，公司承担了多项与公司刻蚀技术、MOCVD 技术等核心技术相关"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:4c2856015cf7fc2e5db1ce80550af9d46e8a4539c172ed450589a8234dc1bcaa",
+          "locator_v1": "loc:v1/page:302/paragraph:7",
+          "coordinates": {
+            "page_number": 302,
+            "paragraph_index": 7,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "的科研项目，科研内容主要为刻蚀设备研发、MOCVD 设备研发等。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:6a29ff784dbd0289e4e2b9411611ae8291462b396a283c6bc07fd878ef2f4750",
+          "locator_v1": "loc:v1/page:302/paragraph:8",
+          "coordinates": {
+            "page_number": 302,
+            "paragraph_index": 8,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "公司向主管"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:710b947129757f7909f922becda9d0edf0c173756c2544343bb56208bf9565a9",
+          "locator_v1": "loc:v1/page:302/paragraph:9",
+          "coordinates": {
+            "page_number": 302,
+            "paragraph_index": 9,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "机关递交科研项目申请书，由相应专家组审议通过后，公司签订任务合同书，科"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:477f675ef563e0abd6190e89417c6da6377c3f47f056e916a7965553e3e6cd71",
+          "locator_v1": "loc:v1/page:357/paragraph:10",
+          "coordinates": {
+            "page_number": 357,
+            "paragraph_index": 10,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects",
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "求的设备与解决方案，并为客户提供及时、快捷的技术支持，具备完成本项目的"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:19a5b15a89a4318870947a981ad52619ca3767630729ee7aeddea3318107b99c",
+          "locator_v1": "loc:v1/page:357/paragraph:11",
+          "coordinates": {
+            "page_number": 357,
+            "paragraph_index": 11,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects",
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "技术基础与管理经验。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:c3a0ae4f3315faad56fd44be25b85610add5f502850fe64b8832baa194cee61a",
+          "locator_v1": "loc:v1/page:357/paragraph:2",
+          "coordinates": {
+            "page_number": 357,
+            "paragraph_index": 2,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "的相关核心技术，截至2019 年2 月28 日，公司拥有注册专利951 项。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:b8dce1d3c23f4bcfe5305017b4bd290bd5d98054b6d09280219e47db44cb5c0b",
+          "locator_v1": "loc:v1/page:357/paragraph:3",
+          "coordinates": {
+            "page_number": 357,
+            "paragraph_index": 3,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects",
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "此外，公"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:24d79a74e84912cf77fdedd6049e42d899751a6600d110ed1eaa7ff05384d7c7",
+          "locator_v1": "loc:v1/page:357/paragraph:4",
+          "coordinates": {
+            "page_number": 357,
+            "paragraph_index": 4,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects",
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "司目前拥有研发及工程技术人员381 名，占报告期末公司员工总数的58.35%，"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:f9cb1193c54a28ab43a35d7346572ee40393fa206870d19edb726fc399a093d4",
+          "locator_v1": "loc:v1/page:357/paragraph:5",
+          "coordinates": {
+            "page_number": 357,
+            "paragraph_index": 5,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects",
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "组成了专业功底深厚、经验丰富、专业互补的研发团队，致力于刻蚀设备及"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:4c2bd4a8a60e37137e9a79422e82c44beae258c6df0c9ee18dfe0196110a2c08",
+          "locator_v1": "loc:v1/page:357/paragraph:6",
+          "coordinates": {
+            "page_number": 357,
+            "paragraph_index": 6,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "MOCVD 设备等领域的核心技术研发工作，所研发的半导体设备已成功进入全球"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:0c1e89c8f19dd8c36887253131aad143fc67c05682764bb1675a848128556f61",
+          "locator_v1": "loc:v1/page:357/paragraph:7",
+          "coordinates": {
+            "page_number": 357,
+            "paragraph_index": 7,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "知名半导体制造企业的生产线。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:c0537c705ad9231e6ad0766c5c4024b8ffe18834c776bf9752267a135354cbf2",
+          "locator_v1": "loc:v1/page:357/paragraph:8",
+          "coordinates": {
+            "page_number": 357,
+            "paragraph_index": 8,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects",
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "公司技术实力雄厚、核心团队稳定，在自主创新、"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:f805840d50dfe23737e82ec0c84e42883cf7c0c2d02778b902bde4f4fb75b9b0",
+          "locator_v1": "loc:v1/page:357/paragraph:9",
+          "coordinates": {
+            "page_number": 357,
+            "paragraph_index": 9,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "capacity_projects",
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "本地化服务、知识管理等方面有突出表现，能针对市场变化快速推出符合客户要"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:d10c56b2771e2f35ab8b8ea50a85ebceff915bc0d7d6c21f58e03cd7d7593e46",
+          "locator_v1": "loc:v1/page:366/paragraph:14",
+          "coordinates": {
+            "page_number": 366,
+            "paragraph_index": 14,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "报告期内，公司持续收集半导体制造行业市场与技术动态信息，密切关注客"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:f85eb3cb785d6fe073da54875683aca1839fa0eddf54b82877938f3f0d4df3a7",
+          "locator_v1": "loc:v1/page:366/paragraph:15",
+          "coordinates": {
+            "page_number": 366,
+            "paragraph_index": 15,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "户需求。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:f9c5b43b2efcf3ec14a2ad19e99cf84b987f6f86fbd5209a30468ce60aa2fbb8",
+          "locator_v1": "loc:v1/page:366/paragraph:16",
+          "coordinates": {
+            "page_number": 366,
+            "paragraph_index": 16,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "公司在满足现有客户设备需求的同时，深度挖掘现有客户的其他需求；"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:6b1264c30af7eb24cde0bd7bc615a11845b92b76829f2a3259709ffcdc6d3c86",
+          "locator_v1": "loc:v1/page:366/paragraph:17",
+          "coordinates": {
+            "page_number": 366,
+            "paragraph_index": 17,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "积极拓展国内外其他知名客户，不断支持公司扩大业务规模。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:6dade3f07248546777581c355a30f1af941f42e9634b3f77fa52a8c918aecc8c",
+          "locator_v1": "loc:v1/page:366/paragraph:23",
+          "coordinates": {
+            "page_number": 366,
+            "paragraph_index": 23,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "报告期内，公司通过市场拓展计划，营业收入保持高速增长，从2016 年的"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:926bb32c3200e7999b937baaeb300979063cb4330e43ffd1bcd8c518199ba91c",
+          "locator_v1": "loc:v1/page:366/paragraph:24",
+          "coordinates": {
+            "page_number": 366,
+            "paragraph_index": 24,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "6.10 亿元增长至2018 年的16.39 亿元，年均复合增长率达64%。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:70587a5a184b03ed28a311c5c10a7325312b1e6038cc80493d17c64e1e754fc2",
+          "locator_v1": "loc:v1/page:366/paragraph:25",
+          "coordinates": {
+            "page_number": 366,
+            "paragraph_index": 25,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "公司保证自身"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:6c955760b8f9fe3a3db0cb35dfa14635616a468ab6c9ff68d4bb01d05a2f8c78",
+          "locator_v1": "loc:v1/page:366/paragraph:26",
+          "coordinates": {
+            "page_number": 366,
+            "paragraph_index": 26,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "产品的技术先进性和对客户需求的适应性，在不断巩固、优化与现有优质客户的"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:97b5d69062b1be753173a80c93c563e3729cd59cbfda51ad16c03b6536e51add",
+          "locator_v1": "loc:v1/page:366/paragraph:27",
+          "coordinates": {
+            "page_number": 366,
+            "paragraph_index": 27,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "合作关系的同时，成功拓展了众多新客户，提升了市场份额。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:268e624042cd72f5da80567fe2c3ef7a563bc1b19963a97f1828757fe45b2a43",
+          "locator_v1": "loc:v1/page:366/paragraph:28",
+          "coordinates": {
+            "page_number": 366,
+            "paragraph_index": 28,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "通过多年的积累和"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:27e74f08995de3bfe00f08c7a03d82aa9c95a0db46ca460f55176ad9036b1334",
+          "locator_v1": "loc:v1/page:366/paragraph:29",
+          "coordinates": {
+            "page_number": 366,
+            "paragraph_index": 29,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "培养，公司有了一批既有销售服务能力又懂专业技术的销售和服务精英，有力保"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:0f7a166f3e5ea240fa1c2e22587b7cd03f5faeb8ab7efdb60bc98fe18d62d137",
+          "locator_v1": "loc:v1/page:366/paragraph:30",
+          "coordinates": {
+            "page_number": 366,
+            "paragraph_index": 30,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "障并提高了服务的专业性和响应速度。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:80736be1b4027c80ba6dcee169aaa785bb8fc2137f6b240f85cef9c8aa969208",
+          "locator_v1": "loc:v1/page:65/paragraph:10",
+          "coordinates": {
+            "page_number": 65,
+            "paragraph_index": 10,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "core_business"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "业务直接相关，本次重组不会导致发行人主营业务发生重大变更。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:df6c7eea03b7853dc08b0191117569181e56051cf36f40a343c15c74358715a0",
+          "locator_v1": "loc:v1/page:65/paragraph:9",
+          "coordinates": {
+            "page_number": 65,
+            "paragraph_index": 9,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [],
+          "topics": [
+            "core_business"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "本次重组新增的业务是境外的销售扩展、客户维护及售后管理等，与发行人"
+        }
+      ]
+    }
+  ],
+  "totals": {
+    "documents": 1,
+    "source_file_bytes": 11211796,
+    "summary_input_bytes": 50692,
+    "selected_span_count": 166,
+    "locator_roundtrip_verified_count": 166,
+    "locator_roundtrip_failed_count": 0,
+    "selected_documents": 0,
+    "partial_documents": 1,
+    "skipped_documents": 0,
+    "needs_review_documents": 0,
+    "blocked_documents": 0
+  },
+  "limitations": [
+    "This is a 12-document pilot, not a corpus recall estimate.",
+    "The selector uses deterministic candidate rules; a model did not generate summaries.",
+    "summary_input_bytes excludes database indexes, filesystem allocation and future exports.",
+    "A status of selected means the parser covered the file, not that a human approved every candidate.",
+    "Locator round-trip verifies same-parser extraction; it does not certify downstream support for table-cell sub-locators."
+  ]
+}

@@ -5,6 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass, replace
 from enum import Enum
 import hashlib
+import json
 import os
 from pathlib import Path
 import re
@@ -17,7 +18,7 @@ from company_wiki.source_contract import source_id_for_sha256
 from .acquisition import DownloadCandidate, DownloadReceipt
 from .lock import CatalogOperationLock
 from .resolver import ResolutionResult, ResolutionStatus, SourceRequest, SourceResolver
-from .scanner import scan_catalog, v2_scan_shadow_from_snapshot
+from .scanner import scan_catalog
 from .service import SourceCatalog
 from .store import canonical_json
 
@@ -168,6 +169,16 @@ class CanonicalSourceWriter:
 
             destination = self._destination(request, candidate, receipt)
             destination.parent.mkdir(parents=True, exist_ok=True)
+            # DEF-MSFT-CANONICAL-DUP: ``destination_preexisting`` marks the
+            # case where the computed canonical path (including the hash
+            # suffix fallback) already holds byte-identical content — a
+            # re-serve of bytes an earlier acquisition committed to this
+            # exact path.  The copy below is then a no-op and the immutable
+            # provenance sidecar must NOT be rewritten: it belongs to the
+            # first acquisition of these bytes, and request_id/retrieved_at
+            # differ on every attempt (writing would die on the immutable
+            # sidecar conflict and orphan the file yet again).
+            destination_preexisting = False
             if destination.exists():
                 if _hash_file(destination) != receipt.content_sha256:
                     destination = destination.with_name(
@@ -178,18 +189,37 @@ class CanonicalSourceWriter:
                     )
                 if destination.exists() and _hash_file(destination) != receipt.content_sha256:
                     raise CanonicalImportError("canonical filename collision after hash suffix")
+                # only a FINAL path that already held these exact bytes is a
+                # re-acquisition; after the hash-suffix rename the new path
+                # has not been written yet, so this import is a fresh commit.
+                destination_preexisting = destination.exists()
             if not destination.exists():
                 self._atomic_copy(staged, destination, receipt)
             provenance = destination.with_name(destination.name + ".source.json")
-            self._write_provenance(provenance, request, candidate, receipt)
+            if destination_preexisting and provenance.exists():
+                self._verify_committed_provenance(provenance, candidate, receipt)
+            else:
+                self._write_provenance(provenance, request, candidate, receipt)
+            # DEF-MSFT-CANONICAL-DUP: this scan is the import's own
+            # consistency mechanism — the exact-identity verification below
+            # (and every future reuse) reads the index it builds.  GP-002
+            # wires production scans to the activation snapshot's
+            # v2_scan_shadow flag, but a root that declares no adapter_id
+            # fails CLOSED in the v2 dispatch (adapter_dispatch), so a
+            # shadow-mode import scan indexes NOTHING while the canonical
+            # file is already committed: the import then fails its own
+            # verification, and every replay re-downloads into another
+            # unindexed orphan (MSFT FY2026 10-K).  The import is a
+            # committed write, not a shadow experiment: dispatch through
+            # the root's declared adapter when it has one, otherwise the
+            # legacy scanner that can actually read the root.  Non-import
+            # scans keep following GP-002 unchanged.
             scan_catalog(
                 self.catalog.config,
                 self.catalog.store,
                 dry_run=False,
                 root_ids={self.company_root.root_id},
-                v2_scan_shadow=v2_scan_shadow_from_snapshot(
-                    self.catalog.config.catalog_dir
-                ),
+                v2_scan_shadow=bool(self.company_root.adapter_id),
             )
             exact_request = SourceRequest(
                 entity=request.entity,
@@ -207,8 +237,38 @@ class CanonicalSourceWriter:
             )
             exact_resolution = SourceResolver(self.catalog).resolve(exact_request)
             if exact_resolution.status is not ResolutionStatus.REUSED_EXACT:
-                raise CanonicalImportError(
-                    "canonical file was written but exact provider identity did not resolve"
+                # DEF-MSFT-CANONICAL-DUP: re-serve variants of one provider
+                # identity may legitimately coexist on canonical disk (the
+                # pre-existing variant file stays until its owner disposes
+                # of it — raw content is immutable here), and two
+                # distinct-content documents sharing one provider identity
+                # resolve AMBIGUOUS by design (resolver: exact identity is
+                # one filing; which byte-variant is authoritative is an
+                # owner decision).  This verification pins the exact bytes
+                # THIS import just committed: adopt the resolution only
+                # when exactly one capture-ready exact-identity match
+                # carries the committed sha.  Anything else stays
+                # fail-closed.
+                committed = [
+                    handle
+                    for handle in exact_resolution.matches
+                    if handle.capture_ready
+                    and handle.content_sha256 == receipt.content_sha256
+                    and handle.provider_document_id == candidate.provider_document_id
+                    and (not candidate.provider or handle.provider == candidate.provider)
+                ]
+                if (
+                    exact_resolution.status is not ResolutionStatus.AMBIGUOUS
+                    or len(committed) != 1
+                ):
+                    raise CanonicalImportError(
+                        "canonical file was written but exact provider identity did not resolve"
+                    )
+                exact_resolution = replace(
+                    exact_resolution,
+                    status=ResolutionStatus.REUSED_EXACT,
+                    reason="exact provider identity resolved to the committed bytes",
+                    matches=(committed[0],),
                 )
             # F-EE1: exact_request above is only the post-write VERIFICATION
             # probe (it pins the candidate's provider identity).  The result
@@ -230,7 +290,15 @@ class CanonicalSourceWriter:
             self._remove_staged(staged)
             return CanonicalImportResult(
                 schema_version=CANONICAL_IMPORT_SCHEMA_VERSION,
-                status=CanonicalImportStatus.IMPORTED_NEW,
+                # DEF-MSFT-CANONICAL-DUP: when the committed bytes were
+                # already on canonical disk this import is a re-acquisition
+                # of existing content, not a new document — journal it as
+                # the established deduplicated outcome.
+                status=(
+                    CanonicalImportStatus.DEDUPLICATED_AFTER_DOWNLOAD
+                    if destination_preexisting
+                    else CanonicalImportStatus.IMPORTED_NEW
+                ),
                 request_id=request.request_id,
                 source_id=source_id_for_sha256(receipt.content_sha256),
                 content_sha256=receipt.content_sha256,
@@ -404,6 +472,32 @@ class CanonicalSourceWriter:
         finally:
             if temporary.exists():
                 temporary.unlink()
+
+    @staticmethod
+    def _verify_committed_provenance(
+        path: Path,
+        candidate: DownloadCandidate,
+        receipt: DownloadReceipt,
+    ) -> None:
+        """DEF-MSFT-CANONICAL-DUP: the canonical file already held these
+        exact bytes, so its immutable sidecar belongs to the FIRST
+        acquisition of them.  Re-acquisition must not rewrite it — but it
+        must also never adopt a sidecar describing a different document.
+        Verify the identity binding and fail closed on anything else (the
+        error string matches _write_provenance's conflict so the failure
+        taxonomy is unchanged)."""
+        try:
+            existing = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, ValueError) as exc:
+            raise CanonicalImportError("immutable provenance sidecar conflict") from exc
+        if (
+            existing.get("content_sha256") != receipt.content_sha256
+            or existing.get("provider") != candidate.provider
+            or existing.get("provider_document_id")
+            != candidate.provider_document_id
+            or existing.get("byte_size") != receipt.byte_size
+        ):
+            raise CanonicalImportError("immutable provenance sidecar conflict")
 
     def _remove_staged(self, staged: Path) -> None:
         try:

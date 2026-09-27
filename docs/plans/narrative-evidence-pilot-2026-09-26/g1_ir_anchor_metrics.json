@@ -1,0 +1,392 @@
+{
+  "schema_version": "narrative-g1-pilot/0.1.0",
+  "runner": "scripts/narrative_evidence_pilot.py",
+  "read_only_roots": [
+    "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\transcripts"
+  ],
+  "generated_from_manifest": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\narrative-evidence-pilot-2026-09-26\\g1_sample_manifest.json",
+  "elapsed_seconds": 0.506,
+  "samples": [
+    {
+      "sample_id": "P07",
+      "title": "万润股份：投资者关系活动记录表20260515.pdf",
+      "source_sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+      "source_file_bytes": 153851,
+      "document_kind": "investor_relations",
+      "status": "needs_review",
+      "coverage_complete": false,
+      "page_count": 6,
+      "pages_read": 6,
+      "opaque_pages": [],
+      "table_scan_page_count": 2,
+      "deferred_table_pages": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "focus_pages": [
+        5,
+        6
+      ],
+      "selected_focus_pages": [
+        5,
+        6
+      ],
+      "line_count": 0,
+      "parse_errors": [],
+      "source_units": 233,
+      "candidate_count": 5,
+      "selected_span_count": 5,
+      "locator_roundtrip_verified_count": 5,
+      "locator_roundtrip_failed_count": 0,
+      "locator_roundtrip_failed_span_ids": [],
+      "dropped_financial_count": 0,
+      "omitted_candidate_count": 0,
+      "selected_text_bytes": 1290,
+      "summary_input_bytes": 5044,
+      "summary_input_to_source_ratio": 0.032785,
+      "anchor_checks": [
+        {
+          "check_id": "C07-lithium-sulfide-pilot-line",
+          "page_number": 6,
+          "source_role": "management",
+          "passed": false,
+          "matched_term": null,
+          "required_any": [
+            "硫化锂的中试线建设工作正在按计划推进"
+          ],
+          "evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:174a1dbc2dd333bf4c47be03ae46290f7d6cc16fd2a56c3a211935d68df93640"
+          ]
+        },
+        {
+          "check_id": "C08-cross-page-zeolite-answer",
+          "page_number": 6,
+          "source_role": "management",
+          "passed": true,
+          "matched_term": "现已有产品实现销售",
+          "required_any": [
+            "已实现销售",
+            "现已有产品实现销售"
+          ],
+          "evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:174a1dbc2dd333bf4c47be03ae46290f7d6cc16fd2a56c3a211935d68df93640"
+          ]
+        }
+      ],
+      "anchor_check_failure_count": 1,
+      "elapsed_seconds": 0.296,
+      "selected_evidence_preview": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:eadcc6c7293898f799336440fee8045022530396ac94fef9143a1e01d4b97019",
+          "locator_v1": "loc:v1/page:5/table:0/row:0/column:1",
+          "coordinates": {
+            "page_number": 5,
+            "paragraph_index": null,
+            "table_index": 0,
+            "row_index": 0,
+            "column_index": 1,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [
+            "locator_unstable"
+          ],
+          "topics": [],
+          "selection_reasons": [
+            "linked_question_context"
+          ],
+          "source_role": "investor_question",
+          "excerpt": "15、问：看市场信息，公司在主要产品沸石的市场开拓上的有想法，\n但是市场好像并不是很认可:这一块业务的估值比建龙微纳低。请问董事\n长，在柴油车排放标准短期不提高的情况下，我们的沸石业务开拓有哪"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:ff74052044250bcd6f218dacc6cbcbb15d4e890ad9e7f1fa93e24ef0981c4b47",
+          "locator_v1": "loc:v1/page:5/table:0/row:0/column:1",
+          "coordinates": {
+            "page_number": 5,
+            "paragraph_index": null,
+            "table_index": 0,
+            "row_index": 0,
+            "column_index": 1,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [
+            "locator_unstable"
+          ],
+          "topics": [
+            "orders_customers",
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "progress_or_change_language",
+            "project_plan_or_status",
+            "management_statement"
+          ],
+          "source_role": "management",
+          "excerpt": "答：您好！目前公司在半导体制造材料领域已销售的产品主要为光刻\n胶单体、树脂、光酸以及半导体制程中清洗剂添加材料等，现已开发了超\n300 种化合物，在所涉足的产品方面技术已经处于国内领先水平。公司结\n合实际情况与下游客户需求，在新产能方面积极布局，2025 年公司启动\n了万润工业园二期 C05 建设项目，该项目包含半导体光刻胶用相关材料产\n能约 751 吨/年，项目建成后将为公司半导体制造材料业务发展提供产能\n保障。谢谢！"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:9505d17135d846485481c2786ce346f5b0aea7de06b0b0a2aaefcab0c5f3a9e5",
+          "locator_v1": "loc:v1/page:5/table:0/row:0/column:1",
+          "coordinates": {
+            "page_number": 5,
+            "paragraph_index": null,
+            "table_index": 0,
+            "row_index": 0,
+            "column_index": 1,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [
+            "locator_unstable"
+          ],
+          "topics": [],
+          "selection_reasons": [
+            "linked_question_context"
+          ],
+          "source_role": "investor_question",
+          "excerpt": "13、问：公司预计半导体制造等相关材料，何时能为公司贡献 10 以\n上收益？"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:c52adc6e38d5f5610d5daa96004e005c1ba08a292ab00006517acda188477695",
+          "locator_v1": "loc:v1/page:6/table:0/row:0/column:1",
+          "coordinates": {
+            "page_number": 6,
+            "paragraph_index": null,
+            "table_index": 0,
+            "row_index": 0,
+            "column_index": 1,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [
+            "locator_unstable"
+          ],
+          "topics": [],
+          "selection_reasons": [
+            "linked_question_context"
+          ],
+          "source_role": "investor_question",
+          "excerpt": "些安排？谢谢。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:174a1dbc2dd333bf4c47be03ae46290f7d6cc16fd2a56c3a211935d68df93640",
+          "locator_v1": "loc:v1/page:6/table:0/row:0/column:1",
+          "coordinates": {
+            "page_number": 6,
+            "paragraph_index": null,
+            "table_index": 0,
+            "row_index": 0,
+            "column_index": 1,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [
+            "locator_unstable"
+          ],
+          "topics": [
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "progress_or_change_language",
+            "specific_business_event",
+            "management_statement"
+          ],
+          "source_role": "management",
+          "excerpt": "答：您好！公司近年来为应对车用沸石分子筛产品下游需求波动产生\n的影响，公司积极开发并推广石油化工催化领域的沸石分子筛产品，2025\n年公司与中国石化催化剂有限公司签署《项目合作意向书》，现已有产品\n实现销售。谢谢！"
+        }
+      ]
+    },
+    {
+      "sample_id": "P08",
+      "title": "万润股份：投资者关系活动记录表20250430.pdf",
+      "source_sha256": "4455d6f099f5f1051fc5daad32a6db1564bb6e8cbd7584637388e42ba0163a32",
+      "source_file_bytes": 236281,
+      "document_kind": "investor_relations",
+      "status": "needs_review",
+      "coverage_complete": false,
+      "page_count": 13,
+      "pages_read": 13,
+      "opaque_pages": [],
+      "table_scan_page_count": 1,
+      "deferred_table_pages": [
+        1,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "focus_pages": [
+        2
+      ],
+      "selected_focus_pages": [
+        2
+      ],
+      "line_count": 0,
+      "parse_errors": [],
+      "source_units": 469,
+      "candidate_count": 4,
+      "selected_span_count": 4,
+      "locator_roundtrip_verified_count": 4,
+      "locator_roundtrip_failed_count": 0,
+      "locator_roundtrip_failed_span_ids": [],
+      "dropped_financial_count": 0,
+      "omitted_candidate_count": 0,
+      "selected_text_bytes": 2207,
+      "summary_input_bytes": 5305,
+      "summary_input_to_source_ratio": 0.022452,
+      "anchor_checks": [
+        {
+          "check_id": "C09-management-correction",
+          "page_number": 2,
+          "source_role": "management",
+          "passed": true,
+          "matched_term": "已超过25%",
+          "required_any": [
+            "已超过25%",
+            "营收比例已超过25%"
+          ],
+          "evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:bec295292664a12b78703a96b56991fdbef7d8f5a0e16bc5a8d789554351e307",
+            "urn:company-wiki:evidence-span:sha256:69d82699d44320e2df8795f96271e422675a296bf4d613e2480913099b9b7341"
+          ]
+        }
+      ],
+      "anchor_check_failure_count": 0,
+      "elapsed_seconds": 0.206,
+      "selected_evidence_preview": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:bec295292664a12b78703a96b56991fdbef7d8f5a0e16bc5a8d789554351e307",
+          "locator_v1": "loc:v1/page:2/table:0/row:0/column:1",
+          "coordinates": {
+            "page_number": 2,
+            "paragraph_index": null,
+            "table_index": 0,
+            "row_index": 0,
+            "column_index": 1,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [
+            "locator_unstable"
+          ],
+          "topics": [
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "progress_or_change_language",
+            "specific_business_event",
+            "management_statement"
+          ],
+          "source_role": "management",
+          "excerpt": "答：您好，公司信息请以公司公告为准，为应对沸石系列环保材料下\n游需求的变化，公司一方面积极开发欧七及同级别标准的下一代沸石系列\n环保材料，并持续推进改进、优化和验证工作，期待未来公司在车用沸石\n领域的市场地位能够随之进一步稳固及提升。另一方面公司成功开发了不\n同种类的非车用沸石分子筛产品，可用于烟道气脱硝领域、炼油催化领域、\nVOCs（挥发性有机化合物）治理领域等，且已在石油化工催化裂化、VOCs\n治理领域实现销售，公司通过与中国石化催化剂有限公司等业内优质企业\n加深合作，积"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:417bb85959291b7365bcf229a083b2a10a5fdcf75026bd08ef7202a25d3c963b",
+          "locator_v1": "loc:v1/page:2/table:0/row:0/column:1",
+          "coordinates": {
+            "page_number": 2,
+            "paragraph_index": null,
+            "table_index": 0,
+            "row_index": 0,
+            "column_index": 1,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [
+            "locator_unstable"
+          ],
+          "topics": [],
+          "selection_reasons": [
+            "linked_question_context"
+          ],
+          "source_role": "investor_question",
+          "excerpt": "2、问：2024 年沸石环保材料营收同比下降 28.65%，2025 年一季度\n营收利润继续下降。公司这边如何应对柴油车市场需求变化，以及在石\n油化工催化、VOCs 治理等新领域的拓展进展，跟中石化催化剂公司合作\n的空间在哪里？"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:69d82699d44320e2df8795f96271e422675a296bf4d613e2480913099b9b7341",
+          "locator_v1": "loc:v1/page:2/table:0/row:0/column:1",
+          "coordinates": {
+            "page_number": 2,
+            "paragraph_index": null,
+            "table_index": 0,
+            "row_index": 0,
+            "column_index": 1,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [
+            "locator_unstable"
+          ],
+          "topics": [
+            "new_business"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "progress_or_change_language",
+            "specific_business_event",
+            "management_statement"
+          ],
+          "source_role": "management",
+          "excerpt": "答：您好，仅以公司已披露的从事 OLED 材料的业务主体（三月科技\n与九目化学）营收计算 2024 年度占公司整体营收比例已超过 25%，相关\n公司信息请以公司公告为准，公司的研发投入为按照公司发展规划开展，\n在半导体制造材料、OLED 材料、聚酰亚胺材料、其他高性能聚合物等多\n类材料方面持续投入研发，争取为公司赢得更多市场机会。在国内产业合\n作方面，2025 年 3 月公司与中国石化催化剂有限公司签署了《项目合作\n意向书》，有望为公司模板剂、分子筛等产品带来发展机遇；202"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:e27dfc969422a07821fe6e405a2915fe58cb9743e4693528c404b23198a3b945",
+          "locator_v1": "loc:v1/page:2/table:0/row:0/column:1",
+          "coordinates": {
+            "page_number": 2,
+            "paragraph_index": null,
+            "table_index": 0,
+            "row_index": 0,
+            "column_index": 1,
+            "char_start": null,
+            "char_end": null
+          },
+          "quality_flags": [
+            "locator_unstable"
+          ],
+          "topics": [],
+          "selection_reasons": [
+            "linked_question_context"
+          ],
+          "source_role": "investor_question",
+          "excerpt": "3、问：OLED 材料、半导体光刻胶等新兴业务 2024 年营收占比不足\n5%，但研发投入占比超 10%。请量化说明这些业务的产能释放时间表及客\n户认证进展（如是否进入京东方、中芯国际供应链），怎么让研发投入\n有价值，打消投资者的顾虑？"
+        }
+      ]
+    }
+  ],
+  "totals": {
+    "documents": 2,
+    "source_file_bytes": 390132,
+    "summary_input_bytes": 10349,
+    "selected_span_count": 9,
+    "locator_roundtrip_verified_count": 9,
+    "locator_roundtrip_failed_count": 0,
+    "selected_documents": 0,
+    "partial_documents": 0,
+    "skipped_documents": 0,
+    "needs_review_documents": 2,
+    "blocked_documents": 0,
+    "anchor_check_failure_count": 1
+  },
+  "limitations": [
+    "This is a 12-document pilot, not a corpus recall estimate.",
+    "The selector uses deterministic candidate rules; a model did not generate summaries.",
+    "summary_input_bytes excludes database indexes, filesystem allocation and future exports.",
+    "A status of selected means the parser covered the file, not that a human approved every candidate.",
+    "Locator round-trip verifies same-parser extraction; it does not certify downstream support for table-cell sub-locators."
+  ]
+}

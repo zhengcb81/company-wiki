@@ -1,5 +1,13 @@
 # 上市公司知识库 — Schema（维护规范）
 
+> ⚠️ **时代边界（2026-07-16 起，重申于 2026-09-19）**：本文件是 legacy Wiki 时代
+> 的历史快照，仅解释旧 wiki 文档格式；当前最高规范是 `AGENTS.md` 的
+> “职责边界”——canonical 产品目标是 source manifest / 规范化解析 / EvidenceSpan /
+> 只读 export，**不是**研究 Wiki 生产。旧“评估/综合判断/研究 writer”中的全部
+> 研究生产职责已退役并转到 StockWiki；不因本文件存在而重建研究 writer。
+> 后台 `source_catalog` worker 当前 desired_state 为 paused；代理不得自行
+> resume，恢复只在授权运行窗口内执行（见 audit plan 2026-09-19 的 I-16 卡）。
+
 > 这份文件定义了 LLM 维护此知识库时应遵循的行为规范。
 > 所有 ingest、lint、query 操作都应参考此文件。
 

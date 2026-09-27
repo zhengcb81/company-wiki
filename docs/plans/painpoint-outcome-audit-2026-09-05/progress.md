@@ -1,5 +1,69 @@
 # 审计进度
 
+## 2026-09-27：ensure/close-gap 进程边界 pathless opt-in 首轮完成
+
+- CWP 隔离工作树新增 `--source-ref-v2` operation 结果投影，`ensure`/`close-gap` 输出 schema 1.0；成功 candidate 由精确 SourceRef 2.0 生成，pathless gap 带 request/gap/hash，另保留授权 close-gap 所需的 `policy_hash`。CLI projector 错误结构化返回，未带 flag 的旧输出不变。
+- FF 隔离工作树 exact 无下载仍走 DB-only query；latest 和授权下载走 pathless ensure，授权 gap 后走 pathless close-gap。消费端拒绝未知版本、路径字段、SourceRef/candidate/hash 不匹配、非法事件数、非 `not_detected` review。gap request_id 绑定与授权校验保留。
+- TDD/回归：CWP operation/reader/CLI/close-gap 相关 **52 passed**，FF `tests/` **385 passed、14 skipped、78 subtests**，独立 FF→CWP CLI E2E **1 passed**；FF Ruff、Mypy、`git diff --check` 与 CWP Ruff、`git diff --check` 通过；复杂度 31≤34。全量 FF 测试另有 `test_spy_log` UnicodeDecodeError warning，不作为断言通过。
+- **仍非 C.local 签收**：latest provider 的实际隔离刷新、CWP 实际 close-gap CLI 下载及重试幂等、OS 级读次数、RF/StockWiki/default entrypoint/完整测试区恢复未验；这轮没有真实网络或生产写入。
+- 清理异常：本轮唯一 `pytest-*` 输出根此前已按 run-id 清点且无 reparse，但访问控制仅列 SYSTEM/Administrators；递归删除与 `icacls /reset` 均 Access denied。mypy cache 和空 parent 已清除。保持所有其余隔离目录不动，后续需由本机管理员处理测试根 ACL 后删除，或在另一个可清理的短路径重跑 E2E 并验证回基线。
+
+## 2026-09-27：最终读取回执版本化与旧收据拒绝测试
+
+- CWP binary `source-read` receipt 单独升级为 schema `2.1`，携带原文 SHA 验证后读取到的 review snapshot；`SourceRef`/query candidate 仍为 `2.0`。RF transport 和 final record builder 严格校验 `2.1`，新增把成功回执改成旧 `2.0` 后必须拒绝的回归用例。
+- 验证：CWP reader + CLI 契约 32 passed；RF transport/builder/preparation + FF→CWP→RF 真实 E2E 36 passed、1 skipped；两仓 Ruff、RF 三源码文件 Mypy、两仓 `git diff --check` 全绿。首次 pytest 默认 Temp 受沙箱拒绝；改用授权隔离 basetemp 后通过。仅验证隔离 opt-in，不等于默认入口或 StockWiki 生产路由已切。
+
+## 2026-09-27：TDD 边界复核与单用户资料湖简化
+
+- 用户要求全面检查多余设置。本轮 CodeGraph 对 559 个 Python 文件做结构盘点，核对 83 个 `source_catalog` 文件以及 Worker/调度、全文转换、章节副本、摘要、清理与 legacy 研究入口的关键调用和读写；S1–S10 简化项、状态和待测量项已写入 [R4 实施卡](r4-data-lake-priority-rollout-2026-09-27.md#全仓结构审查后的进一步简化2026-09-27-增量)。这是结构与热点审查，未声称逐行看完全部文件。R4 主计划/测试矩阵中原来每阶段 DR→VR→AR 三次签字和每级 cohort 停审已改为关键节点一份综合结果包，局部用 TDD 与相邻合同测试；生产删除、付费联网、Worker 启动仍核实际动作。
+- 额外只读审查核实 CI 在每个 Python 矩阵重复 unit/contract/full coverage/6 组 canary，`--cov ... || true` 与 CLI smoke 的 `|| true` 可掩盖真实失败；`pyproject.toml` 已有可选解析/download extras，`requirements.txt` 和 CI 却默认安装全套。StockWiki 当前 `company-wiki` provider 明确 disabled，现行 Tavily fallback 不动；将来启用 v2 后须显式选择来源模式，失效不能悄悄排 Tavily。S8 可独立减法，S9 等 C.local 激活，S10 先量安装成本；均不增加小步审核门。
+- 空间基线纠正：2026-09-26 收据证明旧 46.266 GiB SQLite 主库已退役并实测同卷净释放 37.630 GiB，D0 盘点当前三自有目录 39.744 GiB；本轮主库只读 stat 3,055,800,320 B。原计划表中实施前 46 GiB 快照不可再当待删现况。保留压缩备份 5.773 GiB、退休归档 4.850 GiB、raw 23.460 GiB、derived 2.632 GiB，均需各自引用/保留关系审查后才能计可回收；重复 raw 候选理论差额仅 98,845,393 B，尚非删除资格。
+- 本轮再次核对空间调查：旧库约 2720 万 span，其中 table cell/空 `raw_text` 比例在小样本中很高；目前没有全库精确表/索引占比。R4 卡已把“新 DAG 零新增全量旧式 span/MD、量每份新增字节”放在派生清理之前，并写出最终五个生产 owner。D0 的 `future_lake` 一件 545 B 原文已纠正此前“只有 README”的过时描述；它尚不构成原生第四根真实覆盖。
+- 只读量测发现 3,500 个已规范化不同文档里仅 22 个有当前 prompt-injection review 收据；S7 已加入自动扫描干净的**实际将发给模型的字节**并写绑定收据，命中/异常才需人工的方案。首轮三仓 E2E 暴露 FF legacy resolve + RF final open 两次全文读取；隔离 CWP 随后新增 DB-only 候选投影、FF 显式 v2 opt-in 改走查询。FF↔CWP 真实集成 11/11 及三仓真实 E2E 已绿，坏字节仍由 RF 最终打开拒绝。旧 FF 默认行为、StockWiki 正式消费、OS 级 I/O 计数和生产路由切换留待 C.local 大节点签收。
+- 候选 `prompt_injection_review` 在 query→open 间撤回的反例先红：CWP CLI 成功回执缺 `review`，RF 会沿用候选的旧状态。隔离 CWP 补验真后 review snapshot、隔离 RF 严格收据与最终状态后，CWP reader/query/真实字节 34 passed；RF 受影响 6 文件 36 passed，真实三仓 E2E 含候选后撤回审查与原文同尺寸篡改两负例均绿。Ruff、RF Mypy、两仓 diff-check 绿；仍只在隔离 opt-in，默认生产路由未切。
+- 隔离跨仓回归收口：FF 全套 379 passed/13 skipped/78 subtests（1 条既有测试线程解码 warning），RF v2 定向 81 passed，CWP reader/query/真实字节 33 passed；三方 Ruff/Mypy（适用仓）/diff-check 绿。真实三仓 E2E 含根标签 false、零下载、坏源字节最终拒绝及测试文件恢复。三仓均未提交/合并；FF 的 `latest_as_of`/授权下载仍经旧 ensure/resolve，`detected_and_ignored` v2 保守 hold，C.local 结果包必须分别核这些请求型态。
+- 复核新增两个 LLM 摘要负例：规范化工件被改写仍外发、旧根 active 位置遮蔽当前根同 SHA 副本；两项先红后绿。外发前现核工件实际 SHA，查询以存在当前已配置 active 副本为准；GP003 8 passed。CWP 单次 binary reader CLI 收据新增 DB-only `manifest`，先红后 5 passed，使 RF 可在一次原文读取中取得当次来源元数据。
+- 再给 LLM 增加 normalized 工件 lineage 错配不外发的红测（旧实现会完成一次 LLM 调用），将 LLM/确定性摘要/章节提取统一到同一工件读取器后，GP003 9 项及直接相关五套合同合计 48 passed。旧 FC906a 夹具未按现有 review API 提供 `evidence_payload`，已改为扫描并绑定该测试真实 normalized 工件字节，4 passed。随后只读生产 catalog 发现 4,797/4,984 条旧 normalized 行缺 DB source SHA；已把安全的 frontmatter 兼容要求写入 S2，隔离实现/真实旧工件验证仍在进行，当前不宣称 S2 已可生产切换。
+- S2 历史兼容 TDD 后直接相关 75 passed、unit 20 passed；主库 `immutable=1` 每种旧生成器抽一件共 11 件，8 件通过，2 件真实工件 digest 与记录不符、1 件 frontmatter 状态不符，均按预期拒绝。随后生产只读查询又发现 1,469 个文档有两条可读 normalized 工件；双工件只加工一次的 TDD 正在进行，避免 S7 扩大 review 覆盖后重复调用 LLM。
+- `config_doctor.py` 原来把 directory 根写死为 Dropbox/future_lake；先红 3 项后改为通用目录根结构/可达性检查，相关 21 passed，仍拒绝重复 ID、未知变量、指向文件的根。SourceExport v2 仅 manifest 的 PDF 原来全文载入并长期保留；16 MiB 测试峰值 33,598,348 B，改为共享读取规则的 streaming `verify_version` 后 2,144,131 B，相关 76 passed、1 skipped，包含两份真实 PDF E2E。上述改动均在隔离 CWP worktree，尚未并入主树。
+- 隔离 CWP worktree 的 v2 来源读取新增完整配置指纹、查询/resolve/ensure/二进制 CLI 收据；`policy_2x` 历史 hash 未改。后来跨仓审计指出把该指纹作为消费者硬门槛会让配置根搬家后的旧 SourceRef 失效，违背位置透明，因此当前只把它作为可选一致性检查与审计字段；FF/RF v2 消费者下一轮先红后绿地改为来源候选→最终消费者单次 current-policy open，旧跨仓双 hash 和两次全文读取不得成为最终合同。
+- 审查发现导出曾可包装调用者任意提交的 PDF EvidenceSpan；新增伪造 PDF/TXT 红测后，v2 现在只接受对已验 UTF-8 `text/plain` 原字节的精确字符坐标引用，PDF 等仅导出 source manifest。解析器管理的 PDF normalized artifact registry 是后续叙述 G2a 的前置，不用包自身 hash 冒充引用真实性。StockWiki 新 loader 已按同一规则先红后绿，并用临时 catalog 跨进程 scan→query→export→load 真实运行，36 passed。
+- 同 SHA 的完整侧车若 URL、财年、provider ID 等声明冲突，以前受 root priority 影响而静默保留胜出项；新增红测后 scanner 持续记录关键字段冲突，正式复用和导出都拒绝不明归属。B05 原有两例因旧测试收据未提供新要求的 source SHA/policy/evidence payload 而失败；只修测试夹具后 B05 16 passed，未放松产品校验。
+- 用户明确裁定个人项目取消 `private/public`，全部已配置来源均允许外发。隔离 CWP v2 已用先红后绿测试移除本地 SourceExport 标签拦截、正式复用的根级 `reusable_for_filing` 拦截和 LLM 摘要入口的 `private_user` 否决；仍核来源完整性、状态、报告期、采集证据、审查收据及当前字节 SHA。RootPolicy 3.x 不再强制根标签；隔离配置删去四根的 `privacy_class`。LLM GP003 6 passed、RootPolicy 单测 12 passed；此前自动审批因授权不够明确拒绝过外发改动，用户的后续明确授权已解决该问题。
+- CWP v2 reader、export、policy、LLM/B05 合同及两份真实文档 E2E 组合回归 99 passed；首次未提权运行因测试临时目录访问权限报 96 个 setup error，按环境权限重跑后全部通过，非产品失败。隔离配置由 `load_catalog_config` 成功加载四根，均走缺省兼容标签；它不再用于读取或外发决策。
+- filing-fetch 隔离分支曾通过 396 passed、13 skipped，真实 FF↔CWP 临时目录 E2E 也验证了策略变化下旧 pin 拒绝/新 pin 可读；RF 隔离分支 v2 19 单测、真实 E2E 1、旧纯回归 31 和旧入口 mock 8 全绿。这些是过渡实现的局部结果，尚未并线，也不代表已达到单次读取/旧路径无关的最终合同；下一轮简化正在 TDD 进行。
+
+## 2026-09-27：抽象读取第一切片按 TDD 推进
+
+- v1/v2 导出、读取、相邻 B 合同及真实字节合并回归：229 passed、1 skipped；新增 v2 发布 CLI 的 3 项调用者测试先因模块不存在红，实施后 3 passed。CLI 只收临时 catalog 的精确 SourceRef 与 EvidenceSpan，不收原文路径，不扫描或下载；成功 stdout 单行 bundle，拒绝 stdout 空且 stderr 单行结构化错误。测试发现 SQLite WAL 只读连接会刷新 -shm 的 mtime；断言仍核其字节和大小、主库/WAL 的完整状态，独立临时测试树结束后恢复，不能将 -shm 时间变化误报为原文写入。
+- 跨仓并行：filing-fetch 独立 worktree 的 binary read transport 先红后 13 passed，接线先红后 16 passed；既有无下载相关回归 274 passed、3 skipped，隔离真实 CLI E2E 1 passed（三方 policy_hash 一致、同 SHA 备用副本、零下载）。其 v2 目前显式 opt-in，防止 CWP 新入口未部署时破坏旧 CLI；还不是全面移除旧 resolve/path 字段。StockWiki 独立 worktree 因主树有大量未提交/未跟踪内容，仅新增 v2 独立 loader，首轮 15 failed→15 passed，尚未接旧 source-provider。
+- 真实资料门槛首轮：隔离运行星环 2025 年报与三角防务 P06 定增资料，真实原件/侧车先后完整 SHA、大小、mtime、属性一致，临时测试树已恢复；2 passed。星环验证原生侧车查询、正式读取、同 SHA 备用副本回退；P06 验证预览可读但稀疏 capture 拒绝正式复用。第二根只是真实字节的隔离备份，尚不能代表 future_lake 原生接入。
+- SourceExport v2 采用先红后绿：导出三例先因缺模块红、随后全绿；strict from_dict 七例先因缺 API 红、随后全绿；重复 JSON key、公共包接口、报告期字段也先红后修。期间又在组合运行中发现循环导入，修复后导出/reader/CLI/真实字节合计 33 passed。v2 目前是可调用的构建器及严格加载器，发布 CLI 与 StockWiki 实际消费仍待下一大节点。
+- 查询分页红测证实 1001 条同日非匹配候选会遮住后续真匹配；补带上限的只读 SQL 分页后，新反例及旧 B02 候选测试 31 passed。正式 filing_reuse 另要求显式报告期事实，不再把公告日期当报告期：红灯曾实际打开 PDF，修复后先拒绝。
+- 前一切片：跨进程二进制 read/query CLI、按业务身份的本地 query、preview 与正式 filing_reuse 分权、生产形状嵌套配置、as-of SQL 前置裁剪、待修正来源拦截均先记录红灯再补最小实现。该时点相邻合同回归为 98 passed、1 skipped；新增待修正来源红灯为 found、修复后 1 passed。ruff 通过。原有 B05 套件另有两例在未改的 prompt_injection.py 内失败，需基线核对；不能把这两例当本切片绿灯或回归。真实 E2E 与跨仓消费者的后续结果见上方，整体接线仍未完成。
+- 已把 red→green→refactor 和“每层单测、相邻合同、关键节点真实 E2E”写入 R4 活动实施卡。CWP 产品修改均在独立 `codex/data-lake-reader` 工作树，不覆盖主工作树的其他未提交改动。
+- 先新增 `tests/contract/test_source_version_reader.py` 四个调用者合同测试；初跑在导入 `source_reader` 时红（`ModuleNotFoundError`，0 collected）。随后最小加入路径无关精确版本查询/打开，复跑四项全绿。覆盖 ref 不含 path/root/location、精确 hash/身份、退休或撤权零原文打开、同 SHA 副本缺失/坏字节回退、配置 root 搬家无需重扫、其他版本不得替代。
+- 此绿灯只表示隔离夹具的第一切片；跨进程 CLI、一般 `query_local`/preview 权限、真实多根 E2E、消费者接线、独立 B.AR 均未验收。下一步继续先写相应红测试，再实施。
+
+## 2026-09-27：用户目标重排与 RF 主线并线完成
+
+- RF 已签收尾项在隔离候选核对并经定向测试 22 passed、九负例 9/9、真实年报离线跨仓 E2E 5/5；原 RF pre-push 全门绿，远端 `main` 已核对为 `3a69f9c5b6516ebc949d1c95bd50965f9112b7ad`。`fcap` 留历史 `ee0a82bfd`；此前“RF 尚未并线”的段落均为时间点快照。
+- 用户把持续实施顺序定为 RF 并线 → CWP 位置透明抽象层 → 叙述/Worker/空间原计划，并要求按层单元、相邻集成和关键真实 E2E 验松耦合。已更新 R4 唯一活动入口、实施卡、本计划及叙述专项当前 Next Step；历史复审 `A.AR=rejected` 仍原样保留，受影响合同做一次增量独立审查。
+- CWP 主工作树有其他工位未提交代码、测试和规划文件；本轮只写本目录/叙述专项计划文本，另建独立 `data-lake-reader` 工作树准备产品实现。尚未在本轮修改 CWP 产品代码、生产 catalog/raw、Worker 或空间文件。
+
+## 2026-09-27：本地/远端 Git 实时核对与 RF 未提交候选澄清（只读 + 规划）
+
+- company-wiki 远端 HEAD/master `f39bd5a`、远端 fcap `8665c8c`；本地 fcap `dbe4745` 比远端 master 多 4 个提交，工作树另有 24 tracked 修改和 16 untracked 条目。RF 远端 main/fcap 同为 `ee0a82bfd`，用户澄清新的 RF 工作在本地未提交，暂停后续并线。
+- 将 R4 及叙述专项的“等待 RF Git merge”技术前置改为“由 RF owner 固定可复现的候选快照或支线提交、版本化接口合同及当前 dirty 冲突面”；A/B 通用设计可准备，RF 的 C.local 正向 E2E 在候选未冻结时 hold。company-wiki 产品代码和 Worker 仍暂停，不因为远端已有旧 merge 自动恢复。
+- 仅执行 Git 只读查询与规划文档修改；未 fetch/pull/merge/push、切分支、修改产品代码或生产资料。具体 SHA 与差异见本目录 findings 顶部。
+
+## 2026-09-27：位置透明优先线路细化（仅计划）
+
+- 用户要求 RF 非主线改动并入后优先实施抽象分层；本轮新增 [R4 优先实施卡](r4-data-lake-priority-rollout-2026-09-27.md)，同步 R4 实施入口/测试矩阵与叙述专项：G0 复用 A 合同审查，C.local 先验基础来源 reader，W5 后 G2a 增验 selected package。所有跨仓消费者业务代码都应从上游原文路径操作迁到版本化 `SourceRef`/`EvidenceRef` 与受控读取；StockWiki SourceExport v1 的路径与 export/evidence ID、标题耦合单列迁移，full sync 不借 C.local 放行。
+- 只读调查得到三角防务定增、星环科技年报、微软 10-K、拓尔思招股书等跨根真实样本与完整 catalog SHA；这些尚未由本轮重新哈希，正式隔离复制后必须核原字节、sidecar 和独立 locator。真实修订对/future_lake 原生根仍有明确缺口。
+- **未运行**新产品 E2E，未改产品代码/生产 DB/原文/Worker；现存其他未提交产品文件并非本次规划改动。A/B/C.local 仍需当前输入、授权与独立结果，不用历史收据自动签收。
+- 独立只读复核纠正四个假放行风险：StockWiki 旧 `--source-root` dry-run 不能证明新 reader；RF `not_reviewed` 拒绝不能替代正向 RevenueSourceRecord；StockWiki 新 evidence ID/标题/候选状态也必须跨路径稳定；基础 C.local 不得等待 W5/G2a。已同步 R4 与叙述计划，旧 v1 兼容和新 SourceExport v2 分名。规划文档链接/尾随空白及已跟踪文件 `git diff --check` 均通过；这不是产品验收。
+
 ## 2026-09-12 上午：R4 阶段 A 收口为 v0.4.2、阶段 B 设计三轮复审、A06 首个真实基线
 
 - **阶段 A（合同/基线）**：A07（A.VR）**`accepted_with_findings`**（6×P1/3×P2/2×P3；交付 **22 条负例 VR-N01–N22** + **五值错误模型** `not_found/not_indexed/unavailable/blocked/ambiguous`）；A08（A.AR）**`rejected`**（**117 行逐行映射已产出**：98 行可直连、6 行经 AC 桥接、**13 行无法指派**）；A.DR rev3 `accepted_with_findings`。三份复审**独立命中同一 P0**：

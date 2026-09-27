@@ -16,6 +16,7 @@ from company_wiki.source_catalog.observability import (  # noqa: E402
     MetricsCollector,
     REDACT,
     REASONS,
+    redact_text,
     validate_reason,
 )
 
@@ -96,3 +97,17 @@ def test_obs07_taxonomy_versioned_and_additive():
                  "artifact_rejected", "recomputed", "legacy_bridge_hit",
                  "shadow_diff", "migration_remaining"):
         assert code in REASONS, f"{code} missing from taxonomy"
+
+
+def test_obs08_redaction_preserves_adjacent_diagnostic_fields():
+    message = (
+        "cmd: --token=private-value\ndoc=17\n"
+        "url=https://example.invalid/?token=another-secret&stage=scan\n"
+        'token = "quoted secret"\nstatus=failed'
+    )
+    redacted = redact_text(message)
+    assert redacted == (
+        "cmd: --token=<redacted>\ndoc=17\n"
+        "url=https://example.invalid/?token=<redacted>&stage=scan\n"
+        "token = <redacted>\nstatus=failed"
+    )

@@ -1,0 +1,264 @@
+# Findings：叙述性证据试点
+
+## Requirements
+
+- 财务报表标准数值可由外部清洗数据接口提供；优先处理行业、主营业务、新业务、出海、风险和运营驱动的叙述。
+- 覆盖年报、半年报、季报、招股书、再融资文件、投资者关系材料及英文财报电话会议。
+- 目标是 filing-fetch 在抓取公司文档时通过版本化 companion flow 调用 earnings-transcripts 的正式 adapter，电话会议英文 TXT 统一登记在 company-wiki；不翻译，做来源锚定的选择与摘要。此处描述目标，不表示当前已有 MCP tool 或已完成集成。
+- 仅维护本计划目录，不改变现有项目计划、生产数据或 Worker 状态。
+
+## Prior Read-only Findings
+
+- 现有 source catalog 数据库约 46.27 GiB、约 2720 万 EvidenceSpan；高基数的全量切片及其 JSON/索引是首要排查对象，不能简单归因于 PDF 原件或仅仅归因于重复正文。精确空间分解尚未完成。
+- 现有 section_extractor 只针对少数财报/招股书章节；投资者关系、再融资等高价值类型不在默认目标集合。
+- earnings-transcripts 存量 43 份英文 TXT，约 2.44 MB，分属 6 家公司；原文混有网站编辑摘要和电话会议逐字稿，至少有两种版式、若干说话人/转写异常。
+- 跨项目职责：company-wiki 提供可追溯来源和版本化导出；StockWiki 持有投资研究状态；revenue-forecast 消费驱动证据；StockWiki/RF 是否消费本试点叙述包须分别通过其真实 reader/adapter 合同。invest-quick-scan 只使用可选的实体/证券身份映射，不消费文档、原文或叙述摘要。
+
+## E2E Isolation Findings (2026-09-27)
+
+- 项目已有局部验收断言和临时目录要求，但 G1–G4 大节点原先没有统一的端到端运行生命周期与清理后基线证明。补充一个隔离 E2E 计划，将完整链路集中在既有大节点，而不是每张小卡重复复核。
+- earnings-transcripts 当前入口为 Python CLI；其 output 参数不能证明配置目录、cache、log、lock 也已隔离。因此真实下载 E2E 必须注入隔离 config/staging，并证明所有副作用都落在 run-id 根目录；否则只运行 fake provider contract test。
+- 稳妥的恢复方法是固定 fixture 只读、每次唯一 run-id、所有临时输出限制到新增运行子目录，测试后只删除本次创建的内容，再逐项比对测试目录前后文件树。禁止通配符清理和对公司原始数据目录做全量 46 GiB 快照。
+- 跨仓 schema 只读核对发现：StockWiki 的严格 Source Provider v1 与 pilot `narrative-evidence-selection-bundle/0.2.0` 不同构；StockWiki provider 配置当前 disabled。G2a 必须等待 owner 批准并用其真实 reader/adapter 做隔离 E2E，不能以本仓 harness 代替；quick-scan 的 G2b 仅测试 optional identity mapping。
+
+## Transcript Acquisition Contract Findings (2026-09-27)
+
+- 当前 `ALL_TOOLS` 中没有 earnings-transcripts MCP tool；`Projects/earnings-transcripts/earnings-transcripts/scraper.py` 是现有 CLI。`--output` 只改 transcript 文件路径；`main()` 仍从脚本目录载入固定 config，并初始化 transcript/log 目录、日志、single-instance lock、cache。CLI 默认翻译，必须带 `--no-translate` 才跳过；`--quarters` 表示最近 N 季，不是可验证的精确 fiscal-period 请求。直接把当前 CLI 当隔离 provider 会留下共享副作用风险。
+- 当前 `filing-fetch/scripts/fetch_filing.py::resolve_filing()` 走 verified identity → company-wiki resolve/ensure，仅返回单份 filing handle；`filing_contracts.py::validate_request()` 对 schema 1.2 严格拒绝未知字段，未实现 related transcript 调用或复合结果。安装/项目 `SKILL.md` 写 request schema 1.1、SKILL v1.4.0，而同目录代码写 request schema 1.2、`SKILL_VERSION=1.2.0`；集成前需由该接口 owner 指明真实活动合同，不能据技能文案推断代码行为。只读 `git status` 因目录 ownership protection 未能取得状态，本轮没有尝试更改 safe.directory。
+- Transcript writer 会给 transcript content 前置生成式 header；FMP response 把 `url` 设为 `FMP API`，不是可验证 HTTPS URL。因此新的 canonical 保存不能直接把该 CLI 输出当 provider 原始响应；应定义正文/元数据分离、精确期次、真实来源 URL，分别核验 provider-payload hash 与 company-wiki canonical TXT hash。
+- 结论：G1e 需增加**独立上游 transcript acquisition contract gate**（filing-fetch 新版 request/response + earnings-transcripts 可注入、无翻译、精确 period、隔离副作用 adapter）。此 gate 与 RF `I-05-C/I-06-A` 下游 producer/consumer 冻结不同；它允许先完成 acquisition 集成，而 G2 consumer、shared producer/Worker 仍必须等 RF G0。当前没有把 fake CLI 或本仓 parser harness冒充真实 acquisition E2E 的依据。
+
+## Sample Register
+
+样本根路径：PDF 为 `C:/Users/郑曾波/Projects/company-wiki/companies/`；TXT 为 `C:/Users/郑曾波/Projects/earnings-transcripts/earnings-transcripts/transcripts/`。文件哈希是只读计算值；表内只展示前 12 位，完整值可按文件重新计算。
+
+| 编号/类别 | 相对路径或文件名 | 页/行 | 大小 | SHA-256 前 12 位 | 试点用途 |
+|---|---|---:|---:|---|---|
+| P01 年报 | `中微公司/raw/financial_reports/中微公司：2025年年度报告.pdf` | 259 页 | 9,165,875 B | `d64c410832f2` | 大量财务表与业务讨论混排 |
+| P02 半年报 | `中微公司/raw/financial_reports/中微公司：2025年半年度报告.pdf` | 188 页 | 6,361,468 B | `91ae4978b694` | 中期进展与期间增量 |
+| P03 季报 | `中微公司/raw/financial_reports/中微公司：2026年第一季度报告.pdf` | 15 页 | 217,264 B | `ab7bb0076b2a` | 小文件中财务与业务信息相邻 |
+| P04 招股书 | `中微公司/raw/prospectus/中微公司：首次公开发行股票并在科创板上市招股说明书.pdf` | 429 页 | 11,211,796 B | `19cdb41e03b2` | 基线业务、技术与风险 |
+| P05 可转债 | `三角防务/raw/research/三角防务：1-1西安三角防务股份有限公司创业板向不特定对象发行可转换公司债券募集说明书.PDF` | 302 页 | 18,858,880 B | `2ea34bcb188f` | 项目用途、产能和阶段，首封面无可提文字 |
+| P06 定向增发 | `三角防务/raw/research/三角防务：西安三角防务股份有限公司向特定对象发行股票并在创业板上市募集说明书（注册稿）.PDF` | 191 页 | 5,595,592 B | `cd803fe9528f` | 募集投向与注册稿状态 |
+| P07 投资者关系 | `万润股份/raw/research/万润股份：投资者关系活动记录表20260515.pdf` | 6 页 | 153,851 B | `221467c15a24` | 套话与具体业务问答混合；有跨页问答 |
+| P08 投资者关系 | `万润股份/raw/research/万润股份：投资者关系活动记录表20250430.pdf` | 13 页 | 236,281 B | `4455d6f099f5` | 密集业务问答 |
+| P09 格式制度 | `中微公司/raw/investor_relations/中微公司：投资者关系管理办法（2025年8月）.pdf` | 7 页 | 167,252 B | `76e146985388` | 应跳过业务切片的负例 |
+| P10 会议通知 | `八方股份/raw/research/八方股份：关于召开2025年年度暨2026年第一季度业绩说明会的通知.pdf` | 3 页 | 95,673 B | `823b2bdee3b6` | 文件名含“业绩说明会”但正文不含会议问答的负例 |
+| T01 新版 TXT | `MSFT/MSFT_Q4_2026_earnings_call.txt` | 340 行 | 66,324 B | `4ac3b4f0fa1b` | 网站摘要与逐字稿并存、说话人冒号样式 |
+| T02 旧版 TXT | `NVO/NVO_Q4_2024_earnings_call.txt` | 604 行 | 66,597 B | `d00e2a4537b8` | `Prepared Remarks`/`Questions & Answers`、说话人独立行 |
+
+只读 catalog 基线：P04 已有 `normalized` 和 `sections` artifact，22,458 个 evidence spans；P05/P06 均被归入 `document_kind=other` 且没有解析产物；P07/P09 为 `investor_relations` 且当前无解析产物。P01–P04 的匹配记录为 `retired`，但 P04 仍有历史解析产物；这些查询不代表最新可消费状态。试点按原文直接读取，不以 `retired` 等同于文件缺失。
+
+## Pilot Evidence
+
+### 方法和证据范围
+
+使用 PyMuPDF 1.26.7 只读打开 10 份 PDF，并对相关页使用 `page.get_text(sort=True)`，页码从 1 起；括号内偏移是该方法产生的**页内字符偏移**，从 0 起，尚不是生产 EvidenceSpan locator。对 2 份 TXT 读取原始 UTF-8 行。逐页检索仅用于找候选，随后人工阅读问答及上下文；中文来源做中文来源摘要，英文 TXT 做英文来源摘要。未调用 LLM、Worker、生产解析或下游投资分析。本轮结果是小样本的可行性与失效模式验证，**不构成整体召回率或成本节省率证明**。
+
+### 试点来源摘要卡（人工抽样产物）
+
+| 案例 | 原文定位与锚点 | 来源摘要 / 选择结果 | 必须保留的限定 |
+|---|---|---|---|
+| C01 年报新业务 | P01 PDF 第 40 页，页内 64 起“新产品开发已经取得了显著成效” | 多款 LPCVD/ALD 薄膜设备进入市场并获重要客户重复订单；EPI 处于客户端量产验证；湿法设备布局涉及**拟议**收购。选取产品进展，略过相邻口号式增长表述。 | “重复订单”“量产验证”“拟购买”是三种不同成熟度。 |
+| C02 半年报中期方向 | P02 PDF 第 21 页，页首行业及业务讨论 | 半年报将自主研发、合作及潜在并购作为设备类别扩展方向，提出未来 5–10 年覆盖更广设备市场的愿景。需与年报更新做时间线。 | 未来覆盖是管理层计划，不是实现事实。 |
+| C03 季报页内混排 | P03 PDF 第 3 页，页内 744 起“四款MOCVD 新产品” | 四款面向功率器件/显示应用的新产品进入客户端验证，部分获得批量订货；同页下半部转为收入、利润和非经常性损益。保留运营进展，财务表走结构化数据链。 | 不能按“季度财务页”整页跳过；“部分”不应扩大为全部四款。已视觉核对版面。 |
+| C04 招股书历史基线 | P04 PDF 第 114 页，页内 55 起“第六节 业务与技术” | 招股时的刻蚀、MOCVD 产品、应用领域和客户阶段构成历史基线。相邻产品表需按产品保留关键用途。 | 招股书描述是其披露时点的状态，不能直接当 2026 年现状。 |
+| C05 可转债项目 | P05 PDF 第 231 页，页内 518 起“项目建设的必要性”；第 13–14 页对应供应商/建设风险 | 项目论述从锻件向加工与零件交付延伸；蒙皮镜像铣项目受供应商产能和技术验证制约。建设理由与执行风险应成对呈现。 | 募投、产能消化和订单优势是预测/论证，不是已交付结果。 |
+| C06 定增认证门槛 | P06 PDF 第 3 页，页内 132 起“募投项目供应商认证和产品认证的风险”；第 101 页为项目必要性 | 数字化集成中心向下游装配延伸，需要供应商及产品认证；文本给出认证时长的预计区间。项目逻辑和认证条件均应入选。 | 注册稿中的时间与达产安排为预计值；“无需”某项认证仅适用于文中明确的原有锻件项目。 |
+| C07 IR 中试线 | P07 PDF 第 6 页，页内 198 起“16、问：” | 对硫化锂中试线，管理层表示当时预计 6 月底前建成并开展中试。单独保留问答与时间条件。 | 本样本不能证明后来按期建成；待后续来源验证。 |
+| C08 IR 跨页问答 | P07 PDF 第 5 页问题 15 延续至第 6 页回答 | 车用沸石需求波动背景下，公司称推进石化催化分子筛，已有产品销售。页边界不能截断问答。 | 问题中的估值比较是投资者观点，不写作公司事实。 |
+| C09 IR 错误前提 | P08 PDF 第 2 页，页内 61 起“2、问：”，随后问题 3 与回答 | 公司称非车用沸石已在石化催化及 VOCs 领域销售；问题 3 称 OLED 等业务收入不足 5%，回答明确纠正为所列两个 OLED 业务主体占比已超 25%。 | 必须区分投资者提问数字与管理层纠正；合作意向书不等于新增收入已实现。已视觉核对问答表格。 |
+| C10 英文新式电话会 | T01 第 124 行起为 `Full Conference Call Transcript`，第 236–248 行讨论模型选择，第 252–258 行讨论容量 | **English source summary:** Management described enterprise model choice as part of its platform design. The CFO said demand still exceeded available capacity and efficiency gains were monetized quickly during the quarter. | 第 1–123 行含网站编辑摘要、词汇表等；来源为 Motley Fool 转写，不能把编辑摘要误标为管理层逐字发言。 |
+| C11 英文旧式电话会 | T02 第 178 行起 `Questions & Answers`，第 184–212 行为双问题、多管理层回答 | **English source summary:** Management attributed prescription patterns partly to benefit-plan changes and starter-dose supply. On a separate CagriSema trial question, the development executive said it was too early to speculate on superiority. | 按两个子问题分别锚定答复；不能把“尚早判断”摘要成临床优势已证实。 |
+| N01 制度负例 | P09 PDF 第 1–7 页 | 规定投资者关系管理职责、形式及合规要求，未发现具体业务动态；登记/检索原文即可，业务切片状态 `skipped_no_narrative`。 | 仅凭“投资者关系”文件名会误收。 |
+| N02 会议通知负例 | P10 PDF 第 1–3 页 | 公告会议时间、地点和提问方式，并无正式会议回答；登记元数据与事件时间即可，业务切片状态 `skipped_event_notice`。 | 不能把“将回答问题”生成已经答复的问答。 |
+
+### 对现行机制的直接检验
+
+- P04 现有 `sections` 索引只含 `risk_factors`、`business_and_technology`、`important_events` 三个角色；其中 `business_and_technology` 覆盖 **83 页、302,779 字符**（页 114–196）。章级定位有用，但还须章内选择。现有 `normalized.md` 为 2,490,019 B，章节索引为 453,482 B；不能把章节 artifact 大小等同于最终摘要大小。
+- 现行 `section_extractor.TARGET_DOCUMENT_KINDS` 包含年报、半年报、招股书、券商研报，未包含季报、投资者关系、再融资和电话会议；P03/P05–P08 的正例不进入该抽取范围。
+- P05/P06 被归为 `other`，显示再融资识别和准入必须先修，随后才能按项目/风险抽取。
+- P03 第 3 页及 P08 第 2 页的渲染图人工核对过：前者的运营叙述与财务段落在同页，后者一个表格单元连续承载多个问答。页级二元保留/丢弃均不够。
+- T01 原文 65,980 字符，正式逐字稿从字符 7,214/第 124 行开始；网站尾注从字符 64,917/第 334 行开始。T02 原文 65,986 字符，准备发言从字符 545/第 20 行开始，问答从字符 27,770/第 178 行开始，尾注从字符 65,219/第 598 行开始。两种版式必须分别识别正文边界。
+
+### 尚未验证
+
+- 全语料的召回率、误收率、节省的数据库体积、LLM 费用与运行时长；本试点只有 12 份样本和有限人工片段。
+- 英文电话会在线重新下载的可用性、FMP 来源校验和指定财年季度检索；本轮仅检查本地代码与已有 TXT。
+- 现有来源版本中 `retired` 与下游可消费状态的完整影响；需在实施前做同文件多版本链路检查。
+
+## 第二轮只读小样本实验（2026-09-26）
+
+**方法**：不调用 Worker/LLM、不落盘解析产物。以 PyMuPDF 1.26.7 对 P03 第 3 页、P04 第 114 页、P08 第 2 页分别运行 `get_text('blocks', sort=True)` 与 `find_tables()`，按现行 `_pymupdf_page_snapshots` 的“块与表格 bbox 相交即排除正文”规则计数。另对 P05 第 231 页、P07 第 6 页比较 `get_text('text', sort=False/True)` 长度。对生产 `catalog.sqlite3` 使用 SQLite URI `mode=ro&immutable=1` 与 `PRAGMA query_only=ON` 读取元数据，并以固定随机种子 20260926 在 rowid 空间分散抽取 1000 条旧 `evidence_spans`；这是样本估计，**不是全库表/索引字节的精确分解**。尝试 `dbstat` 失败：当前 Python SQLite 没有该虚表，因此不把样本比例直接外推为准确的 46 GiB 构成。
+
+| 观察 | 只读结果 | 对设计的影响 |
+|---|---|---|
+| 旧库容量/空闲页 | DB 46.266 GiB，4096 B/page，12,128,258 页，freelist 仅 9 页，WAL 当时 0 B | 不能把一次 `VACUUM` 当成主要节省路径；应先阻止新增高基数行，并在独立迁移中测表/索引占用。 |
+| 迁移暂存容量 | 2026-09-26 C 盘空闲 83,279,212,544 B，约 77.56 GiB；一份与主库等大的副本约需 46.27 GiB，两份约需 92.53 GiB，尚未计 WAL/索引重建/备份增长。 | 现有 C 盘余量不足以同时放两份完整副本；W7 先核经验证的独立卷/快照和最坏空间预算，不能靠删除生产库临时腾空间。 |
+| 旧 span 随机样本 | 1000 条中 820 条 locator 为 table cell，496 条 `raw_text` 为空；`raw_text` 平均 16.9 B，`span_json` 平均 812.6 B（p95 932 B）。JSON 含定位、结构值、来源和解析元数据，表上另有 3 个索引。 | 空表格单元和每单元 JSON/索引可能是大库的重要驱动；“46G 主要因为全文文本重复”过于简单。新流水线要按候选/选中单元存证据，禁止重新物化整表空单元。 |
+| P08 IR 第 2 页 | 表格识别为 1 行 2 列，bbox 约占页面 71.9%；按旧排除规则 30 个正文块中 29 个被排掉，仅余约 4 字符，而表格单元含 864 字符和多个问答。 | 不能直接复用旧“表格优先、相交正文丢弃”的 PDF 快照函数；IR 需保留双视图并在大单元内拆问答。 |
+| P04 招股书第 114 页 | 产品/应用表 bbox 约占 10.2%；27 个正文块中 7 个与表相交，表格单元含产品类别、应用领域等业务描述。 | 不能一概排除表格；应区分标准财务表和产品/客户/产能/募投等业务表，并校验表格提取与页文本的锚点覆盖。 |
+| P03 季报第 3 页 | 财务表 bbox 约占 1.4%；32 个正文块仅 1 个相交，运营叙述仍在同页。 | 页级/表格级二元过滤仍不够；同页要按单元选择。 |
+| PDF 文本偏移稳定性 | P03/P04/P05/P07/P08 五页 `sort=False` 与 `sort=True` 文本均不同，字符长度差分别为 157/190/55/213/59。 | 试点中的“页内字符偏移”只对指定提取方法有效，不能直接当持久 locator；新证据要绑定 parser 版本、精确片段 hash 与可回放的页/段/表锚，升级解析器时重验。 |
+
+**仍待验证**：全库 table-cell/空单元比例与每张索引实际占用、不同 PDF 版式下双视图的召回/精确率、长期存储节省、按需回源时延、跨版本 locator 重验。旧来源 P01–P04 为 `retired` 的实际可消费语义仍要在隔离 catalog 中验证；只读 raw 试点不能证明这些来源当前可发布。
+
+### 全文检索的最小反例
+
+现有 `source_catalog/evidence_query.py` 的主要查询按精确 `source_id/document_id` 列出旧 spans；本仓 `source_catalog` Python 代码中未找到 FTS 虚表或 `MATCH` 查询。生产 SQLite 编译了 FTS5，但当前库无虚表。在**纯内存** SQLite 中插入一行含“硫化锂的中试线”的中文句子：`unicode61` 的 `MATCH` 对“硫化锂”“中试线”均返回 0；`trigram` 的 `MATCH` 对这两个三字词返回 1，但“出海”两字词返回 0（`LIKE '%出海%'` 可找到，索引是否有效和大库时延未测）。这证明不能把“引入 FTS5”直接写成中文全文检索已解决。W0/W5 要先定义中文两字词、英文词、精确短语、OCR 页和结果定位的查询合同，再比较轻量页级索引、trigram/分词器及按需回源的空间与 p95。新 DAG 不写全量 normalized 后，**现有证据列举接口无法自动替代全文检索**。
+
+### 降容升级的附加只读/内存试验
+
+对上述固定 seed 的 1000 条旧 `span_json` 仅在内存中测试 zlib：原 JSON 合计 812,588 B，逐行压缩合计 469,528 B，合并为一个压缩批次 175,172 B（原 JSON 的 21.6%）。大批量压缩能利用重复字段名，提示按来源的冷归档有潜力；这**不是**生产归档文件大小，更不是全库容量预测，未含 SQLite B-tree/索引、其它表、检索索引和备份。试图精确全库计数的只读扫描两次均因耗时较长主动中止；本机 Python/CLI SQLite 都没有 `dbstat`。精确分解及缩库预测必须在独立存储/副本上完成，详见[降容升级方案](space_reduction_upgrade.md)。
+
+另一固定 seed（20260927）抽取 1200 行并把 `span_json` 解码后与关系列逐字段比较：1022 行为 table cell；JSON 平均 815.5 B。`span_id/source_id/locator/raw_text/parser_name/parser_version/parse_status` 七个字段与独立列逐行完全相等；这些键值在 JSON 内合计约 418,218 B，另有 table cell 的 `structured_value.raw_value/value` 再复制正文约 18,324 B。两项相加为 **436,542 B**，约占样本 JSON 的 **44.6%**（364 B/row）。之前记录的 460,942 B / 47.1% 比这两项多 24,400 B，未找到可复核的分项依据，故撤回该总数；W0 应用固定脚本复算。即使校正后，这仍只是样本 JSON 中已识别重复字段的比例，不是全库 DB 可回收率；行头、索引、其他结构和唯一业务字段未计。它支持 vNext 不重复嵌入身份/定位/parser 字段，正文也只存一次。
+
+## 旧库提前退役的额外只读与临时库演练
+
+生产库 `catalog.sqlite3` 当前 49,677,344,768 B（46.266 GiB）、WAL 0 B；`worker_control.json` 的 desired_state 为 paused。SQLite 中除 `evidence_spans` 外有 17 张表，共 189,580 行：其中 sources 43,112、documents 23,530、locations 46,606、artifacts 8,191。documents 中 active 13,839、retired 9,501，另有 upstream_rejected 189 与 quarantined 1。用 `idx_documents_status_kind` 和 `idx_spans_document` 的关联索引精确计数，active 文档共有 **1,490,530** 条旧 span（8.75 秒）；这不是对全表表/索引占用的分解。
+
+在系统临时目录执行两次**不改源 DB**的 SQLite 复制试验，均完整复制原 DDL/非 span 数据和索引，并在结束后自动清理：
+
+| 复制范围 | 临时 DB 大小 | 检查 | 实际意义 |
+|---|---:|---|---|
+| 17 张非 span 表 | 225,280,000 B = 214.84 MiB | 189,580 行，`foreign_key_check` 无错误，`quick_check=ok` | 来源、文档、位置、artifact、退役/恢复审计等目录状态可保存为小库；不是完整旧证据服务 |
+| 上述目录 + active 的全部 1,490,530 条 span | 3,059,200,000 B = 2.849 GiB | 共 1,680,110 行、现有索引重建，`foreign_key_check` 无错误，`quick_check=ok`；总耗时约 143 秒 | 保持 active 旧证据热查询有真实空间基础；retired 旧证据仍需明确的归档/冷读状态及可恢复备份 |
+
+`.source_catalog/derived` 约 2,826,010,634 B，`index` 约 45,052,670 B；`source_manifests/archive/2026-08-07/retired-evidence.jsonl.gz` 为 5,207,478,767 B，首条可解析为旧 span JSONL。ADR-009 记录 2026-08-07 归档 25,708,956 条 retired span，但 H01 独立复核指出该归档缺不可覆盖发布、逐项 hash 与稳定快照保证，不能直接替代完整旧库备份。StockWiki 生产 `config/source_provider.yaml` 当前 company-wiki provider 为 disabled；跨仓实际读路径仍需在切换前作差分验证。
+
+只读抽取 6 处各 8 MiB 数据块做 zstd level 3 试压，比例分别约 15.3%、12.7%、12.7%、13.1%、12.2%、32.1%；**这不是完整 DB 压缩率**。当前磁盘空闲约 85,079,416,832 B（79.24 GiB）。完整压缩快照及恢复演练的峰值空间要在实际文件产生后判定，详见[提前退役审查卡](early_catalog_retirement.md)。
+
+## 原文处置补充核查（2026-09-26）
+
+- `src/company_wiki/source_contract/source_manifest.py` 中 `SourceManifest v1` 保存 source SHA、相对原路径、大小、`immutable_status`；`verify_file()` 在原路径不存在时失败。现有两个 immutable 状态未包含有意删除，因此需单独版本化 `SourceDisposition`，保留历史 manifest 而不伪称文件仍可回读。
+- 生产 SQLite 只读查询的 `company_raw`/`original_primary`：active 7,524 个 location、历史 `observed_size` 合计 6,511,169,498 B；retired 9,046 个、合计 18,641,858,464 B。location 可能缺失/移动/不在 C 盘，且 retired 不能等同无价值；实际可回收字节须 D0 按真实路径/卷、SHA、别名和消费引用逐件核对。
+- 旧源身份按 SHA，路径是 location；同 SHA 的重复副本可以在保住 canonical 一份且迁移所有路径引用后清理。唯一低价值原文删除会丧失未来原文回读/复核能力，不能仅由 `skipped_*`、未命中关键词或文档类型推出。详见[原文处置 D0–D5](raw_disposition_plan.md)。
+
+## 逐步空间账补充只读实测（2026-09-26）
+
+- 三处主要本项目数据目录的文件逻辑长度：`.source_catalog/` 52,700,659,299 B，`source_manifests/` 5,207,479,410 B，`companies/` 25,173,861,091 B；合计 83,081,999,800 B（77.376 GiB）。公司原文目录 PDF 15,129 个、25,073,770,125 B（23.352 GiB），不能据此认定均可删除。
+- 在不落盘、不改生产 DB 的条件下用 `zstd -3 --stdout` 读取完整 49,677,344,768 B 主库并计输出流：6,198,704,362 B（5.773 GiB，耗时约 96 秒，输入前后 stat 长度与 mtime 一致）。此计数不是可恢复备份，正式 F2 仍需写快照、流/文件 SHA 与实际恢复验证。
+- 以活跃临时库 3,059,200,000 B 和压缩流预算计算，同盘 F1/F2/F5 净释放约 37.644 GiB；完整恢复临时文件也在 C 时峰值增量约 54.888 GiB。C 盘当时空闲 85,058,437,120 B（79.217 GiB），理论峰值余量约 24.329 GiB，未含安全缓冲。逐步公式见[空间账](stepwise_space_budget.md)。
+
+## G1 主样本与量化目标补选（2026-09-27）
+
+- P02 半年报 p.21 将“超过60%的设备市场”拆在相邻 PDF 文本片段：第一段止于“超”，下一 locator 为“过60%的设备市场”。v15 的 17 锚点基线通过；为让量化目标摘要有完整已选证据，新增专用锚点后首轮诚实失败 1 次，未把不完整证据记为成功。
+- 选择器新增量化市场覆盖目标识别：只将命中目标所需的连续 PDF 片段成组选择、共用原有每文档预算；排序使该组在容量竞争时优先于普通事件。回归测试用两 span 预算验证完整保留并验证“60%的设备市场”锚点精确映射到第二个 locator。
+- v16 主样本：12 件、52,196,853 B 原文、1,289 个 span，1,289/1,289 定位回读、18/18 锚点命中、0 blocked、0 超上限；状态 2 selected、6 partial、2 skipped、2 needs_review。序列化 evidence JSON 542,820 B（1.0399%）。
+- v11 回归集：4 件、14,939,109 B 原文、401/401 定位回读、5/5 锚点、0 超上限；序列化 evidence JSON 202,661 B（1.3566%）。这是一组固定回归文档，不是盲测留出集，也不能由小样本外推召回率。
+- v8 对 13 条人工摘要草稿完成引用/角色/语言/问答关系机械校验；逐页核源记录在 [G1 摘要来源支持审查](g1_summary_source_support_audit_v1.md)。该审查由实施者完成，不是独立签字；所有摘要仍待审。实测候选 JSON 文件字节与序列化字节相等，但没有连接持久 catalog、扫描器或生产 writer，故不称为数据库节省量。
+- 44 个相关单测通过，`ruff check` 通过；v16/v11/v8 JSON 可解析。Worker 仍暂停。Revenue-forecast 当前只读状态与剩余共享契约见[跨项目协调](cross_project_coordination_2026-09-26.md)；在 G0 通过前不接共享目录、不建持久需求、不做消费者切换。
+
+## D0 当前文件元数据盘点（2026-09-27）
+
+- 只读 immutable catalog 并逐路径 stat 29,409 条登记原文位置。company-wiki 自有 `company_raw` 里 7,524 条 active 为 6,511,169,498 B，9,046 条 retired 为 18,641,858,464 B；这些状态均不能推出删除资格。除 catalog 原已标记 `missing` 的 3 条外，登记路径实际存在且大小相符；本轮未算文件 SHA。
+- `companies/` 当前目录元数据为 33,131 个文件、25,189,914,642 B，其中 16,561 个非登记原文路径占 36,886,680 B；须分类后才能识别 sidecar/wiki/遗漏来源，不能直接清除。`source_manifests/` 实际 5,207,479,410 B，`.source_catalog/derived/` 2,826,010,634 B，`index/` 45,052,670 B。
+- `.source_catalog/` 全目录当前为 8,214 个文件、12,277,797,132 B；其中 `retirement/` 6,198,717,464 B、active-only 主库 3,055,796,224 B、`derived/` 2,826,010,634 B、`index/` 45,052,670 B。三个自有数据目录合计 42,675,191,184 B（39.744 GiB），较 F5 前同口径下降 40,406,808,616 B（37.632 GiB）；与 F5 实测净释放 37.630 GiB 口径不同，不以逻辑长度代替磁盘可用空间。
+- 登记 artifact 有 8,191 行、6,714 唯一路径、唯一物理路径逻辑长度 2,794,944,096 B；1,477 路径由多条记录复用，620 路径存在历史大小冲突。这要求按 path + source/version + 当前引用整体核对，不能按 artifact 行数直接计算或删除。
+- 本地 raw 按 catalog SHA 可识别 52 组双路径别名、共 197,690,786 B；“留一份”的 98,845,393 B 为理论候选上限，未新算 SHA、未查完引用、未判所有权或保留期，不能报告成可回收量。
+- 本地引用映射：1,490,530 条当前 evidence span 涉及 1,636 个 source ID；其中 1 个 ID 没有登记原文 location，329 个 ID 在多个 root 有 location，未发现 span 只挂在 retired location 上。8,191 条 artifact 记录都有 source/document ID。跨仓 consumer 引用另受 G0 门禁约束。
+- `source_manifests/` 内一个 643 B manifest 可与已登记 PDF SHA/location 对上；5,207,478,767 B retired-span gzip 仅核了路径和长度，未读取/验证内容，不作为可清理对象。
+- `companies/` 中 5 个文件在 2026-09-26 UTC 之后更新，合计 16,120,320 B：紫金矿业 2023 年报 PDF+sidecar 与 Microsoft 两个 8-K HTML+sidecar，和 revenue-forecast 当前资料工作一致。确切路径查询确认 5 个都未登记到 catalog locations；目录总量已包含它们，但必须保持 `hold`，直到 owner 接管并完成登记。不得为 D0 盘点启动 scan/normalize，也不得进入 D1–D3 清理候选。
+- D0 收据：[`d0_inventory_receipt_2026-09-27.md`](d0_inventory_receipt_2026-09-27.md)。本地 source/location/artifact/span 映射已完成只读盘点；跨仓 consumer 的处置响应仍须 G0/D1 合同冻结，G0 未放行前不做共享接入。
+
+## 隔离检索试点与现有 API 边界（2026-09-27）
+
+- CodeGraph 结构查询和源码复核确认：`EvidenceQueryService` 的 `lookup(source_id, locator)` 是精确定位查询，`list_spans` 只能按 source/document 列出旧 `evidence_spans`；`SectionQueryService` 只能列出 sections。legacy `scripts/search.py` 的 TF-IDF 索引输入是 Wiki 页面，不是新选择包。不能把任一现有接口声称为新叙述证据的全文检索实现。
+- 在本仓新增隔离 prototype `source_catalog/narrative_retrieval.py`：只消费 `summary_scope=selected_evidence_only` 的版本化包，在进程内按证据组建立 BM25 postings；中文 CJK bigram、英文/数字词项；精确短语与覆盖度参与排序。结果保留 source ID/hash、文档类型、选择状态/覆盖、evidence IDs 和原 locators。`blocked`/`skipped_no_narrative` 不进入结果，`needs_review` 命中显式带状态。实例不建文件、不写 catalog、不保存持久索引。
+- `narrative_evidence_pilot.py --package-output` 仅允许与 `--run-root` 联用，且输出必须位于 run-root 的 `outputs/`；文件封装已选 evidence groups，不写整篇 Markdown。G1 P06 定增 + T02 电话会 E2E 已用该包查询中文“向下游装配产业领域的延伸”和英文“too early to speculate”，检查 source SHA、证据 IDs/locator 并断言证据包文件小于两份原文合计；最终 run tree 已清理复原。
+- 历史收据需按 schema 版本区分：bundle v0.2.0 的早期合并回归曾被 P06/T02 对旧 0.1.0 bundle 常量的断言阻断，断言已修正。最终代码上将 12 个检索/回源单测、P06/T02 双样本 E2E 与 12 件 selected-anchor/raw-replay E2E 合并运行，结果 **14 passed in 122.56s**，`ruff check` 通过；pytest 实际 basetemp 已删除并复核不存在，`tests/e2e/.runtime/` 运行前后均不存在。该回归证明已选证据链的 locator/raw replay 与样本链路通过，不证明未选内容召回率/精确率、盲留出集、p95 或生产 catalog/export/consumer。
+- 同一合并回归在 2026-09-27 以唯一新 basetemp 再运行：**14 passed in 130.77s**；pytest 报告实际 basetemp 清理成功且逐路径核实不存在，`tests/e2e/.runtime/` 仍不存在，`tests/e2e` 文件 SHA 集合前后相同。测试范围与上一条相同，不扩大为生产 catalog、provider、Worker 或跨仓 consumer 验收。
+- 当前边界：`NarrativeEvidenceResolver` 仍是 G2 预研，不是正式 package-backed service。bundle v0.2.0 自带 parser/selector 回放合同（含版本、语言/文档类型、options 与 max-selected）；resolver 的调用方仍须显式提供 source ID→raw path 映射。它没有生产授权/撤回、历史时点过滤或正式 query/preview API。现有 `EvidenceQueryService.lookup` 仍不能单独读取不落 `evidence_spans` 的新 package；G2 仍须冻结这些语义及三仓消费行为，不能据此删旧 spans/旧检索路径。
+
+## Resources
+
+- `AGENTS.md`（项目职责边界）
+- `docs/plans/source-catalog-worker-recovery-v5-2026-09-03/`（现有独立 Worker 计划）
+- `docs/plans/core-section-extraction/`（已有章节提取计划）
+- `C:/Users/郑曾波/Projects/earnings-transcripts/earnings-transcripts/`（电话会议抓取与 TXT 样本）
+
+## G1–G4 端到端计划复核（2026-09-27）
+
+- E2E 运行根在开始时必须不存在且由唯一 run-id 独占；所有样本副本、模拟/真实下载、数据库/WAL、日志、锁和派生产物只能写到该根。新下载若不是基线内容，测试后必须确认文件与整个运行根均不存在。
+- 为覆盖“运行目录已创建但进程在写清单前中断”的窗口，控制清单改为运行根的同级文件：先唯一创建 pending、完整写入并 fsync/原子改名，再创建运行根。pending 阶段不允许任何输入/下载/数据库输出；启动恢复只可清理同 ID pending 且运行根不存在的情况。
+- 正常清理和强杀/断电恢复都只识别一个经过校验的 run root；不按 run-manifest 任意列出的路径或通配符删除。PID 必须连同进程启动时间校验以规避 PID 复用；manifest 损坏、进程仍活或发现 reparse/outside-root 写入时失败关闭并保留现场。
+- 大节点矩阵区分真实 E2E 与合同测试：filing-fetch transcript 测试必须经过生产编排调用边界并以 fake tool/provider 替代外部副作用；下游三仓需由各自 reader/adapter 实际消费；Worker 必须是真子进程；原文处置只在 scratch 副本删除。
+- E2E 只作为 G1–G4 大节点审查，不逐张 W/N/D 卡重复全套；日常变更运行受影响目标测试，节点放行才运行对应完整 E2E 组。
+
+## FMP/Koyfin/Seeking Alpha 成本与权限调查（2026-09-27）
+
+- 本地 companies 当前有 246 个目录；这只是预算压力分母，不代表 246 个已核实的美国上市证券。SEC 官方 submissions API 不需要 API key，可供美国披露发现。公司 IR、交易所原始公告仍是其他市场的首选来源。
+- FMP 官网当前公开 Basic 免费 250 calls/day、滚动 30 日 500 MB；Starter $22/月年付、Premium $59/月年付、Ultimate $149/月年付。官网把 Earnings Call Transcripts 列在 Ultimate；官网又声明展示/再分发需要独立数据许可。精确 endpoint 的个人 key 权益必须实测，不能据套餐名称推定。
+- 用户提供的 FMP key 只读 MSFT canary：profile 200、完整参数 SEC search 200、press releases 402、transcript dates 402。SEC 首次 400 是遗漏必填 from/to，补齐后 200；不是权限拒绝。早前完整 transcript canary 为 402。响应体不保存，HTTP 200 不证明全量 coverage 或落盘/只读 export 权利。
+- Koyfin Plus 官网年付档显示 $39/月，网页含 filings/press releases/transcripts；Koyfin FAQ 明示不向用户开放 API，部分数据受供应商下载限制。Seeking Alpha Premium 官网 $299/年、官方列无限 transcript 阅读，但 API/feeds 属单独合作，站点条款限制机器人抓取/索引。二者不能作为 Worker 自动来源。
+- 以 20 家每日、226 家每周五轮、20% 余量计算：FMP Basic 的 SEC 补充发现为 2,076 calls/30 日，首月加一次性 profile 为 2,372；纯 SEC/IR 方案为 0 FMP calls。条件性 Starter 新闻稿方案为 4,200，Premium 加三种日历 feed 为 4,308，Ultimate 事件触发 transcript 为 4,505；这几档互斥，后三级 endpoint 权益未证实。完整假设见 [外部来源成本卡](provider_cost_and_capability_2026-09-27.md)。
+- 当前无需采购。G1e 需先冻结 provider/filing-fetch 合同，再取 20 家核实证券做 30 日增量覆盖、权限和带宽试点；不因网页内容和个人订阅默认取得自动采集或存储权限。只在大节点汇总审查。
+- 本轮再次只读检查 earnings-transcripts 工作树，已见新增但未提交的 transcript_api.py 与 transcript_tool.py；这是旧审计之后的新本地状态，不再把“只有 scraper.py CLI”当作当前事实。filing-fetch 集成与正式跨仓 G1e E2E 仍未完成，G0/Worker 状态不变。
+
+## G1e 电话会议来源权利与原件身份（2026-09-27）
+
+- Motley Fool 官方 2026-01-29 更新的使用条款禁止 agents、robots、scripts 等自动访问/复制/采集站点内容；当前 earnings-transcripts 的 `motley_fool` provider 即使能返回英文 TXT，也不得因此接入 filing-fetch/Worker 自动生产。用户授权修改本地仓库不等于内容方授权。官方来源：https://www.fool.com/legal/terms-and-conditions/fool-rules/
+- Seeking Alpha 官方个人站点条款限制机器人下载、索引和抓取；Koyfin FAQ 表示没有开放给用户的 API。二者适合人工对照，不进入自动化覆盖分子。来源：https://about.seekingalpha.com/terms ; https://www.koyfin.com/help/faq/can-i-get-the-data-via-api/
+- SEC 官方允许有界程序访问并要求公平访问（目前公开指引上限 10 requests/second）；已有 8-K 实例在 EX-99.1/99.2 附件提供完整电话会议文字，但这不是所有公司的普遍做法。来源：https://www.sec.gov/about/developer-resources ; https://www.sec.gov/Archives/edgar/data/108516/000156459020058036/0001564590-20-058036-index.htm
+- NVIDIA IR 挂出的 Q2 2027 transcript PDF 自带 FactSet CallStreet 版权标识；“发行人 IR 链接”不能自动推出批量留存、TXT 派生和 export 的权利。来源：https://investor.nvidia.com/files/content_files/TRANSCRIPT_-NVIDIA-Corp-NVDA-US-Q2-2027-Earnings-Call-26-August-2026-5_00-PM-ET.pdf
+- G1e 需保存原始 HTML/PDF/TXT 的原件 SHA，并把派生英文 TXT 的转换版本、parent SHA/locator 关联回原件。当前隔离 CWP writer/importer spike 只证明 TXT 进入 catalog 和精确复用，不证明原始网页已不可变留存、来源权利、filing-fetch 编排或生产 G1e 通过。许可证/站点条款需逐 provider、逐动作审查，缺项默认拒绝。
+
+
+### SEC EX-99 小样本（3 个 2026 附件 + 版权反例）
+
+- TTM Technologies 2026-08-06 的 8-K/A 补交完整电话会 EX-99.2，HTML 直接包含发言人、管理层业务进展及 Q&A，可做“原始 HTML → 带 locator 英文 TXT”的解析样本：https://www.sec.gov/Archives/edgar/data/1116942/000119312526337923/d142017dex992.htm
+- FitLife Brands 2026-04-07 8-K 的 EX-99.1 与 Global Indemnity 2026-03-12 8-K 的 EX-99.1 也包含电话会议文字；三份样本的网页文本没有检出 `Copyright` 或 `FactSet` 字样，但这只是有限表面检查，不是版权/留存许可的法律结论。来源：https://www.sec.gov/Archives/edgar/data/1374328/000143774926011607/ex_942831.htm ; https://www.sec.gov/Archives/edgar/data/1494904/000119312526103797/d126781dex991.htm
+- 反例：SEC 内也有附带 FactSet CallStreet 版权字样的电话会议附件，故 `sec.gov` 域名和 8-K EX-99 类型不能直接替代逐附件权利审查：https://www.sec.gov/Archives/edgar/data/48039/000119312521235407/d211506ddefa14a.htm
+- 这个便利样本只证明存在可发现的 HTML 全文，不代表在用户跟踪的公司或最近 30 日具有足够覆盖，也未下载到本地或测试爬虫。G1e 的 20 家核实证券覆盖/增量计数仍待做。
+
+
+## G1e 现有可复用代码合同（2026-09-27 再核）
+
+- `source_catalog.authorization.DownloadAuthorization` 已精确绑定 GapPlan hash、RuntimePolicySnapshot hash、provider/accession、件数/字节上限与 expiry；`validate_download_authorization` 返回拒绝理由。provider 内容权利要与它取交集，不另造相同的下载许可。`RuntimePolicySnapshot` 的作用是激活/根政策，不是内容许可证。
+- `SourceManifest` 的 source ID 由原件 SHA 决定；`artifacts` 行已有 `source_id`、`source_sha256`（升级列）、`generator_name/version`、`content_sha256`、`metadata_json`。TXT 派生应绑定原件 source ID/hash，并把文本 locator 映射做成受校验的版本合同。当前架构没有现成受校验的 HTML→TXT parent/locator 字段，不能靠任意 metadata_json 字符串假装完成。
+- 隔离分支 `provider_use_policy.py` 用受 hash 保护的只读规则、逐动作/时间/host/path/内容类别检查；无政策、站点禁止名单、缺动作/过期/撤销/歧义、导出范围不符均拒绝。`authorize_transcript_fetch` 复用现有精确授权，还要求候选 payload 中 market/security_id 与请求一致。没有正式政策文件，也未接 filing-fetch 或 earnings-transcripts 网络调用；只验证 prefetch 决策。
+
+
+- 现有 `normalizer._html_text_markdown` 用 BeautifulSoup+markdownify 生成整篇 Markdown，只创建一个 `paragraph_index=0` 的 ParserResult/locator；这无法为电话会议每个 speaker turn 和问答建立足够细的原件定位。新路径应只对通过权限闸门的电话会议 HTML 运行专用轻量抽取，保留原始 HTML bytes，TXT 行/说话人单元逐条映射到原件 byte/DOM locator；不能借旧 `normalize_catalog` 全量产物来绕过低空间目标。
+
+## earnings-transcripts 与商业阅读平台并排核查（2026-09-27）
+
+- 只读盘点现有 `transcripts/`：6 家公司 43 份英文 TXT，43 份对应双语 JSON、43 份夹排 TXT，所有英文头部 `Source: motley_fool`。英文 2,441,306 B，双语 6,770,745 B，夹排 6,731,684 B，summary 9,996 B，总 15,953,731 B。配置为 7 个 ticker，其中 GENB 暂无本地英文文件。这是现存库存，不是来源实时覆盖率；体积约 15.2 MiB，不能解释 company-wiki 旧库的 46 GiB。
+- 已提交的 `scraper.py` 是“最近 N 季”批量 CLI，有增量跳过、自动翻译、Web 阅读器和单实例锁；原件 HTML 未保留，`--output` 不隔离日志/锁/cache。工作树里未提交的新 `transcript_api.py`/`transcript_tool.py` 才支持确切 FY/Q、as-of、无翻译正文、双 SHA 与 JSON subprocess；但不返回原始 HTML/FMP JSON 字节，无法证明 TXT 行到原件 byte 的 locator，FMP `call_date` 不是可核实的 publication date，尚未接 filing-fetch 或权限闸门。新接口测试是 fake response 合同，当前 FMP key 的正文端点真实返回 402。
+- Koyfin 官网 Plus 年付显示 $39/月并列 filings、新闻稿、transcripts，但官方 FAQ 不开放用户 API。Seeking Alpha Premium $299/年并列无限 transcript 阅读，个人条款限制机器人下载/索引/抓取。二者相对现有工具可能改善人工阅读覆盖与搜索体验，**实际独有覆盖、时效和价值尚未测试**；都不能直接填补 company-wiki 自动原件/locator 合同。比较方法和购买门槛见[对照卡](earnings_transcripts_vs_platforms_2026-09-27.md)。
+- 隔离 `transcript_material.py` 可从合规原始 HTML/TXT 产生无翻译英文行、原件字节范围及双方 SHA；`load_transcript_material` 重算确定性转换验证持久化 lineage，当前没有 catalog artifact 持久化。首次把重算误放在生成函数内，4 项出现递归；移到加载边界后合并 27 项通过，且 `ruff`/`git diff --check` 通过。此收据只涉及 fake 原件与临时 catalog，不是 provider 下载、原件来源许可或跨仓 E2E。
+
+## 派生 transcript artifact 与 revenue-forecast 同步复核（2026-09-27）
+
+- 再读 revenue-forecast 最新实际资料：progress Round 120、register §162、owner decisions §39；I-16-B 的部署结果已 `accepted_scoped` 落定，Worker 保持 `paused`。register 将 I-17-A 列为在飞且带真实观察 attempt；其来源卡模板仍为 `planned`，所以应按 register/attempt 观察，不能声称观察窗口已完成。I-17-B 为后继卡。I-05-C/I-06-A 的开放项仍足以阻止 G0。本轮没有写 RF。
+- 新加 `transcript_text` 不能只 insert 到现有 `artifacts` 表：`SourceBundle` 依据 `ROLE_DEPENDENCIES` 形成 `KNOWN_ARTIFACT_ROLES`，未知 role 会产出 `artifact_role_unknown`；`artifact_read_model.read_artifact(s)` 同样 fail closed。对应全链还包括 `GENERATOR_REGISTRY`、`scripts/resolve_bundle.py` 的 `_ARTIFACT_ROLES`、producer event 触发器分类及 role producer contract 测试。新增 role 属共享读/导出合同变更；G0 前不动生产 bundle/schema。
+- 为守低空间目标，逐行原文 locator 不应再全量复制到 artifact `metadata_json`：immutable raw 保留 source ID/hash；TXT 只保留一份和短 metadata；同版本 extractor 可确定性重算候选 byte locator；只有入选 evidence/package 保存最终 locator。读取时验证 raw SHA、TXT SHA 和 extractor/version，不匹配则重新提取或拒绝。该方案已补入 [G1e 来源合同](transcript_provider_rights_contract_v1.md) 与总计划。
+
+## filing-fetch × earnings-transcripts 当前互操作缺口（2026-09-27）
+
+- 只读检查 E-T 新工具源码、CLI、README 和本地 task_plan：工具为 `transcript_tool.py` stdin JSON 子进程（schema `earnings-transcript-request/1` / result `/1`），不是 MCP；精确 FY/Q、as-of、未翻译文本、payload/text hashes、双重授权位和无持久文件副作用都已有。它仅实现 Motley Fool/FMP。
+- 成功响应没有原始 provider payload（HTML/JSON）bytes，也没有 final/effective URL；MF fetch 内部拿到 effective URL 后只返回规范候选 URL。filing-fetch 不能凭 hash 重新构造这些 bytes，也不能让 company-wiki 重新校验原件或建原文 locator。因此跨仓不能直接把 `content_utf8` 写为 canonical source 而声称来源原件完整。已形成[跨仓集成合同草案](filing_fetch_transcript_integration_v1.md)，要求 E-T 可选择返回有界原件字节/MIME/final URL，CWP 重新解析和哈希。
+- 检查 filing-fetch 当前代码：`FILING_REQUEST_SCHEMA_VERSION=1.2`，`SKILL.md` 用户文档还标 1.1；strict request whitelist 没有 companion key。filing 流程返回一个 handle，下载失败与 companion 部分失败尚无独立 response contract；`--allow-download` 授权 filing 的下载，不能自动授权电话会。
+- 用户要求“下载公司文档时也同步获取电话会”须表达为可选 companion exact FY/Q；季度报告和电话会 period 不能通过名字猜；先 resolve/reuse 已存在 transcript，再查权利和授权，再 provider fetch、post-fetch check、CWP canonical import。电话会失败必须保留 filing success。外网 fetch 不得持有 company-wiki catalog lock；Worker 只在短 canonical import transaction 使用既有协调，尊重用户 pause。
+- 当前 real-provider gate 仍关闭：Motley Fool 自动访问受限，Seeking Alpha 无适用 adapter 且个人订阅不授权抓取；FMP 实测 HTTP 402 且 publication date/rights 未解决。后续 G1e 完成前仅可 fake provider 测试；本地 E-T task_plan 也将此阶段拆为 repo-specific、要求同步 revenue-forecast snapshot，不得借此改 RF。
+- 2026-09-27 隔离实现把 lineage schema 升为 v2，去掉全量 per-line locator 数组，仅保留 `line_count` 与原件/派生物 hashes、sizes、MIME、extractor version。`load_transcript_material` 必须收到从 canonical receipt 获得的 `expected_mime_type`，并以原件重新抽取、逐字段比对紧凑 lineage 和派生 TXT bytes；持久化 locator 或伪造 MIME 会被拒绝。此处只证明 helper 的可重放性与小范围合同，不量化整个 company-wiki 的节省，也没有把 helper 接入生产 artifacts。
+- 下载后安全门禁缺口已实测并补为隔离 `validate_transcript_fetch_result`：下载前通过仍不够；必须用新加载且 hash 与预取 pin 一致的 policy，再核对 final URL 的 automated_fetch/retain_original/derive_text 三个动作、request/candidate/receipt 身份、2xx、`text/html|text/plain`、授权 byte cap、时间、staging containment、文件类型、实际 byte size 与 SHA。拒绝时此 helper 不导入数据。`DownloadReceipt` 当前没有 effective redirect URL 持久字段，因此真实 E2E 先用无重定向 fixture；上线前需记录 effective URL sidecar，或要求 adapter 拒绝 redirect。该处理尚未在 `AcquisitionCoordinator` 或 production writer 接线。
+
+## 2026-09-27 — 免费平台层是否值得成为 provider
+
+- Koyfin 官方 pricing 当前把 Free 定义为有限 news/company snapshot、2 年 financials/1 年 estimates；filings/press releases/transcripts 列在 Plus。Free 对“业务叙述 + 电话会原件”没有可证的新增自动覆盖，故不做 connector。Koyfin 条款还限制再处理 Information；只可作为用户自己看的候选发现界面。
+- Seeking Alpha 官方称有免费 earnings-call transcripts、每季覆盖约 4,500 calls；这是可选人工发现线索。其当前条款同时许可个人非商业阅读/下载，并明文禁止 robot、search/retrieval application/process 自动下载、检索、索引、data mine、scrape 或 harvest，因此不由 company-wiki/filing-fetch/Worker 获取或保存正文。只保留人工查阅链接，优先追到 issuer IR/SEC 原件。
+- 决策：不为了 provider 数量而接入。company-wiki 只允许把人工外链作为来源发现线索，不复制站点正文、评级或作者观点；机器接入只选权利明确且能保存原件/重放 locator 的发行人/SEC 逐件许可来源。详细依据见 [Koyfin / Seeking Alpha 免费层对照](earnings_transcripts_vs_platforms_2026-09-27.md)。
+
+## 2026-09-27 — G1e-C importer 实施复核
+
+- 对 `CanonicalSourceWriter.import_staged` 的调用面使用 CodeGraph 检查后，采取可选 namespaced provenance extension；旧调用不传参数时 sidecar 字节结构不变。transcript importer 将 `DownloadAuthorization.receipt_hash`、provider-use policy hash、effective URL、raw SHA、adapter/extractor 版本和通过的动作保存在 `provenance_extensions.transcript_acquisition`，扩展不超过 16 KiB；不保存正文副本或逐行 locator。
+- 预检复核发现 `authorize_transcript_fetch` 组合了 provider/accession/plan/runtime policy，但此前没有显式比较 `DownloadAuthorization.request_id` 与当前 `SourceRequest.request_id`。已改为不匹配即拒绝，并将 request/candidate ID 放入 admission 供 importer 绑定；合同测试覆盖另一请求的授权被拒绝。
+- E-T discovery/fetch result 的 `exchange` 是请求参数回显，不是独立验证过的交易所。caller 必须从明确 security identity 映射出 `nasdaq` 或 `nyse`，禁止 `auto` 进入候选授权；CWP importer 对未知 venue fail closed，并以不区分大小写方式绑定 E-T 小写输出与 CWP identity。
+- CWP library core 只在 synthetic provider fixture 下成功；`fixtures.invalid` fake E2E 覆盖坏 SHA、错 request/document、外部 effective URL、错 venue/period、重复 JSON key、未授权 admission 和成功 raw+sidecar import。相关 **56 项**核心/writer/acquisition/sidecar 合同通过，不证明真实 provider 权利、stdin CLI、filing-fetch 编排或 Worker 运行。
+
+## 2026-09-27 — 数据湖边界与目录泄漏再调查（只读）
+
+- 用户提出的“目录是底层细节”在**业务身份与消费者读取**层成立；生产 CWP 已有 `sources/documents/locations`、多 root 配置和同 SHA 候选回退。`canonical_writer` 固定 company_raw 写目标与外部只读根属于写入所有权，不应为追求表面平权而取消。Dropbox 占位、来源权利/公开时间和外发许可仍须按具体来源/动作处理。
+- 2026-09-07 旧诊断有两处时效变化：resolver 已逐份验证同 SHA 副本并回退，且调用统一 reusable policy。仍存在 scanner 旧版按 root kind 选择文档默认类型/元数据容器与按 priority 合并、normalizer 自行选路径、`SourceHandle.canonical_path` 外泄。filing-fetch 与 RF 又直接读绝对路径；RF 导入 CWP 内部 DAG，CWP DAG 反含 `consumer_analysis`。这是跨仓职责耦合，不能以“所有文件搬到 company 目录”解决。
+- `resolver.read_verified_bytes` 是进程内原语，尚无等价跨进程读取合同。正式 reader 需要 ID/版本定位、受控字节交付或短期物化、同版本校验、云占位/撤回/权限状态与清理；pilot 的调用方 raw-path map 是隔离试验的临时接缝。确切代码证据、责任表、R4 复用和大节点测试见[数据湖边界复核](data_lake_boundary_review_2026-09-27.md)。本轮未证明 scanner 的 root priority 在真实同 SHA 样本上已造成输出差异，列为隔离验证问题。

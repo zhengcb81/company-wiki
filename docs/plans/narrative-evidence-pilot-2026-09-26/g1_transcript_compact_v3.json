@@ -1,0 +1,651 @@
+{
+  "schema_version": "narrative-g1-pilot/0.1.0",
+  "runner": "scripts/narrative_evidence_pilot.py",
+  "read_only_roots": [
+    "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\transcripts"
+  ],
+  "generated_from_manifest": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\narrative-evidence-pilot-2026-09-26\\g1_sample_manifest.json",
+  "elapsed_seconds": 1.03,
+  "samples": [
+    {
+      "sample_id": "T01",
+      "title": "MSFT_Q4_2026_earnings_call.txt",
+      "source_sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+      "source_file_bytes": 66324,
+      "document_kind": "investor_call_transcript",
+      "status": "selected",
+      "coverage_complete": true,
+      "page_count": 0,
+      "pages_read": 0,
+      "opaque_pages": [],
+      "table_scan_page_count": 0,
+      "deferred_table_pages": [],
+      "focus_pages": [],
+      "selected_focus_pages": [],
+      "line_count": 340,
+      "parse_errors": [],
+      "source_units": 498,
+      "candidate_count": 13,
+      "selected_span_count": 13,
+      "locator_roundtrip_verified_count": 13,
+      "locator_roundtrip_failed_count": 0,
+      "locator_roundtrip_failed_span_ids": [],
+      "dropped_financial_count": 0,
+      "omitted_candidate_count": 0,
+      "selected_text_bytes": 1726,
+      "summary_input_bytes": 8166,
+      "summary_input_to_source_ratio": 0.123123,
+      "elapsed_seconds": 0.693,
+      "selected_evidence_preview": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:de6730543e17d5a4504fbb5b983ef54197ed32dd00a4df3b5f7d00625c09f9a3",
+          "locator_v1": "loc:v1/paragraph:135/chars:2554-2582",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 135,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": 2554,
+            "char_end": 2582
+          },
+          "quality_flags": [],
+          "topics": [
+            "new_business"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "specific_business_event",
+            "management_statement"
+          ],
+          "source_role": "management",
+          "excerpt": "It starts with model choice."
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:2723afa2c889a58123eaf6e0a02a95eb46327ee5daf7049629398026d23cac8c",
+          "locator_v1": "loc:v1/paragraph:135/chars:6572-6672",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 135,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": 6572,
+            "char_end": 6672
+          },
+          "quality_flags": [],
+          "topics": [
+            "new_business"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "specific_business_event",
+            "management_statement"
+          ],
+          "source_role": "management",
+          "excerpt": "Beyond model choice, data, and context, we are building Foundry as the complete app and agent stack."
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:f1afaf3b067fa129a52e3ad1df99bb4de3cf21e2c49987d0fb5e109ecf5602ad",
+          "locator_v1": "loc:v1/paragraph:237/chars:2248-2354",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 237,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": 2248,
+            "char_end": 2354
+          },
+          "quality_flags": [],
+          "topics": [
+            "new_business"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "specific_business_event",
+            "management_statement"
+          ],
+          "source_role": "management",
+          "excerpt": "You will maybe need multiple models to even remediate some challenges that get caused by one model, right?"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:a03fd0855eadf0dc52713646084f51da91050c82384194d67f361774fb3f2b5e",
+          "locator_v1": "loc:v1/paragraph:253/chars:776-919",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 253,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": 776,
+            "char_end": 919
+          },
+          "quality_flags": [],
+          "topics": [
+            "industry_dynamics"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "specific_business_event",
+            "current_industry_context",
+            "management_statement"
+          ],
+          "source_role": "management",
+          "excerpt": "And because of the supply-demand imbalance, we've been talking about, when we can make efficiency gains, they are quickly monetized in quarter."
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:95e5afd04cccd8b3ec8e40ded2604d3396cb97c3030e98bca270b856af96d2d5",
+          "locator_v1": "loc:v1/paragraph:263/chars:91-205",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 263,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": 91,
+            "char_end": 205
+          },
+          "quality_flags": [],
+          "topics": [
+            "industry_dynamics"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "specific_business_event",
+            "current_industry_context",
+            "management_statement"
+          ],
+          "source_role": "management",
+          "excerpt": "Currently, the situation is obviously that demand exceeds available supply in a sort of relatively extreme moment."
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:22ba1cad79c16d2ec285d2e799fc429c24614858b72933bcc277f1d18b96b87d",
+          "locator_v1": "loc:v1/paragraph:235/chars:13-188",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 235,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": 13,
+            "char_end": 188
+          },
+          "quality_flags": [],
+          "topics": [],
+          "selection_reasons": [
+            "linked_question_context"
+          ],
+          "source_role": "analyst",
+          "excerpt": "Satya, maybe I'll start away from the numbers and ask if you could spend a minute and elaborate on your opening comments about model choice and the protection of corporate IP."
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:674f7ab55d2c813f67ccd0bb78cc1990b81becd691739af0f4739b4b8c9bede3",
+          "locator_v1": "loc:v1/paragraph:235/chars:224-404",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 235,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": 224,
+            "char_end": 404
+          },
+          "quality_flags": [],
+          "topics": [],
+          "selection_reasons": [
+            "linked_question_context"
+          ],
+          "source_role": "analyst",
+          "excerpt": "First, how material do you think traction could be for open and custom models over the next year or 2, knowing that many enterprises might be initially reticent to use open models?"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:d21f44af33725623f259bfc8169ad94c7331990329f64feefa727d4bf9b6de69",
+          "locator_v1": "loc:v1/paragraph:235/chars:405-534",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 235,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": 405,
+            "char_end": 534
+          },
+          "quality_flags": [],
+          "topics": [],
+          "selection_reasons": [
+            "linked_question_context"
+          ],
+          "source_role": "analyst",
+          "excerpt": "And secondly, how exactly does Microsoft benefit from this shift knowing that you've also got fairly large frontier lab exposure?"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:c6c5bab70d26c25eebefa45577d5e7d195310c85a9ea79471eb798fc18feb904",
+          "locator_v1": "loc:v1/paragraph:251/chars:0-241",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 251,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": 0,
+            "char_end": 241
+          },
+          "quality_flags": [],
+          "topics": [],
+          "selection_reasons": [
+            "linked_question_context"
+          ],
+          "source_role": "analyst",
+          "excerpt": "Amy, impressive acceleration in Azure up to 43% going to mid-40s. I guess the questions around the underlying drivers, what you and Satya are seeing in terms of just what's driving this and mainly the question is around capacity constraints"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:f9a1a5265fc6a0cc3814b6ae8f598c7a480d0fd911b26ac2d15295a415d9e425",
+          "locator_v1": "loc:v1/paragraph:251/chars:242-284",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 251,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": 242,
+            "char_end": 284
+          },
+          "quality_flags": [],
+          "topics": [],
+          "selection_reasons": [
+            "linked_question_context"
+          ],
+          "source_role": "analyst",
+          "excerpt": "Are we just still in the same environment?"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:671169f1d263f722cba79a6b7991df805e1b9fc9aa43dfd5c769b9cc16065008",
+          "locator_v1": "loc:v1/paragraph:251/chars:285-367",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 251,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": 285,
+            "char_end": 367
+          },
+          "quality_flags": [],
+          "topics": [],
+          "selection_reasons": [
+            "linked_question_context"
+          ],
+          "source_role": "analyst",
+          "excerpt": "Or is this Microsoft just executing better given the constraints we're all seeing?"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:e1b7f168c52b86fa31c3a6e0026cab3dc94dc87017fb91a1491d9b6d638ea2f2",
+          "locator_v1": "loc:v1/paragraph:261/chars:252-387",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 261,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": 252,
+            "char_end": 387
+          },
+          "quality_flags": [],
+          "topics": [],
+          "selection_reasons": [
+            "linked_question_context"
+          ],
+          "source_role": "analyst",
+          "excerpt": "How does Microsoft protect itself if there really is overcapacity and overbuilding of data centers or overbuilding of chips, et cetera?"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:3ddfeb351fda3d3fff66e53b679c9ea0688ecf1cd7ff784ac94b35cf77c5c73e",
+          "locator_v1": "loc:v1/paragraph:261/chars:388-639",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 261,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": 388,
+            "char_end": 639
+          },
+          "quality_flags": [],
+          "topics": [],
+          "selection_reasons": [
+            "linked_question_context"
+          ],
+          "source_role": "analyst",
+          "excerpt": "And on the flip side of that, how do you manage through the hardware price increases that we're seeing, the component prices and that it doesn't just drive you to either massively drive up the price of your offerings or negatively impact yo"
+        }
+      ]
+    },
+    {
+      "sample_id": "T02",
+      "title": "NVO_Q4_2024_earnings_call.txt",
+      "source_sha256": "d00e2a4537b86628ef019180e27de5ae0a57e715770ddf15135bd75627a6d59e",
+      "source_file_bytes": 66597,
+      "document_kind": "investor_call_transcript",
+      "status": "selected",
+      "coverage_complete": true,
+      "page_count": 0,
+      "pages_read": 0,
+      "opaque_pages": [],
+      "table_scan_page_count": 0,
+      "deferred_table_pages": [],
+      "focus_pages": [],
+      "selected_focus_pages": [],
+      "line_count": 604,
+      "parse_errors": [],
+      "source_units": 645,
+      "candidate_count": 12,
+      "selected_span_count": 12,
+      "locator_roundtrip_verified_count": 12,
+      "locator_roundtrip_failed_count": 0,
+      "locator_roundtrip_failed_span_ids": [],
+      "dropped_financial_count": 0,
+      "omitted_candidate_count": 0,
+      "selected_text_bytes": 1443,
+      "summary_input_bytes": 7642,
+      "summary_input_to_source_ratio": 0.11475,
+      "elapsed_seconds": 0.334,
+      "selected_evidence_preview": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:7cb62a7f73f274c3d46ea4071f8a4d2f08997787b33b08723b4d346c41687759",
+          "locator_v1": "loc:v1/paragraph:193/chars:1016-1104",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 193,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": 1016,
+            "char_end": 1104
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "specific_business_event",
+            "management_statement"
+          ],
+          "source_role": "management",
+          "excerpt": "And what we can say about that is we are shipping more of the starter doses as we speak."
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:c11f4a81fcbf127500aa57e0cf45c1d8d373f3f9b151e027f342df195e1d2bb6",
+          "locator_v1": "loc:v1/paragraph:193/chars:1105-1272",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 193,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": 1105,
+            "char_end": 1272
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "specific_business_event",
+            "management_statement"
+          ],
+          "source_role": "management",
+          "excerpt": "Those started doses are making their way through the supply chain from the wholesaler to a retailer, which is also new for us to have this amount of new starter doses."
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:a5684e9c59ab9c2f4903bc4ea611c7475568d4ded9a30dbfbffc82179e25b5de",
+          "locator_v1": "loc:v1/paragraph:193/chars:1274-1388",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 193,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": 1274,
+            "char_end": 1388
+          },
+          "quality_flags": [],
+          "topics": [
+            "industry_dynamics"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "specific_business_event",
+            "management_statement"
+          ],
+          "source_role": "management",
+          "excerpt": "And now it's our opportunity to pull through this market expansion and connect more people with Wegovy in the U.S."
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:756ec0168f6a2b3c70a1655a20336519f32944d3bbb6b09dca7de7d205b08094",
+          "locator_v1": "loc:v1/paragraph:193/chars:158-226",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 193,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": 158,
+            "char_end": 226
+          },
+          "quality_flags": [],
+          "topics": [
+            "industry_dynamics"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "specific_business_event",
+            "management_statement"
+          ],
+          "source_role": "management",
+          "excerpt": "And so the story continues to be about market expansion for obesity."
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:7cc150ccc2f03eacfaccc413ba2ee060a2a0410b6e2edf135bd1bcbf41c7d467",
+          "locator_v1": "loc:v1/paragraph:67/chars:765-918",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 67,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": 765,
+            "char_end": 918
+          },
+          "quality_flags": [],
+          "topics": [
+            "industry_dynamics"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "specific_business_event",
+            "current_industry_context",
+            "management_statement"
+          ],
+          "source_role": "management",
+          "excerpt": "The positive volume development was also reflected in the Wegovy prescription trends in the U.S., which currently is around 200,000 weekly prescriptions."
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:11f165c2387fada120d47fef0c13e902a6c84d09e3954337f1032befded1ff6c",
+          "locator_v1": "loc:v1/paragraph:81/chars:11086-11252",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 81,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": 11086,
+            "char_end": 11252
+          },
+          "quality_flags": [],
+          "topics": [
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "specific_business_event",
+            "management_statement"
+          ],
+          "source_role": "management",
+          "excerpt": "Specifically, we expect the first Phase 3 results from CagriSema, as well as Phase 2 results for both subcutaneous and amycretin and once weekly GIP/GLP-1 co-agonist."
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:b68394838b0f833db11f2d9ab53d622930ff56320fe25f6f796b7c8ef0e595b1",
+          "locator_v1": "loc:v1/paragraph:81/chars:11439-11526",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 81,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": 11439,
+            "char_end": 11526
+          },
+          "quality_flags": [],
+          "topics": [
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "specific_business_event",
+            "management_statement"
+          ],
+          "source_role": "management",
+          "excerpt": "Furthermore, we also expect Phase 2 results from the once-weekly GLP-1, GIP co-agonist."
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:dcab31aaa80367f73c34a7cf7d70743f2910d3332f45b2d7b00a9e72f0c6248b",
+          "locator_v1": "loc:v1/paragraph:81/chars:981-1154",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 81,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": 981,
+            "char_end": 1154
+          },
+          "quality_flags": [],
+          "topics": [
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "specific_business_event",
+            "management_statement"
+          ],
+          "source_role": "management",
+          "excerpt": "In line with regulatory guidelines, the purpose of the trial was to demonstrate superiority of CagriSema over placebo, cagrilintide and semaglutide on body weight reduction."
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:cff3dfae4e1841b211593ef4315a30f2a36f0f4a16bb5188683ce72741c7b0b4",
+          "locator_v1": "loc:v1/paragraph:183/chars:216-241",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 183,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": 216,
+            "char_end": 241
+          },
+          "quality_flags": [],
+          "topics": [],
+          "selection_reasons": [
+            "linked_question_context"
+          ],
+          "source_role": "analyst",
+          "excerpt": "What can you do about it?"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:4926dc693ee069f8f9553a0a1a74b0de830d61602f4b81812d9934967845192b",
+          "locator_v1": "loc:v1/paragraph:183/chars:242-309",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 183,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": 242,
+            "char_end": 309
+          },
+          "quality_flags": [],
+          "topics": [],
+          "selection_reasons": [
+            "linked_question_context"
+          ],
+          "source_role": "analyst",
+          "excerpt": "And how should we anticipate the growth in prescriptions from here?"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:ca221e76204ef74d26f80a9c594e07dce133021e6299e6bc86fda64b06636dc0",
+          "locator_v1": "loc:v1/paragraph:183/chars:368-547",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 183,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": 368,
+            "char_end": 547
+          },
+          "quality_flags": [],
+          "topics": [],
+          "selection_reasons": [
+            "linked_question_context"
+          ],
+          "source_role": "analyst",
+          "excerpt": "But based on that, and what you've seen in REDEFINE 1 and the tolerability that you've shown, how do you think the profile of CagriSema will stack up versus rebound in REDEFINE 4?"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:a54a24951ded526e45495455b0eb3741e00d95ba64868abc6043b36e953109f0",
+          "locator_v1": "loc:v1/paragraph:183/chars:59-215",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 183,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": 59,
+            "char_end": 215
+          },
+          "quality_flags": [],
+          "topics": [],
+          "selection_reasons": [
+            "linked_question_context"
+          ],
+          "source_role": "analyst",
+          "excerpt": "Firstly, on Wegovy, could you give us some more details of what's holding back the U.S.\n\nprescriptions in the last quarter of '24 and the early part of '25?"
+        }
+      ]
+    }
+  ],
+  "totals": {
+    "documents": 2,
+    "source_file_bytes": 132921,
+    "summary_input_bytes": 15808,
+    "selected_span_count": 25,
+    "locator_roundtrip_verified_count": 25,
+    "locator_roundtrip_failed_count": 0,
+    "selected_documents": 2,
+    "partial_documents": 0,
+    "skipped_documents": 0,
+    "needs_review_documents": 0,
+    "blocked_documents": 0
+  },
+  "limitations": [
+    "This is a 12-document pilot, not a corpus recall estimate.",
+    "The selector uses deterministic candidate rules; a model did not generate summaries.",
+    "summary_input_bytes excludes database indexes, filesystem allocation and future exports.",
+    "A status of selected means the parser covered the file, not that a human approved every candidate.",
+    "Locator round-trip verifies same-parser extraction; it does not certify downstream support for table-cell sub-locators."
+  ]
+}

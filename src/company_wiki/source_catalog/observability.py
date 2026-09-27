@@ -359,6 +359,10 @@ def redact_text(text: Any) -> Any:
     return _redact_assignments(redacted)
 
 
+# Complexity ratchet (FC-1204, owner §四十二 裁定一, 2026-09-27): split only;
+# behaviour unchanged.  `_redact_assignments` was 27 (frozen 6): the key walk,
+# the value walk and the quote handling are separate top-level functions now,
+# and the dispatcher keeps every redaction branch — no redaction rule dropped.
 def _redact_assignments(text: str) -> str:
     """Single pass over ``key = value`` / ``key: value`` forms.
 
@@ -378,42 +382,14 @@ def _redact_assignments(text: str) -> str:
             index += 1
             continue
 
-        # walk back over optional whitespace, then over the key characters
-        cursor = index
-        while cursor > 0 and text[cursor - 1] in _INLINE_SPACE:
-            cursor -= 1
-        key_end = cursor
-        while cursor > 0 and text[cursor - 1] in _KEY_CHARS:
-            cursor -= 1
-        key = text[cursor:key_end]
-        boundary_ok = cursor == 0 or text[cursor - 1] not in _KEY_CHARS
-        if not (key and boundary_ok and key_is_credential(key)):
+        if not _credential_key_before_separator(text, index):
             out.append(char)
             index += 1
             continue
 
         # the value: a quoted string, or a run of non-delimiter tokens
-        value_start = index + 1
-        while value_start < length and text[value_start] in _INLINE_SPACE:
-            value_start += 1
-        if value_start < length and text[value_start] in _QUOTES:
-            closing = _find_closing_quote(text, value_start)
-            if closing == -1:                      # unterminated quote: redact the tail
-                value_end = length
-            else:
-                value_end = closing + 1
-        else:
-            # I-14-D (C13 narrowing): the value is ONE token.  It stops at any
-            # whitespace INCLUDING newlines, so a diagnostic key after the
-            # credential (`doc=17`, `stage=...` on the next line) survives.
-            # value_end == value_start after the loop means "no value at all";
-            # the `value_end <= value_start` guard below leaves the text alone,
-            # exactly as before.
-            value_end = value_start
-            while (value_end < length
-                   and text[value_end] not in _VALUE_STOP_CHARS
-                   and not text[value_end].isspace()):
-                value_end += 1
+        value_start = _assignment_value_start(text, index + 1)
+        value_end = _assignment_value_end(text, value_start)
         if value_end <= value_start:
             out.append(char)
             index += 1
@@ -428,6 +404,50 @@ def _redact_assignments(text: str) -> str:
         out.append(REDACT)
         index = value_end
     return "".join(out)
+
+
+def _credential_key_before_separator(text: str, separator_at: int) -> bool:
+    key_end = _scan_left_over(text, separator_at, _INLINE_SPACE)
+    key_start = _scan_left_over(text, key_end, _KEY_CHARS)
+    return _is_credential_key(text, key_start, key_end)
+
+
+def _scan_left_over(text: str, cursor: int, allowed: frozenset[str]) -> int:
+    while cursor > 0 and text[cursor - 1] in allowed:
+        cursor -= 1
+    return cursor
+
+
+def _is_credential_key(text: str, key_start: int, key_end: int) -> bool:
+    if key_start > 0 and text[key_start - 1] in _KEY_CHARS:
+        return False
+    key = text[key_start:key_end]
+    return bool(key and key_is_credential(key))
+
+
+def _assignment_value_start(text: str, cursor: int) -> int:
+    while cursor < len(text) and text[cursor] in _INLINE_SPACE:
+        cursor += 1
+    return cursor
+
+
+def _assignment_value_end(text: str, value_start: int) -> int:
+    if value_start < len(text) and text[value_start] in _QUOTES:
+        closing = _find_closing_quote(text, value_start)
+        if closing == -1:  # unterminated quote: redact the tail
+            return len(text)
+        return closing + 1
+    return _unquoted_assignment_end(text, value_start)
+
+
+def _unquoted_assignment_end(text: str, value_start: int) -> int:
+    # I-14-D (C13): consume one token, preserving the next diagnostic line.
+    cursor = value_start
+    while (cursor < len(text)
+           and text[cursor] not in _VALUE_STOP_CHARS
+           and not text[cursor].isspace()):
+        cursor += 1
+    return cursor
 
 
 def _find_closing_quote(text: str, quote_at: int) -> int:
@@ -459,14 +479,20 @@ def exception_cause_types(exc: BaseException) -> list[str]:
     names: list[str] = []
     seen: set[int] = set()
     current = exc
-    while True:
-        nxt = current.__cause__ or current.__context__
-        if nxt is None or id(nxt) in seen:
-            break
+    while (nxt := _next_unseen_cause(current, seen)) is not None:
         seen.add(id(nxt))
         names.append(type(nxt).__name__)
         current = nxt
     return names
+
+
+def _next_unseen_cause(
+    current: BaseException, seen: set[int]
+) -> BaseException | None:
+    nxt = current.__cause__ or current.__context__
+    if nxt is None or id(nxt) in seen:
+        return None
+    return nxt
 
 
 def validate_reason(code: str) -> bool:

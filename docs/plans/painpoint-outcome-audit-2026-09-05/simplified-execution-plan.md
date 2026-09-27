@@ -1,12 +1,26 @@
 # R4：虚拟数据湖收敛实施计划（唯一活动编排）
 
-日期：2026-09-07。状态：**PLAN_ONLY / NOT_IMPLEMENTATION_AUTHORIZED**。用户批准的是按减法调整规划，不是代码、数据、网络、任务或worker实施。依据[简化诊断](../data-lake-simplification-2026-09-07/README.md)。R4取代R3“15包共同G0–G5/95门”的全局执行顺序；原发现和必要测试保留，逐项归属见[r4-transition.md](r4-transition.md)。历史review不自动签收R4。
+日期：2026-09-07。以下原始状态是当时的规划授权快照；2026-09-27 的最新执行授权与顺序见紧接的当前目标。依据[简化诊断](../data-lake-simplification-2026-09-07/README.md)。R4取代R3“15包共同G0–G5/95门”的全局执行顺序；原发现和必要测试保留，逐项归属见[r4-transition.md](r4-transition.md)。历史review不自动签收R4。
+
+## 当前目标与执行顺序（2026-09-27，覆盖旧暂停/并线表述）
+
+用户现授权按以下优先级持续实施：**① RF 已签收支线改进并入主线；② company-wiki 数据湖来源抽象层及 filing-fetch/RF/StockWiki 消费接口；③ 本项目叙述加工、Worker 并发恢复和空间迁移原计划。**①已完成：RF 远端 `main=3a69f9c5b6516ebc949d1c95bd50965f9112b7ad`，原 pre-push 全门绿、定向 22 测试与九负例 9/9 绿；`fcap` 保持历史 `ee0a82bfd`。②以此已并主线提交为 RF 基线，在隔离 CWP 工作树实施，保护主工作树中其他工位的未提交文件。原文删除、联网 provider、生产 Worker 恢复仍按各自已批准方案的关键节点检验，不由本段提前触发。
+
+每层只对自己的责任与不变量负责：catalog 管身份/版本/字段来源/状态，storage/open 管同版本副本选择和交付前字节校验，producer/export 管上游工件/locator/质量和版本化导出，filing-fetch 管发现/经授权获取，RF/StockWiki 管各自消费和研究状态。跨仓只交换版本化 `SourceRef`/读取收据，不由业务代码拼上游 root/path 或导入上游 store/DAG。StockWiki SourceExport v1 按原路径语义兼容，路径无关接口另立 v2。用户已明确取消 `private/public` 根标签并允许已配置来源外发；旧字段只作迁移兼容，具体简化 S1–S10 见[实施卡](r4-data-lake-priority-rollout-2026-09-27.md#全仓结构审查后的进一步简化2026-09-27-增量)。
+
+测试随分层收敛：单元测试检本层不变量；相邻层集成测试检契约、错误与来源状态；**B.VR/B.AR** 用真实多根原文验目录册→verified open，**C.local.VR/AR** 用 filing-fetch、RF、StockWiki 实际入口验路径无关消费，后续 G2a/G3/G4 分别验选定叙述证据、Worker 崩溃恢复、精确空间处置。小改动只跑受影响层及相邻合同；大节点跑一次真实 E2E 并由独立审查签收，不对每个文件重复整套验收。具体样本、恢复规则和测试 ID 见[实施卡](r4-data-lake-priority-rollout-2026-09-27.md)与[现有测试矩阵](simplified-test-matrix.md)。
+
+从当前未满足的接口开始按 **red→green→refactor** 推进：先写调用者视角的失败测试并记录失败原因，再做最小实现，最后整理代码；修复缺陷先补复现测试。每层测试锁定该层职责，集成测试锁定相邻合同，真实原文端到端与独立签收只放在大节点。首个切片为路径无关来源读取，不能把旧 `canonical_path` 作为新合同的入参。
+
+**当前事实优先于旧空间/效率预算**：F0–F5 已在 2026-09-26 退役旧 46.266 GiB 主库，实测同卷净释放 37.630 GiB；D0 当前三个自有目录合计 39.744 GiB。旧分节出现“待退役 46 GiB”时只作历史设计快照。FF→CWP→RF 首轮真实 E2E 曾因 legacy resolve 有两次全量读；显式 v2 opt-in 改走 DB-only 候选查询后的真实集成与三仓 E2E 已绿，最终打开仍核坏字节。C.local 的生产/StockWiki 路由及 OS 级一次读计数尚未签收。现行 3,500 个已规范化文档仅 22 个有 prompt-injection review 收据，故 S7 自动扫描/异常复核是新摘要 Worker 的实际前置。具体状态与顺序以[实施卡](r4-data-lake-priority-rollout-2026-09-27.md)顶部为准。
+
+**2026-09-27 较早协调快照：**当时为保护 RF 本地未提交候选，曾允许 A/B 先准备而不等待 Git 并线。此段的 RF SHA、暂停和执行顺序已由上方“当前目标与执行顺序”覆盖；仓库归属、跨进程 open、StockWiki SourceExport v1 路径泄漏及真实样本仍见[R4 位置透明数据湖优先实施卡](r4-data-lake-priority-rollout-2026-09-27.md)。
 
 ## 1. 成果、边界和不再做的事
 
 最终用户只提供公司/报告类型/期间/截至日/所需能力，不提供root或路径。同一真实报告的同版本在任一已批准root中地位相同；目录差异仅影响怎样取得字节，不影响身份、权威或业务可用性。
 
-保留现有sources/documents/locations、只读reader、来源hash、不可变raw与版本化export，先在现有本地API/CLI上改，不重建分布式平台、不强制移动全部文件、不合并仓库、不添常驻服务。kind/adapter只解释格式；priority只影响同内容健康副本的I/O偏好。读取能力、语义有效性、加工状态、外发/写权限分开。
+保留现有sources/documents/locations、只读reader、来源hash、不可变raw与版本化export，先在现有本地API/CLI上改，不重建分布式平台、不强制移动全部文件、不合并仓库、不添常驻服务。kind/adapter只解释格式；priority只影响同内容健康副本的I/O偏好。读取能力、来源有效性和加工状态分别由各层负责；外发不按根标签分流，采集写入与删除仍由各自明确动作控制。
 
 不再：重复维护路径权限判断、把companies作为静默后备特权、以下载URL完备性阻止纯原文预览、由消费者推导上游生产DAG、普通读取pause/resume worker、每个薄wrapper再起Python、用CA/ZR accepted代替效果。也不因“简化”删除真实来源校验/安全边界/失败事实，或将所有来源设为可写。
 
@@ -18,34 +32,34 @@
 
 ## 2. 简化后的步骤依赖与独立审查
 
-每阶段只有三次常规独立决策：**设计审查DR → 变更与隔离测试审查VR → 真实结果验收AR**。每个小步骤自带检查点；范围扩大、数据迁移、删除、外发、1→3→7放量各是额外关键节点，仍分别独立审查。实现者不能自审，AR审查者不能是本阶段oracle作者；真实task/agent ID、输入hash、原始结果及verdict必须记录。名字字符串、未回复或用量中断不计通过。
+**2026-09-27 当前审查节奏（覆盖下方旧三签流程）**：设计、代码/隔离测试、真实结果是**同一个大节点结果包里的三个栏目**，不要求三次串行独立签署。实施者可按 TDD 连续做可逆代码与夹具；每层单测、相邻合同测试自动运行，只有 B 通用 reader、C.local 跨仓消费、G2a 叙述、G3 Worker 恢复、G4/D4 精确空间处置等关键结果包接受一次独立复核和真实资料 E2E。合同范围变化时仅补受影响栏，不重跑未受影响的大包。生产原文删除、联网下载/费用和 Worker 恢复按各自明确动作与真实结果复核；用户已授权已配置来源外发，不为每份文档或 1→3→7 的每档放量重复申请根级隐私许可。历史 DR/VR/AR 名称和 verdict 保留作证据索引，不自动变绿，也不恢复为新审批链。真实测试保留输入 SHA、执行命令、断言和清理收据。
 
-| 阶段 | 设计准入 | 隔离验证/验收准入 | 明确不依赖 |
+| 大节点 | 可并行推进的准备 | 一次综合验收需要的事实 | 不需等待 |
 |---|---|---|---|
-| A 合同与真实基线 | 文档完成后，未来精确DEV/数据读取许可 | 独立来源oracle和禁止副作用的命令卡 | B/C/D、矿业模型、自然soak |
-| B 位置透明索引/读取 | A.DR | A.AR、B.VR；真实生产数据动作另授权 | C完整producer、D后台上线 |
-| C 瘦消费者与唯一producer | A.DR；接口设计可并行，接线以B.AR为准 | B.AR、C.VR；涉及worker/外发/写时追加D.SAFE和对应授权 | M、D完整自然观察 |
-| D 安全与运维 | D01–D04安全准备在A.DR后可独立进行 | D05以后实际接线取B.AR/C.VR及作用域所需结果；持续上线只取拟启用的C真实加工/provider路线AR，不等未启用市场或M | D.SAFE不等待C.AR或D自然观察 |
-| M 收入业务独立轨道 | 独立批准的真实source/业务合同，不等D | 自身VR；新版湖集成时取B.AR/C相关接口AR | D自然soak，未请求的provider/后台任务 |
+| A 合同与真实基线 | 复用已有 v0.4.2、A.DR/A.VR/A.AR 历史收据；只修受影响接口和 oracle | 当前来源身份、SHA、字段权属与负例一致，旧拒绝项被实证处置 | B/C/D、矿业模型、自然观察 |
+| B 位置透明索引/读取 | A 当前合同冻结后做 TDD；C 薄客户端可并行写夹具 | 一次 B 包：单元/合同绿，真实多根原文 query→open→locator、失败恢复、测试树还原，独立复核 | C 完整 producer、D 后台上线 |
+| C.local 跨仓消费 | B 接口形状冻结后 FF/RF/StockWiki 各在本仓 TDD；不等 B 全部根覆盖 | 一次 C.local 包：三仓真实入口正向、无上游路径业务操作、FF 0 全文读/RF 最终 1 次验真、旧兼容回归，独立复核 | 未启用的联网 provider、叙述 G2a、M |
+| G/Worker/空间 | 对应隔离夹具、任务状态机和处置候选可并行准备 | 每个**实际拟启用**的大动作各一包：真实叙述回读、进程崩溃恢复或逐文件 SHA/引用与磁盘对账；启用前独立复核 | 未启用市场、其余模型、无关自然观察 |
+| M 收入业务独立轨道 | 复用已通过的来源合同，领域模型自测 | 新版湖集成时只取对应 B/C 真实接口结果，领域验收归 RF/StockWiki | D 自然观察、未请求的 provider/后台任务 |
 
 **D.SAFE的精确定义**：D01–D04的独立安全/恢复审查通过，可信归档未修好时可选择自动prune硬禁用并独立证明不可达；原文只读/目标隔离/有限预算/停止与恢复卡完整。它只是特定动作的安全准备，不是worker或LLM的统一绿灯。真实worker仍需本次worker候选隔离测试、v5对应正式前置、C持久领取/失败恢复测试、操作许可。禁止把“有D.SAFE”当全部C已通过。
 
-**避免自身互等**：VR可以启动被测真实程序在获批隔离副本中测试，不要求先拿到它自身AR。必须由独立operator先核隔离根、OS禁止生产写与网络、显式配置、不访问生产worker控制、无自启动/任务、自动prune0、超时和子孙清理。不能证明隔离则blocked；这不授权当前运行，也不计生产成功。
+**避免自身互等**：测试 harness 在每个 run 开始与结束自动核隔离根、禁止生产写/网络、显式临时配置、不访问生产 Worker 控制、无自启动/自动 prune、超时与子进程清理；大节点复核者检查同一收据。夹具/配置不变时不让独立操作员在每个小测试前重复人工签字；隔离证明失败则该真实结果不计通过。
 
-DR一份合同、VR一份结果包、AR一份决策即可；一个阶段不为每个辅助文件建新的批准系统。继承的是实际安全要求和反例，不是重复的文档仪式。
+每个大节点只保存**一份**包含合同、测试与裁决的结果包；一个阶段不为每个辅助文件或局部重构建新批准系统。继承的是实际来源、恢复和验证要求，不是重复的文档仪式。
 
 同一VR/AR结果包按能力分栏，而非再建新审批平台：C至少分“本地读取”“加工”“联网provider”；D分“安全准备”“有限运行”“持续运行”。本文C.local.AR只指本地栏，绝不代表全C通过。VR的required只包含该次设计冻结的隔离测试层；真实外网、受控放量、自然观察属于后续AR层，不能反过来作为VR前置。AR尚未执行写pending，不能删掉它或填不适用来制造阶段全绿。细分规则见测试矩阵第6节。
 
 ## 3. 执行者每次接班只核八件事
 
 1. 读本页、[测试矩阵](simplified-test-matrix.md)、[归属表](r4-transition.md)及本阶段run目录的task_plan/findings/progress。
-2. 确认精确DEV/数据/运行授权与当前step，文档“继续”不隐含外发/删除/自启动。
+2. 确认当前步骤、已授权的外发/可逆代码范围，以及本次是否涉及生产删除、付费联网或 Worker 启动等单独动作；不重新申请已经明确授予的个人项目写权限或已配置来源外发许可。
 3. 记录三仓HEAD、实际输入dirty/config/schema/依赖hash；并发漂移则重审受影响部分，不覆盖别人变更。9/7诊断行号只是定位线索。
-4. 检查该step的前置决策、allowlist、已知阻塞；未有独立verdict不可推进。
+4. 检查该大节点当前合同、测试夹具和已知阻塞；可逆实现不因尚未到最终独立验收而停工。
 5. 用当前CLI解析器冻结解释器绝对路径/cwd/argv数组/env键/读写路径/网络目的地/预算/timeout；本文接口名是设计，不猜现成参数。--help/--dry-run也先审副作用。
-6. 每次只执行一个小步，保存原始stdout/stderr/rc/实际业务状态、前后文件/DB/进程/费用事实，不用最后一条成功覆盖前一条失败。
+6. 不冲突的 repo/模块可并行实施；每个文件和生产状态只设一个写 owner。保留关键失败、真实 E2E 与迁移/删除动作的原始 stdout/stderr/rc 和前后事实，不为每个微小局部测试单独建审计包。
 7. 对照独立oracle，失败写findings；超scope/未知费用/取消失败先停并按预审卡恢复，禁止改golden、删case、抬阈值解红。
-8. checkpoint写last_completed、review_pending、产物hash、未做/unknown、下一精确step；产品结果全部以实际证据填，不能从本文抄PASS。
+8. 在大节点或阻塞变化时更新 last_completed、review_pending、产物 hash、未做/unknown 与下一精确动作；产品结果以实际证据填，不能从本文抄 PASS。
 
 未来每阶段一个批准run目录，最少task_plan/findings/progress、输入/命令清单、results与reviews即可。原始审计/收据不作临时目录；不要复制生产大库做无目的测试。真实样本与未知字段使用测试矩阵协议。
 
@@ -57,7 +71,7 @@ DR一份合同、VR一份结果包、AR一份决策即可；一个阶段不为�
 |---|---|---|
 | A01 | 重核三仓当前代码/配置，列query→identify→resolve→open→消费路径、每次子进程/全文件hash、root分支及副作用 | baseline-map；把已删旧工具/已修代码标已变更，绝不复原旧bug跑红 |
 | A02 | 冻结四个已批准root读取等价，root capability与文档证据质量分开；显式deny/未注册root不能因默认等价放行 | root-contract；独立DR确认“全部可读”不等于全部可写/可外发 |
-| A03 | 定义query_local、open_version、request_work三个接口；本地latest只指已索引集合，在线refresh另显式动作 | operation-contract与副作用表；任何纯query可能ensure/download/pause则设计退回 |
+| A03 | 定义query_local、open_version、request_work三个接口；本地latest只指已索引集合，在线refresh另显式动作；冻结跨进程open的完整hash成立时点、大文件上限、临时物化/取消/清理与错误/版本协商 | operation-contract与副作用表；任何纯query可能ensure/download/pause则设计退回；细节按[优先实施卡§1](r4-data-lake-priority-rollout-2026-09-27.md#1-结果合同与分层边界) |
 | A04 | 定义对外引用document_id+版本/source hash+locator，路径诊断不入业务身份；同字节副本与真实修订区分 | identity-contract；无凭据证明同逻辑文档不强行合并，alias迁移不得删除旧引用 |
 | A05 | 独立Data-Agent从真实资料挑报告和版本，标公司/期间/页码/原hash；缺URL保留unknown与本地导入provenance | corpus-manifest+独立oracle；真实资料缺失blocked，不synthetic补位 |
 | A06 | 冻结L01–L12等本地测试及接口错误状态；生成基线小型只读trace和profile，禁止整库重复扫描 | 每例基线结果；基线已正确者记保留回归，不要求所有case都红 |
@@ -78,7 +92,7 @@ DR一份合同、VR一份结果包、AR一份决策即可；一个阶段不为�
 | B06 | 本地可读与正式capture分开：缺URL可预览，身份/期间不明不被默认为可信财报；缺文本只返回所需产物pending | L09/L10；不能把preview合格当forecast合格，不补假https_url |
 | B07 | 输出唯一版本化读取合同；缺/未知版本报明确不兼容，旧客户端在边界adapter一次转换 | L11；禁止无policy自动退companies；不让合法旧引用突然不可读，先测N-1支持合同 |
 | B08 | 独立VR在新隔离环境重跑L01–L12和必要旧C01–C10；独立文件/OS观察证明本地零副作用 | 不用人工构造catalog结果冒充真实parser/索引；特殊cloud无法测标限制 |
-| B09 | 用真实四root/Fifth-root新注册进行一次端到端query→open→consumer最小读取，错副本/移动/离线逐例复验 | 独立AR从原文重新核身份与hash；仅隔离副本变化，不改用户原文件 |
+| B09 | 用一份真原文的四个隔离root副本验证位置等价；另用各root的原生真实文件/sidecar验证adapter；第五个支持格式root只新增注册；query→open→最小通用协议客户端，错副本/移动/离线逐例复验 | 独立AR从原文重新核身份与hash；原生root缺样本记pending，不能用改名副本冒充；filing/revenue/StockWiki的基础来源真实consumer留C.local，叙述selected package消费留W5之后G2a，避免互等；仅隔离副本变化 |
 | B10 | 小范围切到单一读取链，旧入口仅显式版本adapter；记录可回退版本与旧字段移除条件 | 变更独立审查后才切换；回退代码/配置不回滚原始数据和历史来源证据。无法兼容则停切换，不永久默默双跑 |
 
 ## C. 瘦消费者与唯一生产入口（10步）
@@ -94,7 +108,7 @@ DR一份合同、VR一份结果包、AR一份决策即可；一个阶段不为�
 | C05 | 采用唯一现有持久job/attempt入口，定义source+角色+版本幂等key、lease/fencing、开始/失败/unknown与恢复 | 旧D01–D10+P04；实现队列API机制测试可以先做，实际worker待隔离测试与D.SAFE，不建第三套队列 |
 | C06 | query_local与refresh/fetch_missing/process分开；下载修订/授权候选/字节费用上限/deadline保留 | P05/P06及旧T01–T08；缺预算/未知post-send结果不自动重发，多gap不得首项成功即总completed |
 | C07 | 用单写者/短事务消除普通调用者pause/resume；先在隔离真实数据验证读写争用、崩溃/锁释放/取消 | P07；未证明替代安全则保留现保护且不称C完整通过。绝不在生产试删锁/强制resume |
-| C08 | 独立VR与真实无网络消费AR：从真实source→湖读取→filing/revenue预览或已验证输入；精确二次0download/parser/LLM | C.local.AR只签L12与P01/P02/P03的只读部分；P04队列机制归加工VR，真实worker归加工AR。usage unknown只能“不证明零调用”，不阻纯预览；付费请求unknown仍受预算门 |
+| C08 | 独立VR与真实无网络消费AR：从真实source→湖读取→filing/revenue/StockWiki各自实际基础来源reader→预览、已验证输入或新 SourceExport v2 strict dry-run；精确二次0download/parser/LLM | C.local.AR先签L12与P01/P02/P03的基础只读结果，不依赖 W5 selected package；叙述G2a在W5后复用此reader收据并加验业务包。StockWiki旧SourceExport v1路径字段只作受控兼容。P04队列机制归加工VR，真实worker归加工AR。usage unknown只能“不证明零调用”，不阻纯预览；付费请求unknown仍受预算门 |
 | C09 | 获D.SAFE/本候选隔离运行验证/v5适用前置及精确动作授权后，真实1→3→7加工、首次下载/复用/修订 | 每批独立Ops检查scope/成本/副作用后再放大；P04–P08及M08的broker真实解析，外部响应不得mock；安全拒绝与正向成功分开。broker目标归C解析能力，不等待M收入模型；纯离线解析可在隔离VR先验证 |
 | C10 | 独立AR签本地读取、真实加工、真实provider各自状态；仅已通过路线退出旧wrapper和兼容flag | 不把本地成功当联网/后台成功；其他未完成路线明确保留后继与期限条件，不强制全局等M或soak |
 

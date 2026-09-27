@@ -51,6 +51,10 @@ class EvidenceQueryNotFoundError(EvidenceQueryError):
     """Raised when no exact evidence row matches the supplied identity."""
 
 
+class EvidenceQueryArchivedError(EvidenceQueryError):
+    """The identity exists, but legacy evidence is outside the hot catalog."""
+
+
 class EvidenceQueryIntegrityError(EvidenceQueryError):
     """Raised when persisted evidence cannot pass its canonical contract."""
 
@@ -349,6 +353,36 @@ class EvidenceQueryService:
             JOIN sources s ON s.source_id=e.source_id
             WHERE {where}"""
 
+    @staticmethod
+    def _raise_if_archived(
+        connection: sqlite3.Connection,
+        *,
+        source_id: str | None = None,
+        document_id: str | None = None,
+    ) -> None:
+        retention = connection.execute(
+            "SELECT value FROM catalog_meta WHERE key='legacy_evidence_retention'"
+        ).fetchone()
+        if retention is None or retention[0] != "active_only":
+            return
+        if source_id is not None:
+            row = connection.execute(
+                "SELECT 1 FROM documents WHERE primary_source_id=? "
+                "AND source_status<>'active' LIMIT 1",
+                (source_id,),
+            ).fetchone()
+        else:
+            row = connection.execute(
+                "SELECT 1 FROM documents WHERE document_id=? "
+                "AND source_status<>'active' LIMIT 1",
+                (document_id,),
+            ).fetchone()
+        if row is not None:
+            raise EvidenceQueryArchivedError(
+                "legacy_evidence_archived: this source exists, but its "
+                "non-active legacy spans are in the verified cold snapshot"
+            )
+
     def lookup(self, *, source_id: str, locator: str) -> EvidenceQueryResult:
         source_id = _validate_source_id(source_id)
         locator = _validate_locator(locator)
@@ -358,6 +392,7 @@ class EvidenceQueryService:
                 (source_id, locator),
             ).fetchone()
             if row is None:
+                self._raise_if_archived(connection, source_id=source_id)
                 raise EvidenceQueryNotFoundError(
                     "no evidence matches the exact source_id and locator"
                 )
@@ -393,6 +428,9 @@ class EvidenceQueryService:
                 ).fetchone()[0]
             )
             if total == 0:
+                self._raise_if_archived(
+                    connection, source_id=source_id, document_id=document_id
+                )
                 raise EvidenceQueryNotFoundError(
                     "no evidence matches the exact source or document identity"
                 )
@@ -416,6 +454,7 @@ __all__ = [
     "MAX_EVIDENCE_QUERY_LIMIT",
     "EvidenceLocationRef",
     "EvidenceQueryError",
+    "EvidenceQueryArchivedError",
     "EvidenceQueryInputError",
     "EvidenceQueryIntegrityError",
     "EvidenceQueryNotFoundError",

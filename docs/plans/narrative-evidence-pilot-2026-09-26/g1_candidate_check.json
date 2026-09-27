@@ -1,0 +1,439 @@
+{
+  "schema_version": "narrative-g1-pilot/0.1.0",
+  "runner": "scripts/narrative_evidence_pilot.py",
+  "read_only_roots": [
+    "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\transcripts"
+  ],
+  "generated_from_manifest": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\narrative-evidence-pilot-2026-09-26\\g1_sample_manifest.json",
+  "elapsed_seconds": 101.513,
+  "samples": [
+    {
+      "sample_id": "P04",
+      "title": "中微公司：首次公开发行股票并在科创板上市招股说明书.pdf",
+      "source_sha256": "19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+      "source_file_bytes": 11211796,
+      "document_kind": "prospectus",
+      "status": "partial",
+      "coverage_complete": false,
+      "page_count": 429,
+      "pages_read": 429,
+      "opaque_pages": [],
+      "table_scan_page_count": 327,
+      "deferred_table_pages": [
+        21,
+        22,
+        23,
+        36,
+        37,
+        53,
+        54,
+        60,
+        61,
+        62,
+        63,
+        83,
+        84,
+        85,
+        86,
+        87,
+        92,
+        100,
+        104,
+        108,
+        112,
+        130,
+        131,
+        145,
+        151,
+        197,
+        198,
+        199,
+        200,
+        201,
+        202,
+        203,
+        204,
+        205,
+        210,
+        211,
+        212,
+        218,
+        219,
+        220,
+        221,
+        222,
+        223,
+        224,
+        225,
+        226,
+        227,
+        228,
+        232,
+        236,
+        251,
+        252,
+        253,
+        254,
+        258,
+        281,
+        307,
+        308,
+        312,
+        313,
+        314,
+        322,
+        332,
+        340,
+        341,
+        342,
+        373,
+        380,
+        381,
+        382,
+        383,
+        384,
+        385,
+        386,
+        394,
+        403,
+        404,
+        405,
+        406,
+        407,
+        408,
+        409,
+        410,
+        411,
+        412,
+        413,
+        414,
+        415,
+        416,
+        417,
+        418,
+        419,
+        420,
+        421,
+        422,
+        423,
+        424,
+        425,
+        426,
+        427,
+        428,
+        429
+      ],
+      "line_count": 0,
+      "parse_errors": [],
+      "source_units": 14664,
+      "candidate_count": 886,
+      "selected_span_count": 200,
+      "dropped_financial_count": 85,
+      "omitted_candidate_count": 686,
+      "selected_text_bytes": 25428,
+      "summary_input_bytes": 247575,
+      "summary_input_to_source_ratio": 0.022082,
+      "elapsed_seconds": 98.544,
+      "selected_evidence_preview": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:e8780ac95a86abe287454c718fffeb74ebca8d14d9a6a1bae073ceb56047719d",
+          "locator": "loc:v1/page:292/table:0/row:2",
+          "topics": [
+            "industry_dynamics",
+            "capacity_projects",
+            "products_rd"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "2、具有完成该\n无形资产并使\n用或出售的意\n图 | 研发项目以客户需\n求为导向，研发项\n目立项及实施阶段\n即紧密与市场需求\n相结合 | 研发目的为掌握\nMOCVD 关键部件\n技术、建立完整的产\n业供应链；样机用于\n聚光光伏电池扩产 | 公司已在立项书中确立了机台研发成功以实现销\n售的目标；公司研发项目的目标均面向市场，以\n实现量产销售、实现经济利益为目标，且本刻蚀\n设备研发项目与公司的高端半导体设备的主营业\n务及产品高度相关"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:72355c074ddd024e815091153da234db9cb5446b75bb43406c994ec59bb5b884",
+          "locator": "loc:v1/page:292/table:0/row:3",
+          "topics": [
+            "industry_dynamics",
+            "capacity_projects",
+            "products_rd"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "3、无形资产产\n生经济利益的\n方式明确 | 研发产品已与客户\n达成采购意向，投\n产后将以销售产品\n的形式获利；或者\n研发项目将形成公\n司自有的核心技\n术，可应用于现有\n产品工艺技术的提\n高或完善 | MOCVD 设备是外\n延片制作的核心设\n备，主要应用于聚光\n光伏电池、空间太阳\n能电池、大功率激光\n武器、LED 照明等，\n存在市场 | 各资本化项目均已取得“模拟生产线寿命测试”报\n告，各项指标均满足市场需求规范（MRS）要求\n的技术规格，证明了研发项目生产出的产品具有\n技术先"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:ef007ea3fe462b35a852d2acd8f1697548f6311289911f8bfb242a493264e606",
+          "locator": "loc:v1/page:288/table:1/row:6",
+          "topics": [
+            "capacity_projects",
+            "products_rd"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "新型高产能MOCVD 设备研发 | 已获授权专利22 项；申请中专利5 项 | 完成 | 2018 年\n8 月 | 产品销售"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:fbe8ef31743c08ac0c48fe67eeff5f712873b9a0760dfa312608e80e9e5045c3",
+          "locator": "loc:v1/page:360/table:1/row:1",
+          "topics": [
+            "capacity_projects",
+            "products_rd"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "1 | 高端半导体\n设备扩产升\n级项目 | 本项目建设期为2 年零6 个月，分如下五个阶段工作实施：\n第一阶段为研究与设计阶段，历时3 个月，主要是完成项目可行性研\n究及规划、初步设计、施工图设计；\n第二阶段为厂房改建和装修阶段，历时6 个月，主要工作为生产车间\n生产设施及配套生产设施的改建、装修；\n第三阶段为设备采购阶段，历时9 个月，主要是设备采购、施工安装，\n以及软件采购及安装、调试等；\n第四阶段为人员招聘及培训阶段，主要是生产人员及相关岗位人员招\n聘、完成相应培训，可"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:895cc19c9229c3cc2c044810d9195dd71d9994228e3d5a5ffc5d7c44d0fdd276",
+          "locator": "loc:v1/page:360/table:1/row:2",
+          "topics": [
+            "capacity_projects",
+            "products_rd"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "2 | 技术研发中\n心建设升级\n项目 | 本项目建设期2 年，计划分三个阶段实施完成，计划进度安排如下：\n第一阶段为工程施工阶段，本阶段主要任务是研发中心装修及实验室\n等配套工程施工，历时6 个月。\n第二阶段为设备采购及施工安装阶段，本阶段的主要工作是进行公用\n系统安装，空调净化装修，各输配系统工艺管道的安装；此外本阶段\n将完成项目设备的采购、招投标等相关工作，历时1 年。\n第三阶段为设备调试、试运行阶段，本阶段是在施工全部完毕后，进\n行设备调试、单机设备验证、系统调试及系统"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:b0a586f98a61e54c962d499483b97b13be20b71cc38273185215d60f6d231822",
+          "locator": "loc:v1/page:114/paragraph:14",
+          "topics": [
+            "capacity_projects",
+            "products_rd"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "具体应用。公司的MOCVD 设备在行业领先客户的生产线上大规模投入量产，"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:fd305744cd22a9db9c83c97b513dd9c20c74e113577d9305978f542fa6beb291",
+          "locator": "loc:v1/page:119/paragraph:12",
+          "topics": [
+            "orders_customers",
+            "capacity_projects"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "员根据核准的订单需求评估可用产能及资源计划后，制定或更新周期性滚动主生"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:7894f46b3baab7a3c34a2c5bd28b95eeabf78028caa86f850977df3f023bdf67",
+          "locator": "loc:v1/page:119/paragraph:13",
+          "topics": [
+            "orders_customers",
+            "products_rd"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "产计划。产品研发部门根据订单配置中的机型及客户定制化需求，发布量产机型"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:e6230d9522679664969363185f99f4dcbc522151a0b9035b74926e6ae2ecc623",
+          "locator": "loc:v1/page:133/table:0/row:4",
+          "topics": [
+            "products_rd"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "4 | 2011.12 | 国务院 | 《工业转型升\n级规划\n（2011-2015\n年）》 | 提出应重点突破LED 外延生长和芯片制造关键\n技术，提高外延片和高端芯片的国内保障水平。\n增强功率型LED 器件封装能力，加大对封装结\n构设计、新型封装材料及新工艺的研究与开发。\n加快实现金属有机化合物化学气相淀积\n（MOCVD）设备的量产，推进衬底材料、高纯"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:1c9d8c263da236a9de0c3b514e8b4808fec20b138140fd97d8001480426d46c1",
+          "locator": "loc:v1/page:134/table:0/row:3",
+          "topics": [
+            "products_rd"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "7 | 2013.01 | 国家发改\n委、科技\n部等 | 《关于印发半\n导体照明节能\n产业规划的通\n知》 | 提出“大型MOCVD 装备、关键原材料实现国产\n化，检测设备国产化率达70%以上。建立具有世\n界先进水平的研发、检测平台和标准、认证体系”\n的发展目标。将“着力推进核心装备的引进消化\n吸收和再创新，力争实现生产型 MOCVD 设备\n量产”作为重点任务推动。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:c453833a15e86c1cf1e4bf31d4b6227ab9ab4e6c69f0b79be5b3ec424118df5b",
+          "locator": "loc:v1/page:134/table:0/row:4",
+          "topics": [
+            "products_rd"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "8 | 2014.10 | 国家发改\n委、工业\n和信息化\n部 | 《关于印发重\n大节能技术与\n装备产业化工\n程实施方案的\n通知》 | 提出“推动高效压缩机及节能控制器、高效换热\n与相变储能装置、家电节能自动控制、低待机能\n耗技术、温湿度独立调节系统、动态冰蓄冷、发\n光二极管（LED）用大尺寸开盒即用蓝宝石、高\n纯金属有机化合物（MO 源）、生产型金属有机\n源化学气相沉积设备（MOCVD）等关键技术和\n设备研发取得突破”。"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:bb014e63974034392fb4fcbafe695339c0274d761dfab5a330b7a1ea7755c385",
+          "locator": "loc:v1/page:162/paragraph:14",
+          "topics": [
+            "overseas",
+            "products_rd"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "国际化人才研发队伍，形成了良好的企业创新文化，为公司持续创新和研发提供"
+        }
+      ]
+    },
+    {
+      "sample_id": "P08",
+      "title": "万润股份：投资者关系活动记录表20250430.pdf",
+      "source_sha256": "4455d6f099f5f1051fc5daad32a6db1564bb6e8cbd7584637388e42ba0163a32",
+      "source_file_bytes": 236281,
+      "document_kind": "investor_relations",
+      "status": "selected",
+      "coverage_complete": true,
+      "page_count": 13,
+      "pages_read": 13,
+      "opaque_pages": [],
+      "table_scan_page_count": 13,
+      "deferred_table_pages": [],
+      "line_count": 0,
+      "parse_errors": [],
+      "source_units": 352,
+      "candidate_count": 77,
+      "selected_span_count": 77,
+      "dropped_financial_count": 0,
+      "omitted_candidate_count": 0,
+      "selected_text_bytes": 29739,
+      "summary_input_bytes": 157224,
+      "summary_input_to_source_ratio": 0.665411,
+      "elapsed_seconds": 2.939,
+      "selected_evidence_preview": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:b257cbbdb6f446a553397aedf0e7abe5f7d8ad4e2b5afc4b331eac63f11e21ef",
+          "locator": "loc:v1/page:11/table:0/row:0",
+          "topics": [
+            "industry_dynamics",
+            "orders_customers",
+            "capacity_projects",
+            "products_rd"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "收益取决于相关产品的下游市场需求。谢谢！\n30、问：公司“中节能万润（蓬莱）新材料一期建设项目”计划新\n增功能性材料产能 7,900 吨/年，建设完成后逐步达产，预计将于 2025\n年上半年开始逐步投入使用。请分析一下贵公司投入后订单量如何？\n答：投资者您好，据了解，该项目尚未投入使用，未来投入后的订单\n量情况取决于相关产品的下游市场需求情况。谢谢关注。\n31、问：蓬莱项目建成后能生产 PEEK 材料吗，现在有无开拓下游客\n户，今年财务预算有无预算此块业务收入？\n答：您好！目"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:04efa08b0862ebd55554defad80296e716016e64cc4e68f3eb35cc088156aa3b",
+          "locator": "loc:v1/page:2/table:0/row:0",
+          "topics": [
+            "industry_dynamics",
+            "new_business",
+            "capacity_projects",
+            "products_rd"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "投资价值受让公司股份，丰富化学领域产业投资布局。本次转让不会导致\n公司控股股东、实际控制人发生变化。谢谢！\n2、问：2024 年沸石环保材料营收同比下降 28.65%，2025 年一季度\n营收利润继续下降。公司这边如何应对柴油车市场需求变化，以及在石\n油化工催化、VOCs 治理等新领域的拓展进展，跟中石化催化剂公司合作\n的空间在哪里？\n答：您好，公司信息请以公司公告为准，为应对沸石系列环保材料下\n游需求的变化，公司一方面积极开发欧七及同级别标准的下一代沸石系列\n环保材料，并持"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:5b9e44d4b9e2c89b43bd9c0479212c47a363f89d137c9980444824b58a338954",
+          "locator": "loc:v1/page:3/table:0/row:0",
+          "topics": [
+            "new_business",
+            "orders_customers",
+            "capacity_projects",
+            "products_rd"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "会。公司未来与中国石化催化剂有限公司及烟台京东方材料科技有限公司\n的业务往来情况属于关联交易，如达到关联交易披露标准将及时披露，感\n谢您对公司的关注！\n4、问：前五大客户占比 60.29%，境外收入占比超 80%。请说明是否\n计划通过客户分散化（如重点开拓国内市场，实现自主可控新材料平台\n企业）降低对单一客户和区域的依赖。贸易战关税战大家都很关注和疑\n虑。\n答：您好，公司积极开发国内市场，持续完善国内市场战略布局，提\n高公司的抗风险能力。希望在环保材料产业、电子信息材料产业、"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:834810d443a67a8bfc49b79751d5f3fe12d7e6e6e4b2a108aa1be18331aaac9c",
+          "locator": "loc:v1/page:4/table:0/row:0",
+          "topics": [
+            "industry_dynamics",
+            "new_business",
+            "capacity_projects",
+            "products_rd"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "7、问：存货余额 20.32 亿元，计提跌价准备 2.36 亿元；商誉 6.74\n亿元，子公司 MP 公司2024 年净亏损 1,899.5 万元。请说明 2025 年是否\n存在进一步减值风险，以及应对措施。\n答：您好，公司根据《企业会计准则》要求，基于谨慎性原则，对各\n类资产进行减值测试，未来是否减值取决于各类资产的减值测试结果。公\n司持续加强两金管理，积极推进存货压降和货款清收工作，同时，持续推\n进 MP 公司完善内控体系建设、优化研发体系构建、拓展下游销售渠道等\n方面的"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:4c16361b5350d71387e530bdcfa4b83e8dee34d21b7404e99a6e2abd0b1b588e",
+          "locator": "loc:v1/page:5/table:0/row:0",
+          "topics": [
+            "industry_dynamics",
+            "new_business",
+            "capacity_projects",
+            "products_rd"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "业化效率，提升公司核心竞争力，提高产能利用率水平。谢谢！\n10、问：公司现在资本开支这么大，每年进入折扣摊销的越来越大，\n产线利用率这么低，怎么应对？\n答：您好，公司产品种类繁多，多数产线为柔性生产线，可根据产品\n的市场需求变化调整产线产品，因生产不同产品的生产工艺周期差异，导\n致生产不同产品的产能不同。公司资本开支符合公司的经营方针和发展战\n略。未来公司将进一步强化新产品研发与产业化效率，拓展国内外市场份\n额，提升公司核心竞争力，力争将公司打造成为世界先进化学材料制造者。\n"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:adc2b4385d07c0a8ab17bfe4c392478513d273d5e2c4cb3c4cc3ef978c261587",
+          "locator": "loc:v1/page:7/table:0/row:0",
+          "topics": [
+            "industry_dynamics",
+            "new_business",
+            "overseas",
+            "capacity_projects"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "少，近年来公司每年实际现金分红金额占当年实现可供分配利润的比例无\n较大变化，均超过 40%。感谢您对公司的关注！\n15、问：沸石材料需求下降导致 2024 年业绩承压，2025 年沸石需求\n是否能够复苏？未来跟中石化催化剂公司合作主要涉及哪一领域？2025\n年能否有明确落地计划？\n答：您好！公司将积极努力争取 2025 年沸石分子筛业务有更好的市\n场表现。未来和中国石化催化剂有限公司合作主要在石油化工催化领域的\n模板剂与沸石分子筛等产品领域，我们力争在 2025 年实现与其产"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:b9339d55f4b2f197c68ee567037f67a5950de7d0d9788b1c72dbdc5df99cfbf1",
+          "locator": "loc:v1/page:8/table:0/row:0",
+          "topics": [
+            "new_business",
+            "orders_customers",
+            "capacity_projects",
+            "products_rd"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "发与产业化效率，提升公司核心竞争力，提高产能利用率水平。谢谢！\n18、问：请问贵公司本期财务报告中，盈利表现如何？谢谢。\n答：您好！2024 年度公司实现营业收入约 36.93 亿元，实现归属于\n上市公司股东的净利润约 2.46 亿元；2025 年一季度实现营业收入约 8.61\n亿元，实现归属于上市公司股东的净利润约 0.80 亿元。感谢您对公司的\n关注！\n19、问：公司前五大客户占比是否过高，超过 50%了？如何降低对单\n一客户的依赖？\n答：您好，公司积极开发半导体制造材料"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:a90625d6f337e96d1b8528f31556efde9564799977b552acd89c8c4eac800e6e",
+          "locator": "loc:v1/page:10/table:0/row:0",
+          "topics": [
+            "capacity_projects",
+            "products_rd"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "26、问：能谈谈 PEEK 材料和光刻胶的进展情况吗？\n答：您好！公司 PEEK 材料已有中试产品产出，正在推进产品下游推\n广验证工作；公司 2024 年至2025 年一季度半导体制造材料整体收入均呈\n现增长态势，公司销售的半导体制造材料主要包括光刻胶单体、树脂、光\n酸以及半导体制程中清洗剂添加材料等。公司在半导体材料领域定位是发\n展成为全球半导体制造材料产业的坚实后盾，为下游半导体成品材料企业\n提供优质产品与服务，未来公司还将继续根据下游国内外成品材料客户的\n需求做好产品开"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:a422013f7a5a81656b26331fa56a35ae622ffd788d562eb85cc872f97e4bbc5e",
+          "locator": "loc:v1/page:12/table:0/row:0",
+          "topics": [
+            "new_business",
+            "products_rd"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "35、问：贵司今年研发费用是否会持续增加，2024 年贵司投入四个\n多亿研发的方向是什么，具体都有什么进展和成就？\n答：您好，公司会坚持以研发创新驱动公司长期可持续发展，进一步\n强化新产品研发与产业化效率，在半导体制造材料、OLED 材料、聚酰亚\n胺材料、其他高性能聚合物等多类材料方面持续投入研发，争取为公司赢\n得更多的市场机会，提升公司核心竞争力。谢谢！\n36、问：我看董事长和董秘都回复问题中很看重和中石化催化剂公\n司的合作，那么具体什么时候能落地呢？\n答：您好！公司将努力"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:8fb3268011f6513a72052f1a18ef5c0a274528edfb5876a6f4e513c8dc287059",
+          "locator": "loc:v1/page:6/table:0/row:0",
+          "topics": [
+            "new_business",
+            "products_rd"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "有限公司等国内优质企业持续合作，在国内推广公司石油化工催化等领域\n的沸石分子筛产品，争取国内市场机会。公司出口产品主要销往欧洲、日\n韩等地区，公司未来将积极开发国内市场，希望在环保材料产业、电子信\n息材料产业、新能源材料产业、生命科学与医药产业四大领域向国内提供\n更多优质产品。感谢您对公司关注！\n13、问：公司2024 年研发费用 4.23 亿元，同比增长 16%，已经占比\n超过营收的 10%，但研发成果转化效率如何？是否考虑引入外部合作或风\n险投资加速技术商业化？什么时候能"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:735f666ea7bb14a09d69d93ef5156d162622ba4c9db8383803c7f38d111ab1bd",
+          "locator": "loc:v1/page:9/table:0/row:0",
+          "topics": [
+            "new_business",
+            "products_rd"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "公司一直来说是以销定产，为什么会计提这么多存货跌价准备？MP 公司\n经营近两年来不及预期，商誉高悬，针对现在中美之间的关系，MP 公司\n接下去怎么办？\n答：您好，公司严格按照《企业会计准则》，基于谨慎性原则，对各\n类资产进行减值测试，按照资产负债表日成本与可变现净值孰低来计量，\n当其可变现净值低于成本时，提取存货跌价准备。2025 年一季度MP 公司\n经营情况较去年同期有所改善，公司将持续推动 MP 公司在开展完善内控\n体系建设、优化研发体系构建、拓展下游销售渠道等方面的相关"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:393ac794663bbd8e0c461e9cc03801a675f92523ec9e82fb26c9c6407a27148e",
+          "locator": "loc:v1/page:4/paragraph:21",
+          "topics": [
+            "industry_dynamics",
+            "capacity_projects"
+          ],
+          "source_role": "company_filing",
+          "excerpt": "料项目（年产8,870 吨功能性材料）的投产节奏及市场需求预测，如何"
+        }
+      ]
+    }
+  ],
+  "totals": {
+    "documents": 2,
+    "source_file_bytes": 11448077,
+    "summary_input_bytes": 404799,
+    "selected_span_count": 277,
+    "selected_documents": 1,
+    "partial_documents": 1,
+    "skipped_documents": 0,
+    "needs_review_documents": 0,
+    "blocked_documents": 0
+  },
+  "limitations": [
+    "This is a 12-document pilot, not a corpus recall estimate.",
+    "The selector uses deterministic candidate rules; a model did not generate summaries.",
+    "summary_input_bytes excludes database indexes, filesystem allocation and future exports.",
+    "A status of selected means the parser covered the file, not that a human approved every candidate."
+  ]
+}

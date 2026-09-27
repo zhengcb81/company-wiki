@@ -1,0 +1,589 @@
+{
+  "schema_version": "narrative-g1-pilot/0.1.0",
+  "runner": "scripts/narrative_evidence_pilot.py",
+  "read_only_roots": [
+    "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\transcripts"
+  ],
+  "generated_from_manifest": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\narrative-evidence-pilot-2026-09-26\\g1_sample_manifest.json",
+  "elapsed_seconds": 0.317,
+  "samples": [
+    {
+      "sample_id": "T02",
+      "title": "NVO_Q4_2024_earnings_call.txt",
+      "source_sha256": "d00e2a4537b86628ef019180e27de5ae0a57e715770ddf15135bd75627a6d59e",
+      "source_file_bytes": 66597,
+      "document_kind": "investor_call_transcript",
+      "status": "selected",
+      "selection_limit": 160,
+      "coverage_complete": true,
+      "page_count": 0,
+      "pages_read": 0,
+      "opaque_pages": [],
+      "table_scan_page_count": 0,
+      "deferred_table_pages": [],
+      "focus_pages": [],
+      "selected_focus_pages": [],
+      "line_count": 604,
+      "parse_errors": [],
+      "source_units": 645,
+      "candidate_count": 20,
+      "selected_span_count": 20,
+      "locator_roundtrip_verified_count": 20,
+      "locator_roundtrip_failed_count": 0,
+      "locator_roundtrip_failed_span_ids": [],
+      "dropped_financial_count": 0,
+      "omitted_candidate_count": 0,
+      "selected_text_bytes": 2387,
+      "summary_input_bytes": 15806,
+      "summary_input_file_bytes": 15806,
+      "summary_input_to_source_ratio": 0.237338,
+      "anchor_checks": [
+        {
+          "check_id": "C11-too-early-to-speculate",
+          "page_number": null,
+          "source_role": "management",
+          "passed": true,
+          "matched_term": "too early to speculate",
+          "required_any": [
+            "too early to speculate"
+          ],
+          "matched_evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:00870b3350067d5356519b85f6b0af751856656d3ce609046263b7b8012ea516"
+          ],
+          "match_scope": "selected_span_window",
+          "evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:7cb62a7f73f274c3d46ea4071f8a4d2f08997787b33b08723b4d346c41687759",
+            "urn:company-wiki:evidence-span:sha256:c11f4a81fcbf127500aa57e0cf45c1d8d373f3f9b151e027f342df195e1d2bb6",
+            "urn:company-wiki:evidence-span:sha256:a5684e9c59ab9c2f4903bc4ea611c7475568d4ded9a30dbfbffc82179e25b5de",
+            "urn:company-wiki:evidence-span:sha256:756ec0168f6a2b3c70a1655a20336519f32944d3bbb6b09dca7de7d205b08094",
+            "urn:company-wiki:evidence-span:sha256:16de4233025fc9595d96939547bdb96313b5c6f875905921a5e0d167b28e7a6f",
+            "urn:company-wiki:evidence-span:sha256:1523c5a6c297d6c75aadedaedef7aa1e5aad92248790ca3fafb2479d934d816a",
+            "urn:company-wiki:evidence-span:sha256:00870b3350067d5356519b85f6b0af751856656d3ce609046263b7b8012ea516",
+            "urn:company-wiki:evidence-span:sha256:88830c148c20415470bb96dd4eb473e52f419e6b9fdaf197da31abb701d2725b",
+            "urn:company-wiki:evidence-span:sha256:7cc150ccc2f03eacfaccc413ba2ee060a2a0410b6e2edf135bd1bcbf41c7d467",
+            "urn:company-wiki:evidence-span:sha256:11f165c2387fada120d47fef0c13e902a6c84d09e3954337f1032befded1ff6c",
+            "urn:company-wiki:evidence-span:sha256:b68394838b0f833db11f2d9ab53d622930ff56320fe25f6f796b7c8ef0e595b1",
+            "urn:company-wiki:evidence-span:sha256:dcab31aaa80367f73c34a7cf7d70743f2910d3332f45b2d7b00a9e72f0c6248b"
+          ]
+        }
+      ],
+      "anchor_check_failure_count": 0,
+      "elapsed_seconds": 0.316,
+      "selected_evidence_preview": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:cff3dfae4e1841b211593ef4315a30f2a36f0f4a16bb5188683ce72741c7b0b4",
+          "locator_v1": "loc:v1/paragraph:183/chars:216-241",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 183,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": 216,
+            "char_end": 241
+          },
+          "quality_flags": [],
+          "topics": [],
+          "selection_reasons": [
+            "linked_question_context"
+          ],
+          "source_role": "analyst",
+          "qa_group_id": "1:q1",
+          "selection_group_id": null,
+          "excerpt": "What can you do about it?"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:4926dc693ee069f8f9553a0a1a74b0de830d61602f4b81812d9934967845192b",
+          "locator_v1": "loc:v1/paragraph:183/chars:242-309",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 183,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": 242,
+            "char_end": 309
+          },
+          "quality_flags": [],
+          "topics": [],
+          "selection_reasons": [
+            "linked_question_context"
+          ],
+          "source_role": "analyst",
+          "qa_group_id": "1:q1",
+          "selection_group_id": null,
+          "excerpt": "And how should we anticipate the growth in prescriptions from here?"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:ca221e76204ef74d26f80a9c594e07dce133021e6299e6bc86fda64b06636dc0",
+          "locator_v1": "loc:v1/paragraph:183/chars:368-547",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 183,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": 368,
+            "char_end": 547
+          },
+          "quality_flags": [],
+          "topics": [],
+          "selection_reasons": [
+            "linked_question_context"
+          ],
+          "source_role": "analyst",
+          "qa_group_id": "1:q2",
+          "selection_group_id": null,
+          "excerpt": "But based on that, and what you've seen in REDEFINE 1 and the tolerability that you've shown, how do you think the profile of CagriSema will stack up versus rebound in REDEFINE 4?"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:a54a24951ded526e45495455b0eb3741e00d95ba64868abc6043b36e953109f0",
+          "locator_v1": "loc:v1/paragraph:183/chars:59-215",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 183,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": 59,
+            "char_end": 215
+          },
+          "quality_flags": [],
+          "topics": [],
+          "selection_reasons": [
+            "linked_question_context"
+          ],
+          "source_role": "analyst",
+          "qa_group_id": "1:q1",
+          "selection_group_id": null,
+          "excerpt": "Firstly, on Wegovy, could you give us some more details of what's holding back the U.S.\n\nprescriptions in the last quarter of '24 and the early part of '25?"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:7cb62a7f73f274c3d46ea4071f8a4d2f08997787b33b08723b4d346c41687759",
+          "locator_v1": "loc:v1/paragraph:193/chars:1016-1104",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 193,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": 1016,
+            "char_end": 1104
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "specific_business_event",
+            "management_statement"
+          ],
+          "source_role": "management",
+          "qa_group_id": 1,
+          "selection_group_id": null,
+          "excerpt": "And what we can say about that is we are shipping more of the starter doses as we speak."
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:c11f4a81fcbf127500aa57e0cf45c1d8d373f3f9b151e027f342df195e1d2bb6",
+          "locator_v1": "loc:v1/paragraph:193/chars:1105-1272",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 193,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": 1105,
+            "char_end": 1272
+          },
+          "quality_flags": [],
+          "topics": [
+            "orders_customers"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "specific_business_event",
+            "management_statement"
+          ],
+          "source_role": "management",
+          "qa_group_id": 1,
+          "selection_group_id": null,
+          "excerpt": "Those started doses are making their way through the supply chain from the wholesaler to a retailer, which is also new for us to have this amount of new starter doses."
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:a5684e9c59ab9c2f4903bc4ea611c7475568d4ded9a30dbfbffc82179e25b5de",
+          "locator_v1": "loc:v1/paragraph:193/chars:1274-1388",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 193,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": 1274,
+            "char_end": 1388
+          },
+          "quality_flags": [],
+          "topics": [
+            "industry_dynamics"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "specific_business_event",
+            "management_statement"
+          ],
+          "source_role": "management",
+          "qa_group_id": 1,
+          "selection_group_id": null,
+          "excerpt": "And now it's our opportunity to pull through this market expansion and connect more people with Wegovy in the U.S."
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:756ec0168f6a2b3c70a1655a20336519f32944d3bbb6b09dca7de7d205b08094",
+          "locator_v1": "loc:v1/paragraph:193/chars:158-226",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 193,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": 158,
+            "char_end": 226
+          },
+          "quality_flags": [],
+          "topics": [
+            "industry_dynamics"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "specific_business_event",
+            "management_statement"
+          ],
+          "source_role": "management",
+          "qa_group_id": 1,
+          "selection_group_id": null,
+          "excerpt": "And so the story continues to be about market expansion for obesity."
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:16de4233025fc9595d96939547bdb96313b5c6f875905921a5e0d167b28e7a6f",
+          "locator_v1": "loc:v1/paragraph:207/chars:122-300",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 207,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": 122,
+            "char_end": 300
+          },
+          "quality_flags": [],
+          "topics": [
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "specific_business_event",
+            "management_statement"
+          ],
+          "source_role": "management",
+          "qa_group_id": 1,
+          "selection_group_id": null,
+          "excerpt": "The first statistical testing will be non-inferiority and based on what we've seen with REDEFINE 1, there's a good assumption that will come out with non-inferiority established."
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:1523c5a6c297d6c75aadedaedef7aa1e5aad92248790ca3fafb2479d934d816a",
+          "locator_v1": "loc:v1/paragraph:207/chars:302-330",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 207,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": 302,
+            "char_end": 330
+          },
+          "quality_flags": [],
+          "topics": [
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "specific_business_event",
+            "management_statement"
+          ],
+          "source_role": "management",
+          "qa_group_id": 1,
+          "selection_group_id": null,
+          "excerpt": "Second test for superiority."
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:00870b3350067d5356519b85f6b0af751856656d3ce609046263b7b8012ea516",
+          "locator_v1": "loc:v1/paragraph:207/chars:331-455",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 207,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": 331,
+            "char_end": 455
+          },
+          "quality_flags": [],
+          "topics": [
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "specific_business_event",
+            "management_statement"
+          ],
+          "source_role": "management",
+          "qa_group_id": 1,
+          "selection_group_id": null,
+          "excerpt": "And again, I think it's too early to speculate, but we will see the data when we will see them, but that is test number two."
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:f10160cf9c28a60161964c2484592b1644b2032a12beb265ad60384cb0caac7f",
+          "locator_v1": "loc:v1/paragraph:407/chars:237-303",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 407,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": 237,
+            "char_end": 303
+          },
+          "quality_flags": [],
+          "topics": [],
+          "selection_reasons": [
+            "linked_question_context"
+          ],
+          "source_role": "analyst",
+          "qa_group_id": "7:q1",
+          "selection_group_id": null,
+          "excerpt": "So could you remind us how you will manage the situation for 2027?"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:ad06be62bf71da25062dd753884fe5e6b227800dc3bee5974c05293046a10a78",
+          "locator_v1": "loc:v1/paragraph:407/chars:304-411",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 407,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": 304,
+            "char_end": 411
+          },
+          "quality_flags": [],
+          "topics": [],
+          "selection_reasons": [
+            "linked_question_context"
+          ],
+          "source_role": "analyst",
+          "qa_group_id": "7:q1",
+          "selection_group_id": null,
+          "excerpt": "And when should we have the final level of rebates, if you could remind us that the process would be great?"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:d0a1d5d56dd8edbeb99861ef0cf2c1274cc8d2f5100550a4bb5a715b87cf26cb",
+          "locator_v1": "loc:v1/paragraph:407/chars:454-699",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 407,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": 454,
+            "char_end": 699
+          },
+          "quality_flags": [],
+          "topics": [],
+          "selection_reasons": [
+            "linked_question_context"
+          ],
+          "source_role": "analyst",
+          "qa_group_id": "7:q2",
+          "selection_group_id": null,
+          "excerpt": "Maybe could you give us some color on the Phase 2 if from the kidney trial, notably on the tolerance if there is any readout on the tolerance side that could maybe help you to design or adjust the rest of the clinical -- ongoing clinical tr"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:ee424bf7214904b2e4f5621ccf8dc34c10dd0c22893f7a3c0842c0a9516cc9f9",
+          "locator_v1": "loc:v1/paragraph:407/chars:92-236",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 407,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": 92,
+            "char_end": 236
+          },
+          "quality_flags": [],
+          "topics": [],
+          "selection_reasons": [
+            "linked_question_context"
+          ],
+          "source_role": "analyst",
+          "qa_group_id": "7:q1",
+          "selection_group_id": null,
+          "excerpt": "Could you give us your view on the situation in the U.S. for semaglutide regarding IRA, Inflation Reduction Act, because now you're on the list?"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:88830c148c20415470bb96dd4eb473e52f419e6b9fdaf197da31abb701d2725b",
+          "locator_v1": "loc:v1/paragraph:417/chars:166-218",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 417,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": 166,
+            "char_end": 218
+          },
+          "quality_flags": [],
+          "topics": [
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "specific_business_event",
+            "management_statement"
+          ],
+          "source_role": "management",
+          "qa_group_id": 7,
+          "selection_group_id": null,
+          "excerpt": "It's too early to speculate on the potential impact."
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:7cc150ccc2f03eacfaccc413ba2ee060a2a0410b6e2edf135bd1bcbf41c7d467",
+          "locator_v1": "loc:v1/paragraph:67/chars:765-918",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 67,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": 765,
+            "char_end": 918
+          },
+          "quality_flags": [],
+          "topics": [
+            "industry_dynamics"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "specific_business_event",
+            "current_industry_context",
+            "management_statement"
+          ],
+          "source_role": "management",
+          "qa_group_id": null,
+          "selection_group_id": null,
+          "excerpt": "The positive volume development was also reflected in the Wegovy prescription trends in the U.S., which currently is around 200,000 weekly prescriptions."
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:11f165c2387fada120d47fef0c13e902a6c84d09e3954337f1032befded1ff6c",
+          "locator_v1": "loc:v1/paragraph:81/chars:11086-11252",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 81,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": 11086,
+            "char_end": 11252
+          },
+          "quality_flags": [],
+          "topics": [
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "specific_business_event",
+            "management_statement"
+          ],
+          "source_role": "management",
+          "qa_group_id": null,
+          "selection_group_id": null,
+          "excerpt": "Specifically, we expect the first Phase 3 results from CagriSema, as well as Phase 2 results for both subcutaneous and amycretin and once weekly GIP/GLP-1 co-agonist."
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:b68394838b0f833db11f2d9ab53d622930ff56320fe25f6f796b7c8ef0e595b1",
+          "locator_v1": "loc:v1/paragraph:81/chars:11439-11526",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 81,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": 11439,
+            "char_end": 11526
+          },
+          "quality_flags": [],
+          "topics": [
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "specific_business_event",
+            "management_statement"
+          ],
+          "source_role": "management",
+          "qa_group_id": null,
+          "selection_group_id": null,
+          "excerpt": "Furthermore, we also expect Phase 2 results from the once-weekly GLP-1, GIP co-agonist."
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:dcab31aaa80367f73c34a7cf7d70743f2910d3332f45b2d7b00a9e72f0c6248b",
+          "locator_v1": "loc:v1/paragraph:81/chars:981-1154",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 81,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": 981,
+            "char_end": 1154
+          },
+          "quality_flags": [],
+          "topics": [
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "specific_business_event",
+            "management_statement"
+          ],
+          "source_role": "management",
+          "qa_group_id": null,
+          "selection_group_id": null,
+          "excerpt": "In line with regulatory guidelines, the purpose of the trial was to demonstrate superiority of CagriSema over placebo, cagrilintide and semaglutide on body weight reduction."
+        }
+      ]
+    }
+  ],
+  "totals": {
+    "documents": 1,
+    "source_file_bytes": 66597,
+    "summary_input_bytes": 15806,
+    "summary_input_file_bytes": 15806,
+    "selected_span_count": 20,
+    "locator_roundtrip_verified_count": 20,
+    "locator_roundtrip_failed_count": 0,
+    "selected_documents": 1,
+    "partial_documents": 0,
+    "skipped_documents": 0,
+    "needs_review_documents": 0,
+    "blocked_documents": 0,
+    "anchor_check_failure_count": 0
+  },
+  "limitations": [
+    "This is a 12-document pilot, not a corpus recall estimate.",
+    "The selector uses deterministic candidate rules; a model did not generate summaries.",
+    "summary_input_file_bytes is the exact logical file length for a temporary, fsynced per-source JSON file; the file is removed after measurement.",
+    "Temporary JSON file lengths exclude database indexes, filesystem allocation rounding, and future exports.",
+    "A status of selected means the parser covered the file, not that a human approved every candidate.",
+    "Locator round-trip verifies same-parser extraction; it does not certify downstream support for table-cell sub-locators."
+  ]
+}

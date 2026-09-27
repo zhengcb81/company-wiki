@@ -1,5 +1,23 @@
 # 三仓原始痛点与完成真实性审计
 
+## 当前执行目标（2026-09-27，覆盖下方历史等待项）
+
+用户要求持续实施直到完成，顺序为 **RF 已签收支线并入 main → R4 数据湖来源抽象层 → company-wiki 叙述加工、Worker 并发恢复与空间迁移原计划**。RF 远端 `main` 已核对为 `3a69f9c5b6516ebc949d1c95bd50965f9112b7ad`；先前 `ee0a82bfd` 与“暂停 RF 并线”只属历史快照。本计划当前从 R4 A 合同的受影响部分增量审查开始，在独立工作树推进 B 通用读取与 C.local 消费者；主树其他工位的未提交文件不得覆盖、清理或捎带提交。用户已授权按计划实施可逆代码与测试；原文退役、生产 Worker、联网 provider 等仍各按既有关键节点验证，不因总目标提前放行。
+
+**2026-09-27 新简化要求：**用户已明确裁定取消 `private/public` 区分，所有已配置来源均可外发给 LLM；隔离 CWP v2 已移除本地读取/导出的根标签门槛及摘要入口的 `private_user` 否决，隔离配置也已删去该标签。保留旧 schema 字段只为尚未迁移的调用者兼容，迁移后清理。FF 只发现并返回路径无关来源候选，不先读整份 PDF；RF 等最终消费者通过 CWP 当前策略 `open_version` 一次读取并核 SHA。完整读取指纹只作审计或显式快照一致性选项，不作为跨仓位置变动后的硬 pin。仍保留来源身份、SHA、冲突、撤回、资源和显式网络/删除动作边界。见[进度](progress.md)与[R4 实施卡](r4-data-lake-priority-rollout-2026-09-27.md)。
+
+**测试与复核节奏：**catalog、storage/open、producer/export、filing-fetch、RF、StockWiki 各为自身不变量写单元测试；相邻层靠版本化 fixture/CLI 做集成测试；只在 B.AR、C.local.AR、叙述 G2a、Worker 恢复和空间处置等大节点跑真实数据 E2E、独立复核与测试目录恢复。小节点不重复全套审查。权威细节见[R4 主计划](simplified-execution-plan.md)、[数据湖实施卡](r4-data-lake-priority-rollout-2026-09-27.md)、[测试矩阵](simplified-test-matrix.md)。
+
+**全仓简化审查新增 S1–S10：**S1–S7 收敛来源读取、工件读取、叙述加工、Worker、legacy writer、空间处置和自动清洁扫描；补充的 S8–S10 分别减少 CI 重复且消除假绿、在 StockWiki 新来源启用后取消隐式 Tavily 回退、按实测收益拆轻量读取与重型解析依赖。每项的代码证据、顺序、TDD 反例、当前状态和大节点退出条件见[数据湖实施卡的全仓结构审查](r4-data-lake-priority-rollout-2026-09-27.md#全仓结构审查后的进一步简化2026-09-27-增量)。结构盘点覆盖 559 个 Python 文件，热点代码已核查；旧 46.266 GiB 主库已退役，下一步应在 D0 实测 **39.744 GiB** 剩余自有目录基线上核各文件引用和回收量，不能把这轮审查写成逐行签收或已实现全部简化。
+
+**简化实施判据：**最终收敛为五个生产 owner：来源目录/可验证 reader、工件读取器、叙述选择 DAG、可恢复的多进程 Worker、来源处置 ledger。对每个旧入口或配置字段先列真实调用者，再给替代合同和迁移测试；同一来源版本不能同时由新旧 Worker 写。大节点一次独立审查与真实资料 E2E，局部只测自身和相邻接口。防空间复发优先断开“每份 PDF 都建全量旧式 span/整篇 MD”的默认路由；旧 46 GiB 库主要是约 2720 万旧 span 与索引，删除 MD 本身不足解决。当前 active 库仍有 1,490,530 span；新 DAG 入选/跳过均须断言旧式全量 span 与 MD 零增量。D0 记录 `future_lake` 已有一件 545 B 文件，但原生适配覆盖仍待核实。
+
+**新发现的真实瓶颈与未完成判据：**当前 3,500 个已规范化文档只有 22 个有 prompt-injection review 收据；S7 把干净输入的扫描/收据变成新摘要 DAG 的自动阶段，只有命中或异常需人工复核。首轮三仓真实 E2E 曾因 FF legacy `resolve` 与 RF final open 两次全文读取；隔离 FF 显式 v2 opt-in 现改走 CWP DB-only 候选查询，真实 FF↔CWP 集成和三仓 E2E 已绿，最终读的篡改拒绝也已验证。**旧默认入口、StockWiki 正式消费和生产切换尚未完成**；C.local 效率签收仍需端到端来源 I/O 计数、一次最终完整验真与默认路由迁移，不能把 opt-in 局部绿灯写成整体完成。
+
+**C.local 审查时间一致性：**候选时的 `prompt_injection_review` 可能在 query→open 之间撤回；该反例先红，隔离 opt-in 已让最终验真读取收据携带当时可见的 review/source/evidence/rule hash，RF 只信最终收据，真实三仓撤回反例已绿。仍需默认入口、StockWiki、`latest_as_of`/授权下载及全链 I/O 计数后才能签 C.local，不增加小节点审查。
+
+**C.local pathless operation 更新（2026-09-27）：**隔离 CWP/FF 工作树首轮 opt-in 已实施：CWP `ensure`/`close-gap` 用 operation schema 1.0 在进程边界投影无路径结果（SourceRef 2.0、候选、outcome/download count、close-gap policy binding）；FF exact 仍 DB-only，latest/provider freshness 和授权下载走 pathless ensure/close-gap。CWP 相关 **52 passed**；FF `tests/` **385 passed、14 skipped、78 subtests**，FF→CWP本地 CLI E2E **1 passed**，Ruff/Mypy/diff-check 通过。仍未测真实 provider latest、实际 CLI 授权 close-gap 和重试幂等性，尚无 OS 级精确来源 I/O 计数，StockWiki/default routing 未接；pytest 临时目录 ACL 拒绝恢复，故**C.local 未签收、生产默认未切换**。详细覆盖与下一步见[R4实施卡](r4-data-lake-priority-rollout-2026-09-27.md#clocal-下一切片ensureclose-gap-pathless-operation-contractopt-in-首轮已实现clocal-未签收)。
+
 ## 目标与授权边界
 
 以原始 P01–P11 痛点、CA/ZR 117 项及后续 GP 项为索引，逐项审计已完成主张是否实现用户结果。全部发现、证据、审计脚本和后续修复计划只写本新目录。不得修改原项目代码、已有计划、配置、数据库、收据、任务或 worker；不得运行下载、生产处理或恢复后台工作。独立计划不并入主线。日期：2026-09-05。
@@ -16,6 +34,8 @@
 ## Next Step
 
 等待精确实施授权（DEV/数据/运行各自批准），从 R4 A01 重锁三仓输入开始。Phase 7 只完成规划细化，不构成产品实施或真实测试结果；原R4两份被审核心文档及历史签署字节不变。
+
+**2026-09-27 并线前协调快照（已被上方当前执行目标覆盖）：**当时暂停的是 RF 本地未提交后续改动，并允许 A/B 通用合同先准备而不等待 Git merge。该状态和 SHA 已过时；仍有效的是所有跨仓消费者的业务层不得直接操作上游原文路径、G0 复用 A.DR、叙述 G2a 复用 C.local 基础 reader 收据，以及历史裁决不自动转绿。
 
 ### 2026-09-11 夜：阶段 A 授权落位与首轮 A.DR（**rejected** → v0.2）
 

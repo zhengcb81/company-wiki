@@ -2,10 +2,14 @@
 
 from __future__ import annotations
 
+from datetime import datetime, timezone
 from pathlib import Path
 
 from company_wiki.source_catalog.prune_retired_evidence import (
     prune_retired_evidence,
+)
+from company_wiki.source_catalog.archive_retired_evidence import (
+    archive_retired_evidence,
 )
 from company_wiki.source_catalog.store import retire_document
 
@@ -23,6 +27,10 @@ ANNUAL = """\
 
 经营情况：报告期内公司营业收入稳步增长，主要得益于先进制程设备出货量提升与国产替代进程加速。
 """
+
+NOW = datetime(2026, 8, 15, tzinfo=timezone.utc)
+OLD_ARCHIVE = datetime(2026, 5, 1, tzinfo=timezone.utc)
+CURRENT_ARCHIVE = datetime(2026, 8, 7, tzinfo=timezone.utc)
 
 
 def _retired_catalog(tmp_path: Path):
@@ -54,25 +62,33 @@ def _retired_catalog(tmp_path: Path):
 def test_prune_dry_run_reports_span_volume(tmp_path):
     catalog = _retired_catalog(tmp_path)
     archive = tmp_path / "manifests"
-    (archive / "archive" / "2026-05-01").mkdir(parents=True)  # > 90 days old
-    report = prune_retired_evidence(catalog.config, archive)
+    archive_retired_evidence(catalog.config.database_path, archive, now=OLD_ARCHIVE)
+    report = prune_retired_evidence(catalog.config, archive, now=NOW)
     assert report.dry_run is True
     assert report.span_rows > 0
     assert report.retired_documents == 1
-    assert report.oldest_archive == "2026-05-01"
+    oldest_archive = Path(report.oldest_archive)
+    assert oldest_archive.parent.name == "2026-05-01"
+    assert oldest_archive.name.startswith("retired-evidence-")
     assert report.due is True
 
 
 def test_prune_apply_deletes_spans_when_due(tmp_path):
     catalog = _retired_catalog(tmp_path)
     archive = tmp_path / "manifests"
-    (archive / "archive" / "2026-05-01").mkdir(parents=True)
+    archive_retired_evidence(catalog.config.database_path, archive, now=OLD_ARCHIVE)
     before = catalog.store.fetchone(
         "SELECT COUNT(*) FROM evidence_spans"
     )[0]
+    dry_run = prune_retired_evidence(catalog.config, archive, now=NOW)
+    assert dry_run.due is True
 
     report = prune_retired_evidence(
-        catalog.config, archive, apply=True, retention_days=0
+        catalog.config,
+        archive,
+        apply=True,
+        now=NOW,
+        plan=dry_run.plan,
     )
     assert report.dry_run is False
     assert report.due is True
@@ -87,8 +103,15 @@ def test_prune_apply_deletes_spans_when_due(tmp_path):
 def test_prune_apply_within_retention_does_nothing(tmp_path):
     catalog = _retired_catalog(tmp_path)
     archive = tmp_path / "manifests"
-    (archive / "archive" / "2026-08-07").mkdir(parents=True)  # today
-    report = prune_retired_evidence(catalog.config, archive, apply=True)
+    archive_retired_evidence(
+        catalog.config.database_path, archive, now=CURRENT_ARCHIVE
+    )
+    report = prune_retired_evidence(
+        catalog.config,
+        archive,
+        apply=True,
+        now=CURRENT_ARCHIVE,
+    )
     assert report.due is False
     assert report.deleted_rows == 0
     remaining = catalog.store.fetchone("SELECT COUNT(*) FROM evidence_spans")[0]

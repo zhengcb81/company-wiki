@@ -175,6 +175,26 @@ def _ed25519_verify(public_key_raw: bytes, message: bytes,
         return False
 
 
+def _require_disposal_metadata(
+    ignore_reason: str | None,
+    ignore_authorizer: str | None,
+    authorized_at: str | None,
+    declared_matches: Any,
+) -> None:
+    """Require the signed disposition fields before loading a trust root."""
+    for field, value in (
+        ("ignore_reason", ignore_reason),
+        ("ignore_authorizer", ignore_authorizer),
+        ("authorized_at", authorized_at),
+    ):
+        if not value or not str(value).strip():
+            raise PromptInjectionReviewError(
+                f"disposal authorization unavailable: {field}")
+    if not declared_matches:
+        raise PromptInjectionReviewError(
+            "disposal authorization unavailable: declared_matches")
+
+
 def _disposal_gate(
     *,
     document_id: str,
@@ -192,18 +212,8 @@ def _disposal_gate(
 ) -> dict[str, str]:
     """P5-b: detected_and_ignored passes ONLY with (tuple) + (trust root)
     + (verified authorizer signature); every gap is a defined refusal."""
-    if not ignore_reason or not str(ignore_reason).strip():
-        raise PromptInjectionReviewError(
-            "disposal authorization unavailable: ignore_reason")
-    if not ignore_authorizer or not str(ignore_authorizer).strip():
-        raise PromptInjectionReviewError(
-            "disposal authorization unavailable: ignore_authorizer")
-    if not authorized_at or not str(authorized_at).strip():
-        raise PromptInjectionReviewError(
-            "disposal authorization unavailable: authorized_at")
-    if not declared_matches:
-        raise PromptInjectionReviewError(
-            "disposal authorization unavailable: declared_matches")
+    _require_disposal_metadata(
+        ignore_reason, ignore_authorizer, authorized_at, declared_matches)
     trust_root = _load_trust_root(trust_root_path)
     if not trust_root:
         raise PromptInjectionReviewError(

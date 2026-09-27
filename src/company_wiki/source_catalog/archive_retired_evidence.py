@@ -25,6 +25,14 @@ pinning it by sha256/size/exact span ids/row digests/verified completion time
 
 The export still runs on a read-only connection and does not take the operation
 lock (retired documents are never re-normalized, so their spans are stable).
+
+**Complexity ratchet (FC-1204, owner §四十二 裁定一, 2026-09-27)**: the former
+single ``archive_retired_evidence`` body measured cyclomatic complexity 19
+(> frozen 7) after the 2026-09-22 promotion batch.  Behaviour is UNCHANGED; the
+body is split into the same straight-line steps below so the module's max
+complexity ratchets back down (门禁自己指的根因修法：拆分函数 + 冻结表保持).
+Order, exception types, file layout and the fail-closed D5 guarantees are
+preserved.
 """
 from __future__ import annotations
 
@@ -127,6 +135,110 @@ def _verify_snapshot(temp_path: Path) -> tuple[int, dict[str, str]]:
     return len(ids), digests
 
 
+def _validate_required_now(now: datetime) -> None:
+    """D3: ``now`` must be an injected timezone-aware datetime (no clock read)."""
+    if not isinstance(now, datetime) or now.tzinfo is None:
+        raise TypeError(
+            "now: a timezone-aware datetime is required (no system-clock fallback)")
+
+
+def _target_paths(
+    archive_root: Path, now: datetime,
+) -> tuple[datetime, Path, Path, Path]:
+    """Resolve moment/out_dir/published path/temp path (D2/D3 uniqueness)."""
+    moment = now.astimezone(timezone.utc)
+    day = moment.date().isoformat()
+    token = uuid.uuid4().hex[:16]                     # non-clock uniqueness (D2/D3)
+    out_dir = archive_root / "archive" / day
+    out_dir.mkdir(parents=True, exist_ok=True)
+    out_path = out_dir / f"retired-evidence-{token}.jsonl.gz"
+    if out_path.exists():
+        raise FileExistsError(f"snapshot path already published: {out_path}")
+    tmp_path = out_dir / (
+        f"retired-evidence-{token}.jsonl.gz.partial-{uuid.uuid4().hex[:8]}")
+    return moment, out_dir, out_path, tmp_path
+
+
+def _write_snapshot_rows(
+    conn: sqlite3.Connection, tmp_path: Path,
+    progress: Callable[[int, int], None] | None, total: int,
+) -> tuple[int, dict[str, str]]:
+    """Stream retired spans into the TEMP file only (D5)."""
+    rows_written = 0
+    written_digests: dict[str, str] = {}
+    last_id: str | None = None
+    with gzip.open(tmp_path, "wt", encoding="utf-8", newline="\n") as fh:
+        while True:
+            if last_id is None:
+                rows = conn.execute(
+                    _SELECT + " ORDER BY e.span_id LIMIT ?", (BATCH_SIZE,)
+                ).fetchall()
+            else:
+                rows = conn.execute(
+                    _SELECT + " AND e.span_id > ? ORDER BY e.span_id LIMIT ?",
+                    (last_id, BATCH_SIZE),
+                ).fetchall()
+            if not rows:
+                break
+            for row in rows:
+                row_dict = dict(row)
+                fh.write(json.dumps(row_dict, ensure_ascii=False) + "\n")
+                written_digests[row_dict["span_id"]] = _row_digest(row_dict)
+                last_id = row["span_id"]
+            rows_written += len(rows)
+            if progress is not None:
+                progress(rows_written, total)
+    return rows_written, written_digests
+
+
+def _check_reconciliation(rows_written: int, total: int) -> None:
+    """Fail closed when the streamed count disagrees with the catalog."""
+    if rows_written != total:
+        raise RuntimeError(
+            f"archive reconciliation failed: wrote {rows_written}, "
+            f"catalog reports {total}; snapshot not published")
+
+
+def _verify_and_publish(
+    tmp_path: Path, out_path: Path,
+    rows_written: int, written_digests: dict[str, str],
+) -> tuple[int, dict[str, str]]:
+    """Verify the bytes about to be published, then publish (fail closed, D5)."""
+    _fsync_file(tmp_path)
+    verified_count, verified_digests = _verify_snapshot(tmp_path)
+    if verified_count != rows_written or verified_digests != written_digests:
+        raise RuntimeError(
+            "archive self-verification failed: snapshot not published")
+    _publish(tmp_path, out_path)
+    return verified_count, verified_digests
+
+
+def _write_manifest(
+    out_dir: Path, out_path: Path, moment: datetime,
+    database_path: Path, verified_count: int, verified_digests: dict[str, str],
+) -> Path:
+    """Write the pinning manifest atomically next to the published snapshot."""
+    manifest = {
+        "schema_version": MANIFEST_SCHEMA,
+        "catalog_identity": f"{database_path.name}:{CATALOG_SCHEMA_VERSION}",
+        "archive_path": str(out_path.resolve()),
+        "archive_sha256": _sha256_file(out_path),
+        "archive_bytes": out_path.stat().st_size,
+        "rows_in_archive": verified_count,
+        "verified_completed_at": moment.strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "span_ids": sorted(verified_digests),
+        "row_digests": {k: verified_digests[k] for k in sorted(verified_digests)},
+        "verifier": ("archive_retired_evidence self-check: re-read snapshot, "
+                     "recomputed per-row digests and count before publish"),
+        "problems": [],
+        "ok": True,
+    }
+    manifest_path = out_dir / f"{out_path.name}.manifest.json"
+    _atomic_write_text(manifest_path,
+                       json.dumps(manifest, ensure_ascii=False, indent=2))
+    return manifest_path
+
+
 def archive_retired_evidence(
     database_path: Path | str,
     archive_root: Path | str,
@@ -139,22 +251,10 @@ def archive_retired_evidence(
     The machine clock is never read: ``now`` decides the date directory and the
     provenance timestamp, a uuid4 token decides file uniqueness (D2/D3).
     """
-    if not isinstance(now, datetime) or now.tzinfo is None:
-        raise TypeError(
-            "now: a timezone-aware datetime is required (no system-clock fallback)")
+    _validate_required_now(now)
     database_path = Path(database_path)
     archive_root = Path(archive_root)
-
-    moment = now.astimezone(timezone.utc)
-    day = moment.date().isoformat()
-    token = uuid.uuid4().hex[:16]                     # non-clock uniqueness (D2/D3)
-    out_dir = archive_root / "archive" / day
-    out_dir.mkdir(parents=True, exist_ok=True)
-    out_path = out_dir / f"retired-evidence-{token}.jsonl.gz"
-    if out_path.exists():
-        raise FileExistsError(f"snapshot path already published: {out_path}")
-    tmp_path = out_dir / (
-        f"retired-evidence-{token}.jsonl.gz.partial-{uuid.uuid4().hex[:8]}")
+    moment, out_dir, out_path, tmp_path = _target_paths(archive_root, now)
 
     conn = sqlite3.connect(f"file:{database_path}?mode=ro", uri=True)
     conn.row_factory = sqlite3.Row
@@ -166,68 +266,17 @@ def archive_retired_evidence(
                 "(SELECT document_id FROM documents WHERE source_status='retired')"
             ).fetchone()[0]
         )
-
-        rows_written = 0
-        written_digests: dict[str, str] = {}
-        last_id: str | None = None
         # D5: everything below writes the TEMP file only; the published path
         # is touched once, atomically, after verification.
-        with gzip.open(tmp_path, "wt", encoding="utf-8", newline="\n") as fh:
-            while True:
-                if last_id is None:
-                    rows = conn.execute(
-                        _SELECT + " ORDER BY e.span_id LIMIT ?", (BATCH_SIZE,)
-                    ).fetchall()
-                else:
-                    rows = conn.execute(
-                        _SELECT + " AND e.span_id > ? ORDER BY e.span_id LIMIT ?",
-                        (last_id, BATCH_SIZE),
-                    ).fetchall()
-                if not rows:
-                    break
-                for row in rows:
-                    row_dict = dict(row)
-                    fh.write(json.dumps(row_dict, ensure_ascii=False) + "\n")
-                    written_digests[row_dict["span_id"]] = _row_digest(row_dict)
-                    last_id = row["span_id"]
-                rows_written += len(rows)
-                if progress is not None:
-                    progress(rows_written, total)
-
-        if rows_written != total:
-            raise RuntimeError(
-                f"archive reconciliation failed: wrote {rows_written}, "
-                f"catalog reports {total}; snapshot not published")
-
-        # verify the bytes we are about to publish (fail closed, D5)
-        _fsync_file(tmp_path)
-        verified_count, verified_digests = _verify_snapshot(tmp_path)
-        if verified_count != rows_written or verified_digests != written_digests:
-            raise RuntimeError(
-                "archive self-verification failed: snapshot not published")
-
-        _publish(tmp_path, out_path)
+        rows_written, written_digests = _write_snapshot_rows(
+            conn, tmp_path, progress, total)
+        _check_reconciliation(rows_written, total)
+        verified_count, verified_digests = _verify_and_publish(
+            tmp_path, out_path, rows_written, written_digests)
         published = True
-
-        archive_sha256 = _sha256_file(out_path)
-        manifest = {
-            "schema_version": MANIFEST_SCHEMA,
-            "catalog_identity": f"{database_path.name}:{CATALOG_SCHEMA_VERSION}",
-            "archive_path": str(out_path.resolve()),
-            "archive_sha256": archive_sha256,
-            "archive_bytes": out_path.stat().st_size,
-            "rows_in_archive": verified_count,
-            "verified_completed_at": moment.strftime("%Y-%m-%dT%H:%M:%SZ"),
-            "span_ids": sorted(verified_digests),
-            "row_digests": {k: verified_digests[k] for k in sorted(verified_digests)},
-            "verifier": ("archive_retired_evidence self-check: re-read snapshot, "
-                         "recomputed per-row digests and count before publish"),
-            "problems": [],
-            "ok": True,
-        }
-        manifest_path = out_dir / f"{out_path.name}.manifest.json"
-        _atomic_write_text(manifest_path,
-                           json.dumps(manifest, ensure_ascii=False, indent=2))
+        manifest_path = _write_manifest(
+            out_dir, out_path, moment, database_path,
+            verified_count, verified_digests)
     finally:
         conn.close()
         if not published and tmp_path.exists():
