@@ -361,6 +361,7 @@ def _controller_for_start_test(tmp_path: Path, *, child_returns=7, child_stderr=
             "inventory_error": None,
         },
     )
+    controller._write_control(desired_state="enabled", stop_requested_for=None)
     return controller, fake_process, project
 
 
@@ -470,9 +471,11 @@ def test_read_desired_state_reads_persistent_pause_without_runtime_or_inventory(
             "inventory_error": "should_not_be_called",
         },
     )
-    # Default desired_state for a fresh control file is enabled.
+    # Missing control state is fail-closed and does not consult inventory.
+    assert controller.read_desired_state() == "paused"
+    # Explicit enable and pause remain persistent.
+    controller._write_control(desired_state="enabled")
     assert controller.read_desired_state() == "enabled"
-    # Mark persistent pause.
     controller._write_control(desired_state="paused")
     assert controller.read_desired_state() == "paused"
     # No runtime file created.

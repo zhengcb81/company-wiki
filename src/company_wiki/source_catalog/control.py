@@ -707,13 +707,13 @@ class WorkerController:
         if not loaded or loaded.get("schema_version") != CONTROL_SCHEMA_VERSION:
             return {
                 "schema_version": CONTROL_SCHEMA_VERSION,
-                "desired_state": "enabled",
+                "desired_state": "paused",
                 "updated_at": None,
                 "stop_requested_for": None,
             }
         desired = loaded.get("desired_state")
         if desired not in {"enabled", "paused"}:
-            loaded["desired_state"] = "enabled"
+            loaded["desired_state"] = "paused"
         return loaded
 
     def _write_control(self, **changes: Any) -> dict[str, Any]:
@@ -774,7 +774,7 @@ class WorkerController:
         worker has even opened its session). Always returns ``enabled`` or
         ``paused``.
         """
-        return self._read_control().get("desired_state") or "enabled"
+        return self._read_control().get("desired_state") or "paused"
 
     def status(self) -> dict[str, Any]:
         control = self._read_control()

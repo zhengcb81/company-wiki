@@ -1,6 +1,6 @@
 # company-wiki 清洁架构与 TDD 实施总图（2026-09-27）
 
-> **状态：计划已冻结；Phase B / M1、Phase C / M2-derive 与 Phase D / M2-provider 已完成，Phase E / M3 的详细施工卡已冻结，下一步从 E0 可信基线开始 TDD 实施。** 本页把 R4 数据湖、叙述证据、电话会议、Worker、跨仓消费和空间治理收束成一个施工顺序。历史计划保留证据价值；发生冲突时，以本页的层次、门禁和顺序为准。company-wiki 当前没有生产流量，允许重构内部接口、模块和派生 schema；财报、公告、招股书、再融资文件、投资者关系资料和电话会议原件不得丢失。
+> **状态：计划已冻结；Phase B / M1、Phase C / M2-derive 与 Phase D / M2-provider 已完成，Phase E / M3 施工卡与 E0 可信基线已完成，下一步从 E1 Automation DB v2/原子 Store 的 RED tests 开始。** 本页把 R4 数据湖、叙述证据、电话会议、Worker、跨仓消费和空间治理收束成一个施工顺序。历史计划保留证据价值；发生冲突时，以本页的层次、门禁和顺序为准。company-wiki 当前没有生产流量，允许重构内部接口、模块和派生 schema；财报、公告、招股书、再融资文件、投资者关系资料和电话会议原件不得丢失。
 
 ## 1. 第一性原理与不可破坏条件
 
@@ -344,7 +344,7 @@ git diff --check
 
 ## 13. 当前下一步
 
-按已冻结的 [Phase E / M3 Worker 详细施工卡](phase_e_m3_worker_implementation_spec_2026-09-28.md)进入 **E0 可信基线**：先修两处已被生产 review contract 淘汰的测试 helper，并增加缺失/非法控制状态默认 paused 的红测；E0 全绿后才进入 Automation DB v2 和原子 Store。E-A 通过前不实现多进程 Supervisor，E-B 通过前不建议生产 enable。Phase E 不修改 revenue-forecast/filing-fetch/StockWiki，不启动生产 Worker，也不删除历史派生数据。
+按已冻结的 [Phase E / M3 Worker 详细施工卡](phase_e_m3_worker_implementation_spec_2026-09-28.md)进入 **E1 Automation DB v2 与原子 Store**：先写 migration、claim/heartbeat/finish/reap/effect+outbox fencing 的 RED tests，再重构 Store；E-A 通过前不实现多进程 Supervisor，E-B 通过前不建议生产 enable。E0 已把缺失/损坏/非法 legacy control 改为默认 paused，并修正两处陈旧 review fixture，未放松生产 review gate。Phase E 不修改 revenue-forecast/filing-fetch/StockWiki，不启动生产 Worker，也不删除历史派生数据。
 
 ### M2-provider 完成收据（2026-09-28）
 

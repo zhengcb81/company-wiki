@@ -52,14 +52,16 @@ def _review_documents(catalog: SourceCatalog) -> None:
     )
     with catalog.store.transaction() as connection:
         for row in rows:
+            evidence_payload = str(row["content_sha256"])
             record_prompt_injection_review(
                 connection,
                 str(row["document_id"]),
                 status="not_detected",
                 reviewer="gp003-test-fixture",
                 evidence_sha256=hashlib.sha256(
-                    str(row["content_sha256"]).encode()
+                    evidence_payload.encode()
                 ).hexdigest(),
+                evidence_payload=evidence_payload,
                 now="2026-09-02T12:00:00Z",
                 source_sha256=str(row["content_sha256"]),
                 policy_hash="c" * 64,

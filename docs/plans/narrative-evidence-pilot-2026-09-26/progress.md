@@ -563,3 +563,12 @@
 - 空间取舍：select/summary 中间结果存有上限的 attempt JSON，不生成全量 normalized 或逐页文件；verify 只生成一份内容寻址 canonical JSON bundle；低价值文档只生成小型 skip/coverage bundle。最终使用窄的 immutable `narrative_artifact_versions`，不覆写 legacy `artifacts`，不增加第二全文索引。
 - 当前 production control 仍为 `paused` 且 runtime 文件不存在。RF 阶段边界仍为 `fcap@ee0a82bfd`、`origin/main@3a69f9c5`，其既有 planning/assurance dirty 内容未触碰。
 - 下一步：单独提交本次纯规划变更；之后从 E0 测试夹具/默认暂停红测开始。E-A 通过前不写 Supervisor/narrative handler，E-B 通过前不建议生产 enable。
+
+## Session: Phase E / E0 可信基线（2026-09-28）
+
+- 计划先以独立 commit `77b1229` 冻结后才改产品。E0 新增 missing/malformed/unknown legacy control 三个 fail-closed 用例，首轮按预期 **3 failed**；`WorkerController._read_control/read_desired_state` 改为缺失或非法时默认 `paused` 后，聚焦集合 **10 passed**。
+- 旧 control tests 若确实要启动 Worker，现在必须显式写 `enabled` 或走 `resume`。测试 helper 只在首次构造时显式 opt in，不再依赖生产默认开启；这使 fresh install、控制文件损坏和测试启动意图分开。
+- `test_source_catalog_worker` 和 `test_source_catalog_focus_admission` 的 review helper 现在传入与 `evidence_sha256` 对应的 `evidence_payload`。原先五个失败与 focus summary 调度用例均通过；mandatory payload 的生产拒绝逻辑没有更改。
+- 扩展 E0 基线覆盖 automation store/worker/migration/controller、operation lock、parser liveness、legacy worker、pause guard、control/bootstrap 和 focus admission，共收集 223 项。首次运行 **222 passed / 1 failed**，唯一失败是 fresh control 后直接调用 `worker-start` 的真实临时 Worker 测试；按新合同在 fixture 显式 enable 后，该项单独重跑通过。未重复运行其余 222 项，因为改动只影响该 fixture 的启动前状态。
+- 修改文件 Ruff 与 `git diff --check` 通过；全部 `C:\cwt\m3-e0-*` 测试根清理为 0。生产 `.source_catalog/worker_control.json` 仍为 paused，`worker_runtime.json` 不存在，没有启动生产 Worker。
+- 下一步 E1：先增加 Automation DB v2 migration 和原子 claim/heartbeat/finish/reap/effect+outbox 的 RED tests；E-A 之前不实现 Supervisor。

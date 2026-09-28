@@ -32,6 +32,7 @@ def _controller(tmp_path: Path, processes: _FakeProcesses, **extra):
     from company_wiki.source_catalog.control import WorkerController
 
     terminate_process = extra.pop("terminate_process", processes.terminate)
+    initialize_control = extra.pop("initialize_control", True)
     project = tmp_path / "project"
     project.mkdir(exist_ok=True)
     config = project / "config" / "source_catalog.yaml"
@@ -39,7 +40,7 @@ def _controller(tmp_path: Path, processes: _FakeProcesses, **extra):
     config.parent.mkdir(exist_ok=True)
     config.write_text("schema_version: '1.0'\n", encoding="utf-8")
     worker_config.write_text("schema_version: '1.0'\n", encoding="utf-8")
-    return WorkerController(
+    controller = WorkerController(
         catalog_dir=project / ".source_catalog",
         project_root=project,
         config_path=config,
@@ -50,6 +51,36 @@ def _controller(tmp_path: Path, processes: _FakeProcesses, **extra):
         sleeper=lambda _seconds: None,
         **extra,
     )
+    # Tests that exercise a running legacy worker opt in explicitly.  The
+    # production default for a missing control file is tested separately and
+    # must remain fail-closed.
+    if initialize_control and not controller.control_path.exists():
+        controller._write_control(desired_state="enabled", stop_requested_for=None)
+    return controller
+
+
+@pytest.mark.parametrize(
+    "payload",
+    (
+        None,
+        "{",
+        json.dumps({"schema_version": "1.0", "desired_state": "unknown"}),
+    ),
+)
+def test_missing_or_invalid_control_defaults_to_paused(tmp_path, payload):
+    processes = _FakeProcesses()
+    controller = _controller(
+        tmp_path,
+        processes,
+        initialize_control=False,
+    )
+    if payload is not None:
+        controller.control_path.parent.mkdir(parents=True, exist_ok=True)
+        controller.control_path.write_text(payload, encoding="utf-8")
+
+    assert controller.read_desired_state() == "paused"
+    with pytest.raises(RuntimeError, match="paused"):
+        controller.open_session()
 
 
 def test_atomic_json_write_retries_a_transient_windows_permission_error(
@@ -1031,6 +1062,7 @@ fingerprint_retry_backoff_seconds: 900
         worker_config_path=worker_config_path,
         python_executable=Path(os.sys.executable),
     )
+    controller._write_control(desired_state="enabled", stop_requested_for=None)
 
     owned_identities = []
     residual_identities = []
