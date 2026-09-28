@@ -583,3 +583,14 @@
 - 新增/旧 automation 合并门最终共 **193 passed**。修改范围 Ruff、显式 C901 `<=10`、`git diff --check` 通过；pre-commit 的 Ruff、config doctor、host assumption guard 通过。全部 `C:\cwt\m3-e1-*` 根清理为 0。
 - production `.source_catalog/worker_control.json` 仍为 paused，`worker_runtime.json` 不存在；未创建/迁移生产 Automation DB，未改 raw/catalog。RF 只读边界仍为 `fcap@ee0a82bf`、`origin/main@3a69f9c5`，保留其既有 planning/assurance dirty 和一次性目录，本项目零写入、零清理、零切换。
 - 下一步 E2：先写 DAG materialization、dependency result、missing/corrupt/paused gate、pause/claim/finish 线性化 RED tests；只修改 `automation/scheduler.py`、`automation/runtime_control.py`、controller/planner 与关闭 legacy auto-prune 所需最小边界。E2 完成后统一执行 E-A，不提前写 Supervisor 或 narrative handler。
+
+## Session: Phase E / E2 DAG 与运行闸门；E-A 集中审查（2026-09-28）
+
+- 按冻结施工卡先写 E2 RED tests：DAG 重复物化、payload/job-key 冲突、依赖 result 缺失、terminal predecessor blocked、gate 缺失/损坏、pause/finish race、legacy interlock 和旧 Worker prune。首组为 **12 failed**；新增双向 interlock 审查为 **4 failed / 4 passed**；重复 enable 幂等为 **1 failed**。
+- 新增 `automation/scheduler.py`、`automation/runtime_control.py` 和 connection-local `automation/dag_persistence.py`。Controller shadow 不再逐 job 写 DETECTED，而是一次事务写 root READY、downstream PLANNED 和全部 dependency；异常不会留下半个 DAG。
+- `promote_ready_jobs` 只接受具有非空成功 `result_json` 的 SUCCEEDED predecessor；cancelled/dead-letter predecessor 会把仍在 PLANNED 的 downstream 标成 `BLOCKED_HUMAN / DEPENDENCY_TERMINAL`，诊断列出 parent job/status。
+- runtime control 同时使用 SQLite generation 与 catalog operation lock。AUTO enable 设置 legacy `automation_enabled` 标记；legacy `resume/start/open_session` 读取同一标记并拒绝双开。pause 在锁内更新 AUTO gate、持久 legacy pause、清除标记，锁外停止旧进程；旧 attempt 随 generation 失效。除 fake seam 竞争测试外，真实 `WorkerController` ↔ `AutomationWorkerController` 临时根集成 **2 passed**。
+- E-A 首轮 **227 passed** 后没有直接签收：人工审查发现 legacy resume 的单向互斥缺口，补测修复并再跑最终门，结果 **229 passed in 69.23s**。随后全部 automation 单测加 store boundary 回归 **195 passed in 19.14s**；其中两条旧 shadow 测试从过时的 DETECTED 假设更新为 root READY/downstream PLANNED，仍明确禁止 shadow 产生 SUCCEEDED/accepted 决策。DAG SQL 从大 Store 拆到 capability 文件，但 transaction 仍由 Store 管理；修改文件 Ruff 全绿，新 automation 模块 C901 `<=10`，`dag_persistence.py`、`scheduler.py`、`runtime_control.py` strict mypy 通过。
+- 旧 `SourceCatalogWorker` 的 retained-evidence 周期任务从 `apply=True` 改为 `apply=False`，并以 cycle timestamp 显式构造 timezone-aware `now`；测试还暴露并修复了原本缺失的 `project_root` fallback 属性。Phase E 没有提供 destructive apply 入口。
+- 所有测试位于精确 `C:/cwt/m3-e2-*`、`m3-gate-a*` 根并在 finally 后复核为 0。production legacy control 仍 paused，runtime/automation DB/operation lock 均不存在；未运行 Supervisor、narrative handler 或 production Worker。
+- RF 阶段边界只读核对仍为本地 `fcap@ee0a82bf`，保留其既有 planning/assurance/temp dirty 内容；本项目没有修改、清理或切换 RF。下一步为 E3 Supervisor/worker-process 的真 `spawn` 多文档并发。

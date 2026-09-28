@@ -13,6 +13,13 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Generic, TypeVar
 
+from .dag_persistence import (
+    DAGConflictError,
+    DAGEventNotFoundError,
+    DAGIntegrityError,
+    DAGPutResult,
+    write_materialized_dag,
+)
 from .migrations import (
     BackupHook,
     SchemaReport,
@@ -29,6 +36,7 @@ from .models import (
     HandlerResult,
     Job,
     JobStatus,
+    MaterializedDAG,
     Attempt,
     OutboxLease,
     RuntimeGate,
@@ -510,6 +518,41 @@ def _resolve_idempotency(
     )
 
 
+def _block_terminal_dependencies(
+    connection: sqlite3.Connection,
+    *,
+    now: str,
+) -> None:
+    rows = connection.execute(
+        "SELECT child.job_id AS child_id, parent.job_id AS parent_id, "
+        "parent.status AS parent_status FROM jobs child "
+        "JOIN job_dependencies d ON d.job_id = child.job_id "
+        "JOIN jobs parent ON parent.job_id = d.depends_on_job_id "
+        "WHERE child.status = ? AND parent.status IN (?, ?) "
+        "ORDER BY child.job_id, parent.job_id",
+        (
+            JobStatus.PLANNED.value,
+            JobStatus.DEAD_LETTER.value,
+            JobStatus.CANCELLED.value,
+        ),
+    ).fetchall()
+    failures: dict[str, list[str]] = {}
+    for row in rows:
+        failures.setdefault(row["child_id"], []).append(
+            f"{row['parent_id']}={row['parent_status']}"
+        )
+    for child_id, details in failures.items():
+        child = _job_from_row(_job_row(connection, child_id))
+        _transition_job_in_transaction(
+            connection,
+            child,
+            target=JobStatus.BLOCKED_HUMAN,
+            updated_at=now,
+            error_code="DEPENDENCY_TERMINAL",
+            error_detail="terminal dependencies: " + ", ".join(details),
+        )
+
+
 # --------------------------------------------------------------------------- #
 # AutomationStore.
 # --------------------------------------------------------------------------- #
@@ -804,6 +847,28 @@ class AutomationStore:
         finally:
             conn.close()
 
+    def materialize_dag(
+        self,
+        event: Event,
+        dag: MaterializedDAG,
+    ) -> DAGPutResult:
+        """Persist one deterministic DAG and all dependency edges atomically."""
+
+        if not isinstance(event, Event) or not isinstance(dag, MaterializedDAG):
+            raise TypeError("event and dag must use automation model types")
+
+        def _op(conn):
+            try:
+                return write_materialized_dag(conn, event, dag)
+            except DAGConflictError as exc:
+                raise IdempotencyConflictError(str(exc)) from exc
+            except DAGEventNotFoundError as exc:
+                raise RecordNotFoundError(str(exc)) from exc
+            except DAGIntegrityError as exc:
+                raise IntegrityViolationError(str(exc)) from exc
+
+        return self._write_transaction(_op)
+
     # -- Attempt CRUD ------------------------------------------------------ #
 
     def put_attempt(self, value: Attempt) -> PutResult[Attempt]:
@@ -1025,6 +1090,7 @@ class AutomationStore:
 
     def promote_ready_jobs(self, *, now: str) -> tuple[str, ...]:
         def _op(conn):
+            _block_terminal_dependencies(conn, now=now)
             rows = conn.execute(
                 f"SELECT {_JOB_COLS.replace('job_id', 'j.job_id', 1)} FROM jobs j "
                 "WHERE j.status IN (?, ?) AND j.not_before <= ? "
@@ -1472,6 +1538,7 @@ class AutomationStore:
 __all__ = [
     "AutomationStore",
     "PutResult",
+    "DAGPutResult",
     "AutomationStoreError",
     "InvalidStorePathError",
     "StoreBusyError",

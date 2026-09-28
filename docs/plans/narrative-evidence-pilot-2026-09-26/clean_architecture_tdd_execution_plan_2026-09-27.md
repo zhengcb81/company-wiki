@@ -344,7 +344,7 @@ git diff --check
 
 ## 13. 当前下一步
 
-按已冻结的 [Phase E / M3 Worker 详细施工卡](phase_e_m3_worker_implementation_spec_2026-09-28.md)进入 **E2 DAG materialization、依赖结果和运行门**：先写 materialize 幂等/冲突、dependency result、paused/missing/corrupt gate 与 pause 竞争 RED tests，再实现 scheduler/runtime control；随后只做一次 E-A 集中审查。E1 已完成 schema v2、generation fencing、原子 Store、薄 Worker 和 outbox ACK/retry。E-A 通过前不实现多进程 Supervisor，E-B 通过前不建议生产 enable。Phase E 不修改 revenue-forecast/filing-fetch/StockWiki，不启动生产 Worker，也不删除历史派生数据。
+按已冻结的 [Phase E / M3 Worker 详细施工卡](phase_e_m3_worker_implementation_spec_2026-09-28.md)进入 **E3 Supervisor 与真正的多文档进程并发**：先写 Windows `spawn`、P1/P2/P4 profile、每进程独立 Store/client、heartbeat、崩溃回收、bounded shutdown 和 profile 非法值失败关闭的 RED tests，再实现 Supervisor 与 child entry point。E2 已完成原子 DAG materialization、依赖 result 门、双向 legacy/AUTO interlock 和 destructive prune dry-run 收口；E-A 最终 229 项通过。E-B 通过前不建议 production enable。Phase E 不修改 revenue-forecast/filing-fetch/StockWiki，不启动生产 Worker，也不删除历史派生数据。
 
 ### E1 完成收据（2026-09-28）
 
@@ -353,6 +353,15 @@ git diff --check
 - Worker 只执行 gate read → atomic claim → transaction 外 handler → atomic finish；不再调用旧 split CRUD 或吞完成异常。
 - automation 迁移、Store、Worker、竞争及既有回归 **193 passed**；修改函数显式 C901 `<=10`，Ruff/pre-commit/config/host/diff gate 全绿。
 - production Worker 保持 paused、runtime absent，`C:/cwt/m3-e1-*` 为 0；RF 只读边界未改变。
+
+### E2 / E-A 完成收据（2026-09-28）
+
+- `AutomationScheduler` 将纯 `PlannedDAG` 转成 root READY / downstream PLANNED 的 `MaterializedDAG`；Store 在一个事务内核对已登记 event、幂等写 jobs/dependencies，并在任何冲突时整体回滚。
+- dependency promotion 要求前置 job 为 SUCCEEDED 且存在非空成功 `result_json`；前置 cancelled/dead-letter 时，下游进入带 `DEPENDENCY_TERMINAL` 明细的 `BLOCKED_HUMAN`。
+- AUTO gate 与 legacy JSON 使用同一 `CatalogOperationLock`；legacy control 新增 `automation_enabled` 互斥标记，`resume/start/open_session` 均拒绝与 AUTO 同时运行。pause 先递增 AUTO generation，再持久 legacy pause/清除标记，随后在锁外停止旧进程。
+- E-A 审查发现 DAG SQL 不应继续堆入 `store.py`，因此拆出 connection-local `dag_persistence.py`；transaction 仍由 Store 独占。旧 Worker 的 retired-evidence 周期任务只允许 `apply=False`，并显式传入由 cycle timestamp 得到的 UTC `now`。
+- RED 收据：首组 12 failed；双向 interlock 4 failed / 4 passed；enable 幂等 1 failed。最终 E-A **229 passed in 69.23s**，修改文件 Ruff 与新 automation 模块 C901 `<=10`。
+- production legacy control 仍 paused，runtime/automation DB/operation lock 均不存在；`C:/cwt/m3-e2-*` 与 `m3-gate-a*` 测试根为 0。RF 只读边界保持 `fcap@ee0a82bf`，未写入或清理其既有 dirty 工作树。
 
 ### M2-provider 完成收据（2026-09-28）
 

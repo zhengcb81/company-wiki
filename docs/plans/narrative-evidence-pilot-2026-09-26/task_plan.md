@@ -291,6 +291,7 @@ company-wiki 只负责来源、解析质量、证据定位、检索和来源摘�
 - [x] 按总图 Phase C 完成 12 件样本、DocumentStructure/selector/coverage/locator/空间行为与叙述证据分层。
 - [x] 完成 Phase D provider/transcript adapter、失败矩阵与 fake subprocess E2E；保留真实 E-T HTML material 语义阻断到 Phase F。
 - [x] 完成 Phase E/E0 fail-closed baseline 与 E1 Automation DB v2、原子 Store、Worker/Outbox fencing。
-- [ ] 实施 E2 DAG materialization、依赖结果和运行门，再执行 E-A 集中审查。
+- [x] 完成 E2 原子 DAG materialization、依赖结果门、双向 legacy/AUTO interlock 与 destructive prune dry-run 收口；E-A 集中审查最终 **229 passed**。
+- [ ] 按冻结施工卡进入 E3：先写 Supervisor/worker-process 的 spawn、profile、heartbeat、崩溃恢复与 bounded shutdown RED tests，再实现真正的多文档进程并发。
 
-**Status:** Phase E/E1 complete；E2 与 E-A pending。
+**Status:** Phase E/E2 与 E-A complete；E3 pending，production Worker 仍 paused。

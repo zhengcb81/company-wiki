@@ -83,6 +83,61 @@ def test_missing_or_invalid_control_defaults_to_paused(tmp_path, payload):
         controller.open_session()
 
 
+def test_interlock_state_distinguishes_valid_pause_from_missing_control(tmp_path):
+    processes = _FakeProcesses()
+    controller = _controller(
+        tmp_path,
+        processes,
+        initialize_control=False,
+    )
+
+    missing = controller.interlock_state()
+    controller.persist_pause_intent()
+    persisted = controller.interlock_state()
+
+    assert missing == {
+        "automation_enabled": False,
+        "control_valid": False,
+        "desired_state": "paused",
+        "runtime_state": "stopped",
+    }
+    assert persisted == {
+        "automation_enabled": False,
+        "control_valid": True,
+        "desired_state": "paused",
+        "runtime_state": "stopped",
+    }
+
+
+def test_interlock_state_treats_corrupt_runtime_as_unknown(tmp_path):
+    processes = _FakeProcesses()
+    controller = _controller(tmp_path, processes)
+    controller.persist_pause_intent()
+    controller.runtime_path.write_text("{", encoding="utf-8")
+
+    assert controller.interlock_state() == {
+        "automation_enabled": False,
+        "control_valid": True,
+        "desired_state": "paused",
+        "runtime_state": "unknown",
+    }
+
+
+def test_automation_interlock_blocks_legacy_resume_start_and_session(tmp_path):
+    processes = _FakeProcesses()
+    controller = _controller(tmp_path, processes)
+    controller.persist_automation_interlock(True)
+
+    with pytest.raises(RuntimeError, match="automation worker"):
+        controller.resume(wait_seconds=0)
+
+    controller._write_control(desired_state="enabled", automation_enabled=True)
+    with pytest.raises(RuntimeError, match="automation worker"):
+        controller.start(wait_seconds=0)
+    with pytest.raises(RuntimeError, match="automation worker"):
+        controller.open_session()
+
+
 def test_atomic_json_write_retries_a_transient_windows_permission_error(
     tmp_path, monkeypatch
 ):

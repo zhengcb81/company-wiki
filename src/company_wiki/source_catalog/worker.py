@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import ctypes
 from dataclasses import dataclass
-from datetime import datetime
+from datetime import datetime, timezone
 import json
 import os
 from pathlib import Path
@@ -357,6 +357,12 @@ class SourceCatalogWorker:
         self.sleep = sleep
         self.scheduler_policy = scheduler_policy or SourceOnlySchedulerPolicy()
         self.state = self._load_state()
+
+    @property
+    def project_root(self) -> Path:
+        if self._project_root is not None:
+            return self._project_root
+        return Path(self.catalog.config.project_root)
 
     def _load_state(self) -> dict[str, Any]:
         defaults: dict[str, Any] = {
@@ -781,10 +787,8 @@ class SourceCatalogWorker:
                 3,
             )
             self.state["dirty_since_last_export"] = 0
-        # Phase 2.3: weekly retained-evidence prune check (90-day retention).
-        # The worker is the durable "memory": it checks weekly and auto-recycles
-        # once the oldest archive passes the retention window (the archive
-        # protects evidence; not-due runs are no-ops).
+        # Weekly retained-evidence report. Destructive apply is intentionally
+        # unreachable from the legacy worker; Phase G owns any reviewed cleanup.
         if timestamp - int(self.state.get("last_prune_check_at") or 0) >= (
             self.config.prune_check_interval_seconds
         ):
@@ -795,8 +799,9 @@ class SourceCatalogWorker:
                 prune = prune_retired_evidence(
                     self.catalog.config,
                     self.project_root / "source_manifests",
-                    apply=True,
+                    apply=False,
                     retention_days=self.config.prune_retention_days,
+                    now=datetime.fromtimestamp(timestamp, tz=timezone.utc),
                 )
                 self.state["last_prune_report"] = _plain(prune)
             except Exception as exc:

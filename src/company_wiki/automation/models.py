@@ -387,6 +387,35 @@ class Job(StrictModel):
 
 
 @dataclass(frozen=True)
+class MaterializedDAG(StrictModel):
+    """Concrete jobs and dependency edges ready for one atomic store write."""
+
+    jobs: tuple[Job, ...]
+    dependencies: tuple[tuple[str, str], ...]
+
+    def __post_init__(self) -> None:
+        if not self.jobs:
+            raise ValueError("materialized DAG must contain at least one job")
+        if not all(isinstance(job, Job) for job in self.jobs):
+            raise TypeError("jobs must contain Job values")
+        job_ids = tuple(job.job_id for job in self.jobs)
+        if len(set(job_ids)) != len(job_ids):
+            raise ValueError("materialized DAG job_id values must be unique")
+        normalized_edges: list[tuple[str, str]] = []
+        for edge in self.dependencies:
+            if not isinstance(edge, tuple) or len(edge) != 2:
+                raise TypeError("dependency edges must be (job_id, depends_on_job_id)")
+            child, parent = edge
+            if child not in job_ids or parent not in job_ids:
+                raise ValueError("dependency edge references a job outside the DAG")
+            if child == parent:
+                raise ValueError("self-dependency is not allowed")
+            normalized_edges.append(edge)
+        if len(set(normalized_edges)) != len(normalized_edges):
+            raise ValueError("materialized DAG dependency edges must be unique")
+
+
+@dataclass(frozen=True)
 class Attempt(StrictModel):
     attempt_id: str
     job_id: str

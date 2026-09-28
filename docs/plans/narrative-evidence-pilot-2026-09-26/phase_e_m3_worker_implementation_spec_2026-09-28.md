@@ -317,6 +317,14 @@ Store busy、schema drift、token mismatch、generation mismatch 必须是具名
 - `src/company_wiki/source_catalog/control.py`（只做 fail-closed 默认和 legacy interlock）
 - `src/company_wiki/source_catalog/worker.py`（只关闭自动 apply prune）
 
+**E2 实施收据（2026-09-28）**
+
+- 同一 event 重复 materialize 只保留一组 jobs/dependencies；event payload 或不可变 job 内容漂移复用 job key 时具名冲突，部分写入整体 rollback。
+- root 初始 READY、downstream 初始 PLANNED；前置完成但无成功 result JSON 时不提升，cancelled/dead-letter 时下游写入可解释的 `DEPENDENCY_TERMINAL` blocked 诊断。
+- runtime gate 缺失/损坏时 claim 失败关闭；pause 与 finish 的真实双线程竞争只产生“finish 先提交”或“pause 先 fencing”两种线性结果。
+- AUTO/legacy 采用双向互斥：AUTO enable 先写 legacy `automation_enabled` 标记再开 DB gate；legacy `resume/start/open_session` 在同一 operation lock 下拒绝该标记；重复 enable 幂等；真实两类 controller 的临时根集成 **2 passed**。
+- `dag_persistence.py` 只接收调用方 transaction connection，Store 继续独占 BEGIN/COMMIT；scheduler/controller 不执行 handler。旧 Worker 的自动 retired-evidence apply 已不可达，只保留确定性 dry-run 报告。
+
 ### 大节点 E-A：事务与安全审查
 
 集中运行：
@@ -333,6 +341,13 @@ python -m pytest -q -p no:cacheprovider --basetemp C:\cwt\m3-gate-a `
 ```
 
 Gate 条件：原子性与 fencing 全绿；legacy 默认 paused；自动 destructive prune 不可达；无生产 DB/控制文件变化。通过后才写进程并发和 narrative handler。
+
+**E-A 结果（2026-09-28）**
+
+- 首轮集中门 227 passed 后，人工审查发现 legacy resume 仍可在 AUTO enable 之后单独启动；补双向 interlock 红测并修复后，最终集中门 **229 passed in 69.23s**。
+- Ruff 全绿；新增/重构 automation 模块显式 C901 `<=10`；全部 automation 单测加 store boundary 回归另有 **195 passed in 19.14s**。旧 `control.py`/`worker.py` 的既存高复杂函数未扩大为并发内核。
+- production `worker_control.json` 仍为 paused；`worker_runtime.json`、`automation.db`、`operation.lock` 均不存在；全部本轮 `C:/cwt/m3-e2-*` 与 `m3-gate-a*` 根已精确清理。
+- E-A 已放行 E3；Supervisor、narrative handler、projector 和 production enable 仍未实现或启动。
 
 ### E3：Supervisor 与真正的多进程执行
 
@@ -491,6 +506,7 @@ C:\cwt\m3-e2e-<nonce>\
 | `automation/migrations.py` | v1/v2 snapshot、备份、rollback、drift validation | 不静默修 schema |
 | `automation/models.py` | claim/gate/outbox lease 类型，完整 HandlerResult 序列化 | 不引入 source_catalog 类型 |
 | `automation/store.py` | 原子 application operations | 不把多步事务留给 Worker |
+| `automation/dag_persistence.py` | connection-local DAG SQL 与幂等比较 | 不拥有 transaction、不执行 handler |
 | `automation/worker.py` | 薄 orchestration、具名错误、heartbeat 生命周期 | 不吞异常、不共享 client |
 | `automation/scheduler.py` | 新建；DAG materialize/promote | 不执行 handler |
 | `automation/runtime_control.py` | 新建；gate generation | 不启动 production |

@@ -202,9 +202,15 @@ def test_shadow_creates_jobs_no_handler_execution(tmp_path):
     # Jobs were created in the store.
     jobs = store.list_jobs()
     assert len(jobs) > 0
-    # All jobs are in DETECTED status (not executed).
-    for job in jobs:
-        assert job.status is m.JobStatus.DETECTED
+    # Materialization makes only DAG roots claimable; dependent jobs wait.
+    status_by_type = {job.job_type: job.status for job in jobs}
+    assert status_by_type["source.normalize"] is m.JobStatus.READY
+    assert status_by_type["source.analyze"] is m.JobStatus.PLANNED
+    analyze = next(job for job in jobs if job.job_type == "source.analyze")
+    normalize = next(job for job in jobs if job.job_type == "source.normalize")
+    assert store.list_job_dependencies(analyze.job_id) == (
+        (analyze.job_id, normalize.job_id),
+    )
 
 
 def test_shadow_idempotent_on_duplicate_events(tmp_path):

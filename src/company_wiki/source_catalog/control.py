@@ -15,6 +15,7 @@ from typing import Any, Callable
 from uuid import uuid4
 
 from .code_identity import source_bundle_fingerprint
+from .lock import CatalogOperationLock
 
 
 CONTROL_SCHEMA_VERSION = "1.0"
@@ -724,6 +725,50 @@ class WorkerController:
         _atomic_write_json(self.control_path, value)
         return value
 
+    def interlock_state(self) -> dict[str, object]:
+        """Return the strict minimum state needed to enable the new worker."""
+
+        loaded = _read_json(self.control_path)
+        marker = loaded.get("automation_enabled", False) if loaded else False
+        marker_valid = type(marker) is bool
+        control_valid = bool(
+            loaded
+            and loaded.get("schema_version") == CONTROL_SCHEMA_VERSION
+            and loaded.get("desired_state") in {"enabled", "paused"}
+            and marker_valid
+        )
+        desired_state = (
+            str(loaded["desired_state"])
+            if control_valid and loaded is not None
+            else "paused"
+        )
+        runtime_exists = self.runtime_path.exists()
+        runtime = _read_json(self.runtime_path)
+        if runtime_exists and runtime is None:
+            runtime_state = "unknown"
+        else:
+            runtime_state = "running" if self._runtime_is_live(runtime) else "stopped"
+        return {
+            "automation_enabled": marker if marker_valid else True,
+            "control_valid": control_valid,
+            "desired_state": desired_state,
+            "runtime_state": runtime_state,
+        }
+
+    def persist_pause_intent(self) -> dict[str, object]:
+        self._write_control(desired_state="paused")
+        return self.interlock_state()
+
+    def persist_automation_interlock(self, enabled: bool) -> dict[str, object]:
+        if type(enabled) is not bool:
+            raise TypeError("enabled must be a boolean")
+        self._write_control(automation_enabled=enabled)
+        return self.interlock_state()
+
+    def _require_legacy_runtime_allowed(self) -> None:
+        if self.interlock_state()["automation_enabled"] is not False:
+            raise RuntimeError("automation worker is enabled; legacy worker is interlocked")
+
     @staticmethod
     def _runtime_identity(runtime: dict[str, Any] | None) -> dict[str, Any] | None:
         if not runtime:
@@ -882,8 +927,13 @@ class WorkerController:
         return result
 
     def open_session(self) -> WorkerSession:
-        if self._read_control()["desired_state"] == "paused":
-            raise RuntimeError("source-catalog worker is paused")
+        with CatalogOperationLock(
+            self.catalog_dir,
+            operation="legacy-worker-open-session",
+        ):
+            self._require_legacy_runtime_allowed()
+            if self._read_control()["desired_state"] == "paused":
+                raise RuntimeError("source-catalog worker is paused")
         self._clear_stale_runtime()
         existing = _read_json(self.lock_path)
         if self._runtime_is_live(existing):
@@ -980,7 +1030,11 @@ class WorkerController:
     def pause(
         self, *, graceful_timeout_seconds: float = 5.0, force: bool = True
     ) -> dict[str, Any]:
-        self._write_control(desired_state="paused")
+        with CatalogOperationLock(
+            self.catalog_dir,
+            operation="legacy-worker-pause",
+        ):
+            self._write_control(desired_state="paused")
         return self.stop(
             graceful_timeout_seconds=graceful_timeout_seconds,
             force=force,
@@ -1068,8 +1122,13 @@ class WorkerController:
     def start(
         self, *, wait_seconds: float = 5.0, startup_delay_seconds: int = 0
     ) -> dict[str, Any]:
-        if self._read_control()["desired_state"] == "paused":
-            return {"started": False, "reason": "paused; use resume"}
+        with CatalogOperationLock(
+            self.catalog_dir,
+            operation="legacy-worker-start",
+        ):
+            self._require_legacy_runtime_allowed()
+            if self._read_control()["desired_state"] == "paused":
+                return {"started": False, "reason": "paused; use resume"}
         current_runtime = _read_json(self.runtime_path)
         if self._runtime_is_live(current_runtime):
             return {"started": False, "reason": "already_running"}
@@ -1191,7 +1250,12 @@ class WorkerController:
         wait_seconds: float = 5.0,
         startup_delay_seconds: int = 0,
     ) -> dict[str, Any]:
-        self._write_control(desired_state="enabled", stop_requested_for=None)
+        with CatalogOperationLock(
+            self.catalog_dir,
+            operation="legacy-worker-resume",
+        ):
+            self._require_legacy_runtime_allowed()
+            self._write_control(desired_state="enabled", stop_requested_for=None)
         return self.start(
             wait_seconds=wait_seconds,
             startup_delay_seconds=startup_delay_seconds,

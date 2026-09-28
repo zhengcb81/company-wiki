@@ -380,6 +380,53 @@ class _Idle:
         return self.battery
 
 
+def test_retired_evidence_maintenance_is_dry_run_only(tmp_path, monkeypatch):
+    import importlib
+
+    prune_module = importlib.import_module(
+        "company_wiki.source_catalog.prune_retired_evidence"
+    )
+    from company_wiki.source_catalog.worker import SourceCatalogWorker, WorkerConfig
+
+    catalog = _FakeCatalog()
+    catalog.config = object()
+    calls: list[dict[str, object]] = []
+
+    def fake_prune(_config, _archive_root, **kwargs):
+        calls.append(dict(kwargs))
+        return {"dry_run": True}
+
+    monkeypatch.setattr(prune_module, "prune_retired_evidence", fake_prune)
+    worker = SourceCatalogWorker(
+        catalog,
+        WorkerConfig(
+            runtime_config=tmp_path / "config.yaml",
+            scan_interval_seconds=3600,
+            export_interval_seconds=3600,
+            poll_interval_seconds=30,
+            idle_seconds_required=600,
+            normalize_batch_size=1,
+            llm_summary_batch_size=1,
+            llm_max_input_chars=1,
+            llm_max_output_tokens=1,
+            llm_retry_backoff_seconds=3600,
+            allow_processing_on_battery=False,
+            require_user_idle=False,
+            prune_check_interval_seconds=1,
+        ),
+        state_path=tmp_path / "state.json",
+        project_root=tmp_path,
+        idle_detector=_Idle(700),
+        llm_client_factory=lambda: object(),
+    )
+
+    worker.run_cycle(now=1_700_000_000)
+
+    assert len(calls) == 1
+    assert calls[0]["apply"] is False
+    assert calls[0]["now"].tzinfo is not None
+
+
 def test_worker_passes_parser_liveness_and_retry_limits_to_both_paths(tmp_path):
     from company_wiki.source_catalog.worker import SourceCatalogWorker, WorkerConfig
 

@@ -12,10 +12,11 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 from .event_sources import EventSource
-from .models import Job, JobStatus, make_job_key
-from .planner import PlannedDAG, plan_jobs
+from .models import make_job_key
+from .planner import PlannedDAG, PlannerError, plan_jobs
 from .policy import PolicyConfig
 from .registry import HandlerRegistry
+from .scheduler import AutomationScheduler
 
 
 @dataclass(frozen=True)
@@ -50,6 +51,7 @@ class Controller:
         self._registry = registry
         self._config = config or PolicyConfig()
         self._event_source = EventSource(store)
+        self._scheduler = AutomationScheduler(store, registry, self._config)
 
     def observe(self) -> ObserveResult:
         """Read events, plan jobs, return what would be done (no side effects).
@@ -65,7 +67,7 @@ class Controller:
         for event in events:
             try:
                 dag = plan_jobs(event, self._registry, self._config)
-            except Exception:
+            except PlannerError:
                 continue  # skip events that can't be planned
             planned_dags.append(dag)
             for pj in dag.jobs:
@@ -89,8 +91,8 @@ class Controller:
     def shadow(self) -> ShadowResult:
         """Read events, plan jobs, create jobs in the store.
 
-        Jobs are created in ``detected`` status.  No handlers are executed, no
-        production writes occur, and no effects are generated.
+        Root jobs are created READY and dependent jobs PLANNED in one database
+        transaction. No handlers are executed and no effects are generated.
         """
         events = self._event_source.get_all_events()
         created = 0
@@ -98,40 +100,11 @@ class Controller:
 
         for event in events:
             try:
-                dag = plan_jobs(event, self._registry, self._config)
-            except Exception:
+                result = self._scheduler.materialize_event(event)
+            except PlannerError:
                 continue
-            for pj in dag.jobs:
-                job_key = make_job_key(
-                    pj.job_type, pj.subject_type, pj.subject_id,
-                    pj.input_hash, pj.policy_version, pj.handler_version,
-                )
-                existing = self._store.get_job_by_key(job_key)
-                if existing:
-                    already_existed += 1
-                    continue
-                job = Job(
-                    job_id=pj.temp_id,
-                    job_key=job_key,
-                    job_type=pj.job_type,
-                    subject_type=pj.subject_type,
-                    subject_id=pj.subject_id,
-                    input_hash=pj.input_hash,
-                    policy_version=pj.policy_version,
-                    handler_version=pj.handler_version,
-                    risk_class=pj.risk_class,
-                    status=JobStatus.DETECTED,
-                    priority=pj.priority,
-                    not_before=event.observed_at,
-                    max_attempts=pj.max_attempts,
-                    created_from_event_id=event.event_id,
-                    created_at=event.observed_at,
-                    updated_at=event.observed_at,
-                    last_error_code=None,
-                    last_error_detail=None,
-                )
-                self._store.put_job(job)
-                created += 1
+            created += result.jobs_created
+            already_existed += result.jobs_existing
 
         return ShadowResult(
             events_processed=len(events),

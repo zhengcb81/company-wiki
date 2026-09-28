@@ -353,3 +353,12 @@
 - schema migration 也需要 fencing 思维：保留 v1 的精确结构快照，先只读验证再升级；v0 新库按 v1/v2 顺序一次提交；索引和 singleton gate row 都属于 schema health。仅检查 `PRAGMA user_version` 会把缺索引或空 gate 的损坏库误判为健康。
 - 双连接 race 比单实例 mock 更能证明 SQLite claim 的线性化。E1 的 job/outbox 两组真实连接竞争都只有一个胜者；duplicate attempt/effect 故障注入证明事务 rollback 后 job、attempt、effect、outbox 数量保持原值。
 - 事务层已集中，但 `automation/store.py` 同时保留大量 v1 CRUD 和 v2 application operations，文件规模明显上升。E2 不应继续把 DAG/planner/controller 逻辑塞入 Store；scheduler/runtime control 使用独立模块，只保留必须与 SQLite 原子提交的窄方法，并在 E-A 复核是否需要按 persistence capability 拆文件而不拆事务。
+
+## 2026-09-28 — E2 / E-A DAG 与双 Worker 互斥结论
+
+- DAG 幂等不能复用普通 `put_job` 的“整行相等”定义：job status、not-before 和错误字段会随执行改变，而 event/job identity 与 policy/handler/risk/priority 等不可变内容不能漂移。E2 将二者分开，并在一个 transaction 内核对 event、全部 jobs 和完整 dependency set。
+- “前置 job 显示 SUCCEEDED”不足以放行下游。恢复语义还要求存在 outcome=succeeded 且 `result_json` 非空的 attempt；否则进程可能在状态更新和结果持久化之间留下伪完成。terminal predecessor 也必须留下明确 blocked 原因，不能让下游永久停在无解释的 PLANNED。
+- SQLite generation 只阻止旧 AUTO attempt 回写，不能单独阻止旧 legacy Worker 被另一个 CLI 稍后 resume。完整互斥需要 DB gate 与 legacy control marker 双向检查，并让 AUTO enable/pause、legacy resume/start/session 都经过同一个短时 `CatalogOperationLock`。
+- 安全的 enable 写序是先设置 legacy interlock，再开启 DB gate；中途崩溃最多使两边都停。安全的 pause 写序是先关闭 DB gate并递增 generation，再持久 legacy pause/清除 marker，最后在锁外等待或强停进程。
+- `AutomationStore` 应拥有 transaction，而不必拥有所有 SQL 细节。DAG capability 被拆到 `dag_persistence.py`，只接收现有 connection；这降低 Store 增长速度，同时没有把 BEGIN/COMMIT 或部分失败恢复交给 scheduler/controller。
+- 旧 Worker 的自动 `apply=True` prune 与“原件不可丢、派生清理由 Phase G 审查”冲突，而且旧调用没有传必需的 timezone-aware `now`，异常长期被 cycle 捕获。E2 将其收口为确定性 dry-run；任何真实处置仍必须走 Phase G 逐路径清单与大节点门。

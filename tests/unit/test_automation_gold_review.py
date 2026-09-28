@@ -200,7 +200,7 @@ def test_inbox_does_not_modify_jobs(tmp_path):
 # Controller integration: gold review never writes accepted decisions.
 # --------------------------------------------------------------------------- #
 def test_controller_shadow_does_not_write_accepted_decisions(tmp_path):
-    """Shadow mode creates jobs in DETECTED status, never SUCCEEDED."""
+    """Shadow mode may queue work but never records an accepted decision."""
     c_mod = __import__("company_wiki.automation.controller", fromlist=["Controller"])
     s = _store_mod()
     r = _registry_mod()
@@ -212,8 +212,7 @@ def test_controller_shadow_does_not_write_accepted_decisions(tmp_path):
     config = p.PolicyConfig(allow_llm=True)
     ctrl = c_mod.Controller(store, reg, config)
     ctrl.shadow()
-    # All created jobs are in DETECTED status.
+    # The root is claimable, but shadow mode has not executed or accepted it.
     for job in store.list_jobs():
-        assert job.status is m.JobStatus.DETECTED
-        # No job has SUCCEEDED status (no accepted decisions).
+        assert job.status is m.JobStatus.READY
         assert job.status is not m.JobStatus.SUCCEEDED
