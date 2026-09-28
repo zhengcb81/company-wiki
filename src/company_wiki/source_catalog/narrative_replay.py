@@ -41,6 +41,20 @@ def _validate_source_binding(
         raise ValueError("evidence source_id does not match the requested PDF")
 
 
+def _validate_source_bytes_binding(
+    data: bytes,
+    source_id: str,
+    source_sha256: str,
+    evidence_spans: Sequence[EvidenceSpan],
+) -> None:
+    if not isinstance(data, bytes):
+        raise TypeError("PDF data must be bytes")
+    if hashlib.sha256(data).hexdigest() != source_sha256:
+        raise ValueError("PDF changed before evidence locator round-trip")
+    if any(span.source_id != source_id for span in evidence_spans):
+        raise ValueError("evidence source_id does not match the requested PDF")
+
+
 def _parser_version(
     evidence_spans: Sequence[EvidenceSpan], default_parser_version: str
 ) -> str:
@@ -69,6 +83,22 @@ def prepare_pdf_replay(
 ) -> PdfReplayPlan:
     """Validate immutable inputs and derive the minimal deterministic replay plan."""
     _validate_source_binding(path, source_id, source_sha256, evidence_spans)
+    return PdfReplayPlan(
+        parser_version=_parser_version(evidence_spans, default_parser_version),
+        table_pages=_table_pages(evidence_spans),
+    )
+
+
+def prepare_pdf_replay_bytes(
+    data: bytes,
+    *,
+    source_id: str,
+    source_sha256: str,
+    evidence_spans: Sequence[EvidenceSpan],
+    default_parser_version: str,
+) -> PdfReplayPlan:
+    """Validate immutable in-memory bytes and derive their replay plan."""
+    _validate_source_bytes_binding(data, source_id, source_sha256, evidence_spans)
     return PdfReplayPlan(
         parser_version=_parser_version(evidence_spans, default_parser_version),
         table_pages=_table_pages(evidence_spans),
@@ -149,6 +179,7 @@ def verify_replayed_pdf_spans(
 __all__ = [
     "PdfReplayPlan",
     "prepare_pdf_replay",
+    "prepare_pdf_replay_bytes",
     "span_roundtrip_key",
     "unit_roundtrip_key",
     "verify_replayed_pdf_spans",

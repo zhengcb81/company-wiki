@@ -341,6 +341,14 @@ NarrativeSummaryModel.summarize(NarrativeSummaryRequest) -> NarrativeSummaryResp
 
 再让 path/bytes facade 共用一个内部 PyMuPDF document parser，禁止复制选择规则。
 
+**E4.4 实施收据（2026-09-28）**
+
+- RED：新 PDF bytes 测试因 `parse_pdf_bytes` 不存在在 collection 失败；reader 合同为 **2 failed / 23 passed**，分别命中 unsupported purpose 与 remediation gate 未覆盖。
+- GREEN：`narrative_derivation` 进入 verified reader 的显式 purpose 集合，并与 filing reuse/source export 一样受 remediation、当前 root/source/read-policy/SHA 约束；open 与 verify 都返回同一 source SHA/policy 绑定的 `ReviewSnapshot`，公开对象不含路径。
+- `parse_pdf(path)` 与 `parse_pdf_bytes(bytes)` 共用 `_parse_pdf_document`；bytes 路径先核对 SHA，再以内存 stream 打开 PyMuPDF。replay 同样新增 bytes binding/plan，未复制 selector 或 locator 匹配规则。
+- 测试 monkeypatch `Path.write_*` 和 Python tempfile API 后，parse/replay 仍通过；错误 SHA 在解析前拒绝。PDF bytes + 原有 narrative parser 为 **37 passed**，reader contract **25 passed**。
+- 直接 reader/export 消费回归与真实 bytes E2E **41 passed in 22.77s**。三个产品模块 strict mypy 通过，reader 已加入 CI/pre-commit mypy 范围并实际触发钩子；PDF 模块 Ruff/C901 `<=10` 与 repository complexity ratchet 全绿。reader 既有四个大函数复杂度债务未借本切片扩张为第二套 reader。
+
 ### E4.5：select handler
 
 先 RED 覆盖：

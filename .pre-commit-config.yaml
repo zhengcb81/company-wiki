@@ -33,6 +33,7 @@ repos:
           src/company_wiki/source_catalog/operation_contract.py
           src/company_wiki/source_catalog/operation_projection.py
           src/company_wiki/source_catalog/source_operation.py
+          src/company_wiki/source_catalog/source_reader.py
           src/company_wiki/source_catalog/narrative_document.py
           src/company_wiki/source_catalog/narrative_routing.py
           src/company_wiki/source_catalog/narrative_candidates.py
@@ -63,7 +64,7 @@ repos:
           (?x)^src/company_wiki/source_catalog/
           (artifact_handle|source_bundle|runtime_policy|activation|close_gap|
           policy_2x|canary_registry|normalized_meta|flags|policy|restore|
-          operation_contract|operation_projection|source_operation|
+          operation_contract|operation_projection|source_operation|source_reader|
           narrative_document|narrative_routing|narrative_candidates|
           narrative_context|narrative_budget|narrative_group_candidates|
           narrative_neighbors|narrative_finalize|narrative_pdf_groups|

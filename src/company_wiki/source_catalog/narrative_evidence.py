@@ -14,7 +14,7 @@ import hashlib
 import json
 from pathlib import Path
 import re
-from typing import Any, Literal
+from typing import Any, Literal, cast
 import unicodedata
 
 from company_wiki.source_contract import EvidenceCoordinates, EvidenceSpan
@@ -35,6 +35,7 @@ from .narrative_neighbors import NeighborRules, enrich_neighbor_context
 from .narrative_pdf_groups import PdfGroupRules, build_pdf_context_groups
 from .narrative_replay import (
     prepare_pdf_replay,
+    prepare_pdf_replay_bytes,
     span_roundtrip_key as _span_roundtrip_key,
     unit_roundtrip_key as _unit_roundtrip_key,
     verify_replayed_pdf_spans,
@@ -719,8 +720,18 @@ def _emit_pdf_page(
         state.opaque_pages.append(page_number)
 
 
-def parse_pdf(
-    path: Path,
+def _fitz_module() -> Any:
+    try:
+        import fitz  # type: ignore[import-untyped]
+    except ImportError as exc:  # pragma: no cover - environment-specific
+        raise RuntimeError(
+            "PDF parsing requires the optional PyMuPDF dependency"
+        ) from exc
+    return fitz
+
+
+def _parse_pdf_document(
+    document: Any,
     *,
     source_id: str,
     source_sha256: str,
@@ -729,24 +740,14 @@ def parse_pdf(
     full_table_scan: bool = False,
     table_pages: Sequence[int] | None = None,
 ) -> NarrativeParseResult:
-    """Scan every page cheaply, then detect tables only on candidate pages.
-
-    Set ``full_table_scan`` only for bounded negative-control documents or a
-    review run that needs complete table coverage. Unscanned table pages are
-    reported as deferred, so the selector cannot auto-skip that document.
-    """
-    try:
-        import fitz  # type: ignore[import-untyped]
-    except ImportError as exc:  # pragma: no cover - environment-specific
-        raise RuntimeError("PDF parsing requires the optional PyMuPDF dependency") from exc
-
     state = _PdfParseState(source_id, source_sha256, parser_version, language)
-    with fitz.open(path) as document:
-        state.page_count = len(document)
-        _scan_pdf_pages(state, document)
-        state.table_scan_pages = _pdf_table_scan_pages(state, full_table_scan, table_pages)
-        for page_number, blocks in state.page_blocks:
-            _emit_pdf_page(state, document, page_number, blocks)
+    state.page_count = len(document)
+    _scan_pdf_pages(state, document)
+    state.table_scan_pages = _pdf_table_scan_pages(
+        state, full_table_scan, table_pages
+    )
+    for page_number, blocks in state.page_blocks:
+        _emit_pdf_page(state, document, page_number, blocks)
     return NarrativeParseResult(
         source_id=source_id, source_sha256=source_sha256, language=language,
         units=_link_cross_page_qa(state.units), page_count=state.page_count,
@@ -757,6 +758,56 @@ def parse_pdf(
         )),
         errors=tuple(state.errors),
     )
+
+
+def parse_pdf(
+    path: Path,
+    *,
+    source_id: str,
+    source_sha256: str,
+    parser_version: str = NARRATIVE_PARSER_VERSION,
+    language: str = "zh",
+    full_table_scan: bool = False,
+    table_pages: Sequence[int] | None = None,
+) -> NarrativeParseResult:
+    """Scan a PDF path without materializing a normalized full-text artifact."""
+    with _fitz_module().open(path) as document:
+        return _parse_pdf_document(
+            document,
+            source_id=source_id,
+            source_sha256=source_sha256,
+            parser_version=parser_version,
+            language=language,
+            full_table_scan=full_table_scan,
+            table_pages=table_pages,
+        )
+
+
+def parse_pdf_bytes(
+    data: bytes,
+    *,
+    source_id: str,
+    source_sha256: str,
+    parser_version: str = NARRATIVE_PARSER_VERSION,
+    language: str = "zh",
+    full_table_scan: bool = False,
+    table_pages: Sequence[int] | None = None,
+) -> NarrativeParseResult:
+    """Parse verified PDF bytes in memory without a temporary file."""
+    if not isinstance(data, bytes):
+        raise TypeError("PDF data must be bytes")
+    if hashlib.sha256(data).hexdigest() != source_sha256:
+        raise ValueError("PDF changed before narrative parsing")
+    with _fitz_module().open(stream=data, filetype="pdf") as document:
+        return _parse_pdf_document(
+            document,
+            source_id=source_id,
+            source_sha256=source_sha256,
+            parser_version=parser_version,
+            language=language,
+            full_table_scan=full_table_scan,
+            table_pages=table_pages,
+        )
 
 
 def _speaker_role(name: str, title: str, *, qa_mode: bool, management_speakers: set[str]) -> str:
@@ -1084,6 +1135,31 @@ def verify_pdf_evidence_spans(
     return verify_replayed_pdf_spans(evidence_spans, replay.units)
 
 
+def verify_pdf_evidence_spans_bytes(
+    data: bytes,
+    *,
+    source_id: str,
+    source_sha256: str,
+    evidence_spans: Sequence[EvidenceSpan],
+) -> tuple[tuple[str, ...], tuple[str, ...]]:
+    """Replay verified PDF bytes and verify selected locators without disk."""
+    plan = prepare_pdf_replay_bytes(
+        data,
+        source_id=source_id,
+        source_sha256=source_sha256,
+        evidence_spans=evidence_spans,
+        default_parser_version=NARRATIVE_PARSER_VERSION,
+    )
+    replay = parse_pdf_bytes(
+        data,
+        source_id=source_id,
+        source_sha256=source_sha256,
+        parser_version=plan.parser_version,
+        table_pages=plan.table_pages,
+    )
+    return verify_replayed_pdf_spans(evidence_spans, replay.units)
+
+
 def verify_transcript_evidence_spans(
     text: str,
     *,
@@ -1118,7 +1194,7 @@ def verify_transcript_evidence_spans(
 
 def classify_document_kind(title: str, existing_kind: str = "unknown") -> str:
     """Compatibility facade for the document-routing layer."""
-    return _classify_document_kind(title, existing_kind)
+    return cast(str, _classify_document_kind(title, existing_kind))
 
 
 def _topics(text: str) -> tuple[str, ...]:
@@ -1231,12 +1307,15 @@ def _pdf_context_groups(
     units: Sequence[NarrativeUnit],
 ) -> tuple[tuple[str, tuple[NarrativeUnit, ...], str], ...]:
     """Compatibility seam for tests while grouping lives in its own layer."""
-    return build_pdf_context_groups(
-        units,
-        PdfGroupRules(
-            project_heading=_PROJECT_SECTION_HEADING,
-            business_heading=_BUSINESS_SECTION_HEADING,
-            heading_only=_HEADING_ONLY,
+    return cast(
+        tuple[tuple[str, tuple[NarrativeUnit, ...], str], ...],
+        build_pdf_context_groups(
+            units,
+            PdfGroupRules(
+                project_heading=_PROJECT_SECTION_HEADING,
+                business_heading=_BUSINESS_SECTION_HEADING,
+                heading_only=_HEADING_ONLY,
+            ),
         ),
     )
 

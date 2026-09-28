@@ -641,3 +641,11 @@
 - source revision DAG 固定为三个 job 与三条 edge；重复 materialize 首次 3/3、再次 0 new + 3/3 existing。controller shadow 验证只有 select 可领取，verify 直接依赖 select 与 summarize。
 - Worker 通用单测使用现有非叙述 `timer.execute_step`；multiprocess 拓扑/强杀测试使用 test factory 私有的 `test.compute/test.model` specs。未把假 handler 混入产品 registry，也未提前启用 narrative runtime。
 - 聚焦 planner、scheduler、controller、Worker、Supervisor 与真实 multiprocess **70 passed in 25.36s**；registry/planner/CLI strict mypy、Ruff、C901 全绿。下一步 E4.4 先扩展 verified reader 的 `narrative_derivation` purpose，再实现 PDF bytes parse/replay facade。
+
+## Session: Phase E / E4.4 verified reader 与 PDF bytes facade（2026-09-28）
+
+- RED 分成两个独立风险：PDF bytes API 缺失在 collection 失败；reader 新 purpose 为 **2 failed / 23 passed**，准确命中 purpose whitelist 与 remediation gate。
+- `SourceVersionReader` 新增 `narrative_derivation` purpose，不接受路径输入，也不返回路径；每次 open/verify 重验 active source、root admission、runtime/read policy、remediation 与 bytes SHA，并在两种结果上返回绑定 source SHA/evidence SHA/review policy 的 review snapshot。
+- path 与 bytes PDF facade 共用唯一 `_parse_pdf_document`；bytes 在打开 PyMuPDF stream 前核对 SHA，replay 复用现有 parser-version/table-page/roundtrip-key 规则。monkeypatch 所有 Python temp/write API 的测试仍绿，证明应用层不落临时 PDF。
+- PDF/narrative **37 passed**，reader contract **25 passed**，reader/export 直接消费者与真实 bytes E2E **41 passed**；strict mypy、Ruff、PDF C901 `<=10`、complexity ratchet 全绿。`source_reader.py` 已加入 CI/pre-commit strict mypy 并用 targeted hook 实测。
+- 没有打开 production raw、没有新增 normalized artifact 或 catalog 写入。下一步 E4.5 先为 PDF/TXT select handler 写 success/skip/incomplete/parser/policy/checkpoint/result-cap RED tests。

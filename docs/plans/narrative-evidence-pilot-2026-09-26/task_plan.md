@@ -8,9 +8,9 @@
 
 ## Next Step
 
-**2026-09-28 Phase 23 重构总图：**后续实施统一按[清洁架构与 TDD 实施总图](clean_architecture_tdd_execution_plan_2026-09-27.md)的 Phase A–G / M1–M4 执行。内部代码和派生 schema 允许破坏式重构；canonical raw 原件、来源 SHA/manifest 和版本事实不得丢失。Phase B/M1、Phase C/M2-derive、Phase D/M2-provider 与 Phase E 的 E0–E4.3 已按该图实施；下一步按[E4 Narrative handlers 详细实施规格](phase_e_e4_narrative_handler_implementation_spec_2026-09-28.md)从 E4.4 verified reader purpose/PDF bytes RED tests 继续，再接三个 handler。跨仓 consumer 和派生清理仍分别留在 Phase F/G。
+**2026-09-28 Phase 23 重构总图：**后续实施统一按[清洁架构与 TDD 实施总图](clean_architecture_tdd_execution_plan_2026-09-27.md)的 Phase A–G / M1–M4 执行。内部代码和派生 schema 允许破坏式重构；canonical raw 原件、来源 SHA/manifest 和版本事实不得丢失。Phase B/M1、Phase C/M2-derive、Phase D/M2-provider 与 Phase E 的 E0–E4.4 已按该图实施；下一步按[E4 Narrative handlers 详细实施规格](phase_e_e4_narrative_handler_implementation_spec_2026-09-28.md)从 E4.5 select handler RED tests 继续，再接 summarize/verify。跨仓 consumer 和派生清理仍分别留在 Phase F/G。
 
-**2026-09-28 最新状态（覆盖下方历史快照）：**Phase E/E4.1–E4.3 已完成。默认 registry 与 source event mapping 已彻底移除旧 `source.normalize/source.analyze`，改为 select→summarize、select+summarize→verify 三阶段 DAG；默认政策拒绝模型/网络，显式同时 admission 后才规划。E4.3 聚焦回归 **70 passed in 25.36s**，strict mypy、Ruff、C901 全绿。production Worker 仍 paused，narrative handlers 尚未注册进 executor。下一步 E4.4 先做 verified reader 的 `narrative_derivation` purpose 与 PDF bytes parse/replay；E5 前不写 catalog，E-B 前不启用生产。
+**2026-09-28 最新状态（覆盖下方历史快照）：**Phase E/E4.1–E4.4 已完成。verified reader 已提供 pathless `narrative_derivation` bytes/review snapshot；PDF path/bytes parse 与 replay 共用一个内核，bytes hash drift 和 temp-file fallback 均有负测。PDF/narrative **37 passed**、reader contract **25 passed**、直接消费者/真实 bytes E2E **41 passed**，reader 已进入 strict mypy CI/pre-commit。production Worker 仍 paused，narrative handlers 尚未注册进 executor。下一步 E4.5 先实现 select handler；E5 前不写 catalog，E-B 前不启用生产。
 
 **Phase 22 阻断结论（保留证据）：**暂停 R4 consumer/跨仓接线。正式 `SourceEnsureResult.to_dict()` 输出 `acquisition`，当前 consumer/test 同步漂移到不存在的 `acquisition_result`；现有 390/88 项绿灯不能覆盖这个 producer/consumer 反例。
 

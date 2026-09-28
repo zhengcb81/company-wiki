@@ -398,3 +398,11 @@
 - summarize 即使在测试中使用 replay model，也必须声明真实生产所需的 LLM 与 network 两项能力。默认 policy 以及只允许 LLM 的 policy 都拒绝规划，防止未来把模型网络访问错误归类为无网络任务。
 - verify 直接依赖 select 与 summarize会产生三条 edge，而不是线性链的两条。幂等测试必须同时断言 job 和 dependency 数量；只检查 job key 会漏掉拓扑漂移。
 - 旧 source jobs 从默认 registry 和 event mapping 一次性移除比保留兼容别名更安全。generic Worker/recovery 测试应使用 generic/test job identity，避免测试夹具反向迫使产品保留已经废弃的全量 normalize 路线。
+
+## 2026-09-28 — E4.4 reader/bytes 边界结论
+
+- 路径独立不能只停在 `SourceRef`。handler 如果拿到 reader 内部解析出的 Path，存储迁移仍会穿透应用层；让 reader 返回已验证 bytes、PDF parser 接受 bytes，才形成可测试的完整抽象边界。
+- `open_version` 与 `verify_version` 对 narrative purpose 应返回同一 review snapshot。只在 open 上附 review 会让 verify handler 为复核内容完整性重新访问 review store，产生第二个时间视图。
+- PyMuPDF 的 path 与 stream 打开方式不同，但结构扫描、table-page 决策、unit 生成和 locator 回放必须共用一个 document parser。只新增 bytes wrapper 而复制解析循环，会使同一原件因存储形式不同产生不同证据。
+- hash 校验要发生在 `fitz.open(stream=...)` 前。reader 已验证 bytes 并不能成为 parser 的隐式前提；独立 bytes facade 的绑定校验让单元测试、未来其他 read port 和崩溃恢复都能 fail closed。
+- `source_reader.py` 原有查询/描述/verified-read 方法仍有既存复杂度债务，但本次新 purpose/review 规则已提取成窄集合与 helper，并把整个 reader 纳入 strict mypy CI/pre-commit。后续若改 reader 决策逻辑，应单列重构节点，避免在 handler slice 内顺手复制或继续堆条件。

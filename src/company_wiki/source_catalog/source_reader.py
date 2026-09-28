@@ -15,6 +15,7 @@ from collections.abc import Iterator
 from dataclasses import asdict, dataclass
 from datetime import UTC, datetime
 from pathlib import Path, PurePosixPath, PureWindowsPath
+from typing import Any
 
 from .policy_2x import export_policy_2x
 from .prompt_injection import (
@@ -44,6 +45,12 @@ SOURCE_READ_RECEIPT_SCHEMA_VERSION = "2.1"
 _SHA256 = re.compile(r"[0-9a-f]{64}\Z")
 _ERROR_STATUSES = frozenset(
     {"not_found", "not_indexed", "unavailable", "blocked", "ambiguous"}
+)
+_SUPPORTED_READ_PURPOSES = frozenset(
+    {"preview", "filing_reuse", "source_export", "narrative_derivation"}
+)
+_REMEDIATION_GATED_PURPOSES = frozenset(
+    {"filing_reuse", "source_export", "narrative_derivation"}
 )
 
 
@@ -105,6 +112,7 @@ class VerifiedVersionReceipt:
     read_at: str
     policy_sha256: str
     source_read_policy_sha256: str
+    review: ReviewSnapshot | None = None
     schema_version: str = SOURCE_REF_SCHEMA_VERSION
 
 
@@ -176,13 +184,15 @@ class SourceVersionReader:
         self, source_id: str, resolver: SourceResolver | None = None
     ) -> bool:
         try:
-            return (resolver or self._resolver_for_request())._remediation_pending(
-                source_id
+            return bool(
+                (resolver or self._resolver_for_request())._remediation_pending(
+                    source_id
+                )
             )
         except (CatalogReaderUnavailable, sqlite3.Error):
             raise SourceReadError("unavailable", "catalog_unavailable") from None
 
-    def _candidate_pages(self, request: SourceRequest) -> Iterator[dict]:
+    def _candidate_pages(self, request: SourceRequest) -> Iterator[dict[str, Any]]:
         page_size = 1000
         max_candidates = 20_000
         for offset in range(0, max_candidates, page_size):
@@ -519,6 +529,15 @@ class SourceVersionReader:
             str(review.get("reviewed_at") or "") or None,
         )
 
+    def _review_for_result(
+        self, ref: SourceRef, *, purpose: str, retain_bytes: bool
+    ) -> ReviewSnapshot | None:
+        if purpose == "narrative_derivation":
+            return self._current_review(ref)
+        if retain_bytes and purpose == "filing_reuse":
+            return self._current_review(ref)
+        return None
+
     def open_version(
         self, ref: SourceRef, *, purpose: str = "filing_reuse",
         expected_read_policy_sha256: str | None = None,
@@ -559,7 +578,7 @@ class SourceVersionReader:
             raise TypeError("ref must be SourceRef")
         if ref.schema_version != SOURCE_REF_SCHEMA_VERSION:
             raise SourceReadError("unavailable", "unsupported_version")
-        if purpose not in {"preview", "filing_reuse", "source_export"}:
+        if purpose not in _SUPPORTED_READ_PURPOSES:
             raise SourceReadError("blocked", "unsupported_purpose")
         current = self.query_ref(ref.document_id, ref.source_id, ref.content_sha256)
         if current != ref:
@@ -567,7 +586,7 @@ class SourceVersionReader:
         resolver, read_policy_sha256 = self._resolver_and_read_policy(
             expected_read_policy_sha256
         )
-        if purpose in {"filing_reuse", "source_export"} and self._remediation_pending(
+        if purpose in _REMEDIATION_GATED_PURPOSES and self._remediation_pending(
             ref.source_id, resolver
         ):
             raise SourceReadError("blocked", "remediation_pending")
@@ -700,6 +719,9 @@ class SourceVersionReader:
                 expected_byte_size=ref.byte_size, retain_bytes=retain_bytes,
             )
             if not status:
+                review = self._review_for_result(
+                    ref, purpose=purpose, retain_bytes=retain_bytes
+                )
                 receipt_fields = dict(
                     document_id=ref.document_id,
                     source_id=ref.source_id,
@@ -713,12 +735,11 @@ class SourceVersionReader:
                         raise SourceReadError("unavailable", "verification_invariant_broken")
                     return VerifiedContent(
                         data=data, byte_size=len(data),
-                        review=(self._current_review(ref)
-                                if purpose == "filing_reuse" else None),
+                        review=review,
                         **receipt_fields,
                     )
                 return VerifiedVersionReceipt(
-                    byte_size=ref.byte_size, **receipt_fields
+                    byte_size=ref.byte_size, review=review, **receipt_fields
                 )
             failures.append(reason or status or detail or "read_failed")
             if reason in {"cancelled", "budget_exceeded"}:

@@ -164,6 +164,64 @@ def test_exact_ref_contains_no_location_and_delivers_verified_bytes(tmp_path):
     assert opened.policy_sha256 == export_policy_2x(catalog.config)[0]
 
 
+def test_narrative_derivation_open_and_verify_return_bound_review_snapshot(
+    tmp_path,
+):
+    from company_wiki.source_catalog.prompt_injection import (
+        record_prompt_injection_review,
+    )
+
+    catalog, _, _, ids = _fixture(tmp_path)
+    reader = SourceVersionReader(catalog)
+    ref = reader.query_ref(ids["document_id"], ids["source_id"], SHA)
+    policy_hash = export_policy_2x(catalog.config)[0]
+    with catalog.store.transaction() as connection:
+        record_prompt_injection_review(
+            connection,
+            ref.document_id,
+            status="not_detected",
+            reviewer="e4-reader-contract",
+            evidence_sha256=SHA,
+            evidence_payload=BODY,
+            now="2026-09-28T16:00:00Z",
+            source_sha256=SHA,
+            policy_hash=policy_hash,
+        )
+    read_policy_sha256 = reader.read_policy_sha256()
+
+    opened = reader.open_version(
+        ref,
+        purpose="narrative_derivation",
+        expected_read_policy_sha256=read_policy_sha256,
+    )
+    verified = reader.verify_version(
+        ref,
+        purpose="narrative_derivation",
+        expected_read_policy_sha256=read_policy_sha256,
+    )
+
+    assert opened.data == BODY
+    assert opened.review is not None
+    assert opened.review.status == "not_detected"
+    assert opened.review.source_sha256 == SHA
+    assert opened.review.policy_hash == policy_hash
+    assert verified.review == opened.review
+    assert str(tmp_path) not in repr(asdict(opened))
+    assert str(tmp_path) not in repr(asdict(verified))
+    assert not any("path" in key or "root" in key for key in asdict(verified))
+
+    with pytest.raises(SourceReadError) as purpose_error:
+        reader.open_version(ref, purpose="unknown-purpose")
+    assert purpose_error.value.reason == "unsupported_purpose"
+    with pytest.raises(SourceReadError) as policy_error:
+        reader.open_version(
+            ref,
+            purpose="narrative_derivation",
+            expected_read_policy_sha256="0" * 64,
+        )
+    assert policy_error.value.reason == "read_policy_mismatch"
+
+
 def test_wrong_identity_hash_and_retirement_fail_before_open(tmp_path, monkeypatch):
     catalog, _, _, ids = _fixture(tmp_path)
     reader = SourceVersionReader(catalog)
@@ -554,7 +612,7 @@ def test_pending_remediation_is_not_offered_or_opened_for_reuse(tmp_path, monkey
         return real_open(path, *args, **kwargs)
 
     monkeypatch.setattr(Path, "open", no_pdf_open)
-    for purpose in ("filing_reuse", "source_export"):
+    for purpose in ("filing_reuse", "source_export", "narrative_derivation"):
         with pytest.raises(SourceReadError) as error:
             reader.open_version(ref, purpose=purpose)
         assert error.value.status == "blocked"
@@ -609,7 +667,7 @@ def test_current_root_admission_policy_applies_before_any_source_open(
         return real_open(path, *args, **kwargs)
 
     monkeypatch.setattr(Path, "open", no_pdf_open)
-    for purpose in ("preview", "filing_reuse"):
+    for purpose in ("preview", "filing_reuse", "narrative_derivation"):
         with pytest.raises(SourceReadError) as error:
             SourceVersionReader(restricted).open_version(ref, purpose=purpose)
         assert error.value.status == "blocked"
