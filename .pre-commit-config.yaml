@@ -12,8 +12,8 @@ repos:
         entry: ruff check
         language: system
         types: [python]
-        # CI scope: ruff check src tests/unit tests/contract scripts
-        files: ^(src/|tests/unit/|tests/contract/|scripts/).*\.py$
+        # CI scope: ruff check src tests/unit tests/contract tests/e2e scripts
+        files: ^(src/|tests/unit/|tests/contract/|tests/e2e/|scripts/).*\.py$
 
       - id: mypy-contract
         name: mypy contract modules (FC-1204-c, mirrors CI)
@@ -44,6 +44,18 @@ repos:
           src/company_wiki/source_catalog/narrative_pdf_groups.py
           src/company_wiki/source_catalog/narrative_replay.py
           src/company_wiki/source_catalog/narrative_evidence.py
+          src/company_wiki/source_catalog/provider_use_policy.py
+          src/company_wiki/source_catalog/transcript_use_policy.py
+          src/company_wiki/source_catalog/transcript_fetch_admission.py
+          src/company_wiki/source_catalog/transcript_fetch_validation.py
+          src/company_wiki/source_catalog/transcript_tool_contract.py
+          src/company_wiki/source_catalog/transcript_admission_service.py
+          src/company_wiki/source_catalog/transcript_import.py
+          src/company_wiki/source_catalog/transcript_text_extract.py
+          src/company_wiki/source_catalog/transcript_lineage.py
+          src/company_wiki/source_catalog/transcript_material.py
+          src/company_wiki/source_catalog/transcript_preflight_service.py
+          src/company_wiki/source_catalog/transcript_import_cli.py
         language: system
         pass_filenames: false
         # Run only when one of the checked modules is staged.
@@ -55,7 +67,12 @@ repos:
           narrative_document|narrative_routing|narrative_candidates|
           narrative_context|narrative_budget|narrative_group_candidates|
           narrative_neighbors|narrative_finalize|narrative_pdf_groups|
-          narrative_replay|narrative_evidence)\.py$
+          narrative_replay|narrative_evidence|provider_use_policy|
+          transcript_use_policy|transcript_fetch_admission|
+          transcript_fetch_validation|transcript_tool_contract|
+          transcript_admission_service|transcript_import|
+          transcript_text_extract|transcript_lineage|transcript_material|
+          transcript_preflight_service|transcript_import_cli)\.py$
 
       - id: config-doctor
         name: config doctor (WU-7.1, mirrors CI)

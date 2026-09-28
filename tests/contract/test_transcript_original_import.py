@@ -24,7 +24,11 @@ from company_wiki.source_catalog.authorization import build_download_authorizati
 from company_wiki.source_catalog.provider_use_policy import (
     ACTIONS,
     ProviderUsePolicy,
+)
+from company_wiki.source_catalog.transcript_fetch_admission import (
     authorize_transcript_fetch,
+)
+from company_wiki.source_catalog.transcript_fetch_validation import (
     validate_transcript_fetch_result,
 )
 from company_wiki.source_catalog.transcript_import import (
@@ -102,6 +106,7 @@ def _fixture_rights_policy() -> ProviderUsePolicy:
 
 
 def _transcript_result_v2(request, candidate, body: bytes, **overrides) -> bytes:
+    material = extract_transcript_material(body, mime_type="text/html")
     result = {
         "schema_version": "earnings-transcript-result/2",
         "request_id": request.request_id,
@@ -117,8 +122,8 @@ def _transcript_result_v2(request, candidate, body: bytes, **overrides) -> bytes
         "published_date": candidate.filing_date,
         "extraction_version": "synthetic-html-extractor/1",
         "provider_payload_sha256": hashlib.sha256(body).hexdigest(),
-        "canonical_content_sha256": hashlib.sha256(b"fixture extracted text").hexdigest(),
-        "content_bytes": len(b"fixture extracted text"),
+        "canonical_content_sha256": material.text_sha256,
+        "content_bytes": material.text_byte_size,
         "provider_payload_encoding": "base64",
         "provider_payload_base64": base64.b64encode(body).decode("ascii"),
         "provider_payload_mime_type": "text/html",
@@ -287,6 +292,10 @@ def test_v2_tool_result_is_bound_revalidated_and_imported(tmp_path: Path):
             ),
             _transcript_result_v2(request, candidate, body, exchange="NYSE"),
             _transcript_result_v2(request, candidate, body, fiscal_period="2026-Q1"),
+            _transcript_result_v2(
+                request, candidate, body, canonical_content_sha256="0" * 64
+            ),
+            _transcript_result_v2(request, candidate, body, content_bytes=1),
         ]
         duplicate_key = _transcript_result_v2(request, candidate, body).replace(
             b'"status":"fetched"', b'"status":"failed","status":"fetched"', 1

@@ -18,11 +18,13 @@ from company_wiki.source_catalog.flags import FLAGS
 from company_wiki.source_catalog.provider_use_policy import (
     ACTIONS,
     ProviderUsePolicy,
-    authorize_transcript_fetch,
 )
 from company_wiki.source_catalog.resolver import SourceRequest
 from company_wiki.source_catalog.runtime_policy import build_snapshot
 from company_wiki.source_catalog.store import canonical_json
+from company_wiki.source_catalog.transcript_fetch_admission import (
+    authorize_transcript_fetch,
+)
 from company_wiki.source_catalog.transcript_material import extract_transcript_material
 
 

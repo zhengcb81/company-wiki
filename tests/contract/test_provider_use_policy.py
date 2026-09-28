@@ -15,12 +15,16 @@ from company_wiki.source_catalog.provider_use_policy import (
     ACTIONS,
     ProviderUsePolicy,
     ProviderUsePolicyError,
-    authorize_transcript_fetch,
     load_provider_use_policy,
-    validate_transcript_fetch_result,
 )
 from company_wiki.source_catalog.resolver import SourceRequest
 from company_wiki.source_catalog.store import canonical_json
+from company_wiki.source_catalog.transcript_fetch_admission import (
+    authorize_transcript_fetch,
+)
+from company_wiki.source_catalog.transcript_fetch_validation import (
+    validate_transcript_fetch_result,
+)
 
 
 def _payload(*, provider: str = "fixture_provider", host: str = "fixtures.invalid") -> dict:

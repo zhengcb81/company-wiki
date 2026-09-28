@@ -1,6 +1,6 @@
 # company-wiki 清洁架构与 TDD 实施总图（2026-09-27）
 
-> **状态：计划已冻结；Phase B / M1 与 Phase C / M2-derive 已完成，下一步为 Phase D / M2-provider。** 本页把 R4 数据湖、叙述证据、电话会议、Worker、跨仓消费和空间治理收束成一个施工顺序。历史计划保留证据价值；发生冲突时，以本页的层次、门禁和顺序为准。company-wiki 当前没有生产流量，允许重构内部接口、模块和派生 schema；财报、公告、招股书、再融资文件、投资者关系资料和电话会议原件不得丢失。
+> **状态：计划已冻结；Phase B / M1、Phase C / M2-derive 与 Phase D / M2-provider 已完成，下一步先编写并冻结 Phase E / M3 Worker 详细施工卡，再实施。** 本页把 R4 数据湖、叙述证据、电话会议、Worker、跨仓消费和空间治理收束成一个施工顺序。历史计划保留证据价值；发生冲突时，以本页的层次、门禁和顺序为准。company-wiki 当前没有生产流量，允许重构内部接口、模块和派生 schema；财报、公告、招股书、再融资文件、投资者关系资料和电话会议原件不得丢失。
 
 ## 1. 第一性原理与不可破坏条件
 
@@ -233,6 +233,8 @@ artifact_id = hash(source_id, source_sha256, artifact_role,
 
 详细施工、测试矩阵和收据格式见 [Phase D / M2-provider 实施细则](phase_d_m2_provider_implementation_spec_2026-09-28.md)。该施工卡先于代码冻结，Phase D 实施不得绕过其依赖方向和停止条件。
 
+**状态：已完成 company-wiki 侧分层和 fake-provider 验收。** 真实 `earnings-transcripts` 当前 `/2` 的 HTML `canonical_content_sha256/content_bytes` 表示 provider 提取正文，而 CWP 表示从 raw 确定性重建的材料文本；只读 spike 已证明两者不同。这个跨仓 producer 语义升级属于 Phase F，在修复前不得把 fake-provider 全绿解释成真实 E-T 已可导入。
+
 1. 把 provider discovery、candidate authorization、fetch、result validation、canonical admission 分为不同端口。
 2. `earnings-transcripts` 保持英文原文、翻译默认关闭；filing-fetch 只编排显式 companion request。
 3. company-wiki importer 只接收 schema `/2` provider 原件并重算 SHA/MIME/URL/FY/Q；长期 raw 只保存一份。
@@ -340,7 +342,16 @@ git diff --check
 
 ## 13. 当前下一步
 
-进入 **Phase D / M2-provider**：先按施工卡 D0–D1 冻结现有合同、复杂度和完整链 RED 测试，再拆 provider policy、prefetch/postfetch、`/2` transport、canonical admission、material replay 与 CLI。先不改 revenue-forecast/filing-fetch，不接真实付费 provider、Worker 或历史派生清理。
+进入 **Phase E / M3 Worker 的规划冻结**：先复核现有 `worker_parallel_recovery.md`、`worker_parallel_execution_plan.md`、automation job/attempt/outbox 的真实代码和恢复语义，形成一份像 Phase D 一样可由较弱模型执行的文件级 TDD 施工卡；该施工卡单独提交后才开始实现。Phase E 不修改 revenue-forecast/filing-fetch/StockWiki，不启动生产 Worker，也不删除历史派生数据。
+
+### M2-provider 完成收据（2026-09-28）
+
+- provider policy、逐动作 use policy、prefetch admission、postfetch validation、`/2` transport、canonical admission、英文 material/lineage、preflight service 与 CLI 已按单向依赖拆分；四个 38/41/23/19 复杂度冻结项移除，新模块和 facade 顶层函数均不高于 10。
+- 完整 fake provider 子进程 E2E 覆盖 HTML/TXT：discover → discovery preflight → candidate preflight → fetch-candidate `/2` → stdin import → verified reader → selector/locator replay；第二次先 resolve，fetch 计数保持 1，原件/sidecar 各一份。
+- 集中失败矩阵覆盖 discovery/candidate 权限拒绝、timeout、坏 JSON、超限 stdout、effective URL 漂移、fetch 后 policy 漂移和 reader 原件 hash 漂移；拒绝链 raw/sidecar/catalog source/staging 均为零，timeout child 已回收。
+- Phase D 核心门 **51 passed**；selector 定向回归 **3 passed**；Phase C 真实样本 E2E **2 passed**；E-T 自有 producer/translation-control 离线测试 **31 passed**。pre-commit 的 Ruff、scoped mypy、config doctor、host-assumption guard 全绿。
+- synthetic HTML/TXT 空间收据分别为 raw 343/266 B、sidecar 3131/3125 B、catalog 249856 B、selected 3551 B。短样本固定元数据开销使 selected/raw 比率大于 1，不能用于估算长文档；Phase C 的 12 件真实文档 1.0533% 才是当前长文档派生比例证据。
+- 所有 `C:/cwt/m2p-*` 测试根按精确父目录/名称校验后清理；RF 保持 `fcap@ee0a82bf` 且原 dirty 工作树未改，E-T 保持 `codex/transcript-companion-adapter@1a48f66e` 且原未提交工作未改。
 
 ### M1 完成收据（2026-09-27）
 

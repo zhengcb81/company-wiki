@@ -75,10 +75,6 @@ FROZEN_MAX = {
     "policy_2x.py": 43,
     "portfolio_promoter.py": 36,
     "producer_events.py": 1,
-    # 2026-09-27 integration baselines: scoped unit/contract/E2E suites pass;
-    # keep each measured maximum as a hard non-growth ceiling and decompose
-    # these policy/import modules before G0 production use.
-    "provider_use_policy.py": 38,
     "prompt_injection.py": 15,
     "prune_retired_evidence.py": 12,
     "reconcile_retire_state.py": 12,
@@ -99,9 +95,6 @@ FROZEN_MAX = {
     "startup.py": 13,
     "store.py": 30,
     "summarizer.py": 23,
-    "transcript_import.py": 41,
-    "transcript_import_cli.py": 23,
-    "transcript_material.py": 19,
     "trace_parity.py": 19,
     "url_binding.py": 6,
     "visibility_bridge.py": 7,

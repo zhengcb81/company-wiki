@@ -2,6 +2,8 @@
 
 > 本页是 [清洁架构与 TDD 实施总图](clean_architecture_tdd_execution_plan_2026-09-27.md) 的 Phase D 施工卡。先冻结实施顺序、接口所有权和大节点验收，再改产品代码。历史 G1e 文档保留调查证据；若状态或模块边界冲突，以本页为准。
 
+> **完成状态（2026-09-28）：company-wiki 侧 D0–D7 已完成。** fake-provider HTML/TXT 全链和失败矩阵已通过 verified reader；四个复杂度冻结项已移除。真实 E-T `/2` HTML 的 canonical text 定义与 CWP deterministic material 不同，作为 Phase F producer-contract 阻断项保留，不能以本阶段 fake 结果替代。
+
 ## 1. 阶段目标和边界
 
 本阶段只解决四件事：

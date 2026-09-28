@@ -538,3 +538,16 @@
 - 本阶段目标明确为移除或降至实际 `<=10` 的四项复杂度 freeze：`provider_use_policy.py=38`、`transcript_import.py=41`、`transcript_import_cli.py=23`、`transcript_material.py=19`。不得只迁移巨函数或放宽 ratchet。
 - E-T 只读状态为本地 `codex/transcript-companion-adapter`，工具/API/测试仍是未提交文件；`transcript_tool.py` 已是无翻译 JSON 子进程，旧 scraper 有 `--disable-translation`。Phase D 用冻结 JSON schema 的 fake subprocess，不把未提交外仓实现作为生产依赖；正式提交和 filing-fetch 互操作留 Phase F。
 - RF 阶段边界只读复核：`fcap=ee0a82bfd1eec935cf4e567eb42f0ef79efa0226`、`origin/main=3a69f9c5b6516ebc949d1c95bd50965f9112b7ad`，原 planning/assurance dirty 与一次性目录仍在。本阶段零写入、零清理、零切换 RF。
+
+## Session: Phase D / M2-provider 大节点完成（2026-09-28）
+
+- D0 基线：现有 provider/transcript 四组测试 **36 passed in 6.36s**。架构 RED 测试按预期 3/3 失败，证明 8 个目标模块未出现、provider policy 仍反向导入 admission/acquisition，四个 38/41/23/19 freeze 仍存在；没有先放宽门禁。
+- 依次拆出 `transcript_use_policy`、prefetch admission、postfetch validation、`/2` transport、canonical admission、deterministic text/lineage 和 typed preflight service；原 `transcript_import`、`transcript_material` 缩为兼容 facade，CLI 只保留 bounded transport/组合根。四个旧 freeze 已删除，新模块与 facade 的 custom/Ruff complexity 均 `<=10`。
+- TDD 发现并修复一个真实 admission 缺陷：`/2` 的 `canonical_content_sha256/content_bytes` 原先只校验格式，未与 CWP 从 raw 独立重建的文本比较；新增错误 hash/size 负例先失败，随后 admission 在 staging 前重建 material 并比对，拒绝路径无 raw/staging。
+- 新增独立 fake provider 子进程，成功链对 HTML/TXT 都执行 discovery → discovery preflight → exact candidate preflight → fetch-candidate `/2` → CWP stdin import → `SourceVersionReader` verified open → transcript selector → locator replay。初轮 RED 先抓到手写 request ID 漂移，再抓到 runtime policy hash 未绑定 catalog，最后抓到测试快照关闭 metadata bridge 导致 period 不可见；均修正 producer/夹具，没有放宽 reader identity/period/hash gate。
+- 失败矩阵覆盖 discovery deny、candidate 缺 derive、timeout、坏 JSON、stdout 超限、effective URL redirect、fetch 后 policy 改变和 canonical bytes 漂移。拒绝链 raw=0、sidecar=0、catalog source=0、staging=0；timeout child 被 kill/wait 回收；reader 在 hash 漂移后 fail closed。
+- 集中测试：核心合同/架构/复杂度/新 E2E **51 passed in 25.68s**；transcript selector 定向 **3 passed**；Phase C P06/T02 与 12 件真实样本 E2E **2 passed in 118.03s**；E-T 自有 producer 与翻译控制离线测试 **31 passed in 1.95s**。Ruff、12 模块 scoped mypy、config doctor、host-assumption guard 均通过。
+- 空间收据：synthetic HTML 为 raw 343 B、sidecar 3131 B、catalog 249856 B、selected 3551 B；TXT 为 raw 266 B、sidecar 3125 B、catalog 249856 B、selected 3551 B。短样本被固定审计元数据主导，selected/raw 分别 10.35/13.35，不作为长文档比率；Phase C 真实 12 件的 1.0533% 仍是主要容量证据。永久逐行 locator 为 0，raw 各一份，第二次 resolve 时 fetch 仍为 1。
+- 兼容核对发现真实跨仓阻断：E-T 当前 HTML `/2` 以 provider 提取正文计算 canonical hash/size，而 CWP 以 raw 的确定性全文 material 计算。E-T 自有 fixture 实测 `543 B / 97b5...f2ca`，CWP 为 `570 B / 3cb8...8eb0`，二者不等。Phase F 必须升级 producer contract 或明确传输可验证的派生正文；不得删除 CWP 的独立 hash 校验，也不得宣称 fake provider 已证明真实 E-T 可导入。
+- 测试根收据：本轮列出的 13 个 RED/debug/full-chain 根、3 个 D7 根及 1 个 E-T 根均先校验精确名称与 `C:/cwt` 父目录后删除，remaining=0。CWP 未写生产 raw/catalog；RF 保持 `fcap@ee0a82bf` 原 dirty 状态，E-T 保持 `codex/transcript-companion-adapter@1a48f66e` 原 dirty 状态，均未被本项目修改。
+- 下一步先编写并单独提交 Phase E / M3 Worker 详细施工卡，再实施；Worker 仍 paused，46 GiB 旧派生仍未删除。

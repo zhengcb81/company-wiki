@@ -320,3 +320,12 @@
 - postfetch validator 与 canonical writer 也必须分开：validator 验证 fresh policy、effective URL、receipt、staging containment、真实 size/SHA；application service 才拥有唯一临时文件和 `finally` 清理。这样 timeout、坏 JSON、redirect 和政策变化才能逐层断言零残留。
 - transcript selector 是通用 narrative selector 的消费者，不能把 provider 权利逻辑塞回 Phase C 模块。应用层在调用 selector/summarizer 前分别检查 `select_evidence`/`generate_summary`；动作不传递。该门是来源使用权，不是此前已取消的 private/public 分类或个人项目文件权限。
 - Phase D 的完整链必须通过 `SourceVersionReader.open_version()` 或 reader CLI 读回原件；直接使用 importer 返回的 canonical path 会重新把存储目录暴露给上层，也无法验证迁移/同 SHA 副本回退后的抽象有效性。
+
+## 2026-09-28 — M2-provider 完成后的合同与恢复结论
+
+- provider policy、request/candidate admission、transport schema、postfetch byte validation、canonical commit、material replay 和 CLI 是七个不同变化原因。拆开后每层可以独立证明“错误输入在本层停止”，四个旧巨函数 freeze 才能真正删除，而不是把复杂度搬到新文件。
+- `canonical_content_sha256/content_bytes` 必须有明确的 byte semantics。只校验 64 位 hex 和正整数会让 producer 同时篡改正文声明而通过；CWP 现在以 raw 独立重建 material 再比较。但这也暴露 E-T `/2` 的语义漂移：E-T 对 HTML 排除 `<h1>` 并用段落间双换行，CWP deterministic material 保留标题并按行规范化。当前 producer fixture 的两组 hash/size 不同，因此 Phase F 应升级 schema，显式区分 `provider_extracted_text_*` 与 `cwp_material_*`，或传输可独立核验的 provider 派生 bytes；不能复用同名字段表达两种文本。
+- fake provider 必须与 CWP 无代码依赖，否则 producer 和 consumer 可能共享同一错误实现。测试 fixture 自己生成原件和合同 JSON，CWP 只通过 subprocess stdout 收到不可信对象；成功后也必须从 catalog identity 经 `SourceVersionReader` 取回 bytes，而不是读 importer 返回路径。
+- runtime snapshot 的 `policy_hash` 是 catalog policy pin，测试不可填任意 SHA。reader 同时按 snapshot 控制 v1/v2 metadata 可见性；把所有 flag 设 false 会关闭 legacy bridge，使刚导入 sidecar 的 fiscal period 不可见。E2E 夹具最终显式启用现行 bridge，从而保留严格 FY/Q 校验。
+- 多文档并发不能复用本阶段 test harness 的 subprocess 串联作为生产 orchestrator。provider 的 timeout/stdout cap/kill/wait 只证明边界故障可被回收；正式 job claim、lease、幂等 commit、outbox/reconcile 和 pause 线性化仍属于 Phase E automation 层。
+- synthetic transcript 很短，固定 sidecar 与 SQLite page allocation 会使派生/原件比率看起来大于 1000%；空间预算应分别报告 raw、sidecar、catalog allocation、selected bundle，并以真实长文档批次估算总体容量。不要用短 TXT 百分比否定“选择性证据代替全量切片”的 12 件真实样本结果。

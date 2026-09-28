@@ -1,25 +1,21 @@
-"""Fail-closed, read-only provider content-use policy for G1e sources.
+"""Fail-closed, read-only provider content-use policy.
 
-This is an additional rights layer. It does not replace the existing exact
-candidate DownloadAuthorization or user download authorization. No policy file
-is installed by this module, so production callers have no implicit grants.
+This module owns provider rule parsing and one-action decisions only. Exact
+download authorization and transcript request identity live in separate
+application layers.
 """
 
 from __future__ import annotations
 
-from dataclasses import dataclass
-from datetime import date, datetime
 import hashlib
 import json
-from pathlib import Path
 import re
-import stat
+from dataclasses import dataclass
+from datetime import date
+from pathlib import Path
 from typing import Any, Mapping
 from urllib.parse import unquote, urlsplit
 
-from .acquisition import DownloadCandidate, DownloadReceipt
-from .authorization import DownloadAuthorization, validate_download_authorization
-from .resolver import SourceRequest
 from .store import canonical_json
 
 
@@ -57,10 +53,11 @@ _RULE_KEYS = frozenset(
         "revoked",
     }
 )
-# Current site terms prohibit automated harvesting. A future written license
-# requires a reviewed code/policy change; a local JSON edit cannot lift this.
 _BLOCKED_SITE_PROVIDERS = frozenset({"motley_fool", "seeking_alpha"})
 _BLOCKED_SITE_HOSTS = frozenset({"fool.com", "seekingalpha.com"})
+_LOCAL_ACTIONS = frozenset(
+    {"retain_original", "derive_text", "select_evidence", "generate_summary"}
+)
 
 
 class ProviderUsePolicyError(ValueError):
@@ -119,19 +116,19 @@ class ProviderUseRule:
         if host != host.lower() or not _HOST.fullmatch(host) or ".." in host:
             raise ProviderUsePolicyError("invalid origin_host")
         prefix = _text(value["path_prefix"], "path_prefix")
-        if not prefix.startswith("/") or "//" in prefix or ".." in prefix or "?" in prefix or "#" in prefix:
+        if not prefix.startswith("/") or any(
+            part in prefix for part in ("//", "..", "?", "#")
+        ):
             raise ProviderUsePolicyError("invalid path_prefix")
-        content_class = _text(value["content_class"], "content_class")
-        evidence_ref = _text(value["rights_evidence_ref"], "rights_evidence_ref")
-        evidence_sha = _sha(value["rights_evidence_sha256"], "rights_evidence_sha256")
-        reviewer = _text(value["reviewer"], "reviewer")
         reviewed = _date(value["reviewed_at"], "reviewed_at")
         valid_from = _date(value["valid_from"], "valid_from")
         valid_until = _date(value["valid_until"], "valid_until")
         if not reviewed <= valid_from <= valid_until:
             raise ProviderUsePolicyError("provider use rule dates are out of order")
         actions = value["permitted_actions"]
-        if not isinstance(actions, list) or not all(isinstance(item, str) for item in actions):
+        if not isinstance(actions, list) or not all(
+            isinstance(item, str) for item in actions
+        ):
             raise ProviderUsePolicyError("invalid permitted_actions")
         if len(actions) != len(set(actions)) or not set(actions) <= ACTIONS:
             raise ProviderUsePolicyError("invalid permitted_actions")
@@ -141,10 +138,14 @@ class ProviderUseRule:
             provider_id=provider_id,
             origin_host=host,
             path_prefix=prefix,
-            content_class=content_class,
-            rights_evidence_ref=evidence_ref,
-            rights_evidence_sha256=evidence_sha,
-            reviewer=reviewer,
+            content_class=_text(value["content_class"], "content_class"),
+            rights_evidence_ref=_text(
+                value["rights_evidence_ref"], "rights_evidence_ref"
+            ),
+            rights_evidence_sha256=_sha(
+                value["rights_evidence_sha256"], "rights_evidence_sha256"
+            ),
+            reviewer=_text(value["reviewer"], "reviewer"),
             reviewed_at=reviewed.isoformat(),
             valid_from=valid_from.isoformat(),
             valid_until=valid_until.isoformat(),
@@ -164,6 +165,111 @@ class ProviderUseDecision:
     rule_evidence_sha256: str | None = None
 
 
+def _deny(policy: "ProviderUsePolicy", reason: str) -> ProviderUseDecision:
+    return ProviderUseDecision(False, reason, policy.policy_id, policy.policy_sha256)
+
+
+def _safe_https_location(source_url: object) -> tuple[str, str] | None:
+    if not isinstance(source_url, str):
+        return None
+    try:
+        parsed = urlsplit(source_url)
+        port = parsed.port
+    except ValueError:
+        return None
+    if _authority_is_unsafe(parsed, port) or _path_is_unsafe(parsed):
+        return None
+    hostname = parsed.hostname
+    if hostname is None:
+        return None
+    return hostname, parsed.path
+
+
+def _authority_is_unsafe(parsed: Any, port: int | None) -> bool:
+    if parsed.scheme != "https" or not parsed.hostname:
+        return True
+    if parsed.username is not None or parsed.password is not None:
+        return True
+    if port is not None:
+        return True
+    return bool(parsed.query) or bool(parsed.fragment)
+
+
+def _path_is_unsafe(parsed: Any) -> bool:
+    if parsed.path != unquote(parsed.path):
+        return True
+    return ".." in parsed.path.split("/")
+
+
+def _host_is_blocked(host: str) -> bool:
+    return any(
+        host == blocked or host.endswith("." + blocked)
+        for blocked in _BLOCKED_SITE_HOSTS
+    )
+
+
+def _rule_matches(
+    rule: ProviderUseRule,
+    *,
+    provider_id: str,
+    host: str,
+    path: str,
+    content_class: str,
+) -> bool:
+    path_matches = path == rule.path_prefix or path.startswith(
+        rule.path_prefix.rstrip("/") + "/"
+    )
+    return (
+        rule.provider_id == provider_id
+        and rule.origin_host == host
+        and rule.content_class == content_class
+        and path_matches
+    )
+
+
+def _active_rule_decision(
+    policy: "ProviderUsePolicy",
+    rule: ProviderUseRule,
+    *,
+    action: str,
+    on_date: str,
+    export_target: str | None,
+) -> ProviderUseDecision:
+    if not _rule_is_active(rule, on_date):
+        return _deny(policy, "rule_inactive")
+    if action not in rule.permitted_actions:
+        return _deny(policy, "action_not_permitted")
+    scope_issue = _scope_issue(rule, action, export_target)
+    if scope_issue is not None:
+        return _deny(policy, scope_issue)
+    return ProviderUseDecision(
+        True,
+        "permitted",
+        policy.policy_id,
+        policy.policy_sha256,
+        rule.rights_evidence_sha256,
+    )
+
+
+def _rule_is_active(rule: ProviderUseRule, on_date: str) -> bool:
+    return not rule.revoked and rule.valid_from <= on_date <= rule.valid_until
+
+
+def _scope_issue(
+    rule: ProviderUseRule, action: str, export_target: str | None
+) -> str | None:
+    if action in _LOCAL_ACTIONS:
+        return (
+            "retention_scope_mismatch"
+            if rule.retention_scope != "company_wiki_local"
+            else None
+        )
+    if action == "export_excerpt":
+        if rule.export_scope == "none" or export_target != rule.export_scope:
+            return "export_scope_mismatch"
+    return None
+
+
 @dataclass(frozen=True)
 class ProviderUsePolicy:
     policy_id: str
@@ -173,7 +279,9 @@ class ProviderUsePolicy:
     @classmethod
     def from_dict(cls, value: Mapping[str, Any]) -> "ProviderUsePolicy":
         if not isinstance(value, Mapping) or set(value) != _POLICY_KEYS:
-            raise ProviderUsePolicyError("provider use policy fields differ from schema")
+            raise ProviderUsePolicyError(
+                "provider use policy fields differ from schema"
+            )
         if value["schema_version"] != PROVIDER_USE_POLICY_SCHEMA:
             raise ProviderUsePolicyError("unsupported provider use policy schema")
         policy_id = _text(value["policy_id"], "policy_id")
@@ -182,15 +290,20 @@ class ProviderUsePolicy:
             raise ProviderUsePolicyError("rules must be a bounded list")
         declared = _sha(value["policy_sha256"], "policy_sha256")
         try:
-            computed = hashlib.sha256(
-                canonical_json({key: val for key, val in value.items() if key != "policy_sha256"}).encode("utf-8")
-            ).hexdigest()
+            encoded = canonical_json(
+                {key: val for key, val in value.items() if key != "policy_sha256"}
+            ).encode("utf-8")
         except (TypeError, ValueError) as exc:
-            raise ProviderUsePolicyError("provider use policy is not canonical JSON") from exc
-        if declared != computed:
+            raise ProviderUsePolicyError(
+                "provider use policy is not canonical JSON"
+            ) from exc
+        if declared != hashlib.sha256(encoded).hexdigest():
             raise ProviderUsePolicyError("provider use policy hash mismatch")
         rules = tuple(ProviderUseRule.from_dict(item) for item in rules_input)
-        identities = [(rule.provider_id, rule.origin_host, rule.path_prefix, rule.content_class) for rule in rules]
+        identities = [
+            (rule.provider_id, rule.origin_host, rule.path_prefix, rule.content_class)
+            for rule in rules
+        ]
         if len(identities) != len(set(identities)):
             raise ProviderUsePolicyError("duplicate provider use rule")
         return cls(policy_id=policy_id, policy_sha256=declared, rules=rules)
@@ -205,67 +318,39 @@ class ProviderUsePolicy:
         on_date: str,
         export_target: str | None = None,
     ) -> ProviderUseDecision:
-        def deny(reason: str) -> ProviderUseDecision:
-            return ProviderUseDecision(False, reason, self.policy_id, self.policy_sha256)
-
         if action not in ACTIONS:
-            return deny("unknown_action")
+            return _deny(self, "unknown_action")
         if provider_id in _BLOCKED_SITE_PROVIDERS:
-            return deny("provider_site_automation_blocked")
-        if not isinstance(source_url, str):
-            return deny("invalid_source_url")
+            return _deny(self, "provider_site_automation_blocked")
+        location = _safe_https_location(source_url)
+        if location is None:
+            return _deny(self, "invalid_source_url")
+        host, path = location
+        if _host_is_blocked(host):
+            return _deny(self, "provider_site_automation_blocked")
         try:
-            parsed = urlsplit(source_url)
-            port = parsed.port
-        except ValueError:
-            return deny("invalid_source_url")
-        if (
-            parsed.scheme != "https"
-            or not parsed.hostname
-            or parsed.username is not None
-            or parsed.password is not None
-            or port is not None
-            or parsed.query
-            or parsed.fragment
-            or parsed.path != unquote(parsed.path)
-            or ".." in parsed.path.split("/")
-        ):
-            return deny("invalid_source_url")
-        if any(
-            parsed.hostname == host or parsed.hostname.endswith("." + host)
-            for host in _BLOCKED_SITE_HOSTS
-        ):
-            return deny("provider_site_automation_blocked")
-        try:
-            at = _date(on_date, "on_date")
+            at = _date(on_date, "on_date").isoformat()
         except ProviderUsePolicyError:
-            return deny("invalid_date")
+            return _deny(self, "invalid_date")
         matches = [
             rule
             for rule in self.rules
-            if rule.provider_id == provider_id
-            and rule.origin_host == parsed.hostname
-            and rule.content_class == content_class
-            and (
-                parsed.path == rule.path_prefix
-                or parsed.path.startswith(rule.path_prefix.rstrip("/") + "/")
+            if _rule_matches(
+                rule,
+                provider_id=provider_id,
+                host=host,
+                path=path,
+                content_class=content_class,
             )
         ]
         if len(matches) != 1:
-            return deny("missing_or_ambiguous_rule")
-        rule = matches[0]
-        if rule.revoked or not (rule.valid_from <= at.isoformat() <= rule.valid_until):
-            return deny("rule_inactive")
-        if action not in rule.permitted_actions:
-            return deny("action_not_permitted")
-        if action in {"retain_original", "derive_text", "select_evidence", "generate_summary"}:
-            if rule.retention_scope != "company_wiki_local":
-                return deny("retention_scope_mismatch")
-        if action == "export_excerpt":
-            if rule.export_scope == "none" or export_target != rule.export_scope:
-                return deny("export_scope_mismatch")
-        return ProviderUseDecision(
-            True, "permitted", self.policy_id, self.policy_sha256, rule.rights_evidence_sha256
+            return _deny(self, "missing_or_ambiguous_rule")
+        return _active_rule_decision(
+            self,
+            matches[0],
+            action=action,
+            on_date=at,
+            export_target=export_target,
         )
 
 
@@ -283,261 +368,3 @@ def load_provider_use_policy(path: Path) -> ProviderUsePolicy:
     except (UnicodeDecodeError, json.JSONDecodeError) as exc:
         raise ProviderUsePolicyError("provider use policy JSON is corrupt") from exc
     return ProviderUsePolicy.from_dict(payload)
-
-
-@dataclass(frozen=True)
-class TranscriptFetchAdmission:
-    """Pre-network decision; an allowed result still requires post-fetch checks."""
-
-    allowed: bool
-    reason: str
-    rights_policy_sha256: str | None
-    download_authorization_hash: str | None
-    request_id: str | None = None
-    candidate_id: str | None = None
-
-
-@dataclass(frozen=True)
-class TranscriptFetchValidation:
-    """Post-fetch proof before any transcript bytes become canonical raw."""
-
-    allowed: bool
-    reason: str
-    rights_policy_sha256: str | None
-    download_authorization_hash: str | None
-    content_sha256: str | None = None
-    final_url: str | None = None
-    mime_type: str | None = None
-    byte_size: int | None = None
-
-
-def validate_transcript_fetch_result(
-    *,
-    request: SourceRequest,
-    candidate: DownloadCandidate,
-    receipt: DownloadReceipt,
-    authorization: DownloadAuthorization | None,
-    plan_hash: str,
-    runtime_policy_hash: str,
-    pinned_rights_policy_sha256: str,
-    current_rights_policy: ProviderUsePolicy | None,
-    final_url: str,
-    staging_root: Path,
-    now: str,
-) -> TranscriptFetchValidation:
-    """Revalidate rights, response identity and exact staged bytes after fetch.
-
-    ``current_rights_policy`` must be freshly loaded after the request. A
-    caller must keep a denied response in private staging only, then delete it.
-    This function never imports or exposes the staged bytes.
-    """
-    policy_hash = (
-        current_rights_policy.policy_sha256
-        if isinstance(current_rights_policy, ProviderUsePolicy)
-        else None
-    )
-    authorization_hash = (
-        authorization.receipt_hash
-        if isinstance(authorization, DownloadAuthorization)
-        else None
-    )
-
-    def deny(reason: str) -> TranscriptFetchValidation:
-        return TranscriptFetchValidation(
-            False, reason, policy_hash, authorization_hash,
-            final_url=final_url if isinstance(final_url, str) else None,
-        )
-
-    if not isinstance(receipt, DownloadReceipt):
-        return deny("invalid_download_receipt")
-    if not isinstance(staging_root, Path):
-        return deny("invalid_staging_root")
-    if not isinstance(current_rights_policy, ProviderUsePolicy):
-        return deny("missing_current_provider_use_policy")
-    if current_rights_policy.policy_sha256 != pinned_rights_policy_sha256:
-        return deny("provider_use_policy_changed_during_fetch")
-    admission = authorize_transcript_fetch(
-        request=request,
-        candidate=candidate,
-        authorization=authorization,
-        plan_hash=plan_hash,
-        runtime_policy_hash=runtime_policy_hash,
-        rights_policy=current_rights_policy,
-        now=now,
-    )
-    if not admission.allowed:
-        return deny("post_fetch_" + admission.reason)
-    if (
-        receipt.candidate_id != candidate.candidate_id
-        or receipt.provider != candidate.provider
-        or receipt.provider_document_id != candidate.provider_document_id
-        or receipt.source_url != candidate.source_url
-    ):
-        return deny("download_receipt_identity_mismatch")
-    if not 200 <= receipt.http_status < 300:
-        return deny("download_receipt_http_status_not_successful")
-    if receipt.mime_type not in {"text/html", "application/xhtml+xml", "text/plain"}:
-        return deny("unsupported_transcript_mime_type")
-    if authorization is None or receipt.byte_size > authorization.max_bytes:
-        return deny("downloaded_bytes_exceed_authorized_cap")
-    try:
-        received_at = datetime.strptime(receipt.retrieved_at, "%Y-%m-%dT%H:%M:%SZ")
-        checked_at = datetime.strptime(now, "%Y-%m-%dT%H:%M:%SZ")
-    except (TypeError, ValueError):
-        return deny("invalid_fetch_timestamp")
-    if received_at > checked_at:
-        return deny("download_receipt_from_future")
-
-    try:
-        root_path = staging_root.resolve(strict=True)
-    except OSError:
-        return deny("allocated_staging_root_unavailable")
-    staged_path = Path(receipt.staged_path)
-    try:
-        resolved_path = staged_path.resolve(strict=True)
-        resolved_path.relative_to(root_path)
-    except (OSError, ValueError):
-        return deny("staged_file_outside_allocated_root")
-    try:
-        file_stat = resolved_path.stat()
-        if staged_path.is_symlink() or not stat.S_ISREG(file_stat.st_mode):
-            return deny("staged_file_not_regular")
-        if file_stat.st_size != receipt.byte_size:
-            return deny("staged_file_size_mismatch")
-        digest = hashlib.sha256()
-        with resolved_path.open("rb") as stream:
-            for chunk in iter(lambda: stream.read(1024 * 1024), b""):
-                digest.update(chunk)
-    except OSError:
-        return deny("staged_file_unavailable")
-    if digest.hexdigest() != receipt.content_sha256:
-        return deny("staged_file_sha256_mismatch")
-
-    for action in ("automated_fetch", "retain_original", "derive_text"):
-        decision = current_rights_policy.decide(
-            provider_id=candidate.provider,
-            source_url=final_url,
-            content_class="earnings_call_transcript",
-            action=action,
-            on_date=now[:10],
-        )
-        if not decision.allowed:
-            return deny("final_url_rights_" + action + "_" + decision.reason)
-    return TranscriptFetchValidation(
-        True,
-        "permitted",
-        policy_hash,
-        authorization_hash,
-        receipt.content_sha256,
-        final_url,
-        receipt.mime_type,
-        receipt.byte_size,
-    )
-
-
-def authorize_transcript_fetch(
-    *,
-    request: SourceRequest,
-    candidate: DownloadCandidate,
-    authorization: DownloadAuthorization | None,
-    plan_hash: str,
-    runtime_policy_hash: str,
-    rights_policy: ProviderUsePolicy | None,
-    now: str,
-) -> TranscriptFetchAdmission:
-    """Compose existing exact-download authorization with transcript rights.
-
-    The caller must run this before invoking the provider. It must recheck the
-    pinned rights policy and candidate identity before making bytes visible.
-    """
-    rights_hash = rights_policy.policy_sha256 if isinstance(rights_policy, ProviderUsePolicy) else None
-    auth_hash = authorization.receipt_hash if isinstance(authorization, DownloadAuthorization) else None
-
-    def deny(reason: str) -> TranscriptFetchAdmission:
-        return TranscriptFetchAdmission(
-            False,
-            reason,
-            rights_hash,
-            auth_hash,
-            request.request_id if isinstance(request, SourceRequest) else None,
-            candidate.candidate_id if isinstance(candidate, DownloadCandidate) else None,
-        )
-
-    if not isinstance(request, SourceRequest) or not isinstance(candidate, DownloadCandidate):
-        return deny("invalid_request_or_candidate")
-    if not request.allow_download:
-        return deny("download_not_authorized")
-    # Transcript feeds frequently omit a trustworthy Content-Length during
-    # discovery. A missing candidate.remote_size is allowed: callers must
-    # send authorization.max_bytes to the bounded provider fetch, and the
-    # post-fetch receipt validator enforces the actual byte count before any
-    # canonical write.
-    if (
-        request.market != "US"
-        or request.document_kind != "investor_call_transcript"
-        or request.fiscal_year is None
-        or request.fiscal_period not in {"Q1", "Q2", "Q3", "Q4"}
-        or request.security_id is None
-        or request.mode not in (None, "exact")
-    ):
-        return deny("request_not_exact_us_transcript")
-    if (
-        candidate.market != request.market
-        or candidate.document_kind != request.document_kind
-        or candidate.entity != request.entity
-        or candidate.fiscal_year != request.fiscal_year
-        or candidate.fiscal_period != request.fiscal_period
-        or candidate.filing_date > request.as_of_date
-        or request.provider not in (None, candidate.provider)
-        or request.provider_document_id not in (None, candidate.provider_document_id)
-    ):
-        return deny("candidate_identity_mismatch")
-    try:
-        candidate_identity = json.loads(candidate.adapter_payload_json or "null")
-    except json.JSONDecodeError:
-        return deny("candidate_security_identity_missing")
-    if (
-        not isinstance(candidate_identity, dict)
-        or candidate_identity.get("security_id") != request.security_id
-        or candidate_identity.get("market") != request.market
-    ):
-        return deny("candidate_security_identity_missing")
-    try:
-        parsed_now = datetime.strptime(now, "%Y-%m-%dT%H:%M:%SZ")
-    except (TypeError, ValueError):
-        return deny("invalid_now")
-    if parsed_now.strftime("%Y-%m-%dT%H:%M:%SZ") != now:
-        return deny("invalid_now")
-    if not isinstance(authorization, DownloadAuthorization):
-        return deny("missing_download_authorization")
-    if authorization.request_id != request.request_id:
-        return deny("authorization_request_mismatch")
-    if authorization.policy_hash != runtime_policy_hash:
-        return deny("runtime_policy_hash_mismatch")
-    download_issue = validate_download_authorization(
-        authorization, candidate, plan_hash=plan_hash, now=now
-    )
-    if download_issue is not None:
-        return deny("download_authorization_rejected")
-    if not isinstance(rights_policy, ProviderUsePolicy):
-        return deny("missing_provider_use_policy")
-    for action in ("automated_fetch", "retain_original", "derive_text"):
-        rights = rights_policy.decide(
-            provider_id=candidate.provider,
-            source_url=candidate.source_url,
-            content_class="earnings_call_transcript",
-            action=action,
-            on_date=now[:10],
-        )
-        if not rights.allowed:
-            if action == "automated_fetch":
-                return deny("provider_rights_" + rights.reason)
-            return deny("provider_rights_" + action + "_" + rights.reason)
-    return TranscriptFetchAdmission(
-        True,
-        "permitted",
-        rights_hash,
-        auth_hash,
-        request.request_id,
-        candidate.candidate_id,
-    )
