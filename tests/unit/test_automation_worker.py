@@ -83,7 +83,7 @@ def _make_job(m=None, store=None, status=None, **overrides):
     status = status or m.JobStatus.READY
     defaults = dict(
         job_id="job-auto4-001",
-        job_type="source.normalize",
+        job_type="timer.execute_step",
         subject_type="source_revision",
         subject_id="rev-auto4-001",
         input_hash=INPUT_HASH,
@@ -217,7 +217,7 @@ def test_worker_claims_and_executes_happy_path(tmp_path):
     store = _setup_store_with_job(s, m, tmp_path)
     reg = r.create_default_registry()
     executor = w.HandlerExecutor()
-    executor.register("source.normalize", _make_fake_handler(m.HandlerOutcome.SUCCEEDED, result={"ok": True}))
+    executor.register("timer.execute_step", _make_fake_handler(m.HandlerOutcome.SUCCEEDED, result={"ok": True}))
     clock = FixedClock("2026-07-12T10:01:00Z")
     id_gen = SequentialIDGen()
     worker = w.Worker(store, reg, executor, clock=clock, id_gen=id_gen, lease_seconds=60)
@@ -248,7 +248,7 @@ def test_worker_retries_on_retryable_error(tmp_path):
     reg = r.create_default_registry()
     executor = w.HandlerExecutor()
     error = m.HandlerError(code="IO_TRANSIENT", detail="transient failure")
-    executor.register("source.normalize", _make_fake_handler(
+    executor.register("timer.execute_step", _make_fake_handler(
         m.HandlerOutcome.RETRYABLE, error=error
     ))
     clock = FixedClock("2026-07-12T10:01:00Z")
@@ -270,7 +270,7 @@ def test_worker_dead_letters_on_terminal_error(tmp_path):
     reg = r.create_default_registry()
     executor = w.HandlerExecutor()
     error = m.HandlerError(code="SCHEMA_INVALID", detail="bad schema")
-    executor.register("source.normalize", _make_fake_handler(
+    executor.register("timer.execute_step", _make_fake_handler(
         m.HandlerOutcome.TERMINAL_FAILURE, error=error
     ))
     clock = FixedClock("2026-07-12T10:01:00Z")
@@ -290,7 +290,7 @@ def test_worker_blocks_on_human_error(tmp_path):
     reg = r.create_default_registry()
     executor = w.HandlerExecutor()
     error = m.HandlerError(code="REVIEW_PENDING", detail="needs review")
-    executor.register("source.normalize", _make_fake_handler(
+    executor.register("timer.execute_step", _make_fake_handler(
         m.HandlerOutcome.BLOCKED_HUMAN, error=error
     ))
     clock = FixedClock("2026-07-12T10:01:00Z")
@@ -309,7 +309,7 @@ def test_worker_reaps_expired_leases(tmp_path):
     store = _setup_store_with_job(s, m, tmp_path)
     reg = r.create_default_registry()
     executor = w.HandlerExecutor()
-    executor.register("source.normalize", _make_fake_handler(m.HandlerOutcome.SUCCEEDED))
+    executor.register("timer.execute_step", _make_fake_handler(m.HandlerOutcome.SUCCEEDED))
     # First worker claims with short lease.
     clock1 = FixedClock("2026-07-12T10:01:00Z")
     id_gen1 = SequentialIDGen("w1")
@@ -319,7 +319,7 @@ def test_worker_reaps_expired_leases(tmp_path):
     assert job.status is m.JobStatus.SUCCEEDED
     # For reap test, create a job stuck in RUNNING with an expired lease.
     store.put_event(_make_event(m=m, event_id="evt-reap", subject_id="rev-reap"))
-    job2 = _make_job(m=m, job_id="job-reap", job_type="source.normalize",
+    job2 = _make_job(m=m, job_id="job-reap", job_type="timer.execute_step",
                       subject_id="src-reap", status=m.JobStatus.READY,
                       created_from_event_id="evt-reap")
     store.put_job(job2)
@@ -363,7 +363,7 @@ def test_worker_handler_exception_dead_letters(tmp_path):
     executor = w.HandlerExecutor()
     def bad_handler(input_data):
         raise RuntimeError("handler crashed")
-    executor.register("source.normalize", bad_handler)
+    executor.register("timer.execute_step", bad_handler)
     clock = FixedClock("2026-07-12T10:01:00Z")
     id_gen = SequentialIDGen()
     worker = w.Worker(store, reg, executor, clock=clock, id_gen=id_gen, lease_seconds=60)
@@ -382,7 +382,7 @@ def test_worker_uses_only_atomic_store_operations_for_claim_and_finish(
     store = _setup_store_with_job(s, m, tmp_path)
     executor = w.HandlerExecutor()
     executor.register(
-        "source.normalize",
+        "timer.execute_step",
         _make_fake_handler(m.HandlerOutcome.SUCCEEDED, result={"ok": True}),
     )
 
@@ -414,7 +414,7 @@ def test_worker_fails_closed_while_runtime_gate_is_paused(tmp_path):
     )
     executor = w.HandlerExecutor()
     executor.register(
-        "source.normalize", _make_fake_handler(m.HandlerOutcome.SUCCEEDED)
+        "timer.execute_step", _make_fake_handler(m.HandlerOutcome.SUCCEEDED)
     )
     worker = w.Worker(
         store,

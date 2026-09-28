@@ -8,6 +8,7 @@ the planned DAG without creating any jobs or side effects.
 import argparse
 from collections.abc import Sequence
 from pathlib import Path
+from typing import Any
 
 from .models import canonical_json
 
@@ -15,7 +16,7 @@ from .models import canonical_json
 SCHEMA_VERSION = 1
 
 
-def _status() -> dict:
+def _status() -> dict[str, object]:
     return {
         "database": None,
         "mode": "off",
@@ -26,7 +27,7 @@ def _status() -> dict:
     }
 
 
-def _doctor() -> dict:
+def _doctor() -> dict[str, object]:
     return {
         "checks": {
             "automation_store": "not_configured",
@@ -51,7 +52,7 @@ def _doctor() -> dict:
     }
 
 
-def _plan(db_path: Path, event_id: str | None) -> dict:
+def _plan(db_path: Path, event_id: str | None) -> dict[str, Any]:
     """Read events from the store and output the planned DAG (read-only)."""
     from .event_sources import EventSource
     from .planner import plan_jobs
@@ -62,7 +63,9 @@ def _plan(db_path: Path, event_id: str | None) -> dict:
     store = AutomationStore(db_path)
     source = EventSource(store)
     registry = create_default_registry()
-    config = PolicyConfig(allow_llm=True)
+    # Planning is read-only, but it must explicitly admit every capability
+    # declared by the resulting jobs.  No network or model call occurs here.
+    config = PolicyConfig(allow_llm=True, allow_network=True)
 
     if event_id:
         event = store.get_event(event_id)
@@ -142,7 +145,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         result = _plan(args.db, args.event_id)
         exit_code = result.pop("exit_code", 0)
         print(canonical_json(result))
-        return exit_code
+        return int(exit_code)
 
     return 2  # unknown command
 

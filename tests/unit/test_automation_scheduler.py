@@ -41,7 +41,7 @@ def _scheduler(tmp_path: Path):
     scheduler = AutomationScheduler(
         store,
         create_default_registry(),
-        PolicyConfig(allow_llm=True),
+        PolicyConfig(allow_llm=True, allow_network=True),
     )
     return store, scheduler
 
@@ -60,16 +60,22 @@ def test_materialize_same_event_twice_creates_one_exact_dag(tmp_path: Path) -> N
     first = scheduler.materialize_event(event)
     second = scheduler.materialize_event(event)
 
-    assert (first.jobs_created, first.dependencies_created) == (2, 1)
+    assert (first.jobs_created, first.dependencies_created) == (3, 3)
     assert (second.jobs_created, second.dependencies_created) == (0, 0)
-    assert (second.jobs_existing, second.dependencies_existing) == (2, 1)
+    assert (second.jobs_existing, second.dependencies_existing) == (3, 3)
     jobs = store.list_jobs()
-    assert len(jobs) == 2
-    root = _job_by_type(store, "source.normalize")
-    child = _job_by_type(store, "source.analyze")
+    assert len(jobs) == 3
+    root = _job_by_type(store, "source.narrative_select")
+    child = _job_by_type(store, "source.narrative_summarize")
+    verify = _job_by_type(store, "source.narrative_verify")
     assert root.status is JobStatus.READY
     assert child.status is JobStatus.PLANNED
+    assert verify.status is JobStatus.PLANNED
     assert store.list_job_dependencies(child.job_id) == ((child.job_id, root.job_id),)
+    assert set(store.list_job_dependencies(verify.job_id)) == {
+        (verify.job_id, root.job_id),
+        (verify.job_id, child.job_id),
+    }
 
 
 def test_materialize_rejects_changed_event_payload_reusing_job_key(
@@ -90,7 +96,7 @@ def test_materialize_rejects_changed_event_payload_reusing_job_key(
     with pytest.raises(IdempotencyConflictError, match="event"):
         scheduler.materialize_event(changed)
 
-    assert len(store.list_jobs()) == 2
+    assert len(store.list_jobs()) == 3
 
 
 def test_materialize_rolls_back_partial_dag_on_job_conflict(tmp_path: Path) -> None:
@@ -106,10 +112,10 @@ def test_materialize_rolls_back_partial_dag_on_job_conflict(tmp_path: Path) -> N
     plan = plan_jobs(
         event,
         create_default_registry(),
-        PolicyConfig(allow_llm=True),
+        PolicyConfig(allow_llm=True, allow_network=True),
     )
     dag = materialize_plan(event, plan)
-    root, child = dag.jobs
+    root, child, verify = dag.jobs
     store.put_job(replace(child, priority=child.priority + 1))
 
     with pytest.raises(IdempotencyConflictError, match="different materialized content"):
@@ -117,6 +123,7 @@ def test_materialize_rolls_back_partial_dag_on_job_conflict(tmp_path: Path) -> N
 
     assert store.get_job(root.job_id) is None
     assert store.get_job(child.job_id) is not None
+    assert store.get_job(verify.job_id) is None
     assert store.list_job_dependencies(child.job_id) == ()
 
 
@@ -127,8 +134,8 @@ def test_downstream_waits_for_success_result_payload(tmp_path: Path) -> None:
     event = _event()
     store.put_event(event)
     scheduler.materialize_event(event)
-    root = _job_by_type(store, "source.normalize")
-    child = _job_by_type(store, "source.analyze")
+    root = _job_by_type(store, "source.narrative_select")
+    child = _job_by_type(store, "source.narrative_summarize")
 
     connection = sqlite3.connect(store.db_path)
     try:
@@ -186,8 +193,8 @@ def test_terminal_predecessor_blocks_downstream_with_diagnostic(
     event = _event()
     store.put_event(event)
     scheduler.materialize_event(event)
-    root = _job_by_type(store, "source.normalize")
-    child = _job_by_type(store, "source.analyze")
+    root = _job_by_type(store, "source.narrative_select")
+    child = _job_by_type(store, "source.narrative_summarize")
     connection = sqlite3.connect(store.db_path)
     try:
         connection.execute(

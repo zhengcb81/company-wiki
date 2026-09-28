@@ -10,6 +10,13 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
+from .narrative_contracts import (
+    BUNDLE_SCHEMA,
+    SELECT_RESULT_SCHEMA,
+    SOURCE_REVISION_EVENT_SCHEMA,
+    SUMMARY_RESULT_SCHEMA,
+)
+
 
 class UnknownJobTypeError(KeyError):
     """Raised when a job_type has no registered handler spec."""
@@ -59,32 +66,75 @@ class HandlerRegistry:
 # --------------------------------------------------------------------------- #
 _KNOWN_SPECS: tuple[HandlerSpec, ...] = (
     HandlerSpec(
-        job_type="source.normalize",
+        job_type="source.narrative_select",
         handler_version="1.0.0",
-        input_schema="SourceNormalizeInput.v1",
-        result_schema="SourceNormalizeResult.v1",
+        input_schema=SOURCE_REVISION_EVENT_SCHEMA,
+        result_schema=SELECT_RESULT_SCHEMA,
         effect_class="artifact_only",
-        allowed_paths=("companies/*/raw/**", "sectors/*/raw/**"),
+        allowed_paths=(),
+        network=False,
+        llm=False,
+        default_max_attempts=3,
+        retryable_errors=("IO_TRANSIENT", "STORE_BUSY", "LEASE_LOST"),
+        human_errors=("PARSER_INCOMPLETE", "SOURCE_UNAVAILABLE"),
+        terminal_errors=(
+            "INPUT_SCHEMA_INVALID",
+            "SOURCE_HASH_MISMATCH",
+            "POLICY_DENIED",
+            "UNSUPPORTED_SOURCE_TYPE",
+            "RESULT_TOO_LARGE",
+        ),
+    ),
+    HandlerSpec(
+        job_type="source.narrative_summarize",
+        handler_version="1.0.0",
+        input_schema=SOURCE_REVISION_EVENT_SCHEMA,
+        result_schema=SUMMARY_RESULT_SCHEMA,
+        effect_class="artifact_only",
+        allowed_paths=(),
+        network=True,
+        llm=True,
+        default_max_attempts=3,
+        retryable_errors=(
+            "MODEL_TIMEOUT",
+            "MODEL_RATE_LIMIT",
+            "IO_TRANSIENT",
+            "LEASE_LOST",
+        ),
+        human_errors=("MODEL_NOT_CONFIGURED", "PROMPT_REVIEW_REQUIRED"),
+        terminal_errors=(
+            "INPUT_SCHEMA_INVALID",
+            "DEPENDENCY_INVALID",
+            "POLICY_DENIED",
+            "MODEL_RESPONSE_INVALID",
+            "SUMMARY_INVALID",
+            "RESULT_TOO_LARGE",
+        ),
+    ),
+    HandlerSpec(
+        job_type="source.narrative_verify",
+        handler_version="1.0.0",
+        input_schema=SOURCE_REVISION_EVENT_SCHEMA,
+        result_schema=BUNDLE_SCHEMA,
+        effect_class="knowledge_write",
+        allowed_paths=(),
         network=False,
         llm=False,
         default_max_attempts=2,
-        retryable_errors=("IO_TRANSIENT",),
-        human_errors=(),
-        terminal_errors=("SCHEMA_INVALID", "HASH_MISMATCH"),
-    ),
-    HandlerSpec(
-        job_type="source.analyze",
-        handler_version="1.0.0",
-        input_schema="SourceAnalyzeInput.v1",
-        result_schema="SourceAnalyzeResult.v1",
-        effect_class="artifact_only",
-        allowed_paths=("artifacts/proposals/**",),
-        network=False,
-        llm=True,
-        default_max_attempts=3,
-        retryable_errors=("IO_TRANSIENT", "LEASE_LOST"),
-        human_errors=("REVIEW_PENDING",),
-        terminal_errors=("SCHEMA_INVALID", "POLICY_DENIED"),
+        retryable_errors=("IO_TRANSIENT", "STORE_BUSY", "LEASE_LOST"),
+        human_errors=(
+            "LOCATOR_REPLAY_FAILED",
+            "SOURCE_UNAVAILABLE",
+            "PROMPT_REVIEW_REQUIRED",
+        ),
+        terminal_errors=(
+            "INPUT_SCHEMA_INVALID",
+            "DEPENDENCY_INVALID",
+            "SOURCE_HASH_MISMATCH",
+            "POLICY_DENIED",
+            "SUMMARY_INVALID",
+            "RESULT_TOO_LARGE",
+        ),
     ),
     HandlerSpec(
         job_type="gold.validate_receipt",

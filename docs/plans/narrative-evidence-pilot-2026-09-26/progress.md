@@ -633,3 +633,11 @@
 - 增加数据库可落库但领域非法的 runtime gate 时间戳用例，验证模型异常统一映射为 `ExecutionSnapshotError`；非法 desired state 本身已经由 SQLite CHECK 在写入边界拒绝。
 - 最终节点门覆盖全部 automation unit、双连接 race、真实 multiprocess、CLI、Store boundary 与 E4.1 contracts，共 **244 passed in 42.93s**。strict mypy（4 个边界模块）、Ruff、C901 `<=10`、config doctor、diff check 全绿；独立测试根均清理。
 - 此步未接 reader、provider、model 或 catalog，未写 production raw/catalog/runtime。下一步 E4.3 先用 RED tests 将 source revision 唯一映射为 select→summarize、select+summarize→verify 三阶段 DAG，并移除旧 normalize/analyze 映射。
+
+## Session: Phase E / E4.3 registry 与三阶段 DAG（2026-09-28）
+
+- 先改 exact contract tests，RED 为 **9 failed / 14 passed**；全部失败精确落在旧 source specs、旧两阶段 mapping 和缺 network admission，没有无关回归。
+- 默认 registry 已删除 `source.normalize/source.analyze`，新增冻结的 select/summarize/verify specs；summarize 同时声明 `llm=True/network=True`，三项 `allowed_paths=()`，error 集合、attempt budget 与 result schema 均按 E4 卡固定。
+- source revision DAG 固定为三个 job 与三条 edge；重复 materialize 首次 3/3、再次 0 new + 3/3 existing。controller shadow 验证只有 select 可领取，verify 直接依赖 select 与 summarize。
+- Worker 通用单测使用现有非叙述 `timer.execute_step`；multiprocess 拓扑/强杀测试使用 test factory 私有的 `test.compute/test.model` specs。未把假 handler 混入产品 registry，也未提前启用 narrative runtime。
+- 聚焦 planner、scheduler、controller、Worker、Supervisor 与真实 multiprocess **70 passed in 25.36s**；registry/planner/CLI strict mypy、Ruff、C901 全绿。下一步 E4.4 先扩展 verified reader 的 `narrative_derivation` purpose，再实现 PDF bytes parse/replay facade。

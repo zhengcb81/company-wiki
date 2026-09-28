@@ -8,9 +8,9 @@
 
 ## Next Step
 
-**2026-09-28 Phase 23 重构总图：**后续实施统一按[清洁架构与 TDD 实施总图](clean_architecture_tdd_execution_plan_2026-09-27.md)的 Phase A–G / M1–M4 执行。内部代码和派生 schema 允许破坏式重构；canonical raw 原件、来源 SHA/manifest 和版本事实不得丢失。Phase B/M1、Phase C/M2-derive、Phase D/M2-provider 与 Phase E 的 E0–E4.2 已按该图实施；下一步按[E4 Narrative handlers 详细实施规格](phase_e_e4_narrative_handler_implementation_spec_2026-09-28.md)从 E4.3 registry/三阶段 DAG RED tests 继续，再接 reader/PDF bytes 与三个 handler。跨仓 consumer 和派生清理仍分别留在 Phase F/G。
+**2026-09-28 Phase 23 重构总图：**后续实施统一按[清洁架构与 TDD 实施总图](clean_architecture_tdd_execution_plan_2026-09-27.md)的 Phase A–G / M1–M4 执行。内部代码和派生 schema 允许破坏式重构；canonical raw 原件、来源 SHA/manifest 和版本事实不得丢失。Phase B/M1、Phase C/M2-derive、Phase D/M2-provider 与 Phase E 的 E0–E4.3 已按该图实施；下一步按[E4 Narrative handlers 详细实施规格](phase_e_e4_narrative_handler_implementation_spec_2026-09-28.md)从 E4.4 verified reader purpose/PDF bytes RED tests 继续，再接三个 handler。跨仓 consumer 和派生清理仍分别留在 Phase F/G。
 
-**2026-09-28 最新状态（覆盖下方历史快照）：**Phase E/E4.1 strict narrative contracts 与 E4.2 consistent execution snapshot/context 已完成。Worker handler 只接收一次性、冻结的 `JobExecutionContext`；Store 在单一 read transaction 中绑定 runtime generation、claim、event 与直接 dependency results。完整 automation/narrative-contract/race/multiprocess/CLI/Store-boundary 节点门为 **244 passed in 42.93s**，strict mypy、Ruff、C901、config doctor 全绿。production Worker 仍 paused、未接 reader/provider/model/catalog。下一步 E4.3 先写三 job/三 edge、旧 normalize/analyze 消失和显式 policy admission 的 RED tests；E5 前不写 catalog，E-B 前不启用生产。Phase D 的真实 E-T `/2` HTML canonical text 语义漂移仍留到 Phase F，不在 E4 绕过。
+**2026-09-28 最新状态（覆盖下方历史快照）：**Phase E/E4.1–E4.3 已完成。默认 registry 与 source event mapping 已彻底移除旧 `source.normalize/source.analyze`，改为 select→summarize、select+summarize→verify 三阶段 DAG；默认政策拒绝模型/网络，显式同时 admission 后才规划。E4.3 聚焦回归 **70 passed in 25.36s**，strict mypy、Ruff、C901 全绿。production Worker 仍 paused，narrative handlers 尚未注册进 executor。下一步 E4.4 先做 verified reader 的 `narrative_derivation` purpose 与 PDF bytes parse/replay；E5 前不写 catalog，E-B 前不启用生产。
 
 **Phase 22 阻断结论（保留证据）：**暂停 R4 consumer/跨仓接线。正式 `SourceEnsureResult.to_dict()` 输出 `acquisition`，当前 consumer/test 同步漂移到不存在的 `acquisition_result`；现有 390/88 项绿灯不能覆盖这个 producer/consumer 反例。
 

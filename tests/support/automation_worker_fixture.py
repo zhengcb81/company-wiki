@@ -8,7 +8,7 @@ import time
 from pathlib import Path
 
 from company_wiki.automation.models import HandlerMetrics, HandlerOutcome, HandlerResult
-from company_wiki.automation.registry import create_default_registry
+from company_wiki.automation.registry import HandlerSpec, create_default_registry
 from company_wiki.automation.worker import HandlerExecutor
 from company_wiki.automation.worker_process import WorkerProcessSpec, WorkerRuntime
 
@@ -40,6 +40,38 @@ def create_runtime(spec: WorkerProcessSpec) -> WorkerRuntime:
     block_phase_by_job = options.get("block_phase_by_job", {})
 
     registry = create_default_registry()
+    registry.register(
+        HandlerSpec(
+            job_type="test.compute",
+            handler_version="1.0.0",
+            input_schema="test-input/1",
+            result_schema="test-result/1",
+            effect_class="artifact_only",
+            allowed_paths=(),
+            network=False,
+            llm=False,
+            default_max_attempts=3,
+            retryable_errors=("LEASE_LOST",),
+            human_errors=(),
+            terminal_errors=(),
+        )
+    )
+    registry.register(
+        HandlerSpec(
+            job_type="test.model",
+            handler_version="1.0.0",
+            input_schema="test-input/1",
+            result_schema="test-result/1",
+            effect_class="artifact_only",
+            allowed_paths=(),
+            network=False,
+            llm=True,
+            default_max_attempts=3,
+            retryable_errors=("LEASE_LOST",),
+            human_errors=(),
+            terminal_errors=(),
+        )
+    )
     executor = HandlerExecutor()
 
     def handler(context) -> HandlerResult:

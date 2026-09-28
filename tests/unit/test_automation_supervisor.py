@@ -47,7 +47,7 @@ def test_compute_runtime_rejects_model_client_and_model_job_types() -> None:
     )
     with pytest.raises(ValueError, match="compute.*model client"):
         worker_process.validate_runtime(
-            runtime, role="compute", allowed_job_types=("source.normalize",)
+            runtime, role="compute", allowed_job_types=("timer.execute_step",)
         )
 
     runtime = worker_process.WorkerRuntime(
@@ -55,7 +55,9 @@ def test_compute_runtime_rejects_model_client_and_model_job_types() -> None:
     )
     with pytest.raises(ValueError, match="compute.*LLM"):
         worker_process.validate_runtime(
-            runtime, role="compute", allowed_job_types=("source.analyze",)
+            runtime,
+            role="compute",
+            allowed_job_types=("source.narrative_summarize",),
         )
 
 
@@ -71,7 +73,7 @@ def test_model_runtime_rejects_compute_job_types() -> None:
     )
     with pytest.raises(ValueError, match="model.*non-LLM"):
         worker_process.validate_runtime(
-            runtime, role="model", allowed_job_types=("source.normalize",)
+            runtime, role="model", allowed_job_types=("timer.execute_step",)
         )
 
 

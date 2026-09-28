@@ -110,10 +110,27 @@ class _JobMappingEntry:
 
 _EVENT_JOB_MAPPING: dict[str, tuple[_JobMappingEntry, ...]] = {
     "source.revision_registered": (
-        _JobMappingEntry("source.normalize", priority=0, fan_out=1,
-                         schema_change=False, depends_on=()),
-        _JobMappingEntry("source.analyze", priority=0, fan_out=1,
-                         schema_change=False, depends_on=("source.normalize",)),
+        _JobMappingEntry(
+            "source.narrative_select",
+            priority=0,
+            fan_out=1,
+            schema_change=False,
+            depends_on=(),
+        ),
+        _JobMappingEntry(
+            "source.narrative_summarize",
+            priority=0,
+            fan_out=1,
+            schema_change=False,
+            depends_on=("source.narrative_select",),
+        ),
+        _JobMappingEntry(
+            "source.narrative_verify",
+            priority=0,
+            fan_out=1,
+            schema_change=False,
+            depends_on=("source.narrative_select", "source.narrative_summarize"),
+        ),
     ),
     "analysis.proposal_ready": (
         _JobMappingEntry("analysis.validate", priority=0, fan_out=1,

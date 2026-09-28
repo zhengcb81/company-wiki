@@ -102,8 +102,8 @@ def _config(
         profile=profile,
         runtime_factory_path=FACTORY,
         runtime_options_json=json.dumps(options, sort_keys=True),
-        compute_job_types=("source.normalize",),
-        model_job_types=("source.analyze",),
+        compute_job_types=("test.compute",),
+        model_job_types=("test.model",),
         lease_seconds=lease_seconds,
         heartbeat_interval_seconds=heartbeat_interval_seconds,
         idle_sleep_seconds=0.03,
@@ -181,15 +181,15 @@ def test_p2_processes_two_sources_concurrently_and_preserves_same_source_depende
 ) -> None:
     store = AutomationStore(process_root / "automation.db")
     compute = _seed_job(
-        store, suffix="compute", job_type="source.normalize", subject_id="source-a"
+        store, suffix="compute", job_type="test.compute", subject_id="source-a"
     )
     model = _seed_job(
-        store, suffix="model", job_type="source.analyze", subject_id="source-b"
+        store, suffix="model", job_type="test.model", subject_id="source-b"
     )
     downstream = _seed_job(
         store,
         suffix="downstream",
-        job_type="source.analyze",
+        job_type="test.model",
         subject_id="source-a",
         status=models.JobStatus.PLANNED,
         depends_on=compute,
@@ -239,7 +239,7 @@ def test_killed_child_is_reaped_and_job_is_recovered_after_supervisor_restart(
 ) -> None:
     store = AutomationStore(process_root / "automation.db")
     job_id = _seed_job(
-        store, suffix=kill_phase, job_type="source.normalize", subject_id="source-crash"
+        store, suffix=kill_phase, job_type="test.compute", subject_id="source-crash"
     )
     store.set_runtime_gate(models.RuntimeState.ENABLED, updated_at=_now())
     trace_dir = process_root / "trace"
@@ -297,7 +297,7 @@ def test_active_heartbeat_prevents_reap_then_stopped_process_becomes_reclaimable
 ) -> None:
     store = AutomationStore(process_root / "automation.db")
     job_id = _seed_job(
-        store, suffix="heartbeat", job_type="source.normalize", subject_id="source-heartbeat"
+        store, suffix="heartbeat", job_type="test.compute", subject_id="source-heartbeat"
     )
     store.set_runtime_gate(models.RuntimeState.ENABLED, updated_at=_now())
     trace_dir = process_root / "trace"
@@ -337,7 +337,7 @@ def test_context_exit_reaps_owned_children_and_child_logs_are_bounded(
 ) -> None:
     store = AutomationStore(process_root / "automation.db")
     job_id = _seed_job(
-        store, suffix="logs", job_type="source.normalize", subject_id="source-logs"
+        store, suffix="logs", job_type="test.compute", subject_id="source-logs"
     )
     store.set_runtime_gate(models.RuntimeState.ENABLED, updated_at=_now())
     trace_dir = process_root / "trace"
@@ -362,7 +362,7 @@ def test_workers_self_terminate_when_supervisor_parent_is_abruptly_killed(
 ) -> None:
     store = AutomationStore(process_root / "automation.db")
     job_id = _seed_job(
-        store, suffix="orphan", job_type="source.normalize", subject_id="source-orphan"
+        store, suffix="orphan", job_type="test.compute", subject_id="source-orphan"
     )
     store.set_runtime_gate(models.RuntimeState.ENABLED, updated_at=_now())
     trace_dir = process_root / "trace"

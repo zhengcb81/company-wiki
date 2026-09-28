@@ -137,7 +137,7 @@ def test_observe_returns_planned_dags_no_side_effects(tmp_path):
     m = _models()
     store = _setup_store_with_events(s, m, tmp_path, [_make_event(m=m)])
     reg = r.create_default_registry()
-    config = p.PolicyConfig(allow_llm=True)
+    config = p.PolicyConfig(allow_llm=True, allow_network=True)
     ctrl = c.Controller(store, reg, config)
     result = ctrl.observe()
     assert result.events_processed == 1
@@ -156,7 +156,7 @@ def test_observe_deterministic_across_restarts(tmp_path):
     m = _models()
     store = _setup_store_with_events(s, m, tmp_path, [_make_event(m=m)])
     reg = r.create_default_registry()
-    config = p.PolicyConfig(allow_llm=True)
+    config = p.PolicyConfig(allow_llm=True, allow_network=True)
     results = []
     for _ in range(3):
         ctrl = c.Controller(store, reg, config)
@@ -194,7 +194,7 @@ def test_shadow_creates_jobs_no_handler_execution(tmp_path):
     m = _models()
     store = _setup_store_with_events(s, m, tmp_path, [_make_event(m=m)])
     reg = r.create_default_registry()
-    config = p.PolicyConfig(allow_llm=True)
+    config = p.PolicyConfig(allow_llm=True, allow_network=True)
     ctrl = c.Controller(store, reg, config)
     result = ctrl.shadow()
     assert result.events_processed == 1
@@ -204,13 +204,21 @@ def test_shadow_creates_jobs_no_handler_execution(tmp_path):
     assert len(jobs) > 0
     # Materialization makes only DAG roots claimable; dependent jobs wait.
     status_by_type = {job.job_type: job.status for job in jobs}
-    assert status_by_type["source.normalize"] is m.JobStatus.READY
-    assert status_by_type["source.analyze"] is m.JobStatus.PLANNED
-    analyze = next(job for job in jobs if job.job_type == "source.analyze")
-    normalize = next(job for job in jobs if job.job_type == "source.normalize")
-    assert store.list_job_dependencies(analyze.job_id) == (
-        (analyze.job_id, normalize.job_id),
+    assert status_by_type["source.narrative_select"] is m.JobStatus.READY
+    assert status_by_type["source.narrative_summarize"] is m.JobStatus.PLANNED
+    assert status_by_type["source.narrative_verify"] is m.JobStatus.PLANNED
+    select = next(job for job in jobs if job.job_type == "source.narrative_select")
+    summarize = next(
+        job for job in jobs if job.job_type == "source.narrative_summarize"
     )
+    verify = next(job for job in jobs if job.job_type == "source.narrative_verify")
+    assert store.list_job_dependencies(summarize.job_id) == (
+        (summarize.job_id, select.job_id),
+    )
+    assert set(store.list_job_dependencies(verify.job_id)) == {
+        (verify.job_id, select.job_id),
+        (verify.job_id, summarize.job_id),
+    }
 
 
 def test_shadow_idempotent_on_duplicate_events(tmp_path):
@@ -221,7 +229,7 @@ def test_shadow_idempotent_on_duplicate_events(tmp_path):
     m = _models()
     store = _setup_store_with_events(s, m, tmp_path, [_make_event(m=m)])
     reg = r.create_default_registry()
-    config = p.PolicyConfig(allow_llm=True)
+    config = p.PolicyConfig(allow_llm=True, allow_network=True)
     ctrl = c.Controller(store, reg, config)
     result1 = ctrl.shadow()
     result2 = ctrl.shadow()

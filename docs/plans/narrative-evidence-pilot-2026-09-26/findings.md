@@ -391,3 +391,10 @@
 - event natural key 是 source revision 的幂等事实。同一 source/policy/input 的下游 job 必须复用原 event；测试 helper 为每个 job 造 event 会掩盖 planner 错误，也会在真实数据库触发唯一键冲突。
 - 数据库 schema 与领域模型是互补防线：枚举状态由 SQLite CHECK 拒绝，格式合法性由 typed model 拒绝。snapshot boundary 将后者统一映射成具名领域错误，使 Worker 不暴露 JSON/enum/时间戳解析细节。
 - Worker 对 Store 的依赖可以收窄为 claim、heartbeat、finish、reap、runtime gate 和 read snapshot 六类 operation；handler 只依赖 `JobExecutionContext`。这为 E4.3 registry/DAG 和后续 handler 单测保留了可替换边界。
+
+## 2026-09-28 — E4.3 job 拓扑与能力声明结论
+
+- registry spec 是能力声明，不是 handler 实现。可以先冻结 job schema、错误分类和资源属性，但在 E4.5–E4.7 完成前不能把 narrative job 装入生产 executor；多进程恢复测试因此使用 test factory 私有 specs，避免“返回成功的空假 handler”掩盖产品缺失。
+- summarize 即使在测试中使用 replay model，也必须声明真实生产所需的 LLM 与 network 两项能力。默认 policy 以及只允许 LLM 的 policy 都拒绝规划，防止未来把模型网络访问错误归类为无网络任务。
+- verify 直接依赖 select 与 summarize会产生三条 edge，而不是线性链的两条。幂等测试必须同时断言 job 和 dependency 数量；只检查 job key 会漏掉拓扑漂移。
+- 旧 source jobs 从默认 registry 和 event mapping 一次性移除比保留兼容别名更安全。generic Worker/recovery 测试应使用 generic/test job identity，避免测试夹具反向迫使产品保留已经废弃的全量 normalize 路线。

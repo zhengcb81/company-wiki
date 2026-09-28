@@ -321,6 +321,14 @@ NarrativeSummaryModel.summarize(NarrativeSummaryRequest) -> NarrativeSummaryResp
 
 再改 `registry.py`、`planner.py`。不注册实际 handler 前，runtime factory 不得启用这些 job。
 
+**E4.3 实施收据（2026-09-28）**
+
+- RED：先将既有 planner tests 改成 exact narrative registry/DAG 合同，得到 **9 failed / 14 passed**；失败全部对应旧 `source.normalize/source.analyze` specs、两阶段映射和仅允许 LLM 的政策假设。
+- GREEN：默认 registry 删除两个旧 source job，新增三项冻结 spec；`source.revision_registered` 精确生成 select、summarize、verify 三 job 和三 edge。默认 policy 及仅 `allow_llm` 都因 network 声明 fail closed，只有同时显式允许 LLM/network 才可规划。
+- scheduler 重复 materialize 首次固定为 3 jobs/3 dependencies，第二次为 0 新增且 3/3 existing；controller shadow 只把 select 置 READY，另外两项保持 PLANNED，并验证 verify 的两个直接前置。
+- 通用 Worker/恢复测试改用 `timer.execute_step`，真实多进程并发测试改用只存在于 test factory 的 `test.compute/test.model` specs，避免用未实现的 narrative handler 制造假绿，也没有把 test job 注册进产品 registry。
+- 聚焦 planner/registry/scheduler/controller/Worker/Supervisor/真实 multiprocess 为 **70 passed in 25.36s**。三个修改产品模块 strict mypy、Ruff 与 C901 `<=10` 全绿；CLI 的 read-only plan 显式 admission 两项能力，但不会调用网络或模型。
+
 ### E4.4：reader purpose 与 PDF bytes facade
 
 先新增 contract/unit tests：
