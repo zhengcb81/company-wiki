@@ -384,6 +384,15 @@ NarrativeSummaryModel.summarize(NarrativeSummaryRequest) -> NarrativeSummaryResp
 
 再实现 model protocol、adapter errors 和 summarize handler。
 
+**E4.6 实施收据（2026-09-28）**
+
+- RED：新测试因 `automation.narrative_model` 不存在在 collection 失败。首轮实现收集 18 项并得到 2 failed / 16 passed；两项均为 fixture 与正式合同不一致（把 line range 当 EvidenceCoordinates 字段、把 byte range 写成数组），修正夹具而未放宽合同后为 18 passed。
+- 增加模型 port、canonical selected-evidence-only request 与 opaque response bytes 边界。固定指令和 evidence data 分离；request 只含 selected spans/source identity/language/title/kind，不含全文、路径或 `summary_input`。原始 model response 不持久化，只保存 SHA、adapter/model/prompt version。
+- missing model 在 review/provider/model 调用前进入 `MODEL_NOT_CONFIGURED`；skip 为零 model、零 review lookup、零 provider-policy lookup。zh/en/mixed 原样输出，`translate=false`。
+- prompt review 当前值必须与 select snapshot 完全一致且已审核；transcript 重新按当前 policy 单独授权 `generate_summary`。select 的 `derive_text/select_evidence` 或下载许可不能替代，policy hash 漂移/撤销在 model 前拒绝。
+- timeout/429 每次 handler 只调用模型一次并交给 durable job 的三次 attempt 上限；非法 UTF-8/JSON、重复 key、transport cap、prompt version 与路径泄漏均 terminal 且不重试。未知 evidence、角色混淆、空 claim、unstable locator 未标 review 均为 `SUMMARY_INVALID`。
+- 扩展后 handler 单测 **23 passed**；select/contracts/parser/provider/material 直接依赖组合门 **118 passed in 2.08s**。新增两模块 strict mypy、Ruff、C901 `<=10` 全绿并纳入 CI/pre-commit。
+
 ### E4.7：verify handler 与 effect intent
 
 先 RED 覆盖：

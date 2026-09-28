@@ -414,3 +414,11 @@
 - transcript 的空间最小化单位是 selected binding。全量清洗文本和全量行映射只在单次 handler 内存中存在；持久结果保留选中 EvidenceSpan、对应原件 byte ranges、deterministic lineage hashes/versions 和本次动作授权证据即可。
 - policy pin 既要防配置漂移，也要执行当前撤销/有效期/动作判断。`derive_text` 与 `select_evidence` 必须分别存在；下载许可或任一单独动作不能推导另一动作。
 - strict 类型检查只有和运行时值域校验配对才安全。仅对任意字符串 `cast(Literal)` 会制造静态假绿；E4.5 将 claim type、modality、draft status 的显式 whitelist 放在 cast 前，并用三个非法输入合同测试固定该边界。
+
+## 2026-09-28 — E4.6 summarize handler 结论
+
+- 模型端口应传递 canonical request 和 opaque response bytes，而不是复用旧全局 `LLMClient`。前者让 adapter 身份、prompt version、输入 hash、响应 hash 和错误分类可独立测试，也避免全局限流/线程状态进入 handler。
+- “不翻译”必须同时出现在 prompt constraint、结果合同和验证测试。只在调用参数上关闭翻译无法防止 adapter 或模型改变语言；summary result 与 draft 都必须等于 source language，且 `translate` 只能为 false。
+- prompt review 是调用时能力门。select 时通过的 snapshot 只证明当时状态；summarize 在网络前重读当前 receipt 并要求完全一致，才能覆盖 review policy 或 evidence receipt 在排队期间变化。
+- 模型的 transient retry 不应在 handler 内再包循环。一次 attempt 只发一次请求，timeout/429 返回 retryable；总次数由 durable job 的 `max_attempts` 约束，crash/lease 审计与 E3 恢复语义保持一致。
+- 对 model JSON 的严格 transport 校验和对 summary claims 的领域校验是两层边界。非法编码、重复 key、超限和路径泄漏属于 response contract；未知 citation、说话者角色混淆、空 claim 和 unstable locator 状态属于 summary validity。两者都不重试，但错误码不同，便于人工定位。

@@ -657,3 +657,11 @@
 - 年报、招股书、IR、TXT/HTML 电话会、完整低价值 skip、parser incomplete、缺逐动作授权、policy revoke、source/read-policy/metadata drift、cap/path leak 全部有显式测试。handler 重新计算 opened bytes SHA；损坏但 hash 正确的 PDF 进入 `PARSER_INCOMPLETE/BLOCKED_HUMAN`。
 - strict mypy 纳入 8 个 E4 automation boundary 模块后发现 summary contract 的三个 Literal 参数未收窄。新增运行时值域负例先得到 2 failed / 1 passed，再同时加入显式集合校验和类型收窄，避免非法 `investment_conclusion`、`guaranteed` 或 `accepted` 值进入合同。
 - 最终直接依赖组合门 **97 passed in 1.64s**；mypy hook 检查 46 个模块通过，Ruff 与 C901 全绿。所有 `C:\cwt\m3-e4-select-*` / `m3-e4-contract-*` 本轮测试根均由 `finally` 清理。下一步 E4.6 先写 replay/skip/language/prompt-review/model-error/transcript-summary-policy RED tests。
+
+## Session: Phase E / E4.6 selected-only summarize handler（2026-09-28）
+
+- 先写 18 项 handler RED tests，因模型边界模块不存在在 collection 失败。首轮实现后 2 failed / 16 passed；失败均为测试夹具误用了正式 locator/binding schema，修正夹具后 18 passed，没有放宽生产合同。
+- 新 `narrative_model.py` 冻结无 SDK 的窄 port：canonical instruction/data request、128 KiB transport cap、严格 UTF-8 JSON、duplicate-key rejection、prompt version 和响应 SHA。`narrative_summarize.py` 只消费 select dependency，不读路径/全文、不写 DB/catalog/effect。
+- replay 同输入 byte-identical；skip 不调用 model/review/provider。zh/en/mixed 保持语言且 `translate=false`。缺模型、缺/漂移审核票据、429/timeout、非法响应、错误 citation/role/locator 状态与 transcript `generate_summary` 权限分别映射到冻结错误码。
+- 扩展攻击面加入 duplicate JSON、超 transport cap、model path leak、provider hash drift 与 revoke，handler suite 为 **23 passed**。直接依赖组合门 **118 passed in 2.08s**；strict mypy、Ruff、C901 全绿，新增模块已进入 CI/pre-commit 范围。
+- 模型原始 response bytes 仅在单次执行内存存在，持久结果只含 response SHA 和最小模型身份。每个 transient handler attempt 只调用一次模型，重试总量由 registry `default_max_attempts=3` 与 durable Worker 控制。下一步 E4.7 先写全 locator replay、依赖漂移、post-model revoke/review drift、canonical bundle/effect idempotency RED tests。
