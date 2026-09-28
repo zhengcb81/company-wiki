@@ -616,3 +616,11 @@
 - 明确三类 result cap：select 1 MiB、summary 64 KiB、bundle 1.25 MiB、skip bundle 16 KiB；递归拒绝物理路径但允许 page/line/byte locator。verify 只产生一个逻辑 effect，E5 前不写 catalog/object。
 - E4 隔离测试统一使用 `C:\cwt\m3-e4-<nonce>`，finally 做 exact-root 校验和清理；E4 结束只跑一次合并门，避免每个 helper 重复大回归。production Worker 保持 paused。
 - RF 阶段边界只读复核：仍为 `fcap@ee0a82bfd1ee`、`origin/main@3a69f9c5b651`；既存 planning/assurance/temp dirty 内容未修改、未清理、未切分支。下一步先单独提交计划，再从 E4.1 RED contract tests 开始。
+
+## Session: Phase E / E4.1 strict narrative job contracts（2026-09-28）
+
+- 计划 commit `60c896a` 后才开始产品实现。新增 12 项合同测试；首个 RED 因 `automation.narrative_contracts` 不存在在 collection 失败，首轮实现为 **3 passed / 9 failed**，定位到 selection 计数以无序集合位置传参的真实缺陷。
+- 改为字段名显式构造后聚焦测试 **12 passed in 0.64s**；最终加 automation models 回归为 **41 passed in 0.74s**。合同现在严格验证 source revision event、source/ref/policy pin、selected evidence、summary draft、bundle、transcript lineage/action/bindings、依赖间 identity 和四类 byte cap。
+- 递归 path-leak gate 拒绝路径 key、drive/UNC/file URI，同时允许 page/line/byte locator 与 HTTPS source URL。Select 结果拒绝 `summary_input`，transcript bindings 必须与 selected evidence ID 精确相等。
+- skip 只有 complete coverage + 零 evidence 才成立；summary_not_needed 必须零 model/draft；completed summary 必须同语种、`translate=false` 且 citation/role 通过现有 validator。合同层不调用 Worker、reader、provider/model 或 catalog。
+- Ruff、C901 `<=10`、strict mypy 全绿；三次 `C:\cwt\m3-e4-contract-*` 根均精确清理。下一步 E4.2 先写一致性 execution snapshot/context RED tests。

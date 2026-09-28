@@ -280,6 +280,13 @@ NarrativeSummaryModel.summarize(NarrativeSummaryRequest) -> NarrativeSummaryResp
 
 实现候选：`automation/narrative_contracts.py`。此步不接 Worker。
 
+**E4.1 实施收据（2026-09-28）**
+
+- RED：合同模块不存在，12 项测试在 collection 处按预期失败；实现首轮为 **3 passed / 9 failed**，暴露 selection 计数字段使用无序集合导致的位置错配。
+- GREEN：event/source/policy exact schema、canonical input hash、selected-only result、summary/bundle dependency validation、四类 byte cap、skip、同语种、`translate=false`、transcript selected bindings 和递归 path-leak gate 已实现，聚焦 **12 passed**；加 automation models 回归为 **41 passed**。
+- `summary_input`、整份 transcript text/line map 和模型原始响应不在合同中；EvidenceSpan 是唯一持久化的 selected text 载体。
+- Ruff、C901 `<=10` 与 strict mypy 通过；所有 `C:\cwt\m3-e4-contract-*` 根已在 finally 后清理。此步未接 Worker、reader、provider/model 或 catalog。
+
 ### E4.2：一致性 execution snapshot 与 context
 
 先新增/调整：
