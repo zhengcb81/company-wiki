@@ -290,6 +290,13 @@ Store busy、schema drift、token mismatch、generation mismatch 必须是具名
 - handler 执行、sleep、PDF/LLM、文件 hash 不得在 SQLite transaction 中。
 - store method 不导入 source_catalog、LLM 或 provider。
 
+**E1 实施收据（2026-09-28）**
+
+- v2 migration、runtime gate、attempt generation、claim indexes 和 v1 backup/rollback/drift 路径已实现；v1→v2 没有显式 backup hook 时 fail closed。
+- claim、heartbeat、finish、promote、reap、outbox claim/ack/retry 已成为 Store 单事务 application operations；Worker 只负责编排与事务外 handler execution。
+- RED 收据：首组 18 failed / 2 passed；Worker 4 failed / 13 passed；多 effect/hash 2 failed / 1 passed；实现后 automation 合并门为 193 passed。
+- Store/Worker/migration 新改函数显式 C901 `<=10`；production control paused、runtime absent、测试根 0。E2/E-A 前未新增 Supervisor 或 narrative handler。
+
 ### E2：DAG materialization、依赖结果和运行门
 
 **RED 测试先行**
@@ -524,10 +531,10 @@ Phase E 完成时在 `progress.md` 记录：
 
 ## 8. 开始实施前检查
 
-- [ ] 本施工卡已单独 commit。
-- [ ] company-wiki 工作树除已知不可访问临时目录外干净。
-- [ ] revenue-forecast 状态再次只读核查，无需修改对方文件。
-- [ ] production legacy Worker 仍 paused、无 runtime。
-- [ ] 先做 E0 RED/green，不直接改 Store。
-- [ ] E-A 通过前不新增 Supervisor/narrative handler 产品代码。
+- [x] 本施工卡已单独 commit（`77b1229`）。
+- [x] company-wiki 开始实施时除已知不可访问临时目录外干净。
+- [x] revenue-forecast 每阶段只读核查，无修改对方文件。
+- [x] production legacy Worker 仍 paused、无 runtime。
+- [x] 先完成 E0 RED/green，再进入 Store。
+- [x] E-A 通过前未新增 Supervisor/narrative handler 产品代码。
 - [ ] E-B 通过前不提供 production enable 建议。

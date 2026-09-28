@@ -111,6 +111,9 @@ def _make_job(m=None, store=None, status=None, **overrides):
 
 def _setup_store_with_job(s, m, tmp_path, status=None):
     store = s.AutomationStore(tmp_path / "automation.db")
+    store.set_runtime_gate(
+        m.RuntimeState.ENABLED, updated_at="2026-07-12T10:00:30Z"
+    )
     store.put_event(_make_event(m=m))
     job = _make_job(m=m, status=status or m.JobStatus.READY)
     store.put_job(job)
@@ -251,10 +254,11 @@ def test_worker_retries_on_retryable_error(tmp_path):
     clock = FixedClock("2026-07-12T10:01:00Z")
     id_gen = SequentialIDGen()
     worker = w.Worker(store, reg, executor, clock=clock, id_gen=id_gen, lease_seconds=60)
-    # First attempt: retryable → RETRY_WAIT → READY.
+    # First attempt waits until its deterministic retry deadline.
     assert worker.process_one() is True
     job = store.get_job("job-auto4-001")
-    assert job.status is m.JobStatus.READY  # reset for retry
+    assert job.status is m.JobStatus.RETRY_WAIT
+    assert job.not_before > "2026-07-12T10:01:00Z"
 
 
 def test_worker_dead_letters_on_terminal_error(tmp_path):
@@ -313,7 +317,7 @@ def test_worker_reaps_expired_leases(tmp_path):
     worker1.process_one()
     job = store.get_job("job-auto4-001")
     assert job.status is m.JobStatus.SUCCEEDED
-    # For reap test, create a job that's stuck in LECTED with expired lease.
+    # For reap test, create a job stuck in RUNNING with an expired lease.
     store.put_event(_make_event(m=m, event_id="evt-reap", subject_id="rev-reap"))
     job2 = _make_job(m=m, job_id="job-reap", job_type="source.normalize",
                       subject_id="src-reap", status=m.JobStatus.READY,
@@ -326,6 +330,8 @@ def test_worker_reaps_expired_leases(tmp_path):
     # Manually transition to LECTED and create an expired attempt.
     store.transition_job("job-reap", expected=m.JobStatus.READY,
                          target=m.JobStatus.LEASED, updated_at="2026-07-12T10:02:00Z")
+    store.transition_job("job-reap", expected=m.JobStatus.LEASED,
+                         target=m.JobStatus.RUNNING, updated_at="2026-07-12T10:02:00Z")
     att = m.Attempt(
         attempt_id="att-reap", job_id="job-reap", attempt_no=1,
         worker_id="w2", lease_token="token-reap",
@@ -341,7 +347,10 @@ def test_worker_reaps_expired_leases(tmp_path):
     reaped = worker3.reap_expired()
     assert reaped == 1
     job2_after = store.get_job("job-reap")
-    assert job2_after.status is m.JobStatus.READY
+    assert job2_after.status is m.JobStatus.RETRY_WAIT
+    attempt_after = store.get_attempt("att-reap")
+    assert attempt_after.finished_at == "2026-07-12T10:05:00Z"
+    assert attempt_after.error_code == "LEASE_EXPIRED"
 
 
 def test_worker_handler_exception_dead_letters(tmp_path):
@@ -361,3 +370,60 @@ def test_worker_handler_exception_dead_letters(tmp_path):
     assert worker.process_one() is True
     job = store.get_job("job-auto4-001")
     assert job.status is m.JobStatus.DEAD_LETTER
+
+
+def test_worker_uses_only_atomic_store_operations_for_claim_and_finish(
+    tmp_path, monkeypatch
+):
+    w = _worker_mod()
+    s = _store_mod()
+    r = _registry_mod()
+    m = _models()
+    store = _setup_store_with_job(s, m, tmp_path)
+    executor = w.HandlerExecutor()
+    executor.register(
+        "source.normalize",
+        _make_fake_handler(m.HandlerOutcome.SUCCEEDED, result={"ok": True}),
+    )
+
+    def forbidden(*_args, **_kwargs):
+        raise AssertionError("Worker must not compose legacy CRUD operations")
+
+    for name in ("list_jobs", "transition_job", "put_attempt", "put_outbox_entry"):
+        monkeypatch.setattr(store, name, forbidden)
+
+    worker = w.Worker(
+        store,
+        r.create_default_registry(),
+        executor,
+        clock=FixedClock("2026-07-12T10:01:00Z"),
+        id_gen=SequentialIDGen(),
+        lease_seconds=60,
+    )
+    assert worker.process_one() is True
+
+
+def test_worker_fails_closed_while_runtime_gate_is_paused(tmp_path):
+    w = _worker_mod()
+    s = _store_mod()
+    r = _registry_mod()
+    m = _models()
+    store = _setup_store_with_job(s, m, tmp_path)
+    store.set_runtime_gate(
+        m.RuntimeState.PAUSED, updated_at="2026-07-12T10:00:45Z"
+    )
+    executor = w.HandlerExecutor()
+    executor.register(
+        "source.normalize", _make_fake_handler(m.HandlerOutcome.SUCCEEDED)
+    )
+    worker = w.Worker(
+        store,
+        r.create_default_registry(),
+        executor,
+        clock=FixedClock("2026-07-12T10:01:00Z"),
+        id_gen=SequentialIDGen(),
+    )
+
+    assert worker.process_one() is False
+    assert store.get_job("job-auto4-001").status is m.JobStatus.READY
+    assert store.list_attempts("job-auto4-001") == ()

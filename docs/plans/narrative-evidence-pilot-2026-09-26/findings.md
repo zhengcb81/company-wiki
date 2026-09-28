@@ -342,3 +342,14 @@
 - 旧 `artifacts` 会按 `(document, role, generator, version)` 更新同一行，无法保存同一 document 的多个 source/policy 版本。只为 narrative bundle 建窄的 immutable version registry 比重建 generic artifact 系统更小，也比复用 legacy upsert 更可审计；旧 artifacts 暂作兼容 projection，不复制最终 bundle。
 - Phase E 的长期派生只需一个 compact content-addressed bundle。selected evidence 和 summary candidate 在 attempt JSON 中设硬上限；skip 只存小型 coverage receipt；不生成整份 Markdown、全量 spans、逐页缓存或磁盘 BM25。这样并发不会重现 46 GiB 的“每阶段复制一份全文”。
 - 本轮 150 项基线的五个失败属于陈旧测试 helper：生产 writer 新增 mandatory evidence payload 绑定后，helper 仍只传 hash。正确修复是让 helper 生成真实合法 receipt，同时保留缺 payload 拒绝测试；放松生产合同会把测试问题变成产品缺陷。
+
+## 2026-09-28 — E1 原子队列实施后的恢复性结论
+
+- `put_*` 幂等 CRUD 和 Worker application transaction 是两类接口。前者适合登记不可变 event/job/approval，不能由调用者拼成 claim 或 finish；claim/finish/reap/outbox ACK 必须由 Store 持有完整事务，否则任何中间异常都会留下无法推断的半状态。
+- pause 的可靠边界必须持久化在与 attempt 相同的数据库中。`runtime_gate.control_generation` 在每次状态改变时递增，attempt 绑定领取代际；heartbeat、finish、outbox ACK/retry 都同时核对当前 enabled、generation、token、最新 attempt 与未过期 lease。这样 pause 返回后，即使旧子进程稍后恢复，也不能提交旧结果。
+- attempt 的 `result_json` 应保存有上限的完整 `HandlerResult`，包括 outcome、result、artifact/effect 引用、metrics 和 error。只保存 `result` 会丢失恢复/审计所需的错误分类和副作用意图；重新 insert 同 attempt 也不能替代完成更新。
+- Effect 与 Outbox 不能分开持久化，也不能在第一项 effect 投递后就把多 effect job 置成功。finish 原子写全部 effect/outbox 并停在 VERIFYING；每个 ACK 独立验证 intended/actual hash，只有同 job 不再有未 delivered outbox 时才 SUCCEEDED。
+- retry 的 `not_before` 是持久调度事实，不应由 Worker 在同一调用中 `RETRY_WAIT→READY`。reaper 只结束最新过期 attempt 并写 `LEASE_EXPIRED`；promotion 是可重复的独立 Store 操作，未到期返回空，到期只提升一次。
+- schema migration 也需要 fencing 思维：保留 v1 的精确结构快照，先只读验证再升级；v0 新库按 v1/v2 顺序一次提交；索引和 singleton gate row 都属于 schema health。仅检查 `PRAGMA user_version` 会把缺索引或空 gate 的损坏库误判为健康。
+- 双连接 race 比单实例 mock 更能证明 SQLite claim 的线性化。E1 的 job/outbox 两组真实连接竞争都只有一个胜者；duplicate attempt/effect 故障注入证明事务 rollback 后 job、attempt、effect、outbox 数量保持原值。
+- 事务层已集中，但 `automation/store.py` 同时保留大量 v1 CRUD 和 v2 application operations，文件规模明显上升。E2 不应继续把 DAG/planner/controller 逻辑塞入 Store；scheduler/runtime control 使用独立模块，只保留必须与 SQLite 原子提交的窄方法，并在 E-A 复核是否需要按 persistence capability 拆文件而不拆事务。

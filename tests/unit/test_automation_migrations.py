@@ -1,4 +1,4 @@
-"""AUTO-2 migration contract tests (M01-M17).
+"""AUTO-2 migration contract tests (M01-M17), carried forward to schema v2.
 
 Each test asserts the production module path exists before importing it, so the
 red phase fails as a normal assertion rather than a collection/import error.  No
@@ -16,7 +16,7 @@ MIGRATIONS_PATH = ROOT / "src" / "company_wiki" / "automation" / "migrations.py"
 
 EXPECTED_TABLES = frozenset({
     "events", "jobs", "job_dependencies", "attempts",
-    "approvals", "effects", "outbox", "notifications",
+    "approvals", "effects", "outbox", "notifications", "runtime_gate",
 })
 
 
@@ -46,10 +46,21 @@ def _user_version(conn: sqlite3.Connection) -> int:
     return conn.execute("PRAGMA user_version").fetchone()[0]
 
 
+def _create_frozen_v1_database(migrations, db: Path) -> None:
+    conn = sqlite3.connect(db)
+    try:
+        for statement in migrations._DDL_V1_STATEMENTS:
+            conn.execute(statement)
+        conn.execute("PRAGMA user_version = 1")
+        conn.commit()
+    finally:
+        conn.close()
+
+
 # --------------------------------------------------------------------------- #
-# M01: new Path initializes all eight business tables at version 1
+# M01: new Path initializes v1 and v2 in one transaction
 # --------------------------------------------------------------------------- #
-def test_m01_new_path_initializes_eight_tables_at_version_1(tmp_path):
+def test_m01_new_path_initializes_schema_at_version_2(tmp_path):
     migrations = _migrations()
     db = tmp_path / "automation.db"
     report = migrations.migrate_database(db)
@@ -57,11 +68,11 @@ def test_m01_new_path_initializes_eight_tables_at_version_1(tmp_path):
     conn = _connect_readonly(db)
     try:
         assert set(_user_tables(conn)) == EXPECTED_TABLES
-        assert _user_version(conn) == 1
+        assert _user_version(conn) == 2
     finally:
         conn.close()
-    assert report.to_version == 1
-    assert report.applied_versions == (1,)
+    assert report.to_version == 2
+    assert report.applied_versions == (1, 2)
 
 
 # --------------------------------------------------------------------------- #
@@ -125,6 +136,7 @@ def test_m02_full_structure_matches_frozen_ddl(tmp_path):
                 ("result_json", "TEXT", 0, None, 0),
                 ("error_code", "TEXT", 0, None, 0),
                 ("error_detail", "TEXT", 0, None, 0),
+                ("runtime_generation", "INTEGER", 1, "0", 0),
             ],
             "pk": [("attempt_id",)],
         },
@@ -193,6 +205,15 @@ def test_m02_full_structure_matches_frozen_ddl(tmp_path):
                 ("required_status", "TEXT", 1, "'succeeded'", 0),
             ],
             "pk": [("job_id",), ("depends_on_job_id",)],
+        },
+        "runtime_gate": {
+            "columns": [
+                ("singleton_id", "INTEGER", 0, None, 1),
+                ("desired_state", "TEXT", 1, None, 0),
+                ("control_generation", "INTEGER", 1, None, 0),
+                ("updated_at", "TEXT", 1, None, 0),
+            ],
+            "pk": [("singleton_id",)],
         },
     }
 
@@ -295,9 +316,9 @@ def test_m03_journal_mode_persists_and_pragmas_are_issued(tmp_path):
 
 
 # --------------------------------------------------------------------------- #
-# M04: repeated open of a v1 database is a no-op with a stable fingerprint
+# M04: repeated open of a v2 database is a no-op with a stable fingerprint
 # --------------------------------------------------------------------------- #
-def test_m04_repeated_v1_open_is_noop_with_stable_fingerprint(tmp_path):
+def test_m04_repeated_v2_open_is_noop_with_stable_fingerprint(tmp_path):
     migrations = _migrations()
     db = tmp_path / "automation.db"
     first = migrations.migrate_database(db)
@@ -306,8 +327,8 @@ def test_m04_repeated_v1_open_is_noop_with_stable_fingerprint(tmp_path):
     for _ in range(9):
         report = migrations.migrate_database(db)
         assert report.applied_versions == ()
-        assert report.from_version == 1
-        assert report.to_version == 1
+        assert report.from_version == 2
+        assert report.to_version == 2
         assert report.schema_fingerprint == fingerprint
         assert report.backup_path is None
 
@@ -329,13 +350,13 @@ def test_m05_preexisting_empty_v0_file_migrates_with_one_backup(tmp_path):
 
     report = migrations.migrate_database(db, backup_hook=backup_hook)
     assert report.from_version == 0
-    assert report.to_version == 1
-    assert report.applied_versions == (1,)
+    assert report.to_version == 2
+    assert report.applied_versions == (1, 2)
     assert len(calls) == 1
-    assert calls[0][1] == 0 and calls[0][2] == 1
+    assert calls[0][1] == 0 and calls[0][2] == 2
     conn = _connect_readonly(db)
     try:
-        assert _user_version(conn) == 1
+        assert _user_version(conn) == 2
         assert set(_user_tables(conn)) == EXPECTED_TABLES
     finally:
         conn.close()
@@ -373,22 +394,22 @@ def test_m06_v0_with_unknown_user_table_is_unknown_schema(tmp_path):
 
 
 # --------------------------------------------------------------------------- #
-# M07: user_version > 1 -> UnsupportedSchemaVersionError, no downgrade
+# M07: user_version > 2 -> UnsupportedSchemaVersionError, no downgrade
 # --------------------------------------------------------------------------- #
 def test_m07_higher_user_version_is_unsupported(tmp_path):
     migrations = _migrations()
     db = tmp_path / "automation.db"
     conn = sqlite3.connect(db)
-    conn.execute("PRAGMA user_version = 2")
+    conn.execute("PRAGMA user_version = 3")
     conn.commit()
     conn.close()
     before = db.read_bytes()
     with pytest.raises(migrations.UnsupportedSchemaVersionError):
         migrations.migrate_database(db)
-    # user_version must remain 2 (no downgrade/clear)
+    # user_version must remain 3 (no downgrade/clear)
     conn = _connect_readonly(db)
     try:
-        assert _user_version(conn) == 2
+        assert _user_version(conn) == 3
     finally:
         conn.close()
     assert db.read_bytes() == before
@@ -400,7 +421,7 @@ def test_m07_higher_user_version_is_unsupported(tmp_path):
 def test_m08_v1_missing_table_is_schema_drift(tmp_path):
     migrations = _migrations()
     db = tmp_path / "automation.db"
-    migrations.migrate_database(db)
+    _create_frozen_v1_database(migrations, db)
     conn = sqlite3.connect(db)
     conn.execute("DROP TABLE notifications")
     conn.commit()
@@ -412,7 +433,7 @@ def test_m08_v1_missing_table_is_schema_drift(tmp_path):
 def test_m08_v1_extra_table_is_schema_drift(tmp_path):
     migrations = _migrations()
     db = tmp_path / "automation.db"
-    migrations.migrate_database(db)
+    _create_frozen_v1_database(migrations, db)
     conn = sqlite3.connect(db)
     conn.execute("CREATE TABLE extra_table (id TEXT)")
     conn.execute("PRAGMA user_version = 1")
@@ -428,7 +449,7 @@ def test_m08_v1_extra_table_is_schema_drift(tmp_path):
 def test_m09_v1_column_default_altered_is_schema_drift(tmp_path):
     migrations = _migrations()
     db = tmp_path / "automation.db"
-    migrations.migrate_database(db)
+    _create_frozen_v1_database(migrations, db)
     conn = sqlite3.connect(db)
     conn.execute("DROP TABLE outbox")
     conn.execute(
@@ -449,7 +470,7 @@ def test_m09_v1_column_default_altered_is_schema_drift(tmp_path):
 def test_m10_v1_unique_constraint_removed_is_schema_drift(tmp_path):
     migrations = _migrations()
     db = tmp_path / "automation.db"
-    migrations.migrate_database(db)
+    _create_frozen_v1_database(migrations, db)
     conn = sqlite3.connect(db)
     conn.execute("DROP TABLE effects")
     # Recreate effects without the UNIQUE(effect_key) constraint.
@@ -472,7 +493,7 @@ def test_m10_v1_unique_constraint_removed_is_schema_drift(tmp_path):
 def test_m11_v1_foreign_key_removed_is_schema_drift(tmp_path):
     migrations = _migrations()
     db = tmp_path / "automation.db"
-    migrations.migrate_database(db)
+    _create_frozen_v1_database(migrations, db)
     conn = sqlite3.connect(db)
     conn.execute("DROP TABLE attempts")
     conn.execute(
@@ -562,9 +583,9 @@ def test_m13_backup_hook_invalid_receipt_is_backup_error(tmp_path):
 
 
 # --------------------------------------------------------------------------- #
-# M14: two instances concurrently initializing the same new DB -> one v1 schema
+# M14: two instances concurrently initializing the same new DB -> one v2 schema
 # --------------------------------------------------------------------------- #
-def test_m14_concurrent_init_produces_one_v1_schema(tmp_path):
+def test_m14_concurrent_init_produces_one_v2_schema(tmp_path):
     threading = pytest.importorskip("threading")
     migrations = _migrations()
     db = tmp_path / "automation.db"
@@ -586,7 +607,7 @@ def test_m14_concurrent_init_produces_one_v1_schema(tmp_path):
     assert errors == []
     conn = _connect_readonly(db)
     try:
-        assert _user_version(conn) == 1
+        assert _user_version(conn) == 2
         assert set(_user_tables(conn)) == EXPECTED_TABLES
         report = migrations.validate_database(db)
         assert report.integrity_ok

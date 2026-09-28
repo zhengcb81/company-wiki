@@ -1,4 +1,4 @@
-"""AUTO-2 schema v1 migration and read-only validation for AutomationStore.
+"""Versioned AutomationStore schema migration and read-only validation.
 
 This module owns the frozen DDL, the version migration algorithm and the
 read-only schema report.  It deliberately depends only on the Python standard
@@ -28,9 +28,9 @@ from dataclasses import dataclass
 from pathlib import Path
 
 
-SCHEMA_VERSION = 1
+SCHEMA_VERSION = 2
 
-EXPECTED_TABLES = frozenset(
+EXPECTED_TABLES_V1 = frozenset(
     {
         "events",
         "jobs",
@@ -42,6 +42,7 @@ EXPECTED_TABLES = frozenset(
         "notifications",
     }
 )
+EXPECTED_TABLES = EXPECTED_TABLES_V1 | {"runtime_gate"}
 
 BackupHook = Callable[[Path, int, int], Path]
 
@@ -52,7 +53,7 @@ _CONNECT_TIMEOUT_S = 5.0
 # --------------------------------------------------------------------------- #
 # Frozen schema v1 DDL (single source of truth; matches AUTO-D exactly).
 # --------------------------------------------------------------------------- #
-_DDL_STATEMENTS: tuple[str, ...] = (
+_DDL_V1_STATEMENTS: tuple[str, ...] = (
     """
     CREATE TABLE events (
       event_id TEXT PRIMARY KEY,
@@ -169,6 +170,41 @@ _DDL_STATEMENTS: tuple[str, ...] = (
       created_at TEXT NOT NULL,
       delivered_at TEXT
     )
+    """,
+)
+
+# Backward-compatible private alias retained for the original v1 contract tests.
+_DDL_STATEMENTS = _DDL_V1_STATEMENTS
+
+_DDL_V2_STATEMENTS: tuple[str, ...] = (
+    """
+    ALTER TABLE attempts
+    ADD COLUMN runtime_generation INTEGER NOT NULL DEFAULT 0
+    """,
+    """
+    CREATE TABLE runtime_gate (
+      singleton_id INTEGER PRIMARY KEY CHECK(singleton_id=1),
+      desired_state TEXT NOT NULL CHECK(desired_state IN ('paused','enabled')),
+      control_generation INTEGER NOT NULL CHECK(control_generation>=1),
+      updated_at TEXT NOT NULL
+    )
+    """,
+    """
+    INSERT INTO runtime_gate (
+      singleton_id, desired_state, control_generation, updated_at
+    ) VALUES (1, 'paused', 1, '1970-01-01T00:00:00Z')
+    """,
+    """
+    CREATE INDEX idx_jobs_claim
+    ON jobs(status, not_before, priority DESC, created_at, job_id)
+    """,
+    """
+    CREATE INDEX idx_attempts_latest
+    ON attempts(job_id, attempt_no DESC)
+    """,
+    """
+    CREATE INDEX idx_outbox_claim
+    ON outbox(status, not_before, lease_until, outbox_id)
     """,
 )
 
@@ -337,9 +373,11 @@ def _user_version(connection: sqlite3.Connection) -> int:
 # --------------------------------------------------------------------------- #
 # Structured schema fingerprint (independent of sqlite_master whitespace).
 # --------------------------------------------------------------------------- #
-def _read_structure(connection: sqlite3.Connection) -> dict:
+def _read_structure(
+    connection: sqlite3.Connection, expected_tables: frozenset[str]
+) -> dict:
     structure: dict[str, dict] = {}
-    for table in sorted(EXPECTED_TABLES):
+    for table in sorted(expected_tables):
         columns = connection.execute(f'PRAGMA table_info("{table}")').fetchall()
         col_tuples = tuple(
             (
@@ -353,12 +391,20 @@ def _read_structure(connection: sqlite3.Connection) -> dict:
             for row in columns
         )
         unique_indexes: list[tuple] = []
+        ordinary_indexes: list[tuple] = []
         for index in connection.execute(f'PRAGMA index_list("{table}")').fetchall():
+            info = connection.execute(
+                f'PRAGMA index_xinfo("{index["name"]}")'
+            ).fetchall()
+            columns = tuple(
+                (row["name"], row["desc"])
+                for row in info
+                if row["key"] == 1 and row["name"] is not None
+            )
             if index["origin"] == "u":
-                info = connection.execute(
-                    f'PRAGMA index_info("{index["name"]}")'
-                ).fetchall()
-                unique_indexes.append(tuple(row["name"] for row in info))
+                unique_indexes.append(tuple(name for name, _desc in columns))
+            elif index["origin"] == "c":
+                ordinary_indexes.append((index["name"], columns))
         foreign_keys = connection.execute(
             f'PRAGMA foreign_key_list("{table}")'
         ).fetchall()
@@ -376,31 +422,43 @@ def _read_structure(connection: sqlite3.Connection) -> dict:
         structure[table] = {
             "columns": col_tuples,
             "unique": tuple(sorted(unique_indexes)),
+            "indexes": tuple(sorted(ordinary_indexes)),
             "foreign_keys": fk_tuples,
         }
     return structure
 
 
-@functools.lru_cache(maxsize=1)
-def _expected_structure() -> dict:
+@functools.lru_cache(maxsize=2)
+def _expected_structure(version: int) -> dict:
     connection = sqlite3.connect(":memory:")
     connection.row_factory = sqlite3.Row
     try:
-        for statement in _DDL_STATEMENTS:
+        for statement in _DDL_V1_STATEMENTS:
             connection.execute(statement)
-        return _read_structure(connection)
+        if version == 2:
+            for statement in _DDL_V2_STATEMENTS:
+                connection.execute(statement)
+            tables = EXPECTED_TABLES
+        elif version == 1:
+            tables = EXPECTED_TABLES_V1
+        else:
+            raise ValueError(f"unsupported expected schema version: {version}")
+        return _read_structure(connection, tables)
     finally:
         connection.close()
 
 
-def _require_expected_structure(connection: sqlite3.Connection) -> None:
+def _require_expected_structure(
+    connection: sqlite3.Connection, *, version: int = SCHEMA_VERSION
+) -> None:
+    expected_tables = EXPECTED_TABLES if version == 2 else EXPECTED_TABLES_V1
     tables = set(_user_tables(connection))
-    if tables != EXPECTED_TABLES:
-        missing = sorted(EXPECTED_TABLES - tables)
-        extra = sorted(tables - EXPECTED_TABLES)
+    if tables != expected_tables:
+        missing = sorted(expected_tables - tables)
+        extra = sorted(tables - expected_tables)
         raise SchemaDriftError(f"table set mismatch; missing={missing} extra={extra}")
-    actual = _read_structure(connection)
-    expected = _expected_structure()
+    actual = _read_structure(connection, expected_tables)
+    expected = _expected_structure(version)
     differences = [
         table
         for table in sorted(set(actual) | set(expected))
@@ -408,6 +466,24 @@ def _require_expected_structure(connection: sqlite3.Connection) -> None:
     ]
     if differences:
         raise SchemaDriftError(f"schema structure drift in: {differences}")
+    if version == 2:
+        gate_rows = connection.execute(
+            "SELECT singleton_id, desired_state, control_generation, updated_at "
+            "FROM runtime_gate"
+        ).fetchall()
+        if len(gate_rows) != 1:
+            raise SchemaDriftError("runtime_gate must contain exactly one row")
+        gate = gate_rows[0]
+        gate_valid = (
+            gate["singleton_id"] == 1
+            and gate["desired_state"] in {"paused", "enabled"}
+            and isinstance(gate["control_generation"], int)
+            and gate["control_generation"] >= 1
+            and isinstance(gate["updated_at"], str)
+            and bool(gate["updated_at"])
+        )
+        if not gate_valid:
+            raise SchemaDriftError("runtime_gate row is invalid")
     integrity = connection.execute("PRAGMA integrity_check").fetchone()[0]
     if integrity != "ok":
         raise SchemaDriftError(f"integrity_check failed: {integrity}")
@@ -428,9 +504,12 @@ def _canonical_json(value) -> str:
     )
 
 
-def _fingerprint(connection: sqlite3.Connection) -> str:
+def _fingerprint(
+    connection: sqlite3.Connection, *, version: int = SCHEMA_VERSION
+) -> str:
+    expected_tables = EXPECTED_TABLES if version == 2 else EXPECTED_TABLES_V1
     return hashlib.sha256(
-        _canonical_json(_read_structure(connection)).encode("utf-8")
+        _canonical_json(_read_structure(connection, expected_tables)).encode("utf-8")
     ).hexdigest()
 
 
@@ -438,12 +517,16 @@ def _fingerprint(connection: sqlite3.Connection) -> str:
 # Backup hook.
 # --------------------------------------------------------------------------- #
 def _perform_backup(
-    db_path: Path, pre_existing: bool, backup_hook: BackupHook | None
+    db_path: Path,
+    *,
+    from_version: int,
+    pre_existing: bool,
+    backup_hook: BackupHook | None,
 ) -> str | None:
     if backup_hook is None or not pre_existing:
         return None
     try:
-        target = backup_hook(db_path, 0, SCHEMA_VERSION)
+        target = backup_hook(db_path, from_version, SCHEMA_VERSION)
     except BackupError:
         raise
     except Exception as exc:  # noqa: BLE001 - hook is untrusted caller code
@@ -471,8 +554,11 @@ def _classify_existing(db_path: Path) -> str:
             )
         tables = _user_tables(connection)
         if version == SCHEMA_VERSION:
+            return "v2"
+        if version == 1:
+            _require_expected_structure(connection, version=1)
             return "v1"
-        unknown = [name for name in tables if name not in EXPECTED_TABLES]
+        unknown = [name for name in tables if name not in EXPECTED_TABLES_V1]
         if unknown:
             raise UnknownSchemaError(
                 f"unrecognized tables in uninitialized database: {unknown}"
@@ -482,10 +568,10 @@ def _classify_existing(db_path: Path) -> str:
         connection.close()
 
 
-def _validate_v1_readonly(db_path: Path) -> MigrationReport:
+def _validate_v2_readonly(db_path: Path) -> MigrationReport:
     connection = _open_readonly_connection(db_path)
     try:
-        _require_expected_structure(connection)
+        _require_expected_structure(connection, version=2)
         return MigrationReport(
             SCHEMA_VERSION, SCHEMA_VERSION, (), None, _fingerprint(connection)
         )
@@ -503,39 +589,54 @@ def _apply_write_migration(
         )
     if version == SCHEMA_VERSION:
         # Another worker migrated between classification and the write lock.
-        _require_expected_structure(connection)
+        _require_expected_structure(connection, version=2)
         return MigrationReport(
             SCHEMA_VERSION, SCHEMA_VERSION, (), None, _fingerprint(connection)
         )
-    tables = _user_tables(connection)
-    unknown = [name for name in tables if name not in EXPECTED_TABLES]
-    if unknown:
-        raise UnknownSchemaError(
-            f"unrecognized tables in uninitialized database: {unknown}"
-        )
+    from_version = version
     try:
-        for statement in _DDL_STATEMENTS:
-            _execute_statement(connection, statement)
-        connection.execute(f"PRAGMA user_version = {SCHEMA_VERSION}")
+        applied_versions: list[int] = []
+        if version == 0:
+            tables = _user_tables(connection)
+            unknown = [name for name in tables if name not in EXPECTED_TABLES_V1]
+            if unknown:
+                raise UnknownSchemaError(
+                    f"unrecognized tables in uninitialized database: {unknown}"
+                )
+            for statement in _DDL_V1_STATEMENTS:
+                _execute_statement(connection, statement)
+            connection.execute("PRAGMA user_version = 1")
+            version = 1
+            applied_versions.append(1)
+        if version == 1:
+            _require_expected_structure(connection, version=1)
+            for statement in _DDL_V2_STATEMENTS:
+                _execute_statement(connection, statement)
+            connection.execute("PRAGMA user_version = 2")
+            applied_versions.append(2)
     except sqlite3.OperationalError as exc:
         raise MigrationExecutionError(
             f"DDL execution failed and was rolled back: {exc}"
         ) from exc
-    _require_expected_structure(connection)
+    _require_expected_structure(connection, version=2)
     return MigrationReport(
-        0, SCHEMA_VERSION, (SCHEMA_VERSION,), backup_path_str, _fingerprint(connection)
+        from_version,
+        SCHEMA_VERSION,
+        tuple(applied_versions),
+        backup_path_str,
+        _fingerprint(connection, version=2),
     )
 
 
 def migrate_database(
     db_path: Path, *, backup_hook: BackupHook | None = None
 ) -> MigrationReport:
-    """Create or validate the automation database at schema v1.
+    """Create or validate the automation database at schema v2.
 
-    A new file or an empty v0 file is migrated to v1 in a single transaction.
-    An existing v1 database is validated read-only and left untouched.  Higher
-    versions, unknown schemas and drifted schemas fail closed without modifying
-    the file.
+    A new file or empty v0 database applies v1 then v2 in one transaction.  A
+    frozen, valid v1 database requires a successful explicit backup hook before
+    it is upgraded in one transaction. Existing v2 databases are validated
+    read-only.
     """
     db_path = _require_valid_path_object(db_path)
     _require_writable_target(db_path)
@@ -550,14 +651,17 @@ def migrate_database(
     else:
         classification = "new"
 
-    if classification == "v1":
-        return _validate_v1_readonly(db_path)
+    if classification == "v2":
+        return _validate_v2_readonly(db_path)
 
-    # classification in {"v0_empty", "new"}: back up the pre-existing file
-    # before opening any write connection, so a backup failure leaves the file
-    # byte-for-byte unchanged.
+    from_version = 1 if classification == "v1" else 0
+    if classification == "v1" and backup_hook is None:
+        raise BackupError("v1 to v2 upgrade requires an explicit backup hook")
     backup_path_str = _perform_backup(
-        db_path, pre_existing=(classification == "v0_empty"), backup_hook=backup_hook
+        db_path,
+        from_version=from_version,
+        pre_existing=(classification in {"v0_empty", "v1"}),
+        backup_hook=backup_hook,
     )
 
     connection = _open_connection(db_path)
@@ -590,17 +694,24 @@ def validate_database(db_path: Path) -> SchemaReport:
             )
         tables = _user_tables(connection)
         if version == SCHEMA_VERSION:
-            _require_expected_structure(connection)
+            _require_expected_structure(connection, version=2)
+            fingerprint = _fingerprint(connection, version=2)
+        elif version == 1:
+            _require_expected_structure(connection, version=1)
+            fingerprint = _fingerprint(connection, version=1)
         else:  # uninitialized v0
-            unknown = [name for name in tables if name not in EXPECTED_TABLES]
+            unknown = [name for name in tables if name not in EXPECTED_TABLES_V1]
             if unknown:
                 raise UnknownSchemaError(f"unrecognized tables in database: {unknown}")
+            fingerprint = hashlib.sha256(
+                _canonical_json({"version": 0, "tables": tables}).encode("utf-8")
+            ).hexdigest()
         integrity = connection.execute("PRAGMA integrity_check").fetchone()[0]
         violations = connection.execute("PRAGMA foreign_key_check").fetchall()
         return SchemaReport(
             user_version=version,
             tables=tuple(tables),
-            schema_fingerprint=_fingerprint(connection),
+            schema_fingerprint=fingerprint,
             integrity_ok=(integrity == "ok"),
             foreign_key_violations=tuple(tuple(row) for row in violations),
         )

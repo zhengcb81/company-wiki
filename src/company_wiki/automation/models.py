@@ -63,6 +63,11 @@ class EffectStatus(str, Enum):
     CANCELLED = "cancelled"
 
 
+class RuntimeState(str, Enum):
+    PAUSED = "paused"
+    ENABLED = "enabled"
+
+
 JOB_STATUS_TRANSITIONS: dict[JobStatus, set[JobStatus]] = {
     JobStatus.DETECTED: {JobStatus.PLANNED, JobStatus.CANCELLED},
     JobStatus.PLANNED: {JobStatus.READY, JobStatus.BLOCKED_HUMAN, JobStatus.CANCELLED},
@@ -167,6 +172,44 @@ def _require_nonempty(value: str, field_name: str) -> str:
     if not value:
         raise ValueError(f"{field_name} must not be empty")
     return value
+
+
+def _require_positive_integer(value: int, field_name: str) -> int:
+    if type(value) is not int or value < 1:
+        raise ValueError(f"{field_name} must be a positive integer")
+    return value
+
+
+def _require_nonnegative_integer(value: int, field_name: str) -> int:
+    if type(value) is not int or value < 0:
+        raise ValueError(f"{field_name} must be a non-negative integer")
+    return value
+
+
+def _require_optional_text(value: str | None, field_name: str) -> None:
+    if value is not None and not isinstance(value, str):
+        raise TypeError(f"{field_name} must be text or null")
+
+
+def _validate_attempt_times(
+    *,
+    started_at: str,
+    heartbeat_at: str,
+    lease_until: str,
+    finished_at: str | None,
+) -> None:
+    for value in (lease_until, started_at, heartbeat_at):
+        require_utc_timestamp(value)
+    if finished_at is not None:
+        require_utc_timestamp(finished_at)
+    if heartbeat_at < started_at:
+        raise ValueError("heartbeat_at must not be before started_at")
+    if lease_until < heartbeat_at:
+        raise ValueError("lease_until must not be before heartbeat_at")
+    if finished_at is not None and finished_at < started_at:
+        raise ValueError("finished_at must not be before started_at")
+    if finished_at is not None and heartbeat_at > finished_at:
+        raise ValueError("heartbeat_at must not be after finished_at")
 
 
 def _identity_hash(parts: tuple[str, ...]) -> str:
@@ -334,18 +377,13 @@ class Job(StrictModel):
             raise TypeError("risk_class and status must be enum values")
         if type(self.priority) is not int:
             raise TypeError("priority must be an integer, not bool or coercible text")
-        if type(self.max_attempts) is not int:
-            raise TypeError("max_attempts must be an integer")
-        if self.max_attempts < 1:
-            raise ValueError("max_attempts must be positive")
+        _require_positive_integer(self.max_attempts, "max_attempts")
         for value in (self.not_before, self.created_at, self.updated_at):
             require_utc_timestamp(value)
         if self.updated_at < self.created_at:
             raise ValueError("updated_at must not be before created_at")
         for name in ("last_error_code", "last_error_detail"):
-            value = getattr(self, name)
-            if value is not None and not isinstance(value, str):
-                raise TypeError(f"{name} must be text or null")
+            _require_optional_text(getattr(self, name), name)
 
 
 @dataclass(frozen=True)
@@ -363,36 +401,78 @@ class Attempt(StrictModel):
     result_json: str | None
     error_code: str | None
     error_detail: str | None
+    runtime_generation: int = 0
 
     _enum_fields: ClassVar[dict[str, type[Enum]]] = {"outcome": HandlerOutcome}
 
     def __post_init__(self) -> None:
         for name in ("attempt_id", "job_id", "worker_id", "lease_token"):
             _require_nonempty(getattr(self, name), name)
-        if type(self.attempt_no) is not int:
-            raise TypeError("attempt_no must be an integer")
-        if self.attempt_no < 1:
-            raise ValueError("attempt_no must be positive")
-        for value in (self.lease_until, self.started_at, self.heartbeat_at):
-            require_utc_timestamp(value)
-        if self.finished_at is not None:
-            require_utc_timestamp(self.finished_at)
-        if self.heartbeat_at < self.started_at:
-            raise ValueError("heartbeat_at must not be before started_at")
-        if self.lease_until < self.heartbeat_at:
-            raise ValueError("lease_until must not be before heartbeat_at")
-        if self.finished_at is not None and self.finished_at < self.started_at:
-            raise ValueError("finished_at must not be before started_at")
-        if self.finished_at is not None and self.heartbeat_at > self.finished_at:
-            raise ValueError("heartbeat_at must not be after finished_at")
+        _require_positive_integer(self.attempt_no, "attempt_no")
+        _require_nonnegative_integer(self.runtime_generation, "runtime_generation")
+        _validate_attempt_times(
+            started_at=self.started_at,
+            heartbeat_at=self.heartbeat_at,
+            lease_until=self.lease_until,
+            finished_at=self.finished_at,
+        )
         if self.outcome is not None and not isinstance(self.outcome, HandlerOutcome):
             raise TypeError("outcome must be HandlerOutcome or null")
         if self.result_json is not None:
             require_canonical_json(self.result_json)
         for name in ("error_code", "error_detail"):
-            value = getattr(self, name)
-            if value is not None and not isinstance(value, str):
-                raise TypeError(f"{name} must be text or null")
+            _require_optional_text(getattr(self, name), name)
+
+
+@dataclass(frozen=True)
+class RuntimeGate(StrictModel):
+    desired_state: RuntimeState
+    control_generation: int
+    updated_at: str
+
+    _enum_fields: ClassVar[dict[str, type[Enum]]] = {"desired_state": RuntimeState}
+
+    def __post_init__(self) -> None:
+        if not isinstance(self.desired_state, RuntimeState):
+            raise TypeError("desired_state must be RuntimeState")
+        if type(self.control_generation) is not int or self.control_generation < 1:
+            raise ValueError("control_generation must be a positive integer")
+        require_utc_timestamp(self.updated_at)
+
+
+@dataclass(frozen=True)
+class ClaimedWork(StrictModel):
+    job: Job
+    attempt: Attempt
+
+    def __post_init__(self) -> None:
+        if not isinstance(self.job, Job) or not isinstance(self.attempt, Attempt):
+            raise TypeError("job and attempt must use automation model types")
+        if self.job.job_id != self.attempt.job_id:
+            raise ValueError("claimed job and attempt must have the same job_id")
+        if self.job.status is not JobStatus.RUNNING:
+            raise ValueError("claimed job must be RUNNING")
+
+
+@dataclass(frozen=True)
+class OutboxLease(StrictModel):
+    outbox_id: str
+    effect_id: str
+    payload_json: str
+    attempt_count: int
+    lease_token: str
+    lease_until: str
+    runtime_generation: int
+
+    def __post_init__(self) -> None:
+        for name in ("outbox_id", "effect_id", "lease_token"):
+            _require_nonempty(getattr(self, name), name)
+        require_canonical_json(self.payload_json)
+        if type(self.attempt_count) is not int or self.attempt_count < 0:
+            raise ValueError("attempt_count must be a non-negative integer")
+        if type(self.runtime_generation) is not int or self.runtime_generation < 1:
+            raise ValueError("runtime_generation must be a positive integer")
+        require_utc_timestamp(self.lease_until)
 
 
 @dataclass(frozen=True)

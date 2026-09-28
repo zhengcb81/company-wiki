@@ -8,9 +8,9 @@
 
 ## Next Step
 
-**2026-09-27 Phase 23 重构总图：**后续实施统一按[清洁架构与 TDD 实施总图](clean_architecture_tdd_execution_plan_2026-09-27.md)的 Phase A–G / M1–M4 执行。内部代码和派生 schema 允许破坏式重构；canonical raw 原件、来源 SHA/manifest 和版本事实不得丢失。下一步不是对 `source_operation` 做一行字段补丁，而是先完成 Phase B 的正式 producer/CLI 红测，再拆分 typed operation contract、纯 projection 和 read facade，最后以真实 latest-as-of fake-provider CLI E2E 验收。随后按生产启用顺序分解 narrative/provider/transcript 的复杂度豁免，最后才接 Worker、跨仓 consumer 和派生清理。
+**2026-09-27 Phase 23 重构总图：**后续实施统一按[清洁架构与 TDD 实施总图](clean_architecture_tdd_execution_plan_2026-09-27.md)的 Phase A–G / M1–M4 执行。内部代码和派生 schema 允许破坏式重构；canonical raw 原件、来源 SHA/manifest 和版本事实不得丢失。Phase B/M1、Phase C/M2-derive、Phase D/M2-provider 与 Phase E 的 E0/E1 已按该图实施；下一步是 E2 DAG materialization、依赖结果和运行门，再进入 E-A 集中审查。跨仓 consumer 和派生清理仍分别留在 Phase F/G。
 
-**2026-09-28 最新状态（覆盖下方历史快照）：**Phase B/M1、Phase C/M2-derive、Phase D/M2-provider 与 Phase E/E0 已完成；[Phase E/M3 Worker 详细施工卡](phase_e_m3_worker_implementation_spec_2026-09-28.md)已在 `77b1229` 单独提交。E0 的 fail-closed control 红测先 3 failed，产品修复后聚焦 10 passed；扩展基线先得到 222 passed / 1 个仍依赖 fresh-default-enabled 的真实 Worker 测试失败，该测试改为显式 enable 后单项通过。两处 mandatory `evidence_payload` 陈旧 fixture 已修，生产 review gate 未放松；生产 Worker 仍 paused、runtime 不存在、所有 `C:\cwt\m3-e0-*` 根已清理。下一步是 E1 Automation DB v2 与原子 Store RED tests。Phase D 的真实 E-T 兼容仍有一个明确的 Phase F 阻断项：E-T `/2` HTML canonical text hash/size 与 CWP deterministic material 不是同一语义；fake provider 全绿不代表真实 E-T 已接通。
+**2026-09-28 最新状态（覆盖下方历史快照）：**Phase B/M1、Phase C/M2-derive、Phase D/M2-provider 与 Phase E/E0–E1 已完成；[Phase E/M3 Worker 详细施工卡](phase_e_m3_worker_implementation_spec_2026-09-28.md)已在 `77b1229` 单独提交。E1 已把 Automation DB 升为 v2，加入 paused-by-default generation gate、attempt generation 和 claim 索引；claim/heartbeat/finish/reap/effect/outbox/ACK/retry 均为 Store 单事务 application operation，Worker 不再组合旧 CRUD。迁移、Store、Worker、竞争和旧 automation 回归共 **193 passed**；修改范围 Ruff、复杂度 `<=10`、pre-commit/config/host gate 全绿。生产 Worker 仍 paused、runtime 不存在，`C:\cwt\m3-e1-*` 根为 0。下一步是 E2 DAG materialization、依赖结果与 pause 线性化，然后只做一次 E-A 集中审查。Phase D 的真实 E-T 兼容仍有一个明确的 Phase F 阻断项：E-T `/2` HTML canonical text hash/size 与 CWP deterministic material 不是同一语义；fake provider 全绿不代表真实 E-T 已接通。
 
 **Phase 22 阻断结论（保留证据）：**暂停 R4 consumer/跨仓接线。正式 `SourceEnsureResult.to_dict()` 输出 `acquisition`，当前 consumer/test 同步漂移到不存在的 `acquisition_result`；现有 390/88 项绿灯不能覆盖这个 producer/consumer 反例。
 
@@ -30,7 +30,7 @@ Phase 17 的 F0–F5 已完成。G1 离线主样本和回归集已经复跑：12
 
 ## Current Phase
 
-Phase 23：大重构的第一性原理、分层、原件/派生边界、TDD 矩阵、M1–M4 大节点和 Phase A–G 施工顺序已冻结；产品代码尚未实施。下一实施阶段为总图 Phase B / M1。Phase 18 的样本证据仍作为 M2 回归输入；G2 consumer、G3 Worker 和 G4 派生清理继续等待各自大节点。
+Phase 23：总图已进入 Phase E/M3。M1、M2-derive、M2-provider、E0 与 E1 已完成；当前实施阶段是 E2 DAG/依赖/运行门，完成后执行 E-A 事务与安全集中审查。Phase 18 的样本证据继续作为 E6 真实数据输入；跨仓 consumer 和派生清理等待 Phase F/G。
 
 外部来源采购补充：FMP Basic key 实测 profile/有效 SEC 检索 200，press releases/transcript dates 402；SEC 原生 API 无 key。以 246 个本地公司目录作保守分母，Basic 补充 SEC 检索约 2,076 calls/30 日，纯 SEC/IR 路径为 0 FMP calls；Koyfin 无用户 API，Seeking Alpha 个人订阅不授权自动抓取；Motley Fool 官方条款也禁止自动访问/采集，现有适配器不得接通生产。详细价格、假设、权利分级和 30 日试点见 [外部数据源与成本卡](provider_cost_and_capability_2026-09-27.md)。采购结论为先不买，且不改变 G0/G1e 门禁。
 
@@ -288,6 +288,9 @@ company-wiki 只负责来源、解析质量、证据定位、检索和来源摘�
 - [x] 本轮曾用红测确认正式 `acquisition` producer 与 consumer 的断裂，并验证重构思路；按用户“先计划后实施”要求，所有未提交产品/测试试验已恢复到 HEAD。
 - [x] 按总图 Phase B 完成 producer/CLI 红测、typed operation contract、projection 与薄 facade；read-only ensure 复用正式 producer serializer。
 - [x] 完成 M1 大节点：正式 producer/consumer 合同、latest-as-of/provider-unavailable CLI E2E、跨 root 同 SHA 回退、错误 SHA 拒绝、复杂度与严格类型门，共 115 项测试通过。
-- [ ] 按总图 Phase C 先冻结 12 件样本与反例的 DocumentStructure/selector/coverage/locator/空间行为，再拆分叙述证据实现。
+- [x] 按总图 Phase C 完成 12 件样本、DocumentStructure/selector/coverage/locator/空间行为与叙述证据分层。
+- [x] 完成 Phase D provider/transcript adapter、失败矩阵与 fake subprocess E2E；保留真实 E-T HTML material 语义阻断到 Phase F。
+- [x] 完成 Phase E/E0 fail-closed baseline 与 E1 Automation DB v2、原子 Store、Worker/Outbox fencing。
+- [ ] 实施 E2 DAG materialization、依赖结果和运行门，再执行 E-A 集中审查。
 
-**Status:** Phase B / M1 complete；Phase C / M2 pending。
+**Status:** Phase E/E1 complete；E2 与 E-A pending。

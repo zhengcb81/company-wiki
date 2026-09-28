@@ -572,3 +572,14 @@
 - 扩展 E0 基线覆盖 automation store/worker/migration/controller、operation lock、parser liveness、legacy worker、pause guard、control/bootstrap 和 focus admission，共收集 223 项。首次运行 **222 passed / 1 failed**，唯一失败是 fresh control 后直接调用 `worker-start` 的真实临时 Worker 测试；按新合同在 fixture 显式 enable 后，该项单独重跑通过。未重复运行其余 222 项，因为改动只影响该 fixture 的启动前状态。
 - 修改文件 Ruff 与 `git diff --check` 通过；全部 `C:\cwt\m3-e0-*` 测试根清理为 0。生产 `.source_catalog/worker_control.json` 仍为 paused，`worker_runtime.json` 不存在，没有启动生产 Worker。
 - 下一步 E1：先增加 Automation DB v2 migration 和原子 claim/heartbeat/finish/reap/effect+outbox 的 RED tests；E-A 之前不实现 Supervisor。
+
+## Session: Phase E / E1 Automation DB v2 与原子 Store（2026-09-28）
+
+- 严格按施工卡先写 RED：第一组迁移/Store/双连接竞争测试收集 20 项，得到 **18 failed / 2 passed**；失败分别指向仍为 schema v1、缺 runtime gate、缺原子 application API。Worker 增量红测得到 **4 failed / 13 passed**，证明旧实现仍组合 `list_jobs/transition_job/put_attempt/put_outbox_entry`、立即把 retry 置 READY 且 paused gate 不生效。多 effect/hash 补充红测再得到 **2 failed / 1 passed**。
+- Automation schema 升为 v2：保留冻结 v1 DDL/validator；新库在一个 transaction 内依次应用 v1/v2；合法 v1 可经 backup hook 后升级；DDL/backup 失败不半升级；未来 v3、v1/v2 schema drift、缺 claim index 和缺 singleton gate row 均 fail closed。v2 新增 `attempts.runtime_generation`、`runtime_gate` 和 jobs/attempts/outbox 三组 claim index，初始状态固定 `paused, generation=1`。
+- Store 新增原子 claim、heartbeat、finish、promote、reap、outbox claim/ack/retry 和 gate 操作。claim 在一个 `BEGIN IMMEDIATE` 内选择 due/依赖满足的 READY job、写 attempt 并到 RUNNING；finish 在同一事务更新原 attempt，按结果改变 job，并原子写 Effect+Outbox。旧 token、旧 generation、非最新 attempt、完成/过期 lease、暂停后的旧执行者都被具名错误拒绝。
+- Outbox projector 合同现在要求 token/generation/lease 匹配、actual hash 与 intended hash 相同；一个 job 的所有 effect 全部 delivered 后才从 VERIFYING 到 SUCCEEDED。达到 retry budget 时 effect FAILED、outbox failed、job DEAD_LETTER 同事务提交。双 AutomationStore 的 job claim 和 outbox claim 竞争各自都只有一个胜者。
+- Worker 已重写为薄 orchestration：只读 gate、调用 `claim_next_ready`、在事务外执行 handler、分类 retry/blocked/terminal 后调用 `finish_attempt`；不再吞 claim/finish 错误或重用 insert-only `put_attempt`。retry 保持 RETRY_WAIT 到 `not_before`，reaper 写完 `LEASE_EXPIRED` 后由 promote 单独升 READY。
+- 新增/旧 automation 合并门最终共 **193 passed**。修改范围 Ruff、显式 C901 `<=10`、`git diff --check` 通过；pre-commit 的 Ruff、config doctor、host assumption guard 通过。全部 `C:\cwt\m3-e1-*` 根清理为 0。
+- production `.source_catalog/worker_control.json` 仍为 paused，`worker_runtime.json` 不存在；未创建/迁移生产 Automation DB，未改 raw/catalog。RF 只读边界仍为 `fcap@ee0a82bf`、`origin/main@3a69f9c5`，保留其既有 planning/assurance dirty 和一次性目录，本项目零写入、零清理、零切换。
+- 下一步 E2：先写 DAG materialization、dependency result、missing/corrupt/paused gate、pause/claim/finish 线性化 RED tests；只修改 `automation/scheduler.py`、`automation/runtime_control.py`、controller/planner 与关闭 legacy auto-prune 所需最小边界。E2 完成后统一执行 E-A，不提前写 Supervisor 或 narrative handler。
