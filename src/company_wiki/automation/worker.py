@@ -9,37 +9,91 @@ from __future__ import annotations
 
 import hashlib
 from datetime import datetime, timedelta, timezone
-from typing import Callable
+from typing import Callable, Protocol
 
 from ._clock import Clock, IDGenerator
 from .heartbeat import AttemptHeartbeat
+from .execution_context import (
+    ExecutionContextFactory,
+    ExecutionSnapshotStore,
+    JobExecutionContext,
+)
 from .models import (
+    Attempt,
     ClaimedWork,
     HandlerError,
     HandlerMetrics,
     HandlerOutcome,
     HandlerResult,
     JobStatus,
+    RuntimeGate,
     RuntimeState,
 )
 from .registry import HandlerRegistry, HandlerSpec
 from .retry import classify_outcome, compute_retry_delay
 
 
+Handler = Callable[[JobExecutionContext], HandlerResult]
+
+
+class WorkerStore(ExecutionSnapshotStore, Protocol):
+    """Small Store surface required by one worker process."""
+
+    def read_runtime_gate(self) -> RuntimeGate: ...
+
+    def claim_next_ready(
+        self,
+        *,
+        worker_id: str,
+        attempt_id: str,
+        lease_token: str,
+        now: str,
+        lease_until: str,
+        expected_generation: int,
+        allowed_job_types: tuple[str, ...] | None = None,
+    ) -> ClaimedWork | None: ...
+
+    def heartbeat_attempt(
+        self,
+        *,
+        attempt_id: str,
+        lease_token: str,
+        runtime_generation: int,
+        now: str,
+        lease_until: str,
+    ) -> Attempt: ...
+
+    def finish_attempt(
+        self,
+        *,
+        attempt_id: str,
+        lease_token: str,
+        runtime_generation: int,
+        finished_at: str,
+        result: HandlerResult,
+        retry_not_before: str | None = None,
+        outbox_not_before: str | None = None,
+    ) -> Attempt: ...
+
+    def reap_expired_attempts(self, *, now: str) -> tuple[str, ...]: ...
+
+
 class HandlerExecutor:
     """Registry of callable handlers keyed by job_type."""
 
     def __init__(self) -> None:
-        self._handlers: dict[str, object] = {}
+        self._handlers: dict[str, Handler] = {}
 
-    def register(self, job_type: str, handler) -> None:
+    def register(self, job_type: str, handler: Handler) -> None:
         self._handlers[job_type] = handler
 
-    def execute(self, job_type: str, input_data: dict) -> HandlerResult:
+    def execute(
+        self, job_type: str, context: JobExecutionContext
+    ) -> HandlerResult:
         handler = self._handlers.get(job_type)
         if handler is None:
             raise UnknownHandlerError(f"no handler registered for {job_type}")
-        return handler(input_data)
+        return handler(context)
 
 
 class UnknownHandlerError(Exception):
@@ -51,7 +105,7 @@ class Worker:
 
     def __init__(
         self,
-        store,
+        store: WorkerStore,
         registry: HandlerRegistry,
         executor: HandlerExecutor,
         *,
@@ -62,6 +116,7 @@ class Worker:
         heartbeat_interval_seconds: float | None = None,
         allowed_job_types: tuple[str, ...] | None = None,
         lifecycle_callback: Callable[[str, ClaimedWork], None] | None = None,
+        context_factory: ExecutionContextFactory | None = None,
     ) -> None:
         self._store = store
         self._registry = registry
@@ -78,6 +133,7 @@ class Worker:
             raise ValueError(f"allowed job types are not registered: {sorted(unknown)}")
         self._allowed_job_types = tuple(sorted(selected))
         self._lifecycle_callback = lifecycle_callback
+        self._context_factory = context_factory or ExecutionContextFactory(store)
 
     def process_one(self) -> bool:
         gate = self._store.read_runtime_gate()
@@ -112,9 +168,15 @@ class Worker:
             heartbeat.start()
         try:
             try:
+                checkpoint = (
+                    heartbeat.raise_if_failed if heartbeat is not None else lambda: None
+                )
+                context = self._context_factory.create(
+                    claimed, now=self._clock.now(), checkpoint=checkpoint
+                )
                 raw_result = self._executor.execute(
                     job.job_type,
-                    {"job_id": job.job_id, "subject_id": job.subject_id},
+                    context,
                 )
                 result, target = _classify_result(raw_result, spec, attempt.attempt_no)
             except Exception as exc:  # noqa: BLE001 - handler boundary

@@ -300,6 +300,15 @@ NarrativeSummaryModel.summarize(NarrativeSummaryRequest) -> NarrativeSummaryResp
 
 实现：`automation/execution_context.py`、`automation/execution_snapshot.py`、Store 的单一 read operation，以及 Worker/HandlerExecutor 的一次性接口迁移。
 
+**E4.2 实施收据（2026-09-28）**
+
+- RED：两个新模块不存在，context/snapshot 测试在 collection 处失败；首轮实现 **11 passed / 2 failed**，两项均定位为夹具没有满足新合同，而不是放宽生产校验。
+- GREEN：Store 在一个显式 SQLite read transaction 中读取 runtime gate、当前 claim、source event 与全部直接前置结果；stale token/generation、过期 lease、非最新 attempt、event/job identity 漂移、未成功或损坏 dependency 均 fail closed。
+- Worker 只向 handler 传冻结的 `JobExecutionContext`；payload 和 dependency mapping 不可变，narrative 三种 job 的前置类型集合必须精确匹配，checkpoint 复用 heartbeat failure boundary。`WorkerStore` 与 handler callable 均为显式窄接口。
+- 双连接竞争测试证明 snapshot 只观察一个 SQLite read view。旧 multiprocess helper 的同一 source 下重复建 event 做法违反 event natural key，已改为下游复用父 event；生产 natural key 没有放宽。
+- 聚焦 context/snapshot/Worker/Supervisor/multiprocess 为 **43 collected，修正损坏 gate 夹具后全绿**；最终全部 automation、narrative contract、race、multiprocess、CLI 与 Store boundary 为 **244 passed in 42.93s**。
+- 四个边界模块 strict mypy、修改文件 Ruff、C901 `<=10`、config doctor 与 diff check 全绿；所有 `C:\cwt\m3-e4-*-*` 本轮测试根均在 finally 后精确清理。未接 reader/provider/model/catalog，production Worker 未启用。
+
 ### E4.3：registry 与三阶段 DAG
 
 先改 planner/registry tests：

@@ -26,6 +26,7 @@ from .migrations import (
     migrate_database,
     validate_database,
 )
+from .execution_snapshot import ExecutionSnapshot, load_execution_snapshot
 from .models import (
     Approval,
     ClaimedWork,
@@ -665,6 +666,29 @@ class AutomationStore:
             conn.execute("BEGIN IMMEDIATE")
             try:
                 result = operation(conn)
+            except BaseException:
+                conn.execute("ROLLBACK")
+                raise
+            conn.execute("COMMIT")
+            return result
+        except sqlite3.OperationalError as exc:
+            if "database is locked" in str(exc).lower():
+                raise StoreBusyError(
+                    f"database locked after {self._timeout}s timeout"
+                ) from exc
+            raise
+        finally:
+            conn.close()
+
+    def read_execution_snapshot(
+        self, claimed: ClaimedWork, *, now: str
+    ) -> ExecutionSnapshot:
+        """Read event, claim and direct dependency results from one DB view."""
+        conn = self._connect()
+        try:
+            conn.execute("BEGIN")
+            try:
+                result = load_execution_snapshot(conn, claimed, now=now)
             except BaseException:
                 conn.execute("ROLLBACK")
                 raise

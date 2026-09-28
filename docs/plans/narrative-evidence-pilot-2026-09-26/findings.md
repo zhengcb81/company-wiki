@@ -383,3 +383,11 @@
 - 模型配置缺失与模型响应非法是不同故障：前者在网络前进入 `MODEL_NOT_CONFIGURED` 人工阻断，后者不应重复消耗同一模型预算。429/timeout 才使用有界 retry。
 - verify job 必须直接依赖 select 和 summarize。这样最终 bundle 可从两个小型结果组合，summary 无需再次复制 selected evidence，也能用 Store snapshot 明确证明所有输入版本。
 - E4 不需要 catalog writer。verify 只生成 canonical bundle/hash 和逻辑 effect；对象原子写、immutable version row 与 ACK 恢复留给 E5，避免 handler 与 publication 再次耦合。
+
+## 2026-09-28 — E4.2 一致性执行上下文结论
+
+- handler 输入的一致性必须由 Store transaction 保证，不能靠多个 getter 后验比较。SQLite read transaction 在并发 dependency result 更新时保持旧完整视图；下一次读取才看到新完整视图，因此不会把旧 event 与新 result 拼成不存在的执行状态。
+- context 的不可变不仅是 frozen dataclass。嵌套 JSON 需要递归转为 tuple/read-only mapping，dependency results 也要按 job type 建只读映射；否则 handler 仍可在进程内改写审计输入。
+- event natural key 是 source revision 的幂等事实。同一 source/policy/input 的下游 job 必须复用原 event；测试 helper 为每个 job 造 event 会掩盖 planner 错误，也会在真实数据库触发唯一键冲突。
+- 数据库 schema 与领域模型是互补防线：枚举状态由 SQLite CHECK 拒绝，格式合法性由 typed model 拒绝。snapshot boundary 将后者统一映射成具名领域错误，使 Worker 不暴露 JSON/enum/时间戳解析细节。
+- Worker 对 Store 的依赖可以收窄为 claim、heartbeat、finish、reap、runtime gate 和 read snapshot 六类 operation；handler 只依赖 `JobExecutionContext`。这为 E4.3 registry/DAG 和后续 handler 单测保留了可替换边界。

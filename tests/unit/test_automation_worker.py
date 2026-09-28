@@ -84,8 +84,8 @@ def _make_job(m=None, store=None, status=None, **overrides):
     defaults = dict(
         job_id="job-auto4-001",
         job_type="source.normalize",
-        subject_type="source",
-        subject_id="src-auto4-001",
+        subject_type="source_revision",
+        subject_id="rev-auto4-001",
         input_hash=INPUT_HASH,
         policy_version="v1",
         handler_version="1.0.0",

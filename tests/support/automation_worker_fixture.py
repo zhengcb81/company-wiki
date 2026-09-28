@@ -42,8 +42,8 @@ def create_runtime(spec: WorkerProcessSpec) -> WorkerRuntime:
     registry = create_default_registry()
     executor = HandlerExecutor()
 
-    def handler(input_data: dict) -> HandlerResult:
-        job_id = input_data["job_id"]
+    def handler(context) -> HandlerResult:
+        job_id = context.job.job_id
         _write_marker(trace_dir, "handler_started", job_id, spec.worker_id)
         if block_phase_by_job.get(job_id) == "handler_started":
             while True:

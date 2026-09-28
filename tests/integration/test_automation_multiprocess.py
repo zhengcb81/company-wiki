@@ -34,44 +34,48 @@ def _seed_job(
     depends_on: str | None = None,
 ) -> str:
     timestamp = _now()
-    event_id = f"event-{suffix}"
     job_id = f"job-{suffix}"
-    store.put_event(
-        models.Event(
-            event_id=event_id,
+    if depends_on is None:
+        event = models.Event(
+            event_id=f"event-{suffix}",
             event_type="source.revision_registered",
             subject_type="source_revision",
-            subject_id=f"revision-{suffix}",
+            subject_id=subject_id,
             input_hash=INPUT_HASH,
             payload_json=models.canonical_json({"suffix": suffix}),
             policy_version="narrative-v1",
             occurred_at=timestamp,
             observed_at=timestamp,
         )
-    )
+        store.put_event(event)
+    else:
+        parent = store.get_job(depends_on)
+        assert parent is not None
+        event = store.get_event(parent.created_from_event_id)
+        assert event is not None
     store.put_job(
         models.Job(
             job_id=job_id,
             job_key=models.make_job_key(
                 job_type,
-                "source",
-                subject_id,
-                INPUT_HASH,
-                "narrative-v1",
+                event.subject_type,
+                event.subject_id,
+                event.input_hash,
+                event.policy_version,
                 "1.0.0",
             ),
             job_type=job_type,
-            subject_type="source",
-            subject_id=subject_id,
-            input_hash=INPUT_HASH,
-            policy_version="narrative-v1",
+            subject_type=event.subject_type,
+            subject_id=event.subject_id,
+            input_hash=event.input_hash,
+            policy_version=event.policy_version,
             handler_version="1.0.0",
             risk_class=models.RiskClass.LOW,
             status=status,
             priority=10,
             not_before=timestamp,
             max_attempts=3,
-            created_from_event_id=event_id,
+            created_from_event_id=event.event_id,
             created_at=timestamp,
             updated_at=timestamp,
             last_error_code=None,

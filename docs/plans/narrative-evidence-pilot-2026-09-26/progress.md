@@ -624,3 +624,12 @@
 - 递归 path-leak gate 拒绝路径 key、drive/UNC/file URI，同时允许 page/line/byte locator 与 HTTPS source URL。Select 结果拒绝 `summary_input`，transcript bindings 必须与 selected evidence ID 精确相等。
 - skip 只有 complete coverage + 零 evidence 才成立；summary_not_needed 必须零 model/draft；completed summary 必须同语种、`translate=false` 且 citation/role 通过现有 validator。合同层不调用 Worker、reader、provider/model 或 catalog。
 - Ruff、C901 `<=10`、strict mypy 全绿；三次 `C:\cwt\m3-e4-contract-*` 根均精确清理。下一步 E4.2 先写一致性 execution snapshot/context RED tests。
+
+## Session: Phase E / E4.2 consistent execution snapshot（2026-09-28）
+
+- 按计划先写 context/snapshot RED tests；模块缺失时 collection 失败，首轮实现 **11 passed / 2 failed**。失败揭示两个夹具错误：duplicate dependency 已在 snapshot 构造边界被拒绝，以及 malformed payload 夹具同时漂移了 job/event hash。拆分单一风险后聚焦 **13 passed**。
+- 新增 `execution_snapshot.py` 与 `execution_context.py`：一个 Store read transaction 绑定 gate generation、完整 claimed job/attempt、event identity 和全部直接 dependency 的最新成功 `HandlerResult`；context 冻结 JSON，按 job type 精确约束 dependency set，并暴露 heartbeat checkpoint。
+- Worker/HandlerExecutor 已一次性改为 typed `JobExecutionContext`。Supervisor/multiprocess 首轮 **28 passed / 1 failed**，定位到旧测试 helper 在同一 source revision 为下游新建第二个 event，违反既有 event natural key；helper 改为复用父 event 后 **29 passed**，没有放宽生产唯一性。
+- 增加数据库可落库但领域非法的 runtime gate 时间戳用例，验证模型异常统一映射为 `ExecutionSnapshotError`；非法 desired state 本身已经由 SQLite CHECK 在写入边界拒绝。
+- 最终节点门覆盖全部 automation unit、双连接 race、真实 multiprocess、CLI、Store boundary 与 E4.1 contracts，共 **244 passed in 42.93s**。strict mypy（4 个边界模块）、Ruff、C901 `<=10`、config doctor、diff check 全绿；独立测试根均清理。
+- 此步未接 reader、provider、model 或 catalog，未写 production raw/catalog/runtime。下一步 E4.3 先用 RED tests 将 source revision 唯一映射为 select→summarize、select+summarize→verify 三阶段 DAG，并移除旧 normalize/analyze 映射。
