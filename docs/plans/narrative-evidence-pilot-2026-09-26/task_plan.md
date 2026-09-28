@@ -292,6 +292,7 @@ company-wiki 只负责来源、解析质量、证据定位、检索和来源摘�
 - [x] 完成 Phase D provider/transcript adapter、失败矩阵与 fake subprocess E2E；保留真实 E-T HTML material 语义阻断到 Phase F。
 - [x] 完成 Phase E/E0 fail-closed baseline 与 E1 Automation DB v2、原子 Store、Worker/Outbox fencing。
 - [x] 完成 E2 原子 DAG materialization、依赖结果门、双向 legacy/AUTO interlock 与 destructive prune dry-run 收口；E-A 集中审查最终 **229 passed**。
-- [ ] 按冻结施工卡进入 E3：先写 Supervisor/worker-process 的 spawn、profile、heartbeat、崩溃恢复与 bounded shutdown RED tests，再实现真正的多文档进程并发。
+- [x] 按冻结施工卡完成 E3：Windows `spawn` 的 P1/P2/P4 有界进程拓扑、compute/model 硬隔离、per-attempt heartbeat、数据库租约恢复、父进程强杀自退出、bounded shutdown 与跨重启有界日志均已先红后绿；真实 P2 证明两份不同 source 同时执行，同 source downstream 不越过依赖。
+- [ ] 进入 E4 Narrative handlers：先冻结 `JobExecutionContext` 与 dependency-result 读取合同，再把 Phase C selector、Phase D transcript material/权限门和 deterministic fake/replay summarizer 接成 `select→summarize→verify`，不在 handler 暴露永久路径、不翻译、不写 catalog。
 
-**Status:** Phase E/E2 与 E-A complete；E3 pending，production Worker 仍 paused。
+**Status:** Phase E/E3 complete；E4 pending，production Worker 仍 paused。

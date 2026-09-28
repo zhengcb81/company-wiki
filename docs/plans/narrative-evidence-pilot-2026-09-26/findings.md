@@ -337,7 +337,7 @@
 - Outbox 外键指向 Effect，但现有 success path 未持久化 Effect 就写 Outbox。真正的完成协议应当把 attempt 完成、Effect、Outbox 和 job→VERIFYING 放在同一 AUTO transaction；catalog 可见后再由 projector fencing ACK 并把 job 置 SUCCEEDED。
 - pause 要阻止的不只是新 claim，还包括旧执行者的 heartbeat、finish 和 publish。JSON 状态单独检查不能与数据库提交线性化；AUTO v2 需要持久 generation，attempt 记录领取代际，projector 与 pause 还要共享短时 catalog operation lock。
 - 旧 SourceCatalogWorker 把解析、LLM、导出和 destructive prune 放在一个高复杂 cycle 中，不适合继续演化为并发内核。最小风险路线是保持其 paused，关闭自动 apply prune，以新的 AutomationStore/worker processes 驱动 narrow narrative jobs。
-- 多文档并发使用进程，模型并发固定为 1；唯一允许的线程是每个执行进程的 Store heartbeat，它不触碰 LLMClient。这既满足 Windows/非线程安全 client 约束，也让不同文档的 parser/模型等待可以流水线重叠。
+- 多文档并发使用进程，模型并发固定为 1；唯一接触持久执行状态的辅助线程是每个执行进程的 Store heartbeat，它不触碰 LLMClient。E3 的真实父进程强杀试验证明还需要一个无状态 parent watchdog；它只检查父进程存活，不访问 Store、handler、catalog 或 LLM。这既满足 Windows/非线程安全 client 约束，也让不同文档的 parser/模型等待可以流水线重叠。
 - 叙述流水线无需五个以上持久 job。Phase C 的结构扫描和选择已经按小模块拆开，可在一个 select job 内编排；summarize 和 verify 分开以隔离 LLM 重试；publication 由 outbox projector 承担。三 job DAG 降低状态数，同时保留同文档顺序与跨文档并发。
 - 旧 `artifacts` 会按 `(document, role, generator, version)` 更新同一行，无法保存同一 document 的多个 source/policy 版本。只为 narrative bundle 建窄的 immutable version registry 比重建 generic artifact 系统更小，也比复用 legacy upsert 更可审计；旧 artifacts 暂作兼容 projection，不复制最终 bundle。
 - Phase E 的长期派生只需一个 compact content-addressed bundle。selected evidence 和 summary candidate 在 attempt JSON 中设硬上限；skip 只存小型 coverage receipt；不生成整份 Markdown、全量 spans、逐页缓存或磁盘 BM25。这样并发不会重现 46 GiB 的“每阶段复制一份全文”。
@@ -362,3 +362,12 @@
 - 安全的 enable 写序是先设置 legacy interlock，再开启 DB gate；中途崩溃最多使两边都停。安全的 pause 写序是先关闭 DB gate并递增 generation，再持久 legacy pause/清除 marker，最后在锁外等待或强停进程。
 - `AutomationStore` 应拥有 transaction，而不必拥有所有 SQL 细节。DAG capability 被拆到 `dag_persistence.py`，只接收现有 connection；这降低 Store 增长速度，同时没有把 BEGIN/COMMIT 或部分失败恢复交给 scheduler/controller。
 - 旧 Worker 的自动 `apply=True` prune 与“原件不可丢、派生清理由 Phase G 审查”冲突，而且旧调用没有传必需的 timezone-aware `now`，异常长期被 cycle 捕获。E2 将其收口为确定性 dry-run；任何真实处置仍必须走 Phase G 逐路径清单与大节点门。
+
+## 2026-09-28 — E3 多进程恢复与 Windows 进程治理结论
+
+- 真并发应按资源属性分进程槽，而不是把线程数配置成一个整数。P2 的一个 compute + 一个 model 已用执行区间证明跨文档重叠；model slot 永远为 1，compute 在 claim 前同时校验“不持有 model client”和“不接收 `llm=True` job”。
+- child 必须在 spawn 后通过 importable factory 自建 Store、registry、executor 和 model client。把已构造 client 或 callable queue 从 parent 传入会重新引入线程安全、pickle 和隐式共享状态问题；数据库 job/attempt/lease 才是恢复事实。
+- 三个强杀窗口最终都归约为同一协议：旧 attempt 保持未完成，heartbeat 停止，lease 到期，reaper 以 `LEASE_EXPIRED` 完成旧 attempt 并使 job 可重试，新进程领取新 token。故障注入不需要写进业务 handler；Worker 的通用 lifecycle observation seam 足以在精确边界阻塞测试进程。
+- Windows 上直接 terminate 一个同时有多线程等待同一 multiprocessing Event 的 child，可能让 Event semaphore 永久锁住，反过来卡住 Supervisor shutdown。watchdog 因此不能等待共享 stop Event；它使用本地 sleep 和 parent process handle，主循环独占 stop Event 等待。
+- 有界日志不能在 worker restart 时清空，否则最需要的上一轮 crash 诊断会丢失。正确行为是每个 slot 固定 stdout/stderr 文件，写入时保留最后 N bytes，重建 writer 时裁剪并延续既有 tail。
+- Supervisor 的正常退出清理和父进程异常死亡是两种故障。前者用 signal→bounded join→terminate/kill owned children；后者需 child 自检 parent。两者都不改变 DB job 状态，后续恢复仍由 lease/reaper 决定，避免把“进程消失”误当“任务失败已提交”。

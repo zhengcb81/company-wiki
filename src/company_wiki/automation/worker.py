@@ -9,8 +9,10 @@ from __future__ import annotations
 
 import hashlib
 from datetime import datetime, timedelta, timezone
+from typing import Callable
 
 from ._clock import Clock, IDGenerator
+from .heartbeat import AttemptHeartbeat
 from .models import (
     ClaimedWork,
     HandlerError,
@@ -57,6 +59,9 @@ class Worker:
         id_gen: IDGenerator | None = None,
         lease_seconds: int = 300,
         worker_id: str = "local-worker",
+        heartbeat_interval_seconds: float | None = None,
+        allowed_job_types: tuple[str, ...] | None = None,
+        lifecycle_callback: Callable[[str, ClaimedWork], None] | None = None,
     ) -> None:
         self._store = store
         self._registry = registry
@@ -65,6 +70,14 @@ class Worker:
         self._id_gen = id_gen or IDGenerator()
         self._lease_seconds = lease_seconds
         self._worker_id = worker_id
+        self._heartbeat_interval_seconds = heartbeat_interval_seconds
+        known = set(registry.known_job_types())
+        selected = allowed_job_types or registry.known_job_types()
+        unknown = set(selected) - known
+        if unknown:
+            raise ValueError(f"allowed job types are not registered: {sorted(unknown)}")
+        self._allowed_job_types = tuple(sorted(selected))
+        self._lifecycle_callback = lifecycle_callback
 
     def process_one(self) -> bool:
         gate = self._store.read_runtime_gate()
@@ -82,10 +95,11 @@ class Worker:
             now=now,
             lease_until=_add_seconds(now, self._lease_seconds),
             expected_generation=gate.control_generation,
-            allowed_job_types=self._registry.known_job_types(),
+            allowed_job_types=self._allowed_job_types,
         )
         if claimed is None:
             return False
+        self._notify("claimed", claimed)
         self._execute_and_finish(claimed)
         return True
 
@@ -93,15 +107,25 @@ class Worker:
         job = claimed.job
         attempt = claimed.attempt
         spec = self._registry.get(job.job_type)
+        heartbeat = self._heartbeat(claimed)
+        if heartbeat is not None:
+            heartbeat.start()
         try:
-            raw_result = self._executor.execute(
-                job.job_type,
-                {"job_id": job.job_id, "subject_id": job.subject_id},
-            )
-            result, target = _classify_result(raw_result, spec, attempt.attempt_no)
-        except Exception as exc:  # noqa: BLE001 - handler boundary
-            result = _handler_exception_result(exc)
-            target = JobStatus.DEAD_LETTER
+            try:
+                raw_result = self._executor.execute(
+                    job.job_type,
+                    {"job_id": job.job_id, "subject_id": job.subject_id},
+                )
+                result, target = _classify_result(raw_result, spec, attempt.attempt_no)
+            except Exception as exc:  # noqa: BLE001 - handler boundary
+                result = _handler_exception_result(exc)
+                target = JobStatus.DEAD_LETTER
+            self._notify("before_finish", claimed)
+        finally:
+            if heartbeat is not None:
+                heartbeat.stop()
+        if heartbeat is not None:
+            heartbeat.raise_if_failed()
         finished_at = self._clock.now()
         retry_at = None
         if target is JobStatus.RETRY_WAIT:
@@ -118,6 +142,22 @@ class Worker:
             retry_not_before=retry_at,
             outbox_not_before=finished_at,
         )
+        self._notify("attempt_finished", claimed)
+
+    def _heartbeat(self, claimed: ClaimedWork) -> AttemptHeartbeat | None:
+        if self._heartbeat_interval_seconds is None:
+            return None
+        return AttemptHeartbeat(
+            self._store,
+            claimed,
+            interval_seconds=self._heartbeat_interval_seconds,
+            lease_seconds=self._lease_seconds,
+            clock=self._clock,
+        )
+
+    def _notify(self, phase: str, claimed: ClaimedWork) -> None:
+        if self._lifecycle_callback is not None:
+            self._lifecycle_callback(phase, claimed)
 
     def reap_expired(self) -> int:
         return len(self._store.reap_expired_attempts(now=self._clock.now()))

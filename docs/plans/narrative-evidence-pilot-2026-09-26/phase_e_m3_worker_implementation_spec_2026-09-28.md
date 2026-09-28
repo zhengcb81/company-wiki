@@ -369,6 +369,16 @@ Gate 条件：原子性与 fencing 全绿；legacy 默认 paused；自动 destru
 
 Supervisor 不使用内存 queue 保存唯一任务事实；进程退出后以 DB lease 恢复。
 
+**E3 实施收据（2026-09-28）**
+
+- 新增 `supervisor.py`、`worker_process.py`、`heartbeat.py`：Supervisor 只管理固定进程槽并周期执行 promote/reap；子进程按 importable factory 在 `spawn` 后自建 Store、registry、executor 和可选 model client，进程间不传 client 或内存任务队列。
+- P1 为一个 mixed slot，P2 为一个 compute + 一个 model，P4 为三个 compute + 一个 model；所有 profile 最多一个可持有 model client 的 slot。compute 若持有 model client 或接收 `llm=True` job、model 若接收非 LLM job，均在 claim 前拒绝。
+- Worker 新增显式 allowed job types、attempt heartbeat 和 lifecycle observation seam；heartbeat 线程只调用 Store lease API，handler 仍在主线程执行。另有一个不接触 Store、handler 或 LLM 的 parent watchdog，仅检查父进程存活；真实测试证明没有它时，父进程在 child 处于 handler 时被强杀会留下 orphan，因此该线程作为进程治理例外保留。
+- 三个确定性强杀窗口（claim 后、handler 中、finish 前）均由 lease expiry → reap → 新 Supervisor/新 attempt 恢复；active heartbeat 防止误 reap，停止后可回收。父 Supervisor 自身被强杀时，处于 handler 的 child 会自退出。
+- 子进程 stdout/stderr 是固定字节上限的 tail log，重启保留旧 tail 而不清空；Supervisor restart budget 有界，normal stop 先 signal/join，再只终止自己创建且仍存活的 child。
+- 最终聚焦单元/真实进程测试 **29 passed in 13.79s**；全部 automation 单元、Store race、真实 multiprocess 与 store boundary 回归 **209 passed in 32.07s**。Ruff 通过，三个新边界模块 strict mypy 通过；全部 `C:/cwt/m3-e3-*` 根精确清理后 remaining=0。
+- production legacy control 仍 paused；本阶段没有创建 production Automation DB/runtime，没有接 narrative handler、projector 或真实 LLM，也没有修改 raw/catalog/RF。
+
 ### E4：Narrative handlers
 
 **注册 job**

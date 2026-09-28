@@ -594,3 +594,13 @@
 - 旧 `SourceCatalogWorker` 的 retained-evidence 周期任务从 `apply=True` 改为 `apply=False`，并以 cycle timestamp 显式构造 timezone-aware `now`；测试还暴露并修复了原本缺失的 `project_root` fallback 属性。Phase E 没有提供 destructive apply 入口。
 - 所有测试位于精确 `C:/cwt/m3-e2-*`、`m3-gate-a*` 根并在 finally 后复核为 0。production legacy control 仍 paused，runtime/automation DB/operation lock 均不存在；未运行 Supervisor、narrative handler 或 production Worker。
 - RF 阶段边界只读核对仍为本地 `fcap@ee0a82bf`，保留其既有 planning/assurance/temp dirty 内容；本项目没有修改、清理或切换 RF。下一步为 E3 Supervisor/worker-process 的真 `spawn` 多文档并发。
+
+## Session: Phase E / E3 真正的多进程执行与恢复（2026-09-28）
+
+- TDD 首轮因缺少 `automation.supervisor` 按预期在 collection 阶段失败；随后依次实现 spawn-safe runtime factory、P1/P2/P4 固定拓扑、compute/model job 路由、child-local model client、attempt heartbeat、Supervisor promote/reap/restart loop 和 bounded tail logs。旧 Worker 默认行为保持兼容，17 项原测试持续通过。
+- P2 真实 Windows `spawn` 测试让 `source.normalize` 与 `source.analyze` 两个不同 source 的 0.7 秒 handler 执行区间重叠，同时依赖该 normalize 的同 source downstream 只在前置成功并持久化结果后启动。runtime 记录证明 model slot 恰为 1，compute slot 未构造 model client。
+- claim 后、handler 中、finish 前三个强杀窗口都留下未完成 attempt；租约过期后 Store 写 `LEASE_EXPIRED`，重启 Supervisor 以第二个 attempt 完成同一 job，没有把 in-memory queue 当恢复依据。active heartbeat 经过原 lease deadline 仍阻止 reaper，child 停止后相同 attempt 可按期限回收。
+- 新增父进程强杀真实测试。要求 child 已进入无限等待 handler 后再 terminate Supervisor parent；首轮按预期失败并留下活 child，测试 `finally` 精确清理。加入无状态 parent watchdog 后 child 自退出。合并复跑又发现 watchdog 与主循环同时等待同一个 multiprocessing Event 时，硬杀可能把 semaphore 留在锁定状态并卡住 parent `stop_event.set()`；改为 watchdog 只用本地 sleep + parent handle 检查后，死锁消失。
+- 日志 writer 先有 64/512-byte 硬上限；补充 restart 红测发现构造器会清空前次 crash tail，改为保留并裁剪既有 tail。Supervisor normal stop 有界 signal/join/terminate/kill，abrupt parent 由 child watchdog 收口；restart 次数按 slot 有硬上限。
+- 最终聚焦 E3 为 **29 passed in 13.79s**；扩大到全部 automation unit、Store 双连接 race、真实 multiprocess 和 store boundary 为 **209 passed in 32.07s**。Ruff 与三个新边界模块 strict mypy 全绿，diff check 无空白错误。
+- 全部 `C:/cwt/m3-e3-*` RED/debug/green/regression 根逐一验证父目录和名称后删除，remaining=0。production Worker/control/catalog/raw 未写，真实 LLM 未调用，RF 未改。下一步 E4 先写 handler/context/dependency-result RED tests，再接 Phase C/D 既有组件。
