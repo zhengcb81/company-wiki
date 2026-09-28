@@ -1,5 +1,7 @@
 # 叙述性证据规划：执行入口
 
+> **2026-09-28 入口更新：**跨仓合主线、R4 抽象、电话会、StockWiki/IQS、E5–E7 Worker 与派生降容的当前整体顺序见[跨仓主线整合与交付总计划](cross_repo_mainline_and_delivery_plan_2026-09-28.md)。本页以下历史状态是既有试点收据；遇“当前下一步”冲突，以新总计划及 `task_plan.md` Phase 24 为准。
+
 > 2026-09-27：F0–F5 旧库退役、G1 离线选择试点和 D0 本地只读文件/引用盘点已完成各自允许范围；检索原型现含 query-local BM25 与 pilot-only raw resolver，12 件 manifest 样本 E2E 对全部已选 evidence groups 做原件重放和 SHA/locator/text 校验。最新合并回归为 12 个检索/回源单测 + 两个隔离 E2E（P06/T02 双样本链路、12 件样本 selected-anchor/raw-replay），共 **14 passed in 130.77s**；历史全绿收据为 122.56s；`ruff check` 通过。唯一 basetemp 清理后复核不存在，`tests/e2e/.runtime/` 运行前后均不存在，样本副本、package、metrics 与临时状态随 run root 清理，测试目录恢复基线。13 条摘要草稿通过引用/角色机械校验并经实施者逐条核源，但全部仍 `needs_review`。本轮 transcript 接口审计确认当前没有可调用 MCP tool，且 filing-fetch 没有 companion request/response；G1e 需先冻结独立上游接口合同。pilot resolver 不等于正式 G2 service 或共享 consumer 放行；StockWiki strict Source Provider v1 与 pilot bundle v0.2.0 不兼容，revenue-forecast G0 未通过；invest-quick-scan 仅做可选身份映射，不读取叙述包。Worker 仍暂停。
 
 > 2026-09-27 后续状态校正：earnings-transcripts 工作树现已有尚未提交的 transcript_api.py 与 transcript_tool.py。上段“只有 scraper.py CLI”是旧审计时点事实；filing-fetch 尚未接线，G1e 仍需正式合同和跨仓 E2E。来源/采购预算新增 [外部来源成本卡](provider_cost_and_capability_2026-09-27.md)，当前结论先不买订阅。

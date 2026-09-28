@@ -1,5 +1,7 @@
 # R4 位置透明数据湖优先实施卡（2026-09-27）
 
+> **2026-09-28 实物盘点校正：**跨仓并线与后续施工统一参照[跨仓总计划](../narrative-evidence-pilot-2026-09-26/cross_repo_mainline_and_delivery_plan_2026-09-28.md)。本页对 StockWiki Source Provider v1 源码、disabled 配置与 v2 reader 分支的描述是较早快照；当前 checkout 中 v1 文件/配置不存在，v2 reader 分支与 master 同 HEAD 且无实现。必须按当前树先盘历史持久引用，再开发/验收新 reader，不能复用旧快照宣称 C.local 通过。
+
 > **本页是 [R4 唯一活动编排](simplified-execution-plan.md) 的实施细化，不另建计划或审批门。** 下述旧的“RF 不必并线／company-wiki 产品代码暂停”属于并线前快照；用户现指定先并 RF、再实施抽象层。RF 远端 `main=3a69f9c5b6516ebc949d1c95bd50965f9112b7ad` 已核对，当前在独立 CWP 工作树实施以保护主树未提交改动。现有 A v0.4.2 的 A.DR/A.VR 为 `accepted_with_findings`、历史 A.AR 为 `rejected`；后续 A08 处置已解决其中多项，但旧裁决原文不改。只对当前合同与真实样本做一次增量独立审查，然后在隔离工作树实施 B；B/C 的正式路由按各自大节点 E2E 和 AR 签收。**C.local 先验基础来源 reader，不等待叙述 W5/G2a；G2a 后续复用已通过的 reader 收据，再验 selected evidence package。**
 
 ### 2026-09-27 单用户简化裁决（覆盖本页较早的“权限”措辞）

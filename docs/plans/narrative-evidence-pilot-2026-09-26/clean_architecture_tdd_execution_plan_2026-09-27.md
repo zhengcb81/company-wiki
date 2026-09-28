@@ -1,5 +1,7 @@
 # company-wiki 清洁架构与 TDD 实施总图（2026-09-27）
 
+> **2026-09-28 状态更新：**下方页首与 §13 的 E2/E3“下一步”是历史施工快照。E0–E4 已完成，生产 Worker 仍 paused；当前跨仓并主线与剩余 E5–E7、G2a、派生清理的依赖顺序见[跨仓总计划](cross_repo_mainline_and_delivery_plan_2026-09-28.md)和 `task_plan.md` Phase 24。本页 L0–L7 职责和 M1–M4 质量原则继续有效；R4 的独立 B.AR/C.local 门尚未由内部 M1 绿灯自动签收。
+
 > **状态：计划已冻结；Phase B / M1、Phase C / M2-derive、Phase D / M2-provider 及 Phase E/E0–E1 已完成，下一步实施 E2 DAG/依赖/运行门并执行 E-A 集中审查。** 本页把 R4 数据湖、叙述证据、电话会议、Worker、跨仓消费和空间治理收束成一个施工顺序。历史计划保留证据价值；发生冲突时，以本页的层次、门禁和顺序为准。company-wiki 当前没有生产流量，允许重构内部接口、模块和派生 schema；财报、公告、招股书、再融资文件、投资者关系资料和电话会议原件不得丢失。
 
 ## 1. 第一性原理与不可破坏条件

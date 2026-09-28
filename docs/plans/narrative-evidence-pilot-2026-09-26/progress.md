@@ -683,3 +683,36 @@
 - 所有临时基于 `C:\\cwt\\m3-e4-*` 的测试根均已清理（计数 0）。Production Worker 进程未运行，production executor 未注册 narrative runtime；config/raw/catalog 未纳入本次变更。
 - 同步记录本轮跨仓审计：company-wiki 当前本地 `master@b33ce932` 已包含 `fcap/r4b03/r4b06/codex-data-lake-reader/codex-transcript-companion` 支线祖先；与当前 `origin/master@f39bd5a` 相比本地 ahead 32、远端独有 0，未推送。StockWiki `master` 与 `codex/source-export-v2-reader` 都为 `f5b8526`、工作树干净，但仓库未配置 remote。RF 仍为 `fcap@ee0a82bf`，工作区存在 11 个 tracked 修改及 355 个 untracked 文件；只做分组核查，未清理或修改。RF untracked 里包含 `.planning/.../execution_runs/` 收据，后续必须先检查 PWF 引用关系再分类处置，不能一律删除。
 - 下一步遵循优先级：先把 RF 支线未提交内容逐项映射到 PWF/提交记录并完成并线方案与测试门；本轮不对 RF 作写操作。StockWiki 因本地分支已同提交、工作树干净，不需要额外文件清理。
+
+## Session: Cross-project pathless reader baseline and E2E audit (2026-09-28)
+
+- 复核当前 refs/worktrees 后更正前次状态：company-wiki 主工作树 clean、`master@43c5f4a` 比缓存 `origin/master@f39bd5a` ahead 33，列出的功能支线均为 master 祖先；StockWiki 主工作树不是 clean，reader-v2 linked worktree clean，而当前未提交 `QuickScanStore`/测试由 invest-quick-scan P00/W01 计划明确引用，应保留；RF root 和 reader 专项 worktree 均有未提交工作。
+- 按 RF 当前 `codex/revenue-source-reader` WIP 对照 company-wiki `SourceVersionReader` 和 RF 生产 adapter。旧 RF adapter 仍消费 `canonical_path` 并直接导入 company-wiki `artifact_dag`；pathless reader adapter 正在把 source identity/bytes/review 转换为现有 RevenueSourceRecord，不向记录写入物理路径。
+- 在 `C:\\cwt\\rf-source-reader-e2e-20260928` 运行 `tests/test_source_preparation_v2_cross_repo.py` 与 `tests/test_source_ref_v2_three_repo_e2e.py`：前者 **1 passed**；后者 **1 failed**，filing-fetch 真实 CLI 不认识 `--source-ref-v2`。失败定位在 FF producer/CLI 合同缺口，未触达 CWP reader；不要在 CWP 侧重复造 reader 或恢复路径耦合 fallback。
+- 另跑 RF reader WIP 五个隔离单测/合同/两仓测试文件（reader transport、record projection、source preparation、candidate binding、RF↔CWP），结果 **37 passed in 2.07s**。结合三仓 E2E 的失败，当前唯一已复现的端到端缺口位于 filing-fetch producer，不是 RF→CWP pathless open。
+- 阅读 filing-fetch 当前实现：`resolve_filing` 从 company-wiki resolve/ensure 取得结果，`_handle_from_resolution` 深验带 path 的 capture-ready handle，CLI 只输出现有 response wrapper。后续 FF v2 方案必须做显式版本化字段投影、保持 v1 默认兼容、清除嵌套路径字段，同时保留 verified identity/capture/download evidence；测试先写 v1 compatibility 与 v2 no-path/identity negatives，再做三仓真实 CLI E2E。此次未写 FF/RF/StockWiki 文件。
+- 测试前已审查夹具：所有 catalog、config、PDF 与损坏/恢复动作均位于 pytest `tmp_path`；下载未授权；`PYTHONDONTWRITEBYTECODE=1` 且禁用 pytest cache。finally 删除该专用 basetemp，复核不存在；测试前后 RF reader WIP、CWP、StockWiki 状态未被本次测试改动。
+- 待办门：复核 filing-fetch 的正式 SourceRef candidate producer 合同与实现安排；在其支持 candidate 后重跑三仓 E2E，必须覆盖真实 FF 输出、CWP 当前 read-policy/review/bytes 校验、RF RevenueSourceRecord 校验、无下载/无物理路径泄漏、raw/catalog/file hash 无变化。reader WIP 的 PWF 收据、StockWiki QuickScanStore 与 invest-quick-scan W01 身份 contract 需分别纳入跨项目同步记录。旧预审 detached worktree 的文件缺失/未跟踪 reviewer receipts 暂不清理，待完成来源及活动性分类。
+
+## Session: SourceRef v2 producer integration check (2026-09-28)
+
+- 找到现成 filing-fetch `codex/ff-source-reader-v2-20260927@90771d8` 工作树。该工作树已有 v2 candidate producer、CLI flag 与专门测试；生产 diff 范围较大，包含删除旧 transport 模块/测试，需先做调用者与 v1 兼容审查，暂不合入。
+- FF v2 定向测试首次 `20 passed, 2 skipped`，跳过原因是未提供 CWP 源路径；设置 `CWP_V2_CODE_ROOT` 与 `FILING_FETCH_V2_WIKI_SRC` 指向当前 company-wiki 后重跑 **22 passed in 7.72s**，零跳过。独立 pytest basetemp 清理并验证完成。
+- RF 三仓隔离 E2E 以真实 FF/CWP/RF 代码重跑，失败点从 FF CLI 参数进入 RF adapter 后移至时间边界：`source capture is outside published <= captured <= as_of`。测试请求 as-of 固定在 `2026-09-27`，实际运行日期为 `2026-09-28`；待核 fixture manifest 与 candidate 的实际日期字段，不能先将它归因为实现或测试，也不得放松生产时序约束。
+- 三仓 pytest basetemp `codex-three-repo-source-v2-20260928` 在 finally 中删除且已确认不存在；本次没有改 RF、FF 或 CWP 产品代码，只追加本计划的状态、发现和进度记录。
+- 日期诊断：`pytest --showlocals` 确认 `source_manifest.retrieved_at=null`，有效 capture 时间来自 FF candidate 的 `2026-09-28T18:55:58Z`，晚于测试固定的 `as_of_date=2026-09-27`。TEMP 副本只把 as-of 改为 `date.today()`、仍导入实际 RF scripts/FF/CWP 后，三仓 E2E **1 passed in 14.09s**；正式 RF 测试和产品文件均未改，正式测试仍需在对应工作树更新日期 fixture 后复验。
+- FF legacy/v2 combined regression **138 passed, 1 skipped, 39 subtests passed in 21.18s**; skip 是既有 production security-master smoke test 因本机 snapshot 缺失。旧 `source_reader_transport` 没有剩余仓内引用；v1 默认仍走 legacy `validate_handle` 与 root-policy hash gate。FF v2 整体 diff 尚待完整 code review，不能只凭定向测试并线。
+
+## Session: Reader WIP plan provenance and RF worktree inventory (2026-09-28)
+
+- 搜索 RF/FF reader worktree 内的 PWF 文件及 RF `.planning` 后，确认这两个 linked worktree 根部的 PWF 是旧通用计划，没有 reader 专项实施收据；RF 的 B10 只记录旧 metadata reader 的限度。reader WIP 的用途、合同、测试和下一步在 company-wiki 的 narrative-evidence 与 R4 rollout 计划中有明确记录，见 `findings.md` 本轮补记及两个计划文件。
+- 用 `SourceVersionReader` 的 CodeGraph 符号信息确认 CWP 已有 `query_local`、`describe_version`、`open_version` 等入口；职责是按逻辑版本查找并在使用前校验精确原文字节/当前读取策略，再交给薄消费者。RF WIP 将它投影为 RF 自有 `RevenueSourceRecord`；FF WIP 提供兼容 v1 的显式 v2 候选 CLI，不再要求消费者持有物理 root/path。
+- 纠正受限沙箱的 RF Git 误报：沙箱外只读 `git status --porcelain=v1 --untracked-files=all` 实际为 **415 行（11 修改、404 未跟踪、0 删除）**；沙箱内 6,123 行/3,778 删除不得作为恢复或清理依据。个别长路径/权限警告待精确核对。此前 `.tmp-zr408-unit*` 的 681 文件/19.55 MB 每组及 58.65 MB 合计也仅来自受限扫描，撤销可清理量判断；未删除文件。
+- 本次没有写入 RF、FF 或 StockWiki 产品/工作树文件，没有删除 RF 测试或证据。后续先按 PWF 卡片和 manifest 对 `.planning/execution_runs` 的删除/新增逐组分类；reader 集成则先审 FF 大 diff、更新 RF 的过期固定日期 fixture，再在原 RF 测试文件上重跑真实 FF→CWP→RF E2E。
+
+## Session: Cross-repository mainline and delivery plan (2026-09-28)
+
+- 使用 RF/FF/ET、StockWiki/IQS 和 CWP 各自 PWF、Git refs/工作树现状及真实局部测试交叉审计；RF 状态计数改用沙箱外只读结果 415（11 M/404 ??/0 D）。确认 RF fcap 和 CWP 旧命名支线均已进入相应主线，而 RF reader、FF SourceRef v2/companion、ET 工具和 StockWiki v2 reader 尚未并主线或尚未实现。StockWiki W01 现行测试 8 passed/10 failed；ET 聚焦 31 passed，FF companion 6 passed；这些局部结果没有被记为跨仓端到端验收。
+- 新建 `cross_repo_mainline_and_delivery_plan_2026-09-28.md`，固定 S0/G-0 基线与 R4 多根 reader、ET/FF/RF G-A、StockWiki 基础 G-B 与独立 IQS G2b、CWP 旧链/N1–N3/G-C、派生 G-D 的依赖图、逐步执行卡、单仓提交/并线方式及大节点 TDD/E2E/清理/回退门。同步 `task_plan.md` Phase 24、README、清洁架构总图和 R4 卡的过期状态指针；本次仅修改 company-wiki 规划文件。
+- 未修改任何 RF、FF、ET、StockWiki、IQS 源码或 PWF；未合并/推送分支，未读取 API key 内容，未下载或删除原文，未运行生产 Worker/派生清理。现有旧库退役收据原样保留，不把已释放的 37.630 GiB 重计入后续收益。下一轮从 S0 live refs/样本 oracle 与 G-0 的未签项开始，再按已固定 DAG 施工，不临时另定顺序。
+- 对新总计划做独立只读审查后补齐：SourceExport v2 producer、StockWiki S5b sync/weekly 实作与发布回路，G-0 scoped A/B 结论，ET `/2` 抽取字节与 CWP material hash 的区分，G1e 取前授权时序、正常文档自动 review、旧 normalized 实际字节核验，以及 G-A latest/gap/close-gap 真链矩阵。同步旧 raw 处置/空间账页首标记本轮 `Rdup=Rskip=0`。`git diff --check` 已通过；尚未运行任何新产品测试，规划文档仍待最终提交。

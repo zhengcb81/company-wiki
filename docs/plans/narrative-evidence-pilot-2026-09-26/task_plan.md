@@ -8,9 +8,11 @@
 
 ## Next Step
 
-**2026-09-28 Phase 23 重构总图：**后续实施统一按[清洁架构与 TDD 实施总图](clean_architecture_tdd_execution_plan_2026-09-27.md)的 Phase A–G / M1–M4 执行。内部代码和派生 schema 允许破坏式重构；canonical raw 原件、来源 SHA/manifest 和版本事实不得丢失。Phase B/M1、Phase C/M2-derive、Phase D/M2-provider 与 Phase E/E0–E4 已完成。按用户优先级，下一大节点先审查并推进 RF `fcap`→main 并线和跨仓抽象边界，再继续 E5–E7；company-wiki 与 StockWiki 本地并线状态见 2026-09-28 progress 收据。跨仓 consumer 和派生清理仍分别留在 Phase F/G。
+**2026-09-28 跨仓总编排（覆盖本节以下较早的“唯一下一步”与 Current Phase 快照）：**先按[跨仓主线整合与交付总计划](cross_repo_mainline_and_delivery_plan_2026-09-28.md)固定 **S0/G-0 → S2/S3/S4/S4b/G-A → S5/G-B** 的来源抽象与真实消费者门；IQS C01→StockWiki W01/W02/W03/G2b 独立推进，CWP N0/N1 可并行，随后 N2/N3/G-C、派生 G-D。RF `fcap` 已并入远端 main，不再重复合并；真正待并的是 RF reader、FF 两个重叠 WIP、ET 接口和 StockWiki 的新 reader。大节点签收前不切默认路由、不启动生产 Worker、不删除唯一原文。下方长篇 Phase 1–23 保留历史与阶段证据，不再自行定义施工顺序。
 
-**2026-09-28 最新状态（覆盖下方历史快照）：**Phase E/E4.1–E4.8 已完成；全套 E4 节点门 **420 passed in 70.65s**，Ruff/C901/strict mypy、config doctor、host guard、diff check 均通过。production Worker 保持 paused，runtime composition 尚未接入生产；短路径测试根已清零。按用户优先级，下一大节点是 RF `fcap`→main 并线和跨仓抽象边界审查；此时先完成 RF 未提交文件的用途/证据分类，保留被 PWF 引用的审计证据，只清除明确的一次性临时产物，再进入后续 Phase E5–E7。
+**2026-09-28 Phase 23 重构总图：**后续实施统一按[清洁架构与 TDD 实施总图](clean_architecture_tdd_execution_plan_2026-09-27.md)的 Phase A–G / M1–M4 执行。内部代码和派生 schema 允许破坏式重构；canonical raw 原件、来源 SHA/manifest 和版本事实不得丢失。Phase B/M1、Phase C/M2-derive、Phase D/M2-provider 与 Phase E/E0–E4 已完成。当前大节点是跨仓 pathless reader 合同验收：复用现有 RF `codex/revenue-source-reader` WIP、filing-fetch `codex/ff-source-reader-v2-20260927` WIP 与 company-wiki `SourceVersionReader`，不重复实现适配器；FF→CWP 定向集成 **22/22 通过**，FF 原有 `test_fetch_filing.py` 与新增 v2 定向组合回归 **138 passed, 1 skipped, 39 subtests passed**（唯一 skip 需要本机 production security-master snapshot）。旧 transport 在 FF 工作树内无残余代码引用；v1 默认路径仍调用 `validate_handle` 的 root-policy/路径校验，v2 是显式分支。FF 的新增 producer 仍有较大 diff，须完成全 diff 审查再考虑合入。原 RF 三仓 E2E 因固定 `as_of_date=2026-09-27` 早于实测 FF candidate capture (`2026-09-28T18:55:58Z`) 而失败；仅在 TEMP 测试副本把 as-of 改为测试日、其余三仓代码不变后，真实 FF→CWP→RF E2E **1 passed in 14.09s**。**历史下一步（已由上方跨仓总编排替代）：完成 FF v2 全 diff 与输出合同审查，确认默认 v1 golden/调用者兼容；再协调更新 RF WIP 中过期 E2E 日期夹具，并以原路径重跑三仓门。**不得为通过测试放宽 capture/published/as-of 校验。当时拟在三仓门绿后接 G2a/StockWiki；现以总编排的 S5 并行和 N3 前置为准；Worker 与空间处置继续按 Phase G 的节点顺序实施。
+
+**2026-09-28 最新状态（覆盖下方历史快照）：**Phase E/E4.1–E4.8 已完成；全套 E4 节点门 **420 passed in 70.65s**，Ruff/C901/strict mypy、config doctor、host guard、diff check 均通过。production Worker 保持 paused，runtime composition 尚未接入生产；短路径测试根已清零。RF 已提交的 `fcap@ee0a82bf` 是缓存 `origin/main@3a69f9c5` 的祖先，本地 `main` 仍落后；**沙箱外**只读 Git 盘点 RF 根工作树为 **415 条状态（11 修改、404 未跟踪、0 删除）**，个别长路径/权限警告另见 findings.md；先前沙箱内报告的 6,123 条及 3,778 删除是访问隔离造成的误报，不得据此恢复或清理文件。另有 `codex/revenue-source-reader` 未提交 WIP（3 个修改、7 个未跟踪）。filing-fetch 已有未提交 SourceRef v2 producer WIP（提交 `90771d8` 之上另有修改）；以 CWP 当前源码路径运行其 v2 定向测试为 **22 passed**。RF 三仓原测试失败原因为 as-of 固定旧日期：候选 capture 实测为 `2026-09-28T18:55:58Z`，而 `as_of_date=2026-09-27`；只修改 TEMP 副本的日期输入后真实 FF→CWP→RF 路径 **1 passed in 14.09s**，原 RF 文件未修改。三仓接口路径已实证，但 FF v2 差异仍需 v1 兼容/旧 transport 删除影响审查，RF 正式工作树测试夹具仍待更新后复验，因此尚不能接入 G2a。company-wiki `master@43c5f4a` 包含已核支线提交、本地工作树干净但比缓存远端领先 33 个提交；StockWiki 有 invest-quick-scan 计划明确引用的活动 `QuickScanStore` 未提交改动，须保留。当前阶段先审清这些既有工作与合同边界，不把仓库局部 clean 误报为跨项目集成完成。
 
 **Phase 22 阻断结论（保留证据）：**暂停 R4 consumer/跨仓接线。正式 `SourceEnsureResult.to_dict()` 输出 `acquisition`，当前 consumer/test 同步漂移到不存在的 `acquisition_result`；现有 390/88 项绿灯不能覆盖这个 producer/consumer 反例。
 
@@ -299,3 +301,15 @@ company-wiki 只负责来源、解析质量、证据定位、检索和来源摘�
 - [x] E4.8 隔离三阶段集成完成；按冻结施工卡完成隔离端到端验证及一次 E4 合并门（420 passed），runtime 尚未在 production 注册。
 
 **Status:** Phase E/E4.1–E4.8 complete；production Worker 仍 paused。下一步按总优先级审查 RF 支线并线与跨仓抽象边界。
+
+## Phase 24：跨仓主线整合与剩余施工总编排（2026-09-28）
+
+- [x] 对 CWP、RF、FF、ET、StockWiki、IQS 的当前 refs、未提交工作、PWF 收据和关键现行测试做只读交叉盘点；纠正 RF 沙箱误报（真实 11 M/404 ??/0 D）。
+- [x] 写出[跨仓总施工图](cross_repo_mainline_and_delivery_plan_2026-09-28.md)：冻结层级责任、合并分支与冲突次序、G-0/G-A/G-B/G-C/G-D 大节点真数据 E2E、TDD/回退/测试根恢复、Worker E5–E7、旧链退出和派生空间账。
+- [ ] S0/G-0：live refs、真实样本 oracle、CWP 多根 verified reader 的独立 B.AR；先确认旧 A.AR 与历史时点，不借 M1 内部门跳步。
+- [ ] S1–S4b/G-A：整理 ET WIP；FF SourceRef v2 最终净差异 → RF reader 正式夹具与三仓真测 → FF companion 真实 ET/CWP 编排，按各仓正常合主线。
+- [ ] S5/G-B 与 Q 线：CWP 先产基础 SourceExport v2，StockWiki 实作 v2 reader/CLI；S5b full sync/weekly 留 G-D 发布门。IQS C01 v2.1、StockWiki W01 修红及 W02/W03 新合同；G2b 身份线独立签收。
+- [ ] N0–N3/G-C：退出旧重复工件/全量写/研究 writer，完成 E5 projector、E6/E7/E-B、正式 selected G2a 消费；生产 Worker 在签收前 paused。
+- [ ] G-D：只对可重建派生做 scratch 与精确生产批次清理，量同卷净收益，原件/manifest 保持不变；受控发布与分仓脏树对账。
+
+**Status:** 规划已完整落盘；本阶段尚未执行任何跨仓合并、RF/StockWiki/IQS 脏树清理、生产数据删除或 Worker 开启。后续状态只在上述大节点推进时更新。

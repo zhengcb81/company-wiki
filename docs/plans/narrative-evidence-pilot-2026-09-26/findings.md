@@ -436,3 +436,52 @@
 - company-wiki 的本地 feature 支线都已是当前 `master` 祖先，但本地 master 的 32 个提交尚未推远端；StockWiki 两个本地分支同指一个 commit且干净，但没有 remote。描述为“本地并线已完成”，不能表述成“远端同步已完成”。
 - RF `fcap` 仍不是已并入 main 的状态，其工作树 dirty 内容与 `.planning/.../execution_runs/` 证据需先按 PWF 交叉引用分类。目录名像临时运行数据不构成删除依据；继续复用“commit 为主、引用到的收据保留、只删可证明的一次性临时副本”的规则。
 - source guard 是应用边界，不是底层存储 adapter。它消费 `SourceRevisionEventPayload` 与 verified reader 返回的 bytes/metadata/review，对 select 和 verify提供相同的 fail-closed identity 规则，仍不暴露 root、Path 或 catalog SQL。
+
+## 2026-09-28 — 跨仓真实 reader 合同复核（覆盖前一节的过时快照）
+
+- company-wiki `master@43c5f4a` 包含 `fcap`、`r4b03-wip`、`r4b06-wip`、data-lake-reader 与 transcript-companion 的已核提交；工作树干净，但缓存 `origin/master@f39bd5a` 落后 33 个提交。此为本地提交已汇集，不等于远端发布或消费者已集成。
+- RF 已提交 `fcap@ee0a82bf` 是缓存 `origin/main@3a69f9c5` 的祖先；本地 `main@3ce9cc4d` 未更新。RF 根工作树仍有 11 个 tracked 修改、404 个 untracked 文件；独立 `codex/revenue-source-reader@3a69f9c5` 工作树有 3 个 tracked 修改、7 个 untracked 文件，五个 RF 计划主文件中没有找到该 reader WIP 的显式收据引用。
+- company-wiki 的 `SourceVersionReader`/`source_reader_cli` 已提供按 `SourceRef` 校验后返回原件 bytes、当前 review 与 metadata 的 pathless 读取。RF reader WIP 正在调用该接口并具备两仓/三仓测试；它是现成待审实现，应复用而非在 company-wiki 重造。
+- 本轮用 company-wiki、filing-fetch、RF 实际代码运行 RF WIP 的两项隔离 E2E：RF↔CWP 真实 reader 测试 **1 passed**；FF→CWP→RF 测试 **1 failed**，失败发生在 reader 调用之前——当前 filing-fetch CLI 拒绝 RF 传入的 `--source-ref-v2`。因此 CWP pathless reader 已通过一条真实跨仓读路径，但三仓合同尚未闭环；不能以 RF/CWP 单项绿灯宣称整体通过，也不能改用物理路径回退来绕过失败。
+- 同一 RF WIP 的五个隔离单位/合同/两仓测试文件另以固定独立 basetemp 跑完 **37 passed in 2.07s**；这证明其 v2 adapter、strict receipt/bytes checks、record projection 与 RF↔CWP 当前接口可运行，但不覆盖 FF 的候选输出。专用测试根已由 `finally` 清除。
+- FF 缺口位置已定到 producer 边界：当前 `scripts/fetch_filing.py::resolve_filing` 走 company-wiki `resolve/ensure`，`_handle_from_resolution` 要求 `capture_ready` 并深度验证 pathful handle；`main()` 只输出现有 response envelope/handle，也没有 `--source-ref-v2` 参数。计划中的修复不是单纯加 parser flag：应在 FF 增加显式、版本化的 pathless candidate 投影，默认 v1 输出保持兼容；v2 仅输出精确 `SourceRef`（schema/document/source/hash/size/MIME）和 RF 已消费的身份、业务 metadata、下载/解析结果字段，禁止 `canonical_path`、root/path 或 resolution envelope 中嵌套路径泄漏。FF 内部仍按当前 capture/policy gate 验证，字节只能由 CWP 的当前 `SourceVersionReader` 按 ref/SHA/read-policy/review 打开。
+- FF v2 的最低测试门：默认 v1 golden/合同逐字不漂；v2 exact-field allowlist 与所有层级 path-leak 负例；SourceRef 与 current CWP manifest 的 identity/hash/size/MIME 一致；ambiguous/gap/policy refusal fail-closed；下载事件 `0/1` 与 resolution outcome 如实保留；实际 FF CLI→CWP reader→RF RevenueSourceRecord 三仓 E2E 通过，且断言不下载、测试原件与 catalog hash 还原、无绝对路径进入 RF 输出。不能以 mock FF 的两仓测试替代此门。
+- StockWiki 主工作树当前 `M .gitignore`、新增 `stockwiki/quick_scan_store.py` 与 `tests/test_quick_scan_store.py`。invest-quick-scan 的 P00/W01 计划和基线明确引用这两个文件，W01 回归用例尚待运行；应视为活动跨项目工作，保留并在 StockWiki/RF 变更合并前对齐身份合同。StockWiki 没有配置 remote。
+- 独立测试根 `C:\\cwt\\rf-source-reader-e2e-20260928` 已在测试后删除并验证不存在；未改 company-wiki、RF、filing-fetch 或 StockWiki 产品文件。filing-fetch 唯一 untracked 项为 `config/FMP_API_KEY.txt`，本轮未读取其内容。
+
+## 2026-09-28 — filing-fetch SourceRef v2 工作树与三仓复测
+
+- 检查发现已有 FF 工作树 `codex/ff-source-reader-v2-20260927@90771d8`，其工作树含 `fetch_filing.py`/`filing_contracts.py` 修改、旧 transport 文件与测试删除，以及新的 v2 测试；无需在 CWP 重造 producer。其差异较大（`fetch_filing.py` 742 行变更），合入前要审查 v1 默认输出兼容性、旧 transport 删除是否影响其他调用者，以及 v2 字段白名单/失败语义。
+- 首跑 FF v2 定向集成因缺少 CWP 环境变量有 2 项跳过；随后显式绑定 CWP `src/` 和仓库根，在隔离 pytest basetemp 重跑 **22 passed in 7.72s，0 skipped**。覆盖实际 CWP catalog/reader CLI 代码；临时 catalog/PDF 只在 basetemp，下载未授权，finally 后确认目录已删除。
+- 用该 FF 工作树运行 RF `test_source_ref_v2_three_repo_e2e.py`，真实执行 FF CLI→CWP verified read→RF RevenueSourceRecord，未再出现 `--source-ref-v2` 参数拒绝。测试在 RF 记录构造的 `published <= captured <= as_of` 检查失败；request 将 `as_of_date` 固定为 `2026-09-27`，本次运行日期为 `2026-09-28`。现有证据把失败定位到时间区间约束，但尚未读取失败夹具的每个日期字段，不能先定性为测试缺陷；下一步核 `source_manifest.published_date/retrieved_at` 与 FF candidate `retrieved_at`，只有确认固定 as-of 过期后才改隔离测试输入，不能改宽生产校验。
+- 端到端测试原件、catalog、损坏/恢复动作均位于专用 temp tree；脚本 `finally` 移除了 `codex-three-repo-source-v2-20260928` 并验证不存在。RF/CWP/FF 源工作树没有因测试被改写；本次只更新 CWP planning 文档。
+
+### 日期根因验证补记
+
+- 使用 `pytest --showlocals` 取得实际 candidate 日期：`source_manifest.retrieved_at = null`，RF adapter 按设计回退到 `source_candidate.retrieved_at = 2026-09-28T18:55:58Z`；`as_of_date = 2026-09-27`，违反捕获不晚于信息截止日的既有约束。没有证据显示 published date 或 raw/hash 错误；失败是三仓测试输入落后于当前运行日。
+- 为避免碰 RF 工作树，在 TEMP 下生成原 E2E 的一次性副本，仅将 request 的 as-of 改为 `date.today()`，并让该副本仍导入实际 RF scripts、FF worktree 和 CWP 源码。真实三仓路径 **1 passed in 14.09s**，证明在有效日期输入下 pathless producer→reader→RF projection 可运行。原 RF 测试及产品文件均未改；三仓 TEMP 根 finally 后已删除。
+- 结论边界：接口 E2E 的临时有效日期复跑已绿，但 RF 工作树里的正式测试仍是过期日期，不能把正式测试文件集合记为全绿。合入 FF/RF WIP 前须由对应仓的变更流程更新固定测试日期为运行时或夹具 capture 日期，并在原路径复跑；生产时序验证保持严格。
+
+### FF v1 兼容回归与删除面核查
+
+- `source_reader_transport.py` 删除后，在 FF 当前工作树内全仓搜索无 import/call 引用；其旧 transport/wiring tests 已移除，新增 candidate/DB query/CLI tests 取代对应路径。该结论限于 FF 工作树，不替代跨仓外部调用方核查。
+- `resolve_filing(source_ref_v2=False)` 仍走 `_run_legacy_filing_command`，输出兼容既有 pathful handle；`_handle_from_resolution` 的 v1 分支仍调用 `validate_handle(... policy_snapshot, expected_policy_hash)`。root policy hash 校验只从 SourceRef v2 candidate metadata validator 移出，当前 read policy 留给 CWP verified reader；没有看到 v1 默认调用被切到 v2。
+- 以 CWP 环境变量显式启用实际 CWP v2 E2E，并运行原 `tests/test_fetch_filing.py` 与新增 v2 文件，结果 **138 passed, 1 skipped, 39 subtests passed in 21.18s**。唯一跳过是既有 production security-master smoke test（本机没有生产 snapshot）；v2 相关 E2E 零跳过。以上通过的是 FF 合并边界的重点回归，不代表 FF 全仓测试或 742 行实现的代码审查已完成。
+
+## 2026-09-28 — reader WIP 的计划来源与 RF 根工作树盘点
+
+- 搜索 RF 与 FF 两个 reader linked worktree 根目录后，确认其中的 `task_plan.md/findings.md/progress.md` 是历史通用计划：RF 根计划停在 2026-08-18 的 ZR-408，FF 根计划记录旧 filing-fetch v1.3.0 六阶段；两者都没有 reader/SourceRef v2 专项收据。RF 审计目录的 B10 记录的是更早的 metadata JSON reader 收敛，并明确指出它没有接通字节交付、artifact 实读和 forecast 参数化，不能当作当前 RF adapter WIP 的计划或验收。
+- 当前 reader WIP 的明确跨仓计划与阶段证据在本仓 `narrative-evidence-pilot-2026-09-26/{task_plan.md,findings.md,progress.md}` 和 `painpoint-outcome-audit-2026-09-05/r4-data-lake-priority-rollout-2026-09-27.md`：RF adapter 以 CWP `SourceRef`/verified read 取代 `canonical_path`/CWP DAG 直连；FF v2 负责把候选投影为 pathless SourceRef，默认 v1 保持兼容；当前两支均为待审 WIP，不是已签收工作。
+- **沙箱计数纠错：**同一 RF 根工作树在受限沙箱中的 `git status` 曾列出 6,123 条、其中 3,778 条删除，这是目录访问隔离的假象；在沙箱外以只读 Git 复核，实际为 **415 条（11 修改、404 未跟踪、0 删除）**。个别长路径与权限警告仍需针对性核对，但不能由沙箱结果推断任何 `.planning/execution_runs` 证据已删除，也不能据此执行恢复或清理。RF 已提交 fcap 证据以 main 已签收的清单为准，未跟踪的 execution_runs 按 PWF 引用逐项分类。
+- 先前在受限沙箱中对 `.tmp-zr408-unit`、`-retry`、`-final` 得出的每组 681 文件/19.55 MB、合计 58.65 MB **未经沙箱外复核，撤销其清理量结论**。RF PWF 对这些精确目录有 PID 20528 停止后的清理说明；是否存在、归属、实际大小和可清理性均待独立复核，本轮没有删除 RF 文件。
+- RF reader linked worktree 仍为 `codex/revenue-source-reader@3a69f9c5`，有 3 个修改和 7 个新增文件；FF reader worktree 为 `codex/ff-source-reader-v2-20260927@90771d8`，另有修改、新增及旧 transport 文件删除。两支的目的与 CWP PWF 对得上，但具体代码审查、RF 日期 fixture 正式修复/原路径三仓复跑、RF 根证据树逐卡分类仍未完成。
+
+## 2026-09-28 — 六仓与 R4/Worker 的整合审计结论
+
+- RF 真 `origin/main@3a69f9c5b` 包含 `fcap@ee0a82bfd`；本地 `main@3ce9cc4d3` 落后 813，不能作 reader 施工基底。RF 主线整合文档 `.planning/2026-09-19-three-project-history-audit/RF_MAIN_INTEGRATION_2026-09-27.md` 明记历史 fcap 已并、沙箱状态误报。主线 `OWNER_DECISIONS.md` §43 的“有 evidence path 必有合法 fixture hash”覆盖根脏树旧 §42；真实 197 项缺 hash 仍红。404 未跟踪中约 81 个 RATCHET-FIX 属活动审查载体，须按 PWF 收据保存；`.tmp-zr408-unit*` ACL 未验，不计可回收量。
+- FF 有两个互相覆盖的 WIP：SourceRef v2 的提交 `90771d8` 引入旧 transport，但后续未提交实现已删；companion WIP 也改 `fetch_filing.py`/`filing_contracts.py`，其 `_resolved_handle` 仍依 v1 pathful `validate_handle`，工具和 CWP 包路径还猜 sibling/wiki_root。FF v2 envelope 当前把新语义标为 1.1；须先以最终净差异冻结 v2 版本和 v1 golden，再移植 companion。其现有 6 个单测把 CWP preflight/import mock 掉，不能当三仓 E2E。FF root 的 `config/FMP_API_KEY.txt` 是未跟踪秘密，不进入提交。
+- ET 本地 `main@1a48f66e` 已比缓存远端领先 4，精确期次工具/免翻译 flag 尚有 WIP；本轮只读审计聚焦 31 passed。ET provider 抽取文本的 `canonical_content_sha256/content_bytes` 与 CWP deterministic material 的 hash/字节语义可能不同，必须以独立字段/schema 与链路收据表达，不可硬等同。CWP `filing_fetch_transcript_integration_v1.md` 的“importer CLI 未完成”被当前 `task_plan.md` 后续 CLI 收据覆盖。
+- StockWiki `master` 与空 v2 reader 分支同 `f5b8526` 且无 remote；现行 checkout 缺 R4 旧文档声称的 Source Provider v1 源码/配置。IQS 历史 W02/W03 八文件/59 pass 收据在当前 StockWiki 树仅剩 W01 三文件；当前 W01 真实测试 **8 passed/10 failed**，失败与 IQS `findings.md` 五类完整性缺陷一致。IQS `master@25b8d14` 无 remote，47 M/719 ?? 多为活动 PWF 与代码；C01 合同升为 issuer/security/listing v2.1，旧收据不代表当前签收。两仓没有可直接 merge 的 StockWiki reader 成果。
+- CWP 内部 M1/M2/E0–E4 的收据属实，E4 420 passed；但 R4 A.AR 历史 rejected、B 多根/原生位置独立 AR、C.local 三方真入口尚未完成。`clean_architecture_tdd_execution_plan_2026-09-27.md` 页首/§13 仍写 E3 下一步，已过期；E5 的 artifact store/projector/reader 当前不存在。R4 S2 工件重复读取、S3 全量 MD/span 旧写、S5 研究 writer、S7 prompt-injection 同字节检查、S8 CI `|| true`、S9 StockWiki 隐式 Tavily 回退都应进入新路由退出清单，不能只验 pathless reader 就宣称整个平台完成。
+- 空间账以 F0–F5 实际净释放 **37.630 GiB** 为已完成；D0 的当前 39.744 GiB 含 raw、备份、归档、active 库和 2.632 GiB derived，不能整体视为垃圾。用户最新“原始文档不丢”在本轮解释为唯一 raw 不删，历史 D4 低价值唯一原文删除提案暂停；只估可重建派生的实际净释放，重复位置也不作为本轮目标。详细依赖与四条整合线见[跨仓总计划](cross_repo_mainline_and_delivery_plan_2026-09-28.md)。
+- 总计划复核时又确认：CWP 现行 `source_export.py` 仍是 schema 1.0.0，StockWiki v2 reader 缺少上游基础 SourceExport v2 producer，已在 S5 加 TDD；StockWiki full sync/weekly 也缺当前代码，新增 S5b 实作后才可在 G-D 放默认。ET 新 tool/api 固定不翻译，不能传不存在的 `translate=false`；G1e 取前 discover/精确候选授权/取后 admission 的真时序不可由 importer 单独证明。旧 normalized 工件必须核自身实际 SHA；正常来源缺 review 收据时应经同字节自动扫描形成 clean receipt，不能无限 blocked。
