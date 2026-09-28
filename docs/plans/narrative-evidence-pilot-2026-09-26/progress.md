@@ -665,3 +665,11 @@
 - replay 同输入 byte-identical；skip 不调用 model/review/provider。zh/en/mixed 保持语言且 `translate=false`。缺模型、缺/漂移审核票据、429/timeout、非法响应、错误 citation/role/locator 状态与 transcript `generate_summary` 权限分别映射到冻结错误码。
 - 扩展攻击面加入 duplicate JSON、超 transport cap、model path leak、provider hash drift 与 revoke，handler suite 为 **23 passed**。直接依赖组合门 **118 passed in 2.08s**；strict mypy、Ruff、C901 全绿，新增模块已进入 CI/pre-commit 范围。
 - 模型原始 response bytes 仅在单次执行内存存在，持久结果只含 response SHA 和最小模型身份。每个 transient handler attempt 只调用一次模型，重试总量由 registry `default_max_attempts=3` 与 durable Worker 控制。下一步 E4.7 先写全 locator replay、依赖漂移、post-model revoke/review drift、canonical bundle/effect idempotency RED tests。
+
+## Session: Phase E / E4.7 locator replay 与 effect intent（2026-09-28）
+
+- verify RED suite 先因模块缺失在 collection 失败。首轮实现连同 select source-guard regression 为 2 failed / 26 passed；两项分别是测试直接 canonicalize frozen MappingProxy、低价值 fixture 未执行 select 的 deferred-table completion。修正测试建模后为 28 passed，补 missing current review 后最终 **29 passed**。
+- 新共享 `narrative_source_guard.py` 将 source ref、实际 bytes SHA、read-policy、metadata 和 review snapshot 绑定从 select 中抽出，verify 复用同一端口；handler 仍看不到物理路径或 root。
+- verify 对 PDF 全量 bytes locator replay；对 transcript 重建 material 并核 original lineage、span line range、每个 byte range 与 speaker-block roundtrip。post-model prompt review 缺失/漂移和 provider revoke/hash drift 均发生在 effect 前，失败结果零 effect。
+- 成功 bundle 保留 selected evidence、validated summary、最小 lineage/versions/current action evidence；普通与 skip cap 均通过。每次成功只返回一个 deterministic `PENDING` effect，logical URN target 无 slash/backslash，after hash 等于 canonical bundle hash，无 ArtifactRef、无 catalog/object 写入。
+- 直接依赖组合门覆盖三 handler、strict contracts、PDF parser/replay、provider/material 和 verified reader，共 **157 passed in 7.37s**；strict mypy hook、Ruff、C901 全绿。下一步 E4.8 在隔离 catalog/Automation DB 中注册真实 handler factory，验证 DAG dependency snapshot、outbox pending、幂等与故障路径。

@@ -407,6 +407,15 @@ NarrativeSummaryModel.summarize(NarrativeSummaryRequest) -> NarrativeSummaryResp
 
 再实现 verify handler 和 runtime registry facade。E5 前不实现 effect apply。
 
+**E4.7 实施收据（2026-09-28）**
+
+- RED：新 verify suite 因 `automation.narrative_verify` 缺失在 collection 失败。首轮实现后 verify+select regression 为 2 failed / 26 passed；失败均为测试端对 frozen Mapping 直接 canonicalize、以及低价值 fixture 未复刻 select 的 full-table completion，修正夹具后全绿，未放宽产品合同。
+- 抽出 `narrative_source_guard.py` 供 select/verify 共享 source ref、实际 bytes SHA、read-policy、metadata 与 review snapshot 绑定，避免两个 handler 复制底层 root/路径判断。select 原有 17 项随 refactor 保持全绿。
+- verify 从同一 execution snapshot 读取 select+summary，检查 source/read-policy/metadata、parser/selector/prompt version 和 transcript policy pin；重新 open verified bytes 后再核 current prompt review 与所有实际 transcript actions。
+- PDF 对全部 selected locators 运行 bytes replay；transcript 重建 deterministic material，核 lineage、span line range、每个 original byte range，再运行 speaker-block replay。任一 locator、binding、review 或 policy 失败均零 artifact/零 effect。
+- 成功构造 canonical `NarrativeBundle`，skip 小于 16 KiB、普通 bundle 小于 1.25 MiB；恰好一个 deterministic `PENDING` effect，target 为 logical URN，`intended_after_hash` 等于 bundle canonical hash，不含物理路径，也不 apply/write catalog。
+- handler/refactor suite **29 passed**；select/summarize/contracts/parser/provider/material/reader 直接依赖组合门 **157 passed in 7.37s**。新增/改模块 strict mypy、Ruff、C901 `<=10` 全绿并纳入 CI/pre-commit。
+
 ### E4.8：隔离集成链
 
 在 `C:\cwt\m3-e4-<nonce>` 建立短根，运行：

@@ -422,3 +422,11 @@
 - prompt review 是调用时能力门。select 时通过的 snapshot 只证明当时状态；summarize 在网络前重读当前 receipt 并要求完全一致，才能覆盖 review policy 或 evidence receipt 在排队期间变化。
 - 模型的 transient retry 不应在 handler 内再包循环。一次 attempt 只发一次请求，timeout/429 返回 retryable；总次数由 durable job 的 `max_attempts` 约束，crash/lease 审计与 E3 恢复语义保持一致。
 - 对 model JSON 的严格 transport 校验和对 summary claims 的领域校验是两层边界。非法编码、重复 key、超限和路径泄漏属于 response contract；未知 citation、说话者角色混淆、空 claim 和 unstable locator 状态属于 summary validity。两者都不重试，但错误码不同，便于人工定位。
+
+## 2026-09-28 — E4.7 verify/effect 结论
+
+- verify 不能信任“select 当时能回放”。队列等待、raw/root 迁移、policy/review 变化都可能发生在 model 之后；publish effect 前必须重新打开 pinned bytes、重算 SHA、重读 metadata/review，并全量回放 locator。
+- transcript 的证据回放有两层：parser 生成的 speaker-block roundtrip 证明文本定位，selected byte binding 证明这些行仍对应同一原件 byte ranges。只做其中一层不能证明派生英文文本与 immutable original 的关系。
+- effect 幂等身份应由 logical target、canonical bundle hash 和 projector version 决定，而不是 attempt ID 或临时文件名。同一 job 重试得到同一 effect key/ID，Store/outbox 才能安全去重。
+- verify 只生成 intent，不执行 publication。把 object write/version row/ACK 放到 E5 projector 后，handler 的 locator/policy/review 失败永远保持零外部副作用，crash 恢复也只依赖 DB attempt/effect 状态。
+- source guard 是应用边界，不是底层存储 adapter。它消费 `SourceRevisionEventPayload` 与 verified reader 返回的 bytes/metadata/review，对 select 和 verify提供相同的 fail-closed identity 规则，仍不暴露 root、Path 或 catalog SQL。

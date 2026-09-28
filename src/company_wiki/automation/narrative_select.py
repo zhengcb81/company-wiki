@@ -2,9 +2,8 @@
 
 from __future__ import annotations
 
-from collections.abc import Callable, Mapping, Sequence
+from collections.abc import Callable, Sequence
 from dataclasses import dataclass
-import hashlib
 from typing import Any, Protocol
 
 from company_wiki.source_catalog.narrative_document import (
@@ -26,8 +25,6 @@ from company_wiki.source_catalog.provider_use_policy import (
 )
 from company_wiki.source_catalog.source_reader import (
     SourceReadError,
-    SourceRef,
-    VerifiedContent,
 )
 from company_wiki.source_catalog.transcript_text_extract import (
     TRANSCRIPT_MIME_TYPES,
@@ -60,18 +57,14 @@ from .narrative_contracts import (
     TranscriptByteBinding,
     TranscriptLineageValue,
 )
-
-
-class NarrativeSourceReader(Protocol):
-    def open_version(
-        self,
-        ref: SourceRef,
-        *,
-        purpose: str,
-        expected_read_policy_sha256: str | None = None,
-    ) -> VerifiedContent: ...
-
-    def describe_version(self, ref: SourceRef) -> dict[str, object]: ...
+from .narrative_source_guard import (
+    NarrativeSourceGuardError,
+    NarrativeSourceReader,
+    prompt_review_value,
+    source_ref,
+    validate_opened_identity,
+    validate_source_metadata,
+)
 
 
 class PdfBytesParser(Protocol):
@@ -125,85 +118,6 @@ def _failure(code: str, outcome: HandlerOutcome, detail: str) -> HandlerResult:
         metrics=HandlerMetrics(tokens=0, cost_usd=0.0, duration_ms=0),
         error=HandlerError(code=code, detail=detail),
     )
-
-
-def _source_ref(payload: SourceRevisionEventPayload) -> SourceRef:
-    value = payload.source_ref
-    return SourceRef(
-        document_id=value.document_id,
-        source_id=value.source_id,
-        content_sha256=value.content_sha256,
-        byte_size=value.byte_size,
-        mime_type=value.mime_type,
-        schema_version=value.schema_version,
-    )
-
-
-def _prompt_review(opened: VerifiedContent) -> PromptReviewValue:
-    if opened.review is None:
-        raise _SelectFailure(
-            "INPUT_SCHEMA_INVALID",
-            HandlerOutcome.TERMINAL_FAILURE,
-            "verified narrative read omitted its review snapshot",
-        )
-    review = opened.review
-    return PromptReviewValue.from_dict(
-        {
-            "status": review.status,
-            "source_sha256": review.source_sha256,
-            "evidence_sha256": review.evidence_sha256,
-            "policy_hash": review.policy_hash,
-            "reviewed_at": review.reviewed_at,
-        }
-    )
-
-
-def _opened_identity(
-    payload: SourceRevisionEventPayload, opened: VerifiedContent
-) -> None:
-    source = payload.source_ref
-    if (
-        opened.document_id != source.document_id
-        or opened.source_id != source.source_id
-        or opened.content_sha256 != source.content_sha256
-        or opened.byte_size != source.byte_size
-        or len(opened.data) != source.byte_size
-        or hashlib.sha256(opened.data).hexdigest() != source.content_sha256
-    ):
-        raise _SelectFailure(
-            "SOURCE_HASH_MISMATCH",
-            HandlerOutcome.TERMINAL_FAILURE,
-            "verified source identity differs from the event pin",
-        )
-    if opened.source_read_policy_sha256 != payload.expected_read_policy_sha256:
-        raise _SelectFailure(
-            "POLICY_DENIED",
-            HandlerOutcome.TERMINAL_FAILURE,
-            "source read policy differs from the event pin",
-        )
-
-
-def _metadata_identity(
-    payload: SourceRevisionEventPayload, metadata: Mapping[str, object]
-) -> None:
-    source = payload.source_ref
-    expected = {
-        "document_id": source.document_id,
-        "source_id": source.source_id,
-        "content_sha256": source.content_sha256,
-        "byte_size": source.byte_size,
-        "mime_type": source.mime_type,
-        "title": payload.source_metadata.title,
-        "document_kind": payload.source_metadata.document_kind,
-        "language": payload.source_metadata.language,
-    }
-    actual = {key: metadata.get(key) for key in expected}
-    if actual != expected:
-        raise _SelectFailure(
-            "INPUT_SCHEMA_INVALID",
-            HandlerOutcome.TERMINAL_FAILURE,
-            "current source metadata differs from the event pin",
-        )
 
 
 def _read_error_result(error: SourceReadError) -> HandlerResult:
@@ -322,6 +236,12 @@ class NarrativeSelectHandler:
             )
         except _SelectFailure as exc:
             return _failure(exc.code, exc.outcome, exc.detail)
+        except NarrativeSourceGuardError as exc:
+            return _failure(
+                exc.code,
+                HandlerOutcome.TERMINAL_FAILURE,
+                exc.detail,
+            )
         except ProviderUsePolicyError:
             return _failure(
                 "POLICY_DENIED",
@@ -344,15 +264,15 @@ class NarrativeSelectHandler:
     def _execute(self, context: JobExecutionContext) -> HandlerResult:
         context.checkpoint()
         payload = self._payload(context)
-        ref = _source_ref(payload)
+        ref = source_ref(payload)
         opened = self._reader.open_version(
             ref,
             purpose="narrative_derivation",
             expected_read_policy_sha256=payload.expected_read_policy_sha256,
         )
-        _opened_identity(payload, opened)
-        _metadata_identity(payload, self._reader.describe_version(ref))
-        review = _prompt_review(opened)
+        validate_opened_identity(payload, opened)
+        validate_source_metadata(payload, self._reader.describe_version(ref))
+        review = prompt_review_value(opened)
         context.checkpoint()
         work = self._select(payload, opened.data, context)
         raw = self._result_dict(payload, review, work)

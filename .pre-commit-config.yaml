@@ -67,6 +67,8 @@ repos:
           src/company_wiki/automation/narrative_select.py
           src/company_wiki/automation/narrative_model.py
           src/company_wiki/automation/narrative_summarize.py
+          src/company_wiki/automation/narrative_source_guard.py
+          src/company_wiki/automation/narrative_verify.py
         language: system
         pass_filenames: false
         # Run only when one of the checked modules is staged.
@@ -87,7 +89,7 @@ repos:
           transcript_preflight_service|transcript_import_cli)|
           automation/(narrative_contracts|execution_snapshot|execution_context|
           worker|registry|planner|cli|narrative_select|narrative_model|
-          narrative_summarize))\.py$
+          narrative_summarize|narrative_source_guard|narrative_verify))\.py$
 
       - id: config-doctor
         name: config doctor (WU-7.1, mirrors CI)

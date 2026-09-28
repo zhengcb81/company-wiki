@@ -295,6 +295,7 @@ company-wiki 只负责来源、解析质量、证据定位、检索和来源摘�
 - [x] 按冻结施工卡完成 E3：Windows `spawn` 的 P1/P2/P4 有界进程拓扑、compute/model 硬隔离、per-attempt heartbeat、数据库租约恢复、父进程强杀自退出、bounded shutdown 与跨重启有界日志均已先红后绿；真实 P2 证明两份不同 source 同时执行，同 source downstream 不越过依赖。
 - [x] E4.1 strict narrative contracts、E4.2 single-snapshot `JobExecutionContext`、E4.3 三阶段 DAG、E4.4 verified bytes reader/PDF facade、E4.5 select handler 已逐片先红后绿；select 对年报/招股书/IR/transcript 做证据最小化，完整低价值文档才可 skip，parser/policy/source drift 均零 effect 失败。
 - [x] E4.6 summarize handler 完成：同语种、不翻译、selected-only prompt、current review 与 transcript `generate_summary` 独立授权、模型错误分类和原始响应不持久化均有 RED→GREEN 合同。
-- [ ] E4.7 verify/effect、E4.8 隔离三阶段集成仍待按冻结施工卡实现；完成 E4.8 后只跑一次 E4 合并门，再进入 E5 publication。
+- [x] E4.7 verify/effect 完成：全 locator/original-byte replay、post-model review/policy 复核、canonical bundle 和单一逻辑 PENDING effect 均已先红后绿；未 apply、未写 catalog。
+- [ ] E4.8 隔离三阶段集成仍待按冻结施工卡实现；完成后只跑一次 E4 合并门，再进入 E5 publication。
 
-**Status:** Phase E/E4.1–E4.6 complete；下一步 E4.7 verify/effect，production Worker 仍 paused。
+**Status:** Phase E/E4.1–E4.7 complete；下一步 E4.8 isolated integration，production Worker 仍 paused。
