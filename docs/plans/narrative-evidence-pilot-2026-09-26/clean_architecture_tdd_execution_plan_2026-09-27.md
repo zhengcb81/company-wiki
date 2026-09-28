@@ -1,6 +1,6 @@
 # company-wiki 清洁架构与 TDD 实施总图（2026-09-27）
 
-> **状态：计划已冻结；Phase B / M1、Phase C / M2-derive 与 Phase D / M2-provider 已完成，下一步先编写并冻结 Phase E / M3 Worker 详细施工卡，再实施。** 本页把 R4 数据湖、叙述证据、电话会议、Worker、跨仓消费和空间治理收束成一个施工顺序。历史计划保留证据价值；发生冲突时，以本页的层次、门禁和顺序为准。company-wiki 当前没有生产流量，允许重构内部接口、模块和派生 schema；财报、公告、招股书、再融资文件、投资者关系资料和电话会议原件不得丢失。
+> **状态：计划已冻结；Phase B / M1、Phase C / M2-derive 与 Phase D / M2-provider 已完成，Phase E / M3 的详细施工卡已冻结，下一步从 E0 可信基线开始 TDD 实施。** 本页把 R4 数据湖、叙述证据、电话会议、Worker、跨仓消费和空间治理收束成一个施工顺序。历史计划保留证据价值；发生冲突时，以本页的层次、门禁和顺序为准。company-wiki 当前没有生产流量，允许重构内部接口、模块和派生 schema；财报、公告、招股书、再融资文件、投资者关系资料和电话会议原件不得丢失。
 
 ## 1. 第一性原理与不可破坏条件
 
@@ -244,6 +244,8 @@ artifact_id = hash(source_id, source_sha256, artifact_role,
 
 ### Phase E：重构 Worker 为多文档并发、单文档有序（M3）
 
+详细文件级顺序、schema、原子 API、故障矩阵、真实数据 E2E、空间预算和两个集中审查点见 [Phase E / M3 Worker 详细施工卡](phase_e_m3_worker_implementation_spec_2026-09-28.md)。该卡覆盖下方概述；若旧 `worker_parallel_execution_plan.md` 与施工卡冲突，以施工卡为准。
+
 1. 复用唯一 `automation` job/attempt/outbox，不新建任务数据库。
 2. 先以测试固定原子 claim、lease generation、心跳、幂等 commit、outbox/reconcile 和 pause 线性化。
 3. 同一 source version 的 DAG 串行；不同 source version 用独立进程并发。每进程独立 LLMClient、临时目录和预算。
@@ -251,7 +253,7 @@ artifact_id = hash(source_id, source_sha256, artifact_role,
 5. 故障注入：worker kill、ACK 丢失、重复领取、lease 过期、提交后进程死、catalog 锁、429/超时。
 6. 1→2→4 workers 基准；只有吞吐改善且错误/峰值受控才扩级。
 
-**完成条件**：任务不丢、重复执行最多一个 accepted artifact、暂停后不再领取、重启可恢复；原件零改动。
+**完成条件**：任务不丢、同 work key 最多一个 visible source-quality artifact、暂停后不再领取或发布、重启可恢复；原件零改动。
 
 **停止条件**：需要共享非线程安全 LLMClient、长事务包住解析/LLM、重试产生多个 accepted 结果。
 
@@ -342,7 +344,7 @@ git diff --check
 
 ## 13. 当前下一步
 
-进入 **Phase E / M3 Worker 的规划冻结**：先复核现有 `worker_parallel_recovery.md`、`worker_parallel_execution_plan.md`、automation job/attempt/outbox 的真实代码和恢复语义，形成一份像 Phase D 一样可由较弱模型执行的文件级 TDD 施工卡；该施工卡单独提交后才开始实现。Phase E 不修改 revenue-forecast/filing-fetch/StockWiki，不启动生产 Worker，也不删除历史派生数据。
+按已冻结的 [Phase E / M3 Worker 详细施工卡](phase_e_m3_worker_implementation_spec_2026-09-28.md)进入 **E0 可信基线**：先修两处已被生产 review contract 淘汰的测试 helper，并增加缺失/非法控制状态默认 paused 的红测；E0 全绿后才进入 Automation DB v2 和原子 Store。E-A 通过前不实现多进程 Supervisor，E-B 通过前不建议生产 enable。Phase E 不修改 revenue-forecast/filing-fetch/StockWiki，不启动生产 Worker，也不删除历史派生数据。
 
 ### M2-provider 完成收据（2026-09-28）
 

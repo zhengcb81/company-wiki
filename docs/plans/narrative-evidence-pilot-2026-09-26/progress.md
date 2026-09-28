@@ -551,3 +551,15 @@
 - 兼容核对发现真实跨仓阻断：E-T 当前 HTML `/2` 以 provider 提取正文计算 canonical hash/size，而 CWP 以 raw 的确定性全文 material 计算。E-T 自有 fixture 实测 `543 B / 97b5...f2ca`，CWP 为 `570 B / 3cb8...8eb0`，二者不等。Phase F 必须升级 producer contract 或明确传输可验证的派生正文；不得删除 CWP 的独立 hash 校验，也不得宣称 fake provider 已证明真实 E-T 可导入。
 - 测试根收据：本轮列出的 13 个 RED/debug/full-chain 根、3 个 D7 根及 1 个 E-T 根均先校验精确名称与 `C:/cwt` 父目录后删除，remaining=0。CWP 未写生产 raw/catalog；RF 保持 `fcap@ee0a82bf` 原 dirty 状态，E-T 保持 `codex/transcript-companion-adapter@1a48f66e` 原 dirty 状态，均未被本项目修改。
 - 下一步先编写并单独提交 Phase E / M3 Worker 详细施工卡，再实施；Worker 仍 paused，46 GiB 旧派生仍未删除。
+
+## Session: Phase E / M3 Worker 实施前调查与施工卡冻结（2026-09-28）
+
+- 严格遵守“先计划后实施”：本节只读调查并新增 [Phase E / M3 Worker 详细施工卡](phase_e_m3_worker_implementation_spec_2026-09-28.md)，没有修改 Worker 产品代码、生产 catalog/raw/control、RF 或其他仓库。
+- 真实代码核查确认 Automation Worker 的 claim 由三次事务组成；attempt 完成错误地复用 insert-only `put_attempt` 且异常被吞；Effect 未插入即写 Outbox；job/effect/outbox 非原子；无 heartbeat、最新 attempt fencing 或 pause generation。现有 worker tests 只看 job 最终状态，因而会漏掉这些故障。
+- 旧 `SourceCatalogWorker.run_cycle` 仍串行 scan→normalize→fingerprint→sections→LLM→export，并包含 `prune_retired_evidence(..., apply=True)`；新并发内核明确只建在 `automation/` 上，旧 Worker 保持 paused，并在 E0/E2 先改为 fail-closed/default-paused 和关闭自动 destructive prune。
+- 现有 targeted baseline 在经校验并最终清理的 `C:\cwt\m3-plan-baseline-*` 中运行 150 项，结果 **145 passed / 5 failed**。五项均为 `test_source_catalog_worker::_review_all` 未随 mandatory `evidence_payload` 合同更新；生产 fail-closed 正确，E0 只修 helper，不放松生产 gate。同类 focus-admission helper 一并列入。
+- 复杂度只读门发现 11 个既有 C901 超限，旧 `run_cycle=34`。施工卡冻结新函数 `<=10`、不扩张旧函数，并只在 E-A（事务/安全）与 E-B（完整 M3）做集中审查。
+- 冻结架构：一个 AutomationStore 队列；Windows spawn 的 compute/model 进程；模型进程固定 1；heartbeat 线程只写 Store；每文档三个 job `select→summarize→verify`；publication 走 effect/outbox 单 writer，避免 ACK 丢失重跑模型。
+- 空间取舍：select/summary 中间结果存有上限的 attempt JSON，不生成全量 normalized 或逐页文件；verify 只生成一份内容寻址 canonical JSON bundle；低价值文档只生成小型 skip/coverage bundle。最终使用窄的 immutable `narrative_artifact_versions`，不覆写 legacy `artifacts`，不增加第二全文索引。
+- 当前 production control 仍为 `paused` 且 runtime 文件不存在。RF 阶段边界仍为 `fcap@ee0a82bfd`、`origin/main@3a69f9c5`，其既有 planning/assurance dirty 内容未触碰。
+- 下一步：单独提交本次纯规划变更；之后从 E0 测试夹具/默认暂停红测开始。E-A 通过前不写 Supervisor/narrative handler，E-B 通过前不建议生产 enable。

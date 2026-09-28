@@ -329,3 +329,16 @@
 - runtime snapshot 的 `policy_hash` 是 catalog policy pin，测试不可填任意 SHA。reader 同时按 snapshot 控制 v1/v2 metadata 可见性；把所有 flag 设 false 会关闭 legacy bridge，使刚导入 sidecar 的 fiscal period 不可见。E2E 夹具最终显式启用现行 bridge，从而保留严格 FY/Q 校验。
 - 多文档并发不能复用本阶段 test harness 的 subprocess 串联作为生产 orchestrator。provider 的 timeout/stdout cap/kill/wait 只证明边界故障可被回收；正式 job claim、lease、幂等 commit、outbox/reconcile 和 pause 线性化仍属于 Phase E automation 层。
 - synthetic transcript 很短，固定 sidecar 与 SQLite page allocation 会使派生/原件比率看起来大于 1000%；空间预算应分别报告 raw、sidecar、catalog allocation、selected bundle，并以真实长文档批次估算总体容量。不要用短 TXT 百分比否定“选择性证据代替全量切片”的 12 件真实样本结果。
+
+## 2026-09-28 — M3 Worker 实施前第一性原理结论
+
+- 当前 Automation Worker 的核心风险不是“线程数不够”，而是领取、attempt、job 状态、Effect 和 Outbox 没有形成一个事务状态机。在此基础上直接加线程/进程会扩大半领取、旧 token 覆盖和重复副作用，因此必须先实现原子 Store application operations。
+- `put_attempt` 是 insert-only 幂等 API，不能承担 finish/update。现有 Worker 构造完成后的 Attempt 再 `put_attempt`，冲突后吞异常，导致 job 可以显示 succeeded 而 attempt 仍未完成。这证明只断言 job status 的旧测试不足以验收恢复能力。
+- Outbox 外键指向 Effect，但现有 success path 未持久化 Effect 就写 Outbox。真正的完成协议应当把 attempt 完成、Effect、Outbox 和 job→VERIFYING 放在同一 AUTO transaction；catalog 可见后再由 projector fencing ACK 并把 job 置 SUCCEEDED。
+- pause 要阻止的不只是新 claim，还包括旧执行者的 heartbeat、finish 和 publish。JSON 状态单独检查不能与数据库提交线性化；AUTO v2 需要持久 generation，attempt 记录领取代际，projector 与 pause 还要共享短时 catalog operation lock。
+- 旧 SourceCatalogWorker 把解析、LLM、导出和 destructive prune 放在一个高复杂 cycle 中，不适合继续演化为并发内核。最小风险路线是保持其 paused，关闭自动 apply prune，以新的 AutomationStore/worker processes 驱动 narrow narrative jobs。
+- 多文档并发使用进程，模型并发固定为 1；唯一允许的线程是每个执行进程的 Store heartbeat，它不触碰 LLMClient。这既满足 Windows/非线程安全 client 约束，也让不同文档的 parser/模型等待可以流水线重叠。
+- 叙述流水线无需五个以上持久 job。Phase C 的结构扫描和选择已经按小模块拆开，可在一个 select job 内编排；summarize 和 verify 分开以隔离 LLM 重试；publication 由 outbox projector 承担。三 job DAG 降低状态数，同时保留同文档顺序与跨文档并发。
+- 旧 `artifacts` 会按 `(document, role, generator, version)` 更新同一行，无法保存同一 document 的多个 source/policy 版本。只为 narrative bundle 建窄的 immutable version registry 比重建 generic artifact 系统更小，也比复用 legacy upsert 更可审计；旧 artifacts 暂作兼容 projection，不复制最终 bundle。
+- Phase E 的长期派生只需一个 compact content-addressed bundle。selected evidence 和 summary candidate 在 attempt JSON 中设硬上限；skip 只存小型 coverage receipt；不生成整份 Markdown、全量 spans、逐页缓存或磁盘 BM25。这样并发不会重现 46 GiB 的“每阶段复制一份全文”。
+- 本轮 150 项基线的五个失败属于陈旧测试 helper：生产 writer 新增 mandatory evidence payload 绑定后，helper 仍只传 hash。正确修复是让 helper 生成真实合法 receipt，同时保留缺 payload 拒绝测试；放松生产合同会把测试问题变成产品缺陷。

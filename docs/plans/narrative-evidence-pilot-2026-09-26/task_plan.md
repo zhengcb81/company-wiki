@@ -10,7 +10,7 @@
 
 **2026-09-27 Phase 23 重构总图：**后续实施统一按[清洁架构与 TDD 实施总图](clean_architecture_tdd_execution_plan_2026-09-27.md)的 Phase A–G / M1–M4 执行。内部代码和派生 schema 允许破坏式重构；canonical raw 原件、来源 SHA/manifest 和版本事实不得丢失。下一步不是对 `source_operation` 做一行字段补丁，而是先完成 Phase B 的正式 producer/CLI 红测，再拆分 typed operation contract、纯 projection 和 read facade，最后以真实 latest-as-of fake-provider CLI E2E 验收。随后按生产启用顺序分解 narrative/provider/transcript 的复杂度豁免，最后才接 Worker、跨仓 consumer 和派生清理。
 
-**2026-09-28 最新状态（覆盖下方历史快照）：**Phase B/M1、Phase C/M2-derive、Phase D/M2-provider 已完成。下一步仅先编写并冻结 Phase E/M3 Worker 详细施工卡，核对 automation job/attempt/outbox、lease generation、pause/recovery 和多进程隔离的现状后再实施。Phase D 的真实 E-T 兼容仍有一个明确的 Phase F 阻断项：E-T `/2` HTML canonical text hash/size 与 CWP deterministic material 不是同一语义；fake provider 全绿不代表真实 E-T 已接通。
+**2026-09-28 最新状态（覆盖下方历史快照）：**Phase B/M1、Phase C/M2-derive、Phase D/M2-provider 已完成；[Phase E/M3 Worker 详细施工卡](phase_e_m3_worker_implementation_spec_2026-09-28.md)已完成调查并冻结，下一步先单独提交计划，再从 E0 可信基线按 TDD 实施。施工卡已把 Automation DB v2、原子 claim/heartbeat/finish/outbox、pause generation、spawn 多进程、三阶段 narrative DAG、单 catalog projector、11 个恢复场景、四类真实文档 E2E、P1/P2/P4 benchmark 和空间上限写成文件级步骤，并将审查收敛为 E-A/E-B 两个大节点。Phase D 的真实 E-T 兼容仍有一个明确的 Phase F 阻断项：E-T `/2` HTML canonical text hash/size 与 CWP deterministic material 不是同一语义；fake provider 全绿不代表真实 E-T 已接通。
 
 **Phase 22 阻断结论（保留证据）：**暂停 R4 consumer/跨仓接线。正式 `SourceEnsureResult.to_dict()` 输出 `acquisition`，当前 consumer/test 同步漂移到不存在的 `acquisition_result`；现有 390/88 项绿灯不能覆盖这个 producer/consumer 反例。
 
