@@ -1,6 +1,6 @@
 # Phase E / E4：Narrative handlers 详细实施规格（2026-09-28）
 
-> **状态：实施前冻结稿。** 本文件只规定 E4 的测试和实现顺序；提交本计划前不写 E4 产品代码。计划单独提交且工作树可解释后，才从 E4.1 的 RED 测试开始实施。
+> **状态：实施前冻结的施工卡，后附 E4.1–E4.8 实施收据。** 原始合同与顺序先冻结，再从 RED 测试开始实现。
 >
 > **边界：** E4 只把已完成的 verified source reader、Phase C 叙述证据选择、Phase D transcript material/权利门接入 Automation Worker。E4 不写 catalog、不发布对象、不启动生产 Worker、不访问真实付费模型、不删除 raw/旧派生、不修改 revenue-forecast、filing-fetch、StockWiki 或 earnings-transcripts。最终对象写入和单 writer projector 属于 E5。
 
@@ -431,6 +431,15 @@ NarrativeSummaryModel.summarize(NarrativeSummaryRequest) -> NarrativeSummaryResp
 
 E4 集成不替代 E6 四份真实文档/P2 并发，也不 apply projector。
 
+**E4.8 实施收据（2026-09-28）**
+
+- 新增 `automation/narrative_runtime.py` 作为显式 composition root，依赖 reader、model、catalog review loader、provider policy loader 与日期函数；只把三类 handler 注册到注入的 registrar，不创建全局状态或生产 Worker。
+- 新增 `tests/integration/test_narrative_runtime_e2e.py` 与固定 replay model fixture。使用独立临时 catalog/Automation DB 和正式 `companies/.../raw/` + `company_raw_v1` adapter；4 个隔离场景覆盖 PDF 年报、低价值 IR skip、TXT transcript、幂等 pending outbox、reader policy refusal、429/timeout、模型生成后 provider revoke。原始字节 hash 不变，skip 不调用模型，失败无 effect，Catalog 不新增 artifact/version。
+- RED 阶段先确认 runtime module 缺失；后续夹具错误定位为使用了不存在的 `earnings_call_transcript` 文档类型和不符合 company_raw 目录的 fixture。按真实契约改成 `investor_call_transcript` 及 raw 路径后，E2E 为 **4 passed**。
+- E4 合并门覆盖叙述 handlers/contracts、全部 automation unit、Store/runtime race、Windows multiprocess、provider policy、source reader、transcript material/import：**420 passed in 70.65s**。Ruff、C901、runtime strict mypy 全绿；config doctor healthy；host assumption guard `new=0`；`git diff --check` 通过。
+- runtime composition 尚未接入 CLI/production；进程检查未发现运行中的 production Worker。E4 测试及 gate 只写短根临时目录，结束后 `C:\\cwt\\m3-e4-*` 为 0；只修改本卡、CI 检查列表、runtime/test 文件，没有触及 raw、production catalog 或生产配置。
+- RF 边界只读复核保持 `fcap@ee0a82bf`，其既存工作区改动未触碰。详见本计划 progress 的跨仓状态核对。
+
 ## 8. 测试门与审查节奏
 
 E4 完成时只跑以下合并门：
@@ -479,4 +488,4 @@ E4 完成时只跑以下合并门：
 - [x] RF 当前仍 `fcap@ee0a82bfd1ee`、`origin/main@3a69f9c5b651`，既存 dirty planning/assurance 内容只读未碰；
 - [x] 本卡先于 E4 产品代码建立；
 - [x] 本卡随纯规划变更单独提交且工作树可解释；
-- [ ] 从 E4.1 RED 开始实现，不跳到 handler happy path。
+- [x] 从 E4.1 RED 开始实现，不跳到 handler happy path；E4.1–E4.8 均完成。

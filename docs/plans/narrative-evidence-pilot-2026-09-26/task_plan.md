@@ -8,9 +8,9 @@
 
 ## Next Step
 
-**2026-09-28 Phase 23 重构总图：**后续实施统一按[清洁架构与 TDD 实施总图](clean_architecture_tdd_execution_plan_2026-09-27.md)的 Phase A–G / M1–M4 执行。内部代码和派生 schema 允许破坏式重构；canonical raw 原件、来源 SHA/manifest 和版本事实不得丢失。Phase B/M1、Phase C/M2-derive、Phase D/M2-provider 与 Phase E 的 E0–E4.4 已按该图实施；下一步按[E4 Narrative handlers 详细实施规格](phase_e_e4_narrative_handler_implementation_spec_2026-09-28.md)从 E4.5 select handler RED tests 继续，再接 summarize/verify。跨仓 consumer 和派生清理仍分别留在 Phase F/G。
+**2026-09-28 Phase 23 重构总图：**后续实施统一按[清洁架构与 TDD 实施总图](clean_architecture_tdd_execution_plan_2026-09-27.md)的 Phase A–G / M1–M4 执行。内部代码和派生 schema 允许破坏式重构；canonical raw 原件、来源 SHA/manifest 和版本事实不得丢失。Phase B/M1、Phase C/M2-derive、Phase D/M2-provider 与 Phase E/E0–E4 已完成。按用户优先级，下一大节点先审查并推进 RF `fcap`→main 并线和跨仓抽象边界，再继续 E5–E7；company-wiki 与 StockWiki 本地并线状态见 2026-09-28 progress 收据。跨仓 consumer 和派生清理仍分别留在 Phase F/G。
 
-**2026-09-28 最新状态（覆盖下方历史快照）：**Phase E/E4.1–E4.4 已完成。verified reader 已提供 pathless `narrative_derivation` bytes/review snapshot；PDF path/bytes parse 与 replay 共用一个内核，bytes hash drift 和 temp-file fallback 均有负测。PDF/narrative **37 passed**、reader contract **25 passed**、直接消费者/真实 bytes E2E **41 passed**，reader 已进入 strict mypy CI/pre-commit。production Worker 仍 paused，narrative handlers 尚未注册进 executor。下一步 E4.5 先实现 select handler；E5 前不写 catalog，E-B 前不启用生产。
+**2026-09-28 最新状态（覆盖下方历史快照）：**Phase E/E4.1–E4.8 已完成；全套 E4 节点门 **420 passed in 70.65s**，Ruff/C901/strict mypy、config doctor、host guard、diff check 均通过。production Worker 保持 paused，runtime composition 尚未接入生产；短路径测试根已清零。按用户优先级，下一大节点是 RF `fcap`→main 并线和跨仓抽象边界审查；此时先完成 RF 未提交文件的用途/证据分类，保留被 PWF 引用的审计证据，只清除明确的一次性临时产物，再进入后续 Phase E5–E7。
 
 **Phase 22 阻断结论（保留证据）：**暂停 R4 consumer/跨仓接线。正式 `SourceEnsureResult.to_dict()` 输出 `acquisition`，当前 consumer/test 同步漂移到不存在的 `acquisition_result`；现有 390/88 项绿灯不能覆盖这个 producer/consumer 反例。
 
@@ -296,6 +296,6 @@ company-wiki 只负责来源、解析质量、证据定位、检索和来源摘�
 - [x] E4.1 strict narrative contracts、E4.2 single-snapshot `JobExecutionContext`、E4.3 三阶段 DAG、E4.4 verified bytes reader/PDF facade、E4.5 select handler 已逐片先红后绿；select 对年报/招股书/IR/transcript 做证据最小化，完整低价值文档才可 skip，parser/policy/source drift 均零 effect 失败。
 - [x] E4.6 summarize handler 完成：同语种、不翻译、selected-only prompt、current review 与 transcript `generate_summary` 独立授权、模型错误分类和原始响应不持久化均有 RED→GREEN 合同。
 - [x] E4.7 verify/effect 完成：全 locator/original-byte replay、post-model review/policy 复核、canonical bundle 和单一逻辑 PENDING effect 均已先红后绿；未 apply、未写 catalog。
-- [ ] E4.8 隔离三阶段集成仍待按冻结施工卡实现；完成后只跑一次 E4 合并门，再进入 E5 publication。
+- [x] E4.8 隔离三阶段集成完成；按冻结施工卡完成隔离端到端验证及一次 E4 合并门（420 passed），runtime 尚未在 production 注册。
 
-**Status:** Phase E/E4.1–E4.7 complete；下一步 E4.8 isolated integration，production Worker 仍 paused。
+**Status:** Phase E/E4.1–E4.8 complete；production Worker 仍 paused。下一步按总优先级审查 RF 支线并线与跨仓抽象边界。

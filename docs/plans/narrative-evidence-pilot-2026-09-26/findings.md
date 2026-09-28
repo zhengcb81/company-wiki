@@ -429,4 +429,10 @@
 - transcript 的证据回放有两层：parser 生成的 speaker-block roundtrip 证明文本定位，selected byte binding 证明这些行仍对应同一原件 byte ranges。只做其中一层不能证明派生英文文本与 immutable original 的关系。
 - effect 幂等身份应由 logical target、canonical bundle hash 和 projector version 决定，而不是 attempt ID 或临时文件名。同一 job 重试得到同一 effect key/ID，Store/outbox 才能安全去重。
 - verify 只生成 intent，不执行 publication。把 object write/version row/ACK 放到 E5 projector 后，handler 的 locator/policy/review 失败永远保持零外部副作用，crash 恢复也只依赖 DB attempt/effect 状态。
+
+## 2026-09-28 — E4.8 与跨仓 Git 状态核对
+
+- 端到端夹具必须使用 source catalog 已支持的 `investor_call_transcript` kind，以及 `companies/{entity}/raw/investor_relations/transcripts/` 正式位置；`earnings_call_transcript` 是 rights-policy content class，不是 SourceCatalog `document_kind`。沿用通用 sidecar adapter 会把未知 kind 降为 `broker_research`，因此 E4 runtime E2E 使用 `company_raw_v1`，避免绕过产品路径。
+- company-wiki 的本地 feature 支线都已是当前 `master` 祖先，但本地 master 的 32 个提交尚未推远端；StockWiki 两个本地分支同指一个 commit且干净，但没有 remote。描述为“本地并线已完成”，不能表述成“远端同步已完成”。
+- RF `fcap` 仍不是已并入 main 的状态，其工作树 dirty 内容与 `.planning/.../execution_runs/` 证据需先按 PWF 交叉引用分类。目录名像临时运行数据不构成删除依据；继续复用“commit 为主、引用到的收据保留、只删可证明的一次性临时副本”的规则。
 - source guard 是应用边界，不是底层存储 adapter。它消费 `SourceRevisionEventPayload` 与 verified reader 返回的 bytes/metadata/review，对 select 和 verify提供相同的 fail-closed identity 规则，仍不暴露 root、Path 或 catalog SQL。

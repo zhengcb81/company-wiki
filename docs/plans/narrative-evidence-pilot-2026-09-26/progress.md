@@ -673,3 +673,13 @@
 - verify 对 PDF 全量 bytes locator replay；对 transcript 重建 material 并核 original lineage、span line range、每个 byte range 与 speaker-block roundtrip。post-model prompt review 缺失/漂移和 provider revoke/hash drift 均发生在 effect 前，失败结果零 effect。
 - 成功 bundle 保留 selected evidence、validated summary、最小 lineage/versions/current action evidence；普通与 skip cap 均通过。每次成功只返回一个 deterministic `PENDING` effect，logical URN target 无 slash/backslash，after hash 等于 canonical bundle hash，无 ArtifactRef、无 catalog/object 写入。
 - 直接依赖组合门覆盖三 handler、strict contracts、PDF parser/replay、provider/material 和 verified reader，共 **157 passed in 7.37s**；strict mypy hook、Ruff、C901 全绿。下一步 E4.8 在隔离 catalog/Automation DB 中注册真实 handler factory，验证 DAG dependency snapshot、outbox pending、幂等与故障路径。
+
+## Session: Phase E / E4.8 隔离端到端与合并门（2026-09-28）
+
+- 按先 RED 后 GREEN 建立 E4.8 隔离链。缺失 `narrative_runtime` 时 collection 失败；实现 runtime composition 后暴露两类测试夹具问题：transcript 文档类型误写为 `earnings_call_transcript`（正式类型为 `investor_call_transcript`），以及文件未按 company_raw 的 `companies/.../raw/` 结构放置。修正为正式 sidecar/目录合同后，运行时集成 **4 passed**。
+- `narrative_runtime.py` 显式注入 reader、model、prompt review 与 provider policy；Catalog review 只投影成 strict `PromptReviewValue`。runtime factory 只把三 handler 注册到传入 executor，未在 CLI/production 接线。
+- 综合 E4 节点门共 **420 passed in 70.65s**：narrative handlers/contracts、automation unit、Store/runtime races、multiprocess、provider/source reader/transcript contracts。Ruff、C901、strict mypy 通过；config doctor healthy；host assumption guard 新违规为 0；diff check 通过。
+- 四种主路径的 E2E 使用隔离 catalog/Automation DB：年报摘要、低价值 IR skip、原始 TXT transcript、model 429/timeout、reader refusal、生成后 provider revoke、重复 materialize 幂等、pending outbox 只留 intent。检查 raw 字节 hash 未变，catalog artifact 数不变；E4 不 apply effect。
+- 所有临时基于 `C:\\cwt\\m3-e4-*` 的测试根均已清理（计数 0）。Production Worker 进程未运行，production executor 未注册 narrative runtime；config/raw/catalog 未纳入本次变更。
+- 同步记录本轮跨仓审计：company-wiki 当前本地 `master@b33ce932` 已包含 `fcap/r4b03/r4b06/codex-data-lake-reader/codex-transcript-companion` 支线祖先；与当前 `origin/master@f39bd5a` 相比本地 ahead 32、远端独有 0，未推送。StockWiki `master` 与 `codex/source-export-v2-reader` 都为 `f5b8526`、工作树干净，但仓库未配置 remote。RF 仍为 `fcap@ee0a82bf`，工作区存在 11 个 tracked 修改及 355 个 untracked 文件；只做分组核查，未清理或修改。RF untracked 里包含 `.planning/.../execution_runs/` 收据，后续必须先检查 PWF 引用关系再分类处置，不能一律删除。
+- 下一步遵循优先级：先把 RF 支线未提交内容逐项映射到 PWF/提交记录并完成并线方案与测试门；本轮不对 RF 作写操作。StockWiki 因本地分支已同提交、工作树干净，不需要额外文件清理。

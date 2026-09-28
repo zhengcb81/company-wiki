@@ -12,8 +12,8 @@ repos:
         entry: ruff check
         language: system
         types: [python]
-        # CI scope: ruff check src tests/unit tests/contract tests/e2e scripts
-        files: ^(src/|tests/unit/|tests/contract/|tests/e2e/|scripts/).*\.py$
+        # CI scope plus the narrative runtime integration fixture and its model port.
+        files: ^(src/|tests/unit/|tests/contract/|tests/e2e/|scripts/).*\.py$|^tests/integration/test_narrative_runtime_e2e\.py$|^tests/support/narrative_model_fixture\.py$
 
       - id: mypy-contract
         name: mypy contract modules (FC-1204-c, mirrors CI)
@@ -69,6 +69,7 @@ repos:
           src/company_wiki/automation/narrative_summarize.py
           src/company_wiki/automation/narrative_source_guard.py
           src/company_wiki/automation/narrative_verify.py
+          src/company_wiki/automation/narrative_runtime.py
         language: system
         pass_filenames: false
         # Run only when one of the checked modules is staged.
@@ -89,7 +90,8 @@ repos:
           transcript_preflight_service|transcript_import_cli)|
           automation/(narrative_contracts|execution_snapshot|execution_context|
           worker|registry|planner|cli|narrative_select|narrative_model|
-          narrative_summarize|narrative_source_guard|narrative_verify))\.py$
+          narrative_summarize|narrative_source_guard|narrative_verify|
+          narrative_runtime))\.py$
 
       - id: config-doctor
         name: config doctor (WU-7.1, mirrors CI)
