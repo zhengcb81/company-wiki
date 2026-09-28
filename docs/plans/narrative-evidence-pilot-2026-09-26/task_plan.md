@@ -8,9 +8,9 @@
 
 ## Next Step
 
-**2026-09-27 Phase 23 重构总图：**后续实施统一按[清洁架构与 TDD 实施总图](clean_architecture_tdd_execution_plan_2026-09-27.md)的 Phase A–G / M1–M4 执行。内部代码和派生 schema 允许破坏式重构；canonical raw 原件、来源 SHA/manifest 和版本事实不得丢失。Phase B/M1、Phase C/M2-derive、Phase D/M2-provider 与 Phase E 的 E0/E1 已按该图实施；下一步是 E2 DAG materialization、依赖结果和运行门，再进入 E-A 集中审查。跨仓 consumer 和派生清理仍分别留在 Phase F/G。
+**2026-09-28 Phase 23 重构总图：**后续实施统一按[清洁架构与 TDD 实施总图](clean_architecture_tdd_execution_plan_2026-09-27.md)的 Phase A–G / M1–M4 执行。内部代码和派生 schema 允许破坏式重构；canonical raw 原件、来源 SHA/manifest 和版本事实不得丢失。Phase B/M1、Phase C/M2-derive、Phase D/M2-provider 与 Phase E 的 E0–E3 已按该图实施；下一步按[E4 Narrative handlers 详细实施规格](phase_e_e4_narrative_handler_implementation_spec_2026-09-28.md)先写 RED contracts/context tests，再接 Phase C/D 组件。跨仓 consumer 和派生清理仍分别留在 Phase F/G。
 
-**2026-09-28 最新状态（覆盖下方历史快照）：**Phase B/M1、Phase C/M2-derive、Phase D/M2-provider 与 Phase E/E0–E1 已完成；[Phase E/M3 Worker 详细施工卡](phase_e_m3_worker_implementation_spec_2026-09-28.md)已在 `77b1229` 单独提交。E1 已把 Automation DB 升为 v2，加入 paused-by-default generation gate、attempt generation 和 claim 索引；claim/heartbeat/finish/reap/effect/outbox/ACK/retry 均为 Store 单事务 application operation，Worker 不再组合旧 CRUD。迁移、Store、Worker、竞争和旧 automation 回归共 **193 passed**；修改范围 Ruff、复杂度 `<=10`、pre-commit/config/host gate 全绿。生产 Worker 仍 paused、runtime 不存在，`C:\cwt\m3-e1-*` 根为 0。下一步是 E2 DAG materialization、依赖结果与 pause 线性化，然后只做一次 E-A 集中审查。Phase D 的真实 E-T 兼容仍有一个明确的 Phase F 阻断项：E-T `/2` HTML canonical text hash/size 与 CWP deterministic material 不是同一语义；fake provider 全绿不代表真实 E-T 已接通。
+**2026-09-28 最新状态（覆盖下方历史快照）：**Phase B/M1、Phase C/M2-derive、Phase D/M2-provider 与 Phase E/E0–E3 已完成；E3 commit `005a4b0` 已实现 Windows spawn 的 P1/P2/P4、compute/model 硬隔离、heartbeat、lease 恢复、父进程强杀自退出和有界日志。聚焦测试 **29 passed**，扩大 automation 回归 **209 passed**；production Worker 仍 paused、runtime/Automation DB 不存在，所有 `C:\cwt\m3-e3-*` 根为 0。E4 已先形成独立[详细实施规格](phase_e_e4_narrative_handler_implementation_spec_2026-09-28.md)：strict source event、单 snapshot `JobExecutionContext`、三阶段 DAG、PDF bytes parser、逐动作 transcript policy、同语种无翻译摘要、path-leak/cap 和隔离 E2E 均已逐项冻结。下一步是先单独提交本计划，再从 E4.1 RED contracts/context tests 开始；E5 前不写 catalog，E-B 前不启用生产。Phase D 的真实 E-T `/2` HTML canonical text 语义漂移仍留到 Phase F，不在 E4 绕过。
 
 **Phase 22 阻断结论（保留证据）：**暂停 R4 consumer/跨仓接线。正式 `SourceEnsureResult.to_dict()` 输出 `acquisition`，当前 consumer/test 同步漂移到不存在的 `acquisition_result`；现有 390/88 项绿灯不能覆盖这个 producer/consumer 反例。
 
@@ -30,7 +30,7 @@ Phase 17 的 F0–F5 已完成。G1 离线主样本和回归集已经复跑：12
 
 ## Current Phase
 
-Phase 23：总图已进入 Phase E/M3。M1、M2-derive、M2-provider、E0 与 E1 已完成；当前实施阶段是 E2 DAG/依赖/运行门，完成后执行 E-A 事务与安全集中审查。Phase 18 的样本证据继续作为 E6 真实数据输入；跨仓 consumer 和派生清理等待 Phase F/G。
+Phase 23：总图已进入 Phase E/M3。M1、M2-derive、M2-provider、E0–E3 与 E-A 已完成；当前先冻结 E4 Narrative handlers 的执行合同，然后按 E4.1–E4.8 做 TDD 实施。Phase 18 的样本证据继续作为 E6 真实数据输入；跨仓 consumer 和派生清理等待 Phase F/G。
 
 外部来源采购补充：FMP Basic key 实测 profile/有效 SEC 检索 200，press releases/transcript dates 402；SEC 原生 API 无 key。以 246 个本地公司目录作保守分母，Basic 补充 SEC 检索约 2,076 calls/30 日，纯 SEC/IR 路径为 0 FMP calls；Koyfin 无用户 API，Seeking Alpha 个人订阅不授权自动抓取；Motley Fool 官方条款也禁止自动访问/采集，现有适配器不得接通生产。详细价格、假设、权利分级和 30 日试点见 [外部数据源与成本卡](provider_cost_and_capability_2026-09-27.md)。采购结论为先不买，且不改变 G0/G1e 门禁。
 
@@ -293,6 +293,6 @@ company-wiki 只负责来源、解析质量、证据定位、检索和来源摘�
 - [x] 完成 Phase E/E0 fail-closed baseline 与 E1 Automation DB v2、原子 Store、Worker/Outbox fencing。
 - [x] 完成 E2 原子 DAG materialization、依赖结果门、双向 legacy/AUTO interlock 与 destructive prune dry-run 收口；E-A 集中审查最终 **229 passed**。
 - [x] 按冻结施工卡完成 E3：Windows `spawn` 的 P1/P2/P4 有界进程拓扑、compute/model 硬隔离、per-attempt heartbeat、数据库租约恢复、父进程强杀自退出、bounded shutdown 与跨重启有界日志均已先红后绿；真实 P2 证明两份不同 source 同时执行，同 source downstream 不越过依赖。
-- [ ] 进入 E4 Narrative handlers：先冻结 `JobExecutionContext` 与 dependency-result 读取合同，再把 Phase C selector、Phase D transcript material/权限门和 deterministic fake/replay summarizer 接成 `select→summarize→verify`，不在 handler 暴露永久路径、不翻译、不写 catalog。
+- [ ] 进入 E4 Narrative handlers：详细施工卡已冻结 strict event、单 snapshot `JobExecutionContext`、dependency result、三类结果 cap/path-leak、PDF bytes、逐动作 transcript policy、同语种 fake/replay summary 与 verify effect；计划单独提交后从 E4.1 RED tests 起步，不在 handler 暴露永久路径、不翻译、不写 catalog。
 
-**Status:** Phase E/E3 complete；E4 pending，production Worker 仍 paused。
+**Status:** Phase E/E3 complete；E4 plan frozen、implementation pending，production Worker 仍 paused。

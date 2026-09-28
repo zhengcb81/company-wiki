@@ -371,3 +371,15 @@
 - Windows 上直接 terminate 一个同时有多线程等待同一 multiprocessing Event 的 child，可能让 Event semaphore 永久锁住，反过来卡住 Supervisor shutdown。watchdog 因此不能等待共享 stop Event；它使用本地 sleep 和 parent process handle，主循环独占 stop Event 等待。
 - 有界日志不能在 worker restart 时清空，否则最需要的上一轮 crash 诊断会丢失。正确行为是每个 slot 固定 stdout/stderr 文件，写入时保留最后 N bytes，重建 writer 时裁剪并延续既有 tail。
 - Supervisor 的正常退出清理和父进程异常死亡是两种故障。前者用 signal→bounded join→terminate/kill owned children；后者需 child 自检 parent。两者都不改变 DB job 状态，后续恢复仍由 lease/reaper 决定，避免把“进程消失”误当“任务失败已提交”。
+
+## 2026-09-28 — E4 Narrative handler 实施前结论
+
+- Handler 的安全输入必须是一次一致性读取的执行快照，而不是 Worker 临时拼出的 job ID 字典。event、job、attempt、gate generation、lease token 和直接 dependency results 若来自多次独立查询，pause/retry/并发更新可能产生从未同时存在过的混合上下文。
+- verified reader 已解决“文件到底在哪个 root”的底层问题，handler 再接收 Path 会破坏这一抽象。PDF 应从 verified bytes 解析；既有 path facade 与新 bytes facade 共用同一内部 parser，不能复制一套选择规则。
+- summary prompt 不应作为 selection result 的第二份正文长期保存。EvidenceSpan 已包含模型所需的最小引用文本，prompt 可临时构造；同理 transcript 的全量 material/line map 只在一次执行内存在，持久结果只保留已选证据对应的原始 byte bindings。
+- provider 权利不是一次下载许可。对 transcript 而言，派生文本、选择证据和生成摘要是三个动作；每个 handler 必须按当前政策独立授权，verify 还要在产生 publish effect 前重验实际用过的动作，以覆盖“模型调用后政策撤销”的窗口。
+- 取消 public/private 外发分类不等于删除 prompt-injection 内容完整性检查。现有 review receipt 与 source SHA/review policy 绑定且只接受两个已审核状态；E4 应在模型外发前和 effect 前复核它，同时把来源证据放在结构化 data envelope，不能拼进固定指令。
+- `skipped_no_narrative` 是完整扫描后的业务结果，不是 parser failure 的替代状态。coverage 不完整、transcript 起始结构缺失或 locator 不可回放应进入具名 blocked/terminal 状态，防止重要文档被静默丢弃。
+- 模型配置缺失与模型响应非法是不同故障：前者在网络前进入 `MODEL_NOT_CONFIGURED` 人工阻断，后者不应重复消耗同一模型预算。429/timeout 才使用有界 retry。
+- verify job 必须直接依赖 select 和 summarize。这样最终 bundle 可从两个小型结果组合，summary 无需再次复制 selected evidence，也能用 Store snapshot 明确证明所有输入版本。
+- E4 不需要 catalog writer。verify 只生成 canonical bundle/hash 和逻辑 effect；对象原子写、immutable version row 与 ACK 恢复留给 E5，避免 handler 与 publication 再次耦合。

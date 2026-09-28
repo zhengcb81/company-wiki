@@ -381,6 +381,8 @@ Supervisor 不使用内存 queue 保存唯一任务事实；进程退出后以 D
 
 ### E4：Narrative handlers
 
+本节的逐字段合同、错误分类、TDD 次序和测试根清理细则由 [E4 Narrative handlers 详细实施规格](phase_e_e4_narrative_handler_implementation_spec_2026-09-28.md) 冻结。下方为阶段摘要；实施时如有歧义，以详细规格为准。详细规格明确取消重复持久化 `summary_input` 正文，只从 selected EvidenceSpans 临时构造模型输入，并且 transcript 只保留已选证据对应的原始 byte bindings。
+
 **注册 job**
 
 - `source.narrative_select`：`llm=False`，retryable `IO_TRANSIENT/STORE_BUSY/LEASE_LOST`，terminal `SOURCE_HASH_MISMATCH/POLICY_DENIED/RESULT_TOO_LARGE`。

@@ -604,3 +604,15 @@
 - 日志 writer 先有 64/512-byte 硬上限；补充 restart 红测发现构造器会清空前次 crash tail，改为保留并裁剪既有 tail。Supervisor normal stop 有界 signal/join/terminate/kill，abrupt parent 由 child watchdog 收口；restart 次数按 slot 有硬上限。
 - 最终聚焦 E3 为 **29 passed in 13.79s**；扩大到全部 automation unit、Store 双连接 race、真实 multiprocess 和 store boundary 为 **209 passed in 32.07s**。Ruff 与三个新边界模块 strict mypy 全绿，diff check 无空白错误。
 - 全部 `C:/cwt/m3-e3-*` RED/debug/green/regression 根逐一验证父目录和名称后删除，remaining=0。production Worker/control/catalog/raw 未写，真实 LLM 未调用，RF 未改。下一步 E4 先写 handler/context/dependency-result RED tests，再接 Phase C/D 既有组件。
+
+## Session: Phase E / E4 实施前详细设计冻结（2026-09-28）
+
+- 按用户要求先完善计划和实施细则，本轮没有写 E4 产品代码。新增 [E4 Narrative handlers 详细实施规格](phase_e_e4_narrative_handler_implementation_spec_2026-09-28.md)，把 E4 拆成 strict contracts、execution snapshot/context、registry/DAG、reader/PDF bytes、select、summarize、verify/effect、隔离集成八个 TDD slice。
+- 冻结 source revision event exact schema 和 canonical input hash；Store 必须在一个只读 snapshot 内验证 gate/generation/token/latest attempt/event/direct dependencies，再由 context factory 构造不可变 `JobExecutionContext`。HandlerExecutor 一次性迁移，不保留 dict 双接口。
+- 空间合同进一步收紧：select result 不重复保存 `summary_input` 正文；模型输入从 selected EvidenceSpans 临时构造。Transcript 只保存已选 evidence 对应的 original byte bindings，不保存整份派生文本或全部行图；model 原始响应也只留 hash。
+- transcript 权限分三次独立复核：select 要 `derive_text + select_evidence`，summarize 单独要 `generate_summary`，verify 在 effect 前重验所有实际使用过的 action 和当前 policy hash。任何下载阶段许可都不能转移。
+- 外发前继续复用现有 prompt-injection review receipt：它是来源内容完整性门，不恢复 public/private 分类。Select 记录与 source/policy 绑定的 review snapshot；summarize 在网络前、verify 在 effect 前重验，缺失或漂移均具名阻断。
+- PDF handler 不接 Path：新增 bytes parse/replay facade并与现有 path facade 共用一个内部 parser；verified reader 新增明确的 `narrative_derivation` purpose，继续重验 remediation/read policy/root/source/hash。
+- 明确三类 result cap：select 1 MiB、summary 64 KiB、bundle 1.25 MiB、skip bundle 16 KiB；递归拒绝物理路径但允许 page/line/byte locator。verify 只产生一个逻辑 effect，E5 前不写 catalog/object。
+- E4 隔离测试统一使用 `C:\cwt\m3-e4-<nonce>`，finally 做 exact-root 校验和清理；E4 结束只跑一次合并门，避免每个 helper 重复大回归。production Worker 保持 paused。
+- RF 阶段边界只读复核：仍为 `fcap@ee0a82bfd1ee`、`origin/main@3a69f9c5b651`；既存 planning/assurance/temp dirty 内容未修改、未清理、未切分支。下一步先单独提交计划，再从 E4.1 RED contract tests 开始。
