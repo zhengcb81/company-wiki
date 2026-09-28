@@ -337,6 +337,27 @@ def test_summary_result_validates_language_citations_and_translate_flag() -> Non
         NarrativeSummaryResult.from_dict({**_summary(), "translate": True})
 
 
+@pytest.mark.parametrize(
+    ("field", "invalid", "message"),
+    [
+        ("claim_type", "investment_conclusion", "claim type"),
+        ("modality", "guaranteed", "modality"),
+        ("status", "accepted", "draft status"),
+    ],
+)
+def test_summary_result_rejects_values_outside_literal_domains(
+    field: str, invalid: str, message: str
+) -> None:
+    draft = _draft()
+    if field == "status":
+        draft[field] = invalid
+    else:
+        draft["claims"][0][field] = invalid
+
+    with pytest.raises(NarrativeContractError, match=message):
+        NarrativeSummaryResult.from_dict(_summary(draft=draft))
+
+
 def test_summary_not_needed_requires_skip_and_no_model_payload() -> None:
     skipped = NarrativeSelectResult.from_dict(_selection(status="skipped_no_narrative", evidence=[]))
     summary = NarrativeSummaryResult.from_dict(_summary(status="summary_not_needed"))

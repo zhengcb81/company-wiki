@@ -406,3 +406,11 @@
 - PyMuPDF 的 path 与 stream 打开方式不同，但结构扫描、table-page 决策、unit 生成和 locator 回放必须共用一个 document parser。只新增 bytes wrapper 而复制解析循环，会使同一原件因存储形式不同产生不同证据。
 - hash 校验要发生在 `fitz.open(stream=...)` 前。reader 已验证 bytes 并不能成为 parser 的隐式前提；独立 bytes facade 的绑定校验让单元测试、未来其他 read port 和崩溃恢复都能 fail closed。
 - `source_reader.py` 原有查询/描述/verified-read 方法仍有既存复杂度债务，但本次新 purpose/review 规则已提取成窄集合与 helper，并把整个 reader 纳入 strict mypy CI/pre-commit。后续若改 reader 决策逻辑，应单列重构节点，避免在 handler slice 内顺手复制或继续堆条件。
+
+## 2026-09-28 — E4.5 select handler 结论
+
+- “reader 已核 SHA”不能成为 handler/parser 的隐式信任。执行快照之后到解析之前仍需把实际 bytes 与 event pin 再绑定；这样替换 reader port、故障注入和未来恢复路径都不能把自报 hash 当成内容事实。
+- 完整低价值 skip 需要 coverage 证明。PDF 初次选择为空但还有 deferred table pages 时，handler 必须完成表页扫描后才能 skip；结构损坏、opaque page、transcript 起始标记缺失或 locator 不能回放都应阻断人工处理。
+- transcript 的空间最小化单位是 selected binding。全量清洗文本和全量行映射只在单次 handler 内存中存在；持久结果保留选中 EvidenceSpan、对应原件 byte ranges、deterministic lineage hashes/versions 和本次动作授权证据即可。
+- policy pin 既要防配置漂移，也要执行当前撤销/有效期/动作判断。`derive_text` 与 `select_evidence` 必须分别存在；下载许可或任一单独动作不能推导另一动作。
+- strict 类型检查只有和运行时值域校验配对才安全。仅对任意字符串 `cast(Literal)` 会制造静态假绿；E4.5 将 claim type、modality、draft status 的显式 whitelist 放在 cast 前，并用三个非法输入合同测试固定该边界。

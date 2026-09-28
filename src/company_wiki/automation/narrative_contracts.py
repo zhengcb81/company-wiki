@@ -712,12 +712,45 @@ def _claim_from_dict(value: object) -> SummaryClaim:
     )
     if type(item["needs_review"]) is not bool:
         raise NarrativeContractError("summary claim needs_review must be boolean")
+    claim_type = _text(item["claim_type"], "summary claim claim type")
+    if claim_type not in {
+        "company_statement",
+        "analyst_question",
+        "editorial",
+        "uncertain",
+    }:
+        raise NarrativeContractError("summary claim type is invalid")
+    modality = _text(item["modality"], "summary claim modality")
+    if modality not in {
+        "actual",
+        "planned",
+        "forecast",
+        "question",
+        "negation",
+        "uncertain",
+    }:
+        raise NarrativeContractError("summary claim modality is invalid")
     return SummaryClaim(
         claim_id=_text(item["claim_id"], "summary claim claim_id"),
         text=_text(item["text"], "summary claim text"),
         evidence_ids=evidence_ids,
-        claim_type=_text(item["claim_type"], "summary claim claim_type"),
-        modality=_text(item["modality"], "summary claim modality"),
+        claim_type=cast(
+            Literal[
+                "company_statement", "analyst_question", "editorial", "uncertain"
+            ],
+            claim_type,
+        ),
+        modality=cast(
+            Literal[
+                "actual",
+                "planned",
+                "forecast",
+                "question",
+                "negation",
+                "uncertain",
+            ],
+            modality,
+        ),
         needs_review=item["needs_review"],
     )
 
@@ -736,7 +769,7 @@ def _draft_from_dict(value: object) -> SourceSummaryDraft:
         source_sha256=_sha(item["source_sha256"], "summary draft source_sha256"),
         language=_text(item["language"], "summary draft language"),
         claims=claims,
-        status=status,
+        status=cast(Literal["draft", "needs_review"], status),
     )
 
 

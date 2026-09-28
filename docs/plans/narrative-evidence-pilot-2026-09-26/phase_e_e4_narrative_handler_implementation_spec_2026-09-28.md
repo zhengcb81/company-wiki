@@ -362,6 +362,15 @@ NarrativeSummaryModel.summarize(NarrativeSummaryRequest) -> NarrativeSummaryResp
 
 再实现独立 select handler 和错误映射；不写 DB/catalog 文件。
 
+**E4.5 实施收据（2026-09-28）**
+
+- RED→GREEN：模块缺失先在 collection 失败；首轮实现后 15 项通过。补入策略撤销、selected-only binding 和损坏 PDF 后，损坏 PDF 用例以未捕获 `FileDataError` 精确变红（1 failed / 16 passed），增加窄 parser 错误映射后 **17 passed**。
+- handler 只接 `JobExecutionContext`、verified bytes 与注入 ports。年报、招股书、IR PDF 和 TXT/HTML transcript 均从内存处理；不接 Path、不落 temp、不写 DB/catalog/artifact/effect。打开内容重新计算 SHA，source/read-policy/metadata/provider-policy 任一漂移均 fail closed。
+- transcript select 独立要求当前 policy 同时授权 `derive_text` 与 `select_evidence`；撤销或缺任一动作均拒绝。结果只保存 selected EvidenceSpan 对应的 original byte ranges 和无正文 lineage，不保存整份 material、`summary_input` 或模型输入。
+- 完整低价值文档产生小型 `skipped_no_narrative`；parser errors、opaque/incomplete coverage 与不可回放 transcript 不得伪装成 skip。结果 cap/path leak 都在零 effect 下失败。
+- 直接依赖组合门覆盖 handler、strict contracts、PDF bytes、selector、provider policy 与 transcript material，共 **97 passed in 1.64s**。Ruff、C901 `<=10` 与 strict mypy 全绿；CI/pre-commit mypy 范围扩至 E4 automation boundary。
+- strict mypy 首次暴露 summary contract 的 `claim_type/modality/status` Literal 收窄缺失；新运行时负例先得到 2 failed / 1 passed，修复后非法投资结论型 claim、非法 modality 和 `accepted` draft status 均被合同拒绝，没有用 cast 掩盖未验证输入。
+
 ### E4.6：summarize handler
 
 先 RED 覆盖：

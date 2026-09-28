@@ -649,3 +649,11 @@
 - path 与 bytes PDF facade 共用唯一 `_parse_pdf_document`；bytes 在打开 PyMuPDF stream 前核对 SHA，replay 复用现有 parser-version/table-page/roundtrip-key 规则。monkeypatch 所有 Python temp/write API 的测试仍绿，证明应用层不落临时 PDF。
 - PDF/narrative **37 passed**，reader contract **25 passed**，reader/export 直接消费者与真实 bytes E2E **41 passed**；strict mypy、Ruff、PDF C901 `<=10`、complexity ratchet 全绿。`source_reader.py` 已加入 CI/pre-commit strict mypy 并用 targeted hook 实测。
 - 没有打开 production raw、没有新增 normalized artifact 或 catalog 写入。下一步 E4.5 先为 PDF/TXT select handler 写 success/skip/incomplete/parser/policy/checkpoint/result-cap RED tests。
+
+## Session: Phase E / E4.5 selective narrative handler（2026-09-28）
+
+- 按冻结规格先建 handler tests；模块缺失在 collection 失败，首轮实现后 15 项通过。再补 selected-only transcript binding、policy revoke 与损坏 PDF；后者先以未捕获 PyMuPDF `FileDataError` 红灯（1 failed / 16 passed），窄映射后 **17 passed**。
+- 新 `NarrativeSelectHandler` 仅从 `JobExecutionContext` 与 verified bytes 工作。PDF 在内存选择；transcript 原件经 deterministic material 后只保留被选 evidence 对应的原始 byte ranges。没有路径参数、全文副本、`summary_input`、DB/catalog 写入或 effect。
+- 年报、招股书、IR、TXT/HTML 电话会、完整低价值 skip、parser incomplete、缺逐动作授权、policy revoke、source/read-policy/metadata drift、cap/path leak 全部有显式测试。handler 重新计算 opened bytes SHA；损坏但 hash 正确的 PDF 进入 `PARSER_INCOMPLETE/BLOCKED_HUMAN`。
+- strict mypy 纳入 8 个 E4 automation boundary 模块后发现 summary contract 的三个 Literal 参数未收窄。新增运行时值域负例先得到 2 failed / 1 passed，再同时加入显式集合校验和类型收窄，避免非法 `investment_conclusion`、`guaranteed` 或 `accepted` 值进入合同。
+- 最终直接依赖组合门 **97 passed in 1.64s**；mypy hook 检查 46 个模块通过，Ruff 与 C901 全绿。所有 `C:\cwt\m3-e4-select-*` / `m3-e4-contract-*` 本轮测试根均由 `finally` 清理。下一步 E4.6 先写 replay/skip/language/prompt-review/model-error/transcript-summary-policy RED tests。

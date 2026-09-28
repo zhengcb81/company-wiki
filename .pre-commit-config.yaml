@@ -57,11 +57,20 @@ repos:
           src/company_wiki/source_catalog/transcript_material.py
           src/company_wiki/source_catalog/transcript_preflight_service.py
           src/company_wiki/source_catalog/transcript_import_cli.py
+          src/company_wiki/automation/narrative_contracts.py
+          src/company_wiki/automation/execution_snapshot.py
+          src/company_wiki/automation/execution_context.py
+          src/company_wiki/automation/worker.py
+          src/company_wiki/automation/registry.py
+          src/company_wiki/automation/planner.py
+          src/company_wiki/automation/cli.py
+          src/company_wiki/automation/narrative_select.py
         language: system
         pass_filenames: false
         # Run only when one of the checked modules is staged.
         files: >-
-          (?x)^src/company_wiki/source_catalog/
+          (?x)^src/company_wiki/
+          (source_catalog/
           (artifact_handle|source_bundle|runtime_policy|activation|close_gap|
           policy_2x|canary_registry|normalized_meta|flags|policy|restore|
           operation_contract|operation_projection|source_operation|source_reader|
@@ -73,7 +82,9 @@ repos:
           transcript_fetch_validation|transcript_tool_contract|
           transcript_admission_service|transcript_import|
           transcript_text_extract|transcript_lineage|transcript_material|
-          transcript_preflight_service|transcript_import_cli)\.py$
+          transcript_preflight_service|transcript_import_cli)|
+          automation/(narrative_contracts|execution_snapshot|execution_context|
+          worker|registry|planner|cli|narrative_select))\.py$
 
       - id: config-doctor
         name: config doctor (WU-7.1, mirrors CI)

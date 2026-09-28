@@ -293,6 +293,7 @@ company-wiki 只负责来源、解析质量、证据定位、检索和来源摘�
 - [x] 完成 Phase E/E0 fail-closed baseline 与 E1 Automation DB v2、原子 Store、Worker/Outbox fencing。
 - [x] 完成 E2 原子 DAG materialization、依赖结果门、双向 legacy/AUTO interlock 与 destructive prune dry-run 收口；E-A 集中审查最终 **229 passed**。
 - [x] 按冻结施工卡完成 E3：Windows `spawn` 的 P1/P2/P4 有界进程拓扑、compute/model 硬隔离、per-attempt heartbeat、数据库租约恢复、父进程强杀自退出、bounded shutdown 与跨重启有界日志均已先红后绿；真实 P2 证明两份不同 source 同时执行，同 source downstream 不越过依赖。
-- [ ] 进入 E4 Narrative handlers：详细施工卡已冻结 strict event、单 snapshot `JobExecutionContext`、dependency result、三类结果 cap/path-leak、PDF bytes、逐动作 transcript policy、同语种 fake/replay summary 与 verify effect；计划单独提交后从 E4.1 RED tests 起步，不在 handler 暴露永久路径、不翻译、不写 catalog。
+- [x] E4.1 strict narrative contracts、E4.2 single-snapshot `JobExecutionContext`、E4.3 三阶段 DAG、E4.4 verified bytes reader/PDF facade、E4.5 select handler 已逐片先红后绿；select 对年报/招股书/IR/transcript 做证据最小化，完整低价值文档才可 skip，parser/policy/source drift 均零 effect 失败。
+- [ ] E4.6 summarize、E4.7 verify/effect、E4.8 隔离三阶段集成仍待按冻结施工卡实现；完成 E4.8 后只跑一次 E4 合并门，再进入 E5 publication。
 
-**Status:** Phase E/E3 complete；E4 plan frozen、implementation pending，production Worker 仍 paused。
+**Status:** Phase E/E4.1–E4.5 complete；下一步 E4.6 summarize handler，production Worker 仍 paused。
