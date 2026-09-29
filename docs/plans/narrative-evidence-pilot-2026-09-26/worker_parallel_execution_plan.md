@@ -71,53 +71,31 @@ source manifest/scan（既有受控入口）
 
 遵守 `automation.models.make_job_key(job_type, subject_type, subject_id, input_hash, policy_version, handler_version)`。`subject_type='source'`，`subject_id=source_id`。`input_hash` 是以下 canonical JSON 的 SHA-256：`source_sha256, document_id, document_kind, stage, upstream_artifact_hashes, parser_version, selector_version, summary_policy_version, prompt_hash, model_id, config_hash, locator_schema_version`；无关字段按 stage 固定空值而非省略。W0 冻结 canonical 排序/编码、模型与提示词身份；任一实质变化产生新 job key，不能复用旧结果。job 仍引用触发 `event_id`，不以文件路径作为身份。
 
-### 3.3 必须先修的 AutomationStore API
+### 3.3 当前 AutomationStore 基线与 E5 缺口
 
-| API（拟新增到现有 store/worker，非新队列） | 单事务保证 | 失败返回 |
+E4 已实现原子 claim/finish 与基础 outbox，不得再按旧草案重做 API：
+
+| 当前 API | 已有保证 | E5 要补的内容 |
 |---|---|---|
-| `claim_ready(allowed_types, now, worker_id)` | `BEGIN IMMEDIATE` 中查 ready+依赖成功+not_before+暂停 gate；选优先级、创建 **下一 attempt_no/随机 lease_token**、把 job 置 RUNNING；全部一起 COMMIT | 没活返回 None；锁忙返回 `STORE_BUSY`，不吞异常 |
-| `heartbeat(job_id, attempt_no, token, now, new_until)` | 仅最新未结束 attempt、同 token、未过期、未暂停代际可延长 | `LEASE_LOST`/`PAUSED`，执行者停止提交 |
-| `finish_or_retry(...)` | 比对 job 状态+最新 attempt_no/token/有效租约；更新 attempt 的 `finished_at/outcome/result_json`、job 终态/退避、effect/outbox **同一事务** | 旧 token/重复完成有稳定 `STALE_ATTEMPT`/already_completed，不写第二结果 |
-| `reap_expired(now)` | 一次事务封存过期 attempt 并把 job 移到 retry_wait/ready；不越过 max_attempts | 不能吞掉 SQLite/disk 错误；死信可审计 |
+| `claim_next_ready(...)` | 一个 AUTO 事务领取 job、创建下一 attempt/token 并应用 runtime generation | E5 不改；E7 才讨论多文档进程数 |
+| `heartbeat_attempt(...)` / `reap_expired_attempts(...)` | 最新租约及 generation fencing；过期 attempt 回收 | E5 不改 |
+| `finish_attempt(...)` | 一个 AUTO 事务保存 attempt `result_json`、effect 与 pending outbox；有 effect 时 job 进入 `VERIFYING` | 增加按 effect 精确读取该 attempt 结果的只读 API；不能重跑 handler/LLM |
+| `claim_next_outbox(...)` / `ack_outbox(...)` / `retry_outbox(...)` | outbox lease、generation、intended/actual hash 与终态更新 | claim 增加可选 effect-type filter；新增只处理 `narrative_bundle.publish` 的 dispatcher/reconciler |
 
-当前 `automation.worker._try_claim` 分 3 次 store 调用，`_commit_success` 对已存在 attempt 的 `put_attempt` 冲突直接忽略，outbox 又是另一事务；这些实现**不得**直接投入并发。用独立单元/多进程交错测试先证明新 API，再接文档 handler。`attempt_no` 与 `lease_token` 共同充当 fencing token，旧进程即使收到迟到 LLM 响应也不能完成任务。
-
-`claim_ready` 的事务骨架须遵守现有状态机 `READY→LEASED→RUNNING`，两个状态更新与 attempt INSERT 在**同一个** `BEGIN IMMEDIATE/COMMIT` 内；依赖检查使用 `job_dependencies.required_status`，`SELECT` 排序为 `priority DESC, created_at ASC, job_id ASC`，`not_before<=now`。`finish_or_retry` 同一事务中先 `UPDATE attempts ... WHERE attempt_id=? AND lease_token=? AND finished_at IS NULL` 并确认 rowcount=1，再按状态机更新 job/effect/outbox；若 rowcount=0 即 `STALE_ATTEMPT`，不能吞异常后仍标 job succeeded。`reap_expired` 与 `claim_ready` 竞争时通过同一事务及最新 attempt 比较保证只有一个胜者。v2 索引至少覆盖 `jobs(status,not_before,priority,created_at)` 与 `attempts(job_id,attempt_no)`；保留 v1 约束/历史行，迁移需备份与版本化验收。
+CodeGraph 与现有调用图确认 `claim_next_outbox` 当前只有测试调用者，没有生产分发器；outbox payload 只序列化 Effect，不含 bundle 正文。E5 必须补 `result_for_effect(effect_id)` 的唯一性/完整性检查和窄 dispatcher，否则 job 会停留在 `VERIFYING`。其余 claim/lease/reap 测试已覆盖，不重复造队列，不在本阶段启用生产 Worker。并发阶段 E7 只协调多个文档 job，不让同一份文档跨进程并行；每个进程自建非线程安全 `LLMClient`，catalog 投影始终单 writer。
 
 ## 4. 两个数据库与文件的提交协议
 
 AUTO DB 是 job/attempt/effect 真相源，catalog DB 是来源和叙述产物真相源；SQLite 的两个 WAL 数据库不承诺跨库原子事务。使用以下**可重放 saga**，每个步骤有确定性 key：
 
-1. **prepare**：计算者把候选写到隔离目录 `temp/<job_key>/<attempt_no>/`，fsync 文件，算结果 SHA。原文读取在打开时绑定受控根内的文件身份及 raw SHA，解析后重验，避免运行中被替换。候选大小按文档类型设硬上限；超限失败关闭。AUTO 的 `effects` 用 `effect_key=job_key` 记录 `intended_after_hash` 和 pending；只记录一个逻辑 effect。此时不对读者可见。
-2. **file stage**：唯一 writer 重验 raw SHA、input hashes、结果 schema、文件大小与 SHA、路径在临时根内；不能只靠字符串 `resolved path`，须拒绝路径组件中的 junction/symlink/reparse 或按打开句柄重验文件身份，防止检查后路径被换。临时与目标尽量同卷，先写入目标目录的随机临时名、flush/fsync，再原子 rename 为 `derived/narrative/sha256/<hash>`；跨卷输入先受控复制至目标卷临时文件并重验 SHA，不能假定跨卷 rename 原子。相同哈希复用，不覆盖不同内容。Windows 文件占用/rename 失败留 retryable 状态。
-3. **catalog prepare**：writer 持短时提交互斥锁，先再次验证 Worker 暂停 gate、最新 attempt token、source_status/`primary_source_id`/raw SHA、上游 artifact 与验证结果；在单个 catalog `BEGIN IMMEDIATE` 中登记 `narrative_artifact_versions`，状态为 `prepared`。选中证据先封装在内容寻址的 package 文件内，包含可回读的 EvidenceSpan 对象；此时不写旧 `evidence_spans` 可被普通查询看到的行。重复同 `work_key+hash` 返回已有，冲突 hash 为 P1。旧 v1 `artifacts` 唯一约束不用于承载多个策略版本，避免覆写历史。
-4. **AUTO finish**：catalog prepare 成功后，AUTO `finish_or_retry` 在**同一 AUTO 事务**把 effect `verified`、attempt finished、job `succeeded` 及 export outbox `pending` 写入。此时任何下游仍为 `PLANNED`；outbox 发布器必须在发送前检查 catalog 行已经 `visible` 且源身份、SHA 仍有效，未达条件则保留 pending 或撤回。
-5. **catalog activate**：仍在短时提交互斥锁下，重读 AUTO verified effect、当前 pause generation、catalog prepared hash，以及 source_status/`primary_source_id`/raw SHA；catalog 事务把同一行标 `visible`。只有 `visible` 且验证通过的 narrative package 可被新只读接口消费。随后 coordinator 依据可见包的精确 hash/role/source，把后继 `PLANNED→READY`；这一步可重放，遗漏由 reconcile 补。若 pause 在 AUTO finish 后、activate 前生效，保持 prepared 待下一次**获授权**的恢复；若来源已 retired/替换，则转 `quarantined`、取消 outbox 和未运行下游。需要旧全文检索的 selected span 投影，只能在此事务或后续带 visible 过滤的版本化投影中生成，不能提前泄露 prepared 证据。
-6. **reconcile**：进程重启扫描未完成 effect：AUTO pending/catalog prepared 同 `work_key+hash` 且原 attempt 租约有效 → 补 finish，再 activate；租约失效则先新 claim，用相同结果哈希完成新 attempt，**不再调用模型**；AUTO verified/catalog prepared → 在非暂停且来源仍有效时补 activate，否则 quarantine/cancel；AUTO succeeded/catalog visible/后继 PLANNED → 重验源与包并补 READY；AUTO pending/catalog 无而可信文件有 → 重做 prepare；文件无 → 按有界重试重算；catalog row 与 AUTO job/hash 不符 → 保持不可见并输出 machine-readable conflict，等待输入/版本修正后重试，不把常规冲突放进人工审批队列。孤儿文件经过保留期与引用核对后再清理，不能凭路径猜测删除。
+1. **AUTO handler finish**：`NarrativeVerifyHandler` 已在 locator 全回放后把严格 `NarrativeBundle` 放入 `HandlerResult.result` 并发出一个 effect。现有 `AutomationStore.finish_attempt` 在一个 AUTO 事务中保存 attempt result、pending effect 与 pending outbox，job 留在 `VERIFYING`；此时 bundle 尚不可读。
+2. **读取已保存结果**：唯一 narrative outbox dispatcher 以 generation-fenced lease 只 claim `narrative_bundle.publish`；从该 effect 的已结束 attempt 精确读回 bundle。校验 effect id/job id、strict bundle schema、大小限制及 canonical bundle SHA=`intended_after_hash`。缺失/重复/不匹配拒绝，不调用模型；失败使用现有有界 outbox retry/dead-letter。
+3. **内容寻址写入**：storage adapter 在 catalog lock 外把 canonical JSON 写到 `.source_catalog/objects/sha256/{prefix}/{sha}.json`，目标卷临时文件 fsync 后原子 rename；同 SHA 复用前重验 hash，异内容不覆盖。该 adapter 是唯一知道物理目录的层。
+4. **catalog prepare**：dispatcher 持 `CatalogOperationLock` 只执行短检查/事务：重读当前 worker generation、source active/primary/source SHA 与 read policy；有效时在 catalog `BEGIN IMMEDIATE` 插入 `narrative_artifact_versions(status='prepared')`。prepared 不进入普通 reader，也不写旧 `evidence_spans`。同 work_key+hash 幂等；同 work_key 异 hash fail closed。具体列、索引及 additive migration 唯一以 [Phase E §3.4/E5](phase_e_m3_worker_implementation_spec_2026-09-28.md) 为准，必须含 `effect_id` 与不含物理路径的 `object_key`。
+5. **AUTO ACK 与 catalog activate**：prepare commit 后 `ack_outbox` 校验 intended/actual hash，在 AUTO 事务把 effect verified、outbox delivered、job succeeded。随后再次持短 catalog lock 重验当前 generation、source 身份/策略和 AUTO verified effect，把同一版本切成 `visible`。pause 或进程退出可在中间留下 prepared；没有 `visible` 状态绝不能对下游呈现成功内容。
+6. **可重放恢复**：outbox lease 未 ACK 就退出时，租约到期后再次 claim 会复用已落盘对象与同 prepared 行并 ACK；ACK 后、activate 前退出时，reconcile 按唯一 `effect_id` 找 prepared 行，确认 AUTO effect 已 verified 后 activate。generation/source 变更时旧 generation 不得提交；来源已 retired/不是当前 primary 记 `retired`，SHA/schema/身份/read-policy 冲突记 `quarantined`。这些状态都不可读；冲突直接产生机器可诊断的 retry/terminal error，不建人工审批队列。
 
-新 catalog 表的最低迁移形状（W0 根据当时 schema/索引审查后冻结；**不得**重建旧 `artifacts/evidence_spans` 大表）：
-
-```sql
-CREATE TABLE narrative_artifact_versions (
-  work_key TEXT PRIMARY KEY,
-  document_id TEXT NOT NULL REFERENCES documents(document_id),
-  source_id TEXT NOT NULL REFERENCES sources(source_id),
-  source_sha256 TEXT NOT NULL,
-  artifact_role TEXT NOT NULL,
-  input_hash TEXT NOT NULL,
-  content_sha256 TEXT NOT NULL,
-  byte_size INTEGER NOT NULL CHECK (byte_size > 0),
-  path TEXT NOT NULL,
-  producer_version TEXT NOT NULL,
-  status TEXT NOT NULL CHECK (status IN ('prepared','visible','retired','quarantined')),
-  created_at TEXT NOT NULL,
-  activated_at TEXT
-);
-CREATE INDEX idx_narrative_source_role_status
-  ON narrative_artifact_versions(source_id, artifact_role, status);
-```
-
-只读新接口在读行后仍须按 artifact handle 规则核 source SHA、路径根、文件 hash、role/schema/producer 版本；`visible` 只是必要条件，不是充分条件。catalog `artifacts` v1 继续服务旧消费者，不在此迁移中删/改历史行。
+`narrative_artifact_versions` 的唯一 DDL/状态枚举见 Phase E §3.4（必须为 additive `CREATE TABLE IF NOT EXISTS`，不重建旧 `artifacts/evidence_spans`）。只读 `NarrativeArtifactReader` 只列/打开 visible 行，经 object adapter 重验 object SHA/size、bundle schema 与当前 source SHA，返回已验证 bytes 和 source/hash/locator/quality，不返回物理路径。catalog `artifacts` v1 继续服务旧消费者，不在此迁移中删/改历史行。
 
 若 package 的 selected EvidenceSpan 和摘要不能在同一个内容寻址文件/原子版本包中一起验证，N4 必须先改接口；不能先发布摘要再补定位。新表是版本化产物索引，不是第三套任务队列；清理历史 spans 仍归 W7 独立迁移。
 

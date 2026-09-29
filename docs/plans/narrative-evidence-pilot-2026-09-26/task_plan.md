@@ -311,7 +311,7 @@ company-wiki 只负责来源、解析质量、证据定位、检索和来源摘�
 - [ ] S0/G-0：live refs、真实样本 oracle、CWP 多根 verified reader 的一次自动 E2E；旧 A.AR 只作历史事实，不借 M1 内部门跳步。已复核 CWP SourceExport v2 producer/CLI 在主线，当前要验现有合同并补真实输出证据，不重建 producer。
 - [ ] S1–S4b/G-A：整理 ET WIP；FF SourceRef v2 最终净差异 → RF reader 正式夹具与三仓真测 → FF companion 真实 ET/CWP 编排，按各仓正常合主线。
 - [ ] S5/G-B 与 Q 线：复用 CWP 现有基础 SourceExport v2，StockWiki 实作 v2 reader/CLI；S5b full sync/weekly 留 G-D 发布门。IQS 契约包 2.2.0（Entity 2.1.0 + AnalysisSubject 1.0.0）、StockWiki W01 修红及 W02/W03 新合同；G2b 身份线独立自动测试。
-- [ ] N0–N3/G-C：退出旧重复工件/全量写/研究 writer，完成 E5 projector、E6/E7/E-B、正式 selected G2a 消费；生产 Worker 在 G-C 自动测试通过前 paused。
+- [ ] N0–N3/G-C：退出旧重复工件/全量写/研究 writer；E5 需同时交付窄 narrative outbox dispatcher、按 effect 恢复已存 attempt bundle、prepared→visible 可恢复投影与 pathless reader；随后做 E6/E7/E-B、正式 selected G2a 消费。生产 Worker 在 G-C 自动测试通过前 paused。
 - [ ] G-D：只对可重建派生做 scratch 与精确生产批次清理，量同卷净收益，原件/manifest 保持不变；受控发布与分仓脏树对账。
 - [x] 权限简化：移除逐文档/逐期人工授权、prompt-review receipt 门、transcript rights-policy 与双阶段复核。删除 importer 调用链外且只互相调用的 rights/admission/preflight 旧模块及专属测试；transcript importer CLI 收敛到 `/2` 单次请求。narrative event/select/summary/bundle 合同升至 `/2.0` 并去掉 provider-policy 字段。保留身份、原文 hash、lineage、payload 上限和结构校验。自动化 `PolicyConfig` 默认允许 LLM；外部下载仍由具体采集任务触发并受 API 速率/费用/字节约束。
 - [ ] 后续合同迁移：`privacy_class` 当前不控制外发，但仍进入 RootPolicy 3.0 导出 hash；在统一更新 CWP/RF/StockWiki consumer 后移除此 legacy 字段，不能在中途静默改变 3.0 hash。

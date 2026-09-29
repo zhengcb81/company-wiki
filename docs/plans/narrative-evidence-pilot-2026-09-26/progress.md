@@ -726,6 +726,13 @@
 - 真实字节门覆盖 STAR annual report 的双根同 SHA 查询、完整验 hash、首选位置移动后的 fallback、同尺寸篡改后的 fallback；P06 定增说明书 sidecar 缺完整正式期次/来源，exact query 不复用，preview 仍验原始 SHA，正式 reuse 被拒。测试本身对原始文件 SHA/size/mtime/attributes、测试树快照作前后断言。本轮没改产品源码、没下载或编辑原文。
 - G-0 剩余实质缺口：四隔离根、company/dayu/Dropbox 原生布局与 adapter、真实 SourceExport v2 span/locator 回放、旧引用回放、429 页招股说明书资源约束以及独立 B.AR。不能用这 77 项基线代签 G-0；下一步调查能否用现存原件做上述同一大门验收，并将缺失 oracle 逐项列为 hold。
 
+## Session: E5 schema/outbox implementation audit (2026-09-29)
+
+- 继续 E5 前使用 CodeGraph 对照当前源码：`NarrativeVerifyHandler` 已把严格 bundle 放入 attempt result 并产生一个 effect；`AutomationStore.finish_attempt` 原子写 attempt/effect/outbox，claim/ack/retry 已存在，但 `claim_next_outbox` 的调用者只有测试，没有生产分发器，outbox JSON 只含 effect 身份，不含 bundle 正文。因此单独实现 catalog projector 会是无法交付的孤立组件。
+- 发现 E5 两份规格互相冲突：Phase E 写 `visible/withdrawn`，worker 并发计划写 `prepared/visible/retired/quarantined`，后者还把物理 `path` 放进 catalog 表。已把 Phase E §3.4 定为唯一 DDL：含 `effect_id` 与逻辑 `object_key`、状态 `prepared/visible/retired/quarantined`；path 只留在 object storage adapter。`artifact_dag.py` 与 legacy generic `artifacts` 不参与新 bundle 发布，避免复用错误职责。
+- E5 实施顺序已修正为：attempt result → effect-type 限定的 outbox lease/dispatch → content-addressed object → 短 catalog `prepared` → AUTO ACK → 短 catalog activate；ACK/activate 间退出由按 `effect_id` 对账恢复。projector/reader 只见逻辑键或已校验 bytes，存储 adapter 唯一知物理布局。所有来源/hash/策略和 runtime generation 校验为自动事实，不加人工批准/receipt。
+- 本次只改了计划文件，未改产品代码、未运行产品测试，也未接触其他项目或原始财报。下一步先在 CWP 专用代码 worktree 写 E5 单元/恢复测试并确认 RED，再实现 API、object adapter、projector、pathless reader 与 outbox 分发器；Worker 继续 paused。
+
 ## Session: 人工权限门简化与回归（2026-09-28）
 
 - 根据用户已经给出的个人项目及外部 LLM 外发授权，移除逐文档人工批准、review 回执门槛、transcript rights-policy 文件/哈希、双阶段预授权与取后政策复核；CLI 收敛为 schema `/2` 的一次精确请求结果导入。无回执不再阻断叙述摘要；Worker 技术失败走自动重试或终态失败。
