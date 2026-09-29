@@ -1,5 +1,7 @@
 # StockWiki 独占施工卡：来源 reader、QuickScanStore 与身份消费
 
+> **2026-09-29 状态更新：**W01 已在本地 `master@5bb68f6` 完成并独立验收。基础 SourceExport v2 reader 现在有可直接派发的[独立施工卡](stockwiki_source_reader.md)，应先按该卡实施；本页下方 W01 的 8/10 失败数是开工前历史快照。W02/W03 仍待 IQS 公开验证 CLI 和 StockWiki 真实身份 snapshot，不是基础 reader 的前置。同一时刻只保留一位 StockWiki 写入者。
+
 > 可单独交给一个 StockWiki harness。**唯一写入目录**：`C:\Users\郑曾波\Projects\StockWiki` 的指定集成 worktree；`C:\Users\郑曾波\Projects\StockWiki-v2-reader` 是可检查的既有隔离工作树，不表示已有 reader 实现。CWP/IQS/RF/FF 只读；不得写它们的数据库或文件。StockWiki 独占投资研究状态，CWP 只提供来源与证据。
 
 开工输入包：本卡、S0a observed 接口表、CWP SourceExport/selected 的 S0b golden（未产时标 pending）、IQS 2.2 schema/校验 CLI、只读 P/T 样本清单和本仓 W01 活动文件归属表。

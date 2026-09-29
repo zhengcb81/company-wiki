@@ -6,7 +6,7 @@
 
 ## 目标、输入和输出
 
-- 现行 `/2` 接收明确的证券/交易所、fiscal year **与 fiscal quarter**；只有 FY 时由 FF 返回 `period_unresolved`，ET 不猜 Q4、不遍历其它季度。若以后需要 FY-only，设计新请求版本并同步 FF/CWP。
+- 现行 `/2` 接收明确的证券/交易所、fiscal year **与 fiscal quarter**；只有 FY 时由 FF 返回 `period_unresolved`，ET 不猜 Q4、不遍历其它季度。若以后需要 FY-only，设计新请求版本并同步 FF/CWP。S0a 已实测：Motley fetched 为 24 字段，FMP fetched 为 26 字段；CWP 现行 exact-key importer 只收前者。ET 不为迎合旧 importer 伪造 FMP 的 `published_date`。
 - `transcript_tool.py`/`transcript_api.py` 用一次精确请求返回**未翻译**英文 TXT 的版本化 `/2` 工具结果：安全来源 URL/时间、`provider_payload_sha256`、抽取文本 `canonical_content_sha256` 与 `content_bytes`。`/2` **没有原始 payload 长度字段**；不要在原版本添字段，因为 CWP importer 对结果 exact-key 校验。工具可在受控路径附带原 payload，CWP 入库时另算 deterministic material SHA；三种哈希/长度的含义不能互换。
 - 未找到、provider unavailable、凭证缺失、限流、坏响应和超预算各有具名状态；正文不混入 stdout 日志。ET 不产生 CWP source ID，不决定最终公司目录或投资结论。
 - 旧 `scraper.py` 的 `--no-translate`/`--disable-translation` 保持可用；新 tool/API 原本只返回原语言文本，不添加无作用的翻译开关。
@@ -22,8 +22,8 @@ provider 能否使用由一份简明配置和真实接口能力决定。[The Mot
 1. 盘点 `transcript_api.py`、`transcript_tool.py`、legacy scraper 与活动未提交测试，收拢为本仓独立提交。保持旧 `/1` 入口兼容；`/2` 正例必须由真实 serializer 生成，并记录 exact request、响应字段、错误码/退出码与 payload 上限。
 2. 先改 `tests/test_transcript_api.py` 的双门测试，覆盖单一网络意图、FY+Q 唯一性、Motley 默认禁用下三个入口均 0 HTTP、FMP 缺 key/402、坏 host/redirect、超过字节/截止时间、相同精确请求的确定性结果；`tests/test_translation_controls.py` 保证原语言、无翻译 API 调用和无额外翻译文件。ET 自身不保存文件，“重复候选 0 再保存”属于 FF/CWP importer 测试。
 3. 现有 `transcript_tool.main(argv)` 无 fake HTTP 注入入口；先在内部 CLI dispatch 加一个只供测试传入的 transport/session factory seam，生产 `main` 仍使用真实受限 transport。成功 E2E 使用 **fake FMP HTTP + 测试专用假 key/有效权益响应**，走真实 ET CLI JSON 读写→API 解析→fake transport；同时证明默认 Motley 即使有请求也 0 HTTP、无候选/未请求 0 网络、FY/Q 不符失败。不能 mock 掉整段 `fetch_transcript`，也不能靠旧授权布尔打开生产 Motley。再用 subprocess 跑无网络的 JSON/退出码边界。产物和临时根在 finally 恢复；无需付费 provider 联网测试来证明工具合同。
-4. 向总指挥交付 tool `/2` 的正式 golden 正反例、版本、CLI 命令/退出码、`provider_payload_sha256` 与 `canonical_content_sha256`/`content_bytes` 的定义，以及本仓 commit。若确需新增原始 payload 长度或 FY-only，先升版本并协调 CWP exact-key importer 与 FF consumer。FF harness 据此实现 companion；ET harness 不写 FF 或 CWP。
+4. 向总指挥交付 tool `/2` 的正式 **FMP 和 Motley 各自字段集** golden 正反例、版本、CLI 命令/退出码、`provider_payload_sha256` 与 `canonical_content_sha256`/`content_bytes` 的定义，以及本仓 commit。FMP 结果现有 `call_date`、`publication_date`、`as_of_cutoff_verified`，payload MIME 为 `application/json`，安全 URL 含 `symbol/year/quarter` 查询参数；CWP owner 须按 provider 精确校验或先协调新版本。若确需新增原始 payload 长度或 FY-only，先升版本并协调 CWP exact-key importer 与 FF consumer。FF harness 据此实现 companion；ET harness 不写 FF 或 CWP。
 
 原始 provider payload、来源 URL/时间和内容哈希不因去掉人工许可而省略。输出字段变更由 ET 更新版本和 golden，交总指挥协调 FF/CWP；如果请求身份、期次或两级哈希不一致，本线保持错误结果，不隐式回退到别的季度或翻译后的文本。
 
-**本线自动验收：**本仓 API 与真实 CLI dispatch 测试通过且新增路由零 skip；默认 Motley 三入口 0 HTTP，FMP fake 200 可解析而缺 key/402 有具名失败；`/2` 正例由当前 serializer 重生且与 CWP exact-key 合同一致。测试仅用本仓可写短临时根，前后恢复；交接报告 commit、golden SHA、命令/退出及 provider 未验证状态，不要求人工签收。
+**本线自动验收：**本仓 API 与真实 CLI dispatch 测试通过且新增路由零 skip；默认 Motley 三入口 0 HTTP，FMP fake 200 可解析而缺 key/402 有具名失败；`/2` 正例由当前 serializer 重生、字段集和哈希语义稳定。CWP 的 FMP 兼容另由 CWP owner 用同一 golden 及拒绝额外 query/凭证的负例验收，未通过时跨仓 G-A 保持 pending。测试仅用本仓可写短临时根，前后恢复；交接报告 commit、golden SHA、命令/退出及 provider 未验证状态，不要求人工签收。

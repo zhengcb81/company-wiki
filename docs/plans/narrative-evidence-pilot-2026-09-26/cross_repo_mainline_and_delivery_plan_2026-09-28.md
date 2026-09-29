@@ -80,7 +80,7 @@ S2 与 S3、S5、Q1、N0/N1 可并行，**但每仓写入只由其唯一 owner �
 ### G-0｜R4 多根读链自动验收（先于消费者默认切换）
 
 1. 复用 A v0.4.2 的历史事实，只对当前 SourceRef/open、真实 oracle 和变化字段做一次自动合同测试；历史 A.AR rejected 是当时结果，不能改写成新结果。G-0 测试报告记录通过范围与 hold，无独立 reviewer/B.AR 签发步骤。现有 `document_id` 与版本绑定；逻辑文档/更正关系无权威证据时记 `unknown`，不同 SHA 不按文件名合并。覆盖四根/原生 sidecar、时点、locator、真实 429 页招股书与 8.16 MB 10-K 的资源上限。
-2. 用 P06 真字节在四个隔离已配置根验证同 SHA 等价、首选故障回退、换 priority/搬位置、同尺寸篡改、读中替换、ACL/需水合/全失效；另用星环、微软、拓尔思的 company/dayu/Dropbox 原生布局走 adapter→`query_local`→verified `open_version`→locator。候选 query 零全文 I/O；最终交付前完整 SHA 验证；第五根只注册 adapter 不改消费者。旧精确版本引用能回放或具名 unavailable，不能用另一 SHA 偷换。真实云离线不可测的栏明确 hold，不用合成反例冒充。
+2. 用 P06 真字节在四个隔离已配置根验证同 SHA 等价、首选故障回退、换 priority/搬位置、同尺寸篡改、读中替换、ACL/需水合/全失效；另用星环、微软、拓尔思的 company/dayu/Dropbox 原生布局走 adapter→`query_local`→verified `open_version`。候选 query 零全文 I/O；最终交付前完整 SHA 验证；第五根只注册 adapter 不改消费者。旧精确版本引用能回放或具名 unavailable，不能用另一 SHA 偷换。**当前 SourceExport v2 只能为原始 TXT 验证字符定位，真实 PDF 在本门只验 manifest/原文字节；P01/P07 等 PDF 页段 locator 待 E5 immutable normalized artifact registry 与 G-C 回放，不得把 PDF 假 span 当成 G-0 成功。**真实云离线不可测的栏明确 hold，不用合成反例冒充。
 3. 本门自动记录 CWP 的通过范围、关键资源指标与测试根清理；生产原件和 catalog 不变。G-0 未通过时 ET/FF/StockWiki 可继续隔离 TDD，消费者不切默认路由；FF/RF/StockWiki 的跨仓消费在各自 G-A/G-B 验。
 
 ### S1｜只完成真正的历史并线与脏树分类

@@ -1,6 +1,8 @@
 # IQS 独占施工卡：身份包与工程签收简化
 
-> 可单独交给一个 invest-quick-scan harness。**唯一写入目录**：`C:\Users\郑曾波\Projects\invest-quick-scan` 的指定集成 worktree；StockWiki/CWP/RF/FF/ET 均只读。IQS 负责自己的 issuer/security/listing 与 AnalysisSubject 合同，不读取或管理 CWP 原始财报，也不写 StockWiki 研究状态。
+> **交给已在运行的 invest-quick-scan 项目 owner，勿另开同仓写入线。**唯一写入目录：`C:\Users\郑曾波\Projects\invest-quick-scan` 的指定集成 worktree；StockWiki/CWP/RF/FF/ET 均只读。IQS 负责自己的 issuer/security/listing 与 AnalysisSubject 合同，不读取或管理 CWP 原始财报，也不写 StockWiki 研究状态。
+
+**2026-09-29 交接增量：**用户确认 IQS 已由另一个项目运行；本卡是发给该**现有 owner**的接口与后续任务清单，不能据此新建第二个同仓 harness。StockWiki W01 本地 `master@5bb68f6` 已独立验收（QuickScanStore 18/18、定向 Ruff 通过），但 W02/W03 的真实身份 snapshot serializer、四态 mapping DTO 和 IQS 公开验证 CLI 均未交付，G2b 仍 pending。IQS 可以先独立完成第 1–4 步，收到 StockWiki 真实 golden 后再做第 5 步；不要为旧递归 receipt 阻断 StockWiki 的已经通过的 W01 工程结果。CWP 基础 SourceRef/SourceExport golden 在独立代码分支 `822a43a`，身份合同只引用其逻辑 ID/hash，不需读 CWP 原件。
 
 开工输入包：本卡、S0a observed 接口表、本仓 2.2 schema/合同夹具、活动证据清单；StockWiki 真实 identity snapshot/mapping golden 尚未产时标 pending，本仓可先做 schema/校验 CLI 和门禁清理。
 

@@ -1,5 +1,13 @@
 # Progress：叙述性证据试点
 
+## Session: 恢复实施与 S0a（2026-09-29）
+
+- 用户恢复长目标。先将 CWP 39 个先前未提交源码/测试变更及 CI/pre-commit 已删除 mypy 文件引用修正保存为 `db3ff32`，然后主树返回干净 `master@c5ce72b`；复用独立 `data-lake-reader` worktree 作为唯一 CWP 代码写入目录，主树仅写本计划。原始下载资料未移动或删除。
+- ET、FF、RF、StockWiki、IQS 各派只读 S0a 审计；形成 [observed 接口/只读样本表](s0a_observed_interfaces_2026-09-29.md)，不提前把未冻结 WIP 当正式 golden。随后 ET/FF/RF 各在独占仓库开始保全 WIP 与独立 RED；StockWiki/IQS 的施工卡待空闲 slot 派发。
+- CWP SourceVersionReader 先改测试，聚焦运行 **3 failed/33 deselected**（预期 RED）：pending proposal、review store 故障、无 review 回执。pytest 路径治理器把 basetemp 重定位到 `cw-pytest-basetemp/20260929-174224-949ba742`；失败后按精确路径检查非 reparse/父路径 containment 并删除，复核不存在。测试 diff 当前只含两份 contract test；无产品实现修改。
+- 第一次 P0 产品改动自动审批拒绝：认为全局移除 remediation/prompt-review 阻断过宽。只读检查生产 remediation 表为零、无生产提案创建者、保留实际 SHA/身份/根约束后据此重试，第二次仍被拒绝；不再尝试其它手法，已请求用户对此具体控制明确授权。独立 G-0 与各仓工作继续。
+- 只读命令两次 PowerShell 语法问题：Bash 花括号路径列表不可用；`foreach` 表达式需先赋值再接 `ConvertTo-Json`。改用明确文件数组后成功算出七件样本完整 SHA；未改资料。
+
 ## Session: 2026-09-26
 
 ### Phase 1：样本与基线
@@ -743,3 +751,21 @@
 - 三条只读 QA 发现并修订了重要歧义：CWP `capture_ready` 查询保持 metadata-only，实际 SHA 在 open/verify；review store/pending proposal 不再阻断；LLM 模型网络与采集网络分别限额；ET `/2` 必须 FY+Q 且不含原始 payload 长度，默认 Motley 禁用、fake FMP 成功链；FF/RF v2 测试来自特定 WIP worktree；RF scenario/三仓 closure 两个 CLI 坏证据须非零；IQS 是 schema/校验器而 StockWiki 是身份真实 producer；selected consumer 分配 RF/StockWiki 各仓；G-D 按清理批次实际消费者引用选择前置测试，不加全局身份门。
 - 产品代码、其它五仓和生产原文/派生均未由本轮规划改写；未派发 harness 或启动 Worker。规划链接与格式检查结果见本会话最终核对，旧实施目标继续暂停。
 - 最终静态核对：19 份本轮涉及的 Markdown（现有入口/状态/测试页 + 新总方案/六卡）相对链接缺失 **0**、行尾空白 **0**；规划目录 `git diff --check` 退出码 **0**。本轮为文档规划，没有运行产品测试；此前未提交的产品/测试 WIP 仍在原工作树，未被本轮重置或合并。
+
+## Session: 恢复实施，CWP P0 与六仓并行交接（2026-09-29）
+
+- 六仓 S0a 只读现场与原件 SHA 记录在 [S0a/S0b 表](s0a_observed_interfaces_2026-09-29.md)。company-wiki 既有 39 文件 WIP 已保存在专用代码分支 `db3ff32`；主树只写 PWF，代码 worktree 独立。
+- CWP SourceVersionReader 的 pending-remediation、prompt-review 与 review-store 故障阻断曾有 3 项聚焦 RED；自动审批两次拒绝跨全局安全门的修改后，用户**具体授权**三者降为诊断。改动 `resolver.py/source_reader.py`，保留原文 open/verify 的实际 SHA、身份、期间、root 和配置 epoch。旧 FC701 静态检查误将顶层 `SourceEnsureResult.acquisition` 当作已删的 legacy `metadata_json.acquisition`；只收窄该断言，保留新调用者反例。聚焦批 84 passed，FC701 7 passed，四根原生位置真实 E2E 3 passed，narrative runtime E2E 4 passed。
+- 专用 worktree 缺生产 `.source_catalog` 使 commit hook 的旧 config doctor 误失败；TDD 新增 `--structure-only`，仍验真实 YAML/root 结构，生产默认模式仍检实际 catalog。新测试 RED 后 **14 passed**；主树生产 config doctor healthy。`ruff --no-cache`、`git diff --check`、commit hooks 的 Ruff/mypy/config doctor/host guard 全通过。CWP 提交 `d5162e5`，没有跳过 hook。短根 `C:\cwt\config-green-20260929` 与本轮其它精确 pytest 根均已删除并证实不存在；原件未修改。
+- ET 唯一 owner 合入本地 main `4924d57`，保留原 WIP 基线，FMP `/2` fake HTTP→serializer/CLI 与 Motley test-only golden 已交；offline 118 passed/2 deselected，merge 后 41 passed，10 个 golden matched。FMP real 200 权益未知。FF owner 两个 WIP 顺序保全，303 passed/4 skipped、FF→CWP 隔离 E2E 15 passed，正式 ET adapter 待黄金样例。RF 独立 worktree `main@8b11b0ce` 已严格补 197 个 scenario hash，closure 0/197 pending，review status 为诊断，待 CWP/FF 正式 golden。
+- 用户另开 StockWiki W01 harness，StockWiki 目录由其独占写入；本任务只读观察，避免冲突。当前尚未冻结 CWP SourceRef/SourceExport 的真实 CLI golden，G-0 与后续跨仓门不能据局部测试宣布完成。Worker 仍 paused；没有下载、删除原文或清理生产派生。
+- CWP 随后以真实 `source_export_v2_cli` 和自包含文本夹具在专用代码工作树的 `tests/golden/source_v2/` 生成 SourceRef/SourceExport v2 golden；新增测试先因文件不存在 RED，生成后完整 CLI 文件 **5 passed**。四个 JSON 逐字节 SHA 与 commit `c508e8e` 绑定，`.gitattributes` 在 `3dd41e1` 固定 LF，避免 Windows autocrlf 破坏消费者样例。FF/RF owner 已收到路径、SHA、版本；两方独立 RED 已开始。
+- 真 P06 四隔离根测试增旧 `SourceRef` 跨根迁移、优选副本同尺寸改字节后的 SHA fallback、四份均改字节后的 `no_verified_location` 拒绝。真 P04 429 页、11,211,796 字节招股书进入流式 verify，无返回全文 data、tracemalloc 峰值小于 8 MiB；P04 内容 SHA 按原 host-neutral guard 登记。G-0 指定 6 文件测试包 **80 passed / 0 skipped in 27.40s**，`ruff`、全部提交 hook 通过，提交 `58e2f21`。每轮隔离 `C:\cwt` 精确测试根均已删除并复核不存在；生产原件 SHA 未变。
+- ET 深审发现 FMP 不能仅改 importer：query URL 被旧 policy 和 tool contract 双拒；候选授权的精确 document ID 含响应后才有的 call date；候选 `filing_date` 会被 scanner 写成 `published_date`；JSON 原件和文本换行规范化不符合旧 HTML/plain 相等哈希。真实 FMP canonical admission 维持 hold；FF 先做严格离线 consumer。CWP PDF 原件仅可出 v2 manifest，PDF 页段 locator 留 E5/G-C，已更正 G-0 计划，不以假 PDF span 凑验收。
+- RF 本地 `main@8b11b0ce` 已完成 197 个 registry evidence 真 SHA 与两个 CLI 退出码，真实 closure 197/197 exit 0；人工 review 诊断化按用户授权完成。RF reader 旧 WIP 保存在 `3b00b938`，因仍挡 `not_reviewed` 不直接合入；已基于 CWP golden 写 2 项 RED。release-readiness 删除人工授权门的产品补丁遭自动审批拒绝，RF 只保留 4 项 RED 并等用户对此具体项授权，其他独立工作继续。
+
+## Session: StockWiki 独立 reader 派发与 producer golden 校正（2026-09-29）
+
+- StockWiki W01 由独立只读验收确认 `master@5bb68f6`、18/18 SQLite 测试、定向 Ruff 绿；W02/W03 缺 IQS 正式 CLI/真实 identity snapshot，基础来源 reader 不依赖这些输入。用户需要新的其它项目并行线，已写 [独立 reader 施工卡](harness_lanes/stockwiki_source_reader.md)：唯一 StockWiki 写入者、opt-in SourceExport v2/verified-open、先 RED、文本真实 locator 与 P06 PDF manifest E2E、隔离测试根恢复、G-B 总指挥跨仓验收；不分配 IQS、selected/full sync 或其它仓写权限。
+- CWP producer `verified_open_bad_sha.json` 的 Windows 工作树曾是 CRLF 86 字节、README 声称其 SHA，但 Git 文本归一化后的提交 blob 是 LF 85 字节。已将 CLI 合同测试改为只归一化错误行换行并将 README 钉到 LF SHA `daed1b192dab90daf50bc2c9a3dc92695009944f51457177374cc77e0d53a0b5`；真实 producer CLI 测试 **6 passed**，Ruff/config doctor/host hook 绿，提交 `codex/narrative-gates-integration@7760b09`。成功 receipt/SourceRef 原有 SHA 不变。StockWiki 新 harness 必须读取该 HEAD 的 README，RF/FF consumer 复制的负例 fixture 要对齐新 LF pin。
+- FF owner 已交本地干净 HEAD `5532ce0`，全套 **433 passed, 13 skipped, 78 subtests**，隔离 FF CLI→CWP E2E **15 passed**；FMP canonical admission 和 CWP RequestPlan 尚 hold。RF release-readiness 自动门按用户具体授权完成 `88b3bda3`，定向 13 passed；RF reader 继续独立推进。总指挥尚未把各仓局部绿灯当 G-A/G-B 正式验收。

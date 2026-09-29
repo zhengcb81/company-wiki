@@ -326,8 +326,23 @@ company-wiki 只负责来源、解析质量、证据定位、检索和来源摘�
 - [x] 完成第一部分的清理实施方案后，建立[总指挥计划](parallel_harness_orchestration_2026-09-29.md)与六仓独立施工卡；每条线独占一个项目目录，按 S0a observed→S0b producer golden 冻结输入/输出、交接、独立测试包和跨仓大节点。IQS 管合同校验，StockWiki 管真实身份库；RF/StockWiki 的 selected consumer 各有本仓施工任务。
 - [x] 只更新本计划目录的规划文件，复核链接、目录独占、依赖图和 `git diff --check`；本轮不修改项目实现、不启动 Worker、不清理原文或派生数据。只读 QA 指出的接口版本、真实审查阻断、closure 退出码和 G-D 分批依赖已写回施工卡。
 
-**Status:** planning complete；产品代码清理与六线实施均未在本轮启动，旧实施目标继续暂停。
+**Status:** planning complete；2026-09-29 已按用户“恢复运行”开始 Phase 26。
+
+## Phase 26：恢复实施，S0a observed 与跨仓独占开工（2026-09-29）
+
+- [x] 保全 company-wiki 此前 39 个源码/测试 WIP：`codex/narrative-gates-integration@db3ff32`，同时修复 hook/CI 的已删除 mypy 文件引用；主树 `master@c5ce72b` 与专用代码 worktree 均干净，原件未改。
+- [x] 六仓只读 S0a 盘点及有效 WIP 归属；记录 [S0a 现场接口和七件只读试点输入](s0a_observed_interfaces_2026-09-29.md)。RF 旧 fcap 已在远端 main；ET FMP `/2` 与 CWP importer 存在 26/24 字段、MIME、URL 规则冲突，正式 S0b 前不得当兼容。
+- [ ] 各仓 owner 在独占目录保存 WIP、写独立 RED、给出 producer golden；总指挥只写本计划目录与 CWP 专用代码 worktree，不跨目录改其他仓。
+- [x] CWP SourceVersionReader P0：3 项聚焦 RED 确认旧人工门阻断；用户随后明确授权 pending proposal、prompt review 与 review-store 故障只作诊断。专用代码工作树 `d5162e5` 已让 RED 转绿，保留 open/verify 时真实字节 SHA、身份/期次/root/epoch 校验。G-0 聚焦批 84 passed（另 1 个旧静态断言已纠正，FC701 7 passed），原生四根真实字节 E2E 3 passed，narrative runtime E2E 4 passed，config doctor 14 passed，Ruff/mypy/全部 commit hooks 通过；测试根已恢复。尚需 formal producer golden 与 G-0 余项，不能以聚焦结果代签 G-0。
+- [x] ET S0b 首批真实 serializer/CLI golden：本地 `main@4924d57`，FMP `/2` 26 字段与 Motley 24 字段分别冻结；offline 118 passed、合并后 41 passed、golden 10 matched。FMP 真实 200 权益仍未证实；CWP importer 目前不兼容 FMP 26 字段/JSON MIME/query URL，先写 consumer RED，再接 FF。
+- [x] CWP 基础 S0b golden 与 G-0 增量：`3dd41e1` 已从真实 CLI 冻结 SourceRef/文本 span/SourceExport 正反 JSON 及 Windows LF（5 CLI tests passed）；`58e2f21` 增真实 P06 四根旧引用迁移、首选同尺寸损坏 fallback、全损坏具名拒绝，以及 P04 429 页/11.2 MB 流式 SHA 内存门。完整 G-0 指定批 **80 passed、0 skipped**，所有独立测试根已清。PDF span 当前合同不支持，真实 PDF locator 留 E5/G-C；G-0 仍需确认原生多根/实际消费者边界与剩余 hold。
+- [x] RF 本地 main `8b11b0ce` 已整合严格 evidence SHA 与 review 诊断，197/197 closure exit 0；reader 旧 WIP `3b00b938` 保全但因人工 review 旧语义不直接 cherry-pick。用户随后明确授权自动发布门，RF 本地 main `88b3bda3` 已将人工 `issue-auth` 改为验证当前 HEAD/证据/catalog/容量/回退的自动门，13 个定向测试通过；新 opt-in reader 已基于 CWP golden 做 7 项预期 RED，正在同一 RF owner 实施，FF envelope 消费待汇合。
+- [x] StockWiki W01 已由用户 harness 在本地 `master@5bb68f6` 完成；总指挥只读独立验收 `tests/test_quick_scan_store.py` **18 passed**、定向 Ruff 通过，临时 SQLite 根清理，已跟踪工作树干净。W02/W03 的真实身份 snapshot/四态 DTO 和 G2b 仍 pending。W01 已交接，基础 reader 可由新的唯一 StockWiki harness 按[独立施工卡](harness_lanes/stockwiki_source_reader.md)执行；同一时间仍只允许一个 StockWiki 写入者。
+- [ ] 用户确认 invest-quick-scan 正由其他项目运行；本任务仅只读对接其 2.2 合同，不再建议或派发第二个 IQS 写入 harness。等该 owner 交真实 schema/公开 CLI 时汇合；其约 500 项活动工作树状态不由本任务清理。
+- [ ] 按 [总指挥计划](parallel_harness_orchestration_2026-09-29.md)推进 G-A/G-B/G2b/G-C/G-D，汇合时只验受影响合同与大节点真实 E2E，Worker 在 G-C 自动门前维持 paused，原始下载文档始终保留。
+
+**Status:** in progress；S0a observed、CWP P0、基础 S0b、G-0 指定测试批及 StockWiki W01 已完成。G-0 的 PDF locator 明确移至 E5/G-C；RF 新 reader、StockWiki 新 reader、FMP 日期语义与跨仓门仍在进行。
 
 ## Next Step
 
-将来恢复实施时，先由总指挥做 S0a 只读基线/活动 WIP 归属和接口表，再派发六份独占施工卡；P0 RED→修复→G-0 后冻结 CWP producer golden。当前只完成规划，不从 S0a 自动继续产品改造。
+先将已完成的 CWP verified-open 成功/错误 golden `7760b09` 和 FF/RF consumer 提交汇合，运行 G-A 定向跨仓 E2E；同时将 [StockWiki 基础 reader 卡](harness_lanes/stockwiki_source_reader.md)交给唯一 StockWiki owner，准备 G-B。G-0 的 PDF locator 留 E5/G-C；FMP canonical 入库仍待日期/身份/JSON 跨层合同。Worker 保持 paused，原件不清理。

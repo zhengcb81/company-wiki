@@ -1,5 +1,12 @@
 # Findings：叙述性证据试点
 
+## 2026-09-29 恢复实施后的现场修正
+
+- 六仓 S0a observed 与七件只读样本完整 SHA/字节数见 [接口表](s0a_observed_interfaces_2026-09-29.md)。ET FMP `/2` 真 serializer 为 26 字段，当前 CWP importer 只收 Motley 24 字段，同时拒 `application/json` 和 FMP 的安全查询参数；因此跨仓电话会成功链仍是合同 hold，不可把 ET 本仓假 HTTP 200 说成 CWP 已可导入。
+- company-wiki 旧的 39 文件 WIP 已保存到 `codex/narrative-gates-integration@db3ff32`，主树与专用代码工作树干净。SourceVersionReader 的聚焦新测试在产品未改时为 **3 failed（预期 RED）**：pending remediation 拒绝本地候选、review store 故障拒绝候选、无 review receipt 令 capture_ready=false。测试临时根精确清理后不存在。
+- 只读 SQLite 检查当前 `.source_catalog/catalog.sqlite3` 约 3.06 GB，`remediation_proposals` 表**零条记录**；源树 `create_proposal/approve_proposal` 没有生产调用者（CodeGraph 调用图与限定源树搜索），提案仅由测试入口创建。实际安全边界还包括 source active/retired、捕获/身份/期间、当前 root/epoch 和最终完整字节 SHA；narrative guard 会再次校验 event pin/bytes SHA。不过这只能说明现场影响，不等于自动审批接受全局删除审查阻断。
+- 自动审批连续两次拒绝把 pending remediation/prompt-injection review（包括 review store 故障）在 reader/resolver 全局降为诊断，理由是会持久削弱复用/导出/叙述派生的安全控制且既有笼统授权不够具体。已向用户异步请求对此**准确行为**的明确授权；在回复前只推进不依赖该变更的 G-0/跨仓事项，不用间接方式执行被拒绝的修改。
+
 ## Requirements
 
 - 财务报表标准数值可由外部清洗数据接口提供；优先处理行业、主营业务、新业务、出海、风险和运营驱动的叙述。
@@ -511,3 +518,10 @@
 - 二次只读 QA 证明 CWP `source_reader.py` 的 `capture_ready` 与 review-store 故障仍构成 P0 阻断，但 `query_local` 是 metadata-only，不能为移除 review 门而改成全文 SHA 查询；实际字节 SHA 只在 open/verify 时最终判定。`source.narrative_summarize` 注册为 `network=True,llm=True`，模型网络必须由叙述任务预算允许，不能假标本地无网络。
 - ET `/2` 真请求必须 FY+Q，结果有 provider payload SHA 和 canonical content SHA/bytes，却无原始 payload 长度；CWP importer 做 exact-key 校验。ET Motley 路由当前仍可联网，默认禁用是待实施任务；成功 fake 端到端应走 FMP 测试响应。FF SourceRef v2 测试目前位于 `ff-source-reader-v2-20260927` worktree、companion 测试在 `filing-fetch-transcript-companion`；RF v2 测试在 `rfv2-tdd-20260927` worktree，均须先保存/导入，不能把主工作树缺文件当失败。
 - RF `uc/scenarios.py` closure 缺 `repo_root` 无法验实际文件，`cmd_scenario_verify` 与三仓 `cmd_closure_report` 均可能在坏 hash 下返回 0；新统一 verifier 须让两出口非零。IQS 的当前 identity 2.2 是 schema/参考校验器，没有真实身份 producer，也无四态 mapping DTO；StockWiki 是身份库唯一 writer，需产真实 snapshot golden，IQS 增公开 JSON 校验 CLI。`mapping_status=null` 应表示未尝试而不是尝试后无匹配；无匹配为 `unknown`。这些均为新计划的待实施合同，不是现成功能。
+
+### 2026-09-29 — ET FMP golden 揭露的跨层日期与身份问题
+
+- ET `main@4924d57` 的 FMP `/2` 真 serializer golden 是 26 键、JSON 原件、规范 query URL、`call_date=2026-07-22`、`publication_date=null`、`as_of_cutoff_verified=false`，ET 从未宣称历史 as-of 可得。Motley test-only 24 键/`published_date` 是另一 producer 分支，CWP 旧 importer 只接受它；两者不能假装统一 exact-key。FMP 官方接口示例仅列 `date` 与 `content`，未给 transcript 发表时间，见[官方文档](https://site.financialmodelingprep.com/developer/docs/stable/search-transcripts)。
+- CWP 阻塞跨四层：provider-use policy 与 tool contract 皆拒 query URL；取前 authorization 精确锁定 `provider_document_id`，但 FMP ID 包含响应后才知道的 call date；`DownloadCandidate.filing_date` 必填，经 canonical writer/scanner 投影为 `published_date`，resolver 会把它当历史时点资格；JSON MIME 与 CWP HTML/plain 材料提取、尾换行 canonical text hash 不兼容。仅修改 importer 会制造虚假的发表日期或假哈希通过。
+- 裁定：短期 FMP 正例仅驱动严格离线解析 RED/GREEN，canonical import 维持具名 `contract_pending`、零 raw/sidecar/catalog 残留；ET 本地 TXT 与 CWP G-0 可独立推进。实际入库须一次版本化迁移：原件 JSON immutable；`call_date` 与 `publication_date=null` 分列；CWP 对同一 content SHA 记录真实 `first_observed_at`，仅 `as_of >= first_observed_at` 可用，早期历史查询 hold，不能把 call/retrieval date 填作 published；请求前绑定 provider/ticker/FY/Q/规范 URL、响应后核 document ID；FMP query 只接受固定 HTTPS host/path 与唯一 symbol/year/quarter，禁止额外参数；JSON 抽取 TXT 的 ET/CWP 哈希各自记录并可回放。先写日期/ID/URL/JSON/零残留反例，再修改跨层代码。若改变现有全局 `/2` 字段语义，则升 `/3` 并协同 consumer，不静默放宽。
+- `SourceExportBundleV2` 当前明定仅原始 `text/plain` 的精确字符偏移可形成 evidence span；PDF 只能出 manifest，待 E5 immutable normalized artifact registry 才能有 PDF locator。G-0 需验真实 PDF manifest 与 TXT span；P01/P07 PDF 页段 locator 必须列为 E5/G-C 的前置，不能用 PDF 假 span 宣称 G-0 已绿。
