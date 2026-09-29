@@ -739,6 +739,7 @@
 - 继续 E5 前使用 CodeGraph 对照当前源码：`NarrativeVerifyHandler` 已把严格 bundle 放入 attempt result 并产生一个 effect；`AutomationStore.finish_attempt` 原子写 attempt/effect/outbox，claim/ack/retry 已存在，但 `claim_next_outbox` 的调用者只有测试，没有生产分发器，outbox JSON 只含 effect 身份，不含 bundle 正文。因此单独实现 catalog projector 会是无法交付的孤立组件。
 - 发现 E5 两份规格互相冲突：Phase E 写 `visible/withdrawn`，worker 并发计划写 `prepared/visible/retired/quarantined`，后者还把物理 `path` 放进 catalog 表。已把 Phase E §3.4 定为唯一 DDL：含 `effect_id` 与逻辑 `object_key`、状态 `prepared/visible/retired/quarantined`；path 只留在 object storage adapter。`artifact_dag.py` 与 legacy generic `artifacts` 不参与新 bundle 发布，避免复用错误职责。
 - E5 实施顺序已修正为：attempt result → effect-type 限定的 outbox lease/dispatch → content-addressed object → 短 catalog `prepared` → AUTO ACK → 短 catalog activate；ACK/activate 间退出由按 `effect_id` 对账恢复。projector/reader 只见逻辑键或已校验 bytes，存储 adapter 唯一知物理布局。所有来源/hash/策略和 runtime generation 校验为自动事实，不加人工批准/receipt。
+- 再按 L0/L3/L4 依赖方向复核后，projector 与 typed reader 放在 automation 层；`source_catalog/narrative_artifact_store.py` 仅做 bytes/object/SQL port，不认识 Effect/NarrativeBundle，也不 import automation。增加 layering contract test，防止底层 storage 反向依赖 job 合同。
 - 本次只改了计划文件，未改产品代码、未运行产品测试，也未接触其他项目或原始财报。下一步先在 CWP 专用代码 worktree 写 E5 单元/恢复测试并确认 RED，再实现 API、object adapter、projector、pathless reader 与 outbox 分发器；Worker 继续 paused。
 
 ## Session: 人工权限门简化与回归（2026-09-28）

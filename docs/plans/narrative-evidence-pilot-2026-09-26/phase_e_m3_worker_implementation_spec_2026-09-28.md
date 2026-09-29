@@ -426,12 +426,14 @@ Supervisor 不使用内存 queue 保存唯一任务事实；进程退出后以 D
 - 新 `src/company_wiki/automation/narrative_outbox.py`（窄 effect dispatcher、lease/retry、prepared reconciliation）
 - `src/company_wiki/automation/store.py`（按 effect 读取已完成 handler result；claim 支持 effect type 过滤）
 - 新 `src/company_wiki/source_catalog/narrative_artifact_store.py`
-- 新 `src/company_wiki/source_catalog/narrative_projector.py`
-- 新 `src/company_wiki/source_catalog/narrative_artifact_reader.py`
+- 新 `src/company_wiki/automation/narrative_projector.py`（唯一 narrative catalog writer）
+- 新 `src/company_wiki/automation/narrative_artifact_reader.py`（typed/pathless reader）
 - `src/company_wiki/source_catalog/store.py`（前述窄表与索引、additive DDL）
 - 不修改旧 `artifact_dag.py`/generic `artifacts`：narrative bundle 由 AUTO DAG 的 `source.narrative_verify` effect 发布；混入旧 normalized/sections DAG 会制造第二套职责和迁移面。
 - `src/company_wiki/automation/narrative_verify.py` 仅在 RED 证明 payload 绑定不足时改；解析/LLM 不得进入 projector。
-- 新 `tests/unit/test_narrative_artifact_store.py`、`tests/unit/test_narrative_projector.py` 与 `tests/integration/test_narrative_projector_recovery.py`
+- 新 `tests/contract/test_narrative_artifact_layering.py`、`tests/unit/test_narrative_artifact_store.py`、`tests/unit/test_narrative_projector.py` 与 `tests/integration/test_narrative_projector_recovery.py`
+
+分层合同：`source_catalog/narrative_artifact_store.py` 只接 canonical bytes、SHA 和 primitive version metadata，负责 object adapter 与窄 SQL repository；它不得 import `automation`、Effect 或 NarrativeBundle。automation projector/outbox/reader 作为上层，负责 strict NarrativeBundle/effect 校验并调用该 repository。storage adapter 以外不读取/拼接 object 物理路径。
 
 **固定数据流（不跨两个 WAL 数据库假设原子性）**
 
@@ -439,11 +441,11 @@ Supervisor 不使用内存 queue 保存唯一任务事实；进程退出后以 D
 2. narrative dispatcher 用 generation-fenced lease 只 claim `narrative_bundle.publish`，读取并严格解析那一个 attempt result；canonical bundle SHA 必须等于 effect hash。投影错误走有界 retry/dead-letter，不调用模型。
 3. content-addressed object adapter 在 catalog lock 外原子写/复用对象；catalog projector 随后持 `CatalogOperationLock` 短锁，重验 Worker generation、来源当前 active/primary/source SHA 和 read policy，在一个 catalog 事务插入 `prepared`。
 4. dispatcher ACK AUTO outbox；ACK 成功后再持短锁重验上述状态和已 verified effect，把该行原子变成 `visible`。pause 可在线性化边界阻止旧 generation；ACK 后崩溃由 prepared reconciler 恢复。
-5. `NarrativeArtifactReader` 只按逻辑身份读取 `visible` 版本，经 object adapter 取得 bytes 并重验 byte size、SHA、strict bundle schema 与当前来源 SHA；不返回 object path。来源退休记 `retired`，内容/身份/策略冲突记 `quarantined`，二者均不可读。
+5. automation 层 `NarrativeArtifactReader` 只按逻辑身份读取 `visible` 版本，经 source_catalog adapter 取得 bytes 并重验 byte size、SHA、strict bundle schema 与当前来源 SHA；不返回 object path。来源退休记 `retired`，内容/身份/策略冲突记 `quarantined`，二者均不可读。
 
 Object adapter 是本阶段唯一接触 `.source_catalog/objects/sha256/{prefix}/{sha}.json` 物理布局的层；store/projector/reader/consumer 只见 `object_key` 或 verified bytes。临时与目标同卷，fsync 后原子 rename，已有对象必须重验 hash，不覆盖异 hash 对象。孤儿对象留待后续有引用账的清理阶段，E5 不自行猜测删除。
 
-Projector 是唯一 narrative catalog writer。pause/catalog operation lock 只包短时校验与事务，不包 I/O/解析/LLM；内容写完至 catalog 提交之间崩溃时只留下可复用的孤儿对象。自动事实决定是否继续，不使用授权文件、人工 review receipt 或人工队列。
+automation 层 projector 是唯一 narrative catalog writer。它只依赖下层 source_catalog storage port；source_catalog 不反向导入 automation。pause/catalog operation lock 只包短时校验与事务，不包 I/O/解析/LLM；内容写完至 catalog 提交之间崩溃时只留下可复用的孤儿对象。自动事实决定是否继续，不使用授权文件、人工 review receipt 或人工队列。
 
 ### E6：关键真实数据端到端
 
@@ -545,8 +547,9 @@ C:\cwt\m3-e2e-<nonce>\
 | `automation/planner.py` | source event → 3-stage DAG | 不建立跨仓 job |
 | `source_catalog/narrative_jobs.py` | 新建；Phase C adapter | 不做全文 normalized |
 | `source_catalog/narrative_artifact_store.py` | 新建；immutable version registry | 不覆写同 work_key 不同 hash |
-| `source_catalog/narrative_projector.py` | 新建；单 writer/outbox apply | 不在锁内解析/LLM |
-| `source_catalog/narrative_artifact_reader.py` | 新建；pathless verified read | 不泄露物理路径 |
+| `automation/narrative_projector.py` | 新建；唯一 typed bundle writer/orchestrator | 不让底层 storage 依赖 automation |
+| `automation/narrative_artifact_reader.py` | 新建；strict/pathless verified read | 不泄露物理路径 |
+| `automation/narrative_outbox.py` | 新建；effect lease/dispatch/reconcile | 不重跑已完成 handler/LLM |
 | `source_catalog/store.py` | narrative version table migration | 不改 raw/source identity |
 | `source_catalog/control.py` | legacy default paused/interlock | 不自动恢复 enabled |
 | `source_catalog/worker.py` | destructive prune default disabled | 不重写旧 run_cycle |
