@@ -716,3 +716,30 @@
 - 新建 `cross_repo_mainline_and_delivery_plan_2026-09-28.md`，固定 S0/G-0 基线与 R4 多根 reader、ET/FF/RF G-A、StockWiki 基础 G-B 与独立 IQS G2b、CWP 旧链/N1–N3/G-C、派生 G-D 的依赖图、逐步执行卡、单仓提交/并线方式及大节点 TDD/E2E/清理/回退门。同步 `task_plan.md` Phase 24、README、清洁架构总图和 R4 卡的过期状态指针；本次仅修改 company-wiki 规划文件。
 - 未修改任何 RF、FF、ET、StockWiki、IQS 源码或 PWF；未合并/推送分支，未读取 API key 内容，未下载或删除原文，未运行生产 Worker/派生清理。现有旧库退役收据原样保留，不把已释放的 37.630 GiB 重计入后续收益。下一轮从 S0 live refs/样本 oracle 与 G-0 的未签项开始，再按已固定 DAG 施工，不临时另定顺序。
 - 对新总计划做独立只读审查后补齐：SourceExport v2 producer、StockWiki S5b sync/weekly 实作与发布回路，G-0 scoped A/B 结论，ET `/2` 抽取字节与 CWP material hash 的区分，G1e 取前授权时序、正常文档自动 review、旧 normalized 实际字节核验，以及 G-A latest/gap/close-gap 真链矩阵。同步旧 raw 处置/空间账页首标记本轮 `Rdup=Rskip=0`。`git diff --check` 已通过；尚未运行任何新产品测试，规划文档仍待最终提交。
+
+## Session: S0/G-0 plan correction and CWP baseline (2026-09-28)
+
+- 复查代码与合同测试后发现 CWP 主线已有 `source_export_v2.py`、`source_export_v2_cli.py` 及对应 producer/CLI contract suites。修正总计划和 Phase 24：不重新造 producer；先跑现有测试并补真实样本输出证据，StockWiki reader/CLI 仍是待实现项。
+- 复核 RF 当前 HEAD 与根工作树计划，发现 RF 根 PWF §42/dirty implementation 允许 evidence path 缺 hash 时 pending，与用户已经确认的“有 path 必须有有效 hash”冲突。更新总计划为拒绝导入该放宽规则；本仓没有对 RF 做写入。
+- 核实本仓当前 HEAD `25aa51b`，相较已知 `origin/master@f39bd5a` ahead 34；工作树仅有总计划修改。下一动作是运行 CWP SourceExport v2、reader、operation 合同测试及真实字节 E2E；具体通过/skip/fail 和测试根恢复状态待补。
+- CWP 基线测试在 `C:\cwt\g0-20260928-source-reader` 运行：`test_source_operation_v2.py`、SourceVersionReader unit/CLI、SourceExport v2 producer/CLI contract、`test_source_version_reader_real_bytes.py` 共 **77 passed, 0 skipped in 22.78s**。sandbox 阻止的第一次尝试未执行产品逻辑；按用户此前授权在完整文件系统重跑后通过。finally 后确认唯一测试根不存在。
+- 真实字节门覆盖 STAR annual report 的双根同 SHA 查询、完整验 hash、首选位置移动后的 fallback、同尺寸篡改后的 fallback；P06 定增说明书 sidecar 缺完整正式期次/来源，exact query 不复用，preview 仍验原始 SHA，正式 reuse 被拒。测试本身对原始文件 SHA/size/mtime/attributes、测试树快照作前后断言。本轮没改产品源码、没下载或编辑原文。
+- G-0 剩余实质缺口：四隔离根、company/dayu/Dropbox 原生布局与 adapter、真实 SourceExport v2 span/locator 回放、旧引用回放、429 页招股说明书资源约束以及独立 B.AR。不能用这 77 项基线代签 G-0；下一步调查能否用现存原件做上述同一大门验收，并将缺失 oracle 逐项列为 hold。
+
+## Session: 人工权限门简化与回归（2026-09-28）
+
+- 根据用户已经给出的个人项目及外部 LLM 外发授权，移除逐文档人工批准、review 回执门槛、transcript rights-policy 文件/哈希、双阶段预授权与取后政策复核；CLI 收敛为 schema `/2` 的一次精确请求结果导入。无回执不再阻断叙述摘要；Worker 技术失败走自动重试或终态失败。
+- 保留可自动判定的数据正确性与运行预算：公司/证券和期次匹配、URL/状态/MIME、原文 SHA 与字节长度、最大 payload、去重、原文不可变、summary schema/引用/locator 回放。它们不要求人工队列，也不将内容标成 private/public。
+- 删除未被当前 importer 使用的 provider-rights/admission/preflight 服务链与专属测试；narrative event/select/summary/bundle 合同升到 `/2.0` 并删除 provider-policy 字段，测试确认新版本不需要 policy receipt。通用 `DownloadAuthorization` 仍被 `close_gap` 使用，本轮保留待后续单独评估。
+- 两轮回归分别 **127 passed** 和 **95 passed**（共 198 个不同用例，24 个 automation planner 用例重复覆盖）；覆盖 transcript importer/reader/narrative 全链、LLM egress、Worker、focus admission、reader 原文篡改检测、planner/registry 与 observability。全部改动 Python 文件 Ruff clean，`git diff --check` clean。
+- 两组测试使用 workspace `.test-tmp` 隔离 basetemp；测试输入只为临时 fixture，未下载或删除生产原文；测试完成后 `.test-tmp` 已删除。Worker 仍按总计划保持 paused，跨仓与生产 Worker 启用须通过相应真实数据大节点 E2E。
+
+## Session: 多余门禁统一清理与并行施工规划（2026-09-29）
+
+- 用户要求先全面清查多余权限、人工签收和复杂合同，形成具体清理方案；完成后由本任务统一协调，按仓库目录独占拆成可交给不同 agent harness 的独立计划。本轮仅做只读审计与规划文档，不改产品代码。
+- 已启动 company-wiki、FF/ET/RF、StockWiki/IQS 三个只读审计；当前发现旧历史实施卡与 2026-09-28 自动验收规则存在冲突，且 `close_gap` 的运行策略哈希与自动授权、automation 人工审批模型仍在现行代码中。待核调用图和实际阻断范围后裁定，不按关键词批量删除。
+- 三项只读审计均已完成。新建 `gate_and_contract_simplification_2026-09-29.md`，按 P0 真阻断、P1 影子/人工状态、P2 配置/历史文档列代码位置、替换规则与测试；明确保留原文/来源/预算、RF 有路径必有哈希和实际 provider 限制。第一部分为已完成的实施方案，尚未修改六仓产品代码。
+- 在清理裁定之后新建 `parallel_harness_orchestration_2026-09-29.md` 和六份仓库独占施工卡。主 agent 唯一写总计划/跨仓测试根；各仓 owner 独自保存 WIP、提交/合并本仓分支并停写；总指挥登记真实 producer golden、协调接口和 G-0/G-A/G-B/G2b/G-C/G-D。S0a 只读 observed 先于派发，S0b 正式 golden 由对应 producer owner 生成；每仓测试包、交接格式和自动验收标准写在各卡。
+- 三条只读 QA 发现并修订了重要歧义：CWP `capture_ready` 查询保持 metadata-only，实际 SHA 在 open/verify；review store/pending proposal 不再阻断；LLM 模型网络与采集网络分别限额；ET `/2` 必须 FY+Q 且不含原始 payload 长度，默认 Motley 禁用、fake FMP 成功链；FF/RF v2 测试来自特定 WIP worktree；RF scenario/三仓 closure 两个 CLI 坏证据须非零；IQS 是 schema/校验器而 StockWiki 是身份真实 producer；selected consumer 分配 RF/StockWiki 各仓；G-D 按清理批次实际消费者引用选择前置测试，不加全局身份门。
+- 产品代码、其它五仓和生产原文/派生均未由本轮规划改写；未派发 harness 或启动 Worker。规划链接与格式检查结果见本会话最终核对，旧实施目标继续暂停。
+- 最终静态核对：19 份本轮涉及的 Markdown（现有入口/状态/测试页 + 新总方案/六卡）相对链接缺失 **0**、行尾空白 **0**；规划目录 `git diff --check` 退出码 **0**。本轮为文档规划，没有运行产品测试；此前未提交的产品/测试 WIP 仍在原工作树，未被本轮重置或合并。

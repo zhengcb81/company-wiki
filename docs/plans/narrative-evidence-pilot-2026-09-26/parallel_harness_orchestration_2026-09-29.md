@@ -1,0 +1,79 @@
+# 六仓独占施工与总指挥集成计划（2026-09-29）
+
+> **本计划为分工与交接方案，尚未派发或实施。** 执行前先完成[统一门禁清理方案](gate_and_contract_simplification_2026-09-29.md)的合同裁定。本任务的主 agent 是唯一总指挥：维护本目录总计划、冻结接口、收各仓提交、处理跨仓不兼容、运行跨仓真实数据 E2E 和发布汇总。各 harness 只写自己独占的项目仓库/隔离工作树；可以只读其它仓及本目录的合同。旧 [跨仓施工图](cross_repo_mainline_and_delivery_plan_2026-09-28.md)保留历史调查和详细试验背景，冲突时以本页与 2026-09-29 清理方案为准。
+
+## 1. 唯一写入者与六份可直接派发的施工卡
+
+| 线 / 独占项目目录 | 可直接交给 harness 的文档 | 输入 | 产出 |
+|---|---|---|---|
+| CWP / `C:\Users\郑曾波\Projects\company-wiki` 的**专用代码 worktree** | [CWP 施工卡](harness_lanes/company_wiki.md) | 本仓已保存的 2026-09-28 WIP、真实原件只读副本 | 来源读取/导出 golden、简化的精确采集接口、selected bundle 与可靠 Worker |
+| ET / `C:\Users\郑曾波\Projects\earnings-transcripts\earnings-transcripts` | [ET 施工卡](harness_lanes/earnings_transcripts.md) | 明确公司和 fiscal FY/Q 请求 | 原语言 TXT 的版本化精确工具结果 |
+| FF / `C:\Users\郑曾波\Projects\filing-fetch` | [FF 施工卡](harness_lanes/filing_fetch.md) | CWP SourceRef/operation golden、ET tool golden | v1 兼容和显式 v2 来源/电话会编排 envelope |
+| RF / `C:\Users\郑曾波\Projects\revenue-forecast` | [RF 施工卡](harness_lanes/revenue_forecast.md) | FF/CWP 生产者 golden 和来源读取 CLI | 无物理根依赖的来源 adapter、严格 evidence hash |
+| StockWiki / `C:\Users\郑曾波\Projects\StockWiki` | [StockWiki 施工卡](harness_lanes/stockwiki.md) | CWP SourceExport v2/verified-open golden、IQS 身份合同/校验器 | v2 只读 reader/CLI、真实身份库 serializer/golden、W01–W03 与 selected 消费 |
+| IQS / `C:\Users\郑曾波\Projects\invest-quick-scan` | [IQS 施工卡](harness_lanes/invest_quick_scan.md) | 已有 identity 合同及独立证据 | identity package 2.2 的 schema/参考校验器/合同夹具与简化工程签收 |
+
+主 agent 独占当前 `company-wiki/docs/plans/narrative-evidence-pilot-2026-09-26/` 和跨仓 E2E 运行目录，不在其他 harness 活动期间修改其产品仓库。CWP 代码 harness 必须使用独立**物理 worktree 目录与独立分支**，不在主 agent 当前脏工作树写文件；总指挥先将当前 WIP 形成可恢复提交或经核验的快照，再指定准确 base。其它仓每仓也只设一个写入者；同仓 WIP 收拢由该 owner 完成。外部 `dayu-agent`、`StockInfoDLSimple` 和全局安装的 filing-fetch skill 本波为只读依赖；如确需修改，增开单独目录所有者，不让 FF harness 越界写。
+
+**写入交接**：每仓 owner 独自提交并正常合并该仓代码、报告 HEAD/剩余脏文件，然后停写；总指挥只读核验各仓结果、协调跨仓不兼容并运行独立汇合测试，不进入别人的仓库执行合并。G-D 的 CWP 生产派生清理也由 CWP owner 在总指挥核准精确清单和隔离测试结果后执行；主 agent 核对前后原件/manifest/净空间账。总指挥的计划文档与 CWP 代码 worktree 始终是两个不同的物理目录和不同写入集合，但共享同一 Git 对象库/refs；并行期双方只操作自己的分支，不做共享 `gc/prune`、跨分支 reset 或强推。各线测试根使用该 harness **实际可写**的短临时目录 `<lane>-<nonce>`，汇合根使用总指挥可写的 `gate-<nonce>`；仅在 `C:\cwt` 已明确配置为可写时才选它，运行前须确认目标原本不存在且在专用测试目录内。
+
+使用 PWF 的 harness 把自己的进度记在**自己的仓库/工作树**，其它 harness 可直接使用本页链接的单仓施工卡；不共同编辑本计划目录，也不把其它仓 PWF 当自己的任务状态。总指挥是本目录 `task_plan.md`、接口表和跨仓结果的唯一写入者。各线单独测试通过是本仓交接条件，跨仓能力是否可用由总指挥跑相应 G 节点后标记；没有第二套人工签收文件。
+
+## 2. S0a/S0b：先给共同基线，再冻结正式 producer 合同
+
+1. **S0a 只读盘点**：在具备完整文件权限的环境逐仓记录 live HEAD、上游/merge-base、tracked diff、untracked 路径清单和已有 PWF 关联。CWP 当前未提交简化改动、ET/FF/RF 的 WIP、StockWiki 未跟踪 W01、IQS 大量活动文件均须先归属，不用 `reset --hard`/通配符 clean。派发后各仓 owner 才在独立分支保存自己的有效 WIP 为可恢复提交；总指挥只记录 commit/路径，不复制跨仓文件。
+2. **S0a（派发前）**：总指挥只读记录当前 CWP/ET/FF 真实 serializer、CLI 与现存样本的版本/字段/错误码；IQS 则记录现有 2.2 schema/参考校验器和合同夹具，StockWiki 身份库生产入口现状。此时接口表标 `observed` 或 `pending`，只足以让各线写本仓 RED/整理 WIP，**不宣称 frozen**。
+3. 固定 P01 年报、P04 招股书、P06 增发、P07 IR、T01/T02 电话会、P09 低价值文档等试点原件的文件身份和只读路径；每个测试复制少量原件到**各线不同**的隔离根。测试结束恢复本次测试目录原状，生产原件、catalog 和 manifest 不写。
+4. 总指挥发每条线的独立施工卡和 S0a 表。**S0b（producer owner 完成后）**：CWP owner 从现行或修复后的代码输出 SourceRef/operation/SourceExport v2/verified-open 的正式 golden；ET owner 输出 `/2` 工具 golden；FF owner 输出 v2 envelope golden；StockWiki owner 从自己的身份数据库/serializer 输出 identity snapshot golden，IQS owner 用其 schema/参考校验器验证并交合同反例。总指挥把版本、golden 文件 SHA、字段/错误码、CLI 命令、owner/consumer 与 `frozen` 状态登记。selected package 与尚未定义的 identity mapping DTO 均保持 `pending`，直到各自 owner 给出正式版本。消费者只在对应 producer 冻结后接入；任何字段变化由生产者先更新 golden 和版本，再通知受影响 consumer，只重跑受影响合同与跨仓边。
+
+接口表每行固定为 `producer repo+commit | schema/version | serializer/CLI 命令 | golden 正例/畸形反例路径与 SHA | 身份/时间/SHA/locator 语义 | 错误码/退出码 | consumer repo+版本 | 状态 observed/pending/frozen`。正式正例由生产代码序列化，畸形反例可人工构造；接口表是技术事实记录，不是多方签收。
+
+总指挥随 S0a 向每线交一份**只读测试输入清单**：`sample_id | 原件绝对路径 | 原件 SHA/字节数 | 文档类型/期次 | 此线所需 locator oracle | 复制到本线隔离根的规则 | 预期生成文件 | 清理后根状态`。按需求分发 P/T 子集，绝不把生产原文提交进其它仓。各仓自己维护 fake HTTP/坏合同 fixture；真样本只复制到本仓专用可写临时根。G 门使用另一套总指挥专用短根，同一原件在测试前后重算 SHA，DB/WAL/cache/下载等本次生成物全部移除并核根恢复。现有正式测试文件若只在 WIP worktree，先由 owner 保存并导入可恢复提交；测试包不得引用一个尚不存在的路径却记为通过。
+
+## 3. 交接接口：生产者负责事实，消费者只持逻辑 ID
+
+| 生产者 → 消费者 | 已知版本/最小语义 | 冻结物与失败规则 | 汇合测试 |
+|---|---|---|---|
+| CWP → FF/RF 的 SourceRef/verified read | 现行 `SourceRef` schema `2.0` 含 `document_id, source_id, content_sha256, byte_size, mime_type`；verify/open 返回实际全字节 SHA 验证结果，不返回永久物理路径。外部 envelope 的精确字段以 CWP serializer golden 为准。 | 同 ID 错 SHA、未知版本、撤回、as-of 后、仅元数据未验 bytes 不可当可用原文；同 SHA 多根迁移不得改变逻辑身份。 | G-0、G-A |
+| CWP → StockWiki 的 SourceExport v2 | `SourceExportBundleV2` schema `2.0.0`，manifest/evidence span、export ID、bundle SHA、locator；`SourceExport` 是来源快照，不携带投资结论。 | CWP 真实 producer golden；StockWiki 不使用 `companies/`、dayu、Dropbox 的路径或旧 path hash 作 source ID。 | G-B；full sync/weekly 到 G-D |
+| ET → FF 的 transcript tool | 现行 opt-in `/2` 请求必须同时提供公司/交易所、FY **及** Q；结果有 `provider_payload_sha256`、抽取文本 `content_bytes`/hash、来源 URL/时间，**没有原始 payload 长度字段**。工具失败和未找到分开。 | ET 真 serializer golden；CWP importer 对 `/2` exact-key 校验。若要 FY-only 或新增 payload 长度，先定义新版本并同步 FF/CWP golden；FF 不把全年报告猜成 Q4，不翻译。 | G-A 中 FF→ET→CWP |
+| FF → RF 的 filing/source envelope | FF v1 默认 JSON/退出码继续；显式 v2 SourceRef envelope 将 filing 与 companion 的状态分开。最终 wire 版本由 FF producer golden 固定，旧计划所写 `1.3` 不是允许猜字段的依据。 | 缺 review receipt 不阻断；已有复用须 0 下载，未知/歧义期次 0 网络，错误来源和损坏 payload 具名失败。 | G-A 中正式 FF CLI→CWP→RF |
+| IQS 合同 → StockWiki 身份库；StockWiki → 下游 identity snapshot | IQS 契约包 `2.2.0`，其中 Entity `2.1.0`、AnalysisSubject `1.0.0`；issuer/security/listing 分开。StockWiki 是身份库与名单的唯一生产写入者。跨仓映射 DTO **当前不存在、标 pending**。 | IQS 提 schema/参考校验器/合同夹具和一个公开 JSON 校验 CLI；StockWiki 真实 serializer/DB 产生 snapshot golden，运行时本地验 schema，G2b 由总指挥调用 IQS CLI 核对。新 mapping DTO 中 `mapping_status=null` 是 JSON null、表示未请求/未尝试；`unknown` 是已尝试但零精确匹配，`ambiguous` 是多个候选，`mapped` 是唯一精确绑定；均须规定 as-of、issuer/security/listing、来源绑定和错误码，再升版本/golden。 | G-B 基础身份；四态 G2b 待新合同 |
+| CWP → RF/StockWiki 的 selected evidence | narrative event/select/summary/bundle 试点 schema `/2.0`；持久 selected package 和正式消费尚待 CWP/消费者实现。 | CWP 先出含 source ID、locator、raw SHA、同语种摘要、skip/partial/needs_review 理由和撤回/as-of 的正式 package/golden；RF 与 StockWiki 各自实现本仓 reader/adapter 并回源核验，不可直接用试点 DTO 假充已发布合同。 | G-C |
+
+总指挥负责**接口表的登记/冻结、核对各 owner 的真实 producer golden 与跨仓测试**；golden 由生产者 owner 的代码生成。每条线保留内部自由度；不共享数据库、物理根路径、临时文件或 Python 内部类型。若 producer 改了字段且未更新版本/golden，集成失败即由 producer 修复；若 consumer 硬编码路径或擅自放宽 hash，由 consumer 修复。旧兼容只为实存持久数据和既有用户 CLI 保留。
+
+## 4. 可执行的并行波次与关键依赖
+
+```text
+S0a 只读盘点 → 六仓各自整理 WIP / 写 RED / 独立测试
+CWP P0 修复 → G-0 → CWP S0b golden ─┬→ FF v2 → FF envelope → RF reader → G-A
+                                    └→ StockWiki v2 reader → G-B
+ET 精确工具 → ET S0b golden → FF companion → G-A
+IQS 2.2 schema/校验器 → StockWiki 身份 serializer/golden → IQS 校验 → G2b
+CWP 持久 selected package → RF + StockWiki 各自 selected adapter → G-C
+G-D：逐批按实际消费者引用选择已通过的 G-A/G-B/G2b/G-C；无全局 G2b 前置
+```
+
+- **第一波可同时启动**：ET、IQS、CWP P0 RED/修复/G-0、StockWiki W01/身份 serializer、RF registry hash/无 review 阻断测试、FF v1 基线/SourceRef 合同准备。每线只改自己的仓。FF 最终 v2 消费等 CWP golden；RF 最终 reader 等 FF envelope；StockWiki reader 最终消费等 CWP export golden；IQS 的 G2b 校验等 StockWiki 身份 golden。ET 可独立完成工具测试。
+- **第二波在同仓内顺序**：FF 的 SourceRef v2 与 companion 由同一个 FF harness 依次合入；StockWiki W01、W02/W03、v2 reader 由同一个 StockWiki harness 依次收拢。CWP G-0 与 E5/Worker 也由同一个 CWP harness 管理，不开第二个写 CWP 的 agent。
+- **汇合可并行**：G-A 和 G-B 在 G-0 通过后可在不同隔离测试根运行；G-C 的 CWP 内部 E5/E6 可与它们推进，但正式 RF/StockWiki selected 消费须等各自 reader 与持久 package。G-D 逐批检查待清派生的实际消费者：只要求与该批相关的已通过读/消费门和无引用证明；G2b 只限制身份功能发布或被身份功能引用的派生，不挡无关清理。
+- **共享机器负载**：各仓小测试可并行，429 页 PDF、Windows 1/2/4 进程与空间清理 E2E 由总指挥排班，避免内存/磁盘竞争影响性能结论。任何生产 Worker 在 E-B/G-C 通过前保持 paused。
+
+## 5. 每条线的独立测试包与总指挥验收
+
+各线施工卡列自己的单元/合同/本仓 E2E 文件和正反例；owner 先写或修有意义的失败测试，再实现。开发时跑受影响测试，交接前跑该线测试包；总指挥只在 G-0/G-A/G-B/G-C/G-D 跑一次跨仓真样本 E2E，不要求每个小提交重复全量套件或独立 reviewer。
+
+| 集成点 | 总指挥负责的真入口与通过条件 | 失败时继续的范围 |
+|---|---|---|
+| G-0 CWP reader | 四根和 company/dayu/Dropbox 原生位置、同 SHA 搬根、同尺寸篡改、旧引用、真实 locator、429 页资源；测试根恢复 | ET/IQS/FF/StockWiki/RF 可继续本仓 TDD，消费者不切默认 |
+| G-A 采集/预测 | FF→CWP→RF、FF→ET→CWP 正式 CLI/工具；0 意外网络、一次精确下载、无 review receipt、严格 evidence hash、原文与来源不变 | 只关闭失败的 FF/RF/ET 新路由 |
+| G-B 来源消费与 G2b 身份 | StockWiki v2 reader 实读 CWP verified bytes，迁根/篡改/撤回；StockWiki 真实身份 snapshot/mapping DTO 经 IQS schema/参考校验器验证 mapped/unknown/ambiguous/null | 基础 reader 与身份线各自独立失败/重跑；新 mapping DTO 未冻结前 G2b 保持 pending |
+| G-C 叙述/Worker | 年报、招股、IR、TXT 的 selected/skip/locator 真回放；RF 与 StockWiki 从各自正式 adapter 实读 selected package 并核撤回/as-of/原文 SHA；1/2/4 文档、kill/retry/lease/outbox、资源/空间上限 | Worker 保持 paused；若仅 CWP 内部包绿而消费者失败，只记内部 E5/E6 通过，G-C 不通过 |
+| G-D 派生清理/发布 | 每批 scratch 删除重建、实际消费者引用与对应已通过门、精确生产派生清单、同卷净字节、原件/manifest 前后相同；StockWiki full sync/weekly 仅在相关 G-B/G2b/G-C 已通过后单独 canary | 不可解释的派生批次跳过；无关批次和已验能力继续 |
+
+每个 harness 交接只需一页：`repo/base HEAD/branch/commit`、改动路径、生产接口版本与真实 golden 路径/hash、测试命令/退出和隔离根恢复、已知 hold。该页是技术交接，**不是授权签收**。同仓 owner 按依赖顺序正常合并自己的代码并停写；总指挥只读核实实际仓库状态、协调跨仓字段冲突与最终路线，不 force push。用户无需为已授权范围内的每个文件、job、PR 或节点再签字。
+
+## 6. 当前派发条件与风险
+
+本轮仅编写计划，六仓代码未因此变化。CWP 现有简化 WIP 尚未提交；StockWiki W01 未跟踪且现有 18 项测试历史为 8 pass/10 fail；IQS 活动脏树和 RF reader/§42 WIP 要先按最新 Git/PWF 分类。`SourceExport v2` producer 在 CWP 已存在，StockWiki reader 分支当前无实现。ET/FF/RF 的接口与测试文件须在各仓当前 HEAD 上核实，不把 2026-09-28 SHA 当未来合并目标。FMP 当前实际请求曾返回 402，G-A fake-provider E2E 不代表付费 API 可用。以上不阻止独立线开始 TDD，但会阻止相应默认路由发布。

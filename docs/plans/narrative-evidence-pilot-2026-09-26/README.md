@@ -1,6 +1,6 @@
 # 叙述性证据规划：执行入口
 
-> **2026-09-28 入口更新：**跨仓合主线、R4 抽象、电话会、StockWiki/IQS、E5–E7 Worker 与派生降容的当前整体顺序见[跨仓主线整合与交付总计划](cross_repo_mainline_and_delivery_plan_2026-09-28.md)。本页以下历史状态是既有试点收据；遇“当前下一步”冲突，以新总计划及 `task_plan.md` Phase 24 为准。
+> **2026-09-29 入口更新：**先读[多余门禁统一清理方案](gate_and_contract_simplification_2026-09-29.md)，再读[六仓独占施工与总指挥计划](parallel_harness_orchestration_2026-09-29.md)。两页依次裁定要清理的真实代码/历史规则、各仓独立写入范围、接口与汇合测试；`task_plan.md` Phase 25 记录本轮规划状态。2026-09-28 的[跨仓总图](cross_repo_mainline_and_delivery_plan_2026-09-28.md)保留历史基线和详细施工背景，冲突时以 2026-09-29 两页为准。本项目已取消逐文件人工审批、review receipt 和常规独立签字；自动测试/完整性断言是常规依据。旧 provider policy 与人工 review 文档不得作为新实施门槛。
 
 > 2026-09-27：F0–F5 旧库退役、G1 离线选择试点和 D0 本地只读文件/引用盘点已完成各自允许范围；检索原型现含 query-local BM25 与 pilot-only raw resolver，12 件 manifest 样本 E2E 对全部已选 evidence groups 做原件重放和 SHA/locator/text 校验。最新合并回归为 12 个检索/回源单测 + 两个隔离 E2E（P06/T02 双样本链路、12 件样本 selected-anchor/raw-replay），共 **14 passed in 130.77s**；历史全绿收据为 122.56s；`ruff check` 通过。唯一 basetemp 清理后复核不存在，`tests/e2e/.runtime/` 运行前后均不存在，样本副本、package、metrics 与临时状态随 run root 清理，测试目录恢复基线。13 条摘要草稿通过引用/角色机械校验并经实施者逐条核源，但全部仍 `needs_review`。本轮 transcript 接口审计确认当前没有可调用 MCP tool，且 filing-fetch 没有 companion request/response；G1e 需先冻结独立上游接口合同。pilot resolver 不等于正式 G2 service 或共享 consumer 放行；StockWiki strict Source Provider v1 与 pilot bundle v0.2.0 不兼容，revenue-forecast G0 未通过；invest-quick-scan 仅做可选身份映射，不读取叙述包。Worker 仍暂停。
 
@@ -8,31 +8,33 @@
 
 ## 先读顺序
 
-1. [clean_architecture_tdd_execution_plan_2026-09-27.md](clean_architecture_tdd_execution_plan_2026-09-27.md)：**当前唯一实施顺序**；定义不可丢失原件、可重建派生、L0–L7 分层、Phase A–G、TDD 和 M1–M4 大节点。
-2. [findings.md](findings.md)：10 PDF + 2 TXT 的真实样本、11 个正例、2 个负例及已验证边界。
-3. [implementation_plan.md](implementation_plan.md)：项目目标、来源/证据/摘要/跨仓合同和 W0–W7 历史工作包。
-4. [milestone_review_cadence.md](milestone_review_cadence.md)：现行集中审查节奏；由重构总图收束为 M1–M4。
-5. [execution_cards.md](execution_cards.md)：W/N/D 实现范围与失败关闭断言。
-6. [worker_parallel_execution_plan.md](worker_parallel_execution_plan.md)：Worker 多文档并发的详细实施入口；[worker_parallel_recovery.md](worker_parallel_recovery.md) 只留故障背景。
-7. [test_acceptance_plan.md](test_acceptance_plan.md) 和 [review_protocol.md](review_protocol.md)：测试分母、对抗场景、独立审查和放行证据。
-8. [task_plan.md](task_plan.md)、[progress.md](progress.md)：本计划状态与本轮调查记录。
-9. [g1_summary_source_support_audit_v1.md](g1_summary_source_support_audit_v1.md)：13 条人工摘要逐条来源支持、时点、语气、角色审查；不构成独立审稿签字。
-10. [end_to_end_test_plan.md](end_to_end_test_plan.md)：G1–G4 关键端到端链路、隔离运行目录、崩溃清理和测试后目录恢复基线要求。
-11. [early_catalog_retirement.md](early_catalog_retirement.md)：46 GiB 旧主库提前退役的活跃子集、完整压缩备份、服务差分和文件级清理门禁。
-12. [raw_disposition_plan.md](raw_disposition_plan.md)：被新方法跳过的旧来源如何判定、逐件处置与 D0–D5 恢复门禁；重构总图已将 canonical raw 默认改为保留。
-13. [stepwise_space_budget.md](stepwise_space_budget.md)：逐步新增/释放空间、临时峰值、旧库压缩计数与待试点变量。
-14. [implementation_run_2026-09-26.md](implementation_run_2026-09-26.md)：F0–F5 实际运行卡和空间释放收据。
-15. [cross_project_coordination_2026-09-26.md](cross_project_coordination_2026-09-26.md)：与 revenue-forecast 的源码/数据交叉、消费者 SHA 门禁和唯一 owner 约束。
-16. [d0_inventory_receipt_2026-09-27.md](d0_inventory_receipt_2026-09-27.md)：D0 本地只读文件与旧引用盘点。
-17. [provider_cost_and_capability_2026-09-27.md](provider_cost_and_capability_2026-09-27.md)：SEC/FMP/Koyfin/Seeking Alpha 的来源、月调用预算及采购闸门。
+1. [gate_and_contract_simplification_2026-09-29.md](gate_and_contract_simplification_2026-09-29.md)：当前多余门禁清理裁定、准确代码位置和测试替代。
+2. [parallel_harness_orchestration_2026-09-29.md](parallel_harness_orchestration_2026-09-29.md)：总指挥、六仓独占、接口冻结和 G-0/G-A/G-B/G-C/G-D 汇合。可单独派发：[CWP](harness_lanes/company_wiki.md)、[ET](harness_lanes/earnings_transcripts.md)、[FF](harness_lanes/filing_fetch.md)、[RF](harness_lanes/revenue_forecast.md)、[StockWiki](harness_lanes/stockwiki.md)、[IQS](harness_lanes/invest_quick_scan.md)。
+3. [clean_architecture_tdd_execution_plan_2026-09-27.md](clean_architecture_tdd_execution_plan_2026-09-27.md)：L0–L7 分层、TDD 和旧 M1–M4 节点的技术背景；实施顺序以本页前两项为准。
+4. [findings.md](findings.md)：10 PDF + 2 TXT 的真实样本、11 个正例、2 个负例及已验证边界。
+5. [implementation_plan.md](implementation_plan.md)：项目目标、来源/证据/摘要/跨仓合同和 W0–W7 历史工作包。
+6. [milestone_review_cadence.md](milestone_review_cadence.md)：关键自动化测试节点与何时重跑的规则。
+7. [execution_cards.md](execution_cards.md)：W/N/D 实现范围与失败关闭断言。
+8. [worker_parallel_execution_plan.md](worker_parallel_execution_plan.md)：Worker 多文档并发的详细实施入口；[worker_parallel_recovery.md](worker_parallel_recovery.md) 只留故障背景。
+9. [test_acceptance_plan.md](test_acceptance_plan.md)：测试分母与对抗场景；`review_protocol.md` 只列机器可判定的放行条件，不要求人工 reviewer。
+10. [task_plan.md](task_plan.md)、[progress.md](progress.md)：本计划状态与本轮调查记录。
+11. [g1_summary_source_support_audit_v1.md](g1_summary_source_support_audit_v1.md)：13 条人工摘要逐条来源支持、时点、语气、角色审查；不构成独立审稿签字。
+12. [end_to_end_test_plan.md](end_to_end_test_plan.md)：旧 G1–G4 样本与隔离运行目录；当前节点对应关系见并行总计划。
+13. [early_catalog_retirement.md](early_catalog_retirement.md)：46 GiB 旧主库提前退役的历史实施卡和实际收据。
+14. [raw_disposition_plan.md](raw_disposition_plan.md)：旧 D0–D5 原文处置研究；当前原始下载文档全部保留。
+15. [stepwise_space_budget.md](stepwise_space_budget.md)：逐步新增/释放空间、临时峰值、旧库压缩计数与待试点变量。
+16. [implementation_run_2026-09-26.md](implementation_run_2026-09-26.md)：F0–F5 实际运行卡和空间释放收据。
+17. [cross_project_coordination_2026-09-26.md](cross_project_coordination_2026-09-26.md)：与 revenue-forecast 的源码/数据交叉、消费者 SHA 门禁和唯一 owner 约束。
+18. [d0_inventory_receipt_2026-09-27.md](d0_inventory_receipt_2026-09-27.md)：D0 本地只读文件与旧引用盘点。
+19. [provider_cost_and_capability_2026-09-27.md](provider_cost_and_capability_2026-09-27.md)：SEC/FMP/Koyfin/Seeking Alpha 的来源、月调用预算及采购闸门。
 
 ## 实施时的硬边界
 
-- Worker 当前暂停；本目录的任何 `complete/accepted_scoped` 都不解除暂停或授权生产运行。实际恢复需先满足 [Worker v5](../source-catalog-worker-recovery-v5-2026-09-03/README.md) 与 [R4 C/D](../painpoint-outcome-audit-2026-09-05/simplified-execution-plan.md) 对 H01、D.SAFE、持久任务、隔离运行和用户精确授权的要求。
+- Worker 当前暂停；自动测试通过后，按用户已授权的任务范围实施，不另索逐 job/逐文件授权 receipt。Worker 只有在持久任务、恢复、资源上限及原件保护等自动技术断言通过后才可运行。
 - R4 C05 已指定**唯一现有**持久 job/attempt 入口。实施者先检查 `src/company_wiki/automation/` 实际状态；不得在 catalog 再造任务表，也不得直接多开现有 Worker。
 - 按 `N0→N1→N2→N3→N4→N5→N6` 实施 Worker：先原子领取/完成与恢复，再让不同文档并发解析/模型计算，catalog 单写短事务；多 agent 核验是后续可选功能。
-- 计划写明的 SQL/API/CLI 是未来设计合同，**尚未存在**。现有 AUTO CLI `status` 报 `not_configured`，70 个现有 automation 单测通过只证明旧单线程单元行为，不证明已具备生产并发或丢包恢复。
-- W/N/D 小步骤做相关测试与自检；G0–G4 大节点集中提交可重跑的关键证据、故障注入与独立复审。质量、费用、吞吐和暂停任何硬门槛失败时，保留单执行者或继续暂停；不能调低阈值、删除负例、以 mock 充真实提速。
+- 旧实施卡中的 SQL/API/CLI 有些已实现到 E4.8，有些仍是设计；实施者先核当前代码与测试，不按历史状态重做。生产并发与跨仓消费仍须在 G-C 等大节点验证。
+- 小步骤跑受影响测试；G-0/G-A/G-B/G-C/G-D 各跑一次对应真实 E2E 并记录自动结果。质量、费用、吞吐、来源身份或原件保护断言失败时，只暂停受影响能力；无需独立人工复审或签字。不能调低阈值、删除负例、以 mock 充真实提速。
 
 ## 当前实际结论
 

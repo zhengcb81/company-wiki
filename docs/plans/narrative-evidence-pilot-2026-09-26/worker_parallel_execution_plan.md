@@ -1,6 +1,6 @@
 # 多文档并发 Worker：可实施设计与验收手册
 
-> **状态：PLAN ONLY；未实施、未启动、未解除暂停。** 本文件是本专题并发方案的实施入口；[worker_parallel_recovery.md](worker_parallel_recovery.md) 保留设计背景和故障分类。执行时须服从现行 [Worker v5 冻结计划](../source-catalog-worker-recovery-v5-2026-09-03/README.md) 和 [R4 C/D 协调计划](../painpoint-outcome-audit-2026-09-05/simplified-execution-plan.md) 的真实门禁，复用它们已通过的同版本收据；本专题的审查/测试频率按 [G0–G4](milestone_review_cadence.md)，N0–N6 不是七次独立审查。本文件不改写别的计划，也不构成启动许可。
+> **状态：PLAN ONLY；未实施、未启动、未解除暂停。** 本文件是本专题并发方案的实施入口；[worker_parallel_recovery.md](worker_parallel_recovery.md) 保留设计背景和故障分类。复用 [Worker v5](../source-catalog-worker-recovery-v5-2026-09-03/README.md) 和 [R4 C/D](../painpoint-outcome-audit-2026-09-05/simplified-execution-plan.md) 中仍适用的自动技术断言，不叠加人工签收、逐 job 权限 receipt 或同一测试重复跑。本专题按 [G0–G4](milestone_review_cadence.md) 的大节点运行端到端测试，N0–N6 不是七次独立审查。用户已授权的明确公司/期次任务覆盖其文档和电话会配套处理；运行次数/费用/字节上限是自动资源控制，不是再次索取人工授权。
 
 ## 0. 结论与边界
 
@@ -14,9 +14,9 @@
 
 | 现有归属/代码 | 已核实事实 | 本计划交接点 |
 |---|---|---|
-| R4 C05 | 要求唯一现有持久 job/attempt 入口、source+角色+版本幂等键、lease/fencing、失败恢复，明确“不建第三套队列” | 本计划复用 `src/company_wiki/automation/` 的 `jobs/attempts/effects/outbox`；C05 对基础事务能力签收后，才接 narrative handler。若 C05 在实施前改了接口，以当时通过审查的唯一入口为准，重新审核本计划的映射表。 |
+| R4 C05 | 唯一持久 job/attempt 入口、source+角色+版本幂等键、lease/fencing、失败恢复；不建第三套队列 | 复用 `src/company_wiki/automation/` 的 `jobs/attempts/effects/outbox`。先运行其对应合同测试，再接 narrative handler；接口变化时只重跑受影响的映射测试。 |
 | R4 C07 | 要求单写者/短事务，并在隔离真实数据上验证读写争用、崩溃与取消 | 本计划的计算进程不写 catalog；writer 的短提交与跨库恢复作为 C07 的 narrative 用例。 |
-| R4 D01–D04 / Worker v5 | 自动 prune 危险入口 H01 或独立禁用证明、隔离测试、持久任务、取消/恢复、明确运行许可均是生产前置 | 本计划的 N0–N5 可以在 temp 中实施测试；任意真实 Worker 恢复仍等待 D.SAFE、v5 适用前置和用户精确授权。不可把本计划评审替代这些 Gate。 |
+| R4 D01–D04 / Worker v5 | 禁止自动删除原始文档；任务持久化、取消/恢复和资源上限需有自动测试 | N0–N5 可在隔离目录实施。真实 Worker 仅在自动化 E2E 通过、操作命令限定公司/期次并具备资源上限后运行；不要求额外人工启动收据，也不允许 Worker 删除原始文档。 |
 | `source_catalog/worker.py`, `service.py` | `run_cycle` 串行；`normalize`/`summarize_with_llm` 在整个调用期间持 `CatalogOperationLock` | 保留旧入口和暂停行为；新执行器在 feature flag 关闭时不接管。把“选任务→锁外计算→短提交”做成新路径，按公司/类型灰度，不直接删旧锁。 |
 | `automation/migrations.py`, `store.py`, `worker.py` | 已有表、WAL、唯一 `job_key`；但 AUTO CLI 报 `not_configured`，目前未接生产 Worker。`_try_claim` 的状态转移/attempt 插入为多个事务；完成 attempt 的 `put_attempt` 与旧记录冲突后被忽略；outbox 是另一次事务 | 先修原有入口的原子 claim、续租、finish、outbox、reap；不能把表存在等同于并发安全。 |
 | `source_catalog/store.py` | catalog 是另一 SQLite DB，`artifacts` 有 `UNIQUE(document_id,artifact_role,generator_name,generator_version)`；旧 normalized/summary 文件名可能被同文档重用 | 两库无法自然共享一个提交事务。新叙述产物走可回查的版本行和内容寻址文件；用 effect/对账完成跨库 saga，绝不静默覆盖旧产物。 |
@@ -93,7 +93,7 @@ AUTO DB 是 job/attempt/effect 真相源，catalog DB 是来源和叙述产物�
 3. **catalog prepare**：writer 持短时提交互斥锁，先再次验证 Worker 暂停 gate、最新 attempt token、source_status/`primary_source_id`/raw SHA、上游 artifact 与验证结果；在单个 catalog `BEGIN IMMEDIATE` 中登记 `narrative_artifact_versions`，状态为 `prepared`。选中证据先封装在内容寻址的 package 文件内，包含可回读的 EvidenceSpan 对象；此时不写旧 `evidence_spans` 可被普通查询看到的行。重复同 `work_key+hash` 返回已有，冲突 hash 为 P1。旧 v1 `artifacts` 唯一约束不用于承载多个策略版本，避免覆写历史。
 4. **AUTO finish**：catalog prepare 成功后，AUTO `finish_or_retry` 在**同一 AUTO 事务**把 effect `verified`、attempt finished、job `succeeded` 及 export outbox `pending` 写入。此时任何下游仍为 `PLANNED`；outbox 发布器必须在发送前检查 catalog 行已经 `visible` 且源身份、SHA 仍有效，未达条件则保留 pending 或撤回。
 5. **catalog activate**：仍在短时提交互斥锁下，重读 AUTO verified effect、当前 pause generation、catalog prepared hash，以及 source_status/`primary_source_id`/raw SHA；catalog 事务把同一行标 `visible`。只有 `visible` 且验证通过的 narrative package 可被新只读接口消费。随后 coordinator 依据可见包的精确 hash/role/source，把后继 `PLANNED→READY`；这一步可重放，遗漏由 reconcile 补。若 pause 在 AUTO finish 后、activate 前生效，保持 prepared 待下一次**获授权**的恢复；若来源已 retired/替换，则转 `quarantined`、取消 outbox 和未运行下游。需要旧全文检索的 selected span 投影，只能在此事务或后续带 visible 过滤的版本化投影中生成，不能提前泄露 prepared 证据。
-6. **reconcile**：进程重启扫描未完成 effect：AUTO pending/catalog prepared 同 `work_key+hash` 且原 attempt 租约有效 → 补 finish，再 activate；租约失效则先新 claim，用相同结果哈希完成新 attempt，**不再调用模型**；AUTO verified/catalog prepared → 在非暂停且来源仍有效时补 activate，否则 quarantine/cancel；AUTO succeeded/catalog visible/后继 PLANNED → 重验源与包并补 READY；AUTO pending/catalog 无而可信文件有 → 重做 prepare；文件无 → 按有界重试重算；catalog row 与 AUTO job/hash 不符 → 保持不可见并人工审查。孤儿文件经过保留期与引用核对后再清理，不能凭路径猜测删除。
+6. **reconcile**：进程重启扫描未完成 effect：AUTO pending/catalog prepared 同 `work_key+hash` 且原 attempt 租约有效 → 补 finish，再 activate；租约失效则先新 claim，用相同结果哈希完成新 attempt，**不再调用模型**；AUTO verified/catalog prepared → 在非暂停且来源仍有效时补 activate，否则 quarantine/cancel；AUTO succeeded/catalog visible/后继 PLANNED → 重验源与包并补 READY；AUTO pending/catalog 无而可信文件有 → 重做 prepare；文件无 → 按有界重试重算；catalog row 与 AUTO job/hash 不符 → 保持不可见并输出 machine-readable conflict，等待输入/版本修正后重试，不把常规冲突放进人工审批队列。孤儿文件经过保留期与引用核对后再清理，不能凭路径猜测删除。
 
 新 catalog 表的最低迁移形状（W0 根据当时 schema/索引审查后冻结；**不得**重建旧 `artifacts/evidence_spans` 大表）：
 
@@ -159,7 +159,7 @@ CREATE INDEX idx_narrative_source_role_status
 | F13 | pause 与 claim/commit 三个交错点竞争 | pause 返回后无新 claim/产物提交；旧 token 无效 |
 | F14 | source 在计算后 retired/换主源 SHA | commit 拒绝旧候选，触发撤回/新 job |
 | F15 | SQLite busy、磁盘满、Windows rename PermissionError | 不把 job 记成功；有界重试/停止，原文与旧包可读 |
-| F16 | 同 job_key 不同结果 hash/无源句/错误 speaker | 冲突或校验失败进入 needs_review/P1，绝不覆盖第一 accepted 包 |
+| F16 | 同 job_key 不同结果 hash/无源句/错误 speaker | 自动拒绝当前候选并记录原因，绝不覆盖第一 accepted 包；不建立人工 review 队列 |
 | F17 | AUTO finish 后、catalog activate 前协调器尝试放行下游 | 下游保持 PLANNED，零 claim/零网络；activate 后才 READY，重启漏升可补 |
 | F18 | AUTO finish 后、activate 前来源退休/换 SHA | prepared 进入 quarantined，outbox 撤回，下游保持不可运行；已运行租约按状态机封存 |
 | F19 | Windows temp/raw 路径检查后被 junction/symlink/reparse 替换 | 句柄身份或组件检查拒绝提交；不得写出受控根，也不将 job 标成功 |
@@ -173,16 +173,16 @@ G3 集中运行 F01–F20：每个断点先有一次可复现的确定性注入�
 
 **实验**：同一机器、电源模式、Python/SQLite/模型和输入预算；G3 先测 P1 与 P2 各 2 轮且交错顺序，只有 P2 达标才测 P2M/P4 各 2 轮。记录原始每文档开始/完成时间、阶段时长/队列等待、token/费用、峰值 RSS、CPU、磁盘、锁等待和失败；波动导致结论不稳时仅为相邻候选追加一轮。P2M/P4 的真实模型请求必须先有统一预算接口。远程模型速率/费用波动不可控时先用可重放的延迟/429 仿真比较调度能力，再在**明确允许外发**的有限真实 cohort 复测；仿真结果不能当真实生产提速。
 
-N5 必须交付 `scripts/benchmark_narrative_parallel.py`（或经 W0 固定的同等入口），显式参数 `--fixture-manifest`、`--scratch-root`、`--total-inflight {1,2,4}`、`--model-mode replay|approved-live`、`--round-id`、`--output-json`。在导入任何生产配置/打开 DB 前验证：scratch/root/output 的 resolved path 位于隔离根，fixture manifest SHA 对应 W0 冻结值，`approved-live` 有费用与外发授权 receipt；默认 `replay`，不得默认联网。输出 JSON 至少含每 job 时间线、三类资源槽占用、成功/重试/死信、accepted package ID/hash、token/费用、每阶段 RSS/锁等待/磁盘占用、fixture 与代码 SHA。以同一分析脚本计算吞吐和 p95，不手工摘最佳轮。
+N5 必须交付 `scripts/benchmark_narrative_parallel.py`（或经 W0 固定的同等入口），显式参数 `--fixture-manifest`、`--scratch-root`、`--total-inflight {1,2,4}`、`--model-mode replay|live`、`--round-id`、`--output-json`。在导入任何生产配置/打开 DB 前验证：scratch/root/output 的 resolved path 位于隔离根、fixture manifest SHA 对应 W0 冻结值。`replay` 为默认；`live` 需要命令行显式选择，并配置单轮费用上限和文档数上限。用户已授权来源内容外发，不再要求重复的授权 receipt。输出 JSON 至少含每 job 时间线、三类资源槽占用、成功/重试/死信、accepted package ID/hash、token/费用、每阶段 RSS/锁等待/磁盘占用、fixture 与代码 SHA。以同一分析脚本计算吞吐和 p95，不手工摘最佳轮。
 
-**建议预注册的上线判据**（W0 在看候选结果前可按业务预算裁决并锁定；以下是设计目标，**不是已测结果**）：
+**建议预先固定的自动判据**（以下是设计目标，**不是已测结果**）：
 
 - F01–F20 全过；13 张探索卡全过；盲测质量不低于 W0 冻结的召回/精确率/locator 门槛；0 个 P0/P1，0 个重复 accepted artifact，0 个暂停后提交或未 visible 提前导出；新 DAG 不新增长期全量 normalized/spans。
 - 在同等质量/输入下，P2 或 P2M 相对 P1 的完成文档/小时至少提高 **25%**；P4 仅在相对最佳 2 在途 profile 再提高至少 **15%** 且锁等待/峰值内存/失败不越预算时启用。达不到即采用更低并发，不把“开多进程”本身视为完成。
 - 同批文档的 LLM token/可归因费用较单执行者最多增加 **5%**；未知收费单列且不能被排除在预算之外。按需任务 p95 完成时间与排队时龄不得越 W0 冻结的消费方时限；磁盘剩余和最坏暂存必须大于 W0 的安全保留量。
 - F03/F11/F13 等竞争恢复已按 §7 真进程 3 轮通过；再用一轮至少 100 个混合 job、30–60 分钟的有界隔离负载覆盖重启、429、失败重试和磁盘增长，没有 stuck lease、孤儿子进程或无限重试。本专题不额外要求 72 小时隔离 soak；若 v5/R4 当时正式生产门禁要求更长观察，直接遵守或复用其同版本通过收据。
 
-若上述具体性能百分比与 W0 实际业务目标不符，须**在候选测试前**由消费者/运营审核改为签定值并记录理由；不能失败后改阈值。样本不足、未测真实 provider 或费用未知时状态为 `blocked_decision`，不能宣称并发生产可用。
+阈值按当前实现前已知预算固定在配置中，不能看到测试结果后再改。样本不足或真实 provider/费用不可用时，自动报告未覆盖项并保持该能力关闭；不要求人工签字，也不能把未测项目描述为已验证。
 
 ## 9. 分卡实施顺序与可运行测试入口
 
@@ -194,7 +194,7 @@ N5 必须交付 `scripts/benchmark_narrative_parallel.py`（或经 W0 固定的�
 | N3 叙述 DAG 与只读计算（N1/N2、W1–W4） | `automation/registry.py,planner.py` 和独立 source handler；PDF/TXT 结构、选择、摘要、验证只在 temp 产物；不自动触发旧全量 normalize | 13 卡、盲测合同、F04/F06/F07/F16/F17；LLM 独立进程，共享预算 |
 | N4 catalog writer/对账（N2/N3；R4 C07） | 新 `narrative_artifact_versions` 索引、commit actor/reconciler、版本化包输出；旧 `artifacts` 不重建；visible 后才升下游 READY | F08–F11/F14/F15/F18–F20、跨库恢复与旧 v1 消费回归；任一 accepted 产物无 locator 即阻断 |
 | N5 并发试验（N4） | temp benchmark harness、数据与图表、1/2/4 配置收据；先仿真后有限真实 provider | §8 全部质量/效率/成本判据；未达保留单执行者 |
-| N6 灰度/回退（N5 + v5/R4 门禁 + 用户精确授权） | limited cohort、开关/观察/撤回、operator runbook；不改其他仓库数据库 | 1→3→7 文档真实加工按 R4 C09；G3 一次放行、每批自动指标观察，异常退回 `total=1` 或暂停；不在本专题重复逐批签名，其他计划若有硬门禁仍适用 |
+| N6 灰度/回退（N5 + v5/R4 技术不变量） | bounded cohort、一个本地运行配置、指标/回滚说明；不改其他仓库数据库 | 1→3→7 文档按 R4 C09 自动扩大 cohort；G3 一次集中验收、每批由指标自动决定继续/降并发/暂停；不逐批人工签名，其他计划若有更高层系统边界仍适用 |
 
 测试命令以未来实现后的具体文件名为准，先用已有隔离单测基线：
 
@@ -215,5 +215,5 @@ python -m pytest -p no:cacheprovider -q --basetemp $caseBase tests/contract/test
 
 1. `status` 只读展示 feature flag、双暂停 gate、进程数、job 各状态、最老年龄、当前租约与预算、最近 24h 失败、catalog/temporary 文件字节。健康检查不可触发迁移或下载。
 2. `pause` 必须先 fence 新 claim/commit 再停止子进程；在途 job 到期后由下一次**经授权**运行对账，不因暂停自动重启。`drain` 不领取新 job，待有界时间后把未完任务留持久状态。
-3. `recover --dry-run` 在离线 temp/隔离副本先列待补 finish、待重试、孤儿文件和冲突；正式恢复只在批准窗口按同一账本重放，逐 job receipt。不能直接删除 lock、WAL、attempt 或旧 artifact 来“解卡”。
-4. 并发异常先把 `max_total_inflight` 降为 1 或关闭新 route，等待已有提交完成/暂停；已 accepted 的版本包按撤回合同处理。原文、attempt/effect 历史与旧 v1 导出不可回滚删除。生产 Worker 恢复仍遵守 v5/R4 精确门禁与用户批准。
+3. `recover --dry-run` 在离线 temp/隔离副本列待补 finish、待重试、孤儿文件和冲突。正式 `recover` 按持久账本确定性重放可安全恢复的任务并输出汇总；身份/hash 冲突自动保持不可见并给出可读错误，不需要逐 job 人工批准。不能直接删除 lock、WAL、attempt 或旧 artifact 来“解卡”。
+4. 并发异常先把 `max_total_inflight` 降为 1 或关闭新 route，等待已有提交完成/暂停；已 accepted 的版本包按撤回合同处理。原文、attempt/effect 历史与旧 v1 导出不可回滚删除。生产 Worker 的启动/恢复使用同一配置运行档及 v5/R4 技术不变量，不对每个 job 重复索要用户批准。

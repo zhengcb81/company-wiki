@@ -485,3 +485,29 @@
 - CWP 内部 M1/M2/E0–E4 的收据属实，E4 420 passed；但 R4 A.AR 历史 rejected、B 多根/原生位置独立 AR、C.local 三方真入口尚未完成。`clean_architecture_tdd_execution_plan_2026-09-27.md` 页首/§13 仍写 E3 下一步，已过期；E5 的 artifact store/projector/reader 当前不存在。R4 S2 工件重复读取、S3 全量 MD/span 旧写、S5 研究 writer、S7 prompt-injection 同字节检查、S8 CI `|| true`、S9 StockWiki 隐式 Tavily 回退都应进入新路由退出清单，不能只验 pathless reader 就宣称整个平台完成。
 - 空间账以 F0–F5 实际净释放 **37.630 GiB** 为已完成；D0 的当前 39.744 GiB 含 raw、备份、归档、active 库和 2.632 GiB derived，不能整体视为垃圾。用户最新“原始文档不丢”在本轮解释为唯一 raw 不删，历史 D4 低价值唯一原文删除提案暂停；只估可重建派生的实际净释放，重复位置也不作为本轮目标。详细依赖与四条整合线见[跨仓总计划](cross_repo_mainline_and_delivery_plan_2026-09-28.md)。
 - 总计划复核时又确认：CWP 现行 `source_export.py` 仍是 schema 1.0.0，StockWiki v2 reader 缺少上游基础 SourceExport v2 producer，已在 S5 加 TDD；StockWiki full sync/weekly 也缺当前代码，新增 S5b 实作后才可在 G-D 放默认。ET 新 tool/api 固定不翻译，不能传不存在的 `translate=false`；G1e 取前 discover/精确候选授权/取后 admission 的真时序不可由 importer 单独证明。旧 normalized 工件必须核自身实际 SHA；正常来源缺 review 收据时应经同字节自动扫描形成 clean receipt，不能无限 blocked。
+
+### 2026-09-28 S0/G-0 增量核验修正
+
+- 复查当前 CWP 主线后，撤销上一条“缺少 SourceExport v2 producer”的结论：`src/company_wiki/source_contract/source_export_v2.py`、`src/company_wiki/source_catalog/source_export_v2_cli.py` 及 producer/CLI 合同测试已经在主线。S5 改为复用并验收现有 producer，待实现的是 StockWiki v2 consumer；G-0 仍须补独立多根 B.AR 和真实样本 export 证据。
+- 当前 RF 根 PWF §42 与用户已选规则冲突：用户要求 evidence path 存在时必须有有效 64 位 fixture hash；RF 根 dirty 改动却允许 hash 缺失时 pending/closure-ready。RF 主线 HEAD 也尚未包含严格校验。CWP 只记录冲突，不改 RF；RF 集成不得导入 dirty 放宽变更。
+- CWP 当前 HEAD 为 `25aa51b`，相较已核远端 `origin/master@f39bd5a` ahead 34；本仓本轮只有规划文件改动。G-0 基线命令覆盖 operation、SourceVersionReader、SourceExport v2 producer/CLI 合同及真实字节 E2E，**77 passed, 0 skipped**。真实用例确认 STAR annual report 在两根同 SHA 位置间可回退，并确认 P06 定增说明书 sparse sidecar 只可 preview、不能作为正式 filing reuse；测试内部比较了生产原件及测试目录状态，隔离根已清除。
+- 现有真实字节测试仍不覆盖计划要求的四根同 SHA 与迁移、company/dayu/Dropbox 三种原生位置组合、真实 SourceExport v2 `evidence span → locator` 消费回放、旧持久引用和 429 页文档资源限额。故 G-0 仍未签；77 pass 只说明已有接口/路径的基线没有回归。
+
+### 2026-09-28 — 取消冗余人工权限门
+
+- 按用户此前授权，逐文档人工批准、private/public 外发分流、prompt review 回执、transcript rights-policy 文件、双阶段预授权/取后复核及独立人工签收不再作为当前产品门槛。LLM 在本地普通 Worker 默认可用；provider 可用性仍取决于配置凭证、接口能力和调用预算。
+- 保留自动、直接服务于正确性的断言：原始字节完整保留，身份/期次匹配，SHA/长度/MIME 核验，有限 payload、幂等去重、证据引用/locator/schema 校验，失败后不暴露损坏结果。它们不再生成审批队列。
+- transcript importer/CLI 已简化为单次精确请求结果校验并 canonical import，CLI 使用 schema `/2`；无需 authorization receipt、rights policy、预取 admission 或运行策略文件。Narrative handlers 对无 review receipt 的来源可继续选择、摘要、验证；技术失败使用可重试/终态错误。
+- 移除了仅互相调用、已不在 importer 调用图内的 provider rights/admission/preflight 服务链及其专属测试；叙述事件、选择、摘要和 bundle 合同升到 `/2.0`，删除其中 provider policy 字段和 `PROMPT_REVIEW_REQUIRED` 人工错误分类。旧 `/1.0` 载荷不会静默兼容；当前没有生产 Worker 消费这些试点合同。
+- 两轮聚焦回归分别 **127 passed** 和 **95 passed**，重叠 24 项 automation planner，用例总覆盖 198 项。全部改动 Python 文件 Ruff clean，`git diff --check` clean，隔离测试根已删除。以上均为本地/fake-provider 测试，不代表真实付费 provider 连通性。Worker 仍 paused，等待原计划大节点的真实 E2E。
+- 通用 `DownloadAuthorization` 仍由 `close_gap.execute` 创建，并可在 acquisition 层验收；它不属于已删除的 transcript provider-rights 链。本轮未改写这条通用下载控制，恢复整体工作时再按调用和资源上限单独评估。
+
+### 2026-09-29 — 六仓门禁只读审计
+
+- 真阻断集中在 CWP 的 pending remediation→reader 拒绝、CWP close-gap 的 policy/hash/自动授权叠层、FF/ET 下载双门以及 FF `not_reviewed`→RF 多层消费者拒绝。具体位置、替换合同和测试见[统一清理方案](gate_and_contract_simplification_2026-09-29.md)。
+- CWP automation Approval/HumanInbox/gold review、prompt review shadow readiness、activation/restore reviewer、IQS 递归 task receipts、RF release-readiness 人工授权主要是历史或局部工具复杂度；清理前仍按生产调用者与持久库状态逐项核对。StockWiki 的 accepted/rejected 属投资研究状态，应保留。
+- RF registry 197 个 passed 场景均有 evidence path、均无 fixture hash；证据文件全部存在，总长 50,803 B。按用户已定规则可自动回填并严格复核，不需要放宽 closure-ready。IQS 当前契约包 2.2.0 包含 Entity 2.1.0 和 AnalysisSubject 1.0.0；旧总计划只写 C01 v2.1 不完整。
+- Motley Fool 自动抓取限制有[官方规则](https://www.fool.com/legal/terms-and-conditions/fool-rules/)依据；FMP 使用范围取决于[官方条款](https://site.financialmodelingprep.com/terms-of-service)与套餐。其真实限制可在 provider 配置表达，项目自建的逐文档 rights receipt 不需要恢复。
+- 二次只读 QA 证明 CWP `source_reader.py` 的 `capture_ready` 与 review-store 故障仍构成 P0 阻断，但 `query_local` 是 metadata-only，不能为移除 review 门而改成全文 SHA 查询；实际字节 SHA 只在 open/verify 时最终判定。`source.narrative_summarize` 注册为 `network=True,llm=True`，模型网络必须由叙述任务预算允许，不能假标本地无网络。
+- ET `/2` 真请求必须 FY+Q，结果有 provider payload SHA 和 canonical content SHA/bytes，却无原始 payload 长度；CWP importer 做 exact-key 校验。ET Motley 路由当前仍可联网，默认禁用是待实施任务；成功 fake 端到端应走 FMP 测试响应。FF SourceRef v2 测试目前位于 `ff-source-reader-v2-20260927` worktree、companion 测试在 `filing-fetch-transcript-companion`；RF v2 测试在 `rfv2-tdd-20260927` worktree，均须先保存/导入，不能把主工作树缺文件当失败。
+- RF `uc/scenarios.py` closure 缺 `repo_root` 无法验实际文件，`cmd_scenario_verify` 与三仓 `cmd_closure_report` 均可能在坏 hash 下返回 0；新统一 verifier 须让两出口非零。IQS 的当前 identity 2.2 是 schema/参考校验器，没有真实身份 producer，也无四态 mapping DTO；StockWiki 是身份库唯一 writer，需产真实 snapshot golden，IQS 增公开 JSON 校验 CLI。`mapping_status=null` 应表示未尝试而不是尝试后无匹配；无匹配为 `unknown`。这些均为新计划的待实施合同，不是现成功能。

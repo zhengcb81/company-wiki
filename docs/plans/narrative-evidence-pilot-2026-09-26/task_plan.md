@@ -8,6 +8,8 @@
 
 ## Next Step
 
+> **2026-09-28 权限/审查简化（优先于下方所有历史段落）：**不设 private/public、逐文档/逐期/逐 job 授权、review receipt、独立 reviewer 或人工批次审批。用户已授权范围内，自动化测试和 source/hash/lineage/预算断言决定能否继续；原始文档全部保留，只清理可重建且无引用的派生文件。下方 2026-09-27 transcript permission 细节和历史 G 门槛只作事实记录，不是待实施指令。
+
 **2026-09-28 跨仓总编排（覆盖本节以下较早的“唯一下一步”与 Current Phase 快照）：**先按[跨仓主线整合与交付总计划](cross_repo_mainline_and_delivery_plan_2026-09-28.md)固定 **S0/G-0 → S2/S3/S4/S4b/G-A → S5/G-B** 的来源抽象与真实消费者门；IQS C01→StockWiki W01/W02/W03/G2b 独立推进，CWP N0/N1 可并行，随后 N2/N3/G-C、派生 G-D。RF `fcap` 已并入远端 main，不再重复合并；真正待并的是 RF reader、FF 两个重叠 WIP、ET 接口和 StockWiki 的新 reader。大节点签收前不切默认路由、不启动生产 Worker、不删除唯一原文。下方长篇 Phase 1–23 保留历史与阶段证据，不再自行定义施工顺序。
 
 **2026-09-28 Phase 23 重构总图：**后续实施统一按[清洁架构与 TDD 实施总图](clean_architecture_tdd_execution_plan_2026-09-27.md)的 Phase A–G / M1–M4 执行。内部代码和派生 schema 允许破坏式重构；canonical raw 原件、来源 SHA/manifest 和版本事实不得丢失。Phase B/M1、Phase C/M2-derive、Phase D/M2-provider 与 Phase E/E0–E4 已完成。当前大节点是跨仓 pathless reader 合同验收：复用现有 RF `codex/revenue-source-reader` WIP、filing-fetch `codex/ff-source-reader-v2-20260927` WIP 与 company-wiki `SourceVersionReader`，不重复实现适配器；FF→CWP 定向集成 **22/22 通过**，FF 原有 `test_fetch_filing.py` 与新增 v2 定向组合回归 **138 passed, 1 skipped, 39 subtests passed**（唯一 skip 需要本机 production security-master snapshot）。旧 transport 在 FF 工作树内无残余代码引用；v1 默认路径仍调用 `validate_handle` 的 root-policy/路径校验，v2 是显式分支。FF 的新增 producer 仍有较大 diff，须完成全 diff 审查再考虑合入。原 RF 三仓 E2E 因固定 `as_of_date=2026-09-27` 早于实测 FF candidate capture (`2026-09-28T18:55:58Z`) 而失败；仅在 TEMP 测试副本把 as-of 改为测试日、其余三仓代码不变后，真实 FF→CWP→RF E2E **1 passed in 14.09s**。**历史下一步（已由上方跨仓总编排替代）：完成 FF v2 全 diff 与输出合同审查，确认默认 v1 golden/调用者兼容；再协调更新 RF WIP 中过期 E2E 日期夹具，并以原路径重跑三仓门。**不得为通过测试放宽 capture/published/as-of 校验。当时拟在三仓门绿后接 G2a/StockWiki；现以总编排的 S5 并行和 N3 前置为准；Worker 与空间处置继续按 Phase G 的节点顺序实施。
@@ -296,8 +298,8 @@ company-wiki 只负责来源、解析质量、证据定位、检索和来源摘�
 - [x] 完成 E2 原子 DAG materialization、依赖结果门、双向 legacy/AUTO interlock 与 destructive prune dry-run 收口；E-A 集中审查最终 **229 passed**。
 - [x] 按冻结施工卡完成 E3：Windows `spawn` 的 P1/P2/P4 有界进程拓扑、compute/model 硬隔离、per-attempt heartbeat、数据库租约恢复、父进程强杀自退出、bounded shutdown 与跨重启有界日志均已先红后绿；真实 P2 证明两份不同 source 同时执行，同 source downstream 不越过依赖。
 - [x] E4.1 strict narrative contracts、E4.2 single-snapshot `JobExecutionContext`、E4.3 三阶段 DAG、E4.4 verified bytes reader/PDF facade、E4.5 select handler 已逐片先红后绿；select 对年报/招股书/IR/transcript 做证据最小化，完整低价值文档才可 skip，parser/policy/source drift 均零 effect 失败。
-- [x] E4.6 summarize handler 完成：同语种、不翻译、selected-only prompt、current review 与 transcript `generate_summary` 独立授权、模型错误分类和原始响应不持久化均有 RED→GREEN 合同。
-- [x] E4.7 verify/effect 完成：全 locator/original-byte replay、post-model review/policy 复核、canonical bundle 和单一逻辑 PENDING effect 均已先红后绿；未 apply、未写 catalog。
+- [x] E4.6 summarize handler 完成：同语种、不翻译、selected-only prompt、模型错误分类和原始响应不持久化均有 RED→GREEN 合同；2026-09-28 简化后无 prompt-review 回执和 transcript action-policy gate。
+- [x] E4.7 verify/effect 完成：全 locator/original-byte replay、canonical bundle 和单一逻辑 PENDING effect 均有 RED→GREEN 合同；去掉生成后人工 review/provider policy 复核；未 apply、未写 catalog。
 - [x] E4.8 隔离三阶段集成完成；按冻结施工卡完成隔离端到端验证及一次 E4 合并门（420 passed），runtime 尚未在 production 注册。
 
 **Status:** Phase E/E4.1–E4.8 complete；production Worker 仍 paused。下一步按总优先级审查 RF 支线并线与跨仓抽象边界。
@@ -306,10 +308,26 @@ company-wiki 只负责来源、解析质量、证据定位、检索和来源摘�
 
 - [x] 对 CWP、RF、FF、ET、StockWiki、IQS 的当前 refs、未提交工作、PWF 收据和关键现行测试做只读交叉盘点；纠正 RF 沙箱误报（真实 11 M/404 ??/0 D）。
 - [x] 写出[跨仓总施工图](cross_repo_mainline_and_delivery_plan_2026-09-28.md)：冻结层级责任、合并分支与冲突次序、G-0/G-A/G-B/G-C/G-D 大节点真数据 E2E、TDD/回退/测试根恢复、Worker E5–E7、旧链退出和派生空间账。
-- [ ] S0/G-0：live refs、真实样本 oracle、CWP 多根 verified reader 的独立 B.AR；先确认旧 A.AR 与历史时点，不借 M1 内部门跳步。
+- [ ] S0/G-0：live refs、真实样本 oracle、CWP 多根 verified reader 的一次自动 E2E；旧 A.AR 只作历史事实，不借 M1 内部门跳步。已复核 CWP SourceExport v2 producer/CLI 在主线，当前要验现有合同并补真实输出证据，不重建 producer。
 - [ ] S1–S4b/G-A：整理 ET WIP；FF SourceRef v2 最终净差异 → RF reader 正式夹具与三仓真测 → FF companion 真实 ET/CWP 编排，按各仓正常合主线。
-- [ ] S5/G-B 与 Q 线：CWP 先产基础 SourceExport v2，StockWiki 实作 v2 reader/CLI；S5b full sync/weekly 留 G-D 发布门。IQS C01 v2.1、StockWiki W01 修红及 W02/W03 新合同；G2b 身份线独立签收。
-- [ ] N0–N3/G-C：退出旧重复工件/全量写/研究 writer，完成 E5 projector、E6/E7/E-B、正式 selected G2a 消费；生产 Worker 在签收前 paused。
+- [ ] S5/G-B 与 Q 线：复用 CWP 现有基础 SourceExport v2，StockWiki 实作 v2 reader/CLI；S5b full sync/weekly 留 G-D 发布门。IQS 契约包 2.2.0（Entity 2.1.0 + AnalysisSubject 1.0.0）、StockWiki W01 修红及 W02/W03 新合同；G2b 身份线独立自动测试。
+- [ ] N0–N3/G-C：退出旧重复工件/全量写/研究 writer，完成 E5 projector、E6/E7/E-B、正式 selected G2a 消费；生产 Worker 在 G-C 自动测试通过前 paused。
 - [ ] G-D：只对可重建派生做 scratch 与精确生产批次清理，量同卷净收益，原件/manifest 保持不变；受控发布与分仓脏树对账。
+- [x] 权限简化：移除逐文档/逐期人工授权、prompt-review receipt 门、transcript rights-policy 与双阶段复核。删除 importer 调用链外且只互相调用的 rights/admission/preflight 旧模块及专属测试；transcript importer CLI 收敛到 `/2` 单次请求。narrative event/select/summary/bundle 合同升至 `/2.0` 并去掉 provider-policy 字段。保留身份、原文 hash、lineage、payload 上限和结构校验。自动化 `PolicyConfig` 默认允许 LLM；外部下载仍由具体采集任务触发并受 API 速率/费用/字节约束。
+- [ ] 后续合同迁移：`privacy_class` 当前不控制外发，但仍进入 RootPolicy 3.0 导出 hash；在统一更新 CWP/RF/StockWiki consumer 后移除此 legacy 字段，不能在中途静默改变 3.0 hash。
+- [x] 简化 transcript provider/import：旧 v1 rights receipt 规则只作历史；importer 直接消费一次精确工具结果，保留确定性身份/期次/状态码/MIME/长度/SHA 校验，不再逐期人工签收或创建 preflight receipt。
+- [x] 减少人工门禁：审查规程改为自动测试放行；G0–G3 为集中真实 E2E，不再要求独立 reviewer、人工签收、逐文件授权或批次审批。未通过时仅暂停受影响能力。
 
-**Status:** 规划已完整落盘；本阶段尚未执行任何跨仓合并、RF/StockWiki/IQS 脏树清理、生产数据删除或 Worker 开启。后续状态只在上述大节点推进时更新。
+**Status（2026-09-28 最新）:** S0/G-0 reader 基线曾通过 **125 项**；它不覆盖尚待完成的四根/原生目录位置、SourceExport locator 真消费及旧引用回放，G-0 仍未通过。权限简化代码已扩展到 narrative handlers 与 transcript importer/CLI，并删除不再使用的 transcript rights/admission/preflight 服务链：第一组回归 **127 passed**，第二组 **95 passed**（两组重叠 24 个 planner 用例，共 198 个不同用例）。narrative event/select/summary/bundle 合同为 `/2.0`，importer CLI 为 `/2`；改动 Python 文件 Ruff clean、`git diff --check` clean，隔离测试根已删除。当前不要求逐文档人工批准、人工 review receipt、private/public 外发分流或独立签收；保留身份/SHA/长度/locator/结构校验及运行预算。通用 `DownloadAuthorization` 仍由 `close_gap` 使用，本轮未改，恢复整体工作时单独评估。Worker 仍 paused，需 G-C 真实数据 E2E 通过后才进入其原计划发布阶段。RF 根 PWF §42 与用户确定的严格 fixture-hash 规则冲突，CWP 不导入其 dirty 放宽实现。跨仓并线、RF/StockWiki/IQS 脏树清理和生产派生清理尚未执行。
+
+## Phase 25：统一清理多余门禁与按仓库独占的并行施工计划（2026-09-29）
+
+- [x] 第一部分：逐仓调查运行时代码、测试与现行计划；把人工权限/签收、自动数据正确性校验、运行预算和历史文字分开，形成[统一清理方案](gate_and_contract_simplification_2026-09-29.md)及受影响测试清单。方案已完成，产品代码清理尚未执行。
+- [x] 完成第一部分的清理实施方案后，建立[总指挥计划](parallel_harness_orchestration_2026-09-29.md)与六仓独立施工卡；每条线独占一个项目目录，按 S0a observed→S0b producer golden 冻结输入/输出、交接、独立测试包和跨仓大节点。IQS 管合同校验，StockWiki 管真实身份库；RF/StockWiki 的 selected consumer 各有本仓施工任务。
+- [x] 只更新本计划目录的规划文件，复核链接、目录独占、依赖图和 `git diff --check`；本轮不修改项目实现、不启动 Worker、不清理原文或派生数据。只读 QA 指出的接口版本、真实审查阻断、closure 退出码和 G-D 分批依赖已写回施工卡。
+
+**Status:** planning complete；产品代码清理与六线实施均未在本轮启动，旧实施目标继续暂停。
+
+## Next Step
+
+将来恢复实施时，先由总指挥做 S0a 只读基线/活动 WIP 归属和接口表，再派发六份独占施工卡；P0 RED→修复→G-0 后冻结 CWP producer golden。当前只完成规划，不从 S0a 自动继续产品改造。
