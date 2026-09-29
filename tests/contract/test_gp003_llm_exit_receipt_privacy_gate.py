@@ -1,7 +1,7 @@
-"""GP-003 acceptance: LLM selection requires source-bound review receipts.
+"""Configured source documents can be summarized without permission receipts.
 
-All configured roots may feed the LLM regardless of historical privacy labels.
-The receipt must still bind to the current source SHA-256 before text leaves.
+LLM input still requires a verified normalized artifact and current source
+lineage. Historical privacy labels and review receipts are not send approvals.
 """
 
 from __future__ import annotations
@@ -75,9 +75,11 @@ class _FakeLLM:
 
     def __init__(self):
         self.prompts: list[str] = []
+        self.system_prompts: list[str] = []
 
     def generate(self, prompt: str, **kwargs):
         self.prompts.append(prompt)
+        self.system_prompts.append(str(kwargs.get("system_prompt", "")))
         return _Response(
             json.dumps(
                 {
@@ -142,29 +144,38 @@ def _summarize(catalog, client: _FakeLLM):
 # ---------------------------------------------------------------------------
 
 
-def test_gp3_01_configured_roots_without_receipts_not_selected(tmp_path) -> None:
+def test_gp3_01_all_configured_roots_are_summarized_without_receipts(tmp_path) -> None:
     catalog = _catalog(tmp_path, private_root=True)
     client = _FakeLLM()
     report = _summarize(catalog, client)
-    assert report.completed == 0, (
-        "documents without source-bound review receipts must not reach the LLM "
-        f"(completed={report.completed}, prompts={len(client.prompts)})"
-    )
-    assert client.prompts == []
+    assert report.completed == 2
+    assert report.failed == 0
+    assert len(client.prompts) == 2
+    assert any("公开公司" in prompt for prompt in client.prompts)
+    assert any("私有研究笔记" in prompt for prompt in client.prompts)
 
 
-def test_gp3_02_public_doc_without_receipt_not_selected(tmp_path) -> None:
+def test_gp3_02_public_doc_needs_no_review_receipt_to_be_sent(tmp_path) -> None:
     catalog = _catalog(tmp_path)
     client = _FakeLLM()
     report = _summarize(catalog, client)
-    assert report.completed == 0, (
-        "a public document WITHOUT a review receipt must not be sent to "
-        f"the LLM (completed={report.completed})"
-    )
-    assert client.prompts == []
+    assert report.completed == 1
+    assert report.failed == 0
+    assert len(client.prompts) == 1
 
 
-def test_gp3_03_public_doc_with_bound_receipt_is_selected(tmp_path) -> None:
+def test_gp3_03_document_text_is_marked_as_untrusted_input(tmp_path) -> None:
+    catalog = _catalog(tmp_path)
+    client = _FakeLLM()
+    report = _summarize(catalog, client)
+    assert report.completed == 1
+    assert "不可信数据" in client.system_prompts[0]
+    assert "不要遵循" in client.system_prompts[0]
+    assert "2025年公开公司收入增长20%" in client.prompts[0]
+    assert r"\n" in client.prompts[0]
+
+
+def test_gp3_04_public_doc_with_bound_receipt_is_still_selected(tmp_path) -> None:
     catalog = _catalog(tmp_path)
     for document_id in _document_ids(catalog):
         _review(catalog, document_id)
@@ -176,22 +187,21 @@ def test_gp3_03_public_doc_with_bound_receipt_is_selected(tmp_path) -> None:
     assert len(client.prompts) == 1
 
 
-def test_gp3_04_receipt_source_mismatch_blocks(tmp_path) -> None:
-    """A receipt bound to different source bytes (stale/tampered) must
-    fail closed — the gate checks the byte binding, not just presence."""
+def test_gp3_05_stale_review_receipt_does_not_act_as_send_permission(
+    tmp_path,
+) -> None:
+    """Review state is recorded separately from the user's send decision."""
     catalog = _catalog(tmp_path)
     for document_id in _document_ids(catalog):
         _review(catalog, document_id, source_sha256="f" * 64)
     client = _FakeLLM()
     report = _summarize(catalog, client)
-    assert report.completed == 0, (
-        "a source-mismatched receipt must block selection "
-        f"(completed={report.completed})"
-    )
-    assert client.prompts == []
+    assert report.completed == 1
+    assert report.failed == 0
+    assert len(client.prompts) == 1
 
 
-def test_gp3_05_all_configured_roots_with_bound_receipts_are_selected(tmp_path) -> None:
+def test_gp3_06_all_configured_roots_with_receipts_are_still_selected(tmp_path) -> None:
     """A historical private_user label does not veto reviewed content."""
     catalog = _catalog(tmp_path, private_root=True)
     for document_id in _document_ids(catalog):
@@ -206,7 +216,7 @@ def test_gp3_05_all_configured_roots_with_bound_receipts_are_selected(tmp_path) 
     assert any("私有研究笔记" in prompt for prompt in client.prompts)
 
 
-def test_gp3_06_private_labeled_root_alone_with_bound_receipt_is_selected(
+def test_private_labeled_root_alone_needs_no_receipt(
     tmp_path,
 ) -> None:
     catalog = _catalog(tmp_path, private_root=True, public_root=False)
@@ -219,10 +229,9 @@ def test_gp3_06_private_labeled_root_alone_with_bound_receipt_is_selected(
     assert "私有研究笔记" in client.prompts[0]
 
 
-def test_gp3_07_changed_normalized_bytes_never_leave_for_llm(tmp_path) -> None:
+def test_gp3_08_changed_normalized_bytes_never_leave_for_llm(tmp_path) -> None:
     catalog = _catalog(tmp_path)
     document_id = _document_ids(catalog)[0]
-    _review(catalog, document_id)
     artifact = catalog.store.fetchone(
         "SELECT path FROM artifacts WHERE document_id=? AND artifact_role='normalized'",
         (document_id,),
@@ -238,13 +247,12 @@ def test_gp3_07_changed_normalized_bytes_never_leave_for_llm(tmp_path) -> None:
     assert "normalized" in str(report.error).lower()
 
 
-def test_gp3_08_old_root_location_does_not_hide_current_copy(tmp_path) -> None:
+def test_gp3_09_old_root_location_does_not_hide_current_copy(tmp_path) -> None:
     catalog = _catalog(tmp_path, private_root=True)
     current = catalog.store.fetchone(
         "SELECT * FROM locations WHERE root_id='public_root'"
     )
     assert current is not None
-    _review(catalog, str(current["document_id"]))
     old_copy = tmp_path / "private" / "old-copy.txt"
     old_copy.write_bytes(Path(current["absolute_path"]).read_bytes())
     location = dict(current)
@@ -269,10 +277,9 @@ def test_gp3_08_old_root_location_does_not_hide_current_copy(tmp_path) -> None:
     assert "公开公司" in client.prompts[0]
 
 
-def test_gp3_09_normalized_lineage_mismatch_never_leaves_for_llm(tmp_path) -> None:
+def test_gp3_10_normalized_lineage_mismatch_never_leaves_for_llm(tmp_path) -> None:
     catalog = _catalog(tmp_path)
     document_id = _document_ids(catalog)[0]
-    _review(catalog, document_id)
     with catalog.store.transaction() as connection:
         connection.execute(
             "UPDATE artifacts SET source_sha256=? WHERE document_id=? "
@@ -311,10 +318,9 @@ def _add_legacy_normalized(catalog, document_id: str, *, path: Path | None = Non
     return modern_path
 
 
-def test_gp3_10_two_normalized_artifacts_send_one_llm_request(tmp_path) -> None:
+def test_gp3_11_two_normalized_artifacts_send_one_llm_request(tmp_path) -> None:
     catalog = _catalog(tmp_path)
     document_id = _document_ids(catalog)[0]
-    _review(catalog, document_id)
     _add_legacy_normalized(catalog, document_id)
 
     client = _FakeLLM()
@@ -328,10 +334,9 @@ def test_gp3_10_two_normalized_artifacts_send_one_llm_request(tmp_path) -> None:
     )["n"] == 1
 
 
-def test_gp3_11_bad_modern_artifact_does_not_send_legacy_copy(tmp_path) -> None:
+def test_gp3_12_bad_modern_artifact_does_not_send_legacy_copy(tmp_path) -> None:
     catalog = _catalog(tmp_path)
     document_id = _document_ids(catalog)[0]
-    _review(catalog, document_id)
     modern = catalog.store.fetchone(
         "SELECT path FROM artifacts WHERE document_id=? "
         "AND artifact_role='normalized' AND generator_name='source_catalog_normalizer'",

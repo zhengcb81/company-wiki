@@ -27,7 +27,6 @@ from company_wiki.automation.narrative_model import (
     NarrativeModelResponse,
 )
 from company_wiki.automation.narrative_runtime import (
-    CatalogPromptReviewLoader,
     NarrativeRuntimeDependencies,
     register_narrative_handlers,
 )
@@ -37,9 +36,6 @@ from company_wiki.automation.scheduler import AutomationScheduler
 from company_wiki.automation.store import AutomationStore
 from company_wiki.automation.worker import HandlerExecutor, Worker
 from company_wiki.source_catalog import CatalogConfig, RootSpec, SourceCatalog
-from company_wiki.source_catalog.policy_2x import export_policy_2x
-from company_wiki.source_catalog.prompt_injection import record_prompt_injection_review
-from company_wiki.source_catalog.provider_use_policy import ProviderUsePolicy
 from company_wiki.source_catalog.source_reader import SourceVersionReader
 from support.narrative_model_fixture import ReplayNarrativeModel
 
@@ -61,37 +57,6 @@ def _pdf_bytes(text: str) -> bytes:
     data = document.tobytes()
     document.close()
     return data
-
-
-def _provider_policy(*, revoked: bool = False) -> ProviderUsePolicy:
-    payload: dict[str, object] = {
-        "schema_version": "provider-use-policy/1",
-        "policy_id": "runtime-e2e-policy",
-        "rules": [
-            {
-                "provider_id": "fixture_provider",
-                "origin_host": "fixtures.invalid",
-                "path_prefix": "/transcripts",
-                "content_class": "earnings_call_transcript",
-                "rights_evidence_ref": "offline fixture",
-                "rights_evidence_sha256": _sha("rights"),
-                "reviewer": "integration-test",
-                "reviewed_at": "2026-09-01",
-                "valid_from": "2026-09-01",
-                "valid_until": "2026-09-30",
-                "permitted_actions": [
-                    "derive_text",
-                    "generate_summary",
-                    "select_evidence",
-                ],
-                "retention_scope": "company_wiki_local",
-                "export_scope": "stockwiki_readonly_excerpt",
-                "revoked": revoked,
-            }
-        ],
-    }
-    payload["policy_sha256"] = _sha(canonical_json(payload))
-    return ProviderUsePolicy.from_dict(payload)
 
 
 def _sidecar(
@@ -196,7 +161,6 @@ def _new_catalog(run_root: Path, sources: list[dict[str, object]]) -> tuple[
     try:
         catalog.scan()
         reader = SourceVersionReader(catalog)
-        policy_hash = export_policy_2x(config)[0]
         result: dict[str, tuple[bytes, object]] = {}
         for digest, data in by_sha.items():
             row = catalog.reader.fetchone(
@@ -207,18 +171,6 @@ def _new_catalog(run_root: Path, sources: list[dict[str, object]]) -> tuple[
             )
             assert row is not None
             ref = reader.query_ref(row["document_id"], row["source_id"], digest)
-            with catalog.store.transaction() as connection:
-                record_prompt_injection_review(
-                    connection,
-                    ref.document_id,
-                    status="not_detected",
-                    reviewer="narrative-runtime-e2e",
-                    evidence_sha256=digest,
-                    evidence_payload=data,
-                    now=T0,
-                    source_sha256=digest,
-                    policy_hash=policy_hash,
-                )
             result[digest] = (data, ref)
         return catalog, reader, result
     except BaseException:
@@ -230,7 +182,6 @@ def _event(
     reader: SourceVersionReader,
     ref,
     *,
-    transcript_policy: ProviderUsePolicy | None,
     event_id: str,
 ) -> Event:
     metadata = reader.describe_version(ref)
@@ -243,7 +194,7 @@ def _event(
         expected_mime,
     )
     payload = {
-        "schema_version": "source-revision-event/1.0",
+        "schema_version": "source-revision-event/2.0",
         "source_ref": {
             "schema_version": ref.schema_version,
             "document_id": ref.document_id,
@@ -259,16 +210,6 @@ def _event(
             "document_kind": metadata["document_kind"],
             "language": metadata["language"],
         },
-        "transcript_policy": (
-            {
-                "provider_id": "fixture_provider",
-                "source_url": "https://fixtures.invalid/transcripts/acme-q2.txt",
-                "content_class": "earnings_call_transcript",
-                "expected_provider_policy_sha256": transcript_policy.policy_sha256,
-            }
-            if transcript and transcript_policy is not None
-            else None
-        ),
     }
     parsed = SourceRevisionEventPayload.from_dict(payload)
     return Event(
@@ -310,10 +251,8 @@ class FailingModel:
 
 def _runtime(
     run_root: Path,
-    catalog: SourceCatalog,
     reader: SourceVersionReader,
     model,
-    policy_loader: Callable[[], ProviderUsePolicy | None],
 ) -> tuple[AutomationStore, AutomationScheduler, Worker]:
     state_dir = run_root / "automation"
     state_dir.mkdir()
@@ -331,9 +270,6 @@ def _runtime(
         NarrativeRuntimeDependencies(
             reader=reader,
             model=model,
-            prompt_review_loader=CatalogPromptReviewLoader(catalog.reader),
-            provider_policy_loader=policy_loader,
-            current_date=lambda: "2026-09-28",
         ),
     )
     worker = Worker(
@@ -433,16 +369,12 @@ def test_runtime_e2e_three_sources_are_idempotent_and_leave_only_pending_effects
         raw_hashes = {digest: _sha(data) for digest, (data, _ref) in indexed.items()}
         artifacts_before = catalog.reader.fetchone("SELECT COUNT(*) AS count FROM artifacts")
         assert artifacts_before is not None
-        policy = _provider_policy()
         model = ReplayNarrativeModel()
-        store, scheduler, worker = _runtime(
-            run_root, catalog, reader, model, lambda: policy
-        )
+        store, scheduler, worker = _runtime(run_root, reader, model)
         events = [
             _event(
                 reader,
                 ref,
-                transcript_policy=policy,
                 event_id=f"event-runtime-{index}",
             )
             for index, (_data, ref) in enumerate(indexed.values(), start=1)
@@ -516,12 +448,9 @@ def test_runtime_e2e_model_transient_stops_before_verify_effect(
             ],
         )
         model = FailingModel(error_factory)
-        policy = _provider_policy()
-        store, scheduler, worker = _runtime(
-            run_root, catalog, reader, model, lambda: policy
-        )
+        store, scheduler, worker = _runtime(run_root, reader, model)
         ref = next(iter(indexed.values()))[1]
-        event = _event(reader, ref, transcript_policy=None, event_id="event-transient")
+        event = _event(reader, ref, event_id="event-transient")
         store.put_event(event)
         scheduler.materialize_event(event)
 
@@ -537,10 +466,10 @@ def test_runtime_e2e_model_transient_stops_before_verify_effect(
         _cleanup(tmp_path, run_root, baseline, catalog)
 
 
-def test_runtime_e2e_reader_refusal_and_post_model_revoke_leave_zero_effect(
+def test_runtime_e2e_read_identity_fails_automatically_and_transcript_needs_no_receipt(
     tmp_path: Path,
 ) -> None:
-    run_root, baseline = _run_root(tmp_path, "m3-e4-runtime-refusal-revoke")
+    run_root, baseline = _run_root(tmp_path, "m3-e4-runtime-auto-checks")
     catalog = None
     try:
         annual = _pdf_bytes("Company launched a new product for overseas customers.")
@@ -565,20 +494,13 @@ def test_runtime_e2e_reader_refusal_and_post_model_revoke_leave_zero_effect(
                 },
             ],
         )
-        allowed = _provider_policy()
-        current = [allowed]
-        model = ReplayNarrativeModel(
-            after_generate=lambda: current.__setitem__(0, _provider_policy(revoked=True))
-        )
-        store, scheduler, worker = _runtime(
-            run_root, catalog, reader, model, lambda: current[0]
-        )
+        model = ReplayNarrativeModel()
+        store, scheduler, worker = _runtime(run_root, reader, model)
         refs = {data: ref for data, ref in indexed.values()}
         refused = _event(
             reader,
             refs[annual],
-            transcript_policy=None,
-            event_id="event-reader-refusal",
+            event_id="event-read-policy-mismatch",
         )
         refused_payload = json.loads(refused.payload_json)
         refused_payload["expected_read_policy_sha256"] = _sha("wrong-read-policy")
@@ -593,8 +515,7 @@ def test_runtime_e2e_reader_refusal_and_post_model_revoke_leave_zero_effect(
         transcript_event = _event(
             reader,
             refs[transcript],
-            transcript_policy=allowed,
-            event_id="event-policy-revoke",
+            event_id="event-transcript-no-review",
         )
         for event in (refused, transcript_event):
             store.put_event(event)
@@ -612,7 +533,7 @@ def test_runtime_e2e_reader_refusal_and_post_model_revoke_leave_zero_effect(
             if job.created_from_event_id == refused.event_id
             and job.job_type == "source.narrative_select"
         )
-        revoked_verify = next(
+        transcript_verify = next(
             job
             for job in jobs
             if job.created_from_event_id == transcript_event.event_id
@@ -620,8 +541,8 @@ def test_runtime_e2e_reader_refusal_and_post_model_revoke_leave_zero_effect(
         )
         assert refused_select.status is JobStatus.DEAD_LETTER
         assert refused_select.last_error_code == "POLICY_DENIED"
-        assert revoked_verify.status is JobStatus.DEAD_LETTER
-        assert revoked_verify.last_error_code == "POLICY_DENIED"
-        assert store.list_outbox_entries() == ()
+        assert transcript_verify.status is JobStatus.VERIFYING
+        assert store.list_outbox_entries(status="pending")
+        assert len(model.calls) == 1
     finally:
         _cleanup(tmp_path, run_root, baseline, catalog)

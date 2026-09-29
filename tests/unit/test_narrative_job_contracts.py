@@ -62,25 +62,15 @@ def _metadata(*, source_class: str = "filing", language: str = "zh") -> dict:
     }
 
 
-def _transcript_policy() -> dict:
-    return {
-        "provider_id": "fixture-provider",
-        "source_url": "https://example.test/calls/2026-q2",
-        "content_class": "earnings_call_transcript",
-        "expected_provider_policy_sha256": _sha("provider-policy"),
-    }
-
-
 def _event_payload(*, transcript: bool = False) -> dict:
     return {
-        "schema_version": "source-revision-event/1.0",
+        "schema_version": "source-revision-event/2.0",
         "source_ref": _source_ref(mime_type="text/plain" if transcript else "application/pdf"),
         "expected_read_policy_sha256": _sha("read-policy"),
         "source_metadata": _metadata(
             source_class="transcript" if transcript else "filing",
             language="en" if transcript else "zh",
         ),
-        "transcript_policy": _transcript_policy() if transcript else None,
     }
 
 
@@ -116,7 +106,7 @@ def _selection(*, status: str = "selected", evidence: list[dict] | None = None) 
     spans = [_span().to_dict()] if evidence is None else evidence
     selected_count = len(spans)
     return {
-        "schema_version": "narrative-select-result/1.0",
+        "schema_version": "narrative-select-result/2.0",
         "source_ref": _source_ref(),
         "expected_read_policy_sha256": _sha("read-policy"),
         "source_metadata": _metadata(),
@@ -140,7 +130,6 @@ def _selection(*, status: str = "selected", evidence: list[dict] | None = None) 
         "prompt_review": _review(),
         "transcript_lineage": None,
         "transcript_byte_bindings": [],
-        "transcript_action_policy": None,
         "summary_scope": "selected_evidence_only",
     }
 
@@ -167,7 +156,7 @@ def _draft(*, evidence_id: str | None = None, language: str = "zh", text: str = 
 def _summary(*, status: str = "completed", draft: dict | None = None) -> dict:
     completed = status == "completed"
     return {
-        "schema_version": "narrative-summary-result/1.0",
+        "schema_version": "narrative-summary-result/2.0",
         "source_ref": _source_ref(),
         "language": "zh",
         "translate": False,
@@ -184,7 +173,6 @@ def _summary(*, status: str = "completed", draft: dict | None = None) -> dict:
             else None
         ),
         "prompt_review": _review(),
-        "transcript_action_policy": None,
     }
 
 
@@ -192,7 +180,7 @@ def _bundle(*, quality_status: str = "verified", evidence: list[dict] | None = N
     spans = [_span().to_dict()] if evidence is None else evidence
     summary = _summary() if quality_status != "skipped_no_narrative" else _summary(status="summary_not_needed")
     return {
-        "schema_version": "narrative-bundle/1.0",
+        "schema_version": "narrative-bundle/2.0",
         "source_ref": _source_ref(),
         "expected_read_policy_sha256": _sha("read-policy"),
         "source_metadata": _metadata(),
@@ -208,7 +196,6 @@ def _bundle(*, quality_status: str = "verified", evidence: list[dict] | None = N
         "prompt_review": _review(),
         "transcript_lineage": None,
         "transcript_byte_bindings": [],
-        "transcript_action_policy": None,
         "versions": {
             "parser": "1.0.0",
             "selector": "1.0.0",
@@ -235,15 +222,13 @@ def test_source_revision_event_is_exact_and_hashes_canonical_payload() -> None:
         SourceRevisionEventPayload.from_dict(missing)
 
 
-def test_source_revision_event_rejects_cross_class_policy_and_unknown_language() -> None:
+def test_source_revision_event_has_no_provider_policy_field() -> None:
     filing = _event_payload()
-    with pytest.raises(NarrativeContractError, match="filing.*transcript_policy"):
-        SourceRevisionEventPayload.from_dict({**filing, "transcript_policy": _transcript_policy()})
-
     transcript = _event_payload(transcript=True)
-    with pytest.raises(NarrativeContractError, match="transcript_policy"):
-        SourceRevisionEventPayload.from_dict({**transcript, "transcript_policy": None})
-
+    parsed = SourceRevisionEventPayload.from_dict(transcript)
+    assert parsed.source_metadata.source_class == "transcript"
+    with pytest.raises(NarrativeContractError, match="unknown fields"):
+        SourceRevisionEventPayload.from_dict({**transcript, "transcript_policy": {}})
     bad_metadata = {**filing["source_metadata"], "language": "unknown"}
     with pytest.raises(NarrativeContractError, match="language"):
         SourceRevisionEventPayload.from_dict({**filing, "source_metadata": bad_metadata})
@@ -302,13 +287,6 @@ def test_select_result_rejects_incomplete_skip_and_unknown_transcript_binding() 
             "source_byte_ranges": [{"start": 10, "end": 30}],
         }
     ]
-    transcript["transcript_action_policy"] = {
-        "policy_sha256": _sha("provider-policy"),
-        "evidence_sha256_by_action": [
-            ["derive_text", _sha("derive-evidence")],
-            ["select_evidence", _sha("select-evidence")],
-        ],
-    }
     with pytest.raises(NarrativeContractError, match="selected evidence"):
         NarrativeSelectResult.from_dict(transcript)
 

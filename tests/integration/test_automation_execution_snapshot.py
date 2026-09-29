@@ -29,7 +29,7 @@ def _sha(seed: str) -> str:
 def _event() -> models.Event:
     source_sha = _sha("snapshot-source")
     payload = {
-        "schema_version": "source-revision-event/1.0",
+        "schema_version": "source-revision-event/2.0",
         "source_ref": {
             "schema_version": "2.0",
             "document_id": "doc-snapshot",
@@ -45,7 +45,6 @@ def _event() -> models.Event:
             "document_kind": "annual_report",
             "language": "zh",
         },
-        "transcript_policy": None,
     }
     return models.Event(
         event_id="evt-snapshot",

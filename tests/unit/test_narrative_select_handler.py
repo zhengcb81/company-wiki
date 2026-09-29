@@ -24,7 +24,6 @@ from company_wiki.automation.narrative_contracts import (
 )
 from company_wiki.automation.narrative_select import NarrativeSelectHandler
 from company_wiki.source_catalog.narrative_document import NarrativeEvidencePackage
-from company_wiki.source_catalog.provider_use_policy import ProviderUsePolicy
 from company_wiki.source_catalog.source_reader import (
     ReviewSnapshot,
     SourceRef,
@@ -55,45 +54,6 @@ def _pdf_bytes(text: str) -> bytes:
     return data
 
 
-def _policy_payload(
-    *, permitted_actions: tuple[str, ...], revoked: bool = False
-) -> dict[str, object]:
-    payload: dict[str, object] = {
-        "schema_version": "provider-use-policy/1",
-        "policy_id": "select-handler-policy",
-        "rules": [
-            {
-                "provider_id": "fixture_provider",
-                "origin_host": "fixtures.invalid",
-                "path_prefix": "/transcripts",
-                "content_class": "earnings_call_transcript",
-                "rights_evidence_ref": "offline fixture",
-                "rights_evidence_sha256": _sha(b"fixture-rights"),
-                "reviewer": "unit-test",
-                "reviewed_at": "2026-09-01",
-                "valid_from": "2026-09-01",
-                "valid_until": "2026-09-30",
-                "permitted_actions": sorted(permitted_actions),
-                "retention_scope": "company_wiki_local",
-                "export_scope": "stockwiki_readonly_excerpt",
-                "revoked": revoked,
-            }
-        ],
-    }
-    payload["policy_sha256"] = _sha(canonical_json(payload).encode("utf-8"))
-    return payload
-
-
-def _policy(
-    *,
-    permitted_actions: tuple[str, ...] = ("derive_text", "select_evidence"),
-    revoked: bool = False,
-) -> ProviderUsePolicy:
-    return ProviderUsePolicy.from_dict(
-        _policy_payload(permitted_actions=permitted_actions, revoked=revoked)
-    )
-
-
 def _payload(
     data: bytes,
     *,
@@ -101,12 +61,11 @@ def _payload(
     document_kind: str,
     language: str,
     mime_type: str,
-    transcript_policy_sha256: str | None = None,
 ) -> dict[str, object]:
     digest = _sha(data)
-    transcript = transcript_policy_sha256 is not None
+    transcript = document_kind == "earnings_call_transcript"
     return {
-        "schema_version": "source-revision-event/1.0",
+        "schema_version": "source-revision-event/2.0",
         "source_ref": {
             "schema_version": "2.0",
             "document_id": "doc-select",
@@ -122,16 +81,6 @@ def _payload(
             "document_kind": document_kind,
             "language": language,
         },
-        "transcript_policy": (
-            {
-                "provider_id": "fixture_provider",
-                "source_url": "https://fixtures.invalid/transcripts/2026/q2.html",
-                "content_class": "earnings_call_transcript",
-                "expected_provider_policy_sha256": transcript_policy_sha256,
-            }
-            if transcript
-            else None
-        ),
     }
 
 
@@ -257,14 +206,11 @@ def _run(
     data: bytes,
     *,
     reader: FakeReader | None = None,
-    policy: ProviderUsePolicy | None = None,
     selector: Callable[..., NarrativeEvidencePackage] | None = None,
 ) -> tuple[object, int]:
     checkpoints: list[int] = []
     handler = NarrativeSelectHandler(
         reader=reader or FakeReader(payload, data),
-        provider_policy_loader=(lambda: policy) if policy is not None else None,
-        current_date=lambda: "2026-09-28",
         selector=selector,
     )
     result = handler(_context(payload, lambda: checkpoints.append(1)))
@@ -302,6 +248,24 @@ def test_select_handler_reads_pdf_bytes_for_high_value_document_types(
     assert checkpoint_count >= 4
 
 
+def test_select_handler_does_not_require_prompt_review_receipt() -> None:
+    data = _pdf_bytes("Company expanded its new business overseas.")
+    payload = _payload(
+        data,
+        title="ACME annual report.pdf",
+        document_kind="annual_report",
+        language="en",
+        mime_type="application/pdf",
+    )
+    reader = FakeReader(payload, data)
+    reader.opened = replace(reader.opened, review=None)
+
+    raw, _ = _run(payload, data, reader=reader)
+
+    assert raw.outcome is HandlerOutcome.SUCCEEDED
+    assert NarrativeSelectResult.from_dict(raw.result).prompt_review.status == "not_reviewed"
+
+
 @pytest.mark.parametrize("mime_type", ["text/plain", "text/html"])
 def test_select_handler_transcript_keeps_only_selected_original_byte_bindings(
     mime_type: str,
@@ -318,17 +282,15 @@ def test_select_handler_transcript_keeps_only_selected_original_byte_bindings(
         if mime_type == "text/plain"
         else "".join(f"<p>{line}</p>" for line in text.splitlines()).encode("utf-8")
     )
-    policy = _policy()
     payload = _payload(
         data,
         title="ACME Q2 2026 earnings call",
         document_kind="earnings_call_transcript",
         language="en",
         mime_type=mime_type,
-        transcript_policy_sha256=policy.policy_sha256,
     )
 
-    raw, _ = _run(payload, data, policy=policy)
+    raw, _ = _run(payload, data)
     assert raw.outcome is HandlerOutcome.SUCCEEDED
     result = NarrativeSelectResult.from_dict(raw.result)
     assert result.evidence_spans
@@ -339,11 +301,6 @@ def test_select_handler_transcript_keeps_only_selected_original_byte_bindings(
     assert "text_utf8" not in result.transcript_lineage.to_dict()
     assert all(item.material_line_start > 1 for item in result.transcript_byte_bindings)
     assert "summary_input" not in result.to_dict()
-    assert result.transcript_action_policy is not None
-    assert result.transcript_action_policy.actions == {
-        "derive_text",
-        "select_evidence",
-    }
 
 
 def test_select_handler_complete_low_value_pdf_emits_small_skip() -> None:
@@ -376,85 +333,52 @@ def test_select_handler_invalid_verified_pdf_blocks_without_effect() -> None:
     )
 
     raw, _ = _run(payload, data)
-    assert raw.outcome is HandlerOutcome.BLOCKED_HUMAN
+    assert raw.outcome is HandlerOutcome.TERMINAL_FAILURE
     assert raw.error is not None and raw.error.code == "PARSER_INCOMPLETE"
     assert raw.effects == ()
 
 
 def test_select_handler_transcript_parser_incomplete_cannot_become_skip() -> None:
     data = b"CEO: This omits the required transcript start marker.\n"
-    policy = _policy()
     payload = _payload(
         data,
         title="ACME Q2 call",
         document_kind="earnings_call_transcript",
         language="en",
         mime_type="text/plain",
-        transcript_policy_sha256=policy.policy_sha256,
     )
 
-    raw, _ = _run(payload, data, policy=policy)
-    assert raw.outcome is HandlerOutcome.BLOCKED_HUMAN
+    raw, _ = _run(payload, data)
+    assert raw.outcome is HandlerOutcome.TERMINAL_FAILURE
     assert raw.error is not None and raw.error.code == "PARSER_INCOMPLETE"
     assert raw.effects == ()
 
 
-@pytest.mark.parametrize(
-    "permitted_actions",
-    [("derive_text",), ("select_evidence",)],
-)
-def test_select_handler_requires_each_transcript_action(
-    permitted_actions: tuple[str, ...]
-) -> None:
+def test_select_handler_does_not_require_provider_policy_for_transcript() -> None:
     data = b"Full Conference Call Transcript\nCEO: We launched a new product.\n"
-    policy = _policy(permitted_actions=permitted_actions)
     payload = _payload(
         data,
         title="ACME call",
         document_kind="earnings_call_transcript",
         language="en",
         mime_type="text/plain",
-        transcript_policy_sha256=policy.policy_sha256,
     )
 
-    raw, _ = _run(payload, data, policy=policy)
-    assert raw.outcome is HandlerOutcome.TERMINAL_FAILURE
-    assert raw.error is not None and raw.error.code == "POLICY_DENIED"
-    assert raw.effects == ()
+    raw, _ = _run(payload, data)
+    assert raw.outcome is HandlerOutcome.SUCCEEDED
+    assert raw.error is None
+    assert NarrativeSelectResult.from_dict(raw.result).evidence_spans
 
 
-def test_select_handler_rejects_revoked_transcript_policy() -> None:
+@pytest.mark.parametrize("drift", ["source_hash", "read_policy", "metadata"])
+def test_select_handler_rejects_source_identity_and_metadata_drift(drift: str) -> None:
     data = b"Full Conference Call Transcript\nCEO: We launched a new product.\n"
-    policy = _policy(revoked=True)
     payload = _payload(
         data,
         title="ACME call",
         document_kind="earnings_call_transcript",
         language="en",
         mime_type="text/plain",
-        transcript_policy_sha256=policy.policy_sha256,
-    )
-
-    raw, _ = _run(payload, data, policy=policy)
-    assert raw.outcome is HandlerOutcome.TERMINAL_FAILURE
-    assert raw.error is not None and raw.error.code == "POLICY_DENIED"
-    assert raw.effects == ()
-
-
-@pytest.mark.parametrize("drift", ["provider_policy", "source_hash", "read_policy", "metadata"])
-def test_select_handler_rejects_source_and_policy_drift(drift: str) -> None:
-    data = b"Full Conference Call Transcript\nCEO: We launched a new product.\n"
-    policy = _policy()
-    expected_policy_sha = policy.policy_sha256
-    if drift == "provider_policy":
-        expected_policy_sha = _sha(b"old-policy")
-    payload = _payload(
-        data,
-        title="ACME call",
-        document_kind="earnings_call_transcript",
-        language="en",
-        mime_type="text/plain",
-        transcript_policy_sha256=expected_policy_sha,
     )
     reader = FakeReader(payload, data)
     if drift == "source_hash":
@@ -466,7 +390,7 @@ def test_select_handler_rejects_source_and_policy_drift(drift: str) -> None:
     elif drift == "metadata":
         reader.metadata["language"] = "mixed"
 
-    raw, _ = _run(payload, data, reader=reader, policy=policy)
+    raw, _ = _run(payload, data, reader=reader)
     assert raw.outcome is HandlerOutcome.TERMINAL_FAILURE
     assert raw.error is not None
     assert raw.error.code in {

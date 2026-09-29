@@ -101,7 +101,7 @@ _KNOWN_SPECS: tuple[HandlerSpec, ...] = (
             "IO_TRANSIENT",
             "LEASE_LOST",
         ),
-        human_errors=("MODEL_NOT_CONFIGURED", "PROMPT_REVIEW_REQUIRED"),
+        human_errors=("MODEL_NOT_CONFIGURED",),
         terminal_errors=(
             "INPUT_SCHEMA_INVALID",
             "DEPENDENCY_INVALID",
@@ -125,7 +125,6 @@ _KNOWN_SPECS: tuple[HandlerSpec, ...] = (
         human_errors=(
             "LOCATOR_REPLAY_FAILED",
             "SOURCE_UNAVAILABLE",
-            "PROMPT_REVIEW_REQUIRED",
         ),
         terminal_errors=(
             "INPUT_SCHEMA_INVALID",

@@ -21,10 +21,12 @@ import pytest
 
 from company_wiki.source_catalog import CatalogConfig, RootSpec, SourceCatalog
 from company_wiki.source_catalog.resolver import SourceRequest
+from company_wiki.source_catalog.scanner import R4_PROVENANCE_KEY
 from company_wiki.source_catalog.source_reader import (
     SourceReadError,
     SourceVersionReader,
 )
+from company_wiki.source_contract import SourceExportBundleV2
 
 
 P06_SHA = "cd803fe9528f4646f8f29b518a450ae4bd5b5968c482eb49789f9786b523595b"
@@ -42,6 +44,16 @@ STAR_RELATIVE = Path(
 )
 P06_ORIGINAL = Path.home() / "Projects" / "company-wiki" / "companies" / P06_RELATIVE
 STAR_ORIGINAL = Path.home() / "Dropbox" / "Stock" / STAR_RELATIVE
+DAYU_STAR_RELATIVE = Path(
+    "688031/filings/fil_cn_cd044bc0b6d88ca025885f43ed445e0b4c209822/"
+    "fil_cn_cd044bc0b6d88ca025885f43ed445e0b4c209822.pdf"
+)
+DAYU_STAR_ORIGINAL = (
+    Path.home() / "Projects" / "dayu-agent" / "workspace" / "portfolio"
+    / DAYU_STAR_RELATIVE
+)
+DAYU_STAR_META = DAYU_STAR_ORIGINAL.parent / "meta.json"
+DAYU_STAR_ENTITY_META = DAYU_STAR_ORIGINAL.parents[2] / "meta.json"
 
 
 def _sidecar(path: Path) -> Path:
@@ -106,6 +118,25 @@ def _available_originals(raw: Path, expected_sha: str, expected_size: int) -> di
     assert states[raw][1] == expected_size
     assert states[raw][4] == expected_sha
     return states
+
+
+def _available_files(paths: tuple[Path, ...]) -> dict[Path, tuple]:
+    for path in paths:
+        if not path.is_file():
+            pytest.skip(f"real source input unavailable: {path}")
+        info = path.stat()
+        cloud_flags = sum(
+            getattr(stat, name, 0)
+            for name in (
+                "FILE_ATTRIBUTE_OFFLINE",
+                "FILE_ATTRIBUTE_RECALL_ON_OPEN",
+                "FILE_ATTRIBUTE_RECALL_ON_DATA_ACCESS",
+                "FILE_ATTRIBUTE_REPARSE_POINT",
+            )
+        )
+        if getattr(info, "st_file_attributes", 0) & cloud_flags:
+            pytest.skip(f"real source input may require hydration: {path}")
+    return {path: _file_state(path) for path in paths}
 
 
 def _copy_checked(source: Path, target: Path, expected_sha: str) -> Path:
@@ -186,11 +217,16 @@ def _exact_row(catalog: SourceCatalog, digest: str) -> dict:
     return dict(row)
 
 
-def test_real_star_sidecar_query_open_and_same_sha_fallback(
+def test_real_star_native_metadata_conflict_is_priority_independent(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     original_states = _available_originals(STAR_ORIGINAL, STAR_SHA, STAR_SIZE)
     sidecar = _sidecar(STAR_ORIGINAL)
+    original_states.update(_available_files((
+        DAYU_STAR_ORIGINAL, DAYU_STAR_META, DAYU_STAR_ENTITY_META,
+    )))
+    assert original_states[DAYU_STAR_ORIGINAL][1] == STAR_SIZE
+    assert original_states[DAYU_STAR_ORIGINAL][4] == STAR_SHA
     payload = json.loads(sidecar.read_text(encoding="utf-8"))
     assert payload["content_sha256"] == STAR_SHA
     assert payload["document_kind"] == "annual_report"
@@ -198,81 +234,109 @@ def test_real_star_sidecar_query_open_and_same_sha_fallback(
     assert payload["source_url"].startswith("https://")
 
     run_root, baseline, parent_state, fixed_tests = _new_run(tmp_path)
-    catalog = None
+    catalogs: list[SourceCatalog] = []
     try:
         _forbid_external_actions(monkeypatch)
-        first_root = run_root / "sandbox" / "dropbox_stock"
-        second_root = run_root / "sandbox" / "same_sha_backup"
-        first = _copy_checked(STAR_ORIGINAL, first_root / STAR_RELATIVE, STAR_SHA)
-        second = _copy_checked(STAR_ORIGINAL, second_root / STAR_RELATIVE, STAR_SHA)
+        dayu_root = run_root / "sandbox" / "dayu_portfolio"
+        dropbox_root = run_root / "sandbox" / "dropbox_stock"
+        dayu_file = _copy_checked(
+            DAYU_STAR_ORIGINAL, dayu_root / DAYU_STAR_RELATIVE, STAR_SHA
+        )
+        _copy_checked(
+            DAYU_STAR_META, dayu_file.parent / "meta.json",
+            original_states[DAYU_STAR_META][4],
+        )
+        _copy_checked(
+            DAYU_STAR_ENTITY_META,
+            dayu_root / "688031" / "meta.json",
+            original_states[DAYU_STAR_ENTITY_META][4],
+        )
+        dropbox_file = _copy_checked(
+            STAR_ORIGINAL, dropbox_root / STAR_RELATIVE, STAR_SHA
+        )
         sidecar_sha = original_states[sidecar][4]
-        _copy_checked(sidecar, _sidecar(first), sidecar_sha)
-        _copy_checked(sidecar, _sidecar(second), sidecar_sha)
-
-        roots = (
-            RootSpec(
-                "dropbox_stock", first_root, "directory", priority=10,
-                adapter_id="sidecar_filing_v1", read_only=True,
-                reusable_for_filing=True,
-            ),
-            RootSpec(
-                "same_sha_backup", second_root, "directory", priority=20,
-                adapter_id="sidecar_filing_v1", read_only=True,
-                reusable_for_filing=True,
-            ),
-        )
-        catalog = _catalog(run_root, roots)
-        rows = catalog.reader.fetchall(
-            """SELECT l.root_id FROM locations l JOIN sources s
-                 ON s.source_id=l.source_id
-               WHERE s.content_sha256=? AND l.role='original_primary'
-                 AND l.location_status='active'""",
-            (STAR_SHA,),
-        )
-        assert {row["root_id"] for row in rows} == {"dropbox_stock", "same_sha_backup"}
+        _copy_checked(sidecar, _sidecar(dropbox_file), sidecar_sha)
 
         request = SourceRequest(
             entity="星环科技", market="CN", security_id="688031",
             document_kind="annual_report", fiscal_year=2025,
-            provider="cninfo", provider_document_id="1225028771",
             as_of_date="2026-09-27", mode="exact",
         )
-        reader = SourceVersionReader(catalog)
-        result = reader.query_local(request)
-        assert result.status == "found", result
-        assert len(result.matches) == 1
-        ref = result.matches[0]
-        assert ref.content_sha256 == STAR_SHA
-        assert all(
-            "path" not in key and "root" not in key and "location" not in key
-            for key in asdict(ref)
-        )
-        opened = reader.open_version(ref, purpose="filing_reuse")
-        assert opened.byte_size == STAR_SIZE
-        assert hashlib.sha256(opened.data).hexdigest() == STAR_SHA
+        outcomes = []
+        for name, dayu_priority, dropbox_priority in (
+            ("dayu-first", 10, 20), ("dropbox-first", 20, 10),
+        ):
+            roots = (
+                RootSpec(
+                    "dayu_portfolio", dayu_root, "dayu_portfolio",
+                    priority=dayu_priority, adapter_id="dayu_filing_v1",
+                    read_only=True, reusable_for_filing=True,
+                ),
+                RootSpec(
+                    "dropbox_stock", dropbox_root, "directory",
+                    priority=dropbox_priority,
+                    adapter_id="sidecar_filing_v1", read_only=True,
+                    reusable_for_filing=True,
+                ),
+            )
+            config = CatalogConfig(
+                project_root=run_root,
+                catalog_dir=run_root / "state" / name,
+                reusable_root_kinds=("company_raw", "directory"),
+                roots=roots,
+            )
+            catalog = SourceCatalog(config)
+            catalog.scan()
+            catalogs.append(catalog)
+            locations = catalog.reader.fetchall(
+                """SELECT l.root_id FROM locations l JOIN sources s
+                     ON s.source_id=l.source_id
+                   WHERE s.content_sha256=? AND l.role='original_primary'
+                     AND l.location_status='active'""",
+                (STAR_SHA,),
+            )
+            assert {row["root_id"] for row in locations} == {
+                "dayu_portfolio", "dropbox_stock",
+            }
 
-        moved = first.with_name(first.name + ".moved")
-        first.rename(moved)
-        try:
-            fallback = reader.open_version(ref, purpose="filing_reuse")
-            assert fallback.data == opened.data
-            assert reader.query_local(request).matches == (ref,)
-        finally:
-            moved.rename(first)
+            reader = SourceVersionReader(catalog)
+            result = reader.query_local(request)
+            assert result.status == "not_found", result
+            assert result.reason == "no_local_match"
+            row = _exact_row(catalog, STAR_SHA)
+            ref = reader.query_ref(
+                row["document_id"], row["source_id"], STAR_SHA
+            )
+            assert all(
+                "path" not in key and "root" not in key and "location" not in key
+                for key in asdict(ref)
+            )
+            with pytest.raises(SourceReadError) as error:
+                reader.describe_version(ref)
+            assert error.value.status == "blocked"
+            assert error.value.reason == "metadata_conflict"
 
-        with first.open("r+b") as stream:
-            first_byte = stream.read(1)
-            assert first_byte
-            stream.seek(0)
-            stream.write(bytes((first_byte[0] ^ 1,)))
-        assert first.stat().st_size == STAR_SIZE
-        assert _sha256(first) != STAR_SHA
-        fallback_after_drift = reader.open_version(ref, purpose="filing_reuse")
-        assert fallback_after_drift.data == opened.data
+            version = catalog.reader.exact_source_version(ref.document_id)
+            assert version is not None
+            metadata = json.loads(version["metadata_json"])
+            provenance = metadata.get(R4_PROVENANCE_KEY)
+            assert isinstance(provenance, dict)
+            field_records = provenance.get("fields")
+            assert isinstance(field_records, dict)
+            conflict_fields = tuple(sorted(
+                key for key, record in field_records.items()
+                if isinstance(record, dict) and record.get("conflicts")
+            ))
+            assert conflict_fields
+            outcomes.append((ref.document_id, ref.source_id, conflict_fields))
+
+        assert outcomes[0] == outcomes[1]
     finally:
+        for catalog in reversed(catalogs):
+            catalog.close()
         _finish_run(
             tmp_path, run_root, baseline, parent_state, fixed_tests,
-            original_states, catalog,
+            original_states, None,
         )
 
 
@@ -324,4 +388,97 @@ def test_real_p06_sparse_sidecar_preview_is_not_formal_reuse(
         _finish_run(
             tmp_path, run_root, baseline, parent_state, fixed_tests,
             original_states, catalog,
+        )
+
+
+def test_real_p06_four_root_export_is_independent_of_root_names_and_priority(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """A real PDF source keeps its exported identity across isolated roots."""
+    original_states = _available_originals(P06_ORIGINAL, P06_SHA, P06_SIZE)
+    run_root, baseline, parent_state, fixed_tests = _new_run(tmp_path)
+    catalogs: list[SourceCatalog] = []
+    try:
+        _forbid_external_actions(monkeypatch)
+
+        def make_roots(
+            layout: str, labels: tuple[str, ...], priorities: tuple[int, ...]
+        ) -> tuple[RootSpec, ...]:
+            roots = []
+            for label, priority in zip(labels, priorities, strict=True):
+                root_path = run_root / "sandbox" / layout / label
+                staged = _copy_checked(
+                    P06_ORIGINAL, root_path / P06_RELATIVE, P06_SHA
+                )
+                _copy_checked(
+                    _sidecar(P06_ORIGINAL),
+                    _sidecar(staged),
+                    original_states[_sidecar(P06_ORIGINAL)][4],
+                )
+                roots.append(RootSpec(
+                    label, root_path, "company_raw", priority=priority,
+                    adapter_id="company_raw_v1", read_only=True,
+                    reusable_for_filing=True,
+                    canonical_write_target="companies",
+                ))
+            return tuple(roots)
+
+        def open_catalog(
+            name: str, roots: tuple[RootSpec, ...]
+        ) -> SourceCatalog:
+            assert all(root.path.is_relative_to(run_root) for root in roots)
+            config = CatalogConfig(
+                project_root=run_root,
+                catalog_dir=run_root / "state" / name,
+                reusable_root_kinds=("company_raw", "directory"),
+                roots=roots,
+            )
+            catalog = SourceCatalog(config)
+            catalog.scan()
+            catalogs.append(catalog)
+            return catalog
+
+        first = open_catalog(
+            "catalog-first",
+            make_roots("layout-first", ("root-a", "root-b", "root-c", "root-d"),
+                       (10, 20, 30, 40)),
+        )
+        second = open_catalog(
+            "catalog-relocated",
+            make_roots("layout-relocated", ("vault-1", "vault-2", "vault-3", "vault-4"),
+                       (40, 30, 20, 10)),
+        )
+
+        def export(catalog: SourceCatalog) -> dict:
+            row = _exact_row(catalog, P06_SHA)
+            reader = SourceVersionReader(catalog)
+            ref = reader.query_ref(
+                row["document_id"], row["source_id"], P06_SHA
+            )
+            bundle = SourceExportBundleV2.build(
+                source_reader=reader, refs=(ref,), evidence_spans=(),
+            )
+            return bundle.to_dict()
+
+        first_export = export(first)
+        second_export = export(second)
+        assert first_export == second_export
+        assert first_export["counts"] == {
+            "source_manifests": 1, "evidence_spans": 0,
+        }
+        manifest = first_export["manifests"][0]
+        assert manifest["content_sha256"] == P06_SHA
+        assert manifest["byte_size"] == P06_SIZE
+        assert "path" not in first_export
+        assert all(
+            "path" not in field and "root" not in field
+            for field in manifest
+        )
+        _forbid_external_actions(monkeypatch)
+    finally:
+        for catalog in reversed(catalogs):
+            catalog.close()
+        _finish_run(
+            tmp_path, run_root, baseline, parent_state, fixed_tests,
+            original_states, None,
         )
