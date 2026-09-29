@@ -290,3 +290,30 @@ def test_cli_rejects_same_size_raw_byte_drift_with_empty_stdout(
     proc = _run_cli(config_path, guard_dir, ref, span, tmp_path / "caller")
     _one_json_error(proc, tmp_path)
     assert _snapshot(tmp_path) == before
+
+
+def test_cli_matches_frozen_source_v2_golden(tmp_path: Path) -> None:
+    """Freeze actual CLI bytes for pathless cross-repo consumers."""
+    config_path, _raw, guard_dir, ref, span = _fixture(tmp_path)
+    goldens = ROOT / "tests" / "golden" / "source_v2"
+    ref_wire = (
+        json.dumps(ref, ensure_ascii=True, sort_keys=True, separators=(",", ":"))
+        + "\n"
+    ).encode("utf-8")
+    assert ref_wire == (goldens / "source_ref.json").read_bytes()
+    span_wire = (
+        json.dumps(span, ensure_ascii=True, sort_keys=True, separators=(",", ":"))
+        + "\n"
+    ).encode("utf-8")
+    assert span_wire == (goldens / "evidence_span.json").read_bytes()
+    process = _run_cli(config_path, guard_dir, ref, span, tmp_path / "caller")
+    assert process.returncode == 0, process.stderr
+    assert process.stderr == b""
+    assert process.stdout == (goldens / "source_export_bundle.json").read_bytes()
+    bad_ref = json.loads((goldens / "source_ref_bad_sha.json").read_bytes())
+    assert set(bad_ref) == set(ref)
+    assert bad_ref["content_sha256"] != ref["content_sha256"]
+    rejected = _run_cli(config_path, guard_dir, bad_ref, span, tmp_path / "caller")
+    assert rejected.returncode == 2
+    assert rejected.stdout == b""
+    assert json.loads(rejected.stderr)["status"] in {"not_found", "unavailable"}
