@@ -159,6 +159,7 @@ Phase E 新增一个窄表 `narrative_artifact_versions`，不增加 generic hea
 CREATE TABLE narrative_artifact_versions (
   artifact_version_id TEXT PRIMARY KEY,
   work_key TEXT NOT NULL UNIQUE,
+  effect_id TEXT NOT NULL UNIQUE,
   document_id TEXT NOT NULL,
   source_id TEXT NOT NULL,
   source_sha256 TEXT NOT NULL,
@@ -172,17 +173,17 @@ CREATE TABLE narrative_artifact_versions (
   selection_status TEXT NOT NULL,
   quality_status TEXT NOT NULL,
   metadata_json TEXT NOT NULL,
-  visibility_state TEXT NOT NULL CHECK(visibility_state IN ('visible','withdrawn')),
+  status TEXT NOT NULL CHECK(status IN ('prepared','visible','retired','quarantined')),
   created_at TEXT NOT NULL,
-  withdrawn_at TEXT,
+  activated_at TEXT,
   FOREIGN KEY(document_id) REFERENCES documents(document_id),
   FOREIGN KEY(source_id) REFERENCES sources(source_id)
 );
 ```
 
-`work_key` 绑定 `document_id + source_id + source_sha256 + artifact_role + producer/version + policy_sha256`。同 work_key、同 content hash 是幂等重放；同 work_key、不同 hash 必须冲突并进入审查，不能 last-write-wins。
+这是 E5 唯一正式表形状：`object_key` 是逻辑键，绝不存物理路径；`effect_id` 让跨 AUTO/catalog 数据库的恢复器能找到对应发布结果。`work_key` 绑定 `document_id + source_id + source_sha256 + artifact_role + producer/version + policy_sha256`。同 work_key、同 content hash 是幂等重放；同 work_key、不同 hash 直接冲突并按自动重试/终态错误处理，不进入人工审查队列，不得 last-write-wins。
 
-`visible` 只表示来源身份、解析/locator 和包完整性通过，不表示投资结论成立。
+状态只允许：`prepared`（对象和 catalog 已登记、尚不可读）、`visible`（自动来源/locator/包校验通过）、`retired`（来源已退休或不再是当前主来源）、`quarantined`（hash、schema 或身份冲突）。从 `prepared` 到 `visible` 的切换必须重验当前源。`visible` 只表示来源身份、解析/locator 和包完整性通过，不表示投资结论成立。E5 的表/索引为 additive DDL，不重建旧 `artifacts/evidence_spans`，也不改变 catalog schema version；初始化时所有已支持版本都须执行幂等 additive DDL。
 
 ### 3.5 Automation DB v2
 
@@ -410,7 +411,10 @@ Supervisor 不使用内存 queue 保存唯一任务事实；进程退出后以 D
 
 - bundle 写一半崩溃：没有 catalog visible 行；临时文件可清理。
 - object rename 后、catalog insert 前崩溃：重试复用同 hash object。
-- catalog insert 后、outbox ACK 前崩溃：重试发现同 work_key/hash，完成 ACK，不生成第二行或重跑模型。
+- AUTO `finish_attempt` 原子保存 attempt result/effect/outbox；outbox 只含 effect 身份，E5 必须增加只读 `result_for_effect(effect_id)`，精确找回同一已完成 attempt 的 bundle；缺失/多重/不匹配都拒绝。
+- 分发器只 claim `narrative_bundle.publish`，校验 bundle SHA 与 effect `intended_after_hash`，把 effect 交给 projector；当前没有 outbox 生产分发器，这一层必须实现并供 E7 调用。
+- catalog `prepared` 登记后、outbox ACK 前崩溃：lease 重试发现同 work_key/hash，完成 ACK，不生成第二行或重跑模型。
+- outbox ACK 后、catalog activate 前崩溃：恢复器用 `effect_id` 找到 `prepared` 行，发现 AUTO effect 已 verified 后幂等 activate。
 - 同 work_key 不同 hash：冲突并 fail closed。
 - pause 在 compute 后、project 前发生：旧 generation 不产生 visible 行。
 - source retired、primary source/hash 或 read policy 改变：project 拒绝。
@@ -419,14 +423,27 @@ Supervisor 不使用内存 queue 保存唯一任务事实；进程退出后以 D
 
 **实现文件**
 
+- 新 `src/company_wiki/automation/narrative_outbox.py`（窄 effect dispatcher、lease/retry、prepared reconciliation）
+- `src/company_wiki/automation/store.py`（按 effect 读取已完成 handler result；claim 支持 effect type 过滤）
 - 新 `src/company_wiki/source_catalog/narrative_artifact_store.py`
 - 新 `src/company_wiki/source_catalog/narrative_projector.py`
 - 新 `src/company_wiki/source_catalog/narrative_artifact_reader.py`
-- `src/company_wiki/source_catalog/store.py`（表/索引与迁移）
-- `src/company_wiki/source_catalog/artifact_dag.py`（只登记 narrative role 依赖语义）
-- 新 `tests/integration/test_narrative_projector_recovery.py`
+- `src/company_wiki/source_catalog/store.py`（前述窄表与索引、additive DDL）
+- 不修改旧 `artifact_dag.py`/generic `artifacts`：narrative bundle 由 AUTO DAG 的 `source.narrative_verify` effect 发布；混入旧 normalized/sections DAG 会制造第二套职责和迁移面。
+- `src/company_wiki/automation/narrative_verify.py` 仅在 RED 证明 payload 绑定不足时改；解析/LLM 不得进入 projector。
+- 新 `tests/unit/test_narrative_artifact_store.py`、`tests/unit/test_narrative_projector.py` 与 `tests/integration/test_narrative_projector_recovery.py`
 
-Projector 是唯一 catalog writer。对外 reader 返回 source ID、hash、locator、质量状态和验证后的 bundle bytes，不返回 object path。
+**固定数据流（不跨两个 WAL 数据库假设原子性）**
+
+1. Worker `finish_attempt` 在一个 AUTO 事务中写成功 attempt result、pending effect 与 pending outbox，job 留在 `VERIFYING`。
+2. narrative dispatcher 用 generation-fenced lease 只 claim `narrative_bundle.publish`，读取并严格解析那一个 attempt result；canonical bundle SHA 必须等于 effect hash。投影错误走有界 retry/dead-letter，不调用模型。
+3. content-addressed object adapter 在 catalog lock 外原子写/复用对象；catalog projector 随后持 `CatalogOperationLock` 短锁，重验 Worker generation、来源当前 active/primary/source SHA 和 read policy，在一个 catalog 事务插入 `prepared`。
+4. dispatcher ACK AUTO outbox；ACK 成功后再持短锁重验上述状态和已 verified effect，把该行原子变成 `visible`。pause 可在线性化边界阻止旧 generation；ACK 后崩溃由 prepared reconciler 恢复。
+5. `NarrativeArtifactReader` 只按逻辑身份读取 `visible` 版本，经 object adapter 取得 bytes 并重验 byte size、SHA、strict bundle schema 与当前来源 SHA；不返回 object path。来源退休记 `retired`，内容/身份/策略冲突记 `quarantined`，二者均不可读。
+
+Object adapter 是本阶段唯一接触 `.source_catalog/objects/sha256/{prefix}/{sha}.json` 物理布局的层；store/projector/reader/consumer 只见 `object_key` 或 verified bytes。临时与目标同卷，fsync 后原子 rename，已有对象必须重验 hash，不覆盖异 hash 对象。孤儿对象留待后续有引用账的清理阶段，E5 不自行猜测删除。
+
+Projector 是唯一 narrative catalog writer。pause/catalog operation lock 只包短时校验与事务，不包 I/O/解析/LLM；内容写完至 catalog 提交之间崩溃时只留下可复用的孤儿对象。自动事实决定是否继续，不使用授权文件、人工 review receipt 或人工队列。
 
 ### E6：关键真实数据端到端
 
