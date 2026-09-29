@@ -90,6 +90,22 @@ def test_missing_catalog_dir_is_rejected(tmp_path: Path) -> None:
     assert any("catalog_dir" in problem for problem in problems)
 
 
+def test_structure_only_checks_config_without_requiring_local_catalog(tmp_path: Path) -> None:
+    path = _write_config(
+        tmp_path,
+        'schema_version: "1.0"\n'
+        'catalog_dir: "${PROJECT_ROOT}/missing-catalog"\n'
+        'roots:\n'
+        '  - root_id: company_raw\n'
+        '    kind: company_raw\n'
+        '    path: "${PROJECT_ROOT}/companies"\n',
+    )
+    assert any("catalog_dir" in problem for problem in diagnose(path, project_root=tmp_path))
+    assert diagnose(path, project_root=tmp_path, check_catalog_data=False) == []
+    path.write_text('{broken', encoding="utf-8")
+    assert diagnose(path, project_root=tmp_path, check_catalog_data=False)
+
+
 def test_missing_config_file_is_rejected(tmp_path: Path) -> None:
     problems = diagnose(tmp_path / "nope.yaml", project_root=tmp_path)
     assert any("missing config" in problem for problem in problems)

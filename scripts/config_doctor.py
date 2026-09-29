@@ -24,6 +24,7 @@ def diagnose(
     config_path: Path | None = None,
     project_root: Path | None = None,
     filing_fetch_config: Path | None = None,
+    check_catalog_data: bool = True,
 ) -> list[str]:
     """Return a list of config problems (empty = healthy).
 
@@ -53,11 +54,11 @@ def diagnose(
         problems.append(f"config failed to load: {exc}")
         return problems
     if not config.catalog_dir.is_dir():
-        # CI runners have no production catalog; they still get structure +
-        # cross-repo checks. Production machines must have the catalog.
-        if os.environ.get("CI") != "true":
+        # Code-only worktrees and CI runners have no production catalog.
+        # Explicit structure-only mode still checks YAML and root shape.
+        if check_catalog_data and os.environ.get("CI") != "true":
             problems.append(f"catalog_dir is not a directory: {config.catalog_dir}")
-    else:
+    elif check_catalog_data:
         master = config.catalog_dir / "security_master"
         files = sorted(master.glob("*.json")) if master.is_dir() else []
         if not files:
@@ -123,6 +124,10 @@ def main(argv: list[str] | None = None) -> int:
         description="Production-config doctor (R4.1, roadmap RC-4 / N-05)."
     )
     parser.add_argument(
+        "--structure-only", action="store_true",
+        help="validate config structure without requiring a local production catalog",
+    )
+    parser.add_argument(
         "--filing-fetch-config",
         type=Path,
         default=None,
@@ -130,7 +135,10 @@ def main(argv: list[str] | None = None) -> int:
         "the cross-repo check (FC-1202: skipped when omitted)",
     )
     args = parser.parse_args(argv)
-    problems = diagnose(filing_fetch_config=args.filing_fetch_config)
+    problems = diagnose(
+        filing_fetch_config=args.filing_fetch_config,
+        check_catalog_data=not args.structure_only,
+    )
     for problem in problems:
         print(f"CONFIG-PROBLEM: {problem}")
     if not problems:

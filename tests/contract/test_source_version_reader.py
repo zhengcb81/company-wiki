@@ -581,18 +581,17 @@ def test_disputed_capture_metadata_cannot_authorize_filing_reuse(tmp_path, monke
     assert error.value.reason == "metadata_conflict"
 
 
-def test_pending_remediation_is_not_offered_or_opened_for_reuse(tmp_path, monkeypatch):
+def test_pending_remediation_is_diagnostic_and_does_not_block_verified_reuse(tmp_path):
     catalog, _, _, ids = _fixture(tmp_path)
     reader = SourceVersionReader(catalog)
     ref = reader.query_ref(ids["document_id"], ids["source_id"], SHA)
     connection = sqlite3.connect(catalog.config.database_path)
     connection.execute(
-        """INSERT INTO remediation_proposals
-           (proposal_id, source_id, document_id, content_sha256, proposal_json,
-            policy_hash, proposed_by, created_at, status)
-           VALUES (?, ?, ?, ?, '{}', ?, 'test', '2026-09-27T00:00:00Z', 'proposed')""",
-        ("proposal-1", ids["source_id"], ids["document_id"], SHA,
-         "0" * 64),
+        "INSERT INTO remediation_proposals "
+        "(proposal_id, source_id, document_id, content_sha256, proposal_json, "
+        "policy_hash, proposed_by, created_at, status) "
+        "VALUES (?, ?, ?, ?, '{}', ?, 'test', '2026-09-27T00:00:00Z', 'proposed')",
+        ("proposal-1", ids["source_id"], ids["document_id"], SHA, "0" * 64),
     )
     connection.commit()
     connection.close()
@@ -602,21 +601,9 @@ def test_pending_remediation_is_not_offered_or_opened_for_reuse(tmp_path, monkey
         provider="sec", provider_document_id="doc-1",
         as_of_date="2026-08-10", mode="exact",
     )
-    assert reader.query_local(request).status == "not_found"
-
-    real_open = Path.open
-
-    def no_pdf_open(path, *args, **kwargs):
-        if path.suffix.lower() == ".pdf":
-            raise AssertionError("disputed source opened filing bytes")
-        return real_open(path, *args, **kwargs)
-
-    monkeypatch.setattr(Path, "open", no_pdf_open)
+    assert reader.query_local(request).matches == (ref,)
     for purpose in ("filing_reuse", "source_export", "narrative_derivation"):
-        with pytest.raises(SourceReadError) as error:
-            reader.open_version(ref, purpose=purpose)
-        assert error.value.status == "blocked"
-        assert error.value.reason == "remediation_pending"
+        assert reader.open_version(ref, purpose=purpose).data == BODY
 
 
 def test_filing_reuse_needs_declared_reporting_period_not_a_filing_date(
@@ -762,13 +749,15 @@ def test_same_sha_complete_sidecars_with_disputed_identity_are_not_reused(tmp_pa
         assert error.value.reason == "metadata_conflict"
 
 
-def test_candidate_review_store_error_is_named_unavailable(tmp_path, monkeypatch):
+def test_review_store_failure_is_diagnostic_and_verified_bytes_remain_usable(
+    tmp_path, monkeypatch,
+):
     from company_wiki.source_catalog.prompt_injection import (
         PromptInjectionReviewError,
     )
     import company_wiki.source_catalog.source_reader as reader_module
 
-    catalog, _, _, ids = _fixture(tmp_path)
+    catalog, paths, _, ids = _fixture(tmp_path)
     reader = SourceVersionReader(catalog)
     ref = reader.query_ref(ids["document_id"], ids["source_id"], SHA)
 
@@ -776,7 +765,16 @@ def test_candidate_review_store_error_is_named_unavailable(tmp_path, monkeypatch
         raise PromptInjectionReviewError("database is locked")
 
     monkeypatch.setattr(reader_module, "read_prompt_injection_review", fail_review)
+    candidate = reader.describe_candidate(ref)
+    assert candidate["capture_ready"] is True
+    assert candidate["prompt_injection_status"] == "not_reviewed"
+    opened = reader.open_version(ref, purpose="filing_reuse")
+    assert opened.data == BODY
+    assert opened.review is not None
+    assert opened.review.status == "not_reviewed"
+
+    paths[0].write_bytes(b"X" * len(BODY))
+    assert reader.describe_candidate(ref)["capture_ready"] is True
     with pytest.raises(SourceReadError) as error:
-        reader.describe_candidate(ref)
-    assert error.value.status == "unavailable"
-    assert error.value.reason == "review_unavailable"
+        reader.open_version(ref, purpose="filing_reuse")
+    assert error.value.reason == "no_verified_location"

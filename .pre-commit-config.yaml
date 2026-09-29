@@ -89,6 +89,7 @@ repos:
         name: config doctor (WU-7.1, mirrors CI)
         entry: >-
           python -c "import sys, runpy; sys.path.insert(0, 'src');
+          sys.argv=['scripts/config_doctor.py', '--structure-only'];
           runpy.run_path('scripts/config_doctor.py', run_name='__main__')"
         language: system
         pass_filenames: false

@@ -351,7 +351,7 @@ def test_query_cli_returns_db_only_pathless_reviewed_candidate(tmp_path: Path):
     assert refused.stdout == b""
 
 
-def test_query_cli_reports_unreviewed_candidate_without_granting_reuse(
+def test_query_cli_reports_unreviewed_candidate_with_capture_readiness(
     tmp_path: Path,
 ):
     config_path, _, _ = _fixture(tmp_path)
@@ -361,7 +361,10 @@ def test_query_cli_reports_unreviewed_candidate_without_granting_reuse(
     assert result["status"] == "found"
     assert len(result["candidates"]) == 1
     assert result["candidates"][0]["prompt_injection_status"] == "not_reviewed"
-    assert result["candidates"][0]["capture_ready"] is False
+    assert result["candidates"][0]["capture_ready"] is True
+    opened = _run_cli(config_path, result["matches"][0], tmp_path)
+    assert opened.returncode == 0, opened.stderr
+    assert opened.stdout == BODY
 
 
 
