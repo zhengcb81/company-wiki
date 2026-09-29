@@ -369,4 +369,4 @@ def test_reader_cli_matches_normalized_verified_open_golden(tmp_path: Path) -> N
         check=False, timeout=30,
     )
     assert refused.returncode == 2 and refused.stdout == b""
-    assert refused.stderr == (goldens / "verified_open_bad_sha.json").read_bytes()
+    assert refused.stderr.replace(b"\r\n", b"\n") == (goldens / "verified_open_bad_sha.json").read_bytes()
