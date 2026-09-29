@@ -35,6 +35,11 @@
       "where": "tests/e2e/test_source_version_reader_real_bytes.py (STAR_SHA)",
       "rationale": "Content SHA-256 of the real StarRing annual-report bytes used by the isolated reader E2E; it is intentionally pinned to detect source mutation and does not include a path.",
       "registered_by": "company-wiki R4 integration audit (2026-09-27)"
+    },
+    "19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67": {
+      "where": "tests/e2e/test_source_version_reader_real_bytes.py (P04_SHA)",
+      "rationale": "Content SHA-256 of the real 429-page P04 prospectus bytes used by the isolated streaming reader E2E; it detects source mutation and is independent of host paths.",
+      "registered_by": "company-wiki G-0 integration (2026-09-29)"
     }
   }
 }

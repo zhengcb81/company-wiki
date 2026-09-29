@@ -13,6 +13,7 @@ import shutil
 import socket
 import stat
 import subprocess
+import tracemalloc
 import uuid
 from dataclasses import asdict
 from pathlib import Path
@@ -33,6 +34,8 @@ P06_SHA = "cd803fe9528f4646f8f29b518a450ae4bd5b5968c482eb49789f9786b523595b"
 STAR_SHA = "0d40d94aef8d2fa08c4c75760198be426a0b579be3d7200ec9450a7e04522b4f"
 P06_SIZE = 5_595_592
 STAR_SIZE = 1_794_755
+P04_SHA = "19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67"
+P04_SIZE = 11_211_796
 
 P06_RELATIVE = Path(
     "三角防务/raw/research/"
@@ -43,6 +46,11 @@ STAR_RELATIVE = Path(
     "星环科技：2025年年度报告.pdf"
 )
 P06_ORIGINAL = Path.home() / "Projects" / "company-wiki" / "companies" / P06_RELATIVE
+P04_RELATIVE = Path(
+    "中微公司/raw/prospectus/"
+    "中微公司：首次公开发行股票并在科创板上市招股说明书.pdf"
+)
+P04_ORIGINAL = Path.home() / "Projects" / "company-wiki" / "companies" / P04_RELATIVE
 STAR_ORIGINAL = Path.home() / "Dropbox" / "Stock" / STAR_RELATIVE
 DAYU_STAR_RELATIVE = Path(
     "688031/filings/fil_cn_cd044bc0b6d88ca025885f43ed445e0b4c209822/"
@@ -463,6 +471,42 @@ def test_real_p06_four_root_export_is_independent_of_root_names_and_priority(
         first_export = export(first)
         second_export = export(second)
         assert first_export == second_export
+
+        # A ref issued before root relocation contains no physical location.
+        row = _exact_row(first, P06_SHA)
+        old_ref = SourceVersionReader(first).query_ref(
+            row["document_id"], row["source_id"], P06_SHA
+        )
+        moved_reader = SourceVersionReader(second)
+        assert moved_reader.query_ref(
+            old_ref.document_id, old_ref.source_id, old_ref.content_sha256
+        ) == old_ref
+        first_open = moved_reader.open_version(old_ref, purpose="preview")
+        assert hashlib.sha256(first_open.data).hexdigest() == P06_SHA
+
+        # Corrupt the preferred copy without changing its size. The same old
+        # ref must fall back to another verified location, never these bytes.
+        preferred = (
+            run_root / "sandbox" / "layout-relocated" / "vault-4" / P06_RELATIVE
+        )
+        damaged = preferred.read_bytes()
+        preferred.write_bytes(damaged[:-1] + bytes([damaged[-1] ^ 1]))
+        assert preferred.stat().st_size == P06_SIZE
+        fallback = moved_reader.open_version(old_ref, purpose="preview")
+        assert hashlib.sha256(fallback.data).hexdigest() == P06_SHA
+        assert fallback.data != preferred.read_bytes()
+
+        for label in ("vault-1", "vault-2", "vault-3"):
+            copy = (
+                run_root / "sandbox" / "layout-relocated" / label / P06_RELATIVE
+            )
+            bytes_before = copy.read_bytes()
+            copy.write_bytes(bytes_before[:-1] + bytes([bytes_before[-1] ^ 1]))
+            assert copy.stat().st_size == P06_SIZE
+        with pytest.raises(SourceReadError) as fully_lost:
+            moved_reader.open_version(old_ref, purpose="preview")
+        assert fully_lost.value.status == "unavailable"
+        assert fully_lost.value.reason == "no_verified_location"
         assert first_export["counts"] == {
             "source_manifests": 1, "evidence_spans": 0,
         }
@@ -481,4 +525,42 @@ def test_real_p06_four_root_export_is_independent_of_root_names_and_priority(
         _finish_run(
             tmp_path, run_root, baseline, parent_state, fixed_tests,
             original_states, None,
+        )
+
+
+def test_real_p04_large_prospectus_verify_streams_with_bounded_memory(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """The actual 429-page prospectus can be hash-verified without whole-file RAM."""
+    original_states = _available_originals(P04_ORIGINAL, P04_SHA, P04_SIZE)
+    run_root, baseline, parent_state, fixed_tests = _new_run(tmp_path)
+    catalog = None
+    try:
+        _forbid_external_actions(monkeypatch)
+        company_root = run_root / "sandbox" / "companies"
+        staged = _copy_checked(P04_ORIGINAL, company_root / P04_RELATIVE, P04_SHA)
+        sidecar = _sidecar(P04_ORIGINAL)
+        _copy_checked(sidecar, _sidecar(staged), original_states[sidecar][4])
+        catalog = _catalog(run_root, (RootSpec(
+            "company_raw", company_root, "company_raw", priority=10,
+            adapter_id="company_raw_v1", read_only=True,
+            reusable_for_filing=True, canonical_write_target="companies",
+        ),))
+        row = _exact_row(catalog, P04_SHA)
+        reader = SourceVersionReader(catalog)
+        ref = reader.query_ref(row["document_id"], row["source_id"], P04_SHA)
+        tracemalloc.start()
+        try:
+            receipt = reader.verify_version(ref, purpose="source_export")
+            _, peak = tracemalloc.get_traced_memory()
+        finally:
+            tracemalloc.stop()
+        assert receipt.content_sha256 == P04_SHA
+        assert receipt.byte_size == P04_SIZE
+        assert not hasattr(receipt, "data")
+        assert peak < 8 * 1024 * 1024
+    finally:
+        _finish_run(
+            tmp_path, run_root, baseline, parent_state, fixed_tests,
+            original_states, catalog,
         )
