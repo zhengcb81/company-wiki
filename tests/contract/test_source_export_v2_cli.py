@@ -7,6 +7,8 @@ The CLI is invoked from another cwd with a production-shaped config path.
 from __future__ import annotations
 
 import hashlib
+import re
+from datetime import datetime, timezone
 import json
 import os
 from dataclasses import asdict
@@ -317,3 +319,54 @@ def test_cli_matches_frozen_source_v2_golden(tmp_path: Path) -> None:
     assert rejected.returncode == 2
     assert rejected.stdout == b""
     assert json.loads(rejected.stderr)["status"] in {"not_found", "unavailable"}
+
+
+def test_reader_cli_matches_normalized_verified_open_golden(tmp_path: Path) -> None:
+    """Freeze reader receipt shape while keeping runtime clock and policy pins live."""
+    config_path, raw, guard_dir, ref, _span = _fixture(tmp_path)
+    goldens = ROOT / "tests" / "golden" / "source_v2"
+    env = os.environ.copy()
+    env["PYTHONPATH"] = (
+        str(guard_dir) + os.pathsep + str(ROOT / "src")
+        + os.pathsep + env.get("PYTHONPATH", "")
+    )
+    env["PYTHONDONTWRITEBYTECODE"] = "1"
+    command = [
+        sys.executable, "-B", "-m",
+        "company_wiki.source_catalog.source_reader_cli",
+        "--config", str(config_path),
+        "--document-id", ref["document_id"],
+        "--source-id", ref["source_id"],
+        "--content-sha256", ref["content_sha256"],
+        "--purpose", "source_export",
+    ]
+    success = subprocess.run(
+        command, cwd=tmp_path / "caller", env=env,
+        stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+        check=False, timeout=30,
+    )
+    assert success.returncode == 0, success.stderr
+    assert success.stdout == raw.read_bytes()
+    assert hashlib.sha256(success.stdout).hexdigest() == ref["content_sha256"]
+    assert success.stderr.endswith(b"\n") and len(success.stderr.splitlines()) == 1
+    receipt = json.loads(success.stderr)
+    assert datetime.fromisoformat(receipt["read_at"]).utcoffset() == timezone.utc.utcoffset(None)
+    for field in ("policy_sha256", "source_read_policy_sha256"):
+        assert re.fullmatch(r"[0-9a-f]{64}", receipt[field])
+        receipt[field] = "<runtime-sha256>"
+    receipt["read_at"] = "<runtime-utc>"
+    normalized = (
+        json.dumps(receipt, ensure_ascii=True, sort_keys=True, separators=(",", ":"))
+        + "\n"
+    ).encode("utf-8")
+    assert normalized == (goldens / "verified_open_receipt_normalized.json").read_bytes()
+
+    bad_ref = json.loads((goldens / "source_ref_bad_sha.json").read_bytes())
+    command[command.index("--content-sha256") + 1] = bad_ref["content_sha256"]
+    refused = subprocess.run(
+        command, cwd=tmp_path / "caller", env=env,
+        stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+        check=False, timeout=30,
+    )
+    assert refused.returncode == 2 and refused.stdout == b""
+    assert refused.stderr == (goldens / "verified_open_bad_sha.json").read_bytes()
