@@ -1,8 +1,8 @@
 # StockWiki 独占施工卡：身份快照与四态映射（W02/W03）
 
-> **状态：W02/W03 实现和真实 serializer golden 已完成于 `codex/identity-snapshot-w02-w03@ae11135`，尚未并入本地 `master`。**不要重复派发实现。本线已交付不等于 G2b 通过；当前 IQS handoff 仍缺 owner identity receipt 与 market-registry 实体数据。主线整合见[StockWiki lanes 收尾卡](stockwiki_mainline_integration.md)，不得伪造这些记录。
+> **状态：W02/W03 实现和真实 serializer golden 已并入 StockWiki `master@c8cfb2e7`。**本文件是已完成实施记录，不要重复派发。它不等于 G2b 通过：IQS handoff 仍要求 owner identity receipt 与 market-registry 投影。后续 producer 工作见[W04 独立施工卡](stockwiki_g2b_owner_context.md)；不得伪造这些记录。
 
-> 可单独交给一个 StockWiki harness。**唯一写入仓库**：`C:\Users\郑曾波\Projects\StockWiki` 的独立 worktree。IQS、company-wiki、filing-fetch、revenue-forecast、earnings-transcripts 只读；不访问或写入它们的数据库、文件和配置。
+> 这条 W02/W03 线已经结束。W04 施工卡独占 StockWiki 写入范围；IQS、company-wiki、filing-fetch、revenue-forecast、earnings-transcripts 仍为只读依赖。
 
 ## 任务目标
 

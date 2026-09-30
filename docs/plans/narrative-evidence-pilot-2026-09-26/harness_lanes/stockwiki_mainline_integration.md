@@ -68,3 +68,8 @@
 - 受影响聚焦回归：**99 passed，0 skipped**。单次 `bash scripts/check_all.sh`：**ALL CHECKS PASSED / exit 0**，coverage 包裹的 pytest **598 passed**，Ruff clean、总 coverage ≥73%、`stockwiki/ui.py` 75%、validate-framework 0 errors。
 - 工作树状态：唯一未跟踪项仍为根 `.claude/`，未纳入提交、未修改。集成任务无其它未跟踪文件；源 reader、identity 与集成 worktree 保留。
 - 本仓并线任务完成。StockWiki reader 的跨仓 **G-B 仍待总指挥用真实 CWP producer E2E 验证**；IQS **G2b 仍待真实 owner identity receipt / market-registry 数据**，本次没有伪造记录或将它们标绿。
+
+## Follow-up receipt — 2026-09-30
+
+- 基础 CWP→StockWiki SourceExport G-B 已由真实 producer E2E 通过：StockWiki `tests/e2e/test_cwp_source_export_v2.py` **3 passed**；CWP P06 四根 relocation/corruption E2E **1 passed**。前一段记录的是主线整合当时状态，当前以本条及 [Phase 28](../task_plan.md) 为准。
+- IQS G2b 仍 pending。当前 W02/W03 serializer 有 receipt ID 与 source binding projection，但 StockWiki owner store/public snapshot 尚无 receipt 实体与 ISO MIC registry projection；后续只由 [W04](stockwiki_g2b_owner_context.md) 处理。
