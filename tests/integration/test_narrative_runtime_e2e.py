@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import math
 import os
 from pathlib import Path
 import shutil
@@ -268,8 +269,11 @@ def _event(
 
 
 class FixedClock:
+    def __init__(self, value: str = T1) -> None:
+        self.value = value
+
     def now(self) -> str:
-        return T1
+        return self.value
 
 
 class SequentialIDs:
@@ -291,10 +295,39 @@ class FailingModel:
         raise self._error_factory()
 
 
+class LostResponseOnceModel:
+    """Simulate a provider accepting the first request before its reply is lost."""
+
+    def __init__(self) -> None:
+        self.calls: list[NarrativeModelRequest] = []
+        self._delegate = ReplayNarrativeModel()
+
+    def generate(self, request: NarrativeModelRequest) -> NarrativeModelResponse:
+        self.calls.append(request)
+        if len(self.calls) == 1:
+            raise ModelTimeoutError("provider accepted request; response was lost")
+        return self._delegate.generate(request)
+
+
+def _wait_for_e7_condition(predicate: Callable[[], bool], *, timeout: float = 30.0) -> None:
+    deadline = time.monotonic() + timeout
+    while time.monotonic() < deadline:
+        if predicate():
+            return
+        time.sleep(0.03)
+    raise AssertionError("E7 condition was not reached before the timeout")
+
+
+def _e7_now() -> str:
+    return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+
 def _runtime(
     run_root: Path,
     reader: SourceVersionReader,
     model,
+    *,
+    clock: FixedClock | None = None,
 ) -> tuple[AutomationStore, AutomationScheduler, Worker]:
     state_dir = run_root / "automation"
     state_dir.mkdir()
@@ -318,7 +351,7 @@ def _runtime(
         store,
         registry,
         executor,
-        clock=FixedClock(),
+        clock=clock or FixedClock(),
         id_gen=SequentialIDs(),
         lease_seconds=60,
         worker_id="narrative-runtime-e2e",
@@ -942,12 +975,106 @@ def _wait_for_e6_verification_jobs(
     raise TimeoutError("E6 verify jobs did not reach the outbox boundary")
 
 
+def _e6_process_rss_bytes(pid: int) -> int:
+    if os.name == "nt":
+        import ctypes
+        from ctypes import wintypes
+
+        class ProcessMemoryCounters(ctypes.Structure):
+            _fields_ = [
+                ("cb", wintypes.DWORD),
+                ("PageFaultCount", wintypes.DWORD),
+                ("PeakWorkingSetSize", ctypes.c_size_t),
+                ("WorkingSetSize", ctypes.c_size_t),
+                ("QuotaPeakPagedPoolUsage", ctypes.c_size_t),
+                ("QuotaPagedPoolUsage", ctypes.c_size_t),
+                ("QuotaPeakNonPagedPoolUsage", ctypes.c_size_t),
+                ("QuotaNonPagedPoolUsage", ctypes.c_size_t),
+                ("PagefileUsage", ctypes.c_size_t),
+                ("PeakPagefileUsage", ctypes.c_size_t),
+            ]
+
+        kernel = ctypes.WinDLL("kernel32", use_last_error=True)
+        psapi = ctypes.WinDLL("psapi", use_last_error=True)
+        open_process = kernel.OpenProcess
+        open_process.argtypes = (wintypes.DWORD, wintypes.BOOL, wintypes.DWORD)
+        open_process.restype = ctypes.c_void_p
+        close_handle = kernel.CloseHandle
+        close_handle.argtypes = (ctypes.c_void_p,)
+        counters = ProcessMemoryCounters()
+        counters.cb = ctypes.sizeof(counters)
+        get_memory = psapi.GetProcessMemoryInfo
+        get_memory.argtypes = (
+            ctypes.c_void_p,
+            ctypes.POINTER(ProcessMemoryCounters),
+            wintypes.DWORD,
+        )
+        get_memory.restype = wintypes.BOOL
+        handle = open_process(0x0400 | 0x0010, False, pid)
+        if not handle:
+            return 0
+        try:
+            return (
+                int(counters.WorkingSetSize)
+                if get_memory(handle, ctypes.byref(counters), counters.cb)
+                else 0
+            )
+        finally:
+            close_handle(handle)
+
+    status = Path(os.sep) / "proc" / str(pid) / "status"
+    if not status.is_file():
+        return 0
+    for line in status.read_text(encoding="utf-8").splitlines():
+        if line.startswith("VmRSS:"):
+            return int(line.split()[1]) * 1024
+    return 0
+
+
+def _e6_sample_supervisor_rss(
+    supervisor: AutomationSupervisor,
+    stop: ThreadEvent,
+    peak_values: list[int],
+) -> None:
+    peak = 0
+    while not stop.is_set():
+        pids = {os.getpid()}
+        pids.update(
+            child.pid
+            for child in supervisor.children()
+            if child.alive and child.pid is not None
+        )
+        peak = max(peak, sum(_e6_process_rss_bytes(pid) for pid in pids))
+        stop.wait(0.05)
+    peak_values.append(peak)
+
+
+def _e6_percentile95(values: list[float]) -> float:
+    ordered = sorted(values)
+    return ordered[max(0, math.ceil(0.95 * len(ordered)) - 1)]
+
+
+def _e6_max_concurrency(intervals: list[tuple[int, int]]) -> int:
+    events = sorted(
+        [(start, 1) for start, _end in intervals]
+        + [(end, -1) for _start, end in intervals],
+        key=lambda event: (event[0], event[1]),
+    )
+    active = 0
+    maximum = 0
+    for _time_ns, delta in events:
+        active += delta
+        maximum = max(maximum, active)
+    return maximum
+
+
 def _e6_run_profile(
     run_root: Path,
     *,
     profile: str,
     copied_samples: dict[str, tuple[dict[str, object], bytes, Path]],
 ) -> dict[str, object]:
+    profile_started = time.perf_counter()
     profile_root = run_root / profile
     sources: list[dict[str, object]] = []
     source_by_digest: dict[str, dict[str, object]] = {}
@@ -1025,6 +1152,7 @@ def _e6_run_profile(
         jobs = store.list_jobs()
         assert len(jobs) == 15
         job_ids = tuple(job.job_id for job in jobs)
+        queued_at_ns = {job_id: time.monotonic_ns() for job_id in job_ids}
         config = SupervisorConfig(
             db_path=automation_root / "automation.db",
             log_dir=profile_root / "process-logs",
@@ -1054,8 +1182,16 @@ def _e6_run_profile(
         )
 
         supervisor = AutomationSupervisor(config)
+        stop_sampling = ThreadEvent()
+        peak_rss_values: list[int] = []
+        sampler = Thread(
+            target=_e6_sample_supervisor_rss,
+            args=(supervisor, stop_sampling, peak_rss_values),
+            daemon=True,
+        )
         try:
             supervisor.start()
+            sampler.start()
             parent_job_ids = tuple(
                 job.job_id
                 for job in jobs
@@ -1067,6 +1203,9 @@ def _e6_run_profile(
             )
         finally:
             supervisor.stop()
+            stop_sampling.set()
+            if sampler.ident is not None:
+                sampler.join(timeout=3)
 
         current_jobs = store.list_jobs()
         assert len(current_jobs) == 15
@@ -1103,6 +1242,15 @@ def _e6_run_profile(
                     job.job_id,
                 )
             )
+        handler_run_ms = [
+            (finish - start) / 1_000_000
+            for start, finish, *_metadata in intervals
+        ]
+        queue_wait_ms = [
+            (int(starts_by_job[job_id]["monotonic_ns"]) - queued_at_ns[job_id])
+            / 1_000_000
+            for job_id in job_ids
+        ]
 
         by_source_type = {
             (item[2], item[4]): item for item in intervals
@@ -1360,6 +1508,16 @@ def _e6_run_profile(
         assert visible_after_repeat is not None
         assert int(visible_after_repeat["count"]) == visible_before_repeat
         assert len(tuple(trace_dir.glob("model-call--*.json"))) == 4
+        all_attempts = [
+            attempt
+            for job_id in job_ids
+            for attempt in store.list_attempts(job_id)
+        ]
+        database_path = automation_root / "automation.db"
+        wal_path = Path(f"{database_path}-wal")
+        wall_seconds = time.perf_counter() - profile_started
+        peak_rss_bytes = max(peak_rss_values, default=0)
+        assert peak_rss_bytes > 0
         return {
             "profile": profile,
             "raw_bytes": real_raw_bytes,
@@ -1368,6 +1526,30 @@ def _e6_run_profile(
             "visible_count": int(visible["count"]),
             "model_calls": len(call_records),
             "intervals": intervals,
+            "wall_seconds": round(wall_seconds, 3),
+            "narrative_documents_per_hour": round(
+                len(call_records) * 3600 / wall_seconds, 1
+            ),
+            "p95_queue_wait_ms": round(_e6_percentile95(queue_wait_ms), 1),
+            "p95_handler_ms": round(_e6_percentile95(handler_run_ms), 1),
+            "max_concurrency": _e6_max_concurrency(
+                [(start, finish) for start, finish, *_metadata in intervals]
+            ),
+            "peak_process_tree_rss_bytes": peak_rss_bytes,
+            "automation_db_bytes": database_path.stat().st_size,
+            "automation_wal_bytes": wal_path.stat().st_size if wal_path.exists() else 0,
+            "retry_count": max(0, len(all_attempts) - len(job_ids)),
+            "sqlite_busy_errors": sum(
+                1
+                for attempt in all_attempts
+                if attempt.error_code
+                and any(
+                    token in attempt.error_code.upper()
+                    for token in ("BUSY", "LOCKED")
+                )
+            ),
+            "sqlite_busy_p95_ms": None,
+            "catalog_lock_wait_ms": None,
         }
     finally:
         if catalog is not None:
@@ -1408,6 +1590,8 @@ def test_e6_real_samples_run_isolated_p1_p2_and_restore_test_root(
     assert run_root.parent.resolve() == test_base.resolve()
     assert run_root.name.startswith("m3-e2e-")
     assert not run_root.exists()
+
+
     run_root.mkdir()
     try:
         input_root = run_root / "input"
@@ -1421,20 +1605,51 @@ def test_e6_real_samples_run_isolated_p1_p2_and_restore_test_root(
             assert _sha(copied) == sample["sha256"]
             copied_samples[sample_id] = (sample, copied, copied_path)
 
-        profile_results = {
-            profile: _e6_run_profile(
+        profile_results: dict[str, dict[str, object]] = {}
+        for profile in ("P1", "P2"):
+            profile_results[profile] = _e6_run_profile(
                 run_root,
                 profile=profile,
                 copied_samples=copied_samples,
             )
-            for profile in ("P1", "P2")
-        }
         assert profile_results["P1"]["visible_count"] == 5
         assert profile_results["P2"]["visible_count"] == 5
         assert profile_results["P1"]["model_calls"] == 4
         assert profile_results["P2"]["model_calls"] == 4
         assert profile_results["P1"]["object_bytes"] / profile_results["P1"]["raw_bytes"] <= 0.03
         assert profile_results["P2"]["object_bytes"] / profile_results["P2"]["raw_bytes"] <= 0.03
+        metric_keys = (
+            "wall_seconds",
+            "narrative_documents_per_hour",
+            "p95_queue_wait_ms",
+            "p95_handler_ms",
+            "max_concurrency",
+            "peak_process_tree_rss_bytes",
+            "automation_db_bytes",
+            "automation_wal_bytes",
+            "raw_bytes",
+            "object_bytes",
+            "skip_bytes",
+            "visible_count",
+            "model_calls",
+            "retry_count",
+            "sqlite_busy_errors",
+            "sqlite_busy_p95_ms",
+            "catalog_lock_wait_ms",
+        )
+        print(
+            "E6_REAL_PROFILE_RECEIPT "
+            + json.dumps(
+                {
+                    profile: {
+                        key: result[key]
+                        for key in metric_keys
+                    }
+                    for profile, result in profile_results.items()
+                },
+                sort_keys=True,
+            )
+        )
     finally:
         if run_root.exists():
             assert run_root.resolve().parent == test_base.resolve()
@@ -1448,3 +1663,311 @@ def test_e6_real_samples_run_isolated_p1_p2_and_restore_test_root(
         assert set(test_base.iterdir()) == initial_test_root_entries
 
     assert not run_root.exists()
+
+
+def test_e7_r09_lost_model_response_retries_without_duplicate_visible_bundle(
+    tmp_path: Path,
+) -> None:
+    run_root, baseline = _run_root(
+        tmp_path, "m3-e4-runtime-e7-lost-response"
+    )
+    catalog = None
+    try:
+        source_bytes = _pdf_bytes(
+            "Acme launched a new product for overseas customers in 2026."
+        )
+        catalog, reader, indexed = _new_catalog(
+            run_root,
+            [
+                {
+                    "name": "annual.pdf",
+                    "data": source_bytes,
+                    "title": "Acme annual report",
+                    "document_kind": "annual_report",
+                }
+            ],
+        )
+        model = LostResponseOnceModel()
+        clock = FixedClock()
+        store, scheduler, worker = _runtime(
+            run_root, reader, model, clock=clock
+        )
+        ref = next(iter(indexed.values()))[1]
+        event = _event(reader, ref, event_id="event-e7-lost-response")
+        store.put_event(event)
+        created = scheduler.materialize_event(event)
+        assert (created.jobs_created, created.dependencies_created) == (3, 3)
+
+        processed = _drain(worker, scheduler)
+        assert processed == 2, [
+            (job.job_type, job.status.value, job.last_error_code)
+            for job in store.list_jobs()
+        ]
+        jobs = {job.job_type: job for job in store.list_jobs()}
+        assert jobs["source.narrative_select"].status is JobStatus.SUCCEEDED
+        assert jobs["source.narrative_summarize"].status is JobStatus.RETRY_WAIT
+        assert jobs["source.narrative_verify"].status is JobStatus.PLANNED
+        assert len(model.calls) == 1
+        assert store.list_outbox_entries() == ()
+        assert not tuple(
+            (run_root / "catalog" / "objects" / "sha256").rglob("*.json")
+        )
+
+        retry_time = "2026-09-28T22:20:00Z"
+        clock.value = retry_time
+        scheduler.refresh_ready(now=retry_time)
+        assert (
+            store.get_job(jobs["source.narrative_summarize"].job_id).status
+            is JobStatus.READY
+        )
+        assert _drain(worker, scheduler) == 2
+
+        jobs = {job.job_type: job for job in store.list_jobs()}
+        summarize_attempts = store.list_attempts(
+            jobs["source.narrative_summarize"].job_id
+        )
+        assert len(summarize_attempts) == 2
+        assert summarize_attempts[0].error_code == "MODEL_TIMEOUT"
+        assert summarize_attempts[1].outcome is HandlerOutcome.SUCCEEDED
+        assert jobs["source.narrative_summarize"].status is JobStatus.SUCCEEDED
+        assert jobs["source.narrative_verify"].status is JobStatus.VERIFYING
+        assert len(model.calls) == 2
+        assert len(store.list_outbox_entries(status="pending")) == 1
+
+        artifact_store = NarrativeArtifactStore(
+            catalog.store,
+            LocalNarrativeObjectStore(catalog.config.catalog_dir),
+        )
+        dispatcher = NarrativeEffectDispatcher(store, artifact_store)
+        dispatch_now = datetime.now(timezone.utc)
+        receipt = dispatcher.dispatch_next(
+            worker_id="e7-lost-response-projector",
+            now=dispatch_now.strftime("%Y-%m-%dT%H:%M:%SZ"),
+            lease_until=(dispatch_now + timedelta(minutes=2)).strftime(
+                "%Y-%m-%dT%H:%M:%SZ"
+            ),
+            expected_generation=store.read_runtime_gate().control_generation,
+        )
+        assert receipt.status == "visible"
+        assert store.list_outbox_entries(status="pending") == ()
+        loaded = NarrativeBundleReader(artifact_store).read(
+            document_id=ref.document_id,
+            source_id=ref.source_id,
+            source_sha256=ref.content_sha256,
+        )
+        assert loaded.bundle.source_ref.content_sha256 == _sha(source_bytes)
+        visible = catalog.reader.fetchone(
+            "SELECT COUNT(*) AS count, COUNT(DISTINCT work_key) AS work_keys "
+            "FROM narrative_artifact_versions WHERE status='visible'"
+        )
+        assert visible is not None
+        assert (int(visible["count"]), int(visible["work_keys"])) == (1, 1)
+        assert len(
+            tuple((run_root / "catalog" / "objects" / "sha256").rglob("*.json"))
+        ) == 1
+    finally:
+        _cleanup(tmp_path, run_root, baseline, catalog)
+
+
+def test_e7_r11_100_narrative_jobs_recover_after_worker_restart_without_duplicates(
+    tmp_path: Path,
+) -> None:
+    run_root, baseline = _run_root(
+        tmp_path, "m3-e4-runtime-e7-r11-100job-restart"
+    )
+    catalog = None
+    first_supervisor = None
+    recovery_supervisor = None
+    try:
+        sources = [
+            {
+                "name": f"annual-{index:02d}.pdf",
+                "data": _pdf_bytes(
+                    f"Acme new product {index:02d} advanced export sales and overseas "
+                    f"capacity for industrial customers during 2026."
+                ),
+                "title": f"Acme annual report 2026 #{index:02d}",
+                "document_kind": "annual_report",
+            }
+            for index in range(34)
+        ]
+        catalog, reader, indexed = _new_catalog(run_root, sources)
+        raw_file_hashes = {
+            path: _sha(path.read_bytes())
+            for path in (run_root / "companies").rglob("*")
+            if path.is_file()
+        }
+        initial_artifacts = catalog.reader.fetchone(
+            "SELECT COUNT(*) AS count FROM artifacts"
+        )
+        assert initial_artifacts is not None
+
+        automation_root = run_root / "automation"
+        automation_root.mkdir()
+        store = AutomationStore(automation_root / "automation.db")
+        store.set_runtime_gate(RuntimeState.ENABLED, updated_at=T0)
+        scheduler = AutomationScheduler(
+            store,
+            create_default_registry(),
+            PolicyConfig(allow_llm=True, allow_network=True),
+        )
+        events = [
+            _event(reader, ref, event_id=f"event-e7-r11-{index:02d}")
+            for index, (_data, ref) in enumerate(indexed.values())
+        ]
+        for event in events:
+            store.put_event(event)
+            created = scheduler.materialize_event(event)
+            assert (created.jobs_created, created.dependencies_created) == (3, 3)
+
+        jobs = store.list_jobs()
+        assert len(jobs) == 102
+        job_ids = tuple(job.job_id for job in jobs)
+        target_source_id = events[0].subject_id
+        target_job = next(
+            job
+            for job in jobs
+            if job.subject_id == target_source_id
+            and job.job_type == "source.narrative_select"
+        )
+        trace_dir = run_root / "trace"
+
+        def config(*, block_target: bool) -> SupervisorConfig:
+            options: dict[str, object] = {
+                "project_root": str(run_root),
+                "trace_dir": str(trace_dir),
+                "model_delay_seconds": 0.02,
+            }
+            if block_target:
+                options["block_phase_by_job"] = {
+                    target_job.job_id: "before_finish"
+                }
+            return SupervisorConfig(
+                db_path=automation_root / "automation.db",
+                log_dir=run_root / "process-logs",
+                profile="P4",
+                runtime_factory_path=(
+                    "support.narrative_runtime_worker_fixture:create_runtime"
+                ),
+                runtime_options_json=json.dumps(options, sort_keys=True),
+                compute_job_types=(
+                    "source.narrative_select",
+                    "source.narrative_verify",
+                ),
+                model_job_types=("source.narrative_summarize",),
+                lease_seconds=3.0,
+                heartbeat_interval_seconds=0.5,
+                idle_sleep_seconds=0.03,
+                maintenance_interval_seconds=0.05,
+                stop_grace_seconds=10.0,
+                child_log_max_bytes=65_536,
+            )
+
+        first_supervisor = AutomationSupervisor(config(block_target=True))
+        first_supervisor.start()
+        try:
+            _wait_for_e7_condition(
+                lambda: bool(
+                    tuple(
+                        trace_dir.glob(
+                            f"before_finish--{target_job.job_id}--1--*.json"
+                        )
+                    )
+                ),
+                timeout=60,
+            )
+            marker = json.loads(
+                next(
+                    trace_dir.glob(
+                        f"before_finish--{target_job.job_id}--1--*.json"
+                    )
+                ).read_text(encoding="utf-8")
+            )
+            first_supervisor.terminate_worker(str(marker["worker_id"]))
+        finally:
+            first_supervisor.stop()
+
+        interrupted = store.list_attempts(target_job.job_id)
+        assert len(interrupted) == 1
+        assert interrupted[0].finished_at is None
+        _wait_for_e7_condition(
+            lambda: store.list_attempts(target_job.job_id)[0].lease_until < _e7_now(),
+            timeout=10,
+        )
+
+        recovery_supervisor = AutomationSupervisor(config(block_target=False))
+        recovery_supervisor.start()
+        try:
+            parent_job_ids = tuple(
+                job.job_id
+                for job in jobs
+                if job.job_type != "source.narrative_verify"
+            )
+            recovery_supervisor.wait_for_terminal(
+                parent_job_ids, timeout_seconds=240.0
+            )
+            _wait_for_e6_verification_jobs(
+                recovery_supervisor, store, job_ids, timeout_seconds=120.0
+            )
+        finally:
+            recovery_supervisor.stop()
+
+        current_jobs = store.list_jobs()
+        assert len(current_jobs) == 102
+        assert sum(job.status is JobStatus.SUCCEEDED for job in current_jobs) == 68
+        assert sum(job.status is JobStatus.VERIFYING for job in current_jobs) == 34
+        assert len(store.list_outbox_entries(status="pending")) == 34
+        for job in current_jobs:
+            attempts = store.list_attempts(job.job_id)
+            assert len(attempts) == (2 if job.job_id == target_job.job_id else 1)
+            if job.job_id == target_job.job_id:
+                assert attempts[0].error_code == "LEASE_EXPIRED"
+                assert attempts[1].outcome is HandlerOutcome.SUCCEEDED
+            else:
+                assert attempts[0].outcome is HandlerOutcome.SUCCEEDED
+
+        model_calls = tuple((trace_dir).glob("model-call--*.json"))
+        assert len(model_calls) == 34
+        artifact_store = NarrativeArtifactStore(
+            catalog.store,
+            LocalNarrativeObjectStore(catalog.config.catalog_dir),
+        )
+        dispatcher = NarrativeEffectDispatcher(store, artifact_store)
+        dispatch_now = datetime.now(timezone.utc)
+        for _ in range(35):
+            receipt = dispatcher.dispatch_next(
+                worker_id="e7-r11-projector",
+                now=dispatch_now.strftime("%Y-%m-%dT%H:%M:%SZ"),
+                lease_until=(dispatch_now + timedelta(minutes=2)).strftime(
+                    "%Y-%m-%dT%H:%M:%SZ"
+                ),
+                expected_generation=store.read_runtime_gate().control_generation,
+            )
+            if receipt.status == "empty":
+                break
+            assert receipt.status == "visible"
+
+        assert store.list_outbox_entries(status="pending") == ()
+        visible = catalog.reader.fetchone(
+            "SELECT COUNT(*) AS count, COUNT(DISTINCT work_key) AS work_keys "
+            "FROM narrative_artifact_versions WHERE status='visible'"
+        )
+        assert visible is not None
+        assert (int(visible["count"]), int(visible["work_keys"])) == (34, 34)
+        object_paths = tuple(
+            (run_root / "catalog" / "objects" / "sha256").rglob("*.json")
+        )
+        assert len(object_paths) == 34
+        assert {
+            path: _sha(path.read_bytes()) for path in raw_file_hashes
+        } == raw_file_hashes
+        artifacts_after = catalog.reader.fetchone(
+            "SELECT COUNT(*) AS count FROM artifacts"
+        )
+        assert artifacts_after == initial_artifacts
+    finally:
+        if first_supervisor is not None:
+            first_supervisor.stop()
+        if recovery_supervisor is not None:
+            recovery_supervisor.stop()
+        _cleanup(tmp_path, run_root, baseline, catalog)

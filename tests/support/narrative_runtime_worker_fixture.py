@@ -97,6 +97,8 @@ def create_runtime(spec: WorkerProcessSpec) -> WorkerRuntime:
     project_root = Path(options["project_root"])
     trace_dir = Path(options["trace_dir"])
     trace_dir.mkdir(parents=True, exist_ok=True)
+    block_phase_by_job = options.get("block_phase_by_job", {})
+    release_file_by_job = options.get("release_file_by_job", {})
 
     catalog = SourceCatalog(_catalog_config(project_root))
     reader = SourceVersionReader(catalog)
@@ -124,6 +126,14 @@ def create_runtime(spec: WorkerProcessSpec) -> WorkerRuntime:
 
     def lifecycle(phase, claimed) -> None:
         _write_lifecycle(trace_dir, phase, claimed, spec)
+        if block_phase_by_job.get(claimed.job.job_id) != phase:
+            return
+        release_file = release_file_by_job.get(claimed.job.job_id)
+        if release_file is None:
+            while True:
+                time.sleep(0.05)
+        while not Path(release_file).exists():
+            time.sleep(0.05)
 
     return WorkerRuntime(
         registry=registry,
