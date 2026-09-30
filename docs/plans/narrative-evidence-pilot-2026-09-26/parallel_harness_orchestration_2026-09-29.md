@@ -1,8 +1,8 @@
 # 六仓独占施工与总指挥集成计划（2026-09-29）
 
-> **2026-09-30 状态更新：**StockWiki reader/W02/W03 已并入 `master@c8cfb2e7`；W04 已正常并入本地 `master@72531b5`（实现提交 `8bee364`，reader 模块大小拆分 `6f0c2c4`）。W04 聚焦测试 **64 passed**，合并后单次 `check_all.sh` **651 passed / 15 skipped / exit 0**，Ruff、coverage（总门与 `ui.py`）及 validate-framework 全绿。当前 IQS 主线 `65e96ba` 的 public CLI 正例与 17 个单字段负例均通过。G2b 主流程已实测；W04 最终验收仍需把记录的 canonical SHA 固定为测试断言/可复核 golden，并补 ISO Operating/Segment MIC 关系拒绝例。`.claude/` 保留，生产 StockWiki data 未改。
+> **2026-09-30 状态更新：**StockWiki reader/W02/W03 已并入主线；W04 MIC 关系补强提交 `afa9692` 已并入 StockWiki 本地 `master@b4f3846`。合并后 `bash scripts/check_all.sh` **686 passed**，Ruff clean、coverage 总门/`ui.py` 门通过、validate-framework 0 errors（11 条既有内容警告）。官方 ISO CSV 的 2,883 条记录/149 个辖区 canary 通过，包括 8 条嵌套 SGMT 与 2 条跨市场 parent。IQS owner 已提供 canonical golden SHA 断言；公开 CLI 的 17 个单字段负例均拒绝，稳定通用码为 `semantic_validation_failed`。W04 验收完成，逐 mutation 更细错误码作为非阻断诊断改进。StockWiki `.claude/` 保留、生产 data 未改。用户要求当前手头工作完成后暂停，故本计划不派发新线。
 
-> **本计划已进入实施；当前提交与测试状态见 [Phase 26–30](task_plan.md) 与 [S0a/S0b 接口表](s0a_observed_interfaces_2026-09-29.md)。** 本任务的主 agent 是唯一总指挥：维护本目录总计划、冻结接口、收各仓提交、处理跨仓不兼容、运行跨仓真实数据 E2E 和发布汇总。各 harness 只写自己独占的项目仓库/隔离工作树；可以只读其它仓及本目录的合同。用户确认 invest-quick-scan 已由别的项目运行，本任务把 IQS 施工卡交给**现有 owner**，不另开同仓写入线。用户于 2026-09-29 报告 IQS 步骤 1–4 已收尾；现在 IQS 仍由现有 owner 推进。StockWiki 的 SourceExport v2 reader、engineering gate simplification 和 W02/W03 已合入并通过单仓验收；当前 StockWiki 独立施工卡是 [W04 owner context producer](harness_lanes/stockwiki_g2b_owner_context.md)。旧 [跨仓施工图](cross_repo_mainline_and_delivery_plan_2026-09-28.md)保留历史调查和详细试验背景，冲突时以本页、Phase 26–28 与 2026-09-29 清理方案为准。
+> **本计划已进入实施；当前提交与测试状态见 [Phase 26–31](task_plan.md) 与 [S0a/S0b 接口表](s0a_observed_interfaces_2026-09-29.md)。** 本任务的主 agent 是唯一总指挥：维护本目录总计划、冻结接口、收各仓提交、处理跨仓不兼容、运行跨仓真实数据 E2E 和发布汇总。各 harness 只写自己独占的项目仓库/隔离工作树；可以只读其它仓及本目录的合同。用户确认 invest-quick-scan 已由别的项目运行，本任务把 IQS 施工卡交给**现有 owner**，不另开同仓写入线。用户于 2026-09-29 报告 IQS 步骤 1–4 已收尾；现由原 owner 维护 IQS。StockWiki reader/W02/W03 与 W04 均已通过本地单仓集成验收；W04 最新合同与测试收据见 [W04 owner-context card](harness_lanes/stockwiki_g2b_owner_context.md)。旧 [跨仓施工图](cross_repo_mainline_and_delivery_plan_2026-09-28.md)保留历史调查和详细试验背景，冲突时以本页、Phase 26–31 与 2026-09-29 清理方案为准。
 
 ## 1. 唯一写入者与六份可直接派发的施工卡
 
@@ -12,8 +12,8 @@
 | ET / `C:\Users\郑曾波\Projects\earnings-transcripts\earnings-transcripts` | [ET 施工卡](harness_lanes/earnings_transcripts.md) | 明确公司和 fiscal FY/Q 请求 | 原语言 TXT 的版本化精确工具结果 |
 | FF / `C:\Users\郑曾波\Projects\filing-fetch` | [FF 施工卡](harness_lanes/filing_fetch.md) | CWP SourceRef/operation golden、ET tool golden | v1 兼容和显式 v2 来源/电话会编排 envelope |
 | RF / `C:\Users\郑曾波\Projects\revenue-forecast` | [RF 施工卡](harness_lanes/revenue_forecast.md) | FF/CWP 生产者 golden 和来源读取 CLI | 无物理根依赖的来源 adapter、严格 evidence hash |
-| StockWiki / `C:\Users\郑曾波\Projects\StockWiki` | [W04 实施与验收记录](harness_lanes/stockwiki_g2b_owner_context.md)；已完成并线见[收据](harness_lanes/stockwiki_mainline_integration.md) | 当前本地 `master@72531b5`；保留源 worktree、分支和 `.claude/` | owner receipt、ISO MIC registry、精确 request export 已合入；64 项聚焦与 651 项全门通过；G2b public CLI 正反例通过；留两个精确测试补强项，不再把该施工卡作为未开始任务 |
-| IQS / `C:\Users\郑曾波\Projects\invest-quick-scan` | [IQS 施工卡](harness_lanes/invest_quick_scan.md) | 用户报告本仓步骤 1–4 已收尾；总指挥只读核收尾报告/CLI 版本，不新开写入线 | 保持 G2b pending，等 StockWiki 真实 DTO/golden；到件后跑公开 CLI 和跨仓身份正反例 |
+| StockWiki / `C:\Users\郑曾波\Projects\StockWiki` | [W04 实施与验收记录](harness_lanes/stockwiki_g2b_owner_context.md)；已完成并线见[收据](harness_lanes/stockwiki_mainline_integration.md) | 当前本地 `master@b4f3846`；保留源 worktree、分支和 `.claude/` | owner receipt、ISO MIC registry、精确 request export 与关系校验已合入；聚焦 57 项、合并后全门 686 项通过；G2b public CLI 正反例通过；W04 已验收，不再把此卡当作未完成实现任务 |
+| IQS / `C:\Users\郑曾波\Projects\invest-quick-scan` | [IQS 施工卡](harness_lanes/invest_quick_scan.md) | canonical golden 已由当前 owner 提供；只读核收尾报告/公开 CLI，不新开写入线 | G2b 当前 owner-context 公共正反例已通过；其它 IQS capability 与其 active PWF 由现有 owner 收尾，不由本线重复实现 |
 
 主 agent 独占当前 `company-wiki/docs/plans/narrative-evidence-pilot-2026-09-26/` 和跨仓 E2E 运行目录，不在其他 harness 活动期间修改其产品仓库。CWP 代码 harness 必须使用独立**物理 worktree 目录与独立分支**，不在主 agent 当前脏工作树写文件；总指挥先将当前 WIP 形成可恢复提交或经核验的快照，再指定准确 base。其它仓每仓也只设一个写入者；同仓 WIP 收拢由该 owner 完成。外部 `dayu-agent`、`StockInfoDLSimple` 和全局安装的 filing-fetch skill 本波为只读依赖；如确需修改，增开单独目录所有者，不让 FF harness 越界写。
 

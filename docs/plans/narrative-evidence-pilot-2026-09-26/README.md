@@ -1,5 +1,7 @@
 # 叙述性证据规划：执行入口
 
+> **2026-09-30 最新状态：**StockWiki W04 已验收并合入本地 `master@b4f3846`；ISO MIC Operating/Segment 关系补强后的全量门为 **686 passed**。具体 golden、真实 CSV、跨仓 CLI 和清理收据见 [task_plan.md Phase 31](task_plan.md) 与 [W04 收据](harness_lanes/stockwiki_g2b_owner_context.md)。用户要求当前手头工作完成后暂停；恢复时先核对各仓当前 HEAD/WIP，再决定 E-B、G-C、G-D 和剩余跨仓工作的顺序。
+
 > **2026-09-29 入口更新：**先读[多余门禁统一清理方案](gate_and_contract_simplification_2026-09-29.md)，再读[六仓独占施工与总指挥计划](parallel_harness_orchestration_2026-09-29.md)。两页依次裁定要清理的真实代码/历史规则、各仓独立写入范围、接口与汇合测试；`task_plan.md` Phase 25 记录本轮规划状态。2026-09-28 的[跨仓总图](cross_repo_mainline_and_delivery_plan_2026-09-28.md)保留历史基线和详细施工背景，冲突时以 2026-09-29 两页为准。本项目已取消逐文件人工审批、review receipt 和常规独立签字；自动测试/完整性断言是常规依据。旧 provider policy 与人工 review 文档不得作为新实施门槛。
 
 > 2026-09-27：F0–F5 旧库退役、G1 离线选择试点和 D0 本地只读文件/引用盘点已完成各自允许范围；检索原型现含 query-local BM25 与 pilot-only raw resolver，12 件 manifest 样本 E2E 对全部已选 evidence groups 做原件重放和 SHA/locator/text 校验。最新合并回归为 12 个检索/回源单测 + 两个隔离 E2E（P06/T02 双样本链路、12 件样本 selected-anchor/raw-replay），共 **14 passed in 130.77s**；历史全绿收据为 122.56s；`ruff check` 通过。唯一 basetemp 清理后复核不存在，`tests/e2e/.runtime/` 运行前后均不存在，样本副本、package、metrics 与临时状态随 run root 清理，测试目录恢复基线。13 条摘要草稿通过引用/角色机械校验并经实施者逐条核源，但全部仍 `needs_review`。本轮 transcript 接口审计确认当前没有可调用 MCP tool，且 filing-fetch 没有 companion request/response；G1e 需先冻结独立上游接口合同。pilot resolver 不等于正式 G2 service 或共享 consumer 放行；StockWiki strict Source Provider v1 与 pilot bundle v0.2.0 不兼容，revenue-forecast G0 未通过；invest-quick-scan 仅做可选身份映射，不读取叙述包。Worker 仍暂停。

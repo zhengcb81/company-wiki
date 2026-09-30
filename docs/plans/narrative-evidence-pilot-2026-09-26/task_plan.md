@@ -363,18 +363,18 @@ company-wiki 只负责来源、解析质量、证据定位、检索和来源摘�
 - [x] 检查并行冲突：RF、FF、IQS 当前有未提交 owner 工作，不派第二写入者；ET 工具/供应商门已实现且本地无未完成的同范围任务；CWP E7 由本总指挥在不同仓库进行。W04 是目前确认可以独立派发的较大产品任务。
 - [x] W04 已实现并正常并入 StockWiki：当前 `master@72531b5`，实现提交 `8bee364`，reader 模块大小拆分 `6f0c2c4`；只读确认原有 `.claude/` 保留。W04 聚焦包 64 passed；合并后 `bash scripts/check_all.sh` 651 passed/15 skipped/exit 0，Ruff、coverage 总门/`ui.py`、validate-framework 通过。
 - [x] 在当前 IQS `master@65e96ba` 上运行 W04 跨仓 public CLI E2E：真实 StockWiki serializer 正例 exit 0/valid，17 个逐字段负例均 exit 2；真实 ISO MIC canary hash/记录数/辖区数及临时根清理结果见[W04 验收收据](harness_lanes/stockwiki_g2b_owner_context.md)。
-- [ ] W04 最终验收补强：固定记录的 canonical request SHA `0efc2c04daa7b6345078410a5df5ae0aa5bec9098b1523d7c25f9f60f53e5d2f` 为可复核 golden/测试断言，并为 ISO OPRT/SGMT `OPERATING MIC` 父子关系写明确坏数据拒绝测试；逐负例固定具名 CLI error code。G2b 当前正反 CLI 路径已通过，但施工卡的这些合同保护尚未验证。
+- [x] W04 最终验收补强已在 Phase 31 收口：IQS owner 冻结 canonical request golden/SHA；StockWiki 的 OPRT/SGMT 父子关系 RED/GREEN 已合入本地主线并通过整仓门。17 个负例均返回稳定通用具名码 `semantic_validation_failed`；逐 mutation 更细的错误分类不作为本卡验收阻断。
 
-**Status:** W04 实现已提交并进入 StockWiki 本地主线；全量质量门与 IQS 当前公开 CLI 正反例均通过。最终施工卡签收仍 pending 上述 golden/parser 关系测试补强。没有更改 StockWiki 生产身份库；company-wiki E7 继续由总指挥推进，Worker 保持 paused，原始文档未动。
+**Status:** W04 实现已提交并进入 StockWiki 本地主线；Phase 31 记录的 golden、parser 关系和全量测试补强已通过。StockWiki 生产身份库未更改；company-wiki E7 与 Worker 状态另按总计划管理。
 
 ## Phase 29：StockWiki W04 交付验收（2026-09-30）
 
 - [x] 只读核对 StockWiki merge HEAD `72531b598dcd80325e55e1e70527b7afb89b163f`、W04 commit `8bee364`、伴随的 reader module-size split `6f0c2c4`；保留 `.claude/` 与现有源 worktrees。
 - [x] 在合并后 HEAD 运行 W04 聚焦测试 **64 passed** 和一次 `bash scripts/check_all.sh`：**651 passed / 15 skipped / exit 0**，Ruff/coverage/framework 门通过。
 - [x] 使用 IQS 当前 `master@65e96ba` public CLI 跑 StockWiki producer E2E：1 个 serializer 正例 exit 0/valid，17 个单字段负例 exit 2；production `data/` 前后快照相同，唯一运行临时根和 coverage/Ruff 产物已清理。
-- [ ] 最终 W04 卡验收：将 canonical request SHA 固定为可复核 golden/断言，补 ISO OPRT/SGMT `OPERATING MIC` 父子关系坏数据拒绝，并按负例固定预期 error code。三项合并为一个小型合同测试补强批，不另起重叠 StockWiki 写入者。
+- [x] 最终 W04 卡验收（收口见 Phase 31）：IQS owner 固定 canonical request SHA；StockWiki 补齐 ISO OPRT/SGMT `OPERATING MIC` 父项关系负测；公开 CLI 17 个负例均返回稳定具名错误码。更细的逐 mutation 错误分类不作为本卡阻断项。
 
-**Status:** W04 实现已并线，完整测试门与 G2b 当前 public CLI 正反路径通过。施工卡最终签收和 G2b 关闭等上述合同保护补齐。该线没有写 StockWiki 生产身份库；CWP E7 继续在独立 worktree 实施，RF/FF/IQS 代码均未修改。
+**Status（Phase 29 当时记录；最终状态见 Phase 31）:** W04 实现已并线，完整测试门与 G2b 当前 public CLI 正反路径通过；当时仍缺 golden 与 MIC 关系保护。Phase 31 记录了补齐、并线和重跑整仓门结果。该线没有写 StockWiki 生产身份库；RF/FF/IQS 产品代码未由本线修改。
 
 ## Phase 30：E7 故障恢复与并发档位复测（2026-09-30）
 
@@ -386,6 +386,18 @@ company-wiki 只负责来源、解析质量、证据定位、检索和来源摘�
 
 **Status:** 进程争用、过期租约 fencing、丢响应重试、100+ job 重启恢复和 bounded synthetic profile 均已测试；真实 E6 P1/P2 样本指标已取得但只是一对、且使用 replay 模型。现有证据支持继续保持默认单 worker/生产 paused，不支持宣称并发已带来端到端提速。下一大节点仍是 E-B 集中集成验收与 runtime composition；RF/FF/IQS 未改，唯一原始文档未动。
 
+## Phase 31：W04 MIC 关系补强与最终验收（2026-09-30）
+
+- [x] 对 ISO 10383 Operating/Segment 关系先写 RED：旧解析器对空父项、缺失父项、OPRT 非自引用和环均未拒绝；4 个负测如预期失败。
+- [x] 实现受约束关系校验：Operating MIC 必填且格式有效；OPRT 自引用；所有父项存在；SGMT 可嵌套，但引用链必须最终到 OPRT，环具名失败。允许合法跨市场父项，不引入 country 相等门。
+- [x] 将补强提交 `afa9692` 合并进 StockWiki 本地 `master`，合并提交 `b4f3846bb3e331f5661edee974a7d0b76dbf9664`。变更只有 parser、对应测试和隔离 fixture；保留原有 `.claude/`，未写生产数据。
+- [x] 实际官方 MIC CSV canary SHA `79de0f7704e260bd49b0d2439f3084891cabc93481da8bdbaa716e15a27211ed`：2,883 records / 149 jurisdictions，其中 8 条嵌套 SGMT、2 条跨市场引用均通过。
+- [x] 合并前跨层聚焦测试 **57 passed**；合并后 StockWiki `bash scripts/check_all.sh` **686 passed**、Ruff clean、coverage 总门通过、`ui.py` 75%、validate-framework 0 errors（11 条既有 type warning）。全部临时根、coverage/Ruff 产物和精确官方 CSV canary 均复核后删除；生产库与原始公司文件保持不变。
+- [x] 对照 IQS owner acceptance receipt：canonical SHA 已固定为 golden/断言；正反公开 CLI 路径通过。17 个负例采用稳定通用错误码 `semantic_validation_failed`；更细的逐 mutation 错误码不阻塞 W04 验收。
+- [x] 按用户“手头工作做好就暂停”要求，完成本轮 W04 验收记录后暂停后续项目施工。
+
+**Status:** W04 owner-context producer 与 MIC 关系补强均已本地合入并通过完整质量门；剩余 G2b capability 按 IQS owner 收尾范围跟踪。本轮暂停，不继续 E-B/G-C/G-D 或其它跨仓实现；恢复时先读取本阶段和各仓最新状态，避免重复或覆盖活动工作。
+
 ## Next Step
 
-W04 实现/整仓门/当前 IQS CLI 正反路径已过，完整卡仍留 golden SHA、ISO Operating/Segment MIC 关系负例及具名错误码三项测试补强；StockWiki owner 单仓完成后再关闭 G2b。CWP E7 故障恢复和 100-job 重启矩阵已过，真实文档 replay 的 P1/P2 一对测量未显示 P2 提速，Worker 保持 paused/default-off，继续做 E-B 集中集成与 runtime composition 前的锁等待/真实样本复测。RF、FF、IQS 活动 WIP 由各自 owner 维护；selected narrative G-C 与原始文档保留。
+本轮 W04 验收已完成，用户要求完成手头工作后暂停，因此不启动新施工。恢复时再根据 RF/FF/IQS 当前主线与未提交状态，决定 E-B、selected narrative G-C、G-D 与剩余跨仓集成顺序；Worker 维持 paused/default-off，原始下载文档保留。

@@ -1,6 +1,6 @@
 # StockWiki 独占施工卡 W04：G2b owner identity context 与公开导出
 
-> **状态：实现已合入，核心跨仓路径通过；最终施工卡验收留两个测试补强项。**StockWiki 本地 `master@72531b5` 含实现提交 `8bee364` 与 reader 模块大小拆分 `6f0c2c4`。W04 聚焦 **64 passed**；合并后的 `bash scripts/check_all.sh` **651 passed / 15 skipped / exit 0**。当前 IQS 主线 `65e96ba` 的公开 CLI 正例与 17 个单字段负例通过。完整验收需固定 canonical request SHA 为自动断言/可复核 golden，并覆盖 ISO Operating/Segment MIC 引用关系的坏数据拒绝；补齐前不把这两个验收项标为完成。本卡不修改 IQS，也不涉及 company-wiki 的 E7。
+> **最新状态（2026-09-30）：W04 已验收。**StockWiki 本地主线现为 `b4f3846`，包含 W04 原实现及 MIC Operating/Segment 关系补强；合并后的完整门 **686 passed**，Ruff、coverage 与 validate-framework 全绿。canonical request SHA 已由 IQS owner 的冻结 golden/自动断言固定。公开 CLI 的 17 个单字段负例均被拒绝，使用稳定的通用 `semantic_validation_failed` 错误码；逐 mutation 区分更细错误码可作为后续诊断改进，不阻塞本次验收。本卡不修改 IQS，也不涉及 company-wiki E7。
 
 ## 任务目标
 
@@ -105,3 +105,12 @@
 - ISO 官方 MIC canary 收据记录原 CSV SHA-256 `79de0f7704e260bd49b0d2439f3084891cabc93481da8bdbaa716e15a27211ed`（589,482 bytes）、2,883 records / 149 jurisdictions；离线正例的 request SHA 记为 `0efc2c04daa7b6345078410a5df5ae0aa5bec9098b1523d7c25f9f60f53e5d2f`。测试临时根与 coverage/Ruff 临时产物已删除；E2E 自己断言生产 `data/` 状态前后相同。
 - 剩余验收补强：① 将正例 request golden 持久化或在测试中固定预期 SHA（当前测试只比较两个临时根输出相同并检查 SHA 长度，未锁定记录的 SHA）；② 解析器缺少对 OPRT/SGMT `OPERATING MIC` 父子关系的明确校验与坏数据拒绝测试。负例测试目前检查 error code 是非空字符串，没有逐场景钉住具体 code；可与 golden 补强放在同一小批测试中完成。
 - 因此 W04 代码与 G2b 当前 happy/negative public CLI 路径通过；按本卡 §2/§5 的完整数据不变量和 golden 要求，最终施工卡验收保持 pending，不能把当前通过解释成已经测试了 parser relation 或防止 wire output 漂移。
+
+## 总指挥验收补记（2026-09-30）
+
+- 将上面的历史 pending 项复查后，IQS owner 已提供冻结 golden `stockwiki-g2b-72531b5-provisional.json`，其 canonical SHA-256 为 `0efc2c04daa7b6345078410a5df5ae0aa5bec9098b1523d7c25f9f60f53e5d2f`；当前 owner acceptance script 对该 SHA 和字节内容作断言。该 owner 收据见 IQS `docs/implementation/reviews/IQS-lane/G2b-owner-acceptance-2026-09-30.md`。本线只读引用，未写 IQS。
+- W04 原测试曾让空 Operating MIC 回退为自身 MIC，未检查父项是否存在、OPRT 是否自引用，也不检测环。按 TDD 先增加 4 个预期失败测试，再实现：Operating MIC 必填且为 4 位 MIC；OPRT 必须自引用；引用必须解析；SGMT 链必须终止于 OPRT，环具名拒绝。ISO 官方 CSV 存在 8 条嵌套 SGMT 链和 2 条跨市场父引用，故合法嵌套链和跨市场关联均可通过；不强制父子同国家。
+- 修复在 StockWiki 独立分支提交 `afa9692`，随后正常并入本地 `master`，合并提交为 `b4f3846bb3e331f5661edee974a7d0b76dbf9664`。唯一变更路径为 `stockwiki/market_registry.py`、`tests/test_market_registry.py`、`tests/fixtures/market_registry/iso10383_sample.csv`；fixture 改为引用已存在的 XNAS 父项，不改变导出 market→MIC 投影。StockWiki 根 `.claude/` 保留且未触碰。
+- 官方 ISO 10383 CSV canary：SHA-256 `79de0f7704e260bd49b0d2439f3084891cabc93481da8bdbaa716e15a27211ed`，589,482 bytes，2,883 records / 149 jurisdictions；解析到 8 条 SGMT→SGMT、2 条跨市场 parent，均接受。测试素材是此前已下载到 `%TEMP%` 的精确 canary 文件；处理后按 SHA/size 复核并删除。
+- 合并前聚焦 parser + identity export + G2b CLI + CWP SourceExport E2E：**57 passed**；合并后 `bash scripts/check_all.sh`：**686 passed**、Ruff clean、coverage 总门 ≥73%、`ui.py` 75%、validate-framework 0 errors。validate-framework 有 11 条现存 `news_by_topic` type 警告。短路径隔离测试根、coverage/Ruff 文件与 canary CSV 均已清理并检查不存在；StockWiki 生产 `data/` 未修改。
+- IQS public CLI 17 个负例都以 exit 2 拒绝并给出稳定通用 `semantic_validation_failed`。没有逐 mutation 专属 error code 的断言；考虑到合同需要稳定具名失败、而当前通用码已稳定且所有负例拒绝，这不作为 W04 通过的阻断项。W04 本地验收通过；G2b 其它 capability 范围仍按 IQS 自身收尾报告管理。
