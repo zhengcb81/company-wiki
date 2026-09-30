@@ -8,7 +8,7 @@
 
 ## Next Step
 
-> **2026-09-30 更新：**CWP E5 已提交 `05756d3`，E6 真实样本 P1/P2 已提交 `c839baf`；E6 通过 1 项端到端（含 P1/P2 隔离、跨文档重叠、locator 回放、幂等、原件/生产状态保护、≤3% 对象/原文空间比与测试根恢复）。StockWiki SourceExport v2 reader 与 W02/W03 identity snapshot/mapping 已并入本地 `master@c8cfb2e`；聚焦回归 99 passed、无 skip，单次 `check_all.sh` 为 598 passed 且全门 exit 0。G-B 基础 SourceExport 跨仓 E2E 通过。W04 已并入 `master@72531b5`：聚焦 64 passed、全门 651 passed/15 skipped，IQS public CLI 正例和 17 个单字段负例通过；最终施工卡还差 golden SHA 固定、ISO Operating/Segment MIC 关系负例和具名 error code 测试。下一步先完成这一小批合同测试，然后 CWP 继续做 E7 故障恢复与有界吞吐矩阵。RF/FF/IQS 活动 WIP 由各自 owner 维护；Worker 保持 paused，原始文档不清理。
+> **2026-09-30 更新：**CWP E5/E6 已提交，StockWiki reader/W02/W03 已并入 `master@c8cfb2e`，基础 G-B 真实跨仓 E2E 通过。W04 已并入 `master@72531b5`：聚焦 64 passed、全门 651 passed/15 skipped，IQS public CLI 正例和 17 个单字段负例通过；完整施工卡仍差 golden SHA、ISO Operating/Segment MIC 关系负例和具名 error code 测试。CWP E7 的 R01/R04/R09/R11 与 100+ job 重启矩阵通过；synthetic P1/P2/P4 benchmark 显示可重叠，但真实五样本 E6 replay 配对里 P2 比 P1 慢约 6.8%、峰值内存高约 22%。因此 Worker 继续 paused/default-off，当前隔离基线用 P1；下一节点是 E-B 集成门及带锁等待数据的真实样本复测。RF/FF/IQS 活动 WIP 由各自 owner 维护，原始文档不清理。
 
 > **2026-09-28 权限/审查简化（优先于下方所有历史段落）：**不设 private/public、逐文档/逐期/逐 job 授权、review receipt、独立 reviewer 或人工批次审批。用户已授权范围内，自动化测试和 source/hash/lineage/预算断言决定能否继续；原始文档全部保留，只清理可重建且无引用的派生文件。下方 2026-09-27 transcript permission 细节和历史 G 门槛只作事实记录，不是待实施指令。
 
@@ -36,7 +36,7 @@ Phase 17 的 F0–F5 已完成。G1 离线主样本和回归集已经复跑：12
 
 ## Current Phase
 
-Phase 26：跨仓抽象与 Narrative Worker 分阶段实施中。M1、M2、E0–E6 已完成；E5/E6 代码已提交，production Worker 仍 paused。StockWiki 基础 SourceExport G-B 已由真实 producer→verified-open→reader E2E 验证；G2b 身份 owner 数据仍 pending。当前主线下一大阶段是 E7 的故障恢复/重启/丢响应和有界吞吐矩阵；独立 StockWiki harness 可并行执行 W04 owner-context producer。原件保留。
+Phase 26：跨仓抽象与 Narrative Worker 分阶段实施中。M1、M2、E0–E7 故障恢复矩阵已完成测试，E-B 集成与 runtime composition 未完成；E5/E6 已提交，E7 测试仍在专用 worktree 待提交。production Worker 继续 paused/default-off。真实五样本 P1/P2 replay 配对未显示并发提速，需带锁等待指标的复测。StockWiki 基础 G-B 已过；W04 实现/质量门/CLI 正反路径通过，但 golden SHA、MIC 父子关系负例和具名错误码仍待补测，G2b 尚未关闭。原件保留。
 
 外部来源采购补充：FMP Basic key 实测 profile/有效 SEC 检索 200，press releases/transcript dates 402；SEC 原生 API 无 key。以 246 个本地公司目录作保守分母，Basic 补充 SEC 检索约 2,076 calls/30 日，纯 SEC/IR 路径为 0 FMP calls；Koyfin 无用户 API，Seeking Alpha 个人订阅不授权自动抓取；Motley Fool 官方条款也禁止自动访问/采集，现有适配器不得接通生产。详细价格、假设、权利分级和 30 日试点见 [外部数据源与成本卡](provider_cost_and_capability_2026-09-27.md)。采购结论为先不买，且不改变 G0/G1e 门禁。
 
@@ -376,6 +376,16 @@ company-wiki 只负责来源、解析质量、证据定位、检索和来源摘�
 
 **Status:** W04 实现已并线，完整测试门与 G2b 当前 public CLI 正反路径通过。施工卡最终签收和 G2b 关闭等上述合同保护补齐。该线没有写 StockWiki 生产身份库；CWP E7 继续在独立 worktree 实施，RF/FF/IQS 代码均未修改。
 
+## Phase 30：E7 故障恢复与并发档位复测（2026-09-30）
+
+- [x] R01 双进程同一 ready job 抢占、R04 旧租约晚完成 fencing，各重复 3 次；R09 provider 已接收但响应丢失后的重试/唯一可见 bundle；R11 34 份文档、102 个 DAG jobs 中断后重启恢复。组合回归 **8 passed**。
+- [x] 对 45-job、P1/P2/P4 六轮交错 synthetic replay profile 做资源与吞吐试验（每档两轮）；**1 passed**。合成模型/短 handler 基准：P1/P2/P4 中位总耗时 15.31/10.91/6.65 秒；P2 对 P1 提升约 40.3%，P4 对 P2 提升约 64.1%，P4/P2 峰值 RSS 中位比约 1.50。它不含真实 catalog 锁争用，不能单独决定默认档位。
+- [x] 用隔离根和显式来源路径复跑 E6 的 4 份真实 PDF/TXT + 1 份低价值跳过控制，P1/P2 各一轮：**1 passed**（输出指标复跑 94.23 秒）。真实文档 replay 配置下 P1/P2 墙钟 45.07/48.13 秒；P2 慢约 6.8%，峰值进程树 RSS 360.9/440.7 MiB；对象输出均 419,428 B / 原文 20,597,846 B = **2.04%**；DB 均 1,011,712 B、WAL 0、busy 错误 0。SQLite busy p95 和 catalog lock wait 未采集。
+- [x] 运行器第一次按 worktree 邻接规则找不到电话会源目录；设置 `COMPANY_WIKI_E6_PROJECT_ROOT`、`COMPANY_WIKI_E6_COMPANIES_ROOT`、`EARNINGS_TRANSCRIPTS_E6_ROOT` 后通过。两次运行的隔离 `%TEMP%` 基准根最终均不存在；生产原件/hash 和 company-wiki 生产目录指纹由测试前后断言保持不变。
+- [ ] E7 暂定策略：production Worker 保持 paused/default-off。单轮真实样本中 P2 未达到计划的 25% 提速门，故若继续做隔离试用，以 P1 为保守比较基线；合成基准中的 P2/P4 提速不外推到真实 workload。只有补充交错真实样本轮次并测 catalog/SQLite 锁等待后，才决定是否启用更高并发；P2M/P4 不作为默认候选。
+
+**Status:** 进程争用、过期租约 fencing、丢响应重试、100+ job 重启恢复和 bounded synthetic profile 均已测试；真实 E6 P1/P2 样本指标已取得但只是一对、且使用 replay 模型。现有证据支持继续保持默认单 worker/生产 paused，不支持宣称并发已带来端到端提速。下一大节点仍是 E-B 集中集成验收与 runtime composition；RF/FF/IQS 未改，唯一原始文档未动。
+
 ## Next Step
 
-由 StockWiki owner 在其单仓工作线补齐 W04 收据列出的 golden/parser 关系测试后，重新跑受影响包与一次必要的大门；不要另开重叠写入者。总指挥继续完成 CWP E7 丢响应、100-job 重启恢复与资源基准，再做 E-B 大节点验收和 runtime composition；Worker 在自动验收前继续 paused。RF、FF、IQS 的活动 WIP 不另开写入者，等现有 owner 交接后再汇合；selected narrative G-C 与原始文档保留。
+W04 实现/整仓门/当前 IQS CLI 正反路径已过，完整卡仍留 golden SHA、ISO Operating/Segment MIC 关系负例及具名错误码三项测试补强；StockWiki owner 单仓完成后再关闭 G2b。CWP E7 故障恢复和 100-job 重启矩阵已过，真实文档 replay 的 P1/P2 一对测量未显示 P2 提速，Worker 保持 paused/default-off，继续做 E-B 集中集成与 runtime composition 前的锁等待/真实样本复测。RF、FF、IQS 活动 WIP 由各自 owner 维护；selected narrative G-C 与原始文档保留。

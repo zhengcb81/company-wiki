@@ -2,7 +2,7 @@
 
 > **2026-09-30 状态更新：**StockWiki reader/W02/W03 已并入 `master@c8cfb2e7`；W04 已正常并入本地 `master@72531b5`（实现提交 `8bee364`，reader 模块大小拆分 `6f0c2c4`）。W04 聚焦测试 **64 passed**，合并后单次 `check_all.sh` **651 passed / 15 skipped / exit 0**，Ruff、coverage（总门与 `ui.py`）及 validate-framework 全绿。当前 IQS 主线 `65e96ba` 的 public CLI 正例与 17 个单字段负例均通过。G2b 主流程已实测；W04 最终验收仍需把记录的 canonical SHA 固定为测试断言/可复核 golden，并补 ISO Operating/Segment MIC 关系拒绝例。`.claude/` 保留，生产 StockWiki data 未改。
 
-> **本计划已进入实施；当前提交与测试状态见 [Phase 26–29](task_plan.md) 与 [S0a/S0b 接口表](s0a_observed_interfaces_2026-09-29.md)。** 本任务的主 agent 是唯一总指挥：维护本目录总计划、冻结接口、收各仓提交、处理跨仓不兼容、运行跨仓真实数据 E2E 和发布汇总。各 harness 只写自己独占的项目仓库/隔离工作树；可以只读其它仓及本目录的合同。用户确认 invest-quick-scan 已由别的项目运行，本任务把 IQS 施工卡交给**现有 owner**，不另开同仓写入线。用户于 2026-09-29 报告 IQS 步骤 1–4 已收尾；现在 IQS 仍由现有 owner 推进。StockWiki 的 SourceExport v2 reader、engineering gate simplification 和 W02/W03 已合入并通过单仓验收；当前 StockWiki 独立施工卡是 [W04 owner context producer](harness_lanes/stockwiki_g2b_owner_context.md)。旧 [跨仓施工图](cross_repo_mainline_and_delivery_plan_2026-09-28.md)保留历史调查和详细试验背景，冲突时以本页、Phase 26–28 与 2026-09-29 清理方案为准。
+> **本计划已进入实施；当前提交与测试状态见 [Phase 26–30](task_plan.md) 与 [S0a/S0b 接口表](s0a_observed_interfaces_2026-09-29.md)。** 本任务的主 agent 是唯一总指挥：维护本目录总计划、冻结接口、收各仓提交、处理跨仓不兼容、运行跨仓真实数据 E2E 和发布汇总。各 harness 只写自己独占的项目仓库/隔离工作树；可以只读其它仓及本目录的合同。用户确认 invest-quick-scan 已由别的项目运行，本任务把 IQS 施工卡交给**现有 owner**，不另开同仓写入线。用户于 2026-09-29 报告 IQS 步骤 1–4 已收尾；现在 IQS 仍由现有 owner 推进。StockWiki 的 SourceExport v2 reader、engineering gate simplification 和 W02/W03 已合入并通过单仓验收；当前 StockWiki 独立施工卡是 [W04 owner context producer](harness_lanes/stockwiki_g2b_owner_context.md)。旧 [跨仓施工图](cross_repo_mainline_and_delivery_plan_2026-09-28.md)保留历史调查和详细试验背景，冲突时以本页、Phase 26–28 与 2026-09-29 清理方案为准。
 
 ## 1. 唯一写入者与六份可直接派发的施工卡
 
@@ -79,4 +79,4 @@ G-D：逐批按实际消费者引用选择已通过的 G-A/G-B/G2b/G-C；无全�
 
 ## 6. 当前派发条件与风险
 
-本节实际进度以 [Phase 26–29](task_plan.md) 为准。StockWiki 主线整合与 W04 实施均已完成；W04 在本地 `master@72531b5`，64 项聚焦测试、651 passed/15 skipped 的 `check_all.sh` 和当前 IQS public CLI 正反例均通过。G2b 功能路径已验证；完整施工卡签收还缺 pinned canonical golden/预期 SHA 断言和 ISO Operating/Segment MIC 关系负例。当前没有第二条确认安全的并行写入线：RF、FF、IQS 各有既有 owner 的活动工作，ET 精确工具门已完成，CWP E7 由总指挥继续。FMP 此前真实请求返回 402；fake-provider E2E 不代表已付费 API 可用。
+本节实际进度以 [Phase 26–30](task_plan.md) 为准。StockWiki 主线整合与 W04 实施均已完成；W04 在本地 `master@72531b5`，64 项聚焦测试、651 passed/15 skipped 的 `check_all.sh` 和当前 IQS public CLI 正反例均通过。G2b 功能路径已验证；完整施工卡签收还缺 pinned canonical golden/预期 SHA 断言和 ISO Operating/Segment MIC 关系负例。当前没有第二条确认安全的并行写入线：RF、FF、IQS 各有既有 owner 的活动工作，ET 精确工具门已完成，CWP E7 由总指挥继续。FMP 此前真实请求返回 402；fake-provider E2E 不代表已付费 API 可用。
