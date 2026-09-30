@@ -8,7 +8,7 @@
 
 ## Next Step
 
-> **2026-09-30 更新：**CWP E5 已提交 `05756d3`，E6 真实样本 P1/P2 已提交 `c839baf`；E6 通过 1 项端到端（含 P1/P2 隔离、跨文档重叠、locator 回放、幂等、原件/生产状态保护、≤3% 对象/原文空间比与测试根恢复）。StockWiki SourceExport v2 reader 与 W02/W03 identity snapshot/mapping 已由独立 harness 正常并入本地 `master@c8cfb2e`；聚焦回归 99 passed、无 skip，单次 `check_all.sh` 为 598 passed 且全门 exit 0，源 worktree 与 `.claude/` 保留。总指挥已完成真实 CWP→StockWiki 基础 SourceExport G-B E2E（StockWiki 3 passed；CWP P06 四根原文 E2E 1 passed）。下一步 CWP 做 E7 恢复/崩溃/丢响应与吞吐矩阵；另有一条不重叠的 StockWiki W04 G2b owner-context producer 施工卡可交给独立 harness。G2b 在其 owner receipt/market-registry 真实投影和 IQS CLI 正反例过关前保持 pending。RF/FF G-A 与 FMP 日期/身份/JSON 跨层合同按各自 owner 当前状态汇合。Worker 保持 paused，原始文档不清理。
+> **2026-09-30 更新：**CWP E5 已提交 `05756d3`，E6 真实样本 P1/P2 已提交 `c839baf`；E6 通过 1 项端到端（含 P1/P2 隔离、跨文档重叠、locator 回放、幂等、原件/生产状态保护、≤3% 对象/原文空间比与测试根恢复）。StockWiki SourceExport v2 reader 与 W02/W03 identity snapshot/mapping 已并入本地 `master@c8cfb2e`；聚焦回归 99 passed、无 skip，单次 `check_all.sh` 为 598 passed 且全门 exit 0。G-B 基础 SourceExport 跨仓 E2E 通过。W04 已并入 `master@72531b5`：聚焦 64 passed、全门 651 passed/15 skipped，IQS public CLI 正例和 17 个单字段负例通过；最终施工卡还差 golden SHA 固定、ISO Operating/Segment MIC 关系负例和具名 error code 测试。下一步先完成这一小批合同测试，然后 CWP 继续做 E7 故障恢复与有界吞吐矩阵。RF/FF/IQS 活动 WIP 由各自 owner 维护；Worker 保持 paused，原始文档不清理。
 
 > **2026-09-28 权限/审查简化（优先于下方所有历史段落）：**不设 private/public、逐文档/逐期/逐 job 授权、review receipt、独立 reviewer 或人工批次审批。用户已授权范围内，自动化测试和 source/hash/lineage/预算断言决定能否继续；原始文档全部保留，只清理可重建且无引用的派生文件。下方 2026-09-27 transcript permission 细节和历史 G 门槛只作事实记录，不是待实施指令。
 
@@ -361,10 +361,21 @@ company-wiki 只负责来源、解析质量、证据定位、检索和来源摘�
 - [x] 核实市场注册表权威来源：[ISO 20022 MIC list](https://www.iso20022.org/market-identifier-codes) 的官方 CSV 和发布日历可用于 ISO 10383 market→MIC owner projection；MIC 只证明市场/MIC 归属，不推导发行人同一性。
 - [x] 新建[StockWiki W04 独立施工卡](harness_lanes/stockwiki_g2b_owner_context.md)，指定 StockWiki 单仓独占、新 worktree、TDD、owner receipt 与 registry 持久化/API、精确 IQS request exporter、真实官方 registry canary、IQS CLI 正反 E2E、生产库只读和测试根恢复。
 - [x] 检查并行冲突：RF、FF、IQS 当前有未提交 owner 工作，不派第二写入者；ET 工具/供应商门已实现且本地无未完成的同范围任务；CWP E7 由本总指挥在不同仓库进行。W04 是目前确认可以独立派发的较大产品任务。
-- [ ] W04 harness 实施、提交并交接后，由总指挥复核产品 diff、运行 IQS public CLI 跨仓 G2b 正反例，满足条件再关闭 G2b。
+- [x] W04 已实现并正常并入 StockWiki：当前 `master@72531b5`，实现提交 `8bee364`，reader 模块大小拆分 `6f0c2c4`；只读确认原有 `.claude/` 保留。W04 聚焦包 64 passed；合并后 `bash scripts/check_all.sh` 651 passed/15 skipped/exit 0，Ruff、coverage 总门/`ui.py`、validate-framework 通过。
+- [x] 在当前 IQS `master@65e96ba` 上运行 W04 跨仓 public CLI E2E：真实 StockWiki serializer 正例 exit 0/valid，17 个逐字段负例均 exit 2；真实 ISO MIC canary hash/记录数/辖区数及临时根清理结果见[W04 验收收据](harness_lanes/stockwiki_g2b_owner_context.md)。
+- [ ] W04 最终验收补强：固定记录的 canonical request SHA `0efc2c04daa7b6345078410a5df5ae0aa5bec9098b1523d7c25f9f60f53e5d2f` 为可复核 golden/测试断言，并为 ISO OPRT/SGMT `OPERATING MIC` 父子关系写明确坏数据拒绝测试；逐负例固定具名 CLI error code。G2b 当前正反 CLI 路径已通过，但施工卡的这些合同保护尚未验证。
 
-**Status:** W04 计划已细化，可交 StockWiki harness；尚未开始 StockWiki 产品写入。G2b 保持 pending。CWP E7 继续由总指挥执行，Worker 保持 paused，原始文档与 StockWiki 生产身份库均不动。
+**Status:** W04 实现已提交并进入 StockWiki 本地主线；全量质量门与 IQS 当前公开 CLI 正反例均通过。最终施工卡签收仍 pending 上述 golden/parser 关系测试补强。没有更改 StockWiki 生产身份库；company-wiki E7 继续由总指挥推进，Worker 保持 paused，原始文档未动。
+
+## Phase 29：StockWiki W04 交付验收（2026-09-30）
+
+- [x] 只读核对 StockWiki merge HEAD `72531b598dcd80325e55e1e70527b7afb89b163f`、W04 commit `8bee364`、伴随的 reader module-size split `6f0c2c4`；保留 `.claude/` 与现有源 worktrees。
+- [x] 在合并后 HEAD 运行 W04 聚焦测试 **64 passed** 和一次 `bash scripts/check_all.sh`：**651 passed / 15 skipped / exit 0**，Ruff/coverage/framework 门通过。
+- [x] 使用 IQS 当前 `master@65e96ba` public CLI 跑 StockWiki producer E2E：1 个 serializer 正例 exit 0/valid，17 个单字段负例 exit 2；production `data/` 前后快照相同，唯一运行临时根和 coverage/Ruff 产物已清理。
+- [ ] 最终 W04 卡验收：将 canonical request SHA 固定为可复核 golden/断言，补 ISO OPRT/SGMT `OPERATING MIC` 父子关系坏数据拒绝，并按负例固定预期 error code。三项合并为一个小型合同测试补强批，不另起重叠 StockWiki 写入者。
+
+**Status:** W04 实现已并线，完整测试门与 G2b 当前 public CLI 正反路径通过。施工卡最终签收和 G2b 关闭等上述合同保护补齐。该线没有写 StockWiki 生产身份库；CWP E7 继续在独立 worktree 实施，RF/FF/IQS 代码均未修改。
 
 ## Next Step
 
-把 [StockWiki W04 施工卡](harness_lanes/stockwiki_g2b_owner_context.md)交给一个 StockWiki harness；它与本总指挥的 company-wiki E7 worktree 没有文件重叠。总指挥继续完成 E7 崩溃窗口、丢响应、重启与吞吐/空间矩阵，随后做 E-B 大节点验收和 runtime composition；Worker 在自动验收前继续 paused。RF、FF、IQS 的活动 WIP 不另开写入者，等现有 owner 交接后再汇合；selected narrative G-C 与原始文档保留。
+由 StockWiki owner 在其单仓工作线补齐 W04 收据列出的 golden/parser 关系测试后，重新跑受影响包与一次必要的大门；不要另开重叠写入者。总指挥继续完成 CWP E7 丢响应、100-job 重启恢复与资源基准，再做 E-B 大节点验收和 runtime composition；Worker 在自动验收前继续 paused。RF、FF、IQS 的活动 WIP 不另开写入者，等现有 owner 交接后再汇合；selected narrative G-C 与原始文档保留。

@@ -1,8 +1,8 @@
 # 六仓独占施工与总指挥集成计划（2026-09-29）
 
-> **2026-09-30 状态更新：**StockWiki reader 与 W02/W03 identity snapshot/mapping 已由独立 harness 正常并入本地 `master@c8cfb2e7`；聚焦回归 99 passed/无 skip，单次 `check_all.sh` 为 598 passed、exit 0。总指挥随后完成真实 CWP producer→verified-open→StockWiki reader G-B E2E（StockWiki 3 passed；CWP P06 四根真实字节 E2E 1 passed）。源分支/worktree 与根 `.claude/` 保留。基础 G-B 已完成；G2b 仍缺 owner receipt/market-registry 的公开投影，新的 StockWiki 独立施工卡 W04 已就绪。
+> **2026-09-30 状态更新：**StockWiki reader/W02/W03 已并入 `master@c8cfb2e7`；W04 已正常并入本地 `master@72531b5`（实现提交 `8bee364`，reader 模块大小拆分 `6f0c2c4`）。W04 聚焦测试 **64 passed**，合并后单次 `check_all.sh` **651 passed / 15 skipped / exit 0**，Ruff、coverage（总门与 `ui.py`）及 validate-framework 全绿。当前 IQS 主线 `65e96ba` 的 public CLI 正例与 17 个单字段负例均通过。G2b 主流程已实测；W04 最终验收仍需把记录的 canonical SHA 固定为测试断言/可复核 golden，并补 ISO Operating/Segment MIC 关系拒绝例。`.claude/` 保留，生产 StockWiki data 未改。
 
-> **本计划已进入实施；当前提交与测试状态见 [Phase 26–28](task_plan.md) 与 [S0a/S0b 接口表](s0a_observed_interfaces_2026-09-29.md)。** 本任务的主 agent 是唯一总指挥：维护本目录总计划、冻结接口、收各仓提交、处理跨仓不兼容、运行跨仓真实数据 E2E 和发布汇总。各 harness 只写自己独占的项目仓库/隔离工作树；可以只读其它仓及本目录的合同。用户确认 invest-quick-scan 已由别的项目运行，本任务把 IQS 施工卡交给**现有 owner**，不另开同仓写入线。用户于 2026-09-29 报告 IQS 步骤 1–4 已收尾；现在 IQS 仍由现有 owner 推进。StockWiki 的 SourceExport v2 reader、engineering gate simplification 和 W02/W03 已合入并通过单仓验收；当前 StockWiki 独立施工卡是 [W04 owner context producer](harness_lanes/stockwiki_g2b_owner_context.md)。旧 [跨仓施工图](cross_repo_mainline_and_delivery_plan_2026-09-28.md)保留历史调查和详细试验背景，冲突时以本页、Phase 26–28 与 2026-09-29 清理方案为准。
+> **本计划已进入实施；当前提交与测试状态见 [Phase 26–29](task_plan.md) 与 [S0a/S0b 接口表](s0a_observed_interfaces_2026-09-29.md)。** 本任务的主 agent 是唯一总指挥：维护本目录总计划、冻结接口、收各仓提交、处理跨仓不兼容、运行跨仓真实数据 E2E 和发布汇总。各 harness 只写自己独占的项目仓库/隔离工作树；可以只读其它仓及本目录的合同。用户确认 invest-quick-scan 已由别的项目运行，本任务把 IQS 施工卡交给**现有 owner**，不另开同仓写入线。用户于 2026-09-29 报告 IQS 步骤 1–4 已收尾；现在 IQS 仍由现有 owner 推进。StockWiki 的 SourceExport v2 reader、engineering gate simplification 和 W02/W03 已合入并通过单仓验收；当前 StockWiki 独立施工卡是 [W04 owner context producer](harness_lanes/stockwiki_g2b_owner_context.md)。旧 [跨仓施工图](cross_repo_mainline_and_delivery_plan_2026-09-28.md)保留历史调查和详细试验背景，冲突时以本页、Phase 26–28 与 2026-09-29 清理方案为准。
 
 ## 1. 唯一写入者与六份可直接派发的施工卡
 
@@ -12,7 +12,7 @@
 | ET / `C:\Users\郑曾波\Projects\earnings-transcripts\earnings-transcripts` | [ET 施工卡](harness_lanes/earnings_transcripts.md) | 明确公司和 fiscal FY/Q 请求 | 原语言 TXT 的版本化精确工具结果 |
 | FF / `C:\Users\郑曾波\Projects\filing-fetch` | [FF 施工卡](harness_lanes/filing_fetch.md) | CWP SourceRef/operation golden、ET tool golden | v1 兼容和显式 v2 来源/电话会编排 envelope |
 | RF / `C:\Users\郑曾波\Projects\revenue-forecast` | [RF 施工卡](harness_lanes/revenue_forecast.md) | FF/CWP 生产者 golden 和来源读取 CLI | 无物理根依赖的来源 adapter、严格 evidence hash |
-| StockWiki / `C:\Users\郑曾波\Projects\StockWiki` | [可派发 W04：G2b owner context producer](harness_lanes/stockwiki_g2b_owner_context.md)；已完成并线见[收据](harness_lanes/stockwiki_mainline_integration.md) | 当前本地 `master@c8cfb2e7`；W02/W03 与 reader 已并线；保留源 worktree、分支和 `.claude/` | 新增 owner receipt、ISO MIC registry 与精确公开 request export；只写 StockWiki。基础 G-B 已通过，G2b 交 IQS CLI 正反例 |
+| StockWiki / `C:\Users\郑曾波\Projects\StockWiki` | [W04 实施与验收记录](harness_lanes/stockwiki_g2b_owner_context.md)；已完成并线见[收据](harness_lanes/stockwiki_mainline_integration.md) | 当前本地 `master@72531b5`；保留源 worktree、分支和 `.claude/` | owner receipt、ISO MIC registry、精确 request export 已合入；64 项聚焦与 651 项全门通过；G2b public CLI 正反例通过；留两个精确测试补强项，不再把该施工卡作为未开始任务 |
 | IQS / `C:\Users\郑曾波\Projects\invest-quick-scan` | [IQS 施工卡](harness_lanes/invest_quick_scan.md) | 用户报告本仓步骤 1–4 已收尾；总指挥只读核收尾报告/CLI 版本，不新开写入线 | 保持 G2b pending，等 StockWiki 真实 DTO/golden；到件后跑公开 CLI 和跨仓身份正反例 |
 
 主 agent 独占当前 `company-wiki/docs/plans/narrative-evidence-pilot-2026-09-26/` 和跨仓 E2E 运行目录，不在其他 harness 活动期间修改其产品仓库。CWP 代码 harness 必须使用独立**物理 worktree 目录与独立分支**，不在主 agent 当前脏工作树写文件；总指挥先将当前 WIP 形成可恢复提交或经核验的快照，再指定准确 base。其它仓每仓也只设一个写入者；同仓 WIP 收拢由该 owner 完成。外部 `dayu-agent`、`StockInfoDLSimple` 和全局安装的 filing-fetch skill 本波为只读依赖；如确需修改，增开单独目录所有者，不让 FF harness 越界写。
@@ -79,4 +79,4 @@ G-D：逐批按实际消费者引用选择已通过的 G-A/G-B/G2b/G-C；无全�
 
 ## 6. 当前派发条件与风险
 
-本节实际进度以 [Phase 26–28](task_plan.md) 为准。StockWiki 主线整合已完成：本地 `master@c8cfb2e7` 含 reader `0b40683` 与 identity snapshot/mapping `ae11135`，聚焦回归 99 passed、全量门 598 passed；真实 G-B 另由总指挥以 StockWiki 3 passed + CWP P06 四根 E2E 1 passed 验证。当前唯一已确认可交给独立 harness 的产品施工卡是[StockWiki W04](harness_lanes/stockwiki_g2b_owner_context.md)，仅写 StockWiki；RF、FF、IQS 有活动修改，ET 的独立精确工具门已完成。G2b 仍 pending，直到 W04 的 owner-context request 经 IQS 公共 CLI 正反例通过。FMP 此前真实请求返回 402；fake-provider E2E 不代表已付费 API 可用。
+本节实际进度以 [Phase 26–29](task_plan.md) 为准。StockWiki 主线整合与 W04 实施均已完成；W04 在本地 `master@72531b5`，64 项聚焦测试、651 passed/15 skipped 的 `check_all.sh` 和当前 IQS public CLI 正反例均通过。G2b 功能路径已验证；完整施工卡签收还缺 pinned canonical golden/预期 SHA 断言和 ISO Operating/Segment MIC 关系负例。当前没有第二条确认安全的并行写入线：RF、FF、IQS 各有既有 owner 的活动工作，ET 精确工具门已完成，CWP E7 由总指挥继续。FMP 此前真实请求返回 402；fake-provider E2E 不代表已付费 API 可用。

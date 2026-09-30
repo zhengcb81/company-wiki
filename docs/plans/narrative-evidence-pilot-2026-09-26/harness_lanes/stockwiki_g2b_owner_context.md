@@ -1,6 +1,6 @@
 # StockWiki 独占施工卡 W04：G2b owner identity context 与公开导出
 
-> **状态：可独立派发。**StockWiki reader、W02/W03 identity snapshot/mapping 已进入本地 master；基础 CWP→StockWiki G-B 已通过。G2b 仍缺 owner-controlled identity receipt 与 market registry。此卡补齐 StockWiki 生产者公开读取/导出，不修改 IQS 消费者，也不碰 company-wiki 当前 E7。
+> **状态：实现已合入，核心跨仓路径通过；最终施工卡验收留两个测试补强项。**StockWiki 本地 `master@72531b5` 含实现提交 `8bee364` 与 reader 模块大小拆分 `6f0c2c4`。W04 聚焦 **64 passed**；合并后的 `bash scripts/check_all.sh` **651 passed / 15 skipped / exit 0**。当前 IQS 主线 `65e96ba` 的公开 CLI 正例与 17 个单字段负例通过。完整验收需固定 canonical request SHA 为自动断言/可复核 golden，并覆盖 ISO Operating/Segment MIC 引用关系的坏数据拒绝；补齐前不把这两个验收项标为完成。本卡不修改 IQS，也不涉及 company-wiki 的 E7。
 
 ## 任务目标
 
@@ -97,3 +97,11 @@
 - 生产数据库、实际身份、其它仓库不变；所有隔离根恢复到原状态；无凭证、原文或生产 DB 被提交。
 
 交接内容：StockWiki base/final HEAD、变更路径、迁移版本、registry 官方发布/生效日期与源 SHA、receipt/export schema 版本、golden 路径/SHA、命令/退出结果、临时根清理结果、IQS CLI 成功/负例结果及剩余未覆盖状态。单仓实现通过不代表 G2b 完成；总指挥按 IQS handoff 核对跨仓字段、原件/状态不变并记录最终 G2b gate。
+
+## 总指挥验收收据（2026-09-30）
+
+- StockWiki 主线 `72531b598dcd80325e55e1e70527b7afb89b163f`，包含 W04 `8bee364` 和 reader 模块拆分 `6f0c2c4`；唯一未跟踪根目录仍为原有 `.claude/`，验收未触碰。
+- 当前 IQS `master@65e96ba`。W04 聚焦包 64 passed；`check_all.sh` 在隔离临时路径运行，651 passed、15 skipped、1 个既有 DeprecationWarning，coverage 总门与 `ui.py` 门通过、validate-framework 0 errors（11 条既有内容警告）。G2b E2E 的 1 个正例通过，17 个单字段负例均由公开 CLI exit 2 拒绝。
+- ISO 官方 MIC canary 收据记录原 CSV SHA-256 `79de0f7704e260bd49b0d2439f3084891cabc93481da8bdbaa716e15a27211ed`（589,482 bytes）、2,883 records / 149 jurisdictions；离线正例的 request SHA 记为 `0efc2c04daa7b6345078410a5df5ae0aa5bec9098b1523d7c25f9f60f53e5d2f`。测试临时根与 coverage/Ruff 临时产物已删除；E2E 自己断言生产 `data/` 状态前后相同。
+- 剩余验收补强：① 将正例 request golden 持久化或在测试中固定预期 SHA（当前测试只比较两个临时根输出相同并检查 SHA 长度，未锁定记录的 SHA）；② 解析器缺少对 OPRT/SGMT `OPERATING MIC` 父子关系的明确校验与坏数据拒绝测试。负例测试目前检查 error code 是非空字符串，没有逐场景钉住具体 code；可与 golden 补强放在同一小批测试中完成。
+- 因此 W04 代码与 G2b 当前 happy/negative public CLI 路径通过；按本卡 §2/§5 的完整数据不变量和 golden 要求，最终施工卡验收保持 pending，不能把当前通过解释成已经测试了 parser relation 或防止 wire output 漂移。
