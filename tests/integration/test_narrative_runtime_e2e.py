@@ -4,6 +4,7 @@ import hashlib
 import json
 from pathlib import Path
 import shutil
+from threading import Event as ThreadEvent, Thread
 from typing import Callable
 
 import pytest
@@ -15,6 +16,7 @@ from company_wiki.automation.models import (
     JobStatus,
     RuntimeState,
     canonical_json,
+    canonical_json_hash,
 )
 from company_wiki.automation.narrative_contracts import (
     NarrativeBundle,
@@ -30,12 +32,22 @@ from company_wiki.automation.narrative_runtime import (
     NarrativeRuntimeDependencies,
     register_narrative_handlers,
 )
+from company_wiki.automation.narrative_verify import EFFECT_TYPE
 from company_wiki.automation.policy import PolicyConfig
+from company_wiki.automation.narrative_projection import (
+    NarrativeBundleReader,
+    NarrativeEffectDispatcher,
+)
 from company_wiki.automation.registry import create_default_registry
 from company_wiki.automation.scheduler import AutomationScheduler
 from company_wiki.automation.store import AutomationStore
 from company_wiki.automation.worker import HandlerExecutor, Worker
 from company_wiki.source_catalog import CatalogConfig, RootSpec, SourceCatalog
+from company_wiki.source_catalog.lock import CatalogOperationLock
+from company_wiki.source_catalog.narrative_artifact_store import (
+    LocalNarrativeObjectStore,
+    NarrativeArtifactStore,
+)
 from company_wiki.source_catalog.source_reader import SourceVersionReader
 from support.narrative_model_fixture import ReplayNarrativeModel
 
@@ -66,8 +78,9 @@ def _sidecar(
     document_kind: str,
     provider_document_id: str,
     language: str = "en",
+    overrides: dict[str, object] | None = None,
 ) -> dict[str, object]:
-    return {
+    payload: dict[str, object] = {
         "schema_version": "1.0",
         "canonical_entity_id": "ent-acme",
         "display_name": "Acme",
@@ -87,6 +100,10 @@ def _sidecar(
         "collector_name": "narrative_runtime_fixture",
         "collector_version": "1.0.0",
     }
+    if overrides:
+        payload.update(overrides)
+    payload["content_sha256"] = _sha(data)
+    return payload
 
 
 def _write_source(
@@ -96,12 +113,16 @@ def _write_source(
     data: bytes,
     title: str,
     document_kind: str,
+    entity_name: str = "Acme",
+    sidecar_overrides: dict[str, object] | None = None,
 ) -> Path:
-    directory = root / "Acme"
+    directory = root / entity_name
     if document_kind == "investor_call_transcript":
         directory = directory / "raw" / "investor_relations" / "transcripts"
     elif document_kind == "annual_report":
         directory = directory / "raw" / "financial_reports" / "annual"
+    elif document_kind in {"prospectus", "equity_offering_prospectus"}:
+        directory = directory / "raw" / "prospectus"
     else:
         directory = directory / "raw" / "investor_relations"
     directory.mkdir(parents=True, exist_ok=True)
@@ -114,6 +135,8 @@ def _write_source(
                 title=title,
                 document_kind=document_kind,
                 provider_document_id=name,
+                language=str((sidecar_overrides or {}).get("language", "en")),
+                overrides=sidecar_overrides,
             ),
             sort_keys=True,
         ),
@@ -138,6 +161,12 @@ def _new_catalog(run_root: Path, sources: list[dict[str, object]]) -> tuple[
             data=data,
             title=str(source["title"]),
             document_kind=str(source["document_kind"]),
+            entity_name=str(source.get("entity_name", "Acme")),
+            sidecar_overrides=(
+                source.get("sidecar_overrides")
+                if isinstance(source.get("sidecar_overrides"), dict)
+                else None
+            ),
         )
         by_sha[_sha(data)] = path.read_bytes()
     config = CatalogConfig(
@@ -416,6 +445,184 @@ def test_runtime_e2e_three_sources_are_idempotent_and_leave_only_pending_effects
         assert {
             digest: _sha(data) for digest, (data, _ref) in indexed.items()
         } == raw_hashes
+    finally:
+        _cleanup(tmp_path, run_root, baseline, catalog)
+
+
+def test_runtime_e2e_dispatches_and_recovers_pathless_bundle_versions(
+    tmp_path: Path,
+) -> None:
+    run_root, baseline = _run_root(tmp_path, "m3-e4-runtime-publish")
+    catalog = None
+    try:
+        annual = _pdf_bytes(
+            "Company launched a new product and expanded overseas capacity for customers."
+        )
+        transcript = (
+            b"Full Conference Call Transcript\n"
+            b"CEO: We launched a new product and expanded overseas capacity.\n"
+            b"Questions & Answers\n"
+        )
+        sources = [
+            {
+                "name": "annual.pdf",
+                "data": annual,
+                "title": "ACME annual report",
+                "document_kind": "annual_report",
+            },
+            {
+                "name": "call.txt",
+                "data": transcript,
+                "title": "ACME Q2 earnings call",
+                "document_kind": "investor_call_transcript",
+            },
+        ]
+        catalog, source_reader, indexed = _new_catalog(run_root, sources)
+        raw_hashes_before = {
+            digest: _sha(data) for digest, (data, _ref) in indexed.items()
+        }
+        store, scheduler, worker = _runtime(
+            run_root, source_reader, ReplayNarrativeModel()
+        )
+        events = [
+            _event(source_reader, ref, event_id=f"event-publish-{index}")
+            for index, (_data, ref) in enumerate(indexed.values(), start=1)
+        ]
+        for event in events:
+            store.put_event(event)
+            scheduler.materialize_event(event)
+        assert _drain(worker, scheduler) == 6
+
+        artifacts = NarrativeArtifactStore(
+            catalog.store,
+            LocalNarrativeObjectStore(catalog.config.catalog_dir),
+        )
+        dispatcher = NarrativeEffectDispatcher(store, artifacts)
+        generation = store.read_runtime_gate().control_generation
+
+        ack_finished = ThreadEvent()
+        allow_activation = ThreadEvent()
+        order: list[str] = []
+        original_ack = store.ack_outbox
+        original_activate = artifacts.activate
+
+        def ack_then_hold(**kwargs):
+            result = original_ack(**kwargs)
+            ack_finished.set()
+            if not allow_activation.wait(timeout=10):
+                raise AssertionError("test did not release activation")
+            return result
+
+        def activate_then_record(effect_id: str, **kwargs):
+            result = original_activate(effect_id, **kwargs)
+            order.append("visible")
+            return result
+
+        store.ack_outbox = ack_then_hold
+        artifacts.activate = activate_then_record
+        dispatched = []
+        dispatch_thread = Thread(
+            target=lambda: dispatched.append(
+                dispatcher.dispatch_next(
+                    worker_id="narrative-projector-e2e",
+                    now="2026-09-28T22:02:00Z",
+                    lease_until="2026-09-28T22:03:00Z",
+                    expected_generation=generation,
+                )
+            )
+        )
+        dispatch_thread.start()
+        try:
+            assert ack_finished.wait(timeout=10)
+            with CatalogOperationLock(
+                catalog.config.catalog_dir,
+                operation="test-pause-after-ack-before-activation",
+            ):
+                store.set_runtime_gate(
+                    RuntimeState.PAUSED, updated_at="2026-09-28T22:02:20Z"
+                )
+                order.append("paused")
+            allow_activation.set()
+            dispatch_thread.join(timeout=10)
+        finally:
+            allow_activation.set()
+            dispatch_thread.join(timeout=10)
+            store.ack_outbox = original_ack
+            artifacts.activate = original_activate
+
+        assert not dispatch_thread.is_alive()
+        assert dispatched and dispatched[0].status == "activation_pending"
+        assert order == ["paused"]
+        first = dispatched[0]
+        first_effect = store.get_effect(first.effect_id)
+        assert first_effect is not None
+        assert first_effect.status.value == "verified"
+        assert dispatcher.reconcile_prepared(
+            activated_at="2026-09-28T22:02:25Z"
+        ) == ()
+        store.set_runtime_gate(
+            RuntimeState.ENABLED, updated_at="2026-09-28T22:02:30Z"
+        )
+        generation = store.read_runtime_gate().control_generation
+        assert dispatcher.reconcile_prepared(
+            activated_at="2026-09-28T22:02:35Z"
+        ) == (first.effect_id,)
+
+        # Reconstruct the durable crash point: catalog prepared and AUTO ACKed,
+        # process exits before the short catalog activation transaction.
+        second_lease = store.claim_next_outbox(
+            worker_id="narrative-projector-recovery",
+            lease_token="recovery-lease",
+            now="2026-09-28T22:02:00Z",
+            lease_until="2026-09-28T22:03:00Z",
+            expected_generation=generation,
+            allowed_effect_types=(EFFECT_TYPE,),
+        )
+        assert second_lease is not None
+        second_effect = store.get_effect(second_lease.effect_id)
+        assert second_effect is not None
+        result = store.result_for_effect(second_effect.effect_id)
+        bundle = NarrativeBundle.from_dict(dict(result.result))
+        bundle_bytes = canonical_json(bundle.to_dict()).encode("utf-8")
+        artifacts.prepare(dispatcher._draft(second_effect, bundle), bundle_bytes)
+        store.ack_outbox(
+            outbox_id=second_lease.outbox_id,
+            lease_token=second_lease.lease_token,
+            runtime_generation=generation,
+            verified_at="2026-09-28T22:02:30Z",
+            actual_after_hash=canonical_json_hash(bundle.to_dict()),
+        )
+        prepared = artifacts.prepared_effects()
+        assert [version.effect_id for version in prepared] == [
+            second_effect.effect_id
+        ]
+
+        recovered = dispatcher.reconcile_prepared(
+            activated_at="2026-09-28T22:02:40Z"
+        )
+        assert recovered == (second_effect.effect_id,)
+        assert store.get_job(second_effect.job_id).status is JobStatus.SUCCEEDED
+
+        pathless_reader = NarrativeBundleReader(artifacts)
+        all_versions = []
+        for effect in (first_effect, second_effect):
+            result = store.result_for_effect(effect.effect_id)
+            expected = NarrativeBundle.from_dict(dict(result.result))
+            loaded = pathless_reader.read(
+                document_id=expected.source_ref.document_id,
+                source_id=expected.source_ref.source_id,
+                source_sha256=expected.source_ref.content_sha256,
+            )
+            assert loaded.bundle.to_dict() == expected.to_dict()
+            assert loaded.artifact.object_key.startswith("objects/sha256/")
+            assert not hasattr(loaded, "path")
+            all_versions.append(loaded)
+        assert {
+            item.bundle.source_metadata.document_kind for item in all_versions
+        } == {"annual_report", "investor_call_transcript"}
+        assert {
+            digest: _sha(data) for digest, (data, _ref) in indexed.items()
+        } == raw_hashes_before
     finally:
         _cleanup(tmp_path, run_root, baseline, catalog)
 

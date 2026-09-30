@@ -9,6 +9,7 @@ default database path.
 from __future__ import annotations
 
 import sqlite3
+import json
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Generic, TypeVar
@@ -1265,6 +1266,70 @@ class AutomationStore:
         finally:
             conn.close()
 
+    def result_for_effect(self, effect_id: str) -> HandlerResult:
+        """Return the single successful attempt result that emitted an effect."""
+        effect = self.get_effect(effect_id)
+        if effect is None:
+            raise RecordNotFoundError(f"effect {effect_id!r} not found")
+
+        matches: list[HandlerResult] = []
+        for attempt in self.list_attempts(effect.job_id):
+            if attempt.result_json is None:
+                continue
+            try:
+                result = HandlerResult.from_dict(json.loads(attempt.result_json))
+            except (KeyError, TypeError, ValueError) as exc:
+                raise IntegrityViolationError(
+                    f"attempt result for effect {effect_id!r} is invalid"
+                ) from exc
+            emitted = [item for item in result.effects if item.effect_id == effect_id]
+            if not emitted:
+                continue
+            if result.outcome is not HandlerOutcome.SUCCEEDED or len(emitted) != 1:
+                raise IntegrityViolationError(
+                    f"attempt result for effect {effect_id!r} is inconsistent"
+                )
+            original_effect = emitted[0]
+            immutable_fields = (
+                "effect_id",
+                "effect_key",
+                "job_id",
+                "effect_type",
+                "target",
+                "before_hash",
+                "intended_after_hash",
+                "created_at",
+            )
+            if any(
+                getattr(original_effect, name) != getattr(effect, name)
+                for name in immutable_fields
+            ) or (
+                original_effect.status
+                not in {EffectStatus.PLANNED, EffectStatus.PENDING}
+                or original_effect.actual_after_hash is not None
+                or original_effect.verified_at is not None
+            ):
+                raise IntegrityViolationError(
+                    f"attempt result does not match stored effect {effect_id!r}"
+                )
+            if (
+                effect.status is EffectStatus.VERIFIED
+                and (
+                    effect.actual_after_hash != effect.intended_after_hash
+                    or effect.verified_at is None
+                )
+            ):
+                raise IntegrityViolationError(
+                    f"verified effect {effect_id!r} has an invalid result hash"
+                )
+            matches.append(result)
+
+        if len(matches) != 1:
+            raise IntegrityViolationError(
+                f"expected one attempt result for effect {effect_id!r}; found {len(matches)}"
+            )
+        return matches[0]
+
     def get_effect_by_key(self, effect_key: str) -> Effect | None:
         conn = self._connect()
         try:
@@ -1394,29 +1459,48 @@ class AutomationStore:
         now: str,
         lease_until: str,
         expected_generation: int,
+        allowed_effect_types: tuple[str, ...] | None = None,
     ) -> OutboxLease | None:
         if not worker_id or not lease_token:
             raise ValueError("worker_id and lease_token must not be empty")
         if lease_until < now:
             raise ValueError("outbox lease_until must not be before now")
+        if allowed_effect_types is not None:
+            allowed_effect_types = tuple(dict.fromkeys(allowed_effect_types))
+            if not allowed_effect_types or any(
+                not isinstance(value, str) or not value or value.strip() != value
+                for value in allowed_effect_types
+            ):
+                raise ValueError("allowed_effect_types must contain non-empty names")
 
         def _op(conn):
             gate = _enabled_gate(conn, expected_generation)
-            row = conn.execute(
+            statement = (
                 f"SELECT {_OUTBOX_COLS_O} FROM outbox o "
                 "JOIN effects e ON e.effect_id = o.effect_id "
                 "JOIN jobs j ON j.job_id = e.job_id "
-                "WHERE o.status = 'pending' AND o.not_before <= ? "
+                "WHERE ((o.status = 'pending' AND o.not_before <= ?) "
+                "OR (o.status = 'leased' AND o.lease_until <= ?)) "
                 "AND e.status IN ('planned', 'pending') AND j.status = 'verifying' "
-                "ORDER BY o.not_before, o.outbox_id LIMIT 1",
-                (now,),
-            ).fetchone()
+            )
+            parameters: tuple[object, ...] = (now, now)
+            if allowed_effect_types is not None:
+                placeholders = ",".join("?" for _ in allowed_effect_types)
+                statement += f"AND e.effect_type IN ({placeholders}) "
+                parameters += allowed_effect_types
+            statement += (
+                "ORDER BY CASE WHEN o.status = 'leased' THEN o.lease_until "
+                "ELSE o.not_before END, o.outbox_id LIMIT 1"
+            )
+            row = conn.execute(statement, parameters).fetchone()
             if row is None:
                 return None
             changed = conn.execute(
                 "UPDATE outbox SET status = 'leased', lease_token = ?, "
-                "lease_until = ? WHERE outbox_id = ? AND status = 'pending'",
-                (lease_token, lease_until, row["outbox_id"]),
+                "lease_until = ? WHERE outbox_id = ? AND "
+                "(status = 'pending' OR "
+                "(status = 'leased' AND lease_until <= ?))",
+                (lease_token, lease_until, row["outbox_id"], now),
             )
             if changed.rowcount != 1:
                 raise ConcurrentUpdateError("outbox entry changed during claim")

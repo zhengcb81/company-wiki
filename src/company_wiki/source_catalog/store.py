@@ -208,6 +208,39 @@ CREATE TABLE IF NOT EXISTS artifacts (
     FOREIGN KEY(document_id) REFERENCES documents(document_id),
     FOREIGN KEY(source_id) REFERENCES sources(source_id)
 );
+CREATE TABLE IF NOT EXISTS narrative_artifact_versions (
+    artifact_version_id TEXT PRIMARY KEY,
+    work_key TEXT NOT NULL UNIQUE,
+    effect_id TEXT NOT NULL UNIQUE,
+    document_id TEXT NOT NULL,
+    source_id TEXT NOT NULL,
+    source_sha256 TEXT NOT NULL,
+    artifact_role TEXT NOT NULL CHECK (artifact_role='narrative_bundle'),
+    object_key TEXT NOT NULL,
+    content_sha256 TEXT NOT NULL,
+    byte_size INTEGER NOT NULL CHECK (byte_size >= 0),
+    producer_name TEXT NOT NULL,
+    producer_version TEXT NOT NULL,
+    policy_sha256 TEXT NOT NULL,
+    selection_status TEXT NOT NULL CHECK (
+        selection_status IN (
+            'selected', 'partial', 'skipped_no_narrative', 'needs_review', 'blocked'
+        )
+    ),
+    quality_status TEXT NOT NULL CHECK (
+        quality_status IN ('verified', 'needs_review', 'skipped_no_narrative')
+    ),
+    metadata_json TEXT NOT NULL,
+    status TEXT NOT NULL CHECK (
+        status IN ('prepared', 'visible', 'retired', 'quarantined')
+    ),
+    created_at TEXT NOT NULL,
+    activated_at TEXT,
+    FOREIGN KEY(document_id) REFERENCES documents(document_id),
+    FOREIGN KEY(source_id) REFERENCES sources(source_id)
+);
+CREATE INDEX IF NOT EXISTS idx_narrative_versions_source_status
+ON narrative_artifact_versions(document_id, source_id, status, created_at);
 CREATE TABLE IF NOT EXISTS llm_summary_failures (
     document_id TEXT NOT NULL,
     generator_name TEXT NOT NULL,
