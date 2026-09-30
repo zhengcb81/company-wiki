@@ -61,3 +61,10 @@
 完成条件：两条已完成产品线均进入 StockWiki 本地 `master`；reader/identity/QuickScanStore 聚焦回归通过且无新增 skip；单次 `scripts/check_all.sh` 退出 0；改动 diff check 通过；测试根与所有原有 worktree 状态恢复；`.claude/` 等非本线文件保留。
 
 交付记录仅需列：合入前后 master HEAD、两个功能分支 HEAD、实际合并顺序、受影响测试与整套门结果、隔离根前后状态、未跟踪文件归属、G-B 是否已由真实 CWP CLI 验证、G2b 是否仍因 receipt/registry owner 数据待建而 pending。无需人工 review receipt 或额外逐项签收。
+
+## Completion receipt — 2026-09-30
+
+- 本地 `master` 从 `8590b0e` 正常合入集成分支，最终 HEAD 为 `c8cfb2e7dc093398abd9473c74f4b4d7bc055257`。集成历史包含 reader `0b406832` 与 identity W02/W03 `ae11135c`；reader、identity 两个源 worktree和集成 worktree 均保留且干净。
+- 受影响聚焦回归：**99 passed，0 skipped**。单次 `bash scripts/check_all.sh`：**ALL CHECKS PASSED / exit 0**，coverage 包裹的 pytest **598 passed**，Ruff clean、总 coverage ≥73%、`stockwiki/ui.py` 75%、validate-framework 0 errors。
+- 工作树状态：唯一未跟踪项仍为根 `.claude/`，未纳入提交、未修改。集成任务无其它未跟踪文件；源 reader、identity 与集成 worktree 保留。
+- 本仓并线任务完成。StockWiki reader 的跨仓 **G-B 仍待总指挥用真实 CWP producer E2E 验证**；IQS **G2b 仍待真实 owner identity receipt / market-registry 数据**，本次没有伪造记录或将它们标绿。

@@ -453,7 +453,7 @@ automation 层 projector 是唯一 narrative catalog writer。它只依赖下层
 测试根结构：
 
 ```text
-C:\cwt\m3-e2e-<nonce>\
+<configured-e6-test-root>\m3-e2e-<nonce>\
   input\              # 从 frozen 样本复制的只读原件
   project\            # 临时 company-wiki/config/catalog
   automation\         # 临时 AUTO DB
@@ -481,7 +481,9 @@ P1 和 P2 各自使用独立 automation DB、catalog 和对象目录，防止上
 6. 低价值 `ir_policy` fixture 产生 `skipped_no_narrative`、完整 coverage、零 evidence、零模型调用；skip bundle `<=16 KiB` 且不含全文。
 7. 没有新增旧 `normalized.md`、`summary.md` 或全量 evidence_spans。
 8. 分别对 P1、P2 四份真实样本计算最终对象总字节 / 原始字节，均 `<=3%`；skip bundle 单独按 `<=16 KiB` 验收。
-9. 测试结束先验证唯一 root 位于 `C:\cwt` 且名称以 `m3-e2e-` 开头，再只删除该精确 root；确认该 root 不存在，且本次创建的 `m3-e2e-<nonce>` 路径恢复原状。
+9. 测试根由 `COMPANY_WIKI_E6_TEST_BASE` 显式指定；未设置时使用 pytest 创建的 `tmp_path`。测试开始记录 test-root 的直接子项快照，只在该根下创建唯一 `m3-e2e-<nonce>` 子目录；结束时确认该子目录在根内，再只删除该精确路径，并确认 test-root 子项恢复快照。
+
+**E6 实施收据（2026-09-30）：**真实样本 P1/P2 已完成。真实年报/半年报/季报/transcript 的标准选择上限设为 96 spans，招股书/增发/可转债为 160 spans；旧默认 160/320 使首轮对象/原文比达到 3.55%。降额后 P01 年报仍覆盖新业务、研发产品、产能、订单客户、主营业务、行业动态；P04 招股书仍覆盖新业务、研发产品、产能、订单客户、主营业务、出海。真实 P1/P2 E2E 通过（1 passed），覆盖跨文档重叠、skip、不重复生成、locator 回放、原件与生产状态指纹不变、各 profile 空间比不超过 3%，测试根恢复。测试输入与 production/test root 从仓库/env 动态解析，不依赖开发机固定绝对路径。E7 故障恢复/重启/吞吐测试仍未实施。
 
 ### E7：恢复矩阵、吞吐与空间收据
 
