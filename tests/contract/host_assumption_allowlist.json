@@ -40,6 +40,21 @@
       "where": "tests/e2e/test_source_version_reader_real_bytes.py (P04_SHA)",
       "rationale": "Content SHA-256 of the real 429-page P04 prospectus bytes used by the isolated streaming reader E2E; it detects source mutation and is independent of host paths.",
       "registered_by": "company-wiki G-0 integration (2026-09-29)"
+    },
+    "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5": {
+      "where": "tests/integration/test_narrative_runtime_e2e.py (E6 P01)",
+      "rationale": "Content SHA-256 of the frozen real annual-report bytes used by the isolated E6 P1/P2 runtime test; the digest is checked against bytes and does not include a host path.",
+      "registered_by": "company-wiki E6 runtime pilot (2026-09-30)"
+    },
+    "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7": {
+      "where": "tests/integration/test_narrative_runtime_e2e.py (E6 P07)",
+      "rationale": "Content SHA-256 of the frozen real investor-relations PDF bytes used by the isolated E6 P1/P2 runtime test; the digest is checked against bytes and does not include a host path.",
+      "registered_by": "company-wiki E6 runtime pilot (2026-09-30)"
+    },
+    "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a": {
+      "where": "tests/integration/test_narrative_runtime_e2e.py (E6 T01)",
+      "rationale": "Content SHA-256 of the frozen real earnings-transcript bytes used by the isolated E6 P1/P2 runtime test; the digest is checked against bytes and does not include a host path.",
+      "registered_by": "company-wiki E6 runtime pilot (2026-09-30)"
     }
   }
 }

@@ -41,23 +41,23 @@ from company_wiki.source_contract import EvidenceCoordinates, source_id_for_sha2
 @pytest.mark.parametrize(
     ("title", "existing_kind", "expected_kind", "expected_limit"),
     (
-        ("2025年度报告.pdf", "unknown", "annual_report", 160),
-        ("2026年半年度报告.pdf", "unknown", "semi_annual_report", 160),
-        ("2026年第一季度报告.pdf", "unknown", "quarterly_report", 160),
-        ("首次公开发行招股说明书.pdf", "unknown", "prospectus", 320),
+        ("2025年度报告.pdf", "unknown", "annual_report", 96),
+        ("2026年半年度报告.pdf", "unknown", "semi_annual_report", 96),
+        ("2026年第一季度报告.pdf", "unknown", "quarterly_report", 96),
+        ("首次公开发行招股说明书.pdf", "unknown", "prospectus", 160),
         (
             "向特定对象发行股票募集说明书.pdf",
             "unknown",
             "equity_offering_prospectus",
-            320,
+            160,
         ),
         (
             "向不特定对象发行可转换公司债券募集说明书.pdf",
             "unknown",
             "convertible_bond_prospectus",
-            320,
+            160,
         ),
-        ("2026_Q2_earnings_call.txt", "unknown", "investor_call_transcript", 160),
+        ("2026_Q2_earnings_call.txt", "unknown", "investor_call_transcript", 96),
     ),
 )
 def test_route_document_owns_kind_and_default_budget(

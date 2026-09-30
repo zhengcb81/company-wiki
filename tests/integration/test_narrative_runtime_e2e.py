@@ -2,10 +2,14 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 from pathlib import Path
 import shutil
 from threading import Event as ThreadEvent, Thread
+from datetime import datetime, timedelta, timezone
+import time
 from typing import Callable
+import uuid
 
 import pytest
 
@@ -20,6 +24,7 @@ from company_wiki.automation.models import (
 )
 from company_wiki.automation.narrative_contracts import (
     NarrativeBundle,
+    NarrativeSelectResult,
     SourceRevisionEventPayload,
 )
 from company_wiki.automation.narrative_model import (
@@ -41,6 +46,7 @@ from company_wiki.automation.narrative_projection import (
 from company_wiki.automation.registry import create_default_registry
 from company_wiki.automation.scheduler import AutomationScheduler
 from company_wiki.automation.store import AutomationStore
+from company_wiki.automation.supervisor import AutomationSupervisor, SupervisorConfig
 from company_wiki.automation.worker import HandlerExecutor, Worker
 from company_wiki.source_catalog import CatalogConfig, RootSpec, SourceCatalog
 from company_wiki.source_catalog.lock import CatalogOperationLock
@@ -48,7 +54,14 @@ from company_wiki.source_catalog.narrative_artifact_store import (
     LocalNarrativeObjectStore,
     NarrativeArtifactStore,
 )
+from company_wiki.source_catalog.narrative_evidence import (
+    verify_pdf_evidence_spans_bytes,
+    verify_transcript_evidence_spans,
+)
 from company_wiki.source_catalog.source_reader import SourceVersionReader
+from company_wiki.source_catalog.transcript_text_extract import (
+    extract_transcript_material,
+)
 from support.narrative_model_fixture import ReplayNarrativeModel
 
 
@@ -753,3 +766,685 @@ def test_runtime_e2e_read_identity_fails_automatically_and_transcript_needs_no_r
         assert len(model.calls) == 1
     finally:
         _cleanup(tmp_path, run_root, baseline, catalog)
+
+
+_E6_REAL_SAMPLES = (
+    {
+        "sample_id": "P01",
+        "relative_path": "中微公司/raw/financial_reports/中微公司：2025年年度报告.pdf",
+        "name": "中微公司：2025年年度报告.pdf",
+        "entity_name": "中微公司",
+        "title": "中微公司：2025年年度报告.pdf",
+        "document_kind": "annual_report",
+        "language": "zh",
+        "sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+        "sidecar_overrides": {
+            "canonical_entity_id": "e6-entity-zhongwei",
+            "display_name": "中微公司",
+            "market": "CN",
+            "security_id": "688012.SH",
+        },
+    },
+    {
+        "sample_id": "P04",
+        "relative_path": "中微公司/raw/prospectus/中微公司：首次公开发行股票并在科创板上市招股说明书.pdf",
+        "name": "中微公司：首次公开发行股票并在科创板上市招股说明书.pdf",
+        "entity_name": "中微公司",
+        "title": "中微公司：首次公开发行股票并在科创板上市招股说明书.pdf",
+        "document_kind": "prospectus",
+        "language": "zh",
+        "sha256": "19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+        "sidecar_overrides": {
+            "canonical_entity_id": "e6-entity-zhongwei",
+            "display_name": "中微公司",
+            "market": "CN",
+            "security_id": "688012.SH",
+        },
+    },
+    {
+        "sample_id": "P07",
+        "relative_path": "万润股份/raw/research/万润股份：投资者关系活动记录表20260515.pdf",
+        "name": "万润股份：投资者关系活动记录表20260515.pdf",
+        "entity_name": "万润股份",
+        "title": "万润股份：投资者关系活动记录表20260515.pdf",
+        "document_kind": "investor_relations",
+        "language": "zh",
+        "sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+        "sidecar_overrides": {
+            "canonical_entity_id": "e6-entity-wanrun",
+            "display_name": "万润股份",
+            "market": "CN",
+            "security_id": "002643.SZ",
+        },
+    },
+    {
+        "sample_id": "T01",
+        "relative_path": "MSFT/MSFT_Q4_2026_earnings_call.txt",
+        "name": "MSFT_Q4_2026_earnings_call.txt",
+        "entity_name": "MSFT",
+        "title": "Microsoft Q4 2026 earnings call transcript",
+        "document_kind": "investor_call_transcript",
+        "language": "en",
+        "sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+        "sidecar_overrides": {
+            "canonical_entity_id": "e6-entity-msft",
+            "display_name": "Microsoft",
+            "market": "US",
+            "security_id": "MSFT",
+        },
+    },
+)
+
+
+def _e6_project_root() -> Path:
+    configured_root = os.environ.get("COMPANY_WIKI_E6_PROJECT_ROOT")
+    return (
+        Path(configured_root).resolve()
+        if configured_root
+        else Path(__file__).resolve().parents[2]
+    )
+
+
+def _e6_source_paths() -> tuple[Path, dict[str, Path]]:
+    project_root = _e6_project_root()
+    companies_root = Path(
+        os.environ.get(
+            "COMPANY_WIKI_E6_COMPANIES_ROOT", str(project_root / "companies")
+        )
+    )
+    transcripts_root = Path(
+        os.environ.get(
+            "EARNINGS_TRANSCRIPTS_E6_ROOT",
+            str(
+                project_root.parent
+                / "earnings-transcripts"
+                / "earnings-transcripts"
+                / "transcripts"
+            ),
+        )
+    )
+    paths = {
+        sample["sample_id"]: (
+            transcripts_root / str(sample["relative_path"])
+            if sample["sample_id"] == "T01"
+            else companies_root / str(sample["relative_path"])
+        )
+        for sample in _E6_REAL_SAMPLES
+    }
+    return companies_root, paths
+
+
+def _e6_production_fingerprint() -> dict[str, tuple[object, ...] | None]:
+    project_root = _e6_project_root()
+    catalog_dir = project_root / ".source_catalog"
+    paths = (
+        catalog_dir / "catalog.sqlite3",
+        catalog_dir / "runtime_policy.json",
+        catalog_dir / "worker_control.json",
+        project_root / "config" / "source_catalog.yaml",
+        project_root / "config" / "source_catalog_worker.yaml",
+    )
+    result: dict[str, tuple[object, ...] | None] = {}
+    for path in paths:
+        if not path.is_file():
+            result[str(path)] = None
+            continue
+        stat = path.stat()
+        if path.name == "catalog.sqlite3":
+            # The production catalog is multi-gigabyte. Its immutable file
+            # identity is checked with metadata; the E6 runtime never opens it.
+            result[str(path)] = (stat.st_size, stat.st_mtime_ns)
+        else:
+            result[str(path)] = (stat.st_size, _sha(path.read_bytes()))
+    return result
+
+
+def _wait_for_e6_verification_jobs(
+    supervisor: AutomationSupervisor,
+    store: AutomationStore,
+    job_ids: tuple[str, ...],
+    *,
+    timeout_seconds: float = 300.0,
+) -> None:
+    deadline = time.monotonic() + timeout_seconds
+    expected_verifying = sum(
+        1
+        for job_id in job_ids
+        if (job := store.get_job(job_id)) is not None
+        and job.job_type == "source.narrative_verify"
+    )
+    while time.monotonic() < deadline:
+        supervisor.maintain()
+        jobs = tuple(store.get_job(job_id) for job_id in job_ids)
+        if all(job is not None for job in jobs):
+            statuses = tuple(job.status for job in jobs if job is not None)
+            if any(
+                status
+                in {
+                    JobStatus.DEAD_LETTER,
+                    JobStatus.BLOCKED_HUMAN,
+                    JobStatus.CANCELLED,
+                }
+                for status in statuses
+            ):
+                raise AssertionError(
+                    "E6 worker reached an unexpected terminal status: "
+                    f"{[(job.job_type, job.status.value, job.last_error_code, job.last_error_detail) for job in jobs if job]}"
+                )
+            ready = all(
+                status in {JobStatus.SUCCEEDED, JobStatus.VERIFYING}
+                for status in statuses
+            )
+            verifying = sum(status is JobStatus.VERIFYING for status in statuses)
+            if ready and verifying == expected_verifying:
+                return
+        time.sleep(0.05)
+    raise TimeoutError("E6 verify jobs did not reach the outbox boundary")
+
+
+def _e6_run_profile(
+    run_root: Path,
+    *,
+    profile: str,
+    copied_samples: dict[str, tuple[dict[str, object], bytes, Path]],
+) -> dict[str, object]:
+    profile_root = run_root / profile
+    sources: list[dict[str, object]] = []
+    source_by_digest: dict[str, dict[str, object]] = {}
+    for sample_id, (sample, data, _copied_path) in copied_samples.items():
+        source = {
+            "name": sample["name"],
+            "data": data,
+            "title": sample["title"],
+            "document_kind": sample["document_kind"],
+            "entity_name": sample["entity_name"],
+            "language": sample["language"],
+            "sidecar_overrides": {
+                **sample["sidecar_overrides"],
+                "language": sample["language"],
+            },
+            "sample_id": sample_id,
+        }
+        sources.append(source)
+        source_by_digest[_sha(data)] = source
+
+    policy = _pdf_bytes(
+        "This policy describes investor meeting administration and record retention."
+    )
+    skip_source = {
+        "name": "投资者关系管理办法（2025年8月）.pdf",
+        "data": policy,
+        "title": "投资者关系管理办法（2025年8月）.pdf",
+        "document_kind": "ir_policy",
+        "entity_name": "中微公司",
+        "sidecar_overrides": {
+            "canonical_entity_id": "e6-entity-zhongwei",
+            "display_name": "中微公司",
+            "market": "CN",
+            "security_id": "688012.SH",
+            "language": "zh",
+        },
+        "language": "zh",
+        "sample_id": "SKIP",
+    }
+    sources.append(skip_source)
+    source_by_digest[_sha(policy)] = skip_source
+
+    catalog: SourceCatalog | None = None
+    try:
+        catalog, reader, indexed = _new_catalog(profile_root, sources)
+        initial_artifacts = catalog.reader.fetchone(
+            "SELECT COUNT(*) AS count FROM artifacts"
+        )
+        assert initial_artifacts is not None
+        initial_artifact_count = int(initial_artifacts["count"])
+
+        automation_root = profile_root / "automation"
+        automation_root.mkdir(parents=True)
+        store = AutomationStore(automation_root / "automation.db")
+        store.set_runtime_gate(RuntimeState.ENABLED, updated_at=T0)
+        scheduler = AutomationScheduler(
+            store,
+            create_default_registry(),
+            # The production handler declares network capability. The E6
+            # fixture injects a deterministic local replay model and no
+            # network client, but the policy must still admit that handler.
+            PolicyConfig(allow_llm=True, allow_network=True),
+        )
+        events = []
+        source_by_document: dict[str, dict[str, object]] = {}
+        for index, (digest, (_data, ref)) in enumerate(indexed.items(), start=1):
+            source = source_by_digest[digest]
+            event = _event(reader, ref, event_id=f"event-e6-{profile}-{index}")
+            events.append(event)
+            source_by_document[ref.document_id] = source
+            store.put_event(event)
+            created = scheduler.materialize_event(event)
+            assert (created.jobs_created, created.dependencies_created) == (3, 3)
+
+        jobs = store.list_jobs()
+        assert len(jobs) == 15
+        job_ids = tuple(job.job_id for job in jobs)
+        config = SupervisorConfig(
+            db_path=automation_root / "automation.db",
+            log_dir=profile_root / "process-logs",
+            profile=profile,
+            runtime_factory_path=(
+                "support.narrative_runtime_worker_fixture:create_runtime"
+            ),
+            runtime_options_json=json.dumps(
+                {
+                    "project_root": str(profile_root),
+                    "trace_dir": str(profile_root / "trace"),
+                    "model_delay_seconds": 0.8,
+                },
+                sort_keys=True,
+            ),
+            compute_job_types=(
+                "source.narrative_select",
+                "source.narrative_verify",
+            ),
+            model_job_types=("source.narrative_summarize",),
+            lease_seconds=30.0,
+            heartbeat_interval_seconds=1.0,
+            idle_sleep_seconds=0.03,
+            maintenance_interval_seconds=0.05,
+            stop_grace_seconds=2.0,
+            child_log_max_bytes=65_536,
+        )
+
+        supervisor = AutomationSupervisor(config)
+        try:
+            supervisor.start()
+            parent_job_ids = tuple(
+                job.job_id
+                for job in jobs
+                if job.job_type != "source.narrative_verify"
+            )
+            supervisor.wait_for_terminal(parent_job_ids, timeout_seconds=300.0)
+            _wait_for_e6_verification_jobs(
+                supervisor, store, job_ids, timeout_seconds=120.0
+            )
+        finally:
+            supervisor.stop()
+
+        current_jobs = store.list_jobs()
+        assert len(current_jobs) == 15
+        assert sum(job.status is JobStatus.VERIFYING for job in current_jobs) == 5
+        assert sum(job.status is JobStatus.SUCCEEDED for job in current_jobs) == 10
+        assert len(store.list_outbox_entries(status="pending")) == 5
+
+        trace_dir = profile_root / "trace"
+        claimed = [
+            json.loads(path.read_text(encoding="utf-8"))
+            for path in trace_dir.glob("claimed--*.json")
+        ]
+        before_finish = [
+            json.loads(path.read_text(encoding="utf-8"))
+            for path in trace_dir.glob("before_finish--*.json")
+        ]
+        starts_by_job = {item["job_id"]: item for item in claimed}
+        finishes_by_job = {item["job_id"]: item for item in before_finish}
+        assert len(starts_by_job) == len(current_jobs)
+        assert len(finishes_by_job) == len(current_jobs)
+        intervals = []
+        for job in current_jobs:
+            start = starts_by_job[job.job_id]
+            finish = finishes_by_job[job.job_id]
+            assert finish["monotonic_ns"] > start["monotonic_ns"]
+            assert start["source_id"] == finish["source_id"] == job.subject_id
+            intervals.append(
+                (
+                    start["monotonic_ns"],
+                    finish["monotonic_ns"],
+                    start["source_id"],
+                    start["role"],
+                    job.job_type,
+                    job.job_id,
+                )
+            )
+
+        by_source_type = {
+            (item[2], item[4]): item for item in intervals
+        }
+        for source_id in source_by_document:
+            selected = by_source_type[(source_id, "source.narrative_select")]
+            summarized = by_source_type[(source_id, "source.narrative_summarize")]
+            verified = by_source_type[(source_id, "source.narrative_verify")]
+            assert summarized[0] >= selected[1]
+            assert verified[0] >= summarized[1]
+
+        if profile == "P1":
+            ordered = sorted(intervals)
+            assert all(
+                current[0] >= previous[1]
+                for previous, current in zip(ordered, ordered[1:])
+            )
+        else:
+            overlap = any(
+                left[3] != right[3]
+                and {left[3], right[3]} == {"compute", "model"}
+                and left[2] != right[2]
+                and max(left[0], right[0]) < min(left[1], right[1])
+                for index, left in enumerate(intervals)
+                for right in intervals[index + 1 :]
+            )
+            assert overlap, "P2 did not overlap compute and model work across sources"
+
+        call_records = [
+            json.loads(path.read_text(encoding="utf-8"))
+            for path in trace_dir.glob("model-call--*.json")
+        ]
+        assert len(call_records) == 4
+        expected_model_source_ids = {
+            ref.source_id
+            for digest, (_data, ref) in indexed.items()
+            if source_by_digest[digest]["sample_id"] != "SKIP"
+        }
+        assert {item["source_id"] for item in call_records} == expected_model_source_ids
+
+        artifact_store = NarrativeArtifactStore(
+            catalog.store,
+            LocalNarrativeObjectStore(catalog.config.catalog_dir),
+        )
+        dispatcher = NarrativeEffectDispatcher(store, artifact_store)
+        generation = store.read_runtime_gate().control_generation
+        dispatch_now = datetime.now(timezone.utc)
+        dispatch_at = dispatch_now.strftime("%Y-%m-%dT%H:%M:%SZ")
+        dispatch_lease_until = (dispatch_now + timedelta(minutes=2)).strftime(
+            "%Y-%m-%dT%H:%M:%SZ"
+        )
+        for _ in range(6):
+            receipt = dispatcher.dispatch_next(
+                worker_id=f"e6-projector-{profile.lower()}",
+                now=dispatch_at,
+                lease_until=dispatch_lease_until,
+                expected_generation=generation,
+            )
+            if receipt.status == "empty":
+                break
+            assert receipt.status == "visible", receipt
+        assert store.list_outbox_entries(status="pending") == ()
+        assert all(
+            job.status is JobStatus.SUCCEEDED for job in store.list_jobs()
+        )
+
+        bundle_reader = NarrativeBundleReader(artifact_store)
+        bundles_by_source_id = {}
+        real_object_bytes = 0
+        skip_size = None
+        for document_id, source in source_by_document.items():
+            source_job = next(
+                job
+                for job in current_jobs
+                if job.subject_id == document_id
+                and job.job_type == "source.narrative_select"
+            )
+            selection_result = NarrativeSelectResult.from_dict(
+                _attempt_result(store, source_job.job_id).result
+            )
+            assert selection_result.encoded_size <= 1_048_576
+            assert selection_result.source_metadata.language == source["language"]
+
+            summary_job = next(
+                job
+                for job in current_jobs
+                if job.subject_id == document_id
+                and job.job_type == "source.narrative_summarize"
+            )
+            summary_result = _attempt_result(store, summary_job.job_id)
+            summary_payload = json.loads(
+                json.dumps(summary_result.result, default=lambda value: dict(value))
+            )
+            assert len(canonical_json(summary_payload).encode("utf-8")) <= 65_536
+            assert summary_result.result["translate"] is False
+
+            verify_job = next(
+                job
+                for job in current_jobs
+                if job.subject_id == document_id
+                and job.job_type == "source.narrative_verify"
+            )
+            handler_result = _attempt_result(store, verify_job.job_id)
+            assert handler_result.outcome is HandlerOutcome.SUCCEEDED
+            expected_bundle = NarrativeBundle.from_dict(handler_result.result)
+            loaded = bundle_reader.read(
+                document_id=expected_bundle.source_ref.document_id,
+                source_id=expected_bundle.source_ref.source_id,
+                source_sha256=expected_bundle.source_ref.content_sha256,
+            )
+            assert loaded.bundle.to_dict() == expected_bundle.to_dict()
+            assert loaded.artifact.status == "visible"
+            assert loaded.bundle.encoded_size <= 1_310_720
+            bundles_by_source_id[expected_bundle.source_ref.source_id] = (
+                source,
+                loaded,
+            )
+
+            if source["sample_id"] == "SKIP":
+                skip_size = loaded.artifact.byte_size
+                assert expected_bundle.quality_status == "skipped_no_narrative"
+                assert expected_bundle.selection.coverage_complete is True
+                assert expected_bundle.evidence_spans == ()
+                assert expected_bundle.summary.status == "summary_not_needed"
+                assert loaded.artifact.byte_size <= 16_384
+                assert expected_bundle.source_ref.source_id not in {
+                    item["source_id"] for item in call_records
+                }
+                continue
+
+            sample_id = str(source["sample_id"])
+            selected_topics = {
+                topic
+                for span in expected_bundle.evidence_spans
+                for topic in span.structured_value.get("topics", ())
+            }
+            required_topics = {
+                "P01": {
+                    "new_business", "products_rd", "capacity_projects",
+                    "orders_customers", "core_business", "industry_dynamics",
+                },
+                "P04": {
+                    "new_business", "products_rd", "capacity_projects",
+                    "orders_customers", "core_business", "overseas",
+                },
+            }.get(sample_id, set())
+            assert required_topics <= selected_topics, (
+                sample_id, sorted(required_topics - selected_topics)
+            )
+            sample_caps = {"P01": 96, "P04": 160}
+            if sample_id in sample_caps:
+                assert len(expected_bundle.evidence_spans) <= sample_caps[sample_id]
+
+            expected_quality_status = (
+                "needs_review"
+                if expected_bundle.summary.draft is not None
+                and expected_bundle.summary.draft.status == "needs_review"
+                else "verified"
+            )
+            assert expected_bundle.quality_status == expected_quality_status
+            assert expected_bundle.evidence_spans
+            real_object_bytes += loaded.artifact.byte_size
+            raw = next(
+                data
+                for digest, (data, ref) in indexed.items()
+                if ref.source_id == expected_bundle.source_ref.source_id
+            )
+            if source["document_kind"] == "investor_call_transcript":
+                material = extract_transcript_material(raw, mime_type="text/plain")
+                verified_ids, failed_ids = verify_transcript_evidence_spans(
+                    material.text_utf8,
+                    source_id=expected_bundle.source_ref.source_id,
+                    source_sha256=expected_bundle.source_ref.content_sha256,
+                    evidence_spans=expected_bundle.evidence_spans,
+                    language=str(source["language"]),
+                )
+            else:
+                verified_ids, failed_ids = verify_pdf_evidence_spans_bytes(
+                    raw,
+                    source_id=expected_bundle.source_ref.source_id,
+                    source_sha256=expected_bundle.source_ref.content_sha256,
+                    evidence_spans=expected_bundle.evidence_spans,
+                )
+            assert set(verified_ids) == {
+                span.span_id for span in expected_bundle.evidence_spans
+            }
+            assert failed_ids == ()
+
+        assert skip_size is not None and skip_size <= 16_384
+        real_raw_bytes = sum(
+            len(data)
+            for sample_id, (_sample, data, _path) in copied_samples.items()
+        )
+        real_artifact_bytes_by_sample = {
+            str(source["sample_id"]): loaded.artifact.byte_size
+            for source, loaded in bundles_by_source_id.values()
+            if source["sample_id"] != "SKIP"
+        }
+        raw_bytes_by_sample = {
+            sample_id: len(data)
+            for sample_id, (_sample, data, _path) in copied_samples.items()
+        }
+        assert real_object_bytes / real_raw_bytes <= 0.03, (
+            f"real narrative artifact ratio={real_object_bytes}/{real_raw_bytes}; "
+            f"artifact_bytes={real_artifact_bytes_by_sample}; "
+            f"raw_bytes={raw_bytes_by_sample}"
+        )
+
+        visible = catalog.reader.fetchone(
+            """SELECT COUNT(*) AS count, COUNT(DISTINCT work_key) AS work_keys
+                 FROM narrative_artifact_versions WHERE status='visible'"""
+        )
+        assert visible is not None
+        assert int(visible["count"]) == 5
+        assert int(visible["work_keys"]) == 5
+        duplicated = catalog.reader.fetchone(
+            """SELECT COUNT(*) AS count FROM (
+                   SELECT work_key FROM narrative_artifact_versions
+                    WHERE status='visible' GROUP BY work_key HAVING COUNT(*) > 1
+               )"""
+        )
+        assert duplicated is not None and int(duplicated["count"]) == 0
+        object_paths = tuple(
+            (profile_root / "catalog" / "objects" / "sha256").rglob("*.json")
+        )
+        assert len(object_paths) == 5
+        assert sum(path.stat().st_size for path in object_paths) == sum(
+            int(loaded.artifact.byte_size)
+            for _source, loaded in bundles_by_source_id.values()
+        )
+        assert not tuple(
+            path
+            for path in profile_root.rglob("*")
+            if path.is_file() and path.name.lower() in {"normalized.md", "summary.md"}
+        )
+        artifact_count_after = catalog.reader.fetchone(
+            "SELECT COUNT(*) AS count FROM artifacts"
+        )
+        assert artifact_count_after is not None
+        assert int(artifact_count_after["count"]) == initial_artifact_count
+
+        for event in events:
+            replayed = scheduler.materialize_event(event)
+            assert (replayed.jobs_created, replayed.dependencies_created) == (0, 0)
+        visible_before_repeat = int(visible["count"])
+        supervisor = AutomationSupervisor(config)
+        try:
+            supervisor.start()
+            supervisor.wait_for_terminal(tuple(job.job_id for job in store.list_jobs()), timeout_seconds=10.0)
+        finally:
+            supervisor.stop()
+        visible_after_repeat = catalog.reader.fetchone(
+            "SELECT COUNT(*) AS count FROM narrative_artifact_versions WHERE status='visible'"
+        )
+        assert visible_after_repeat is not None
+        assert int(visible_after_repeat["count"]) == visible_before_repeat
+        assert len(tuple(trace_dir.glob("model-call--*.json"))) == 4
+        return {
+            "profile": profile,
+            "raw_bytes": real_raw_bytes,
+            "object_bytes": real_object_bytes,
+            "skip_bytes": skip_size,
+            "visible_count": int(visible["count"]),
+            "model_calls": len(call_records),
+            "intervals": intervals,
+        }
+    finally:
+        if catalog is not None:
+            catalog.close()
+
+
+def test_e6_real_samples_run_isolated_p1_p2_and_restore_test_root(
+    tmp_path: Path,
+) -> None:
+    if os.environ.get("COMPANY_WIKI_RUN_E6") != "1":
+        pytest.skip("set COMPANY_WIKI_RUN_E6=1 to run the real-sample E6 gate")
+
+    test_base = Path(
+        os.environ.get("COMPANY_WIKI_E6_TEST_BASE", str(tmp_path))
+    ).resolve()
+    assert test_base.is_dir(), "the dedicated E6 test root must already exist"
+    initial_test_root_entries = set(test_base.iterdir())
+
+    companies_root, sample_paths = _e6_source_paths()
+    transcript_root = sample_paths["T01"].parent
+    assert companies_root.is_dir()
+    assert transcript_root.is_dir()
+    production_hashes: dict[Path, str] = {}
+    copied_samples: dict[str, tuple[dict[str, object], bytes, Path]] = {}
+    input_files: dict[str, bytes] = {}
+    for sample in _E6_REAL_SAMPLES:
+        sample_id = str(sample["sample_id"])
+        source_path = sample_paths[sample_id]
+        assert source_path.is_file(), f"missing frozen E6 source: {source_path}"
+        data = source_path.read_bytes()
+        assert len(data) > 0
+        assert _sha(data) == sample["sha256"], f"frozen SHA changed for {sample_id}"
+        production_hashes[source_path] = _sha(data)
+        input_files[sample_id] = data
+
+    production_fingerprint = _e6_production_fingerprint()
+    run_root = test_base / f"m3-e2e-{uuid.uuid4().hex}"
+    assert run_root.parent.resolve() == test_base.resolve()
+    assert run_root.name.startswith("m3-e2e-")
+    assert not run_root.exists()
+    run_root.mkdir()
+    try:
+        input_root = run_root / "input"
+        input_root.mkdir()
+        for sample in _E6_REAL_SAMPLES:
+            sample_id = str(sample["sample_id"])
+            copied_path = input_root / sample_id / str(sample["name"])
+            copied_path.parent.mkdir(parents=True)
+            copied_path.write_bytes(input_files[sample_id])
+            copied = copied_path.read_bytes()
+            assert _sha(copied) == sample["sha256"]
+            copied_samples[sample_id] = (sample, copied, copied_path)
+
+        profile_results = {
+            profile: _e6_run_profile(
+                run_root,
+                profile=profile,
+                copied_samples=copied_samples,
+            )
+            for profile in ("P1", "P2")
+        }
+        assert profile_results["P1"]["visible_count"] == 5
+        assert profile_results["P2"]["visible_count"] == 5
+        assert profile_results["P1"]["model_calls"] == 4
+        assert profile_results["P2"]["model_calls"] == 4
+        assert profile_results["P1"]["object_bytes"] / profile_results["P1"]["raw_bytes"] <= 0.03
+        assert profile_results["P2"]["object_bytes"] / profile_results["P2"]["raw_bytes"] <= 0.03
+    finally:
+        if run_root.exists():
+            assert run_root.resolve().parent == test_base.resolve()
+            assert run_root.name.startswith("m3-e2e-")
+            shutil.rmtree(run_root)
+        assert not run_root.exists()
+        assert {
+            path: _sha(path.read_bytes()) for path in production_hashes
+        } == production_hashes
+        assert _e6_production_fingerprint() == production_fingerprint
+        assert set(test_base.iterdir()) == initial_test_root_entries
+
+    assert not run_root.exists()

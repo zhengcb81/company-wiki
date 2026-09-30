@@ -6,8 +6,8 @@ from dataclasses import dataclass
 import re
 
 
-DEFAULT_SELECTION_LIMIT = 160
-PROSPECTUS_SELECTION_LIMIT = 320
+DEFAULT_SELECTION_LIMIT = 96
+PROSPECTUS_SELECTION_LIMIT = 160
 
 _DOCUMENT_KIND_PATTERNS = (
     (r"可转换公司债券|可转债", "convertible_bond_prospectus"),
