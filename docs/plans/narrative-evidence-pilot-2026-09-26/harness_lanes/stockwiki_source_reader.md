@@ -1,5 +1,7 @@
 # StockWiki 独立并行线：SourceExport v2 来源 reader
 
+> **状态：实现已完成于 `codex/source-export-v2-reader@0b40683`，尚未并入本地 `master`。**不要把本卡作为新的实现任务重复派发；当前可派发的是[已完成 StockWiki lanes 主线整合卡](stockwiki_mainline_integration.md)。跨仓 G-B 真实 producer/consumer E2E 仍待总指挥运行。
+
 > 可将**本文件单独交给一个新的 StockWiki harness**。总指挥负责跨仓合同和 G-B 汇合测试。此线仅写 `C:\Users\郑曾波\Projects\StockWiki` 的一个隔离工作树及该仓自己的测试/PWF；company-wiki、invest-quick-scan、revenue-forecast、filing-fetch、earnings-transcripts 都只读。StockWiki 同一时间只能有这一位产品代码写入者；若 W02/W03 已由另一个 StockWiki harness 开工，先由总指挥重新分配，不能并发改同仓。
 
 ## 0. 开工事实、目标与边界

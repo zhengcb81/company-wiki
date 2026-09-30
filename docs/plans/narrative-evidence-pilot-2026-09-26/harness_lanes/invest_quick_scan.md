@@ -2,7 +2,7 @@
 
 > **交给已在运行的 invest-quick-scan 项目 owner，勿另开同仓写入线。**唯一写入目录：`C:\Users\郑曾波\Projects\invest-quick-scan` 的指定集成 worktree；StockWiki/CWP/RF/FF/ET 均只读。IQS 负责自己的 issuer/security/listing 与 AnalysisSubject 合同，不读取或管理 CWP 原始财报，也不写 StockWiki 研究状态。
 
-**2026-09-29 交接增量：**用户确认 IQS 已由另一个项目运行；本卡是发给该**现有 owner**的接口与后续任务清单，不能据此新建第二个同仓 harness。StockWiki W01 本地 `master@5bb68f6` 已独立验收（QuickScanStore 18/18、定向 Ruff 通过），但 W02/W03 的真实身份 snapshot serializer、四态 mapping DTO 和 IQS 公开验证 CLI 均未交付，G2b 仍 pending。IQS 可以先独立完成第 1–4 步，收到 StockWiki 真实 golden 后再做第 5 步；不要为旧递归 receipt 阻断 StockWiki 的已经通过的 W01 工程结果。CWP 基础 SourceRef/SourceExport golden 在独立代码分支 `822a43a`，身份合同只引用其逻辑 ID/hash，不需读 CWP 原件。
+**2026-09-29 交接增量：**用户报告 IQS 施工卡的仓内步骤 1–4 已收尾并写入收尾报告；第 5 步 G2b 只等 StockWiki 提供真实身份 DTO/golden。此状态尚未由本仓只读核对 IQS 收尾报告，因此跨仓验收时仍需核实其 commit、公开 CLI/schema 版本与报告路径。不得要求 IQS 重做步骤 1–4，也不得新开同仓写入 harness；StockWiki W02/W03 是当前唯一 producer 前置，须由真实身份数据库/serializer 产生 golden，不能伪造。IQS 收到 golden 后只执行第 5 步的真实跨仓验证，包含成功 golden 和身份/期间/来源绑定反例；G2b 在此之前保持 pending。StockWiki W01 本地 `master@5bb68f6` 已独立验收（QuickScanStore 18/18、定向 Ruff 通过），不要为旧递归 receipt 阻断该工程结果。CWP 基础 SourceRef/SourceExport golden 在独立代码分支 `822a43a`，身份合同只引用其逻辑 ID/hash，不需读 CWP 原件。
 
 开工输入包：本卡、S0a observed 接口表、本仓 2.2 schema/合同夹具、活动证据清单；StockWiki 真实 identity snapshot/mapping golden 尚未产时标 pending，本仓可先做 schema/校验 CLI 和门禁清理。
 
@@ -13,6 +13,8 @@
 IQS 向 StockWiki 交付：版本化 issuer/security/listing、AnalysisSubject、source-binding 的**schema、参考校验器、合同夹具和公开 JSON 校验 CLI**。当前 `scripts/contract_validation.py` 只有 Python 函数，没有该 CLI，须新建薄入口，例如 `scripts/identity_contract_cli.py --input <snapshot.json> --schema-version 2.2.0`：stdout 一行 JSON `status=valid|invalid`、结构化 error code/JSON pointer，valid 退出 0、内容无效退出 2、未知版本退出 3；输入文件只读、文件大小有界。StockWiki 运行时按 schema 本地验，总指挥在 G2b 用本 CLI 交叉验，不要求 StockWiki 导入本仓内部模块。按本仓 `docs/implementation/cross-project-delivery.md`，StockWiki 是身份库/名单的唯一生产写入者；真实 identity snapshot golden 必须由 StockWiki 的 DB/serializer 生成，再由 IQS 校验。四态跨仓映射 DTO **尚未存在**，由 StockWiki 定义/生产 status、issuer/security/listing、as-of、来源绑定、错误码；其中 JSON `null` 表示未请求/未尝试，`unknown` 表示已尝试但无精确匹配，`ambiguous` 是多候选，`mapped` 是唯一精确绑定。IQS 补校验规则和各态反例，不能把它算作现成 identity 2.2 功能。CWP SourceRef/SourceExport 提供来源 ID/hash，不替 StockWiki 判定证券和上市地。
 
 ## 本仓实施顺序
+
+**当前状态（用户于 2026-09-29 报告）：**第 1–4 步已完成；仅第 5 步 G2b 等 StockWiki 的真实身份 DTO/golden。下列步骤 1–4 是交付范围和已完成工作的记录，不是要求 IQS 再执行一遍。收到 producer golden 后，先核实报告/commit/CLI 版本，再跑 G2b 并更新状态。
 
 1. 按 PWF/当前 Git 分类本仓活动文件：有效 schema/代码/测试、证据、一次性运行日志与已被 main 覆盖的副本分别列清；有效内容先进入本仓分支，不批量 reset/clean，不删被研究记录引用的证据。
 2. 冻结 identity package 2.2 的现行 schema/参考校验器/合同夹具，补 issuer/security/listing/AnalysisSubject/来源绑定错配测试；新建上述公开 JSON 校验 CLI 并给正反例、退出码 golden。把版本、字段、错误和夹具 SHA 交总指挥。StockWiki producer 实际产生的 snapshot golden 返回后，本仓用公开 CLI 校验并记录兼容结果。四态 mapping DTO 由 StockWiki 新建后，本仓按其版本补校验夹具；不得自行编造 StockWiki 的生产者正例。

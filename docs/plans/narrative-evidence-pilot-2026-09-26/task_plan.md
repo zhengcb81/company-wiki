@@ -8,6 +8,8 @@
 
 ## Next Step
 
+> **2026-09-30 更新：**继续 CWP E5/E6 受影响实现与测试；StockWiki 的 SourceExport reader 和 W02/W03 不重复开发，可将[StockWiki lanes 主线整合卡](harness_lanes/stockwiki_mainline_integration.md)交给独立 harness。该线只写 StockWiki，合并已完成的两个分支并运行一次全套门；不碰 CWP E5/E6。之后由总指挥运行真实 CWP→StockWiki G-B；G2b 暂因 StockWiki owner receipt/market registry 实体未提供而保持 pending。RF/FF G-A 及 FMP 日期/身份/JSON 跨层合同按各自 owner 当前状态汇合。Worker 保持 paused，原始文档不清理。
+
 > **2026-09-28 权限/审查简化（优先于下方所有历史段落）：**不设 private/public、逐文档/逐期/逐 job 授权、review receipt、独立 reviewer 或人工批次审批。用户已授权范围内，自动化测试和 source/hash/lineage/预算断言决定能否继续；原始文档全部保留，只清理可重建且无引用的派生文件。下方 2026-09-27 transcript permission 细节和历史 G 门槛只作事实记录，不是待实施指令。
 
 **2026-09-28 跨仓总编排（覆盖本节以下较早的“唯一下一步”与 Current Phase 快照）：**先按[跨仓主线整合与交付总计划](cross_repo_mainline_and_delivery_plan_2026-09-28.md)固定 **S0/G-0 → S2/S3/S4/S4b/G-A → S5/G-B** 的来源抽象与真实消费者门；IQS C01→StockWiki W01/W02/W03/G2b 独立推进，CWP N0/N1 可并行，随后 N2/N3/G-C、派生 G-D。RF `fcap` 已并入远端 main，不再重复合并；真正待并的是 RF reader、FF 两个重叠 WIP、ET 接口和 StockWiki 的新 reader。大节点签收前不切默认路由、不启动生产 Worker、不删除唯一原文。下方长篇 Phase 1–23 保留历史与阶段证据，不再自行定义施工顺序。
@@ -337,12 +339,21 @@ company-wiki 只负责来源、解析质量、证据定位、检索和来源摘�
 - [x] ET S0b 首批真实 serializer/CLI golden：本地 `main@4924d57`，FMP `/2` 26 字段与 Motley 24 字段分别冻结；offline 118 passed、合并后 41 passed、golden 10 matched。FMP 真实 200 权益仍未证实；CWP importer 目前不兼容 FMP 26 字段/JSON MIME/query URL，先写 consumer RED，再接 FF。
 - [x] CWP 基础 S0b golden 与 G-0 增量：`3dd41e1` 已从真实 CLI 冻结 SourceRef/文本 span/SourceExport 正反 JSON 及 Windows LF（5 CLI tests passed）；`58e2f21` 增真实 P06 四根旧引用迁移、首选同尺寸损坏 fallback、全损坏具名拒绝，以及 P04 429 页/11.2 MB 流式 SHA 内存门。完整 G-0 指定批 **80 passed、0 skipped**，所有独立测试根已清。PDF span 当前合同不支持，真实 PDF locator 留 E5/G-C；G-0 仍需确认原生多根/实际消费者边界与剩余 hold。
 - [x] RF 本地 main `8b11b0ce` 已整合严格 evidence SHA 与 review 诊断，197/197 closure exit 0；reader 旧 WIP `3b00b938` 保全但因人工 review 旧语义不直接 cherry-pick。用户随后明确授权自动发布门，RF 本地 main `88b3bda3` 已将人工 `issue-auth` 改为验证当前 HEAD/证据/catalog/容量/回退的自动门，13 个定向测试通过；新 opt-in reader 已基于 CWP golden 做 7 项预期 RED，正在同一 RF owner 实施，FF envelope 消费待汇合。
-- [x] StockWiki W01 已由用户 harness 在本地 `master@5bb68f6` 完成；总指挥只读独立验收 `tests/test_quick_scan_store.py` **18 passed**、定向 Ruff 通过，临时 SQLite 根清理，已跟踪工作树干净。W02/W03 的真实身份 snapshot/四态 DTO 和 G2b 仍 pending。W01 已交接，基础 reader 可由新的唯一 StockWiki harness 按[独立施工卡](harness_lanes/stockwiki_source_reader.md)执行；同一时间仍只允许一个 StockWiki 写入者。
+- [x] StockWiki W01 与 SourceExport v2 reader 已由用户报告完成；reader 交接收据仍待总指挥记入 G-B。engineering gate simplification 已在 `master@dd8912f` 完成并通过审查（PWF 记录 516 项全套通过；本次独立聚焦测试 2 passed）。StockWiki `master` 工作树干净；已完成 reader worktree `0b40683` 目前干净但未并入 master。W02/W03 的真实 identity snapshot/四态 DTO 和 G2b 仍 pending，现已准备独立[身份快照施工卡](harness_lanes/stockwiki_identity_snapshot.md)；开工使用当前 master 的另一独立 worktree，先确认 reader owner 停写，不改写旧 reader 分支。IQS 仍由现有 owner 实施，本任务只读接口。
 - [ ] 用户确认 invest-quick-scan 正由其他项目运行；本任务仅只读对接其 2.2 合同，不再建议或派发第二个 IQS 写入 harness。等该 owner 交真实 schema/公开 CLI 时汇合；其约 500 项活动工作树状态不由本任务清理。
 - [ ] 按 [总指挥计划](parallel_harness_orchestration_2026-09-29.md)推进 G-A/G-B/G2b/G-C/G-D，汇合时只验受影响合同与大节点真实 E2E，Worker 在 G-C 自动门前维持 paused，原始下载文档始终保留。
 
-**Status:** in progress；S0a observed、CWP P0、基础 S0b、G-0 指定测试批及 StockWiki W01 已完成。G-0 的 PDF locator 明确移至 E5/G-C；RF 新 reader、StockWiki 新 reader、FMP 日期语义与跨仓门仍在进行。
+**Status:** in progress；S0a observed、CWP P0、基础 S0b、G-0 指定测试批及 StockWiki W01 已完成；StockWiki SourceExport v2 reader 与 W02/W03 identity snapshot/mapping 均有已完成提交但尚未并入当前 master；reader 的 G-B 跨仓真实 producer E2E 与 G2b owner receipt/market registry 均待处理。G-0 的 PDF locator 明确移至 E5/G-C；RF reader、FMP 日期语义与跨仓门仍待汇合。
+
+## Phase 27：StockWiki 已完成 lanes 主线整合卡（2026-09-30）
+
+- [x] 只读核对 StockWiki 当前 refs/worktrees：本地 `master@8590b0e`；SourceExport v2 reader `codex/source-export-v2-reader@0b40683`、W02/W03 identity snapshot/mapping `codex/identity-snapshot-w02-w03@ae11135` 均已有提交且 worktree 干净；两条功能线改动文件无重叠，尚未进入 master。
+- [x] 核对最新 IQS G2b handoff：StockWiki serializer 已产出真实 snapshot，但 IQS 正例还需要 owner identity receipt 和 market registry 实体记录；当前 snapshot 仅含 scope-attestation ID/source bindings，故不能将本地实现完成误记为 G2b 通过。
+- [x] 新建[StockWiki lanes 主线整合施工卡](harness_lanes/stockwiki_mainline_integration.md)，限制为 StockWiki 单仓、新集成 worktree、两个既有完成分支正常并线、受影响回归和一次 `check_all.sh`；要求保留 `.claude/` 与两个源 worktree，不伪造 G2b 数据。
+- [ ] 由独立 StockWiki harness 执行主线整合和测试；总指挥后续只读核对结果。G-B 真实 CWP producer E2E 与 G2b owner-context 缺口另行保持 pending。
+
+**Status:** plan ready for handoff; no StockWiki product files, CWP E5/E6 code, or production source/catalog data were changed in this phase.
 
 ## Next Step
 
-先将已完成的 CWP verified-open 成功/错误 golden `7760b09` 和 FF/RF consumer 提交汇合，运行 G-A 定向跨仓 E2E；同时将 [StockWiki 基础 reader 卡](harness_lanes/stockwiki_source_reader.md)交给唯一 StockWiki owner，准备 G-B。G-0 的 PDF locator 留 E5/G-C；FMP canonical 入库仍待日期/身份/JSON 跨层合同。Worker 保持 paused，原件不清理。
+继续 CWP E5/E6 受影响实现与测试；StockWiki 的 SourceExport reader 和 W02/W03 不重复开发，可将[StockWiki lanes 主线整合卡](harness_lanes/stockwiki_mainline_integration.md)交给独立 harness。该线只写 StockWiki，合并已完成的两个分支并运行一次全套门；不碰 CWP E5/E6。之后由总指挥运行真实 CWP→StockWiki G-B；G2b 暂因 StockWiki owner receipt/market registry 实体未提供而保持 pending。RF/FF G-A 及 FMP 日期/身份/JSON 跨层合同按各自 owner 当前状态汇合。Worker 保持 paused，原始文档不清理。

@@ -415,6 +415,7 @@ Supervisor 不使用内存 queue 保存唯一任务事实；进程退出后以 D
 - 分发器只 claim `narrative_bundle.publish`，校验 bundle SHA 与 effect `intended_after_hash`，把 effect 交给 projector；当前没有 outbox 生产分发器，这一层必须实现并供 E7 调用。
 - catalog `prepared` 登记后、outbox ACK 前崩溃：lease 重试发现同 work_key/hash，完成 ACK，不生成第二行或重跑模型。
 - outbox ACK 后、catalog activate 前崩溃：恢复器用 `effect_id` 找到 `prepared` 行，发现 AUTO effect 已 verified 后幂等 activate。
+- pause 在 ACK 与 activate 之间成功：旧 generation 不得把 `prepared` 变成 `visible`；恢复器在 gate 仍 paused 时保持隐藏，下一次明确 enable 后才恢复。
 - 同 work_key 不同 hash：冲突并 fail closed。
 - pause 在 compute 后、project 前发生：旧 generation 不产生 visible 行。
 - source retired、primary source/hash 或 read policy 改变：project 拒绝。
@@ -423,15 +424,15 @@ Supervisor 不使用内存 queue 保存唯一任务事实；进程退出后以 D
 
 **实现文件**
 
-- 新 `src/company_wiki/automation/narrative_outbox.py`（窄 effect dispatcher、lease/retry、prepared reconciliation）
+- 新 `src/company_wiki/automation/narrative_projection.py`（窄 effect dispatcher、pathless reader、lease/retry、prepared reconciliation）
 - `src/company_wiki/automation/store.py`（按 effect 读取已完成 handler result；claim 支持 effect type 过滤）
 - 新 `src/company_wiki/source_catalog/narrative_artifact_store.py`
-- 新 `src/company_wiki/automation/narrative_projector.py`（唯一 narrative catalog writer）
+- `src/company_wiki/source_catalog/store.py`（幂等 additive DDL）
 - 新 `src/company_wiki/automation/narrative_artifact_reader.py`（typed/pathless reader）
 - `src/company_wiki/source_catalog/store.py`（前述窄表与索引、additive DDL）
 - 不修改旧 `artifact_dag.py`/generic `artifacts`：narrative bundle 由 AUTO DAG 的 `source.narrative_verify` effect 发布；混入旧 normalized/sections DAG 会制造第二套职责和迁移面。
 - `src/company_wiki/automation/narrative_verify.py` 仅在 RED 证明 payload 绑定不足时改；解析/LLM 不得进入 projector。
-- 新 `tests/contract/test_narrative_artifact_layering.py`、`tests/unit/test_narrative_artifact_store.py`、`tests/unit/test_narrative_projector.py` 与 `tests/integration/test_narrative_projector_recovery.py`
+- 新 `tests/contract/test_narrative_artifact_layering.py`、`tests/unit/test_narrative_artifact_store.py`、`tests/unit/test_narrative_outbox_store.py` 与 `tests/integration/test_narrative_runtime_e2e.py`。最后一项使用真实隔离 PDF/TXT 运行 handler/outbox/reader，并覆盖 ACK 崩溃恢复与 pause-generation 竞态。
 
 分层合同：`source_catalog/narrative_artifact_store.py` 只接 canonical bytes、SHA 和 primitive version metadata，负责 object adapter 与窄 SQL repository；它不得 import `automation`、Effect 或 NarrativeBundle。automation projector/outbox/reader 作为上层，负责 strict NarrativeBundle/effect 校验并调用该 repository。storage adapter 以外不读取/拼接 object 物理路径。
 
@@ -460,25 +461,27 @@ C:\cwt\m3-e2e-<nonce>\
   receipts\           # 测试收据
 ```
 
-首个真实 cohort 复用已审样本，不下载新文件：
+首个 E6 cohort 由**四份真实样本 + 一个合成低价值控制样本**组成，不下载新文件：
 
 - P01 年报；
 - P04 招股说明书；
 - P07 投资者关系活动记录；
 - T01 或等价已登记 transcript TXT。
+- 合成 `投资者关系管理办法（2025年8月）.pdf`：只验证已知 `ir_policy` 路由完整扫描后生成小型 skip，不计入四份真实样本的空间比率。
 
-执行链：临时 catalog register → materialize 4 个 DAG → P1/P2 worker → select → fake/replay summarize → locator verify → outbox project → narrative reader → 再次 materialize/运行应零新增逻辑 artifact。
+P1 和 P2 各自使用独立 automation DB、catalog 和对象目录，防止上一 profile 的 visible artifact 污染下一组测量；每个 profile 都拷贝相同四份真实原件与同一 skip 控制样本。执行链：临时 catalog register → materialize 5 个 DAG → P1/P2 worker → select → deterministic replay summarize（skip 不调用模型）→ locator verify → outbox project → pathless narrative reader → 再次 materialize/运行应零新增逻辑 artifact。
 
 必须断言：
 
-1. 四份 copied raw 的 before/after SHA-256 完全相同。
+1. 每个 profile 下四份 copied raw 与 skip 控制文件的 before/after SHA-256 完全相同；每份复制件先与 frozen production sample SHA 比对。
 2. 原 production raw、catalog、control JSON、runtime 均未变化。
-3. 同 source 的 job 按 DAG 顺序；至少两个不同 source 在 P2 有重叠执行区间。
+3. 五个 source 的 job 按 DAG 依赖顺序；至少两个不同 source 在 P2 有重叠执行区间；P1 单 mixed worker 的作业区间无重叠。
 4. 最终每个 work_key 的 visible count `<=1`。
 5. P01/P04/P07/T01 冻结 anchor 可从 bundle locator 回放。
-6. 低价值 fixture 只生成小型 skip bundle，不含全文。
+6. 低价值 `ir_policy` fixture 产生 `skipped_no_narrative`、完整 coverage、零 evidence、零模型调用；skip bundle `<=16 KiB` 且不含全文。
 7. 没有新增旧 `normalized.md`、`summary.md` 或全量 evidence_spans。
-8. 测试结束先验证 root 位于 `C:\cwt` 且名称以 `m3-e2e-` 开头，再递归删除；最终同前缀目录数为 0。
+8. 分别对 P1、P2 四份真实样本计算最终对象总字节 / 原始字节，均 `<=3%`；skip bundle 单独按 `<=16 KiB` 验收。
+9. 测试结束先验证唯一 root 位于 `C:\cwt` 且名称以 `m3-e2e-` 开头，再只删除该精确 root；确认该 root 不存在，且本次创建的 `m3-e2e-<nonce>` 路径恢复原状。
 
 ### E7：恢复矩阵、吞吐与空间收据
 

@@ -777,3 +777,38 @@
 - StockWiki W01 由独立只读验收确认 `master@5bb68f6`、18/18 SQLite 测试、定向 Ruff 绿；W02/W03 缺 IQS 正式 CLI/真实 identity snapshot，基础来源 reader 不依赖这些输入。用户需要新的其它项目并行线，已写 [独立 reader 施工卡](harness_lanes/stockwiki_source_reader.md)：唯一 StockWiki 写入者、opt-in SourceExport v2/verified-open、先 RED、文本真实 locator 与 P06 PDF manifest E2E、隔离测试根恢复、G-B 总指挥跨仓验收；不分配 IQS、selected/full sync 或其它仓写权限。
 - CWP producer `verified_open_bad_sha.json` 的 Windows 工作树曾是 CRLF 86 字节、README 声称其 SHA，但 Git 文本归一化后的提交 blob 是 LF 85 字节。已将 CLI 合同测试改为只归一化错误行换行并将 README 钉到 LF SHA `daed1b192dab90daf50bc2c9a3dc92695009944f51457177374cc77e0d53a0b5`；真实 producer CLI 测试 **6 passed**，Ruff/config doctor/host hook 绿，提交 `codex/narrative-gates-integration@7760b09`。成功 receipt/SourceRef 原有 SHA 不变。StockWiki 新 harness 必须读取该 HEAD 的 README，RF/FF consumer 复制的负例 fixture 要对齐新 LF pin。
 - FF owner 已交本地干净 HEAD `5532ce0`，全套 **433 passed, 13 skipped, 78 subtests**，隔离 FF CLI→CWP E2E **15 passed**；FMP canonical admission 和 CWP RequestPlan 尚 hold。RF release-readiness 自动门按用户具体授权完成 `88b3bda3`，定向 13 passed；RF reader 继续独立推进。总指挥尚未把各仓局部绿灯当 G-A/G-B 正式验收。
+
+## Session: StockWiki 下一条独立线与 E5 恢复验证（2026-09-29）
+
+- 用户指出 `stockwiki_source_reader.md` 是刚完成的 SourceExport v2 任务对应施工卡。确认重复推荐属实，已从“新任务”候选中撤下；用户报告该 reader 已完成，G-B 总指挥验收仍等原 owner 的 commit/测试交接，未把用户报告替代为本任务自己的测试收据。
+- 检查 StockWiki 当前 `AGENTS.md` 与 `scripts/check_all.sh`：全量 `pytest -q` 先单独运行一次，随后 `coverage run -m pytest -q` 又跑第二次；总 coverage 73%、`stockwiki/ui.py` 40%、Ruff、`validate-framework` 及真实 workspace/data-contract 测试仍有价值。新增[StockWiki 工程测试门简化施工卡](harness_lanes/stockwiki_engineering_gate_simplification.md)，范围仅 StockWiki AGENTS、全量验证脚本和至多一个脚本行为测试；明确保留质量阈值及 `review_workflow.py` accepted/rejected 研究状态。已在[并行总表](parallel_harness_orchestration_2026-09-29.md)引用。此卡只在 reader owner 停写/交接后派发，以满足每仓单一写入者。
+- 本轮没有修改 StockWiki 产品仓、RF/IQS/FF/ET；没有启动新的 harness。计划文档 `git diff --check` 通过，Git 提示主计划现有 LF 会在 Windows 下转为 CRLF。
+- CWP E5 专用 worktree 的受影响回归包含 automation store/atomicity/worker、outbox 重领和 fencing、artifact store、layering contract 与真实 narrative runtime E2E：**84 passed in 10.08s**。此批用例检查正常 ACK 后仍能重建原始 effect result，及 ACK→activate 中断后的 prepared-artifact reconcile；Worker 仍 paused，测试不接触 production raw/catalog。E5 仍未完成，继续实现/验收前不启动生产 Worker。
+
+## Session: E5 outbox projection 与 pause fencing（2026-09-29）
+
+- 在 CWP E5 专用 worktree 把 `narrative_artifact_versions` 作为 additive 表实现，object adapter 以 content SHA 写不可覆盖的 JSON bundle；`prepare` 先验来源仍为当前 active primary、在 catalog lock 外落对象，再短事务登记 `prepared`。同 work key/hash 重试复用既有对象；不一致内容冲突。automation 层 dispatcher 只接 `narrative_bundle.publish`，按 effect id 精确恢复成功 attempt result、重算 bundle hash、ACK 后激活；reader 只返回 visible、当前 source SHA 匹配且 bytes/schema 均重验的 bundle，不泄漏物理 object path。
+- 原 E5 E2E 首先暴露 ACK 完成后 `result_for_effect()` 与当前已转为 VERIFIED 的 effect 比较会误拒；增加回归并修复为比对不可变 effect 身份，同时核对当前 VERIFIED 状态/hash。
+- 对照冻结 E5 规格又发现 ACK 与 catalog activate 之间缺少 pause 的线性化边界。先加入真实隔离 PDF/TXT runtime E2E 作为 RED：暂停成功后 event order 为 `paused → visible`，证明原实现会在 pause 返回后继续使 bundle 可见。实现层在 activate/reconcile 共用 `CatalogOperationLock`，先重验 enabled gate/generation 和 AUTO effect verified/hash；pause 获胜时 artifact 留在 prepared、paused reconciliation 不激活，恢复 enabled 后才激活。RED 已转绿，E2E 也继续验证正常 dispatch、ACK 后模拟崩溃恢复与 pathless read。
+- 最终受影响批包括 automation store/atomic/worker、store race、narrative runtime E2E、outbox/artifact store 和 layering contract：**84 passed in 7.34s**；触及 Python 文件 Ruff 全绿，`git diff --check` 通过。一次中间 RED 因测试把 domain `Event` 名与 threading event 冲突，改用 `ThreadEvent` 后得到目标竞态 RED；无产品变更基线未被覆盖。
+- 代码仍在专用 worktree 未提交；未接入生产 runtime composition、未运行完整 E6/E7 故障/吞吐矩阵、未启用 Worker。按 spec 将实际模块/测试名同步到 E5 施工卡，下一步继续验证运行时 dispatcher 接线及 E6/E7 真实数据/恢复矩阵；旧 raw/catalog 未触碰。
+## 2026-09-29 — E6 continuation: live worktree and cross-project boundary recheck
+
+- Re-read live state before resuming the next implementation phase. CWP planning root is `master@b9f38d9` with active planning edits; the dedicated code worktree is `codex/narrative-gates-integration@5bcb337` and still contains the E5 automation/catalog changes plus the new E6 spawn-safe runtime fixture. No production raw/catalog state was changed.
+- Fresh read-only RF check: `fcap@ee0a82bf` remains the live head and has substantial uncommitted planning, code, test, and generated execution-run state. No RF files were changed. The current E6 work exercises only the CWP Worker and isolated CWP catalog; RF selected-package consumption remains a later cross-project gate and is not being inferred from this local E2E.
+- E5's most recent affected regression receipt remains **84 passed** after pause/activation fencing; E5 is still uncommitted and not connected to production composition. Production Worker remains paused.
+- Next action: finish the isolated P01/P04/P07/T01 plus low-value skip E6 runtime test, exercising actual P1 and P2 supervisor processes; record raw hashes, locator replay, outbox/pathless read, idempotent rerun, concurrency/order and ≤3% object/raw byte ratio. Keep all writes under a fresh `C:\cwt\m3-e2e-<nonce>` test root and remove only that exact root afterward.
+
+## 2026-09-29 — E6 input freeze and test-shape correction
+
+- Corrected the E6 specification to make the executable cohort explicit: four frozen real sources plus one synthetic `ir_policy` control, run in separate P1 and P2 catalog/AUTO roots. The real-source storage ratio is measured independently from the skip bundle.
+- Rehashed each live sample before the test: P01 `d64c4108…` / 9,165,875 B; P04 `19cdb41e…` / 11,211,796 B; P07 `221467c1…` / 153,851 B; T01 `4ac3b4f0…` / 66,324 B. `C:\cwt` exists and has no current `m3-e2e-*` root.
+- Confirmed existing route test/implementation contract for the exact low-value IR policy title; it requires complete PDF coverage to skip and has no selected spans. E6 will additionally assert skip produces no model call.
+- No production data was read through the production catalog or written. Next: implement the opt-in E6 real-sample supervisor test and change the lifecycle trace from `attempt_finished` to `before_finish`.
+
+## 2026-09-30 — StockWiki lanes integration plan ready for handoff
+
+- Rechecked StockWiki refs/worktrees read-only. Local `master@8590b0e` does not contain the completed reader `codex/source-export-v2-reader@0b40683` or identity snapshot/mapping `codex/identity-snapshot-w02-w03@ae11135`; both source worktrees are clean and their changed-file lists do not overlap. StockWiki root contains untracked `.claude/`, which the new card explicitly preserves.
+- Read the IQS G2b handoff and StockWiki serializer/store code. W02/W03 produces a real snapshot with scope-attestation IDs and source bindings, but the owner identity-receipt and market-registry records required by IQS are not available from the current persistent model/public snapshot. G2b must remain pending; do not synthesize trust records.
+- Created [StockWiki mainline integration card](harness_lanes/stockwiki_mainline_integration.md): one StockWiki-only integration worktree, normal merges of the two completed branches, focused reader/identity/QuickScanStore regression, one `bash scripts/check_all.sh` major gate, preserve source worktrees and unrelated files. Updated lane status pointers, orchestration table and this plan's next step so completed implementation cards are not dispatched again.
+- This session changed only company-wiki planning documents. No StockWiki product code, CWP E5/E6 code, IQS files, raw documents, or production derived data were changed; no product tests were run.
