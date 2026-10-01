@@ -1631,6 +1631,31 @@ def _merge_columns(
     return merged, fields, conflicted
 
 
+def _stored_column_declarations(
+    *,
+    existing_inner: dict[str, Any],
+    stored_columns: dict[str, Any],
+    previous_fields: dict[str, Any],
+) -> dict[str, bool]:
+    """Recover declaration status from provenance before container fallback."""
+    container_declared = _declared_columns(existing_inner, stored_columns)
+    stored_declared: dict[str, bool] = {}
+    for column in _DECLARING_KEYS:
+        record = previous_fields.get(column)
+        sources = (
+            [source for source in (record.get("sources") or [])
+             if isinstance(source, dict)]
+            if isinstance(record, dict)
+            else []
+        )
+        stored_declared[column] = (
+            any(bool(source.get("declared")) for source in sources)
+            if sources
+            else container_declared.get(column, False)
+        )
+    return stored_declared
+
+
 def _merge_document_row(
     connection: Any,
     *,
@@ -1808,20 +1833,13 @@ def _merge_document_row(
             "source_status": existing_document["source_status"],
             "primary_source_id": existing_document["primary_source_id"],
         }
-        container_declared = _declared_columns(existing_inner, stored_columns)
-        stored_declared: dict[str, bool] = {}
-        for column in _DECLARING_KEYS:
-            record = previous_fields.get(column)
-            bound: bool | None = None
-            if isinstance(record, dict):
-                sources = [s for s in (record.get("sources") or []) if isinstance(s, dict)]
-                if sources:
-                    bound = any(bool(source.get("declared")) for source in sources)
-            # A recorded declaration is authoritative; only a row written before
-            # B05 falls back to reading the stored container (B-VR05-02).
-            stored_declared[column] = (
-                container_declared.get(column, False) if bound is None else bound
-            )
+        # A recorded declaration is authoritative; only a row written before
+        # B05 falls back to reading the stored container (B-VR05-02).
+        stored_declared = _stored_column_declarations(
+            existing_inner=existing_inner,
+            stored_columns=stored_columns,
+            previous_fields=previous_fields,
+        )
         incoming_columns = {
             "title": title,
             "source_type": source_type,
@@ -1888,10 +1906,60 @@ def _merge_document_row(
             ),
         )
         return
-    if capture_conflicts:
+    # A lower-priority capture cannot replace the selected metadata container,
+    # but it still participates in field conflict/agreement provenance. If we
+    # skip this merge, the recorded conflicts differ when only root priority is
+    # reversed (e.g. Dayu vs Dropbox publication dates). Preserve only facts
+    # represented by the current stored columns; don't claim a lower-priority
+    # fill was written when this branch intentionally leaves values unchanged.
+    previous_fields = _previous_provenance_fields(
+        existing_document["metadata_json"]
+    )
+    stored_columns = {
+        "title": existing_document["title"],
+        "source_type": existing_document["source_type"],
+        "document_kind": existing_document["document_kind"],
+        "published_date": existing_document["published_date"],
+        "source_status": existing_document["source_status"],
+        "primary_source_id": existing_document["primary_source_id"],
+    }
+    incoming_columns = {
+        "title": title,
+        "source_type": source_type,
+        "document_kind": document_kind,
+        "published_date": published,
+        "source_status": source_status,
+        "primary_source_id": primary.source_id if primary else None,
+    }
+    stored_declared = _stored_column_declarations(
+        existing_inner=existing_inner,
+        stored_columns=stored_columns,
+        previous_fields=previous_fields,
+    )
+    _, column_provenance, _ = _merge_columns(
+        stored_columns,
+        incoming=incoming_columns,
+        source_id=primary.source_id if primary else None,
+        observed_at=scan_time,
+        fields={},
+        incoming_declared=_declared_columns(new_inner, incoming_columns),
+        stored_declared=stored_declared,
+        previous_fields=previous_fields,
+    )
+    lower_priority_provenance = {
+        name: record
+        for name, record in column_provenance.items()
+        if record.get("conflicts")
+        or any(
+            isinstance(source, dict) and source.get("role") == "incoming"
+            for source in record.get("sources") or []
+        ) and record.get("value") == _short_value_hash(stored_columns.get(name))
+    }
+    lower_priority_provenance.update(capture_conflicts)
+    if lower_priority_provenance:
         updated_metadata = _merge_metadata_json(
             existing_document["metadata_json"], {}, prefer_new=False,
-            provenance_fields=capture_conflicts,
+            provenance_fields=lower_priority_provenance,
         )
         connection.execute(
             "UPDATE documents SET metadata_json=?,last_seen_at=? WHERE document_id=?",

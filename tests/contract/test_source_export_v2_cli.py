@@ -7,6 +7,8 @@ The CLI is invoked from another cwd with a production-shaped config path.
 from __future__ import annotations
 
 import hashlib
+import re
+from datetime import datetime, timezone
 import json
 import os
 from dataclasses import asdict
@@ -203,6 +205,7 @@ def _one_json_error(proc: subprocess.CompletedProcess[bytes], tmp_path: Path) ->
     assert proc.returncode != 0
     assert proc.stdout == b""
     assert proc.stderr.endswith(b"\n"), proc.stderr
+    assert b"\r\n" not in proc.stderr, proc.stderr
     lines = proc.stderr.decode("utf-8").splitlines()
     assert len(lines) == 1, proc.stderr
     error = json.loads(lines[0])
@@ -290,3 +293,81 @@ def test_cli_rejects_same_size_raw_byte_drift_with_empty_stdout(
     proc = _run_cli(config_path, guard_dir, ref, span, tmp_path / "caller")
     _one_json_error(proc, tmp_path)
     assert _snapshot(tmp_path) == before
+
+
+def test_cli_matches_frozen_source_v2_golden(tmp_path: Path) -> None:
+    """Freeze actual CLI bytes for pathless cross-repo consumers."""
+    config_path, _raw, guard_dir, ref, span = _fixture(tmp_path)
+    goldens = ROOT / "tests" / "golden" / "source_v2"
+    ref_wire = (
+        json.dumps(ref, ensure_ascii=True, sort_keys=True, separators=(",", ":"))
+        + "\n"
+    ).encode("utf-8")
+    assert ref_wire == (goldens / "source_ref.json").read_bytes()
+    span_wire = (
+        json.dumps(span, ensure_ascii=True, sort_keys=True, separators=(",", ":"))
+        + "\n"
+    ).encode("utf-8")
+    assert span_wire == (goldens / "evidence_span.json").read_bytes()
+    process = _run_cli(config_path, guard_dir, ref, span, tmp_path / "caller")
+    assert process.returncode == 0, process.stderr
+    assert process.stderr == b""
+    assert process.stdout == (goldens / "source_export_bundle.json").read_bytes()
+    bad_ref = json.loads((goldens / "source_ref_bad_sha.json").read_bytes())
+    assert set(bad_ref) == set(ref)
+    assert bad_ref["content_sha256"] != ref["content_sha256"]
+    rejected = _run_cli(config_path, guard_dir, bad_ref, span, tmp_path / "caller")
+    assert rejected.returncode == 2
+    assert rejected.stdout == b""
+    assert json.loads(rejected.stderr)["status"] in {"not_found", "unavailable"}
+
+
+def test_reader_cli_matches_normalized_verified_open_golden(tmp_path: Path) -> None:
+    """Freeze reader receipt shape while keeping runtime clock and policy pins live."""
+    config_path, raw, guard_dir, ref, _span = _fixture(tmp_path)
+    goldens = ROOT / "tests" / "golden" / "source_v2"
+    env = os.environ.copy()
+    env["PYTHONPATH"] = (
+        str(guard_dir) + os.pathsep + str(ROOT / "src")
+        + os.pathsep + env.get("PYTHONPATH", "")
+    )
+    env["PYTHONDONTWRITEBYTECODE"] = "1"
+    command = [
+        sys.executable, "-B", "-m",
+        "company_wiki.source_catalog.source_reader_cli",
+        "--config", str(config_path),
+        "--document-id", ref["document_id"],
+        "--source-id", ref["source_id"],
+        "--content-sha256", ref["content_sha256"],
+        "--purpose", "source_export",
+    ]
+    success = subprocess.run(
+        command, cwd=tmp_path / "caller", env=env,
+        stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+        check=False, timeout=30,
+    )
+    assert success.returncode == 0, success.stderr
+    assert success.stdout == raw.read_bytes()
+    assert hashlib.sha256(success.stdout).hexdigest() == ref["content_sha256"]
+    assert success.stderr.endswith(b"\n") and len(success.stderr.splitlines()) == 1
+    receipt = json.loads(success.stderr)
+    assert datetime.fromisoformat(receipt["read_at"]).utcoffset() == timezone.utc.utcoffset(None)
+    for field in ("policy_sha256", "source_read_policy_sha256"):
+        assert re.fullmatch(r"[0-9a-f]{64}", receipt[field])
+        receipt[field] = "<runtime-sha256>"
+    receipt["read_at"] = "<runtime-utc>"
+    normalized = (
+        json.dumps(receipt, ensure_ascii=True, sort_keys=True, separators=(",", ":"))
+        + "\n"
+    ).encode("utf-8")
+    assert normalized == (goldens / "verified_open_receipt_normalized.json").read_bytes()
+
+    bad_ref = json.loads((goldens / "source_ref_bad_sha.json").read_bytes())
+    command[command.index("--content-sha256") + 1] = bad_ref["content_sha256"]
+    refused = subprocess.run(
+        command, cwd=tmp_path / "caller", env=env,
+        stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+        check=False, timeout=30,
+    )
+    assert refused.returncode == 2 and refused.stdout == b""
+    assert refused.stderr.replace(b"\r\n", b"\n") == (goldens / "verified_open_bad_sha.json").read_bytes()

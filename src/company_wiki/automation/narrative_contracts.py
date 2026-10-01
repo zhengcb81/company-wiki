@@ -17,10 +17,10 @@ from company_wiki.source_contract import EvidenceSpan, source_id_for_sha256
 from .models import canonical_json, canonical_json_hash
 
 
-SOURCE_REVISION_EVENT_SCHEMA = "source-revision-event/1.0"
-SELECT_RESULT_SCHEMA = "narrative-select-result/1.0"
-SUMMARY_RESULT_SCHEMA = "narrative-summary-result/1.0"
-BUNDLE_SCHEMA = "narrative-bundle/1.0"
+SOURCE_REVISION_EVENT_SCHEMA = "source-revision-event/2.0"
+SELECT_RESULT_SCHEMA = "narrative-select-result/2.0"
+SUMMARY_RESULT_SCHEMA = "narrative-summary-result/2.0"
+BUNDLE_SCHEMA = "narrative-bundle/2.0"
 SELECT_RESULT_MAX_BYTES = 1024 * 1024
 SUMMARY_RESULT_MAX_BYTES = 64 * 1024
 BUNDLE_MAX_BYTES = 1280 * 1024
@@ -247,56 +247,11 @@ class SourceMetadataValue:
 
 
 @dataclass(frozen=True)
-class TranscriptPolicyPin:
-    provider_id: str
-    source_url: str
-    content_class: str
-    expected_provider_policy_sha256: str
-
-    @classmethod
-    def from_dict(cls, value: object) -> "TranscriptPolicyPin":
-        item = _exact(
-            value,
-            {
-                "provider_id", "source_url", "content_class",
-                "expected_provider_policy_sha256",
-            },
-            "transcript_policy",
-        )
-        url = _text(item["source_url"], "transcript_policy.source_url")
-        if not url.startswith("https://"):
-            raise NarrativeContractError("transcript_policy.source_url must be HTTPS")
-        content_class = _text(
-            item["content_class"], "transcript_policy.content_class"
-        )
-        if content_class != "earnings_call_transcript":
-            raise NarrativeContractError("transcript_policy.content_class is invalid")
-        return cls(
-            _text(item["provider_id"], "transcript_policy.provider_id"),
-            url,
-            content_class,
-            _sha(
-                item["expected_provider_policy_sha256"],
-                "transcript_policy.expected_provider_policy_sha256",
-            ),
-        )
-
-    def to_dict(self) -> dict[str, Any]:
-        return {
-            "provider_id": self.provider_id,
-            "source_url": self.source_url,
-            "content_class": self.content_class,
-            "expected_provider_policy_sha256": self.expected_provider_policy_sha256,
-        }
-
-
-@dataclass(frozen=True)
 class SourceRevisionEventPayload:
     schema_version: str
     source_ref: SourceRefValue
     expected_read_policy_sha256: str
     source_metadata: SourceMetadataValue
-    transcript_policy: TranscriptPolicyPin | None
 
     @classmethod
     def from_dict(cls, value: object) -> "SourceRevisionEventPayload":
@@ -305,22 +260,13 @@ class SourceRevisionEventPayload:
             value,
             {
                 "schema_version", "source_ref", "expected_read_policy_sha256",
-                "source_metadata", "transcript_policy",
+                "source_metadata",
             },
             "source revision event",
         )
         if item["schema_version"] != SOURCE_REVISION_EVENT_SCHEMA:
             raise NarrativeContractError("unsupported source revision event schema")
         metadata = SourceMetadataValue.from_dict(item["source_metadata"])
-        transcript = (
-            None
-            if item["transcript_policy"] is None
-            else TranscriptPolicyPin.from_dict(item["transcript_policy"])
-        )
-        if metadata.source_class == "filing" and transcript is not None:
-            raise NarrativeContractError("filing must have null transcript_policy")
-        if metadata.source_class == "transcript" and transcript is None:
-            raise NarrativeContractError("transcript requires transcript_policy")
         return cls(
             SOURCE_REVISION_EVENT_SCHEMA,
             SourceRefValue.from_dict(item["source_ref"]),
@@ -329,7 +275,6 @@ class SourceRevisionEventPayload:
                 "expected_read_policy_sha256",
             ),
             metadata,
-            transcript,
         )
 
     @property
@@ -342,9 +287,6 @@ class SourceRevisionEventPayload:
             "source_ref": self.source_ref.to_dict(),
             "expected_read_policy_sha256": self.expected_read_policy_sha256,
             "source_metadata": self.source_metadata.to_dict(),
-            "transcript_policy": (
-                self.transcript_policy.to_dict() if self.transcript_policy else None
-            ),
         }
 
 
@@ -553,41 +495,6 @@ class TranscriptByteBinding:
 
 
 @dataclass(frozen=True)
-class TranscriptActionPolicyValue:
-    policy_sha256: str
-    evidence_sha256_by_action: tuple[tuple[str, str], ...]
-
-    @classmethod
-    def from_dict(cls, value: object) -> "TranscriptActionPolicyValue":
-        item = _exact(
-            value, {"policy_sha256", "evidence_sha256_by_action"},
-            "transcript_action_policy",
-        )
-        evidence: list[tuple[str, str]] = []
-        for raw in _array(item["evidence_sha256_by_action"], "evidence_sha256_by_action"):
-            pair = _array(raw, "action evidence pair")
-            if len(pair) != 2:
-                raise NarrativeContractError("action evidence pair must have two items")
-            evidence.append(
-                (_text(pair[0], "action"), _sha(pair[1], "action evidence SHA-256"))
-            )
-        actions = [action for action, _ in evidence]
-        if not evidence or len(actions) != len(set(actions)):
-            raise NarrativeContractError("action evidence must be non-empty and unique")
-        return cls(_sha(item["policy_sha256"], "policy_sha256"), tuple(evidence))
-
-    def to_dict(self) -> dict[str, Any]:
-        return {
-            "policy_sha256": self.policy_sha256,
-            "evidence_sha256_by_action": [list(item) for item in self.evidence_sha256_by_action],
-        }
-
-    @property
-    def actions(self) -> frozenset[str]:
-        return frozenset(action for action, _ in self.evidence_sha256_by_action)
-
-
-@dataclass(frozen=True)
 class NarrativeSelectResult:
     schema_version: str
     source_ref: SourceRefValue
@@ -600,7 +507,6 @@ class NarrativeSelectResult:
     prompt_review: PromptReviewValue
     transcript_lineage: TranscriptLineageValue | None
     transcript_byte_bindings: tuple[TranscriptByteBinding, ...]
-    transcript_action_policy: TranscriptActionPolicyValue | None
     summary_scope: str
     encoded_size: int
 
@@ -611,7 +517,7 @@ class NarrativeSelectResult:
             "schema_version", "source_ref", "expected_read_policy_sha256",
             "source_metadata", "parser", "selector", "selection",
             "evidence_spans", "prompt_review", "transcript_lineage",
-            "transcript_byte_bindings", "transcript_action_policy", "summary_scope",
+            "transcript_byte_bindings", "summary_scope",
         }
         item = _exact(value, keys, "narrative select result")
         if item["schema_version"] != SELECT_RESULT_SCHEMA:
@@ -630,17 +536,13 @@ class NarrativeSelectResult:
             TranscriptByteBinding.from_dict(raw)
             for raw in _array(item["transcript_byte_bindings"], "transcript_byte_bindings")
         )
-        action_policy = (
-            None if item["transcript_action_policy"] is None
-            else TranscriptActionPolicyValue.from_dict(item["transcript_action_policy"])
-        )
         result = cls(
             SELECT_RESULT_SCHEMA, source,
             _sha(item["expected_read_policy_sha256"], "expected_read_policy_sha256"),
             metadata,
             ComponentValue.from_dict(item["parser"], "parser"),
             ComponentValue.from_dict(item["selector"], "selector"),
-            selection, spans, review, lineage, bindings, action_policy,
+            selection, spans, review, lineage, bindings,
             _text(item["summary_scope"], "summary_scope"), 0,
         )
         result._validate()
@@ -662,11 +564,11 @@ class NarrativeSelectResult:
 
     def _validate_transcript_fields(self) -> None:
         if self.source_metadata.source_class == "filing":
-            if self.transcript_lineage or self.transcript_byte_bindings or self.transcript_action_policy:
+            if self.transcript_lineage or self.transcript_byte_bindings:
                 raise NarrativeContractError("filing result cannot contain transcript fields")
             return
-        if self.transcript_lineage is None or self.transcript_action_policy is None:
-            raise NarrativeContractError("transcript result requires lineage and action policy")
+        if self.transcript_lineage is None:
+            raise NarrativeContractError("transcript result requires source lineage")
         lineage = self.transcript_lineage.values
         if (
             lineage["original_source_id"] != self.source_ref.source_id
@@ -677,8 +579,6 @@ class NarrativeSelectResult:
         selected = {span.span_id for span in self.evidence_spans}
         if bound != selected:
             raise NarrativeContractError("transcript bindings must match selected evidence")
-        if not {"derive_text", "select_evidence"} <= self.transcript_action_policy.actions:
-            raise NarrativeContractError("transcript action policy lacks selection actions")
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -693,9 +593,6 @@ class NarrativeSelectResult:
             "prompt_review": self.prompt_review.to_dict(),
             "transcript_lineage": self.transcript_lineage.to_dict() if self.transcript_lineage else None,
             "transcript_byte_bindings": [item.to_dict() for item in self.transcript_byte_bindings],
-            "transcript_action_policy": (
-                self.transcript_action_policy.to_dict() if self.transcript_action_policy else None
-            ),
             "summary_scope": self.summary_scope,
         }
 
@@ -832,7 +729,6 @@ class NarrativeSummaryResult:
     draft: SourceSummaryDraft | None
     model: ModelValue | None
     prompt_review: PromptReviewValue
-    transcript_action_policy: TranscriptActionPolicyValue | None
     encoded_size: int
 
     @classmethod
@@ -842,7 +738,7 @@ class NarrativeSummaryResult:
             value,
             {
                 "schema_version", "source_ref", "language", "translate", "status",
-                "draft", "model", "prompt_review", "transcript_action_policy",
+                "draft", "model", "prompt_review",
             },
             "narrative summary result",
         )
@@ -865,13 +761,9 @@ class NarrativeSummaryResult:
             raise NarrativeContractError("summary status is invalid")
         review = PromptReviewValue.from_dict(item["prompt_review"])
         review.validate_source(source)
-        action = (
-            None if item["transcript_action_policy"] is None
-            else TranscriptActionPolicyValue.from_dict(item["transcript_action_policy"])
-        )
         result = cls(
             SUMMARY_RESULT_SCHEMA, source, language, False, status, draft, model,
-            review, action, 0,
+            review, 0,
         )
         result._validate_identity()
         size = _enforce_cap(result.to_dict(), SUMMARY_RESULT_MAX_BYTES, "summary")
@@ -896,8 +788,6 @@ class NarrativeSummaryResult:
         if skipped != (self.status == "summary_not_needed"):
             raise NarrativeContractError("summary status differs from selection")
         if self.status == "completed":
-            if self.prompt_review.status == "not_reviewed":
-                raise NarrativeContractError("summary requires reviewed prompt evidence")
             assert self.draft is not None
             try:
                 validate_summary_draft(
@@ -909,17 +799,6 @@ class NarrativeSummaryResult:
                 )
             except SummaryValidationError as exc:
                 raise NarrativeContractError(str(exc)) from exc
-        self._validate_transcript_action(selected)
-
-    def _validate_transcript_action(self, selected: NarrativeSelectResult) -> None:
-        is_transcript = selected.source_metadata.source_class == "transcript"
-        if not is_transcript and self.transcript_action_policy is not None:
-            raise NarrativeContractError("filing summary cannot contain transcript policy")
-        if is_transcript and self.status == "completed":
-            if self.transcript_action_policy is None or (
-                "generate_summary" not in self.transcript_action_policy.actions
-            ):
-                raise NarrativeContractError("transcript summary lacks generate_summary action")
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -931,9 +810,6 @@ class NarrativeSummaryResult:
             "draft": _draft_to_dict(self.draft) if self.draft else None,
             "model": self.model.to_dict() if self.model else None,
             "prompt_review": self.prompt_review.to_dict(),
-            "transcript_action_policy": (
-                self.transcript_action_policy.to_dict() if self.transcript_action_policy else None
-            ),
         }
 
 
@@ -1032,7 +908,6 @@ class NarrativeBundle:
     prompt_review: PromptReviewValue
     transcript_lineage: TranscriptLineageValue | None
     transcript_byte_bindings: tuple[TranscriptByteBinding, ...]
-    transcript_action_policy: TranscriptActionPolicyValue | None
     versions: VersionsValue
     replay: ReplayValue
     encoded_size: int
@@ -1044,7 +919,7 @@ class NarrativeBundle:
             "schema_version", "source_ref", "expected_read_policy_sha256",
             "source_metadata", "quality_status", "selection", "evidence_spans",
             "summary", "prompt_review", "transcript_lineage",
-            "transcript_byte_bindings", "transcript_action_policy", "versions", "replay",
+            "transcript_byte_bindings", "versions", "replay",
         }
         item = _exact(value, keys, "narrative bundle")
         if item["schema_version"] != BUNDLE_SCHEMA:
@@ -1063,7 +938,6 @@ class NarrativeBundle:
             BundleSummaryValue.from_dict(item["summary"]), review,
             None if item["transcript_lineage"] is None else TranscriptLineageValue.from_dict(item["transcript_lineage"]),
             tuple(TranscriptByteBinding.from_dict(raw) for raw in _array(item["transcript_byte_bindings"], "transcript_byte_bindings")),
-            None if item["transcript_action_policy"] is None else TranscriptActionPolicyValue.from_dict(item["transcript_action_policy"]),
             VersionsValue.from_dict(item["versions"]), ReplayValue.from_dict(item["replay"]), 0,
         )
         result._validate()
@@ -1122,9 +996,6 @@ class NarrativeBundle:
             "prompt_review": self.prompt_review.to_dict(),
             "transcript_lineage": self.transcript_lineage.to_dict() if self.transcript_lineage else None,
             "transcript_byte_bindings": [item.to_dict() for item in self.transcript_byte_bindings],
-            "transcript_action_policy": (
-                self.transcript_action_policy.to_dict() if self.transcript_action_policy else None
-            ),
             "versions": self.versions.to_dict(),
             "replay": self.replay.to_dict(),
         }

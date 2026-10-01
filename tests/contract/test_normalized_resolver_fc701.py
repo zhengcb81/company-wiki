@@ -210,12 +210,11 @@ def test_fc701_bridge_on_still_observable_with_v2_snapshot(tmp_path):
         f"v2 assertion present but bridge read: {observer.reasons}")
 
 
-# --- remediation / retired / unprovable explicitly excluded ------------------
+# --- proposal diagnostic; retired and unprovable still excluded ---------------
 
 
-def test_fc701_remediation_pending_excluded(tmp_path):
-    """A source with a pending remediation proposal is not offered for
-    reuse — the resolver records the exclusion reason."""
+def test_fc701_pending_proposal_is_diagnostic_when_source_bytes_and_identity_match(tmp_path):
+    """A proposal alone does not override verified source and identity facts."""
     from company_wiki.source_catalog import ResolutionStatus
 
     ident = {"market": "CN", "security_id": "601899",
@@ -242,10 +241,8 @@ def test_fc701_remediation_pending_excluded(tmp_path):
         proposed_by="fc701-test",
     )
     result = _resolve(catalog, ident)
-    assert result.status is not ResolutionStatus.REUSED_EXACT
-    assert any("remediation" in t for t in result.debug_trace), (
-        f"no remediation exclusion reason: {list(result.debug_trace)[:4]}")
-
+    assert result.status is ResolutionStatus.REUSED_EXACT
+    assert not any("remediation" in t for t in result.debug_trace)
 
 def test_fc701_retired_document_excluded(tmp_path):
     """A retired document is never offered for reuse."""
@@ -300,6 +297,16 @@ def _legacy_reads(src_dir) -> list[str]:
                 key = node.slice.value
             elif isinstance(node, ast.Call) and isinstance(node.func, ast.Attribute)                     and node.func.attr == "get" and node.args                     and isinstance(node.args[0], ast.Constant):
                 key = node.args[0].value
+            # SourceEnsureResult has a top-level acquisition envelope; it is
+            # distinct from legacy metadata_json.acquisition.
+            if (
+                py_file.name == "operation_contract.py"
+                and key == "acquisition"
+                and isinstance(node, ast.Call)
+                and isinstance(node.func.value, ast.Name)
+                and node.func.value.id == "result"
+            ):
+                continue
             if key in ("acquisition", "dayu_meta"):
                 violations.append(f"{py_file.name}:{node.lineno}:{key}")
     return violations

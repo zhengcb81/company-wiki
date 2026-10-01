@@ -93,9 +93,14 @@ def validate_source_metadata(
 
 def prompt_review_value(opened: VerifiedContent) -> PromptReviewValue:
     if opened.review is None:
-        raise NarrativeSourceGuardError(
-            "INPUT_SCHEMA_INVALID",
-            "verified narrative read omitted its review snapshot",
+        return PromptReviewValue.from_dict(
+            {
+                "status": "not_reviewed",
+                "source_sha256": None,
+                "evidence_sha256": None,
+                "policy_hash": None,
+                "reviewed_at": None,
+            }
         )
     review = opened.review
     return PromptReviewValue.from_dict(

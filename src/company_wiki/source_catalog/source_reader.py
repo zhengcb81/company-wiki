@@ -49,9 +49,6 @@ _ERROR_STATUSES = frozenset(
 _SUPPORTED_READ_PURPOSES = frozenset(
     {"preview", "filing_reuse", "source_export", "narrative_derivation"}
 )
-_REMEDIATION_GATED_PURPOSES = frozenset(
-    {"filing_reuse", "source_export", "narrative_derivation"}
-)
 
 
 class SourceReadError(RuntimeError):
@@ -180,18 +177,6 @@ class SourceVersionReader:
         """Return a pathless pin for a subsequent exact-version open."""
         return self._resolver_and_read_policy()[1]
 
-    def _remediation_pending(
-        self, source_id: str, resolver: SourceResolver | None = None
-    ) -> bool:
-        try:
-            return bool(
-                (resolver or self._resolver_for_request())._remediation_pending(
-                    source_id
-                )
-            )
-        except (CatalogReaderUnavailable, sqlite3.Error):
-            raise SourceReadError("unavailable", "catalog_unavailable") from None
-
     def _candidate_pages(self, request: SourceRequest) -> Iterator[dict[str, Any]]:
         page_size = 1000
         max_candidates = 20_000
@@ -257,10 +242,6 @@ class SourceVersionReader:
         found: list[tuple[str, str, SourceRef]] = []
         for document in self._candidate_pages(request):
             if document["metadata_status"] != "ok":
-                continue
-            if self._remediation_pending(
-                str(document["source_id"] or ""), resolver
-            ):
                 continue
             if not resolver._entity_matches(request.entity, document):
                 continue
@@ -502,20 +483,20 @@ class SourceVersionReader:
             "language": manifest["language"],
             "capture_ready": bool(
                 capture and https_url and manifest["published_date"]
-                and period_known and review_status == "not_detected"
+                and period_known
             ),
             "prompt_injection_status": review_status,
             "capture_provenance": "indexed_location_manifest" if capture else None,
         }
 
     def _current_review(self, ref: SourceRef) -> ReviewSnapshot:
-        """Read the current review; a stale or malformed binding is unreviewed."""
+        """Return an optional review diagnostic, never a read prerequisite."""
         try:
             review = read_prompt_injection_review(
                 self.catalog.reader, ref.document_id
             )
-        except PromptInjectionReviewError:
-            raise SourceReadError("unavailable", "review_unavailable") from None
+        except (PromptInjectionReviewError, sqlite3.Error):
+            return ReviewSnapshot("not_reviewed", None, None, None, None)
         if (
             review is None
             or review.get("source_sha256") != ref.content_sha256
@@ -586,10 +567,6 @@ class SourceVersionReader:
         resolver, read_policy_sha256 = self._resolver_and_read_policy(
             expected_read_policy_sha256
         )
-        if purpose in _REMEDIATION_GATED_PURPOSES and self._remediation_pending(
-            ref.source_id, resolver
-        ):
-            raise SourceReadError("blocked", "remediation_pending")
         try:
             version_row = self.catalog.reader.exact_source_version(ref.document_id)
         except (CatalogReaderUnavailable, sqlite3.Error):

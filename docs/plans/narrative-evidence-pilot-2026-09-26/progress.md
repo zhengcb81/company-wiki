@@ -875,3 +875,9 @@
 - 用户将先前“有 evidence path 必须有 hash”的规则放宽：路径解析到 RF 仓库内真实可读普通文件时，缺失或空白 `fixture_hash` 仅增加 `evidence_hash_pending` 诊断，不阻断 `closure_ready`。保留仓库边界、文件存在和可读性校验；若记录 hash，仍要求合法 SHA-256 并匹配当前文件字节；错误路径或错误/不匹配 hash 仍阻断。
 - 在 RF main `415d8eb3` 上先补 RED：缺 hash+真实文件预期 ready、缺 hash+不存在路径仍 fail、closure summary 保留 pending 且 registry 不变。随后修改 `scenarios.py`，未照搬 fcap 代码中不检查无 hash 路径且会修改输入对象的问题；四文件提交为 RF main `3e03ce83`，工作树干净。
 - 真实 `tmp_path` 字节夹具的 scenario、三仓 closure 与双 CLI 定向测试 **33 passed**；覆盖已有错误 hash、坏路径拒绝和缺 hash 正例。另对 RF main 真实 registry 做只读核验：197 项当前全 ready；内存中移除 AR-01 hash、保留实际路径后仍 ready、pending=1，registry SHA 不变。全目录测试被 `test_freeze_exclusive_and_cas` 派生的 CodeGraph `prepare_source` 子进程挂住，未据此记为全套通过；确认进程属于本轮后结束它，并删除本轮 pytest-7046/7047/7048 三个独立临时根，验证它们已不存在。
+## 2026-10-01 — CWP E-B 与当前主线整合验收
+
+- 在 `codex/narrative-mainline-integration` 上，以当前 CWP `master@11b6472` 为基线，将已验收 E-B 分支 `codex/narrative-gates-integration@cba745a` 做无快进合并。两处计划文档冲突采用较新的主线版本；未合并其他仓库文件。
+- 合并后的 29 个变更测试文件回归 **349 passed、2 skipped**；SourceExport v2 CLI 专项 **6 passed**；真实字节及 transcript E2E **11 passed**。修复并覆盖 Windows stdout/stderr 将协议 LF 写成 CRLF 的问题。
+- Ruff 对 56 个变更 Python 文件通过，暂存/未暂存 `git diff --check` 均通过，无 unmerged paths。所有本轮创建的 `C:\cwt` 和 pytest 临时目录均经存在性核查后确认已清理。
+- 当前验收分支已具备提交条件，merge commit 与 `master` 快进在收尾中。E-B 测试通过不代表 Worker 已启用；生产 Worker 继续 paused/default-off，G-C selected-package consumer 与 G-D 批处理/撤回验收仍待做。

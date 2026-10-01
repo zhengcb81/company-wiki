@@ -288,7 +288,9 @@ class CanonicalSourceWriter:
                     or len(committed) != 1
                 ):
                     raise CanonicalImportError(
-                        "canonical file was written but exact provider identity did not resolve"
+                        "canonical file was written but exact provider identity did not resolve: "
+                        f"status={exact_resolution.status.value}; "
+                        f"trace={';'.join(exact_resolution.debug_trace)}"
                     )
                 exact_resolution = replace(
                     exact_resolution,

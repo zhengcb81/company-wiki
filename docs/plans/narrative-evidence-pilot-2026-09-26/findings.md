@@ -612,3 +612,8 @@
 - 放宽范围限于缺失/空白 `fixture_hash` 不再单独阻断闭环，并以 `evidence_hash_pending` 暴露；仍须验证 evidence path 是仓库内真实可读普通文件。若有 hash，必须验证 64 位十六进制格式并重读实际文件字节匹配。路径缺失/越界/不可读、已提供 hash 格式错误或不匹配仍阻断。
 - 采用 RF main 作为实现基线；先增加实际临时文件 RED/绿回归，检查 closure summary 的 pending 传播与输入对象无副作用；不直接 cherry-pick fcap dirty 代码，因为该版本未验证路径且在校验期间修改输入对象。
 - 实现核对：RF main `assurance/unified_completion/uc/scenarios.py` 现将缺 hash 作为非阻断 pending，同时仍校验真实路径；已提供 hash 时校验格式和当前字节。补充的 unit/integration/CLI 用例全部通过（33 passed）。整套测试因 CodeGraph 子进程未返回中止，不能记为全绿；挂起进程已停止，本轮 3 个 pytest 根已清理。- 真实 registry 核验已确认生产路径不需迁移：当前 197 项 registry `closure_ready=true`、`evidence_hash_pending=0`；仅在内存中把 AR-01 hash 置空、继续读取其真实证据文件，结果 `closure_ready=true/evidence_hash_pending=1`，registry 字节 SHA 前后相同。- RF main 已提交闭环规则与回归：`3e03ce83 fix: allow pending evidence hashes in closure`。提交 hook 的 config doctor 通过；手动 Ruff 与 33 项定向测试通过，RF main 工作树干净。
+## 2026-10-01 — CWP E-B 集成回归发现
+
+- Windows 文本流会把 SourceExport v2 JSON 行的 `\n` 写成 `\r\n`，破坏协议要求的逐字节 LF golden。通过测试先复现，再让 CLI 走 UTF-8 binary buffer 写行，并为 `StringIO` 保留文本 fallback；stdout 与 stderr 的 LF 测试通过。
+- CWP E-B 与 `master@11b6472` 合并后的 29 个变更测试文件通过（349 passed、2 skipped）；56 个变更 Python 文件 Ruff 通过。此收据只覆盖本次变更相关测试，不等于整仓完整测试或跨仓 G-C/G-D 验收。
+- E6 P2 在四文档实测只比 P1 快约 6.3%，峰值 RSS 高约 23.5%，且锁等待 p95 未测；不能据此启用默认并发。Worker 保持 paused/default-off。

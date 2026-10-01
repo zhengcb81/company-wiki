@@ -20,10 +20,10 @@ class PolicyViolationError(Exception):
 
 @dataclass(frozen=True)
 class PolicyConfig:
-    """Frozen policy configuration."""
+    """Local single-user capability defaults for planned work."""
 
     allow_network: bool = False
-    allow_llm: bool = False
+    allow_llm: bool = True
     allowed_effect_paths: tuple[str, ...] = ()  # empty = no path restriction
     max_fan_out: int = 15
     max_priority: int = 100

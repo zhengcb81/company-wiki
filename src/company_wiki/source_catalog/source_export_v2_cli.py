@@ -63,20 +63,29 @@ def _read_request() -> tuple[tuple[SourceRef, ...], tuple[EvidenceSpan, ...]]:
     return refs, spans
 
 
-def _emit_error(status: str, reason: str) -> None:
-    sys.stderr.write(
+def _write_json_line(stream: Any, value: dict[str, Any]) -> None:
+    payload = (
         json.dumps(
-            {
-                "schema_version": SOURCE_REF_SCHEMA_VERSION,
-                "status": status,
-                "reason": reason,
-            },
-            ensure_ascii=True,
-            sort_keys=True,
-            separators=(",", ":"),
+            value, ensure_ascii=True, sort_keys=True, separators=(",", ":"),
         ) + "\n"
+    ).encode("utf-8")
+    binary_stream = getattr(stream, "buffer", None)
+    if binary_stream is None:
+        stream.write(payload.decode("utf-8"))
+    else:
+        binary_stream.write(payload)
+    stream.flush()
+
+
+def _emit_error(status: str, reason: str) -> None:
+    _write_json_line(
+        sys.stderr,
+        {
+            "schema_version": SOURCE_REF_SCHEMA_VERSION,
+            "status": status,
+            "reason": reason,
+        },
     )
-    sys.stderr.flush()
 
 
 def main(argv: Sequence[str] | None = None) -> int:
@@ -92,13 +101,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             refs=refs,
             evidence_spans=spans,
         )
-        sys.stdout.write(
-            json.dumps(
-                bundle.to_dict(), ensure_ascii=True, sort_keys=True,
-                separators=(",", ":"),
-            ) + "\n"
-        )
-        sys.stdout.flush()
+        _write_json_line(sys.stdout, bundle.to_dict())
         return 0
     except SourceReadError as exc:
         _emit_error(exc.status, exc.reason)

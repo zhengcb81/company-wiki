@@ -34,7 +34,6 @@ from company_wiki.automation.narrative_model import (
     NarrativeModelResponse,
 )
 from company_wiki.automation.narrative_summarize import NarrativeSummarizeHandler
-from company_wiki.source_catalog.provider_use_policy import ProviderUsePolicy
 from company_wiki.source_contract import (
     EvidenceCoordinates,
     EvidenceSpan,
@@ -49,41 +48,6 @@ T0 = "2026-09-28T18:00:00Z"
 def _sha(value: str | bytes) -> str:
     data = value if isinstance(value, bytes) else value.encode("utf-8")
     return hashlib.sha256(data).hexdigest()
-
-
-def _provider_policy(
-    actions: tuple[str, ...] = (
-        "derive_text",
-        "select_evidence",
-        "generate_summary",
-    ),
-    *,
-    revoked: bool = False,
-) -> ProviderUsePolicy:
-    payload: dict[str, object] = {
-        "schema_version": "provider-use-policy/1",
-        "policy_id": "summary-handler-policy",
-        "rules": [
-            {
-                "provider_id": "fixture_provider",
-                "origin_host": "fixtures.invalid",
-                "path_prefix": "/transcripts",
-                "content_class": "earnings_call_transcript",
-                "rights_evidence_ref": "offline fixture",
-                "rights_evidence_sha256": _sha("rights"),
-                "reviewer": "unit-test",
-                "reviewed_at": "2026-09-01",
-                "valid_from": "2026-09-01",
-                "valid_until": "2026-09-30",
-                "permitted_actions": sorted(actions),
-                "retention_scope": "company_wiki_local",
-                "export_scope": "stockwiki_readonly_excerpt",
-                "revoked": revoked,
-            }
-        ],
-    }
-    payload["policy_sha256"] = _sha(canonical_json(payload))
-    return ProviderUsePolicy.from_dict(payload)
 
 
 def _review(source_sha: str, *, reviewed: bool = True) -> dict[str, object]:
@@ -112,7 +76,6 @@ def _selection(
     reviewed: bool = True,
     role: str = "company_filing",
     quality_flags: tuple[str, ...] = (),
-    policy: ProviderUsePolicy | None = None,
 ) -> NarrativeSelectResult:
     source_bytes = (
         b"Full Conference Call Transcript\nCEO: new product launch\n"
@@ -148,18 +111,6 @@ def _selection(
             quality_flags=quality_flags,
         )
         spans.append(span.to_dict())
-    policy = policy or _provider_policy()
-    transcript_policy = (
-        {
-            "policy_sha256": policy.policy_sha256,
-            "evidence_sha256_by_action": [
-                ["derive_text", _sha("derive")],
-                ["select_evidence", _sha("select")],
-            ],
-        }
-        if transcript
-        else None
-    )
     lineage = (
         {
             "schema_version": "transcript-material/2",
@@ -189,7 +140,7 @@ def _selection(
     )
     return NarrativeSelectResult.from_dict(
         {
-            "schema_version": "narrative-select-result/1.0",
+            "schema_version": "narrative-select-result/2.0",
             "source_ref": {
                 "schema_version": "2.0",
                 "document_id": "doc-summary",
@@ -227,33 +178,17 @@ def _selection(
             "prompt_review": _review(source_sha, reviewed=reviewed),
             "transcript_lineage": lineage,
             "transcript_byte_bindings": bindings,
-            "transcript_action_policy": transcript_policy,
             "summary_scope": "selected_evidence_only",
         }
     )
 
 
-def _event_payload(
-    selected: NarrativeSelectResult,
-    policy: ProviderUsePolicy | None = None,
-) -> dict[str, object]:
-    transcript = selected.source_metadata.source_class == "transcript"
-    policy = policy or _provider_policy()
+def _event_payload(selected: NarrativeSelectResult) -> dict[str, object]:
     return {
-        "schema_version": "source-revision-event/1.0",
+        "schema_version": "source-revision-event/2.0",
         "source_ref": selected.source_ref.to_dict(),
         "expected_read_policy_sha256": selected.expected_read_policy_sha256,
         "source_metadata": selected.source_metadata.to_dict(),
-        "transcript_policy": (
-            {
-                "provider_id": "fixture_provider",
-                "source_url": "https://fixtures.invalid/transcripts/2026/q2.txt",
-                "content_class": "earnings_call_transcript",
-                "expected_provider_policy_sha256": policy.policy_sha256,
-            }
-            if transcript
-            else None
-        ),
     }
 
 
@@ -400,17 +335,11 @@ def _run(
     model: ReplayModel | None,
     review: PromptReviewValue | None = None,
     review_loader: ReviewLoader | None = None,
-    policy: ProviderUsePolicy | None = None,
     payload: dict[str, object] | None = None,
 ) -> tuple[HandlerResult, ReviewLoader, list[int]]:
     loader = review_loader or ReviewLoader(review or selected.prompt_review)
     checkpoints: list[int] = []
-    handler = NarrativeSummarizeHandler(
-        model=model,
-        prompt_review_loader=loader,
-        provider_policy_loader=(lambda: policy) if policy is not None else None,
-        current_date=lambda: "2026-09-28",
-    )
+    handler = NarrativeSummarizeHandler(model=model)
     return handler(_context(selected, payload=payload, checkpoints=checkpoints)), loader, checkpoints
 
 
@@ -437,17 +366,24 @@ def test_summarize_handler_replay_is_canonical_and_selected_only() -> None:
     assert "absolute_path" not in prompt
 
 
+def test_summarize_handler_does_not_require_prompt_review_receipt() -> None:
+    selected = _selection(reviewed=False)
+    model = ReplayModel()
+
+    raw, _, _ = _run(selected, model=model)
+
+    assert raw.outcome is HandlerOutcome.SUCCEEDED
+    assert len(model.calls) == 1
+    summary = NarrativeSummaryResult.from_dict(raw.result)
+    assert summary.prompt_review.status == "not_reviewed"
+
+
 def test_summarize_handler_skip_uses_no_model_policy_or_review_lookup() -> None:
     selected = _selection(skipped=True, reviewed=False)
     model = ReplayModel()
     loader = ReviewLoader(None)
     policy_calls: list[int] = []
-    handler = NarrativeSummarizeHandler(
-        model=model,
-        prompt_review_loader=loader,
-        provider_policy_loader=lambda: policy_calls.append(1) or _provider_policy(),
-        current_date=lambda: "2026-09-28",
-    )
+    handler = NarrativeSummarizeHandler(model=model)
 
     raw = handler(_context(selected))
 
@@ -476,14 +412,14 @@ def test_summarize_handler_missing_model_blocks_before_external_work() -> None:
     selected = _selection()
     raw, loader, _ = _run(selected, model=None)
 
-    assert raw.outcome is HandlerOutcome.BLOCKED_HUMAN
+    assert raw.outcome is HandlerOutcome.TERMINAL_FAILURE
     assert raw.error is not None and raw.error.code == "MODEL_NOT_CONFIGURED"
     assert loader.calls == []
     assert raw.effects == ()
 
 
 @pytest.mark.parametrize("case", ["missing", "not_reviewed", "drift"])
-def test_summarize_handler_requires_current_bound_prompt_review(case: str) -> None:
+def test_summarize_handler_does_not_require_current_prompt_review(case: str) -> None:
     selected = _selection(reviewed=case != "not_reviewed")
     current: PromptReviewValue | None = selected.prompt_review
     if case == "missing":
@@ -499,10 +435,10 @@ def test_summarize_handler_requires_current_bound_prompt_review(case: str) -> No
         review_loader=current_loader,
     )
 
-    assert raw.outcome is HandlerOutcome.BLOCKED_HUMAN
-    assert raw.error is not None and raw.error.code == "PROMPT_REVIEW_REQUIRED"
-    assert len(loader.calls) == 1
-    assert model.calls == []
+    assert raw.outcome is HandlerOutcome.SUCCEEDED
+    assert raw.error is None
+    assert loader.calls == []
+    assert len(model.calls) == 1
     assert raw.effects == ()
 
 
@@ -620,58 +556,15 @@ def test_summarize_handler_rejects_invalid_summary_claims(case: str) -> None:
     assert raw.effects == ()
 
 
-def test_summarize_handler_transcript_requires_separate_summary_action() -> None:
-    denied_policy = _provider_policy(("derive_text", "select_evidence"))
-    denied = _selection(transcript=True, policy=denied_policy)
-    denied_model = ReplayModel()
-
-    raw, _, _ = _run(
-        denied,
-        model=denied_model,
-        policy=denied_policy,
-        payload=_event_payload(denied, denied_policy),
-    )
-    assert raw.outcome is HandlerOutcome.TERMINAL_FAILURE
-    assert raw.error is not None and raw.error.code == "POLICY_DENIED"
-    assert denied_model.calls == []
-
-    allowed_policy = _provider_policy()
-    allowed = _selection(transcript=True, policy=allowed_policy)
-    accepted, _, _ = _run(
-        allowed,
-        model=ReplayModel(),
-        policy=allowed_policy,
-        payload=_event_payload(allowed, allowed_policy),
-    )
-    assert accepted.outcome is HandlerOutcome.SUCCEEDED
-    summary = NarrativeSummaryResult.from_dict(accepted.result)
-    assert summary.transcript_action_policy is not None
-    assert summary.transcript_action_policy.actions == {"generate_summary"}
-
-
-@pytest.mark.parametrize("case", ["hash_drift", "revoked"])
-def test_summarize_handler_rechecks_current_transcript_policy(case: str) -> None:
-    pinned_policy = _provider_policy()
-    selected = _selection(transcript=True, policy=pinned_policy)
-    current_policy = (
-        _provider_policy(
-            ("derive_text", "select_evidence", "generate_summary", "export_excerpt")
-        )
-        if case == "hash_drift"
-        else _provider_policy(revoked=True)
-    )
+def test_summarize_handler_summarizes_transcript_without_provider_policy() -> None:
+    selected = _selection(transcript=True)
     model = ReplayModel()
 
-    raw, _, _ = _run(
-        selected,
-        model=model,
-        policy=current_policy,
-        payload=_event_payload(selected, pinned_policy),
-    )
+    raw, _, _ = _run(selected, model=model)
 
-    assert raw.outcome is HandlerOutcome.TERMINAL_FAILURE
-    assert raw.error is not None and raw.error.code == "POLICY_DENIED"
-    assert model.calls == []
+    assert raw.outcome is HandlerOutcome.SUCCEEDED
+    assert raw.error is None
+    assert model.calls
     assert raw.effects == ()
 
 

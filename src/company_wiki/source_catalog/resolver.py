@@ -1347,18 +1347,6 @@ class SourceResolver:
                 self.legacy_bridge_allowed,
             ) = resolver_visibility(runtime_policy)
 
-    def _remediation_pending(self, source_id) -> bool:
-        """FC-701: True when a pending remediation proposal exists for the
-        source (evidence disputed; not offered for reuse)."""
-        if not source_id:
-            return False
-        row = self.catalog.reader.fetchone(
-            "SELECT 1 FROM remediation_proposals WHERE source_id=? "
-            "AND status='proposed' LIMIT 1",
-            (source_id,),
-        )
-        return row is not None
-
     def resolve(self, request: SourceRequest) -> ResolutionResult:
         if not isinstance(request, SourceRequest):
             raise TypeError("request must be SourceRequest")
@@ -1416,12 +1404,6 @@ class SourceResolver:
                     f"{document['title']}: rejected_source_status="
                     f"{document['source_status']}"
                 )
-                continue
-            # FC-701: a source with a pending remediation proposal is not
-            # offered for reuse — the proposal flags that the current
-            # evidence is disputed until a reviewer approves a correction.
-            if self._remediation_pending(document.get("source_id")):
-                trace.append(f"{document['title']}: remediation_pending")
                 continue
             metadata = _source_metadata(
                 document,

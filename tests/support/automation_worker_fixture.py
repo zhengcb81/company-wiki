@@ -38,6 +38,17 @@ def create_runtime(spec: WorkerProcessSpec) -> WorkerRuntime:
     delay_by_job = options.get("delay_by_job", {})
     print_bytes = int(options.get("print_bytes", 0))
     block_phase_by_job = options.get("block_phase_by_job", {})
+    release_file_by_job = options.get("release_file_by_job", {})
+
+    def block_if_requested(job_id: str, phase: str) -> None:
+        if block_phase_by_job.get(job_id) != phase:
+            return
+        release_file = release_file_by_job.get(job_id)
+        if release_file is None:
+            while True:
+                time.sleep(0.05)
+        while not Path(release_file).exists():
+            time.sleep(0.05)
 
     registry = create_default_registry()
     registry.register(
@@ -77,9 +88,7 @@ def create_runtime(spec: WorkerProcessSpec) -> WorkerRuntime:
     def handler(context) -> HandlerResult:
         job_id = context.job.job_id
         _write_marker(trace_dir, "handler_started", job_id, spec.worker_id)
-        if block_phase_by_job.get(job_id) == "handler_started":
-            while True:
-                time.sleep(0.05)
+        block_if_requested(job_id, "handler_started")
         if print_bytes:
             print("x" * print_bytes, flush=True)
         delay = float(delay_by_job.get(job_id, 0.0))
@@ -101,9 +110,7 @@ def create_runtime(spec: WorkerProcessSpec) -> WorkerRuntime:
     def lifecycle(phase: str, claimed) -> None:
         job_id = claimed.job.job_id
         _write_marker(trace_dir, phase, job_id, spec.worker_id)
-        if block_phase_by_job.get(job_id) == phase:
-            while True:
-                time.sleep(0.05)
+        block_if_requested(job_id, phase)
 
     runtime_record = {
         "worker_id": spec.worker_id,

@@ -86,8 +86,8 @@ def test_registry_unknown_job_type_raises():
             "source.narrative_select",
             {
                 "handler_version": "1.0.0",
-                "input_schema": "source-revision-event/1.0",
-                "result_schema": "narrative-select-result/1.0",
+                "input_schema": "source-revision-event/2.0",
+                "result_schema": "narrative-select-result/2.0",
                 "effect_class": "artifact_only",
                 "network": False,
                 "llm": False,
@@ -107,8 +107,8 @@ def test_registry_unknown_job_type_raises():
             "source.narrative_summarize",
             {
                 "handler_version": "1.0.0",
-                "input_schema": "source-revision-event/1.0",
-                "result_schema": "narrative-summary-result/1.0",
+                "input_schema": "source-revision-event/2.0",
+                "result_schema": "narrative-summary-result/2.0",
                 "effect_class": "artifact_only",
                 "network": True,
                 "llm": True,
@@ -121,7 +121,6 @@ def test_registry_unknown_job_type_raises():
                 ),
                 "human_errors": (
                     "MODEL_NOT_CONFIGURED",
-                    "PROMPT_REVIEW_REQUIRED",
                 ),
                 "terminal_errors": (
                     "INPUT_SCHEMA_INVALID",
@@ -137,8 +136,8 @@ def test_registry_unknown_job_type_raises():
             "source.narrative_verify",
             {
                 "handler_version": "1.0.0",
-                "input_schema": "source-revision-event/1.0",
-                "result_schema": "narrative-bundle/1.0",
+                "input_schema": "source-revision-event/2.0",
+                "result_schema": "narrative-bundle/2.0",
                 "effect_class": "knowledge_write",
                 "network": False,
                 "llm": False,
@@ -147,7 +146,6 @@ def test_registry_unknown_job_type_raises():
                 "human_errors": (
                     "LOCATOR_REPLAY_FAILED",
                     "SOURCE_UNAVAILABLE",
-                    "PROMPT_REVIEW_REQUIRED",
                 ),
                 "terminal_errors": (
                     "INPUT_SCHEMA_INVALID",
@@ -199,7 +197,30 @@ def test_policy_rejects_llm_handler():
         retryable_errors=(), human_errors=(), terminal_errors=(),
     )
     with pytest.raises(p.PolicyViolationError, match="LLM"):
-        p.compute_risk(spec)
+        p.compute_risk(spec, config=p.PolicyConfig(allow_llm=False))
+
+
+def test_personal_default_allows_llm_but_keeps_network_explicit():
+    p = _policy_mod()
+    r = _registry_mod()
+    llm_spec = r.HandlerSpec(
+        job_type="llm.handler", handler_version="1.0.0",
+        input_schema="X.v1", result_schema="X.v1",
+        effect_class="artifact_only", allowed_paths=("artifacts/**",),
+        network=False, llm=True, default_max_attempts=1,
+        retryable_errors=(), human_errors=(), terminal_errors=(),
+    )
+    assert p.compute_risk(llm_spec, config=p.PolicyConfig()) == _models().RiskClass.LOW
+
+    network_spec = r.HandlerSpec(
+        job_type="net.handler", handler_version="1.0.0",
+        input_schema="X.v1", result_schema="X.v1",
+        effect_class="artifact_only", allowed_paths=("artifacts/**",),
+        network=True, llm=False, default_max_attempts=1,
+        retryable_errors=(), human_errors=(), terminal_errors=(),
+    )
+    with pytest.raises(p.PolicyViolationError, match="network"):
+        p.compute_risk(network_spec, config=p.PolicyConfig())
 
 
 def test_policy_rejects_path_outside_allowlist():

@@ -13,7 +13,6 @@ from typing import Any
 from urllib.parse import urlsplit
 
 from .acquisition import DownloadCandidate
-from .authorization import DownloadAuthorization
 from .resolver import SourceRequest
 
 
@@ -259,7 +258,7 @@ def _validate_security(
 
 
 def _validate_payload_metadata(
-    payload: dict[str, Any], original: bytes, authorization: DownloadAuthorization
+    payload: dict[str, Any], original: bytes, *, max_bytes: int
 ) -> tuple[str, str, str]:
     _text(payload["title"], "title", max_length=512)
     extraction = _text(
@@ -282,10 +281,10 @@ def _validate_payload_metadata(
     ).lower()
     if mime_type not in _MIME_TYPES:
         raise TranscriptToolContractError("unsupported transcript MIME type")
-    if authorization.max_bytes < len(original):
-        raise TranscriptToolContractError(
-            "provider payload exceeds authorized byte cap"
-        )
+    if type(max_bytes) is not int or not 0 < max_bytes <= MAX_PROVIDER_PAYLOAD_BYTES:
+        raise TranscriptToolContractError("invalid provider payload byte cap")
+    if len(original) > max_bytes:
+        raise TranscriptToolContractError("provider payload exceeds byte cap")
     return mime_type, extraction, payload_sha
 
 
@@ -294,7 +293,7 @@ def parse_transcript_tool_result(
     *,
     request: SourceRequest,
     candidate: DownloadCandidate,
-    authorization: DownloadAuthorization,
+    max_bytes: int = MAX_PROVIDER_PAYLOAD_BYTES,
 ) -> ValidatedTranscriptPayload:
     payload = _load_payload(raw_result)
     original = _decode_original(payload)
@@ -303,7 +302,7 @@ def parse_transcript_tool_result(
     _validate_period(payload, request, candidate)
     _validate_security(payload, request, candidate)
     mime_type, extraction, payload_sha = _validate_payload_metadata(
-        payload, original, authorization
+        payload, original, max_bytes=max_bytes
     )
     return ValidatedTranscriptPayload(
         original=original,

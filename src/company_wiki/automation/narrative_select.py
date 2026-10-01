@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from collections.abc import Callable, Sequence
+from collections.abc import Sequence
 from dataclasses import dataclass
 from typing import Any, Protocol
 
@@ -19,10 +19,6 @@ from company_wiki.source_catalog.narrative_evidence import (
     parse_transcript_text,
     select_narrative_evidence,
 )
-from company_wiki.source_catalog.provider_use_policy import (
-    ProviderUsePolicy,
-    ProviderUsePolicyError,
-)
 from company_wiki.source_catalog.source_reader import (
     SourceReadError,
 )
@@ -31,9 +27,6 @@ from company_wiki.source_catalog.transcript_text_extract import (
     TranscriptMaterial,
     TranscriptMaterialError,
     extract_transcript_material,
-)
-from company_wiki.source_catalog.transcript_use_policy import (
-    authorize_transcript_actions,
 )
 from company_wiki.source_contract import EvidenceSpan
 
@@ -53,7 +46,6 @@ from .narrative_contracts import (
     SELECT_RESULT_SCHEMA,
     SelectionValue,
     SourceRevisionEventPayload,
-    TranscriptActionPolicyValue,
     TranscriptByteBinding,
     TranscriptLineageValue,
 )
@@ -91,9 +83,6 @@ class NarrativeSelector(Protocol):
     ) -> NarrativeEvidencePackage: ...
 
 
-ProviderPolicyLoader = Callable[[], ProviderUsePolicy | None]
-
-
 @dataclass(frozen=True)
 class _SelectFailure(Exception):
     code: str
@@ -106,7 +95,6 @@ class _SelectionWork:
     parsed: NarrativeParseResult
     package: NarrativeEvidencePackage
     material: TranscriptMaterial | None
-    action_policy: TranscriptActionPolicyValue | None
 
 
 def _failure(code: str, outcome: HandlerOutcome, detail: str) -> HandlerResult:
@@ -136,7 +124,7 @@ def _read_error_result(error: SourceReadError) -> HandlerResult:
             "SOURCE_HASH_MISMATCH", HandlerOutcome.TERMINAL_FAILURE, error.reason
         )
     return _failure(
-        "SOURCE_UNAVAILABLE", HandlerOutcome.BLOCKED_HUMAN, error.reason
+        "SOURCE_UNAVAILABLE", HandlerOutcome.RETRYABLE, error.reason
     )
 
 
@@ -174,7 +162,7 @@ def _transcript_bindings(
         if type(start) is not int or type(end) is not int or end < start:
             raise _SelectFailure(
                 "PARSER_INCOMPLETE",
-                HandlerOutcome.BLOCKED_HUMAN,
+                HandlerOutcome.TERMINAL_FAILURE,
                 "selected transcript evidence has no stable line range",
             )
         lines = tuple(
@@ -183,7 +171,7 @@ def _transcript_bindings(
         if len(lines) != end - start + 1:
             raise _SelectFailure(
                 "PARSER_INCOMPLETE",
-                HandlerOutcome.BLOCKED_HUMAN,
+                HandlerOutcome.TERMINAL_FAILURE,
                 "selected transcript line range cannot be replayed",
             )
         bindings.append(
@@ -206,14 +194,10 @@ class NarrativeSelectHandler:
         self,
         *,
         reader: NarrativeSourceReader,
-        provider_policy_loader: ProviderPolicyLoader | None,
-        current_date: Callable[[], str],
         pdf_parser: PdfBytesParser = parse_pdf_bytes,
         selector: NarrativeSelector | None = None,
     ) -> None:
         self._reader = reader
-        self._provider_policy_loader = provider_policy_loader
-        self._current_date = current_date
         self._pdf_parser = pdf_parser
         self._selector = selector or select_narrative_evidence
 
@@ -242,16 +226,10 @@ class NarrativeSelectHandler:
                 HandlerOutcome.TERMINAL_FAILURE,
                 exc.detail,
             )
-        except ProviderUsePolicyError:
-            return _failure(
-                "POLICY_DENIED",
-                HandlerOutcome.TERMINAL_FAILURE,
-                "provider use policy is unavailable or invalid",
-            )
         except TranscriptMaterialError:
             return _failure(
                 "PARSER_INCOMPLETE",
-                HandlerOutcome.BLOCKED_HUMAN,
+                HandlerOutcome.TERMINAL_FAILURE,
                 "transcript material is not replayable",
             )
         except NarrativeContractError:
@@ -331,7 +309,7 @@ class NarrativeSelectHandler:
             context.checkpoint()
             package = self._run_selector(payload, parsed)
         self._require_usable_selection(parsed, package)
-        return _SelectionWork(parsed, package, None, None)
+        return _SelectionWork(parsed, package, None)
 
     def _parse_pdf(
         self,
@@ -351,7 +329,7 @@ class NarrativeSelectHandler:
         except (RuntimeError, ValueError) as exc:
             raise _SelectFailure(
                 "PARSER_INCOMPLETE",
-                HandlerOutcome.BLOCKED_HUMAN,
+                HandlerOutcome.TERMINAL_FAILURE,
                 "verified PDF cannot be parsed completely",
             ) from exc
 
@@ -367,7 +345,6 @@ class NarrativeSelectHandler:
                 HandlerOutcome.TERMINAL_FAILURE,
                 "transcript MIME type is unsupported",
             )
-        action_policy = self._transcript_policy(payload)
         material = extract_transcript_material(
             data, mime_type=payload.source_ref.mime_type
         )
@@ -381,46 +358,7 @@ class NarrativeSelectHandler:
         context.checkpoint()
         package = self._run_selector(payload, parsed)
         self._require_usable_selection(parsed, package)
-        return _SelectionWork(parsed, package, material, action_policy)
-
-    def _transcript_policy(
-        self, payload: SourceRevisionEventPayload
-    ) -> TranscriptActionPolicyValue:
-        pin = payload.transcript_policy
-        if pin is None or self._provider_policy_loader is None:
-            raise _SelectFailure(
-                "POLICY_DENIED",
-                HandlerOutcome.TERMINAL_FAILURE,
-                "transcript policy configuration is missing",
-            )
-        policy = self._provider_policy_loader()
-        if policy is None or policy.policy_sha256 != pin.expected_provider_policy_sha256:
-            raise _SelectFailure(
-                "POLICY_DENIED",
-                HandlerOutcome.TERMINAL_FAILURE,
-                "transcript policy differs from the event pin",
-            )
-        decision = authorize_transcript_actions(
-            rights_policy=policy,
-            provider_id=pin.provider_id,
-            source_url=pin.source_url,
-            actions=("derive_text", "select_evidence"),
-            on_date=self._current_date(),
-        )
-        if not decision.allowed or decision.rights_policy_sha256 != policy.policy_sha256:
-            raise _SelectFailure(
-                "POLICY_DENIED",
-                HandlerOutcome.TERMINAL_FAILURE,
-                "transcript actions are not currently permitted",
-            )
-        return TranscriptActionPolicyValue.from_dict(
-            {
-                "policy_sha256": policy.policy_sha256,
-                "evidence_sha256_by_action": [
-                    list(item) for item in decision.evidence_sha256_by_action
-                ],
-            }
-        )
+        return _SelectionWork(parsed, package, material)
 
     def _run_selector(
         self,
@@ -440,19 +378,19 @@ class NarrativeSelectHandler:
         if parsed.errors or parsed.opaque_pages or package.status == "blocked":
             raise _SelectFailure(
                 "PARSER_INCOMPLETE",
-                HandlerOutcome.BLOCKED_HUMAN,
+                HandlerOutcome.TERMINAL_FAILURE,
                 "source parsing is incomplete",
             )
         if not package.evidence_spans and not package.coverage_complete:
             raise _SelectFailure(
                 "PARSER_INCOMPLETE",
-                HandlerOutcome.BLOCKED_HUMAN,
+                HandlerOutcome.TERMINAL_FAILURE,
                 "empty selection does not have complete coverage",
             )
         if not package.evidence_spans and package.status != "skipped_no_narrative":
             raise _SelectFailure(
                 "PARSER_INCOMPLETE",
-                HandlerOutcome.BLOCKED_HUMAN,
+                HandlerOutcome.TERMINAL_FAILURE,
                 "valuable source has no replayable selected evidence",
             )
 
@@ -492,9 +430,6 @@ class NarrativeSelectHandler:
                 else None
             ),
             "transcript_byte_bindings": [item.to_dict() for item in bindings],
-            "transcript_action_policy": (
-                work.action_policy.to_dict() if work.action_policy is not None else None
-            ),
             "summary_scope": "selected_evidence_only",
         }
 

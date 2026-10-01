@@ -8,7 +8,7 @@
 
 ## Next Step
 
-> **2026-10-01 更新：**StockWiki W04 已完成本地主线验收（`master@b4f3846`，合并后 686 passed，ISO MIC canary 与 IQS public CLI 正反例通过）。CWP E-B 集中测试门在专用 `codex/narrative-gates-integration@cba745a` 工作树通过：UTF-8 环境下 404 passed、2 skipped、695 deselected；新增覆盖暂停/完成竞争、进程退出后恢复和 catalog lock 下 prepared→visible 恢复。该提交只在专用工作树，尚未并入 CWP `master@b0fd763`；两边各有 9/13 个独有提交，差异覆盖 77 个文件，需另做整合审查。最新四文档 E6 P1/P2 配对为 90.14/84.776 秒，P2 快约 6.3%、峰值 RSS 高约 23.5%，未达计划的 25% 提速门；锁等待 p95 未测。Worker 继续 paused/default-off，以 P1 为隔离基线。RF/FF/IQS 既有 owner 工作保持原样。
+> **2026-10-01 更新：**StockWiki W04 已合入本地主线并验收（`master@b4f3846`，686 tests 通过，ISO MIC canary 与 IQS public CLI 正反例通过）。CWP E-B 已在当前 `master@11b6472` 上做无快进集成；合并分支的 29 个变更测试文件回归为 **349 passed、2 skipped**，Ruff 检查 56 个变更 Python 文件通过，`git diff --check` 通过，Windows SourceExport v2 的 LF wire-format 也有回归保护。当前仅待提交 merge commit 并快进 CWP `master`。P2 实测四文档快约 6.3%、峰值 RSS 高约 23.5%，未达到 25% 提速门，锁等待 p95 未测；Worker 继续 paused/default-off。RF/FF/IQS 其他工作树保持各自 owner 状态。
 
 > **2026-09-28 权限/审查简化（优先于下方所有历史段落）：**不设 private/public、逐文档/逐期/逐 job 授权、review receipt、独立 reviewer 或人工批次审批。用户已授权范围内，自动化测试和 source/hash/lineage/预算断言决定能否继续；原始文档全部保留，只清理可重建且无引用的派生文件。下方 2026-09-27 transcript permission 细节和历史 G 门槛只作事实记录，不是待实施指令。
 
@@ -36,7 +36,7 @@ Phase 17 的 F0–F5 已完成。G1 离线主样本和回归集已经复跑：12
 
 ## Current Phase
 
-Phase 32：StockWiki W04 与 CWP E-B 测试验收已完成；CWP E-B 结果仍位于与主线分叉的专用工作树，跨分支整合待做。production Worker 继续 paused/default-off。真实 E6 P1/P2 只显示约 6.3% 提速且 P2 峰值 RSS 较高，锁等待 p95 未测，因此并发未获默认启用依据。下一步先核对并整合 CWP 专用工作树中已验收的提交，再推进正式 selected-package 消费/G-C 与 G-D；原始文档保留。
+Phase 32：StockWiki W04 已合入本地主线并完成 686-test 验收。CWP E-B 已与 `master@11b6472` 在集成分支合并，29 个变更测试文件为 349 passed、2 skipped，56 个变更 Python 文件 Ruff 通过；待创建 merge commit 并快进 `master`。production Worker 继续 paused/default-off。真实 E6 P1/P2 仅约 6.3% 提速且 P2 峰值 RSS 高约 23.5%，锁等待 p95 未测，因此并发尚无默认启用依据。随后优先完成正式 selected-package 消费/G-C 与 G-D 的跨仓端到端验收；原始文档保留。
 
 外部来源采购补充：FMP Basic key 实测 profile/有效 SEC 检索 200，press releases/transcript dates 402；SEC 原生 API 无 key。以 246 个本地公司目录作保守分母，Basic 补充 SEC 检索约 2,076 calls/30 日，纯 SEC/IR 路径为 0 FMP calls；Koyfin 无用户 API，Seeking Alpha 个人订阅不授权自动抓取；Motley Fool 官方条款也禁止自动访问/采集，现有适配器不得接通生产。详细价格、假设、权利分级和 30 日试点见 [外部数据源与成本卡](provider_cost_and_capability_2026-09-27.md)。采购结论为先不买，且不改变 G0/G1e 门禁。
 

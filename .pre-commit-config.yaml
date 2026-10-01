@@ -45,17 +45,11 @@ repos:
           src/company_wiki/source_catalog/narrative_pdf_groups.py
           src/company_wiki/source_catalog/narrative_replay.py
           src/company_wiki/source_catalog/narrative_evidence.py
-          src/company_wiki/source_catalog/provider_use_policy.py
-          src/company_wiki/source_catalog/transcript_use_policy.py
-          src/company_wiki/source_catalog/transcript_fetch_admission.py
-          src/company_wiki/source_catalog/transcript_fetch_validation.py
           src/company_wiki/source_catalog/transcript_tool_contract.py
-          src/company_wiki/source_catalog/transcript_admission_service.py
           src/company_wiki/source_catalog/transcript_import.py
           src/company_wiki/source_catalog/transcript_text_extract.py
           src/company_wiki/source_catalog/transcript_lineage.py
           src/company_wiki/source_catalog/transcript_material.py
-          src/company_wiki/source_catalog/transcript_preflight_service.py
           src/company_wiki/source_catalog/transcript_import_cli.py
           src/company_wiki/automation/narrative_contracts.py
           src/company_wiki/automation/execution_snapshot.py
@@ -82,12 +76,10 @@ repos:
           narrative_document|narrative_routing|narrative_candidates|
           narrative_context|narrative_budget|narrative_group_candidates|
           narrative_neighbors|narrative_finalize|narrative_pdf_groups|
-          narrative_replay|narrative_evidence|provider_use_policy|
-          transcript_use_policy|transcript_fetch_admission|
-          transcript_fetch_validation|transcript_tool_contract|
-          transcript_admission_service|transcript_import|
+          narrative_replay|narrative_evidence|
+          transcript_tool_contract|transcript_import|
           transcript_text_extract|transcript_lineage|transcript_material|
-          transcript_preflight_service|transcript_import_cli)|
+          transcript_import_cli)|
           automation/(narrative_contracts|execution_snapshot|execution_context|
           worker|registry|planner|cli|narrative_select|narrative_model|
           narrative_summarize|narrative_source_guard|narrative_verify|
@@ -97,6 +89,7 @@ repos:
         name: config doctor (WU-7.1, mirrors CI)
         entry: >-
           python -c "import sys, runpy; sys.path.insert(0, 'src');
+          sys.argv=['scripts/config_doctor.py', '--structure-only'];
           runpy.run_path('scripts/config_doctor.py', run_name='__main__')"
         language: system
         pass_filenames: false

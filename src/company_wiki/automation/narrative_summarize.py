@@ -2,17 +2,10 @@
 
 from __future__ import annotations
 
-from collections.abc import Callable, Mapping
+from collections.abc import Mapping
 from dataclasses import dataclass
 from typing import Any
 
-from company_wiki.source_catalog.provider_use_policy import (
-    ProviderUsePolicy,
-    ProviderUsePolicyError,
-)
-from company_wiki.source_catalog.transcript_use_policy import (
-    authorize_transcript_actions,
-)
 
 from .execution_context import JobExecutionContext
 from .models import HandlerError, HandlerMetrics, HandlerOutcome, HandlerResult
@@ -25,7 +18,6 @@ from .narrative_contracts import (
     PromptReviewValue,
     SUMMARY_RESULT_SCHEMA,
     SourceRevisionEventPayload,
-    TranscriptActionPolicyValue,
 )
 from .narrative_model import (
     ModelRateLimitError,
@@ -36,10 +28,6 @@ from .narrative_model import (
     NarrativeModelResponse,
     decode_model_draft,
 )
-
-
-PromptReviewLoader = Callable[[str], PromptReviewValue | None]
-ProviderPolicyLoader = Callable[[], ProviderUsePolicy | None]
 
 
 @dataclass(frozen=True)
@@ -110,20 +98,6 @@ def _validate_dependency_identity(
             HandlerOutcome.TERMINAL_FAILURE,
             "select dependency identity differs from the source event",
         )
-    if payload.source_metadata.source_class != "transcript":
-        return
-    pin = payload.transcript_policy
-    action = selected.transcript_action_policy
-    if (
-        pin is None
-        or action is None
-        or action.policy_sha256 != pin.expected_provider_policy_sha256
-    ):
-        raise _SummaryFailure(
-            "DEPENDENCY_INVALID",
-            HandlerOutcome.TERMINAL_FAILURE,
-            "select dependency transcript policy differs from the source event",
-        )
 
 
 class NarrativeSummarizeHandler:
@@ -133,14 +107,8 @@ class NarrativeSummarizeHandler:
         self,
         *,
         model: NarrativeModel | None,
-        prompt_review_loader: PromptReviewLoader,
-        provider_policy_loader: ProviderPolicyLoader | None,
-        current_date: Callable[[], str],
     ) -> None:
         self._model = model
-        self._prompt_review_loader = prompt_review_loader
-        self._provider_policy_loader = provider_policy_loader
-        self._current_date = current_date
 
     def __call__(self, context: JobExecutionContext) -> HandlerResult:
         try:
@@ -163,12 +131,6 @@ class NarrativeSummarizeHandler:
                 HandlerOutcome.TERMINAL_FAILURE,
                 "model response violates its transport contract",
             )
-        except ProviderUsePolicyError:
-            return _failure(
-                "POLICY_DENIED",
-                HandlerOutcome.TERMINAL_FAILURE,
-                "provider use policy is unavailable or invalid",
-            )
 
     def _execute(self, context: JobExecutionContext) -> HandlerResult:
         context.checkpoint()
@@ -180,18 +142,15 @@ class NarrativeSummarizeHandler:
         if self._model is None:
             raise _SummaryFailure(
                 "MODEL_NOT_CONFIGURED",
-                HandlerOutcome.BLOCKED_HUMAN,
+                HandlerOutcome.TERMINAL_FAILURE,
                 "narrative model is not configured",
             )
-        review = self._current_review(selected)
-        action_policy = self._transcript_policy(payload, selected)
+        review = selected.prompt_review
         request = NarrativeModelRequest.from_selection(selected)
         context.checkpoint()
         response = self._model.generate(request)
         context.checkpoint()
-        return _success(
-            self._completed_result(selected, review, action_policy, response)
-        )
+        return _success(self._completed_result(selected, review, response))
 
     @staticmethod
     def _payload(context: JobExecutionContext) -> SourceRevisionEventPayload:
@@ -207,62 +166,9 @@ class NarrativeSummarizeHandler:
         return context.source_revision
 
     def _current_review(self, selected: NarrativeSelectResult) -> PromptReviewValue:
-        current = self._prompt_review_loader(selected.source_ref.document_id)
-        if (
-            current is None
-            or current.status == "not_reviewed"
-            or current != selected.prompt_review
-        ):
-            raise _SummaryFailure(
-                "PROMPT_REVIEW_REQUIRED",
-                HandlerOutcome.BLOCKED_HUMAN,
-                "prompt review is missing or differs from the selection snapshot",
-            )
-        current.validate_source(selected.source_ref)
-        return current
-
-    def _transcript_policy(
-        self,
-        payload: SourceRevisionEventPayload,
-        selected: NarrativeSelectResult,
-    ) -> TranscriptActionPolicyValue | None:
-        if selected.source_metadata.source_class != "transcript":
-            return None
-        pin = payload.transcript_policy
-        if pin is None or self._provider_policy_loader is None:
-            raise _SummaryFailure(
-                "POLICY_DENIED",
-                HandlerOutcome.TERMINAL_FAILURE,
-                "transcript summary policy configuration is missing",
-            )
-        policy = self._provider_policy_loader()
-        if policy is None or policy.policy_sha256 != pin.expected_provider_policy_sha256:
-            raise _SummaryFailure(
-                "POLICY_DENIED",
-                HandlerOutcome.TERMINAL_FAILURE,
-                "transcript summary policy differs from the event pin",
-            )
-        decision = authorize_transcript_actions(
-            rights_policy=policy,
-            provider_id=pin.provider_id,
-            source_url=pin.source_url,
-            actions=("generate_summary",),
-            on_date=self._current_date(),
-        )
-        if not decision.allowed or decision.rights_policy_sha256 != policy.policy_sha256:
-            raise _SummaryFailure(
-                "POLICY_DENIED",
-                HandlerOutcome.TERMINAL_FAILURE,
-                "transcript summary action is not currently permitted",
-            )
-        return TranscriptActionPolicyValue.from_dict(
-            {
-                "policy_sha256": policy.policy_sha256,
-                "evidence_sha256_by_action": [
-                    list(item) for item in decision.evidence_sha256_by_action
-                ],
-            }
-        )
+        """Return optional quality metadata; it is not permission to call a model."""
+        selected.prompt_review.validate_source(selected.source_ref)
+        return selected.prompt_review
 
     @staticmethod
     def _skip_result(selected: NarrativeSelectResult) -> NarrativeSummaryResult:
@@ -275,7 +181,6 @@ class NarrativeSummarizeHandler:
             "draft": None,
             "model": None,
             "prompt_review": selected.prompt_review.to_dict(),
-            "transcript_action_policy": None,
         }
         try:
             result = NarrativeSummaryResult.from_dict(raw)
@@ -292,7 +197,6 @@ class NarrativeSummarizeHandler:
     def _completed_result(
         selected: NarrativeSelectResult,
         review: PromptReviewValue,
-        action_policy: TranscriptActionPolicyValue | None,
         response: NarrativeModelResponse,
     ) -> NarrativeSummaryResult:
         draft = decode_model_draft(response)
@@ -310,9 +214,6 @@ class NarrativeSummarizeHandler:
                 "response_sha256": response.response_sha256,
             },
             "prompt_review": review.to_dict(),
-            "transcript_action_policy": (
-                action_policy.to_dict() if action_policy is not None else None
-            ),
         }
         try:
             result = NarrativeSummaryResult.from_dict(raw)
@@ -334,4 +235,4 @@ class NarrativeSummarizeHandler:
             ) from exc
 
 
-__all__ = ["NarrativeSummarizeHandler", "PromptReviewLoader"]
+__all__ = ["NarrativeSummarizeHandler"]

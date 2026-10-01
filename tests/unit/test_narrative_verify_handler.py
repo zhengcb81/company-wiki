@@ -41,7 +41,6 @@ from company_wiki.source_catalog.narrative_evidence import (
     parse_transcript_text,
     select_narrative_evidence,
 )
-from company_wiki.source_catalog.provider_use_policy import ProviderUsePolicy
 from company_wiki.source_catalog.source_reader import (
     ReviewSnapshot,
     SourceRef,
@@ -70,37 +69,6 @@ def _pdf_bytes(text: str) -> bytes:
     data = document.tobytes()
     document.close()
     return data
-
-
-def _policy(*, revoked: bool = False) -> ProviderUsePolicy:
-    payload: dict[str, object] = {
-        "schema_version": "provider-use-policy/1",
-        "policy_id": "verify-handler-policy",
-        "rules": [
-            {
-                "provider_id": "fixture_provider",
-                "origin_host": "fixtures.invalid",
-                "path_prefix": "/transcripts",
-                "content_class": "earnings_call_transcript",
-                "rights_evidence_ref": "offline fixture",
-                "rights_evidence_sha256": _sha("rights"),
-                "reviewer": "unit-test",
-                "reviewed_at": "2026-09-01",
-                "valid_from": "2026-09-01",
-                "valid_until": "2026-09-30",
-                "permitted_actions": [
-                    "derive_text",
-                    "generate_summary",
-                    "select_evidence",
-                ],
-                "retention_scope": "company_wiki_local",
-                "export_scope": "stockwiki_readonly_excerpt",
-                "revoked": revoked,
-            }
-        ],
-    }
-    payload["policy_sha256"] = _sha(canonical_json(payload))
-    return ProviderUsePolicy.from_dict(payload)
 
 
 def _review(source_sha: str) -> dict[str, object]:
@@ -157,7 +125,6 @@ def _selected(
     *,
     transcript: bool = False,
     skipped: bool = False,
-    policy: ProviderUsePolicy | None = None,
 ) -> tuple[bytes, NarrativeSelectResult]:
     if transcript:
         data = (
@@ -210,9 +177,8 @@ def _selected(
         assert package.status == "skipped_no_narrative"
     else:
         assert package.evidence_spans
-    policy = policy or _policy()
     value = {
-        "schema_version": "narrative-select-result/1.0",
+        "schema_version": "narrative-select-result/2.0",
         "source_ref": {
             "schema_version": "2.0",
             "document_id": "doc-verify",
@@ -239,17 +205,6 @@ def _selected(
         "transcript_lineage": material.lineage_dict() if material is not None else None,
         "transcript_byte_bindings": (
             _bindings(material, package.evidence_spans) if material is not None else []
-        ),
-        "transcript_action_policy": (
-            {
-                "policy_sha256": policy.policy_sha256,
-                "evidence_sha256_by_action": [
-                    ["derive_text", _sha("derive")],
-                    ["select_evidence", _sha("select")],
-                ],
-            }
-            if transcript
-            else None
         ),
         "summary_scope": "selected_evidence_only",
     }
@@ -288,10 +243,9 @@ def _summary(
             "prompt_version": prompt_version,
             "response_sha256": _sha("response"),
         }
-    transcript = selected.source_metadata.source_class == "transcript"
     result = NarrativeSummaryResult.from_dict(
         {
-            "schema_version": "narrative-summary-result/1.0",
+            "schema_version": "narrative-summary-result/2.0",
             "source_ref": selected.source_ref.to_dict(),
             "language": selected.source_metadata.language,
             "translate": False,
@@ -299,43 +253,18 @@ def _summary(
             "draft": draft,
             "model": model,
             "prompt_review": selected.prompt_review.to_dict(),
-            "transcript_action_policy": (
-                {
-                    "policy_sha256": selected.transcript_action_policy.policy_sha256,
-                    "evidence_sha256_by_action": [
-                        ["generate_summary", _sha("summary")]
-                    ],
-                }
-                if transcript and not skipped
-                else None
-            ),
         }
     )
     result.validate_against(selected)
     return result
 
 
-def _payload(
-    selected: NarrativeSelectResult,
-    policy: ProviderUsePolicy | None = None,
-) -> dict[str, object]:
-    transcript = selected.source_metadata.source_class == "transcript"
-    policy = policy or _policy()
+def _payload(selected: NarrativeSelectResult) -> dict[str, object]:
     return {
-        "schema_version": "source-revision-event/1.0",
+        "schema_version": "source-revision-event/2.0",
         "source_ref": selected.source_ref.to_dict(),
         "expected_read_policy_sha256": selected.expected_read_policy_sha256,
         "source_metadata": selected.source_metadata.to_dict(),
-        "transcript_policy": (
-            {
-                "provider_id": "fixture_provider",
-                "source_url": "https://fixtures.invalid/transcripts/2026/q2.txt",
-                "content_class": "earnings_call_transcript",
-                "expected_provider_policy_sha256": policy.policy_sha256,
-            }
-            if transcript
-            else None
-        ),
     }
 
 
@@ -487,14 +416,11 @@ def _run(
     summary: NarrativeSummaryResult,
     *,
     reader: FakeReader | None = None,
-    policy: ProviderUsePolicy | None = None,
     payload: dict[str, object] | None = None,
     pdf_replayer: Callable[..., tuple[tuple[str, ...], tuple[str, ...]]] | None = None,
 ) -> HandlerResult:
     handler = NarrativeVerifyHandler(
         reader=reader or FakeReader(selected, data),
-        provider_policy_loader=(lambda: policy) if policy is not None else None,
-        current_date=lambda: "2026-09-28",
         pdf_replayer=pdf_replayer,
     )
     return handler(_context(selected, summary, payload=payload))
@@ -537,33 +463,24 @@ def test_verify_handler_skip_bundle_stays_under_small_cap() -> None:
     assert len(raw.effects) == 1
 
 
-def test_verify_handler_transcript_replays_bytes_and_rechecks_all_actions() -> None:
-    policy = _policy()
-    data, selected = _selected(transcript=True, policy=policy)
+def test_verify_handler_transcript_replays_bytes_without_provider_policy() -> None:
+    data, selected = _selected(transcript=True)
     summary = _summary(selected)
 
     raw = _run(
         data,
         selected,
         summary,
-        policy=policy,
-        payload=_payload(selected, policy),
+        payload=_payload(selected),
     )
 
     assert raw.outcome is HandlerOutcome.SUCCEEDED
     bundle = NarrativeBundle.from_dict(raw.result)
-    assert bundle.transcript_action_policy is not None
-    assert bundle.transcript_action_policy.actions == {
-        "derive_text",
-        "select_evidence",
-        "generate_summary",
-    }
     assert bundle.replay.locator_count == len(selected.evidence_spans)
 
 
 def test_verify_handler_rejects_transcript_byte_binding_mismatch_with_zero_effect() -> None:
-    policy = _policy()
-    data, selected = _selected(transcript=True, policy=policy)
+    data, selected = _selected(transcript=True)
     changed = selected.to_dict()
     changed["transcript_byte_bindings"][0]["source_byte_ranges"][0]["start"] += 1
     drifted = NarrativeSelectResult.from_dict(changed)
@@ -573,11 +490,10 @@ def test_verify_handler_rejects_transcript_byte_binding_mismatch_with_zero_effec
         data,
         drifted,
         summary,
-        policy=policy,
-        payload=_payload(drifted, policy),
+        payload=_payload(drifted),
     )
 
-    assert raw.outcome is HandlerOutcome.BLOCKED_HUMAN
+    assert raw.outcome is HandlerOutcome.TERMINAL_FAILURE
     assert raw.error is not None and raw.error.code == "LOCATOR_REPLAY_FAILED"
     assert raw.effects == ()
 
@@ -591,13 +507,13 @@ def test_verify_handler_any_pdf_locator_failure_has_zero_effect() -> None:
 
     raw = _run(data, selected, summary, pdf_replayer=fail_replay)
 
-    assert raw.outcome is HandlerOutcome.BLOCKED_HUMAN
+    assert raw.outcome is HandlerOutcome.TERMINAL_FAILURE
     assert raw.error is not None and raw.error.code == "LOCATOR_REPLAY_FAILED"
     assert raw.effects == ()
 
 
 @pytest.mark.parametrize("case", ["drift", "missing"])
-def test_verify_handler_post_model_review_drift_blocks_effect(case: str) -> None:
+def test_verify_handler_review_metadata_does_not_gate_effect(case: str) -> None:
     data, selected = _selected()
     summary = _summary(selected)
     current = replace(selected.prompt_review, policy_hash=_sha("new-review-policy"))
@@ -612,28 +528,9 @@ def test_verify_handler_post_model_review_drift_blocks_effect(case: str) -> None
         reader=reader,
     )
 
-    assert raw.outcome is HandlerOutcome.BLOCKED_HUMAN
-    assert raw.error is not None and raw.error.code == "PROMPT_REVIEW_REQUIRED"
-    assert raw.effects == ()
-
-
-def test_verify_handler_post_model_transcript_revoke_blocks_effect() -> None:
-    pinned = _policy()
-    data, selected = _selected(transcript=True, policy=pinned)
-    summary = _summary(selected)
-    revoked = _policy(revoked=True)
-
-    raw = _run(
-        data,
-        selected,
-        summary,
-        policy=revoked,
-        payload=_payload(selected, pinned),
-    )
-
-    assert raw.outcome is HandlerOutcome.TERMINAL_FAILURE
-    assert raw.error is not None and raw.error.code == "POLICY_DENIED"
-    assert raw.effects == ()
+    assert raw.outcome is HandlerOutcome.SUCCEEDED
+    assert raw.error is None
+    assert len(raw.effects) == 1
 
 
 @pytest.mark.parametrize("case", ["event", "parser", "prompt"])

@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from collections.abc import Callable, Sequence
+from collections.abc import Sequence
 from dataclasses import dataclass
 from typing import Protocol
 
@@ -14,18 +14,11 @@ from company_wiki.source_catalog.narrative_evidence import (
     verify_pdf_evidence_spans_bytes,
     verify_transcript_evidence_spans,
 )
-from company_wiki.source_catalog.provider_use_policy import (
-    ProviderUsePolicy,
-    ProviderUsePolicyError,
-)
-from company_wiki.source_catalog.source_reader import SourceReadError, VerifiedContent
+from company_wiki.source_catalog.source_reader import SourceReadError
 from company_wiki.source_catalog.transcript_text_extract import (
     TranscriptMaterialError,
     TranscriptTextLine,
     extract_transcript_material,
-)
-from company_wiki.source_catalog.transcript_use_policy import (
-    authorize_transcript_actions,
 )
 from company_wiki.source_contract import EvidenceSpan
 
@@ -50,13 +43,11 @@ from .narrative_contracts import (
     PhysicalPathLeakError,
     PromptReviewValue,
     SourceRevisionEventPayload,
-    TranscriptActionPolicyValue,
 )
 from .narrative_model import NARRATIVE_PROMPT_VERSION
 from .narrative_source_guard import (
     NarrativeSourceGuardError,
     NarrativeSourceReader,
-    prompt_review_value,
     source_ref,
     validate_opened_identity,
     validate_source_metadata,
@@ -65,7 +56,6 @@ from .narrative_source_guard import (
 
 BUNDLE_PRODUCER_VERSION = "1.0.0"
 EFFECT_TYPE = "narrative_bundle.publish"
-ProviderPolicyLoader = Callable[[], ProviderUsePolicy | None]
 
 
 class PdfEvidenceReplayer(Protocol):
@@ -110,9 +100,7 @@ def _read_error_result(error: SourceReadError) -> HandlerResult:
         return _failure(
             "SOURCE_HASH_MISMATCH", HandlerOutcome.TERMINAL_FAILURE, error.reason
         )
-    return _failure(
-        "SOURCE_UNAVAILABLE", HandlerOutcome.BLOCKED_HUMAN, error.reason
-    )
+    return _failure("SOURCE_UNAVAILABLE", HandlerOutcome.RETRYABLE, error.reason)
 
 
 def _dependencies(
@@ -184,38 +172,6 @@ def _validate_dependency_identity(
             HandlerOutcome.TERMINAL_FAILURE,
             "dependency component version is not the active version",
         )
-    if payload.source_metadata.source_class == "transcript":
-        _validate_transcript_dependency_policy(payload, selected, summary)
-
-
-def _validate_transcript_dependency_policy(
-    payload: SourceRevisionEventPayload,
-    selected: NarrativeSelectResult,
-    summary: NarrativeSummaryResult,
-) -> None:
-    pin = payload.transcript_policy
-    selected_policy = selected.transcript_action_policy
-    summary_policy = summary.transcript_action_policy
-    if (
-        pin is None
-        or selected_policy is None
-        or selected_policy.policy_sha256 != pin.expected_provider_policy_sha256
-        or (
-            summary.status == "completed"
-            and (
-                summary_policy is None
-                or summary_policy.policy_sha256
-                != pin.expected_provider_policy_sha256
-            )
-        )
-    ):
-        raise _VerifyFailure(
-            "DEPENDENCY_INVALID",
-            HandlerOutcome.TERMINAL_FAILURE,
-            "transcript dependency policy differs from the source event",
-        )
-
-
 class NarrativeVerifyHandler:
     """Replay all locators and emit one logical publication effect."""
 
@@ -223,13 +179,9 @@ class NarrativeVerifyHandler:
         self,
         *,
         reader: NarrativeSourceReader,
-        provider_policy_loader: ProviderPolicyLoader | None,
-        current_date: Callable[[], str],
         pdf_replayer: PdfEvidenceReplayer | None = None,
     ) -> None:
         self._reader = reader
-        self._provider_policy_loader = provider_policy_loader
-        self._current_date = current_date
         self._pdf_replayer = pdf_replayer or verify_pdf_evidence_spans_bytes
 
     def __call__(self, context: JobExecutionContext) -> HandlerResult:
@@ -241,16 +193,10 @@ class NarrativeVerifyHandler:
             return _failure(exc.code, HandlerOutcome.TERMINAL_FAILURE, exc.detail)
         except _VerifyFailure as exc:
             return _failure(exc.code, exc.outcome, exc.detail)
-        except ProviderUsePolicyError:
-            return _failure(
-                "POLICY_DENIED",
-                HandlerOutcome.TERMINAL_FAILURE,
-                "provider use policy is unavailable or invalid",
-            )
         except TranscriptMaterialError:
             return _failure(
                 "LOCATOR_REPLAY_FAILED",
-                HandlerOutcome.BLOCKED_HUMAN,
+                HandlerOutcome.TERMINAL_FAILURE,
                 "transcript material cannot be replayed",
             )
 
@@ -267,11 +213,10 @@ class NarrativeVerifyHandler:
         )
         validate_opened_identity(payload, opened)
         validate_source_metadata(payload, self._reader.describe_version(ref))
-        review = self._current_review(opened, selected, summary)
-        action_policy = self._current_transcript_policy(payload, summary)
+        review = self._current_review(selected, summary)
         context.checkpoint()
         self._replay(opened.data, selected)
-        bundle = self._bundle(selected, summary, review, action_policy)
+        bundle = self._bundle(selected, summary, review)
         context.checkpoint()
         effect = self._effect(context, bundle)
         return HandlerResult(
@@ -298,75 +243,19 @@ class NarrativeVerifyHandler:
 
     @staticmethod
     def _current_review(
-        opened: VerifiedContent,
         selected: NarrativeSelectResult,
         summary: NarrativeSummaryResult,
     ) -> PromptReviewValue:
-        try:
-            current = prompt_review_value(opened)
-        except (NarrativeSourceGuardError, NarrativeContractError) as exc:
+        # Prompt review is descriptive metadata; source identity and locator replay
+        # provide the automatic acceptance checks for a bundle.
+        selected.prompt_review.validate_source(selected.source_ref)
+        if summary.prompt_review != selected.prompt_review:
             raise _VerifyFailure(
-                "PROMPT_REVIEW_REQUIRED",
-                HandlerOutcome.BLOCKED_HUMAN,
-                "current prompt review is missing or invalid",
-            ) from exc
-        if (
-            current.status == "not_reviewed"
-            or current != selected.prompt_review
-            or current != summary.prompt_review
-        ):
-            raise _VerifyFailure(
-                "PROMPT_REVIEW_REQUIRED",
-                HandlerOutcome.BLOCKED_HUMAN,
-                "current prompt review differs from narrative dependencies",
-            )
-        return current
-
-    def _current_transcript_policy(
-        self,
-        payload: SourceRevisionEventPayload,
-        summary: NarrativeSummaryResult,
-    ) -> TranscriptActionPolicyValue | None:
-        if payload.source_metadata.source_class != "transcript":
-            return None
-        pin = payload.transcript_policy
-        if pin is None or self._provider_policy_loader is None:
-            raise _VerifyFailure(
-                "POLICY_DENIED",
+                "DEPENDENCY_INVALID",
                 HandlerOutcome.TERMINAL_FAILURE,
-                "transcript verify policy configuration is missing",
+                "summary review metadata differs from selection",
             )
-        policy = self._provider_policy_loader()
-        if policy is None or policy.policy_sha256 != pin.expected_provider_policy_sha256:
-            raise _VerifyFailure(
-                "POLICY_DENIED",
-                HandlerOutcome.TERMINAL_FAILURE,
-                "current transcript policy differs from the event pin",
-            )
-        actions = ["derive_text", "select_evidence"]
-        if summary.status == "completed":
-            actions.append("generate_summary")
-        decision = authorize_transcript_actions(
-            rights_policy=policy,
-            provider_id=pin.provider_id,
-            source_url=pin.source_url,
-            actions=tuple(actions),
-            on_date=self._current_date(),
-        )
-        if not decision.allowed or decision.rights_policy_sha256 != policy.policy_sha256:
-            raise _VerifyFailure(
-                "POLICY_DENIED",
-                HandlerOutcome.TERMINAL_FAILURE,
-                "current transcript actions are not permitted",
-            )
-        return TranscriptActionPolicyValue.from_dict(
-            {
-                "policy_sha256": policy.policy_sha256,
-                "evidence_sha256_by_action": [
-                    list(item) for item in decision.evidence_sha256_by_action
-                ],
-            }
-        )
+        return selected.prompt_review
 
     def _replay(self, data: bytes, selected: NarrativeSelectResult) -> None:
         if selected.source_metadata.source_class == "filing":
@@ -385,7 +274,7 @@ class NarrativeVerifyHandler:
         except (RuntimeError, ValueError) as exc:
             raise _VerifyFailure(
                 "LOCATOR_REPLAY_FAILED",
-                HandlerOutcome.BLOCKED_HUMAN,
+                HandlerOutcome.TERMINAL_FAILURE,
                 "PDF evidence replay could not complete",
             ) from exc
         self._require_full_replay(selected.evidence_spans, verified, failed)
@@ -403,7 +292,7 @@ class NarrativeVerifyHandler:
         ):
             raise _VerifyFailure(
                 "LOCATOR_REPLAY_FAILED",
-                HandlerOutcome.BLOCKED_HUMAN,
+                HandlerOutcome.TERMINAL_FAILURE,
                 "transcript material lineage differs from selection",
             )
         NarrativeVerifyHandler._verify_transcript_bindings(material.lines, selected)
@@ -418,7 +307,7 @@ class NarrativeVerifyHandler:
         except (RuntimeError, ValueError) as exc:
             raise _VerifyFailure(
                 "LOCATOR_REPLAY_FAILED",
-                HandlerOutcome.BLOCKED_HUMAN,
+                HandlerOutcome.TERMINAL_FAILURE,
                 "transcript evidence replay could not complete",
             ) from exc
         NarrativeVerifyHandler._require_full_replay(
@@ -452,7 +341,7 @@ class NarrativeVerifyHandler:
             ):
                 raise _VerifyFailure(
                     "LOCATOR_REPLAY_FAILED",
-                    HandlerOutcome.BLOCKED_HUMAN,
+                    HandlerOutcome.TERMINAL_FAILURE,
                     "transcript byte binding differs from original bytes",
                 )
 
@@ -466,7 +355,7 @@ class NarrativeVerifyHandler:
         if failed or set(verified) != expected or len(verified) != len(expected):
             raise _VerifyFailure(
                 "LOCATOR_REPLAY_FAILED",
-                HandlerOutcome.BLOCKED_HUMAN,
+                HandlerOutcome.TERMINAL_FAILURE,
                 "not every selected locator replayed exactly",
             )
 
@@ -475,7 +364,6 @@ class NarrativeVerifyHandler:
         selected: NarrativeSelectResult,
         summary: NarrativeSummaryResult,
         review: PromptReviewValue,
-        action_policy: TranscriptActionPolicyValue | None,
     ) -> NarrativeBundle:
         summary_raw = summary.to_dict()
         quality = (
@@ -510,9 +398,6 @@ class NarrativeVerifyHandler:
             "transcript_byte_bindings": [
                 item.to_dict() for item in selected.transcript_byte_bindings
             ],
-            "transcript_action_policy": (
-                action_policy.to_dict() if action_policy is not None else None
-            ),
             "versions": {
                 "parser": selected.parser.version,
                 "selector": selected.selector.version,

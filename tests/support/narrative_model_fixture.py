@@ -26,12 +26,26 @@ class ReplayNarrativeModel:
             raise AssertionError("replay model must not be called for an empty selection")
         first = evidence[0]
         role = first["structured_value"].get("source_role")
-        claim_type = (
-            "analyst_question"
-            if role in {"analyst", "investor_question"}
-            else "company_statement"
-        )
-        modality = "question" if claim_type == "analyst_question" else "actual"
+        if role in {"analyst", "investor_question"}:
+            claim_type = "analyst_question"
+            modality = "question"
+            needs_review = False
+            draft_status = "draft"
+        elif role in {"company_filing", "management"}:
+            claim_type = "company_statement"
+            modality = "actual"
+            needs_review = False
+            draft_status = "draft"
+        else:
+            # Real PDFs can contain evidence without a trustworthy speaker
+            # role. Keep the replay output conservative and contract-valid.
+            claim_type = "uncertain"
+            modality = "uncertain"
+            needs_review = True
+            draft_status = "needs_review"
+        if "locator_unstable" in first.get("quality_flags", []):
+            needs_review = True
+            draft_status = "needs_review"
         draft = {
             "source_id": envelope["source"]["source_id"],
             "source_sha256": envelope["source"]["source_sha256"],
@@ -43,10 +57,10 @@ class ReplayNarrativeModel:
                     "evidence_ids": [first["span_id"]],
                     "claim_type": claim_type,
                     "modality": modality,
-                    "needs_review": False,
+                    "needs_review": needs_review,
                 }
             ],
-            "status": "draft",
+            "status": draft_status,
         }
         response = NarrativeModelResponse(
             adapter_id="replay",
