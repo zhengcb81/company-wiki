@@ -1,6 +1,6 @@
 # 跨线收尾盘点（2026-10-01）
 
-本页补充 Phase 33；事实取自当前 Git、各仓 PWF 和已交付测试收据。本次只收尾计划与发布，不启动新的产品实现。较早施工表为历史记录，不能据此重复派发。
+本页补充 Phase 33；事实取自当前 Git、各仓 PWF 和已交付测试收据。本次收尾计划与发布；仅对发布检查发现的两处复杂度超限作保行为拆分，不启动新功能。较早施工表为历史记录，不能据此重复派发。
 
 ## 当前进展
 
@@ -34,4 +34,4 @@ FMP 大节点测试：真实 ET serializer golden→CWP import CLI→catalog→v
 - ET 已正常推送 `1aa9111..4924d57` 到 origin/main；未跟踪文件未纳入。
 - RF 首次 push 被既有检查拒绝：稀疏检出遗漏已跟踪 `e2e/`，Ruff E902。仅补齐 e2e/.github，保留原字节；后续 Ruff/编译/host/mypy 通过，但 historical current_triplet ancestry 两项失败，RF 未推送。根因与恢复时的 TDD 修复范围见 progress.md，不 bypass。
 - CWP 将本次收尾及既有已验收主线一并正常推送；最终 commit/远端核对见 progress.md。StockWiki/IQS 无远端；FF 待汇合支线不在本次发布范围。
-- 本次期间没有改产品代码、生产配置或原始文档；不运行空间清理/生产 Worker。用户要求收尾后暂停，恢复后从上述剩余节点继续。
+- 本次仅将 transcript importer 入口校验与工具合同的 byte cap 校验抽为 helper，保留错误顺序和原有行为；没有改生产配置或原始文档；不运行空间清理/生产 Worker。用户要求收尾后暂停，恢复后从上述剩余节点继续。

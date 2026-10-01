@@ -77,6 +77,21 @@ def _remove_staged(staged: Path, root: Path) -> None:
     resolved.unlink()
 
 
+def _validate_import_context(
+    request: SourceRequest,
+    candidate: DownloadCandidate,
+    writer: CanonicalSourceWriter,
+) -> None:
+    if not isinstance(request, SourceRequest):
+        raise TranscriptImportError("request is required")
+    if not isinstance(candidate, DownloadCandidate):
+        raise TranscriptImportError("candidate is required")
+    if not isinstance(writer, CanonicalSourceWriter):
+        raise TranscriptImportError("canonical writer is required")
+    if request.document_kind != "investor_call_transcript":
+        raise TranscriptImportError("request is not for an earnings transcript")
+
+
 def import_transcript_tool_result(
     raw_result: bytes | str,
     *,
@@ -92,14 +107,7 @@ def import_transcript_tool_result(
     receipt or provider policy file; it still validates that the returned
     document matches that request and candidate before writing anything.
     """
-    if not isinstance(request, SourceRequest):
-        raise TranscriptImportError("request is required")
-    if not isinstance(candidate, DownloadCandidate):
-        raise TranscriptImportError("candidate is required")
-    if not isinstance(writer, CanonicalSourceWriter):
-        raise TranscriptImportError("canonical writer is required")
-    if request.document_kind != "investor_call_transcript":
-        raise TranscriptImportError("request is not for an earnings transcript")
+    _validate_import_context(request, candidate, writer)
     try:
         payload = parse_transcript_tool_result(
             raw_result,

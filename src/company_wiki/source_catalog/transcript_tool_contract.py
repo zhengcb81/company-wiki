@@ -257,6 +257,13 @@ def _validate_security(
         )
 
 
+def _validate_byte_cap(original: bytes, max_bytes: int) -> None:
+    if type(max_bytes) is not int or not 0 < max_bytes <= MAX_PROVIDER_PAYLOAD_BYTES:
+        raise TranscriptToolContractError("invalid provider payload byte cap")
+    if len(original) > max_bytes:
+        raise TranscriptToolContractError("provider payload exceeds byte cap")
+
+
 def _validate_payload_metadata(
     payload: dict[str, Any], original: bytes, *, max_bytes: int
 ) -> tuple[str, str, str]:
@@ -281,10 +288,7 @@ def _validate_payload_metadata(
     ).lower()
     if mime_type not in _MIME_TYPES:
         raise TranscriptToolContractError("unsupported transcript MIME type")
-    if type(max_bytes) is not int or not 0 < max_bytes <= MAX_PROVIDER_PAYLOAD_BYTES:
-        raise TranscriptToolContractError("invalid provider payload byte cap")
-    if len(original) > max_bytes:
-        raise TranscriptToolContractError("provider payload exceeds byte cap")
+    _validate_byte_cap(original, max_bytes)
     return mime_type, extraction, payload_sha
 
 

@@ -641,3 +641,5 @@
 - 本轮命令问题：rg 以 glob 当 Windows 具体路径（error 123）及查询不存在 pyproject/ci 文件（error 2/3）；改用明确现存文件和目录级 -g 过滤。完整 Git 状态仍报告两处旧 pytest 目录不可读，不以此推断可以删除，也不纳入提交。
 
 - RF 标准 push 的第二个阻断已查明：compatibility validator 把标明 informational 的旧 current_triplet 当成当前 ancestry 检查对象；2026-08-12 两个 historical SHA 真实存在但低于后设 baseline。Ruff/编译/host/mypy 均通过，25 个 meta 测试通过、2 个失败。恢复后用 live repo HEAD 或明确 snapshot 校验 API 修正分层，先 RED；本轮保留阻断，不绕过检查、不篡改历史记录。RF CodeGraph 未初始化，本次用已知验证器源文件定位，无索引初始化或产品修改。
+
+- CWP publish gate 揭示两处新文件复杂度债（12/13）。问题限于函数职责集中，不是导入协议错误；入口校验与 payload budget 独立 helper 后 ratchet 与 13 项真实 CLI/原件导入/full-chain 回归通过，Ruff 通过。保留限制与错误顺序，不扩大冻结豁免表。

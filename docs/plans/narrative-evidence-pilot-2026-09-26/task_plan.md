@@ -9,7 +9,7 @@
 ## Phase 34：发布收尾与暂停（2026-10-01）
 
 - [x] 完成各线/PWF 复核并形成[收尾报告](harness_lanes/results/cross_line_closeout_2026-10-01.md)；不重复已完成 E-B/W04，不覆盖 IQS 新的 V02/scoring owner 工作。
-- [x] 将 FMP JSON admission、原件 locator 和未知 publication/as-of 语义补为 G-A 明确待办；未修改产品代码。
+- [x] 将 FMP JSON admission、原件 locator 和未知 publication/as-of 语义补为 G-A 明确待办。发布检查暴露 importer/contract 的 12/13 复杂度超限，按既有 RED 拆分入口/预算校验，保留行为；13 项合同/CLI/端到端回归通过，Ruff 通过。
 - [x] 用户要求及时推送：ET main 已正常推送至 `4924d57`。CWP/RF 按普通快进与既有自动检查发布，结果记 progress.md；无 remote 的 StockWiki/IQS 不擅自建远端。
 - [x] 记录 RF push 的环境问题：rf-impl 稀疏检出漏掉 tracked e2e，Ruff E902；补齐当前 HEAD 工作树后再跑原有检查，不 bypass。
 - [x] 本轮收尾后暂停实施；Worker 保持 paused，原件保留。RF 普通推送被 historical current_triplet ancestry 的 2 项测试阻断（其余 25 项通过）；不绕过，留待恢复时先 RED 区分 historical snapshot/live HEAD。CWP 本轮提交的发布结果以 origin/master 实读核对为准。
