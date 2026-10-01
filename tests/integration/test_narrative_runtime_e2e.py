@@ -3,6 +3,7 @@ from __future__ import annotations
 import hashlib
 import json
 import math
+import multiprocessing
 import os
 from pathlib import Path
 import shutil
@@ -68,6 +69,27 @@ from support.narrative_model_fixture import ReplayNarrativeModel
 
 T0 = "2026-09-28T22:00:00Z"
 T1 = "2026-09-28T22:01:00Z"
+
+
+def _ack_outbox_then_exit_process(
+    db_path: str,
+    outbox_id: str,
+    lease_token: str,
+    runtime_generation: int,
+    verified_at: str,
+    actual_after_hash: str,
+) -> None:
+    store = AutomationStore(Path(db_path))
+    store.ack_outbox(
+        outbox_id=outbox_id,
+        lease_token=lease_token,
+        runtime_generation=runtime_generation,
+        verified_at=verified_at,
+        actual_after_hash=actual_after_hash,
+    )
+    # Model the real crash window: durable AUTO ACK has committed; no process
+    # remains to run the short catalog activation step.
+    os._exit(0)
 
 
 def _sha(value: bytes | str) -> str:
@@ -668,6 +690,209 @@ def test_runtime_e2e_dispatches_and_recovers_pathless_bundle_versions(
         } == {"annual_report", "investor_call_transcript"}
         assert {
             digest: _sha(data) for digest, (data, _ref) in indexed.items()
+        } == raw_hashes_before
+    finally:
+        _cleanup(tmp_path, run_root, baseline, catalog)
+
+
+@pytest.mark.parametrize("crash_round", [1, 2, 3])
+def test_e7_r07_acknowledged_projection_recovers_after_projector_process_exit(
+    tmp_path: Path, crash_round: int
+) -> None:
+    run_root, baseline = _run_root(
+        tmp_path, f"m3-e4-runtime-e7-r07-process-crash-{crash_round}"
+    )
+    catalog = None
+    child = None
+    try:
+        source_bytes = _pdf_bytes(
+            "Acme launched a new product and expanded overseas sales in 2026."
+        )
+        sources = [
+            {
+                "name": "annual.pdf",
+                "data": source_bytes,
+                "title": "ACME annual report 2026",
+                "document_kind": "annual_report",
+            }
+        ]
+        catalog, reader, indexed = _new_catalog(run_root, sources)
+        raw_hashes_before = {
+            path: _sha(path.read_bytes())
+            for path in (run_root / "companies").rglob("*")
+            if path.is_file()
+        }
+        store, scheduler, worker = _runtime(
+            run_root, reader, ReplayNarrativeModel()
+        )
+        _data, ref = next(iter(indexed.values()))
+        event = _event(
+            reader,
+            ref,
+            event_id=f"event-e7-r07-process-{crash_round}",
+        )
+        store.put_event(event)
+        created = scheduler.materialize_event(event)
+        assert (created.jobs_created, created.dependencies_created) == (3, 3)
+        assert _drain(worker, scheduler) == 3
+        assert len(store.list_outbox_entries(status="pending")) == 1
+
+        artifacts = NarrativeArtifactStore(
+            catalog.store,
+            LocalNarrativeObjectStore(catalog.config.catalog_dir),
+        )
+        dispatcher = NarrativeEffectDispatcher(store, artifacts)
+        generation = store.read_runtime_gate().control_generation
+        lease = store.claim_next_outbox(
+            worker_id=f"e7-r07-crash-projector-{crash_round}",
+            lease_token=f"e7-r07-crash-lease-{crash_round}",
+            now="2026-09-28T22:03:00Z",
+            lease_until="2026-09-28T22:04:00Z",
+            expected_generation=generation,
+            allowed_effect_types=(EFFECT_TYPE,),
+        )
+        assert lease is not None
+        effect, bundle, payload = dispatcher._prepare_effect(lease.effect_id)
+        prepared = artifacts.prepare(dispatcher._draft(effect, bundle), payload)
+        assert prepared.status == "prepared"
+
+        context = multiprocessing.get_context("spawn")
+        child = context.Process(
+            target=_ack_outbox_then_exit_process,
+            args=(
+                str(store.db_path),
+                lease.outbox_id,
+                lease.lease_token,
+                lease.runtime_generation,
+                "2026-09-28T22:03:05Z",
+                prepared.content_sha256,
+            ),
+        )
+        child.start()
+        child.join(timeout=20)
+        assert not child.is_alive()
+        assert child.exitcode == 0
+        child = None
+
+        recovered_effect = store.get_effect(effect.effect_id)
+        assert recovered_effect is not None
+        assert recovered_effect.status.value == "verified"
+        assert store.list_outbox_entries(status="pending") == ()
+        assert dispatcher.reconcile_prepared(
+            activated_at="2026-09-28T22:03:10Z"
+        ) == (effect.effect_id,)
+
+        loaded = NarrativeBundleReader(artifacts).read(
+            document_id=ref.document_id,
+            source_id=ref.source_id,
+            source_sha256=ref.content_sha256,
+        )
+        assert loaded.bundle.to_dict() == bundle.to_dict()
+        visible = catalog.reader.fetchone(
+            "SELECT COUNT(*) AS count, COUNT(DISTINCT work_key) AS work_keys "
+            "FROM narrative_artifact_versions WHERE status='visible'"
+        )
+        assert visible is not None
+        assert (int(visible["count"]), int(visible["work_keys"])) == (1, 1)
+        assert {
+            path: _sha(path.read_bytes())
+            for path in raw_hashes_before
+        } == raw_hashes_before
+    finally:
+        if child is not None and child.is_alive():
+            child.terminate()
+            child.join(timeout=5)
+        _cleanup(tmp_path, run_root, baseline, catalog)
+
+
+def test_e7_r08_catalog_lock_keeps_acknowledged_bundle_recoverable(
+    tmp_path: Path,
+) -> None:
+    run_root, baseline = _run_root(tmp_path, "m3-e4-runtime-e7-r08-catalog-lock")
+    catalog = None
+    try:
+        source_bytes = _pdf_bytes(
+            "Acme launched a new business line and expanded overseas sales in 2026."
+        )
+        catalog, reader, indexed = _new_catalog(
+            run_root,
+            [
+                {
+                    "name": "annual.pdf",
+                    "data": source_bytes,
+                    "title": "ACME annual report 2026",
+                    "document_kind": "annual_report",
+                }
+            ],
+        )
+        raw_hashes_before = {
+            path: _sha(path.read_bytes())
+            for path in (run_root / "companies").rglob("*")
+            if path.is_file()
+        }
+        store, scheduler, worker = _runtime(
+            run_root, reader, ReplayNarrativeModel()
+        )
+        _data, ref = next(iter(indexed.values()))
+        event = _event(reader, ref, event_id="event-e7-r08-catalog-lock")
+        store.put_event(event)
+        created = scheduler.materialize_event(event)
+        assert (created.jobs_created, created.dependencies_created) == (3, 3)
+        assert _drain(worker, scheduler) == 3
+        assert len(store.list_outbox_entries(status="pending")) == 1
+
+        artifacts = NarrativeArtifactStore(
+            catalog.store,
+            LocalNarrativeObjectStore(catalog.config.catalog_dir),
+        )
+        dispatcher = NarrativeEffectDispatcher(store, artifacts)
+        generation = store.read_runtime_gate().control_generation
+        with CatalogOperationLock(
+            catalog.config.catalog_dir,
+            operation="test-e7-r08-held-catalog-lock",
+        ):
+            receipt = dispatcher.dispatch_next(
+                worker_id="e7-r08-catalog-projector",
+                now="2026-09-28T22:02:00Z",
+                lease_until="2026-09-28T22:03:00Z",
+                expected_generation=generation,
+            )
+            assert receipt.status == "activation_pending"
+            assert receipt.effect_id is not None
+            effect = store.get_effect(receipt.effect_id)
+            assert effect is not None
+            assert effect.status.value == "verified"
+            assert store.list_outbox_entries(status="pending") == ()
+            prepared = artifacts.prepared_effects()
+            assert [item.effect_id for item in prepared] == [receipt.effect_id]
+            visible = catalog.reader.fetchone(
+                "SELECT COUNT(*) AS count FROM narrative_artifact_versions "
+                "WHERE status='visible'"
+            )
+            assert visible is not None
+            assert int(visible["count"]) == 0
+
+        assert not (catalog.config.catalog_dir / "operation.lock").exists()
+        assert dispatcher.reconcile_prepared(
+            activated_at="2026-09-28T22:03:00Z"
+        ) == (receipt.effect_id,)
+        loaded = NarrativeBundleReader(artifacts).read(
+            document_id=ref.document_id,
+            source_id=ref.source_id,
+            source_sha256=ref.content_sha256,
+        )
+        assert loaded.bundle.source_ref.content_sha256 == ref.content_sha256
+        visible_after = catalog.reader.fetchone(
+            "SELECT COUNT(*) AS count, COUNT(DISTINCT work_key) AS work_keys "
+            "FROM narrative_artifact_versions WHERE status='visible'"
+        )
+        assert visible_after is not None
+        assert (int(visible_after["count"]), int(visible_after["work_keys"])) == (
+            1,
+            1,
+        )
+        assert {
+            path: _sha(path.read_bytes()) for path in raw_hashes_before
         } == raw_hashes_before
     finally:
         _cleanup(tmp_path, run_root, baseline, catalog)

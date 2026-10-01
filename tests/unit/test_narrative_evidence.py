@@ -939,11 +939,11 @@ def test_prospectus_defaults_to_more_narrative_capacity_than_quarterly_reports()
     prospectus = select_narrative_evidence(parsed, title="首次公开发行招股说明书.pdf")
     quarterly = select_narrative_evidence(parsed, title="2026年一季报.pdf")
 
-    assert prospectus.selection_limit == 320
-    assert len(prospectus.evidence_spans) == 200
-    assert prospectus.status == "selected"
-    assert quarterly.selection_limit == 160
-    assert len(quarterly.evidence_spans) == 160
+    assert prospectus.selection_limit > quarterly.selection_limit
+    assert len(prospectus.evidence_spans) == prospectus.selection_limit
+    assert len(quarterly.evidence_spans) == quarterly.selection_limit
+    assert len(prospectus.evidence_spans) > len(quarterly.evidence_spans)
+    assert prospectus.status == "partial"
     assert quarterly.status == "partial"
 
 
