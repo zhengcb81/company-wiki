@@ -35,3 +35,5 @@ FMP 大节点测试：真实 ET serializer golden→CWP import CLI→catalog→v
 - RF 首次 push 被既有检查拒绝：稀疏检出遗漏已跟踪 `e2e/`，Ruff E902。仅补齐 e2e/.github，保留原字节；后续 Ruff/编译/host/mypy 通过，但 historical current_triplet ancestry 两项失败，RF 未推送。根因与恢复时的 TDD 修复范围见 progress.md，不 bypass。
 - CWP 已正常推送 `f39bd5a..d6d33b8`，完整 pre-push 六门 GREEN、远端 SHA 一致。Actions run 36936780795 核对时仍 in_progress；本页发布收据作为后续 docs 提交正常推送，最终 ref 可由 origin/master 核对。StockWiki/IQS 无远端；FF 待汇合支线不在本次发布范围。
 - 本次仅将 transcript importer 入口校验与工具合同的 byte cap 校验抽为 helper，保留错误顺序和原有行为；并修正六项来源工具的 legacy 分类（20 passed）；没有改生产配置或原始文档；不运行空间清理/生产 Worker。用户要求收尾后暂停，恢复后从上述剩余节点继续。
+
+**远端 CI 后续覆盖：**CWP 已同步到 7c80031；d6d33b8 的 Actions 36936780795 已结束失败，Python 3.11/3.12/3.13 均 Unit tests exit 1，公开 annotations 未给具体用例。最新 docs run 当时 queued。本地发布门全绿不代表远端 full suite 已通过，恢复时先取日志定位，不把 runner/action 提示当根因。暂停状态不变。

@@ -912,3 +912,5 @@
 
 - 发布最终收据：CWP **f39bd5a..d6d33b8 正常推送成功**，git ls-remote 实读 d6d33b8f6a73edc0f464718c8eb44f1669c95ae1；全部六个标准 pre-push 门 GREEN。ET origin/main 实读 4924d57044ae061d5fec3ccd4f1b7e74633f013a。GitHub Actions run 36936780795 在核对时 in_progress（不是已绿）。RF 未推送，保留既有失败证据。
 - 所有本轮独立测试根 .push-rf-20261001/.pc8869/.pc8869b/.prwred/.prwgreen/.pp7f8c/.ppd6d3 均已验证不存在；Win32 pytest owner ACL 使不同执行上下文清理曾失败，改由创建它们的原上下文或同权限上下文清理成功，未修改生产权限。旧不可读 pytest 根不清理。该发布收据提交后正常推送文档，随后暂停；不继续 RF/G-A/G-C/G-D 实现。
+
+- 最后远端核对：CWP master 已到 **7c800313ae41ca516b5ac4a8421f73614f845c56**，本地与远端一致，标准六门再次全绿，最后 .ppreceipt 根已清理。随后发现前一 run **36936780795 / d6d33b8** 的 Python 3.11/3.12/3.13 job 均在 **Unit tests** 步骤失败；check-run 注释只有 exit 1 和 runner/action 提示，未给具体失败用例，不能推断根因。最新 run **36937052936 / 7c80031** 当时 queued。远端 CI **未验收**；按用户收尾暂停要求不扩展产品改造，恢复后先获取失败日志、区分环境/测试/实现，再修 RF 已记录的 snapshot 发布门。此 CI 事实补充文档提交正常推送。
