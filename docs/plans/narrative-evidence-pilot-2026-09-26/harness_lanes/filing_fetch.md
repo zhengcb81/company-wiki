@@ -2,11 +2,13 @@
 
 > 可单独交给一个 filing-fetch harness。**唯一写入目录**：`C:\Users\郑曾波\Projects\filing-fetch` 的本仓集成 worktree。`filing-fetch-transcript-companion` 旧 worktree 只读参考；ET/CWP/RF、全局安装的 filing-fetch skill 只读。总指挥接收本仓实现后统一更新全局技能入口。不得读取或 stage `config/FMP_API_KEY.txt` 的内容。
 
+> **2026-10-01 当前状态：**FF 根当前检出 `fcap@d35b6f5`，与 `origin/main` 同步；本地名为 `main` 的 ref `c9799b7` 比远端落后 39 个提交。SourceRef v2 worktree `5532ce0` 与 transcript companion worktree `29085f7` 当前无工作区改动，但 `fetch_filing.py`、`filing_contracts.py`、`transcript_companion.py`、`test_transcript_companion.py` 等核心路径有重叠。由一个 FF owner 在最新远端主线基础上收拢两条 WIP；不要让两个 harness 分别合并或覆盖同一文件。全局计划/S0b golden 与本仓 E2E 仍待验，不能把分支存在等同于功能已并线。
+
 开工输入包：本卡、S0a observed 接口表、CWP/ET 的 S0b golden（未产时标 pending）、只读 P/T 样本清单和本仓 fake provider fixture；本仓只复制所需样本到自己的隔离测试根。
 
 ## 已知状态和依赖
 
-2026-09-29 只读 `git worktree list` 所见：主目录 `fcap@d35b6f5`，SourceRef v2 WIP 在 `C:\Users\郑曾波\AppData\Local\Temp\ff-source-reader-v2-20260927`（`codex/ff-source-reader-v2-20260927@90771d8`），companion WIP 在 `C:\Users\郑曾波\Projects\filing-fetch-transcript-companion`（`codex/transcript-companion@d35b6f5`）。它们同时改 `fetch_filing.py`、`filing_contracts.py`。**只设这一名 FF 写入者**，先核 live refs 和脏树，把有效 WIP 保存为可恢复提交，再在基于实际最新 main 的单一集成分支内先完成 SourceRef v2、后移植 companion；逐 hunk 合并，不将两个脏树互相覆盖。CWP SourceRef/operation golden 与 ET tool `/2` golden 是外部输入；未冻结时可先写本仓测试和清理 WIP，不切默认路由。
+2026-09-29 只读 `git worktree list` 所见是历史基线：主目录 `fcap@d35b6f5`，SourceRef v2 与 companion WIP 当时仍在早期提交。当前准确 HEAD、base 和 overlap 以本卡首段的 2026-10-01 更新为准。**只设这一名 FF 写入者**，先核 live refs 和脏树，把有效 WIP 保存为可恢复提交，再在基于实际最新 main 的单一集成分支内先完成 SourceRef v2、后移植 companion；逐 hunk 合并，不将两个脏树互相覆盖。CWP SourceRef/operation golden 与 ET tool `/2` golden 是外部输入；未冻结时可先写本仓测试和清理 WIP，不切默认路由。
 
 ## 输入、输出和职责
 

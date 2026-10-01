@@ -617,3 +617,17 @@
 - Windows 文本流会把 SourceExport v2 JSON 行的 `\n` 写成 `\r\n`，破坏协议要求的逐字节 LF golden。通过测试先复现，再让 CLI 走 UTF-8 binary buffer 写行，并为 `StringIO` 保留文本 fallback；stdout 与 stderr 的 LF 测试通过。
 - CWP E-B 与 `master@11b6472` 合并后的 29 个变更测试文件通过（349 passed、2 skipped）；56 个变更 Python 文件 Ruff 通过。此收据只覆盖本次变更相关测试，不等于整仓完整测试或跨仓 G-C/G-D 验收。
 - E6 P2 在四文档实测只比 P1 快约 6.3%，峰值 RSS 高约 23.5%，且锁等待 p95 未测；不能据此启用默认并发。Worker 保持 paused/default-off。
+
+## 2026-10-01 — 跨线 PWF 对照与实施计划调整
+
+- **顺序保持不变。** CWP E-B 和 StockWiki W04 都已完成并合入本地主线；RF fcap 已提交历史也包含在正式 RF main 中。当前卡点集中在 FF 单 owner 汇合及跨仓 G-0/G-A/G-C，而不是再开一遍本仓 E-B/W04 或重复合并已经成为祖先的分支。
+- **完整 G2b 不是 W04 的同义词。** W04 producer、MIC registry 和当前 IQS public CLI 正反例已过；IQS 当前 owner 的 PWF 仍将完整 G2b 标为 partial，缺少 verified/multi-listing/AnalysisSubject、有效期历史和近名生产路径等数据/能力。StockWiki W04 旧 worktree 已无 branch-only commit，本轮不清理。
+- **RF 状态应分两层描述。** 正式 `rf-impl main@3e03ce83` 已包含 `fcap@ee0a82bf` 的提交历史并有 4 个本地 ahead commit；另一目录 `revenue-forecast` 的 fcap 工作树仍有大量 dirty 状态和不可见子树。报告的 404 是旧可见性基线下界，不足以提交、reset 或删除。RF 自己的 PWF 也明显滞后于该目录的实际进度，适合由 RF owner 修订；CWP 不覆盖。
+- **FF 有实际路径冲突。** 当前 checked-out `fcap` 与 origin main 同步，而本地 `main` 名称落后 39；SourceRef v2 和 companion WIP 分处两个 worktree，至少 `fetch_filing.py`、`filing_contracts.py`、`transcript_companion.py`、`test_transcript_companion.py` 有重叠。因此原来的“按依赖顺序先 v2 后 companion、单一 owner”仍正确，不应再分给并发 writer。
+- **ET producer 已就绪，G-A 未就绪。** ET PWF 和测试记录支持精确 FY/Q、原语言文本、`/1` 与 opt-in `/2`、Motley 默认禁用、单个网络意图及 producer goldens；CWP importer 和 FF 仍需按 provider 精确对齐字段集。FMP 返回 402，未验证账户权益或当前抓取成功。ET 的既有未跟踪评测/工具笔记已在其 PWF 归类，保留不影响 G-A。
+- **IQS 当前不是可另开的平行施工线。** 主树 `task_plan.md` 有 owner 编辑；现有收尾和 2026-10-01 复验指出 QA-04 handoff、SW-IDENT 部分范围及 full G2b 仍待处理。仅保留既有 owner 接线，CWP 侧等待真实增量，不写 IQS。
+- **G-C transport 应明确分离。** 代码结构显示 CWP 已有持久 `NarrativeArtifactStore` 和 `NarrativeBundleReader`，bundle wire 是 `narrative-bundle/2.0`，但现有 `SourceExportBundleV2` 专门承载 source manifest/span，RF reader `SourceRef 2.0` 专门验证原始文档字节；这两个合同都不是 selected narrative consumer API。下一步应定义独立 pathless `NarrativeBundleRef`/read receipt，绑定 artifact SHA、当前 source ID/SHA、文档/期间/as-of、bundle schema 与 locator；用当前 CWP CLI 产出 golden 并回读真实 selected locator。RF/StockWiki 各加薄 adapter 后再跑消费者 E2E。不先把 narrative bundle塞进通用 source export 或 role DAG，避免扩大 blast radius。
+- **大门保留、微门不增加。** 先完成既有 G-0/G-A 必要真数据测试，在 G-C 对 producer→CWP reader→各真实 consumer 做一次端到端验证，G-D 以明确批次测派生对象删除前后同卷空间/manifest/raw SHA。无需新增逐字段人工签收。生产 Worker 保持 paused：当前一对 E6 真文档 P1/P2 只见约 6.3% throughput 改善、RSS +23.5%，catalog lock wait 与 SQLite busy-wait p95 未测，不能据此开并发。
+- **仍在的 schema 清理项不是发外部请求门。** CWP 的 `privacy_class` 已在 RootPolicy 3.0 语义中标为 legacy/informational，不代表 LLM 禁止外发；字段仍进入 snapshot hash。既有计划要求同步 consumer/golden 后做有版本的迁移，目的是避免悄悄改变 hash。保留为兼容性维护项，不把它误报成目前的权限阻断，也不在本轮静默改 wire。
+- **46 GB 目标的空间进度要按物理与逻辑分账。** F0–F5 已实测同卷空闲增加 37.630 GiB；D0 的 39.744 GiB 是数据目录逻辑长度，含 raw、retirement、备份和 derived。G-D 派生清理仍未执行；RF 可见审计候选最多约 40.3 MB 且有 owner/可见性前置，不能承担继续释放几十 GB 的目标。
+- **PWF drift 已校准。** CWP 最新 overview、Phase 32 历史标记、CWP lane 与总编排更新至 live refs；RF 计划滞后和各仓剩余 owner hold 记录到 `progress.md`。老阶段里的当时快照留作历史证据，不作为当前派发依据。

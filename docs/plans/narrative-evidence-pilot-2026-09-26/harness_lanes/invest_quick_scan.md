@@ -2,6 +2,8 @@
 
 > **交给已在运行的 invest-quick-scan 项目 owner，勿另开同仓写入线。**唯一写入目录：`C:\Users\郑曾波\Projects\invest-quick-scan` 的指定集成 worktree；StockWiki/CWP/RF/FF/ET 均只读。IQS 负责自己的 issuer/security/listing 与 AnalysisSubject 合同，不读取或管理 CWP 原始财报，也不写 StockWiki 研究状态。
 
+> **2026-10-01 当前状态：**IQS `master@e7fe99c`；主工作树有 owner 未提交的 `task_plan.md` 编辑，本总控不覆盖。IQS 仓内施工卡步骤 1–4 已完成；provisional Entity 与四态 mapping golden 经 public CLI 正反验证，最新复验的 StockWiki→IQS 聚焦包为 113 passed。完整 G2b 仍 partial：verified/multi-listing/AnalysisSubject 与有效期历史等 owner 真实样例未齐，W01–W03 的完整生产入口/名单扫描接线也未关闭。QA-04 行为回归通过但交付 handoff 仍 partial；DWA-03/04/05/06 有审计跟进。只由现有 IQS owner 收尾，不派第二个 IQS 写入 harness。下方 2026-09-29 状态段是当时交接快照。
+
 **2026-09-29 交接增量：**用户报告 IQS 施工卡的仓内步骤 1–4 已收尾并写入收尾报告；第 5 步 G2b 只等 StockWiki 提供真实身份 DTO/golden。此状态尚未由本仓只读核对 IQS 收尾报告，因此跨仓验收时仍需核实其 commit、公开 CLI/schema 版本与报告路径。不得要求 IQS 重做步骤 1–4，也不得新开同仓写入 harness；StockWiki W02/W03 是当前唯一 producer 前置，须由真实身份数据库/serializer 产生 golden，不能伪造。IQS 收到 golden 后只执行第 5 步的真实跨仓验证，包含成功 golden 和身份/期间/来源绑定反例；G2b 在此之前保持 pending。StockWiki W01 本地 `master@5bb68f6` 已独立验收（QuickScanStore 18/18、定向 Ruff 通过），不要为旧递归 receipt 阻断该工程结果。CWP 基础 SourceRef/SourceExport golden 在独立代码分支 `822a43a`，身份合同只引用其逻辑 ID/hash，不需读 CWP 原件。
 
 开工输入包：本卡、S0a observed 接口表、本仓 2.2 schema/合同夹具、活动证据清单；StockWiki 真实 identity snapshot/mapping golden 尚未产时标 pending，本仓可先做 schema/校验 CLI 和门禁清理。

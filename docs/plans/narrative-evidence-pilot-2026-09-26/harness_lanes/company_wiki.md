@@ -1,19 +1,19 @@
 # CWP 独占施工卡：来源、叙述证据与 Worker
 
-> 原 CWP harness 施工卡；本轮 E-B 测试验收已完成，但对应代码工作树尚未并入当前 master。当前不要据此另开一条同仓实现线；后续先由总指挥完成分支差异审查与整合。**写入范围**仍限定在 company-wiki 专用代码 worktree；总指挥独占本目录的计划与跨仓验收记录，其它项目目录只读。
+> **2026-10-01 当前状态：**E-B 已由 merge commit `9e73eb4` 并入 CWP `master@00af53f`；集成后相关回归 349 passed/2 skipped，Ruff 56 个变更 Python 文件通过。此卡中 E-B 并线前的旧状态是历史记录，不再派发 E-B 重复工作。下一项 CWP 工作是 G-0/G-A 剩余真实合同验收，然后为 `NarrativeBundle /2.0` 建独立 pathless 引用/读回 golden，推进 G-C；生产 Worker 仍 paused/default-off。**写入范围**仍限定在 company-wiki 专用代码 worktree；总指挥独占本目录的计划与跨仓验收记录，其它项目目录只读。
 
 开工输入包：本卡、S0a observed 接口表、指定 base/worktree、只读 P/T 样本清单（绝对路径、SHA、大小、期次、locator oracle、隔离复制/清理规则）。缺样本只阻对应真样本验收，不阻本仓 RED/代码整理。
 
 ## 已知状态与第一步
 
-截至 2026-10-01，CWP E-B 专用工作树分支 `codex/narrative-gates-integration@cba745a` 的聚焦回归为 **404 passed, 2 skipped, 695 deselected**，新增 R05/R07/R08 恢复场景及 E6 真实样本 replay 已通过。该分支与当前 `master@b0fd763` 有 9 个 master-only、13 个 branch-only 提交，整体差异覆盖 77 个文件，因此验收只适用于该 worktree，不能写成已进入主线。原始 PDF/TXT、manifest 和历史证据均保留；生产 Worker 仍 paused/default-off。先逐提交审查和整合，再决定剩余代码工作，不要重新从旧主线实施本卡。
+截至 2026-10-01，专用分支 `codex/narrative-gates-integration@cba745a` 的聚焦回归为 **404 passed, 2 skipped, 695 deselected**；随后已通过逐文件审查与主线回归，合并到 `master@00af53f`（merge commit `9e73eb4`）。并线后相关测试 **349 passed, 2 skipped**，Ruff 检查 56 个变更 Python 文件通过；SourceExport v2 Windows stdout LF golden 有回归保护。E-B 的恢复场景和 E6 replay 已进入主线，E-B 不再是开放任务。原始 PDF/TXT、manifest 和历史证据均保留；生产 Worker 仍 paused/default-off。后续从当前 master 开始处理 G-0/G-A hold，再推进 selected narrative G-C。
 
 ## 目标和交给别人的接口
 
 1. **CWP→FF/RF：**公开逻辑 `SourceRef`（现行 schema `2.0`，`document_id/source_id/content_sha256/byte_size/mime_type`）、source operation、verified read；最终打开实际字节并验 SHA。一个 SHA 多位置只影响 locator，不影响业务身份；外部输出不得给永久物理 raw 路径。给出真实 serializer 正例、坏版本/错 SHA/撤回/迁根负例、CLI 命令与退出码。
 2. **CWP→StockWiki：**现有 SourceExportBundleV2 `2.0.0` 的真实 producer golden，含 manifest/span/locator、export ID 与 bundle SHA；提供 verified-open 入口。仅输出来源/证据，不输出研究结论。
 3. **CWP→FF 的精确采集：**把 close-gap 的 policy hash + DownloadAuthorization 叠层收敛为一次 `RequestPlan`（精确 request/gap/candidate、provider、有限项目/字节/时间预算）。CWP 独自完成 raw canonical import、来源版本和 provenance；FF 不写 catalog。
-4. **CWP→RF/StockWiki 的 selected package：**叙述 event/select/summary/bundle 试点 `/2.0`，E5 后形成持久、内容寻址 package，含 source ID、原文 SHA、locator、摘要和 skip 理由；无全量正文切片默认写入。未知合同版本具名拒绝。
+4. **CWP→RF/StockWiki 的 selected package：**叙述 event/select/summary/bundle 试点 `/2.0`，E5 后形成持久、内容寻址 package，含 source ID、原文 SHA、locator、摘要和 skip 理由；无全量正文切片默认写入。跨仓传输使用独立的 pathless narrative reference/read receipt，不混入 raw `SourceRef 2.0` 或 `SourceExportBundleV2`；由当前 CWP CLI 产生 artifact SHA、source identity/as-of binding 与 locator 回放 golden。未知合同版本具名拒绝。只有现有通用 role DAG 确实能减少重复实现时才评估新 role，不把整份原文加入传输包。
 
 每个 producer golden 必须由当前代码生成；字段、状态和 schema 变化先更新 producer 测试/golden，再交总指挥更新接口表。`privacy_class` 仍进入 RootPolicy 3.0 hash，删除前必须显式迁移版本与所有真实 consumer，不能在本线悄悄改变老 hash。
 

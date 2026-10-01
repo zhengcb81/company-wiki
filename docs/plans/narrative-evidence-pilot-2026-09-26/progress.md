@@ -881,3 +881,17 @@
 - 合并后的 29 个变更测试文件回归 **349 passed、2 skipped**；SourceExport v2 CLI 专项 **6 passed**；真实字节及 transcript E2E **11 passed**。修复并覆盖 Windows stdout/stderr 将协议 LF 写成 CRLF 的问题。
 - Ruff 对 56 个变更 Python 文件通过，暂存/未暂存 `git diff --check` 均通过，无 unmerged paths。所有本轮创建的 `C:\cwt` 和 pytest 临时目录均经存在性核查后确认已清理。
 - 集成已提交为 `9e73eb4 Merge narrative evidence gates into mainline` 并 fast-forward 到 CWP `master`；当前 master 比 `origin/master` 超前 61 个提交，本轮没有 push。E-B 测试通过不代表 Worker 已启用；生产 Worker 继续 paused/default-off，G-C selected-package consumer 与 G-D 批处理/撤回验收仍待做。
+
+## 2026-10-01 — 六仓 live refs 与 PWF 计划对照
+
+- 本轮只读核对 CWP、revenue-forecast、filing-fetch、earnings-transcripts、StockWiki、invest-quick-scan 的 HEAD、分支/worktree 和各自最新可读计划/交接收据；只在 CWP 本计划目录记录结果。未读取 API key 或其他凭据，未修改/清理任何外仓。
+- CWP：`master@00af53f`、`origin/master` 前 62；E-B merge `9e73eb4` 已进入主线，合并后相关回归 349 passed/2 skipped，56 个变更 Python 文件 Ruff 通过。与 Phase 32 首次快照相比，ahead 计数从 61 增至 62。当前可见 Git 输出仍提示 `.pytest_cache` 权限不可见；因此只报告可见状态，不宣称未忽略文件完全 clean。
+- StockWiki：`master@b4f3846`，`.claude/` 是既有未跟踪本地路径。W02/W03、SourceExport reader、G2b owner-context、W04 MIC 分支共六个已知 branch tips 全部是 master 祖先（`master...branch` 计数分别为 15/0、11/0、6/0、21/0、8/0、6/0）；整仓门 686 passed。旧 worktree 没有独有提交；本轮保留，不为“整理”而删除。
+- RF：正式仓 `rf-impl main@3e03ce83` 干净、ahead origin 4；`fcap@ee0a82bf` 已提交历史为该 main 的祖先。用户放宽后的缺失 `fixture_hash` pending 规则已在 main 提交，相关 unit/integration/CLI 回归 33 项通过；raw `SourceRef` 字节 SHA 仍严格验证。另一个 `revenue-forecast` fcap 工作树仍有大量 dirty/删除/运行目录状态；既有 RF 审计只确认至少 404 个可见未跟踪项和 7 个不可见子树，数字不能作为完整空间盘点或清理依据。其 PWF task_plan/progress/register 最后更新均为 2026-09-27，且 task_plan 的 R98 指针落后于 progress R123/register §165。CWP 不改 RF、不合并该脏树。
+- FF：根当前 `fcap@d35b6f5` 与 `origin/main` 同步；本地名为 `main` 的 ref `c9799b7` 落后 39。SourceRef v2 与 transcript companion 位于两个干净 worktree（HEAD `5532ce0`、`29085f7`），但共享至少四个关键代码/测试文件，因此由同一 FF owner 先对齐 live main 再逐 hunk 汇合。凭据路径 `config/FMP_API_KEY.txt` 只记录状态、不读取内容。ET `/2` producer 的两个 golden 是 FF 集成输入。
+- ET：`main@4924d57` 比 `origin/main` 超前 6；当前 PWF 记录 `/2` schema golden、Motley 三入口默认禁用、一个 request 内 `download_authorized` 控制网络意图，离线 118 passed/2 deselected。FMP 真实请求曾返回 402，不能声称已取得 transcript 权益。`eval_results.json` 与 `.workbuddy-ai/memory/` 仍未跟踪，但 ET PWF 早已标为旧评测与工具笔记；原样保留。FF→ET→CWP 的正式 companion 集成尚未通过 G-A。
+- IQS：`master@e7fe99c`，工作树有 owner 对 `task_plan.md` 的未提交更新，本轮未覆盖。最新复验为 StockWiki→IQS focused package 113 passed；provisional G2b 正反 CLI 可用，但 full G2b 仍 partial，缺 verified/multi-listing/AnalysisSubject 与有效期/近名生产样例等；QA-04 有行为测试但交付 handoff partial，SW-IDENT 完整交付也未关闭。DWA-03/04/05/06 仍有 owner follow-up，无新的独立写入卡。
+- 计划校准：更新 CWP 当前 refs、E-B/W04 完成状态及 RF/FF/ET/IQS hold，旧 Phase 32 保留为历史快照。实施主顺序不变；具体下一步是在 G-0/G-A 剩余真数据门通过后，以独立 pathless `NarrativeBundle /2.0` read/export reference 和 artifact SHA/source binding/as-of/locator golden 接入 RF、StockWiki 查询入口。不得把叙述包混进 raw `SourceExportBundleV2` 或贸然加通用 role DAG；跨仓真实消费通过 G-C 后再按精确批次 G-D 清理派生空间。Worker 仍 paused/default-off。
+- 空间账：F0–F5 已实测同卷净释放 **37.630 GiB**；D0 记录的 39.744 GiB 是当前 catalog 数据目录逻辑长度，含 raw、归档、备份和派生。G-D 尚未实施；RF 审计的最多约 40.3 MB 条件候选不足以解释/解决历史 46 GB 体量问题，不能作为删除目标。
+- 文档验证：9 个编辑文件的相对 Markdown 链接全部存在，`git diff --check` 通过。该轮只改 PWF，不重跑产品套件；引用的产品测试结果仍限定于各自已记录的变更范围。Git 提示部分 harness 文档将 LF 转为 CRLF 的 autocrlf 警告，未造成 diff-check 错误。
+- 执行时一条 PowerShell 文本替换查询因反斜线转义写法失败；该次只读查询未改文件，随后改用字符串原样查找完成。无产品代码变更。
