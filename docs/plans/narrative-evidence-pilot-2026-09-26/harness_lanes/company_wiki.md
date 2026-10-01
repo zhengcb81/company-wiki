@@ -52,3 +52,5 @@
 ## 收尾暂停与 G-A 细则（2026-10-01）
 
 本轮仅完成盘点/计划收尾并发布已验收主线，暂停新实施。恢复时先按[跨线收尾报告](results/cross_line_closeout_2026-10-01.md) 为 ET FMP 26 字段/JSON 的原始字节、转义 locator 和 publication 未知语义写 RED；不能用 HTML fake-provider 通过声称 FMP admission 完成。不要把 call_date 当 publication，不重复 E-B/W04。
+
+发布检查补强：两项 transcript helper 保行为拆分（13 passed），六个 source audit/catalog lifecycle/叙述试点 CLI 从 legacy research 分类中分离（六项 RED→writer freeze 20 passed）。不追加人工权限门，不放行退役研究 writer；原件/生产配置不改。恢复后先处理 RF 已记录的 historical snapshot/live HEAD push blocker。

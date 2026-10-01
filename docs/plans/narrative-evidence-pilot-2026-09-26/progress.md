@@ -907,3 +907,5 @@
 - RF 再次正常 push：Ruff、compileall、unique symbols、host guard、mypy 全绿；meta/binding 25 passed/2 failed，故未发布。根因已只读确认：compatibility/current.json 的 2026-08-12 informational current_triplet 仍被当作 frozen floor 的验收对象，FF 89c8bdb2cf/CWP 31c0afcb96 都是存在的历史 commit，但非冻结基线后代；不是当前主线回退。修复需要明确历史快照与 live HEAD 校验合同并写 RED，留待恢复，不在本轮停机收尾中仓促改验证器或更新历史 SHA。
 
 - CWP 初次 push：Ruff/compileall/config doctor 通过，复杂度检查 RED（transcript_import 12；后续发现 transcript_tool_contract 13）。只抽取入口上下文校验和 byte cap helper，未变合同或放宽阈值。第二轮复杂度及原件导入/CLI/full-chain 测试 **13 passed**，Ruff 通过；第一次增量试验为 12 passed/1 failed，最终全绿。相关独立根 .pc8869/.pc8869b 在发布前精确清理；hook 的路径重定位根已由清理器删除。最终普通 push 仍须执行原有标准门。
+
+- CWP 第二轮 standard push：lint/编译/config/复杂度/host 全绿；contract/meta 101 passed/1 failed。失败是旧 writer scanner 将六个 source audit/catalog lifecycle/叙述试点工具当成 legacy research writer。先 RED 六项分类断言，新增明确 source-workflow 分类（不是泛化放行），六个真实 CLI --help 无 legacy 环境即可使用，退役研究 writer 不被重新启用；writer freeze 完整包 **20 passed**，Ruff 通过。source 工具自身 SHA/path/事务检查不改。

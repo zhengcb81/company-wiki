@@ -12,6 +12,7 @@
 - [x] 将 FMP JSON admission、原件 locator 和未知 publication/as-of 语义补为 G-A 明确待办。发布检查暴露 importer/contract 的 12/13 复杂度超限，按既有 RED 拆分入口/预算校验，保留行为；13 项合同/CLI/端到端回归通过，Ruff 通过。
 - [x] 用户要求及时推送：ET main 已正常推送至 `4924d57`。CWP/RF 按普通快进与既有自动检查发布，结果记 progress.md；无 remote 的 StockWiki/IQS 不擅自建远端。
 - [x] 记录 RF push 的环境问题：rf-impl 稀疏检出漏掉 tracked e2e，Ruff E902；补齐当前 HEAD 工作树后再跑原有检查，不 bypass。
+- [x] 修复发布检查的 source-workflow/legacy writer 误分类：六项 RED→writer freeze 20 GREEN，保留退役研究 writer、来源工具自身 SHA/path/事务规则。
 - [x] 本轮收尾后暂停实施；Worker 保持 paused，原件保留。RF 普通推送被 historical current_triplet ancestry 的 2 项测试阻断（其余 25 项通过）；不绕过，留待恢复时先 RED 区分 historical snapshot/live HEAD。CWP 本轮提交的发布结果以 origin/master 实读核对为准。
 
 ## Next Step
@@ -437,4 +438,4 @@ company-wiki 只负责来源、解析质量、证据定位、检索和来源摘�
 
 ## Next Step
 
-按用户要求，完成本轮提交/远端发布后暂停。恢复时先复核 live owner 状态，再完成 G-0 剩余真实 reader/locator 与 G-A（含 FMP JSON admission 和 publication 未知语义），不重复 E-B/W04。随后由 CWP 固定独立 `NarrativeBundle /2.0` pathless export/read CLI，RF/StockWiki 各自接入并跑 G-C，再按相关消费门和无引用事实进行 G-D 精确派生清理。Worker 保持 paused/default-off；不清理其他 owner 的 dirty tree。
+按用户要求，完成本轮提交/远端发布后暂停。恢复时先复核 live owner 状态，解决 RF historical snapshot/live HEAD 的发布检查并正常推送，再完成 G-0 剩余真实 reader/locator 与 G-A（含 FMP JSON admission 和 publication 未知语义），不重复 E-B/W04。随后由 CWP 固定独立 `NarrativeBundle /2.0` pathless export/read CLI，RF/StockWiki 各自接入并跑 G-C，再按相关消费门和无引用事实进行 G-D 精确派生清理。Worker 保持 paused/default-off；不清理其他 owner 的 dirty tree。

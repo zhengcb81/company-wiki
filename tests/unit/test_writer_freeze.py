@@ -24,6 +24,9 @@ from gate_runner import _sanitized_environment, production_data_snapshot
 from writer_policy import (
     BLOCKED_EXIT_CODE,
     CONTROL_TOOL_ALLOWLIST,
+    SOURCE_WORKFLOW_TOOL_ALLOWLIST,
+    PERMANENTLY_RETIRED_SCRIPTS,
+    is_legacy_script_cli,
     legacy_writer_authorized,
 )
 
@@ -107,7 +110,7 @@ def test_every_direct_writer_cli_has_an_explicit_guard() -> None:
     missing: list[str] = []
     guarded: list[str] = []
     for path in sorted(SCRIPTS.glob("*.py")):
-        if path.name in CONTROL_TOOL_ALLOWLIST:
+        if path.name in CONTROL_TOOL_ALLOWLIST | SOURCE_WORKFLOW_TOOL_ALLOWLIST:
             continue
         source = path.read_text(encoding="utf-8-sig")
         tree = ast.parse(source)
@@ -158,6 +161,38 @@ def test_control_gate_cli_remains_available() -> None:
         check=False,
     )
     assert completed.returncode == 0, completed.stderr
+
+
+@pytest.mark.parametrize(
+    "script_name",
+    [
+        "audit_catalog_consumers.py",
+        "audit_catalog_retirement.py",
+        "cutover_source_catalog_db.py",
+        "narrative_evidence_pilot.py",
+        "narrative_summary_review_pilot.py",
+        "retire_source_catalog_db.py",
+    ],
+)
+def test_source_workflow_cli_is_not_a_legacy_research_writer(script_name: str) -> None:
+    assert not is_legacy_script_cli(SCRIPTS / script_name)
+    completed = subprocess.run(
+        [sys.executable, str(SCRIPTS / script_name), "--help"],
+        cwd=ROOT,
+        env=_blocked_environment(),
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+        errors="replace",
+        timeout=20,
+        check=False,
+    )
+    assert completed.returncode == 0, completed.stderr
+    assert "LEGACY WRITER BLOCKED" not in completed.stdout
+
+
+def test_source_workflow_classification_does_not_reenable_retired_research() -> None:
+    assert not SOURCE_WORKFLOW_TOOL_ALLOWLIST & PERMANENTLY_RETIRED_SCRIPTS
 
 
 def test_production_snapshot_detects_ignored_and_same_stat_content_changes(

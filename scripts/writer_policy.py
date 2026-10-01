@@ -35,6 +35,20 @@ CONTROL_TOOL_ALLOWLIST = frozenset(
     }
 )
 
+# Source audit, catalog lifecycle and isolated narrative tools belong to the
+# canonical source system. They retain their own byte/path/transaction checks;
+# writing a receipt or replacing a catalog does not make them research writers.
+SOURCE_WORKFLOW_TOOL_ALLOWLIST = frozenset(
+    {
+        "audit_catalog_consumers.py",
+        "audit_catalog_retirement.py",
+        "cutover_source_catalog_db.py",
+        "narrative_evidence_pilot.py",
+        "narrative_summary_review_pilot.py",
+        "retire_source_catalog_db.py",
+    }
+)
+
 # These entry points create or orchestrate legacy research semantics, formal
 # research output, review/Wiki state, or destructive cleanup/reset operations.
 # The source-only and immutable-raw boundaries are permanent: compatibility
@@ -124,6 +138,7 @@ def is_legacy_script_cli(script_path: str | os.PathLike[str]) -> bool:
         path.parent == SCRIPTS_DIR
         and path.suffix.casefold() == ".py"
         and path.name not in CONTROL_TOOL_ALLOWLIST
+        and path.name not in SOURCE_WORKFLOW_TOOL_ALLOWLIST
         and path.name not in {"sitecustomize.py", "writer_policy.py"}
     )
 
