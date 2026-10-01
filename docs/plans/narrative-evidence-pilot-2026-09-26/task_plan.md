@@ -6,6 +6,14 @@
 
 用 10 份不同类型的 PDF 与 2 份英文 TXT 验证业务叙述选择、证据定位和摘要边界，形成 company-wiki 与 filing-fetch、StockWiki、revenue-forecast、invest-quick-scan 兼容的可实施方案。
 
+## Phase 34：发布收尾与暂停（2026-10-01）
+
+- [x] 完成各线/PWF 复核并形成[收尾报告](harness_lanes/results/cross_line_closeout_2026-10-01.md)；不重复已完成 E-B/W04，不覆盖 IQS 新的 V02/scoring owner 工作。
+- [x] 将 FMP JSON admission、原件 locator 和未知 publication/as-of 语义补为 G-A 明确待办；未修改产品代码。
+- [x] 用户要求及时推送：ET main 已正常推送至 `4924d57`。CWP/RF 按普通快进与既有自动检查发布，结果记 progress.md；无 remote 的 StockWiki/IQS 不擅自建远端。
+- [x] 记录 RF push 的环境问题：rf-impl 稀疏检出漏掉 tracked e2e，Ruff E902；补齐当前 HEAD 工作树后再跑原有检查，不 bypass。
+- [x] 本轮收尾后暂停实施；Worker 保持 paused，原件保留。RF 普通推送被 historical current_triplet ancestry 的 2 项测试阻断（其余 25 项通过）；不绕过，留待恢复时先 RED 区分 historical snapshot/live HEAD。CWP 本轮提交的发布结果以 origin/master 实读核对为准。
+
 ## Next Step
 
 > **2026-10-01 当前审计基线（Phase 33，覆盖下方较早的 live-state 快照）：**CWP `master@00af53f`，比 `origin/master` 超前 62 个提交；E-B 已由 `9e73eb4` 并入，合并后相关回归 **349 passed、2 skipped**，56 个变更 Python 文件 Ruff 通过。StockWiki `master@b4f3846` 的 W01/W02/W03、SourceExport reader、W04 和 MIC 关系补强均已合并；已知源分支全部是 master 祖先，`check_all.sh` **686 passed**。RF 正式 `main@3e03ce83` 干净且比 `origin/main` 超前 4 个提交；`fcap@ee0a82bf` 的已提交历史是 main 祖先，但 fcap 工作树仍有大量未提交/不可见路径，审计报告的 404 是下界，不能清理或整树并线。FF 当前检出的 `fcap@d35b6f5` 与 `origin/main` 同步；本地 `main@c9799b7` 落后 39 个提交，SourceRef v2 与 transcript companion 两个独立 worktree 的改动路径有重叠，仍应由单一 FF owner 汇合。ET `main@4924d57` 比 `origin/main` 超前 6 个提交，工具 `/2` 已实现；FF→ET→CWP 的正式整合门仍待做。IQS `master@e7fe99c` 仅有 owner 正在编辑的 `task_plan.md`；provisional G2b 正反 CLI 已通过，但完整 G2b、QA-04 收尾和部分 W01–W03 交付仍 pending。下方早于 Phase 33 的“当前/下一步”状态段均是历史快照，不作为当前派发依据。各仓当前证据与计划漂移见 Phase 33、`progress.md` 和 `findings.md`。
@@ -429,4 +437,4 @@ company-wiki 只负责来源、解析质量、证据定位、检索和来源摘�
 
 ## Next Step
 
-按 Phase 33 开始 G-0 剩余真实 source reader/locator 证据与 G-A producer 汇合验收；不重复 E-B/W04，也不清理 RF/ET/IQS 的 owner 工作树。随后先在 CWP 为独立 `NarrativeBundle /2.0` 建 pathless export/read CLI 与真实原文 locator 回放 golden，再由单一 RF owner 和 StockWiki owner 各自实现薄 consumer adapter，并由总指挥跑 G-C 跨仓端到端测试。G-C 大门通过后才进行 G-D 精确派生清理及同卷净空间计量；Worker 保持 paused/default-off。
+按用户要求，完成本轮提交/远端发布后暂停。恢复时先复核 live owner 状态，再完成 G-0 剩余真实 reader/locator 与 G-A（含 FMP JSON admission 和 publication 未知语义），不重复 E-B/W04。随后由 CWP 固定独立 `NarrativeBundle /2.0` pathless export/read CLI，RF/StockWiki 各自接入并跑 G-C，再按相关消费门和无引用事实进行 G-D 精确派生清理。Worker 保持 paused/default-off；不清理其他 owner 的 dirty tree。

@@ -1,6 +1,6 @@
 # ET 独占施工卡：精确期次的原语言电话会议工具
 
-> **2026-10-01 当前状态：**本仓 `main@4924d57` 比 `origin/main` 超前 6 个提交。精确 FY/Q、未翻译 `/1`、可选原始 payload `/2`、Motley 三入口默认禁用、FMP/Motley producer goldens 和单一请求内 `download_authorized` 网络意图已实现；旧 `--allow-download` 仅兼容 CLI 参数。离线全套 118 passed、2 deselected。FMP 真请求曾返回 402，真实 provider 权益未证实。FF→ET→CWP 汇合仍待 FF owner 完成，主要合同差异是 FMP 26 字段、Motley 24 字段与 CWP importer 当前只接受 Motley 形状。`eval_results.json` 和 `.workbuddy-ai/memory/` 由 ET PWF 记为既有本地评测/工具笔记，本轮保留。下方实现顺序是历史施工说明；不重复实现已完成的 ET producer。
+> **2026-10-01 当前状态：**本仓 `main@4924d57` 已于本轮正常推送到 `origin/main`。精确 FY/Q、未翻译 `/1`、可选原始 payload `/2`、Motley 三入口默认禁用、FMP/Motley producer goldens 和单一请求内 `download_authorized` 网络意图已实现；旧 `--allow-download` 仅兼容 CLI 参数。离线全套 118 passed、2 deselected。FMP 真请求曾返回 402，真实 provider 权益未证实。FF→ET→CWP 汇合仍待 FF owner 完成，主要合同差异是 FMP 26 字段、Motley 24 字段与 CWP importer 当前只接受 Motley 形状。`eval_results.json` 和 `.workbuddy-ai/memory/` 由 ET PWF 记为既有本地评测/工具笔记，本轮保留。下方实现顺序是历史施工说明；不重复实现已完成的 ET producer。
 
 > 可单独交给一个 earnings-transcripts harness。**唯一写入目录**：`C:\Users\郑曾波\Projects\earnings-transcripts\earnings-transcripts` 及其由 owner 创建的独立 worktree。company-wiki、filing-fetch、revenue-forecast 等只读；本卡不授权更改那些仓。开工前读本仓当前 Git/PWF 并保存有效未提交代码，别按 2026-09-28 缓存 SHA 直接 reset。
 
@@ -29,3 +29,7 @@ provider 能否使用由一份简明配置和真实接口能力决定。[The Mot
 原始 provider payload、来源 URL/时间和内容哈希不因去掉人工许可而省略。输出字段变更由 ET 更新版本和 golden，交总指挥协调 FF/CWP；如果请求身份、期次或两级哈希不一致，本线保持错误结果，不隐式回退到别的季度或翻译后的文本。
 
 **本线自动验收：**本仓 API 与真实 CLI dispatch 测试通过且新增路由零 skip；默认 Motley 三入口 0 HTTP，FMP fake 200 可解析而缺 key/402 有具名失败；`/2` 正例由当前 serializer 重生、字段集和哈希语义稳定。CWP 的 FMP 兼容另由 CWP owner 用同一 golden 及拒绝额外 query/凭证的负例验收，未通过时跨仓 G-A 保持 pending。测试仅用本仓可写短临时根，前后恢复；交接报告 commit、golden SHA、命令/退出及 provider 未验证状态，不要求人工签收。
+
+## 恢复后的 G-A 补充
+
+FMP `/2` JSON 原件、带 query 的精确期次 URL、26 字段结果及 unknown publication 仍需 CWP admission；实现/测试细则见[跨线收尾报告](results/cross_line_closeout_2026-10-01.md)。ET producer 不伪造 publication，不降级为 Motley 形状；本轮暂停，不重做已交付工具。

@@ -631,3 +631,13 @@
 - **仍在的 schema 清理项不是发外部请求门。** CWP 的 `privacy_class` 已在 RootPolicy 3.0 语义中标为 legacy/informational，不代表 LLM 禁止外发；字段仍进入 snapshot hash。既有计划要求同步 consumer/golden 后做有版本的迁移，目的是避免悄悄改变 hash。保留为兼容性维护项，不把它误报成目前的权限阻断，也不在本轮静默改 wire。
 - **46 GB 目标的空间进度要按物理与逻辑分账。** F0–F5 已实测同卷空闲增加 37.630 GiB；D0 的 39.744 GiB 是数据目录逻辑长度，含 raw、retirement、备份和 derived。G-D 派生清理仍未执行；RF 可见审计候选最多约 40.3 MB 且有 owner/可见性前置，不能承担继续释放几十 GB 的目标。
 - **PWF drift 已校准。** CWP 最新 overview、Phase 32 历史标记、CWP lane 与总编排更新至 live refs；RF 计划滞后和各仓剩余 owner hold 记录到 `progress.md`。老阶段里的当时快照留作历史证据，不作为当前派发依据。
+
+## 2026-10-01 — 发布收尾补充
+
+- 完整盘点结论见[跨线收尾报告](harness_lanes/results/cross_line_closeout_2026-10-01.md)。总编排仍有 W04 待启、E7 当前施工和 mapping DTO 不存在的旧描述，已按已完成/partial 的实际边界纠正，不改变整体依赖顺序。
+- FMP importer 缺口是具体协议与日期/locator 问题：CWP exact-key 24 字段、HTML/TXT MIME、禁止 URL query；ET FMP 26 字段、JSON 和 unknown publication。恢复时先定义 admission/as-of 语义再 TDD，不能将 call_date 伪装为 publication。
+- IQS HEAD 已到 56ff421，三份 PWF 盘点已提交；新增 V02/scoring 四项属于活动 owner 工作，不纳入本次提交。StockWiki/IQS 未配置 remote，不推测或创建 URL。
+- RF push 首次 Ruff E902：rf-impl 开启 sparse checkout，未物化 tracked e2e。通过补齐当前 HEAD 工作树排除环境原因，无代码改动。ET 六项本地提交已正常推送。
+- 本轮命令问题：rg 以 glob 当 Windows 具体路径（error 123）及查询不存在 pyproject/ci 文件（error 2/3）；改用明确现存文件和目录级 -g 过滤。完整 Git 状态仍报告两处旧 pytest 目录不可读，不以此推断可以删除，也不纳入提交。
+
+- RF 标准 push 的第二个阻断已查明：compatibility validator 把标明 informational 的旧 current_triplet 当成当前 ancestry 检查对象；2026-08-12 两个 historical SHA 真实存在但低于后设 baseline。Ruff/编译/host/mypy 均通过，25 个 meta 测试通过、2 个失败。恢复后用 live repo HEAD 或明确 snapshot 校验 API 修正分层，先 RED；本轮保留阻断，不绕过检查、不篡改历史记录。RF CodeGraph 未初始化，本次用已知验证器源文件定位，无索引初始化或产品修改。

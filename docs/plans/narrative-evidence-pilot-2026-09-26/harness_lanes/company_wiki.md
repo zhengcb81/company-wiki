@@ -48,3 +48,7 @@
 交付本仓 commit、base、改动路径、CWP 四类接口的真实 golden 路径/hash 与版本、测试命令/结果、测试根恢复状态、未解 hold。总指挥据此调 FF/RF/StockWiki；本线不得替他们修改目录。若来源身份/SHA/期间不符、原件写入、测试根未恢复或 Worker 重复 visible，停止受影响能力并给出复现；无需创建人工审批队列。
 
 **本线自动验收：**P0/G-0 真字节样本和对应负例通过、正式 producer golden 可从当前 commit 重生、P1/P2 删除不影响旧持久数据读取；E5–E7 在独立报告中分别列通过/未通过，新 Worker 在总指挥 G-C 通过前保持 paused。新增路由的测试不可 skip。只在本仓可写短临时根运行，原件/manifest SHA 和测试根前后相同；每次小改仅跑受影响测试，交接时汇总一次本线测试包。
+
+## 收尾暂停与 G-A 细则（2026-10-01）
+
+本轮仅完成盘点/计划收尾并发布已验收主线，暂停新实施。恢复时先按[跨线收尾报告](results/cross_line_closeout_2026-10-01.md) 为 ET FMP 26 字段/JSON 的原始字节、转义 locator 和 publication 未知语义写 RED；不能用 HTML fake-provider 通过声称 FMP admission 完成。不要把 call_date 当 publication，不重复 E-B/W04。

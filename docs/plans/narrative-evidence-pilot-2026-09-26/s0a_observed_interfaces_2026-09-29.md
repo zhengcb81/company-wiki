@@ -53,3 +53,7 @@ PowerShell 不接受 Bash 花括号路径列表，改为单文件或明确数组
 | revenue-forecast | 独立 `rf-impl` worktree/local main 已到 `88b3bda3`：197 个 registry scenario 证据真 SHA、strict path/hash、两个 CLI 非零语义和 review 诊断已提交；按用户授权将可伪造的人工 `issue-auth` 改为自动 HEAD/证据/catalog/容量/回退门，13 个定向测试通过。 | 新 opt-in SourceRef/verified-open reader 已按 CWP golden RED 开工，FF envelope/selected 正式消费仍待；`origin/main` 未 push。 |
 | filing-fetch | 唯一 owner 的 `codex/ff-source-companion-integration@5532ce0` 干净：v1 默认保持，v2 pathless SourceRef 与独立 transcript 状态已用 CWP/ET 真 producer golden 消费；全套 433 passed/13 skipped/78 subtests，隔离 FF CLI→CWP E2E 15 passed。 | CWP RequestPlan 合同、FMP canonical admission 与真实多根 G-0 保持 hold；复制的坏 SHA receipt fixture 仍需对齐 CWP `7760b09` 的 LF pin。根密钥文件未读取或纳入提交。 |
 | StockWiki | W01 已在本地 `master@5bb68f6` 完成并独立验收 18/18；基础 SourceExport v2 reader 尚不存在，已给出[独立施工卡](harness_lanes/stockwiki_source_reader.md)。 | 可由新的唯一 StockWiki harness 先做 opt-in reader/G-B；W02/W03 仍等 IQS 正式公开 CLI 与真实 DB identity snapshot，G2b pending。 |
+
+## 6. 当前状态覆盖（2026-10-01）
+
+上面的 S0a/S0b 是带日期的历史合同/收据；实际实现已进入 CWP master，StockWiki reader/W04 已验收，RF reader 已提交，不能按旧表重派。以[收尾报告](harness_lanes/results/cross_line_closeout_2026-10-01.md)和 task_plan Phase 34 为当前状态。ET FMP/Motley golden SHA 保留；FMP JSON/admission 仍 pending，未知 publication/cutoff 不伪装为已验证。selected NarrativeBundle transport 不混入 SourceRef/SourceExport。ET 已推送；其余发布结果见 progress.md。

@@ -895,3 +895,13 @@
 - 空间账：F0–F5 已实测同卷净释放 **37.630 GiB**；D0 记录的 39.744 GiB 是当前 catalog 数据目录逻辑长度，含 raw、归档、备份和派生。G-D 尚未实施；RF 审计的最多约 40.3 MB 条件候选不足以解释/解决历史 46 GB 体量问题，不能作为删除目标。
 - 文档验证：9 个编辑文件的相对 Markdown 链接全部存在，`git diff --check` 通过。该轮只改 PWF，不重跑产品套件；引用的产品测试结果仍限定于各自已记录的变更范围。Git 提示部分 harness 文档将 LF 转为 CRLF 的 autocrlf 警告，未造成 diff-check 错误。
 - 执行时一条 PowerShell 文本替换查询因反斜线转义写法失败；该次只读查询未改文件，随后改用字符串原样查找完成。无产品代码变更。
+
+## 2026-10-01 — 跨线盘点收尾与发布暂停
+
+- 复核各仓当前 HEAD/PWF，细项与恢复次序见[收尾报告](harness_lanes/results/cross_line_closeout_2026-10-01.md)。修正总编排中的 W04 待启、mapping DTO 不存在等旧描述；IQS 当前 HEAD 56ff421 的 V02/scoring 活动文件保留，不覆盖/提交。
+- 补齐 G-A 的 FMP JSON admission、原件转义 locator、publication 未知与历史 as-of 的实施/测试细则。本轮没有修改产品代码、生产配置或原件，未启动 Worker/空间清理。
+- ET 正常推送 1aa9111..4924d57，origin/main 已接受。RF/CWP 发布均使用既有 hooks，不 force push 或 bypass。StockWiki/IQS 无 remote；FF 未汇合支线仍由 owner 整合。
+- RF 第一次 push 因 sparse checkout 未物化 e2e 而 Ruff E902。尝试补齐全树遇三项旧测试路径 Filename too long，随后仅追加 e2e/.github。稀疏展开显示四项历史 .planning 文件 M；逐字节比较确认全部等于 HEAD blob，差异是 Git 换行 clean/index 语义，不含未提交业务工作。保留原字节，不 reset。自动审批曾拒绝四路径 restore，理由是当时尚无证据证明改动归属；转为只读完整字节比较及不丢弃文件的追加稀疏目录方案，未绕过拒绝。
+- 当前计划仍按 G-0/G-A→NarrativeBundle transport→G-C→G-D；Worker paused/default-off。完成本轮远端发布及临时根收尾后，遵照用户要求暂停。
+
+- RF 再次正常 push：Ruff、compileall、unique symbols、host guard、mypy 全绿；meta/binding 25 passed/2 failed，故未发布。根因已只读确认：compatibility/current.json 的 2026-08-12 informational current_triplet 仍被当作 frozen floor 的验收对象，FF 89c8bdb2cf/CWP 31c0afcb96 都是存在的历史 commit，但非冻结基线后代；不是当前主线回退。修复需要明确历史快照与 live HEAD 校验合同并写 RED，留待恢复，不在本轮停机收尾中仓促改验证器或更新历史 SHA。
