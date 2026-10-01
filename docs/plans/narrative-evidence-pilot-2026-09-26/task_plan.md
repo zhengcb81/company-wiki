@@ -13,11 +13,11 @@
 - [x] 用户要求及时推送：ET main 已正常推送至 `4924d57`。CWP/RF 按普通快进与既有自动检查发布，结果记 progress.md；无 remote 的 StockWiki/IQS 不擅自建远端。
 - [x] 记录 RF push 的环境问题：rf-impl 稀疏检出漏掉 tracked e2e，Ruff E902；补齐当前 HEAD 工作树后再跑原有检查，不 bypass。
 - [x] 修复发布检查的 source-workflow/legacy writer 误分类：六项 RED→writer freeze 20 GREEN，保留退役研究 writer、来源工具自身 SHA/path/事务规则。
-- [x] 本轮收尾后暂停实施；Worker 保持 paused，原件保留。RF 普通推送被 historical current_triplet ancestry 的 2 项测试阻断（其余 25 项通过）；不绕过，留待恢复时先 RED 区分 historical snapshot/live HEAD。CWP 本轮提交的发布结果以 origin/master 实读核对为准。
+- [x] 本轮收尾后暂停实施；Worker 保持 paused，原件保留。RF 普通推送被 historical current_triplet ancestry 的 2 项测试阻断（其余 25 项通过）；不绕过，留待恢复时先 RED 区分 historical snapshot/live HEAD。CWP `f39bd5a..d6d33b8` 已正常推送，远端 SHA 实读一致；完整 pre-push 六门全绿，GitHub Actions 尚 in_progress，不能声称远端 CI 已通过。
 
-## Next Step
+## 历史恢复快照（当前以 Phase 34 和文末 Next Step 为准）
 
-> **2026-10-01 当前审计基线（Phase 33，覆盖下方较早的 live-state 快照）：**CWP `master@00af53f`，比 `origin/master` 超前 62 个提交；E-B 已由 `9e73eb4` 并入，合并后相关回归 **349 passed、2 skipped**，56 个变更 Python 文件 Ruff 通过。StockWiki `master@b4f3846` 的 W01/W02/W03、SourceExport reader、W04 和 MIC 关系补强均已合并；已知源分支全部是 master 祖先，`check_all.sh` **686 passed**。RF 正式 `main@3e03ce83` 干净且比 `origin/main` 超前 4 个提交；`fcap@ee0a82bf` 的已提交历史是 main 祖先，但 fcap 工作树仍有大量未提交/不可见路径，审计报告的 404 是下界，不能清理或整树并线。FF 当前检出的 `fcap@d35b6f5` 与 `origin/main` 同步；本地 `main@c9799b7` 落后 39 个提交，SourceRef v2 与 transcript companion 两个独立 worktree 的改动路径有重叠，仍应由单一 FF owner 汇合。ET `main@4924d57` 比 `origin/main` 超前 6 个提交，工具 `/2` 已实现；FF→ET→CWP 的正式整合门仍待做。IQS `master@e7fe99c` 仅有 owner 正在编辑的 `task_plan.md`；provisional G2b 正反 CLI 已通过，但完整 G2b、QA-04 收尾和部分 W01–W03 交付仍 pending。下方早于 Phase 33 的“当前/下一步”状态段均是历史快照，不作为当前派发依据。各仓当前证据与计划漂移见 Phase 33、`progress.md` 和 `findings.md`。
+> **2026-10-01 Phase 33 审计快照（已由 Phase 34 发布收尾覆盖）：**CWP `master@00af53f`，比 `origin/master` 超前 62 个提交；E-B 已由 `9e73eb4` 并入，合并后相关回归 **349 passed、2 skipped**，56 个变更 Python 文件 Ruff 通过。StockWiki `master@b4f3846` 的 W01/W02/W03、SourceExport reader、W04 和 MIC 关系补强均已合并；已知源分支全部是 master 祖先，`check_all.sh` **686 passed**。RF 正式 `main@3e03ce83` 干净且比 `origin/main` 超前 4 个提交；`fcap@ee0a82bf` 的已提交历史是 main 祖先，但 fcap 工作树仍有大量未提交/不可见路径，审计报告的 404 是下界，不能清理或整树并线。FF 当前检出的 `fcap@d35b6f5` 与 `origin/main` 同步；本地 `main@c9799b7` 落后 39 个提交，SourceRef v2 与 transcript companion 两个独立 worktree 的改动路径有重叠，仍应由单一 FF owner 汇合。ET `main@4924d57` 比 `origin/main` 超前 6 个提交，工具 `/2` 已实现；FF→ET→CWP 的正式整合门仍待做。IQS `master@e7fe99c` 仅有 owner 正在编辑的 `task_plan.md`；provisional G2b 正反 CLI 已通过，但完整 G2b、QA-04 收尾和部分 W01–W03 交付仍 pending。下方早于 Phase 33 的“当前/下一步”状态段均是历史快照，不作为当前派发依据。各仓当前证据与计划漂移见 Phase 33、`progress.md` 和 `findings.md`。
 
 > **2026-09-28 权限/审查简化（优先于下方所有历史段落）：**不设 private/public、逐文档/逐期/逐 job 授权、review receipt、独立 reviewer 或人工批次审批。用户已授权范围内，自动化测试和 source/hash/lineage/预算断言决定能否继续；原始文档全部保留，只清理可重建且无引用的派生文件。下方 2026-09-27 transcript permission 细节和历史 G 门槛只作事实记录，不是待实施指令。
 

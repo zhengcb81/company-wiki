@@ -85,3 +85,5 @@ G-D：逐批按实际消费者引用选择已通过的 G-A/G-B/G2b/G-C；无全�
 ## 7. 收尾暂停（2026-10-01）
 
 以 [跨线收尾报告](harness_lanes/results/cross_line_closeout_2026-10-01.md) 和 Phase 34 为最新状态。用户要求完成提交/远端发布后暂停；ET 已推送，CWP/RF 发布结果见 progress.md。恢复后保持 G-0/G-A→G-C→G-D 顺序；FMP JSON、unknown publication 与原始字节 locator 是明确缺口，不追加无价值 provider 或重复验收。
+
+**发布收尾覆盖：**CWP 已推送 d6d33b8，标准 pre-push 六门全绿；ET 已推送 4924d57。RF 的 historical current_triplet 检查 25 passed/2 failed，暂未推送，恢复时先 RED 修分层。当前暂停，StockWiki/IQS 无远端，FF 支线等待同一 owner 汇合；远端 CWP CI 核对时仍运行。

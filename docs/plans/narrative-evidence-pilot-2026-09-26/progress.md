@@ -909,3 +909,6 @@
 - CWP 初次 push：Ruff/compileall/config doctor 通过，复杂度检查 RED（transcript_import 12；后续发现 transcript_tool_contract 13）。只抽取入口上下文校验和 byte cap helper，未变合同或放宽阈值。第二轮复杂度及原件导入/CLI/full-chain 测试 **13 passed**，Ruff 通过；第一次增量试验为 12 passed/1 failed，最终全绿。相关独立根 .pc8869/.pc8869b 在发布前精确清理；hook 的路径重定位根已由清理器删除。最终普通 push 仍须执行原有标准门。
 
 - CWP 第二轮 standard push：lint/编译/config/复杂度/host 全绿；contract/meta 101 passed/1 failed。失败是旧 writer scanner 将六个 source audit/catalog lifecycle/叙述试点工具当成 legacy research writer。先 RED 六项分类断言，新增明确 source-workflow 分类（不是泛化放行），六个真实 CLI --help 无 legacy 环境即可使用，退役研究 writer 不被重新启用；writer freeze 完整包 **20 passed**，Ruff 通过。source 工具自身 SHA/path/事务检查不改。
+
+- 发布最终收据：CWP **f39bd5a..d6d33b8 正常推送成功**，git ls-remote 实读 d6d33b8f6a73edc0f464718c8eb44f1669c95ae1；全部六个标准 pre-push 门 GREEN。ET origin/main 实读 4924d57044ae061d5fec3ccd4f1b7e74633f013a。GitHub Actions run 36936780795 在核对时 in_progress（不是已绿）。RF 未推送，保留既有失败证据。
+- 所有本轮独立测试根 .push-rf-20261001/.pc8869/.pc8869b/.prwred/.prwgreen/.pp7f8c/.ppd6d3 均已验证不存在；Win32 pytest owner ACL 使不同执行上下文清理曾失败，改由创建它们的原上下文或同权限上下文清理成功，未修改生产权限。旧不可读 pytest 根不清理。该发布收据提交后正常推送文档，随后暂停；不继续 RF/G-A/G-C/G-D 实现。
