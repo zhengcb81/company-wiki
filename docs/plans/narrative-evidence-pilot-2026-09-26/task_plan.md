@@ -8,7 +8,7 @@
 
 ## Next Step
 
-> **2026-10-01 更新：**StockWiki W04 已合入本地主线并验收（`master@b4f3846`，686 tests 通过，ISO MIC canary 与 IQS public CLI 正反例通过）。CWP E-B 已在当前 `master@11b6472` 上做无快进集成；合并分支的 29 个变更测试文件回归为 **349 passed、2 skipped**，Ruff 检查 56 个变更 Python 文件通过，`git diff --check` 通过，Windows SourceExport v2 的 LF wire-format 也有回归保护。当前仅待提交 merge commit 并快进 CWP `master`。P2 实测四文档快约 6.3%、峰值 RSS 高约 23.5%，未达到 25% 提速门，锁等待 p95 未测；Worker 继续 paused/default-off。RF/FF/IQS 其他工作树保持各自 owner 状态。
+> **2026-10-01 更新：**StockWiki W04 已合入本地主线并验收（`master@b4f3846`，686 tests 通过，ISO MIC canary 与 IQS public CLI 正反例通过）。CWP E-B 已合入当前本地主线：merge commit `9e73eb4`，`master` 快进成功；合并后的 29 个变更测试文件为 **349 passed、2 skipped**，Ruff 检查 56 个变更 Python 文件通过，`git diff --check` 通过，Windows SourceExport v2 的 LF wire-format 有回归保护。CWP `master` 当前比 `origin/master` 超前 61 个提交，本轮未推送。P2 四文档实测快约 6.3%、峰值 RSS 高约 23.5%，未达到 25% 提速门，锁等待 p95 未测；Worker 继续 paused/default-off。RF/FF/IQS 其他工作树保持各自 owner 状态。
 
 > **2026-09-28 权限/审查简化（优先于下方所有历史段落）：**不设 private/public、逐文档/逐期/逐 job 授权、review receipt、独立 reviewer 或人工批次审批。用户已授权范围内，自动化测试和 source/hash/lineage/预算断言决定能否继续；原始文档全部保留，只清理可重建且无引用的派生文件。下方 2026-09-27 transcript permission 细节和历史 G 门槛只作事实记录，不是待实施指令。
 
@@ -36,7 +36,7 @@ Phase 17 的 F0–F5 已完成。G1 离线主样本和回归集已经复跑：12
 
 ## Current Phase
 
-Phase 32：StockWiki W04 已合入本地主线并完成 686-test 验收。CWP E-B 已与 `master@11b6472` 在集成分支合并，29 个变更测试文件为 349 passed、2 skipped，56 个变更 Python 文件 Ruff 通过；待创建 merge commit 并快进 `master`。production Worker 继续 paused/default-off。真实 E6 P1/P2 仅约 6.3% 提速且 P2 峰值 RSS 高约 23.5%，锁等待 p95 未测，因此并发尚无默认启用依据。随后优先完成正式 selected-package 消费/G-C 与 G-D 的跨仓端到端验收；原始文档保留。
+Phase 32：StockWiki W04 已合入本地主线并完成 686-test 验收。CWP E-B 已由 `9e73eb4` 合入本地主线；29 个变更测试文件为 349 passed、2 skipped，56 个变更 Python 文件 Ruff 通过。`master` 比 `origin/master` 超前 61 个提交，本轮未推送。production Worker 继续 paused/default-off。真实 E6 P1/P2 仅约 6.3% 提速且 P2 峰值 RSS 高约 23.5%，锁等待 p95 未测，因此并发尚无默认启用依据。随后优先完成正式 selected-package 消费/G-C 与 G-D 的跨仓端到端验收；原始文档保留。
 
 外部来源采购补充：FMP Basic key 实测 profile/有效 SEC 检索 200，press releases/transcript dates 402；SEC 原生 API 无 key。以 246 个本地公司目录作保守分母，Basic 补充 SEC 检索约 2,076 calls/30 日，纯 SEC/IR 路径为 0 FMP calls；Koyfin 无用户 API，Seeking Alpha 个人订阅不授权自动抓取；Motley Fool 官方条款也禁止自动访问/采集，现有适配器不得接通生产。详细价格、假设、权利分级和 30 日试点见 [外部数据源与成本卡](provider_cost_and_capability_2026-09-27.md)。采购结论为先不买，且不改变 G0/G1e 门禁。
 

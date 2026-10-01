@@ -880,4 +880,4 @@
 - 在 `codex/narrative-mainline-integration` 上，以当前 CWP `master@11b6472` 为基线，将已验收 E-B 分支 `codex/narrative-gates-integration@cba745a` 做无快进合并。两处计划文档冲突采用较新的主线版本；未合并其他仓库文件。
 - 合并后的 29 个变更测试文件回归 **349 passed、2 skipped**；SourceExport v2 CLI 专项 **6 passed**；真实字节及 transcript E2E **11 passed**。修复并覆盖 Windows stdout/stderr 将协议 LF 写成 CRLF 的问题。
 - Ruff 对 56 个变更 Python 文件通过，暂存/未暂存 `git diff --check` 均通过，无 unmerged paths。所有本轮创建的 `C:\cwt` 和 pytest 临时目录均经存在性核查后确认已清理。
-- 当前验收分支已具备提交条件，merge commit 与 `master` 快进在收尾中。E-B 测试通过不代表 Worker 已启用；生产 Worker 继续 paused/default-off，G-C selected-package consumer 与 G-D 批处理/撤回验收仍待做。
+- 集成已提交为 `9e73eb4 Merge narrative evidence gates into mainline` 并 fast-forward 到 CWP `master`；当前 master 比 `origin/master` 超前 61 个提交，本轮没有 push。E-B 测试通过不代表 Worker 已启用；生产 Worker 继续 paused/default-off，G-C selected-package consumer 与 G-D 批处理/撤回验收仍待做。
