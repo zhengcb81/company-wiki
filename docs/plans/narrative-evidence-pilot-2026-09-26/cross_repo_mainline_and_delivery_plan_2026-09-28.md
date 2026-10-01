@@ -35,7 +35,7 @@
 | CWP L6 / RF / StockWiki / IQS | CWP 提供版本化 SourceRef/SourceExport/selected bundle；RF、StockWiki 通过各自薄 adapter 读取。IQS 只可选映射身份。 | RF/SW/IQS 不导入 CWP 内部 DAG/Store，不要 `--source-root` 作 v2 必填，不跨仓写 mutable DB。 |
 | CWP L7 | 持久 job/attempt/outbox、generation/token fencing、单 writer projector、进程并发和统一资源预算。 | 不共享非线程安全 LLMClient，不靠内存 queue 恢复任务，Worker 不删原文。 |
 
-接口裁定：CWP operation、SourceRef 和 verified read result 各自保留**独立版本**，producer 输出 golden 正例，consumer 用其正例测试；未知版本/多余路径字段、source/hash/期间/时点/撤回漂移须 fail closed。FF 默认 v1 保持原退出码与 JSON 行为，opt-in v2 envelope 必须显式可识别且全部 pathless，再讨论技能默认路由。RF 主线当前没有已落实的严格 evidence-hash 实现；用户已明确选择有 evidence path 必须配合法 64 位 fixture hash，缺失/错误不能 closure ready；197 份现存小证据文件可自动回填并验证。StockWiki reader 的旧 v1 兼容只为**实际发现的历史持久引用**实现。IQS 契约包 `2.2.0` 的 Entity `2.1.0`、AnalysisSubject `1.0.0` 只进入身份线，不硬塞进 CWP SourceRef。
+接口裁定：CWP operation、SourceRef 和 verified read result 各自保留**独立版本**，producer 输出 golden 正例，consumer 用其正例测试；未知版本/多余路径字段、source/hash/期间/时点/撤回漂移须 fail closed。FF 默认 v1 保持原退出码与 JSON 行为，opt-in v2 envelope 必须显式可识别且全部 pathless，再讨论技能默认路由。RF assurance scenario 的 `fixture_hash` 缺失/空白只计 pending，不阻断 closure；`evidence_path` 仍须解析为 RF 仓内真实可读普通文件，已提供 hash 必须是匹配实际字节的 SHA-256。此放宽只针对场景证据登记，不改变 SourceRef/source 原文 SHA 校验；不要求批量回填 197 项。StockWiki reader 的旧 v1 兼容只为**实际发现的历史持久引用**实现。IQS 契约包 `2.2.0` 的 Entity `2.1.0`、AnalysisSubject `1.0.0` 只进入身份线，不硬塞进 CWP SourceRef。
 
 电话会编排的可执行语义：filing-fetch 技能在“采集公司文档”工作流中，取得**明确 fiscal year/quarter**时自动附带该期 transcript 请求；用户已经授权的公司文档采集任务覆盖这个匹配期次，不再逐份弹权限确认。standalone 旧 v1 调用仍保持原行为。年报不能仅因是全年报告就猜 Q4；仅 ET/来源 metadata 明确映射到 FY 或精确 Q 时调用该期，无法确定时返回 `period_unresolved/not_requested` 类具名结果而不抓错误季度。财报成功、电话会失败要分别报告和可重试，不回滚已保存财报；电话会原语言 TXT 入 CWP canonical raw，直接进入 L4/L5，无 PDF 转录与翻译。工具入口经显式配置/包入口注入，不猜相邻 ET checkout 或 `wiki_root/src`。FMP/Koyfin/Seeking Alpha 本轮不强加 provider；真实 provider 权利/成本配置缺失时只执行离线 fake E2E，不误报生产抓取可用。
 
@@ -102,8 +102,8 @@ S2 与 S3、S5、Q1、N0/N1 可并行，**但每仓写入只由其唯一 owner �
 
 ### S4｜RF reader WIP 整合与三仓读取
 
-1. 从 RF 真 `origin/main` 建洁净 reader 集成工作树，选择性纳入 `codex/revenue-source-reader` 的 3 M/7 ??，不导入 RF 根旧宽松 assurance；先写 `SourceRef→verified bytes→RevenueSourceRecord` 正反例、同 SHA 换根、错误 SHA/撤回/as-of、证据 hash 严格门。修正式 `tests/test_source_ref_v2_three_repo_e2e.py` 的硬编码 2026-09-27：fixture 的 capture 与 request as-of 在同一冻结测试时间线上，保持生产 as-of 拒绝规则，不能把生产校验放宽来让测试绿。
-2. 在真正 RF 测试文件上跑 FF→CWP→RF 全链：已审真实来源正例产生 verified bytes 和 RF source record；无下载授权/撤回/同大小篡改/迁根负例，无下载或生产写，测试树恢复。此前只改 TEMP 副本 1 pass 是可行性，不作正式通过。再跑 RF v1 兼容及 RF 严格 hash 回归，确认 197 个现缺 hash 样本仍是红而非被错误放行。G-A 完成后，RF reader 合入 RF main；FF source v2 和 companion 作为同一 FF 集成分支上的两组独立提交，一次正常合入 FF main。
+1. 从 RF 真 `origin/main` 建洁净 reader 集成工作树，选择性纳入 `codex/revenue-source-reader` 的 3 M/7 ??，不导入 RF 根旧宽松 assurance；先写 `SourceRef→verified bytes→RevenueSourceRecord` 正反例、同 SHA 换根、错误 source SHA/撤回/as-of、closure 缺 hash pending 规则（有效路径可闭环，已有 hash 严格验字节）。修正式 `tests/test_source_ref_v2_three_repo_e2e.py` 的硬编码 2026-09-27：fixture 的 capture 与 request as-of 在同一冻结测试时间线上，保持生产 as-of 拒绝规则，不能把生产校验放宽来让测试绿。
+2. 在真正 RF 测试文件上跑 FF→CWP→RF 全链：已审真实来源正例产生 verified bytes 和 RF source record；无下载授权/撤回/同大小篡改/迁根负例，无下载或生产写，测试树恢复。此前只改 TEMP 副本 1 pass 是可行性，不作正式通过。再跑 RF v1 兼容及 closure 回归：真实仓内证据路径缺 hash 应 closure-ready 并报 pending；路径缺失/越界/不可读、已提供 hash 格式错误或字节不匹配仍不 ready。无需为闭环批量回填 197 项。G-A 完成后，RF reader 合入 RF main；FF source v2 和 companion 作为同一 FF 集成分支上的两组独立提交，一次正常合入 FF main。
    RF 的 I-06 caller/claim 与 producer/consumer/event 持久生命周期是独立 RF 施工项；本 reader E2E 只证明来源准备，不冒充 RF 跨进程队列/forecast 全链验收。需要该能力的正式 RF 运行仍遵其自身 PWF 门。
 
 ### S4b｜FF companion 与 ET/CWP 串联
@@ -136,7 +136,7 @@ S2 与 S3、S5、Q1、N0/N1 可并行，**但每仓写入只由其唯一 owner �
 | 大门 | 进入条件 | 一次性真实验收 | 阻断与回退 |
 |---|---|---|---|
 | **G-0：CWP 通用读链** | S0 真实 oracle/合同冻结；内部 M1 测试结果已核 | 四隔离根及原生 company/dayu/Dropbox 字节、版本/字段/locator、旧引用、429 页资源与测试树恢复 | 未验字节、元数据随 root 改变、旧 ID 丢失或树未恢复则本门自动测试失败；消费者只可保持 opt-in。 |
-| **G-A：FF/ET/CWP/RF** | G-0 自动测试通过；S2、S3、S4、S4b 各自单元/合同绿；FF v1 golden、用户确定的严格 evidence hash 规则不退化 | 正式 FF→CWP→RF 原路径及 CWP ensure/close-gap CLI，FF→ET→CWP 原入口；隔离 provider stub 测已有复用 0 下载、明确请求的精确期次只取一次、未请求/期次歧义 0 网络、as-of 后版本排除、身份/期次漂移、坏 payload/超限、重试 0 重复、stdout/stderr 无 raw path；最终 RF 验同尺寸篡改/撤回；OS I/O 证明 FF 候选零原文读取、RF 最终一次完整验真；真实样本与前后测试树/原件 SHA 相同 | 任一跨仓 schema/期次/来源错误或清理失败，不切默认；只回退该新路由，旧 v1 保留。 |
+| **G-A：FF/ET/CWP/RF** | G-0 自动测试通过；S2、S3、S4、S4b 各自单元/合同绿；FF v1 golden；RF 场景缺 hash 只作 pending、有 hash 仍严格验格式和实际字节 | 正式 FF→CWP→RF 原路径及 CWP ensure/close-gap CLI，FF→ET→CWP 原入口；隔离 provider stub 测已有复用 0 下载、明确请求的精确期次只取一次、未请求/期次歧义 0 网络、as-of 后版本排除、身份/期次漂移、坏 payload/超限、重试 0 重复、stdout/stderr 无 raw path；最终 RF 验同尺寸篡改/撤回；OS I/O 证明 FF 候选零原文读取、RF 最终一次完整验真；真实样本与前后测试树/原件 SHA 相同 | 任一跨仓 schema/期次/来源错误或清理失败，不切默认；只回退该新路由，旧 v1 保留。 |
 | **G-B：StockWiki C.local；Q 线另测** | G-0 自动测试通过；S5 reader 已实现；IQS/W01 若并入同 main 已各自绿 | StockWiki 新 CLI 实读 CWP verified bytes，迁根/篡改/撤回/旧引用；Q 线独立 C01→W01→W02/W03→G2b | reader 空分支、仅旧命令或 8/10 红测不能启用；G-B 仅 opt-in 基础读，full sync 留 G-D；Q 线失败不阻 RF/FF 基础读。 |
 | **G-C：叙述与 Worker** | N1 形成持久包；基础 reader 已验 | N2 四真实文档、R01–R11、P1/P2/P4、预算；N3 RF/StockWiki 真消费与 locator；测试根恢复。由自动化套件给出 pass/fail，不设独立人工签收。 | 任一原文写入、重复 visible、未回源、空间超限即继续 paused；N3 消费缺席则只启用已测试的 E-B 范围，不启用 G2a。 |
 | **G-D：空间与发布** | **本批拟清派生**的所有消费者已切新合同；G-A/B/C 对该批对象已自动验过；S5b sync 待本门实测 | scratch 删除重建、精确生产批次 intent/receipt、同卷前后净字节、原件/hash/manifest 不变、受控 canary 恢复；StockWiki full sync 的撤回/版本替换、weekly/CLI、显式来源与零隐式 Tavily | 未证明可重建/仍被引用/净字节无法解释即不删；StockWiki full sync 失败只保持 opt-in reader，无关派生批次可独立通过自动检查；异常暂停新路由/Worker 并按收据回滚派生。 |
@@ -150,7 +150,7 @@ S2 与 S3、S5、Q1、N0/N1 可并行，**但每仓写入只由其唯一 owner �
 | CWP G-0 | `python -m pytest -q tests/contract/test_source_operation_v2.py tests/contract/test_source_version_reader.py tests/contract/test_source_version_reader_cli.py tests/contract/test_source_export_v2.py tests/contract/test_source_export_v2_cli.py tests/e2e/test_source_version_reader_real_bytes.py` | 现有真实字节测试需零 skip；之后 R4 L01–L12 的四根/原生 company/dayu/Dropbox 样本、旧引用回放与 429 页资源门仍需补验，内部单测绿不能代 G-0 自动 E2E。 |
 | ET S2 | `python -m pytest -q tests/test_transcript_api.py tests/test_translation_controls.py` | 精确 FY/Q 与原语言 TXT 的真实 ET tool CLI、两级 hash/bytes lineage；需凭证/联网的旧项单列跳过。 |
 | FF S3 | `python -m pytest -q tests/test_source_ref_v2.py tests/test_source_ref_v2_db_query.py tests/test_fetch_filing.py` | 显式提供已记录的 `CWP_V2_CODE_ROOT`/`FILING_FETCH_V2_WIKI_SRC` 指向本次固定 CWP checkout；latest/close-gap 与 v1 golden 正式 E2E 零跳过。 |
-| RF S4 | `python -m pytest -q tests/test_company_wiki_source_reader_v2.py tests/test_source_preparation_v2_cross_repo.py tests/test_source_ref_v2_three_repo_e2e.py` | 修**原测试文件**日期后，真实 FF/CWP/RF + 有证据路径必有合法 64 位 fixture hash 的 assurance；已审来源正例不能只靠 fake ref。 |
+| RF S4 | `python -m pytest -q tests/test_company_wiki_source_reader_v2.py tests/test_source_preparation_v2_cross_repo.py tests/test_source_ref_v2_three_repo_e2e.py` | 修**原测试文件**日期后，真实 FF/CWP/RF；closure 有仓内可读证据路径即可，缺 fixture hash 只增加 pending 诊断；已提供 hash 必须是匹配实际字节的合法 SHA-256，已审来源正例不能只靠 fake ref。 |
 | FF companion S4b | `python -m pytest -q tests/test_transcript_companion.py` | 当前 6 项仅 fake CWP；补真正 FF CLI/CWP import/ET tool 三边界 E2E。 |
 | StockWiki S5/Q2 | `python -m pytest -q tests/test_quick_scan_store.py` | 当前 8 pass/10 fail 先修 W01；v2 reader/CLI 测试文件尚不存在，TDD 先写，再做 P06 真字节 dry-run。 |
 
@@ -165,7 +165,7 @@ S2 与 S3、S5、Q1、N0/N1 可并行，**但每仓写入只由其唯一 owner �
 ## 7. 已知风险与分支裁决
 
 - **SourceRef v2 response 仍写 1.1**：S3 修版本并用 golden 保证 v1 默认；未完成前 FF v2 只能 opt-in 试验。
-- **RF 原三仓测试日期过期**：修 fixture 的冻结时钟，不放宽生产 as-of；用户裁定“有 evidence path 必须有有效 hash”，dirty §42 的 pending 放宽不能导入。
+- **RF 原三仓测试日期过期**：修 fixture 的冻结时钟，不放宽生产 as-of；用户 2026-10-01 后续裁定已放宽缺 hash 阻断；仓内路径/文件有效性仍阻断失败，已有 hash 仍必须匹配实际字节。
 - **StockWiki 旧代码/历史收据消失**：按当前树实现 strict v2，兼容范围只由真实旧引用决定；QuickScanStore 10 fail 先修再用新回执。
 - **ET/FF companion 仅局部 fake 测过**：G-A 必须经过真实编排、CWP importer/writer 和 ET 工具边界；目前无 provider policy/FMP 402 不宣称生产联网可用。
 - **空间误算与重复检查**：旧 46 GiB 已退役；只按同卷实际文件变化算收益。单元/集成持续 TDD，大节点一次集中 E2E；失败只复测受影响链。

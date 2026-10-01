@@ -869,3 +869,9 @@
 - Confirmed the RF read-only audit card defines its sole report path, report schema, start/end immutability checks, RF no-write boundary, and stop condition for incomplete filesystem visibility. The report is not present yet; no audit completion is inferred.
 - Reproduced that uncommitted RF `fcap` closure logic returns ready for a nonexistent evidence path paired with a malformed fixture hash. Its 11 passing tests omit this invariant. The mainline implementation rejects missing, malformed, and mismatched hashes and accepts a matching SHA; its focused 16-test suite passes. This confirms a contract regression in the dirty proposal despite its local test result.
 - No RF files were changed. Integration must retain the selected invariant “evidence path requires valid matching hash”; add a direct regression before accepting any RF closure changes. The isolated temporary mainline fixture was removed.
+
+## 2026-10-01 — RF closure hash 规则更新与验收
+
+- 用户将先前“有 evidence path 必须有 hash”的规则放宽：路径解析到 RF 仓库内真实可读普通文件时，缺失或空白 `fixture_hash` 仅增加 `evidence_hash_pending` 诊断，不阻断 `closure_ready`。保留仓库边界、文件存在和可读性校验；若记录 hash，仍要求合法 SHA-256 并匹配当前文件字节；错误路径或错误/不匹配 hash 仍阻断。
+- 在 RF main `415d8eb3` 上先补 RED：缺 hash+真实文件预期 ready、缺 hash+不存在路径仍 fail、closure summary 保留 pending 且 registry 不变。随后修改 `scenarios.py`，未照搬 fcap 代码中不检查无 hash 路径且会修改输入对象的问题；四文件提交为 RF main `3e03ce83`，工作树干净。
+- 真实 `tmp_path` 字节夹具的 scenario、三仓 closure 与双 CLI 定向测试 **33 passed**；覆盖已有错误 hash、坏路径拒绝和缺 hash 正例。另对 RF main 真实 registry 做只读核验：197 项当前全 ready；内存中移除 AR-01 hash、保留实际路径后仍 ready、pending=1，registry SHA 不变。全目录测试被 `test_freeze_exclusive_and_cas` 派生的 CodeGraph `prepare_source` 子进程挂住，未据此记为全套通过；确认进程属于本轮后结束它，并删除本轮 pytest-7046/7047/7048 三个独立临时根，验证它们已不存在。

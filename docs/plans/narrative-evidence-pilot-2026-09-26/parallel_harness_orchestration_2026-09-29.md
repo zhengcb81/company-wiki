@@ -11,8 +11,8 @@
 | CWP / `C:\Users\郑曾波\Projects\company-wiki` 的**专用代码 worktree** | [CWP 施工卡](harness_lanes/company_wiki.md) | 本仓已保存的 2026-09-28 WIP、真实原件只读副本 | 来源读取/导出 golden、简化的精确采集接口、selected bundle 与可靠 Worker |
 | ET / `C:\Users\郑曾波\Projects\earnings-transcripts\earnings-transcripts` | [ET 施工卡](harness_lanes/earnings_transcripts.md) | 明确公司和 fiscal FY/Q 请求 | 原语言 TXT 的版本化精确工具结果 |
 | FF / `C:\Users\郑曾波\Projects\filing-fetch` | [FF 施工卡](harness_lanes/filing_fetch.md) | CWP SourceRef/operation golden、ET tool golden | v1 兼容和显式 v2 来源/电话会编排 envelope |
-| RF / `C:\Users\郑曾波\Projects\revenue-forecast` | [RF 施工卡](harness_lanes/revenue_forecast.md) | FF/CWP 生产者 golden 和来源读取 CLI | 无物理根依赖的来源 adapter、严格 evidence hash |
-| RF 本地状态只读审计 / RF 只读、CWP 单一报告文件 | [RF 状态审计卡](harness_lanes/revenue_forecast_worktree_audit_2026-10-01.md) | 2026-10-01 完整权限快照：root `fcap@ee0a82bf` 12 tracked 状态/404 untracked；local main `415d8eb3`；reader `3b00b938` | 只读归属报告写入 `harness_lanes/results/revenue_forecast_worktree_audit_2026-10-01.md`；禁止改 RF、merge、restore 或 delete |
+| RF / `C:\Users\郑曾波\Projects\revenue-forecast` | [RF 施工卡](harness_lanes/revenue_forecast.md) | FF/CWP 生产者 golden 和来源读取 CLI | 无物理根依赖的来源 adapter；仓内可读证据路径即可闭环，缺 hash 只记 pending，已有 hash 校验格式和实际字节 |
+| RF 本地状态只读审计 / RF 只读、CWP 单一报告文件 | [RF 状态审计卡](harness_lanes/revenue_forecast_worktree_audit_2026-10-01.md) | 2026-10-01 审计基线快照：root `fcap@ee0a82bf` 12 tracked 状态/404 untracked；local main `415d8eb3`；reader `3b00b938` | 审计报告已交付在指定结果路径；已提交 fcap 历史在 main，旧 reader 原型需择要评估；报告记录 ACL 不可见目录与未完成的全量归属，不据此清理；RF 全程只读 |
 | StockWiki / `C:\Users\郑曾波\Projects\StockWiki` | [W04 实施与验收记录](harness_lanes/stockwiki_g2b_owner_context.md)；已完成并线见[收据](harness_lanes/stockwiki_mainline_integration.md) | 当前本地 `master@b4f3846`；保留源 worktree、分支和 `.claude/` | owner receipt、ISO MIC registry、精确 request export 与关系校验已合入；聚焦 57 项、合并后全门 686 项通过；G2b public CLI 正反例通过；W04 已验收，不再把此卡当作未完成实现任务 |
 | IQS / `C:\Users\郑曾波\Projects\invest-quick-scan` | [IQS 施工卡](harness_lanes/invest_quick_scan.md) | canonical golden 已由当前 owner 提供；只读核收尾报告/公开 CLI，不新开写入线 | G2b 当前 owner-context 公共正反例已通过；其它 IQS capability 与其 active PWF 由现有 owner 收尾，不由本线重复实现 |
 
@@ -71,7 +71,7 @@ G-D：逐批按实际消费者引用选择已通过的 G-A/G-B/G2b/G-C；无全�
 | 集成点 | 总指挥负责的真入口与通过条件 | 失败时继续的范围 |
 |---|---|---|
 | G-0 CWP reader | 四根和 company/dayu/Dropbox 原生位置、同 SHA 搬根、同尺寸篡改、旧引用、真实 locator、429 页资源；测试根恢复 | ET/IQS/FF/StockWiki/RF 可继续本仓 TDD，消费者不切默认 |
-| G-A 采集/预测 | FF→CWP→RF、FF→ET→CWP 正式 CLI/工具；0 意外网络、一次精确下载、无 review receipt、严格 evidence hash、原文与来源不变 | 只关闭失败的 FF/RF/ET 新路由 |
+| G-A 采集/预测 | FF→CWP→RF、FF→ET→CWP 正式 CLI/工具；0 意外网络、一次精确下载、无 review receipt、仓内可读证据路径、缺 hash 只作 pending，已有 hash 校验实际字节、原文与来源不变 | 只关闭失败的 FF/RF/ET 新路由 |
 | G-B 来源消费与 G2b 身份 | G-B 已由 CWP→verified-open→StockWiki reader 的真实跨仓 E2E 通过（StockWiki 3 passed；CWP P06 四根字节 1 passed）。G2b 等 W04 输出含真实 owner receipt、market registry、source bindings 的 Entity request，再由 IQS CLI 验证正反例。 | 基础 G-B 已完成；W04 失败只保持 G2b pending，不影响 CWP E7/其它来源读取 |
 | G-C 叙述/Worker | 年报、招股、IR、TXT 的 selected/skip/locator 真回放；RF 与 StockWiki 从各自正式 adapter 实读 selected package 并核撤回/as-of/原文 SHA；1/2/4 文档、kill/retry/lease/outbox、资源/空间上限 | Worker 保持 paused；若仅 CWP 内部包绿而消费者失败，只记内部 E5/E6 通过，G-C 不通过 |
 | G-D 派生清理/发布 | 每批 scratch 删除重建、实际消费者引用与对应已通过门、精确生产派生清单、同卷净字节、原件/manifest 前后相同；StockWiki full sync/weekly 仅在相关 G-B/G2b/G-C 已通过后单独 canary | 不可解释的派生批次跳过；无关批次和已验能力继续 |
@@ -80,4 +80,4 @@ G-D：逐批按实际消费者引用选择已通过的 G-A/G-B/G2b/G-C；无全�
 
 ## 6. 当前派发条件与风险
 
-本节实际进度以 [Phase 26–32](task_plan.md) 为准。StockWiki W04 已验收并在本地 master；CWP E-B 测试通过但其实现工作树尚未与当前 master 整合。当前有一张可直接独立派发、与产品写入不冲突的卡：[RF 本地状态只读审计](harness_lanes/revenue_forecast_worktree_audit_2026-10-01.md)，它只读 RF、只写一个独占结果文件，为优先 RF 并线决策提供证据。FF、IQS 产品代码仍有各自 owner 工作，ET 精确工具门已完成，不另开第二写入者。主 agent 根据 RF 审计结果推进 RF 整合，同时在独立 CWP worktree 做分支审查，再推进 selected package/G-C 与 G-D。FMP 此前真实请求返回 402；fake-provider E2E 不代表已付费 API 可用。
+本节实际进度以 [Phase 26–32](task_plan.md) 为准。StockWiki W04 已验收并在本地 master；CWP E-B 测试通过但其实现工作树尚未与当前 master 整合。RF 本地状态只读审计报告已交付；它发现无条件可删项为零、最多约 40.3 MB 条件性空间候选，并指出 7 个不可见子树。用户后续裁定放宽缺 hash 阻断：路径须是仓内可读文件；缺失/空白 hash 只作 pending 诊断，已有 hash 仍校验 SHA 格式和实际字节。FF、IQS 产品代码仍有各自 owner 工作，ET 精确工具门已完成，不另开第二写入者。主 agent 根据 RF 审计结果推进 RF 整合，同时在独立 CWP worktree 做分支审查，再推进 selected package/G-C 与 G-D。FMP 此前真实请求返回 402；fake-provider E2E 不代表已付费 API 可用。
