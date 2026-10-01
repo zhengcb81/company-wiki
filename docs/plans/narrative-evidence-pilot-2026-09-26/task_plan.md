@@ -8,7 +8,7 @@
 
 ## Next Step
 
-> **2026-09-30 更新：**CWP E5/E6 已提交，StockWiki reader/W02/W03 已并入 `master@c8cfb2e`，基础 G-B 真实跨仓 E2E 通过。W04 已并入 `master@72531b5`：聚焦 64 passed、全门 651 passed/15 skipped，IQS public CLI 正例和 17 个单字段负例通过；完整施工卡仍差 golden SHA、ISO Operating/Segment MIC 关系负例和具名 error code 测试。CWP E7 的 R01/R04/R09/R11 与 100+ job 重启矩阵通过；synthetic P1/P2/P4 benchmark 显示可重叠，但真实五样本 E6 replay 配对里 P2 比 P1 慢约 6.8%、峰值内存高约 22%。因此 Worker 继续 paused/default-off，当前隔离基线用 P1；下一节点是 E-B 集成门及带锁等待数据的真实样本复测。RF/FF/IQS 活动 WIP 由各自 owner 维护，原始文档不清理。
+> **2026-10-01 更新：**StockWiki W04 已完成本地主线验收（`master@b4f3846`，合并后 686 passed，ISO MIC canary 与 IQS public CLI 正反例通过）。CWP E-B 集中测试门在专用 `codex/narrative-gates-integration@cba745a` 工作树通过：UTF-8 环境下 404 passed、2 skipped、695 deselected；新增覆盖暂停/完成竞争、进程退出后恢复和 catalog lock 下 prepared→visible 恢复。该提交只在专用工作树，尚未并入 CWP `master@b0fd763`；两边各有 9/13 个独有提交，差异覆盖 77 个文件，需另做整合审查。最新四文档 E6 P1/P2 配对为 90.14/84.776 秒，P2 快约 6.3%、峰值 RSS 高约 23.5%，未达计划的 25% 提速门；锁等待 p95 未测。Worker 继续 paused/default-off，以 P1 为隔离基线。RF/FF/IQS 既有 owner 工作保持原样。
 
 > **2026-09-28 权限/审查简化（优先于下方所有历史段落）：**不设 private/public、逐文档/逐期/逐 job 授权、review receipt、独立 reviewer 或人工批次审批。用户已授权范围内，自动化测试和 source/hash/lineage/预算断言决定能否继续；原始文档全部保留，只清理可重建且无引用的派生文件。下方 2026-09-27 transcript permission 细节和历史 G 门槛只作事实记录，不是待实施指令。
 
@@ -36,7 +36,7 @@ Phase 17 的 F0–F5 已完成。G1 离线主样本和回归集已经复跑：12
 
 ## Current Phase
 
-Phase 26：跨仓抽象与 Narrative Worker 分阶段实施中。M1、M2、E0–E7 故障恢复矩阵已完成测试，E-B 集成与 runtime composition 未完成；E5/E6 已提交，E7 测试仍在专用 worktree 待提交。production Worker 继续 paused/default-off。真实五样本 P1/P2 replay 配对未显示并发提速，需带锁等待指标的复测。StockWiki 基础 G-B 已过；W04 实现/质量门/CLI 正反路径通过，但 golden SHA、MIC 父子关系负例和具名错误码仍待补测，G2b 尚未关闭。原件保留。
+Phase 32：StockWiki W04 与 CWP E-B 测试验收已完成；CWP E-B 结果仍位于与主线分叉的专用工作树，跨分支整合待做。production Worker 继续 paused/default-off。真实 E6 P1/P2 只显示约 6.3% 提速且 P2 峰值 RSS 较高，锁等待 p95 未测，因此并发未获默认启用依据。下一步先核对并整合 CWP 专用工作树中已验收的提交，再推进正式 selected-package 消费/G-C 与 G-D；原始文档保留。
 
 外部来源采购补充：FMP Basic key 实测 profile/有效 SEC 检索 200，press releases/transcript dates 402；SEC 原生 API 无 key。以 246 个本地公司目录作保守分母，Basic 补充 SEC 检索约 2,076 calls/30 日，纯 SEC/IR 路径为 0 FMP calls；Koyfin 无用户 API，Seeking Alpha 个人订阅不授权自动抓取；Motley Fool 官方条款也禁止自动访问/采集，现有适配器不得接通生产。详细价格、假设、权利分级和 30 日试点见 [外部数据源与成本卡](provider_cost_and_capability_2026-09-27.md)。采购结论为先不买，且不改变 G0/G1e 门禁。
 
@@ -398,6 +398,20 @@ company-wiki 只负责来源、解析质量、证据定位、检索和来源摘�
 
 **Status:** W04 owner-context producer 与 MIC 关系补强均已本地合入并通过完整质量门；剩余 G2b capability 按 IQS owner 收尾范围跟踪。本轮暂停，不继续 E-B/G-C/G-D 或其它跨仓实现；恢复时先读取本阶段和各仓最新状态，避免重复或覆盖活动工作。
 
+## Phase 32：E-B 集中测试验收与分支整合状态（2026-10-01）
+
+- [x] CWP 专用 worktree 的 E-B 聚焦回归通过：`404 passed, 2 skipped, 695 deselected`。运行时设置 `PYTHONIOENCODING=utf-8`、`PYTHONUTF8=1`，覆盖此前 Windows 默认 CP936 与 pytest UTF-8 capture 的子进程输出编码冲突。
+- [x] 增补并提交进程级恢复测试 `cba745a`：R05 pause-vs-finish、R07 ACK 后进程退出与恢复各重复 3 次；R08 使用真实 `CatalogOperationLock` 验证 AUTO ACK 持久后 artifact 保持 prepared/invisible，释放锁后 reconcile 只发布一个 visible version。相关焦点测试通过。
+- [x] `pre-commit --all-files`、提交 hook 的 Ruff、config doctor、host guard 通过；contract mypy 在该提交仅包含测试文件时按配置跳过。
+- [x] E6 最新四文档 P1/P2 隔离 replay 通过：P1 90.14 秒、159.8 narrative docs/h、RSS 401,235,968 B；P2 84.776 秒、169.9 docs/h、RSS 495,566,848 B。P2 墙钟改善约 5.95%，吞吐改善约 6.3%，RSS 高约 23.5%；raw 20,597,846 B、selected objects 419,428 B（2.04%）、skip artifact 1,441 B、5 visible、4 model calls、0 retries/SQLite busy errors、DB 约 1.0 MB、WAL 0。catalog lock wait 与 SQLite busy-wait p95 未测。
+- [x] 生产 Worker 控制仍为 paused；未发现 runtime worker JSON、automation DB 或 operation lock。新增测试用根均已清理并复核原本不存在的目录恢复为不存在；生产原件未改。
+- [x] 只读核对跨仓本地分支祖先关系：StockWiki 已知 W02/W03、SourceExport reader、W04、G2b 分支均并入 `master@b4f3846`；ET transcript adapter 与 `main@4924d57` 同 HEAD；IQS 本地 `master@091999d` 干净。CWP transcript-companion/fcap/r4b06 分支已是 `master@b0fd763` 的祖先，但 CWP master 本身比 `origin/master` 超前 44 个本地提交。
+- [ ] RF 优先项仍需核清：本地 `main@415d8eb3` 已包含 `fcap@ee0a82bf` 的提交历史；`codex/revenue-source-reader@3b00b938` 尚有 1 个独有提交。完整权限只读复核显示 RF 根 fcap 工作树有 12 个 tracked 状态、404 个 untracked path；独立 main 与 reader 工作树干净。353 项来自 `.planning`（主要在 `execution_runs`），45 项来自 `.tmp-r41-mutation`，余项包括 assurance 与日志。已准备只读、独立的 [RF 本地状态审计卡](harness_lanes/revenue_forecast_worktree_audit_2026-10-01.md)，先完成逐项归属，再按既有用户指令决定恢复/清理与 reader 并线；本轮未改 RF。
+- [ ] FF 本地 `main@c9799b7` 尚未包含 fcap、SourceRef v2 和 transcript companion 支线（各有 39、41、45 个仅分支提交）；专用工作树干净但未并线。暂由 FF owner 维护，不另开同仓 harness。
+- [ ] CWP 主线整合未完成：专用分支 `cba745a` 的测试验收成立，但该工作树与 `master@b0fd763` 分叉；两侧分别有 9 与 13 个独有提交，整体差异 77 个文件。需按提交和文件逐块判定哪些有效后再整合，不能直接 fast-forward 或将分支整体视为已并线。
+
+**Status:** W04 与 E-B 测试门验收通过，但 E-B 代码线尚未进入 CWP 主线，runtime composition、正式 G-C 消费和 G-D 空间处置仍未完成。Worker 保持 paused/default-off。唯一可立即独立交给 harness 的任务是 RF 本地状态只读审计卡；它只读 RF、只写自己的报告文件，不和主线 RF 并入或 CWP 产品代码写集合重叠。RF/FF/IQS 产品代码仍由各自 owner 管理，ET 工具卡和 StockWiki W04 已完成。
+
 ## Next Step
 
-本轮 W04 验收已完成，用户要求完成手头工作后暂停，因此不启动新施工。恢复时再根据 RF/FF/IQS 当前主线与未提交状态，决定 E-B、selected narrative G-C、G-D 与剩余跨仓集成顺序；Worker 维持 paused/default-off，原始下载文档保留。
+按既定优先级先审 RF PWF/Git 记录，逐项归属 fcap 根工作树的未提交变化，并整合唯一仍不在本地 main 的 reader 提交；不猜测性清理。随后复核 FF owner 的三条未并线支线，再整合 CWP E-B 分叉并运行主线回归，最后推进 selected-package/G-C 与 G-D。RF/FF 活动目录不另开第二写入线。Worker 保持 paused/default-off。

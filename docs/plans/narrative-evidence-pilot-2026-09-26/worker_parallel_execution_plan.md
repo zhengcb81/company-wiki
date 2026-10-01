@@ -165,6 +165,10 @@ N5 必须交付 `scripts/benchmark_narrative_parallel.py`（或经 W0 固定的�
 
 **2026-09-30 实测补充（E6/E7；覆盖上面的候选比较，不改冻结阈值）：**45-job 短 deterministic handler 的交错六轮中位数 P1/P2/P4 为 15.31/10.91/6.65 秒；真实 P01/P04/P07/T01 文档 + replay model 的一次 P1/P2 配对则为 45.07/48.13 秒，P2 慢 6.8%，峰值 RSS 360.9/440.7 MiB。后一组的选中对象/原文比均 2.04%，retry/busy/WAL 为 0，但 catalog lock 与 SQLite busy-wait p95 没测。样本配对次数不足以定长期策略，但当前证据不通过 P2 ≥25% 提速门；继续保持 Worker default-off/paused，隔离验证先以 P1 为比较基线。Synthetic 结果只证明调度器可重叠，不作为文档端到端提速依据；获得真实文档、锁等待及稳定多轮结果前不升档。
 
+**2026-10-01 E-B 验收补充：**最新四文档 E6 P1/P2 replay 的单轮墙钟为 90.14/84.776 秒，吞吐为 159.8/169.9 narrative docs/h，峰值进程树 RSS 为 401,235,968/495,566,848 B。P2 墙钟改善 5.95%、吞吐提高约 6.3%，峰值 RSS 高约 23.5%；selected objects/raw 均为 419,428/20,597,846 B（2.04%），skip artifact 1,441 B，5 visible、4 model calls、0 retry、0 SQLite busy errors、DB 约 1.0 MB、WAL 0。catalog lock wait 和 SQLite busy-wait p95 仍未量到。不同日期的两组真实样本配对差异较大，均未通过 25% 提速门；不得用其中一轮的微小优势替代多轮锁压力证据。
+
+R05 pause-vs-finish 与 R07 ACK 后进程退出恢复各做 3 次；R08 通过真实 `CatalogOperationLock` 锁定 publication，确认 durable AUTO ACK 不会使 prepared artifact 提前 visible，释放锁后 reconcile 恰好发布一个版本。广泛 E-B 回归在 UTF-8 parent/child 环境下通过 **404 passed, 2 skipped, 695 deselected**。因此本计划的运行结论仍为 production Worker paused/default-off、隔离基线 P1；下一性能研究若启动，须单独加入多轮配对与锁等待遥测后再谈升档。
+
 ## 9. 分卡实施顺序与可运行测试入口
 
 | 卡/依赖 | 精确产物与建议落点 | 最小测试和停止点 |

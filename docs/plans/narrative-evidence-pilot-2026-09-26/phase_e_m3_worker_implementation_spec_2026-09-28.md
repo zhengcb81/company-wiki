@@ -535,6 +535,10 @@ P1 和 P2 各自使用独立 automation DB、catalog 和对象目录，防止上
 
 不要求在每个 helper、每个 job stage 做人工复核，也不做 72 小时 soak。失败时只修对应场景及直接依赖，再在 E-B 统一复跑。
 
+**2026-10-01 执行收据：**专用分支 `codex/narrative-gates-integration@cba745a` 上 E-B 聚焦回归通过 **404 passed, 2 skipped, 695 deselected**；UTF-8 parent/child 环境通过此前默认 CP936 与 pytest capture 的编码冲突。R05 pause-vs-finish 与 R07 ACK 后进程退出/恢复各重复 3 次；R08 以真实 catalog lock 验证 prepared 不提前 visible、解锁后 reconcile 唯一发布。E6 最新四文档 P1/P2 为 90.14/84.776 秒、159.8/169.9 docs/h、峰值 RSS 401,235,968/495,566,848 B；P2 提速约 6.3%、RSS 高约 23.5%，锁等待 p95 尚无数据。生产 Worker 保持 paused/default-off。
+
+此收据证明专用分支上的 E-B 测试门通过，不证明该分支已集成到 CWP master。当前 `master@b0fd763` 与该分支分叉，主线整合须先按 Phase 32 完成提交/文件差异审查，再以整合后的主线版本运行相应测试。
+
 ## 5. 精确文件变更表
 
 | 文件 | 计划动作 | 禁止事项 |
@@ -590,4 +594,4 @@ Phase E 完成时在 `progress.md` 记录：
 - [x] production legacy Worker 仍 paused、无 runtime。
 - [x] 先完成 E0 RED/green，再进入 Store。
 - [x] E-A 通过前未新增 Supervisor/narrative handler 产品代码。
-- [ ] E-B 通过前不提供 production enable 建议。
+- [x] E-B 测试门已在专用分支通过；由于尚未完成主线整合、G-C/G-D 未关闭且真实并发提速证据不足，production Worker 继续 paused/default-off。

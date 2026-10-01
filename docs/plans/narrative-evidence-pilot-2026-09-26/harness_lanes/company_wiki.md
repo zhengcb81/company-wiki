@@ -1,12 +1,12 @@
 # CWP 独占施工卡：来源、叙述证据与 Worker
 
-> 可单独交给一个 company-wiki harness。**写入范围**：仅 `C:\Users\郑曾波\Projects\company-wiki` 的指定独立代码 worktree；总指挥独占原主工作树的 `docs/plans/narrative-evidence-pilot-2026-09-26/`。其它项目目录均只读。本卡尚未执行；开工时以总指挥交付的 base commit 和接口表为准，不按文内历史 HEAD reset。
+> 原 CWP harness 施工卡；本轮 E-B 测试验收已完成，但对应代码工作树尚未并入当前 master。当前不要据此另开一条同仓实现线；后续先由总指挥完成分支差异审查与整合。**写入范围**仍限定在 company-wiki 专用代码 worktree；总指挥独占本目录的计划与跨仓验收记录，其它项目目录只读。
 
 开工输入包：本卡、S0a observed 接口表、指定 base/worktree、只读 P/T 样本清单（绝对路径、SHA、大小、期次、locator oracle、隔离复制/清理规则）。缺样本只阻对应真样本验收，不阻本仓 RED/代码整理。
 
 ## 已知状态与第一步
 
-截至 2026-09-29，原主工作树有 2026-09-28 简化权限/叙述合同的**未提交**有效改动；相关两组测试 127 与 95 passed、24 重叠。`SourceVersionReader`、SourceRef `2.0`、SourceExport v2 producer/CLI 已存在；E0–E4.8 已实现，E5–E7 与生产启用未完成。总指挥须先保存当前 WIP 为可恢复提交/快照并给本线独立 worktree、base 与禁止改动路径。不得从干净旧主线重写这些已完成改动，也不清除原始 PDF/TXT、manifest 或旧证据。
+截至 2026-10-01，CWP E-B 专用工作树分支 `codex/narrative-gates-integration@cba745a` 的聚焦回归为 **404 passed, 2 skipped, 695 deselected**，新增 R05/R07/R08 恢复场景及 E6 真实样本 replay 已通过。该分支与当前 `master@b0fd763` 有 9 个 master-only、13 个 branch-only 提交，整体差异覆盖 77 个文件，因此验收只适用于该 worktree，不能写成已进入主线。原始 PDF/TXT、manifest 和历史证据均保留；生产 Worker 仍 paused/default-off。先逐提交审查和整合，再决定剩余代码工作，不要重新从旧主线实施本卡。
 
 ## 目标和交给别人的接口
 
