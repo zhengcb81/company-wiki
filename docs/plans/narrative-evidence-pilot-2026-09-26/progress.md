@@ -999,3 +999,24 @@
 - WSL 三个相关 contract 模块 31 passed in 41.50s；新增 pre-commit focused contract hook 实测 Passed；JUnit reporter helper 7 passed；Ruff/YAML/diff check 已验证。
 - Windows 完整 pre-push 七阶段 GREEN；新增门禁包括完整 unit 与 focused reader/receipt/B10 contract。曾试图在本机 push gate 加整套 CI contracts，但 Windows 子进程 600 秒超时，因此恢复为高风险聚焦 contracts，完整 matrix 保留在远端 CI。
 - 诊断工具上报异常类、不带失败正文；坏 JSON 参数 ID 已压短。实现和 PWF 修改未提交；新远端 CI 尚待验证。远端 run 的 receipt-envelope 三用例与 WSL 结果不同，按下一轮 CI 异常类别继续查。
+
+## Session: CI 失败修复交接（2026-10-02）
+
+- 最新远端证据为 run `37012332197` / commit `1504d6a`：Unit matrix 三版通过，Contract matrix 三版失败，具体六项见 [交接卡](ci_red_handoff_2026-10-02.md)。
+- 修正三项过期测试合同：resolver read gate 不再要求已删除的 remediation helper；C2 review fixture 补齐 source/policy/evidence 绑定；paused Worker 测试验证 foreign runtime/lock 原样保留且进程不被终止。
+- JUnit 异常类 reporter fallback 已增加，只暴露类名、不暴露 message 正文；新增 privacy regression test。
+- commit hook 的三模块集改为经 `python tools/pre_push_gate.py --metadata-reader-contracts-only` 运行，复用短隔离 basetemp；hook 实际 Passed。Windows 默认 pre-commit cache 只读时，本轮通过临时 `PRE_COMMIT_HOME` 调用验证。
+- 精确受影响用例 **33 passed in 9.28s**；`ruff check` 与 `git diff --check` 通过。
+- 全量 `python tools/pre_push_gate.py` 本轮曾运行但控制台连接丢失；已按进程启动时间、解释器路径确认并停止该次四个进程，专属 `.pp-92h6asp5` 已安全清理。此结果标记为**未验收**，不可推断通过。
+- 工作树修改尚未提交或推送；产品数据/raw 未改。交接者完成全量本地 push gate 后再正常提交/推送，并以新 Actions 的三版 Contract、Unit 和其余必需 jobs 全绿结案。不要增加小节点签收；完整过程见 [交接卡](ci_red_handoff_2026-10-02.md)。
+
+## Session: CI 根因复核与短 basetemp 门禁修复（2026-10-02）
+
+- 复跑最新六个远端失败身份：旧契约三个、FC905 三个，Windows/Python 3.13.9 **6 passed in 4.37s**；显式使用仓库 `tmp/` 短 basetemp，回执 `relocated=false`，run root 清理后不存在。
+- 根因：pre-push 原 `.pp-<32 hex>` basetemp 长约 71 字符，超过 60 字符阈值，被转移至用户 `%TEMP%`；CI 的门禁输出捕获隐藏了重定向证据。该路径清理 `removed=false`，本轮新建目录在系统 ACL 下无法删除；精确路径和内容边界见 findings。没有更改 raw、生产 config 或数据库。
+- 修改 `tools/pre_push_gate.py`：basetemp 放入忽略的 `tmp/` 短唯一子目录；解析 pytest 决策并强制不重定向，结束后验证目录已删除。将三个本轮 Contract 红测纳入 commit hook 与 pre-push 聚焦回归，相关实现文件也能触发 hook。
+- 修改后 `python tools/pre_push_gate.py --metadata-reader-contracts-only` 通过，且 direct 6-case run 全绿；完整 pre-push 尚未运行，提交/推送和远端 FC905 根因仍未完成。
+- 环境限制：`wsl --status` 返回 `E_ACCESSDENIED`；未找到 `docker` 或 `py` launcher。Windows Python 3.13 通过不能代表 Linux 三版本已绿。下一步先完整 pre-push，再一次聚合提交/推送，用 reporter 新增的异常类别定位剩余 FC905，再按证据修复并验收远端全矩阵。
+
+- 完整 `python tools/pre_push_gate.py` 已通过：Ruff、compileall、config doctor、complexity ratchet、host assumption guard、全量 Unit、focused contracts + 三项回归均 GREEN；各 pytest 阶段都报告短仓内 basetemp、`relocated=false`。真实 pre-commit hook 以三项过期契约文件触发并 Passed。
+- 由于 Linux 环境不可用，FC905 异常仍须由下一次 Actions 提供。本轮已有局部修复和 PWF 变更尚未提交；下一步做一次聚合普通 commit/push，检查完整 GitHub matrix，再继续按异常类别定位，不能以本地全绿提前关闭。

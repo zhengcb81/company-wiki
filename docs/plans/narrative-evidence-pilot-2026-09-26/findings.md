@@ -720,3 +720,22 @@
 - 三个完整相关 contract 模块在 Linux 无父级 PYTHONPATH 下 **31 passed**；完整本机七阶段 pre-push GREEN。新增 pre-commit 按相关源码文件触发重点 contracts；pre-push 运行完整 Unit 和 focused contract，不在每次本地 push 重复整套长 CI Contract matrix。
 - reporter 现输出 testcase identity 与异常类，不输出失败正文；测试参数使用紧凑 IDs，深层 JSON fixture 不再生成超长 annotation。
 - 远端同 run 还报告三项 test_fc905_receipt_envelope.py failure，但 WSL 上对应三项通过。下轮 CI 异常类是定位此平台差异的下一条证据；修复尚未推送，不能报告整条 CI 已绿。
+
+## 2026-10-02 — Contract 红灯交接与 pre-commit 覆盖边界
+
+- 最新远端 run `37012332197`（`1504d6a`）：Python 3.11/3.12/3.13 Unit 全绿，Contract 三版红；失败身份为 ZR-203、ZR-1003 C2、worker temp governance 各一项，以及 FC905 receipt envelope 三项。
+- 三个本机可复现用例属于过期测试合同：ZR-203 的 `_remediation_pending` 已由 `d5162e5` 有意移除；ZR-1003 fixture 不满足当前 receipt writer 的完整绑定格式；worker 用例在默认 `paused` 时要求删除外来 runtime/lock，与“不触碰外来 worker”相反。工作树仅修正测试期望/fixture，生产校验没有放松。
+- reporter 读取 JUnit `failure.type` 为空时，仅从 `failure.message` 中提取形如 `sqlite3.OperationalError:` 的类名前缀。异常正文不输出；回归测试证明只显示 `[OperationalError]`。
+- 以前 pre-commit 不拦截，是因为 commit hook 以快速静态检查为主，并按文件范围触发；旧 pre-push 也没有全量 Contract matrix。新 commit hook 只覆盖三个最相关 reader/receipt/B10 模块，额外长测试留给 push gate 与 CI，不要求每次提交跑全矩阵。
+- 首次将 pytest 直接放进 hook 时，Windows 默认 `%TEMP%` 目录 ACL 导致 tmp fixture setup errors。现通过 `pre_push_gate.py` 的隔离短 basetemp wrapper 执行；三模块 hook 真实运行 Passed。默认 pre-commit cache 目录同时只读，执行 pre-commit 命令时需指定可写 `PRE_COMMIT_HOME`；这是主机环境限制。
+- 修改后受影响用例 **33 passed in 9.28s**。一轮全量 pre-push 失去终端会话，没有可用退出状态；本轮已停止其四个进程、删除独有 `.pp-*` 根。故全量本地门禁状态为**未验证**。
+- FC905 三项此前本机 Linux/WSL 通过而远端失败；当前 reporter 类别 fallback 尚未推送，仍无异常类证据。后续不得猜原因或放宽哈希/证据绑定，需看新 Actions 注解并按 CI Python/依赖定向重现。
+
+## 2026-10-02 — 本地 pytest basetemp 门禁的实际根因
+
+- 基线 `tools/pre_push_gate.py::_run_pytest_gate` 使用 `TemporaryDirectory(prefix=".pp-", dir=PROJECT_ROOT)`。本机仓库绝对路径长度约 34，加上 `.pp-` 和 32 位随机名后约 71，超过根 `conftest.py` 的 60 字符 basetemp 阈值。
+- pytest 因此将实际临时目录重定向至 `%TEMP%/cw-pytest-basetemp/`。`_run` 捕获且隐藏成功测试的输出，所以门禁虽然打印 GREEN，却没有暴露 `relocated=true`；本轮实跑还观察到 fixture 清理回执 `removed=false`。该路径 ACL 拒绝递归清理，精确目录 `C:\Users\郑曾波\AppData\Local\Temp\cw-pytest-basetemp\20261002-172410-196fe21e` 是本轮测试遗留，提升权限删除仍被操作系统拒绝；里面仅有 PI01/PI02/PI09 pytest 临时子目录，不含项目原文。
+- 按 E2E 计划将唯一 basetemp 改到仓库忽略的 `tmp/` 下短路径；实际记录长度 47、`relocated=false`，pytest 结束后该 run root 自动消失。门禁现检查 pytest 输出中的唯一 basetemp 决策，重定向/缺失/错路径都会令 gate RED。
+- 在 Windows/Python 3.13.9 用符合路径规范的独立 run root 重跑远端 6 个最新失败身份：**6 passed in 4.37s**；增强后的 focused pre-commit/pre-push contract gate 亦通过。
+- 修复后的完整 `python tools/pre_push_gate.py` 全阶段 GREEN：Ruff、compileall、config doctor、complexity ratchet、host-assumption guard、全量 Unit、focused contracts + 本轮回归；三个 pytest 阶段均确认 basetemp 短、在仓库内且未重定向。真实 `pre-commit run metadata-reader-contracts --files ...` 亦 Passed。
+- 本机 WSL 返回 `E_ACCESSDENIED`，`docker` 与 Windows `py` launcher 不存在；因此 FC905 在 Linux 三版本的失败仍需通过一次带异常类别的远端 CI 证据定位，不据 Windows 通过推断远端问题已解决。

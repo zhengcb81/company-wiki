@@ -41,6 +41,29 @@ def test_emits_test_identity_without_failure_body(tmp_path: Path, capsys) -> Non
     assert "private traceback omitted" not in output
 
 
+def test_extracts_only_exception_class_when_junit_type_is_missing(
+    tmp_path: Path, capsys
+) -> None:
+    report = tmp_path / "junit-missing-type.xml"
+    suite = ET.Element("testsuite")
+    case = ET.SubElement(
+        suite,
+        "testcase",
+        {"file": "tests/contract/test_example.py", "name": "test_private_failure"},
+    )
+    ET.SubElement(
+        case,
+        "failure",
+        {"message": "sqlite3.OperationalError: private database detail"},
+    )
+    ET.ElementTree(suite).write(report, encoding="utf-8", xml_declaration=True)
+
+    assert main(str(report)) == 0
+    output = capsys.readouterr().out
+    assert "[OperationalError]" in output
+    assert "private database detail" not in output
+
+
 def test_caps_annotations_and_reports_remaining_failure_count(
     tmp_path: Path, capsys
 ) -> None:

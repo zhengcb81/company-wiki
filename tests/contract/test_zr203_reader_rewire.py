@@ -187,7 +187,9 @@ READ_ENTRYPOINTS = {
         "bundle_for_resolution",
         "semantic_duplicate_groups",
     },
-    "resolver.py": {"_remediation_pending", "resolve"},
+    # Pending remediation proposals are diagnostics after the review-gate
+    # simplification; only the resolver read entrypoint remains here.
+    "resolver.py": {"resolve"},
 }
 
 

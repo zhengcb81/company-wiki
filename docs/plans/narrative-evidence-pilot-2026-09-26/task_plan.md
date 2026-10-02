@@ -578,3 +578,25 @@ company-wiki 只负责来源、解析质量、证据定位、检索和来源摘�
 - [ ] 提交并推送实现、诊断类别与本地门禁；检查新 Actions run。若三项 receipt-envelope 仍失败，按报告出的异常类别继续定位；只有远端 Unit/Contract 三版本都绿才关闭任务。
 
 **状态：**7 个本机可复现失败已修；GitHub-only 的三项 receipt-envelope failure 原因待新 CI 异常类别说明，不能宣称 CI 全绿。
+
+## Phase 47：Contract CI 修复交接（2026-10-02）
+
+- [x] 定位三项本机可复现失败是过期测试合同/fixture，不改生产校验：ZR-203 仍检查 `resolve`；ZR-1003 fixture 提供有效 SHA/source/policy/evidence；Worker paused 场景验证外来 runtime/lock 不被触碰。
+- [x] JUnit reporter 对无 `failure.type` 的结果从 `failure.message` 仅提取异常类名；回归测试确保异常正文不泄露。
+- [x] pre-commit contract hook 改为调用带隔离 basetemp 的 gate CLI，并收窄到三个 reader/receipt/B10 模块；实际 hook 运行通过。
+- [x] 受影响用例 **33 passed in 9.28s**；被本轮打断的全量门禁临时进程与专属目录已清理。
+- [ ] 后续接手者完成一次全量本地 pre-push、普通提交/推送，并根据新 Actions 运行处理仍未解释的 FC905 三项；远端 Unit/Contract 三版本及其他必需 jobs 全绿后结束。
+
+**状态：**停在交接点。最新已知远端 run `37012332197` 的 Unit matrix 全绿、Contract matrix 红；本轮修复尚未提交/推送。全量 pre-push 结果未知，不得记绿。详细执行顺序见[CI 红灯修复交接卡](ci_red_handoff_2026-10-02.md)。
+
+## Phase 48：消除本地 CI 门禁的短路径假绿并关闭 Contract 红灯（2026-10-02）
+
+- [x] 对远端 6 个失败身份在当前 Windows/Python 3.13 环境定向复现；更新后的三个旧契约 fixture/断言与三项 FC905 用例共 **6 passed**。
+- [x] 从基线和运行证据确认门禁真实 basetemp 超过 `conftest.py` 的 60 字符边界，pytest 重定向到用户 Temp；本轮观察到清理失败，确定该路径不满足仓库 E2E 临时目录规范。
+- [x] 将 pytest 基目录收敛到仓库忽略的 `tmp/` 下短唯一目录；门禁解析并强制 `relocated=false`，且验证 pytest 结束后目录消失。
+- [x] 把当前三项 Contract 红测加入 commit hook 与 pre-push 的同一回归集，路径触发同时覆盖对应测试和相关 source-catalog 实现。
+- [x] 完成本机完整 `python tools/pre_push_gate.py` 集成验收：Ruff、compileall、config doctor、complexity、host guard、全量 Unit、focused Contract 均 GREEN；所有 pytest 阶段核验 `relocated=false` 且短 basetemp 清理成功。
+- [ ] 将修复与诊断聚合成一次普通提交并推送；不得绕过 hook。
+- [ ] 读取该次 GitHub Actions 的异常类别，定位并修复 Linux-only/CI-only FC905 失败；三个 Python 版本及其他必需 jobs 全绿后关闭。
+
+**当前状态：**六项失败测试、增强后的 focused hook 和完整本机 pre-push 在 Windows/Python 3.13 通过。WSL 返回 `E_ACCESSDENIED`，本机没有 Docker/其他 Python minor runtime，因此目前不能声称已复现 Linux 或 3.11/3.12 差异；需推送一次聚合修复取得 FC905 新异常类别，再按证据修根因。

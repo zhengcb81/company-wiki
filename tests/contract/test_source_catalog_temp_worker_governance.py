@@ -160,13 +160,10 @@ def test_stop_does_not_touch_unowned_live_workers_or_temporary_files(tmp_path):
     # does not match - so stop did NOT terminate the current pytest process.
     assert result["forced"] is False
     assert killed == []
-    # Stale runtime/lock files are cleared via _clear_stale_runtime (called when
-    # runtime is not live) 鈥?production safety: this is exactly the
-    # behavior we want for foreign PIDs that look live but are NOT our spawned
-    # worker; we still drop the stale runtime so the next spawn is not blocked.
-    # The guarantee is "don't kill foreign PIDs", not "don't drop stale files".
-    assert not foreign_runtime.exists()
-    assert not foreign_lock.exists()
+    # The controller is paused, so stop preserves a runtime whose identity
+    # does not match this process. Explicit resume can reconcile stale files.
+    assert json.loads(foreign_runtime.read_text(encoding="utf-8")) == payload
+    assert json.loads(foreign_lock.read_text(encoding="utf-8")) == payload
 
 
 def test_process_inventory_reports_pytest_temp_workers_leftover_without_killing(

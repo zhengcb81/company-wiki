@@ -31,16 +31,33 @@ Push protocol (see revenue-forecast ci_root_fix.md):
 from __future__ import annotations
 
 import argparse
+import json
+import os
 import subprocess
 import sys
 import tempfile
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
+READER_CONTRACT_FILES = (
+    "tests/contract/test_r4b05b_shared_column_readers.py",
+    "tests/contract/test_fc905_receipt_envelope.py",
+    "tests/contract/test_b10_read_chain.py",
+)
+CURRENT_CI_REGRESSION_CASES = (
+    "tests/contract/test_zr203_reader_rewire.py::test_read_entrypoints_never_construct_catalog_store",
+    "tests/contract/test_zr1003_shadow_assertions.py::test_c2_recorded_review_unblocks",
+    "tests/contract/test_source_catalog_temp_worker_governance.py::test_stop_does_not_touch_unowned_live_workers_or_temporary_files",
+)
 
 
-def _run(cmd: list[str], label: str, timeout: int = 600, env_extra: dict | None = None) -> int:
-    import os
+def _run(
+    cmd: list[str],
+    label: str,
+    timeout: int = 600,
+    env_extra: dict | None = None,
+    expected_basetemp: Path | None = None,
+) -> int:
     env = dict(os.environ)
     env["PYTHONPATH"] = str(PROJECT_ROOT / "src")
     if env_extra:
@@ -50,28 +67,65 @@ def _run(cmd: list[str], label: str, timeout: int = 600, env_extra: dict | None 
         cmd, cwd=str(PROJECT_ROOT), capture_output=True, text=True,
         encoding="utf-8", errors="replace", timeout=timeout, env=env,
     )
-    tail = (proc.stdout or "")[-2000:] + (proc.stderr or "")[-1000:]
-    if proc.returncode != 0:
+    output = (proc.stdout or "") + "\n" + (proc.stderr or "")
+    tail = output[-3000:]
+    returncode = proc.returncode
+    if expected_basetemp is not None:
+        decisions = []
+        for line in output.splitlines():
+            if line.startswith("CW-BASETEMP-DECISION "):
+                try:
+                    decisions.append(json.loads(line.removeprefix("CW-BASETEMP-DECISION ")))
+                except json.JSONDecodeError:
+                    decisions.append({"invalid_record": line})
+        expected = os.path.normcase(os.path.abspath(expected_basetemp))
+        if (
+            len(decisions) != 1
+            or decisions[0].get("relocated") is not False
+            or os.path.normcase(os.path.abspath(decisions[0].get("requested_basetemp", ""))) != expected
+        ):
+            print("pytest basetemp decision was missing, relocated, or unexpected:")
+            print("\n".join(line for line in output.splitlines() if line.startswith("CW-BASETEMP-")))
+            returncode = returncode or 1
+        elif returncode == 0:
+            print("pytest basetemp verified: short, repository-local, and not relocated")
+    if returncode != 0:
         print(tail)
         print(f"FAILED: {label}")
     else:
         print("ok")
-    return proc.returncode
+    return returncode
 
 
 def _run_pytest_gate(cmd: list[str], label: str) -> int:
-    with tempfile.TemporaryDirectory(prefix=".pp-", dir=PROJECT_ROOT) as basetemp:
-        return _run(
+    temp_root = PROJECT_ROOT / "tmp"
+    temp_root.mkdir(exist_ok=True)
+    with tempfile.TemporaryDirectory(prefix="pp", dir=temp_root) as basetemp:
+        basetemp_path = Path(basetemp)
+        if len(str(basetemp_path)) > 60:
+            print(f"FAILED: pytest basetemp exceeds the 60-character limit: {basetemp_path}")
+            return 1
+        result = _run(
             [*cmd, "--basetemp", basetemp, "-p", "no:cacheprovider"],
             label,
             env_extra={"PYTHONIOENCODING": "utf-8", "PYTHONUTF8": "1"},
+            expected_basetemp=basetemp_path,
         )
+    if basetemp_path.exists():
+        print(f"FAILED: pytest basetemp was not removed: {basetemp_path}")
+        return result or 1
+    return result
 
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--skip-contract", action="store_true",
                         help="skip the contract-test step (fast lint-only)")
+    parser.add_argument(
+        "--metadata-reader-contracts-only",
+        action="store_true",
+        help="run reader contracts and the current CI regression cases",
+    )
     args = parser.parse_args(argv)
 
     gates: list[tuple[list[str], str, dict | None]] = [
@@ -89,8 +143,7 @@ def main(argv: list[str] | None = None) -> int:
         ([sys.executable, "-m", "pytest", "tests/unit", "-q", "--tb=short"],
          "unit tests (CI Unit tests)", None),
     ]
-    if not args.skip_contract:
-        gates.append((
+    focused_contract_gate = (
             [sys.executable, "-m", "pytest", "-q", "--tb=short", "--timeout=180",
              "tests/contract/test_source_catalog_section_extractor.py",
              "tests/contract/test_fc906a_producer_binding_metadata.py",
@@ -100,10 +153,21 @@ def main(argv: list[str] | None = None) -> int:
              "tests/contract/test_fc905_receipt_envelope.py",
              "tests/contract/test_b10_read_chain.py",
              "tests/unit/test_writer_freeze.py",
-             "tests/contract/test_fc1307_host_assumption_gate.py"],
-            "focused contracts (reader + receipt + B10) and gate regression tests",
+             "tests/contract/test_fc1307_host_assumption_gate.py",
+             *CURRENT_CI_REGRESSION_CASES],
+            "focused contracts, recent CI regressions, and gate regression tests",
             None,
-        ))
+    )
+    metadata_reader_contract_gate = (
+        [sys.executable, "-m", "pytest", "-q", "--tb=short", "--timeout=180",
+         *READER_CONTRACT_FILES, *CURRENT_CI_REGRESSION_CASES],
+        "reader contracts plus the current CI regression cases",
+        None,
+    )
+    if args.metadata_reader_contracts_only:
+        gates = [metadata_reader_contract_gate]
+    elif not args.skip_contract:
+        gates.append(focused_contract_gate)
 
     for cmd, label, env_extra in gates:
         if "-m" in cmd and "pytest" in cmd:

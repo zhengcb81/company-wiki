@@ -1,7 +1,7 @@
 # Local pre-commit gate mirroring the CI quality workflow's fast checks.
 # Pins match CI exactly (ruff 0.15.18, mypy 1.19.0 via the local system).
-# Keep broad suites out of every commit hook. Changes to the shared metadata
-# reader and its scanner/resolver contracts run their focused tests at commit;
+# Keep broad suites out of every commit hook. Changes to shared source-catalog
+# readers, receipts, resolver, assertion, or worker contracts run focused tests;
 # pre-push runs the full unit suite plus the selected high-risk contracts.
 #
 #   pre-commit install   # once per clone (installs .git/hooks/pre-commit)
@@ -88,18 +88,14 @@ repos:
           narrative_runtime))\.py$
 
       - id: metadata-reader-contracts
-        name: shared metadata reader contracts (R4-B05 + B10)
-        entry: >-
-          python -m pytest -q --tb=short --timeout=180
-          tests/contract/test_r4b05b_shared_column_readers.py
-          tests/contract/test_fc905_receipt_envelope.py
-          tests/contract/test_b10_read_chain.py
+        name: source-catalog reader and recent CI regression contracts
+        entry: python tools/pre_push_gate.py --metadata-reader-contracts-only
         language: system
         pass_filenames: false
         types: [python]
         files: >-
-          (?x)^src/company_wiki/source_catalog/(llm_summarizer|scanner|read_chain|store|resolver)\.py$
-          |^tests/contract/(test_r4b05b_shared_column_readers|test_fc905_receipt_envelope|test_b10_read_chain)\.py$
+          (?x)^src/company_wiki/source_catalog/(llm_summarizer|scanner|read_chain|store|resolver|reader|service|activation|assertion_service|prompt_injection|control)\.py$
+          |^tests/contract/(test_r4b05b_shared_column_readers|test_fc905_receipt_envelope|test_b10_read_chain|test_zr203_reader_rewire|test_zr1003_shadow_assertions|test_source_catalog_temp_worker_governance)\.py$
 
       - id: config-doctor
         name: config doctor (WU-7.1, mirrors CI)

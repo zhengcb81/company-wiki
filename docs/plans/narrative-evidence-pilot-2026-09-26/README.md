@@ -1,6 +1,6 @@
 # 叙述性证据规划：执行入口
 
-> **2026-10-02 最新状态：**CWP master@d15a230 已推送。run 37005308707 的 Unit tests 三版全绿；Contract reporter 给出 10 个失败节点，其中 7 个在 WSL/Python 3.12（无父级 PYTHONPATH）复现，根因分别是移除 review gate 时误删 JSON object 完整性筛选，以及 scanner 对同一 metadata 列重复解析。恢复安全 JSON object 过滤、复用已解码 metadata 后，Linux 相关 contract 模块 31 passed；新增按改动文件触发的 pre-commit contract hook 和更完整的 pre-push 重点测试。Windows 完整七阶段 pre-push 全绿。三项 receipt-envelope 失败在 WSL 可通过，远端差异尚待新 CI 以异常类别定位；以下修复尚未提交/推送。见 [task_plan.md Phase 44–46](task_plan.md)、[findings.md](findings.md)、[progress.md](progress.md)。
+> **2026-10-02 最新状态：**CWP `master@1504d6a` 与 `origin/master` 一致；远端 run `37012332197` 的 Unit 三版全绿、Contract 三版失败。当前工作树修正 3 项过期契约，增加失败异常类别诊断；发现并修复本地门禁 basetemp 过长导致的用户 Temp 重定向与清理假绿，并将最新三项 Contract 红测纳入 commit hook/pre-push 聚焦集。最新 6 项失败身份 **6 passed**；完整本机 `pre_push_gate.py` 与实际 pre-commit hook 均通过。改动仍未提交/推送，远端 FC905 Linux 差异待新 Actions 异常类别定位。按 [CI 红灯修复交接卡](ci_red_handoff_2026-10-02.md)继续；远端三版 Contract 全绿前不得结案。
 
 > **2026-09-29 入口更新：**先读[多余门禁统一清理方案](gate_and_contract_simplification_2026-09-29.md)，再读[六仓独占施工与总指挥计划](parallel_harness_orchestration_2026-09-29.md)。两页依次裁定要清理的真实代码/历史规则、各仓独立写入范围、接口与汇合测试；`task_plan.md` Phase 25 记录本轮规划状态。2026-09-28 的[跨仓总图](cross_repo_mainline_and_delivery_plan_2026-09-28.md)保留历史基线和详细施工背景，冲突时以 2026-09-29 两页为准。本项目已取消逐文件人工审批、review receipt 和常规独立签字；自动测试/完整性断言是常规依据。旧 provider policy 与人工 review 文档不得作为新实施门槛。
 
@@ -20,15 +20,16 @@
 8. [worker_parallel_execution_plan.md](worker_parallel_execution_plan.md)：Worker 多文档并发的详细实施入口；[worker_parallel_recovery.md](worker_parallel_recovery.md) 只留故障背景。
 9. [test_acceptance_plan.md](test_acceptance_plan.md)：测试分母与对抗场景；`review_protocol.md` 只列机器可判定的放行条件，不要求人工 reviewer。
 10. [task_plan.md](task_plan.md)、[progress.md](progress.md)：本计划状态与本轮调查记录。
-11. [g1_summary_source_support_audit_v1.md](g1_summary_source_support_audit_v1.md)：13 条人工摘要逐条来源支持、时点、语气、角色审查；不构成独立审稿签字。
-12. [end_to_end_test_plan.md](end_to_end_test_plan.md)：旧 G1–G4 样本与隔离运行目录；当前节点对应关系见并行总计划。
-13. [early_catalog_retirement.md](early_catalog_retirement.md)：46 GiB 旧主库提前退役的历史实施卡和实际收据。
-14. [raw_disposition_plan.md](raw_disposition_plan.md)：旧 D0–D5 原文处置研究；当前原始下载文档全部保留。
-15. [stepwise_space_budget.md](stepwise_space_budget.md)：逐步新增/释放空间、临时峰值、旧库压缩计数与待试点变量。
-16. [implementation_run_2026-09-26.md](implementation_run_2026-09-26.md)：F0–F5 实际运行卡和空间释放收据。
-17. [cross_project_coordination_2026-09-26.md](cross_project_coordination_2026-09-26.md)：与 revenue-forecast 的源码/数据交叉、消费者 SHA 门禁和唯一 owner 约束。
-18. [d0_inventory_receipt_2026-09-27.md](d0_inventory_receipt_2026-09-27.md)：D0 本地只读文件与旧引用盘点。
-19. [provider_cost_and_capability_2026-09-27.md](provider_cost_and_capability_2026-09-27.md)：SEC/FMP/Koyfin/Seeking Alpha 的来源、月调用预算及采购闸门。
+11. [ci_red_handoff_2026-10-02.md](ci_red_handoff_2026-10-02.md)：给后续模型的 CI 根因、当前未提交文件、可复用命令和单一最终验收点。
+12. [g1_summary_source_support_audit_v1.md](g1_summary_source_support_audit_v1.md)：13 条人工摘要逐条来源支持、时点、语气、角色审查；不构成独立审稿签字。
+13. [end_to_end_test_plan.md](end_to_end_test_plan.md)：旧 G1–G4 样本与隔离运行目录；当前节点对应关系见并行总计划。
+14. [early_catalog_retirement.md](early_catalog_retirement.md)：46 GiB 旧主库提前退役的历史实施卡和实际收据。
+15. [raw_disposition_plan.md](raw_disposition_plan.md)：旧 D0–D5 的原文处置研究；当前原始下载文档全部保留。
+16. [stepwise_space_budget.md](stepwise_space_budget.md)：逐步新增/释放空间、临时峰值、旧库压缩计数与待试点变量。
+17. [implementation_run_2026-09-26.md](implementation_run_2026-09-26.md)：F0–F5 实际运行卡和空间释放收据。
+18. [cross_project_coordination_2026-09-26.md](cross_project_coordination_2026-09-26.md)：与 revenue-forecast 的源码/数据交叉、消费者 SHA 门禁和唯一 owner 约束。
+19. [d0_inventory_receipt_2026-09-27.md](d0_inventory_receipt_2026-09-27.md)：D0 本地只读文件与旧引用盘点。
+20. [provider_cost_and_capability_2026-09-27.md](provider_cost_and_capability_2026-09-27.md)：SEC/FMP/Koyfin/Seeking Alpha 的来源、月调用预算及采购闸门。
 
 ## 实施时的硬边界
 

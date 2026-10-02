@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import os
+import re
 import sys
 import xml.etree.ElementTree as ET
 from pathlib import Path
@@ -37,7 +38,15 @@ def _failed_cases(report_path: Path) -> list[tuple[str, str, str, str]] | None:
             node_id = f"{case.get('classname', 'unknown')}::{test_name}"
         failure_kind = failure if failure is not None else error
         assert failure_kind is not None
-        error_type = failure_kind.get("type", "unknown error").rsplit(".", maxsplit=1)[-1]
+        declared_type = failure_kind.get("type")
+        if not declared_type:
+            # pytest's JUnit writer may put the exception class in `message`
+            # while leaving `type` empty. Keep only a class-like prefix so the
+            # diagnostic does not expose assertion text or private data.
+            message = failure_kind.get("message", "")
+            match = re.match(r"^([A-Za-z_][A-Za-z0-9_.]*)\s*:", message)
+            declared_type = match.group(1) if match else "unknown_error"
+        error_type = declared_type.rsplit(".", maxsplit=1)[-1]
         error_type = "".join(char for char in error_type if char.isalnum() or char == "_")
         failures.append((file_name, case.get("line", ""), node_id, error_type))
     if not failures:

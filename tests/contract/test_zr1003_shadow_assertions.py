@@ -20,6 +20,7 @@ Hermetic: temporary catalog only; production catalog never touched.
 
 from __future__ import annotations
 
+import hashlib
 import json
 import sys
 from pathlib import Path
@@ -54,7 +55,8 @@ def _seed(store: CatalogStore) -> list[str]:
         conn.execute(
             "INSERT INTO sources (source_id, content_sha256, byte_size, "
             "mime_type, first_seen_at) "
-            "VALUES ('s1', 'src-hash', 10, 'application/pdf', '2026-01-01')")
+            "VALUES ('s1', ?, 10, 'application/pdf', '2026-01-01')",
+            ("0" * 64,))
         conn.execute(
             "INSERT INTO documents (document_id, title, source_status, "
             "source_type, document_kind, metadata_priority, metadata_json, "
@@ -145,13 +147,19 @@ def test_c2_recorded_review_unblocks(tmp_path):
         record_prompt_injection_review(
             conn, document_id="d1",
             status="not_detected", reviewer="zr1003-implementer",
-            evidence_sha256="e" * 64, now="2026-08-23T00:00:00Z")
+            evidence_sha256=hashlib.sha256(("0" * 64).encode()).hexdigest(),
+            evidence_payload="0" * 64,
+            source_sha256="0" * 64,
+            policy_hash=POLICY_A,
+            now="2026-08-23T00:00:00Z")
     row = store.fetchone(
         "SELECT metadata_json FROM documents WHERE document_id='d1'")
     meta = json.loads(row["metadata_json"])
     review = meta[PROMPT_INJECTION_REVIEW_KEY]
     assert review["status"] == "not_detected"
     assert review["reviewer"] == "zr1003-implementer"
+    assert review["source_sha256"] == "0" * 64
+    assert review["policy_hash"] == POLICY_A
 
 
 # ---------------------------------------------------------------------------
