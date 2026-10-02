@@ -601,3 +601,15 @@ company-wiki 只负责来源、解析质量、证据定位、检索和来源摘�
 - [ ] 完成本机完整门禁并推送依赖修复；GitHub 三版本及其余必需 jobs 全绿后关闭。
 
 **当前状态：**本地六项原失败已绿、完整 pre-push 已绿；第一次远端验证确认最后三项根因是 CI requirements 未装 `cryptography`，依赖清单已补但尚未本地复验、提交和远端复跑。此前 WSL 返回 `E_ACCESSDENIED`，所以以真实 GitHub Python 三版本矩阵验收。
+
+## Phase 49：CI 根因修复与 S8 重复运行收敛（2026-10-02）
+
+- [x] 远端异常身份已逐轮定位：Linux 子进程缺 `PYTHONPATH=src`、陈旧合同/fixture、未声明 `cryptography`；pre-push 自身也曾因 basetemp 超过 60 字符而重定向并假绿。按各自根因修测试环境、合同、依赖清单和短目录核验，不放松来源/签名校验。
+- [x] commit `b168a2e` 修复 pytest 本地短 basetemp 重定向并增加真实清理校验；commit `4c66a4e` 声明 Ed25519 backend 依赖。远端 run `37043343785` 已验证前一组六项失败消失；run `37045273003` 的三版 Unit/Contract 和其它必需 jobs 当前可见为通过，完整覆盖率步骤仍运行中，不能提前结案。
+- [x] 按 R4 S8 实测 `.github/workflows/ci.yml` 的 `tests/` 收集到 3,814 个项目；该全量覆盖率套件过去在三版矩阵各重跑一次，而且失败被 `|| true` 吞掉；6 个 mutation-canary 模块又在全量 Contract 之外手动重复。将静态检查、计划/唯一符号检查和全量 coverage ratchet 固定为 Python 3.12 执行一次，保留 unit+contract 三版；删除重复 canary step，失败摘要仍走 JUnit。
+- [x] `collect_news.py --help` 是故意冻结的 legacy writer，实测退出码 78；因此 CLI smoke 不再 `|| true` 忽略结果，而是明确断言退出 78 且输出 `LEGACY WRITER BLOCKED`。
+- [x] 合成失败 E2E：临时 pytest 用例实际调用 `source_catalog.flags` 后强制失败；coverage 命令返回 1、生成当次 `coverage.json` 且其中确实测到 `flags.py`。测试目录用临时 run root，执行后清理。第一次探针因转义错误只产生 SyntaxError 且无 coverage，修正生成方式后 E2E 通过。
+- [x] 本地 YAML parse/结构不变量、`collect_news` 的预期 exit 78/冻结文案、`snapshot_manifest --help` 均通过；pytest-cov 合成失败 E2E 与 source-catalog fresh JSON 核验通过。此前完整 pre-push 在两项本地 regression patch 后全绿。
+- [ ] 聚合 PWF 与 workflow 改动做一次正常提交并推送；在新的 Actions 中确认 3.11/3.12/3.13 测试全绿、coverage 失败能提供 testcase identity、fresh coverage ratchet 通过。run `37045273003` 和新 run 的耗时只按实际 UI 状态记录，不声称未量测的 wall-time 节省。
+
+**当前状态：**业务测试根因修复已推送，CI 流程 S8 调整在本地工作树；本机合成 E2E 与 YAML 结构检查通过。旧 run `37045273003` 仍停在 coverage 阶段（最近看到 0/3 matrix jobs completed、约 1 小时），无公开日志可判其是否卡住。最终结论等待新 workflow 的 GitHub 结果。

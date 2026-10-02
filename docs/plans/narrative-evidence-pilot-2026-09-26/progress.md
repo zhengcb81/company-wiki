@@ -1026,3 +1026,15 @@
 - `b168a2e` 推送后 Actions run `37043343785` 完成：之前六项 Contract 红测清零；FC905 PI01/PI02/PI09 三项在三个 Python 版本上全部报告 `ModuleNotFoundError`，其他必需 jobs 成功。
 - 沿测试 `_record_review` 和产品 `_ed25519_verify` 确认两者使用 `cryptography` Ed25519；`requirements.txt`（CI 干净安装入口）、pyproject catalog/test/all extras 均漏声明。本机因环境预装此包而无法复现。
 - 当前未提交工作树已将 `cryptography>=41.0` 增加到 requirements 和三个相关 pyproject extras。下一步验证 toml/依赖清单、FC905/重点 hook 与完整 pre-push，通过后正常提交推送，并以干净 Actions matrix 作为最终验收。
+
+## Session: CI 根因修复与 S8 重复运行收敛（2026-10-02）
+
+- 远端已有根因修复 commits：`b168a2e`（短且可核验的 pytest basetemp、本地 gate 覆盖最新 Contract 回归）及 `4c66a4e`（requirements 与 pyproject 声明 `cryptography>=41.0`）。run `37043343785` 证实上一组 6 个测试失败消失，剩余 FC905 三项因依赖未安装；4c66a4e 的下一轮 run 是 `37045273003`。
+- `37045273003` 最近可见三个矩阵仍位于 Branch coverage ratchet；Unit/Contract steps 与 cli-smoke、secret-scan、markdown-lint 状态此前均显示成功。运行超过 1h，0/3 matrix 完成；无登录态页面不能读取 pytest 进度或结果，保持 pending，不推断 pass/fail。
+- 按 R4 S8 阅读现行 workflow 并实测 collection：`pytest --collect-only -q tests` 共 3,814 条；6 个 canary 文件属于当前 `tests/contract` 主套件且不在 ignore 清单中，因此重复步骤可删除。静态步骤和计划校验在每个 Python 版本重复也是确定性冗余。
+- 本地 `.github/workflows/ci.yml` 已调整：Python 3.11/3.12/3.13 仍各跑 Unit 与 Contract；Ruff、mypy、compile/config doctor、unique symbols、plan claim 和全量 coverage/threshold 仅在 3.12 跑一次；移除重复 canary；coverage pytest 不再 `|| true`，并有 always-run JUnit failure summary。
+- legacy `collect_news.py --help` 实测被 writer freeze 阻断并返回 78；workflow smoke 改为精确校验该预期而非忽略任意错误。`snapshot_manifest.py --help` 正常。
+- 验证：PyYAML 可解析 workflow；结构检查确认 coverage/static 的 `if` 都限定 Python 3.12、mutation canary step 已移除、workflow test commands 无 `|| true`；`git diff --check` 通过。综合成隔离 pytest-cov E2E 的第一次探针因转义错误报 SyntaxError、未产生报告；纠正后 probe 调用真实 source-catalog module 再故意 fail，子进程返回 1、生成 fresh JSON 且报告中含 `flags.py`，独立目录自动清理。
+- 首次 coverage probe 曾写改 tracked 根目录 `.coverage`，而非仅写独立 JSON；发现后立即 `git restore -- .coverage`，恢复到本轮开始时干净状态并确认 status 不再列该文件。隔离 probe 输出仍在各自 `tmp/cx*` 子目录且已由 `TemporaryDirectory` 清理。没有改动测试原文或 catalog 数据。
+- 最终本地验收：`verify_plan_claims.py --plan-dir .` 为 **OK (11 plans)**；workflow YAML/invariants 检查通过；CLI smoke 对 `collect_news` 捕获并核 exit=78/冻结文案、`snapshot_manifest --help` 返回 0；`git diff --check` 通过。完整 pre-push 的既有绿收据对应两项本地 regression patch 后的工作树；本轮 workflow/PWF 修改不改变 Python 运行代码。
+- 当前尚未完成：最近一次完整 pre-push 的绿收据来自仅 6 行本地 fixture/gate 修改之后；workflow/PWF 变更是非 Python 逻辑，最终还需总览 diff、正常提交推送，再以新的 Actions matrix 验收。若 no-`|| true` coverage run 发现额外测试失败，应按 JUnit 新证据修，不可恢复吞错。

@@ -47,6 +47,7 @@ READER_CONTRACT_FILES = (
 CURRENT_CI_REGRESSION_CASES = (
     "tests/contract/test_zr203_reader_rewire.py::test_read_entrypoints_never_construct_catalog_store",
     "tests/contract/test_zr1003_shadow_assertions.py::test_c2_recorded_review_unblocks",
+    "tests/contract/test_source_catalog_temp_worker_governance.py::test_owned_temp_worker_helper_detects_test_pid",
     "tests/contract/test_source_catalog_temp_worker_governance.py::test_stop_does_not_touch_unowned_live_workers_or_temporary_files",
 )
 

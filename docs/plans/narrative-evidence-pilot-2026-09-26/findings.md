@@ -746,3 +746,13 @@
 - 唯一三项共用测试 helper `_record_review`；它在分支判断前无条件导入 `cryptography.hazmat...Ed25519PrivateKey`。生产 `prompt_injection.py::_ed25519_verify` 也使用 `cryptography`，但仅在调用时导入并在缺失时按安全设计 fail closed。CI 从 `requirements.txt` 干净安装，此依赖在 `requirements.txt` 与 `pyproject.toml` 的 `catalog` extra 均未声明；本机环境恰好已有安装，所以本机绿、CI 红。
 - 在 `requirements.txt` 和 `pyproject.toml` 的 `catalog`、`test`、`all` extras 声明 `cryptography>=41.0`。`catalog` extra 对应可选来源目录签名验证功能；`test` 确保该回归用例组独立安装时提供签名 fixture backend；CI 的 requirements 则确保 clean install 一致。
 - 此根因已定位，依赖修正当前尚未推送；必须用干净 CI 安装完成下一轮 Python 3.11/3.12/3.13 验收，不能用本机预装依赖代替。
+
+## 2026-10-02 — CI 失败根因与 S8 重复门禁核查
+
+- 今天连续的 Actions 红灯不是一个共通产品缺陷：公开 JUnit node IDs 和独立复现分别定位到测试合同过时、pytest 子进程没有显式 `PYTHONPATH=src`、CI 环境漏装 `cryptography`；本地预装依赖和 pre-push 统一注入 `PYTHONPATH` 曾掩盖环境差异。另有 pre-push basetemp 实长约 71 字符，超过 60 字符阈值，被 conftest 重定向到用户 Temp，而 `_run` 吞掉成功测试 stdout，构成真实假绿。
+- 远端失败诊断已由独立 JUnit reporter 修复：现在报告 node ID/文件/行号（必要时异常类），不暴露失败正文；这使本次从一轮红灯收敛为可复现根因。
+- `.github/workflows/ci.yml` 的 collection-only 实测得出 `tests/` 3,814 项。旧 pipeline 在 3 个 Python matrix job 中各跑一次 Unit、Contract、整个带 coverage 的 `tests/`，且 coverage pytest 使用 `|| true`；再对 Contract 已收集的 6 个 canary 文件重复执行一次。R4 S8 本次据此改为 Unit+Contract 三版、全量静态与 fresh coverage 仅在 Python 3.12 一次，删除重复 canary，并移除覆盖率失败吞错。coverage suite 新增 JUnit 汇总。
+- `collect_news.py --help` 的 `|| true` 不能简单删掉后当成功 smoke：实跑证明 legacy-writer freeze 预期返回 78。因此改为精确断言 exit 78 且输出 `LEGACY WRITER BLOCKED`，保留 frozen boundary 并让意外结果阻断 CI。
+- 合成 workflow E2E 在独立 `tmp/cx*` 根内运行了真实 pytest-cov subprocess：调用 `validate_flag_state` 确保采到 `source_catalog/flags.py`，再故意失败。pytest 返回 1、在隔离根写出 coverage JSON，且 JSON 包含被测模块；临时根已清理。首个 probe 因 Windows 命令转义产生 SyntaxError，未生成 coverage；纠正构造方式后成功。
+- runner 的 `tests/` suite 过去因 `|| true` 而不能当作通过证据。当前规则只有在 pytest 退出 0 且后续 coverage threshold step 成功时才绿；若失败，新 JUnit summary 报用例身份。单次覆盖率运行仍有 3,814 项，故尚未量得端到端 wall-time 改善；可准确声称的只是全量 coverage 重复数由 3 降为 1、静态门禁由 3 降为 1、重复 canary 被移除。
+- Actions run `37045273003` 对 `4c66a4e` 最近可见仍在三版 coverage step，0/3 matrix jobs completed、约 1 小时；匿名页面不提供 pytest step logs。它不包含本地新 S8 workflow，必须等新 commit 的 CI 结果确认。

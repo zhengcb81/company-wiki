@@ -2,6 +2,15 @@
 
 > 给后续模型/agent 的接手说明。先按本卡继续，不要重做已完成根因分析，也不要放宽来源哈希、证据绑定或其他业务校验。用户要求：大节点验证即可，不要为每个小修改新增审查节点。
 
+## 2026-10-02 当前状态修正（以下旧快照被本节覆盖）
+
+- 当前远端 `master`/`origin/master` 为 `4c66a4e`，前两项修复提交为 `b168a2e` 与 `4c66a4e`；CI run `37043343785` 证明前 6 个失败身份已清零，剩余 FC905 PI01/PI02/PI09 的 `ModuleNotFoundError` 是依赖漏声明，已补 `cryptography>=41.0` 并推送。
+- `37045273003` 是该依赖修复的验证 run。浏览器最近可见 Unit/Contract 三版本及 cli-smoke/secret-scan/markdown-lint 的步骤已通过，但三版 coverage step 已持续超过 1 小时，0/3 matrix jobs 完成；匿名 GitHub 页面不能查看 step log，必须按 pending 记录，不猜 pass/fail。
+- 发现并处理 R4 S8 CI 假绿/冗余：`tests/` 收集 3,814 项，旧 workflow 在每个 Python 版本都再运行全量 coverage，`|| true` 吞 pytest 失败，并重复执行已被 Contract 套件包含的六个 canary。当前未提交 workflow diff 将 Unit+Contract 三版保留，将 repo-wide static/coverage 一次性限定在 3.12、移除重复 canary 和 coverage 的吞错，并添加 coverage JUnit summary。coverage 全套失败现会实际阻断。
+- `collect_news.py --help` 是 intentional frozen legacy writer，实测 exit 78；CI smoke 改成精确验证阻断输出/退出码，不把预期失败当成功命令，也不吞任何未知错误。
+- `tests/contract/test_source_catalog_temp_worker_governance.py` 与 `tools/pre_push_gate.py` 还有未提交改动，修正短 repo-local basetemp 下的 TEMP 假设并把该测试放进 regression set。最近完整本地 pre-push 对该小补丁已通过；合成 coverage failure probe 也验证 exit 1 + fresh source-catalog JSON。
+- 收尾时先看 `git status --short`、完整 diff、`git diff --check` 和 workflow YAML/CLI smoke。此次新 workflow/PWF 改动完成后正常 commit/push，再核新 run：三版 Unit+Contract、3.12 full coverage + threshold、其它 required jobs 全绿才结案。run `37045273003` 如仍运行按实况保留记录，不需要等它才推送后续版本。
+
 ## 当前事实
 
 - 分支：`master`；上次读取时本地 `HEAD` 与 `origin/master` 都是 `1504d6a`。

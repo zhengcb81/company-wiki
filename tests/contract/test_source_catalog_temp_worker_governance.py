@@ -262,6 +262,11 @@ def test_owned_temp_worker_helper_detects_test_pid(tmp_path, monkeypatch):
         "_run_powershell_inventory_subprocess",
         fake_runner,
     )
+    # Local CI gates deliberately place --basetemp under the repository's
+    # ignored tmp/ directory to keep paths short and avoid host %TEMP% ACLs.
+    # Model that pytest temp root explicitly so this fixture remains portable
+    # between pytest's default system-temp layout and the repo-local layout.
+    monkeypatch.setenv("TEMP", str(tmp_path.parent))
 
     owned = scan_owned_temp_workers()
 

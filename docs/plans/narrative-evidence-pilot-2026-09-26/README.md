@@ -1,6 +1,6 @@
 # 叙述性证据规划：执行入口
 
-> **2026-10-02 最新状态：**CWP `master@b168a2e` 已推送；run `37043343785` 已确认本轮六项旧红测全清，FC905 PI01/PI02/PI09 三个版本矩阵失败原因是 CI 未安装测试及签名验证所需 `cryptography`。依赖已补到 requirements 与 pyproject catalog/test/all extras，正进行本地验收；下一步提交推送并验证 clean GitHub matrix。此前完整本机 pre-push 与实际 pre-commit hook 通过。按 [CI 红灯修复交接卡](ci_red_handoff_2026-10-02.md)继续；远端三版 Contract 全绿前不得结案。
+> **2026-10-02 最新状态：**CWP `master@4c66a4e` 已推送 `cryptography>=41.0` 声明；run `37043343785` 验证此前六项测试红灯消失，剩余三项根因已修。新 run `37045273003` 里 Unit/Contract 与其它必需 jobs 最近可见均过，三版 coverage step 超过 1 小时仍在跑，不能提前记绿。为落实 R4 S8，`.github/workflows/ci.yml` 当前本地改动把全量静态/coverage 限定为 Python 3.12 一次、移除重复 canary 和吞错，并为 coverage 加 JUnit failure summary；Unit+Contract 三版矩阵保持。合成失败 E2E 与 YAML/CLI 结构检查通过，workflow/PWF diff 尚未提交推送；最终按新 Actions matrix 验收。详情见 [CI 红灯修复交接卡](ci_red_handoff_2026-10-02.md) 与 task_plan Phase 49。
 
 > **2026-09-29 入口更新：**先读[多余门禁统一清理方案](gate_and_contract_simplification_2026-09-29.md)，再读[六仓独占施工与总指挥计划](parallel_harness_orchestration_2026-09-29.md)。两页依次裁定要清理的真实代码/历史规则、各仓独立写入范围、接口与汇合测试；`task_plan.md` Phase 25 记录本轮规划状态。2026-09-28 的[跨仓总图](cross_repo_mainline_and_delivery_plan_2026-09-28.md)保留历史基线和详细施工背景，冲突时以 2026-09-29 两页为准。本项目已取消逐文件人工审批、review receipt 和常规独立签字；自动测试/完整性断言是常规依据。旧 provider policy 与人工 review 文档不得作为新实施门槛。
 

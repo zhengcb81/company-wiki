@@ -14,6 +14,8 @@ jobs:
       # one failure no longer cancels the others, so a single run exposes
       # ALL failures (previously 3.11 failing cancelled 3.12/3.13, hiding
       # whether they also had issues)
+      # Unit and Contract stay version-matrix tests. Repo-wide static checks
+      # and the expensive full-suite coverage measurement run once on 3.12.
       matrix:
         python-version: ["3.11", "3.12", "3.13"]
 
@@ -33,12 +35,15 @@ jobs:
           pip install "ruff==0.15.18"
 
       - name: Ruff lint (WU-1.2)
+        if: matrix.python-version == '3.12'
         run: ruff check src tests/unit tests/contract tests/e2e scripts tests/integration/test_narrative_runtime_e2e.py tests/support/narrative_model_fixture.py
 
       - name: Strict type check on contract modules (FC-1204-c)
+        if: matrix.python-version == '3.12'
         run: python -m mypy src/company_wiki/source_catalog/artifact_handle.py src/company_wiki/source_catalog/source_bundle.py src/company_wiki/source_catalog/runtime_policy.py src/company_wiki/source_catalog/activation.py src/company_wiki/source_catalog/close_gap.py src/company_wiki/source_catalog/policy_2x.py src/company_wiki/source_catalog/canary_registry.py src/company_wiki/source_catalog/normalized_meta.py src/company_wiki/source_catalog/flags.py src/company_wiki/source_catalog/policy.py src/company_wiki/source_catalog/restore.py src/company_wiki/source_catalog/operation_contract.py src/company_wiki/source_catalog/operation_projection.py src/company_wiki/source_catalog/source_operation.py src/company_wiki/source_catalog/source_reader.py src/company_wiki/source_catalog/narrative_document.py src/company_wiki/source_catalog/narrative_routing.py src/company_wiki/source_catalog/narrative_candidates.py src/company_wiki/source_catalog/narrative_context.py src/company_wiki/source_catalog/narrative_budget.py src/company_wiki/source_catalog/narrative_group_candidates.py src/company_wiki/source_catalog/narrative_neighbors.py src/company_wiki/source_catalog/narrative_finalize.py src/company_wiki/source_catalog/narrative_pdf_groups.py src/company_wiki/source_catalog/narrative_replay.py src/company_wiki/source_catalog/narrative_evidence.py src/company_wiki/source_catalog/transcript_tool_contract.py src/company_wiki/source_catalog/transcript_import.py src/company_wiki/source_catalog/transcript_text_extract.py src/company_wiki/source_catalog/transcript_lineage.py src/company_wiki/source_catalog/transcript_material.py src/company_wiki/source_catalog/transcript_import_cli.py src/company_wiki/automation/narrative_contracts.py src/company_wiki/automation/execution_snapshot.py src/company_wiki/automation/execution_context.py src/company_wiki/automation/worker.py src/company_wiki/automation/registry.py src/company_wiki/automation/planner.py src/company_wiki/automation/cli.py src/company_wiki/automation/narrative_select.py src/company_wiki/automation/narrative_model.py src/company_wiki/automation/narrative_summarize.py src/company_wiki/automation/narrative_source_guard.py src/company_wiki/automation/narrative_verify.py src/company_wiki/automation/narrative_runtime.py
 
       - name: Compileall + config doctor (WU-7.1)
+        if: matrix.python-version == '3.12'
         run: |
           python -m compileall -q src scripts tests
           PYTHONPATH=src python scripts/config_doctor.py
@@ -83,18 +88,32 @@ jobs:
           python tools/summarize_junit_failures.py "$report"
 
       - name: Branch coverage ratchet (FC-1204-a, fresh measurement)
+        if: matrix.python-version == '3.12'
+        id: coverage_tests
         run: |
-          python -m pytest tests/ -q --tb=short --cov=src/company_wiki/source_catalog --cov-branch --cov-report=json || true
+          report="$RUNNER_TEMP/coverage-tests-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}.xml"
+          python -m pytest tests/ -q --tb=short --cov=src/company_wiki/source_catalog --cov-branch --cov-report=json --junitxml="$report"
+
+      - name: Coverage test failure summary
+        if: always() && matrix.python-version == '3.12'
+        env:
+          TEST_SUITE_NAME: coverage suite
+          TEST_SUITE_OUTCOME: ${{ steps.coverage_tests.outcome }}
+        run: |
+          report="$RUNNER_TEMP/coverage-tests-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}.xml"
+          python tools/summarize_junit_failures.py "$report"
+
+      - name: Branch coverage threshold (FC-1204-a)
+        if: matrix.python-version == '3.12'
+        run: |
           FC1204_COVERAGE_GATE=1 python -m pytest tests/contract/test_fc1204_coverage_ratchet.py -q
       - name: Unique test symbols gate (WU-1.1)
+        if: matrix.python-version == '3.12'
         run: python tools/check_unique_test_symbols.py
 
       - name: Plan claim verifier (WU-8.3)
+        if: matrix.python-version == '3.12'
         run: python tools/verify_plan_claims.py --plan-dir .
-
-      - name: Mutation canaries (WU-7.1)
-        run: |
-          python -m pytest tests/contract/test_source_catalog_artifact_handle.py tests/contract/test_source_catalog_source_bundle.py tests/contract/test_source_catalog_download_authorization.py tests/contract/test_source_catalog_gap_plan.py tests/contract/test_source_catalog_fail_closed.py tests/contract/test_source_catalog_determinism.py -q
 
   cli-smoke:
     runs-on: ubuntu-latest
@@ -114,7 +133,23 @@ jobs:
       - name: CLI smoke test
         run: |
           python scripts/snapshot_manifest.py --help
-          python scripts/collect_news.py --help || true
+          python - <<'PY'
+          import subprocess
+          import sys
+
+          result = subprocess.run(
+              [sys.executable, "scripts/collect_news.py", "--help"],
+              capture_output=True,
+              text=True,
+              check=False,
+          )
+          assert result.returncode == 78, (
+              f"expected retired writer exit 78, got {result.returncode}: "
+              f"{result.stdout}{result.stderr}"
+          )
+          assert "LEGACY WRITER BLOCKED" in result.stdout
+          print("collect_news legacy writer remains blocked (exit 78)")
+          PY
 
   secret-scan:
     runs-on: ubuntu-latest
