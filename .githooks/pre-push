@@ -1,11 +1,10 @@
 #!/bin/sh
-# Pre-push gate hook (root-cause fix, 2026-09-07): BLOCKS any push that
-# fails the CI-equivalent fast surface.  See revenue-forecast
-# assurance/runs/2026-09-02_remaining-gap-closure/ci_root_fix.md.
+# Pre-push gate: run only the small reader/regression smoke set. The complete
+# Unit + portable Contract suites run once in GitHub Actions after push.
 #
 # Installed as .githooks/pre-push (git config core.hooksPath .githooks).
-# Every `git push` runs tools/pre_push_gate.py first; a red gate aborts
-# the push BEFORE anything reaches GitHub CI.
+# Keep push latency short; the full seven-stage local gate remains available
+# explicitly via `python tools/pre_push_gate.py` when a broad local run is needed.
 #
 # NOTE: shebang MUST be #!/bin/sh (git-for-windows spawns /bin/sh hooks
 # natively; /usr/bin/env bash failed with "cannot spawn").  Use
@@ -18,7 +17,7 @@ if [ ! -f "$ROOT/tools/pre_push_gate.py" ]; then
   exit 0
 fi
 
-python "$ROOT/tools/pre_push_gate.py"
+python "$ROOT/tools/pre_push_gate.py" --metadata-reader-contracts-only
 rc=$?
 if [ "$rc" -ne 0 ]; then
   echo "" >&2

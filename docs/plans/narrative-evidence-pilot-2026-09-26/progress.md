@@ -1061,3 +1061,7 @@
 - 本机 `python tools/pre_push_gate.py` 七阶段 **GREEN**。此前 48 项新增 portable Contract 与 6 项 FC-804 并发均通过；完整本机 Contract 总跑因 Windows parser process latency 主动中止，不将部分执行表述为全绿。
 - 最终 YAML/差异/计划验证已执行；尚待普通 commit/push 和新 Actions 实测 10 分钟内完成。之后写入真实 Actions 结果与总耗时并收尾。
 - 最终 Contract marker 只收集不执行的全量核算为 **2,120 selected/32 deselected in 16.96s**；repo-local basetemp=57 chars、`relocated=false`。收集数字不是测试通过数；全矩阵仍由新 Actions 验收。
+- 2026-10-02 CI 历史复核：`a3685a1` 对应 Actions #167 `37067439635` 5m14s 后失败；annotation 唯一测试身份为 ZR-1006 C2 ramp `FileNotFoundError`。根因是纯内存 scheduler 测试仍读取 revenue-forecast golden corpus，虽只有同模块 C1 标了 `requires_corpus`。C2 改为七个本地 synthetic keys；把 corpus env 指向不存在文件跑该用例仍 **1 passed in 3.20s**。
+- 静态比较 2026-09-25 基线至今测试函数从 2,664 增至 2,999（约 +12.6%），文件从 275 增到 314；当前 Unit collection 1,048，Contract collection 2,120 selected/32 deselected。最大时长根因是此前每次 CI 在三版 Python matrix 中重复执行 `tests/` full branch coverage；单次运行也耗约 25 分钟。去掉 coverage 后常规 #167 为 5m14s，之前 #164 为 5m56s。
+- 为减少重复等待，CI 安装改为 setup-python pip cache + 单次解析安装；push hook从完整七阶段缩至 reader/regression focused gate，并把 ZR-1006 C2 加入本地 regression case。`python tools/pre_push_gate.py --metadata-reader-contracts-only` GREEN，约 54s；完整七阶段仍保留手动入口，未在本轮重跑。
+- 当前待办：Ruff、workflow cache YAML/关键不变量、计划 claim、diff 检查；普通提交推送后等新 Actions 完成，记录 cache 命中与耗时，确认旧 FileNotFoundError 消失。若 warmed run 仍慢，再按可读 step timings缩减，不先删除宽泛 suite。

@@ -1,6 +1,6 @@
 # 叙述性证据规划：执行入口
 
-> **2026-10-02 最新状态：**CWP 远端 `master@41aa176` 已包含根因修复；旧 Actions run `37045273003` 与 `37055076384` 证明每次推送带全量 coverage 会长时间等待。按用户最新要求，当前工作树将 CI 再简化为单一 Python 3.12 job、10 分钟硬上限；删除自动定时/手动长测 workflow，不在提交时跑全量 coverage。push/PR 继续跑可移植 Unit+Contract、Ruff、选定 mypy、compile/config、CLI smoke 和 secret scan；移除多版本矩阵、重复 CI jobs、计划 claim/符号门及伪 markdown lint。原先整文件排除的 8 个 Contract 模块已改为测试级分类；重点子集 48 项全绿，慢并发与 parser backfill 仍保留于测试代码供按需手动运行。本机 pre-push 七阶段 GREEN；完整 Contract 总跑因本机 parser 隔离耗时主动中止，不记作绿。新 CI 尚待提交推送和 Actions 10 分钟内通过验收。详情见 [CI 红灯修复交接卡](ci_red_handoff_2026-10-02.md) 与 task_plan Phase 51。
+> **2026-10-02 最新状态：**远端 `master@a3685a1` 的单 job CI run `37067439635` 用时 5m14s 后失败，唯一报告身份为 `test_zr1006_broker_cohort::test_c2_ramp_1_to_3_to_7` 的 `FileNotFoundError`。C2 误读 RF golden corpus，现已改用合成 key；单项在 corpus 路径故意不存在时通过。全量 branch coverage 已从常规 CI 移除（旧 #165/#166 约 1h46/25m）；普通 #167 约 5m14，比此前 #164 的 5m56 快 42 秒。已给 pip 安装加缓存，并把每次 push 的本机全量七阶段改为约 54 秒的聚焦 reader/regression gate。新 Actions 验收仍待提交推送。详见 task_plan Phase 52 与 [CI 交接卡](ci_red_handoff_2026-10-02.md)。
 
 > **2026-09-29 入口更新：**先读[多余门禁统一清理方案](gate_and_contract_simplification_2026-09-29.md)，再读[六仓独占施工与总指挥计划](parallel_harness_orchestration_2026-09-29.md)。两页依次裁定要清理的真实代码/历史规则、各仓独立写入范围、接口与汇合测试；`task_plan.md` Phase 25 记录本轮规划状态。2026-09-28 的[跨仓总图](cross_repo_mainline_and_delivery_plan_2026-09-28.md)保留历史基线和详细施工背景，冲突时以 2026-09-29 两页为准。本项目已取消逐文件人工审批、review receipt 和常规独立签字；自动测试/完整性断言是常规依据。旧 provider policy 与人工 review 文档不得作为新实施门槛。
 

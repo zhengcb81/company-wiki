@@ -24,13 +24,14 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+          cache: pip
+          cache-dependency-path: |
+            requirements.txt
+            requirements-test.txt
 
       - name: Install dependencies
         run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-          pip install -r requirements-test.txt
-          pip install "ruff==0.15.18"
+          python -m pip install -r requirements.txt -r requirements-test.txt "ruff==0.15.18"
 
       - name: Ruff lint
         run: ruff check src tests/unit tests/contract tests/e2e scripts tests/integration/test_narrative_runtime_e2e.py tests/support/narrative_model_fixture.py

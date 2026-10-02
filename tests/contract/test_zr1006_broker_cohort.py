@@ -68,11 +68,6 @@ def _golden_broker_samples() -> list[dict]:
     return samples
 
 
-def _broker_keys(samples: list[dict]) -> list[str]:
-    """Deterministic cohort keys: sample_id ascending (creation order)."""
-    return sorted(s["sample_id"] for s in samples)
-
-
 def _seed_catalog(cat_path: Path, root: Path) -> dict[str, str]:
     """Seed a temp catalog: 2 broker artifacts, one bindable one not.
 
@@ -217,7 +212,9 @@ def _ramp(queue: DemandQueue, keys: list[str], waves: list[int], *, now: float) 
 
 
 def test_c2_ramp_1_to_3_to_7():
-    keys = _broker_keys(_golden_broker_samples())
+    # This is a queue/scheduler contract, so use a synthetic cohort. Only C1
+    # reads the owner-maintained golden corpus; C2 must remain hermetic in CI.
+    keys = [f"broker_{index}" for index in range(1, 8)]
     queue = DemandQueue(lease_seconds=300.0)
     for key in keys:
         queue.enqueue(key=key, kind=BROKER_KIND, priority=1, now=0.0)

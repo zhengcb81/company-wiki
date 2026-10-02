@@ -641,3 +641,15 @@ company-wiki 只负责来源、解析质量、证据定位、检索和来源摘�
 - [ ] 最终验证单 job workflow YAML/步骤/10 分钟限制、Ruff、plan claims、diff check；正常提交推送并观察 GitHub run。在 10 分钟内全绿才完成本阶段；若超过上限或出现根因失败，缩减到稳定核心合同后再验，不延长为长跑。
 
 **当前目标：**提交一次以后，GitHub 仅运行一个 3.12 job，10 分钟后必结束；全量 coverage、慢速/本机数据/外仓样本不自动运行。3.11/3.13 兼容验证由开发者在需要时手动运行。历史 CI 长测数据与新快门验收记录见[CI 红灯修复交接卡](ci_red_handoff_2026-10-02.md)。
+
+## Phase 52：核对 CI 时长回归并修复真实失败（2026-10-02）
+
+- [x] 对比 2026-09-25 前 workflow 与 2026-10-02 run：旧快门已包含 Unit+Contract 和 `pytest tests/ --cov --cov-branch`；当时 coverage 还在 3 个 Python matrix job 中重复，且使用 `|| true`。run `37045273003` 超过 1h46、run `37055076384` 单次 coverage 约 25 分钟未结束。`a3685a1` 已删除自动 coverage；该 run 的普通 CI `37067439635` 共 **5m14s**。
+- [x] 做测试规模静态对照：2026-09-25 基线 `bf0c8b2` 有 2,664 个 test 函数、275 个 test 文件；当前 2,999 个函数、314 个文件（函数数约 +12.6%）。当前 collection 为 Unit **1,048** 项、Contract **2,120 selected / 32 deselected**。因此全量 coverage/集成测试是长测主因，当前常规 CI 仍有约 3,168 个 test items。
+- [x] 读取 run `37067439635` annotation：`test_zr1006_broker_cohort::test_c2_ramp_1_to_3_to_7` 的 `FileNotFoundError`。根因是纯内存调度测试调用 `_golden_broker_samples()`，隐式依赖 RF 仓库 corpus；只有同模块 C1 被标记 `requires_corpus`。
+- [x] 将 ZR-1006 C2 改成 7 个合成 key；设置不存在的 `COMPANY_WIKI_GOLDEN_CORPUS` 后单项仍 **1 passed in 3.20s**，验证该合同不再触碰外部资料。C1 真实生产 snapshot 仍保留 owner-only markers。
+- [x] 启用 `setup-python` pip cache，合并依赖解析安装并移除每次运行的无必要 pip 自升级；当前首次缓存构建的 wall time仍须以新 Actions 为准。
+- [x] 将 `.githooks/pre-push` 从完整七阶段（Ruff、compileall、config doctor、ratchet、guard、全量 Unit、focused Contract）改为只运行 reader/当前回归 Contract 子集；完整本机命令仍可手动运行。包含新增的 ZR-1006 C2回归。该 hook 子集实跑 **GREEN**（wall time约 54 秒），避免 GitHub CI前重复跑全量 Unit。
+- [ ] 正常提交推送本次修复；确认缓存安装下 CI 结果与 wall time，并核对原 ZR-1006 红灯清零。若耗时仍高于可接受的数分钟，再按真实 step timings 缩小每次 push 的测试集合；不凭猜测删掉整个 suite。
+
+**本阶段结论：**近年可见的正常 CI 并未因这轮单 job 收敛而变慢：`37067439635` 5m14s，比之前 `37043343785` 5m56s 快约 42 秒；“几十分钟至数小时”的突增对应全量 branch coverage。匿名 GitHub 可见摘要与 annotations，但不提供登录后 step logs，因此不能把五分钟精确分摊到 pip 安装、Unit、Contract。后续用 pip cache 和本地 hook 降低可优化部分，并用下一轮实测决定是否收窄自动 test items。

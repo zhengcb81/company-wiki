@@ -779,3 +779,11 @@
 - 本机 `python tools/pre_push_gate.py` 七阶段最终 **GREEN**；Ruff、workflow BaseLoader YAML/结构检查、计划 claim verifier、`git diff --check` 通过。8 个原整文件忽略模块 **48 passed,18 deselected**；FC-804 **6 passed**。完整本机 portable Contract 曾收集 2,134 项，因 Windows parser isolation 耗时主动中断，未完成、不记绿。
 - 新版 CI 尚待普通 commit/push 后验收。若单 job 在 10 分钟内无法通过，需要减掉自动快门中高成本/高噪声项目，不能将 timeout 加长到几十分钟；若发现具体根因则按身份修复。提交后记录真实 Actions wall time 与结果。
 - 最终 marker expression 对全 `tests/contract` 做 collection-only：**2,120 tests selected / 32 deselected，16.96 秒**；basetemp 57 字符且 `relocated=false`。它确认 CI 运行的真实 portable contract 集合，不代表 2,120 项已本机全部通过。
+# 2026-10-02 最新 CI 审计：长测来源与红灯根因
+
+- 历史 workflow（commit `bf0c8b2`，2026-09-25 基线）已将 `pytest tests/ --cov --cov-branch` 放进日常 CI；当时它在 Python 3.11/3.12/3.13 三个 matrix job 中重复运行，并以 `|| true` 吞 pytest 失败。后来一次 run `37045273003` 超过 1h46 未完成；run `37055076384` 将 coverage 减为一次后仍运行约 25m。异常长耗时源于 full-tree branch coverage，不是 Ruff 或单纯的多 job 数量。`a3685a1` 已从自动 CI 删除它。
+- 普通验证的可见数据：`37067439635` (#167，单 Python 3.12，已无 coverage) 5m14s；此前 `37043343785` (#164) 5m56s，#167 快约 42 秒。测试规模静态比较：2026-09-25 `bf0c8b2` 有 2,664 个 `def test_*`、275 个测试文件；当前 2,999 个函数、314 个文件（+12.6%）。当前常规 pytest collection 为 Unit 1,048、Contract 2,120 selected/32 deselected。增长会增加成本，但现有数据没有显示普通 CI 因单 job 改造反而变慢。
+- 新红灯是 `tests/contract/test_zr1006_broker_cohort.py::test_c2_ramp_1_to_3_to_7`。C2 的 scheduler 队列本身是纯内存合同，但测试先调用 `_golden_broker_samples()` 从 `revenue-forecast` 的用户专属 golden corpus 构造 key；`real_data/requires_corpus` 只标在 C1，导致 C2 被 GitHub Linux 选中并因 `FileNotFoundError` 失败。现已用 7 个合成 key 消除非必要跨仓输入；设置不存在的 corpus 路径仍 **1 passed in 3.20s**。C1 继续保留真实数据标记。
+- 安装阶段尚无匿名可读的 GitHub step log，不能准确报出 pip 相对 pytest 的耗时占比。针对可证实的重复安装成本，在 setup-python 加 pip cache、将两个 requirements 一次解析安装并移除每次运行的 pip 自升级；下一次 run 验证实际收益。
+- `.githooks/pre-push` 之前每次推送完整执行 7 阶段：Ruff、compile/config、ratchet、host guard、全 Unit 和 focused contracts，导致 push 前重复数分钟。现在 hook 只跑 `--metadata-reader-contracts-only` 的 reader/regression 回归组；其真实 GREEN 用时约 54 秒。完整七阶段仍可人工运行，GitHub 继续承担常规 Unit/portable Contract 全套。
+- 保持原测试本身，当前无证据表明这批测试随机 flaky；本轮证实的是外仓 corpus 依赖未标在实际读取它的测试上。下一轮提交后观察 cache warm run、总 wall time 和 failure annotations，再基于 step 证据决定是否还需减少自动测试数。匿名 GitHub 不提供日志，所以暂不虚构步骤级时长分解。

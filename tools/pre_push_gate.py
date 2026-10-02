@@ -1,6 +1,11 @@
-"""Pre-push gate: CI-equivalent fast checks BEFORE pushing (root-cause fix).
+"""Local validation helpers for the GitHub CI fast gate.
 
-Runs the CI-quality checks plus its complete unit suite before push:
+The installed pre-push hook runs only ``--metadata-reader-contracts-only`` to
+keep push latency short. Run this script without arguments for the optional
+full local gate; GitHub Actions runs the regular Unit and portable Contract
+suites after push.
+
+Run without flags for the optional full local validation suite:
 
   1. ruff check src tests/unit tests/contract scripts   (CI WU-1.2)
   2. compileall src scripts tests                        (CI WU-7.1)
@@ -17,15 +22,13 @@ class the local gate never ran - the gate must run the tests that judge the
 gate.  Add a new `scripts/*.py` CLI and this step tells you locally whether it
 needs the legacy-writer freeze.
 
-Exit non-zero on the first red check. The full unit suite and focused high-risk
-contract suite run here so regressions in the affected surfaces block push. CI
-still runs the broader contract selection and coverage/mutation ratchets. Local pytest gates use an isolated short basetemp and
-UTF-8 subprocess streams so host TEMP ACL/encoding do not create false reds.
+Exit non-zero on the first red check. The full local run is useful before a
+large integration but is not part of every push. GitHub CI runs all Unit and
+portable Contract tests; full-tree coverage and the coverage ratchet are manual.
+Local pytest gates use an isolated short basetemp and UTF-8 subprocess streams
+so host TEMP ACL/encoding do not create false reds.
 
-Push protocol (see revenue-forecast ci_root_fix.md):
-    python tools/pre_push_gate.py   # ~2-3 min
-    git push ...
-    # self-monitor GitHub Actions until green; on red fix the ROOT CAUSE.
+The small hook path is intentionally narrower than this full local gate.
 """
 
 from __future__ import annotations
@@ -47,6 +50,7 @@ READER_CONTRACT_FILES = (
 CURRENT_CI_REGRESSION_CASES = (
     "tests/contract/test_zr203_reader_rewire.py::test_read_entrypoints_never_construct_catalog_store",
     "tests/contract/test_zr1003_shadow_assertions.py::test_c2_recorded_review_unblocks",
+    "tests/contract/test_zr1006_broker_cohort.py::test_c2_ramp_1_to_3_to_7",
     "tests/contract/test_source_catalog_temp_worker_governance.py::test_owned_temp_worker_helper_detects_test_pid",
     "tests/contract/test_source_catalog_temp_worker_governance.py::test_stop_does_not_touch_unowned_live_workers_or_temporary_files",
 )

@@ -92,3 +92,14 @@
 
 **剩余唯一验收点：**正常 commit/push 后，新 GitHub fast CI 在 10 分钟硬上限内通过。检查 job 数量、实际 wall time 与失败摘要；若超过上限/出现失败，按输出定位并缩减或修复，不延长至长测。
 - 新 marker expression 的最终 collection-only 为 **2,120 selected / 32 deselected in 16.96s**，57 字符 basetemp、未重定向。这个结果只确认选择集合，不要写成 2,120 tests passed。完整本机总执行未完成，等待单一 Actions run 作验收。
+
+
+## 2026-10-02 后续复核：时长与 ZR-1006 CI-only 失败
+
+- 当前远端 `master` `a3685a1` 的 Actions #167 `37067439635` 已结束，**5m14s / failed**（job 5m10s）。匿名公开页面的 annotation 只列出一个失败：`test_zr1006_broker_cohort::test_c2_ramp_1_to_3_to_7 [FileNotFoundError]`；它不提供登录后 step logs，不能精确分配时间给 pip/pytest。
+- 根因：C2 只验证内存 `DemandQueue`/`DemandScheduler` ramp，却通过 `_golden_broker_samples()` 读取 RF 用户主机路径下的 golden corpus。只有同文件 C1 标记 `real_data + requires_corpus`，所以 CI 仍运行 C2。修正后 C2 用合成 key；将 `COMPANY_WIKI_GOLDEN_CORPUS` 指向不存在路径，该项 **1 passed in 3.20s**。
+- 回到历史对比：旧 normal run `37043343785` (#164) 5m56s，当前无 coverage 的 #167 5m14s，约快 42 秒。长测真正来源是全 `tests/` branch coverage：旧版本在 3 个 Python matrix 重复运行，#165 超过 1h46；减为一次后 #166 仍约 25m。新 workflow 已彻底移除自动 coverage，保留人工入口。
+- 测试规模从 `bf0c8b2`（2026-09-25）静态增长：2,664 个 `def test_*` / 275 个 test files 到 2,999 / 314（函数 +12.6%）。当前常规执行选择约 3,168 项（Unit 1,048 + portable Contract 2,120；32 项因 slow/data/corpus marker 退出集合）。5 分钟是完整常规 suite + 安装的实测，不代表长 coverage。
+- 新提交优化安装：setup-python pip cache、一次解析 runtime/test/ruff requirements、移除每次 pip upgrade。下一次 Actions 验证缓存收益。
+- `.githooks/pre-push` 之前每次推送还会先运行全量本机七阶段。本地 hook 已改为只执行 `python tools/pre_push_gate.py --metadata-reader-contracts-only`；该回归组 GREEN、约 54 秒，完整 gate 命令仍可人工运行。ZR-1006 C2 已加入本机 regression set。
+- **当前接手状态：**测试、workflow、hook 与 PWF 更新待提交。关键本机检查包括 C2 missing-corpus probe 1 passed/3.20s 与 metadata-reader gate GREEN/约 54s；还需 Ruff、workflow YAML/invariants、plan claim、diff check，再正常 commit/push。新 run 通过后再把阶段置完成。不要恢复自动 full branch coverage，也别无证据删除合同；cache 后仍慢时先按可用 step timing 缩小。
