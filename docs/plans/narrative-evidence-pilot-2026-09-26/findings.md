@@ -831,3 +831,9 @@
 - E2E已实证company-wiki落盘原bytes(.json)、source catalog active记录/published null、已知sourceID+documentID的SourceRef读回字节SHA、repeat import dedup，以及query_local历史as-of忽略未知日期。失败SHA路径无文件及staging残留。目录隔离并finally复原。
 - 50 tests passed; Ruff和mypy通过。新增合同拆模块满足旧复杂度cap：tool_contract10、fmp_contract9；未改 ratchet。
 - 待commit/push与Actions短CI。然后单owner研究FF两个重叠worktree的逐文件差异，以便接通ETF工具并在一个端到端节点验收；RF、SW均未修改。
+
+
+## G-A1发布最终收据（2026-10-03）
+
+- `3e5923b`已推送origin/master；[Actions37079602808](https://github.com/zhengcb81/company-wiki/actions/runs/37079602808) success，workflow61秒/job56秒。
+- G-A1 50个节点测试、本机Ruff/mypy/fast-pre-push均绿。下一阶段盘点FF两个clean worktree的PWF/Git/contracts，明确单owner并线；FF主目录唯一可见未跟踪项目是API key文件，不读取、不改动。

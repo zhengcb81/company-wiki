@@ -699,7 +699,16 @@ G-A0只是原件到定位正文层。FMP入库仍待GA1，不声称26字段已�
 - [x] unknown publication入库post-scan精确核验indexed SHA/active/company/market/security/provider ID；返回unknown ambiguous而非REUSED；SourceRef hash验证读可用，query_local as-of排除unknown。
 - [x] 扩充隔离E2E：CLI、保真byte、read、locator、unknown cut-off、幂等重复、坏hash拒绝、无残留；测试run root完成清理。
 - [x] 总节点包50 passed；Ruff、mypy六个源码模块、复杂度契约与本机共享fast pre-push GREEN。
-- [ ] 只提交本阶段G-A代码和PWF；push主线并等Actions短门，写最终commit/远端CI收据。
+- [x] 提交`3e5923b`并推送主线；Actions37079602808 success/61秒。
 - [ ] 然后按cross_line_closeout单owner处理FF两个重叠worktree，把transcript调用接到filing-fetch并保存至company-wiki统一目录；只复用正式SourceRef，不改RF/StockWiki实现。
 
 G-A1尚未由producer/filing-fetch表示FF→ET→CWP下载完整链完成；真实FMP200/授权也未验证。本阶段证明的是producer golden可被CWP安全入库、locator和cutoff语义正确。
+
+
+## Phase 57：G-A1主线发布验收（2026-10-03）
+
+- [x] commit `3e5923b`推送至origin/master。
+- [x] 远端Actions `37079602808` 单job全部通过，workflow61秒/job56秒。
+- [x] 本机G-A1节点包50 passed；Ruff、mypy六模块、fast pre-push passed。
+- [x] 未碰RF、StockWiki、FF工作树/工作目录；FF两个G-A相关worktree只读盘点均clean。FF主fcap仍有`config/FMP_API_KEY.txt`未跟踪，本任务不读取、不改动它。
+- [ ] 下阶段单owner逐文件比较FF SourceRef与transcript companion两支线，依据其PWF、已提交commit和ET合同形成合并顺序；company-wiki仅按对齐后的正式CLI/工具合同做E2E联通，不跨仓写入另一线的独立生产改动。
