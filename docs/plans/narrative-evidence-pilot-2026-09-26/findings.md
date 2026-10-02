@@ -739,3 +739,10 @@
 - 在 Windows/Python 3.13.9 用符合路径规范的独立 run root 重跑远端 6 个最新失败身份：**6 passed in 4.37s**；增强后的 focused pre-commit/pre-push contract gate 亦通过。
 - 修复后的完整 `python tools/pre_push_gate.py` 全阶段 GREEN：Ruff、compileall、config doctor、complexity ratchet、host-assumption guard、全量 Unit、focused contracts + 本轮回归；三个 pytest 阶段均确认 basetemp 短、在仓库内且未重定向。真实 `pre-commit run metadata-reader-contracts --files ...` 亦 Passed。
 - 本机 WSL 返回 `E_ACCESSDENIED`，`docker` 与 Windows `py` launcher 不存在；因此 FC905 在 Linux 三版本的失败仍需通过一次带异常类别的远端 CI 证据定位，不据 Windows 通过推断远端问题已解决。
+
+## 2026-10-02 — FC905 CI-only 根因：未声明的 Ed25519 后端依赖
+
+- 聚合提交 `b168a2e` 的 Actions run `37043343785` 已确认：之前的六项失败全消失；仅 FC905 的 PI01/PI02/PI09 三项在 Python 3.11、3.12、3.13 各失败一次，异常类别全为 `ModuleNotFoundError`。Unit、cli-smoke、secret-scan、markdown-lint 均通过。
+- 唯一三项共用测试 helper `_record_review`；它在分支判断前无条件导入 `cryptography.hazmat...Ed25519PrivateKey`。生产 `prompt_injection.py::_ed25519_verify` 也使用 `cryptography`，但仅在调用时导入并在缺失时按安全设计 fail closed。CI 从 `requirements.txt` 干净安装，此依赖在 `requirements.txt` 与 `pyproject.toml` 的 `catalog` extra 均未声明；本机环境恰好已有安装，所以本机绿、CI 红。
+- 在 `requirements.txt` 和 `pyproject.toml` 的 `catalog`、`test`、`all` extras 声明 `cryptography>=41.0`。`catalog` extra 对应可选来源目录签名验证功能；`test` 确保该回归用例组独立安装时提供签名 fixture backend；CI 的 requirements 则确保 clean install 一致。
+- 此根因已定位，依赖修正当前尚未推送；必须用干净 CI 安装完成下一轮 Python 3.11/3.12/3.13 验收，不能用本机预装依赖代替。

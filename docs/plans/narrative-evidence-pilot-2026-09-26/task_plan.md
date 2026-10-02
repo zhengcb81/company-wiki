@@ -596,7 +596,8 @@ company-wiki 只负责来源、解析质量、证据定位、检索和来源摘�
 - [x] 将 pytest 基目录收敛到仓库忽略的 `tmp/` 下短唯一目录；门禁解析并强制 `relocated=false`，且验证 pytest 结束后目录消失。
 - [x] 把当前三项 Contract 红测加入 commit hook 与 pre-push 的同一回归集，路径触发同时覆盖对应测试和相关 source-catalog 实现。
 - [x] 完成本机完整 `python tools/pre_push_gate.py` 集成验收：Ruff、compileall、config doctor、complexity、host guard、全量 Unit、focused Contract 均 GREEN；所有 pytest 阶段核验 `relocated=false` 且短 basetemp 清理成功。
-- [ ] 将修复与诊断聚合成一次普通提交并推送；不得绕过 hook。
-- [ ] 读取该次 GitHub Actions 的异常类别，定位并修复 Linux-only/CI-only FC905 失败；三个 Python 版本及其他必需 jobs 全绿后关闭。
+- [x] 读取 run `37043343785`：六项旧 Contract 回归均消失；余下三个 FC905 用例在 Python 3.11/3.12/3.13 均为 `ModuleNotFoundError`。
+- [x] 沿生产签名验证实现和测试调用确认缺少 `cryptography` 声明；将 `cryptography>=41.0` 加入 requirements 与 `pyproject.toml` 的 catalog/test/all extras。
+- [ ] 完成本机完整门禁并推送依赖修复；GitHub 三版本及其余必需 jobs 全绿后关闭。
 
-**当前状态：**六项失败测试、增强后的 focused hook 和完整本机 pre-push 在 Windows/Python 3.13 通过。WSL 返回 `E_ACCESSDENIED`，本机没有 Docker/其他 Python minor runtime，因此目前不能声称已复现 Linux 或 3.11/3.12 差异；需推送一次聚合修复取得 FC905 新异常类别，再按证据修根因。
+**当前状态：**本地六项原失败已绿、完整 pre-push 已绿；第一次远端验证确认最后三项根因是 CI requirements 未装 `cryptography`，依赖清单已补但尚未本地复验、提交和远端复跑。此前 WSL 返回 `E_ACCESSDENIED`，所以以真实 GitHub Python 三版本矩阵验收。

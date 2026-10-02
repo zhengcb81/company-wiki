@@ -1,6 +1,6 @@
 # 叙述性证据规划：执行入口
 
-> **2026-10-02 最新状态：**CWP `master@1504d6a` 与 `origin/master` 一致；远端 run `37012332197` 的 Unit 三版全绿、Contract 三版失败。当前工作树修正 3 项过期契约，增加失败异常类别诊断；发现并修复本地门禁 basetemp 过长导致的用户 Temp 重定向与清理假绿，并将最新三项 Contract 红测纳入 commit hook/pre-push 聚焦集。最新 6 项失败身份 **6 passed**；完整本机 `pre_push_gate.py` 与实际 pre-commit hook 均通过。改动仍未提交/推送，远端 FC905 Linux 差异待新 Actions 异常类别定位。按 [CI 红灯修复交接卡](ci_red_handoff_2026-10-02.md)继续；远端三版 Contract 全绿前不得结案。
+> **2026-10-02 最新状态：**CWP `master@b168a2e` 已推送；run `37043343785` 已确认本轮六项旧红测全清，FC905 PI01/PI02/PI09 三个版本矩阵失败原因是 CI 未安装测试及签名验证所需 `cryptography`。依赖已补到 requirements 与 pyproject catalog/test/all extras，正进行本地验收；下一步提交推送并验证 clean GitHub matrix。此前完整本机 pre-push 与实际 pre-commit hook 通过。按 [CI 红灯修复交接卡](ci_red_handoff_2026-10-02.md)继续；远端三版 Contract 全绿前不得结案。
 
 > **2026-09-29 入口更新：**先读[多余门禁统一清理方案](gate_and_contract_simplification_2026-09-29.md)，再读[六仓独占施工与总指挥计划](parallel_harness_orchestration_2026-09-29.md)。两页依次裁定要清理的真实代码/历史规则、各仓独立写入范围、接口与汇合测试；`task_plan.md` Phase 25 记录本轮规划状态。2026-09-28 的[跨仓总图](cross_repo_mainline_and_delivery_plan_2026-09-28.md)保留历史基线和详细施工背景，冲突时以 2026-09-29 两页为准。本项目已取消逐文件人工审批、review receipt 和常规独立签字；自动测试/完整性断言是常规依据。旧 provider policy 与人工 review 文档不得作为新实施门槛。
 

@@ -1020,3 +1020,9 @@
 
 - 完整 `python tools/pre_push_gate.py` 已通过：Ruff、compileall、config doctor、complexity ratchet、host assumption guard、全量 Unit、focused contracts + 三项回归均 GREEN；各 pytest 阶段都报告短仓内 basetemp、`relocated=false`。真实 pre-commit hook 以三项过期契约文件触发并 Passed。
 - 由于 Linux 环境不可用，FC905 异常仍须由下一次 Actions 提供。本轮已有局部修复和 PWF 变更尚未提交；下一步做一次聚合普通 commit/push，检查完整 GitHub matrix，再继续按异常类别定位，不能以本地全绿提前关闭。
+
+## Session: 远端 ModuleNotFoundError 根因与依赖声明修复（2026-10-02）
+
+- `b168a2e` 推送后 Actions run `37043343785` 完成：之前六项 Contract 红测清零；FC905 PI01/PI02/PI09 三项在三个 Python 版本上全部报告 `ModuleNotFoundError`，其他必需 jobs 成功。
+- 沿测试 `_record_review` 和产品 `_ed25519_verify` 确认两者使用 `cryptography` Ed25519；`requirements.txt`（CI 干净安装入口）、pyproject catalog/test/all extras 均漏声明。本机因环境预装此包而无法复现。
+- 当前未提交工作树已将 `cryptography>=41.0` 增加到 requirements 和三个相关 pyproject extras。下一步验证 toml/依赖清单、FC905/重点 hook 与完整 pre-push，通过后正常提交推送，并以干净 Actions matrix 作为最终验收。

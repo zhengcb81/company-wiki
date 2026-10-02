@@ -6,6 +6,7 @@
 
 - 分支：`master`；上次读取时本地 `HEAD` 与 `origin/master` 都是 `1504d6a`。
 - 最近远端 Actions：run `37012332197`（commit `1504d6a`）。Python 3.11/3.12/3.13 的 Unit tests 全部通过；Contract tests 三个版本均失败。
+- 后续提交 `b168a2e` 的 run `37043343785` 已验证六项旧 Contract 回归不再失败；余下 PI01/PI02/PI09 在三个 Python 版本均报告 `ModuleNotFoundError`，其余 Unit/jobs 通过。根因已定位为 `cryptography` 漏列入 CI `requirements.txt`；当前工作树已补依赖清单，待本地验收与二次推送。
 - 该 run 的 Contract 失败身份：
   - `tests.contract.test_zr203_reader_rewire::test_read_entrypoints_never_construct_catalog_store`
   - `tests.contract.test_zr1003_shadow_assertions::test_c2_recorded_review_unblocks`
@@ -26,7 +27,7 @@
 | ZR-203 reader rewire | `d5162e5` 已有意移除 `_remediation_pending`，因为补救提案状态不再阻断读取；AST 测试仍把已删除方法列为入口。 | 从结构性入口清单移除该方法，继续检查 `resolve` 不构造 writer。 |
 | ZR-1003 C2 review receipt | 测试沿用旧的“仅填 status/reviewer/evidence hash”形状；当前写入合同要求 SHA-256 格式、source/policy 双绑定、证据载荷与 hash 一致并复核扫描 verdict。 | 只修正测试 fixture，填入有效 source SHA、policy hash、evidence payload 和匹配 hash；生产校验没有放松。 |
 | Worker temp governance | 测试在默认 `paused` 状态下期待 stop 删除外来 runtime/lock，和当前“暂停时保留、显式 resume 才 reconcile stale 文件”的行为矛盾；测试标题及安全描述要求不要触碰外来 worker。 | 断言外来 PID 未被终止且 runtime/lock 内容原样保留。 |
-| FC905 三项 | 远端失败；此前 WSL/Python 3.12 相同三项均通过，说明仍有远端/本地差异，根因未证实。当前远端注解没有异常类。 | reporter 已在工作树增加从 JUnit `failure.message` 安全提取异常类名的 fallback；只输出 testcase identity 和异常类，不输出异常正文。新增隐私回归测试。必须由下一次 Actions 结果继续定位。 |
+| FC905 三项 | run `37043343785` 已暴露 `ModuleNotFoundError`：测试 `_record_review` 使用 Ed25519 fixture，但 clean CI `requirements.txt` 未声明 `cryptography`；本机预装包掩盖了问题。产品 `_ed25519_verify` 也依赖此 backend，并在缺失时安全拒绝签名验证。 | 已在工作树将 `cryptography>=41.0` 加入 requirements 和 pyproject catalog/test/all extras；跑完整门禁、普通提交推送后，以新 GitHub 三版本矩阵验收。 |
 
 ## 为什么 pre-commit 没拦住
 
@@ -43,7 +44,7 @@
 2. **跑聚焦 hook**：`python tools/pre_push_gate.py --metadata-reader-contracts-only`。该命令覆盖 reader/receipt/B10 三个模块及本轮三项 Contract 回归，使用仓库 `tmp/` 短隔离目录并检查未重定向及清理。需要验证真实 hook 时再运行 `pre-commit run metadata-reader-contracts --files ...`；若默认 cache 只读，用 workspace 临时目录设置 `PRE_COMMIT_HOME`，不要把环境故障误判为测试失败。
 3. **本机集成验收已完成**：本轮 `python tools/pre_push_gate.py` 全部通过，包含静态检查、全量 Unit、既定重点 Contract 和本轮三项失败回归；所有 pytest 阶段均验证 `relocated=false` 且 run root 清理完成。真实 pre-commit hook 也已通过。
 4. 把修复、诊断 helper、hook 和 PWF 更新一起做一次普通提交并推送 `origin/master`；不使用 `--no-verify`、force push 或绕过 hook。用户已授权正常提交/推送。
-5. **唯一最终验收点**：核对新 Actions run。Unit 与 Contract 的 3 个 Python 版本以及 workflow 其他必需 jobs 均绿，任务才算完成。WSL 当前返回 `E_ACCESSDENIED` 且未发现 Docker/其他 Python minor runtime；若 FC905 仍失败，使用本次修复后的 reporter 读取异常类，并以 GitHub Linux matrix 为依据定位。不得仅因 Windows 本机通过就关闭，也不得仅因诊断 reporter 通过就关闭。
+5. **唯一最终验收点**：核对加入依赖后的新 Actions run。Unit 与 Contract 的 3 个 Python 版本以及 workflow 其他必需 jobs 均绿，任务才算完成。WSL 当前返回 `E_ACCESSDENIED` 且未发现 Docker/其他 Python minor runtime；不得仅因 Windows 本机预装包下测试通过就关闭，也不得仅因诊断 reporter 通过就关闭。
 6. 最后把最终 commit、Actions run 和绿灯状态写回 `task_plan.md`、`findings.md`、`progress.md` 和本入口 README，然后停止。只在这个集成验收节点做一次整体确认，不增设逐文件/逐小步骤签收。
 
 ## 本轮未提交文件
