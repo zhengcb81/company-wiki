@@ -71,6 +71,12 @@ def _date(value: Any, name: str) -> str:
     return value
 
 
+def _optional_date(value: Any, name: str) -> str | None:
+    if value is None:
+        return None
+    return _date(value, name)
+
+
 @dataclass(frozen=True)
 class DownloadCandidate:
     candidate_id: str
@@ -81,7 +87,7 @@ class DownloadCandidate:
     title: str
     source_url: str
     document_kind: str
-    filing_date: str
+    filing_date: str | None
     fiscal_year: int
     form_type: str | None = None
     fiscal_period: str | None = None
@@ -114,7 +120,10 @@ class DownloadCandidate:
             raise ValueError("market must be CN, HK, or US")
         if not self.source_url.startswith("https://"):
             raise ValueError("source_url must be HTTPS")
-        object.__setattr__(self, "filing_date", _date(self.filing_date, "filing_date"))
+        if self.document_kind == "investor_call_transcript":
+            object.__setattr__(self, "filing_date", _optional_date(self.filing_date, "filing_date"))
+        else:
+            object.__setattr__(self, "filing_date", _date(self.filing_date, "filing_date"))
         for name in (
             "form_type",
             "fiscal_period",

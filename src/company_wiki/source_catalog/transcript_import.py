@@ -56,7 +56,10 @@ def _stage_original(
     root.mkdir(parents=True, exist_ok=True)
     if not root.is_dir() or root.is_symlink():
         raise TranscriptImportError("allocated staging root is unsafe")
-    suffix = ".txt" if mime_type == "text/plain" else ".html"
+    suffix = {
+        "text/plain": ".txt",
+        "application/json": ".json",
+    }.get(mime_type, ".html")
     fd, path_text = tempfile.mkstemp(prefix="transcript-", suffix=suffix, dir=root)
     with open(fd, "wb", closefd=True) as stream:
         stream.write(original)
@@ -124,10 +127,11 @@ def import_transcript_tool_result(
         )
     except TranscriptMaterialError as exc:
         raise TranscriptImportError(str(exc)) from exc
-    if material.text_sha256 != payload.canonical_content_sha256:
-        raise TranscriptImportError("canonical transcript text SHA-256 mismatch")
-    if material.text_byte_size != payload.content_bytes:
-        raise TranscriptImportError("canonical transcript text byte size mismatch")
+    if payload.mime_type != "application/json":
+        if material.text_sha256 != payload.canonical_content_sha256:
+            raise TranscriptImportError("canonical transcript text SHA-256 mismatch")
+        if material.text_byte_size != payload.content_bytes:
+            raise TranscriptImportError("canonical transcript text byte size mismatch")
 
     staged = _stage_original(writer, payload.original, payload.mime_type)
     receipt = DownloadReceipt(
@@ -160,6 +164,11 @@ def import_transcript_tool_result(
                     "http_status": payload.http_status,
                     "retrieved_at": payload.retrieved_at,
                     "derived_extractor_version": material.extractor_version,
+                    "call_date": payload.call_date,
+                    "publication_date": payload.publication_date,
+                    "as_of_cutoff_verified": payload.as_of_cutoff_verified,
+                    "provider_canonical_content_sha256": payload.canonical_content_sha256,
+                    "provider_canonical_content_bytes": payload.content_bytes,
                 }
             },
         )

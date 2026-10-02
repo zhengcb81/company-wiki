@@ -10,10 +10,15 @@ import re
 from dataclasses import dataclass
 from datetime import date, datetime
 from typing import Any
-from urllib.parse import urlsplit
 
 from .acquisition import DownloadCandidate
 from .resolver import SourceRequest
+from .transcript_fmp_contract import (
+    validate_fmp_original,
+    validate_fmp_period,
+    validate_fmp_url,
+)
+from .transcript_tool_errors import TranscriptToolContractError
 
 
 TRANSCRIPT_RESULT_SCHEMA = "earnings-transcript-result/2"
@@ -22,6 +27,7 @@ MAX_PROVIDER_PAYLOAD_BYTES = 16 * 1024 * 1024
 _SHA256 = re.compile(r"^[0-9a-f]{64}$")
 _UTC_TIMESTAMP = re.compile(r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$")
 _MIME_TYPES = frozenset({"text/html", "application/xhtml+xml", "text/plain"})
+_FMP_MIME = "application/json"
 _RESULT_FIELDS = frozenset(
     {
         "schema_version",
@@ -50,10 +56,10 @@ _RESULT_FIELDS = frozenset(
         "adapter_version",
     }
 )
-
-
-class TranscriptToolContractError(ValueError):
-    """The provider tool result does not satisfy the frozen `/2` contract."""
+_FMP_RESULT_FIELDS = frozenset(
+    (_RESULT_FIELDS - {"published_date"})
+    | {"call_date", "publication_date", "as_of_cutoff_verified"}
+)
 
 
 @dataclass(frozen=True)
@@ -69,6 +75,9 @@ class ValidatedTranscriptPayload:
     http_status: int
     canonical_content_sha256: str
     content_bytes: int
+    call_date: str | None = None
+    publication_date: str | None = None
+    as_of_cutoff_verified: bool = True
 
 
 def _unique_object(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
@@ -137,7 +146,9 @@ def _load_payload(raw_result: bytes | str) -> dict[str, Any]:
         )
     except (json.JSONDecodeError, TranscriptToolContractError) as exc:
         raise TranscriptToolContractError("tool result is invalid JSON") from exc
-    if not isinstance(payload, dict) or set(payload) != _RESULT_FIELDS:
+    if not isinstance(payload, dict) or frozenset(payload) not in {
+        _RESULT_FIELDS, _FMP_RESULT_FIELDS
+    }:
         raise TranscriptToolContractError("tool result fields differ from schema")
     if payload["schema_version"] != TRANSCRIPT_RESULT_SCHEMA:
         raise TranscriptToolContractError("unsupported transcript result schema")
@@ -184,24 +195,26 @@ def _validate_result_binding(
         )
 
 
-def _validate_safe_source_url(source_url: str) -> None:
+def _validate_safe_source_url(
+    source_url: str, *, provider: str, request: SourceRequest
+) -> None:
+    if provider == "fmp":
+        validate_fmp_url(source_url, request)
+        return
+    from urllib.parse import urlsplit
+
     parsed = urlsplit(source_url)
     if (
-        parsed.scheme != "https"
-        or not parsed.hostname
-        or parsed.username is not None
-        or parsed.password is not None
-        or bool(parsed.query)
-        or bool(parsed.fragment)
+        parsed.scheme != "https" or not parsed.hostname
+        or parsed.username is not None or parsed.password is not None
+        or parsed.query or parsed.fragment
     ):
-        raise TranscriptToolContractError(
-            "candidate source URL is not a safe canonical HTTPS URL"
-        )
+        raise TranscriptToolContractError("candidate source URL is not canonical")
 
 
 def _validate_period(
     payload: dict[str, Any], request: SourceRequest, candidate: DownloadCandidate
-) -> None:
+) -> tuple[str | None, str | None, bool]:
     if payload["as_of_date"] != request.as_of_date:
         raise TranscriptToolContractError("result as_of_date does not match request")
     if payload["fiscal_period"] != f"{request.fiscal_year}-{request.fiscal_period}":
@@ -217,6 +230,19 @@ def _validate_period(
         raise TranscriptToolContractError("invalid published_date") from exc
     if published.isoformat() != payload["published_date"] or published > as_of:
         raise TranscriptToolContractError("invalid or future published_date")
+    return None, payload["published_date"], True
+
+
+def _canonical_date(value: Any, name: str) -> str:
+    if not isinstance(value, str):
+        raise TranscriptToolContractError(f"invalid {name}")
+    try:
+        parsed = date.fromisoformat(value)
+    except ValueError as exc:
+        raise TranscriptToolContractError(f"invalid {name}") from exc
+    if parsed.isoformat() != value:
+        raise TranscriptToolContractError(f"invalid {name}")
+    return value
 
 
 def _candidate_identity(candidate: DownloadCandidate) -> dict[str, Any]:
@@ -286,10 +312,18 @@ def _validate_payload_metadata(
     mime_type = _text(
         payload["provider_payload_mime_type"], "provider payload MIME type"
     ).lower()
-    if mime_type not in _MIME_TYPES:
+    if mime_type not in _MIME_TYPES | {_FMP_MIME}:
         raise TranscriptToolContractError("unsupported transcript MIME type")
     _validate_byte_cap(original, max_bytes)
     return mime_type, extraction, payload_sha
+
+
+def _validate_provider_format(provider: str, mime_type: str, extraction: str) -> None:
+    if provider == "fmp":
+        if mime_type != _FMP_MIME or extraction != "fmp-api-content/1":
+            raise TranscriptToolContractError("FMP MIME or extraction version mismatch")
+    elif mime_type not in _MIME_TYPES:
+        raise TranscriptToolContractError("unsupported transcript MIME type")
 
 
 def parse_transcript_tool_result(
@@ -300,14 +334,32 @@ def parse_transcript_tool_result(
     max_bytes: int = MAX_PROVIDER_PAYLOAD_BYTES,
 ) -> ValidatedTranscriptPayload:
     payload = _load_payload(raw_result)
+    expected_fields = _FMP_RESULT_FIELDS if payload.get("provider") == "fmp" else _RESULT_FIELDS
+    if set(payload) != expected_fields:
+        raise TranscriptToolContractError("provider result fields differ from schema")
     original = _decode_original(payload)
     _validate_result_binding(payload, request, candidate)
-    _validate_safe_source_url(candidate.source_url)
-    _validate_period(payload, request, candidate)
+    _validate_safe_source_url(
+        candidate.source_url, provider=candidate.provider, request=request
+    )
+    call_date: str | None
+    publication_date: str | None
+    cutoff_verified: bool
+    if candidate.provider == "fmp":
+        call_date, publication_date, cutoff_verified = validate_fmp_period(
+            payload, candidate, request
+        )
+    else:
+        call_date, publication_date, cutoff_verified = _validate_period(
+            payload, request, candidate
+        )
     _validate_security(payload, request, candidate)
     mime_type, extraction, payload_sha = _validate_payload_metadata(
         payload, original, max_bytes=max_bytes
     )
+    _validate_provider_format(candidate.provider, mime_type, extraction)
+    if candidate.provider == "fmp":
+        validate_fmp_original(payload, original, request, candidate)
     return ValidatedTranscriptPayload(
         original=original,
         mime_type=mime_type,
@@ -322,4 +374,7 @@ def parse_transcript_tool_result(
         http_status=payload["http_status"],
         canonical_content_sha256=payload["canonical_content_sha256"],
         content_bytes=payload["content_bytes"],
+        call_date=call_date,
+        publication_date=publication_date,
+        as_of_cutoff_verified=cutoff_verified,
     )

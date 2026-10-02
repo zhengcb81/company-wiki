@@ -263,6 +263,25 @@ class CanonicalSourceWriter:
             )
             exact_resolution = SourceResolver(self.catalog).resolve(exact_request)
             if exact_resolution.status is not ResolutionStatus.REUSED_EXACT:
+                unknown_publication = (
+                    candidate.document_kind == "investor_call_transcript"
+                    and candidate.filing_date is None
+                )
+                if unknown_publication:
+                    if (
+                        exact_resolution.status is not ResolutionStatus.AMBIGUOUS
+                        or exact_resolution.reason
+                        != "matching_sources_have_unknown_published_date"
+                    ):
+                        raise CanonicalImportError(
+                            "unknown-date source did not remain cutoff-ineligible"
+                        )
+                    self._verify_unknown_date_index(request, candidate, receipt.content_sha256)
+                    exact_resolution = replace(
+                        exact_resolution,
+                        request_id=request.request_id,
+                    )
+                else:
                 # DEF-MSFT-CANONICAL-DUP: re-serve variants of one provider
                 # identity may legitimately coexist on canonical disk (the
                 # pre-existing variant file stays until its owner disposes
@@ -275,29 +294,29 @@ class CanonicalSourceWriter:
                 # when exactly one capture-ready exact-identity match
                 # carries the committed sha.  Anything else stays
                 # fail-closed.
-                committed = [
+                    committed = [
                     handle
                     for handle in exact_resolution.matches
-                    if handle.capture_ready
-                    and handle.content_sha256 == receipt.content_sha256
+                    if handle.content_sha256 == receipt.content_sha256
                     and handle.provider_document_id == candidate.provider_document_id
                     and (not candidate.provider or handle.provider == candidate.provider)
+                    and handle.capture_ready
                 ]
-                if (
-                    exact_resolution.status is not ResolutionStatus.AMBIGUOUS
-                    or len(committed) != 1
-                ):
-                    raise CanonicalImportError(
-                        "canonical file was written but exact provider identity did not resolve: "
-                        f"status={exact_resolution.status.value}; "
-                        f"trace={';'.join(exact_resolution.debug_trace)}"
+                    if (
+                        exact_resolution.status is not ResolutionStatus.AMBIGUOUS
+                        or len(committed) != 1
+                    ):
+                        raise CanonicalImportError(
+                            "canonical file was written but exact provider identity did not resolve: "
+                            f"status={exact_resolution.status.value}; "
+                            f"trace={';'.join(exact_resolution.debug_trace)}"
+                        )
+                    exact_resolution = replace(
+                        exact_resolution,
+                        status=ResolutionStatus.REUSED_EXACT,
+                        reason="exact provider identity resolved to the committed bytes",
+                        matches=(committed[0],),
                     )
-                exact_resolution = replace(
-                    exact_resolution,
-                    status=ResolutionStatus.REUSED_EXACT,
-                    reason="exact provider identity resolved to the committed bytes",
-                    matches=(committed[0],),
-                )
             # F-EE1: exact_request above is only the post-write VERIFICATION
             # probe (it pins the candidate's provider identity).  The result
             # this import RETURNS answers the CALLER's request: the journal
@@ -418,7 +437,7 @@ class CanonicalSourceWriter:
             # transcript title otherwise exceeds the Windows path budget in
             # nested company directories and unique pytest run roots.
             filename = (
-                f"{candidate.filing_date}_"
+                f"{candidate.filing_date or 'unknown-date'}_"
                 f"{_safe_component(candidate.provider, limit=24)}_"
                 f"{receipt.content_sha256[:16]}"
                 f"{_extension(receipt)}"
@@ -426,7 +445,7 @@ class CanonicalSourceWriter:
         else:
             filename = "_".join(
                 (
-                    candidate.filing_date,
+                    candidate.filing_date or "unknown-date",
                     _safe_component(candidate.provider, limit=24),
                     _safe_component(candidate.provider_document_id, limit=64),
                     _safe_component(candidate.title, limit=90),
@@ -439,6 +458,39 @@ class CanonicalSourceWriter:
             / _destination_subdirectory(candidate.document_kind)
             / filename
         ).resolve(strict=False)
+
+    def _verify_unknown_date_index(
+        self, request: SourceRequest, candidate: DownloadCandidate, sha256: str
+    ) -> None:
+        rows = self.catalog.reader.query(
+            text=candidate.title,
+            document_kind=candidate.document_kind,
+            limit=1000,
+        )
+        matches = []
+        for row in rows:
+            try:
+                metadata = json.loads(row["metadata_json"])
+                acquisition = metadata.get("acquisition") or {}
+            except (TypeError, json.JSONDecodeError):
+                continue
+            if (
+                row["published_date"] is None
+                and row["source_status"] == "active"
+                and row["primary_source_id"] == source_id_for_sha256(sha256)
+                and acquisition.get("provider_document_id")
+                == candidate.provider_document_id
+                and acquisition.get("provider") == candidate.provider
+                and acquisition.get("company_name") == request.entity
+                and acquisition.get("security_id") == request.security_id
+                and acquisition.get("market") == request.market
+                and self.catalog.reader.source_sha(row["primary_source_id"]) == sha256
+            ):
+                matches.append(row["document_id"])
+        if len(matches) != 1:
+            raise CanonicalImportError(
+                "unknown-date original was not indexed to its verified bytes"
+            )
 
     @staticmethod
     def _atomic_copy(

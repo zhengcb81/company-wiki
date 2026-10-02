@@ -689,3 +689,17 @@ G-A0已提交推送29327f3，35项节点验收与远端CI（57秒）通过。下
 - [x] 提交推送29327f3，Actions37077718031 success/57秒，工作树无未提交实现；随后进入GA1。
 
 G-A0只是原件到定位正文层。FMP入库仍待GA1，不声称26字段已接通、付费API200或完整FF下载链完成。详细后续接口、反例与大节点E2E见GA1施工细则。
+
+
+## Phase 56：G-A1 FMP入库与未知公开日期语义（2026-10-03）
+
+- [x] 读取producer `/2` golden，TDD先RED 12个纯合同用例；严格区分FMP26和旧24 envelope。
+- [x] 验证FMP安全URL/request绑定，原JSON身份/period/call date，原件hash、canonical内容hash/bytes、call/publication/cutoff分别验证。保留publication null + cutoff false。
+- [x] 允许transcript候选日期为空；其他document_kind仍要求日期。原件JSON后缀、无日期文件名及sidecar双hash来源审计。
+- [x] unknown publication入库post-scan精确核验indexed SHA/active/company/market/security/provider ID；返回unknown ambiguous而非REUSED；SourceRef hash验证读可用，query_local as-of排除unknown。
+- [x] 扩充隔离E2E：CLI、保真byte、read、locator、unknown cut-off、幂等重复、坏hash拒绝、无残留；测试run root完成清理。
+- [x] 总节点包50 passed；Ruff、mypy六个源码模块、复杂度契约与本机共享fast pre-push GREEN。
+- [ ] 只提交本阶段G-A代码和PWF；push主线并等Actions短门，写最终commit/远端CI收据。
+- [ ] 然后按cross_line_closeout单owner处理FF两个重叠worktree，把transcript调用接到filing-fetch并保存至company-wiki统一目录；只复用正式SourceRef，不改RF/StockWiki实现。
+
+G-A1尚未由producer/filing-fetch表示FF→ET→CWP下载完整链完成；真实FMP200/授权也未验证。本阶段证明的是producer golden可被CWP安全入库、locator和cutoff语义正确。

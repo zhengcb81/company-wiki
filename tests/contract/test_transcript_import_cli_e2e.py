@@ -13,6 +13,8 @@ import shutil
 import subprocess
 import sys
 
+import pytest
+
 from company_wiki.source_catalog.acquisition import DownloadCandidate
 from company_wiki.source_catalog.resolver import SourceRequest
 from company_wiki.source_catalog.transcript_material import extract_transcript_material
@@ -202,6 +204,122 @@ def test_cli_rejects_wrong_company_period_or_hash_before_writing(tmp_path: Path)
         assert json.loads(process.stdout)["status"] == "rejected"
         assert not list((root / "companies").rglob("*.html"))
         assert not (root / ".source_catalog" / "staging").exists()
+    finally:
+        _remove_fixture(root, tmp_path)
+    assert not root.exists()
+
+
+
+def _fmp_fixture(tmp_path: Path) -> tuple[Path, dict[str, object], bytes]:
+    golden = json.loads(
+        (REPO_ROOT / "tests" / "fixtures" / "transcript_fmp" / "fmp_v2.fetched.json")
+        .read_text(encoding="utf-8")
+    )
+    root = tmp_path / "company-wiki-fmp"
+    (root / "companies").mkdir(parents=True)
+    (root / "config").mkdir()
+    (root / "config" / "source_catalog.yaml").write_text(
+        "schema_version: '1.0'\ncatalog_dir: .source_catalog\nroots:\n"
+        "  - root_id: company_raw\n    path: companies\n    kind: company_raw\n"
+        "    priority: 10\n    adapter_id: company_raw_v1\n    read_only: false\n",
+        encoding="utf-8",
+    )
+    request = SourceRequest(
+        entity="Microsoft Corporation", market="US", security_id="MSFT",
+        document_kind="investor_call_transcript", fiscal_year=2026,
+        fiscal_period="Q3", language="en", provider="fmp",
+        provider_document_id=golden["provider_document_id"],
+        as_of_date="2026-09-30", allow_download=True,
+    )
+    candidate = DownloadCandidate(
+        candidate_id="fmp:msft:2026-q3", provider="fmp",
+        provider_document_id=golden["provider_document_id"], market="US",
+        entity=request.entity, title=golden["title"], source_url=golden["source_url"],
+        document_kind="investor_call_transcript", filing_date=None,
+        fiscal_year=2026, fiscal_period="Q3", language="en",
+        adapter_payload_json=json.dumps(
+            {"market": "US", "security_id": "MSFT", "exchange": "nasdaq"}
+        ),
+    )
+    golden["request_id"] = request.request_id
+    envelope = {
+        "schema_version": "company-wiki-transcript-import-request/2",
+        "source_request": request.to_dict(),
+        "candidate": asdict(candidate),
+        "transcript_result": golden,
+    }
+    original = base64.b64decode(golden["provider_payload_base64"], validate=True)
+    return root, envelope, original
+
+
+def test_fmp_unknown_publication_cli_stores_original_but_excludes_historical_cutoff(
+    tmp_path: Path,
+) -> None:
+    from company_wiki.source_catalog import SourceCatalog, load_catalog_config
+    from company_wiki.source_catalog.source_reader import SourceVersionReader
+    from company_wiki.source_catalog.transcript_material import extract_transcript_material
+
+    root, envelope, original = _fmp_fixture(tmp_path)
+    catalog = None
+    try:
+        first = _run(root, envelope)
+        assert first.returncode == 0, first.stderr
+        imported = json.loads(first.stdout)
+        assert imported["status"] == "imported"
+        assert imported["canonical_status"] == "imported_new"
+        assert imported["provider_payload_sha256"] == _sha(original)
+        files = [p for p in (root / "companies").rglob("*.json") if not p.name.endswith(".source.json")]
+        assert len(files) == 1 and files[0].read_bytes() == original
+        assert files[0].name.startswith("unknown-date_fmp_")
+        sidecar = json.loads(files[0].with_name(files[0].name + ".source.json").read_text(encoding="utf-8"))
+        audit = sidecar["provenance_extensions"]["transcript_acquisition"]
+        assert audit["call_date"] == "2026-07-22"
+        assert audit["publication_date"] is None
+        assert audit["as_of_cutoff_verified"] is False
+        assert audit["provider_canonical_content_sha256"] == envelope["transcript_result"]["canonical_content_sha256"]
+
+        config = load_catalog_config(root / "config" / "source_catalog.yaml", project_root=root)
+        catalog = SourceCatalog(config)
+        reader = SourceVersionReader(catalog)
+        docs = catalog.reader.query(text="MSFT 2026 Q3", document_kind="investor_call_transcript")
+        assert len(docs) == 1 and docs[0]["published_date"] is None
+        ref = reader.query_ref(docs[0]["document_id"], imported["source_id"], _sha(original))
+        opened = reader.open_version(ref, purpose="preview")
+        assert opened.data == original
+        material = extract_transcript_material(opened.data, mime_type="application/json")
+        material.verify(original)
+        assert material.lines
+        request = SourceRequest(**envelope["source_request"])
+        assert reader.query_local(request).status == "not_found"
+
+        second = _run(root, envelope)
+        assert second.returncode == 0, second.stderr
+        replay = json.loads(second.stdout)
+        assert replay["canonical_status"] == "deduplicated_after_download"
+        assert replay["source_id"] == imported["source_id"]
+        assert len([p for p in (root / "companies").rglob("*.json") if not p.name.endswith(".source.json")]) == 1
+        staging = root / ".source_catalog" / "staging"
+        assert not staging.exists() or list(staging.iterdir()) == []
+    finally:
+        if catalog is not None:
+            catalog.close()
+        _remove_fixture(root, tmp_path)
+    assert not root.exists()
+
+
+@pytest.mark.parametrize("bad_field", ["provider_payload_sha256", "canonical_content_sha256"])
+def test_fmp_cli_rejects_corrupt_original_evidence_without_files(
+    tmp_path: Path, bad_field: str,
+) -> None:
+    root, envelope, _ = _fmp_fixture(tmp_path)
+    try:
+        envelope["transcript_result"][bad_field] = "0" * 64
+        process = _run(root, envelope)
+        assert process.returncode != 0
+        assert json.loads(process.stdout)["status"] == "rejected"
+        assert not list((root / "companies").rglob("*.json"))
+        staging = root / ".source_catalog" / "staging"
+        assert not staging.exists() or list(staging.iterdir()) == []
     finally:
         _remove_fixture(root, tmp_path)
     assert not root.exists()

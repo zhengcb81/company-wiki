@@ -1099,3 +1099,13 @@
 - G-A0最终节点包35项全部GREEN，Ruff/mypy通过。中间run 34 passed/1 failed定位为旧timeout E2E对计数的错误前提：Python可能在0.2秒启动阶段即被kill，尚未写入计数。修正为超时计数0或1，其他故障仍必须1，并把异常从三类任选改为每种故障的精确类型；kill+communicate/零raw与sidecar断言保留。没有延长timeout、没有改产品行为。复跑同一35项GREEN，运行root清理。
 
 - G-A0发布收据：`29327f3`正常commit/push至origin/master，真实pre-commit与pre-push GREEN；[Actions37077718031](https://github.com/zhengcb81/company-wiki/actions/runs/37077718031) success，workflow57秒。生产配置和raw未变；下一步GA1。
+
+
+## 2026-10-03 — G-A1 FMP importer节点验收
+
+- ET golden26 schema现在由FMP专属合同读取，legacy24不变。candidate transcript字段nullable不会放松filing/其他文档日期要求。
+- Unknown publication只存明确null；call_date不进入published_date。已知cutoff资格与verified bool同步；未来call/publication拒绝。URL host/path/query精确绑定request，带apikey、重复参数、错期/身份/host/path拒绝。
+- FMP原件producer canonical哈希按producer CRLF规范化、strip算法验证；raw SHA不同字段验证；derived transcript locator/lineage hash留给transcript_material，sidecar留存两层依据。
+- E2E已实证company-wiki落盘原bytes(.json)、source catalog active记录/published null、已知sourceID+documentID的SourceRef读回字节SHA、repeat import dedup，以及query_local历史as-of忽略未知日期。失败SHA路径无文件及staging残留。目录隔离并finally复原。
+- 50 tests passed; Ruff和mypy通过。新增合同拆模块满足旧复杂度cap：tool_contract10、fmp_contract9；未改 ratchet。
+- 待commit/push与Actions短CI。然后单owner研究FF两个重叠worktree的逐文件差异，以便接通ETF工具并在一个端到端节点验收；RF、SW均未修改。
