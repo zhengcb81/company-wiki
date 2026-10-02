@@ -695,3 +695,11 @@
 - run `36998369238` 的 check annotations 仍只有 runner 的通用 step failure。无法从公开 API 判断是 workflow command 未解析还是 helper 没走到失败分支。
 - 去除可选自定义 `title`，使用官方文档示例的 `::error file=...,line=...::message` 或 `::error::message`。这是降低命令解析变量的假设，必须以新 Actions annotation 验证。
 - helper 7 tests、Ruff、YAML parse、`git diff --check` 与完整本机 pre-push 均 GREEN；最简格式仍待推送实测。
+
+## 2026-10-02 — CI 子进程遗漏源码导入路径
+
+- Actions run `37000426435` 的 3.11/3.12/3.13 annotations 指向同一 `test_writer_freeze.py` 参数化测试四项；其 `--help` 子进程非零。
+- Linux 独立复现 traceback：四个 source workflow 脚本 import `company_wiki.source_catalog...` 时 `ModuleNotFoundError`。pytest 主进程在 GitHub 能收集测试，但直接 `python scripts/<file>.py` 子进程的 `sys.path[0]` 是 `scripts/`，不包含 `src/`。
+- `pre_push_gate.py::_run` 对本机所有子进程注入 `PYTHONPATH=src`；原 `_blocked_environment()` 只删 API keys 并继承此路径。因此 Windows/Linux 本地 pre-push 的绿灯掩盖了 GitHub 环境缺项。
+- 在 `_blocked_environment()` 显式设置 `PYTHONPATH=ROOT/src` 后，WSL/Python 3.12 清除父进程路径时六个参数 **6 passed**，Windows/Python 3.13 同样 **6 passed**。这是测试启动环境缺陷，未改生产模块。
+- 修复后的完整 `python tools/pre_push_gate.py` 七阶段通过，临时 `.pp-*` 路径自动清理；提交推送及 GitHub 三版本复验待做。

@@ -1,6 +1,6 @@
 # CWP 独占施工卡：来源、叙述证据与 Worker
 
-> **2026-10-02 当前状态：**E-B 已并入 CWP 主线。本地完整 pre-push 七阶段 GREEN；CLI test helper watchdog 已由 10 秒调至 30 秒。Actions `36998369238` 的 3.11/3.12/3.13 Unit tests 仍失败约 14–15 秒；独立 reporter/outcome fallback 未产生公开 testcase annotation。当前工作树使用最简 `::error` command，helper 7 项与完整门均通过，待推送后复验。
+> **2026-10-02 当前状态：**E-B 已并入 CWP 主线。run `37000426435` 的三版本 annotation 定位四个 writer-freeze CLI 子进程失败；Linux 根因是 `_blocked_environment()` 漏设 `PYTHONPATH=src`，本机 pre-push 注入环境掩盖了问题。测试 helper 已显式设置源码路径；WSL/Python 3.12 与 Windows/Python 3.13 定向六项 E2E、完整七阶段 pre-push 均 GREEN。更新待提交推送后复验 Actions。
 
 开工输入包：本卡、S0a observed 接口表、指定 base/worktree、只读 P/T 样本清单（绝对路径、SHA、大小、期次、locator oracle、隔离复制/清理规则）。缺样本只阻对应真样本验收，不阻本仓 RED/代码整理。
 

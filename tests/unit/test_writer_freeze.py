@@ -40,6 +40,9 @@ def _blocked_environment() -> dict[str, str]:
     environment["COMPANY_WIKI_LEGACY_WRITERS"] = "deny"
     environment["COMPANY_WIKI_REAL_LLM"] = "0"
     environment["COMPANY_WIKI_NETWORK"] = "blocked"
+    # These CLIs import the package from src/ when launched as scripts. Set
+    # this explicitly so the test does not inherit pre-push's local PYTHONPATH.
+    environment["PYTHONPATH"] = str(ROOT / "src")
     return environment
 
 

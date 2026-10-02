@@ -975,3 +975,11 @@
 
 - Actions run `36998369238`（commit `81e23b1`）三版本仍失败；unit reporter 与 outcome fallback 均 success，但公开 annotations 仍没有 testcase 身份。
 - reporter 去掉 `title`，改用 GitHub workflow command 文档中的最简 error 格式；聚焦 7 tests 与完整 pre-push 均通过，PWF 同步。待提交推送后再次核对公开 annotations。
+
+## Session: CI writer-freeze 子进程导入根因（2026-10-02）
+
+- 最简 reporter 提交 `f1986cd` 已推送；Actions run `37000426435` 的三版本 annotations 均给出同一测试的四个失败参数：`audit_catalog_consumers.py`、`audit_catalog_retirement.py`、`cutover_source_catalog_db.py`、`retire_source_catalog_db.py`。
+- 在 WSL/Python 3.12 清除父进程 `PYTHONPATH` 复现 **4 failed, 2 passed**；错误均为 `ModuleNotFoundError: No module named 'company_wiki'`。本机 pre-push 的 `_run` 会统一设置 `PYTHONPATH=src`，而 CI 的 Unit tests step 不会，原 `_blocked_environment()` 又继承父进程环境，造成本机漏测。
+- 测试 helper 现为子进程明确设置 `PYTHONPATH=src`。WSL/Python 3.12（父环境无该变量）及 Windows/Python 3.13 的六项参数化 CLI E2E 分别 **6 passed in 29.12s**、**6 passed in 33.25s**。生产代码未改。
+- 完整 pre-push 和修复提交/推送尚待完成。
+- 完整 `python tools/pre_push_gate.py` 已通过七阶段；`.pp-*` 临时根已自动清理。测试/PWF 修复待提交推送及 Actions 三版本验收。

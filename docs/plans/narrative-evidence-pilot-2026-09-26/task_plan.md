@@ -476,7 +476,7 @@ company-wiki 只负责来源、解析质量、证据定位、检索和来源摘�
 
 ## Next Step
 
-提交并推送最简 CI failure annotation 格式，检查下一轮公开 annotations。若仍只有 runner 通用退出码，取得已登录 job log/summary 后按具体 pytest 输出修复；远端三版本通过后再按既定 G-0/G-A → NarrativeBundle/G-C → G-D 顺序继续，并在实施 RF 发布门前复核 RF 当前 PWF 与工作树。
+修复 `test_writer_freeze.py` 中四个 CLI 子进程环境缺失 `PYTHONPATH=src` 的问题，运行完整 pre-push 后提交推送；检查下一轮三版本 Actions 是否通过。远端通过后再按既定 G-0/G-A → NarrativeBundle/G-C → G-D 顺序继续，并在实施 RF 发布门前复核 RF 当前 PWF 与工作树。
 
 ## Phase 38：让无登录 CI 摘要暴露失败用例（2026-10-02）
 
@@ -539,6 +539,19 @@ company-wiki 只负责来源、解析质量、证据定位、检索和来源摘�
 - [x] 将 annotation 输出改成 GitHub 文档示例的最简形式：有 testcase 时 `::error file=...,line=...::node-id`，无测试身份时 `::error::message`，移除可选自定义 title 属性以减少解析变量。
 - [x] reporter 聚焦测试 **7 passed**；Ruff、workflow YAML parse、`git diff --check` 通过。
 - [x] 完整 `python tools/pre_push_gate.py` 七阶段全部 GREEN。
-- [ ] 提交推送最简 command 格式；通过下一轮公开 annotations 验证 runner 是否识别。仍只有通用退出码时，具体 pytest 输出需要登录后的 job log/summary。
+- [x] 提交推送最简 command 格式（`f1986cd`）；Actions run `37000426435` 的三版本公开 annotations 均返回失败节点，证明 runner 已正确识别诊断命令。
+- [x] 失败节点一致为 `tests.unit.test_writer_freeze::test_source_workflow_cli_is_not_a_legacy_research_writer` 四个参数：`audit_catalog_consumers.py`、`audit_catalog_retirement.py`、`cutover_source_catalog_db.py`、`retire_source_catalog_db.py`。
 
-**状态：**远端失败根因仍未定位。当前本地输出格式验证通过，真实 GitHub command annotation 效果待 CI 实测。
+**状态：**诊断通道现已在远端输出 testcase 身份；具体根因转 Phase 44。该阶段 code 变更提交已推送。
+
+## Phase 44：修复 Linux CI 的 CLI 子进程导入环境（2026-10-02）
+
+- [x] 从公开 annotations 确认三版本失败集中于 `test_source_workflow_cli_is_not_a_legacy_research_writer` 的四个 source workflow CLI 参数。
+- [x] WSL/Python 3.12、移除父进程 `PYTHONPATH` 后复现 **4 failed, 2 passed**；traceback 明确为四个脚本 `ModuleNotFoundError: No module named 'company_wiki'`。
+- [x] 查明掩盖原因：`tools/pre_push_gate.py` 为 pytest 父进程统一设置 `PYTHONPATH=src`，本地 `_blocked_environment()` 原样继承；GitHub Unit tests 未设置 `PYTHONPATH`。受测 CLI 作为 `python scripts/<name>.py` 子进程启动，`sys.path[0]` 是 `scripts/`，缺 `src/` 就无法导入 package。
+- [x] 更新 `tests/unit/test_writer_freeze.py::_blocked_environment()`，显式设置 `PYTHONPATH` 为当前仓库 `src/`，不再依赖调用者环境。
+- [x] 在 WSL/Python 3.12、父环境无 `PYTHONPATH` 下重跑同一参数包 **6 passed in 29.12s**；Windows/Python 3.13 同包 **6 passed in 33.25s**。生产代码无需改动。
+- [x] 完整 `python tools/pre_push_gate.py` 七阶段通过：Ruff、compileall、config doctor、complexity、host guard、全量 unit、contract/meta 全部 GREEN，临时 `.pp-*` 根自动清理。
+- [ ] 提交并推送测试环境修复，验证 Actions 三个 Python 版本全部通过。
+
+**状态：**根因和测试修复已在 Linux/Windows 定向 E2E、完整本机 pre-push 验证；待提交推送和下一轮 Actions 验收。

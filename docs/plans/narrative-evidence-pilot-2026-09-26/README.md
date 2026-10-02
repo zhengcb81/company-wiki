@@ -1,6 +1,6 @@
 # 叙述性证据规划：执行入口
 
-> **2026-10-02 最新状态：**CWP `master@81e23b1` 已推送。本地完整 pre-push GREEN；CLI subprocess watchdog 已调至 30 秒。Actions `36998369238` 的 Python 3.11/3.12/3.13 Unit tests 仍约 14–15 秒失败；独立 reporter 和 outcome fallback 均未产生公开 testcase annotation。当前把输出改成最简 `::error` command，helper 7 项和完整 pre-push 均通过，待提交推送与 Actions 再验证。远端根因尚未定位。见 [task_plan.md Phase 37–43](task_plan.md)、[findings.md](findings.md)、[progress.md](progress.md)。
+> **2026-10-02 最新状态：**CWP `master@f1986cd` 已推送；run `37000426435` 的三版本 annotations 定位四个失败 testcase。根因是 CI 测试子进程缺少 `PYTHONPATH=src`，而本机 pre-push 会注入该值。`test_writer_freeze.py::_blocked_environment()` 已明确设置源码路径；WSL/Python 3.12、Windows/Python 3.13 定向 E2E 均通过，修复后的完整七阶段 pre-push 也 GREEN。测试/PWF 更新待提交推送与 Actions 三版本验收。见 [task_plan.md Phase 37–44](task_plan.md)、[findings.md](findings.md)、[progress.md](progress.md)。
 
 > **2026-09-29 入口更新：**先读[多余门禁统一清理方案](gate_and_contract_simplification_2026-09-29.md)，再读[六仓独占施工与总指挥计划](parallel_harness_orchestration_2026-09-29.md)。两页依次裁定要清理的真实代码/历史规则、各仓独立写入范围、接口与汇合测试；`task_plan.md` Phase 25 记录本轮规划状态。2026-09-28 的[跨仓总图](cross_repo_mainline_and_delivery_plan_2026-09-28.md)保留历史基线和详细施工背景，冲突时以 2026-09-29 两页为准。本项目已取消逐文件人工审批、review receipt 和常规独立签字；自动测试/完整性断言是常规依据。旧 provider policy 与人工 review 文档不得作为新实施门槛。
 
