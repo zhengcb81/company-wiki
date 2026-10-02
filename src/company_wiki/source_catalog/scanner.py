@@ -1442,14 +1442,13 @@ def _provenance_record(
     return {"value": value_hash, "sources": sources, "conflicts": conflicts}
 
 
-def _previous_provenance_fields(stored_json: Any) -> dict[str, Any]:
+def _previous_provenance_fields(stored: dict[str, Any]) -> dict[str, Any]:
     """The reserved block's ``fields`` from a stored column (empty when the row
     predates B05, which is the only case that falls back to reading the
     container).
 
     B10-3: the parse is the single chain's (store.metadata_object); a malformed
     column has no previous provenance to report (B-VR05M-04/-02 history)."""
-    stored = metadata_object(stored_json)
     reserved = stored.get(R4_PROVENANCE_KEY)
     if isinstance(reserved, dict) and isinstance(reserved.get("fields"), dict):
         return reserved["fields"]
@@ -1759,6 +1758,8 @@ def _merge_document_row(
     existing_meta = metadata_object(existing_document["metadata_json"])
     existing_inner = existing_meta.get("dayu_meta") or existing_meta.get("acquisition") or {}
     new_inner = document_metadata.get("dayu_meta") or document_metadata.get("acquisition") or {}
+    # Parse the shared column once. Both priority branches need its provenance.
+    previous_fields = _previous_provenance_fields(existing_meta)
     capture_conflicts: dict[str, Any] = {}
     if isinstance(existing_inner, dict) and isinstance(new_inner, dict):
         # Same bytes do not prove that two complete sidecars describe the same
@@ -1824,7 +1825,6 @@ def _merge_document_row(
         # Per-column merge (design §B05): priority only ranks candidates now, it
         # no longer decides which truth is written, and a real disagreement is
         # recorded instead of silently resolved.
-        previous_fields = _previous_provenance_fields(existing_document["metadata_json"])
         stored_columns = {
             "title": existing_document["title"],
             "source_type": existing_document["source_type"],
@@ -1912,9 +1912,6 @@ def _merge_document_row(
     # reversed (e.g. Dayu vs Dropbox publication dates). Preserve only facts
     # represented by the current stored columns; don't claim a lower-priority
     # fill was written when this branch intentionally leaves values unchanged.
-    previous_fields = _previous_provenance_fields(
-        existing_document["metadata_json"]
-    )
     stored_columns = {
         "title": existing_document["title"],
         "source_type": existing_document["source_type"],

@@ -353,6 +353,12 @@ def summarize_catalog_with_llm(
             AND failure.generator_name=? AND failure.generator_version=?
             AND failure.retry_after>?
         )
+        -- Review receipts are optional metadata, but unreadable/non-object shared
+        -- metadata is not eligible for a summarization batch. CASE keeps json_type
+        -- from evaluating malformed text on SQLite builds without guaranteed AND order.
+        AND CASE WHEN json_valid(d.metadata_json)
+                 THEN json_type(d.metadata_json)='object'
+                 ELSE 0 END
         AND EXISTS (
             SELECT 1 FROM locations configured_loc
             WHERE configured_loc.document_id=d.document_id

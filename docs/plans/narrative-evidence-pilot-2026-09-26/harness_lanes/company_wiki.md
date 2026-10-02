@@ -1,6 +1,6 @@
 # CWP 独占施工卡：来源、叙述证据与 Worker
 
-> **2026-10-02 当前状态：**E-B 已并入 CWP 主线。commit `9c1f9b7` 修复 `_blocked_environment()` 显式设置 `PYTHONPATH=src`；WSL/Python 3.12、Windows/Python 3.13 定向测试和完整七阶段 pre-push 通过，Actions run `37002442446` 三版 Unit tests 全绿。该 run 三版 Contract tests 仍失败且只有通用 annotation；当前工作树已加入 Contract JUnit identity reporter，focused tests 7 passed、完整 pre-push 绿，待推送后定位具体 Contract testcase。见 [task_plan.md Phase 44–45](../task_plan.md)。
+> **2026-10-02 当前状态：**E-B 已并入 CWP 主线。9c1f9b7 修复 CLI 子进程 PYTHONPATH=src，Actions 37002442446 三版 Unit 全绿。d15a230 的 37005308707 三版 Unit 仍绿；Contract annotations 定位 10 个节点。WSL/Python 3.12 无父级 PYTHONPATH 复现 7 项，已修正 metadata object 资格筛选和 scanner 重复 handoff；三个相关 contract 模块 31 passed，完整七阶段 pre-push 全绿。新增针对 reader/scanner/resolver 的 commit-time contract hook。远端报告的三项 receipt-envelope 用例在 WSL 通过，平台差异待异常类诊断；新修复待 push/CI 验收。见 [task_plan.md Phase 44–46](../task_plan.md)。
 
 开工输入包：本卡、S0a observed 接口表、指定 base/worktree、只读 P/T 样本清单（绝对路径、SHA、大小、期次、locator oracle、隔离复制/清理规则）。缺样本只阻对应真样本验收，不阻本仓 RED/代码整理。
 

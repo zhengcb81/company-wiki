@@ -14,15 +14,17 @@ def _escape_command_data(value: str) -> str:
     return value.replace("%", "%25").replace("\r", "%0D").replace("\n", "%0A")
 
 
-def _failed_cases(report_path: Path) -> list[tuple[str, str, str]] | None:
+def _failed_cases(report_path: Path) -> list[tuple[str, str, str, str]] | None:
     try:
         root = ET.parse(report_path).getroot()
     except (OSError, ET.ParseError):
         return None
 
-    failures: list[tuple[str, str, str]] = []
+    failures: list[tuple[str, str, str, str]] = []
     for case in root.iter("testcase"):
-        if case.find("failure") is None and case.find("error") is None:
+        failure = case.find("failure")
+        error = case.find("error")
+        if failure is None and error is None:
             continue
 
         file_name = case.get("file", "")
@@ -33,14 +35,20 @@ def _failed_cases(report_path: Path) -> list[tuple[str, str, str]] | None:
             node_id = f"{file_name}::{test_name}"
         else:
             node_id = f"{case.get('classname', 'unknown')}::{test_name}"
-        failures.append((file_name, case.get("line", ""), node_id))
+        failure_kind = failure if failure is not None else error
+        assert failure_kind is not None
+        error_type = failure_kind.get("type", "unknown error").rsplit(".", maxsplit=1)[-1]
+        error_type = "".join(char for char in error_type if char.isalnum() or char == "_")
+        failures.append((file_name, case.get("line", ""), node_id, error_type))
     if not failures:
         suites = [element for element in root.iter() if element.tag.endswith("testsuite")]
         suite_errors = sum(int(suite.get("errors", "0")) for suite in suites)
         suite_failures = sum(int(suite.get("failures", "0")) for suite in suites)
         if suite_errors or suite_failures:
             count = suite_errors + suite_failures
-            failures.append(("", "", f"pytest collection/runtime failures ({count})"))
+            failures.append(
+                ("", "", f"pytest collection/runtime failures ({count})", "collection")
+            )
     return failures
 
 
@@ -74,16 +82,17 @@ def main(report_path: str) -> int:
         return 0
 
     summary_lines = [f"## Failed {suite_name}", ""]
-    for file_name, line, node_id in failures[:MAX_ANNOTATIONS]:
+    for file_name, line, node_id, error_type in failures[:MAX_ANNOTATIONS]:
         properties = f" file={_escape_command_data(file_name)}" if file_name else ""
         if line.isdigit():
             properties += f",line={line}"
+        diagnostic = f"{node_id} [{error_type}]"
         print(
             f"::error{properties}::"
-            f"{_escape_command_data(node_id)}"
+            f"{_escape_command_data(diagnostic)}"
         )
         markdown_node_id = node_id.replace("`", "\\`")
-        summary_lines.append(f"- `{markdown_node_id}`")
+        summary_lines.append(f"- `{markdown_node_id}` [{error_type}]")
     if len(failures) > MAX_ANNOTATIONS:
         remainder = len(failures) - MAX_ANNOTATIONS
         print(f"::error::and {remainder} more failing tests")

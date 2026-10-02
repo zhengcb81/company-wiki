@@ -130,7 +130,8 @@ COLUMN_VALUE_HANDOFFS: dict[str, str] = {
     "migration_ledger.py::build_quality_ledger": "1",
     "normalizer.py::normalize_catalog": "1",
     "resolver.py::_metadata_conflict_reason": "1",
-    "scanner.py::_merge_document_row": "4",
+    # One decoded object is reused by both priority branches in the scanner.
+    "scanner.py::_merge_document_row": "3",
     "section_query.py::SectionQueryService.list_sections": "1",
     "service.py::SourceCatalog.query": "2",
     "service.py::SourceCatalog.query_filing_candidates": "1",

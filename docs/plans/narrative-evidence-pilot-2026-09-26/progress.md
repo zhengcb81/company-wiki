@@ -990,3 +990,12 @@
 - 同一 run 三版 Contract tests 失败，公开 API 只给通用 exit 1，不能据此判断失败用例。给 contract pytest 加 run/attempt 专属 JUnit 报告和 always-run failure summary，reporter 支持通用 suite 名称/outcome。
 - helper focused tests **7 passed**；Ruff、workflow YAML parse、`git diff --check` 通过；完整 `python tools/pre_push_gate.py` 七阶段全绿且清理 `.pp-*` 根。
 - 当前 reporter/PWF 改动未提交。提交推送后读取新 run 的 Contract node IDs，定位并修复失败；Unit 全绿不代表完整 CI 通过。
+
+## Session: Contract CI 根因修复与门禁补齐（2026-10-02）
+
+- Actions run 37005308707：三版 Unit 全绿；Contract 诊断得到 10 个失败节点。无父级 PYTHONPATH 的 WSL/Python 3.12 复现 7 个：5 个 metadata malformed/non-object 用例、查询 guard anti-vacuity、B10 handoff；3 个 receipt-envelope 用例在 WSL 通过。
+- 根因一：db3ff32 删除人工审查条件时连带删除 json_valid；恢复与 review policy 独立的 JSON validity + object shape CASE。
+- 根因二：scanner 同时在两个分支从相同 raw column 构造 provenance fields；改为复用单次 metadata_object 结果，B10 baseline 4→3。
+- WSL 三个相关 contract 模块 31 passed in 41.50s；新增 pre-commit focused contract hook 实测 Passed；JUnit reporter helper 7 passed；Ruff/YAML/diff check 已验证。
+- Windows 完整 pre-push 七阶段 GREEN；新增门禁包括完整 unit 与 focused reader/receipt/B10 contract。曾试图在本机 push gate 加整套 CI contracts，但 Windows 子进程 600 秒超时，因此恢复为高风险聚焦 contracts，完整 matrix 保留在远端 CI。
+- 诊断工具上报异常类、不带失败正文；坏 JSON 参数 ID 已压短。实现和 PWF 修改未提交；新远端 CI 尚待验证。远端 run 的 receipt-envelope 三用例与 WSL 结果不同，按下一轮 CI 异常类别继续查。

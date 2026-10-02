@@ -710,3 +710,13 @@
 - 同 run 的 Contract tests 三个矩阵均失败，公开 annotations 只有通用退出码，当前证据不能区分平台差异或具体用例。
 - 已把 JUnit reporter 扩展为通用 suite 名称/outcome，并为 Contract tests 增加独立 always-run 汇报步骤；它只上报 testcase node ID/文件/行号，不输出 traceback。reporter 7 项测试通过，Ruff、workflow YAML parse、diff check 和完整本机七阶段 pre-push 均通过。
 - 后续需先推送 reporter 并读新 CI 的 testcase identities，再复现并修复 Contract 根因；不能把 Unit 已绿写成整条 CI 已绿。
+
+## 2026-10-02 — Contract CI 根因与本地门禁覆盖缺口
+
+- d15a230 的 Actions run 37005308707：三版 Unit 通过；Contract annotations 有 10 个失败 node ID：malformed shared metadata 5 个参数、selection anti-vacuity、三项 receipt-envelope、B10 value handoff。
+- 本机 WSL/Python 3.12 清除父级 PYTHONPATH 后，7 项复现、三项 receipt-envelope 通过。复现错误为 LLM summarizer 在坏/非 object metadata 下仍创建 LLM client，以及 _merge_document_row 将同一列重复交给 provenance helper（5 handoffs vs baseline 4）。
+- commit db3ff32 移除 prompt-review receipt SQL 条件时连带删掉仍必要的 json_valid 保护。修复为独立 CASE：只允许合法 JSON object 进入 summary eligibility；review receipt 仍不作为外发门槛。
+- scanner._merge_document_row 在 priority 与 lower-priority 分支重复调用 provenance parser。现在使用 metadata_object 的已解码对象；B10 baseline 从 4 降至 3，符合只缩减约束。
+- 三个完整相关 contract 模块在 Linux 无父级 PYTHONPATH 下 **31 passed**；完整本机七阶段 pre-push GREEN。新增 pre-commit 按相关源码文件触发重点 contracts；pre-push 运行完整 Unit 和 focused contract，不在每次本地 push 重复整套长 CI Contract matrix。
+- reporter 现输出 testcase identity 与异常类，不输出失败正文；测试参数使用紧凑 IDs，深层 JSON fixture 不再生成超长 annotation。
+- 远端同 run 还报告三项 test_fc905_receipt_envelope.py failure，但 WSL 上对应三项通过。下轮 CI 异常类是定位此平台差异的下一条证据；修复尚未推送，不能报告整条 CI 已绿。

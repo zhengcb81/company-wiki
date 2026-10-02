@@ -21,7 +21,11 @@ def _write_report(path: Path, case_count: int = 1) -> None:
                 "name": f"test_case_{index}",
             },
         )
-        ET.SubElement(case, "failure", {"message": "private traceback omitted"})
+        ET.SubElement(
+            case,
+            "failure",
+            {"message": "private traceback omitted", "type": "AssertionError"},
+        )
     ET.ElementTree(suite).write(path, encoding="utf-8", xml_declaration=True)
 
 
@@ -33,6 +37,7 @@ def test_emits_test_identity_without_failure_body(tmp_path: Path, capsys) -> Non
     output = capsys.readouterr().out
     assert "::error file=tests/unit/test_example.py,line=10::" in output
     assert "tests/unit/test_example.py::test_case_0" in output
+    assert "[AssertionError]" in output
     assert "private traceback omitted" not in output
 
 

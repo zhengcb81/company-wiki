@@ -1,6 +1,6 @@
 # 叙述性证据规划：执行入口
 
-> **2026-10-02 最新状态：**CWP `master@9c1f9b7` 已推送。run `37002442446` 的 Unit tests 在 Python 3.11/3.12/3.13 全绿，验证了显式设置测试子进程 `PYTHONPATH=src` 的修复。完整七阶段本机 pre-push 也全绿。该 run 的三版 Contract tests 仍失败，公开信息没有 testcase 身份；当前工作树已为 Contract step 增加 JUnit identity reporter，focused helper 7 passed、Ruff/YAML/diff 检查与完整七阶段 pre-push 全绿，待推送后定位并修复剩余失败。见 [task_plan.md Phase 37–45](task_plan.md)、[findings.md](findings.md)、[progress.md](progress.md)。
+> **2026-10-02 最新状态：**CWP master@d15a230 已推送。run 37005308707 的 Unit tests 三版全绿；Contract reporter 给出 10 个失败节点，其中 7 个在 WSL/Python 3.12（无父级 PYTHONPATH）复现，根因分别是移除 review gate 时误删 JSON object 完整性筛选，以及 scanner 对同一 metadata 列重复解析。恢复安全 JSON object 过滤、复用已解码 metadata 后，Linux 相关 contract 模块 31 passed；新增按改动文件触发的 pre-commit contract hook 和更完整的 pre-push 重点测试。Windows 完整七阶段 pre-push 全绿。三项 receipt-envelope 失败在 WSL 可通过，远端差异尚待新 CI 以异常类别定位；以下修复尚未提交/推送。见 [task_plan.md Phase 44–46](task_plan.md)、[findings.md](findings.md)、[progress.md](progress.md)。
 
 > **2026-09-29 入口更新：**先读[多余门禁统一清理方案](gate_and_contract_simplification_2026-09-29.md)，再读[六仓独占施工与总指挥计划](parallel_harness_orchestration_2026-09-29.md)。两页依次裁定要清理的真实代码/历史规则、各仓独立写入范围、接口与汇合测试；`task_plan.md` Phase 25 记录本轮规划状态。2026-09-28 的[跨仓总图](cross_repo_mainline_and_delivery_plan_2026-09-28.md)保留历史基线和详细施工背景，冲突时以 2026-09-29 两页为准。本项目已取消逐文件人工审批、review receipt 和常规独立签字；自动测试/完整性断言是常规依据。旧 provider policy 与人工 review 文档不得作为新实施门槛。
 

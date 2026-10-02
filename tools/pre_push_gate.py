@@ -8,11 +8,8 @@ Runs the CI-quality checks plus its complete unit suite before push:
   4. FC-1204 complexity ratchet                          (CI meta-gate)
   5. host-assumption guard                              (CI meta-gate, FC-1307-a)
   6. Full unit suite                                     (CI Unit tests)
-  7. Section-extractor + binding + observation contract tests
-     (the surfaces most often broken by cross-repo changes)
-     plus the META tests about our own tooling: the frozen writer
-     inventory (tests/unit/test_writer_freeze.py) and the host-assumption
-     guard's own regression test.
+  7. The focused high-risk contract tests (including the shared-column reader,
+     receipt-envelope, and B10 handoff contracts) plus the gate's own regression tests.
 
 Step 6's meta pair is the fix for the second-order F-B01-9 lesson: on CI run
 34751519232 the NEW guard step itself failed `test_writer_freeze.py`, a test
@@ -20,9 +17,9 @@ class the local gate never ran - the gate must run the tests that judge the
 gate.  Add a new `scripts/*.py` CLI and this step tells you locally whether it
 needs the legacy-writer freeze.
 
-Exit non-zero on the first red check.  The complete unit suite runs here so
-a local unit regression blocks push.  The broader contract suite and coverage
-ratchet stay in CI.  Local pytest gates use an isolated short basetemp and
+Exit non-zero on the first red check. The full unit suite and focused high-risk
+contract suite run here so regressions in the affected surfaces block push. CI
+still runs the broader contract selection and coverage/mutation ratchets. Local pytest gates use an isolated short basetemp and
 UTF-8 subprocess streams so host TEMP ACL/encoding do not create false reds.
 
 Push protocol (see revenue-forecast ci_root_fix.md):
@@ -94,14 +91,17 @@ def main(argv: list[str] | None = None) -> int:
     ]
     if not args.skip_contract:
         gates.append((
-            [sys.executable, "-m", "pytest", "-q", "--timeout=180",
+            [sys.executable, "-m", "pytest", "-q", "--tb=short", "--timeout=180",
              "tests/contract/test_source_catalog_section_extractor.py",
              "tests/contract/test_fc906a_producer_binding_metadata.py",
              "tests/contract/test_legacy_observation.py",
              "tests/contract/test_zr506_section_chunk_fact.py",
+             "tests/contract/test_r4b05b_shared_column_readers.py",
+             "tests/contract/test_fc905_receipt_envelope.py",
+             "tests/contract/test_b10_read_chain.py",
              "tests/unit/test_writer_freeze.py",
              "tests/contract/test_fc1307_host_assumption_gate.py"],
-            "contract tests (extractor + binding + observation + chunk) + meta gates",
+            "focused contracts (reader + receipt + B10) and gate regression tests",
             None,
         ))
 

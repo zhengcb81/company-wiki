@@ -562,6 +562,19 @@ company-wiki 只负责来源、解析质量、证据定位、检索和来源摘�
 - [x] 将 JUnit failure identity reporter 泛化为可复用 suite 名称/outcome，并给 Contract tests 写入 run/attempt 专属 JUnit 文件；独立 `if: always()` step 输出最多 25 个 node ID、文件和行号，不输出失败正文。
 - [x] reporter focused tests **7 passed**；Ruff、workflow YAML parse、`git diff --check` 通过。
 - [x] 完整 `python tools/pre_push_gate.py` 七阶段全部 GREEN；临时 `.pp-*` 根自动清理。
-- [ ] 提交并推送 Contract reporter；从新的 Actions annotations/summary 取得失败 node ID，按第一性原理复现并修复；本地完整门禁、远端三版本 Unit/Contract 均通过后关闭本阶段。
+- [x] 提交并推送 Contract reporter：d15a230；run 37005308707 给出 10 个 failure identities。
 
-**状态：**Unit CI 已修复并全绿；Contract 根因待新 reporter 提供具体用例。不能用本地 pre-push 的绿灯替代 GitHub 三版本验收。
+**状态：**reporter 已推送并成功提供远端失败身份；根因修复见 Phase 46。
+
+## Phase 46：修复 Contract 根因并让本地门禁覆盖关键面（2026-10-02）
+
+- [x] 检查 d15a230 的 Actions run 37005308707：Unit tests 三版本全绿；Contract tests 三版本失败，reporter 输出 10 个失败 node ID：共享列读取/坏 JSON（6 项）、receipt envelope（3 项）、B10 handoff（1 项）。
+- [x] 在 WSL/Python 3.12 清除父级 PYTHONPATH 后复现其中 7 个失败：5 个 malformed/non-object metadata 参数、查询 anti-vacuity 断言、scanner.py::_merge_document_row handoff 超基线。三个 receipt-envelope 用例在同环境通过；GitHub-only 差异尚未解释。
+- [x] LLM summarizer 恢复独立于 review policy 的 metadata JSON object 资格筛选：使用 CASE WHEN json_valid(...) THEN json_type(...)='object' ELSE 0 END，防止 malformed 输入触发 SQLite JSON 错误，也排除合法 JSON array。
+- [x] Scanner 在 priority 分支前只解析一次 metadata_json，把已解码对象供 provenance 读取复用；B10 handoff baseline 从 4 降为 3，保持 ratchet 只减不增。
+- [x] WSL/Python 3.12、无父级 PYTHONPATH 下三个完整相关 contract 模块 **31 passed in 41.50s**；Windows reporter helper **7 passed**，新增 compact parameter IDs 防止超长 annotation。
+- [x] .pre-commit-config.yaml 为 shared metadata reader/scanner/resolver 改动增加按文件触发的三模块 contract hook；pre-push 保留完整 unit + 聚焦高风险 contracts，完整 GitHub Contract matrix 仍在 CI 执行。
+- [x] 完整本机 python tools/pre_push_gate.py 七阶段 GREEN；Ruff、compileall、config doctor、complexity、host guard、unit 和 reader/receipt/B10 contracts 均通过。
+- [ ] 提交并推送实现、诊断类别与本地门禁；检查新 Actions run。若三项 receipt-envelope 仍失败，按报告出的异常类别继续定位；只有远端 Unit/Contract 三版本都绿才关闭任务。
+
+**状态：**7 个本机可复现失败已修；GitHub-only 的三项 receipt-envelope failure 原因待新 CI 异常类别说明，不能宣称 CI 全绿。

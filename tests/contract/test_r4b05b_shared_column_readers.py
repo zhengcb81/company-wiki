@@ -4,10 +4,9 @@ Work package b05-read-side-malformed-columns, second disposition round.  The ver
 the first round found that the same crash class (B-VR05M2-01, P1) still lived in readers
 the package had mislabelled as "artifacts column, unverified":
 
-  * ``llm_summarizer.summarize_catalog_with_llm`` - the batch selection filters with
-    ``json_extract(d.metadata_json, '$.<receipt>.schema_version')``; without a
-    ``json_valid`` guard SQLite raises ``OperationalError: malformed JSON`` from inside
-    the query for ``{not json``, deep nesting, the empty string and undecodable TEXT.
+  * ``llm_summarizer.summarize_catalog_with_llm`` - malformed or non-object shared
+    metadata must not make a document eligible for LLM summarization. The validity/type
+    guard must safely handle invalid JSON, deep nesting, arrays and undecodable TEXT.
 
 Hermetic: a temp catalog built by the product's own ``CatalogStore`` (no production
 catalog, no network, no LLM call - the client factory raises if it is ever invoked).
@@ -33,16 +32,17 @@ MALFORMED_SHAPES = (
     ("empty string", ""),
     ("payload is a JSON array", "[]"),
 )
+MALFORMED_CASES = MALFORMED_SHAPES + (("undecodable TEXT", b"\xff\xfe{}"),)
 
 
 def _seed_catalog(tmp_path: Path) -> tuple[CatalogStore, Path]:
     """A catalog whose document actually reaches the summarizer's WHERE clause.
 
     Anti-vacuity, second attempt: the first fixture had no ``artifacts`` row, so the
-    JOIN produced no candidates and ``json_extract`` was never EVALUATED on the malformed
-    value - the cases passed while proving nothing (the mutation harness caught it: the
-    mutant that removes the ``json_valid`` guard survived).  With a normalized artifact
-    row and an active location the expression is evaluated for real.
+    JOIN produced no candidates - the cases passed while proving nothing (the mutation
+    harness caught it: removing the eligibility guard still passed). With a normalized
+    artifact row and an active location, the malformed document would otherwise be
+    selected and construct the forbidden LLM client.
     """
     store = CatalogStore(tmp_path / "catalog.sqlite3")
     with store.transaction() as conn:
@@ -120,7 +120,11 @@ def _config(tmp_path: Path) -> CatalogConfig:
     )
 
 
-@pytest.mark.parametrize("label,raw", MALFORMED_SHAPES + (("undecodable TEXT", b"\xff\xfe{}"),))
+@pytest.mark.parametrize(
+    "label,raw",
+    MALFORMED_CASES,
+    ids=[label for label, _ in MALFORMED_CASES],
+)
 def test_the_summarizer_selection_survives_a_malformed_shared_column(
         tmp_path, monkeypatch, label, raw):
     """B-VR05M2-01 (P1): the batch selection must not raise on any of these - a row whose
