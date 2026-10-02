@@ -668,3 +668,9 @@
 - 将 CI 同命令 `python -m pytest tests/unit -q --tb=short` 加入 pre-push 门。最新完整门的 Ruff、compileall、config doctor、复杂度 ratchet、host assumption guard、1040 项 unit 和 contract/meta 全部 GREEN；任一失败会阻止后续推送。
 - 为确认操作系统/依赖差异，用 Python 3.11.15 与 GitHub CI 同版 requirements，在原生 Linux 文件系统复跑：**1040 passed in 169.84s**。已有 Windows/Python 3.13 和 Linux/Python 3.12 全量 unit 也各为 **1040 passed**。
 - 这解释了旧 hook 为什么没有阻止本地可复现回归；它不能单独解释 GitHub 上 36982949142、36984865650 的三版本失败。匿名 job-log API 返回 403 `Must have admin rights to Repository`，具体远端失败用例仍未知；新 push 后需核对 Actions，若仍失败需读取有权限的 job log。
+- Actions `36989156366` 的公开 job steps 显示 3.11 与 3.13 在 Unit tests 失败，耗时约 10 秒和 14 秒；相同 jobs 的依赖安装、Ruff、mypy、compileall/config doctor 成功。3.12 初查时仍运行。失败 annotation 仍只有通用 exit 1，浏览器未登录且 `data-log-url` 为空，无法读取 pytest traceback。
+- 为避免继续猜测，在 CI 的 Unit tests step 写 JUnit XML；失败时只输出最多 25 个失败 case 的 node ID/相对路径/行号为 GitHub annotations，不输出 failure body/traceback，pytest 的原退出码不变。下轮可通过公开 annotations 识别测试，即使 job log 仍需登录。
+- 新增的 annotation helper 三个聚焦测试均通过。但首次默认运行因 pytest `%TEMP%` 根 ACL 返回 `PermissionError [WinError 5]` 而有 539 个 fixture/setup errors；受影响的 wiki projector 单文件在显式短 basetemp 下 **18 passed**，完整 Windows/Python 3.13 unit 使用该根 **1043 passed in 90.80s**。`.pytest_cache` 仅有写权限 warning。
+- 因此本地 push gate 需自己创建短 basetemp、禁用可选 cache provider，并给 pytest 子进程设置 UTF-8；避免把主机 ACL 问题误判成代码失败。对应改动已加到 `tools/pre_push_gate.py`，等待全门重跑。
+- 第一轮修复后的全 gate 证明同样的 `%TEMP%` ACL 影响 pre-push 最后的 contract/meta pytest：73 passed、36 errors 均在 `tmp_path` fixture setup 阶段。已把隔离短 basetemp/UTF-8/cache-provider 配置推广到所有 pre-push pytest commands，避免只修 unit 门；需完整 gate 再验收。
+- 第二轮完整 `python tools/pre_push_gate.py` 七阶段全部 GREEN（Ruff、compileall、config doctor、complexity、host assumption、1043 unit、contract/meta），退出后 `.pp-*` 临时根已自动清理。公开 run `36989156366` 最终 Python 3.11/3.12/3.13 三个 unit jobs 均失败，其他公开 jobs 成功；failure annotation 仍无 node ID，因为本地诊断 workflow 尚未推送。

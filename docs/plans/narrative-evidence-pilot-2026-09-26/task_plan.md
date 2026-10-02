@@ -466,10 +466,36 @@ company-wiki 只负责来源、解析质量、证据定位、检索和来源摘�
 - [x] 更新 `.pre-commit-config.yaml` 说明：全量 unit 由 pre-push 执行，更广 contract/coverage 仍由 CI 执行。
 - [x] 新 pre-push 全门通过：Ruff、compileall、config doctor、复杂度 ratchet、host assumption guard、完整 unit suite、contract/meta suite 均 GREEN。
 - [x] Python 3.11.15、CI 同版依赖、原生 Linux 文件系统复跑 `tests/unit`：**1040 passed in 169.84s**。此前 Windows/Python 3.13 与 Linux/Python 3.12 也各为 1040 passed。
-- [ ] 提交并正常推送新 pre-push 门；检查触发的 GitHub Actions。若远端 Unit tests 仍失败，需取得 repo admin 可见的具体 job log，不能以本地通过宣称远端根因已解决。
+- [x] 提交并正常推送新 pre-push 门（`f97b111`）；push hook 的七个阶段全部 GREEN，远端 `master` SHA 与本地一致。
+- [x] 检查新 Actions run `36989156366`：3.11 与 3.13 的 Unit tests 失败，3.12 曾在运行中；其它公开 job 成功。匿名 check annotation 仍只有通用 exit 1，原始步骤日志需登录。
+- [x] run `36989156366` 最终完成：Python 3.11/3.12/3.13 三个 Unit tests 全失败；secret-scan、cli-smoke、markdown-lint 成功，确认不是 3.11/3.13 单版本问题。
+- [x] 为失败定位增加 JUnit 报告和精简 GitHub error annotations：只公开失败测试 node ID/文件/行，不公开 traceback。已抽为 `tools/summarize_junit_failures.py` 并用 3 个合成 JUnit 用例通过验证。
+- [ ] 新 CI annotations 给出失败用例后，按对应平台与 Python 版本在干净环境 RED 复现、修正后绿测；最终完整三版本 Actions 通过才关闭本阶段。
 
-**结论：**确认的是门禁缺口，不是远端失败的具体根因。pre-commit 没有 pytest；旧 pre-push 没有完整 unit suite。远端 Actions 的 Python 3.11/3.12/3.13 曾同时报 Unit tests exit 1，而当前三种本地 CI 等价环境均通过；GitHub job-log API 匿名访问返回 403，因此仍有远端/本地差异未解释。
+**结论：**确认的是门禁缺口，不是远端失败的具体根因。pre-commit 没有 pytest；旧 pre-push 没有完整 unit suite。全量 unit 已进入本地 pre-push，但新 Actions 仍在 3.11/3.13 失败，说明仅补本地门不能修复远端差异。GitHub 匿名日志受限，CI 现在会把失败 node ID 作为精简 annotation 暴露，取得用例后继续根因修复。
 
 ## Next Step
 
-正常提交并推送本阶段代码与 PWF；随后读取新 Actions run 的状态和可见摘要。若 unit 仍红，继续保留本地全量 pre-push 门，并以有权限的失败日志定位具体用例；远端通过后再按既定 G-0/G-A → NarrativeBundle/G-C → G-D 顺序继续，并在实施 RF 发布门前复核 RF 当前 PWF 与工作树。
+提交并推送 CI 失败用例诊断 annotation；读取公开 annotation 定位红测，修复后重跑完整三版本 Actions。远端通过后再按既定 G-0/G-A → NarrativeBundle/G-C → G-D 顺序继续，并在实施 RF 发布门前复核 RF 当前 PWF 与工作树。
+
+## Phase 38：让无登录 CI 摘要暴露失败用例（2026-10-02）
+
+- [x] 复核 CI 为 `ubuntu-latest`、Python 3.11/3.12/3.13 矩阵，Unit tests 命令与本机复跑一致；依赖安装、Ruff、mypy、compileall/config doctor 在失败 jobs 均成功。
+- [x] 公开 Actions run `36989156366` 中 Python 3.11 与 3.13 Unit tests 失败（约 10 秒/14 秒），3.12 初查时仍在运行。公开 annotations 只有 `Process completed with exit code 1`；job step log 页面未登录时没有可取的日志内容，REST log API 返回 403。
+- [x] 调整 `.github/workflows/ci.yml`：Unit tests 同时写 JUnit XML；失败时只发最多 25 个失败测试的 node ID、相对文件和行号 GitHub error annotations，不打印异常正文/完整堆栈。保留 pytest 原始退出码和 fail-fast 语义。
+- [x] 合成 JUnit 回归 3 项通过：单项失败身份/行号与 traceback 隐去、多失败只输出 25 项并计剩余数、报告缺失时输出受控诊断。
+- [ ] 提交 workflow/PWF 更新，推送并读取公开 annotations，再据具体失败用例修复。
+
+**状态：**本地 pre-push 已覆盖全量 unit，但远端 Actions 仍红；新 workflow 加入受限失败标识后，需靠下一次 Actions 输出继续定位。不要改动产品代码或跳过失败测试来消除红灯。
+
+## Phase 39：让 Windows push gate 使用可写的临时根（2026-10-02）
+
+- [x] 复现首次诊断工具聚焦测试在默认 `%TEMP%` 的 3 个 setup error，明确异常是 `PermissionError [WinError 5]` 创建 `pytest-of-郑曾波`，测试函数尚未执行。
+- [x] 同一 wiki projector 测试在指定 workspace 短 basetemp 后 **18 passed**；完整 unit suite 在显式短 basetemp 下 **1043 passed in 90.80s**。仅有 `.pytest_cache` 不可写的非阻断 warning。
+- [x] 把 pre-push unit 临时根改为 `TemporaryDirectory(prefix='.pp-', dir=PROJECT_ROOT)` 自动建立/清理；运行时强制 UTF-8 子进程环境并禁用可选 pytest cache provider，避免默认用户 TEMP/cache ACL。保留完整测试清单和退出码。
+- [x] 第一次接线后的全门结果：unit 通过，但 contract/meta 73 passed、36 个 tmp_path setup errors，说明同一 ACL 问题也影响定向 pytest 门。
+- [x] 将短 basetemp、UTF-8 和 cache-provider 关闭推广到所有 pre-push pytest 命令（unit 与 contract/meta）。
+- [x] 重跑完整 `python tools/pre_push_gate.py`：Ruff、compileall、config doctor、complexity、host guard、1043 unit 与 contract/meta 全部 GREEN；退出后无 `.pp-*` 根残留。
+- [ ] 提交并正常推送 pre-push 环境修复与 CI 诊断；新 Actions annotations 给出用例后修复远端 CI 红测。
+
+**结论：**539 个 unit setup error 及其后 36 个 contract setup error 与远端 CI 红灯不是一件事。Windows pre-push 自身受默认 pytest TEMP ACL 影响；使用短隔离 basetemp 后完整 1043 项 unit 和定向 contract/meta 均绿。所有本地 pytest 阶段共用隔离临时根，完整 pre-push 已验收 GREEN；新 Actions 仍全矩阵红，待失败 node ID。

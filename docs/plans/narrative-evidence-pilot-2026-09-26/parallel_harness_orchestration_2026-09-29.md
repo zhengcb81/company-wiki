@@ -88,4 +88,4 @@ G-D：逐批按实际消费者引用选择已通过的 G-A/G-B/G2b/G-C；无全�
 
 **发布收尾覆盖：**CWP 已推送 d6d33b8，标准 pre-push 六门全绿；ET 已推送 4924d57。RF 的 historical current_triplet 检查 25 passed/2 failed，暂未推送，恢复时先 RED 修分层。当前暂停，StockWiki/IQS 无远端，FF 支线等待同一 owner 汇合；远端 CWP CI 核对时仍运行。
 
-**2026-10-02 状态覆盖：**CWP 当前基线 `master@69652b5` 与 `origin/master` 同步。Windows/Python 3.13、Linux/Python 3.12、Python 3.11.15 原生 Linux 文件系统全量 unit 均 1040 passed。根因核对发现旧 pre-commit 没有 pytest，旧 pre-push 漏掉完整 unit；现已把 `tests/unit` 加入 pre-push，完整门 GREEN。GitHub runs `36982949142`、`36984865650` 的三版本 Unit tests 仍失败，匿名 job-log API 返回 403，具体远端失败仍未定位。推送门禁后查看新 Actions；细节见 [task_plan.md Phase 37](task_plan.md)。RF 当前 main `3e03ce83` ahead origin 4，既有 execution_runs 文件保持原样。
+**2026-10-02 状态覆盖：**CWP `master@f97b111` 已推送。全量 `tests/unit` 已加入 pre-push；Windows pytest gates 使用独立短 basetemp/UTF-8/cache off，完整七阶段 gate GREEN（1043 unit 通过、临时根无残留）。Actions `36989156366` 的 Python 3.11/3.12/3.13 Unit tests 均失败，其它公开 jobs 成功；workflow 已增加只公开 node ID/文件/行号的 JUnit annotations，诊断改动待推送后读取。详见 [task_plan.md Phase 37–39](task_plan.md)。RF 当前 main `3e03ce83` ahead origin 4，既有 execution_runs 文件保持原样。

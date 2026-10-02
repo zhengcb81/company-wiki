@@ -1,6 +1,6 @@
 # 叙述性证据规划：执行入口
 
-> **2026-10-02 最新状态：**CWP `master@69652b5` 当前基线仍与 `origin/master` 同步；Windows/Python 3.13、Linux/Python 3.12、Python 3.11.15 原生 Linux 文件系统的全量 unit 均 **1040 passed**。已确认 pre-commit 不含 pytest，旧 pre-push 也漏掉完整 unit；新 pre-push 已加入全量 `tests/unit`，并且全门 GREEN。此前 GitHub Actions runs `36982949142`、`36984865650` 的三个 Python job 仍失败，匿名 job-log API 返回 403，具体远端失败未定位。详见 [task_plan.md Phase 37](task_plan.md)、[findings.md](findings.md) 和 [progress.md](progress.md)。推送本地门禁改动后需检查新 Actions；远端通过后再按 G-0/G-A、G-C、G-D 原顺序推进。
+> **2026-10-02 最新状态：**CWP `master@f97b111` 已推送。本地 pre-push 已加入全量 unit；新 Actions `36989156366` 的 Python 3.11/3.12/3.13 全在 Unit tests 失败，其他公开 jobs 成功。匿名页面不提供失败 traceback，故 CI 增加 JUnit annotations，仅公开测试 node ID/文件/行号。Windows 默认 pytest `%TEMP%` ACL 曾导致本地 setup errors；短隔离根下全量 1043 passed，完整 pre-push 七阶段 GREEN，自动清理无残留。下一步推送 CI 诊断，按失败 node ID 修复远端红测。详见 [task_plan.md Phase 37–39](task_plan.md)、[findings.md](findings.md)、[progress.md](progress.md)。
 
 > **2026-09-29 入口更新：**先读[多余门禁统一清理方案](gate_and_contract_simplification_2026-09-29.md)，再读[六仓独占施工与总指挥计划](parallel_harness_orchestration_2026-09-29.md)。两页依次裁定要清理的真实代码/历史规则、各仓独立写入范围、接口与汇合测试；`task_plan.md` Phase 25 记录本轮规划状态。2026-09-28 的[跨仓总图](cross_repo_mainline_and_delivery_plan_2026-09-28.md)保留历史基线和详细施工背景，冲突时以 2026-09-29 两页为准。本项目已取消逐文件人工审批、review receipt 和常规独立签字；自动测试/完整性断言是常规依据。旧 provider policy 与人工 review 文档不得作为新实施门槛。
 

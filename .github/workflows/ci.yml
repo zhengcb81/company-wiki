@@ -44,7 +44,16 @@ jobs:
           PYTHONPATH=src python scripts/config_doctor.py
 
       - name: Unit tests
-        run: python -m pytest tests/unit -q --tb=short
+        run: |
+          report="$RUNNER_TEMP/unit-tests-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}.xml"
+          set +e
+          python -m pytest tests/unit -q --tb=short --junitxml="$report"
+          pytest_status=$?
+          set -e
+          if [[ "$pytest_status" -ne 0 ]]; then
+            python tools/summarize_junit_failures.py "$report"
+          fi
+          exit "$pytest_status"
 
       - name: Contract tests
         run: |

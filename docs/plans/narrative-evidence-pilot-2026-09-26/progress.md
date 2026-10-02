@@ -941,3 +941,14 @@
 - 更新后的 Windows 全门 GREEN：Ruff、compileall、config doctor、复杂度 ratchet、host assumption guard、unit tests、contract/meta tests。
 - Fresh Python 3.11.15 + CI 同版依赖 + 原生 Linux 文件系统完整 unit：**1040 passed in 169.84s**；Windows/Python 3.13 与 Linux/Python 3.12 也均为 1040 passed。
 - 仍未取得 GitHub run `36982949142`、`36984865650` 的具体失败日志（job-log API 403）。因此已修复“push 前本地门缺少 unit”的缺口，但远端失败根因仍未证实；待提交推送后检查新 Actions run，不把本地 GREEN 当成远端验收。
+
+## Session: 新 Actions 仍红与失败用例诊断（2026-10-02）
+
+- `f97b111` 正常推送至 `origin/master`；本地 pre-push 重新运行的七阶段全部 GREEN。GitHub Actions run `36989156366` 已触发，公开 job 状态显示 Python 3.11、3.13 的 Unit tests 失败，3.12 在初查时仍运行；Ruff、mypy、compileall/config doctor 成功。
+- 失败 job 用时分别约 10 秒和 14 秒。公开 annotation 只报告 `Process completed with exit code 1`；GitHub 页面显示未登录，失败步骤日志无公开 log URL；REST logs 403。没有据此猜某个测试。
+- 为获取受限的精确诊断，CI Unit tests 增加 JUnit XML；pytest 失败时发出最多 25 条只含 node ID/文件/行号的 error annotations，不输出完整异常正文。下一步先验证合成报告解析与边界，再推送并按新 Actions annotation 修复。
+- 验证 annotation helper 的三个合成报告测试 **3 passed**。首次完整 pre-push 暴露另一项本机因素：默认 `%TEMP%\pytest-of-郑曾波` ACL 拒绝创建，导致 539 个 tmp fixture setup errors；无关测试函数本身。显式短 workspace basetemp 下受影响模块 **18 passed**、全量 unit **1043 passed in 90.80s**（仅不可写 `.pytest_cache` warning）。
+- `tools/pre_push_gate.py` 已让 unit gate 在 workspace 用 `TemporaryDirectory(prefix='.pp-')` 建立短隔离根，传 `--basetemp`、禁用 optional cache provider，并为子进程设置 `PYTHONIOENCODING=utf-8`/`PYTHONUTF8=1`。需以重跑完整 pre-push 为收据后再提交。
+- 全门第一轮修复后 unit 已通过，末尾 contract/meta 出现 36 个同源 `tmp_path` setup errors（73 passed）；因此把相同 temp/UTF-8/cache 设置推广到所有 pytest gate。完整 gate 再跑中，未推送当前 workflow 诊断改动。
+- 第二轮完整 pre-push 七阶段全部 GREEN，unit 为 1043 passed；contract/meta GREEN，所有 `.pp-*` 测试根退出后均自动删除。Ruff、YAML parse、`git diff --check` 通过。
+- Actions `36989156366` 最终 3.11/3.12/3.13 都在 Unit tests 失败，其它公开 jobs 成功；原始 log 仍不可匿名读取。失败 node ID annotations 尚在本地 workflow 修改中，待随下一提交推送。

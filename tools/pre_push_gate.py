@@ -22,7 +22,8 @@ needs the legacy-writer freeze.
 
 Exit non-zero on the first red check.  The complete unit suite runs here so
 a local unit regression blocks push.  The broader contract suite and coverage
-ratchet stay in CI.
+ratchet stay in CI.  Local pytest gates use an isolated short basetemp and
+UTF-8 subprocess streams so host TEMP ACL/encoding do not create false reds.
 
 Push protocol (see revenue-forecast ci_root_fix.md):
     python tools/pre_push_gate.py   # ~2-3 min
@@ -35,6 +36,7 @@ from __future__ import annotations
 import argparse
 import subprocess
 import sys
+import tempfile
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
@@ -58,6 +60,15 @@ def _run(cmd: list[str], label: str, timeout: int = 600, env_extra: dict | None 
     else:
         print("ok")
     return proc.returncode
+
+
+def _run_pytest_gate(cmd: list[str], label: str) -> int:
+    with tempfile.TemporaryDirectory(prefix=".pp-", dir=PROJECT_ROOT) as basetemp:
+        return _run(
+            [*cmd, "--basetemp", basetemp, "-p", "no:cacheprovider"],
+            label,
+            env_extra={"PYTHONIOENCODING": "utf-8", "PYTHONUTF8": "1"},
+        )
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -95,7 +106,10 @@ def main(argv: list[str] | None = None) -> int:
         ))
 
     for cmd, label, env_extra in gates:
-        rc = _run(cmd, label, env_extra=env_extra)
+        if "-m" in cmd and "pytest" in cmd:
+            rc = _run_pytest_gate(cmd, label)
+        else:
+            rc = _run(cmd, label, env_extra=env_extra)
         if rc != 0:
             print(f"\nGATE RED at: {label}\nFix the root cause (see "
                   f"revenue-forecast ci_root_fix.md), do not bypass.")
