@@ -476,7 +476,7 @@ company-wiki 只负责来源、解析质量、证据定位、检索和来源摘�
 
 ## Next Step
 
-实施 G-A0：用 ET 已提交的 FMP producer golden 与转义/Unicode 反例先写 RED，补 JSON 原件到未翻译正文的确定性抽取和原始字节 locator 回放。随后补 FMP 26 字段、unknown publication 日期语义和正式 import CLI 汇合；复用 RF SourceRef 接口，不修改 RF 文件。CI 修复已完成，后续按 G-0/G-A → NarrativeBundle/G-C → G-D 继续。
+G-A0 JSON原件抽取已完成35项节点验收，提交推送后继续。下一步按[GA1施工细则](ga1_fmp_admission_implementation.md)先用producer golden写26字段/未知publication RED，区分provider canonical hash与定位文本hash，再拆开来源入库和历史as-of资格，完成正式CLI端到端。复用RF SourceRef接口，不修改RF文件；后续G-A FF汇合→NarrativeBundle/G-C→G-D。
 
 ## Phase 38：让无登录 CI 摘要暴露失败用例（2026-10-02）
 
@@ -676,3 +676,16 @@ company-wiki 只负责来源、解析质量、证据定位、检索和来源摘�
 - [x] YAML/触发路径检查、Ruff、diff检查与本机共享快门GREEN，提交并推送`b8b4d12`。Actions #171 / `37076765799` success，workflow60秒、job57秒；本轮未提交未完成G-A0源码。
 
 本阶段只优化CI，G-A0进度不变。历史Phase49–52的matrix/deep安排已被Phase53–54取代，不应恢复。
+
+
+## Phase 55：G-A0 JSON原件抽取（2026-10-03）
+
+- [x] 恢复现有TDD草稿：初轮JSON golden/Unicode三项RED；实现application/json抽取，无翻译，无PDF转录，字节不重写。
+- [x] 覆盖字符串转义、UTF-8/surrogate pair、CRLF/Unicode换行、重复键/多记录/截断/NaN/坏代理项与行数预算；JSON extractor独立版本，旧HTML/TXT版本保持。
+- [x] 严格类型检查与第一次6文件入库链回归通过；真实路径短basetemp未重定向并清理。sandbox运行的旧失败不作为代码缺陷结论。
+- [x] 将纯解析/字段位置/回放拆开，JSON helper最大复杂度8，不放宽既有复杂度标准。
+- [x] RF新核查：rf-impl main3e03ce83，4处dirty历史证据保留；root fcap5319ee26。未修改RF。
+- [x] 最终35项节点包（新增JSON+旧抽取/入库/CLI/E2E+复杂度）GREEN，Ruff/mypy通过，51字符basetemp未重定向、临时目录清理。
+- [ ] 正常commit/push并确认远端短CI；随后进入GA1。
+
+G-A0只是原件到定位正文层。FMP入库仍待GA1，不声称26字段已接通、付费API200或完整FF下载链完成。详细后续接口、反例与大节点E2E见GA1施工细则。

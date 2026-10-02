@@ -31,6 +31,8 @@
 19. [d0_inventory_receipt_2026-09-27.md](d0_inventory_receipt_2026-09-27.md)：D0 本地只读文件与旧引用盘点。
 20. [provider_cost_and_capability_2026-09-27.md](provider_cost_and_capability_2026-09-27.md)：SEC/FMP/Koyfin/Seeking Alpha 的来源、月调用预算及采购闸门。
 
+21. [ga1_fmp_admission_implementation.md](ga1_fmp_admission_implementation.md)：G-A0完成后的FMP26字段、未知公开日期、双文本hash与正式CLI入库大节点施工细则。
+
 ## 实施时的硬边界
 
 - Worker 当前暂停；自动测试通过后，按用户已授权的任务范围实施，不另索逐 job/逐文件授权 receipt。Worker 只有在持久任务、恢复、资源上限及原件保护等自动技术断言通过后才可运行。

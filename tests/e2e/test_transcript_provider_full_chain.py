@@ -324,7 +324,12 @@ def test_provider_failure_or_source_mismatch_leaves_no_raw_file(
         candidate = _candidate(discovery)
         timeout = 0.2 if fault == "timeout" else 5
         if fault in {"timeout", "bad-json", "oversized"}:
-            with pytest.raises((subprocess.TimeoutExpired, json.JSONDecodeError, ValueError)):
+            expected_error = {
+                "timeout": subprocess.TimeoutExpired,
+                "bad-json": json.JSONDecodeError,
+                "oversized": ValueError,
+            }[fault]
+            with pytest.raises(expected_error):
                 _run_provider(
                     root,
                     "fetch-candidate",
@@ -341,7 +346,13 @@ def test_provider_failure_or_source_mismatch_leaves_no_raw_file(
             )
             assert process.returncode == 2
             assert response["status"] == "rejected"
-        assert _count(root, "fetch-candidate") == 1
+        count = _count(root, "fetch-candidate")
+        # A timeout may terminate Python before the provider body runs. Both
+        # paths must leave no import; non-timeout failures reach the body once.
+        if fault == "timeout":
+            assert count in {0, 1}
+        else:
+            assert count == 1
         _assert_no_import(root)
     finally:
         _remove_run(root, tmp_path)

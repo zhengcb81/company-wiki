@@ -10,14 +10,20 @@ from html.parser import HTMLParser
 from typing import Any
 
 from company_wiki.source_contract import source_id_for_sha256
+from .transcript_json_extract import (
+    JsonTranscriptError,
+    json_transcript_rows,
+    replay_json_transcript_fragment,
+)
 
 
 TRANSCRIPT_MATERIAL_SCHEMA = "transcript-material/2"
 TRANSCRIPT_MATERIAL_EXTRACTOR = "transcript-original-text/1.0.0"
+TRANSCRIPT_JSON_EXTRACTOR = "transcript-original-json/1.0.0"
 MAX_TRANSCRIPT_ORIGINAL_BYTES = 10 * 1024 * 1024
 MAX_TRANSCRIPT_LINES = 20000
 TRANSCRIPT_MIME_TYPES = frozenset(
-    {"text/html", "application/xhtml+xml", "text/plain"}
+    {"text/html", "application/xhtml+xml", "text/plain", "application/json"}
 )
 _SHA = re.compile(r"^[0-9a-f]{64}$")
 
@@ -79,7 +85,11 @@ class TranscriptMaterial:
 def _verify_identity(material: TranscriptMaterial) -> None:
     if material.schema_version != TRANSCRIPT_MATERIAL_SCHEMA:
         raise TranscriptMaterialError("unsupported material schema")
-    if material.extractor_version != TRANSCRIPT_MATERIAL_EXTRACTOR:
+    expected_extractor = (
+        TRANSCRIPT_JSON_EXTRACTOR if material.original_mime_type == "application/json"
+        else TRANSCRIPT_MATERIAL_EXTRACTOR
+    )
+    if material.extractor_version != expected_extractor:
         raise TranscriptMaterialError("unsupported extractor version")
     if material.original_mime_type not in TRANSCRIPT_MIME_TYPES:
         raise TranscriptMaterialError("unsupported original MIME type")
@@ -125,6 +135,11 @@ def _replayed_source_text(
         raise TranscriptMaterialError(
             "source locator splits UTF-8 code point"
         ) from exc
+    if mime_type == "application/json":
+        try:
+            return replay_json_transcript_fragment(source_text)
+        except JsonTranscriptError as exc:
+            raise TranscriptMaterialError("invalid JSON source locator") from exc
     return _clean(
         source_text,
         html_entities=mime_type in {"text/html", "application/xhtml+xml"},
@@ -207,7 +222,8 @@ def _material(
         original_byte_size=len(original),
         text_sha256=_sha(body),
         text_byte_size=len(body),
-        extractor_version=TRANSCRIPT_MATERIAL_EXTRACTOR,
+        extractor_version=(TRANSCRIPT_JSON_EXTRACTOR if mime_type == "application/json"
+                           else TRANSCRIPT_MATERIAL_EXTRACTOR),
         lines=_text_lines(rows),
         text_utf8=text_utf8,
     )
@@ -298,6 +314,12 @@ def extract_transcript_material(
         raise TranscriptMaterialError("original is not strict UTF-8") from exc
     if mime_type == "text/plain":
         return _material(original, mime_type, _plain_rows(original))
+    if mime_type == "application/json":
+        try:
+            rows = json_transcript_rows(source, max_lines=MAX_TRANSCRIPT_LINES)
+            return _material(original, mime_type, rows)
+        except JsonTranscriptError as exc:
+            raise TranscriptMaterialError(str(exc)) from exc
     if mime_type in {"text/html", "application/xhtml+xml"}:
         parser = _HTMLTextLines(source)
         parser.feed(source)
