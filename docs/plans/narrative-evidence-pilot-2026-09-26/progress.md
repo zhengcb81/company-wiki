@@ -1068,9 +1068,9 @@
 
 ## Session: 依据真实 step timing 再压缩 CI（2026-10-02）
 
-- 复核远端成功 run #168（`37070651953`，4m16s）：Install 24s，Ruff <1s、mypy 1s、compile/config 2s，Unit 11s，Contract 3m30s。主要日常瓶颈是常规筛选下 2,120 项 portable Contract；旧 branch coverage 长测已删除，单个 job/Unit 不是当前耗时主因。
+- 复核远端成功 run #168（`37070651953`）：workflow 总计 **4m37s**、job **4m33s**；Install 24s，Ruff <1s、mypy 1s、compile/config 2s，Unit 11s，Contract 3m30s。主要日常瓶颈是常规筛选下 2,120 项 portable Contract；旧 branch coverage 长测已删除，单个 job/Unit 不是当前耗时主因。
 - CI/pre-push 收敛到同一 11 个显式 Contract node IDs；覆盖 reader/assertion/scheduler regression、worker ownership、年报与招股书抽取、producer binding、receipt、shared-column、B10 scan。CI 仍保留完整 Unit；没有删除其他测试，完整 Contract/coverage 仅不在日常自动门禁中。
 - 定向验证发现 `--junitxml` 误引用更宽的 `focused_contract_gate`，导致之前一次诊断复跑跑了超出精选清单的合同集。已修成从 `fast_contract_gate` 拼接 JUnit 参数。精选运行 GREEN，JUnit 中 15 个 testcase（含参数化展开），隔离 basetemp 自动清理；本轮报告文件已清理。
 - 检查到 `.pre-commit-config.yaml` 仍调用已删除的 `--metadata-reader-contracts-only`，匹配到相应源文件时会报参数错误；已改用 `--fast-contracts-only`，并更正 pre-commit 文档对 pre-push 全 Unit 的陈旧说明。
 - 直接精选门测试和真实 `pre-commit run metadata-reader-contracts --files tests/contract/test_b10_read_chain.py` 均通过；JUnit 为 15 testcase。默认 pre-commit cache 在受限环境只读，故用 repo 内随机临时 `PRE_COMMIT_HOME` 重跑；hook GREEN，缓存目录退出后删除。该只读 cache 是执行环境问题，不是仓库测试失败。
-- Ruff、workflow 与 pre-commit YAML 解析、单 job/10 分钟/pip cache/Unit/no-auto-coverage 不变量、`verify_plan_claims.py --plan-dir .`（11 plans）及 `git diff --check` 均通过。当前修改含 workflow、push/commit hooks、门禁脚本和 PWF；聚合提交推送后以新 Actions 结果验收时长和绿灯，#168 的 4m16 留作运行全 portable Contract 的基线。
+- Ruff、workflow 与 pre-commit YAML 解析、单 job/10 分钟/pip cache/Unit/no-auto-coverage 不变量、`verify_plan_claims.py --plan-dir .`（11 plans）及 `git diff --check` 均通过。聚合提交 `630196a` 已正常推送；Actions #169（`37074907164`）单 job **59s**、workflow 总计 **1m04s**，成功。较 #168 workflow 总时长下降约 **77%**。结果页没有测试失败，仅有 Node 20 兼容警告和 Ubuntu runner 迁移提示；记为后续维护事项，本轮不扩展升级 action/runner 版本。

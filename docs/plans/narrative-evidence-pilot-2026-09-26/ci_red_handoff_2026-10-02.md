@@ -108,7 +108,7 @@
 
 以下状态覆盖上文尚未刷新到 #168 的快门快照：
 
-- run `37070651953` (#168，`b676980`) 成功，总耗时 **4m16s**；step timings：Install 24s，Ruff <1s，mypy 1s，compile/config 2s，Unit 11s，Contract **3m30s**。因此常规耗时的直接主因是 2,120 项 portable Contract 全量执行，而非 Unit、单 job 或静态检查；旧 branch coverage 导致的 25m–1h46 长测已另行删除。
+- run `37070651953` (#168，`b676980`) 成功，workflow 总计 **4m37s**、job **4m33s**；step timings：Install 24s，Ruff <1s，mypy 1s，compile/config 2s，Unit 11s，Contract **3m30s**。因此常规耗时的直接主因是 2,120 项 portable Contract 全量执行，而非 Unit、单 job 或静态检查；旧 branch coverage 导致的 25m–1h46 长测已另行删除。
 - 当前工作树将 Contract 日常门收敛到 `FAST_CONTRACT_CASES` **11 个显式 node IDs**；JUnit 展开为 **15 个 testcase**。保留完整 Unit 和单 Python 3.12 的静态/config/CLI/secret 门；其余 Contract 与 branch coverage 不删除，留给需要时的手工命令。
 - GitHub CI、pre-push、匹配源文件时触发的 pre-commit 使用同一个 `--fast-contracts-only`。过程中发现并修复 `--junitxml` 曾选中更大的 `focused_contract_gate`，以及 pre-commit 配置残留失效参数 `--metadata-reader-contracts-only`；因此此前该参数带来的长复跑是命令接线错误，不是精选集速度证据。
-- 精选门本机 JUnit run GREEN，报告已核实为 15 个 testcase；临时 basetemp 和报告已清理。真实 pre-commit hook 也 GREEN（受限环境的默认 cache 只读，使用 repo 内临时 `PRE_COMMIT_HOME` 后运行并清理）。Ruff、YAML/pre-commit parse、单 job/timeout/cache/unit/no-coverage 不变量、11-plan claim verifier 与 diff 检查均通过。接下来可聚合 commit/push；新 Actions 是速度和绿灯最终验收，不得把本机定向通过写成远端全绿。
+- 精选门本机 JUnit run GREEN，报告已核实为 15 个 testcase；临时 basetemp 和报告已清理。真实 pre-commit hook 也 GREEN（受限环境的默认 cache 只读，使用 repo 内临时 `PRE_COMMIT_HOME` 后运行并清理）。Ruff、YAML/pre-commit parse、单 job/timeout/cache/unit/no-coverage 不变量、11-plan claim verifier 与 diff 检查均通过。提交 `630196a` 已推送；Actions #169 (`37074907164`) 已全绿，job **59s**、workflow 总计 **1m04s**，较 #168 总时长快约 **77%**。只有 Node 20 兼容警告和 Ubuntu runner 迁移提示，无测试失败。

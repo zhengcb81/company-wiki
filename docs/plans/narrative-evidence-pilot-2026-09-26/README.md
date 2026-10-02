@@ -1,6 +1,6 @@
 # 叙述性证据规划：执行入口
 
-> **2026-10-02 最新状态：**CI 主因已由真实 step timing 定位：run `37070651953` 在 4m16s 通过，Contract 用例耗时 3m30s（约 82%），Unit 为 11s、依赖安装 24s；此前全量 coverage 曾耗 25 分钟至 1h46。CI 与本机 push/pre-commit 正收敛为同一精选契约集（11 个显式 node IDs，含 worker ownership、reader-chain、叙述抽取和既有红灯回归），保留完整 Unit，移除日常 2,120 项 portable Contract 执行及自动 coverage。精选集本机 JUnit 验收、workflow/计划校验通过后推送，最终以新 Actions 的实际 wall time/绿灯验收。参数路由与旧 pre-commit 标记已发现并修复；当前状态见 task_plan Phase 53 与[CI 交接卡](ci_red_handoff_2026-10-02.md)。
+> **2026-10-02 最新状态：**CI 主因由真实 step timing 定位：#168 job 4m33s、workflow 总计 4m37s；Contract 用例 3m30s（约 77% job 时长），Unit 11s、依赖安装 24s；此前全量 coverage 曾耗 25 分钟至 1h46。CI 与本机 push/pre-commit 收敛为同一精选契约集（11 个显式 node IDs，含 worker ownership、reader-chain、叙述抽取和既有红灯回归），保留完整 Unit，移除日常 2,120 项 portable Contract 执行及自动 coverage。新方案已由 [Actions #169](https://github.com/zhengcb81/company-wiki/actions/runs/37074907164) 验收：单 job 全绿，job 59s、workflow 总计 1m04s（比 #168 总时长缩短约 77%）。参数路由和失效的 pre-commit 标记也已修复；详情见 task_plan Phase 53 与[CI 交接卡](ci_red_handoff_2026-10-02.md)。
 
 > **2026-09-29 入口更新：**先读[多余门禁统一清理方案](gate_and_contract_simplification_2026-09-29.md)，再读[六仓独占施工与总指挥计划](parallel_harness_orchestration_2026-09-29.md)。两页依次裁定要清理的真实代码/历史规则、各仓独立写入范围、接口与汇合测试；`task_plan.md` Phase 25 记录本轮规划状态。2026-09-28 的[跨仓总图](cross_repo_mainline_and_delivery_plan_2026-09-28.md)保留历史基线和详细施工背景，冲突时以 2026-09-29 两页为准。本项目已取消逐文件人工审批、review receipt 和常规独立签字；自动测试/完整性断言是常规依据。旧 provider policy 与人工 review 文档不得作为新实施门槛。
 
