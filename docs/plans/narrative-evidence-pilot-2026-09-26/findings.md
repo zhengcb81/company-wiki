@@ -796,3 +796,13 @@
 - `.pre-commit-config.yaml` 也残留已删除的 `--metadata-reader-contracts-only` 参数，且注释错误声称 pre-push 执行全量 Unit；统一修为 `--fast-contracts-only` 并更新说明。这是此前仅看 `ci.yml` 和 pre-push 时会漏掉的本地门禁接线缺陷。
 - 实际调用 pre-commit 首次因 sandbox 下默认 `%USERPROFILE%\.cache\pre-commit` 只读而在配置数据库写入前失败；改用仓库 `tmp/` 中唯一的临时 `PRE_COMMIT_HOME` 后，真实 hook **Passed**，目录清理。它是测试环境缓存权限限制，并非 CI/testcase 红灯，也没有改写全局缓存。
 - 新方案 commit `630196a` 已推送；Actions #169 / run `37074907164` 单 job **59s**、workflow 总计 **1m04s**，成功且无测试失败。较 #168 的 workflow 总时长缩短约 **77%**。页面只显示 1 warning + 1 notice：Actions 的 Node 20 兼容提示和 Ubuntu runner 迁移提示，均非测试失败；作为后续维护项记录，不扩大本轮改动。
+
+
+## 2026-10-03 — 再退一步核对真实 CI 基线（本节覆盖历史快照）
+
+- 通过公开 GitHub REST API 复核最新运行，不依赖旧浏览器标签：#169 `37074907164` success / 64s；#170 `37075453339` success / 61s。#170 安装24s、Unit15s、精选Contract2s、mypy2s；当前主要成本是干净安装，不再是测试长跑。
+- 更早成功基线 #150（2026-09-19）总计10m06s；3.11/3.12/3.13的合同测试244/228/250s，coverage303/272/305s。公开列表在9月19日至10月2日之间未见运行，因此不能虚构“上周”某次更快的实测。
+- 已确认两层慢因：自动全仓branch coverage（旧#165/#166仍显示in_progress）；以及全2,120项Contract（#168的210s，占job77%）。不是Unit，也不是Ruff/mypy。此前失败根因包括漏声明cryptography、测试隐式依赖RF本机corpus、过期fixture/合同和本机临时路径；无证据支持随机删除所谓flaky测试。
+- 本轮进一步简化：纯根目录Markdown或docs下Markdown提交不触发CI；测试夹具目录的Markdown仍触发，任何代码/config/依赖/workflow变更仍触发。单job硬超时收紧5分钟，保留全Unit与11个精选合同ID（15个参数化项）。完整Contract/coverage仍只手工按大节点需要执行。
+- GitHub对paths-ignore的行为：被跳过的workflow不会产生成功check。若未来启用PR必需check，应改为始终有轻量成功check的方案；当前个人仓库不新增分支保护配置。本轮不改动未完成的G-A0抽取代码，也不把它混入CI提交。
+- 下一次代码提交需核对远端在5分钟内全绿；纯文档提交预期无CI。日常目标约1–2分钟，5分钟只是硬上限，不承诺每次runner排队时间。

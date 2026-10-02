@@ -112,3 +112,13 @@
 - 当前工作树将 Contract 日常门收敛到 `FAST_CONTRACT_CASES` **11 个显式 node IDs**；JUnit 展开为 **15 个 testcase**。保留完整 Unit 和单 Python 3.12 的静态/config/CLI/secret 门；其余 Contract 与 branch coverage 不删除，留给需要时的手工命令。
 - GitHub CI、pre-push、匹配源文件时触发的 pre-commit 使用同一个 `--fast-contracts-only`。过程中发现并修复 `--junitxml` 曾选中更大的 `focused_contract_gate`，以及 pre-commit 配置残留失效参数 `--metadata-reader-contracts-only`；因此此前该参数带来的长复跑是命令接线错误，不是精选集速度证据。
 - 精选门本机 JUnit run GREEN，报告已核实为 15 个 testcase；临时 basetemp 和报告已清理。真实 pre-commit hook 也 GREEN（受限环境的默认 cache 只读，使用 repo 内临时 `PRE_COMMIT_HOME` 后运行并清理）。Ruff、YAML/pre-commit parse、单 job/timeout/cache/unit/no-coverage 不变量、11-plan claim verifier 与 diff 检查均通过。提交 `630196a` 已推送；Actions #169 (`37074907164`) 已全绿，job **59s**、workflow 总计 **1m04s**，较 #168 总时长快约 **77%**。只有 Node 20 兼容警告和 Ubuntu runner 迁移提示，无测试失败。
+
+
+## 2026-10-03 — 再退一步核对真实 CI 基线（本节覆盖历史快照）
+
+- 通过公开 GitHub REST API 复核最新运行，不依赖旧浏览器标签：#169 `37074907164` success / 64s；#170 `37075453339` success / 61s。#170 安装24s、Unit15s、精选Contract2s、mypy2s；当前主要成本是干净安装，不再是测试长跑。
+- 更早成功基线 #150（2026-09-19）总计10m06s；3.11/3.12/3.13的合同测试244/228/250s，coverage303/272/305s。公开列表在9月19日至10月2日之间未见运行，因此不能虚构“上周”某次更快的实测。
+- 已确认两层慢因：自动全仓branch coverage（旧#165/#166仍显示in_progress）；以及全2,120项Contract（#168的210s，占job77%）。不是Unit，也不是Ruff/mypy。此前失败根因包括漏声明cryptography、测试隐式依赖RF本机corpus、过期fixture/合同和本机临时路径；无证据支持随机删除所谓flaky测试。
+- 本轮进一步简化：纯根目录Markdown或docs下Markdown提交不触发CI；测试夹具目录的Markdown仍触发，任何代码/config/依赖/workflow变更仍触发。单job硬超时收紧5分钟，保留全Unit与11个精选合同ID（15个参数化项）。完整Contract/coverage仍只手工按大节点需要执行。
+- GitHub对paths-ignore的行为：被跳过的workflow不会产生成功check。若未来启用PR必需check，应改为始终有轻量成功check的方案；当前个人仓库不新增分支保护配置。本轮不改动未完成的G-A0抽取代码，也不把它混入CI提交。
+- 下一次代码提交需核对远端在5分钟内全绿；纯文档提交预期无CI。日常目标约1–2分钟，5分钟只是硬上限，不承诺每次runner排队时间。

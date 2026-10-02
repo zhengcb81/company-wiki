@@ -476,7 +476,7 @@ company-wiki 只负责来源、解析质量、证据定位、检索和来源摘�
 
 ## Next Step
 
-修复 `test_writer_freeze.py` 中四个 CLI 子进程环境缺失 `PYTHONPATH=src` 的问题，运行完整 pre-push 后提交推送；检查下一轮三版本 Actions 是否通过。远端通过后再按既定 G-0/G-A → NarrativeBundle/G-C → G-D 顺序继续，并在实施 RF 发布门前复核 RF 当前 PWF 与工作树。
+实施 G-A0：用 ET 已提交的 FMP producer golden 与转义/Unicode 反例先写 RED，补 JSON 原件到未翻译正文的确定性抽取和原始字节 locator 回放。随后补 FMP 26 字段、unknown publication 日期语义和正式 import CLI 汇合；复用 RF SourceRef 接口，不修改 RF 文件。CI 修复已完成，后续按 G-0/G-A → NarrativeBundle/G-C → G-D 继续。
 
 ## Phase 38：让无登录 CI 摘要暴露失败用例（2026-10-02）
 
@@ -666,3 +666,13 @@ company-wiki 只负责来源、解析质量、证据定位、检索和来源摘�
 - [x] 正常提交推送 commit `630196a` 并确认新 Actions 单 job 全绿及实际 wall time。run [37074907164](https://github.com/zhengcb81/company-wiki/actions/runs/37074907164) 的 workflow 为 **1m04s**，job 为 **59s**；没有测试失败。仅有 GitHub 提示 `actions/checkout@v4`、`setup-python@v5` 的 Node 20 兼容警告，以及 `ubuntu-latest` 即将迁移的 runner 提示，不是本次失败原因，后续可单独评估。
 
 **当前结论：**本机这 11 项精选合同通过，报告展开 15 个 testcase；真实 pre-commit hook 也在 repo-local 临时缓存下通过。上一轮的长耗时定位为 JUnit 参数错误地运行较宽 `focused_contract_gate`，而 GitHub #168 的主瓶颈确实是 3m30 的全 portable Contract。#169 已证明新快门单 job 全绿并在 1m04s 完成；同一清单用于提交 hook、push hook 和 CI。阶段完成。
+
+
+## Phase 54：再次核对基线并消除文档空跑（2026-10-03）
+
+- [x] REST API核对早期成功运行与最新#169/#170；确认目前61–64秒全绿，Unit15秒/精选合同2秒。
+- [x] docs下Markdown与根目录Markdown仅文档提交跳过CI；测试夹具Markdown及代码/config/workflow仍触发。
+- [x] 单job超时收紧至5分钟；修正pre_push_gate过时的“CI全Contract”注释。
+- [ ] YAML/触发路径检查、Ruff、diff检查，限定本轮文件正常提交推送；通过公开API确认推送结果。本轮不提交尚未完成的G-A0源码。
+
+本阶段只优化CI，G-A0进度不变。历史Phase49–52的matrix/deep安排已被Phase53–54取代，不应恢复。

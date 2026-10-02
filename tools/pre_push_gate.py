@@ -24,7 +24,8 @@ needs the legacy-writer freeze.
 
 Exit non-zero on the first red check. The full local run is useful before a
 large integration but is not part of every push. GitHub CI runs all Unit and
-portable Contract tests; full-tree coverage and the coverage ratchet are manual.
+the curated Contract smoke set; full Contract tests, full-tree coverage and
+the coverage ratchet are manual.
 Local pytest gates use an isolated short basetemp and UTF-8 subprocess streams
 so host TEMP ACL/encoding do not create false reds.
 

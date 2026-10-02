@@ -3,8 +3,14 @@ name: CI
 on:
   push:
     branches: [master]
+    paths-ignore:
+      - "docs/**/*.md"
+      - "*.md"
   pull_request:
     branches: [master]
+    paths-ignore:
+      - "docs/**/*.md"
+      - "*.md"
 
 # Replace an older run when another commit arrives on the same ref.
 concurrency:
@@ -15,7 +21,7 @@ jobs:
   test:
     name: Fast checks (Python 3.12)
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 5
 
     steps:
       - uses: actions/checkout@v4
