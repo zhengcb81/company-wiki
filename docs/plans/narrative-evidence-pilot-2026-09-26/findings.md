@@ -819,3 +819,5 @@
 - 环境记录：sandbox用户读取外仓Git触发dubious ownership；转用已授权真实用户只读命令成功，没有修改global safe.directory。此前ET源码路径误写src不存在；实际producer位于仓库根transcript_api.py，已读到真实算法。
 
 - G-A0最终节点包35项全部GREEN，Ruff/mypy通过。中间run 34 passed/1 failed定位为旧timeout E2E对计数的错误前提：Python可能在0.2秒启动阶段即被kill，尚未写入计数。修正为超时计数0或1，其他故障仍必须1，并把异常从三类任选改为每种故障的精确类型；kill+communicate/零raw与sidecar断言保留。没有延长timeout、没有改产品行为。复跑同一35项GREEN，运行root清理。
+
+- G-A0发布收据：`29327f3`正常commit/push至origin/master，真实pre-commit与pre-push GREEN；[Actions37077718031](https://github.com/zhengcb81/company-wiki/actions/runs/37077718031) success，workflow57秒。生产配置和raw未变；下一步GA1。

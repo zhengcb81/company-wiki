@@ -476,7 +476,7 @@ company-wiki 只负责来源、解析质量、证据定位、检索和来源摘�
 
 ## Next Step
 
-G-A0 JSON原件抽取已完成35项节点验收，提交推送后继续。下一步按[GA1施工细则](ga1_fmp_admission_implementation.md)先用producer golden写26字段/未知publication RED，区分provider canonical hash与定位文本hash，再拆开来源入库和历史as-of资格，完成正式CLI端到端。复用RF SourceRef接口，不修改RF文件；后续G-A FF汇合→NarrativeBundle/G-C→G-D。
+G-A0已提交推送29327f3，35项节点验收与远端CI（57秒）通过。下一步按[GA1施工细则](ga1_fmp_admission_implementation.md)先用producer golden写26字段/未知publication RED，区分provider canonical hash与定位文本hash，再拆开来源入库和历史as-of资格，完成正式CLI端到端。复用RF SourceRef接口，不修改RF文件；后续G-A FF汇合→NarrativeBundle/G-C→G-D。
 
 ## Phase 38：让无登录 CI 摘要暴露失败用例（2026-10-02）
 
@@ -686,6 +686,6 @@ G-A0 JSON原件抽取已完成35项节点验收，提交推送后继续。下一
 - [x] 将纯解析/字段位置/回放拆开，JSON helper最大复杂度8，不放宽既有复杂度标准。
 - [x] RF新核查：rf-impl main3e03ce83，4处dirty历史证据保留；root fcap5319ee26。未修改RF。
 - [x] 最终35项节点包（新增JSON+旧抽取/入库/CLI/E2E+复杂度）GREEN，Ruff/mypy通过，51字符basetemp未重定向、临时目录清理。
-- [ ] 正常commit/push并确认远端短CI；随后进入GA1。
+- [x] 提交推送29327f3，Actions37077718031 success/57秒，工作树无未提交实现；随后进入GA1。
 
 G-A0只是原件到定位正文层。FMP入库仍待GA1，不声称26字段已接通、付费API200或完整FF下载链完成。详细后续接口、反例与大节点E2E见GA1施工细则。
