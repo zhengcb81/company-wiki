@@ -122,3 +122,5 @@
 - 本轮进一步简化：纯根目录Markdown或docs下Markdown提交不触发CI；测试夹具目录的Markdown仍触发，任何代码/config/依赖/workflow变更仍触发。单job硬超时收紧5分钟，保留全Unit与11个精选合同ID（15个参数化项）。完整Contract/coverage仍只手工按大节点需要执行。
 - GitHub对paths-ignore的行为：被跳过的workflow不会产生成功check。若未来启用PR必需check，应改为始终有轻量成功check的方案；当前个人仓库不新增分支保护配置。本轮不改动未完成的G-A0抽取代码，也不把它混入CI提交。
 - 下一次代码提交需核对远端在5分钟内全绿；纯文档提交预期无CI。日常目标约1–2分钟，5分钟只是硬上限，不承诺每次runner排队时间。
+
+- 本轮最终验收：`b8b4d12`已推送；[Actions #171](https://github.com/zhengcb81/company-wiki/actions/runs/37076765799) **success，workflow60秒/job57秒**。安装25秒、Unit14秒、精选Contract3秒。当前三次连续快门均绿（64/61/60秒），无需继续删掉便宜且有效的Unit检查。YAML、Ruff、diff及真实push hook GREEN；测试basetemp未重定向且退出清理。查询一次尚未结束job时错误把null completed_at转换为日期，后续使用完成状态再读取时间；这是本机查询脚本错误，不是CI失败。

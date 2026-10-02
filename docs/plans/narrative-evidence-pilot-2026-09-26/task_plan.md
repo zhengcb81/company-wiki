@@ -673,6 +673,6 @@ company-wiki 只负责来源、解析质量、证据定位、检索和来源摘�
 - [x] REST API核对早期成功运行与最新#169/#170；确认目前61–64秒全绿，Unit15秒/精选合同2秒。
 - [x] docs下Markdown与根目录Markdown仅文档提交跳过CI；测试夹具Markdown及代码/config/workflow仍触发。
 - [x] 单job超时收紧至5分钟；修正pre_push_gate过时的“CI全Contract”注释。
-- [ ] YAML/触发路径检查、Ruff、diff检查，限定本轮文件正常提交推送；通过公开API确认推送结果。本轮不提交尚未完成的G-A0源码。
+- [x] YAML/触发路径检查、Ruff、diff检查与本机共享快门GREEN，提交并推送`b8b4d12`。Actions #171 / `37076765799` success，workflow60秒、job57秒；本轮未提交未完成G-A0源码。
 
 本阶段只优化CI，G-A0进度不变。历史Phase49–52的matrix/deep安排已被Phase53–54取代，不应恢复。
