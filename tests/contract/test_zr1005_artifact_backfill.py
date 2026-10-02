@@ -17,6 +17,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import sqlite3
 import sys
 from pathlib import Path
@@ -29,7 +30,10 @@ from company_wiki.source_catalog.artifact_backfill import (  # noqa: E402
     run_artifact_backfill,
 )
 
-PRODUCTION_CATALOG = Path(r"C:\Users\郑曾波\Projects\company-wiki\.source_catalog\catalog.sqlite3")
+PRODUCTION_CATALOG = Path(os.environ.get(
+    "COMPANY_WIKI_TEST_CATALOG",
+    r"C:\Users\郑曾波\Projects\company-wiki\.source_catalog\catalog.sqlite3",
+))
 NOW = "2026-08-23T12:00:00Z"
 _REGISTRY = {"source_catalog_normalizer": {"1.0.0"}}
 
@@ -109,6 +113,11 @@ def _seed_catalog(cat_path: Path, root: Path) -> None:
 
 
 @pytest.mark.timeout(900)
+@pytest.mark.real_data
+@pytest.mark.skipif(
+    os.environ.get("COMPANY_WIKI_RUN_EXTERNAL_DATA_TESTS") != "1",
+    reason="set COMPANY_WIKI_RUN_EXTERNAL_DATA_TESTS=1 to use the owner's live catalog",
+)
 def test_c1_dry_run_real_catalog():
     before = _row_counts(PRODUCTION_CATALOG)
     result = run_artifact_backfill(

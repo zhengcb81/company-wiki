@@ -35,6 +35,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import sqlite3
 import sys
 from pathlib import Path
@@ -48,12 +49,14 @@ from company_wiki.source_catalog.processing_demand import (  # noqa: E402
 )
 from company_wiki.source_catalog.scheduler import DemandScheduler  # noqa: E402
 
-PRODUCTION_CATALOG = Path(
-    r"C:\Users\郑曾波\Projects\company-wiki\.source_catalog\catalog.sqlite3"
-)
-GOLDEN_CORPUS = Path(
-    r"C:\Users\郑曾波\Projects\revenue-forecast\assurance\unified_completion\corpus\golden_corpus.json"
-)
+PRODUCTION_CATALOG = Path(os.environ.get(
+    "COMPANY_WIKI_TEST_CATALOG",
+    r"C:\Users\郑曾波\Projects\company-wiki\.source_catalog\catalog.sqlite3",
+))
+GOLDEN_CORPUS = Path(os.environ.get(
+    "COMPANY_WIKI_GOLDEN_CORPUS",
+    r"C:\Users\郑曾波\Projects\revenue-forecast\assurance\unified_completion\corpus\golden_corpus.json",
+))
 BROKER_KIND = "broker_process"
 LLM_KIND = "llm"
 
@@ -139,6 +142,12 @@ def _table_count(path: Path, table: str) -> int:
 # ---------------------------------------------------------------------------
 
 
+@pytest.mark.real_data
+@pytest.mark.requires_corpus
+@pytest.mark.skipif(
+    os.environ.get("COMPANY_WIKI_RUN_EXTERNAL_DATA_TESTS") != "1",
+    reason="set COMPANY_WIKI_RUN_EXTERNAL_DATA_TESTS=1 to use the owner's live catalog/corpus",
+)
 def test_c1_seven_zijin_brokers_active_with_processed_artifacts():
     """The minimal cohort exists in the production catalog as active docs
     whose owner-approved processing (GP-010, 2026-09-03) is on disk: every

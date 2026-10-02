@@ -1037,4 +1037,27 @@
 - 验证：PyYAML 可解析 workflow；结构检查确认 coverage/static 的 `if` 都限定 Python 3.12、mutation canary step 已移除、workflow test commands 无 `|| true`；`git diff --check` 通过。综合成隔离 pytest-cov E2E 的第一次探针因转义错误报 SyntaxError、未产生报告；纠正后 probe 调用真实 source-catalog module 再故意 fail，子进程返回 1、生成 fresh JSON 且报告中含 `flags.py`，独立目录自动清理。
 - 首次 coverage probe 曾写改 tracked 根目录 `.coverage`，而非仅写独立 JSON；发现后立即 `git restore -- .coverage`，恢复到本轮开始时干净状态并确认 status 不再列该文件。隔离 probe 输出仍在各自 `tmp/cx*` 子目录且已由 `TemporaryDirectory` 清理。没有改动测试原文或 catalog 数据。
 - 最终本地验收：`verify_plan_claims.py --plan-dir .` 为 **OK (11 plans)**；workflow YAML/invariants 检查通过；CLI smoke 对 `collect_news` 捕获并核 exit=78/冻结文案、`snapshot_manifest --help` 返回 0；`git diff --check` 通过。完整 pre-push 的既有绿收据对应两项本地 regression patch 后的工作树；本轮 workflow/PWF 修改不改变 Python 运行代码。
-- 当前尚未完成：最近一次完整 pre-push 的绿收据来自仅 6 行本地 fixture/gate 修改之后；workflow/PWF 变更是非 Python 逻辑，最终还需总览 diff、正常提交推送，再以新的 Actions matrix 验收。若 no-`|| true` coverage run 发现额外测试失败，应按 JUnit 新证据修，不可恢复吞错。
+- 提交前的完整 pre-push 七阶段全部 GREEN；workflow/PWF 与两项 regression patch 已在 `41aa176` 同批正常提交推送。若 no-`|| true` coverage run 发现额外测试失败，应按 JUnit 新证据修，不可恢复吞错。
+- 聚合提交 `41aa176` 已经普通 commit/push，pre-commit 相关 contract、Ruff/config/host guard 和完整 pre-push 七段均 Passed；`HEAD == origin/master == 41aa176161a780d5c42d82070d0d586ccd754353`，工作树干净。run `37055076384` (#166) 已触发；3.12 页面快照显示静态步骤完成、Unit tests 已结束、Contract tests 进行中（约 2 分钟），未见失败 annotation；其它 fast jobs 中 secret-scan/markdown-lint 已通过，CLI smoke 当时在运行。job logs 匿名不可见，继续以 run status 和 reporter summary 为准。
+- 后续 run `37055076384` 摘要显示 cli-smoke、secret-scan、markdown-lint 已通过，测试矩阵 **2/3 完成**且未见错误 annotation；3.12 job 已越过 Contract failure summary，进入单次 Branch coverage ratchet，约 6 分钟仍在跑。故这两版 Unit+Contract 可暂记远端完成，其余 3.12 coverage/threshold 与最终 run status 仍 pending。
+- 最新复核 run `37055076384`：3.11、3.13、fast jobs 均通过；3.12 Unit+Contract 已结束，矩阵仍 2/3，唯一活跃步骤是 Branch coverage ratchet，约 25 分钟仍在执行、未见失败 annotation。旧 run `37045273003` 的三版 coverage 已超过 1h46；已确认只将 coverage 从三次降至一次，仍会让每次提交等待过久。
+- 按用户关于“每次 commit 不应等待长测”的反馈继续调整：当前工作树将 push/PR CI 留为三版 Unit+Contract + 单次静态门禁，把 `tests/` 全量 fresh coverage/FC-1204 ratchet 移入每周 Monday 02:17 UTC 与手动的 `.github/workflows/deep-validation.yml`，加 180 分钟 job 上限；同 ref 新 push 自动取消过期快速 CI。已知红灯为环境/fixture/依赖问题，尚无证据证明测试随机不稳定；不删除关键测试，只对生产目录/真实根/并发类测试保留长测位置。
+
+## Session: 精确分流 CI 中的环境依赖与慢速用例（2026-10-02）
+
+- 将原来 CI 按整个文件忽略的 8 个 contract 模块改为测试级标记；本机真数据用例标记 `real_data`，跨仓样本用例标记 `requires_corpus`，多进程并发模块标记 `slow`。push/PR 用例表达式为 `not slow and not real_data and not requires_corpus`，保留其中合成测试；每周/手动 Deep Validation 只排除无 runner 数据的 `real_data/requires_corpus`，仍运行 slow 与全部可移植用例。
+- 已确认 ZR-409 整文件 gate 过宽；现在生产 root/config journey 单独分类，portable config/export/temp fixture scan 回到普通 CI。移除了要求 `future_lake` 必须显式声明逐根 reusable flag 的过时断言，保留配置 root/adapter/read-only 与兼容 policy export 检查。
+- `COMPANY_WIKI_GOLDEN_CORPUS` 已覆盖三个 golden corpus 测试的默认跨仓路径；ZR-1006 也有相同覆盖。`COMPANY_WIKI_TEST_CATALOG`、`COMPANY_WIKI_REAL_WIKI_ROOT` 和总开关 `COMPANY_WIKI_RUN_EXTERNAL_DATA_TESTS=1` 给本机数据验收提供明确入口。
+- 完整 Contract 探索发现 CW-2.28 backfill parser isolation 的 `test_parser_failure_does_not_block_next_document` 单项耗时 **43.32 秒**；同文件首三项耗时约 50 秒，文件中的其它案例也围绕 parser subprocess/backfill 状态。将该模块整体标记 `slow`，而 Deep Validation 仍收集完整模块的 14 个测试。
+- 本机 Python 3.13.9：原忽略的 8 个模块按 push marker 跑 **48 passed, 18 deselected in 8.60s**；FC-804 slow 并发组 **6 passed in 14.30s**。均确认 57 字符 repo-local basetemp 且 pytest 未重定向，隔离目录自动清理。
+- 原失败根因仍是环境/测试合同/fixture/依赖问题；没有观察到应靠删测试解决的随机 flaky。CI 设计改为每次 commit 快速验证、每周/手动全量 coverage/slow 和 owner 主机 opt-in 数据测试。最终整体验收、commit/push 与新 Actions 结果仍待完成。
+- 一次完整本机 Contract 尝试在 slow 分流前选中 2,134 项；已运行部分无失败，执行到 parser isolation 长用例时主动中断以定位耗时并完成清理。该试跑未完成、不记 GREEN；最终要以新 push 的 GitHub 3 版 fast matrix 作为全量可移植 Contract 验收。
+
+## Session: CI 单 job 与十分钟上限（2026-10-02）
+
+- 接受用户对前一版 weekly Deep Validation 仍太复杂/太久的纠正：已删除自动 full-suite coverage workflow；coverage ratchet 留作人工按需命令，不由 push、schedule 或手动 Actions 启动。
+- `.github/workflows/ci.yml` 收敛为一个 Python 3.12 job，10 分钟硬上限，一次安装；包括 Ruff、核心 mypy、compile/config、Unit、可移植 Contract、CLI smoke、secret scan 和两组 JUnit failure summary。删除 3 版本矩阵、重复 workflow jobs、计划 claim/唯一 symbol/伪 Markdown 编码门。
+- slow 并发/backfill、live catalog/raw、外仓 RF golden corpus 代码保留；三类由 pytest marker 表达，不在日常 CI 运行。本机用户数据按需 opt-in；3.11/3.13 兼容验证按需手动运行。
+- 本机 `python tools/pre_push_gate.py` 七阶段 **GREEN**。此前 48 项新增 portable Contract 与 6 项 FC-804 并发均通过；完整本机 Contract 总跑因 Windows parser process latency 主动中止，不将部分执行表述为全绿。
+- 最终 YAML/差异/计划验证已执行；尚待普通 commit/push 和新 Actions 实测 10 分钟内完成。之后写入真实 Actions 结果与总耗时并收尾。
+- 最终 Contract marker 只收集不执行的全量核算为 **2,120 selected/32 deselected in 16.96s**；repo-local basetemp=57 chars、`relocated=false`。收集数字不是测试通过数；全矩阵仍由新 Actions 验收。

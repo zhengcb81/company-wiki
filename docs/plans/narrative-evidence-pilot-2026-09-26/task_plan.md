@@ -610,6 +610,34 @@ company-wiki 只负责来源、解析质量、证据定位、检索和来源摘�
 - [x] `collect_news.py --help` 是故意冻结的 legacy writer，实测退出码 78；因此 CLI smoke 不再 `|| true` 忽略结果，而是明确断言退出 78 且输出 `LEGACY WRITER BLOCKED`。
 - [x] 合成失败 E2E：临时 pytest 用例实际调用 `source_catalog.flags` 后强制失败；coverage 命令返回 1、生成当次 `coverage.json` 且其中确实测到 `flags.py`。测试目录用临时 run root，执行后清理。第一次探针因转义错误只产生 SyntaxError 且无 coverage，修正生成方式后 E2E 通过。
 - [x] 本地 YAML parse/结构不变量、`collect_news` 的预期 exit 78/冻结文案、`snapshot_manifest --help` 均通过；pytest-cov 合成失败 E2E 与 source-catalog fresh JSON 核验通过。此前完整 pre-push 在两项本地 regression patch 后全绿。
-- [ ] 聚合 PWF 与 workflow 改动做一次正常提交并推送；在新的 Actions 中确认 3.11/3.12/3.13 测试全绿、coverage 失败能提供 testcase identity、fresh coverage ratchet 通过。run `37045273003` 和新 run 的耗时只按实际 UI 状态记录，不声称未量测的 wall-time 节省。
+- [x] 聚合 PWF 与 workflow 改动正常提交并推送：`41aa176`。pre-commit 与完整 pre-push 门禁通过，`HEAD == origin/master`。
+- [x] 复核新 Actions run `37055076384` (#166)：fast jobs、3.11/3.13 完成且通过；3.12 Unit+Contract 通过，coverage 运行约 25 分钟仍未结束。结合旧 run `37045273003` 超过 1h46 未结束，确认全量 coverage 不能继续作为每次 push 的阻断步骤。
+- [x] 设计分层 CI：快速 push/PR gate 保留三版 Unit+Contract 与 3.12 静态/config/CLI 等检查；完整 `tests/` fresh coverage + FC-1204 阈值移至每周/手动 Deep Validation，设 180 分钟总上限与 JUnit failure summary；新提交取消同 ref 过期快速 CI。
+- [ ] 验证并正常提交/推送 CI 分层：新 push CI 必须不执行全量 coverage，三版 Unit+Contract 与 fast jobs 全绿；Deep Validation YAML/触发器/coverage gate 结构验证通过。旧 #166 的 pending 长测作为历史耗时证据保留，不再作为日常提交必须等待项。
 
-**当前状态：**业务测试根因修复已推送，CI 流程 S8 调整在本地工作树；本机合成 E2E 与 YAML 结构检查通过。旧 run `37045273003` 仍停在 coverage 阶段（最近看到 0/3 matrix jobs completed、约 1 小时），无公开日志可判其是否卡住。最终结论等待新 workflow 的 GitHub 结果。
+**当前状态：**根因修复与初轮 CI 调整已随 `41aa176` 推送；本地合成 pytest-cov failure E2E、旧 workflow YAML 与完整 pre-push 通过。旧 run `37045273003` 超过 1h46 仍在 coverage，run #166 的 3.12 coverage 已运行约 25 分钟；两者证实长测不适合作为每次提交门禁。当前工作树已做 quick/deep workflow 分层，结构检查与计划 claim verifier 通过，尚未提交和经新 Actions 验证。历史 #166 继续跑不再是新 fast CI 的阻塞条件。
+
+## Phase 50：按测试依赖分层，保留每次提交的可复现覆盖（2026-10-02）
+
+- [x] 复核原 CI 整文件排除的 8 个 contract 模块，区分其内部的合成测试、本机真实 catalog/root 测试、跨仓 golden corpus 测试和多进程并发测试；不因一个外部依赖用例跳过整个模块。
+- [x] 将 `real_data` 与 `requires_corpus` 用例标为默认不运行、可通过 `COMPANY_WIKI_RUN_EXTERNAL_DATA_TESTS=1` 本机显式启用；给 golden corpus 测试增加 `COMPANY_WIKI_GOLDEN_CORPUS` 路径覆盖，给本机 catalog/root 测试保留 catalog 与仓库路径覆盖。
+- [x] 收窄 ZR-409：合成配置测试与仓库内配置合同保留常规 CI；只有读取真实本机 raw roots/catalog 的检查移出常规 CI。移除对 `future_lake.reusable_for_filing` 逐根显式值的旧断言，与当前 root 资格由来源事实/兼容 policy 决定的合同一致。
+- [x] 标记 FC-804 多进程并发模块为 `slow`：从 push/PR 快门筛选中移出；用例仍保留供人工完整回归；本机 6 项 **14.30 秒全部通过**。
+- [x] 将 CW-2.28 backfill contract 模块整体标记 `slow`：该文件的合同围绕隔离 parser 进程、批处理和失败重试；`test_parser_failure_does_not_block_next_document` 单项在 Windows/Python 3.13 实测 **43.32 秒**，普通筛选中前三项合计约 50 秒。完整模块保留供人工完整回归。
+- [x] 保持原整文件忽略清单中的 Dropbox 配置检查及其余合成回归纳入快速筛选。原先 8 个模块按新 marker 表达式收集：**48 passed, 18 deselected in 8.60s**（Python 3.13.9，仓库内短 basetemp，未重定向）。
+- [x] 已知红灯均有可复现的依赖、测试合同、环境/临时目录根因；暂无随机失败证据。不删除测试、不放松产品完整性校验。
+- [ ] 按 Phase 51 的进一步简化收敛 CI：只保留 Python 3.12 单 job/10 分钟上限，移除自动全量 coverage；跑最终门禁、普通提交推送并核对新 Actions。
+
+**状态说明：**Phase 50 的测试分类和本机子集结果保留；其每周 Deep Validation 安排被 Phase 51 的用户新指示取代。最终当前门禁以 Phase 51 为准。
+
+## Phase 51：把自动 CI 收敛到一个十分钟内的快门（2026-10-02）
+
+- [x] 根据用户最新要求，移除每次提交之外的自动长测计划；删除会自动/手动触发全量 coverage 的新增 workflow，不让提交触发二十多分钟的 pytest-cov。
+- [x] 将 `.github/workflows/ci.yml` 收敛为一个 Python 3.12 job，设置 10 分钟 hard timeout；一次安装依赖后串行运行 Ruff、选定源码 mypy、compileall/config doctor、Unit、portable Contract、CLI smoke、secret scan。
+- [x] 移除低价值/重复的 CI 步骤：多 Python 版本矩阵、重复安装/并行小 job、计划 claim verifier、唯一测试符号门、只探测文本编码的 markdown-lint job。保留 JUnit 失败身份摘要和同 ref 新提交取消旧 run。
+- [x] 把慢测、本机数据、外仓 corpus 从自动快门排除并加上清晰 pytest marker；原测试代码未删，保留本机手动运行入口。
+- [x] 本机 `python tools/pre_push_gate.py` 七阶段 GREEN；受影响 8 模块筛选 **48 passed/18 deselected**，FC-804 并发组 **6 passed**。完整 portable Contract 的本机总跑因 Windows parser 隔离耗时主动中断，不记作全套通过。
+- [x] 最终 Contract marker collection-only 为 **2,120 selected/32 deselected in 16.96s**，57 字符 repo-local basetemp、`relocated=false`；该结果只确认测试选择，不代表全套已通过。
+- [ ] 最终验证单 job workflow YAML/步骤/10 分钟限制、Ruff、plan claims、diff check；正常提交推送并观察 GitHub run。在 10 分钟内全绿才完成本阶段；若超过上限或出现根因失败，缩减到稳定核心合同后再验，不延长为长跑。
+
+**当前目标：**提交一次以后，GitHub 仅运行一个 3.12 job，10 分钟后必结束；全量 coverage、慢速/本机数据/外仓样本不自动运行。3.11/3.13 兼容验证由开发者在需要时手动运行。历史 CI 长测数据与新快门验收记录见[CI 红灯修复交接卡](ci_red_handoff_2026-10-02.md)。

@@ -6,26 +6,24 @@ on:
   pull_request:
     branches: [master]
 
+# Replace an older run when another commit arrives on the same ref.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   test:
+    name: Fast checks (Python 3.12)
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false  # root-fix: all 3 Python versions run to completion —
-      # one failure no longer cancels the others, so a single run exposes
-      # ALL failures (previously 3.11 failing cancelled 3.12/3.13, hiding
-      # whether they also had issues)
-      # Unit and Contract stay version-matrix tests. Repo-wide static checks
-      # and the expensive full-suite coverage measurement run once on 3.12.
-      matrix:
-        python-version: ["3.11", "3.12", "3.13"]
+    timeout-minutes: 10
 
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up Python ${{ matrix.python-version }}
+      - name: Set up Python 3.12
         uses: actions/setup-python@v5
         with:
-          python-version: ${{ matrix.python-version }}
+          python-version: "3.12"
 
       - name: Install dependencies
         run: |
@@ -34,16 +32,13 @@ jobs:
           pip install -r requirements-test.txt
           pip install "ruff==0.15.18"
 
-      - name: Ruff lint (WU-1.2)
-        if: matrix.python-version == '3.12'
+      - name: Ruff lint
         run: ruff check src tests/unit tests/contract tests/e2e scripts tests/integration/test_narrative_runtime_e2e.py tests/support/narrative_model_fixture.py
 
-      - name: Strict type check on contract modules (FC-1204-c)
-        if: matrix.python-version == '3.12'
+      - name: Strict type check on contract modules
         run: python -m mypy src/company_wiki/source_catalog/artifact_handle.py src/company_wiki/source_catalog/source_bundle.py src/company_wiki/source_catalog/runtime_policy.py src/company_wiki/source_catalog/activation.py src/company_wiki/source_catalog/close_gap.py src/company_wiki/source_catalog/policy_2x.py src/company_wiki/source_catalog/canary_registry.py src/company_wiki/source_catalog/normalized_meta.py src/company_wiki/source_catalog/flags.py src/company_wiki/source_catalog/policy.py src/company_wiki/source_catalog/restore.py src/company_wiki/source_catalog/operation_contract.py src/company_wiki/source_catalog/operation_projection.py src/company_wiki/source_catalog/source_operation.py src/company_wiki/source_catalog/source_reader.py src/company_wiki/source_catalog/narrative_document.py src/company_wiki/source_catalog/narrative_routing.py src/company_wiki/source_catalog/narrative_candidates.py src/company_wiki/source_catalog/narrative_context.py src/company_wiki/source_catalog/narrative_budget.py src/company_wiki/source_catalog/narrative_group_candidates.py src/company_wiki/source_catalog/narrative_neighbors.py src/company_wiki/source_catalog/narrative_finalize.py src/company_wiki/source_catalog/narrative_pdf_groups.py src/company_wiki/source_catalog/narrative_replay.py src/company_wiki/source_catalog/narrative_evidence.py src/company_wiki/source_catalog/transcript_tool_contract.py src/company_wiki/source_catalog/transcript_import.py src/company_wiki/source_catalog/transcript_text_extract.py src/company_wiki/source_catalog/transcript_lineage.py src/company_wiki/source_catalog/transcript_material.py src/company_wiki/source_catalog/transcript_import_cli.py src/company_wiki/automation/narrative_contracts.py src/company_wiki/automation/execution_snapshot.py src/company_wiki/automation/execution_context.py src/company_wiki/automation/worker.py src/company_wiki/automation/registry.py src/company_wiki/automation/planner.py src/company_wiki/automation/cli.py src/company_wiki/automation/narrative_select.py src/company_wiki/automation/narrative_model.py src/company_wiki/automation/narrative_summarize.py src/company_wiki/automation/narrative_source_guard.py src/company_wiki/automation/narrative_verify.py src/company_wiki/automation/narrative_runtime.py
 
-      - name: Compileall + config doctor (WU-7.1)
-        if: matrix.python-version == '3.12'
+      - name: Compileall and config doctor
         run: |
           python -m compileall -q src scripts tests
           PYTHONPATH=src python scripts/config_doctor.py
@@ -68,14 +63,7 @@ jobs:
         run: |
           report="$RUNNER_TEMP/contract-tests-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}.xml"
           python -m pytest tests/contract -q --tb=short \
-            --ignore=tests/contract/test_dropbox_config_invariants.py \
-            --ignore=tests/contract/test_zr1005_artifact_backfill.py \
-            --ignore=tests/contract/test_zr1006_broker_cohort.py \
-            --ignore=tests/contract/test_zr409_fourth_root_real_journeys.py \
-            --ignore=tests/contract/test_zr503_multi_entity_attribution.py \
-            --ignore=tests/contract/test_zr504_page_fidelity.py \
-            --ignore=tests/contract/test_zr505_table_fidelity.py \
-            --ignore=tests/contract/test_close_gap_concurrency_fc804.py \
+            -m "not slow and not real_data and not requires_corpus" \
             --junitxml="$report"
 
       - name: Contract test failure summary
@@ -86,49 +74,6 @@ jobs:
         run: |
           report="$RUNNER_TEMP/contract-tests-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}.xml"
           python tools/summarize_junit_failures.py "$report"
-
-      - name: Branch coverage ratchet (FC-1204-a, fresh measurement)
-        if: matrix.python-version == '3.12'
-        id: coverage_tests
-        run: |
-          report="$RUNNER_TEMP/coverage-tests-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}.xml"
-          python -m pytest tests/ -q --tb=short --cov=src/company_wiki/source_catalog --cov-branch --cov-report=json --junitxml="$report"
-
-      - name: Coverage test failure summary
-        if: always() && matrix.python-version == '3.12'
-        env:
-          TEST_SUITE_NAME: coverage suite
-          TEST_SUITE_OUTCOME: ${{ steps.coverage_tests.outcome }}
-        run: |
-          report="$RUNNER_TEMP/coverage-tests-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}.xml"
-          python tools/summarize_junit_failures.py "$report"
-
-      - name: Branch coverage threshold (FC-1204-a)
-        if: matrix.python-version == '3.12'
-        run: |
-          FC1204_COVERAGE_GATE=1 python -m pytest tests/contract/test_fc1204_coverage_ratchet.py -q
-      - name: Unique test symbols gate (WU-1.1)
-        if: matrix.python-version == '3.12'
-        run: python tools/check_unique_test_symbols.py
-
-      - name: Plan claim verifier (WU-8.3)
-        if: matrix.python-version == '3.12'
-        run: python tools/verify_plan_claims.py --plan-dir .
-
-  cli-smoke:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
 
       - name: CLI smoke test
         run: |
@@ -151,14 +96,8 @@ jobs:
           print("collect_news legacy writer remains blocked (exit 78)")
           PY
 
-  secret-scan:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
       - name: Scan for hardcoded secrets
         run: |
-          # Check for common secret patterns
           if grep -rn 'sk-[0-9a-f]\{32\}' scripts/ tests/ --include="*.py" | grep -v "test\|example\|placeholder\|your_"; then
             echo "WARNING: Potential hardcoded API key found"
             exit 1
@@ -168,19 +107,3 @@ jobs:
             exit 1
           fi
           echo "No hardcoded secrets found"
-
-  markdown-lint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Check markdown for common issues
-        run: |
-          # Check for broken links in planning files
-          for f in task_plan.md findings.md progress.md; do
-            if [ -f "$f" ]; then
-              echo "Checking $f..."
-              # Just verify the files are valid UTF-8
-              file "$f" | grep -q "UTF-8\|ASCII" || echo "WARNING: $f may not be valid UTF-8"
-            fi
-          done

@@ -744,8 +744,7 @@
 
 - 聚合提交 `b168a2e` 的 Actions run `37043343785` 已确认：之前的六项失败全消失；仅 FC905 的 PI01/PI02/PI09 三项在 Python 3.11、3.12、3.13 各失败一次，异常类别全为 `ModuleNotFoundError`。Unit、cli-smoke、secret-scan、markdown-lint 均通过。
 - 唯一三项共用测试 helper `_record_review`；它在分支判断前无条件导入 `cryptography.hazmat...Ed25519PrivateKey`。生产 `prompt_injection.py::_ed25519_verify` 也使用 `cryptography`，但仅在调用时导入并在缺失时按安全设计 fail closed。CI 从 `requirements.txt` 干净安装，此依赖在 `requirements.txt` 与 `pyproject.toml` 的 `catalog` extra 均未声明；本机环境恰好已有安装，所以本机绿、CI 红。
-- 在 `requirements.txt` 和 `pyproject.toml` 的 `catalog`、`test`、`all` extras 声明 `cryptography>=41.0`。`catalog` extra 对应可选来源目录签名验证功能；`test` 确保该回归用例组独立安装时提供签名 fixture backend；CI 的 requirements 则确保 clean install 一致。
-- 此根因已定位，依赖修正当前尚未推送；必须用干净 CI 安装完成下一轮 Python 3.11/3.12/3.13 验收，不能用本机预装依赖代替。
+- 在 `requirements.txt` 和 `pyproject.toml` 的 `catalog`、`test`、`all` extras 声明 `cryptography>=41.0`。`catalog` extra 对应可选来源目录签名验证功能；`test` 确保该回归用例组独立安装时提供签名 fixture backend；CI 的 requirements 则确保 clean install 一致。修复已于 `4c66a4e` 推送；依赖后的旧 run `37045273003` 因旧 workflow 的全量 coverage 长时间未结束，不能仅据其推断三项最终状态。
 
 ## 2026-10-02 — CI 失败根因与 S8 重复门禁核查
 
@@ -755,4 +754,28 @@
 - `collect_news.py --help` 的 `|| true` 不能简单删掉后当成功 smoke：实跑证明 legacy-writer freeze 预期返回 78。因此改为精确断言 exit 78 且输出 `LEGACY WRITER BLOCKED`，保留 frozen boundary 并让意外结果阻断 CI。
 - 合成 workflow E2E 在独立 `tmp/cx*` 根内运行了真实 pytest-cov subprocess：调用 `validate_flag_state` 确保采到 `source_catalog/flags.py`，再故意失败。pytest 返回 1、在隔离根写出 coverage JSON，且 JSON 包含被测模块；临时根已清理。首个 probe 因 Windows 命令转义产生 SyntaxError，未生成 coverage；纠正构造方式后成功。
 - runner 的 `tests/` suite 过去因 `|| true` 而不能当作通过证据。当前规则只有在 pytest 退出 0 且后续 coverage threshold step 成功时才绿；若失败，新 JUnit summary 报用例身份。单次覆盖率运行仍有 3,814 项，故尚未量得端到端 wall-time 改善；可准确声称的只是全量 coverage 重复数由 3 降为 1、静态门禁由 3 降为 1、重复 canary 被移除。
-- Actions run `37045273003` 对 `4c66a4e` 最近可见仍在三版 coverage step，0/3 matrix jobs completed、约 1 小时；匿名页面不提供 pytest step logs。它不包含本地新 S8 workflow，必须等新 commit 的 CI 结果确认。
+- Actions run `37045273003` 对 `4c66a4e` 最近可见仍在三版 coverage step，0/3 matrix jobs completed、约 1h46；匿名页面不提供 pytest step logs。它不包含本地新 S8 workflow。
+- 后续 `41aa176` 的 run `37055076384` 已给出实测：fast jobs 与 3.11/3.13 通过，3.12 Unit+Contract 通过，但单次全量 coverage 约 25 分钟仍在运行。故 R4 S8 “三次变一次”虽减少冗余，仍不适合作为每次提交的等待门。当前工作树将其完整移至每周/手动 Deep Validation，并保留 180 分钟超时、失败 JUnit 摘要和 fresh coverage threshold；日常 push/PR 仍阻断于三版 Unit+Contract 与 3.12 静态门禁。历史红灯证据均可定位到环境、fixture 或依赖错误，没有观察到足以证明随机不稳定的用例，暂不删测试。
+
+## 2026-10-02 — 将环境依赖测试从每次 CI 精确分流
+
+- 原 `.github/workflows/ci.yml` 对 8 个 Contract 模块整文件 `--ignore`。复核后发现这会连同可在 GitHub Linux 运行的合成合同一起丢掉：backfill/scheduler synthetic tests、抽取与 locator 合成验证、ZR-409 temporary-config reader journey、Dropbox root config doctor 检查等。
+- 新增 marker：`real_data` 表示依赖个人本机 live catalog/raw roots；`requires_corpus` 表示依赖 revenue-forecast 跨仓 golden corpus；`slow` 表示放入深度周期任务的并发/多进程测试。push/PR Contract 按 marker 过滤；Deep Validation 只排除 runner 不具备的本机生产数据和外仓 corpus，不过滤 `slow`，因此仍运行并发组及所有可移植合成测试。
+- 完整 Contract 探索中观察到 backfill parser isolation 的实际耗时：`test_parser_failure_does_not_block_next_document` 在 Windows/Python 3.13 单项 **43.32 秒**，同文件首三项累计约 50 秒。该文件整体测试 parser subprocess backfill、批次中断与失败重试，因此模块级标记 `slow`；14 项仍在周/手动 Deep Validation 中运行，快门不再重复昂贵的进程往返。
+- 对原 8 模块使用 CI 等价筛选，本机 Python 3.13.9 结果 **48 passed, 18 deselected in 8.60s**。6 个 FC-804 并发用例单独运行 **6 passed in 14.30s**。两次均使用 repo 内 57 字符 basetemp、`relocated=false`，并自动清理临时目录。
+- ZR-409 原先模块级 `real_data` 会连合成 EX-08 用例一起跳过。现仅对访问 owner live roots/catalog 的具体用例加标记；合成配置/export/scan 回到普通 CI。移除逐根必须显式填写 `future_lake.reusable_for_filing` 的断言，保留根/adapter 注册与兼容 policy export 检查。
+- 以上是运行环境分层，不是判定测试随机不稳定。此前红灯均定位到依赖、过期 fixture/合同或 pytest temp ACL；没有证据说明需要删除这些测试。关键慢测仍在每周/手动深度任务运行，本机真数据测试保留 opt-in。
+- 拥有对应资料的主机可设置 `COMPANY_WIKI_RUN_EXTERNAL_DATA_TESTS=1`，并按需设置 `COMPANY_WIKI_TEST_CATALOG`、`COMPANY_WIKI_REAL_WIKI_ROOT`、`COMPANY_WIKI_GOLDEN_CORPUS`，再运行 `python -m pytest tests/contract -m "real_data or requires_corpus"`。这些检查只读本机数据；GitHub runner 不下载、不复制，也不假装持有 owner-only 数据。
+- 每次 push/PR 仍对 3 个 Python 版本运行所有可移植 Unit+Contract，3.12 静态/type/config/计划检查一次；全仓 fresh branch coverage 与 FC-1204 阈值在每周/手动 `deep-validation.yml` 运行，最长 180 分钟并保留 JUnit 失败摘要。新结构的 Actions 尚待提交推送后验收。
+- 一次本机完整 Contract 试跑在新增 slow 分类前收集了 2,134 项可移植测试；已跑过的案例未失败，运行到 CW-2.28 parser isolation 后为避免 Windows 长测阻塞而主动中断。隔离复现的单项 **43.32 秒且通过**，随后把整个专用 backfill process 模块移到 Deep Validation。该完整本机 Contract run 未完成，不记作 PASS；新 push 的 GitHub 三版本 fast matrix 是最终完整合同验收。
+
+## 2026-10-02 — 按用户最新意见进一步压缩 CI
+
+- 上一版提案虽把 full coverage 从每次 push 移到每周/手动 workflow，但仍会自动跑二十多分钟，违背“不要一次跑几十分钟、减少复杂度”的新要求；已删除该自动化 workflow，不再安排长时间 GitHub Actions job。
+- `.github/workflows/ci.yml` 现为单一 Python 3.12 job，硬超时 10 分钟；一次装依赖，执行 Ruff、限定核心模块 mypy、compileall/config doctor、Unit、`not slow and not real_data and not requires_corpus` Contract、CLI smoke、secret scan，并汇报 Unit/Contract 的 JUnit 失败身份。concurrency 取消同 ref 过时 run。
+- 删除 3 版 Python 矩阵、重复 setup/install jobs、计划 claim verifier、唯一测试符号门和只检查 UTF-8 的伪 markdown-lint。3.11/3.13 需在需要时手动兼容验证。全仓 fresh coverage/FC-1204 ratchet 保留脚本和测试，仅人工按需运行，不再自动触发。
+- 自动快门之外的慢测和 owner-only 测试仍存在：FC-804 并发模块与 CW-2.28 backfill parser 模块有 `slow`；本机 catalog/root 标 `real_data`；RF golden corpus 标 `requires_corpus`。`real_data/requires_corpus` 本机入口见上节。
+- 手动覆盖率流程（会明显长于日常 CI，因此只在明确需要时运行）：`python -m pytest tests/ -q --tb=short -m "not real_data and not requires_corpus" --cov=src/company_wiki/source_catalog --cov-branch --cov-report=json`，随后设置 `FC1204_COVERAGE_GATE=1` 运行 `tests/contract/test_fc1204_coverage_ratchet.py`。
+- 本机 `python tools/pre_push_gate.py` 七阶段最终 **GREEN**；Ruff、workflow BaseLoader YAML/结构检查、计划 claim verifier、`git diff --check` 通过。8 个原整文件忽略模块 **48 passed,18 deselected**；FC-804 **6 passed**。完整本机 portable Contract 曾收集 2,134 项，因 Windows parser isolation 耗时主动中断，未完成、不记绿。
+- 新版 CI 尚待普通 commit/push 后验收。若单 job 在 10 分钟内无法通过，需要减掉自动快门中高成本/高噪声项目，不能将 timeout 加长到几十分钟；若发现具体根因则按身份修复。提交后记录真实 Actions wall time 与结果。
+- 最终 marker expression 对全 `tests/contract` 做 collection-only：**2,120 tests selected / 32 deselected，16.96 秒**；basetemp 57 字符且 `relocated=false`。它确认 CI 运行的真实 portable contract 集合，不代表 2,120 项已本机全部通过。

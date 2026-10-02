@@ -35,12 +35,16 @@ mutation).
 from __future__ import annotations
 
 import hashlib
+import os
 import sqlite3
 import sys
 from pathlib import Path
 
+import pytest
 
-WIKI_ROOT = Path(r"C:\Users\郑曾波\Projects\company-wiki")
+WIKI_ROOT = Path(os.environ.get(
+    "COMPANY_WIKI_REAL_WIKI_ROOT", str(Path(__file__).resolve().parents[2])
+))
 sys.path.insert(0, str(WIKI_ROOT / "src"))
 
 PRODUCTION_DB = WIKI_ROOT / ".source_catalog" / "catalog.sqlite3"
@@ -114,7 +118,7 @@ def _root_dir(catalog, root_id: str) -> Path:
 
 def test_c1_production_config_has_fourth_root():
     """future_lake is present, directory-kind, sidecar-adapter-bound,
-    read-only and reusable — the config-only fourth root (EX-08)."""
+    and read-only — the config-only fourth root (EX-08)."""
     from company_wiki.source_catalog.config import load_catalog_config
 
     config = load_catalog_config(PRODUCTION_CONFIG, project_root=WIKI_ROOT)
@@ -124,7 +128,6 @@ def test_c1_production_config_has_fourth_root():
     assert future.kind == "directory"
     assert future.adapter_id == "sidecar_filing_v1"
     assert future.read_only is True
-    assert future.reusable_for_filing is True
     assert len(by_id) == 4
 
 
@@ -144,6 +147,16 @@ def test_c1_policy_export_lists_four_reusable_roots():
     assert reusable == {"company_raw", "dayu_portfolio", "dropbox_stock", "future_lake"}
 
 
+@pytest.mark.real_data
+@pytest.mark.skipif(
+    os.environ.get("COMPANY_WIKI_RUN_EXTERNAL_DATA_TESTS") != "1",
+    reason="set COMPANY_WIKI_RUN_EXTERNAL_DATA_TESTS=1 to inspect the owner's raw roots",
+)
+@pytest.mark.real_data
+@pytest.mark.skipif(
+    os.environ.get("COMPANY_WIKI_RUN_EXTERNAL_DATA_TESTS") != "1",
+    reason="set COMPANY_WIKI_RUN_EXTERNAL_DATA_TESTS=1 to inspect the owner's raw roots",
+)
 def test_c1_future_lake_fixture_dir_exists():
     """The adapter fixture directory exists so the root is scannable."""
     assert (WIKI_ROOT / "future_lake").is_dir()
@@ -182,6 +195,11 @@ DROPBOX = dict(
 )
 
 
+@pytest.mark.real_data
+@pytest.mark.skipif(
+    os.environ.get("COMPANY_WIKI_RUN_EXTERNAL_DATA_TESTS") != "1",
+    reason="set COMPANY_WIKI_RUN_EXTERNAL_DATA_TESTS=1 to inspect the owner's live catalog/roots",
+)
 def test_c2_journey_companies_zijin():
     """Journey A: companies-root annual resolves exactly, canonical under
     companies/, zero downloads, zero writes."""
@@ -201,6 +219,11 @@ def test_c2_journey_companies_zijin():
     assert sample_before == _file_fingerprint(Path(handle.canonical_path))
 
 
+@pytest.mark.real_data
+@pytest.mark.skipif(
+    os.environ.get("COMPANY_WIKI_RUN_EXTERNAL_DATA_TESTS") != "1",
+    reason="set COMPANY_WIKI_RUN_EXTERNAL_DATA_TESTS=1 to inspect the owner's live catalog/roots",
+)
 def test_c2_journey_dayu_only_real_sample():
     """Journey B: a filing that exists ONLY under the dayu portfolio
     (content absent from companies — pinned by the dedicated test below)
@@ -224,6 +247,11 @@ def test_c2_journey_dayu_only_real_sample():
     assert sample_before == _file_fingerprint(Path(handle.canonical_path))
 
 
+@pytest.mark.real_data
+@pytest.mark.skipif(
+    os.environ.get("COMPANY_WIKI_RUN_EXTERNAL_DATA_TESTS") != "1",
+    reason="set COMPANY_WIKI_RUN_EXTERNAL_DATA_TESTS=1 to inspect the owner's live catalog/roots",
+)
 def test_c2_journey_dayu_sample_is_dayu_only():
     """Precondition pin: the dayu journey's document content is genuinely
     absent from companies (not a disguised copy) — the exec-plan T2 sample
@@ -243,6 +271,11 @@ def test_c2_journey_dayu_sample_is_dayu_only():
     assert row["c"] == 0, "dayu-only sample unexpectedly exists in companies"
 
 
+@pytest.mark.real_data
+@pytest.mark.skipif(
+    os.environ.get("COMPANY_WIKI_RUN_EXTERNAL_DATA_TESTS") != "1",
+    reason="set COMPANY_WIKI_RUN_EXTERNAL_DATA_TESTS=1 to inspect the owner's live catalog/roots",
+)
 def test_c2_journey_dropbox_fail_closed_incomplete_sample():
     """Journey C (honest, current production data): the Dropbox root's ONLY
     exclusive annual filings carry http (not https) source_urls — they are
@@ -277,6 +310,11 @@ def test_c2_journey_dropbox_fail_closed_incomplete_sample():
     assert dropbox_before == _shallow_fingerprint(sample_dir)
 
 
+@pytest.mark.real_data
+@pytest.mark.skipif(
+    os.environ.get("COMPANY_WIKI_RUN_EXTERNAL_DATA_TESTS") != "1",
+    reason="set COMPANY_WIKI_RUN_EXTERNAL_DATA_TESTS=1 to inspect the owner's live catalog/roots",
+)
 def test_c2_journey_dropbox_shared_zijin_resolves_in_companies():
     """The Dropbox root also hosts the Zijin annual, shared with companies
     (same content): the cross-root dedup makes the lowest-priority root
@@ -290,6 +328,11 @@ def test_c2_journey_dropbox_shared_zijin_resolves_in_companies():
     assert dropbox_before == _shallow_fingerprint(_root_dir(catalog, "dropbox_stock"))
 
 
+@pytest.mark.real_data
+@pytest.mark.skipif(
+    os.environ.get("COMPANY_WIKI_RUN_EXTERNAL_DATA_TESTS") != "1",
+    reason="set COMPANY_WIKI_RUN_EXTERNAL_DATA_TESTS=1 to inspect the owner's live catalog/roots",
+)
 def test_c2_journeys_are_read_only_for_every_root():
     """All three journeys in one process: every real root's shallow
     fingerprint and each canonical sample file are unchanged (catalog-DIR

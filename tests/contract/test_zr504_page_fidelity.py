@@ -20,6 +20,7 @@ error/empty pages keep their page number without corrupting later pages.
 from __future__ import annotations
 
 import json
+import os
 import sys
 from pathlib import Path
 
@@ -45,6 +46,20 @@ from company_wiki.source_contract.source_manifest import (  # noqa: E402
 
 _CHANGJIANG_SHA256 = (
     "273d450887eff7c079b28f394c4831092fa3abbb81db86f2544cab425c2719d7"
+)
+_PROJECT_ROOT = Path(__file__).resolve().parents[2]
+_GOLDEN_CORPUS = Path(
+    os.environ.get(
+        "COMPANY_WIKI_GOLDEN_CORPUS",
+        str(
+            _PROJECT_ROOT.parent
+            / "revenue-forecast"
+            / "assurance"
+            / "unified_completion"
+            / "corpus"
+            / "golden_corpus.json"
+        ),
+    )
 )
 
 
@@ -264,18 +279,13 @@ def test_c4_non_contiguous_page_numbers_are_rejected():
 # ---------------------------------------------------------------------------
 
 
+@pytest.mark.requires_corpus
+@pytest.mark.skipif(
+    os.environ.get("COMPANY_WIKI_RUN_EXTERNAL_DATA_TESTS") != "1",
+    reason="set COMPANY_WIKI_RUN_EXTERNAL_DATA_TESTS=1 to read the owner's golden corpus",
+)
 def test_c5_golden_broker_samples_anchored_read_only():
-    corpus = json.loads(
-        (
-            Path(__file__).resolve().parents[2]
-            / ".."
-            / "revenue-forecast"
-            / "assurance"
-            / "unified_completion"
-            / "corpus"
-            / "golden_corpus.json"
-        ).read_text(encoding="utf-8")
-    )
+    corpus = json.loads(_GOLDEN_CORPUS.read_text(encoding="utf-8"))
     broker = [item for item in corpus["samples"] if item["role"] == "broker_research"]
     assert len(broker) >= 7  # the seven broker-report corpus
     changjiang = next(

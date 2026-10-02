@@ -4,12 +4,13 @@
 
 ## 2026-10-02 当前状态修正（以下旧快照被本节覆盖）
 
-- 当前远端 `master`/`origin/master` 为 `4c66a4e`，前两项修复提交为 `b168a2e` 与 `4c66a4e`；CI run `37043343785` 证明前 6 个失败身份已清零，剩余 FC905 PI01/PI02/PI09 的 `ModuleNotFoundError` 是依赖漏声明，已补 `cryptography>=41.0` 并推送。
-- `37045273003` 是该依赖修复的验证 run。浏览器最近可见 Unit/Contract 三版本及 cli-smoke/secret-scan/markdown-lint 的步骤已通过，但三版 coverage step 已持续超过 1 小时，0/3 matrix jobs 完成；匿名 GitHub 页面不能查看 step log，必须按 pending 记录，不猜 pass/fail。
-- 发现并处理 R4 S8 CI 假绿/冗余：`tests/` 收集 3,814 项，旧 workflow 在每个 Python 版本都再运行全量 coverage，`|| true` 吞 pytest 失败，并重复执行已被 Contract 套件包含的六个 canary。当前未提交 workflow diff 将 Unit+Contract 三版保留，将 repo-wide static/coverage 一次性限定在 3.12、移除重复 canary 和 coverage 的吞错，并添加 coverage JUnit summary。coverage 全套失败现会实际阻断。
+- 当前远端 `master`/`origin/master` 为 `41aa176`，前两项修复提交为 `b168a2e` 与 `4c66a4e`；CI run `37043343785` 证明前 6 个失败身份已清零，剩余 FC905 PI01/PI02/PI09 的 `ModuleNotFoundError` 是依赖漏声明，已补 `cryptography>=41.0` 并推送。
+- `37045273003` 是依赖修复后的旧 workflow 验证 run。最新可见 Unit/Contract 三版本及其它 jobs 的早期步骤通过，但三版 coverage step 已超过 1h46、0/3 matrix jobs 完成；匿名页面不能查看 logs，状态保持 pending。
+- R4 S8 第一轮已在 `41aa176` 推送：`tests/` 收集 3,814 项；旧 workflow 每个 Python 版本都重跑全量 coverage、用 `|| true` 吞 pytest 失败，并重复执行已被 Contract 覆盖的六个 canary。`37055076384` (#166) 中 3.11/3.13 与 fast jobs 通过，3.12 Unit+Contract 通过，coverage 运行约 25 分钟仍未结束。这说明只把 coverage 从三次减为一次，仍让每次提交等待长测，不符合日常节奏。
+- 当前工作树进一步将 push/PR 主 CI 改为快速阻断门（3 版 Unit+Contract、单次静态/配置检查、CLI smoke、secret scan、Markdown 检查）；把全量 `tests/` + fresh branch coverage + FC-1204 阈值完整保留到每周及手动的 `deep-validation.yml`，最长 180 分钟，失败继续由 JUnit 摘要给身份。新 push 对同 ref 的旧 CI 设 `cancel-in-progress`，防止快速提交时浪费在已过期提交上。这个分层尚未提交，需新 Actions 证明 push run 不再进入 coverage 且 fast jobs 全绿。
 - `collect_news.py --help` 是 intentional frozen legacy writer，实测 exit 78；CI smoke 改成精确验证阻断输出/退出码，不把预期失败当成功命令，也不吞任何未知错误。
-- `tests/contract/test_source_catalog_temp_worker_governance.py` 与 `tools/pre_push_gate.py` 还有未提交改动，修正短 repo-local basetemp 下的 TEMP 假设并把该测试放进 regression set。最近完整本地 pre-push 对该小补丁已通过；合成 coverage failure probe 也验证 exit 1 + fresh source-catalog JSON。
-- 收尾时先看 `git status --short`、完整 diff、`git diff --check` 和 workflow YAML/CLI smoke。此次新 workflow/PWF 改动完成后正常 commit/push，再核新 run：三版 Unit+Contract、3.12 full coverage + threshold、其它 required jobs 全绿才结案。run `37045273003` 如仍运行按实况保留记录，不需要等它才推送后续版本。
+- `tests/contract/test_source_catalog_temp_worker_governance.py` 与 `tools/pre_push_gate.py` 的短 repo-local basetemp regression 已含在 `41aa176`。合成 coverage failure probe 验证 exit 1 + fresh source-catalog JSON；正常 commit hooks 和完整 pre-push 已通过，工作树/远端 HEAD 一致。
+- 当前旧 workflow run `37055076384` (#166)：fast jobs 与 3.11/3.13 jobs 已通过；3.12 Unit+Contract 已结束，单次 full coverage 在运行（最近页面显示约 25 分钟），未见失败 annotation，但匿名日志不可读。它由新分层方案 supersede，作为耗时证据保留；最终日常门禁验收改看新 commit 的 fast CI，深度 coverage 的完整验收走单独 workflow。
 
 ## 当前事实
 
@@ -67,3 +68,27 @@
 - `tests/contract/test_source_catalog_temp_worker_governance.py`
 - 本交接卡和同目录 PWF 更新
 
+
+## 2026-10-02 后续分层与测试分类（当前权威状态）
+
+- 在 `41aa176` 之后的当前工作树中，`ci.yml` 将每次 push/PR 限制为三版 Unit+可移植 Contract，3.12 静态/config/计划门禁只跑一次；全仓 coverage/FC-1204 移到每周或手动 `deep-validation.yml`，180 分钟上限。新 commit 对同 ref 的过期快速 CI 执行 cancel-in-progress。
+- 原 Contract workflow 整文件排除清单已换为测试级筛选：`not slow and not real_data and not requires_corpus`。此处的 `slow` 仍由 Deep Validation 运行；真实本机 catalog/raw 和外仓 golden corpus 测试由 owner 主机 opt-in 运行。不是删除用例。
+- 被分类的 8 个模块本机快速筛选 **48 passed, 18 deselected in 8.60s**；FC-804 并发组单跑 **6 passed in 14.30s**。另测得 CW-2.28 一个 parser isolation case 用时 **43.32s**，同模块首三项已耗约 50s，故该完整 backfill process contract 模块标记 `slow`，14 项仍在 Deep Validation。ZR-409 合成测试恢复普通筛选，production path journey 保持数据 marker。golden corpus 测试支持 `COMPANY_WIKI_GOLDEN_CORPUS`，其他 root/catalog 支持 `COMPANY_WIKI_REAL_WIKI_ROOT`、`COMPANY_WIKI_TEST_CATALOG`。
+- owner 本机真数据命令：设置 `COMPANY_WIKI_RUN_EXTERNAL_DATA_TESTS=1`，必要时指定上述路径变量，再运行 `python -m pytest tests/contract -m "real_data or requires_corpus"`。该项不是 GitHub gate，因为 runner 没有用户生产 catalog、Dropbox/Dayu 根或 RF golden corpus。
+- `deep-validation.yml` 运行 `python -m pytest tests/ -m "not real_data and not requires_corpus" --cov=src/company_wiki/source_catalog --cov-branch --cov-report=json`，失败由 JUnit 汇总；只有 pytest 成功才检查 FC-1204 coverage threshold。
+- 本阶段尚待：完整本机 `python tools/pre_push_gate.py`；Ruff、两 workflow YAML/invariants、`verify_plan_claims.py --plan-dir .`、`git diff --check`；之后普通 commit/push 并等新 push CI 完成。新 CI 全绿后更新此卡、task_plan/findings/progress/README 并收尾。旧 run `37045273003`/`37055076384` 是旧 workflow 耗时证据，不要求等它们结束。
+- 注意：本机一次完整 Contract run 在 slow 模块标记前选中 2,134 项；过程中没有已观察到的断言失败，但因 CW-2.28 parser isolation 长耗时被主动中断，run 未完成，不能报告 PASS。唯一 run root 已清理。已有的 48 项重点增补 Contract 和 6 项 FC-804 并发分别完整通过；完整剩余矩阵由下一次 push Actions 三 Python 版本验收。
+
+## 2026-10-02 最新状态：按用户最新指示撤销自动长测方案
+
+本节覆盖本卡前文仍提到“weekly/manual Deep Validation”的临时方案。用户明确希望 CI 简单、失败少、单次不要几十分钟。当前交付结构如下：
+
+- `.github/workflows/ci.yml` 单 workflow、单 job、Python 3.12、10 分钟硬上限。一次安装依赖，运行 Ruff、核心 mypy、compileall/config doctor、Unit、可移植 Contract、CLI smoke、secret scan 和 JUnit failure summary。新同 ref push 取消旧 fast run。
+- 自动 Contract 选择：`not slow and not real_data and not requires_corpus`。环境依赖/慢测试未删除；在测试代码中有 marker，可供本机或人工回归。
+- 3.11/3.13 matrix、独立 CLI/secret/markdown jobs、唯一 test symbol 与 plan-claim CI 门均已移除。前两者需人工按需检查；低价值文本/文档结构检查可由本机工具运行。
+- 自动 weekly/manual `deep-validation.yml` 已删除。Full branch coverage 与 FC-1204 ratchet 仍可人工运行，但不由 GitHub Actions 自动启动：
+  `python -m pytest tests/ -q --tb=short -m "not real_data and not requires_corpus" --cov=src/company_wiki/source_catalog --cov-branch --cov-report=json`，然后设置 `FC1204_COVERAGE_GATE=1` 运行 coverage ratchet 测试。
+- 本机 `python tools/pre_push_gate.py` 七阶段 **GREEN**；Ruff、CI workflow YAML/invariants、计划 claim verifier 和 diff check 通过。8 个原整文件忽略模块 **48 passed, 18 deselected**；FC-804 **6 passed**。完整本机 portable Contract run 未完成，因 Windows parser isolation 长耗时主动停下，不得报告全套绿。已跑关键 slow parser 单测 **1 passed in 43.32s**。
+
+**剩余唯一验收点：**正常 commit/push 后，新 GitHub fast CI 在 10 分钟硬上限内通过。检查 job 数量、实际 wall time 与失败摘要；若超过上限/出现失败，按输出定位并缩减或修复，不延长至长测。
+- 新 marker expression 的最终 collection-only 为 **2,120 selected / 32 deselected in 16.96s**，57 字符 basetemp、未重定向。这个结果只确认选择集合，不要写成 2,120 tests passed。完整本机总执行未完成，等待单一 Actions run 作验收。
