@@ -52,13 +52,16 @@ jobs:
       - name: Unit test failure summary
         if: always()
         env:
-          UNIT_TEST_OUTCOME: ${{ steps.unit_tests.outcome }}
+          TEST_SUITE_NAME: unit tests
+          TEST_SUITE_OUTCOME: ${{ steps.unit_tests.outcome }}
         run: |
           report="$RUNNER_TEMP/unit-tests-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}.xml"
           python tools/summarize_junit_failures.py "$report"
 
       - name: Contract tests
+        id: contract_tests
         run: |
+          report="$RUNNER_TEMP/contract-tests-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}.xml"
           python -m pytest tests/contract -q --tb=short \
             --ignore=tests/contract/test_dropbox_config_invariants.py \
             --ignore=tests/contract/test_zr1005_artifact_backfill.py \
@@ -67,7 +70,17 @@ jobs:
             --ignore=tests/contract/test_zr503_multi_entity_attribution.py \
             --ignore=tests/contract/test_zr504_page_fidelity.py \
             --ignore=tests/contract/test_zr505_table_fidelity.py \
-            --ignore=tests/contract/test_close_gap_concurrency_fc804.py
+            --ignore=tests/contract/test_close_gap_concurrency_fc804.py \
+            --junitxml="$report"
+
+      - name: Contract test failure summary
+        if: always()
+        env:
+          TEST_SUITE_NAME: contract tests
+          TEST_SUITE_OUTCOME: ${{ steps.contract_tests.outcome }}
+        run: |
+          report="$RUNNER_TEMP/contract-tests-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}.xml"
+          python tools/summarize_junit_failures.py "$report"
 
       - name: Branch coverage ratchet (FC-1204-a, fresh measurement)
         run: |

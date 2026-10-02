@@ -56,23 +56,24 @@ def _append_step_summary(lines: list[str]) -> None:
 
 
 def main(report_path: str) -> int:
+    suite_name = os.environ.get("TEST_SUITE_NAME", "tests")
     failures = _failed_cases(Path(report_path))
     if failures is None:
         message = "JUnit report unavailable or invalid; inspect the authenticated job log"
         print(f"::error::{_escape_command_data(message)}")
-        _append_step_summary(["## Unit test report unavailable", "", message])
+        _append_step_summary([f"## {suite_name} JUnit report unavailable", "", message])
         return 0
     if not failures:
-        if os.environ.get("UNIT_TEST_OUTCOME") == "failure":
+        if os.environ.get("TEST_SUITE_OUTCOME") == "failure":
             message = (
-                "pytest exited nonzero but JUnit contains no failing testcase; "
+                f"{suite_name} pytest exited nonzero but JUnit contains no failing testcase; "
                 "inspect the authenticated job log"
             )
             print(f"::error::{_escape_command_data(message)}")
-            _append_step_summary(["## Unit test failure details unavailable", "", message])
+            _append_step_summary([f"## {suite_name} failure details unavailable", "", message])
         return 0
 
-    summary_lines = ["## Failed unit tests", ""]
+    summary_lines = [f"## Failed {suite_name}", ""]
     for file_name, line, node_id in failures[:MAX_ANNOTATIONS]:
         properties = f" file={_escape_command_data(file_name)}" if file_name else ""
         if line.isdigit():

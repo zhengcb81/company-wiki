@@ -88,4 +88,4 @@ G-D：逐批按实际消费者引用选择已通过的 G-A/G-B/G2b/G-C；无全�
 
 **发布收尾覆盖：**CWP 已推送 d6d33b8，标准 pre-push 六门全绿；ET 已推送 4924d57。RF 的 historical current_triplet 检查 25 passed/2 failed，暂未推送，恢复时先 RED 修分层。当前暂停，StockWiki/IQS 无远端，FF 支线等待同一 owner 汇合；远端 CWP CI 核对时仍运行。
 
-**2026-10-02 状态覆盖：**CWP `master@f1986cd` 已推送；run `37000426435` 三版本 annotations 定位四个 CLI freeze 参数。测试子进程缺 `PYTHONPATH=src`，本地 pre-push 环境注入掩盖了缺项；`_blocked_environment()` 已显式设置。WSL/Python 3.12 与 Windows/Python 3.13 六项定向 E2E、完整七阶段 pre-push 均通过，待修复提交和下一轮 CI。细节见 [task_plan.md Phase 37–44](task_plan.md)。RF 当前 main `3e03ce83` ahead origin 4，既有 execution_runs 文件保持原样。
+**2026-10-02 状态覆盖：**CWP `master@9c1f9b7` 已推送；Unit 根因是测试子进程缺 `PYTHONPATH=src`，本机 pre-push 注入环境掩盖了缺项。WSL/Python 3.12、Windows/Python 3.13 定向测试和完整七阶段 pre-push 通过；Actions run `37002442446` 三版 Unit 全绿，但三版 Contract 仍红且公开 annotation 无 testcase identity。Contract JUnit reporter 已在工作树中通过 focused tests 和完整 pre-push，待提交推送后读取具体失败项。RF 当前 main `3e03ce83` ahead origin 4，既有 execution_runs 文件保持原样。

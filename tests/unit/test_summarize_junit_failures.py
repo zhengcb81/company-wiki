@@ -86,11 +86,12 @@ def test_failed_pytest_with_no_failed_case_gets_a_diagnostic(
     report = tmp_path / "empty-junit.xml"
     suite = ET.Element("testsuite", {"tests": "0", "failures": "0", "errors": "0"})
     ET.ElementTree(suite).write(report, encoding="utf-8", xml_declaration=True)
-    monkeypatch.setenv("UNIT_TEST_OUTCOME", "failure")
+    monkeypatch.setenv("TEST_SUITE_OUTCOME", "failure")
+    monkeypatch.setenv("TEST_SUITE_NAME", "contract tests")
 
     assert main(str(report)) == 0
     output = capsys.readouterr().out
-    assert "pytest exited nonzero but JUnit contains no failing testcase" in output
+    assert "contract tests pytest exited nonzero but JUnit contains no failing testcase" in output
 
 
 def test_collection_error_without_testcase_gets_a_generic_identity(

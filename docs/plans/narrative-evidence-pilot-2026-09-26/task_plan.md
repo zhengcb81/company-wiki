@@ -552,6 +552,16 @@ company-wiki 只负责来源、解析质量、证据定位、检索和来源摘�
 - [x] 更新 `tests/unit/test_writer_freeze.py::_blocked_environment()`，显式设置 `PYTHONPATH` 为当前仓库 `src/`，不再依赖调用者环境。
 - [x] 在 WSL/Python 3.12、父环境无 `PYTHONPATH` 下重跑同一参数包 **6 passed in 29.12s**；Windows/Python 3.13 同包 **6 passed in 33.25s**。生产代码无需改动。
 - [x] 完整 `python tools/pre_push_gate.py` 七阶段通过：Ruff、compileall、config doctor、complexity、host guard、全量 unit、contract/meta 全部 GREEN，临时 `.pp-*` 根自动清理。
-- [ ] 提交并推送测试环境修复，验证 Actions 三个 Python 版本全部通过。
+- [x] 提交并推送测试环境修复：commit `9c1f9b7`；Actions run `37002442446` 的 Unit tests 在 Python 3.11/3.12/3.13 全绿。
 
-**状态：**根因和测试修复已在 Linux/Windows 定向 E2E、完整本机 pre-push 验证；待提交推送和下一轮 Actions 验收。
+**状态：**Unit 根因和修复已由 Linux/Windows 定向 E2E、完整本机 pre-push、Actions 三版本验证。该 Actions run 的 Contract tests 三版本仍失败，具体 testcase 身份未公开；转 Phase 45 定位。
+
+## Phase 45：暴露并定位 Contract CI 失败身份（2026-10-02）
+
+- [x] 检查 `9c1f9b7` 的 Actions run `37002442446`：Unit tests 三版本全绿；Contract tests 三版本失败，公开 annotations 只有通用 exit 1，无法据此推断根因。
+- [x] 将 JUnit failure identity reporter 泛化为可复用 suite 名称/outcome，并给 Contract tests 写入 run/attempt 专属 JUnit 文件；独立 `if: always()` step 输出最多 25 个 node ID、文件和行号，不输出失败正文。
+- [x] reporter focused tests **7 passed**；Ruff、workflow YAML parse、`git diff --check` 通过。
+- [x] 完整 `python tools/pre_push_gate.py` 七阶段全部 GREEN；临时 `.pp-*` 根自动清理。
+- [ ] 提交并推送 Contract reporter；从新的 Actions annotations/summary 取得失败 node ID，按第一性原理复现并修复；本地完整门禁、远端三版本 Unit/Contract 均通过后关闭本阶段。
+
+**状态：**Unit CI 已修复并全绿；Contract 根因待新 reporter 提供具体用例。不能用本地 pre-push 的绿灯替代 GitHub 三版本验收。

@@ -983,3 +983,10 @@
 - 测试 helper 现为子进程明确设置 `PYTHONPATH=src`。WSL/Python 3.12（父环境无该变量）及 Windows/Python 3.13 的六项参数化 CLI E2E 分别 **6 passed in 29.12s**、**6 passed in 33.25s**。生产代码未改。
 - 完整 pre-push 和修复提交/推送尚待完成。
 - 完整 `python tools/pre_push_gate.py` 已通过七阶段；`.pp-*` 临时根已自动清理。测试/PWF 修复待提交推送及 Actions 三版本验收。
+
+## Session: 修复 Unit CI 并定位剩余 Contract 失败（2026-10-02）
+
+- `9c1f9b7` 已推送；Actions run `37002442446` 的 Unit tests 在 Python 3.11/3.12/3.13 全绿。根因修复得到远端确认。
+- 同一 run 三版 Contract tests 失败，公开 API 只给通用 exit 1，不能据此判断失败用例。给 contract pytest 加 run/attempt 专属 JUnit 报告和 always-run failure summary，reporter 支持通用 suite 名称/outcome。
+- helper focused tests **7 passed**；Ruff、workflow YAML parse、`git diff --check` 通过；完整 `python tools/pre_push_gate.py` 七阶段全绿且清理 `.pp-*` 根。
+- 当前 reporter/PWF 改动未提交。提交推送后读取新 run 的 Contract node IDs，定位并修复失败；Unit 全绿不代表完整 CI 通过。

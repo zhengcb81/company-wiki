@@ -703,3 +703,10 @@
 - `pre_push_gate.py::_run` 对本机所有子进程注入 `PYTHONPATH=src`；原 `_blocked_environment()` 只删 API keys 并继承此路径。因此 Windows/Linux 本地 pre-push 的绿灯掩盖了 GitHub 环境缺项。
 - 在 `_blocked_environment()` 显式设置 `PYTHONPATH=ROOT/src` 后，WSL/Python 3.12 清除父进程路径时六个参数 **6 passed**，Windows/Python 3.13 同样 **6 passed**。这是测试启动环境缺陷，未改生产模块。
 - 修复后的完整 `python tools/pre_push_gate.py` 七阶段通过，临时 `.pp-*` 路径自动清理；提交推送及 GitHub 三版本复验待做。
+
+## 2026-10-02 — Unit 根因已由远端验证，Contract CI 仍失败
+
+- commit `9c1f9b7` 修复后，Actions run `37002442446` 的 Unit tests 在 Python 3.11、3.12、3.13 均通过；验证 `test_writer_freeze.py` 子进程显式 `PYTHONPATH=src` 解决了原 CI 缺包导入路径问题。
+- 同 run 的 Contract tests 三个矩阵均失败，公开 annotations 只有通用退出码，当前证据不能区分平台差异或具体用例。
+- 已把 JUnit reporter 扩展为通用 suite 名称/outcome，并为 Contract tests 增加独立 always-run 汇报步骤；它只上报 testcase node ID/文件/行号，不输出 traceback。reporter 7 项测试通过，Ruff、workflow YAML parse、diff check 和完整本机七阶段 pre-push 均通过。
+- 后续需先推送 reporter 并读新 CI 的 testcase identities，再复现并修复 Contract 根因；不能把 Unit 已绿写成整条 CI 已绿。
