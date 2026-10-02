@@ -914,3 +914,14 @@
 - 所有本轮独立测试根 .push-rf-20261001/.pc8869/.pc8869b/.prwred/.prwgreen/.pp7f8c/.ppd6d3 均已验证不存在；Win32 pytest owner ACL 使不同执行上下文清理曾失败，改由创建它们的原上下文或同权限上下文清理成功，未修改生产权限。旧不可读 pytest 根不清理。该发布收据提交后正常推送文档，随后暂停；不继续 RF/G-A/G-C/G-D 实现。
 
 - 最后远端核对：CWP master 已到 **7c800313ae41ca516b5ac4a8421f73614f845c56**，本地与远端一致，标准六门再次全绿，最后 .ppreceipt 根已清理。随后发现前一 run **36936780795 / d6d33b8** 的 Python 3.11/3.12/3.13 job 均在 **Unit tests** 步骤失败；check-run 注释只有 exit 1 和 runner/action 提示，未给具体失败用例，不能推断根因。最新 run **36937052936 / 7c80031** 当时 queued。远端 CI **未验收**；按用户收尾暂停要求不扩展产品改造，恢复后先获取失败日志、区分环境/测试/实现，再修 RF 已记录的 snapshot 发布门。此 CI 事实补充文档提交正常推送。
+
+## 2026-10-02 — 远端 Unit tests 复现与修正
+
+- 复核 RF：`rf-impl main@3e03ce83` 仍领先 origin 4；dirty fcap 四个可见状态文件字节与其 HEAD 相同，不提交/覆盖。
+- 匿名 GitHub API 确认 run 36937292193 Python job 的前置 Ruff、mypy、compile/config 通过，Unit tests 失败；下载 job logs 返回 403 `Must have admin rights to Repository`。
+- 本机按 CI 原命令 `pytest tests/unit -q --tb=short` 在 Python 3.13 重现 **1038 passed / 2 failed**。
+- 数值矛盾 fixture 日期硬编码在 2026-06-24..27，超过实现的最近 90 天窗口。测试改为按 today 生成距今 1..4 天的相邻日期，保留现有功能契约；不改产品代码。
+- stage semantic spot 的 `provider_site_automation_blocked` 已不在 reason registry；既有清洁架构计划 §4.1 已将它认定为过时测试期望。移除这条旧硬编码，保留真实的 `downloaded_bytes_exceed_authorized_cap -> acquisition+safety` 映射。
+- 两个失败模块聚焦回归 **29 passed**；完整 unit 回归 **1040 passed in 70.57s**，Ruff 通过。
+- 三个确切 basetemp `.ciunit1002/.cwfails-fixed/.cwall-unit1002` 均以同一受限上下文清理；清理脚本逐项核对目标是 workspace 直接子目录、无 reparse point，并恢复测试生成的只读权限；三个路径最终都不存在。生产 raw/配置/运行 Worker 未动。
+- 下一步提交并正常推送，检查新的 GitHub Actions unit/contract/coverage；旧 runs 已过期，不能替代新提交验收。

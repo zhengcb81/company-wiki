@@ -163,7 +163,7 @@ def test_stage_attribution_semantic_spots() -> None:
     assert is_registered_stage("safety")
     attributed = {s for stages in STAGES_BY_REASON.values() for s in stages}
     assert "safety" in attributed
-    assert stages_for_reason("provider_site_automation_blocked") == ("safety",)
+    # Safety attribution is represented by this registered download-cap reason.
     assert stages_for_reason("downloaded_bytes_exceed_authorized_cap") == (
         "acquisition", "safety",
     )

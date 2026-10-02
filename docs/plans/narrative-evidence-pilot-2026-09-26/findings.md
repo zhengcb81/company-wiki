@@ -647,3 +647,11 @@
 - 发布检查的 writer freeze 不是来源完整性失败：全 scripts 文本 write/unlink 扫描无法区分写来源回执、迁移 catalog 和写研究 Wiki。新增精确六项 source-workflow 分类，scanner 与 launcher 复用同一分类；RED 6→完整包 20 GREEN，保留退役研究 writer 的不相交断言。避免通过添加 legacy 环境门阻塞正确的来源层职责。
 
 - 本地标准 push GREEN 不等于远端 full Unit tests GREEN。d6d33b8 的 Actions 36936780795 三个 Python 矩阵均 Unit tests exit 1；annotations 不含具体失败用例，根因尚未确定。7c80031 收据提交已远端一致，后续 CI 当时 queued。保留下一恢复节点，不把 runner Node/Ubuntu 提示误判为失败原因。
+
+## 2026-10-02 — 远端 Unit tests 失败根因复现
+
+- GitHub Actions runs `36936780795`、`36937052936`、`36937292193` 均在 Python unit tests 失败；匿名 REST 的 job-log 下载返回 403 `Must have admin rights to Repository`，annotations 只给 step exit 1。按相同 CI 命令复跑当前 CWP master 的 `tests/unit`：1040 项中 1038 passed、2 failed。
+- `test_contradiction_detector.py::test_detect_numeric_contradictions` 使用固定 2026-06-24..27 日期，而 `ContradictionDetector._extract_recent_entries` 用运行时 `datetime.now()-90 days` 截断。当前日期已超过窗口，测试 fixture 失效；不是解析器回归。测试 fixture 应按运行时固定相对日期生成并保留同一事件的日期差，恢复确定性。
+- `test_stage_taxonomy.py` 的 `provider_site_automation_blocked` 不在当前 REASONS；现有 `downloaded_bytes_exceed_authorized_cap` 已覆盖 acquisition+safety。计划 `clean_architecture_tdd_execution_plan_2026-09-27.md` §4.1 明确记录这个 semantic spot 是旧测试预期，应调整测试，不新增已移除的 provider restriction reason。
+
+- 2026-10-02 将 root cause 拆成两项可独立验证的测试修正：时间窗 fixture 确定性与过时 taxonomy semantic spot。通过本机完整 1040 unit 面；不扩展到调整业务实现。GitHub Actions 原始 job logs 因 API 要求 repo admin 被拒绝下载，但本机同版本完整重现两项具体失败并修复。

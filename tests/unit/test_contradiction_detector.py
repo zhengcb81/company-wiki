@@ -6,6 +6,7 @@
 import pytest
 from pathlib import Path
 from unittest.mock import patch
+from datetime import datetime, timedelta
 
 import sys
 
@@ -17,6 +18,12 @@ from contradiction_detector import ContradictionDetector, Contradiction
 @pytest.fixture
 def test_wiki_with_contradictions(tmp_path):
     """创建带有矛盾的测试 wiki"""
+    # The detector intentionally ignores entries older than 90 days. Keep the
+    # fixture recent while preserving its one-day event ordering.
+    recent_dates = [
+        (datetime.now().date() - timedelta(days=offset)).isoformat()
+        for offset in (1, 2, 3, 4)
+    ]
     wiki_root = tmp_path / "wiki"
     wiki_root.mkdir()
 
@@ -59,6 +66,7 @@ last_updated: "2026-06-27"
 
 - [来源](../raw/news/test1.md)
 """
+    page1_content = page1_content.replace("2026-06-27", recent_dates[0])
 
     page2_content = """---
 title: "相关动态"
@@ -77,6 +85,7 @@ last_updated: "2026-06-26"
 
 - [来源](../raw/research/report1.md)
 """
+    page2_content = page2_content.replace("2026-06-26", recent_dates[1])
 
     (company_dir / "wiki" / "公司动态.md").write_text(page1_content, encoding="utf-8")
     (company_dir / "wiki" / "相关动态.md").write_text(page2_content, encoding="utf-8")
@@ -103,6 +112,10 @@ last_updated: "2026-06-25"
 
 - [来源](../raw/reports/annual2.md)
 """
+    page3_content = (
+        page3_content.replace("2026-06-25", recent_dates[2])
+        .replace("2026-06-24", recent_dates[3])
+    )
 
     (company_dir / "wiki" / "财务数据.md").write_text(page3_content, encoding="utf-8")
 

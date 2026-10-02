@@ -37,3 +37,7 @@ FMP 大节点测试：真实 ET serializer golden→CWP import CLI→catalog→v
 - 本次仅将 transcript importer 入口校验与工具合同的 byte cap 校验抽为 helper，保留错误顺序和原有行为；并修正六项来源工具的 legacy 分类（20 passed）；没有改生产配置或原始文档；不运行空间清理/生产 Worker。用户要求收尾后暂停，恢复后从上述剩余节点继续。
 
 **远端 CI 后续覆盖：**CWP 已同步到 7c80031；d6d33b8 的 Actions 36936780795 已结束失败，Python 3.11/3.12/3.13 均 Unit tests exit 1，公开 annotations 未给具体用例。最新 docs run 当时 queued。本地发布门全绿不代表远端 full suite 已通过，恢复时先取日志定位，不把 runner/action 提示当根因。暂停状态不变。
+
+## 2026-10-02 CI root-fix follow-up
+
+CWP 的旧远端 runs `36936780795`/`36937052936`/`36937292193` 在 Unit tests 步骤失败；run `36937292193` 可见 job 元数据显示 Ruff/mypy/compile 前置通过。GitHub 匿名日志下载要求 repo admin（403）。本地同 CI 命令完整复现 1038/2：recent-window fixture 静态日期过期、stage spot 引用已移出 REASONS 的 provider-site code。只改测试：fixture 使用动态近日日历，taxonomy 保留当前真实 safety mapping。两个失败文件 29 passed，完整 unit 1040 passed；产品实现未改。远端新 commit CI 待验。

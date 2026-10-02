@@ -436,6 +436,16 @@ company-wiki 只负责来源、解析质量、证据定位、检索和来源摘�
 
 **Status:** 盘点与 PWF 校准完成；实施计划保留原依赖顺序，仅补充 selected bundle transport 的具体边界和 owner 交接。Worker 仍 paused/default-off，原文保留。跨仓 E2E 与派生空间清理仍未完成。
 
+## Phase 35：远端 Unit tests 失败归因与修复（2026-10-02）
+
+- [x] 逐字节按 CI 的 unit 命令本机复现：1040 项中 1038 passed、2 failed；三个 GitHub Actions 运行均在 Unit tests 步骤失败。匿名 job-log API 要求仓库 admin，拒绝下载；以本机完整测试与当前源文件查明根因。
+- [x] 年龄窗口造成的 contradiction fixture 过期；test fixture 改为依据今天生成最近 1–4 天且相邻一天的事件日期，生产代码不改。
+- [x] taxonomy semantic spot 的 provider-site reason 在 registry/spec 已移除，既有 §4.1 记载测试预期过时；去掉失效 hardcode，保留合法 cap-overflow → acquisition+safety 断言。
+- [x] 两个失败文件聚焦包 29 passed，Ruff 通过。
+- [x] 重跑完整 `tests/unit`：**1040 passed in 70.57s**。定向两文件 29 passed、Ruff 通过；生产代码未改。三个独立 pytest 根均已核验路径并清理，原状恢复。
+
+**Status:** 两个远端 unit 根因已复现并作为测试漂移修正；本机 CI unit 面全绿。接下来提交/推送并验新远端 CI，包含本次尚未运行的完整 contract/coverage 等步骤。
+
 ## Next Step
 
-按用户要求，完成本轮提交/远端发布后暂停。恢复时先复核 live owner 状态并取得 CWP 远端 Unit tests 失败日志（本地标准六门已绿，CI 未验收），解决 RF historical snapshot/live HEAD 的发布检查并正常推送，再完成 G-0 剩余真实 reader/locator 与 G-A（含 FMP JSON admission 和 publication 未知语义），不重复 E-B/W04。随后由 CWP 固定独立 `NarrativeBundle /2.0` pathless export/read CLI，RF/StockWiki 各自接入并跑 G-C，再按相关消费门和无引用事实进行 G-D 精确派生清理。Worker 保持 paused/default-off；不清理其他 owner 的 dirty tree。
+提交并推送 Phase 35 测试/PWF 修正，核对 GitHub Actions 的 unit 与后续 contract/coverage 步骤；完成后继续处理 RF compatibility snapshot 发布门。
