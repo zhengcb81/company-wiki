@@ -924,4 +924,12 @@
 - stage semantic spot 的 `provider_site_automation_blocked` 已不在 reason registry；既有清洁架构计划 §4.1 已将它认定为过时测试期望。移除这条旧硬编码，保留真实的 `downloaded_bytes_exceed_authorized_cap -> acquisition+safety` 映射。
 - 两个失败模块聚焦回归 **29 passed**；完整 unit 回归 **1040 passed in 70.57s**，Ruff 通过。
 - 三个确切 basetemp `.ciunit1002/.cwfails-fixed/.cwall-unit1002` 均以同一受限上下文清理；清理脚本逐项核对目标是 workspace 直接子目录、无 reparse point，并恢复测试生成的只读权限；三个路径最终都不存在。生产 raw/配置/运行 Worker 未动。
-- 下一步提交并正常推送，检查新的 GitHub Actions unit/contract/coverage；旧 runs 已过期，不能替代新提交验收。
+- 下一步原计划为提交并正常推送、检查新的 GitHub Actions unit/contract/coverage；Phase 36 已补充远端失败与本机 Linux 复测的最新结论。
+
+## Session: Linux CI 差异与停机收尾（2026-10-02）
+
+- CWP `69652b5` 已推送，`git ls-remote` 确认 `origin/master` 与本地 HEAD 相同。GitHub run `36982949142` 的三个 Python job 都在 `Unit tests` 失败；markdown lint、CLI smoke、secret scan 成功。
+- 公开 API 可读 job 摘要，但失败日志下载返回 403 `Must have admin rights to Repository`。未读取凭据。该限制使远端具体失败用例仍未知。
+- 本地初次 WSL 结果无效：WSL 通过 Windows PATH 选中了 `zstd.exe`，造成 4 个需要 Linux zstd 的测试假失败。将 Ubuntu `zstd` 包解到临时 `/tmp` 后，聚焦包 **6 passed**、Linux/Python 3.12 全量 unit **1040 passed in 83.12s**。Windows/Python 3.13 全量 unit 亦 **1040 passed**。这些结果尚不能解释远端三矩阵同时失败，不能记远端 CI 为绿。
+- 本轮 `/tmp/cw-zstd-native-20261002`、`cw-retire-linux-20261002`、`cw-unit-linux-20261002`、`cw-unit-linux-native-20261002` 均核对为直接子目录且非符号链接后删除；复查均不存在。RF `main@3e03ce83` 仍 ahead origin 4；四个 `.planning/execution_runs` 可见状态文件逐字节等于 HEAD，未触碰。
+- 下一恢复动作：取得带具体失败用例的 Actions 日志或等效 runner 证据，再处理远端 CI；其后按计划继续。CWP 产品代码、原文、生产配置、Worker 和 RF 文件均未改。本轮仅更新 CWP PWF 并按用户要求暂停。

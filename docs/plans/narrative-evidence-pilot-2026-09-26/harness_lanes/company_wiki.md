@@ -1,6 +1,6 @@
 # CWP 独占施工卡：来源、叙述证据与 Worker
 
-> **2026-10-01 当前状态：**E-B 已由 merge commit `9e73eb4` 并入 CWP `master@00af53f`；集成后相关回归 349 passed/2 skipped，Ruff 56 个变更 Python 文件通过。此卡中 E-B 并线前的旧状态是历史记录，不再派发 E-B 重复工作。下一项 CWP 工作是 G-0/G-A 剩余真实合同验收，然后为 `NarrativeBundle /2.0` 建独立 pathless 引用/读回 golden，推进 G-C；生产 Worker 仍 paused/default-off。**写入范围**仍限定在 company-wiki 专用代码 worktree；总指挥独占本目录的计划与跨仓验收记录，其它项目目录只读。
+> **2026-10-02 当前状态：**E-B 已由 merge commit `9e73eb4` 并入 CWP 主线。CWP `master@69652b5` 已推送且与远端一致；Windows/Python 3.13 和 Linux/Python 3.12 全量 unit 各 1040 passed，但 Actions 三个 Linux Python 矩阵仍在 Unit tests 失败，日志下载因 repo admin 权限返回 403，不能宣称 CI 已验收。暂停前先取得具体失败日志；CI 问题解决后按 G-0/G-A → 独立 `NarrativeBundle /2.0` pathless golden → G-C 顺序推进。生产 Worker 仍 paused/default-off。**写入范围**仍限定在 company-wiki 专用代码 worktree；总指挥独占本目录的计划与跨仓验收记录，其它项目目录只读。
 
 开工输入包：本卡、S0a observed 接口表、指定 base/worktree、只读 P/T 样本清单（绝对路径、SHA、大小、期次、locator oracle、隔离复制/清理规则）。缺样本只阻对应真样本验收，不阻本仓 RED/代码整理。
 

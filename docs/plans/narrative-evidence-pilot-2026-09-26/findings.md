@@ -654,4 +654,10 @@
 - `test_contradiction_detector.py::test_detect_numeric_contradictions` 使用固定 2026-06-24..27 日期，而 `ContradictionDetector._extract_recent_entries` 用运行时 `datetime.now()-90 days` 截断。当前日期已超过窗口，测试 fixture 失效；不是解析器回归。测试 fixture 应按运行时固定相对日期生成并保留同一事件的日期差，恢复确定性。
 - `test_stage_taxonomy.py` 的 `provider_site_automation_blocked` 不在当前 REASONS；现有 `downloaded_bytes_exceed_authorized_cap` 已覆盖 acquisition+safety。计划 `clean_architecture_tdd_execution_plan_2026-09-27.md` §4.1 明确记录这个 semantic spot 是旧测试预期，应调整测试，不新增已移除的 provider restriction reason。
 
-- 2026-10-02 将 root cause 拆成两项可独立验证的测试修正：时间窗 fixture 确定性与过时 taxonomy semantic spot。通过本机完整 1040 unit 面；不扩展到调整业务实现。GitHub Actions 原始 job logs 因 API 要求 repo admin 被拒绝下载，但本机同版本完整重现两项具体失败并修复。
+- 2026-10-02 将本机失败拆成两项可独立验证的测试修正：时间窗 fixture 确定性与过时 taxonomy semantic spot。通过本机完整 1040 unit 面；不扩展到调整业务实现。GitHub Actions 原始 job logs 因 API 要求 repo admin 被拒绝下载；此时只确认本机问题已修，不将其视为远端失败已查明。
+
+## 2026-10-02 — Linux CI 复现边界
+
+- WSL 默认 PATH 将 `zstd` 解析为 Windows `zstd.exe`。该 Windows 程序不能读取 WSL `/tmp` 路径，故首轮 Linux 测试中 `test_retire_source_catalog_db.py` 的 4 项失败是本地跨系统工具选择问题，不是有效的 Ubuntu 复现。
+- 使用临时解包的 Ubuntu 原生 zstd 后，退休工具模块为 **6 passed**，完整 Linux/Python 3.12 unit 套件为 **1040 passed in 83.12s**；临时包和 pytest 根均已移除。Windows/Python 3.13 同版本全量套件也为 **1040 passed**。
+- 公开 Actions job 摘要仍显示 run `36982949142` 的 Python 3.11、3.12、3.13 全在 `Unit tests` 步骤失败。GitHub job-log API 对当前匿名访问返回 403 `Must have admin rights to Repository`。因此远端具体用例与本地通过之间仍有未解释差异，不能宣称已修复或验收远端 CI；需要有权限的失败日志或可复现的同版本 runner 环境。

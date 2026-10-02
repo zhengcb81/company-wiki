@@ -438,14 +438,26 @@ company-wiki 只负责来源、解析质量、证据定位、检索和来源摘�
 
 ## Phase 35：远端 Unit tests 失败归因与修复（2026-10-02）
 
-- [x] 逐字节按 CI 的 unit 命令本机复现：1040 项中 1038 passed、2 failed；三个 GitHub Actions 运行均在 Unit tests 步骤失败。匿名 job-log API 要求仓库 admin，拒绝下载；以本机完整测试与当前源文件查明根因。
+- [x] 按 CI 的 unit 命令在本机 Windows/Python 3.13 复现：1040 项中 1038 passed、2 failed；修正的是本机发现的两项测试漂移，不代表已查明所有远端 Linux 失败。
 - [x] 年龄窗口造成的 contradiction fixture 过期；test fixture 改为依据今天生成最近 1–4 天且相邻一天的事件日期，生产代码不改。
 - [x] taxonomy semantic spot 的 provider-site reason 在 registry/spec 已移除，既有 §4.1 记载测试预期过时；去掉失效 hardcode，保留合法 cap-overflow → acquisition+safety 断言。
 - [x] 两个失败文件聚焦包 29 passed，Ruff 通过。
 - [x] 重跑完整 `tests/unit`：**1040 passed in 70.57s**。定向两文件 29 passed、Ruff 通过；生产代码未改。三个独立 pytest 根均已核验路径并清理，原状恢复。
 
-**Status:** 两个远端 unit 根因已复现并作为测试漂移修正；本机 CI unit 面全绿。接下来提交/推送并验新远端 CI，包含本次尚未运行的完整 contract/coverage 等步骤。
+**Status:** 两项本机测试漂移已修正且 Windows 全量 unit 通过。新远端 CI 仍失败，远端根因由 Phase 36 跟踪。
+
+## Phase 36：Linux 复现、CI 差异与收尾（2026-10-02）
+
+- [x] 首轮 WSL 测试错误地从 Windows PATH 选中 `zstd.exe`；该程序不能访问 WSL `/tmp`，使退休工具的 4 个用例报找不到 Linux 测试文件。此结果是 WSL 工具选择造成的假失败，不作为 GitHub Linux CI 根因。
+- [x] 在 `/tmp` 临时解包 Ubuntu 原生 zstd（未安装到系统），退休工具聚焦包 **6 passed**；完整 Linux/Python 3.12 `tests/unit` **1040 passed in 83.12s**。此前 Windows/Python 3.13 全量 unit **1040 passed**。
+- [x] 复核远端 run `36982949142`（commit `69652b5bba8b77125fd6df3074c48ee916e12181`）：Python 3.11/3.12/3.13 三个 job 都在 `Unit tests` 失败；markdown-lint、cli-smoke、secret-scan 成功。
+- [x] 再次请求失败 job 日志，GitHub API 返回 403 `Must have admin rights to Repository`。未读取凭据；公开 job 摘要没有具体失败用例。因此不能把 Phase 35 两项本机测试修正称为远端 CI 根因。
+- [x] RF 复核：`rf-impl main@3e03ce83` 仍领先 `origin/main` 4 个提交；4 个可见 `.planning/execution_runs` 状态文件与其 HEAD 字节相同，保留不恢复、不提交。
+- [x] 清理本轮 WSL 原生 zstd 包和 3 个临时 pytest 根；逐路径确认均直接位于 `/tmp`、非符号链接后删除，复核 4 个临时路径均不存在。
+- [x] CWP `master@69652b5` 与 `origin/master` 一致；本阶段只补 PWF 收据，无产品代码改动。生产 Worker 仍 paused/default-off，原始文件和生产数据未改。
+
+**Status:** 本机 Windows/Python 3.13 与 Linux/Python 3.12 的全量 unit 均通过。远端三版本 Unit tests 仍红，缺少 admin 权限无法读取日志，故 CI 尚未验收；恢复时先取得具体失败用例/CI 日志，再决定是否需要代码或环境修复。其余 G-0/G-A、G-C、G-D 仍按原顺序待办。
 
 ## Next Step
 
-提交并推送 Phase 35 测试/PWF 修正，核对 GitHub Actions 的 unit 与后续 contract/coverage 步骤；完成后继续处理 RF compatibility snapshot 发布门。
+当前按用户要求暂停。恢复后先解决 CWP 远端 Unit tests 失败的证据缺口；CI 通过后再继续既定 G-0/G-A → NarrativeBundle/G-C → G-D 顺序，并在实施 RF 发布门前复核 RF 当前 PWF 与工作树。
