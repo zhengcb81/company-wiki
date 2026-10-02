@@ -63,6 +63,13 @@ def main(report_path: str) -> int:
         _append_step_summary(["## Unit test report unavailable", "", message])
         return 0
     if not failures:
+        if os.environ.get("UNIT_TEST_OUTCOME") == "failure":
+            message = (
+                "pytest exited nonzero but JUnit contains no failing testcase; "
+                "inspect the authenticated job log"
+            )
+            print(f"::error title=Unit test diagnostics::{_escape_command_data(message)}")
+            _append_step_summary(["## Unit test failure details unavailable", "", message])
         return 0
 
     summary_lines = ["## Failed unit tests", ""]

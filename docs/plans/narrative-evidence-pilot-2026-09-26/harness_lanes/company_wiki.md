@@ -1,6 +1,6 @@
 # CWP 独占施工卡：来源、叙述证据与 Worker
 
-> **2026-10-02 当前状态：**E-B 已并入 CWP 主线。本地 pre-push 覆盖完整 unit/contract pytest，使用短隔离 basetemp 与 UTF-8，最近完整七阶段 GREEN。全量负载下曾有两项 CLI test helper 的 10 秒子进程上限超时，已调整至 30 秒并复跑全门。GitHub run `36992457178` 的 3.11/3.12/3.13 Unit tests 全失败，匿名 annotations 未显示同一步失败 helper 的 node ID。CI 现改为独立 `if: always()` reporter，写 job summary 与 error annotations；待推送验证后按具体用例定位修复。
+> **2026-10-02 当前状态：**E-B 已并入 CWP 主线。本地 pre-push 覆盖完整 unit/contract pytest，使用短隔离 basetemp 与 UTF-8，最近完整七阶段 GREEN。全量负载下两项 CLI test helper 的 10 秒上限已调整至 30 秒。远端 `9393d76` 对应 run `36995666512` 的 3.11/3.12/3.13 Unit tests 仍失败（约 14–15 秒）；独立 reporter 成功运行但公开 annotations 无失败 testcase 身份。工作树新增 `UNIT_TEST_OUTCOME` fallback，报告 pytest 非零但 JUnit 无失败 testcase；聚焦测试 7 passed，完整门与推送待验。
 
 开工输入包：本卡、S0a observed 接口表、指定 base/worktree、只读 P/T 样本清单（绝对路径、SHA、大小、期次、locator oracle、隔离复制/清理规则）。缺样本只阻对应真样本验收，不阻本仓 RED/代码整理。
 

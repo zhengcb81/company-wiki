@@ -520,3 +520,14 @@ company-wiki 只负责来源、解析质量、证据定位、检索和来源摘�
 - [x] 再跑完整 `python tools/pre_push_gate.py`，Ruff、compileall、config doctor、complexity、host guard、全量 unit、contract/meta 全部 GREEN；临时根自动清理，`git diff --check` 通过。
 
 **状态：**当前本地完整提交/推送门 GREEN，CI reporter 和 PWF 更新待提交。远端失败测试身份仍未知；推送后用 job summary/annotations 定位。
+
+## Phase 42：处理 CI reporter 未输出失败身份（2026-10-02）
+
+- [x] 推送 `9393d76` 后检查 Actions run `36995666512`：3.11/3.12/3.13 的 `Unit tests` 均失败；分别约 14–15 秒。Ruff、mypy、compileall/config doctor 与其它公开 jobs 成功；`Unit test failure summary` 均报告 success。
+- [x] 公开 check-run annotations 仍仅有 runner 的通用 step failure，没有 testcase node ID。独立 reporter 虽执行，但当前 API 无法读取 job step log/summary 的具体内容；不据此断言 JUnit 空、解析失败或某个测试失败。
+- [x] 将 `steps.unit_tests.outcome` 传给 reporter；若 pytest 非零但 JUnit 没有失败 testcase，则输出“pytest exited nonzero but JUnit contains no failing testcase”诊断，而不静默结束。新增空 JUnit 回归测试。
+- [x] reporter 聚焦包 **7 passed**；Ruff、workflow YAML parse、`git diff --check` 通过。
+- [x] 再跑完整 `python tools/pre_push_gate.py`：Ruff、compileall、config doctor、complexity、host guard、unit、contract/meta 全部 GREEN；pytest 隔离临时根自动清理。
+- [ ] 提交推送该 fallback；检查下一轮 annotations 是否至少给出 testcase 身份或“无失败 testcase”明确诊断。仍没有时，需要用户登录后的 job log/summary 内容才能确定根因。
+
+**状态：**远端根因未定位。job summary 对登录后的仓库用户可用，但本执行环境未登录；公开 REST job-log 下载此前返回 403。当前 fallback 已通过完整本地门禁，待提交推送验证。

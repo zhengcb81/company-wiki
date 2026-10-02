@@ -683,3 +683,9 @@
 - 全量 pre-push 曾得到 1044 passed、2 failed；两项都由测试 helper 的 `subprocess.run(timeout=10)` 抛 `TimeoutExpired`，断言主体尚未失败。
 - 定向两项 **2 passed in 16.07s**；同环境五次 CLI 单独启动耗时 1.20–8.80 秒。测试测的是只读结果、退出码和输出，不定义响应时间 SLA；Windows 全量 suite 下 10 秒 watchdog 太紧。
 - unit/contract 两个 CLI helper 的超时上限改成 30 秒后，完整 pre-push 七阶段全部 GREEN，且无 `.pp-*` 残根。这个本地稳定性问题不能解释 GitHub `36992457178` 的三版本远端失败；新独立 reporter 仍需推送验证。
+
+## 2026-10-02 — 独立 CI reporter 的剩余盲点
+
+- `9393d76` 的 Actions run `36995666512` 中三个 Python 矩阵的 Unit tests 均失败，耗时约 14–15 秒；后续独立 reporter step 均 success。公开 check-run annotations 仍未显示节点标识。
+- 现有 helper 在解析到有效 JUnit、但无 failure/error testcase 时静默返回。这可能是“无节点 annotation”的一种解释，但缺少 XML 与 job log 不能认定实际发生了此情况。
+- 工作树加入 unit-step `outcome` 传递；只有 pytest step 明确 failure 且 JUnit 没有失败节点时，helper 才发通用诊断。这样区分“成功且报告无失败”与“失败但报告不给用例”。新增 fallback 用例后 helper 7 项和完整 pre-push 均通过；更新待提交推送及新 Actions 验证。

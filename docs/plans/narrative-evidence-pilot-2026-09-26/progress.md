@@ -962,3 +962,11 @@
 - 两个失败用例单独复跑 **2 passed in 16.07s**。五次直接 CLI 进程启动耗时 1.20–8.80 秒；测试验证只读结果/退出码/JSON，没有 10 秒性能合同，因此 unit 与 contract CLI test helper timeout 改为 30 秒。
 - 调整后完整 `python tools/pre_push_gate.py` 的 Ruff、compileall、config doctor、complexity、host assumption guard、unit、contract/meta 全部 GREEN；`.pp-*` 临时根清理，`git diff --check` 通过。
 - 远端 `36992457178` 具体失败用例仍不可见。独立 `if: always()` JUnit reporter 尚未推送，仍需以新 Actions run 验证。
+
+## Session: reporter 运行但未暴露 testcase（2026-10-02）
+
+- 提交并推送 `9393d76`，本机 commit/pre-push hooks 均通过。新 Actions run 为 `36995666512`。
+- 公开 API 确认 Python 3.11、3.12、3.13 的 unit job 均失败；Ruff、mypy、compileall/config doctor 成功。三个 pytest step 分别运行约 14–15 秒；独立 `Unit test failure summary` step 结论均为 success。
+- check-run annotations 仍只有 GitHub runner 的通用退出码，没有 testcase node ID。没有登录凭据访问 job step log；不推断是空报告或特定测试失败。
+- 为避免 reporter 在 pytest 非零但 JUnit 不含失败 testcase 时静默返回，workflow 给 unit step 加 `id`，将其 `outcome` 传入独立 reporter；新增 fallback annotation/summary 与回归测试。聚焦 helper **7 passed**，Ruff、YAML parse 与 diff check 通过；完整 pre-push/推送待做。
+- 完整 `python tools/pre_push_gate.py` 已通过：Ruff、compileall、config doctor、complexity、host guard、unit、contract/meta 全 GREEN；fallback 与 PWF 更新待提交推送。

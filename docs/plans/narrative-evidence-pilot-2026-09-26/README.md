@@ -1,6 +1,6 @@
 # 叙述性证据规划：执行入口
 
-> **2026-10-02 最新状态：**CWP `master@b8fdfb7` 已推送。本地完整 pre-push 最近一轮 GREEN；两项 CLI subprocess 测试在 Windows 全量负载下曾越过 10 秒 watchdog，已调至 30 秒并重跑全门通过。Actions run `36992457178` 的 Python 3.11/3.12/3.13 Unit tests 全失败；公开 annotations 未显示同一步 helper 的 node ID。现将失败报告改为独立 `if: always()` 步骤，并写 `GITHUB_STEP_SUMMARY`；该诊断与 timeout 稳定性修复待提交、推送和远端验证。具体远端用例仍未知，不能宣称 CI 已修复。见 [task_plan.md Phase 37–41](task_plan.md)、[findings.md](findings.md)、[progress.md](progress.md)。
+> **2026-10-02 最新状态：**CWP `master@9393d76` 已推送。本地完整 pre-push GREEN；两项 CLI subprocess 测试在 Windows 全量负载下曾越过 10 秒 watchdog，已调至 30 秒。Actions `36995666512` 的 Python 3.11/3.12/3.13 Unit tests 仍在约 14–15 秒失败；独立 reporter 成功执行，但公开 annotations 仍无 testcase node ID。新增 failure-outcome fallback 后 helper 7 项和完整 pre-push 均 GREEN，待提交推送与下一次 Actions 验证。远端根因尚未定位。见 [task_plan.md Phase 37–42](task_plan.md)、[findings.md](findings.md)、[progress.md](progress.md)。
 
 > **2026-09-29 入口更新：**先读[多余门禁统一清理方案](gate_and_contract_simplification_2026-09-29.md)，再读[六仓独占施工与总指挥计划](parallel_harness_orchestration_2026-09-29.md)。两页依次裁定要清理的真实代码/历史规则、各仓独立写入范围、接口与汇合测试；`task_plan.md` Phase 25 记录本轮规划状态。2026-09-28 的[跨仓总图](cross_repo_mainline_and_delivery_plan_2026-09-28.md)保留历史基线和详细施工背景，冲突时以 2026-09-29 两页为准。本项目已取消逐文件人工审批、review receipt 和常规独立签字；自动测试/完整性断言是常规依据。旧 provider policy 与人工 review 文档不得作为新实施门槛。
 

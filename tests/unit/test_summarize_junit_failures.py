@@ -80,6 +80,19 @@ def test_pass_report_produces_no_failure_diagnostic(tmp_path: Path, capsys) -> N
     assert capsys.readouterr().out == ""
 
 
+def test_failed_pytest_with_no_failed_case_gets_a_diagnostic(
+    tmp_path: Path, capsys, monkeypatch
+) -> None:
+    report = tmp_path / "empty-junit.xml"
+    suite = ET.Element("testsuite", {"tests": "0", "failures": "0", "errors": "0"})
+    ET.ElementTree(suite).write(report, encoding="utf-8", xml_declaration=True)
+    monkeypatch.setenv("UNIT_TEST_OUTCOME", "failure")
+
+    assert main(str(report)) == 0
+    output = capsys.readouterr().out
+    assert "pytest exited nonzero but JUnit contains no failing testcase" in output
+
+
 def test_collection_error_without_testcase_gets_a_generic_identity(
     tmp_path: Path, capsys
 ) -> None:

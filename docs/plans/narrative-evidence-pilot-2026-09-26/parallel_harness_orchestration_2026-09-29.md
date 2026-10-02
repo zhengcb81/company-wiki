@@ -88,4 +88,4 @@ G-D：逐批按实际消费者引用选择已通过的 G-A/G-B/G2b/G-C；无全�
 
 **发布收尾覆盖：**CWP 已推送 d6d33b8，标准 pre-push 六门全绿；ET 已推送 4924d57。RF 的 historical current_triplet 检查 25 passed/2 failed，暂未推送，恢复时先 RED 修分层。当前暂停，StockWiki/IQS 无远端，FF 支线等待同一 owner 汇合；远端 CWP CI 核对时仍运行。
 
-**2026-10-02 状态覆盖：**CWP `master@b8fdfb7` 已推送。本地完整 pre-push 最近七阶段 GREEN；两项 CLI 测试在 Windows 全量负载下超过 10 秒 watchdog，已调至 30 秒。Actions `36992457178` 中 3.11/3.12/3.13 Unit tests 全失败，其它公开 jobs 成功；匿名 annotations 未显示 inline helper 的失败 node ID。当前 CI 改为独立 `if: always()` reporter，同时写 job summary/annotations，待新 run 验证实际可见性。细节见 [task_plan.md Phase 37–41](task_plan.md)。RF 当前 main `3e03ce83` ahead origin 4，既有 execution_runs 文件保持原样。
+**2026-10-02 状态覆盖：**CWP `master@9393d76` 已推送。本地完整 pre-push 最近七阶段 GREEN；两项 CLI 测试在 Windows 全量负载下超过 10 秒 watchdog，已调至 30 秒。Actions `36995666512` 的 3.11/3.12/3.13 Unit tests 仍失败约 14–15 秒；独立 `if: always()` reporter 执行成功，但公开 annotations 没有失败节点。CWP 工作树加入 pytest failure outcome fallback，helper 7 项及完整门通过，待推送。细节见 [task_plan.md Phase 37–42](task_plan.md)。RF 当前 main `3e03ce83` ahead origin 4，既有 execution_runs 文件保持原样。
