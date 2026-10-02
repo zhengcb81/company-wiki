@@ -1,6 +1,6 @@
 # 叙述性证据规划：执行入口
 
-> **2026-10-02 最新状态：**CWP `master@69652b5` 已推送且与 `origin/master` 同步。Windows/Python 3.13 与 Linux/Python 3.12 全量 unit 各 **1040 passed**；GitHub Actions run `36982949142` 的 Python 3.11/3.12/3.13 仍在 Unit tests 步骤失败，失败日志 API 要求仓库 admin，故远端 CI 未验收。细节与收尾状态见 [task_plan.md Phase 36](task_plan.md) 和 [progress.md](progress.md)。用户要求当前手头工作完成后暂停；恢复时先解决 CI 证据缺口，再按 G-0/G-A、G-C、G-D 的原顺序推进，并核对各仓最新 HEAD/WIP。
+> **2026-10-02 最新状态：**CWP `master@69652b5` 当前基线仍与 `origin/master` 同步；Windows/Python 3.13、Linux/Python 3.12、Python 3.11.15 原生 Linux 文件系统的全量 unit 均 **1040 passed**。已确认 pre-commit 不含 pytest，旧 pre-push 也漏掉完整 unit；新 pre-push 已加入全量 `tests/unit`，并且全门 GREEN。此前 GitHub Actions runs `36982949142`、`36984865650` 的三个 Python job 仍失败，匿名 job-log API 返回 403，具体远端失败未定位。详见 [task_plan.md Phase 37](task_plan.md)、[findings.md](findings.md) 和 [progress.md](progress.md)。推送本地门禁改动后需检查新 Actions；远端通过后再按 G-0/G-A、G-C、G-D 原顺序推进。
 
 > **2026-09-29 入口更新：**先读[多余门禁统一清理方案](gate_and_contract_simplification_2026-09-29.md)，再读[六仓独占施工与总指挥计划](parallel_harness_orchestration_2026-09-29.md)。两页依次裁定要清理的真实代码/历史规则、各仓独立写入范围、接口与汇合测试；`task_plan.md` Phase 25 记录本轮规划状态。2026-09-28 的[跨仓总图](cross_repo_mainline_and_delivery_plan_2026-09-28.md)保留历史基线和详细施工背景，冲突时以 2026-09-29 两页为准。本项目已取消逐文件人工审批、review receipt 和常规独立签字；自动测试/完整性断言是常规依据。旧 provider policy 与人工 review 文档不得作为新实施门槛。
 

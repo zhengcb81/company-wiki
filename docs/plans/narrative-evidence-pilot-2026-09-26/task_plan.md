@@ -458,6 +458,18 @@ company-wiki 只负责来源、解析质量、证据定位、检索和来源摘�
 
 **Status:** 本机 Windows/Python 3.13 与 Linux/Python 3.12 的全量 unit 均通过。远端三版本 Unit tests 仍红，缺少 admin 权限无法读取日志，故 CI 尚未验收；恢复时先取得具体失败用例/CI 日志，再决定是否需要代码或环境修复。其余 G-0/G-A、G-C、G-D 仍按原顺序待办。
 
+## Phase 37：把全量 Unit tests 纳入推送门（2026-10-02）
+
+- [x] 查明本地提交门配置：pre-commit 仅运行 Ruff、选择性 mypy、config doctor 和 host guard；配置注释明确完整 pytest 留给人工。
+- [x] 查明旧 pre-push 虽有六项检查，但未运行 `tests/unit`；因此本机 1040 项 unit 回归可以在提交和推送时都不执行。
+- [x] 将完整命令 `python -m pytest tests/unit -q --tb=short` 加入 `tools/pre_push_gate.py`，放在 contract/meta 定向测试之前；保留每项失败即中止的行为。commit hook 保持快速。
+- [x] 更新 `.pre-commit-config.yaml` 说明：全量 unit 由 pre-push 执行，更广 contract/coverage 仍由 CI 执行。
+- [x] 新 pre-push 全门通过：Ruff、compileall、config doctor、复杂度 ratchet、host assumption guard、完整 unit suite、contract/meta suite 均 GREEN。
+- [x] Python 3.11.15、CI 同版依赖、原生 Linux 文件系统复跑 `tests/unit`：**1040 passed in 169.84s**。此前 Windows/Python 3.13 与 Linux/Python 3.12 也各为 1040 passed。
+- [ ] 提交并正常推送新 pre-push 门；检查触发的 GitHub Actions。若远端 Unit tests 仍失败，需取得 repo admin 可见的具体 job log，不能以本地通过宣称远端根因已解决。
+
+**结论：**确认的是门禁缺口，不是远端失败的具体根因。pre-commit 没有 pytest；旧 pre-push 没有完整 unit suite。远端 Actions 的 Python 3.11/3.12/3.13 曾同时报 Unit tests exit 1，而当前三种本地 CI 等价环境均通过；GitHub job-log API 匿名访问返回 403，因此仍有远端/本地差异未解释。
+
 ## Next Step
 
-当前按用户要求暂停。恢复后先解决 CWP 远端 Unit tests 失败的证据缺口；CI 通过后再继续既定 G-0/G-A → NarrativeBundle/G-C → G-D 顺序，并在实施 RF 发布门前复核 RF 当前 PWF 与工作树。
+正常提交并推送本阶段代码与 PWF；随后读取新 Actions run 的状态和可见摘要。若 unit 仍红，继续保留本地全量 pre-push 门，并以有权限的失败日志定位具体用例；远端通过后再按既定 G-0/G-A → NarrativeBundle/G-C → G-D 顺序继续，并在实施 RF 发布门前复核 RF 当前 PWF 与工作树。

@@ -1,6 +1,6 @@
 # CWP 独占施工卡：来源、叙述证据与 Worker
 
-> **2026-10-02 当前状态：**E-B 已由 merge commit `9e73eb4` 并入 CWP 主线。CWP `master@69652b5` 已推送且与远端一致；Windows/Python 3.13 和 Linux/Python 3.12 全量 unit 各 1040 passed，但 Actions 三个 Linux Python 矩阵仍在 Unit tests 失败，日志下载因 repo admin 权限返回 403，不能宣称 CI 已验收。暂停前先取得具体失败日志；CI 问题解决后按 G-0/G-A → 独立 `NarrativeBundle /2.0` pathless golden → G-C 顺序推进。生产 Worker 仍 paused/default-off。**写入范围**仍限定在 company-wiki 专用代码 worktree；总指挥独占本目录的计划与跨仓验收记录，其它项目目录只读。
+> **2026-10-02 当前状态：**E-B 已由 merge commit `9e73eb4` 并入 CWP 主线。已确认旧 pre-commit 和 pre-push 都未跑完整 `tests/unit`；全量 unit 已纳入 `tools/pre_push_gate.py`，新 push gate 全门 GREEN。Windows/Python 3.13、Linux/Python 3.12 与 Python 3.11.15 原生 Linux 全量 unit 各 1040 passed。此前 Actions 三个 Python 矩阵的 Unit tests 失败，匿名日志 API 返回 403，具体远端用例仍未知；推送门禁后需看新 Actions 是否复现。通过后按 G-0/G-A → 独立 `NarrativeBundle /2.0` pathless golden → G-C 顺序推进。生产 Worker 仍 paused/default-off。**写入范围**仍限定在 company-wiki 专用代码 worktree；总指挥独占本目录的计划与跨仓验收记录，其它项目目录只读。
 
 开工输入包：本卡、S0a observed 接口表、指定 base/worktree、只读 P/T 样本清单（绝对路径、SHA、大小、期次、locator oracle、隔离复制/清理规则）。缺样本只阻对应真样本验收，不阻本仓 RED/代码整理。
 

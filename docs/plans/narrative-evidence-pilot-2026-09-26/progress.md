@@ -933,3 +933,11 @@
 - 本地初次 WSL 结果无效：WSL 通过 Windows PATH 选中了 `zstd.exe`，造成 4 个需要 Linux zstd 的测试假失败。将 Ubuntu `zstd` 包解到临时 `/tmp` 后，聚焦包 **6 passed**、Linux/Python 3.12 全量 unit **1040 passed in 83.12s**。Windows/Python 3.13 全量 unit 亦 **1040 passed**。这些结果尚不能解释远端三矩阵同时失败，不能记远端 CI 为绿。
 - 本轮 `/tmp/cw-zstd-native-20261002`、`cw-retire-linux-20261002`、`cw-unit-linux-20261002`、`cw-unit-linux-native-20261002` 均核对为直接子目录且非符号链接后删除；复查均不存在。RF `main@3e03ce83` 仍 ahead origin 4；四个 `.planning/execution_runs` 可见状态文件逐字节等于 HEAD，未触碰。
 - 下一恢复动作：取得带具体失败用例的 Actions 日志或等效 runner 证据，再处理远端 CI；其后按计划继续。CWP 产品代码、原文、生产配置、Worker 和 RF 文件均未改。本轮仅更新 CWP PWF 并按用户要求暂停。
+
+## Session: 补齐 push 前 Unit tests 门（2026-10-02）
+
+- 用户要求修复先前提交后触发的远端 CI Unit tests 失败，并追查 pre-commit 为什么没有拦截。核对发现 commit hook 无 pytest；旧 pre-push 也没有完整 `tests/unit`，故既有 GREEN 只覆盖静态检查及定向 contract/meta。
+- `tools/pre_push_gate.py` 现运行完整 `tests/unit`，失败即阻止 push；`.pre-commit-config.yaml` 注释同步说明 commit hooks 保持快速、完整 unit 在 pre-push、较广 contract/coverage 仍由 CI 执行。
+- 更新后的 Windows 全门 GREEN：Ruff、compileall、config doctor、复杂度 ratchet、host assumption guard、unit tests、contract/meta tests。
+- Fresh Python 3.11.15 + CI 同版依赖 + 原生 Linux 文件系统完整 unit：**1040 passed in 169.84s**；Windows/Python 3.13 与 Linux/Python 3.12 也均为 1040 passed。
+- 仍未取得 GitHub run `36982949142`、`36984865650` 的具体失败日志（job-log API 403）。因此已修复“push 前本地门缺少 unit”的缺口，但远端失败根因仍未证实；待提交推送后检查新 Actions run，不把本地 GREEN 当成远端验收。

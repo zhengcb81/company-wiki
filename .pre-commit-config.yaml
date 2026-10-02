@@ -1,6 +1,7 @@
 # Local pre-commit gate mirroring the CI quality workflow's fast checks.
 # Pins match CI exactly (ruff 0.15.18, mypy 1.19.0 via the local system).
-# Full regression stays manual: run the affected pytest suites before push.
+# Keep commit hooks quick. The pre-push gate runs the complete tests/unit suite;
+# broader contract and coverage checks still run in CI.
 #
 #   pre-commit install   # once per clone (installs .git/hooks/pre-commit)
 #   pre-commit run --all-files   # full gate on demand

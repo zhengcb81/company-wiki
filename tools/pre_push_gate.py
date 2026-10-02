@@ -1,13 +1,14 @@
 """Pre-push gate: CI-equivalent fast checks BEFORE pushing (root-cause fix).
 
-Mirrors the CI workflow's fast surface so failures are caught locally:
+Runs the CI-quality checks plus its complete unit suite before push:
 
   1. ruff check src tests/unit tests/contract scripts   (CI WU-1.2)
   2. compileall src scripts tests                        (CI WU-7.1)
   3. config_doctor                                       (CI WU-7.1)
   4. FC-1204 complexity ratchet                          (CI meta-gate)
   5. host-assumption guard                              (CI meta-gate, FC-1307-a)
-  6. Section-extractor + binding + observation contract tests
+  6. Full unit suite                                     (CI Unit tests)
+  7. Section-extractor + binding + observation contract tests
      (the surfaces most often broken by cross-repo changes)
      plus the META tests about our own tooling: the frozen writer
      inventory (tests/unit/test_writer_freeze.py) and the host-assumption
@@ -19,8 +20,9 @@ class the local gate never ran - the gate must run the tests that judge the
 gate.  Add a new `scripts/*.py` CLI and this step tells you locally whether it
 needs the legacy-writer freeze.
 
-Exit non-zero on the first red check.  Full pytest + coverage ratchet
-stay in CI (too slow for a pre-push gate on Windows).
+Exit non-zero on the first red check.  The complete unit suite runs here so
+a local unit regression blocks push.  The broader contract suite and coverage
+ratchet stay in CI.
 
 Push protocol (see revenue-forecast ci_root_fix.md):
     python tools/pre_push_gate.py   # ~2-3 min
@@ -76,6 +78,8 @@ def main(argv: list[str] | None = None) -> int:
          "FC-1204 complexity ratchet (CI meta-gate)", None),
         ([sys.executable, "scripts/host_assumption_guard.py"],
          "host assumption guard (FC-1307-a; the class that broke CI in F-B01-9)", None),
+        ([sys.executable, "-m", "pytest", "tests/unit", "-q", "--tb=short"],
+         "unit tests (CI Unit tests)", None),
     ]
     if not args.skip_contract:
         gates.append((

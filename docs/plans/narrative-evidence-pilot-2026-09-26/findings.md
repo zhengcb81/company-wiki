@@ -661,3 +661,10 @@
 - WSL 默认 PATH 将 `zstd` 解析为 Windows `zstd.exe`。该 Windows 程序不能读取 WSL `/tmp` 路径，故首轮 Linux 测试中 `test_retire_source_catalog_db.py` 的 4 项失败是本地跨系统工具选择问题，不是有效的 Ubuntu 复现。
 - 使用临时解包的 Ubuntu 原生 zstd 后，退休工具模块为 **6 passed**，完整 Linux/Python 3.12 unit 套件为 **1040 passed in 83.12s**；临时包和 pytest 根均已移除。Windows/Python 3.13 同版本全量套件也为 **1040 passed**。
 - 公开 Actions job 摘要仍显示 run `36982949142` 的 Python 3.11、3.12、3.13 全在 `Unit tests` 步骤失败。GitHub job-log API 对当前匿名访问返回 403 `Must have admin rights to Repository`。因此远端具体用例与本地通过之间仍有未解释差异，不能宣称已修复或验收远端 CI；需要有权限的失败日志或可复现的同版本 runner 环境。
+
+## 2026-10-02 — 本地 push 门补齐 unit suite
+
+- 根因已拆为两层：`.pre-commit-config.yaml` 的 commit hooks 从未包含 pytest，且明确把完整回归留给人工；旧 `tools/pre_push_gate.py` 虽运行六项门，也只覆盖 Ruff、compile/config、复杂度、host guard 和指定 contract/meta 测试，没有完整 `tests/unit`。所以 hook 绿灯不能代表 CI 的 Unit tests 已在本机执行。
+- 将 CI 同命令 `python -m pytest tests/unit -q --tb=short` 加入 pre-push 门。最新完整门的 Ruff、compileall、config doctor、复杂度 ratchet、host assumption guard、1040 项 unit 和 contract/meta 全部 GREEN；任一失败会阻止后续推送。
+- 为确认操作系统/依赖差异，用 Python 3.11.15 与 GitHub CI 同版 requirements，在原生 Linux 文件系统复跑：**1040 passed in 169.84s**。已有 Windows/Python 3.13 和 Linux/Python 3.12 全量 unit 也各为 **1040 passed**。
+- 这解释了旧 hook 为什么没有阻止本地可复现回归；它不能单独解释 GitHub 上 36982949142、36984865650 的三版本失败。匿名 job-log API 返回 403 `Must have admin rights to Repository`，具体远端失败用例仍未知；新 push 后需核对 Actions，若仍失败需读取有权限的 job log。
