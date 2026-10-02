@@ -31,7 +31,7 @@ def test_emits_test_identity_without_failure_body(tmp_path: Path, capsys) -> Non
 
     assert main(str(report)) == 0
     output = capsys.readouterr().out
-    assert "::error file=tests/unit/test_example.py,line=10,title=Failed unit test::" in output
+    assert "::error file=tests/unit/test_example.py,line=10::" in output
     assert "tests/unit/test_example.py::test_case_0" in output
     assert "private traceback omitted" not in output
 
@@ -44,8 +44,8 @@ def test_caps_annotations_and_reports_remaining_failure_count(
 
     assert main(str(report)) == 0
     output = capsys.readouterr().out.splitlines()
-    assert sum("title=Failed unit test" in line for line in output) == 25
-    assert output[-1] == "::error title=Unit test diagnostics::and 5 more failing tests"
+    assert sum(line.startswith("::error file=tests/unit/test_example.py,line=") for line in output) == 25
+    assert output[-1] == "::error::and 5 more failing tests"
 
 
 def test_missing_junit_file_keeps_original_pytest_failure_actionable(

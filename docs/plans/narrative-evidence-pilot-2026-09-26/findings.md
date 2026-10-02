@@ -689,3 +689,9 @@
 - `9393d76` 的 Actions run `36995666512` 中三个 Python 矩阵的 Unit tests 均失败，耗时约 14–15 秒；后续独立 reporter step 均 success。公开 check-run annotations 仍未显示节点标识。
 - 现有 helper 在解析到有效 JUnit、但无 failure/error testcase 时静默返回。这可能是“无节点 annotation”的一种解释，但缺少 XML 与 job log 不能认定实际发生了此情况。
 - 工作树加入 unit-step `outcome` 传递；只有 pytest step 明确 failure 且 JUnit 没有失败节点时，helper 才发通用诊断。这样区分“成功且报告无失败”与“失败但报告不给用例”。新增 fallback 用例后 helper 7 项和完整 pre-push 均通过；更新待提交推送及新 Actions 验证。
+
+## 2026-10-02 — 最简 GitHub annotation 命令
+
+- run `36998369238` 的 check annotations 仍只有 runner 的通用 step failure。无法从公开 API 判断是 workflow command 未解析还是 helper 没走到失败分支。
+- 去除可选自定义 `title`，使用官方文档示例的 `::error file=...,line=...::message` 或 `::error::message`。这是降低命令解析变量的假设，必须以新 Actions annotation 验证。
+- helper 7 tests、Ruff、YAML parse、`git diff --check` 与完整本机 pre-push 均 GREEN；最简格式仍待推送实测。

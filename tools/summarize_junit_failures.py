@@ -59,7 +59,7 @@ def main(report_path: str) -> int:
     failures = _failed_cases(Path(report_path))
     if failures is None:
         message = "JUnit report unavailable or invalid; inspect the authenticated job log"
-        print(f"::error title=Unit test diagnostics::{_escape_command_data(message)}")
+        print(f"::error::{_escape_command_data(message)}")
         _append_step_summary(["## Unit test report unavailable", "", message])
         return 0
     if not failures:
@@ -68,7 +68,7 @@ def main(report_path: str) -> int:
                 "pytest exited nonzero but JUnit contains no failing testcase; "
                 "inspect the authenticated job log"
             )
-            print(f"::error title=Unit test diagnostics::{_escape_command_data(message)}")
+            print(f"::error::{_escape_command_data(message)}")
             _append_step_summary(["## Unit test failure details unavailable", "", message])
         return 0
 
@@ -78,14 +78,14 @@ def main(report_path: str) -> int:
         if line.isdigit():
             properties += f",line={line}"
         print(
-            f"::error{properties},title=Failed unit test::"
+            f"::error{properties}::"
             f"{_escape_command_data(node_id)}"
         )
         markdown_node_id = node_id.replace("`", "\\`")
         summary_lines.append(f"- `{markdown_node_id}`")
     if len(failures) > MAX_ANNOTATIONS:
         remainder = len(failures) - MAX_ANNOTATIONS
-        print(f"::error title=Unit test diagnostics::and {remainder} more failing tests")
+        print(f"::error::and {remainder} more failing tests")
         summary_lines.extend(["", f"And {remainder} more failing tests."])
     _append_step_summary(summary_lines)
     return 0

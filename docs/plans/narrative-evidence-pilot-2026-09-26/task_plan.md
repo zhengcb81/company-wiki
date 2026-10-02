@@ -476,7 +476,7 @@ company-wiki 只负责来源、解析质量、证据定位、检索和来源摘�
 
 ## Next Step
 
-提交并推送 CI 失败用例诊断 annotation；读取公开 annotation 定位红测，修复后重跑完整三版本 Actions。远端通过后再按既定 G-0/G-A → NarrativeBundle/G-C → G-D 顺序继续，并在实施 RF 发布门前复核 RF 当前 PWF 与工作树。
+提交并推送最简 CI failure annotation 格式，检查下一轮公开 annotations。若仍只有 runner 通用退出码，取得已登录 job log/summary 后按具体 pytest 输出修复；远端三版本通过后再按既定 G-0/G-A → NarrativeBundle/G-C → G-D 顺序继续，并在实施 RF 发布门前复核 RF 当前 PWF 与工作树。
 
 ## Phase 38：让无登录 CI 摘要暴露失败用例（2026-10-02）
 
@@ -508,9 +508,9 @@ company-wiki 只负责来源、解析质量、证据定位、检索和来源摘�
 - [x] helper 聚焦测试 **6 passed**；Ruff 与 workflow YAML 解析通过，覆盖失败节点/行号、25 项上限、丢失/损坏报告、job summary 内容以及无失败时无输出。
 - [x] 完整 `python tools/pre_push_gate.py` 通过：Ruff、compileall、config doctor、complexity、host guard、unit tests、contract/meta tests 全部 GREEN；退出后没有 `.pp-*` 临时根，`git diff --check` 通过。
 - [x] 首轮 pre-push unit 为 1044 passed、2 项 CLI subprocess 测试超时。两个用例单独重跑通过；五次 CLI 启动耗时 1.20–8.80 秒，10 秒上限在 Windows 全量负载下过紧。unit 与 contract 两个 CLI test helper 的 watchdog 已调为 30 秒；仍断言退出码、输出和只读行为，不把耗时作为产品 SLA。
-- [ ] 正常提交推送；检查新的 reporter step 结论、公开 annotations 与 job summary 是否实际可见。若仍没有节点，取得登录 job log或改用可匿名读取的受限测试报告 artifact。
+- [x] 已推送 reporter 到 `9393d76` 并检查 run `36995666512`；独立 step 成功，但公开 annotations 未展示节点。随后补充 outcome fallback（见 Phase 42）。
 
-**状态：**本地完整 pre-push 已 GREEN；失败用例识别仍未完成。下一次推送后验证独立 `always()` step、annotations 与 job summary，再据实际失败节点定位远端根因。
+**状态：**独立 `always()` step 已在远端运行；annotation/JUnit fallback 后续见 Phase 42–43。远端根因尚未定位。
 
 ## Phase 41：稳定 CLI 子进程测试并重跑完整门禁（2026-10-02）
 
@@ -528,6 +528,17 @@ company-wiki 只负责来源、解析质量、证据定位、检索和来源摘�
 - [x] 将 `steps.unit_tests.outcome` 传给 reporter；若 pytest 非零但 JUnit 没有失败 testcase，则输出“pytest exited nonzero but JUnit contains no failing testcase”诊断，而不静默结束。新增空 JUnit 回归测试。
 - [x] reporter 聚焦包 **7 passed**；Ruff、workflow YAML parse、`git diff --check` 通过。
 - [x] 再跑完整 `python tools/pre_push_gate.py`：Ruff、compileall、config doctor、complexity、host guard、unit、contract/meta 全部 GREEN；pytest 隔离临时根自动清理。
-- [ ] 提交推送该 fallback；检查下一轮 annotations 是否至少给出 testcase 身份或“无失败 testcase”明确诊断。仍没有时，需要用户登录后的 job log/summary 内容才能确定根因。
+- [x] 提交推送 outcome fallback（`81e23b1`），检查 run `36998369238`；公开 annotations 仍只有 runner 通用退出码，未给 testcase 或 fallback 身份。
+- [ ] 验证最简 command 格式（Phase 43）；若仍无信息，具体 pytest 输出需要用户登录后的 job log/summary。
 
-**状态：**远端根因未定位。job summary 对登录后的仓库用户可用，但本执行环境未登录；公开 REST job-log 下载此前返回 403。当前 fallback 已通过完整本地门禁，待提交推送验证。
+**状态：**outcome fallback 已本地验证、提交并推送，公开 annotations 仍没有 testcase 身份。匿名 REST job-log 下载此前返回 403；继续验证 Phase 43 的最简 command 格式。
+
+## Phase 43：改用最简 GitHub error command（2026-10-02）
+
+- [x] Actions `36998369238`（commit `81e23b1`）仍有三版 Unit tests failure；outcome fallback 之后，公开 annotations 仍只列 runner 的通用退出码。不能据此确定是 outcome 未传入、JUnit 状态为空，还是 workflow-command 解析问题。
+- [x] 将 annotation 输出改成 GitHub 文档示例的最简形式：有 testcase 时 `::error file=...,line=...::node-id`，无测试身份时 `::error::message`，移除可选自定义 title 属性以减少解析变量。
+- [x] reporter 聚焦测试 **7 passed**；Ruff、workflow YAML parse、`git diff --check` 通过。
+- [x] 完整 `python tools/pre_push_gate.py` 七阶段全部 GREEN。
+- [ ] 提交推送最简 command 格式；通过下一轮公开 annotations 验证 runner 是否识别。仍只有通用退出码时，具体 pytest 输出需要登录后的 job log/summary。
+
+**状态：**远端失败根因仍未定位。当前本地输出格式验证通过，真实 GitHub command annotation 效果待 CI 实测。

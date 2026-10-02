@@ -970,3 +970,8 @@
 - check-run annotations 仍只有 GitHub runner 的通用退出码，没有 testcase node ID。没有登录凭据访问 job step log；不推断是空报告或特定测试失败。
 - 为避免 reporter 在 pytest 非零但 JUnit 不含失败 testcase 时静默返回，workflow 给 unit step 加 `id`，将其 `outcome` 传入独立 reporter；新增 fallback annotation/summary 与回归测试。聚焦 helper **7 passed**，Ruff、YAML parse 与 diff check 通过；完整 pre-push/推送待做。
 - 完整 `python tools/pre_push_gate.py` 已通过：Ruff、compileall、config doctor、complexity、host guard、unit、contract/meta 全 GREEN；fallback 与 PWF 更新待提交推送。
+
+## Session: 最简 GitHub error command（2026-10-02）
+
+- Actions run `36998369238`（commit `81e23b1`）三版本仍失败；unit reporter 与 outcome fallback 均 success，但公开 annotations 仍没有 testcase 身份。
+- reporter 去掉 `title`，改用 GitHub workflow command 文档中的最简 error 格式；聚焦 7 tests 与完整 pre-push 均通过，PWF 同步。待提交推送后再次核对公开 annotations。
