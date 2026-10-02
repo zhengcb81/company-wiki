@@ -1,9 +1,9 @@
 """Local validation helpers for the GitHub CI fast gate.
 
-The installed pre-push hook runs only ``--metadata-reader-contracts-only`` to
-keep push latency short. Run this script without arguments for the optional
-full local gate; GitHub Actions runs the regular Unit and portable Contract
-suites after push.
+The installed pre-push hook and GitHub Actions use ``--fast-contracts-only``
+to keep routine validation short. Run this script without arguments for the
+optional full local gate; all portable Contract tests remain available by
+running pytest directly.
 
 Run without flags for the optional full local validation suite:
 
@@ -42,17 +42,21 @@ import tempfile
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-READER_CONTRACT_FILES = (
-    "tests/contract/test_r4b05b_shared_column_readers.py",
-    "tests/contract/test_fc905_receipt_envelope.py",
-    "tests/contract/test_b10_read_chain.py",
-)
 CURRENT_CI_REGRESSION_CASES = (
     "tests/contract/test_zr203_reader_rewire.py::test_read_entrypoints_never_construct_catalog_store",
     "tests/contract/test_zr1003_shadow_assertions.py::test_c2_recorded_review_unblocks",
     "tests/contract/test_zr1006_broker_cohort.py::test_c2_ramp_1_to_3_to_7",
     "tests/contract/test_source_catalog_temp_worker_governance.py::test_owned_temp_worker_helper_detects_test_pid",
     "tests/contract/test_source_catalog_temp_worker_governance.py::test_stop_does_not_touch_unowned_live_workers_or_temporary_files",
+)
+FAST_CONTRACT_CASES = (
+    *CURRENT_CI_REGRESSION_CASES,
+    "tests/contract/test_source_catalog_section_extractor.py::test_annual_report_extracts_mda_and_business_overview",
+    "tests/contract/test_source_catalog_section_extractor.py::test_prospectus_uses_zhang_heading",
+    "tests/contract/test_fc906a_producer_binding_metadata.py::test_sections_artifact_is_v2_bindable",
+    "tests/contract/test_fc905_receipt_envelope.py::test_pi03_no_review_is_explicit_not_reviewed",
+    "tests/contract/test_r4b05b_shared_column_readers.py::test_the_summarizer_selection_survives_a_malformed_shared_column",
+    "tests/contract/test_b10_read_chain.py::test_b10_scan_is_not_vacuous",
 )
 
 
@@ -127,9 +131,13 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--skip-contract", action="store_true",
                         help="skip the contract-test step (fast lint-only)")
     parser.add_argument(
-        "--metadata-reader-contracts-only",
+        "--fast-contracts-only",
         action="store_true",
-        help="run reader contracts and the current CI regression cases",
+        help="run the curated portable contract smoke set used by CI and the push hook",
+    )
+    parser.add_argument(
+        "--junitxml",
+        help="write a JUnit report for the fast contract set",
     )
     args = parser.parse_args(argv)
 
@@ -163,14 +171,21 @@ def main(argv: list[str] | None = None) -> int:
             "focused contracts, recent CI regressions, and gate regression tests",
             None,
     )
-    metadata_reader_contract_gate = (
+    fast_contract_gate = (
         [sys.executable, "-m", "pytest", "-q", "--tb=short", "--timeout=180",
-         *READER_CONTRACT_FILES, *CURRENT_CI_REGRESSION_CASES],
-        "reader contracts plus the current CI regression cases",
+         *FAST_CONTRACT_CASES],
+        "CI fast contract smoke set",
         None,
     )
-    if args.metadata_reader_contracts_only:
-        gates = [metadata_reader_contract_gate]
+    if args.fast_contracts_only:
+        fast_gate = fast_contract_gate
+        if args.junitxml:
+            fast_gate = (
+                [*fast_contract_gate[0], f"--junitxml={args.junitxml}"],
+                fast_contract_gate[1],
+                fast_contract_gate[2],
+            )
+        gates = [fast_gate]
     elif not args.skip_contract:
         gates.append(focused_contract_gate)
 

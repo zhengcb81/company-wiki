@@ -1,6 +1,6 @@
 # 叙述性证据规划：执行入口
 
-> **2026-10-02 最新状态：**远端 `master@a3685a1` 的单 job CI run `37067439635` 用时 5m14s 后失败，唯一报告身份为 `test_zr1006_broker_cohort::test_c2_ramp_1_to_3_to_7` 的 `FileNotFoundError`。C2 误读 RF golden corpus，现已改用合成 key；单项在 corpus 路径故意不存在时通过。全量 branch coverage 已从常规 CI 移除（旧 #165/#166 约 1h46/25m）；普通 #167 约 5m14，比此前 #164 的 5m56 快 42 秒。已给 pip 安装加缓存，并把每次 push 的本机全量七阶段改为约 54 秒的聚焦 reader/regression gate。新 Actions 验收仍待提交推送。详见 task_plan Phase 52 与 [CI 交接卡](ci_red_handoff_2026-10-02.md)。
+> **2026-10-02 最新状态：**CI 主因已由真实 step timing 定位：run `37070651953` 在 4m16s 通过，Contract 用例耗时 3m30s（约 82%），Unit 为 11s、依赖安装 24s；此前全量 coverage 曾耗 25 分钟至 1h46。CI 与本机 push/pre-commit 正收敛为同一精选契约集（11 个显式 node IDs，含 worker ownership、reader-chain、叙述抽取和既有红灯回归），保留完整 Unit，移除日常 2,120 项 portable Contract 执行及自动 coverage。精选集本机 JUnit 验收、workflow/计划校验通过后推送，最终以新 Actions 的实际 wall time/绿灯验收。参数路由与旧 pre-commit 标记已发现并修复；当前状态见 task_plan Phase 53 与[CI 交接卡](ci_red_handoff_2026-10-02.md)。
 
 > **2026-09-29 入口更新：**先读[多余门禁统一清理方案](gate_and_contract_simplification_2026-09-29.md)，再读[六仓独占施工与总指挥计划](parallel_harness_orchestration_2026-09-29.md)。两页依次裁定要清理的真实代码/历史规则、各仓独立写入范围、接口与汇合测试；`task_plan.md` Phase 25 记录本轮规划状态。2026-09-28 的[跨仓总图](cross_repo_mainline_and_delivery_plan_2026-09-28.md)保留历史基线和详细施工背景，冲突时以 2026-09-29 两页为准。本项目已取消逐文件人工审批、review receipt 和常规独立签字；自动测试/完整性断言是常规依据。旧 provider policy 与人工 review 文档不得作为新实施门槛。
 

@@ -787,3 +787,12 @@
 - 安装阶段尚无匿名可读的 GitHub step log，不能准确报出 pip 相对 pytest 的耗时占比。针对可证实的重复安装成本，在 setup-python 加 pip cache、将两个 requirements 一次解析安装并移除每次运行的 pip 自升级；下一次 run 验证实际收益。
 - `.githooks/pre-push` 之前每次推送完整执行 7 阶段：Ruff、compile/config、ratchet、host guard、全 Unit 和 focused contracts，导致 push 前重复数分钟。现在 hook 只跑 `--metadata-reader-contracts-only` 的 reader/regression 回归组；其真实 GREEN 用时约 54 秒。完整七阶段仍可人工运行，GitHub 继续承担常规 Unit/portable Contract 全套。
 - 保持原测试本身，当前无证据表明这批测试随机 flaky；本轮证实的是外仓 corpus 依赖未标在实际读取它的测试上。下一轮提交后观察 cache warm run、总 wall time 和 failure annotations，再基于 step 证据决定是否还需减少自动测试数。匿名 GitHub 不提供日志，所以暂不虚构步骤级时长分解。
+
+## 2026-10-02 — CI 时长根因复核与精选集接线
+
+- GitHub Actions #168 / run `37070651953` 已提供 step 级时长：总计 **4m16s**；依赖安装 24s；Ruff <1s、mypy 1s、compile/config 2s；Unit 11s；Contract **3m30s**。约 82% 的常规 run 用时来自执行 2,120 个 portable Contract 项；单 job 并非慢因，完整 Unit 也只需 11 秒。更早 25m/1h46 的独立根因是自动 full-tree branch coverage，已从日常 workflow 移除。
+- 把常规合同缩为 11 个明确的回归/高风险 node IDs，并复用同一 `FAST_CONTRACT_CASES` 入口到 CI、pre-push 和匹配相关文件的 pre-commit。完整 Unit 继续运行；完整 Contract 和 coverage 保留手工入口，测试代码不删除。
+- 在追查本机 JUnit 复跑的长耗时时发现参数路由 bug：`--fast-contracts-only --junitxml=...` 实际拼入较大的 `focused_contract_gate`。因此那轮耗时不是 11 项精选集性能证据。现已改为拼接 `fast_contract_gate`；修复后本机精选命令 GREEN，JUnit 报告含 15 个 testcase（11 个显式 IDs 中共享 reader 测试展开为参数化项）。
+- `.pre-commit-config.yaml` 也残留已删除的 `--metadata-reader-contracts-only` 参数，且注释错误声称 pre-push 执行全量 Unit；统一修为 `--fast-contracts-only` 并更新说明。这是此前仅看 `ci.yml` 和 pre-push 时会漏掉的本地门禁接线缺陷。
+- 实际调用 pre-commit 首次因 sandbox 下默认 `%USERPROFILE%\.cache\pre-commit` 只读而在配置数据库写入前失败；改用仓库 `tmp/` 中唯一的临时 `PRE_COMMIT_HOME` 后，真实 hook **Passed**，目录清理。它是测试环境缓存权限限制，并非 CI/testcase 红灯，也没有改写全局缓存。
+- 新 Actions 尚未由本次工作树触发，故本机结果只能证明选定合同可通过，不代表新 CI 已全绿或达到目标时长。等新 run 再记录完整 wall time 与单 job 状态。

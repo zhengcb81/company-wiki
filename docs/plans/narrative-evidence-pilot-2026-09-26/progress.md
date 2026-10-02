@@ -1065,3 +1065,12 @@
 - 静态比较 2026-09-25 基线至今测试函数从 2,664 增至 2,999（约 +12.6%），文件从 275 增到 314；当前 Unit collection 1,048，Contract collection 2,120 selected/32 deselected。最大时长根因是此前每次 CI 在三版 Python matrix 中重复执行 `tests/` full branch coverage；单次运行也耗约 25 分钟。去掉 coverage 后常规 #167 为 5m14s，之前 #164 为 5m56s。
 - 为减少重复等待，CI 安装改为 setup-python pip cache + 单次解析安装；push hook从完整七阶段缩至 reader/regression focused gate，并把 ZR-1006 C2 加入本地 regression case。`python tools/pre_push_gate.py --metadata-reader-contracts-only` GREEN，约 54s；完整七阶段仍保留手动入口，未在本轮重跑。
 - 当前待办：Ruff、workflow cache YAML/关键不变量、计划 claim、diff 检查；普通提交推送后等新 Actions 完成，记录 cache 命中与耗时，确认旧 FileNotFoundError 消失。若 warmed run 仍慢，再按可读 step timings缩减，不先删除宽泛 suite。
+
+## Session: 依据真实 step timing 再压缩 CI（2026-10-02）
+
+- 复核远端成功 run #168（`37070651953`，4m16s）：Install 24s，Ruff <1s、mypy 1s、compile/config 2s，Unit 11s，Contract 3m30s。主要日常瓶颈是常规筛选下 2,120 项 portable Contract；旧 branch coverage 长测已删除，单个 job/Unit 不是当前耗时主因。
+- CI/pre-push 收敛到同一 11 个显式 Contract node IDs；覆盖 reader/assertion/scheduler regression、worker ownership、年报与招股书抽取、producer binding、receipt、shared-column、B10 scan。CI 仍保留完整 Unit；没有删除其他测试，完整 Contract/coverage 仅不在日常自动门禁中。
+- 定向验证发现 `--junitxml` 误引用更宽的 `focused_contract_gate`，导致之前一次诊断复跑跑了超出精选清单的合同集。已修成从 `fast_contract_gate` 拼接 JUnit 参数。精选运行 GREEN，JUnit 中 15 个 testcase（含参数化展开），隔离 basetemp 自动清理；本轮报告文件已清理。
+- 检查到 `.pre-commit-config.yaml` 仍调用已删除的 `--metadata-reader-contracts-only`，匹配到相应源文件时会报参数错误；已改用 `--fast-contracts-only`，并更正 pre-commit 文档对 pre-push 全 Unit 的陈旧说明。
+- 直接精选门测试和真实 `pre-commit run metadata-reader-contracts --files tests/contract/test_b10_read_chain.py` 均通过；JUnit 为 15 testcase。默认 pre-commit cache 在受限环境只读，故用 repo 内随机临时 `PRE_COMMIT_HOME` 重跑；hook GREEN，缓存目录退出后删除。该只读 cache 是执行环境问题，不是仓库测试失败。
+- Ruff、workflow 与 pre-commit YAML 解析、单 job/10 分钟/pip cache/Unit/no-auto-coverage 不变量、`verify_plan_claims.py --plan-dir .`（11 plans）及 `git diff --check` 均通过。当前修改含 workflow、push/commit hooks、门禁脚本和 PWF；聚合提交推送后以新 Actions 结果验收时长和绿灯，#168 的 4m16 留作运行全 portable Contract 的基线。

@@ -103,3 +103,12 @@
 - 新提交优化安装：setup-python pip cache、一次解析 runtime/test/ruff requirements、移除每次 pip upgrade。下一次 Actions 验证缓存收益。
 - `.githooks/pre-push` 之前每次推送还会先运行全量本机七阶段。本地 hook 已改为只执行 `python tools/pre_push_gate.py --metadata-reader-contracts-only`；该回归组 GREEN、约 54 秒，完整 gate 命令仍可人工运行。ZR-1006 C2 已加入本机 regression set。
 - **当前接手状态：**测试、workflow、hook 与 PWF 更新待提交。关键本机检查包括 C2 missing-corpus probe 1 passed/3.20s 与 metadata-reader gate GREEN/约 54s；还需 Ruff、workflow YAML/invariants、plan claim、diff check，再正常 commit/push。新 run 通过后再把阶段置完成。不要恢复自动 full branch coverage，也别无证据删除合同；cache 后仍慢时先按可用 step timing 缩小。
+
+## 2026-10-02 最新复核：常规 Contract 是 4 分钟主因（Phase 53）
+
+以下状态覆盖上文尚未刷新到 #168 的快门快照：
+
+- run `37070651953` (#168，`b676980`) 成功，总耗时 **4m16s**；step timings：Install 24s，Ruff <1s，mypy 1s，compile/config 2s，Unit 11s，Contract **3m30s**。因此常规耗时的直接主因是 2,120 项 portable Contract 全量执行，而非 Unit、单 job 或静态检查；旧 branch coverage 导致的 25m–1h46 长测已另行删除。
+- 当前工作树将 Contract 日常门收敛到 `FAST_CONTRACT_CASES` **11 个显式 node IDs**；JUnit 展开为 **15 个 testcase**。保留完整 Unit 和单 Python 3.12 的静态/config/CLI/secret 门；其余 Contract 与 branch coverage 不删除，留给需要时的手工命令。
+- GitHub CI、pre-push、匹配源文件时触发的 pre-commit 使用同一个 `--fast-contracts-only`。过程中发现并修复 `--junitxml` 曾选中更大的 `focused_contract_gate`，以及 pre-commit 配置残留失效参数 `--metadata-reader-contracts-only`；因此此前该参数带来的长复跑是命令接线错误，不是精选集速度证据。
+- 精选门本机 JUnit run GREEN，报告已核实为 15 个 testcase；临时 basetemp 和报告已清理。真实 pre-commit hook 也 GREEN（受限环境的默认 cache 只读，使用 repo 内临时 `PRE_COMMIT_HOME` 后运行并清理）。Ruff、YAML/pre-commit parse、单 job/timeout/cache/unit/no-coverage 不变量、11-plan claim verifier 与 diff 检查均通过。接下来可聚合 commit/push；新 Actions 是速度和绿灯最终验收，不得把本机定向通过写成远端全绿。

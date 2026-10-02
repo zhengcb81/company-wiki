@@ -653,3 +653,16 @@ company-wiki 只负责来源、解析质量、证据定位、检索和来源摘�
 - [ ] 正常提交推送本次修复；确认缓存安装下 CI 结果与 wall time，并核对原 ZR-1006 红灯清零。若耗时仍高于可接受的数分钟，再按真实 step timings 缩小每次 push 的测试集合；不凭猜测删掉整个 suite。
 
 **本阶段结论：**近年可见的正常 CI 并未因这轮单 job 收敛而变慢：`37067439635` 5m14s，比之前 `37043343785` 5m56s 快约 42 秒；“几十分钟至数小时”的突增对应全量 branch coverage。匿名 GitHub 可见摘要与 annotations，但不提供登录后 step logs，因此不能把五分钟精确分摊到 pip 安装、Unit、Contract。后续用 pip cache 和本地 hook 降低可优化部分，并用下一轮实测决定是否收窄自动 test items。
+
+## Phase 53：按实际 CI 耗时收敛快门并修复门禁接线（2026-10-02）
+
+- [x] 复核快门 commit `b676980` 的真实 Actions run `37070651953`：run 全长 **4m16s**，安装 **24s**，Ruff <1s，mypy 1s，compile/config 2s，Unit **11s**，portable Contract **3m30s**。日常耗时主因不是 Unit 或静态检查，而是每次运行 **2,120 个 portable Contract 项**（另 32 项已 marker 排除）。旧 branch coverage 造成的 25 分钟至 1h46 长测已另行取消。
+- [x] 保留可快速且高价值的阻断面：单 Python 3.12、10 分钟 job timeout、setup-python pip cache、静态/config/CLI/secret 检查、完整 Unit；Contract 缩到 `FAST_CONTRACT_CASES` 的 **11 个显式 node IDs**（JUnit 展开为更多参数化 testcase），仍含 ZR reader/assertion/scheduler 红灯、worker ownership 两项、年报/招股书抽取、producer binding、PI03、shared-column malformed input 和 B10 scan。
+- [x] 使用同一个 `--fast-contracts-only` 入口连接 GitHub CI、`.githooks/pre-push` 与按相关源码路径触发的 pre-commit，避免三套互不一致的清单；完整 portable Contract 与 branch coverage 保留为人工命令，不自动跑、不删测试。
+- [x] 根因复核中发现 `--junitxml` 分支错用了 `focused_contract_gate`，导致诊断性复跑绕过 11 项快门、执行更宽的合同集；改为给 `fast_contract_gate` 本身附加 JUnit 参数。修复后实际 fast gate 只报告精选 node IDs；本次验证通过，报告包含 **15 个 testcase**（参数化项展开），并自动清理 run basetemp 与临时报告。
+- [x] 修复 `.pre-commit-config.yaml` 残留的已删除参数 `--metadata-reader-contracts-only`，统一到 `--fast-contracts-only`，并更正文档注释中“pre-push 运行全量 Unit”的过时描述。
+- [x] 记录差异与失败归类：#168 是成功基线；当前修改后的 CI 结果尚待推送触发，新 Actions 的 wall time 和全绿结果作为本阶段最终远端收据。此前 JUnit 长耗时复跑属于脚本选错测试集，不记作精选集慢或 flaky。
+- [x] 本地快门 **GREEN**：11 个显式 ID / JUnit 15 testcase；直接 gate 与真正的 pre-commit hook 均通过（hook 用 repo 内临时 `PRE_COMMIT_HOME`，退出清理）；Ruff、workflow/pre-commit YAML parse 与单 job/10m/pip-cache/full-unit/no-coverage invariants、plan claim verifier（11 plans）、`git diff --check` 通过。
+- [ ] 正常提交推送并确认新 Actions 单 job 全绿及实际 wall time。若精选集再出现红灯，按失败 node ID 修根因；若仍超出用户可接受的分钟级时长，先看 step timing，只减少没有明确回归价值的重复项。
+
+**当前结论：**本机这 11 项精选合同通过；报告展开 15 个 testcase。真正 pre-commit hook 也在 repo-local 临时缓存下通过。上一轮的长耗时定位为 JUnit 参数错误地运行较宽 `focused_contract_gate`，而 GitHub #168 正常 4m16 的主瓶颈确实是 3m30 的全 portable Contract。新方案以单一清单复用到提交 hook、push hook 和 CI；远端速度收益待新 run 验证，不把预期写成已验收事实。

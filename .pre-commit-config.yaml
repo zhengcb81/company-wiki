@@ -1,8 +1,8 @@
 # Local pre-commit gate mirroring the CI quality workflow's fast checks.
 # Pins match CI exactly (ruff 0.15.18, mypy 1.19.0 via the local system).
 # Keep broad suites out of every commit hook. Changes to shared source-catalog
-# readers, receipts, resolver, assertion, or worker contracts run focused tests;
-# pre-push runs the full unit suite plus the selected high-risk contracts.
+# readers, receipts, resolver, assertion, or worker contracts run the curated
+# contract smoke set. Push and CI use that same set; CI also runs all Unit tests.
 #
 #   pre-commit install   # once per clone (installs .git/hooks/pre-commit)
 #   pre-commit run --all-files   # full gate on demand
@@ -88,8 +88,8 @@ repos:
           narrative_runtime))\.py$
 
       - id: metadata-reader-contracts
-        name: source-catalog reader and recent CI regression contracts
-        entry: python tools/pre_push_gate.py --metadata-reader-contracts-only
+        name: curated source-catalog and CI regression contracts
+        entry: python tools/pre_push_gate.py --fast-contracts-only
         language: system
         pass_filenames: false
         types: [python]

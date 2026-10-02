@@ -59,18 +59,16 @@ jobs:
           report="$RUNNER_TEMP/unit-tests-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}.xml"
           python tools/summarize_junit_failures.py "$report"
 
-      - name: Contract tests
+      - name: Focused contract tests
         id: contract_tests
         run: |
           report="$RUNNER_TEMP/contract-tests-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}.xml"
-          python -m pytest tests/contract -q --tb=short \
-            -m "not slow and not real_data and not requires_corpus" \
-            --junitxml="$report"
+          python tools/pre_push_gate.py --fast-contracts-only --junitxml="$report"
 
-      - name: Contract test failure summary
+      - name: Focused contract failure summary
         if: always()
         env:
-          TEST_SUITE_NAME: contract tests
+          TEST_SUITE_NAME: focused contract tests
           TEST_SUITE_OUTCOME: ${{ steps.contract_tests.outcome }}
         run: |
           report="$RUNNER_TEMP/contract-tests-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}.xml"

@@ -1,6 +1,6 @@
 #!/bin/sh
-# Pre-push gate: run only the small reader/regression smoke set. The complete
-# Unit + portable Contract suites run once in GitHub Actions after push.
+# Pre-push gate: run only the small curated Contract smoke set. GitHub CI runs
+# all Unit tests and this same subset; the full portable Contract suite stays manual.
 #
 # Installed as .githooks/pre-push (git config core.hooksPath .githooks).
 # Keep push latency short; the full seven-stage local gate remains available
@@ -17,7 +17,7 @@ if [ ! -f "$ROOT/tools/pre_push_gate.py" ]; then
   exit 0
 fi
 
-python "$ROOT/tools/pre_push_gate.py" --metadata-reader-contracts-only
+python "$ROOT/tools/pre_push_gate.py" --fast-contracts-only
 rc=$?
 if [ "$rc" -ne 0 ]; then
   echo "" >&2
