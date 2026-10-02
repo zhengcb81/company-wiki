@@ -90,7 +90,9 @@ def run_cli(*args):
         text=True,
         encoding="utf-8",
         capture_output=True,
-        timeout=10,
+        # CLI startup imports the automation graph and can vary substantially
+        # on Windows under full-suite load; this test checks behavior, not SLA.
+        timeout=30,
         check=False,
     )
 

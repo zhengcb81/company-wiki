@@ -499,3 +499,24 @@ company-wiki 只负责来源、解析质量、证据定位、检索和来源摘�
 - [ ] 提交并正常推送 pre-push 环境修复与 CI 诊断；新 Actions annotations 给出用例后修复远端 CI 红测。
 
 **结论：**539 个 unit setup error 及其后 36 个 contract setup error 与远端 CI 红灯不是一件事。Windows pre-push 自身受默认 pytest TEMP ACL 影响；使用短隔离 basetemp 后完整 1043 项 unit 和定向 contract/meta 均绿。所有本地 pytest 阶段共用隔离临时根，完整 pre-push 已验收 GREEN；新 Actions 仍全矩阵红，待失败 node ID。
+
+## Phase 40：让 CI 失败报告步骤在红测后执行（2026-10-02）
+
+- [x] 检查 `b8fdfb7` 触发的 run `36992457178`：3.11/3.12/3.13 Unit tests 均失败，其它公开 job 成功；公开 check annotations 仍只有 runner 自动生成的通用 exit 1，未出现 helper 的节点注解。
+- [x] 结论：把 reporter 放在同一个会失败的 Unit tests shell step 中，没有产生可见 diagnostics；原因可能是 pytest/JUnit 生成路径或 runner command 行为，当前匿名信息不足，不能断言更具体技术原因。
+- [x] 改为独立 `if: always()` reporter step，解析 run 专属 JUnit 文件，只把 node ID 写为 annotations 和 `GITHUB_STEP_SUMMARY`。完整测试通过时不输出摘要；缺失/损坏报告给具名诊断。
+- [x] helper 聚焦测试 **6 passed**；Ruff 与 workflow YAML 解析通过，覆盖失败节点/行号、25 项上限、丢失/损坏报告、job summary 内容以及无失败时无输出。
+- [x] 完整 `python tools/pre_push_gate.py` 通过：Ruff、compileall、config doctor、complexity、host guard、unit tests、contract/meta tests 全部 GREEN；退出后没有 `.pp-*` 临时根，`git diff --check` 通过。
+- [x] 首轮 pre-push unit 为 1044 passed、2 项 CLI subprocess 测试超时。两个用例单独重跑通过；五次 CLI 启动耗时 1.20–8.80 秒，10 秒上限在 Windows 全量负载下过紧。unit 与 contract 两个 CLI test helper 的 watchdog 已调为 30 秒；仍断言退出码、输出和只读行为，不把耗时作为产品 SLA。
+- [ ] 正常提交推送；检查新的 reporter step 结论、公开 annotations 与 job summary 是否实际可见。若仍没有节点，取得登录 job log或改用可匿名读取的受限测试报告 artifact。
+
+**状态：**本地完整 pre-push 已 GREEN；失败用例识别仍未完成。下一次推送后验证独立 `always()` step、annotations 与 job summary，再据实际失败节点定位远端根因。
+
+## Phase 41：稳定 CLI 子进程测试并重跑完整门禁（2026-10-02）
+
+- [x] 复现 pre-push 全量 unit 1044 passed、2 项 CLI subprocess 测试因 `timeout=10` 失败；没有 CLI 行为断言失败。
+- [x] 两个失败用例定向重跑 **2 passed in 16.07s**。同环境连续启动 CLI 五次为 1.20、3.33、5.87、6.41、8.80 秒；确认 10 秒上限过紧。
+- [x] 将 unit 与 contract CLI test helper 的子进程 watchdog 从 10 秒改为 30 秒；这两组测试验证 CLI 行为而非性能 SLA。
+- [x] 再跑完整 `python tools/pre_push_gate.py`，Ruff、compileall、config doctor、complexity、host guard、全量 unit、contract/meta 全部 GREEN；临时根自动清理，`git diff --check` 通过。
+
+**状态：**当前本地完整提交/推送门 GREEN，CI reporter 和 PWF 更新待提交。远端失败测试身份仍未知；推送后用 job summary/annotations 定位。

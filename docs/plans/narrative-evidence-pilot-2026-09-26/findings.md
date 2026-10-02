@@ -674,3 +674,12 @@
 - 因此本地 push gate 需自己创建短 basetemp、禁用可选 cache provider，并给 pytest 子进程设置 UTF-8；避免把主机 ACL 问题误判成代码失败。对应改动已加到 `tools/pre_push_gate.py`，等待全门重跑。
 - 第一轮修复后的全 gate 证明同样的 `%TEMP%` ACL 影响 pre-push 最后的 contract/meta pytest：73 passed、36 errors 均在 `tmp_path` fixture setup 阶段。已把隔离短 basetemp/UTF-8/cache-provider 配置推广到所有 pre-push pytest commands，避免只修 unit 门；需完整 gate 再验收。
 - 第二轮完整 `python tools/pre_push_gate.py` 七阶段全部 GREEN（Ruff、compileall、config doctor、complexity、host assumption、1043 unit、contract/meta），退出后 `.pp-*` 临时根已自动清理。公开 run `36989156366` 最终 Python 3.11/3.12/3.13 三个 unit jobs 均失败，其他公开 jobs 成功；failure annotation 仍无 node ID，因为本地诊断 workflow 尚未推送。
+- `b8fdfb7` 的 run `36992457178` 三个 Unit tests 矩阵仍失败，其他公开 jobs 成功；虽然失败的 pytest shell step 调用了 helper，公开 annotations 依然没有 node ID，说明同一步 inline reporting 实际不可见。不能把预期的 runner 命令行为当作已验证事实。
+- 当前改用一个独立 `if: always()` reporter step；helper 同时写 node ID/文件/行号 annotations 和 `GITHUB_STEP_SUMMARY`，仅摘要标识，不暴露 traceback。下一轮需实测两个公开面是否可读。
+- 独立 reporter helper 六项测试通过：失败身份/行号、异常正文不外露、25 条上限、丢报告诊断、仅有 suite-level collection errors、pass report 不产摘要，并验证 step summary 只含节点标识。workflow YAML parse 与 Ruff 通过。
+
+## 2026-10-02 — CLI subprocess watchdog 的 Windows 负载波动
+
+- 全量 pre-push 曾得到 1044 passed、2 failed；两项都由测试 helper 的 `subprocess.run(timeout=10)` 抛 `TimeoutExpired`，断言主体尚未失败。
+- 定向两项 **2 passed in 16.07s**；同环境五次 CLI 单独启动耗时 1.20–8.80 秒。测试测的是只读结果、退出码和输出，不定义响应时间 SLA；Windows 全量 suite 下 10 秒 watchdog 太紧。
+- unit/contract 两个 CLI helper 的超时上限改成 30 秒后，完整 pre-push 七阶段全部 GREEN，且无 `.pp-*` 残根。这个本地稳定性问题不能解释 GitHub `36992457178` 的三版本远端失败；新独立 reporter 仍需推送验证。

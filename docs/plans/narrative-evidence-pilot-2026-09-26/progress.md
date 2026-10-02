@@ -952,3 +952,13 @@
 - 全门第一轮修复后 unit 已通过，末尾 contract/meta 出现 36 个同源 `tmp_path` setup errors（73 passed）；因此把相同 temp/UTF-8/cache 设置推广到所有 pytest gate。完整 gate 再跑中，未推送当前 workflow 诊断改动。
 - 第二轮完整 pre-push 七阶段全部 GREEN，unit 为 1043 passed；contract/meta GREEN，所有 `.pp-*` 测试根退出后均自动删除。Ruff、YAML parse、`git diff --check` 通过。
 - Actions `36989156366` 最终 3.11/3.12/3.13 都在 Unit tests 失败，其它公开 jobs 成功；原始 log 仍不可匿名读取。失败 node ID annotations 尚在本地 workflow 修改中，待随下一提交推送。
+- 推送 `b8fdfb7` 后 run `36992457178` 仍是三版本 Unit tests 失败，cli-smoke/markdown-lint/secret-scan 成功。匿名 check-run annotations 仍只有 runner 的通用 exit 1；同一步 pytest shell 内的 helper 输出没有变成可见 annotation，因此不能由该 run 推断具体用例。
+- 现改为独立 `if: always()` summary step，读取 run/attempt 专属 JUnit 报告；报告只包含失败测试身份，节点注解发送给 Actions，node ID 同时写入 job summary。helper 增加 pass-report 与 summary 输出测试。待 focused tests、完整 pre-push、push 及新 run 验证。
+- helper 六项 focused tests 通过，Ruff/CI YAML parse/git diff check 通过；完整 pre-push 尚未重跑，当前 workflow 修改尚未提交或推送。
+
+## Session: CLI watchdog 调整与完整 push gate 验收（2026-10-02）
+
+- 首轮完整 pre-push 的 unit 套件 1044 项通过、2 项失败；失败均为 automation CLI subprocess 在 `timeout=10` 到期，不是 CLI 行为断言失败。
+- 两个失败用例单独复跑 **2 passed in 16.07s**。五次直接 CLI 进程启动耗时 1.20–8.80 秒；测试验证只读结果/退出码/JSON，没有 10 秒性能合同，因此 unit 与 contract CLI test helper timeout 改为 30 秒。
+- 调整后完整 `python tools/pre_push_gate.py` 的 Ruff、compileall、config doctor、complexity、host assumption guard、unit、contract/meta 全部 GREEN；`.pp-*` 临时根清理，`git diff --check` 通过。
+- 远端 `36992457178` 具体失败用例仍不可见。独立 `if: always()` JUnit reporter 尚未推送，仍需以新 Actions run 验证。

@@ -46,14 +46,13 @@ jobs:
       - name: Unit tests
         run: |
           report="$RUNNER_TEMP/unit-tests-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}.xml"
-          set +e
           python -m pytest tests/unit -q --tb=short --junitxml="$report"
-          pytest_status=$?
-          set -e
-          if [[ "$pytest_status" -ne 0 ]]; then
-            python tools/summarize_junit_failures.py "$report"
-          fi
-          exit "$pytest_status"
+
+      - name: Unit test failure summary
+        if: always()
+        run: |
+          report="$RUNNER_TEMP/unit-tests-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}.xml"
+          python tools/summarize_junit_failures.py "$report"
 
       - name: Contract tests
         run: |

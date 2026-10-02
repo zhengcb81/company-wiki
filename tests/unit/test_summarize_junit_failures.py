@@ -52,4 +52,40 @@ def test_missing_junit_file_keeps_original_pytest_failure_actionable(
     tmp_path: Path, capsys
 ) -> None:
     assert main(str(tmp_path / "missing.xml")) == 0
-    assert "JUnit report unavailable" in capsys.readouterr().out
+    output = capsys.readouterr().out
+    assert "JUnit report unavailable" in output
+
+
+def test_writes_only_failure_identities_to_step_summary(
+    tmp_path: Path, monkeypatch
+) -> None:
+    report = tmp_path / "junit.xml"
+    summary = tmp_path / "step-summary.md"
+    _write_report(report)
+    monkeypatch.setenv("GITHUB_STEP_SUMMARY", str(summary))
+
+    assert main(str(report)) == 0
+    content = summary.read_text(encoding="utf-8")
+    assert "tests/unit/test_example.py::test_case_0" in content
+    assert "private traceback omitted" not in content
+
+
+def test_pass_report_produces_no_failure_diagnostic(tmp_path: Path, capsys) -> None:
+    report = tmp_path / "passing.xml"
+    suite = ET.Element("testsuite")
+    ET.SubElement(suite, "testcase", {"name": "test_pass"})
+    ET.ElementTree(suite).write(report, encoding="utf-8", xml_declaration=True)
+
+    assert main(str(report)) == 0
+    assert capsys.readouterr().out == ""
+
+
+def test_collection_error_without_testcase_gets_a_generic_identity(
+    tmp_path: Path, capsys
+) -> None:
+    report = tmp_path / "collection-error.xml"
+    suite = ET.Element("testsuite", {"errors": "2", "tests": "0"})
+    ET.ElementTree(suite).write(report, encoding="utf-8", xml_declaration=True)
+
+    assert main(str(report)) == 0
+    assert "pytest collection/runtime failures (2)" in capsys.readouterr().out
