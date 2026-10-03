@@ -217,56 +217,6 @@ def test_artifacts_zero_reports_detached_status(tmp_path):
     assert "derived_detached_count" in a
 
 
-def test_control_panel_has_pipeline_inventory_section():
-    ps1 = Path("scripts/source_catalog_control.ps1")
-    assert ps1.is_file()
-    c = ps1.read_text(encoding="utf-8", errors="replace")
-    w = Path("scripts/source_catalog_worker.ps1").read_text(
-        encoding="utf-8", errors="replace"
-    )
-    for heading in (
-        "Process health",
-        "Scan health",
-        "Export health",
-        "Artifact health",
-        "Lock health",
-        "Process events",
-        "Pipeline inventory",
-    ):
-        assert f"Write-Host '{heading}'" in c
-    assert "operation_lock_identity_verification" in c
-    assert c.count('Write-Host "    Doc retry') == 1
-    for scheduler_field in (
-        "last_export_at",
-        "last_export_duration_seconds",
-        "last_export_progress_total",
-        "last_export_progress_detail",
-    ):
-        assert f"$Status.scheduler.{scheduler_field}" in c
-    for inventory_field in (
-        "production_supervisors",
-        "pytest_temp_supervisors",
-        "foreign_supervisors",
-    ):
-        assert f"$Inventory.{inventory_field}" in c
-    assert "automatic recovery unavailable" in c
-    assert "restart_in=" in c
-    assert "watchdog=" in c
-    assert "$Launcher.status -eq 'restarting'" in c
-    assert "$Launcher.stdout_log" in c
-    assert "$Launcher.stderr_log" in c
-    for timeout_field in (
-        "worker_stage",
-        "current_path",
-        "current_path_elapsed_seconds",
-        "progress_detail",
-        "parser_pid",
-    ):
-        assert timeout_field in w
-    assert "launcher_source_hashes" in w
-    assert "supervisor_ps1" in w
-    assert "logon_ps1" in w
-    assert "logon_vbs" in w
 
 
 def test_worker_writes_exit_event(tmp_path):

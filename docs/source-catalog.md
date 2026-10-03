@@ -1,4 +1,6 @@
 # 分布式原始资料目录与 Markdown 索引
+> **当前状态（2026-10-03）**：旧的全库 Worker/登录启动与 `normalize`、`summarize`、`run` CLI 入口已退役。当前维护命令和替代叙述批次方案以 [company-wiki 主计划](plans/narrative-evidence-pilot-2026-09-26/task_plan.md) 与根 README 为准；本页随后内容保留为历史实现背景，不能照旧命令启动 Worker。
+
 
 ## 目标与边界
 
@@ -56,62 +58,31 @@ dayu portfolio 的一个 filing 目录被视为一个逻辑文档：
 
 当 `meta.json.pdf_sha256` 与 primary PDF 一致时，normalizer 优先使用 Docling Markdown、page provenance 和 table provenance；否则回退到 page-aware PyMuPDF，不猜测页码。
 
-## 命令
+## 当前可用命令
+
+旧版全库转换、常驻 Worker 和登录启动命令已退出。当前以 `task_plan.md` 中的有限叙述批次为处理入口。
 
 ```powershell
-# 只统计，不创建 .source_catalog
+# 只读统计来源候选
 python -m company_wiki.source_catalog.cli --config config/source_catalog.yaml scan --dry-run
 
-# 增量扫描与 hash；未变化的 size+mtime 直接复用
-python -m company_wiki.source_catalog.cli --config config/source_catalog.yaml scan
+# 查看目录状态与剩余旧 Worker 状态
+python -m company_wiki.source_catalog.cli --config config/source_catalog.yaml status
+python -m company_wiki.source_catalog.cli --config config/source_catalog.yaml worker-status
 
-# 只续跑一个 root（例如云盘长任务）
-python -m company_wiki.source_catalog.cli --config config/source_catalog.yaml scan --root-id dropbox_stock
+# 只在发现残留旧进程时停止；清除可能遗留的登录任务
+python -m company_wiki.source_catalog.cli --config config/source_catalog.yaml worker-stop
+python -m company_wiki.source_catalog.cli --config config/source_catalog.yaml uninstall-startup
 
-# 规范化与 EvidenceSpan，可用 --limit 分批执行
-python -m company_wiki.source_catalog.cli --config config/source_catalog.yaml normalize
+# 显式发起一份来源下载
+python -m company_wiki.source_catalog.cli --config config/source_catalog.yaml ensure \
+  --entity "公司名" --document-kind annual_report --as-of-date YYYY-MM-DD \
+  --allow-download
 
-# 手工生成确定性 extractive 摘要（后台 worker 默认改用配置 LLM）
-python -m company_wiki.source_catalog.cli --config config/source_catalog.yaml summarize
-
-# 导出完整索引表
+# 维护查询与导出
+python -m company_wiki.source_catalog.cli --config config/source_catalog.yaml query "公司名"
 python -m company_wiki.source_catalog.cli --config config/source_catalog.yaml export
-
-# 一次顺序执行全部阶段（适合小样本；不建议对初始 2 万份 backlog 使用）
-python -m company_wiki.source_catalog.cli --config config/source_catalog.yaml run
-
-# 查询
-python -m company_wiki.source_catalog.cli --config config/source_catalog.yaml query --entity 中微公司 --document-kind annual_report
-
-# 用精确 source_id + canonical locator 读取一个已验证 EvidenceSpan（机器可读 JSON）
-python -m company_wiki.source_catalog.cli --config config/source_catalog.yaml evidence --source-id urn:company-wiki:source:sha256:<64位小写hash> --locator loc:v1/page:1/paragraph:0/chars:0-20
-
-# 按 source 或 document 稳定枚举 locator；limit 最大 500，支持 offset
-python -m company_wiki.source_catalog.cli --config config/source_catalog.yaml evidence-list --source-id urn:company-wiki:source:sha256:<64位小写hash> --limit 100 --offset 0
-
-# 对精确 source/document 做只读提取质量诊断；只返回状态、原因、计数与locator引用
-python -m company_wiki.source_catalog.cli --config config/source_catalog.yaml extraction-quality --document-id urn:company-wiki:document:sha256:<64位小写hash> --locator-limit 100
-
-# 首次使用或需要更新时，按市场刷新官方证券主数据缓存并识别公司
-python -m company_wiki.source_catalog.cli --config config/source_catalog.yaml identify --query 中微公司 --market CN --refresh
-
-# 独立小工具；可输入公司名、简称或 ticker，输出机器可读 JSON
-company-wiki-identify --cache-dir .source_catalog/security_master 小米
-company-wiki-identify --cache-dir .source_catalog/security_master AMD
-
-# 默认只读：按公司/财期解析现有来源，不调用 downloader
-python -m company_wiki.source_catalog.cli --config config/source_catalog.yaml resolve --entity 中微公司 --security-id 688012 --market CN --document-kind annual_report --fiscal-year 2025 --as-of-date 2026-07-18
-
-# 模糊公司名先经过同一身份层；只有唯一验证结果才进入现有来源 resolver
-python -m company_wiki.source_catalog.cli --config config/source_catalog.yaml resolve --company-query 中微 --market CN --document-kind annual_report --fiscal-year 2025 --as-of-date 2026-07-19
-
-# 确认缺失后显式允许下载；A 股走 StockInfo，港股/美股走 dayu
-python -m company_wiki.source_catalog.cli --config config/source_catalog.yaml ensure --entity 中微公司 --security-id 688012 --market CN --document-kind annual_report --fiscal-year 2025 --as-of-date 2026-07-18 --allow-download
 ```
-
-`query` 继续用于标题、实体、类型与路径等 metadata 搜索；`evidence`/`evidence-list` 是独立的精确 locator 接口，不做模糊匹配，也不猜“最近一段”。它们只返回 catalog 中已存在并重新通过 EvidenceSpan v1 校验的 span、source/document metadata 和同 source 的原件位置引用，不读取整份二进制、不触发 normalize/download/LLM、不生成研究结论。数据库以 SQLite `mode=ro` + `query_only` 打开；静态 catalog 使用 immutable snapshot 避免生成 WAL/SHM，活动 WAL 缺少既有 SHM 时直接 unavailable。缺库不会创建 `.source_catalog`，损坏 span 或 identity 列冲突会明确失败关闭。详细合同见 [Evidence Query v1](contracts/evidence-query-v1.md)。
-
-`extraction-quality` 是与正文查询分离的确定性技术质检接口：精确读取 current normalizer artifact、source/location status 与 canonical span metadata，返回 `usable/review_required/unavailable`、reason codes、计数和 bounded locator references。结果不含 `raw_text`、整份派生正文或 artifact error 全文，不包含投资结论；unknown、ambiguous 或 integrity conflict 均失败关闭。它沿用同一 SQLite 物理只读政策，不创建 catalog、不触发 normalize/download/LLM，也不回写质量状态。详细合同见 [Extraction Quality Diagnostic v1](contracts/extraction-quality-v1.md)。
 
 ### Source-only scheduler policy
 
@@ -127,67 +98,11 @@ python -m company_wiki.source_catalog.cli --config config/source_catalog.yaml en
 
 默认没有自动“猜缺什么并批量下载”的任务。revenue-forecast 等上层只能先调用 read-only resolve，并在明确缺口时显式调用 ensure。Pause 状态会拒绝带 `--allow-download` 的 ensure，因此在不希望占用网络/磁盘/浏览器资源时，双击控制中心选择 Pause 即可同时阻止后台处理和统一下载入口。
 
-## 日常后台运行
+## 旧 Worker 已退役
 
-后台配置位于 `config/source_catalog_worker.yaml`。默认行为：
+旧版周期扫描、全库 Markdown 规范化、EvidenceSpan 批量生成、后台摘要及 Windows 登录启动均不再是支持的运行路径。CLI 不提供 `normalize`、`summarize`、`run`、`worker`、启动/恢复或安装登录任务命令；旧 PowerShell/VBS 启动器已删除。
 
-- 每 60 分钟扫描三个来源根并更新原件索引；
-- 普通检查间隔为 30 秒；若本轮实际完成了 Markdown 规范化或 LLM 摘要，下一轮仅等待 `active_poll_interval_seconds`（默认 2 秒），无产出、在电池上、provider 全局失败/退避或周期异常时仍等待 30 秒；
-- 单线程每循环最多规范化 1 份、用 LLM 摘要 1 份；可在控制中心随时 pause 或 stop；
-- `require_user_idle: true` 可恢复“连续空闲 `idle_seconds_required` 秒后才处理”的兼容模式；
-- LLM 或密钥不可用时不生成伪摘要，保留 pending，并在 60 分钟后重试；
-- 进程使用低调度优先级，不在电池供电时后处理。
-
-worker 配置 schema 1.2 新增 `active_poll_interval_seconds`。schema 1.0/1.1 仍可加载，并自动令 active interval 等于普通 `poll_interval_seconds`，因此旧配置不会突然加速。自适应等待只改变单线程循环间隔，不改变每轮 batch（仍各1份）、线程数、LLM 模型、失败退避或原始资料。控制中心在 worker 等待时显示 `Next wake`、等待秒数、原因和时间；Pause/Stop 仍由可中断的0.5秒控制检查优先处理。
-
-最方便的入口是直接双击 `scripts/source_catalog_control.cmd`。控制中心会同时显示：登录自启动是否安装、用户意图是 ENABLED 还是 PAUSED、后台进程是否运行、PID、worker 阶段及最近心跳。菜单中的动作语义如下：
-
-- **Pause**：立即结束当前 worker，并把暂停状态持久保存；重启或重新登录后仍不运行，后台不留常驻 worker；
-- **Resume**：清除持久暂停并立即隐藏启动；以后登录也会照常自启动；
-- **Stop**：只结束当前这一次运行，不改变登录自启动；下次登录会重新启动；
-- **Start**：在 ENABLED 状态下立即启动；重复点击不会产生第二个 worker；
-- **Browse exact duplicates**：按公司、标题、日期、类型或路径搜索完全相同内容的重复组；canonical 以 `KEEP` 显示且不可操作，只能逐个选择非 canonical 副本移入 Windows 回收站；
-- **Refresh status**：只读取很小的控制/状态文件，不打开大索引、不扫描原件。
-
-重复资料界面没有自动清理、全选删除或任意路径输入。用户选中一个编号后，控制中心会显示“要回收的 COPY”和“必须保留的 KEEP”、文件大小与 SHA-256，并要求逐字输入本次确认短语；若副本位于 Dropbox，还会提醒这次移除可能同步到其他设备。真正执行时，Python 服务在 catalog 单写锁内重新计算 duplicate 关系，验证 location ID 仍属配置 root、canonical 与副本都存在且 SHA-256 相同，才调用 Windows 回收站。成功后只把该 location 标为 `missing`，source/document/解析历史继续保留；从回收站恢复文件后，下次扫描会重新标为 active。失败不会把 location 标成 missing。
-
-每次已确认动作会在 `.source_catalog/duplicate_cleanup_events.jsonl` 追加 `requested → recycled/failed` 审计事件，并在下次 export 进入 `duplicate_cleanup_events.csv`。因此后台仍然绝不自动删除资料；唯一例外是用户在控制中心明确选择并确认的 exact-copy 副本。
-
-```powershell
-# 安装“登录后启动”的 Windows 计划任务；只安装，不立即运行
-python -m company_wiki.source_catalog.cli --config config/source_catalog.yaml install-startup
-
-# 查看自启动、持久意图、运行进程和调度进度
-python -m company_wiki.source_catalog.cli --config config/source_catalog.yaml startup-status
-python -m company_wiki.source_catalog.cli --config config/source_catalog.yaml worker-status
-
-# 持久暂停（同时结束当前 worker）
-python -m company_wiki.source_catalog.cli --config config/source_catalog.yaml worker-pause
-
-# 恢复并立即后台启动
-python -m company_wiki.source_catalog.cli --config config/source_catalog.yaml worker-resume
-
-# 仅停止本次运行，下次登录仍自启动
-python -m company_wiki.source_catalog.cli --config config/source_catalog.yaml worker-stop
-
-# ENABLED 状态下立即启动；单实例、重复执行安全
-python -m company_wiki.source_catalog.cli --config config/source_catalog.yaml worker-start
-
-# 只读列出重复组；日常建议直接使用控制中心菜单 6
-python -m company_wiki.source_catalog.cli --config config/source_catalog.yaml duplicates --limit 20
-
-# 调试时只运行一个调度循环；它仍遵守电池门控和可选的用户空闲门控
-python -m company_wiki.source_catalog.cli --config config/source_catalog.yaml worker --once
-
-# 不再需要时移除登录任务
-python -m company_wiki.source_catalog.cli --config config/source_catalog.yaml uninstall-startup
-```
-
-安装器优先创建 Windows Task Scheduler 的 ONLOGON 任务；若当前用户策略拒绝（例如 `Access is denied`），自动回退到当前用户 `HKCU\Software\Microsoft\Windows\CurrentVersion\Run`，并在 worker 注册运行时身份后做两分钟可中断等待。等待期间 Pause/Stop 也会立即生效。两种方式都不会在安装命令执行时立即启动，`startup-status` 会显示实际 method。LLM 密钥只从项目根目录 `.env` 或安全运行环境中的 `MINIMAX_API_KEY` / `MIMO_API_KEY` 读取，不写入 YAML、SQLite、Markdown 或 worker 日志。对这两个托管 key，项目 `.env` 是权威来源：即使 Windows 用户环境中已有旧值，source-catalog worker 也必须用项目 `.env` 覆盖，确保交互启动和下次登录自启动采用同一份配置。
-
-控制层使用独立单实例租约。运行时记录 PID、Python 可执行文件和 Windows 进程创建时间；优雅停止短时间内没有完成时，只有三项身份仍完全匹配才允许强制结束，避免 PID 被复用后误杀其他 Python 程序。worker 在普通或active等待期间都每0.5秒检查控制状态，并每10秒刷新heartbeat；长等待刷新不会丢失当前next-wake计划。Windows偶发占用控制JSON时，原子替换只对`PermissionError`做短暂、有上限重试，持续权限错误仍明确失败。扫描、解析或 LLM 请求属于同步单项操作；Pause/Stop 会先请求安全退出，默认 5 秒后使用上述身份校验终止，因此不会被长 PDF 或网络请求无限拖住。
-
-LLM 摘要 frontmatter 记录 provider、实际 model、prompt version、source/normalized hash、截断标记和 `llm_generated_unverified` 质量状态。响应必须通过固定 JSON Schema 和禁用投资结论检查，否则不落盘。MiniMax/MiMo 均失败时由 worker 延迟重试，不退化成伪装的 LLM 成功。provider 级错误只附加实际 `provider/model` route 供诊断，不记录 key、header 或响应正文中的 secret。
+旧目录中的 worker 状态与运行日志仍作为历史诊断数据保留；`worker-status`、`worker-stop` 与 `uninstall-startup` 仅用于检查和收尾。当前有限叙述批次、空间预算及迁移顺序以 [主计划](plans/narrative-evidence-pilot-2026-09-26/task_plan.md) 为准。
 
 ## 输出
 

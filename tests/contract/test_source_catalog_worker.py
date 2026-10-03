@@ -4,7 +4,6 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 import json
-import os
 from pathlib import Path
 
 import pytest
@@ -1528,111 +1527,12 @@ llm:
     assert client.fallback_client.workload == "source"
 
 
-def test_windows_startup_spec_is_logon_triggered_and_does_not_start_task(tmp_path):
-    from company_wiki.source_catalog.startup import build_startup_task_args
-
-    project = tmp_path / "project with spaces"
-    launcher = project / "scripts" / "source_catalog_worker.ps1"
-    args = build_startup_task_args(
-        project_root=project,
-        launcher_path=launcher,
-        python_executable=Path("C:/Python/python.exe"),
-        task_name="CompanyWiki Source Catalog",
-    )
-
-    assert args[0].lower().endswith("schtasks.exe")
-    assert "/Create" in args
-    assert "/SC" in args and "ONLOGON" in args
-    assert "/DELAY" in args
-    assert "/Run" not in args
-    assert "wscript.exe" in args[args.index("/TR") + 1].lower()
-    assert "//B //Nologo" in args[args.index("/TR") + 1]
-    assert "source_catalog_worker_at_logon.vbs" in args[args.index("/TR") + 1]
 
 
-def test_logon_delay_is_worker_interruptible_and_double_click_controls_exist():
-    project = Path(__file__).resolve().parents[2]
-    logon_launcher = (
-        project / "scripts" / "source_catalog_worker_at_logon.ps1"
-    ).read_text(encoding="utf-8")
-    hidden_host = (
-        project / "scripts" / "source_catalog_worker_at_logon.vbs"
-    ).read_text(encoding="utf-8")
-    worker_launcher = (project / "scripts" / "source_catalog_worker.ps1").read_text(
-        encoding="utf-8"
-    )
-    control = (project / "scripts" / "source_catalog_control.ps1").read_text(
-        encoding="utf-8"
-    )
-    double_click = project / "scripts" / "source_catalog_control.cmd"
-
-    assert "Start-Sleep" not in logon_launcher
-    assert "Start-Process" in logon_launcher
-    assert "shell.Run(command, 0, False)" in hidden_host
-    assert "& (Join-Path" not in logon_launcher
-    assert "-StartupDelaySeconds 120" in logon_launcher
-    assert "--startup-delay-seconds" in worker_launcher
-    assert all(
-        action in control
-        for action in ("worker-status", "worker-pause", "worker-resume", "worker-stop")
-    )
-    assert double_click.is_file()
 
 
-def test_worker_launcher_records_output_and_exit_events_for_logon_startup():
-    project = Path(__file__).resolve().parents[2]
-    worker_launcher = (project / "scripts" / "source_catalog_worker.ps1").read_text(
-        encoding="utf-8"
-    )
-
-    assert "worker_stdout-" in worker_launcher
-    assert "worker_stderr-" in worker_launcher
-    assert "worker_launcher.lock" in worker_launcher
-    assert "worker_launcher_events.jsonl" in worker_launcher
-    assert "function Write-LauncherEvent" in worker_launcher
-    assert "Write-LauncherEvent -Status 'starting'" in worker_launcher
-    assert "-Status 'child_started'" in worker_launcher
-    assert "-Status 'restarting'" in worker_launcher
-    assert "-Status 'launcher_exception'" in worker_launcher
-    assert "Start-Process" in worker_launcher
-    assert "RedirectStandardOutput" in worker_launcher
-    assert "RedirectStandardError" in worker_launcher
-    assert "*>>" not in worker_launcher
-    assert "exit_code" in worker_launcher
 
 
-def test_control_center_survives_startup_status_failures_and_marks_stale_runtime():
-    project = Path(__file__).resolve().parents[2]
-    control = (project / "scripts" / "source_catalog_control.ps1").read_text(
-        encoding="utf-8"
-    )
-
-    assert "function Show-WorkerStatusSafely" in control
-    assert "Unable to read worker status" in control
-    assert "if ($Status.runtime_state -eq 'running' -and $Status.pid)" in control
-    assert "if ($Status.stale_runtime -and $Status.pid)" in control
-    assert "Window title could not be set" in control
-    assert "control_center.log" in control
-    assert "[Console]::InputEncoding = $Utf8NoBom" in control
-    assert "[Console]::OutputEncoding = $Utf8NoBom" in control
-    assert "$OutputEncoding = $Utf8NoBom" in control
-    assert "Pipeline inventory" in control
-    assert "Last scan" in control
-    assert "Markdown" in control
-    assert "LLM summary" in control
-    assert "function Read-ControlChoiceWithLiveProgress" in control
-    assert "[Console]::KeyAvailable" in control
-    assert "Write-Progress" in control
-    assert "worker_runtime.json" in control
-    assert "$RuntimeStaleAfterSeconds = 60" in control
-    assert "Stale heartbeat; last beat" in control
-    assert "if ($Stage -eq 'idle') { $Stage = 'waiting' }" in control
-    assert "waiting for next cycle" in control
-    assert "Next wake" in control
-    assert "next_wait_seconds" in control
-    assert "next_wake_reason" in control
-    assert "next_wake_at" in control
-    assert "Start-Sleep -Milliseconds 500" in control
 
 
 class _Response:
@@ -1685,73 +1585,8 @@ class _ProviderFailingLLM(_FakeLLM):
 
 
 
-@pytest.mark.skipif(os.name != "nt", reason="startup task installation is Windows-only")
-def test_startup_install_falls_back_to_current_user_registry_without_running(tmp_path):
-    from types import SimpleNamespace
-
-    from company_wiki.source_catalog.startup import install_startup_task
-
-    project = tmp_path / "project"
-    scripts = project / "scripts"
-    scripts.mkdir(parents=True)
-    launcher = scripts / "source_catalog_worker.ps1"
-    launcher.write_text("# worker", encoding="utf-8")
-    (scripts / "source_catalog_worker_at_logon.ps1").write_text(
-        "# delayed worker", encoding="utf-8"
-    )
-    (scripts / "source_catalog_worker_at_logon.vbs").write_text(
-        "' hidden host", encoding="utf-8"
-    )
-    calls: list[list[str]] = []
-
-    def runner(args, **kwargs):
-        calls.append(args)
-        if len(calls) == 1:
-            return SimpleNamespace(returncode=1, stdout="", stderr="Access is denied")
-        return SimpleNamespace(
-            returncode=0, stdout="The operation completed", stderr=""
-        )
-
-    result = install_startup_task(
-        project_root=project,
-        launcher_path=launcher,
-        python_executable=Path("C:/Python/python.exe"),
-        runner=runner,
-    )
-
-    assert result["success"] is True
-    assert result["started"] is False
-    assert result["method"] == "current_user_run_registry"
-    assert calls[0][1] == "/Create"
-    assert calls[1][1] == "ADD"
-    assert "/Run" not in calls[0]
 
 
-def test_logon_delay_is_worker_interruptible_and_double_click_controls_exist_alt():
-    project = Path(__file__).resolve().parents[2]
-    logon_launcher = (
-        project / "scripts" / "source_catalog_worker_at_logon.ps1"
-    ).read_text(encoding="utf-8")
-    hidden_host = (
-        project / "scripts" / "source_catalog_worker_at_logon.vbs"
-    ).read_text(encoding="utf-8")
-    worker_launcher = (project / "scripts" / "source_catalog_worker.ps1").read_text(
-        encoding="utf-8"
-    )
-    control = (project / "scripts" / "source_catalog_control.ps1").read_text(
-        encoding="utf-8"
-    )
-    double_click = project / "scripts" / "source_catalog_control.cmd"
-
-    assert "Start-Sleep" not in logon_launcher
-    assert "shell.Run(command, 0, False)" in hidden_host
-    assert "-StartupDelaySeconds 120" in logon_launcher
-    assert "--startup-delay-seconds" in worker_launcher
-    assert all(
-        action in control
-        for action in ("worker-status", "worker-pause", "worker-resume", "worker-stop")
-    )
-    assert double_click.is_file()
 
 
 

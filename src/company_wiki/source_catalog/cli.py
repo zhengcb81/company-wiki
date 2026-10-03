@@ -3,9 +3,7 @@
 from __future__ import annotations
 
 import argparse
-from datetime import datetime, timezone
 import json
-import os
 from pathlib import Path
 import sys
 import time
@@ -33,7 +31,6 @@ from .section_query import SectionQueryService
 from .reconcile_retire_state import ReconcileRetireStateService
 from .extraction_quality import ExtractionQualityService
 from .focus_cleanup import FocusScopeCleanupService
-from .llm_summarizer import build_configured_llm_client
 from .portfolio_promoter import (
     PromotionIdentity,
     promote_all_for_entity,
@@ -55,12 +52,10 @@ from .security_identity import (
 from .store import read_pipeline_status
 from .startup import (
     DEFAULT_TASK_NAME,
-    install_startup_task,
     startup_task_status,
     uninstall_startup_task,
 )
 from .lock import CatalogOperationLockedError
-from .worker import SourceCatalogWorker, load_worker_config, set_low_process_priority
 
 
 def _retry_on_catalog_lock(
@@ -97,35 +92,6 @@ def _retry_on_catalog_lock(
             time.sleep(wait)
             attempt += 1
             backoff *= factor
-
-
-def _append_paused_acquisition_audit(
-    catalog_dir: Path,
-    *,
-    entity: str | None,
-    document_kind: str,
-    pid: int,
-) -> None:
-    """Append one audit line when a download runs while the worker is paused.
-
-    Best-effort: an audit failure warns on stderr but never blocks acquisition.
-    """
-    record = {
-        "at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
-        "entity": entity,
-        "document_kind": document_kind,
-        "pid": pid,
-    }
-    try:
-        path = catalog_dir / "paused_acquisition.log"
-        path.parent.mkdir(parents=True, exist_ok=True)
-        with path.open("a", encoding="utf-8") as stream:
-            stream.write(json.dumps(record, ensure_ascii=False) + "\n")
-    except OSError as exc:
-        print(
-            f"[ensure] warning: paused-acquisition audit log failed: {exc}",
-            file=sys.stderr,
-        )
 
 
 def _read_recent_worker_events(catalog_dir: Path) -> dict[str, Any]:
@@ -202,18 +168,6 @@ def _parser() -> argparse.ArgumentParser:
     scan.add_argument(
         "--root-id", action="append", help="scan only this configured root; repeatable"
     )
-
-    normalize = subparsers.add_parser(
-        "normalize", help="create normalized Markdown and EvidenceSpans"
-    )
-    normalize.add_argument("--limit", type=int)
-    normalize.add_argument("--force", action="store_true")
-
-    summarize = subparsers.add_parser(
-        "summarize", help="create deterministic source-only summaries"
-    )
-    summarize.add_argument("--limit", type=int)
-    summarize.add_argument("--force", action="store_true")
 
     fingerprint_backfill = subparsers.add_parser(
         "fingerprint-backfill",
@@ -473,9 +427,8 @@ def _parser() -> argparse.ArgumentParser:
         "--allow-acquisition-while-paused",
         action="store_true",
         help=(
-            "permit adapter download even when the background worker is paused; "
-            "intended for orchestrators (filing-fetch) that deliberately paused the "
-            "worker to release the catalog lock and will resume it afterwards"
+            "deprecated compatibility flag; a finite explicit download is independent "
+            "of legacy background-worker state"
         ),
     )
     ensure.add_argument(
@@ -487,7 +440,7 @@ def _parser() -> argparse.ArgumentParser:
         "--worker-config",
         type=Path,
         default=Path("config/source_catalog_worker.yaml"),
-        help="control state used to refuse downloads while the worker is paused",
+        help="deprecated compatibility option; finite acquisition does not read it",
     )
 
     close_gap = subparsers.add_parser(
@@ -524,17 +477,13 @@ def _parser() -> argparse.ArgumentParser:
     close_gap.add_argument(
         "--allow-acquisition-while-paused",
         action="store_true",
-        help=(
-            "permit the close-gap download even when the background worker "
-            "is paused; intended for orchestrators (filing-fetch) that "
-            "deliberately paused the worker and will resume it afterwards"
-        ),
+        help="deprecated compatibility flag; finite acquisition ignores legacy worker state",
     )
     close_gap.add_argument(
         "--worker-config",
         type=Path,
         default=Path("config/source_catalog_worker.yaml"),
-        help="control state used to refuse close-gap downloads while the worker is paused",
+        help="deprecated compatibility option; close-gap does not read it",
     )
 
     import_portfolio = subparsers.add_parser(
@@ -569,30 +518,6 @@ def _parser() -> argparse.ArgumentParser:
         default=Path("config/source_acquisition.yaml"),
     )
 
-    run = subparsers.add_parser(
-        "run", help="scan, normalize, summarize, and export in order"
-    )
-    run.add_argument("--limit", type=int, help="optional normalize/summary batch limit")
-    run.add_argument("--force", action="store_true")
-
-    worker = subparsers.add_parser(
-        "worker", help="periodically scan and process low-priority background batches"
-    )
-    worker.add_argument(
-        "--worker-config",
-        type=Path,
-        default=Path("config/source_catalog_worker.yaml"),
-    )
-    worker.add_argument(
-        "--once", action="store_true", help="run one scheduling cycle and exit"
-    )
-    worker.add_argument(
-        "--startup-delay-seconds",
-        type=int,
-        default=0,
-        help="interruptible delay used by the Windows logon fallback",
-    )
-
     def add_worker_control_parser(name: str, help_text: str) -> argparse.ArgumentParser:
         command = subparsers.add_parser(name, help=help_text)
         command.add_argument(
@@ -603,41 +528,21 @@ def _parser() -> argparse.ArgumentParser:
         return command
 
     worker_status = add_worker_control_parser(
-        "worker-status", "show startup, persistent pause, process, and scheduler state"
+        "worker-status", "inspect any remaining legacy worker and startup-task state"
     )
     worker_status.add_argument("--task-name", default=DEFAULT_TASK_NAME)
 
-    worker_start = add_worker_control_parser(
-        "worker-start", "start the background worker now if it is enabled"
+    worker_stop = add_worker_control_parser(
+        "worker-stop", "stop a remaining legacy worker process"
     )
-    worker_start.add_argument("--wait-seconds", type=float, default=5.0)
-    worker_start.add_argument("--startup-delay-seconds", type=int, default=0)
-
-    worker_resume = add_worker_control_parser(
-        "worker-resume", "clear persistent pause and start the background worker"
+    worker_stop.add_argument("--graceful-timeout-seconds", type=float, default=5.0)
+    worker_stop.add_argument(
+        "--no-force",
+        action="store_false",
+        dest="force",
+        help="request a graceful stop without the identity-checked force fallback",
     )
-    worker_resume.add_argument("--wait-seconds", type=float, default=5.0)
-    worker_resume.add_argument("--startup-delay-seconds", type=int, default=0)
-
-    for name, help_text in (
-        ("worker-pause", "persistently pause the worker and stop it now"),
-        ("worker-stop", "stop this run but keep the next-logon auto-start enabled"),
-    ):
-        command = add_worker_control_parser(name, help_text)
-        command.add_argument("--graceful-timeout-seconds", type=float, default=5.0)
-        command.add_argument(
-            "--no-force",
-            action="store_false",
-            dest="force",
-            help="request a graceful stop without the identity-checked force fallback",
-        )
-        command.set_defaults(force=True)
-
-    install = subparsers.add_parser(
-        "install-startup",
-        help="install a Windows logon task without starting it immediately",
-    )
-    install.add_argument("--task-name", default=DEFAULT_TASK_NAME)
+    worker_stop.set_defaults(force=True)
 
     uninstall = subparsers.add_parser(
         "uninstall-startup", help="remove the Windows logon task"
@@ -758,7 +663,6 @@ def _run_ensure_command(
     config: Any,
     project_root: Path,
     get_catalog: Any,
-    worker_controller: Any,
     source_request: Any,
 ) -> dict[str, Any]:
     """Execute the read-only or acquisition-capable ``ensure`` command."""
@@ -774,22 +678,6 @@ def _run_ensure_command(
     # Download-capable and latest-as-of ensure remain write flows: the writer
     # initializer may create the catalog before staging.
     _ = get_catalog().store
-    desired_state = worker_controller().status()["desired_state"]
-    if (
-        args.allow_download
-        and desired_state == "paused"
-        and not args.allow_acquisition_while_paused
-    ):
-        raise RuntimeError(
-            "source acquisition is paused; run worker-resume before allowing downloads"
-        )
-    if args.allow_download and desired_state == "paused":
-        _append_paused_acquisition_audit(
-            config.catalog_dir,
-            entity=request.entity,
-            document_kind=request.document_kind,
-            pid=os.getpid(),
-        )
     acquisition_config_path = args.acquisition_config
     if not acquisition_config_path.is_absolute():
         acquisition_config_path = project_root / acquisition_config_path
@@ -971,10 +859,6 @@ def main(argv: Sequence[str] | None = None) -> int:
                 dry_run=args.dry_run,
                 root_ids=set(args.root_id) if args.root_id else None,
             )
-        elif args.command == "normalize":
-            result = get_catalog().normalize(limit=args.limit, force=args.force)
-        elif args.command == "summarize":
-            result = get_catalog().summarize(limit=args.limit, force=args.force)
         elif args.command == "fingerprint-backfill":
             result = get_catalog().backfill_text_fingerprints(limit=args.limit)
         elif args.command == "extract-sections":
@@ -1224,7 +1108,6 @@ def main(argv: Sequence[str] | None = None) -> int:
                 config,
                 project_root,
                 get_catalog,
-                worker_controller,
                 source_request,
             )
         elif args.command == "close-gap":
@@ -1234,12 +1117,6 @@ def main(argv: Sequence[str] | None = None) -> int:
             # ZR-203: write entrypoint — writer initializer may create the
             # catalog before the read-only resolver reads it.
             _ = get_catalog().store
-            desired_state = worker_controller().status()["desired_state"]
-            if desired_state == "paused" and not args.allow_acquisition_while_paused:
-                raise RuntimeError(
-                    "source acquisition is paused; run worker-resume before "
-                    "allowing close-gap downloads"
-                )
             request, identity = source_request()
             binding_payload = json.loads(args.binding_file.read_text(encoding="utf-8"))
             binding = CloseGapBinding(
@@ -1496,78 +1373,17 @@ def main(argv: Sequence[str] | None = None) -> int:
             }
             result["pipeline"] = pipeline
             result.update(_read_recent_worker_events(config.catalog_dir))
-        elif args.command == "worker-start":
-            result = worker_controller().start(
-                wait_seconds=args.wait_seconds,
-                startup_delay_seconds=args.startup_delay_seconds,
-            )
-        elif args.command == "worker-resume":
-            result = worker_controller().resume(
-                wait_seconds=args.wait_seconds,
-                startup_delay_seconds=args.startup_delay_seconds,
-            )
-        elif args.command == "worker-pause":
-            result = worker_controller().pause(
-                graceful_timeout_seconds=args.graceful_timeout_seconds,
-                force=args.force,
-            )
         elif args.command == "worker-stop":
             result = worker_controller().stop(
                 graceful_timeout_seconds=args.graceful_timeout_seconds,
                 force=args.force,
             )
-        elif args.command == "worker":
-            worker_config = load_worker_config(
-                worker_config_path(), project_root=project_root
-            )
-            state_path = config.catalog_dir / "worker_state.json"
-
-            def factory() -> Any:
-                return build_configured_llm_client(
-                    project_root, worker_config.runtime_config
-                )
-
-            if not args.once and worker_controller().read_desired_state() == "paused":
-                result = {"status": "paused", "reason": "persistent_pause"}
-            else:
-                worker = SourceCatalogWorker(
-                    get_catalog(),
-                    worker_config,
-                    state_path=state_path,
-                    project_root=project_root,
-                    llm_client_factory=factory,
-                )
-                if args.once:
-                    set_low_process_priority()
-                    result = worker.run_cycle()
-                else:
-                    result = worker.run_forever(
-                        control=worker_controller(),
-                        startup_delay_seconds=args.startup_delay_seconds,
-                    )
-        elif args.command == "install-startup":
-            result = install_startup_task(
-                project_root=project_root,
-                launcher_path=project_root / "scripts" / "source_catalog_worker.ps1",
-                python_executable=Path(sys.executable),
-                task_name=args.task_name,
-            )
         elif args.command == "uninstall-startup":
             result = uninstall_startup_task(task_name=args.task_name)
         elif args.command == "startup-status":
             result = startup_task_status(task_name=args.task_name)
-        else:
-            result = {
-                "scan": get_catalog().scan(),
-                "normalize": get_catalog().normalize(
-                    limit=args.limit, force=args.force
-                ),
-                "summarize": get_catalog().summarize(
-                    limit=args.limit, force=args.force
-                ),
-                "export": get_catalog().export_indexes(),
-                "status": get_catalog().status(),
-            }
+        else:  # pragma: no cover - argparse requires a registered command
+            raise RuntimeError(f"unsupported source-catalog command: {args.command}")
     except Exception as exc:
         # ZR-204: unified error taxonomy — canonical code + retryable flag.
         from .error_taxonomy import structured_error

@@ -109,31 +109,31 @@ bundle = IngestService(root=Path(".")).ingest(
 
 consumer 在读取 bundle 前必须按 [Source Contract Compatibility Policy v1](docs/contracts/source-contract-compatibility-v1.md) 声明三个契约的精确稳定 SemVer 并完成 `exact_highest` 协商；任一契约无共同版本时整组 fail closed。
 
-### 7. 扫描分布式原始资料并生成 Markdown 索引
+### 7. 来源目录与叙述处理
+
+当前受支持的维护命令：
 
 ```bash
-# 只读统计，不创建 catalog
+# 只读统计候选文件
 python -m company_wiki.source_catalog.cli --config config/source_catalog.yaml scan --dry-run
 
-# 安装登录后常驻任务；安装时不会立即启动
-python -m company_wiki.source_catalog.cli --config config/source_catalog.yaml install-startup
-
-# 查看原件索引与后台进度
+# 查看来源目录状态
 python -m company_wiki.source_catalog.cli --config config/source_catalog.yaml status
+
+# 查看或停止仍残留的旧 Worker；卸载旧登录任务
 python -m company_wiki.source_catalog.cli --config config/source_catalog.yaml worker-status
+python -m company_wiki.source_catalog.cli --config config/source_catalog.yaml worker-stop
+python -m company_wiki.source_catalog.cli --config config/source_catalog.yaml uninstall-startup
+
+# 仅对一个明确公司/期次执行来源下载
+python -m company_wiki.source_catalog.cli --config config/source_catalog.yaml ensure \
+  --entity "公司名" --document-kind annual_report --as-of-date YYYY-MM-DD \
+  --allow-download
 ```
 
-日常使用可直接双击 `scripts/source_catalog_control.cmd`：Pause 会立即停止并跨重启保持暂停，Resume 会恢复并立即启动，Stop 只结束本次运行但保留下次登录自启动；菜单 6 可搜索完全重复资料，清楚标出必须保留的 canonical 和可回收副本，并只在用户逐项选择、输入确认短语、执行前再次核验双边 SHA-256 后把该副本移入 Windows 回收站。没有自动清理或批量删除。
+旧的全库 `normalize`、`summarize`、`run`、常驻 Worker 和登录启动入口已从公开 CLI 退役。叙述性文档通过有限批次处理；批次的接口、空间上限与实施进度见[当前主计划](docs/plans/narrative-evidence-pilot-2026-09-26/task_plan.md)。历史操作说明保留在 [分布式原始资料目录与 Markdown 索引](docs/source-catalog.md)，其中旧 Worker 的命令和行为不再是当前使用方式。
 
-> **2026-09-19 边界提示（audit plan 2026-09-19-three-project-history-audit）**：
-> 当前 `.source_catalog/worker_control.json` 的 desired_state 为 `paused`。
-> 代理不得因旧手册或未勾选的历史框而 Resume/重启 worker；恢复只在明确的
-> 授权运行窗口（I-16 卡）内进行。下载-恢复（fetch→scan→register→resolve）
-> 断链修复见 execution_v2 分卡 I-01/I-02。
-
-默认配置覆盖 `companies/*/raw/**`、Dropbox Stock 和 dayu-agent portfolio。后台扫描/解析绝不移动、复制或改写外部原件；只有用户在控制中心明确确认的非 canonical exact-copy 可以被移入回收站，并写入 append-only cleanup audit。`scan` 每小时独立更新可查询索引，低优先级 worker 只在用户空闲且接通电源时逐份生成 normalized Markdown、EvidenceSpan 和配置 LLM 的 source-only summary。索引会在 `locations.csv/duplicates.csv` 显式标记同内容副本。缺失来源默认只查询；显式 `ensure --allow-download` 时，A 股走 StockInfo，港股/美股由本项目调用 Dayu 现有 `python -m dayu.cli download`，不修改或导入 Dayu 代码；下载经隔离临时 workspace、staging 和二次 SHA 去重后才由 company-wiki 写入 canonical raw。Pause 会同时阻止后台后处理与该统一下载入口。全部派生物写入可重建的 `.source_catalog/`。完整格式、命令、路由、空闲门控、登录启动、控制和恢复语义见 [分布式原始资料目录与 Markdown 索引](docs/source-catalog.md)。
-
-### 4. 使用系统
+### 8. 使用系统
 
 ```bash
 # 查看产业链概览

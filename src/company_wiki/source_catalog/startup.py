@@ -21,84 +21,8 @@ def _reg_executable() -> str:
     return str(windows_dir / "System32" / "reg.exe")
 
 
-def _wscript_executable() -> str:
-    windows_dir = Path(os.environ.get("WINDIR", "C:/Windows"))
-    return str(windows_dir / "System32" / "wscript.exe")
-
-
 def _registry_value_name(task_name: str) -> str:
     return "".join(character for character in task_name if character.isalnum()) or "CompanyWikiSourceCatalog"
-
-
-def _hidden_startup_action(
-    *, project_root: Path, launcher_path: Path, python_executable: Path
-) -> str:
-    project = project_root.resolve(strict=False)
-    hidden_host = launcher_path.with_name(
-        "source_catalog_worker_at_logon.vbs"
-    ).resolve(strict=False)
-    python = python_executable.resolve(strict=False)
-    return (
-        f'"{_wscript_executable()}" //B //Nologo "{hidden_host}" '
-        f'"{python}" "{project}"'
-    )
-
-
-def build_startup_registry_args(
-    *,
-    project_root: Path,
-    launcher_path: Path,
-    python_executable: Path,
-    task_name: str = DEFAULT_TASK_NAME,
-) -> list[str]:
-    action = _hidden_startup_action(
-        project_root=project_root,
-        launcher_path=launcher_path,
-        python_executable=python_executable,
-    )
-    return [
-        _reg_executable(),
-        "ADD",
-        r"HKCU\Software\Microsoft\Windows\CurrentVersion\Run",
-        "/V",
-        _registry_value_name(task_name),
-        "/T",
-        "REG_SZ",
-        "/D",
-        action,
-        "/F",
-    ]
-
-
-def build_startup_task_args(
-    *,
-    project_root: Path,
-    launcher_path: Path,
-    python_executable: Path,
-    task_name: str = DEFAULT_TASK_NAME,
-) -> list[str]:
-    if not task_name.strip():
-        raise ValueError("task_name must be non-empty")
-    action = _hidden_startup_action(
-        project_root=project_root,
-        launcher_path=launcher_path,
-        python_executable=python_executable,
-    )
-    return [
-        _schtasks_executable(),
-        "/Create",
-        "/TN",
-        task_name,
-        "/SC",
-        "ONLOGON",
-        "/DELAY",
-        "0002:00",
-        "/TR",
-        action,
-        "/RL",
-        "LIMITED",
-        "/F",
-    ]
 
 
 def _run(
@@ -112,61 +36,6 @@ def _run(
         "stdout": completed.stdout.strip(),
         "stderr": completed.stderr.strip(),
         "success": completed.returncode == 0,
-    }
-
-
-def install_startup_task(
-    *,
-    project_root: Path,
-    launcher_path: Path,
-    python_executable: Path,
-    task_name: str = DEFAULT_TASK_NAME,
-    runner: Callable[..., Any] = subprocess.run,
-) -> dict[str, Any]:
-    if os.name != "nt":
-        raise OSError("startup task installation is only supported on Windows")
-    required_launchers = (
-        launcher_path,
-        launcher_path.with_name("source_catalog_worker_at_logon.ps1"),
-        launcher_path.with_name("source_catalog_worker_at_logon.vbs"),
-    )
-    for required_launcher in required_launchers:
-        if not required_launcher.is_file():
-            raise FileNotFoundError(required_launcher)
-    task_result = _run(
-        build_startup_task_args(
-            project_root=project_root,
-            launcher_path=launcher_path,
-            python_executable=python_executable,
-            task_name=task_name,
-        ),
-        runner=runner,
-    )
-    if task_result["success"]:
-        return {
-            **task_result,
-            "task_name": task_name,
-            "method": "task_scheduler",
-            "started": False,
-        }
-    registry_result = _run(
-        build_startup_registry_args(
-            project_root=project_root,
-            launcher_path=launcher_path,
-            python_executable=python_executable,
-            task_name=task_name,
-        ),
-        runner=runner,
-    )
-    if not registry_result["success"]:
-        detail = registry_result["stderr"] or registry_result["stdout"]
-        raise RuntimeError(detail or task_result["stderr"] or "startup installation failed")
-    return {
-        **registry_result,
-        "task_name": task_name,
-        "method": "current_user_run_registry",
-        "task_scheduler_error": task_result["stderr"] or task_result["stdout"],
-        "started": False,
     }
 
 
@@ -244,9 +113,6 @@ def startup_task_status(
 
 __all__ = [
     "DEFAULT_TASK_NAME",
-    "build_startup_registry_args",
-    "build_startup_task_args",
-    "install_startup_task",
     "startup_task_status",
     "uninstall_startup_task",
 ]

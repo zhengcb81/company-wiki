@@ -10,7 +10,7 @@
 
 ## 当前基线
 
-- CWP主线a104d25已推送，CI37139842105成功：修正首次cf662cc的两项Unit夹具问题；正式CLI/降容、英文召回和三施工卡已发布。跨run身份及3run正式CLI节点现已绿，owner/父kill/ACK整体恢复收口仍待完成。G-A/N3a/G-C、B1/B3/B4均完成，不重新验收整个历史。
+- CWP mainline: commits `d2250b7` (run/generation ownership) and `54db2a2` (SQLite migration fixture close) are pushed. The 54db2a2 remote CI status could not be read in this session. On 2026-10-03 the old Worker public execution surface was retired: bulk `normalize/summarize/run`, worker launch/start/resume/pause and startup installation commands plus PS/VBS/menu/pilot launchers are gone. `worker-status`, identity-checked `worker-stop`, startup status/removal, scan/query/export and explicit `ensure`/`close-gap` remain. A read-only production check found desired state paused, runtime stopped, no matching worker/supervisor process and no installed startup task; no catalog/raw/config data was changed.
 - RF rf-impl main 6fb2def7/4项tracked dirty；原fcap 5319ee26保留。FF真正origin/main/交付线c47c397，常用根仍fcap d35b6f5；ET main4924d57 tracked干净。StockWiki master已推进aa98848/4项quick-scan dirty；IQS master44b805f在继续实施。外仓各自owner，不reset或重复派线。
 - 最新完整空间32,821,613,206B/32.82GB，公司原件25.20GB，current DB3.06GB、旧derived/index约2.87GB。已释放13.06GB不再重复计收益；原件不进入清理候选。
 - 真实代码CI约56–62秒，单Python/全Unit/精选回归；不恢复全Contract/coverage日常门。
@@ -21,9 +21,9 @@
 |---|---|---|---|
 | S0 简化收口 | complete（ff5396c，CI绿） | PWF只留当前入口；删除R1旁路签收/shadow/gold；commit移除pytest、config doctor按相关文件触发 | 一次相关Unit/混合行为回归与正常发布；不逐文件签收 |
 | S1 N4A | complete（ff5396c，CI绿） | scope贯通Store/Worker/Supervisor/outbox/prepared，None兼容、空scope零修改、范围SQL先于LIMIT | N4节点A，确定性RED先行 |
-| S2 N4B | in_progress（CLI/终态降容67绿；跨run节点绿；run/generation owner、正式父kill恢复及费用对账已绿） | 真实factory/薄HTTP model adapter/完整prompt；同Store持久token/费用预留；有限batch CLI；唯一final正文、终态恢复小记录 | 节点A记账/并发、节点B正式CLI本地HTTP/kill/ACK/空间；余项为旧Worker入口退出与生命周期边界收尾 |
+| S2 N4B | in_progress (budget/factory/batch/recovery and public legacy Worker retirement implemented; capacity and real-sample acceptance remain in the later N4C node) | real factory/HTTP adapter/full prompt; persistent token/cost reservation in AUTO; finite batch CLI; unique final artifact and small recovery receipt; public legacy whole-catalog Worker and startup routes removed | node A accounting/concurrency green; node B formal CLI/HTTP/kill/ACK and focused regression green; next close CWP producer caps then N4C real-sample/total-capacity evidence |
 | S3 来源与采集默认收敛 | in_progress（英文召回子项绿；FF/ET running，CWP默认/caps pending） | R2/R6：一请求、薄v1适配、相关字段fingerprint、缺元数据partial、published-asof；FF执行limits/ET旧入口一致；安装技能示例同步 | root CWP与FF-S3/ET-S3在一个接口大节点汇合 |
-| S4 N4C与旧Worker退出 | pending | 四类真实文档小批/consumer读取/语言引用coverage与总容量；迁移control实际调用者，唯一AUTO执行器、短提交锁 | 节点C；先有限批次，再按实测1/2/4调整并发 |
+| S4 N4C real samples and storage plan | pending | four real document types / consumer reads / language and citation coverage / total incremental bytes; retain only status/stop/uninstall compatibility for old worker process cleanup | node C; start with a bounded batch, then use measured 1/2/4 parallelism |
 | S5 B2逐caller清理 | pending | 每集合无引用即可删约2.87GB旧derived/index；停用功能直接退役，未要求全库先生成摘要 | 存储迁移节点真实回读/原件保留/实际bytes，逐集合幂等 |
 | S6 DB事实收缩与收尾 | pending | 表级盘点，删除不可再消费派生/废索引并收缩，来源版本/撤回事实保留；旁路兼容、docs/hook残留清完 | 同一存储节点；commit/push、PWF收尾 |
 | 可选 exact-SHA原件对象去重 | 不阻S0–S6完成 | 先用已有SHA/size找候选、逐候选验字节，保留所有source/location版本事实 | 有真实收益才实施；不报未测节省量 |
@@ -76,12 +76,11 @@ TDD框住公开行为，不把旧签收规则写进新测试。仅S0相关收口
 
 ## Next Step
 
-跨run身份已绿。run↔generation自动owner、正式CLI父kill恢复、未知费用保留及ACK丢失幂等已实现并通过大节点测试。root继续退役旧catalog Worker入口，再收生命周期/容量证据；随后CWP S3实际采集limits与来源默认。FF/ET/空间三线running，等待只发生在最终接口汇合；未交付模块不写complete。不启动旧无限Worker，不删除原件。
+旧 Worker 的公开执行与启动链已退役，生产无残留进程/登录任务。root 接着实现 CWP `ensure` / `close-gap` 的字节、耗时和费用硬上限，与 FF-S3 对齐 producer 接口；未知或缺失上限必须在 provider 外发前拒绝。随后与 FF/ET 两条线在接口节点汇合，再执行 N4C 四类真实文档小批与完整容量测量。
 
-## S2当前交接与下一集中节点
+## S2 当前交接与下一集中节点
 
-节点A已实现真实HTTP、完整prompt1.1、成对usage、AUTO v3同库持久预算、BudgetedNarrativeCaller与production factory并发布9ccd29f。正式 `company-wiki-narrative-batch` / `python -m company_wiki.automation.narrative_batch_cli` 和terminal receipt已实现首组67绿：同run零重复HTTP、原文错误保持真实费用、0费用/小空间cap零外发、exact工件可回读、完成DAG去正文。自动OS mutex复用到基础设施层，gate CAS/scoped obsolete generation reaper保未知reservation；不写第二queue或人工许可。parse/HTTP在Catalog短锁外。
-
-S2跨run身份已修：effect绑定verify job+bundle SHA，工件work-key/2绑定effect，原对象仍按正文SHA去重；升级前effect薄兼容原work-key/1，prepared可复原。三个run各自发布/旧pin回读/同run零POST已经真CLI验证。剩余owner实证：当前无独立AUTO生产daemon，factory已拒绝空/非run scope；风险为旧catalog Worker/自启动/全量normalize入口。generic scope=None仅库兼容，不新增禁令。现有run行新增nullable last_runtime_generation，同AUTO事务CAS启用绑定（版本迁移v3→v4），只有匹配本run/generation才恢复ENABLED；未知ENABLED具名拒绝。OS mutex证活进程，binding证恢复归属，无新owner签收文件/队列。每run独立work-dir，同run复用baseline；FF明确下载不参加长期处理owner锁。
-
-English entered new markets/pilot agreements已TDD修为selector0.2.0，114+70责任包绿；safe-harbor/会议/纯金融负例仍跳过，parser未改。S3其他默认/caps及S4–S6仍未完成；不借阶段提交标全部完成。outbox原来只保存小Effect metadata，主要去attempt.result重复正文，不能虚报outbox GB收益。
+- N4A scope、N4B 真实模型计量、持久预算、production factory、有限 CLI、终态降容、跨 run 工件绑定、run/generation 自动 owner、父进程 kill 恢复与提交 ACK 丢失幂等已实现；相关提交 `ff5396c`、`9ccd29f`、`9041543`、`d2250b7`、`54db2a2` 均已推送。
+- 2026-10-03 只读现场检查：旧 worker `desired_state=paused`、`runtime_state=stopped`；匹配 worker/supervisor 均为 0，Windows startup task 未安装。随后删除旧全库 CLI、启动/恢复/暂停与安装任务入口、Windows 启动器/控制菜单及旧启动专属测试；保留 `worker-status`、身份核验 `worker-stop` 与启动任务检查/卸载。旧 raw、SQLite、worker state 和日志均未触碰。
+- 155 项相关回归此前 153 项通过；两项失败都是过期断言（deletion manifest 已退役、旧 `resume` 方法已删除），更正后对应 2 项单测复跑通过。CLI/显式下载退役合同另有 18 项通过。
+- 仍不把 S2 标记完成：N4C 的真实模型小批、消费者实读、引用/语言 coverage 与全量新增空间峰值仍未验收；先完成 CWP producer limits，再进入 N4C。

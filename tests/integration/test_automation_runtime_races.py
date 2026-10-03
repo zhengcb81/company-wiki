@@ -349,7 +349,7 @@ def test_pause_and_finish_linearize_across_spawned_processes(
         assert job.status is JobStatus.RUNNING
 
 
-def test_real_legacy_controller_and_automation_gate_are_mutually_exclusive(
+def test_automation_gate_blocks_legacy_session_and_can_pause(
     tmp_path: Path,
 ) -> None:
     from company_wiki.automation.models import RuntimeState
@@ -388,7 +388,7 @@ def test_real_legacy_controller_and_automation_gate_are_mutually_exclusive(
     assert enabled.desired_state is RuntimeState.ENABLED
     assert legacy.interlock_state()["automation_enabled"] is True
     with pytest.raises(RuntimeError, match="automation worker"):
-        legacy.resume(wait_seconds=0)
+        legacy.open_session()
 
     paused = controller.pause(graceful_timeout_seconds=0, force=False)
     assert paused.gate.desired_state is RuntimeState.PAUSED

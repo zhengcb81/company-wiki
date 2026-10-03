@@ -314,20 +314,9 @@ def test_maintenance_guard_precedes_project_initialization() -> None:
     assert source.index("enforce_direct_cli") < source.index("from common import")
 
 
-def test_deletion_manifest_control_cli_remains_available() -> None:
-    assert "deletion_manifest.py" in writer_policy.CONTROL_TOOL_ALLOWLIST
-    completed = subprocess.run(
-        [sys.executable, str(SCRIPTS / "deletion_manifest.py"), "--help"],
-        cwd=ROOT,
-        env=_legacy_override(),
-        capture_output=True,
-        text=True,
-        encoding="utf-8",
-        errors="replace",
-        timeout=20,
-        check=False,
-    )
-    assert completed.returncode == 0, completed.stderr
+def test_retired_deletion_manifest_control_is_not_allowlisted() -> None:
+    assert "deletion_manifest.py" not in writer_policy.CONTROL_TOOL_ALLOWLIST
+    assert not (SCRIPTS / "deletion_manifest.py").exists()
 
 
 def test_canonical_source_export_help_remains_available() -> None:
@@ -391,16 +380,12 @@ def test_canonical_source_entry_points_exclude_legacy_modules() -> None:
         assert forbidden not in entries
 
 
-def test_windows_source_launchers_exclude_legacy_scheduler() -> None:
-    launcher_text = "\n".join(
-        (SCRIPTS / name).read_text(encoding="utf-8-sig")
-        for name in (
-            "source_catalog_worker.ps1",
-            "source_catalog_worker_at_logon.ps1",
-            "source_catalog_control.ps1",
-            "source_catalog_control.cmd",
-        )
-    )
-    assert "company_wiki.source_catalog.cli" in launcher_text
-    assert "scheduler.py" not in launcher_text
-    assert "full_pipeline.py" not in launcher_text
+def test_windows_source_catalog_worker_launchers_are_retired() -> None:
+    for name in (
+        "source_catalog_worker.ps1",
+        "source_catalog_worker_at_logon.ps1",
+        "source_catalog_worker_at_logon.vbs",
+        "source_catalog_control.ps1",
+        "source_catalog_control.cmd",
+    ):
+        assert not (SCRIPTS / name).exists()

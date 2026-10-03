@@ -88,3 +88,10 @@ N4 完成必须有生产代码入口、正常/故障真实 CLI 收据、usage/�
 3. 自动owner收敛：production factory已固定run.scope，AUTO CLI现只有只读status/doctor/plan；不虚构已配置AUTO daemon。退役source_catalog `worker/--once`、`worker-start/resume`、install-startup、PS/VBS旧启动和全量normalize/run路径；保留status/stop/uninstall/scan/query/export来源维护。run行一个nullable last_runtime_generation，通过v3→v4迁移；activate_run与gate CAS同AUTO事务绑定，PAUSED可启本run、ENABLED仅匹配本run当前generation可恢复；未知/他run零修改具名拒绝，不写owner签收文件。OS mutex证活进程、binding证恢复归属；正式CLI父kill恢复已通过，旧generation attempt被隔离后reserved费用转unknown且原额保留；提交ACK丢失用commit后注入超时验证重试幂等。尚余source_catalog旧执行入口退出。FF ensure来源采集仍在短commit锁，不加入长期处理owner锁。
 4. 节点B本地HTTP正式CLI父进程kill后同run恢复、文件mutex重取、原始来源/旁路任务不变已绿。费用对账事务另以提交成功但返回ACK丢失故障注入证明可重试。batch deadline从入口开始计时，覆盖来源读取、准备、解析、提交；持久/临时峰值按实际文件与SQLite WAL统计，只有总增量和coverage达标才进入四份真实样本节点C。
 5. 与FF-S3/ET-S3并行的是root CWP S3 producer caps/来源默认；I1三参数尚pending，不把外线fake传参测试当下载执行已限额。只在最终接口大节点汇合，其他仓dirty/已有owner不改。
+
+
+## 2026-10-03 旧 Worker 入口退役状态
+
+CWP 已删除 public `worker/--once`、后台 daemon、worker start/resume/pause、whole-catalog normalize/summarize/run 以及 startup install CLI。对应 PS/VBS launchers 与菜单已删除；生产只读检查证明没有运行进程或已安装 startup task。保留 `worker-status`、身份绑定 `worker-stop`、startup status/removal，以处理升级窗口内的残留 PID/任务。显式 `ensure`/`close-gap` 不再依赖旧 worker paused 状态；FF 使用的兼容参数现为 no-op，直到 FF-S3 合并后一起收敛。旧 `source_catalog.worker` Python 模块暂留作未暴露库兼容；它没有公开执行入口，也不会被新有限批次 factory 调用，后续若确定没有外部调用者再与 B2/派生清理合并删除。
+
+下一集中节点是 CWP producer 的 `--max-download-bytes`、`--max-download-seconds`、`--max-download-cost-usd`，随后与 FF-S3 接口汇合；每项缺失/未知限制必须在 provider 外发前 fail closed，direct acquisition 不再等待后台 worker 锁。

@@ -5,7 +5,6 @@ from __future__ import annotations
 import json
 import os
 from pathlib import Path
-import subprocess
 
 import pytest
 
@@ -123,17 +122,12 @@ def test_interlock_state_treats_corrupt_runtime_as_unknown(tmp_path):
     }
 
 
-def test_automation_interlock_blocks_legacy_resume_start_and_session(tmp_path):
+def test_automation_interlock_blocks_legacy_worker_session(tmp_path):
     processes = _FakeProcesses()
     controller = _controller(tmp_path, processes)
     controller.persist_automation_interlock(True)
 
-    with pytest.raises(RuntimeError, match="automation worker"):
-        controller.resume(wait_seconds=0)
-
     controller._write_control(desired_state="enabled", automation_enabled=True)
-    with pytest.raises(RuntimeError, match="automation worker"):
-        controller.start(wait_seconds=0)
     with pytest.raises(RuntimeError, match="automation worker"):
         controller.open_session()
 
@@ -297,55 +291,8 @@ def test_status_compares_loaded_and_current_code_fingerprints(tmp_path, monkeypa
     assert status["code_fingerprint_error"] is None
 
 
-@pytest.mark.skipif(os.name != "nt", reason="Windows supervisor startup contract")
-def test_start_launches_the_supervisor_instead_of_a_bare_worker(tmp_path):
-    processes = _FakeProcesses()
-    calls = []
-
-    class _ExitedProcess:
-        pid = 4242
-
-        @staticmethod
-        def poll():
-            return 7
-
-    def fake_popen(command, **kwargs):
-        calls.append((command, kwargs))
-        return _ExitedProcess()
-
-    launcher = (
-        Path(__file__).resolve().parents[2] / "scripts" / "source_catalog_worker.ps1"
-    )
-    controller = _controller(
-        tmp_path,
-        processes,
-        popen=fake_popen,
-        launcher_path=launcher,
-    )
-
-    result = controller.start(wait_seconds=0)
-
-    assert result["started"] is False
-    command = calls[0][0]
-    assert Path(command[0]).name.lower() == "powershell.exe"
-    assert "-File" in command
-    launcher = Path(command[command.index("-File") + 1])
-    assert launcher.name == "source_catalog_worker.ps1"
-    assert "company_wiki.source_catalog.cli" not in command
-    assert calls[0][1]["creationflags"] & 0x00000008 == 0
 
 
-def test_pause_is_persistent_and_prevents_a_worker_session(tmp_path):
-    processes = _FakeProcesses()
-    controller = _controller(tmp_path, processes)
-
-    result = controller.pause(graceful_timeout_seconds=0, force=False)
-
-    assert result["desired_state"] == "paused"
-    reloaded = _controller(tmp_path, processes)
-    assert reloaded.status()["desired_state"] == "paused"
-    with pytest.raises(RuntimeError, match="paused"):
-        reloaded.open_session()
 
 
 def test_worker_session_is_single_instance_and_records_heartbeat(tmp_path):
@@ -587,7 +534,7 @@ def test_stop_refuses_to_terminate_a_reused_pid(tmp_path):
     session.close()
 
 
-def test_cli_pause_and_status_are_lightweight_and_report_startup_state(
+def test_cli_worker_status_is_lightweight_and_reports_startup_state(
     tmp_path, monkeypatch, capsys
 ):
     import company_wiki.source_catalog.cli as cli
@@ -618,23 +565,6 @@ roots:
         "startup_task_status",
         lambda **_kwargs: {"installed": True, "method": "current_user_run_registry"},
     )
-
-    assert (
-        cli.main(
-            [
-                "--config",
-                str(config_path),
-                "worker-pause",
-                "--worker-config",
-                str(worker_config_path),
-                "--graceful-timeout-seconds",
-                "0",
-            ]
-        )
-        == 0
-    )
-    paused = __import__("json").loads(capsys.readouterr().out)
-    assert paused["desired_state"] == "paused"
 
     retry_after = __import__("time").time() + 3600
     state_path = project / ".source_catalog" / "worker_state.json"
@@ -1056,125 +986,3 @@ def test_live_status_computes_current_path_elapsed_from_snapshot_time(tmp_path):
         assert status["long_running_document_warning"] is True
     finally:
         session.close()
-
-
-@pytest.mark.skipif(os.name != "nt", reason="Windows background-process integration")
-def test_real_background_worker_can_start_heartbeat_and_stop_in_a_temp_catalog(
-    tmp_path,
-):
-    from company_wiki.source_catalog.control import (
-        WorkerController,
-        process_identity,
-        terminate_matching_process,
-    )
-
-    workspace = Path(__file__).resolve().parents[2]
-    project = tmp_path / "project"
-    source = tmp_path / "source"
-    source.mkdir()
-    (source / "tiny.txt").write_text("source-only test document", encoding="utf-8")
-    config_path = project / "config" / "source_catalog.yaml"
-    worker_config_path = project / "config" / "source_catalog_worker.yaml"
-    config_path.parent.mkdir(parents=True)
-    config_path.write_text(
-        f"""
-schema_version: '1.0'
-catalog_dir: '{project.as_posix()}/.source_catalog'
-roots:
-  - root_id: temp
-    kind: directory
-    path: '{source.as_posix()}'
-""".strip(),
-        encoding="utf-8",
-    )
-    worker_config_path.write_text(
-        f"""
-schema_version: '1.2'
-runtime_config: '{workspace.as_posix()}/config.yaml'
-scan_interval_minutes: 60
-export_interval_minutes: 60
-poll_interval_seconds: 30
-active_poll_interval_seconds: 2
-idle_seconds_required: 600
-require_user_idle: false
-normalize_batch_size: 1
-llm_summary_batch_size: 1
-llm_max_input_chars: 1000
-llm_max_output_tokens: 100
-llm_retry_backoff_minutes: 60
-allow_processing_on_battery: false
-fingerprint_backfill_batch_size: 3
-fingerprint_retry_limit: 3
-fingerprint_retry_backoff_seconds: 900
-""".strip(),
-        encoding="utf-8",
-    )
-    (project / "config.yaml").write_text("llm: {}\n", encoding="utf-8")
-    controller = WorkerController(
-        catalog_dir=project / ".source_catalog",
-        project_root=workspace,
-        config_path=config_path,
-        worker_config_path=worker_config_path,
-        python_executable=Path(os.sys.executable),
-    )
-    controller._write_control(desired_state="enabled", stop_requested_for=None)
-
-    owned_identities = []
-    residual_identities = []
-    started = None
-    try:
-        environment = os.environ.copy()
-        environment["PYTHONUTF8"] = "1"
-        environment["PYTHONIOENCODING"] = "utf-8"
-        completed = subprocess.run(
-            [
-                os.sys.executable,
-                "-m",
-                "company_wiki.source_catalog.cli",
-                "--config",
-                str(config_path),
-                "worker-start",
-                "--worker-config",
-                str(worker_config_path),
-                "--wait-seconds",
-                "10",
-                "--startup-delay-seconds",
-                "120",
-            ],
-            cwd=workspace,
-            env=environment,
-            capture_output=True,
-            text=True,
-            encoding="utf-8",
-            errors="replace",
-            timeout=15,
-            check=False,
-        )
-        assert completed.returncode == 0, completed.stderr
-        started = json.loads(completed.stdout)
-        assert started["started"] is True
-        started_identity = process_identity(started["spawned_pid"])
-        assert started_identity is not None
-        owned_identities.append(started_identity)
-        assert controller.status()["runtime_state"] == "running"
-        paused = controller.pause(graceful_timeout_seconds=5, force=True)
-        assert paused["desired_state"] == "paused"
-        assert paused["runtime_state"] == "stopped"
-        blocked = controller.start(wait_seconds=0)
-        assert blocked["started"] is False
-        assert "paused" in blocked["reason"]
-        resumed = controller.resume(wait_seconds=10, startup_delay_seconds=120)
-        assert resumed["started"] is True
-        resumed_identity = process_identity(resumed["spawned_pid"])
-        assert resumed_identity is not None
-        owned_identities.append(resumed_identity)
-        assert controller.status()["runtime_state"] == "running"
-    finally:
-        stopped = controller.stop(graceful_timeout_seconds=5, force=True)
-        for identity in owned_identities:
-            current = process_identity(identity["pid"])
-            if current == identity:
-                residual_identities.append(identity)
-                terminate_matching_process(identity)
-    assert stopped["runtime_state"] == "stopped"
-    assert residual_identities == []

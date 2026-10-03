@@ -209,8 +209,11 @@ def _classify_worker_command(
     if not flags:
         return "no_config_path"
 
-    resolved = [_normalize_path(p, project_root) for p in flags]
-    resolved = [p for p in resolved if p]
+    resolved: list[str] = []
+    for flag in flags:
+        path = _normalize_path(flag, project_root)
+        if path is not None:
+            resolved.append(path)
     if not resolved:
         return "no_config_path"
 
@@ -991,6 +994,7 @@ class WorkerController:
         if not self._runtime_is_live(runtime):
             self._clear_stale_runtime()
             return {**self.status(), "forced": False, "stop_requested": False}
+        assert runtime is not None
         expected = self._runtime_identity(runtime)
         assert expected is not None
         self._write_control(stop_requested_for=runtime.get("token"))
@@ -1027,239 +1031,11 @@ class WorkerController:
             self.lock_path.unlink(missing_ok=True)
         return {**self.status(), "forced": forced, "stop_requested": True}
 
-    def pause(
-        self, *, graceful_timeout_seconds: float = 5.0, force: bool = True
-    ) -> dict[str, Any]:
-        with CatalogOperationLock(
-            self.catalog_dir,
-            operation="legacy-worker-pause",
-        ):
-            self._write_control(desired_state="paused")
-        return self.stop(
-            graceful_timeout_seconds=graceful_timeout_seconds,
-            force=force,
-        )
 
-    def _read_console_tail(self, max_lines: int = 40) -> str:
-        """Return the last ``max_lines`` lines of the worker console log.
 
-        Returns an empty string if the log does not exist or cannot be read.
-        """
-        if max_lines <= 0:
-            return ""
-        try:
-            if not self.console_log_path.is_file():
-                return ""
-        except OSError:
-            return ""
-        try:
-            content = self.console_log_path.read_text(
-                encoding="utf-8", errors="replace"
-            )
-        except OSError:
-            return ""
-        lines = content.splitlines()
-        if not lines:
-            return ""
-        tail = lines[-max_lines:]
-        return "\n".join(tail)
 
-    def _read_recent_process_event(
-        self,
-    ) -> tuple[dict[str, Any] | None, str | None]:
-        """Return ``(last_event, error)`` from ``worker_process_events.jsonl``.
 
-        JSONL parse failure returns ``(None, "<error_msg>")`` — never raises.
-        """
-        events_path = self.catalog_dir / "worker_process_events.jsonl"
-        try:
-            if not events_path.is_file():
-                return (None, None)
-            raw = events_path.read_text(encoding="utf-8", errors="replace")
-        except OSError as exc:
-            return (None, f"OSError: {exc}")
-        if raw.startswith("\ufeff"):
-            raw = raw.lstrip("\ufeff")
-        lines = [ln for ln in raw.splitlines() if ln.strip()]
-        if not lines:
-            return (None, None)
-        last = lines[-1].strip()
-        try:
-            event = json.loads(last)
-        except json.JSONDecodeError as exc:
-            return (None, f"JSONDecodeError: {exc.msg}")
-        return (event, None)
 
-    def _classify_start_failure_reason(
-        self, *, spawned_pid, exit_code, runtime_state
-    ) -> str:
-        if exit_code is None:
-            return (
-                "worker_spawned_without_runtime_and_no_exit_code; "
-                "the child process may have been killed before it could write "
-                "worker_runtime.json. Check antivirus, login-session teardown, "
-                "or external kill signals."
-            )
-        if exit_code == 0:
-            return (
-                "worker_exited_clean_before_writing_runtime; the worker may "
-                "have observed desired_state=paused or a startup-delay "
-                "control request. Open worker_process_events.jsonl for the "
-                "process_exiting reason."
-            )
-        prefix = (
-            "worker_exited_with_nonzero_code_before_writing_runtime; "
-            f"exit_code={exit_code}; "
-        )
-        if spawned_pid is not None:
-            prefix += f"pid={spawned_pid}; "
-        prefix += (
-            "see console_tail and worker_process_events.jsonl for the "
-            "underlying module import / encoding / config error."
-        )
-        return prefix
-
-    def start(
-        self, *, wait_seconds: float = 5.0, startup_delay_seconds: int = 0
-    ) -> dict[str, Any]:
-        with CatalogOperationLock(
-            self.catalog_dir,
-            operation="legacy-worker-start",
-        ):
-            self._require_legacy_runtime_allowed()
-            if self._read_control()["desired_state"] == "paused":
-                return {"started": False, "reason": "paused; use resume"}
-        current_runtime = _read_json(self.runtime_path)
-        if self._runtime_is_live(current_runtime):
-            return {"started": False, "reason": "already_running"}
-        self._clear_stale_runtime()
-        if os.name == "nt":
-            command = [
-                "powershell.exe",
-                "-NoProfile",
-                "-NonInteractive",
-                "-ExecutionPolicy",
-                "Bypass",
-                "-File",
-                str(self.launcher_path),
-                "-PythonExe",
-                str(self.python_executable),
-                "-ProjectRoot",
-                str(self.project_root),
-                "-ConfigPath",
-                str(self.config_path),
-                "-WorkerConfigPath",
-                str(self.worker_config_path),
-                "-CatalogDir",
-                str(self.catalog_dir),
-                "-StartupDelaySeconds",
-                str(startup_delay_seconds),
-            ]
-        else:
-            command = [
-                str(self.python_executable),
-                "-m",
-                "company_wiki.source_catalog.cli",
-                "--config",
-                str(self.config_path),
-                "worker",
-                "--worker-config",
-                str(self.worker_config_path),
-            ]
-            if startup_delay_seconds > 0:
-                command.extend(["--startup-delay-seconds", str(startup_delay_seconds)])
-        self.console_log_path.parent.mkdir(parents=True, exist_ok=True)
-        environment = os.environ.copy()
-        environment["PYTHONUTF8"] = "1"
-        environment["PYTHONIOENCODING"] = "utf-8"
-        creationflags = 0
-        if os.name == "nt":
-            # DETACHED_PROCESS makes Windows PowerShell exit 0 without
-            # executing its -File script. CREATE_NO_WINDOW keeps the
-            # supervisor hidden while the new process group isolates control
-            # signals from the CLI process that launched it.
-            creationflags = 0x08000000 | 0x00000200
-        # Give the child its own binary append handle. A PIPE keeps the CLI
-        # caller's capture pipe open for the worker lifetime on Windows, so
-        # `worker-start` never returns even though the worker is healthy.
-        with self.console_log_path.open("ab", buffering=0) as log:
-            process = self.popen(
-                command,
-                cwd=self.project_root,
-                env=environment,
-                stdin=subprocess.DEVNULL,
-                stdout=log,
-                stderr=subprocess.STDOUT,
-                close_fds=True,
-                creationflags=creationflags,
-            )
-        deadline = time.monotonic() + max(0.0, wait_seconds)
-        spawned_pid = getattr(process, "pid", None)
-        runtime_state = "stopped"
-        while time.monotonic() < deadline:
-            runtime = _read_json(self.runtime_path)
-            if self._runtime_is_live(runtime):
-                runtime_state = "running"
-                break
-            if getattr(process, "poll", lambda: None)() is not None:
-                runtime_state = "stopped"
-                break
-            self.sleeper(0.1)
-
-        if runtime_state == "running":
-            runtime = _read_json(self.runtime_path) or {}
-            return {
-                "started": True,
-                "spawned_pid": spawned_pid,
-                "supervisor_pid": spawned_pid if os.name == "nt" else None,
-                "worker_pid": runtime.get("pid"),
-            }
-
-        # Worker exited before publishing a runtime file. Provide explicit
-        # boot-failure diagnostics per §10.8.3.
-        spawned_exit_code = None
-        try:
-            spawned_exit_code = process.poll()
-        except Exception:
-            spawned_exit_code = None
-        recent_event, _event_error = self._read_recent_process_event()
-        console_tail = self._read_console_tail(max_lines=40)
-        failure_reason = self._classify_start_failure_reason(
-            spawned_pid=spawned_pid,
-            exit_code=spawned_exit_code,
-            runtime_state=runtime_state,
-        )
-        result: dict[str, Any] = {
-            "runtime_state": runtime_state,
-            "started": False,
-            "spawned_pid": spawned_pid,
-            "spawned_exit_code": spawned_exit_code,
-            "startup_failure_reason": failure_reason,
-            "console_tail": console_tail,
-            "recent_process_event": recent_event,
-        }
-        if recent_event is None:
-            result["recent_process_event_error"] = _event_error
-        else:
-            result["recent_process_event_error"] = None
-        return result
-
-    def resume(
-        self,
-        *,
-        wait_seconds: float = 5.0,
-        startup_delay_seconds: int = 0,
-    ) -> dict[str, Any]:
-        with CatalogOperationLock(
-            self.catalog_dir,
-            operation="legacy-worker-resume",
-        ):
-            self._require_legacy_runtime_allowed()
-            self._write_control(desired_state="enabled", stop_requested_for=None)
-        return self.start(
-            wait_seconds=wait_seconds,
-            startup_delay_seconds=startup_delay_seconds,
-        )
 
 
 __all__ = [
