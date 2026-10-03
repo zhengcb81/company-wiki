@@ -11,7 +11,7 @@
 ## 当前基线
 
 - CWP mainline: commits `d2250b7` (run/generation ownership) and `54db2a2` (SQLite migration fixture close) are pushed. The 54db2a2 remote CI status could not be read in this session. On 2026-10-03 the old Worker public execution surface was retired: bulk `normalize/summarize/run`, worker launch/start/resume/pause and startup installation commands plus PS/VBS/menu/pilot launchers are gone. `worker-status`, identity-checked `worker-stop`, startup status/removal, scan/query/export and explicit `ensure`/`close-gap` remain. A read-only production check found desired state paused, runtime stopped, no matching worker/supervisor process and no installed startup task; no catalog/raw/config data was changed.
-- RF rf-impl main 6fb2def7/4项tracked dirty；原fcap 5319ee26保留。FF真正origin/main/交付线c47c397，常用根仍fcap d35b6f5；ET main4924d57 tracked干净。StockWiki master已推进aa98848/4项quick-scan dirty；IQS master44b805f在继续实施。外仓各自owner，不reset或重复派线。
+- RF `rf-impl` 当前 `main/origin/main@6fb2def7`，N3a narrative consumer 已并入；最近两提交修复 POSIX pipe deadline/reader descendants。4个旧 execution evidence 文件有本地行尾差异，保留不动；`Projects\revenue-forecast@fcap/5319ee26` 仍为另一工作树。FF-S3 已提交并推送至 `origin/codex/ff-s3-single-request-limits@8f17cbd`；责任回归和快门禁通过，尚未合 FF main，原因是 CWP 生产 provider 尚无真实 bounded transport，且 v1/latest_as_of 额度语义待汇合。ET-S3 已并入 earnings-transcripts main，合并提交 `93fe52c`；同步阻塞 HTTP 与翻译预算仍不构成硬总时限承诺。SPACE-S5 只读审计已交付，机器/文字报告及 15 项工具测试通过；清理仍归主线。StockWiki/IQS/RF dirty 工作树继续保持 owner 隔离。
 - 最新完整空间32,821,613,206B/32.82GB，公司原件25.20GB，current DB3.06GB、旧derived/index约2.87GB。已释放13.06GB不再重复计收益；原件不进入清理候选。
 - 真实代码CI约56–62秒，单Python/全Unit/精选回归；不恢复全Contract/coverage日常门。
 
@@ -21,10 +21,10 @@
 |---|---|---|---|
 | S0 简化收口 | complete（ff5396c，CI绿） | PWF只留当前入口；删除R1旁路签收/shadow/gold；commit移除pytest、config doctor按相关文件触发 | 一次相关Unit/混合行为回归与正常发布；不逐文件签收 |
 | S1 N4A | complete（ff5396c，CI绿） | scope贯通Store/Worker/Supervisor/outbox/prepared，None兼容、空scope零修改、范围SQL先于LIMIT | N4节点A，确定性RED先行 |
-| S2 N4B | in_progress (budget/factory/batch/recovery and public legacy Worker retirement implemented; capacity and real-sample acceptance remain in the later N4C node) | real factory/HTTP adapter/full prompt; persistent token/cost reservation in AUTO; finite batch CLI; unique final artifact and small recovery receipt; public legacy whole-catalog Worker and startup routes removed | node A accounting/concurrency green; node B formal CLI/HTTP/kill/ACK and focused regression green; next close CWP producer caps then N4C real-sample/total-capacity evidence |
-| S3 来源与采集默认收敛 | in_progress（英文召回子项绿；FF/ET running，CWP默认/caps pending） | R2/R6：一请求、薄v1适配、相关字段fingerprint、缺元数据partial、published-asof；FF执行limits/ET旧入口一致；安装技能示例同步 | root CWP与FF-S3/ET-S3在一个接口大节点汇合 |
+| S2 N4B | in_progress (budget/factory/batch/recovery and public legacy Worker retirement implemented; capacity and real-sample acceptance remain in the later N4C node) | real factory/HTTP adapter/full prompt; persistent token/cost reservation in AUTO; finite batch CLI; unique final artifact and small recovery receipt; public legacy whole-catalog Worker and startup routes removed | node A accounting/concurrency green; node B formal CLI/HTTP/kill/ACK and focused regression green; CWP producer-limit design must first close verified provider transport gaps, then N4C |
+| S3 来源与采集默认收敛 | in_progress（英文召回子项绿；FF-S3 branch delivered，ET-S3 merged，CWP producer limits pending） | R2/R6：一请求、薄v1适配、相关字段fingerprint、缺元数据partial、published-asof；FF执行limits/ET旧入口一致；安装技能示例同步 | root先让CWP limits在真实 provider egress 路径生效，定清 v1 / latest_as_of 预算语义，再做跨仓接口节点与 FF 合并 |
 | S4 N4C real samples and storage plan | pending | four real document types / consumer reads / language and citation coverage / total incremental bytes; retain only status/stop/uninstall compatibility for old worker process cleanup | node C; start with a bounded batch, then use measured 1/2/4 parallelism |
-| S5 B2逐caller清理 | pending | 每集合无引用即可删约2.87GB旧derived/index；停用功能直接退役，未要求全库先生成摘要 | 存储迁移节点真实回读/原件保留/实际bytes，逐集合幂等 |
+| S5 B2逐caller清理 | pending（SPACE-S5只读审计已交付） | 审计确认约138.6 MB无代码调用者集合可列入首批候选；2.826 GB `derived/` 仍有 reader 与 8,191 条 artifact 路径引用，必须先迁移；报告不是删除清单 | 主线复核当前调用者/生产文件状态后分集合处理；每批验证原件与来源事实保留并测实际释放量 |
 | S6 DB事实收缩与收尾 | pending | 表级盘点，删除不可再消费派生/废索引并收缩，来源版本/撤回事实保留；旁路兼容、docs/hook残留清完 | 同一存储节点；commit/push、PWF收尾 |
 | 可选 exact-SHA原件对象去重 | 不阻S0–S6完成 | 先用已有SHA/size找候选、逐候选验字节，保留所有source/location版本事实 | 有真实收益才实施；不报未测节省量 |
 
@@ -55,7 +55,7 @@
 
 ## 并行所有权
 
-R1/N4A临时分工已完成。新的外部harness分工见[并行实施总计划](parallel_execution_plan_2026-10-03.md)：MAIN独占company-wiki；FF-S3独占filing-fetch-s3-limits worktree；ET-S3独占earnings-transcripts-s3-runtime worktree；SPACE-S5只写独立company-wiki-storage-audit-20261003目录、所有生产仓只读。用户已确认三包均派出，现为running。root保持总指挥、CWP producer/全局安装/跨仓大节点集成，不重复施工对应包。
+R1/N4A临时分工已完成。外部harness分工见[并行实施总计划](parallel_execution_plan_2026-10-03.md)：MAIN独占company-wiki；FF-S3独占filing-fetch-s3-limits worktree；ET-S3独占earnings-transcripts-s3-runtime worktree；SPACE-S5只写独立company-wiki-storage-audit-20261003目录、所有生产仓只读。ET-S3已合并并推送；FF-S3已推送支线、等 CWP producer/预算语义联调后再合 FF main；SPACE-S5报告完成、主线负责按报告实施清理。StockWiki/IQS/RF dirty 工作树继续由各自 owner 管理。
 
 StockWiki/IQS已有活跃owner与新未提交工作，本轮不再派线；RF源工作树保留。FF/ET不写CWP总PWF或彼此仓库，各自局部PWF/测试/小报告，交commit；root一次合入联调，不逐helper审批。结构上共用Store/来源默认/批次/空间清理仍归MAIN，不强拆同目录。
 
@@ -76,7 +76,7 @@ TDD框住公开行为，不把旧签收规则写进新测试。仅S0相关收口
 
 ## Next Step
 
-旧 Worker 的公开执行与启动链已退役，生产无残留进程/登录任务。root 接着实现 CWP `ensure` / `close-gap` 的字节、耗时和费用硬上限，与 FF-S3 对齐 producer 接口；未知或缺失上限必须在 provider 外发前拒绝。随后与 FF/ET 两条线在接口节点汇合，再执行 N4C 四类真实文档小批与完整容量测量。
+旧 Worker 的公开执行与启动链已退役，生产无残留进程/登录任务。CWP producer-budget WIP 已增加额度模型、CLI 参数和失败关闭检查；定向测试 33 项通过，但尚未提交，也没有证明生产 provider 的实际响应流受硬限额约束。下一步是补齐 provider capability RED/GREEN：StockInfo CNINFO 适配器仍在 owner 的未提交工作中，须先建立安全隔离基线；Dayu 是纯外部项目，禁止改代码，且当前 SEC HTTP/CLI 下载会整段物化，CWP 对不支持硬限额的 provider 必须在外发前拒绝。与此同时确定 v1 `--allow-download` 的额度承载，以及 `latest_as_of` 本地复用与实际 provider 探测何时要求额度。完成后再跑 FF/CWP 正式限额 CLI E2E、合入 FF-S3；ET 已并入，但其同步 HTTP deadline 与显式翻译预算仍需按真实语义处理。随后进入 N4C 小批和 SPACE-S5 的分集合清理。
 
 ## S2 当前交接与下一集中节点
 
