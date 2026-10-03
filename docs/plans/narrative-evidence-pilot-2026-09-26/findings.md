@@ -84,9 +84,10 @@ Git写入/联网用正常用户，sandbox .git只读不是产品权限。测试�
 
 ## 2026-10-04 — CNINFO provider transport 与 CWP budget bridge
 
-- 在 StockInfoDLSimple 隔离分支 `codex/cninfo-bounded-budget@947e839`（父提交 `1693045`）完成 bounded CNINFO transport：discovery JSON 与 PDF 响应按块计量同一预算，报告 `acquisition_usage/1.0`；提交仅含13个相关源码、fixture和测试文件。原 `v2-clean-rewrite` owner 工作树未写入或清理。分支此前已推送；本轮 GitHub 网络连接失败，未重复验证远端ref。provider仓未发现Actions workflow。
+- 在 StockInfoDLSimple 隔离分支 `codex/cninfo-bounded-budget@947e839`（父提交 `1693045`）完成 bounded CNINFO transport：discovery JSON 与 PDF 响应按块计量同一预算，报告 `acquisition_usage/1.0`；提交仅含13个相关源码、fixture和测试文件。原 `v2-clean-rewrite` owner 工作树未写入或清理。随后通过GitHub公开API确认该远端ref精确指向 `947e839`，`v2-clean-rewrite` 仍指向父提交 `1693045`；provider仓未发现Actions workflow。
 - provider测试此前按最终focused集合 **61 passed**；本轮另外跑的51项到达100%但pytest未打印结束摘要，Python进程仍占CPU，故中断退出阶段。这次补跑不计作完整新绿。改动文件限定Ruff检查通过，`git show --check HEAD`通过；对全 `tests/` 跑Ruff会出现19个既有无关lint问题，不据此扩大清理范围。
 - CWP当前bounded JSON桥接、真实子进程deadline、usage/partial usage计费与fetch receipt复核责任集 **38 passed**。跨仓E2E使用真实CWP预算服务 + StockInfo CLI/client，仅HTTP响应被测试桩替代、不访问外网或生产目录；发现1个候选，PDF为399 B，discovery+PDF总计713 B，与provider上报及CWP扣费精确一致；临时root已回收。
 - CWP生产配置仍是 `stockinfo-cninfo` 1.1.0 且没有 `supports_acquisition_budget` 声明；能力默认false。因此当前生产严格限额路径仍fail closed。只有provider分支进入其owner集成工作树后，才能将CWP配置切到1.2.0并明确启用，随后完成FF正式入口E2E。Dayu未改，继续拒绝无法真正施加硬下载上限的请求。
 - 本轮一次补跑在 `company-wiki/.t-cninfo-provider-final` 生成的模拟文件/测试staging已按目录内均为本轮pytest fixture确认后删除；CWP 38项回归的basetemp hook将测试根重定位到`%TEMP%`且自动cleanup失败，实测仅18个测试fixture、987,840 B后按精确路径手动删除。两处测试根均确认不存在；真实原件、生产DB、source catalog和provider原工作树未变。
 - 继续复核发现计量边界缺陷：provider失败回执在deadline刚过时才到达，旧`consume_response_bytes/cost`先执行`ensure_open`，导致已发生响应流量/费用未记入CWP budget。先加入两项测试，旧逻辑均RED；修改为`ensure_open`只阻止后续请求，usage消费方法始终记录已报告用量、仍独立执行字节/费用上限。最终六文件责任集 **41 passed / 14.83s**，Ruff与diff check通过；短basetemp `.t-bud`经finally清除。
+- CWP本地commit `288b02857d0a27b5622fb96c9e2156b6132a0deb`（父 `ba71ed4`）已推送到master；push前本地快smoke gate绿，远端Actions run `37162544905` 对应同一SHA且 `completed/success`。工作树干净。`gh` CLI缺失，CI由GitHub公开REST API核实。

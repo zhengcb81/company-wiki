@@ -145,6 +145,7 @@ S0/N4A及S2模型预算基础、CLI阶段与CI修复已正常发布，当前CI�
 ## 2026-10-04 — CWP / StockInfo bounded provider 节点
 
 - CWP producer-budget 代码与新增测试已覆盖共享 AcquisitionBudget、明确provider capability、bounded JSON子进程、严格usage与部分失败计费、receipt二次校验，以及缺能力时外发前fail closed。复核发现deadline已过时仍须记录provider已报告usage，新增两项先RED后GREEN；最终六文件责任回归 **41 passed in 14.83s**，Ruff与`git diff --check`通过。pytest hook曾重定位并漏删987,840 B fixture，本轮按精确路径清除；短路径 `.t-bud` 通过finally删除。
-- StockInfo CNINFO bounded transport在隔离分支 `codex/cninfo-bounded-budget@947e839`（基于 `1693045`）完成并提交，仅13个相关文件；original dirty checkout未改。focused测试此前61 passed、限定改动文件Ruff clean。今天额外51项运行到100%但退出阶段挂住并被中断，不算完整测试结果。分支此前已推送，本轮网络错误使远端状态未能复查；provider仓未发现Actions workflow。
+- StockInfo CNINFO bounded transport在隔离分支 `codex/cninfo-bounded-budget@947e839`（基于 `1693045`）完成并提交，仅13个相关文件；original dirty checkout未改。focused测试此前61 passed、限定改动文件Ruff clean。今天额外51项运行到100%但退出阶段挂住并被中断，不算完整测试结果。随后GitHub API核实远端隔离分支精确为947e839，`v2-clean-rewrite`仍是父提交1693045；provider仓未发现Actions workflow。
 - CWP→StockInfo CLI/client跨进程模拟HTTP E2E通过：1个候选，PDF 399 B，discovery+PDF用量713 B且精确对账；测试没有外网请求、生产目录变更，临时root已删除。
 - 配置保持不变且正确fail closed：`config/source_acquisition.yaml`仍指向旧 `v2-clean-rewrite` provider 1.1.0，没有 `supports_acquisition_budget`，默认能力false。故本阶段完成provider和CWP桥接实现，不等于生产下载限额已经启用。下一步先将StockInfo分支纳入owner集成工作树，再显式配置1.2.0和budget capability，完成FF正式入口端到端及v1/latest_as_of复用语义验证，然后合入FF-S3。Dayu无改动。
+- CWP budget桥接与额度计量修复已commit `288b028` 并推送；远端CI `37162544905` 已对该SHA成功。这个阶段完成的是安全fail-closed桥接，不是生产provider已经启用。

@@ -11,7 +11,7 @@
 ## 当前基线
 
 - CWP mainline: commits `d2250b7` (run/generation ownership) and `54db2a2` (SQLite migration fixture close) are pushed. The 54db2a2 remote CI status could not be read in this session. On 2026-10-03 the old Worker public execution surface was retired: bulk `normalize/summarize/run`, worker launch/start/resume/pause and startup installation commands plus PS/VBS/menu/pilot launchers are gone. `worker-status`, identity-checked `worker-stop`, startup status/removal, scan/query/export and explicit `ensure`/`close-gap` remain. A read-only production check found desired state paused, runtime stopped, no matching worker/supervisor process and no installed startup task; no catalog/raw/config data was changed.
-- RF `rf-impl` 当前 `main/origin/main@6fb2def7`，N3a narrative consumer 已并入；最近两提交修复 POSIX pipe deadline/reader descendants。4个旧 execution evidence 文件有本地行尾差异，保留不动；`Projects\revenue-forecast@fcap/5319ee26` 仍为另一工作树。FF-S3 已提交并推送至 `origin/codex/ff-s3-single-request-limits@8f17cbd`；CWP bounded JSON桥接、CNINFO provider隔离实现及跨进程E2E已完成，但StockInfo分支尚未合入当前配置所指的工作树（配置仍为1.1.0且能力默认关闭），因此生产限额仍fail closed；v1/latest_as_of额度语义仍待汇合。ET-S3 已并入 earnings-transcripts main，合并提交 `93fe52c`；同步阻塞 HTTP 与翻译预算仍不构成硬总时限承诺。SPACE-S5 只读审计已交付，机器/文字报告及 15 项工具测试通过；清理仍归主线。StockWiki/IQS/RF dirty 工作树继续保持 owner 隔离。
+- RF `rf-impl` 当前 `main/origin/main@6fb2def7`，N3a narrative consumer 已并入；最近两提交修复 POSIX pipe deadline/reader descendants。4个旧 execution evidence 文件有本地行尾差异，保留不动；`Projects\revenue-forecast@fcap/5319ee26` 仍为另一工作树。FF-S3 已提交并推送至 `origin/codex/ff-s3-single-request-limits@8f17cbd`；CWP bounded JSON桥接、CNINFO provider隔离实现及跨进程E2E已完成。CWP commit `288b028` 已推送，CI `37162544905` 成功；StockInfo provider commit `947e839` 远端ref已核对，且 `v2-clean-rewrite` 仍指向其父提交 `1693045`，适合做集成目标。它尚未进入CWP当前配置工作树（配置仍为1.1.0且能力默认关闭），因此生产限额仍fail closed；v1/latest_as_of额度语义仍待汇合。ET-S3 已并入 earnings-transcripts main，合并提交 `93fe52c`；同步阻塞 HTTP 与翻译预算仍不构成硬总时限承诺。SPACE-S5 只读审计已交付，机器/文字报告及 15 项工具测试通过；清理仍归主线。StockWiki/IQS/RF dirty 工作树继续保持 owner 隔离。
 - 最新完整空间32,821,613,206B/32.82GB，公司原件25.20GB，current DB3.06GB、旧derived/index约2.87GB。已释放13.06GB不再重复计收益；原件不进入清理候选。
 - 真实代码CI约56–62秒，单Python/全Unit/精选回归；不恢复全Contract/coverage日常门。
 
@@ -80,13 +80,13 @@ TDD框住公开行为，不把旧签收规则写进新测试。仅S0相关收口
 
 ### S3 bounded provider transport：固定桥接合同
 
-- 唯一先实现的生产 transport 是 CNINFO。StockInfo 原工作区在实施前有24个tracked修改和未跟踪CNINFO adapter/client/test；不得直接编辑。已基于 `1693045` 建立隔离分支 `codex/cninfo-bounded-budget`，commit `947e839`（13个精确相关文件），实现provider-local预算和CNINFO discovery/PDF流式读取；原工作区保持不变。该分支已推送（最新会话网络不可达，未能再次远端核验）；仓库未发现Actions workflow。Dayu 是纯外部项目，代码不改；HK/US 遇到硬下载 cap 继续外发前拒绝。
+- 唯一先实现的生产 transport 是 CNINFO。StockInfo 原工作区在实施前有24个tracked修改和未跟踪CNINFO adapter/client/test；不得直接编辑。已基于 `1693045` 建立隔离分支 `codex/cninfo-bounded-budget`，commit `947e839`（13个精确相关文件），实现provider-local预算和CNINFO discovery/PDF流式读取；原工作区保持不变。GitHub API核对远端ref等于 `947e839`，owner集成分支 `v2-clean-rewrite` 仍等于父提交 `1693045`；provider仓未发现Actions workflow。Dayu 是纯外部项目，代码不改；HK/US 遇到硬下载 cap 继续外发前拒绝。
 - CWP `JsonCommandAdapter` 增加 `discover_bounded` / `fetch_bounded`。子进程 JSON 请求附加 `acquisition_budget`：恰含 `schema_version="1.0"`、`max_response_bytes`（本阶段剩余额度）、`timeout_seconds`（单调 deadline 剩余秒）、`max_cost_usd`（十进制字符串）。CWP subprocess timeout 取配置 timeout 与同一剩余秒数的较小值。
 - 支持 bounded 的 provider 对每个 discovery JSON / PDF HTTP响应按块读取；检查本阶段 deadline，并在接纳每块前拒绝超过 `max_response_bytes` 的响应。成功 JSON 必须包含 `acquisition_usage`，恰含 `schema_version="1.0"`、`response_bytes`、`cost_usd`；CWP 校验形状后把两项记入共享 `AcquisitionBudget`。漏报、额外字段、非法数、超预算、进程超时一律失败；fetch回执大小还须由 CWP 独立复核。
 - 一个 `AcquisitionBudget` 对象贯穿 ensure/close-gap 锁外及锁内 metadata discovery、CNINFO分页、fetch与staging，不因子进程/分页重置；未知失败不重试已部分消费的预算。CNINFO当前收费为零，由provider明确报告 `"0"`，不将“没有成本数据”伪报为零。provider CLI 无预算的 legacy调用保持既有合同。
 - TDD 大节点：CWP 命令适配器进程测试证明预算被传递、真实elapsed timeout、usage缺失/少报/超额失败；StockInfo 测试用分块假响应覆盖 discovery 与 PDF cap边界、deadline、cleanup `.part`；正式短根跨进程 E2E 从 CWP budgeted `ensure` 到 StockInfo JSON CLI，确认发现+下载共享总字节、精确SHA/回执、第二次失败时不留part/staging且没有第三方/生产文件变化。Dayu负例确认子进程 marker不存在。集中责任包通过后才启用CN bounded能力并与FF-S3运行正式E2E/汇合。
 
-CNINFO provider transport已完成代码与模拟HTTP跨仓E2E，但尚未集成进当前CWP配置工作树。不能仅因配置切换就开放能力：先将StockInfo隔离分支纳入provider owner集成线，再把CWP配置版本改为1.2.0并显式声明supports_acquisition_budget，执行FF正式入口E2E；预算、latest_as_of复用和legacy v1请求语义也要一并验证。Dayu不支持的硬限额请求继续在外发前拒绝。CWP producer-budget改动仍为未提交WIP，最终集中测试41项通过；PWF整理后作为一个完整阶段提交。
+CNINFO provider transport已完成代码与模拟HTTP跨仓E2E，但尚未集成进当前CWP配置工作树。不能仅因配置切换就开放能力：先将StockInfo隔离分支纳入provider owner集成线，再把CWP配置版本改为1.2.0并显式声明supports_acquisition_budget，执行FF正式入口E2E；预算、latest_as_of复用和legacy v1请求语义也要一并验证。Dayu不支持的硬限额请求继续在外发前拒绝。CWP producer-budget已提交并推送为 `288b028`，对应远端CI `37162544905` success；最终集中测试41项通过。下一步是StockInfo provider集成与FF正式入口闭环，原 owner dirty worktree保持不动。
 
 ## S2 当前交接与下一集中节点
 
