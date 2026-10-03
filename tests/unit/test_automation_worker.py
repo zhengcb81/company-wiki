@@ -323,24 +323,22 @@ def test_worker_reaps_expired_leases(tmp_path):
                       subject_id="src-reap", status=m.JobStatus.READY,
                       created_from_event_id="evt-reap")
     store.put_job(job2)
-    # Claim it.
+    # Claim through the fenced Store API so this lease belongs to the current
+    # runtime generation. A manually constructed Attempt defaults to generation
+    # zero and would test generation invalidation instead of lease expiry.
     clock2 = FixedClock("2026-07-12T10:02:00Z")
     id_gen2 = SequentialIDGen("w2")
-    w.Worker(store, reg, executor, clock=clock2, id_gen=id_gen2, lease_seconds=1)
-    # Manually transition to LECTED and create an expired attempt.
-    store.transition_job("job-reap", expected=m.JobStatus.READY,
-                         target=m.JobStatus.LEASED, updated_at="2026-07-12T10:02:00Z")
-    store.transition_job("job-reap", expected=m.JobStatus.LEASED,
-                         target=m.JobStatus.RUNNING, updated_at="2026-07-12T10:02:00Z")
-    att = m.Attempt(
-        attempt_id="att-reap", job_id="job-reap", attempt_no=1,
-        worker_id="w2", lease_token="token-reap",
-        lease_until="2026-07-12T10:02:01Z",  # expired
-        started_at="2026-07-12T10:02:00Z", heartbeat_at="2026-07-12T10:02:00Z",
-        finished_at=None, outcome=None, result_json=None,
-        error_code=None, error_detail=None,
+    worker2 = w.Worker(store, reg, executor, clock=clock2, id_gen=id_gen2, lease_seconds=1)
+    gate = store.read_runtime_gate()
+    claimed = store.claim_next_ready(
+        worker_id="w2", attempt_id="att-reap", lease_token="token-reap",
+        now=clock2.now(), lease_until="2026-07-12T10:02:01Z",
+        expected_generation=gate.control_generation,
+        allowed_job_types=("timer.execute_step",), allowed_job_ids=("job-reap",),
     )
-    store.put_attempt(att)
+    assert claimed is not None
+    assert claimed.attempt.runtime_generation == gate.control_generation
+    assert worker2.reap_expired() == 0
     # Now reap with a clock past the lease_until.
     clock3 = FixedClock("2026-07-12T10:05:00Z")
     worker3 = w.Worker(store, reg, executor, clock=clock3, id_gen=SequentialIDGen("w3"), lease_seconds=1)

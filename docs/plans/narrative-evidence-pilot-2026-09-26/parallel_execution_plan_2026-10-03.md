@@ -9,9 +9,9 @@
 | 线 | 当前状态 | 独占写入目录 | 本次内容 | 独立卡 |
 |---|---|---|---|---|
 | MAIN：本对话/root | active | `C:\Users\郑曾波\Projects\company-wiki` | S2 批次/恢复/降容，CWP S3 来源与采集接口，S4 真样本/消费者，S5/S6 清理与所有集成 | [N4](n4_production_batch_implementation.md)、task_plan |
-| FF-S3 | ready，尚未派出 | `C:\Users\郑曾波\Projects\filing-fetch-s3-limits` | 一请求、实际限额、v2/薄 v1、文档及安装面收敛 | [FF 独立卡](harness_lanes/s3_filing_fetch_single_request_limits.md) |
-| ET-S3 | ready，尚未派出 | `C:\Users\郑曾波\Projects\earnings-transcripts-s3-runtime` | 旧 scraper 与工具共用 provider，原语言、实际限额、有界错误 | [ET 独立卡](harness_lanes/s3_earnings_transcripts_runtime.md) |
-| SPACE-S5 | ready，尚未派出 | `C:\Users\郑曾波\Projects\company-wiki-storage-audit-20261003` | 只读 B2 调用者/库页/原件精确重复量，给主线可执行清理批次 | [空间审计卡](harness_lanes/s5_storage_audit.md) |
+| FF-S3 | running，用户已派出 | `C:\Users\郑曾波\Projects\filing-fetch-s3-limits` | 一请求、实际限额、v2/薄 v1、文档及安装面收敛 | [FF 独立卡](harness_lanes/s3_filing_fetch_single_request_limits.md) |
+| ET-S3 | running，用户已派出 | `C:\Users\郑曾波\Projects\earnings-transcripts-s3-runtime` | 旧 scraper 与工具共用 provider，原语言、实际限额、有界错误 | [ET 独立卡](harness_lanes/s3_earnings_transcripts_runtime.md) |
+| SPACE-S5 | running，用户已派出 | `C:\Users\郑曾波\Projects\company-wiki-storage-audit-20261003` | 只读 B2 调用者/库页/原件精确重复量，给主线可执行清理批次 | [空间审计卡](harness_lanes/s5_storage_audit.md) |
 
 “ready”表示可以开工，不能解释成有 harness 已经在做。用户启动后把线名交本对话登记为 running；root 从那时起不再实施其仓内工作。没有消息回传也不推测交付。工作目录已存在时先读 status/计划，复用同线可用目录；不覆盖不明目录。
 
@@ -80,4 +80,4 @@ root 只在 S3 接口、N4 B/C、S5/S6 存储几个大节点复核和测试。FF
 
 模型/持久预算基础 `9ccd29f` 已推送，CI37135709529成功。正式 CLI/终态降容第一组集中 67 passed/55.05s；同 run 重跑零新增 POST，零费用/小空间 cap 均零 POST，原文改 SHA 后失败仍保留此前费用。这不等于 N4B/C 全完成：root 还负责跨 run 工件幂等、父进程 kill/ACK 窗口、四份真实小批和旧 Worker 退出，见 N4 卡。
 
-已发布cf662cc（正式CLI/终态降容、英文召回、三施工卡），正常hooks/pre-push绿；CI37139201102首次查询运行中。下一步：按用户派出的线登记 owner，同时 root 继续 S2 的恢复/跨 run 收口及 CWP S3 producer 限额。任何任务卡被外部 harness 接走后，该包不再由 root 另起实现。
+已发布cf662cc（正式CLI/终态降容、英文召回、三施工卡），正常hooks/pre-push绿；CI37139201102两项Unit夹具失败已确定根因并修复，54项责任包绿。2026-10-03用户确认三包都已派出，均登记running；root不再另起它们仓内实现。root继续 S2 的恢复/跨 run 收口及 CWP S3 producer 限额。
