@@ -121,3 +121,9 @@ S0/N4A及S2模型预算基础、CLI阶段与CI修复已正常发布，当前CI�
 - SPACE-S5 交付审查完成：报告 `company-wiki-storage-audit-20261003/results/storage_audit.{json,md}`，schema `storage-audit/1`；15项工具测试通过，production mutation 为0。报告供主线拆分 S5/S6，不是自动删除清单；优先候选138,648,023 B，derived 2.826 GB先迁移，DB无free pages。
 - ET-S3 状态更正：已合并并推送到 earnings-transcripts main，merge commit `93fe52c`；旧计划中仍写“running/未合main”的状态已纠正。其同步网络调用和显式翻译是否受总时限约束仍开放，不能把ET报告成硬端到端deadline。
 - 测试临时目录异常如 findings 所述：3个文件、402,088 B 因ACL残留于`%TEMP%`，未调整权限，清理失败事实已记录；该测试目录未达到恢复原样。
+
+## 2026-10-03 — CWP producer budget 回执二次校验
+
+- RED：新增 under-reporting bounded adapter，discovery先计20 B、下载产物21 B、总cap 30 B；旧逻辑未拒绝。原因是它把 receipt 与总cap比较，没有验证本次 fetch 实际记账，也没有扣除 discovery 消耗。
+- GREEN：fetch 前记录累计响应字节，fetch 后要求 `receipt.byte_size` 不大于本次新增计费字节及 discovery 后剩余额度；新增 CN `JsonCommandAdapter` 子进程 marker 测试证明不支持 bounded 的 adapter 会在外发前 fail closed。5个相关测试文件最终 **35 passed / 1 existing pytest config warning**；Ruff与`git diff --check`通过。所有本轮 `.t-*` basetemp 均确认移除。此修正只挡住漏记账回执；生产 CNINFO/Dayu bounded transports 仍未实现，不能宣称真实 provider cap 已生效。
+- StockInfoDLSimple 状态复核：`v2-clean-rewrite@1693045` 原 checkout 有24个tracked修改及其他未跟踪文件；其现有 `CninfoAnnouncementClient.fetch_pdf` 仍先完整 `response.read()` 再写。没有修改原 checkout；后续需先建立精准隔离快照并将 discovery 与 PDF 下载统一到一个逐块消耗的 budget。Dayu 保持未改。

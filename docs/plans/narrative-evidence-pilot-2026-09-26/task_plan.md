@@ -76,7 +76,7 @@ TDD框住公开行为，不把旧签收规则写进新测试。仅S0相关收口
 
 ## Next Step
 
-旧 Worker 的公开执行与启动链已退役，生产无残留进程/登录任务。CWP producer-budget WIP 已增加额度模型、CLI 参数和失败关闭检查；定向测试 33 项通过，但尚未提交，也没有证明生产 provider 的实际响应流受硬限额约束。下一步是补齐 provider capability RED/GREEN：StockInfo CNINFO 适配器仍在 owner 的未提交工作中，须先建立安全隔离基线；Dayu 是纯外部项目，禁止改代码，且当前 SEC HTTP/CLI 下载会整段物化，CWP 对不支持硬限额的 provider 必须在外发前拒绝。与此同时确定 v1 `--allow-download` 的额度承载，以及 `latest_as_of` 本地复用与实际 provider 探测何时要求额度。完成后再跑 FF/CWP 正式限额 CLI E2E、合入 FF-S3；ET 已并入，但其同步 HTTP deadline 与显式翻译预算仍需按真实语义处理。随后进入 N4C 小批和 SPACE-S5 的分集合清理。
+旧 Worker 的公开执行与启动链已退役，生产无残留进程/登录任务。CWP producer-budget WIP 已增加额度模型、CLI 参数、失败关闭检查和回执字节二次校验；5 文件定向组 35 项通过，仍未提交，且尚未证明生产 provider 的实际响应流受硬限额约束。新 RED 反例发现回执字节只与总 cap 比较会漏掉 discovery 已消耗额度；现要求下载期间计入的字节至少覆盖 staged receipt。`JsonCommandAdapter` 与 Dayu CLI adapter 均被测试证明在 provider 进程启动前 fail closed；CNINFO 实际 HTTP 子适配器仍需升级。StockInfo 当前原工作树 24 个 tracked 文件修改并带额外未跟踪文件，不能直接写；需要在不覆盖 owner 工作的隔离快照上接通 fetch/discovery 逐块限额。Dayu 是纯外部项目，禁止改代码，且当前 SEC HTTP/CLI 下载会整段物化，CWP 对不支持硬限额的 provider 必须在外发前拒绝。与此同时确定 v1 `--allow-download` 的额度承载，以及 `latest_as_of` 本地复用与实际 provider 探测何时要求额度。完成后再跑 FF/CWP 正式限额 CLI E2E、合入 FF-S3；ET 已并入，但其同步 HTTP deadline 与显式翻译预算仍需按真实语义处理。随后进入 N4C 小批和 SPACE-S5 的分集合清理。
 
 ## S2 当前交接与下一集中节点
 
