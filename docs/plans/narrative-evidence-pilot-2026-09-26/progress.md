@@ -1,5 +1,16 @@
 # Progress：叙述性证据试点
 
+## 2026-10-03 — B3节点完成，发布后精确apply
+
+- B3节点64passed/45.23s，Ruff/host绿；正式CLI证明删两小真实archive后narrative包/active query不变，retired具名不可用、unknown NotFound，DB/raw字节和mtime不变。独立只读大节点审查无阻塞，不新增helper审查。
+- Root发现真实dry-run输出经PS重定向损坏中文用户路径。新增强制GBK/unicode root正式CLI RED→GREEN（1passed/1.26s），B1/B3输出改ASCII JSON，随后Python bytes捕获并UTF8写纠正收据，project_root再次实核等于cwd。这是输出收据缺陷，不是原metadata或生产文件损坏；生产尚未apply。
+- 实现交付与dry-run见[交付记录](harness_lanes/results/gd_b3_implementation_2026-10-03.md)。普通commit/push/精简CI绿后执行同audit --apply。B4补批已审清：两历史commit只含审查docs，以轻Git ref保存；四份untracked报告main已有相同blob，不新增副本；按[精确补卡](gd_b4_historical_receipts_cleanup_2026-10-03.md)处理。
+
+## 2026-10-03 — B4实删完成与后续空间约束
+
+- 23/23普通历史worktree已移除，路径与Git登记均确认缺席，hold/fail均0；逻辑释放1,414,586,922B/1.317437GiB，同卷free观测单独记录。主HEAD、catalog size/mtime、配置和Worker控制SHA/mtime前后相同。见[实际收据](harness_lanes/results/worktree_cleanup_2026-10-03.md)。三个managed旧根仍在，269MB不计收益。
+- 更新当前入口、ADR-009和已完成consumer卡，避免弱模型重做G-C或照旧等待90天/恢复全归档。N4加入一份原件/最终正文、终态小收据、无自动完整旧库备份，以及三个可配置新增空间预算；测试集中进原节点B，不新增小节点审查。
+
 ## 2026-10-03 — B4普通工作树清理卡冻结
 
 - 独立盘点复核23个普通checkout，HEAD无漂移、无独有提交、工作树干净；ignored仅缓存、pyc及五个0行旧MD5标记库。冻结[精确清单和操作边界](gd_b4_worktree_cleanup_2026-10-03.md)，预计1,414,586,922B；普通Git remove，不force，不扩展到活动根或其他仓。

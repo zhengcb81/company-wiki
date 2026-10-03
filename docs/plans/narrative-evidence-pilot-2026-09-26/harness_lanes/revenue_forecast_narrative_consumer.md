@@ -1,5 +1,7 @@
 # RF 独占任务：持久叙述证据薄 consumer
 
+> **已完成，勿重复派发（2026-10-03）：**最终`6fb2def7`正常推送origin/main并快进rf-impl本地主线，Actions37119502901全绿。89项真实文档/原reader节点、生命周期Win20/Linux16/CLI3及静态门已通过；4项历史owner dirty原SHA保留。见[G-C收尾](results/gc_consumer_closeout_2026-10-03.md)。下方为实施历史与接口记录。
+
 ## 范围与前置
 
 只写 revenue-forecast 新 consumer、该消费者测试/文档及确有必要的既有入口调用点，不写 company-wiki/FF/ET/StockWiki/IQS。RF `0573c40` 已发布 main、CI 两 job 全绿；开工 fetch 当前 main，使用新 `codex/...` worktree，不清理或修改活动 fcap/历史 execution_runs。

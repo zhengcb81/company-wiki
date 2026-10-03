@@ -1,6 +1,6 @@
 # CWP 独占施工卡：来源、叙述证据与 Worker
 
-> **N3a 发布覆盖：**producer `a640400` 已推送，Actions `37113358995` 成功 / 57 秒；CWP 本阶段实现已完成，当前 RF / StockWiki 按[交接包](../narrative_transport_handoff.md)独占接线。G-C 未收口，G-D 只读盘点，Worker paused。下段 `2e674cc` 为 N3a 前的 G-A 收据。
+> **2026-10-03 当前入口：**G-A/N3a/G-C已完成；RF `6fb2def7`/StockWiki `ae0b3e3`已并主线，RF推送及CI全绿，见[G-C收尾](results/gc_consumer_closeout_2026-10-03.md)。当前先实施[B3精确archive退役](../gd_b3_archive_retirement_implementation.md)和[B4旧checkout清理](../gd_b4_worktree_cleanup_2026-10-03.md)，之后[N4生产composition/model/预算](../n4_production_batch_implementation.md)。下方G-C pending/N3a施工均为历史，勿重复。原件保留、Worker paused。
 
 > **2026-10-03 最新状态覆盖：**CWP `master@2e674cc`、FF `origin/main@c47c397`（已核远端 ref）、ET `main@4924d57` 与 RF `main@0573c40` 已发布。G-A0/G-A1 和 FF transcript companion 已完成；当前三仓 `test_source_ref_v2_three_repo_e2e.py` 用这些 FF/CWP/RF 提交通过（1 passed，8.69 秒），独立根 `.ga-mainline-20261003` 已清理。G-A 选定接口范围已收口，下一步为正在实施的 [N3a 叙述传输细则](../narrative_transport_implementation.md)；RF/StockWiki selected 消费 G-C 仍 pending，G-D 和生产 Worker 仍 paused。
 

@@ -66,7 +66,7 @@ def _bound(path: Path, sha: object, size: object) -> None:
         raise SnapshotRetirementError('file binding changed')
 
 
-def _basis(root: Path, prepared: Path, retired: Path) -> dict[str, Any]:
+def _basis(root: Path, prepared: Path, retired: Path, *, verify_archive: bool = True) -> dict[str, Any]:
     p = _json(_inside(prepared, root / 'retirement'))
     r = _json(_inside(retired, root / 'retirement'))
     current = _inside(Path(p.get('production_database', '')), root)
@@ -80,7 +80,8 @@ def _basis(root: Path, prepared: Path, retired: Path) -> dict[str, Any]:
             or p.get('backup_sha256') != r.get('backup_sha256')):
         raise SnapshotRetirementError('retirement identity mismatch')
     archive = _inside(Path(p['backup_path']), root / 'retirement')
-    _bound(archive, p['backup_sha256'], p['backup_bytes'])
+    if verify_archive:
+        _bound(archive, p['backup_sha256'], p['backup_bytes'])
     return {
         'snapshot_sha256': p['shadow_sha256'], 'candidate_bytes': p['shadow_bytes'],
         'basis_run_id': p['run_id'], 'archive_sha256': p['backup_sha256'],
@@ -145,6 +146,26 @@ def _verify_snapshot(snapshot: Path, plan: dict[str, Any]) -> None:
             raise SnapshotRetirementError('candidate is not a SQLite snapshot')
 
 
+def _completed(root: Path, snapshot: Path, prepared: Path, retired: Path) -> dict[str, Any] | None:
+    """Only replay a completed operation; new deletions still require the archive."""
+    if snapshot.exists():
+        return None
+    plan = {'snapshot_name': snapshot.name,
+            **_basis(root, prepared, retired, verify_archive=False)}
+    operation_id = hashlib.sha256(json.dumps(plan, sort_keys=True).encode()).hexdigest()[:24]
+    directory = _inside(root / 'snapshot-cleanup' / operation_id, root)
+    receipt = _inside(directory / 'receipt.json', root)
+    intent = _inside(directory / 'intent.json', root)
+    if not receipt.exists():
+        return None
+    result = _json(receipt)
+    if (not intent.exists() or _json(intent).get('plan') != plan
+            or result.get('plan') != plan or result.get('status') != 'removed'
+            or result.get('deleted_bytes') != plan['candidate_bytes']):
+        raise SnapshotRetirementError('completed cleanup receipt drift')
+    return result
+
+
 def retire_snapshot(
     catalog_dir: Path, snapshot_name: str, prepared: Path, retired: Path,
     *, apply: bool = False,
@@ -159,6 +180,9 @@ def retire_snapshot(
         _verify_snapshot(snapshot, plan)
         return {'status': 'dry_run', **plan}
     with CatalogOperationLock(root, operation='retire-redundant-snapshot'):
+        completed = _completed(root, snapshot, prepared, retired)
+        if completed is not None:
+            return completed
         plan = {'snapshot_name': snapshot_name, **_basis(root, prepared, retired)}
         if snapshot.exists():
             _verify_snapshot(snapshot, plan)
@@ -176,9 +200,9 @@ def main() -> int:
     try:
         value = retire_snapshot(args.catalog_dir, args.snapshot, args.prepared, args.retired, apply=args.apply)
     except (OSError, ValueError, KeyError) as exc:
-        print(json.dumps({'status': 'refused', 'reason': str(exc)}, ensure_ascii=False))
+        print(json.dumps({'status': 'refused', 'reason': str(exc)}, ensure_ascii=True))
         return 2
-    print(json.dumps(value, ensure_ascii=False, sort_keys=True))
+    print(json.dumps(value, ensure_ascii=True, sort_keys=True))
     return 0
 
 

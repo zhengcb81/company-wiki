@@ -272,6 +272,8 @@ def test_active_only_catalog_identifies_archived_legacy_evidence(
     error = json.loads(capsys.readouterr().err)
     assert error["error_type"] == "legacy_evidence_archived"
     assert error["retryable"] is False
+    assert "verified cold snapshot" not in error["error"]
+    assert "source identity" in error["error"]
 
 
 def test_missing_database_is_unavailable_without_creating_parent(tmp_path):

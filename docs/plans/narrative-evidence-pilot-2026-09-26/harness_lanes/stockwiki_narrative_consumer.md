@@ -1,5 +1,7 @@
 # StockWiki 独占任务：持久叙述证据薄 consumer
 
+> **已完成，勿重复派发（2026-10-03）：**最终`4c3334e`正常merge到master`ae0b3e3`，保留W05其他owner提交；合并后相关172passed/1平台skip，Ruff绿。14真实producer/consumerE2E、785项单仓节点和两平台生命周期包有既有收据，不重复运行。无remote不新增。见[G-C收尾](results/gc_consumer_closeout_2026-10-03.md)。下方为实施历史与接口记录。
+
 ## 范围与前置
 
 只写 StockWiki 新 narrative adapter/来源 DTO、查询入口调用点、本线测试和文档；不写 CWP/FF/ET/RF/IQS。W01–W04、SourceExport reader 已在 StockWiki 主线，不重复实施；保留现有 `.claude/` 和无关 owner 工作。先核 Git/current PWF，基于当前 master 建 `codex/...` worktree。

@@ -1,6 +1,6 @@
 # company-wiki 清洁架构与 TDD 实施总图（2026-09-27）
 
-> **2026-10-03 执行入口：**M1/M2、E-B、G-A / N3a 已完成；RF/StockWiki 真消费 G-C 正做生命周期局部修复/并线。G-D B1 已发布/CI 55 秒绿并精确删除重复 snapshot，逻辑释放 2.846 GiB，主库 SHA/mtime 不变。当前步骤见[主计划 Phase 60](task_plan.md)、[实际收据](harness_lanes/results/gd_b1_retirement_2026-10-03.md)；[G-D 细则](gd_storage_batches_2026-10-03.md)明确 B2/B3 和生产 composition/计量缺口。本页较早阶段/§13 下一步属于历史。用户要求完成进度及时普通推送，覆盖下方旧“提交不推送”规则；生产 Worker paused，原件保留。
+> **2026-10-03 执行入口：**M1/M2、E-B、G-A/N3a/G-C来源消费均完成；StockWiki `ae0b3e3`、RF `6fb2def7`已并主线，RF远端CI全绿。B1已精确释放2.846GiB；先做[Phase61](task_plan.md)的[B3两旧archive退役](gd_b3_archive_retirement_implementation.md)及[B4旧checkout整理](gd_b4_worktree_cleanup_2026-10-03.md)，随后按[N4细则](n4_production_batch_implementation.md)接真实模型、计量/预算/终态保留，再B2调用者切换。当前无空间反弹；原件和来源事实保留。本页较早“下一步”属于历史，完成进度普通推送，Worker保持paused。
 
 > **2026-09-28 状态更新：**下方页首与 §13 的 E2/E3“下一步”是历史施工快照。E0–E4 已完成，生产 Worker 仍 paused；当前跨仓并主线与剩余 E5–E7、G2a、派生清理的依赖顺序见[跨仓总计划](cross_repo_mainline_and_delivery_plan_2026-09-28.md)和 `task_plan.md` Phase 24。本页 L0–L7 职责和 M1–M4 质量原则继续有效；R4 的独立 B.AR/C.local 门尚未由内部 M1 绿灯自动签收。
 

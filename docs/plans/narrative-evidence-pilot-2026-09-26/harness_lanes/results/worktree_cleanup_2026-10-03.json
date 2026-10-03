@@ -1,0 +1,1270 @@
+{
+  "audit_sha256": "a777462988bb406987f28cea8a03a8bdf11c6f2609568690378a3c290cdc69c1",
+  "failed_count": 0,
+  "finished_at_utc": "2026-10-03T11:48:38.718708+00:00",
+  "free_bytes_after": 131365511168,
+  "free_bytes_before": 129861976064,
+  "free_delta_observed_bytes": 1503535104,
+  "held_count": 0,
+  "initial_git_registered_roots": [
+    {
+      "branch": "refs/heads/master",
+      "head": "0dc82c1b643eac010a51967418c52bc0caca4659",
+      "path": "C:/Users/郑曾波/Projects/company-wiki"
+    },
+    {
+      "branch": "refs/heads/codex/narrative-gates-integration",
+      "head": "cba745ac7e398fc2ccd84c132aa5c4c47d8828eb",
+      "path": "C:/Users/郑曾波/.codex/worktrees/data-lake-reader/company-wiki"
+    },
+    {
+      "branch": "refs/heads/codex/rf-state-audit",
+      "head": "447d1c74b78bec369ff5dc32fe78097905ce6342",
+      "path": "C:/Users/郑曾波/.codex/worktrees/rf-state-audit/company-wiki"
+    },
+    {
+      "branch": "refs/heads/codex/transcript-companion",
+      "head": "ced354a24c02928a28cc94c34b18780f9766cf06",
+      "path": "C:/Users/郑曾波/.codex/worktrees/transcript-companion/company-wiki"
+    },
+    {
+      "detached": true,
+      "head": "2e674cca4b715fea492ad9071de3ee456ca61835",
+      "path": "C:/Users/郑曾波/AppData/Local/Temp/company-wiki"
+    },
+    {
+      "branch": "refs/heads/r4b06-wip",
+      "head": "ced354a24c02928a28cc94c34b18780f9766cf06",
+      "path": "C:/Users/郑曾波/AppData/Local/Temp/cw-b06-wt"
+    },
+    {
+      "detached": true,
+      "head": "7d4852fa35023aaf467ba7a7277c0ff4d77c2eb9",
+      "path": "C:/Users/郑曾波/AppData/Local/Temp/cw-preb"
+    },
+    {
+      "detached": true,
+      "head": "c986c7adb61508f475f801c6fda4d2ab207ef269",
+      "path": "C:/Users/郑曾波/AppData/Local/Temp/r4b02-preb02"
+    },
+    {
+      "detached": true,
+      "head": "155e759c4c8cd0f63a58075e7820666c238f2b2d",
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-1003-wik"
+    },
+    {
+      "detached": true,
+      "head": "f6eb58410e85b20aed738418cbaef6833803a4b6",
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-1101-wik"
+    },
+    {
+      "detached": true,
+      "head": "a6937f34081cdc928704d511e0b011f71b061a90",
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-1203/base-wiki"
+    },
+    {
+      "detached": true,
+      "head": "460d2730719acb6e4fdf59886c568c847d10d028",
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-1203/result-wiki"
+    },
+    {
+      "detached": true,
+      "head": "460d2730719acb6e4fdf59886c568c847d10d028",
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-1204/base-wiki"
+    },
+    {
+      "detached": true,
+      "head": "f03142cae67055b7895f3fedaa06e40fdfafcf06",
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-1204/layout/company-wiki"
+    },
+    {
+      "detached": true,
+      "head": "925b3e8027f9c22c475656efae98142b976244e6",
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-1204/r2/company-wiki"
+    },
+    {
+      "detached": true,
+      "head": "925b3e8027f9c22c475656efae98142b976244e6",
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-1205/wiki-base"
+    },
+    {
+      "detached": true,
+      "head": "b93994ae27201563c6789d1f8242bf53295eda68",
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-1205/wiki-result"
+    },
+    {
+      "detached": true,
+      "head": "b93994ae27201563c6789d1f8242bf53295eda68",
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-130x/wiki-base"
+    },
+    {
+      "detached": true,
+      "head": "304966d1579344cbf4b1c368c7ddea46b443f982",
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-130x/wiki-result"
+    },
+    {
+      "detached": true,
+      "head": "47a03117ada0d5b3fe33ba9ab62a6718a3efeaeb",
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-505"
+    },
+    {
+      "detached": true,
+      "head": "545a9861dd5b7c72669e053d05f6e7de1beae6f6",
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-703/company-wiki"
+    },
+    {
+      "detached": true,
+      "head": "85f45a30f8f07faa33148f4a8be2e4cfcb76c3dd",
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-703-r2/company-wiki"
+    },
+    {
+      "detached": true,
+      "head": "d546558830fd594fcbb83eef7cba550d4b4bc1d2",
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-703-r3/company-wiki"
+    },
+    {
+      "detached": true,
+      "head": "c3fd9c413eb8f1309af21a2d67daa19aacabbd30",
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-704/company-wiki"
+    },
+    {
+      "detached": true,
+      "head": "6ada6fed17a66457b8aa624b5d5a41a49ddccb15",
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-705/company-wiki"
+    },
+    {
+      "detached": true,
+      "head": "f20a64f265c0472c16e19a3ddfa6d7e5d0b79e54",
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-705-r2/company-wiki"
+    },
+    {
+      "detached": true,
+      "head": "bf502af1ce5a1a944f3142befaf6a9b899d1f4ae",
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-801/company-wiki"
+    },
+    {
+      "detached": true,
+      "head": "ec00a028048da40cb43e8fc058aad9c8a7e1f963",
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-802/company-wiki"
+    },
+    {
+      "detached": true,
+      "head": "74f8ec08d613dacaa68413736d364b3ce5bd75a1",
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-802-r2/company-wiki"
+    },
+    {
+      "detached": true,
+      "head": "29abc878dcf04fba46f8919331bdb9d5f1f9a297",
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-802-r3/company-wiki"
+    },
+    {
+      "detached": true,
+      "head": "18a2792ca5e02e7960d694a8007e097a46c4179e",
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-803/company-wiki"
+    },
+    {
+      "detached": true,
+      "head": "7d9f40cace24aafed4ef9414a3f5ecbb929c42da",
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-804/company-wiki"
+    },
+    {
+      "detached": true,
+      "head": "9587cb4650f03ea96327526c1e2f8142843e56f8",
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-805/company-wiki"
+    },
+    {
+      "detached": true,
+      "head": "304966d1579344cbf4b1c368c7ddea46b443f982",
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-r8-debug"
+    }
+  ],
+  "main_facts_after": {
+    "catalog": {
+      "bytes": 3055800320,
+      "mtime_ns": 1790490231504738600
+    },
+    "catalog_config": {
+      "bytes": 866,
+      "mtime_ns": 1790542565101886700,
+      "sha256": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968"
+    },
+    "head": "0dc82c1b643eac010a51967418c52bc0caca4659",
+    "worker_control": {
+      "bytes": 178,
+      "mtime_ns": 1787262212371386700,
+      "sha256": "9fcbe233efe76222a32316c07b9273b9c5128da3af6db27d706b1759680ac7bd"
+    }
+  },
+  "main_facts_before": {
+    "catalog": {
+      "bytes": 3055800320,
+      "mtime_ns": 1790490231504738600
+    },
+    "catalog_config": {
+      "bytes": 866,
+      "mtime_ns": 1790542565101886700,
+      "sha256": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968"
+    },
+    "head": "0dc82c1b643eac010a51967418c52bc0caca4659",
+    "worker_control": {
+      "bytes": 178,
+      "mtime_ns": 1787262212371386700,
+      "sha256": "9fcbe233efe76222a32316c07b9273b9c5128da3af6db27d706b1759680ac7bd"
+    }
+  },
+  "main_facts_unchanged": true,
+  "managed_archives_excluded": true,
+  "method": "ordinary git worktree remove only",
+  "no_force_no_prune_no_recursive_shell_delete": true,
+  "ordinary_allowlisted_remaining": [],
+  "plan_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\narrative-evidence-pilot-2026-09-26\\gd_b4_worktree_cleanup_2026-10-03.md",
+  "plan_sha256": "68c963d67e8dfa7535a392d57bb4fb1cf30b4691f48c8c163f4137bedb20ed0b",
+  "raw_originals_not_targeted": true,
+  "remaining_git_registered_roots": [
+    {
+      "branch": "refs/heads/master",
+      "head": "0dc82c1b643eac010a51967418c52bc0caca4659",
+      "inventory_note": "Main project not recursively rescanned; prior main space audit retained.",
+      "path": "C:/Users/郑曾波/Projects/company-wiki",
+      "path_exists": true
+    },
+    {
+      "branch": "refs/heads/codex/narrative-gates-integration",
+      "head": "cba745ac7e398fc2ccd84c132aa5c4c47d8828eb",
+      "inventory": {
+        "errors": [],
+        "files": 2378,
+        "logical_bytes": 125485516,
+        "reparse": []
+      },
+      "path": "C:/Users/郑曾波/.codex/worktrees/data-lake-reader/company-wiki",
+      "path_exists": true
+    },
+    {
+      "branch": "refs/heads/codex/rf-state-audit",
+      "head": "447d1c74b78bec369ff5dc32fe78097905ce6342",
+      "inventory": {
+        "errors": [],
+        "files": 1809,
+        "logical_bytes": 72492226,
+        "reparse": []
+      },
+      "path": "C:/Users/郑曾波/.codex/worktrees/rf-state-audit/company-wiki",
+      "path_exists": true
+    },
+    {
+      "branch": "refs/heads/codex/transcript-companion",
+      "head": "ced354a24c02928a28cc94c34b18780f9766cf06",
+      "inventory": {
+        "errors": [],
+        "files": 1746,
+        "logical_bytes": 71519645,
+        "reparse": []
+      },
+      "path": "C:/Users/郑曾波/.codex/worktrees/transcript-companion/company-wiki",
+      "path_exists": true
+    },
+    {
+      "detached": true,
+      "head": "2e674cca4b715fea492ad9071de3ee456ca61835",
+      "inventory": {
+        "errors": [],
+        "files": 1848,
+        "logical_bytes": 73142856,
+        "reparse": []
+      },
+      "path": "C:/Users/郑曾波/AppData/Local/Temp/company-wiki",
+      "path_exists": true
+    },
+    {
+      "detached": true,
+      "head": "7d4852fa35023aaf467ba7a7277c0ff4d77c2eb9",
+      "inventory": {
+        "errors": [],
+        "files": 1,
+        "logical_bytes": 72,
+        "reparse": []
+      },
+      "path": "C:/Users/郑曾波/AppData/Local/Temp/cw-preb",
+      "path_exists": true
+    },
+    {
+      "detached": true,
+      "head": "c986c7adb61508f475f801c6fda4d2ab207ef269",
+      "inventory": {
+        "errors": [],
+        "files": 1,
+        "logical_bytes": 77,
+        "reparse": []
+      },
+      "path": "C:/Users/郑曾波/AppData/Local/Temp/r4b02-preb02",
+      "path_exists": true
+    },
+    {
+      "detached": true,
+      "head": "ec00a028048da40cb43e8fc058aad9c8a7e1f963",
+      "inventory": {
+        "errors": [],
+        "files": 1310,
+        "logical_bytes": 56920847,
+        "reparse": []
+      },
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-802/company-wiki",
+      "path_exists": true
+    },
+    {
+      "detached": true,
+      "head": "29abc878dcf04fba46f8919331bdb9d5f1f9a297",
+      "inventory": {
+        "errors": [],
+        "files": 1309,
+        "logical_bytes": 56693435,
+        "reparse": []
+      },
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-802-r3/company-wiki",
+      "path_exists": true
+    },
+    {
+      "detached": true,
+      "head": "7d9f40cace24aafed4ef9414a3f5ecbb929c42da",
+      "inventory": {
+        "errors": [],
+        "files": 1329,
+        "logical_bytes": 56785249,
+        "reparse": []
+      },
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-804/company-wiki",
+      "path_exists": true
+    },
+    {
+      "detached": true,
+      "head": "9587cb4650f03ea96327526c1e2f8142843e56f8",
+      "inventory": {
+        "errors": [],
+        "files": 1384,
+        "logical_bytes": 57911465,
+        "reparse": []
+      },
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-805/company-wiki",
+      "path_exists": true
+    }
+  ],
+  "removed_count": 23,
+  "removed_logical_bytes": 1414586922,
+  "rows": [
+    {
+      "absent_after": true,
+      "ancestor_reparse": [],
+      "checked_at_utc": "2026-10-03T11:48:02.770068+00:00",
+      "common_git_directory": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.git",
+      "expected_head": "ced354a24c02928a28cc94c34b18780f9766cf06",
+      "git_remove_returncode": 0,
+      "git_remove_stderr": "",
+      "git_remove_stdout": "",
+      "git_status_entries": [],
+      "head_is_master_ancestor": true,
+      "ignored_classification": {
+        "class_bytes": {},
+        "classes": {},
+        "count": 0,
+        "ingested": [],
+        "unknown": []
+      },
+      "inventory_before": {
+        "errors": [],
+        "files": 1674,
+        "logical_bytes": 70271410,
+        "reparse": []
+      },
+      "observed_head": "ced354a24c02928a28cc94c34b18780f9766cf06",
+      "path": "C:/Users/郑曾波/AppData/Local/Temp/cw-b06-wt",
+      "planned_bytes": 70271410,
+      "registered_after": false,
+      "removed_logical_bytes": 70271410,
+      "resolved_absolute_root": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cw-b06-wt",
+      "status": "removed"
+    },
+    {
+      "absent_after": true,
+      "ancestor_reparse": [],
+      "checked_at_utc": "2026-10-03T11:48:04.125463+00:00",
+      "common_git_directory": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.git",
+      "expected_head": "155e759c4c8cd0f63a58075e7820666c238f2b2d",
+      "git_remove_returncode": 0,
+      "git_remove_stderr": "",
+      "git_remove_stdout": "",
+      "git_status_entries": [],
+      "head_is_master_ancestor": true,
+      "ignored_classification": {
+        "class_bytes": {
+          ".pytest_cache": 2866
+        },
+        "classes": {
+          ".pytest_cache": 5
+        },
+        "count": 5,
+        "ingested": [],
+        "unknown": []
+      },
+      "inventory_before": {
+        "errors": [],
+        "files": 1365,
+        "logical_bytes": 57081830,
+        "reparse": []
+      },
+      "observed_head": "155e759c4c8cd0f63a58075e7820666c238f2b2d",
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-1003-wik",
+      "planned_bytes": 57081830,
+      "registered_after": false,
+      "removed_logical_bytes": 57081830,
+      "resolved_absolute_root": "C:\\Users\\郑曾波\\Projects\\.fcap-review\\fc-1003-wik",
+      "status": "removed"
+    },
+    {
+      "absent_after": true,
+      "ancestor_reparse": [],
+      "checked_at_utc": "2026-10-03T11:48:05.254117+00:00",
+      "common_git_directory": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.git",
+      "expected_head": "f6eb58410e85b20aed738418cbaef6833803a4b6",
+      "git_remove_returncode": 0,
+      "git_remove_stderr": "",
+      "git_remove_stdout": "",
+      "git_status_entries": [],
+      "head_is_master_ancestor": true,
+      "ignored_classification": {
+        "class_bytes": {},
+        "classes": {},
+        "count": 0,
+        "ingested": [],
+        "unknown": []
+      },
+      "inventory_before": {
+        "errors": [],
+        "files": 1360,
+        "logical_bytes": 57078968,
+        "reparse": []
+      },
+      "observed_head": "f6eb58410e85b20aed738418cbaef6833803a4b6",
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-1101-wik",
+      "planned_bytes": 57078968,
+      "registered_after": false,
+      "removed_logical_bytes": 57078968,
+      "resolved_absolute_root": "C:\\Users\\郑曾波\\Projects\\.fcap-review\\fc-1101-wik",
+      "status": "removed"
+    },
+    {
+      "absent_after": true,
+      "ancestor_reparse": [],
+      "checked_at_utc": "2026-10-03T11:48:06.766862+00:00",
+      "common_git_directory": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.git",
+      "expected_head": "a6937f34081cdc928704d511e0b011f71b061a90",
+      "git_remove_returncode": 0,
+      "git_remove_stderr": "",
+      "git_remove_stdout": "",
+      "git_status_entries": [],
+      "head_is_master_ancestor": true,
+      "ignored_classification": {
+        "class_bytes": {
+          ".pytest_cache": 2897
+        },
+        "classes": {
+          ".pytest_cache": 5
+        },
+        "count": 5,
+        "ingested": [],
+        "unknown": []
+      },
+      "inventory_before": {
+        "errors": [],
+        "files": 1371,
+        "logical_bytes": 57121737,
+        "reparse": []
+      },
+      "observed_head": "a6937f34081cdc928704d511e0b011f71b061a90",
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-1203/base-wiki",
+      "planned_bytes": 57121737,
+      "registered_after": false,
+      "removed_logical_bytes": 57121737,
+      "resolved_absolute_root": "C:\\Users\\郑曾波\\Projects\\.fcap-review\\fc-1203\\base-wiki",
+      "status": "removed"
+    },
+    {
+      "absent_after": true,
+      "ancestor_reparse": [],
+      "checked_at_utc": "2026-10-03T11:48:08.484380+00:00",
+      "common_git_directory": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.git",
+      "expected_head": "460d2730719acb6e4fdf59886c568c847d10d028",
+      "git_remove_returncode": 0,
+      "git_remove_stderr": "",
+      "git_remove_stdout": "",
+      "git_status_entries": [],
+      "head_is_master_ancestor": true,
+      "ignored_classification": {
+        "class_bytes": {
+          ".pytest_cache": 223733,
+          "empty_legacy_ingested_marks": 12288,
+          "python_bytecode": 1386059
+        },
+        "classes": {
+          ".pytest_cache": 5,
+          "empty_legacy_ingested_marks": 1,
+          "python_bytecode": 77
+        },
+        "count": 83,
+        "ingested": [
+          {
+            "bytes": 12288,
+            "columns": [
+              "hash TEXT PRIMARY KEY",
+              "created_at TEXT"
+            ],
+            "path": ".ingested/ingested.db",
+            "rows": 0
+          }
+        ],
+        "unknown": []
+      },
+      "inventory_before": {
+        "errors": [],
+        "files": 1446,
+        "logical_bytes": 58731176,
+        "reparse": []
+      },
+      "observed_head": "460d2730719acb6e4fdf59886c568c847d10d028",
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-1203/result-wiki",
+      "planned_bytes": 58731176,
+      "registered_after": false,
+      "removed_logical_bytes": 58731176,
+      "resolved_absolute_root": "C:\\Users\\郑曾波\\Projects\\.fcap-review\\fc-1203\\result-wiki",
+      "status": "removed"
+    },
+    {
+      "absent_after": true,
+      "ancestor_reparse": [],
+      "checked_at_utc": "2026-10-03T11:48:10.163876+00:00",
+      "common_git_directory": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.git",
+      "expected_head": "460d2730719acb6e4fdf59886c568c847d10d028",
+      "git_remove_returncode": 0,
+      "git_remove_stderr": "",
+      "git_remove_stdout": "",
+      "git_status_entries": [],
+      "head_is_master_ancestor": true,
+      "ignored_classification": {
+        "class_bytes": {
+          ".pytest_cache": 225382,
+          "empty_legacy_ingested_marks": 12288,
+          "python_bytecode": 1385905
+        },
+        "classes": {
+          ".pytest_cache": 5,
+          "empty_legacy_ingested_marks": 1,
+          "python_bytecode": 77
+        },
+        "count": 83,
+        "ingested": [
+          {
+            "bytes": 12288,
+            "columns": [
+              "hash TEXT PRIMARY KEY",
+              "created_at TEXT"
+            ],
+            "path": ".ingested/ingested.db",
+            "rows": 0
+          }
+        ],
+        "unknown": []
+      },
+      "inventory_before": {
+        "errors": [],
+        "files": 1446,
+        "logical_bytes": 58732670,
+        "reparse": []
+      },
+      "observed_head": "460d2730719acb6e4fdf59886c568c847d10d028",
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-1204/base-wiki",
+      "planned_bytes": 58732670,
+      "registered_after": false,
+      "removed_logical_bytes": 58732670,
+      "resolved_absolute_root": "C:\\Users\\郑曾波\\Projects\\.fcap-review\\fc-1204\\base-wiki",
+      "status": "removed"
+    },
+    {
+      "absent_after": true,
+      "ancestor_reparse": [],
+      "checked_at_utc": "2026-10-03T11:48:12.098242+00:00",
+      "common_git_directory": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.git",
+      "expected_head": "f03142cae67055b7895f3fedaa06e40fdfafcf06",
+      "git_remove_returncode": 0,
+      "git_remove_stderr": "",
+      "git_remove_stdout": "",
+      "git_status_entries": [],
+      "head_is_master_ancestor": true,
+      "ignored_classification": {
+        "class_bytes": {
+          ".mypy_cache": 73692401,
+          ".pytest_cache": 225382,
+          "empty_legacy_ingested_marks": 12288,
+          "python_bytecode": 1386059
+        },
+        "classes": {
+          ".mypy_cache": 2209,
+          ".pytest_cache": 5,
+          "empty_legacy_ingested_marks": 1,
+          "python_bytecode": 77
+        },
+        "count": 2292,
+        "ingested": [
+          {
+            "bytes": 12288,
+            "columns": [
+              "hash TEXT PRIMARY KEY",
+              "created_at TEXT"
+            ],
+            "path": ".ingested/ingested.db",
+            "rows": 0
+          }
+        ],
+        "unknown": []
+      },
+      "inventory_before": {
+        "errors": [],
+        "files": 3660,
+        "logical_bytes": 132468047,
+        "reparse": []
+      },
+      "observed_head": "f03142cae67055b7895f3fedaa06e40fdfafcf06",
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-1204/layout/company-wiki",
+      "planned_bytes": 132468047,
+      "registered_after": false,
+      "removed_logical_bytes": 132468047,
+      "resolved_absolute_root": "C:\\Users\\郑曾波\\Projects\\.fcap-review\\fc-1204\\layout\\company-wiki",
+      "status": "removed"
+    },
+    {
+      "absent_after": true,
+      "ancestor_reparse": [],
+      "checked_at_utc": "2026-10-03T11:48:15.951271+00:00",
+      "common_git_directory": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.git",
+      "expected_head": "925b3e8027f9c22c475656efae98142b976244e6",
+      "git_remove_returncode": 0,
+      "git_remove_stderr": "",
+      "git_remove_stdout": "",
+      "git_status_entries": [],
+      "head_is_master_ancestor": true,
+      "ignored_classification": {
+        "class_bytes": {
+          ".mypy_cache": 9748089,
+          ".pytest_cache": 2194,
+          ".ruff_cache": 21658
+        },
+        "classes": {
+          ".mypy_cache": 179,
+          ".pytest_cache": 5,
+          ".ruff_cache": 10
+        },
+        "count": 194,
+        "ingested": [],
+        "unknown": []
+      },
+      "inventory_before": {
+        "errors": [],
+        "files": 1562,
+        "logical_bytes": 66924090,
+        "reparse": []
+      },
+      "observed_head": "925b3e8027f9c22c475656efae98142b976244e6",
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-1204/r2/company-wiki",
+      "planned_bytes": 66924090,
+      "registered_after": false,
+      "removed_logical_bytes": 66924090,
+      "resolved_absolute_root": "C:\\Users\\郑曾波\\Projects\\.fcap-review\\fc-1204\\r2\\company-wiki",
+      "status": "removed"
+    },
+    {
+      "absent_after": true,
+      "ancestor_reparse": [],
+      "checked_at_utc": "2026-10-03T11:48:18.046069+00:00",
+      "common_git_directory": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.git",
+      "expected_head": "925b3e8027f9c22c475656efae98142b976244e6",
+      "git_remove_returncode": 0,
+      "git_remove_stderr": "",
+      "git_remove_stdout": "",
+      "git_status_entries": [],
+      "head_is_master_ancestor": true,
+      "ignored_classification": {
+        "class_bytes": {
+          ".pytest_cache": 1221
+        },
+        "classes": {
+          ".pytest_cache": 5
+        },
+        "count": 5,
+        "ingested": [],
+        "unknown": []
+      },
+      "inventory_before": {
+        "errors": [],
+        "files": 1373,
+        "logical_bytes": 57153365,
+        "reparse": []
+      },
+      "observed_head": "925b3e8027f9c22c475656efae98142b976244e6",
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-1205/wiki-base",
+      "planned_bytes": 57153365,
+      "registered_after": false,
+      "removed_logical_bytes": 57153365,
+      "resolved_absolute_root": "C:\\Users\\郑曾波\\Projects\\.fcap-review\\fc-1205\\wiki-base",
+      "status": "removed"
+    },
+    {
+      "absent_after": true,
+      "ancestor_reparse": [],
+      "checked_at_utc": "2026-10-03T11:48:20.007775+00:00",
+      "common_git_directory": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.git",
+      "expected_head": "b93994ae27201563c6789d1f8242bf53295eda68",
+      "git_remove_returncode": 0,
+      "git_remove_stderr": "",
+      "git_remove_stdout": "",
+      "git_status_entries": [],
+      "head_is_master_ancestor": true,
+      "ignored_classification": {
+        "class_bytes": {
+          ".pytest_cache": 225179,
+          "empty_legacy_ingested_marks": 12288,
+          "python_bytecode": 1386059
+        },
+        "classes": {
+          ".pytest_cache": 5,
+          "empty_legacy_ingested_marks": 1,
+          "python_bytecode": 77
+        },
+        "count": 83,
+        "ingested": [
+          {
+            "bytes": 12288,
+            "columns": [
+              "hash TEXT PRIMARY KEY",
+              "created_at TEXT"
+            ],
+            "path": ".ingested/ingested.db",
+            "rows": 0
+          }
+        ],
+        "unknown": []
+      },
+      "inventory_before": {
+        "errors": [],
+        "files": 1451,
+        "logical_bytes": 58776448,
+        "reparse": []
+      },
+      "observed_head": "b93994ae27201563c6789d1f8242bf53295eda68",
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-1205/wiki-result",
+      "planned_bytes": 58776448,
+      "registered_after": false,
+      "removed_logical_bytes": 58776448,
+      "resolved_absolute_root": "C:\\Users\\郑曾波\\Projects\\.fcap-review\\fc-1205\\wiki-result",
+      "status": "removed"
+    },
+    {
+      "absent_after": true,
+      "ancestor_reparse": [],
+      "checked_at_utc": "2026-10-03T11:48:22.032718+00:00",
+      "common_git_directory": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.git",
+      "expected_head": "b93994ae27201563c6789d1f8242bf53295eda68",
+      "git_remove_returncode": 0,
+      "git_remove_stderr": "",
+      "git_remove_stdout": "",
+      "git_status_entries": [],
+      "head_is_master_ancestor": true,
+      "ignored_classification": {
+        "class_bytes": {
+          ".pytest_cache": 999,
+          "python_bytecode": 915188
+        },
+        "classes": {
+          ".pytest_cache": 5,
+          "python_bytecode": 47
+        },
+        "count": 52,
+        "ingested": [],
+        "unknown": []
+      },
+      "inventory_before": {
+        "errors": [],
+        "files": 1420,
+        "logical_bytes": 58069108,
+        "reparse": []
+      },
+      "observed_head": "b93994ae27201563c6789d1f8242bf53295eda68",
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-130x/wiki-base",
+      "planned_bytes": 58069108,
+      "registered_after": false,
+      "removed_logical_bytes": 58069108,
+      "resolved_absolute_root": "C:\\Users\\郑曾波\\Projects\\.fcap-review\\fc-130x\\wiki-base",
+      "status": "removed"
+    },
+    {
+      "absent_after": true,
+      "ancestor_reparse": [],
+      "checked_at_utc": "2026-10-03T11:48:23.855211+00:00",
+      "common_git_directory": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.git",
+      "expected_head": "304966d1579344cbf4b1c368c7ddea46b443f982",
+      "git_remove_returncode": 0,
+      "git_remove_stderr": "",
+      "git_remove_stdout": "",
+      "git_status_entries": [],
+      "head_is_master_ancestor": true,
+      "ignored_classification": {
+        "class_bytes": {
+          ".pytest_cache": 3414,
+          "python_bytecode": 919428
+        },
+        "classes": {
+          ".pytest_cache": 5,
+          "python_bytecode": 47
+        },
+        "count": 52,
+        "ingested": [],
+        "unknown": []
+      },
+      "inventory_before": {
+        "errors": [],
+        "files": 1421,
+        "logical_bytes": 58081712,
+        "reparse": []
+      },
+      "observed_head": "304966d1579344cbf4b1c368c7ddea46b443f982",
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-130x/wiki-result",
+      "planned_bytes": 58081712,
+      "registered_after": false,
+      "removed_logical_bytes": 58081712,
+      "resolved_absolute_root": "C:\\Users\\郑曾波\\Projects\\.fcap-review\\fc-130x\\wiki-result",
+      "status": "removed"
+    },
+    {
+      "absent_after": true,
+      "ancestor_reparse": [],
+      "checked_at_utc": "2026-10-03T11:48:25.004654+00:00",
+      "common_git_directory": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.git",
+      "expected_head": "47a03117ada0d5b3fe33ba9ab62a6718a3efeaeb",
+      "git_remove_returncode": 0,
+      "git_remove_stderr": "",
+      "git_remove_stdout": "",
+      "git_status_entries": [],
+      "head_is_master_ancestor": true,
+      "ignored_classification": {
+        "class_bytes": {
+          ".pytest_cache": 216322,
+          ".ruff_cache": 362,
+          "empty_legacy_ingested_marks": 12288
+        },
+        "classes": {
+          ".pytest_cache": 5,
+          ".ruff_cache": 4,
+          "empty_legacy_ingested_marks": 1
+        },
+        "count": 10,
+        "ingested": [
+          {
+            "bytes": 12288,
+            "columns": [
+              "hash TEXT PRIMARY KEY",
+              "created_at TEXT"
+            ],
+            "path": ".ingested/ingested.db",
+            "rows": 0
+          }
+        ],
+        "unknown": []
+      },
+      "inventory_before": {
+        "errors": [],
+        "files": 1285,
+        "logical_bytes": 56626668,
+        "reparse": []
+      },
+      "observed_head": "47a03117ada0d5b3fe33ba9ab62a6718a3efeaeb",
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-505",
+      "planned_bytes": 56626668,
+      "registered_after": false,
+      "removed_logical_bytes": 56626668,
+      "resolved_absolute_root": "C:\\Users\\郑曾波\\Projects\\.fcap-review\\fc-505",
+      "status": "removed"
+    },
+    {
+      "absent_after": true,
+      "ancestor_reparse": [],
+      "checked_at_utc": "2026-10-03T11:48:26.160916+00:00",
+      "common_git_directory": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.git",
+      "expected_head": "545a9861dd5b7c72669e053d05f6e7de1beae6f6",
+      "git_remove_returncode": 0,
+      "git_remove_stderr": "",
+      "git_remove_stdout": "",
+      "git_status_entries": [],
+      "head_is_master_ancestor": true,
+      "ignored_classification": {
+        "class_bytes": {
+          ".pytest_cache": 2902,
+          ".ruff_cache": 315
+        },
+        "classes": {
+          ".pytest_cache": 5,
+          ".ruff_cache": 4
+        },
+        "count": 9,
+        "ingested": [],
+        "unknown": []
+      },
+      "inventory_before": {
+        "errors": [],
+        "files": 1296,
+        "logical_bytes": 56497795,
+        "reparse": []
+      },
+      "observed_head": "545a9861dd5b7c72669e053d05f6e7de1beae6f6",
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-703/company-wiki",
+      "planned_bytes": 56497795,
+      "registered_after": false,
+      "removed_logical_bytes": 56497795,
+      "resolved_absolute_root": "C:\\Users\\郑曾波\\Projects\\.fcap-review\\fc-703\\company-wiki",
+      "status": "removed"
+    },
+    {
+      "absent_after": true,
+      "ancestor_reparse": [],
+      "checked_at_utc": "2026-10-03T11:48:27.709497+00:00",
+      "common_git_directory": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.git",
+      "expected_head": "85f45a30f8f07faa33148f4a8be2e4cfcb76c3dd",
+      "git_remove_returncode": 0,
+      "git_remove_stderr": "",
+      "git_remove_stdout": "",
+      "git_status_entries": [],
+      "head_is_master_ancestor": true,
+      "ignored_classification": {
+        "class_bytes": {
+          ".pytest_cache": 2805,
+          ".ruff_cache": 321
+        },
+        "classes": {
+          ".pytest_cache": 5,
+          ".ruff_cache": 4
+        },
+        "count": 9,
+        "ingested": [],
+        "unknown": []
+      },
+      "inventory_before": {
+        "errors": [],
+        "files": 1298,
+        "logical_bytes": 56514908,
+        "reparse": []
+      },
+      "observed_head": "85f45a30f8f07faa33148f4a8be2e4cfcb76c3dd",
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-703-r2/company-wiki",
+      "planned_bytes": 56514908,
+      "registered_after": false,
+      "removed_logical_bytes": 56514908,
+      "resolved_absolute_root": "C:\\Users\\郑曾波\\Projects\\.fcap-review\\fc-703-r2\\company-wiki",
+      "status": "removed"
+    },
+    {
+      "absent_after": true,
+      "ancestor_reparse": [],
+      "checked_at_utc": "2026-10-03T11:48:29.131509+00:00",
+      "common_git_directory": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.git",
+      "expected_head": "d546558830fd594fcbb83eef7cba550d4b4bc1d2",
+      "git_remove_returncode": 0,
+      "git_remove_stderr": "",
+      "git_remove_stdout": "",
+      "git_status_entries": [],
+      "head_is_master_ancestor": true,
+      "ignored_classification": {
+        "class_bytes": {
+          ".pytest_cache": 1008,
+          ".ruff_cache": 321
+        },
+        "classes": {
+          ".pytest_cache": 5,
+          ".ruff_cache": 4
+        },
+        "count": 9,
+        "ingested": [],
+        "unknown": []
+      },
+      "inventory_before": {
+        "errors": [],
+        "files": 1298,
+        "logical_bytes": 56513474,
+        "reparse": []
+      },
+      "observed_head": "d546558830fd594fcbb83eef7cba550d4b4bc1d2",
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-703-r3/company-wiki",
+      "planned_bytes": 56513474,
+      "registered_after": false,
+      "removed_logical_bytes": 56513474,
+      "resolved_absolute_root": "C:\\Users\\郑曾波\\Projects\\.fcap-review\\fc-703-r3\\company-wiki",
+      "status": "removed"
+    },
+    {
+      "absent_after": true,
+      "ancestor_reparse": [],
+      "checked_at_utc": "2026-10-03T11:48:30.528226+00:00",
+      "common_git_directory": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.git",
+      "expected_head": "c3fd9c413eb8f1309af21a2d67daa19aacabbd30",
+      "git_remove_returncode": 0,
+      "git_remove_stderr": "",
+      "git_remove_stdout": "",
+      "git_status_entries": [],
+      "head_is_master_ancestor": true,
+      "ignored_classification": {
+        "class_bytes": {
+          ".pytest_cache": 4650,
+          ".ruff_cache": 377
+        },
+        "classes": {
+          ".pytest_cache": 5,
+          ".ruff_cache": 4
+        },
+        "count": 9,
+        "ingested": [],
+        "unknown": []
+      },
+      "inventory_before": {
+        "errors": [],
+        "files": 1305,
+        "logical_bytes": 56570580,
+        "reparse": []
+      },
+      "observed_head": "c3fd9c413eb8f1309af21a2d67daa19aacabbd30",
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-704/company-wiki",
+      "planned_bytes": 56570580,
+      "registered_after": false,
+      "removed_logical_bytes": 56570580,
+      "resolved_absolute_root": "C:\\Users\\郑曾波\\Projects\\.fcap-review\\fc-704\\company-wiki",
+      "status": "removed"
+    },
+    {
+      "absent_after": true,
+      "ancestor_reparse": [],
+      "checked_at_utc": "2026-10-03T11:48:31.863003+00:00",
+      "common_git_directory": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.git",
+      "expected_head": "6ada6fed17a66457b8aa624b5d5a41a49ddccb15",
+      "git_remove_returncode": 0,
+      "git_remove_stderr": "",
+      "git_remove_stdout": "",
+      "git_status_entries": [],
+      "head_is_master_ancestor": true,
+      "ignored_classification": {
+        "class_bytes": {
+          ".pytest_cache": 5937,
+          ".ruff_cache": 446
+        },
+        "classes": {
+          ".pytest_cache": 5,
+          ".ruff_cache": 5
+        },
+        "count": 10,
+        "ingested": [],
+        "unknown": []
+      },
+      "inventory_before": {
+        "errors": [],
+        "files": 1310,
+        "logical_bytes": 56614336,
+        "reparse": []
+      },
+      "observed_head": "6ada6fed17a66457b8aa624b5d5a41a49ddccb15",
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-705/company-wiki",
+      "planned_bytes": 56614336,
+      "registered_after": false,
+      "removed_logical_bytes": 56614336,
+      "resolved_absolute_root": "C:\\Users\\郑曾波\\Projects\\.fcap-review\\fc-705\\company-wiki",
+      "status": "removed"
+    },
+    {
+      "absent_after": true,
+      "ancestor_reparse": [],
+      "checked_at_utc": "2026-10-03T11:48:33.142621+00:00",
+      "common_git_directory": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.git",
+      "expected_head": "f20a64f265c0472c16e19a3ddfa6d7e5d0b79e54",
+      "git_remove_returncode": 0,
+      "git_remove_stderr": "",
+      "git_remove_stdout": "",
+      "git_status_entries": [],
+      "head_is_master_ancestor": true,
+      "ignored_classification": {
+        "class_bytes": {
+          ".pytest_cache": 2052,
+          ".ruff_cache": 455
+        },
+        "classes": {
+          ".pytest_cache": 5,
+          ".ruff_cache": 5
+        },
+        "count": 10,
+        "ingested": [],
+        "unknown": []
+      },
+      "inventory_before": {
+        "errors": [],
+        "files": 1310,
+        "logical_bytes": 56612518,
+        "reparse": []
+      },
+      "observed_head": "f20a64f265c0472c16e19a3ddfa6d7e5d0b79e54",
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-705-r2/company-wiki",
+      "planned_bytes": 56612518,
+      "registered_after": false,
+      "removed_logical_bytes": 56612518,
+      "resolved_absolute_root": "C:\\Users\\郑曾波\\Projects\\.fcap-review\\fc-705-r2\\company-wiki",
+      "status": "removed"
+    },
+    {
+      "absent_after": true,
+      "ancestor_reparse": [],
+      "checked_at_utc": "2026-10-03T11:48:34.363029+00:00",
+      "common_git_directory": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.git",
+      "expected_head": "bf502af1ce5a1a944f3142befaf6a9b899d1f4ae",
+      "git_remove_returncode": 0,
+      "git_remove_stderr": "",
+      "git_remove_stdout": "",
+      "git_status_entries": [],
+      "head_is_master_ancestor": true,
+      "ignored_classification": {
+        "class_bytes": {
+          ".pytest_cache": 5345,
+          ".ruff_cache": 486
+        },
+        "classes": {
+          ".pytest_cache": 5,
+          ".ruff_cache": 4
+        },
+        "count": 9,
+        "ingested": [],
+        "unknown": []
+      },
+      "inventory_before": {
+        "errors": [],
+        "files": 1314,
+        "logical_bytes": 56669271,
+        "reparse": []
+      },
+      "observed_head": "bf502af1ce5a1a944f3142befaf6a9b899d1f4ae",
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-801/company-wiki",
+      "planned_bytes": 56669271,
+      "registered_after": false,
+      "removed_logical_bytes": 56669271,
+      "resolved_absolute_root": "C:\\Users\\郑曾波\\Projects\\.fcap-review\\fc-801\\company-wiki",
+      "status": "removed"
+    },
+    {
+      "absent_after": true,
+      "ancestor_reparse": [],
+      "checked_at_utc": "2026-10-03T11:48:35.514065+00:00",
+      "common_git_directory": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.git",
+      "expected_head": "74f8ec08d613dacaa68413736d364b3ce5bd75a1",
+      "git_remove_returncode": 0,
+      "git_remove_stderr": "",
+      "git_remove_stdout": "",
+      "git_status_entries": [],
+      "head_is_master_ancestor": true,
+      "ignored_classification": {
+        "class_bytes": {},
+        "classes": {},
+        "count": 0,
+        "ingested": [],
+        "unknown": []
+      },
+      "inventory_before": {
+        "errors": [],
+        "files": 1307,
+        "logical_bytes": 56681653,
+        "reparse": []
+      },
+      "observed_head": "74f8ec08d613dacaa68413736d364b3ce5bd75a1",
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-802-r2/company-wiki",
+      "planned_bytes": 56681653,
+      "registered_after": false,
+      "removed_logical_bytes": 56681653,
+      "resolved_absolute_root": "C:\\Users\\郑曾波\\Projects\\.fcap-review\\fc-802-r2\\company-wiki",
+      "status": "removed"
+    },
+    {
+      "absent_after": true,
+      "ancestor_reparse": [],
+      "checked_at_utc": "2026-10-03T11:48:36.715460+00:00",
+      "common_git_directory": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.git",
+      "expected_head": "18a2792ca5e02e7960d694a8007e097a46c4179e",
+      "git_remove_returncode": 0,
+      "git_remove_stderr": "",
+      "git_remove_stdout": "",
+      "git_status_entries": [],
+      "head_is_master_ancestor": true,
+      "ignored_classification": {
+        "class_bytes": {
+          ".pytest_cache": 1146,
+          ".ruff_cache": 247
+        },
+        "classes": {
+          ".pytest_cache": 4,
+          ".ruff_cache": 3
+        },
+        "count": 7,
+        "ingested": [],
+        "unknown": []
+      },
+      "inventory_before": {
+        "errors": [],
+        "files": 1320,
+        "logical_bytes": 56731779,
+        "reparse": []
+      },
+      "observed_head": "18a2792ca5e02e7960d694a8007e097a46c4179e",
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-803/company-wiki",
+      "planned_bytes": 56731779,
+      "registered_after": false,
+      "removed_logical_bytes": 56731779,
+      "resolved_absolute_root": "C:\\Users\\郑曾波\\Projects\\.fcap-review\\fc-803\\company-wiki",
+      "status": "removed"
+    },
+    {
+      "absent_after": true,
+      "ancestor_reparse": [],
+      "checked_at_utc": "2026-10-03T11:48:37.718541+00:00",
+      "common_git_directory": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.git",
+      "expected_head": "304966d1579344cbf4b1c368c7ddea46b443f982",
+      "git_remove_returncode": 0,
+      "git_remove_stderr": "",
+      "git_remove_stdout": "",
+      "git_status_entries": [],
+      "head_is_master_ancestor": true,
+      "ignored_classification": {
+        "class_bytes": {
+          "python_bytecode": 904510
+        },
+        "classes": {
+          "python_bytecode": 46
+        },
+        "count": 46,
+        "ingested": [],
+        "unknown": []
+      },
+      "inventory_before": {
+        "errors": [],
+        "files": 1415,
+        "logical_bytes": 58063379,
+        "reparse": []
+      },
+      "observed_head": "304966d1579344cbf4b1c368c7ddea46b443f982",
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-r8-debug",
+      "planned_bytes": 58063379,
+      "registered_after": false,
+      "removed_logical_bytes": 58063379,
+      "resolved_absolute_root": "C:\\Users\\郑曾波\\Projects\\.fcap-review\\fc-r8-debug",
+      "status": "removed"
+    }
+  ],
+  "schema": "company-wiki-worktree-cleanup/1",
+  "started_at_utc": "2026-10-03T11:48:02.765945+00:00"
+}

@@ -1,6 +1,10 @@
 # G-D：当前空间与分批实施
 
-## 当前盘点（2026-10-03，只读）
+## 当前入口（2026-10-03，B1后实读）
+
+三资料根实读 **42,692,408,858B /39.760GiB**，精确等于下方原盘点减B1删除3,055,796,224B加1,207B小收据，原文/主库无反弹。全主仓可读40.873GiB，另33登记checkout1.849GiB，共45.87十进制GB；全主仓24个旧测试ACL目录不可读，故全仓是下界，三资料根0错误。G-C已并主线/CI，先按[B3精确卡](gd_b3_archive_retirement_implementation.md)释放两旧派生archive预计10.623GiB，再按[B4精确卡](gd_b4_worktree_cleanup_2026-10-03.md)移除23旧checkout预计1.317GiB，实际收据决定结论。三个managed附件UI归档尚未实际移除，不计收益。随后[N4](n4_production_batch_implementation.md)/B2，不删任何原件。
+
+## B1前盘点（历史实施依据）
 
 仅遍历本项目 `.source_catalog/`、`source_manifests/`、`companies/`，不跟随 reparse；访问错误与 reparse 均为 0。合计 **45,748,203,875 B / 42.606 GiB**，不能再使用 9/27 的 39.744 GiB 快照。历史 F0–F5 已净释放 37.630 GiB，不重复计作收益。
 
@@ -33,9 +37,9 @@
 
 先形成按真实路径去重的 plan（文件 SHA/size、所有 artifact ID/source ID、实际消费者引用）；仅该批 consumer 切换后删除。缺引用信息或漂移只 hold 该候选。scratch 删→从 raw 重建→reader/export/query 对照→生产精确批次 receipt。现有 Git deletion_manifest、DB retired-span prune、raw duplicate/focus cleanup 均不替代这个文件清理器。bak + 全 derived/index **理论上限 5.520 GiB**，不能提前承诺全可删。
 
-## B3：旧派生归档
+## B3：旧派生归档（已冻结独立实施）
 
-独立决定 deprecated evidence ID 的行为和来源事实保留形式；验证运行时没有 cold reader，再提取必要的小型 metadata/ID tombstone（不是保留全部 retired span 正文）。只读 stream/list/hash 足够的地方不落盘全恢复。不得同时盲删 zstd/gzip；先明确历史元数据/当前回滚保留范围和实际空间收益，再按精确单批执行。
+16表全部metadata逐行digest与原prepared匹配，scan_runs原480行相等，仅多零文件错误扫描；来源/版本/位置/退役事实全部在currentDB。没有runtime cold reader，gzip没有被prune发现的manifest；不需要复制数百万span ID或完整解压旧DB。按[B3卡](gd_b3_archive_retirement_implementation.md)分别核两个archive字节SHA，保留小审计/历史收据，旧span不再保证full restore；查询明确不可用但source identity保留。一个隔离TDD/正式CLI/中断恢复节点后普通发布及生产apply。两件共11,406,183,129B；预计三根降至29.138GiB，原文/currentDB不变，不等N4/B2。
 
 ## 后续运行入口缺口
 

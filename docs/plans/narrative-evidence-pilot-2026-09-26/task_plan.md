@@ -1,6 +1,6 @@
 # 叙述性证据选择与摘要：小范围试点及实施方案
 
-> **2026-10-03 当前入口（用户已恢复）：**G-C 两条consumer已收尾：StockWiki `master@ae0b3e3`、RF `main@6fb2def7`，RF已普通推送且Actions37119502901成功，本地主线已快进且原4处历史planning dirty字节未变。G-A/N3a/E-B不重复。先按[精确归档退役卡](gd_b3_archive_retirement_implementation.md)独立实施B3，再清理审明的旧checkout；N4为[未实施细则](n4_production_batch_implementation.md)。新空间复核三根 **39.760 GiB**，比B1后仅增加1,207B收据，原文/主库无增长；主仓及登记工作树约45.87十进制GB。B3预计释放10.623GiB，实际收据决定完成。生产Worker继续paused，原件保留。
+> **2026-10-03 当前入口（用户已恢复）：**G-C两consumer已收尾并主线：StockWiki `ae0b3e3`、RF `6fb2def7`，RF推送/CI全绿，原4处owner dirty保留。B4首批23旧checkout实删1.317437GiB；B3窄清理器64节点与1个中文路径回归绿，生产dry-run核两archive，待普通发布/CI后精确apply。另按[B4补卡](gd_b4_historical_receipts_cleanup_2026-10-03.md)保留历史ref/已有报告后整理4旧审查根。空间未反弹，原文/主库不变；B3预计释放10.623GiB，以实际收据为准。随后[N4](n4_production_batch_implementation.md)真实composition/model/预算/终态降容和B2调用者切换，勿重做G-A/N3a/E-B/G-C。生产Worker继续paused，原件保留。
 
 > **2026-10-03 B1执行时快照（已由首段覆盖）：**G-D B1发布 `9f986ad`（Actions37115171888成功/55秒），精确删除重复snapshot，释放3,055,796,224B/2.846GiB，主库SHA/mtime不变。见[实际收据](harness_lanes/results/gd_b1_retirement_2026-10-03.md)。当时G-C尚待局部修复；现G-C已完成，未来步骤以首段、Phase61和Next Step为准，历史未勾选项不作为派发清单。
 
@@ -751,9 +751,10 @@ G-A1尚未由producer/filing-fetch表示FF→ET→CWP下载完整链完成；真
 
 - [x] 只读实测无空间反弹；旧46GiB数据库与当前全资料目录口径分开，空间/worktree分类记录待归档。
 - [x] 16表metadata全digest相等，scan_runs原480行digest相等、额外一次零文件错误扫描；旧归档无runtime cold reader，现查询已拒绝。按[实施卡](gd_b3_archive_retirement_implementation.md)冻结窄清理范围和一个节点包。
-- [ ] B3先RED→精确plan/apply/resume工具及旧query中性诊断→一个真实隔离节点；B1已完成回显不依赖仍存在的归档，新的snapshot删除不放宽。
+- [x] B3先RED→精确plan/apply/resume工具及旧query中性诊断→真实隔离节点64passed/45.23s；B1已完成回显不依赖仍存在的归档，新的snapshot删除不放宽。发现PS重定向损坏中文路径，增加GBK下正式unicode CLI RED→GREEN1passed/1.26s，ASCII JSON输出及纠正生产dry-run通过；Ruff/host绿、独立只读大节点审查无阻塞。
 - [ ] 普通commit/push/CI后生产删除两个精确派生archive，保留currentDB/source/version/raw、小收据，记录实际bytes/free。
-- [ ] 按已核旧worktree独占清单逐项普通git移除clean checkout；保留活动pinnedCWP、未并审计docs和未跟踪小报告，原件不入删除列表。
+- [x] 按[B4精确卡](gd_b4_worktree_cleanup_2026-10-03.md)普通移除23旧checkout，逻辑释放1.317437GiB，原文/主库/配置/Worker控制不变；见[收据](harness_lanes/results/worktree_cleanup_2026-10-03.md)。managed附件仍实际存在，不计收益。
+- [ ] 按[B4历史补批](gd_b4_historical_receipts_cleanup_2026-10-03.md)保留两Git历史ref、核四份报告已同blob存main后移除四个旧checkout；不新增重复报告副本，不动pinned/managed/其他仓。
 
 ## Next Step
 

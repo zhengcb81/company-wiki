@@ -149,3 +149,21 @@ def test_reparse_candidate_is_refused_without_following_it(tmp_path, monkeypatch
     with pytest.raises(SnapshotRetirementError, match='reparse'):
         retire_snapshot(root, snapshot.name, prepared, retired, apply=True)
     assert snapshot.exists()
+
+
+def test_completed_receipt_can_replay_after_retained_archive_is_retired(tmp_path):
+    root, snapshot, prepared, retired, _, archive, _ = _fixture(tmp_path)
+    result = retire_snapshot(root, snapshot.name, prepared, retired, apply=True)
+    archive.unlink()
+    assert retire_snapshot(root, snapshot.name, prepared, retired, apply=True) == result
+
+
+def test_new_snapshot_cannot_reuse_completed_receipt_without_archive(tmp_path):
+    root, snapshot, prepared, retired, current, archive, _ = _fixture(tmp_path)
+    retire_snapshot(root, snapshot.name, prepared, retired, apply=True)
+    archive.unlink()
+    new_snapshot = root / 'catalog.sqlite3.bak-new'
+    new_snapshot.write_bytes(current.read_bytes())
+    with pytest.raises(SnapshotRetirementError):
+        retire_snapshot(root, new_snapshot.name, prepared, retired, apply=True)
+    assert new_snapshot.exists()

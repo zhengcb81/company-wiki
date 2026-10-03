@@ -1,0 +1,60 @@
+{
+  "audit_sha256": "4c01433143d6663d314dc337f0d1f5679d7f8c5528bcba0df2a751d8ba878cad",
+  "basis": {
+    "prepared": {
+      "byte_size": 4288,
+      "mtime_ns": 1790447401732883300,
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.source_catalog\\retirement\\20260926T170825Z-4a9c67e1\\prepared.json",
+      "relative_path": ".source_catalog/retirement/20260926T170825Z-4a9c67e1/prepared.json",
+      "sha256": "cebcc51daf0a13a5f583273a1f0c3218f265fbe845fd8656e38cd82a30805cd9"
+    },
+    "retired": {
+      "byte_size": 1113,
+      "mtime_ns": 1790449614812055200,
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.source_catalog\\retirement\\20260926T170825Z-4a9c67e1\\retired.json",
+      "relative_path": ".source_catalog/retirement/20260926T170825Z-4a9c67e1/retired.json",
+      "sha256": "6f7f1b88b36aa93f22056627143fa3dd1c4bdd8d4ce3032ab1a1d4a78008b8e9"
+    }
+  },
+  "candidate_deleted_bytes": 11406183129,
+  "current_database": {
+    "byte_size": 3055800320,
+    "mtime_ns": 1790490231504738600,
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.source_catalog\\catalog.sqlite3",
+    "relative_path": ".source_catalog/catalog.sqlite3",
+    "sha256": "30794a01e04a9e77ec13cd7b27a3f24bf9861bda9fc7c3c50a2b362830fbc823"
+  },
+  "old_span_restore_guaranteed": false,
+  "project_root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+  "schema": "derived-archive-retirement-plan/1",
+  "status": "dry_run",
+  "targets": [
+    {
+      "byte_size": 6198704362,
+      "existing_full_stream_validation": {
+        "decompressed_bytes": 49677344768,
+        "decompressed_sha256": "69f498a23895c5a693621d9ee754b20bb9d6fbc199b684dc16e950d00b8fd7b7",
+        "full_disk_restore_performed": false,
+        "zstd_test": "ok"
+      },
+      "is_original_download": false,
+      "kind": "old_full_catalog_derivative_snapshot",
+      "matches_prepared_and_retired": true,
+      "mtime_ns": 1789799495000000000,
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.source_catalog\\retirement\\20260926T170825Z-4a9c67e1\\catalog.full.sqlite3.zst",
+      "relative_path": ".source_catalog/retirement/20260926T170825Z-4a9c67e1/catalog.full.sqlite3.zst",
+      "sha256": "1bc09746b8ee18db91fbbd14c97410241ad9a54d3f45a6468886692e763edd9e"
+    },
+    {
+      "adjacent_manifest_exists": false,
+      "byte_size": 5207478767,
+      "is_original_download": false,
+      "kind": "legacy_retired_evidence_derivatives",
+      "manifest_files_in_directory": [],
+      "mtime_ns": 1786094396327175400,
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\source_manifests\\archive\\2026-08-07\\retired-evidence.jsonl.gz",
+      "relative_path": "source_manifests/archive/2026-08-07/retired-evidence.jsonl.gz",
+      "sha256": "a3a6b2782350820cdf9a466e074685f9b377e2df46b42c11077a5c7ae1842109"
+    }
+  ]
+}

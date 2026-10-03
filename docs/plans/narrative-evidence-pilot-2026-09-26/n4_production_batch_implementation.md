@@ -42,6 +42,14 @@
 - 保留 job/event/source/version/attempt/error/usage/hash 与 final artifact/effect ID，不重复 quote。读取完成工件走已发布 transport；恢复不能从已压缩 result 重新计算依赖，若 lineage 变化生成新 DAG。保留最小 trace，不写第二份 bundle。
 - scope 精确、幂等、停机后可继续；旧 evidence/span ID 与 B3 archive 退役另按 G-D，不借此删历史事实。
 
+### N4B：避免再次积累大体积记录
+
+- 原件一份、可用最终叙述包一份、小型来源/usage/失败收据一份；AUTO终态和outbox不再保存同一quote/bundle正文。全文转换只作有期限的解析临时文件；不要重新给全部财务表格/单元格建立百万级span。skip只留原因/coverage/来源引用，不留全文派生。
+- 默认不自动生成完整catalog备份、gzip退休span或zstd旧库。确有一次性schema迁移时使用原有维护机制，迁移节点成功后立即按绑定收据收尾，不把同一内容无限保留多份。原文和来源/版本事实仍保留。
+- 新批次只增加三个可配置空间预算：单文档最终持久正文2MiB、新叙述流程累计持久增量1GiB、所有该批临时文件峰值2GiB。原始下载和现存legacy目录不占“新增”额度，也不能因额度不足被删。开跑前记录既有目录基线；HTTP前预留本次输出上界，存储不足具名停该批，不循环重试/复制全文。若优质长文确实超过单文档额度，报partial与被截内容的coverage，不静默丢失、不伪报完整；由配置调整下一批。
+- 可恢复的active/prepared工作继续保留；退出先清本次临时解析目录，失联目录由现有run/lease状态回收，无活跃owner才能删除。测试也只用独立短根；交付前清自己创建的根，历史工作树在交付并线后及时移除。日志只记ID/hash/状态/字节/token/费用，不重复正文；错误体仍沿用现有限长。
+- 总容量统计包含新artifact、AUTO数据库/WAL、metadata、运行日志和临时峰值，不能只报最终bundle很小；SQLite逻辑prune和文件体积分别记录。与原文目录/旧库空间分别出数，避免把全仓45GB误认成46GiB旧DB反弹。预算/重复正文/临时恢复清理测试并入下方节点B，不新增小节点审查。
+
 ## 3. TDD 与三个大节点
 
 ### 节点 A：scope 与持久记账

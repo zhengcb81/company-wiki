@@ -380,7 +380,8 @@ class EvidenceQueryService:
         if row is not None:
             raise EvidenceQueryArchivedError(
                 "legacy_evidence_archived: this source exists, but its "
-                "non-active legacy spans are in the verified cold snapshot"
+                "non-active legacy evidence is unavailable in the active catalog; "
+                "source identity is retained"
             )
 
     def lookup(self, *, source_id: str, locator: str) -> EvidenceQueryResult:
