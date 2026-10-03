@@ -28,7 +28,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 
-SCHEMA_VERSION = 2
+SCHEMA_VERSION = 3
 
 EXPECTED_TABLES_V1 = frozenset(
     {
@@ -42,7 +42,10 @@ EXPECTED_TABLES_V1 = frozenset(
         "notifications",
     }
 )
-EXPECTED_TABLES = EXPECTED_TABLES_V1 | {"runtime_gate"}
+EXPECTED_TABLES_V2 = EXPECTED_TABLES_V1 | {"runtime_gate"}
+EXPECTED_TABLES = EXPECTED_TABLES_V2 | {
+    "narrative_runs", "narrative_run_jobs", "narrative_model_reservations",
+}
 
 BackupHook = Callable[[Path, int, int], Path]
 
@@ -206,6 +209,59 @@ _DDL_V2_STATEMENTS: tuple[str, ...] = (
     CREATE INDEX idx_outbox_claim
     ON outbox(status, not_before, lease_until, outbox_id)
     """,
+)
+
+_DDL_V3_STATEMENTS: tuple[str, ...] = (
+    """CREATE TABLE narrative_runs (
+      run_id TEXT PRIMARY KEY,
+      input_hash TEXT NOT NULL,
+      scope_sha256 TEXT NOT NULL,
+      model_id TEXT NOT NULL,
+      prompt_version TEXT NOT NULL,
+      pricing_version TEXT NOT NULL,
+      input_micro_usd_per_million_tokens INTEGER NOT NULL CHECK(input_micro_usd_per_million_tokens>=0),
+      output_micro_usd_per_million_tokens INTEGER NOT NULL CHECK(output_micro_usd_per_million_tokens>=0),
+      max_tokens INTEGER NOT NULL CHECK(max_tokens>=0),
+      max_micro_usd INTEGER NOT NULL CHECK(max_micro_usd>=0),
+      max_output_bytes INTEGER NOT NULL CHECK(max_output_bytes>=0),
+      state TEXT NOT NULL CHECK(state IN ('open','blocked')),
+      block_reason TEXT,
+      created_at TEXT NOT NULL,
+      updated_at TEXT NOT NULL
+    )""",
+    """CREATE TABLE narrative_run_jobs (
+      run_id TEXT NOT NULL REFERENCES narrative_runs(run_id),
+      job_id TEXT NOT NULL UNIQUE REFERENCES jobs(job_id),
+      input_hash TEXT NOT NULL,
+      handler_version TEXT NOT NULL,
+      PRIMARY KEY(run_id,job_id)
+    )""",
+    """CREATE TABLE narrative_model_reservations (
+      attempt_id TEXT PRIMARY KEY REFERENCES attempts(attempt_id),
+      run_id TEXT NOT NULL REFERENCES narrative_runs(run_id),
+      job_id TEXT NOT NULL,
+      request_sha256 TEXT NOT NULL,
+      input_tokens_bound INTEGER NOT NULL CHECK(input_tokens_bound>=0),
+      max_output_tokens INTEGER NOT NULL CHECK(max_output_tokens>=0),
+      output_bytes_bound INTEGER NOT NULL CHECK(output_bytes_bound>=0),
+      reserved_micro_usd INTEGER NOT NULL CHECK(reserved_micro_usd>=0),
+      usage_status TEXT NOT NULL CHECK(usage_status IN ('reserved','known','unknown')),
+      input_tokens INTEGER CHECK(input_tokens>=0),
+      output_tokens INTEGER CHECK(output_tokens>=0),
+      estimated_micro_usd INTEGER CHECK(estimated_micro_usd>=0),
+      response_sha256 TEXT,
+      error_code TEXT,
+      output_bytes INTEGER CHECK(output_bytes>=0),
+      output_sha256 TEXT,
+      reserved_at TEXT NOT NULL,
+      usage_settled_at TEXT,
+      output_settled_at TEXT,
+      FOREIGN KEY(run_id,job_id) REFERENCES narrative_run_jobs(run_id,job_id),
+      CHECK((usage_status='known' AND input_tokens IS NOT NULL AND output_tokens IS NOT NULL AND estimated_micro_usd IS NOT NULL)
+         OR (usage_status!='known' AND input_tokens IS NULL AND output_tokens IS NULL AND estimated_micro_usd IS NULL))
+    )""",
+    """CREATE INDEX idx_narrative_reservations_run
+       ON narrative_model_reservations(run_id,attempt_id)""",
 )
 
 
@@ -399,15 +455,15 @@ def _read_structure(
             info = connection.execute(
                 f'PRAGMA index_xinfo("{index["name"]}")'
             ).fetchall()
-            columns = tuple(
+            index_columns = tuple(
                 (row["name"], row["desc"])
                 for row in info
                 if row["key"] == 1 and row["name"] is not None
             )
             if index["origin"] == "u":
-                unique_indexes.append(tuple(name for name, _desc in columns))
+                unique_indexes.append(tuple(name for name, _desc in index_columns))
             elif index["origin"] == "c":
-                ordinary_indexes.append((index["name"], columns))
+                ordinary_indexes.append((index["name"], index_columns))
         foreign_keys = connection.execute(
             f'PRAGMA foreign_key_list("{table}")'
         ).fetchall()
@@ -431,17 +487,21 @@ def _read_structure(
     return structure
 
 
-@functools.lru_cache(maxsize=2)
+@functools.lru_cache(maxsize=3)
 def _expected_structure(version: int) -> dict:
     connection = sqlite3.connect(":memory:")
     connection.row_factory = sqlite3.Row
     try:
         for statement in _DDL_V1_STATEMENTS:
             connection.execute(statement)
-        if version == 2:
+        if version in (2, 3):
             for statement in _DDL_V2_STATEMENTS:
                 connection.execute(statement)
-            tables = EXPECTED_TABLES
+            tables = EXPECTED_TABLES_V2
+            if version == 3:
+                for statement in _DDL_V3_STATEMENTS:
+                    connection.execute(statement)
+                tables = EXPECTED_TABLES
         elif version == 1:
             tables = EXPECTED_TABLES_V1
         else:
@@ -454,7 +514,7 @@ def _expected_structure(version: int) -> dict:
 def _require_expected_structure(
     connection: sqlite3.Connection, *, version: int = SCHEMA_VERSION
 ) -> None:
-    expected_tables = EXPECTED_TABLES if version == 2 else EXPECTED_TABLES_V1
+    expected_tables = _tables_for_version(version)
     tables = set(_user_tables(connection))
     if tables != expected_tables:
         missing = sorted(expected_tables - tables)
@@ -469,7 +529,7 @@ def _require_expected_structure(
     ]
     if differences:
         raise SchemaDriftError(f"schema structure drift in: {differences}")
-    if version == 2:
+    if version >= 2:
         gate_rows = connection.execute(
             "SELECT singleton_id, desired_state, control_generation, updated_at "
             "FROM runtime_gate"
@@ -510,10 +570,19 @@ def _canonical_json(value) -> str:
 def _fingerprint(
     connection: sqlite3.Connection, *, version: int = SCHEMA_VERSION
 ) -> str:
-    expected_tables = EXPECTED_TABLES if version == 2 else EXPECTED_TABLES_V1
+    expected_tables = _tables_for_version(version)
     return hashlib.sha256(
         _canonical_json(_read_structure(connection, expected_tables)).encode("utf-8")
     ).hexdigest()
+
+def _tables_for_version(version: int) -> frozenset[str]:
+    if version == 1:
+        return EXPECTED_TABLES_V1
+    if version == 2:
+        return EXPECTED_TABLES_V2
+    if version == 3:
+        return EXPECTED_TABLES
+    raise ValueError(f"unsupported schema version: {version}")
 
 
 # --------------------------------------------------------------------------- #
@@ -557,10 +626,10 @@ def _classify_existing(db_path: Path) -> str:
             )
         tables = _user_tables(connection)
         if version == SCHEMA_VERSION:
-            return "v2"
-        if version == 1:
-            _require_expected_structure(connection, version=1)
-            return "v1"
+            return f"v{version}"
+        if version in (1, 2):
+            _require_expected_structure(connection, version=version)
+            return f"v{version}"
         unknown = [name for name in tables if name not in EXPECTED_TABLES_V1]
         if unknown:
             raise UnknownSchemaError(
@@ -571,10 +640,17 @@ def _classify_existing(db_path: Path) -> str:
         connection.close()
 
 
-def _validate_v2_readonly(db_path: Path) -> MigrationReport:
+def _validate_current_readonly(db_path: Path) -> MigrationReport:
     connection = _open_readonly_connection(db_path)
     try:
-        _require_expected_structure(connection, version=2)
+        version = _user_version(connection)
+        if version > SCHEMA_VERSION:
+            raise UnsupportedSchemaVersionError(
+                f"user_version {version} is newer than supported {SCHEMA_VERSION}"
+            )
+        if version != SCHEMA_VERSION:
+            raise SchemaDriftError("schema version changed during read-only classification")
+        _require_expected_structure(connection, version=SCHEMA_VERSION)
         return MigrationReport(
             SCHEMA_VERSION, SCHEMA_VERSION, (), None, _fingerprint(connection)
         )
@@ -592,7 +668,7 @@ def _apply_write_migration(
         )
     if version == SCHEMA_VERSION:
         # Another worker migrated between classification and the write lock.
-        _require_expected_structure(connection, version=2)
+        _require_expected_structure(connection, version=SCHEMA_VERSION)
         return MigrationReport(
             SCHEMA_VERSION, SCHEMA_VERSION, (), None, _fingerprint(connection)
         )
@@ -616,29 +692,36 @@ def _apply_write_migration(
             for statement in _DDL_V2_STATEMENTS:
                 _execute_statement(connection, statement)
             connection.execute("PRAGMA user_version = 2")
+            version = 2
             applied_versions.append(2)
+        if version == 2:
+            _require_expected_structure(connection, version=2)
+            for statement in _DDL_V3_STATEMENTS:
+                _execute_statement(connection, statement)
+            connection.execute("PRAGMA user_version = 3")
+            applied_versions.append(3)
     except sqlite3.OperationalError as exc:
         raise MigrationExecutionError(
             f"DDL execution failed and was rolled back: {exc}"
         ) from exc
-    _require_expected_structure(connection, version=2)
+    _require_expected_structure(connection, version=SCHEMA_VERSION)
     return MigrationReport(
         from_version,
         SCHEMA_VERSION,
         tuple(applied_versions),
         backup_path_str,
-        _fingerprint(connection, version=2),
+        _fingerprint(connection, version=SCHEMA_VERSION),
     )
 
 
 def migrate_database(
     db_path: Path, *, backup_hook: BackupHook | None = None
 ) -> MigrationReport:
-    """Create or validate the automation database at schema v2.
+    """Create or validate the automation database at schema v3.
 
-    A new file or empty v0 database applies v1 then v2 in one transaction.  A
-    frozen, valid v1 database requires a successful explicit backup hook before
-    it is upgraded in one transaction. Existing v2 databases are validated
+    A new file or empty v0 database applies v1, v2 and v3 in one transaction. A
+    frozen, valid v1/v2 database requires a successful explicit backup hook before
+    it is upgraded in one transaction. Existing v3 databases are validated
     read-only.
     """
     db_path = _require_valid_path_object(db_path)
@@ -654,16 +737,16 @@ def migrate_database(
     else:
         classification = "new"
 
-    if classification == "v2":
-        return _validate_v2_readonly(db_path)
+    if classification == "v3":
+        return _validate_current_readonly(db_path)
 
-    from_version = 1 if classification == "v1" else 0
-    if classification == "v1" and backup_hook is None:
-        raise BackupError("v1 to v2 upgrade requires an explicit backup hook")
+    from_version = {"v1": 1, "v2": 2}.get(classification, 0)
+    if classification in {"v1", "v2"} and backup_hook is None:
+        raise BackupError(f"v{from_version} to v3 upgrade requires an explicit backup hook")
     backup_path_str = _perform_backup(
         db_path,
         from_version=from_version,
-        pre_existing=(classification in {"v0_empty", "v1"}),
+        pre_existing=(classification in {"v0_empty", "v1", "v2"}),
         backup_hook=backup_hook,
     )
 
@@ -696,12 +779,9 @@ def validate_database(db_path: Path) -> SchemaReport:
                 f"user_version {version} is newer than supported {SCHEMA_VERSION}"
             )
         tables = _user_tables(connection)
-        if version == SCHEMA_VERSION:
-            _require_expected_structure(connection, version=2)
-            fingerprint = _fingerprint(connection, version=2)
-        elif version == 1:
-            _require_expected_structure(connection, version=1)
-            fingerprint = _fingerprint(connection, version=1)
+        if version in (1, 2, 3):
+            _require_expected_structure(connection, version=version)
+            fingerprint = _fingerprint(connection, version=version)
         else:  # uninitialized v0
             unknown = [name for name in tables if name not in EXPECTED_TABLES_V1]
             if unknown:

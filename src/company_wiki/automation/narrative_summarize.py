@@ -28,6 +28,7 @@ from .narrative_model import (
     NarrativeModelResponse,
     decode_model_draft,
 )
+from .narrative_model_caller import NarrativeBudgetCallError, NarrativeModelCaller
 
 
 @dataclass(frozen=True)
@@ -37,24 +38,24 @@ class _SummaryFailure(Exception):
     detail: str
 
 
-def _failure(code: str, outcome: HandlerOutcome, detail: str) -> HandlerResult:
+def _failure(code: str, outcome: HandlerOutcome, detail: str, metrics: HandlerMetrics | None = None) -> HandlerResult:
     return HandlerResult(
         outcome=outcome,
         result={},
         artifacts=(),
         effects=(),
-        metrics=HandlerMetrics(tokens=0, cost_usd=0.0, duration_ms=0),
+        metrics=metrics or HandlerMetrics(tokens=0, cost_usd=0.0, duration_ms=0),
         error=HandlerError(code=code, detail=detail),
     )
 
 
-def _success(result: NarrativeSummaryResult) -> HandlerResult:
+def _success(result: NarrativeSummaryResult, metrics: HandlerMetrics | None = None) -> HandlerResult:
     return HandlerResult(
         outcome=HandlerOutcome.SUCCEEDED,
         result=result.to_dict(),
         artifacts=(),
         effects=(),
-        metrics=HandlerMetrics(tokens=0, cost_usd=0.0, duration_ms=0),
+        metrics=metrics or HandlerMetrics(tokens=0, cost_usd=0.0, duration_ms=0),
         error=None,
     )
 
@@ -107,14 +108,18 @@ class NarrativeSummarizeHandler:
         self,
         *,
         model: NarrativeModel | None,
+        model_caller: NarrativeModelCaller | None = None,
     ) -> None:
         self._model = model
+        self._model_caller = model_caller
 
     def __call__(self, context: JobExecutionContext) -> HandlerResult:
         try:
             return self._execute(context)
         except _SummaryFailure as exc:
             return _failure(exc.code, exc.outcome, exc.detail)
+        except NarrativeBudgetCallError as exc:
+            return _failure(exc.code, exc.outcome, "metered model attempt did not complete", exc.metrics)
         except ModelTimeoutError:
             return _failure(
                 "MODEL_TIMEOUT", HandlerOutcome.RETRYABLE, "model request timed out"
@@ -139,7 +144,7 @@ class NarrativeSummarizeHandler:
         _validate_dependency_identity(payload, selected)
         if selected.selection.status == "skipped_no_narrative":
             return _success(self._skip_result(selected))
-        if self._model is None:
+        if self._model is None and self._model_caller is None:
             raise _SummaryFailure(
                 "MODEL_NOT_CONFIGURED",
                 HandlerOutcome.TERMINAL_FAILURE,
@@ -148,9 +153,21 @@ class NarrativeSummarizeHandler:
         review = selected.prompt_review
         request = NarrativeModelRequest.from_selection(selected)
         context.checkpoint()
-        response = self._model.generate(request)
+        if self._model_caller is not None:
+            response, metrics = self._model_caller.generate(context, request)
+        else:
+            assert self._model is not None
+            response = self._model.generate(request)
+            metrics = HandlerMetrics(tokens=0, cost_usd=0.0, duration_ms=0)
         context.checkpoint()
-        return _success(self._completed_result(selected, review, response))
+        try:
+            completed = self._completed_result(selected, review, response)
+        except _SummaryFailure as exc:
+            return _failure(exc.code, exc.outcome, exc.detail, metrics)
+        except ModelResponseError:
+            return _failure("MODEL_RESPONSE_INVALID", HandlerOutcome.TERMINAL_FAILURE,
+                            "model response violates its transport contract", metrics)
+        return _success(completed, metrics)
 
     @staticmethod
     def _payload(context: JobExecutionContext) -> SourceRevisionEventPayload:

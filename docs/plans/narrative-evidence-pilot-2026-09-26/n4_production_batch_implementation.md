@@ -1,6 +1,6 @@
 # N4：可运行的叙述批次、真实模型计量与持久恢复
 
-> 2026-10-03 未实施细则。G-A/N3a/G-C、B1/B3/B4已完成，见[实际整理收尾](harness_lanes/results/gd_b3_retirement_2026-10-03.md)；当前先按task_plan S0清旁路/hook，N4A scope在独占范围并行RED→实现。先按本文冻结接口，再实现；保留现有AUTO唯一任务库、Supervisor、三步handler/projector，不启动旧normalize Worker。只在三个大节点验收，helper不增加审查。原件及来源/版本事实保留。shared readonly migration snapshot竞态已修，复用既有32项两平台/CI收据，不重开同一修复。
+> 2026-10-03 执行细则：scope已发布，节点A预算/模型/factory已验收，正式batch/终态降容/节点B+C未完成。G-A/N3a/G-C、B1/B3/B4已完成，见[实际整理收尾](harness_lanes/results/gd_b3_retirement_2026-10-03.md)；当前先按task_plan S0清旁路/hook，N4A scope在独占范围并行RED→实现。先按本文冻结接口，再实现；保留现有AUTO唯一任务库、Supervisor、三步handler/projector，不启动旧normalize Worker。只在三个大节点验收，helper不增加审查。原件及来源/版本事实保留。shared readonly migration snapshot竞态已修，复用既有32项两平台/CI收据，不重开同一修复。
 
 ## 1. 已核缺口与目标
 

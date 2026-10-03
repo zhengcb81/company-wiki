@@ -12,7 +12,7 @@ from .narrative_contracts import NarrativeSelectResult
 
 
 MODEL_REQUEST_SCHEMA = "narrative-model-request/1.0"
-NARRATIVE_PROMPT_VERSION = "1.0.0"
+NARRATIVE_PROMPT_VERSION = "1.1.0"
 MODEL_RESPONSE_MAX_BYTES = 128 * 1024
 
 _INSTRUCTION = (
@@ -20,7 +20,73 @@ _INSTRUCTION = (
     "Return one JSON object with the single key 'draft'. Preserve the source "
     "language, do not translate, cite only supplied evidence IDs, preserve modality "
     "and speaker role, and do not add valuation, ratings, or investment conclusions."
+    " Follow response_schema; response_example shows wire format only, not coverage. "
+    "Summarize material business progress, industry changes, new business and overseas "
+    "expansion without repeating financial tables or generic boilerplate. Use concise "
+    "claims supported by evidence; each evidence_id is an evidence.span_id. "
+    "Copy source_id, source_sha256 and language from source. source_role company_filing "
+    "or management supports company_statement; analyst or investor_question supports "
+    "analyst_question with modality question. Unknown roles require uncertain claims. "
+    "Keep actual, planned, forecast, question, negation and uncertain distinct. "
+    "If a cited item has locator_unstable, or a claim is uncertain, set needs_review "
+    "true and draft status needs_review. These are quality diagnostics, not a request "
+    "for human permission. Otherwise status draft is appropriate. Return no Markdown, "
+    "extra commentary, physical file paths, or invented evidence IDs."
 )
+
+_CLAIM_SCHEMA = {
+    "type": "object",
+    "required": ["claim_id", "text", "evidence_ids", "claim_type", "modality", "needs_review"],
+    "additionalProperties": False,
+    "properties": {
+        "claim_id": {"type": "string", "minLength": 1},
+        "text": {"type": "string", "minLength": 1},
+        "evidence_ids": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+        "claim_type": {"enum": ["company_statement", "analyst_question", "editorial", "uncertain"]},
+        "modality": {"enum": ["actual", "planned", "forecast", "question", "negation", "uncertain"]},
+        "needs_review": {"type": "boolean"},
+    },
+}
+_RESPONSE_SCHEMA = {
+    "type": "object", "required": ["draft"], "additionalProperties": False,
+    "properties": {"draft": {
+        "type": "object",
+        "required": ["source_id", "source_sha256", "language", "claims", "status"],
+        "additionalProperties": False,
+        "properties": {
+            "source_id": {"type": "string", "minLength": 1},
+            "source_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+            "language": {"type": "string", "minLength": 1},
+            "claims": {"type": "array", "minItems": 1, "items": _CLAIM_SCHEMA},
+            "status": {"enum": ["draft", "needs_review"]},
+        },
+    }},
+}
+
+
+def _response_example(selected: NarrativeSelectResult) -> dict[str, Any] | None:
+    if not selected.evidence_spans:
+        return None
+    span = selected.evidence_spans[0]
+    role = span.structured_value.get("source_role")
+    claim_type = (
+        "company_statement" if role in {"company_filing", "management"}
+        else "analyst_question" if role in {"analyst", "investor_question"}
+        else "uncertain"
+    )
+    needs_review = claim_type == "uncertain" or "locator_unstable" in span.quality_flags
+    return {"draft": {
+        "source_id": selected.source_ref.source_id,
+        "source_sha256": selected.source_ref.content_sha256,
+        "language": selected.source_metadata.language,
+        "claims": [{
+            "claim_id": "claim-001", "text": span.raw_text[:200],
+            "evidence_ids": [span.span_id], "claim_type": claim_type,
+            "modality": "question" if claim_type == "analyst_question" else "uncertain",
+            "needs_review": needs_review,
+        }],
+        "status": "needs_review" if needs_review else "draft",
+    }}
 
 
 class NarrativeModelError(RuntimeError):
@@ -60,6 +126,8 @@ class NarrativeModelRequest:
                 "document_kind": selected.source_metadata.document_kind,
             },
             "evidence": [span.to_dict() for span in selected.evidence_spans],
+            "response_schema": _RESPONSE_SCHEMA,
+            "response_example": _response_example(selected),
             "constraints": {
                 "translate": False,
                 "citation_scope": "supplied_evidence_ids_only",
@@ -88,6 +156,9 @@ class NarrativeModelResponse:
     model_id: str
     prompt_version: str
     response_bytes: bytes
+    input_tokens: int | None = None
+    output_tokens: int | None = None
+    duration_ms: int = 0
 
     def __post_init__(self) -> None:
         if not all(
@@ -99,6 +170,13 @@ class NarrativeModelResponse:
             raise ModelResponseError("model response bytes are empty")
         if len(self.response_bytes) > MODEL_RESPONSE_MAX_BYTES:
             raise ModelResponseError("model response exceeds its transport cap")
+        counts = (self.input_tokens, self.output_tokens)
+        if counts != (None, None) and not all(
+            type(value) is int and value >= 0 for value in counts
+        ):
+            raise ModelResponseError("model response usage must be paired nonnegative integers")
+        if type(self.duration_ms) is not int or self.duration_ms < 0:
+            raise ModelResponseError("model response duration must be a nonnegative integer")
 
     @property
     def response_sha256(self) -> str:

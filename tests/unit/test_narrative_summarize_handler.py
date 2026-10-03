@@ -580,3 +580,62 @@ def test_summarize_handler_rejects_dependency_identity_drift_before_model() -> N
     assert raw.error is not None and raw.error.code == "DEPENDENCY_INVALID"
     assert model.calls == []
     assert raw.effects == ()
+
+
+def test_model_prompt_teaches_wire_schema_to_an_unconfigured_model() -> None:
+    import jsonschema
+
+    selected = _selection()
+    request = NarrativeModelRequest.from_selection(selected)
+    envelope = json.loads(request.data_json)
+    schema = envelope["response_schema"]
+    response = json.loads(ReplayModel().generate(request).response_bytes)
+    jsonschema.validate(response, schema)
+    response["draft"]["claims"][0]["modality"] = "buy"
+    with pytest.raises(jsonschema.ValidationError):
+        jsonschema.validate(response, schema)
+    assert request.prompt_version != "1.0.0"
+    assert "source_role" in request.instruction
+    assert "locator_unstable" in request.instruction
+    assert "needs_review" in request.instruction
+
+
+@pytest.mark.parametrize("language,role,flags", [("zh", "company_filing", ()), ("en", "analyst", ()), ("zh", "unknown", ("locator_unstable",))])
+def test_prompt_wire_example_passes_the_actual_summary_contract(language, role, flags) -> None:
+    selected = _selection(language=language, role=role, quality_flags=flags)
+    envelope = json.loads(NarrativeModelRequest.from_selection(selected).data_json)
+    response = NarrativeModelResponse(
+        "example", "shape-only", NARRATIVE_PROMPT_VERSION,
+        canonical_json(envelope["response_example"]).encode("utf-8"),
+    )
+    result = NarrativeSummarizeHandler._completed_result(selected, selected.prompt_review, response)
+    result.validate_against(selected)
+
+
+@pytest.mark.parametrize("case", ["valid", "bad_json", "bad_claim"])
+def test_summarize_keeps_paid_attempt_metrics_after_output_validation(case) -> None:
+    selected = _selection()
+    model = ReplayModel(
+        malformed=b"not JSON" if case == "bad_json" else None,
+        draft_overrides={"claims": []} if case == "bad_claim" else None,
+    )
+    expected = HandlerMetrics(tokens=123, cost_usd=0.002, duration_ms=17)
+
+    class Caller:
+        def generate(self, context, request):
+            assert context.attempt.attempt_id
+            return model.generate(request), expected
+
+    result = NarrativeSummarizeHandler(model=model, model_caller=Caller())(_context(selected))
+    assert result.metrics == expected
+    assert result.outcome is (HandlerOutcome.SUCCEEDED if case == "valid" else HandlerOutcome.TERMINAL_FAILURE)
+
+
+def test_skipped_document_never_reserves_or_calls_paid_model() -> None:
+    class Caller:
+        def generate(self, *arguments):
+            raise AssertionError("skipped document must use zero budget and HTTP")
+
+    result = NarrativeSummarizeHandler(model=None, model_caller=Caller())(_context(_selection(skipped=True)))
+    assert result.outcome is HandlerOutcome.SUCCEEDED
+    assert result.metrics.tokens == 0

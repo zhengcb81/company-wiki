@@ -1,4 +1,4 @@
-"""Automation schema v2 migration contracts for the recoverable worker."""
+"""Frozen v1 and v2 facts carried forward through the current v3 migration."""
 
 from __future__ import annotations
 
@@ -46,15 +46,17 @@ def _table_names(connection: sqlite3.Connection) -> set[str]:
     return {row[0] for row in rows}
 
 
-def test_v2_new_database_has_gate_generation_and_claim_indexes(tmp_path: Path) -> None:
+def test_v3_new_database_preserves_v2_gate_generation_and_claim_indexes(tmp_path: Path) -> None:
     database = tmp_path / "automation.db"
 
     report = migrations.migrate_database(database)
 
     connection = sqlite3.connect(database)
     try:
-        assert connection.execute("PRAGMA user_version").fetchone()[0] == 2
-        assert _table_names(connection) == EXPECTED_V2_TABLES
+        assert connection.execute("PRAGMA user_version").fetchone()[0] == 3
+        assert _table_names(connection) == EXPECTED_V2_TABLES | {
+            "narrative_runs", "narrative_run_jobs", "narrative_model_reservations",
+        }
         columns = {
             row[1]: (row[2], row[3], row[4])
             for row in connection.execute("PRAGMA table_info(attempts)")
@@ -79,11 +81,11 @@ def test_v2_new_database_has_gate_generation_and_claim_indexes(tmp_path: Path) -
         connection.close()
 
     assert report.from_version == 0
-    assert report.to_version == 2
-    assert report.applied_versions == (1, 2)
+    assert report.to_version == 3
+    assert report.applied_versions == (1, 2, 3)
 
 
-def test_v1_to_v2_backs_up_once_and_preserves_existing_rows(tmp_path: Path) -> None:
+def test_v1_to_v3_backs_up_once_and_preserves_existing_rows(tmp_path: Path) -> None:
     database = tmp_path / "automation.db"
     _create_v1_database(database)
     connection = sqlite3.connect(database)
@@ -113,12 +115,12 @@ def test_v1_to_v2_backs_up_once_and_preserves_existing_rows(tmp_path: Path) -> N
 
     report = migrations.migrate_database(database, backup_hook=backup)
 
-    assert calls == [(1, 2)]
-    assert report.applied_versions == (2,)
+    assert calls == [(1, 3)]
+    assert report.applied_versions == (2, 3)
     assert report.backup_path == str(tmp_path / "automation.v1.backup.db")
     connection = sqlite3.connect(database)
     try:
-        assert connection.execute("PRAGMA user_version").fetchone()[0] == 2
+        assert connection.execute("PRAGMA user_version").fetchone()[0] == 3
         assert connection.execute(
             "SELECT event_id FROM events WHERE event_id='evt-existing'"
         ).fetchone() == ("evt-existing",)
@@ -199,23 +201,23 @@ def test_v1_to_v2_ddl_failure_rolls_back_the_entire_upgrade(
         connection.close()
 
 
-def test_v2_reopen_is_a_read_only_noop_with_stable_fingerprint(tmp_path: Path) -> None:
+def test_v3_reopen_is_a_read_only_noop_with_stable_fingerprint(tmp_path: Path) -> None:
     database = tmp_path / "automation.db"
     first = migrations.migrate_database(database)
 
     second = migrations.migrate_database(database)
 
-    assert second.from_version == 2
-    assert second.to_version == 2
+    assert second.from_version == 3
+    assert second.to_version == 3
     assert second.applied_versions == ()
     assert second.backup_path is None
     assert second.schema_fingerprint == first.schema_fingerprint
 
 
-def test_future_v3_is_rejected_without_downgrade(tmp_path: Path) -> None:
+def test_future_v4_is_rejected_without_downgrade(tmp_path: Path) -> None:
     database = tmp_path / "automation.db"
     connection = sqlite3.connect(database)
-    connection.execute("PRAGMA user_version = 3")
+    connection.execute("PRAGMA user_version = 4")
     connection.commit()
     connection.close()
 
@@ -224,7 +226,7 @@ def test_future_v3_is_rejected_without_downgrade(tmp_path: Path) -> None:
 
     connection = sqlite3.connect(database)
     try:
-        assert connection.execute("PRAGMA user_version").fetchone()[0] == 3
+        assert connection.execute("PRAGMA user_version").fetchone()[0] == 4
     finally:
         connection.close()
 

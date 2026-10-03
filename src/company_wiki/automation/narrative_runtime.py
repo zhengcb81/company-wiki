@@ -9,6 +9,7 @@ from typing import Protocol
 from .execution_context import JobExecutionContext
 from .models import HandlerResult
 from .narrative_model import NarrativeModel
+from .narrative_model_caller import NarrativeModelCaller
 from .narrative_select import NarrativeSelectHandler
 from .narrative_source_guard import NarrativeSourceReader
 from .narrative_summarize import NarrativeSummarizeHandler
@@ -31,6 +32,7 @@ class NarrativeRuntimeDependencies:
 
     reader: NarrativeSourceReader
     model: NarrativeModel | None
+    model_caller: NarrativeModelCaller | None = None
 
 
 def register_narrative_handlers(
@@ -45,7 +47,7 @@ def register_narrative_handlers(
     )
     registrar.register(
         "source.narrative_summarize",
-        NarrativeSummarizeHandler(model=dependencies.model),
+        NarrativeSummarizeHandler(model=dependencies.model, model_caller=dependencies.model_caller),
     )
     registrar.register(
         "source.narrative_verify",
