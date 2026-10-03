@@ -264,7 +264,8 @@ def _insert(connection, table, values):
 
 def _v3_with_paid_facts(path: Path):
     """Frozen v3 history, built without invoking the current migration algorithm."""
-    with sqlite3.connect(path) as connection:
+    connection = sqlite3.connect(path)
+    try:
         # Historical AUTO connections use WAL before beginning a migration.
         connection.execute("PRAGMA journal_mode=WAL")
         connection.execute("PRAGMA foreign_keys=ON")
@@ -291,6 +292,11 @@ def _v3_with_paid_facts(path: Path):
             estimated_micro_usd=None, response_sha256=None, error_code="MODEL_TRANSPORT_UNKNOWN",
             output_bytes=None, output_sha256=None, reserved_at=T1, usage_settled_at=T1, output_settled_at=None,
         ))
+        connection.commit()
+    finally:
+        # sqlite3.Connection.__exit__ commits/rolls back but does not close it.
+        # Close explicitly so read-only classification starts after WAL cleanup.
+        connection.close()
 
 
 def test_v3_upgrade_preserves_all_facts_and_leaves_old_owner_unbound(tmp_path):
