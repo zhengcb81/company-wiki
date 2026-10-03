@@ -15,6 +15,13 @@
 
 ## 本轮责任/缺口
 
+- 2026-10-03 再核 RF：当前可读 checkout 为 `fcap@5319ee263c4af41ac255938c25bebd32cce56f66`，与 `origin/main@6fb2def709d13bda9cfada7ecf62bfc0e3744ae2` 不同。当前 checkout 的 tracked diff 包含大量 `.planning/2026-09-19-three-project-history-audit/execution_runs/**` 删除；按 owner 隔离全部保留，不清理、不合并。只使用本次命令的 `safe.directory` 参数读取 Git，未更改全局配置。RF PWF 主目录为 `.planning/2026-09-19-three-project-history-audit/`。CodeGraph 未能定位正式 pathless read receipt 契约，需直接从 RF main 的规范文件核实后再复用，不从记忆重建接口。
+- 直接读 RF 当前可见的 `scripts/contracts/evidence.py::validate_source_capture` 与 `scripts/contracts/document.py::validate_sources` 后确认：RF 消费侧正式验证的是带 `source_id` 的 HTTPS source，含标题/发布者/页节、published/accessed date，以及 capture schema/method/tool call id/captured date/snapshot SHA、`untrusted_data_only`、prompt status、host receipt 和 capture receipt SHA；evidence claim 再绑定 source id、snapshot SHA 与 capture receipt SHA。该合同定义来源身份、时间与字节快照绑定，没有给出 company-wiki 数据湖路径字段。CodeGraph 的名称查询并不能证明存在单独 pathless reader API；跨项目实现应保留 RF 这个消费文档合同，并继续查清是否有独立 reader adapter，不能把 URL/capture receipt 误称为完整读取接口。
+- **更正（以 RF 当前 `origin/main@6fb2def7` 为准）**：上一条读的是 `fcap@5319ee26` 旧工作树中的旧 `source_preparation.py`，因此不能据此断言 RF 没有 pathless reader。`origin/main` 已包含 `scripts/narrative_source_preparation.py`，消费 CWP 发布的 `narrative-read-request/1`/`narrative-reference-request/1`，由 `company_wiki_narrative_reader` 做 pathless source read；CWP 2026-10-03 G-C 收尾报告记录 RF main 与真实年报/英文 TXT 跨仓端到端回归。RF 的正式 source/capture contract 仍负责输出 source id、URL、日期、snapshot SHA 和 receipt hash；两种 DTO 在不同边界承担不同职责。
+- CWP 侧 `SourceRef`/`SourceRefValue` schema `2.0` 仅含 document/source ID、内容 SHA、字节数、MIME；`VerifiedContent`/`VerifiedVersionReceipt` 在读时重新核当前 catalog/root/read policy 并核原文字节 SHA，receipt schema `2.1` 含 read-at、policy hashes、review snapshot。实际调用已进入 narrative select/verify/batch、transport 和 SourceExport v2；CodeGraph caller 索引有漏报，按符号搜索与源码路径核实，不据其“No callers”报告判定未使用。RF legacy `source_preparation.py` 的 artifact bundle 绝对路径读取仍存在于旧路径，G-C 新 reader 并不自动退役该旧路径；本计划复用已发布的新 consumer API，不重建、不修改 RF。
+- FF-S3 调用点已核实：`_command_arguments()` 在每个 ensure/close-gap argv 附上 bytes/seconds/cost，v2 `source_ref_v2` ensure 和 v1 close-gap 都复用该函数；`_shared_deadline()` 又把请求timeout合入全链共享单调deadline。CWP CLI因此能收到请求上限。真正断点位于CWP内部：`JsonCommandAdapter` 无 bounded discover/fetch，Dayu CLI无 bounded方法；CWP预算模式必须在 provider 子进程/HTTP外发前拒绝，不能声称参数透传就有响应体硬限额。
+- CWP `JsonCommandAdapter` 的 bounded bridge 已按固定的 `acquisition_budget/1.0`（剩余字节、秒数、美元字符串）和 `acquisition_usage/1.0`（本阶段实收费字节/成本）合同实现本地未提交WIP。bridge要求provider usage字段精确、收费累计进入单个CWP预算，并用fetch收据字节再校验；普通无budget调用保留旧命令。专项进程测试行为RED为三个 `discover_bounded` 缺失失败，GREEN后3项通过。这个 bridge 仍不能使未实现该JSON合同的StockInfo provider自动变安全，需在 provider CLI与HTTP读流接上之后才启用。
+
 - S0退役专属测试时保留混合文件的真实环境隔离/原件保护/故障失败反例；依赖gate_runner的helper迁到已有clean_env_gate/test-only helper。
 - N4在推进：scope和模型/预算基础9ccd29f已发布；正式CLI/coordinator与terminal降容首组67绿，跨run/统一owner/父kill/ACK还需收口。测试Replay不是真实provider能力。
 - B2当前有normalized/旧summarizer/RF兼容引用，逐caller迁移/退休后可分批删，不需全仓重做摘要。
@@ -74,3 +81,12 @@ Git写入/联网用正常用户，sandbox .git只读不是产品权限。测试�
 - CWP 临时测试目录清理限制：此前一组 33 项 producer-budget 测试在 `%TEMP%\\cw-pytest-basetemp\\20261003-210201-7b69b511` 留下3个测试文件（402,088 B）；Windows ACL 拒绝清理，包括一次已授权 elevated 尝试。没有改 ACL/接管所有权，路径不在生产仓；将此列作明确的临时数据清理异常，不能声称目录恢复完成。
 - CWP `AcquisitionCoordinator.resolve_or_stage` 的原二次检查只比较 `receipt.byte_size` 与总上限。新增 under-reporting adapter RED 用例证明 discovery 已先用20 B、下载回执21 B、总上限30 B时仍会被旧代码放行。现在以下载前后的 `response_bytes_used` 差值核回执收费，并校验文件大小不超 discovery 后剩余额度；该防线不能替代 adapter 在流读取时逐块计费。CN `JsonCommandAdapter` 和 Dayu CLI adapter 在预算模式下都在子进程启动前 fail closed。5文件责任包35 passed，Ruff/diff clean，短测试根已移除。
 - 本次检查的 StockInfoDLSimple checkout 为 `v2-clean-rewrite@1693045`，含24个tracked修改和额外未跟踪源码/测试；本次未写入。其现有未提交 `CninfoAnnouncementClient.fetch_pdf` 仍用 `response.read()` 后才写文件，没有字节/期限额。要继续适配，必须先形成不覆盖该 owner 状态的隔离快照；之后对 discovery JSON 和 PDF body 都按同一预算流式计费。Dayu 代码不动。
+
+## 2026-10-04 — CNINFO provider transport 与 CWP budget bridge
+
+- 在 StockInfoDLSimple 隔离分支 `codex/cninfo-bounded-budget@947e839`（父提交 `1693045`）完成 bounded CNINFO transport：discovery JSON 与 PDF 响应按块计量同一预算，报告 `acquisition_usage/1.0`；提交仅含13个相关源码、fixture和测试文件。原 `v2-clean-rewrite` owner 工作树未写入或清理。分支此前已推送；本轮 GitHub 网络连接失败，未重复验证远端ref。provider仓未发现Actions workflow。
+- provider测试此前按最终focused集合 **61 passed**；本轮另外跑的51项到达100%但pytest未打印结束摘要，Python进程仍占CPU，故中断退出阶段。这次补跑不计作完整新绿。改动文件限定Ruff检查通过，`git show --check HEAD`通过；对全 `tests/` 跑Ruff会出现19个既有无关lint问题，不据此扩大清理范围。
+- CWP当前bounded JSON桥接、真实子进程deadline、usage/partial usage计费与fetch receipt复核责任集 **38 passed**。跨仓E2E使用真实CWP预算服务 + StockInfo CLI/client，仅HTTP响应被测试桩替代、不访问外网或生产目录；发现1个候选，PDF为399 B，discovery+PDF总计713 B，与provider上报及CWP扣费精确一致；临时root已回收。
+- CWP生产配置仍是 `stockinfo-cninfo` 1.1.0 且没有 `supports_acquisition_budget` 声明；能力默认false。因此当前生产严格限额路径仍fail closed。只有provider分支进入其owner集成工作树后，才能将CWP配置切到1.2.0并明确启用，随后完成FF正式入口E2E。Dayu未改，继续拒绝无法真正施加硬下载上限的请求。
+- 本轮一次补跑在 `company-wiki/.t-cninfo-provider-final` 生成的模拟文件/测试staging已按目录内均为本轮pytest fixture确认后删除；CWP 38项回归的basetemp hook将测试根重定位到`%TEMP%`且自动cleanup失败，实测仅18个测试fixture、987,840 B后按精确路径手动删除。两处测试根均确认不存在；真实原件、生产DB、source catalog和provider原工作树未变。
+- 继续复核发现计量边界缺陷：provider失败回执在deadline刚过时才到达，旧`consume_response_bytes/cost`先执行`ensure_open`，导致已发生响应流量/费用未记入CWP budget。先加入两项测试，旧逻辑均RED；修改为`ensure_open`只阻止后续请求，usage消费方法始终记录已报告用量、仍独立执行字节/费用上限。最终六文件责任集 **41 passed / 14.83s**，Ruff与diff check通过；短basetemp `.t-bud`经finally清除。

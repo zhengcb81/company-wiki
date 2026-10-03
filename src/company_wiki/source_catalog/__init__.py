@@ -45,6 +45,7 @@ from .acquisition import (
     DownloadReceipt,
     MarketRoutingError,
 )
+from .download_budget import AcquisitionBudget, AcquisitionBudgetExceeded
 from .canonical_writer import (
     CANONICAL_IMPORT_SCHEMA_VERSION,
     CanonicalImportError,
@@ -148,6 +149,8 @@ __all__ = [
     "ACQUISITION_JOURNAL_SCHEMA_VERSION",
     "ACQUISITION_OUTCOMES",
     "AcquisitionCoordinator",
+    "AcquisitionBudget",
+    "AcquisitionBudgetExceeded",
     "AcquisitionConfig",
     "AcquisitionConfigError",
     "AcquisitionError",

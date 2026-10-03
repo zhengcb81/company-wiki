@@ -149,12 +149,100 @@ adapters:
     )
 
     assert registry.cn.name == "cn-adapter"
+    assert registry.cn.supports_acquisition_budget is False
     assert registry.hk.name == "hk-adapter"
     assert registry.us.name == "us-adapter"
     assert registry.hk.__class__.__name__ == "DayuCliDownloadAdapter"
     assert registry.us.__class__.__name__ == "DayuCliDownloadAdapter"
     assert config.staging_root == project / ".source_catalog" / "staging"
     assert args.allow_download is False
+
+
+def test_ensure_cli_requires_complete_budget_for_provider_access():
+    from company_wiki.source_catalog.cli import (
+        _acquisition_budget_from_args,
+        _parser,
+    )
+
+    args = _parser().parse_args(
+        [
+            "ensure",
+            "--entity",
+            "示例公司",
+            "--document-kind",
+            "annual_report",
+            "--as-of-date",
+            "2026-07-18",
+            "--allow-download",
+            "--max-download-bytes",
+            "1048576",
+            "--max-download-seconds",
+            "25",
+            "--max-download-cost-usd",
+            "0.00",
+        ]
+    )
+    budget = _acquisition_budget_from_args(args, required=True)
+
+    assert budget.max_response_bytes == 1_048_576
+    assert budget.max_cost_usd == 0
+    assert 0 < budget.remaining_seconds <= 25
+
+
+def test_ensure_cli_rejects_partial_or_missing_download_budgets():
+    import pytest
+
+    from company_wiki.source_catalog.cli import (
+        _acquisition_budget_from_args,
+        _parser,
+    )
+
+    base = [
+        "ensure",
+        "--entity",
+        "示例公司",
+        "--document-kind",
+        "annual_report",
+        "--as-of-date",
+        "2026-07-18",
+    ]
+    partial = _parser().parse_args(
+        [*base, "--max-download-bytes", "1024"]
+    )
+    with pytest.raises(ValueError, match="supplied together"):
+        _acquisition_budget_from_args(partial, required=False)
+
+    missing = _parser().parse_args(base)
+    with pytest.raises(ValueError, match="requires --max-download-bytes"):
+        _acquisition_budget_from_args(missing, required=True)
+
+
+def test_close_gap_cli_accepts_download_budget_flags():
+    from company_wiki.source_catalog.cli import _parser
+
+    args = _parser().parse_args(
+        [
+            "close-gap",
+            "--entity",
+            "示例公司",
+            "--binding-file",
+            "binding.json",
+            "--document-kind",
+            "annual_report",
+            "--as-of-date",
+            "2026-07-18",
+            "--max-download-bytes",
+            "1024",
+            "--max-download-seconds",
+            "15",
+            "--max-download-cost-usd",
+            "0.00",
+        ]
+    )
+
+    assert args.max_download_bytes == 1024
+    assert args.max_download_seconds == 15
+    assert args.max_download_cost_usd == "0.00"
 
 
 # ---------------------------------------------------------------------------

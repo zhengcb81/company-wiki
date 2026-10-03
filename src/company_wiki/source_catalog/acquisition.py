@@ -12,6 +12,7 @@ import re
 from typing import Any, Protocol, runtime_checkable
 
 from .authorization import DownloadAuthorization
+from .download_budget import AcquisitionBudget
 from .gap_plan import GapPlan, build_gap_plan
 from .resolver import (
     ResolutionResult,
@@ -321,7 +322,10 @@ class AcquisitionCoordinator:
         request: SourceRequest,
         *,
         authorization: DownloadAuthorization | None = None,
+        budget: AcquisitionBudget | None = None,
     ) -> AcquisitionResult:
+        if budget is not None and not isinstance(budget, AcquisitionBudget):
+            raise TypeError("budget must be AcquisitionBudget")
         resolution = SourceResolver(self.catalog).resolve(request)
         if resolution.status in {
             ResolutionStatus.REUSED_EXACT,
@@ -358,7 +362,7 @@ class AcquisitionCoordinator:
             # plan first — even when download is allowed, fetching must be
             # plan-driven and authorization-bound (WU-4.3). Nothing is
             # downloaded here.
-            return self._gap_plan_result(request, resolution)
+            return self._gap_plan_result(request, resolution, budget=budget)
         if not request.allow_download:
             return AcquisitionResult(
                 schema_version=ACQUISITION_SCHEMA_VERSION,
@@ -369,7 +373,12 @@ class AcquisitionCoordinator:
         if request.market is None:
             raise MarketRoutingError("market is required before adapter discovery")
         adapter = self.adapters.for_market(request.market)
-        candidates = tuple(adapter.discover(request))
+        if budget is None:
+            candidates = tuple(adapter.discover(request))
+        else:
+            self._require_bounded_adapter(adapter)
+            budget.ensure_open()
+            candidates = tuple(adapter.discover_bounded(request, budget))
         for candidate in candidates:
             if not isinstance(candidate, DownloadCandidate):
                 raise AcquisitionError("adapter returned a non-DownloadCandidate value")
@@ -450,7 +459,24 @@ class AcquisitionCoordinator:
                 raise AcquisitionError(f"download not authorized: {error}")
         request_directory = self.staging_root / request.request_id.rsplit(":", 1)[-1]
         request_directory.mkdir(parents=True, exist_ok=True)
-        receipt = adapter.fetch(candidate, request_directory)
+        if budget is None:
+            receipt = adapter.fetch(candidate, request_directory)
+        else:
+            budget.ensure_open()
+            bytes_before_fetch = budget.response_bytes_used
+            receipt = adapter.fetch_bounded(candidate, request_directory, budget)
+            budget.ensure_open()
+            bytes_charged_during_fetch = (
+                budget.response_bytes_used - bytes_before_fetch
+            )
+            if receipt.byte_size > bytes_charged_during_fetch:
+                raise AcquisitionError(
+                    "bounded adapter did not charge the staged response bytes"
+                )
+            if receipt.byte_size > budget.max_response_bytes - bytes_before_fetch:
+                raise AcquisitionError(
+                    "staged response exceeds remaining acquisition byte budget"
+                )
         self._validate_receipt(candidate, receipt, request_directory)
         return AcquisitionResult(
             schema_version=ACQUISITION_SCHEMA_VERSION,
@@ -463,7 +489,11 @@ class AcquisitionCoordinator:
         )
 
     def _gap_plan_result(
-        self, request: SourceRequest, resolution: ResolutionResult
+        self,
+        request: SourceRequest,
+        resolution: ResolutionResult,
+        *,
+        budget: AcquisitionBudget | None = None,
     ) -> AcquisitionResult:
         """WU-4.2: metadata-only discovery for latest_as_of — discover remote
         metadata (never fetch), align with local reusable handles, and return
@@ -500,7 +530,22 @@ class AcquisitionCoordinator:
         )
         provider_error: str | None = None
         try:
-            discovered = tuple(adapter.discover(discovery_request))
+            if budget is None:
+                discovered = tuple(adapter.discover(discovery_request))
+            else:
+                if not callable(getattr(adapter, "discover_bounded", None)):
+                    raise AcquisitionError(
+                        f"adapter {adapter.name} does not support bounded acquisition"
+                    )
+                if not getattr(adapter, "supports_acquisition_budget", False):
+                    raise AcquisitionError(
+                        f"adapter {adapter.name} does not support bounded acquisition"
+                    )
+                budget.ensure_open()
+                discovered = tuple(
+                    adapter.discover_bounded(discovery_request, budget)
+                )
+                budget.ensure_open()
         except Exception as exc:  # offline / rate-limit / adapter failure
             provider_error = f"{type(exc).__name__}: {exc}"
             discovered = ()
@@ -526,6 +571,15 @@ class AcquisitionCoordinator:
                 else "metadata_only_gap_plan_provider_unavailable"
             ),
         )
+
+    @staticmethod
+    def _require_bounded_adapter(adapter: Any) -> None:
+        if not callable(getattr(adapter, "discover_bounded", None)) or not callable(
+            getattr(adapter, "fetch_bounded", None)
+        ) or not getattr(adapter, "supports_acquisition_budget", False):
+            raise AcquisitionError(
+                f"adapter {adapter.name} does not support bounded acquisition"
+            )
 
     @staticmethod
     def _validate_receipt(

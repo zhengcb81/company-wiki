@@ -193,6 +193,65 @@ def test_dayu_cli_failure_removes_isolated_workspace(
     assert list(workspace_parent.glob("dayu-*")) == []
 
 
+def test_bounded_acquisition_rejects_dayu_before_starting_external_cli(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+):
+    """Dayu's current CLI cannot enforce response-byte budgets, so bounded
+    requests must fail before the external process performs network I/O."""
+    from decimal import Decimal
+    import time
+
+    from company_wiki.source_catalog import (
+        AcquisitionBudget,
+        AcquisitionCoordinator,
+        AcquisitionError,
+        AdapterRegistry,
+        CatalogConfig,
+        RootSpec,
+        SourceCatalog,
+        SourceRequest,
+    )
+
+    project = tmp_path / "project"
+    companies = project / "companies"
+    companies.mkdir(parents=True)
+    catalog = SourceCatalog(
+        CatalogConfig(
+            project_root=project,
+            catalog_dir=project / ".source_catalog",
+            roots=(RootSpec("company_raw", companies, "company_raw", priority=10),),
+        )
+    )
+    catalog.scan()
+    adapter, record, _workspace_parent = _adapter(tmp_path, monkeypatch, market="HK")
+    coordinator = AcquisitionCoordinator(
+        catalog=catalog,
+        adapters=AdapterRegistry(cn=adapter, hk=adapter, us=adapter),
+        staging_root=tmp_path / "staging",
+    )
+    request = SourceRequest(
+        entity="示例公司",
+        market="HK",
+        security_id="0700",
+        document_kind="annual_report",
+        fiscal_year=2025,
+        as_of_date="2026-07-18",
+        allow_download=True,
+    )
+    budget = AcquisitionBudget(
+        max_response_bytes=1024,
+        deadline_monotonic=time.monotonic() + 30,
+        max_cost_usd=Decimal("0.00"),
+    )
+
+    with pytest.raises(AcquisitionError, match="bounded acquisition"):
+        coordinator.resolve_or_stage(request, budget=budget)
+
+    assert not record.exists(), "unsupported bounded request must not launch Dayu"
+    assert not (tmp_path / "staging").exists()
+
+
 def test_acquisition_config_builds_dayu_cli_adapters_without_dayu_private_module(
     tmp_path: Path,
 ):

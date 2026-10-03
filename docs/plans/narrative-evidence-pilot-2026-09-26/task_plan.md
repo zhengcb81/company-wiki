@@ -11,7 +11,7 @@
 ## 当前基线
 
 - CWP mainline: commits `d2250b7` (run/generation ownership) and `54db2a2` (SQLite migration fixture close) are pushed. The 54db2a2 remote CI status could not be read in this session. On 2026-10-03 the old Worker public execution surface was retired: bulk `normalize/summarize/run`, worker launch/start/resume/pause and startup installation commands plus PS/VBS/menu/pilot launchers are gone. `worker-status`, identity-checked `worker-stop`, startup status/removal, scan/query/export and explicit `ensure`/`close-gap` remain. A read-only production check found desired state paused, runtime stopped, no matching worker/supervisor process and no installed startup task; no catalog/raw/config data was changed.
-- RF `rf-impl` 当前 `main/origin/main@6fb2def7`，N3a narrative consumer 已并入；最近两提交修复 POSIX pipe deadline/reader descendants。4个旧 execution evidence 文件有本地行尾差异，保留不动；`Projects\revenue-forecast@fcap/5319ee26` 仍为另一工作树。FF-S3 已提交并推送至 `origin/codex/ff-s3-single-request-limits@8f17cbd`；责任回归和快门禁通过，尚未合 FF main，原因是 CWP 生产 provider 尚无真实 bounded transport，且 v1/latest_as_of 额度语义待汇合。ET-S3 已并入 earnings-transcripts main，合并提交 `93fe52c`；同步阻塞 HTTP 与翻译预算仍不构成硬总时限承诺。SPACE-S5 只读审计已交付，机器/文字报告及 15 项工具测试通过；清理仍归主线。StockWiki/IQS/RF dirty 工作树继续保持 owner 隔离。
+- RF `rf-impl` 当前 `main/origin/main@6fb2def7`，N3a narrative consumer 已并入；最近两提交修复 POSIX pipe deadline/reader descendants。4个旧 execution evidence 文件有本地行尾差异，保留不动；`Projects\revenue-forecast@fcap/5319ee26` 仍为另一工作树。FF-S3 已提交并推送至 `origin/codex/ff-s3-single-request-limits@8f17cbd`；CWP bounded JSON桥接、CNINFO provider隔离实现及跨进程E2E已完成，但StockInfo分支尚未合入当前配置所指的工作树（配置仍为1.1.0且能力默认关闭），因此生产限额仍fail closed；v1/latest_as_of额度语义仍待汇合。ET-S3 已并入 earnings-transcripts main，合并提交 `93fe52c`；同步阻塞 HTTP 与翻译预算仍不构成硬总时限承诺。SPACE-S5 只读审计已交付，机器/文字报告及 15 项工具测试通过；清理仍归主线。StockWiki/IQS/RF dirty 工作树继续保持 owner 隔离。
 - 最新完整空间32,821,613,206B/32.82GB，公司原件25.20GB，current DB3.06GB、旧derived/index约2.87GB。已释放13.06GB不再重复计收益；原件不进入清理候选。
 - 真实代码CI约56–62秒，单Python/全Unit/精选回归；不恢复全Contract/coverage日常门。
 
@@ -22,8 +22,8 @@
 | S0 简化收口 | complete（ff5396c，CI绿） | PWF只留当前入口；删除R1旁路签收/shadow/gold；commit移除pytest、config doctor按相关文件触发 | 一次相关Unit/混合行为回归与正常发布；不逐文件签收 |
 | S1 N4A | complete（ff5396c，CI绿） | scope贯通Store/Worker/Supervisor/outbox/prepared，None兼容、空scope零修改、范围SQL先于LIMIT | N4节点A，确定性RED先行 |
 | S2 N4B | in_progress (budget/factory/batch/recovery and public legacy Worker retirement implemented; capacity and real-sample acceptance remain in the later N4C node) | real factory/HTTP adapter/full prompt; persistent token/cost reservation in AUTO; finite batch CLI; unique final artifact and small recovery receipt; public legacy whole-catalog Worker and startup routes removed | node A accounting/concurrency green; node B formal CLI/HTTP/kill/ACK and focused regression green; CWP producer-limit design must first close verified provider transport gaps, then N4C |
-| S3 来源与采集默认收敛 | in_progress（英文召回子项绿；FF-S3 branch delivered，ET-S3 merged，CWP producer limits pending） | R2/R6：一请求、薄v1适配、相关字段fingerprint、缺元数据partial、published-asof；FF执行limits/ET旧入口一致；安装技能示例同步 | root先让CWP limits在真实 provider egress 路径生效，定清 v1 / latest_as_of 预算语义，再做跨仓接口节点与 FF 合并 |
-| S4 N4C real samples and storage plan | pending | four real document types / consumer reads / language and citation coverage / total incremental bytes; retain only status/stop/uninstall compatibility for old worker process cleanup | node C; start with a bounded batch, then use measured 1/2/4 parallelism |
+| S3 来源与采集默认收敛 | in_progress（英文召回子项绿；FF-S3 branch delivered，ET-S3 merged；RF G-C pathless consumer 已由 main + 跨仓E2E确认；CWP bounded bridge/provider已实现并E2E验证，provider尚未进入配置工作树、生产能力仍关闭） | R2/R6：一请求、薄v1适配、相关字段fingerprint、缺元数据partial、published-asof；FF执行limits/ET旧入口一致；安装技能示例同步 | 将已测试StockInfo provider能力并入其集成工作树；更新CWP provider版本/能力声明并以正式FF请求跑跨仓E2E；定清 v1 / latest_as_of 预算语义后再合FF |
+| S4 N4C real samples and storage plan | pending（G-C 证明了 RF 年报/TXT 来源消费，不等于 Worker 多文档批次） | four real document types / consumer reads / language and citation coverage / total incremental bytes; retain only status/stop/uninstall compatibility for old worker process cleanup | node C; bounded real batch, then measured 1/2/4 parallelism；至少覆盖年报、招股/再融资、IR和电话会/季度类中的四种，记录摘要证据定位和新增空间 |
 | S5 B2逐caller清理 | pending（SPACE-S5只读审计已交付） | 审计确认约138.6 MB无代码调用者集合可列入首批候选；2.826 GB `derived/` 仍有 reader 与 8,191 条 artifact 路径引用，必须先迁移；报告不是删除清单 | 主线复核当前调用者/生产文件状态后分集合处理；每批验证原件与来源事实保留并测实际释放量 |
 | S6 DB事实收缩与收尾 | pending | 表级盘点，删除不可再消费派生/废索引并收缩，来源版本/撤回事实保留；旁路兼容、docs/hook残留清完 | 同一存储节点；commit/push、PWF收尾 |
 | 可选 exact-SHA原件对象去重 | 不阻S0–S6完成 | 先用已有SHA/size找候选、逐候选验字节，保留所有source/location版本事实 | 有真实收益才实施；不报未测节省量 |
@@ -76,7 +76,17 @@ TDD框住公开行为，不把旧签收规则写进新测试。仅S0相关收口
 
 ## Next Step
 
-旧 Worker 的公开执行与启动链已退役，生产无残留进程/登录任务。CWP producer-budget WIP 已增加额度模型、CLI 参数、失败关闭检查和回执字节二次校验；5 文件定向组 35 项通过，仍未提交，且尚未证明生产 provider 的实际响应流受硬限额约束。新 RED 反例发现回执字节只与总 cap 比较会漏掉 discovery 已消耗额度；现要求下载期间计入的字节至少覆盖 staged receipt。`JsonCommandAdapter` 与 Dayu CLI adapter 均被测试证明在 provider 进程启动前 fail closed；CNINFO 实际 HTTP 子适配器仍需升级。StockInfo 当前原工作树 24 个 tracked 文件修改并带额外未跟踪文件，不能直接写；需要在不覆盖 owner 工作的隔离快照上接通 fetch/discovery 逐块限额。Dayu 是纯外部项目，禁止改代码，且当前 SEC HTTP/CLI 下载会整段物化，CWP 对不支持硬限额的 provider 必须在外发前拒绝。与此同时确定 v1 `--allow-download` 的额度承载，以及 `latest_as_of` 本地复用与实际 provider 探测何时要求额度。完成后再跑 FF/CWP 正式限额 CLI E2E、合入 FF-S3；ET 已并入，但其同步 HTTP deadline 与显式翻译预算仍需按真实语义处理。随后进入 N4C 小批和 SPACE-S5 的分集合清理。
+旧 Worker 的公开执行与启动链已退役，生产无残留进程/登录任务。CWP producer-budget WIP 包含额度模型、CLI参数、失败关闭检查、回执二次校验及bounded JSON进程桥接；发现并修复deadline之后未记录provider已实际消耗usage的缺陷，TDD两项RED/GREEN，最终六文件集中回归 **41 passed / 14.83s**。跨仓模拟HTTP E2E发现1个候选、PDF 399 B、发现+下载计费713 B且精确吻合。StockInfo隔离分支 `codex/cninfo-bounded-budget@947e839`（父提交 `1693045`）已实现流式CNINFO discovery/PDF限额；当前CWP配置仍指向原 `v2-clean-rewrite` 并配置 provider 1.1.0、未声明能力，因此按默认false保持fail closed。StockInfo分支focused test先前61 passed；本轮补跑51项到达100%但pytest未输出终结摘要，进程挂在退出阶段后被中断，不计作完整新绿。FF-S3 `_command_arguments()` 已把同一请求的bytes/seconds/cost传入ensure/close-gap，`_shared_deadline()`统一全请求时限；Dayu保持不改且不支持硬限额。StockInfo分支尚需进入owner集成工作树、CWP配置显式切至1.2.0并经过正式FF跨仓E2E，之后才可合FF-S3。
+
+### S3 bounded provider transport：固定桥接合同
+
+- 唯一先实现的生产 transport 是 CNINFO。StockInfo 原工作区在实施前有24个tracked修改和未跟踪CNINFO adapter/client/test；不得直接编辑。已基于 `1693045` 建立隔离分支 `codex/cninfo-bounded-budget`，commit `947e839`（13个精确相关文件），实现provider-local预算和CNINFO discovery/PDF流式读取；原工作区保持不变。该分支已推送（最新会话网络不可达，未能再次远端核验）；仓库未发现Actions workflow。Dayu 是纯外部项目，代码不改；HK/US 遇到硬下载 cap 继续外发前拒绝。
+- CWP `JsonCommandAdapter` 增加 `discover_bounded` / `fetch_bounded`。子进程 JSON 请求附加 `acquisition_budget`：恰含 `schema_version="1.0"`、`max_response_bytes`（本阶段剩余额度）、`timeout_seconds`（单调 deadline 剩余秒）、`max_cost_usd`（十进制字符串）。CWP subprocess timeout 取配置 timeout 与同一剩余秒数的较小值。
+- 支持 bounded 的 provider 对每个 discovery JSON / PDF HTTP响应按块读取；检查本阶段 deadline，并在接纳每块前拒绝超过 `max_response_bytes` 的响应。成功 JSON 必须包含 `acquisition_usage`，恰含 `schema_version="1.0"`、`response_bytes`、`cost_usd`；CWP 校验形状后把两项记入共享 `AcquisitionBudget`。漏报、额外字段、非法数、超预算、进程超时一律失败；fetch回执大小还须由 CWP 独立复核。
+- 一个 `AcquisitionBudget` 对象贯穿 ensure/close-gap 锁外及锁内 metadata discovery、CNINFO分页、fetch与staging，不因子进程/分页重置；未知失败不重试已部分消费的预算。CNINFO当前收费为零，由provider明确报告 `"0"`，不将“没有成本数据”伪报为零。provider CLI 无预算的 legacy调用保持既有合同。
+- TDD 大节点：CWP 命令适配器进程测试证明预算被传递、真实elapsed timeout、usage缺失/少报/超额失败；StockInfo 测试用分块假响应覆盖 discovery 与 PDF cap边界、deadline、cleanup `.part`；正式短根跨进程 E2E 从 CWP budgeted `ensure` 到 StockInfo JSON CLI，确认发现+下载共享总字节、精确SHA/回执、第二次失败时不留part/staging且没有第三方/生产文件变化。Dayu负例确认子进程 marker不存在。集中责任包通过后才启用CN bounded能力并与FF-S3运行正式E2E/汇合。
+
+CNINFO provider transport已完成代码与模拟HTTP跨仓E2E，但尚未集成进当前CWP配置工作树。不能仅因配置切换就开放能力：先将StockInfo隔离分支纳入provider owner集成线，再把CWP配置版本改为1.2.0并显式声明supports_acquisition_budget，执行FF正式入口E2E；预算、latest_as_of复用和legacy v1请求语义也要一并验证。Dayu不支持的硬限额请求继续在外发前拒绝。CWP producer-budget改动仍为未提交WIP，最终集中测试41项通过；PWF整理后作为一个完整阶段提交。
 
 ## S2 当前交接与下一集中节点
 

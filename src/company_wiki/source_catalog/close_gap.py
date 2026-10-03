@@ -39,6 +39,7 @@ from typing import Any
 from .acquisition import AcquisitionStatus
 from .acquisition_journal import AcquisitionJournal
 from .authorization import build_download_authorization
+from .download_budget import AcquisitionBudget
 from .canonical_writer import CanonicalSourceWriter
 from .resolver import (
     SourceRequest,
@@ -175,11 +176,17 @@ class CloseGapTransaction:
         self,
         binding: CloseGapBinding,
         request: SourceRequest,
+        *,
+        budget: AcquisitionBudget | None = None,
     ) -> CloseGapResult:
         if not isinstance(binding, CloseGapBinding):
             raise TypeError("binding must be a CloseGapBinding")
         if not isinstance(request, SourceRequest):
             raise TypeError("request must be a SourceRequest")
+        if budget is not None and not isinstance(budget, AcquisitionBudget):
+            raise TypeError("budget must be AcquisitionBudget")
+        if budget is not None and budget.max_response_bytes > binding.max_bytes:
+            raise ValueError("budget byte ceiling exceeds close-gap binding")
         txn = _txn_id(binding)
 
         def _fail(
@@ -226,8 +233,7 @@ class CloseGapTransaction:
             return _reject("stale_policy_hash")
 
         # Step 2: gap revalidation (DL-03) — metadata only, nothing fetched.
-        rediscovered = self.coordinator.resolve_or_stage(
-            SourceRequest(
+        rediscovery_request = SourceRequest(
                 entity=request.entity,
                 market=request.market,
                 security_id=request.security_id,
@@ -241,10 +247,15 @@ class CloseGapTransaction:
                 as_of_date=request.as_of_date,
                 mode="latest_as_of",
             )
+        rediscovery_options = {"budget": budget} if budget is not None else {}
+        rediscovered = self.coordinator.resolve_or_stage(
+            rediscovery_request, **rediscovery_options
         )
         if rediscovered.status is not AcquisitionStatus.GAP:
             return _reject(f"gap_revalidated_status:{rediscovered.status.value}")
         current_plan = rediscovered.gap_plan
+        if getattr(current_plan, "provider_unavailable", False):
+            return _reject("provider_unavailable_during_gap_revalidation")
         actionable = _actionable_candidates(current_plan)
         if not actionable:
             # The gap is already closed (local is latest): complete as
@@ -309,6 +320,7 @@ class CloseGapTransaction:
                     txn,
                     binding,
                     missing_candidate,
+                    budget,
                 )
         except CatalogOperationLockedError as exc:
             return _fail(
@@ -331,6 +343,7 @@ class CloseGapTransaction:
         txn: str,
         binding,
         missing_candidate,
+        budget,
     ) -> CloseGapResult:
         def _fail(reason, *, error=None, error_type=None):
             self.journal.record(
@@ -353,8 +366,7 @@ class CloseGapTransaction:
 
         # Re-check the gap INSIDE the lock (FC-804 DL-08): the first caller
         # may have closed it while we waited.
-        rediscovered = self.coordinator.resolve_or_stage(
-            SourceRequest(
+        rediscovery_request = SourceRequest(
                 entity=request.entity,
                 market=request.market,
                 security_id=request.security_id,
@@ -368,9 +380,16 @@ class CloseGapTransaction:
                 as_of_date=request.as_of_date,
                 mode="latest_as_of",
             )
+        rediscovery_options = {"budget": budget} if budget is not None else {}
+        rediscovered = self.coordinator.resolve_or_stage(
+            rediscovery_request, **rediscovery_options
         )
         if rediscovered.status is AcquisitionStatus.GAP:
             current = rediscovered.gap_plan
+            if getattr(current, "provider_unavailable", False):
+                return _reject_result(
+                    txn, "provider_unavailable_during_gap_revalidation"
+                )
             if not _actionable_candidates(current):
                 # single-flight win: the other caller downloaded it
                 return self._complete_reused(
@@ -385,15 +404,20 @@ class CloseGapTransaction:
         while True:
             attempts += 1
             try:
+                staging_options = {"authorization": authorization}
+                if budget is not None:
+                    staging_options["budget"] = budget
                 staged = self.coordinator.resolve_or_stage(
-                    staged_request, authorization=authorization
+                    staged_request, **staging_options
                 )
                 break
             except Exception as exc:
                 if str(exc).startswith("download not authorized"):
                     # DL-02: authorization failures are REJECTIONS.
                     return _reject_result(txn, str(exc))
-                retryable = _is_retryable_staging_error(exc)
+                # An interrupted bounded call may already have consumed bytes
+                # or cost. Never retry with a partially spent operation budget.
+                retryable = budget is None and _is_retryable_staging_error(exc)
                 if attempts >= 3 or not retryable:
                     # DL-07 / LT-10: never committed, staging cleaned.  The
                     # staging dir is named by the STAGING request's id.

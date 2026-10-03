@@ -343,6 +343,71 @@ def test_cg07_success_downloaded_new_envelope(tmp_path):
         ResolutionStatus.REUSED_EQUIVALENT.value)
 
 
+def test_close_gap_reuses_one_budget_across_revalidation_and_fetch(tmp_path):
+    from decimal import Decimal
+    import time
+
+    from company_wiki.source_catalog import AcquisitionBudget
+
+    class _BudgetedAdapter(_FakeAdapter):
+        supports_acquisition_budget = True
+
+        def __init__(self):
+            super().__init__()
+            self.seen_budgets = []
+
+        def discover_bounded(self, request, budget):
+            self.seen_budgets.append(budget)
+            budget.consume_response_bytes(1)
+            return self.discover(request)
+
+        def fetch_bounded(self, candidate, staging_dir, budget):
+            self.seen_budgets.append(budget)
+            budget.consume_response_bytes(len(b"%PDF-2025"))
+            return self.fetch(candidate, staging_dir)
+
+    catalog = _catalog(tmp_path)
+    _policy_file(catalog, "a" * 64)
+    adapter = _BudgetedAdapter()
+    gap_hash, _ = _current_gap_hash(catalog, adapter)
+    txn = _txn(tmp_path, adapter, catalog)
+    budget = AcquisitionBudget(
+        max_response_bytes=64,
+        deadline_monotonic=time.monotonic() + 30,
+        max_cost_usd=Decimal("0.00"),
+    )
+
+    result = txn.execute(
+        _binding(gap_hash, policy_hash="a" * 64, request_id=_request().request_id),
+        _request(),
+        budget=budget,
+    )
+
+    assert result.status == "completed"
+    assert len(adapter.seen_budgets) == 4
+    assert all(seen is budget for seen in adapter.seen_budgets)
+    assert budget.response_bytes_used == 3 + len(b"%PDF-2025")
+
+
+def test_provider_unavailable_is_not_reported_as_gap_closed(tmp_path):
+    class _UnavailableAdapter(_FakeAdapter):
+        def discover(self, request):
+            raise RuntimeError("provider is offline")
+
+    catalog = _catalog(tmp_path)
+    _policy_file(catalog, "a" * 64)
+    txn = _txn(tmp_path, _UnavailableAdapter(), catalog)
+
+    result = txn.execute(
+        _binding("unused", policy_hash="a" * 64, request_id=_request().request_id),
+        _request(),
+    )
+
+    assert result.status == "rejected"
+    assert result.reason == "provider_unavailable_during_gap_revalidation"
+    assert result.fetch_events == 0
+
+
 def test_zr407_newer_revision_is_actionable_authorized_candidate(tmp_path):
     """ZR-407: a same-period amendment is an actionable gap, not an
     already-closed plan.  The transaction must stage exactly that candidate

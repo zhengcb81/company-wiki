@@ -187,6 +187,166 @@ def test_missing_hk_source_routes_to_adapter_and_only_writes_request_staging(tmp
     assert not list(catalog.config.project_root.rglob("*.pdf"))
 
 
+def test_bounded_adapter_consumes_one_budget_for_discovery_and_fetch(tmp_path):
+    from decimal import Decimal
+    import time
+
+    from company_wiki.source_catalog import (
+        AcquisitionBudget,
+        AcquisitionCoordinator,
+        AcquisitionStatus,
+        AdapterRegistry,
+        SourceRequest,
+    )
+
+    class _BudgetedFakeAdapter(_FakeAdapter):
+        supports_acquisition_budget = True
+
+        def discover_bounded(self, request, budget):
+            budget.consume_response_bytes(8)
+            return self.discover(request)
+
+        def fetch_bounded(self, candidate, staging_dir, budget):
+            payload = b"%PDF-1.7\nsource bytes"
+            budget.consume_response_bytes(len(payload))
+            return self.fetch(candidate, staging_dir)
+
+    catalog = _catalog(tmp_path, with_source=False)
+    adapter = _BudgetedFakeAdapter()
+    coordinator = AcquisitionCoordinator(
+        catalog=catalog,
+        adapters=AdapterRegistry(cn=_ExplodingAdapter(), hk=adapter, us=_ExplodingAdapter()),
+        staging_root=tmp_path / "staging",
+    )
+    budget = AcquisitionBudget(
+        max_response_bytes=64,
+        deadline_monotonic=time.monotonic() + 30,
+        max_cost_usd=Decimal("0.00"),
+    )
+
+    result = coordinator.resolve_or_stage(
+        SourceRequest(
+            entity="ACME",
+            market="HK",
+            document_kind="annual_report",
+            fiscal_year=2025,
+            as_of_date="2026-07-18",
+            allow_download=True,
+        ),
+        budget=budget,
+    )
+
+    assert result.status is AcquisitionStatus.STAGED
+    assert budget.response_bytes_used == 8 + len(b"%PDF-1.7\nsource bytes")
+
+
+def test_bounded_receipt_must_be_charged_against_remaining_budget(tmp_path):
+    from decimal import Decimal
+    import time
+
+    from company_wiki.source_catalog import (
+        AcquisitionBudget,
+        AcquisitionCoordinator,
+        AcquisitionError,
+        AdapterRegistry,
+        SourceRequest,
+    )
+
+    class _UnderreportingAdapter(_FakeAdapter):
+        supports_acquisition_budget = True
+
+        def discover_bounded(self, request, budget):
+            budget.consume_response_bytes(20)
+            return self.discover(request)
+
+        def fetch_bounded(self, candidate, staging_dir, budget):
+            # Simulate an adapter that produced a real staged file but forgot
+            # to charge the response body it read from its provider.
+            return self.fetch(candidate, staging_dir)
+
+    catalog = _catalog(tmp_path, with_source=False)
+    adapter = _UnderreportingAdapter()
+    coordinator = AcquisitionCoordinator(
+        catalog=catalog,
+        adapters=AdapterRegistry(cn=_ExplodingAdapter(), hk=adapter, us=_ExplodingAdapter()),
+        staging_root=tmp_path / "staging",
+    )
+    budget = AcquisitionBudget(
+        max_response_bytes=30,
+        deadline_monotonic=time.monotonic() + 30,
+        max_cost_usd=Decimal("0.00"),
+    )
+
+    with pytest.raises(AcquisitionError, match="did not charge"):
+        coordinator.resolve_or_stage(
+            SourceRequest(
+                entity="ACME",
+                market="HK",
+                document_kind="annual_report",
+                fiscal_year=2025,
+                as_of_date="2026-07-18",
+                allow_download=True,
+            ),
+            budget=budget,
+        )
+
+
+def test_unbounded_json_command_adapter_is_rejected_before_process_launch(tmp_path):
+    from decimal import Decimal
+    import sys
+    import time
+
+    from company_wiki.source_catalog import (
+        AcquisitionBudget,
+        AcquisitionCoordinator,
+        AcquisitionError,
+        AdapterRegistry,
+        JsonCommandAdapter,
+        SourceRequest,
+    )
+
+    marker = tmp_path / "provider_process_started"
+    command = (
+        sys.executable,
+        "-c",
+        "from pathlib import Path; import sys; Path(sys.argv[1]).touch()",
+        str(marker),
+    )
+    adapter = JsonCommandAdapter(
+        name="unbounded-json-provider",
+        version="1.0",
+        command=command,
+        project_root=tmp_path,
+    )
+    coordinator = AcquisitionCoordinator(
+        catalog=_catalog(tmp_path, with_source=False),
+        adapters=AdapterRegistry(
+            cn=adapter, hk=_ExplodingAdapter(), us=_ExplodingAdapter()
+        ),
+        staging_root=tmp_path / "staging",
+    )
+    budget = AcquisitionBudget(
+        max_response_bytes=1024,
+        deadline_monotonic=time.monotonic() + 30,
+        max_cost_usd=Decimal("0.00"),
+    )
+
+    with pytest.raises(AcquisitionError, match="bounded acquisition"):
+        coordinator.resolve_or_stage(
+            SourceRequest(
+                entity="ACME",
+                market="CN",
+                document_kind="annual_report",
+                fiscal_year=2025,
+                as_of_date="2026-07-18",
+                allow_download=True,
+            ),
+            budget=budget,
+        )
+
+    assert not marker.exists(), "unsupported CN adapter launched external work"
+
+
 def test_adapter_receipt_outside_allocated_staging_fails_closed(tmp_path):
     from company_wiki.source_catalog import (
         AcquisitionCoordinator,
@@ -410,3 +570,67 @@ def test_e2e_f02_same_accession_second_request_reuses(tmp_path):
     second = service.ensure(request)
     assert second.status.value in {"reused", "deduplicated", "imported"}, second
     assert adapter.fetch_calls == 1, "second request must not fetch again"
+
+
+def test_source_acquisition_service_passes_budget_to_provider(tmp_path):
+    from decimal import Decimal
+    import time
+
+    from company_wiki.source_catalog import (
+        AcquisitionBudget,
+        AcquisitionCoordinator,
+        AcquisitionJournal,
+        AdapterRegistry,
+        CanonicalSourceWriter,
+        SourceAcquisitionService,
+        SourceRequest,
+    )
+
+    class _BudgetedFakeAdapter(_FakeAdapter):
+        supports_acquisition_budget = True
+
+        def discover_bounded(self, request, budget):
+            budget.consume_response_bytes(8)
+            return self.discover(request)
+
+        def fetch_bounded(self, candidate, staging_dir, budget):
+            payload = b"%PDF-1.7\nsource bytes"
+            budget.consume_response_bytes(len(payload))
+            return self.fetch(candidate, staging_dir)
+
+    catalog = _catalog(tmp_path, with_source=False)
+    adapter = _BudgetedFakeAdapter()
+    staging_root = tmp_path / "staging"
+    journal_dir = tmp_path / "journal"
+    journal_dir.mkdir()
+    service = SourceAcquisitionService(
+        coordinator=AcquisitionCoordinator(
+            catalog=catalog,
+            adapters=AdapterRegistry(
+                cn=_ExplodingAdapter(), hk=adapter, us=_ExplodingAdapter()
+            ),
+            staging_root=staging_root,
+        ),
+        journal=AcquisitionJournal(journal_dir),
+        writer=CanonicalSourceWriter(catalog, staging_root=staging_root),
+    )
+    budget = AcquisitionBudget(
+        max_response_bytes=64,
+        deadline_monotonic=time.monotonic() + 30,
+        max_cost_usd=Decimal("0.00"),
+    )
+
+    result = service.ensure(
+        SourceRequest(
+            entity="ACME",
+            market="HK",
+            document_kind="annual_report",
+            fiscal_year=2025,
+            as_of_date="2026-07-18",
+            allow_download=True,
+        ),
+        budget=budget,
+    )
+
+    assert result.status.value == "imported"
+    assert budget.response_bytes_used == 8 + len(b"%PDF-1.7\nsource bytes")

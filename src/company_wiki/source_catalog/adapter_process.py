@@ -9,6 +9,7 @@ import subprocess
 from typing import Any, Sequence
 
 from .acquisition import DownloadCandidate, DownloadReceipt
+from .download_budget import AcquisitionBudget
 from .resolver import SourceRequest
 from .store import canonical_json
 
@@ -28,6 +29,7 @@ class AdapterProcessError(RuntimeError):
     error_code: str | None = None
     retryable: bool | None = None
     adapter_version: str | None = None
+    acquisition_usage: dict[str, Any] | None = None
 
     def __init__(self, message: str = "") -> None:
         super().__init__(message)
@@ -72,6 +74,7 @@ class JsonCommandAdapter:
         command: Sequence[str],
         project_root: Path,
         timeout_seconds: float = 300.0,
+        supports_acquisition_budget: bool = False,
     ):
         if not isinstance(name, str) or not name.strip():
             raise ValueError("name must be non-empty text")
@@ -86,16 +89,42 @@ class JsonCommandAdapter:
             raise TypeError("project_root must be pathlib.Path")
         if timeout_seconds <= 0:
             raise ValueError("timeout_seconds must be positive")
+        if not isinstance(supports_acquisition_budget, bool):
+            raise TypeError("supports_acquisition_budget must be bool")
         self.name = name
         self.version = version
         self.command = normalized
         self.project_root = project_root.resolve(strict=True)
         self.timeout_seconds = float(timeout_seconds)
+        self.supports_acquisition_budget = supports_acquisition_budget
 
     def discover(self, request: SourceRequest) -> tuple[DownloadCandidate, ...]:
         if not isinstance(request, SourceRequest):
             raise TypeError("request must be SourceRequest")
         response = self._run("discover", request.to_dict())
+        values = response.get("candidates")
+        if not isinstance(values, list):
+            raise AdapterProcessError("discover response candidates must be an array")
+        return tuple(self._candidate(value, request) for value in values)
+
+    def discover_bounded(
+        self, request: SourceRequest, budget: AcquisitionBudget
+    ) -> tuple[DownloadCandidate, ...]:
+        """Run discovery with the caller's remaining shared egress budget."""
+        if not isinstance(request, SourceRequest):
+            raise TypeError("request must be SourceRequest")
+        if not isinstance(budget, AcquisitionBudget):
+            raise TypeError("budget must be AcquisitionBudget")
+        self._ensure_bounded_support()
+        payload, timeout_seconds = self._bounded_request(request.to_dict(), budget)
+        try:
+            response = self._run(
+                "discover", payload, timeout_seconds=timeout_seconds
+            )
+        except AdapterProcessError as exc:
+            self._charge_failure_usage(exc, budget)
+            raise
+        self._charge_bounded_usage(response, budget)
         values = response.get("candidates")
         if not isinstance(values, list):
             raise AdapterProcessError("discover response candidates must be an array")
@@ -122,12 +151,116 @@ class JsonCommandAdapter:
             raise AdapterProcessError("fetch response receipt must be an object")
         return self._receipt(value)
 
+    def fetch_bounded(
+        self,
+        candidate: DownloadCandidate,
+        staging_dir: Path,
+        budget: AcquisitionBudget,
+    ) -> DownloadReceipt:
+        """Fetch through a budget-aware CLI and account its network usage."""
+        if not isinstance(candidate, DownloadCandidate):
+            raise TypeError("candidate must be DownloadCandidate")
+        if not isinstance(staging_dir, Path):
+            raise TypeError("staging_dir must be pathlib.Path")
+        if not isinstance(budget, AcquisitionBudget):
+            raise TypeError("budget must be AcquisitionBudget")
+        self._ensure_bounded_support()
+        staging_dir.mkdir(parents=True, exist_ok=True)
+        allocated = staging_dir.resolve(strict=True)
+        payload, timeout_seconds = self._bounded_request(candidate.to_dict(), budget)
+        bytes_before_fetch = budget.response_bytes_used
+        try:
+            response = self._run(
+                "fetch",
+                payload,
+                extra_args=("--staging-dir", str(allocated)),
+                timeout_seconds=timeout_seconds,
+            )
+        except AdapterProcessError as exc:
+            self._charge_failure_usage(exc, budget)
+            raise
+        self._charge_bounded_usage(response, budget)
+        value = response.get("receipt")
+        if not isinstance(value, dict):
+            raise AdapterProcessError("fetch response receipt must be an object")
+        receipt = self._receipt(value)
+        if receipt.byte_size > budget.response_bytes_used - bytes_before_fetch:
+            raise AdapterProcessError(
+                "bounded adapter charged fewer response bytes than its staged receipt"
+            )
+        return receipt
+
+    def _bounded_request(
+        self, payload: dict[str, Any], budget: AcquisitionBudget
+    ) -> tuple[dict[str, Any], float]:
+        self._ensure_bounded_support()
+        budget.ensure_open()
+        timeout_seconds = min(self.timeout_seconds, budget.remaining_seconds)
+        if timeout_seconds <= 0:
+            budget.ensure_open()
+        bounded = dict(payload)
+        bounded["acquisition_budget"] = {
+            "schema_version": "1.0",
+            "max_response_bytes": budget.remaining_response_bytes,
+            "timeout_seconds": timeout_seconds,
+            "max_cost_usd": str(budget.remaining_cost_usd),
+        }
+        return bounded, timeout_seconds
+
+    def _ensure_bounded_support(self) -> None:
+        if not self.supports_acquisition_budget:
+            raise AdapterProcessError(
+                f"adapter {self.name} does not support bounded acquisition"
+            )
+
+    @staticmethod
+    def _charge_bounded_usage(
+        response: dict[str, Any], budget: AcquisitionBudget
+    ) -> None:
+        usage = response.get("acquisition_usage")
+        if (
+            not isinstance(usage, dict)
+            or set(usage) != {"schema_version", "response_bytes", "cost_usd"}
+            or usage.get("schema_version") != "1.0"
+        ):
+            raise AdapterProcessError(
+                "bounded adapter acquisition_usage is missing or invalid"
+            )
+        response_bytes = usage.get("response_bytes")
+        cost_usd = usage.get("cost_usd")
+        if (
+            isinstance(response_bytes, bool)
+            or not isinstance(response_bytes, int)
+            or response_bytes < 0
+            or not isinstance(cost_usd, str)
+        ):
+            raise AdapterProcessError(
+                "bounded adapter acquisition_usage values are invalid"
+            )
+        budget.consume_response_bytes(response_bytes)
+        try:
+            budget.consume_cost_usd(cost_usd)
+        except (TypeError, ValueError) as exc:
+            raise AdapterProcessError(
+                "bounded adapter reported an invalid acquisition cost"
+            ) from exc
+
+    @classmethod
+    def _charge_failure_usage(
+        cls, exc: AdapterProcessError, budget: AcquisitionBudget
+    ) -> None:
+        if exc.acquisition_usage is not None:
+            cls._charge_bounded_usage(
+                {"acquisition_usage": exc.acquisition_usage}, budget
+            )
+
     def _run(
         self,
         action: str,
         payload: dict[str, Any],
         *,
         extra_args: tuple[str, ...] = (),
+        timeout_seconds: float | None = None,
     ) -> dict[str, Any]:
         command = (*self.command, action, *extra_args)
         environment = dict(os.environ)
@@ -143,7 +276,11 @@ class JsonCommandAdapter:
                 capture_output=True,
                 cwd=self.project_root,
                 env=environment,
-                timeout=self.timeout_seconds,
+                timeout=(
+                    self.timeout_seconds
+                    if timeout_seconds is None
+                    else min(self.timeout_seconds, timeout_seconds)
+                ),
                 check=False,
                 shell=False,
                 creationflags=creationflags,
@@ -172,6 +309,9 @@ class JsonCommandAdapter:
                 retryable_raw = error_obj.get("retryable")
                 if isinstance(retryable_raw, bool):
                     exc.retryable = retryable_raw
+                usage_raw = error_obj.get("acquisition_usage")
+                if isinstance(usage_raw, dict):
+                    exc.acquisition_usage = usage_raw
                 exc.adapter_version = str(adapter_obj["version"])
             else:
                 exc.error_code = "adapter_process_failed"

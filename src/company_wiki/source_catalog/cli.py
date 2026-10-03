@@ -423,6 +423,9 @@ def _parser() -> argparse.ArgumentParser:
         action="store_true",
         help="explicitly permit adapter discovery/fetch when the catalog has no reusable source",
     )
+    ensure.add_argument("--max-download-bytes", type=int)
+    ensure.add_argument("--max-download-seconds", type=float)
+    ensure.add_argument("--max-download-cost-usd")
     ensure.add_argument(
         "--allow-acquisition-while-paused",
         action="store_true",
@@ -454,6 +457,9 @@ def _parser() -> argparse.ArgumentParser:
     close_gap_identity.add_argument("--entity")
     close_gap_identity.add_argument("--company-query")
     close_gap.add_argument("--binding-file", type=Path, required=True)
+    close_gap.add_argument("--max-download-bytes", type=int)
+    close_gap.add_argument("--max-download-seconds", type=float)
+    close_gap.add_argument("--max-download-cost-usd")
     close_gap.add_argument("--document-kind", required=True)
     close_gap.add_argument("--as-of-date", required=True)
     close_gap.add_argument("--market")
@@ -658,6 +664,38 @@ def _read_only_ensure_result(resolution: ResolutionResult) -> dict[str, Any]:
     ).to_dict()
 
 
+def _acquisition_budget_from_args(
+    args: argparse.Namespace,
+    *,
+    required: bool,
+) -> Any:
+    from .download_budget import AcquisitionBudget
+
+    values = (
+        getattr(args, "max_download_bytes", None),
+        getattr(args, "max_download_seconds", None),
+        getattr(args, "max_download_cost_usd", None),
+    )
+    supplied = tuple(value is not None for value in values)
+    if not any(supplied):
+        if required:
+            raise ValueError(
+                "bounded provider access requires --max-download-bytes, "
+                "--max-download-seconds, and --max-download-cost-usd"
+            )
+        return None
+    if not all(supplied):
+        raise ValueError(
+            "the three --max-download-* limits must be supplied together"
+        )
+    max_bytes, max_seconds, max_cost_usd = values
+    return AcquisitionBudget.from_limits(
+        max_response_bytes=max_bytes,
+        max_seconds=max_seconds,
+        max_cost_usd=max_cost_usd,
+    )
+
+
 def _run_ensure_command(
     args: argparse.Namespace,
     config: Any,
@@ -667,6 +705,10 @@ def _run_ensure_command(
 ) -> dict[str, Any]:
     """Execute the read-only or acquisition-capable ``ensure`` command."""
     request, identity = source_request(allow_download=args.allow_download)
+    budget = _acquisition_budget_from_args(
+        args,
+        required=args.allow_download or request.mode == "latest_as_of",
+    )
     if not args.allow_download and request.mode != "latest_as_of":
         result = _read_only_ensure_result(SourceResolver(get_catalog()).resolve(request))
         return (
@@ -699,7 +741,7 @@ def _run_ensure_command(
                 get_catalog(), staging_root=acquisition_config.staging_root
             ),
             journal=AcquisitionJournal(config.catalog_dir),
-        ).ensure(request),
+        ).ensure(request, budget=budget),
         action="ensure",
     )
 
@@ -1129,6 +1171,7 @@ def main(argv: Sequence[str] | None = None) -> int:
                 max_bytes=int(binding_payload["max_bytes"]),
                 expires_at=str(binding_payload["expires_at"]),
             )
+            budget = _acquisition_budget_from_args(args, required=True)
             acquisition_config_path = args.acquisition_config
             if not acquisition_config_path.is_absolute():
                 acquisition_config_path = project_root / acquisition_config_path
@@ -1149,7 +1192,7 @@ def main(argv: Sequence[str] | None = None) -> int:
                         staging_root=acquisition_config.staging_root,
                     ),
                     journal=AcquisitionJournal(config.catalog_dir),
-                ).execute(binding, request),
+                ).execute(binding, request, budget=budget),
                 action="close-gap",
             )
             result = (

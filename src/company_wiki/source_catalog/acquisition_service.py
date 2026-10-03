@@ -11,6 +11,7 @@ from .acquisition import (
     AcquisitionResult,
     AcquisitionStatus,
 )
+from .download_budget import AcquisitionBudget
 from .acquisition_journal import AcquisitionAttempt, AcquisitionJournal
 from .canonical_writer import (
     CanonicalImportResult,
@@ -74,11 +75,18 @@ class SourceAcquisitionService:
         self.writer = writer
         self.journal = journal
 
-    def ensure(self, request: SourceRequest) -> SourceEnsureResult:
+    def ensure(
+        self,
+        request: SourceRequest,
+        *,
+        budget: AcquisitionBudget | None = None,
+    ) -> SourceEnsureResult:
         if not isinstance(request, SourceRequest):
             raise TypeError("request must be SourceRequest")
+        if budget is not None and not isinstance(budget, AcquisitionBudget):
+            raise TypeError("budget must be AcquisitionBudget")
         try:
-            acquisition = self.coordinator.resolve_or_stage(request)
+            acquisition = self.coordinator.resolve_or_stage(request, budget=budget)
         except Exception as exc:
             self.journal.record(
                 request_id=request.request_id,

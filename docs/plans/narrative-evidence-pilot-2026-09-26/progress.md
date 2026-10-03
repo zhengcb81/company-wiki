@@ -127,3 +127,24 @@ S0/N4A及S2模型预算基础、CLI阶段与CI修复已正常发布，当前CI�
 - RED：新增 under-reporting bounded adapter，discovery先计20 B、下载产物21 B、总cap 30 B；旧逻辑未拒绝。原因是它把 receipt 与总cap比较，没有验证本次 fetch 实际记账，也没有扣除 discovery 消耗。
 - GREEN：fetch 前记录累计响应字节，fetch 后要求 `receipt.byte_size` 不大于本次新增计费字节及 discovery 后剩余额度；新增 CN `JsonCommandAdapter` 子进程 marker 测试证明不支持 bounded 的 adapter 会在外发前 fail closed。5个相关测试文件最终 **35 passed / 1 existing pytest config warning**；Ruff与`git diff --check`通过。所有本轮 `.t-*` basetemp 均确认移除。此修正只挡住漏记账回执；生产 CNINFO/Dayu bounded transports 仍未实现，不能宣称真实 provider cap 已生效。
 - StockInfoDLSimple 状态复核：`v2-clean-rewrite@1693045` 原 checkout 有24个tracked修改及其他未跟踪文件；其现有 `CninfoAnnouncementClient.fetch_pdf` 仍先完整 `response.read()` 再写。没有修改原 checkout；后续需先建立精准隔离快照并将 discovery 与 PDF 下载统一到一个逐块消耗的 budget。Dayu 保持未改。
+
+## 2026-10-03 — 跨仓阶段重新核对
+
+- 开始下一阶段前先检查 RF：当前本地 checkout 是 `fcap@5319ee263c4af41ac255938c25bebd32cce56f66`，`origin/main` 是 `6fb2def709d13bda9cfada7ecf62bfc0e3744ae2`；checkout 保留大量 `.planning/2026-09-19-three-project-history-audit/execution_runs/**` tracked 删除。本轮只读并保留 owner 工作，没有恢复、合并或修改 RF；Git dubious-ownership 用命令级 `safe.directory` 读取，没有改全局配置。
+- RF 当前 PWF 根为 `.planning/2026-09-19-three-project-history-audit/`。CodeGraph 对 pathless receipt 的模糊查询没有给出规范合同，下一步从 RF main 的正式合同文件直接核实并复用，再决定 company-wiki 的接口与回归范围。
+- 已直接检查 RF `scripts/contracts/evidence.py` 与 `scripts/contracts/document.py`：消费者模型将 source identity、HTTPS URL、日期、snapshot SHA 和 host/capture receipt 纳入验证；这证明的是 forecast evidence data contract。它没有声明数据湖路径，也未找到独立 pathless reader 的证据；继续定位真实 reader adapter 前不新造第二份合同。
+- 随后发现本地 `fcap` 是旧 checkout，改从 `revenue-forecast origin/main@6fb2def7` 与 CWP G-C 收尾记录复核：main 已发布 `scripts/narrative_source_preparation.py` + `company_wiki_narrative_reader`，以 pathless `narrative-read-request/1` 读取 CWP source-only context；年报与英文 TXT 的 RF/CWP CLI 真实跨仓端到端已记录通过。CWP `SourceVersionReader` 已被 narrative/SourceExport v2 正式调用。前一条“未找到pathless reader”只适用于旧 `fcap` checkout，已由 findings 明确更正；RF 文件保持只读。
+- 计划状态：G-C 消费接口能力已有交付，不重复实现或改 RF；N4C 的真实多文档 Worker 批处理、1/2/4并行实测、四类叙述召回/引用覆盖及空间增量仍未被该消费者 E2E 替代，S4 继续 pending。S3 仍由 CWP 的真实 provider download limits 和 FF 汇合阻塞。
+- FF-S3 当前源码将 `acquisition_limits` 接入共享deadline，并含 CWP `--max-download-*` 参数适配；但 CWP 的 `JsonCommandAdapter` 仍无 `discover_bounded/fetch_bounded`，外部 provider是否逐块计费仍未闭合。接下来逐个核 FF 实际命令路径及CWP预算分流，避免把 schema/argparse通过当成实际下载限额。
+- 已核 FF-S3 实际 argv：`_command_arguments()` 将三项上限附至 ensure/close-gap；v2 pathless ensure与legacy close-gap都调用它，`_shared_deadline()` 贯穿全请求。预算确实传到CWP CLI；差口是CWP生产provider transport，不是FF漏传。
+- CWP bounded JSON桥接先写了RED合同：发现与fetch用同一budget，子进程收到剩余bytes/time/cost并必须返回usage；另覆盖usage缺失/超额。第一次pytest未进用例，失败在全局可选`langsmith`插件导入`pydantic_core` DLL被拒；不是项目测试红。测试根已在finally清除；接着仅本次命令禁用外部plugin autoload，继续得到真实行为RED，不改pytest配置。
+- 隔离插件autoload后行为RED为3项，根因正是 bounded CLI methods不存在。实现 `JsonCommandAdapter.discover_bounded/fetch_bounded`：请求携带schema `1.0`剩余字节/秒/成本，subprocess timeout受同一剩余时限约束；输出须精确返回 `acquisition_usage/1.0`，再计入原budget，fetch收据字节不得超过该fetch本次收费。既有无预算`discover/fetch`形状未动。三条进程合同 **3 passed**；初次plugin failure与RED/Green basetemp均由finally清理，pytest cache plugin关闭以绕开ACL warning。CNINFO实际HTTP仍未启用bounded。
+- 补充真实子进程sleep合同验证剩余deadline会杀掉慢provider；bounded adapter责任组最终 **4 passed / 1现有 unknown `asyncio_mode`配置warning / 4.25秒**。关闭全局plugin autoload是仅本次测试命令的环境选择，没有修改CI/pytest配置。
+- company-wiki 仍有 producer-budget 未提交 WIP；上一节点35项相关测试通过，但生产 provider 响应流尚未接入硬限额。无外仓写入、无原件/生产库操作。
+
+## 2026-10-04 — CWP / StockInfo bounded provider 节点
+
+- CWP producer-budget 代码与新增测试已覆盖共享 AcquisitionBudget、明确provider capability、bounded JSON子进程、严格usage与部分失败计费、receipt二次校验，以及缺能力时外发前fail closed。复核发现deadline已过时仍须记录provider已报告usage，新增两项先RED后GREEN；最终六文件责任回归 **41 passed in 14.83s**，Ruff与`git diff --check`通过。pytest hook曾重定位并漏删987,840 B fixture，本轮按精确路径清除；短路径 `.t-bud` 通过finally删除。
+- StockInfo CNINFO bounded transport在隔离分支 `codex/cninfo-bounded-budget@947e839`（基于 `1693045`）完成并提交，仅13个相关文件；original dirty checkout未改。focused测试此前61 passed、限定改动文件Ruff clean。今天额外51项运行到100%但退出阶段挂住并被中断，不算完整测试结果。分支此前已推送，本轮网络错误使远端状态未能复查；provider仓未发现Actions workflow。
+- CWP→StockInfo CLI/client跨进程模拟HTTP E2E通过：1个候选，PDF 399 B，discovery+PDF用量713 B且精确对账；测试没有外网请求、生产目录变更，临时root已删除。
+- 配置保持不变且正确fail closed：`config/source_acquisition.yaml`仍指向旧 `v2-clean-rewrite` provider 1.1.0，没有 `supports_acquisition_budget`，默认能力false。故本阶段完成provider和CWP桥接实现，不等于生产下载限额已经启用。下一步先将StockInfo分支纳入owner集成工作树，再显式配置1.2.0和budget capability，完成FF正式入口端到端及v1/latest_as_of复用语义验证，然后合入FF-S3。Dayu无改动。

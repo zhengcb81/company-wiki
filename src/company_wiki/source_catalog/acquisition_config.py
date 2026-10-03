@@ -32,6 +32,7 @@ class AdapterCommandSpec:
     project_root: Path
     config_root: Path | None
     command: tuple[str, ...]
+    supports_acquisition_budget: bool = False
 
 
 @dataclass(frozen=True)
@@ -51,6 +52,7 @@ class AcquisitionConfig:
                 command=spec.command,
                 project_root=spec.project_root,
                 timeout_seconds=self.timeout_seconds,
+                supports_acquisition_budget=spec.supports_acquisition_budget,
             )
 
         def build_dayu(spec: AdapterCommandSpec, market: str) -> DayuCliDownloadAdapter:
@@ -117,16 +119,18 @@ def _path(value: Any, *, project_root: Path) -> Path:
 
 def _adapter(value: Any, *, project_root: Path, name: str) -> AdapterCommandSpec:
     data = _mapping(value, name)
-    if set(data) != {
+    required_fields = {
         "name",
         "version",
         "interface",
         "project_root",
         "config_root",
         "command",
-    }:
+    }
+    optional_fields = {"supports_acquisition_budget"}
+    if not required_fields.issubset(data) or set(data) - required_fields - optional_fields:
         raise AcquisitionConfigError(
-            f"{name} must contain exact name/version/interface/project_root/config_root/command fields"
+            f"{name} must contain name/version/interface/project_root/config_root/command and only known optional fields"
         )
     raw_command = data["command"]
     if not isinstance(raw_command, list) or not raw_command:
@@ -140,6 +144,13 @@ def _adapter(value: Any, *, project_root: Path, name: str) -> AdapterCommandSpec
         raise AcquisitionConfigError(f"{name}.config_root must be null for json_command_v1")
     if interface == "dayu_cli_v1" and raw_config_root is None:
         raise AcquisitionConfigError(f"{name}.config_root is required for dayu_cli_v1")
+    supports_budget = data.get("supports_acquisition_budget", False)
+    if not isinstance(supports_budget, bool):
+        raise AcquisitionConfigError(f"{name}.supports_acquisition_budget must be boolean")
+    if interface != "json_command_v1" and supports_budget:
+        raise AcquisitionConfigError(
+            f"{name}.supports_acquisition_budget is only available for json_command_v1"
+        )
     return AdapterCommandSpec(
         name=_expand(data["name"], project_root=project_root),
         version=_expand(data["version"], project_root=project_root),
@@ -151,6 +162,7 @@ def _adapter(value: Any, *, project_root: Path, name: str) -> AdapterCommandSpec
             else None
         ),
         command=command,
+        supports_acquisition_budget=supports_budget,
     )
 
 
