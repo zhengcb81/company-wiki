@@ -80,4 +80,4 @@ root 只在 S3 接口、N4 B/C、S5/S6 存储几个大节点复核和测试。FF
 
 模型/持久预算基础 `9ccd29f` 已推送，CI37135709529成功。正式 CLI/终态降容第一组集中 67 passed/55.05s；同 run 重跑零新增 POST，零费用/小空间 cap 均零 POST，原文改 SHA 后失败仍保留此前费用。这不等于 N4B/C 全完成：root 还负责跨 run 工件幂等、父进程 kill/ACK 窗口、四份真实小批和旧 Worker 退出，见 N4 卡。
 
-已发布cf662cc（正式CLI/终态降容、英文召回、三施工卡），正常hooks/pre-push绿；CI37139201102两项Unit夹具失败已确定根因并修复，54项责任包绿。2026-10-03用户确认三包都已派出，均登记running；root不再另起它们仓内实现。root继续 S2 的恢复/跨 run 收口及 CWP S3 producer 限额。
+已发布cf662cc（正式CLI/终态降容、英文召回、三施工卡）和a104d25（CI夹具修复），CI37139842105成功；跨run三批真CLI/旧pin/正文去重节点已绿。2026-10-03用户确认三包都已派出，均登记running；root不再另起它们仓内实现。root继续 S2 run/generation owner、旧catalog执行入口退出、父kill/ACK恢复及 CWP S3 producer 限额。

@@ -345,7 +345,8 @@ class NarrativeVerifyHandler:
         effect_key = make_effect_key(
             EFFECT_TYPE,
             target,
-            bundle_hash,
+            canonical_json_hash({"verification_job_id": context.job.job_id,
+                                 "bundle_sha256": bundle_hash}),
             BUNDLE_PRODUCER_VERSION,
         )
         return Effect(

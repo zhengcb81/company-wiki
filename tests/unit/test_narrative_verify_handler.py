@@ -463,6 +463,27 @@ def test_verify_handler_skip_bundle_stays_under_small_cap() -> None:
     assert len(raw.effects) == 1
 
 
+def test_same_bundle_from_distinct_jobs_has_distinct_publication_effects() -> None:
+    data, selected = _selected()
+    summary = _summary(selected)
+    context = _context(selected, summary)
+    other_job = replace(context.job, job_id="job-verify-next-run")
+    other = replace(context, job=other_job,
+                    attempt=replace(context.attempt, job_id=other_job.job_id))
+    handler = NarrativeVerifyHandler(reader=FakeReader(selected, data))
+
+    first = handler(context)
+    second = handler(other)
+
+    assert first.outcome is second.outcome is HandlerOutcome.SUCCEEDED
+    assert first.result == second.result
+    assert first.effects[0].intended_after_hash == second.effects[0].intended_after_hash
+    assert first.effects[0].job_id != second.effects[0].job_id
+    assert first.effects[0].effect_id != second.effects[0].effect_id
+    assert first.effects[0].effect_key != second.effects[0].effect_key
+    assert handler(other).effects == second.effects
+
+
 def test_verify_handler_transcript_replays_bytes_without_provider_policy() -> None:
     data, selected = _selected(transcript=True)
     summary = _summary(selected)

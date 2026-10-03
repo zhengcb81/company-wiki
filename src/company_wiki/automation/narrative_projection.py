@@ -29,6 +29,7 @@ from .models import (
     RuntimeState,
     canonical_json,
     canonical_json_hash,
+    make_effect_key,
     require_canonical_json,
     require_utc_timestamp,
 )
@@ -318,9 +319,14 @@ class NarrativeEffectDispatcher:
         producer_name = "company_wiki.narrative_bundle"
         producer_version = bundle.versions.bundle_producer
         artifact_role = "narrative_bundle"
-        work_key = canonical_json_hash(
-            {
-                "schema_version": "narrative-work-key/1.0",
+        # Previously emitted outbox effects can finish their immutable prepared
+        # versions. New effects bind a verification job and use a scoped key.
+        legacy = effect.effect_key == make_effect_key(
+            effect.effect_type, effect.target, canonical_json_hash(bundle.to_dict()),
+            producer_version,
+        )
+        identity = {
+                "schema_version": "narrative-work-key/1.0" if legacy else "narrative-work-key/2.0",
                 "document_id": bundle.source_ref.document_id,
                 "source_id": bundle.source_ref.source_id,
                 "source_sha256": bundle.source_ref.content_sha256,
@@ -329,7 +335,9 @@ class NarrativeEffectDispatcher:
                 "producer_version": producer_version,
                 "policy_sha256": bundle.expected_read_policy_sha256,
             }
-        )
+        if not legacy:
+            identity["publication_effect_key"] = effect.effect_key
+        work_key = canonical_json_hash(identity)
         return NarrativeArtifactDraft(
             effect_id=effect.effect_id,
             work_key=work_key,

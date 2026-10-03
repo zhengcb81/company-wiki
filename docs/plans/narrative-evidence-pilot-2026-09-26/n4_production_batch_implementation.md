@@ -8,8 +8,8 @@
 2. scope已贯通claim/promotion/reaper/outbox/prepared，S0/N4A发布ff5396c；不重新实现同一范围接口。
 3. 有限batch CLI已串event/DAG/Supervisor/dispatcher。67项集中绿验证同run幂等/预算/源SHA/空间cap/目录恢复；生产小批前还要跨run、父kill/ACK与统一owner恢复收口。
 4. terminal receipt已实装：只在三job SUCCEEDED、effect verified/outbox delivered、exact final visible+实读hash后去attempt正文；预算与小outbox DTO不动。物理SQLite释放是S6另测，不能把逻辑结果压缩当GB释放。
-5. 不同run同源目前effect_key未含验证job、work_key未含effect，产生跨job/不同正文冲突，见下方root下一节点；先测试框住再修两处身份，不改SourceRef/wire/Store通用幂等。
-6. OS mutex死亡自动释放，generation CAS/scoped obsolete reaper已实现；idle scope=None旧daemon仍可醒来claim，旧catalogWorker控制面独立。统一自动owner/固定scope与旧启动入口退出须在真实生产批次前完成，不能猜previousrun就可接管。
+5. 跨run同源冲突已先RED后修：effect_key含验证job+bundle SHA，work-key/2含publication effect；三个真实CLI run绿，相同正文对象只有一份，旧pin不漂移。升级前effect薄兼容work-key/1，prepared恢复绿；SourceRef/wire/Store通用幂等未放松。
+6. OS mutex死亡自动释放，generation CAS/scoped obsolete reaper已实现；实读确认当前无独立AUTO生产daemon，factory已经严格run scope。实际风险是旧catalogWorker/startup/全量派生入口，控制面独立。统一自动owner、退役旧启动路径须在生产小批前完成，不能猜previousrun就可接管；generic scope=None保留库兼容。
 
 目标入口接受明确 SourceRef 列表、当前 catalog 配置、profile、文档/时间/token/费用上限；按 `event→DAG→worker→verify→outbox→visible artifact` 完成并返回 pathless 收据。退出/暂停/杀进程后可从原任务库继续；不自动下载、翻译或生成投资判断。
 
@@ -85,6 +85,6 @@ N4 完成必须有生产代码入口、正常/故障真实 CLI 收据、usage/�
 
 1. 跨run RED先行：同源runA发布、runB相同draft发布、runC不同合法draft发布；effect各自绑定verify job、工件各自exact pin回读，旧pin不取latest；相同正文object按SHA只有一份，runB同run恢复零额外POST。新run用独立work-dir，同run复用baseline。
 2. 最小实现：verify effect action hash绑定`verification_job_id + bundle_sha256`，intended_after_hash仍纯bundle SHA；projector work key升级`/2`绑定publication effect key。不新建run→artifact映射/签名文件，不放松ArtifactStore冲突校验。显式新run当前可能再付费，不冒称跨run缓存零模型调用；未来缓存策略由实测决定。
-3. 自动owner收敛：生产进程只能由同一个有限coordinator/固定run.scope工厂启动；已有旧launcher/计划任务/legacy control caller先盘点迁移。generation更新只fence旧attempt，不能做进程owner证明；不自动pause不明ENABLED运行。父kill后自身watchdog退出、未知reservation保留、scope内恢复，不碰foreign idle/任务。
+3. 自动owner收敛：production factory已固定run.scope，AUTO CLI现只有只读status/doctor/plan；不虚构已配置AUTO daemon。退役source_catalog `worker/--once`、`worker-start/resume`、install-startup、PS/VBS旧启动和全量normalize/run路径；保留status/stop/uninstall/scan/query/export来源维护。run行一个nullable last_runtime_generation，通过v3→v4迁移；activate_run与gate CAS同AUTO事务绑定，PAUSED可启本run、ENABLED仅匹配本run当前generation可恢复；未知/他run零修改具名拒绝，不写owner签收文件。OS mutex证活进程、binding证恢复归属；父kill后watchdog退出、unknown reservation保留，scope内恢复。FF ensure来源采集仍在短commit锁，不加入长期处理owner锁。
 4. 补正式CLI父kill/ACK丢失窗口测试；当前terminal单位/集成abort与OS mutex kill收据不能冒充完整batch kill。时限还须覆盖准备/解析/提交全部生命周期，持久/临时峰值按实际文件与SQLite WAL统计，只有总增量和coverage达标才进入四份真实样本节点C。
 5. 与FF-S3/ET-S3并行的是root CWP S3 producer caps/来源默认；I1三参数尚pending，不把外线fake传参测试当下载执行已限额。只在最终接口大节点汇合，其他仓dirty/已有owner不改。

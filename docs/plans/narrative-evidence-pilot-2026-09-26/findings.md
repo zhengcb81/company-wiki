@@ -43,5 +43,5 @@ Git写入/联网用正常用户，sandbox .git只读不是产品权限。测试�
 - ET tracked干净4924d57，现代工具已交付；旧scraper仍defaultFool、直接Session/旧v3/吞异常、默认翻译，FMP list会落下载/翻译、dry-run未定义变量，计划模式先写目录。ET独立包收敛这些真实路由，不重复实现W wire/importer。
 - StockWiki已aa98848且四项quick-scan CLI/maintenance/test dirty，IQS44b805f正在W07后续；不开第二线。RF四dirty保留。新三外线专属工作目录互不包含，不写共同PWF/全局安装。
 - S5/S6适合独立只读审计workspace：B2实际调用者、dbstat/freelist/保留事实、SHA候选物理重复量；真实删除/收缩统一主线。不重新hash25GB、不完整备份恢复、不把既释放13.06GB再计。
-- same-run实测不足以覆盖cross-run：verify效应键未含job，同内容跨job冲突；projection工件work_key未含effect，同源异内容冲突。root S2要用同源两run/第三差异/旧pin回读测试收口；对象仍SHA去重。
-- idle scope=None AUTO daemon能跟新generation再次claim，旧catalogWorker控制面独立。有限批次所有权必须统一启动入口/固定scope，不能只看foreign RUNNING瞬时快照；S4退出旧写Worker的必要前置已并入root S2安全启动。
+- cross-run缺口已RED→GREEN：verify effect绑定job+bundleSHA、工件work-key/2绑定effect，三run真CLI发布/同正文去重/旧pin回读/同run零POST均过。旧effect保work-key/1使prepared可恢复；不放松Store immutable冲突。
+- owner实读纠正：当前没有独立AUTO生产daemon CLI，factory已严格固定run.scope；generic scope=None只库兼容。真实风险来自catalog Worker/once/start/resume/startup与全量normalize/run，和batch owner互不相认；生产control paused，任务启用状态人类账户待查。最小run行generation绑定+CAS和OS mutex分别解决恢复归属/活进程事实，退出旧实际caller，不加泛化人工门或FF下载长锁。

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from dataclasses import replace
 import hashlib
 import json
 import math
@@ -23,6 +24,7 @@ from company_wiki.automation.models import (
     RuntimeState,
     canonical_json,
     canonical_json_hash,
+    make_effect_key,
 )
 from company_wiki.automation.narrative_contracts import (
     NarrativeBundle,
@@ -39,7 +41,7 @@ from company_wiki.automation.narrative_runtime import (
     NarrativeRuntimeDependencies,
     register_narrative_handlers,
 )
-from company_wiki.automation.narrative_verify import EFFECT_TYPE
+from company_wiki.automation.narrative_verify import EFFECT_TYPE, NarrativeVerifyHandler
 from company_wiki.automation.policy import PolicyConfig
 from company_wiki.automation.narrative_projection import (
     NarrativeBundleReader,
@@ -691,6 +693,65 @@ def test_runtime_e2e_dispatches_and_recovers_pathless_bundle_versions(
         assert {
             digest: _sha(data) for digest, (data, _ref) in indexed.items()
         } == raw_hashes_before
+    finally:
+        _cleanup(tmp_path, run_root, baseline, catalog)
+
+
+def test_prepared_legacy_publication_recovers_without_rebinding_its_work_key(
+    tmp_path: Path, monkeypatch,
+) -> None:
+    run_root, baseline = _run_root(tmp_path, "m3-e4-runtime-legacy-prepared")
+    catalog = None
+    try:
+        sources = [{"name": "annual.pdf", "data": _pdf_bytes(
+            "Acme launched a new product and expanded overseas sales in 2026."),
+            "title": "ACME annual report", "document_kind": "annual_report"}]
+        catalog, reader, indexed = _new_catalog(run_root, sources)
+        originals = {path: path.read_bytes() for path in (run_root / "companies").rglob("*") if path.is_file()}
+        store, scheduler, worker = _runtime(run_root, reader, ReplayNarrativeModel())
+        _data, ref = next(iter(indexed.values()))
+        event = _event(reader, ref, event_id="legacy-effect-before-upgrade")
+        store.put_event(event)
+        scheduler.materialize_event(event)
+        current_effect = NarrativeVerifyHandler._effect
+
+        def legacy_effect(context, bundle):
+            effect = current_effect(context, bundle)
+            key = make_effect_key(effect.effect_type, effect.target,
+                                  canonical_json_hash(bundle.to_dict()), bundle.versions.bundle_producer)
+            return replace(effect, effect_id="eff-" + key[:32], effect_key=key)
+
+        # Simulate the previous producer finishing its work before an upgrade.
+        with monkeypatch.context() as old_producer:
+            old_producer.setattr(NarrativeVerifyHandler, "_effect", staticmethod(legacy_effect))
+            assert _drain(worker, scheduler) == 3
+        artifacts = NarrativeArtifactStore(catalog.store, LocalNarrativeObjectStore(catalog.config.catalog_dir))
+        dispatcher = NarrativeEffectDispatcher(store, artifacts)
+        effect_id = store.list_outbox_entries(status="pending")[0]["effect_id"]
+        effect, bundle, payload = dispatcher._prepare_effect(effect_id)
+        legacy_work_key = canonical_json_hash({
+            "schema_version": "narrative-work-key/1.0", "document_id": ref.document_id,
+            "source_id": ref.source_id, "source_sha256": ref.content_sha256,
+            "artifact_role": "narrative_bundle", "producer_name": "company_wiki.narrative_bundle",
+            "producer_version": bundle.versions.bundle_producer,
+            "policy_sha256": bundle.expected_read_policy_sha256,
+        })
+        prepared = artifacts.prepare(replace(dispatcher._draft(effect, bundle), work_key=legacy_work_key), payload)
+        assert prepared.status == "prepared"
+        recovered = dispatcher.dispatch_next(
+            worker_id="new-projector-after-upgrade", now=T1,
+            lease_until="2026-09-28T22:05:00Z",
+            expected_generation=store.read_runtime_gate().control_generation,
+        )
+        assert recovered.status == "visible" and recovered.artifact_version_id == prepared.artifact_version_id
+        version, content = artifacts.read_exact(
+            artifact_version_id=prepared.artifact_version_id, document_id=ref.document_id,
+            source_id=ref.source_id, source_sha256=ref.content_sha256,
+            expected_sha256=prepared.content_sha256, expected_size=prepared.byte_size,
+        )
+        assert version.work_key == legacy_work_key and content == payload
+        assert store.list_outbox_entries(status="pending") == ()
+        assert all(path.read_bytes() == data for path, data in originals.items())
     finally:
         _cleanup(tmp_path, run_root, baseline, catalog)
 
