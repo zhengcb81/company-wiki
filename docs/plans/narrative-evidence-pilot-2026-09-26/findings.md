@@ -1,5 +1,13 @@
 # Findings：叙述性证据试点
 
+## 2026-10-03 — 简化没有全部收口
+
+- [46项现状清单](gate_permission_inventory_2026-10-03.md)以当前代码为准：private/public、外发人工许可、prompt消费阻断、RF人工发布、IQS工程签收已改；activation/rollback CLI仍required reviewer，restore也仍拒空审核人。可选review/工程/删除manifest旧工具与AUTO shadow/placeholder仍在，P1/P2未全完成。
+- 旧完整policy hash、capture资格、双日期cutoff、当前generator-only、旧全局parse/LLM锁/电池/冷却有进一步简化空间；底层SHA/身份/路径/引用与事务/lease有具体正确性用途。不把质量needs_review标签报成人工门。
+- 两安装FF三脚本与交付c47c397同字节SHA；旧根fcap保持。v2请求acquisition_limits尚未转发，ET旧scraper没有共用modern provider gate，archive/prune旧CLI漏now；仅静态发现，未声称发生联网超额或生产错误。StockWiki检查脚本手动，73/40数字和before-commit文档仍有收口空间。
+- N4新空间/费用/并发措施未上线；workspace sandbox/pytest账号ACL不是项目private权限，当前无项目Claude/Codex权限配置文件。
+
+
 ## 2026-10-03 — 最终完整盘点覆盖
 
 - 本轮合计实删13,063,624,100B/12.166448GiB，完整stat32,821,613,206B/32.82GB/0读取错误；原件目录/当前DBstat与Worker paused未变。见[最终收尾](harness_lanes/results/gd_storage_final_cleanup_2026-10-03.md)。

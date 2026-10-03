@@ -1,5 +1,13 @@
 # Progress：叙述性证据试点
 
+## 2026-10-03 — 46项门禁审计与计划入口纠正
+
+- 三条只读审计并行完成，root复核实际reviewer参数、安装FF脚本SHA、StockWiki真实hook状态、CWP工程快门。未改产品策略、未调用provider/读APIkey、未启动Worker或重跑大节点验收。
+- 形成[逐项清单](gate_permission_inventory_2026-10-03.md)，记录已清/未清/诊断/历史库层边界和保留理由；用户可逐编号裁定，清单不得成为新产品许可文件。
+- 纠正09-29总清理卡的尚未执行和RF缺hash必拒旧规则；当前Next仍N4A，清理项集中现有owner大节点。FF请求预算和ET旧入口纳入下次G-A相关节点，禁止继续仅凭字段validator假报预算已执行。
+- 本轮命令问题：PowerShell不展开rg路径里的通配符，改-g和目录参数；几项旧测试名不存在，改已知路径读；sandbox读StockWiki Git metadata返回非repo，正常用户只读确认无hook。没有生产配置/资料变化。首次staged diff-check发现新审计文档末尾多空行，已清除再走普通发布。
+
+
 ## 2026-10-03 — B4测试根与最终盘点收尾
 
 - 首轮15测试根259,795B，root复核9只读测试树后原生LiteralPath/Recurse/Force补批14,283,258B，24根全部缺席；没有ACL修改、当前DBstat/control/config未变。历史首轮hold保留在收据，追加补批结果，不伪改。

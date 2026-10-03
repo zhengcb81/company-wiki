@@ -6,6 +6,8 @@
 
 > 独立实施计划；不替代仓库根目录或任何已有专项计划。Phase 17 的旧库退役已完成；Phase 18 的离线 G1 选择、定位和草稿验证已完成一轮。**2026-09-27 新顺序：RF 主线并线已完成，先实施 R4 数据湖抽象层，再继续本计划的 W5/G2a、Worker 与空间处置。**本计划自身不写 RF，不启动生产 Worker；已有隔离叙述工位与主树未提交文件保持原样，待抽象层合同接入时按当前文件快照整合。
 
+> **2026-10-03权限审计补充：**[46项逐项清单](gate_permission_inventory_2026-10-03.md)已核当前代码和安装入口；P0已实质简化、P1/P2仍未收口，列明实际CLI门/可选旧工具/未接生产库层。用户本轮要求先逐项审查，本次未改变产品权限。裁定并入既有大节点，不增加小节点签收；主线实施顺序仍N4A。
+
 ## Goal
 
 用 10 份不同类型的 PDF 与 2 份英文 TXT 验证业务叙述选择、证据定位和摘要边界，形成 company-wiki 与 filing-fetch、StockWiki、revenue-forecast、invest-quick-scan 兼容的可实施方案。
@@ -770,3 +772,15 @@ G-A1尚未由producer/filing-fetch表示FF→ET→CWP下载完整链完成；真
 ## Next Step
 
 Phase61已收尾；唯一下一步按[N4A](n4_production_batch_implementation.md)实现限定批次scope（先RED）。随后N4B/C真实模型/计量/恢复/总占用，最后B2引用切换后的精确清理。复用G-C/B1/B3/B4收据，不重hash大库/恢复归档/复跑4份旧Replay文档或全仓长测；保留原件，旧生产Worker继续paused。
+
+## Phase 63：门禁与权限现状审计（审计支线已完成）
+
+- [x] 只读核CWP来源/Worker/工程门及RF、FF、ET、StockWiki、IQS相关来源链；以当前调用与主线代码为准，不以历史关键词命中认定生效。
+- [x] 形成46个独立裁定编号、状态/触发/理由/建议/代码定位；区分现行、可选历史工具、AUTO库层和N4未实施措施。
+- [x] 核对两份已安装FF三个脚本均与c47c397交付同SHA，StockWiki无pre-commit/hookPath；不改这些仓owner工作树。
+- [x] 揭示未收口的reviewer必填/旧工程签收、FF请求预算未转发、ET旧scraper绕provider默认、archive/prune漏now、旧全局耗时锁与文档漂移；列入原有owner大节点，无新增逐条审查门。
+- [x] 改正旧总清理卡状态及RF缺hash裁定入口，记录实况；未执行生产CLI、外发或读key。仅计划文档普通提交推送。
+
+## Next Step（审计后仍沿用主线顺序）
+
+N4A限定批次scope先RED→实现；用户对46项清单的裁定并入相应owner的原节点，P1/P2收口不另立人工授权合同。FF预算/ET旧入口缺口在再次启用实际provider前纳入G-A相关E2E，不因已交付v2而假报单请求预算严密。旧Worker保持paused。
