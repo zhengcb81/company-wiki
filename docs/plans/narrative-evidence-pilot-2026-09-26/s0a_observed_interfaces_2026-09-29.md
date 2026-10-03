@@ -1,5 +1,9 @@
 # S0a 现场接口与样本输入（2026-09-29）
 
+> **2026-10-03 当前接口状态覆盖：**已发布 CWP `master@2e674cc`、FF `origin/main@c47c397`（已核远端 ref）、ET `main@4924d57`、RF `main@0573c40`。G-A0/G-A1、FF transcript companion 及选定 SourceRef 消费链已完成；当前 FF/CWP/RF 三仓 E2E 为 1 passed / 8.69 秒，隔离根 `.ga-mainline-20261003` 已清理。FF→ET→CWP 历史节点包 191 passed / 1 skipped 见 [Phase 58](task_plan.md)；未证明 live FMP 200，历史真实请求为 402。RF [Actions 37110072067](https://github.com/zhengcb81/revenue-forecast/actions/runs/37110072067) 两 job 成功（verify 2 分 15 秒、real-roots 1 分 40 秒）。
+
+> 下表旧 worktree/待合并状态仅代表 S0a 观察时点，不能据此重复并线或清理现场。下一接口范围是正在实施的 [N3a pathless narrative reference/read receipt](narrative_transport_implementation.md)，不改 raw SourceRef / SourceExport v2 wire；RF/StockWiki selected 消费 G-C 仍 pending，G-D/生产 Worker paused。StockWiki W01–W04 已交付；IQS 继续由既有 owner 处理，本覆盖不扩大其范围。
+
 本页是总指挥的**观察记录**，不是冻结合同或人工签收。生产者要先从实际 serializer/CLI 生成 S0b golden；消费者只根据相应冻结版本接线。任何仓库的未提交工作先由其唯一 owner 保存，不能以本页的旧 SHA 执行 reset/clean。原始文档只读，派生与测试文件在隔离根生成并清理。以下工作树 SHA 是 **S0a 时点**；2026-09-29 的新提交见第 5 节。
 
 ## 1. 工作树和独占写入

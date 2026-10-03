@@ -1,5 +1,18 @@
 # Findings：叙述性证据试点
 
+## 2026-10-03 — N3a 真实边界修正
+
+- 只读来源接口不能复用会初始化schema/BEGIN IMMEDIATE的writer Store；新 facade复用ReadOnlyCatalogReader，仅SELECT，不创建缺失DB，保留live WAL读取正确性，不使用immutable忽略未checkpoint数据。
+- 二进制CLI的stdout/stderr属于协议；真实429页招股书等PDF的backend会print可选包提示，必须在CLI boundary隔离诊断，不能删hash断言或在consumer截取看起来像JSON的部分。
+- 持久Bundle需要独立验证摘要source SHA/语言/已知evidence IDs/完成状态；原生成链的validate_against不足以保护单独read。复用共享引用校验，不引入投资结论或人工审核门。
+- 原文同尺寸篡改、工件篡改、prepared/撤回/primary变化、错请求身份/期间、unknown publication、JSON bytebinding漂移均自动拒绝；生成policy变化不等于原文失效，当前配置决定读资格。质量needs_review保留诊断而非人工授权。
+
+## 2026-10-03 — 持久叙述消费边界调查
+
+- E-B Store/projector 和内部 NarrativeBundleReader 已存在；内部 reader 取 latest visible、仅验 artifact bytes/当前 DB 绑定，没有正式跨进程 ref/receipt/CLI。不能再重复实现持久化/Worker，也不能将试点 `/0.2.0` 的 raw-path search 当正式消费者。
+- 新 transport 必须精确绑定 artifact version/SHA/size，并通过当前 SourceVersionReader 实开原文、manifest 请求身份/期间、publication/retrieval as-of、全 locator/JSON byte binding回放。bundle 生成时 policy pin 是 lineage，读取用当前配置，迁根不让全部旧包失效。
+- 当前 G-A 官方代码路径 FF `c47c397`、CWP `2e674cc`、RF `0573c40` 的三仓 E2E 通过；RF 固定兼容 snapshot 中的 FF `89c8bdb` 是更早版本，因此本轮额外以当前 FF 主线验证，未改其 snapshot。FMP真实可用权益未验证。
+
 ## 2026-09-29 恢复实施后的现场修正
 
 - 六仓 S0a observed 与七件只读样本完整 SHA/字节数见 [接口表](s0a_observed_interfaces_2026-09-29.md)。ET FMP `/2` 真 serializer 为 26 字段，当前 CWP importer 只收 Motley 24 字段，同时拒 `application/json` 和 FMP 的安全查询参数；因此跨仓电话会成功链仍是合同 hold，不可把 ET 本仓假 HTTP 200 说成 CWP 已可导入。

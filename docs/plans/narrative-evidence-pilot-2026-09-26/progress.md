@@ -1,5 +1,23 @@
 # Progress：叙述性证据试点
 
+## 2026-10-03 — N3a 节点验收与交接
+
+- 新实现为独立 logical ref/read request/receipt、精确 artifact version、只读 DB facade、当前 SourceVersionReader 原文/manifest/as-of校验和共享 PDF/TXT/JSON locator replay；生成 pin 作 lineage，读用当前 policy。注册 `company-wiki-narrative-read`，不改 raw SourceRef/SourceExport，不开 Worker。
+- 新测试首轮 RED 捕获 SourceReadError 未归一、CLI fixture root 的 CFG-05。前者按 API 命名错误归一，后者测试配置改 read_only=true；生产配置不改。64 KiB 恶意输入参数的自动pytest ID过长引起两项 Windows setup error，显式短 ID 后 63 项全绿。
+- 真实 PDF 首轮 **3 failed / 1 passed（74.55s）**：第三方解析库打印提示污染 stdout，而 bundle/read receipt本身有效。新增污染回归先RED后用CLI专属静默上下文隔离vendor diagnostics；正式 CLI+四原文重跑 **19 passed in 120.36s**，无skip，run root清理。
+- 正式包可独立读取，不得依赖生成时外部校验。四项 summary source/language/citation/status反例先RED，复用现有 validate_summary_draft补入Bundle；旧容量测试需把引用同步到oversized span才能确实测容量，未放宽产品合同。TXT重复byte binding覆盖反例也通过。
+- 最终受影响 8文件节点包 **109 passed in 32.86s**；Ruff、7模块 mypy、host assumption gate GREEN。guard曾误报两个测试中的虚构绝对路径；这些用例只测禁止字段，值改为host-neutral字符串，未放宽guard或增加allowlist。mypy首次沙箱读urllib3遇ACL，实际用户环境通过；argparse.error签名改为NoReturn。
+- 四真实样本指标见[交接包](narrative_transport_handoff.md)，总包约原文2.04%；P07保持needs_review。所有原件完整SHA/mtime、生产config/control/catalog fingerprint不变。测试根 `.nt-real-20261003`、`.nt-final-20261003`、`.nt-output-red`、`.nt-binding-red`、`.nt-node-final`、`.nt-node-green`均删除；各agent独立测试根也删除。
+- 上轮RF scratch安全清理18个可完整枚举、无reparse的目录；22个ACL不可读目录保留，单目录takeown亦被OS拒绝，未扩大权限变更。它们不是原文；不可声称全部清完。根tracked `.coverage` 和生产raw/config未改。
+- 本轮产品/计划待正常commit/push；已提供RF与StockWiki独占consumer卡及golden交接，G-C/G-D仍未完成，生产Worker继续paused。
+
+## 2026-10-03 — G-A 收口，恢复 N3a
+
+- 当前已发布：CWP `2e674cc`、FF `c47c397`（ls-remote 实读）、RF `0573c40`；RF run `37110072067` verify/real-roots 全绿（2m15s/1m40s）。CI 根因修复已收口，不再增加逐提交长测。
+- 使用当前 FF 集成 checkout、CWP 主树与 RF 已发布 checkout，`test_source_ref_v2_three_repo_e2e.py` **1 passed in 8.69s**。正式原文复用、pathless、无 review receipt、同尺寸篡改拒绝通过；`.ga-mainline-20261003` 退出清理，0 实际下载。FF→ET→CWP 节点沿用 Phase58 的 191 passed/1 production-opt-in skip，不声称 live FMP 200。
+- 下一主线 N3a：先冻结独立 transport 细则，TDD 后实现精确 artifact read、原文/manifest/as-of/locator 校验、CLI 和 producer golden。产品 Store/Worker 已实现不重复。RF/StockWiki selected consumer 与 G-C/G-D 后续未完成，生产 Worker paused。
+- 本轮只读恢复命令误写不存在的 realroots 测试路径、PowerShell foreach 管道一次语法失败；改用实际 `tests/test_source_ref_v2_three_repo_e2e.py` 和先赋数组再输出。RF 旧 `.rf-*-20261003*` scratch 存在 ACL 不可读子树，当前不能将未完整枚举的目录记成已清理；原件与已跟踪 `.coverage` 不触碰。
+
 ## Session: 恢复实施与 S0a（2026-09-29）
 
 - 用户恢复长目标。先将 CWP 39 个先前未提交源码/测试变更及 CI/pre-commit 已删除 mypy 文件引用修正保存为 `db3ff32`，然后主树返回干净 `master@c5ce72b`；复用独立 `data-lake-reader` worktree 作为唯一 CWP 代码写入目录，主树仅写本计划。原始下载资料未移动或删除。

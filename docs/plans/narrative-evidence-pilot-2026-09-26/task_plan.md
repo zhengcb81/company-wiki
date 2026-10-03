@@ -1,5 +1,7 @@
 # 叙述性证据选择与摘要：小范围试点及实施方案
 
+> **2026-10-03 当前主线：**G-A0/G-A1、FF SourceRef+transcript companion 和 RF reader 已提交推送。RF `0573c40` 的远端 CI 两个 job 全绿；当前 FF `c47c397` → CWP `2e674cc` → RF `0573c40` 正式三仓测试 1 passed（8.69s），隔离根恢复。下一功能步骤是 [N3a 持久叙述包跨进程读取](narrative_transport_implementation.md)，复用现有 E-B Store/Worker，先 TDD，再由 RF/StockWiki 薄 consumer 汇合 G-C。下方历史未勾选项不是当前派发清单；生产 Worker 继续 paused，G-C/G-D 未完成。
+
 > 独立实施计划；不替代仓库根目录或任何已有专项计划。Phase 17 的旧库退役已完成；Phase 18 的离线 G1 选择、定位和草稿验证已完成一轮。**2026-09-27 新顺序：RF 主线并线已完成，先实施 R4 数据湖抽象层，再继续本计划的 W5/G2a、Worker 与空间处置。**本计划自身不写 RF，不启动生产 Worker；已有隔离叙述工位与主树未提交文件保持原样，待抽象层合同接入时按当前文件快照整合。
 
 ## Goal
@@ -722,8 +724,16 @@ G-A1尚未由producer/filing-fetch表示FF→ET→CWP下载完整链完成；真
 - [x] company-wiki transcript/read CLI 直接回归 **16 passed**；Ruff、相关四模块 mypy 和 `pre_push_gate.py --fast-contracts-only` 均绿。fast gate 在移除故障的自动插件加载并显式加载 `pytest_timeout` 后通过。
 - [x] FF SourceRef、ET `/2`、CWP handoff、v1 CLI 和 companion 节点包 **191 passed, 1 skipped in 50.40s**；Ruff 通过。唯一 skip 是既有 production opt-in 测试；隔离集成测试无 skip。测试根使用短路径 `C:\\cwt`，退出后清理。
 - [x] 记录 Windows E2E 首次失败根因：深层 pytest TEMP 路径导致隔离 company-wiki 的最终文件路径超过 Windows 可用长度，出现 `FileNotFoundError`；短 basetemp 后完整E2E通过，产品路径和实现未为测试特判。
-- [ ] 正常提交、快进推送FF集成线与CWP变更；随后执行正式 FF→CWP→RF 消费者大节点E2E（本阶段 FF→CWP 通过尚不等于RF消费链完成）。
+- [x] CWP `2e674cc`、FF `c47c397` 已推送；RF SourceRef 集成和 CI 根因修复已推送 `0573c40`，远端 run `37110072067` 两个 job 全绿。以当前三仓 checkout 重跑正式 source-ref E2E **1 passed in 8.69s**，原文复用/无 review/同尺寸篡改拒绝均实证，独立测试根清理。没有调用真实 FMP，不能宣称付费 provider 可用。
+
+## Phase 59：G-A 收口与 N3a 正式叙述包 transport（2026-10-03）
+
+- [x] 核当前三个已发布提交和三仓正式入口；同步跨线状态，避免重复 G-A0/G-A1、E-B 和 StockWiki W04。
+- [x] 先写[实施细则](narrative_transport_implementation.md)：独立 reference/request/receipt、精确 artifact version、当前原文 verified open、身份/期间/as-of、共享 locator replay、CLI byte/hash 协议与一次节点包。
+- [x] TDD 合同/集成 RED→GREEN；复用持久 Store/projector，增加精确工件读、独立只读 facade、共享 replay 和窄 transport/CLI；不改变原始 SourceRef/SourceExport wire。Bundle 独立读取时复核摘要来源/语言/引用/状态（四项 RED→GREEN），不再只依赖生成任务的外部校验。
+- [x] 最终本仓受影响节点包 **109 passed in 32.86s**，Ruff/七模块 mypy/host guard 绿；正式 CLI+四真实样本 **19 passed in 120.36s**。P01/P04/P07/T01 原件 SHA/mtime、生产 fingerprint 不变，测试根清理。第三方 PDF 提示污染二进制 stdout 的真实 RED 已修复，回归保护两条协议流。六份 producer golden 与[交接包](narrative_transport_handoff.md)已生成；空间样本 419,428/20,597,846 bytes≈2.04%，Replay模型不外推线上效果或全库。
+- [ ] 正常提交推送并更新 RF/StockWiki 接口交接卡，后续各仓薄 consumer 接线。Worker 仍 paused，原件保留。
 
 ## Next Step
 
-完成本阶段代码和计划文件的提交/快进推送；之后只做 G-A 剩余的大节点：用当前FF与CWP路径运行RF中已有的三仓 SourceRef E2E，检查测试时钟、真实字节hash和as-of，不放宽生产合同。若该测试需要修改RF源码，先确认确为合同问题而非过期夹具；独立consumer/研究状态不动。
+提交推送 N3a producer 并核远端快门后，按[交接包](narrative_transport_handoff.md)启动 RF、StockWiki 两条独占 consumer 卡，汇合 G-C；再做 G-D 精确派生清理。不要重复 G-A/E-B/W04，不引入每小步审查或全仓长测。

@@ -2,25 +2,18 @@
 
 from __future__ import annotations
 
-from collections.abc import Sequence
 from dataclasses import dataclass
-from typing import Protocol
 
 from company_wiki.source_catalog.narrative_evidence import (
     NARRATIVE_PARSER_NAME,
     NARRATIVE_PARSER_VERSION,
     NARRATIVE_SELECTOR_NAME,
     NARRATIVE_SELECTOR_VERSION,
-    verify_pdf_evidence_spans_bytes,
-    verify_transcript_evidence_spans,
 )
 from company_wiki.source_catalog.source_reader import SourceReadError
 from company_wiki.source_catalog.transcript_text_extract import (
     TranscriptMaterialError,
-    TranscriptTextLine,
-    extract_transcript_material,
 )
-from company_wiki.source_contract import EvidenceSpan
 
 from .execution_context import JobExecutionContext
 from .models import (
@@ -45,6 +38,11 @@ from .narrative_contracts import (
     SourceRevisionEventPayload,
 )
 from .narrative_model import NARRATIVE_PROMPT_VERSION
+from .narrative_replay import (
+    NarrativeReplayError,
+    PdfEvidenceReplayer,
+    replay_narrative_evidence,
+)
 from .narrative_source_guard import (
     NarrativeSourceGuardError,
     NarrativeSourceReader,
@@ -56,17 +54,6 @@ from .narrative_source_guard import (
 
 BUNDLE_PRODUCER_VERSION = "1.0.0"
 EFFECT_TYPE = "narrative_bundle.publish"
-
-
-class PdfEvidenceReplayer(Protocol):
-    def __call__(
-        self,
-        data: bytes,
-        *,
-        source_id: str,
-        source_sha256: str,
-        evidence_spans: Sequence[EvidenceSpan],
-    ) -> tuple[tuple[str, ...], tuple[str, ...]]: ...
 
 
 @dataclass(frozen=True)
@@ -182,7 +169,7 @@ class NarrativeVerifyHandler:
         pdf_replayer: PdfEvidenceReplayer | None = None,
     ) -> None:
         self._reader = reader
-        self._pdf_replayer = pdf_replayer or verify_pdf_evidence_spans_bytes
+        self._pdf_replayer = pdf_replayer
 
     def __call__(self, context: JobExecutionContext) -> HandlerResult:
         try:
@@ -258,106 +245,14 @@ class NarrativeVerifyHandler:
         return selected.prompt_review
 
     def _replay(self, data: bytes, selected: NarrativeSelectResult) -> None:
-        if selected.source_metadata.source_class == "filing":
-            self._replay_pdf(data, selected)
-            return
-        self._replay_transcript(data, selected)
-
-    def _replay_pdf(self, data: bytes, selected: NarrativeSelectResult) -> None:
         try:
-            verified, failed = self._pdf_replayer(
-                data,
-                source_id=selected.source_ref.source_id,
-                source_sha256=selected.source_ref.content_sha256,
-                evidence_spans=selected.evidence_spans,
-            )
-        except (RuntimeError, ValueError) as exc:
+            replay_narrative_evidence(data, selected, pdf_replayer=self._pdf_replayer)
+        except NarrativeReplayError as exc:
             raise _VerifyFailure(
                 "LOCATOR_REPLAY_FAILED",
                 HandlerOutcome.TERMINAL_FAILURE,
-                "PDF evidence replay could not complete",
+                "selected evidence replay could not complete",
             ) from exc
-        self._require_full_replay(selected.evidence_spans, verified, failed)
-
-    @staticmethod
-    def _replay_transcript(data: bytes, selected: NarrativeSelectResult) -> None:
-        material = extract_transcript_material(
-            data,
-            mime_type=selected.source_ref.mime_type,
-        )
-        material.verify(data)
-        if (
-            selected.transcript_lineage is None
-            or material.lineage_dict() != selected.transcript_lineage.to_dict()
-        ):
-            raise _VerifyFailure(
-                "LOCATOR_REPLAY_FAILED",
-                HandlerOutcome.TERMINAL_FAILURE,
-                "transcript material lineage differs from selection",
-            )
-        NarrativeVerifyHandler._verify_transcript_bindings(material.lines, selected)
-        try:
-            verified, failed = verify_transcript_evidence_spans(
-                material.text_utf8,
-                source_id=selected.source_ref.source_id,
-                source_sha256=selected.source_ref.content_sha256,
-                evidence_spans=selected.evidence_spans,
-                language=selected.source_metadata.language,
-            )
-        except (RuntimeError, ValueError) as exc:
-            raise _VerifyFailure(
-                "LOCATOR_REPLAY_FAILED",
-                HandlerOutcome.TERMINAL_FAILURE,
-                "transcript evidence replay could not complete",
-            ) from exc
-        NarrativeVerifyHandler._require_full_replay(
-            selected.evidence_spans, verified, failed
-        )
-
-    @staticmethod
-    def _verify_transcript_bindings(
-        lines: Sequence[TranscriptTextLine],
-        selected: NarrativeSelectResult,
-    ) -> None:
-        spans = {span.span_id: span for span in selected.evidence_spans}
-        for binding in selected.transcript_byte_bindings:
-            span = spans[binding.evidence_id]
-            start = span.structured_value.get("line_start")
-            end = span.structured_value.get("line_end")
-            bound_lines = tuple(
-                line
-                for line in lines
-                if binding.material_line_start
-                <= line.line_number
-                <= binding.material_line_end
-            )
-            actual = tuple(
-                (line.source_byte_start, line.source_byte_end) for line in bound_lines
-            )
-            if (
-                start != binding.material_line_start
-                or end != binding.material_line_end
-                or actual != binding.source_byte_ranges
-            ):
-                raise _VerifyFailure(
-                    "LOCATOR_REPLAY_FAILED",
-                    HandlerOutcome.TERMINAL_FAILURE,
-                    "transcript byte binding differs from original bytes",
-                )
-
-    @staticmethod
-    def _require_full_replay(
-        spans: Sequence[EvidenceSpan],
-        verified: Sequence[str],
-        failed: Sequence[str],
-    ) -> None:
-        expected = {span.span_id for span in spans}
-        if failed or set(verified) != expected or len(verified) != len(expected):
-            raise _VerifyFailure(
-                "LOCATOR_REPLAY_FAILED",
-                HandlerOutcome.TERMINAL_FAILURE,
-                "not every selected locator replayed exactly",
-            )
 
     @staticmethod
     def _bundle(

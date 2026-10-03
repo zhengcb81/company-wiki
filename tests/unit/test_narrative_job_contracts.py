@@ -383,5 +383,8 @@ def test_skip_bundle_has_stricter_cap_and_no_evidence_or_model() -> None:
 
 def test_bundle_enforces_full_byte_cap() -> None:
     oversized = _span(text="A" * BUNDLE_MAX_BYTES).to_dict()
+    payload = _bundle(evidence=[oversized])
+    # Keep citations valid so this test reaches the byte-budget boundary.
+    payload["summary"]["draft"]["claims"][0]["evidence_ids"] = [oversized["span_id"]]
     with pytest.raises(ContractSizeError, match="bundle"):
-        NarrativeBundle.from_dict(_bundle(evidence=[oversized]))
+        NarrativeBundle.from_dict(payload)

@@ -1,8 +1,8 @@
 # StockWiki 独立并行线：SourceExport v2 来源 reader
 
-> **状态：实现已并入 StockWiki `master@c8cfb2e7`，基础 CWP→verified-open→StockWiki reader G-B 已通过真实跨仓 E2E。**不要重复派发。本卡保留实现合同和验收记录；当前 StockWiki 独立任务是[G2b owner context producer W04](stockwiki_g2b_owner_context.md)。
+> **2026-10-03 状态：本卡已完成，不再派发。**reader 已并入 StockWiki 主线，基础 G-B 已通过真实跨仓 E2E；W01–W04 均已完成，[W04 卡](stockwiki_g2b_owner_context.md)保留交付记录。当前主线是 CWP [N3a 叙述传输实现](../narrative_transport_implementation.md)，RF/StockWiki selected 消费 G-C 仍 pending；它是新的接口范围，不应重复本卡 reader 实施。G-D/生产 Worker 仍 paused，IQS 活动项目归其既有 owner。
 
-> 可将**本文件单独交给一个新的 StockWiki harness**。总指挥负责跨仓合同和 G-B 汇合测试。此线仅写 `C:\Users\郑曾波\Projects\StockWiki` 的一个隔离工作树及该仓自己的测试/PWF；company-wiki、invest-quick-scan、revenue-forecast、filing-fetch、earnings-transcripts 都只读。StockWiki 同一时间只能有这一位产品代码写入者；若 W02/W03 已由另一个 StockWiki harness 开工，先由总指挥重新分配，不能并发改同仓。
+> 下方开工输入、命令、起点 SHA 和实施步骤是已交付 reader 的历史合同记录。总指挥负责新的跨仓接口与汇合；后续 StockWiki 工作仍只写该仓的独占工作树，其他仓只读，每仓维持单一产品代码写入者。不要依据本卡重新启动 W02/W03/W04 或接管 IQS。
 
 ## 0. 开工事实、目标与边界
 

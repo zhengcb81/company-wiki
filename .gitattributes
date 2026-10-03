@@ -3,3 +3,4 @@
 # ("cannot spawn .githooks/pre-push: No such file or directory").
 /.githooks/** text eol=lf
 /tests/golden/source_v2/*.json text eol=lf
+/tests/fixtures/narrative_transport_v1/*.json text eol=lf

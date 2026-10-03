@@ -18,6 +18,7 @@ import tempfile
 import uuid
 
 from .store import CatalogStore
+from .reader import ReadOnlyCatalogReader
 
 
 _SHA256 = re.compile(r"[0-9a-f]{64}\Z")
@@ -28,6 +29,20 @@ _SELECTION_STATUSES = frozenset(
 _QUALITY_STATUSES = frozenset(
     {"verified", "needs_review", "skipped_no_narrative"}
 )
+_LATEST_VISIBLE_SQL = """SELECT * FROM narrative_artifact_versions
+    WHERE document_id=? AND source_id=? AND source_sha256=? AND status='visible'
+    ORDER BY activated_at DESC, created_at DESC, artifact_version_id DESC LIMIT 1"""
+_EXACT_VISIBLE_SQL = """SELECT * FROM narrative_artifact_versions
+    WHERE artifact_version_id=? AND document_id=? AND source_id=?
+      AND source_sha256=? AND status='visible'"""
+_CURRENT_SOURCE_SQL = """SELECT d.primary_source_id, d.source_status, s.content_sha256
+    FROM documents AS d LEFT JOIN sources AS s ON s.source_id=d.primary_source_id
+    WHERE d.document_id=?"""
+_CURRENT_ARTIFACT_SQL = """SELECT 1 FROM narrative_artifact_versions AS v
+    JOIN documents AS d ON d.document_id=v.document_id
+    JOIN sources AS s ON s.source_id=d.primary_source_id
+    WHERE v.artifact_version_id=? AND v.status='visible'
+      AND d.primary_source_id=? AND d.source_status='active' AND s.content_sha256=?"""
 
 
 class NarrativeArtifactError(ValueError):
@@ -172,7 +187,8 @@ class LocalNarrativeObjectStore:
             raise NarrativeObjectIntegrityError("object key does not match expected hash")
         target = self._physical_path(key)
         try:
-            data = target.read_bytes()
+            with target.open("rb") as stream:
+                data = stream.read(expected_size + 1)
         except OSError as exc:
             raise NarrativeObjectIntegrityError("narrative object is unavailable") from exc
         self._verify(data, expected_sha256, expected_size)
@@ -201,6 +217,13 @@ class NarrativeArtifactStore:
             raise TypeError("objects must be LocalNarrativeObjectStore")
         self._catalog = catalog
         self._objects = objects
+
+    @classmethod
+    def for_reading(
+        cls, database_path: Path, objects: LocalNarrativeObjectStore,
+    ) -> "NarrativeArtifactReader":
+        """Open an existing catalog without initialization or any writer surface."""
+        return NarrativeArtifactReader(database_path, objects)
 
     @property
     def catalog_dir(self) -> Path:
@@ -398,15 +421,24 @@ class NarrativeArtifactStore:
         source_id: str,
         source_sha256: str,
     ) -> tuple[NarrativeArtifactVersion, bytes]:
+        version = self.latest_visible_version(
+            document_id=document_id, source_id=source_id, source_sha256=source_sha256,
+        )
+        return version, self._read_current_payload(version)
+
+    def latest_visible_version(
+        self,
+        *,
+        document_id: str,
+        source_id: str,
+        source_sha256: str,
+    ) -> NarrativeArtifactVersion:
+        """Discover a logical reference without reading artifact or source bytes."""
         if not _SHA256.fullmatch(source_sha256):
             raise ValueError("source_sha256 must be lowercase SHA-256")
         with self._catalog.transaction() as connection:
             row = connection.execute(
-                """SELECT v.* FROM narrative_artifact_versions AS v
-                   WHERE v.document_id=? AND v.source_id=? AND v.source_sha256=?
-                     AND v.status='visible'
-                   ORDER BY v.activated_at DESC, v.created_at DESC,
-                            v.artifact_version_id DESC LIMIT 1""",
+                _LATEST_VISIBLE_SQL,
                 (document_id, source_id, source_sha256),
             ).fetchone()
             if row is None:
@@ -414,8 +446,43 @@ class NarrativeArtifactStore:
                     "no visible artifact for the requested source"
                 )
             self._require_current_source(connection, row)
-            version = NarrativeArtifactVersion.from_row(row)
+            return NarrativeArtifactVersion.from_row(row)
 
+    def read_exact(
+        self,
+        *,
+        artifact_version_id: str,
+        document_id: str,
+        source_id: str,
+        source_sha256: str,
+        expected_sha256: str | None = None,
+        expected_size: int | None = None,
+    ) -> tuple[NarrativeArtifactVersion, bytes]:
+        """Read the referenced version, even when a newer summary is visible."""
+        if not isinstance(artifact_version_id, str) or not artifact_version_id.strip():
+            raise ValueError("artifact_version_id must be non-empty text")
+        if not _SHA256.fullmatch(source_sha256):
+            raise ValueError("source_sha256 must be lowercase SHA-256")
+        with self._catalog.transaction() as connection:
+            row = connection.execute(
+                _EXACT_VISIBLE_SQL,
+                (artifact_version_id, document_id, source_id, source_sha256),
+            ).fetchone()
+            if row is None:
+                raise NarrativeArtifactNotVisibleError(
+                    "the exact narrative artifact is not visible"
+                )
+            self._require_current_source(connection, row)
+            version = NarrativeArtifactVersion.from_row(row)
+            if (
+                expected_sha256 is not None and version.content_sha256 != expected_sha256
+            ) or (expected_size is not None and version.byte_size != expected_size):
+                raise NarrativeArtifactConflictError(
+                    "exact artifact metadata differs from its reference"
+                )
+        return version, self._read_current_payload(version)
+
+    def _read_current_payload(self, version: NarrativeArtifactVersion) -> bytes:
         payload = self._objects.read(
             version.object_key,
             expected_sha256=version.content_sha256,
@@ -423,38 +490,88 @@ class NarrativeArtifactStore:
         )
         with self._catalog.transaction() as connection:
             still_current = connection.execute(
-                """SELECT 1 FROM documents AS d
-                   JOIN sources AS s ON s.source_id=d.primary_source_id
-                   WHERE d.document_id=? AND d.primary_source_id=?
-                     AND d.source_status='active' AND s.content_sha256=?""",
-                (document_id, source_id, source_sha256),
+                _CURRENT_ARTIFACT_SQL,
+                (version.artifact_version_id, version.source_id, version.source_sha256),
             ).fetchone()
             if still_current is None:
                 raise NarrativeSourceNotCurrentError(
                     "source changed while reading the narrative artifact"
                 )
-        return version, payload
+        return payload
 
     @staticmethod
     def _require_current_source(
         connection: sqlite3.Connection, row: sqlite3.Row
     ) -> None:
         source = connection.execute(
-            """SELECT d.primary_source_id, d.source_status, s.content_sha256
-               FROM documents AS d
-               LEFT JOIN sources AS s ON s.source_id=d.primary_source_id
-               WHERE d.document_id=?""",
+            _CURRENT_SOURCE_SQL,
             (row["document_id"],),
         ).fetchone()
-        if (
-            source is None
-            or source["primary_source_id"] != row["source_id"]
-            or source["content_sha256"] != row["source_sha256"]
-            or source["source_status"] != "active"
+        _require_current_identity(row, source)
+
+
+def _require_current_identity(row: sqlite3.Row, source: sqlite3.Row | None) -> None:
+    if (
+        source is None
+        or source["primary_source_id"] != row["source_id"]
+        or source["content_sha256"] != row["source_sha256"]
+        or source["source_status"] != "active"
+    ):
+        raise NarrativeSourceNotCurrentError(
+            "artifact source is no longer the active primary"
+        )
+
+
+class NarrativeArtifactReader:
+    """Narrow read facade; it cannot create, migrate, prepare or publish artifacts."""
+
+    def __init__(self, database_path: Path, objects: LocalNarrativeObjectStore) -> None:
+        self._reader = ReadOnlyCatalogReader(database_path)
+        self._objects = objects
+
+    def close(self) -> None:
+        self._reader.close()
+
+    def _version(self, sql: str, params: tuple[str, ...]) -> NarrativeArtifactVersion:
+        row = self._reader.fetchone(sql, params)
+        if row is None:
+            raise NarrativeArtifactNotVisibleError("the narrative artifact is not visible")
+        source = self._reader.fetchone(_CURRENT_SOURCE_SQL, (row["document_id"],))
+        _require_current_identity(row, source)
+        return NarrativeArtifactVersion.from_row(row)
+
+    def latest_visible_version(
+        self, *, document_id: str, source_id: str, source_sha256: str,
+    ) -> NarrativeArtifactVersion:
+        if not _SHA256.fullmatch(source_sha256):
+            raise ValueError("source_sha256 must be lowercase SHA-256")
+        return self._version(_LATEST_VISIBLE_SQL, (document_id, source_id, source_sha256))
+
+    def read_exact(
+        self, *, artifact_version_id: str, document_id: str, source_id: str,
+        source_sha256: str, expected_sha256: str | None = None,
+        expected_size: int | None = None,
+    ) -> tuple[NarrativeArtifactVersion, bytes]:
+        if not isinstance(artifact_version_id, str) or not artifact_version_id.strip():
+            raise ValueError("artifact_version_id must be non-empty text")
+        if not _SHA256.fullmatch(source_sha256):
+            raise ValueError("source_sha256 must be lowercase SHA-256")
+        version = self._version(
+            _EXACT_VISIBLE_SQL, (artifact_version_id, document_id, source_id, source_sha256),
+        )
+        if (expected_sha256 is not None and version.content_sha256 != expected_sha256) or (
+            expected_size is not None and version.byte_size != expected_size
         ):
-            raise NarrativeSourceNotCurrentError(
-                "artifact source is no longer the active primary"
-            )
+            raise NarrativeArtifactConflictError("exact artifact differs from its reference")
+        data = self._objects.read(
+            version.object_key, expected_sha256=version.content_sha256,
+            expected_size=version.byte_size,
+        )
+        if self._reader.fetchone(
+            _CURRENT_ARTIFACT_SQL, (artifact_version_id, source_id, source_sha256),
+        ) is None:
+            raise NarrativeSourceNotCurrentError("source changed while reading the artifact")
+        return version, data
 
 
 __all__ = [
@@ -464,6 +581,7 @@ __all__ = [
     "NarrativeArtifactError",
     "NarrativeArtifactNotVisibleError",
     "NarrativeArtifactStore",
+    "NarrativeArtifactReader",
     "NarrativeArtifactVersion",
     "NarrativeObjectIntegrityError",
     "NarrativeSourceNotCurrentError",

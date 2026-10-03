@@ -960,6 +960,25 @@ class NarrativeBundle:
             raise NarrativeContractError("skip bundle contains narrative content")
         if not skipped and self.selection.status == "skipped_no_narrative":
             raise NarrativeContractError("non-skip bundle has skipped selection")
+        self._validate_summary()
+
+    def _validate_summary(self) -> None:
+        if self.summary.status == "summary_not_needed":
+            if self.quality_status != "skipped_no_narrative":
+                raise NarrativeContractError("only skip bundles may omit summaries")
+            return
+        if self.summary.status != "completed" or self.summary.draft is None:
+            raise NarrativeContractError("unsupported narrative bundle summary status")
+        try:
+            validate_summary_draft(
+                self.summary.draft,
+                source_id=self.source_ref.source_id,
+                source_sha256=self.source_ref.content_sha256,
+                language=self.source_metadata.language,
+                evidence_spans=self.evidence_spans,
+            )
+        except SummaryValidationError as exc:
+            raise NarrativeContractError("bundle summary does not bind its evidence") from exc
 
     def validate_against(
         self, selected: NarrativeSelectResult, summary: NarrativeSummaryResult

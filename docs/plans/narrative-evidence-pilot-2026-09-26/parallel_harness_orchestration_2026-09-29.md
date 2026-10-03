@@ -1,12 +1,16 @@
 # 六仓独占施工与总指挥集成计划（2026-09-29）
 
+> **2026-10-03 最新编排覆盖：**CWP `master@2e674cc`、FF `origin/main@c47c397`（远端 ref 已核）、ET `main@4924d57`、RF `main@0573c40` 已发布；G-A0/G-A1、FF companion 和选定范围的 G-A 汇合已完成。当前 FF→CWP→RF 三仓 SourceRef E2E 为 1 passed / 8.69 秒，独立测试根 `.ga-mainline-20261003` 已清理。FF→ET→CWP 历史节点包 191 passed / 1 skipped 见 [Phase 58](task_plan.md)，不代表 live FMP 200（历史真实请求为 402）。RF [Actions 37110072067](https://github.com/zhengcb81/revenue-forecast/actions/runs/37110072067) 两 job 全绿：verify 2 分 15 秒、real-roots 1 分 40 秒。
+
+> 当前主线为 [N3a 叙述传输实现](narrative_transport_implementation.md)，随后推进 RF/StockWiki selected 消费 G-C；G-D/生产 Worker 仍 paused。StockWiki W01–W04 已完成，旧 reader/W04 卡仅作合同与交付记录，不再派发重复任务。IQS 保持既有 owner，本轮范围不覆盖其活动项目。下方 2026-10-01 快照、旧待合并项和“可派发”措辞为历史；实际启动任务以主计划最新进度和对应施工细则为准，维持每仓单一写入者。
+
 > **2026-10-01 当前现场状态（后续更新见 Phase 34）：**CWP `master@00af53f` 已包含 E-B merge `9e73eb4`，合并后相关回归 349 passed/2 skipped；StockWiki `master@b4f3846` 已包含 W01/W02/W03、SourceExport reader、W04 和 MIC 补强，`check_all.sh` 686 passed，所有已知来源分支均为 master 祖先。RF `rf-impl main@3e03ce83` 已包含 `fcap@ee0a82bf` 全部已提交历史且干净（ahead origin 4）；revenue-forecast 的 fcap 工作树仍有大量未提交/不可见项，不能按旧审计下界清理或整树并线。FF 当前 `fcap@d35b6f5` 与 `origin/main` 同步，但本地 `main@c9799b7` 落后 39 个提交；SourceRef v2 与 transcript companion 两个干净 WIP worktree 有 4 个核心路径重叠，应由同一 FF owner 合入。ET `main@4924d57` 已推送 origin/main，`/2` producer 已实现；其本地 `.workbuddy-ai/` 与 `eval_results.json` 保留。IQS `master@56ff421` 已提交 owner 盘点；现有 V02/scoring 未跟踪工作由其 owner 管理；provisional G2b 正反 CLI 通过，但 full G2b、QA-04 与 SW-IDENT 仍有 pending。跨仓工作继续按每仓单一 owner，本计划不另开第二写入者。
 
 > **本计划已进入实施；当前提交与测试状态见 [Phase 26–34](task_plan.md) 与 [S0a/S0b 接口表](s0a_observed_interfaces_2026-09-29.md)。** 本任务的主 agent 是唯一总指挥：维护本目录总计划、冻结接口、收各仓提交、处理跨仓不兼容、运行跨仓真实数据 E2E 和发布汇总。各 harness 只写自己独占的项目仓库/隔离工作树；可以只读其它仓及本目录的合同。IQS 当前由既有 owner 维护，不另开同仓写入线。StockWiki reader/W02/W03/W04 均已通过本地单仓集成验收，收据见 [W04 owner-context card](harness_lanes/stockwiki_g2b_owner_context.md)。旧 [跨仓施工图](cross_repo_mainline_and_delivery_plan_2026-09-28.md)保留历史调查和详细试验背景，冲突时以本页、Phase 26–34 与 2026-09-29 清理方案为准。
 
-## 1. 唯一写入者与六份可直接派发的施工卡
+## 1. 唯一写入者与六仓施工卡（已交付项保留历史记录）
 
-| 线 / 独占项目目录 | 可直接交给 harness 的文档 | 输入 | 产出 |
+| 线 / 独占项目目录 | 施工卡 / 交付记录 | 输入 | 产出 |
 |---|---|---|---|
 | CWP / `C:\Users\郑曾波\Projects\company-wiki` 的**专用代码 worktree** | [CWP 施工卡](harness_lanes/company_wiki.md) | 本仓已保存的 2026-09-28 WIP、真实原件只读副本 | 来源读取/导出 golden、简化的精确采集接口、selected bundle 与可靠 Worker |
 | ET / `C:\Users\郑曾波\Projects\earnings-transcripts\earnings-transcripts` | [ET 施工卡](harness_lanes/earnings_transcripts.md) | 明确公司和 fiscal FY/Q 请求 | 原语言 TXT 的版本化精确工具结果 |

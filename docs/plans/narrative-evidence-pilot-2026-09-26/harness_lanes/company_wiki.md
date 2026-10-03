@@ -1,5 +1,9 @@
 # CWP 独占施工卡：来源、叙述证据与 Worker
 
+> **2026-10-03 最新状态覆盖：**CWP `master@2e674cc`、FF `origin/main@c47c397`（已核远端 ref）、ET `main@4924d57` 与 RF `main@0573c40` 已发布。G-A0/G-A1 和 FF transcript companion 已完成；当前三仓 `test_source_ref_v2_three_repo_e2e.py` 用这些 FF/CWP/RF 提交通过（1 passed，8.69 秒），独立根 `.ga-mainline-20261003` 已清理。G-A 选定接口范围已收口，下一步为正在实施的 [N3a 叙述传输细则](../narrative_transport_implementation.md)；RF/StockWiki selected 消费 G-C 仍 pending，G-D 和生产 Worker 仍 paused。
+
+> FF→ET→CWP 的历史节点包为 191 passed、1 skipped，见 [task_plan.md Phase 58](../task_plan.md)。它证明隔离 producer/CLI/真实字节链，不证明 live FMP 200；已记录的真实 API 结果为 402。RF [Actions 37110072067](https://github.com/zhengcb81/revenue-forecast/actions/runs/37110072067) 两个 job 均成功，verify 2 分 15 秒、real-roots 1 分 40 秒。下方较早“当前状态”、待发布和施工顺序保留为历史记录；恢复执行以本覆盖与主计划最新进度为准，不重复 E-B/G-A，也不修改 IQS owner 范围。
+
 > **2026-10-02 当前状态：**E-B 已并入 CWP 主线。9c1f9b7 修复 CLI 子进程 PYTHONPATH=src，Actions 37002442446 三版 Unit 全绿。d15a230 的 37005308707 三版 Unit 仍绿；Contract annotations 定位 10 个节点。WSL/Python 3.12 无父级 PYTHONPATH 复现 7 项，已修正 metadata object 资格筛选和 scanner 重复 handoff；三个相关 contract 模块 31 passed，完整七阶段 pre-push 全绿。新增针对 reader/scanner/resolver 的 commit-time contract hook。远端报告的三项 receipt-envelope 用例在 WSL 通过，平台差异待异常类诊断；新修复待 push/CI 验收。见 [task_plan.md Phase 44–46](../task_plan.md)。
 
 开工输入包：本卡、S0a observed 接口表、指定 base/worktree、只读 P/T 样本清单（绝对路径、SHA、大小、期次、locator oracle、隔离复制/清理规则）。缺样本只阻对应真样本验收，不阻本仓 RED/代码整理。
