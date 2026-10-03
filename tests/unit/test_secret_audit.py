@@ -77,7 +77,7 @@ def test_history_secret_is_detected_after_worktree_removal(tmp_path: Path) -> No
     assert audit["result"] == "blocked_external"
 
 
-def test_ignored_local_env_requires_rotation_but_is_not_repo_exposure(tmp_path: Path) -> None:
+def test_ignored_local_env_is_diagnostic_without_repo_exposure(tmp_path: Path) -> None:
     repo = _repo(tmp_path)
     (repo / ".gitignore").write_text(".env\n", encoding="utf-8")
     (repo / ".env.example").write_text("DEEPSEEK_API_KEY=your-key-here\n", encoding="utf-8")
@@ -91,8 +91,9 @@ def test_ignored_local_env_requires_rotation_but_is_not_repo_exposure(tmp_path: 
     assert secret not in serialized
     assert audit["summary"]["tracked_active_candidates"] == 0
     assert audit["summary"]["local_env_active_candidates"] == 1
-    assert audit["decision"]["provider_rotation"] == "external_action_pending"
+    assert audit["decision"]["provider_rotation"] == "not_indicated"
     assert audit["decision"]["history_rewrite"] == "not_indicated"
+    assert audit["result"] == "pass"
 
 
 def test_sanitize_claude_settings_removes_embedded_secret_without_exposing_it(

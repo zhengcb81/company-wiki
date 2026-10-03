@@ -1,8 +1,8 @@
 # Local pre-commit gate mirroring the CI quality workflow's fast checks.
 # Pins match CI exactly (ruff 0.15.18, mypy 1.19.0 via the local system).
-# Keep broad suites out of every commit hook. Changes to shared source-catalog
-# readers, receipts, resolver, assertion, or worker contracts run the curated
-# contract smoke set. Push and CI use that same set; CI also runs all Unit tests.
+# Commits run static checks only. Push and CI run the curated behavior smoke
+# set once each; CI also runs all Unit tests. Major implementation nodes run
+# their relevant integration and end-to-end tests.
 #
 #   pre-commit install   # once per clone (installs .git/hooks/pre-commit)
 #   pre-commit run --all-files   # full gate on demand
@@ -87,18 +87,6 @@ repos:
           narrative_summarize|narrative_source_guard|narrative_verify|
           narrative_runtime))\.py$
 
-      - id: metadata-reader-contracts
-        name: curated source-catalog and CI regression contracts
-        entry: python tools/pre_push_gate.py --fast-contracts-only
-        language: system
-        pass_filenames: false
-        types: [python]
-        files: >-
-          (?x)^src/company_wiki/source_catalog/(llm_summarizer|scanner|read_chain|store|resolver|reader|service|activation|assertion_service|prompt_injection|control)\.py$
-          |^tests/contract/(test_r4b05b_shared_column_readers|test_fc905_receipt_envelope|test_b10_read_chain|test_zr203_reader_rewire|test_zr1003_shadow_assertions|test_source_catalog_temp_worker_governance)\.py$
-          |^src/company_wiki/automation/migrations\.py$
-          |^tests/unit/test_automation_migrations\.py$
-
       - id: config-doctor
         name: config doctor (WU-7.1, mirrors CI)
         entry: >-
@@ -107,7 +95,10 @@ repos:
           runpy.run_path('scripts/config_doctor.py', run_name='__main__')"
         language: system
         pass_filenames: false
-        always_run: true
+        files: >-
+          (?x)^(config\.yaml$|config/|
+          scripts/(config|config_doctor)\.py$|
+          src/company_wiki/(config\.py$|source_catalog/[^/]*config[^/]*\.py$))
 
       # FC-1307-a: the host-assumption classes that passed every local hook and
       # broke CI (findings F-B01-9) - a host path baked into a test, an unguarded

@@ -16,22 +16,21 @@ SCRIPTS = ROOT / "scripts"
 sys.path.insert(0, str(SCRIPTS))
 
 from clean_env_gate import sanitized_environment as clean_environment
-from gate_runner import _sanitized_environment as gate_environment
 
 
-def test_gate_environments_disable_dotenv_and_strip_api_keys(monkeypatch) -> None:
+def test_isolated_environment_disables_dotenv_and_strips_api_keys(monkeypatch) -> None:
     monkeypatch.setenv("DEEPSEEK_API_KEY", "must-not-survive")
     monkeypatch.setenv("MINIMAX_API_KEY", "must-not-survive")
     monkeypatch.setenv("MIMO_API_KEY", "must-not-survive")
     monkeypatch.setenv("TAVILY_API_KEY", "must-not-survive")
-    for environment in (gate_environment(), clean_environment()):
-        assert "DEEPSEEK_API_KEY" not in environment
-        assert "MINIMAX_API_KEY" not in environment
-        assert "MIMO_API_KEY" not in environment
-        assert "TAVILY_API_KEY" not in environment
-        assert environment["PYTHON_DOTENV_DISABLED"] == "1"
-        assert environment["COMPANY_WIKI_NETWORK"] == "blocked"
-        assert environment["COMPANY_WIKI_REAL_LLM"] == "0"
+    environment = clean_environment()
+    assert "DEEPSEEK_API_KEY" not in environment
+    assert "MINIMAX_API_KEY" not in environment
+    assert "MIMO_API_KEY" not in environment
+    assert "TAVILY_API_KEY" not in environment
+    assert environment["PYTHON_DOTENV_DISABLED"] == "1"
+    assert environment["COMPANY_WIKI_NETWORK"] == "blocked"
+    assert environment["COMPANY_WIKI_REAL_LLM"] == "0"
 
 
 def test_config_cannot_reload_repository_dotenv_when_disabled() -> None:

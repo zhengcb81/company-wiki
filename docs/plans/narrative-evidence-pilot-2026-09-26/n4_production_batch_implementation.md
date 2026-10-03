@@ -1,6 +1,6 @@
 # N4：可运行的叙述批次、真实模型计量与持久恢复
 
-> 2026-10-03 未实施细则。G-A/N3a/G-C、B1/B3/B4已完成，见[实际整理收尾](harness_lanes/results/gd_b3_retirement_2026-10-03.md)；当前唯一下一步N4A scope RED→实现。先按本文冻结接口，再实现；保留现有AUTO唯一任务库、Supervisor、三步handler/projector，不启动旧normalize Worker。只在三个大节点验收，helper不增加审查。原件及来源/版本事实保留。shared readonly migration snapshot竞态已修，复用既有32项两平台/CI收据，不重开同一修复。
+> 2026-10-03 未实施细则。G-A/N3a/G-C、B1/B3/B4已完成，见[实际整理收尾](harness_lanes/results/gd_b3_retirement_2026-10-03.md)；当前先按task_plan S0清旁路/hook，N4A scope在独占范围并行RED→实现。先按本文冻结接口，再实现；保留现有AUTO唯一任务库、Supervisor、三步handler/projector，不启动旧normalize Worker。只在三个大节点验收，helper不增加审查。原件及来源/版本事实保留。shared readonly migration snapshot竞态已修，复用既有32项两平台/CI收据，不重开同一修复。
 
 ## 1. 已核缺口与目标
 
@@ -28,7 +28,7 @@
 - 新 production factory 是 importable module-level function `create_runtime(spec: WorkerProcessSpec) -> WorkerRuntime`；只在 child 构造 reader/model/本地 connection。compute 不持模型；model/mixed 一个模型实例，首版模型并发 1。
 - 新 batch application/CLI 复用 scheduler、Supervisor、runtime controller、dispatcher。部署路径只在 composition options；业务 DTO 只用 SourceRef / ID / hash。优先一个明确的 `company-wiki-narrative-batch`，不把只读 transport 变 writer。
 - request：`schema_version=narrative-batch-request/1`、`sources`（1–100 精确 SourceRef、重复折叠）、`profile=P1|P2|P4`（默认 P1）、`max_seconds`、`max_tokens`、`max_cost_usd`、模型配置的非秘密标识。配置/refs/hash 校验后确定精确 DAG job IDs，持久 run ID/输入 hash；相同 run 恢复，输入/模型/prompt/selector 版本变化具名冲突或新 generation，不能悄悄复用。
-- 同一 AUTO store 同时一个 batch coordinator。所有权是自动运行互斥/lease，不是人工授权合同；不能抢已有活跃 owner，不能 pause 其他活跃运行。沿用 runtime generation 与 legacy 暂停互锁，开始/退出/恢复有测试；不长持 CatalogOperationLock 等待解析/HTTP。
+- 同一 AUTO store 同时一个 batch coordinator。所有权是自动运行互斥/lease，不是人工授权合同；不能抢已有活跃 owner，不能 pause 其他活跃运行。沿用runtime generation；把主动有限批次与后台暂停明确分开，迁移LegacyWorkerControl调用者后删除旧新互锁，开始/退出/恢复有测试；不长持 CatalogOperationLock 等待解析/HTTP。
 - `NarrativeModelResponse` 增加明确 usage/elapsed 信息；无 usage 标 unknown，不能用 0 伪装。现有 replay fixture 可明确为测试计量，产品不引用它。
 - 一个薄 OpenAI-compatible HTTP adapter，一次 `generate` 至多一次 provider 请求，无隐式重试、fallback、全局成本日志。凭证从指定 env 在 child 读取，不进入 request/options/日志；网络 timeout、请求/响应字节 cap、错误体限长/脱敏。429/timeout 按既有 Worker retry；无 key 预检具名拒绝。
 - 在 AUTO 原数据库新增最小 versioned migration（run/budget 与每 attempt model reservation）。金额用整数 micro-USD、token 用整数，避免 float 累积；同事务预留，两个进程不能超额。绑定 run/attempt/request SHA/model/pricing version，成功记录 provider usage + 配置价格估算，未知 usage/超时/进程失联保留保守 reservation。已结束请求结果无有效摘要也计量；输出截断具名失败。
@@ -73,7 +73,7 @@
 
 ## 4. 顺序与完成定义
 
-1. G-C来源消费及B1/B3/B4已完成；现在从N4A开始，不重新恢复/重hash已删除归档或重做旧checkout整理。
+1. G-C来源消费及B1/B3/B4已完成；现在按task_plan先S0收口、N4A独占并行，不重新恢复/重hash已删除归档或重做旧checkout整理。
 2. N4A scope 先 RED→GREEN；与独立模型 HTTP 新文件可以并行，共享 Store/schema/prompt 只由一条 owner 实施。
 3. N4B 计量/预算/模型 prompt/factory/batch/retention→节点 A+B 集中验收。
 4. N4C真实小批→消费者读取→普通发布，再更新 G-D B2 调用者清单和生产可清理批次。

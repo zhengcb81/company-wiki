@@ -19,8 +19,10 @@ import pytest
 ROOT = Path(__file__).resolve().parents[2]
 SCRIPTS = ROOT / "scripts"
 sys.path.insert(0, str(SCRIPTS))
+sys.path.insert(0, str(ROOT / "tests"))
 
-from gate_runner import _sanitized_environment, production_data_snapshot
+from clean_env_gate import sanitized_environment
+from helpers.fixture_files import snapshot_files
 from writer_policy import (
     BLOCKED_EXIT_CODE,
     CONTROL_TOOL_ALLOWLIST,
@@ -67,10 +69,10 @@ def test_legacy_authorization_requires_two_explicit_factors(
     assert legacy_writer_authorized(environment) is expected
 
 
-def test_gate_environment_cannot_inherit_legacy_authorization(monkeypatch) -> None:
+def test_isolated_environment_cannot_inherit_legacy_authorization(monkeypatch) -> None:
     monkeypatch.setenv("COMPANY_WIKI_WRITE_MODE", "legacy")
     monkeypatch.setenv("COMPANY_WIKI_LEGACY_WRITERS", "allow")
-    environment = _sanitized_environment()
+    environment = sanitized_environment()
     assert environment["COMPANY_WIKI_WRITE_MODE"] == "off"
     assert environment["COMPANY_WIKI_LEGACY_WRITERS"] == "deny"
 
@@ -150,22 +152,6 @@ def test_critical_guard_survives_python_no_site_mode(script_name: str) -> None:
     assert "LEGACY WRITER BLOCKED" in completed.stdout
 
 
-def test_control_gate_cli_remains_available() -> None:
-    assert "gate_runner.py" in CONTROL_TOOL_ALLOWLIST
-    completed = subprocess.run(
-        [sys.executable, str(SCRIPTS / "gate_runner.py"), "--help"],
-        cwd=ROOT,
-        env=_blocked_environment(),
-        capture_output=True,
-        text=True,
-        encoding="utf-8",
-        errors="replace",
-        timeout=20,
-        check=False,
-    )
-    assert completed.returncode == 0, completed.stderr
-
-
 @pytest.mark.parametrize(
     "script_name",
     [
@@ -199,7 +185,7 @@ def test_source_workflow_classification_does_not_reenable_retired_research() -> 
     assert not SOURCE_WORKFLOW_TOOL_ALLOWLIST & PERMANENTLY_RETIRED_SCRIPTS
 
 
-def test_production_snapshot_detects_ignored_and_same_stat_content_changes(
+def test_fixture_snapshot_detects_ignored_and_same_stat_content_changes(
     tmp_path: Path,
 ) -> None:
     raw = tmp_path / "companies" / "样例公司" / "raw" / "source.md"
@@ -212,15 +198,23 @@ def test_production_snapshot_detects_ignored_and_same_stat_content_changes(
     state.parent.mkdir()
     state.write_bytes(b"state")
 
-    before = production_data_snapshot(tmp_path)
+    before = snapshot_files(tmp_path)
     original_stat = wiki.stat()
     wiki.write_text("bravo", encoding="utf-8")
     os.utime(wiki, ns=(original_stat.st_atime_ns, original_stat.st_mtime_ns))
-    after_rewrite = production_data_snapshot(tmp_path)
-    assert after_rewrite["digest"] != before["digest"]
+    after_rewrite = snapshot_files(tmp_path)
+    assert after_rewrite != before
+
+    # The original-file fixture is protected by content as well, even when
+    # a writer restores both its size and modification timestamp.
+    raw_stat = raw.stat()
+    raw.write_text("RAW", encoding="utf-8")
+    os.utime(raw, ns=(raw_stat.st_atime_ns, raw_stat.st_mtime_ns))
+    after_raw_rewrite = snapshot_files(tmp_path)
+    assert after_raw_rewrite != after_rewrite
 
     extra = tmp_path / "sectors" / "行业" / "raw" / "new.pdf"
     extra.parent.mkdir(parents=True)
     extra.write_bytes(b"pdf")
-    after_add = production_data_snapshot(tmp_path)
-    assert after_add["digest"] != after_rewrite["digest"]
+    after_add = snapshot_files(tmp_path)
+    assert after_add != after_raw_rewrite

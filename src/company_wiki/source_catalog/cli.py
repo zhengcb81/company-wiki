@@ -669,14 +669,14 @@ def _parser() -> argparse.ArgumentParser:
         "--assertion-ids", required=True, help="comma-separated assertion ids"
     )
     act_apply.add_argument("--policy-hash", required=True)
-    act_apply.add_argument("--reviewer", required=True)
+    act_apply.add_argument("--reviewer", help="optional actor label; defaults to the process user")
     act_apply.add_argument("--reason", required=True)
     act_rollback = activation_sub.add_parser(
         "rollback", help="revert a prior apply inside one catalog transaction"
     )
     act_rollback.add_argument("--receipt-id", required=True)
     act_rollback.add_argument("--cohort", help="must match the apply receipt")
-    act_rollback.add_argument("--reviewer", required=True)
+    act_rollback.add_argument("--reviewer", help="optional actor label; defaults to the process user")
     act_rollback.add_argument("--reason", required=True)
 
     runtime_policy = subparsers.add_parser(

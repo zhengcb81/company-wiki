@@ -76,8 +76,6 @@ def test_doctor_json_requires_no_llm_key_network_or_writes(tmp_path):
             "worker_importable": True,
             "event_sources_importable": True,
             "controller_importable": True,
-            "gold_review_handler_importable": True,
-            "human_inbox_importable": True,
             "llm_required": False,
             "models_importable": True,
             "network_required": False,

@@ -52,15 +52,17 @@ def test_rest04_fuzzy_batch_rejected():
     assert "must_target_one_document_id" in rejection.reasons
 
 
-def test_rest05_retired_auto_scan_never_restores():
-    """restore is explicit-only: no code path auto-restores retired assets."""
-    receipt, rejection = restore_asset(document_id="d1", **GATES)
-    assert receipt is not None  # explicit restore works
-    # a scanner-driven path would call with reviewer="" → rejected
-    auto = dict(GATES, reviewer="")
-    receipt, rejection = restore_asset(document_id="d1", **auto)
-    assert receipt is None
-    assert "reviewer_required" in rejection.reasons
+def test_explicit_restore_records_actor_without_manual_reviewer():
+    gates = {key: value for key, value in GATES.items() if key != "reviewer"}
+    receipt, rejection = restore_asset(document_id="d1", **gates)
+    assert receipt is not None
+    assert not rejection.reasons
+    assert receipt.reviewer
+    assert receipt.original_retire_reason == GATES["original_retire_reason"]
+    empty_label, rejection = restore_asset(document_id="d1", reviewer="", **gates)
+    assert empty_label is not None
+    assert empty_label.reviewer == receipt.reviewer
+    assert not rejection.reasons
 
 
 def test_rest06_receipt_preserves_history_and_can_revert():

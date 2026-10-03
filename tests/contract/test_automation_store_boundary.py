@@ -6,6 +6,7 @@ B02: no default database paths — neither source nor tests hard-code ``.state``
      or ``automation.db`` as a default constant.
 """
 
+import ast
 from pathlib import Path
 
 
@@ -20,12 +21,11 @@ OUTBOX_PATH = ROOT / "src" / "company_wiki" / "automation" / "outbox.py"
 WORKER_PATH = ROOT / "src" / "company_wiki" / "automation" / "worker.py"
 EVENT_SOURCES_PATH = ROOT / "src" / "company_wiki" / "automation" / "event_sources.py"
 CONTROLLER_PATH = ROOT / "src" / "company_wiki" / "automation" / "controller.py"
-GOLD_REVIEW_PATH = ROOT / "src" / "company_wiki" / "automation" / "handlers" / "gold_review.py"
-HUMAN_INBOX_PATH = ROOT / "src" / "company_wiki" / "automation" / "human_inbox.py"
 
 _ALLOWED_IMPORTS = {
     "__future__", "sqlite3", "json", "hashlib", "functools", "dataclasses",
     "pathlib", "typing", "collections", "collections.abc", "math",
+    "company_wiki._id_scope",
     "company_wiki.automation.models", "company_wiki.automation.migrations",
 }
 
@@ -127,30 +127,19 @@ def test_b01_controller_no_forbidden_tokens():
         assert token not in source, f"forbidden in controller.py: {token!r}"
 
 
-def test_b01_gold_review_no_forbidden_tokens():
-    source = GOLD_REVIEW_PATH.read_text(encoding="utf-8")
-    for token in _FORBIDDEN_TOKENS:
-        assert token not in source, f"forbidden in gold_review.py: {token!r}"
-
-
-def test_b01_human_inbox_no_forbidden_tokens():
-    source = HUMAN_INBOX_PATH.read_text(encoding="utf-8")
-    for token in _FORBIDDEN_TOKENS:
-        assert token not in source, f"forbidden in human_inbox.py: {token!r}"
-
-
 def test_b01_store_imports_only_allowed_modules():
     source = STORE_PATH.read_text(encoding="utf-8")
-    for line in source.splitlines():
-        stripped = line.strip()
-        if stripped.startswith("import ") or stripped.startswith("from "):
-            # Relative imports (from .xxx) are intra-package — allowed.
-            if stripped.startswith("from ."):
-                continue
-            if stripped.startswith("from "):
-                module = stripped.split()[1].split(".")[0]
-            else:
-                module = stripped.split()[1].split(".")[0]
+    for node in ast.walk(ast.parse(source)):
+        if isinstance(node, ast.ImportFrom):
+            if node.level:
+                continue  # Intra-package imports are allowed.
+            modules = (node.module,)
+        elif isinstance(node, ast.Import):
+            modules = tuple(alias.name for alias in node.names)
+        else:
+            continue
+        # Match full module names; sharing a top-level package is insufficient.
+        for module in modules:
             assert module in _ALLOWED_IMPORTS, f"unexpected import in store.py: {module!r}"
 
 

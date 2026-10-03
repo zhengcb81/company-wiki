@@ -8,6 +8,8 @@ import json
 import sqlite3
 import uuid
 
+from company_wiki._id_scope import normalize_id_scope
+
 from company_wiki.source_catalog.lock import (
     CatalogOperationLockedError,
     CatalogOperationLock,
@@ -112,7 +114,10 @@ class NarrativeEffectDispatcher:
         self,
         automation: AutomationStore,
         artifacts: NarrativeArtifactStore,
+        *,
+        allowed_job_ids: tuple[str, ...] | None = None,
     ) -> None:
+        self._allowed_job_ids = normalize_id_scope(allowed_job_ids, name="allowed_job_ids")
         self._automation = automation
         self._artifacts = artifacts
 
@@ -126,6 +131,8 @@ class NarrativeEffectDispatcher:
     ) -> NarrativeProjectionReceipt:
         require_utc_timestamp(now)
         require_utc_timestamp(lease_until)
+        if self._allowed_job_ids == ():
+            return NarrativeProjectionReceipt(None, "empty")
         lease = self._automation.claim_next_outbox(
             worker_id=worker_id,
             lease_token=f"narrative-outbox-{uuid.uuid4().hex}",
@@ -133,6 +140,7 @@ class NarrativeEffectDispatcher:
             lease_until=lease_until,
             expected_generation=expected_generation,
             allowed_effect_types=(EFFECT_TYPE,),
+            allowed_job_ids=self._allowed_job_ids,
         )
         if lease is None:
             return NarrativeProjectionReceipt(None, "empty")
@@ -233,8 +241,21 @@ class NarrativeEffectDispatcher:
         self, *, activated_at: str, limit: int = 100
     ) -> tuple[str, ...]:
         require_utc_timestamp(activated_at)
+        if type(limit) is not int or limit < 1:
+            raise ValueError("limit must be a positive integer")
+        if self._allowed_job_ids == ():
+            return ()
+        effect_ids = None
+        if self._allowed_job_ids is not None:
+            effect_ids = self._automation.effect_ids_for_jobs(
+                self._allowed_job_ids, effect_type=EFFECT_TYPE,
+            )
+            if not effect_ids:
+                return ()
         activated: list[str] = []
-        for artifact in self._artifacts.prepared_effects(limit=limit):
+        for artifact in self._artifacts.prepared_effects(
+            limit=limit, allowed_effect_ids=effect_ids,
+        ):
             try:
                 with CatalogOperationLock(
                     self._artifacts.catalog_dir,
@@ -246,6 +267,7 @@ class NarrativeEffectDispatcher:
                     effect = self._automation.get_effect(artifact.effect_id)
                     if (
                         effect is None
+                        or (self._allowed_job_ids is not None and effect.job_id not in self._allowed_job_ids)
                         or effect.status is not EffectStatus.VERIFIED
                         or effect.actual_after_hash != artifact.content_sha256
                     ):

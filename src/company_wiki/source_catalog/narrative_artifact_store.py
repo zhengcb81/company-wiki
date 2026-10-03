@@ -17,6 +17,8 @@ import sqlite3
 import tempfile
 import uuid
 
+from company_wiki._id_scope import normalize_id_scope
+
 from .store import CatalogStore
 from .reader import ReadOnlyCatalogReader
 
@@ -402,15 +404,25 @@ class NarrativeArtifactStore:
             ).fetchone()
             return NarrativeArtifactVersion.from_row(activated)
 
-    def prepared_effects(self, *, limit: int = 100) -> tuple[NarrativeArtifactVersion, ...]:
+    def prepared_effects(
+        self, *, limit: int = 100, allowed_effect_ids: tuple[str, ...] | None = None,
+    ) -> tuple[NarrativeArtifactVersion, ...]:
         if type(limit) is not int or limit < 1:
             raise ValueError("limit must be a positive integer")
+        allowed_effect_ids = normalize_id_scope(allowed_effect_ids, name="allowed_effect_ids")
+        if allowed_effect_ids == ():
+            return ()
+        scope_sql = ""
+        parameters: tuple[object, ...] = ()
+        if allowed_effect_ids is not None:
+            scope_sql = "AND effect_id IN (" + ",".join("?" for _ in allowed_effect_ids) + ") "
+            parameters = allowed_effect_ids
         with self._catalog.transaction() as connection:
             rows = connection.execute(
-                """SELECT * FROM narrative_artifact_versions
-                   WHERE status='prepared'
-                   ORDER BY created_at, artifact_version_id LIMIT ?""",
-                (limit,),
+                "SELECT * FROM narrative_artifact_versions WHERE status='prepared' "
+                f"{scope_sql}"
+                "ORDER BY created_at, artifact_version_id LIMIT ?",
+                parameters + (limit,),
             ).fetchall()
             return tuple(NarrativeArtifactVersion.from_row(row) for row in rows)
 

@@ -114,7 +114,7 @@ def test_utc_timestamp_accepts_exact_schema_format():
 
 def test_job_key_is_stable_and_matches_frozen_formula():
     m = load_models()
-    parts = ("gold.validate_receipt", "review_receipt", "receipt-1", digest("input"), "p1", "1.0.0")
+    parts = ("source.narrative_verify", "source_revision", "revision-1", digest("input"), "p1", "1.0.0")
     expected = digest("|".join(parts))
     assert m.make_job_key(*parts) == expected
     assert m.make_job_key(*parts) == m.make_job_key(*parts)

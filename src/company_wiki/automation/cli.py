@@ -40,8 +40,6 @@ def _doctor() -> dict[str, object]:
             "worker_importable": True,
             "event_sources_importable": True,
             "controller_importable": True,
-            "gold_review_handler_importable": True,
-            "human_inbox_importable": True,
             "llm_required": False,
             "models_importable": True,
             "network_required": False,

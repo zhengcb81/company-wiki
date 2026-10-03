@@ -1,3 +1,5 @@
+> 2026-10-03 当前施工由 [task_plan.md](task_plan.md) 的S0–S6统一定义。本文保留历史技术背景，旧审批/签收、原件处置和逐小步审查要求不再执行；原件全部保留。
+
 # 执行卡：叙述性证据流水线 W0–W7
 
 > **后续 W/D 实施卡；本轮 F0–F5 已获授权并单独执行。** 总体目标、样本和已验证事实分别见 [implementation_plan.md](implementation_plan.md)、[findings.md](findings.md)。执行时新建独立实施记录，不修改当前或其他项目的活动计划指针。W/N/D 卡按依赖关系实施，**集中在 [G0–G4 大节点](milestone_review_cadence.md)审查；本文件和旧审查/测试文档中“逐卡签收/逐步全验”的频率均以该修订为准**。具体断言见 [review_protocol.md](review_protocol.md)、[test_acceptance_plan.md](test_acceptance_plan.md)；G1–G4 的真实端到端路径、run-id 测试目录与清理后基线恢复见 [end_to_end_test_plan.md](end_to_end_test_plan.md)。

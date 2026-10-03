@@ -384,24 +384,26 @@ def test_cli_activation_apply_rollback_roundtrip(tmp_path, capsys):
          "--epoch", "epoch-2", "--cohort", "cohort-a",
          "--assertion-ids", joined,
          "--policy-hash", current_policy_hash,
-         "--reviewer", "cli-user", "--reason", "cli drill",
+         "--reason", "cli drill",
          ]
     )
     assert rc == 0
     out = json.loads(capsys.readouterr().out)
     assert out["kind"] == "apply"
     assert out["receipt_id"]
+    assert out["reviewer"]  # Legacy field records the actual process actor.
 
     rc = main(
         ["--config", str(config_path), "activation", "rollback",
          "--receipt-id", out["receipt_id"],
-         "--reviewer", "cli-user", "--reason", "cli drill rollback",
+         "--reason", "cli drill rollback",
          ]
     )
     assert rc == 0
     rolled = json.loads(capsys.readouterr().out)
     assert rolled["kind"] == "rollback"
     assert rolled["applies_receipt_id"] == out["receipt_id"]
+    assert rolled["reviewer"] == out["reviewer"]
 
 
 # --- immutable journal receipt --------------------------------------------

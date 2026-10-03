@@ -37,7 +37,6 @@
       "max_matches": 0,
       "exclude": [
         "scripts/recovery_baseline.py",
-        "scripts/gate_runner.py",
         "scripts/clean_env_gate.py",
         "scripts/architecture_gate.py"
       ],

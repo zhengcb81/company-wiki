@@ -15,6 +15,8 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Callable, Protocol, cast
 
+from company_wiki._id_scope import normalize_id_scope
+
 from .models import ClaimedWork
 from .registry import HandlerRegistry
 from .store import AutomationStore
@@ -50,8 +52,12 @@ class WorkerProcessSpec:
     heartbeat_interval_seconds: float
     idle_sleep_seconds: float
     child_log_max_bytes: int
+    allowed_job_ids: tuple[str, ...] | None = None
 
     def __post_init__(self) -> None:
+        object.__setattr__(self, "allowed_job_ids", normalize_id_scope(
+            self.allowed_job_ids, name="allowed_job_ids",
+        ))
         if self.role not in {"mixed", "compute", "model"}:
             raise ValueError(f"unknown worker role: {self.role}")
         if not self.worker_id or not self.runtime_factory_path:
@@ -164,6 +170,7 @@ def run_worker_process(
                 lease_seconds=spec.lease_seconds,
                 heartbeat_interval_seconds=spec.heartbeat_interval_seconds,
                 allowed_job_types=spec.allowed_job_types,
+                allowed_job_ids=spec.allowed_job_ids,
                 lifecycle_callback=runtime.lifecycle_callback,
             )
             while not stop_event.is_set() and os.getppid() == parent_pid:

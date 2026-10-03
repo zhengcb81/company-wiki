@@ -1,3 +1,5 @@
+> 2026-10-03 当前施工由 [task_plan.md](task_plan.md) 的S0–S6统一定义。本文保留历史技术背景，旧审批/签收、原件处置和逐小步审查要求不再执行；原件全部保留。
+
 # 自动化验收规则
 
 > 2026-09-29 当前跨仓节点名和独占 owner 见[并行总计划](parallel_harness_orchestration_2026-09-29.md)；旧 G0–G3 名称只标识早期测试类别。具体人工门禁删除顺序见[统一清理方案](gate_and_contract_simplification_2026-09-29.md)。

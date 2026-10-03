@@ -12,6 +12,8 @@ from pathlib import Path
 from types import TracebackType
 from typing import Protocol
 
+from company_wiki._id_scope import normalize_id_scope
+
 from .models import JobStatus
 from .store import AutomationStore
 from .worker_process import WorkerProcessSpec, run_worker_process
@@ -60,8 +62,12 @@ class SupervisorConfig:
     stop_grace_seconds: float = 5.0
     child_log_max_bytes: int = 1_048_576
     max_restarts_per_slot: int = 3
+    allowed_job_ids: tuple[str, ...] | None = None
 
     def __post_init__(self) -> None:
+        object.__setattr__(self, "allowed_job_ids", normalize_id_scope(
+            self.allowed_job_ids, name="allowed_job_ids",
+        ))
         profile_slots(self.profile)
         if not isinstance(self.db_path, Path) or not isinstance(self.log_dir, Path):
             raise TypeError("db_path and log_dir must be pathlib.Path values")
@@ -182,8 +188,8 @@ class AutomationSupervisor:
         if not self._started or self._stopping:
             return
         now = _now()
-        self._store.reap_expired_attempts(now=now)
-        self._store.promote_ready_jobs(now=now)
+        self._store.reap_expired_attempts(now=now, allowed_job_ids=self._config.allowed_job_ids)
+        self._store.promote_ready_jobs(now=now, allowed_job_ids=self._config.allowed_job_ids)
         for slot in profile_slots(self._config.profile):
             worker_id = slot.worker_id
             child = self._children.get(worker_id)
@@ -252,6 +258,7 @@ class AutomationSupervisor:
             heartbeat_interval_seconds=self._config.heartbeat_interval_seconds,
             idle_sleep_seconds=self._config.idle_sleep_seconds,
             child_log_max_bytes=self._config.child_log_max_bytes,
+            allowed_job_ids=self._config.allowed_job_ids,
         )
         stop_event = self._context.Event()
         process = self._context.Process(

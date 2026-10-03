@@ -70,7 +70,24 @@ def test_registry_known_types():
     assert "source.narrative_verify" in known
     assert "source.normalize" not in known
     assert "source.analyze" not in known
-    assert "gold.validate_receipt" in known
+    assert "gold.validate_receipt" not in known
+
+
+@pytest.mark.parametrize(
+    "job_type",
+    (
+        "gold.refresh_packet",
+        "gold.validate_receipt",
+        "gold.promote_reviewed",
+        "analysis.validate",
+        "analysis.review",
+    ),
+)
+def test_default_registry_does_not_schedule_retired_review_workflows(job_type):
+    r = _registry_mod()
+    registry = r.create_default_registry()
+    with pytest.raises(r.UnknownJobTypeError):
+        registry.get(job_type)
 
 
 def test_registry_unknown_job_type_raises():
@@ -267,7 +284,7 @@ def test_policy_schema_change_forces_high():
 def test_policy_knowledge_write_is_medium():
     p = _policy_mod()
     r = _registry_mod()
-    spec = r.create_default_registry().get("gold.promote_reviewed")
+    spec = r.create_default_registry().get("source.narrative_verify")
     risk = p.compute_risk(spec)
     assert risk == _models().RiskClass.MEDIUM
 
@@ -379,43 +396,22 @@ def test_planner_policy_violation_propagates():
     assert len(dag.jobs) == 3
 
 
-def test_planner_analysis_proposal_produces_validate_and_review():
-    pl = _planner_mod()
-    r = _registry_mod()
-    _policy_mod()
-    reg = r.create_default_registry()
-    evt = _make_event(event_type="analysis.proposal_ready")
-    dag = pl.plan_jobs(evt, reg)
-    job_types = {j.job_type for j in dag.jobs}
-    assert "analysis.validate" in job_types
-    assert "analysis.review" in job_types
-
-
-def test_planner_gold_inputs_changed_produces_refresh():
+@pytest.mark.parametrize(
+    "event_type",
+    (
+        "analysis.proposal_ready",
+        "gold.inputs_changed",
+        "review.receipt_changed",
+        "review.approved",
+    ),
+)
+def test_planner_rejects_retired_review_events(event_type):
     pl = _planner_mod()
     r = _registry_mod()
     reg = r.create_default_registry()
-    evt = _make_event(event_type="gold.inputs_changed")
-    dag = pl.plan_jobs(evt, reg)
-    assert dag.jobs[0].job_type == "gold.refresh_packet"
-
-
-def test_planner_review_receipt_changed_produces_validate():
-    pl = _planner_mod()
-    r = _registry_mod()
-    reg = r.create_default_registry()
-    evt = _make_event(event_type="review.receipt_changed")
-    dag = pl.plan_jobs(evt, reg)
-    assert dag.jobs[0].job_type == "gold.validate_receipt"
-
-
-def test_planner_review_approved_produces_promote():
-    pl = _planner_mod()
-    r = _registry_mod()
-    reg = r.create_default_registry()
-    evt = _make_event(event_type="review.approved")
-    dag = pl.plan_jobs(evt, reg)
-    assert dag.jobs[0].job_type == "gold.promote_reviewed"
+    evt = _make_event(event_type=event_type)
+    with pytest.raises(pl.PlannerError, match="unknown event type"):
+        pl.plan_jobs(evt, reg)
 
 
 def test_planner_job_fields_populated():

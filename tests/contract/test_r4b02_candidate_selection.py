@@ -1013,18 +1013,6 @@ def test_r4b02_documented_difference_from_pre_b02_is_pinned(tmp_path):
 # ---------------------------------------------------------------------------
 
 
-def test_r4b02_complexity_ratchet_table_is_not_edited() -> None:
-    """S-7: B may not raise a ratchet ceiling.  B02 keeps the two changed
-    files inside their frozen values instead of editing the table."""
-    import importlib.util
-
-    ratchet_path = Path(__file__).with_name("test_fc1204_complexity_ratchet.py")
-    spec = importlib.util.spec_from_file_location("_r4b02_ratchet", ratchet_path)
-    assert spec is not None and spec.loader is not None
-    module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
-    assert module.FROZEN_MAX["service.py"] == 45
-    assert module.FROZEN_MAX["resolver.py"] == 103
 
 
 def test_r4b02_no_new_source_catalog_module_was_added() -> None:

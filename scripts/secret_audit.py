@@ -225,7 +225,8 @@ def build_audit(root: Path, local_env_path: Path | None = Path(".env")) -> dict[
     tracked_active = sum(item["classification"] == "active_candidate" for item in tracked)
     history_active = sum(item["classification"] == "active_candidate" for item in history)
     local_active = sum(item["classification"] == "active_candidate" for item in local)
-    any_active = tracked_active + history_active + local_active > 0
+    # An ignored local credential is configuration, not repository exposure.
+    any_active = tracked_active + history_active > 0
     remote_refs = sorted(
         ref
         for ref in _git(root, ["for-each-ref", "--format=%(refname:short)", "refs/remotes/"])

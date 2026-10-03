@@ -14,6 +14,8 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Generic, TypeVar
 
+from company_wiki._id_scope import normalize_id_scope
+
 from .dag_persistence import (
     DAGConflictError,
     DAGEventNotFoundError,
@@ -524,19 +526,24 @@ def _block_terminal_dependencies(
     connection: sqlite3.Connection,
     *,
     now: str,
+    allowed_job_ids: tuple[str, ...] | None = None,
 ) -> None:
+    scope_sql = ""
+    parameters: tuple[object, ...] = (
+        JobStatus.PLANNED.value, JobStatus.DEAD_LETTER.value, JobStatus.CANCELLED.value,
+    )
+    if allowed_job_ids is not None:
+        scope_sql = "AND child.job_id IN (" + ",".join("?" for _ in allowed_job_ids) + ") "
+        parameters += allowed_job_ids
     rows = connection.execute(
         "SELECT child.job_id AS child_id, parent.job_id AS parent_id, "
         "parent.status AS parent_status FROM jobs child "
         "JOIN job_dependencies d ON d.job_id = child.job_id "
         "JOIN jobs parent ON parent.job_id = d.depends_on_job_id "
         "WHERE child.status = ? AND parent.status IN (?, ?) "
+        f"{scope_sql}"
         "ORDER BY child.job_id, parent.job_id",
-        (
-            JobStatus.PLANNED.value,
-            JobStatus.DEAD_LETTER.value,
-            JobStatus.CANCELLED.value,
-        ),
+        parameters,
     ).fetchall()
     failures: dict[str, list[str]] = {}
     for row in rows:
@@ -959,7 +966,11 @@ class AutomationStore:
         lease_until: str,
         expected_generation: int,
         allowed_job_types: tuple[str, ...] | None = None,
+        allowed_job_ids: tuple[str, ...] | None = None,
     ) -> ClaimedWork | None:
+        allowed_job_ids = normalize_id_scope(allowed_job_ids, name="allowed_job_ids")
+        if allowed_job_ids == ():
+            return None
         if allowed_job_types is not None and not allowed_job_types:
             return None
 
@@ -971,6 +982,10 @@ class AutomationStore:
                 placeholders = ",".join("?" for _ in allowed_job_types)
                 type_sql = f" AND j.job_type IN ({placeholders})"
                 params.extend(allowed_job_types)
+            if allowed_job_ids is not None:
+                placeholders = ",".join("?" for _ in allowed_job_ids)
+                type_sql += f" AND j.job_id IN ({placeholders})"
+                params.extend(allowed_job_ids)
             row = conn.execute(
                 f"SELECT {_JOB_COLS.replace('job_id', 'j.job_id', 1)} FROM jobs j "
                 "WHERE j.status = ? AND j.not_before <= ?"
@@ -1113,19 +1128,30 @@ class AutomationStore:
 
         return self._write_transaction(_op)
 
-    def promote_ready_jobs(self, *, now: str) -> tuple[str, ...]:
+    def promote_ready_jobs(
+        self, *, now: str, allowed_job_ids: tuple[str, ...] | None = None,
+    ) -> tuple[str, ...]:
+        allowed_job_ids = normalize_id_scope(allowed_job_ids, name="allowed_job_ids")
+        if allowed_job_ids == ():
+            return ()
         def _op(conn):
-            _block_terminal_dependencies(conn, now=now)
+            _block_terminal_dependencies(conn, now=now, allowed_job_ids=allowed_job_ids)
+            scope_sql = ""
+            parameters: tuple[object, ...] = (JobStatus.PLANNED.value, JobStatus.RETRY_WAIT.value, now)
+            if allowed_job_ids is not None:
+                scope_sql = "AND j.job_id IN (" + ",".join("?" for _ in allowed_job_ids) + ") "
+                parameters += allowed_job_ids
             rows = conn.execute(
                 f"SELECT {_JOB_COLS.replace('job_id', 'j.job_id', 1)} FROM jobs j "
                 "WHERE j.status IN (?, ?) AND j.not_before <= ? "
+                f"{scope_sql}"
                 "AND NOT EXISTS (SELECT 1 FROM job_dependencies d JOIN jobs parent "
                 "ON parent.job_id = d.depends_on_job_id "
                 "WHERE d.job_id = j.job_id AND (parent.status != d.required_status "
                 "OR NOT EXISTS (SELECT 1 FROM attempts a WHERE a.job_id = parent.job_id "
                 "AND a.outcome = 'succeeded' AND a.result_json IS NOT NULL))) "
                 "ORDER BY j.priority DESC, j.created_at, j.job_id",
-                (JobStatus.PLANNED.value, JobStatus.RETRY_WAIT.value, now),
+                parameters,
             ).fetchall()
             promoted: list[str] = []
             for row in rows:
@@ -1138,16 +1164,27 @@ class AutomationStore:
 
         return self._write_transaction(_op)
 
-    def reap_expired_attempts(self, *, now: str) -> tuple[str, ...]:
+    def reap_expired_attempts(
+        self, *, now: str, allowed_job_ids: tuple[str, ...] | None = None,
+    ) -> tuple[str, ...]:
+        allowed_job_ids = normalize_id_scope(allowed_job_ids, name="allowed_job_ids")
+        if allowed_job_ids == ():
+            return ()
         def _op(conn):
+            scope_sql = ""
+            parameters: tuple[object, ...] = (now, JobStatus.RUNNING.value)
+            if allowed_job_ids is not None:
+                scope_sql = "AND j.job_id IN (" + ",".join("?" for _ in allowed_job_ids) + ") "
+                parameters += allowed_job_ids
             rows = conn.execute(
                 f"SELECT {_ATTEMPT_COLS_A} "
                 "FROM attempts a JOIN jobs j ON j.job_id = a.job_id "
                 "WHERE a.finished_at IS NULL AND a.lease_until < ? "
                 "AND j.status = ? AND a.attempt_no = (SELECT MAX(a2.attempt_no) "
                 "FROM attempts a2 WHERE a2.job_id = a.job_id) "
+                f"{scope_sql}"
                 "ORDER BY a.job_id",
-                (now, JobStatus.RUNNING.value),
+                parameters,
             ).fetchall()
             reaped: list[str] = []
             for row in rows:
@@ -1353,6 +1390,29 @@ class AutomationStore:
         finally:
             conn.close()
 
+    def effect_ids_for_jobs(
+        self, allowed_job_ids: tuple[str, ...], *, effect_type: str,
+    ) -> tuple[str, ...]:
+        """Map a batch to effect IDs in one read, without catalog/AUTO coupling."""
+        scope = normalize_id_scope(allowed_job_ids, name="allowed_job_ids")
+        if scope is None:
+            raise TypeError("allowed_job_ids must be a tuple")
+        if not isinstance(effect_type, str) or not effect_type or effect_type.strip() != effect_type:
+            raise ValueError("effect_type must be a non-empty name")
+        if not scope:
+            return ()
+        placeholders = ",".join("?" for _ in scope)
+        conn = self._connect()
+        try:
+            rows = conn.execute(
+                "SELECT effect_id FROM effects WHERE effect_type=? "
+                f"AND job_id IN ({placeholders}) ORDER BY created_at, effect_id",
+                (effect_type,) + scope,
+            ).fetchall()
+            return tuple(row["effect_id"] for row in rows)
+        finally:
+            conn.close()
+
     # -- Job CAS transition (batch 3 skeleton) ----------------------------- #
 
     def transition_job(
@@ -1460,7 +1520,11 @@ class AutomationStore:
         lease_until: str,
         expected_generation: int,
         allowed_effect_types: tuple[str, ...] | None = None,
+        allowed_job_ids: tuple[str, ...] | None = None,
     ) -> OutboxLease | None:
+        allowed_job_ids = normalize_id_scope(allowed_job_ids, name="allowed_job_ids")
+        if allowed_job_ids == ():
+            return None
         if not worker_id or not lease_token:
             raise ValueError("worker_id and lease_token must not be empty")
         if lease_until < now:
@@ -1488,6 +1552,10 @@ class AutomationStore:
                 placeholders = ",".join("?" for _ in allowed_effect_types)
                 statement += f"AND e.effect_type IN ({placeholders}) "
                 parameters += allowed_effect_types
+            if allowed_job_ids is not None:
+                placeholders = ",".join("?" for _ in allowed_job_ids)
+                statement += f"AND j.job_id IN ({placeholders}) "
+                parameters += allowed_job_ids
             statement += (
                 "ORDER BY CASE WHEN o.status = 'leased' THEN o.lease_until "
                 "ELSE o.not_before END, o.outbox_id LIMIT 1"

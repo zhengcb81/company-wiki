@@ -77,7 +77,6 @@ include = ["company_wiki*"]
 "scripts/*.py" = ["E402", "E741", "F401"]
 "tests/unit/test_hermetic_runtime.py" = ["E402"]
 "tests/unit/test_secret_audit.py" = ["E402"]
-"tests/unit/test_deletion_manifest.py" = ["E402"]
 "tests/unit/test_secret_preflight.py" = ["E402"]
 "tests/unit/test_writer_freeze.py" = ["E402"]
 

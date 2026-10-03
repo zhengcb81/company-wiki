@@ -21,6 +21,7 @@ from datetime import datetime, timezone
 from typing import Any, Sequence
 
 from .store import CatalogStore
+from .operation_actor import operation_actor
 
 ACTIVATION_SCHEMA_VERSION = "1.0"
 RECEIPT_SCHEMA_VERSION = "1.0"
@@ -99,7 +100,7 @@ def apply_activation(
     cohort: str,
     assertion_ids: Sequence[str],
     policy_hash: str,
-    reviewer: str,
+    reviewer: str | None = None,
     reason: str,
     current_policy_hash: str | None = None,
 ) -> dict[str, Any]:
@@ -123,8 +124,7 @@ def apply_activation(
             f"current policy {current_policy_hash[:12]}... (re-load the "
             f"RootPolicy snapshot and retry)"
         )
-    if not (isinstance(reviewer, str) and reviewer.strip()):
-        raise ActivationError("reviewer required")
+    reviewer = operation_actor(reviewer)
     if not (isinstance(reason, str) and reason.strip()):
         raise ActivationError("reason required")
 
@@ -178,7 +178,7 @@ def rollback_activation(
     *,
     receipt_id: str,
     cohort: str | None = None,
-    reviewer: str,
+    reviewer: str | None = None,
     reason: str,
 ) -> dict[str, Any]:
     """Revert a prior apply inside ONE catalog transaction.
@@ -188,8 +188,7 @@ def rollback_activation(
     flips back to shadow; the activation_epoch is preserved for audit.
     A second rollback of the same receipt is rejected (immutable receipt).
     """
-    if not (isinstance(reviewer, str) and reviewer.strip()):
-        raise ActivationError("reviewer required")
+    reviewer = operation_actor(reviewer)
     if not (isinstance(reason, str) and reason.strip()):
         raise ActivationError("reason required")
     apply_row = store.fetchone(

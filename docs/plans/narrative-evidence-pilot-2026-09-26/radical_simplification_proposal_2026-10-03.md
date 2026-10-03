@@ -1,6 +1,6 @@
 # 更激进的简化建议：整套退役、按需派生（2026-10-03）
 
-> 本文是用户要求的第二轮优化建议，尚未实施或切换产品默认值。基于[46项代码现状清单](gate_permission_inventory_2026-10-03.md)、[最终空间盘点](harness_lanes/results/gd_storage_final_cleanup_2026-10-03.md)及[N4实施卡](n4_production_batch_implementation.md)。不增加许可文件、逐项签收或小节点审查。当前主线下一步仍是N4A；若采纳，以下工作并入已有owner节点。
+> 用户2026-10-03已采纳本文并授权实施；执行顺序和完成状态以[task_plan](task_plan.md)为准，不能把采纳视作已实现。基于[46项代码现状清单](gate_permission_inventory_2026-10-03.md)、[最终空间盘点](harness_lanes/results/gd_storage_final_cleanup_2026-10-03.md)及[N4实施卡](n4_production_batch_implementation.md)。不增加许可文件、逐项签收或小节点审查。当前先S0整套简化收口，N4A在独占范围可并行；以下工作并入已有owner节点。
 
 ## 1. 判断：停止维护可以退出的整套机制
 

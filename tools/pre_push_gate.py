@@ -10,13 +10,12 @@ Run without flags for the optional full local validation suite:
   1. ruff check src tests/unit tests/contract scripts   (CI WU-1.2)
   2. compileall src scripts tests                        (CI WU-7.1)
   3. config_doctor                                       (CI WU-7.1)
-  4. FC-1204 complexity ratchet                          (CI meta-gate)
-  5. host-assumption guard                              (CI meta-gate, FC-1307-a)
-  6. Full unit suite                                     (CI Unit tests)
-  7. The focused high-risk contract tests (including the shared-column reader,
+  4. host-assumption guard                              (CI meta-gate, FC-1307-a)
+  5. Full unit suite                                     (CI Unit tests)
+  6. The focused high-risk contract tests (including the shared-column reader,
      receipt-envelope, and B10 handoff contracts) plus the gate's own regression tests.
 
-Step 6's meta pair is the fix for the second-order F-B01-9 lesson: on CI run
+The unit suite includes the second-order F-B01-9 regression: on CI run
 34751519232 the NEW guard step itself failed `test_writer_freeze.py`, a test
 class the local gate never ran - the gate must run the tests that judge the
 gate.  Add a new `scripts/*.py` CLI and this step tells you locally whether it
@@ -25,7 +24,7 @@ needs the legacy-writer freeze.
 Exit non-zero on the first red check. The full local run is useful before a
 large integration but is not part of every push. GitHub CI runs all Unit and
 the curated Contract smoke set; full Contract tests, full-tree coverage and
-the coverage ratchet are manual.
+coverage are manual. Complexity is an optional diagnostic report, not a gate.
 Local pytest gates use an isolated short basetemp and UTF-8 subprocess streams
 so host TEMP ACL/encoding do not create false reds.
 
@@ -150,9 +149,6 @@ def main(argv: list[str] | None = None) -> int:
          "compileall", None),
         ([sys.executable, "scripts/config_doctor.py"],
          "config_doctor (CI WU-7.1)", None),
-        ([sys.executable, "-m", "pytest",
-          "tests/contract/test_fc1204_complexity_ratchet.py", "-q"],
-         "FC-1204 complexity ratchet (CI meta-gate)", None),
         ([sys.executable, "scripts/host_assumption_guard.py"],
          "host assumption guard (FC-1307-a; the class that broke CI in F-B01-9)", None),
         ([sys.executable, "-m", "pytest", "tests/unit", "-q", "--tb=short"],

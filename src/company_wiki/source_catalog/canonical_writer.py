@@ -20,7 +20,7 @@ from .lock import CatalogOperationLock
 from .resolver import ResolutionResult, ResolutionStatus, SourceRequest, SourceResolver
 from .scanner import scan_catalog
 from .service import SourceCatalog
-from .store import canonical_json
+from .store import canonical_json, metadata_state
 
 if TYPE_CHECKING:
     from .source_reader import SourceRef
@@ -506,10 +506,9 @@ class CanonicalSourceWriter:
         )
         matches = []
         for row in rows:
-            try:
-                metadata = json.loads(row["metadata_json"])
-                acquisition = metadata.get("acquisition") or {}
-            except (TypeError, json.JSONDecodeError):
+            metadata, problem = metadata_state(row["metadata_json"])
+            acquisition = metadata.get("acquisition")
+            if problem is not None or not isinstance(acquisition, dict):
                 continue
             if (
                 row["published_date"] is None

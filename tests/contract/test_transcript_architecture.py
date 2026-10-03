@@ -25,11 +25,6 @@ RETIRED_POLICY_MODULES = {
     "transcript_preflight_service.py",
     "transcript_admission_service.py",
 }
-LEGACY_COMPLEXITY_FREEZES = {
-    "transcript_import.py",
-    "transcript_import_cli.py",
-    "transcript_material.py",
-}
 
 
 def _local_imports(path: Path) -> set[str]:
@@ -58,17 +53,3 @@ def test_active_transcript_importer_does_not_import_retired_policy_layers() -> N
         if found:
             failures.append(f"{name}: {found}")
     assert not failures, "retired transcript policy imports: " + "; ".join(failures)
-
-
-def test_transcript_pipeline_is_not_kept_in_a_complexity_freeze() -> None:
-    ratchet = ROOT / "tests" / "contract" / "test_fc1204_complexity_ratchet.py"
-    tree = ast.parse(ratchet.read_text(encoding="utf-8"))
-    frozen: set[str] = set()
-    for node in ast.walk(tree):
-        if isinstance(node, ast.Dict):
-            frozen.update(
-                key.value
-                for key in node.keys
-                if isinstance(key, ast.Constant) and isinstance(key.value, str)
-            )
-    assert not (LEGACY_COMPLEXITY_FREEZES & frozen)

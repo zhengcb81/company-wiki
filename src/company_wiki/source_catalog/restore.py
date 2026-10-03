@@ -12,6 +12,8 @@ from __future__ import annotations
 import hashlib
 from dataclasses import dataclass, field
 
+from .operation_actor import operation_actor
+
 
 @dataclass(frozen=True)
 class RestoreReceipt:
@@ -36,7 +38,7 @@ def restore_asset(
     v2_complete: bool,
     provenance_ok: bool,
     policy_allows: bool,
-    reviewer: str,
+    reviewer: str | None = None,
     reason: str,
     original_retire_reason: str,
     policy_hash: str,
@@ -56,12 +58,11 @@ def restore_asset(
         rejection.reasons.append("missing_provenance")
     if not policy_allows:
         rejection.reasons.append("root_policy_denied")
-    if not reviewer:
-        rejection.reasons.append("reviewer_required")
     if not reason:
         rejection.reasons.append("restore_reason_required")
     if rejection.reasons:
         return None, rejection
+    reviewer = operation_actor(reviewer)
     receipt_id = hashlib.sha256(
         f"{document_id}|{reviewer}|{reason}|{policy_hash}".encode("utf-8")
     ).hexdigest()[:16]

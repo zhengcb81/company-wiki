@@ -11,6 +11,8 @@ import hashlib
 from datetime import datetime, timedelta, timezone
 from typing import Callable, Protocol
 
+from company_wiki._id_scope import normalize_id_scope
+
 from ._clock import Clock, IDGenerator
 from .heartbeat import AttemptHeartbeat
 from .execution_context import (
@@ -51,6 +53,7 @@ class WorkerStore(ExecutionSnapshotStore, Protocol):
         lease_until: str,
         expected_generation: int,
         allowed_job_types: tuple[str, ...] | None = None,
+        allowed_job_ids: tuple[str, ...] | None = None,
     ) -> ClaimedWork | None: ...
 
     def heartbeat_attempt(
@@ -75,7 +78,9 @@ class WorkerStore(ExecutionSnapshotStore, Protocol):
         outbox_not_before: str | None = None,
     ) -> Attempt: ...
 
-    def reap_expired_attempts(self, *, now: str) -> tuple[str, ...]: ...
+    def reap_expired_attempts(
+        self, *, now: str, allowed_job_ids: tuple[str, ...] | None = None,
+    ) -> tuple[str, ...]: ...
 
 
 class HandlerExecutor:
@@ -111,10 +116,11 @@ class Worker:
         *,
         clock: Clock | None = None,
         id_gen: IDGenerator | None = None,
-        lease_seconds: int = 300,
+        lease_seconds: float = 300,
         worker_id: str = "local-worker",
         heartbeat_interval_seconds: float | None = None,
         allowed_job_types: tuple[str, ...] | None = None,
+        allowed_job_ids: tuple[str, ...] | None = None,
         lifecycle_callback: Callable[[str, ClaimedWork], None] | None = None,
         context_factory: ExecutionContextFactory | None = None,
     ) -> None:
@@ -132,10 +138,13 @@ class Worker:
         if unknown:
             raise ValueError(f"allowed job types are not registered: {sorted(unknown)}")
         self._allowed_job_types = tuple(sorted(selected))
+        self._allowed_job_ids = normalize_id_scope(allowed_job_ids, name="allowed_job_ids")
         self._lifecycle_callback = lifecycle_callback
         self._context_factory = context_factory or ExecutionContextFactory(store)
 
     def process_one(self) -> bool:
+        if self._allowed_job_ids == ():
+            return False
         gate = self._store.read_runtime_gate()
         if gate.desired_state is not RuntimeState.ENABLED:
             return False
@@ -152,6 +161,7 @@ class Worker:
             lease_until=_add_seconds(now, self._lease_seconds),
             expected_generation=gate.control_generation,
             allowed_job_types=self._allowed_job_types,
+            allowed_job_ids=self._allowed_job_ids,
         )
         if claimed is None:
             return False
@@ -222,7 +232,11 @@ class Worker:
             self._lifecycle_callback(phase, claimed)
 
     def reap_expired(self) -> int:
-        return len(self._store.reap_expired_attempts(now=self._clock.now()))
+        if self._allowed_job_ids == ():
+            return 0
+        return len(self._store.reap_expired_attempts(
+            now=self._clock.now(), allowed_job_ids=self._allowed_job_ids,
+        ))
 
 
 def _classify_result(

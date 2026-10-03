@@ -89,7 +89,7 @@ LEGACY_READ_ADAPTERS: dict[str, dict[str, object]] = {
 #:
 #: Converged so far: batch 1's seven sites (artifact_backfill._classify,
 #: artifact_read_model._artifact_row, scanner._merge_document_row,
-#: scanner._previous_provenance_fields, source_lifecycle._safety_receipt,
+#: scanner._previous_provenance_fields,
 #: service.SourceCatalog.query_filing_candidates via metadata_state, and
 #: resolver._metadata_conflict_reason via metadata_state), then batch 2's
 #: normalizer._frontmatter, then normalizer.normalize_catalog in the P0 fix
@@ -119,13 +119,15 @@ CONFIRMED_DIRECT_READERS: dict[str, dict[str, str]] = {
 #: an already-baselined scope kept the same qualified key and passed (probe: exit code 0,
 #: "1 passed").  The count closes that: one more site in a known scope is a new violation,
 #: and one fewer means the baseline must be lowered.  The counts are MACHINE-DERIVED from the
-#: tree (12 scopes / 15 sites after the batch-2 and P0 convergences; the earlier 13/16 reading
-#: was stale text in this comment - B-VR-B10R3-03); my first hand-written version
+#: tree; the unused shadow lifecycle reader was removed in R1. The earlier
+#: 12/15 and 13/16 counts are historical, not the current baseline; my first hand-written version
 #: under-counted two of them, which is exactly why they are derived now.
 COLUMN_VALUE_HANDOFFS: dict[str, str] = {
     "artifact_backfill.py::_classify": "1",
     "artifact_read_model.py::_artifact_row": "1",
     "backfill_v2.py::run_backfill": "1",
+    # Unknown-date originals use the reporting decoder; malformed rows cannot match.
+    "canonical_writer.py::CanonicalSourceWriter._verify_unknown_date_index": "1",
     "extraction_quality.py::ExtractionQualityService._artifact": "1",
     "migration_ledger.py::build_quality_ledger": "1",
     "normalizer.py::normalize_catalog": "1",
@@ -139,7 +141,6 @@ COLUMN_VALUE_HANDOFFS: dict[str, str] = {
     # so malformed metadata stays distinguishable from an empty object.
     "source_reader.py::SourceVersionReader._verified_version": "1",
     "source_reader.py::SourceVersionReader.describe_version": "1",
-    "source_lifecycle.py::_safety_receipt": "1",
 }
 
 #: Readers that deliberately do NOT go through the chain.  Declared so "not on the chain" is

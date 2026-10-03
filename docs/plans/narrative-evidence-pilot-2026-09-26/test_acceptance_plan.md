@@ -1,3 +1,5 @@
+> 2026-10-03 当前施工由 [task_plan.md](task_plan.md) 的S0–S6统一定义。本文保留历史技术背景，旧审批/签收、原件处置和逐小步审查要求不再执行；原件全部保留。
+
 # 测试与验收计划：叙述性证据流水线
 
 > **2026-09-29 更新：**本文件保留样本/失效断言；当前运行节奏、节点名和权限语义以[门禁清理方案](gate_and_contract_simplification_2026-09-29.md)及[并行总计划](parallel_harness_orchestration_2026-09-29.md)为准。旧 G0–G4 映射到当前 G-0/G-A/G-B/G-C/G-D；下文“人工授权、独立审查、权限拒绝”是历史设计，不得作为新测试的正向前置。开发只跑受影响目标测试，大节点跑对应真实 E2E。测试仅写唯一隔离 run-id 根/临时 SQLite；`config/source_catalog.yaml`、真实 `companies/` 和生产 catalog 不写。结束恢复测试目录原状，新增下载/派生文件清理；崩溃恢复只处理本次核验过的精确路径。样本见[findings.md](findings.md)。

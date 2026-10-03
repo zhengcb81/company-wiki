@@ -132,24 +132,6 @@ _EVENT_JOB_MAPPING: dict[str, tuple[_JobMappingEntry, ...]] = {
             depends_on=("source.narrative_select", "source.narrative_summarize"),
         ),
     ),
-    "analysis.proposal_ready": (
-        _JobMappingEntry("analysis.validate", priority=0, fan_out=1,
-                         schema_change=False, depends_on=()),
-        _JobMappingEntry("analysis.review", priority=0, fan_out=1,
-                         schema_change=False, depends_on=("analysis.validate",)),
-    ),
-    "gold.inputs_changed": (
-        _JobMappingEntry("gold.refresh_packet", priority=0, fan_out=1,
-                         schema_change=False, depends_on=()),
-    ),
-    "review.receipt_changed": (
-        _JobMappingEntry("gold.validate_receipt", priority=0, fan_out=1,
-                         schema_change=False, depends_on=()),
-    ),
-    "review.approved": (
-        _JobMappingEntry("gold.promote_reviewed", priority=0, fan_out=1,
-                         schema_change=False, depends_on=()),
-    ),
     "timer.due": (
         _JobMappingEntry("timer.execute_step", priority=0, fan_out=1,
                          schema_change=False, depends_on=()),
