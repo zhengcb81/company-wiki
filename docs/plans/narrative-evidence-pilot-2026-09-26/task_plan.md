@@ -754,7 +754,8 @@ G-A1尚未由producer/filing-fetch表示FF→ET→CWP下载完整链完成；真
 - [x] B3先RED→精确plan/apply/resume工具及旧query中性诊断→真实隔离节点64passed/45.23s；B1已完成回显不依赖仍存在的归档，新的snapshot删除不放宽。发现PS重定向损坏中文路径，增加GBK下正式unicode CLI RED→GREEN1passed/1.26s，ASCII JSON输出及纠正生产dry-run通过；Ruff/host绿、独立只读大节点审查无阻塞。
 - [ ] 普通commit/push/CI后生产删除两个精确派生archive，保留currentDB/source/version/raw、小收据，记录实际bytes/free。
 - [x] 按[B4精确卡](gd_b4_worktree_cleanup_2026-10-03.md)普通移除23旧checkout，逻辑释放1.317437GiB，原文/主库/配置/Worker控制不变；见[收据](harness_lanes/results/worktree_cleanup_2026-10-03.md)。managed附件仍实际存在，不计收益。
-- [ ] 按[B4历史补批](gd_b4_historical_receipts_cleanup_2026-10-03.md)保留两Git历史ref、核四份报告已同blob存main后移除四个旧checkout；不新增重复报告副本，不动pinned/managed/其他仓。
+- [x] 按[B4历史补批](gd_b4_historical_receipts_cleanup_2026-10-03.md)保留两Git历史ref、核四份报告已同blob存main后移除四旧checkout，再释放0.212631GiB；不新增重复报告副本、不动pinned/managed/其他仓。历史ref随收尾正常推送。
+- [ ] B3发布6ab25373后CI唯一M14初始化竞态，确定性RED复现旧version/新table混合视图；shared readonly snapshot修复/两平台聚焦节点/同一廉价regression纳入既有快速门，绿后再生产apply。
 
 ## Next Step
 

@@ -1,5 +1,11 @@
 # Progress：叙述性证据试点
 
+## 2026-10-03 — B3正常发布后CI竞态修复，生产apply未执行
+
+- `6ab25373`已正常commit/push，Ruff/config/host/fast pre-push均绿；远端Actions37121441436约48秒完成，M14并发初始化1failed，其他1115项Unit绿。认证日志定位旧version与新runtime_gate混合视图，交实现线只修migrations.py/对应测试，先确定性RED、保留坏库拒绝和原M14，CI绿前不apply。
+- B4历史补批4/4普通worktree移除完成，再释放228,310,996B/0.212631GiB；两个历史Git ref保留独有审查docs，四份重复报告main已有相同blob，不复制。主库/config/Workercontrol/主线报告hash和mtime均不变，见[补批收据](harness_lanes/results/worktree_historical_cleanup_2026-10-03.md)。managed/pinned保持，原文不动。
+- 确定性RED稳定复现同一错误，BEGIN固定readonly snapshot后Win/Ubuntu各32passed（2.16s/3.19s），没有改DDL、串行化或删除M14。原快门加入一个廉价regression（代码/相关测试改动时commit smoke也覆盖），正常发布后验CI。见[竞态修复记录](harness_lanes/results/ci_migration_race_2026-10-03.md)。
+
 ## 2026-10-03 — B3节点完成，发布后精确apply
 
 - B3节点64passed/45.23s，Ruff/host绿；正式CLI证明删两小真实archive后narrative包/active query不变，retired具名不可用、unknown NotFound，DB/raw字节和mtime不变。独立只读大节点审查无阻塞，不新增helper审查。

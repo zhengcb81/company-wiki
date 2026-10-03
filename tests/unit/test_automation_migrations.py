@@ -615,6 +615,64 @@ def test_m14_concurrent_init_produces_one_v2_schema(tmp_path):
         conn.close()
 
 
+def test_m14_classification_uses_one_snapshot_during_concurrent_init(
+    tmp_path, monkeypatch
+):
+    """A concurrent commit must not mix v0's version with v2's table list."""
+    threading = pytest.importorskip("threading")
+    migrations = _migrations()
+    db = tmp_path / "automation.db"
+    connection = sqlite3.connect(db)
+    try:
+        assert connection.execute("PRAGMA journal_mode = WAL").fetchone()[0] == "wal"
+    finally:
+        connection.close()
+
+    reader_id = threading.get_ident()
+    version_read = threading.Event()
+    writer_finished = threading.Event()
+    errors: list[BaseException] = []
+    writer_reports = []
+    original_user_version = migrations._user_version
+
+    def user_version_with_concurrent_commit(connection):
+        version = original_user_version(connection)
+        if threading.get_ident() == reader_id and not version_read.is_set():
+            assert version == 0
+            version_read.set()
+            assert writer_finished.wait(5), "concurrent initializer did not finish"
+        return version
+
+    def init_writer():
+        try:
+            assert version_read.wait(5), "classifier did not read the version"
+            writer_reports.append(migrations.migrate_database(db))
+        except BaseException as exc:  # pragma: no cover - recorded for diagnosis
+            errors.append(exc)
+        finally:
+            writer_finished.set()
+
+    monkeypatch.setattr(
+        migrations, "_user_version", user_version_with_concurrent_commit
+    )
+    writer = threading.Thread(target=init_writer)
+    writer.start()
+    try:
+        reader_report = migrations.migrate_database(db)
+    finally:
+        writer.join(5)
+        assert not writer.is_alive(), "concurrent initializer leaked a thread"
+
+    assert errors == []
+    assert writer_reports[0].applied_versions == (1, 2)
+    assert reader_report.applied_versions == ()
+    assert reader_report.schema_fingerprint == writer_reports[0].schema_fingerprint
+    report = migrations.validate_database(db)
+    assert report.user_version == 2
+    assert set(report.tables) == EXPECTED_TABLES
+    assert report.integrity_ok
+
+
 # --------------------------------------------------------------------------- #
 # M15: non-SQLite / truncated file -> typed error, original file untouched
 # --------------------------------------------------------------------------- #

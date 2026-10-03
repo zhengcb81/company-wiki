@@ -1,5 +1,12 @@
 # Findings：叙述性证据试点
 
+## 2026-10-03 — 快CI发现既有初始化竞态
+
+- B3发布`6ab25373`的Actions37121441436结束48s，Unit为1failed/1115passed/14.91s；唯一失败M14并发初始化，实际异常`UnknownSchemaError: unrecognized tables in uninitialized database: ['runtime_gate']`。归档清理检查未失败，生产apply仍未执行；不删M14、不串行化测试、不盲加timeout。
+- 通过既有GitHub credential helper在内存读取认证失败日志，没有输出或写出凭证，下载重定向不转发授权头。公开annotation缺详细异常；本机无gh命令，改用受限GitHub REST读取实际日志。
+- 根因候选是readonly classification在读user_version与表列表间跨了另一连接的schema提交，得到旧version=0/新v2表的混合视图；实现线先确定性RED再修一致snapshot。这与当前B3删除器不共享写路径，却是后续多进程Worker初始化的重要真实风险。
+- 根因已由真实WAL库/Event控制提交的确定性RED证实，异常与CI完全相同。修复仅shared readonly connection显式BEGIN，classify/v2验证/validate共用一致snapshot；Win32passed/2.16s、Ubuntu32passed/3.19s，原M14及坏库拒绝均保留。同一廉价node加入既有快速regression清单，并仅在migrations/相关测试改动时触发既有commit smoke，不增加full Unit每commit或新门。
+
 ## 2026-10-03 — 无空间反弹，B3可先退役
 
 - 精确三根42,692,408,858B，等于旧盘点45,748,203,875B减B1删除3,055,796,224B加1,207B小收据。原文目录/主库零增长；全主仓可读43,887,252,776B，另33登记checkout1,985,538,310B，共45.87十进制GB，不能与旧46GiB主DB混称。全仓24个ACL旧test子树不可读，是下界；数据三根0错误。

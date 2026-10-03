@@ -355,6 +355,9 @@ def _open_readonly_connection(db_path: Path) -> sqlite3.Connection:
     )
     connection.row_factory = sqlite3.Row
     _configure_connection(connection, read_only=True)
+    # Version, tables and validation must share a snapshot. In autocommit mode
+    # a concurrent migration can otherwise commit between those reads.
+    connection.execute("BEGIN")
     return connection
 
 

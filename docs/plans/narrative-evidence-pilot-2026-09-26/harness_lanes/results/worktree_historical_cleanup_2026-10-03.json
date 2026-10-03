@@ -1,0 +1,388 @@
+{
+  "duplicate_reports": [
+    {
+      "absent_after": true,
+      "candidate_sha256": "a7d35b6559217a377987d66a0f76ea57185a7b275f0de1928b5aa875a20ee106",
+      "expected_bytes": 9530,
+      "expected_sha256": "a7d35b6559217a377987d66a0f76ea57185a7b275f0de1928b5aa875a20ee106",
+      "lane": "fc-804",
+      "main_HEAD": "6ab25373fdff5ebe97ae85bc141e8178a07d74ae",
+      "main_HEAD_blob_sha256": "a7d35b6559217a377987d66a0f76ea57185a7b275f0de1928b5aa875a20ee106",
+      "main_file_sha256": "a7d35b6559217a377987d66a0f76ea57185a7b275f0de1928b5aa875a20ee106",
+      "relative_path": "assurance/fc/FC-804/12_reviewer_receipt.json",
+      "status": "duplicate_unlinked"
+    },
+    {
+      "absent_after": true,
+      "candidate_sha256": "d49d0191f6f8be8df150618a0214d3fb72b1deb0ce9d6e5e029fc9bb0e8d0eac",
+      "expected_bytes": 5854,
+      "expected_sha256": "d49d0191f6f8be8df150618a0214d3fb72b1deb0ce9d6e5e029fc9bb0e8d0eac",
+      "lane": "fc-804",
+      "main_HEAD": "6ab25373fdff5ebe97ae85bc141e8178a07d74ae",
+      "main_HEAD_blob_sha256": "d49d0191f6f8be8df150618a0214d3fb72b1deb0ce9d6e5e029fc9bb0e8d0eac",
+      "main_file_sha256": "d49d0191f6f8be8df150618a0214d3fb72b1deb0ce9d6e5e029fc9bb0e8d0eac",
+      "relative_path": "assurance/fc/FC-804/REVIEWER_REPORT.md",
+      "status": "duplicate_unlinked"
+    },
+    {
+      "absent_after": true,
+      "candidate_sha256": "b2f4c8ece047c04c6bf9d4d3c49f252c2ac68506704d9bf838076eed53ee484a",
+      "expected_bytes": 11126,
+      "expected_sha256": "b2f4c8ece047c04c6bf9d4d3c49f252c2ac68506704d9bf838076eed53ee484a",
+      "lane": "fc-805",
+      "main_HEAD": "6ab25373fdff5ebe97ae85bc141e8178a07d74ae",
+      "main_HEAD_blob_sha256": "b2f4c8ece047c04c6bf9d4d3c49f252c2ac68506704d9bf838076eed53ee484a",
+      "main_file_sha256": "b2f4c8ece047c04c6bf9d4d3c49f252c2ac68506704d9bf838076eed53ee484a",
+      "relative_path": "assurance/fc/FC-805/12_reviewer_receipt.json",
+      "status": "duplicate_unlinked"
+    },
+    {
+      "absent_after": true,
+      "candidate_sha256": "84e7bb600a901ae9188bbe6eb552b38c524d86a33c254e5d295f5de2cf6da085",
+      "expected_bytes": 3543,
+      "expected_sha256": "84e7bb600a901ae9188bbe6eb552b38c524d86a33c254e5d295f5de2cf6da085",
+      "lane": "fc-805",
+      "main_HEAD": "6ab25373fdff5ebe97ae85bc141e8178a07d74ae",
+      "main_HEAD_blob_sha256": "84e7bb600a901ae9188bbe6eb552b38c524d86a33c254e5d295f5de2cf6da085",
+      "main_file_sha256": "84e7bb600a901ae9188bbe6eb552b38c524d86a33c254e5d295f5de2cf6da085",
+      "relative_path": "assurance/fc/FC-805/REVIEWER_REPORT.md",
+      "status": "duplicate_unlinked"
+    }
+  ],
+  "duplicated_report_unlinked_bytes": 30053,
+  "failed_count": 0,
+  "finished_at_utc": "2026-10-03T12:03:49.475302+00:00",
+  "free_bytes_after": 129815375872,
+  "free_bytes_before": 129600098304,
+  "free_observed_delta_bytes": 215277568,
+  "held_count": 0,
+  "main_facts_after": {
+    "canonical_reports": {
+      "assurance/fc/FC-804/12_reviewer_receipt.json": {
+        "bytes": 9530,
+        "mtime_ns": 1786428660859432100,
+        "sha256": "a7d35b6559217a377987d66a0f76ea57185a7b275f0de1928b5aa875a20ee106"
+      },
+      "assurance/fc/FC-804/REVIEWER_REPORT.md": {
+        "bytes": 5854,
+        "mtime_ns": 1786428660891577100,
+        "sha256": "d49d0191f6f8be8df150618a0214d3fb72b1deb0ce9d6e5e029fc9bb0e8d0eac"
+      },
+      "assurance/fc/FC-805/12_reviewer_receipt.json": {
+        "bytes": 11126,
+        "mtime_ns": 1786430491307279600,
+        "sha256": "b2f4c8ece047c04c6bf9d4d3c49f252c2ac68506704d9bf838076eed53ee484a"
+      },
+      "assurance/fc/FC-805/REVIEWER_REPORT.md": {
+        "bytes": 3543,
+        "mtime_ns": 1786430491332865900,
+        "sha256": "84e7bb600a901ae9188bbe6eb552b38c524d86a33c254e5d295f5de2cf6da085"
+      }
+    },
+    "catalog": {
+      "bytes": 3055800320,
+      "mtime_ns": 1790490231504738600
+    },
+    "catalog_config": {
+      "bytes": 866,
+      "mtime_ns": 1790542565101886700,
+      "sha256": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968"
+    },
+    "head": "6ab25373fdff5ebe97ae85bc141e8178a07d74ae",
+    "worker_control": {
+      "bytes": 178,
+      "mtime_ns": 1787262212371386700,
+      "sha256": "9fcbe233efe76222a32316c07b9273b9c5128da3af6db27d706b1759680ac7bd"
+    }
+  },
+  "main_facts_before": {
+    "canonical_reports": {
+      "assurance/fc/FC-804/12_reviewer_receipt.json": {
+        "bytes": 9530,
+        "mtime_ns": 1786428660859432100,
+        "sha256": "a7d35b6559217a377987d66a0f76ea57185a7b275f0de1928b5aa875a20ee106"
+      },
+      "assurance/fc/FC-804/REVIEWER_REPORT.md": {
+        "bytes": 5854,
+        "mtime_ns": 1786428660891577100,
+        "sha256": "d49d0191f6f8be8df150618a0214d3fb72b1deb0ce9d6e5e029fc9bb0e8d0eac"
+      },
+      "assurance/fc/FC-805/12_reviewer_receipt.json": {
+        "bytes": 11126,
+        "mtime_ns": 1786430491307279600,
+        "sha256": "b2f4c8ece047c04c6bf9d4d3c49f252c2ac68506704d9bf838076eed53ee484a"
+      },
+      "assurance/fc/FC-805/REVIEWER_REPORT.md": {
+        "bytes": 3543,
+        "mtime_ns": 1786430491332865900,
+        "sha256": "84e7bb600a901ae9188bbe6eb552b38c524d86a33c254e5d295f5de2cf6da085"
+      }
+    },
+    "catalog": {
+      "bytes": 3055800320,
+      "mtime_ns": 1790490231504738600
+    },
+    "catalog_config": {
+      "bytes": 866,
+      "mtime_ns": 1790542565101886700,
+      "sha256": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968"
+    },
+    "head": "6ab25373fdff5ebe97ae85bc141e8178a07d74ae",
+    "worker_control": {
+      "bytes": 178,
+      "mtime_ns": 1787262212371386700,
+      "sha256": "9fcbe233efe76222a32316c07b9273b9c5128da3af6db27d706b1759680ac7bd"
+    }
+  },
+  "main_facts_unchanged": true,
+  "method": "exact duplicate report unlink, then ordinary git worktree remove",
+  "no_force_no_prune_no_reset_no_recursive_shell_delete": true,
+  "plan_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\narrative-evidence-pilot-2026-09-26\\gd_b4_historical_receipts_cleanup_2026-10-03.md",
+  "plan_sha256": "9a27dc1dd447c25bc0bca50a59258468dc78daeab18bd24cf57e810e1fb5070c",
+  "preserved_refs": [
+    {
+      "name": "codex/history/fc802-rejected-20261003",
+      "sha": "ec00a028048da40cb43e8fc058aad9c8a7e1f963",
+      "status": "created"
+    },
+    {
+      "name": "codex/history/fc802-r3-accepted-20261003",
+      "sha": "29abc878dcf04fba46f8919331bdb9d5f1f9a297",
+      "status": "created"
+    }
+  ],
+  "remaining_allowed_roots": [],
+  "remaining_registrations": [
+    {
+      "flags": [
+        "branch refs/heads/master"
+      ],
+      "head": "6ab25373fdff5ebe97ae85bc141e8178a07d74ae",
+      "path": "C:/Users/郑曾波/Projects/company-wiki"
+    },
+    {
+      "flags": [
+        "branch refs/heads/codex/narrative-gates-integration"
+      ],
+      "head": "cba745ac7e398fc2ccd84c132aa5c4c47d8828eb",
+      "path": "C:/Users/郑曾波/.codex/worktrees/data-lake-reader/company-wiki"
+    },
+    {
+      "flags": [
+        "branch refs/heads/codex/rf-state-audit"
+      ],
+      "head": "447d1c74b78bec369ff5dc32fe78097905ce6342",
+      "path": "C:/Users/郑曾波/.codex/worktrees/rf-state-audit/company-wiki"
+    },
+    {
+      "flags": [
+        "branch refs/heads/codex/transcript-companion"
+      ],
+      "head": "ced354a24c02928a28cc94c34b18780f9766cf06",
+      "path": "C:/Users/郑曾波/.codex/worktrees/transcript-companion/company-wiki"
+    },
+    {
+      "flags": [
+        "detached"
+      ],
+      "head": "2e674cca4b715fea492ad9071de3ee456ca61835",
+      "path": "C:/Users/郑曾波/AppData/Local/Temp/company-wiki"
+    },
+    {
+      "flags": [
+        "detached"
+      ],
+      "head": "7d4852fa35023aaf467ba7a7277c0ff4d77c2eb9",
+      "path": "C:/Users/郑曾波/AppData/Local/Temp/cw-preb"
+    },
+    {
+      "flags": [
+        "detached"
+      ],
+      "head": "c986c7adb61508f475f801c6fda4d2ab207ef269",
+      "path": "C:/Users/郑曾波/AppData/Local/Temp/r4b02-preb02"
+    }
+  ],
+  "removed_count": 4,
+  "removed_logical_bytes": 228310996,
+  "rows": [
+    {
+      "absent_after": true,
+      "checked_at_utc": "2026-10-03T12:03:45.171961+00:00",
+      "expected_head": "ec00a028048da40cb43e8fc058aad9c8a7e1f963",
+      "git_remove_rc": 0,
+      "git_remove_stderr": "",
+      "git_remove_stdout": "",
+      "git_status_after_duplicate_unlink": [],
+      "git_status_before": [],
+      "history_commit_files": [
+        "assurance/fc/FC-802/12_reviewer_receipt.json",
+        "assurance/fc/FC-802/REVIEWER_REPORT.md"
+      ],
+      "ignored": {
+        "class_bytes": {
+          "empty_legacy_catalog_schema": 221184
+        },
+        "classes": {
+          "empty_legacy_catalog_schema": 1
+        },
+        "empty_catalog": {
+          "bytes": 221184,
+          "catalog_meta_keys": [
+            "schema_version"
+          ],
+          "path": ".source_catalog/catalog.sqlite3",
+          "sha256": "9854f20ba2ebb0b0a3f80657869d87cde5bf2577a31a834c0a25691b83f30fc3",
+          "table_counts": {
+            "activation_journal": 0,
+            "artifacts": 0,
+            "catalog_meta": 1,
+            "document_entities": 0,
+            "document_fingerprint_state": 0,
+            "document_restore_audit": 0,
+            "document_retire_audit": 0,
+            "documents": 0,
+            "entities": 0,
+            "evidence_spans": 0,
+            "llm_summary_failures": 0,
+            "locations": 0,
+            "remediation_proposals": 0,
+            "roots": 0,
+            "scan_runs": 0,
+            "source_metadata_assertions": 0,
+            "sources": 0
+          }
+        },
+        "unknown": []
+      },
+      "inventory_before": {
+        "errors": [],
+        "files": 1310,
+        "logical_bytes": 56920847,
+        "reparse": []
+      },
+      "observed_head": "ec00a028048da40cb43e8fc058aad9c8a7e1f963",
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-802/company-wiki",
+      "registered_after": false,
+      "removed_logical_bytes": 56920847,
+      "saved_ref": {
+        "name": "codex/history/fc802-rejected-20261003",
+        "sha": "ec00a028048da40cb43e8fc058aad9c8a7e1f963",
+        "status": "created"
+      },
+      "status": "removed"
+    },
+    {
+      "absent_after": true,
+      "checked_at_utc": "2026-10-03T12:03:46.235805+00:00",
+      "expected_head": "29abc878dcf04fba46f8919331bdb9d5f1f9a297",
+      "git_remove_rc": 0,
+      "git_remove_stderr": "",
+      "git_remove_stdout": "",
+      "git_status_after_duplicate_unlink": [],
+      "git_status_before": [],
+      "history_commit_files": [
+        "assurance/fc/FC-802/12_reviewer_receipt_r3.json",
+        "assurance/fc/FC-802/REVIEWER_REPORT_R3.md"
+      ],
+      "ignored": {
+        "class_bytes": {},
+        "classes": {},
+        "empty_catalog": null,
+        "unknown": []
+      },
+      "inventory_before": {
+        "errors": [],
+        "files": 1309,
+        "logical_bytes": 56693435,
+        "reparse": []
+      },
+      "observed_head": "29abc878dcf04fba46f8919331bdb9d5f1f9a297",
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-802-r3/company-wiki",
+      "registered_after": false,
+      "removed_logical_bytes": 56693435,
+      "saved_ref": {
+        "name": "codex/history/fc802-r3-accepted-20261003",
+        "sha": "29abc878dcf04fba46f8919331bdb9d5f1f9a297",
+        "status": "created"
+      },
+      "status": "removed"
+    },
+    {
+      "absent_after": true,
+      "checked_at_utc": "2026-10-03T12:03:47.284328+00:00",
+      "expected_head": "7d9f40cace24aafed4ef9414a3f5ecbb929c42da",
+      "git_remove_rc": 0,
+      "git_remove_stderr": "",
+      "git_remove_stdout": "",
+      "git_status_after_duplicate_unlink": [],
+      "git_status_before": [
+        "?? assurance/fc/FC-804/12_reviewer_receipt.json",
+        "?? assurance/fc/FC-804/REVIEWER_REPORT.md"
+      ],
+      "ignored": {
+        "class_bytes": {
+          ".pytest_cache": 1628,
+          ".ruff_cache": 338
+        },
+        "classes": {
+          ".pytest_cache": 5,
+          ".ruff_cache": 4
+        },
+        "empty_catalog": null,
+        "unknown": []
+      },
+      "inventory_before": {
+        "errors": [],
+        "files": 1329,
+        "logical_bytes": 56785249,
+        "reparse": []
+      },
+      "observed_head": "7d9f40cace24aafed4ef9414a3f5ecbb929c42da",
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-804/company-wiki",
+      "registered_after": false,
+      "removed_logical_bytes": 56785249,
+      "status": "removed"
+    },
+    {
+      "absent_after": true,
+      "checked_at_utc": "2026-10-03T12:03:48.412542+00:00",
+      "expected_head": "9587cb4650f03ea96327526c1e2f8142843e56f8",
+      "git_remove_rc": 0,
+      "git_remove_stderr": "",
+      "git_remove_stdout": "",
+      "git_status_after_duplicate_unlink": [],
+      "git_status_before": [
+        "?? assurance/fc/FC-805/12_reviewer_receipt.json",
+        "?? assurance/fc/FC-805/REVIEWER_REPORT.md"
+      ],
+      "ignored": {
+        "class_bytes": {
+          ".pytest_cache": 1626,
+          ".ruff_cache": 207,
+          "python_bytecode": 1107192
+        },
+        "classes": {
+          ".pytest_cache": 4,
+          ".ruff_cache": 3,
+          "python_bytecode": 55
+        },
+        "empty_catalog": null,
+        "unknown": []
+      },
+      "inventory_before": {
+        "errors": [],
+        "files": 1384,
+        "logical_bytes": 57911465,
+        "reparse": []
+      },
+      "observed_head": "9587cb4650f03ea96327526c1e2f8142843e56f8",
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-805/company-wiki",
+      "registered_after": false,
+      "removed_logical_bytes": 57911465,
+      "status": "removed"
+    }
+  ],
+  "schema": "company-wiki-historical-worktree-cleanup/1",
+  "started_at_utc": "2026-10-03T12:03:45.167737+00:00"
+}

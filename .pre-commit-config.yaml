@@ -96,6 +96,8 @@ repos:
         files: >-
           (?x)^src/company_wiki/source_catalog/(llm_summarizer|scanner|read_chain|store|resolver|reader|service|activation|assertion_service|prompt_injection|control)\.py$
           |^tests/contract/(test_r4b05b_shared_column_readers|test_fc905_receipt_envelope|test_b10_read_chain|test_zr203_reader_rewire|test_zr1003_shadow_assertions|test_source_catalog_temp_worker_governance)\.py$
+          |^src/company_wiki/automation/migrations\.py$
+          |^tests/unit/test_automation_migrations\.py$
 
       - id: config-doctor
         name: config doctor (WU-7.1, mirrors CI)
