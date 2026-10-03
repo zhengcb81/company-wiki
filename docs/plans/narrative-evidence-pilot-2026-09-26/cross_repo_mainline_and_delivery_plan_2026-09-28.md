@@ -174,3 +174,10 @@ S2 与 S3、S5、Q1、N0/N1 可并行，**但每仓写入只由其唯一 owner �
 ## 8. 本计划之后的第一批具体动作
 
 先完成 S0 的 live refs/工作树与合同样本冻结，并将 ET、FF v2、RF reader、StockWiki reader、IQS C01/W01 分到各自隔离施工线；FF v2→RF reader→FF companion 的生产合同顺序固定。随后按 G-A、G-B、G-C、G-D 放行，缺失的测试或来源只把该栏保持 hold，不阻独立线推进。每次节点结束更新同目录 `task_plan.md`、`findings.md`、`progress.md`；不要在其他仓的活动 PWF 上覆盖内容。
+
+## 2026-10-03 状态附记：S3/S4b 合流
+
+- 单一 FF 集成工作树已包含 SourceRef v2 与 ET companion，不再保留两条互相覆盖的实现路径。CWP transcript importer `/3` 返回 pathless SourceRef；ET `/2` 原始 JSON 经 FF 调用后由 CWP 统一入库并 verified-open。
+- FF v1、SourceRef v2、ET/CWP contracts 和实际子进程 FF→CWP fixture E2E **191 passed, 1 skipped**；CWP reader/import CLI **16 passed**。CWP mypy/Ruff/fast gate 及 FF Ruff 通过。短临时目录已恢复。
+- 这个结果只关闭 S3/S4b 的 FF→CWP 汇合；真实 provider API 权益未验证，G-A 的 RF consumer 三仓 E2E 还未完成。只用 fixture，不读 key；不动 RF/StockWiki 生产代码。
+- **Next Step：**完成 CWP/FF 的普通提交与快进推送；随后运行 RF 仓已有三仓 E2E，按其当前 SourceRef consumer 核验真实原始字节 SHA、cutoff 和 as-of。若只因 fixture 日期过期则修正测试时钟；不放宽源数据合同。

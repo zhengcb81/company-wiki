@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
-from dataclasses import fields
+from dataclasses import asdict, fields
 from datetime import datetime, timezone
 from pathlib import Path
 import sys
@@ -23,7 +23,7 @@ from .transcript_import import (
 
 
 REQUEST_SCHEMA = "company-wiki-transcript-import-request/2"
-RESPONSE_SCHEMA = "company-wiki-transcript-import-response/2"
+RESPONSE_SCHEMA = "company-wiki-transcript-import-response/3"
 MAX_ENVELOPE_BYTES = MAX_TOOL_RESULT_BYTES + 128 * 1024
 _ENVELOPE_FIELDS = frozenset(
     {"schema_version", "source_request", "candidate", "transcript_result"}
@@ -101,13 +101,17 @@ def run_import(wiki_root: Path, stream: BinaryIO) -> dict[str, Any]:
     config = load_catalog_config(root / "config" / "source_catalog.yaml", project_root=root)
     catalog = SourceCatalog(config)
     now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    writer = CanonicalSourceWriter(catalog)
     try:
         imported = import_transcript_tool_result(
             result_bytes,
             request=request,
             candidate=candidate,
-            writer=CanonicalSourceWriter(catalog),
+            writer=writer,
             now=now,
+        )
+        source_ref = writer.source_ref_for_import(
+            request, candidate, imported.provider_payload_sha256
         )
     finally:
         catalog.close()
@@ -118,6 +122,7 @@ def run_import(wiki_root: Path, stream: BinaryIO) -> dict[str, Any]:
         "request_id": request.request_id,
         "source_id": imported.canonical_import.source_id,
         "content_sha256": imported.canonical_import.content_sha256,
+        "source_ref": asdict(source_ref),
         "provider_payload_sha256": imported.provider_payload_sha256,
         "line_count": len(imported.material.lines),
         "extractor_version": imported.material.extractor_version,

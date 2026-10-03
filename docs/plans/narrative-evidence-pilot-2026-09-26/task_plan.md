@@ -700,7 +700,7 @@ G-A0只是原件到定位正文层。FMP入库仍待GA1，不声称26字段已�
 - [x] 扩充隔离E2E：CLI、保真byte、read、locator、unknown cut-off、幂等重复、坏hash拒绝、无残留；测试run root完成清理。
 - [x] 总节点包50 passed；Ruff、mypy六个源码模块、复杂度契约与本机共享fast pre-push GREEN。
 - [x] 提交`3e5923b`并推送主线；Actions37079602808 success/61秒。
-- [ ] 然后按cross_line_closeout单owner处理FF两个重叠worktree，把transcript调用接到filing-fetch并保存至company-wiki统一目录；只复用正式SourceRef，不改RF/StockWiki实现。
+- [x] 已在Phase 58由单owner收拢FF SourceRef与transcript companion两条重叠WIP，并按正式SourceRef接入company-wiki统一目录；RF/StockWiki实现未改。
 
 G-A1尚未由producer/filing-fetch表示FF→ET→CWP下载完整链完成；真实FMP200/授权也未验证。本阶段证明的是producer golden可被CWP安全入库、locator和cutoff语义正确。
 
@@ -711,4 +711,19 @@ G-A1尚未由producer/filing-fetch表示FF→ET→CWP下载完整链完成；真
 - [x] 远端Actions `37079602808` 单job全部通过，workflow61秒/job56秒。
 - [x] 本机G-A1节点包50 passed；Ruff、mypy六模块、fast pre-push passed。
 - [x] 未碰RF、StockWiki、FF工作树/工作目录；FF两个G-A相关worktree只读盘点均clean。FF主fcap仍有`config/FMP_API_KEY.txt`未跟踪，本任务不读取、不改动它。
-- [ ] 下阶段单owner逐文件比较FF SourceRef与transcript companion两支线，依据其PWF、已提交commit和ET合同形成合并顺序；company-wiki仅按对齐后的正式CLI/工具合同做E2E联通，不跨仓写入另一线的独立生产改动。
+- [x] 下阶段单owner逐文件比较并汇合FF SourceRef与transcript companion；依据其PWF、已提交commit和ET合同收敛合并顺序；company-wiki按正式CLI/工具合同完成真实隔离E2E。不跨仓改RF/StockWiki。
+
+## Phase 58：FF SourceRef 与电话会议统一入库（2026-10-03）
+
+- [x] 单owner复核 SourceRef v2 分支与 transcript companion 分支的提交、测试和重叠文件；不直接 cherry-pick 过度复杂的旧 companion 实现，在一条基于最新 `origin/main` 的FF集成线上复用已验证 SourceRef producer，并落地窄 transport。
+- [x] CWP importer response 升至 `/3` 并返回不含物理路径的正式 SourceRef；CWP query 增加只供 transcript 幂等复用的显式 lookup envelope。普通 as-of 查询继续排除未知 publication；unknown publication 只可精确去重，不可被当作历史资格。
+- [x] FF v2 以单一 `filing_intent` 驱动下载；对电话会议只在 FY/Q 精确时调用 earnings-transcripts `/2` CLI，原始 FMP JSON 不翻译、不转录，交 CWP 入库；逐字节 SHA/大小/MIME、provider 文档 ID、call/publication/cutoff 分开核验和表达。电话会议失败不回滚财报。
+- [x] 真实子进程 E2E 覆盖 ET fixture → CWP import CLI/catalog → verified open → SourceRef 回传；复跑从 CWP 去重且不再次调用 provider；验证唯一原文 bytes 保持相同、路径不泄漏、未知日期不获 cutoff。没有调用真实 FMP API、没有读取密钥。
+- [x] company-wiki transcript/read CLI 直接回归 **16 passed**；Ruff、相关四模块 mypy 和 `pre_push_gate.py --fast-contracts-only` 均绿。fast gate 在移除故障的自动插件加载并显式加载 `pytest_timeout` 后通过。
+- [x] FF SourceRef、ET `/2`、CWP handoff、v1 CLI 和 companion 节点包 **191 passed, 1 skipped in 50.40s**；Ruff 通过。唯一 skip 是既有 production opt-in 测试；隔离集成测试无 skip。测试根使用短路径 `C:\\cwt`，退出后清理。
+- [x] 记录 Windows E2E 首次失败根因：深层 pytest TEMP 路径导致隔离 company-wiki 的最终文件路径超过 Windows 可用长度，出现 `FileNotFoundError`；短 basetemp 后完整E2E通过，产品路径和实现未为测试特判。
+- [ ] 正常提交、快进推送FF集成线与CWP变更；随后执行正式 FF→CWP→RF 消费者大节点E2E（本阶段 FF→CWP 通过尚不等于RF消费链完成）。
+
+## Next Step
+
+完成本阶段代码和计划文件的提交/快进推送；之后只做 G-A 剩余的大节点：用当前FF与CWP路径运行RF中已有的三仓 SourceRef E2E，检查测试时钟、真实字节hash和as-of，不放宽生产合同。若该测试需要修改RF源码，先确认确为合同问题而非过期夹具；独立consumer/研究状态不动。

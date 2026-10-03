@@ -4,6 +4,8 @@
 
 > **2026-10-01 当前状态：**FF 根当前检出 `fcap@d35b6f5`，与 `origin/main` 同步；本地名为 `main` 的 ref `c9799b7` 比远端落后 39 个提交。SourceRef v2 worktree `5532ce0` 与 transcript companion worktree `29085f7` 当前无工作区改动，但 `fetch_filing.py`、`filing_contracts.py`、`transcript_companion.py`、`test_transcript_companion.py` 等核心路径有重叠。由一个 FF owner 在最新远端主线基础上收拢两条 WIP；不要让两个 harness 分别合并或覆盖同一文件。全局计划/S0b golden 与本仓 E2E 仍待验，不能把分支存在等同于功能已并线。
 
+> **2026-10-03 状态更新：**单owner已在FF `codex/ff-source-companion-integration` 汇合SourceRef v2与companion；本仓v1、v2、ET `/2`、CWP真实import/verified-open与FF→CWP E2E为 **191 passed, 1 skipped**（旧生产opt-in skip；新E2E无skip）。CWP返回pathless SourceRef并统一保存原始JSON。FF/CWP commit/push收据待下方总计划记录；FF→CWP→RF正式consumer G-A仍是下一大节点。没有真实FMP API 请求或密钥读取。此状态取代2026-10-01“仍待汇合”的快照。
+
 开工输入包：本卡、S0a observed 接口表、CWP/ET 的 S0b golden（未产时标 pending）、只读 P/T 样本清单和本仓 fake provider fixture；本仓只复制所需样本到自己的隔离测试根。
 
 ## 已知状态和依赖
@@ -32,4 +34,4 @@
 
 交接提供本仓 base/branch/commit、v1 与 v2 golden、ET `/2` 的消费版本、明确请求到 0/1 网络调用表、测试命令/退出和未解 hold。若 CWP/ET 生产者 golden 尚未冻结，标接口 `pending`，继续可独立的测试工作；不得自行猜字段并宣称跨仓完成。
 
-**本线自动验收：**v1 默认 CLI 回归与 v2/companion 新路由测试均通过且新路由零 skip；已索引复用/歧义期次/两 provider 不可用为 0 正文网络，精确缺口最多一次下载；财报和电话会状态独立、原文/locator 可回放。只用本仓可写短临时根，测试前后生产 catalog/raw 与本次测试树相同；G-A 跨仓是否可用由总指挥另验。
+**本线自动验收：**v1 默认 CLI 回归与 v2/companion 新路由测试通过；已索引复用/歧义期次/不可用provider不会触发多余正文调用，精确缺口最多一次下载；财报和电话会状态独立，原文/SourceRef可回放。只用短临时根；正式FF→CWP fixture E2E实测原始bytes、catalog与verified-open。G-A对RF消费者可用性仍须由总指挥另验。

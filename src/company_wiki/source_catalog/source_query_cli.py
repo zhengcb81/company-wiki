@@ -8,7 +8,7 @@ import json
 import sqlite3
 import sys
 from pathlib import Path
-from typing import Sequence
+from typing import NoReturn, Sequence
 
 from .config import CatalogConfigError, load_catalog_config
 from .reader import CatalogReaderUnavailable
@@ -18,10 +18,11 @@ from .source_reader import SOURCE_REF_SCHEMA_VERSION, SourceReadError, SourceVer
 
 
 _MAX_REQUEST_BYTES = 65_536
+_TRANSCRIPT_LOOKUP_SCHEMA = "company-wiki-transcript-import-lookup-request/1"
 
 
 class _JsonArgumentParser(argparse.ArgumentParser):
-    def error(self, message: str) -> None:
+    def error(self, message: str) -> NoReturn:
         raise ValueError(message)
 
 
@@ -45,17 +46,28 @@ def main(argv: Sequence[str] | None = None) -> int:
         request_data = json.loads(raw.decode("utf-8"))
         if not isinstance(request_data, dict):
             raise ValueError("request must be an object")
+        transcript_lookup = request_data.get("schema_version") == _TRANSCRIPT_LOOKUP_SCHEMA
+        if transcript_lookup:
+            if set(request_data) != {"schema_version", "source_request"}:
+                raise ValueError("transcript lookup fields differ from schema")
+            request_data = request_data["source_request"]
+            if not isinstance(request_data, dict):
+                raise ValueError("source_request must be an object")
         request = SourceRequest(**request_data)
         config = load_catalog_config(args.config)
         catalog = SourceCatalog(config)
         reader = SourceVersionReader(catalog)
-        result = reader.query_local(request)
+        result = (
+            reader.lookup_transcript_import(request)
+            if transcript_lookup
+            else reader.query_local(request)
+        )
         _emit({
             **asdict(result),
             "request_id": request.request_id,
             "candidates": [
                 reader.describe_candidate(ref) for ref in result.matches
-            ] if result.status == "found" else [],
+            ] if result.status in {"found", "unknown_publication"} else [],
             "source_read_policy_sha256": reader.read_policy_sha256(),
         })
         return 0

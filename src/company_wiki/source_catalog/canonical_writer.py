@@ -11,7 +11,7 @@ from pathlib import Path
 import re
 import shutil
 import unicodedata
-from typing import Any, Mapping
+from typing import TYPE_CHECKING, Any, Mapping
 
 from company_wiki.source_contract import source_id_for_sha256
 
@@ -21,6 +21,9 @@ from .resolver import ResolutionResult, ResolutionStatus, SourceRequest, SourceR
 from .scanner import scan_catalog
 from .service import SourceCatalog
 from .store import canonical_json
+
+if TYPE_CHECKING:
+    from .source_reader import SourceRef
 
 
 CANONICAL_IMPORT_SCHEMA_VERSION = "1.0"
@@ -354,6 +357,40 @@ class CanonicalSourceWriter:
                 resolution=resolution,
             )
 
+    def source_ref_for_import(
+        self,
+        request: SourceRequest,
+        candidate: DownloadCandidate,
+        sha256: str,
+    ) -> SourceRef:
+        """Return the pathless catalog reference for one committed import.
+
+        Transcript records with unknown publication dates are deliberately
+        excluded from as-of resolution, so locate those only through the
+        writer's exact post-scan identity check. This reference does not grant
+        historical eligibility; consumers still apply their requested cutoff.
+        """
+        if candidate.document_kind == "investor_call_transcript" and candidate.filing_date is None:
+            document_id = self._verify_unknown_date_index(request, candidate, sha256)
+        else:
+            matches = [
+                item
+                for item in SourceResolver(self.catalog).resolve(request).matches
+                if item.content_sha256 == sha256
+                and item.provider_document_id == candidate.provider_document_id
+                and (not candidate.provider or item.provider == candidate.provider)
+            ]
+            if len(matches) != 1:
+                raise CanonicalImportError(
+                    "imported source has no unique exact catalog reference"
+                )
+            document_id = matches[0].document_id
+        from .source_reader import SourceVersionReader
+
+        return SourceVersionReader(self.catalog).query_ref(
+            document_id, source_id_for_sha256(sha256), sha256
+        )
+
     def _validate_staged(
         self,
         request: SourceRequest,
@@ -461,7 +498,7 @@ class CanonicalSourceWriter:
 
     def _verify_unknown_date_index(
         self, request: SourceRequest, candidate: DownloadCandidate, sha256: str
-    ) -> None:
+    ) -> str:
         rows = self.catalog.reader.query(
             text=candidate.title,
             document_kind=candidate.document_kind,
@@ -491,6 +528,7 @@ class CanonicalSourceWriter:
             raise CanonicalImportError(
                 "unknown-date original was not indexed to its verified bytes"
             )
+        return str(matches[0])
 
     @staticmethod
     def _atomic_copy(

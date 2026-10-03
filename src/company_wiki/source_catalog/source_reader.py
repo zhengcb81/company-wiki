@@ -177,7 +177,9 @@ class SourceVersionReader:
         """Return a pathless pin for a subsequent exact-version open."""
         return self._resolver_and_read_policy()[1]
 
-    def _candidate_pages(self, request: SourceRequest) -> Iterator[dict[str, Any]]:
+    def _candidate_pages(
+        self, request: SourceRequest, *, include_unknown_publication: bool = False
+    ) -> Iterator[dict[str, Any]]:
         page_size = 1000
         max_candidates = 20_000
         for offset in range(0, max_candidates, page_size):
@@ -185,7 +187,9 @@ class SourceVersionReader:
                 documents = self.catalog.query_filing_candidates(
                     document_kind=request.document_kind,
                     source_statuses=("active",),
-                    published_on_or_before=request.as_of_date,
+                    published_on_or_before=(
+                        None if include_unknown_publication else request.as_of_date
+                    ),
                     limit=page_size,
                     offset=offset,
                 )
@@ -236,11 +240,39 @@ class SourceVersionReader:
         This lookup never scans, downloads, or grants permission to reuse a
         filing.  The selected action is checked again by open_version.
         """
+        return self._query_local(request, include_unknown_publication=False)
+
+    def lookup_transcript_import(self, request: SourceRequest) -> SourceQueryResult:
+        """Find an exact stored transcript for duplicate suppression.
+
+        A missing publication date is reported explicitly and never changes
+        the normal as-of query contract. This lookup is for import idempotency,
+        not historical evidence selection.
+        """
+        if not isinstance(request, SourceRequest):
+            raise TypeError("request must be SourceRequest")
+        if (
+            request.document_kind != "investor_call_transcript"
+            or request.market is None
+            or request.security_id is None
+            or request.fiscal_year is None
+            or request.fiscal_period is None
+            or request.provider is None
+            or request.mode not in {None, "exact"}
+        ):
+            raise ValueError("transcript import lookup requires exact company and period")
+        return self._query_local(request, include_unknown_publication=True)
+
+    def _query_local(
+        self, request: SourceRequest, *, include_unknown_publication: bool
+    ) -> SourceQueryResult:
         if not isinstance(request, SourceRequest):
             raise TypeError("request must be SourceRequest")
         resolver = self._resolver_for_request()
         found: list[tuple[str, str, SourceRef]] = []
-        for document in self._candidate_pages(request):
+        for document in self._candidate_pages(
+            request, include_unknown_publication=include_unknown_publication
+        ):
             if document["metadata_status"] != "ok":
                 continue
             if not resolver._entity_matches(request.entity, document):
@@ -267,7 +299,11 @@ class SourceVersionReader:
             if request.language and metadata.get("language") != request.language:
                 continue
             provider, provider_document_id, identities = _provider_identity(metadata)
-            if request.provider and provider and provider != request.provider:
+            if request.provider and (
+                provider != request.provider
+                if include_unknown_publication
+                else provider is not None and provider != request.provider
+            ):
                 continue
             if request.provider_document_id and (
                 request.provider_document_id not in identities
@@ -275,7 +311,9 @@ class SourceVersionReader:
             ):
                 continue
             published = str(document["published_date"] or "")
-            if not published or published > request.as_of_date:
+            if not published and not include_unknown_publication:
+                continue
+            if published and published > request.as_of_date:
                 continue
             source_id = str(document["source_id"] or "")
             digest = str(document["content_sha256"] or "")
@@ -298,6 +336,10 @@ class SourceVersionReader:
             return SourceQueryResult(
                 "ambiguous", tuple(item[2] for item in found),
                 "multiple_local_matches",
+            )
+        if not found[0][0]:
+            return SourceQueryResult(
+                "unknown_publication", (found[0][2],), "publication_date_unknown"
             )
         return SourceQueryResult("found", (found[0][2],), "one_local_match")
 

@@ -143,6 +143,32 @@ def _run(root: Path, envelope: dict[str, object]) -> subprocess.CompletedProcess
     )
 
 
+def _run_transcript_lookup(
+    root: Path, source_request: dict[str, object]
+) -> subprocess.CompletedProcess[str]:
+    environment = os.environ.copy()
+    environment["PYTHONPATH"] = str(SRC_ROOT) + os.pathsep + environment.get("PYTHONPATH", "")
+    payload = {
+        "schema_version": "company-wiki-transcript-import-lookup-request/1",
+        "source_request": source_request,
+    }
+    return subprocess.run(
+        [
+            sys.executable,
+            "-m",
+            "company_wiki.source_catalog.source_query_cli",
+            "--config",
+            str(root / "config" / "source_catalog.yaml"),
+        ],
+        input=json.dumps(payload, ensure_ascii=False),
+        text=True,
+        capture_output=True,
+        cwd=REPO_ROOT,
+        env=environment,
+        check=False,
+    )
+
+
 def _remove_fixture(root: Path, parent: Path) -> None:
     if not root.exists():
         return
@@ -268,6 +294,18 @@ def test_fmp_unknown_publication_cli_stores_original_but_excludes_historical_cut
         assert imported["status"] == "imported"
         assert imported["canonical_status"] == "imported_new"
         assert imported["provider_payload_sha256"] == _sha(original)
+        source_ref = imported["source_ref"]
+        assert imported["schema_version"] == "company-wiki-transcript-import-response/3"
+        assert source_ref == {
+            "schema_version": "2.0",
+            "document_id": source_ref["document_id"],
+            "source_id": imported["source_id"],
+            "content_sha256": _sha(original),
+            "byte_size": len(original),
+            "mime_type": "application/json",
+        }
+        assert isinstance(source_ref["document_id"], str) and source_ref["document_id"]
+        assert not any("path" in key.lower() for key in source_ref)
         files = [p for p in (root / "companies").rglob("*.json") if not p.name.endswith(".source.json")]
         assert len(files) == 1 and files[0].read_bytes() == original
         assert files[0].name.startswith("unknown-date_fmp_")
@@ -284,6 +322,8 @@ def test_fmp_unknown_publication_cli_stores_original_but_excludes_historical_cut
         docs = catalog.reader.query(text="MSFT 2026 Q3", document_kind="investor_call_transcript")
         assert len(docs) == 1 and docs[0]["published_date"] is None
         ref = reader.query_ref(docs[0]["document_id"], imported["source_id"], _sha(original))
+        assert ref.document_id == source_ref["document_id"]
+        assert ref.source_id == source_ref["source_id"]
         opened = reader.open_version(ref, purpose="preview")
         assert opened.data == original
         material = extract_transcript_material(opened.data, mime_type="application/json")
@@ -291,12 +331,23 @@ def test_fmp_unknown_publication_cli_stores_original_but_excludes_historical_cut
         assert material.lines
         request = SourceRequest(**envelope["source_request"])
         assert reader.query_local(request).status == "not_found"
+        dedup_request = dict(envelope["source_request"])
+        dedup_request["provider_document_id"] = None
+        lookup_process = _run_transcript_lookup(root, dedup_request)
+        assert lookup_process.returncode == 0, lookup_process.stderr
+        lookup = json.loads(lookup_process.stdout)
+        assert lookup["status"] == "unknown_publication"
+        assert lookup["reason"] == "publication_date_unknown"
+        assert lookup["matches"] == [source_ref]
+        assert lookup["candidates"][0]["published_date"] is None
+        assert str(root / "companies") not in lookup_process.stdout
 
         second = _run(root, envelope)
         assert second.returncode == 0, second.stderr
         replay = json.loads(second.stdout)
         assert replay["canonical_status"] == "deduplicated_after_download"
         assert replay["source_id"] == imported["source_id"]
+        assert replay["source_ref"] == source_ref
         assert len([p for p in (root / "companies").rglob("*.json") if not p.name.endswith(".source.json")]) == 1
         staging = root / ".source_catalog" / "staging"
         assert not staging.exists() or list(staging.iterdir()) == []

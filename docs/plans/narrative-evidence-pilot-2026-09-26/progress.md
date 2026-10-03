@@ -1115,3 +1115,13 @@
 
 - `3e5923b`已推送origin/master；[Actions37079602808](https://github.com/zhengcb81/company-wiki/actions/runs/37079602808) success，workflow61秒/job56秒。
 - G-A1 50个节点测试、本机Ruff/mypy/fast-pre-push均绿。下一阶段盘点FF两个clean worktree的PWF/Git/contracts，明确单owner并线；FF主目录唯一可见未跟踪项目是API key文件，不读取、不改动。
+
+## 2026-10-03 — Phase 58 FF→ET→CWP SourceRef 接线
+
+- 单owner基于FF `origin/main` 派生整合SourceRef v2与电话会议companion；逐项检查两个旧分支记录/提交/测试，保留SourceRef branch合同与fixture，只移植精简 companion transport。FF API key 文件未读、未改、未加入暂存区。
+- CWP增量：transcript import response `/3`返回正式 pathless SourceRef；额外 transcript-import lookup envelope 允许精确发现未知publication记录供去重。原普通 as-of reader contract 不变。
+- FF增量：一个FF请求意图/预算触发最多一次精确ET `/2`调用；原JSON直接写入CWP统一raw/catalog，完成后verified-open并验证byte size/SHA与receipt。失败保持财报结果；unknown publication 保持 cutoff false；重复请求复用已有SourceRef且无第二次provider调用。
+- FF完整相关包包含v1 CLI、SourceRef v2、ET/CWP contracts、三仓真实子进程边界：**191 passed, 1 skipped in 50.40s**；唯一skip为既有production opt-in项。Ruff全绿。company-wiki对应CLI直接测试 **16 passed**，Ruff、四模块mypy、快门均绿。
+- CWP fast gate曾因全局langsmith插件加载时pydantic_core DLL `Access denied`退出、关闭全部插件后缺少pytest-timeout而退出；仅对本次运行禁用自动插件并指定`PYTEST_PLUGINS=pytest_timeout`后，原快门GREEN，未改workflow/依赖。
+- FF首个真实E2E出现FileNotFound：测试tmp根过深，Windows最终文件路径超长；使用C:\\cwt短basetemp重跑完整套件通过。首次CWP pytest默认TEMP根因权限拒绝；短隔离basetemp/hook环境中16个测试通过。专属临时测试目录均已清理。
+- 下一步仅剩CWP/FF提交与推送，然后执行既有RF三仓consumer E2E；未运行live FMP、未修改RF/StockWiki、未触碰production raw/catalog或真实下载资料。

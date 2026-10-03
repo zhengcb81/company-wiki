@@ -837,3 +837,11 @@
 
 - `3e5923b`已推送origin/master；[Actions37079602808](https://github.com/zhengcb81/company-wiki/actions/runs/37079602808) success，workflow61秒/job56秒。
 - G-A1 50个节点测试、本机Ruff/mypy/fast-pre-push均绿。下一阶段盘点FF两个clean worktree的PWF/Git/contracts，明确单owner并线；FF主目录唯一可见未跟踪项目是API key文件，不读取、不改动。
+
+## 2026-10-03 — FF transcript companion integration findings
+
+- FF两条工作线的提交图：`codex/ff-source-reader-v2-20260927` 是当前集成支线祖先；`codex/transcript-companion` 是旁支。没有把 companion worktree 的核心实现整树覆盖进来；在单一整合工作树复用已验证的SourceRef v2 producer，新增精简ET subprocess transport和真实CWP CLI E2E。
+- CWP transcript lookup 通过独立、精确的 `company-wiki-transcript-import-lookup-request/1` envelope 调用；它能返回 `unknown_publication` 供去重，但 `SourceVersionReader.query_local` 原有as-of过滤不变。Import response `/3`只增加正式SourceRef，不包含绝对路径。source ref回放仍必须verified-open。
+- 下载路线：精确 FY/Q、身份已验证、请求意图`fetch_if_missing`且预算大于零时调用ET `/2`工具一次；provider返回request_id、FMP URL/期次/call date、原始JSON bytes及原始SHA均由CWP import合同重验。Provider key只留在ET子进程环境，不序列化给CWP。未知publication保持`as_of_cutoff_verified=false`。
+- Windows环境的两项红灯均为测试运行环境：pytest自动加载langsmith时`pydantic_core` DLL被拒绝；isolated company-wiki深临时路径导致目标路径超长。前者指定pytest需要的timeout插件后快门通过；后者改用唯一短测试根后真实E2E通过；均未以删测试/放宽产品校验解决。
+- 综合直接依赖节点回归：`tests/test_fetch_filing.py`、SourceRef v2 query/CLI、ET `/2`、CWP handoff、FF envelope/companion/E2E，**191 passed, 1 skipped in 50.40s**。当前未验证真实FMP权益/API 200，也尚未完成 RF consumer端的完整三仓E2E。
