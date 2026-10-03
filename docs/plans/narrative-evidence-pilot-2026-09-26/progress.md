@@ -1,5 +1,13 @@
 # Progress：叙述性证据试点
 
+## 2026-10-03 — G-D B1 准备与节点
+
+- 当前限定盘点三根 45,748,203,875 B / 42.606 GiB（0 access error/0 reparse），详细类别和后批引用缺口见[G-D 细则](gd_storage_batches_2026-10-03.md)。原文目录 23.468 GiB 保留；旧 DB zstd 与 gzip 是派生历史，不是原件备份。B1 候选是 3,055,796,224 B 的重复 active snapshot，完整 SHA 与 F4 prepared/cutover/smoke/retired 收据一致。
+- 新窄工具 `scripts/retire_catalog_snapshot.py` 只允许 catalog 直接子 snapshot 名，核 SQLite header、完成的退休 basis、候选及保留 archive 字节 SHA；默认 dry-run，apply 用既有操作锁，精确 unlink 和小型 intent/receipt，重复执行/中断恢复。无 recursive delete、无 raw 路径操作、无完整备份恢复。
+- TDD 初始模块缺失 RED；来源工具分类一项 RED 后明确登记 source workflow，不启用 legacy research writer。最终节点 **34 passed in 15.73s**：12 窄操作、正式 CWP 持久包→删 snapshot→CLI 回读、21 writer 分类回归；Ruff/host guard 绿，测试根全部删除。真实 E2E 首次 WinError32 是测试 `with sqlite3.connect` 不 close，改 closing 后连接释放；未放宽产品删除错误。
+- 生产 dry-run 已核候选 SHA `63c359aa…` / 3,055,796,224 B 和保留 archive SHA `1bc09746…`，未删除。准备正常发布后执行此独立批次；derived 的 663 个共享路径冲突与旧 normalized 调用者仍 hold，不整树删除。
+- 生产能力调查发现：factory/model adapter 仅测试，AUTO status/doctor 固定 not_configured/AUTO-7；Supervisor 不 materialize event / dispatch narrative outbox，summarize metrics 目前为零且 response 无 usage。需后续薄 composition 与真实 usage/预算，不能接 replay 模型生产或启动旧 normalize Worker。
+
 ## 2026-10-03 — N3a 发布，consumer 两线开工
 
 - CWP `a640400af4bea0ce97944e99ac9cb6abc6813ae9` 正常 commit/push 至 origin/master，ls-remote 实读一致；Ruff/mypy/config/host 提交钩子通过，真实 fast pre-push 通过。[Actions 37113358995](https://github.com/zhengcb81/company-wiki/actions/runs/37113358995) 全绿，Python 3.12 单 job 57 秒（09:31:55–09:32:52 UTC）。本轮没有追加全仓 coverage。

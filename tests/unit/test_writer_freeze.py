@@ -175,6 +175,7 @@ def test_control_gate_cli_remains_available() -> None:
         "narrative_evidence_pilot.py",
         "narrative_summary_review_pilot.py",
         "retire_source_catalog_db.py",
+        "retire_catalog_snapshot.py",
     ],
 )
 def test_source_workflow_cli_is_not_a_legacy_research_writer(script_name: str) -> None:

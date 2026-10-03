@@ -740,7 +740,10 @@ G-A1尚未由producer/filing-fetch表示FF→ET→CWP下载完整链完成；真
 - [ ] RF 按[独占卡](harness_lanes/revenue_forecast_narrative_consumer.md) TDD 实现显式来源准备入口、真正有界子进程、独立 DTO；本仓节点包及年报/英文 TXT 正式入口 E2E 通过后提交分支。
 - [ ] StockWiki 按[独占卡](harness_lanes/stockwiki_narrative_consumer.md) TDD 实现显式来源查询入口、真正有界子进程、独立 DTO；本仓节点包及招股/IR 正式入口 E2E 通过后提交分支。
 - [ ] 总指挥验两条线的实际入口/独立根恢复/负例与旧 raw reader 回归，正常并入对应主线；RF 普通推送并核 CI，无 remote 的 StockWiki 不新增 remote。签收 G-C 后才推进该批 G-D。
-- [ ] G-D 只读空间/引用盘点，形成精确可重建派生清单和实际释放估计；任何原始下载文档、API key、其他 owner 未提交文件均不进入清单。
+- [x] G-D 只读空间/引用盘点完成：三目录 42.606 GiB；明确重复 snapshot / 当前 DB / raw / derived / archive 边界，见[分批细则](gd_storage_batches_2026-10-03.md)。不把 historical 37.630 GiB 再算作收益。
+- [x] B1 窄 snapshot 清理器 TDD 与正式叙述 CLI 删副本后回读通过；节点 34 passed / 15.73s、Ruff/host guard 绿。生产 dry-run 精确候选 SHA/size 及保留 zstd SHA 均核实。
+- [ ] B1 发布后按精确候选执行，记录原文零改动/主库不变/同卷 free 前后及小型 intent/receipt；预计逻辑释放 2.846 GiB，不等待该批没有依赖的 G-C。
+- [ ] 后续生产 composition/model 计量施工细则：现有 runtime factories 仅测试实现，不能把 G-C consumer 绿灯当 batch/daemon 已可运行；生产 Worker 仍 paused。
 
 ## Next Step
 

@@ -46,6 +46,7 @@ SOURCE_WORKFLOW_TOOL_ALLOWLIST = frozenset(
         "narrative_evidence_pilot.py",
         "narrative_summary_review_pilot.py",
         "retire_source_catalog_db.py",
+        "retire_catalog_snapshot.py",
     }
 )
 

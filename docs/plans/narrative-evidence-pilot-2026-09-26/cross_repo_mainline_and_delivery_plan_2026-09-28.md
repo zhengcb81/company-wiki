@@ -1,5 +1,7 @@
 # 跨仓主线整合与 company-wiki 后续交付总计划（2026-09-28）
 
+> **2026-10-03 最新状态：**G-A 已收口，CWP N3a producer `a640400` 已发布/CI 绿，RF/StockWiki consumer 各自独占施工中；空间 B1 重复 snapshot 的 34 项节点已绿，生产仍 dry-run，见[当前总计划](task_plan.md)与[G-D 分批细则](gd_storage_batches_2026-10-03.md)。下方旧 Next Step / hold 仅作调查历史，不重复 E-B/G-A/W04。用户已授权及时普通推送；原件保留、Worker paused。
+
 > **2026-09-29 当前入口已移至[门禁统一清理方案](gate_and_contract_simplification_2026-09-29.md)与[六仓独占施工计划](parallel_harness_orchestration_2026-09-29.md)。** 本页保留 2026-09-28 的 Git/PWF 调查和详细施工背景；其中独立 B.AR、人工 reviewer、逐期 authorization、S0 一步冻结 golden、IQS 作为真实身份 producer、G-D 一律等待 G2b 等未来动作均被新方案替代，不能照旧执行。新方案使用 S0a observed→S0b 真实 producer、StockWiki 身份库→IQS 合同校验、按批次消费者引用决定 G-D 前置。跨仓并线、生产发布尚未完成；实施前以 live Git/测试复核状态。
 
 ## 0. 目标、边界与验收定义

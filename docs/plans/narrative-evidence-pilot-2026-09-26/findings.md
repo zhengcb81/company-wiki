@@ -1,5 +1,10 @@
 # Findings：叙述性证据试点
 
+## 2026-10-03 — 生产运行与空间的剩余实际缺口
+
+- 完成 consumer 不等于生产可运行：已定位的 factory / model response 实例仅测试 fixture；旧 daemon 是 normalize+旧 summary 链。需薄 composition 把 event materialization、Supervisor、outbox dispatcher接起来；摘要 handler 的 tokens/cost/duration 固定零，真实模型接入必须同时计量和持久预算，不能虚报零费用。
+- 当前空间 42.606 GiB，重复旧 active snapshot 2.846 GiB 与 F4机器收据逐字节同 SHA。旧 46 GiB 退役的 37.630 GiB 已是历史收益；大 zstd / retired gzip 是派生历史而非 PDF/TXT 原件。B1 独立于 selected 消费，后批 normalized 清理必须考虑 CWP旧summarizer / RF旧source-preparation 调用者及共享 artifact 文件。
+
 ## 2026-10-03 — consumer 部署边界
 
 - StockWiki 现有 SourceExport 子进程先完整 capture 再核大小，不能直接复用为有界 narrative I/O；新接口须同时限 stdout/stderr、处理 overflow/timeout 和回收所启动进程。部署配置习惯可以复用，旧 reader 无需在本轮全仓重构。
