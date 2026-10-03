@@ -1,6 +1,6 @@
 # 叙述性证据选择与摘要：小范围试点及实施方案
 
-> **2026-10-03 当前主线：**G-A 已收口，N3a producer 已发布 `a640400`；[Actions 37113358995](https://github.com/zhengcb81/company-wiki/actions/runs/37113358995) 成功，单 job 57 秒。当前执行 Phase 60：RF / StockWiki 在各自独占 worktree 并行接叙述包 consumer，总指挥汇合 G-C，空间 G-D 仅先只读盘点。下方历史未勾选项不是当前派发清单；以本首段、文末 Phase 60 和 Next Step 为准。生产 Worker 继续 paused，G-C/G-D 未完成。
+> **2026-10-03 当前主线：**G-A 与 N3a producer 已完成；RF / StockWiki consumer 的真实文档节点已绿，正在修复包装进程先退出时的子进程回收并汇合 G-C。G-D B1 工具已发布 `9f986ad`（Actions 37115171888 成功，55 秒），生产精确删除重复 snapshot，逻辑释放 **3,055,796,224 B / 2.846 GiB**；当前主库 SHA/mtime 不变，原件未进入操作范围。见[实际收据](harness_lanes/results/gd_b1_retirement_2026-10-03.md)。下方历史未勾选项不是当前派发清单；以本首段、文末 Phase 60 和 Next Step 为准。生产 Worker 继续 paused，G-C / G-D 后批与生产运行入口未完成。
 
 > 独立实施计划；不替代仓库根目录或任何已有专项计划。Phase 17 的旧库退役已完成；Phase 18 的离线 G1 选择、定位和草稿验证已完成一轮。**2026-09-27 新顺序：RF 主线并线已完成，先实施 R4 数据湖抽象层，再继续本计划的 W5/G2a、Worker 与空间处置。**本计划自身不写 RF，不启动生产 Worker；已有隔离叙述工位与主树未提交文件保持原样，待抽象层合同接入时按当前文件快照整合。
 
@@ -47,7 +47,7 @@ Phase 17 的 F0–F5 已完成。G1 离线主样本和回归集已经复跑：12
 
 ## Current Phase
 
-Phase 60：接通两个叙述 consumer，再汇合 G-C。CWP `a640400` 为正式 producer，原始 SourceRef / SourceExport wire 不变；G-A、E-B、StockWiki W01–W04 不重复实施。RF base `0573c40`、StockWiki base `5f2739a` 分别新建隔离 worktree，保留 RF fcap 与 StockWiki quick-scan owner 文件。总指挥负责接口、节点验收、主线并入和 PWF；G-D 候选只做只读盘点，未通过该批依赖前不删除。production Worker 继续 paused/default-off，原始文档保留。
+Phase 60：接通两个叙述 consumer，再汇合 G-C。CWP `a640400` 为正式 producer，原始 SourceRef / SourceExport wire 不变；G-A、E-B、StockWiki W01–W04 不重复实施。RF base `0573c40`、StockWiki base `5f2739a` 分别独占 worktree；StockWiki 当前 master 已由其他 owner 推进到 `aa3c6e6`，须正常三方并线，保留 RF fcap。B1 精确冗余 snapshot 已删除；B2/B3 按各批引用与来源事实处理，不能整树删除。总指挥负责接口、节点验收、主线并入和 PWF。production Worker 继续 paused/default-off，先补实际 composition/model 计量入口。
 
 外部来源采购补充：FMP Basic key 实测 profile/有效 SEC 检索 200，press releases/transcript dates 402；SEC 原生 API 无 key。以 246 个本地公司目录作保守分母，Basic 补充 SEC 检索约 2,076 calls/30 日，纯 SEC/IR 路径为 0 FMP calls；Koyfin 无用户 API，Seeking Alpha 个人订阅不授权自动抓取；Motley Fool 官方条款也禁止自动访问/采集，现有适配器不得接通生产。详细价格、假设、权利分级和 30 日试点见 [外部数据源与成本卡](provider_cost_and_capability_2026-09-27.md)。采购结论为先不买，且不改变 G0/G1e 门禁。
 
@@ -742,9 +742,9 @@ G-A1尚未由producer/filing-fetch表示FF→ET→CWP下载完整链完成；真
 - [ ] 总指挥验两条线的实际入口/独立根恢复/负例与旧 raw reader 回归，正常并入对应主线；RF 普通推送并核 CI，无 remote 的 StockWiki 不新增 remote。签收 G-C 后才推进该批 G-D。
 - [x] G-D 只读空间/引用盘点完成：三目录 42.606 GiB；明确重复 snapshot / 当前 DB / raw / derived / archive 边界，见[分批细则](gd_storage_batches_2026-10-03.md)。不把 historical 37.630 GiB 再算作收益。
 - [x] B1 窄 snapshot 清理器 TDD 与正式叙述 CLI 删副本后回读通过；节点 34 passed / 15.73s、Ruff/host guard 绿。生产 dry-run 精确候选 SHA/size 及保留 zstd SHA 均核实。
-- [ ] B1 发布后按精确候选执行，记录原文零改动/主库不变/同卷 free 前后及小型 intent/receipt；预计逻辑释放 2.846 GiB，不等待该批没有依赖的 G-C。
+- [x] B1 `9f986ad` 发布/CI 55 秒绿后执行精确候选，逻辑释放 3,055,796,224 B；同卷 free 增加 3,055,755,264 B，主库 SHA/mtime 不变。原件不进入操作范围，未声称全库 raw 已重新 hash；机器收据与[发布记录](harness_lanes/results/gd_b1_retirement_2026-10-03.md)保留。不完整恢复备份、不删 zstd/gzip。
 - [ ] 后续生产 composition/model 计量施工细则：现有 runtime factories 仅测试实现，不能把 G-C consumer 绿灯当 batch/daemon 已可运行；生产 Worker 仍 paused。
 
 ## Next Step
 
-完成两条已启动 consumer 线并汇合 G-C；期间只读盘点 G-D。按[交接包](narrative_transport_handoff.md)验各仓节点和真实入口，正常并入/推送，再按无引用清单批次清理派生。不要重复 G-A/E-B/W04，不引入每小步审查或全仓长测，生产 Worker 保持 paused。
+完成两条 consumer 的进程生命周期局部补丁、并线和 RF 远端 CI，汇合 G-C；B1 已完成。随后先冻结并实施生产 composition / 模型计量 / 持久预算 / 终态结果降容细则，按实际引用推进 B2/B3。不要重复四份真实文档或全仓长测，不重复 G-A/E-B/W04，生产 Worker 保持 paused，原件保留。

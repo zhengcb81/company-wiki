@@ -18,6 +18,8 @@
 
 ## B1：立即可实施的重复 active 快照
 
+**已完成：**工具发布 `9f986ad`，Actions 37115171888 成功/55 秒；生产精确 unlink 后逻辑释放 3,055,796,224 B。同卷 free 从 131,192,340,480 B 到 134,248,095,744 B（增加 3,055,755,264 B），当前 DB SHA/mtime 不变。三根按本次精确删除计算剩余 **42,692,407,651 B / 39.760 GiB**，这是盘点减已删文件，未重新全遍历。详细[收据](harness_lanes/results/gd_b1_retirement_2026-10-03.md)；下方步骤保留实施依据。B2/B3 仍未执行。
+
 候选完整 SHA `63c359aa4b09545a540a05f8d32d66ac3c9dbd4ccf696470d55cb38a31f6dcfc`，与 `.source_catalog/retirement/20260926T170825Z-4a9c67e1/prepared.json` 的 shadow SHA、两次 smoke 与 `retired.json` 的 production SHA 一致。当前表无 raw BLOB；未发现该 bak 精确文件名或 bak-r6 的 runtime/config 引用。首批只删除此精确副本，保留当前 DB、完整 zstd、退休收据和原件，不等待无关的 G-C。
 
 1. 先写窄 snapshot 清理器的 RED：合法副本、坏 hash/size、当前 DB、非 snapshot/原文、reparse、basis 漂移、重复 apply/中断恢复。目录参数属于存储维护层，不进入上层业务 DTO。

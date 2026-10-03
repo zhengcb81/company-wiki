@@ -1,6 +1,6 @@
 # company-wiki 清洁架构与 TDD 实施总图（2026-09-27）
 
-> **2026-10-03 执行入口：**M1/M2、E-B、G-A 已完成；CWP N3a `a640400` 发布且 CI 绿，正在 RF/StockWiki 真消费 G-C 与 G-D B1。当前步骤见[主计划 Phase 60](task_plan.md)，[G-D 细则](gd_storage_batches_2026-10-03.md)明确空间和生产 composition/计量缺口。本页较早阶段/§13 下一步属于历史。用户要求完成进度及时普通推送，覆盖下方旧“提交不推送”规则；生产 Worker paused，原件保留。
+> **2026-10-03 执行入口：**M1/M2、E-B、G-A / N3a 已完成；RF/StockWiki 真消费 G-C 正做生命周期局部修复/并线。G-D B1 已发布/CI 55 秒绿并精确删除重复 snapshot，逻辑释放 2.846 GiB，主库 SHA/mtime 不变。当前步骤见[主计划 Phase 60](task_plan.md)、[实际收据](harness_lanes/results/gd_b1_retirement_2026-10-03.md)；[G-D 细则](gd_storage_batches_2026-10-03.md)明确 B2/B3 和生产 composition/计量缺口。本页较早阶段/§13 下一步属于历史。用户要求完成进度及时普通推送，覆盖下方旧“提交不推送”规则；生产 Worker paused，原件保留。
 
 > **2026-09-28 状态更新：**下方页首与 §13 的 E2/E3“下一步”是历史施工快照。E0–E4 已完成，生产 Worker 仍 paused；当前跨仓并主线与剩余 E5–E7、G2a、派生清理的依赖顺序见[跨仓总计划](cross_repo_mainline_and_delivery_plan_2026-09-28.md)和 `task_plan.md` Phase 24。本页 L0–L7 职责和 M1–M4 质量原则继续有效；R4 的独立 B.AR/C.local 门尚未由内部 M1 绿灯自动签收。
 

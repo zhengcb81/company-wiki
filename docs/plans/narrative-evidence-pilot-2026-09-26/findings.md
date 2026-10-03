@@ -1,5 +1,10 @@
 # Findings：叙述性证据试点
 
+## 2026-10-03 — B1 与消费线验收修正
+
+- 精确 snapshot 已删，主库完整 SHA/mtime 不变，逻辑释放 2.846 GiB；当前三根按已删文件计算为 39.760 GiB。原件没有进入操作范围，不能写成“全库 raw 已重新 hash”。B2 的 normalized 调用者与共享路径冲突、B3 旧 ID/元数据策略仍需各批解决。
+- 有界 pipe 必须覆盖子进程全生命周期：只 kill 父 PID 或在父退出后 taskkill /T，无法可靠回收仍持 pipe 的孙进程。两条新 consumer 正用真实反例修复 Windows Job Object/POSIX process group 与总 deadline，线程部分启动失败也需收尾；这属于本次新增 reader 的窄边界，不改全仓旧 reader、不加入人工审批门。
+
 ## 2026-10-03 — 生产运行与空间的剩余实际缺口
 
 - 完成 consumer 不等于生产可运行：已定位的 factory / model response 实例仅测试 fixture；旧 daemon 是 normalize+旧 summary 链。需薄 composition 把 event materialization、Supervisor、outbox dispatcher接起来；摘要 handler 的 tokens/cost/duration 固定零，真实模型接入必须同时计量和持久预算，不能虚报零费用。

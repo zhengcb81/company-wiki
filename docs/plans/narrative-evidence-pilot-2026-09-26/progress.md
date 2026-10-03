@@ -1,6 +1,14 @@
 # Progress：叙述性证据试点
 
+## 2026-10-03 — G-D B1 实际完成
+
+- `9f986ad` 已普通提交/推送，Actions 37115171888 成功、55 秒。节点 34 passed，生产随后精确删除重复 active snapshot **3,055,796,224 B / 2.846 GiB**；主库完整 SHA/mtime/size 不变，原文不进入操作范围。
+- 同卷 free 增加 3,055,755,264 B；机器 intent/receipt 保留于 `.source_catalog/snapshot-cleanup/b26c0c427a5fd31ef72d965c/`。三根原盘点减此次删除为 39.760 GiB，未重新全遍历；历史 37.630 GiB 不重复计收益。详见[实际收据](harness_lanes/results/gd_b1_retirement_2026-10-03.md)。B2/B3 未执行，两个大 archive 保留，无完整恢复演练。
+- RF / StockWiki 真实文档消费节点已完成；验收发现包装父进程先退出而孙进程持有 pipe 会超时/遗留，两线正在 TDD 局部生命周期修复，不重跑全仓/四份原文节点。StockWiki 其他 owner 的 W05 `aa3c6e6` 已在 master，正常三方合并保留该进度。
+
 ## 2026-10-03 — G-D B1 准备与节点
+
+> 下方 dry-run 是执行前记录，已由上方实际完成收据覆盖。
 
 - 当前限定盘点三根 45,748,203,875 B / 42.606 GiB（0 access error/0 reparse），详细类别和后批引用缺口见[G-D 细则](gd_storage_batches_2026-10-03.md)。原文目录 23.468 GiB 保留；旧 DB zstd 与 gzip 是派生历史，不是原件备份。B1 候选是 3,055,796,224 B 的重复 active snapshot，完整 SHA 与 F4 prepared/cutover/smoke/retired 收据一致。
 - 新窄工具 `scripts/retire_catalog_snapshot.py` 只允许 catalog 直接子 snapshot 名，核 SQLite header、完成的退休 basis、候选及保留 archive 字节 SHA；默认 dry-run，apply 用既有操作锁，精确 unlink 和小型 intent/receipt，重复执行/中断恢复。无 recursive delete、无 raw 路径操作、无完整备份恢复。
