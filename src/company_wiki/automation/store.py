@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import sqlite3
 import json
+import hashlib
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Generic, TypeVar
@@ -46,8 +47,13 @@ from .models import (
     RuntimeGate,
     RuntimeState,
     canonical_json,
+    require_utc_timestamp,
     require_sha256,
     validate_job_transition,
+)
+from .terminal_receipt_contracts import (
+    FinalArtifactPin, TerminalCompactionResult, TERMINAL_RECEIPT_SCHEMA,
+    is_terminal_receipt, terminal_job_scope,
 )
 
 T = TypeVar("T")
@@ -74,6 +80,12 @@ class StoreBusyError(AutomationStoreError):
 
 class IntegrityViolationError(AutomationStoreError):
     code = "integrity_violation"
+
+
+class TerminalResultCompactedError(IntegrityViolationError):
+    """The original result was retired; read the exact final artifact instead."""
+
+    code = "terminal_result_compacted"
 
 
 class IdempotencyConflictError(AutomationStoreError):
@@ -565,6 +577,161 @@ def _block_terminal_dependencies(
 # --------------------------------------------------------------------------- #
 # AutomationStore.
 # --------------------------------------------------------------------------- #
+def _compact_terminal_narrative(
+    connection: sqlite3.Connection,
+    scope: tuple[str, ...],
+    pin: FinalArtifactPin,
+    compacted_at: str,
+    *,
+    write: bool,
+) -> TerminalCompactionResult | None:
+    """Derive and validate all AUTO facts in the caller's transaction."""
+    placeholders = ",".join("?" for _ in scope)
+    if not write and connection.execute(
+        f"SELECT 1 FROM attempts WHERE job_id IN ({placeholders}) "
+        "AND instr(result_json,?) > 0 LIMIT 1",
+        scope + (f'"schema_version":"{TERMINAL_RECEIPT_SCHEMA}"',),
+    ).fetchone() is None:
+        # The normal path avoids decoding large bodies in its no-op preflight.
+        return None
+    attempt_rows = connection.execute(
+        f"SELECT {_ATTEMPT_COLS} FROM attempts WHERE job_id IN ({placeholders}) "
+        "ORDER BY job_id,attempt_no,attempt_id", scope,
+    ).fetchall()
+    parsed = []
+    for row in attempt_rows:
+        result = None
+        if row["result_json"] is not None:
+            try:
+                result = HandlerResult.from_dict(json.loads(row["result_json"]))
+            except (KeyError, TypeError, ValueError) as exc:
+                raise IntegrityViolationError("terminal attempt result is invalid") from exc
+        parsed.append((row, result))
+    markers = [result for _, result in parsed if result is not None and is_terminal_receipt(result.result)]
+    if not write and not markers:
+        return None
+
+    jobs = [_job_from_row(_job_row(connection, job_id)) for job_id in scope]
+    jobs_by_id = {job.job_id: job for job in jobs}
+    kinds = {job.job_type: job for job in jobs}
+    if set(kinds) != {"source.narrative_select", "source.narrative_summarize", "source.narrative_verify"}:
+        raise IntegrityViolationError("scope is not one canonical narrative DAG")
+    if any(job.status is not JobStatus.SUCCEEDED for job in jobs):
+        raise IntegrityViolationError("narrative DAG is not fully succeeded")
+    event_ids = {job.created_from_event_id for job in jobs}
+    if len(event_ids) != 1:
+        raise IntegrityViolationError("narrative jobs belong to different events")
+    event_id = jobs[0].created_from_event_id
+    event_row = connection.execute(f"SELECT {_EVENT_COLS} FROM events WHERE event_id=?", (event_id,)).fetchone()
+    if event_row is None:
+        raise IntegrityViolationError("terminal narrative event is missing")
+    event = _event_from_row(event_row)
+    if (event.event_type, event.subject_type) != ("source.revision_registered", "source_revision") or any(
+        (job.input_hash, job.policy_version, job.subject_type, job.subject_id) !=
+        (event.input_hash, event.policy_version, event.subject_type, event.subject_id) for job in jobs
+    ):
+        raise IntegrityViolationError("terminal narrative event/input pins differ")
+    payload = json.loads(event.payload_json)
+    source = payload.get("source_ref", {}) if isinstance(payload, dict) else {}
+    if not isinstance(source, dict):
+        raise IntegrityViolationError("terminal event source is invalid")
+    if (source.get("document_id"), source.get("source_id"), source.get("content_sha256")) != (
+        pin.document_id, pin.source_id, pin.source_sha256
+    ):
+        raise IntegrityViolationError("terminal event source differs from final artifact")
+    members = connection.execute(
+        "SELECT run_id,job_id,input_hash,handler_version FROM narrative_run_jobs "
+        f"WHERE job_id IN ({placeholders})", scope,
+    ).fetchall()
+    if len(members) != 3 or len({row["run_id"] for row in members}) != 1:
+        raise IntegrityViolationError("terminal narrative scope must belong to one immutable run")
+    run_id = members[0]["run_id"]
+    run = connection.execute("SELECT * FROM narrative_runs WHERE run_id=?", (run_id,)).fetchone()
+    if run is None or any((row["input_hash"], row["handler_version"]) !=
+                          (jobs_by_id[row["job_id"]].input_hash,
+                           jobs_by_id[row["job_id"]].handler_version)
+                          for row in members):
+        raise IntegrityViolationError("immutable run job pins differ")
+
+    select = kinds["source.narrative_select"].job_id
+    summary = kinds["source.narrative_summarize"].job_id
+    verify = kinds["source.narrative_verify"].job_id
+    edges = connection.execute(
+        f"SELECT job_id,depends_on_job_id,required_status FROM job_dependencies WHERE job_id IN ({placeholders})", scope,
+    ).fetchall()
+    if {tuple(row) for row in edges} != {(summary, select, "succeeded"), (verify, select, "succeeded"), (verify, summary, "succeeded")}:
+        raise IntegrityViolationError("terminal narrative dependency set differs")
+    if connection.execute(
+        "SELECT 1 FROM job_dependencies d JOIN jobs j ON j.job_id=d.job_id "
+        f"WHERE d.depends_on_job_id IN ({placeholders}) AND d.job_id NOT IN ({placeholders}) "
+        "AND j.status NOT IN ('succeeded','dead_letter','cancelled') LIMIT 1", scope + scope,
+    ).fetchone():
+        raise IntegrityViolationError("a nonterminal outside job still needs an intermediate result")
+    if any(row["finished_at"] is None or row["outcome"] is None or row["finished_at"] > compacted_at for row in attempt_rows):
+        raise IntegrityViolationError("terminal DAG has an unfinished or later attempt")
+    latest = {row["job_id"]: (row, result) for row, result in parsed}
+    if set(latest) != set(scope) or any(row["outcome"] != "succeeded" or result is None or result.outcome is not HandlerOutcome.SUCCEEDED
+                                      for row, result in latest.values()):
+        raise IntegrityViolationError("terminal DAG has no latest successful result")
+    effects = connection.execute(f"SELECT {_EFFECT_COLS} FROM effects WHERE job_id IN ({placeholders})", scope).fetchall()
+    if len(effects) != 1:
+        raise IntegrityViolationError("terminal narrative DAG does not have one final effect")
+    effect = _effect_from_row(effects[0])
+    if (effect.effect_id, effect.job_id, effect.effect_type, effect.target, effect.status,
+        effect.intended_after_hash, effect.actual_after_hash) != (
+        pin.effect_id, verify, "narrative_bundle.publish",
+        f"urn:company-wiki:narrative-bundle:{pin.document_id}:{pin.source_sha256}",
+        EffectStatus.VERIFIED, pin.artifact_sha256, pin.artifact_sha256
+    ) or effect.verified_at is None:
+        raise IntegrityViolationError("final effect is not acknowledged with the pinned hash")
+    outbox = connection.execute(f"SELECT {_OUTBOX_COLS} FROM outbox WHERE effect_id=?", (pin.effect_id,)).fetchall()
+    if len(outbox) != 1 or outbox[0]["status"] != "delivered" or outbox[0]["lease_token"] is not None or outbox[0]["lease_until"] is not None:
+        raise IntegrityViolationError("final outbox is not delivered")
+
+    before = sum(len(row["result_json"].encode("utf-8")) for row, result in parsed if result is not None)
+    changes = []
+    for row, result in parsed:
+        if result is None:
+            continue
+        if is_terminal_receipt(result.result):
+            receipt = result.result
+            if (dict(receipt.get("final_artifact", {})), receipt.get("run_id"), receipt.get("event_id"),
+                receipt.get("input_hash"), receipt.get("job_id"), receipt.get("attempt_id")) != (
+                pin.to_dict(), run_id, event_id, event.input_hash, row["job_id"], row["attempt_id"]
+            ):
+                raise IntegrityViolationError("compacted result is bound to a different final artifact or DAG")
+            continue
+        if row["job_id"] == verify and row["outcome"] == "succeeded":
+            if len(result.effects) != 1 or result.effects[0].effect_id != pin.effect_id:
+                raise IntegrityViolationError("verify attempt did not emit the final effect")
+            data = canonical_json(result.to_dict()["result"]).encode("utf-8")
+            if len(data) != pin.byte_size or hashlib.sha256(data).hexdigest() != pin.artifact_sha256:
+                raise IntegrityViolationError("verify result bytes differ from the final artifact")
+            versions = result.result.get("versions", {})
+            if versions.get("prompt") not in (None, run["prompt_version"]) or versions.get("model") not in (None, run["model_id"]):
+                raise IntegrityViolationError("final model/prompt differs from the immutable run")
+        original = row["result_json"].encode("utf-8")
+        receipt = {"schema_version": TERMINAL_RECEIPT_SCHEMA, "final_artifact": pin.to_dict(),
+                   "run_id": run_id, "event_id": event_id, "input_hash": event.input_hash,
+                   "job_id": row["job_id"], "attempt_id": row["attempt_id"],
+                   "original_result_sha256": hashlib.sha256(original).hexdigest(),
+                   "original_result_bytes": len(original), "compacted_at": compacted_at}
+        # The outer envelope retains metrics, outcome, error and logical effect IDs.
+        value = result.to_dict()
+        value["result"] = receipt
+        changes.append((row["attempt_id"], canonical_json(value)))
+    if markers and changes:
+        raise IntegrityViolationError("terminal compaction markers are incomplete")
+    if not changes:
+        return TerminalCompactionResult(scope, 0, before, before, True)
+    if not write:
+        return None
+    for attempt_id, payload in changes:
+        connection.execute("UPDATE attempts SET result_json=? WHERE attempt_id=?", (payload, attempt_id))
+    after = sum(len(payload.encode("utf-8")) for _, payload in changes)
+    return TerminalCompactionResult(scope, len(changes), before, after)
+
+
 class AutomationStore:
     def __init__(
         self,
@@ -619,11 +786,14 @@ class AutomationStore:
             conn.close()
 
     def set_runtime_gate(
-        self, desired_state: RuntimeState, *, updated_at: str
+        self, desired_state: RuntimeState, *, updated_at: str,
+        expected_generation: int | None = None,
     ) -> RuntimeGate:
         if not isinstance(desired_state, RuntimeState):
             raise TypeError("desired_state must be RuntimeState")
         RuntimeGate(desired_state, 1, updated_at)
+        if expected_generation is not None and (type(expected_generation) is not int or expected_generation < 1):
+            raise ValueError("expected_generation must be a positive integer")
 
         def _op(conn):
             row = conn.execute(
@@ -633,6 +803,8 @@ class AutomationStore:
             if row is None:
                 raise RuntimeGateClosedError("runtime gate row is missing")
             current = _runtime_gate_from_row(row)
+            if expected_generation is not None and current.control_generation != expected_generation:
+                raise ConcurrentUpdateError("runtime gate generation changed")
             if current.desired_state is desired_state:
                 return current
             if updated_at < current.updated_at:
@@ -1170,16 +1342,23 @@ class AutomationStore:
         allowed_job_ids = normalize_id_scope(allowed_job_ids, name="allowed_job_ids")
         if allowed_job_ids == ():
             return ()
+        require_utc_timestamp(now)
         def _op(conn):
+            gate_row = conn.execute(
+                "SELECT desired_state,control_generation,updated_at FROM runtime_gate WHERE singleton_id=1"
+            ).fetchone()
+            if gate_row is None:
+                raise RuntimeGateClosedError("runtime gate row is missing")
+            generation = _runtime_gate_from_row(gate_row).control_generation
             scope_sql = ""
-            parameters: tuple[object, ...] = (now, JobStatus.RUNNING.value)
+            parameters: tuple[object, ...] = (now, generation, JobStatus.RUNNING.value)
             if allowed_job_ids is not None:
                 scope_sql = "AND j.job_id IN (" + ",".join("?" for _ in allowed_job_ids) + ") "
                 parameters += allowed_job_ids
             rows = conn.execute(
                 f"SELECT {_ATTEMPT_COLS_A} "
                 "FROM attempts a JOIN jobs j ON j.job_id = a.job_id "
-                "WHERE a.finished_at IS NULL AND a.lease_until < ? "
+                "WHERE a.finished_at IS NULL AND (a.lease_until < ? OR a.runtime_generation != ?) "
                 "AND j.status = ? AND a.attempt_no = (SELECT MAX(a2.attempt_no) "
                 "FROM attempts a2 WHERE a2.job_id = a.job_id) "
                 f"{scope_sql}"
@@ -1190,6 +1369,11 @@ class AutomationStore:
             for row in rows:
                 attempt = _attempt_from_row(row)
                 job = _job_from_row(_job_row(conn, attempt.job_id))
+                if now < attempt.started_at:
+                    raise IntegrityViolationError("attempt reaping time precedes its start")
+                obsolete = attempt.runtime_generation != generation
+                error_code = "RUNTIME_GENERATION_CHANGED" if obsolete else "LEASE_EXPIRED"
+                error_detail = "worker runtime generation changed" if obsolete else "worker lease expired"
                 exhausted = attempt.attempt_no >= job.max_attempts
                 outcome = (
                     HandlerOutcome.TERMINAL_FAILURE
@@ -1198,9 +1382,9 @@ class AutomationStore:
                 )
                 conn.execute(
                     "UPDATE attempts SET finished_at = ?, outcome = ?, "
-                    "error_code = 'LEASE_EXPIRED', error_detail = ? "
+                    "error_code = ?, error_detail = ? "
                     "WHERE attempt_id = ? AND finished_at IS NULL",
-                    (now, outcome.value, "worker lease expired", attempt.attempt_id),
+                    (now, outcome.value, error_code, error_detail, attempt.attempt_id),
                 )
                 target = JobStatus.DEAD_LETTER if exhausted else JobStatus.RETRY_WAIT
                 _transition_job_in_transaction(
@@ -1209,8 +1393,8 @@ class AutomationStore:
                     target=target,
                     updated_at=now,
                     not_before=None if exhausted else now,
-                    error_code="LEASE_EXPIRED",
-                    error_detail="worker lease expired",
+                    error_code=error_code,
+                    error_detail=error_detail,
                 )
                 reaped.append(attempt.attempt_id)
             return tuple(reaped)
@@ -1322,6 +1506,10 @@ class AutomationStore:
             emitted = [item for item in result.effects if item.effect_id == effect_id]
             if not emitted:
                 continue
+            if is_terminal_receipt(result.result):
+                raise TerminalResultCompactedError(
+                    f"effect {effect_id!r} has a terminal receipt; read its exact final artifact"
+                )
             if result.outcome is not HandlerOutcome.SUCCEEDED or len(emitted) != 1:
                 raise IntegrityViolationError(
                     f"attempt result for effect {effect_id!r} is inconsistent"
@@ -1366,6 +1554,35 @@ class AutomationStore:
                 f"expected one attempt result for effect {effect_id!r}; found {len(matches)}"
             )
         return matches[0]
+
+    def compact_terminal_narrative_jobs(
+        self, *, job_ids: tuple[str, ...], final_artifact: FinalArtifactPin, compacted_at: str,
+    ) -> TerminalCompactionResult:
+        """Replace terminal intermediate bodies, after the application proves visibility.
+
+        This AUTO-only transaction cannot independently inspect Catalog bytes.
+        ``terminal_receipts`` owns that proof and its short catalog lock.
+        """
+        scope = terminal_job_scope(job_ids)
+        if not scope:
+            return TerminalCompactionResult((), 0, 0, 0)
+        if not isinstance(final_artifact, FinalArtifactPin):
+            raise TypeError("final_artifact must be FinalArtifactPin")
+        require_utc_timestamp(compacted_at)
+        connection = self._connect()
+        try:
+            connection.execute("BEGIN")
+            repeat = _compact_terminal_narrative(connection, scope, final_artifact, compacted_at, write=False)
+        finally:
+            connection.rollback()
+            connection.close()
+        if repeat is not None:
+            return repeat
+        result = self._write_transaction(lambda conn: _compact_terminal_narrative(
+            conn, scope, final_artifact, compacted_at, write=True,
+        ))
+        assert result is not None
+        return result
 
     def get_effect_by_key(self, effect_key: str) -> Effect | None:
         conn = self._connect()
@@ -1719,6 +1936,7 @@ __all__ = [
     "InvalidStorePathError",
     "StoreBusyError",
     "IntegrityViolationError",
+    "TerminalResultCompactedError",
     "IdempotencyConflictError",
     "RecordNotFoundError",
     "ConcurrentUpdateError",

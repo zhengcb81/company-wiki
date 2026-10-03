@@ -23,6 +23,7 @@ company-wiki-source-export-v2 = "company_wiki.source_catalog.source_export_v2_cl
 company-wiki-identify = "company_wiki.source_catalog.identity_cli:main"
 company-wiki-transcript-import = "company_wiki.source_catalog.transcript_import_cli:main"
 company-wiki-narrative-read = "company_wiki.source_catalog.narrative_transport_cli:main"
+company-wiki-narrative-batch = "company_wiki.automation.narrative_batch_cli:main"
 
 [project.optional-dependencies]
 pdf = ["PyMuPDF>=1.23.0"]

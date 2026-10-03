@@ -49,7 +49,10 @@ from .narrative_routing import (
 NARRATIVE_PARSER_NAME = "selective_narrative_parser"
 NARRATIVE_PARSER_VERSION = "0.1.0"
 NARRATIVE_SELECTOR_NAME = "select_narrative_evidence"
-NARRATIVE_SELECTOR_VERSION = "0.1.0"
+# 0.2.0 recalls bounded English operational milestones (market entry, pilot /
+# supply agreements and commercial deployments), with explicit safe-harbor
+# exclusions. Parsing, source bytes and locator construction remain unchanged.
+NARRATIVE_SELECTOR_VERSION = "0.2.0"
 _FINANCIAL_TERMS = re.compile(
     r"资产负债表|利润表|现金流量表|每股收益|归母净利润|营业收入|营业成本|"
     r"货币资金|应收账款|存货|固定资产|加权平均|基本每股|稀释每股|"
@@ -72,6 +75,7 @@ _SIGNALS: dict[str, tuple[str, ...]] = {
     "core_business": (
         "主营业务", "核心业务", "业务进展", "业务布局", "生产经营", "主业发展",
         "关键设备领域", "设备市场", "设备产品", "core business", "business development",
+        "commercial operations", "commercial deployment", "distribution network", "sales office",
     ),
     "new_business": (
         "新业务", "第二曲线", "新产品", "新市场", "业务开拓", "新兴业务",
@@ -88,6 +92,7 @@ _SIGNALS: dict[str, tuple[str, ...]] = {
         "客户端验证", "批量订货", "批量订单", "付运量显著提升",
         "order", "customer", "backlog", "qualification", "starter doses", "patient uptake",
         "customer uptake", "prescription growth",
+        "pilot agreement", "supply agreement", "pilot deployment",
     ),
     "capacity_projects": (
         "产能", "产线", "中试线", "扩产", "投产", "募投项目", "项目建设", "基地建设",
@@ -158,6 +163,11 @@ _ACCOUNTING_CONTEXT = re.compile(
     r"合同现金流|公允价值|资本化时点|资本化项目|开发支出|应收账款|收款政策|营运资金|未实现销售收入",
     re.IGNORECASE,
 )
+_EXCLUDED_NARRATIVE_CONTEXT = re.compile(
+    _ACCOUNTING_CONTEXT.pattern + r"|\b(?:safe[ -]harbou?r|forward[ -]looking statements?)\b|"
+    r"\bactual results (?:may|could) differ materially\b",
+    re.IGNORECASE,
+)
 _HEADING_ONLY = re.compile(
     r"^[（(]?[一二三四五六七八九十\d]+[）).、]\s*[^。！？!?；;]{1,24}(?:风险|项目|方案|安排)$"
 )
@@ -177,6 +187,12 @@ _HIGH_VALUE_EVENT = re.compile(
     r"客户端.{0,18}(?:验证|订单)|批量订货|批量订单|付运量.{0,14}(?:提升|增长)|"
     r"实现销售|"
     r"customer qualification|customer validation|repeat order|new product.{0,24}(?:launched|validated|commercialized|sales|order)|"
+    # Require a completed operational action and a specific business object.
+    # Neither market/growth vocabulary alone nor finance-only growth qualifies.
+    r"\b(?:entered|penetrated|expanded\s+into)\b[^.!?;\n]{0,48}\b(?:new|overseas|international|export)\s+markets?\b|"
+    r"\b(?:signed|secured|won|executed)\b[^.!?;\n]{0,36}\b(?:pilot|supply|distribution|commercial|customer)\s+(?:agreements?|contracts?)\b|"
+    r"\b(?:began|started|commenced|completed)\b[^.!?;\n]{0,36}\b(?:commercial\s+(?:operations?|deployments?)|pilot\s+(?:deployments?|programs?|projects?))\b|"
+    r"\b(?:expanded|established|opened)\b[^.!?;\n]{0,48}\b(?:distribution\s+networks?|sales\s+offices?|commercial\s+operations?)\b|"
     r"(?:launched|validated|commercialized|expanded|entered|signed|won).{0,24}"
     r"(?:new product|new business|overseas|international|customer|order|capacity|facility)|"
     r"model choice|models are an input|model is swappable|multiple models|open and custom models|"
@@ -1281,7 +1297,7 @@ def _candidate_rules() -> CandidateRules:
         new_product_milestone=_NEW_PRODUCT_COMMERCIALIZATION,
         recency=_RECENCY,
         table_of_contents=_TABLE_OF_CONTENTS,
-        accounting_context=_ACCOUNTING_CONTEXT,
+        accounting_context=_EXCLUDED_NARRATIVE_CONTEXT,
         heading_only=_HEADING_ONLY,
         static_definition=_STATIC_DEFINITION,
     )
@@ -1405,7 +1421,7 @@ def select_narrative_evidence(
             project_plan=_PROJECT_PLAN,
             strategic_plan=_STRATEGIC_PLAN,
             table_of_contents=_TABLE_OF_CONTENTS,
-            accounting_context=_ACCOUNTING_CONTEXT,
+            accounting_context=_EXCLUDED_NARRATIVE_CONTEXT,
             static_definition=_STATIC_DEFINITION,
             progress=_PROGRESS,
             recency=_RECENCY,
@@ -1423,7 +1439,7 @@ def select_narrative_evidence(
             topics=_topics,
             high_value_event=_HIGH_VALUE_EVENT,
             named_product_context=_NAMED_PRODUCT_CONTEXT,
-            accounting_context=_ACCOUNTING_CONTEXT,
+            accounting_context=_EXCLUDED_NARRATIVE_CONTEXT,
             project_rationale=_PROJECT_RATIONALE_SIGNAL,
             table_of_contents=_TABLE_OF_CONTENTS,
         ),

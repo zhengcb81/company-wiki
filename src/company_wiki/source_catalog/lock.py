@@ -10,9 +10,10 @@ import json
 import os
 from pathlib import Path
 import subprocess
-import time
 from typing import Iterator
 import uuid
+
+from company_wiki._file_mutex import FileMutexLockedError, os_file_mutex
 
 
 class CatalogOperationLockedError(RuntimeError):
@@ -23,49 +24,11 @@ class CatalogOperationLockedError(RuntimeError):
 def _acquisition_mutex(path: Path, *, timeout_seconds: float = 10.0) -> Iterator[None]:
     """Serialize lock-file create/takeover without introducing another PID lock."""
 
-    guard_path = path.with_name(path.name + ".acquire")
-    descriptor = os.open(guard_path, os.O_CREAT | os.O_RDWR, 0o600)
-    acquired = False
     try:
-        if os.fstat(descriptor).st_size < 1:
-            os.write(descriptor, b"\0")
-            os.fsync(descriptor)
-        deadline = time.monotonic() + timeout_seconds
-        while True:
-            try:
-                os.lseek(descriptor, 0, os.SEEK_SET)
-                if os.name == "nt":
-                    import msvcrt
-
-                    msvcrt.locking(descriptor, msvcrt.LK_NBLCK, 1)
-                else:
-                    import fcntl
-
-                    fcntl.flock(descriptor, fcntl.LOCK_EX | fcntl.LOCK_NB)
-                acquired = True
-                break
-            except OSError as exc:
-                if time.monotonic() >= deadline:
-                    raise CatalogOperationLockedError(
-                        "timed out serializing catalog lock acquisition"
-                    ) from exc
-                time.sleep(0.05)
-        yield
-    finally:
-        if acquired:
-            try:
-                os.lseek(descriptor, 0, os.SEEK_SET)
-                if os.name == "nt":
-                    import msvcrt
-
-                    msvcrt.locking(descriptor, msvcrt.LK_UNLCK, 1)
-                else:
-                    import fcntl
-
-                    fcntl.flock(descriptor, fcntl.LOCK_UN)
-            except OSError:
-                pass
-        os.close(descriptor)
+        with os_file_mutex(path.with_name(path.name + ".acquire"), timeout_seconds=timeout_seconds):
+            yield
+    except FileMutexLockedError as exc:
+        raise CatalogOperationLockedError("timed out serializing catalog lock acquisition") from exc
 
 
 def _windows_creation_time_via_cim(pid: int) -> float | None:

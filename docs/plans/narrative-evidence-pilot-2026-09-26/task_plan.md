@@ -6,12 +6,12 @@
 
 完成八束整套简化：一个下载请求入口、一套pathless来源接口、一套AUTO任务系统，按需选择业务叙述、摘要和检索；停止全量永久转换与重复正文；完成真实模型、持久预算、可恢复多文档处理及消费者接线，然后分批删除无调用者的旧派生。原件、来源/版本事实不丢。RF/FF/ET/StockWiki/IQS各仓独占写入，不修改其他owner未提交工作。
 
-执行已恢复。应用goal卡最后实读仍paused；当前工具没有resume/修改objective接口，不能伪报卡片已重启，也不能为了重建卡片把未完成旧goal标complete。继续本轮授权实施；自动续跑需应用恢复卡片。
+执行已恢复。最新 `get_goal` 实读为 **active**（2026-10-03）；此前工具无resume接口的限制已由应用实际恢复解决，不再把旧paused快照当当前状态。目标未完成，不标complete。
 
 ## 当前基线
 
-- CWP master/origin/master ff5396c，S0/N4A已发布，CI37131769647成功（job53秒），当前只开展S2；G-A/N3a/G-C、B1/B3/B4均完成，不重新验收整个历史。
-- RF rf-impl main 6fb2def7/4项tracked dirty；原fcap 5319ee26保留。FF交付线c47c397干净；ET main4924d57干净。StockWiki masterd4779e6/2项tracked dirty；IQS masterbfaf04c。外仓变更用独立worktree/各自owner，不reset上述工作树。
+- CWP master/origin/master 9ccd29f，S0/N4A和模型/持久预算基础已发布，CI37135709529成功；S2正式CLI/降容首组67绿但恢复收口仍待完成。G-A/N3a/G-C、B1/B3/B4均完成，不重新验收整个历史。
+- RF rf-impl main 6fb2def7/4项tracked dirty；原fcap 5319ee26保留。FF真正origin/main/交付线c47c397，常用根仍fcap d35b6f5；ET main4924d57 tracked干净。StockWiki master已推进aa98848/4项quick-scan dirty；IQS master44b805f在继续实施。外仓各自owner，不reset或重复派线。
 - 最新完整空间32,821,613,206B/32.82GB，公司原件25.20GB，current DB3.06GB、旧derived/index约2.87GB。已释放13.06GB不再重复计收益；原件不进入清理候选。
 - 真实代码CI约56–62秒，单Python/全Unit/精选回归；不恢复全Contract/coverage日常门。
 
@@ -21,8 +21,8 @@
 |---|---|---|---|
 | S0 简化收口 | complete（ff5396c，CI绿） | PWF只留当前入口；删除R1旁路签收/shadow/gold；commit移除pytest、config doctor按相关文件触发 | 一次相关Unit/混合行为回归与正常发布；不逐文件签收 |
 | S1 N4A | complete（ff5396c，CI绿） | scope贯通Store/Worker/Supervisor/outbox/prepared，None兼容、空scope零修改、范围SQL先于LIMIT | N4节点A，确定性RED先行 |
-| S2 N4B | in_progress（节点A已绿；正式CLI/终态降容与节点B待完成） | 真实factory/薄HTTP model adapter/完整prompt；同Store持久token/费用预留；正式有限batch CLI；唯一final正文、终态恢复小记录 | 节点A记账/并发、节点B正式CLI本地HTTP/kill/ACK/空间 |
-| S3 来源与采集默认收敛 | pending，可与独立新model文件并行 | R2/R6：一请求、薄v1适配、相关字段fingerprint、缺元数据partial、published-asof；FF执行limits/ET旧入口一致；安装技能示例同步 | 合入G-A相关接口E2E及节点B，不再设独立review receipt |
+| S2 N4B | in_progress（正式CLI/终态降容首组67绿；跨run/owner/kill/ACK待收口） | 真实factory/薄HTTP model adapter/完整prompt；同Store持久token/费用预留；有限batch CLI；唯一final正文、终态恢复小记录 | 节点A记账/并发、节点B正式CLI本地HTTP/kill/ACK/空间 |
+| S3 来源与采集默认收敛 | in_progress（英文召回子项绿；FF/ET ready未派，CWP默认/caps pending） | R2/R6：一请求、薄v1适配、相关字段fingerprint、缺元数据partial、published-asof；FF执行limits/ET旧入口一致；安装技能示例同步 | root CWP与FF-S3/ET-S3在一个接口大节点汇合 |
 | S4 N4C与旧Worker退出 | pending | 四类真实文档小批/consumer读取/语言引用coverage与总容量；迁移control实际调用者，唯一AUTO执行器、短提交锁 | 节点C；先有限批次，再按实测1/2/4调整并发 |
 | S5 B2逐caller清理 | pending | 每集合无引用即可删约2.87GB旧derived/index；停用功能直接退役，未要求全库先生成摘要 | 存储迁移节点真实回读/原件保留/实际bytes，逐集合幂等 |
 | S6 DB事实收缩与收尾 | pending | 表级盘点，删除不可再消费派生/废索引并收缩，来源版本/撤回事实保留；旁路兼容、docs/hook残留清完 | 同一存储节点；commit/push、PWF收尾 |
@@ -55,7 +55,9 @@
 
 ## 并行所有权
 
-root拥有PWF、hook/CI、对外接口与集成。R1 agent拥有上列退役模块/registry/planner及对应测试，不改Store/worker/supervisor/projector。N4A agent拥有scope相关Store/worker/supervisor/dispatcher/projector及独立scope测试，不改R1映射或PWF。root明确分配后才能写；两个agent不共改同一文件。外仓dirty文件保留，发布前核当前ref与接口，不凭旧快照覆盖。
+R1/N4A临时分工已完成。新的外部harness分工见[并行实施总计划](parallel_execution_plan_2026-10-03.md)：MAIN独占company-wiki；FF-S3独占filing-fetch-s3-limits worktree；ET-S3独占earnings-transcripts-s3-runtime worktree；SPACE-S5只写独立company-wiki-storage-audit-20261003目录、所有生产仓只读。三卡均可现在开工，ready不代表已派出。root保持总指挥、CWP producer/全局安装/跨仓大节点集成；接到用户派出消息后登记running，不重复施工对应包。
+
+StockWiki/IQS已有活跃owner与新未提交工作，本轮不再派线；RF源工作树保留。FF/ET不写CWP总PWF或彼此仓库，各自局部PWF/测试/小报告，交commit；root一次合入联调，不逐helper审批。结构上共用Store/来源默认/批次/空间清理仍归MAIN，不强拆同目录。
 
 ## 验收与发布
 
@@ -74,10 +76,12 @@ TDD框住公开行为，不把旧签收规则写进新测试。仅S0相关收口
 
 ## Next Step
 
-S0/N4A已发布且CI绿；继续S2持久run/budget、真实HTTP adapter、完整prompt与正式batch；S3来源默认语义在独占范围接入。复用S0/N4A收据，不重新跑所有旧AUTO里程碑。不启动旧无限Worker，不删除原件。
+发布已绿的S2 CLI/终态降容及S3英文召回阶段、交付三条独立卡；随后root补S2跨run工件身份/自动owner/kill与ACK恢复，CWP S3实际采集limits与来源默认。FF/ET/空间卡可现在由用户分派，等待只发生在最终接口汇合；未交付模块不写complete。不启动旧无限Worker，不删除原件。
 
 ## S2当前交接与下一集中节点
 
-节点A已实现真实HTTP、完整prompt1.1、成对usage、AUTO v3同库持久预算、BudgetedNarrativeCaller与production factory，见progress。root继续正式batch coordinator/CLI（当前尚无可运行生产命令，不能宣称N4完成）；同run恢复必须核同input/model/pricing/prompt/selector和job scope。parse/HTTP在Catalog提交锁外。自动单coordinator运行互斥优先复用已有OS锁/RuntimeGate，避免第二queue或人工许可。owner预算Store已冻结只读；其后负责终态receipt设计，root确认后再写。factory owner当前仅独立本地HTTP完整pipelineE2E，不写生产共享文件。
+节点A已实现真实HTTP、完整prompt1.1、成对usage、AUTO v3同库持久预算、BudgetedNarrativeCaller与production factory并发布9ccd29f。正式 `company-wiki-narrative-batch` / `python -m company_wiki.automation.narrative_batch_cli` 和terminal receipt已实现首组67绿：同run零重复HTTP、原文错误保持真实费用、0费用/小空间cap零外发、exact工件可回读、完成DAG去正文。自动OS mutex复用到基础设施层，gate CAS/scoped obsolete generation reaper保未知reservation；不写第二queue或人工许可。parse/HTTP在Catalog短锁外。
 
-terminal降容须显式覆盖active/retry/prepared/未ACK保留、final可读、正文不会重复保留、同run恢复不发第二HTTP；与正式CLI的shutdown/kill/outside-scope/预算0/目录还原并在节点B集中测试。English新markets/agreements召回缺口归S3正例+金融表格负例，质量标记仅诊断。S3–S6状态继续pending，不借阶段提交标全部完成。
+S2剩余两项已实读风险：不同run同源的effect/work_key尚缺job/版本作用域，会发生同内容effect跨job冲突或异内容work_key冲突；generation只fence旧attempt，不能阻空闲scope=None daemon重新claim。root在真实production小批前先修跨run身份并收敛统一启动owner，不能靠previousrun+ENABLED猜可接管；对应两run/旧pin/父kill/ACK恢复集中在节点B。每run独立work-dir、同run复用baseline，不能覆盖已存baseline。
+
+English entered new markets/pilot agreements已TDD修为selector0.2.0，114+70责任包绿；safe-harbor/会议/纯金融负例仍跳过，parser未改。S3其他默认/caps及S4–S6仍未完成；不借阶段提交标全部完成。outbox原来只保存小Effect metadata，主要去attempt.result重复正文，不能虚报outbox GB收益。

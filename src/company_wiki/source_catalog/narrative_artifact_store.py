@@ -37,6 +37,7 @@ _LATEST_VISIBLE_SQL = """SELECT * FROM narrative_artifact_versions
 _EXACT_VISIBLE_SQL = """SELECT * FROM narrative_artifact_versions
     WHERE artifact_version_id=? AND document_id=? AND source_id=?
       AND source_sha256=? AND status='visible'"""
+_EFFECT_VISIBLE_SQL = "SELECT * FROM narrative_artifact_versions WHERE effect_id=? AND status='visible'"
 _CURRENT_SOURCE_SQL = """SELECT d.primary_source_id, d.source_status, s.content_sha256
     FROM documents AS d LEFT JOIN sources AS s ON s.source_id=d.primary_source_id
     WHERE d.document_id=?"""
@@ -460,6 +461,17 @@ class NarrativeArtifactStore:
             self._require_current_source(connection, row)
             return NarrativeArtifactVersion.from_row(row)
 
+    def visible_version_for_effect(self, effect_id: str) -> NarrativeArtifactVersion:
+        """Read exact current visible metadata without opening original or bundle bytes."""
+        if not isinstance(effect_id, str) or not effect_id or effect_id != effect_id.strip():
+            raise ValueError("effect_id must be a nonempty, unpadded identifier")
+        with self._catalog.transaction() as connection:
+            row = connection.execute(_EFFECT_VISIBLE_SQL, (effect_id,)).fetchone()
+            if row is None:
+                raise NarrativeArtifactNotVisibleError("the exact effect artifact is not visible")
+            self._require_current_source(connection, row)
+            return NarrativeArtifactVersion.from_row(row)
+
     def read_exact(
         self,
         *,
@@ -558,6 +570,12 @@ class NarrativeArtifactReader:
         if not _SHA256.fullmatch(source_sha256):
             raise ValueError("source_sha256 must be lowercase SHA-256")
         return self._version(_LATEST_VISIBLE_SQL, (document_id, source_id, source_sha256))
+
+    def visible_version_for_effect(self, effect_id: str) -> NarrativeArtifactVersion:
+        """Read exact current visible metadata without opening either payload."""
+        if not isinstance(effect_id, str) or not effect_id or effect_id != effect_id.strip():
+            raise ValueError("effect_id must be a nonempty, unpadded identifier")
+        return self._version(_EFFECT_VISIBLE_SQL, (effect_id,))
 
     def read_exact(
         self, *, artifact_version_id: str, document_id: str, source_id: str,

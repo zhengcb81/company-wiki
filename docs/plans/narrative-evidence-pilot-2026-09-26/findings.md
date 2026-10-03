@@ -16,11 +16,11 @@
 ## 本轮责任/缺口
 
 - S0退役专属测试时保留混合文件的真实环境隔离/原件保护/故障失败反例；依赖gate_runner的helper迁到已有clean_env_gate/test-only helper。
-- N4在推进：scope已发布；真实HTTP、usage/持久reserve、生产factory已实现并节点A验收，正式CLI/coordinator、terminal降容仍需实现。测试Replay不是真实provider能力。
+- N4在推进：scope和模型/预算基础9ccd29f已发布；正式CLI/coordinator与terminal降容首组67绿，跨run/统一owner/父kill/ACK还需收口。测试Replay不是真实provider能力。
 - B2当前有normalized/旧summarizer/RF兼容引用，逐caller迁移/退休后可分批删，不需全仓重做摘要。
 - 当前DB可回收量、exact-SHA原件重复量、1/2/4并发真实收益均未测；不外推5000份算术为实际体积。
 - 默认published-asof、最小配置fingerprint、partial规则会改变公开行为，先写来源/consumer反例再实现，已有hash错配/身份冲突仍失败。
-- 应用goal卡实读paused，工具无resume/修改objective；用户恢复指令已授权实施，不伪报UI卡状态。
+- 应用goal卡最新实读active；旧paused/无resume工具是历史障碍，当前执行持续恢复。
 
 ## 环境约定
 
@@ -36,3 +36,12 @@ Git写入/联网用正常用户，sandbox .git只读不是产品权限。测试�
 - S0/N4A ff5396c已发布，CI37131769647 success/job53秒。S2公开接口的生产装配暴露了真实Reader Protocol dict协变问题，已收敛Mapping；泛化接口让真实对象可直接装配。
 - selector漏召回：英文管理层entered two new markets / signed pilot agreements未选入，candidate_count=0并needs_review；S3用独立真实样本验证召回改善，不为factory正例强行放宽shared规则。
 - 新run持久预算只保ID/hash/费用/用量，不保存prompt或原文；actual usage超声明仍记账并停后续外发。缺key证明未调用为0，transport/timeout未知保持占额。
+
+## 并行实施的新调查（2026-10-03）
+
+- FF origin/main实际c47c397，常用根仍fcap d35b6f5；已安装脚本同c47，SKILL仍旧v1。acquisition_limits三字段仅validator；ensure/close-gap producer尚无三caps CLI，新I1接口由root实现。FF可以独立改透传/deadline/安装面/说明，生产限额联调pending不伪报。
+- ET tracked干净4924d57，现代工具已交付；旧scraper仍defaultFool、直接Session/旧v3/吞异常、默认翻译，FMP list会落下载/翻译、dry-run未定义变量，计划模式先写目录。ET独立包收敛这些真实路由，不重复实现W wire/importer。
+- StockWiki已aa98848且四项quick-scan CLI/maintenance/test dirty，IQS44b805f正在W07后续；不开第二线。RF四dirty保留。新三外线专属工作目录互不包含，不写共同PWF/全局安装。
+- S5/S6适合独立只读审计workspace：B2实际调用者、dbstat/freelist/保留事实、SHA候选物理重复量；真实删除/收缩统一主线。不重新hash25GB、不完整备份恢复、不把既释放13.06GB再计。
+- same-run实测不足以覆盖cross-run：verify效应键未含job，同内容跨job冲突；projection工件work_key未含effect，同源异内容冲突。root S2要用同源两run/第三差异/旧pin回读测试收口；对象仍SHA去重。
+- idle scope=None AUTO daemon能跟新generation再次claim，旧catalogWorker控制面独立。有限批次所有权必须统一启动入口/固定scope，不能只看foreign RUNNING瞬时快照；S4退出旧写Worker的必要前置已并入root S2安全启动。

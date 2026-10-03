@@ -44,7 +44,10 @@ def _options(spec: WorkerProcessSpec) -> tuple[dict[str, Any], dict[str, Any]]:
         options = json.loads(spec.runtime_options_json)
     except (ValueError, TypeError):
         raise ValueError("NARRATIVE_RUNTIME_OPTIONS_INVALID") from None
-    if not isinstance(options, dict) or set(options) != _OPTION_FIELDS:
+    if not isinstance(options, dict) or not _OPTION_FIELDS <= options.keys() or not options.keys() <= (_OPTION_FIELDS | {"max_final_bytes"}):
+        raise ValueError("NARRATIVE_RUNTIME_OPTIONS_INVALID")
+    final_bytes = options.get("max_final_bytes", 2 * 1024 * 1024)
+    if type(final_bytes) is not int or not 0 < final_bytes <= 2 * 1024 * 1024:
         raise ValueError("NARRATIVE_RUNTIME_OPTIONS_INVALID")
     for field in _OPTION_FIELDS - {"model"}:
         _text(options[field])
@@ -101,7 +104,8 @@ def create_runtime(spec: WorkerProcessSpec) -> WorkerRuntime:
             model = NarrativeHTTPModel(**model_options)
         except (TypeError, ValueError):
             raise ValueError("NARRATIVE_MODEL_CONFIG_INVALID") from None
-        caller = BudgetedNarrativeCaller(store=run_store, run_id=options["run_id"], model=model)
+        caller = BudgetedNarrativeCaller(store=run_store, run_id=options["run_id"], model=model,
+                                        final_output_bytes_bound=options.get("max_final_bytes", 2 * 1024 * 1024))
     registry = create_default_registry()
     executor = HandlerExecutor()
     register_narrative_handlers(

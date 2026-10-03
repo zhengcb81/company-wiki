@@ -1,15 +1,15 @@
 # N4：可运行的叙述批次、真实模型计量与持久恢复
 
-> 2026-10-03 执行细则：scope已发布，节点A预算/模型/factory已验收，正式batch/终态降容/节点B+C未完成。G-A/N3a/G-C、B1/B3/B4已完成，见[实际整理收尾](harness_lanes/results/gd_b3_retirement_2026-10-03.md)；当前先按task_plan S0清旁路/hook，N4A scope在独占范围并行RED→实现。先按本文冻结接口，再实现；保留现有AUTO唯一任务库、Supervisor、三步handler/projector，不启动旧normalize Worker。只在三个大节点验收，helper不增加审查。原件及来源/版本事实保留。shared readonly migration snapshot竞态已修，复用既有32项两平台/CI收据，不重开同一修复。
+> 2026-10-03 执行细则：S0/scope与节点A预算/模型/factory已发布；正式batch/终态降容首组67绿，节点B恢复收口与C仍未完成。G-A/N3a/G-C、B1/B3/B4已完成，见[实际整理收尾](harness_lanes/results/gd_b3_retirement_2026-10-03.md)。root负责N4和CWP接口，外部FF/ET/空间审计按[并行总图](parallel_execution_plan_2026-10-03.md)各自独占目录。不启动旧normalize Worker。只在A/B/C大节点验收，helper不增加审查；原件/来源事实保留。
 
 ## 1. 已核缺口与目标
 
-1. `WorkerRuntime` factory、`NarrativeModelResponse` 实例目前只在测试；`automation.cli status/doctor` 固定 not_configured/AUTO-7。测试 replay 不代表生产模型能力。
-2. Supervisor 只维护子进程/lease/readiness，没有 event materialize 或 narrative outbox dispatch。需要薄 composition，不能新建内存队列或另一个任务真相源。
-3. claim、promotion、lease reaper、outbox 和 prepared reconciliation 没有本批 job 范围；小批 canary 可能触及其他文档。须先补范围。
-4. summarize 的 tokens/cost/duration 固定零；无模型请求的持久费用预留。旧 `scripts/llm_client.py.chat` 有全局 CSV、旧价格、SDK隐式重试/可选 fallback，不能直接当新预算依据。
-5. 持久 select/summary/verify result 和 effect payload 可能多次保存引用正文；419,428 B 的最终包不代表 AUTO 总增量。需要终态结果压缩为小收据与净总字节验收。
-6. 现行 prompt 只描述约束，没有完整 draft 字段合同；真实弱模型不能靠测试 Replay 知道输出结构。生产 adapter 接入前给它明确、版本化的 draft 输出 schema/例子。
+1. 生产factory、薄HTTP、完整prompt1.1、真实usage与同AUTO持久预算已发布9ccd29f；测试Replay不当真实provider能力。
+2. scope已贯通claim/promotion/reaper/outbox/prepared，S0/N4A发布ff5396c；不重新实现同一范围接口。
+3. 有限batch CLI已串event/DAG/Supervisor/dispatcher。67项集中绿验证同run幂等/预算/源SHA/空间cap/目录恢复；生产小批前还要跨run、父kill/ACK与统一owner恢复收口。
+4. terminal receipt已实装：只在三job SUCCEEDED、effect verified/outbox delivered、exact final visible+实读hash后去attempt正文；预算与小outbox DTO不动。物理SQLite释放是S6另测，不能把逻辑结果压缩当GB释放。
+5. 不同run同源目前effect_key未含验证job、work_key未含effect，产生跨job/不同正文冲突，见下方root下一节点；先测试框住再修两处身份，不改SourceRef/wire/Store通用幂等。
+6. OS mutex死亡自动释放，generation CAS/scoped obsolete reaper已实现；idle scope=None旧daemon仍可醒来claim，旧catalogWorker控制面独立。统一自动owner/固定scope与旧启动入口退出须在真实生产批次前完成，不能猜previousrun就可接管。
 
 目标入口接受明确 SourceRef 列表、当前 catalog 配置、profile、文档/时间/token/费用上限；按 `event→DAG→worker→verify→outbox→visible artifact` 完成并返回 pathless 收据。退出/暂停/杀进程后可从原任务库继续；不自动下载、翻译或生成投资判断。
 
@@ -80,3 +80,11 @@
 5. 复核已完成B3收据，不重做旧span墓碑/恢复；不能将N4最终包2%样本比率当总空间已验收。
 
 N4 完成必须有生产代码入口、正常/故障真实 CLI 收据、usage/未知请求账本、batch isolation、恢复与总占用实测。只新增测试 factory、仅 status 变绿、仅保存几份 Replay bundle 均不算完成。
+
+## 5. root下一集中节点（与外部三线不重叠）
+
+1. 跨run RED先行：同源runA发布、runB相同draft发布、runC不同合法draft发布；effect各自绑定verify job、工件各自exact pin回读，旧pin不取latest；相同正文object按SHA只有一份，runB同run恢复零额外POST。新run用独立work-dir，同run复用baseline。
+2. 最小实现：verify effect action hash绑定`verification_job_id + bundle_sha256`，intended_after_hash仍纯bundle SHA；projector work key升级`/2`绑定publication effect key。不新建run→artifact映射/签名文件，不放松ArtifactStore冲突校验。显式新run当前可能再付费，不冒称跨run缓存零模型调用；未来缓存策略由实测决定。
+3. 自动owner收敛：生产进程只能由同一个有限coordinator/固定run.scope工厂启动；已有旧launcher/计划任务/legacy control caller先盘点迁移。generation更新只fence旧attempt，不能做进程owner证明；不自动pause不明ENABLED运行。父kill后自身watchdog退出、未知reservation保留、scope内恢复，不碰foreign idle/任务。
+4. 补正式CLI父kill/ACK丢失窗口测试；当前terminal单位/集成abort与OS mutex kill收据不能冒充完整batch kill。时限还须覆盖准备/解析/提交全部生命周期，持久/临时峰值按实际文件与SQLite WAL统计，只有总增量和coverage达标才进入四份真实样本节点C。
+5. 与FF-S3/ET-S3并行的是root CWP S3 producer caps/来源默认；I1三参数尚pending，不把外线fake传参测试当下载执行已限额。只在最终接口大节点汇合，其他仓dirty/已有owner不改。
