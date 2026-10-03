@@ -1,5 +1,27 @@
 # Progress：叙述性证据试点
 
+## 2026-10-03 — G-C 主线完成，B3施工卡冻结
+
+- RF `6fb2def7`已正常推origin/main并快进rf-impl本地main；4项历史planning dirty完整SHA前后相同。Actions37119502901全部绿，verify2m40s/real-roots1m46s。StockWiki `ae0b3e3`已正常merge，无remote不新增。详见[G-C收尾](harness_lanes/results/gc_consumer_closeout_2026-10-03.md)。
+- 暂停的RF selector补丁已收口：Win20passed/2平台skip、Linux16passed/1平台skip、正式CLI3passed，6模块mypy及Ruff/host/unique/普通hooks绿；本线测试根清理。G-C来源消费完成，生产模型/Worker尚未实施。
+- 精确空间审计显示未反弹，旧gzip/zstd共10.623GiB是上次保留的派生历史。metadata审计当前16表完整digest匹配、scan_runs原480行匹配；当前DB完整SHA与B1一致。两archive完整SHA已实读、0解压/0rawhash，详见[机器依据](harness_lanes/results/gd_b3_metadata_audit_2026-10-03.json)。按[B3冻结卡](gd_b3_archive_retirement_implementation.md)先独立退役，不等待N4/B2，不建立数百万ID账本。
+
+## 2026-10-03 — 恢复整理与空间复核
+
+- 用户恢复并要求解释剩余占用。实测三根 42,692,408,858 B，比 B1 后预计仅多 1,207 B（intent/receipt），companies/source_manifests与此前完全一致，catalog size/mtime一致，bak不存在。不能描述成旧库重新增长；原46GiB主要指旧DB，与当前全资料目录口径不同。
+- StockWiki 分支 `4c3334e` 普通三方并入 `master@ae0b3e3030d18ca619d44361b2cf673d73bb7e21`，其他 owner `aa3c6e6` 是祖先且改动保留。合并后 narrative process/wire/CLI、CLI smoke和W05回归 **172 passed / 1 POSIX-only skip / 18.74s**，Ruff绿，独立 `C:\\cwt\\sw-gc-merge-20261003` 删除恢复；不重复785项全仓/真实PDF。
+- RF 独占 worktree 恢复4预期dirty，未见上轮遗留测试进程；正做selector局部包/普通提交，再由总指挥并推main。fcap与rf-impl历史4处planning dirty不恢复、不stage。
+- B3只读核查：旧zstd除non-active spans外的metadata完整复制到当前库；16/17表digest相等，scan_runs额外新增一次零文件错误扫描，原480行digest仍相等。详细机器依据待本轮归档退役节点收口；不完整恢复备份、不删除原件、不写逐span tombstone。
+
+## 2026-10-03 — 用户要求暂停
+
+> 已由上方用户恢复覆盖；保留暂停时交接事实。
+
+- 已停止新的实施/并线/测试。CWP `f63878f` 与 origin/master 同步，B1 实际收据已提交推送；N4 production batch 细则是本轮未提交草稿，尚未修改生产 runtime/model/schema。
+- StockWiki consumer `3c20d4d→4c3334e` 分支完成：Windows 58 passed/1平台skip、真实Ubuntu42 passed/1平台skip；真实父退出/持pipe与POSIX主动脱组本地I/O有界，测试根已清理。master 的其他 owner `aa3c6e6` 保留；本线尚未合并。
+- RF consumer `8b49bf6→b409a9c6` 已提交；POSIX selector 修复在独立 worktree，暂停时尚未最终提交/验收。仅安排该 owner 关闭已在运行的本次测试并报告交接，不继续实现。下次先核未提交文件与剩余测试根。
+- Worker 保持 paused；B2/B3 未执行，原件保留。恢复须由用户明确要求，不从计划 Next Step 自动启动。
+
 ## 2026-10-03 — G-D B1 实际完成
 
 - `9f986ad` 已普通提交/推送，Actions 37115171888 成功、55 秒。节点 34 passed，生产随后精确删除重复 active snapshot **3,055,796,224 B / 2.846 GiB**；主库完整 SHA/mtime/size 不变，原文不进入操作范围。

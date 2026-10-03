@@ -1,0 +1,278 @@
+{
+  "archives": [
+    {
+      "byte_size": 6198704362,
+      "existing_full_stream_validation": {
+        "decompressed_bytes": 49677344768,
+        "decompressed_sha256": "69f498a23895c5a693621d9ee754b20bb9d6fbc199b684dc16e950d00b8fd7b7",
+        "full_disk_restore_performed": false,
+        "zstd_test": "ok"
+      },
+      "is_original_download": false,
+      "kind": "old_full_catalog_derivative_snapshot",
+      "matches_prepared_and_retired": true,
+      "mtime_ns": 1789799495000000000,
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.source_catalog\\retirement\\20260926T170825Z-4a9c67e1\\catalog.full.sqlite3.zst",
+      "relative_path": ".source_catalog/retirement/20260926T170825Z-4a9c67e1/catalog.full.sqlite3.zst",
+      "sha256": "1bc09746b8ee18db91fbbd14c97410241ad9a54d3f45a6468886692e763edd9e"
+    },
+    {
+      "adjacent_manifest_exists": false,
+      "byte_size": 5207478767,
+      "is_original_download": false,
+      "kind": "legacy_retired_evidence_derivatives",
+      "manifest_files_in_directory": [],
+      "mtime_ns": 1786094396327175400,
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\source_manifests\\archive\\2026-08-07\\retired-evidence.jsonl.gz",
+      "relative_path": "source_manifests/archive/2026-08-07/retired-evidence.jsonl.gz",
+      "sha256": "a3a6b2782350820cdf9a466e074685f9b377e2df46b42c11077a5c7ae1842109"
+    }
+  ],
+  "audited_at": "2026-10-03T11:25:44.621906+00:00",
+  "basis": {
+    "prepared": {
+      "byte_size": 4288,
+      "mtime_ns": 1790447401732883300,
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.source_catalog\\retirement\\20260926T170825Z-4a9c67e1\\prepared.json",
+      "relative_path": ".source_catalog/retirement/20260926T170825Z-4a9c67e1/prepared.json",
+      "sha256": "cebcc51daf0a13a5f583273a1f0c3218f265fbe845fd8656e38cd82a30805cd9"
+    },
+    "retired": {
+      "byte_size": 1113,
+      "mtime_ns": 1790449614812055200,
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.source_catalog\\retirement\\20260926T170825Z-4a9c67e1\\retired.json",
+      "relative_path": ".source_catalog/retirement/20260926T170825Z-4a9c67e1/retired.json",
+      "sha256": "6f7f1b88b36aa93f22056627143fa3dd1c4bdd8d4ce3032ab1a1d4a78008b8e9"
+    }
+  },
+  "basis_run_id": "20260926T170825Z-4a9c67e1",
+  "candidate_deleted_bytes": 11406183129,
+  "catalog_legacy_markers": [
+    {
+      "key": "legacy_backup_name",
+      "value": "catalog.full.sqlite3.zst"
+    },
+    {
+      "key": "legacy_evidence_backup_format",
+      "value": "zstd-full-sqlite-stream-sha256-v1"
+    },
+    {
+      "key": "legacy_evidence_retention",
+      "value": "active_only"
+    },
+    {
+      "key": "legacy_source_sha256",
+      "value": "69f498a23895c5a693621d9ee754b20bb9d6fbc199b684dc16e950d00b8fd7b7"
+    }
+  ],
+  "conclusion": "All original non-span source, document, location, assertion and audit facts are preserved in the current catalog; old derivative evidence may be retired independently without per-span tombstones. Historical scan rows are identical with exactly one later zero-file error scan appended.",
+  "copied_metadata_tables": [
+    {
+      "matches_prepared": true,
+      "prepared_rows": 1,
+      "prepared_sha256": "303e6274abd534f8528c3445232a5e9bf54ec956d4cd4d5b3e011c41133d2e06",
+      "rows": 1,
+      "scope": "full table",
+      "sha256": "303e6274abd534f8528c3445232a5e9bf54ec956d4cd4d5b3e011c41133d2e06",
+      "table": "activation_journal"
+    },
+    {
+      "matches_prepared": true,
+      "prepared_rows": 8191,
+      "prepared_sha256": "13dd0212aaa1dc36d97fc766ebadc1368ae5a9c2e1e5729b4b6689dfde6c2038",
+      "rows": 8191,
+      "scope": "full table",
+      "sha256": "13dd0212aaa1dc36d97fc766ebadc1368ae5a9c2e1e5729b4b6689dfde6c2038",
+      "table": "artifacts"
+    },
+    {
+      "matches_prepared": true,
+      "prepared_rows": 1,
+      "prepared_sha256": "d03fe3d0f0135c14f1a041d3dae545d2f757f9777b4ad2f86d07502bc99df391",
+      "rows": 1,
+      "scope": "original non-legacy keys",
+      "sha256": "d03fe3d0f0135c14f1a041d3dae545d2f757f9777b4ad2f86d07502bc99df391",
+      "table": "catalog_meta"
+    },
+    {
+      "matches_prepared": true,
+      "prepared_rows": 23709,
+      "prepared_sha256": "efcca6e41cf9fec1e1d67e5d70259a3dd25641eb4718ce5400d242b0ab98ef23",
+      "rows": 23709,
+      "scope": "full table",
+      "sha256": "efcca6e41cf9fec1e1d67e5d70259a3dd25641eb4718ce5400d242b0ab98ef23",
+      "table": "document_entities"
+    },
+    {
+      "matches_prepared": true,
+      "prepared_rows": 23529,
+      "prepared_sha256": "ed4ea4711384e9a3bb21ed36c0e0c8907924287c9224d1210468c42fe85a2af1",
+      "rows": 23529,
+      "scope": "full table",
+      "sha256": "ed4ea4711384e9a3bb21ed36c0e0c8907924287c9224d1210468c42fe85a2af1",
+      "table": "document_fingerprint_state"
+    },
+    {
+      "matches_prepared": true,
+      "prepared_rows": 0,
+      "prepared_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rows": 0,
+      "scope": "full table",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "table": "document_restore_audit"
+    },
+    {
+      "matches_prepared": true,
+      "prepared_rows": 19000,
+      "prepared_sha256": "18f3080936e13e3c64773ec6fc1cb9cb5e79c7804b7b76ac7b56972000e8e5af",
+      "rows": 19000,
+      "scope": "full table",
+      "sha256": "18f3080936e13e3c64773ec6fc1cb9cb5e79c7804b7b76ac7b56972000e8e5af",
+      "table": "document_retire_audit"
+    },
+    {
+      "matches_prepared": true,
+      "prepared_rows": 23530,
+      "prepared_sha256": "4bd2f4c5d3fcbc877488304dd4259f7db161cec2d1d6740c62ce18d4ae6f6d45",
+      "rows": 23530,
+      "scope": "full table",
+      "sha256": "4bd2f4c5d3fcbc877488304dd4259f7db161cec2d1d6740c62ce18d4ae6f6d45",
+      "table": "documents"
+    },
+    {
+      "matches_prepared": true,
+      "prepared_rows": 271,
+      "prepared_sha256": "31ca512f89beb51c669b88220b87b691d6c10a55525f84b4665368db45523787",
+      "rows": 271,
+      "scope": "full table",
+      "sha256": "31ca512f89beb51c669b88220b87b691d6c10a55525f84b4665368db45523787",
+      "table": "entities"
+    },
+    {
+      "matches_prepared": true,
+      "prepared_rows": 651,
+      "prepared_sha256": "4135829a463638b1315c4f50eb528d56c49592fe92b794f70b5dd4a13712f694",
+      "rows": 651,
+      "scope": "full table",
+      "sha256": "4135829a463638b1315c4f50eb528d56c49592fe92b794f70b5dd4a13712f694",
+      "table": "llm_summary_failures"
+    },
+    {
+      "matches_prepared": true,
+      "prepared_rows": 46606,
+      "prepared_sha256": "f07ef2f33b847298c5e59b4d9a05778b9dac2fea493fb204274e55038d482b8a",
+      "rows": 46606,
+      "scope": "full table",
+      "sha256": "f07ef2f33b847298c5e59b4d9a05778b9dac2fea493fb204274e55038d482b8a",
+      "table": "locations"
+    },
+    {
+      "matches_prepared": true,
+      "prepared_rows": 473,
+      "prepared_sha256": "dfdc8824a32ec84b4c767b6b1a94035112bb5f8da9d92b089a759c36941af8d6",
+      "rows": 473,
+      "scope": "full table",
+      "sha256": "dfdc8824a32ec84b4c767b6b1a94035112bb5f8da9d92b089a759c36941af8d6",
+      "table": "producer_events"
+    },
+    {
+      "matches_prepared": true,
+      "prepared_rows": 0,
+      "prepared_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rows": 0,
+      "scope": "full table",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "table": "remediation_proposals"
+    },
+    {
+      "matches_prepared": true,
+      "prepared_rows": 4,
+      "prepared_sha256": "6f0ba9b3de53acaf2928affbba1e0f37927aef79b2bbc6c0f3be92b7ecd68791",
+      "rows": 4,
+      "scope": "full table",
+      "sha256": "6f0ba9b3de53acaf2928affbba1e0f37927aef79b2bbc6c0f3be92b7ecd68791",
+      "table": "roots"
+    },
+    {
+      "matches_prepared": true,
+      "prepared_rows": 22,
+      "prepared_sha256": "37ea8a981dd50d86ef55ff46aacd721c20dfe3fef34f07294af176824969c700",
+      "rows": 22,
+      "scope": "full table",
+      "sha256": "37ea8a981dd50d86ef55ff46aacd721c20dfe3fef34f07294af176824969c700",
+      "table": "source_metadata_assertions"
+    },
+    {
+      "matches_prepared": true,
+      "prepared_rows": 43112,
+      "prepared_sha256": "0f538d27dff22ed0ea390df763c99b6fa87e71a19d92df63efa5279d0789a291",
+      "rows": 43112,
+      "scope": "full table",
+      "sha256": "0f538d27dff22ed0ea390df763c99b6fa87e71a19d92df63efa5279d0789a291",
+      "table": "sources"
+    }
+  ],
+  "current_database": {
+    "byte_size": 3055800320,
+    "mtime_ns": 1790490231504738600,
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.source_catalog\\catalog.sqlite3",
+    "relative_path": ".source_catalog/catalog.sqlite3",
+    "sha256": "30794a01e04a9e77ec13cd7b27a3f24bf9861bda9fc7c3c50a2b362830fbc823"
+  },
+  "database_stat_unchanged_during_audit": true,
+  "document_status_counts": [
+    {
+      "rows": 13839,
+      "source_status": "active"
+    },
+    {
+      "rows": 1,
+      "source_status": "quarantined"
+    },
+    {
+      "rows": 9501,
+      "source_status": "retired"
+    },
+    {
+      "rows": 189,
+      "source_status": "upstream_rejected"
+    }
+  ],
+  "limitations": [
+    "This audit intentionally does not prove full gzip/zstd row overlap and does not promise reproduction of old span IDs.",
+    "Current source metadata preservation does not assert that every historical original location remains readable.",
+    "The gzip has no verified manifest; its SHA here binds the exact deletion candidate, not a claim of content completeness."
+  ],
+  "nonempty_wal": false,
+  "operations": {
+    "archive_decompressed_this_run": false,
+    "archive_restored_to_disk": false,
+    "deleted_files": 0,
+    "production_files_written": 0,
+    "raw_hashed": 0,
+    "raw_written": 0
+  },
+  "project_root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+  "scan_runs": {
+    "current_rows": 481,
+    "extra_rows": [
+      {
+        "completed_at": "2026-09-27T06:16:35Z",
+        "report_json": "{\"dry_run\":false,\"error_details\":[{\"error\":\"scan_root_strategy: v2 scanner unavailable (fail closed): root 'company_raw' has no adapter_id (2.x policy required)\",\"relative_path\":\"\",\"root_id\":\"company_raw\",\"unchanged\":false}],\"errors\":1,\"files_excluded\":0,\"files_hashed\":0,\"files_reused\":0,\"files_seen\":0,\"known_quarantined\":0,\"locations_active\":25046,\"locations_missing\":6,\"new_errors\":1,\"policy_excluded\":0,\"run_id\":\"scan-c4ae2c0090944c42b2b30ede8cb5eac6\",\"strategy\":{\"company_raw\":\"adapter\"}}",
+        "run_id": "scan-c4ae2c0090944c42b2b30ede8cb5eac6",
+        "started_at": "2026-09-27T06:16:27Z",
+        "status": "completed_with_errors"
+      }
+    ],
+    "historical_filter": "started_at < '2026-09-26T18:30:01'",
+    "historical_matches_prepared": true,
+    "historical_rows": 480,
+    "historical_sha256": "b6caf11aafd7097c01d555c0960c34c9918ce92d4bb02de5741a67ad69331dae",
+    "prepared_rows": 480,
+    "prepared_sha256": "b6caf11aafd7097c01d555c0960c34c9918ce92d4bb02de5741a67ad69331dae",
+    "table": "scan_runs"
+  },
+  "schema": "gd-b3-metadata-audit/1",
+  "status": "passed",
+  "worker_desired_state": "paused"
+}

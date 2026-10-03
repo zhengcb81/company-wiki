@@ -1,5 +1,7 @@
 # 叙述性证据选择与摘要：小范围试点及实施方案
 
+> **2026-10-03 当前入口（用户已恢复）：**G-C 两条consumer已收尾：StockWiki `master@ae0b3e3`、RF `main@6fb2def7`，RF已普通推送且Actions37119502901成功，本地主线已快进且原4处历史planning dirty字节未变。G-A/N3a/E-B不重复。先按[精确归档退役卡](gd_b3_archive_retirement_implementation.md)独立实施B3，再清理审明的旧checkout；N4为[未实施细则](n4_production_batch_implementation.md)。新空间复核三根 **39.760 GiB**，比B1后仅增加1,207B收据，原文/主库无增长；主仓及登记工作树约45.87十进制GB。B3预计释放10.623GiB，实际收据决定完成。生产Worker继续paused，原件保留。
+
 > **2026-10-03 当前主线：**G-A 与 N3a producer 已完成；RF / StockWiki consumer 的真实文档节点已绿，正在修复包装进程先退出时的子进程回收并汇合 G-C。G-D B1 工具已发布 `9f986ad`（Actions 37115171888 成功，55 秒），生产精确删除重复 snapshot，逻辑释放 **3,055,796,224 B / 2.846 GiB**；当前主库 SHA/mtime 不变，原件未进入操作范围。见[实际收据](harness_lanes/results/gd_b1_retirement_2026-10-03.md)。下方历史未勾选项不是当前派发清单；以本首段、文末 Phase 60 和 Next Step 为准。生产 Worker 继续 paused，G-C / G-D 后批与生产运行入口未完成。
 
 > 独立实施计划；不替代仓库根目录或任何已有专项计划。Phase 17 的旧库退役已完成；Phase 18 的离线 G1 选择、定位和草稿验证已完成一轮。**2026-09-27 新顺序：RF 主线并线已完成，先实施 R4 数据湖抽象层，再继续本计划的 W5/G2a、Worker 与空间处置。**本计划自身不写 RF，不启动生产 Worker；已有隔离叙述工位与主树未提交文件保持原样，待抽象层合同接入时按当前文件快照整合。
@@ -47,7 +49,7 @@ Phase 17 的 F0–F5 已完成。G1 离线主样本和回归集已经复跑：12
 
 ## Current Phase
 
-Phase 60：接通两个叙述 consumer，再汇合 G-C。CWP `a640400` 为正式 producer，原始 SourceRef / SourceExport wire 不变；G-A、E-B、StockWiki W01–W04 不重复实施。RF base `0573c40`、StockWiki base `5f2739a` 分别独占 worktree；StockWiki 当前 master 已由其他 owner 推进到 `aa3c6e6`，须正常三方并线，保留 RF fcap。B1 精确冗余 snapshot 已删除；B2/B3 按各批引用与来源事实处理，不能整树删除。总指挥负责接口、节点验收、主线并入和 PWF。production Worker 继续 paused/default-off，先补实际 composition/model 计量入口。
+Phase 60 G-C已完成来源消费范围：CWP正式producer、RF显式context/StockWiki显式sourceDTO均通过真实文档与生命周期节点并主线；RF远端CI绿。当前Phase61先执行独立B3精确旧派生归档退役与旧工作树整理，再N4生产运行和B2实际调用者切换。生产Worker继续paused/default-off，原始文档及当前来源事实保留，RF fcap不动。
 
 外部来源采购补充：FMP Basic key 实测 profile/有效 SEC 检索 200，press releases/transcript dates 402；SEC 原生 API 无 key。以 246 个本地公司目录作保守分母，Basic 补充 SEC 检索约 2,076 calls/30 日，纯 SEC/IR 路径为 0 FMP calls；Koyfin 无用户 API，Seeking Alpha 个人订阅不授权自动抓取；Motley Fool 官方条款也禁止自动访问/采集，现有适配器不得接通生产。详细价格、假设、权利分级和 30 日试点见 [外部数据源与成本卡](provider_cost_and_capability_2026-09-27.md)。采购结论为先不买，且不改变 G0/G1e 门禁。
 
@@ -737,14 +739,22 @@ G-A1尚未由producer/filing-fetch表示FF→ET→CWP下载完整链完成；真
 ## Phase 60：RF / StockWiki 叙述 consumer 汇合 G-C（2026-10-03）
 
 - [x] 核两个下游当前主线及其他 owner 文件；各自只在新 `codex/...` worktree 实施。RF `0573c40` 为 origin/main，StockWiki `5f2739a` 为本地 master，无 remote。
-- [ ] RF 按[独占卡](harness_lanes/revenue_forecast_narrative_consumer.md) TDD 实现显式来源准备入口、真正有界子进程、独立 DTO；本仓节点包及年报/英文 TXT 正式入口 E2E 通过后提交分支。
-- [ ] StockWiki 按[独占卡](harness_lanes/stockwiki_narrative_consumer.md) TDD 实现显式来源查询入口、真正有界子进程、独立 DTO；本仓节点包及招股/IR 正式入口 E2E 通过后提交分支。
-- [ ] 总指挥验两条线的实际入口/独立根恢复/负例与旧 raw reader 回归，正常并入对应主线；RF 普通推送并核 CI，无 remote 的 StockWiki 不新增 remote。签收 G-C 后才推进该批 G-D。
+- [x] RF 按[独占卡](harness_lanes/revenue_forecast_narrative_consumer.md)交付，89项真实文档/原reader节点通过；真实父先exit与POSIX脱组pipe修正局部20Win/16Linux/3CLI通过，最终6fb2def7正常推main，Actions37119502901成功。
+- [x] StockWiki 按[独占卡](harness_lanes/stockwiki_narrative_consumer.md)交付，14实际producer/consumerE2E包括招股/IR，局部58Win/42Linux通过；4c3334e正常三方并入ae0b3e3，合并回归172passed/1平台skip，不重复785项/4PDF。
+- [x] 总指挥验两条线真实入口、根恢复、负例与兼容；G-C仅来源消费能力完成，不冒充生产模型/daemon。RF main及origin/main同6fb2def7，保留fcap与rf-impl4项原dirty；StockWiki无remote不新建。
 - [x] G-D 只读空间/引用盘点完成：三目录 42.606 GiB；明确重复 snapshot / 当前 DB / raw / derived / archive 边界，见[分批细则](gd_storage_batches_2026-10-03.md)。不把 historical 37.630 GiB 再算作收益。
 - [x] B1 窄 snapshot 清理器 TDD 与正式叙述 CLI 删副本后回读通过；节点 34 passed / 15.73s、Ruff/host guard 绿。生产 dry-run 精确候选 SHA/size 及保留 zstd SHA 均核实。
 - [x] B1 `9f986ad` 发布/CI 55 秒绿后执行精确候选，逻辑释放 3,055,796,224 B；同卷 free 增加 3,055,755,264 B，主库 SHA/mtime 不变。原件不进入操作范围，未声称全库 raw 已重新 hash；机器收据与[发布记录](harness_lanes/results/gd_b1_retirement_2026-10-03.md)保留。不完整恢复备份、不删 zstd/gzip。
-- [ ] 后续生产 composition/model 计量施工细则：现有 runtime factories 仅测试实现，不能把 G-C consumer 绿灯当 batch/daemon 已可运行；生产 Worker 仍 paused。
+- [x] 形成[N4生产composition/model计量/预算/终态降容细则](n4_production_batch_implementation.md)，尚未实施；先执行独立可退役B3，再恢复N4/B2。
+
+## Phase 61：B3旧派生归档与checkout整理（2026-10-03）
+
+- [x] 只读实测无空间反弹；旧46GiB数据库与当前全资料目录口径分开，空间/worktree分类记录待归档。
+- [x] 16表metadata全digest相等，scan_runs原480行digest相等、额外一次零文件错误扫描；旧归档无runtime cold reader，现查询已拒绝。按[实施卡](gd_b3_archive_retirement_implementation.md)冻结窄清理范围和一个节点包。
+- [ ] B3先RED→精确plan/apply/resume工具及旧query中性诊断→一个真实隔离节点；B1已完成回显不依赖仍存在的归档，新的snapshot删除不放宽。
+- [ ] 普通commit/push/CI后生产删除两个精确派生archive，保留currentDB/source/version/raw、小收据，记录实际bytes/free。
+- [ ] 按已核旧worktree独占清单逐项普通git移除clean checkout；保留活动pinnedCWP、未并审计docs和未跟踪小报告，原件不入删除列表。
 
 ## Next Step
 
-完成两条 consumer 的进程生命周期局部补丁、并线和 RF 远端 CI，汇合 G-C；B1 已完成。随后先冻结并实施生产 composition / 模型计量 / 持久预算 / 终态结果降容细则，按实际引用推进 B2/B3。不要重复四份真实文档或全仓长测，不重复 G-A/E-B/W04，生产 Worker 保持 paused，原件保留。
+G-C/B1已完成。先执行Phase61独立B3和旧checkout整理，再N4生产composition/usage/budget/retention与B2调用者切换。按[精确归档卡](gd_b3_archive_retirement_implementation.md)只在一个大节点测，普通发布后apply。不要重复4份原文/全仓长测，不删除原件，生产Worker保持paused。
