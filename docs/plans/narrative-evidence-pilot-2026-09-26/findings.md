@@ -1,5 +1,12 @@
 # Findings：叙述性证据试点
 
+## 2026-10-03 — 激进简化应整套退役，非继续堆开关
+
+- [八束优化提案](radical_simplification_proposal_2026-10-03.md)把46项裁定归并为旁路签收退役、单请求/reader、单AUTO、按需派生、B2逐caller、partial、轻commit与当前PWF。仅建议，未改运行默认或放松事实校验。
+- 旁路Work Unit/shadow/gold候选约2102行/81.7KB，收益主要维护；旧完整normalize/HTTP持锁才是真实并发瓶颈。旧control被主动下载及AUTO共同依赖，先迁移再删，不重建已完成Store/lease/outbox。
+- 只留locator会破坏当前verify/projection/consumer完整bundle合同；N4首版应先去重复attempt正文，唯一final仍保留短引用。冷文档按需解析必须显式coverage，不冒称全文搜索覆盖。
+- 总量32.82GB、公司原件25.20GB、B2约2.87GB可分批退出；DB3.06GB不是可删量。原件exact-SHA去重尚未测，不虚报收益。PWF三入口581351B是上下文负担而非存储大头。
+
 ## 2026-10-03 — 简化没有全部收口
 
 - [46项现状清单](gate_permission_inventory_2026-10-03.md)以当前代码为准：private/public、外发人工许可、prompt消费阻断、RF人工发布、IQS工程签收已改；activation/rollback CLI仍required reviewer，restore也仍拒空审核人。可选review/工程/删除manifest旧工具与AUTO shadow/placeholder仍在，P1/P2未全完成。

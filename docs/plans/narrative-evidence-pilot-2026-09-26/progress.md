@@ -1,5 +1,12 @@
 # Progress：叙述性证据试点
 
+## 2026-10-03 — 激进优化建议（未实施）
+
+- 在46项现状审计基础上并行只读复核，形成[八束建议](radical_simplification_proposal_2026-10-03.md)及收益/迁移前置；保留当前主线N4A顺序，将简化合入现有节点而非新增逐条签收。
+- 核对CodeGraph reader/authorization及实际hooks、旧长锁、最新空间收据；未扫全库/hash原件、未跑生产CLI/模型/API、未改产品代码/config/DB、旧Worker仍paused。
+- 工具记录：新增第二个审计agent触达线程上限，改复用已有runtime agent；第三条窄任务仍触达上限，已有两条只读分工足够，未重复创建。git只读在sandbox提示用户ignore/cache权限，未修改ACL；无命中rg最后一项返回1，不视为产品故障。
+- 当前提案待用户讨论；不是新的许可文件。文档正常提交推送，纯Markdown不新增CI长测。
+
 ## 2026-10-03 — 46项门禁审计与计划入口纠正
 
 - 三条只读审计并行完成，root复核实际reviewer参数、安装FF脚本SHA、StockWiki真实hook状态、CWP工程快门。未改产品策略、未调用provider/读APIkey、未启动Worker或重跑大节点验收。

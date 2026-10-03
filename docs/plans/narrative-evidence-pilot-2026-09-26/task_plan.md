@@ -784,3 +784,14 @@ Phase61已收尾；唯一下一步按[N4A](n4_production_batch_implementation.md
 ## Next Step（审计后仍沿用主线顺序）
 
 N4A限定批次scope先RED→实现；用户对46项清单的裁定并入相应owner的原节点，P1/P2收口不另立人工授权合同。FF预算/ET旧入口缺口在再次启用实际provider前纳入G-A相关E2E，不因已交付v2而假报单请求预算严密。旧Worker保持paused。
+
+## Phase 64：更激进优化建议（建议支线已完成，未实施）
+
+- [x] 将46项分散裁定归并为[八束整套退役/按需派生建议](radical_simplification_proposal_2026-10-03.md)，明确真实运行瓶颈、历史旁路、底层正确性与跨仓接口的区别。
+- [x] 核旧control实际依赖、完整bundle发布合同及现成AUTO恢复能力，避免为了清理误删新链或另造任务库；收益与未测量分开。
+- [x] 写明单入口/单worker迁移、B2逐caller提前退出、commit去pytest/PWF入口瘦身；并入既有大节点，不增加八套审批或测试包。
+- [x] 更新发现/进度，仅计划文档提交推送，未执行本提案或修改产品门禁。
+
+## Next Step（建议后仍沿用主线顺序）
+
+主线仍N4A scope先RED→实现。激进提案供讨论，采纳项纳入既有简化与N4/B2节点；不重做已完成并线/归档，不开启旧无限Worker，不因本文自动删除代码/原件。有限范围清理以实际调用者为准，未来并行harness继续独占目录/shared owner。
