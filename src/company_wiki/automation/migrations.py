@@ -28,7 +28,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 
-SCHEMA_VERSION = 3
+SCHEMA_VERSION = 4
 
 EXPECTED_TABLES_V1 = frozenset(
     {
@@ -265,6 +265,13 @@ _DDL_V3_STATEMENTS: tuple[str, ...] = (
 )
 
 
+_DDL_V4_STATEMENTS: tuple[str, ...] = (
+    """ALTER TABLE narrative_runs ADD COLUMN last_runtime_generation INTEGER
+       CHECK(last_runtime_generation IS NULL OR
+             (typeof(last_runtime_generation)='integer' AND last_runtime_generation>=1))""",
+)
+
+
 # --------------------------------------------------------------------------- #
 # Migration errors (stable code strings; original exceptions chained).
 # --------------------------------------------------------------------------- #
@@ -487,21 +494,24 @@ def _read_structure(
     return structure
 
 
-@functools.lru_cache(maxsize=3)
+@functools.lru_cache(maxsize=4)
 def _expected_structure(version: int) -> dict:
     connection = sqlite3.connect(":memory:")
     connection.row_factory = sqlite3.Row
     try:
         for statement in _DDL_V1_STATEMENTS:
             connection.execute(statement)
-        if version in (2, 3):
+        if version in (2, 3, 4):
             for statement in _DDL_V2_STATEMENTS:
                 connection.execute(statement)
             tables = EXPECTED_TABLES_V2
-            if version == 3:
+            if version in (3, 4):
                 for statement in _DDL_V3_STATEMENTS:
                     connection.execute(statement)
                 tables = EXPECTED_TABLES
+                if version == 4:
+                    for statement in _DDL_V4_STATEMENTS:
+                        connection.execute(statement)
         elif version == 1:
             tables = EXPECTED_TABLES_V1
         else:
@@ -580,7 +590,7 @@ def _tables_for_version(version: int) -> frozenset[str]:
         return EXPECTED_TABLES_V1
     if version == 2:
         return EXPECTED_TABLES_V2
-    if version == 3:
+    if version in (3, 4):
         return EXPECTED_TABLES
     raise ValueError(f"unsupported schema version: {version}")
 
@@ -627,7 +637,7 @@ def _classify_existing(db_path: Path) -> str:
         tables = _user_tables(connection)
         if version == SCHEMA_VERSION:
             return f"v{version}"
-        if version in (1, 2):
+        if version in (1, 2, 3):
             _require_expected_structure(connection, version=version)
             return f"v{version}"
         unknown = [name for name in tables if name not in EXPECTED_TABLES_V1]
@@ -699,7 +709,14 @@ def _apply_write_migration(
             for statement in _DDL_V3_STATEMENTS:
                 _execute_statement(connection, statement)
             connection.execute("PRAGMA user_version = 3")
+            version = 3
             applied_versions.append(3)
+        if version == 3:
+            _require_expected_structure(connection, version=3)
+            for statement in _DDL_V4_STATEMENTS:
+                _execute_statement(connection, statement)
+            connection.execute("PRAGMA user_version = 4")
+            applied_versions.append(4)
     except sqlite3.OperationalError as exc:
         raise MigrationExecutionError(
             f"DDL execution failed and was rolled back: {exc}"
@@ -717,11 +734,11 @@ def _apply_write_migration(
 def migrate_database(
     db_path: Path, *, backup_hook: BackupHook | None = None
 ) -> MigrationReport:
-    """Create or validate the automation database at schema v3.
+    """Create or validate the automation database at schema v4.
 
-    A new file or empty v0 database applies v1, v2 and v3 in one transaction. A
-    frozen, valid v1/v2 database requires a successful explicit backup hook before
-    it is upgraded in one transaction. Existing v3 databases are validated
+    A new file or empty v0 database applies v1 through v4 in one transaction. A
+    frozen, valid v1/v2/v3 database requires a successful explicit backup hook before
+    it is upgraded in one transaction. Existing v4 databases are validated
     read-only.
     """
     db_path = _require_valid_path_object(db_path)
@@ -737,16 +754,16 @@ def migrate_database(
     else:
         classification = "new"
 
-    if classification == "v3":
+    if classification == "v4":
         return _validate_current_readonly(db_path)
 
-    from_version = {"v1": 1, "v2": 2}.get(classification, 0)
-    if classification in {"v1", "v2"} and backup_hook is None:
-        raise BackupError(f"v{from_version} to v3 upgrade requires an explicit backup hook")
+    from_version = {"v1": 1, "v2": 2, "v3": 3}.get(classification, 0)
+    if classification in {"v1", "v2", "v3"} and backup_hook is None:
+        raise BackupError(f"v{from_version} to v4 upgrade requires an explicit backup hook")
     backup_path_str = _perform_backup(
         db_path,
         from_version=from_version,
-        pre_existing=(classification in {"v0_empty", "v1", "v2"}),
+        pre_existing=(classification in {"v0_empty", "v1", "v2", "v3"}),
         backup_hook=backup_hook,
     )
 
@@ -779,7 +796,7 @@ def validate_database(db_path: Path) -> SchemaReport:
                 f"user_version {version} is newer than supported {SCHEMA_VERSION}"
             )
         tables = _user_tables(connection)
-        if version in (1, 2, 3):
+        if version in (1, 2, 3, 4):
             _require_expected_structure(connection, version=version)
             fingerprint = _fingerprint(connection, version=version)
         else:  # uninitialized v0

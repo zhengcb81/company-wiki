@@ -428,7 +428,7 @@ def test_s17_get_nonexistent_returns_none_no_creation(tmp_path):
     assert store.get_effect("nonexistent") is None
     # No data created — schema report shows empty tables.
     report = store.schema_report()
-    assert report.user_version == 3
+    assert report.user_version == 4
 
 
 # --------------------------------------------------------------------------- #
@@ -596,7 +596,7 @@ def test_s24_sql_injection_payload_roundtrips(tmp_path):
     got = store.get_event("evt-auto2-001")
     assert got is not None
     assert got.payload_json == malicious
-    # All schema v3 tables still exist; SQL data cannot drop old or new tables.
+    # All schema v4 tables still exist; SQL data cannot drop old or new tables.
     report = store.schema_report()
     assert set(report.tables) == {
         "events", "jobs", "job_dependencies", "attempts",

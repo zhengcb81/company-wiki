@@ -190,6 +190,45 @@ def _runtime_gate_from_row(row: sqlite3.Row) -> RuntimeGate:
     return RuntimeGate.from_dict(dict(row))
 
 
+def _read_runtime_gate_in_transaction(connection: sqlite3.Connection) -> RuntimeGate:
+    row = connection.execute(
+        "SELECT desired_state, control_generation, updated_at "
+        "FROM runtime_gate WHERE singleton_id = 1"
+    ).fetchone()
+    if row is None:
+        raise RuntimeGateClosedError("runtime gate row is missing")
+    return _runtime_gate_from_row(row)
+
+
+def _set_runtime_gate_in_transaction(
+    connection: sqlite3.Connection, desired_state: RuntimeState, *, updated_at: str,
+    expected_generation: int | None = None, advance_generation: bool = False,
+) -> RuntimeGate:
+    """Fence a generation inside the caller's existing write transaction."""
+    if not isinstance(desired_state, RuntimeState):
+        raise TypeError("desired_state must be RuntimeState")
+    RuntimeGate(desired_state, 1, updated_at)
+    if expected_generation is not None and (type(expected_generation) is not int or expected_generation < 1):
+        raise ValueError("expected_generation must be a positive integer")
+    current = _read_runtime_gate_in_transaction(connection)
+    if expected_generation is not None and current.control_generation != expected_generation:
+        raise ConcurrentUpdateError("runtime gate generation changed")
+    if current.desired_state is desired_state and not advance_generation:
+        return current
+    if updated_at < current.updated_at:
+        raise IntegrityViolationError("runtime gate updated_at must not regress")
+    generation = current.control_generation + 1
+    changed = connection.execute(
+        "UPDATE runtime_gate SET desired_state = ?, "
+        "control_generation = ?, updated_at = ? WHERE singleton_id = 1 "
+        "AND control_generation = ?",
+        (desired_state.value, generation, updated_at, current.control_generation),
+    )
+    if changed.rowcount != 1:
+        raise ConcurrentUpdateError("runtime gate generation changed")
+    return RuntimeGate(desired_state, generation, updated_at)
+
+
 def _job_row(connection: sqlite3.Connection, job_id: str) -> sqlite3.Row:
     row = connection.execute(
         f"SELECT {_JOB_COLS} FROM jobs WHERE job_id = ?", (job_id,)
@@ -795,37 +834,9 @@ class AutomationStore:
         if expected_generation is not None and (type(expected_generation) is not int or expected_generation < 1):
             raise ValueError("expected_generation must be a positive integer")
 
-        def _op(conn):
-            row = conn.execute(
-                "SELECT desired_state, control_generation, updated_at "
-                "FROM runtime_gate WHERE singleton_id = 1"
-            ).fetchone()
-            if row is None:
-                raise RuntimeGateClosedError("runtime gate row is missing")
-            current = _runtime_gate_from_row(row)
-            if expected_generation is not None and current.control_generation != expected_generation:
-                raise ConcurrentUpdateError("runtime gate generation changed")
-            if current.desired_state is desired_state:
-                return current
-            if updated_at < current.updated_at:
-                raise IntegrityViolationError("runtime gate updated_at must not regress")
-            generation = current.control_generation + 1
-            changed = conn.execute(
-                "UPDATE runtime_gate SET desired_state = ?, "
-                "control_generation = ?, updated_at = ? WHERE singleton_id = 1 "
-                "AND control_generation = ?",
-                (
-                    desired_state.value,
-                    generation,
-                    updated_at,
-                    current.control_generation,
-                ),
-            )
-            if changed.rowcount != 1:
-                raise ConcurrentUpdateError("runtime gate generation changed")
-            return RuntimeGate(desired_state, generation, updated_at)
-
-        return self._write_transaction(_op)
+        return self._write_transaction(lambda conn: _set_runtime_gate_in_transaction(
+            conn, desired_state, updated_at=updated_at, expected_generation=expected_generation,
+        ))
 
     # -- connection helpers ------------------------------------------------ #
 

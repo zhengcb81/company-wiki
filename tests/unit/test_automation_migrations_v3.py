@@ -20,7 +20,7 @@ def _v2(path):
 def test_v3_new_database_has_exact_three_additive_budget_tables(tmp_path):
     database = tmp_path / "auto.db"
     report = migrations.migrate_database(database)
-    assert report.to_version == 3 and report.applied_versions == (1, 2, 3)
+    assert report.to_version == 4 and report.applied_versions == (1, 2, 3, 4)
     assert set(migrations.validate_database(database).tables) == set(
         migrations.EXPECTED_TABLES_V1
     ) | {
@@ -49,7 +49,7 @@ def test_v2_is_validated_readonly_then_upgraded_once_with_exact_backup(tmp_path)
         return target
 
     report = migrations.migrate_database(database, backup_hook=backup)
-    assert calls == [(2, 3)] and report.applied_versions == (3,)
+    assert calls == [(2, 4)] and report.applied_versions == (3, 4)
     assert (tmp_path / "before.db").read_bytes() == before
     assert migrations.migrate_database(database).applied_versions == ()
 
@@ -102,7 +102,7 @@ def test_current_reopen_rechecks_version_in_its_validation_snapshot(
     def concurrent_version_change(path):
         classification = classify(path)
         with sqlite3.connect(path) as connection:
-            connection.execute("PRAGMA user_version=4")
+            connection.execute("PRAGMA user_version=5")
         after_change.append(path.read_bytes())
         return classification
 

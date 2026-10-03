@@ -14,8 +14,11 @@ from typing import Callable, TypeVar
 from company_wiki._id_scope import normalize_id_scope
 
 from . import migrations
-from .models import canonical_json_hash, require_sha256, require_utc_timestamp
-from .store import StoreBusyError, _require_active_attempt
+from .models import RuntimeGate, RuntimeState, canonical_json_hash, require_sha256, require_utc_timestamp
+from .store import (
+    ConcurrentUpdateError, StoreBusyError, _read_runtime_gate_in_transaction,
+    _require_active_attempt, _set_runtime_gate_in_transaction,
+)
 
 
 _MAX_INT = (1 << 63) - 1
@@ -40,6 +43,10 @@ class RunBudgetExceededError(NarrativeRunError):
 
 class RunScopeError(NarrativeRunError):
     code = "run_scope_mismatch"
+
+
+class RunOwnershipError(NarrativeRunError):
+    code = "run_ownership_conflict"
 
 
 def _name(value: str, name: str) -> None:
@@ -85,6 +92,7 @@ class RunRecord:
     created_at: str
     updated_at: str
     job_ids: tuple[str, ...]
+    last_runtime_generation: int | None = None
 
     @property
     def blocked(self) -> bool:
@@ -277,6 +285,40 @@ class NarrativeRunStore:
     def get_run(self, run_id: str) -> RunRecord | None:
         return self._read(lambda connection: _run(connection, run_id))
 
+    def activate_run(
+        self, run_id: str, *, expected_generation: int, updated_at: str,
+    ) -> RuntimeGate:
+        """Bind and fence this run atomically; the coordinator holds its OS mutex.
+
+        Creation is not ownership. An enabled generation can only be recovered
+        by its recorded run, including a parent failure before the first claim.
+        A recovery advances the generation so old attempts cannot finish.
+        """
+        _name(run_id, "run_id")
+        require_utc_timestamp(updated_at)
+        if type(expected_generation) is not int or expected_generation < 1:
+            raise ValueError("expected_generation must be a positive integer")
+
+        def write(connection):
+            current = _read_runtime_gate_in_transaction(connection)
+            if current.control_generation != expected_generation:
+                raise ConcurrentUpdateError("runtime gate generation changed")
+            run = _required_run(connection, run_id)
+            if (current.desired_state is RuntimeState.ENABLED
+                    and run.last_runtime_generation != current.control_generation):
+                raise RunOwnershipError("enabled runtime generation belongs to another or unknown run")
+            gate = _set_runtime_gate_in_transaction(
+                connection, RuntimeState.ENABLED, updated_at=updated_at,
+                expected_generation=expected_generation, advance_generation=True,
+            )
+            connection.execute(
+                "UPDATE narrative_runs SET last_runtime_generation=?,updated_at=? WHERE run_id=?",
+                (gate.control_generation, updated_at, run_id),
+            )
+            return gate
+
+        return self._write(write)
+
     def run_for_job(self, job_id: str) -> RunRecord | None:
         def read(connection):
             row = connection.execute(
@@ -301,6 +343,44 @@ class NarrativeRunStore:
             return tuple(ReservationRecord(**dict(row)) for row in rows)
 
         return self._read(read)
+
+    def settle_finished_attempt_reservations(
+        self, *, run_id: str, settled_at: str,
+    ) -> tuple[str, ...]:
+        """Mark finished attempts without a receipt unknown, keeping their charge.
+
+        A reserved model request may have reached the provider before a worker
+        died. Reconciliation therefore records uncertainty and never refunds
+        the original token or cost bounds. One transaction makes retry safe if
+        the coordinator loses the commit acknowledgement.
+        """
+        _name(run_id, "run_id")
+        require_utc_timestamp(settled_at)
+
+        def write(connection):
+            _required_run(connection, run_id)
+            rows = connection.execute(
+                """SELECT r.attempt_id FROM narrative_model_reservations r
+                   JOIN attempts a ON a.attempt_id=r.attempt_id
+                   WHERE r.run_id=? AND r.usage_status='reserved'
+                     AND a.finished_at IS NOT NULL ORDER BY r.attempt_id""",
+                (run_id,),
+            ).fetchall()
+            settled = []
+            for row in rows:
+                changed = connection.execute(
+                    """UPDATE narrative_model_reservations
+                       SET usage_status='unknown',error_code='MODEL_WORKER_LOST',usage_settled_at=?
+                       WHERE run_id=? AND attempt_id=? AND usage_status='reserved'
+                         AND EXISTS (SELECT 1 FROM attempts a
+                                     WHERE a.attempt_id=? AND a.finished_at IS NOT NULL)""",
+                    (settled_at, run_id, row["attempt_id"], row["attempt_id"]),
+                )
+                if changed.rowcount == 1:
+                    settled.append(row["attempt_id"])
+            return tuple(settled)
+
+        return self._write(write)
 
     def budget_snapshot(self, run_id: str) -> RunBudgetSnapshot:
         def read(connection):
@@ -653,6 +733,7 @@ __all__ = [
     "RunBudgetExceededError",
     "ReservationConflictError",
     "RunScopeError",
+    "RunOwnershipError",
     "ModelUsage",
     "RunRecord",
     "ReservationRecord",

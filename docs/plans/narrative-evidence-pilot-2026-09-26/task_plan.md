@@ -21,7 +21,7 @@
 |---|---|---|---|
 | S0 简化收口 | complete（ff5396c，CI绿） | PWF只留当前入口；删除R1旁路签收/shadow/gold；commit移除pytest、config doctor按相关文件触发 | 一次相关Unit/混合行为回归与正常发布；不逐文件签收 |
 | S1 N4A | complete（ff5396c，CI绿） | scope贯通Store/Worker/Supervisor/outbox/prepared，None兼容、空scope零修改、范围SQL先于LIMIT | N4节点A，确定性RED先行 |
-| S2 N4B | in_progress（CLI/终态降容67绿；跨run节点绿，owner/父kill/ACK整体待收口） | 真实factory/薄HTTP model adapter/完整prompt；同Store持久token/费用预留；有限batch CLI；唯一final正文、终态恢复小记录 | 节点A记账/并发、节点B正式CLI本地HTTP/kill/ACK/空间 |
+| S2 N4B | in_progress（CLI/终态降容67绿；跨run节点绿；run/generation owner、正式父kill恢复及费用对账已绿） | 真实factory/薄HTTP model adapter/完整prompt；同Store持久token/费用预留；有限batch CLI；唯一final正文、终态恢复小记录 | 节点A记账/并发、节点B正式CLI本地HTTP/kill/ACK/空间；余项为旧Worker入口退出与生命周期边界收尾 |
 | S3 来源与采集默认收敛 | in_progress（英文召回子项绿；FF/ET running，CWP默认/caps pending） | R2/R6：一请求、薄v1适配、相关字段fingerprint、缺元数据partial、published-asof；FF执行limits/ET旧入口一致；安装技能示例同步 | root CWP与FF-S3/ET-S3在一个接口大节点汇合 |
 | S4 N4C与旧Worker退出 | pending | 四类真实文档小批/consumer读取/语言引用coverage与总容量；迁移control实际调用者，唯一AUTO执行器、短提交锁 | 节点C；先有限批次，再按实测1/2/4调整并发 |
 | S5 B2逐caller清理 | pending | 每集合无引用即可删约2.87GB旧derived/index；停用功能直接退役，未要求全库先生成摘要 | 存储迁移节点真实回读/原件保留/实际bytes，逐集合幂等 |
@@ -76,7 +76,7 @@ TDD框住公开行为，不把旧签收规则写进新测试。仅S0相关收口
 
 ## Next Step
 
-跨run身份已绿，正常发布后root继续run↔generation自动owner、旧catalog Worker入口退役、正式CLI父kill/ACK恢复及全生命周期时限；随后CWP S3实际采集limits与来源默认。FF/ET/空间三线running，等待只发生在最终接口汇合；未交付模块不写complete。不启动旧无限Worker，不删除原件。
+跨run身份已绿。run↔generation自动owner、正式CLI父kill恢复、未知费用保留及ACK丢失幂等已实现并通过大节点测试。root继续退役旧catalog Worker入口，再收生命周期/容量证据；随后CWP S3实际采集limits与来源默认。FF/ET/空间三线running，等待只发生在最终接口汇合；未交付模块不写complete。不启动旧无限Worker，不删除原件。
 
 ## S2当前交接与下一集中节点
 

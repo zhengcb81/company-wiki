@@ -184,6 +184,7 @@ def run_batch(request: NarrativeBatchRequest, *, project_root: Path, catalog_con
 
 
 def _run_owned(request, catalog, project_root, config_path, db_path, work_dir):
+    deadline = time.monotonic() + request.max_seconds
     reader = SourceVersionReader(catalog)
     binding = build_batch_events(request, reader, now=_now())
     # Verify raw bytes before materializing anything, including a completed resume.
@@ -212,45 +213,57 @@ def _run_owned(request, catalog, project_root, config_path, db_path, work_dir):
     if previous is not None and any(job.status is JobStatus.RUNNING and job.job_id not in previous.job_ids
                                     for job in store.list_jobs()):
         raise ValueError("AUTOMATION_FOREIGN_WORKER_ACTIVE")
-    scheduler = AutomationScheduler(store, create_default_registry(), PolicyConfig(allow_llm=True, allow_network=True))
-    for event in binding.events:
-        stored = store.get_event(event.event_id)
-        if stored is None:
-            stored = store.put_event(event).value
-        elif (stored.input_hash, stored.payload_json, stored.policy_version, stored.subject_id) != (
-                event.input_hash, event.payload_json, event.policy_version, event.subject_id):
-            raise RunConflictError("batch event changed")
-        scheduler.materialize_event(stored)
-    job_ids = tuple(job.job_id for job in store.list_jobs() if job.created_from_event_id in {event.event_id for event in binding.events})
-    run = runs.create_run(run_id=request.run_id, input_hash=binding.input_hash, job_ids=job_ids,
-        model_id=request.model_options["model_id"], prompt_version=NARRATIVE_PROMPT_VERSION,
-        pricing_version=request.pricing_version,
-        input_micro_usd_per_million_tokens=request.input_micro_usd_per_million_tokens,
-        output_micro_usd_per_million_tokens=request.output_micro_usd_per_million_tokens,
-        max_tokens=request.max_tokens, max_micro_usd=request.max_micro_usd,
-        max_output_bytes=min(len(request.sources) * request.max_final_bytes, request.max_persistent_bytes), created_at=_now())
-    artifacts = NarrativeArtifactStore(catalog.store, _BudgetedObjects(catalog.config.catalog_dir, guard, request.max_final_bytes))
-    dispatcher = NarrativeEffectDispatcher(store, artifacts, allowed_job_ids=run.job_ids)
-    supervisor = AutomationSupervisor(SupervisorConfig(
-        db_path=db_path, log_dir=work_dir / "logs", profile=request.profile,
-        runtime_factory_path="company_wiki.automation.narrative_worker_factory:create_runtime",
-        runtime_options_json=canonical_json({"project_root": str(project_root), "catalog_config_path": str(config_path),
-            "run_id": run.run_id, "expected_run_input_hash": run.input_hash, "model": request.model_options,
-            "max_final_bytes": request.max_final_bytes}),
-        compute_job_types=("source.narrative_select", "source.narrative_verify"),
-        model_job_types=("source.narrative_summarize",), allowed_job_ids=run.job_ids,
-        heartbeat_interval_seconds=1, lease_seconds=15, idle_sleep_seconds=0.05,
-        maintenance_interval_seconds=0.05, stop_grace_seconds=2, child_log_max_bytes=262144,
-    ))
     status = "partial"
     generation = None
-    deadline = time.monotonic() + request.max_seconds
+    supervisor = None
     try:
-        with CatalogOperationLock(catalog.config.catalog_dir, operation="narrative-batch-start"):
-            if gate.desired_state is RuntimeState.ENABLED:
-                gate = store.set_runtime_gate(RuntimeState.PAUSED, updated_at=_now(), expected_generation=gate.control_generation)
-            generation = store.set_runtime_gate(RuntimeState.ENABLED, updated_at=_now(), expected_generation=gate.control_generation).control_generation
-        if not run.blocked:
+        if gate.desired_state is RuntimeState.ENABLED:
+            # A surviving enabled gate can only be recovered by the run
+            # durably recorded as its owner. Bind and fence it before AUTO
+            # events/jobs can be written.
+            with CatalogOperationLock(catalog.config.catalog_dir, operation="narrative-batch-start"):
+                generation = runs.activate_run(
+                    request.run_id, expected_generation=gate.control_generation, updated_at=_now(),
+                ).control_generation
+
+        scheduler = AutomationScheduler(store, create_default_registry(), PolicyConfig(allow_llm=True, allow_network=True))
+        event_ids = {event.event_id for event in binding.events}
+        for event in binding.events:
+            stored = store.get_event(event.event_id)
+            if stored is None:
+                stored = store.put_event(event).value
+            elif (stored.input_hash, stored.payload_json, stored.policy_version, stored.subject_id) != (
+                    event.input_hash, event.payload_json, event.policy_version, event.subject_id):
+                raise RunConflictError("batch event changed")
+            scheduler.materialize_event(stored)
+        job_ids = tuple(job.job_id for job in store.list_jobs() if job.created_from_event_id in event_ids)
+        run = runs.create_run(run_id=request.run_id, input_hash=binding.input_hash, job_ids=job_ids,
+            model_id=request.model_options["model_id"], prompt_version=NARRATIVE_PROMPT_VERSION,
+            pricing_version=request.pricing_version,
+            input_micro_usd_per_million_tokens=request.input_micro_usd_per_million_tokens,
+            output_micro_usd_per_million_tokens=request.output_micro_usd_per_million_tokens,
+            max_tokens=request.max_tokens, max_micro_usd=request.max_micro_usd,
+            max_output_bytes=min(len(request.sources) * request.max_final_bytes, request.max_persistent_bytes), created_at=_now())
+        artifacts = NarrativeArtifactStore(catalog.store, _BudgetedObjects(catalog.config.catalog_dir, guard, request.max_final_bytes))
+        dispatcher = NarrativeEffectDispatcher(store, artifacts, allowed_job_ids=run.job_ids)
+        supervisor = AutomationSupervisor(SupervisorConfig(
+            db_path=db_path, log_dir=work_dir / "logs", profile=request.profile,
+            runtime_factory_path="company_wiki.automation.narrative_worker_factory:create_runtime",
+            runtime_options_json=canonical_json({"project_root": str(project_root), "catalog_config_path": str(config_path),
+                "run_id": run.run_id, "expected_run_input_hash": run.input_hash, "model": request.model_options,
+                "max_final_bytes": request.max_final_bytes}),
+            compute_job_types=("source.narrative_select", "source.narrative_verify"),
+            model_job_types=("source.narrative_summarize",), allowed_job_ids=run.job_ids,
+            heartbeat_interval_seconds=1, lease_seconds=15, idle_sleep_seconds=0.05,
+            maintenance_interval_seconds=0.05, stop_grace_seconds=2, child_log_max_bytes=262144,
+        ))
+        if generation is None:
+            with CatalogOperationLock(catalog.config.catalog_dir, operation="narrative-batch-start"):
+                current = store.read_runtime_gate()
+                generation = runs.activate_run(
+                    request.run_id, expected_generation=current.control_generation, updated_at=_now(),
+                ).control_generation
+        if not run.blocked and time.monotonic() < deadline:
             supervisor.start()
         while time.monotonic() < deadline:
             current_gate = store.read_runtime_gate()
@@ -260,6 +273,10 @@ def _run_owned(request, catalog, project_root, config_path, db_path, work_dir):
             guard.check()
             if not run.blocked:
                 supervisor.maintain()
+                # Finished model attempts with no provider receipt may have
+                # reached the provider. Reconcile their reserved bounds as
+                # unknown without refunding them; repeat calls are idempotent.
+                runs.settle_finished_attempt_reservations(run_id=run.run_id, settled_at=_now())
             # Do not prepare a file larger than the requested final byte cap.
             for effect_id in store.effect_ids_for_jobs(run.job_ids, effect_type=EFFECT_TYPE):
                 effect = store.get_effect(effect_id)
@@ -271,13 +288,19 @@ def _run_owned(request, catalog, project_root, config_path, db_path, work_dir):
                 lease_until=(datetime.now(timezone.utc) + timedelta(seconds=30)).strftime("%Y-%m-%dT%H:%M:%SZ"),
                 expected_generation=generation)
             dispatcher.reconcile_prepared(activated_at=now)
-            jobs = tuple(store.get_job(job_id) for job_id in run.job_ids)
+            read_jobs = tuple(store.get_job(job_id) for job_id in run.job_ids)
+            if any(job is None for job in read_jobs):
+                raise RunConflictError("batch run job disappeared")
+            jobs = tuple(job for job in read_jobs if job is not None)
             if all(job.status in {JobStatus.SUCCEEDED, JobStatus.DEAD_LETTER, JobStatus.BLOCKED_HUMAN, JobStatus.CANCELLED} for job in jobs):
                 status = "completed" if all(job.status is JobStatus.SUCCEEDED for job in jobs) else "failed"
                 if any(job.last_error_code == "MODEL_BUDGET_DENIED" for job in jobs):
                     status = "budget_exhausted"
                 break
-            if runs.get_run(run.run_id).blocked:
+            current_run = runs.get_run(run.run_id)
+            if current_run is None:
+                raise RunConflictError("batch run disappeared")
+            if current_run.blocked:
                 status = "budget_exhausted"
                 break
             time.sleep(0.05)
@@ -289,7 +312,8 @@ def _run_owned(request, catalog, project_root, config_path, db_path, work_dir):
         runs.block_run(run.run_id, error_code=str(exc), updated_at=_now())
         status = "storage_exhausted"
     finally:
-        supervisor.stop()
+        if supervisor is not None:
+            supervisor.stop()
         if generation is not None:
             with CatalogOperationLock(catalog.config.catalog_dir, operation="narrative-batch-stop"):
                 current = store.read_runtime_gate()
