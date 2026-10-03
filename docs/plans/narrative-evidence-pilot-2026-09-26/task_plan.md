@@ -10,7 +10,7 @@
 
 ## 当前基线
 
-- CWP master/origin/master 9ccd29f，S0/N4A和模型/持久预算基础已发布，CI37135709529成功；S2正式CLI/降容首组67绿但恢复收口仍待完成。G-A/N3a/G-C、B1/B3/B4均完成，不重新验收整个历史。
+- CWP阶段提交cf662cc已推送master：正式CLI/降容、英文召回和三份独立卡已发布，集中67绿，跨run/owner/kill/ACK恢复收口仍待完成；新CI37139201102运行中。前序模型预算9ccd29f的CI37135709529成功。G-A/N3a/G-C、B1/B3/B4均完成，不重新验收整个历史。
 - RF rf-impl main 6fb2def7/4项tracked dirty；原fcap 5319ee26保留。FF真正origin/main/交付线c47c397，常用根仍fcap d35b6f5；ET main4924d57 tracked干净。StockWiki master已推进aa98848/4项quick-scan dirty；IQS master44b805f在继续实施。外仓各自owner，不reset或重复派线。
 - 最新完整空间32,821,613,206B/32.82GB，公司原件25.20GB，current DB3.06GB、旧derived/index约2.87GB。已释放13.06GB不再重复计收益；原件不进入清理候选。
 - 真实代码CI约56–62秒，单Python/全Unit/精选回归；不恢复全Contract/coverage日常门。
