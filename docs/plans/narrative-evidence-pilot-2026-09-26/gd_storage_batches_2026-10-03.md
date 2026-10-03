@@ -1,5 +1,7 @@
 # G-D：当前空间与分批实施
 
+> **生产收尾已完成（2026-10-03）：**B3两归档及B4共27旧checkout实删合计12.152904GiB。三根29.137574GiB；主仓可读+剩余worktree32.821十进制GB（全仓24历史ACL测试树仍不可读）；原文目录/主库不变。见[实际收据](harness_lanes/results/gd_b3_retirement_2026-10-03.md)。下方B1后/候选估计均为历史依据，勿重复执行。下一步[N4A](n4_production_batch_implementation.md)，再B2实际调用者切换后的清理；managed三根物理归档待app处理、不计收益。
+
 ## 当前入口（2026-10-03，B1后实读）
 
 三资料根实读 **42,692,408,858B /39.760GiB**，精确等于下方原盘点减B1删除3,055,796,224B加1,207B小收据，原文/主库无反弹。全主仓可读40.873GiB，另33登记checkout1.849GiB，共45.87十进制GB；全主仓24个旧测试ACL目录不可读，故全仓是下界，三资料根0错误。G-C已并主线/CI，先按[B3精确卡](gd_b3_archive_retirement_implementation.md)释放两旧派生archive预计10.623GiB，再按[B4精确卡](gd_b4_worktree_cleanup_2026-10-03.md)移除23旧checkout预计1.317GiB，实际收据决定结论。三个managed附件UI归档尚未实际移除，不计收益。随后[N4](n4_production_batch_implementation.md)/B2，不删任何原件。

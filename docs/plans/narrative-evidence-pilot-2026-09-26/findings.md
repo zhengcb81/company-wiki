@@ -1,5 +1,11 @@
 # Findings：叙述性证据试点
 
+## 2026-10-03 — 已清理空间的实际结论
+
+- B3两个已废弃派生归档共11,406,183,129B实删，原文/来源库不在删除范围；currentDB完整SHA、size、mtime与审计相等。B4共27旧checkout删除1,642,897,918B，两历史refs已推远端、四个小报告main已有同blob保留。合计13,049,081,047B/12.152904GiB。
+- fresh三资料根29.137574GiB；主仓可读及剩余checkout合计32.821GB/30.567GiB（24历史ACL测试目录仍不可读，lower bound）。公司资料目录23.467935GiB占主要部分；当前catalog2.845936GiB和旧derived/index约2.674GiB仍保留，后者需N4/B2切换调用者后处理。原46GB感受来自统计口径/未退役archive，而不是原库又长回来。
+- 新空间上限、终态仅一份正文与及时临时/历史checkout收尾已写入N4；尚未实施，不以最终bundle2%样本比例外推全库，也不把本次收尾冒充无限生产daemon可用。
+
 ## 2026-10-03 — 快CI发现既有初始化竞态
 
 - B3发布`6ab25373`的Actions37121441436结束48s，Unit为1failed/1115passed/14.91s；唯一失败M14并发初始化，实际异常`UnknownSchemaError: unrecognized tables in uninitialized database: ['runtime_gate']`。归档清理检查未失败，生产apply仍未执行；不删M14、不串行化测试、不盲加timeout。

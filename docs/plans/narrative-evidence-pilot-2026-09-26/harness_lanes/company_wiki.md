@@ -1,5 +1,7 @@
 # CWP 独占施工卡：来源、叙述证据与 Worker
 
+> **当前入口覆盖（2026-10-03）：**G-C/B1/B3/B4已完成，27旧checkout与两archive实删12.152904GiB、原文/主库不变；d61b8f6/CI57秒绿，见[收尾](results/gd_b3_retirement_2026-10-03.md)。现在只按[Phase62/N4A](../n4_production_batch_implementation.md)先写scope RED再实现，后续真实model/计量/预算/降容与B2切换。下方先B3/B4/N3a/consumer pending均为历史，不重做；旧生产Worker仍paused。
+
 > **2026-10-03 当前入口：**G-A/N3a/G-C已完成；RF `6fb2def7`/StockWiki `ae0b3e3`已并主线，RF推送及CI全绿，见[G-C收尾](results/gc_consumer_closeout_2026-10-03.md)。当前先实施[B3精确archive退役](../gd_b3_archive_retirement_implementation.md)和[B4旧checkout清理](../gd_b4_worktree_cleanup_2026-10-03.md)，之后[N4生产composition/model/预算](../n4_production_batch_implementation.md)。下方G-C pending/N3a施工均为历史，勿重复。原件保留、Worker paused。
 
 > **2026-10-03 最新状态覆盖：**CWP `master@2e674cc`、FF `origin/main@c47c397`（已核远端 ref）、ET `main@4924d57` 与 RF `main@0573c40` 已发布。G-A0/G-A1 和 FF transcript companion 已完成；当前三仓 `test_source_ref_v2_three_repo_e2e.py` 用这些 FF/CWP/RF 提交通过（1 passed，8.69 秒），独立根 `.ga-mainline-20261003` 已清理。G-A 选定接口范围已收口，下一步为正在实施的 [N3a 叙述传输细则](../narrative_transport_implementation.md)；RF/StockWiki selected 消费 G-C 仍 pending，G-D 和生产 Worker 仍 paused。

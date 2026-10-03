@@ -1,5 +1,7 @@
 # 六仓独占施工与总指挥集成计划（2026-09-29）
 
+> **当前派发覆盖（2026-10-03）：**G-C两consumer/B3清理器/B4两批已完成，实际收尾见[收据](harness_lanes/results/gd_b3_retirement_2026-10-03.md)。这四条已完成线勿重新派发。下一步[N4A](n4_production_batch_implementation.md)由CWP独占Store/Worker/Supervisor/outbox scope；模型HTTP独立新文件可在接口冻结后并行，共享Store/schema/prompt保持单owner。N4尚未实施，其他仓owner文件保留，原文保留、Worker paused。下方“本轮B3/B4”是历史编排。
+
 > **最新派发：**G-C两consumer已交付并主线：RF `6fb2def7`正常推送/CI全绿，StockWiki `ae0b3e3`本地merge且无remote不新增，见[G-C收尾](harness_lanes/results/gc_consumer_closeout_2026-10-03.md)。本轮仅两条独占工作：B3 agent拥有精确archive清理器/受影响测试，总指挥负责PWF/ADR/发布/生产apply；B4 agent仅移除[23普通旧工作树](gd_b4_worktree_cleanup_2026-10-03.md)/写独占收据，Git写入期间总指挥不同时提交。N4模型/生产运行尚未实施，后续按[N4卡](n4_production_batch_implementation.md)拆线。RF/StockWiki旧consumer卡是交付历史，不能重新派发。其他owner文件保留，原件保留、Worker paused。
 
 > **2026-10-03 最新编排覆盖：**CWP `master@2e674cc`、FF `origin/main@c47c397`（远端 ref 已核）、ET `main@4924d57`、RF `main@0573c40` 已发布；G-A0/G-A1、FF companion 和选定范围的 G-A 汇合已完成。当前 FF→CWP→RF 三仓 SourceRef E2E 为 1 passed / 8.69 秒，独立测试根 `.ga-mainline-20261003` 已清理。FF→ET→CWP 历史节点包 191 passed / 1 skipped 见 [Phase 58](task_plan.md)，不代表 live FMP 200（历史真实请求为 402）。RF [Actions 37110072067](https://github.com/zhengcb81/revenue-forecast/actions/runs/37110072067) 两 job 全绿：verify 2 分 15 秒、real-roots 1 分 40 秒。

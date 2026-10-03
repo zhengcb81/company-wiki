@@ -1,5 +1,16 @@
 # Progress：叙述性证据试点
 
+## 2026-10-03 — B3/B4生产整理收尾
+
+- d61b8f6/CI57秒绿后生产exact apply，39.728s，两archive实删11,406,183,129B；currentDB完整SHA/size/mtime不变，两路径缺席。重复apply回放且newly_deleted_bytes=0，B1旧收据在archive退役后仍正常回显（历史bytes不重计）。见[实际收尾](harness_lanes/results/gd_b3_retirement_2026-10-03.md)。
+- 本轮B3+27旧checkout合计释放13,049,081,047B/12.152904GiB。fresh三根31,286,231,649B/29.137574GiB、错误/reparse0；公司资料目录仍25,198,502,813B。主仓可读+6剩余checkout共32.821GB/30.567GiB，全仓24历史ACL测试目录不可读，明确为可读下界而非全仓clean。两个history ref已推远端；managed3仍实际存在不计收益。
+- Phase61完成；当前入口统一改为Phase62/N4A scope→N4B/C→B2。Worker保持paused，真实model/composition尚未实施；记录实际收益不等于整个项目完成。收据/PWF普通提交推送，完成进度及时发布。
+
+## 2026-10-03 — 初始化竞态发布验收
+
+- `d61b8f645bf871c0feb3834d7fba4f2b91fd496a`已正常commit/push，commit smoke与fast pre-push全绿；[Actions37122264065](https://github.com/zhengcb81/company-wiki/actions/runs/37122264065)成功，单job57秒，原M14故障消失。两历史ref也已普通推远端，不需要保留完整旧checkout。
+- CI保持单job/5分钟硬上限/无自动全仓coverage；只加一个确定性廉价case。B3生产apply依据此已发布绿灯执行，最终字节/数据库/路径状态见随后的收据，不把预期当实删。
+
 ## 2026-10-03 — B3正常发布后CI竞态修复，生产apply未执行
 
 - `6ab25373`已正常commit/push，Ruff/config/host/fast pre-push均绿；远端Actions37121441436约48秒完成，M14并发初始化1failed，其他1115项Unit绿。认证日志定位旧version与新runtime_gate混合视图，交实现线只修migrations.py/对应测试，先确定性RED、保留坏库拒绝和原M14，CI绿前不apply。

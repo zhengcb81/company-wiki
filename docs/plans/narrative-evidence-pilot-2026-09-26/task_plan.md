@@ -1,6 +1,6 @@
 # 叙述性证据选择与摘要：小范围试点及实施方案
 
-> **2026-10-03 当前入口（用户已恢复）：**G-C两consumer已收尾并主线：StockWiki `ae0b3e3`、RF `6fb2def7`，RF推送/CI全绿，原4处owner dirty保留。B4首批23旧checkout实删1.317437GiB；B3窄清理器64节点与1个中文路径回归绿，生产dry-run核两archive，待普通发布/CI后精确apply。另按[B4补卡](gd_b4_historical_receipts_cleanup_2026-10-03.md)保留历史ref/已有报告后整理4旧审查根。空间未反弹，原文/主库不变；B3预计释放10.623GiB，以实际收据为准。随后[N4](n4_production_batch_implementation.md)真实composition/model/预算/终态降容和B2调用者切换，勿重做G-A/N3a/E-B/G-C。生产Worker继续paused，原件保留。
+> **2026-10-03 当前入口（用户已恢复）：**G-C已并主线；B1/B3/B4完成。B3两旧派生archive实删10.622836GiB，B4共27旧checkout实删1.530068GiB，本轮合计**12.152904GiB**，见[实际收尾](harness_lanes/results/gd_b3_retirement_2026-10-03.md)。三资料根29.137574GiB，主仓可读及剩余worktree合计32.821十进制GB；公司资料25.20GB/主库SHA/mtime不变，没有空间反弹。初始化竞态修复`d61b8f6`已发布，Actions37122264065绿/57秒。唯一下一步是[N4A批次scope](n4_production_batch_implementation.md)，再真实composition/model/预算/终态降容、B2调用者切换。不要重做已验收线，不删除原件；managed三附件仅UI归档未物理移除，不计释放；Worker仍paused。
 
 > **2026-10-03 B1执行时快照（已由首段覆盖）：**G-D B1发布 `9f986ad`（Actions37115171888成功/55秒），精确删除重复snapshot，释放3,055,796,224B/2.846GiB，主库SHA/mtime不变。见[实际收据](harness_lanes/results/gd_b1_retirement_2026-10-03.md)。当时G-C尚待局部修复；现G-C已完成，未来步骤以首段、Phase61和Next Step为准，历史未勾选项不作为派发清单。
 
@@ -752,11 +752,19 @@ G-A1尚未由producer/filing-fetch表示FF→ET→CWP下载完整链完成；真
 - [x] 只读实测无空间反弹；旧46GiB数据库与当前全资料目录口径分开，空间/worktree分类记录待归档。
 - [x] 16表metadata全digest相等，scan_runs原480行digest相等、额外一次零文件错误扫描；旧归档无runtime cold reader，现查询已拒绝。按[实施卡](gd_b3_archive_retirement_implementation.md)冻结窄清理范围和一个节点包。
 - [x] B3先RED→精确plan/apply/resume工具及旧query中性诊断→真实隔离节点64passed/45.23s；B1已完成回显不依赖仍存在的归档，新的snapshot删除不放宽。发现PS重定向损坏中文路径，增加GBK下正式unicode CLI RED→GREEN1passed/1.26s，ASCII JSON输出及纠正生产dry-run通过；Ruff/host绿、独立只读大节点审查无阻塞。
-- [ ] 普通commit/push/CI后生产删除两个精确派生archive，保留currentDB/source/version/raw、小收据，记录实际bytes/free。
+- [x] 普通commit/push及d61b8f6/CI57秒绿后生产删除两个精确派生archive，实删11,406,183,129B；currentDB/source/version/raw、小收据保留，完整DB SHA/size/mtime不变。重复apply新删0；B1完成收据仍可回显。详见[实际收据](harness_lanes/results/gd_b3_retirement_2026-10-03.md)。
 - [x] 按[B4精确卡](gd_b4_worktree_cleanup_2026-10-03.md)普通移除23旧checkout，逻辑释放1.317437GiB，原文/主库/配置/Worker控制不变；见[收据](harness_lanes/results/worktree_cleanup_2026-10-03.md)。managed附件仍实际存在，不计收益。
 - [x] 按[B4历史补批](gd_b4_historical_receipts_cleanup_2026-10-03.md)保留两Git历史ref、核四份报告已同blob存main后移除四旧checkout，再释放0.212631GiB；不新增重复报告副本、不动pinned/managed/其他仓。历史ref随收尾正常推送。
-- [ ] B3发布6ab25373后CI唯一M14初始化竞态，确定性RED复现旧version/新table混合视图；shared readonly snapshot修复/两平台聚焦节点/同一廉价regression纳入既有快速门，绿后再生产apply。
+- [x] B3发布6ab25373后CI唯一M14初始化竞态，确定性RED复现旧version/新table混合视图；shared readonly snapshot修复/两平台各32项绿，同一廉价regression纳入既有快速门，d61b8f6/Actions37122264065绿后生产apply。未删M14、未新增长测。
+
+## Phase 62：N4生产批次（未实施）
+
+- [ ] 按[N4接口/所有权细则](n4_production_batch_implementation.md)先N4A scope的确定性RED，再串通Store claim/promote/reap、Worker/Supervisor、outbox/prepared；None兼容旧daemon、空scope零操作，外批job/effect不动。
+- [ ] N4B同一Store的持久run/token/cost/输出预算，真实薄HTTP model adapter/完整draft prompt、production factory与显式bounded batch CLI；禁止test Replay进入生产、隐式重试/fallback、零usage冒充计量。
+- [ ] 终态正文仅一份、小型恢复/usage收据和三个新增空间预算；合同/集成集中节点A、正式本地HTTP CLI E2E节点B，不增加小节点审查。
+- [ ] 节点C在独立测试根真实小批（按卡的token/费用上限与原语言），消费者读取、吞吐/总占用/中断恢复/原件fingerprint复核，普通提交推送与精简CI。不得直接启动旧无限Worker或假报已生产。
+- [ ] 新调用者切换后按B2实际引用/共享路径/冲突对账删除旧derived/index；managed物理归档/24历史ACL scratch另记诊断，不阻上述scope/model开发，原文不删。
 
 ## Next Step
 
-G-C/B1已完成。先执行Phase61独立B3和旧checkout整理，再N4生产composition/usage/budget/retention与B2调用者切换。按[精确归档卡](gd_b3_archive_retirement_implementation.md)只在一个大节点测，普通发布后apply。不要重复4份原文/全仓长测，不删除原件，生产Worker保持paused。
+Phase61已收尾；唯一下一步按[N4A](n4_production_batch_implementation.md)实现限定批次scope（先RED）。随后N4B/C真实模型/计量/恢复/总占用，最后B2引用切换后的精确清理。复用G-C/B1/B3/B4收据，不重hash大库/恢复归档/复跑4份旧Replay文档或全仓长测；保留原件，旧生产Worker继续paused。

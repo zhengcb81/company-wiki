@@ -15,6 +15,8 @@
 
 实施与验收见[当前B3卡](../plans/narrative-evidence-pilot-2026-09-26/gd_b3_archive_retirement_implementation.md)和[主计划Phase61](../plans/narrative-evidence-pilot-2026-09-26/task_plan.md)。下方90天/归档保护陈述保留为当时历史，不再充当本批前置。
 
+**已实际执行：**2026-10-03 `d61b8f6`正常发布/CI57秒绿后精确删除两archive11,406,183,129B，currentDB完整SHA/size/mtime不变；重复apply新增0，B1历史收据仍可回显。原始下载和来源事实保留。[实际收尾](../plans/narrative-evidence-pilot-2026-09-26/harness_lanes/results/gd_b3_retirement_2026-10-03.md)及小型durable收据成为当前状态，不再表示仅待执行。
+
 ## Context
 
 `.source_catalog/catalog.sqlite3` 达 43.9 GB（evidence_spans 25,985,291 行），其中 **95% 挂 phase-15.6 审计文档**（9,578 份"审计但 active"）；软删除永不物理回收；归一化仅 11%（pending 20,728）；单元格级证据粒度导致体积倍数（原文 23.4 GB → 证据库 43.9 GB）。若全量按现状粒度归一化，粗估 100 GB+。

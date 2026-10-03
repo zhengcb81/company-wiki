@@ -1,6 +1,6 @@
 # N4：可运行的叙述批次、真实模型计量与持久恢复
 
-> 2026-10-03 未实施细则。G-A / N3a / G-C来源消费已完成；当前先执行[独立B3退役](gd_b3_archive_retirement_implementation.md)与旧checkout整理，再进入N4。先完成本文接口与RED，再实现；保留现有AUTO唯一任务库、Supervisor、三步handler/projector，不启动旧normalize Worker。只在三个大节点验收，helper不增加审查。原件及来源/版本事实保留。
+> 2026-10-03 未实施细则。G-A/N3a/G-C、B1/B3/B4已完成，见[实际整理收尾](harness_lanes/results/gd_b3_retirement_2026-10-03.md)；当前唯一下一步N4A scope RED→实现。先按本文冻结接口，再实现；保留现有AUTO唯一任务库、Supervisor、三步handler/projector，不启动旧normalize Worker。只在三个大节点验收，helper不增加审查。原件及来源/版本事实保留。shared readonly migration snapshot竞态已修，复用既有32项两平台/CI收据，不重开同一修复。
 
 ## 1. 已核缺口与目标
 
@@ -72,7 +72,7 @@
 
 ## 4. 顺序与完成定义
 
-1. G-C来源消费与B1已完成；先独立B3/旧checkout整理，已有metadata证明不用等待N4。
+1. G-C来源消费及B1/B3/B4已完成；现在从N4A开始，不重新恢复/重hash已删除归档或重做旧checkout整理。
 2. N4A scope 先 RED→GREEN；与独立模型 HTTP 新文件可以并行，共享 Store/schema/prompt 只由一条 owner 实施。
 3. N4B 计量/预算/模型 prompt/factory/batch/retention→节点 A+B 集中验收。
 4. N4C真实小批→消费者读取→普通发布，再更新 G-D B2 调用者清单和生产可清理批次。

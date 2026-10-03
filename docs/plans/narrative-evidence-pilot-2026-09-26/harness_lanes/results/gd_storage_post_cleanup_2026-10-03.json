@@ -1,0 +1,653 @@
+{
+  "schema": "gd-storage-post-cleanup/1",
+  "generated_at_utc": "2026-10-03T12:21:21.997373+00:00",
+  "main_head": "d61b8f645bf871c0feb3834d7fba4f2b91fd496a",
+  "main_folders": {
+    ".benchmarks": {
+      "bytes": 0,
+      "files": 0,
+      "errors": [],
+      "reparse": []
+    },
+    ".codegraph": {
+      "bytes": 34035025,
+      "files": 5,
+      "errors": [],
+      "reparse": []
+    },
+    ".git": {
+      "bytes": 184096340,
+      "files": 1395,
+      "errors": [],
+      "reparse": []
+    },
+    ".githooks": {
+      "bytes": 1610,
+      "files": 2,
+      "errors": [],
+      "reparse": []
+    },
+    ".github": {
+      "bytes": 6109,
+      "files": 1,
+      "errors": [],
+      "reparse": []
+    },
+    ".ingested": {
+      "bytes": 509568,
+      "files": 3509,
+      "errors": [],
+      "reparse": []
+    },
+    ".mimocode": {
+      "bytes": 50208211,
+      "files": 3407,
+      "errors": [],
+      "reparse": []
+    },
+    ".mypy_cache": {
+      "bytes": 41840291,
+      "files": 1194,
+      "errors": [],
+      "reparse": []
+    },
+    ".obsidian": {
+      "bytes": 2298,
+      "files": 6,
+      "errors": [],
+      "reparse": []
+    },
+    ".pytest_cache": {
+      "bytes": 644437,
+      "files": 5,
+      "errors": [],
+      "reparse": []
+    },
+    ".rf-ca301-safe-20261003": {
+      "bytes": 0,
+      "files": 0,
+      "errors": [
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.rf-ca301-safe-20261003",
+          "error_type": "PermissionError"
+        }
+      ],
+      "reparse": []
+    },
+    ".rf-ca301-suite-20261003": {
+      "bytes": 0,
+      "files": 0,
+      "errors": [
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.rf-ca301-suite-20261003",
+          "error_type": "PermissionError"
+        }
+      ],
+      "reparse": []
+    },
+    ".rf-ca301-suite-20261003b": {
+      "bytes": 0,
+      "files": 0,
+      "errors": [
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.rf-ca301-suite-20261003b",
+          "error_type": "PermissionError"
+        }
+      ],
+      "reparse": []
+    },
+    ".rf-ci-first-failure-20261003": {
+      "bytes": 0,
+      "files": 0,
+      "errors": [
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.rf-ci-first-failure-20261003",
+          "error_type": "PermissionError"
+        }
+      ],
+      "reparse": []
+    },
+    ".rf-ci-first-safe-20261003": {
+      "bytes": 0,
+      "files": 0,
+      "errors": [
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.rf-ci-first-safe-20261003",
+          "error_type": "PermissionError"
+        }
+      ],
+      "reparse": []
+    },
+    ".rf-ci-focused-temp-20261003": {
+      "bytes": 0,
+      "files": 0,
+      "errors": [
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.rf-ci-focused-temp-20261003",
+          "error_type": "PermissionError"
+        }
+      ],
+      "reparse": []
+    },
+    ".rf-ci-focused-temp-20261003b": {
+      "bytes": 0,
+      "files": 0,
+      "errors": [
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.rf-ci-focused-temp-20261003b",
+          "error_type": "PermissionError"
+        }
+      ],
+      "reparse": []
+    },
+    ".rf-ci-rest-base-20261003": {
+      "bytes": 0,
+      "files": 0,
+      "errors": [
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.rf-ci-rest-base-20261003",
+          "error_type": "PermissionError"
+        }
+      ],
+      "reparse": []
+    },
+    ".rf-ci-rootcause-base-20261003": {
+      "bytes": 0,
+      "files": 0,
+      "errors": [
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.rf-ci-rootcause-base-20261003",
+          "error_type": "PermissionError"
+        }
+      ],
+      "reparse": []
+    },
+    ".rf-ci-rootcause-base2-20261003": {
+      "bytes": 0,
+      "files": 0,
+      "errors": [
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.rf-ci-rootcause-base2-20261003",
+          "error_type": "PermissionError"
+        }
+      ],
+      "reparse": []
+    },
+    ".rf-ci-second-firstfail-20261003": {
+      "bytes": 0,
+      "files": 0,
+      "errors": [
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.rf-ci-second-firstfail-20261003",
+          "error_type": "PermissionError"
+        }
+      ],
+      "reparse": []
+    },
+    ".rf-ci-suite-final-20261003": {
+      "bytes": 0,
+      "files": 0,
+      "errors": [
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.rf-ci-suite-final-20261003",
+          "error_type": "PermissionError"
+        }
+      ],
+      "reparse": []
+    },
+    ".rf-ci-tail-base-20261003": {
+      "bytes": 0,
+      "files": 0,
+      "errors": [
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.rf-ci-tail-base-20261003",
+          "error_type": "PermissionError"
+        }
+      ],
+      "reparse": []
+    },
+    ".rf-compat-tests-base-20261003": {
+      "bytes": 0,
+      "files": 0,
+      "errors": [
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.rf-compat-tests-base-20261003",
+          "error_type": "PermissionError"
+        }
+      ],
+      "reparse": []
+    },
+    ".rf-fc1102-current-wiki-20261003": {
+      "bytes": 0,
+      "files": 0,
+      "errors": [
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.rf-fc1102-current-wiki-20261003",
+          "error_type": "PermissionError"
+        }
+      ],
+      "reparse": []
+    },
+    ".rf-fc1102-temp-20261003": {
+      "bytes": 0,
+      "files": 0,
+      "errors": [
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.rf-fc1102-temp-20261003\\pytest-of-郑曾波",
+          "error_type": "PermissionError"
+        }
+      ],
+      "reparse": []
+    },
+    ".rf-fc1307-tmp-20261003": {
+      "bytes": 0,
+      "files": 0,
+      "errors": [
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.rf-fc1307-tmp-20261003",
+          "error_type": "PermissionError"
+        }
+      ],
+      "reparse": []
+    },
+    ".rf-meta-tests-20261003": {
+      "bytes": 0,
+      "files": 0,
+      "errors": [
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.rf-meta-tests-20261003",
+          "error_type": "PermissionError"
+        }
+      ],
+      "reparse": []
+    },
+    ".rf-prepush-tmp-20261003c": {
+      "bytes": 0,
+      "files": 0,
+      "errors": [
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.rf-prepush-tmp-20261003c\\pytest-of-郑曾波",
+          "error_type": "PermissionError"
+        }
+      ],
+      "reparse": []
+    },
+    ".rf-source-reader-guard-20261003": {
+      "bytes": 0,
+      "files": 0,
+      "errors": [
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.rf-source-reader-guard-20261003",
+          "error_type": "PermissionError"
+        }
+      ],
+      "reparse": []
+    },
+    ".rf-source-reader-guard-20261003b": {
+      "bytes": 0,
+      "files": 0,
+      "errors": [
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.rf-source-reader-guard-20261003b",
+          "error_type": "PermissionError"
+        }
+      ],
+      "reparse": []
+    },
+    ".rf-zr1102-collect-20261003": {
+      "bytes": 0,
+      "files": 0,
+      "errors": [
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.rf-zr1102-collect-20261003",
+          "error_type": "PermissionError"
+        }
+      ],
+      "reparse": []
+    },
+    ".ruff_cache": {
+      "bytes": 169996,
+      "files": 177,
+      "errors": [],
+      "reparse": []
+    },
+    ".source_catalog": {
+      "bytes": 6087728193,
+      "files": 8220,
+      "errors": [],
+      "reparse": []
+    },
+    ".state": {
+      "bytes": 69632,
+      "files": 2,
+      "errors": [],
+      "reparse": []
+    },
+    ".tmp-e2e": {
+      "bytes": 0,
+      "files": 0,
+      "errors": [],
+      "reparse": []
+    },
+    ".tmp-pytest-narrative-cap": {
+      "bytes": 0,
+      "files": 0,
+      "errors": [
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp-pytest-narrative-cap",
+          "error_type": "PermissionError"
+        }
+      ],
+      "reparse": []
+    },
+    ".tmp-pytest-narrative-g1": {
+      "bytes": 0,
+      "files": 0,
+      "errors": [
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp-pytest-narrative-g1",
+          "error_type": "PermissionError"
+        }
+      ],
+      "reparse": []
+    },
+    ".venv": {
+      "bytes": 54463401,
+      "files": 5001,
+      "errors": [],
+      "reparse": []
+    },
+    ".verification": {
+      "bytes": 0,
+      "files": 0,
+      "errors": [],
+      "reparse": []
+    },
+    "artifacts": {
+      "bytes": 86782297,
+      "files": 227,
+      "errors": [],
+      "reparse": []
+    },
+    "assurance": {
+      "bytes": 789600,
+      "files": 122,
+      "errors": [],
+      "reparse": []
+    },
+    "build": {
+      "bytes": 840764,
+      "files": 79,
+      "errors": [],
+      "reparse": []
+    },
+    "companies": {
+      "bytes": 25198502813,
+      "files": 33133,
+      "errors": [],
+      "reparse": []
+    },
+    "config": {
+      "bytes": 495611,
+      "files": 30,
+      "errors": [],
+      "reparse": []
+    },
+    "configs": {
+      "bytes": 0,
+      "files": 0,
+      "errors": [],
+      "reparse": []
+    },
+    "control": {
+      "bytes": 19543,
+      "files": 12,
+      "errors": [],
+      "reparse": []
+    },
+    "CUsers郑曾波Projectscompany-wikiartifactsgatescw-2.28": {
+      "bytes": 0,
+      "files": 0,
+      "errors": [],
+      "reparse": []
+    },
+    "docs": {
+      "bytes": 14805410,
+      "files": 372,
+      "errors": [],
+      "reparse": []
+    },
+    "drills": {
+      "bytes": 9420,
+      "files": 1,
+      "errors": [],
+      "reparse": []
+    },
+    "examples": {
+      "bytes": 1402,
+      "files": 1,
+      "errors": [],
+      "reparse": []
+    },
+    "future_lake": {
+      "bytes": 545,
+      "files": 1,
+      "errors": [],
+      "reparse": []
+    },
+    "logs": {
+      "bytes": 174,
+      "files": 1,
+      "errors": [],
+      "reparse": []
+    },
+    "scripts": {
+      "bytes": 4835521,
+      "files": 341,
+      "errors": [],
+      "reparse": []
+    },
+    "sectors": {
+      "bytes": 564155447,
+      "files": 195,
+      "errors": [],
+      "reparse": []
+    },
+    "source_manifests": {
+      "bytes": 643,
+      "files": 1,
+      "errors": [],
+      "reparse": []
+    },
+    "source_provenance": {
+      "bytes": 1632,
+      "files": 1,
+      "errors": [],
+      "reparse": []
+    },
+    "src": {
+      "bytes": 9467448,
+      "files": 628,
+      "errors": [],
+      "reparse": []
+    },
+    "tests": {
+      "bytes": 33515691,
+      "files": 1638,
+      "errors": [],
+      "reparse": []
+    },
+    "themes": {
+      "bytes": 171405,
+      "files": 10,
+      "errors": [],
+      "reparse": []
+    },
+    "tmp": {
+      "bytes": 1368646,
+      "files": 38,
+      "errors": [],
+      "reparse": []
+    },
+    "tools": {
+      "bytes": 68747,
+      "files": 10,
+      "errors": [],
+      "reparse": []
+    },
+    "web": {
+      "bytes": 87154407,
+      "files": 315,
+      "errors": [],
+      "reparse": []
+    },
+    "__pycache__": {
+      "bytes": 58996,
+      "files": 5,
+      "errors": [],
+      "reparse": []
+    }
+  },
+  "main_top_file_bytes": 21711573,
+  "main_readable_bytes": 32478532846,
+  "three_data_roots_bytes": 31286231649,
+  "other_worktrees": {
+    "C:\\Users\\郑曾波\\.codex\\worktrees\\data-lake-reader\\company-wiki": {
+      "bytes": 125485516,
+      "files": 2378,
+      "errors": [],
+      "reparse": []
+    },
+    "C:\\Users\\郑曾波\\.codex\\worktrees\\rf-state-audit\\company-wiki": {
+      "bytes": 72492226,
+      "files": 1809,
+      "errors": [],
+      "reparse": []
+    },
+    "C:\\Users\\郑曾波\\.codex\\worktrees\\transcript-companion\\company-wiki": {
+      "bytes": 71519645,
+      "files": 1746,
+      "errors": [],
+      "reparse": []
+    },
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\company-wiki": {
+      "bytes": 73142856,
+      "files": 1848,
+      "errors": [],
+      "reparse": []
+    },
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cw-preb": {
+      "bytes": 72,
+      "files": 1,
+      "errors": [],
+      "reparse": []
+    },
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\r4b02-preb02": {
+      "bytes": 77,
+      "files": 1,
+      "errors": [],
+      "reparse": []
+    }
+  },
+  "other_worktree_bytes": 342640392,
+  "combined_readable_bytes": 32821173238,
+  "companies_bytes_unchanged": true,
+  "whole_main_is_readable_lower_bound": true,
+  "archive_repeat": {
+    "current_after": {
+      "byte_size": 3055800320,
+      "mtime_ns": 1790490231504738600,
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.source_catalog\\catalog.sqlite3",
+      "relative_path": ".source_catalog/catalog.sqlite3",
+      "sha256": "30794a01e04a9e77ec13cd7b27a3f24bf9861bda9fc7c3c50a2b362830fbc823"
+    },
+    "current_before": {
+      "byte_size": 3055800320,
+      "mtime_ns": 1790490231504738600,
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.source_catalog\\catalog.sqlite3",
+      "relative_path": ".source_catalog/catalog.sqlite3",
+      "sha256": "30794a01e04a9e77ec13cd7b27a3f24bf9861bda9fc7c3c50a2b362830fbc823"
+    },
+    "deleted_bytes": 11406183129,
+    "free_bytes_after": 138599047168,
+    "free_bytes_before": 127238299648,
+    "free_bytes_before_this_call": 127238299648,
+    "newly_deleted_bytes": 0,
+    "plan": {
+      "audit_sha256": "4c01433143d6663d314dc337f0d1f5679d7f8c5528bcba0df2a751d8ba878cad",
+      "basis": {
+        "prepared": {
+          "byte_size": 4288,
+          "mtime_ns": 1790447401732883300,
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.source_catalog\\retirement\\20260926T170825Z-4a9c67e1\\prepared.json",
+          "relative_path": ".source_catalog/retirement/20260926T170825Z-4a9c67e1/prepared.json",
+          "sha256": "cebcc51daf0a13a5f583273a1f0c3218f265fbe845fd8656e38cd82a30805cd9"
+        },
+        "retired": {
+          "byte_size": 1113,
+          "mtime_ns": 1790449614812055200,
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.source_catalog\\retirement\\20260926T170825Z-4a9c67e1\\retired.json",
+          "relative_path": ".source_catalog/retirement/20260926T170825Z-4a9c67e1/retired.json",
+          "sha256": "6f7f1b88b36aa93f22056627143fa3dd1c4bdd8d4ce3032ab1a1d4a78008b8e9"
+        }
+      },
+      "candidate_deleted_bytes": 11406183129,
+      "current_database": {
+        "byte_size": 3055800320,
+        "mtime_ns": 1790490231504738600,
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.source_catalog\\catalog.sqlite3",
+        "relative_path": ".source_catalog/catalog.sqlite3",
+        "sha256": "30794a01e04a9e77ec13cd7b27a3f24bf9861bda9fc7c3c50a2b362830fbc823"
+      },
+      "old_span_restore_guaranteed": false,
+      "project_root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "schema": "derived-archive-retirement-plan/1",
+      "targets": [
+        {
+          "byte_size": 6198704362,
+          "existing_full_stream_validation": {
+            "decompressed_bytes": 49677344768,
+            "decompressed_sha256": "69f498a23895c5a693621d9ee754b20bb9d6fbc199b684dc16e950d00b8fd7b7",
+            "full_disk_restore_performed": false,
+            "zstd_test": "ok"
+          },
+          "is_original_download": false,
+          "kind": "old_full_catalog_derivative_snapshot",
+          "matches_prepared_and_retired": true,
+          "mtime_ns": 1789799495000000000,
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.source_catalog\\retirement\\20260926T170825Z-4a9c67e1\\catalog.full.sqlite3.zst",
+          "relative_path": ".source_catalog/retirement/20260926T170825Z-4a9c67e1/catalog.full.sqlite3.zst",
+          "sha256": "1bc09746b8ee18db91fbbd14c97410241ad9a54d3f45a6468886692e763edd9e"
+        },
+        {
+          "adjacent_manifest_exists": false,
+          "byte_size": 5207478767,
+          "is_original_download": false,
+          "kind": "legacy_retired_evidence_derivatives",
+          "manifest_files_in_directory": [],
+          "mtime_ns": 1786094396327175400,
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\source_manifests\\archive\\2026-08-07\\retired-evidence.jsonl.gz",
+          "relative_path": "source_manifests/archive/2026-08-07/retired-evidence.jsonl.gz",
+          "sha256": "a3a6b2782350820cdf9a466e074685f9b377e2df46b42c11077a5c7ae1842109"
+        }
+      ]
+    },
+    "reconciled": false,
+    "recovered_deleted_bytes": 0,
+    "replayed": true,
+    "status": "removed",
+    "target_states": [
+      "removed",
+      "removed"
+    ]
+  },
+  "b1_historical_replay": {
+    "status": "removed",
+    "historical_deleted_bytes": 3055796224,
+    "new_deletion_this_call": 0
+  },
+  "b3_deleted_bytes": 11406183129,
+  "b4_deleted_bytes": 1642897918,
+  "this_cleanup_logical_deleted_bytes": 13049081047,
+  "worker_control": "paused"
+}
