@@ -1,0 +1,103 @@
+{
+  "schema": "test-scratch-force-cleanup/1",
+  "generated_at_utc": "2026-10-03T12:54:54.2491778Z",
+  "account": "DESKTOP-156V213\\CodexSandboxOffline",
+  "method": "native PowerShell literal exact roots Recurse Force; no ACL changes",
+  "first_receipt_sha": "57D1268D58C2E5E9D4D6DD542E589233B169A9B06F2BCBDF5D243476887EF79F",
+  "plan_sha": "A093330EE36EC42DC44F2E6B9353D069625A4336E9BE1B6EE245E5AF55DB0B23",
+  "production_before": {
+    "bytes": 3055800320,
+    "control_sha": "9FCBE233EFE76222A32316C07B9273B9C5128DA3AF6DB27D706B1759680AC7BD",
+    "mtime_ticks": 639260870315047386
+  },
+  "production_after": {
+    "bytes": 3055800320,
+    "control_sha": "9FCBE233EFE76222A32316C07B9273B9C5128DA3AF6DB27D706B1759680AC7BD",
+    "mtime_ticks": 639260870315047386
+  },
+  "production_unchanged": true,
+  "rows": [
+    {
+      "name": ".rf-ci-first-failure-20261003",
+      "root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.rf-ci-first-failure-20261003",
+      "bytes": 51223,
+      "files": 30,
+      "removed": true,
+      "error": null,
+      "newly_deleted_bytes": 51223
+    },
+    {
+      "name": ".rf-ci-first-safe-20261003",
+      "root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.rf-ci-first-safe-20261003",
+      "bytes": 51223,
+      "files": 30,
+      "removed": true,
+      "error": null,
+      "newly_deleted_bytes": 51223
+    },
+    {
+      "name": ".rf-ci-focused-temp-20261003",
+      "root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.rf-ci-focused-temp-20261003",
+      "bytes": 3798,
+      "files": 1,
+      "removed": true,
+      "error": null,
+      "newly_deleted_bytes": 3798
+    },
+    {
+      "name": ".rf-ci-focused-temp-20261003b",
+      "root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.rf-ci-focused-temp-20261003b",
+      "bytes": 3798,
+      "files": 1,
+      "removed": true,
+      "error": null,
+      "newly_deleted_bytes": 3798
+    },
+    {
+      "name": ".rf-ci-rest-base-20261003",
+      "root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.rf-ci-rest-base-20261003",
+      "bytes": 1652338,
+      "files": 296,
+      "removed": true,
+      "error": null,
+      "newly_deleted_bytes": 1652338
+    },
+    {
+      "name": ".rf-ci-rootcause-base-20261003",
+      "root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.rf-ci-rootcause-base-20261003",
+      "bytes": 3124071,
+      "files": 117,
+      "removed": true,
+      "error": null,
+      "newly_deleted_bytes": 3124071
+    },
+    {
+      "name": ".rf-ci-rootcause-base2-20261003",
+      "root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.rf-ci-rootcause-base2-20261003",
+      "bytes": 3474375,
+      "files": 137,
+      "removed": true,
+      "error": null,
+      "newly_deleted_bytes": 3474375
+    },
+    {
+      "name": ".rf-ci-second-firstfail-20261003",
+      "root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.rf-ci-second-firstfail-20261003",
+      "bytes": 1912849,
+      "files": 60,
+      "removed": true,
+      "error": null,
+      "newly_deleted_bytes": 1912849
+    },
+    {
+      "name": ".rf-ci-suite-final-20261003",
+      "root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.rf-ci-suite-final-20261003",
+      "bytes": 4009583,
+      "files": 310,
+      "removed": true,
+      "error": null,
+      "newly_deleted_bytes": 4009583
+    }
+  ],
+  "newly_deleted_bytes": 14283258
+}

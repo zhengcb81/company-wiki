@@ -1,0 +1,87 @@
+{
+  "schema": "gd-storage-final-cleanup/1",
+  "generated_at_utc": "2026-10-03T12:56:12.398101+00:00",
+  "measurement_note": "File sizes at this time; subsequent receipt/Git writes add small bytes. No raw content rehash.",
+  "main_head": "1d6e1da4c7719062624867fed22636706b922e78",
+  "main": {
+    "bytes": 32478972814,
+    "files": 60186,
+    "errors": [],
+    "reparse": []
+  },
+  "three_data_roots": {
+    "companies": {
+      "bytes": 25198502813,
+      "files": 33133,
+      "errors": [],
+      "reparse": []
+    },
+    ".source_catalog": {
+      "bytes": 6087728193,
+      "files": 8220,
+      "errors": [],
+      "reparse": []
+    },
+    "source_manifests": {
+      "bytes": 643,
+      "files": 1,
+      "errors": [],
+      "reparse": []
+    }
+  },
+  "other_worktrees": {
+    "C:\\Users\\郑曾波\\.codex\\worktrees\\data-lake-reader\\company-wiki": {
+      "bytes": 125485516,
+      "files": 2378,
+      "errors": [],
+      "reparse": []
+    },
+    "C:\\Users\\郑曾波\\.codex\\worktrees\\rf-state-audit\\company-wiki": {
+      "bytes": 72492226,
+      "files": 1809,
+      "errors": [],
+      "reparse": []
+    },
+    "C:\\Users\\郑曾波\\.codex\\worktrees\\transcript-companion\\company-wiki": {
+      "bytes": 71519645,
+      "files": 1746,
+      "errors": [],
+      "reparse": []
+    },
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\company-wiki": {
+      "bytes": 73142856,
+      "files": 1848,
+      "errors": [],
+      "reparse": []
+    },
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cw-preb": {
+      "bytes": 72,
+      "files": 1,
+      "errors": [],
+      "reparse": []
+    },
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\r4b02-preb02": {
+      "bytes": 77,
+      "files": 1,
+      "errors": [],
+      "reparse": []
+    }
+  },
+  "other_worktree_bytes": 342640392,
+  "combined_bytes": 32821613206,
+  "whole_scope_readable": true,
+  "deleted_scratch_root_count": 24,
+  "new_scratch_deleted_bytes": 14543053,
+  "b3_b4_earlier_deleted_bytes": 13049081047,
+  "this_turn_logical_deleted_bytes": 13063624100,
+  "source_roots_bytes_unchanged": true,
+  "catalog_size": 3055800320,
+  "catalog_mtime_ns": 1790490231504738600,
+  "worker_control_sha": "9fcbe233efe76222a32316c07b9273b9c5128da3af6db27d706b1759680ac7bd",
+  "worker_desired_state": "paused",
+  "managed_archive_files_still_present": [
+    "C:\\Users\\郑曾波\\.codex\\worktrees\\data-lake-reader\\company-wiki",
+    "C:\\Users\\郑曾波\\.codex\\worktrees\\rf-state-audit\\company-wiki",
+    "C:\\Users\\郑曾波\\.codex\\worktrees\\transcript-companion\\company-wiki"
+  ]
+}

@@ -1,6 +1,6 @@
 # company-wiki 清洁架构与 TDD 实施总图（2026-09-27）
 
-> **当前以Phase62为准（2026-10-03）：**G-C/B1/B3/B4已收尾，实删12.152904GiB；原文/currentDB不变，d61b8f6/CI57秒绿，见[收据](harness_lanes/results/gd_b3_retirement_2026-10-03.md)。下一步[N4A限定批次scope](n4_production_batch_implementation.md)，随后N4B/C真实模型/计量/终态收据与B2调用者切换。下方Phase61/B3待办为历史依据，不重新恢复已删归档/重跑消费线。生产Worker paused。
+> **2026-10-03 当前入口：**G-C/B1/B3/B4已收尾；两archive、27普通旧checkout、24测试根实删合计12.166448GiB/13.06GB。完整stat全仓及剩余worktree32.82GB/0读取错误；原件和当前库不变，见[最终收尾](harness_lanes/results/gd_storage_final_cleanup_2026-10-03.md)。唯一下一步[Phase62/N4A](n4_production_batch_implementation.md) scope RED→实现，随后N4B/C真实model/持久计量/预算/终态降容，再B2调用者切换。下方候选/待清/24树不可读均为历史依据，不重新执行；managed三根实际仍在不计释放，旧Worker paused。
 
 > **2026-10-03 执行入口：**M1/M2、E-B、G-A/N3a/G-C来源消费均完成；StockWiki `ae0b3e3`、RF `6fb2def7`已并主线，RF远端CI全绿。B1已精确释放2.846GiB；先做[Phase61](task_plan.md)的[B3两旧archive退役](gd_b3_archive_retirement_implementation.md)及[B4旧checkout整理](gd_b4_worktree_cleanup_2026-10-03.md)，随后按[N4细则](n4_production_batch_implementation.md)接真实模型、计量/预算/终态保留，再B2调用者切换。当前无空间反弹；原件和来源事实保留。本页较早“下一步”属于历史，完成进度普通推送，Worker保持paused。
 

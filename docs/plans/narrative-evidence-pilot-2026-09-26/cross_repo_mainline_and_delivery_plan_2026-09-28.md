@@ -1,6 +1,6 @@
 # 跨仓主线整合与 company-wiki 后续交付总计划（2026-09-28）
 
-> **当前以Phase62为准（2026-10-03）：**G-C/B1/B3/B4已完成；27旧checkout与两个派生archive合计实删12.152904GiB，原文/来源库不变。修复d61b8f6的CI绿/57秒，见[实际收尾](harness_lanes/results/gd_b3_retirement_2026-10-03.md)。下一步[N4A批次scope](n4_production_batch_implementation.md)→真实model/composition/计量/降容→B2引用切换。下方先执行B3/consumer修复/并线均为历史，勿重复。Worker保持paused。
+> **2026-10-03 当前入口：**G-C/B1/B3/B4已收尾；两archive、27普通旧checkout、24测试根实删合计12.166448GiB/13.06GB。完整stat全仓及剩余worktree32.82GB/0读取错误；原件和当前库不变，见[最终收尾](harness_lanes/results/gd_storage_final_cleanup_2026-10-03.md)。唯一下一步[Phase62/N4A](n4_production_batch_implementation.md) scope RED→实现，随后N4B/C真实model/持久计量/预算/终态降容，再B2调用者切换。下方候选/待清/24树不可读均为历史依据，不重新执行；managed三根实际仍在不计释放，旧Worker paused。
 
 > **2026-10-03 最新状态：**G-A/N3a/G-C完成；StockWiki `master@ae0b3e3`、RF `main@6fb2def7`已并线，RF推送及Actions37119502901全绿，见[G-C收尾](harness_lanes/results/gc_consumer_closeout_2026-10-03.md)。B1已释放2.846GiB，原文/主库未增长；先按[B3卡](gd_b3_archive_retirement_implementation.md)退役两旧派生archive（10.623GiB），并按[B4卡](gd_b4_worktree_cleanup_2026-10-03.md)整理23普通旧checkout（1.317GiB）。随后才做[N4生产composition/model计量/预算](n4_production_batch_implementation.md)和B2实际调用者切换。下方旧Next Step/hold为历史，不重复已验收项；原件保留、Worker paused。
 
