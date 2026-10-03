@@ -1,5 +1,12 @@
 # Findings：叙述性证据试点
 
+## 2026-10-03 — 无空间反弹，B3可先退役
+
+- 精确三根42,692,408,858B，等于旧盘点45,748,203,875B减B1删除3,055,796,224B加1,207B小收据。原文目录/主库零增长；全主仓可读43,887,252,776B，另33登记checkout1,985,538,310B，共45.87十进制GB，不能与旧46GiB主DB混称。全仓24个ACL旧test子树不可读，是下界；数据三根0错误。
+- companies15,130PDF约23.37GiB，加原始Word/Excel/HTM/news等；两个旧派生归档共10.623GiB，是上轮主动保留而非新Worker增长。主DB1,490,530活跃span/freelist0，普通VACUUM不提供2.85GiB额外收益。
+- 当前16个metadata表逐行digest与原prepared相等，scan_runs原480行相等且额外一条零文件错误扫描；保留sources43,112、locations46,606、documents23,530、retire-audit19,000。无cold-reader、gzip无manifest/prune引用，退役两archive无需第二套metadata或25M墓碑，更无需full restore。
+- G-C已并主线/CI，具名来源消费完成；下一步B3一个隔离节点后精确删除，原件/currentDB/小历史收据不变，生产Worker仍paused。N4真实模型/计量/预算缺口仍存在，不冒充已上线。
+
 ## 2026-10-03 — B1 与消费线验收修正
 
 - 精确 snapshot 已删，主库完整 SHA/mtime 不变，逻辑释放 2.846 GiB；当前三根按已删文件计算为 39.760 GiB。原件没有进入操作范围，不能写成“全库 raw 已重新 hash”。B2 的 normalized 调用者与共享路径冲突、B3 旧 ID/元数据策略仍需各批解决。

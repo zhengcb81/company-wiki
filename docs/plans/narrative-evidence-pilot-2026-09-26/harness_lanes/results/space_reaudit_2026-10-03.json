@@ -1,0 +1,2692 @@
+{
+  "archive_minimum": [
+    "Current catalog retains all non-evidence fact tables; prepared receipt contains matching table row hashes.",
+    "No cold archive runtime reader; EvidenceQuery uses source+locator/document, not span-ID-only lookup.",
+    "Keep archive SHA/size and retirement receipts; use current source/location/document/retire-audit facts as tombstones.",
+    "Update obsolete cold-snapshot diagnostic text/state and let completed B1 receipt remain inspectable after archive retirement.",
+    "No full SQLite restore or default millions-of-IDs secondary ledger. Stream gzip ID/source/locator only if a concrete consumer needs it."
+  ],
+  "archives": {
+    "gzip": {
+      "bytes": 5207478767,
+      "mtime_utc": "2026-08-07T09:19:56.327175Z",
+      "path": "source_manifests/archive/2026-08-07/retired-evidence.jsonl.gz"
+    },
+    "raw_original_backup": false,
+    "total_bytes": 11406183129,
+    "zstd": {
+      "bytes": 6198704362,
+      "mtime_utc": "2026-09-19T06:31:35Z",
+      "path": ".source_catalog/retirement/20260926T170825Z-4a9c67e1/catalog.full.sqlite3.zst"
+    }
+  },
+  "candidates": [
+    {
+      "ancestor_reparse_or_error": [],
+      "behind_unique": "48\t0",
+      "branch": "codex/narrative-gates-integration",
+      "bytes": 125485516,
+      "companies_bytes": 5318534,
+      "companies_extensions": {
+        ".css": 142304,
+        ".js": 4353506,
+        ".json": 9394,
+        ".jsonl": 213316,
+        ".md": 600014
+      },
+      "current_relation_to_master": "49\t0",
+      "current_status": {
+        "entries": [],
+        "entry_count": 0,
+        "error": "",
+        "rc": 0,
+        "tracked_dirty_count": 0,
+        "untracked_count": 0
+      },
+      "detached": false,
+      "dirty_examples": [],
+      "disposition": "managed_archive_by_root",
+      "errors": [],
+      "files": 2378,
+      "head": "cba745ac7e398fc2ccd84c132aa5c4c47d8828eb",
+      "hold_reasons": [
+        "Current chat managed artifact: ordinary git worktree remove is prohibited; root uses archive_worktree with recoverable Git snapshot.",
+        "Ignored data: hold item pending explicit classification."
+      ],
+      "ignored": {
+        "bytes": 54275512,
+        "count": 627,
+        "error_count": 0,
+        "errors": [],
+        "example_paths": [
+          ".codegraph/.gitignore",
+          ".codegraph/codegraph.db",
+          ".codegraph/codegraph.db-shm",
+          ".codegraph/codegraph.db-wal",
+          ".codegraph/config.json",
+          ".mypy_cache/.gitignore",
+          ".mypy_cache/3.11/@plugins_snapshot.json",
+          ".mypy_cache/3.11/__future__.data.json",
+          ".mypy_cache/3.11/__future__.meta.json",
+          ".mypy_cache/3.11/_ast.data.json",
+          ".mypy_cache/3.11/_ast.meta.json",
+          ".mypy_cache/3.11/_blake2.data.json"
+        ],
+        "git_error": "",
+        "rc": 0,
+        "top": {
+          ".codegraph": 34458601,
+          ".mypy_cache": 11899568,
+          ".pytest_cache": 55073,
+          ".ruff_cache": 12534,
+          "__pycache__": 11330,
+          "scripts": 804669,
+          "src": 2523099,
+          "tests": 4510638
+        }
+      },
+      "managed_chat_artifact": true,
+      "path": "C:/Users/郑曾波/.codex/worktrees/data-lake-reader/company-wiki",
+      "raw_kinds": {
+        "company_pdf_txt_bytes": 0,
+        "note": "Tracked legacy projection/static company files only; zero company PDF/TXT originals. Ignored contents are not assumed disposable."
+      },
+      "reparse": [],
+      "source_catalog_bytes": 0,
+      "source_manifests_bytes": 644,
+      "tracked_dirty": 0,
+      "untracked": 0
+    },
+    {
+      "ancestor_reparse_or_error": [],
+      "behind_unique": "85\t0",
+      "branch": "codex/transcript-companion",
+      "bytes": 71519645,
+      "companies_bytes": 5318534,
+      "companies_extensions": {
+        ".css": 142304,
+        ".js": 4353506,
+        ".json": 9394,
+        ".jsonl": 213316,
+        ".md": 600014
+      },
+      "current_relation_to_master": "86\t0",
+      "current_status": {
+        "entries": [],
+        "entry_count": 0,
+        "error": "",
+        "rc": 0,
+        "tracked_dirty_count": 0,
+        "untracked_count": 0
+      },
+      "detached": false,
+      "dirty_examples": [],
+      "disposition": "managed_archive_by_root",
+      "errors": [],
+      "files": 1746,
+      "head": "ced354a24c02928a28cc94c34b18780f9766cf06",
+      "hold_reasons": [
+        "Current chat managed artifact: ordinary git worktree remove is prohibited; root uses archive_worktree with recoverable Git snapshot.",
+        "Ignored data: hold item pending explicit classification."
+      ],
+      "ignored": {
+        "bytes": 1251447,
+        "count": 72,
+        "error_count": 0,
+        "errors": [],
+        "example_paths": [
+          ".pytest_cache/.gitignore",
+          ".pytest_cache/CACHEDIR.TAG",
+          ".pytest_cache/README.md",
+          ".pytest_cache/v/cache/lastfailed",
+          ".pytest_cache/v/cache/nodeids",
+          ".ruff_cache/.gitignore",
+          ".ruff_cache/0.15.18/17991035361556974679",
+          ".ruff_cache/0.15.18/8276915785406645570",
+          ".ruff_cache/CACHEDIR.TAG",
+          "__pycache__/conftest.cpython-313-pytest-9.1.1.pyc",
+          "src/company_wiki/__pycache__/__init__.cpython-313.pyc",
+          "src/company_wiki/__pycache__/canonical_ingest.cpython-313.pyc"
+        ],
+        "git_error": "",
+        "rc": 0,
+        "top": {
+          ".pytest_cache": 3627,
+          ".ruff_cache": 859,
+          "__pycache__": 11334,
+          "src": 1121348,
+          "tests": 114279
+        }
+      },
+      "managed_chat_artifact": true,
+      "path": "C:/Users/郑曾波/.codex/worktrees/transcript-companion/company-wiki",
+      "raw_kinds": {
+        "company_pdf_txt_bytes": 0,
+        "note": "Tracked legacy projection/static company files only; zero company PDF/TXT originals. Ignored contents are not assumed disposable."
+      },
+      "reparse": [],
+      "source_catalog_bytes": 0,
+      "source_manifests_bytes": 644,
+      "tracked_dirty": 0,
+      "untracked": 0
+    },
+    {
+      "ancestor_reparse_or_error": [],
+      "behind_unique": "4\t0",
+      "branch": null,
+      "bytes": 73142856,
+      "companies_bytes": 5318534,
+      "companies_extensions": {
+        ".css": 142304,
+        ".js": 4353506,
+        ".json": 9394,
+        ".jsonl": 213316,
+        ".md": 600014
+      },
+      "current_relation_to_master": "5\t0",
+      "current_status": {
+        "entries": [],
+        "entry_count": 0,
+        "error": "",
+        "rc": 0,
+        "tracked_dirty_count": 0,
+        "untracked_count": 0
+      },
+      "detached": true,
+      "dirty_examples": [],
+      "disposition": "hold",
+      "errors": [],
+      "files": 1848,
+      "head": "2e674cca4b715fea492ad9071de3ee456ca61835",
+      "hold_reasons": [
+        "RF pinned producer-code root: excluded from remove allowlist.",
+        "Ignored data: hold item pending explicit classification."
+      ],
+      "ignored": {
+        "bytes": 1499236,
+        "count": 77,
+        "error_count": 0,
+        "errors": [],
+        "example_paths": [
+          "src/company_wiki/__pycache__/__init__.cpython-313.pyc",
+          "src/company_wiki/__pycache__/canonical_ingest.cpython-313.pyc",
+          "src/company_wiki/parser_adapters/__pycache__/__init__.cpython-313.pyc",
+          "src/company_wiki/parser_adapters/__pycache__/pdf_extract_v3.cpython-313.pyc",
+          "src/company_wiki/parser_adapters/__pycache__/pdf_page_aware.cpython-313.pyc",
+          "src/company_wiki/source_catalog/__pycache__/__init__.cpython-313.pyc",
+          "src/company_wiki/source_catalog/__pycache__/acquisition.cpython-313.pyc",
+          "src/company_wiki/source_catalog/__pycache__/acquisition_config.cpython-313.pyc",
+          "src/company_wiki/source_catalog/__pycache__/acquisition_journal.cpython-313.pyc",
+          "src/company_wiki/source_catalog/__pycache__/acquisition_service.cpython-313.pyc",
+          "src/company_wiki/source_catalog/__pycache__/activation.cpython-313.pyc",
+          "src/company_wiki/source_catalog/__pycache__/adapter_dispatch.cpython-313.pyc"
+        ],
+        "git_error": "",
+        "rc": 0,
+        "top": {
+          "src": 1499236
+        }
+      },
+      "path": "C:/Users/郑曾波/AppData/Local/Temp/company-wiki",
+      "raw_kinds": {
+        "company_pdf_txt_bytes": 0,
+        "note": "Tracked legacy projection/static company files only; zero company PDF/TXT originals. Ignored contents are not assumed disposable."
+      },
+      "reparse": [],
+      "source_catalog_bytes": 0,
+      "source_manifests_bytes": 644,
+      "tracked_dirty": 0,
+      "untracked": 0
+    },
+    {
+      "ancestor_reparse_or_error": [],
+      "behind_unique": "85\t0",
+      "branch": "r4b06-wip",
+      "bytes": 70271410,
+      "companies_bytes": 5318534,
+      "companies_extensions": {
+        ".css": 142304,
+        ".js": 4353506,
+        ".json": 9394,
+        ".jsonl": 213316,
+        ".md": 600014
+      },
+      "current_relation_to_master": "86\t0",
+      "current_status": {
+        "entries": [],
+        "entry_count": 0,
+        "error": "",
+        "rc": 0,
+        "tracked_dirty_count": 0,
+        "untracked_count": 0
+      },
+      "detached": false,
+      "dirty_examples": [],
+      "disposition": "planned_ordinary_remove",
+      "errors": [],
+      "files": 1674,
+      "head": "ced354a24c02928a28cc94c34b18780f9766cf06",
+      "hold_reasons": [],
+      "ignored": {
+        "bytes": 0,
+        "count": 0,
+        "error_count": 0,
+        "errors": [],
+        "example_paths": [],
+        "git_error": "",
+        "rc": 0,
+        "top": {}
+      },
+      "ignored_classification": {
+        "allowed_disposal": "Root permits regenerable cache/pyc and exact empty legacy ingestion marks; no unique source input classes found.",
+        "checked_at_utc": "2026-10-03T11:39:09.757633+00:00",
+        "class_bytes": {},
+        "classes": {},
+        "empty_ingested_db": [],
+        "unknown_paths": []
+      },
+      "path": "C:/Users/郑曾波/AppData/Local/Temp/cw-b06-wt",
+      "raw_kinds": {
+        "company_pdf_txt_bytes": 0,
+        "note": "Tracked legacy projection/static company files only; zero company PDF/TXT originals. Ignored contents are not assumed disposable."
+      },
+      "reparse": [],
+      "source_catalog_bytes": 0,
+      "source_manifests_bytes": 644,
+      "tracked_dirty": 0,
+      "untracked": 0
+    },
+    {
+      "ancestor_reparse_or_error": [],
+      "behind_unique": "286\t0",
+      "branch": null,
+      "bytes": 57081830,
+      "companies_bytes": 5318534,
+      "companies_extensions": {
+        ".css": 142304,
+        ".js": 4353506,
+        ".json": 9394,
+        ".jsonl": 213316,
+        ".md": 600014
+      },
+      "current_relation_to_master": "287\t0",
+      "current_status": {
+        "entries": [],
+        "entry_count": 0,
+        "error": "",
+        "rc": 0,
+        "tracked_dirty_count": 0,
+        "untracked_count": 0
+      },
+      "detached": true,
+      "dirty_examples": [],
+      "disposition": "planned_ordinary_remove",
+      "errors": [],
+      "files": 1365,
+      "head": "155e759c4c8cd0f63a58075e7820666c238f2b2d",
+      "hold_reasons": [],
+      "ignored": {
+        "bytes": 2866,
+        "count": 5,
+        "error_count": 0,
+        "errors": [],
+        "example_paths": [
+          ".pytest_cache/.gitignore",
+          ".pytest_cache/CACHEDIR.TAG",
+          ".pytest_cache/README.md",
+          ".pytest_cache/v/cache/lastfailed",
+          ".pytest_cache/v/cache/nodeids"
+        ],
+        "git_error": "",
+        "rc": 0,
+        "top": {
+          ".pytest_cache": 2866
+        }
+      },
+      "ignored_classification": {
+        "allowed_disposal": "Root permits regenerable cache/pyc and exact empty legacy ingestion marks; no unique source input classes found.",
+        "checked_at_utc": "2026-10-03T11:39:10.393593+00:00",
+        "class_bytes": {
+          ".pytest_cache": 2866
+        },
+        "classes": {
+          ".pytest_cache": 5
+        },
+        "empty_ingested_db": [],
+        "unknown_paths": []
+      },
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-1003-wik",
+      "raw_kinds": {
+        "company_pdf_txt_bytes": 0,
+        "note": "Tracked legacy projection/static company files only; zero company PDF/TXT originals. Ignored contents are not assumed disposable."
+      },
+      "reparse": [],
+      "source_catalog_bytes": 0,
+      "source_manifests_bytes": 644,
+      "tracked_dirty": 0,
+      "untracked": 0
+    },
+    {
+      "ancestor_reparse_or_error": [],
+      "behind_unique": "285\t0",
+      "branch": null,
+      "bytes": 57078968,
+      "companies_bytes": 5318534,
+      "companies_extensions": {
+        ".css": 142304,
+        ".js": 4353506,
+        ".json": 9394,
+        ".jsonl": 213316,
+        ".md": 600014
+      },
+      "current_relation_to_master": "286\t0",
+      "current_status": {
+        "entries": [],
+        "entry_count": 0,
+        "error": "",
+        "rc": 0,
+        "tracked_dirty_count": 0,
+        "untracked_count": 0
+      },
+      "detached": true,
+      "dirty_examples": [],
+      "disposition": "planned_ordinary_remove",
+      "errors": [],
+      "files": 1360,
+      "head": "f6eb58410e85b20aed738418cbaef6833803a4b6",
+      "hold_reasons": [],
+      "ignored": {
+        "bytes": 0,
+        "count": 0,
+        "error_count": 0,
+        "errors": [],
+        "example_paths": [],
+        "git_error": "",
+        "rc": 0,
+        "top": {}
+      },
+      "ignored_classification": {
+        "allowed_disposal": "Root permits regenerable cache/pyc and exact empty legacy ingestion marks; no unique source input classes found.",
+        "checked_at_utc": "2026-10-03T11:39:10.985026+00:00",
+        "class_bytes": {},
+        "classes": {},
+        "empty_ingested_db": [],
+        "unknown_paths": []
+      },
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-1101-wik",
+      "raw_kinds": {
+        "company_pdf_txt_bytes": 0,
+        "note": "Tracked legacy projection/static company files only; zero company PDF/TXT originals. Ignored contents are not assumed disposable."
+      },
+      "reparse": [],
+      "source_catalog_bytes": 0,
+      "source_manifests_bytes": 644,
+      "tracked_dirty": 0,
+      "untracked": 0
+    },
+    {
+      "ancestor_reparse_or_error": [],
+      "behind_unique": "281\t0",
+      "branch": null,
+      "bytes": 57121737,
+      "companies_bytes": 5318534,
+      "companies_extensions": {
+        ".css": 142304,
+        ".js": 4353506,
+        ".json": 9394,
+        ".jsonl": 213316,
+        ".md": 600014
+      },
+      "current_relation_to_master": "282\t0",
+      "current_status": {
+        "entries": [],
+        "entry_count": 0,
+        "error": "",
+        "rc": 0,
+        "tracked_dirty_count": 0,
+        "untracked_count": 0
+      },
+      "detached": true,
+      "dirty_examples": [],
+      "disposition": "planned_ordinary_remove",
+      "errors": [],
+      "files": 1371,
+      "head": "a6937f34081cdc928704d511e0b011f71b061a90",
+      "hold_reasons": [],
+      "ignored": {
+        "bytes": 2897,
+        "count": 5,
+        "error_count": 0,
+        "errors": [],
+        "example_paths": [
+          ".pytest_cache/.gitignore",
+          ".pytest_cache/CACHEDIR.TAG",
+          ".pytest_cache/README.md",
+          ".pytest_cache/v/cache/lastfailed",
+          ".pytest_cache/v/cache/nodeids"
+        ],
+        "git_error": "",
+        "rc": 0,
+        "top": {
+          ".pytest_cache": 2897
+        }
+      },
+      "ignored_classification": {
+        "allowed_disposal": "Root permits regenerable cache/pyc and exact empty legacy ingestion marks; no unique source input classes found.",
+        "checked_at_utc": "2026-10-03T11:39:11.619070+00:00",
+        "class_bytes": {
+          ".pytest_cache": 2897
+        },
+        "classes": {
+          ".pytest_cache": 5
+        },
+        "empty_ingested_db": [],
+        "unknown_paths": []
+      },
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-1203/base-wiki",
+      "raw_kinds": {
+        "company_pdf_txt_bytes": 0,
+        "note": "Tracked legacy projection/static company files only; zero company PDF/TXT originals. Ignored contents are not assumed disposable."
+      },
+      "reparse": [],
+      "source_catalog_bytes": 0,
+      "source_manifests_bytes": 644,
+      "tracked_dirty": 0,
+      "untracked": 0
+    },
+    {
+      "ancestor_reparse_or_error": [],
+      "behind_unique": "277\t0",
+      "branch": null,
+      "bytes": 58731176,
+      "companies_bytes": 5318534,
+      "companies_extensions": {
+        ".css": 142304,
+        ".js": 4353506,
+        ".json": 9394,
+        ".jsonl": 213316,
+        ".md": 600014
+      },
+      "current_relation_to_master": "278\t0",
+      "current_status": {
+        "entries": [],
+        "entry_count": 0,
+        "error": "",
+        "rc": 0,
+        "tracked_dirty_count": 0,
+        "untracked_count": 0
+      },
+      "detached": true,
+      "dirty_examples": [],
+      "disposition": "planned_ordinary_remove",
+      "errors": [],
+      "files": 1446,
+      "head": "460d2730719acb6e4fdf59886c568c847d10d028",
+      "hold_reasons": [],
+      "ignored": {
+        "bytes": 1622080,
+        "count": 83,
+        "error_count": 0,
+        "errors": [],
+        "example_paths": [
+          ".ingested/ingested.db",
+          ".pytest_cache/.gitignore",
+          ".pytest_cache/CACHEDIR.TAG",
+          ".pytest_cache/README.md",
+          ".pytest_cache/v/cache/lastfailed",
+          ".pytest_cache/v/cache/nodeids",
+          "scripts/__pycache__/common.cpython-313.pyc",
+          "scripts/__pycache__/config.cpython-313.pyc",
+          "scripts/__pycache__/graph.cpython-313.pyc",
+          "scripts/__pycache__/log_writer.cpython-313.pyc",
+          "scripts/__pycache__/real_root_probe.cpython-313.pyc",
+          "scripts/__pycache__/sitecustomize.cpython-313.pyc"
+        ],
+        "git_error": "",
+        "rc": 0,
+        "top": {
+          ".ingested": 12288,
+          ".pytest_cache": 223733,
+          "scripts": 80043,
+          "src": 1245609,
+          "tests": 60407
+        }
+      },
+      "ignored_classification": {
+        "allowed_disposal": "Root permits regenerable cache/pyc and exact empty legacy ingestion marks; no unique source input classes found.",
+        "checked_at_utc": "2026-10-03T11:39:12.244158+00:00",
+        "class_bytes": {
+          ".pytest_cache": 223733,
+          "empty_legacy_ingested_marks": 12288,
+          "python_bytecode": 1386059
+        },
+        "classes": {
+          ".pytest_cache": 5,
+          "empty_legacy_ingested_marks": 1,
+          "python_bytecode": 77
+        },
+        "empty_ingested_db": [
+          {
+            "bytes": 12288,
+            "columns": [
+              {
+                "name": "hash",
+                "primary_key": true,
+                "type": "TEXT"
+              },
+              {
+                "name": "created_at",
+                "type": "TEXT"
+              }
+            ],
+            "path": ".ingested/ingested.db",
+            "rows": 0,
+            "table": "ingested"
+          }
+        ],
+        "unknown_paths": []
+      },
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-1203/result-wiki",
+      "raw_kinds": {
+        "company_pdf_txt_bytes": 0,
+        "note": "Tracked legacy projection/static company files only; zero company PDF/TXT originals. Ignored contents are not assumed disposable."
+      },
+      "reparse": [],
+      "source_catalog_bytes": 0,
+      "source_manifests_bytes": 644,
+      "tracked_dirty": 0,
+      "untracked": 0
+    },
+    {
+      "ancestor_reparse_or_error": [],
+      "behind_unique": "277\t0",
+      "branch": null,
+      "bytes": 58732670,
+      "companies_bytes": 5318534,
+      "companies_extensions": {
+        ".css": 142304,
+        ".js": 4353506,
+        ".json": 9394,
+        ".jsonl": 213316,
+        ".md": 600014
+      },
+      "current_relation_to_master": "278\t0",
+      "current_status": {
+        "entries": [],
+        "entry_count": 0,
+        "error": "",
+        "rc": 0,
+        "tracked_dirty_count": 0,
+        "untracked_count": 0
+      },
+      "detached": true,
+      "dirty_examples": [],
+      "disposition": "planned_ordinary_remove",
+      "errors": [],
+      "files": 1446,
+      "head": "460d2730719acb6e4fdf59886c568c847d10d028",
+      "hold_reasons": [],
+      "ignored": {
+        "bytes": 1623575,
+        "count": 83,
+        "error_count": 0,
+        "errors": [],
+        "example_paths": [
+          ".ingested/ingested.db",
+          ".pytest_cache/.gitignore",
+          ".pytest_cache/CACHEDIR.TAG",
+          ".pytest_cache/README.md",
+          ".pytest_cache/v/cache/lastfailed",
+          ".pytest_cache/v/cache/nodeids",
+          "scripts/__pycache__/common.cpython-313.pyc",
+          "scripts/__pycache__/config.cpython-313.pyc",
+          "scripts/__pycache__/graph.cpython-313.pyc",
+          "scripts/__pycache__/log_writer.cpython-313.pyc",
+          "scripts/__pycache__/real_root_probe.cpython-313.pyc",
+          "scripts/__pycache__/sitecustomize.cpython-313.pyc"
+        ],
+        "git_error": "",
+        "rc": 0,
+        "top": {
+          ".ingested": 12288,
+          ".pytest_cache": 225382,
+          "scripts": 80027,
+          "src": 1245477,
+          "tests": 60401
+        }
+      },
+      "ignored_classification": {
+        "allowed_disposal": "Root permits regenerable cache/pyc and exact empty legacy ingestion marks; no unique source input classes found.",
+        "checked_at_utc": "2026-10-03T11:39:12.880857+00:00",
+        "class_bytes": {
+          ".pytest_cache": 225382,
+          "empty_legacy_ingested_marks": 12288,
+          "python_bytecode": 1385905
+        },
+        "classes": {
+          ".pytest_cache": 5,
+          "empty_legacy_ingested_marks": 1,
+          "python_bytecode": 77
+        },
+        "empty_ingested_db": [
+          {
+            "bytes": 12288,
+            "columns": [
+              {
+                "name": "hash",
+                "primary_key": true,
+                "type": "TEXT"
+              },
+              {
+                "name": "created_at",
+                "type": "TEXT"
+              }
+            ],
+            "path": ".ingested/ingested.db",
+            "rows": 0,
+            "table": "ingested"
+          }
+        ],
+        "unknown_paths": []
+      },
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-1204/base-wiki",
+      "raw_kinds": {
+        "company_pdf_txt_bytes": 0,
+        "note": "Tracked legacy projection/static company files only; zero company PDF/TXT originals. Ignored contents are not assumed disposable."
+      },
+      "reparse": [],
+      "source_catalog_bytes": 0,
+      "source_manifests_bytes": 644,
+      "tracked_dirty": 0,
+      "untracked": 0
+    },
+    {
+      "ancestor_reparse_or_error": [],
+      "behind_unique": "275\t0",
+      "branch": null,
+      "bytes": 132468047,
+      "companies_bytes": 5318534,
+      "companies_extensions": {
+        ".css": 142304,
+        ".js": 4353506,
+        ".json": 9394,
+        ".jsonl": 213316,
+        ".md": 600014
+      },
+      "current_relation_to_master": "276\t0",
+      "current_status": {
+        "entries": [],
+        "entry_count": 0,
+        "error": "",
+        "rc": 0,
+        "tracked_dirty_count": 0,
+        "untracked_count": 0
+      },
+      "detached": true,
+      "dirty_examples": [],
+      "disposition": "planned_ordinary_remove",
+      "errors": [],
+      "files": 3660,
+      "head": "f03142cae67055b7895f3fedaa06e40fdfafcf06",
+      "hold_reasons": [],
+      "ignored": {
+        "bytes": 75316130,
+        "count": 2292,
+        "error_count": 0,
+        "errors": [],
+        "example_paths": [
+          ".ingested/ingested.db",
+          ".mypy_cache/.gitignore",
+          ".mypy_cache/3.11/@plugins_snapshot.json",
+          ".mypy_cache/3.11/PIL/ExifTags.data.json",
+          ".mypy_cache/3.11/PIL/ExifTags.meta.json",
+          ".mypy_cache/3.11/PIL/GimpGradientFile.data.json",
+          ".mypy_cache/3.11/PIL/GimpGradientFile.meta.json",
+          ".mypy_cache/3.11/PIL/GimpPaletteFile.data.json",
+          ".mypy_cache/3.11/PIL/GimpPaletteFile.meta.json",
+          ".mypy_cache/3.11/PIL/Image.data.json",
+          ".mypy_cache/3.11/PIL/Image.meta.json",
+          ".mypy_cache/3.11/PIL/ImageCms.data.json"
+        ],
+        "git_error": "",
+        "rc": 0,
+        "top": {
+          ".ingested": 12288,
+          ".mypy_cache": 73692401,
+          ".pytest_cache": 225382,
+          "scripts": 80043,
+          "src": 1245609,
+          "tests": 60407
+        }
+      },
+      "ignored_classification": {
+        "allowed_disposal": "Root permits regenerable cache/pyc and exact empty legacy ingestion marks; no unique source input classes found.",
+        "checked_at_utc": "2026-10-03T11:39:14.817680+00:00",
+        "class_bytes": {
+          ".mypy_cache": 73692401,
+          ".pytest_cache": 225382,
+          "empty_legacy_ingested_marks": 12288,
+          "python_bytecode": 1386059
+        },
+        "classes": {
+          ".mypy_cache": 2209,
+          ".pytest_cache": 5,
+          "empty_legacy_ingested_marks": 1,
+          "python_bytecode": 77
+        },
+        "empty_ingested_db": [
+          {
+            "bytes": 12288,
+            "columns": [
+              {
+                "name": "hash",
+                "primary_key": true,
+                "type": "TEXT"
+              },
+              {
+                "name": "created_at",
+                "type": "TEXT"
+              }
+            ],
+            "path": ".ingested/ingested.db",
+            "rows": 0,
+            "table": "ingested"
+          }
+        ],
+        "unknown_paths": []
+      },
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-1204/layout/company-wiki",
+      "raw_kinds": {
+        "company_pdf_txt_bytes": 0,
+        "note": "Tracked legacy projection/static company files only; zero company PDF/TXT originals. Ignored contents are not assumed disposable."
+      },
+      "reparse": [],
+      "source_catalog_bytes": 0,
+      "source_manifests_bytes": 644,
+      "tracked_dirty": 0,
+      "untracked": 0
+    },
+    {
+      "ancestor_reparse_or_error": [],
+      "behind_unique": "274\t0",
+      "branch": null,
+      "bytes": 66924090,
+      "companies_bytes": 5318534,
+      "companies_extensions": {
+        ".css": 142304,
+        ".js": 4353506,
+        ".json": 9394,
+        ".jsonl": 213316,
+        ".md": 600014
+      },
+      "current_relation_to_master": "275\t0",
+      "current_status": {
+        "entries": [],
+        "entry_count": 0,
+        "error": "",
+        "rc": 0,
+        "tracked_dirty_count": 0,
+        "untracked_count": 0
+      },
+      "detached": true,
+      "dirty_examples": [],
+      "disposition": "planned_ordinary_remove",
+      "errors": [],
+      "files": 1562,
+      "head": "925b3e8027f9c22c475656efae98142b976244e6",
+      "hold_reasons": [],
+      "ignored": {
+        "bytes": 9771941,
+        "count": 194,
+        "error_count": 0,
+        "errors": [],
+        "example_paths": [
+          ".mypy_cache/.gitignore",
+          ".mypy_cache/3.11/@plugins_snapshot.json",
+          ".mypy_cache/3.11/__future__.data.json",
+          ".mypy_cache/3.11/__future__.meta.json",
+          ".mypy_cache/3.11/_ast.data.json",
+          ".mypy_cache/3.11/_ast.meta.json",
+          ".mypy_cache/3.11/_blake2.data.json",
+          ".mypy_cache/3.11/_blake2.meta.json",
+          ".mypy_cache/3.11/_bz2.data.json",
+          ".mypy_cache/3.11/_bz2.meta.json",
+          ".mypy_cache/3.11/_codecs.data.json",
+          ".mypy_cache/3.11/_codecs.meta.json"
+        ],
+        "git_error": "",
+        "rc": 0,
+        "top": {
+          ".mypy_cache": 9748089,
+          ".pytest_cache": 2194,
+          ".ruff_cache": 21658
+        }
+      },
+      "ignored_classification": {
+        "allowed_disposal": "Root permits regenerable cache/pyc and exact empty legacy ingestion marks; no unique source input classes found.",
+        "checked_at_utc": "2026-10-03T11:39:15.505241+00:00",
+        "class_bytes": {
+          ".mypy_cache": 9748089,
+          ".pytest_cache": 2194,
+          ".ruff_cache": 21658
+        },
+        "classes": {
+          ".mypy_cache": 179,
+          ".pytest_cache": 5,
+          ".ruff_cache": 10
+        },
+        "empty_ingested_db": [],
+        "unknown_paths": []
+      },
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-1204/r2/company-wiki",
+      "raw_kinds": {
+        "company_pdf_txt_bytes": 0,
+        "note": "Tracked legacy projection/static company files only; zero company PDF/TXT originals. Ignored contents are not assumed disposable."
+      },
+      "reparse": [],
+      "source_catalog_bytes": 0,
+      "source_manifests_bytes": 644,
+      "tracked_dirty": 0,
+      "untracked": 0
+    },
+    {
+      "ancestor_reparse_or_error": [],
+      "behind_unique": "274\t0",
+      "branch": null,
+      "bytes": 57153365,
+      "companies_bytes": 5318534,
+      "companies_extensions": {
+        ".css": 142304,
+        ".js": 4353506,
+        ".json": 9394,
+        ".jsonl": 213316,
+        ".md": 600014
+      },
+      "current_relation_to_master": "275\t0",
+      "current_status": {
+        "entries": [],
+        "entry_count": 0,
+        "error": "",
+        "rc": 0,
+        "tracked_dirty_count": 0,
+        "untracked_count": 0
+      },
+      "detached": true,
+      "dirty_examples": [],
+      "disposition": "planned_ordinary_remove",
+      "errors": [],
+      "files": 1373,
+      "head": "925b3e8027f9c22c475656efae98142b976244e6",
+      "hold_reasons": [],
+      "ignored": {
+        "bytes": 1221,
+        "count": 5,
+        "error_count": 0,
+        "errors": [],
+        "example_paths": [
+          ".pytest_cache/.gitignore",
+          ".pytest_cache/CACHEDIR.TAG",
+          ".pytest_cache/README.md",
+          ".pytest_cache/v/cache/lastfailed",
+          ".pytest_cache/v/cache/nodeids"
+        ],
+        "git_error": "",
+        "rc": 0,
+        "top": {
+          ".pytest_cache": 1221
+        }
+      },
+      "ignored_classification": {
+        "allowed_disposal": "Root permits regenerable cache/pyc and exact empty legacy ingestion marks; no unique source input classes found.",
+        "checked_at_utc": "2026-10-03T11:39:16.119735+00:00",
+        "class_bytes": {
+          ".pytest_cache": 1221
+        },
+        "classes": {
+          ".pytest_cache": 5
+        },
+        "empty_ingested_db": [],
+        "unknown_paths": []
+      },
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-1205/wiki-base",
+      "raw_kinds": {
+        "company_pdf_txt_bytes": 0,
+        "note": "Tracked legacy projection/static company files only; zero company PDF/TXT originals. Ignored contents are not assumed disposable."
+      },
+      "reparse": [],
+      "source_catalog_bytes": 0,
+      "source_manifests_bytes": 644,
+      "tracked_dirty": 0,
+      "untracked": 0
+    },
+    {
+      "ancestor_reparse_or_error": [],
+      "behind_unique": "273\t0",
+      "branch": null,
+      "bytes": 58776448,
+      "companies_bytes": 5318534,
+      "companies_extensions": {
+        ".css": 142304,
+        ".js": 4353506,
+        ".json": 9394,
+        ".jsonl": 213316,
+        ".md": 600014
+      },
+      "current_relation_to_master": "274\t0",
+      "current_status": {
+        "entries": [],
+        "entry_count": 0,
+        "error": "",
+        "rc": 0,
+        "tracked_dirty_count": 0,
+        "untracked_count": 0
+      },
+      "detached": true,
+      "dirty_examples": [],
+      "disposition": "planned_ordinary_remove",
+      "errors": [],
+      "files": 1451,
+      "head": "b93994ae27201563c6789d1f8242bf53295eda68",
+      "hold_reasons": [],
+      "ignored": {
+        "bytes": 1623526,
+        "count": 83,
+        "error_count": 0,
+        "errors": [],
+        "example_paths": [
+          ".ingested/ingested.db",
+          ".pytest_cache/.gitignore",
+          ".pytest_cache/CACHEDIR.TAG",
+          ".pytest_cache/README.md",
+          ".pytest_cache/v/cache/lastfailed",
+          ".pytest_cache/v/cache/nodeids",
+          "scripts/__pycache__/common.cpython-313.pyc",
+          "scripts/__pycache__/config.cpython-313.pyc",
+          "scripts/__pycache__/graph.cpython-313.pyc",
+          "scripts/__pycache__/log_writer.cpython-313.pyc",
+          "scripts/__pycache__/real_root_probe.cpython-313.pyc",
+          "scripts/__pycache__/sitecustomize.cpython-313.pyc"
+        ],
+        "git_error": "",
+        "rc": 0,
+        "top": {
+          ".ingested": 12288,
+          ".pytest_cache": 225179,
+          "scripts": 80043,
+          "src": 1245609,
+          "tests": 60407
+        }
+      },
+      "ignored_classification": {
+        "allowed_disposal": "Root permits regenerable cache/pyc and exact empty legacy ingestion marks; no unique source input classes found.",
+        "checked_at_utc": "2026-10-03T11:39:16.795643+00:00",
+        "class_bytes": {
+          ".pytest_cache": 225179,
+          "empty_legacy_ingested_marks": 12288,
+          "python_bytecode": 1386059
+        },
+        "classes": {
+          ".pytest_cache": 5,
+          "empty_legacy_ingested_marks": 1,
+          "python_bytecode": 77
+        },
+        "empty_ingested_db": [
+          {
+            "bytes": 12288,
+            "columns": [
+              {
+                "name": "hash",
+                "primary_key": true,
+                "type": "TEXT"
+              },
+              {
+                "name": "created_at",
+                "type": "TEXT"
+              }
+            ],
+            "path": ".ingested/ingested.db",
+            "rows": 0,
+            "table": "ingested"
+          }
+        ],
+        "unknown_paths": []
+      },
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-1205/wiki-result",
+      "raw_kinds": {
+        "company_pdf_txt_bytes": 0,
+        "note": "Tracked legacy projection/static company files only; zero company PDF/TXT originals. Ignored contents are not assumed disposable."
+      },
+      "reparse": [],
+      "source_catalog_bytes": 0,
+      "source_manifests_bytes": 644,
+      "tracked_dirty": 0,
+      "untracked": 0
+    },
+    {
+      "ancestor_reparse_or_error": [],
+      "behind_unique": "273\t0",
+      "branch": null,
+      "bytes": 58069108,
+      "companies_bytes": 5318534,
+      "companies_extensions": {
+        ".css": 142304,
+        ".js": 4353506,
+        ".json": 9394,
+        ".jsonl": 213316,
+        ".md": 600014
+      },
+      "current_relation_to_master": "274\t0",
+      "current_status": {
+        "entries": [],
+        "entry_count": 0,
+        "error": "",
+        "rc": 0,
+        "tracked_dirty_count": 0,
+        "untracked_count": 0
+      },
+      "detached": true,
+      "dirty_examples": [],
+      "disposition": "planned_ordinary_remove",
+      "errors": [],
+      "files": 1420,
+      "head": "b93994ae27201563c6789d1f8242bf53295eda68",
+      "hold_reasons": [],
+      "ignored": {
+        "bytes": 916187,
+        "count": 52,
+        "error_count": 0,
+        "errors": [],
+        "example_paths": [
+          ".pytest_cache/.gitignore",
+          ".pytest_cache/CACHEDIR.TAG",
+          ".pytest_cache/README.md",
+          ".pytest_cache/v/cache/lastfailed",
+          ".pytest_cache/v/cache/nodeids",
+          "src/company_wiki/__pycache__/__init__.cpython-313.pyc",
+          "src/company_wiki/__pycache__/canonical_ingest.cpython-313.pyc",
+          "src/company_wiki/parser_adapters/__pycache__/__init__.cpython-313.pyc",
+          "src/company_wiki/parser_adapters/__pycache__/pdf_extract_v3.cpython-313.pyc",
+          "src/company_wiki/parser_adapters/__pycache__/pdf_page_aware.cpython-313.pyc",
+          "src/company_wiki/source_catalog/__pycache__/__init__.cpython-313.pyc",
+          "src/company_wiki/source_catalog/__pycache__/acquisition.cpython-313.pyc"
+        ],
+        "git_error": "",
+        "rc": 0,
+        "top": {
+          ".pytest_cache": 999,
+          "src": 915188
+        }
+      },
+      "ignored_classification": {
+        "allowed_disposal": "Root permits regenerable cache/pyc and exact empty legacy ingestion marks; no unique source input classes found.",
+        "checked_at_utc": "2026-10-03T11:39:17.401576+00:00",
+        "class_bytes": {
+          ".pytest_cache": 999,
+          "python_bytecode": 915188
+        },
+        "classes": {
+          ".pytest_cache": 5,
+          "python_bytecode": 47
+        },
+        "empty_ingested_db": [],
+        "unknown_paths": []
+      },
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-130x/wiki-base",
+      "raw_kinds": {
+        "company_pdf_txt_bytes": 0,
+        "note": "Tracked legacy projection/static company files only; zero company PDF/TXT originals. Ignored contents are not assumed disposable."
+      },
+      "reparse": [],
+      "source_catalog_bytes": 0,
+      "source_manifests_bytes": 644,
+      "tracked_dirty": 0,
+      "untracked": 0
+    },
+    {
+      "ancestor_reparse_or_error": [],
+      "behind_unique": "272\t0",
+      "branch": null,
+      "bytes": 58081712,
+      "companies_bytes": 5318534,
+      "companies_extensions": {
+        ".css": 142304,
+        ".js": 4353506,
+        ".json": 9394,
+        ".jsonl": 213316,
+        ".md": 600014
+      },
+      "current_relation_to_master": "273\t0",
+      "current_status": {
+        "entries": [],
+        "entry_count": 0,
+        "error": "",
+        "rc": 0,
+        "tracked_dirty_count": 0,
+        "untracked_count": 0
+      },
+      "detached": true,
+      "dirty_examples": [],
+      "disposition": "planned_ordinary_remove",
+      "errors": [],
+      "files": 1421,
+      "head": "304966d1579344cbf4b1c368c7ddea46b443f982",
+      "hold_reasons": [],
+      "ignored": {
+        "bytes": 922842,
+        "count": 52,
+        "error_count": 0,
+        "errors": [],
+        "example_paths": [
+          ".pytest_cache/.gitignore",
+          ".pytest_cache/CACHEDIR.TAG",
+          ".pytest_cache/README.md",
+          ".pytest_cache/v/cache/lastfailed",
+          ".pytest_cache/v/cache/nodeids",
+          "src/company_wiki/__pycache__/__init__.cpython-313.pyc",
+          "src/company_wiki/__pycache__/canonical_ingest.cpython-313.pyc",
+          "src/company_wiki/parser_adapters/__pycache__/__init__.cpython-313.pyc",
+          "src/company_wiki/parser_adapters/__pycache__/pdf_extract_v3.cpython-313.pyc",
+          "src/company_wiki/parser_adapters/__pycache__/pdf_page_aware.cpython-313.pyc",
+          "src/company_wiki/source_catalog/__pycache__/__init__.cpython-313.pyc",
+          "src/company_wiki/source_catalog/__pycache__/acquisition.cpython-313.pyc"
+        ],
+        "git_error": "",
+        "rc": 0,
+        "top": {
+          ".pytest_cache": 3414,
+          "src": 919428
+        }
+      },
+      "ignored_classification": {
+        "allowed_disposal": "Root permits regenerable cache/pyc and exact empty legacy ingestion marks; no unique source input classes found.",
+        "checked_at_utc": "2026-10-03T11:39:18.099449+00:00",
+        "class_bytes": {
+          ".pytest_cache": 3414,
+          "python_bytecode": 919428
+        },
+        "classes": {
+          ".pytest_cache": 5,
+          "python_bytecode": 47
+        },
+        "empty_ingested_db": [],
+        "unknown_paths": []
+      },
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-130x/wiki-result",
+      "raw_kinds": {
+        "company_pdf_txt_bytes": 0,
+        "note": "Tracked legacy projection/static company files only; zero company PDF/TXT originals. Ignored contents are not assumed disposable."
+      },
+      "reparse": [],
+      "source_catalog_bytes": 0,
+      "source_manifests_bytes": 644,
+      "tracked_dirty": 0,
+      "untracked": 0
+    },
+    {
+      "ancestor_reparse_or_error": [],
+      "behind_unique": "352\t0",
+      "branch": null,
+      "bytes": 56626668,
+      "companies_bytes": 5318534,
+      "companies_extensions": {
+        ".css": 142304,
+        ".js": 4353506,
+        ".json": 9394,
+        ".jsonl": 213316,
+        ".md": 600014
+      },
+      "current_relation_to_master": "353\t0",
+      "current_status": {
+        "entries": [],
+        "entry_count": 0,
+        "error": "",
+        "rc": 0,
+        "tracked_dirty_count": 0,
+        "untracked_count": 0
+      },
+      "detached": true,
+      "dirty_examples": [],
+      "disposition": "planned_ordinary_remove",
+      "errors": [],
+      "files": 1285,
+      "head": "47a03117ada0d5b3fe33ba9ab62a6718a3efeaeb",
+      "hold_reasons": [],
+      "ignored": {
+        "bytes": 228972,
+        "count": 10,
+        "error_count": 0,
+        "errors": [],
+        "example_paths": [
+          ".ingested/ingested.db",
+          ".pytest_cache/.gitignore",
+          ".pytest_cache/CACHEDIR.TAG",
+          ".pytest_cache/README.md",
+          ".pytest_cache/v/cache/lastfailed",
+          ".pytest_cache/v/cache/nodeids",
+          ".ruff_cache/.gitignore",
+          ".ruff_cache/0.15.18/17557657027557919548",
+          ".ruff_cache/0.15.18/9601355172357170900",
+          ".ruff_cache/CACHEDIR.TAG"
+        ],
+        "git_error": "",
+        "rc": 0,
+        "top": {
+          ".ingested": 12288,
+          ".pytest_cache": 216322,
+          ".ruff_cache": 362
+        }
+      },
+      "ignored_classification": {
+        "allowed_disposal": "Root permits regenerable cache/pyc and exact empty legacy ingestion marks; no unique source input classes found.",
+        "checked_at_utc": "2026-10-03T11:39:18.631932+00:00",
+        "class_bytes": {
+          ".pytest_cache": 216322,
+          ".ruff_cache": 362,
+          "empty_legacy_ingested_marks": 12288
+        },
+        "classes": {
+          ".pytest_cache": 5,
+          ".ruff_cache": 4,
+          "empty_legacy_ingested_marks": 1
+        },
+        "empty_ingested_db": [
+          {
+            "bytes": 12288,
+            "columns": [
+              {
+                "name": "hash",
+                "primary_key": true,
+                "type": "TEXT"
+              },
+              {
+                "name": "created_at",
+                "type": "TEXT"
+              }
+            ],
+            "path": ".ingested/ingested.db",
+            "rows": 0,
+            "table": "ingested"
+          }
+        ],
+        "unknown_paths": []
+      },
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-505",
+      "raw_kinds": {
+        "company_pdf_txt_bytes": 0,
+        "note": "Tracked legacy projection/static company files only; zero company PDF/TXT originals. Ignored contents are not assumed disposable."
+      },
+      "reparse": [],
+      "source_catalog_bytes": 0,
+      "source_manifests_bytes": 644,
+      "tracked_dirty": 0,
+      "untracked": 0
+    },
+    {
+      "ancestor_reparse_or_error": [],
+      "behind_unique": "339\t0",
+      "branch": null,
+      "bytes": 56497795,
+      "companies_bytes": 5318534,
+      "companies_extensions": {
+        ".css": 142304,
+        ".js": 4353506,
+        ".json": 9394,
+        ".jsonl": 213316,
+        ".md": 600014
+      },
+      "current_relation_to_master": "340\t0",
+      "current_status": {
+        "entries": [],
+        "entry_count": 0,
+        "error": "",
+        "rc": 0,
+        "tracked_dirty_count": 0,
+        "untracked_count": 0
+      },
+      "detached": true,
+      "dirty_examples": [],
+      "disposition": "planned_ordinary_remove",
+      "errors": [],
+      "files": 1296,
+      "head": "545a9861dd5b7c72669e053d05f6e7de1beae6f6",
+      "hold_reasons": [],
+      "ignored": {
+        "bytes": 3217,
+        "count": 9,
+        "error_count": 0,
+        "errors": [],
+        "example_paths": [
+          ".pytest_cache/.gitignore",
+          ".pytest_cache/CACHEDIR.TAG",
+          ".pytest_cache/README.md",
+          ".pytest_cache/v/cache/lastfailed",
+          ".pytest_cache/v/cache/nodeids",
+          ".ruff_cache/.gitignore",
+          ".ruff_cache/0.15.18/16790556004784800578",
+          ".ruff_cache/0.15.18/4624792645089586359",
+          ".ruff_cache/CACHEDIR.TAG"
+        ],
+        "git_error": "",
+        "rc": 0,
+        "top": {
+          ".pytest_cache": 2902,
+          ".ruff_cache": 315
+        }
+      },
+      "ignored_classification": {
+        "allowed_disposal": "Root permits regenerable cache/pyc and exact empty legacy ingestion marks; no unique source input classes found.",
+        "checked_at_utc": "2026-10-03T11:39:19.288433+00:00",
+        "class_bytes": {
+          ".pytest_cache": 2902,
+          ".ruff_cache": 315
+        },
+        "classes": {
+          ".pytest_cache": 5,
+          ".ruff_cache": 4
+        },
+        "empty_ingested_db": [],
+        "unknown_paths": []
+      },
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-703/company-wiki",
+      "raw_kinds": {
+        "company_pdf_txt_bytes": 0,
+        "note": "Tracked legacy projection/static company files only; zero company PDF/TXT originals. Ignored contents are not assumed disposable."
+      },
+      "reparse": [],
+      "source_catalog_bytes": 0,
+      "source_manifests_bytes": 644,
+      "tracked_dirty": 0,
+      "untracked": 0
+    },
+    {
+      "ancestor_reparse_or_error": [],
+      "behind_unique": "336\t0",
+      "branch": null,
+      "bytes": 56514908,
+      "companies_bytes": 5318534,
+      "companies_extensions": {
+        ".css": 142304,
+        ".js": 4353506,
+        ".json": 9394,
+        ".jsonl": 213316,
+        ".md": 600014
+      },
+      "current_relation_to_master": "337\t0",
+      "current_status": {
+        "entries": [],
+        "entry_count": 0,
+        "error": "",
+        "rc": 0,
+        "tracked_dirty_count": 0,
+        "untracked_count": 0
+      },
+      "detached": true,
+      "dirty_examples": [],
+      "disposition": "planned_ordinary_remove",
+      "errors": [],
+      "files": 1298,
+      "head": "85f45a30f8f07faa33148f4a8be2e4cfcb76c3dd",
+      "hold_reasons": [],
+      "ignored": {
+        "bytes": 3126,
+        "count": 9,
+        "error_count": 0,
+        "errors": [],
+        "example_paths": [
+          ".pytest_cache/.gitignore",
+          ".pytest_cache/CACHEDIR.TAG",
+          ".pytest_cache/README.md",
+          ".pytest_cache/v/cache/lastfailed",
+          ".pytest_cache/v/cache/nodeids",
+          ".ruff_cache/.gitignore",
+          ".ruff_cache/0.15.18/18073284479632600623",
+          ".ruff_cache/0.15.18/901643567726125051",
+          ".ruff_cache/CACHEDIR.TAG"
+        ],
+        "git_error": "",
+        "rc": 0,
+        "top": {
+          ".pytest_cache": 2805,
+          ".ruff_cache": 321
+        }
+      },
+      "ignored_classification": {
+        "allowed_disposal": "Root permits regenerable cache/pyc and exact empty legacy ingestion marks; no unique source input classes found.",
+        "checked_at_utc": "2026-10-03T11:39:19.854351+00:00",
+        "class_bytes": {
+          ".pytest_cache": 2805,
+          ".ruff_cache": 321
+        },
+        "classes": {
+          ".pytest_cache": 5,
+          ".ruff_cache": 4
+        },
+        "empty_ingested_db": [],
+        "unknown_paths": []
+      },
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-703-r2/company-wiki",
+      "raw_kinds": {
+        "company_pdf_txt_bytes": 0,
+        "note": "Tracked legacy projection/static company files only; zero company PDF/TXT originals. Ignored contents are not assumed disposable."
+      },
+      "reparse": [],
+      "source_catalog_bytes": 0,
+      "source_manifests_bytes": 644,
+      "tracked_dirty": 0,
+      "untracked": 0
+    },
+    {
+      "ancestor_reparse_or_error": [],
+      "behind_unique": "335\t0",
+      "branch": null,
+      "bytes": 56513474,
+      "companies_bytes": 5318534,
+      "companies_extensions": {
+        ".css": 142304,
+        ".js": 4353506,
+        ".json": 9394,
+        ".jsonl": 213316,
+        ".md": 600014
+      },
+      "current_relation_to_master": "336\t0",
+      "current_status": {
+        "entries": [],
+        "entry_count": 0,
+        "error": "",
+        "rc": 0,
+        "tracked_dirty_count": 0,
+        "untracked_count": 0
+      },
+      "detached": true,
+      "dirty_examples": [],
+      "disposition": "planned_ordinary_remove",
+      "errors": [],
+      "files": 1298,
+      "head": "d546558830fd594fcbb83eef7cba550d4b4bc1d2",
+      "hold_reasons": [],
+      "ignored": {
+        "bytes": 1329,
+        "count": 9,
+        "error_count": 0,
+        "errors": [],
+        "example_paths": [
+          ".pytest_cache/.gitignore",
+          ".pytest_cache/CACHEDIR.TAG",
+          ".pytest_cache/README.md",
+          ".pytest_cache/v/cache/lastfailed",
+          ".pytest_cache/v/cache/nodeids",
+          ".ruff_cache/.gitignore",
+          ".ruff_cache/0.15.18/3482152525609310524",
+          ".ruff_cache/0.15.18/6352453304979222256",
+          ".ruff_cache/CACHEDIR.TAG"
+        ],
+        "git_error": "",
+        "rc": 0,
+        "top": {
+          ".pytest_cache": 1008,
+          ".ruff_cache": 321
+        }
+      },
+      "ignored_classification": {
+        "allowed_disposal": "Root permits regenerable cache/pyc and exact empty legacy ingestion marks; no unique source input classes found.",
+        "checked_at_utc": "2026-10-03T11:39:20.398909+00:00",
+        "class_bytes": {
+          ".pytest_cache": 1008,
+          ".ruff_cache": 321
+        },
+        "classes": {
+          ".pytest_cache": 5,
+          ".ruff_cache": 4
+        },
+        "empty_ingested_db": [],
+        "unknown_paths": []
+      },
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-703-r3/company-wiki",
+      "raw_kinds": {
+        "company_pdf_txt_bytes": 0,
+        "note": "Tracked legacy projection/static company files only; zero company PDF/TXT originals. Ignored contents are not assumed disposable."
+      },
+      "reparse": [],
+      "source_catalog_bytes": 0,
+      "source_manifests_bytes": 644,
+      "tracked_dirty": 0,
+      "untracked": 0
+    },
+    {
+      "ancestor_reparse_or_error": [],
+      "behind_unique": "332\t0",
+      "branch": null,
+      "bytes": 56570580,
+      "companies_bytes": 5318534,
+      "companies_extensions": {
+        ".css": 142304,
+        ".js": 4353506,
+        ".json": 9394,
+        ".jsonl": 213316,
+        ".md": 600014
+      },
+      "current_relation_to_master": "333\t0",
+      "current_status": {
+        "entries": [],
+        "entry_count": 0,
+        "error": "",
+        "rc": 0,
+        "tracked_dirty_count": 0,
+        "untracked_count": 0
+      },
+      "detached": true,
+      "dirty_examples": [],
+      "disposition": "planned_ordinary_remove",
+      "errors": [],
+      "files": 1305,
+      "head": "c3fd9c413eb8f1309af21a2d67daa19aacabbd30",
+      "hold_reasons": [],
+      "ignored": {
+        "bytes": 5027,
+        "count": 9,
+        "error_count": 0,
+        "errors": [],
+        "example_paths": [
+          ".pytest_cache/.gitignore",
+          ".pytest_cache/CACHEDIR.TAG",
+          ".pytest_cache/README.md",
+          ".pytest_cache/v/cache/lastfailed",
+          ".pytest_cache/v/cache/nodeids",
+          ".ruff_cache/.gitignore",
+          ".ruff_cache/0.15.18/14462396464258785605",
+          ".ruff_cache/0.15.18/6673530030450734059",
+          ".ruff_cache/CACHEDIR.TAG"
+        ],
+        "git_error": "",
+        "rc": 0,
+        "top": {
+          ".pytest_cache": 4650,
+          ".ruff_cache": 377
+        }
+      },
+      "ignored_classification": {
+        "allowed_disposal": "Root permits regenerable cache/pyc and exact empty legacy ingestion marks; no unique source input classes found.",
+        "checked_at_utc": "2026-10-03T11:39:20.991585+00:00",
+        "class_bytes": {
+          ".pytest_cache": 4650,
+          ".ruff_cache": 377
+        },
+        "classes": {
+          ".pytest_cache": 5,
+          ".ruff_cache": 4
+        },
+        "empty_ingested_db": [],
+        "unknown_paths": []
+      },
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-704/company-wiki",
+      "raw_kinds": {
+        "company_pdf_txt_bytes": 0,
+        "note": "Tracked legacy projection/static company files only; zero company PDF/TXT originals. Ignored contents are not assumed disposable."
+      },
+      "reparse": [],
+      "source_catalog_bytes": 0,
+      "source_manifests_bytes": 644,
+      "tracked_dirty": 0,
+      "untracked": 0
+    },
+    {
+      "ancestor_reparse_or_error": [],
+      "behind_unique": "329\t0",
+      "branch": null,
+      "bytes": 56614336,
+      "companies_bytes": 5318534,
+      "companies_extensions": {
+        ".css": 142304,
+        ".js": 4353506,
+        ".json": 9394,
+        ".jsonl": 213316,
+        ".md": 600014
+      },
+      "current_relation_to_master": "330\t0",
+      "current_status": {
+        "entries": [],
+        "entry_count": 0,
+        "error": "",
+        "rc": 0,
+        "tracked_dirty_count": 0,
+        "untracked_count": 0
+      },
+      "detached": true,
+      "dirty_examples": [],
+      "disposition": "planned_ordinary_remove",
+      "errors": [],
+      "files": 1310,
+      "head": "6ada6fed17a66457b8aa624b5d5a41a49ddccb15",
+      "hold_reasons": [],
+      "ignored": {
+        "bytes": 6383,
+        "count": 10,
+        "error_count": 0,
+        "errors": [],
+        "example_paths": [
+          ".pytest_cache/.gitignore",
+          ".pytest_cache/CACHEDIR.TAG",
+          ".pytest_cache/README.md",
+          ".pytest_cache/v/cache/lastfailed",
+          ".pytest_cache/v/cache/nodeids",
+          ".ruff_cache/.gitignore",
+          ".ruff_cache/0.15.18/17516665702754020138",
+          ".ruff_cache/0.15.18/3254962674210217611",
+          ".ruff_cache/0.15.18/8912933402950444588",
+          ".ruff_cache/CACHEDIR.TAG"
+        ],
+        "git_error": "",
+        "rc": 0,
+        "top": {
+          ".pytest_cache": 5937,
+          ".ruff_cache": 446
+        }
+      },
+      "ignored_classification": {
+        "allowed_disposal": "Root permits regenerable cache/pyc and exact empty legacy ingestion marks; no unique source input classes found.",
+        "checked_at_utc": "2026-10-03T11:39:21.554906+00:00",
+        "class_bytes": {
+          ".pytest_cache": 5937,
+          ".ruff_cache": 446
+        },
+        "classes": {
+          ".pytest_cache": 5,
+          ".ruff_cache": 5
+        },
+        "empty_ingested_db": [],
+        "unknown_paths": []
+      },
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-705/company-wiki",
+      "raw_kinds": {
+        "company_pdf_txt_bytes": 0,
+        "note": "Tracked legacy projection/static company files only; zero company PDF/TXT originals. Ignored contents are not assumed disposable."
+      },
+      "reparse": [],
+      "source_catalog_bytes": 0,
+      "source_manifests_bytes": 644,
+      "tracked_dirty": 0,
+      "untracked": 0
+    },
+    {
+      "ancestor_reparse_or_error": [],
+      "behind_unique": "327\t0",
+      "branch": null,
+      "bytes": 56612518,
+      "companies_bytes": 5318534,
+      "companies_extensions": {
+        ".css": 142304,
+        ".js": 4353506,
+        ".json": 9394,
+        ".jsonl": 213316,
+        ".md": 600014
+      },
+      "current_relation_to_master": "328\t0",
+      "current_status": {
+        "entries": [],
+        "entry_count": 0,
+        "error": "",
+        "rc": 0,
+        "tracked_dirty_count": 0,
+        "untracked_count": 0
+      },
+      "detached": true,
+      "dirty_examples": [],
+      "disposition": "planned_ordinary_remove",
+      "errors": [],
+      "files": 1310,
+      "head": "f20a64f265c0472c16e19a3ddfa6d7e5d0b79e54",
+      "hold_reasons": [],
+      "ignored": {
+        "bytes": 2507,
+        "count": 10,
+        "error_count": 0,
+        "errors": [],
+        "example_paths": [
+          ".pytest_cache/.gitignore",
+          ".pytest_cache/CACHEDIR.TAG",
+          ".pytest_cache/README.md",
+          ".pytest_cache/v/cache/lastfailed",
+          ".pytest_cache/v/cache/nodeids",
+          ".ruff_cache/.gitignore",
+          ".ruff_cache/0.15.18/15733169449839388224",
+          ".ruff_cache/0.15.18/16168240393642590871",
+          ".ruff_cache/0.15.18/5491202450308001714",
+          ".ruff_cache/CACHEDIR.TAG"
+        ],
+        "git_error": "",
+        "rc": 0,
+        "top": {
+          ".pytest_cache": 2052,
+          ".ruff_cache": 455
+        }
+      },
+      "ignored_classification": {
+        "allowed_disposal": "Root permits regenerable cache/pyc and exact empty legacy ingestion marks; no unique source input classes found.",
+        "checked_at_utc": "2026-10-03T11:39:22.141604+00:00",
+        "class_bytes": {
+          ".pytest_cache": 2052,
+          ".ruff_cache": 455
+        },
+        "classes": {
+          ".pytest_cache": 5,
+          ".ruff_cache": 5
+        },
+        "empty_ingested_db": [],
+        "unknown_paths": []
+      },
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-705-r2/company-wiki",
+      "raw_kinds": {
+        "company_pdf_txt_bytes": 0,
+        "note": "Tracked legacy projection/static company files only; zero company PDF/TXT originals. Ignored contents are not assumed disposable."
+      },
+      "reparse": [],
+      "source_catalog_bytes": 0,
+      "source_manifests_bytes": 644,
+      "tracked_dirty": 0,
+      "untracked": 0
+    },
+    {
+      "ancestor_reparse_or_error": [],
+      "behind_unique": "324\t0",
+      "branch": null,
+      "bytes": 56669271,
+      "companies_bytes": 5318534,
+      "companies_extensions": {
+        ".css": 142304,
+        ".js": 4353506,
+        ".json": 9394,
+        ".jsonl": 213316,
+        ".md": 600014
+      },
+      "current_relation_to_master": "325\t0",
+      "current_status": {
+        "entries": [],
+        "entry_count": 0,
+        "error": "",
+        "rc": 0,
+        "tracked_dirty_count": 0,
+        "untracked_count": 0
+      },
+      "detached": true,
+      "dirty_examples": [],
+      "disposition": "planned_ordinary_remove",
+      "errors": [],
+      "files": 1314,
+      "head": "bf502af1ce5a1a944f3142befaf6a9b899d1f4ae",
+      "hold_reasons": [],
+      "ignored": {
+        "bytes": 5831,
+        "count": 9,
+        "error_count": 0,
+        "errors": [],
+        "example_paths": [
+          ".pytest_cache/.gitignore",
+          ".pytest_cache/CACHEDIR.TAG",
+          ".pytest_cache/README.md",
+          ".pytest_cache/v/cache/lastfailed",
+          ".pytest_cache/v/cache/nodeids",
+          ".ruff_cache/.gitignore",
+          ".ruff_cache/0.15.18/12434998783149551505",
+          ".ruff_cache/0.15.18/6774366841701097104",
+          ".ruff_cache/CACHEDIR.TAG"
+        ],
+        "git_error": "",
+        "rc": 0,
+        "top": {
+          ".pytest_cache": 5345,
+          ".ruff_cache": 486
+        }
+      },
+      "ignored_classification": {
+        "allowed_disposal": "Root permits regenerable cache/pyc and exact empty legacy ingestion marks; no unique source input classes found.",
+        "checked_at_utc": "2026-10-03T11:39:22.795099+00:00",
+        "class_bytes": {
+          ".pytest_cache": 5345,
+          ".ruff_cache": 486
+        },
+        "classes": {
+          ".pytest_cache": 5,
+          ".ruff_cache": 4
+        },
+        "empty_ingested_db": [],
+        "unknown_paths": []
+      },
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-801/company-wiki",
+      "raw_kinds": {
+        "company_pdf_txt_bytes": 0,
+        "note": "Tracked legacy projection/static company files only; zero company PDF/TXT originals. Ignored contents are not assumed disposable."
+      },
+      "reparse": [],
+      "source_catalog_bytes": 0,
+      "source_manifests_bytes": 644,
+      "tracked_dirty": 0,
+      "untracked": 0
+    },
+    {
+      "ancestor_reparse_or_error": [],
+      "behind_unique": "320\t0",
+      "branch": null,
+      "bytes": 56681653,
+      "companies_bytes": 5318534,
+      "companies_extensions": {
+        ".css": 142304,
+        ".js": 4353506,
+        ".json": 9394,
+        ".jsonl": 213316,
+        ".md": 600014
+      },
+      "current_relation_to_master": "321\t0",
+      "current_status": {
+        "entries": [],
+        "entry_count": 0,
+        "error": "",
+        "rc": 0,
+        "tracked_dirty_count": 0,
+        "untracked_count": 0
+      },
+      "detached": true,
+      "dirty_examples": [],
+      "disposition": "planned_ordinary_remove",
+      "errors": [],
+      "files": 1307,
+      "head": "74f8ec08d613dacaa68413736d364b3ce5bd75a1",
+      "hold_reasons": [],
+      "ignored": {
+        "bytes": 0,
+        "count": 0,
+        "error_count": 0,
+        "errors": [],
+        "example_paths": [],
+        "git_error": "",
+        "rc": 0,
+        "top": {}
+      },
+      "ignored_classification": {
+        "allowed_disposal": "Root permits regenerable cache/pyc and exact empty legacy ingestion marks; no unique source input classes found.",
+        "checked_at_utc": "2026-10-03T11:39:23.406100+00:00",
+        "class_bytes": {},
+        "classes": {},
+        "empty_ingested_db": [],
+        "unknown_paths": []
+      },
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-802-r2/company-wiki",
+      "raw_kinds": {
+        "company_pdf_txt_bytes": 0,
+        "note": "Tracked legacy projection/static company files only; zero company PDF/TXT originals. Ignored contents are not assumed disposable."
+      },
+      "reparse": [],
+      "source_catalog_bytes": 0,
+      "source_manifests_bytes": 644,
+      "tracked_dirty": 0,
+      "untracked": 0
+    },
+    {
+      "ancestor_reparse_or_error": [],
+      "behind_unique": "314\t0",
+      "branch": null,
+      "bytes": 56731779,
+      "companies_bytes": 5318534,
+      "companies_extensions": {
+        ".css": 142304,
+        ".js": 4353506,
+        ".json": 9394,
+        ".jsonl": 213316,
+        ".md": 600014
+      },
+      "current_relation_to_master": "315\t0",
+      "current_status": {
+        "entries": [],
+        "entry_count": 0,
+        "error": "",
+        "rc": 0,
+        "tracked_dirty_count": 0,
+        "untracked_count": 0
+      },
+      "detached": true,
+      "dirty_examples": [],
+      "disposition": "planned_ordinary_remove",
+      "errors": [],
+      "files": 1320,
+      "head": "18a2792ca5e02e7960d694a8007e097a46c4179e",
+      "hold_reasons": [],
+      "ignored": {
+        "bytes": 1393,
+        "count": 7,
+        "error_count": 0,
+        "errors": [],
+        "example_paths": [
+          ".pytest_cache/.gitignore",
+          ".pytest_cache/CACHEDIR.TAG",
+          ".pytest_cache/README.md",
+          ".pytest_cache/v/cache/nodeids",
+          ".ruff_cache/.gitignore",
+          ".ruff_cache/0.15.18/2402690064144501368",
+          ".ruff_cache/CACHEDIR.TAG"
+        ],
+        "git_error": "",
+        "rc": 0,
+        "top": {
+          ".pytest_cache": 1146,
+          ".ruff_cache": 247
+        }
+      },
+      "ignored_classification": {
+        "allowed_disposal": "Root permits regenerable cache/pyc and exact empty legacy ingestion marks; no unique source input classes found.",
+        "checked_at_utc": "2026-10-03T11:39:24.049198+00:00",
+        "class_bytes": {
+          ".pytest_cache": 1146,
+          ".ruff_cache": 247
+        },
+        "classes": {
+          ".pytest_cache": 4,
+          ".ruff_cache": 3
+        },
+        "empty_ingested_db": [],
+        "unknown_paths": []
+      },
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-803/company-wiki",
+      "raw_kinds": {
+        "company_pdf_txt_bytes": 0,
+        "note": "Tracked legacy projection/static company files only; zero company PDF/TXT originals. Ignored contents are not assumed disposable."
+      },
+      "reparse": [],
+      "source_catalog_bytes": 0,
+      "source_manifests_bytes": 644,
+      "tracked_dirty": 0,
+      "untracked": 0
+    },
+    {
+      "ancestor_reparse_or_error": [],
+      "behind_unique": "272\t0",
+      "branch": null,
+      "bytes": 58063379,
+      "companies_bytes": 5318534,
+      "companies_extensions": {
+        ".css": 142304,
+        ".js": 4353506,
+        ".json": 9394,
+        ".jsonl": 213316,
+        ".md": 600014
+      },
+      "current_relation_to_master": "273\t0",
+      "current_status": {
+        "entries": [],
+        "entry_count": 0,
+        "error": "",
+        "rc": 0,
+        "tracked_dirty_count": 0,
+        "untracked_count": 0
+      },
+      "detached": true,
+      "dirty_examples": [],
+      "disposition": "planned_ordinary_remove",
+      "errors": [],
+      "files": 1415,
+      "head": "304966d1579344cbf4b1c368c7ddea46b443f982",
+      "hold_reasons": [],
+      "ignored": {
+        "bytes": 904510,
+        "count": 46,
+        "error_count": 0,
+        "errors": [],
+        "example_paths": [
+          "src/company_wiki/__pycache__/__init__.cpython-313.pyc",
+          "src/company_wiki/__pycache__/canonical_ingest.cpython-313.pyc",
+          "src/company_wiki/parser_adapters/__pycache__/__init__.cpython-313.pyc",
+          "src/company_wiki/parser_adapters/__pycache__/pdf_extract_v3.cpython-313.pyc",
+          "src/company_wiki/parser_adapters/__pycache__/pdf_page_aware.cpython-313.pyc",
+          "src/company_wiki/source_catalog/__pycache__/__init__.cpython-313.pyc",
+          "src/company_wiki/source_catalog/__pycache__/acquisition.cpython-313.pyc",
+          "src/company_wiki/source_catalog/__pycache__/acquisition_config.cpython-313.pyc",
+          "src/company_wiki/source_catalog/__pycache__/acquisition_journal.cpython-313.pyc",
+          "src/company_wiki/source_catalog/__pycache__/acquisition_service.cpython-313.pyc",
+          "src/company_wiki/source_catalog/__pycache__/adapter_process.cpython-313.pyc",
+          "src/company_wiki/source_catalog/__pycache__/admission.cpython-313.pyc"
+        ],
+        "git_error": "",
+        "rc": 0,
+        "top": {
+          "src": 904510
+        }
+      },
+      "ignored_classification": {
+        "allowed_disposal": "Root permits regenerable cache/pyc and exact empty legacy ingestion marks; no unique source input classes found.",
+        "checked_at_utc": "2026-10-03T11:39:24.609417+00:00",
+        "class_bytes": {
+          "python_bytecode": 904510
+        },
+        "classes": {
+          "python_bytecode": 46
+        },
+        "empty_ingested_db": [],
+        "unknown_paths": []
+      },
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-r8-debug",
+      "raw_kinds": {
+        "company_pdf_txt_bytes": 0,
+        "note": "Tracked legacy projection/static company files only; zero company PDF/TXT originals. Ignored contents are not assumed disposable."
+      },
+      "reparse": [],
+      "source_catalog_bytes": 0,
+      "source_manifests_bytes": 644,
+      "tracked_dirty": 0,
+      "untracked": 0
+    }
+  ],
+  "comparison": {
+    "B1_deleted_bytes": 3055796224,
+    "B1_new_receipt_bytes": 1207,
+    "B1_snapshot_exists": false,
+    "companies_delta_bytes": 0,
+    "source_manifests_delta_bytes": 0,
+    "three_roots_before_B1": 45748203875
+  },
+  "excluded": [
+    {
+      "ancestor_reparse_or_error": [],
+      "behind_unique": "50\t2",
+      "branch": "codex/rf-state-audit",
+      "bytes": 72492226,
+      "companies_bytes": 5318534,
+      "companies_extensions": {
+        ".css": 142304,
+        ".js": 4353506,
+        ".json": 9394,
+        ".jsonl": 213316,
+        ".md": 600014
+      },
+      "current_relation_to_master": "51\t2",
+      "current_status": {
+        "entries": [],
+        "entry_count": 0,
+        "error": "",
+        "rc": 0,
+        "tracked_dirty_count": 0,
+        "untracked_count": 0
+      },
+      "detached": false,
+      "dirty_examples": [],
+      "disposition": "excluded",
+      "errors": [],
+      "files": 1809,
+      "head": "447d1c74b78bec369ff5dc32fe78097905ce6342",
+      "ignored": {
+        "bytes": 1152633,
+        "count": 56,
+        "error_count": 0,
+        "errors": [],
+        "example_paths": [
+          "src/company_wiki/__pycache__/__init__.cpython-313.pyc",
+          "src/company_wiki/__pycache__/canonical_ingest.cpython-313.pyc",
+          "src/company_wiki/parser_adapters/__pycache__/__init__.cpython-313.pyc",
+          "src/company_wiki/parser_adapters/__pycache__/pdf_extract_v3.cpython-313.pyc",
+          "src/company_wiki/parser_adapters/__pycache__/pdf_page_aware.cpython-313.pyc",
+          "src/company_wiki/source_catalog/__pycache__/__init__.cpython-313.pyc",
+          "src/company_wiki/source_catalog/__pycache__/acquisition.cpython-313.pyc",
+          "src/company_wiki/source_catalog/__pycache__/acquisition_config.cpython-313.pyc",
+          "src/company_wiki/source_catalog/__pycache__/acquisition_journal.cpython-313.pyc",
+          "src/company_wiki/source_catalog/__pycache__/acquisition_service.cpython-313.pyc",
+          "src/company_wiki/source_catalog/__pycache__/adapter_process.cpython-313.pyc",
+          "src/company_wiki/source_catalog/__pycache__/admission.cpython-313.pyc"
+        ],
+        "git_error": "",
+        "rc": 0,
+        "top": {
+          "src": 1152633
+        }
+      },
+      "managed_chat_artifact": true,
+      "path": "C:/Users/郑曾波/.codex/worktrees/rf-state-audit/company-wiki",
+      "raw_kinds": {
+        "company_pdf_txt_bytes": 0,
+        "note": "Tracked legacy projection/static company files only; zero company PDF/TXT originals. Ignored contents are not assumed disposable."
+      },
+      "reason": "Current chat managed artifact with unique audit documentation commits; root archive_worktree preserves recoverable snapshot, ordinary remove prohibited.",
+      "reparse": [],
+      "source_catalog_bytes": 0,
+      "source_manifests_bytes": 644,
+      "tracked_dirty": 0,
+      "untracked": 0
+    },
+    {
+      "ancestor_reparse_or_error": [],
+      "behind_unique": "155\t0",
+      "branch": null,
+      "bytes": 72,
+      "companies_bytes": 0,
+      "companies_extensions": {},
+      "current_relation_to_master": "156\t0",
+      "current_status": {
+        "entries": [
+          "D .coverage",
+          " D .env.example",
+          " D .extracts_db.json",
+          " D .gitattributes",
+          " D .githooks/pre-commit",
+          " D .githooks/pre-push",
+          " D .github/workflows/ci.yml",
+          " D .gitignore",
+          " D .obsidian/app.json",
+          " D .obsidian/appearance.json",
+          " D .obsidian/community-plugins.json",
+          " D .obsidian/graph.json"
+        ],
+        "entry_count": 1640,
+        "error": "",
+        "rc": 0,
+        "tracked_dirty_count": 1640,
+        "untracked_count": 0
+      },
+      "detached": true,
+      "dirty_examples": [
+        " D .coverage",
+        " D .env.example",
+        " D .extracts_db.json",
+        " D .gitattributes",
+        " D .githooks/pre-commit",
+        " D .githooks/pre-push"
+      ],
+      "disposition": "excluded",
+      "errors": [],
+      "files": 1,
+      "head": "7d4852fa35023aaf467ba7a7277c0ff4d77c2eb9",
+      "ignored": {
+        "bytes": 0,
+        "count": 0,
+        "error_count": 0,
+        "errors": [],
+        "example_paths": [],
+        "git_error": "",
+        "rc": 0,
+        "top": {}
+      },
+      "path": "C:/Users/郑曾波/AppData/Local/Temp/cw-preb",
+      "raw_kinds": {
+        "company_pdf_txt_bytes": 0,
+        "note": "Tracked legacy projection/static company files only; zero company PDF/TXT originals. Ignored contents are not assumed disposable."
+      },
+      "reason": "Empty .git-only root with tracked deletions; do not restore old files.",
+      "reparse": [],
+      "source_catalog_bytes": 0,
+      "source_manifests_bytes": 0,
+      "tracked_dirty": 1640,
+      "untracked": 0
+    },
+    {
+      "ancestor_reparse_or_error": [],
+      "behind_unique": "147\t0",
+      "branch": null,
+      "bytes": 77,
+      "companies_bytes": 0,
+      "companies_extensions": {},
+      "current_relation_to_master": "148\t0",
+      "current_status": {
+        "entries": [
+          "D .coverage",
+          " D .env.example",
+          " D .extracts_db.json",
+          " D .gitattributes",
+          " D .githooks/pre-commit",
+          " D .githooks/pre-push",
+          " D .github/workflows/ci.yml",
+          " D .gitignore",
+          " D .obsidian/app.json",
+          " D .obsidian/appearance.json",
+          " D .obsidian/community-plugins.json",
+          " D .obsidian/graph.json"
+        ],
+        "entry_count": 1640,
+        "error": "",
+        "rc": 0,
+        "tracked_dirty_count": 1640,
+        "untracked_count": 0
+      },
+      "detached": true,
+      "dirty_examples": [
+        " D .coverage",
+        " D .env.example",
+        " D .extracts_db.json",
+        " D .gitattributes",
+        " D .githooks/pre-commit",
+        " D .githooks/pre-push"
+      ],
+      "disposition": "excluded",
+      "errors": [],
+      "files": 1,
+      "head": "c986c7adb61508f475f801c6fda4d2ab207ef269",
+      "ignored": {
+        "bytes": 0,
+        "count": 0,
+        "error_count": 0,
+        "errors": [],
+        "example_paths": [],
+        "git_error": "",
+        "rc": 0,
+        "top": {}
+      },
+      "path": "C:/Users/郑曾波/AppData/Local/Temp/r4b02-preb02",
+      "raw_kinds": {
+        "company_pdf_txt_bytes": 0,
+        "note": "Tracked legacy projection/static company files only; zero company PDF/TXT originals. Ignored contents are not assumed disposable."
+      },
+      "reason": "Empty .git-only root with tracked deletions; do not restore old files.",
+      "reparse": [],
+      "source_catalog_bytes": 0,
+      "source_manifests_bytes": 0,
+      "tracked_dirty": 1640,
+      "untracked": 0
+    },
+    {
+      "ancestor_reparse_or_error": [],
+      "behind_unique": "322\t1",
+      "branch": null,
+      "bytes": 56920847,
+      "companies_bytes": 5318534,
+      "companies_extensions": {
+        ".css": 142304,
+        ".js": 4353506,
+        ".json": 9394,
+        ".jsonl": 213316,
+        ".md": 600014
+      },
+      "current_relation_to_master": "323\t1",
+      "current_status": {
+        "entries": [],
+        "entry_count": 0,
+        "error": "",
+        "rc": 0,
+        "tracked_dirty_count": 0,
+        "untracked_count": 0
+      },
+      "detached": true,
+      "dirty_examples": [],
+      "disposition": "excluded",
+      "errors": [],
+      "files": 1310,
+      "head": "ec00a028048da40cb43e8fc058aad9c8a7e1f963",
+      "ignored": {
+        "bytes": 221184,
+        "count": 1,
+        "error_count": 0,
+        "errors": [],
+        "example_paths": [
+          ".source_catalog/catalog.sqlite3"
+        ],
+        "git_error": "",
+        "rc": 0,
+        "top": {
+          ".source_catalog": 221184
+        }
+      },
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-802/company-wiki",
+      "raw_kinds": {
+        "company_pdf_txt_bytes": 0,
+        "note": "Tracked legacy projection/static company files only; zero company PDF/TXT originals. Ignored contents are not assumed disposable."
+      },
+      "reason": "Unique historical documentation commits; preserve refs first.",
+      "reparse": [],
+      "source_catalog_bytes": 221184,
+      "source_manifests_bytes": 644,
+      "tracked_dirty": 0,
+      "untracked": 0
+    },
+    {
+      "ancestor_reparse_or_error": [],
+      "behind_unique": "319\t1",
+      "branch": null,
+      "bytes": 56693435,
+      "companies_bytes": 5318534,
+      "companies_extensions": {
+        ".css": 142304,
+        ".js": 4353506,
+        ".json": 9394,
+        ".jsonl": 213316,
+        ".md": 600014
+      },
+      "current_relation_to_master": "320\t1",
+      "current_status": {
+        "entries": [],
+        "entry_count": 0,
+        "error": "",
+        "rc": 0,
+        "tracked_dirty_count": 0,
+        "untracked_count": 0
+      },
+      "detached": true,
+      "dirty_examples": [],
+      "disposition": "excluded",
+      "errors": [],
+      "files": 1309,
+      "head": "29abc878dcf04fba46f8919331bdb9d5f1f9a297",
+      "ignored": {
+        "bytes": 0,
+        "count": 0,
+        "error_count": 0,
+        "errors": [],
+        "example_paths": [],
+        "git_error": "",
+        "rc": 0,
+        "top": {}
+      },
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-802-r3/company-wiki",
+      "raw_kinds": {
+        "company_pdf_txt_bytes": 0,
+        "note": "Tracked legacy projection/static company files only; zero company PDF/TXT originals. Ignored contents are not assumed disposable."
+      },
+      "reason": "Unique historical documentation commits; preserve refs first.",
+      "reparse": [],
+      "source_catalog_bytes": 0,
+      "source_manifests_bytes": 644,
+      "tracked_dirty": 0,
+      "untracked": 0
+    },
+    {
+      "ancestor_reparse_or_error": [],
+      "behind_unique": "311\t0",
+      "branch": null,
+      "bytes": 56785249,
+      "companies_bytes": 5318534,
+      "companies_extensions": {
+        ".css": 142304,
+        ".js": 4353506,
+        ".json": 9394,
+        ".jsonl": 213316,
+        ".md": 600014
+      },
+      "current_relation_to_master": "312\t0",
+      "current_status": {
+        "entries": [
+          "?? assurance/fc/FC-804/12_reviewer_receipt.json",
+          "?? assurance/fc/FC-804/REVIEWER_REPORT.md"
+        ],
+        "entry_count": 2,
+        "error": "",
+        "rc": 0,
+        "tracked_dirty_count": 0,
+        "untracked_count": 2
+      },
+      "detached": true,
+      "dirty_examples": [
+        "?? assurance/fc/FC-804/12_reviewer_receipt.json",
+        "?? assurance/fc/FC-804/REVIEWER_REPORT.md"
+      ],
+      "disposition": "excluded",
+      "errors": [],
+      "files": 1329,
+      "head": "7d9f40cace24aafed4ef9414a3f5ecbb929c42da",
+      "ignored": {
+        "bytes": 1966,
+        "count": 9,
+        "error_count": 0,
+        "errors": [],
+        "example_paths": [
+          ".pytest_cache/.gitignore",
+          ".pytest_cache/CACHEDIR.TAG",
+          ".pytest_cache/README.md",
+          ".pytest_cache/v/cache/lastfailed",
+          ".pytest_cache/v/cache/nodeids",
+          ".ruff_cache/.gitignore",
+          ".ruff_cache/0.15.18/212578078763851103",
+          ".ruff_cache/0.15.18/7514851580591774342",
+          ".ruff_cache/CACHEDIR.TAG"
+        ],
+        "git_error": "",
+        "rc": 0,
+        "top": {
+          ".pytest_cache": 1628,
+          ".ruff_cache": 338
+        }
+      },
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-804/company-wiki",
+      "raw_kinds": {
+        "company_pdf_txt_bytes": 0,
+        "note": "Tracked legacy projection/static company files only; zero company PDF/TXT originals. Ignored contents are not assumed disposable."
+      },
+      "reason": "Untracked reviewer receipt/report; preserve small records first.",
+      "reparse": [],
+      "source_catalog_bytes": 0,
+      "source_manifests_bytes": 644,
+      "tracked_dirty": 0,
+      "untracked": 2
+    },
+    {
+      "ancestor_reparse_or_error": [],
+      "behind_unique": "308\t0",
+      "branch": null,
+      "bytes": 57911465,
+      "companies_bytes": 5318534,
+      "companies_extensions": {
+        ".css": 142304,
+        ".js": 4353506,
+        ".json": 9394,
+        ".jsonl": 213316,
+        ".md": 600014
+      },
+      "current_relation_to_master": "309\t0",
+      "current_status": {
+        "entries": [
+          "?? assurance/fc/FC-805/12_reviewer_receipt.json",
+          "?? assurance/fc/FC-805/REVIEWER_REPORT.md"
+        ],
+        "entry_count": 2,
+        "error": "",
+        "rc": 0,
+        "tracked_dirty_count": 0,
+        "untracked_count": 2
+      },
+      "detached": true,
+      "dirty_examples": [
+        "?? assurance/fc/FC-805/12_reviewer_receipt.json",
+        "?? assurance/fc/FC-805/REVIEWER_REPORT.md"
+      ],
+      "disposition": "excluded",
+      "errors": [],
+      "files": 1384,
+      "head": "9587cb4650f03ea96327526c1e2f8142843e56f8",
+      "ignored": {
+        "bytes": 1109025,
+        "count": 62,
+        "error_count": 0,
+        "errors": [],
+        "example_paths": [
+          ".pytest_cache/.gitignore",
+          ".pytest_cache/CACHEDIR.TAG",
+          ".pytest_cache/README.md",
+          ".pytest_cache/v/cache/nodeids",
+          ".ruff_cache/.gitignore",
+          ".ruff_cache/0.15.18/14653439948878829773",
+          ".ruff_cache/CACHEDIR.TAG",
+          "src/company_wiki/__pycache__/__init__.cpython-313.pyc",
+          "src/company_wiki/__pycache__/canonical_ingest.cpython-313.pyc",
+          "src/company_wiki/parser_adapters/__pycache__/__init__.cpython-313.pyc",
+          "src/company_wiki/parser_adapters/__pycache__/pdf_extract_v3.cpython-313.pyc",
+          "src/company_wiki/parser_adapters/__pycache__/pdf_page_aware.cpython-313.pyc"
+        ],
+        "git_error": "",
+        "rc": 0,
+        "top": {
+          ".pytest_cache": 1626,
+          ".ruff_cache": 207,
+          "src": 1107192
+        }
+      },
+      "path": "C:/Users/郑曾波/Projects/.fcap-review/fc-805/company-wiki",
+      "raw_kinds": {
+        "company_pdf_txt_bytes": 0,
+        "note": "Tracked legacy projection/static company files only; zero company PDF/TXT originals. Ignored contents are not assumed disposable."
+      },
+      "reason": "Untracked reviewer receipt/report; preserve small records first.",
+      "reparse": [],
+      "source_catalog_bytes": 0,
+      "source_manifests_bytes": 644,
+      "tracked_dirty": 0,
+      "untracked": 2
+    }
+  ],
+  "excluded_active_roots": [
+    "Main company-wiki checkout",
+    "Active StockWiki/RF consumer trees",
+    "RF pinned Temp/company-wiki"
+  ],
+  "execution_errors": [
+    "Initial JS template parse failed before execution/writes; fixed quoting.",
+    "Oversized first shell command exceeded Windows CreateProcess length before execution; compacted payload."
+  ],
+  "generated_at_utc": "2026-10-03T11:31:06.712580+00:00",
+  "inventory": {
+    "acl_classes": {
+      ".rf-*": 22,
+      ".tmp-pytest-narrative-*": 2
+    },
+    "acl_unreadable_main_directory_count": 24,
+    "catalog_second_bytes": {
+      "artifacts": 1120487,
+      "derived": 2826010634,
+      "direct_files": 3071373976,
+      "drills": 77283328,
+      "focus_cleanup_archive": 220981,
+      "index": 45052670,
+      "live_canary": 588,
+      "parser_tmp": 1915919,
+      "qa": 241780,
+      "retirement": 6198717464,
+      "security_master": 6477395,
+      "snapshot-cleanup": 1207,
+      "staging": 57784161,
+      "waves": 13994,
+      "wheel-test": 212051
+    },
+    "logical_sizes_not_allocated_disk_bytes": true,
+    "main_readable_bytes": 43887252776,
+    "reparse_count": 0,
+    "root_top_bytes": {
+      ".codegraph": 33666385,
+      ".git": 187286998,
+      ".mimocode": 50208211,
+      ".mypy_cache": 41840291,
+      ".source_catalog": 12286426635,
+      ".venv": 54463401,
+      "artifacts": 86782297,
+      "companies": 25198502813,
+      "sectors": 564155447,
+      "source_manifests": 5207479410,
+      "web": 87154407
+    },
+    "three_root_bytes": 42692408858,
+    "three_roots_errors": 0
+  },
+  "main_head_observed": "bfc1baeaa94a03794652b628a92d15e5572f1878",
+  "managed_prearchive_fact_check": {
+    "checked_at_utc": "2026-10-03T11:35:10.728065+00:00",
+    "conclusion": "No unique ignored original/news/Word/Excel/manifest was found. All ignored entries are regenerable index/typecheck/test caches or pyc. archive_worktree snapshots preserve all tracked source records and unique audit docs.",
+    "each_root_nonignored_git_status_entries": 0,
+    "each_root_tracked_fact_files": 40,
+    "each_root_unknown_ignored_paths": 0,
+    "each_root_untracked_fact_files": 0,
+    "roots": {
+      "data-lake-reader": {
+        "class_bytes": {
+          ".codegraph": 34458601,
+          ".mypy_cache": 11899568,
+          ".pytest_cache": 55073,
+          ".ruff_cache": 12534,
+          "python_bytecode": 7849736
+        },
+        "class_counts": {
+          ".codegraph": 5,
+          ".mypy_cache": 265,
+          ".pytest_cache": 5,
+          ".ruff_cache": 15,
+          "python_bytecode": 337
+        },
+        "ignored_count": 627
+      },
+      "rf-state-audit": {
+        "class_bytes": {
+          "python_bytecode": 1152633
+        },
+        "class_counts": {
+          "python_bytecode": 56
+        },
+        "ignored_count": 56
+      },
+      "transcript-companion": {
+        "class_bytes": {
+          ".pytest_cache": 3627,
+          ".ruff_cache": 859,
+          "python_bytecode": 1246961
+        },
+        "class_counts": {
+          ".pytest_cache": 5,
+          ".ruff_cache": 4,
+          "python_bytecode": 63
+        },
+        "ignored_count": 72
+      }
+    },
+    "size_caveat": "rf-state-audit gained pyc after initial space inventory; current actual archive receipt must determine disk benefit.",
+    "tracked_company_file_kinds": {
+      "css": 1,
+      "javascript": 1,
+      "json": 8,
+      "jsonl": 16,
+      "markdown": 10
+    },
+    "tracked_fact_scope": [
+      "companies",
+      "source_manifests",
+      "source_provenance",
+      ".state",
+      ".source_catalog"
+    ],
+    "tracked_provenance_manifest_bytes": 1633,
+    "tracked_source_manifest_bytes": 644
+  },
+  "managed_roots_archival": [
+    {
+      "bytes": 125485516,
+      "head": "cba745ac7e398fc2ccd84c132aa5c4c47d8828eb",
+      "method": "root-owned archive_worktree managed artifact snapshot, not ordinary git remove",
+      "path": "C:/Users/郑曾波/.codex/worktrees/data-lake-reader/company-wiki",
+      "unique_commits": 0
+    },
+    {
+      "bytes": 71519645,
+      "head": "ced354a24c02928a28cc94c34b18780f9766cf06",
+      "method": "root-owned archive_worktree managed artifact snapshot, not ordinary git remove",
+      "path": "C:/Users/郑曾波/.codex/worktrees/transcript-companion/company-wiki",
+      "unique_commits": 0
+    },
+    {
+      "bytes": 72492226,
+      "head": "447d1c74b78bec369ff5dc32fe78097905ce6342",
+      "method": "root-owned archive_worktree managed artifact snapshot, not ordinary git remove",
+      "path": "C:/Users/郑曾波/.codex/worktrees/rf-state-audit/company-wiki",
+      "unique_commits": 2
+    }
+  ],
+  "mode": "plan_only_no_deletion",
+  "ordinary_ignored_classification_complete": true,
+  "per_item_rules": [
+    "Root must freeze exact cleanup card first. No deletion has occurred.",
+    "Recheck each allowlisted HEAD/status/ignored classification/reparse/root registration and owner changes immediately before removing.",
+    "Ordinary git worktree remove <exact-path> only. No force/reset/recursive PowerShell deletion/broad prune.",
+    "Hold empty/unknown-ignored/unreadable/reparse/changed roots individually. Known cache/pyc and the exact verified empty ingested DB are permitted; other safe roots may continue.",
+    "Never restore empty .git-only old trees.",
+    "Exclude all three .codex managed artifacts from ordinary removal; root archives exact attached identities with recoverable Git snapshot."
+  ],
+  "schema": "company-wiki-space-reaudit/1",
+  "shared_git_accounting": "Count main .git objects once. Every other worktree has a 71-79 byte .git link file.",
+  "worktree_summary": {
+    "after_pinned_exclusion_bytes": 1611592083,
+    "after_pinned_exclusion_count": 25,
+    "initial_clean_no_unique_bytes": 1684734939,
+    "initial_clean_no_unique_count": 26,
+    "ordinary_method_after_managed_and_pinned_exclusion_bytes": 1414586922,
+    "ordinary_method_after_managed_and_pinned_exclusion_count": 23,
+    "ordinary_remove_ready_bytes": 1414586922,
+    "ordinary_remove_ready_count": 23,
+    "registered_other_count": 33,
+    "total_logical_bytes": 1985538310
+  }
+}

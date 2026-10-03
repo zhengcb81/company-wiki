@@ -1,5 +1,11 @@
 # Progress：叙述性证据试点
 
+## 2026-10-03 — B4普通工作树清理卡冻结
+
+- 独立盘点复核23个普通checkout，HEAD无漂移、无独有提交、工作树干净；ignored仅缓存、pyc及五个0行旧MD5标记库。冻结[精确清单和操作边界](gd_b4_worktree_cleanup_2026-10-03.md)，预计1,414,586,922B；普通Git remove，不force，不扩展到活动根或其他仓。
+- 三个managed附件已显示archived，但实际路径与Git登记仍在；暂不计其空间收益，也不手动越过managed生命周期。小型历史签收、未并独有commit及RF pinned根继续保留。
+- 先正常提交施工卡/盘点，再让独立线逐根执行和报告；两个大派生归档的B3实现并行进行。生产Worker保持paused、原件不进入清理清单。
+
 ## 2026-10-03 — G-C 主线完成，B3施工卡冻结
 
 - RF `6fb2def7`已正常推origin/main并快进rf-impl本地main；4项历史planning dirty完整SHA前后相同。Actions37119502901全部绿，verify2m40s/real-roots1m46s。StockWiki `ae0b3e3`已正常merge，无remote不新增。详见[G-C收尾](harness_lanes/results/gc_consumer_closeout_2026-10-03.md)。

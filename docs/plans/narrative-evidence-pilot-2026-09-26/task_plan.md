@@ -2,7 +2,7 @@
 
 > **2026-10-03 当前入口（用户已恢复）：**G-C 两条consumer已收尾：StockWiki `master@ae0b3e3`、RF `main@6fb2def7`，RF已普通推送且Actions37119502901成功，本地主线已快进且原4处历史planning dirty字节未变。G-A/N3a/E-B不重复。先按[精确归档退役卡](gd_b3_archive_retirement_implementation.md)独立实施B3，再清理审明的旧checkout；N4为[未实施细则](n4_production_batch_implementation.md)。新空间复核三根 **39.760 GiB**，比B1后仅增加1,207B收据，原文/主库无增长；主仓及登记工作树约45.87十进制GB。B3预计释放10.623GiB，实际收据决定完成。生产Worker继续paused，原件保留。
 
-> **2026-10-03 当前主线：**G-A 与 N3a producer 已完成；RF / StockWiki consumer 的真实文档节点已绿，正在修复包装进程先退出时的子进程回收并汇合 G-C。G-D B1 工具已发布 `9f986ad`（Actions 37115171888 成功，55 秒），生产精确删除重复 snapshot，逻辑释放 **3,055,796,224 B / 2.846 GiB**；当前主库 SHA/mtime 不变，原件未进入操作范围。见[实际收据](harness_lanes/results/gd_b1_retirement_2026-10-03.md)。下方历史未勾选项不是当前派发清单；以本首段、文末 Phase 60 和 Next Step 为准。生产 Worker 继续 paused，G-C / G-D 后批与生产运行入口未完成。
+> **2026-10-03 B1执行时快照（已由首段覆盖）：**G-D B1发布 `9f986ad`（Actions37115171888成功/55秒），精确删除重复snapshot，释放3,055,796,224B/2.846GiB，主库SHA/mtime不变。见[实际收据](harness_lanes/results/gd_b1_retirement_2026-10-03.md)。当时G-C尚待局部修复；现G-C已完成，未来步骤以首段、Phase61和Next Step为准，历史未勾选项不作为派发清单。
 
 > 独立实施计划；不替代仓库根目录或任何已有专项计划。Phase 17 的旧库退役已完成；Phase 18 的离线 G1 选择、定位和草稿验证已完成一轮。**2026-09-27 新顺序：RF 主线并线已完成，先实施 R4 数据湖抽象层，再继续本计划的 W5/G2a、Worker 与空间处置。**本计划自身不写 RF，不启动生产 Worker；已有隔离叙述工位与主树未提交文件保持原样，待抽象层合同接入时按当前文件快照整合。
 
