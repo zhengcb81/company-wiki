@@ -1,5 +1,7 @@
 # 六仓独占施工与总指挥集成计划（2026-09-29）
 
+> **最新派发：**CWP N3a 已发布 `a640400`，CI `37113358995` 57 秒成功。RF / StockWiki 分别按[RF 卡](harness_lanes/revenue_forecast_narrative_consumer.md)和[StockWiki 卡](harness_lanes/stockwiki_narrative_consumer.md)在独立 worktree 实施，总指挥维护接口和汇合 G-C；空间 G-D 仅只读盘点。下段是此前 G-A 收据，不再把 N3a producer 当待实现项。其他 owner 文件保留，Worker paused。
+
 > **2026-10-03 最新编排覆盖：**CWP `master@2e674cc`、FF `origin/main@c47c397`（远端 ref 已核）、ET `main@4924d57`、RF `main@0573c40` 已发布；G-A0/G-A1、FF companion 和选定范围的 G-A 汇合已完成。当前 FF→CWP→RF 三仓 SourceRef E2E 为 1 passed / 8.69 秒，独立测试根 `.ga-mainline-20261003` 已清理。FF→ET→CWP 历史节点包 191 passed / 1 skipped 见 [Phase 58](task_plan.md)，不代表 live FMP 200（历史真实请求为 402）。RF [Actions 37110072067](https://github.com/zhengcb81/revenue-forecast/actions/runs/37110072067) 两 job 全绿：verify 2 分 15 秒、real-roots 1 分 40 秒。
 
 > 当前主线为 [N3a 叙述传输实现](narrative_transport_implementation.md)，随后推进 RF/StockWiki selected 消费 G-C；G-D/生产 Worker 仍 paused。StockWiki W01–W04 已完成，旧 reader/W04 卡仅作合同与交付记录，不再派发重复任务。IQS 保持既有 owner，本轮范围不覆盖其活动项目。下方 2026-10-01 快照、旧待合并项和“可派发”措辞为历史；实际启动任务以主计划最新进度和对应施工细则为准，维持每仓单一写入者。

@@ -1,5 +1,12 @@
 # Progress：叙述性证据试点
 
+## 2026-10-03 — N3a 发布，consumer 两线开工
+
+- CWP `a640400af4bea0ce97944e99ac9cb6abc6813ae9` 正常 commit/push 至 origin/master，ls-remote 实读一致；Ruff/mypy/config/host 提交钩子通过，真实 fast pre-push 通过。[Actions 37113358995](https://github.com/zhengcb81/company-wiki/actions/runs/37113358995) 全绿，Python 3.12 单 job 57 秒（09:31:55–09:32:52 UTC）。本轮没有追加全仓 coverage。
+- RF owner 从干净 `0573c40`、StockWiki owner 从 `5f2739a` 建独占 `codex/...` worktree，按两张叙述 consumer 卡开始 TDD。只修改各自 adapter/DTO/显式入口/测试，不写 CWP 或对方仓库；RF fcap 与 StockWiki quick-scan 未提交工作保留。分支先交总指挥验收，再并入对应主线；StockWiki 无 remote 不新增。
+- 消费接口已真实发布，golden、精确读取和失败语义见[交接包](narrative_transport_handoff.md)。既有 transport 先 capture 后限长不能冒充有界读取，两条新 consumer 都须有 bounded pipe/overflow/timeout 回归；不修改全仓旧 reader。
+- `.nt-commit-20261003` / `.nt-push-20261003` 退出已删除。G-D 只读盘点与两条 consumer 并行，未删除原件/生产派生，Worker paused；G-C/G-D 仍未签收。
+
 ## 2026-10-03 — N3a 节点验收与交接
 
 - 新实现为独立 logical ref/read request/receipt、精确 artifact version、只读 DB facade、当前 SourceVersionReader 原文/manifest/as-of校验和共享 PDF/TXT/JSON locator replay；生成 pin 作 lineage，读用当前 policy。注册 `company-wiki-narrative-read`，不改 raw SourceRef/SourceExport，不开 Worker。
@@ -9,7 +16,7 @@
 - 最终受影响 8文件节点包 **109 passed in 32.86s**；Ruff、7模块 mypy、host assumption gate GREEN。guard曾误报两个测试中的虚构绝对路径；这些用例只测禁止字段，值改为host-neutral字符串，未放宽guard或增加allowlist。mypy首次沙箱读urllib3遇ACL，实际用户环境通过；argparse.error签名改为NoReturn。
 - 四真实样本指标见[交接包](narrative_transport_handoff.md)，总包约原文2.04%；P07保持needs_review。所有原件完整SHA/mtime、生产config/control/catalog fingerprint不变。测试根 `.nt-real-20261003`、`.nt-final-20261003`、`.nt-output-red`、`.nt-binding-red`、`.nt-node-final`、`.nt-node-green`均删除；各agent独立测试根也删除。
 - 上轮RF scratch安全清理18个可完整枚举、无reparse的目录；22个ACL不可读目录保留，单目录takeown亦被OS拒绝，未扩大权限变更。它们不是原文；不可声称全部清完。根tracked `.coverage` 和生产raw/config未改。
-- 本轮产品/计划待正常commit/push；已提供RF与StockWiki独占consumer卡及golden交接，G-C/G-D仍未完成，生产Worker继续paused。
+- 本轮产品/计划已由上方 `a640400` 发布收据覆盖；RF与StockWiki独占consumer卡及golden已可开工，G-C/G-D仍未完成，生产Worker继续paused。
 
 ## 2026-10-03 — G-A 收口，恢复 N3a
 

@@ -1,5 +1,7 @@
 # CWP 独占施工卡：来源、叙述证据与 Worker
 
+> **N3a 发布覆盖：**producer `a640400` 已推送，Actions `37113358995` 成功 / 57 秒；CWP 本阶段实现已完成，当前 RF / StockWiki 按[交接包](../narrative_transport_handoff.md)独占接线。G-C 未收口，G-D 只读盘点，Worker paused。下段 `2e674cc` 为 N3a 前的 G-A 收据。
+
 > **2026-10-03 最新状态覆盖：**CWP `master@2e674cc`、FF `origin/main@c47c397`（已核远端 ref）、ET `main@4924d57` 与 RF `main@0573c40` 已发布。G-A0/G-A1 和 FF transcript companion 已完成；当前三仓 `test_source_ref_v2_three_repo_e2e.py` 用这些 FF/CWP/RF 提交通过（1 passed，8.69 秒），独立根 `.ga-mainline-20261003` 已清理。G-A 选定接口范围已收口，下一步为正在实施的 [N3a 叙述传输细则](../narrative_transport_implementation.md)；RF/StockWiki selected 消费 G-C 仍 pending，G-D 和生产 Worker 仍 paused。
 
 > FF→ET→CWP 的历史节点包为 191 passed、1 skipped，见 [task_plan.md Phase 58](../task_plan.md)。它证明隔离 producer/CLI/真实字节链，不证明 live FMP 200；已记录的真实 API 结果为 402。RF [Actions 37110072067](https://github.com/zhengcb81/revenue-forecast/actions/runs/37110072067) 两个 job 均成功，verify 2 分 15 秒、real-roots 1 分 40 秒。下方较早“当前状态”、待发布和施工顺序保留为历史记录；恢复执行以本覆盖与主计划最新进度为准，不重复 E-B/G-A，也不修改 IQS owner 范围。

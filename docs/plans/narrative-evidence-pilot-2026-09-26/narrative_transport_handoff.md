@@ -2,6 +2,8 @@
 
 ## 当前能力
 
+**已发布：**CWP `a640400af4bea0ce97944e99ac9cb6abc6813ae9`，origin/master 实读一致；[Actions 37113358995](https://github.com/zhengcb81/company-wiki/actions/runs/37113358995) 成功 / 单 job 57 秒。两张 consumer 卡现在可独占开工，无需等待额外人工签收。
+
 company-wiki 提供独立的 `narrative-ref/1`、`narrative-read-request/1`、`narrative-read-receipt/1`；包仍为 `narrative-bundle/2.0`。原始 `SourceRef 2.0` 和 `SourceExportBundleV2` 不变。实现细节和边界见[施工细则](narrative_transport_implementation.md)。本仓验收完成后正常提交推送；精确发布 commit/Actions 见[progress.md](progress.md) 最新收据，不使用历史分支。
 
 ## 正式调用
@@ -17,6 +19,7 @@ company-wiki-narrative-read --config <CWP配置> --operation read
 - reference stdout 是 canonical reference，stderr `status=metadata_only`；它不意味着原文、摘要、时点已经核验。
 - read stdout 是精确持久工件 bytes，无附加换行；stderr 是一行 receipt。必须同时核 exit 0、receipt `status=ok`、schema、请求 ref/as-of、实际 stdout SHA/size 和 bundle/source 绑定。非零时 stdout 为空；任何不一致均不得返回可用证据。
 - read 最大正文 1,310,720 bytes，receipt 最大 16 KiB。保持现有 timeout/bounded subprocess；不要自动抓全文、翻译、触发新 LLM 或更新 source DB。
+- consumer 的进程边界必须在读取期间计数限长；不能完整 `capture_output` 后才检查预算。overflow/timeout须结束并回收自己启动的进程，stdout/stderr同时读取避免堵塞，receipt只接受一行JSON。
 - `expected_source` 的六个字段必须存在；null=未提出该字段约束。消费者有明确公司/证券/期次时必须填写真实约束，不能为了成功全置 null。
 - unknown publication 的原始电话会可以保存/去重，但历史叙述 read 具名拒绝；call date 不得补作 publication。reference/read 是独立于原文 transport 的合同，不把其字段塞进原始 SourceRef。
 - partial/needs_review/skipped_no_narrative 原样表达；skip 没有证据。可用片段依实际 locator/hash决定，无人工签收或 prompt-review receipt 门。投资语义和预测规则仍由各下游负责。

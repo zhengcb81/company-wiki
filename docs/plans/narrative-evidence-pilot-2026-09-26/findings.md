@@ -1,5 +1,10 @@
 # Findings：叙述性证据试点
 
+## 2026-10-03 — consumer 部署边界
+
+- StockWiki 现有 SourceExport 子进程先完整 capture 再核大小，不能直接复用为有界 narrative I/O；新接口须同时限 stdout/stderr、处理 overflow/timeout 和回收所启动进程。部署配置习惯可以复用，旧 reader 无需在本轮全仓重构。
+- 两条消费线先在独占 worktree 接显式 opt-in 入口；测试可借当前 CWP fixture 生成真实持久包，产品不能导入 CWP Store/automation。StockWiki 当前未跟踪 quick-scan 源码属于其他 owner，不能因 master 干净假设而清理或收进本线。
+
 ## 2026-10-03 — N3a 真实边界修正
 
 - 只读来源接口不能复用会初始化schema/BEGIN IMMEDIATE的writer Store；新 facade复用ReadOnlyCatalogReader，仅SELECT，不创建缺失DB，保留live WAL读取正确性，不使用immutable忽略未checkpoint数据。

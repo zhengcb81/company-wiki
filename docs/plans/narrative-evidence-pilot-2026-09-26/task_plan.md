@@ -1,6 +1,6 @@
 # 叙述性证据选择与摘要：小范围试点及实施方案
 
-> **2026-10-03 当前主线：**G-A0/G-A1、FF SourceRef+transcript companion 和 RF reader 已提交推送。RF `0573c40` 的远端 CI 两个 job 全绿；当前 FF `c47c397` → CWP `2e674cc` → RF `0573c40` 正式三仓测试 1 passed（8.69s），隔离根恢复。下一功能步骤是 [N3a 持久叙述包跨进程读取](narrative_transport_implementation.md)，复用现有 E-B Store/Worker，先 TDD，再由 RF/StockWiki 薄 consumer 汇合 G-C。下方历史未勾选项不是当前派发清单；生产 Worker 继续 paused，G-C/G-D 未完成。
+> **2026-10-03 当前主线：**G-A 已收口，N3a producer 已发布 `a640400`；[Actions 37113358995](https://github.com/zhengcb81/company-wiki/actions/runs/37113358995) 成功，单 job 57 秒。当前执行 Phase 60：RF / StockWiki 在各自独占 worktree 并行接叙述包 consumer，总指挥汇合 G-C，空间 G-D 仅先只读盘点。下方历史未勾选项不是当前派发清单；以本首段、文末 Phase 60 和 Next Step 为准。生产 Worker 继续 paused，G-C/G-D 未完成。
 
 > 独立实施计划；不替代仓库根目录或任何已有专项计划。Phase 17 的旧库退役已完成；Phase 18 的离线 G1 选择、定位和草稿验证已完成一轮。**2026-09-27 新顺序：RF 主线并线已完成，先实施 R4 数据湖抽象层，再继续本计划的 W5/G2a、Worker 与空间处置。**本计划自身不写 RF，不启动生产 Worker；已有隔离叙述工位与主树未提交文件保持原样，待抽象层合同接入时按当前文件快照整合。
 
@@ -17,7 +17,7 @@
 - [x] 修复发布检查的 source-workflow/legacy writer 误分类：六项 RED→writer freeze 20 GREEN，保留退役研究 writer、来源工具自身 SHA/path/事务规则。
 - [x] 本轮收尾后暂停实施；Worker 保持 paused，原件保留。RF 普通推送被 historical current_triplet ancestry 的 2 项测试阻断（其余 25 项通过）；不绕过，留待恢复时先 RED 区分 historical snapshot/live HEAD。CWP `f39bd5a..d6d33b8` 已正常推送，远端 SHA 实读一致；完整 pre-push 六门全绿，随后 Actions 36936780795 三个 Python 矩阵的 Unit tests 失败，具体用例/根因仍待日志；7c80031 的远端收据已同步，后续 CI 未验收。
 
-## 历史恢复快照（当前以 Phase 34 和文末 Next Step 为准）
+## 历史恢复快照（当前以首段和文末 Next Step 为准）
 
 > **2026-10-01 Phase 33 审计快照（已由 Phase 34 发布收尾覆盖）：**CWP `master@00af53f`，比 `origin/master` 超前 62 个提交；E-B 已由 `9e73eb4` 并入，合并后相关回归 **349 passed、2 skipped**，56 个变更 Python 文件 Ruff 通过。StockWiki `master@b4f3846` 的 W01/W02/W03、SourceExport reader、W04 和 MIC 关系补强均已合并；已知源分支全部是 master 祖先，`check_all.sh` **686 passed**。RF 正式 `main@3e03ce83` 干净且比 `origin/main` 超前 4 个提交；`fcap@ee0a82bf` 的已提交历史是 main 祖先，但 fcap 工作树仍有大量未提交/不可见路径，审计报告的 404 是下界，不能清理或整树并线。FF 当前检出的 `fcap@d35b6f5` 与 `origin/main` 同步；本地 `main@c9799b7` 落后 39 个提交，SourceRef v2 与 transcript companion 两个独立 worktree 的改动路径有重叠，仍应由单一 FF owner 汇合。ET `main@4924d57` 比 `origin/main` 超前 6 个提交，工具 `/2` 已实现；FF→ET→CWP 的正式整合门仍待做。IQS `master@e7fe99c` 仅有 owner 正在编辑的 `task_plan.md`；provisional G2b 正反 CLI 已通过，但完整 G2b、QA-04 收尾和部分 W01–W03 交付仍 pending。下方早于 Phase 33 的“当前/下一步”状态段均是历史快照，不作为当前派发依据。各仓当前证据与计划漂移见 Phase 33、`progress.md` 和 `findings.md`。
 
@@ -47,7 +47,7 @@ Phase 17 的 F0–F5 已完成。G1 离线主样本和回归集已经复跑：12
 
 ## Current Phase
 
-Phase 33：完成六仓现场与 PWF 只读对照，并将 CWP 当前计划状态校准到 live refs。实施顺序无需重排：先关闭 G-0 剩余真实 reader/locator 缺口及 G-A 正式 source/transcript 汇合，再做 G-C selected narrative 消费，之后按批次做 G-D 派生清理。CWP E-B 与 StockWiki W04 已完成；RF 已提交 fcap 历史已在正式 main 祖先链，但其 fcap 脏工作树未归属，不做合并或清理。FF 同名 main 落后远端 39 个提交，两个功能 WIP 有文件重叠，保持单一 owner 汇合。RF、FF、ET、IQS 的跨仓消费者/端到端门仍未全部通过。`NarrativeBundle /2.0` 目前是独立持久叙述工件，尚未成为通用 SourceExport 或 RF/StockWiki 消费入口；下一轮先冻结其 pathless 引用与真实读回 golden，不改 SourceExport v2 wire 或通用 role DAG。production Worker 继续 paused/default-off；真实 P2 仅约 6.3% 提速且峰值 RSS 高约 23.5%，锁等待 p95 未测。原始文档保留。
+Phase 60：接通两个叙述 consumer，再汇合 G-C。CWP `a640400` 为正式 producer，原始 SourceRef / SourceExport wire 不变；G-A、E-B、StockWiki W01–W04 不重复实施。RF base `0573c40`、StockWiki base `5f2739a` 分别新建隔离 worktree，保留 RF fcap 与 StockWiki quick-scan owner 文件。总指挥负责接口、节点验收、主线并入和 PWF；G-D 候选只做只读盘点，未通过该批依赖前不删除。production Worker 继续 paused/default-off，原始文档保留。
 
 外部来源采购补充：FMP Basic key 实测 profile/有效 SEC 检索 200，press releases/transcript dates 402；SEC 原生 API 无 key。以 246 个本地公司目录作保守分母，Basic 补充 SEC 检索约 2,076 calls/30 日，纯 SEC/IR 路径为 0 FMP calls；Koyfin 无用户 API，Seeking Alpha 个人订阅不授权自动抓取；Motley Fool 官方条款也禁止自动访问/采集，现有适配器不得接通生产。详细价格、假设、权利分级和 30 日试点见 [外部数据源与成本卡](provider_cost_and_capability_2026-09-27.md)。采购结论为先不买，且不改变 G0/G1e 门禁。
 
@@ -732,8 +732,16 @@ G-A1尚未由producer/filing-fetch表示FF→ET→CWP下载完整链完成；真
 - [x] 先写[实施细则](narrative_transport_implementation.md)：独立 reference/request/receipt、精确 artifact version、当前原文 verified open、身份/期间/as-of、共享 locator replay、CLI byte/hash 协议与一次节点包。
 - [x] TDD 合同/集成 RED→GREEN；复用持久 Store/projector，增加精确工件读、独立只读 facade、共享 replay 和窄 transport/CLI；不改变原始 SourceRef/SourceExport wire。Bundle 独立读取时复核摘要来源/语言/引用/状态（四项 RED→GREEN），不再只依赖生成任务的外部校验。
 - [x] 最终本仓受影响节点包 **109 passed in 32.86s**，Ruff/七模块 mypy/host guard 绿；正式 CLI+四真实样本 **19 passed in 120.36s**。P01/P04/P07/T01 原件 SHA/mtime、生产 fingerprint 不变，测试根清理。第三方 PDF 提示污染二进制 stdout 的真实 RED 已修复，回归保护两条协议流。六份 producer golden 与[交接包](narrative_transport_handoff.md)已生成；空间样本 419,428/20,597,846 bytes≈2.04%，Replay模型不外推线上效果或全库。
-- [ ] 正常提交推送并更新 RF/StockWiki 接口交接卡，后续各仓薄 consumer 接线。Worker 仍 paused，原件保留。
+- [x] 正常提交 `a640400` 并推送 origin/master，pre-commit / fast pre-push 全绿；Actions `37113358995` 成功（单 job 57 秒）。更新[交接包](narrative_transport_handoff.md)和 consumer 卡；Worker 仍 paused，原件保留。
+
+## Phase 60：RF / StockWiki 叙述 consumer 汇合 G-C（2026-10-03）
+
+- [x] 核两个下游当前主线及其他 owner 文件；各自只在新 `codex/...` worktree 实施。RF `0573c40` 为 origin/main，StockWiki `5f2739a` 为本地 master，无 remote。
+- [ ] RF 按[独占卡](harness_lanes/revenue_forecast_narrative_consumer.md) TDD 实现显式来源准备入口、真正有界子进程、独立 DTO；本仓节点包及年报/英文 TXT 正式入口 E2E 通过后提交分支。
+- [ ] StockWiki 按[独占卡](harness_lanes/stockwiki_narrative_consumer.md) TDD 实现显式来源查询入口、真正有界子进程、独立 DTO；本仓节点包及招股/IR 正式入口 E2E 通过后提交分支。
+- [ ] 总指挥验两条线的实际入口/独立根恢复/负例与旧 raw reader 回归，正常并入对应主线；RF 普通推送并核 CI，无 remote 的 StockWiki 不新增 remote。签收 G-C 后才推进该批 G-D。
+- [ ] G-D 只读空间/引用盘点，形成精确可重建派生清单和实际释放估计；任何原始下载文档、API key、其他 owner 未提交文件均不进入清单。
 
 ## Next Step
 
-提交推送 N3a producer 并核远端快门后，按[交接包](narrative_transport_handoff.md)启动 RF、StockWiki 两条独占 consumer 卡，汇合 G-C；再做 G-D 精确派生清理。不要重复 G-A/E-B/W04，不引入每小步审查或全仓长测。
+完成两条已启动 consumer 线并汇合 G-C；期间只读盘点 G-D。按[交接包](narrative_transport_handoff.md)验各仓节点和真实入口，正常并入/推送，再按无引用清单批次清理派生。不要重复 G-A/E-B/W04，不引入每小步审查或全仓长测，生产 Worker 保持 paused。
