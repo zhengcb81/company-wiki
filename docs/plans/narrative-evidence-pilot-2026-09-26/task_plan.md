@@ -12,7 +12,7 @@
 
 | 项目 | 已发布/已验收事实 | 本机状态与本轮边界 |
 |---|---|---|
-| CWP | G1第一组 `1cfec10` 已推master，CI37188829582 success；本轮审视起点HEAD `376ed90` 为N4顺序文档更新 | 仅 `config/source_acquisition.yaml` 一项本机provider路径未提交，不混入通用配置发布 |
+| CWP | 本轮起点 `master@1906295`；G1-LEGACY 外包提交 `1cf8183` 已进入本次主线合并，收口回归 `170 passed, 1 deselected` | 仅 `config/source_acquisition.yaml` 一项本机provider路径未提交，不混入通用配置发布；合并收据见 parallel execution plan |
 | RF | `rf-impl main@6fb2def7` 已有N3a pathless叙述消费 | rf-impl有242项暂存/未提交记录；另 `revenue-forecast fcap@5319ee26` 只有2项assurance/runs更新；分别保留owner工作，不能混称一个dirty状态 |
 | FF | `1d0c73c` 已进main，CI37182527153 success；真实BYD FY2024链已下载10,092,140 B且SHA/size闭环 | 常用根fcap同HEAD，仅未跟踪key文件；不读取/提交凭证 |
 | ET | ET-S3已合main `93fe52c`，旧采集入口/默认原语言已收敛 | 2项未跟踪工具记录保留；同步HTTP仍可能超过名义deadline，新ET-DEADLINE只在隔离worktree施工 |
@@ -29,7 +29,7 @@ StockWiki/IQS已有owner工作及消费者交付，本轮只读，不重复分�
 | S0 简化收口 | complete（ff5396c，CI绿） | PWF只留当前入口；删除R1旁路签收/shadow/gold；commit移除pytest、config doctor按相关文件触发 | 一次相关Unit/混合行为回归与正常发布；不逐文件签收 |
 | S1 N4A | complete（ff5396c，CI绿） | scope贯通Store/Worker/Supervisor/outbox/prepared，None兼容、空scope零修改、范围SQL先于LIMIT | N4节点A，确定性RED先行 |
 | S2 N4B | complete（节点A/B集中验收已绿；整体N4仍待独立S4/N4C） | real factory/HTTP adapter/full prompt; persistent token/cost reservation in AUTO; finite batch CLI; unique final artifact and small recovery receipt; public legacy whole-catalog Worker and startup routes removed | node A accounting/concurrency green; node B formal CLI/HTTP/kill/ACK and focused regression green; CWP producer limits are now connected and have real-data E2E evidence; proceed to N4C after G1/S3 closeout |
-| G1 残余门禁/签收精简（第一优先） | in_progress（CWP reader/as-of/resolver/planner/canonical消歧已清；FF SourceRef v2资格门与G1-LEGACY旧入口仍待收口） | MAIN清来源核心；G1-LEGACY独立退役旧入口/六脚本；按[G1细则](gate_simplification_closeout_2026-10-04.md)收口；已取消项不重新开工，外仓owner工作保持只读 | reader/as-of 64项与resolver/planner/canonical 100项相关回归均绿；核心组仅做集中验证。FF文件先与现存transcript-companion改写支线协调，避免同文件并行编辑。整体审计仍未完成；大节点收口后再进入 S3 |
+| G1 残余门禁/签收精简（第一优先） | in_progress（CWP reader/as-of/resolver/planner/canonical消歧与G1-LEGACY均已收口；FF SourceRef v2资格门待收口） | MAIN清来源核心并接收G1-LEGACY旧入口/六个一次性脚本退役；按[G1细则](gate_simplification_closeout_2026-10-04.md)收口；已取消项不重新开工，外仓owner工作保持只读 | reader/as-of 64项、resolver/planner/canonical 100项回归绿；G1-LEGACY主线集中回归170 passed / 1 deselected，单独写集自检在外包原工作树通过；旧环境变量合同先RED后GREEN。FF文件先核清既存transcript-companion代码再接入，避免同文件并行编辑。整体审计仍未完成；G1大节点后再进入S3 |
 | S3 SourceRef/SourceExport 虚拟化与来源默认收敛（G1之后第二优先） | in_progress（FF-S3已进main；ET-S3已合并；CNINFO bounded provider已启用并通过真实资料FF→CWP→provider E2E；RF/StockWiki已有pathless消费证据；ET真实工具导入仍待一次验收） | 上层只使用 SourceRef/SourceExport v2，不依赖 CWP/StockInfo/Dayu/Dropbox物理目录；复用已绿FF exact/latest_as_of与现有pathless reader，补安装/provider可移植配置、ET硬deadline与真实原语言导入；非核心资格/capture阻断先在G1清理 | BYD年报真实采集闭环已通过；电话会 live import验收使用[ET-LIVE独立卡](harness_lanes/et_transcript_live_import_acceptance.md)。明确 IQS 快扫不自动消费/下载 CWP 文档，其 PWF 将 company-wiki 定义为可选只读深研链接，不为追求“全仓统一”强行改边界 |
 | S4 N4C real samples and storage plan | pending（G-C 证明了 RF 年报/TXT 来源消费，不等于 Worker 多文档批次；排在优先门禁精简之后） | four real document types / consumer reads / language and citation coverage / total incremental bytes; retain only status/stop/uninstall compatibility for old worker process cleanup | node C; bounded real batch, then measured 1/2/4 parallelism；至少覆盖年报、招股/再融资、IR和电话会/季度类中的四种，记录摘要证据定位和新增空间 |
 | S5 B2逐caller清理 | pending（SPACE-S5只读审计已交付） | 审计确认约138.6 MB无代码调用者集合可列入首批候选；2.826 GB `derived/` 仍有 reader 与 8,191 条 artifact 路径引用，必须先迁移；报告不是删除清单 | 主线复核当前调用者/生产文件状态后分集合处理；每批验证原件与来源事实保留并测实际释放量 |
@@ -95,9 +95,9 @@ TDD框住公开行为，不把旧签收规则写进新测试。仅S0相关收口
 
 ## Next Step
 
-**MAIN下一动作只有一个：**等待G1-LEGACY交付并继续完成其余MAIN专属旧入口收口；FF SourceRef v2剩余资格门待核对`filing-fetch-transcript-companion@29085f7`这条对`fetch_filing.py`/`filing_contracts.py`有大改动的既存工作树后再隔离施工。CWP reader/as-of与resolver/planner/canonical消歧已先RED再GREEN，分别64与100项回归；`capture_ready=false`、null与qualification gaps继续作诊断，来源SHA/身份/期间/公开日仍要求可验证。一次G1责任包GREEN并合入后，才收口S3安装/ET联调；之后N4C，再S5/S6。具体见[G1细则](gate_simplification_closeout_2026-10-04.md)。
+**MAIN下一动作只有一个：**完成FF SourceRef v2资格门收敛，并与现有电话会议 companion 实现打通。已核实 `filing-fetch@fcap/1d0c73c` 与旧 `codex/transcript-companion@29085f7`：旧分支带来earnings-transcripts调用链，但基于旧基线并改动同一组 `fetch_filing.py` / `filing_contracts.py`；在当前FF基线上新建隔离集成后保留有用功能、按SourceRef v2新合同修正资格判定，不直接覆盖旧文件。CWP reader/as-of与resolver/planner/canonical消歧先RED再GREEN，分别64与100项；G1-LEGACY已并入本次CWP主线整合，handoff见[结果记录](harness_lanes/results/g1_legacy_entry_retirement_handoff_2026-10-04.md)。`capture_ready=false`、null与qualification gaps继续作诊断，来源SHA/身份/期间/公开日仍要求可验证。FF门通过后收口S3安装/ET联调；之后N4C，再S5/S6。具体见[G1细则](gate_simplification_closeout_2026-10-04.md)。
 
-**已派发：**G1-LEGACY和ET-DEADLINE两个独立代码包；ET-LIVE仍是可选小验收包。目录/写集/接口/测试/交接各自冻结在卡内，MAIN负责打通并统一发布。外线可提前完成第二优先ET实现，不改变MAIN先G1后S3的合入顺序。没有逐helper/逐文档人工审查，也不等待所有能力扩展完成才验收已可用的pathless接口。
+**外线状态：**G1-LEGACY已经完成接收并进入CWP主线；ET-DEADLINE仍在独立worktree施工，ET-LIVE仍是可选小验收包。目录/写集/接口/测试/交接各自冻结在卡内，MAIN负责打通并统一发布。没有逐helper/逐文档人工审查，也不等待所有能力扩展完成才验收已可用的pathless接口。
 
 以下保留已验收producer桥接技术细节，**不是新的下一步**：
 

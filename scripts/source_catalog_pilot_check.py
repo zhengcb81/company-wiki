@@ -748,5 +748,6 @@ def main(argv: list[str] | None = None):
 
 
 if __name__ == "__main__":
-    from writer_policy import enforce_direct_cli as _enforce_legacy_writer_freeze  # noqa: F401
+    from writer_policy import enforce_direct_cli as _enforce_legacy_writer_freeze
+    _enforce_legacy_writer_freeze(__name__, __file__)
     sys.exit(main())

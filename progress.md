@@ -1,5 +1,13 @@
 # Progress Log
 
+## 2026-10-04 G1-LEGACY 外包包接收并入主线
+
+- 当前 CWP 起点为 `master@1906295`。外包分支 `codex/g1-legacy-entry-retirement@1cf8183` 的删除与兼容变更已合入当前 master merge；机器专用 `config/source_acquisition.yaml` 保持未暂存、未纳入合并。
+- 复核 handoff 后发现 `source_catalog_pilot_check.py` 仅导入 `enforce_direct_cli`，实际没有调用。因此在主线补上入口检查与 plain/PYTHONPATH 两种启动合同；一并移除已退休的 `COMPANY_WIKI_WRITE_MODE` / `COMPANY_WIKI_LEGACY_WRITERS` 双环境许可输出，并更新 deployment 回滚诊断及共享测试。
+- RED/GREEN：新行为在修复前按预期失败；补丁后目标组 **27 passed**。集中整合回归 `tests/unit/test_writer_freeze.py tests/unit/test_common.py tests/unit/test_legacy_entrypoint_simplification.py tests/contract/test_legacy_caller_reachability.py` 为 **170 passed, 1 deselected**。deselect 仅针对检查整个 Git 工作树的包写集测试；该断言在外包隔离工作树有通过收据，主线合并工作树内必然包含其他既有/有意改动。
+- `ruff check` 覆盖所有本次变更代码与测试通过；暂存和未暂存 diff 的 whitespace 检查通过。pytest 临时目录使用短路径隔离，完成后确认已删除。
+- 主线集成发现并修复的 handoff 偏差和完整外包报告已记录在 `docs/plans/narrative-evidence-pilot-2026-09-26/harness_lanes/results/g1_legacy_entry_retirement_handoff_2026-10-04.md`。G1-LEGACY 写集已关闭；FF SourceRef v2 资格门仍待主线处理，因此 G1 总阶段尚未完成。ET-DEADLINE 仍在自己的工作树施工。
+
 ## 2026-08-02 NFC parser 缺陷修复 — 完成，生产已生效（worker PID 3540，Code 41f08db2c5f1）
 
 - **根因**：`_pymupdf_page_snapshots` 表格 data 提取未 NFC 规范化单元格 → `pdf_page_aware._cell_value` 严格校验拒绝非 NFC 文本（盈建科/时代新材招股书 `PageAwarePDFAdapterError: table cell must use Unicode NFC`，failed_terminal attempt=3）。

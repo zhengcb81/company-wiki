@@ -7,7 +7,6 @@
 | 线 | 状态 | 独占实际工作目录 | 内容/责任 | 独立施工卡 |
 |---|---|---|---|---|
 | MAIN/root | active | `C:\Users\郑曾波\Projects\company-wiki` 当前根 | 来源核心、共享CLI/Contract、Store/预算、总PWF、配置发布与全部合入 | [G1细则](gate_simplification_closeout_2026-10-04.md)、[总计划](task_plan.md) |
-| G1-LEGACY | dispatched（用户确认），交付待回报 | `C:\Users\郑曾波\Projects\company-wiki-g1-legacy` | 旧入口双环境许可简化、6个完成运维脚本及专属测试退役；不改src/共享Contract/config | [G1独立代码包](harness_lanes/g1_legacy_entry_and_retirement.md) |
 | ET-DEADLINE | dispatched（用户确认），worktree已创建，交付待回报 | `C:\Users\郑曾波\Projects\earnings-transcripts-s3-deadline` | 两个正式采集入口硬deadline、进程回收、原协议/语言/hash不变 | [ET独立代码包](harness_lanes/et_retrieval_deadline_closeout.md) |
 | ET-LIVE | ready，可选小包 | `C:\Users\郑曾波\Projects\company-wiki-et-live-20261004` | 一次真实ET取数→临时CWP导入→pathless回读；FF路由另记确定性测试，不改生产仓 | [只读验收包](harness_lanes/et_transcript_live_import_acceptance.md) |
 
@@ -21,14 +20,15 @@
 |---|---|---|
 | FF-S3 | `1d0c73c`已推FF main；CI37182527153 success；实际限额/精确复用/latest-as-of元数据预算与CNINFO闭环 | MAIN只处理接口受影响联调与安装配置 |
 | ET-S3 | 已合ET main `93fe52c`；现代入口/旧薄batch/默认原语言已收敛 | ET-DEADLINE仅补真实截止缺口，不重做ET-S3 |
+| G1-LEGACY | 外包交付 commit `1cf8183` 已并入 CWP 本次主线合并；handoff 已保存；集中回归 `170 passed, 1 deselected`，详见下方 2026-10-04 收口记录 | 外线写集关闭；MAIN继续处理 FF SourceRef v2 资格门 |
 | SPACE-S5 | `company-wiki-storage-audit-20261003/results/storage_audit.{json,md}`交付，15项审计工具测试绿；零生产修改 | S5/S6由MAIN执行删除/迁caller，不重派空间审计 |
 | StockWiki W01/W04、工程门简化、SourceExport、Identity、G-C消费者 | 各自既有交付/收据保留 | 不以新包重复实现；active owner树只读 |
 
 ## MAIN职责与当前施工
 
 1. reader的URL/collector描述门与叙述capture截止已按TDD清理；来源/CLI/叙述64项回归绿。下一组收敛resolver/gap_plan/canonical_writer与FF的残留资格门，保capture_ready/gaps只作真实诊断。query_local公开日默认保持。
-2. 接收G1-LEGACY的函数兼容与删脚本diff，更新共享Contract/clean_env_gate/AGENTS引用。源层archive/prune的真实CLI漏now问题由MAIN修复或正式退役，不能交脚本线修改src。
-3. G1一次集中责任包GREEN后普通合入/push；再处理S3安装/provider可移植配置与ET接口联调。外线可以提前准备ET代码，不改变MAIN合入优先级。
+2. G1-LEGACY 的函数兼容、脚本退役和共享测试已合入；外线写集关闭。G1 尚有 FF SourceRef v2 资格门待完成。
+3. G1-LEGACY 集中回归GREEN并完成主线合入/push；随后继续FF资格门与S3安装/provider可移植配置及ET接口联调。ET-DEADLINE可并行施工，但不改变MAIN合入优先级。
 4. 接收外线commit与短报告，核diff/接口/相关测试，解决冲突和跨仓接线。MAIN统一发布；外线不自己合main、不写他仓、不安装全局技能。
 5. 测试全用独立根，退出恢复原样；不丢原件。不造签名、人工授权文件、每helper审批或固定场景数。
 
@@ -48,7 +48,7 @@ ET-DEADLINE只改变内部执行边界。ET-LIVE只证明真实ET工具→临时
 
 ### I3 G1-LEGACY→MAIN
 
-保留 `enforce_direct_cli`、`legacy_script_execution_allowed`、`is_legacy_script_cli`的现有签名，environment薄兼容但不作为人工许可。支持来源/维护入口可以执行；永久退休研究writer仍退出78；删已完成一次性工具，不动历史事实文件。具体支持/退休分类及MAIN待改共享测试列在独立卡和handoff。
+**已完成并入。**保留 `enforce_direct_cli`、`legacy_script_execution_allowed`、`is_legacy_script_cli`的现有签名，environment薄兼容但不作为人工许可。支持来源/维护入口可以执行；永久退休研究writer仍退出78；删已完成一次性工具，不动历史事实文件。接收偏差及主线补测记录见G1 handoff。
 
 ### I4 ET-DEADLINE→MAIN
 
@@ -105,3 +105,11 @@ MAIN只在G1、S3、N4 B/C、S5/S6几个大节点复核。无逐helper/逐文档
 RF `fcap@5319ee26`相对merge-base `ee0a82bfd1eec935cf4e567eb42f0ef79efa0226`没有SourceRef v2消费者代码提交；当前main `6fb2def7`后加的pathless消费者尚未进入fcap。CWP本轮不写RF；合支线时保留main新增的verified-open链路。
 
 FF `codex/transcript-companion@29085f7`现存工作树改动`fetch_filing.py`/`filing_contracts.py`，与SourceRef v2 capture资格入口重叠。MAIN本轮仅核实，不在正式checkout或companion目录改这两个文件；先读清其提交意图，再决定接续或合流。FF root的API key未读未改。
+
+## 2026-10-04 G1-LEGACY 接收与主线收口
+
+外包分支 `codex/g1-legacy-entry-retirement@1cf8183` 基于 `1cfec10`，handoff 已复制到 `harness_lanes/results/g1_legacy_entry_retirement_handoff_2026-10-04.md`。代码退役六个一次性 archive/retirement 工具及其专属测试，保留来源/维护 CLI 兼容入口。主线另修复 handoff 漏测的 `source_catalog_pilot_check.py`：它此前只导入 `enforce_direct_cli`，没有实际调用；同时清掉 clean-env 与 deployment 中已废弃的双环境许可残项，并更新旧共享行为测试。
+
+集中主线回归：相关入口/兼容测试 **170 passed, 1 deselected**；单独针对新增行为的组 **27 passed**；Ruff 与 staged/unstaged `git diff --check` 通过。唯一 deselect 是包内全仓 Git 写集断言：外包原隔离工作树已通过，合入主仓后该断言会把本次有意的主线改动也算成包越界。外包 handoff 的该处收据与主线实际回归均保留。机器专用 `config/source_acquisition.yaml` 未纳入合并。
+
+G1-LEGACY 写集已关闭；G1 总阶段仍因 FF SourceRef v2 资格门而保持进行中。ET-DEADLINE 继续在独立 worktree 施工，不合并到本次范围。

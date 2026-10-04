@@ -52,8 +52,11 @@ def test_materialize_rejects_destination_inside_source(tmp_path):
 def test_sanitized_environment_removes_api_keys(monkeypatch):
     monkeypatch.setenv("DEEPSEEK_API_KEY", "secret")
     monkeypatch.setenv("CUSTOM_API_KEY", "secret")
+    monkeypatch.setenv("COMPANY_WIKI_WRITE_MODE", "legacy")
+    monkeypatch.setenv("COMPANY_WIKI_LEGACY_WRITERS", "allow")
     environment = sanitized_environment()
     assert "DEEPSEEK_API_KEY" not in environment
     assert "CUSTOM_API_KEY" not in environment
+    assert "COMPANY_WIKI_WRITE_MODE" not in environment
+    assert "COMPANY_WIKI_LEGACY_WRITERS" not in environment
     assert environment["PIP_NO_INDEX"] == "1"
-    assert environment["COMPANY_WIKI_WRITE_MODE"] == "off"

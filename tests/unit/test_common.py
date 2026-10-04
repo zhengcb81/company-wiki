@@ -21,6 +21,7 @@ from common import (
     safe_write_file,
     setup_paths,
     get_llm_client_safe,
+    require_legacy_writer_permission,
 )
 
 
@@ -163,3 +164,65 @@ class TestLLMClientSafe:
         finally:
             if old_key:
                 os.environ["DEEPSEEK_API_KEY"] = old_key
+
+
+class TestLegacyWriterPermission:
+    """require_legacy_writer_permission 的静态分类语义（G1-LEGACY 卡）。"""
+
+    # 旧双因素门曾区分的全部环境组合；现在结果必须完全一致。
+    ENV_VARIANTS = (
+        {},
+        {"COMPANY_WIKI_WRITE_MODE": "legacy", "COMPANY_WIKI_LEGACY_WRITERS": "allow"},
+        {"COMPANY_WIKI_WRITE_MODE": "legacy"},
+        {"COMPANY_WIKI_LEGACY_WRITERS": "allow"},
+        {"COMPANY_WIKI_WRITE_MODE": "off", "COMPANY_WIKI_LEGACY_WRITERS": "deny"},
+    )
+
+    @staticmethod
+    def _apply(monkeypatch, environment):
+        for key in ("COMPANY_WIKI_WRITE_MODE", "COMPANY_WIKI_LEGACY_WRITERS"):
+            monkeypatch.delenv(key, raising=False)
+        for key, value in environment.items():
+            monkeypatch.setenv(key, value)
+
+    def test_permanently_retired_production_callers_stay_denied(self, monkeypatch):
+        retired = (
+            "full_pipeline.py",
+            "batch_process.py",
+            "batch_ingest.py",
+            "cleanup_junk.py",
+            "fix_broken_links.py",
+            "cross_verify.py",
+        )
+        for environment in self.ENV_VARIANTS:
+            self._apply(monkeypatch, environment)
+            for script_name in retired:
+                assert require_legacy_writer_permission(script_name) is False, (
+                    script_name,
+                    environment,
+                )
+
+    def test_supported_tools_need_no_permission(self, monkeypatch):
+        supported = (
+            "config_doctor.py",
+            "narrative_evidence_pilot.py",
+            "narrative_summary_review_pilot.py",
+            "clean_env_gate.py",
+        )
+        for environment in self.ENV_VARIANTS:
+            self._apply(monkeypatch, environment)
+            for script_name in supported:
+                assert require_legacy_writer_permission(script_name) is True, (
+                    script_name,
+                    environment,
+                )
+
+    def test_mixed_legacy_entries_stay_frozen(self, monkeypatch):
+        mixed = ("collect_reports.py", "test_framework.py", "graph.py")
+        for environment in self.ENV_VARIANTS:
+            self._apply(monkeypatch, environment)
+            for script_name in mixed:
+                assert require_legacy_writer_permission(script_name) is False, (
+                    script_name,
+                    environment,
+                )

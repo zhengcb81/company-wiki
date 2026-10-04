@@ -240,6 +240,10 @@ class TestDeploymentManager:
         assert "batch_process.py" in entry_names
         assert "batch_ingest.py" in entry_names
         assert "cleanup_junk.py" in entry_names
+        assert all(
+            entry["rollback"] == "不支持环境变量回退；使用替代入口"
+            for entry in report["legacy_entries"]
+        )
 
 
 # ── create_deployment_manager 测试 ──────────────────────────────

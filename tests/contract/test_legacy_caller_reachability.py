@@ -145,11 +145,12 @@ def test_r5_override_is_rejected_by_policy() -> None:
     assert execution_allowed("cross_verify.py", _legacy_override()) is False
 
 
-def test_non_r1_source_compatibility_keeps_explicit_override_contract() -> None:
+def test_non_r1_source_compatibility_ignores_environment_overrides() -> None:
     execution_allowed = getattr(writer_policy, "legacy_script_execution_allowed", None)
     assert execution_allowed is not None
-    assert execution_allowed("collect_reports.py", _legacy_override()) is True
-    assert execution_allowed("test_framework.py", _legacy_override()) is True
+    for script in ("collect_reports.py", "test_framework.py"):
+        assert execution_allowed(script, _legacy_override()) is False
+        assert execution_allowed(script, {}) is False
 
 
 def test_r1_direct_cli_fails_before_argument_or_llm_initialization() -> None:

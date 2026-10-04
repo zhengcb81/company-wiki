@@ -1,5 +1,11 @@
 # Findings & Decisions
 
+## 2026-10-04 G1-LEGACY 集成发现
+
+- 外包 handoff 中对 `source_catalog_pilot_check.py` 的环境独立入口阻断描述与实际源代码不一致：脚本虽导入 `enforce_direct_cli`，但调用路径漏接。主线新增 plain 与 `PYTHONPATH=scripts` 的真实启动合同并接上 guard，修复后两种启动均被统一阻断。
+- `clean_env_gate.sanitized_environment()` 与 deployment rollback 诊断仍包含旧的双环境许可术语/路径提示。入口权限合同已简化后，这些属于不再生效的残项；已改为只报告诊断并指向替代入口。
+- 六个一次性 archive/retirement 脚本及其隔离测试没有现行调用者；G1-LEGACY 删除它们，不改原件、source manifest 或历史事实。主线相关集中回归为 170 passed / 1 deselected，Ruff clean。完整证据见G1 handoff与progress。
+
 ## 2026-08-02 NFC parser 缺陷修复完成 — 已修复并生产生效
 
 - **根因**：`normalizer.py _pymupdf_page_snapshots`（743 行起）在提取表格 `data` 时未对字符串单元格做 NFC 规范化（`table.extract()` 原样返回），而 `pdf_page_aware._cell_value`（pdf_page_aware.py:235）严格校验 NFC → 含非 NFC 字符（如 U+2126 OHM SIGN `Ω`→`Ω`）的表格单元格触发 `PageAwarePDFAdapterError: table cell must use Unicode NFC`。page narrative（805 行）和 table markdown（773 行）已用 `_nfc_lf` 规范化，唯独 `data`（764 行）遗漏 → 不一致。

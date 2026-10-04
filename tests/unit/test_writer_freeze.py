@@ -21,7 +21,6 @@ SCRIPTS = ROOT / "scripts"
 sys.path.insert(0, str(SCRIPTS))
 sys.path.insert(0, str(ROOT / "tests"))
 
-from clean_env_gate import sanitized_environment
 from helpers.fixture_files import snapshot_files
 from writer_policy import (
     BLOCKED_EXIT_CODE,
@@ -29,7 +28,6 @@ from writer_policy import (
     SOURCE_WORKFLOW_TOOL_ALLOWLIST,
     PERMANENTLY_RETIRED_SCRIPTS,
     is_legacy_script_cli,
-    legacy_writer_authorized,
 )
 
 
@@ -38,43 +36,12 @@ def _blocked_environment() -> dict[str, str]:
     for key in list(environment):
         if key.upper().endswith("_API_KEY"):
             environment.pop(key, None)
-    environment["COMPANY_WIKI_WRITE_MODE"] = "off"
-    environment["COMPANY_WIKI_LEGACY_WRITERS"] = "deny"
     environment["COMPANY_WIKI_REAL_LLM"] = "0"
     environment["COMPANY_WIKI_NETWORK"] = "blocked"
     # These CLIs import the package from src/ when launched as scripts. Set
     # this explicitly so the test does not inherit pre-push's local PYTHONPATH.
     environment["PYTHONPATH"] = str(ROOT / "src")
     return environment
-
-
-@pytest.mark.parametrize(
-    ("write_mode", "legacy_switch", "expected"),
-    [
-        (None, None, False),
-        ("off", "allow", False),
-        ("legacy", "deny", False),
-        ("legacy", "allow", True),
-        ("LEGACY", "ALLOW", True),
-    ],
-)
-def test_legacy_authorization_requires_two_explicit_factors(
-    write_mode: str | None, legacy_switch: str | None, expected: bool
-) -> None:
-    environment: dict[str, str] = {}
-    if write_mode is not None:
-        environment["COMPANY_WIKI_WRITE_MODE"] = write_mode
-    if legacy_switch is not None:
-        environment["COMPANY_WIKI_LEGACY_WRITERS"] = legacy_switch
-    assert legacy_writer_authorized(environment) is expected
-
-
-def test_isolated_environment_cannot_inherit_legacy_authorization(monkeypatch) -> None:
-    monkeypatch.setenv("COMPANY_WIKI_WRITE_MODE", "legacy")
-    monkeypatch.setenv("COMPANY_WIKI_LEGACY_WRITERS", "allow")
-    environment = sanitized_environment()
-    assert environment["COMPANY_WIKI_WRITE_MODE"] == "off"
-    assert environment["COMPANY_WIKI_LEGACY_WRITERS"] == "deny"
 
 
 def test_real_ingest_cli_is_blocked_before_argument_handling() -> None:
@@ -155,13 +122,8 @@ def test_critical_guard_survives_python_no_site_mode(script_name: str) -> None:
 @pytest.mark.parametrize(
     "script_name",
     [
-        "audit_catalog_consumers.py",
-        "audit_catalog_retirement.py",
-        "cutover_source_catalog_db.py",
         "narrative_evidence_pilot.py",
         "narrative_summary_review_pilot.py",
-        "retire_source_catalog_db.py",
-        "retire_catalog_snapshot.py",
     ],
 )
 def test_source_workflow_cli_is_not_a_legacy_research_writer(script_name: str) -> None:

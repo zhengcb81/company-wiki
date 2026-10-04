@@ -115,15 +115,14 @@ def sanitized_environment() -> dict[str, str]:
         if not key.upper().endswith("_API_KEY")
         and key.upper() not in {
             "OPENAI_API_KEY", "DEEPSEEK_API_KEY", "MINIMAX_API_KEY",
-            "MIMO_API_KEY", "TAVILY_API_KEY"
+            "MIMO_API_KEY", "TAVILY_API_KEY",
+            "COMPANY_WIKI_WRITE_MODE", "COMPANY_WIKI_LEGACY_WRITERS",
         }
     }
     environment.update(
         {
             "PIP_NO_INDEX": "1",
             "PIP_DISABLE_PIP_VERSION_CHECK": "1",
-            "COMPANY_WIKI_WRITE_MODE": "off",
-            "COMPANY_WIKI_LEGACY_WRITERS": "deny",
             "COMPANY_WIKI_REAL_LLM": "0",
             "COMPANY_WIKI_NETWORK": "blocked",
             "PYTHON_DOTENV_DISABLED": "1",
