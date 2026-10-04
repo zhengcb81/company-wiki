@@ -352,3 +352,10 @@ S0/N4A及S2模型预算基础、CLI阶段与CI修复已正常发布，当前CI�
 - TDD: focused reader/export tests RED for the intended block, then **34 passed / 10.00s** after the narrow change. Synthetic CLI E2E verifies source ID/SHA/size, grounded span, no raw-body leak, and unchanged scratch tree.
 - Pytest scratch cleanup was verified: the first long basetemp was relocated and its exact run directory manually removed; the successful rerun used short unique `tmp/pt1004b`, `relocated=false`, and that directory was removed after the test.
 - Remaining sample gate: the IR can now be represented as a sparse manifest but batch creation still requires language metadata. Next implement deterministic language resolution from the exact opened SourceRef bytes, bind it into the event hash, then prove through isolated Worker/consumer E2E before N4C real batch.
+
+## 2026-10-04 — Sparse SourceExport published; ET deadline still open
+
+- Commit `48d3a9d` pushed to `origin/master`. Pre-commit Ruff, contract mypy and host assumption guard passed; pre-push fast contract smoke passed. Local/remote HEAD match. Preserve the one user-owned dirty config file, `config/source_acquisition.yaml`.
+- Read-only status check of `earnings-transcripts-s3-deadline` confirms the actual deadline worktree is still uncommitted at `93fe52c`; `s3-et-runtime-handoff.md` inside it describes the earlier runtime package, not this deadline work. Do not merge or clean the active worktree before its dedicated handoff and focused acceptance.
+- The two ET work directories serve separate stages: completed runtime integration (already in main history) and later deadline hardening (still WIP). Remote Actions was not checked because `gh` is unavailable; pre-push GREEN is not a claim that remote CI completed.
+- Next: accept the deadline-specific commit/handoff, run its consolidated tests plus golden check, then close S3. The N4C language-resolution issue remains planned and is not yet implemented.

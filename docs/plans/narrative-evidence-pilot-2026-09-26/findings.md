@@ -277,3 +277,10 @@ Git写入/联网用正常用户，sandbox .git只读不是产品权限。测试�
 - 目标责任集转绿：`test_source_version_reader.py` + `test_source_export_v2_cli.py` **34 passed / 10.00s**。合成catalog CLI E2E证明SourceRef/hash/size/MIME和grounded text span可导出、无原始正文泄漏、所有不可见描述字段为null，临时catalog/fixture快照不变。不是实际IR生产CLI导出证据。
 - 第一轮pytest basetemp过长，pytest自动改写到TEMP且其cleanup标记`removed=false`；检查该次测试独占目录无reparse point后，仅删除该精确run目录并核实消失。重跑使用仓内`tmp/pt1004b`（46字符，`relocated=false`），完成后删除且核实该唯一basetemp不存在；未清理任何既有TEMP目录。
 - Worker尚未因此解锁：`build_batch_events`仍要求非空`language`，而这份IR无可见language assertion。N4C计划增加仅对缺失language从已SHA绑定SourceRef原文字节进行确定性语言识别，识别结果写入事件hash；不可推断时具名失败、不猜市场语言、不翻译。RF财报消费者保持原合同。
+
+## 2026-10-04 — Sparse SourceExport发布与ET目录区分
+
+- CWP sparse SourceExport提交`48d3a9d`已推送`origin/master`；pre-commit的Ruff、contract mypy、host assumption guard通过，pre-push fast contract smoke GREEN。`git status`确认远端与本地HEAD一致，唯一未提交项仍是用户本机`config/source_acquisition.yaml`。
+- 当前harness身份检查只读使用一次性`git -c safe.directory=...`，没有改全局Git设置。`earnings-transcripts-s3-deadline`仍在`codex/et-s3-deadline@93fe52c`，scraper/tool/test有tracked改动，runtime/worker/test/PWF等未跟踪；没有提交或deadline专属交接。目录里的`s3-et-runtime-handoff.md`记载的是此前runtime施工包，不能当作当前deadline交接。
+- 这两个ET工作目录用途不同：已完成的S3 runtime工作树代码已进入ET main的提交祖先；deadline工作树是后来为补硬deadline创建的独立、尚未交付施工现场。不要把后者和前者当同一批重复工作，也不要清理未交付目录。
+- `gh` CLI在当前环境未安装；远端推送由pre-push gate确认成功，但本轮没有取得GitHub Actions运行状态，不把本地gate当远端CI结果。
