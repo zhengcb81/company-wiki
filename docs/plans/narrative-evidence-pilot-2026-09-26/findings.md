@@ -310,3 +310,11 @@ Git写入/联网用正常用户，sandbox .git只读不是产品权限。测试�
 - 上述“尚待提交/推送”是联调后、发布前快照；当前FF `eb0af13`已在远端main，ET `63c4090`已在远端main并包含deadline `0017f24`。ET快进合入不是squash/cherry-pick，保留交付提交祖先；候选branch与main同指`63c4090`。
 - 合入后完整离线契约再次成功，ET CLI E2E 6 passed、10 goldens matched、FF companion 5 passed、CWP FMP importer 5 passed。ET main无tracked改动；个人未跟踪文件保留。CWP唯一用户配置和FF未跟踪API key均没有被stage或写入。
 - S3完成条件满足，N4C真实样本文档资格和有限Worker批次是当前计划下一步。待验证的真实内容资格包括IR metadata可见性、招股书当前来源状态和ET TXT是否已有可规范化SourceRef；不可绕过admission或直接改数据库。positive dollar amount的provider实际计费未被ET wire提供，不能写作已实施美元实时扣费上限。
+
+## 2026-10-04 — N4C失败账本与分派卡的只读复核
+
+- 读取隔离运行 `tmp/n4c-20261004-pilot-a` / `n4c-20261004-wave1` 的结构化结果：四个SourceRef均已验证来源身份与原文字节SHA；年度报告选出3条span、5,593 source units；招股说明书选出160条span，另有784条省略及430条财务行移除。招股说明书summary因预算拒绝而无最终产物。
+- 中文季报和IR均无候选/span并报PARSER_INCOMPLETE。另用正式SourceCatalog、SourceVersionReader及只读catalog查询确认两份PDF都可verified-open、SHA/size有效、PDF页均可抽取且季报全表格扫描完成；故本轮发现指向选材覆盖，不是原件损坏或来源身份失败。现行规则对已知valuable种类拒绝把空选择静默skip是正确的失败保护。
+- 模型请求的未知reservation为5,258 micro-USD、2,400 max-output token；累计保守记账10,325 token、$0.005258，响应usage、HTTP状态和response SHA均缺失。不能由此推断MiniMax的真实失败原因；后续不复用该run，也不把reservation退为零。
+- 源码对照确认HTTP适配器保留HTTP status于ModelHTTPError，但预算调用层将其折叠为MODEL_RESPONSE_INVALID。该状态丢失是已证实的诊断缺口，不是旧请求根因结论。MiniMax官方Chat Completions文档示例采用choices/message/content字符串及prompt_tokens/completion_tokens；旧事件没有存响应形状，所以不能断言是否为协议不兼容。参考：[MiniMax Chat Completions API](https://platform.minimax.io/docs/api-reference/text-chat-openai)。
+- 本轮创建三张READY TO DISPATCH卡：N4-T1仅改automation模型错误/账本诊断；N4-T2仅改source_catalog中文叙述选材；MeetingConverter卡只限定另一仓CI workflow。前两者源代码与测试目录互斥，必须使用两个worktree；第三张卡跨仓独立。Main仍保留集成、真实文档/模型调用、预算和最终端到端验收。IQS不检查、不修改。

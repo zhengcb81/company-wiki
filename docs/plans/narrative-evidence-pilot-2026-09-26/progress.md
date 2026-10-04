@@ -396,3 +396,11 @@ S0/N4A及S2模型预算基础、CLI阶段与CI修复已正常发布，当前CI�
 - 合入后在ET `main`重新运行FF→ET→CWP完整离线脚本成功；ET CLI E2E **6 passed / 22.54s**且**10 goldens matched**；FF companion **5 passed / 10.55s**；CWP FMP importer **5 passed / 14.98s**。Ruff之前在FF两个变更文件上通过；实际测试basetemp逐项清除。CWP pytest禁用第三方插件运行，有一条仓库`asyncio_mode`配置warning，没有失败。
 - ET main工作树仍只有两个原有未跟踪个人文件 `.workbuddy-ai/`、`eval_results.json`；deadline worktree无跟踪改动。FF的未跟踪API key文件保持未读、未暂存、未推送。CWP本机provider配置仍未改。
 - S3跨仓合同与deadline接线已完成；真实FMP取数权益仍未知/HTTP 402，不阻塞offline合同。下一步转S4/N4C：先逐类型只读确认active、metadata可见、原文字节SHA一致的真实样本；再跑有限Worker批次并测consumer实读、证据定位/语言与总空间。样本不合格就通过正式producer/activation流程解决，不手改catalog。
+
+## 2026-10-04 — 新增外部harness施工包
+
+- 已创建并接入总计划、并行计划的三个可独立派发卡：N4-T1模型传输错误诊断、N4-T2中文财报/IR叙述选材覆盖、MeetingConverter CI快速门。当前仅为READY TO DISPATCH，尚未收到这三张卡的施工交付。
+- N4-T1和N4-T2限定在CWP不同代码目录和不同测试文件，需从同一已提交基线各自创建隔离worktree；不得共用checkout、修改共享PWF/配置/生产数据或执行付费请求。交付后由MAIN联合做跨层测试与新的有限真实批次。
+- MeetingConverter卡限定其独立仓库CI配置；先核查远端最新workflow是否已有真实job和测试。如已修复只交证据，不为制造改动而改工作流。StockQAbyLLM与MeetingConverter早期只读盘点卡仍按原收据保持验收状态，IQS不派新任务。
+- N4C run账本复核结果及不确定性已写入findings/task_plan：季报与IR来源可验证且解析覆盖完成但零span；MiniMax旧失败无状态码/响应摘要，确切原因未知；错误分类丢失HTTP状态是源码已确认的独立缺口。旧unknown reservation保留，不复用run ID。
+- 无代码、source catalog、raw文件或生产数据库修改；本机用户文件 `config/source_acquisition.yaml` 原样保留。计划文档后续执行diff check/plan-claims检查并仅提交本轮明确的PWF及三张卡。

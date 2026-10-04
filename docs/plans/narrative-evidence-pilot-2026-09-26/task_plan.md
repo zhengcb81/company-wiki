@@ -110,6 +110,32 @@ TDD框住公开行为，不把旧签收规则写进新测试。仅S0相关收口
 
 **MAIN下一动作：**进入S4/N4C的真实文档资格与小批次验收。先只读检查候选年报、招股/再融资、IR和电话会TXT是否已由当前admission路径登记为active、metadata可见且raw字节SHA匹配；任何类型不达标则记录缺口并走标准producer/activation路径，不直接写catalog或数据库、不读写用户 `config/source_acquisition.yaml`。样本就绪后运行有限Worker批次，测摘要定位、语言/引用覆盖、consumer实读和1/2/4并行空间增量。S3与四仓可合入工作已完成；Dayu远端push权限问题单独记为owner待办，不阻塞N4C。审计结果目录按其独立计划管理。
 
+## 2026-10-04：新增三张可独立派发的施工卡
+
+三张卡均为 READY TO DISPATCH；本段记录的是可派发计划，不表示施工已经开始。StockQAbyLLM 与 MeetingConverter 先前的只读盘点交付仍按已有收据验收；invest-quick-scan 仍由其独立任务负责，本计划不检查、不修改、不重复派发。
+
+| 卡 | 仓库 / 隔离工作树 | 精确责任 | 与其他卡的隔离方式 |
+|---|---|---|---|
+| [N4-T1 模型传输错误诊断](harness_lanes/n4_model_transport_diagnostics.md) | company-wiki 新建独立 worktree | automation 的HTTP模型适配、错误分类、预算账本诊断及对应测试；不修改选择器/调度/配置/生产来源 | 与N4-T2代码目录及测试文件完全不重叠；两者只共享只读的当前主线基线 |
+| [N4-T2 中文叙述选材覆盖](harness_lanes/n4_selective_narrative_coverage.md) | company-wiki 另一独立 worktree | source_catalog选材/路由/收尾与selector测试；增强中文季报、IR中的行业、业务进展、新业务、出海证据选取 | 不修改automation模型传输、Worker/AUTO、共享wire、配置或PWF；只提交本线分支，不合main |
+| [MeetingConverter CI 快速门](harness_lanes/meetingconverter_ci_fast_gate.md) | MeetingConverter 新建独立 worktree | 只调查和修复CI零任务/无实际测试问题，限定CI工作流、专用配置测试和本线HANDOFF | 在独立仓库施工，不读写company-wiki业务代码、StockQAbyLLM、IQS或任何转录资料 |
+
+N4-T1与N4-T2应从同一已提交主线基线创建两个不同worktree，不能共用checkout或分支工作目录；即使文件写集不重叠，也不能在同一工作树并行写。两卡交付后由MAIN按先后顺序整合并运行跨模块测试及Worker端到端验收。MeetingConverter卡与CWP N4C完全异步，可以独立完成，不进入N4C关键路径。卡片中的路径、测试、边界、handoff字段和禁止操作是交付接口；外部harness只需拿对应卡，无需本总计划全文。
+
+### N4C复盘：已证实的问题与尚未证实的原因
+
+- 2026-10-04隔离运行n4c-20261004-wave1已停止且不重跑：四个SourceRef的原件SHA/身份可验证；年报选择出3条span，招股书选择出160条span但summary触发预算拒绝；中文季报和IR均零候选/零span并报PARSER_INCOMPLETE。失败账本没有HTTP状态/响应摘要，因此不能反推MiniMax那次请求究竟因HTTP错误还是2xx响应格式失败。
+- 源码已证实一个可修复的可观测性缺口：HTTP适配器携带状态码抛出ModelHTTPError，但预算调用层归类为MODEL_RESPONSE_INVALID且丢掉状态码。N4-T1只改诊断/分类和账本安全信息，不能宣称这已证明旧请求根因，也不能降低未知用量按预留上限计费的规则。
+- 季报和IR的正式来源读取、PDF抽取、表格覆盖均成功；选择器仍未选到业务叙述。N4-T2优先以离线合成中文案例证明选材与跳过逻辑；不得把解析未覆盖当成“无叙述可跳过”，也不能以财报数字span代替主营进展证据。
+- 旧运行约0.005258美元的未知预留继续保留在旧run账本；不得复用该run id或把未知费用清零。新真实模型检查由MAIN在两张N4卡集成且离线验收后另建run，并受剩余批次预算约束。
+
+### 新施工卡导航
+
+- [N4-T1 模型传输诊断卡](harness_lanes/n4_model_transport_diagnostics.md)
+- [N4-T2 叙述选材卡](harness_lanes/n4_selective_narrative_coverage.md)
+- [MeetingConverter CI快门卡](harness_lanes/meetingconverter_ci_fast_gate.md)
+- [并行总计划与隔离合同](parallel_execution_plan_2026-10-03.md)
+
 ### 已完成：ET-DEADLINE 并线前 FF→ET→CWP 离线契约联调
 
 **目的：**验证已交付deadline分支通过真实命令行/子进程，被FF实际调用并由CWP importer接收，最后通过CWP exact query与SourceVersionReader verified-open读回。测试覆盖ET分支 `0017f24`，不以独立ET单测或历史Motley E2E代替此链路。
