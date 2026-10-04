@@ -104,6 +104,14 @@ N4C的四种文档仍按主计划在G1/S3之后运行。预选不能直接用数
 
 active catalog盘点总数：年报46、半年报8、季报7、IR 3,682、电话会7；229份招股书全部retired。以上来源分类未调用LLM、未启动Worker、未修改生产数据库，也没有复制raw。实际N4C不因这些预检提前开始：S3关闭后先验证招股书、IR、ET TXT进入既有SourceRef合同；任一类型无合格来源就继续报告缺口，不降低SHA/身份/公开日期要求。并发1/2/4比较仍需同一批次、相同source set与确定性输出基准，并量实际模型费用、最终工件、SQLite/WAL和scratch峰值。
 
+### RF/CWP接口复核与IR metadata前置（2026-10-04，只读）
+
+- 财报下游沿用RF已发布`SourceRef/2.0`和`company_wiki_source_reader_v2.open_source_version_v2`：pathless精确ref→CWP `filing_reuse` CLI→RF实读bytes SHA/size、身份/财年/期间、published/retrieved与as-of复核。`not_reviewed`不阻断读取。CWP不得复制这一套财报校验器。
+- RF `company_wiki_narrative_reader.py`消费已有`narrative-read-request/1`工件引用；原件发现、叙述选择/生成仍由CWP现有SourceVersionReader和N4 Worker负责。
+- 三七互娱2026-05-11 IR的document/source active且SHA可实读，但`source_metadata_assertions`行数为0；metadata JSON仅有scanner/acquisition键，所以v2 `describe_version`没有可投影的normalized metadata。现有`upsert_verified_assertion`写入verified/shadow；`activation.apply_activation`才把行变成当前v2 snapshot可见。不能用手动SQL改active、虚构fiscal year/period，或把“raw能打开”当完整SourceExport。
+- N4C进入真实IR样本前，先在CWP G1/S3收口内明确并验证一个简单的非周期IR元数据生成路径：只需真实document/source IDs、SHA/size、公司证券身份、source type/document kind、已证实公开日及必要的检索事实；不强制财报期次。不增加人工逐文档签收；如果仍必须走shadow cutover，证明它可由已验证元数据自动、幂等地通过现行snapshot，而不绕过共享解析器。与此同时保留RF财报reader的identity/period/as-of合同。
+- 招股书/ET TXT相同原则：正式active SourceRef、实际bytes SHA和可导出来源信息；只复用已有admission/importer。provider权益不可用时不编造ET TXT，不把旧Motley来源sidecar当新授权。
+
 
 ## 2026-10-03 旧 Worker 入口退役状态
 

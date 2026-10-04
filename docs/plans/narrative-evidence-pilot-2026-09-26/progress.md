@@ -337,3 +337,11 @@ S0/N4A及S2模型预算基础、CLI阶段与CI修复已正常发布，当前CI�
 - 三七互娱2026-05-11 IR记录经SourceRef narrative_derivation读出、验证133,294 B SHA，实际包含游戏储备、重点品类和海外上线等信息，也重复出现一般性模板话术；但当前v2 `describe_version` 返回`metadata_not_visible`，未满足pathless export入场条件。
 - catalog内229份招股书全为retired；其中盛美上海招股书7,073,891 B的记录和原件位置状态均retired，不通过物理路径绕过。7条active电话会记录为旧PDF/JSON而非ET TXT；ET-LIVE仍因HTTP 402未导入。
 - N4C细卡已新增逐项入场要求：先通过既有source admission得到active、v2 metadata可见且字节SHA匹配的IR/招股书/ET TXT；若未就绪，阶段如实保持pending。下一步仍是验收ET-DEADLINE交付并完成S3确定性联调。
+
+## 2026-10-04 — RF接口复核与IR来源门诊断
+
+- 实施下一步前先只读检查RF：`origin/main`=`rf-impl main@6fb2def7`；`fcap@5319ee26`只有weekly alert/manifest两项dirty。RF main工作树还有owner未提交的规划/证据改动，全部保持不动。RF没有CodeGraph索引；没有为本次任务向RF写入索引。
+- 确认复用RF已发布接口而非重造：财报消费用`SourceRef/2.0` exact ref、CWP pathless `filing_reuse` CLI、RF bytes SHA/size + identity/period/publication/as-of校验；审查状态仅诊断。RF叙述reader `narrative-read-request/1`面向已有叙述工件，走有限只读子进程传输，不替代CWP的raw/source处理。
+- 只读SQL查明三七互娱2026-05-11 IR没有任何`source_metadata_assertions`，现有`metadata_json`只有scanner/acquisition字段。当前v2不可见的直接原因是缺normalized assertion，而非活跃状态或字节验证失败。通用upsert新建的是shadow assertion，激活流程单独依赖epoch/cohort/policy snapshot；已将其列为G1剩余复杂度审查项和N4C入场路线设计点，不绕开或直接写数据库。
+- ET-DEADLINE worktree仍为`codex/et-s3-deadline@93fe52c`且代码/测试未提交；当前PWF未更新、无handoff文件。最新观测到代码文件修改时间为本地10:59，不能据此断言harness终止。保持外线写集不动，S3仍pending。
+- 本轮只有证据收集与PWF更新；无代码测试需要重跑。待提交前执行`verify_plan_claims.py`和`git diff --check`，只提交本次计划文档，保留`config/source_acquisition.yaml`用户本地变更。

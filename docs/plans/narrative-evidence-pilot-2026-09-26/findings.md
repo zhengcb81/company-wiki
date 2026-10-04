@@ -260,3 +260,12 @@ Git写入/联网用正常用户，sandbox .git只读不是产品权限。测试�
 - 代表性招股书“盛美上海首次公开发行股票并在科创板上市招股说明书”有旧记录SHA `02adc989…` / 7,073,891 B，但document与original-primary location均为`retired`；当前`SourceVersionReader`不允许把它当active SourceRef。其余228份招股书同样retired。不得直接开物理路径或改状态；N4C要包含招股书，须用正式再入库/metadata验证流程取得可见的active SourceRef，且原始字节SHA一致。
 - 当前CWP的7条active `investor_call_transcript`记录是旧PDF或JSON sidecar，没有已验证的ET原语言TXT；ET-LIVE真实请求返回402，未导入。N4C电话会样本须来自ET的既有原语言TXT并经正式importer生成SourceRef，或等合法provider权益恢复后按S3合同导入，不把旧PDF冒充TXT闭环。
 - 结论：N4C仍排在G1/S3之后。先固定active verified财报基线，再将IR、招股书、ET TXT的来源可见性列入样本入场检查；无法通过现有来源合同的样本要报告为未就绪，不能通过松开验证把批次做绿。实际Worker/模型并发、来源覆盖、成本与总空间测试仍未开始。
+
+## 2026-10-04 — RF消费者合同与IR元数据入场根因（只读）
+
+- 最新RF复核：`origin/main` / `rf-impl main@6fb2def7`；`fcap@5319ee26`仅有`assurance/runs/weekly_alert.jsonl`、`weekly_manifest.json`两项本地修改。`rf-impl`主线工作树另有大量owner未提交的planning/evidence改动，保持只读；没有尝试恢复或合并。RF未初始化CodeGraph；因本项目边界禁止改RF目录，未在那里初始化索引，按只读源码与测试核实接口。
+- 财报消费复用`scripts/company_wiki_source_reader_v2.py`：请求为pathless `SourceRef/2.0`精确字段；CWP CLI按`filing_reuse`打开精确`document_id + source_id + SHA`，RF再核验实际字节数/SHA、manifest身份/期间、财年、公开日、检索日和as-of。prompt review在该合同里明确是诊断字段。不要在CWP另造相同的财报reader。
+- 叙述消费复用RF `scripts/company_wiki_narrative_reader.py`和既有`narrative-read-request/1`；它读取的是已有叙述工件引用，做有界只读传输，不是新的原始来源下载协议。CWP仍是原件、解析、EvidenceSpan与摘要工件的owner。
+- SQLite只读查询三七互娱2026-05-11 IR：document与source均active、公开日为2026-05-11、真实SHA记录一致；`documents.metadata_json`只有`acquisition/dayu_meta/group_key/root_id/scanner_version`，该document在`source_metadata_assertions`中为0行。故`describe_version=metadata_not_visible`不是路径或原件问题，而是从未写入可供v2 reader消费的normalized metadata assertion。
+- 当前`upsert_verified_assertion`对规范化metadata作幂等写入，但新行默认`decision=verified, visibility_state=shadow`；需独立`activation.apply_activation`以epoch/cohort/policy hash等改变可见性，v2 reader只读active且匹配当前snapshot/cohort的行。不要直接改数据库状态或伪造财报期间。G1门禁简化需补审这条通用shadow/activation流程是否仍有实际生产必要；N4C需先确定最小可靠的IR metadata生产/可见路径，再复用SourceRef，而不是跳过manifest校验。
+- 本次只读核对没有改RF、ET、CWP生产代码/配置/数据库/raw。ET-DEADLINE仍有未提交worktree；本机PWF仍写Stage 2 RED待做，当前checkout无handoff文件，最新源码/测试mtime显示为本地10:59，此后未更新。目录静止不能证明外部harness已停，故状态保持“未交付、不可合入”，不触碰它的写集。
