@@ -48,12 +48,6 @@ class RiskClass(str, Enum):
     CRITICAL = "critical"
 
 
-class ApprovalDecision(str, Enum):
-    APPROVED = "approved"
-    REJECTED = "rejected"
-    NEEDS_CHANGES = "needs_changes"
-
-
 class EffectStatus(str, Enum):
     PLANNED = "planned"
     PENDING = "pending"
@@ -502,32 +496,6 @@ class OutboxLease(StrictModel):
         if type(self.runtime_generation) is not int or self.runtime_generation < 1:
             raise ValueError("runtime_generation must be a positive integer")
         require_utc_timestamp(self.lease_until)
-
-
-@dataclass(frozen=True)
-class Approval(StrictModel):
-    approval_id: str
-    job_id: str
-    action_hash: str
-    reviewer_principal: str
-    reviewer_session_id: str
-    role: str
-    decision: ApprovalDecision
-    decided_at: str
-    receipt_hash: str
-
-    _enum_fields: ClassVar[dict[str, type[Enum]]] = {"decision": ApprovalDecision}
-
-    def __post_init__(self) -> None:
-        for name in (
-            "approval_id", "job_id", "reviewer_principal", "reviewer_session_id", "role",
-        ):
-            _require_nonempty(getattr(self, name), name)
-        require_sha256(self.action_hash, field_name="action_hash")
-        require_sha256(self.receipt_hash, field_name="receipt_hash")
-        if not isinstance(self.decision, ApprovalDecision):
-            raise TypeError("decision must be ApprovalDecision")
-        require_utc_timestamp(self.decided_at)
 
 
 @dataclass(frozen=True)

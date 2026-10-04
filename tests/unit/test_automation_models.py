@@ -215,7 +215,7 @@ def test_job_rejects_boolean_priority_and_nonpositive_attempt_limit():
         m.Job.from_dict({**job_data(), "max_attempts": 0})
 
 
-def test_attempt_approval_effect_and_handler_result_roundtrip():
+def test_attempt_effect_and_handler_result_roundtrip():
     m = load_models()
     attempt = m.Attempt.from_dict({
         "attempt_id": "attempt-001", "job_id": "job-001", "attempt_no": 1,
@@ -223,12 +223,6 @@ def test_attempt_approval_effect_and_handler_result_roundtrip():
         "lease_until": "2026-07-12T06:05:00Z", "started_at": "2026-07-12T06:00:00Z",
         "heartbeat_at": "2026-07-12T06:01:00Z", "finished_at": None,
         "outcome": None, "result_json": None, "error_code": None, "error_detail": None,
-    })
-    approval = m.Approval.from_dict({
-        "approval_id": "approval-001", "job_id": "job-001", "action_hash": digest("action"),
-        "reviewer_principal": "reviewer-1", "reviewer_session_id": "session-1",
-        "role": "primary", "decision": "approved", "decided_at": "2026-07-12T06:10:00Z",
-        "receipt_hash": digest("receipt"),
     })
     effect = m.Effect.from_dict({
         "effect_id": "effect-001",
@@ -245,7 +239,6 @@ def test_attempt_approval_effect_and_handler_result_roundtrip():
         "error": None,
     })
     assert attempt.to_dict()["outcome"] is None
-    assert approval.to_dict()["decision"] == "approved"
     assert effect.to_dict()["status"] == "planned"
     assert result.to_dict()["artifacts"][0]["sha256"] == digest("after")
     assert result.to_dict()["effects"][0]["effect_id"] == "effect-001"

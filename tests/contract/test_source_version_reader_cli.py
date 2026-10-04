@@ -181,6 +181,9 @@ def _run_ensure_cli(
     security_id: str = "ACME",
     acquisition_config: Path | None = None,
     worker_config: Path | None = None,
+    max_download_bytes: int | None = None,
+    max_download_seconds: int | None = None,
+    max_download_cost_usd: str | None = None,
 ) -> subprocess.CompletedProcess[bytes]:
     env = os.environ.copy()
     env["PYTHONPATH"] = str(ROOT / "src") + os.pathsep + env.get("PYTHONPATH", "")
@@ -197,6 +200,12 @@ def _run_ensure_cli(
         command.extend(("--acquisition-config", str(acquisition_config)))
     if worker_config is not None:
         command.extend(("--worker-config", str(worker_config)))
+    if max_download_bytes is not None:
+        command.extend(("--max-download-bytes", str(max_download_bytes)))
+    if max_download_seconds is not None:
+        command.extend(("--max-download-seconds", str(max_download_seconds)))
+    if max_download_cost_usd is not None:
+        command.extend(("--max-download-cost-usd", max_download_cost_usd))
     if source_ref_v2:
         command.append("--source-ref-v2")
     return subprocess.run(
@@ -276,6 +285,12 @@ response = {
         'language': 'zh',
     }],
 }
+response['acquisition_usage'] = {
+    'schema_version': '1.0', 'response_bytes': 0, 'cost_usd': '0'
+}
+for _ in range(4):
+    encoded = json.dumps(response).encode('utf-8')
+    response['acquisition_usage']['response_bytes'] = len(encoded)
 print(json.dumps(response))
 """,
         encoding="utf-8",
@@ -291,6 +306,7 @@ print(json.dumps(response))
             "cn": {
                 "name": "fake-cn", "version": "1.0",
                 "interface": "json_command_v1",
+                "supports_acquisition_budget": True,
                 "project_root": "${PROJECT_ROOT}", "config_root": None,
                 "command": [str(Path(sys.executable).resolve()), str(fake_adapter)],
             },
@@ -428,6 +444,9 @@ def test_ensure_cli_latest_as_of_projects_gap_without_fetch_or_raw_change(
         security_id="BETA",
         acquisition_config=acquisition_config,
         worker_config=worker_config,
+        max_download_bytes=5_000_000,
+        max_download_seconds=90,
+        max_download_cost_usd="0",
     )
 
     assert projected.returncode == 0, projected.stderr
@@ -484,6 +503,9 @@ def test_ensure_cli_latest_as_of_preserves_provider_unavailable_gap(
         security_id="BETA",
         acquisition_config=acquisition_config,
         worker_config=worker_config,
+        max_download_bytes=5_000_000,
+        max_download_seconds=90,
+        max_download_cost_usd="0",
     )
 
     assert projected.returncode == 0, projected.stderr

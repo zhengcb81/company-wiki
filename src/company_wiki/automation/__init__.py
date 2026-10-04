@@ -5,8 +5,6 @@ LLM integration.  Those capabilities are added only by later work units.
 """
 
 from .models import (
-    Approval,
-    ApprovalDecision,
     Attempt,
     Effect,
     EffectStatus,
@@ -19,8 +17,6 @@ from .models import (
 )
 
 __all__ = [
-    "Approval",
-    "ApprovalDecision",
     "Attempt",
     "Effect",
     "EffectStatus",

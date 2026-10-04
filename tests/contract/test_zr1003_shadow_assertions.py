@@ -4,8 +4,8 @@ only flips the flag (stage I third card).
 
   C1  lifecycle: assertion shadow -> apply -> active -> rollback -> shadow,
       visibility correct at every stage.
-  C2  safety: an unreviewed prompt-injection document blocks consumption
-      (fail closed); a recorded not_detected review unblocks it.
+  C2  prompt-injection status is optional diagnostic metadata and never a
+      prerequisite for source consumption.
   C3  RootPolicy: activating with a wrong policy_hash is rejected; the
       correct policy activates.
   C4  two dynamic cycles explainable: two shadow reads of the same catalog
@@ -124,11 +124,11 @@ def test_c1_lifecycle_visibility(tmp_path):
 
 
 # ---------------------------------------------------------------------------
-# C2 — safety: unreviewed document blocks consumption (fail closed)
+# C2 — prompt-review status is diagnostic metadata only
 # ---------------------------------------------------------------------------
 
 
-def test_c2_unreviewed_document_blocks(tmp_path):
+def test_c2_absent_review_is_an_optional_diagnostic(tmp_path):
     db_path = tmp_path / "catalog.sqlite3"
     store = CatalogStore(db_path)
     _seed(store)
@@ -136,10 +136,10 @@ def test_c2_unreviewed_document_blocks(tmp_path):
         "SELECT metadata_json FROM documents WHERE document_id='d1'")
     meta = json.loads(row["metadata_json"]) if row["metadata_json"] else {}
     assert PROMPT_INJECTION_REVIEW_KEY not in meta, (
-        "unreviewed document must carry no review receipt (fail closed)")
+        "a missing diagnostic stays absent; source use has no review prerequisite")
 
 
-def test_c2_recorded_review_unblocks(tmp_path):
+def test_c2_recorded_review_is_diagnostic_metadata(tmp_path):
     db_path = tmp_path / "catalog.sqlite3"
     store = CatalogStore(db_path)
     _seed(store)

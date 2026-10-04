@@ -226,8 +226,6 @@ HEURISTIC_READER_CANDIDATES: tuple[str, ...] = (
     "extraction_quality.py::ExtractionQualityService._artifact",
     "normalizer.py::normalize_catalog",
     "prompt_injection.py::read_prompt_injection_review",
-    "prompt_injection.py::record_prompt_injection_review",
-    "prompt_injection_guard.py::_receipt_from_store",
     "scanner.py::_merge_metadata_json",
     "service.py::_read_shared_metadata",
     "store.py::metadata_object",

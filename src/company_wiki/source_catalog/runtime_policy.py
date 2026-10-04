@@ -38,6 +38,17 @@ def snapshot_hash(snapshot: dict[str, Any]) -> str:
     return hashlib.sha256(payload.encode("utf-8")).hexdigest()
 
 
+def resolver_visibility_projection(snapshot: dict[str, Any]) -> dict[str, Any]:
+    """Return only the activation fields that affect source resolution."""
+    flags = snapshot.get("flags", {})
+    return {
+        "reader": "v2" if flags.get("v2_resolve_active") else "v1",
+        "current_epoch": snapshot.get("current_epoch"),
+        "active_cohorts": tuple(snapshot.get("active_cohorts") or ()),
+        "legacy_bridge_allowed": bool(flags.get("legacy_bridge_enabled")),
+    }
+
+
 def validate_snapshot(snapshot: dict[str, Any]) -> list[str]:
     """Return structural + semantic problems ([] = valid)."""
     problems: list[str] = []

@@ -45,7 +45,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 CURRENT_CI_REGRESSION_CASES = (
     "tests/unit/test_automation_migrations.py::test_m14_classification_uses_one_snapshot_during_concurrent_init",
     "tests/contract/test_zr203_reader_rewire.py::test_read_entrypoints_never_construct_catalog_store",
-    "tests/contract/test_zr1003_shadow_assertions.py::test_c2_recorded_review_unblocks",
+    "tests/contract/test_zr1003_shadow_assertions.py::test_c2_recorded_review_is_diagnostic_metadata",
     "tests/contract/test_zr1006_broker_cohort.py::test_c2_ramp_1_to_3_to_7",
     "tests/contract/test_source_catalog_temp_worker_governance.py::test_owned_temp_worker_helper_detects_test_pid",
     "tests/contract/test_source_catalog_temp_worker_governance.py::test_stop_does_not_touch_unowned_live_workers_or_temporary_files",

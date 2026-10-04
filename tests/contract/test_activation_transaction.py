@@ -496,6 +496,42 @@ def test_map_existing_activation_to_canary_cohort(tmp_path):
     assert rows[0]["cohort"] == "canary-2026-08-10"
 
 
+def test_map_existing_activation_defaults_actor_without_manual_reviewer(tmp_path):
+    from company_wiki.source_catalog.activation import (
+        journal_rows,
+        map_existing_activation,
+    )
+
+    store = CatalogStore(tmp_path / "catalog.sqlite3")
+    ids = _seed_active_legacy(store)
+    receipt = map_existing_activation(
+        store,
+        epoch="epoch-canary-2026-08-10",
+        cohort="canary-2026-08-10",
+        assertion_ids=ids,
+        policy_hash=POLICY_HASH,
+        reason="map pre-existing active rows",
+        current_policy_hash=POLICY_HASH,
+    )
+
+    assert receipt["reviewer"]
+    assert journal_rows(store)[0]["reviewer"] == receipt["reviewer"]
+
+    empty_label_store = CatalogStore(tmp_path / "empty-label.sqlite3")
+    empty_label_ids = _seed_active_legacy(empty_label_store)
+    empty_label_receipt = map_existing_activation(
+        empty_label_store,
+        epoch="epoch-canary-2026-08-10",
+        cohort="canary-2026-08-10",
+        assertion_ids=empty_label_ids,
+        policy_hash=POLICY_HASH,
+        reviewer="",
+        reason="map pre-existing active rows",
+        current_policy_hash=POLICY_HASH,
+    )
+    assert empty_label_receipt["reviewer"] == receipt["reviewer"]
+
+
 def test_map_existing_activation_unknown_id_fails_closed(tmp_path):
     from company_wiki.source_catalog.activation import (
         ActivationError,

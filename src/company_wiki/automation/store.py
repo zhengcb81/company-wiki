@@ -32,7 +32,6 @@ from .migrations import (
 )
 from .execution_snapshot import ExecutionSnapshot, load_execution_snapshot
 from .models import (
-    Approval,
     ClaimedWork,
     Effect,
     EffectStatus,
@@ -143,10 +142,6 @@ _ATTEMPT_COLS = (
     "started_at, heartbeat_at, finished_at, outcome, result_json, "
     "error_code, error_detail, runtime_generation"
 )
-_APPROVAL_COLS = (
-    "approval_id, job_id, action_hash, reviewer_principal, "
-    "reviewer_session_id, role, decision, decided_at, receipt_hash"
-)
 _EFFECT_COLS = (
     "effect_id, effect_key, job_id, effect_type, target, before_hash, "
     "intended_after_hash, actual_after_hash, status, created_at, verified_at"
@@ -176,10 +171,6 @@ def _job_from_row(row: sqlite3.Row) -> Job:
 
 def _attempt_from_row(row: sqlite3.Row) -> Attempt:
     return Attempt.from_dict(dict(row))
-
-
-def _approval_from_row(row: sqlite3.Row) -> Approval:
-    return Approval.from_dict(dict(row))
 
 
 def _effect_from_row(row: sqlite3.Row) -> Effect:
@@ -1411,55 +1402,6 @@ class AutomationStore:
             return tuple(reaped)
 
         return self._write_transaction(_op)
-
-    # -- Approval CRUD ----------------------------------------------------- #
-
-    def put_approval(self, value: Approval) -> PutResult[Approval]:
-        def _op(conn):
-            try:
-                conn.execute(
-                    "INSERT INTO approvals (approval_id, job_id, action_hash, "
-                    "reviewer_principal, reviewer_session_id, role, decision, "
-                    "decided_at, receipt_hash) VALUES (?,?,?,?,?,?,?,?,?)",
-                    (
-                        value.approval_id, value.job_id, value.action_hash,
-                        value.reviewer_principal, value.reviewer_session_id,
-                        value.role, value.decision.value, value.decided_at,
-                        value.receipt_hash,
-                    ),
-                )
-                return PutResult(value=value, created=True)
-            except sqlite3.IntegrityError as exc:
-                return _resolve_idempotency(
-                    conn, "approvals", "approval_id",
-                    ("job_id", "role", "reviewer_principal", "receipt_hash"),
-                    "approval_id", _APPROVAL_COLS, _approval_from_row, value, exc,
-                )
-
-        return self._write_transaction(_op)
-
-    def get_approval(self, approval_id: str) -> Approval | None:
-        conn = self._connect()
-        try:
-            row = conn.execute(
-                f"SELECT {_APPROVAL_COLS} FROM approvals WHERE approval_id = ?",
-                (approval_id,),
-            ).fetchone()
-            return _approval_from_row(row) if row else None
-        finally:
-            conn.close()
-
-    def list_approvals(self, job_id: str) -> tuple[Approval, ...]:
-        conn = self._connect()
-        try:
-            rows = conn.execute(
-                f"SELECT {_APPROVAL_COLS} FROM approvals WHERE job_id = ? "
-                "ORDER BY decided_at, approval_id",
-                (job_id,),
-            ).fetchall()
-            return tuple(_approval_from_row(r) for r in rows)
-        finally:
-            conn.close()
 
     # -- Effect CRUD ------------------------------------------------------- #
 

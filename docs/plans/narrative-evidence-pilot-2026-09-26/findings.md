@@ -93,8 +93,98 @@ Git写入/联网用正常用户，sandbox .git只读不是产品权限。测试�
 - CWP本地commit `288b02857d0a27b5622fb96c9e2156b6132a0deb`（父 `ba71ed4`）已推送到master；push前本地快smoke gate绿，远端Actions run `37162544905` 对应同一SHA且 `completed/success`。工作树干净。`gh` CLI缺失，CI由GitHub公开REST API核实。
 - StockInfo远端ref盘点：`v2-clean-rewrite`=`1693045`，bounded分支=`947e839`且以其为父；默认`main`=`6df45a1`。GitHub compare API返回main与v2-clean-rewrite无共同祖先，因此不能将v2功能当作普通PR直接合到默认main。CWP配置原本指向v2路线；后续沿v2 owner集成线推进，避免全量恢复未提交功能WIP。
 
+## 2026-10-04 — FF→CWP→CNINFO 真实数据闭环与 FF 主线合并
+
+- StockInfo隔离 provider worktree `codex/cninfo-bounded-budget` 当前提交 `8ed5fdd`，在原 `947e839` 限额实现上修复 JSON CLI stdout 污染：日志handler写入stderr，stdout只含一个JSON响应。provider责任集62 passed / 0.87s，`git diff --check` clean；提交已推送到其远端支线。原 `v2-clean-rewrite` owner工作树保持隔离，Dayu仓未改。
+- CWP `config/source_acquisition.yaml` 已切到 provider 1.2.0隔离路径并声明 `supports_acquisition_budget: true`。`load_acquisition_config()` + `build_registry()` smoke通过，HK/US配置保持不变。
+- 正式端到端使用公开真实BYD FY2024年报及真实CNINFO网络响应，预算100,000,000 B / 240 s / $0。FF-S3 v2 exact `fetch_if_missing` 返回 `source_candidate/downloaded_new`，单次下载10,092,140 B；SourceRef SHA-256 `e9c2d7fdd088e151ccb6c8ad3d95587b2b014b10f2c9731508d23ce07fde4de3` 与raw PDF实际字节/hash一致，journal只有一次 `downloaded_new`。
+- 同一临时root中的 `latest_as_of + reuse_only` 使用5,000,000 B / 90 s / $0额度完成元数据查询，返回GAP且missing/newer_revision均为0；journal为 `gap_plan`，原件清单/hash没有变化。legacy v1 exact reuse返回 `capture_ready` 且没有新增下载；legacy v1缺件加 `--allow-download` 但无额度参数时以返回码2失败，且没有写公司文件。所有临时root由finally清除，生产配置与CN identity snapshot指纹前后不变。
+- 真实E2E首轮发现provider CLI logger向stdout写日志、破坏单JSON协议；新增回归并修复后重跑62项provider测试及E2E通过。CWP acquisition/来源适配器精选集32 passed / 18.08s。
+- FF-S3发现 `latest_as_of + reuse_only` 仍查询provider元数据，因此必须要求并转交request ceilings；新增TDD合同覆盖限额转交、缺限额拒绝且不增加 `--allow-download`，exact reuse不产生采集上限参数。FF focused集23 passed / 11.72s，pre-push本地检查全绿；提交 `5b9a8c1` 将远端FF main从 `c47c397` 快进到新头，本地 `filing-fetch` owner工作树也从祖先提交快进同步。未跟踪 `config/FMP_API_KEY.txt` 未被读取、暂存或覆盖。
+
+## 2026-10-04 — FF Actions Linux mypy 根因与修复
+
+- 纠正前一条根因判断：GitHub Actions Runs #52 (`37166994628`)、#53 (`37167094753`) 和 #54 (`37167803001`) 的公开 Jobs API 都明确显示 `Strict type check on public contracts (FC-1204-c)` step 7 failure；pytest步骤被跳过。匿名网页隐藏job日志，本地 fcap 的安装清单测试确有另一个环境假设问题，但它并非这些远端运行的失败原因。
+- 用本机 Python 3.12.12/mypy 1.19.0做Linux目标复现，精确报错为 `scripts/transcript_tool_transport.py:100: Module has no attribute "CREATE_NO_WINDOW" [attr-defined]`。Windows分支本地类型检查通过，掩盖了Linux平台对可选 subprocess 常量的缺失。
+- TDD先加 `test_creationflags_handles_a_missing_windows_constant`，旧代码在模拟Windows常量缺失时RED (`AttributeError`)；改成 `int(getattr(subprocess, "CREATE_NO_WINDOW", 0)) if os.name == "nt" else 0` 后GREEN。随后Python 3.12/mypy 1.19指定 `--platform linux` 与CWP runtime `PYTHONPATH`复核成功。
+- 完整FF workflow精选pytest命令 **361 passed / 5 skipped / 78 subtests / 48.97s**；FF正常pre-push gate全绿。`1d0c73c` 已快进推到FF main，fcap本地工作树同步且未跟踪API key保持原样。Actions #55 (`37182527153`) 已 completed/success；远端真实workflow通过。
+- 独立修正：安装清单credential测试由 `2936ad1` 改为在 `tmp_path` 使用假key；这修复了本机有key的工作树上测试先决条件脆弱，但与GitHub远端mypy失败无关，不能将其记作CI根因修复。
+
 ## 2026-10-04 — StockInfo 原工作树 WIP 审查
 
 - 用户明确要求核对 StockInfoDLSimple 未提交改动并清理不需要项。CWP `config/source_acquisition.yaml` 当前实际引用 `../StockInfoDLSimple/v2-clean-rewrite` 的 1.1.0 JSON CLI；因此恢复掉当前checkout中 adapter、CLI、CNINFO client 等未提交文件会使该配置失效。bounded commit `947e839` 虽已存在于独立分支/远端，但尚未切入配置所指目录、CWP也未切至1.2.0。故未做全量 restore；保留功能性代码、测试与夹具。
 - 相关回归 **88 passed / 19.96s**：下载器、CNINFO API、真实/合成fixture合同、company-wiki adapter与CLI。全局 pytest plugin autoload 首次因 `langsmith` → `pydantic_core` DLL import 权限错误无法启动；仅本次命令禁用自动插件加载后通过，没有改测试配置。`git diff --check HEAD`通过。
 - 清理项限于：`lookup_a_shares.py`（硬编码读取company-wiki物理目录并生成已存在名单，违背pathless来源接口）、`reorganize_downloads.py`（未被调用且会按文件名无hash删重，目录分类已由`save_subdir`完成）、确认0字节的意外 `nul` 文件；另将11个仅有无用import/格式调整的tracked文件恢复至当前HEAD，index未动。保留 README 使用的 `a_share_companies.txt` 与研究目标 `companies.txt`、fixture捕获脚本、适配器和功能WIP；未触碰任何下载原件。StockInfo工作树仍有未提交功能改动，需在其owner集成节点再审查/提交。
+
+## 2026-10-04 — FF-S3 技能安装同步
+
+- FF 主仓 `SKILL.md` 已推荐 schema 2.0、pathless `source_ref`、单次 `filing_intent` 与请求内 `acquisition_limits`；两个实际安装副本（`.agents/skills/filing-fetch`、`.codex/skills/filing-fetch`）此前各有10项manifest漂移，仍展示旧的1.4/v1.1说明和运行脚本。
+- 用 FF 仓库显式 allowlist 安装器同步两个实际目标：安装后各 **MATCH 11 files**，二次 `--check` 也全部匹配。安装器按manifest清理的旧测试夹具/cache仅位于这两个 skill 子目录；FF `fcap` checkout 的未跟踪 `config/FMP_API_KEY.txt` 保留，未读取或改动。
+- 这只闭合了技能安装面。S3 获取默认和缺失关键元数据时的 latest-as-of 语义，仍需按来源合同核对并记录后才能关闭该阶段。
+## 2026-10-04 — latest_as_of 缺失发布时间语义
+
+- `SourceResolver` 在 identity、年度/表单匹配后，若来源 `published_date` 缺失，会记录 `published_date_unknown` 并跳过该候选；若没有任何可用的带日期匹配、但存在此类候选，结果为 `AMBIGUOUS / matching_sources_have_unknown_published_date`，不会把它猜成“最新”或按mtime补日期。
+- 已有测试覆盖latest选择、as-of cutoff、gap不fetch；reason taxonomy注册了unknown-date reason，但没有直接钉住“只有无发布时间匹配来源”的resolver合同。该缺口值得用一个短合同测试补上。
+- 此行为与字段性质一致：`published_date` 是 latest-as-of 的核心时序条件；可缺失的非核心描述元数据可以保持未知，不能因此弱化latest判定。旧总计划短语“缺元数据partial”需要在收口时拆清两种语义。
+## 2026-10-04 — latest_as_of 回归验证与本机 pytest 隔离
+
+- 新增 `tests/contract/test_source_catalog_latest_mode.py::test_latest_as_of_does_not_guess_a_missing_published_date`：把匹配来源的 `published_date` 置空，断言状态为 AMBIGUOUS、无返回handle且诊断包含 `published_date_unknown`。现有实现通过，无生产代码改动。
+- 默认 pytest 首次被全局 `langsmith/pydantic_core` DLL加载失败拦截；禁用自动插件后又因受限的默认 `%TEMP%\pytest-of-郑曾波` ACL在tmp_path fixture阶段失败，未进入测试。以仓内唯一短basetemp `.tla-1004`、禁用外部插件及cache provider后，latest mode责任组 **4 passed / 0.75s**；短根finally移除。pytest hook初次重定位创建的唯一临时根也已按精确路径核对并清理。
+- 仅剩 pytest.ini 里的 `asyncio_mode` 在禁用插件时显示既有unknown-option warning；本次不改全局/仓库pytest配置，避免把环境问题误诊为项目行为失败。
+## 2026-10-04 — R2/R6 细则核对
+
+- 原激进方案中的R2明确要求：读取只用SourceRef、一次verified-open；read-policy pin应绑定本次来源/存储实际依赖与相关配置，避免无关root/runtime变化让原文失效。R6要求普通请求按公开发布日期as-of；缺非核心描述字段或局部解析/引用失败标partial/coverage；真实identity/period/hash和发布时序仍必须正确。
+- `SourceResolver` 的unknown `published_date`路径不是通用partial：它跳过无日期候选，仅有这种候选时报告AMBIGUOUS；新测试已钉住。`finalize_selection` 的可用partial由 coverage 不全或候选被预算省略产生，不能用它替代来源时序事实。
+- 读取层已具备pathless `VerifiedVersionReceipt`（source IDs/SHA/size/read time/read-policy pins）；具体read-policy hash到底只纳入实际依赖配置、是否排除无关字段，仍需查看实现和变更反例测试，才能评价R2是否完成。
+- 一次审计命令将 FF 仓库测试路径误从CWP cwd读取，收到FileNotFound后转回正确仓库；未改文件、未运行任何测试或writer。
+## 2026-10-04 — read-policy 指纹范围待收敛
+
+- 实读 `source_read_policy_sha256()` 发现：当前fingerprint把 `asdict(CatalogConfig)` 全量canonical JSON与runtime snapshot SHA一起hash。现有测试覆盖 admission dimension 与 runtime snapshot的变化，但尚未见无关配置变化保持fingerprint稳定的反例。
+- 这比R2目标“绑定本次读取真正依赖的root/admission/激活配置，忽略日志批大小等无关变化”更宽。须列出 `CatalogConfig` 字段并区分读资格/根绑定字段与运行参数；再用正反两类测试确认，不能直接删掉根/激活/来源hash相关校验。
+## 更正：read-policy fingerprint 字段范围
+
+- `CatalogConfig` 当前仅含 `project_root`、`catalog_dir`、`roots`、`reusable_root_kinds`。`RootSpec` 中还含路径、根类型/顺序、重用资格、路由、大小/状态/文档种类、adapter、symlink及sidecar解析等root约束；没有日志格式、批大小或模型运行参数。
+- `test_source_read_policy.py` 明确覆盖privacy、max size、allowed status、symlink、routes、adapter version、sidecar suffix和encoding改变时pin必须变化；这些均被当前来源发现/解析策略消费。因此前条“可能超宽”尚无具体反例，不能只因使用 `asdict` 就判为架构缺陷。仍需看runtime snapshot是否把不影响读取的更新时间纳入hash；只有找到真实无关字段后才加稳定性反例并考虑收窄。
+- CodeGraph对两个测试函数名未返回节点；已改用项目测试源文件和 `CatalogConfig`/`RootSpec` AST信息核实，不影响代码或测试状态。
+## Runtime fingerprint 具体反例候选
+
+- Runtime snapshot的 `snapshot_hash()` 把除自身SHA外的整个payload做canonical hash；`source_read_policy_sha256()`再把该snapshot SHA纳入reader pin。payload当前含 `updated_at`，所以只更新时间但不改变epoch/cohort/flags/policy hash，也会改变reader pin。这是已确认的非读取字段候选，和R2“无关变化不使来源失效”直接相关。
+- 不立即重构：先读Resolver实际消费哪些activation字段，再加一条RED反例，证明只更新 `updated_at` 应保持reader pin，而current_epoch/cohort/影响读取的flag/policy变动必须改变。随后仅收窄reader-specific fingerprint；runtime_snapshot自身wire/存储哈希和现有运行合同不改。
+## 2026-10-04 — Runtime reader pin 的实际依赖字段
+
+- `SourceResolver`通过 `resolver_visibility()` 只消费 `v2_resolve_active`（选择v1/v2 reader）、`current_epoch`、`active_cohorts`、`legacy_bridge_enabled`。`SourceReader`另校验runtime `policy_hash` 与当前RootPolicy 2.x导出相符。
+- 但当前reader fingerprint取整个 `snapshot_sha256`，连同 `updated_at`、v2 scan/persist/bundle等不参与这次SourceRef resolve/open的flags一起绑定。故“只更新时间/扫描激活切换使旧read pin失效”是明确的不必要耦合。
+- 实施方向：保留runtime snapshot自身完整hash与加载校验；仅将reader专用pin改为对`schema + policy_hash + resolver_visibility有效值`计算canonical fingerprint。先写RED测试：更新时间及非读取flag不改变reader pin；reader/epoch/cohort/bridge/policy真正变化必须改变。
+## 2026-10-04 — 收敛 reader-specific policy pin
+
+- 新合同RED证明纯 `updated_at` + `v2_scan_shadow` 变化会让旧SourceRef read pin意外失效。增加共享 `resolver_visibility_projection()`，由resolver与fingerprint共用，有效读取投影为reader模式、current epoch、active cohorts和legacy bridge；fingerprint另绑定snapshot schema与RootPolicy hash。runtime snapshot的原始完整SHA、加载校验及SourceRef真实字节验证保持不变。
+- 有效runtime flags负例确保scan-shadow独立变化不影响pin；epoch/cohort/reader mode/legacy bridge变化必须影响pin。新相关合同通过。
+## 2026-10-04 — FF/ET companion contract review
+
+- Canonical FF v2 and the newly synced installed skills expose `companion_transcript` as an independent result. Fetch requires exact FY+Q and its own byte/time/cost caps; annual FY alone never invents Q4. Transcript language stays as published, no translation; failure/config absence does not undo a filing. `EARNINGS_TRANSCRIPTS_TOOL` is the explicit entry point; `"0.00"` means zero provider calls.
+- FF has subprocess transport tests and offline companion tests. A live ET→CWP import through the real tool has not yet been evidenced in this session; check tool availability/owner state before deciding whether it can be safely added to the next real-sample batch.
+
+## 2026-10-04 — pathless virtualization and gate status snapshot
+
+- CWP's pathless `SourceVersionReader` / SourceExport v2 is already consumed by RF main and StockWiki; the plan has real cross-repository consumer E2E receipts for annual-report and transcript-text examples. This proves the common read boundary works for those consumers, not that every legacy caller/provider or the live ET tool import is complete.
+- S3 has stronger evidence than the 2026-10-03 gate baseline: FF request limits reach CWP, bounded CNINFO discovery/download is implemented, and the real BYD FY2024 flow verified downloaded PDF bytes, `SourceRef` hash/size, reuse-only metadata lookup, and legacy exact reuse. HK/US Dayu remains fail-closed where the provider cannot enforce the cap.
+- Gate simplification is incomplete across repositories. CWP has just retired unused AUTO approval model/store APIs while preserving old table data. StockWiki's `check_all.sh` invokes one coverage-wrapped pytest run. RF, StockWiki, and IQS working trees are owner-active; use their current plan/receipt and read-only inspection, no overlapping edits.
+- The gate inventory's 2026-10-03 section 6 is a historical snapshot. In particular, deletion-manifest code is already absent, FF request-budget wiring has advanced, and N4A/N4B are implemented; use the 2026-10-04 overlay in that inventory and this file instead of carrying those old gaps forward.
+
+## 2026-10-04 — optional review database failure on export
+
+- The source reader already converts review lookup failures into `not_reviewed`, but `build_resolution_envelope()` called the same optional diagnostic without catching its `PromptInjectionReviewError`/SQLite errors. A database-lock simulation reproduced an export failure before any source-envelope result was returned.
+- The resolver now treats that failure as `not_reviewed` and continues the export. Regression plus the SourceVersionReader suite: **35 passed**. This does not soften source identity/hash, identity/period, root, configuration, or qualification validation.
+- At the time of this finding, the Ed25519 write path and 30-day cache TTL utility had no production callers. They have since been retired in G1; the scanner and old receipt reader remain diagnostic-only.
+
+## 2026-10-04 — signed prompt-review and TTL gate retired
+
+- CodeGraph plus source caller review and repository text search found no production callsites for the signed writer or `evaluate_review`; only tests and read-chain heuristic candidates referred to them. Existing producer/consumer surfaces only read optional receipt status.
+- Removed signature verification/trust-root setup, human disposition authorization, the 30-day TTL cache evaluator and its cache-domain states. Kept deterministic `scan_text`, source/evidence SHA binding, and read-only compatibility for historical `prompt_injection_review` metadata.
+- A detected status can now be stored without a human signature and remains a diagnostic. Existing source opening and export checks continue to bind real bytes SHA, source ID, identity/period, and root policy. Review-store failures on resolver export now report `not_reviewed`.
+- Final focused source/diagnostic/export/CLI test set: **110 passed**. The fake bounded-provider test was updated with explicit caps and usage receipt; it then passed without running fetch.
+
+## 2026-10-04 — stale test node in the fast push gate
+
+- Running the actual `pre_push_gate.py --fast-contracts-only` found one curated node still named `test_c2_recorded_review_unblocks`, while the behavior-preserving test rename now calls it `test_c2_recorded_review_is_diagnostic_metadata`. Pytest therefore collected no fast-gate tests and failed before execution.
+- Updated only the curated node ID. The fast gate then completed GREEN with all 15 selected nodes. The first attempt with `PYTEST_DISABLE_PLUGIN_AUTOLOAD=1` was an environment mistake because it also disabled the installed `pytest-timeout` plugin required by `pytest.ini`; running with normal plugin discovery and disabling only the unrelated `langsmith_plugin` worked. No project pytest or CI configuration was changed.

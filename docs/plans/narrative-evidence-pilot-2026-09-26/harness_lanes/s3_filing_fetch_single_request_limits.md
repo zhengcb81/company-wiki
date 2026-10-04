@@ -2,7 +2,7 @@
 
 ## 启动状态与唯一所有权
 
-**现在可以启动**，仓内实现不等 N4。root 会补 CWP producer 三个限额参数并最终集成；本卡不准把 producer pending 写成端到端通过。
+**施工包已完成并合入 FF main。** 功能提交 `5b9a8c1`、安装清单测试隔离修复 `2936ad1`、Linux mypy修复 `1d0c73c` 均已快进发布；FF本地owner工作树已同步。root后续已把CWP producer限额能力接入CNINFO 1.2.0，并完成真实资料FF→CWP→StockInfo端到端。Actions #52/#53/#54确认失败于Linux mypy；修复后的Actions #55（`37182527153`）已 completed/success。下文记录独立卡的原始实施范围与测试设计，当前状态以总计划最新进度为准。
 
 唯一写入工作目录：`C:\Users\郑曾波\Projects\filing-fetch-s3-limits`；只写该 FF worktree 的代码、测试和局部 PWF。company-wiki、ET、RF、StockWiki、IQS、全局 `.agents/.codex` 技能目录只读。root 负责全局安装和跨仓集成。
 

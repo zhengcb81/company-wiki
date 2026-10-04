@@ -24,7 +24,6 @@ T2 = "2026-07-12T08:02:00Z"
 T5 = "2026-07-12T08:05:00Z"
 INPUT_HASH = hashlib.sha256(b"auto-2-input").hexdigest()
 ACTION_HASH = hashlib.sha256(b"auto-2-action").hexdigest()
-RECEIPT_HASH = hashlib.sha256(b"auto-2-receipt").hexdigest()
 AFTER_HASH = hashlib.sha256(b"auto-2-after").hexdigest()
 
 
@@ -115,23 +114,6 @@ def _make_attempt(m=None, job_id="job-auto2-001", **overrides):
     return m.Attempt(**defaults)
 
 
-def _make_approval(m=None, job_id="job-auto2-001", **overrides):
-    m = m or _models()
-    defaults = dict(
-        approval_id="appr-auto2-001",
-        job_id=job_id,
-        action_hash=ACTION_HASH,
-        reviewer_principal="reviewer-primary",
-        reviewer_session_id="session-001",
-        role="primary",
-        decision=m.ApprovalDecision.APPROVED,
-        decided_at=T2,
-        receipt_hash=RECEIPT_HASH,
-    )
-    defaults.update(overrides)
-    return m.Approval(**defaults)
-
-
 def _make_effect(m=None, job_id="job-auto2-001", **overrides):
     m = m or _models()
     effect_key = m.make_effect_key("artifact_write", "artifacts/gates/auto-2-test.json", ACTION_HASH, "1.0.0")
@@ -203,21 +185,6 @@ def test_s03_attempt_open_and_finished_roundtrip(tmp_path):
     got2 = store.get_attempt("att-auto2-002")
     assert got2 is not None
     assert got2.to_dict() == att2.to_dict()
-
-
-def test_s04_approval_three_decision_roundtrip(tmp_path):
-    s = _store_mod()
-    m = _models()
-    store = s.AutomationStore(tmp_path / "automation.db")
-    store.put_event(_make_event(m=m))
-    store.put_job(_make_job(m=m))
-    for i, decision in enumerate(m.ApprovalDecision):
-        appr = _make_approval(m=m, approval_id=f"appr-{i}", decision=decision,
-                              reviewer_principal=f"reviewer-{i}", decided_at=T2)
-        store.put_approval(appr)
-        got = store.get_approval(f"appr-{i}")
-        assert got is not None
-        assert got.decision is decision
 
 
 def test_s05_effect_nullable_hash_verified_roundtrip(tmp_path):
@@ -337,19 +304,6 @@ def test_s12_attempt_reuse_lease_token(tmp_path):
         store.put_attempt(att2)
 
 
-def test_s13_approval_natural_unique_conflict(tmp_path):
-    s = _store_mod()
-    m = _models()
-    store = s.AutomationStore(tmp_path / "automation.db")
-    store.put_event(_make_event(m=m))
-    store.put_job(_make_job(m=m))
-    appr1 = _make_approval(m=m)
-    store.put_approval(appr1)
-    appr2 = _make_approval(m=m, approval_id="appr-dup", decision=m.ApprovalDecision.REJECTED)
-    with pytest.raises(s.IdempotencyConflictError):
-        store.put_approval(appr2)
-
-
 # --------------------------------------------------------------------------- #
 # S14: Two stores concurrently put the same event -> 1 row, one True one False.
 # --------------------------------------------------------------------------- #
@@ -424,7 +378,6 @@ def test_s17_get_nonexistent_returns_none_no_creation(tmp_path):
     assert store.get_event("nonexistent") is None
     assert store.get_job("nonexistent") is None
     assert store.get_attempt("nonexistent") is None
-    assert store.get_approval("nonexistent") is None
     assert store.get_effect("nonexistent") is None
     # No data created — schema report shows empty tables.
     report = store.schema_report()
@@ -463,20 +416,6 @@ def test_s18_list_attempts_stable_order(tmp_path):
                                         lease_token=f"lease-{no}"))
     atts = store.list_attempts("job-auto2-001")
     assert [a.attempt_no for a in atts] == [1, 2, 3]
-
-
-def test_s18_list_approvals_stable_order(tmp_path):
-    s = _store_mod()
-    m = _models()
-    store = s.AutomationStore(tmp_path / "automation.db")
-    store.put_event(_make_event(m=m))
-    store.put_job(_make_job(m=m))
-    store.put_approval(_make_approval(m=m, approval_id="appr-late", decided_at=T5,
-                                      reviewer_principal="reviewer-late"))
-    store.put_approval(_make_approval(m=m, approval_id="appr-early", decided_at=T0,
-                                      reviewer_principal="reviewer-early"))
-    apprs = store.list_approvals("job-auto2-001")
-    assert [a.approval_id for a in apprs] == ["appr-early", "appr-late"]
 
 
 def test_s18_list_effects_stable_order(tmp_path):

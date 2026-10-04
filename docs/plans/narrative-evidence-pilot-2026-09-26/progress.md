@@ -152,3 +152,112 @@ S0/N4A及S2模型预算基础、CLI阶段与CI修复已正常发布，当前CI�
 - StockInfo分支拓扑：远端bounded分支947e839是`v2-clean-rewrite@1693045`的直接子提交；默认`main@6df45a1`与v2-clean-rewrite无共同祖先。CWP原配置使用v2工作树，后续按v2集成线处理；本轮依用户授权仅清理无调用者辅助脚本和空文件，功能WIP保留，不把commit强行迁到不相关的默认main。
 - 按用户要求检查 StockInfo 原 `v2-clean-rewrite` 未提交改动。`config/source_acquisition.yaml` 仍指向该目录，当前工作树中的 `stockinfo-cninfo` 1.1.0 CLI 仍是本项目配置的适配器入口；整体 restore 会让当前配置失去该入口，所以保留 adapter/client/CLI、预算分支前的源码、测试与夹具，以及 downloader/browser 的功能改动。README/config 变更与现存批量 CLI 能力吻合，`a_share_companies.txt`、`companies.txt` 保留。删除未被代码/文档引用且会绕过 pathless 抽象的 `lookup_a_shares.py`、可能按同名直接删 PDF 且已被 `save_subdir` 取代的 `reorganize_downloads.py`，以及确认的0字节 `nul`；另将11个仅有未使用import/格式调整的tracked文件恢复至当前HEAD，index未动。没有改动或移动任何原始下载资料。
 - 当前脏工作树相关回归 **88 passed / 19.96s**（downloader、CNINFO API/fixture contract、adapter/CLI）。首次 pytest 自动加载全局 `langsmith` 插件时在 `pydantic_core` DLL import 失败；仅本次测试关闭 plugin autoload 后测试正常，未修改项目 pytest 配置。StockInfo 其余功能改动仍未提交；隔离分支 `947e839` 与原目录WIP保持分开，CWP仍配置1.1.0且budget capability关闭，后续集成工作仍待办。
+
+## 2026-10-04 — FF/CWP/StockInfo 真实采集闭环并合入 FF main
+
+- StockInfo provider隔离分支 `codex/cninfo-bounded-budget` 从 `947e839` 补上 JSON stdout 修复，提交并推送 `8ed5fdd`；聚焦 provider suite **62 passed / 0.87s**。原 `v2-clean-rewrite` owner工作树没有整体恢复或覆盖。
+- CWP配置改为 StockInfo隔离 provider路径、版本1.2.0、`supports_acquisition_budget: true`；本地配置加载与 registry smoke通过。CWP限额与适配器责任集 **32 passed / 18.08s**。
+- 真实CNINFO年报E2E经 FF-S3 v2入口下载BYD FY2024 PDF **10,092,140 B**，SourceRef SHA `e9c2d7fdd088e151ccb6c8ad3d95587b2b014b10f2c9731508d23ce07fde4de3` 与PDF实际内容一致。`latest_as_of + reuse_only` metadata lookup、legacy v1 exact reuse均无重复下载/原件改动；v1缺件且无budget在外发前失败。生产配置和CN身份快照指纹未变，隔离root已清理。
+- E2E发现provider logger污染JSON stdout，先写回归再修复；修后测试通过。FF发现latest_as_of reuse-only仍访问provider metadata，追加request ceilings合同，FF重点回归 **23 passed / 11.72s**；本地pre-push检查全绿。
+- FF-S3提交 `5b9a8c1` 已从 `origin/main@c47c397` 快进推入远端main；`Projects\\filing-fetch` 本地owner工作树也同步到 `5b9a8c1`。保留未跟踪 `config/FMP_API_KEY.txt`，未读取或暂存。FF合入后的GitHub Actions状态待查。
+- 当前S3余项是确认FF发布CI、检查安装示例和采集默认/缺元数据语义；随后按总计划转N4C，做四类真实资料有限批次、摘要引用覆盖和空间增量测量。Dayu不改，不能实施bounded的Dayu请求仍外发前拒绝。
+
+## 2026-10-04 — 修复 FF Actions 安装清单测试的工作树依赖
+
+- FF `5b9a8c1` Actions #52/#53失败；GitHub匿名页面可见run状态和step注释，但隐藏详细job logs。按项目同一CI pytest命令本地复现为 **359 passed / 5 skipped / 78 subtests，1 failed**：`test_manifest_excludes_a_fake_fmp_api_key_file` 假定真实owner工作树不存在 `config/FMP_API_KEY.txt`，而 fcap 有用户未跟踪key，于前置断言失败。测试失败发生在读写key之前，没有读取key内容。
+- 修正测试只在 `tmp_path/canonical/config/FMP_API_KEY.txt` 写入假值，并构造三个必需公开manifest模板文件；不读写真实checkout、不清理用户key。聚焦安装面 **7 passed / 4.42s**。
+- 同一完整GitHub CI精选pytest命令 **360 passed / 5 skipped / 78 subtests / 52.86s**。提交 `2936ad1` 已正常快进推至FF main；本地pre-push gate全绿，远端Actions run `37167803001` 当时仍in progress。`Projects\\filing-fetch` 本地owner工作树同步至该提交，未跟踪key仍保留。
+- 更正：上述是本机安装清单测试的独立环境脆弱点；不能据此断言GitHub Actions根因。Actions #52/#53/#54实际失败于mypy step，真实根因及修复见下节。
+
+## 2026-10-04 — 修复 FF Actions 的 Linux mypy 失败
+
+- Actions公开 Jobs API确认 #52/#53/#54都失败于第7步 `Strict type check on public contracts (FC-1204-c)`，pytest步骤被跳过。Python 3.12.12/mypy 1.19.0 Linux目标复现：`scripts/transcript_tool_transport.py:100` 无保护引用平台专有 `subprocess.CREATE_NO_WINDOW`；Windows默认目标本地类型检查通过，掩盖了Linux平台存根问题。
+- RED新增缺少该常量时的creationflags合同；改用 `int(getattr(subprocess, "CREATE_NO_WINDOW", 0)) if os.name == "nt" else 0` 后GREEN。新增回归1 passed，Python 3.12/mypy 1.19.0 `--platform linux` + CI CWP `PYTHONPATH` 返回 no issues。
+- 完整FF CI精选pytest命令 **361 passed / 5 skipped / 78 subtests / 48.97s**；正常pre-push gate全绿。提交 `1d0c73c` 已从 `2936ad1` 快进推入main；fcap工作树同步且保留未跟踪API key。Actions #55 `37182527153` 已 completed/success；根因修复经真实远端workflow验证。
+- `2936ad1` 的假key测试改造仍保留：它解决了本机key工作树上的真实测试前置条件脆弱点，但不是GitHub Actions失败根因。
+
+## 2026-10-04 — FF-S3 技能安装同步
+
+- 检查发现 FF 主仓推荐 schema 2.0 技能说明与两个实际安装副本不一致，`.agents` 和 `.codex` 各有10项manifest漂移。
+- 运行 FF allowlist installer 后，两个目录各报告 **MATCH 11 files**；再次 `--check` 均匹配。旧测试夹具/cache只从这两个 skill 目录按manifest清理；`filing-fetch/config/FMP_API_KEY.txt` 仍为未跟踪原样，未读取。
+- 一次锚定尾行的PWF补丁因上下文不匹配而未应用、未修改文件；改为UTF-8追加。本次工作树状态另行核实。
+- 下一步核对 CWP `latest_as_of` 遇到缺失 `published_date` 的处理：这是核心时序字段，不能被当作可忽略缺省值或据此声称latest已命中；然后决定S3是否收口并转N4C。
+## 2026-10-04 — latest_as_of 缺失发布时间语义
+
+- 代码复核确认：无 `published_date` 的候选会被 latest-as-of 排除；仅有这类匹配来源时返回 `AMBIGUOUS / matching_sources_have_unknown_published_date`，不会伪造“最新”结果。source classification也不会仅凭年份捏造完整发布日期。
+- 现有latest合同测了排序和cutoff，没有单测该缺失日期路径；下一步先加一个短合同回归，运行该测试确认当前实现，再按来源默认/FF响应语义完成S3大节点校验。
+## 2026-10-04 — latest_as_of 缺失日期合同测试
+
+- 新增缺失 `published_date` 回归，确认 resolver 不会用无日期的匹配文件满足latest-as-of；只报 AMBIGUOUS + `published_date_unknown` trace，四项latest模式测试 **4 passed / 0.75s**，无生产实现变化。
+- 测试环境的外部pytest plugin DLL加载失败、默认Temp目录ACL枚举失败均发生在测试执行前；改用唯一短路径 `.tla-1004` 并禁用外部插件/cache后执行成功。pytest hook另生成的唯一Temp测试树已按精确路径清除；本轮短根不存在，测试文件使用临时目录且已自动清理。
+- pytest.ini 的 `asyncio_mode` warning因单次禁用插件而出现，未改配置。下一步核对 S3 剩余指纹/缺省合同，完成后刷新阶段状态并转 N4C。
+## 2026-10-04 — R2/R6 合同复核
+
+- 对照激进方案细则厘清两个语义：缺非核心采集描述/局部摘要覆盖可标partial；缺 `published_date` 时不能满足latest-as-of，现为AMBIGUOUS并已加合同测试。finalizer的partial依赖coverage/预算遗漏，真实来源时序仍由resolver负责。
+- `VerifiedVersionReceipt` 已有pathless source ID/SHA/size/read-at及policy pin字段；尚需确认policy fingerprint输入是否只含本次读取实际依赖配置，并查其测试。
+- 审计过程中曾在company-wiki cwd读取FF相对测试路径导致FileNotFound，改到filing-fetch checkout后继续；无文件变动。
+## 2026-10-04 — read-policy fingerprint 调查
+
+- CWP `source_read_policy_sha256()` 当前直接对整个 `CatalogConfig` 的 `asdict` 和runtime snapshot SHA取哈希；现有合同证明admission配置/activation变化会变，但未证明无关配置变化不会变。它可能超出R2的最小依赖绑定目标。
+- 下一步查CatalogConfig真实字段和现有fixture，再判断是否要窄化hash输入以及增加“相关配置变更拒绝、无关配置变更仍可用”合同测试。
+## 2026-10-04 — read-policy 范围更正
+
+- `CatalogConfig`只有project/catalog位置、RootSpec列表、可复用root kind四项；RootSpec本身承载来源路径、准入/版本/路由/边界等source读策略。现有合同测试覆盖多项相关变更。故当前hash全量取CatalogConfig并未证明夹带日志、批大小等运行设置，不擅自重构。
+- 下一步只核 runtime snapshot hash 是否包含纯时间字段等无关变化；如果没有具体不必要输入，保留现实现并在S3计划说明其范围，而不是为“最小”泛化出新合同。
+- 两个CodeGraph测试节点按名未找到，直接读取对应测试文件补足证据。
+## 2026-10-04 — 定位 runtime timestamp fingerprint 候选
+
+- 确认runtime snapshot自身SHA包含 `updated_at`；reader pin又直接包住该SHA，因此一个纯更新时间会使verified-open pin变化。它很可能不是读取实际依赖项。
+- 将按TDD核Resolver消费字段；准备只对read-policy pin排除更新时间，保留runtime snapshot原schema/hash以及真正影响准入的flags/epoch/cohorts/policy hash。
+## 2026-10-04 — reader pin 依赖集合确定
+
+- CodeGraph解析 `resolver_visibility` 后确定 SourceResolver消费范围仅为reader模式、epoch、active cohorts和legacy bridge；SourceReader还复核当前RootPolicy `policy_hash`。其余snapshot flags及`updated_at`不参与这次读取。
+- 当前read pin全量包住snapshot SHA，确认会让无关扫描flag或纯更新时间触发pin drift。下一步按TDD先补相关/无关字段两组测试，再把read-specific fingerprint收敛到实际消费字段；不改runtime snapshot存储哈希或root config admission pin。
+## TDD 运行记录：read-policy 反例 fixture 初次被schema拦截
+
+- 新 RED 用例第一次未触及fingerprint断言：fixture将 `v2_scan_shadow=false` 与 `v2_persist_assertions=true` 组合，runtime snapshot校验拒绝该不合法依赖（persist assertions requires scan shadow）。没有项目行为失败或配置写入。修正为有效成对变化后重跑。
+- 第二次fixture调整仍未执行目标断言：把 `v2_persist_assertions` 关闭但保留 `v2_resolve_shadow=true`，又违反snapshot前置关系（resolve shadow requires persist assertions）。停止猜flag组合，先读取validator约束，改用独立无关flag变化。
+- Validator代码复核找到前述flag依赖链：`persist_assertions→scan_shadow`、`resolve_shadow→persist_assertions`、`resolve_active→resolve_shadow`、`bundle_active→resolve_active`。第三次RED尝试将采用全关闭有效基线；测试有效启用reader时只打开完整依赖链，不再用无效组合探路。
+- 用合法全关闭基线重跑后，目标测试按预期RED：只改 `updated_at` 并启用无关 `v2_scan_shadow`，完整runtime snapshot SHA改变，当前read pin也错误地从 `2b111c…59fc` 变为 `0d2f7f…2dba5`。测试触及目标断言；没有生产库或config写入，basetemp已清理。
+## 2026-10-04 — reader-specific policy pin实现与验证
+
+- 先有目标行为RED：timestamps/scan flag使read pin变化。将`resolver_visibility_projection`放在runtime policy层，SourceResolver仍通过兼容`resolver_visibility()`返回相同tuple；`source_read_policy_sha256()`改为绑定CatalogConfig + snapshot schema/policy hash/有效resolver visibility，不再绑定不相关flag与`updated_at`。运行时snapshot完整SHA仍由load_runtime_policy校验。
+- read policy + version reader + activation snapshot + latest-as-of合同 **58 passed / 5.10s**；通用SourceResolver合同 **13 passed / 1.68s**；Ruff、`git diff --check`及PWF claim检查均通过。测试仅因本机全局plugin/Temp ACL使用仓内唯一短basetemp与禁用外部pytest plugins/cache；短根已清理。唯一warning是该环境禁用pytest插件后`asyncio_mode`未知，不影响所选同步合同。
+## 2026-10-04 — FF/ET companion wiring review
+
+- FF schema 2.0 documents exact fiscal year+quarter, separate transcript caps, unchanged source language, no inferred Q4, and independent failure behavior. The two active local skill installs now carry that same canonical v2 protocol. FF tests invoke a subprocess fixture for the tool/SourcePayload contract.
+- Before declaring the FF+ET edge fully exercised, check current earnings-transcripts main/working-tree and configured entry-tool availability; no live transcript acquisition is claimed yet.
+
+## 2026-10-04 — AUTO approval API cleanup (CWP G1 first tranche)
+
+- Retired the unused public `Approval` / `ApprovalDecision` model exports and `AutomationStore` approval CRUD. Source-level caller review found no live production workflow using these APIs; `remediation.approval_id` is a separate historical remediation field and was left unchanged.
+- Kept the SQLite `approvals` table and migration intact. Added a regression that writes a valid historical approval row linked to an event/job, reopens the store, and confirms the row survives; no production database was opened or modified.
+- TDD focused suite: initial API assertions went RED as expected. The first preservation fixture was correctly rejected because it violated the table foreign key; the fixture was corrected to create valid parent rows. Final relevant suite: **148 passed / 10.63s**. Changed-file Ruff and `git diff --check` passed. pytest needed `PYTEST_DISABLE_PLUGIN_AUTOLOAD=1` and a workspace-local short basetemp because a global `langsmith` plugin DLL and the default Temp ACL prevent test collection here; no pytest/CI configuration was changed. All `.tga*` scratch roots were removed.
+- This is one CWP cleanup slice, not completion of the 46-item cross-repository gate audit. Next: close remaining S3 examples/metadata semantics, then prioritize G1 gate cleanup before N4C. External repositories remain read-only and owner-scoped.
+
+## 2026-10-04 — Prompt-review storage failure is diagnostic on resolver export
+
+- TDD added `test_pi10_review_storage_failure_is_diagnostic_not_export_blocker`. It failed before the fix: `build_resolution_envelope()` propagated `PromptInjectionReviewError` from optional prompt-review metadata and aborted an otherwise valid export.
+- Resolver now catches the review-specific store error and SQLite failures, reports `not_reviewed`, and continues building the source envelope. SourceRef/hash identity and other source qualification checks are unchanged.
+- Resolver envelope plus SourceVersionReader regression set passed **35 tests / 8.10s**; Ruff on the changed code/test passed. The one pytest warning is the known `asyncio_mode` warning caused by disabling the incompatible globally installed pytest plugin; no project config changed. The short scratch root was removed.
+- At the time of this fix, the signed receipt writer and TTL evaluator were still present; they were subsequently retired in the next G1 slice below. This entry records the storage failure fix only.
+
+## 2026-10-04 — Retire prompt-review signature and TTL machinery (CWP G1)
+
+- The prompt review writer had no production callers. Removed its Ed25519/trust-root/signature and disposal authorization path; `detected_and_ignored` is now a scanner-bound diagnostic that requires no human authorizer. The 30-day review-cache TTL/evaluator, cache-state machinery, and stale read-chain candidate entries were removed.
+- Kept `scan_text`, source/evidence hash binding, its optional metadata write, and the legacy receipt reader so existing source status can still be shown. SourceReader/resolver expose it as optional diagnostics; resolver database failure now returns `not_reviewed` and does not interrupt a valid export. Raw SHA, identity, period, root, and configuration checks were not changed.
+- Updated the old shadow assertion test descriptions so they no longer claim an unreviewed source blocks consumption. Updated latest-as-of CLI fixtures to declare bounded discovery support, return usage, and pass explicit 5 MB / 90-second / $0 limits; this keeps the existing bounded-provider contract test valid.
+- TDD retirement tests initially RED on the required authorizer and TTL API. Final focused suite: **110 passed / 59.78s**. Ruff passed on all changed Python files; `git diff --check` passed. A transient earlier run exposed the stale fake-provider fixture and was corrected without relaxing budget enforcement. Test scratch roots were removed. This is a CWP G1 tranche; the full gate inventory and cross-repository owner queues remain open.
+
+## 2026-10-04 — Remove the last manual reviewer field from legacy activation mapping
+
+- CodeGraph/caller review found `map_existing_activation` had no production caller and was the only activation path still requiring a typed reviewer label. Activation, rollback, restore, and their CLI already accepted an omitted reviewer and filled the actor from the current process user.
+- TDD added a regression for omitted and blank labels; it first failed because the keyword was required. The mapping now uses the same `operation_actor()` fallback. It still requires an explicit reason and keeps transaction, assertion state, and policy-hash checks.
+- Activation plus restore focused contracts: **22 passed / 2.58s**; Ruff passed. The pytest scratch directory was removed. This closes the reviewer-required part of G1 item #1, not the full gate audit.
+
+## 2026-10-04 — Reprioritize PWF and prepare an isolated ET live-import lane
+
+- Reordered the master plan explicitly: G1 gate/sign-off simplification first; S3 SourceRef/SourceExport virtualization second; N4C real multi-document batch after both. Clarified that IQS intentionally treats company-wiki as an optional read-only deep-research link, so it is not forced into document download/source consumption.
+- Refreshed the cross-repository snapshot from read-only Git status: RF `rf-impl@6fb2def7`, RF fcap `5319ee26`, StockWiki `3a3d061`, IQS `6a8b8f3`, FF `1d0c73c`, ET `93fe52c`; owner worktrees remain dirty, so no external code-writing lane is safe to dispatch.
+- Added the standalone ET-LIVE acceptance card. It permits at most one real transcript request, no translation, uses a brand-new temporary CWP root, checks SourceRef/SourceExport pathless reading and raw SHA/size, and writes only its unique result report. It can run alongside G1 because it does not change code/config; any fix waits until G1 closes.
+- `verify_plan_claims.py --plan-dir .` and `git diff --check` passed after the PWF refresh.

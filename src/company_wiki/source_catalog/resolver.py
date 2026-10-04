@@ -11,10 +11,12 @@ import json
 import os
 from pathlib import Path
 import re
+import sqlite3
 import stat
 from typing import Any
 
 from .policy import _effective_reusable
+from .runtime_policy import resolver_visibility_projection
 from .scanner import R4_PROVENANCE_KEY
 from .service import SourceCatalog
 from .store import metadata_state
@@ -728,11 +730,13 @@ def resolver_visibility(
     """Derive (reader, current_epoch, active_cohorts, legacy_bridge_allowed)
     from a RuntimePolicySnapshot (FC-201).  flag=false -> v1 reader, so
     active rows are never visible (CTRL-01)."""
-    flags = snapshot.get("flags", {})
-    reader = "v2" if flags.get("v2_resolve_active") else "v1"
-    cohorts = tuple(snapshot.get("active_cohorts") or ())
-    bridge = bool(flags.get("legacy_bridge_enabled"))
-    return reader, snapshot.get("current_epoch"), cohorts, bridge
+    projection = resolver_visibility_projection(snapshot)
+    return (
+        projection["reader"],
+        projection["current_epoch"],
+        projection["active_cohorts"],
+        projection["legacy_bridge_allowed"],
+    )
 
 
 # --- FC-704: ResolutionEnvelope + AcquisitionTrace -----------------------------
@@ -1087,10 +1091,19 @@ def build_resolution_envelope(
     llm_calls = None
     if store is not None and resolution.matches:
         from .producer_events import count_producer_events
-        from .prompt_injection import read_prompt_injection_review
+        from .prompt_injection import (
+            PromptInjectionReviewError,
+            read_prompt_injection_review,
+        )
 
         document_id = resolution.matches[0].document_id
-        review = read_prompt_injection_review(store, document_id)
+        try:
+            review = read_prompt_injection_review(store, document_id)
+        except (PromptInjectionReviewError, sqlite3.Error):
+            # Prompt-injection review is diagnostic metadata. A busy or
+            # malformed review store must not fail an otherwise valid source
+            # resolution/export.
+            review = None
         if review is not None:
             prompt_injection_status = review["status"]
         counts = count_producer_events(store, document_id)

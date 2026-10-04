@@ -275,7 +275,7 @@ def map_existing_activation(
     cohort: str,
     assertion_ids: Sequence[str],
     policy_hash: str,
-    reviewer: str,
+    reviewer: str | None = None,
     reason: str,
     current_policy_hash: str | None = None,
 ) -> dict[str, Any]:
@@ -299,8 +299,7 @@ def map_existing_activation(
             f"current policy {current_policy_hash[:12]}... (re-load the "
             f"RootPolicy snapshot and retry)"
         )
-    if not (isinstance(reviewer, str) and reviewer.strip()):
-        raise ActivationError("reviewer required")
+    reviewer = operation_actor(reviewer)
     if not (isinstance(reason, str) and reason.strip()):
         raise ActivationError("reason required")
 

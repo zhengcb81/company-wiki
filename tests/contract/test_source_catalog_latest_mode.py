@@ -170,6 +170,21 @@ def test_latest_as_of_respects_as_of_cutoff(tmp_path):
     assert result.matches[0].fiscal_year == 2023, result.matches[0]
 
 
+def test_latest_as_of_does_not_guess_a_missing_published_date(tmp_path):
+    """A matching source without a publication date cannot satisfy an as-of query."""
+    from company_wiki.source_catalog import ResolutionStatus, SourceResolver
+
+    catalog = _catalog(tmp_path)
+    with sqlite3.connect(catalog.config.database_path) as con:
+        con.execute("UPDATE documents SET published_date = NULL")
+
+    result = SourceResolver(catalog).resolve(_request(mode="latest_as_of"))
+
+    assert result.status is ResolutionStatus.AMBIGUOUS
+    assert not result.matches
+    assert any("published_date_unknown" in entry for entry in result.debug_trace)
+
+
 def test_exact_mode_multiple_periods_is_ambiguous(tmp_path):
     """mode=exact (default) with no fiscal_year and multiple periods stays
     AMBIGUOUS — no guessing."""

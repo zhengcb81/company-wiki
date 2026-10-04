@@ -88,3 +88,71 @@ def test_read_policy_pin_covers_runtime_activation_snapshot(tmp_path):
     assert source_read_policy_sha256(config, snapshot) != source_read_policy_sha256(
         config, changed
     )
+
+
+def _runtime_snapshot(
+    config: CatalogConfig,
+    *,
+    updated_at: str = "2026-09-27T00:00:00Z",
+    current_epoch: str = "epoch-a",
+    active_cohorts: tuple[str, ...] = ("cohort-a",),
+    flag_changes: dict[str, bool] | None = None,
+) -> dict:
+    from company_wiki.source_catalog.runtime_policy import build_snapshot
+
+    flags = {
+        "v2_scan_shadow": False,
+        "v2_persist_assertions": False,
+        "v2_resolve_shadow": False,
+        "v2_resolve_active": False,
+        "v2_bundle_active": False,
+        "legacy_bridge_enabled": False,
+    }
+    flags.update(flag_changes or {})
+    return build_snapshot({
+        "schema_version": "1.0",
+        "flags": flags,
+        "current_epoch": current_epoch,
+        "active_cohorts": list(active_cohorts),
+        "policy_hash": export_policy_2x(config)[0],
+        "updated_at": updated_at,
+    })
+
+
+def test_read_policy_pin_ignores_timestamp_and_unrelated_runtime_flags(tmp_path):
+    config = _config(tmp_path)
+    baseline = _runtime_snapshot(config)
+    changed = _runtime_snapshot(
+        config,
+        updated_at="2026-09-28T00:00:00Z",
+        flag_changes={"v2_scan_shadow": True},
+    )
+
+    assert baseline["snapshot_sha256"] != changed["snapshot_sha256"]
+    assert source_read_policy_sha256(config, baseline) == source_read_policy_sha256(
+        config, changed
+    )
+
+
+@pytest.mark.parametrize(
+    "changes",
+    (
+        {"current_epoch": "epoch-b"},
+        {"active_cohorts": ("cohort-b",)},
+        {"flag_changes": {
+            "v2_scan_shadow": True,
+            "v2_persist_assertions": True,
+            "v2_resolve_shadow": True,
+            "v2_resolve_active": True,
+        }},
+        {"flag_changes": {"legacy_bridge_enabled": True}},
+    ),
+)
+def test_read_policy_pin_changes_with_effective_reader_visibility(tmp_path, changes):
+    config = _config(tmp_path)
+    baseline = _runtime_snapshot(config)
+    changed = _runtime_snapshot(config, **changes)
+
+    assert source_read_policy_sha256(config, baseline) != source_read_policy_sha256(
+        config, changed
+    )

@@ -4,6 +4,8 @@
 
 > 本次是静态只读审计和计划收口，未改变产品门禁、启动Worker、调用provider或读取API key。文档发布沿用现有快速Git检查。**P0主调用链已实质简化，P1/P2尚未全部完成**；不能用旧方案的“尚未执行”或某个历史函数名推断现状。下面每个编号对应一项可独立裁定的规则，重复实现合并说明。建议尚未变成新的执行门；由用户裁定后并入现有大节点。
 
+> 状态说明：本文件主体是2026-10-03只读基线；第6节的待办判断可能过时。逐项当前状态以文末“2026-10-04实施覆盖”以及总计划为准。
+
 ## 1. 简化进度与审计基线
 
 | 已取消/已放宽 | 当前实际状态 |
@@ -103,4 +105,23 @@ CWP审计代码`master@9eacbea`；RF`rf-impl/main@6fb2def7`；FF最新交付线/
 
 ## 8. 后续执行方式
 
-用户可按编号指定取消/保留/降为诊断/改默认。整合成三块既有工作：人工/历史残留收口；读取规则与兼容收口；N4运行与预算/锁改造。每块只在原有大节点集中验证，复用已签收P0/G-A/G-C结果，不给每个编号加独立审查或重新跑全仓。审计清单不是又一套人工授权文件，不能把它加进产品CLI的准入条件。当前主线下一实施动作仍N4A，审计裁定并入对应owner的同一节点。
+整合为三块：人工/历史残留收口；读取规则与兼容收口；N4运行与预算/锁改造。每块只在原有大节点集中验证，不给每个编号加独立审查或重新跑全仓。审计清单不是人工授权文件。原“下一实施动作仍N4A”已过时；当前顺序看文末2026-10-04覆盖和总计划。
+
+## 9. 2026-10-04 实施覆盖
+
+本节覆盖第1–6节中已被后续实施取代的状态描述：
+
+| 原基线条目 | 2026-10-04状态 | 当前证据与边界 |
+|---|---|---|
+| #5 deletion_manifest 工具残留 | 已不存在 | `scripts/deletion_manifest.py` 在工作树不存在；保留原审计文字作为历史，不再把它列作待删项。 |
+| #2 FF acquisition limits未传到CWP | 已推进并有真实闭环证据 | FF v2请求限额进入CWP；BYD FY2024真实CNINFO E2E验证下载、hash/size、只读复用和缺件前失败。见总计划S3收据。 |
+| #3 ET旧provider入口统一 | 部分完成，live import待实测 | ET-S3合入，FF schema 2.0已有 transcript companion合同及安装副本；当前会话未证明真实 earnings-transcripts 工具到CWP的live导入。 |
+| #5 N4运行/预算/并发尚未实施 | 部分完成 | N4A/N4B与生产限额桥接已有实现和回归；N4C真实多类型样本、吞吐、空间增量仍待做。 |
+| #1 CWP旧审批API残留 | 本次已移除一组无调用者API | `Approval`/`ApprovalDecision`公用类型和Store CRUD已从当前改动中退休；历史SQLite表与记录保留。相关回归148 passed。当前代码仍未commit。 |
+| #1 reviewer必填字段 | 已收敛为自动actor记录 | apply/rollback/restore CLI与库入口已可省略reviewer；唯一仍要求手填的`map_existing_activation`现改用当前进程用户作actor。22项激活/恢复合同通过；理由、事务、来源断言和policy hash仍照常校验。 |
+| prompt review存储故障导致resolver导出失败 | 已修复 | 新回归先复现 `PromptInjectionReviewError` 使有效envelope生成失败；resolver现将其降为`not_reviewed`诊断并继续。35项resolver/source-reader相关测试通过。 |
+| prompt review Ed25519签名写入与TTL cache evaluator | 已退役 | writer不再加载信任根或要求授权签名；30天cache TTL/evaluate_review整套无调用者逻辑删除。scanner和旧receipt只读显示保留，结果只作诊断。110项相关测试通过。 |
+| #46 StockWiki双pytest | 已简化为单次coverage-wrapped pytest | 只读检查 `scripts/check_all.sh` 只有一次 `python -m coverage run -m pytest -q` 调用；其覆盖率阈值与AGENTS文字仍属该仓owner范围。 |
+| 全局剩余门禁清理 | 未完成 | P1/P2仍需按总计划逐项确认。外仓由各自owner实施；company-wiki先继续G1，不把小API移除等同审计完成。 |
+
+只读提交快照（2026-10-04复核）：RF `rf-impl main@6fb2def7`，另有 `revenue-forecast fcap@5319ee26`；StockWiki `master@3a3d061`；IQS `master@6a8b8f3`；filing-fetch `fcap@1d0c73c`；earnings-transcripts嵌套仓 `main@93fe52c`。这些仓均检测到未提交工作（RF大量，其他少量），仍由各owner保留；SHA只用于识别工作树，不代表dirty内容已经并线、审计或完成。
