@@ -95,7 +95,19 @@ TDD框住公开行为，不把旧签收规则写进新测试。仅S0相关收口
 
 ## Next Step
 
-**MAIN下一动作只有一个：**用隔离根完成ET-DEADLINE与FF/CWP的离线生产路径联调，然后按结果处理并线。ET交付`codex/et-s3-deadline@0017f24`已推送，独有提交1个，worktree干净；只读盘点报告位于`repository-state-audit-2026-10-04/results/earnings_transcripts.md`。ET handoff报告92责任测试、全量172 passed、10 goldens、ruff/diff clean，审计未重跑且无CI URL，因此不把这些写成当前独立复验结果。联调用fake HTTP但走真实ET CLI/supervisor/serializer、FF companion调用和CWP importer/SourceExport读取；检查英文原文、精确FY/Q、provider及canonical SHA、实际bytes、限额/超时、失败不落原件、重复导入幂等及scratch清理。联调前先核对现有CWP FMP exact-key差异（ET FMP 26字段JSON vs importer当前Motley 24字段），优先复用正式ET golden，若不兼容先在CWP写契约测试并实施窄适配，不修改ET wire。所有测试使用独立短TEMP根且结束恢复为空；不发付费/LLM网络请求，不读写生产raw/catalog/config。本机`config/source_acquisition.yaml`保持用户未提交状态。跨仓全链通过后，把ET提交快进并入其主线，更新ET/CWP/PWF状态并再跑受影响接口回归；若FMP admission不具备完成条件，则分开记录deadline代码可并线与FMP导入合同仍pending，不能把真实导入闭环标绿。之后才启动N4C真实样本/并发/空间节点，接着S5/S6。
+**MAIN下一动作只有一个：**完成下面的 ET-DEADLINE 并线前跨仓验收；没有通过验收不得合入。交付分支为 `codex/et-s3-deadline@0017f24`，远端一致、仅1个独有提交且worktree干净；只读收据位于 `repository-state-audit-2026-10-04/results/earnings_transcripts.md`。handoff报告的92项责任测试、全量172 passed、10 goldens和ruff/diff结果是既有交付记录，本次审计未重跑且未提供独立CI链接。CWP本机 `config/source_acquisition.yaml` 保持用户未提交状态，不进入测试或提交。
+
+### ET-DEADLINE 并线前必做的单次 FF→ET→CWP 离线契约联调
+
+**目的：**验证已交付deadline分支通过真实命令行/子进程，能被FF实际调用并由CWP importer接收，最后可经SourceRef/SourceExport读回。测试覆盖ET分支 `0017f24`，不以独立ET单测或历史Motley E2E代替此链路。
+
+- **测试布置：**使用空的短路径scratch根。FF按生产配置入口调用deadline worktree中的正式ET工具CLI；ET正式CLI→supervisor→worker→serializer运行不变，只将外部provider HTTP替换为假响应；CWP运行真实import CLI、catalog写入和`SourceVersionReader`/SourceExport读取。不要mock掉ET抓取函数、FF调用层或CWP importer。
+- **成功链断言：**固定公司/证券身份与精确FY+Q；正文保持英文原文、不翻译；ET payload与canonical文本hash语义可区分；导入后CWP raw字节SHA/size、SourceRef身份/期间/locator可读回一致；重复导入幂等、不新增重复原件；FF/ET/CWP消耗的字节、截止时间和费用上限不被重置或漏计。
+- **合同适配：**使用ET正式FMP `/2` golden走完整导入链。已知ET FMP结果为26字段JSON，CWP importer现行exact-key只接收Motley 24字段形状；若测试证实不兼容，先在CWP增加失败契约测试，再做最窄的provider-aware admission/JSON原件适配，保留unknown publication语义和原始JSON字节；不得改ET公共wire、伪造日期或把JSON重排后冒充原件。Motley既有测试不能替代FMP断言。
+- **失败与恢复断言：**至少覆盖超时/截止时间到期、坏或超限provider响应、CWP拒绝错误SHA/身份/期次；不得返回成功、写入不完整正式原件或泄露凭证/正文。ET worker退出后临时结果目录清除；整次测试退出后scratch恢复为空，生产raw/catalog/config指纹不变。
+- **范围与通过标准：**只运行上述跨仓端到端责任集及受影响的ET serializer golden/CWP importer与FF companion精选测试，不跑无关全仓长套件；fake provider零付费API、零LLM调用。成功路径、负例、hash/size/identity/period、deadline/预算、幂等和清理全部通过后，才快进合入ET提交，并运行一次合入后的受影响接口回归。若FMP admission仍未满足，不声称FMP已闭环；先修CWP适配，不得以真实provider 402为理由跳过fake契约测试。
+
+该门通过后，按顺序进入N4C真实样本/并发/空间测量，再做S5/S6；不额外增加逐helper或逐文档人工审查。
 
 **外线状态：**G1-LEGACY已合入；ET-DEADLINE已作为远端单提交干净候选交付，ET只读审计已验收；待MAIN完成一次离线跨仓路径测试后决定快进合入。ET-LIVE因HTTP 402没有可导入正文。外仓写集继续由各自owner维护；MAIN负责CWP共享接口和最终打通，不重复派发ET工作，不增加逐helper/逐文档审查，也不等付费权益才做fake-provider确定性验收。
 

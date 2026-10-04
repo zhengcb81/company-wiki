@@ -373,3 +373,9 @@ S0/N4A及S2模型预算基础、CLI阶段与CI修复已正常发布，当前CI�
 - ET-DEADLINE handoff记录92项责任测试、全量172 passed、10 goldens、ruff与diff检查通过；这是交付报告中的既有结果。本次只读盘点未运行测试，且没有独立CI链接。旧progress里的“待commit/push”已经过期。
 - ET只读审计包验收通过；ET实现提交暂不并main。下一节点是隔离fake-provider的FF→ET正式CLI/supervisor→CWP importer/SourceExport联调，特别检查FMP 26字段JSON与CWP当前Motley 24字段exact-key差异；不改变ET wire、不请求付费API。
 - 本轮没有修改ET、FF或RF；CWP既有未提交配置 `config/source_acquisition.yaml` 保持原样。
+
+## 2026-10-04 — 并线前 FF→ET→CWP 联调门细化
+
+- 按用户要求，在总计划中把该联调列为ET-DEADLINE合入前的明确必过节点，不再只作为一句后续建议。
+- 细则固定使用FF正式调用入口、ET正式CLI/supervisor/worker和CWP importer/SourceExport真实路径，provider侧使用fake HTTP；包含FMP golden与已知26字段/24字段形状差异、原语言及hash/size/身份/期次、共享限额/截止时间、重复导入、失败回收和空scratch恢复的验收标准。
+- 这是计划细化，尚未运行联调；测试前必须使用隔离短TEMP根，零付费API/LLM调用，生产raw/catalog/config不变。全部通过后才快进合入ET提交。
