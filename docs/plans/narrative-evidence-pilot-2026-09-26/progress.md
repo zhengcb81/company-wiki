@@ -297,3 +297,11 @@ S0/N4A及S2模型预算基础、CLI阶段与CI修复已正常发布，当前CI�
 - RF先行核查：main@6fb2def7；fcap@5319ee26，merge-base ee0a82bfd1eec935cf4e567eb42f0ef79efa0226。main侧后加SourceRef v2消费代码尚未进入fcap；支线没有在merge-base后改这些源消费者文件。本轮不改RF，未来合支线需保留main的pathless verified-open链路。
 - FF核查：正式checkout fcap@1d0c73c2只有未跟踪API key，本轮未读未改；已有`codex/transcript-companion@29085f7`工作树改动`fetch_filing.py`/`filing_contracts.py`，与剩余SourceRef v2资格门重叠。先协调这条现存工作线，不并发改FF同文件。
 - G1未完：CWP reader/as-of/resolver/gap planner/canonical writer门已收敛；FF v2 consumer和G1-LEGACY外包旧入口收口还在前面。未改RF/FF、外包目录、原始财报、catalog数据库或本机采集配置。
+
+## 2026-10-04 — 外包工作树状态与ET样本占用复核
+
+- 只读检查G1-LEGACY：分支实现提交 `1cf8183` 基于 `1cfec10`；交接文件仍未跟踪，尚非完整commit/push交付。交接报告称责任包142 passed、Ruff通过；共享合同包另有1条旧断言仍期待环境变量能放行旧入口（其余25项通过）。主线合入时需按已批准的新静态策略改该合同断言，并在合并代码上集中跑受影响责任包；没有提前改外包写集。
+- 只读检查ET-DEADLINE：worktree仍基于 `93fe52c`，`scraper.py`、`transcript_tool.py`、`test_batch_runtime.py`已修改，worker/supervisor及专属测试/PWF为未跟踪；这是活动中的未交付实现，不能当完成包或清理。
+- 实测正式ET main、旧runtime、新deadline三处各130个transcript文件，每处15,953,731 B，按相对路径SHA-256全部相同；两个worktree额外重复31,907,462 B。旧runtime提交 `53e1e60` 已在main历史内且Git工作树干净，暂不删除其本机配置/缓存；这项重复量只占约30.4 MiB，不能解释CWP的数十GB占用。
+- RF `fcap@5319ee26` 只读检查遇到当前sandbox账号对 `.planning/.../execution_runs` 的访问拒绝；Git输出大量表观删除项并伴随2个assurance文件变化，无法区分真实删除与不可访问路径。本轮未恢复、删除或合并RF内容；原先“两项dirty”的快照在当前账号下无法重新确认，后续需在有权读取这些目录的owner上下文核实后再做RF合支判断。
+- CWP生产代码、raw原件、目录数据库和本机provider配置均未改；本轮只补充PWF实测记录。

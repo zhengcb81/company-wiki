@@ -207,6 +207,12 @@ Git写入/联网用正常用户，sandbox .git只读不是产品权限。测试�
 - 新G1-LEGACY和ET-DEADLINE是两个ready代码包，分别独占company-wiki-g1-legacy与earnings-transcripts-s3-deadline；ET-LIVE改为独占company-wiki-et-live-20261004，只交小报告。三包尚未收到用户启动登记。
 - ET-LIVE明确区分FF companion确定性测试与真实ET→临时CWP段；直接ET调用不证明完整FF live链。无provider权益则NOT RUN，不强加provider或订阅。
 
+## 2026-10-04 — ET worktree 重复样本实测
+
+- 正式ET main、旧 `earnings-transcripts-s3-runtime`、新 `earnings-transcripts-s3-deadline` 三处各有130份 `transcripts/` 文件，每处合计15,953,731 B；按相对路径逐份比较SHA-256，三处内容完全相同。两个额外worktree因此重复占用31,907,462 B文本样本空间，未计少量源码、缓存与本机配置；不是46GB空间的主要来源。
+- ET-S3旧runtime提交 `53e1e60` 已是main `93fe52c`的祖先，旧worktree Git状态干净；deadline worktree仍在修改代码，不能在其交付前清理。Git worktree共享仓库对象库，但各自检出文件，所以样本文本仍占独立空间。
+- G1-LEGACY和ET-DEADLINE都只是外包施工线，不因目录存在或有未提交代码而视为已验收或已合入；当前状态以总进度记录为准。
+
 
 ## 2026-10-04 — 来源字段与叙述as-of实际简化
 
