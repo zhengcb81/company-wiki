@@ -12,10 +12,10 @@
 
 | 项目 | 已发布/已验收事实 | 本机状态与本轮边界 |
 |---|---|---|
-| CWP | `master`已包含G1-LEGACY合入提交`6394271`并推送；来源资格、as-of、resolver/planner/canonical门已收敛 | 本轮只补电话会临时根路径过长的E2E夹具并同步PWF；本机 `config/source_acquisition.yaml` 仍不提交 |
+| CWP | `master@436273b`与`origin/master`一致；G1-LEGACY、SourceExport等已发布；本轮完成ET只读盘点收据 | 本机 `config/source_acquisition.yaml` 保持用户已有未提交状态，不纳入本线 |
 | RF | `revenue-forecast fcap@5319ee26`；N3a pathless消费者已有 | 提升权限复核确认仅2项tracked变更（weekly alert/manifest）；owner文件保持不动。`rf-impl` 当前工作树也不作为本线写集 |
 | FF | `e1eda60` 已推送远端 `main`；SourceRef v2部分采集信息现在是诊断；真实BYD FY2024链已闭环 | 本地 `fcap` 有未跟踪 `config/FMP_API_KEY.txt`，未读取、暂存或推送 |
-| ET | ET-S3已合main `93fe52c`，旧采集入口/默认原语言已收敛 | 2项未跟踪工具记录保留；同步HTTP仍可能超过名义deadline，新ET-DEADLINE只在隔离worktree施工 |
+| ET | ET-S3与S3 bounded-runtime已进入`main@93fe52c`；ET-DEADLINE交付`codex/et-s3-deadline@0017f24`并推至远端 | ET主线无tracked修改；`.workbuddy-ai/`与`eval_results.json`保留。deadline分支相对主线1个独有提交、worktree干净；报告记载92项责任测试、全量172 passed、10 goldens，但只读盘点未重跑。提交尚未并main，待FF→ET→CWP离线联调 |
 | N4 | scope、持久预算、factory、有限batch、kill/ACK恢复与终态降容节点A/B已有集中GREEN | N4C真实多类型批次、1/2/4并行与总空间实测仍待做，不重复开发A/B |
 | 空间 | 最新完整实测32,821,613,206 B；原件25.20GB、DB3.06GB、旧derived/index约2.87GB；已释放13.06GB | SPACE-S5已交付：首批候选138.6MB，derived仍须迁caller；原件不进清理候选，VACUUM收益未测 |
 | CI | 单Python快速代码CI约56–62秒；commit无pytest，push/CI同一精选集合 | 不恢复全Contract/coverage日常门；纯Markdown不要求新CI |
@@ -30,7 +30,7 @@ StockWiki/IQS已有owner工作及消费者交付，本轮只读，不重复分�
 | S1 N4A | complete（ff5396c，CI绿） | scope贯通Store/Worker/Supervisor/outbox/prepared，None兼容、空scope零修改、范围SQL先于LIMIT | N4节点A，确定性RED先行 |
 | S2 N4B | complete（节点A/B集中验收已绿；整体N4仍待独立S4/N4C） | real factory/HTTP adapter/full prompt; persistent token/cost reservation in AUTO; finite batch CLI; unique final artifact and small recovery receipt; public legacy whole-catalog Worker and startup routes removed | node A accounting/concurrency green; node B formal CLI/HTTP/kill/ACK and focused regression green; CWP producer limits are now connected and have real-data E2E evidence; proceed to N4C after G1/S3 closeout |
 | G1 残余门禁/签收精简（第一优先） | complete（CWP来源链与G1-LEGACY已合入；FF SourceRef v2于`e1eda60`推送） | 46项清单已分为已退出、必要自动校验、能力边界及外仓owner事项；未找到生产调用者的旧摘要/binding/archive工具不再作为当前门，留待S5/S6 caller清理 | CWP来源/as-of 64项、resolver/planner/canonical 100项与G1-LEGACY 170 passed / 1 deselected既有收据；FF集中回归177 passed / 1 skipped / 39 subtests，Ruff及push gate GREEN；电话会provider→CWP导入端到端12 passed。保留SHA、来源身份/期间/公开日、可回放引用和资源限制 |
-| S3 SourceRef/SourceExport 虚拟化与来源默认收敛（第二优先） | in_progress（FF `e1eda60` 已在main；CWP sparse SourceExport `48d3a9d` 已推至origin/master，SourceVersionReader+真实CLI合同测试34 passed；ET-LIVE唯一请求得到HTTP 402 entitlement，未产生可导入正文；ET-DEADLINE尚未交付且只读责任包91 passed、1项测试夹具错配） | 上层只用SourceRef/SourceExport v2；复用现有FF exact/latest_as_of和pathless reader，不依赖CWP/StockInfo/Dayu/Dropbox物理目录；验收ET硬deadline与原语言导入；provider位置只在adapter配置层处理 | [ET-LIVE报告](C:/Users/郑曾波/Projects/company-wiki-et-live-20261004/report.md)记录一次HTTP 402、无重试及临时根清理；因此不能声称真实导入/SourceRef闭环。CWP这次新增的合成数据CLI E2E证明v2断言不可见时manifest可保留SourceRef/hash/size、可选描述字段为空；`filing_reuse`仍严格阻止身份/期间不完整来源。该测试未改生产目录，也未证明ET真实导入。ET-DEADLINE当前唯一失败是用`RuntimeError`模拟worker崩溃，实际被既有API捕获为`unexpected_provider_failure`；主线以真实`SystemExit:7`单点确认CLI正确映射为`retrieval_worker_failure`，外线须更正夹具并重跑集中包，再接收提交/交接。现有配置已支持`${PROJECT_ROOT}`与`${PYTHON_EXECUTABLE}`；本机文件只因测试指向StockInfo隔离分支而dirty，待provider进入稳定checkout后调整该adapter路径即可，不新增数据湖根或环境变量解析层。 |
+| S3 SourceRef/SourceExport 虚拟化与来源默认收敛（第二优先） | in_progress（FF `e1eda60`、CWP SourceExport `48d3a9d`已发布；ET-LIVE因FMP HTTP 402未导入；ET-DEADLINE交付`0017f24`，ET只读盘点确认支线干净且相对main仅1个提交；代码包报告92责任项、全量172 passed、10 goldens，审计未重跑） | 上层只用SourceRef/SourceExport v2；复用现有FF exact/latest_as_of和pathless reader，不依赖CWP/StockInfo/Dayu/Dropbox物理目录；先完成硬deadline生产CLI到CWP导入器的离线跨仓联调，再决定合入；provider位置只在adapter配置层处理 | ET交接明确公共`/1`、`/2`、discovery/candidate wire与golden未变，deadline实现只改ET内部监督器/worker/批次路由。只读盘点确认`main@93fe52c`、`codex/et-s3-deadline@0017f24`及远端一致，分支1个独有提交，tracked干净；其PWF仅“commit/push”文字过期，实际提交已推送。既有handoff记载92责任测试、全量172 passed、10 goldens、ruff/diff clean，但盘点未重跑、无独立CI URL。跨仓联调仍必要：此前合同收尾记录指出CWP importer当前exact-key仅接受Motley形状（24字段），ET FMP结果是26字段JSON；HTTP 402 live尝试没有正文，因此不声称FMP真实导入闭环。联调使用fake provider、正式ET CLI/FF调用和隔离CWP根，验证原语言、期次、SHA/size、限额、重复导入与失败清理；通过后再快进并线并跑受影响CWP合同测试。ET主仓未跟踪工具笔记按审计建议保留，不作为本次清理对象。 |
 | S4 N4C real samples and storage plan | pending（缺失language的确定性桥已实现并通过23项聚焦单测/集成E2E；但N4C真实生产批次尚未启动。仍须先完成S3/ET-DEADLINE，并让IR、招股书、ET TXT按现有来源合同达到可见/active/原文SHA验证条件） | four real document types / consumer reads / language and citation coverage / total incremental bytes; retain only status/stop/uninstall compatibility for old worker process cleanup | node C; bounded real batch, then measured 1/2/4 parallelism；至少覆盖年报、招股/再融资、IR和电话会/季度类中的四种，记录摘要证据定位和新增空间 |
 | S5 B2逐caller清理 | pending（SPACE-S5只读审计已交付） | 审计确认约138.6 MB无代码调用者集合可列入首批候选；2.826 GB `derived/` 仍有 reader 与 8,191 条 artifact 路径引用，必须先迁移；报告不是删除清单 | 主线复核当前调用者/生产文件状态后分集合处理；每批验证原件与来源事实保留并测实际释放量 |
 | S6 DB事实收缩与收尾 | pending | 表级盘点，删除不可再消费派生/废索引并收缩，来源版本/撤回事实保留；旁路兼容、docs/hook残留清完 | 同一存储节点；commit/push、PWF收尾 |
@@ -68,10 +68,10 @@ StockWiki/IQS已有owner工作及消费者交付，本轮只读，不重复分�
 | 包 | 独占实际工作目录 | 写入责任 | 合入位置 |
 |---|---|---|---|
 | [G1-LEGACY](harness_lanes/g1_legacy_entry_and_retirement.md) | `Projects/company-wiki-g1-legacy` | 明确脚本/专属测试；不改src、共享Contract、配置和总PWF | 第一优先G1 |
-| [ET-DEADLINE](harness_lanes/et_retrieval_deadline_closeout.md) | `Projects/earnings-transcripts-s3-deadline` | ET正式两个入口的硬采集deadline、专属子进程测试；协议不变 | 第二优先S3 |
+| [ET-DEADLINE](harness_lanes/et_retrieval_deadline_closeout.md) | `Projects/earnings-transcripts-s3-deadline` | ET正式两个入口硬采集deadline及子进程测试；交付已验收为候选，不再派发 | 进入FF→ET→CWP离线联调后合入S3 |
 | [ET-LIVE](harness_lanes/et_transcript_live_import_acceptance.md)（已完成一次性尝试） | `Projects/company-wiki-et-live-20261004` | 单次真实工具调用与临时根报告；生产仓只读 | 报告已交；FMP HTTP 402 entitlement，live import 为 NOT RUN |
 
-G1-LEGACY已合入；ET-DEADLINE由用户确认派发，仍在独立worktree且尚无提交/交接。MAIN只读责任包结果为91 passed/1 failed；失败来自测试用`RuntimeError`却期待worker异常退出码，根因与修正方向已记录，MAIN未编辑其写集。ET-LIVE一次性报告已交，HTTP 402 后不重试。交付以commit/报告为准，不用目录存在推测完成；MAIN独占CWP共享接口、总PWF与最终跨仓合入。
+G1-LEGACY已合入；ET-DEADLINE交付和只读盘点已接收：`0017f24`为远端支线唯一独有提交，worktree干净。旧责任包91/1失败是此前快照，交付人报告已修正夹具并记录92责任项、全量172 passed、10 goldens；只读审计没有重跑，缺独立CI链接。ET-LIVE一次性报告为HTTP 402且未重试。MAIN独占CWP共享接口、总PWF与最终跨仓合入；先跑隔离fake-provider跨仓CLI→importer→SourceRef联调，绿后再并线。
 
 FF-S3、ET-S3、SPACE-S5、StockWiki W01/W04、SourceExport与既有消费者线均已交付，不再重派。RF/StockWiki/IQS active owner树不另开代码线；Dayu不改。需要共享接口变更，外线交root协调，不擅自升级wire或扩张写集。
 
@@ -95,9 +95,9 @@ TDD框住公开行为，不把旧签收规则写进新测试。仅S0相关收口
 
 ## Next Step
 
-**MAIN下一动作只有一个：**验收ET-DEADLINE施工包交付。CWP sparse阶段已提交并推送为`48d3a9d`；34项责任测试、pre-commit与pre-push gate通过。本机`config/source_acquisition.yaml`继续保留未提交。最新只读工作树检查：`earnings-transcripts-s3-deadline`仍为`codex/et-s3-deadline@93fe52c`，存在未提交代码/测试/PWF，未发现deadline专属handoff；目录中的`s3-et-runtime-handoff.md`属于先前runtime包。上次集中责任包为91 passed、1 failed；唯一失败的e2e夹具用`RuntimeError`触发API内可恢复的provider错误，却断言supervisor的`retrieval_worker_failure`，应改成真实子进程异常退出夹具（已有runtime单测和主线CLI单点用`SystemExit:7`证明worker失败映射），再跑该包的集中回归、10份golden校验和diff检查；MAIN不改其独立写集。随后接收commit/handoff并在合入前集中复验。ET-LIVE已按授权只调用一次：ET工具返回`unavailable/provider_entitlement_required`，ET实现将该状态映射自FMP HTTP 402；不重试、不购买权益，临时根清理且CWP生产配置哈希不变。故ET真实原文导入仍未证明；在有合法provider权益之前保留NOT RUN，先完成不依赖真实权益的FF→ET→CWP确定性联调，再进入N4C与S5/S6。配置调查确认`source_acquisition.yaml`已有项目根/Python解释器占位符；只需在StockInfo bounded provider进入稳定checkout后校正本机adapter路径，不为单一安装路径增加新的通用配置层。G1已收口，FF `e1eda60`已推送；SourceRef真实SHA/身份/期次/公开日校验及旧pathful v1保持原合同。
+**MAIN下一动作只有一个：**用隔离根完成ET-DEADLINE与FF/CWP的离线生产路径联调，然后按结果处理并线。ET交付`codex/et-s3-deadline@0017f24`已推送，独有提交1个，worktree干净；只读盘点报告位于`repository-state-audit-2026-10-04/results/earnings_transcripts.md`。ET handoff报告92责任测试、全量172 passed、10 goldens、ruff/diff clean，审计未重跑且无CI URL，因此不把这些写成当前独立复验结果。联调用fake HTTP但走真实ET CLI/supervisor/serializer、FF companion调用和CWP importer/SourceExport读取；检查英文原文、精确FY/Q、provider及canonical SHA、实际bytes、限额/超时、失败不落原件、重复导入幂等及scratch清理。联调前先核对现有CWP FMP exact-key差异（ET FMP 26字段JSON vs importer当前Motley 24字段），优先复用正式ET golden，若不兼容先在CWP写契约测试并实施窄适配，不修改ET wire。所有测试使用独立短TEMP根且结束恢复为空；不发付费/LLM网络请求，不读写生产raw/catalog/config。本机`config/source_acquisition.yaml`保持用户未提交状态。跨仓全链通过后，把ET提交快进并入其主线，更新ET/CWP/PWF状态并再跑受影响接口回归；若FMP admission不具备完成条件，则分开记录deadline代码可并线与FMP导入合同仍pending，不能把真实导入闭环标绿。之后才启动N4C真实样本/并发/空间节点，接着S5/S6。
 
-**外线状态：**G1-LEGACY已完成接收并进入主线；ET-DEADLINE仍留在独立worktree，未提交，责任包有一项测试夹具错误，MAIN未修改；ET-LIVE已交一次性结果报告，live链因HTTP 402 entitlement未运行。外线边界继续按独立目录执行，MAIN负责最终接收和打通。没有逐helper/逐文档人工审查，也不等待真实付费权益才推进确定性接口验收。
+**外线状态：**G1-LEGACY已合入；ET-DEADLINE已作为远端单提交干净候选交付，ET只读审计已验收；待MAIN完成一次离线跨仓路径测试后决定快进合入。ET-LIVE因HTTP 402没有可导入正文。外仓写集继续由各自owner维护；MAIN负责CWP共享接口和最终打通，不重复派发ET工作，不增加逐helper/逐文档审查，也不等付费权益才做fake-provider确定性验收。
 
 以下保留已验收producer桥接技术细节，**不是新的下一步**：
 

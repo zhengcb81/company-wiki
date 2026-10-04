@@ -290,3 +290,10 @@ Git写入/联网用正常用户，sandbox .git只读不是产品权限。测试�
 - 仅当catalog language缺失时，Worker事件构建器通过`narrative_derivation`打开精确SourceRef，验证身份、SHA、size、MIME与read-policy后识别语言，并将结果绑定到event input hash。已有非空catalog语言优先；之后若catalog出现冲突的非空语言则拒绝。
 - 检测范围有界：UTF-8文本最多256 KiB、PDF最多5页，HTML/JSON复用已有transcript extractor；只返回zh/en/mixed。空/短/损坏文本、其他脚本、无效PDF和不支持MIME均具名失败，不猜测、不翻译、不调用LLM、不落临时PDF。
 - 隔离focused单元+CLI/Worker E2E **23 passed / 41.06s**，包含中/英/混合TXT、年报PDF、有无语言metadata、低价值IR skip、模型请求计数、重复执行幂等和原始夹具字节保持。该证据只验证桥接机制，不代表真实生产N4C或ET文档已导入。
+
+## 2026-10-04 — ET-DEADLINE交付收据与并线边界
+
+- 独立只读盘点报告 `docs/plans/repository-state-audit-2026-10-04/results/earnings_transcripts.md` 已按其范围完成。实时本地checkout复核与报告一致：ET main/origin/main=`93fe52c450c79dded53fb8b1e466a2193546bb28`；deadline本地与origin分支=`0017f24a999c5ecb224b646f47ebc8804769be73`，相对main仅1个独有提交，工作树干净；runtime分支tip已在main历史中。ET main的 `.workbuddy-ai/`、`eval_results.json` 是未跟踪资料，按审计建议保留。
+- ET-DEADLINE handoff声明92项集中测试、全量172 passed、10 goldens matched、ruff和diff check clean；只读审计按卡没有运行测试，也没有CI run URL，因此这些是交接记录，不是本次独立测试证据。handoff列出的清理失败后无法确认进程退出、`--api-key` child-env覆盖和Windows受限环境仍有未单独验证项；一次跨仓联调只覆盖核心生产CLI/批次路径，不将防御边缘项扩大成额外人工门。
+- 公共wire、serializer和goldens在ET-DEADLINE提交中未改；主线之外是ET内部supervisor/worker、预算路由及专属测试/文档。提交可作为单提交候选，但由CWP主线完成一次FF→ET生产CLI→CWP importer/SourceExport离线E2E后并线。已知合同缺口是FMP 26字段JSON vs CWP当前只接受Motley形状的24字段；不能把Motley既有12项E2E说成FMP已验收。
+- 本次复核未触及ET原件、owner未跟踪文件、ET配置、FF/RF工作树或CWP生产配置；CWP仍只有用户已有 `config/source_acquisition.yaml` 未提交修改。

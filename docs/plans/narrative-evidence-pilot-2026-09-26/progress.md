@@ -366,3 +366,10 @@ S0/N4A及S2模型预算基础、CLI阶段与CI修复已正常发布，当前CI�
 - 在干净G1 worktree重跑责任包 **142 passed / 58.05s**；Ruff与`git diff --check 1cfec10..HEAD`通过。主线接手合同、clean-env与config-doctor测试 **44 passed / 10.40s**。一次直接在当前主工作树运行G1写集检测时会把本机`config/source_acquisition.yaml`及当前未提交的narrative改动列为超出G1写集；该检查属于预期的dirty-worktree保护，故改在干净外包worktree复跑并全绿。初次无显式临时根的pytest还受到当前sandbox对系统TEMP ACL的限制；成功验收使用隔离basetemp，测试目录在结束后清理。
 - N4 sparse language bridge聚焦包 **23 passed / 41.06s**，覆盖中文/英文/混合电话会TXT、年报PDF、有/无语言元数据、低价值IR skip、Worker真实CLI+本地模型、重复执行不增模型请求及raw夹具不变。Ruff与mypy聚焦检查通过。未运行生产N4C批次，未改catalog/raw/本机来源配置。
 - 计划同步：S4仍pending，但“缺少从verified SourceRef字节推导language”的阻塞已关闭。剩余N4C工作是S3/ET-DEADLINE收口、为真实多类型样本取得符合现行admission/import合同的SourceRef，再测consumer引用/语言覆盖、1/2/4并发吞吐和总空间增量。当前IR normalized assertion、retired招股书及ET 402分别仍是样本资格/可用性缺口；不绕过合同。
+
+## 2026-10-04 — ET-DEADLINE 只读交付验收
+
+- 接收并核对 `docs/plans/repository-state-audit-2026-10-04/results/earnings_transcripts.md`。ET main=`93fe52c`；ET-DEADLINE=`0017f24`，对照本地refs，deadline branch-only为1个提交且远端分支SHA一致；main无tracked修改，两个owner未跟踪资料及两个linked worktree均保留。
+- ET-DEADLINE handoff记录92项责任测试、全量172 passed、10 goldens、ruff与diff检查通过；这是交付报告中的既有结果。本次只读盘点未运行测试，且没有独立CI链接。旧progress里的“待commit/push”已经过期。
+- ET只读审计包验收通过；ET实现提交暂不并main。下一节点是隔离fake-provider的FF→ET正式CLI/supervisor→CWP importer/SourceExport联调，特别检查FMP 26字段JSON与CWP当前Motley 24字段exact-key差异；不改变ET wire、不请求付费API。
+- 本轮没有修改ET、FF或RF；CWP既有未提交配置 `config/source_acquisition.yaml` 保持原样。
