@@ -3,6 +3,12 @@
 This module deliberately uses only the Python standard library so it can run
 before project configuration, dotenv loading, network clients, or writer
 modules are imported.
+
+Entry classification is static: supported control and source-workflow tools
+always run, permanently retired research/Wiki writers never run, and every
+other legacy entry stays frozen until it is normalized or retired.  The
+historic ``COMPANY_WIKI_WRITE_MODE`` / ``COMPANY_WIKI_LEGACY_WRITERS``
+permission pair no longer changes any result.
 """
 
 from __future__ import annotations
@@ -17,11 +23,13 @@ SCRIPTS_DIR = Path(__file__).resolve().parent
 
 # These tools write only isolated receipts/manifests or inspect the repository.
 # Production-data writers, test frameworks, cleanup tools, and migration tools
-# are intentionally absent.
+# are intentionally absent.  config_doctor is the read-only production-config
+# maintenance entry (R4.1/N-05) and must behave the same in every startup mode.
 CONTROL_TOOL_ALLOWLIST = frozenset(
     {
         "architecture_gate.py",
         "clean_env_gate.py",
+        "config_doctor.py",
         "legacy_observer.py",
         "recovery_baseline.py",
         "secret_audit.py",
@@ -31,19 +39,15 @@ CONTROL_TOOL_ALLOWLIST = frozenset(
     }
 )
 
-# Source audit, catalog lifecycle and isolated narrative tools belong to the
-# canonical source system. They retain their own byte/path/transaction checks;
-# writing a receipt or replacing a catalog does not make them research writers.
+# Source narrative pilots belong to the canonical source system.  They retain
+# their own byte/path/transaction checks; running a pilot is not research
+# writing.  The completed one-off catalog retirement, cutover, audit and
+# derived-archive deletion tools were removed together with their dedicated
+# test chain (see the G1-LEGACY handoff).
 SOURCE_WORKFLOW_TOOL_ALLOWLIST = frozenset(
     {
-        "audit_catalog_consumers.py",
-        "audit_catalog_retirement.py",
-        "cutover_source_catalog_db.py",
         "narrative_evidence_pilot.py",
         "narrative_summary_review_pilot.py",
-        "retire_source_catalog_db.py",
-        "retire_catalog_snapshot.py",
-        "retire_derived_archives.py",
     }
 )
 
@@ -95,20 +99,18 @@ PERMANENTLY_RETIRED_SCRIPTS = frozenset(
 )
 
 
-def legacy_writer_authorized(environment: Mapping[str, str] | None = None) -> bool:
-    """Require two explicit factors; either one alone must fail closed."""
-    environment = os.environ if environment is None else environment
-    return (
-        environment.get("COMPANY_WIKI_WRITE_MODE", "").casefold() == "legacy"
-        and environment.get("COMPANY_WIKI_LEGACY_WRITERS", "").casefold() == "allow"
-    )
-
-
 def _script_name(script_path: str | os.PathLike[str]) -> str:
     try:
         return Path(script_path).name
     except (OSError, TypeError, ValueError):
         return ""
+
+
+def _supported_tool(script_name: str) -> bool:
+    return (
+        script_name in CONTROL_TOOL_ALLOWLIST
+        or script_name in SOURCE_WORKFLOW_TOOL_ALLOWLIST
+    )
 
 
 def legacy_script_execution_allowed(
@@ -117,13 +119,17 @@ def legacy_script_execution_allowed(
 ) -> bool:
     """Return whether an explicitly requested legacy script may execute.
 
-    Research/Wiki orchestration and destructive/reset entries are permanently
-    retired.  Other compatibility scripts retain the existing two-factor
-    authorization until a later caller-class audit routes or retires them.
+    The result is a pure function of the entry classification.  Permanently
+    retired research/Wiki writers never run, supported control and
+    source-pilot tools always run, and un-normalized mixed legacy entries
+    stay frozen.  ``environment`` is accepted so existing callers keep
+    working, but permission variables no longer change the outcome.
     """
-    if _script_name(script_path) in PERMANENTLY_RETIRED_SCRIPTS:
+    del environment
+    name = _script_name(script_path)
+    if name in PERMANENTLY_RETIRED_SCRIPTS:
         return False
-    return legacy_writer_authorized(environment)
+    return _supported_tool(name)
 
 
 def is_legacy_script_cli(script_path: str | os.PathLike[str]) -> bool:
@@ -158,11 +164,12 @@ def blocked_message(script_name: str) -> str:
     return (
         "=" * 60
         + f"\n  LEGACY WRITER BLOCKED: {script_name}\n\n"
-        + "  Compatibility scripts are frozen before config, LLM, network, or writes.\n"
-        + "  Explicit compatibility execution requires BOTH settings:\n"
-        + "    COMPANY_WIKI_WRITE_MODE=legacy\n"
-        + "    COMPANY_WIKI_LEGACY_WRITERS=allow\n"
-        + "  Gate environments forcibly override both settings to deny.\n"
+        + "  This legacy entry is not on the supported control / "
+        + "source-pilot list.\n"
+        + "  It stays frozen before config, LLM, network, or writes until "
+        + "it is normalized\n"
+        + "  or retired; environment settings cannot enable it.\n"
+        + "  Investment research and review belong to StockWiki.\n"
         + "=" * 60
     )
 

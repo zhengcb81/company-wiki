@@ -129,11 +129,12 @@ _LEGACY_WARNING_SHOWN = False
 
 def require_legacy_writer_permission(script_name: str) -> bool:
     """
-    Legacy writer kill switch：检查是否有权运行旧版写入脚本。
+    Legacy entry gate：返回该脚本是否按静态分类允许执行。
 
-    仅当 COMPANY_WIKI_WRITE_MODE=legacy 且
-    COMPANY_WIKI_LEGACY_WRITERS=allow 同时存在时放行。
-    否则打印警告并返回 False，调用方应退出或降级为 dry-run。
+    分类与 writer_policy 一致：永久退休的 research/Wiki writer 永远返回
+    False（环境变量无法改变），受支持的控制/来源 pilot 工具返回 True，
+    其余未正规化的混合旧入口保持冻结。旧的双环境变量授权语义已退出。
+    否则打印一次警告，调用方应退出或降级为 dry-run。
 
     Returns:
         True = 允许运行, False = 拒绝运行
