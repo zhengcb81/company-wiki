@@ -15,7 +15,7 @@
 3. [x] 按用户最新决定移除 StockInfoDownloader 施工线，查明 CWP 现有 StockInfoDLSimple provider 入口和剩余旧引用；不读写 StockInfoDownloader 工作树。
 4. [x] 写总览、统一交接模板和 9 份独立审计卡（CWP 报告通过 harness 回复返回；其他报告写入各自唯一结果文件）。
 5. [x] 在 CWP 中以测试先行把下载路径默认改为 StockInfoDLSimple，并更新当前说明；保留被 writer freeze 拦截的历史入口为不执行的兼容记录。
-6. [x] 集中核对卡片边界、验收口径、测试和 Git diff；只提交本计划目录与明确授权的 CWP 代码/测试/文档文件，不暂存既有 `config/source_acquisition.yaml` 用户改动。提交 `d8e6054` 已推送 `origin/master`；推送前远端仍为其父提交，pre-commit 与 pre-push 检查通过。
+6. [x] 集中核对卡片边界、验收口径、测试和 Git diff；只提交本计划目录与明确授权的 CWP 代码/测试/文档文件，不暂存既有 `config/source_acquisition.yaml` 用户改动。`d8e6054`（provider 对齐/审计包）与 `ae2b2b7`（退役旧批量下载旁路）均已推送 `origin/master`；两次推送前远端均核验为父提交，pre-commit 与 pre-push 检查通过。
 
 ## 固定边界
 

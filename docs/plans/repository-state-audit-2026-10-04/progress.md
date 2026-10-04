@@ -26,4 +26,4 @@
 
 最终交付：`scripts/config.py` 的 downloader 默认目录切换到 StockInfoDLSimple；旧 `collect_reports.py` 继续被 legacy writer freeze 拦截，不重接 StockInfoDownloader。目标配置 `config/source_acquisition.yaml` 未暂存、未改动。定向配置测试 9 项通过，Ruff 与 diff check 通过；commit `d8e6054` 已推送 `origin/master`，pre-commit 和 pre-push fast contract smoke 均为 GREEN。当前仅剩用户原有 `config/source_acquisition.yaml` 未提交修改。
 
-后续扫描发现旧 `scripts/batch_download.sh` 没有 writer freeze，会直接调用 StockInfoDownloader 并绕过 Source Catalog 写入公司目录；已将其改为 fail-closed 退役提示，并更新架构/排错说明。此修复待单独提交与推送。
+后续扫描发现旧 `scripts/batch_download.sh` 没有 writer freeze，会直接调用 StockInfoDownloader 并绕过 Source Catalog 写入公司目录；已将其改为 fail-closed 退役提示，并更新架构/排错说明。shell 试运行确认脚本打印退役指引并非零退出，未触碰文件。修复提交 `ae2b2b7` 已推送 `origin/master`，pre-commit 与 pre-push fast contract smoke 通过。
