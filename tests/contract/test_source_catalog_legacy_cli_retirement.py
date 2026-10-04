@@ -4,6 +4,11 @@ from __future__ import annotations
 
 import pytest
 
+import os
+from pathlib import Path
+import subprocess
+import sys
+
 from company_wiki.source_catalog.cli import _parser
 
 
@@ -12,6 +17,7 @@ from company_wiki.source_catalog.cli import _parser
     [
         "normalize",
         "summarize",
+        "extract-sections",
         "run",
         "worker",
         "worker-start",
@@ -35,3 +41,36 @@ def test_source_maintenance_and_worker_cleanup_commands_remain(command):
     args = _parser().parse_args([command])
 
     assert args.command == command
+
+
+def test_normalized_section_writer_is_not_a_catalog_api(tmp_path):
+    from company_wiki.source_catalog.models import CatalogConfig, RootSpec
+    from company_wiki.source_catalog.service import SourceCatalog
+
+    catalog = SourceCatalog(CatalogConfig(
+        project_root=tmp_path, catalog_dir=tmp_path / ".source_catalog",
+        roots=(RootSpec("fixture", tmp_path / "raw", "directory"),),
+    ))
+    try:
+        assert not hasattr(catalog, "extract_sections")
+        assert not (tmp_path / ".source_catalog").exists()
+    finally:
+        catalog.close()
+
+
+def test_retired_section_cli_refuses_before_opening_any_catalog(tmp_path):
+    raw = tmp_path / "original.txt"
+    original = "公司主营业务进展：本季度新产品完成量产。".encode("utf-8")
+    raw.write_bytes(original)
+    source_root = Path(__file__).resolve().parents[2] / "src"
+    environment = dict(os.environ, PYTHONPATH=str(source_root), PYTHONDONTWRITEBYTECODE="1")
+    result = subprocess.run(
+        [sys.executable, "-B", "-m", "company_wiki.source_catalog.cli",
+         "--config", str(tmp_path / "missing-config.yaml"), "extract-sections"],
+        cwd=tmp_path, env=environment, capture_output=True, timeout=10,
+    )
+    assert result.returncode == 2
+    assert b"invalid choice" in result.stderr
+    assert raw.read_bytes() == original
+    assert not (tmp_path / ".source_catalog").exists()
+    assert not (tmp_path / "derived").exists()

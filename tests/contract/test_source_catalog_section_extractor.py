@@ -6,6 +6,7 @@ from company_wiki.source_catalog.section_extractor import (
     SECTION_ARTIFACT_ROLE,
     SectionSlice,
     chapter_page_range,
+    extract_sections_catalog,
     extract_sections_from_text,
 )
 
@@ -156,7 +157,7 @@ def test_extract_sections_writes_artifact_and_is_idempotent(tmp_path):
         "SELECT document_id FROM documents WHERE document_kind='annual_report'"
     )["document_id"]
 
-    report = catalog.extract_sections(document_id=doc_id)
+    report = extract_sections_catalog(catalog.config, catalog.store, document_id=doc_id)
     assert report.completed == 1
 
     row = catalog.store.fetchone(
@@ -177,11 +178,13 @@ def test_extract_sections_writes_artifact_and_is_idempotent(tmp_path):
     assert first["span_ids"] == []
 
     # Idempotent: a second run finds the artifact already present and does nothing.
-    report2 = catalog.extract_sections(document_id=doc_id)
+    report2 = extract_sections_catalog(catalog.config, catalog.store, document_id=doc_id)
     assert report2.completed == 0
 
     # --force re-runs and rewrites the artifact.
-    report3 = catalog.extract_sections(document_id=doc_id, force=True)
+    report3 = extract_sections_catalog(
+        catalog.config, catalog.store, document_id=doc_id, force=True,
+    )
     assert report3.completed == 1
 
     # SectionQueryService reads the artifact back read-only.
@@ -231,7 +234,9 @@ def test_section_extractor_refuses_tampered_normalized_bytes(tmp_path):
     path = Path(normalized["path"])
     path.write_bytes(path.read_bytes() + b"\nTampered section body.\n")
 
-    report = catalog.extract_sections(document_id=normalized["document_id"])
+    report = extract_sections_catalog(
+        catalog.config, catalog.store, document_id=normalized["document_id"],
+    )
     assert report.completed == 0
     assert report.failed == 1
     assert catalog.store.fetchone(
@@ -272,7 +277,7 @@ def test_section_extractor_accepts_hash_bound_legacy_normalized(tmp_path):
             (doc_id,),
         )
 
-    report = catalog.extract_sections(document_id=doc_id)
+    report = extract_sections_catalog(catalog.config, catalog.store, document_id=doc_id)
     assert report.completed == 1
     assert catalog.store.fetchone(
         "SELECT artifact_id FROM artifacts WHERE document_id=? "
@@ -335,7 +340,7 @@ def test_section_extractor_selects_one_deterministic_legacy_artifact(tmp_path):
             (str(second_path), second_sha, len(second_bytes), doc_id),
         )
 
-    report = catalog.extract_sections(document_id=doc_id)
+    report = extract_sections_catalog(catalog.config, catalog.store, document_id=doc_id)
     assert report.completed == 1
     assert report.failed == 0
     sections = catalog.store.fetchone(
@@ -621,7 +626,7 @@ def test_c9_dispatch_broker_kind_routes_to_broker_extraction():
     goes through extract_broker_sections_from_text (broker keywords), all
     other kinds go through extract_sections_from_text (第X节 headings).
     This covers the dispatch branch that integration tests miss (they call
-    catalog.extract_sections which routes internally)."""
+    the legacy extract_sections_catalog function which routes internally)."""
     from company_wiki.source_catalog.section_extractor import (
         _extract_sections_for_kind,
     )

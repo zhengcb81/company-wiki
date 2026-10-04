@@ -149,7 +149,7 @@ def _read_recent_worker_events(catalog_dir: Path) -> dict[str, Any]:
 def _parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="company-wiki-source-catalog",
-        description="Scan read-only source roots and build normalized/summary Markdown indexes.",
+        description="Catalog source versions, verify raw documents, and export read-only indexes.",
     )
     parser.add_argument(
         "--config",
@@ -174,15 +174,6 @@ def _parser() -> argparse.ArgumentParser:
         help="compute normalized-text fingerprints for documents lacking one",
     )
     fingerprint_backfill.add_argument("--limit", type=int)
-
-    extract_sections = subparsers.add_parser(
-        "extract-sections",
-        help="split normalized.md into MD&A / business sections for research",
-    )
-    extract_sections.add_argument("--limit", type=int)
-    extract_sections.add_argument("--document-id")
-    extract_sections.add_argument("--document-kind")
-    extract_sections.add_argument("--force", action="store_true")
 
     subparsers.add_parser(
         "export", help="export documents.csv, artifacts.csv, and index.md"
@@ -903,13 +894,6 @@ def main(argv: Sequence[str] | None = None) -> int:
             )
         elif args.command == "fingerprint-backfill":
             result = get_catalog().backfill_text_fingerprints(limit=args.limit)
-        elif args.command == "extract-sections":
-            result = get_catalog().extract_sections(
-                limit=args.limit,
-                document_id=args.document_id,
-                document_kind=args.document_kind,
-                force=args.force,
-            )
         elif args.command in ("export", "policy-export"):
             result = _run_export_command(args.command, config, get_catalog)
         elif args.command == "derived-audit":

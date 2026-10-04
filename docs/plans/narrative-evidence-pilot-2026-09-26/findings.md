@@ -339,3 +339,10 @@ Git写入/联网用正常用户，sandbox .git只读不是产品权限。测试�
 - 首批仅处理审计已交付的七类缓存：index、drills、parser_tmp、qa、wheel-test、worker_runs.jsonl及worker_stdout/worker_stderr尝试日志。现行代码仅有旧生产者，未发现新读取者；drill目录确为2026-07演练库副本，parser_tmp仅旧结果JSON，qa仅PNG，wheel-test仅wheel。
 - Win32当前进程枚举未发现旧source-catalog Worker、supervisor或narrative-batch；worker_control为paused。清理前仍按实际文件计数/bytes、路径包含与reparse检查执行，保护生产DB、原件、配置、derived/staging/security_master/artifacts和旧失败run；不复制整库，不启动下载/模型，不修改RF/IQS/Dayu。
 - 执行完成：七类923文件/138,648,023 B删除，所有目标路径不存在。保护快照前后相同；公司原件33,133个/25,198,502,813 B清单未变，生产DB3,055,841,280 B完整SHA未变。四种真实资料正式source-reader CLI前后各4次、每轮12,343,802 B，SHA/size/identity/policy均一致。一次性脚本和重复临时JSON已删除，保留约9KB机器收据与短说明，不把这一结果当作全仓最新空间盘点。
+
+## 2026-10-04 — S5旧section公开入口退休范围
+
+- RF重新fetch origin/main后仍为8a153f3；其根task_plan自称历史底稿，audit_review/README和UC state记录旧项目completed/no owner。当前本线不复活旧CA签收流程。RF source preparation的旧默认还同时出现在SKILL和多组CLI夹具，后续迁移需一起更新配置接线与有效断言，不能仅改bool便宣称完成。
+- 本轮先处理CWP独占的extract-sections CLI和SourceCatalog.extract_sections方法：它们是normalized文件的实际公开消费者/section派生生产者。退休这两个入口后，低级纯章节解析及历史artifact测试仍保留，用显式低级函数生成隔离历史夹具；不让旧fixture迫使公开入口继续存在。normalizer/fingerprint所需解析、原件读取、query/export和新叙述选材保持各自职责。
+- 当前旧Worker的Python兼容类仍有extract_sections调用；其公开执行/启动入口此前已退休，不算活动入口。本轮不宣称所有旧writer或derived消费者已退出，RF及SourceCatalog旧normalize/summarize库方法仍列后续。外部N4-T1/T2写集不修改。
+- 本轮extract-sections CLI及SourceCatalog公开方法已删除；TDD三项RED转GREEN，入口/纯章节解析/历史artifact binding合计48项通过。历史fixture改用原低级section函数，定位/正文/质量等断言未放松。新叙述入口按source raw选择与final包工作，旧derived消费的剩余项仍由后续S5处理。

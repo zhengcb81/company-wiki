@@ -428,3 +428,11 @@ S0/N4A及S2模型预算基础、CLI阶段与CI修复已正常发布，当前CI�
 - 清理前后正式source_reader_cli各4次读取真实年报/招股书/IR/季报，共8次、每轮12,343,802 B，完整bytes SHA、来源身份、size及policy一致。没有下载/模型/原件副本；生产DB mutation0、原件删除0。所有923目标文件消失，按文件逻辑大小释放138.65MB；不声称磁盘free-space净变化或完整总量新实测。
 - 一次性两个脚本及重复临时读取JSON逐绝对路径验证并删除，只保留合并机器收据和短说明。用户配置不stage。S5仍in_progress；derived主体、旧全量span及N4C两卡集成/真实摘要/并发与消费者仍待完成。仅文档/收据提交，无新业务代码，不全仓重测。
 - 发布：`3f7dd2b`已推origin/master，pre-commit无相关代码文件正确跳过，pre-push快速门GREEN；git status仅剩既有用户配置。顶层当前状态同步本轮完成项，避免弱模型按较早文字重复收缩模型请求或再次清理923文件。
+
+## 2026-10-04 — 旧normalized section公开生产入口退休
+
+- 先重新fetch RF主线8a153f3，确认owner两项记录未变；其旧来源准备默认、SKILL文档及CLI夹具仍相互绑定，后续迁移一起处理，不仅改开关。CWP独占改动先处理extract-sections；本轮没有修改RF代码。
+- TDD新增CLI未注册、公开SourceCatalog不再提供section writer、真实子进程在配置打开前拒绝旧命令且raw不变。首轮一个根为空的fixture不满足CatalogConfig要求，修成合法RootSpec后再次得到**3 failed/15 passed（1.89s）**，三个失败都对应待退休的实际入口行为。
+- 删除extract-sections CLI注册/分派与SourceCatalog.extract_sections方法，修正CLI用途说明。旧纯解析和artifact完整性回归通过显式低级函数创建隔离legacy夹具，原断言保持；不再为这些fixture保留公开生产入口。
+- 集中入口退休、章节解析与producer binding测试 **48 passed/24.30s**；改动Python Ruff与diff check GREEN。pytest禁用第三方插件仅有既有asyncio_mode warning；测试根短路径未relocate。正式新Worker回归与N4-T1集成一起执行。
+- 旧normalize/summarize库方法、兼容旧Worker类和RF artifact读取仍待后续；没有删除2.826GB derived或生产DB span。当前用户报告N4-T1完成，已定位提交4a53080（base349d331），远端分支一致，六个文件符合独占写集；没有改该worktree，先将本轮入口改动commit，再查收集成T1。
