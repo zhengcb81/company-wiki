@@ -404,3 +404,11 @@ S0/N4A及S2模型预算基础、CLI阶段与CI修复已正常发布，当前CI�
 - MeetingConverter卡限定其独立仓库CI配置；先核查远端最新workflow是否已有真实job和测试。如已修复只交证据，不为制造改动而改工作流。StockQAbyLLM与MeetingConverter早期只读盘点卡仍按原收据保持验收状态，IQS不派新任务。
 - N4C run账本复核结果及不确定性已写入findings/task_plan：季报与IR来源可验证且解析覆盖完成但零span；MiniMax旧失败无状态码/响应摘要，确切原因未知；错误分类丢失HTTP状态是源码已确认的独立缺口。旧unknown reservation保留，不复用run ID。
 - 无代码、source catalog、raw文件或生产数据库修改；本机用户文件 `config/source_acquisition.yaml` 原样保留。计划文档后续执行diff check/plan-claims检查并仅提交本轮明确的PWF及三张卡。
+
+## 2026-10-04 — MAIN长文模型输入收缩完成（N4C仍未GREEN）
+
+- RF先行只读核查正常账号状态：fcap5319ee26仍仅两项owner运行记录dirty，origin/main8a153f3；没有修改RF/IQS或外包卡的写集。本线新代码只有automation/narrative_model.py和tests/unit/test_narrative_model_request.py。
+- 先补施工细则，再TDD：新请求测试初跑5 failed / 0.92s，准确暴露完整span请求超限、无coverage和coverage不入hash；没有修改原摘要/引用断言。最终精简模型投影保留全部selected原文/ID/角色/有意义质量标记，定位仍由canonical证据负责，schema/example继续完整教给模型，prompt1.2.0。
+- 最终单元/handler聚焦35 passed / 1.05s；预算caller+正式CLI/Worker本地HTTP端到端14 passed / 40.16s；合计49项通过。命令为pytest -p no:cacheprovider --basetemp tmp/ptcmp加上述四个测试文件，两次最终责任集均未relocate。Ruff和diff check通过。pytest禁用第三方插件后仅有既有asyncio_mode配置warning。
+- 精确自建tmp/ptcmp在同账号下确认位于workspace后删除，测试scratch已恢复；旧失败run保留用于诊断和未知费用记账。真实select结果只读请求大小复测招股书252,185→47,202 B、年报7,797→4,285 B，全部ID/原文匹配且旧ledger文件SHA不变，没有外部调用。
+- S4改为in_progress，纠正旧“批次尚未开始”文字；真实summary/consumer与并发/空间验收仍未通过。下一主线动作整合N4-T1/T2，先核算剩余总预算，再另建run；原unknown费用和原件不丢。用户source_acquisition.yaml不纳入提交。

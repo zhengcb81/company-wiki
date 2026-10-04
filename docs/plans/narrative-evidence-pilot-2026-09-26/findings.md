@@ -318,3 +318,11 @@ Git写入/联网用正常用户，sandbox .git只读不是产品权限。测试�
 - 模型请求的未知reservation为5,258 micro-USD、2,400 max-output token；累计保守记账10,325 token、$0.005258，响应usage、HTTP状态和response SHA均缺失。不能由此推断MiniMax的真实失败原因；后续不复用该run，也不把reservation退为零。
 - 源码对照确认HTTP适配器保留HTTP status于ModelHTTPError，但预算调用层将其折叠为MODEL_RESPONSE_INVALID。该状态丢失是已证实的诊断缺口，不是旧请求根因结论。MiniMax官方Chat Completions文档示例采用choices/message/content字符串及prompt_tokens/completion_tokens；旧事件没有存响应形状，所以不能断言是否为协议不兼容。参考：[MiniMax Chat Completions API](https://platform.minimax.io/docs/api-reference/text-chat-openai)。
 - 本轮创建三张READY TO DISPATCH卡：N4-T1仅改automation模型错误/账本诊断；N4-T2仅改source_catalog中文叙述选材；MeetingConverter卡只限定另一仓CI workflow。前两者源代码与测试目录互斥，必须使用两个worktree；第三张卡跨仓独立。Main仍保留集成、真实文档/模型调用、预算和最终端到端验收。IQS不检查、不修改。
+
+## 2026-10-04 — MAIN模型请求投影收缩与真实字节复测
+
+- 首先按正常账号只读复核RF：fcap仍在5319ee26，tracked仅两项assurance运行记录；origin/main为8a153f3。沙箱目录ACL显示的大量删除仍是假象，未恢复/修改RF。CWP只有既有用户配置修改；没有发现新N4 worktree注册，不据此宣称外线是否正在运行。
+- 旧run招股书160条证据原文共12,201 B，完整span重复source/hash/parser/coordinates/bbox/规则使HTTP请求252,185 B；它在HTTP发送前因60,000-token预算拒绝，和年报的unknown HTTP失败是两个独立问题。
+- MAIN仅修改narrative_model.py及新增专属请求测试。模型现在接收所有原文片段、原span_id、source_role、非空quality_flags；共同身份与选择coverage一次携带。locator、parser及完整structured_value仍在原select结果保存/校验/回放，不重复发送给模型。prompt version升级1.2.0，旧run原有账本保持原样。
+- 正式HTTP body builder只读复测：年报7,797→4,285 B；招股书252,185→47,202 B（减少81.3%），160条证据ID/原文全部一一匹配。数据库文件SHA前后相同，无HTTP/模型调用。这是请求体字节减少，不是全仓磁盘释放量或实际供应商费用测量。
+- 默认2,400-output上限下招股书保守预留49,730 token，旧unknown为10,325 token，合计60,055仍超过首次aggregate60,000上限。不能宣称新真实批次已可直接成功；下次先明确新请求输出上限和总余量，再逐次预留，不能清旧未知账本或静默扩大总额。传输/选材两卡与真实模型遵约、consumer读取和P1/P2/P4空间吞吐仍待完成。

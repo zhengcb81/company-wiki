@@ -53,6 +53,14 @@
 
 ## 3. TDD 与三个大节点
 
+### 2026-10-04 MAIN补充：模型输入投影收缩
+
+真实失败run只读测量显示：招股书160条span原文共12,201 B，HTTP请求252,185 B；完整EvidenceSpan中的坐标、hash、parser和selection规则重复占据多数输入。60,000-token保守上界因此拒绝请求。MAIN独占改造 automation/narrative_model.py 与新测试 test_narrative_model_request.py，和N4-T1/T2写集互斥。
+
+先RED证明160条合成中文证据可全部保留而模型请求上界低于60,000 token。模型投影仅保留每条span_id、原文、source_role及非空quality_flags；来源身份和选择coverage只附一次。模型只返回证据ID，定位由完整select结果负责，不重复发送locator和空quality_flags数组。完整EvidenceSpan仍保留在select结果，摘要校验/回放及最终artifact使用原合同；不得修改证据ID、截断原文、删片段或放宽账本估算来达标。prompt version升级，绑定新请求hash，使旧run不能静默复用新提示。
+
+GREEN集中验证请求大小、角色/不稳定定位/原语言、证据保留、输入hash变化及现有handler/正式CLI端到端。再只读复测旧run的真实选择结果，只输出字节与计数；不发HTTP、不改旧账本。真实费用由MAIN以后新run测量，不把请求字节节省宣称为实际账单节省。
+
 ### 节点 A：scope 与持久记账
 
 先 RED：更高优先级外批 READY；外批 RETRY_WAIT / terminal-parent child / expired attempt；外批同类 outbox；前 100 个外批 prepared；空 scope；真实 spawn factory 收到 scope。预算再覆盖双进程 reserve、相同 attempt 幂等/冲突、kill-before-request / kill-after-request-unknown、失败/坏JSON仍收费、micro-USD 上界。v2→v3 小库 migration、回滚/原表事实保留。实现后集中相关单元/集成，无全仓 coverage。
