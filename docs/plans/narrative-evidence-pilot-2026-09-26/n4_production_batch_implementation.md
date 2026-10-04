@@ -1,6 +1,6 @@
 # N4：可运行的叙述批次、真实模型计量与持久恢复
 
-> 2026-10-03 执行细则：S0/scope与节点A预算/模型/factory已发布；正式batch/终态降容首组67绿，节点B恢复收口与C仍未完成。G-A/N3a/G-C、B1/B3/B4已完成，见[实际整理收尾](harness_lanes/results/gd_b3_retirement_2026-10-03.md)。root负责N4和CWP接口，外部FF/ET/空间审计按[并行总图](parallel_execution_plan_2026-10-03.md)各自独占目录。不启动旧normalize Worker。只在A/B/C大节点验收，helper不增加审查；原件/来源事实保留。
+> 2026-10-04 当前状态：N4A scope与N4B预算/factory/正式batch/恢复、终态降容已实现；节点A/B的集中回归与CLI/HTTP/kill/ACK合同已绿。N4C（真实多类型样本、并行吞吐与空间增量实测）仍未做。**主计划当前先收口G1门禁精简，再收口S3 SourceRef/SourceExport虚拟化；G1/S3完成后才进入N4C。** 本卡保留N4C施工细节，不改变主计划顺序。G-A/N3a/G-C、B1/B3/B4已完成，见[实际整理收尾](harness_lanes/results/gd_b3_retirement_2026-10-03.md)。不启动旧normalize Worker。只在A/B/C大节点验收，helper不增加审查；原件/来源事实保留。
 
 ## 1. 已核缺口与目标
 
@@ -75,19 +75,19 @@
 
 1. G-C来源消费及B1/B3/B4已完成；现在按task_plan先S0收口、N4A独占并行，不重新恢复/重hash已删除归档或重做旧checkout整理。
 2. N4A scope 先 RED→GREEN；与独立模型 HTTP 新文件可以并行，共享 Store/schema/prompt 只由一条 owner 实施。
-3. N4B 计量/预算/模型 prompt/factory/batch/retention→节点 A+B 集中验收。
-4. N4C真实小批→消费者读取→普通发布，再更新 G-D B2 调用者清单和生产可清理批次。
+3. N4B 计量/预算/模型 prompt/factory/batch/retention的节点A+B已集中验收并通过；不重复开工或重跑全套。
+4. N4C真实小批→消费者读取→普通发布，须等主计划G1与S3先收口；之后再更新 G-D B2 调用者清单和生产可清理批次。
 5. 复核已完成B3收据，不重做旧span墓碑/恢复；不能将N4最终包2%样本比率当总空间已验收。
 
 N4 完成必须有生产代码入口、正常/故障真实 CLI 收据、usage/未知请求账本、batch isolation、恢复与总占用实测。只新增测试 factory、仅 status 变绿、仅保存几份 Replay bundle 均不算完成。
 
-## 5. root下一集中节点（与外部三线不重叠）
+## 5. N4C施工细节（按主计划排在G1/S3之后）
 
 1. 跨run RED先行：同源runA发布、runB相同draft发布、runC不同合法draft发布；effect各自绑定verify job、工件各自exact pin回读，旧pin不取latest；相同正文object按SHA只有一份，runB同run恢复零额外POST。新run用独立work-dir，同run复用baseline。
 2. 最小实现：verify effect action hash绑定`verification_job_id + bundle_sha256`，intended_after_hash仍纯bundle SHA；projector work key升级`/2`绑定publication effect key。不新建run→artifact映射/签名文件，不放松ArtifactStore冲突校验。显式新run当前可能再付费，不冒称跨run缓存零模型调用；未来缓存策略由实测决定。
 3. 自动owner收敛：production factory已固定run.scope，AUTO CLI现只有只读status/doctor/plan；不虚构已配置AUTO daemon。退役source_catalog `worker/--once`、`worker-start/resume`、install-startup、PS/VBS旧启动和全量normalize/run路径；保留status/stop/uninstall/scan/query/export来源维护。run行一个nullable last_runtime_generation，通过v3→v4迁移；activate_run与gate CAS同AUTO事务绑定，PAUSED可启本run、ENABLED仅匹配本run当前generation可恢复；未知/他run零修改具名拒绝，不写owner签收文件。OS mutex证活进程、binding证恢复归属；正式CLI父kill恢复已通过，旧generation attempt被隔离后reserved费用转unknown且原额保留；提交ACK丢失用commit后注入超时验证重试幂等。尚余source_catalog旧执行入口退出。FF ensure来源采集仍在短commit锁，不加入长期处理owner锁。
 4. 节点B本地HTTP正式CLI父进程kill后同run恢复、文件mutex重取、原始来源/旁路任务不变已绿。费用对账事务另以提交成功但返回ACK丢失故障注入证明可重试。batch deadline从入口开始计时，覆盖来源读取、准备、解析、提交；持久/临时峰值按实际文件与SQLite WAL统计，只有总增量和coverage达标才进入四份真实样本节点C。
-5. CWP producer caps与FF-S3现已在主线汇合：CNINFO能力以1.2.0声明并经公开真实年报完成下载限额/哈希闭环；FF-S3已进入FF main。Dayu仍不支持真实bounded transport，相关硬限额请求在外发前拒绝。接下来本计划的独立未完成节点是N4C真实样本多文档批次、1/2/4并行吞吐和新增空间测量。
+5. CWP producer caps与FF-S3现已在主线汇合：CNINFO能力以1.2.0声明并经公开真实年报完成下载限额/哈希闭环；FF-S3已进入FF main。Dayu仍不支持真实bounded transport，相关硬限额请求在外发前拒绝。N4专属下一待办是N4C真实样本多文档批次、1/2/4并行吞吐和新增空间测量；它排在主计划G1门禁精简及S3虚拟化收口之后。
 
 
 ## 2026-10-03 旧 Worker 入口退役状态
