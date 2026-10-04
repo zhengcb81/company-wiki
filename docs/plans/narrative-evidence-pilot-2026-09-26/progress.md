@@ -427,3 +427,4 @@ S0/N4A及S2模型预算基础、CLI阶段与CI修复已正常发布，当前CI�
 - 一个有界PowerShell进程2026-10-04 22:21:38–22:26:27 UTC完成七集合删除；进程终态exit0/status=success。公司原件清单、完整catalog DB SHA、配置、保留derived/staging/security_master/artifacts、旧失败run及控制状态前后相同。一次性全量保护检查耗时约5分钟，不放进commit/CI。
 - 清理前后正式source_reader_cli各4次读取真实年报/招股书/IR/季报，共8次、每轮12,343,802 B，完整bytes SHA、来源身份、size及policy一致。没有下载/模型/原件副本；生产DB mutation0、原件删除0。所有923目标文件消失，按文件逻辑大小释放138.65MB；不声称磁盘free-space净变化或完整总量新实测。
 - 一次性两个脚本及重复临时读取JSON逐绝对路径验证并删除，只保留合并机器收据和短说明。用户配置不stage。S5仍in_progress；derived主体、旧全量span及N4C两卡集成/真实摘要/并发与消费者仍待完成。仅文档/收据提交，无新业务代码，不全仓重测。
+- 发布：`3f7dd2b`已推origin/master，pre-commit无相关代码文件正确跳过，pre-push快速门GREEN；git status仅剩既有用户配置。顶层当前状态同步本轮完成项，避免弱模型按较早文字重复收缩模型请求或再次清理923文件。

@@ -19,7 +19,7 @@
 - **外部审计卡**：StockQAbyLLM 与 MeetingConverter 报告已收到并验收，唯一运行数据保留。invest-quick-scan 另有独立项目正在进行；本线不检查、不修改、不重复派发该仓任务。
 - company-wiki lane 的审计报告仍需从 harness 回复接收；本机 `config/source_acquisition.yaml` 用户改动和本计划审计结果目录继续排除在本线写集之外。
 
-**MAIN当前下一步：**S4/N4C首批试跑未产出最终摘要，当前先收缩模型输入冗余，再将N4-T1传输诊断和N4-T2选材覆盖交付整合到同一正式Worker链。新有限真实批次必须使用新run id，计入旧未知用量，并在现有aggregate预算内。电话会TXT仍没有live来源收据，不宣称其已完成；用户配置和独立owner工作保持各自归属。
+**MAIN当前下一步：**模型输入冗余已在df529a9收缩并通过远端CI；S5首批七类缓存138.65MB已清理且原件/来源库校验通过，收据在3f7dd2b发布。继续接收N4-T1/T2并整合正式Worker；交付等待期间按S5/S6细则B推进MAIN独占的旧入口迁移/退休。S4/N4C仍没有最终真实摘要；新run计入旧未知用量并服从现有aggregate预算。电话会TXT仍没有live来源收据，用户配置和独立owner工作保持各自归属。
 
 ## 当前基线（2026-10-04正常用户上下文复核）
 
@@ -30,7 +30,7 @@
 | FF | `eb0af13`已推送`origin/main`；SourceRef v2和FF→ET companion接线已测 | 本地`fcap`与远端main相同；未跟踪`config/FMP_API_KEY.txt`保持未读、未暂存、未推送 |
 | ET | ET-S3、bounded-runtime和deadline hardening均已在`main@63c4090`，远端同步 | ET deadline候选已按快进合入；`.workbuddy-ai/`和`eval_results.json`仍是未跟踪并原样保留 |
 | N4 | scope、持久预算、factory、有限batch、kill/ACK恢复与终态降容节点A/B已有集中GREEN | N4C真实多类型批次、1/2/4并行与总空间实测仍待做，不重复开发A/B |
-| 空间 | 最新完整实测32,821,613,206 B；原件25.20GB、DB3.06GB、旧derived/index约2.87GB；已释放13.06GB | SPACE-S5已交付：首批候选138.6MB，derived仍须迁caller；原件不进清理候选，VACUUM收益未测 |
+| 空间 | 最新完整盘点32,821,613,206 B是首批清理前历史值；原件25.20GB、DB3.06GB；此前释放13.06GB，本轮另删除138.65MB | 本轮923缓存文件已删除；derived约2.826GB仍须迁caller，DB旧全量span未删；不把算术减法当重新完整实测，原件不进清理候选 |
 | CI | 单Python快速代码CI约56–62秒；commit无pytest，push/CI同一精选集合 | 不恢复全Contract/coverage日常门；纯Markdown不要求新CI |
 
 StockWiki/IQS已有owner工作及消费者交付，本轮只读，不重复分派。Dayu为纯外部项目，零代码修改。已验收细节留在findings/progress和既有报告，未提交内容不自动视为已合入。
