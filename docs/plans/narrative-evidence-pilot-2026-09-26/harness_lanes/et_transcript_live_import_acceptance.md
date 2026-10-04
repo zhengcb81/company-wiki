@@ -2,7 +2,7 @@
 
 ## 任务性质
 
-状态：**ready，可现在启动，小型只读验收包**。真实段只验证 `earnings-transcripts 工具 → company-wiki 临时导入 → SourceRef/SourceExport`；FF companion路由另跑现有确定性测试。直接ET调用成功不能记作完整FF companion live链成功。它可与CWP G1并行；若发现代码缺口，只交报告，由主线统筹修复。
+状态：**一次性验收已执行并交报告；真实导入NOT RUN**。真实段只验证 `earnings-transcripts 工具 → company-wiki 临时导入 → SourceRef/SourceExport`；FF companion路由另跑现有确定性测试。此次FMP GET返回HTTP 402 entitlement，未取到正文，所以不能声称SourceRef live闭环。报告：[report.md](C:/Users/郑曾波/Projects/company-wiki-et-live-20261004/report.md)。
 
 ## 独占写入范围
 
@@ -83,3 +83,10 @@ python -m pytest -p no:cacheprovider tests/test_transcript_companion.py tests/te
 - 原始字节、语言、证券/期次及 SourceRef SHA/size闭环；公共读取不依赖物理路径；
 - 确定性测试结果真实记录；测试临时目录恢复到运行前状态；
 - 没有生产文件、配置、数据库、其他仓库或代码改动。
+
+## 本次执行结果（2026-10-04）
+
+- 确定性前置：CWP transcript importer **7 passed**；FF companion/transport **17 passed**；两次pytest basetemp均删除。
+- 真实工具调用1次；ET代码仅发起1个FMP GET、关闭redirect且无重试。结果为 `unavailable/provider_entitlement_required`，该错误码由ET对HTTP 402的映射产生；公共结果未单独输出HTTP状态字段。没有获取正文，故CWP导入与SourceRef回读为NOT RUN。
+- CWP临时根以系统TEMP下随机 `et-*` 名称创建，finally清理并确认不存在；精确随机名称未留存。生产配置SHA前后相同。密钥和原始返回正文均未进入报告。
+- 本次报告完成ET-LIVE记录要求；真实来源链仍待合法provider权益可用后才能验证，不重复调用或购买套餐。

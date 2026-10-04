@@ -318,3 +318,14 @@ S0/N4A及S2模型预算基础、CLI阶段与CI修复已正常发布，当前CI�
 - CWP→ET→CWP确定性端到端先暴露临时根叠加长规范文件名导致Win32 MAX_PATH超限，准确栈在`canonical_writer._atomic_copy`打开`.importing`临时文件时`FileNotFoundError`。只缩短E2E临时根名字，保留导入/原文SHA/selector/去重/字节漂移断言；`test_transcript_provider_full_chain.py`加`test_transcript_import_cli_e2e.py` **12 passed**，临时测试根自动删除。CWP产品写入逻辑没有改。
 - 通过CodeGraph重新分类G1清单：`CloseGapBinding`、`archive_retired_evidence`、`prune_retired_evidence`以及旧`llm_summarizer.summarize_catalog_with_llm`未发现生产caller；因此不存在当前公开流程要求用户手工准备binding文件。canonical `NarrativeSummarizeHandler`按SourceRef ID/SHA、语言与evidence span校验，不走旧禁词regex。旧未调用能力进入S5/S6 caller清理，不挡G1；source SHA/身份/期间/公开日/可回放引用和不生成投资结论的职责边界继续保留。
 - G1大节点完成；S3进入真实ET工具→临时CWP导入→SourceRef/SourceExport pathless回读。ET-LIVE卡明确最多一次取数、不翻译、保留原始语言；ET-DEADLINE仍在独立worktree施工。当前CWP端到端用fake provider、FF companion用确定性工具测试，均不能冒称真实ET live。
+
+## 2026-10-04 — ET-LIVE单次实测与ET-DEADLINE集中验收快照
+
+- RF先行只读复核：fcap@5319ee26，tracked仅assurance/runs/weekly_alert.jsonl与weekly_manifest.json两项修改；FF为fcap@e1eda60（未跟踪API key留存未读）；ET正式main为93fe52c（两个用户未跟踪文件保留）。没有更改这些owner目录。
+- CWP transcript importer确定性测试 7 passed / 11.30s；FF companion/transport 17 passed / 7.65s；pytest缓存关闭、bytecode关闭，两个独立TEMP basetemp均删除。
+- 按已授权仅调用ET/FMP一次：MSFT US FY2026 Q3、英文原语言请求、10秒与1,000,000字节上限。ET返回unavailable/provider_entitlement_required；读取实现确认这是FMP HTTP 402映射，一次GET、redirect关闭、没有重试。工具wire没有回传http_status字段，因此报告按映射记录402。无正文，CWP导入与SourceRef回读为NOT RUN；不购买或重复调用。
+- 临时CWP根用系统TEMP下随机et-*新目录，唯一配置只指向该根；cleanup PASS、根确认消失，生产source_catalog.yaml和source_acquisition.yaml散列未变。独占验收报告：C:\Users\郑曾波\Projects\company-wiki-et-live-20261004\report.md；报告不含正文/密钥。
+- 只读ET-DEADLINE集中责任包按卡执行，91 passed / 1 failed / 51.46s，测试scratch恢复。唯一失败test_tool_worker_failure_never_leaks_key_or_body把build_failure="RuntimeError:boom"当成worker退出；异常发生在transcript_api.fetch_transcript捕获范围内，正确回传provider_error/unexpected_provider_failure，并非supervisor收到worker退出。真正的异常退出已有runtime单测（SystemExit:7）证明映射为worker_failure；e2e夹具应改为真正worker退出后复跑。独立worktree仍未提交，主线未改其写集。
+- CWP唯一本机未提交项仍为config/source_acquisition.yaml，未暂存。CWP本轮只更新总计划/进度/发现/验收卡并修正ET-LIVE报告状态，不改生产代码/配置。
+- 随后用一次独立TEMP、假provider正式CLI检查真正worker异常退出映射：初次临时脚本漏设stdin，得到invalid_json后立即修正脚本；修正版以SystemExit:7让子进程真实退出，CLI返回provider_error/retrieval_worker_failure，无key/body泄漏且worker临时目录为空，父TEMP根清理完成。无项目代码改动。
+- provider配置审查确认现有${PROJECT_ROOT}/${PYTHON_EXECUTABLE}变量已处理CWP与Python解释器定位；唯一脏差异是用户本地把CNINFO adapter指向隔离集成worktree并标记budget能力。保持该设置不动；CNINFO进入稳定StockInfo checkout后只校正adapter路径，不新增根路径解析层。

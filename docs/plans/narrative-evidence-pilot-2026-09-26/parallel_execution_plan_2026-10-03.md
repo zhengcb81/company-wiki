@@ -8,11 +8,11 @@
 |---|---|---|---|---|
 | MAIN/root | active | `C:\Users\郑曾波\Projects\company-wiki` 当前根 | 来源核心、共享CLI/Contract、Store/预算、总PWF、配置发布与全部合入 | [G1细则](gate_simplification_closeout_2026-10-04.md)、[总计划](task_plan.md) |
 | ET-DEADLINE | dispatched（用户确认），worktree已创建，交付待回报 | `C:\Users\郑曾波\Projects\earnings-transcripts-s3-deadline` | 两个正式采集入口硬deadline、进程回收、原协议/语言/hash不变 | [ET独立代码包](harness_lanes/et_retrieval_deadline_closeout.md) |
-| ET-LIVE | ready，可选小包 | `C:\Users\郑曾波\Projects\company-wiki-et-live-20261004` | 一次真实ET取数→临时CWP导入→pathless回读；FF路由另记确定性测试，不改生产仓 | [只读验收包](harness_lanes/et_transcript_live_import_acceptance.md) |
+| ET-LIVE | 完成一次授权尝试；HTTP 402，导入NOT RUN | `C:\Users\郑曾波\Projects\company-wiki-et-live-20261004` | 单次真实ET取数尝试与隔离报告；确定性CWP/FF测试已通过；未改生产仓 | [只读验收报告](C:/Users/郑曾波/Projects/company-wiki-et-live-20261004/report.md) |
 
 这三个实际目录互不包含，也不进入MAIN当前工作树施工。各卡列精确写集。共享Git对象库不等于共享工作目录；各线用自己的index/codex分支，MAIN负责最后合入。Git切主线/合入期间交付线冻结，不并发改同一目标分支。
 
-用户启动后在本对话报线名，root登记running，并从那时起不实施该写集。没有交付消息不推测完成；目录已存在先核身份/status，不reset不明工作。ET-LIVE使用稳定已发布ET main，不读ET-DEADLINE正在变化的目录，因此两者也能并行。
+ET-DEADLINE独占worktree仍未提交。MAIN只读集中责任包91 passed、1 failed；唯一失败测试把API捕获的`RuntimeError`误当成worker异常退出，见task_plan下一步；MAIN未改外线写集。ET-LIVE只读报告已交付：一次FMP GET被HTTP 402拒绝，不重试，临时根已清理。没有交付消息不推测代码线完成；目录已存在先核身份/status，不reset不明工作。
 
 ## 已交付，不再重新启动
 
@@ -28,7 +28,7 @@
 
 1. CWP来源reader/as-of/resolver/gap_plan/canonical_writer与FF SourceRef v2资格门已按TDD收敛；真实SHA、身份/期次/公开日、可回放locator保持自动验证，采集描述缺失仅诊断。
 2. G1-LEGACY旧入口退役及46项当前状态分类完成；CloseGapBinding、旧whole-catalog LLM summarizer及archive/prune代码未发现生产caller，不作为用户门，后续若无调用者随S5/S6清理。
-3. G1完成；S3转入真实ET工具→临时CWP导入→SourceRef/SourceExport pathless实读。ET-LIVE至多一个真实请求，ET-DEADLINE仍由独立worktree施工；两者不改MAIN共享来源代码。
+3. G1完成；ET-LIVE已进行一次请求但被FMP HTTP 402拒绝，不能声称真实原文导入完成。ET-DEADLINE仍在独立worktree；MAIN等其修正测试夹具并提交后验收，继续不改外线写集。
 4. 接收外线commit与短报告，核diff/接口/相关测试，解决冲突和跨仓接线。MAIN统一发布；外线不自己合main、不写他仓、不安装全局技能。
 5. 测试全用独立根，退出恢复原样；不丢原件。不造签名、人工授权文件、每helper审批或固定场景数。
 
@@ -58,7 +58,7 @@ ET-DEADLINE只改变内部执行边界。ET-LIVE只证明真实ET工具→临时
 
 ### I5 只读验收/空间审计→MAIN
 
-ET-LIVE独占目录 `report.md`包含实际请求数、commit、period/语言/SHA/size/pathless、临时根恢复和PASS/FAIL/NOT RUN；root采纳摘要，不让外线写CWP结果目录。
+ET-LIVE独占报告已交：工具调用1次、FMP GET 1次、HTTP 402（由`provider_entitlement_required`映射；公共结果未返回status字段）、FY2026 Q3、原语言请求、10秒/1MB、没有重试；未取得正文，故未运行导入/SourceRef。确定性测试分别CWP 7 passed、FF 17 passed；临时根清理且CWP生产配置指纹未变。详情见独占目录`report.md`；这份报告完成验收记录，但不代表live source链通过。
 
 SPACE-S5既有 `storage-audit/1`报告是施工输入，不是自动删除授权manifest。首批138,648,023 B候选仍需MAIN核变化；derived 2,826,010,634 B尚有reader及8,191条artifact引用，要先迁caller。DB freelist为0，单独VACUUM不释放空间。原件不进删除候选。
 

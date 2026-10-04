@@ -237,3 +237,17 @@ Git写入/联网用正常用户，sandbox .git只读不是产品权限。测试�
 - CWP电话会E2E原始失败不是导入合同错：复制目标`companies/Acme Inc/raw/investor_relations/transcripts/...`附加`.pid.importing`后超过Win32 MAX_PATH，`shutil.copyfile`因此抛`FileNotFoundError`。把临时测试根叶名由长UUID收缩为`e2e-`加12位随机后，同一真实子进程导入链全绿；CWP full-chain + importer CLI **12 passed**，测试根由finally清理。此项只改测试夹具路径，不改生产canonical目录或正文命名。
 - G1第3/4项审计：modern normalizer绑定版本187条均1.0.0且历史compat回放已存在；canonical叙述summary合同校验source ID/SHA、原语言与citation spans，局部不可回放span降coverage；GapPlan按项保留reuse/missing/newer/future/provider-error，不整体拒绝。旧whole-catalog LLM summary的禁词regex无生产caller；`CloseGapBinding`和source archive/prune API同样未找到生产caller。故当前CWP公开路径没有手工binding门/禁词误拒门；不为不活跃代码再开阻断式改造，随S5/S6按caller清理。
 - G1可以关闭；S3未关闭。FF companion确定性测试和fake-provider CWP全链均不能代替一次真实ET工具导入。S3需要检查ET-LIVE最多一次真实请求的实际权益/工具路径，使用全新临时CWP根，读回并验证原语言/hash/size/SourceRef，退出恢复为空；ET-DEADLINE仍在独立worktree，不并发编辑其写集。
+
+## 2026-10-04 — ET-LIVE provider entitlement 与deadline测试错配
+
+- 一次授权的真实ET工具调用返回unavailable/provider_entitlement_required。ET实现中_read_fmp_payload对FMP端点只调用一次session.get(..., allow_redirects=False)；HTTP 402被映射为此错误码，公共JSON没有保留http_status字段。可据此记录本次HTTP请求数1/status 402；无原文，后续导入及SourceRef验证必须标NOT RUN，不重试。
+- CWP importer 7项、FF companion 17项确定性前置全部通过。LIVE验收报告在独占目录，随机TEMP根已删除、生产两份来源配置hash未变；精确随机根名称未留存，报告如实注明。
+- ET-DEADLINE责任集91项通过、1项失败。失败测试注入RuntimeError作为session factory的异常；该调用处在transcript_api.fetch_transcript宽泛except Exception内，因此wire返回provider_error/unexpected_provider_failure是当前API语义。它不能证明worker死掉；runtime独立单测已经以SystemExit:7证明监督器的worker_failure路径。应调整e2e故障注入来造成子进程异常退出后重跑，除非真实异常退出仍映射错误，才改生产代码。
+- 截至检查时，ET-DEADLINE worktree从93fe52c起有未提交的三个修改文件及多个未跟踪runtime/测试/PWF文件；其自有PWF仍写Stage 2 Not Started，未有commit/handoff。保持只读等待该包交付，不把部分实现当作已合入。
+- 追加CLI层真实异常退出单点复核：初次临时脚本漏把请求写入stdin，故结果为invalid_json；修正stdin后SystemExit:7使worker真实非零退出，正式CLI稳定返回provider_error/retrieval_worker_failure，且无key/body泄漏、worker目录清空。失败测试确为夹具类别不符，尚需外线把其测试用例改成SystemExit后再运行整包并交commit/handoff。
+
+## 2026-10-04 — Provider路径可移植性边界
+
+- CWP配置loader已支持${PROJECT_ROOT}和${PYTHON_EXECUTABLE}；`JsonCommandAdapter`把adapter checkout作为子进程工作目录。这些是来源provider配置层的部署细节，SourceRef/SourceExport和consumer不接触它们。
+- 本地source_acquisition.yaml相对HEAD的三处差异是CNINFO adapter由1.1.0升至1.2.0、project_root从旧provider worktree改指向cwp-cninfo-bounded-budget worktree、显式打开supports_acquisition_budget。它是正在使用的集成测试配置，保持未提交/未暂存。
+- 所以当前所谓“配置可移植”无需新增通用DATA_LAKE_ROOT/adapter-path环境解析器。待bounded provider进入其稳定checkout后，仅将该adapter路径校正到真实canonical目录并发布正常配置；其他HK/US仍由纯外部Dayu配置持有，Dayu代码不改。
