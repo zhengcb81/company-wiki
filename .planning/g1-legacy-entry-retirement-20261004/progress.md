@@ -1,6 +1,7 @@
 # G1-LEGACY progress
 
-- 状态：实现完成，集中责任包 GREEN；交接与提交进行中。
+- 状态：**完成并已推送**。实现提交 `1cf8183`，交接提交 `23a2e6a`，
+  分支 `codex/g1-legacy-entry-retirement` → origin（pre-push 门 GREEN）。
 - 分支：`codex/g1-legacy-entry-retirement`（worktree `Projects\company-wiki-g1-legacy`，基线 `1cfec10`）。
 
 ## 已完成
