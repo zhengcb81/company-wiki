@@ -33,6 +33,8 @@ from company_wiki.automation.narrative_model import (
     NarrativeModelRequest,
     NarrativeModelResponse,
 )
+from company_wiki.automation.narrative_http_model import ModelHTTPError
+from company_wiki.automation.narrative_model_caller import NarrativeBudgetCallError
 from company_wiki.automation.narrative_summarize import NarrativeSummarizeHandler
 from company_wiki.source_contract import (
     EvidenceCoordinates,
@@ -340,7 +342,11 @@ def _run(
     loader = review_loader or ReviewLoader(review or selected.prompt_review)
     checkpoints: list[int] = []
     handler = NarrativeSummarizeHandler(model=model)
-    return handler(_context(selected, payload=payload, checkpoints=checkpoints)), loader, checkpoints
+    return (
+        handler(_context(selected, payload=payload, checkpoints=checkpoints)),
+        loader,
+        checkpoints,
+    )
 
 
 def test_summarize_handler_replay_is_canonical_and_selected_only() -> None:
@@ -493,12 +499,7 @@ def test_summarize_handler_rejects_model_path_leak_and_keeps_only_hash() -> None
                 {
                     "claim_id": "claim-path",
                     "text": (
-                        chr(67)
-                        + ":"
-                        + chr(92)
-                        + "private"
-                        + chr(92)
-                        + "source.pdf"
+                        chr(67) + ":" + chr(92) + "private" + chr(92) + "source.pdf"
                     ),
                     "evidence_ids": [selected.evidence_spans[0].span_id],
                     "claim_type": "company_statement",
@@ -600,15 +601,28 @@ def test_model_prompt_teaches_wire_schema_to_an_unconfigured_model() -> None:
     assert "needs_review" in request.instruction
 
 
-@pytest.mark.parametrize("language,role,flags", [("zh", "company_filing", ()), ("en", "analyst", ()), ("zh", "unknown", ("locator_unstable",))])
-def test_prompt_wire_example_passes_the_actual_summary_contract(language, role, flags) -> None:
+@pytest.mark.parametrize(
+    "language,role,flags",
+    [
+        ("zh", "company_filing", ()),
+        ("en", "analyst", ()),
+        ("zh", "unknown", ("locator_unstable",)),
+    ],
+)
+def test_prompt_wire_example_passes_the_actual_summary_contract(
+    language, role, flags
+) -> None:
     selected = _selection(language=language, role=role, quality_flags=flags)
     envelope = json.loads(NarrativeModelRequest.from_selection(selected).data_json)
     response = NarrativeModelResponse(
-        "example", "shape-only", NARRATIVE_PROMPT_VERSION,
+        "example",
+        "shape-only",
+        NARRATIVE_PROMPT_VERSION,
         canonical_json(envelope["response_example"]).encode("utf-8"),
     )
-    result = NarrativeSummarizeHandler._completed_result(selected, selected.prompt_review, response)
+    result = NarrativeSummarizeHandler._completed_result(
+        selected, selected.prompt_review, response
+    )
     result.validate_against(selected)
 
 
@@ -626,9 +640,13 @@ def test_summarize_keeps_paid_attempt_metrics_after_output_validation(case) -> N
             assert context.attempt.attempt_id
             return model.generate(request), expected
 
-    result = NarrativeSummarizeHandler(model=model, model_caller=Caller())(_context(selected))
+    result = NarrativeSummarizeHandler(model=model, model_caller=Caller())(
+        _context(selected)
+    )
     assert result.metrics == expected
-    assert result.outcome is (HandlerOutcome.SUCCEEDED if case == "valid" else HandlerOutcome.TERMINAL_FAILURE)
+    assert result.outcome is (
+        HandlerOutcome.SUCCEEDED if case == "valid" else HandlerOutcome.TERMINAL_FAILURE
+    )
 
 
 def test_skipped_document_never_reserves_or_calls_paid_model() -> None:
@@ -636,6 +654,71 @@ def test_skipped_document_never_reserves_or_calls_paid_model() -> None:
         def generate(self, *arguments):
             raise AssertionError("skipped document must use zero budget and HTTP")
 
-    result = NarrativeSummarizeHandler(model=None, model_caller=Caller())(_context(_selection(skipped=True)))
+    result = NarrativeSummarizeHandler(model=None, model_caller=Caller())(
+        _context(_selection(skipped=True))
+    )
     assert result.outcome is HandlerOutcome.SUCCEEDED
     assert result.metrics.tokens == 0
+
+
+class _MeteredHttpErrorCaller:
+    def __init__(self, error: NarrativeBudgetCallError) -> None:
+        self.error = error
+
+    def generate(self, context, request):
+        raise self.error
+
+
+@pytest.mark.parametrize(
+    ("code", "outcome", "http_status"),
+    [
+        ("MODEL_HTTP_CLIENT_ERROR", HandlerOutcome.TERMINAL_FAILURE, 400),
+        ("MODEL_HTTP_SERVER_ERROR", HandlerOutcome.RETRYABLE, 503),
+    ],
+)
+def test_summarize_handler_keeps_http_classification_and_bounded_status_detail(
+    code: str, outcome: HandlerOutcome, http_status: int
+) -> None:
+    selected = _selection()
+    metrics = HandlerMetrics(tokens=100, cost_usd=0.000030, duration_ms=6)
+    caller = _MeteredHttpErrorCaller(
+        NarrativeBudgetCallError(code, outcome, metrics, http_status=http_status)
+    )
+
+    raw = NarrativeSummarizeHandler(model=None, model_caller=caller)(_context(selected))
+
+    assert raw.outcome is outcome
+    assert raw.error is not None and raw.error.code == code
+    assert (
+        raw.error.detail
+        == f"metered model attempt did not complete (http_status={http_status})"
+    )
+    assert raw.metrics == metrics
+    assert raw.effects == ()
+    roundtrip = HandlerResult.from_dict(raw.to_dict())
+    assert roundtrip == raw
+
+
+@pytest.mark.parametrize(
+    ("status", "outcome", "code"),
+    [
+        (400, HandlerOutcome.TERMINAL_FAILURE, "MODEL_HTTP_CLIENT_ERROR"),
+        (503, HandlerOutcome.RETRYABLE, "MODEL_HTTP_SERVER_ERROR"),
+    ],
+)
+def test_summarize_handler_classifies_bare_model_http_errors_with_bounded_detail(
+    status: int, outcome: HandlerOutcome, code: str
+) -> None:
+    selected = _selection()
+    model = ReplayModel(error=ModelHTTPError(status))
+
+    raw, _, _ = _run(selected, model=model)
+
+    assert raw.outcome is outcome
+    assert raw.error is not None and raw.error.code == code
+    assert (
+        raw.error.detail
+        == f"model request failed an HTTP status check (http_status={status})"
+    )
+    assert len(model.calls) == 1
+    assert raw.effects == ()

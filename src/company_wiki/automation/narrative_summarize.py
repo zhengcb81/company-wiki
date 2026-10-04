@@ -28,6 +28,7 @@ from .narrative_model import (
     NarrativeModelResponse,
     decode_model_draft,
 )
+from .narrative_http_model import ModelHTTPError
 from .narrative_model_caller import NarrativeBudgetCallError, NarrativeModelCaller
 
 
@@ -38,7 +39,12 @@ class _SummaryFailure(Exception):
     detail: str
 
 
-def _failure(code: str, outcome: HandlerOutcome, detail: str, metrics: HandlerMetrics | None = None) -> HandlerResult:
+def _failure(
+    code: str,
+    outcome: HandlerOutcome,
+    detail: str,
+    metrics: HandlerMetrics | None = None,
+) -> HandlerResult:
     return HandlerResult(
         outcome=outcome,
         result={},
@@ -49,7 +55,9 @@ def _failure(code: str, outcome: HandlerOutcome, detail: str, metrics: HandlerMe
     )
 
 
-def _success(result: NarrativeSummaryResult, metrics: HandlerMetrics | None = None) -> HandlerResult:
+def _success(
+    result: NarrativeSummaryResult, metrics: HandlerMetrics | None = None
+) -> HandlerResult:
     return HandlerResult(
         outcome=HandlerOutcome.SUCCEEDED,
         result=result.to_dict(),
@@ -91,8 +99,7 @@ def _validate_dependency_identity(
     if (
         selected.source_ref.to_dict() != payload.source_ref.to_dict()
         or selected.source_metadata.to_dict() != payload.source_metadata.to_dict()
-        or selected.expected_read_policy_sha256
-        != payload.expected_read_policy_sha256
+        or selected.expected_read_policy_sha256 != payload.expected_read_policy_sha256
     ):
         raise _SummaryFailure(
             "DEPENDENCY_INVALID",
@@ -119,7 +126,23 @@ class NarrativeSummarizeHandler:
         except _SummaryFailure as exc:
             return _failure(exc.code, exc.outcome, exc.detail)
         except NarrativeBudgetCallError as exc:
-            return _failure(exc.code, exc.outcome, "metered model attempt did not complete", exc.metrics)
+            status = (
+                "" if exc.http_status is None else f" (http_status={exc.http_status})"
+            )
+            return _failure(
+                exc.code,
+                exc.outcome,
+                "metered model attempt did not complete" + status,
+                exc.metrics,
+            )
+        except ModelHTTPError as exc:
+            return _failure(
+                exc.error_code,
+                HandlerOutcome.RETRYABLE
+                if exc.retryable
+                else HandlerOutcome.TERMINAL_FAILURE,
+                f"model request failed an HTTP status check (http_status={exc.status_code})",
+            )
         except ModelTimeoutError:
             return _failure(
                 "MODEL_TIMEOUT", HandlerOutcome.RETRYABLE, "model request timed out"
@@ -165,8 +188,12 @@ class NarrativeSummarizeHandler:
         except _SummaryFailure as exc:
             return _failure(exc.code, exc.outcome, exc.detail, metrics)
         except ModelResponseError:
-            return _failure("MODEL_RESPONSE_INVALID", HandlerOutcome.TERMINAL_FAILURE,
-                            "model response violates its transport contract", metrics)
+            return _failure(
+                "MODEL_RESPONSE_INVALID",
+                HandlerOutcome.TERMINAL_FAILURE,
+                "model response violates its transport contract",
+                metrics,
+            )
         return _success(completed, metrics)
 
     @staticmethod
