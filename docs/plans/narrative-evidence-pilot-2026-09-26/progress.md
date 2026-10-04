@@ -454,3 +454,9 @@ S0/N4A及S2模型预算基础、CLI阶段与CI修复已正常发布，当前CI�
 - RED：新退休合同先因`SourceCatalog.normalize`仍存在而失败；基于生产调用及下游依赖调查，把目标改为只退休无人调用的自动Worker，并加注释约束normalize API在读者迁移前保留。GREEN集中集：**127 passed / 64.28s**（退休入口、worker control/status、摘要、SourceCatalog pipeline/section、fingerprint）。
 - 初次sandbox运行125 passed/2失败：HTML parser的Windows spawn受受限`<stdin>`/本机权限影响，python-docx etree DLL access denied；按项目正常用户上下文单独复核2 passed，并重跑同一127项完整集全绿。pytest专用目录最终恢复/删除。stdin诊断脚本和一次跨执行账户清理失败均记录为测试工具问题，已按真实脚本入口和原目录owner纠正。
 - 代码和测试限定CWP，未改`config/source_acquisition.yaml`；RF的fcap两份weekly assurance用户记录保持原样。N4-T2/N4C和真实模型运行仍未完成。
+
+## 2026-10-05 — S5退役提交发布与CI验收
+
+- `ff0eec01137eac23e5142ce7863e20efd27fdfd4` 已推送 `origin/master`；pre-push快速契约门通过。GitHub Actions [37244400156](https://github.com/zhengcb81/company-wiki/actions/runs/37244400156) 对应head SHA完全匹配，最终 `completed/success`（Fast checks Python 3.12）。Ruff、严格类型检查、compileall/config doctor、unit、focused contract、CLI smoke 与 secret scan 均成功。
+- N4-T1的独立收据此前已确认 ACCEPTED/INTEGRATED/PUBLISHED（114项跨层回归加真实loopback HTTP 400持久账本E2E；主线CI run 37241977614 success），此次没有新变更或需补验内容。N4-T2仍待交付。
+- 发布后 `master` 与 `origin/master` 同步；仅保留原用户改动 `config/source_acquisition.yaml` 未提交，没有暂存或覆盖它。

@@ -19,7 +19,7 @@
 - **外部审计卡**：StockQAbyLLM 与 MeetingConverter 报告已收到并验收，唯一运行数据保留。invest-quick-scan 另有独立项目正在进行；本线不检查、不修改、不重复派发该仓任务。
 - company-wiki lane 的审计报告仍需从 harness 回复接收；本机 `config/source_acquisition.yaml` 用户改动和本计划审计结果目录继续排除在本线写集之外。
 
-**MAIN当前下一步：**等待 N4-T2 自己的新增提交，与已合入 N4-T1 联合验收后推进有限真实批次。T1 已发布（MAIN 跨层114项+持久账本E2E 1项通过）；MeetingConverter 已合入 master，主线CI通过。S5 已退役没有生产调用者的旧 SourceCatalogWorker 自动整库循环；127项集中回归通过。`extract-sections` 公开入口也已退出。`SourceCatalog.normalize/summarize` 按需API暂留：RF仍默认走旧SourceBundle，CWP证据查询/质量读取和一批来源测试依赖 normalized；等这些消费者迁移后再关闭，不重新启用后台全量写入。N4C真实摘要、ET TXT来源和DB/derived主体迁移仍未完成。
+**MAIN当前下一步：**等待 N4-T2 自己的新增提交，与已合入 N4-T1 联合验收后推进有限真实批次。T1 已发布（MAIN 跨层114项+持久账本E2E 1项通过）；MeetingConverter 已合入 master，主线CI通过。S5 已退役没有生产调用者的旧 SourceCatalogWorker 自动整库循环：127项集中回归通过，提交 `ff0eec0` 已发布，CI run `37244400156` success。`extract-sections` 公开入口也已退出。`SourceCatalog.normalize/summarize` 按需API暂留：RF仍默认走旧SourceBundle，CWP证据查询/质量读取和一批来源测试依赖 normalized；等这些消费者迁移后再关闭，不重新启用后台全量写入。N4C真实摘要、ET TXT来源和DB/derived主体迁移仍未完成。
 
 ## 当前基线（2026-10-04正常用户上下文复核）
 
