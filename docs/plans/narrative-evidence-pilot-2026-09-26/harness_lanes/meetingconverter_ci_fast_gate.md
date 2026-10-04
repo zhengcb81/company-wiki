@@ -1,9 +1,11 @@
 # MeetingConverter：CI 零任务根因与快速可靠门
 
-Status: READY TO DISPATCH
+Status: ACCEPTED / MERGED TO MASTER / PUBLISHED / MAIN CI GREEN
 Card date: 2026-10-04
 Target repository: C:/Users/郑曾波/Projects/MeetingConverter
 Owner: isolated MeetingConverter harness; company-wiki MAIN only accepts the handoff.
+
+MAIN 已验收并快进发布 `master@8a33a7f`，新主线 CI 一个 job 实际跑测试并成功，22 秒。见 [MAIN 验收收据](results/meetingconverter_ci_acceptance_2026-10-04.md)。以下为原施工要求，不重新派发。
 
 ## Goal
 

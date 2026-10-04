@@ -436,3 +436,10 @@ S0/N4A及S2模型预算基础、CLI阶段与CI修复已正常发布，当前CI�
 - 删除extract-sections CLI注册/分派与SourceCatalog.extract_sections方法，修正CLI用途说明。旧纯解析和artifact完整性回归通过显式低级函数创建隔离legacy夹具，原断言保持；不再为这些fixture保留公开生产入口。
 - 集中入口退休、章节解析与producer binding测试 **48 passed/24.30s**；改动Python Ruff与diff check GREEN。pytest禁用第三方插件仅有既有asyncio_mode warning；测试根短路径未relocate。正式新Worker回归与N4-T1集成一起执行。
 - 旧normalize/summarize库方法、兼容旧Worker类和RF artifact读取仍待后续；没有删除2.826GB derived或生产DB span。当前用户报告N4-T1完成，已定位提交4a53080（base349d331），远端分支一致，六个文件符合独占写集；没有改该worktree，先将本轮入口改动commit，再查收集成T1。
+
+## 2026-10-04 — N4-T1与MeetingConverter外包验收/并线
+
+- N4-T1外线4a53080只含六个允许文件；MAIN cherry-pick为5de9154，没有覆盖其旧基线之后的PWF/紧凑请求/S5内容。外线工作树保持原样，T2可从4a53080接续，只交自己的新增提交。跨层114 passed/48.56s；MAIN新增实际HTTP400→正式CLI→SQLite attempt/unknown reservation端到端1 passed/6.59s，敏感正文/密钥不入输出或库。详见harness_lanes/results/n4t1_model_transport_acceptance_2026-10-04.md。
+- MeetingConverter仅三个允许文件，交付8a33a7f；分支push/PR实际非空job绿18/19秒。MAIN正常用户上下文fetch核ref、merge --ff-only并push master；.coverage/config.json完整SHA/size/mtime和output清单前后相同，原dirty .coverage保留。PR1自动merged=true；新master run37241709261实际job绿22秒、Run tests2秒。外线全量204测试，本次未删业务回归；MAIN未在主checkout跑pytest。详见harness_lanes/results/meetingconverter_ci_acceptance_2026-10-04.md。
+- MeetingConverter既存mimo.py:137未定义logger仍未修，卡片禁止应用代码改动，不把CI绿误报业务缺陷已消失。当前没有恢复全仓lint要求。
+- N4C仍未完成；T2仍待交付。真实新run继续计入旧10,325token/$0.005258未知reservation，不扩总60,000token/$0.10预算；ET live仍402。用户配置、RF owner、IQS与Dayu均未改。

@@ -346,3 +346,10 @@ Git写入/联网用正常用户，sandbox .git只读不是产品权限。测试�
 - 本轮先处理CWP独占的extract-sections CLI和SourceCatalog.extract_sections方法：它们是normalized文件的实际公开消费者/section派生生产者。退休这两个入口后，低级纯章节解析及历史artifact测试仍保留，用显式低级函数生成隔离历史夹具；不让旧fixture迫使公开入口继续存在。normalizer/fingerprint所需解析、原件读取、query/export和新叙述选材保持各自职责。
 - 当前旧Worker的Python兼容类仍有extract_sections调用；其公开执行/启动入口此前已退休，不算活动入口。本轮不宣称所有旧writer或derived消费者已退出，RF及SourceCatalog旧normalize/summarize库方法仍列后续。外部N4-T1/T2写集不修改。
 - 本轮extract-sections CLI及SourceCatalog公开方法已删除；TDD三项RED转GREEN，入口/纯章节解析/历史artifact binding合计48项通过。历史fixture改用原低级section函数，定位/正文/质量等断言未放松。新叙述入口按source raw选择与final包工作，旧derived消费的剩余项仍由后续S5处理。
+
+## 2026-10-04 — N4-T1与MeetingConverter外包验收/并线
+
+- N4-T1外线4a53080只含六个允许文件；MAIN cherry-pick为5de9154，没有覆盖其旧基线之后的PWF/紧凑请求/S5内容。外线工作树保持原样，T2可从4a53080接续，只交自己的新增提交。跨层114 passed/48.56s；MAIN新增实际HTTP400→正式CLI→SQLite attempt/unknown reservation端到端1 passed/6.59s，敏感正文/密钥不入输出或库。详见harness_lanes/results/n4t1_model_transport_acceptance_2026-10-04.md。
+- MeetingConverter仅三个允许文件，交付8a33a7f；分支push/PR实际非空job绿18/19秒。MAIN正常用户上下文fetch核ref、merge --ff-only并push master；.coverage/config.json完整SHA/size/mtime和output清单前后相同，原dirty .coverage保留。PR1自动merged=true；新master run37241709261实际job绿22秒、Run tests2秒。外线全量204测试，本次未删业务回归；MAIN未在主checkout跑pytest。详见harness_lanes/results/meetingconverter_ci_acceptance_2026-10-04.md。
+- MeetingConverter既存mimo.py:137未定义logger仍未修，卡片禁止应用代码改动，不把CI绿误报业务缺陷已消失。当前没有恢复全仓lint要求。
+- N4C仍未完成；T2仍待交付。真实新run继续计入旧10,325token/$0.005258未知reservation，不扩总60,000token/$0.10预算；ET live仍402。用户配置、RF owner、IQS与Dayu均未改。

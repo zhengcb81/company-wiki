@@ -250,3 +250,42 @@ def test_cli_refuses_model_work_without_http_or_overwriting_originals(tmp_path_f
             assert_originals_and_foreign_jobs_untouched(state, originals, output=process.stdout + process.stderr)
         finally:
             state.catalog.close()
+
+
+def test_cli_persists_safe_http_status_and_unknown_charge_without_provider_body(
+    tmp_path_factory, loopback_model_server,
+):
+    sentinel = b"PROVIDER_ERROR_BODY_SENTINEL"
+    loopback_model_server.response_status = 400
+    loopback_model_server.error_body = sentinel + KEY.encode()
+    with isolated_batch_directory(tmp_path_factory) as root:
+        state = _prepare(root, loopback_model_server.endpoint, one_source=True)
+        try:
+            originals = _originals(state)
+            process, result = _invoke(state)
+            assert process.returncode == 2 and result["status"] == "failed"
+            assert len(loopback_model_server.requests) == 1
+            assert loopback_model_server.errors == []
+            run_store = NarrativeRunStore(state.store.db_path)
+            reservations = run_store.reservations_for_run("cli-e2e")
+            assert len(reservations) == 1
+            record = reservations[0]
+            assert record.error_code == "MODEL_HTTP_CLIENT_ERROR"
+            assert record.usage_status == "unknown"
+            assert record.charged_tokens == record.reserved_tokens > 0
+            assert result["budget"]["tokens"] == record.reserved_tokens
+            assert result["budget"]["unknown_reservations"] == 1
+            assert record.output_bytes == 0 and record.response_sha256 is None
+            attempt = state.store.get_attempt(record.attempt_id)
+            assert attempt.error_code == "MODEL_HTTP_CLIENT_ERROR"
+            assert attempt.error_detail == (
+                "metered model attempt did not complete (http_status=400)"
+            )
+            assert sentinel.decode() not in process.stdout + process.stderr
+            assert sentinel not in state.store.db_path.read_bytes()
+            assert KEY.encode() not in state.store.db_path.read_bytes()
+            assert_originals_and_foreign_jobs_untouched(
+                state, originals, output=process.stdout + process.stderr,
+            )
+        finally:
+            state.catalog.close()

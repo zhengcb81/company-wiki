@@ -19,7 +19,7 @@
 - **外部审计卡**：StockQAbyLLM 与 MeetingConverter 报告已收到并验收，唯一运行数据保留。invest-quick-scan 另有独立项目正在进行；本线不检查、不修改、不重复派发该仓任务。
 - company-wiki lane 的审计报告仍需从 harness 回复接收；本机 `config/source_acquisition.yaml` 用户改动和本计划审计结果目录继续排除在本线写集之外。
 
-**MAIN当前下一步：**模型输入冗余已在df529a9收缩并通过远端CI；S5首批七类缓存138.65MB已清理且原件/来源库校验通过，收据在3f7dd2b发布。继续接收N4-T1/T2并整合正式Worker；交付等待期间按S5/S6细则B推进MAIN独占的旧入口迁移/退休。S4/N4C仍没有最终真实摘要；新run计入旧未知用量并服从现有aggregate预算。电话会TXT仍没有live来源收据，用户配置和独立owner工作保持各自归属。
+**MAIN当前下一步：**接收N4-T2自己的新增提交，与已合入的N4-T1联合验证后推进有限真实批次；T1已在5de9154集成，MAIN跨层114项及HTTP400持久账本E2E 1项通过。MeetingConverter CI卡已快进并发布master@8a33a7f，新主线CI绿、job22秒；不重新派发。模型紧凑请求df529a9及首批缓存清理138.65MB已发布；CWP extract-sections公开CLI/方法在71f867a退休，48项集中回归通过。等待T2期间继续S5细则B其余实际caller迁移，不改外线工作树。S4/N4C仍没有最终真实摘要；新run计入旧未知用量并服从现有aggregate预算。电话会TXT仍没有live来源收据，用户配置和独立owner工作保持各自归属。
 
 ## 当前基线（2026-10-04正常用户上下文复核）
 
@@ -44,8 +44,8 @@ StockWiki/IQS已有owner工作及消费者交付，本轮只读，不重复分�
 | S2 N4B | complete（节点A/B集中验收已绿；整体N4仍待独立S4/N4C） | real factory/HTTP adapter/full prompt; persistent token/cost reservation in AUTO; finite batch CLI; unique final artifact and small recovery receipt; public legacy whole-catalog Worker and startup routes removed | node A accounting/concurrency green; node B formal CLI/HTTP/kill/ACK and focused regression green; CWP producer limits are now connected and have real-data E2E evidence; proceed to N4C after G1/S3 closeout |
 | G1 残余门禁/签收精简（第一优先） | complete（CWP来源链与G1-LEGACY已合入；FF SourceRef v2于`e1eda60`推送） | 46项清单已分为已退出、必要自动校验、能力边界及外仓owner事项；未找到生产调用者的旧摘要/binding/archive工具不再作为当前门，留待S5/S6 caller清理 | CWP来源/as-of 64项、resolver/planner/canonical 100项与G1-LEGACY 170 passed / 1 deselected既有收据；FF集中回归177 passed / 1 skipped / 39 subtests，Ruff及push gate GREEN；电话会provider→CWP导入端到端12 passed。保留SHA、来源身份/期间/公开日、可回放引用和资源限制 |
 | S3 SourceRef/SourceExport 虚拟化与来源默认收敛（第二优先） | **complete**（FF `eb0af13`、ET `63c4090`已推送；CWP SourceExport已发布；合入后FF→ET→CWP链及各仓责任集均GREEN。live FMP仍受HTTP 402权益限制，不影响接口合同完成） | 上层只用SourceRef/SourceExport v2；复用FF exact/latest_as_of和pathless reader，不依赖物理目录；电话会走正式ET CLI并由CWP持有原件；provider定位仍在adapter层 | ET deadline分支已快进到main；其`/1`、`/2`、discovery/candidate wire与goldens未改，CWP importer现有provider-aware FMP JSON合同经真实三仓离线链验证。跨仓脚本验证FF uppercase exchange转ET小写、精确FY/Q、FMP原JSON与canonical text各自SHA/size、unknown publication、pathless SourceRef、重复读取不触provider，以及超时后worker结果清理。合并后ET `tests/test_retrieval_cli_e2e.py` 6 passed、10 goldens matched；FF companion 5 passed且Ruff clean；CWP FMP importer 5 passed。FF只在owner目录用`eb0af13`修正交易所slug与3秒清理窗口；ET只更新过期golden说明并合入`63c4090`。旧“Motley 24字段唯一可导入”记录已由当前源码/测试更正。真实FMP HTTP 402不作为代码合同门；正费用额度没有实际账单计量，本计划只声称FF zero-cost拒绝与单次provider请求，不声称美元账单cap已实测。 |
-| S4 N4C real samples and storage plan | in_progress（首批有限真实试跑已运行，尚无最终摘要；年报/招股书选材成功，季报/IR空选材，模型旧错误缺安全HTTP诊断。MAIN正在收缩请求冗余；N4-T1/T2为独立施工卡，ET TXT live仍未取得） | four real document types / consumer reads / language and citation coverage / total incremental bytes; retain only status/stop/uninstall compatibility for old worker process cleanup | node C; bounded real batch, then measured 1/2/4 parallelism；至少覆盖年报、招股/再融资、IR和电话会/季度类中的四种，记录摘要证据定位和新增空间 |
-| S5 B2逐caller清理 | in_progress（[首批缓存清理完成](harness_lanes/results/s5_first_cache_cleanup_2026-10-04.md)，主体迁移待办） | [S5/S6实施细则](s5_s6_legacy_storage_implementation.md)；已删除138,648,023 B/923文件，原件/生产DB保护校验及四份原件CLI前后实读通过。2.826 GB `derived/` 仍有 RF旧默认artifact读取、CWP sections及8,191条路径引用，须先迁移/退休 | 每集合实际释放量及原件/来源事实保护收据；只有存储大节点做集中接口验收，不逐文件复核 |
+| S4 N4C real samples and storage plan | in_progress（首批有限真实试跑已运行，尚无最终摘要；年报/招股书选材成功，季报/IR空选材，模型请求已收缩；N4-T1安全HTTP诊断已集成并经MAIN离线跨层验收，N4-T2仍待交付，ET TXT live仍未取得） | four real document types / consumer reads / language and citation coverage / total incremental bytes; retain only status/stop/uninstall compatibility for old worker process cleanup | node C; bounded real batch, then measured 1/2/4 parallelism；至少覆盖年报、招股/再融资、IR和电话会/季度类中的四种，记录摘要证据定位和新增空间 |
+| S5 B2逐caller清理 | in_progress（[首批缓存清理完成](harness_lanes/results/s5_first_cache_cleanup_2026-10-04.md)，extract-sections公开CLI/方法已退休，主体迁移待办） | [S5/S6实施细则](s5_s6_legacy_storage_implementation.md)；已删除138,648,023 B/923文件，原件/生产DB保护校验及四份原件CLI前后实读通过。2.826 GB `derived/` 仍有 RF旧默认artifact读取、CWP剩余旧normalize/summarize消费者及8,191条路径引用，须先迁移/退休 | 每集合实际释放量及原件/来源事实保护收据；只有存储大节点做集中接口验收，不逐文件复核 |
 | S6 DB事实收缩与收尾 | pending | 表级盘点，删除不可再消费派生/废索引并收缩，来源版本/撤回事实保留；旁路兼容、docs/hook残留清完 | 同一存储节点；commit/push、PWF收尾 |
 | 可选 exact-SHA原件对象去重 | 不阻S0–S6完成 | 先用已有SHA/size找候选、逐候选验字节，保留所有source/location版本事实 | 有真实收益才实施；不报未测节省量 |
 
@@ -109,11 +109,11 @@ TDD框住公开行为，不把旧签收规则写进新测试。仅S0相关收口
 
 ## Next Step
 
-**MAIN下一动作：**核N4-T1/T2交付并集成共享Worker；未交付期间按S5/S6细则B只处理MAIN独占的旧入口迁移/退休，不改外线施工现场。首批七类缓存138.65MB已清理并验证，不重跑。新真实run先核算旧unknown reservation和输入/输出预留，费用/token不足不得发请求。真实摘要/consumer、P1/P2/P4及S5/S6主体迁移继续待办；Dayu403和ET402单独记录，不伪造成功。
+**MAIN下一动作：**接收N4-T2新增提交，与已集成T1联合验收；等待期间推进S5细则B剩余旧caller迁移，不改外线施工现场。T1离线跨层114+1项通过，MeetingConverter已合master且主线CI绿，CWP旧section公开入口已退休。首批七类缓存138.65MB已清理并验证，不重跑。新真实run先核算旧unknown reservation和输入/输出预留，费用/token不足不得发请求。真实摘要/consumer、P1/P2/P4及S5/S6主体迁移继续待办；Dayu403和ET402单独记录，不伪造成功。
 
 ## 2026-10-04：新增三张可独立派发的施工卡
 
-三张卡均为 READY TO DISPATCH；本段记录的是可派发计划，不表示施工已经开始。StockQAbyLLM 与 MeetingConverter 先前的只读盘点交付仍按已有收据验收；invest-quick-scan 仍由其独立任务负责，本计划不检查、不修改、不重复派发。
+三张卡用户均已派发：N4-T1已交付并集成MAIN；MeetingConverter已验收、合入并发布master且新主线CI绿；N4-T2仍待交付。本段原写集和接口继续适用于T2，不重派已完成卡。StockQAbyLLM 与 MeetingConverter 先前的只读盘点交付仍按已有收据验收；invest-quick-scan 仍由其独立任务负责，本计划不检查、不修改、不重复派发。
 
 | 卡 | 仓库 / 隔离工作树 | 精确责任 | 与其他卡的隔离方式 |
 |---|---|---|---|
@@ -126,7 +126,7 @@ N4-T1与N4-T2文件写集互斥。并行施工时从同一已提交主线基线�
 ### N4C复盘：已证实的问题与尚未证实的原因
 
 - 2026-10-04隔离运行n4c-20261004-wave1已停止且不重跑：四个SourceRef的原件SHA/身份可验证；年报选择出3条span，招股书选择出160条span但summary触发预算拒绝；中文季报和IR均零候选/零span并报PARSER_INCOMPLETE。失败账本没有HTTP状态/响应摘要，因此不能反推MiniMax那次请求究竟因HTTP错误还是2xx响应格式失败。
-- 源码已证实一个可修复的可观测性缺口：HTTP适配器携带状态码抛出ModelHTTPError，但预算调用层归类为MODEL_RESPONSE_INVALID且丢掉状态码。N4-T1只改诊断/分类和账本安全信息，不能宣称这已证明旧请求根因，也不能降低未知用量按预留上限计费的规则。
+- 此前可观测性缺口已由N4-T1修复：HTTP状态按4xx/5xx归类且安全数字状态保存在attempt中，未知用量保守计费不变。MAIN已有持久账本E2E证据；不能宣称这已证明旧请求根因，也不能降低未知用量按预留上限计费的规则。
 - 季报和IR的正式来源读取、PDF抽取、表格覆盖均成功；选择器仍未选到业务叙述。N4-T2优先以离线合成中文案例证明选材与跳过逻辑；不得把解析未覆盖当成“无叙述可跳过”，也不能以财报数字span代替主营进展证据。
 - 旧运行约0.005258美元的未知预留继续保留在旧run账本；不得复用该run id或把未知费用清零。新真实模型检查由MAIN在两张N4卡集成且离线验收后另建run，并受剩余批次预算约束。
 

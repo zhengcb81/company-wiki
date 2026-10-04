@@ -108,7 +108,7 @@ FF `codex/transcript-companion@29085f7`现存工作树改动`fetch_filing.py`/`f
 
 ## 2026-10-04 新增三张互斥施工卡
 
-以下三卡已写成可以单独交给外部harness的完整接口，当前均为READY TO DISPATCH，尚未派发/施工。与之前已验收的StockQAbyLLM、MeetingConverter只读盘点卡区分：这里的MeetingConverter是后续CI零任务根因与快速门施工；若远端最新CI已正常运行测试，卡片要求只交现状证据，不制造无必要改动。
+以下三卡已写成可以单独交给外部harness的完整接口，用户已派发；N4-T1已交付并集成MAIN、MeetingConverter已合master且新主线CI绿，N4-T2待交付。以下写集为原卡接口，不重派已完成任务。与之前已验收的StockQAbyLLM、MeetingConverter只读盘点卡区分：这里的MeetingConverter是后续CI零任务根因与快速门施工；若远端最新CI已正常运行测试，卡片要求只交现状证据，不制造无必要改动。
 
 | 卡 | 仓库 | 独占目录与文件写集 | 依赖 / 主线合入 |
 |---|---|---|---|
@@ -127,3 +127,9 @@ MeetingConverter使用独立Git仓库，不改变CWP、StockQAbyLLM、IQS或转�
 集中主线回归：相关入口/兼容测试 **170 passed, 1 deselected**；单独针对新增行为的组 **27 passed**；Ruff 与 staged/unstaged `git diff --check` 通过。唯一 deselect 是包内全仓 Git 写集断言：外包原隔离工作树已通过，合入主仓后该断言会把本次有意的主线改动也算成包越界。外包 handoff 的该处收据与主线实际回归均保留。机器专用 `config/source_acquisition.yaml` 未纳入合并。
 
 G1-LEGACY 写集已关闭；G1 总阶段仍因 FF SourceRef v2 资格门而保持进行中。ET-DEADLINE 继续在独立 worktree 施工，不合并到本次范围。
+
+## 2026-10-04 外线交付状态
+
+- N4-T1：4a53080 → MAIN 5de9154，跨层114+1项通过；[收据](harness_lanes/results/n4t1_model_transport_acceptance_2026-10-04.md)。不改外线worktree；T2若以4a53080为base，MAIN只集成之后的T2提交。
+- MeetingConverter：master/origin/master同为8a33a7f，PR1已merged，新主线CI真实job成功22秒；[收据](harness_lanes/results/meetingconverter_ci_acceptance_2026-10-04.md)。独立卡收尾，不进N4C关键路径。
+- N4-T2与N4C尚待交付/验收；S5首批缓存和旧section公开入口退出已完成，不重复施工。

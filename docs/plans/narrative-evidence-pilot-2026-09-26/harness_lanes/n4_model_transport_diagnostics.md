@@ -1,8 +1,10 @@
 # N4-T1：MiniMax transport error diagnostics and budget settlement
 
-Status: READY TO DISPATCH
+Status: ACCEPTED / INTEGRATED INTO MAIN (5de9154)
 Card date: 2026-10-04
 Owner: isolated harness; MAIN owns final live-provider and cross-layer acceptance.
+
+外线 4a53080 已 cherry-pick；MAIN 跨层 114 项和新增 HTTP 400 持久账本端到端 1 项通过。见 [验收收据](results/n4t1_model_transport_acceptance_2026-10-04.md)。N4-T2/N4C仍待完成，不重新派发 T1。
 
 ## Goal
 
