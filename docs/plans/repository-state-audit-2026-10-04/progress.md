@@ -23,3 +23,5 @@
 ## 下一步
 
 补齐总览/交接模板/独立 lane cards，然后按 TDD 更新 CWP 仍指向 StockInfoDownloader 的活动默认路径与当前说明；定向验证后核对新目录和用户配置未混入暂存集。
+
+最终交付：`scripts/config.py` 的 downloader 默认目录切换到 StockInfoDLSimple；旧 `collect_reports.py` 继续被 legacy writer freeze 拦截，不重接 StockInfoDownloader。目标配置 `config/source_acquisition.yaml` 未暂存、未改动。定向配置测试 9 项通过，Ruff 与 diff check 通过；commit `d8e6054` 已推送 `origin/master`，pre-commit 和 pre-push fast contract smoke 均为 GREEN。当前仅剩用户原有 `config/source_acquisition.yaml` 未提交修改。
