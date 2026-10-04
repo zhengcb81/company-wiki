@@ -28,7 +28,7 @@
 
 - 当前 canonical source-catalog acquisition provider 配置读取 `config/source_acquisition.yaml`；本机文件（用户已有 dirty 改动）明确指向 `../StockInfoDLSimple/cwp-cninfo-bounded-budget`、provider `stockinfo-cninfo` 1.2.0 并启用 budget capability。该本地配置不能被本轮或 harness 覆盖。
 - `scripts/run_downloader.py` 的真实 CLI 已调用 `StockInfoDLSimple`，而且搜索到的 CWP 实际 bounded CNINFO 实测记录也指向它。
-- 旧 `scripts/collect_reports.py` 和 `scripts/config.py` 留有 StockInfoDownloader 字样/默认路径；`collect_reports.py` 在 `writer_policy` 下属于被冻结的 legacy mixed entry，不能为了“切换 provider”而重新启用它的 legacy wiki writer。后续代码收敛应把活动默认/说明改到 StockInfoDLSimple，并将该冻结入口明确标记为非 canonical/不可执行，不要调用 StockInfoDownloader，也不要造一套新的下载链。
+- 旧 `scripts/collect_reports.py`、`scripts/batch_download.sh` 和 `scripts/config.py` 留有 StockInfoDownloader 字样/默认路径；`collect_reports.py` 在 `writer_policy` 下属于被冻结的 legacy mixed entry，不能为了“切换 provider”而重新启用它的 legacy wiki writer。`batch_download.sh` 原先仍会直写公司目录、绕过 Source Catalog，已改为 fail-closed 退役提示；不调用 StockInfoDownloader，也不造一套新的下载链。
 - 该审计仅更新 CWP 内适配路径默认/说明和测试；不会改 StockInfoDLSimple 源码、不会改其 WIP 工作树，也不会改用户的 source acquisition 配置。
 
 ### 已完成的 CWP provider 对齐

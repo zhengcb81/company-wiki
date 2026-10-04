@@ -56,7 +56,7 @@ python3 scripts/config.py
 
 公司资料的正式发现、下载和入库由 Source Catalog 管理；A 股 provider 使用 StockInfoDLSimple。下载先进入受控 staging，由 company-wiki 校验原件身份、SHA-256 和 manifest 后入库。排错请从 [Source Acquisition 运维说明](OPERATIONS.md) 与 [去重设计](source-acquisition-dedup-design.md) 开始。
 
-旧 `StockInfoDownloader` 配置和 `collect_reports.py` 写入目录说明已经退役；`collect_reports.py` 受 legacy writer freeze 拦截。不要修改旧仓的 `config.json`，也不要从旧入口直接写 `companies/`。
+旧 `StockInfoDownloader` 配置和 `collect_reports.py` 写入目录说明已经退役；`collect_reports.py` 受 legacy writer freeze 拦截，`scripts/batch_download.sh` 会 fail closed。不要修改旧仓的 `config.json`，也不要从旧入口直接写 `companies/`。
 
 ---
 

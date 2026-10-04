@@ -35,7 +35,7 @@ normalize / parse ──→ EvidenceSpan（locator、原文/结构化值、解�
 **组件**:
 - `collect_news.py`: 新闻采集（Tavily API）
 - `source_catalog`: 财报/公告来源发现与获取；A 股 provider 使用 StockInfoDLSimple，原件由 company-wiki 校验和入库
-- `collect_reports.py`: 旧 StockInfoDownloader 适配入口，已受 legacy writer freeze 拦截，不属于 canonical 采集流
+- `collect_reports.py`、`batch_download.sh`: 旧 StockInfoDownloader 入口，不属于 canonical 采集流；前者受 legacy writer freeze 拦截，后者已退役并 fail closed
 
 **数据流**:
 ```
@@ -157,7 +157,7 @@ Source Catalog acquisition
     └─→ companies/{公司}/raw/ 的 canonical 原件
 ```
 
-`collect_reports.py` 和旧 `StockInfoDownloader` 输出路径仅保留作历史兼容说明；不得从旧入口绕过 Source Catalog 的 staging、SHA 与 manifest 流程。
+`collect_reports.py` 和 `batch_download.sh` 仅保留为退役入口说明；不得从旧入口绕过 Source Catalog 的 staging、SHA 与 manifest 流程。
 
 ### 2. Canonical 规范化与解析流
 
