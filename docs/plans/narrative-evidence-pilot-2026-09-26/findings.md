@@ -215,3 +215,11 @@ Git写入/联网用正常用户，sandbox .git只读不是产品权限。测试�
 - 审计证明正式链还有resolver/planner/canonical_writer/FF资格门；这是下一组收口，不用reader单点GREEN声称整体G1完工。FF旧owner/key树不改，后续MAIN隔离工作树集成。
 - normalizer现代已绑定187条全1.0.0，生产WAL为0；历史抽样字节/状态拒绝不是版本误拒，保留格式与真实SHA底线。
 - 用户已确认两代码包派发；ET Git三个实际worktree已核，新deadline已创建，旧runtime已合、未删除。双目录是代码隔离，不是两套生产资料。
+
+
+## 2026-10-04 — G1正式来源调用链与跨仓状态复核
+
+- CWP `capture_ready`混合了来源身份/字节真实性与URL/collector采集描述。URL/collector不可再作复用资格；raw SHA、公司/证券身份、期次、公开日期、版本与真实冲突仍验证。缺字段candidate保留false/null/gaps/preview。
+- resolver、gap planner、canonical writer三个阻断已按正式来源合同收敛，六个CWP测试文件集中100项回归通过；canonical writer消歧用receipt SHA + source_id + provider身份，不使用capture_ready。
+- RF `main@6fb2def7`、`fcap@5319ee26`、merge-base `ee0a82bfd1eec935cf4e567eb42f0ef79efa0226`。SourceRef v2消费代码是main侧merge-base后的提交，尚未进入fcap；fcap没有提交改动这些文件。RF当前两个本地dirty文件只是assurance周报账本，本轮只读。
+- FF正式checkout `fcap@1d0c73c2`的唯一额外状态为未跟踪`config/FMP_API_KEY.txt`，不读取。存在`codex/transcript-companion@29085f7`工作树，改动覆盖`fetch_filing.py`和`filing_contracts.py`，与拟收敛的SourceRef v2门重叠；MAIN本轮没改FF，先厘清这条线再施工。

@@ -15,9 +15,8 @@ freshness/coverage planner matrix (WU-4.2 build_gap_plan).
       newer_revision (newest accession); a local that already holds the
       newest accession reuses with download=0.
 
-Product hardening covered here: build_gap_plan filters capture-incomplete
-local handles (``_usable_handles``) in EVERY outcome branch — an unusable
-local never enters reuse and never flips not_published.
+Product behavior covered here: already-admitted local sources remain
+reusable when capture descriptions are sparse in EVERY outcome branch.
 """
 
 from __future__ import annotations
@@ -126,7 +125,7 @@ _L_AMBIGUOUS = [
     _Local(2025, "2026-04-15", "acc-2025-a"),
     _Local(2025, "2026-04-15", "acc-2025-b"),
 ]
-_L_UNUSABLE = [_Local(2025, "2026-04-15", "acc-2025", capture_ready=False)]
+_L_SPARSE_CAPTURE = [_Local(2025, "2026-04-15", "acc-2025", capture_ready=False)]
 
 
 def _matrix_cell(
@@ -140,10 +139,12 @@ def _matrix_cell(
         "exact": _L_EXACT,
         "equivalent": _L_EQUIV,
         "ambiguous": _L_AMBIGUOUS,
-        "unusable": _L_UNUSABLE,
+        "sparse_capture": _L_SPARSE_CAPTURE,
     }
     locals_list = locals_map[local_key]
-    usable = [h for h in locals_list if getattr(h, "capture_ready", True) is not False]
+    # capture_ready is diagnostic metadata: planner inputs are already
+    # admitted and byte-verified source handles.
+    usable = list(locals_list)
     has_usable = bool(usable)
     reuse = tuple(sorted(h.provider_document_id for h in usable))
 
@@ -195,7 +196,7 @@ def _matrix_cell(
     raise AssertionError(f"unknown provider_key {provider_key!r}")
 
 
-_LOCAL_KEYS = ("no_local", "exact", "equivalent", "ambiguous", "unusable")
+_LOCAL_KEYS = ("no_local", "exact", "equivalent", "ambiguous", "sparse_capture")
 _PROVIDER_KEYS = (
     "current",
     "newer_period",
@@ -246,12 +247,10 @@ def test_c1_gap_hash_deterministic_and_discriminating():
     assert different.gap_hash != same.gap_hash
 
 
-def test_c1_unusable_local_in_provider_error_branch():
-    """The capture_ready filter applies in the provider_error branch too:
-    an unusable local is never offered as reuse even when the provider is
-    unavailable."""
-    plan = _plan(_L_UNUSABLE, [], provider_error="rate_limit")
-    assert plan.reuse == ()
+def test_c1_sparse_capture_local_in_provider_error_branch():
+    """A local verified source remains reusable when provider discovery fails."""
+    plan = _plan(_L_SPARSE_CAPTURE, [], provider_error="rate_limit")
+    assert plan.reuse == tuple(_L_SPARSE_CAPTURE)
     assert plan.provider_unavailable is True
 
 

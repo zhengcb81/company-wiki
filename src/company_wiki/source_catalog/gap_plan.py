@@ -86,12 +86,6 @@ def _candidate_amended(candidate: Any) -> bool:
     return bool(getattr(candidate, "amended", False))
 
 
-def _usable_handles(handles: list[Any]) -> list[Any]:
-    """ZR-406: keep only capture-ready (reusable) local handles — a
-    capture-incomplete handle is never reusable evidence."""
-    return [h for h in handles if getattr(h, "capture_ready", True) is not False]
-
-
 def build_gap_plan(
     *,
     request_id: str,
@@ -103,13 +97,11 @@ def build_gap_plan(
     remote_candidates: list[Any],
     provider_error: str | None = None,
 ) -> GapPlan:
-    """Align local reusable handles with remote provider metadata."""
-    # ZR-406 (defense-in-depth): a capture-incomplete local handle is NOT
-    # reusable evidence — it is never offered as reuse and never flips
-    # not_published, in EVERY outcome branch (including provider_error).
-    # The resolver already gates capture_ready upstream; this keeps the
-    # pure planner safe even for direct callers.
-    local_handles = _usable_handles(local_handles)
+    """Align already-admitted local sources with remote provider metadata."""
+    # URL and collector completeness remain handle diagnostics. Reuse
+    # eligibility is decided by the resolver's identity, period, publication
+    # cutoff and byte checks; the planner must not repeat a metadata gate.
+    local_handles = list(local_handles)
     if provider_error:
         return GapPlan(
             schema_version=GAP_PLAN_SCHEMA_VERSION,

@@ -1570,12 +1570,10 @@ class SourceResolver:
                 trace.append(f"{document['title']}: identity_unverifiable_strict")
                 continue
             if not handle.capture_ready:
-                # Phase 16.2: a capture-incomplete handle (e.g. missing
-                # https_url) cannot be consumed by filing-fetch; offering it
-                # as reusable deadlocks the download path. Treat as no match
-                # so the acquisition path proceeds to the adapter.
-                trace.append(f"{document['title']}: capture_incomplete")
-                continue
+                # Capture provenance is diagnostic. Identity, period,
+                # publication cutoff and candidate-byte verification above
+                # determine whether the source version can be reused.
+                trace.append(f"{document['title']}: capture_metadata_sparse")
             semantic.append(handle)
             trace.append(f"{document['title']}: matched")
             if strong_identity:

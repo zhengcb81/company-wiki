@@ -154,14 +154,8 @@ def test_r4b06_complete_handle_is_verified_input(tmp_path):
     assert handle.https_url and handle.content_sha256 == DIGEST
 
 
-def test_r4b06_missing_url_is_refused_before_any_preview_label(tmp_path):
-    """A local copy without a capture URL never reaches the envelope today.
-
-    `resolve` refuses every non-capture-ready handle with
-    ``capture_incomplete`` (a deliberate cross-repo rule: offering such a handle
-    as reusable deadlocks filing-fetch's download path).  So the design's
-    ``preview`` case is a RULE here, not a reachable outcome - recorded as such
-    (see also `..._preview_is_not_inherited_by_a_formal_input`)."""
+def test_r4b06_sparse_capture_is_reused_with_preview_diagnostics(tmp_path):
+    """A verified source can be reused while capture gaps remain visible."""
     root = tmp_path / "companies"
     _write_copy(
         root / "Acme" / "raw" / "financial_reports" / "annual",
@@ -169,14 +163,13 @@ def test_r4b06_missing_url_is_refused_before_any_preview_label(tmp_path):
     )
     catalog = _catalog(tmp_path, [_root("company_raw", root, "company_raw", 10)])
     resolution = SourceResolver(catalog).resolve(_request())
-    assert not resolution.matches, resolution.debug_trace
-    assert any("capture_incomplete" in item for item in resolution.debug_trace), (
-        resolution.debug_trace
-    )
+    assert len(resolution.matches) == 1, resolution.debug_trace
+    assert resolution.matches[0].capture_ready is False
     envelope = build_resolution_envelope(
         resolution, store=catalog.store, project_root=tmp_path
     )
-    assert envelope.qualification is None, envelope.to_dict()
+    assert envelope.qualification["label"] == QUALIFICATION_PREVIEW
+    assert "url_missing" in envelope.qualification["gaps"]
 
 
 def test_r4b06_url_gap_rule_is_preview_and_invents_nothing(tmp_path):

@@ -180,11 +180,13 @@ def test_resolver_prefers_strong_provider_identity_and_builds_capture_ready_hand
     assert handle.snapshot_sha256 == handle.content_sha256
 
 
-def test_resolver_does_not_reuse_capture_incomplete_document(tmp_path):
-    """A company_raw document whose handle is not capture-ready (missing
-    https_url) must not be offered as a reuse candidate: filing-fetch rejects
-    such handles and would otherwise deadlock instead of downloading (Phase
-    16.2)."""
+def test_resolver_reuses_verified_period_with_sparse_capture_metadata(tmp_path):
+    """Missing URL/collector description does not hide verified source bytes.
+
+    Publication and reporting period still qualify the request, and the
+    handle continues to report its missing capture fields honestly.
+    """
+    import hashlib
     from company_wiki.source_catalog import (
         CatalogConfig,
         ResolutionStatus,
@@ -230,9 +232,16 @@ def test_resolver_does_not_reuse_capture_incomplete_document(tmp_path):
         )
     )
 
-    assert result.status is ResolutionStatus.MISSING
-    assert result.reason == "no_existing_source_satisfies_request"
-    assert result.download_required is True
+    assert result.status is ResolutionStatus.REUSED_EQUIVALENT
+    assert result.download_required is False
+    assert len(result.matches) == 1
+    handle = result.matches[0]
+    assert handle.capture_ready is False
+    assert "https_url" in handle.missing_capture_fields
+    assert handle.published_date == "2026-02-20"
+    assert handle.fiscal_year == 2025
+    assert len(handle.content_sha256) == 64
+    assert hashlib.sha256(Path(handle.canonical_path).read_bytes()).hexdigest() == handle.content_sha256
 
 
 def test_resolver_does_not_reuse_dayu_portfolio_non_canonical_documents(tmp_path):

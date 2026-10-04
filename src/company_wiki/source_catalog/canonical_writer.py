@@ -292,18 +292,18 @@ class CanonicalSourceWriter:
                 # distinct-content documents sharing one provider identity
                 # resolve AMBIGUOUS by design (resolver: exact identity is
                 # one filing; which byte-variant is authoritative is an
-                # owner decision).  This verification pins the exact bytes
+                # owner decision). This verification pins the exact bytes
                 # THIS import just committed: adopt the resolution only
-                # when exactly one capture-ready exact-identity match
-                # carries the committed sha.  Anything else stays
-                # fail-closed.
+                # when exactly one exact-provider-identity match carries the
+                # committed source id and SHA. Capture metadata stays
+                # diagnostic and does not override those facts.
                     committed = [
                     handle
                     for handle in exact_resolution.matches
                     if handle.content_sha256 == receipt.content_sha256
+                    and handle.source_id == source_id_for_sha256(receipt.content_sha256)
                     and handle.provider_document_id == candidate.provider_document_id
                     and (not candidate.provider or handle.provider == candidate.provider)
-                    and handle.capture_ready
                 ]
                     if (
                         exact_resolution.status is not ResolutionStatus.AMBIGUOUS

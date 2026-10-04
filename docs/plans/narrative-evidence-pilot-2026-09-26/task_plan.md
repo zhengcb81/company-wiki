@@ -29,7 +29,7 @@ StockWiki/IQS已有owner工作及消费者交付，本轮只读，不重复分�
 | S0 简化收口 | complete（ff5396c，CI绿） | PWF只留当前入口；删除R1旁路签收/shadow/gold；commit移除pytest、config doctor按相关文件触发 | 一次相关Unit/混合行为回归与正常发布；不逐文件签收 |
 | S1 N4A | complete（ff5396c，CI绿） | scope贯通Store/Worker/Supervisor/outbox/prepared，None兼容、空scope零修改、范围SQL先于LIMIT | N4节点A，确定性RED先行 |
 | S2 N4B | complete（节点A/B集中验收已绿；整体N4仍待独立S4/N4C） | real factory/HTTP adapter/full prompt; persistent token/cost reservation in AUTO; finite batch CLI; unique final artifact and small recovery receipt; public legacy whole-catalog Worker and startup routes removed | node A accounting/concurrency green; node B formal CLI/HTTP/kill/ACK and focused regression green; CWP producer limits are now connected and have real-data E2E evidence; proceed to N4C after G1/S3 closeout |
-| G1 残余门禁/签收精简（第一优先） | in_progress（首组已发布；reader元数据门/叙述capture截止已清；剩余正式resolver/planner/FF资格门与外包旧入口收口） | MAIN清来源核心，G1-LEGACY独立退役旧入口/六脚本；按[G1细则](gate_simplification_closeout_2026-10-04.md)收口；已取消项不重新开工，外仓owner工作保持只读 | 110项来源/复核相关回归、22项激活/恢复回归、Ruff通过；快速门精选测试名已修正并通过。整体审计仍未完成；大节点收口后再进入 S3 |
+| G1 残余门禁/签收精简（第一优先） | in_progress（CWP reader/as-of/resolver/planner/canonical消歧已清；FF SourceRef v2资格门与G1-LEGACY旧入口仍待收口） | MAIN清来源核心；G1-LEGACY独立退役旧入口/六脚本；按[G1细则](gate_simplification_closeout_2026-10-04.md)收口；已取消项不重新开工，外仓owner工作保持只读 | reader/as-of 64项与resolver/planner/canonical 100项相关回归均绿；核心组仅做集中验证。FF文件先与现存transcript-companion改写支线协调，避免同文件并行编辑。整体审计仍未完成；大节点收口后再进入 S3 |
 | S3 SourceRef/SourceExport 虚拟化与来源默认收敛（G1之后第二优先） | in_progress（FF-S3已进main；ET-S3已合并；CNINFO bounded provider已启用并通过真实资料FF→CWP→provider E2E；RF/StockWiki已有pathless消费证据；ET真实工具导入仍待一次验收） | 上层只使用 SourceRef/SourceExport v2，不依赖 CWP/StockInfo/Dayu/Dropbox物理目录；复用已绿FF exact/latest_as_of与现有pathless reader，补安装/provider可移植配置、ET硬deadline与真实原语言导入；非核心资格/capture阻断先在G1清理 | BYD年报真实采集闭环已通过；电话会 live import验收使用[ET-LIVE独立卡](harness_lanes/et_transcript_live_import_acceptance.md)。明确 IQS 快扫不自动消费/下载 CWP 文档，其 PWF 将 company-wiki 定义为可选只读深研链接，不为追求“全仓统一”强行改边界 |
 | S4 N4C real samples and storage plan | pending（G-C 证明了 RF 年报/TXT 来源消费，不等于 Worker 多文档批次；排在优先门禁精简之后） | four real document types / consumer reads / language and citation coverage / total incremental bytes; retain only status/stop/uninstall compatibility for old worker process cleanup | node C; bounded real batch, then measured 1/2/4 parallelism；至少覆盖年报、招股/再融资、IR和电话会/季度类中的四种，记录摘要证据定位和新增空间 |
 | S5 B2逐caller清理 | pending（SPACE-S5只读审计已交付） | 审计确认约138.6 MB无代码调用者集合可列入首批候选；2.826 GB `derived/` 仍有 reader 与 8,191 条 artifact 路径引用，必须先迁移；报告不是删除清单 | 主线复核当前调用者/生产文件状态后分集合处理；每批验证原件与来源事实保留并测实际释放量 |
@@ -95,7 +95,7 @@ TDD框住公开行为，不把旧签收规则写进新测试。仅S0相关收口
 
 ## Next Step
 
-**MAIN下一动作只有一个：**为正式resolver保留采集描述不完整的已匹配原件写RED测试，随后一组收敛resolver/gap_plan/canonical_writer与FF仍有的capture_ready/HTTPS资格门；保留false/null/gaps诊断，不造完整元数据。reader与叙述capture截止本轮已按TDD清理，64项相关回归绿。G1-LEGACY外包正在等待交付，MAIN避开写集。一次G1集中GREEN并合入后，才收口S3安装/ET联调；之后N4C，再S5/S6。具体见[G1细则](gate_simplification_closeout_2026-10-04.md)。
+**MAIN下一动作只有一个：**等待G1-LEGACY交付并继续完成其余MAIN专属旧入口收口；FF SourceRef v2剩余资格门待核对`filing-fetch-transcript-companion@29085f7`这条对`fetch_filing.py`/`filing_contracts.py`有大改动的既存工作树后再隔离施工。CWP reader/as-of与resolver/planner/canonical消歧已先RED再GREEN，分别64与100项回归；`capture_ready=false`、null与qualification gaps继续作诊断，来源SHA/身份/期间/公开日仍要求可验证。一次G1责任包GREEN并合入后，才收口S3安装/ET联调；之后N4C，再S5/S6。具体见[G1细则](gate_simplification_closeout_2026-10-04.md)。
 
 **已派发：**G1-LEGACY和ET-DEADLINE两个独立代码包；ET-LIVE仍是可选小验收包。目录/写集/接口/测试/交接各自冻结在卡内，MAIN负责打通并统一发布。外线可提前完成第二优先ET实现，不改变MAIN先G1后S3的合入顺序。没有逐helper/逐文档人工审查，也不等待所有能力扩展完成才验收已可用的pathless接口。
 

@@ -287,3 +287,13 @@ S0/N4A及S2模型预算基础、CLI阶段与CI修复已正常发布，当前CI�
 - 来源reader/latest-as-of/叙述第一组56 passed / 29.81s；包含候选CLI与稀疏字段新行为的最终集中责任包64 passed / 57.25s。mypy暴露optional dict收窄问题，改为逐值校验后2个修改模块mypy GREEN、稀疏候选定点复跑1 passed；Ruff GREEN。
 - G1整体仍in_progress：正式resolver/gap_plan/canonical_writer与FF重复资格门是下一动作。没有修改外包G1-LEGACY/ET-DEADLINE写集、其他owner树或生产原件/数据库。本机provider配置继续排除提交。
 - 两外包包登记dispatched，ET worktree已创建；没有将目录存在当运行进程证明。旧runtime未清理，原正式ET main保留。
+
+
+## 2026-10-04 — CWP resolver / planner / canonical 消歧收口
+
+- TDD先红：`SourceResolver.resolve` 对有原文但缺URL/collector的期次资料返回MISSING；qualification envelope因此没有来源handle；`build_gap_plan`过滤capture_ready=false；canonical writer在provider身份有歧义时仅因capture_ready=false拒绝了匹配本次提交SHA的版本。
+- 实现让身份、期次、公开日和候选字节校验决定复用。resolver不再因采集描述丢弃已验证候选；gap planner删除`_usable_handles` helper；canonical writer用receipt SHA、source_id与provider身份消歧。capture_ready与preview/gaps仍作为诚实诊断。
+- 集中责任测试：`test_source_catalog_resolver.py`、`test_r4b06_qualification.py`、`test_zr406_gap_plan_orthogonality.py`、`test_source_catalog_gap_plan.py`、`test_source_catalog_canonical_writer.py`、`test_source_operation_v2.py`共100 passed / 9.03s。原件SHA/size、identity/period/publication/future cutoff保留；随后在发布门继续跑Ruff/mypy/hook。
+- RF先行核查：main@6fb2def7；fcap@5319ee26，merge-base ee0a82bfd1eec935cf4e567eb42f0ef79efa0226。main侧后加SourceRef v2消费代码尚未进入fcap；支线没有在merge-base后改这些源消费者文件。本轮不改RF，未来合支线需保留main的pathless verified-open链路。
+- FF核查：正式checkout fcap@1d0c73c2只有未跟踪API key，本轮未读未改；已有`codex/transcript-companion@29085f7`工作树改动`fetch_filing.py`/`filing_contracts.py`，与剩余SourceRef v2资格门重叠。先协调这条现存工作线，不并发改FF同文件。
+- G1未完：CWP reader/as-of/resolver/gap planner/canonical writer门已收敛；FF v2 consumer和G1-LEGACY外包旧入口收口还在前面。未改RF/FF、外包目录、原始财报、catalog数据库或本机采集配置。

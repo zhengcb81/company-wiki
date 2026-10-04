@@ -175,6 +175,55 @@ def test_writer_atomically_imports_with_provenance_and_resolver_reuses_exact(tmp
     assert resolved.matches[0].https_url == candidate.source_url
 
 
+def test_writer_disambiguates_committed_bytes_with_sparse_capture_diagnostics(
+    tmp_path, monkeypatch,
+):
+    """The committed hash and provider identity select a source despite gaps."""
+    from dataclasses import replace
+
+    from company_wiki.source_catalog import (
+        CanonicalSourceWriter,
+        ResolutionStatus,
+        SourceResolver,
+    )
+
+    catalog = _catalog(tmp_path)
+    request, candidate, receipt, _ = _staged_contract(tmp_path)
+    original_resolve = SourceResolver.resolve
+
+    def ambiguous_sparse_result(self, source_request):
+        result = original_resolve(self, source_request)
+        if source_request.provider_document_id and result.matches:
+            committed = replace(
+                result.matches[0],
+                capture_ready=False,
+                missing_capture_fields=("https_url", "capture_trace"),
+            )
+            other_hash = "f" * 64
+            other = replace(
+                committed,
+                source_id=f"urn:company-wiki:source:sha256:{other_hash}",
+                content_sha256=other_hash,
+                snapshot_sha256=other_hash,
+            )
+            return replace(
+                result,
+                status=ResolutionStatus.AMBIGUOUS,
+                reason="multiple sources share provider identity",
+                matches=(committed, other),
+            )
+        return result
+
+    monkeypatch.setattr(SourceResolver, "resolve", ambiguous_sparse_result)
+    imported = CanonicalSourceWriter(catalog).import_staged(request, candidate, receipt)
+
+    assert imported.content_sha256 == receipt.content_sha256
+    assert imported.resolution.status is ResolutionStatus.REUSED_EXACT
+    assert len(imported.resolution.matches) == 1
+    assert imported.resolution.matches[0].capture_ready is False
+    assert imported.resolution.matches[0].content_sha256 == receipt.content_sha256
+
+
 def test_writer_reactivates_previously_retired_same_content_document(tmp_path):
     """A user-authorized re-download of bytes whose content-addressed document
     was retired must succeed and reactivate that document (Phase 15.6 batch

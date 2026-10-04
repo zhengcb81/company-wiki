@@ -16,7 +16,7 @@
 | 顺序 | 负责人 | 具体动作 | 完成输出 |
 |---|---|---|---|
 | 1（可并行） | G1-LEGACY外部harness | 去掉兼容脚本双环境变量许可；让来源/只读维护入口行为一致；删除已经完成的一次性六脚本链 | 独立分支、专属测试、短交接；见[施工卡](harness_lanes/g1_legacy_entry_and_retirement.md) |
-| 1（主线） | MAIN | reader直接open的URL/collector资格门已按TDD清理；仍须同组收敛resolver/gap_plan/canonical_writer/FF的重复capture_ready门 | 64项来源/CLI/叙述回归绿；缺字段false/null/gaps不伪造，正式整链尚待闭环 |
+| 1（主线） | MAIN | reader URL/collector资格门、resolver的capture_ready阻断、gap planner重复过滤、canonical writer提交消歧阻断均按TDD清理；FF SourceRef v2仍检查capture_ready/HTTPS | 64项reader/as-of与100项resolver/planner/canonical合同回归绿；raw SHA负例、source身份/期次/公开日期、缺字段诊断均保留；FF整链尚待闭环 |
 | 2 | MAIN | `_require_historical_source` 额外capture截止已清理 | 公开日当天即可读，即使后来下载；未来公开/未知公开日反例仍拒绝 |
 | 3 | MAIN | 核查 normalizer版本、摘要字段/片段校验、GapPlan是否还有无必要整份阻断 | 有具体误拒才改；旧版本须能真实解码/回放，不能随便改成接受所有版本；坏引用丢片段且报coverage |
 | 4 | MAIN | 接收G1-LEGACY，处理真实冲突；将46项分类为已退出、必要自动校验、能力边界或外仓owner事项 | 当前清单无重复待办；一次G1责任包GREEN、普通commit/push |
@@ -66,6 +66,8 @@ G1/S3收口后才进入N4C四类真实文档、1/2/4并行吞吐/空间测量，
 
 ## 当前未闭环调用者（本轮实读）
 
-只清reader不能宣称G1完成：resolver.resolve仍丢弃capture_ready=False；gap_plan._usable_handles再过滤一次；canonical_writer提交消歧仍依赖同bool；FF的_handle_from_resolution和handle metadata校验仍要求完整capture/HTTPS。MAIN下一组统一收敛，不发新schema、不修改外包写集。SourceHandle.capture_ready/missing_capture_fields和qualification.gaps保留为诊断，实际复用由身份/期间/公开时间/真实SHA证明。
+截至本轮，CWP resolver、gap planner和canonical writer已不再把capture_ready当复用门；canonical writer仍要求提交对象的source_id、provider身份和实际内容SHA匹配本次receipt。SourceHandle.capture_ready/missing_capture_fields与qualification.gaps保留为诊断，resolver保留公司/证券/期间/公开日期与候选字节验证。
+
+FF SourceRef v2的`_handle_from_resolution`仍拒绝capture_ready=false；`validate_handle_metadata`仍强制HTTPS URL。旧pathful v1 `validate_handle`保持原合同。当前FF fcap@1d0c73c本体只有未跟踪API key；但已存在`filing-fetch-transcript-companion@29085f7`工作树大改同两份consumer文件。协调/复核这条旧工作树前，MAIN不并发写FF同名文件。
 
 normalizer只读审计没有版本误拒证据：187个已绑定modern产物全部1.0.0，历史未绑定产物已有可回放兼容路径；抽样失败属于字节/状态不一致。当前不放开未知generator版本、不为假设再造支持版本表。
