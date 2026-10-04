@@ -138,18 +138,18 @@ CWP审计代码`master@9eacbea`；RF`rf-impl/main@6fb2def7`；FF最新交付线/
 | 3 | 已退役 | gold/shadow/readiness人工占位链退出，不重复分派 |
 | 4 | 已退役 | Work Unit/独立reviewer工程链退出，不复活 |
 | 5 | 已不存在 | 不再安排deletion_manifest清理 |
-| 6 | **G1-LEGACY现在可分包** | 去双环境许可；只读入口普通/PYTHONPATH行为一致；研究writer产品边界保留 |
-| 7 | **G1-LEGACY+MAIN** | 六个完成脚本链退出；src archive/prune有真实caller且CLI漏now，由MAIN修复/正式替代；不新建90日等待或双smoke签收 |
+| 6 | 已合入CWP `6394271` | 双环境许可移除；只读入口不因启动环境变化；研究writer仍按产品职责退出 |
+| 7 | G1-LEGACY六脚本链已合入/退役；archive/prune无生产调用者 | CodeGraph caller结果仅有专属测试；没有当前用户要手工准备的now/binding文件流程。未调用旧API如仍无消费者，留S5/S6 caller清理；不加等待期/双smoke签收 |
 | 8 | 已达到建议行为 | ignored本机凭证已经只诊断，any_active只含tracked/history；不再派重复secret-audit改造 |
 | 9 | 已简化并发布 | read pin只绑实际读visibility/policy，不因扫描flag/时间更新失效 |
-| 10 | MAIN G1复核 | 实际请求若仍需人工搬binding则内组合；沿现有GapPlan接口，不造另一请求合同 |
+| 10 | 当前公开请求无人工binding门 | CodeGraph未发现`CloseGapBinding`生产调用者；FF v2伴随请求不要求用户搬binding文件。保留尚有调用需要时的内部hash/预算约束，不造第二请求合同 |
 | 11 | 公开阻断已退出 | 旧Worker公开执行退役；兼容allow-acquisition参数无效，可随接口收口删除 |
 | 12 | 已合FF-S3；薄兼容收口归MAIN | v2单一请求与限额已执行，v1仅保现有精确复用/无预算缺件失败；不重复FF-S3施工 |
-| 13 | CWP主链已收口；FF SourceRef v2待接 | raw open、resolver、gap planner、canonical消歧不再要求capture_ready/URL/collector；qualification gaps仍显示。真实SHA、source身份、期次与公开日仍验证。FF v2仍有capture_ready/HTTPS门，等既存companion工作树协调后收敛 |
+| 13 | CWP与FF SourceRef v2资格门已收口（FF `e1eda60`已推main） | raw open、resolver、gap planner、canonical消歧及pathless FF v2均不要求capture_ready/URL/collector描述；qualification gaps仍显示。真实SHA、source身份、期次与公开日仍验证；旧pathful v1保持原合同 |
 | 14 | 保留来源事实；预览语义按实际需要 | active/撤回/冲突状态不能伪装正式可用来源；不是私有访问权限 |
 | 15 | 已按TDD简化 | query_local及叙述transport均按公开日cutoff；capture日期不再误拒，未来/未知公开日仍拒绝，无新增模式 |
 | 16 | 保留实际格式/一致性校验 | 实测187个modern全为1.0.0，历史有现成兼容回放；未发现版本误拒，PDF样本问题是字节/状态错配，不放宽未知格式 |
-| 17 | MAIN G1实际误拒调查 | 必填引用/来源用途保留；无害额外字段/原文事实不应被关键词拒；有误拒证据再改 |
+| 17 | 当前N4叙述路径无旧禁词门 | `NarrativeSummarizeHandler`用source/hash/language/evidence-span合同；旧`llm_summarizer`禁词规则所在whole-catalog函数无生产caller。没有当前输出误拒证据；职责边界仍禁止生成投资结论，旧无调用者实现留S5/S6清理 |
 | 18 | partial已有消费支持；覆盖缺口归MAIN | 已有partial/needs_review回放；坏片段丢弃并报coverage，零可回放证据不能假成功 |
 | 19 | 缩到实际能力 | 类型/尺寸/MIME是处理能力，存储根由底层解释；不加公司角色白名单 |
 | 20 | 不在现行公共执行链 | 旧电池约束库兼容随S5/S6退休，不为它重新开Worker改造 |

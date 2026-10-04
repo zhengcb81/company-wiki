@@ -16,10 +16,10 @@
 | 顺序 | 负责人 | 具体动作 | 完成输出 |
 |---|---|---|---|
 | 1（可并行） | G1-LEGACY外部harness | 去掉兼容脚本双环境变量许可；让来源/只读维护入口行为一致；删除已经完成的一次性六脚本链 | 独立分支、专属测试、短交接；见[施工卡](harness_lanes/g1_legacy_entry_and_retirement.md) |
-| 1（主线） | MAIN | reader URL/collector资格门、resolver的capture_ready阻断、gap planner重复过滤、canonical writer提交消歧阻断均按TDD清理；FF SourceRef v2仍检查capture_ready/HTTPS | 64项reader/as-of与100项resolver/planner/canonical合同回归绿；raw SHA负例、source身份/期次/公开日期、缺字段诊断均保留；FF整链尚待闭环 |
+| 1（主线） | MAIN | reader URL/collector资格门、resolver的capture_ready阻断、gap planner重复过滤、canonical writer提交消歧阻断，以及FF SourceRef v2的重复capture/HTTPS资格门均已按TDD收敛 | CWP reader/as-of 64项与resolver/planner/canonical 100项收据；G1-LEGACY合入`6394271`；FF `e1eda60`推到远端main，集中回归177 passed / 1 skipped / 39 subtests，Ruff和push gate GREEN；raw SHA、身份/期间/公开日仍验证，旧pathful v1不变 |
 | 2 | MAIN | `_require_historical_source` 额外capture截止已清理 | 公开日当天即可读，即使后来下载；未来公开/未知公开日反例仍拒绝 |
 | 3 | MAIN | 核查 normalizer版本、摘要字段/片段校验、GapPlan是否还有无必要整份阻断 | 有具体误拒才改；旧版本须能真实解码/回放，不能随便改成接受所有版本；坏引用丢片段且报coverage |
-| 4 | MAIN | 接收G1-LEGACY，处理真实冲突；将46项分类为已退出、必要自动校验、能力边界或外仓owner事项 | 当前清单无重复待办；一次G1责任包GREEN、普通commit/push |
+| 4 | MAIN | 接收G1-LEGACY，处理真实冲突；将46项分类为已退出、必要自动校验、能力边界或外仓owner事项 | 已完成：`6394271`接收G1-LEGACY；当前清单将旧调用者、保留的正确性校验和外仓owner任务分开；FF v2门收口并已推送。无逐项人工签收 |
 
 外部harness不改 `src/`、catalog CLI、生产配置或原件；MAIN不改外包列出的脚本和专属测试直到交付。需要修改共享调用者时，外线交精确接口缺口，由MAIN合入时处理。
 
@@ -64,10 +64,14 @@ Dayu零代码改动。RF/StockWiki/IQS现有owner工作树只读；其规则发�
 G1/S3收口后才进入N4C四类真实文档、1/2/4并行吞吐/空间测量，再实施S5/S6。G1没有固定待满计数或逐项签收文件；完成依据是已核实的多余阻断退出、相关责任包绿色与真实接口回归。
 
 
-## 当前未闭环调用者（本轮实读）
+## G1 收口实读与S3剩余事项（2026-10-04）
 
-截至本轮，CWP resolver、gap planner和canonical writer已不再把capture_ready当复用门；canonical writer仍要求提交对象的source_id、provider身份和实际内容SHA匹配本次receipt。SourceHandle.capture_ready/missing_capture_fields与qualification.gaps保留为诊断，resolver保留公司/证券/期间/公开日期与候选字节验证。
+截至本轮，CWP resolver、gap planner和canonical writer不再把capture_ready当复用门；canonical writer仍要求提交对象的source_id、provider身份和实际内容SHA匹配本次receipt。SourceHandle.capture_ready/missing_capture_fields与qualification.gaps保留为诊断，resolver保留公司/证券/期间/公开日期与候选字节验证。FF SourceRef v2现也允许缺少HTTPS URL、collector/provenance描述和capture_ready字段；这些字段不能伪造网络来源，但不能挡住company-wiki已实读SHA的pathless原件。pathful v1完整校验未变。
 
-FF SourceRef v2的`_handle_from_resolution`仍拒绝capture_ready=false；`validate_handle_metadata`仍强制HTTPS URL。旧pathful v1 `validate_handle`保持原合同。当前FF fcap@1d0c73c本体只有未跟踪API key；但已存在`filing-fetch-transcript-companion@29085f7`工作树大改同两份consumer文件。协调/复核这条旧工作树前，MAIN不并发写FF同名文件。
+G1集中验收：FF相关回归177 passed / 1 skipped / 39 subtests（唯一skip因生产security-master快照未安装）；Ruff通过，push gate的Ruff/compileall/import/mypy/host/config/plan/BOM检查均GREEN，`e1eda60`已推远端main。CWP电话会导入与CLI确定性端到端12 passed；曾因pytest临时根太深触发Windows MAX_PATH，已缩短仅测试夹具目录，canonical导入、原文SHA与去重断言不变。
 
-normalizer只读审计没有版本误拒证据：187个已绑定modern产物全部1.0.0，历史未绑定产物已有可回放兼容路径；抽样失败属于字节/状态不一致。当前不放开未知generator版本、不为假设再造支持版本表。
+46项清单的最后核对：CodeGraph未发现`CloseGapBinding`/`archive_retired_evidence`/`prune_retired_evidence`的生产调用者，当前公开请求流没有手工binding文件门；旧whole-catalog `summarize_catalog_with_llm`无生产调用者。新`NarrativeSummarizeHandler`按source_id、source SHA、原语言和可回放evidence spans校验，不使用旧LLM摘要器的禁词正则。旧能力不伪装成当前门，若仍无调用者，在S5/S6按caller清理；保留source/hash/citation和“不生成投资结论”的职责约束。
+
+normalizer只读审计没有版本误拒证据：187个已绑定modern产物全部1.0.0，历史未绑定产物已有可回放兼容路径；抽样失败属于字节/状态不一致。GapPlan按来源保存可复用项、缺口与provider错误，不把局部缺口升级为整份文档拒绝。当前不放开未知generator版本、不为假设再造支持版本表。
+
+G1现已完成；下一节点S3需要真实ET工具→临时CWP导入→SourceRef/SourceExport pathless回读。当前12项E2E使用本地fake provider，不得冒称真实live；FF companion调用传输另有177项确定性测试。ET-DEADLINE仍在独立worktree施工，主线不得改其写集。

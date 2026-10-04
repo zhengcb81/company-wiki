@@ -34,7 +34,9 @@ PROVIDER_STDOUT_LIMIT = 256 * 1024
 
 
 def _wiki_root(tmp_path: Path) -> Path:
-    root = tmp_path / f"transcript-e2e-{uuid.uuid4().hex}"
+    # Keep the final canonical path below Win32 MAX_PATH.  The source name
+    # already carries date/provider/hash, so a short unique test-root is enough.
+    root = tmp_path / f"e2e-{uuid.uuid4().hex[:12]}"
     (root / "companies").mkdir(parents=True)
     (root / "config").mkdir()
     (root / "config" / "source_catalog.yaml").write_text(
@@ -226,7 +228,7 @@ def _remove_run(root: Path, tmp_path: Path) -> None:
         return
     resolved = root.resolve(strict=True)
     assert resolved.parent == tmp_path.resolve(strict=True)
-    assert root.name.startswith("transcript-e2e-") and not root.is_symlink()
+    assert root.name.startswith("e2e-") and not root.is_symlink()
     members = (root, *root.rglob("*"))
     assert not any(path.is_symlink() for path in members)
     shutil.rmtree(root)

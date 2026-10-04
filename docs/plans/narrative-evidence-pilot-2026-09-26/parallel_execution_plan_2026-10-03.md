@@ -18,17 +18,17 @@
 
 | 原线 | 当前事实 | 后续归属 |
 |---|---|---|
-| FF-S3 | `1d0c73c`已推FF main；CI37182527153 success；实际限额/精确复用/latest-as-of元数据预算与CNINFO闭环 | MAIN只处理接口受影响联调与安装配置 |
+| FF-S3 | `1d0c73c`与SourceRef v2资格收敛`e1eda60`已推远端main；当前FF聚焦回归177 passed / 1 skipped / 39 subtests，正常push gate GREEN | MAIN处理S3 live接口验收与安装/provider可移植配置 |
 | ET-S3 | 已合ET main `93fe52c`；现代入口/旧薄batch/默认原语言已收敛 | ET-DEADLINE仅补真实截止缺口，不重做ET-S3 |
-| G1-LEGACY | 外包交付 commit `1cf8183` 已并入 CWP 本次主线合并；handoff 已保存；集中回归 `170 passed, 1 deselected`，详见下方 2026-10-04 收口记录 | 外线写集关闭；MAIN继续处理 FF SourceRef v2 资格门 |
+| G1-LEGACY | 外包交付 commit `1cf8183` 已并入 CWP `6394271`；handoff已保存；集中回归`170 passed, 1 deselected` | 外线写集关闭；G1全节点已完成，MAIN转入S3真实电话会导入验收 |
 | SPACE-S5 | `company-wiki-storage-audit-20261003/results/storage_audit.{json,md}`交付，15项审计工具测试绿；零生产修改 | S5/S6由MAIN执行删除/迁caller，不重派空间审计 |
 | StockWiki W01/W04、工程门简化、SourceExport、Identity、G-C消费者 | 各自既有交付/收据保留 | 不以新包重复实现；active owner树只读 |
 
 ## MAIN职责与当前施工
 
-1. reader的URL/collector描述门与叙述capture截止已按TDD清理；来源/CLI/叙述64项回归绿。下一组收敛resolver/gap_plan/canonical_writer与FF的残留资格门，保capture_ready/gaps只作真实诊断。query_local公开日默认保持。
-2. G1-LEGACY 的函数兼容、脚本退役和共享测试已合入；外线写集关闭。G1 尚有 FF SourceRef v2 资格门待完成。
-3. G1-LEGACY 集中回归GREEN并完成主线合入/push；随后继续FF资格门与S3安装/provider可移植配置及ET接口联调。ET-DEADLINE可并行施工，但不改变MAIN合入优先级。
+1. CWP来源reader/as-of/resolver/gap_plan/canonical_writer与FF SourceRef v2资格门已按TDD收敛；真实SHA、身份/期次/公开日、可回放locator保持自动验证，采集描述缺失仅诊断。
+2. G1-LEGACY旧入口退役及46项当前状态分类完成；CloseGapBinding、旧whole-catalog LLM summarizer及archive/prune代码未发现生产caller，不作为用户门，后续若无调用者随S5/S6清理。
+3. G1完成；S3转入真实ET工具→临时CWP导入→SourceRef/SourceExport pathless实读。ET-LIVE至多一个真实请求，ET-DEADLINE仍由独立worktree施工；两者不改MAIN共享来源代码。
 4. 接收外线commit与短报告，核diff/接口/相关测试，解决冲突和跨仓接线。MAIN统一发布；外线不自己合main、不写他仓、不安装全局技能。
 5. 测试全用独立根，退出恢复原样；不丢原件。不造签名、人工授权文件、每helper审批或固定场景数。
 

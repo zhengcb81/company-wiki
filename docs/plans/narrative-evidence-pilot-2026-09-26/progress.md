@@ -309,3 +309,12 @@ S0/N4A及S2模型预算基础、CLI阶段与CI修复已正常发布，当前CI�
 ## 2026-10-04 — RF fcap 权限表象复核
 
 - 随后获准以只读提升权限复查RF：`fcap@5319ee26` 的tracked status为0个删除、2个修改（仅 `assurance/runs/weekly_alert.jsonl` 与 `weekly_manifest.json`）；此前`.planning/.../execution_runs`的大量表观删除来自普通sandbox账号的目录访问拒绝。样本路径现可读取。本轮仍未修改RF任何文件，恢复原先“两项tracked dirty”的判断。
+
+## 2026-10-04 — G1门禁收口并转入S3电话会真实导入
+
+- RF先行只读复核：`revenue-forecast@fcap/5319ee26`经提升权限核实仍只有2项tracked变更（`assurance/runs/weekly_alert.jsonl`、`weekly_manifest.json`）；普通sandbox访问拒绝曾把执行记录显示成大量假删除。RF/StockWiki/IQS owner树均未改。
+- FF隔离工作树先以两条RED合同证明：pathless SourceRef v2缺`https_url`、provider/collector/retrieval描述或`capture_ready=false/缺失`时仍会被外层拒绝；实现后保留hash、SourceRef ID、公司/证券、期次、公开日/as-of校验，仅将采集完整度字段降为诊断。旧pathful v1 `validate_handle`未动。
+- FF责任集最终 **177 passed, 1 skipped, 39 subtests**；唯一skip为本机没有生产security-master快照。Ruff、diff check通过；正常push gate的ruff、compileall、import、contract mypy、host/config/plan/BOM检查全GREEN。提交`e1eda60`从当前`fcap`快进并推送到远端`main`；push返回`1d0c73c..e1eda60`。
+- CWP→ET→CWP确定性端到端先暴露临时根叠加长规范文件名导致Win32 MAX_PATH超限，准确栈在`canonical_writer._atomic_copy`打开`.importing`临时文件时`FileNotFoundError`。只缩短E2E临时根名字，保留导入/原文SHA/selector/去重/字节漂移断言；`test_transcript_provider_full_chain.py`加`test_transcript_import_cli_e2e.py` **12 passed**，临时测试根自动删除。CWP产品写入逻辑没有改。
+- 通过CodeGraph重新分类G1清单：`CloseGapBinding`、`archive_retired_evidence`、`prune_retired_evidence`以及旧`llm_summarizer.summarize_catalog_with_llm`未发现生产caller；因此不存在当前公开流程要求用户手工准备binding文件。canonical `NarrativeSummarizeHandler`按SourceRef ID/SHA、语言与evidence span校验，不走旧禁词regex。旧未调用能力进入S5/S6 caller清理，不挡G1；source SHA/身份/期间/公开日/可回放引用和不生成投资结论的职责边界继续保留。
+- G1大节点完成；S3进入真实ET工具→临时CWP导入→SourceRef/SourceExport pathless回读。ET-LIVE卡明确最多一次取数、不翻译、保留原始语言；ET-DEADLINE仍在独立worktree施工。当前CWP端到端用fake provider、FF companion用确定性工具测试，均不能冒称真实ET live。

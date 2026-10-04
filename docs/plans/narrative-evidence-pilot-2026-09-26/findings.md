@@ -229,3 +229,11 @@ Git写入/联网用正常用户，sandbox .git只读不是产品权限。测试�
 - resolver、gap planner、canonical writer三个阻断已按正式来源合同收敛，六个CWP测试文件集中100项回归通过；canonical writer消歧用receipt SHA + source_id + provider身份，不使用capture_ready。
 - RF `main@6fb2def7`、`fcap@5319ee26`、merge-base `ee0a82bfd1eec935cf4e567eb42f0ef79efa0226`。SourceRef v2消费代码是main侧merge-base后的提交，尚未进入fcap；fcap没有提交改动这些文件。RF当前两个本地dirty文件只是assurance周报账本，本轮只读。
 - FF正式checkout `fcap@1d0c73c2`的唯一额外状态为未跟踪`config/FMP_API_KEY.txt`，不读取。存在`codex/transcript-companion@29085f7`工作树，改动覆盖`fetch_filing.py`和`filing_contracts.py`，与拟收敛的SourceRef v2门重叠；MAIN本轮没改FF，先厘清这条线再施工。
+
+## 2026-10-04 — 当前G1关闭条件复核、FF SourceRef v2与ET测试路径根因
+
+- RF当前`fcap@5319ee26`状态再次经提升权限核实为两项周报账本变化；普通sandbox对`.planning/.../execution_runs`拒绝读取会虚报成数千项删除。该树保持只读，本轮未更改RF合同或工作记录。
+- FF `e1eda60`将SourceRef v2的HTTPS URL、collector/retrieval/provider说明和`capture_ready`改为诊断字段；通过真实本地CWP pathless query请求后仍验证SHA/ID/公司证券/period/published-date/as-of。`validate_handle`的legacy pathful路线没有改。完整责任集177 pass/1 skip/39 subtests，push gate GREEN，已推远端main。
+- CWP电话会E2E原始失败不是导入合同错：复制目标`companies/Acme Inc/raw/investor_relations/transcripts/...`附加`.pid.importing`后超过Win32 MAX_PATH，`shutil.copyfile`因此抛`FileNotFoundError`。把临时测试根叶名由长UUID收缩为`e2e-`加12位随机后，同一真实子进程导入链全绿；CWP full-chain + importer CLI **12 passed**，测试根由finally清理。此项只改测试夹具路径，不改生产canonical目录或正文命名。
+- G1第3/4项审计：modern normalizer绑定版本187条均1.0.0且历史compat回放已存在；canonical叙述summary合同校验source ID/SHA、原语言与citation spans，局部不可回放span降coverage；GapPlan按项保留reuse/missing/newer/future/provider-error，不整体拒绝。旧whole-catalog LLM summary的禁词regex无生产caller；`CloseGapBinding`和source archive/prune API同样未找到生产caller。故当前CWP公开路径没有手工binding门/禁词误拒门；不为不活跃代码再开阻断式改造，随S5/S6按caller清理。
+- G1可以关闭；S3未关闭。FF companion确定性测试和fake-provider CWP全链均不能代替一次真实ET工具导入。S3需要检查ET-LIVE最多一次真实请求的实际权益/工具路径，使用全新临时CWP根，读回并验证原语言/hash/size/SourceRef，退出恢复为空；ET-DEADLINE仍在独立worktree，不并发编辑其写集。
