@@ -15,7 +15,7 @@
 3. [x] 按用户最新决定移除 StockInfoDownloader 施工线，查明 CWP 现有 StockInfoDLSimple provider 入口和剩余旧引用；不读写 StockInfoDownloader 工作树。
 4. [x] 写总览、统一交接模板和 9 份独立审计卡（CWP 报告通过 harness 回复返回；其他报告写入各自唯一结果文件）。
 5. [x] 在 CWP 中以测试先行把下载路径默认改为 StockInfoDLSimple，并更新当前说明；保留被 writer freeze 拦截的历史入口为不执行的兼容记录。
-6. [x] 集中核对卡片边界、验收口径、测试和 Git diff；只提交本计划目录与明确授权的 CWP 代码/测试/文档文件，不暂存既有 `config/source_acquisition.yaml` 用户改动。`d8e6054`（provider 对齐/审计包）与 `ae2b2b7`（退役旧批量下载旁路）均已推送 `origin/master`；两次推送前远端均核验为父提交，pre-commit 与 pre-push 检查通过。
+6. [x] 集中核对卡片边界、验收口径、测试和 Git diff；只提交本计划目录与明确授权的 CWP 代码/测试/文档文件，不暂存既有 `config/source_acquisition.yaml` 用户改动。`d8e6054`（provider 对齐/审计包）、`ae2b2b7`（退役旧批量下载旁路）与 `bc5fed9`（PWF 收尾）均已推送 `origin/master`；推送前远端均核验为父提交，pre-commit 与 pre-push 检查通过。ET lane 交接已收录为 [`results/earnings_transcripts.md`](results/earnings_transcripts.md)。
 
 ## 固定边界
 
@@ -42,6 +42,6 @@
 | PowerShell 批次命令输出曾截断/提前结束 | 改为各仓分支/状态的独立并行只读命令，并对关键仓库逐项检查。 |
 | 普通沙箱的 Git ownership 与少量文件访问限制 | 使用单次命令级 `safe.directory` 的只读 Git 查询；未写全局配置。 |
 
-## 下一步
+## 后续独立交接
 
-做最终的路径/边界核对，确认 9 个结果接口互不覆盖、目标仓库零写入，且用户原有 source acquisition 配置没有进入暂存集。
+本任务已完成审计卡、交接模板和 StockInfoDLSimple provider 对齐；ET lane 已收到并记录。其他 lane 结果到达后，由总指挥按各卡唯一接口与统一模板继续只读验收。该包不授权清理或并线；任何清理/并线另按证据制定施工计划。
