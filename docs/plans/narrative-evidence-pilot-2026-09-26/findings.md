@@ -331,3 +331,11 @@ Git写入/联网用正常用户，sandbox .git只读不是产品权限。测试�
 
 - Worktree隔离解决同时施工共享文件/index的问题，不要求串行卡也各建一份目录。N4-T1/T2文件互斥，可在一个专用worktree依次完成并分卡commit；T2按自己的base..head验收，不把已提交T1误记为T2越界。共享MAIN活动checkout仍会混入总指挥的提交/分支操作，应保留独立施工目录。
 - 模型输入收缩的正式提交df529a9远端CI37239069991已success；本轮说明与卡片修正没有引入代码变更。此收据不替代后续真实模型/消费者/N4C并发及空间验收。
+
+## 2026-10-04 — S5当前调用者复核与首批清理准备
+
+- 正常账号只读复核RF仍为fcap5319ee26、仅weekly alert/manifest两项owner修改，主线8a153f3。限定读取origin/main的scripts后确认source_preparation.py默认source_reader_v2=False，旧分支调用company_wiki_source的artifact角色选择与实际读取；不能用“v2已实现”推断旧derived没有消费者，也不能用.planning中的历史副本判定当前调用者。
+- SourceBundle当前实现允许原件与单个失效artifact独立；删除normalized不会让原件自动失效。但RF旧路径仍会失去派生复用、报告待生产角色，CWP公开extract-sections也仍读normalized。因此2.826GB derived与8,191条artifact记录继续保留，下一批需要明确退休旧功能或迁正式来源接口。
+- 首批仅处理审计已交付的七类缓存：index、drills、parser_tmp、qa、wheel-test、worker_runs.jsonl及worker_stdout/worker_stderr尝试日志。现行代码仅有旧生产者，未发现新读取者；drill目录确为2026-07演练库副本，parser_tmp仅旧结果JSON，qa仅PNG，wheel-test仅wheel。
+- Win32当前进程枚举未发现旧source-catalog Worker、supervisor或narrative-batch；worker_control为paused。清理前仍按实际文件计数/bytes、路径包含与reparse检查执行，保护生产DB、原件、配置、derived/staging/security_master/artifacts和旧失败run；不复制整库，不启动下载/模型，不修改RF/IQS/Dayu。
+- 执行完成：七类923文件/138,648,023 B删除，所有目标路径不存在。保护快照前后相同；公司原件33,133个/25,198,502,813 B清单未变，生产DB3,055,841,280 B完整SHA未变。四种真实资料正式source-reader CLI前后各4次、每轮12,343,802 B，SHA/size/identity/policy均一致。一次性脚本和重复临时JSON已删除，保留约9KB机器收据与短说明，不把这一结果当作全仓最新空间盘点。

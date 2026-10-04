@@ -418,3 +418,12 @@ S0/N4A及S2模型预算基础、CLI阶段与CI修复已正常发布，当前CI�
 - 模型请求投影收缩提交df529a9已推origin/master，pre-commit Ruff/mypy/host检查和pre-push快速门通过；GitHub CI [37239069991](https://github.com/zhengcb81/company-wiki/actions/runs/37239069991) 已completed/success，head_sha匹配df529a9。
 - 用户询问同目录先后执行N4-T1/T2，已将两张卡、总计划与并行计划改为：并行各用一个worktree；串行可复用同一专用worktree，T1测试完且commit后T2接续，分别记录base/head。T2允许以T1交付HEAD为base，不reset已交付代码；MAIN活动checkout仍由主线独占。没有新增人工签收或测试节点。
 - 此后续改动只有文档，diff check通过；不再重复业务测试。并行计划头部同步G1/S3已完成的事实，旧同日记录标为历史过程，防止重新派发ET-DEADLINE。用户配置保留。
+
+## 2026-10-04 — S5首批旧缓存实际清理完成
+
+- RF先行正常账号只读复核仍为fcap5319ee26、origin/main8a153f3、两项owner记录dirty。本轮只读其主线scripts确认默认仍走legacy SourceBundle；不能按v2实现存在便删全部derived。IQS/Dayu与外线代码写集未动。
+- 新增S5/S6实施细则：RF生产入口迁pathless、CWP旧section/全量writer退休、derived和artifact状态同批退出、旧全量span消费者逐项迁移后DB收缩。原件/来源版本/撤回事实保留，不等全量文档重新摘要，不复制巨大恢复备份，不加小节点人工门。
+- 首次只读dry-run逐集合数值正确但PowerShell对ordered hashtable的Measure-Object汇总得0，尚未删除即发现；改collection为PSCustomObject，第二次得到138,648,023 B/923文件，与交付审计一致。受限账号只读CIM访问拒绝后用正常账号核活进程；没有重复启动清理进程。
+- 一个有界PowerShell进程2026-10-04 22:21:38–22:26:27 UTC完成七集合删除；进程终态exit0/status=success。公司原件清单、完整catalog DB SHA、配置、保留derived/staging/security_master/artifacts、旧失败run及控制状态前后相同。一次性全量保护检查耗时约5分钟，不放进commit/CI。
+- 清理前后正式source_reader_cli各4次读取真实年报/招股书/IR/季报，共8次、每轮12,343,802 B，完整bytes SHA、来源身份、size及policy一致。没有下载/模型/原件副本；生产DB mutation0、原件删除0。所有923目标文件消失，按文件逻辑大小释放138.65MB；不声称磁盘free-space净变化或完整总量新实测。
+- 一次性两个脚本及重复临时读取JSON逐绝对路径验证并删除，只保留合并机器收据和短说明。用户配置不stage。S5仍in_progress；derived主体、旧全量span及N4C两卡集成/真实摘要/并发与消费者仍待完成。仅文档/收据提交，无新业务代码，不全仓重测。

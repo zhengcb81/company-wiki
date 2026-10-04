@@ -60,7 +60,7 @@ ET-DEADLINE只改变内部执行边界。ET-LIVE只证明真实ET工具→临时
 
 ET-LIVE独占报告已交：工具调用1次、FMP GET 1次、HTTP 402（由`provider_entitlement_required`映射；公共结果未返回status字段）、FY2026 Q3、原语言请求、10秒/1MB、没有重试；未取得正文，故未运行导入/SourceRef。确定性测试分别CWP 7 passed、FF 17 passed；临时根清理且CWP生产配置指纹未变。详情见独占目录`report.md`；这份报告完成验收记录，但不代表live source链通过。
 
-SPACE-S5既有 `storage-audit/1`报告是施工输入，不是自动删除授权manifest。首批138,648,023 B候选仍需MAIN核变化；derived 2,826,010,634 B尚有reader及8,191条artifact引用，要先迁caller。DB freelist为0，单独VACUUM不释放空间。原件不进删除候选。
+SPACE-S5既有 `storage-audit/1`报告是施工输入。MAIN已完成[首批138,648,023 B/923文件清理](harness_lanes/results/s5_first_cache_cleanup_2026-10-04.md)，保护快照和四份原件正式CLI前后实读均通过，不重派不重复计算收益。derived 2,826,010,634 B仍有RF旧默认读取、CWP section入口及8,191条artifact引用；按[实施细则](s5_s6_legacy_storage_implementation.md)先迁caller。DB单独VACUUM不能释放旧全量span占用；原件不进删除候选。
 
 ## 依赖图与合入顺序
 

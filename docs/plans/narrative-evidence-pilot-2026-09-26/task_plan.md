@@ -45,7 +45,7 @@ StockWiki/IQS已有owner工作及消费者交付，本轮只读，不重复分�
 | G1 残余门禁/签收精简（第一优先） | complete（CWP来源链与G1-LEGACY已合入；FF SourceRef v2于`e1eda60`推送） | 46项清单已分为已退出、必要自动校验、能力边界及外仓owner事项；未找到生产调用者的旧摘要/binding/archive工具不再作为当前门，留待S5/S6 caller清理 | CWP来源/as-of 64项、resolver/planner/canonical 100项与G1-LEGACY 170 passed / 1 deselected既有收据；FF集中回归177 passed / 1 skipped / 39 subtests，Ruff及push gate GREEN；电话会provider→CWP导入端到端12 passed。保留SHA、来源身份/期间/公开日、可回放引用和资源限制 |
 | S3 SourceRef/SourceExport 虚拟化与来源默认收敛（第二优先） | **complete**（FF `eb0af13`、ET `63c4090`已推送；CWP SourceExport已发布；合入后FF→ET→CWP链及各仓责任集均GREEN。live FMP仍受HTTP 402权益限制，不影响接口合同完成） | 上层只用SourceRef/SourceExport v2；复用FF exact/latest_as_of和pathless reader，不依赖物理目录；电话会走正式ET CLI并由CWP持有原件；provider定位仍在adapter层 | ET deadline分支已快进到main；其`/1`、`/2`、discovery/candidate wire与goldens未改，CWP importer现有provider-aware FMP JSON合同经真实三仓离线链验证。跨仓脚本验证FF uppercase exchange转ET小写、精确FY/Q、FMP原JSON与canonical text各自SHA/size、unknown publication、pathless SourceRef、重复读取不触provider，以及超时后worker结果清理。合并后ET `tests/test_retrieval_cli_e2e.py` 6 passed、10 goldens matched；FF companion 5 passed且Ruff clean；CWP FMP importer 5 passed。FF只在owner目录用`eb0af13`修正交易所slug与3秒清理窗口；ET只更新过期golden说明并合入`63c4090`。旧“Motley 24字段唯一可导入”记录已由当前源码/测试更正。真实FMP HTTP 402不作为代码合同门；正费用额度没有实际账单计量，本计划只声称FF zero-cost拒绝与单次provider请求，不声称美元账单cap已实测。 |
 | S4 N4C real samples and storage plan | in_progress（首批有限真实试跑已运行，尚无最终摘要；年报/招股书选材成功，季报/IR空选材，模型旧错误缺安全HTTP诊断。MAIN正在收缩请求冗余；N4-T1/T2为独立施工卡，ET TXT live仍未取得） | four real document types / consumer reads / language and citation coverage / total incremental bytes; retain only status/stop/uninstall compatibility for old worker process cleanup | node C; bounded real batch, then measured 1/2/4 parallelism；至少覆盖年报、招股/再融资、IR和电话会/季度类中的四种，记录摘要证据定位和新增空间 |
-| S5 B2逐caller清理 | pending（SPACE-S5只读审计已交付） | 审计确认约138.6 MB无代码调用者集合可列入首批候选；2.826 GB `derived/` 仍有 reader 与 8,191 条 artifact 路径引用，必须先迁移；报告不是删除清单 | 主线复核当前调用者/生产文件状态后分集合处理；每批验证原件与来源事实保留并测实际释放量 |
+| S5 B2逐caller清理 | in_progress（[首批缓存清理完成](harness_lanes/results/s5_first_cache_cleanup_2026-10-04.md)，主体迁移待办） | [S5/S6实施细则](s5_s6_legacy_storage_implementation.md)；已删除138,648,023 B/923文件，原件/生产DB保护校验及四份原件CLI前后实读通过。2.826 GB `derived/` 仍有 RF旧默认artifact读取、CWP sections及8,191条路径引用，须先迁移/退休 | 每集合实际释放量及原件/来源事实保护收据；只有存储大节点做集中接口验收，不逐文件复核 |
 | S6 DB事实收缩与收尾 | pending | 表级盘点，删除不可再消费派生/废索引并收缩，来源版本/撤回事实保留；旁路兼容、docs/hook残留清完 | 同一存储节点；commit/push、PWF收尾 |
 | 可选 exact-SHA原件对象去重 | 不阻S0–S6完成 | 先用已有SHA/size找候选、逐候选验字节，保留所有source/location版本事实 | 有真实收益才实施；不报未测节省量 |
 
@@ -103,12 +103,13 @@ TDD框住公开行为，不把旧签收规则写进新测试。仅S0相关收口
 - [ET-LIVE电话会原文导入与虚拟化独立验收卡](harness_lanes/et_transcript_live_import_acceptance.md)
 - [46项原审计基线及2026-10-04覆盖更新](gate_permission_inventory_2026-10-03.md)，基线日期不变；当前状态以新增覆盖节为准
 - [最新空间收据](harness_lanes/results/gd_storage_final_cleanup_2026-10-03.md)
+- [S5/S6旧派生退出与来源库降容实施细则](s5_s6_legacy_storage_implementation.md)
 - [findings](findings.md)、[progress](progress.md)
 - 旧implementation/execution/worker/review/space卡保技术背景，其流程/顺序由本页覆盖。已交付harness不再派发同一工作。
 
 ## Next Step
 
-**MAIN下一动作：**模型请求投影收缩已在df529a9发布；N4-T1/T2按互斥写集实施，并行用两个worktree，串行可复用一个专用worktree。MAIN接收后集成并做一次共享Worker端到端。新run先核算旧unknown reservation和输入/输出预留，费用/token不足不得发请求。先取得真实摘要与consumer实读收据，再比较P1/P2/P4吞吐及新增空间。正式SourceRef/raw校验继续；Dayu远端403和ET provider402单独记录，不伪造成功。审计结果目录按其独立计划管理。
+**MAIN下一动作：**核N4-T1/T2交付并集成共享Worker；未交付期间按S5/S6细则B只处理MAIN独占的旧入口迁移/退休，不改外线施工现场。首批七类缓存138.65MB已清理并验证，不重跑。新真实run先核算旧unknown reservation和输入/输出预留，费用/token不足不得发请求。真实摘要/consumer、P1/P2/P4及S5/S6主体迁移继续待办；Dayu403和ET402单独记录，不伪造成功。
 
 ## 2026-10-04：新增三张可独立派发的施工卡
 
