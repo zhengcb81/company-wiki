@@ -379,3 +379,20 @@ S0/N4A及S2模型预算基础、CLI阶段与CI修复已正常发布，当前CI�
 - 按用户要求，在总计划中把该联调列为ET-DEADLINE合入前的明确必过节点，不再只作为一句后续建议。
 - 细则固定使用FF正式调用入口、ET正式CLI/supervisor/worker和CWP importer/SourceExport真实路径，provider侧使用fake HTTP；包含FMP golden与已知26字段/24字段形状差异、原语言及hash/size/身份/期次、共享限额/截止时间、重复导入、失败回收和空scratch恢复的验收标准。
 - 这是计划细化，尚未运行联调；测试前必须使用隔离短TEMP根，零付费API/LLM调用，生产raw/catalog/config不变。全部通过后才快进合入ET提交。
+
+## 2026-10-04 — FF→ET→CWP 离线契约联调与缺陷修复
+
+- 用真实 FF companion/`EarningsTranscriptsTransport`、ET deadline 分支 `0017f24` 正式 `transcript_tool.py`→supervisor→worker→FMP parser/serializer、CWP真实query/import/source-reader CLI跑通离线链路。只有HTTP由ET既有私有worker launcher换成fake session；没有付费API、LLM或生产目录写入。工具 `tests/e2e/run_ff_et_cwp_offline_acceptance.py` 使用短TEMP scratch并在退出时验证它确已删除。
+- 成功链保留原始FMP JSON字节，SHA-256/size/MIME一致；SourceRef无物理路径；unknown publication不伪造日期且不参加历史as-of；第二次调用复用同一SourceRef、provider调用数为0、raw只1份。key未进FF结果/日志，成功后ET worker临时目录为空。
+- 联调最初因ET `request_schema`失败，追溯到FF将公司身份的`NASDAQ`直接传给只接受`nasdaq`/`nyse`的ET公共CLI。FF adapter现有小写规范化和回归测试；此处只改exchange传输字段，不重写身份合同。
+- 有限慢provider场景复现另一个真实问题：FF外层subprocess timeout与ET worker deadline同为2秒，FF先杀ET父进程，导致`et-retrieval-*`目录在worker结束后仍残留。FF现按ET下游60秒上限裁剪，先为清理保留3秒并延长外层等待；FF总余时不足3秒时不启动ET子进程。用5秒fake响应/2秒采集预算复测后映射`provider_deadline`，没有raw入库且worker scratch清空。
+- ET独立 `tests/test_retrieval_cli_e2e.py` **6 passed / 19.13s**；FF `tests/test_transcript_companion_transport.py` **5 passed / 9.77s**，改动文件Ruff通过；CWP FMP importer责任包 **5 passed / 9.45s**。最终FF→ET→CWP离线脚本成功；pytest basetemp与E2E scratch逐路径验证删除。CWP测试禁用第三方pytest插件时有一条`asyncio_mode`未知配置warning，无测试失败。
+- 旧ET golden README和早期findings中的“CWP只接受Motley 24字段、FMP 26字段尚不能导入”是已过期快照。当前CWP源码与`test_fmp_unknown_publication_cli_stores_original_but_excludes_historical_cutoff`确认FMP provider contract已存在；不增加CWP adapter。ET deadline分支的golden说明已按现状更新。
+- 发布状态：FF两文件已测但尚未提交；ET deadline候选原`0017f24`新增一个producer README修正尚未提交。提交前确认各自远端头未前进，不带入FF API key、ET未跟踪文件、CWP用户配置和其他审计结果；随后FF修复推送、ET分支快进并入main后推送。
+
+## 2026-10-04 — ET deadline并线及合入后验收
+
+- 上一条是提交前快照，现已完成：FF adapter/test commit `eb0af13`推至`filing-fetch/main`；ET deadline commit `0017f24`及golden README更正`63c4090`经纯快进进入`earnings-transcripts/main`，远端也已推至`63c4090`。候选branch同步到同一tip。
+- 合入后在ET `main`重新运行FF→ET→CWP完整离线脚本成功；ET CLI E2E **6 passed / 22.54s**且**10 goldens matched**；FF companion **5 passed / 10.55s**；CWP FMP importer **5 passed / 14.98s**。Ruff之前在FF两个变更文件上通过；实际测试basetemp逐项清除。CWP pytest禁用第三方插件运行，有一条仓库`asyncio_mode`配置warning，没有失败。
+- ET main工作树仍只有两个原有未跟踪个人文件 `.workbuddy-ai/`、`eval_results.json`；deadline worktree无跟踪改动。FF的未跟踪API key文件保持未读、未暂存、未推送。CWP本机provider配置仍未改。
+- S3跨仓合同与deadline接线已完成；真实FMP取数权益仍未知/HTTP 402，不阻塞offline合同。下一步转S4/N4C：先逐类型只读确认active、metadata可见、原文字节SHA一致的真实样本；再跑有限Worker批次并测consumer实读、证据定位/语言与总空间。样本不合格就通过正式producer/activation流程解决，不手改catalog。

@@ -297,3 +297,16 @@ Git写入/联网用正常用户，sandbox .git只读不是产品权限。测试�
 - ET-DEADLINE handoff声明92项集中测试、全量172 passed、10 goldens matched、ruff和diff check clean；只读审计按卡没有运行测试，也没有CI run URL，因此这些是交接记录，不是本次独立测试证据。handoff列出的清理失败后无法确认进程退出、`--api-key` child-env覆盖和Windows受限环境仍有未单独验证项；一次跨仓联调只覆盖核心生产CLI/批次路径，不将防御边缘项扩大成额外人工门。
 - 公共wire、serializer和goldens在ET-DEADLINE提交中未改；主线之外是ET内部supervisor/worker、预算路由及专属测试/文档。提交可作为单提交候选，但由CWP主线完成一次FF→ET生产CLI→CWP importer/SourceExport离线E2E后并线。已知合同缺口是FMP 26字段JSON vs CWP当前只接受Motley形状的24字段；不能把Motley既有12项E2E说成FMP已验收。
 - 本次复核未触及ET原件、owner未跟踪文件、ET配置、FF/RF工作树或CWP生产配置；CWP仍只有用户已有 `config/source_acquisition.yaml` 未提交修改。
+
+## 2026-10-04 — FF→ET→CWP 契约联调后的事实更正
+
+- 上文“当前CWP只接Motley 24字段，FMP 26字段不能导入”来源于ET deadline 分支golden说明和较早的只读快照；已与当前CWP源码/测试重新核实，结论过期。CWP存在provider-aware的FMP 26-field JSON合同，准确保存原始payload，保留unknown publication，并阻止它进入历史as-of查询。对应消费者E2E：`tests/contract/test_transcript_import_cli_e2e.py::test_fmp_unknown_publication_cli_stores_original_but_excludes_historical_cutoff`。
+- FF→ET→CWP隔离离线完整链已运行并通过：真实FF子进程、真实ET deadline CLI/supervisor/worker、真实CWP query/import/verified-open，假的FMP HTTP响应；原文bytes/SHA/size/MIME、SourceRef pathless、identity/FYQ、重复导入、unknown publication及scratch清理均核验。没有声称真实FMP权益可用；ET-LIVE仍因HTTP 402未获正文。
+- 联调发现FF把`NASDAQ`大写值直接传给只接受`nasdaq`/`nyse`的ET CLI；FF adapter已统一lowercase并由单测和端到端覆盖。另复现FF外层timeout与ET内部硬deadline同刻导致被迫杀父进程、遗留`et-retrieval-*`目录。FF现给ET cleanup预留3秒，并在总余时不足时停止发起，ET子进程有限慢响应E2E证明目录清空。
+- 以上实现分别归FF和ET owner目录；FF聚焦测试5 passed/Ruff clean，ET CLI E2E 6 passed，CWP importer E2E 5 passed，三个仓库链路脚本GREEN。FF修复和ET README说明修正都尚待提交/推送；在提交时继续只stage明确文件，保护`config/FMP_API_KEY.txt`、ET未跟踪资料及CWP用户配置。
+
+## 2026-10-04 — FF/ET已发布并线的最新状态
+
+- 上述“尚待提交/推送”是联调后、发布前快照；当前FF `eb0af13`已在远端main，ET `63c4090`已在远端main并包含deadline `0017f24`。ET快进合入不是squash/cherry-pick，保留交付提交祖先；候选branch与main同指`63c4090`。
+- 合入后完整离线契约再次成功，ET CLI E2E 6 passed、10 goldens matched、FF companion 5 passed、CWP FMP importer 5 passed。ET main无tracked改动；个人未跟踪文件保留。CWP唯一用户配置和FF未跟踪API key均没有被stage或写入。
+- S3完成条件满足，N4C真实样本文档资格和有限Worker批次是当前计划下一步。待验证的真实内容资格包括IR metadata可见性、招股书当前来源状态和ET TXT是否已有可规范化SourceRef；不可绕过admission或直接改数据库。positive dollar amount的provider实际计费未被ET wire提供，不能写作已实施美元实时扣费上限。
