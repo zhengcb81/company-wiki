@@ -89,6 +89,21 @@ N4 完成必须有生产代码入口、正常/故障真实 CLI 收据、usage/�
 4. 节点B本地HTTP正式CLI父进程kill后同run恢复、文件mutex重取、原始来源/旁路任务不变已绿。费用对账事务另以提交成功但返回ACK丢失故障注入证明可重试。batch deadline从入口开始计时，覆盖来源读取、准备、解析、提交；持久/临时峰值按实际文件与SQLite WAL统计，只有总增量和coverage达标才进入四份真实样本节点C。
 5. CWP producer caps与FF-S3现已在主线汇合：CNINFO能力以1.2.0声明并经公开真实年报完成下载限额/哈希闭环；FF-S3已进入FF main。Dayu仍不支持真实bounded transport，相关硬限额请求在外发前拒绝。N4专属下一待办是N4C真实样本多文档批次、1/2/4并行吞吐和新增空间测量；它排在主计划G1门禁精简及S3虚拟化收口之后。
 
+### 2026-10-04 真样本入场条件（只读预检结果）
+
+N4C的四种文档仍按主计划在G1/S3之后运行。预选不能直接用数据库中的状态标签替代来源验证；每份样本先由SourceRef query取得精确版本，再由既有pathless open/export验证身份、as-of、元数据可见性与原文字节SHA。
+
+| 类别 | 当前候选 | 本次只读证据 | N4C资格 |
+|---|---|---|---|
+| 年报 | 金山云2025年报 | SHA `efe2ccd9…`，4,826,662 B；已有4,779 parsed spans及normalized/summary工件 | active且可验证；批次必须作为复用基线，不冒充本次新生成 |
+| 半年报 | 金山云2025中报 | SHA `4f589193…`，3,396,644 B；已有2,056 spans和派生工件 | active且可验证；测幂等复用 |
+| 季报 | 金山云截至2026-03-31季度业绩 | SHA `37f0eb13…`，309,955 B；active，尚无spans/artifacts | 候选新处理输入；只取经营描述，财务数值不扩成全篇摘要 |
+| 投资者关系 | 三七互娱2026-05-11业绩说明会记录 | SHA `3e25aab4…`，133,294 B；narrative_derivation打开通过，正文有具体产品/出海进展及模板话术 | 暂不合格：v2 `describe_version`报`metadata_not_visible`。先按现有admission规则补齐可见身份/公开日，再用于Worker/export；不得把成功读字节当作source contract完整 |
+| 招股书 | 盛美上海IPO招股说明书 | 旧记录SHA `02adc989…`，7,073,891 B；document和original-primary location均retired | 暂不合格：不可直接用旧SourceRef或物理路径。只有正式再入库/验证取得active可见SourceRef并匹配原文SHA后才能纳入 |
+| 电话会TXT | earnings-transcripts既有原语言文件 | CWP当前7条active transcript记录是PDF/JSON sidecar；单次live FMP调用返回402，没有新TXT入库 | 需ET正式工具/既有TXT的完整来源合同导入；不可把旧PDF或假provider envelope算作TXT闭环 |
+
+active catalog盘点总数：年报46、半年报8、季报7、IR 3,682、电话会7；229份招股书全部retired。以上来源分类未调用LLM、未启动Worker、未修改生产数据库，也没有复制raw。实际N4C不因这些预检提前开始：S3关闭后先验证招股书、IR、ET TXT进入既有SourceRef合同；任一类型无合格来源就继续报告缺口，不降低SHA/身份/公开日期要求。并发1/2/4比较仍需同一批次、相同source set与确定性输出基准，并量实际模型费用、最终工件、SQLite/WAL和scratch峰值。
+
 
 ## 2026-10-03 旧 Worker 入口退役状态
 

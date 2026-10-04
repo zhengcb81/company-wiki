@@ -251,3 +251,12 @@ Git写入/联网用正常用户，sandbox .git只读不是产品权限。测试�
 - CWP配置loader已支持${PROJECT_ROOT}和${PYTHON_EXECUTABLE}；`JsonCommandAdapter`把adapter checkout作为子进程工作目录。这些是来源provider配置层的部署细节，SourceRef/SourceExport和consumer不接触它们。
 - 本地source_acquisition.yaml相对HEAD的三处差异是CNINFO adapter由1.1.0升至1.2.0、project_root从旧provider worktree改指向cwp-cninfo-bounded-budget worktree、显式打开supports_acquisition_budget。它是正在使用的集成测试配置，保持未提交/未暂存。
 - 所以当前所谓“配置可移植”无需新增通用DATA_LAKE_ROOT/adapter-path环境解析器。待bounded provider进入其稳定checkout后，仅将该adapter路径校正到真实canonical目录并发布正常配置；其他HK/US仍由纯外部Dayu配置持有，Dayu代码不改。
+
+## 2026-10-04 — N4C真实样本来源预检（只读）
+
+- 使用当前CWP `SourceCatalog.reader` 与 SQLite `mode=ro/query_only` 做样本盘点；未调用模型、未启动Worker、未写数据库或复制原件。catalog中active记录有annual 46、semi-annual 8、quarterly 7、investor-call transcript 7、investor-relations 3,682；229份prospectus全部为retired。verified/active metadata assertion目前只覆盖annual 13、quarterly 2、semi-annual 1，不能把active等同v2 metadata可见。
+- 可用的同公司财报组为金山云：2025年报SHA `efe2ccd9…` / 4,826,662 B、2025中报 `4f589193…` / 3,396,644 B、2026年3月季报 `37f0eb13…` / 309,955 B。2025年报和中报已有parsed spans与normalized/summary工件，季报没有spans/artifacts；它们可用于检查复用/idempotency与未处理输入的增量差异，不能把旧工件记作本次Worker产量。
+- 实读三七互娱2026-05-11 IR活动记录（SHA `3e25aab4…` / 133,294 B，3页，提取2,394字符）：`SourceVersionReader.query_local` 找到as-of候选；`open_version(..., purpose="narrative_derivation")` 返回完整字节且SHA/size匹配。正文包含具体游戏储备、品类布局、海外区域与产品上线/榜单动态，也有重复的“提升经营质量/按法规披露”模板回复，适合作为叙述筛选正反样本。但`describe_version`在当前v2 reader下返回`metadata_not_visible`，默认`filing_reuse`因非财务期次返回`period_unknown`；正文可读不代表已能作为pathless叙述export。须通过现有来源metadata/admission合同使其身份和公开日期可见，不能绕过。
+- 代表性招股书“盛美上海首次公开发行股票并在科创板上市招股说明书”有旧记录SHA `02adc989…` / 7,073,891 B，但document与original-primary location均为`retired`；当前`SourceVersionReader`不允许把它当active SourceRef。其余228份招股书同样retired。不得直接开物理路径或改状态；N4C要包含招股书，须用正式再入库/metadata验证流程取得可见的active SourceRef，且原始字节SHA一致。
+- 当前CWP的7条active `investor_call_transcript`记录是旧PDF或JSON sidecar，没有已验证的ET原语言TXT；ET-LIVE真实请求返回402，未导入。N4C电话会样本须来自ET的既有原语言TXT并经正式importer生成SourceRef，或等合法provider权益恢复后按S3合同导入，不把旧PDF冒充TXT闭环。
+- 结论：N4C仍排在G1/S3之后。先固定active verified财报基线，再将IR、招股书、ET TXT的来源可见性列入样本入场检查；无法通过现有来源合同的样本要报告为未就绪，不能通过松开验证把批次做绿。实际Worker/模型并发、来源覆盖、成本与总空间测试仍未开始。

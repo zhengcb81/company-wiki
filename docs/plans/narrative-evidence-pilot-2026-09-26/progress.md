@@ -329,3 +329,11 @@ S0/N4A及S2模型预算基础、CLI阶段与CI修复已正常发布，当前CI�
 - CWP唯一本机未提交项仍为config/source_acquisition.yaml，未暂存。CWP本轮只更新总计划/进度/发现/验收卡并修正ET-LIVE报告状态，不改生产代码/配置。
 - 随后用一次独立TEMP、假provider正式CLI检查真正worker异常退出映射：初次临时脚本漏设stdin，得到invalid_json后立即修正脚本；修正版以SystemExit:7让子进程真实退出，CLI返回provider_error/retrieval_worker_failure，无key/body泄漏且worker临时目录为空，父TEMP根清理完成。无项目代码改动。
 - provider配置审查确认现有${PROJECT_ROOT}/${PYTHON_EXECUTABLE}变量已处理CWP与Python解释器定位；唯一脏差异是用户本地把CNINFO adapter指向隔离集成worktree并标记budget能力。保持该设置不动；CNINFO进入稳定StockInfo checkout后只校正adapter路径，不新增根路径解析层。
+
+## 2026-10-04 — N4C真实样本来源预检（只读）
+
+- N4C仍按总计划等待S3收口；本次只用read-only catalog/API预选真样本，没有启动Worker/模型、写数据库或复制原文。
+- 金山云2025年报、2025中报和2026年3月季报构成同公司可见财报组；前两份已有parsed/normalized/summary工件，季报尚无spans/派生物，正式批次必须区分复用与新处理增量。
+- 三七互娱2026-05-11 IR记录经SourceRef narrative_derivation读出、验证133,294 B SHA，实际包含游戏储备、重点品类和海外上线等信息，也重复出现一般性模板话术；但当前v2 `describe_version` 返回`metadata_not_visible`，未满足pathless export入场条件。
+- catalog内229份招股书全为retired；其中盛美上海招股书7,073,891 B的记录和原件位置状态均retired，不通过物理路径绕过。7条active电话会记录为旧PDF/JSON而非ET TXT；ET-LIVE仍因HTTP 402未导入。
+- N4C细卡已新增逐项入场要求：先通过既有source admission得到active、v2 metadata可见且字节SHA匹配的IR/招股书/ET TXT；若未就绪，阶段如实保持pending。下一步仍是验收ET-DEADLINE交付并完成S3确定性联调。
