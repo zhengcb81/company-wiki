@@ -350,7 +350,7 @@ MIT License
 ## 致谢
 
 - 基于 [Karpathy LLM Wiki](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f) 概念
-- 使用 [StockInfoDownloader](https://github.com/zhengcb81/StockInfoDownloader) 下载财报
+- 使用 [StockInfoDLSimple](https://github.com/zhengcb81/StockInfoDLSimple) 作为 A 股下载 provider；正式入库走 company-wiki Source Catalog
 
 
 > Indexed does not equal reusable: only active, capture-ready documents under a registered reusable root kind are reuse candidates.

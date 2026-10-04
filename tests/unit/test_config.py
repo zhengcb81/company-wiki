@@ -123,6 +123,18 @@ search:
 class TestConfigDefaults:
     """测试配置默认值"""
 
+    def test_downloader_paths_use_stockinfo_dl_simple(self, tmp_path):
+        """默认下载器路径指向当前选定的 StockInfoDLSimple。"""
+        from config import PathsConfig
+
+        expected_root = Path.home() / "Projects" / "StockInfoDLSimple" / "v2-clean-rewrite"
+        assert PathsConfig().downloader_dir == expected_root
+        assert PathsConfig().windows_downloads == expected_root / "downloads"
+
+        loaded = Config._build_config({}, tmp_path)
+        assert loaded.paths.downloader_dir == expected_root
+        assert loaded.paths.windows_downloads == expected_root / "downloads"
+
     def test_default_values(self):
         """测试默认值"""
         from config import LLMConfig, SearchConfig

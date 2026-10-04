@@ -54,84 +54,9 @@ python3 scripts/config.py
 
 ### 下载问题
 
-#### Q3: 文件下载到错误目录
+公司资料的正式发现、下载和入库由 Source Catalog 管理；A 股 provider 使用 StockInfoDLSimple。下载先进入受控 staging，由 company-wiki 校验原件身份、SHA-256 和 manifest 后入库。排错请从 [Source Acquisition 运维说明](OPERATIONS.md) 与 [去重设计](source-acquisition-dedup-design.md) 开始。
 
-**症状**: 文件下载到 `~/StockInfoDownloader/downloads/` 而不是 `~/company-wiki/companies/`
-
-**原因**: StockInfoDownloader 的 config.json 中 save_dir 配置错误
-
-**解决方案**:
-```bash
-# 检查配置
-python3 scripts/download_reports_v2.py --check
-
-# 修复配置
-python3 -c "
-import json
-from pathlib import Path
-
-config_path = Path.home() / 'StockInfoDownloader' / 'config.json'
-with open(config_path) as f:
-    config = json.load(f)
-
-config['save_dir'] = str(Path.home() / 'company-wiki' / 'companies')
-
-with open(config_path, 'w') as f:
-    json.dump(config, f, indent=2)
-"
-```
-
-#### Q4: 下载超时
-
-**错误信息**:
-```
-subprocess.TimeoutExpired: Command timed out
-```
-
-**解决方案**:
-
-1. 增加超时时间:
-```python
-result = subprocess.run(..., timeout=1200)  # 20分钟
-```
-
-2. 检查网络连接:
-```bash
-curl -I https://www.cninfo.com.cn
-```
-
-3. 检查 StockInfoDownloader 是否正常:
-```bash
-cd ~/StockInfoDownloader
-python3 main.py --help
-```
-
-#### Q5: 下载失败
-
-**错误信息**:
-```
-Exit code: 1
-ERROR: ...
-```
-
-**解决方案**:
-
-1. 检查 StockInfoDownloader 日志:
-```bash
-ls ~/StockInfoDownloader/logs/
-cat ~/StockInfoDownloader/logs/*.log
-```
-
-2. 检查股票代码是否正确:
-```bash
-python3 scripts/download_reports_v2.py --list | grep "公司名"
-```
-
-3. 手动测试下载:
-```bash
-cd ~/StockInfoDownloader
-python3 main.py 688012  # 中微公司
-```
+旧 `StockInfoDownloader` 配置和 `collect_reports.py` 写入目录说明已经退役；`collect_reports.py` 受 legacy writer freeze 拦截。不要修改旧仓的 `config.json`，也不要从旧入口直接写 `companies/`。
 
 ---
 

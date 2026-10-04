@@ -20,6 +20,10 @@ from common import WIKI_ROOT
 
 logger = logging.getLogger(__name__)
 
+_DEFAULT_DOWNLOADER_ROOT = (
+    Path.home() / "Projects" / "StockInfoDLSimple" / "v2-clean-rewrite"
+)
+
 _PROJECT_DOTENV_AUTHORITATIVE_KEYS = frozenset(
     {"MINIMAX_API_KEY", "MIMO_API_KEY", "DEEPSEEK_API_KEY"}
 )
@@ -126,8 +130,8 @@ class DownloaderConfig:
 class PathsConfig:
     """路径配置"""
     wiki_root: Path = Path.home() / "company-wiki"
-    downloader_dir: Path = Path.home() / "StockInfoDownloader"
-    windows_downloads: Path = Path.home() / "StockInfoDownloader" / "downloads"
+    downloader_dir: Path = _DEFAULT_DOWNLOADER_ROOT
+    windows_downloads: Path = _DEFAULT_DOWNLOADER_ROOT / "downloads"
 
 
 @dataclass
@@ -286,8 +290,8 @@ class Config:
         
         paths = PathsConfig(
             wiki_root=wiki_root,
-            downloader_dir=Path(os.path.expanduser("~/StockInfoDownloader")),
-            windows_downloads=Path(os.path.expanduser("~/StockInfoDownloader/downloads")),
+            downloader_dir=_DEFAULT_DOWNLOADER_ROOT,
+            windows_downloads=_DEFAULT_DOWNLOADER_ROOT / "downloads",
         )
         
         return Config(
