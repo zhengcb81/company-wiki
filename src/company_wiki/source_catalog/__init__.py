@@ -112,13 +112,6 @@ from .extraction_quality import (
     ExtractionQualityUnavailableError,
 )
 from .section_extractor import SectionSlice
-from .scheduler_policy import (
-    SOURCE_ONLY_SCHEDULER_POLICY_SCHEMA_VERSION,
-    SourceOnlySchedulerPolicy,
-    SourceOnlySchedulerPolicyError,
-    SourceOnlyStage,
-    SourceOnlyStageContract,
-)
 from .dayu_cli_adapter import DayuCliAdapterError, DayuCliDownloadAdapter
 from .security_identity import (
     CNINFO_STOCK_URL,
@@ -229,17 +222,12 @@ __all__ = [
     "SEC_TICKER_URL",
     "SOURCE_RESOLVER_SCHEMA_VERSION",
     "SOURCE_REF_SCHEMA_VERSION",
-    "SOURCE_ONLY_SCHEDULER_POLICY_SCHEMA_VERSION",
     "SOURCE_ENSURE_SCHEMA_VERSION",
     "SUMMARIZER_VERSION",
     "ScanReport",
     "SECTION_EXTRACTOR_VERSION",
     "SectionSlice",
     "SourceCatalog",
-    "SourceOnlySchedulerPolicy",
-    "SourceOnlySchedulerPolicyError",
-    "SourceOnlyStage",
-    "SourceOnlyStageContract",
     "SourceAcquisitionService",
     "SourceEnsureResult",
     "SourceEnsureStatus",

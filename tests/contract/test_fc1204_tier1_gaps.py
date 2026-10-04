@@ -146,31 +146,6 @@ def test_restore_asset_success_path_and_revert():
     assert reverted.receipt_id == receipt.receipt_id
 
 
-# --- scheduler_policy: 79, 93 -------------------------------------------------
-
-def test_scheduler_policy_rejects_bad_schema_version():
-    from company_wiki.source_catalog.scheduler_policy import (
-        SOURCE_ONLY_SCHEDULER_POLICY_SCHEMA_VERSION,
-        SourceOnlySchedulerPolicy,
-        SourceOnlySchedulerPolicyError,
-    )
-
-    with pytest.raises(SourceOnlySchedulerPolicyError, match="unsupported"):
-        SourceOnlySchedulerPolicy(
-            schema_version="wrong-" + SOURCE_ONLY_SCHEDULER_POLICY_SCHEMA_VERSION
-        )
-
-
-def test_scheduler_policy_rejects_untrimmed_catalog_method():
-    from company_wiki.source_catalog.scheduler_policy import (
-        SourceOnlySchedulerPolicy,
-        SourceOnlySchedulerPolicyError,
-    )
-
-    with pytest.raises(SourceOnlySchedulerPolicyError, match="exact text"):
-        SourceOnlySchedulerPolicy().require_dispatch("scanning", " scan ")
-
-
 # --- visibility_bridge: 40, 43->46 -------------------------------------------
 
 

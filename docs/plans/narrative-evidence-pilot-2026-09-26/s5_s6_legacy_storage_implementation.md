@@ -6,7 +6,7 @@
 
 - SPACE-S5报告：`C:/Users/郑曾波/Projects/company-wiki-storage-audit-20261003/results/storage_audit.{md,json}`。报告的138,648,023 B缓存、2,826,010,634 B derived、3,055,800,320 B DB是当时实测，下一批只核变化的集合。
 - 2026-10-04重新读RF `origin/main@8a153f3`实际scripts：`source_preparation.prepare_source`默认`source_reader_v2=False`；旧分支选取并实读SourceBundle artifact。v2实现存在不等于生产默认已切换。
-- CWP SourceBundle允许坏artifact与可用原件独立，不能声称normalized一丢就让整个原件不可用。当前公开`extract-sections`仍需要normalized。公开normalize/summarize和旧后台启动入口已退出，别重新实现整套永久转换来维护它们。
+- CWP SourceBundle允许坏artifact与可用原件独立，不能声称normalized一丢就让整个原件不可用。`extract-sections` CLI/服务API已退出。此前“公开normalize/summarize及后台启动都已退出”的记录不准确：CLI启动入口已撤下，但`SourceCatalog.normalize/summarize/summarize_with_llm`按需方法仍存在；旧 Worker 类也曾保留。2026-10-05已移除无生产调用者的旧 Worker 类和仅供其调度的阶段策略，但未删按需API、normalizer、摘要模块或历史数据。
 - 新叙述选择从verified raw现场建立精选EvidenceSpan，不依赖数据库全量旧span。EvidenceSpan仍是来源层canonical对象；改变的是永久存储范围，不是取消来源定位、原文校验或引用回放。
 - IQS当前独立项目不触碰；Dayu零代码修改。RF owner两项assurance记录不加入本线提交；`config/source_acquisition.yaml`保持用户原样。
 
@@ -25,7 +25,7 @@
 1. RF在独立worktree基于当前main实施；先读现有PWF及生产调用者，保留owner工作。本地TDD先验证：正式source preparation只消费SourceRef v2，只有原件而没有derived时也能成功；证据SHA/公司/期次/as-of错误仍拒绝；结果没有物理路径及旧artifact正文读取。继承现有v2 record/reuse receipt合同，不新建来源类型或任务库。
 2. 实际调用者显式使用现有catalog配置接线：缺配置给可诊断的配置错误，不能通过猜目录或偷偷落回legacy掩盖。更新调用者与CLI默认一起交付；仅改默认bool却让生产入口缺配置失败，不算完成。
 3. 清查FF与其他有证据的旧SourceBundle消费者：已用v2的不用重改；实际仍读旧正文的迁现有source-reader/narrative接口。历史JSON、测试夹具和.planning副本不能算活动调用者。现有wire不随清理任意改版本。
-4. CWP退休公开`extract-sections`及只有旧全量流水线使用的normalized writer/summarizer入口与专属代码。先用测试证明不再有公开/后台入口生产normalized或全量span，且新有限批次仍可完成select→summary→verified final。仅为旧行为服务的测试随功能退出，不保留它们迫使恢复旧流水线。
+4. `extract-sections`公开CLI与服务API已退休。旧自动`SourceCatalogWorker`及其阶段策略也已删除：实查src/scripts没有生产导入/调用者，CLI无启动命令，现场没有匹配进程或Windows任务。保留worker-status/worker-stop用于残留进程清理。不得据此宣称所有normalized writer已退役：`SourceCatalog.normalize`等按需方法仍保留，因为当前RF SourceBundle、CWP证据查询/质量路径与历史测试仍读写normalized。只有在步骤1/3的真实消费者迁移和locator回放合同过关后，才删除这些API及其实现；迁移前不删normalized数据。
 5. `fingerprint-backfill`单独对待：当前从raw现场抽取后只保存小型文本指纹，可用于等价来源复用，不依赖永久normalized。若保留，继续有界按需，不将其作为重建全部派生的理由。`export`是显式可再生索引，不作为常驻第二库；本次删index不会取消用户按需export。
 
 集中验证RF来源准备v2责任集、FF→CWP pathless真实CLI离线链和CWP正式有限Worker端到端。只运行受影响包；不得调用付费模型、下载真实资料或写穿生产配置来测试入口迁移。提交/推送后核实际主线，不用未提交候选当切换完成。
@@ -57,3 +57,9 @@ TDD至少框住：精确source+locator能验原件并回放；原件hash不符/l
 ## 2026-10-04 B步骤当前进度
 
 公开extract-sections CLI与SourceCatalog.extract_sections方法已在71f867a退休；入口TDD 3项RED后，入口/纯章节解析/历史artifact binding集中48项GREEN。保留低级章节解析用于历史隔离夹具，不将其算当前公开生产入口。旧normalize/summarize库兼容方法、RF旧默认及旧derived/artifact/span主体仍待迁移，B–D没有整体完成；原件/生产库未变。
+
+## 2026-10-05：旧整库Worker退役与S5依赖边界
+
+生产源码/脚本没有`SourceCatalogWorker`导入者；其原始CLI启动入口已早先退出，现场另查无对应进程与计划任务。删除`source_catalog/worker.py`、仅供该循环使用的`scheduler_policy.py`及专属调度/Worker可靠性测试；保留控制面status/stop/uninstall。为了保住仍工作的读取和迁移夹具，不删除`SourceCatalog.normalize/summarize/summarize_with_llm`、低层normalizer、摘要实现、EvidenceSpan、normalized artifacts或RF消费接口。RF远端main仍在`8a153f3`、默认`source_reader_v2=False`；CWP evidence-query/extraction-quality及PDF/legacy测试也有真实normalized依赖。最终需待SourceRef v2与原件locator读链覆盖后再关闭这些按需API和删除派生。
+
+旧Worker退役集中责任包：`test_source_catalog_legacy_cli_retirement.py`、background/control/architecture、tier1、fingerprint、现有summary/pipeline/section tests，**127 passed / 64.28s**。第一次受限sandbox执行125 passed、两失败（spawned parser与python-docx原生扩展被系统限制）；同一正常用户上下文单测复核两项通过，完整同集重跑127项通过。测试专用目录已清理。调试脚本最初从stdin运行不适用于Windows multiprocessing，改用带`__main__`的短文件后诊断并删除。一次跨用户权限清理测试目录被拒，原创建者清理后在同一正常用户作业中创建/清理专用根。

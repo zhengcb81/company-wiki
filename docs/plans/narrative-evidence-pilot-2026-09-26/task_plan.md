@@ -19,7 +19,7 @@
 - **外部审计卡**：StockQAbyLLM 与 MeetingConverter 报告已收到并验收，唯一运行数据保留。invest-quick-scan 另有独立项目正在进行；本线不检查、不修改、不重复派发该仓任务。
 - company-wiki lane 的审计报告仍需从 harness 回复接收；本机 `config/source_acquisition.yaml` 用户改动和本计划审计结果目录继续排除在本线写集之外。
 
-**MAIN当前下一步：**接收N4-T2自己的新增提交，与已合入的N4-T1联合验证后推进有限真实批次；T1已在5de9154集成，MAIN跨层114项及HTTP400持久账本E2E 1项通过。MeetingConverter CI卡已快进并发布master@8a33a7f，新主线CI绿、job22秒；不重新派发。模型紧凑请求df529a9及首批缓存清理138.65MB已发布；CWP extract-sections公开CLI/方法在71f867a退休，48项集中回归通过。等待T2期间继续S5细则B其余实际caller迁移，不改外线工作树。S4/N4C仍没有最终真实摘要；新run计入旧未知用量并服从现有aggregate预算。电话会TXT仍没有live来源收据，用户配置和独立owner工作保持各自归属。
+**MAIN当前下一步：**等待 N4-T2 自己的新增提交，与已合入 N4-T1 联合验收后推进有限真实批次。T1 已发布（MAIN 跨层114项+持久账本E2E 1项通过）；MeetingConverter 已合入 master，主线CI通过。S5 已退役没有生产调用者的旧 SourceCatalogWorker 自动整库循环；127项集中回归通过。`extract-sections` 公开入口也已退出。`SourceCatalog.normalize/summarize` 按需API暂留：RF仍默认走旧SourceBundle，CWP证据查询/质量读取和一批来源测试依赖 normalized；等这些消费者迁移后再关闭，不重新启用后台全量写入。N4C真实摘要、ET TXT来源和DB/derived主体迁移仍未完成。
 
 ## 当前基线（2026-10-04正常用户上下文复核）
 
@@ -45,7 +45,7 @@ StockWiki/IQS已有owner工作及消费者交付，本轮只读，不重复分�
 | G1 残余门禁/签收精简（第一优先） | complete（CWP来源链与G1-LEGACY已合入；FF SourceRef v2于`e1eda60`推送） | 46项清单已分为已退出、必要自动校验、能力边界及外仓owner事项；未找到生产调用者的旧摘要/binding/archive工具不再作为当前门，留待S5/S6 caller清理 | CWP来源/as-of 64项、resolver/planner/canonical 100项与G1-LEGACY 170 passed / 1 deselected既有收据；FF集中回归177 passed / 1 skipped / 39 subtests，Ruff及push gate GREEN；电话会provider→CWP导入端到端12 passed。保留SHA、来源身份/期间/公开日、可回放引用和资源限制 |
 | S3 SourceRef/SourceExport 虚拟化与来源默认收敛（第二优先） | **complete**（FF `eb0af13`、ET `63c4090`已推送；CWP SourceExport已发布；合入后FF→ET→CWP链及各仓责任集均GREEN。live FMP仍受HTTP 402权益限制，不影响接口合同完成） | 上层只用SourceRef/SourceExport v2；复用FF exact/latest_as_of和pathless reader，不依赖物理目录；电话会走正式ET CLI并由CWP持有原件；provider定位仍在adapter层 | ET deadline分支已快进到main；其`/1`、`/2`、discovery/candidate wire与goldens未改，CWP importer现有provider-aware FMP JSON合同经真实三仓离线链验证。跨仓脚本验证FF uppercase exchange转ET小写、精确FY/Q、FMP原JSON与canonical text各自SHA/size、unknown publication、pathless SourceRef、重复读取不触provider，以及超时后worker结果清理。合并后ET `tests/test_retrieval_cli_e2e.py` 6 passed、10 goldens matched；FF companion 5 passed且Ruff clean；CWP FMP importer 5 passed。FF只在owner目录用`eb0af13`修正交易所slug与3秒清理窗口；ET只更新过期golden说明并合入`63c4090`。旧“Motley 24字段唯一可导入”记录已由当前源码/测试更正。真实FMP HTTP 402不作为代码合同门；正费用额度没有实际账单计量，本计划只声称FF zero-cost拒绝与单次provider请求，不声称美元账单cap已实测。 |
 | S4 N4C real samples and storage plan | in_progress（首批有限真实试跑已运行，尚无最终摘要；年报/招股书选材成功，季报/IR空选材，模型请求已收缩；N4-T1安全HTTP诊断已集成并经MAIN离线跨层验收，N4-T2仍待交付，ET TXT live仍未取得） | four real document types / consumer reads / language and citation coverage / total incremental bytes; retain only status/stop/uninstall compatibility for old worker process cleanup | node C; bounded real batch, then measured 1/2/4 parallelism；至少覆盖年报、招股/再融资、IR和电话会/季度类中的四种，记录摘要证据定位和新增空间 |
-| S5 B2逐caller清理 | in_progress（[首批缓存清理完成](harness_lanes/results/s5_first_cache_cleanup_2026-10-04.md)，extract-sections公开CLI/方法已退休，主体迁移待办） | [S5/S6实施细则](s5_s6_legacy_storage_implementation.md)；已删除138,648,023 B/923文件，原件/生产DB保护校验及四份原件CLI前后实读通过。2.826 GB `derived/` 仍有 RF旧默认artifact读取、CWP剩余旧normalize/summarize消费者及8,191条路径引用，须先迁移/退休 | 每集合实际释放量及原件/来源事实保护收据；只有存储大节点做集中接口验收，不逐文件复核 |
+| S5 B2逐caller清理 | in_progress（首批缓存与 extract-sections 已退出；旧自动 Worker/阶段策略已退休；normalized/summarize按需接口等RF与CWP读者迁移后再退） | [S5/S6实施细则](s5_s6_legacy_storage_implementation.md)；旧全量自动循环已不能由Worker运行，worker-status/stop保留；旧 normalized/summary 数据和 API 未删。RF旧SourceBundle与CWP证据查询/抽取质量目前仍消费 normalized。历史 derived 2.826 GB / 8,191路径引用仍保留，等待caller迁移 | 本轮旧Worker退役集中127 passed；每个存储大节点复核来源事实/消费者与前后空间；不逐文件签收 |
 | S6 DB事实收缩与收尾 | pending | 表级盘点，删除不可再消费派生/废索引并收缩，来源版本/撤回事实保留；旁路兼容、docs/hook残留清完 | 同一存储节点；commit/push、PWF收尾 |
 | 可选 exact-SHA原件对象去重 | 不阻S0–S6完成 | 先用已有SHA/size找候选、逐候选验字节，保留所有source/location版本事实 | 有真实收益才实施；不报未测节省量 |
 
@@ -109,7 +109,7 @@ TDD框住公开行为，不把旧签收规则写进新测试。仅S0相关收口
 
 ## Next Step
 
-**MAIN下一动作：**接收N4-T2新增提交，与已集成T1联合验收；等待期间推进S5细则B剩余旧caller迁移，不改外线施工现场。T1离线跨层114+1项通过，MeetingConverter已合master且主线CI绿，CWP旧section公开入口已退休。首批七类缓存138.65MB已清理并验证，不重跑。新真实run先核算旧unknown reservation和输入/输出预留，费用/token不足不得发请求。真实摘要/consumer、P1/P2/P4及S5/S6主体迁移继续待办；Dayu403和ET402单独记录，不伪造成功。
+**MAIN下一动作：**接收N4-T2独立新增提交并与T1联合验收；N4-T2尚未交付。等待期间S5已移除闲置的旧整库Worker，不再由该后台自动增长normalized/span；RF与CWP的按需读取链仍依赖现有normalized数据，待pathless SourceRef与原件locator消费者完成迁移后再退役按需API/derived。原件、来源版本事实和用户配置继续保留。
 
 ## 2026-10-04：新增三张可独立派发的施工卡
 

@@ -133,3 +133,10 @@ G1-LEGACY 写集已关闭；G1 总阶段仍因 FF SourceRef v2 资格门而保�
 - N4-T1：4a53080 → MAIN 5de9154，跨层114+1项通过；[收据](harness_lanes/results/n4t1_model_transport_acceptance_2026-10-04.md)。不改外线worktree；T2若以4a53080为base，MAIN只集成之后的T2提交。
 - MeetingConverter：master/origin/master同为8a33a7f，PR1已merged，新主线CI真实job成功22秒；[收据](harness_lanes/results/meetingconverter_ci_acceptance_2026-10-04.md)。独立卡收尾，不进N4C关键路径。
 - N4-T2与N4C尚待交付/验收；S5首批缓存和旧section公开入口退出已完成，不重复施工。
+
+## 2026-10-05 MAIN/外线当前接口状态
+
+- N4-T1 已集成并推送（`5de9154`，包含于 MAIN `66808ee`；最终文档收据`e6b884a`），主线run37241977614 success。N4-T2仍待外线交付，只提交其新文件/提交，不重做T1。
+- MeetingConverter施工卡已快进并推送master@`8a33a7f`，CI run37241709261 success；该线关闭。
+- MAIN独占的S5旧整库Worker/阶段策略已退役，保留按需normalized读写直到RF与CWP locator消费者迁移；worker状态/停止清理命令继续保留。细节见S5/S6主计划及旧Worker集成测试收据（本轮记录在progress/findings）。
+- RF复核仍以远端main `8a153f3387ae75fb172e70f8ab63ffd38100779a`为准；fcap仅weekly assurance两处owner改动未触碰。

@@ -39,19 +39,6 @@ _PROHIBITED_CONTENT_PATTERNS = (
     "综合评估（投资判断）",
 )
 
-_REQUIRED_REJECTION_STAGES = frozenset(
-    {
-        "valuation",
-        "research",
-        "rating",
-        "sell",
-        "sotp",
-        "stockwiki",
-        "target_price",
-        "wiki_writer",
-    }
-)
-
 
 def source_catalog_does_not_import_prohibited_modules(
     src_dir: Path | None = None,
@@ -98,26 +85,6 @@ def llm_summarizer_rejects_investment_content(
     return len(violations) == 0, violations
 
 
-def rejected_stages_covers_all_investment_stages(
-    src_dir: Path | None = None,
-) -> tuple[bool, list[str]]:
-    """Verify ``scheduler_policy._FORBIDDEN_DISPATCH_TOKENS`` contains all 8
-    required investment/compliance stage names."""
-    if src_dir is None:
-        src_dir = Path(__file__).resolve().parent
-    policy_path = src_dir / "scheduler_policy.py"
-    if not policy_path.is_file():
-        return False, [f"{policy_path} not found"]
-    text = policy_path.read_text(encoding="utf-8")
-    missing = set(_REQUIRED_REJECTION_STAGES)
-    for stage in _REQUIRED_REJECTION_STAGES:
-        if f'"{stage}"' in text or f"'{stage}'" in text:
-            missing.discard(stage)
-    if missing:
-        return False, [f"missing forbidden stages: {sorted(missing)}"]
-    return True, []
-
-
 _FLAG_NAMES = (
     "v2_scan_shadow",
     "v2_persist_assertions",
@@ -161,26 +128,38 @@ _ROOT_HARDCODE_TOKENS = (
 # mention was a comment/docstring (resolver.py, observability.py,
 # entity_resolver.py) were cleaned and left the allowlist in FC-1201;
 # entity_resolver.py was deleted outright in FC-1203 (dead module).
-_ROOT_HARDCODE_ALLOWED_FILES = frozenset({
-    # new-policy modules: allowed to know the tokens
-    "registry.py", "policy_2x.py", "policy_3x.py", "config.py",
-    "adapter_dispatch.py",
-    # adapters: by contract they know the root layout they serve
-    "company_raw.py", "dayu.py", "sidecar.py",
-    # the gate itself carries the token list
-    "architecture_gate.py",
-    # v1 / loader-blocked backlog (R9 cutover or FC-1201 follow-up):
-    #   scanner.py = v1 production fallback (7 root branches; R9 deletion)
-    #   models.py = ROOT_KINDS enum owner (legitimate single source)
-    #   canonical_writer.py = write-root selection (FC-1201 follow-up: needs
-    #       production 1.x loader to accept canonical_write_target)
-    #   portfolio_promoter.py / backfill_v2.py = v1 legacy tools (R9)
-    #   admission.py / focus_cleanup.py = Dropbox canary (FC-501)
-    #   cli.py = portfolio root identity lookup (literal is inherent)
-    "scanner.py", "models.py", "canonical_writer.py",
-    "portfolio_promoter.py", "admission.py", "focus_cleanup.py",
-    "backfill_v2.py", "cli.py",
-})
+_ROOT_HARDCODE_ALLOWED_FILES = frozenset(
+    {
+        # new-policy modules: allowed to know the tokens
+        "registry.py",
+        "policy_2x.py",
+        "policy_3x.py",
+        "config.py",
+        "adapter_dispatch.py",
+        # adapters: by contract they know the root layout they serve
+        "company_raw.py",
+        "dayu.py",
+        "sidecar.py",
+        # the gate itself carries the token list
+        "architecture_gate.py",
+        # v1 / loader-blocked backlog (R9 cutover or FC-1201 follow-up):
+        #   scanner.py = v1 production fallback (7 root branches; R9 deletion)
+        #   models.py = ROOT_KINDS enum owner (legitimate single source)
+        #   canonical_writer.py = write-root selection (FC-1201 follow-up: needs
+        #       production 1.x loader to accept canonical_write_target)
+        #   portfolio_promoter.py / backfill_v2.py = v1 legacy tools (R9)
+        #   admission.py / focus_cleanup.py = Dropbox canary (FC-501)
+        #   cli.py = portfolio root identity lookup (literal is inherent)
+        "scanner.py",
+        "models.py",
+        "canonical_writer.py",
+        "portfolio_promoter.py",
+        "admission.py",
+        "focus_cleanup.py",
+        "backfill_v2.py",
+        "cli.py",
+    }
+)
 
 
 def no_root_specific_hardcode(
@@ -250,7 +229,7 @@ def no_hardcoded_flag_dicts(
         lines = text.splitlines()
         for i, line in enumerate(lines):
             if line.strip().startswith('"v2_') or line.strip().startswith("'v2_"):
-                neighbors = " ".join(lines[max(0, i - 1):i + 2])
+                neighbors = " ".join(lines[max(0, i - 1) : i + 2])
                 hits = sum(1 for flag in _FLAG_NAMES if flag in neighbors)
                 if hits >= 2:
                     violations.append(f"{py_file.name}:{i + 1}:hardcoded flag dict")
@@ -266,7 +245,7 @@ def no_hardcoded_flag_dicts(
 # Built from parts so this module does not contain the literal pattern
 # string: the leg04 freeze gate asserts the pattern exists in exactly ONE
 # source file (resolver.py), and this gate module must not trip it.
-_BRIDGE_LOOP_PATTERN = 'for key in ' + '("acquisition", "dayu_meta")'
+_BRIDGE_LOOP_PATTERN = "for key in " + '("acquisition", "dayu_meta")'
 
 
 def no_legacy_container_reads_outside_resolver(
@@ -303,7 +282,6 @@ __all__ = [
     "no_hardcoded_flag_dicts",
     "no_legacy_container_reads_outside_resolver",
     "no_root_specific_hardcode",
-    "rejected_stages_covers_all_investment_stages",
     "source_catalog_does_not_import_prohibited_modules",
     "llm_summarizer_rejects_investment_content",
 ]

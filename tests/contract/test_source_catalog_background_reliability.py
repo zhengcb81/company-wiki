@@ -7,6 +7,7 @@ import sqlite3
 from dataclasses import dataclass
 from pathlib import Path
 
+
 class _IdleStub:
     on_battery = staticmethod(lambda: False)
     idle_seconds = staticmethod(lambda: 0)
@@ -80,40 +81,6 @@ def _temp_pipeline_status(tmp_path, *, operation_lock=None):
     return read_pipeline_status(catalog.config.database_path)
 
 
-def test_scan_exception_does_not_block_normalize(tmp_path):
-    from company_wiki.source_catalog.worker import SourceCatalogWorker, WorkerConfig
-
-    class _ThrowingCatalog(_FakeCatalog):
-        def scan(self, *, progress=None):
-            self.calls.append(("scan", None))
-            raise RuntimeError("simulated scan failure")
-
-    cfg = WorkerConfig(
-        runtime_config=tmp_path / "config.yaml",
-        scan_interval_seconds=3600,
-        export_interval_seconds=3600,
-        poll_interval_seconds=30,
-        active_poll_interval_seconds=2,
-        idle_seconds_required=600,
-        normalize_batch_size=1,
-        llm_summary_batch_size=1,
-        llm_max_input_chars=120000,
-        llm_max_output_tokens=1200,
-        llm_retry_backoff_seconds=3600,
-        allow_processing_on_battery=False,
-        require_user_idle=False,
-    )
-    w = SourceCatalogWorker(
-        _ThrowingCatalog(),
-        cfg,
-        state_path=tmp_path / "state.json",
-        idle_detector=_IdleStub(),
-        llm_client_factory=lambda: object(),
-    )
-    w.run_cycle()
-    assert w.state.get("last_scan_error") is not None
-
-
 def test_worker_status_has_scan_health_fields(tmp_path):
     s = _temp_pipeline_status(tmp_path)
     assert s["available"] is True
@@ -175,9 +142,7 @@ def test_completed_with_errors_counts_as_a_completed_scan(tmp_path):
     )
     catalog.scan()
     with sqlite3.connect(catalog.config.database_path) as connection:
-        connection.execute(
-            "UPDATE scan_runs SET status='completed_with_errors'"
-        )
+        connection.execute("UPDATE scan_runs SET status='completed_with_errors'")
 
     pipeline = read_pipeline_status(catalog.config.database_path)
     completed_scan = pipeline["health"]["scan"]["last_completed_scan"]
@@ -215,82 +180,3 @@ def test_artifacts_zero_reports_detached_status(tmp_path):
     assert "artifact_index_empty" in a
     assert "reconciliation_needed" in a
     assert "derived_detached_count" in a
-
-
-
-
-def test_worker_writes_exit_event(tmp_path):
-    from company_wiki.source_catalog.worker import SourceCatalogWorker, WorkerConfig
-
-    cfg = WorkerConfig(
-        runtime_config=tmp_path / "config.yaml",
-        scan_interval_seconds=3600,
-        export_interval_seconds=3600,
-        poll_interval_seconds=30,
-        active_poll_interval_seconds=2,
-        idle_seconds_required=600,
-        normalize_batch_size=1,
-        llm_summary_batch_size=1,
-        llm_max_input_chars=120000,
-        llm_max_output_tokens=1200,
-        llm_retry_backoff_seconds=3600,
-        allow_processing_on_battery=False,
-        require_user_idle=False,
-    )
-    w = SourceCatalogWorker(
-        _FakeCatalog(),
-        cfg,
-        state_path=tmp_path / "state.json",
-        idle_detector=_IdleStub(),
-        llm_client_factory=lambda: object(),
-    )
-
-    class _FC:
-        def __init__(self):
-            self.s = False
-
-        def read_desired_state(self):
-            return "enabled"
-
-        def open_session(self):
-            c = self
-
-            class _S:
-                def __init__(self):
-                    self.c = c
-
-                def heartbeat(self, *a, **kw):
-                    pass
-
-                def wait(self, s):
-                    self.c.s = True
-                    return True
-
-                def should_stop(self):
-                    return self.c.s
-
-                def close(self):
-                    pass
-
-                def __enter__(self):
-                    return self
-
-                def __exit__(self, *a):
-                    self.close()
-
-            return _S()
-
-    r = w.run_forever(control=_FC())
-    assert r["status"] == "stopped"
-    ep = tmp_path / "worker_process_events.jsonl"
-    assert ep.is_file()
-    evs = [
-        json.loads(line)
-        for line in ep.read_text(encoding="utf-8").splitlines()
-        if line.strip()
-    ]
-    types = [e.get("event") for e in evs]
-    assert "process_starting" in types
-    assert "session_opened" in types
-    assert "process_exiting" in types
-    assert "reason" in next(e for e in evs if e["event"] == "process_exiting")
