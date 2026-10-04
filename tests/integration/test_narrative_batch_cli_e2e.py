@@ -30,8 +30,25 @@ from support.narrative_batch_fixtures import (
 loopback_model_server = batch_fixtures.loopback_model_server
 
 
-def _prepare(root, endpoint, *, one_source=False, zero_budget=False):
-    state = prepare_source_catalog(root, one_source=one_source)
+def _prepare(
+    root,
+    endpoint,
+    *,
+    one_source=False,
+    zero_budget=False,
+    sparse_metadata=False,
+    include_mixed=False,
+    include_annual_pdf=False,
+    include_policy=True,
+):
+    state = prepare_source_catalog(
+        root,
+        one_source=one_source,
+        sparse_metadata=sparse_metadata,
+        include_mixed=include_mixed,
+        include_annual_pdf=include_annual_pdf,
+        include_policy=include_policy,
+    )
     try:
         state.store = AutomationStore(root / "automation.db")
         state.store.set_runtime_gate(RuntimeState.ENABLED, updated_at=T0)
@@ -85,9 +102,16 @@ def _originals(state):
     return {path: path.read_bytes() for path in (state.root / "companies").rglob("*") if path.is_file()}
 
 
-def test_cli_p2_publishes_two_languages_and_skip_once_then_restores_test_directory(tmp_path_factory, loopback_model_server):
+@pytest.mark.parametrize("sparse_metadata", [False, True])
+def test_cli_p2_publishes_two_languages_and_skips_policy_without_model_call(
+    tmp_path_factory, loopback_model_server, sparse_metadata
+):
     with isolated_batch_directory(tmp_path_factory) as root:
-        state = _prepare(root, loopback_model_server.endpoint)
+        state = _prepare(
+            root,
+            loopback_model_server.endpoint,
+            sparse_metadata=sparse_metadata,
+        )
         try:
             originals = _originals(state)
             process, result = _invoke(state)
@@ -136,6 +160,60 @@ def test_cli_p2_publishes_two_languages_and_skip_once_then_restores_test_directo
             assert changed.returncode == 2 and refused["status"] == "failed", (changed.stderr, refused)
             assert len(loopback_model_server.requests) == 2 and refused["budget"] == result["budget"]
             assert_originals_and_foreign_jobs_untouched(state, changed_originals, output=changed.stdout + changed.stderr)
+        finally:
+            state.catalog.close()
+
+
+def test_cli_infers_sparse_languages_from_verified_pdf_and_transcript_bytes(
+    tmp_path_factory, loopback_model_server
+):
+    with isolated_batch_directory(tmp_path_factory) as root:
+        state = _prepare(
+            root,
+            loopback_model_server.endpoint,
+            sparse_metadata=True,
+            include_mixed=True,
+            include_annual_pdf=True,
+            include_policy=False,
+        )
+        try:
+            originals = _originals(state)
+            process, result = _invoke(state)
+            assert process.returncode == 0 and result["status"] == "completed", (process.stderr, result)
+            assert loopback_model_server.errors == [] and len(loopback_model_server.requests) == 4
+            assert {data["source"]["language"] for data, _body in loopback_model_server.requests} == {
+                "en", "zh", "mixed",
+            }
+            assert all(data["constraints"]["translate"] is False for data, _body in loopback_model_server.requests)
+
+            documents = {item["document_id"]: item for item in result["documents"]}
+            assert documents.keys() == state.indexed.keys()
+            artifacts = NarrativeArtifactStore(
+                state.catalog.store,
+                LocalNarrativeObjectStore(state.catalog.config.catalog_dir),
+            )
+            reader = NarrativeBundleReader(artifacts)
+            for document_id, (ref, expected_language, kind) in state.indexed.items():
+                loaded = reader.read(
+                    document_id=document_id,
+                    source_id=ref.source_id,
+                    source_sha256=ref.content_sha256,
+                )
+                assert loaded.bundle.source_metadata.language == expected_language
+                assert loaded.bundle.summary.translate is False
+                if kind == "ir_policy":
+                    assert loaded.bundle.selection.status == "skipped_no_narrative"
+                else:
+                    assert loaded.bundle.summary.draft.language == expected_language
+
+            again, repeated = _invoke(state)
+            assert again.returncode == 0 and repeated["status"] == "completed", (again.stderr, repeated)
+            assert len(loopback_model_server.requests) == 4
+            assert_originals_and_foreign_jobs_untouched(
+                state,
+                originals,
+                output=process.stdout + process.stderr + again.stdout + again.stderr,
+            )
         finally:
             state.catalog.close()
 

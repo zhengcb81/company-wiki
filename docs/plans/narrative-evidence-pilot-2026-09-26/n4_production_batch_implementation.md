@@ -117,7 +117,10 @@ active catalog盘点总数：年报46、半年报8、季报7、IR 3,682、电话
 - SourceExport v2 的精确 SourceRef（document/source ID、SHA、byte size、MIME）和实际原文字节校验是必需项；display/provenance/财务期次字段可为null。v2 capture不透明或不存在时，只返回可见信息，不读取旧metadata桥、不推断缺失值、不因此拒绝整个pathless manifest。
 - `filing_reuse`仍经过`describe_candidate`并要求财报消费所需的身份、期间和as-of条件；RF继续执行已发布的SourceRef字节/身份/期间校验。此改动不改变财报闭环规则。
 - 已新增TDD合同：runtime v2关闭legacy bridge后，SourceVersionReader返回精确稀疏描述且财报复用仍blocked；SourceExport CLI用隔离合成catalog验证同一SourceRef可导出、metadata缺失字段全为null、citation span仍按原文校验，且fixture目录前后快照不变。阶段集中结果34 passed；真实IR尚未经过生产CLI导出。
-- 发现的Worker边界：`build_batch_events`把manifest的`language`写入`SourceMetadataValue`，该字段当前必填。IR无normalized assertion时稀疏manifest的language为null，虽然SourceExport可用，仍不能建batch event。下一实现需从`SourceVersionReader.open_version(... purpose="narrative_derivation")`取得hash绑定字节，并仅在capture language缺失时做确定性语言识别；将识别结果写入事件输入hash。可见catalog language仍优先，不允许静默覆盖。无法可靠分类时返回具名失败，不猜市场语言、不翻译。selector/verify必须允许当前manifest语言缺失，但若当前catalog有非空语言且与事件pin不同仍拒绝。用中文、英文、混合文本和PDF样本做一条隔离CLI/Worker E2E；原文SHA、SourceRef身份、document kind、语言合同、RF财报reader严格校验均须保持。
+- Worker语言桥现已实现：`build_batch_events`仅在manifest语言缺失时通过`SourceVersionReader.open_version(..., purpose="narrative_derivation")`打开SourceRef精确版本；复用`validate_opened_source`验证document/source ID、SHA、byte size、MIME及read-policy，再从同一已验证字节推导语言并写入event payload/input hash。manifest已有语言优先，不重新读取原文；无法可靠分类以具名错误退出，不按市场猜测、不翻译、不调用LLM。
+- 新模块`narrative_language.py`支持UTF-8纯文本、既有transcript HTML/JSON抽取器及PDF前5页；只归类`zh`/`en`/`mixed`，限制读取样本大小，对无可分类字母、损坏文本、未知脚本、无效PDF与不支持MIME分别返回具名错误。PDF/文本语言检测不落临时文件。selector/verify允许当前catalog语言为空；若当前catalog提供非空语言且与event pin冲突则拒绝。
+- 集中责任包：`test_narrative_batch.py`、`test_narrative_language.py`、`test_narrative_source_guard.py`及`test_narrative_batch_cli_e2e.py`共**23 passed / 41.06s**。隔离CLI/真实Worker配本地HTTP模型夹具覆盖中/英/混合TXT、英文年报PDF、缺语言与有语言metadata的IR政策跳过；验证语言不翻译、引用/摘要language一致、重复执行不再次调用模型、原始夹具字节与foreign jobs不变。另有Ruff与mypy聚焦检查通过。
+- 这只关闭“稀疏SourceExport无法进入Worker”的技术缺口，不代表N4C真实批次完成。仍需S3/ET-DEADLINE收口，并通过现有admission/import流程取得可见、active且原文字节SHA匹配的IR、招股书、ET TXT SourceRef。招股书现有候选为retired，IR缺normalized metadata assertion，ET live请求返回HTTP 402；未绕过这些来源合同，也未启动生产Worker/模型或触碰生产catalog/raw。样本不就绪就保持N4C pending。
 
 
 ## 2026-10-03 旧 Worker 入口退役状态

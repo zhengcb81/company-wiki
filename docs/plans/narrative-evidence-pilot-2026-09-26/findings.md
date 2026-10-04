@@ -276,7 +276,7 @@ Git写入/联网用正常用户，sandbox .git只读不是产品权限。测试�
 - 只移除`SourceVersionReader.describe_version`对“v2 metadata不可见”的整份拒绝。精确SourceRef、catalog状态、R4 metadata损坏/冲突检查和字节SHA/size验证保留；缺失capture不被legacy bridge补值，描述字段保持null。`open_version(... purpose="filing_reuse")`仍经`describe_candidate`严格拒绝缺身份/期间来源。
 - 目标责任集转绿：`test_source_version_reader.py` + `test_source_export_v2_cli.py` **34 passed / 10.00s**。合成catalog CLI E2E证明SourceRef/hash/size/MIME和grounded text span可导出、无原始正文泄漏、所有不可见描述字段为null，临时catalog/fixture快照不变。不是实际IR生产CLI导出证据。
 - 第一轮pytest basetemp过长，pytest自动改写到TEMP且其cleanup标记`removed=false`；检查该次测试独占目录无reparse point后，仅删除该精确run目录并核实消失。重跑使用仓内`tmp/pt1004b`（46字符，`relocated=false`），完成后删除且核实该唯一basetemp不存在；未清理任何既有TEMP目录。
-- Worker尚未因此解锁：`build_batch_events`仍要求非空`language`，而这份IR无可见language assertion。N4C计划增加仅对缺失language从已SHA绑定SourceRef原文字节进行确定性语言识别，识别结果写入事件hash；不可推断时具名失败、不猜市场语言、不翻译。RF财报消费者保持原合同。
+- Worker当时仍未解锁：`build_batch_events`要求非空`language`，而这份IR无可见language assertion。该缺口已于本轮通过下方的确定性byte-pinned语言桥关闭；RF财报消费者原合同保持不变。
 
 ## 2026-10-04 — Sparse SourceExport发布与ET目录区分
 
@@ -284,3 +284,9 @@ Git写入/联网用正常用户，sandbox .git只读不是产品权限。测试�
 - 当前harness身份检查只读使用一次性`git -c safe.directory=...`，没有改全局Git设置。`earnings-transcripts-s3-deadline`仍在`codex/et-s3-deadline@93fe52c`，scraper/tool/test有tracked改动，runtime/worker/test/PWF等未跟踪；没有提交或deadline专属交接。目录里的`s3-et-runtime-handoff.md`记载的是此前runtime施工包，不能当作当前deadline交接。
 - 这两个ET工作目录用途不同：已完成的S3 runtime工作树代码已进入ET main的提交祖先；deadline工作树是后来为补硬deadline创建的独立、尚未交付施工现场。不要把后者和前者当同一批重复工作，也不要清理未交付目录。
 - `gh` CLI在当前环境未安装；远端推送由pre-push gate确认成功，但本轮没有取得GitHub Actions运行状态，不把本地gate当远端CI结果。
+
+## 2026-10-04 — Sparse narrative language bridge verified
+
+- 仅当catalog language缺失时，Worker事件构建器通过`narrative_derivation`打开精确SourceRef，验证身份、SHA、size、MIME与read-policy后识别语言，并将结果绑定到event input hash。已有非空catalog语言优先；之后若catalog出现冲突的非空语言则拒绝。
+- 检测范围有界：UTF-8文本最多256 KiB、PDF最多5页，HTML/JSON复用已有transcript extractor；只返回zh/en/mixed。空/短/损坏文本、其他脚本、无效PDF和不支持MIME均具名失败，不猜测、不翻译、不调用LLM、不落临时PDF。
+- 隔离focused单元+CLI/Worker E2E **23 passed / 41.06s**，包含中/英/混合TXT、年报PDF、有无语言metadata、低价值IR skip、模型请求计数、重复执行幂等和原始夹具字节保持。该证据只验证桥接机制，不代表真实生产N4C或ET文档已导入。

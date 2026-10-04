@@ -27,7 +27,7 @@ class NarrativeSourceReader(Protocol):
     def describe_version(self, ref: SourceRef) -> Mapping[str, object]: ...
 
 
-@dataclass(frozen=True)
+@dataclass
 class NarrativeSourceGuardError(Exception):
     code: str
     detail: str
@@ -49,7 +49,26 @@ def validate_opened_identity(
     payload: SourceRevisionEventPayload,
     opened: VerifiedContent,
 ) -> None:
-    source = payload.source_ref
+    validate_opened_source(
+        SourceRef(
+            document_id=payload.source_ref.document_id,
+            source_id=payload.source_ref.source_id,
+            content_sha256=payload.source_ref.content_sha256,
+            byte_size=payload.source_ref.byte_size,
+            mime_type=payload.source_ref.mime_type,
+            schema_version=payload.source_ref.schema_version,
+        ),
+        opened,
+        expected_read_policy_sha256=payload.expected_read_policy_sha256,
+    )
+
+
+def validate_opened_source(
+    source: SourceRef,
+    opened: VerifiedContent,
+    *,
+    expected_read_policy_sha256: str,
+) -> None:
     if (
         opened.document_id != source.document_id
         or opened.source_id != source.source_id
@@ -62,7 +81,7 @@ def validate_opened_identity(
             "SOURCE_HASH_MISMATCH",
             "verified source identity differs from the event pin",
         )
-    if opened.source_read_policy_sha256 != payload.expected_read_policy_sha256:
+    if opened.source_read_policy_sha256 != expected_read_policy_sha256:
         raise NarrativeSourceGuardError(
             "POLICY_DENIED",
             "source read policy differs from the event pin",
@@ -82,12 +101,17 @@ def validate_source_metadata(
         "mime_type": source.mime_type,
         "title": payload.source_metadata.title,
         "document_kind": payload.source_metadata.document_kind,
-        "language": payload.source_metadata.language,
     }
     if {key: metadata.get(key) for key in expected} != expected:
         raise NarrativeSourceGuardError(
             "INPUT_SCHEMA_INVALID",
             "current source metadata differs from the event pin",
+        )
+    current_language = metadata.get("language")
+    if current_language not in (None, "") and current_language != payload.source_metadata.language:
+        raise NarrativeSourceGuardError(
+            "INPUT_SCHEMA_INVALID",
+            "current source language differs from the event pin",
         )
 
 
@@ -120,5 +144,6 @@ __all__ = [
     "prompt_review_value",
     "source_ref",
     "validate_opened_identity",
+    "validate_opened_source",
     "validate_source_metadata",
 ]

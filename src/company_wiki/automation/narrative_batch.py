@@ -17,6 +17,7 @@ from company_wiki.source_catalog.lock import CatalogOperationLock
 from company_wiki.source_catalog.narrative_artifact_store import (
     LocalNarrativeObjectStore, NarrativeArtifactNotVisibleError, NarrativeArtifactStore,
 )
+from company_wiki.source_catalog.narrative_language import detect_narrative_language
 from company_wiki.source_catalog.source_reader import SourceVersionReader
 
 from .models import Event, JobStatus, RuntimeState, canonical_json, canonical_json_hash
@@ -28,7 +29,11 @@ from .narrative_contracts import (
 from .narrative_model import NARRATIVE_PROMPT_VERSION
 from .narrative_projection import NarrativeEffectDispatcher
 from .narrative_run_store import NarrativeRunStore, RunConflictError
-from .narrative_source_guard import source_ref
+from .narrative_source_guard import (
+    NarrativeSourceGuardError,
+    source_ref,
+    validate_opened_source,
+)
 from .narrative_verify import EFFECT_TYPE
 from .policy import PolicyConfig
 from .registry import create_default_registry
@@ -55,11 +60,29 @@ def build_batch_events(request: NarrativeBatchRequest, reader: SourceVersionRead
             raise ValueError("SOURCE_REF_CHANGED")
         metadata = reader.describe_version(current)
         kind = metadata["document_kind"]
+        language = metadata.get("language")
+        if language is None:
+            opened = reader.open_version(
+                current,
+                purpose="narrative_derivation",
+                expected_read_policy_sha256=policy,
+            )
+            try:
+                validate_opened_source(
+                    current,
+                    opened,
+                    expected_read_policy_sha256=policy,
+                )
+            except NarrativeSourceGuardError as exc:
+                if exc.code == "SOURCE_HASH_MISMATCH":
+                    raise ValueError("SOURCE_LANGUAGE_SOURCE_MISMATCH") from exc
+                raise
+            language = detect_narrative_language(opened.data, current.mime_type)
         payloads.append(SourceRevisionEventPayload.from_dict({
             "schema_version": "source-revision-event/2.0", "source_ref": ref.to_dict(),
             "expected_read_policy_sha256": policy,
             "source_metadata": {"source_class": "transcript" if kind == "investor_call_transcript" else "filing",
-                                "title": metadata["title"], "document_kind": kind, "language": metadata["language"]},
+                                "title": metadata["title"], "document_kind": kind, "language": language},
         }))
     input_hash = canonical_json_hash({"request_sha256": request.input_hash,
                                       "source_payloads": [payload.to_dict() for payload in payloads]})

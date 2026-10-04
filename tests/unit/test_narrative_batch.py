@@ -1,7 +1,9 @@
 """Batch application contracts: deterministic work and physical byte limits."""
 
 from dataclasses import replace
+import hashlib
 import importlib
+from types import SimpleNamespace
 
 import pytest
 
@@ -41,6 +43,34 @@ class Reader:
         return "b" * 64
 
 
+class SparseMetadataReader(Reader):
+    def __init__(self, body, mime_type="text/plain"):
+        super().__init__()
+        self.metadata.update(title=None, language=None)
+        self.body = body
+        self.mime_type = mime_type
+        self.open_calls = []
+        self.sha256 = hashlib.sha256(body).hexdigest()
+
+    def query_ref(self, document_id, source_id, content_sha256):
+        return SourceRef(
+            document_id, source_id, content_sha256, len(self.body), self.mime_type
+        )
+
+    def open_version(
+        self, ref, *, purpose, expected_read_policy_sha256=None
+    ):
+        self.open_calls.append((purpose, expected_read_policy_sha256))
+        return SimpleNamespace(
+            document_id=ref.document_id,
+            source_id=ref.source_id,
+            content_sha256=self.sha256,
+            data=self.body,
+            byte_size=len(self.body),
+            source_read_policy_sha256=expected_read_policy_sha256,
+        )
+
+
 def _module():
     return importlib.import_module("company_wiki.automation.narrative_batch")
 
@@ -68,6 +98,85 @@ def test_batch_identity_includes_catalog_metadata_and_read_policy():
     reader.metadata["title"] = "Company call"
     reader.read_policy_sha256 = lambda: "c" * 64
     assert module.build_batch_events(request, reader, now="2026-10-03T10:00:00Z").input_hash != first.input_hash
+
+
+def test_batch_infers_missing_language_from_verified_source_bytes_and_pins_it():
+    body = (
+        "Full Conference Call Transcript\nCEO: 公司完成海外产能扩张，"
+        "新产品已进入量产。\n"
+    ).encode("utf-8")
+    digest = hashlib.sha256(body).hexdigest()
+    request_wire = _request().to_dict()
+    request_wire["sources"][0].update(
+        source_id=source_id_for_sha256(digest), content_sha256=digest,
+        byte_size=len(body), mime_type="text/plain",
+    )
+    request = NarrativeBatchRequest.from_dict(request_wire)
+    reader = SparseMetadataReader(body)
+
+    first = _module().build_batch_events(
+        request, reader, now="2026-10-03T10:00:00Z"
+    )
+    second = _module().build_batch_events(
+        request, reader, now="2026-10-03T11:00:00Z"
+    )
+    payload = __import__("json").loads(first.events[0].payload_json)
+
+    assert payload["source_metadata"]["language"] == "zh"
+    assert payload["source_metadata"]["title"] is None
+    assert first.input_hash == second.input_hash
+    assert len(reader.open_calls) == 2
+    assert all(
+        call == ("narrative_derivation", "b" * 64)
+        for call in reader.open_calls
+    )
+
+
+def test_batch_infers_missing_language_from_verified_pdf_bytes():
+    fitz = pytest.importorskip("fitz")
+    document = fitz.open()
+    try:
+        document.new_page().insert_text(
+            (72, 72),
+            "The company expanded overseas capacity and launched a new product.",
+        )
+        body = document.tobytes()
+    finally:
+        document.close()
+    digest = hashlib.sha256(body).hexdigest()
+    request_wire = _request().to_dict()
+    request_wire["sources"][0].update(
+        source_id=source_id_for_sha256(digest), content_sha256=digest,
+        byte_size=len(body), mime_type="application/pdf",
+    )
+    request = NarrativeBatchRequest.from_dict(request_wire)
+    reader = SparseMetadataReader(body, mime_type="application/pdf")
+
+    events = _module().build_batch_events(
+        request, reader, now="2026-10-03T10:00:00Z"
+    )
+    payload = __import__("json").loads(events.events[0].payload_json)
+
+    assert payload["source_metadata"]["language"] == "en"
+    assert reader.open_calls == [("narrative_derivation", "b" * 64)]
+
+
+def test_batch_rejects_language_bytes_that_do_not_match_the_source_ref():
+    body = b"Full Conference Call Transcript\nCEO: New product launch.\n"
+    digest = hashlib.sha256(body).hexdigest()
+    request_wire = _request().to_dict()
+    request_wire["sources"][0].update(
+        source_id=source_id_for_sha256(digest), content_sha256=digest,
+        byte_size=len(body), mime_type="text/plain",
+    )
+    request = NarrativeBatchRequest.from_dict(request_wire)
+    reader = SparseMetadataReader(body)
+    reader.sha256 = "0" * 64
+
+    with pytest.raises(ValueError, match="SOURCE_LANGUAGE_SOURCE_MISMATCH"):
+        _module().build_batch_events(
+            request, reader, now="2026-10-03T10:00:00Z"
+        )
 
 
 def test_batch_rejects_a_reference_whose_size_changed():

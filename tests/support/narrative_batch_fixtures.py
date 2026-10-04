@@ -95,21 +95,41 @@ def sha256(data):
     return hashlib.sha256(data).hexdigest()
 
 
-def source_documents():
+def _pdf_bytes(text):
     fitz = pytest.importorskip("fitz")
     document = fitz.open()
     try:
-        document.new_page().insert_text((72, 72), "This policy describes meeting administration procedures.")
-        policy = document.tobytes()
+        document.new_page().insert_text((72, 72), text)
+        return document.tobytes()
     finally:
         document.close()
-    return [
+
+
+def source_documents(*, include_mixed=False, include_annual_pdf=False, include_policy=True):
+    documents = [
         ("en", "call-en.txt", "Acme 2026 Q1 earnings call", "investor_call_transcript",
          b"Full Conference Call Transcript\nCEO: We launched a new product and expanded overseas capacity.\n"),
         ("zh", "call-zh.txt", "Acme 2026年一季度电话会议", "investor_call_transcript",
          "Full Conference Call Transcript\nCEO: 公司完成海外产能扩张，新产品已完成客户认证并进入量产。\n".encode("utf-8")),
-        ("zh", "ir-policy.pdf", "投资者关系管理办法（2025年8月）.pdf", "ir_policy", policy),
     ]
+    if include_policy:
+        documents.append((
+            "en", "ir-policy.pdf", "投资者关系管理办法（2025年8月）.pdf", "ir_policy",
+            _pdf_bytes("This policy describes meeting administration procedures."),
+        ))
+    if include_mixed:
+        documents.append((
+            "mixed", "call-mixed.txt", "Acme 2026 Q2 earnings call", "investor_call_transcript",
+            ("Full Conference Call Transcript\n"
+             "Management discussed the overseas expansion plan. "
+             "公司新产品已经完成客户认证，开始批量交付。\n").encode("utf-8"),
+        ))
+    if include_annual_pdf:
+        documents.append((
+            "en", "annual-report.pdf", "Acme annual report 2025", "annual_report",
+            _pdf_bytes("Company launched a new product and expanded overseas capacity for customers."),
+        ))
+    return documents
 
 
 def source_event(reader, ref, title, language, kind, event_id, *, policy_version="narrative-v1"):
@@ -127,25 +147,47 @@ def source_event(reader, ref, title, language, kind, event_id, *, policy_version
                  parsed.input_hash, canonical_json(payload), policy_version, T0, T0)
 
 
-def prepare_source_catalog(root, *, one_source=False):
+def prepare_source_catalog(
+    root,
+    *,
+    one_source=False,
+    sparse_metadata=False,
+    include_mixed=False,
+    include_annual_pdf=False,
+    include_policy=True,
+):
     """Scan real PDF/TXT bytes without materializing a batch or leasing work."""
-    sources = source_documents()[:1] if one_source else source_documents()
+    all_sources = source_documents(
+        include_mixed=include_mixed,
+        include_annual_pdf=include_annual_pdf,
+        include_policy=include_policy,
+    )
+    sources = all_sources[:1] if one_source else all_sources
     paths = {}
     for language, name, title, kind, data in sources:
-        group = "transcripts" if kind == "investor_call_transcript" else "policies"
+        group = (
+            "transcripts" if kind == "investor_call_transcript"
+            else "annual" if kind == "annual_report"
+            else "policies"
+        )
         directory = root / "companies" / "Acme" / "raw" / "investor_relations" / group
         directory.mkdir(parents=True, exist_ok=True)
         path = directory / name
         path.write_bytes(data)
         paths[name] = path
-        path.with_name(name + ".source.json").write_text(json.dumps({
+        sidecar = {
             "schema_version": "1.0", "canonical_entity_id": "ent-acme", "display_name": "Acme",
             "market": "US", "security_id": "ACME", "document_kind": kind, "fiscal_year": 2026,
-            "fiscal_period": "Q1", "period_end": "2026-03-31", "filing_date": "2026-05-01",
+            "fiscal_period": "FY" if kind == "annual_report" else "Q1",
+            "period_end": "2025-12-31" if kind == "annual_report" else "2026-03-31",
+            "filing_date": "2026-03-30" if kind == "annual_report" else "2026-05-01",
             "provider": "fixture", "provider_document_id": name, "content_sha256": sha256(data),
-            "source_url": "https://fixtures.invalid/" + name, "source_title": title, "language": language,
+            "source_url": "https://fixtures.invalid/" + name, "source_title": title,
             "retrieved_at": "2026-05-02T00:00:00Z", "collector_name": "production_e2e_fixture", "collector_version": "1.0.0",
-        }), encoding="utf-8")
+        }
+        if not sparse_metadata:
+            sidecar["language"] = language
+        path.with_name(name + ".source.json").write_text(json.dumps(sidecar), encoding="utf-8")
     config_path = root / "catalog.json"
     config_path.write_text(json.dumps({
         "schema_version": "1.0", "catalog_dir": "catalog", "roots": [{
@@ -167,7 +209,8 @@ def prepare_source_catalog(root, *, one_source=False):
             ref = reader.query_ref(row["document_id"], row["source_id"], sha256(data))
             manifest = reader.describe_version(ref)
             catalog_kind = "investor_relations" if kind == "ir_policy" else kind
-            assert (manifest["title"], manifest["document_kind"], manifest["language"]) == (title, catalog_kind, language), manifest
+            expected_language = None if sparse_metadata else language
+            assert (manifest["title"], manifest["document_kind"], manifest["language"]) == (title, catalog_kind, expected_language), manifest
             indexed[ref.document_id] = (ref, language, kind)
         return SimpleNamespace(root=root, config_path=config_path, catalog=catalog, reader=reader,
                                sources=sources, indexed=indexed, raw_paths=paths)

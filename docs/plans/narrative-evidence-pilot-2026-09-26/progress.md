@@ -359,3 +359,10 @@ S0/N4A及S2模型预算基础、CLI阶段与CI修复已正常发布，当前CI�
 - Read-only status check of `earnings-transcripts-s3-deadline` confirms the actual deadline worktree is still uncommitted at `93fe52c`; `s3-et-runtime-handoff.md` inside it describes the earlier runtime package, not this deadline work. Do not merge or clean the active worktree before its dedicated handoff and focused acceptance.
 - The two ET work directories serve separate stages: completed runtime integration (already in main history) and later deadline hardening (still WIP). Remote Actions was not checked because `gh` is unavailable; pre-push GREEN is not a claim that remote CI completed.
 - Next: accept the deadline-specific commit/handoff, run its consolidated tests plus golden check, then close S3. The N4C language-resolution issue remains planned and is not yet implemented.
+
+## 2026-10-04 — G1-LEGACY验收与稀疏language桥收口
+
+- G1-LEGACY复核：隔离分支`codex/g1-legacy-entry-retirement@c3209ee`干净并跟踪origin；实际实现提交`1cf8183`已作为`6394271`第二父提交合入主线。主线结果报告与外包`docs/implementation/g1-legacy-entry-retirement-handoff.md` SHA-256相同；分支额外的局部PWF/交接提交没有待合入生产代码。
+- 在干净G1 worktree重跑责任包 **142 passed / 58.05s**；Ruff与`git diff --check 1cfec10..HEAD`通过。主线接手合同、clean-env与config-doctor测试 **44 passed / 10.40s**。一次直接在当前主工作树运行G1写集检测时会把本机`config/source_acquisition.yaml`及当前未提交的narrative改动列为超出G1写集；该检查属于预期的dirty-worktree保护，故改在干净外包worktree复跑并全绿。初次无显式临时根的pytest还受到当前sandbox对系统TEMP ACL的限制；成功验收使用隔离basetemp，测试目录在结束后清理。
+- N4 sparse language bridge聚焦包 **23 passed / 41.06s**，覆盖中文/英文/混合电话会TXT、年报PDF、有/无语言元数据、低价值IR skip、Worker真实CLI+本地模型、重复执行不增模型请求及raw夹具不变。Ruff与mypy聚焦检查通过。未运行生产N4C批次，未改catalog/raw/本机来源配置。
+- 计划同步：S4仍pending，但“缺少从verified SourceRef字节推导language”的阻塞已关闭。剩余N4C工作是S3/ET-DEADLINE收口、为真实多类型样本取得符合现行admission/import合同的SourceRef，再测consumer引用/语言覆盖、1/2/4并发吞吐和总空间增量。当前IR normalized assertion、retired招股书及ET 402分别仍是样本资格/可用性缺口；不绕过合同。
