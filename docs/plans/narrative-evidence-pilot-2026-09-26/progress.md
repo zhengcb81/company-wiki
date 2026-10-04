@@ -439,6 +439,8 @@ S0/N4A及S2模型预算基础、CLI阶段与CI修复已正常发布，当前CI�
 
 ## 2026-10-04 — N4-T1与MeetingConverter外包验收/并线
 
+最终发布收据：company-wiki master/origin/master代码交接为66808ee，包含71f867a及5de9154；pre-push精选契约GREEN，远端run37241977614实际job72秒，Unit30秒/精选契约2秒，均success。MeetingConverter master/origin/master为8a33a7f，主线run37241709261实际job22秒且success。测试根ptn4t1/ptn4sql已按绝对包含路径删除；CWP唯一保留用户config/source_acquisition.yaml未提交。后续仅补本条文档状态，不增加小节点测试。
+
 - N4-T1外线4a53080只含六个允许文件；MAIN cherry-pick为5de9154，没有覆盖其旧基线之后的PWF/紧凑请求/S5内容。外线工作树保持原样，T2可从4a53080接续，只交自己的新增提交。跨层114 passed/48.56s；MAIN新增实际HTTP400→正式CLI→SQLite attempt/unknown reservation端到端1 passed/6.59s，敏感正文/密钥不入输出或库。详见harness_lanes/results/n4t1_model_transport_acceptance_2026-10-04.md。
 - MeetingConverter仅三个允许文件，交付8a33a7f；分支push/PR实际非空job绿18/19秒。MAIN正常用户上下文fetch核ref、merge --ff-only并push master；.coverage/config.json完整SHA/size/mtime和output清单前后相同，原dirty .coverage保留。PR1自动merged=true；新master run37241709261实际job绿22秒、Run tests2秒。外线全量204测试，本次未删业务回归；MAIN未在主checkout跑pytest。详见harness_lanes/results/meetingconverter_ci_acceptance_2026-10-04.md。
 - MeetingConverter既存mimo.py:137未定义logger仍未修，卡片禁止应用代码改动，不把CI绿误报业务缺陷已消失。当前没有恢复全仓lint要求。

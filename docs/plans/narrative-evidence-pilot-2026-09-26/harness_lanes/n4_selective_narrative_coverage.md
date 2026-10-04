@@ -1,6 +1,6 @@
 # N4-T2：Chinese report and IR narrative selection coverage
 
-Status: READY TO DISPATCH
+Status: DISPATCHED / AWAITING DELIVERY
 Card date: 2026-10-04
 Owner: isolated harness; MAIN owns final real-data batch, provider calls, storage measurement, and shared PWF.
 

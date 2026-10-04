@@ -1,6 +1,8 @@
 # N4-T1：MAIN 跨层验收
 
-Status: ACCEPTED / INTEGRATED；发布以 MAIN push 收据为准。N4C 未完成，N4-T2 尚待交付。
+Status: ACCEPTED / INTEGRATED / PUBLISHED。N4C 未完成，N4-T2 尚待交付。
+
+MAIN 已把 71f867a（S5入口退休）、5de9154（T1）、66808ee（跨层E2E及交接）推到 origin/master；pre-push 快速契约集 GREEN。远端代码 CI：[37241977614](https://github.com/zhengcb81/company-wiki/actions/runs/37241977614) 已完成 success；实际一个 job，22:57:45–22:58:57 UTC（72 秒），Unit tests 30 秒、Focused contract tests 2 秒，两个步骤均 success。没有将 push 成功代替 CI 验收。纯文档发布收据随后提交，不重新跑业务测试。
 
 ## 提交接口
 

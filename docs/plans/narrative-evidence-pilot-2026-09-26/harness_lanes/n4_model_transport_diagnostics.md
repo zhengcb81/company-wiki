@@ -1,6 +1,6 @@
 # N4-T1：MiniMax transport error diagnostics and budget settlement
 
-Status: ACCEPTED / INTEGRATED INTO MAIN (5de9154)
+Status: ACCEPTED / INTEGRATED / PUBLISHED TO MAIN (5de9154, included in 66808ee)
 Card date: 2026-10-04
 Owner: isolated harness; MAIN owns final live-provider and cross-layer acceptance.
 
