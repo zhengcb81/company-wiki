@@ -8,6 +8,19 @@
 
 执行已恢复。最新 `get_goal` 实读为 **active**（2026-10-04）；此前工具无resume接口的限制已由应用实际恢复解决，不再把旧paused快照当当前状态。目标未完成，不标complete。
 
+## 2026-10-04 四仓并线与交接更新
+
+本节为当前执行状态，优先于下方较早的baseline、并行线状态和 Next Step 历史文本。
+
+- **Revenue Forecast**：fcap 的 DWA-04R 有价值证据载体/账本以 merge commit `8a153f3387ae75fb172e70f8ab63ffd38100779a` 推到 `origin/main`；保留主线 UC/hash-pending 语义，UC 聚焦测试 29 passed。稀疏 worktree 的 `tools/pre_push_gate.py` 不存在，故只记录对应钩子跳过，不宣称该门通过。
+- **StockInfoDLSimple**：`codex/cninfo-bounded-budget` 已快进并推送目标支线 `v2-clean-rewrite@8ed5fdd`；provider 单测 171 passed，CWP provider contract/E2E 20 passed。owner checkout 剩余 WIP 保留，CWP 用户配置未动。
+- **filing-fetch**：SourceRef v2/companion 功能已在主线；旧 schema 原型不并入。PWF 收尾提交 `d4d2fac` 已推送 `fcap:main`，plan claims 与 push 选择门通过。
+- **Dayu**：用户本轮要求的唯一现有 `opt/cn_score@76037b2` 提交已快进到本地 main，相关 focused tests 87 passed；远端 push 被 HTTP 403 拒绝，停止重试。该项是已有提交的本地集成，不代表远端已更新。
+- **外部审计卡**：StockQAbyLLM 与 MeetingConverter 报告已收到并验收，唯一运行数据保留。invest-quick-scan 另有独立项目正在进行；本线不检查、不修改、不重复派发该仓任务。
+- company-wiki lane 的审计报告仍需从 harness 回复接收；本机 `config/source_acquisition.yaml` 用户改动和本计划审计结果目录继续排除在本线写集之外。
+
+**MAIN当前下一步：**按下文 S4/N4C 执行真实样本资格核验和有限批次；先确认候选年报、招股/再融资、IR、电话会 TXT 已由标准来源路径登记、原文 SHA 可验证并可被 consumer 实读。不得直接改用户配置或绕过标准 admission。
+
 ## 当前基线（2026-10-04正常用户上下文复核）
 
 | 项目 | 已发布/已验收事实 | 本机状态与本轮边界 |
@@ -31,7 +44,7 @@ StockWiki/IQS已有owner工作及消费者交付，本轮只读，不重复分�
 | S2 N4B | complete（节点A/B集中验收已绿；整体N4仍待独立S4/N4C） | real factory/HTTP adapter/full prompt; persistent token/cost reservation in AUTO; finite batch CLI; unique final artifact and small recovery receipt; public legacy whole-catalog Worker and startup routes removed | node A accounting/concurrency green; node B formal CLI/HTTP/kill/ACK and focused regression green; CWP producer limits are now connected and have real-data E2E evidence; proceed to N4C after G1/S3 closeout |
 | G1 残余门禁/签收精简（第一优先） | complete（CWP来源链与G1-LEGACY已合入；FF SourceRef v2于`e1eda60`推送） | 46项清单已分为已退出、必要自动校验、能力边界及外仓owner事项；未找到生产调用者的旧摘要/binding/archive工具不再作为当前门，留待S5/S6 caller清理 | CWP来源/as-of 64项、resolver/planner/canonical 100项与G1-LEGACY 170 passed / 1 deselected既有收据；FF集中回归177 passed / 1 skipped / 39 subtests，Ruff及push gate GREEN；电话会provider→CWP导入端到端12 passed。保留SHA、来源身份/期间/公开日、可回放引用和资源限制 |
 | S3 SourceRef/SourceExport 虚拟化与来源默认收敛（第二优先） | **complete**（FF `eb0af13`、ET `63c4090`已推送；CWP SourceExport已发布；合入后FF→ET→CWP链及各仓责任集均GREEN。live FMP仍受HTTP 402权益限制，不影响接口合同完成） | 上层只用SourceRef/SourceExport v2；复用FF exact/latest_as_of和pathless reader，不依赖物理目录；电话会走正式ET CLI并由CWP持有原件；provider定位仍在adapter层 | ET deadline分支已快进到main；其`/1`、`/2`、discovery/candidate wire与goldens未改，CWP importer现有provider-aware FMP JSON合同经真实三仓离线链验证。跨仓脚本验证FF uppercase exchange转ET小写、精确FY/Q、FMP原JSON与canonical text各自SHA/size、unknown publication、pathless SourceRef、重复读取不触provider，以及超时后worker结果清理。合并后ET `tests/test_retrieval_cli_e2e.py` 6 passed、10 goldens matched；FF companion 5 passed且Ruff clean；CWP FMP importer 5 passed。FF只在owner目录用`eb0af13`修正交易所slug与3秒清理窗口；ET只更新过期golden说明并合入`63c4090`。旧“Motley 24字段唯一可导入”记录已由当前源码/测试更正。真实FMP HTTP 402不作为代码合同门；正费用额度没有实际账单计量，本计划只声称FF zero-cost拒绝与单次provider请求，不声称美元账单cap已实测。 |
-| S4 N4C real samples and storage plan | pending（缺失language的确定性桥已实现并通过23项聚焦单测/集成E2E；但N4C真实生产批次尚未启动。仍须先完成S3/ET-DEADLINE，并让IR、招股书、ET TXT按现有来源合同达到可见/active/原文SHA验证条件） | four real document types / consumer reads / language and citation coverage / total incremental bytes; retain only status/stop/uninstall compatibility for old worker process cleanup | node C; bounded real batch, then measured 1/2/4 parallelism；至少覆盖年报、招股/再融资、IR和电话会/季度类中的四种，记录摘要证据定位和新增空间 |
+| S4 N4C real samples and storage plan | pending（缺失language的确定性桥已实现并通过23项聚焦单测/集成E2E；S3/ET-DEADLINE已完成。N4C真实生产批次尚未启动，候选IR、招股书、ET TXT仍需逐一通过标准来源合同达到可见/active/原文SHA验证条件） | four real document types / consumer reads / language and citation coverage / total incremental bytes; retain only status/stop/uninstall compatibility for old worker process cleanup | node C; bounded real batch, then measured 1/2/4 parallelism；至少覆盖年报、招股/再融资、IR和电话会/季度类中的四种，记录摘要证据定位和新增空间 |
 | S5 B2逐caller清理 | pending（SPACE-S5只读审计已交付） | 审计确认约138.6 MB无代码调用者集合可列入首批候选；2.826 GB `derived/` 仍有 reader 与 8,191 条 artifact 路径引用，必须先迁移；报告不是删除清单 | 主线复核当前调用者/生产文件状态后分集合处理；每批验证原件与来源事实保留并测实际释放量 |
 | S6 DB事实收缩与收尾 | pending | 表级盘点，删除不可再消费派生/废索引并收缩，来源版本/撤回事实保留；旁路兼容、docs/hook残留清完 | 同一存储节点；commit/push、PWF收尾 |
 | 可选 exact-SHA原件对象去重 | 不阻S0–S6完成 | 先用已有SHA/size找候选、逐候选验字节，保留所有source/location版本事实 | 有真实收益才实施；不报未测节省量 |
@@ -95,7 +108,7 @@ TDD框住公开行为，不把旧签收规则写进新测试。仅S0相关收口
 
 ## Next Step
 
-**MAIN下一动作：**进入S4/N4C的真实文档资格与小批次验收。先只读检查候选年报、招股/再融资、IR和电话会TXT是否已由当前admission路径登记为active、metadata可见且raw字节SHA匹配；任何类型不达标则记录阻塞点并找标准producer/activation路径，不直接写catalog/数据库或绕开来源政策。样本就绪后才运行有限Worker批次，测摘要定位/语言/消费者读取和1/2/4并行空间增量。S3已完成并合入；上一节点ET交付、分支/提交及测试证据见本节收据。CWP `config/source_acquisition.yaml`、审计结果及外仓owner未跟踪文件继续保持原样。
+**MAIN下一动作：**进入S4/N4C的真实文档资格与小批次验收。先只读检查候选年报、招股/再融资、IR和电话会TXT是否已由当前admission路径登记为active、metadata可见且raw字节SHA匹配；任何类型不达标则记录缺口并走标准producer/activation路径，不直接写catalog或数据库、不读写用户 `config/source_acquisition.yaml`。样本就绪后运行有限Worker批次，测摘要定位、语言/引用覆盖、consumer实读和1/2/4并行空间增量。S3与四仓可合入工作已完成；Dayu远端push权限问题单独记为owner待办，不阻塞N4C。审计结果目录按其独立计划管理。
 
 ### 已完成：ET-DEADLINE 并线前 FF→ET→CWP 离线契约联调
 

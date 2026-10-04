@@ -50,3 +50,36 @@
 - IQS/StockQA: live `master` 分别为 `a1938213…` / `5fdcc2c5…`。
 
 这些 SHA 是 2026-10-04 的快照，独立审计 harness 必须在执行时重查；不得 fetch 来刷新本地仓库。
+
+## 四条 lane 接收结论（2026-10-04）
+
+| lane | 验收状态 | 可确认结论 | 需保留/待决事项 |
+|---|---|---|---|
+| Revenue Forecast | 报告完整，按只读卡验收 | `fcap@5319ee26` 有 4 个 branch-only DWA-04R 提交；batch-A 的 360 路径是该提交文件数（355 carrier + 5 台账修改），不是产品代码量。`codex/revenue-source-reader` 另有 1 个原型提交；其余列出的分支已在 main。 | fcap 的 UC 门补丁与 main 语义分叉，应只迁移仍有价值的证据载体/账本，不整组合并旧实现；先找回 `rf-impl` 唯一 §四十四 owner 裁定。保留两份真实运行周账本、rfv2-tdd WIP；不 prune 掏空的 `rf-merge-review`。1,985 untracked 的提交自述与实测 0 未解释，权限受限目录保持 unknown。T3 连续周运行记录为失败，根因不在本只读审计中验证。
+| StockInfoDLSimple | 审计正文完整；附记是审计后的独立工作树实施记录 | 报告时支线 `codex/cninfo-bounded-budget@8ed5fdd` 有 2 个独有提交，包含 1.2.0 bounded provider。审计后附记记录用显式路径把对应 13 个文件放入主 checkout index，并保留 1.1.0 原工作副本备份；单测记录 188 passed/0 failed。当前复核确认 `HEAD@1693045` 未改变，13 个新文件仍 staged、11 个原有文件仍 modified、另有 3 个未跟踪项，分支/远端未合并或提交。 | 本 lane 原定只读，因此将附记作为授权后的实施记录单独对待。继续实施前要核对备份可恢复性、CWP 适配器实际消费的 JSON/预算契约，并补充绑定提交内容的离线集成/E2E 收据；现有 188 项单测不等同跨仓 E2E。不得覆盖或清理另外 11 项 WIP。远端 main 和其它 live heads 本卡未 fetch/评估。 |
+| filing-fetch | 报告完整；另做只读当前 SHA 复核 | 报告时 `origin/main@e1eda607` 已含 FF-S3 与 SourceRef v2 companion 实现；当前本地 `origin/main@eb0af134` 又多一个 transcript bridge deadline/exchange 修复。重算后 `codex/transcript-companion` 仍是 1 个 branch-only 原型提交，主线落后数从报告时 19 增至 20。 | 原型与已交付 v2 契约不同，不整笔并入；可留作历史证据。FF-S3 的“未 push/未并线”计划文字已过期，应在后续 PWF 收尾时修正。`config/FMP_API_KEY.txt` 未读未碰。跨仓 FF→ET→CWP 已交付内容以当前主线为准。 |
+| Dayu agent | 报告完整，按只读卡验收 | `main@2115c86d` 与 live 主线相同；远端 `opt/cn_score@76037b2` 有 1 个独有提交，且 `refs/pull/159/head` 同 SHA。 | PR #159 开/关/合状态 unknown；遵照“Dayu 为纯外部项目”的用户边界，不操作该仓、远端分支或 PR。来源不明的 `docs/architecture_report.html` 只登记并保留。 |
+
+### 接收边界
+
+- 这些结论是各自审计时间点的快照，不代表所有远端 ref 在此后都未移动。FF 的主线已在本次验收中用本地 `origin/main` 再核对；RF、Dayu 等待任何后续施工前应按其独立计划复核最新 head。
+- 四个 lane 报告自身都未执行合并、清理或提交目标仓库。StockInfoDLSimple 的附记例外于“卡片只读范围”，记载的 staging 和 188 项测试发生在审计正文结束后，并声明有单独用户指令；当前只登记该状态，不继续改外部仓库。
+- 本次没有运行产品测试；验收对象是报告证据与状态分类。下一阶段清理/并线需基于独立施工计划，保留 owner WIP 和唯一证据。
+
+## RF 并线前模拟（2026-10-04）
+
+- 再次 `git ls-remote` 确认 RF live heads 未变：`main@6fb2def7`、`fcap@5319ee26`。
+- 对 batch-A 的 355 个新增 blob 做 Git 对象大小统计：合计 **15,527,787 bytes（约 14.8 MiB）**，远低于完整 0.807 GiB main tracked tree；不需要恢复/复制完整备份。`origin/main` tracked tree 实测 48,771 blob、865,981,987 bytes（约 0.807 GiB），因此后续必须用稀疏 worktree，避免额外复制整棵树。
+- `git merge-tree origin/main fcap` 的合并模拟发现 **50 个冲突：45 个 add/add（execution-run 同路径不同内容）和 5 个文本冲突**（`OWNER_DECISIONS.md`、`REMEDIATION_REGISTER.md`、`progress.md`、`test_scenarios.py`、`uc/scenarios.py`）。这证实不能机械 merge。策略：同路径证据默认保留较新的 main 版本；f​​cap 版本仍由 merge parent 历史保存；文本按当前主线与用户 §四十四裁定做语义合并；代码保留 main 当前“缺 hash 仅诊断、有效路径可闭环”的用户决定。
+- `rf-impl` index 中查到 §四十四原文：它明确覆盖 §四十三的缺 hash 阻断规则、有效路径无 hash 可闭环、不得伪造 hash，并保留提供 hash 时的字节 SHA 验证。该内容将安全并入 main 计划记录，不会用过时的 fcap 文本覆盖。
+- 受限沙箱中的首次 Git merge-tree 因 `.git/objects` 写入权限失败；改用用户授权的非沙箱只读模拟得到冲突报告，没有移动分支或改变任何 worktree。一次 PowerShell 管道把 `rev-parse --stdin` 当作对象解析器而失败，改用 `cat-file --batch-check` 后完成统计；没有源文件变化。
+- 当前策略不是把 45 个同路径冲突的旧证据副本加倍复制进 main。合并提交会保留 fcap 父提交及其原始证据历史，工作树使用主线已存在的对应版本，新增且无冲突的 carrier 和账本再带入主线。
+
+## 2026-10-04 四仓并线及外包卡验收结论
+
+- RF `8a153f3` 已推送 main，UC 聚焦测试 29 passed；稀疏 worktree 缺少 pre-push gate 脚本，钩子跳过，不记为完整门通过。
+- StockInfoDLSimple 的 `codex/cninfo-bounded-budget` 已推送到 `v2-clean-rewrite@8ed5fdd`；provider 171 passed、CWP contract/E2E 20 passed。owner WIP 和 CWP 用户配置保留。
+- FF 代码功能已在 main；只推送 PWF 收尾提交 `d4d2fac`，旧 companion 原型不并入，精选 push gates 通过。
+- Dayu `opt/cn_score@76037b2` 已快进到本地 main，测试 87 passed；远端 push 被 HTTP 403 拒绝，停止重试。
+- StockQAbyLLM、MeetingConverter 两份交接已验收。StockQA 运行资料、MeetingConverter `.coverage` 均保留；疑似密钥文件未读。
+- IQS 由用户指定的独立项目处理，本线不检查、不修改、不重复派发。company-wiki lane 如有独立报告仍按原交接接口接收。

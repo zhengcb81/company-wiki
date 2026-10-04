@@ -10,15 +10,15 @@
 
 | 优先 | 仓库 | 首轮问题 | Lane 卡 | 结果交接 |
 |---|---|---|---|---|
-| P1 | Revenue Forecast | fcap 4 个独有提交、360 路径证据记录、2 个 tracked dirty JSON；PWF 完成标志早于当前提交 | [revenue_forecast.md](lanes/revenue_forecast.md) | `results/revenue_forecast.md` |
-| P1 | StockInfoDLSimple | 当前 owner checkout 多个 staged/unstaged/untracked 改动，另有 2 commit bounded-budget worktree | [stock_info_dl_simple.md](lanes/stock_info_dl_simple.md) | `results/stock_info_dl_simple.md` |
-| P2 | filing-fetch | 主线已含 FF-S3，但 transcript companion 有 1 个独有 WIP commit；未跟踪 FMP key | [filing_fetch.md](lanes/filing_fetch.md) | `results/filing_fetch.md` |
+| P1 | Revenue Forecast | fcap 4 个独有提交、360 路径证据记录、2 个 tracked dirty JSON；PWF 完成标志早于当前提交 | [revenue_forecast.md](lanes/revenue_forecast.md) | **已收到并复核**：[results/revenue_forecast.md](results/revenue_forecast.md) |
+| P1 | StockInfoDLSimple | 当前 owner checkout 多个 staged/unstaged/untracked 改动，另有 2 commit bounded-budget worktree | [stock_info_dl_simple.md](lanes/stock_info_dl_simple.md) | **已收到并复核**：[results/stock_info_dl_simple.md](results/stock_info_dl_simple.md)（含审计后实施附记） |
+| P2 | filing-fetch | 主线已含 FF-S3，但 transcript companion 有 1 个独有 WIP commit；未跟踪 FMP key | [filing_fetch.md](lanes/filing_fetch.md) | **已收到并复核**：[results/filing_fetch.md](results/filing_fetch.md) |
 | P2 | earnings-transcripts | ET-DEADLINE 1 个远端独有 commit；PWF “待 commit/push”已过期；根目录有未跟踪运行/工具资料 | [earnings_transcripts.md](lanes/earnings_transcripts.md) | **已验收**：[results/earnings_transcripts.md](results/earnings_transcripts.md)；后续仅待联调/并线决策 |
 | P2 | company-wiki | 本机 provider 配置 dirty；G1、RF-state、FC-802 历史文档分支有少量独有提交/报告 | [company_wiki.md](lanes/company_wiki.md) | Harness 在回复中返回完整报告；不要写目标仓 |
-| P2 | dayu-agent | opt/cn_score 有 1 个远端独有提交；architecture_report 未跟踪 | [dayu_agent.md](lanes/dayu_agent.md) | `results/dayu_agent.md` |
-| P3 | StockQAbyLLM | 多个未跟踪 pilot/工具/报告目录；gh-pages 为部署分支 | [stock_qa_by_llm.md](lanes/stock_qa_by_llm.md) | `results/stock_qa_by_llm.md` |
-| P3 | invest-quick-scan | `nul`、`opencode.json` 未跟踪，当前开发分支无独有提交 | [invest_quick_scan.md](lanes/invest_quick_scan.md) | `results/invest_quick_scan.md` |
-| P3 | MeetingConverter | tracked `.coverage` 改动，计划状态互相过期 | [meeting_converter.md](lanes/meeting_converter.md) | `results/meeting_converter.md` |
+| P2 | dayu-agent | opt/cn_score 有 1 个远端独有提交；architecture_report 未跟踪 | [dayu_agent.md](lanes/dayu_agent.md) | **已收到并复核**：[results/dayu_agent.md](results/dayu_agent.md) |
+| P3 | StockQAbyLLM | 多个未跟踪 pilot/工具/报告目录；gh-pages 为部署分支 | [stock_qa_by_llm.md](lanes/stock_qa_by_llm.md) | **已收到并验收**：[results/stock_qa_by_llm.md](results/stock_qa_by_llm.md)；运行样本和敏感配置副本均保留 |
+| P3 | invest-quick-scan | `nul`、`opencode.json` 未跟踪，当前开发分支无独有提交 | [invest_quick_scan.md](lanes/invest_quick_scan.md) | **本线排除**：用户说明由独立项目进行；不检查仓库、不改文件、不重复发卡 |
+| P3 | MeetingConverter | tracked `.coverage` 改动，计划状态互相过期 | [meeting_converter.md](lanes/meeting_converter.md) | **已收到并验收**：[results/meeting_converter.md](results/meeting_converter.md)；保留唯一 `.coverage` 测试数据和 ignored output |
 
 ## 用户已裁定：StockInfoDownloader 不并线
 
