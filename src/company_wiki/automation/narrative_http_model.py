@@ -35,10 +35,25 @@ class ModelCredentialsError(ModelResponseError):
 
 
 class ModelHTTPError(ModelResponseError):
-    """HTTP status only; provider error bodies and URLs are never copied."""
+    """HTTP status only; provider error bodies and URLs are never copied.
+
+    ``status_code`` is the only provider diagnostic this exception retains,
+    as a bounded integer between 100 and 599.  ``retryable`` and
+    ``error_code`` give the stable classification: HTTP 4xx rejections other
+    than 429, plus 3xx redirections this single-request adapter never
+    follows, are terminal as ``MODEL_HTTP_CLIENT_ERROR``; 5xx responses are
+    retryable as ``MODEL_HTTP_SERVER_ERROR``.  HTTP 429 keeps its dedicated
+    rate-limit error and never reaches this class.
+    """
 
     def __init__(self, status_code: int):
+        if type(status_code) is not int or not 100 <= status_code <= 599:
+            raise ValueError("status_code must be an integer between 100 and 599")
         self.status_code = status_code
+        self.retryable = 500 <= status_code <= 599
+        self.error_code = (
+            "MODEL_HTTP_SERVER_ERROR" if self.retryable else "MODEL_HTTP_CLIENT_ERROR"
+        )
         super().__init__(f"MODEL_HTTP_ERROR status={status_code}")
 
 
@@ -83,11 +98,21 @@ class NarrativeHTTPModel:
         max_response_bytes: int = 262_144,
         allow_local_http: bool = False,
     ) -> None:
-        if not isinstance(model_id, str) or not model_id.strip() or model_id != model_id.strip():
+        if (
+            not isinstance(model_id, str)
+            or not model_id.strip()
+            or model_id != model_id.strip()
+        ):
             raise ValueError("model_id must be nonempty and trimmed")
-        if not isinstance(api_key_env, str) or not re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]*", api_key_env):
+        if not isinstance(api_key_env, str) or not re.fullmatch(
+            r"[A-Za-z_][A-Za-z0-9_]*", api_key_env
+        ):
             raise ValueError("api_key_env must name an environment variable")
-        if not isinstance(endpoint, str) or not endpoint or any(char.isspace() for char in endpoint):
+        if (
+            not isinstance(endpoint, str)
+            or not endpoint
+            or any(char.isspace() for char in endpoint)
+        ):
             raise ValueError("endpoint must be a complete URL without whitespace")
         parsed = urlsplit(endpoint)
         if (
@@ -107,13 +132,24 @@ class NarrativeHTTPModel:
                 loopback = False
             if not loopback:
                 raise ValueError("HTTP endpoint must be an explicit loopback IP")
-        if isinstance(timeout_seconds, bool) or not isinstance(timeout_seconds, (int, float)) or not math.isfinite(timeout_seconds) or timeout_seconds <= 0:
+        if (
+            isinstance(timeout_seconds, bool)
+            or not isinstance(timeout_seconds, (int, float))
+            or not math.isfinite(timeout_seconds)
+            or timeout_seconds <= 0
+        ):
             raise ValueError("timeout_seconds must be finite and positive")
         self.model_id = model_id
         self.api_key_env = api_key_env
-        self.max_output_tokens = _positive_integer(max_output_tokens, "max_output_tokens")
-        self.max_request_bytes = _positive_integer(max_request_bytes, "max_request_bytes")
-        self.max_response_bytes = _positive_integer(max_response_bytes, "max_response_bytes")
+        self.max_output_tokens = _positive_integer(
+            max_output_tokens, "max_output_tokens"
+        )
+        self.max_request_bytes = _positive_integer(
+            max_request_bytes, "max_request_bytes"
+        )
+        self.max_response_bytes = _positive_integer(
+            max_response_bytes, "max_response_bytes"
+        )
         self.timeout_seconds = float(timeout_seconds)
         self._scheme = parsed.scheme
         self._host = parsed.hostname
@@ -134,7 +170,9 @@ class NarrativeHTTPModel:
             "response_format": {"type": "json_object"},
         }
         try:
-            body = json.dumps(payload, ensure_ascii=False, separators=(",", ":")).encode("utf-8")
+            body = json.dumps(
+                payload, ensure_ascii=False, separators=(",", ":")
+            ).encode("utf-8")
         except (ValueError, TypeError, UnicodeError):
             raise ModelResponseError("MODEL_REQUEST_INVALID") from None
         if len(body) > self.max_request_bytes:
@@ -152,12 +190,23 @@ class NarrativeHTTPModel:
             raise ModelCredentialsError("MODEL_KEY_INVALID")
         started = time.monotonic()
         deadline = started + self.timeout_seconds
-        connection_type = http.client.HTTPSConnection if self._scheme == "https" else http.client.HTTPConnection
-        connection = connection_type(self._host, self._port, timeout=self.timeout_seconds)
+        connection_type = (
+            http.client.HTTPSConnection
+            if self._scheme == "https"
+            else http.client.HTTPConnection
+        )
+        connection = connection_type(
+            self._host, self._port, timeout=self.timeout_seconds
+        )
         try:
             connection.request(
-                "POST", self._path, body=body,
-                headers={"Content-Type": "application/json", "Authorization": f"Bearer {key}"},
+                "POST",
+                self._path,
+                body=body,
+                headers={
+                    "Content-Type": "application/json",
+                    "Authorization": f"Bearer {key}",
+                },
             )
             response_socket = connection.sock
             if response_socket is not None:
@@ -200,7 +249,9 @@ class NarrativeHTTPModel:
             raise ModelTimeoutError("MODEL_TIMEOUT")
         return remaining
 
-    def _response(self, request: NarrativeModelRequest, body: bytes, started: float) -> NarrativeModelResponse:
+    def _response(
+        self, request: NarrativeModelRequest, body: bytes, started: float
+    ) -> NarrativeModelResponse:
         try:
             payload = json.loads(body.decode("utf-8"))
             choice = payload["choices"][0]
@@ -211,14 +262,26 @@ class NarrativeHTTPModel:
             actual_model = payload.get("model", self.model_id)
             if not isinstance(actual_model, str) or not actual_model.strip():
                 raise ValueError("invalid model identity")
-        except (UnicodeError, ValueError, TypeError, KeyError, IndexError, AttributeError, RecursionError):
+        except (
+            UnicodeError,
+            ValueError,
+            TypeError,
+            KeyError,
+            IndexError,
+            AttributeError,
+            RecursionError,
+        ):
             raise ModelResponseError("MODEL_RESPONSE_INVALID") from None
         if len(encoded) > MODEL_RESPONSE_MAX_BYTES:
             raise ModelResponseTooLargeError("MODEL_RESPONSE_TOO_LARGE")
         usage = payload.get("usage")
         input_tokens = usage.get("prompt_tokens") if isinstance(usage, dict) else None
-        output_tokens = usage.get("completion_tokens") if isinstance(usage, dict) else None
-        if not all(type(value) is int and value >= 0 for value in (input_tokens, output_tokens)):
+        output_tokens = (
+            usage.get("completion_tokens") if isinstance(usage, dict) else None
+        )
+        if not all(
+            type(value) is int and value >= 0 for value in (input_tokens, output_tokens)
+        ):
             input_tokens = output_tokens = None
         duration_ms = max(0, int((time.monotonic() - started) * 1000))
         if choice.get("finish_reason") == "length":
@@ -231,15 +294,21 @@ class NarrativeHTTPModel:
         if not encoded:
             raise ModelResponseError("MODEL_RESPONSE_INVALID")
         return NarrativeModelResponse(
-            adapter_id=self.adapter_id, model_id=actual_model,
-            prompt_version=request.prompt_version, response_bytes=encoded,
-            input_tokens=input_tokens, output_tokens=output_tokens,
+            adapter_id=self.adapter_id,
+            model_id=actual_model,
+            prompt_version=request.prompt_version,
+            response_bytes=encoded,
+            input_tokens=input_tokens,
+            output_tokens=output_tokens,
             duration_ms=duration_ms,
         )
 
 
 __all__ = [
-    "ModelCredentialsError", "ModelHTTPError", "ModelOutputTruncatedError",
-    "ModelRequestTooLargeError", "ModelResponseTooLargeError",
+    "ModelCredentialsError",
+    "ModelHTTPError",
+    "ModelOutputTruncatedError",
+    "ModelRequestTooLargeError",
+    "ModelResponseTooLargeError",
     "NarrativeHTTPModel",
 ]

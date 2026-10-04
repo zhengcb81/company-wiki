@@ -23,21 +23,30 @@ _CONNECT = socket.socket.connect
 _CREATE_CONNECTION = socket.create_connection
 KEY_ENV = "NARRATIVE_TEST_API_KEY"
 KEY = "synthetic-key-never-a-live-credential"
-REQUEST = NarrativeModelRequest("prompt/1", "Use source data only.", '{"text":"业务进展"}', "a" * 64)
+REQUEST = NarrativeModelRequest(
+    "prompt/1", "Use source data only.", '{"text":"业务进展"}', "a" * 64
+)
 
 
 def _model(**options):
     from company_wiki.automation.narrative_http_model import NarrativeHTTPModel
 
     return NarrativeHTTPModel(
-        model_id="requested-model", api_key_env=KEY_ENV, **options,
+        model_id="requested-model",
+        api_key_env=KEY_ENV,
+        **options,
     )
 
 
 def _response(**overrides):
     value = {
         "model": "actual-provider-model",
-        "choices": [{"message": {"content": '{"draft":{"text":"业务进展"}}'}, "finish_reason": "stop"}],
+        "choices": [
+            {
+                "message": {"content": '{"draft":{"text":"业务进展"}}'},
+                "finish_reason": "stop",
+            }
+        ],
         "usage": {"prompt_tokens": 73, "completion_tokens": 19},
     }
     value.update(overrides)
@@ -46,7 +55,15 @@ def _response(**overrides):
 
 @pytest.fixture
 def stub(monkeypatch, hermetic_runtime):
-    state = SimpleNamespace(body=_response(), status=200, headers={}, delay=0, calls=[], send_length=True, drip=False)
+    state = SimpleNamespace(
+        body=_response(),
+        status=200,
+        headers={},
+        delay=0,
+        calls=[],
+        send_length=True,
+        drip=False,
+    )
 
     class Handler(BaseHTTPRequestHandler):
         def log_message(self, *args):
@@ -126,7 +143,15 @@ def test_single_post_preserves_roles_identity_usage_and_original_language(stub):
     assert KEY not in repr(model) and KEY.encode() not in body
 
 
-@pytest.mark.parametrize("usage", [None, {}, {"prompt_tokens": True, "completion_tokens": 1}, {"prompt_tokens": -1, "completion_tokens": 1}])
+@pytest.mark.parametrize(
+    "usage",
+    [
+        None,
+        {},
+        {"prompt_tokens": True, "completion_tokens": 1},
+        {"prompt_tokens": -1, "completion_tokens": 1},
+    ],
+)
 def test_missing_or_invalid_usage_is_unknown_not_zero(stub, usage):
     stub.body = _response(usage=usage)
     response = _model(endpoint=stub.endpoint, allow_local_http=True).generate(REQUEST)
@@ -147,7 +172,10 @@ def test_key_is_read_at_generate_and_not_cached_in_adapter(stub, monkeypatch):
     assert "rotated-synthetic-key" not in repr(model)
 
 
-@pytest.mark.parametrize("key", ["nonascii-密钥", "key\r\ninjected-header", "key\x01control", "key\x7fcontrol"])
+@pytest.mark.parametrize(
+    "key",
+    ["nonascii-密钥", "key\r\ninjected-header", "key\x01control", "key\x7fcontrol"],
+)
 def test_invalid_header_credentials_are_rejected_before_http(stub, monkeypatch, key):
     from company_wiki.automation.narrative_http_model import ModelCredentialsError
 
@@ -227,11 +255,16 @@ def test_streaming_body_cannot_reset_the_overall_read_deadline(stub):
     assert len(stub.calls) == 1
 
 
-@pytest.mark.parametrize("usage,expected_tokens", [
-    ({"prompt_tokens": 73, "completion_tokens": 19}, (73, 19)),
-    (None, (None, None)),
-])
-def test_truncated_output_carries_metering_without_content_or_secret(stub, usage, expected_tokens):
+@pytest.mark.parametrize(
+    "usage,expected_tokens",
+    [
+        ({"prompt_tokens": 73, "completion_tokens": 19}, (73, 19)),
+        (None, (None, None)),
+    ],
+)
+def test_truncated_output_carries_metering_without_content_or_secret(
+    stub, usage, expected_tokens
+):
     from company_wiki.automation.narrative_http_model import ModelOutputTruncatedError
 
     content = KEY + REQUEST.data_json
@@ -239,7 +272,9 @@ def test_truncated_output_carries_metering_without_content_or_secret(stub, usage
         choices=[{"message": {"content": content}, "finish_reason": "length"}],
         usage=usage,
     )
-    with pytest.raises(ModelOutputTruncatedError, match="^MODEL_OUTPUT_TRUNCATED$") as error:
+    with pytest.raises(
+        ModelOutputTruncatedError, match="^MODEL_OUTPUT_TRUNCATED$"
+    ) as error:
         _model(endpoint=stub.endpoint, allow_local_http=True).generate(REQUEST)
     assert error.value.model_id == "actual-provider-model"
     assert (error.value.input_tokens, error.value.output_tokens) == expected_tokens
@@ -249,7 +284,15 @@ def test_truncated_output_carries_metering_without_content_or_secret(stub, usage
     assert len(stub.calls) == 1
 
 
-@pytest.mark.parametrize("body", [b"not-json", b"[]", b'{"choices":[]}', b'{"choices":[{"message":{"content":"cut"},"finish_reason":"length"}]}'])
+@pytest.mark.parametrize(
+    "body",
+    [
+        b"not-json",
+        b"[]",
+        b'{"choices":[]}',
+        b'{"choices":[{"message":{"content":"cut"},"finish_reason":"length"}]}',
+    ],
+)
 def test_invalid_envelope_or_truncated_output_has_named_static_error(stub, body):
     stub.body = body
     with pytest.raises(ModelResponseError, match="MODEL_") as error:
@@ -257,13 +300,16 @@ def test_invalid_envelope_or_truncated_output_has_named_static_error(stub, body)
     assert KEY not in str(error.value) and "not-json" not in str(error.value)
 
 
-@pytest.mark.parametrize("endpoint", [
-    "http://127.0.0.1:9/v1/chat/completions",
-    "http://198.51.100.1/v1/chat/completions",
-    "https://user:secret@example.invalid/v1/chat/completions",
-    "https://example.invalid/v1/chat/completions?key=secret",
-    "https://example.invalid/v1/chat/completions#secret",
-])
+@pytest.mark.parametrize(
+    "endpoint",
+    [
+        "http://127.0.0.1:9/v1/chat/completions",
+        "http://198.51.100.1/v1/chat/completions",
+        "https://user:secret@example.invalid/v1/chat/completions",
+        "https://example.invalid/v1/chat/completions?key=secret",
+        "https://example.invalid/v1/chat/completions#secret",
+    ],
+)
 def test_endpoint_refuses_plain_http_or_credentials_query_fragment(endpoint):
     with pytest.raises(ValueError, match="endpoint"):
         _model(endpoint=endpoint)
@@ -271,4 +317,62 @@ def test_endpoint_refuses_plain_http_or_credentials_query_fragment(endpoint):
 
 def test_local_http_override_cannot_admit_non_loopback_host():
     with pytest.raises(ValueError, match="loopback"):
-        _model(endpoint="http://198.51.100.1/v1/chat/completions", allow_local_http=True)
+        _model(
+            endpoint="http://198.51.100.1/v1/chat/completions", allow_local_http=True
+        )
+
+
+@pytest.mark.parametrize("status", [400, 401, 404])
+def test_client_rejection_is_terminal_and_keeps_only_the_integer_status(stub, status):
+    from company_wiki.automation.narrative_http_model import ModelHTTPError
+
+    stub.status = status
+    stub.headers = {"Location": stub.endpoint + "/would-leak"}
+    stub.body = (KEY + REQUEST.data_json).encode()
+    with pytest.raises(ModelHTTPError) as error:
+        _model(endpoint=stub.endpoint, allow_local_http=True).generate(REQUEST)
+    assert error.value.status_code == status
+    assert error.value.retryable is False
+    assert error.value.error_code == "MODEL_HTTP_CLIENT_ERROR"
+    assert str(error.value) == f"MODEL_HTTP_ERROR status={status}"
+    assert KEY not in str(error.value) and REQUEST.data_json not in str(error.value)
+    assert len(stub.calls) == 1
+
+
+@pytest.mark.parametrize("status", [500, 502, 503])
+def test_server_failure_is_retryable_and_keeps_only_the_integer_status(stub, status):
+    from company_wiki.automation.narrative_http_model import ModelHTTPError
+
+    stub.status = status
+    stub.headers = {"Location": stub.endpoint + "/would-leak"}
+    stub.body = (KEY + REQUEST.data_json).encode()
+    with pytest.raises(ModelHTTPError) as error:
+        _model(endpoint=stub.endpoint, allow_local_http=True).generate(REQUEST)
+    assert error.value.status_code == status
+    assert error.value.retryable is True
+    assert error.value.error_code == "MODEL_HTTP_SERVER_ERROR"
+    assert str(error.value) == f"MODEL_HTTP_ERROR status={status}"
+    assert KEY not in str(error.value) and REQUEST.data_json not in str(error.value)
+    assert len(stub.calls) == 1
+
+
+@pytest.mark.parametrize(
+    "body",
+    [
+        b'{"model":"actual-provider-model"}',
+        b'{"choices":[{"message":{"content":123}}]}',
+        b'{"choices":[{"message":{"content":""},"finish_reason":"stop"}]}',
+    ],
+)
+def test_malformed_2xx_envelope_stays_a_bounded_response_failure_not_an_http_error(
+    stub, body
+):
+    from company_wiki.automation.narrative_http_model import ModelHTTPError
+
+    stub.status = 200
+    stub.body = body
+    with pytest.raises(ModelResponseError, match="MODEL_RESPONSE_INVALID") as error:
+        _model(endpoint=stub.endpoint, allow_local_http=True).generate(REQUEST)
+    assert not isinstance(error.value, ModelHTTPError)
+    assert KEY not in str(error.value)
+    assert len(stub.calls) == 1
