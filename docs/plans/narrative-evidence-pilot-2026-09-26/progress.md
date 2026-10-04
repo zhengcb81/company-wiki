@@ -345,3 +345,10 @@ S0/N4A及S2模型预算基础、CLI阶段与CI修复已正常发布，当前CI�
 - 只读SQL查明三七互娱2026-05-11 IR没有任何`source_metadata_assertions`，现有`metadata_json`只有scanner/acquisition字段。当前v2不可见的直接原因是缺normalized assertion，而非活跃状态或字节验证失败。通用upsert新建的是shadow assertion，激活流程单独依赖epoch/cohort/policy snapshot；已将其列为G1剩余复杂度审查项和N4C入场路线设计点，不绕开或直接写数据库。
 - ET-DEADLINE worktree仍为`codex/et-s3-deadline@93fe52c`且代码/测试未提交；当前PWF未更新、无handoff文件。最新观测到代码文件修改时间为本地10:59，不能据此断言harness终止。保持外线写集不动，S3仍pending。
 - 本轮只有证据收集与PWF更新；无代码测试需要重跑。待提交前执行`verify_plan_claims.py`和`git diff --check`，只提交本次计划文档，保留`config/source_acquisition.yaml`用户本地变更。
+
+## 2026-10-04 — Sparse SourceExport implementation
+
+- CWP `SourceVersionReader.describe_version` now permits a pathless sparse manifest when v2 capture metadata is absent; absent display/provenance/period fields remain null. `filing_reuse` still rejects the same incomplete financial source.
+- TDD: focused reader/export tests RED for the intended block, then **34 passed / 10.00s** after the narrow change. Synthetic CLI E2E verifies source ID/SHA/size, grounded span, no raw-body leak, and unchanged scratch tree.
+- Pytest scratch cleanup was verified: the first long basetemp was relocated and its exact run directory manually removed; the successful rerun used short unique `tmp/pt1004b`, `relocated=false`, and that directory was removed after the test.
+- Remaining sample gate: the IR can now be represented as a sparse manifest but batch creation still requires language metadata. Next implement deterministic language resolution from the exact opened SourceRef bytes, bind it into the event hash, then prove through isolated Worker/consumer E2E before N4C real batch.

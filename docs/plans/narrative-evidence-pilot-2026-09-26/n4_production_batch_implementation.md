@@ -98,11 +98,11 @@ N4C的四种文档仍按主计划在G1/S3之后运行。预选不能直接用数
 | 年报 | 金山云2025年报 | SHA `efe2ccd9…`，4,826,662 B；已有4,779 parsed spans及normalized/summary工件 | active且可验证；批次必须作为复用基线，不冒充本次新生成 |
 | 半年报 | 金山云2025中报 | SHA `4f589193…`，3,396,644 B；已有2,056 spans和派生工件 | active且可验证；测幂等复用 |
 | 季报 | 金山云截至2026-03-31季度业绩 | SHA `37f0eb13…`，309,955 B；active，尚无spans/artifacts | 候选新处理输入；只取经营描述，财务数值不扩成全篇摘要 |
-| 投资者关系 | 三七互娱2026-05-11业绩说明会记录 | SHA `3e25aab4…`，133,294 B；narrative_derivation打开通过，正文有具体产品/出海进展及模板话术 | 暂不合格：v2 `describe_version`报`metadata_not_visible`。先按现有admission规则补齐可见身份/公开日，再用于Worker/export；不得把成功读字节当作source contract完整 |
+| 投资者关系 | 三七互娱2026-05-11业绩说明会记录 | SHA `3e25aab4…`，133,294 B；narrative_derivation打开通过，正文有具体产品/出海进展及模板话术 | manifest-only SourceExport可在验证SourceRef/原文SHA后输出，缺失capture字段保持null；暂不能进入Worker batch，因为`build_batch_events`仍要求非空`language`。先闭合下方语言输入，再实测消费；不能把null当成已证实元数据 |
 | 招股书 | 盛美上海IPO招股说明书 | 旧记录SHA `02adc989…`，7,073,891 B；document和original-primary location均retired | 暂不合格：不可直接用旧SourceRef或物理路径。只有正式再入库/验证取得active可见SourceRef并匹配原文SHA后才能纳入 |
 | 电话会TXT | earnings-transcripts既有原语言文件 | CWP当前7条active transcript记录是PDF/JSON sidecar；单次live FMP调用返回402，没有新TXT入库 | 需ET正式工具/既有TXT的完整来源合同导入；不可把旧PDF或假provider envelope算作TXT闭环 |
 
-active catalog盘点总数：年报46、半年报8、季报7、IR 3,682、电话会7；229份招股书全部retired。以上来源分类未调用LLM、未启动Worker、未修改生产数据库，也没有复制raw。实际N4C不因这些预检提前开始：S3关闭后先验证招股书、IR、ET TXT进入既有SourceRef合同；任一类型无合格来源就继续报告缺口，不降低SHA/身份/公开日期要求。并发1/2/4比较仍需同一批次、相同source set与确定性输出基准，并量实际模型费用、最终工件、SQLite/WAL和scratch峰值。
+active catalog盘点总数：年报46、半年报8、季报7、IR 3,682、电话会7；229份招股书全部retired。以上来源分类未调用LLM、未启动Worker、未修改生产数据库，也没有复制raw。实际N4C不因这些预检提前开始：S3关闭后先验证招股书、IR、ET TXT进入既有SourceRef合同；任一类型无合格来源就继续报告缺口，不降低SHA/来源身份/公开日期要求。manifest可稀疏不代表Worker输入齐全。并发1/2/4比较仍需同一批次、相同source set与确定性输出基准，并量实际模型费用、最终工件、SQLite/WAL和scratch峰值。
 
 ### RF/CWP接口复核与IR metadata前置（2026-10-04，只读）
 
@@ -111,6 +111,13 @@ active catalog盘点总数：年报46、半年报8、季报7、IR 3,682、电话
 - 三七互娱2026-05-11 IR的document/source active且SHA可实读，但`source_metadata_assertions`行数为0；metadata JSON仅有scanner/acquisition键，所以v2 `describe_version`没有可投影的normalized metadata。现有`upsert_verified_assertion`写入verified/shadow；`activation.apply_activation`才把行变成当前v2 snapshot可见。不能用手动SQL改active、虚构fiscal year/period，或把“raw能打开”当完整SourceExport。
 - N4C进入真实IR样本前，先在CWP G1/S3收口内明确并验证一个简单的非周期IR元数据生成路径：只需真实document/source IDs、SHA/size、公司证券身份、source type/document kind、已证实公开日及必要的检索事实；不强制财报期次。不增加人工逐文档签收；如果仍必须走shadow cutover，证明它可由已验证元数据自动、幂等地通过现行snapshot，而不绕过共享解析器。与此同时保留RF财报reader的identity/period/as-of合同。
 - 招股书/ET TXT相同原则：正式active SourceRef、实际bytes SHA和可导出来源信息；只复用已有admission/importer。provider权益不可用时不编造ET TXT，不把旧Motley来源sidecar当新授权。
+
+### Sparse SourceExport 与 Worker 语言输入（2026-10-04）
+
+- SourceExport v2 的精确 SourceRef（document/source ID、SHA、byte size、MIME）和实际原文字节校验是必需项；display/provenance/财务期次字段可为null。v2 capture不透明或不存在时，只返回可见信息，不读取旧metadata桥、不推断缺失值、不因此拒绝整个pathless manifest。
+- `filing_reuse`仍经过`describe_candidate`并要求财报消费所需的身份、期间和as-of条件；RF继续执行已发布的SourceRef字节/身份/期间校验。此改动不改变财报闭环规则。
+- 已新增TDD合同：runtime v2关闭legacy bridge后，SourceVersionReader返回精确稀疏描述且财报复用仍blocked；SourceExport CLI用隔离合成catalog验证同一SourceRef可导出、metadata缺失字段全为null、citation span仍按原文校验，且fixture目录前后快照不变。阶段集中结果34 passed；真实IR尚未经过生产CLI导出。
+- 发现的Worker边界：`build_batch_events`把manifest的`language`写入`SourceMetadataValue`，该字段当前必填。IR无normalized assertion时稀疏manifest的language为null，虽然SourceExport可用，仍不能建batch event。下一实现需从`SourceVersionReader.open_version(... purpose="narrative_derivation")`取得hash绑定字节，并仅在capture language缺失时做确定性语言识别；将识别结果写入事件输入hash。可见catalog language仍优先，不允许静默覆盖。无法可靠分类时返回具名失败，不猜市场语言、不翻译。selector/verify必须允许当前manifest语言缺失，但若当前catalog有非空语言且与事件pin不同仍拒绝。用中文、英文、混合文本和PDF样本做一条隔离CLI/Worker E2E；原文SHA、SourceRef身份、document kind、语言合同、RF财报reader严格校验均须保持。
 
 
 ## 2026-10-03 旧 Worker 入口退役状态

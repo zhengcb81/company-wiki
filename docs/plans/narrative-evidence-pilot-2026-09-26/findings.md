@@ -269,3 +269,11 @@ Git写入/联网用正常用户，sandbox .git只读不是产品权限。测试�
 - SQLite只读查询三七互娱2026-05-11 IR：document与source均active、公开日为2026-05-11、真实SHA记录一致；`documents.metadata_json`只有`acquisition/dayu_meta/group_key/root_id/scanner_version`，该document在`source_metadata_assertions`中为0行。故`describe_version=metadata_not_visible`不是路径或原件问题，而是从未写入可供v2 reader消费的normalized metadata assertion。
 - 当前`upsert_verified_assertion`对规范化metadata作幂等写入，但新行默认`decision=verified, visibility_state=shadow`；需独立`activation.apply_activation`以epoch/cohort/policy hash等改变可见性，v2 reader只读active且匹配当前snapshot/cohort的行。不要直接改数据库状态或伪造财报期间。G1门禁简化需补审这条通用shadow/activation流程是否仍有实际生产必要；N4C需先确定最小可靠的IR metadata生产/可见路径，再复用SourceRef，而不是跳过manifest校验。
 - 本次只读核对没有改RF、ET、CWP生产代码/配置/数据库/raw。ET-DEADLINE仍有未提交worktree；本机PWF仍写Stage 2 RED待做，当前checkout无handoff文件，最新源码/测试mtime显示为本地10:59，此后未更新。目录静止不能证明外部harness已停，故状态保持“未交付、不可合入”，不触碰它的写集。
+
+## 2026-10-04 — Sparse SourceExport metadata TDD
+
+- 先改测试复现两项预期RED：v2 runtime关闭legacy bridge后`describe_version`仍因`metadata_not_visible`拒绝；真实SourceExport CLI子进程也以同一原因拒绝完整pathless请求。其余责任集32项通过。
+- 只移除`SourceVersionReader.describe_version`对“v2 metadata不可见”的整份拒绝。精确SourceRef、catalog状态、R4 metadata损坏/冲突检查和字节SHA/size验证保留；缺失capture不被legacy bridge补值，描述字段保持null。`open_version(... purpose="filing_reuse")`仍经`describe_candidate`严格拒绝缺身份/期间来源。
+- 目标责任集转绿：`test_source_version_reader.py` + `test_source_export_v2_cli.py` **34 passed / 10.00s**。合成catalog CLI E2E证明SourceRef/hash/size/MIME和grounded text span可导出、无原始正文泄漏、所有不可见描述字段为null，临时catalog/fixture快照不变。不是实际IR生产CLI导出证据。
+- 第一轮pytest basetemp过长，pytest自动改写到TEMP且其cleanup标记`removed=false`；检查该次测试独占目录无reparse point后，仅删除该精确run目录并核实消失。重跑使用仓内`tmp/pt1004b`（46字符，`relocated=false`），完成后删除且核实该唯一basetemp不存在；未清理任何既有TEMP目录。
+- Worker尚未因此解锁：`build_batch_events`仍要求非空`language`，而这份IR无可见language assertion。N4C计划增加仅对缺失language从已SHA绑定SourceRef原文字节进行确定性语言识别，识别结果写入事件hash；不可推断时具名失败、不猜市场语言、不翻译。RF财报消费者保持原合同。

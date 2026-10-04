@@ -716,9 +716,18 @@ def test_v2_runtime_snapshot_closes_legacy_metadata_bridge_for_query_and_reuse(
     )
     assert reader.query_local(request).status == "not_found"
     ref = reader.query_ref(ids["document_id"], ids["source_id"], SHA)
-    with pytest.raises(SourceReadError) as metadata_error:
-        reader.describe_version(ref)
-    assert metadata_error.value.status == "blocked"
+    manifest = reader.describe_version(ref)
+    assert manifest["document_id"] == ref.document_id
+    assert manifest["source_id"] == ref.source_id
+    assert manifest["content_sha256"] == ref.content_sha256
+    assert manifest["byte_size"] == ref.byte_size
+    for field in (
+        "title", "source_url", "retrieved_at", "collector_name",
+        "collector_version", "canonical_entity_id", "display_name", "market",
+        "security_id", "fiscal_year", "fiscal_period", "period_end",
+        "form_type", "provider", "provider_document_id", "language",
+    ):
+        assert manifest[field] is None
     real_open = Path.open
 
     def no_pdf_open(path, *args, **kwargs):

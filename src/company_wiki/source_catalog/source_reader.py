@@ -382,8 +382,6 @@ class SourceVersionReader:
             active_cohorts=resolver.active_cohorts,
             legacy_bridge_allowed=resolver.legacy_bridge_allowed,
         )
-        if not visible and resolver.reader == "v2":
-            raise SourceReadError("blocked", "metadata_not_visible")
         captures = [visible] if visible else []
 
         def claim(key: str) -> str | None:

@@ -18,6 +18,8 @@ import sys
 
 from company_wiki.source_catalog import SourceCatalog
 from company_wiki.source_catalog.config import load_catalog_config
+from company_wiki.source_catalog.policy_2x import export_policy_2x
+from company_wiki.source_catalog.runtime_policy import build_snapshot
 from company_wiki.source_catalog.source_reader import SourceVersionReader
 from company_wiki.source_contract import (
     EvidenceCoordinates,
@@ -171,6 +173,29 @@ def _fixture(
     return config_path, raw, guard_dir, asdict(ref), span.to_dict()
 
 
+def _disable_legacy_metadata_bridge(config_path: Path) -> None:
+    config = load_catalog_config(config_path)
+    policy_hash, _ = export_policy_2x(config)
+    snapshot = build_snapshot({
+        "schema_version": "1.0",
+        "flags": {
+            "v2_scan_shadow": True,
+            "v2_persist_assertions": True,
+            "v2_resolve_shadow": True,
+            "v2_resolve_active": True,
+            "v2_bundle_active": False,
+            "legacy_bridge_enabled": False,
+        },
+        "current_epoch": "epoch-1",
+        "active_cohorts": ["cohort-a"],
+        "policy_hash": policy_hash,
+        "updated_at": "2026-09-27T00:00:00Z",
+    })
+    policy_path = config.catalog_dir / "runtime_policy.json"
+    policy_path.parent.mkdir(parents=True, exist_ok=True)
+    policy_path.write_text(json.dumps(snapshot), encoding="utf-8")
+
+
 def _run_cli(
     config_path: Path, guard_dir: Path, ref: dict, span: dict | None, cwd: Path
 ) -> subprocess.CompletedProcess[bytes]:
@@ -246,6 +271,33 @@ def test_cli_publishes_one_strict_pathless_v2_bundle_without_scanning(
     assert manifest["title"] == "Acme 2025 annual report"
     assert wire["evidence_spans"] == [span]
     assert str(tmp_path) not in proc.stdout.decode("utf-8")
+    assert b"EXPORT-V2-RAW-BYTES-SENTINEL" not in proc.stdout
+    assert _snapshot(tmp_path) == before
+
+
+def test_cli_exports_sparse_manifest_when_v2_metadata_is_not_visible(
+    tmp_path: Path,
+) -> None:
+    config_path, _raw, guard_dir, ref, span = _fixture(tmp_path)
+    _disable_legacy_metadata_bridge(config_path)
+    before = _snapshot(tmp_path)
+    proc = _run_cli(config_path, guard_dir, ref, span, tmp_path / "caller")
+    assert proc.returncode == 0, proc.stderr
+    wire = SourceExportBundleV2.from_json(proc.stdout).to_dict()
+    manifest = wire["manifests"][0]
+    assert manifest["document_id"] == ref["document_id"]
+    assert manifest["source_id"] == ref["source_id"]
+    assert manifest["content_sha256"] == SHA
+    assert manifest["byte_size"] == len(BODY)
+    assert manifest["mime_type"] == "text/plain"
+    for field in (
+        "title", "source_url", "retrieved_at", "collector_name",
+        "collector_version", "canonical_entity_id", "display_name", "market",
+        "security_id", "fiscal_year", "fiscal_period", "period_end",
+        "form_type", "provider", "provider_document_id", "language",
+    ):
+        assert manifest[field] is None
+    assert wire["evidence_spans"] == [span]
     assert b"EXPORT-V2-RAW-BYTES-SENTINEL" not in proc.stdout
     assert _snapshot(tmp_path) == before
 
