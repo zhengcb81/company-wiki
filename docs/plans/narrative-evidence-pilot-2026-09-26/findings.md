@@ -188,3 +188,21 @@ Git写入/联网用正常用户，sandbox .git只读不是产品权限。测试�
 
 - Running the actual `pre_push_gate.py --fast-contracts-only` found one curated node still named `test_c2_recorded_review_unblocks`, while the behavior-preserving test rename now calls it `test_c2_recorded_review_is_diagnostic_metadata`. Pytest therefore collected no fast-gate tests and failed before execution.
 - Updated only the curated node ID. The fast gate then completed GREEN with all 15 selected nodes. The first attempt with `PYTEST_DISABLE_PLUGIN_AUTOLOAD=1` was an environment mistake because it also disabled the installed `pytest-timeout` plugin required by `pytest.ini`; running with normal plugin discovery and disabling only the unrelated `langsmith_plugin` worked. No project pytest or CI configuration was changed.
+
+## 2026-10-04 — 本轮优先级与分包基线复核
+
+- 用户再次明确：先门禁精简，再抽象层虚拟化；本轮更新计划和独立施工卡，不抢外部 owner 工作。`get_goal` 实读仍为 active。
+- 正常用户上下文只读 Git：CWP `master@376ed90`，仅 `config/source_acquisition.yaml` 一项本机 provider 配置未提交；RF `rf-impl main@6fb2def7` 有242项未提交/暂存记录，另一个 RF `fcap@5319ee26` 只有2项 assurance/runs 更新。不要将 sandbox 中的异常 dirty 计数或两个工作树合称“RF大量改动”。
+- FF `fcap@1d0c73c` 只有未跟踪 key 文件；ET嵌套仓 `main@93fe52c` 有 `.workbuddy-ai/` 和 `eval_results.json` 两项未跟踪记录。本轮不读取凭证、不改这些文件、不将工作树内容视为已合并。
+- 门禁清单仍有“当前代码未commit”，并行文档仍有 FF/ET 旧 HEAD，N4细卡末尾仍有直接进入N4C的旧下一步；这些是文档漂移，当前应以已发布 `1cfec10`（CI37188829582 success）和 `376ed90` 及 G1→S3→N4C 顺序覆盖。
+- 已交付 FF-S3、ET-S3、SPACE-S5、StockWiki W01/W04、SourceExport与既有消费者线不重新分派。新分包必须有独立实际工作目录与明确文件归属；核心来源默认、Store/预算、共享CLI与最终合入仍由 root 负责。
+
+## 2026-10-04 — 门禁与可分包的实际剩余
+
+- G1首组已发布，不等于全局门禁精简完成。`source_reader` 的filing_reuse仍要求HTTPS、retrieved_at、collector_name/version；这些缺描述字段不应阻断真实可验证原件，MAIN下一步先TDD清这一项。
+- 来源query_local/latest_as_of已默认按公开日期筛选，现有回归允许cutoff后采集的旧公开资料。叙述 `narrative_transport._require_historical_source` 仍要求capture<=cutoff，应在G1取消误拒；不重新改已正确的查询端，也不为缺需求模式造新配置。
+- `writer_policy` 双环境许可仍在。config_doctor普通启动help成功，但scripts在PYTHONPATH时被sitecustomize拒绝；支持入口应不因启动环境变化。六个完成运维脚本只有自身链/专属测试caller，现场退休事实不删；源层archive/prune仍有真实入口且CLI漏now，归MAIN而非脚本包。
+- secret_audit ignored本机凭证已是诊断，不再安排重复施工。PDF SourceExport manifest-only是能力边界；现有NarrativeTransport PDF回放不重复实现。
+- ET零网络小复现：0.02秒预算、fake get阻塞0.25秒，0.250秒后才拒绝；当前不是硬deadline。独立ET-DEADLINE包采用最小内部子进程隔离，正式tool/batch共用，不改wire/golden、不扩翻译预算。
+- 新G1-LEGACY和ET-DEADLINE是两个ready代码包，分别独占company-wiki-g1-legacy与earnings-transcripts-s3-deadline；ET-LIVE改为独占company-wiki-et-live-20261004，只交小报告。三包尚未收到用户启动登记。
+- ET-LIVE明确区分FF companion确定性测试与真实ET→临时CWP段；直接ET调用不证明完整FF live链。无provider权益则NOT RUN，不强加provider或订阅。

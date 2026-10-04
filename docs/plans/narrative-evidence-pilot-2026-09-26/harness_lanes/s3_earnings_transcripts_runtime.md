@@ -1,5 +1,7 @@
 # ET-S3 独立任务：统一电话会采集入口与有限批次
 
+> 当前状态（2026-10-04）：已交付并合ET main 93fe52c。不要再启动本卡；新增硬deadline缺口使用et_retrieval_deadline_closeout.md。 下文启动基线为历史施工记录，以总计划当前状态为准。
+
 ## 可以现在启动；独占目录
 
 唯一写入 worktree：`C:\Users\郑曾波\Projects\earnings-transcripts-s3-runtime`。公司Wiki、FF、RF、StockWiki、IQS、全局技能只读；ET不直接写CWP公司目录或catalog，由现有CWP importer统一保存。root负责跨仓联调。

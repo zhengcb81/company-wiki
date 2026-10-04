@@ -2,24 +2,53 @@
 
 ## 任务性质
 
-这是一个可独立交给外部 harness 的**只读验收包**，不是生产代码施工。它验证 `filing-fetch → earnings-transcripts → company-wiki` 已有接口能否把一份真实电话会议原文导入临时库，并通过稳定 SourceRef/SourceExport 读取。它可与 CWP G1 门禁清理并行执行；若发现代码缺口，只交报告，代码修复排在 G1 后由主线统筹。
+状态：**ready，可现在启动，小型只读验收包**。真实段只验证 `earnings-transcripts 工具 → company-wiki 临时导入 → SourceRef/SourceExport`；FF companion路由另跑现有确定性测试。直接ET调用成功不能记作完整FF companion live链成功。它可与CWP G1并行；若发现代码缺口，只交报告，由主线统筹修复。
 
 ## 独占写入范围
 
-- 唯一持久写入：本卡对应的报告文件 `docs/plans/narrative-evidence-pilot-2026-09-26/harness_lanes/results/et_transcript_live_import_acceptance_2026-10-04.md`。
-- 运行期测试根：操作系统临时目录中的全新随机目录；开始前必须记录该目录不存在，结束后必须删除并确认不存在。
-- 只读项目：company-wiki、filing-fetch、earnings-transcripts。不得修改它们的代码、配置、全局技能安装、Git索引或任何生产目录。不得写 CWP 的其他 PWF 文件。
+- 独占目录：`C:\Users\郑曾波\Projects\company-wiki-et-live-20261004`。持久交付仅 `report.md`、必要的小型验收脚本及本线 `.planning/et-live-20261004/{task_plan,findings,progress}.md`；不复制整份原件/正文进报告。
+- 运行期测试根：本线创建的全新随机临时目录；开始前记录该目录不存在，结束后删除并确认不存在。pytest如自动重定位短根，记录实际位置并仅清理本次自建子树，不动其他harness根。
+- 只读项目：company-wiki、filing-fetch、earnings-transcripts。不得修改它们的代码、配置、全局技能安装、Git索引、缓存或任何生产目录。不得写 CWP PWF/结果目录；root接收报告后统一采纳摘要。
 - 若临时根已存在、无法证明路径归属或 cleanup 失败，立即停止，不覆盖、不递归删除不明目录；报告原因。
 
 ## 单次运行步骤
 
-1. 记录只读基线：CWP 当前 `HEAD`、FF/ET当前可用的 commit/工具版本、工具是否由 `EARNINGS_TRANSCRIPTS_TOOL` 提供。记录环境变量是否存在，**绝不打印或保存其值**。不得修改 Git `safe.directory` 全局设置。
-2. 先检查现有 FF transcript companion 的 `--help`/schema，确认一条精确证券、市场、财年和季度的请求能调用 earnings-transcripts 工具。仅请求一家公司、一个季度；最多发起一次真实取数调用；失败后停止，不换 provider、不循环尝试、不请求整年。
+1. 记录只读基线：CWP当前HEAD、FF/ET已发布commit/工具版本、工具是否由 `EARNINGS_TRANSCRIPTS_TOOL` 提供。记录变量是否存在，**绝不打印或保存其值**。使用稳定ET main `93fe52c`，不读正在实施的ET-DEADLINE工作目录。不得修改Git全局设置。
+2. 检查现行schema，选精确证券、市场、财年和季度。**调用前**用现有CWP `SourceRequest`构造该来源请求，将其 `request_id`用于ET请求，避免事后自己猜request ID。现有provider/key/权益不具备就NOT RUN，不买订阅或增加provider。最多一次真实ET工具取数调用；工具调用数与实际HTTP次数分别记录。失败后不换provider、不循环尝试、不请求整年；沿用实际byte/time/cost上限。
 3. 请求保持原始语言，关闭翻译。不得将年度财报推断成 Q4。若工具无法显式关闭翻译，确认其当前配置/输出仍为原语言；无法证明就记为未通过，不自行改工具配置。
-4. 将工具返回的原始 transcript payload 直接通过 stdin 交给现有 `company_wiki.source_catalog.transcript_import_cli --wiki-root <临时根>`，不得经过正文翻译、LLM改写或复制到生产 `companies/`。读取 CLI 的 machine JSON 响应并保留最小审计值：request/source ID、期间、语言、payload/content SHA-256、字节数、provider/extractor版本、canonical状态。不得把正文或凭证写入报告。
+4. 先按下方“导入准备”创建临时CWP根；将真实ET结果放入现有四字段import envelope的 `transcript_result`，整个envelope经stdin交 `company_wiki.source_catalog.transcript_import_cli --wiki-root <临时根>`。**ET结果不能直接作为import请求**。不翻译/LLM改写/复制到生产companies。读取machine JSON，保留request/source ID、期间、语言、payload/content SHA、字节数、provider/extractor版本与canonical状态，正文/key不入报告。
 5. 用现有 SourceVersionReader/SourceExport v2 公共入口按 SourceRef 查询同一来源，验证真实字节 hash、身份/期间、原语言和可回放内容一致。消费者侧只能拿 ID/hash/locator 等公开 DTO；不得把临时根绝对路径当接口输入或输出。若当前公共入口不能完成该动作，记录精确缺口与文件/符号，不添加新接口。
 6. 核查临时根只包含本次输入的单份 canonical 原件及必要的来源元数据；没有翻译件、第二份正文、遗留 `.part`、staging 或复用回执异常。保存目录文件清单和原始/导入 hash，不保存完整正文。
 7. `finally` 删除本次创建的临时根；再次确认目录不存在、CWP生产配置与原件/数据库无变化。报告列出清理验证结果。
+
+### 导入准备：复用已实现合同，不现场发明字段
+
+临时根须先有 `companies/`、`config/source_catalog.yaml`，最小配置与 `tests/contract/test_transcript_import_cli_e2e.py::_fixture` 相同：
+
+```yaml
+schema_version: '1.0'
+catalog_dir: .source_catalog
+roots:
+  - root_id: company_raw
+    path: companies
+    kind: company_raw
+    priority: 10
+    adapter_id: company_raw_v1
+    read_only: false
+```
+
+用实际 `SourceRequest.to_dict()` 与 `dataclasses.asdict(DownloadCandidate)`，不要手写少字段对象。FF `scripts/transcript_tool_transport.py::_candidate` 与 `acquire_exact` 已有真实result映射/封装，可按同一helper和该CWP测试构造：
+
+```python
+envelope = {
+    "schema_version": "company-wiki-transcript-import-request/2",
+    "source_request": request.to_dict(),
+    "candidate": asdict(candidate),
+    "transcript_result": et_result,
+}
+```
+
+request ID必须与调用前的ET request一致；公司/市场/证券/FY/Q、provider/source URL等来自已选请求与真实结果。FMP未知publication保留None，不用运行日/季度结束日/假golden值补成“已公开”。真实结果不足以构成合法import时记精确缺口并停，不发第二次取数修正，不伪造元数据。这是导入执行细节，不新增人工授权合同。
 
 ## 测试包
 
@@ -27,26 +56,30 @@
 
 ```powershell
 $env:PYTEST_ADDOPTS='-p no:langsmith_plugin'
-python -m pytest tests/contract/test_transcript_original_import.py tests/contract/test_transcript_import_cli_e2e.py -q
+$env:PYTHONDONTWRITEBYTECODE='1'
+# 从只读CWP根运行，cache关闭；pytest fixture/temp只用本线短根
+python -m pytest -p no:cacheprovider tests/contract/test_transcript_original_import.py tests/contract/test_transcript_import_cli_e2e.py -q
+# 从只读filing-fetch根运行，同样只用隔离fixture
+python -m pytest -p no:cacheprovider tests/test_transcript_companion.py tests/test_transcript_companion_transport.py -q
 ```
 
-测试应使用 pytest 自己的短期临时根；不指定生产数据目录。若pytest插件/参数环境失败，先记录插件和错误，再用仓库约定的本机测试环境处理；不能因工具环境问题删测试或改配置。
+两条pytest命令须各自记录cwd和实际临时根；不指定生产数据目录。`PYTHONDONTWRITEBYTECODE`也传入测试子进程。若环境问题导致cache/bytecode仍写入只读仓，立即停止并记录，不继续污染。插件/参数失败按仓库本机约定处理，不删测试或改配置。
 
 真实验收必须使用上述一次 ET 工具调用及一次 CWP 临时根导入。仅用 golden/mock 成功不得标为 live E2E。工具不可用或 provider 无该季度时，停止真实调用，仍报告现有确定性测试结果和 live 阻塞原因，不伪造成功。
 
 ## 交付接口
 
-只交唯一报告，至少包含：
+只交独占目录中的 `report.md`，至少包含：
 
 - repo/commit/工具版本基线；工作树是否dirty（只报计数与影响本试验的文件名，不读取密钥）；
-- 精确证券、市场、FY/Q、请求次数、翻译状态；
-- 确定性测试命令/结果；真实 E2E 每阶段状态；SourceRef字段与 SHA/字节核验结果；
+- 精确证券、市场、FY/Q、tool/HTTP次数、翻译状态、实际资源限制；
+- 确定性FF companion测试命令/结果；ET真实段每阶段状态；SourceRef字段与SHA/字节核验结果；分别标记`ff_companion_live=NOT RUN`（除非确实经正式FF入口）与`et_import_live`，不混称整链成功；
 - pathless DTO核验结论；临时根运行前/结束后的存在状态；生产配置/原件变化检查；
 - 每个发现标为 `PASS`、`FAIL` 或 `NOT RUN`，失败附文件/符号/最短重现，不直接修代码。
 
 ## 完成标准
 
-- 一次真实工具取数与临时 CWP 导入成功，或清楚说明 live 未运行的可验证阻塞原因；
+- 一次真实ET工具取数与临时CWP导入成功，或说明live未运行的可验证阻塞；后者表示本验收报告完成，不表示S3真实链成功；
 - 原始字节、语言、证券/期次及 SourceRef SHA/size闭环；公共读取不依赖物理路径；
 - 确定性测试结果真实记录；测试临时目录恢复到运行前状态；
 - 没有生产文件、配置、数据库、其他仓库或代码改动。

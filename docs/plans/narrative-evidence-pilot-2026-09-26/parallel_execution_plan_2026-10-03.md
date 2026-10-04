@@ -1,83 +1,93 @@
-# S2–S6 并行实施总图与总指挥责任
+# 并行总计划：门禁先行，独立目录施工，MAIN统一打通
 
-> 2026-10-03 最新施工安排，补充而不替代 [task_plan](task_plan.md)。旧 W01–W04、SourceExport、工程门简化和 G-C 消费线已经交付，不重复派发。本页及各施工卡由 company-wiki 主线 owner 维护；外部 harness 只改各自工作目录。
+> 2026-10-04复核。补充[task_plan](task_plan.md)，不产生第二套全项目顺序。当前先G1门禁精简，再S3虚拟化，随后N4C及S5/S6。旧交付线不重派；ready不等于running。
 
-## 结论与现在能启动的任务
+## 现在能交给外部harness的包
 
-原三条外部分工均已交付：ET-S3 与 FF-S3 已合并发布，SPACE-S5 报告交回 root 实施。当前主线优先完成 G1 门禁精简，其次收口 S3 SourceRef/SourceExport 虚拟化。唯一新增的无冲突包是 ET-LIVE 只读原文导入验收；它只写自己的结果文件，代码缺口由 G1 完成后的主线修复。
-
-| 线 | 当前状态 | 独占写入目录 | 本次内容 | 独立卡 |
+| 线 | 状态 | 独占实际工作目录 | 内容/责任 | 独立施工卡 |
 |---|---|---|---|---|
-| MAIN：本对话/root | active | `C:\Users\郑曾波\Projects\company-wiki` | 第一优先 G1 门禁/签收精简；第二优先 S3 SourceRef/SourceExport 虚拟化收口；之后 N4C 真样本并发、S5/S6存储清理及所有跨仓代码集成 | [总计划](task_plan.md)、[N4](n4_production_batch_implementation.md) |
-| FF-S3 | merged/pushed to main (`1d0c73c`; CI success) | `C:\Users\郑曾波\Projects\filing-fetch-s3-limits` | 一请求、实际限额、v2/薄 v1、latest_as_of元数据查询预算语义已与CWP CNINFO bounded provider闭环；真实资料E2E通过；Linux mypy平台错误已修复 | [FF 独立卡](harness_lanes/s3_filing_fetch_single_request_limits.md) |
-| ET-S3 | merged/pushed | `C:\Users\郑曾波\Projects\earnings-transcripts-s3-runtime` | 已合 earnings-transcripts main，merge commit `93fe52c`；同步阻塞 HTTP/显式翻译超出 retrieval budget 的语义仍未证明为硬总时限 | [ET 独立卡](harness_lanes/s3_earnings_transcripts_runtime.md) |
-| SPACE-S5 | audit delivered; root implementation pending | `C:\Users\郑曾波\Projects\company-wiki-storage-audit-20261003` | 只读 B2 调用者/库页/原件精确重复量完成，报告在 `results/storage_audit.{json,md}`；生产清理不在该包范围 | [空间审计卡](harness_lanes/s5_storage_audit.md) |
-| ET-LIVE | ready / read-only acceptance | 只写 `harness_lanes/results/et_transcript_live_import_acceptance_2026-10-04.md` | 最多一次真实电话会取数；验证原语言原件→临时CWP canonical import→SourceRef/SourceExport pathless read；无生产代码/config/仓库写入 | [独立验收卡](harness_lanes/et_transcript_live_import_acceptance.md) |
+| MAIN/root | active | `C:\Users\郑曾波\Projects\company-wiki` 当前根 | 来源核心、共享CLI/Contract、Store/预算、总PWF、配置发布与全部合入 | [G1细则](gate_simplification_closeout_2026-10-04.md)、[总计划](task_plan.md) |
+| G1-LEGACY | ready，未登记启动 | `C:\Users\郑曾波\Projects\company-wiki-g1-legacy` | 旧入口双环境许可简化、6个完成运维脚本及专属测试退役；不改src/共享Contract/config | [G1独立代码包](harness_lanes/g1_legacy_entry_and_retirement.md) |
+| ET-DEADLINE | ready，未登记启动 | `C:\Users\郑曾波\Projects\earnings-transcripts-s3-deadline` | 两个正式采集入口硬deadline、进程回收、原协议/语言/hash不变 | [ET独立代码包](harness_lanes/et_retrieval_deadline_closeout.md) |
+| ET-LIVE | ready，可选小包 | `C:\Users\郑曾波\Projects\company-wiki-et-live-20261004` | 一次真实ET取数→临时CWP导入→pathless回读；FF路由另记确定性测试，不改生产仓 | [只读验收包](harness_lanes/et_transcript_live_import_acceptance.md) |
 
-“ready”表示可以开工，不能解释成有 harness 已经在做。用户启动后把线名交本对话登记为 running；root 从那时起不再实施其仓内工作。没有消息回传也不推测交付。工作目录已存在时先读 status/计划，复用同线可用目录；不覆盖不明目录。
+这三个实际目录互不包含，也不进入MAIN当前工作树施工。各卡列精确写集。共享Git对象库不等于共享工作目录；各线用自己的index/codex分支，MAIN负责最后合入。Git切主线/合入期间交付线冻结，不并发改同一目标分支。
 
-## 总指挥做什么
+用户启动后在本对话报线名，root登记running，并从那时起不实施该写集。没有交付消息不推测完成；目录已存在先核身份/status，不reset不明工作。ET-LIVE使用稳定已发布ET main，不读ET-DEADLINE正在变化的目录，因此两者也能并行。
 
-1. 我独占 CWP、总 PWF、对外 producer 接口和全局 `.agents/.codex` 技能安装；保持 S0–S6 唯一顺序。其他线不能修改这些目录，避免把总计划写成多份状态真相。
-2. 冻结以下接口，把未实现状态写明。FF/ET 在自己的仓内按接口做测试和实现；接口变化先交 root 协调，不能各自换版本或改另一仓。
-3. 接收各线 commit 和小型交接报告，核实际 diff/相关测试，再做一次跨仓大节点测试。普通 Git 合并；冲突由我处理。root 合并某仓期间该线冻结写入；不要求每个小步骤签收。
-4. 我负责真实原件、最终包/消费者、恢复和空间的总体验收；只读审计线没有删除权。测试完恢复独立目录原样；原件仍全部保留。
-5. 我统一更新主线进度并及时 commit/push。没有 remote 的项目只报告本地提交，不虚报已推送。外线只 push 自己的 `codex/` 分支，不自行切默认主线/安装全局技能。
+## 已交付，不再重新启动
 
-## 已冻结接口与真实完成状态
+| 原线 | 当前事实 | 后续归属 |
+|---|---|---|
+| FF-S3 | `1d0c73c`已推FF main；CI37182527153 success；实际限额/精确复用/latest-as-of元数据预算与CNINFO闭环 | MAIN只处理接口受影响联调与安装配置 |
+| ET-S3 | 已合ET main `93fe52c`；现代入口/旧薄batch/默认原语言已收敛 | ET-DEADLINE仅补真实截止缺口，不重做ET-S3 |
+| SPACE-S5 | `company-wiki-storage-audit-20261003/results/storage_audit.{json,md}`交付，15项审计工具测试绿；零生产修改 | S5/S6由MAIN执行删除/迁caller，不重派空间审计 |
+| StockWiki W01/W04、工程门简化、SourceExport、Identity、G-C消费者 | 各自既有交付/收据保留 | 不以新包重复实现；active owner树只读 |
 
-### I1：FF → CWP 来源操作
+## MAIN职责与当前施工
 
-- 保持现行 SourceRef `2.0`、v2 filing 请求与响应语义；上下游只传 ID/hash，不传原文物理目录，不写共享数据库。
-- 当前 FF `acquisition_limits` EXACT 字段：`max_bytes` 正整数、`timeout_seconds` 正有限数、`max_cost_usd` 非负十进制字符串（当前支持最多两位小数）。`reuse_only` 不接受采集额度。
-- FF v2 `acquisition_limits` 已进入 CWP producer adapter；CWP配置上限、单调deadline及剩余额度传到 bounded provider，不只做JSON形状校验。新增长期CLI flag不是当前合同的一部分，不再要求额外增加一套调用入口。
-- 对旧 producer 未识别参数，FF具名失败，不能删除限额重试或悄悄走v1；provider缺少真正bounded transport时保持fail-closed。Dayu不改。
-- 状态：FF `1d0c73c`、CWP producer `288b028`、StockInfo bounded provider `8ed5fdd` 已通过真实BYD FY2024 CNINFO端到端（下载10,092,140 B，raw与SourceRef SHA/size一致）；`latest_as_of + reuse_only` 与legacy精确复用未发生下载，缺件且无预算时在写入前失败。该路线已完成，剩余虚拟化缺口见I2和总计划S3。
+1. 优先改真实阻断：filing_reuse缺collector等描述字段仍拒绝；叙述transport仍要求下载日期早于as-of。source query_local已按公开日默认，不重复改写它。
+2. 接收G1-LEGACY的函数兼容与删脚本diff，更新共享Contract/clean_env_gate/AGENTS引用。源层archive/prune的真实CLI漏now问题由MAIN修复或正式退役，不能交脚本线修改src。
+3. G1一次集中责任包GREEN后普通合入/push；再处理S3安装/provider可移植配置与ET接口联调。外线可以提前准备ET代码，不改变MAIN合入优先级。
+4. 接收外线commit与短报告，核diff/接口/相关测试，解决冲突和跨仓接线。MAIN统一发布；外线不自己合main、不写他仓、不安装全局技能。
+5. 测试全用独立根，退出恢复原样；不丢原件。不造签名、人工授权文件、每helper审批或固定场景数。
 
-### I2：FF → ET → CWP 电话会
+## 交接接口（冻结，避免各线自创合同）
 
-- 工具位置来自 `EARNINGS_TRANSCRIPTS_TOOL`；调用 `--request-stdin --include-source-payload`。
-- 请求 `earnings-transcript-request/1`，精确证券/市场/FY/Q；ET 返回现行 `/2`，原语言原始 payload/text/hash；CWP import `/2` 请求、`/3` 响应。年度报告不猜 Q4；无法确定期次零抓取。
-- 本次不改 wire 字段/版本、不伪造 FMP publication、不翻译；ET 可加内部执行参数/测试 seam，并保持现有 serializer golden。FF 保持财报/电话会独立结果，电话会失败不回滚财报。
-- 状态：ET-S3已进 `earnings-transcripts` main `93fe52c`；FF S3已进 main `1d0c73c`；request/response合同、原文导入CLI和mock E2E均已存在。G-C证明RF消费报告/TXT来源，但**仍未有真实 ET 工具→FF companion→CWP import→SourceExport 的一次端到端收据**。由[ET-LIVE卡](harness_lanes/et_transcript_live_import_acceptance.md)只读验收；最多一份/一季度、原语言、不翻译，报告完成后若有代码缺口由主线在G1之后修。
+### I1 已有 FF→CWP，复用
 
-### I3：只读审计 → root 清理
+SourceRef 2.0、SourceExport v2、现有FF v2 request/result不变。上层传ID/hash/locator，不传存储目录；CWP独占来源DB与原件保存。
 
-- 一份 `storage-audit/1` JSON + 一份简短 Markdown，字段由空间卡冻结。它是实测/施工输入，不是签名授权或自动删除 manifest。
-- root 将“无活动调用者的派生集合”转成 S5 精确删除步骤；“仍有调用者”转成迁移/退休步骤；DB 行删除与 VACUUM 的实际收益归 S6。
-- 原件 exact-SHA 重复仅测候选；不把相似文本算可删、不删除 raw、不按 DB 总大小承诺释放量。
+实际下载限额已经进入CWP→CNINFO bounded provider；配置与请求取更严格值，共享bytes/deadline/cost，不靠JSON校验冒称执行限额。latest_as_of的metadata查询预算沿用现有合同；reuse和是否补采分别控制。BYD FY2024下载10,092,140 B、raw和SourceRef SHA/size相符，latest_as_of只读复用及legacy精确复用没有新增文件。Dayu不改，不能执行所需硬上限则外发前具名失败。
 
-## 依赖图
+### I2 已有 FF→ET→CWP电话会，协议不变
+
+FF工具位置取 `EARNINGS_TRANSCRIPTS_TOOL`，调用 `--request-stdin --include-source-payload`。request `/1`、现有payload result `/2`、CWP import request `/2`与response `/3`不变；精确市场/证券/FY/Q，不从年报猜Q4、不翻译。ET不直接写CWP；CWP importer保存原件。
+
+ET-DEADLINE只改变内部执行边界。ET-LIVE只证明真实ET工具→临时CWP导入段，FF companion确定性路由另记；如果确实经正式FF入口完成一次live才可以声明完整FF live链。工具不可用时NOT RUN，不用mock伪造真实权益。
+
+### I3 G1-LEGACY→MAIN
+
+保留 `enforce_direct_cli`、`legacy_script_execution_allowed`、`is_legacy_script_cli`的现有签名，environment薄兼容但不作为人工许可。支持来源/维护入口可以执行；永久退休研究writer仍退出78；删已完成一次性工具，不动历史事实文件。具体支持/退休分类及MAIN待改共享测试列在独立卡和handoff。
+
+### I4 ET-DEADLINE→MAIN
+
+正式tool/batch统一内部supervisor；内部operation/request/剩余额度→原wire result+内部usage。内部usage不塞进外部协议。原始语言、期间、payload/hash/size与golden不变。硬限制范围是provider采集，显式旧翻译不冒称受该deadline约束。
+
+超时按一个有限清理宽限回收自建worker；未知usage不当0且停批。原件保存仍由parent完成，已完成文件不回滚。交接提供真实subprocess elapsed/退出/共享deadline测试，不拿最终异常当及时停止。
+
+### I5 只读验收/空间审计→MAIN
+
+ET-LIVE独占目录 `report.md`包含实际请求数、commit、period/语言/SHA/size/pathless、临时根恢复和PASS/FAIL/NOT RUN；root采纳摘要，不让外线写CWP结果目录。
+
+SPACE-S5既有 `storage-audit/1`报告是施工输入，不是自动删除授权manifest。首批138,648,023 B候选仍需MAIN核变化；derived 2,826,010,634 B尚有reader及8,191条artifact引用，要先迁caller。DB freelist为0，单独VACUUM不释放空间。原件不进删除候选。
+
+## 依赖图与合入顺序
 
 ```mermaid
 flowchart LR
-    GATE[MAIN: G1 门禁/签收精简] --> VIRT[S3: SourceRef/SourceExport 虚拟化收口]
-    ETLIVE[ET-LIVE: 单次只读电话会端到端验收] --> VIRT
-    VIRT --> N4C[S4: N4C 多文档/多类型真实批次]
-    N4C --> CLEAN[S5/S6: 派生迁移/精确清理/DB收缩]
-    AUDIT[SPACE-S5 已交付的空间/调用者/DB页审计] --> CLEAN
+    LEGACY[G1-LEGACY 独立代码包] --> G1[MAIN G1 门禁收口]
+    CORE[MAIN 来源资格/采集日期阻断清理] --> G1
+    G1 --> S3[MAIN S3 虚拟化联调]
+    DEADLINE[ET-DEADLINE 独立代码包] --> S3
+    LIVE[ET-LIVE 可选真实段验收] --> S3
+    S3 --> N4C[N4C 四类文档/1、2、4并行/空间实测]
+    N4C --> CLEAN[S5/S6 迁caller/清派生/DB收缩]
+    SPACE[SPACE-S5 已交付报告] --> CLEAN
 ```
 
-空间审计不等 S4；无依赖集合可以先列出。但清理仍由 root 与当时实际调用者核对后实施。FF/ET 不互相 cherry-pick，也不访问生产 CWP 数据写入；本仓 E2E 使用独立副本。
+没有“所有外线交完才开始MAIN”的屏障。MAIN可先做G1核心、先合已绿G1包；ET代码交付暂存到S3。live不可用不阻G1，但S3不能虚报真实段成功。
 
-## 不拆的部分与当前外仓变化
+## 当前外仓owner边界
 
-- AUTO Store、预算、factory、批次 coordinator、projector、terminal compaction、来源默认/as-of/fingerprint，共用 CWP 状态与公开接口，保留给主线。不能用“每人不同 Python 文件”冒称项目目录独立。
-- 只读最新工作树快照（2026-10-04）：RF `rf-impl main@6fb2def7`、RF `revenue-forecast fcap@5319ee26`；StockWiki `master@3a3d061`；IQS `master@6a8b8f3`；FF本地根 `fcap@1d0c73c`；ET嵌套仓 `main@93fe52c`。上述仓均检测到未提交变更（RF大量、其余少量），只由各自owner管理；不得从主线harness改写或清理。
-- RF/StockWiki既有SourceRef/叙述消费者交付不重复派发；IQS设计明确把company-wiki作为可选只读深研链接，不自动下载/镜像公司文档，因此不强迫IQS消费SourceExport。当前无适合外部harness直接改这些活跃仓代码的无冲突包。
-- FF 常用根还是旧 `fcap@d35b6f5`，真正 `origin/main` 为 `c47c397`，ET main 为 `4924d57`。任务卡指定新独立 worktree 起点，不能从陈旧常用根直接施工。
-- 三线只维护自己的局部 PWF 与报告，不写 root 计划、不 reset 他仓、不让 test fixture 写穿生产配置。
+正常用户只读Git快照2026-10-04：CWP master `376ed90`仅本机provider配置dirty；RF rf-impl main `6fb2def7`有242项owner记录，RF fcap `5319ee26`只有2项assurance文件变化；FF fcap `1d0c73c`只有未跟踪key；ET main `93fe52c`只有2项旧工具未跟踪记录。RF两个树不要混计。
 
-## 交接与验收节奏
+StockWiki/IQS仍有owner工作；IQS明确只把CWP作为可选只读深研链接，不自动镜像/下载文档。RF/StockWiki已有pathless消费者，不再另开消费者代码包。Dayu纯外部，零修改。
 
-各线只做三个自然阶段：读基线/先 RED → 仓内实现与一次集中 GREEN → commit/push 自己分支并交接。中间 helper 无人工审查；没有固定场景数量/coverage签收线。交接最少包含 base/head、文件清单、接口/golden、测试命令和结果、清理结果、未完成事实。不要提交每次执行的大日志、完整资料副本、密钥或恢复备份。
+CWP机器特定 `config/source_acquisition.yaml` 指向StockInfo隔离bounded provider工作树，未发布；可移植安装由MAIN收口，不让外线从该dirty配置开始。原StockInfo owner工作树保留，不并行跨仓修改。
 
-root 只在 S3 接口、N4 B/C、S5/S6 存储几个大节点复核和测试。FF/ET 合入后做一次真实正式 CLI 链（HTTP 可本地注入）验证原文入 CWP、refs/语言/期间、实际限额、失败不重复外发及目录恢复；真实 provider 可用性另记，不用 fake 200 冒充 live。
+## 验收和发布节奏
 
-## 本轮新进展及主线下一步
+每个代码包只有三个自然阶段：读基线/目标RED→实现/责任包GREEN→本线commit/push+短handoff。所有局部PWF、测试和报告只在本线目录。交付包含base/head、改动路径、接口/golden、命令/结果、测试目录恢复、未完成事实；不交大执行日志、完整资料副本、key或备份。
 
-模型/持久预算基础 `9ccd29f` 已推送，CI37135709529成功。正式 CLI/终态降容第一组集中 67 passed/55.05s；同 run 重跑零新增 POST，零费用/小空间 cap 均零 POST，原文改 SHA 后失败仍保留此前费用。N4B节点A/B现已完成；仍待N4C真实多类型小批、消费者实读、1/2/4并发和总空间增量，且按主计划排在G1/S3之后。
-
-已发布cf662cc（正式CLI/终态降容、英文召回、三施工卡）和a104d25（CI夹具修复），CI37139842105成功；跨run三批真CLI/旧pin/正文去重节点已绿。ET-S3 已合并 earnings-transcripts main（`93fe52c`）。FF-S3现已快进推入FF main，最新 `1d0c73c`；Actions #52/#53/#54全在FC-1204-c mypy步骤失败，根因为Linux类型存根没有Windows专属 `CREATE_NO_WINDOW`，经Python3.12/mypy1.19 Linux目标复现后安全读取该可选常量并加回归。完整本地CI精选命令361 passed / 5 skipped / 78 subtests；远端 Actions #55 completed/success。`2936ad1`另解决安装清单假key测试在本地key工作树上的环境脆弱点，但不是远端失败根因。CWP以真实BYD FY2024年报完成FF→CWP→StockInfo下载/哈希/预算端到端；latest_as_of只读复用与legacy v1复用/缺件拒绝也验证通过。FF仓库回归23 passed，StockInfo provider回归62 passed，CWP配置/来源精选回归32 passed。SPACE-S5报告完成：15项审计工具测试通过、production mutation为0；实测首批候选138,648,023 B，`derived/` 2,826,010,634 B需先迁移，DB freelist为0，单独VACUUM不释放空间。root当前先做G1门禁精简；随后完成S3虚拟化边界与ET-LIVE验收；S5/S6仍排在N4C及当前调用者复核之后。
-
-审查状态：FF main `1d0c73c`快进push成功；本地pre-push gate、Linux目标mypy、FF精选测试、provider/CWP精选测试和真实公开CNINFO数据E2E均通过。该E2E只读取公开年报，不读取FMP或其他真实密钥；所有临时root清理完毕。GitHub Actions #55 completed/success，Linux mypy修复已通过。
+MAIN只在G1、S3、N4 B/C、S5/S6几个大节点复核。无逐helper/逐文档/逐删除文件审查。已有轻量Git/CI照常；纯文档本轮不重跑业务测试。复杂度/全coverage是按需诊断，不成为交接资格门。

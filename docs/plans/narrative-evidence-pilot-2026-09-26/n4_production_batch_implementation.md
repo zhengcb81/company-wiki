@@ -94,4 +94,4 @@ N4 完成必须有生产代码入口、正常/故障真实 CLI 收据、usage/�
 
 CWP 已删除 public `worker/--once`、后台 daemon、worker start/resume/pause、whole-catalog normalize/summarize/run 以及 startup install CLI。对应 PS/VBS launchers 与菜单已删除；生产只读检查证明没有运行进程或已安装 startup task。保留 `worker-status`、身份绑定 `worker-stop`、startup status/removal，以处理升级窗口内的残留 PID/任务。显式 `ensure`/`close-gap` 不再依赖旧 worker paused 状态；FF 使用的兼容参数现为 no-op，直到 FF-S3 合并后一起收敛。旧 `source_catalog.worker` Python 模块暂留作未暴露库兼容；它没有公开执行入口，也不会被新有限批次 factory 调用，后续若确定没有外部调用者再与 B2/派生清理合并删除。
 
-2026-10-04 已完成原计划的 producer/FF 汇合：`--max-download-bytes`、`--max-download-seconds`、`--max-download-cost-usd` 贯通FF→CWP→CNINFO；真实BYD FY2024年报下载为10,092,140 B，SourceRef SHA与原始PDF一致。缺失/不支持限制的Dayu请求仍在provider外发前fail closed；direct acquisition不等待后台worker锁。下一集中节点转为N4C真实资料有限批次与并行/空间测量。
+2026-10-04 已完成原计划的 producer/FF 汇合：`--max-download-bytes`、`--max-download-seconds`、`--max-download-cost-usd` 贯通FF→CWP→CNINFO；真实BYD FY2024年报下载为10,092,140 B，SourceRef SHA与原始PDF一致。缺失/不支持限制的Dayu请求仍在provider外发前fail closed；direct acquisition不等待后台worker锁。N4下一节点为N4C，但当前MAIN先按总计划完成G1门禁与S3虚拟化收口，再做真实资料有限批次与并行/空间测量。

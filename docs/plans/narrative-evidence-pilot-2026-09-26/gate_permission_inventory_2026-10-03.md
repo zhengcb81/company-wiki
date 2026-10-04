@@ -117,11 +117,69 @@ CWP审计代码`master@9eacbea`；RF`rf-impl/main@6fb2def7`；FF最新交付线/
 | #2 FF acquisition limits未传到CWP | 已推进并有真实闭环证据 | FF v2请求限额进入CWP；BYD FY2024真实CNINFO E2E验证下载、hash/size、只读复用和缺件前失败。见总计划S3收据。 |
 | #3 ET旧provider入口统一 | 部分完成，live import待实测 | ET-S3合入，FF schema 2.0已有 transcript companion合同及安装副本；当前会话未证明真实 earnings-transcripts 工具到CWP的live导入。 |
 | #5 N4运行/预算/并发尚未实施 | 部分完成 | N4A/N4B与生产限额桥接已有实现和回归；N4C真实多类型样本、吞吐、空间增量仍待做。 |
-| #1 CWP旧审批API残留 | 本次已移除一组无调用者API | `Approval`/`ApprovalDecision`公用类型和Store CRUD已从当前改动中退休；历史SQLite表与记录保留。相关回归148 passed。当前代码仍未commit。 |
+| #1 CWP旧审批API残留 | 本次已移除一组无调用者API | `Approval`/`ApprovalDecision`公用类型和Store CRUD已从当前改动中退休；历史SQLite表与记录保留。相关回归148 passed。已随1cfec10提交并推master，CI37188829582 success。 |
 | #1 reviewer必填字段 | 已收敛为自动actor记录 | apply/rollback/restore CLI与库入口已可省略reviewer；唯一仍要求手填的`map_existing_activation`现改用当前进程用户作actor。22项激活/恢复合同通过；理由、事务、来源断言和policy hash仍照常校验。 |
 | prompt review存储故障导致resolver导出失败 | 已修复 | 新回归先复现 `PromptInjectionReviewError` 使有效envelope生成失败；resolver现将其降为`not_reviewed`诊断并继续。35项resolver/source-reader相关测试通过。 |
 | prompt review Ed25519签名写入与TTL cache evaluator | 已退役 | writer不再加载信任根或要求授权签名；30天cache TTL/evaluate_review整套无调用者逻辑删除。scanner和旧receipt只读显示保留，结果只作诊断。110项相关测试通过。 |
 | #46 StockWiki双pytest | 已简化为单次coverage-wrapped pytest | 只读检查 `scripts/check_all.sh` 只有一次 `python -m coverage run -m pytest -q` 调用；其覆盖率阈值与AGENTS文字仍属该仓owner范围。 |
 | 全局剩余门禁清理 | 未完成 | P1/P2仍需按总计划逐项确认。外仓由各自owner实施；company-wiki先继续G1，不把小API移除等同审计完成。 |
 
-只读提交快照（2026-10-04复核）：RF `rf-impl main@6fb2def7`，另有 `revenue-forecast fcap@5319ee26`；StockWiki `master@3a3d061`；IQS `master@6a8b8f3`；filing-fetch `fcap@1d0c73c`；earnings-transcripts嵌套仓 `main@93fe52c`。这些仓均检测到未提交工作（RF大量，其他少量），仍由各owner保留；SHA只用于识别工作树，不代表dirty内容已经并线、审计或完成。
+只读提交快照（2026-10-04复核）：RF `rf-impl main@6fb2def7`，另有 `revenue-forecast fcap@5319ee26`；StockWiki `master@3a3d061`；IQS `master@6a8b8f3`；filing-fetch `fcap@1d0c73c`；earnings-transcripts嵌套仓 `main@93fe52c`。这些仓检测到owner未提交工作；正常用户复核RF rf-impl为242项，另RF fcap只有2项assurance更新，不能混计。仍由各owner保留；SHA只用于识别工作树，不代表dirty内容已经并线、审计或完成。
+
+
+## 10. 2026-10-04 本轮逐项安排（覆盖旧待办，不重新申请授权）
+
+用户已授权整体简化；表中“保留”是最小自动正确性，不是人工签收。当前先G1，再S3，随后N4C/S5/S6。G1第一组已发布，不能将本表理解为从零重审46次。施工细则见[G1收口](gate_simplification_closeout_2026-10-04.md)，目录和接口见[并行总计划](parallel_execution_plan_2026-10-03.md)。
+
+| 编号 | 当前安排 | 理由/下一动作 |
+|---:|---|---|
+| 1 | 已简化并发布 | 所有activation/rollback/restore/map可自动记actor；AUTO审批API退出，历史表保留 |
+| 2 | 已退役并发布 | 签名/信任根/TTL退出；诊断scanner与历史状态可读 |
+| 3 | 已退役 | gold/shadow/readiness人工占位链退出，不重复分派 |
+| 4 | 已退役 | Work Unit/独立reviewer工程链退出，不复活 |
+| 5 | 已不存在 | 不再安排deletion_manifest清理 |
+| 6 | **G1-LEGACY现在可分包** | 去双环境许可；只读入口普通/PYTHONPATH行为一致；研究writer产品边界保留 |
+| 7 | **G1-LEGACY+MAIN** | 六个完成脚本链退出；src archive/prune有真实caller且CLI漏now，由MAIN修复/正式替代；不新建90日等待或双smoke签收 |
+| 8 | 已达到建议行为 | ignored本机凭证已经只诊断，any_active只含tracked/history；不再派重复secret-audit改造 |
+| 9 | 已简化并发布 | read pin只绑实际读visibility/policy，不因扫描flag/时间更新失效 |
+| 10 | MAIN G1复核 | 实际请求若仍需人工搬binding则内组合；沿现有GapPlan接口，不造另一请求合同 |
+| 11 | 公开阻断已退出 | 旧Worker公开执行退役；兼容allow-acquisition参数无效，可随接口收口删除 |
+| 12 | 已合FF-S3；薄兼容收口归MAIN | v2单一请求与限额已执行，v1仅保现有精确复用/无预算缺件失败；不重复FF-S3施工 |
+| 13 | **MAIN G1第一动作** | filing_reuse还硬要求HTTPS、retrieved_at、collector名/版本；非核心缺字段改诊断，不阻真实原件open |
+| 14 | 保留来源事实；预览语义按实际需要 | active/撤回/冲突状态不能伪装正式可用来源；不是私有访问权限 |
+| 15 | **MAIN G1第二动作** | query_local已公开日cutoff；叙述transport仍要求capture<=cutoff，取消这项误拒，不添加无需求严格模式 |
+| 16 | MAIN G1实际误拒调查 | 只接受当前NORMALIZER_VERSION仍在；先核可真实解码/回放的历史版本，再支持，不无条件放行未知格式 |
+| 17 | MAIN G1实际误拒调查 | 必填引用/来源用途保留；无害额外字段/原文事实不应被关键词拒；有误拒证据再改 |
+| 18 | partial已有消费支持；覆盖缺口归MAIN | 已有partial/needs_review回放；坏片段丢弃并报coverage，零可回放证据不能假成功 |
+| 19 | 缩到实际能力 | 类型/尺寸/MIME是处理能力，存储根由底层解释；不加公司角色白名单 |
+| 20 | 不在现行公共执行链 | 旧电池约束库兼容随S5/S6退休，不为它重新开Worker改造 |
+| 21 | 不在现行公共执行链 | 旧900秒/60分钟冷却不控制新有限batch；库残留随退休收口 |
+| 22 | N4A/B已实现 | 持久预留/限额已接，N4C实测吞吐和空间；不是用户逐文档权限 |
+| 23 | 新N4锁外计算已实现；旧caller退休待收口 | 不直接删事务锁；短提交重验版本，旧service随真实caller迁移 |
+| 24 | 新model factory已接 | 仅宣称实际协议能力；旧Config残留随caller退休，不为品牌列表发权限请求 |
+| 25 | 保留诚实能力声明 | v2 PDF仅manifest，TXT有span；已有NarrativeTransport PDF回放不重复造export |
+| 26 | 外仓owner事项 | RF机器readiness可去固定场景/不相关仓强耦合；不修改其242项工作记录，不挡CWP G1 |
+| 27 | 保留声明一致性 | 无签名普通来源可用，声称签名时不能伪造 |
+| 28 | 保留存储正确性 | immutable原件/实读SHA保护用户底线；消重复验/正文副本，不放过已知错SHA |
+| 29 | 保留来源身份事实 | 防串公司/证券/期次；缺非核心信息partial，不伪造verified |
+| 30 | 保留底层写入归属/包含 | 防误覆盖外部原件，上层只用SourceRef不重复目录判断 |
+| 31 | 保留公开日期cutoff | 防未来信息；额外采集日期限制按15取消 |
+| 32 | 保留可回放引用 | 摘要必须有依据，partial/review标签不要求人工签收 |
+| 33 | 保留产品职责 | 投资研究属于StockWiki，永久退休writer不因环境许可复活 |
+| 34 | 保留唯一运行/真实PID归属 | 防误杀/重复任务；新run显式执行，不恢复旧后台人工start门 |
+| 35 | 保留事务/lease/幂等恢复 | 丢包/过期worker正确性；必要小metadata恢复点，不完整原件备份演练 |
+| 36 | 保留最小版本/内容绑定 | 防跨仓坏包，不建立第二合同签收服务 |
+| 37 | 单一请求已接；ET硬deadline分包 | **ET-DEADLINE**修同步阻塞，真实live另记；Dayu零修改，未知能力不假报支持 |
+| 38 | 保留快速相关Ruff | 自动低成本错误检查，无人工审查 |
+| 39 | 保留限定公共接口mypy | 不扩成全仓严格类型/多平台重复大门 |
+| 40 | 已按相关配置触发 | 防真实配置写穿；纯文档commit不跑config doctor |
+| 41 | 保留新增host错误检查 | 防Windows绿/Linux红；不扩baseline签收 |
+| 42 | 保留廉价日常集合 | 12个显式node IDs展开15项回归；单Python快CI，不全Contract/coverage |
+| 43 | 保留待发布密钥检查 | 防真实凭证进入远端，与8本机诊断分开 |
+| 44 | 保留测试独立根/恢复 | 防收费/原件污染；临时路径自动化，不新增人工receipt |
+| 45 | 已降诊断/按需 | 日常快速路径不跑复杂度/full Contract/coverage；不为分数拆helper |
+| 46 | 外仓owner事项 | StockWiki已经单次pytest；coverage阈值/AGENTS节奏由该仓owner收口，不重派已完成工程包 |
+
+补充实测：config_doctor普通`--help`返回0、scripts在PYTHONPATH时返回78，属于入口环境耦合；不能声称所有日常启动都失败。ET零网络小复现：0.02秒预算的fake get阻塞0.25秒，0.250秒后才拒绝，证明迟到检查不能当硬deadline。
+
+本轮只更新计划/卡片，未改生产门禁代码/配置、原件或数据库。表中明确保留项不会生成新的人工审查；G1/S3各一次集中责任包足够。已完成项不再次测试、未运行的live不记成功。

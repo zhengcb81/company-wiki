@@ -267,3 +267,14 @@ S0/N4A及S2模型预算基础、CLI阶段与CI修复已正常发布，当前CI�
 - Commit `1cfec10` pushed to `origin/master`. Pre-commit Ruff, contract mypy, host-assumption guard, the fast contract push gate, and plan-claim verification passed. GitHub Actions run `37188829582` completed with `success`.
 - The machine-specific `config/source_acquisition.yaml` provider path remains local and was excluded from the commit; it points to an isolated StockInfo integration worktree and needs a portable provider location before publication.
 - Corrected the N4 detail card: N4A/N4B acceptance is complete; N4C remains pending and now explicitly follows G1 and S3. This prevents the detailed card's older sequence from overriding the master plan.
+
+## 2026-10-04 — 本轮PWF重审与两个独立代码施工包
+
+- 按用户要求固定MAIN顺序：G1门禁/签收精简→S3抽象层虚拟化收口→N4C真实多文档/并发/空间→S5/S6。本轮只改计划文档，不改生产代码、配置、原件或数据库。
+- 正常用户Git复核CWP仅本机provider配置dirty；RF rf-impl242项与fcap2项分别记录，FF/ET已合提交复用，保留各owner未提交记录。`get_goal`仍active。
+- 更新task_plan、46项清单当前安排、并行总计划与N4细卡；修正“未commit”、陈旧FF/ET HEAD、将N4C反写成N4B未完成、以及末尾旧下一步。已交付三施工卡增加醒目完成标记，不再重派。
+- 新建 `gate_simplification_closeout_2026-10-04.md`、G1-LEGACY及ET-DEADLINE代码卡，冻结独占目录/写集/接口/TDD/集中测试/交接；ET-LIVE移到独占验收目录并澄清真实链范围。用户尚未登记启动，状态保持ready。
+- root下一实施是filing_reuse非核心字段阻断TDD，其后清叙述capture cutoff；G1-LEGACY可以同时施工，ET-DEADLINE提前准备但合入排S3。MAIN独占共享来源核心、CLI/合同、配置发布和最终跨仓接线。
+- 文档核验：`python tools/verify_plan_claims.py --plan-dir .` GREEN（11个plan）；`git diff --check` GREEN。本轮纯Markdown，不重复已绿业务测试，不增加小节点审查；本机provider配置继续排除于提交。
+- 包级复核补足ET-LIVE的现行四字段import envelope、调用前SourceRequest/request_id及临时catalog配置，避免唯一一次取数后导入必然失败；ET-DEADLINE明确硬保证为worker采集终止，parent有界验证的返回开销不虚报为可抢占。
+- 本轮发布提交以 `Clarify gate-first plan and isolated harness packages` 为Git标识；仅13份计划/卡片/进度Markdown，本机provider配置排除。总计划与卡片ready状态不代表外部harness已启动；用户可直接交出两个代码包，MAIN统一合入。
