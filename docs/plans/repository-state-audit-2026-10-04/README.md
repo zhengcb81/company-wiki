@@ -13,7 +13,7 @@
 | P1 | Revenue Forecast | fcap 4 个独有提交、360 路径证据记录、2 个 tracked dirty JSON；PWF 完成标志早于当前提交 | [revenue_forecast.md](lanes/revenue_forecast.md) | `results/revenue_forecast.md` |
 | P1 | StockInfoDLSimple | 当前 owner checkout 多个 staged/unstaged/untracked 改动，另有 2 commit bounded-budget worktree | [stock_info_dl_simple.md](lanes/stock_info_dl_simple.md) | `results/stock_info_dl_simple.md` |
 | P2 | filing-fetch | 主线已含 FF-S3，但 transcript companion 有 1 个独有 WIP commit；未跟踪 FMP key | [filing_fetch.md](lanes/filing_fetch.md) | `results/filing_fetch.md` |
-| P2 | earnings-transcripts | ET-DEADLINE 1 个远端独有 commit；PWF “待 commit/push”已过期；根目录有未跟踪运行/工具资料 | [earnings_transcripts.md](lanes/earnings_transcripts.md) | `results/earnings_transcripts.md` |
+| P2 | earnings-transcripts | ET-DEADLINE 1 个远端独有 commit；PWF “待 commit/push”已过期；根目录有未跟踪运行/工具资料 | [earnings_transcripts.md](lanes/earnings_transcripts.md) | **已验收**：[results/earnings_transcripts.md](results/earnings_transcripts.md)；后续仅待联调/并线决策 |
 | P2 | company-wiki | 本机 provider 配置 dirty；G1、RF-state、FC-802 历史文档分支有少量独有提交/报告 | [company_wiki.md](lanes/company_wiki.md) | Harness 在回复中返回完整报告；不要写目标仓 |
 | P2 | dayu-agent | opt/cn_score 有 1 个远端独有提交；architecture_report 未跟踪 | [dayu_agent.md](lanes/dayu_agent.md) | `results/dayu_agent.md` |
 | P3 | StockQAbyLLM | 多个未跟踪 pilot/工具/报告目录；gh-pages 为部署分支 | [stock_qa_by_llm.md](lanes/stock_qa_by_llm.md) | `results/stock_qa_by_llm.md` |
