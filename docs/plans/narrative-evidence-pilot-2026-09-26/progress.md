@@ -305,3 +305,7 @@ S0/N4A及S2模型预算基础、CLI阶段与CI修复已正常发布，当前CI�
 - 实测正式ET main、旧runtime、新deadline三处各130个transcript文件，每处15,953,731 B，按相对路径SHA-256全部相同；两个worktree额外重复31,907,462 B。旧runtime提交 `53e1e60` 已在main历史内且Git工作树干净，暂不删除其本机配置/缓存；这项重复量只占约30.4 MiB，不能解释CWP的数十GB占用。
 - RF `fcap@5319ee26` 只读检查遇到当前sandbox账号对 `.planning/.../execution_runs` 的访问拒绝；Git输出大量表观删除项并伴随2个assurance文件变化，无法区分真实删除与不可访问路径。本轮未恢复、删除或合并RF内容；原先“两项dirty”的快照在当前账号下无法重新确认，后续需在有权读取这些目录的owner上下文核实后再做RF合支判断。
 - CWP生产代码、raw原件、目录数据库和本机provider配置均未改；本轮只补充PWF实测记录。
+
+## 2026-10-04 — RF fcap 权限表象复核
+
+- 随后获准以只读提升权限复查RF：`fcap@5319ee26` 的tracked status为0个删除、2个修改（仅 `assurance/runs/weekly_alert.jsonl` 与 `weekly_manifest.json`）；此前`.planning/.../execution_runs`的大量表观删除来自普通sandbox账号的目录访问拒绝。样本路径现可读取。本轮仍未修改RF任何文件，恢复原先“两项tracked dirty”的判断。
