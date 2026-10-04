@@ -18,7 +18,7 @@ No raw company paragraph or complete source document is included in this card.
 
 ## Worktree and exclusive write set
 
-Create a fresh company-wiki worktree, separate from N4-T1. Do not work in the MAIN checkout.
+Use a dedicated company-wiki worktree outside the MAIN checkout. If N4-T1 runs concurrently, use a different worktree. If the cards run sequentially, reuse N4-T1's dedicated directory after its tests finish and its changes are committed. Record N4-T1's delivered head as this card's base, and report only this card's base..head delta. Preserve N4-T1's committed implementation; do not reset it or include its paths as new N4-T2 changes. No extra approval is needed between cards.
 
 Write only:
 

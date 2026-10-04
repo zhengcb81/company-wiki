@@ -326,3 +326,8 @@ Git写入/联网用正常用户，sandbox .git只读不是产品权限。测试�
 - MAIN仅修改narrative_model.py及新增专属请求测试。模型现在接收所有原文片段、原span_id、source_role、非空quality_flags；共同身份与选择coverage一次携带。locator、parser及完整structured_value仍在原select结果保存/校验/回放，不重复发送给模型。prompt version升级1.2.0，旧run原有账本保持原样。
 - 正式HTTP body builder只读复测：年报7,797→4,285 B；招股书252,185→47,202 B（减少81.3%），160条证据ID/原文全部一一匹配。数据库文件SHA前后相同，无HTTP/模型调用。这是请求体字节减少，不是全仓磁盘释放量或实际供应商费用测量。
 - 默认2,400-output上限下招股书保守预留49,730 token，旧unknown为10,325 token，合计60,055仍超过首次aggregate60,000上限。不能宣称新真实批次已可直接成功；下次先明确新请求输出上限和总余量，再逐次预留，不能清旧未知账本或静默扩大总额。传输/选材两卡与真实模型遵约、consumer读取和P1/P2/P4空间吞吐仍待完成。
+
+## 2026-10-04 — Worktree隔离的实际需求
+
+- Worktree隔离解决同时施工共享文件/index的问题，不要求串行卡也各建一份目录。N4-T1/T2文件互斥，可在一个专用worktree依次完成并分卡commit；T2按自己的base..head验收，不把已提交T1误记为T2越界。共享MAIN活动checkout仍会混入总指挥的提交/分支操作，应保留独立施工目录。
+- 模型输入收缩的正式提交df529a9远端CI37239069991已success；本轮说明与卡片修正没有引入代码变更。此收据不替代后续真实模型/消费者/N4C并发及空间验收。

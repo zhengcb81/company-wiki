@@ -12,7 +12,7 @@ The current N4C run recorded one unknown reservation ($0.005258) and no final ar
 
 ## Worktree and exclusive write set
 
-Create a fresh worktree in company-wiki. Do not work in the MAIN checkout.
+Use a dedicated company-wiki worktree outside the MAIN checkout, starting from current committed main. Parallel execution requires a separate worktree for each card. Sequential execution may reuse one dedicated worktree: finish and commit N4-T1, finish its tests, then start N4-T2. Record each card's own base/head commit range; N4-T2's base may be N4-T1's delivered head. Preserve committed N4-T1 work rather than resetting the directory. No extra approval is needed between cards.
 
 Write only:
 

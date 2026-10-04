@@ -108,7 +108,7 @@ TDD框住公开行为，不把旧签收规则写进新测试。仅S0相关收口
 
 ## Next Step
 
-**MAIN下一动作：**完成模型请求投影收缩（narrative_model.py和专属新测试）；N4-T1/T2各在独立worktree实施互斥写集，MAIN接收后集成并做一次共享Worker端到端。新run先核算旧unknown reservation和输入/输出预留，费用/token不足不得发请求。先取得真实摘要与consumer实读收据，再比较P1/P2/P4吞吐及新增空间。正式SourceRef/raw校验继续；Dayu远端403和ET provider402单独记录，不伪造成功。审计结果目录按其独立计划管理。
+**MAIN下一动作：**模型请求投影收缩已在df529a9发布；N4-T1/T2按互斥写集实施，并行用两个worktree，串行可复用一个专用worktree。MAIN接收后集成并做一次共享Worker端到端。新run先核算旧unknown reservation和输入/输出预留，费用/token不足不得发请求。先取得真实摘要与consumer实读收据，再比较P1/P2/P4吞吐及新增空间。正式SourceRef/raw校验继续；Dayu远端403和ET provider402单独记录，不伪造成功。审计结果目录按其独立计划管理。
 
 ## 2026-10-04：新增三张可独立派发的施工卡
 
@@ -117,10 +117,10 @@ TDD框住公开行为，不把旧签收规则写进新测试。仅S0相关收口
 | 卡 | 仓库 / 隔离工作树 | 精确责任 | 与其他卡的隔离方式 |
 |---|---|---|---|
 | [N4-T1 模型传输错误诊断](harness_lanes/n4_model_transport_diagnostics.md) | company-wiki 新建独立 worktree | automation 的HTTP模型适配、错误分类、预算账本诊断及对应测试；不修改选择器/调度/配置/生产来源 | 与N4-T2代码目录及测试文件完全不重叠；两者只共享只读的当前主线基线 |
-| [N4-T2 中文叙述选材覆盖](harness_lanes/n4_selective_narrative_coverage.md) | company-wiki 另一独立 worktree | source_catalog选材/路由/收尾与selector测试；增强中文季报、IR中的行业、业务进展、新业务、出海证据选取 | 不修改automation模型传输、Worker/AUTO、共享wire、配置或PWF；只提交本线分支，不合main |
+| [N4-T2 中文叙述选材覆盖](harness_lanes/n4_selective_narrative_coverage.md) | company-wiki专用worktree；串行可复用T1目录 | source_catalog选材/路由/收尾与selector测试；增强中文季报、IR中的行业、业务进展、新业务、出海证据选取 | 不修改automation模型传输、Worker/AUTO、共享wire、配置或PWF；只提交本线分支，不合main |
 | [MeetingConverter CI 快速门](harness_lanes/meetingconverter_ci_fast_gate.md) | MeetingConverter 新建独立 worktree | 只调查和修复CI零任务/无实际测试问题，限定CI工作流、专用配置测试和本线HANDOFF | 在独立仓库施工，不读写company-wiki业务代码、StockQAbyLLM、IQS或任何转录资料 |
 
-N4-T1与N4-T2应从同一已提交主线基线创建两个不同worktree，不能共用checkout或分支工作目录；即使文件写集不重叠，也不能在同一工作树并行写。两卡交付后由MAIN按先后顺序整合并运行跨模块测试及Worker端到端验收。MeetingConverter卡与CWP N4C完全异步，可以独立完成，不进入N4C关键路径。卡片中的路径、测试、边界、handoff字段和禁止操作是交付接口；外部harness只需拿对应卡，无需本总计划全文。
+N4-T1与N4-T2文件写集互斥。并行施工时从同一已提交主线基线创建两个worktree；串行施工时可复用一个专用worktree，T1测试结束且commit后再做T2，T2以T1交付HEAD为base，分别报告每张卡的commit范围。无需每张卡再等人工许可；同目录不能同时施工，也不使用MAIN当前checkout。两卡交付后由MAIN按先后顺序整合并运行跨模块测试及Worker端到端验收。MeetingConverter卡与CWP N4C完全异步，可以独立完成，不进入N4C关键路径。卡片中的路径、测试、边界、handoff字段和禁止操作是交付接口；外部harness只需拿对应卡，无需本总计划全文。
 
 ### N4C复盘：已证实的问题与尚未证实的原因
 

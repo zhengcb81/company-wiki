@@ -412,3 +412,9 @@ S0/N4A及S2模型预算基础、CLI阶段与CI修复已正常发布，当前CI�
 - 最终单元/handler聚焦35 passed / 1.05s；预算caller+正式CLI/Worker本地HTTP端到端14 passed / 40.16s；合计49项通过。命令为pytest -p no:cacheprovider --basetemp tmp/ptcmp加上述四个测试文件，两次最终责任集均未relocate。Ruff和diff check通过。pytest禁用第三方插件后仅有既有asyncio_mode配置warning。
 - 精确自建tmp/ptcmp在同账号下确认位于workspace后删除，测试scratch已恢复；旧失败run保留用于诊断和未知费用记账。真实select结果只读请求大小复测招股书252,185→47,202 B、年报7,797→4,285 B，全部ID/原文匹配且旧ledger文件SHA不变，没有外部调用。
 - S4改为in_progress，纠正旧“批次尚未开始”文字；真实summary/consumer与并发/空间验收仍未通过。下一主线动作整合N4-T1/T2，先核算剩余总预算，再另建run；原unknown费用和原件不丢。用户source_acquisition.yaml不纳入提交。
+
+## 2026-10-04 — 发布收据与串行复用施工目录
+
+- 模型请求投影收缩提交df529a9已推origin/master，pre-commit Ruff/mypy/host检查和pre-push快速门通过；GitHub CI [37239069991](https://github.com/zhengcb81/company-wiki/actions/runs/37239069991) 已completed/success，head_sha匹配df529a9。
+- 用户询问同目录先后执行N4-T1/T2，已将两张卡、总计划与并行计划改为：并行各用一个worktree；串行可复用同一专用worktree，T1测试完且commit后T2接续，分别记录base/head。T2允许以T1交付HEAD为base，不reset已交付代码；MAIN活动checkout仍由主线独占。没有新增人工签收或测试节点。
+- 此后续改动只有文档，diff check通过；不再重复业务测试。并行计划头部同步G1/S3已完成的事实，旧同日记录标为历史过程，防止重新派发ET-DEADLINE。用户配置保留。

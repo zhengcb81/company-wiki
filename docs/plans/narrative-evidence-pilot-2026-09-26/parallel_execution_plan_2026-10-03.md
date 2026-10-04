@@ -1,13 +1,13 @@
 # 并行总计划：门禁先行，独立目录施工，MAIN统一打通
 
-> 2026-10-04复核。补充[task_plan](task_plan.md)，不产生第二套全项目顺序。当前先G1门禁精简，再S3虚拟化，随后N4C及S5/S6。旧交付线不重派；ready不等于running。
+> 2026-10-04复核。补充[task_plan](task_plan.md)，不产生第二套全项目顺序。G1/S3已收口，当前N4C，随后S5/S6。当前三张ready卡见下方“新增三张互斥施工卡”；ready不等于running。其余同日较早章节为历史过程，不再产生待办。
 
 ## 现在能交给外部harness的包
 
 | 线 | 状态 | 独占实际工作目录 | 内容/责任 | 独立施工卡 |
 |---|---|---|---|---|
 | MAIN/root | active | `C:\Users\郑曾波\Projects\company-wiki` 当前根 | 来源核心、共享CLI/Contract、Store/预算、总PWF、配置发布与全部合入 | [G1细则](gate_simplification_closeout_2026-10-04.md)、[总计划](task_plan.md) |
-| ET-DEADLINE | dispatched（用户确认），worktree已创建，交付待回报 | `C:\Users\郑曾波\Projects\earnings-transcripts-s3-deadline` | 两个正式采集入口硬deadline、进程回收、原协议/语言/hash不变 | [ET独立代码包](harness_lanes/et_retrieval_deadline_closeout.md) |
+| ET-DEADLINE | complete，已合入main63c4090；不重派 | `C:\Users\郑曾波\Projects\earnings-transcripts-s3-deadline` | 两个正式采集入口硬deadline、进程回收、原协议/语言/hash不变 | [ET独立代码包](harness_lanes/et_retrieval_deadline_closeout.md) |
 | ET-LIVE | 完成一次授权尝试；HTTP 402，导入NOT RUN | `C:\Users\郑曾波\Projects\company-wiki-et-live-20261004` | 单次真实ET取数尝试与隔离报告；确定性CWP/FF测试已通过；未改生产仓 | [只读验收报告](C:/Users/郑曾波/Projects/company-wiki-et-live-20261004/report.md) |
 
 这三个实际目录互不包含，也不进入MAIN当前工作树施工。各卡列精确写集。共享Git对象库不等于共享工作目录；各线用自己的index/codex分支，MAIN负责最后合入。Git切主线/合入期间交付线冻结，不并发改同一目标分支。
@@ -28,7 +28,7 @@ ET-DEADLINE独占worktree仍未提交。MAIN只读集中责任包91 passed、1 f
 
 1. CWP来源reader/as-of/resolver/gap_plan/canonical_writer与FF SourceRef v2资格门已按TDD收敛；真实SHA、身份/期次/公开日、可回放locator保持自动验证，采集描述缺失仅诊断。
 2. G1-LEGACY旧入口退役及46项当前状态分类完成；CloseGapBinding、旧whole-catalog LLM summarizer及archive/prune代码未发现生产caller，不作为用户门，后续若无调用者随S5/S6清理。
-3. G1完成；ET-LIVE已进行一次请求但被FMP HTTP 402拒绝，不能声称真实原文导入完成。ET-DEADLINE仍在独立worktree；MAIN等其修正测试夹具并提交后验收，继续不改外线写集。
+3. G1/S3已完成，ET-DEADLINE已集中验收并合入main63c4090。ET-LIVE一次请求被FMP HTTP 402拒绝，尚无live原文导入。MAIN正在推进N4C；当前独立包为N4-T1/T2及MeetingConverter CI，不重派已交付旧包。
 4. 接收外线commit与短报告，核diff/接口/相关测试，解决冲突和跨仓接线。MAIN统一发布；外线不自己合main、不写他仓、不安装全局技能。
 5. 测试全用独立根，退出恢复原样；不丢原件。不造签名、人工授权文件、每helper审批或固定场景数。
 
@@ -116,7 +116,7 @@ FF `codex/transcript-companion@29085f7`现存工作树改动`fetch_filing.py`/`f
 | [N4-T2](harness_lanes/n4_selective_narrative_coverage.md) | company-wiki | 独立worktree；source_catalog候选、路由、finalize与对应选择/handler测试 | 不依赖N4-T1；不能碰automation模型、Worker/AUTO、配置、生产数据或总PWF。主线收到后与T1联合验收 |
 | [MeetingConverter CI快速门](harness_lanes/meetingconverter_ci_fast_gate.md) | MeetingConverter | 独立仓库worktree；限定CI workflow、可选的专用workflow合同测试与独立handoff | 与CWP及N4C无依赖，不进主线关键路径；最新CI若已修复则只报告，不改代码 |
 
-N4-T1与N4-T2目录和测试文件互斥，可同时工作，但必须是两个worktree/两个checkout；不在共同目录并发写。二者从同一提交基线开始，任何共享接口需求先停在交接说明，由MAIN裁决，worker不得扩写写集或私自合main。独立提交后，MAIN依次集成、运行两卡聚焦包、跨层Worker/本地模型端到端测试；只有离线合同绿、真实样本来源门合格时，MAIN才开始新的有限真实运行。此顺序不允许两条代码线各自调用模型或生产数据。
+N4-T1与N4-T2目录和测试文件互斥。并行时使用两个worktree，从同一提交基线开始；串行时可共用一个专用worktree，T1测试结束并提交后T2接续，以T1交付HEAD为T2的base，分别报告各自的commit范围。无需额外人工签收才能接续T2，但不得共用MAIN活动checkout或同时在一个目录施工。任何共享接口需求写入交接说明，由MAIN处理，worker不得扩写写集或私自合main。独立提交后，MAIN依次集成、运行两卡聚焦包、跨层Worker/本地模型端到端测试；离线合同和真实样本来源校验通过后开始新的有限真实运行。两条代码线不自行调用付费模型或写生产数据。
 
 MeetingConverter使用独立Git仓库，不改变CWP、StockQAbyLLM、IQS或转录资料，因此可和N4-T1/T2同时施工。IQS不在本批可派发工作中，保持用户已明确的排除边界。
 
