@@ -145,10 +145,10 @@ CWP审计代码`master@9eacbea`；RF`rf-impl/main@6fb2def7`；FF最新交付线/
 | 10 | MAIN G1复核 | 实际请求若仍需人工搬binding则内组合；沿现有GapPlan接口，不造另一请求合同 |
 | 11 | 公开阻断已退出 | 旧Worker公开执行退役；兼容allow-acquisition参数无效，可随接口收口删除 |
 | 12 | 已合FF-S3；薄兼容收口归MAIN | v2单一请求与限额已执行，v1仅保现有精确复用/无预算缺件失败；不重复FF-S3施工 |
-| 13 | **MAIN G1第一动作** | filing_reuse还硬要求HTTPS、retrieved_at、collector名/版本；非核心缺字段改诊断，不阻真实原件open |
+| 13 | reader已简化；正式调用者收口中 | raw open不再要求URL/collector，稀疏观测不丢；resolver/planner/canonical_writer/FF尚有重复资格门，下一组一起收敛 |
 | 14 | 保留来源事实；预览语义按实际需要 | active/撤回/冲突状态不能伪装正式可用来源；不是私有访问权限 |
-| 15 | **MAIN G1第二动作** | query_local已公开日cutoff；叙述transport仍要求capture<=cutoff，取消这项误拒，不添加无需求严格模式 |
-| 16 | MAIN G1实际误拒调查 | 只接受当前NORMALIZER_VERSION仍在；先核可真实解码/回放的历史版本，再支持，不无条件放行未知格式 |
+| 15 | 已按TDD简化 | query_local及叙述transport均按公开日cutoff；capture日期不再误拒，未来/未知公开日仍拒绝，无新增模式 |
+| 16 | 保留实际格式/一致性校验 | 实测187个modern全为1.0.0，历史有现成兼容回放；未发现版本误拒，PDF样本问题是字节/状态错配，不放宽未知格式 |
 | 17 | MAIN G1实际误拒调查 | 必填引用/来源用途保留；无害额外字段/原文事实不应被关键词拒；有误拒证据再改 |
 | 18 | partial已有消费支持；覆盖缺口归MAIN | 已有partial/needs_review回放；坏片段丢弃并报coverage，零可回放证据不能假成功 |
 | 19 | 缩到实际能力 | 类型/尺寸/MIME是处理能力，存储根由底层解释；不加公司角色白名单 |

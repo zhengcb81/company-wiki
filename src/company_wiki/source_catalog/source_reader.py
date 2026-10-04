@@ -1,9 +1,9 @@
 """Path-independent, exact-version reads from the local source catalog.
 
 This is the first v2 read slice.  The public reference contains identity only;
-each open checks the current catalog and root policy again.  Preview and
-filing reuse have separate action gates; other uses need an explicit policy
-decision before being added.
+each open checks the current catalog, root policy and actual bytes again.
+Filing reuse requires a declared publication and reporting period; sparse
+capture descriptions remain diagnostics rather than access prerequisites.
 """
 
 from __future__ import annotations
@@ -482,13 +482,16 @@ class SourceVersionReader:
                 continue
             if observed.get("content_sha256") not in (None, "", ref.content_sha256):
                 continue
-            if not all(
+            # Prefer a complete observation, but retain a sparse one without
+            # discarding its known fields or combining different locations.
+            if capture is None:
+                capture = observed
+            if all(
                 isinstance(observed.get(key), str) and observed[key].strip()
                 for key in ("retrieved_at", "collector_name", "collector_version")
             ):
-                continue
-            capture = observed
-            break
+                capture = observed
+                break
 
         review_status = self._current_review(ref).status
         url = manifest["source_url"]
@@ -497,6 +500,13 @@ class SourceVersionReader:
             manifest["fiscal_year"] is not None
             or manifest["fiscal_period"]
             or manifest["period_end"]
+        )
+        capture_complete = all(
+            isinstance(value, str) and value.strip()
+            for value in (
+                (capture or {}).get(key)
+                for key in ("retrieved_at", "collector_name", "collector_version")
+            )
         )
         return {
             "source_ref": asdict(ref),
@@ -524,7 +534,7 @@ class SourceVersionReader:
             "security_id": manifest["security_id"],
             "language": manifest["language"],
             "capture_ready": bool(
-                capture and https_url and manifest["published_date"]
+                capture_complete and https_url and manifest["published_date"]
                 and period_known
             ),
             "prompt_injection_status": review_status,
@@ -661,9 +671,9 @@ class SourceVersionReader:
             raise SourceReadError("blocked", "root_admission_denied")
         candidates = admitted
 
-        # Formal filing reuse is a source qualification, separate from the
-        # ability to preview the actual bytes.  A healthy duplicate root does
-        # not manufacture missing capture provenance for this source version.
+        # Reuse needs source/period facts, while a URL or collector description
+        # is optional provenance. Every admitted location still gets the same
+        # exact byte verification below; sparse captures stay honestly sparse.
         if purpose == "filing_reuse":
             if not version_row["published_date"]:
                 raise SourceReadError("blocked", "capture_incomplete")
@@ -701,21 +711,6 @@ class SourceVersionReader:
                 )
             ):
                 raise SourceReadError("blocked", "period_unknown")
-            url = str(identity.get("source_url") or identity.get("https_url") or "")
-            if not url.startswith("https://"):
-                raise SourceReadError("blocked", "capture_incomplete")
-            if not any(
-                all(
-                    manifest.get(field)
-                    for field in ("retrieved_at", "collector_name", "collector_version")
-                )
-                for manifest, problem in (
-                    metadata_state(location["manifest_json"]) for location in candidates
-                )
-                if problem is None
-            ):
-                raise SourceReadError("blocked", "capture_incomplete")
-
         budget = _ReadBudget()
         budget.begin_request()
         failures: list[str] = []

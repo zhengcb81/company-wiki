@@ -7,8 +7,8 @@
 | 线 | 状态 | 独占实际工作目录 | 内容/责任 | 独立施工卡 |
 |---|---|---|---|---|
 | MAIN/root | active | `C:\Users\郑曾波\Projects\company-wiki` 当前根 | 来源核心、共享CLI/Contract、Store/预算、总PWF、配置发布与全部合入 | [G1细则](gate_simplification_closeout_2026-10-04.md)、[总计划](task_plan.md) |
-| G1-LEGACY | ready，未登记启动 | `C:\Users\郑曾波\Projects\company-wiki-g1-legacy` | 旧入口双环境许可简化、6个完成运维脚本及专属测试退役；不改src/共享Contract/config | [G1独立代码包](harness_lanes/g1_legacy_entry_and_retirement.md) |
-| ET-DEADLINE | ready，未登记启动 | `C:\Users\郑曾波\Projects\earnings-transcripts-s3-deadline` | 两个正式采集入口硬deadline、进程回收、原协议/语言/hash不变 | [ET独立代码包](harness_lanes/et_retrieval_deadline_closeout.md) |
+| G1-LEGACY | dispatched（用户确认），交付待回报 | `C:\Users\郑曾波\Projects\company-wiki-g1-legacy` | 旧入口双环境许可简化、6个完成运维脚本及专属测试退役；不改src/共享Contract/config | [G1独立代码包](harness_lanes/g1_legacy_entry_and_retirement.md) |
+| ET-DEADLINE | dispatched（用户确认），worktree已创建，交付待回报 | `C:\Users\郑曾波\Projects\earnings-transcripts-s3-deadline` | 两个正式采集入口硬deadline、进程回收、原协议/语言/hash不变 | [ET独立代码包](harness_lanes/et_retrieval_deadline_closeout.md) |
 | ET-LIVE | ready，可选小包 | `C:\Users\郑曾波\Projects\company-wiki-et-live-20261004` | 一次真实ET取数→临时CWP导入→pathless回读；FF路由另记确定性测试，不改生产仓 | [只读验收包](harness_lanes/et_transcript_live_import_acceptance.md) |
 
 这三个实际目录互不包含，也不进入MAIN当前工作树施工。各卡列精确写集。共享Git对象库不等于共享工作目录；各线用自己的index/codex分支，MAIN负责最后合入。Git切主线/合入期间交付线冻结，不并发改同一目标分支。
@@ -26,7 +26,7 @@
 
 ## MAIN职责与当前施工
 
-1. 优先改真实阻断：filing_reuse缺collector等描述字段仍拒绝；叙述transport仍要求下载日期早于as-of。source query_local已按公开日默认，不重复改写它。
+1. reader的URL/collector描述门与叙述capture截止已按TDD清理；来源/CLI/叙述64项回归绿。下一组收敛resolver/gap_plan/canonical_writer与FF的残留资格门，保capture_ready/gaps只作真实诊断。query_local公开日默认保持。
 2. 接收G1-LEGACY的函数兼容与删脚本diff，更新共享Contract/clean_env_gate/AGENTS引用。源层archive/prune的真实CLI漏now问题由MAIN修复或正式退役，不能交脚本线修改src。
 3. G1一次集中责任包GREEN后普通合入/push；再处理S3安装/provider可移植配置与ET接口联调。外线可以提前准备ET代码，不改变MAIN合入优先级。
 4. 接收外线commit与短报告，核diff/接口/相关测试，解决冲突和跨仓接线。MAIN统一发布；外线不自己合main、不写他仓、不安装全局技能。
@@ -91,3 +91,10 @@ CWP机器特定 `config/source_acquisition.yaml` 指向StockInfo隔离bounded pr
 每个代码包只有三个自然阶段：读基线/目标RED→实现/责任包GREEN→本线commit/push+短handoff。所有局部PWF、测试和报告只在本线目录。交付包含base/head、改动路径、接口/golden、命令/结果、测试目录恢复、未完成事实；不交大执行日志、完整资料副本、key或备份。
 
 MAIN只在G1、S3、N4 B/C、S5/S6几个大节点复核。无逐helper/逐文档/逐删除文件审查。已有轻量Git/CI照常；纯文档本轮不重跑业务测试。复杂度/全coverage是按需诊断，不成为交接资格门。
+
+
+## 2026-10-04 派发与实际目录复核
+
+用户确认两个代码包已发出：G1-LEGACY、ET-DEADLINE写集归外线，MAIN不抢改。Git实读ET三个worktree：正式main在 `earnings-transcripts/earnings-transcripts@93fe52c`；旧ET-S3 runtime为 `53e1e60`且已合main；新deadline为 `codex/et-s3-deadline@93fe52c`，由本次外包使用。外层earnings-transcripts是容器目录，没有自身.git。
+
+这些worktree共享Git历史，不复制生产CWP资料库；工作目录各自包含代码与已跟踪样本，所以样本文件可能有副本。只读核查旧runtime：跟踪文件干净、无未跟踪文件，53e1e60已在正式main历史中；有130个已跟踪transcripts文件、ignored本地config.json与缓存。旧runtime可在保留本机配置后收尾，本轮不删除。新deadline保留到外包交付/合入结束。目录存在只证明工作树已创建，不代表worker/process仍在运行。

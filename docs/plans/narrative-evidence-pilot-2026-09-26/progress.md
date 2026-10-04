@@ -278,3 +278,12 @@ S0/N4A及S2模型预算基础、CLI阶段与CI修复已正常发布，当前CI�
 - 文档核验：`python tools/verify_plan_claims.py --plan-dir .` GREEN（11个plan）；`git diff --check` GREEN。本轮纯Markdown，不重复已绿业务测试，不增加小节点审查；本机provider配置继续排除于提交。
 - 包级复核补足ET-LIVE的现行四字段import envelope、调用前SourceRequest/request_id及临时catalog配置，避免唯一一次取数后导入必然失败；ET-DEADLINE明确硬保证为worker采集终止，parent有界验证的返回开销不虚报为可抢占。
 - 本轮发布提交以 `Clarify gate-first plan and isolated harness packages` 为Git标识；仅13份计划/卡片/进度Markdown，本机provider配置排除。总计划与卡片ready状态不代表外部harness已启动；用户可直接交出两个代码包，MAIN统一合入。
+
+
+## 2026-10-04 — G1来源open与叙述日期第一组实现
+
+- 先RED：缺URL/HTTP provenance/缺collector仍可verified raw、公开日在cutoff之前但capture在之后仍可叙述回读。初次叙述夹具误传SourceRefValue触发TypeError，改用真实reader.query_ref后得到目标source_after_as_of红灯。
+- 生产实现移除这两项非核心资格门，保留真实SHA/身份/期间/公开cutoff；稀疏candidate不再丢已知字段，capture_ready仍False。坏字节反例验证门禁简化没有绕过raw hash。
+- 来源reader/latest-as-of/叙述第一组56 passed / 29.81s；包含候选CLI与稀疏字段新行为的最终集中责任包64 passed / 57.25s。mypy暴露optional dict收窄问题，改为逐值校验后2个修改模块mypy GREEN、稀疏候选定点复跑1 passed；Ruff GREEN。
+- G1整体仍in_progress：正式resolver/gap_plan/canonical_writer与FF重复资格门是下一动作。没有修改外包G1-LEGACY/ET-DEADLINE写集、其他owner树或生产原件/数据库。本机provider配置继续排除提交。
+- 两外包包登记dispatched，ET worktree已创建；没有将目录存在当运行进程证明。旧runtime未清理，原正式ET main保留。

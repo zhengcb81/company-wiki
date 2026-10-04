@@ -383,9 +383,9 @@ def test_missing_catalog_is_a_pathless_named_refusal(tmp_path):
 
 @pytest.mark.parametrize(
     ("source_url", "capture_trace"),
-    [(None, True), ("https://sec.gov/x/2025", False)],
+    [(None, True), ("http://sec.gov/x/2025", True), ("https://sec.gov/x/2025", False)],
 )
-def test_filing_reuse_requires_capture_evidence_before_pdf_open(
+def test_filing_reuse_verifies_raw_despite_sparse_capture_metadata(
     tmp_path, monkeypatch, source_url, capture_trace
 ):
     catalog, _, _, ids = _fixture(
@@ -414,18 +414,20 @@ def test_filing_reuse_requires_capture_evidence_before_pdf_open(
             )
         connection.commit()
         connection.close()
-    real_open = Path.open
-
-    def no_pdf_open(path, *args, **kwargs):
-        if path.suffix.lower() == ".pdf":
-            raise AssertionError("incomplete capture opened source bytes")
-        return real_open(path, *args, **kwargs)
-
-    monkeypatch.setattr(Path, "open", no_pdf_open)
+    reader = SourceVersionReader(catalog)
+    candidate = reader.describe_candidate(ref)
+    assert candidate['capture_ready'] is False
+    opened = reader.open_version(ref, purpose='filing_reuse')
+    assert opened.data == BODY
+    assert opened.content_sha256 == SHA
+    assert reader.verify_version(ref, purpose='filing_reuse').byte_size == len(BODY)
+    # Relaxing descriptive metadata must not bypass the actual byte check.
+    for path in catalog.config.roots[0].path.rglob('*.pdf'):
+        path.write_bytes(OTHER)
     with pytest.raises(SourceReadError) as error:
-        SourceVersionReader(catalog).open_version(ref, purpose="filing_reuse")
-    assert error.value.status == "blocked"
-    assert error.value.reason == "capture_incomplete"
+        reader.open_version(ref, purpose='filing_reuse')
+    assert error.value.reason == 'no_verified_location'
+
 
 
 @pytest.mark.parametrize(
@@ -465,14 +467,36 @@ def test_query_local_and_preview_are_separate_from_formal_filing_reuse(
     assert ref.content_sha256 == SHA
     assert "path" not in repr(asdict(ref)).lower()
     assert reader.open_version(ref, purpose="preview").data == BODY
-    if missing_url:
-        with pytest.raises(SourceReadError) as error:
-            reader.open_version(ref, purpose="filing_reuse")
-        assert error.value.status == "blocked"
-        assert error.value.reason == "capture_incomplete"
-    else:
-        # Formal reuse follows source capture quality, not a root label.
-        assert reader.open_version(ref, purpose="filing_reuse").data == BODY
+    # Capture completeness and the old reusable flag are diagnostics;
+    # the same SourceRef still controls the exact verified raw bytes.
+    assert reader.open_version(ref, purpose="filing_reuse").data == BODY
+
+
+
+def test_sparse_candidate_preserves_known_capture_observations(tmp_path):
+    catalog, _, _, ids = _fixture(tmp_path)
+    with catalog.store.transaction() as connection:
+        rows = connection.execute(
+            "SELECT location_id, manifest_json FROM locations WHERE document_id=?",
+            (ids["document_id"],),
+        ).fetchall()
+        for location_id, raw_manifest in rows:
+            manifest = json.loads(raw_manifest)
+            manifest["retrieved_at"] = "2026-02-21T00:00:00Z"
+            manifest["collector_name"] = "sec_edgar"
+            manifest.pop("collector_version", None)
+            connection.execute(
+                "UPDATE locations SET manifest_json=? WHERE location_id=?",
+                (json.dumps(manifest), location_id),
+            )
+    reader = SourceVersionReader(catalog)
+    ref = reader.query_ref(ids["document_id"], ids["source_id"], SHA)
+    candidate = reader.describe_candidate(ref)
+    assert candidate["retrieved_at"] == "2026-02-21T00:00:00Z"
+    assert candidate["collector_name"] == "sec_edgar"
+    assert candidate["collector_version"] is None
+    assert candidate["capture_ready"] is False
+    assert reader.open_version(ref, purpose="filing_reuse").data == BODY
 
 
 def test_query_local_keeps_legacy_year_from_title_and_respects_as_of(tmp_path):

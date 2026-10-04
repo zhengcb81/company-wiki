@@ -158,13 +158,29 @@ def test_requested_identity_and_period_must_match_manifest(tmp_path: Path, field
             transport.read(NarrativeReadRequest.from_dict(payload))
 
 
-@pytest.mark.parametrize("as_of", ["2026-07-31", "2026-08-01"])
-def test_publication_and_capture_both_must_precede_cutoff(tmp_path: Path, as_of) -> None:
+def test_publication_after_cutoff_is_rejected(tmp_path: Path) -> None:
     with published_fixture(tmp_path) as fixture:
         transport = NarrativeTransportReader(fixture.artifacts, fixture.reader)
         reference = transport.reference(fixture.source_ref)
-        with pytest.raises(NarrativeTransportError):
-            transport.read(_request(fixture, reference, as_of_date=as_of))
+        with pytest.raises(NarrativeTransportError) as error:
+            transport.read(_request(fixture, reference, as_of_date="2026-07-31"))
+        assert error.value.reason == "source_after_as_of"
+
+
+def test_later_capture_does_not_block_already_public_narrative(tmp_path: Path) -> None:
+    with published_fixture(tmp_path) as fixture:
+        source = fixture.source_ref
+        ref = fixture.reader.query_ref(
+            source.document_id, source.source_id, source.content_sha256,
+        )
+        manifest = fixture.reader.describe_version(ref)
+        assert manifest["published_date"] == "2026-08-01"
+        assert str(manifest["retrieved_at"]).startswith("2026-08-02")
+        transport = NarrativeTransportReader(fixture.artifacts, fixture.reader)
+        reference = transport.reference(fixture.source_ref)
+        result = transport.read(_request(fixture, reference, as_of_date="2026-08-01"))
+        assert result.data == fixture.payload
+        assert fixture.raw_path.read_bytes() == fixture.raw_bytes
 
 
 def test_unknown_publication_can_have_reference_but_not_historical_read(tmp_path: Path) -> None:

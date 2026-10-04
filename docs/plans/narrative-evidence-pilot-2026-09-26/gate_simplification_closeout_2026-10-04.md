@@ -16,8 +16,8 @@
 | 顺序 | 负责人 | 具体动作 | 完成输出 |
 |---|---|---|---|
 | 1（可并行） | G1-LEGACY外部harness | 去掉兼容脚本双环境变量许可；让来源/只读维护入口行为一致；删除已经完成的一次性六脚本链 | 独立分支、专属测试、短交接；见[施工卡](harness_lanes/g1_legacy_entry_and_retirement.md) |
-| 1（主线同时做） | MAIN | 清理 `source_reader` 中 filing_reuse 对HTTPS、retrieved_at、collector_name/version的逐用途资格阻断 | 缺采集描述字段的真实可验证来源可读，诊断缺口；不伪造verified元数据 |
-| 2 | MAIN | 清理 `automation/narrative_transport.py::_require_historical_source` 的额外采集日期截止 | 公开日在as-of之前、后来才下载的资料可用于叙述读取；未来公开资料仍拒绝 |
+| 1（主线） | MAIN | reader直接open的URL/collector资格门已按TDD清理；仍须同组收敛resolver/gap_plan/canonical_writer/FF的重复capture_ready门 | 64项来源/CLI/叙述回归绿；缺字段false/null/gaps不伪造，正式整链尚待闭环 |
+| 2 | MAIN | `_require_historical_source` 额外capture截止已清理 | 公开日当天即可读，即使后来下载；未来公开/未知公开日反例仍拒绝 |
 | 3 | MAIN | 核查 normalizer版本、摘要字段/片段校验、GapPlan是否还有无必要整份阻断 | 有具体误拒才改；旧版本须能真实解码/回放，不能随便改成接受所有版本；坏引用丢片段且报coverage |
 | 4 | MAIN | 接收G1-LEGACY，处理真实冲突；将46项分类为已退出、必要自动校验、能力边界或外仓owner事项 | 当前清单无重复待办；一次G1责任包GREEN、普通commit/push |
 
@@ -37,7 +37,7 @@ $env:PYTEST_ADDOPTS='-p no:langsmith_plugin'
 python -m pytest tests/contract/test_source_version_reader.py tests/contract/test_source_catalog_latest_mode.py tests/integration/test_narrative_transport.py -q
 ```
 
-先调整“publication_and_capture_both_must_precede_cutoff”这条旧语义测试为上面第2项，看到新期望RED后改实现；不是删掉未来信息反例来获得GREEN。其他测试只在实际行为变更范围更新，不恢复全Contract/coverage长测。
+上述as-of测试已先RED再GREEN，保留未来公开日反例；下一组正式resolver/FF链也先写公开行为RED。其他测试只在实际行为变更范围更新，不恢复全Contract/coverage长测。
 
 ## G1后才做的S3收口
 
@@ -62,3 +62,10 @@ python -m pytest tests/contract/test_source_version_reader.py tests/contract/tes
 Dayu零代码改动。RF/StockWiki/IQS现有owner工作树只读；其规则发现交owner，而不是MAIN跨仓清理。PDF SourceExport只支持manifest的限制是当前能力，已有NarrativeTransport PDF回放不重复实现。没有请求方需要严格“当时本机已经收集到”模式时，不为了删一个capture限制新增配置/权限体系。
 
 G1/S3收口后才进入N4C四类真实文档、1/2/4并行吞吐/空间测量，再实施S5/S6。G1没有固定待满计数或逐项签收文件；完成依据是已核实的多余阻断退出、相关责任包绿色与真实接口回归。
+
+
+## 当前未闭环调用者（本轮实读）
+
+只清reader不能宣称G1完成：resolver.resolve仍丢弃capture_ready=False；gap_plan._usable_handles再过滤一次；canonical_writer提交消歧仍依赖同bool；FF的_handle_from_resolution和handle metadata校验仍要求完整capture/HTTPS。MAIN下一组统一收敛，不发新schema、不修改外包写集。SourceHandle.capture_ready/missing_capture_fields和qualification.gaps保留为诊断，实际复用由身份/期间/公开时间/真实SHA证明。
+
+normalizer只读审计没有版本误拒证据：187个已绑定modern产物全部1.0.0，历史未绑定产物已有可回放兼容路径；抽样失败属于字节/状态不一致。当前不放开未知generator版本、不为假设再造支持版本表。

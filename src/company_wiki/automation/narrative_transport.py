@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import asdict, dataclass
-from datetime import date, datetime, timedelta
+from datetime import date
 import hashlib
 import json
 import re
@@ -70,23 +70,11 @@ def _publication_date(published: object) -> date:
         raise NarrativeTransportError("blocked", "source_publication_invalid") from exc
 
 
-def _capture_time(captured: Any) -> datetime:
-    if not captured:
-        raise NarrativeTransportError("blocked", "source_capture_unknown")
-    try:
-        capture_time = datetime.fromisoformat(captured.replace("Z", "+00:00"))
-    except (AttributeError, TypeError, ValueError) as exc:
-        raise NarrativeTransportError("blocked", "source_capture_invalid") from exc
-    if capture_time.tzinfo is None or capture_time.utcoffset() != timedelta(0):
-        raise NarrativeTransportError("blocked", "source_capture_invalid")
-    return capture_time
-
-
 def _require_historical_source(manifest: dict[str, Any], as_of_date: str) -> None:
+    """Historical availability follows publication, independent of download time."""
     cutoff = date.fromisoformat(as_of_date)
     published = _publication_date(manifest.get("published_date"))
-    captured = _capture_time(manifest.get("retrieved_at"))
-    if published > cutoff or captured.date() > cutoff:
+    if published > cutoff:
         raise NarrativeTransportError("blocked", "source_after_as_of")
 
 

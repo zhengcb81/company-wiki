@@ -206,3 +206,12 @@ Git写入/联网用正常用户，sandbox .git只读不是产品权限。测试�
 - ET零网络小复现：0.02秒预算、fake get阻塞0.25秒，0.250秒后才拒绝；当前不是硬deadline。独立ET-DEADLINE包采用最小内部子进程隔离，正式tool/batch共用，不改wire/golden、不扩翻译预算。
 - 新G1-LEGACY和ET-DEADLINE是两个ready代码包，分别独占company-wiki-g1-legacy与earnings-transcripts-s3-deadline；ET-LIVE改为独占company-wiki-et-live-20261004，只交小报告。三包尚未收到用户启动登记。
 - ET-LIVE明确区分FF companion确定性测试与真实ET→临时CWP段；直接ET调用不证明完整FF live链。无provider权益则NOT RUN，不强加provider或订阅。
+
+
+## 2026-10-04 — 来源字段与叙述as-of实际简化
+
+- raw open/verify移除URL HTTPS与retrieved_at/collector描述必填，仍实读SHA/size、校验当前版本/根/公开日与报告期间。candidate保完整度false/null，并保留缺一项时仍已知的采集字段，不合拼不同位置制造完整capture。
+- 叙述as-of改公开日原则，删除无实际用途的capture时间解析；公开当天可读取后来采集的原文及已发布叙述，未来公开/未知公开仍拒绝。
+- 审计证明正式链还有resolver/planner/canonical_writer/FF资格门；这是下一组收口，不用reader单点GREEN声称整体G1完工。FF旧owner/key树不改，后续MAIN隔离工作树集成。
+- normalizer现代已绑定187条全1.0.0，生产WAL为0；历史抽样字节/状态拒绝不是版本误拒，保留格式与真实SHA底线。
+- 用户已确认两代码包派发；ET Git三个实际worktree已核，新deadline已创建，旧runtime已合、未删除。双目录是代码隔离，不是两套生产资料。
