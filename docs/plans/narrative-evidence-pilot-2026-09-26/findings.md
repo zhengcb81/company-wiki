@@ -375,3 +375,11 @@ Git写入/联网用正常用户，sandbox .git只读不是产品权限。测试�
 - `WorkerSession/open_session/read_desired_state`已无生产调用者，故本轮可退役其启动/心跳执行面；旧status/stop仍须消费升级前runtime文件，AUTO pause/interlock也仍是实际保留行为。normalize/summarize与normalized仍被CWP质量/证据链及RF默认SourceBundle角色读取，因此目前不能以SourceRef v2代码“存在”推断derived消费者已迁移。
 - RF `origin/main@8a153f3` 含SourceRef v2 opt-in flag与真实三仓离线读原文合同；参数默认`false`，默认source preparation仍输出/使用legacy normalized Markdown、summary、sections角色。`tests/test_source_ref_v2_three_repo_e2e.py`对原文复用与字节损坏拒绝验证通过（1项），但不覆盖N4叙述选材或RF默认consumer切换。
 - RF `fcap`为`origin/main`落后15、没有独有提交；3,833个`.planning/.../execution_runs`删除及两个weekly assurance修改是owner未提交状态，本线没有清理或重写。
+
+## 2026-10-05 — RF叙述消费合同与物理存储依赖更正
+
+- RF `origin/main` 已包含独立的N3a叙述来源入口：`scripts/narrative_source_preparation.py` 与 `company_wiki_narrative_reader.py` 通过有界子进程调用CWP `company-wiki-narrative-read`。它是现有正式接口，不应另造第二套wire。RF N3a收件报告记录89项主节点测试、年报PDF与电话会TXT原件样本，并明确“未接入收入计算”。
+- N3a叙述包读取与 `source_preparation.py --source-reader-v2` 是两条不同consumer路线。SourceRef v2 filing路径默认仍关闭（`false`），默认SourceBundle继续读取normalized/summary/sections；N3a不会自动证明默认filing route或预测公式已改用精选叙述。
+- 当前CWP源码中，`EvidenceQueryService`从SQLite EvidenceSpan行返回raw_text/span_json、locator与来源事实；`ExtractionQualityService`读SQLite artifact状态/metadata与EvidenceSpan，不读normalized Markdown正文。直接正文读取点见 `llm_summarizer.py`、`section_extractor.py`、`summarizer.py`。这意味着物理Markdown删除与DB EvidenceSpan删除可分阶段，但artifact状态/句柄和quality语义需同步，且所有真实正文consumer先迁移或退休。
+- 本机只读ref核对为RF `fcap@5319ee263c4af41ac255938c25bebd32cce56f66`、缓存 `origin/main@8a153f3387ae75fb172e70f8ab63ffd38100779a`。本轮网络连接GitHub失败，故远端SHA使用此前已验证的live检查，不把缓存ref冒称为本轮live结果。无RF写入。
+- `codex/rf-state-audit@447d1c7`补充报告称6处ACL不可读、全量分类未完成、确认安全释放为0；它与主线已有同路径报告冲突且没有新增删除候选。结论仅记录为审计限制，不覆盖较完整主线报告，不执行清理。

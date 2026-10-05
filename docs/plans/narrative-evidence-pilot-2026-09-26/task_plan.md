@@ -17,9 +17,9 @@
 - **filing-fetch**：SourceRef v2/companion 功能已在主线；旧 schema 原型不并入。PWF 收尾提交 `d4d2fac` 已推送 `fcap:main`，plan claims 与 push 选择门通过。
 - **Dayu**：用户本轮要求的唯一现有 `opt/cn_score@76037b2` 提交已快进到本地 main，相关 focused tests 87 passed；远端 push 被 HTTP 403 拒绝，停止重试。该项是已有提交的本地集成，不代表远端已更新。
 - **外部审计卡**：StockQAbyLLM 与 MeetingConverter 报告已收到并验收，唯一运行数据保留。invest-quick-scan 另有独立项目正在进行；本线不检查、不修改、不重复派发该仓任务。
-- company-wiki lane 的审计报告仍需从 harness 回复接收；本机 `config/source_acquisition.yaml` 用户改动和本计划审计结果目录继续排除在本线写集之外。
+- RF worktree audit 外线分支 `codex/rf-state-audit@447d1c7` 已有一份受 ACL/长路径限制的补充报告；它与主线已有同名完整报告冲突，不能直接覆盖或并入。补充报告没有可安全删除候选；本机 `config/source_acquisition.yaml` 用户改动和本计划审计结果目录继续排除在本线写集之外。
 
-**MAIN当前下一步：**等待 N4-T2 自己的新增提交，与已合入 N4-T1 联合验收后推进有限真实批次。T1 已发布（MAIN 跨层114项+持久账本E2E 1项通过）；MeetingConverter 已合入 master，主线CI通过。S5 已退役没有生产调用者的旧 SourceCatalogWorker 自动整库循环：127项集中回归通过，提交 `ff0eec0` 已发布，CI run `37244400156` success；本轮再移除无调用者的旧 `WorkerSession/open_session/read_desired_state` 执行面，保留旧进程 status/stop 和自动化暂停互锁。`extract-sections` 公开入口也已退出。`SourceCatalog.normalize/summarize` 按需API暂留：RF `origin/main@8a153f3` 已有 `--source-reader-v2` opt-in 和三仓原文读取E2E，但仍默认走旧SourceBundle artifact-role消费（normalized/markdown/summary/sections）；新E2E证明路径less原件复用/hash拒绝，不证明叙述选材或旧derived读取面已迁完。CWP证据查询/抽取质量与现存测试仍依赖 normalized；等RF默认切换和CWP locator读取迁移后再关闭，不重新启用后台全量写入。N4C真实摘要、ET TXT来源和DB/derived主体迁移仍未完成。
+**MAIN当前下一步：**N4-T2仍待交付；收到后与已合入N4-T1联合验收，再推进N4C真实多类型批次。RF已有正式N3a叙述消费者：RF经bounded subprocess调用CWP `company-wiki-narrative-read`，验证叙述包、原文、身份/期次/as-of、locator和引用；该入口在RF主线的交接明确“未接入收入计算”。另一个SourceRef v2文件读取路径仍是opt-in，默认SourceBundle路径继续读取normalized/summary/sections。复用N3a接口，不另造transport；N4-T2/N4C通过后先做CWP→RF现有N3a入口的真实样本离线端到端，再依RF当前PWF把它接入预测输入。S5存储审计需区分物理normalized文件与SQLite EvidenceSpan/质量元数据：evidence-query直接读DB span，extraction-quality读artifact状态/metadata和span，不直接打开normalized正文文件。真正的normalized正文读取点和RF默认SourceBundle仍须逐个迁移/退休，未完成前不删派生文件；迁移后先处置文件句柄与质量语义，再评估DB span收缩。N4C真实摘要、ET TXT来源和DB/derived主体迁移仍未完成。
 
 ## 当前基线（2026-10-04正常用户上下文复核）
 
@@ -109,7 +109,7 @@ TDD框住公开行为，不把旧签收规则写进新测试。仅S0相关收口
 
 ## Next Step
 
-**MAIN下一动作：**接收N4-T2独立新增提交并与T1联合验收；N4-T2尚未交付。等待期间S5已移除闲置的旧整库Worker，不再由该后台自动增长normalized/span；RF与CWP的按需读取链仍依赖现有normalized数据，待pathless SourceRef与原件locator消费者完成迁移后再退役按需API/derived。原件、来源版本事实和用户配置继续保留。
+**MAIN下一动作：**N4-T2尚未交付，先收它的独立新增提交并与已集成T1联合验收；不改T2独占选材文件。其间按已验证的N3a合同准备N4C实样与跨仓测试输入，不调用付费API/模型、不写生产库。RF N3a现在能经CWP CLI读取已选叙述包，但尚未连接收入计算；旧SourceBundle默认也尚未切换。存储迁移先分开标记物理derived正文、artifact元数据和EvidenceSpan行；删除每一类前分别确认生产读者和旧句柄状态。原件、来源版本事实和用户配置继续保留。
 
 ## 2026-10-04：新增三张可独立派发的施工卡
 
@@ -174,3 +174,12 @@ CNINFO bounded provider已进入隔离 owner集成工作树；CWP配置 `config/
 - 2026-10-03 只读现场检查：旧 worker `desired_state=paused`、`runtime_state=stopped`；匹配 worker/supervisor 均为 0，Windows startup task 未安装。随后删除旧全库 CLI、启动/恢复/暂停与安装任务入口、Windows 启动器/控制菜单及旧启动专属测试；保留 `worker-status`、身份核验 `worker-stop` 与启动任务检查/卸载。旧 raw、SQLite、worker state 和日志均未触碰。
 - 155 项相关回归此前 153 项通过；两项失败都是过期断言（deletion manifest 已退役、旧 `resume` 方法已删除），更正后对应 2 项单测复跑通过。CLI/显式下载退役合同另有 18 项通过。
 - 当前按节点分清状态：S2/N4B节点A/B已验收；整体N4仍未完成，因为独立S4/N4C的真实模型多文档、消费者实读、引用/语言coverage与总新增空间峰值未验收。producer limits已完成，本轮先G1→S3，再N4C；不把N4C待验收写回S2重新开工。
+
+## 2026-10-05 — RF叙述消费者与S5物理依赖复核
+
+- **RF状态先查**：本次正常用户会话最近一次 live 检查记录 `origin/main@8a153f3387ae75fb172e70f8ab63ffd38100779a`；本 sandbox 不能连 GitHub（HTTPS/443受限），只读本地确认 `fcap@5319ee263c4af41ac255938c25bebd32cce56f66`，其本地 `origin/main` ref 仍为 `8a153f3`。不得把缓存 ref说成本轮新鲜live远端检查；跨仓实施前须先重查 owner/PWF/远端。
+- **RF已有叙述合同**：`docs/implementation/reviews/narrative-consumer/N3a-RF-2026-10-03.md` 定义 RF `narrative_source_preparation.py` 通过 bounded subprocess 使用 CWP `company-wiki-narrative-read`；`NarrativeRef` 是 metadata-only，read 输出来源叙述、选中EvidenceSpan/locator、摘要草案及可核验receipt。报告包含89项E2E责任集（含年报PDF与电话会TXT本地原文样本），没有声明把结果写入收入预测。该报告明确标注“未接入收入计算”。
+- **两条路径不得混称**：RF N3a叙述消费者与 RF filing `source_reader_v2` opt-in 是不同接口。后者在 `source_preparation.py` 默认仍为 `false`，当前默认 `SourceBundle` 继续读取旧 normalized/summary/sections角色；N3a能够读叙述包不能证明默认财报准备和收入计算已经接线。复用已有N3a，不再新建CWP/RF wire合同。
+- **CWP文件/DB依赖更正**：当前 `EvidenceQueryService` 从SQLite读 `evidence_spans.raw_text/span_json` 与source/document/location事实，不读normalized Markdown文件。`ExtractionQualityService` 从SQLite读normalized artifact状态/metadata及EvidenceSpan，不打开artifact正文。CWP当前直接调用 `read_verified_normalized_text` 的源码位置是 `llm_summarizer.py`、`section_extractor.py`、`summarizer.py`；section-extractor的公开CLI/Service入口已退休，但不能据此把低层函数/所有调用者都算已清除。故保留EvidenceSpan行不必然阻止物理Markdown释放；但必须先迁移RF的旧SourceBundle读者和CWP仍在用的摘要/章节读者，并处理artifact记录指向已删除文件与quality status的含义。物理文件与数据库span分阶段处置，不能捆成一次删除。
+- **RF worktree audit交付状态**：`codex/rf-state-audit`两条仅文档提交新增了受限报告；它因6处ACL拒绝而停止全量未跟踪分类，0 bytes列为“已确认可安全释放”。主线同路径已经存在更详细的audit报告，且明确不可读子树是覆盖/删除结论的边界。保留补充报告的限制结论，不覆盖主线报告、不从该分支执行任何RF操作。
+- **后续大节点**：先收N4-T2；N4C复用已发布N3a read/reference合同，做年报/招股或再融资/季报或IR/电话会TXT样本中的四类，记select/skip原因、语言、locator replay、实际输出字节和consumer read。真实业务样本不付费测试通过后，另按RF当时的PWF与owner工作树建立单独的预测输入接线变更；在那之前不改RF。S5先退CWP旧正文读者/元数据句柄，再迁移SourceBundle默认；DB spans保留至S6单独验收。

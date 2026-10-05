@@ -472,3 +472,14 @@ S0/N4A及S2模型预算基础、CLI阶段与CI修复已正常发布，当前CI�
 - TDD先以新增契约证明旧API确实退出；最终聚焦`test_source_catalog_control.py`、CLI retirement与automation race共 **55 passed / 17.48s**。Ruff四个改动Python文件及`git diff --check`通过。普通插件自动加载先因环境的`langsmith/pydantic_core` DLL权限在collection前失败；禁用无关插件后同一测试集完整通过（仅pytest.ini中缺asyncio plugin的既有`asyncio_mode` warning）。短路径`tmp/ptworker-s5-sandbox2`已在验证归属后删除。
 - RF只读对账：remote `origin/main@8a153f3387ae75fb172e70f8ab63ffd38100779a`；`fcap`领先0、落后15提交，其3,833个execution_runs删除及两条weekly assurance dirty记录都属于owner WIP，未触碰。远端SourceRef v2仍为opt-in（默认`false`）。用RF/CWP两端都与对应主线匹配的代码跑三仓SourceRef原件复用/篡改拒绝E2E：**1 passed / 8.51s**，未下载或请求外部服务；隔离测试目录已移除。该测试不证明RF默认叙述/derived消费者迁完。
 - 本次S5改动提交`a9b1a06f520c7d2565e2a5d93b90e26e9cdd28f2`并推送`origin/master`；pre-push fast contract smoke GREEN。GitHub Actions [37246820601](https://github.com/zhengcb81/company-wiki/actions/runs/37246820601) 对应SHA匹配，所有步骤通过，最终`completed/success`（Fast checks Python 3.12）。推送后仅保留既有用户配置`config/source_acquisition.yaml`未提交。
+
+## 2026-10-05 — RF叙述消费者与S5空间依赖复核
+
+- 先查RF再更新CWP计划。最近一次可信live检查记录 `origin/main@8a153f3387ae75fb172e70f8ab63ffd38100779a`；本轮sandbox直接访问GitHub HTTPS/443失败。只读本地ref为 `fcap@5319ee263c4af41ac255938c25bebd32cce56f66`、缓存 `origin/main@8a153f3`，未对RF执行写入或状态清理。
+- 阅读RF main的N3a交接：已存在 `narrative_source_preparation.py` → bounded subprocess → CWP `company-wiki-narrative-read` 的跨仓路径；ref只发现metadata，read校验原文/工件SHA与size、身份/期间/as-of、locator和claim citations。N3a报告记录89项主节点测试，表格列明年报PDF 9,165,875 B/96 locators及电话会TXT 66,324 B/14 locators；收件报告仍明确“未接入收入计算”。RF filing `source_reader_v2` 另一路默认false，默认SourceBundle仍读旧派生角色。计划据此改为复用N3a，不造新wire，后续再与RF当时的PWF协调预测入口接线。
+- 用CodeGraph查到CWP `NarrativeTransportReader` 和 `company-wiki-narrative-read` CLI/合同；精确源码引用也确认RF adapter会调用该CLI。因此此前“没有可调用入口”的推断不成立，已在说明中更正。旧的 `NarrativeEvidenceResolver` 要求caller提供raw path；它不应被误当成跨仓正式接口。
+- 精确读CWP `EvidenceQueryService` / `ExtractionQualityService`：前者从SQLite EvidenceSpan行读span正文/locator；后者读artifact元数据和span汇总；二者不打开normalized Markdown正文。字面调用点仍在 `llm_summarizer.py`、`section_extractor.py`、`summarizer.py`。据此修正S5依赖图：先退正文消费者并处置指向已删文件的artifact句柄/quality状态，再删物理Markdown；EvidenceSpan表迁移另列S6。
+- 检查本地 `codex/rf-state-audit@447d1c7` 两个纯文档提交：补充报告因ACL拒绝而未完成全量分类，与主线同路径完整审计报告形成冲突；只新增“安全可删0 B/应停止”保守结论，不形成清理候选。未合并覆盖、未改RF。
+- PWF三文件已更新：总计划写明N3a消费边界、未接预测入口及后续实测；S5/S6细则分开物理derived、artifact metadata、EvidenceSpan；findings/progress记载证据与限制。初次细则补丁因目标句实际位于总计划而匹配失败，没有落盘；重新读取定位后已修正确切段落。
+- 本轮没有跑产品测试（代码未改）；下一大节点仍是N4-T2交付与N4C真实样本，随后用当前RF/CWP代码运行pathless N3a离线真实文档端到端。仅Markdown改动，后续执行`git diff --check`与本计划声明核对；不得称RF live ref本轮可达，也不得删除normalized正文或旧span。
+- Git暂存首次因sandbox账户无`.git/index.lock`写权限而失败；未创建/残留index lock，未暂存任何文件。按用户此前授权改用正常权限，只暂存本段列出的四份PWF文档；`config/source_acquisition.yaml`继续排除。
