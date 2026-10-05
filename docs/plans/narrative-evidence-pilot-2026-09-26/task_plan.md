@@ -6,9 +6,9 @@
 
 完成八束整套简化：一个下载请求入口、一套pathless来源接口、一套AUTO任务系统，按需选择业务叙述、摘要和检索；停止全量永久转换与重复正文；完成真实模型、持久预算、可恢复多文档处理及消费者接线，然后分批删除无调用者的旧派生。原件、来源/版本事实不丢。RF/FF/ET/StockWiki/IQS各仓独占写入，不修改其他owner未提交工作。
 
-**当前恢复点（2026-10-05，最新）：**目标active。Flash配置与DeepSeek环境优先已发布；真实 `/models` 两家200，摘要POST尚待token cap答复。N4C累计旧未知账58,523 tokens/33,884microUSD，另保留2,764 FX余量；旧60k只余1,477，不能按8192输出配置再调用。MAIN已退出CWP三个公开全文writer，读兼容夹具在tests/support，旧物理derived/DB spans仍保留。P5-STORAGE交付已到，四项真实schema小试验暴露managed路径误删fixture原文、越界清扫孤立index、中断不续删及缺失文件completed句柄；未验收、未生产清理。RF/FF两线暂无约定HANDOFF，owner工作保持不动。
+**当前恢复点（2026-10-05，最新）：**目标active。Flash配置与DeepSeek环境优先已发布；真实 `/models` 两家200，摘要POST尚待token cap答复。N4C累计旧未知账58,523 tokens/33,884microUSD，另保留2,764 FX余量；旧60k只余1,477，不能按8192输出配置再调用。MAIN已退出CWP三个公开全文writer；P5-STORAGE工具已验收合入e570daf，53个不同case分步GREEN，精确CI37375836745 success。当前S5质量迁移节点施工中，先行10 RED/1通过，新叙述/metadata_only/retired与真实TXT回放已有GREEN，集中责任集尚在收口。生产derived/DB spans未删；RF/FF两线暂无约定HANDOFF，owner工作保持不动。
 
-**最近发布验收：**`a0ea41bd1aef8ffcdf535e065cb9ed5836abaf2b`已推送，commit/pre-push GREEN；[精确SHA CI](https://github.com/zhengcb81/company-wiki/actions/runs/37368647773) completed/success。S5公开writer退休已发布18da250006cb9e409b519198c3f58913b01f0f17；正常pre-push GREEN，精确CI37371220690首attempt失败，唯一job cancelled/runner未分配/steps0；无原因annotation。已同SHA rerun一次HTTP201，远端尚未GREEN。
+**最近发布验收：**工具代码e570daf已推送，[精确SHA CI](https://github.com/zhengcb81/company-wiki/actions/runs/37375836745) completed/success。纯文档0c05c58与origin/master一致。S5公开writer退休18da250的CI37371220690在零step取消后同SHA仅重跑一次，attempt2已success；Flash/环境优先a0ea41b的CI37368647773也已success。本轮质量节点未提交，不把候选测试进度当已发布。
 
 ## 2026-10-05 四仓状态与当前主线
 
@@ -117,7 +117,7 @@ TDD框住公开行为，不把旧签收规则写进新测试。仅S0相关收口
 
 ## Next Step
 
-**MAIN单一下一动作：推进S5的CWP旧底层正文调用者退出与ExtractionQuality的metadata_only语义。**先按CodeGraph/实际caller核证旧generator、EvidenceQuery、quality和新叙述reader的责任，再写公开行为RED、实现、一次相关责任/E2E节点；不恢复公开全文writer，不改原件、不复制旧正文。RF默认SourceRef迁移卡交付后验收并线，确认实际旧正文消费者归零，再用已验收工具执行S5/S6生产derived/span清理与DB压缩。RF/FF外线写集仍保持独立；不重派P5-STORAGE。
+**MAIN单一下一动作：提交/发布S5质量v2节点并观察精确SHA CI，再迁移EvidenceQuery的旧DB正文依赖。**质量v2候选55个不同case已分步GREEN：metadata_only、retired、selected/skip/partial、最终对象损坏/大小/身份/policy绑定、只读与真实MSFT CLI回放。EvidenceQuery尚未迁，旧底层generator仍需实际caller核证。RF默认SourceRef卡交付后验收并线，确认实际旧正文消费者归零，再执行生产derived/span清理与DB压缩。RF/FF外线写集独立；不重派P5-STORAGE、不恢复公开全文writer。
 
 P5-STORAGE已验收并合入/发布：候选`9fa2166`，主线代码`e570dafb92a3f6aaec51176682d348a1c9303535`。53个不同case分步GREEN，真实AMEC年报+微软电话会TXT的原文stdout SHA、新NarrativeRef完整locator replay前后通过，连接关闭及测试根恢复均通过；没有生产删除。工具预览不写库/sidecar、不拿写锁；切片单次范围SQL/聚合小报告；压缩真实前后计量/空间检查，观测失败明确null。所有细节及实际副本空间见[集成审查](harness_lanes/results/p5_storage_integration_review_2026-10-05.md)、[小验收收据](harness_lanes/results/p5_storage_integration_acceptance_2026-10-05.json)、[工具说明](../../../tools/legacy_storage/README.md)。日常Unit CI不添加多分钟解析包。精确新代码[CI37375836745](https://github.com/zhengcb81/company-wiki/actions/runs/37375836745)已completed/success；此前18da250同SHA重跑CI也已success。
 

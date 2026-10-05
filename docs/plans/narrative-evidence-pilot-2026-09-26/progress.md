@@ -709,3 +709,13 @@ S0/N4A及S2模型预算基础、CLI阶段与CI修复已正常发布，当前CI�
 - 下一动作是CWP旧底层caller/质量metadata_only语义，随后接RF默认SourceRef迁移再做生产处置。生产derived/DB本轮没有清理、0外部模型POST；N4C累计token cap问题仍待答，不把key修复或GET200当付费摘要成功。
 
 - 托管归档工具返回queued，附件随后显示archived；正常账号再次核对，Git仍注册且checkout目录存在。手工删除预检因仍注册而停止，零删除；不重复归档/强删。收据更正为物理归档未完成，后续只读复核后台状态，不阻S5代码工作。所有测试根已恢复absent，已发布代码/CI不受影响。
+
+## 2026-10-05 — S5质量迁移节点
+
+- RF/FF约定交付未到，不动其owner写集。CWP当前只有本线quality/projection/只读facade、相关测试/docs和PWF施工；用户source_acquisition原SHA保持3609e707466e…。
+- 节点实施细则先写入S5/S6文档。11个行为先10 RED/1通过15.51s；初次实现8 passed/3 failed14.40s，失败是额外只读连接创建WAL/SHM及活动SHM读标记。复用已有严格只读connection，final通过既有NarrativeBundleReader验证有界bytes、source/selection/quality/policy，输出body-free，不转换raw、不建立永久span。不请求人工review；v2状态合同明确metadata_only/skip。
+- 集中quality/transport/layering责任集51项正在运行（28425），未到GREEN前不提交、不宣称全节点完成。真实MSFT原TXT只读副本经正式质量CLI+transport replay已通过；仍有静态测试fixture需在快照前结束先前cached reader，以区分活动WAL read mark与数据写入。
+
+- 集中51项50 passed/1 failed43.04s；剩余是已有活动SHM read mark被误计数据变更。关闭cached reader仍可留下WAL，15项随后13 passed/2 failed24.69s（四个新case已绿）。静态夹具改为在快照前正规checkpoint/关闭，另独立实测活动WAL可读到新提交source状态，原件、DB/WAL及全部持久文件不变，仅允许SQLite共享读标记。两具体红灯2 passed2.22s。共55个不同case已分步GREEN，不重跑全部旧慢包。
+- 真实原TXT66324B固定SHA通过真实三任务select→Replay summary→verify/publish，再经质量CLI和正式reference/read CLI全引用回放；实际final计数与bundle相等，原件前后SHA不变，退出唯一测试根恢复。0外部模型/网络请求；不是MiMo/DeepSeek live摘要收据。五个本轮basetemp均按绝对tmp范围核验并删除。
+- Ruff/diff-check GREEN，用户配置SHA保持。新15项解析/CLI测试在integration，未添加日常全Unit/快速CI慢门。下一步正常commit/push，精确代码CI后收口PWF发布字段。

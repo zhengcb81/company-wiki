@@ -80,3 +80,11 @@ CodeGraph首查未收录部分旧模块/函数，不能以其“无调用者”�
 P5-STORAGE四操作工具已通过53个不同case分步验收并合入master@e570daf；真实年报+MSFT TXT原文/叙述完整回放和fixture恢复均GREEN。只读预览、当前对象绑定、未unlink恢复、范围SQL切片、实际空间/VACUUM和失败观测已落实；没有执行生产删除。工具位于tools/legacy_storage_retirement.py，操作说明在tools/legacy_storage/README.md；最新节点收据在总PWF/harness_lanes/results/p5_storage_integration_acceptance_2026-10-05.json。旧handoff样本只作历史追溯。
 
 MAIN接下来核实际旧底层generator/EvidenceQuery/ExtractionQuality caller，落实metadata_only与精选叙述reader行为，然后验收RF默认SourceRef迁移。在消费者/质量语义已迁且原文/新final读取可用后，才用该工具处理生产的known legacy范围，报告生产前后实际空间。仍不做全备份恢复演练、不新增人工签收、不重跑每文件小门。
+
+## MAIN当前质量节点实施细则（2026-10-05）
+
+1. `extraction-quality`保持只读诊断，发布明确的v2输出（新的状态不能冒用v1合同）。当前visible叙述包优先；通过既有read-only artifact facade与NarrativeBundle严格合同实读有界final、校验对象SHA和来源绑定，只输出计数/locator，不输出正文、路径或摘要。诊断注明它没有验证当前原件字节；消费者实读仍由正式narrative transport负责SHA与完整回放。不得让质量查询下载、转换全文或调用模型。
+2. 已有旧normalized未退休且无visible final时，保留旧metadata/span一致性检查作为迁移兼容；旧artifact retired后不再读取全量旧span。不要求重建。原件未请求/旧提取退休为metadata_only；有效skip final为skipped_no_narrative；partial/needs_review是技术诊断，非人工签收门；source撤回/无active location仍不可用。final损坏或身份冲突明确报错，不静默退回旧数据。
+3. TDD先覆盖原件only、retired+旧span、selected/skip/partial final优先与无旧span依赖、prepared不提前可见、损坏final拒绝、body-free/只读/locator限额。复用已有真实三任务DAG夹具；关键CLI E2E增加固定SHA的微软原TXT副本，查询质量后正式transport回放，退出恢复测试目录。零网络与外部模型。
+4. 集中相关quality/artifact/transport回归；只新增低成本公开行为到适合的责任包，真实解析E2E仍在integration。不添加日常长CI、逐文件审查或人工授权文件。完成commit/push并观察精确代码SHA CI。
+5. 本节点不等于EvidenceQuery已迁，也不允许生产prune。下一个节点把evidence lookup/list接原件回放/精选包或明确metadata_only；再接RF外线默认v2交付，最后实际旧derived/span处置。

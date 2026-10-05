@@ -549,18 +549,31 @@ def _require_current_identity(row: sqlite3.Row, source: sqlite3.Row | None) -> N
 class NarrativeArtifactReader:
     """Narrow read facade; it cannot create, migrate, prepare or publish artifacts."""
 
-    def __init__(self, database_path: Path, objects: LocalNarrativeObjectStore) -> None:
-        self._reader = ReadOnlyCatalogReader(database_path)
+    def __init__(
+        self, database_path: Path, objects: LocalNarrativeObjectStore,
+        *, connection: sqlite3.Connection | None = None,
+    ) -> None:
+        # A diagnostic can borrow its existing read-only session. The owner
+        # controls its lifetime; close() never closes a borrowed connection.
+        self._reader = ReadOnlyCatalogReader(database_path) if connection is None else None
+        self._connection = connection
         self._objects = objects
 
     def close(self) -> None:
-        self._reader.close()
+        if self._reader is not None:
+            self._reader.close()
+
+    def _fetchone(self, sql: str, params: tuple[str, ...]) -> sqlite3.Row | None:
+        if self._connection is not None:
+            return self._connection.execute(sql, params).fetchone()
+        assert self._reader is not None
+        return self._reader.fetchone(sql, params)
 
     def _version(self, sql: str, params: tuple[str, ...]) -> NarrativeArtifactVersion:
-        row = self._reader.fetchone(sql, params)
+        row = self._fetchone(sql, params)
         if row is None:
             raise NarrativeArtifactNotVisibleError("the narrative artifact is not visible")
-        source = self._reader.fetchone(_CURRENT_SOURCE_SQL, (row["document_id"],))
+        source = self._fetchone(_CURRENT_SOURCE_SQL, (row["document_id"],))
         _require_current_identity(row, source)
         return NarrativeArtifactVersion.from_row(row)
 
@@ -597,7 +610,7 @@ class NarrativeArtifactReader:
             version.object_key, expected_sha256=version.content_sha256,
             expected_size=version.byte_size,
         )
-        if self._reader.fetchone(
+        if self._fetchone(
             _CURRENT_ARTIFACT_SQL, (artifact_version_id, source_id, source_sha256),
         ) is None:
             raise NarrativeSourceNotCurrentError("source changed while reading the artifact")

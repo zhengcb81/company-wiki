@@ -20,9 +20,14 @@ from company_wiki.source_contract import (
 from company_wiki.source_contract.source_manifest import SOURCE_ID_PREFIX
 
 from .models import NORMALIZER_VERSION
+from .narrative_artifact_store import (
+    LocalNarrativeObjectStore, NarrativeArtifactError, NarrativeArtifactReader,
+    NarrativeArtifactNotVisibleError,
+)
+from .reader import CatalogReaderUnavailable
 
 
-EXTRACTION_QUALITY_SCHEMA_VERSION = "1.0.0"
+EXTRACTION_QUALITY_SCHEMA_VERSION = "2.0.0"
 MAX_QUALITY_LOCATOR_REFERENCES = 500
 
 _NORMALIZER_NAME = "source_catalog_normalizer"
@@ -36,7 +41,7 @@ _SEMVER_RE = re.compile(
 _SOURCE_STATUSES = frozenset(
     {"active", "incomplete", "quarantined", "upstream_rejected"}
 )
-_ARTIFACT_STATUSES = frozenset({"completed", "partial", "unsupported", "failed"})
+_ARTIFACT_STATUSES = frozenset({"completed", "partial", "unsupported", "failed", "retired"})
 _BENIGN_QUALITY_FLAGS = frozenset({QualityFlag.OCR_USED.value})
 
 
@@ -46,6 +51,8 @@ class ExtractionQualityState(str, Enum):
     USABLE = "usable"
     REVIEW_REQUIRED = "review_required"
     UNAVAILABLE = "unavailable"
+    METADATA_ONLY = "metadata_only"
+    SKIPPED_NO_NARRATIVE = "skipped_no_narrative"
 
 
 class ExtractionQualityError(ValueError):
@@ -120,6 +127,12 @@ class ExtractionQualityReport:
     quarantined_count: int
     locator_limit: int
     locator_references: tuple[ExtractionLocatorReference, ...]
+    extraction_basis: str = "legacy_normalization"
+    generator_name: str | None = _NORMALIZER_NAME
+    generator_version: str | None = NORMALIZER_VERSION
+    artifact_version_id: str | None = None
+    selection_status: str | None = None
+    coverage_complete: bool | None = None
 
     def to_dict(self) -> dict[str, Any]:
         location_counts = dict(self.location_status_counts)
@@ -143,12 +156,19 @@ class ExtractionQualityReport:
             },
             "normalization": {
                 "artifact_status": self.artifact_status,
-                "generator_name": _NORMALIZER_NAME,
-                "generator_version": NORMALIZER_VERSION,
+                "generator_name": self.generator_name,
+                "generator_version": self.generator_version,
                 "parser_names": list(self.parser_names),
                 "parser_versions": list(self.parser_versions),
                 "quality_flags": list(self.quality_flags),
                 "recorded_span_count": self.recorded_span_count,
+            },
+            "extraction": {
+                "basis": self.extraction_basis,
+                "artifact_version_id": self.artifact_version_id,
+                "selection_status": self.selection_status,
+                "coverage_complete": self.coverage_complete,
+                "raw_bytes_verified": False,
             },
             "counts": {
                 "spans": self.span_count,
@@ -243,10 +263,11 @@ def _artifact_metadata(value: str) -> dict[str, Any]:
 class ExtractionQualityService:
     """Assess existing catalog extraction metadata through enforced read-only SQL."""
 
-    def __init__(self, database_path: Path):
+    def __init__(self, database_path: Path, *, objects: LocalNarrativeObjectStore | None = None):
         if not isinstance(database_path, Path):
             raise TypeError("database_path must be pathlib.Path")
         self.database_path = database_path
+        self._objects = objects if objects is not None else LocalNarrativeObjectStore(database_path.parent)
 
     @contextmanager
     def _connection(self) -> Iterator[sqlite3.Connection]:
@@ -370,7 +391,37 @@ class ExtractionQualityService:
             raise ExtractionQualityIntegrityError(
                 "normalized artifact status is outside the canonical vocabulary"
             )
-        return status, _artifact_metadata(row["metadata_json"])
+        # Retired records are provenance, never a dependency on deleted spans.
+        return status, None if status == "retired" else _artifact_metadata(row["metadata_json"])
+
+    def _narrative(self, connection: sqlite3.Connection, document: sqlite3.Row):
+        """Use the shared bounded bundle contract, never the legacy span table."""
+        from company_wiki.automation.narrative_projection import (
+            NarrativeBundleReader, NarrativeProjectionError,
+        )
+
+        if connection.execute(
+            "SELECT 1 FROM sqlite_master WHERE type='table' AND name='narrative_artifact_versions'"
+        ).fetchone() is None:
+            return None
+        artifacts = NarrativeArtifactReader(self.database_path, self._objects, connection=connection)
+        try:
+            result = NarrativeBundleReader(artifacts).read(
+                document_id=document["document_id"], source_id=document["primary_source_id"],
+                source_sha256=document["content_sha256"],
+            )
+            if (result.bundle.source_ref.byte_size != document["byte_size"]
+                    or result.bundle.source_ref.mime_type != document["mime_type"]):
+                raise ExtractionQualityIntegrityError("narrative source facts differ from catalog")
+            return result
+        except NarrativeArtifactNotVisibleError:
+            return None
+        except (NarrativeArtifactError, NarrativeProjectionError, ValueError) as exc:
+            raise ExtractionQualityIntegrityError("narrative artifact failed validation") from exc
+        except CatalogReaderUnavailable as exc:
+            raise ExtractionQualityUnavailableError("narrative catalog is unavailable") from exc
+        finally:
+            artifacts.close()
 
     @staticmethod
     def _spans(
@@ -499,23 +550,35 @@ class ExtractionQualityService:
                 document_id=resolved_document_id,
                 source_id=resolved_source_id,
             )
-            artifact_status, metadata = self._artifact(
-                connection,
-                document_id=resolved_document_id,
-                source_id=resolved_source_id,
+            narrative = (
+                self._narrative(connection, document)
+                if document["source_status"] == "active" and resolved_source_id is not None
+                else None
             )
-            spans = self._spans(
-                connection,
-                document_id=resolved_document_id,
-                source_id=resolved_source_id,
-            )
-            parser_names, parser_versions, flags, recorded_count = (
-                self._validate_aggregate(
-                    artifact_status=artifact_status,
-                    metadata=metadata,
-                    spans=spans,
+            if narrative is not None:
+                artifact_status = "visible"
+                spans = tuple(sorted(narrative.bundle.evidence_spans, key=lambda s: (s.locator, s.span_id)))
+                parser_names = tuple(sorted({span.parser_name for span in spans}))
+                parser_versions = tuple(sorted({span.parser_version for span in spans}))
+                flags = tuple(sorted({flag for span in spans for flag in span.quality_flags}))
+                recorded_count = len(spans)
+                basis = "selected_narrative"
+            else:
+                artifact_status, metadata = self._artifact(
+                    connection, document_id=resolved_document_id, source_id=resolved_source_id,
                 )
-            )
+                if artifact_status in {None, "retired"}:
+                    spans = ()
+                    parser_names, parser_versions, flags, recorded_count = (), (), (), None
+                    basis = "metadata_only"
+                else:
+                    spans = self._spans(
+                        connection, document_id=resolved_document_id, source_id=resolved_source_id,
+                    )
+                    parser_names, parser_versions, flags, recorded_count = self._validate_aggregate(
+                        artifact_status=artifact_status, metadata=metadata, spans=spans,
+                    )
+                    basis = "legacy_normalization"
 
         status_counts = {status: 0 for status in ParseStatus}
         for span in spans:
@@ -537,15 +600,26 @@ class ExtractionQualityService:
             review_reasons.append("source_incomplete")
         if location_map.get("active", 0) == 0:
             unavailable_reasons.append("no_active_source_location")
-        if artifact_status is None:
-            unavailable_reasons.append("normalization_pending")
-        elif artifact_status == "unsupported":
-            unavailable_reasons.append("normalization_unsupported")
-        elif artifact_status == "failed":
-            unavailable_reasons.append("normalization_failed")
-        elif artifact_status == "partial":
-            review_reasons.append("normalization_partial")
-        if usable_output == 0:
+        skipped = False
+        if narrative is not None:
+            selection = narrative.bundle.selection
+            skipped = selection.status == "skipped_no_narrative"
+            if selection.status == "blocked":
+                unavailable_reasons.append("narrative_blocked")
+            elif selection.status == "partial":
+                review_reasons.append("narrative_partial")
+            elif selection.status == "needs_review" or narrative.bundle.quality_status == "needs_review":
+                review_reasons.append("narrative_needs_review")
+            if not selection.coverage_complete:
+                review_reasons.append("narrative_coverage_incomplete")
+        elif basis == "legacy_normalization":
+            if artifact_status == "unsupported":
+                unavailable_reasons.append("normalization_unsupported")
+            elif artifact_status == "failed":
+                unavailable_reasons.append("normalization_failed")
+            elif artifact_status == "partial":
+                review_reasons.append("normalization_partial")
+        if usable_output == 0 and basis != "metadata_only" and not skipped:
             unavailable_reasons.append("no_usable_evidence")
         if status_counts[ParseStatus.PARTIAL]:
             review_reasons.append("partial_evidence")
@@ -558,11 +632,19 @@ class ExtractionQualityService:
 
         if unavailable_reasons:
             state = ExtractionQualityState.UNAVAILABLE
+        elif basis == "metadata_only":
+            state = ExtractionQualityState.METADATA_ONLY
+        elif skipped:
+            state = ExtractionQualityState.SKIPPED_NO_NARRATIVE
         elif review_reasons:
             state = ExtractionQualityState.REVIEW_REQUIRED
         else:
             state = ExtractionQualityState.USABLE
-        reasons = tuple(unavailable_reasons + review_reasons)
+        reasons = list(unavailable_reasons + review_reasons)
+        if state is ExtractionQualityState.METADATA_ONLY:
+            reasons.append("legacy_extraction_retired" if artifact_status == "retired" else "not_processed")
+        elif state is ExtractionQualityState.SKIPPED_NO_NARRATIVE:
+            reasons.append("skipped_no_narrative")
         references = tuple(
             ExtractionLocatorReference(
                 span_id=span.span_id,
@@ -576,7 +658,7 @@ class ExtractionQualityService:
         )
         return ExtractionQualityReport(
             quality_state=state,
-            reason_codes=reasons,
+            reason_codes=tuple(reasons),
             document_id=resolved_document_id,
             source_id=resolved_source_id,
             source_status=source_status,
@@ -597,6 +679,14 @@ class ExtractionQualityService:
             quarantined_count=status_counts[ParseStatus.QUARANTINED],
             locator_limit=locator_limit,
             locator_references=references,
+            extraction_basis=basis,
+            generator_name=(narrative.artifact.producer_name if narrative is not None else
+                            _NORMALIZER_NAME if basis == "legacy_normalization" else None),
+            generator_version=(narrative.artifact.producer_version if narrative is not None else
+                               NORMALIZER_VERSION if basis == "legacy_normalization" else None),
+            artifact_version_id=narrative.artifact.artifact_version_id if narrative is not None else None,
+            selection_status=narrative.bundle.selection.status if narrative is not None else None,
+            coverage_complete=narrative.bundle.selection.coverage_complete if narrative is not None else None,
         )
 
 

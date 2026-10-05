@@ -128,7 +128,7 @@ def test_healthy_report_is_usable_bounded_and_never_returns_span_bodies(tmp_path
     ).to_dict()
 
     assert public.ExtractionQualityService is quality.ExtractionQualityService
-    assert payload["schema_version"] == "1.0.0"
+    assert payload["schema_version"] == "2.0.0"
     assert payload["quality_state"] == "usable"
     assert payload["reason_codes"] == []
     assert payload["identity"] == {
@@ -184,14 +184,14 @@ def test_partial_page_aware_pdf_requires_review_with_exact_reasons(tmp_path):
 @pytest.mark.parametrize(
     ("mode", "expected_reasons"),
     (
-        ("pending", ["normalization_pending", "no_usable_evidence"]),
+        ("pending", ["not_processed"]),
         (
             "unsupported",
             ["normalization_unsupported", "no_usable_evidence"],
         ),
     ),
 )
-def test_pending_or_unsupported_normalization_is_unavailable(
+def test_unrequested_raw_is_metadata_only_and_unsupported_extraction_is_unavailable(
     tmp_path, mode, expected_reasons
 ):
     fixture = (
@@ -207,7 +207,7 @@ def test_pending_or_unsupported_normalization_is_unavailable(
         .to_dict()
     )
 
-    assert payload["quality_state"] == "unavailable"
+    assert payload["quality_state"] == ("metadata_only" if mode == "pending" else "unavailable")
     assert payload["reason_codes"] == expected_reasons
     assert payload["counts"]["spans"] == 0
 
@@ -432,7 +432,7 @@ roots:
 
 def test_extraction_quality_contract_documents_source_only_boundary():
     root = Path(__file__).resolve().parents[2]
-    contract = (root / "docs" / "contracts" / "extraction-quality-v1.md").read_text(
+    contract = (root / "docs" / "contracts" / "extraction-quality-v2.md").read_text(
         encoding="utf-8"
     )
     operations = (root / "docs" / "source-catalog.md").read_text(encoding="utf-8")

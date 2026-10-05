@@ -17,6 +17,7 @@ from company_wiki.source_catalog.lock import (
 from company_wiki.source_catalog.narrative_artifact_store import (
     NarrativeArtifactDraft,
     NarrativeArtifactError,
+    NarrativeArtifactReader,
     NarrativeArtifactStore,
     NarrativeArtifactVersion,
     NarrativeSourceNotCurrentError,
@@ -33,7 +34,7 @@ from .models import (
     require_canonical_json,
     require_utc_timestamp,
 )
-from .narrative_contracts import NarrativeBundle, NarrativeContractError
+from .narrative_contracts import BUNDLE_MAX_BYTES, NarrativeBundle, NarrativeContractError
 from .narrative_verify import EFFECT_TYPE
 from .store import (
     AutomationStore,
@@ -69,7 +70,7 @@ class NarrativeProjectionError(ValueError):
 class NarrativeBundleReader:
     """Return only hash-checked visible bundles bound to the active source version."""
 
-    def __init__(self, artifacts: NarrativeArtifactStore) -> None:
+    def __init__(self, artifacts: NarrativeArtifactStore | NarrativeArtifactReader) -> None:
         self._artifacts = artifacts
 
     def read(
@@ -79,10 +80,17 @@ class NarrativeBundleReader:
         source_id: str,
         source_sha256: str,
     ) -> NarrativeArtifactRead:
-        artifact, payload = self._artifacts.read_visible(
+        artifact = self._artifacts.latest_visible_version(
             document_id=document_id,
             source_id=source_id,
             source_sha256=source_sha256,
+        )
+        if type(artifact.byte_size) is not int or not 0 < artifact.byte_size <= BUNDLE_MAX_BYTES:
+            raise NarrativeProjectionError("stored narrative bundle exceeds its byte limit")
+        artifact, payload = self._artifacts.read_exact(
+            artifact_version_id=artifact.artifact_version_id,
+            document_id=document_id, source_id=source_id, source_sha256=source_sha256,
+            expected_sha256=artifact.content_sha256, expected_size=artifact.byte_size,
         )
         try:
             text = payload.decode("utf-8", errors="strict")
@@ -101,6 +109,9 @@ class NarrativeBundleReader:
             or source.document_id != document_id
             or source.source_id != source_id
             or source.content_sha256 != source_sha256
+            or bundle.selection.status != artifact.selection_status
+            or bundle.quality_status != artifact.quality_status
+            or bundle.expected_read_policy_sha256 != artifact.policy_sha256
         ):
             raise NarrativeProjectionError(
                 "stored narrative bundle does not match its source binding"

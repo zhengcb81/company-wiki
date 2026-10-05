@@ -65,7 +65,7 @@ python -m company_wiki.source_catalog.cli --config config/source_catalog.yaml ex
 
 `evidence` 按精确 `source_id + locator` 返回已登记的 EvidenceSpan，不做模糊匹配；`evidence-list` 提供有界分页。目前这两项读取 legacy SQLite span，不自动解析或写回原件。新叙述包有独立的 verified raw 回放与 NarrativeRef 读取接口。两者的迁移见 S6，尚不能宣称旧 span 已清除。
 
-`extraction-quality` 是只读来源/解析质量接口：从 artifact 状态、metadata 和 span 判断质量，不包含正文和投资判断，不打开旧 normalized 文件。`usable/review_required/unavailable` 表示来源或解析质量，不表示投资观点获批。详细读边界分别见[Evidence Query v1](contracts/evidence-query-v1.md)和[Extraction Quality v1](contracts/extraction-quality-v1.md)。
+`extraction-quality` 是只读来源/解析质量接口（v2）：优先校验有界精选叙述包，迁移期间兼容未退休的旧提取记录；未请求或已退役为 `metadata_only`，策略跳过为 `skipped_no_narrative`。不返回正文、摘要、路径或投资判断，不打开旧 normalized 文件，不触发全文转换。`review_required` 只是技术诊断；实际消费仍通过正式 reader/transport 验原件SHA并回放引用。详细边界见[Evidence Query v1](contracts/evidence-query-v1.md)和[Extraction Quality v2](contracts/extraction-quality-v2.md)。
 
 ## 重复、指纹与维护
 

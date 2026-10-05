@@ -1,5 +1,9 @@
 # Extraction Quality Diagnostic v1
 
+> Historical contract. The current CLI emits [v2](extraction-quality-v2.md),
+> including metadata_only and selected narrative coverage. Do not regenerate
+> whole-document extraction to satisfy this former contract.
+
 ## Scope
 
 This contract is **source/extraction quality only**. It answers whether an

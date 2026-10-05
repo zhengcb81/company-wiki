@@ -585,3 +585,18 @@ Git写入/联网用正常用户，sandbox .git只读不是产品权限。测试�
 ## P5工具主线验收收口
 
 e570daf已发布，精确CI37375836745 success。53个不同case分步GREEN。真实年报/MSFT TXT stdout SHA及新摘要完整locator replay、实际source facts/new final保持，测试根已恢复；副本derived释放6,360,944B、DB释放30,617,600B，不是生产数字。保留的路径/身份/SHA/事务/资源校验均有实际原件破坏或错误计量RED支撑，没有新增人工签收。工具和测试记录见P5集成审查/验收JSON；下一步实际caller与metadata_only语义迁移。
+
+## S5 质量与读取迁移调查（2026-10-05，进行中）
+
+- 主线0c05c58与远端一致，只有用户source_acquisition配置未提交；RF远端仍8a153f33、两份assurance owner改动，RF/FF约定HANDOFF尚未到。
+- CodeGraph对ExtractionQualityService/EvidenceQueryService构造调用返回零，但已知CLI明确构造两者，属于索引解析遗漏；不能据此删除合法来源查询。旧normalize_catalog仅发现tests/support夹具调用；其余旧generator仍须按实际导入核证。
+- quality现状仅从normalized artifact metadata及全量旧span评估；不接受retired状态，未处理原件被归unavailable/normalization_pending，新visible narrative没有入口。evidence查询仍直接读取旧DB span，尚未迁移。新叙述transport已有当前来源/对象SHA/完整locator回放，不复制第二套读取实现。
+- 本节点先框住quality对metadata_only、精选/跳过/不完整叙述及旧retired的公开行为。质量诊断不等于字节已验证；真正读取继续走现有transport。未处理不自动转换、不建全量span，不新增人工review门。
+- 本轮首次PWF patch用了不存在的英文标题，验证失败且零写入；按已读尾部精确锚点更新。
+
+- 11个新公开行为case先10 RED/1通过（15.51s）；第一次实现8 GREEN/3失败（14.40s）。实际TXT质量CLI与完整回放已通过，未调用外部模型。三处树变化为SQLite旁文件：新包facade另开只读连接时可创建WAL/SHM；改为借用质量查询既有只读session，关闭facade不关闭借用session。静态无WAL仍immutable，已有活动WAL的SHM读标记可合法变化，不能等同正文/事实写入。
+- 当前生产叙述批次与正式transport均以config.catalog_dir作为LocalNarrativeObjectStore根；quality允许注入对象store，默认同目录。没有猜多个目录尝试读，亦未新增对象位置配置或第二状态库。
+- 一个多文件patch最后使用错误source属性名，整patch校验失败、零写入；随即按content_sha256真实字段修正。两次literal搜索误猜不存在的factory/RF src路径，改用已知batch及结构发现，不据缺路径推断无caller。
+
+- 静态快照前只关闭cached reader不足以清空旧WAL，改在fixture setup阶段正规checkpoint/关闭；没有在实际quality里执行checkpoint或写SQL，也没有删除WAL绕过验证。活动WAL独立测试保留DB/WAL/原件及全部持久内容相等，容许仅SHM协调读标记变化。SQLite官方说明reader有end mark，wal-index使用映射共享内存，最后关闭会checkpoint/清理旁文件：[SQLite WAL](https://www.sqlite.org/wal.html)。本机SHM变化与read mark机制一致，属于由官方机制及实测作出的判断。
+- 最终质量v2 55个不同case分步GREEN，真实TXT回放/恢复通过。新增final大小在读取前检查，精确版本固定后读，policy/selection绑定冲突不静默fallback。schema只升级该诊断2.0.0，不改变NarrativeRef/read/SourceRef及RF正式wire。生产没有执行清理，EvidenceQuery旧span依赖仍待下一节点。
