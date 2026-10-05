@@ -522,3 +522,11 @@ S0/N4A及S2模型预算基础、CLI阶段与CI修复已正常发布，当前CI�
 - CodeGraph与定向源码检索确认旧`SourceCatalog`全文normalize/summarize API仍存在，旧合同测试仍调用；`src/`、`scripts/`未发现这些包装方法的业务入口直接调用。旧LLM/extractive summary与sections流程仍读取normalized正文。CodeGraph对同名方法caller存在错配风险，未用其零结果作为删除依据。
 - 先检查RF：用只读的每命令`safe.directory`参数读取本地refs，未改全局Git配置。RF当前本地`main@6fb2def7`、`fcap@5319ee26`、缓存`origin/main@8a153f33`；tracked owner改动共3,835项，含3,833项execution_runs删除和2项weekly assurance修改。读取缓存`origin/main`源码确认`source_reader_v2=False`；本轮没有网络live检查，也没有修改RF。
 - 这让S5下一动作更明确：先完成N4-T2与N4C，使新叙述reader有实际Worker产物和RF N3a实样证据；RF默认SourceBundle转换之前不得删除旧normalized/summary/sections或span。旧写者代码退役、物理文件清理、DB span收缩分别保留为不同的大节点。本轮为PWF只读收据，未改生产代码或数据。
+
+## 2026-10-05 — S5真实derived与SQLite空间实测
+
+- 使用正常用户工作目录 `C:\Users\郑曾波\Projects\company-wiki`，确认resolved root不是sandbox overlay；只读盘点 `.source_catalog/derived`，未遍历/打开公司原件。无reparse entries。
+- derived共7,104文件、2,826,010,634 B：normalized Markdown 3,528个、2,748,621,075 B；sections 596个、67,624,394 B；summary Markdown 2,980个、9,765,165 B。normalized占约97.3%，决定S5先解决RF默认normalized读取，再争取主要空间收益；旧消费者迁移之前不删除这些文件或相应handle。
+- SQLite以`mode=ro&immutable=1`和`query_only=ON`打开：746,055 pages、freelist 0、1,490,530 EvidenceSpan；artifact状态计数：normalized completed 4,842、partial 127、unsupported 15；sections completed 238；summary completed 2,969。没有写库、VACUUM或全库副本。
+- 上次Stage A已释放的138,648,023 B为受限缓存逻辑长度；本次derived实测仍为2,826,010,634 B。两者集合不同，当前不把旧释放量当作本轮收益，也不把文件逻辑大小等同于磁盘free-space。原件、数据库和配置未修改。本轮PWF记录的`git diff --check`与推送门将在提交时复验；不跑产品测试。
+- 同一轮对CWP origin执行只读`git ls-remote --heads`，live `master@66a4eb1`；远端只见既有N4-T1匹配分支，没有N4-T2分支。当前Codex线程/工件列表也没有N4-T2收据；这是“尚未收到”的证据，不表示外部非Codex harness已停止。RF本轮只查本地refs/owner状态，没做live fetch。

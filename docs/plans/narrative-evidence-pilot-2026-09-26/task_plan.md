@@ -25,6 +25,8 @@
 
 **S5旧写者与RF依赖核验（2026-10-05）：**CWP `SourceCatalog` 仍公开 `normalize/summarize/summarize_with_llm` 包装方法，底层旧normalizer、extractive/LLM summarizer与section extractor仍在；针对 `src/` 和 `scripts/` 的精确引用检索没有发现业务入口直接调用这些包装方法，旧合同测试仍大量调用。`llm_summarizer.py`、`summarizer.py`、`section_extractor.py` 仍经 `read_verified_normalized_text` 读取物理normalized正文。RF缓存 `origin/main@8a153f3` 的 `source_reader_v2` 默认值仍是 `false`，旧SourceBundle仍承担默认读取。故先在N4C验证新叙述产物，再由RF owner切换并验默认消费；之前保留旧reader、artifact句柄和文件，不能把“CWP没有自动Worker”当成“RF已不读旧产物”。RF当前本地 `main@6fb2def`、`fcap@5319ee2` 与缓存 `origin/main@8a153f3` 不同；工作树有3,835项tracked变化（3,833项历史execution_runs删除、2项assurance文件修改），均为owner状态，本线不清理/修改。本轮未做live fetch。
 
+**S5空间实测（2026-10-05，真实用户工作目录，只读）：**`.source_catalog/derived` 为7,104个文件/2,826,010,634 B：3,528个 `normalized.md` 共2,748,621,075 B（约97.3%），596个 `sections` 文件共67,624,394 B，2,980个 `summary.md` 共9,765,165 B。normalized是降容的首要目标；成功迁移前不得删。只读SQLite结果为page_count 746,055、freelist 0、EvidenceSpan 1,490,530；artifact行有normalized completed 4,842/partial 127/unsupported 15、sections completed 238、summary completed 2,969。该扫描不触碰companies原件、不写数据库；文件逻辑长度不是已释放磁盘空间，未来删除后仍需实测free-space。
+
 ## 当前基线（2026-10-04正常用户上下文复核）
 
 | 项目 | 已发布/已验收事实 | 本机状态与本轮边界 |
