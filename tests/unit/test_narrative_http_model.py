@@ -200,6 +200,43 @@ def test_empty_response_is_invalid_envelope_not_a_transport_failure(stub):
     assert len(stub.calls) == 1
 
 
+@pytest.mark.parametrize("overrides,stage", [
+    ({"choices": []}, "choices"),
+    ({"choices": [{"message": {"content": 123}}]}, "content_type"),
+    ({"choices": [{"message": {"content": ""}}]}, "empty_content"),
+    ({"model": None}, "model_identity"),
+    ({"base_resp": {"status_code": 1008, "status_msg": KEY}}, "provider_error"),
+])
+def test_invalid_envelope_keeps_safe_stage_and_reported_usage(stub, overrides, stage):
+    from company_wiki.automation.narrative_http_model import ModelEnvelopeError
+
+    stub.body = _response(**overrides)
+    with pytest.raises(ModelEnvelopeError) as caught:
+        _model(endpoint=stub.endpoint, allow_local_http=True).generate(REQUEST)
+    error = caught.value
+    assert error.response_stage == stage
+    assert error.http_status == 200
+    assert (error.input_tokens, error.output_tokens) == (73, 19)
+    assert error.provider_code == (1008 if stage == "provider_error" else None)
+    assert KEY not in str(error) and REQUEST.data_json not in str(error)
+    assert len(stub.calls) == 1
+
+
+def test_invalid_json_and_provider_text_are_not_copied_into_diagnostics(stub):
+    from company_wiki.automation.narrative_http_model import ModelEnvelopeError
+
+    for body, stage in [(KEY.encode(), "json"),
+                        (_response(error={"code": KEY, "message": REQUEST.data_json}), "provider_error")]:
+        stub.body = body
+        with pytest.raises(ModelEnvelopeError) as caught:
+            _model(endpoint=stub.endpoint, allow_local_http=True).generate(REQUEST)
+        error = caught.value
+        assert error.response_stage == stage and error.provider_code is None
+        assert KEY not in str(error) and REQUEST.data_json not in str(error)
+        if stage == "json":
+            assert error.input_tokens is error.output_tokens is None
+
+
 def test_request_cap_stops_before_http(stub):
     model = _model(endpoint=stub.endpoint, allow_local_http=True, max_request_bytes=10)
     with pytest.raises(ModelResponseError, match="MODEL_REQUEST_TOO_LARGE"):

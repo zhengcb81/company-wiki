@@ -297,7 +297,7 @@ def test_configured_llm_uses_mimo_when_primary_credentials_are_absent(monkeypatc
     client = build_configured_llm_client(project, project / "config.yaml")
 
     assert client.provider == "mimo"
-    assert client.model == "mimo-v2.5-pro"
+    assert client.model == "mimo-v2.6-flash"
     assert client.available is True
     assert client.workload == "source"
 

@@ -13,6 +13,7 @@ from .execution_context import JobExecutionContext
 from .models import HandlerMetrics, HandlerOutcome, canonical_json_hash
 from .narrative_http_model import (
     ModelCredentialsError,
+    ModelEnvelopeError,
     ModelHTTPError,
     ModelOutputTruncatedError,
     ModelRequestTooLargeError,
@@ -46,6 +47,8 @@ class NarrativeBudgetCallError(Exception):
     outcome: HandlerOutcome
     metrics: HandlerMetrics
     http_status: int | None = None
+    response_stage: str | None = None
+    provider_code: int | None = None
 
     def __post_init__(self) -> None:
         if self.http_status is not None and (
@@ -54,6 +57,10 @@ class NarrativeBudgetCallError(Exception):
             raise ValueError(
                 "http_status must be an integer between 100 and 599 or None"
             )
+        if self.response_stage is not None and self.response_stage not in ModelEnvelopeError.stages:
+            raise ValueError("invalid response diagnostic stage")
+        if self.provider_code is not None and (type(self.provider_code) is not int or not 0 < self.provider_code < 1_000_000):
+            raise ValueError("invalid numeric provider code")
 
     def __str__(self) -> str:
         return self.code
@@ -157,6 +164,7 @@ class BudgetedNarrativeCaller:
             code, outcome = "MODEL_RESPONSE_INVALID", HandlerOutcome.TERMINAL_FAILURE
             usage = None
             http_status = None
+            response_stage = provider_code = None
             duration_ms = max(0, int((time.monotonic() - started) * 1000))
             if isinstance(error, ModelTimeoutError):
                 code, outcome = "MODEL_TIMEOUT", HandlerOutcome.RETRYABLE
@@ -177,6 +185,11 @@ class BudgetedNarrativeCaller:
                 http_status = error.status_code
             elif isinstance(error, ModelCredentialsError):
                 code, usage = "MODEL_CREDENTIALS_INVALID", ModelUsage(0, 0)
+            elif isinstance(error, ModelEnvelopeError):
+                http_status, response_stage, provider_code = error.http_status, error.response_stage, error.provider_code
+                duration_ms = error.duration_ms
+                if error.input_tokens is not None and error.output_tokens is not None:
+                    usage = ModelUsage(error.input_tokens, error.output_tokens)
             elif isinstance(error, ModelOutputTruncatedError):
                 code, duration_ms = "MODEL_OUTPUT_TRUNCATED", error.duration_ms
                 if error.input_tokens is not None and error.output_tokens is not None:
@@ -193,7 +206,8 @@ class BudgetedNarrativeCaller:
                 no_output=True,
             )
             raise NarrativeBudgetCallError(
-                code, outcome, metrics, http_status=http_status
+                code, outcome, metrics, http_status=http_status,
+                response_stage=response_stage, provider_code=provider_code,
             ) from None
         usage = None
         if response.input_tokens is not None and response.output_tokens is not None:

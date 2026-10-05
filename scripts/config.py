@@ -11,7 +11,7 @@
 import os
 import copy
 import yaml
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from pathlib import Path
 from typing import Optional, Dict, Any, List
 import logging
@@ -25,12 +25,16 @@ _DEFAULT_DOWNLOADER_ROOT = (
 )
 
 _PROJECT_DOTENV_AUTHORITATIVE_KEYS = frozenset(
-    {"MINIMAX_API_KEY", "MIMO_API_KEY", "DEEPSEEK_API_KEY"}
+    {"MINIMAX_API_KEY", "MIMO_API_KEY"}
 )
 
 
 def _load_dotenv():
-    """Load project .env; its managed LLM keys override stale inherited values."""
+    """Load managed keys; DeepSeek's environment key takes precedence.
+
+    MiniMax/MiMo use this project's managed keys. DeepSeek is configured in the
+    user's environment; .env supplies it only when that variable is absent.
+    """
     if os.environ.get("PYTHON_DOTENV_DISABLED", "").casefold() in {"1", "true", "yes"}:
         return
     # 查找 .env: 先看项目根目录，再看当前工作目录
@@ -78,7 +82,7 @@ class LLMFallbackConfig:
     provider: str = "mimo"
     api_key: str = ""
     api_key_env: str = "MIMO_API_KEY"
-    model: str = "mimo-v2.5-pro"
+    model: str = "mimo-v2.6-flash"
     base_url: str = "https://token-plan-cn.xiaomimimo.com/v1"
     enabled: bool = True
     usage_scope: str = "general"
@@ -147,11 +151,13 @@ class Config:
     _raw: Dict[str, Any] = field(default_factory=dict)
     
     @classmethod
-    def load(cls, config_path: Optional[Path] = None) -> 'Config':
+    def load(cls, config_path: Optional[Path] = None, *,
+             llm_provider: Optional[str] = None) -> 'Config':
         """
         加载配置
         
-        优先级: 项目 .env 中受管 LLM Key > 环境变量 > config.yaml > 默认值
+        优先级: MiniMax/MiMo 项目受管 Key；DeepSeek 环境变量优先、.env 补缺。
+        模型参数来自 config.yaml，其次代码默认值。
         
         Args:
             config_path: 配置文件路径，默认为 ~/company-wiki/config.yaml
@@ -182,6 +188,7 @@ class Config:
         
         # 构建配置对象
         config = cls._build_config(raw_config, config_path.parent)
+        config.llm = config.llm_for_provider(llm_provider)
         
         # 验证配置（测试模式下使用宽松验证）
         is_test = os.getenv("PYTEST_CURRENT_TEST") is not None
@@ -189,6 +196,29 @@ class Config:
         
         config._raw = raw_config
         return config
+
+    def llm_for_provider(self, provider: Optional[str] = None) -> LLMConfig:
+        """Select an existing provider profile without changing persisted config.
+
+        Primary and configured fallback retain their exact model/endpoint. Other
+        providers use this loader's defaults with the shared generation settings.
+        Credentials stay runtime-only. Selection is explicit; this does not retry.
+        """
+        if provider is None or provider == self.llm.provider:
+            return self.llm
+        fallback = self.llm.fallback
+        if provider == fallback.provider:
+            if not fallback.enabled:
+                raise ValueError("configured fallback is disabled")
+            return replace(self.llm, provider=fallback.provider, api_key=fallback.api_key,
+                           api_key_env=fallback.api_key_env, model=fallback.model,
+                           base_url=fallback.base_url)
+        generation = {name: getattr(self.llm, name) for name in (
+            "max_tokens", "max_document_chars", "temperature", "reasoning_split")}
+        selected = self._build_config({"llm": {"provider": provider, **generation}},
+                                      self.paths.wiki_root)
+        selected.validate(strict=False)
+        return replace(selected.llm, fallback=fallback)
     
     @staticmethod
     def _apply_env_overrides(raw: Dict[str, Any]) -> Dict[str, Any]:
@@ -220,8 +250,8 @@ class Config:
         llm_raw = raw.get("llm", {})
         provider_defaults = {
             "minimax": ("MINIMAX_API_KEY", "MiniMax-M3", "https://api.minimaxi.com/v1"),
-            "mimo": ("MIMO_API_KEY", "mimo-v2.5-pro", "https://token-plan-cn.xiaomimimo.com/v1"),
-            "deepseek": ("DEEPSEEK_API_KEY", "deepseek-v4-flash", "https://api.deepseek.com"),
+            "mimo": ("MIMO_API_KEY", "mimo-v2.6-flash", "https://token-plan-cn.xiaomimimo.com/v1"),
+            "deepseek": ("DEEPSEEK_API_KEY", "deepseek-flash", "https://api.deepseek.com"),
             "openai": ("OPENAI_API_KEY", "gpt-4", "https://api.openai.com/v1"),
             "claude": ("ANTHROPIC_API_KEY", "claude-3-opus-20240229", "https://api.anthropic.com"),
         }

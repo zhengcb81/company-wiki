@@ -15,10 +15,12 @@ from company_wiki.automation.models import canonical_json
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(add_help=False, allow_abbrev=False)
     parser.add_argument("--llm-config", type=Path)
+    parser.add_argument("--llm-provider", choices=("minimax", "mimo", "deepseek", "openai"))
     parser.add_argument("--allow-local-model-http", action="store_true")
     args, batch_args = parser.parse_known_args(argv)
     try:
-        options = model_options_from_config(Config.load(args.llm_config).llm)
+        options = model_options_from_config(
+            Config.load(args.llm_config, llm_provider=args.llm_provider).llm)
         if args.allow_local_model_http:
             options["allow_local_http"] = True  # HTTP adapter still requires a loopback IP.
     except (OSError, TypeError, ValueError):

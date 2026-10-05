@@ -1,0 +1,232 @@
+{
+  "schema_version": "n4c-live-experiment/1",
+  "run_id": "n4c-20261005-live-configured-04",
+  "model_options": {
+    "model_id": "MiniMax-M3",
+    "endpoint": "https://api.minimaxi.com/v1/chat/completions",
+    "api_key_env": "MINIMAX_API_KEY",
+    "max_output_tokens": 8192,
+    "temperature": 1.0,
+    "output_token_field": "max_completion_tokens",
+    "reasoning_split": true
+  },
+  "metadata_is_fixture": true,
+  "rf_head": "8a153f3387ae75fb172e70f8ab63ffd38100779a",
+  "prior_budget": {
+    "old": {
+      "run_id": "n4c-20261004-wave1",
+      "charged_tokens": 10325,
+      "charged_micro_usd": 5258,
+      "charged_output_bytes": 0,
+      "unknown_reservations": 1,
+      "unsettled_reservations": 0
+    },
+    "run02": {
+      "run_id": "n4c-20261005-live-disabled-02",
+      "charged_tokens": 23335,
+      "charged_micro_usd": 11322,
+      "charged_output_bytes": 0,
+      "unknown_reservations": 2,
+      "unsettled_reservations": 0
+    },
+    "run03": {
+      "run_id": "n4c-20261005-live-configured-03",
+      "charged_tokens": 0,
+      "charged_micro_usd": 0,
+      "charged_output_bytes": 0,
+      "unknown_reservations": 0,
+      "unsettled_reservations": 0
+    },
+    "charged_tokens": 33660,
+    "charged_micro_usd": 16580
+  },
+  "pricing_basis": {
+    "official_url": "https://platform.minimax.cn/docs/pricing/overview",
+    "checked_date": "2026-10-05",
+    "currency": "CNY",
+    "input_per_million_tokens": "2.10",
+    "output_per_million_tokens": "8.40",
+    "tier": "standard, input <=512k; no cache discount assumed",
+    "fx_reference_url": "https://www.ecb.europa.eu/stats/shared/pdf/eurofxref.pdf",
+    "fx_reference_date": "2026-10-02",
+    "eur_usd": "1.1225",
+    "eur_cny": "7.5259",
+    "accounting_cny_per_usd_floor": "6",
+    "historical_fx_guard_micro": 2764,
+    "billing_mode": "unconfirmed; assume full PAYG, no subscription credit",
+    "cost_is_provider_invoice": false
+  },
+  "caps": {
+    "tokens": 26340,
+    "micro_usd": 80656,
+    "model_concurrency": 1,
+    "profile": "P4"
+  },
+  "samples": [
+    {
+      "sample_id": "P04",
+      "kind": "prospectus",
+      "source_sha256": "19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+      "batch_status": "blocked_human",
+      "errors": [
+        "DEPENDENCY_TERMINAL",
+        "MODEL_RESPONSE_INVALID"
+      ]
+    },
+    {
+      "sample_id": "SKIP",
+      "kind": "ir_policy",
+      "source_sha256": "8426d6353bb5717b70e3eb4eb9221a291de292056e93483aeb4387136847e780",
+      "batch_status": "completed",
+      "errors": [],
+      "rf_reference_exit": 1
+    }
+  ],
+  "checks": {
+    "originals_unchanged": true,
+    "production_unchanged": true,
+    "user_config_unchanged": true,
+    "rf_owner_unchanged": true
+  },
+  "cleanup": {
+    "before": "absent",
+    "after": "absent",
+    "restored": true
+  },
+  "batch_pid": 24044,
+  "batch_result": {
+    "budget": {
+      "estimated_micro_usd": 17304,
+      "tokens": 24863,
+      "unknown_reservations": 1,
+      "unsettled_reservations": 0
+    },
+    "documents": [
+      {
+        "artifact_ref": null,
+        "document_id": "urn:company-wiki:document:sha256:19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+        "errors": [
+          "DEPENDENCY_TERMINAL",
+          "MODEL_RESPONSE_INVALID"
+        ],
+        "status": "blocked_human"
+      },
+      {
+        "artifact_ref": {
+          "artifact_version_id": "narrative-4511c773ef4149d883ee9bdd65218766",
+          "byte_size": 1418,
+          "content_sha256": "c68da14184433be6dc08c03ef9515a1b7a3199be82c22d8c04e577ae04cf4374",
+          "document_id": "urn:company-wiki:document:sha256:8426d6353bb5717b70e3eb4eb9221a291de292056e93483aeb4387136847e780",
+          "source_id": "urn:company-wiki:source:sha256:8426d6353bb5717b70e3eb4eb9221a291de292056e93483aeb4387136847e780",
+          "source_sha256": "8426d6353bb5717b70e3eb4eb9221a291de292056e93483aeb4387136847e780"
+        },
+        "document_id": "urn:company-wiki:document:sha256:8426d6353bb5717b70e3eb4eb9221a291de292056e93483aeb4387136847e780",
+        "errors": [],
+        "status": "completed"
+      }
+    ],
+    "run_id": "n4c-20261005-live-configured-04",
+    "schema_version": "narrative-batch-result/1",
+    "status": "failed",
+    "storage": {
+      "persistent_added_bytes": 468924,
+      "scratch_peak_bytes": 1418
+    }
+  },
+  "returncode": 2,
+  "batch_seconds": 79.651,
+  "peak_process_tree_rss": 444825600,
+  "peak_test_root_bytes": 12008815,
+  "reservations": [
+    {
+      "attempt_id": "771f61de440e46d8ba27a13614d6e8d2",
+      "run_id": "n4c-20261005-live-configured-04",
+      "job_id": "e9ca17717ca22c53",
+      "request_sha256": "ea2b29f1848ec3636d753c222b9d8efcc8770aec5bddda86c52692ea3dceacc8",
+      "input_tokens_bound": 16671,
+      "max_output_tokens": 8192,
+      "output_bytes_bound": 2097152,
+      "reserved_micro_usd": 17304,
+      "usage_status": "unknown",
+      "input_tokens": null,
+      "output_tokens": null,
+      "estimated_micro_usd": null,
+      "response_sha256": null,
+      "error_code": "MODEL_RESPONSE_INVALID",
+      "output_bytes": 0,
+      "output_sha256": null,
+      "reserved_at": "2026-10-05T19:49:34Z",
+      "usage_settled_at": "2026-10-05T19:50:06Z",
+      "output_settled_at": "2026-10-05T19:50:06Z"
+    }
+  ],
+  "model_attempt_reservations": 1,
+  "confirmed_metered_responses": 0,
+  "overall_charged_tokens": 58523,
+  "overall_charged_micro_usd": 33884,
+  "experiment_error": {
+    "type": "AssertionError",
+    "detail": "Traceback (most recent call last):\r\n  File \"C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\n4live05d\\rf-consumer\\narrative_source_preparation.py\", line 17, in <module>\r\n    from company_wiki_narrative_reader import find_narrative_reference, read_narrative_context\r\n  File \"C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\n4live05d\\rf-consumer\\company_wiki_narrative_reader.py\", line 14, in <module>\r\n    from company_"
+  },
+  "final_budget": {
+    "run_id": "n4c-20261005-live-configured-04",
+    "charged_tokens": 24863,
+    "charged_micro_usd": 17304,
+    "charged_output_bytes": 0,
+    "unknown_reservations": 1,
+    "unsettled_reservations": 0
+  },
+  "attempt_diagnostics": [
+    {
+      "job_id": "11a9a575e9db8a84",
+      "job_type": "source.narrative_verify",
+      "attempt_id": "17d9aa911342496d8e18a55a1823100b",
+      "started_at": "2026-10-05T19:48:52Z",
+      "finished_at": "2026-10-05T19:48:52Z",
+      "outcome": "succeeded",
+      "error_code": null,
+      "error_detail": null
+    },
+    {
+      "job_id": "567d0031c9f33d2a",
+      "job_type": "source.narrative_select",
+      "attempt_id": "ebeecadf65904b9e92927d3cacffe287",
+      "started_at": "2026-10-05T19:48:51Z",
+      "finished_at": "2026-10-05T19:49:34Z",
+      "outcome": "succeeded",
+      "error_code": null,
+      "error_detail": null
+    },
+    {
+      "job_id": "568927ea109f6f6c",
+      "job_type": "source.narrative_select",
+      "attempt_id": "b34548bad6014087aaca8d215cd5f186",
+      "started_at": "2026-10-05T19:48:51Z",
+      "finished_at": "2026-10-05T19:48:51Z",
+      "outcome": "succeeded",
+      "error_code": null,
+      "error_detail": null
+    },
+    {
+      "job_id": "e8b0547a9b893c9f",
+      "job_type": "source.narrative_summarize",
+      "attempt_id": "cf59875fcc1248c0a26012b5a9c80e4e",
+      "started_at": "2026-10-05T19:48:52Z",
+      "finished_at": "2026-10-05T19:48:52Z",
+      "outcome": "succeeded",
+      "error_code": null,
+      "error_detail": null
+    },
+    {
+      "job_id": "e9ca17717ca22c53",
+      "job_type": "source.narrative_summarize",
+      "attempt_id": "771f61de440e46d8ba27a13614d6e8d2",
+      "started_at": "2026-10-05T19:49:34Z",
+      "finished_at": "2026-10-05T19:50:06Z",
+      "outcome": "terminal_failure",
+      "error_code": "MODEL_RESPONSE_INVALID",
+      "error_detail": "metered model attempt did not complete"
+    }
+  ],
+  "total_seconds": 82.56
+}

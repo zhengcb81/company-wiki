@@ -130,6 +130,10 @@ class NarrativeSummarizeHandler:
             status = (
                 "" if exc.http_status is None else f" (http_status={exc.http_status})"
             )
+            if exc.response_stage is not None:
+                status += f" (response_stage={exc.response_stage})"
+            if exc.provider_code is not None:
+                status += f" (provider_code={exc.provider_code})"
             return _failure(
                 exc.code,
                 exc.outcome,

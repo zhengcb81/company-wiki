@@ -13,7 +13,7 @@ from llm_client import LLMClient
 
 
 @pytest.mark.unit
-def test_project_dotenv_is_authoritative_for_llm_keys(
+def test_project_dotenv_managed_keys_preserve_deepseek_environment(
     tmp_path: Path, monkeypatch
 ) -> None:
     import config as config_module
@@ -36,7 +36,7 @@ def test_project_dotenv_is_authoritative_for_llm_keys(
 
     assert os.environ["MINIMAX_API_KEY"] == "file-minimax"
     assert os.environ["MIMO_API_KEY"] == "file-mimo"
-    assert os.environ["DEEPSEEK_API_KEY"] == "file-deepseek"
+    assert os.environ["DEEPSEEK_API_KEY"] == "stale-deepseek"
     assert os.environ["TAVILY_API_KEY"] == "inherited-tavily"
 
 
@@ -51,7 +51,7 @@ def test_primary_and_secondary_defaults_are_exact() -> None:
     assert llm.temperature == 1.0
 
     assert llm.fallback.provider == "mimo"
-    assert llm.fallback.model == "mimo-v2.5-pro"
+    assert llm.fallback.model == "mimo-v2.6-flash"
     assert llm.fallback.base_url == "https://token-plan-cn.xiaomimimo.com/v1"
     assert llm.fallback.api_key_env == "MIMO_API_KEY"
     assert llm.fallback.usage_scope == "general"
@@ -105,7 +105,7 @@ def test_mimo_fallback_is_available_for_research_after_owner_override(monkeypatc
     assert client.provider == "minimax"
     assert client.fallback_client is not None
     assert client.fallback_client.provider == "mimo"
-    assert client.fallback_client.model == "mimo-v2.5-pro"
+    assert client.fallback_client.model == "mimo-v2.6-flash"
     assert client.fallback_status == "ready"
 
 
@@ -129,7 +129,7 @@ def test_mimo_token_plan_can_only_be_selected_for_coding(monkeypatch) -> None:
 
     assert client.fallback_client is not None
     assert client.fallback_client.provider == "mimo"
-    assert client.fallback_client.model == "mimo-v2.5-pro"
+    assert client.fallback_client.model == "mimo-v2.6-flash"
 
 
 @pytest.mark.unit

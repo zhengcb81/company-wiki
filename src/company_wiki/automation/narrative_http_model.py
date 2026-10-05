@@ -76,6 +76,30 @@ class ModelOutputTruncatedError(ModelResponseError):
         super().__init__("MODEL_OUTPUT_TRUNCATED")
 
 
+class ModelEnvelopeError(ModelResponseError):
+    """Static response diagnostics and valid usage, without provider text."""
+
+    stages = frozenset({"json", "object", "provider_error", "choices", "message",
+                        "content_type", "empty_content", "model_identity"})
+
+    def __init__(self, response_stage: str, *, http_status: int = 200,
+                 provider_code: int | None = None, input_tokens: int | None = None,
+                 output_tokens: int | None = None, duration_ms: int = 0):
+        if response_stage not in self.stages:
+            raise ValueError("invalid response diagnostic stage")
+        if type(http_status) is not int or not 100 <= http_status <= 599:
+            raise ValueError("invalid response HTTP status")
+        if provider_code is not None and (type(provider_code) is not int or not 0 < provider_code < 1_000_000):
+            raise ValueError("invalid numeric provider code")
+        if (input_tokens, output_tokens) != (None, None) and not all(
+            type(value) is int and value >= 0 for value in (input_tokens, output_tokens)
+        ):
+            raise ValueError("invalid paired response usage")
+        self.response_stage, self.http_status, self.provider_code = response_stage, http_status, provider_code
+        self.input_tokens, self.output_tokens, self.duration_ms = input_tokens, output_tokens, duration_ms
+        super().__init__("MODEL_RESPONSE_INVALID")
+
+
 def _positive_integer(value: int, name: str) -> int:
     if isinstance(value, bool) or not isinstance(value, int) or value <= 0:
         raise ValueError(f"{name} must be a positive integer")
@@ -296,7 +320,7 @@ class NarrativeHTTPModel:
                 if total > self.max_response_bytes:
                     raise ModelResponseTooLargeError("MODEL_RESPONSE_TOO_LARGE")
                 chunks.append(chunk)
-            return self._response(request, b"".join(chunks), started)
+            return self._response(request, b"".join(chunks), started, http_status=response.status)
         except (socket.timeout, TimeoutError):
             raise ModelTimeoutError("MODEL_TIMEOUT") from None
         except (OSError, http.client.HTTPException, ValueError, UnicodeError):
@@ -312,18 +336,39 @@ class NarrativeHTTPModel:
         return remaining
 
     def _response(
-        self, request: NarrativeModelRequest, body: bytes, started: float
+        self, request: NarrativeModelRequest, body: bytes, started: float, *, http_status: int = 200,
     ) -> NarrativeModelResponse:
+        input_tokens = output_tokens = provider_code = None
+        stage = "json"
         try:
             payload = json.loads(body.decode("utf-8"))
+            stage = "object"
+            if not isinstance(payload, dict):
+                raise ValueError("invalid object")
+            usage = payload.get("usage")
+            input_tokens = usage.get("prompt_tokens") if isinstance(usage, dict) else None
+            output_tokens = usage.get("completion_tokens") if isinstance(usage, dict) else None
+            if not all(type(value) is int and value >= 0 for value in (input_tokens, output_tokens)):
+                input_tokens = output_tokens = None
+            base = payload.get("base_resp")
+            numeric_code = base.get("status_code") if isinstance(base, dict) else None
+            if type(numeric_code) is int and 0 < numeric_code < 1_000_000:
+                provider_code = numeric_code
+            if provider_code is not None or payload.get("error"):
+                stage = "provider_error"
+                raise ValueError("provider returned an error")
+            stage = "choices"
             choice = payload["choices"][0]
+            stage = "message"
             content = choice["message"]["content"]
             truncated = choice.get("finish_reason") == "length"
             if content is None and truncated:
                 content = ""
+            stage = "content_type"
             if not isinstance(content, str):
                 raise ValueError("invalid content")
             encoded = content.encode("utf-8")
+            stage = "model_identity"
             actual_model = payload.get("model", self.model_id)
             if not isinstance(actual_model, str) or not actual_model.strip():
                 raise ValueError("invalid model identity")
@@ -336,18 +381,11 @@ class NarrativeHTTPModel:
             AttributeError,
             RecursionError,
         ):
-            raise ModelResponseError("MODEL_RESPONSE_INVALID") from None
+            raise ModelEnvelopeError(stage, http_status=http_status, provider_code=provider_code,
+                input_tokens=input_tokens, output_tokens=output_tokens,
+                duration_ms=max(0, int((time.monotonic() - started) * 1000))) from None
         if len(encoded) > MODEL_RESPONSE_MAX_BYTES:
             raise ModelResponseTooLargeError("MODEL_RESPONSE_TOO_LARGE")
-        usage = payload.get("usage")
-        input_tokens = usage.get("prompt_tokens") if isinstance(usage, dict) else None
-        output_tokens = (
-            usage.get("completion_tokens") if isinstance(usage, dict) else None
-        )
-        if not all(
-            type(value) is int and value >= 0 for value in (input_tokens, output_tokens)
-        ):
-            input_tokens = output_tokens = None
         duration_ms = max(0, int((time.monotonic() - started) * 1000))
         if truncated:
             raise ModelOutputTruncatedError(
@@ -357,7 +395,8 @@ class NarrativeHTTPModel:
                 duration_ms=duration_ms,
             )
         if not encoded:
-            raise ModelResponseError("MODEL_RESPONSE_INVALID")
+            raise ModelEnvelopeError("empty_content", http_status=http_status,
+                input_tokens=input_tokens, output_tokens=output_tokens, duration_ms=duration_ms)
         return NarrativeModelResponse(
             adapter_id=self.adapter_id,
             model_id=actual_model,
@@ -371,6 +410,7 @@ class NarrativeHTTPModel:
 
 __all__ = [
     "ModelCredentialsError",
+    "ModelEnvelopeError",
     "ModelHTTPError",
     "ModelOutputTruncatedError",
     "ModelRequestTooLargeError",

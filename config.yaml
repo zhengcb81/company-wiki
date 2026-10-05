@@ -23,7 +23,7 @@ llm:
   reasoning_split: true
   fallback:
     provider: "mimo"
-    model: "mimo-v2.5-pro"
+    model: "mimo-v2.6-flash"
     base_url: "https://token-plan-cn.xiaomimimo.com/v1"
     enabled: true
     # Human Owner 明确决定允许其作为通用次模型，包含研究工作负载。

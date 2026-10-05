@@ -232,8 +232,8 @@ class LLMClient:
         """获取默认模型"""
         models = {
             "minimax": "MiniMax-M3",
-            "mimo": "mimo-v2.5-pro",
-            "deepseek": "deepseek-v4-flash",
+            "mimo": "mimo-v2.6-flash",
+            "deepseek": "deepseek-flash",
             "openai": "gpt-4",
             "claude": "claude-3-opus-20240229",
         }

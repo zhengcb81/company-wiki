@@ -117,7 +117,7 @@ TDD框住公开行为，不把旧签收规则写进新测试。仅S0相关收口
 
 ## Next Step
 
-**MAIN下一动作：**私有请求降重及英文policy修复已发布`e1cc87f`（134集中回归+3实际CLI/Worker E2E GREEN，精确SHA CI37364555560当前queued）。run03模型前FNF失败且0新增费用，采样竞态TDD修复31 Unit+1 CLI E2E GREEN，独立根已恢复；现在仅做P04+policy有限真实run04，实际入口`scripts/narrative_batch_configured.py`仍由Config.load提供国内MiniMax-M3/8192/温度/reasoning，不临时替换。国内标准价已核：2.10/8.40 CNY每百万input/output（官方pricing/overview，2026-10-05）。账户订阅不推断、不购买，按全额PAYG保守计量；用CNY/USD下限6折算0.35/1.40 USD每百万，并为旧代理价另预留2,764 microUSD汇率余量，不改旧账。run04最多26,340tokens/$0.080656；招股最坏24,863tokens可入场。拿实际usage、final/CWP公开read/RF N3a实读后再按余量推进其他类型，不盲跑四份。原件/生产不改，独立根退出恢复；P5三外线约定handoff尚未交，互斥写集不动。整体N4C、S5/S6仍未完成。
+**MAIN下一动作：**按用户要求实测MiMo/DeepSeek，使用配置入口新增的`--llm-provider`，保持8192/温度/各家地址和Key来源。配置与安全响应诊断集中责任集139 passed（135 Unit +4正式CLI/Worker/HTTP E2E）；默认MiniMax不变，MiMo按已配置fallback选取，DeepSeek复用同一Config已有defaults，不临时改thinking。用户纠正后已统一MiMo `mimo-v2.6-flash`、DeepSeek `deepseek-flash`；二者正式配置 `/models` 均HTTP200、配置模型在清单中。DeepSeek旧401是项目dotenv覆盖有效环境密钥，已TDD修复；无须用户更换密钥，真实摘要POST仍待做。旧试点run04失败且未知用量最坏记账24,863tokens/17,304microUSD，累计58,523/33,884，另保留2,764汇率余量；剩余1,477tokens不足一次配置调用。已询问累计token上限提高到160k、美元仍限$0.10；答复前不突破旧cap。获同意后先MiMo处理P07中文IR、T01英文电话会+零模型policy；DeepSeek同样样本对照。每家独立run/账本，累计包含旧未知账；Mimo Token Plan记Credit与保守PAYG等价费用代理，不能写成现金账单。真实入口→Worker→final→CWP公开read→RF N3a读取，核完整引用/原语言/用量/峰值/重复运行零额外调用并恢复测试根；集中节点验收，不增加小节点人工审查。RF已提交消费模块完整六文件依赖在首次模型POST前校验；本次导出/CLI help实测退出0，零模型，临时根恢复。P5正式交付尚未到，RF live main仍8a153f33、owner两份assurance保持不动。采样修复0ae191a已推送且精确SHA CI37365773471成功。整体N4C、S5/S6未完成。
 
 ## 2026-10-04：新增三张可独立派发的施工卡
 

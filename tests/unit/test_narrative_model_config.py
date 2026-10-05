@@ -126,3 +126,130 @@ def test_configured_composition_preserves_explicit_transport_caps(tmp_path, monk
     for field in ("timeout_seconds", "max_request_bytes", "max_response_bytes"):
         assert actual[field] == raw["model"][field]
     assert "thinking" not in actual and request_path.read_bytes() == before
+
+
+def test_provider_selection_uses_configured_fallback_without_mutating_primary(tmp_path, monkeypatch):
+    monkeypatch.setenv("MIMO_API_KEY", "fixture-mimo-key")
+    path = tmp_path / "config.yaml"
+    path.write_text("llm:\n  provider: minimax\n  max_tokens: 8192\n"
+                    "  temperature: 0.7\n  fallback:\n    provider: mimo\n"
+                    "    model: configured-mimo\n    base_url: https://fallback.example/v1\n",
+                    encoding="utf-8")
+    config = Config.load(path)
+    selected = config.llm_for_provider("mimo")
+    assert (selected.provider, selected.model, selected.base_url) == (
+        "mimo", "configured-mimo", "https://fallback.example/v1")
+    assert selected.api_key == "fixture-mimo-key" and selected.api_key_env == "MIMO_API_KEY"
+    assert (selected.max_tokens, selected.temperature) == (8192, 0.7)
+    assert config.llm.provider == "minimax" and config.llm_for_provider(None) is config.llm
+    assert "fixture-mimo-key" not in json.dumps(model_options_from_config(selected))
+
+
+def test_deepseek_selection_reuses_loader_defaults_and_global_generation(tmp_path, monkeypatch):
+    monkeypatch.setenv("DEEPSEEK_API_KEY", "fixture-deepseek-key")
+    path = tmp_path / "config.yaml"
+    path.write_text("llm:\n  max_tokens: 8192\n  temperature: 0.6\n", encoding="utf-8")
+    config = Config.load(path)
+    selected = config.llm_for_provider("deepseek")
+    defaults = Config._build_config({"llm": {"provider": "deepseek"}}, tmp_path).llm
+    assert (selected.model, selected.base_url, selected.api_key_env) == (
+        defaults.model, defaults.base_url, defaults.api_key_env)
+    assert selected.api_key == "fixture-deepseek-key"
+    assert selected.max_tokens == 8192 and selected.temperature == 0.6
+    assert config.llm.provider == "minimax"
+
+
+def test_provider_selection_respects_disabled_fallback_and_unknown_provider():
+    config = Config()
+    config.llm.fallback.enabled = False
+    with pytest.raises(ValueError, match="disabled"):
+        config.llm_for_provider("mimo")
+    with pytest.raises(ValueError):
+        config.llm_for_provider("misspelled-provider")
+
+
+def test_explicit_provider_validates_selected_key_instead_of_primary(tmp_path, monkeypatch):
+    import config as config_module
+    monkeypatch.delenv("PYTEST_CURRENT_TEST")
+    monkeypatch.setenv("MIMO_API_KEY", "fixture-mimo-key")
+    monkeypatch.delenv("MINIMAX_API_KEY", raising=False)
+    monkeypatch.setenv("TAVILY_API_KEY", "fixture-search")
+    monkeypatch.setenv("WIKI_ROOT", str(tmp_path))
+    monkeypatch.setattr(config_module, "_dotenv_loaded", True)
+    path = tmp_path / "config.yaml"
+    path.write_text("llm:\n  provider: minimax\n", encoding="utf-8")
+    before = path.read_bytes()
+    config = Config.load(path, llm_provider="mimo")
+    assert config.llm.provider == "mimo" and config.llm.api_key == "fixture-mimo-key"
+    assert path.read_bytes() == before
+
+
+@pytest.mark.parametrize("provider", ["mimo", "deepseek"])
+def test_configured_entrypoint_selects_provider_through_authoritative_loader(monkeypatch, provider):
+    import narrative_batch_configured as entrypoint
+    captured = []
+    loaded = []
+
+    def load(path, *, llm_provider=None):
+        loaded.append((path, llm_provider))
+        config = Config()
+        config.llm = config.llm_for_provider(llm_provider)
+        return config
+
+    def batch(args, *, loaded_model_options):
+        captured.append((args, loaded_model_options))
+        return 0
+
+    monkeypatch.setattr(entrypoint.Config, "load", load)
+    monkeypatch.setattr(entrypoint, "batch_main", batch)
+    assert entrypoint.main(["--llm-provider", provider, "--request", "fixture.json"]) == 0
+    assert loaded == [(None, provider)]
+    assert captured[0][0] == ["--request", "fixture.json"]
+    assert captured[0][1]["api_key_env"] == provider.upper() + "_API_KEY"
+    assert captured[0][1]["max_output_tokens"] == 8192
+
+
+@pytest.mark.parametrize("provider,expected", [
+    ("mimo", "mimo-v2.6-flash"), ("deepseek", "deepseek-flash"),
+])
+def test_user_selected_flash_profiles_are_consistent_across_active_defaults(tmp_path, provider, expected):
+    from llm_client import LLMClient
+    selected = Config().llm_for_provider(provider)
+    direct = Config._build_config({"llm": {"provider": provider}}, tmp_path).llm
+    legacy_client = object.__new__(LLMClient)  # No SDK, key read or network.
+    assert selected.model == direct.model == expected
+    assert legacy_client._get_default_model(provider) == expected
+    if provider == "mimo":
+        from company_wiki.config import LLMFallbackConfig
+        assert LLMFallbackConfig().model == expected
+
+
+def test_production_yaml_requests_user_selected_mimo_flash():
+    from pathlib import Path
+    import yaml
+    path = Path(__file__).resolve().parents[2] / "config.yaml"
+    raw = yaml.safe_load(path.read_text(encoding="utf-8"))
+    assert raw["llm"]["fallback"]["model"] == "mimo-v2.6-flash"
+
+
+@pytest.mark.parametrize("environment_present", [True, False])
+def test_deepseek_environment_key_wins_dotenv_which_is_only_a_fallback(
+    tmp_path, monkeypatch, environment_present,
+):
+    import config as config_module
+    monkeypatch.setattr(config_module, "WIKI_ROOT", tmp_path)
+    monkeypatch.setattr(config_module, "_dotenv_loaded", False)
+    monkeypatch.delenv("PYTEST_CURRENT_TEST")
+    monkeypatch.setenv("TAVILY_API_KEY", "fixture-search")
+    monkeypatch.setenv("WIKI_ROOT", str(tmp_path))
+    monkeypatch.delenv("PYTHON_DOTENV_DISABLED", raising=False)
+    if environment_present:
+        monkeypatch.setenv("DEEPSEEK_API_KEY", "environment-fixture-key")
+    else:
+        monkeypatch.delenv("DEEPSEEK_API_KEY", raising=False)
+    (tmp_path / "config.yaml").write_text("llm:\n  provider: minimax\n", encoding="utf-8")
+    (tmp_path / ".env").write_text("DEEPSEEK_API_KEY=dotenv-fixture-key\n", encoding="utf-8")
+    config = Config.load(llm_provider="deepseek")
+    expected = "environment-fixture-key" if environment_present else "dotenv-fixture-key"
+    assert config.llm.api_key == expected
+    assert expected not in json.dumps(model_options_from_config(config.llm))

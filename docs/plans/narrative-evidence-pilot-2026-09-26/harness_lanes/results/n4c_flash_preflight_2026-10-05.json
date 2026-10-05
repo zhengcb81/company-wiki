@@ -1,0 +1,30 @@
+{
+  "schema_version": "n4c-config-provider-preflight/1",
+  "checked_date": "2026-10-05",
+  "checks": [
+    {
+      "provider": "mimo",
+      "model": "mimo-v2.6-flash",
+      "endpoint": "https://token-plan-cn.xiaomimimo.com/v1",
+      "api_key_env": "MIMO_API_KEY",
+      "max_output_tokens": 8192,
+      "temperature": 1.0,
+      "http_status": 200,
+      "configured_model_listed": true
+    },
+    {
+      "provider": "deepseek",
+      "model": "deepseek-flash",
+      "endpoint": "https://api.deepseek.com",
+      "api_key_env": "DEEPSEEK_API_KEY",
+      "max_output_tokens": 8192,
+      "temperature": 1.0,
+      "http_status": 200,
+      "configured_model_listed": true,
+      "environment_preserved": true
+    }
+  ],
+  "model_post_requests": 0,
+  "original_documents_written": false,
+  "api_keys_logged": false
+}

@@ -141,6 +141,22 @@ def test_reservation_hash_binds_local_citation_mapping_even_for_identical_http_b
     assert hashes[0] != hashes[1]
 
 
+def test_malformed_response_still_settles_valid_usage_and_carries_static_diagnostic():
+    from company_wiki.automation.narrative_http_model import ModelEnvelopeError
+
+    ledger = Ledger()
+    model = Model(ledger, error=ModelEnvelopeError("empty_content", input_tokens=50,
+        output_tokens=10, duration_ms=18, http_status=200))
+    with pytest.raises(NarrativeBudgetCallError) as caught:
+        _caller(ledger, model).generate(_context(), REQUEST)
+    error = caught.value
+    assert error.code == "MODEL_RESPONSE_INVALID"
+    assert ledger.settlements[0]["usage"].total_tokens == 60
+    assert (error.metrics.tokens, error.metrics.duration_ms) == (60, 18)
+    assert error.http_status == 200 and error.response_stage == "empty_content"
+    assert error.provider_code is None and model.calls == 1
+
+
 @pytest.mark.parametrize("case", ["denied", "duplicate"])
 def test_admission_failure_never_calls_model(case):
     ledger = Ledger()

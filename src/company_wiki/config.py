@@ -28,7 +28,7 @@ class ConfigError(Exception):
 @dataclass
 class LLMFallbackConfig:
     provider: str = "mimo"
-    model: str = "mimo-v2.5-pro"
+    model: str = "mimo-v2.6-flash"
     base_url: str = "https://token-plan-cn.xiaomimimo.com/v1"
     enabled: bool = True
     usage_scope: str = "general"
@@ -118,7 +118,7 @@ def load_config(
     fallback_raw = llm_raw.get("fallback", {})
     fallback = LLMFallbackConfig(
         provider=fallback_raw.get("provider", "mimo"),
-        model=fallback_raw.get("model", "mimo-v2.5-pro"),
+        model=fallback_raw.get("model", "mimo-v2.6-flash"),
         base_url=fallback_raw.get(
             "base_url", "https://token-plan-cn.xiaomimimo.com/v1"
         ),

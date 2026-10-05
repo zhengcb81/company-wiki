@@ -142,7 +142,7 @@ class TestConfigDefaults:
         llm = LLMConfig()
         assert llm.provider == "minimax"
         assert llm.model == "MiniMax-M3"
-        assert llm.fallback.model == "mimo-v2.5-pro"
+        assert llm.fallback.model == "mimo-v2.6-flash"
         assert llm.max_tokens == 8192
         assert llm.temperature == 1.0
 

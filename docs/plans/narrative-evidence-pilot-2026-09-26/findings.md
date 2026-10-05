@@ -525,6 +525,21 @@ Git写入/联网用正常用户，sandbox .git只读不是产品权限。测试�
 - [ECB 2026-10-02参考率](https://www.ecb.europa.eu/stats/shared/pdf/eurofxref.pdf)：EUR/USD1.1225、EUR/CNY7.5259，推算CNY/USD约6.7046。为本次预算采用更保守下限6，operation价0.35/1.40 USD每百万；不是供应商账单/换汇报价。旧账33,660 tokens/16,580microUSD不改，另保留2,764microUSD历史汇率余量，使run03费用上限80,656microUSD。
 - run03范围固定为P04招股书+synthetic English IR policy。最多26,340tokens；实际配置请求上界24,863，skip零模型。先读真实usage/final/RF接口，不重复四份盲调用；本条记录时尚未POST。RF live main仍8a153f33、owner仅两份assurance变更；P5正式handoff目录没有交付，不能把历史execution_runs/handoff.json当作新交付。
 
+## 2026-10-05 — MiMo/DeepSeek 配置与多供应商实测准备
+
+- 用户要求实测 MiMo 和 DeepSeek，避免只依赖有5小时额度的MiniMax；继续遵守现有Config，不重写生产配置。正常用户读取安全元数据确认三家key均存在。MiMo为已配置fallback：mimo-v2.5-pro / token-plan-cn.xiaomimimo.com/v1；DeepSeek由同一loader已有defaults提供deepseek-v4-flash / api.deepseek.com；共享8192/temperature1.0，不临时改thinking。
+- 增加显式 `--llm-provider` 的配置选择；fallback用现有完整profile，DeepSeek复用已有默认表，主配置和API key均不序列化。六项TDD先RED：不存在选择方法/关键字及CLI未接线；实现后待集中责任测试。这是显式选择，不冒称自动retry/failover已实现。
+- [MiMo官方API](https://mimo.mi.com/docs/en-US/api/chat/openai-api)与[首调用](https://mimo.mi.com/docs/en-US/quick-start/summary/first-api-call)使用max_completion_tokens；思考默认开启，温度实际固定1.0；不切协议。[官方价格](https://mimo.mi.com/docs/en-US/price/pay-as-you-go)公开V2.5-Pro输入未缓存$0.435/百万、输出$0.87/百万；当前是Token Plan专用endpoint，现金费用与Credit消耗须区分，不推定PAYG扣款。
+- [DeepSeek官方价格](https://api-docs.deepseek.com/quick_start/pricing/)仍接受配置的旧别名deepseek-v4-flash，由V4.1-Flash服务；峰值USD输入未缓存0.3/百万、输出1.2/百万，闲时半价。实测仍按峰值/无缓存保守计量。返回model ID可能与请求别名不同，需要实际证明；不先放宽模型身份验证。
+- run04实际失败收据已保存：新增24,863 tokens /17,304 microUSD（usage未知，全部最坏预留）；累计58,523 /33,884，另保留历史FX余量2,764；旧60k只剩1,477 tokens。已询问是否提高累计token cap到160k、仍保留$0.10；得到答复前只做离线准备，不擅自突破旧cap。run04原件、生产、RF owner文件和用户配置均不变，独立测试根恢复。新safe envelope诊断防止以后丢失错误阶段与已知usage；旧未知账不回退。
+
+### 用户纠正后的最新事实（覆盖上段当前模型/凭证判断）
+
+- 用户指定MiMo v2.6 Flash、DeepSeek Flash。实际Config路径确为本仓config.yaml；没有.env模型覆盖项。本仓YAML、脚本Config/default client与typed fallback仍写旧Pro/别名，是本地配置未同步，不是用户指定错误。三个Flash一致性测试先RED，已统一为mimo-v2.6-flash / deepseek-flash；显式自定义旧模型的兼容夹具保留，不批量改历史收据。
+- 用户指出DeepSeek key在环境变量。加载前捕获进程环境（与Windows User scope相同）再请求同一/models：200、flash存在；加载后的key与加载前不同，使用加载后key才401。确定根因是本仓managed dotenv强制覆盖环境密钥。此前“已排除环境覆盖/用户需修复key”的结论撤回：那个比较是在覆盖后进行，没有比较加载前值，证据不充分。
+- TDD纠正环境密钥测试一度被PYTEST_CURRENT_TEST跳过dotenv，修正夹具模拟真实默认load后复现覆盖RED。现在DeepSeek环境优先、dotenv只补缺；MiniMax/MiMo项目受管凭证规则保留。更新旧默认断言并验证：53配置/旧客户端责任tests、16 defaults/legacy来源适配、34最终配置/环境优先tests均GREEN。改后的真实Config `/models`两家均200、Flash都列出，DeepSeek environment_preserved=true；仅安全元数据保存到n4c_flash_preflight_2026-10-05.json，零模型POST。
+- Flash预算代理按[MiMo国内官方价](https://mimo.mi.com/docs/en-US/price/pay-as-you-go)1/2 CNY与FX floor6：0.166667/0.333334 USD每百万；Token Plan [规则](https://mimo.mi.com/docs/en-US/price/token-plan)输入未缓存100、输出200 Credits/token。此前Pro价格是旧配置历史准备依据，未来run不再使用。新driver仍保留旧未知账及$0.10总cap；已发出的160k token cap问题尚未收到批准，真实摘要调用未执行。
+
 
 ## 2026-10-05 — run03零费用失败与空间采样竞态
 

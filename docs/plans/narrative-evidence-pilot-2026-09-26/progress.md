@@ -634,3 +634,20 @@ S0/N4A及S2模型预算基础、CLI阶段与CI修复已正常发布，当前CI�
 - 确定性两个RED复现_tree_bytes的is_file→stat间文件删除竞态；修为一次stat，仅忽略FNF，PermissionError保留。31批次/请求责任测试GREEN，正式CLI+spawned Worker+loopback HTTP删除竞态故障注入1项GREEN（4.75s），原件/foreign jobs不变、final可用、根恢复。Ruff通过。
 - 临时driver的with sqlite3.connect未关闭连接，cleanup WinError32；进程退出后保存小型run03费用/attempt收据，再按绝对路径验证删除唯一scratch。原件SHA和用户配置SHA一致；丢失的峰值/耗时/生产前后fingerprint列明，不伪造。driver已显式close，今后清理前先保存账本，避免丢费用事实。
 - 下一run04仍只P04+policy，配置模型/8192/reasoning不动；run03不增加旧总额，保留26,340tokens/80,656microUSD与2,764microUSD历史汇率余量。N4C未完成，P5写集继续保留。详见harness_lanes/results/n4c_storage_sampling_fix_2026-10-05.md。
+
+## 2026-10-05 — run04结算与三家配置入口验证
+
+- run04实际80秒左右完成批次，但P04模型返回无效envelope且未保留细分阶段/usage，不能判断是供应商错误、正文为空还是其他shape。P04没有final；policy正常跳过。新增24,863tokens/17,304microUSD均为未知响应的最坏结算，不退款；总58,523tokens/33,884microUSD，另保留2,764历史FX余量。原件/生产fingerprint/用户配置/RF owner全不变，独立根恢复；详细JSON已保存。
+- 先TDD复现invalid envelope丢已知usage，再保留静态response_stage、数字provider_code/HTTP status与成对合法usage；不保存原始错误正文、reasoning或Key。真实CLI失败/恢复case证明92已知tokens与111microUSD正确落账，unknown/unsettled均0；恢复零额外HTTP。旧未知费用不重算。先前run04的RF四文件bootstrap不完整；临时driver现从固定RF已提交SHA按AST导出六文件闭包，并在首次模型POST前校验CLI import。真实help退出0、零模型、测试根恢复；没有冒称RF业务实读已验收。
+- 用户要求MiMo与DeepSeek也实测，避免MiniMax5小时额度耗尽。新增Config.llm_for_provider与Config.load(llm_provider=...)，正式配置CLI接受--llm-provider。六项RED先行后20配置Unit GREEN；fallback原配置不变，其他provider共用现有defaults和generation参数，不保存Key，不复制第二套model表。
+- 集中责任集139 passed /8 deselected（35.14s）：135 Unit +4真实CLI/Worker/local HTTP E2E，三家各自token字段/参数、MiMo主配置不可达但fallback正确选中、重复运行零额外调用及独立根恢复均通过。Ruff/diff-check GREEN。一次patch因预期if实际为elif而失败，atomic未改文件；重新读取后精确修正。未以全仓慢测试作为新门。
+- 正常用户真实GET：MiMo清单200，mimo-v2.5-pro在清单；DeepSeek401，key存在、无首尾空白、header字符合法、config等于环境、项目dotenv仅一项定义。没有模型POST，不宣称两家摘要可用。已请求token cap160k/美元仍0.10，以及用户修复DeepSeek配置凭证；答复前继续离线准备。MiMo官方公告旧v2.5-pro于2026-10-21退役，记入配置维护待办，不擅自切v2.6。
+- RF live main再次只读核对8a153f33，仅两份assurance owner变更；三P5约定交接目录无HANDOFF。用户source_acquisition既有变更保留。采样修复0ae191a精确SHA CI37365773471成功。临时模型driver已准备P07/T01+policy对照、聚合run04及后续费用、防重run ID、完整RF依赖、清理前保存收据，不覆盖旧实验。
+
+### 随后用户纠正：Flash模型与DeepSeek环境变量
+
+- 实际本仓YAML/Config/default client/typed fallback仍用旧mimo-v2.5-pro和deepseek-v4-flash；先写3项RED，再按用户指定统一mimo-v2.6-flash / deepseek-flash。保留显式custom模型兼容夹具，更新真正依赖默认配置的断言。53项配置/客户端责任tests GREEN（16.38s），16项defaults/legacy适配GREEN（24.36s）。
+- 初次401的诊断有遗漏：覆盖后config等于环境不代表加载前环境也一样。用户提醒后真实加载前环境key GET200，加载后key不同且GET401；Windows User/Process key相同。旧managed dotenv覆盖有效DeepSeek环境key是根因，无需更换key。移除DeepSeek的强制覆盖，仅环境缺项时dotenv补缺；MiniMax/MiMo受管key规则保持。
+- 测试夹具初版被PYTEST_CURRENT_TEST跳过dotenv，出现不正确RED路径；改成模拟真实默认loader后环境存在case复现覆盖RED、补缺case通过。最终25配置tests+9 defaults=34 passed（10.20s）。修后正式配置两家/models均200，mimo-v2.6-flash与deepseek-flash均存在，环境密钥保留true；小JSON无key/正文，零模型POST。之前请求用户修复DeepSeekkey的问题已失效，已明确告知用户无需更换。
+- 下一真实provider批次需160k token cap问题答复，仍限累计$0.10。Flash代理价与Credits已同步临时driver/交接报告；不声称摘要已完成。配置修正前的旧报告保持历史事实，最新Next Step和preflight报告已经纠正。
+- 发布前Ruff/diff-check GREEN，用户source_acquisition配置SHA仍3609e707466e…，不暂存。本线测试根全部恢复：正常账号删除5个早期sandbox创建的RED目录遇到ACL拒绝，转回创建它们的sandbox执行经绝对路径验证的同一范围删除成功；不是生产权限变更，也未改ACL。旧未知费用SQLite与临时待用driver保留，原件/外包目录未清理。

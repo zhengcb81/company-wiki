@@ -80,7 +80,7 @@ def _prepare(
         raise
 
 
-def _invoke(state, *, llm_config=None, launcher=None):
+def _invoke(state, *, llm_config=None, llm_provider=None, launcher=None):
     env = dict(os.environ)
     env["PYTHONPATH"] = str(Path(__file__).resolve().parents[2] / "src")
     env["PYTHONDONTWRITEBYTECODE"] = "1"
@@ -92,6 +92,8 @@ def _invoke(state, *, llm_config=None, launcher=None):
                       "--llm-config", str(llm_config), "--allow-local-model-http"]
     elif launcher is not None:
         entrypoint = [sys.executable, str(launcher)]
+    if llm_provider is not None:
+        entrypoint += ["--llm-provider", llm_provider]
     process = subprocess.run([
         *entrypoint,
         "--project-root", str(state.root), "--catalog-config", str(state.config_path),
@@ -164,20 +166,26 @@ if __name__ == "__main__":
             state.catalog.close()
 
 
+@pytest.mark.parametrize("provider", ["minimax", "mimo", "deepseek"])
 def test_configured_entrypoint_uses_existing_loader_through_real_worker_and_resume(
-    tmp_path_factory, loopback_model_server, monkeypatch,
+    tmp_path_factory, loopback_model_server, monkeypatch, provider,
 ):
-    monkeypatch.setenv("MINIMAX_API_KEY", KEY)
+    monkeypatch.setenv(provider.upper() + "_API_KEY", KEY)
     with isolated_batch_directory(tmp_path_factory) as root:
         state = _prepare(root, loopback_model_server.endpoint, one_source=True)
         try:
             config_path = root / "llm.yaml"
-            config_path.write_text(
-                "llm:\n  provider: minimax\n  model: stub-model\n"
-                f"  base_url: {loopback_model_server.endpoint.removesuffix('/chat/completions')}\n"
-                "  max_tokens: 8192\n  temperature: 0.7\n  reasoning_split: true\n",
-                encoding="utf-8",
-            )
+            endpoint = loopback_model_server.endpoint.removesuffix('/chat/completions')
+            profile = f"  provider: {provider}\n  model: stub-model\n  base_url: {endpoint}\n"
+            if provider == "mimo":
+                # Exercise explicit fallback selection with a primary that must
+                # never be contacted, rather than replacing production config.
+                profile = ("  provider: minimax\n  model: stale-primary\n"
+                           "  base_url: https://primary.invalid/v1\n  fallback:\n"
+                           f"    provider: mimo\n    model: stub-model\n    base_url: {endpoint}\n")
+            config_path.write_text("llm:\n" + profile
+                                  + "  max_tokens: 8192\n  temperature: 0.7\n  reasoning_split: true\n",
+                                  encoding="utf-8")
             config_before = config_path.read_bytes()
             raw = json.loads(state.request_path.read_text(encoding="utf-8"))
             # A stale competing copy cannot change the configured invocation.
@@ -185,14 +193,17 @@ def test_configured_entrypoint_uses_existing_loader_through_real_worker_and_resu
                                 max_output_tokens=1, thinking="disabled")
             state.request_path.write_text(json.dumps(raw), encoding="utf-8")
             originals = _originals(state)
-            process, result = _invoke(state, llm_config=config_path)
+            process, result = _invoke(state, llm_config=config_path, llm_provider=provider)
             assert process.returncode == 0 and result["status"] == "completed", (process.stderr, result)
             assert loopback_model_server.errors == [] and len(loopback_model_server.requests) == 1
             body = json.loads(loopback_model_server.requests[0][1])
-            assert body["model"] == "stub-model" and body["max_completion_tokens"] == 8192
-            assert body["temperature"] == 0.7 and body["reasoning_split"] is True
-            assert "max_tokens" not in body and "thinking" not in body
-            again, repeated = _invoke(state, llm_config=config_path)
+            token_field = "max_tokens" if provider == "deepseek" else "max_completion_tokens"
+            assert body["model"] == "stub-model" and body[token_field] == 8192
+            assert body["temperature"] == 0.7
+            assert body.get("reasoning_split") is (True if provider == "minimax" else None)
+            assert ({"max_tokens", "max_completion_tokens"} & body.keys()) == {token_field}
+            assert "thinking" not in body
+            again, repeated = _invoke(state, llm_config=config_path, llm_provider=provider)
             assert again.returncode == 0 and repeated["status"] == "completed"
             assert repeated["documents"] == result["documents"]
             assert repeated["budget"] == result["budget"]
@@ -400,5 +411,36 @@ def test_cli_persists_safe_http_status_and_unknown_charge_without_provider_body(
             assert_originals_and_foreign_jobs_untouched(
                 state, originals, output=process.stdout + process.stderr,
             )
+        finally:
+            state.catalog.close()
+
+
+def test_cli_invalid_content_keeps_known_usage_and_safe_stage_on_resume(
+    tmp_path_factory, loopback_model_server,
+):
+    loopback_model_server.response_body = json.dumps({
+        "model": "stub-model", "choices": [{"message": {"content": "", "reasoning_content": KEY},
+                                               "finish_reason": "stop"}],
+        "usage": {"prompt_tokens": 73, "completion_tokens": 19},
+    }).encode()
+    with isolated_batch_directory(tmp_path_factory) as root:
+        state = _prepare(root, loopback_model_server.endpoint, one_source=True)
+        try:
+            originals = _originals(state)
+            process, result = _invoke(state)
+            assert process.returncode == 2 and result["status"] == "failed"
+            assert len(loopback_model_server.requests) == 1 and loopback_model_server.errors == []
+            assert result["budget"] == {"tokens": 92, "estimated_micro_usd": 111,
+                                        "unknown_reservations": 0, "unsettled_reservations": 0}
+            record, = NarrativeRunStore(state.store.db_path).reservations_for_run("cli-e2e")
+            assert record.usage_status == "known" and (record.input_tokens, record.output_tokens) == (73, 19)
+            assert record.error_code == "MODEL_RESPONSE_INVALID" and record.output_bytes == 0
+            attempt = state.store.get_attempt(record.attempt_id)
+            assert attempt.error_detail == "metered model attempt did not complete (http_status=200) (response_stage=empty_content)"
+            again, repeated = _invoke(state)
+            assert again.returncode == 2 and repeated["budget"] == result["budget"]
+            assert len(loopback_model_server.requests) == 1
+            assert_originals_and_foreign_jobs_untouched(state, originals,
+                output=process.stdout + process.stderr + again.stdout + again.stderr)
         finally:
             state.catalog.close()
