@@ -31,3 +31,9 @@ MAIN 独立查询实际 GitHub jobs/steps，以下均一个非空 test job，Run
 并线前后比较 .coverage/config.json 的完整 SHA/size/mtime，以及 output 文件路径/size/mtime清单，均相同。主 checkout 仍仅 tracked `.coverage` dirty，没有暂存；未清理原有 ignored/untracked 文件。原外线工作树保留。
 
 既存 `engines/mimo.py:137` 未定义 logger 是真实未修缺陷；目前回归没有覆盖该路径，不能把本次 CI 绿称为已修复。卡片禁止业务代码改动，本次没有越界；后续有业务修复需求时先写该路径的失败测试再修。全仓 lint 不作为恢复本卡验收的门。PR 分支 push/PR 双触发仍会各跑一次，单次已很短。CODECOV 不再上传，模块覆盖统计仍保留。
+
+## 2026-10-05 live handoff recheck
+
+GitHub API and live remote refs reconfirm completion: PR #1 is closed with `merged=true`, `merged_at=2026-10-04 22:53:12`, and merge SHA `8a33a7f96292af8e6574d98b959703c6d11919eb`. Both remote `master` and `ci/fast-gate` point to that SHA; the local MeetingConverter checkout also has `master` and `origin/master` at that SHA, with only the pre-existing tracked `.coverage` modification visible.
+
+The latest relevant Actions runs are all `completed/success`: master push `37241709261`, PR `37241093118`, and branch push `37241089223`. The original MeetingConverter `HANDOFF.md` still contains pre-merge fields (`head=f1272fd`, `origin/master=3c0b053`, PR open/unmerged); treat those fields as stale. The CWP acceptance receipt and live GitHub state are authoritative. No MeetingConverter files were changed during this recheck.

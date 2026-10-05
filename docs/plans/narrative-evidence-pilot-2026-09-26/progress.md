@@ -460,3 +460,14 @@ S0/N4A及S2模型预算基础、CLI阶段与CI修复已正常发布，当前CI�
 - `ff0eec01137eac23e5142ce7863e20efd27fdfd4` 已推送 `origin/master`；pre-push快速契约门通过。GitHub Actions [37244400156](https://github.com/zhengcb81/company-wiki/actions/runs/37244400156) 对应head SHA完全匹配，最终 `completed/success`（Fast checks Python 3.12）。Ruff、严格类型检查、compileall/config doctor、unit、focused contract、CLI smoke 与 secret scan 均成功。
 - N4-T1的独立收据此前已确认 ACCEPTED/INTEGRATED/PUBLISHED（114项跨层回归加真实loopback HTTP 400持久账本E2E；主线CI run 37241977614 success），此次没有新变更或需补验内容。N4-T2仍待交付。
 - 发布后 `master` 与 `origin/master` 同步；仅保留原用户改动 `config/source_acquisition.yaml` 未提交，没有暂存或覆盖它。
+
+## 2026-10-05 — MeetingConverter外包卡远端复核
+
+- 按用户要求重新核对原始handoff、远端Git refs、PR和Actions。PR #1已closed/merged，merge SHA为`8a33a7f96292af8e6574d98b959703c6d11919eb`；远端`master`与`ci/fast-gate`、本地`master`/`origin/master`均为该SHA。主线push run `37241709261`、PR run `37241093118`、分支push run `37241089223`均success。
+- 发现外仓`HANDOFF.md`的SHA/“PR未合并”段落仍是并线前版本；CWP验收收据和GitHub live状态一致且权威，本轮已在验收收据补充该过期字段说明。外仓文件未修改；MeetingConverter本地仅保留既有tracked `.coverage` dirty状态。
+
+## 2026-10-05 — S5移除无人调用的Worker session launcher
+
+- 源码调用调查确认`WorkerSession`、`WorkerController.open_session()`和`read_desired_state()`无剩余src/scripts生产调用者。移除该旧启动/心跳API与专用循环测试；`worker-status`、`worker-stop`、pause/interlock仍保留，并继续读取和清理升级前写下的runtime snapshot。
+- TDD先以新增契约证明旧API确实退出；最终聚焦`test_source_catalog_control.py`、CLI retirement与automation race共 **55 passed / 17.48s**。Ruff四个改动Python文件及`git diff --check`通过。普通插件自动加载先因环境的`langsmith/pydantic_core` DLL权限在collection前失败；禁用无关插件后同一测试集完整通过（仅pytest.ini中缺asyncio plugin的既有`asyncio_mode` warning）。短路径`tmp/ptworker-s5-sandbox2`已在验证归属后删除。
+- RF只读对账：remote `origin/main@8a153f3387ae75fb172e70f8ab63ffd38100779a`；`fcap`领先0、落后15提交，其3,833个execution_runs删除及两条weekly assurance dirty记录都属于owner WIP，未触碰。远端SourceRef v2仍为opt-in（默认`false`）。用RF/CWP两端都与对应主线匹配的代码跑三仓SourceRef原件复用/篡改拒绝E2E：**1 passed / 8.51s**，未下载或请求外部服务；隔离测试目录已移除。该测试不证明RF默认叙述/derived消费者迁完。

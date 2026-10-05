@@ -1,4 +1,4 @@
-"""Persistent, single-instance controls for the Windows source-catalog worker."""
+"""Persistent controls for automation and cleanup of older catalog workers."""
 
 from __future__ import annotations
 
@@ -15,12 +15,9 @@ from typing import Any, Callable
 from uuid import uuid4
 
 from .code_identity import source_bundle_fingerprint
-from .lock import CatalogOperationLock
 
 
 CONTROL_SCHEMA_VERSION = "1.0"
-RUNTIME_SCHEMA_VERSION = "1.0"
-HEARTBEAT_INTERVAL_SECONDS = 10.0
 
 
 _INVENTORY_NULL_RESULT: dict[str, Any] = {
@@ -537,108 +534,8 @@ def terminate_matching_process(expected: dict[str, Any]) -> bool:
         kernel32.CloseHandle(handle)
 
 
-class WorkerSession:
-    """The owned runtime lease used by one worker process."""
-
-    def __init__(
-        self, controller: "WorkerController", token: str, identity: dict[str, Any]
-    ):
-        self.controller = controller
-        self.token = token
-        self.identity = identity
-        self.closed = False
-
-    def heartbeat(self, status: str, **details: Any) -> None:
-        if self.closed:
-            return
-        current = _read_json(self.controller.runtime_path)
-        if not current or current.get("token") != self.token:
-            return
-        heartbeat_at = self.controller.clock()
-        new_path = details.get("current_path")
-        prev_path = current.get("current_path")
-        if new_path and new_path != prev_path:
-            details["current_path_started_at"] = heartbeat_at
-        elif new_path and new_path == prev_path:
-            started = current.get("current_path_started_at")
-            if started is not None:
-                details["current_path_started_at"] = started
-                details["current_path_elapsed_seconds"] = round(
-                    heartbeat_at - float(started), 1
-                )
-        update = {
-            "heartbeat_at": heartbeat_at,
-            "updated_at": heartbeat_at,
-            "worker_status": status,
-            "current_path": None,
-            "current_path_started_at": None,
-            "current_path_elapsed_seconds": None,
-            "progress_current": 0,
-            "progress_total": 0,
-            "progress_percent": None,
-            "progress_detail": None,
-            "parser_pid": None,
-            "parser_elapsed_seconds": None,
-            "parser_timeout_seconds": None,
-            "parser_ownership": None,
-        }
-        if status != "waiting":
-            update.update(
-                {
-                    "cycle_productive": None,
-                    "next_wait_seconds": None,
-                    "next_wake_reason": None,
-                    "next_wake_at": None,
-                }
-            )
-        update.update(details)
-        current.update(update)
-        _atomic_write_json(self.controller.runtime_path, current)
-
-    def should_stop(self) -> bool:
-        control = self.controller._read_control()
-        return (
-            control["desired_state"] == "paused"
-            or control.get("stop_requested_for") == self.token
-        )
-
-    def wait(self, seconds: float) -> bool:
-        """Wait in small slices; return False as soon as stop is requested."""
-
-        remaining = max(0.0, float(seconds))
-        until_heartbeat = HEARTBEAT_INTERVAL_SECONDS
-        while remaining > 0:
-            if self.should_stop():
-                return False
-            step = min(0.5, remaining)
-            self.controller.sleeper(step)
-            remaining -= step
-            until_heartbeat -= step
-            if until_heartbeat <= 0:
-                self.heartbeat("waiting", progress_detail="waiting for next cycle")
-                until_heartbeat = HEARTBEAT_INTERVAL_SECONDS
-        return not self.should_stop()
-
-    def close(self) -> None:
-        if self.closed:
-            return
-        self.closed = True
-        runtime = _read_json(self.controller.runtime_path)
-        if runtime and runtime.get("token") == self.token:
-            self.controller.runtime_path.unlink(missing_ok=True)
-        lock = _read_json(self.controller.lock_path)
-        if lock and lock.get("token") == self.token:
-            self.controller.lock_path.unlink(missing_ok=True)
-
-    def __enter__(self) -> "WorkerSession":
-        return self
-
-    def __exit__(self, _exc_type: Any, _exc: Any, _traceback: Any) -> None:
-        self.close()
-
-
 class WorkerController:
-    """Persist user intent and manage one safe background worker instance."""
+    """Persist automation intent and inspect or stop an older worker process."""
 
     def __init__(
         self,
@@ -768,10 +665,6 @@ class WorkerController:
         self._write_control(automation_enabled=enabled)
         return self.interlock_state()
 
-    def _require_legacy_runtime_allowed(self) -> None:
-        if self.interlock_state()["automation_enabled"] is not False:
-            raise RuntimeError("automation worker is enabled; legacy worker is interlocked")
-
     @staticmethod
     def _runtime_identity(runtime: dict[str, Any] | None) -> dict[str, Any] | None:
         if not runtime:
@@ -812,17 +705,6 @@ class WorkerController:
         lock = _read_json(self.lock_path)
         if not self._runtime_is_live(lock):
             self.lock_path.unlink(missing_ok=True)
-
-    def read_desired_state(self) -> str:
-        """Return ``desired_state`` without touching runtime or process inventory.
-
-        Used by ``cli.py worker`` and by ``worker.run_forever(control=...)``
-        to check persistent pause without triggering PowerShell subprocess
-        inventory (which can hang/decode-fail on Chinese Windows before the
-        worker has even opened its session). Always returns ``enabled`` or
-        ``paused``.
-        """
-        return self._read_control().get("desired_state") or "paused"
 
     def status(self) -> dict[str, Any]:
         control = self._read_control()
@@ -929,64 +811,6 @@ class WorkerController:
                 )
         return result
 
-    def open_session(self) -> WorkerSession:
-        with CatalogOperationLock(
-            self.catalog_dir,
-            operation="legacy-worker-open-session",
-        ):
-            self._require_legacy_runtime_allowed()
-            if self._read_control()["desired_state"] == "paused":
-                raise RuntimeError("source-catalog worker is paused")
-        self._clear_stale_runtime()
-        existing = _read_json(self.lock_path)
-        if self._runtime_is_live(existing):
-            raise RuntimeError("source-catalog worker is already running")
-        token = uuid4().hex
-        identity = self.process_identity(os.getpid())
-        if not identity:
-            raise RuntimeError("could not identify the worker process")
-        started_at = self.clock()
-        payload = {
-            "schema_version": RUNTIME_SCHEMA_VERSION,
-            "token": token,
-            **identity,
-            "project_root": str(self.project_root),
-            "started_at": started_at,
-            "heartbeat_at": started_at,
-            "updated_at": started_at,
-            "worker_status": "starting",
-            "current_path": None,
-            "progress_current": 0,
-            "progress_total": 0,
-            "progress_percent": None,
-            "progress_detail": None,
-            "cycle_productive": None,
-            "next_wait_seconds": None,
-            "next_wake_reason": None,
-            "next_wake_at": None,
-        }
-        self.lock_path.parent.mkdir(parents=True, exist_ok=True)
-        flags = os.O_CREAT | os.O_EXCL | os.O_WRONLY
-        try:
-            descriptor = os.open(self.lock_path, flags)
-        except FileExistsError as exc:
-            raise RuntimeError("source-catalog worker is already running") from exc
-        try:
-            os.write(
-                descriptor,
-                (json.dumps(payload, ensure_ascii=False, sort_keys=True) + "\n").encode(
-                    "utf-8"
-                ),
-            )
-        finally:
-            os.close(descriptor)
-        try:
-            _atomic_write_json(self.runtime_path, payload)
-        except Exception:
-            self.lock_path.unlink(missing_ok=True)
-            raise
-        return WorkerSession(self, token, identity)
-
     def stop(
         self, *, graceful_timeout_seconds: float = 5.0, force: bool = True
     ) -> dict[str, Any]:
@@ -1040,7 +864,6 @@ class WorkerController:
 
 __all__ = [
     "WorkerController",
-    "WorkerSession",
     "process_identity",
     "terminate_matching_process",
 ]

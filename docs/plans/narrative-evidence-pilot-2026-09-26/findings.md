@@ -364,3 +364,14 @@ Git写入/联网用正常用户，sandbox .git只读不是产品权限。测试�
 - RED：新退休合同先因`SourceCatalog.normalize`仍存在而失败；基于生产调用及下游依赖调查，把目标改为只退休无人调用的自动Worker，并加注释约束normalize API在读者迁移前保留。GREEN集中集：**127 passed / 64.28s**（退休入口、worker control/status、摘要、SourceCatalog pipeline/section、fingerprint）。
 - 初次sandbox运行125 passed/2失败：HTML parser的Windows spawn受受限`<stdin>`/本机权限影响，python-docx etree DLL access denied；按项目正常用户上下文单独复核2 passed，并重跑同一127项完整集全绿。pytest专用目录最终恢复/删除。stdin诊断脚本和一次跨执行账户清理失败均记录为测试工具问题，已按真实脚本入口和原目录owner纠正。
 - 代码和测试限定CWP，未改`config/source_acquisition.yaml`；RF的fcap两份weekly assurance用户记录保持原样。N4-T2/N4C和真实模型运行仍未完成。
+
+## 2026-10-05 — MeetingConverter施工卡当前远端状态
+
+- GitHub API确认PR #1已合并关闭（2026-10-04 22:53:12 UTC），merge SHA `8a33a7f96292af8e6574d98b959703c6d11919eb`；live `master`及`ci/fast-gate` refs相同。run `37241709261`（master push）、`37241093118`（PR）、`37241089223`（分支push）全部`completed/success`。
+- MeetingConverter的原始HANDOFF中base/head/master与PR状态仍记为`3c0b053`/`f1272fd`/open，和后续真实合并状态冲突，属于过期交接字段。CWP的验收收据记录并线和CI绿状态；未改MeetingConverter仓库，既有`.coverage` dirty保持不动。
+
+## 2026-10-05 — S5旧Worker API边界与RF消费者现状
+
+- `WorkerSession/open_session/read_desired_state`已无生产调用者，故本轮可退役其启动/心跳执行面；旧status/stop仍须消费升级前runtime文件，AUTO pause/interlock也仍是实际保留行为。normalize/summarize与normalized仍被CWP质量/证据链及RF默认SourceBundle角色读取，因此目前不能以SourceRef v2代码“存在”推断derived消费者已迁移。
+- RF `origin/main@8a153f3` 含SourceRef v2 opt-in flag与真实三仓离线读原文合同；参数默认`false`，默认source preparation仍输出/使用legacy normalized Markdown、summary、sections角色。`tests/test_source_ref_v2_three_repo_e2e.py`对原文复用与字节损坏拒绝验证通过（1项），但不覆盖N4叙述选材或RF默认consumer切换。
+- RF `fcap`为`origin/main`落后15、没有独有提交；3,833个`.planning/.../execution_runs`删除及两个weekly assurance修改是owner未提交状态，本线没有清理或重写。

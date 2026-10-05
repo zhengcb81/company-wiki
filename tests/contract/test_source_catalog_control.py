@@ -58,6 +58,42 @@ def _controller(tmp_path: Path, processes: _FakeProcesses, **extra):
     return controller
 
 
+def _write_legacy_runtime(
+    controller, identity: dict[str, object], **details: object
+) -> None:
+    """Seed a pre-upgrade runtime receipt without using a retired launcher."""
+    payload: dict[str, object] = {
+        "schema_version": "1.0",
+        "token": "legacy-runtime-token",
+        **identity,
+        "project_root": str(controller.project_root),
+        "started_at": 123450,
+        "heartbeat_at": 123456,
+        "updated_at": 123456,
+        "worker_status": "normalizing",
+        "current_path": None,
+        "current_path_started_at": None,
+        "current_path_elapsed_seconds": None,
+        "progress_current": 0,
+        "progress_total": 0,
+        "progress_percent": None,
+        "progress_detail": None,
+        "parser_pid": None,
+        "parser_elapsed_seconds": None,
+        "parser_timeout_seconds": None,
+        "parser_ownership": None,
+        "cycle_productive": None,
+        "next_wait_seconds": None,
+        "next_wake_reason": None,
+        "next_wake_at": None,
+    }
+    payload.update(details)
+    payload_bytes = json.dumps(payload, sort_keys=True).encode("utf-8")
+    controller.runtime_path.parent.mkdir(parents=True, exist_ok=True)
+    controller.runtime_path.write_bytes(payload_bytes)
+    controller.lock_path.write_bytes(payload_bytes)
+
+
 @pytest.mark.parametrize(
     "payload",
     (
@@ -77,9 +113,8 @@ def test_missing_or_invalid_control_defaults_to_paused(tmp_path, payload):
         controller.control_path.parent.mkdir(parents=True, exist_ok=True)
         controller.control_path.write_text(payload, encoding="utf-8")
 
-    assert controller.read_desired_state() == "paused"
-    with pytest.raises(RuntimeError, match="paused"):
-        controller.open_session()
+    assert controller.interlock_state()["desired_state"] == "paused"
+    assert not hasattr(controller, "open_session")
 
 
 def test_interlock_state_distinguishes_valid_pause_from_missing_control(tmp_path):
@@ -128,8 +163,8 @@ def test_automation_interlock_blocks_legacy_worker_session(tmp_path):
     controller.persist_automation_interlock(True)
 
     controller._write_control(desired_state="enabled", automation_enabled=True)
-    with pytest.raises(RuntimeError, match="automation worker"):
-        controller.open_session()
+    assert controller.interlock_state()["automation_enabled"] is True
+    assert not hasattr(controller, "open_session")
 
 
 def test_atomic_json_write_retries_a_transient_windows_permission_error(
@@ -295,39 +330,6 @@ def test_status_compares_loaded_and_current_code_fingerprints(tmp_path, monkeypa
 
 
 
-def test_worker_session_is_single_instance_and_records_heartbeat(tmp_path):
-    processes = _FakeProcesses()
-    identity = {
-        "pid": os.getpid(),
-        "executable": "C:/Python/python.exe",
-        "creation_time": 123456,
-    }
-    processes.alive[os.getpid()] = identity
-    first = _controller(tmp_path, processes).open_session()
-    first.heartbeat(
-        "waiting",
-        detail="waiting for next cycle",
-        cycle_productive=True,
-        next_wait_seconds=2,
-        next_wake_reason="productive_cycle",
-        next_wake_at=123458,
-    )
-
-    status = _controller(tmp_path, processes).status()
-    assert status["runtime_state"] == "running"
-    assert status["pid"] == os.getpid()
-    assert status["worker_status"] == "waiting"
-    assert status["cycle_productive"] is True
-    assert status["next_wait_seconds"] == 2
-    assert status["next_wake_reason"] == "productive_cycle"
-    assert status["next_wake_at"] == 123458
-    with pytest.raises(RuntimeError, match="already running"):
-        _controller(tmp_path, processes).open_session()
-
-    first.close()
-    assert _controller(tmp_path, processes).status()["runtime_state"] == "stopped"
-
-
 def test_stale_runtime_does_not_report_historical_waiting_as_current(tmp_path):
     processes = _FakeProcesses()
     identity = {
@@ -336,17 +338,19 @@ def test_stale_runtime_does_not_report_historical_waiting_as_current(tmp_path):
         "creation_time": 123456,
     }
     processes.alive[os.getpid()] = identity
-    session = _controller(tmp_path, processes).open_session()
-    session.heartbeat(
-        "waiting",
+    processes.alive.pop(os.getpid())
+    controller = _controller(tmp_path, processes)
+    _write_legacy_runtime(
+        controller,
+        identity,
+        worker_status="waiting",
         cycle_productive=False,
         next_wait_seconds=30,
         next_wake_reason="no_output",
         next_wake_at=123486,
     )
-    processes.alive.pop(os.getpid())
 
-    status = _controller(tmp_path, processes).status()
+    status = controller.status()
 
     assert status["runtime_state"] == "stopped"
     assert status["stale_runtime"] is True
@@ -354,22 +358,21 @@ def test_stale_runtime_does_not_report_historical_waiting_as_current(tmp_path):
     assert status["last_worker_status"] == "waiting"
     assert status["next_wait_seconds"] is None
 
-    session.close()
-
-
-def test_runtime_progress_is_exposed_then_cleared_by_waiting_heartbeat(tmp_path):
+def test_live_legacy_status_exposes_recorded_progress(tmp_path):
     processes = _FakeProcesses()
-    processes.alive[os.getpid()] = {
+    identity = {
         "pid": os.getpid(),
         "executable": "C:/Python/python.exe",
         "creation_time": 123456,
     }
+    processes.alive[os.getpid()] = identity
     controller = _controller(tmp_path, processes)
-    session = controller.open_session()
-
-    session.heartbeat(
-        "normalizing",
+    _write_legacy_runtime(
+        controller,
+        identity,
+        worker_status="normalizing",
         current_path="C:/incoming/report.pdf",
+        current_path_started_at=123450,
         progress_current=1,
         progress_total=4,
         progress_percent=25.0,
@@ -391,76 +394,6 @@ def test_runtime_progress_is_exposed_then_cleared_by_waiting_heartbeat(tmp_path)
     assert active["parser_ownership"] == "windows_job"
     assert active["updated_at"] == active["heartbeat_at"]
 
-    session.heartbeat("waiting")
-    waiting = controller.status()
-    assert waiting["current_path"] is None
-    assert waiting["progress_current"] == 0
-    assert waiting["progress_total"] == 0
-    assert waiting["progress_percent"] is None
-    assert waiting["progress_detail"] is None
-    assert waiting["parser_pid"] is None
-    session.close()
-
-
-def test_stop_polling_does_not_write_a_heartbeat_every_half_second(tmp_path):
-    processes = _FakeProcesses()
-    processes.alive[os.getpid()] = {
-        "pid": os.getpid(),
-        "executable": "C:/Python/python.exe",
-        "creation_time": 123456,
-    }
-    controller = _controller(tmp_path, processes)
-    session = controller.open_session()
-    before = controller.status()["heartbeat_at"]
-
-    assert session.wait(2) is True
-
-    assert controller.status()["heartbeat_at"] == before
-    session.close()
-
-
-def test_long_poll_wait_reports_waiting_instead_of_input_idle(tmp_path):
-    processes = _FakeProcesses()
-    processes.alive[os.getpid()] = {
-        "pid": os.getpid(),
-        "executable": "C:/Python/python.exe",
-        "creation_time": 123456,
-    }
-    controller = _controller(tmp_path, processes)
-    session = controller.open_session()
-
-    assert session.wait(11) is True
-
-    assert controller.status()["worker_status"] == "waiting"
-    session.close()
-
-
-def test_long_poll_heartbeat_preserves_the_current_next_wake_plan(tmp_path):
-    processes = _FakeProcesses()
-    processes.alive[os.getpid()] = {
-        "pid": os.getpid(),
-        "executable": "C:/Python/python.exe",
-        "creation_time": 123456,
-    }
-    controller = _controller(tmp_path, processes)
-    session = controller.open_session()
-    session.heartbeat(
-        "waiting",
-        cycle_productive=False,
-        next_wait_seconds=30,
-        next_wake_reason="no_output",
-        next_wake_at=123486,
-    )
-
-    assert session.wait(11) is True
-
-    status = controller.status()
-    assert status["cycle_productive"] is False
-    assert status["next_wait_seconds"] == 30
-    assert status["next_wake_reason"] == "no_output"
-    assert status["next_wake_at"] == 123486
-    session.close()
-
 
 def test_stop_forces_only_the_exact_recorded_process_identity(tmp_path):
     processes = _FakeProcesses()
@@ -471,7 +404,7 @@ def test_stop_forces_only_the_exact_recorded_process_identity(tmp_path):
     }
     processes.alive[os.getpid()] = identity
     controller = _controller(tmp_path, processes)
-    session = controller.open_session()
+    _write_legacy_runtime(controller, identity)
 
     result = controller.stop(graceful_timeout_seconds=0, force=True)
 
@@ -479,7 +412,6 @@ def test_stop_forces_only_the_exact_recorded_process_identity(tmp_path):
     assert result["forced"] is True
     assert processes.terminated == [identity]
     assert controller.status()["desired_state"] == "enabled"
-    session.close()
 
 
 def test_stop_retries_a_transient_identity_checked_termination_failure(tmp_path):
@@ -503,7 +435,7 @@ def test_stop_retries_a_transient_identity_checked_termination_failure(tmp_path)
         processes,
         terminate_process=flaky_terminate,
     )
-    session = controller.open_session()
+    _write_legacy_runtime(controller, identity)
 
     result = controller.stop(graceful_timeout_seconds=0, force=True)
 
@@ -511,7 +443,6 @@ def test_stop_retries_a_transient_identity_checked_termination_failure(tmp_path)
     assert result["forced"] is True
     assert attempts == [identity, identity]
     assert processes.terminated == [identity]
-    session.close()
 
 
 def test_stop_refuses_to_terminate_a_reused_pid(tmp_path):
@@ -523,7 +454,7 @@ def test_stop_refuses_to_terminate_a_reused_pid(tmp_path):
     }
     processes.alive[os.getpid()] = original
     controller = _controller(tmp_path, processes)
-    session = controller.open_session()
+    _write_legacy_runtime(controller, original)
     processes.alive[os.getpid()] = {**original, "creation_time": 999999}
 
     result = controller.stop(graceful_timeout_seconds=0, force=True)
@@ -531,7 +462,6 @@ def test_stop_refuses_to_terminate_a_reused_pid(tmp_path):
     assert result["runtime_state"] == "stopped"
     assert result["forced"] is False
     assert processes.terminated == []
-    session.close()
 
 
 def test_cli_worker_status_is_lightweight_and_reports_startup_state(
@@ -845,16 +775,17 @@ def test_worker_status_stale_runtime_has_converting_zero_and_last_details(tmp_pa
     }
     processes.alive[os.getpid()] = identity
     controller = _controller(tmp_path, processes)
-    session = controller.open_session()
-    session.heartbeat(
-        "normalizing",
+    processes.alive.pop(os.getpid())
+    _write_legacy_runtime(
+        controller,
+        identity,
+        worker_status="normalizing",
         current_path="C:/incoming/large.pdf",
         progress_current=2,
         progress_total=5,
         progress_percent=40.0,
         progress_detail="extracting Markdown",
     )
-    processes.alive.pop(os.getpid())
 
     status = controller.status()
 
@@ -867,8 +798,6 @@ def test_worker_status_stale_runtime_has_converting_zero_and_last_details(tmp_pa
     assert status["progress_current"] == 0
     assert status["progress_total"] == 0
     assert status["current_path"] is None
-
-    session.close()
 
 
 def test_worker_status_json_includes_status_generated_at(tmp_path):
@@ -945,7 +874,7 @@ def test_status_retries_a_transient_process_identity_read_failure(tmp_path):
         "creation_time": "current-process",
     }
     processes.alive[os.getpid()] = current
-    session = controller.open_session()
+    _write_legacy_runtime(controller, current)
     real_identity = controller.process_identity
     calls = 0
 
@@ -957,11 +886,8 @@ def test_status_retries_a_transient_process_identity_read_failure(tmp_path):
         return real_identity(pid)
 
     controller.process_identity = transient_identity
-    try:
-        assert controller.status()["runtime_state"] == "running"
-        assert calls == 2
-    finally:
-        session.close()
+    assert controller.status()["runtime_state"] == "running"
+    assert calls == 2
 
 
 def test_live_status_computes_current_path_elapsed_from_snapshot_time(tmp_path):
@@ -974,15 +900,17 @@ def test_live_status_computes_current_path_elapsed_from_snapshot_time(tmp_path):
     }
     processes.alive[os.getpid()] = current
     controller.clock = lambda: 1_000.0
-    session = controller.open_session()
-    try:
-        session.heartbeat("normalizing", current_path="C:/source/report.pdf")
-        controller.clock = lambda: 1_190.0
+    _write_legacy_runtime(
+        controller,
+        current,
+        worker_status="normalizing",
+        current_path="C:/source/report.pdf",
+        current_path_started_at=1_000.0,
+    )
+    controller.clock = lambda: 1_190.0
 
-        status = controller.status()
+    status = controller.status()
 
-        assert status["runtime_state"] == "running"
-        assert status["current_path_elapsed_seconds"] == 190.0
-        assert status["long_running_document_warning"] is True
-    finally:
-        session.close()
+    assert status["runtime_state"] == "running"
+    assert status["current_path_elapsed_seconds"] == 190.0
+    assert status["long_running_document_warning"] is True

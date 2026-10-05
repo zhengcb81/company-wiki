@@ -85,6 +85,22 @@ def test_legacy_automatic_worker_is_retired_while_on_demand_sources_remain():
     assert callable(SourceCatalog.summarize_with_llm)
 
 
+def test_legacy_worker_keeps_cleanup_controls_without_a_session_launcher():
+    import company_wiki.source_catalog.control as control
+
+    assert not hasattr(control, "WorkerSession")
+    assert "WorkerSession" not in control.__all__
+    assert not hasattr(control.WorkerController, "open_session")
+    assert not hasattr(control.WorkerController, "read_desired_state")
+    for name in (
+        "status",
+        "stop",
+        "persist_pause_intent",
+        "persist_automation_interlock",
+    ):
+        assert callable(getattr(control.WorkerController, name))
+
+
 def test_retired_section_cli_refuses_before_opening_any_catalog(tmp_path):
     raw = tmp_path / "original.txt"
     original = "公司主营业务进展：本季度新产品完成量产。".encode("utf-8")
