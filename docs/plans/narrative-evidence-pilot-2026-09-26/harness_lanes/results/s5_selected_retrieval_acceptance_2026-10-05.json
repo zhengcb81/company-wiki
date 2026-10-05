@@ -1,0 +1,37 @@
+{
+  "schema_version": "main-node-acceptance/1",
+  "node": "S5 selected narrative retrieval",
+  "state": "local_green_publication_pending",
+  "code_head": null,
+  "published_branch": "master",
+  "ci": null,
+  "tests": {
+    "initial": {"failed": 17, "passed": 38, "seconds": 43.14},
+    "affected_package": {"passed": 100, "failed": 2, "seconds": 106.08},
+    "concrete_refusal_and_retirement_fixes": {"passed": 6, "deselected": 6, "seconds": 23.41},
+    "distinct_cases_green_across_runs": 102,
+    "single_full_102_case_green_run_claimed": false,
+    "old_reference_read_wire_unchanged": true,
+    "persistent_files_and_bytes_unchanged": true
+  },
+  "real_data_e2e": {
+    "original": "MSFT_Q4_2026_earnings_call.txt",
+    "original_bytes": 66324,
+    "sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+    "identity": "synthetic fixture identity; original bytes are the replay oracle",
+    "real_three_job_dag": true,
+    "summary_model": "local ReplayNarrativeModel",
+    "search_and_exact_lookup_cli": true,
+    "complete_locator_replay": true,
+    "original_preserved": true,
+    "fixture_restored": true,
+    "external_llm_posts": 0
+  },
+  "test_roots_restored_absent": ["tmp/s5vred", "tmp/s5vgreen", "tmp/s5vfinal"],
+  "preserved_user_config_sha256": "3609e707466eeb3e0f685e14f2637c6afa39ba900edef1be4814433a43300a01",
+  "production_deletions": 0,
+  "production_span_prune_permitted": false,
+  "rf_main": "8a153f3387ae75fb172e70f8ab63ffd38100779a",
+  "ff_delivery_observed": {"head": "ab9ce33", "code": "7c6cf48", "accepted": false},
+  "next": "Publish exact code/CI, accept FF delivery, close legacy generator callers and RF default migration before production retirement."
+}

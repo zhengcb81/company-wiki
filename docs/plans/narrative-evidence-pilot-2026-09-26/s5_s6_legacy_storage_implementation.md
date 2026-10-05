@@ -97,3 +97,14 @@ MAIN接下来核实际旧底层generator/EvidenceQuery/ExtractionQuality caller�
 - 新读取必须绑定现有artifact版本及source SHA，不以裸loc:v1坐标猜新parser的段落。原始正文读取用现有SourceVersionReader、精选引用用正式transport完整回放；quality v2只用于body-free状态/locator展示，不等于raw验证。
 - TDD集中覆盖退休入口拒绝不建目录/不写库、正常SourceRef原文读、NarrativeRef精选body/locator实读、未请求metadata_only、损坏原件/版本变化具名失败、跳过不造span。对尚有真实v1消费者的路径先迁或仅保留其确实引用的小集合。历史夹具仍可构造旧span，但不得被生产导入。
 - 同节点核sections-list、scanner存在性判断、stats旧artifact/span依赖，分别判定纯诊断可留还是正文入口需退；不能为了删表破坏合法来源检索，也不能因空span自动重建全量。仅在这些责任及RF默认迁移交付已通过后，执行生产C/D。
+
+### 精选查询节点实现细则（MAIN写集，2026-10-05）
+
+1. 正式narrative-read CLI增加精选 `evidence-list` / `evidence-lookup` / `evidence-search` operation；沿用现有NarrativeReadRequest输入及完整transport核验。旧reference/read的字节/receipt wire保持原样。list/lookup/search输出一个pathless来源view及其SHA/size小收据，不输出旧绝对路径或读取旧artifact/span。
+2. view始终固定NarrativeRef.artifact版本；lookup以span_id或已绑定版本的locator精确匹配，零/多匹配具名拒绝，不把旧裸坐标猜成新段落。分页/检索limit上限500，非法输入在raw读取前拒绝。搜索只对已精选正文按现有BM25排序；不要检索模型摘要并当原文。已有分组summary_input纯函数供试点与正式view复用，转换仅在本次内存，不落磁盘。
+3. 正式transport先验原件SHA、来源身份/期次/as-of并完整回放final所有locator；view标明selection/coverage/quality。policy skip返回明确空精选状态，不假造parsed；只有raw无final时沿用reference not-found与quality metadata_only，不自动下载/解析/LLM。损坏当前final/原件绝不落回legacy。
+4. TDD先验证新公开operation、现有wire不变、精确版本/lookup/有界分页/中英搜索/skip，以及坏SHA/as-of和非法参数拒绝。独立端到端使用固定SHA微软原TXT及有业务叙述的合成PDF，中英/跨目录/无旧span场景；测试根退出恢复，原件SHA不变，0模型POST/网络。相关节点一次验收，不逐helper或逐文档加门。
+5. 同步退出source-catalog旧evidence/evidence-list/sections-list运行命令及旧公共backend exports，保留显式历史backend fixture读兼容；旧CLI成功测试改测退出公开入口与正式view，不弱化当前原文/引用校验。scanner引用保护与status计量保留：它们没有生产调度/重建语义。更新运行文档和PWF后commit/push，精确代码CI绿。
+6. RF/FF外线文件不动，生产derived/span暂不删除。新版view接通后仍待RF默认卡验收和旧generator/reader实际caller收口，最后生产处置。已有reference/read/SourceRef/SourceExport正式合同不升级，也不另加人工签收。
+
+**本节点本地验收完成：**102个不同case分步GREEN，集中100 passed/2失败后仅6受影响cases GREEN23.41s，非重跑全包。两处修正是公开错误名与退役旧CLI断言；来源/旧backend事实校验未放宽。真实MSFT TXT search→lookup/全部引用回放/原始SHA、四类型持久文件集合/SHA不变及s5vred/green/final测试根恢复均通过。实际read/reference goldens保持原字节；0外部model POST，0生产删除。Ruff/diff-check GREEN；发布与精确CI待收口。[小收据](harness_lanes/results/s5_selected_retrieval_acceptance_2026-10-05.json)。

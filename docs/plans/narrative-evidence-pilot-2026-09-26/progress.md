@@ -723,3 +723,15 @@ S0/N4A及S2模型预算基础、CLI阶段与CI修复已正常发布，当前CI�
 - 代码dd35d2fc8abb9f7d72e36c0fbc27e7299c6c05f6已commit/push；正常commit GREEN。首次pre-push因本轮临时PYTEST_DISABLE_PLUGIN_AUTOLOAD=1未加载timeout插件而退出，零远端push；仅移除临时变量，正常精选pre-push GREEN后推送成功。没有改门或跳过检查。精确CI37378430383 attempt1 completed/success，全部步骤成功；不是取消后rerun。
 - 后续只读caller调查：328份当前src/scripts/root Python AST仅导入fingerprint backfill、LLMSummaryError和SectionSlice，无旧batch writer直接运行导入；后两项只是public类型兼容，不能据此断言所有动态调用不存在。RF/FF/StockWiki排除.planning、assurance、tests、docs/artifacts后，没有旧EvidenceQuery/quality CLI运行literal引用；初搜未排除历史复制导致噪声，已收敛，不把审计快照当生产caller。RF remote main仍8a153f33/owner两份assurance改动，外线HANDOFF仍未到。
 - 当前生产0删除、0模型POST，用户配置SHA保持3609e707466e…；下一集中节点是旧查询运行入口/精选消费，不复跑已绿quality或P5四操作包。PWF代码发布状态已收口。
+
+## 2026-10-05 — S5正式精选检索节点
+
+- RF外线在独立p5-rf-source-default工作树施工，main仍8a153f33，暂无HANDOFF；MAIN保持隔离。已先写完整精选节点实施细则，再进入测试。实际Config.load核准DeepSeek环境密钥优先与两家Flash模型/参数，零新API POST。
+- 第一轮公开行为TDD 55 collected：17 failed/38 passed，43.14s。RED准确复现新operation不存在、旧evidence/sections CLI及public backend尚未退役；s5vred根恢复absent。
+- 实现只接已有NarrativeTransportReader/精选BM25；旧read/reference wire不变。纯分组函数从现有summary_input抽出，不新增磁盘索引、任务表或provider。新view有版本/身份/selection/coverage及全回放收据；全部filters先于目录/原件打开验证。退出旧三个运行CLI和public EvidenceQuery exports，显式历史backend/夹具校验保留。
+- 增加旧版本固定/新partial版本、真实TXT原语言search→lookup→恢复及API资源输入unit tests。原始raw tamper拒绝沿用resolver已定义content_sha256_mismatch，纠正测试最初猜测的reason，不改校验。一次多文件patch因progress错误锚点整体验证失败、零写入；按实际尾部重做。集中GREEN验收尚未完成；生产derived/span未删。
+
+- 集中相关包102 collected：100 passed/2 failed，106.08s；test root s5vgreen恢复absent。真实MSFT search→lookup、全部locator replay、原始read/reference golden、旧版本固定/partial和中英PDF/TXT/skip均已绿。两处RED分别为新测试猜错公开错误名、历史archive case仍调用退役CLI。实际SourceVersionReader逐location实读SHA失败后公开聚合为unavailable/no_verified_location；内部content_sha256_mismatch不直接透过CLI，生产逻辑保持。修测试为公开语义，archive历史backend原有四类校验全保留，只更新已退出CLI断言。另增加新view读取前后全部持久文件SHA/集合不变证明（仅豁免协调用SHM）。仅复核这6个受影响cases，不重跑106秒全包、不加日常门。
+
+- 六个受影响case复核6 passed/6 deselected、23.41s；s5vfinal根恢复absent。节点102个不同case已分步GREEN，四类持久文件集合/bytes、实际TXT原始文件与引用仍相等。Ruff/diff-check GREEN；用户配置SHA原样，0模型POST/0生产删件。
+- FF正式handoff现已收到，正常OS账号Git核干净ab9ce33；报告code7c6cf48/18+194责任项GREEN，全仓10baseline-red需MAIN按当前下载合同补隔离fixture限额。暂未验收合入。RF远端只读复核仍8a153f33、两处assurance WIP不碰，HANDOFF未到。已校正并行总计划旧“均ready未派发”过期状态，不新建重复卡。当前下一动作是本节点正常commit/push和精确CI，不重复已绿长包。

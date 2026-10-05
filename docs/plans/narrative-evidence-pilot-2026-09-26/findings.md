@@ -604,3 +604,17 @@ e570daf已发布，精确CI37375836745 success。53个不同case分步GREEN。�
 - 发布dd35d2f、精确CI37378430383 attempt1 GREEN。pre-push第一次是本任务禁用插件环境导致--timeout选项不识别，移除该临时变量即GREEN，没有CI代码缺陷或新门。一次误猜tools/pre_commit_gate.py读取失败无写，使用实际正常hook。
 - 328份当前生产Python AST只见normalizer的fingerprint backfill与两项public类型导入（LLMSummaryError/SectionSlice），没有旧batch writer的直接导入。第一次git pathspec *.py也匹配tests，计740；过滤生产前缀后才得328。三外仓当前tracked运行脚本未发现旧EvidenceQuery/质量CLI literal引用；RF有大量.planning/assurance历史复制，不算活动消费者。尚未覆盖动态生成命令或用户手动脚本，不以零匹配证明任意未知消费者不存在。
 - 后续不能把不同parser/version的loc:v1裸坐标默认混用：旧normalizer与当前selector的段落切分可能不同。优先复用已绑定artifact版本的NarrativeRef与完整transport回放；保留source-only查询/预览责任，而不是恢复1.49M永久全量span。此为下一节点实施细则，不冒称已迁。
+
+## S5 精选检索运行接线（2026-10-05，施工中）
+
+- 本次按用户再次提示实读运行配置：DeepSeek使用DEEPSEEK_API_KEY且与进程环境一致，dotenv加载前后不变；模型deepseek-flash/API https://api.deepseek.com。MiMo实际mimo-v2.6-flash/受管token-plan-cn endpoint；两家max_tokens=8192、temperature=1.0，未临时降参数或POST。凭证只输出存在/相等布尔值。旧60k累计额度待答复不由密钥存在替代。
+- 恢复调查中几次rg把通配符当Windows路径、误猜model_factory/操作文档/transport测试路径；均只读无改动。已改为已知具体路径或rg --files的literal发现；CodeGraph宽泛配置context偏离主题且_build_config遗漏，不作为凭证优先级证据，直接读取已知scripts/config.py并用真实Config.load验证。
+
+- fresh主线32d92af与origin一致；RF remote main8a153f33、owner两份assurance改动未变。RF外线codex/p5-rf-source-default已有source_preparation及一组测试WIP，计划在实际`.planning/p5-rf-source-default/task_plan.md`，尚无HANDOFF，保持隔离。误猜其PWF目录/不存在progress只读失败，按git实际路径核查。
+- CodeGraph对SectionQuery构造caller同样漏报；实际CLI有sections-list。该旧查询只读sections metadata且输出物理index/section路径，没有筛除retired状态，不适合作为新接口。EvidenceQuery旧CLI唯一明确当前运行入口；外仓运行literal搜索先前无引用，历史backend可供读夹具，不要求保全全文库。
+- scanner的旧artifact/span EXISTS只是保护尚有引用的空逻辑文档不被扫掉，并不触发重建；status的旧计数是诊断，不是提取调度门。本节点保留这些来源事实保护/计量，不因降容误删document或重新制造全文。
+- `NarrativeEvidenceSearch`已实现内存BM25/中英分词，但只接受早期0.2试点package；resolver仍用source→raw物理路径映射，正式final的运行检索尚未接线。仅删除旧CLI不足以完成用户要求，因此同时接正式NarrativeRef的精选list/lookup/search。复用正式transport原文SHA/完整回放与现有排序，不建设第二磁盘索引/数据库或新权限层。
+
+- 正式view节点现已本地GREEN：102个不同case分步过；全来源verify/replay后才查询，过期裸locator无转换。固定旧版本在新partial final可见后仍返旧spans，技术partial/coverage显式展示；skip零items，所有输入资源边界在打开前验证。summary_input仅抽纯分组函数，旧read/reference golden字节不变。没有调用早期physical resolver或新DB/index。
+- 新测试首猜hash_mismatch再猜resolver内部content_sha256_mismatch均非公开wire；实读SourceVersionReader._verified_version证明SHA失败按location聚合，公开unavailable/no_verified_location。修测试与公开协议一致，完整raw SHA验证不改。历史backend的archive/readonly/hash等测试仍保留，旧CLI迁为未注册断言。
+- FF交接由缺失变已到：实际干净codex/p5-ff-runtime-cleanup@ab9ce33，code7c6cf48，handoff机器schema/2的delivery b5c1c82之后仅文档收尾；尚未MAIN验收。报告463过/10 baseline-red/14skip不是全绿；10处下载fixture未提供CWP限额，下一阶段补fixture真实合同，不新增或放宽门。RF远端仍8a153f33/owner两处assurance、尚无HANDOFF。沙箱读FF Git报dubious ownership，改用真实所有者正常上下文只读，不增加全局safe.directory或改文件。

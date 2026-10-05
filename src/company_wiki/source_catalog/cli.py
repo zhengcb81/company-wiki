@@ -26,8 +26,6 @@ from .acquisition_service import (
 from .canonical_writer import CanonicalSourceWriter
 from .control import WorkerController
 from .duplicate_cleanup import DuplicateCleanupService
-from .evidence_query import EvidenceQueryService
-from .section_query import SectionQueryService
 from .reconcile_retire_state import ReconcileRetireStateService
 from .extraction_quality import ExtractionQualityService
 from .focus_cleanup import FocusScopeCleanupService
@@ -275,27 +273,6 @@ def _parser() -> argparse.ArgumentParser:
     query.add_argument("--document-kind")
     query.add_argument("--source-status")
     query.add_argument("--limit", type=int, default=100)
-
-    evidence = subparsers.add_parser(
-        "evidence", help="look up one exact EvidenceSpan by source ID and locator"
-    )
-    evidence.add_argument("--source-id", required=True)
-    evidence.add_argument("--locator", required=True)
-
-    evidence_list = subparsers.add_parser(
-        "evidence-list", help="list bounded EvidenceSpans for one source or document"
-    )
-    evidence_identity = evidence_list.add_mutually_exclusive_group(required=True)
-    evidence_identity.add_argument("--source-id")
-    evidence_identity.add_argument("--document-id")
-    evidence_list.add_argument("--limit", type=int, default=100)
-    evidence_list.add_argument("--offset", type=int, default=0)
-
-    sections_list = subparsers.add_parser(
-        "sections-list",
-        help="list extracted MD&A / business sections for one document",
-    )
-    sections_list.add_argument("--document-id", required=True)
 
     reconcile_retire = subparsers.add_parser(
         "reconcile-retire",
@@ -1029,22 +1006,6 @@ def main(argv: Sequence[str] | None = None) -> int:
                 document_kind=args.document_kind,
                 source_status=args.source_status,
                 limit=args.limit,
-            )
-        elif args.command == "evidence":
-            result = EvidenceQueryService(config.database_path).lookup(
-                source_id=args.source_id,
-                locator=args.locator,
-            )
-        elif args.command == "evidence-list":
-            result = EvidenceQueryService(config.database_path).list_spans(
-                source_id=args.source_id,
-                document_id=args.document_id,
-                limit=args.limit,
-                offset=args.offset,
-            )
-        elif args.command == "sections-list":
-            result = SectionQueryService(config.database_path).list_sections(
-                document_id=args.document_id,
             )
         elif args.command == "reconcile-retire":
             result = ReconcileRetireStateService(get_catalog().config).reconcile(

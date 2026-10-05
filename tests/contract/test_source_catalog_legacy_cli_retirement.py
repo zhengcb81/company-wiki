@@ -19,6 +19,9 @@ from company_wiki.source_catalog.cli import _parser
         "normalize",
         "summarize",
         "extract-sections",
+        "evidence",
+        "evidence-list",
+        "sections-list",
         "run",
         "worker",
         "worker-start",
@@ -119,7 +122,8 @@ def test_legacy_worker_keeps_cleanup_controls_without_a_session_launcher():
         assert callable(getattr(control.WorkerController, name))
 
 
-def test_retired_section_cli_refuses_before_opening_any_catalog(tmp_path):
+@pytest.mark.parametrize("command", ["extract-sections", "evidence", "evidence-list", "sections-list"])
+def test_retired_section_cli_refuses_before_opening_any_catalog(tmp_path, command):
     raw = tmp_path / "original.txt"
     original = "公司主营业务进展：本季度新产品完成量产。".encode("utf-8")
     raw.write_bytes(original)
@@ -135,7 +139,7 @@ def test_retired_section_cli_refuses_before_opening_any_catalog(tmp_path):
             "company_wiki.source_catalog.cli",
             "--config",
             str(tmp_path / "missing-config.yaml"),
-            "extract-sections",
+            command,
         ],
         cwd=tmp_path,
         env=environment,
@@ -147,3 +151,11 @@ def test_retired_section_cli_refuses_before_opening_any_catalog(tmp_path):
     assert raw.read_bytes() == original
     assert not (tmp_path / ".source_catalog").exists()
     assert not (tmp_path / "derived").exists()
+
+
+def test_old_full_catalog_evidence_backend_is_not_a_public_export():
+    import company_wiki.source_catalog as public
+
+    for name in ("EvidenceQueryService", "EvidenceQueryResult", "EvidenceQueryPage"):
+        assert not hasattr(public, name)
+        assert name not in public.__all__

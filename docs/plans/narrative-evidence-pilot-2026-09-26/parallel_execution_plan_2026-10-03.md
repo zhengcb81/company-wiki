@@ -1,16 +1,16 @@
 # 并行总计划：门禁先行，独立目录施工，MAIN统一打通
 
-> **2026-10-05最新覆盖：**用户已恢复。当前可派发的是[P5三包](harness_lanes/p5_parallel_packages_2026-10-05.md)：RF默认来源迁移、FF旧Worker/有界进程、CWP新降容工具，均ready尚未派发。MAIN继续N4C；旧N4-T1/T2与MeetingConverter卡均已完成。下方旧日期过程只供追溯，不再产生待办或屏障。
+> **2026-10-05最新覆盖：**P5三卡已开工；STORAGE已验收合入e570daf，FF正式交接已到（干净ab9ce33/code7c6cf48）待MAIN验收，RF独立默认迁移仍有WIP且无HANDOFF，不重派。MAIN质量v2已发布/CI绿，正式精选检索102个不同case分步GREEN、当前准备发布；真实模型N4C仅等待累计token cap答复，不阻离线S5。下方旧日期过程只供追溯，不再产生待办或屏障。
 
 ## 当前可立即并行的P5包
 
 | 包 | 独占目录 | 接口与交接 | 何时开工 |
 |---|---|---|---|
-| [P5-RF](harness_lanes/p5_rf_source_default_migration.md) | `Projects/cwp-lanes-20261005/rf-source-v2` | RF SourceRecord/reuse receipt沿用已发布wire；仅RF默认入口迁移 | 现在；不等FF新卡或MAIN模型 |
-| [P5-FF](harness_lanes/p5_ff_runtime_simplification.md) | `Projects/cwp-lanes-20261005/ff-runtime-cleanup` | SourceRef/companion wire不变；删除旧编排、共用有界进程 | 现在；不等RF默认迁移 |
+| [P5-RF](harness_lanes/p5_rf_source_default_migration.md) | `Projects/cwp-lanes-20261005/rf-source-v2` | RF SourceRecord/reuse receipt沿用已发布wire；仅RF默认入口迁移 | 已在施工；无HANDOFF，不碰其写集/不重派 |
+| [P5-FF](harness_lanes/p5_ff_runtime_simplification.md) | `Projects/cwp-lanes-20261005/ff-runtime-cleanup` | SourceRef/companion wire不变；删除旧编排、共用有界进程 | 已交付，MAIN待验收/修隔离fixture限额与跨仓离线链，不重派 |
 | [P5-STORAGE](harness_lanes/p5_storage_retirement_engine.md) | `Projects/cwp-lanes-20261005/cwp-storage-tool` | 新tools/专属tests；四维护操作及`cwp-storage-retirement/1`小报告 | 已验收合入/发布e570daf，53项分步GREEN；生产清理由MAIN在迁caller后做，不重派 |
 
-绝对目录、准备命令、精确写集、测试/清根及统一handoff字段见[P5总包](harness_lanes/p5_parallel_packages_2026-10-05.md)。各卡可独立交给外部harness；本总表与CWP总PWF只由MAIN改。未收到派发消息不把ready写成running。
+绝对目录、准备命令、精确写集、测试/清根及统一handoff字段见[P5总包](harness_lanes/p5_parallel_packages_2026-10-05.md)。三卡不再派发，本总表与CWP总PWF只由MAIN改。交付不等于已验收或已并入主线。
 
 ## 现在能交给外部harness的包
 

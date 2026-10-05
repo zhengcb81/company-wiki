@@ -128,19 +128,26 @@ class NarrativeEvidencePackage:
 
     def summary_input(self) -> dict[str, Any]:
         """Return selected evidence only; the full document is never included."""
-        grouped = _group_spans(self.evidence_spans)
-        evidence = [
+        return selected_summary_input(
+            source_id=self.source_id, source_sha256=self.source_sha256,
+            document_kind=self.document_kind, evidence_spans=self.evidence_spans,
+        )
+
+
+def selected_summary_input(
+    *, source_id: str, source_sha256: str, document_kind: str,
+    evidence_spans: tuple[EvidenceSpan, ...],
+) -> dict[str, Any]:
+    """Group selected spans in memory for summary input or original-text search."""
+    return {
+        "schema_version": "narrative-summary-input/0.2.0",
+        "source_id": source_id, "source_sha256": source_sha256,
+        "document_kind": document_kind, "summary_scope": "selected_evidence_only",
+        "evidence": [
             _summary_group(group_id, members)
-            for group_id, members in grouped.items()
-        ]
-        return {
-            "schema_version": "narrative-summary-input/0.2.0",
-            "source_id": self.source_id,
-            "source_sha256": self.source_sha256,
-            "document_kind": self.document_kind,
-            "summary_scope": "selected_evidence_only",
-            "evidence": evidence,
-        }
+            for group_id, members in _group_spans(evidence_spans).items()
+        ],
+    }
 
 
 def _group_spans(
@@ -217,4 +224,5 @@ __all__ = [
     "NarrativeEvidencePackage",
     "NarrativeParseResult",
     "NarrativeUnit",
+    "selected_summary_input",
 ]

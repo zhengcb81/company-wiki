@@ -1,5 +1,10 @@
 # Evidence Query v1
 
+> Historical fixture contract (2026-10-05). The public export and CLI described
+> below are retired. Explicit `company_wiki.source_catalog.evidence_query` remains
+> read-compatible for historical fixtures. Canonical runtime retrieval uses
+> [pinned selected narrative views](narrative-evidence-view-v1.md).
+
 ## Scope
 
 `company_wiki.source_catalog.EvidenceQueryService` is an exact, read-only access

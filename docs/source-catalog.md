@@ -58,25 +58,26 @@ python scripts/narrative_batch_configured.py --llm-provider mimo `
 ## 精确证据与质量读取
 
 ```powershell
-python -m company_wiki.source_catalog.cli --config config/source_catalog.yaml evidence --help
-python -m company_wiki.source_catalog.cli --config config/source_catalog.yaml evidence-list --help
+python -m company_wiki.source_catalog.narrative_transport_cli --config config/source_catalog.yaml --help
 python -m company_wiki.source_catalog.cli --config config/source_catalog.yaml extraction-quality --help
 ```
 
-`evidence` 按精确 `source_id + locator` 返回已登记的 EvidenceSpan，不做模糊匹配；`evidence-list` 提供有界分页。目前这两项读取 legacy SQLite span，不自动解析或写回原件。新叙述包有独立的 verified raw 回放与 NarrativeRef 读取接口。两者的迁移见 S6，尚不能宣称旧 span 已清除。
+正式 `narrative_transport_cli` 使用已有NarrativeReadRequest从stdin读取，提供 `--operation evidence-list`、`evidence-lookup`、`evidence-search --query "海外"`。先验原件SHA并回放全部引用，再对固定NarrativeRef版本列片段、精确定位或用BM25搜索精选原文。lookup不做模糊匹配，list/search默认100、最多500，使用`--offset`分页；不建立磁盘全文索引。stdout是来源view，stderr小收据含该view SHA/size，消费者须验证。具体输入、输出、失败与示例边界见[精选检索v1](contracts/narrative-evidence-view-v1.md)。
 
-`extraction-quality` 是只读来源/解析质量接口（v2）：优先校验有界精选叙述包，迁移期间兼容未退休的旧提取记录；未请求或已退役为 `metadata_only`，策略跳过为 `skipped_no_narrative`。不返回正文、摘要、路径或投资判断，不打开旧 normalized 文件，不触发全文转换。`review_required` 只是技术诊断；实际消费仍通过正式 reader/transport 验原件SHA并回放引用。详细边界见[Evidence Query v1](contracts/evidence-query-v1.md)和[Extraction Quality v2](contracts/extraction-quality-v2.md)。
+`extraction-quality` 是只读来源/解析质量接口（v2）：优先校验有界精选叙述包，迁移期间兼容未退休的旧提取记录；未请求或已退役为 `metadata_only`，策略跳过为 `skipped_no_narrative`。不返回正文、摘要、路径或投资判断，不打开旧 normalized 文件，不触发全文转换。`review_required` 只是技术诊断；实际消费仍通过正式 reader/transport 验原件SHA并回放引用。详细边界见[Extraction Quality v2](contracts/extraction-quality-v2.md)。
 
 ## 重复、指纹与维护
 
 - 字节 SHA 完全一致的位置为 exact copies；原件 canonical 必须保留。
 - 归一化文本指纹相同而字节不同的 semantic copies 仅展示，不自动删原件。按需 `fingerprint-backfill` 从 raw 取文本后只保存小型指纹，不重建整篇 Markdown。
 - `export` 按需生成可再生索引，不是常驻第二套库。
-- archive/prune、focus-cleanup、sections-list 和其他 legacy 维护命令仍以实际 CLI 为准，不列为新的日常运行流程。
+- archive/prune、focus-cleanup 和其他 legacy 维护命令仍以实际 CLI 为准，不列为新的日常运行流程。
 
 ## 已退役与迁移中
 
 公开 CLI 不提供整库 `normalize`、`summarize`、`run`、旧 Worker 启动/恢复及安装登录任务。`SourceCatalog.normalize`、`summarize`、`summarize_with_llm`、`extract_sections` 也已退出；历史隔离测试通过 `tests/support` 准备旧产物，不能从生产代码导入该夹具。
+
+旧source-catalog `evidence`、`evidence-list`、`sections-list`及公共EvidenceQueryService导出也已退出。明确历史backend仍能读隔离fixture；新运行精选检索不依赖旧SQLite全量span，实际旧数据尚待S6处置。
 
 `worker-status`、`worker-stop`、`startup-status`、`uninstall-startup` 仅用于检查和收尾既存旧进程/任务，不启动新常驻转换。低层 legacy generators 和读者尚在迁移；本页不声称这些模块全部删除。
 

@@ -144,7 +144,8 @@ def test_exact_lookup_returns_validated_span_document_source_and_locations(
         evidence_catalog["catalog"].config.database_path
     )
 
-    assert public.EvidenceQueryService is query.EvidenceQueryService
+    # Explicit historical fixture access remains; public runtime uses pinned finals.
+    assert not hasattr(public, "EvidenceQueryService")
     for kind in ("paragraph", "table", "empty"):
         expected = _span_by_kind(evidence_catalog, kind)
         payload = service.lookup(
@@ -265,16 +266,14 @@ def test_active_only_catalog_identifies_archived_legacy_evidence(
     with pytest.raises(query.EvidenceQueryNotFoundError):
         service.list_spans(source_id="urn:company-wiki:source:sha256:" + "0" * 64)
 
-    assert main([
-        "--config", str(evidence_catalog["config_path"]),
-        "evidence", "--source-id", evidence_catalog["source_id"],
-        "--locator", target["locator"],
-    ]) == 1
-    error = json.loads(capsys.readouterr().err)
-    assert error["error_type"] == "legacy_evidence_archived"
-    assert error["retryable"] is False
-    assert "verified cold snapshot" not in error["error"]
-    assert "source identity" in error["error"]
+    with pytest.raises(SystemExit) as raised:
+        main([
+            "--config", str(evidence_catalog["config_path"]),
+            "evidence", "--source-id", evidence_catalog["source_id"],
+            "--locator", target["locator"],
+        ])
+    assert raised.value.code == 2
+    assert "invalid choice" in capsys.readouterr().err
 
 
 def test_missing_database_is_unavailable_without_creating_parent(tmp_path):
@@ -372,45 +371,15 @@ def test_runtime_queries_use_long_busy_timeout_read_connection(
     assert any("busy_timeout=30000" in s for s in statements)
 
 
-def test_evidence_cli_lookup_and_list_emit_machine_readable_results(
-    evidence_catalog, capsys
-):
+@pytest.mark.parametrize("command", ["evidence", "evidence-list"])
+def test_legacy_evidence_cli_is_retired(command, capsys):
     from company_wiki.source_catalog.cli import main
-
-    target = _span_by_kind(evidence_catalog, "table")
-    common = ["--config", str(evidence_catalog["config_path"])]
-
-    assert (
-        main(
-            common
-            + [
-                "evidence",
-                "--source-id",
-                evidence_catalog["source_id"],
-                "--locator",
-                target["locator"],
-            ]
-        )
-        == 0
-    )
-    lookup = json.loads(capsys.readouterr().out)
-    assert lookup["span"]["span_id"] == target["span_id"]
-    assert (
-        main(
-            common
-            + [
-                "evidence-list",
-                "--source-id",
-                evidence_catalog["source_id"],
-                "--limit",
-                "2",
-            ]
-        )
-        == 0
-    )
-    listed = json.loads(capsys.readouterr().out)
-    assert listed["total"] == 7
-    assert len(listed["items"]) == 2
+    with pytest.raises(SystemExit) as raised:
+        main([command, "--source-id", "urn:company-wiki:source:sha256:" + "0" * 64])
+    assert raised.value.code == 2
+    streams = capsys.readouterr()
+    assert streams.out == ""
+    assert "invalid choice" in streams.err
 
 
 def test_evidence_cli_missing_database_fails_without_initializing_catalog(
@@ -435,8 +404,8 @@ roots:
         encoding="utf-8",
     )
 
-    result = main(
-        [
+    with pytest.raises(SystemExit) as raised:
+        main([
             "--config",
             str(config_path),
             "evidence",
@@ -444,12 +413,9 @@ roots:
             "urn:company-wiki:source:sha256:" + "0" * 64,
             "--locator",
             "loc:v1/page:1",
-        ]
-    )
-
-    assert result == 1
-    error = json.loads(capsys.readouterr().err)
-    assert error["error_type"] == "fatal"
+        ])
+    assert raised.value.code == 2
+    assert "invalid choice" in capsys.readouterr().err
     assert not (project / ".source_catalog").exists()
 
 

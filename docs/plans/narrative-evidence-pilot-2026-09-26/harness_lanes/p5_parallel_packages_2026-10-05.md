@@ -2,6 +2,8 @@
 
 状态：**in_progress，用户于2026-10-05确认三卡均已开工**。2026-10-05只读核对后建立；不是旧N4-T1/T2、StockWiki narrative consumer或SPACE-S5审计的重复任务。MAIN继续N4C，三个外线独占写集保留，收到交付后逐包验收合入。
 
+**最新进度覆盖（2026-10-05）：**STORAGE已验收合入/发布e570daf、53个不同case分步GREEN，生产未删；FF已交付、干净HEAD ab9ce33（code7c6cf48），HANDOFF报告18+194责任项绿但全仓有10项baseline-red，MAIN需按当前CWP实际下载合同补隔离fixture限额并复用FF→ET→CWP离线链验收，不把交付当已合入。RF独立p5-rf-source-default工作树仍WIP，无正式HANDOFF，live main8a153f33不变。MAIN质量v2已发布/CI绿，正式精选检索102个不同case分步GREEN待发布；N4C模型cap问题不阻该离线迁移。下面f775406等为开卡基线，不是当前MAIN HEAD；三卡不重派。
+
 ## 分工与物理隔离
 
 | 包 | 工作量与产出 | 源仓库 | 独占施工目录（新建worktree） | 施工卡 |
