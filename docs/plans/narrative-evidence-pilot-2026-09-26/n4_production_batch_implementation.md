@@ -1,5 +1,7 @@
 # N4：可运行的叙述批次、真实模型计量与持久恢复
 
+> **2026-10-05 当前状态覆盖：**G1/S3、N4A/B和N4-T1/T2已收口；真实原件配本地Replay的E6 P1/P2/P4已绿。耗时控制实验及selector `0.3.0`批次版本修复完成后按用户要求暂停；不代表N4C真实provider/消费者/总空间验收完成。[收尾收据](harness_lanes/results/n4c_latency_version_closeout_2026-10-05.md)给出测量限制、剩余额度、独立测试目录恢复规则与唯一恢复动作。下方2026-10-04状态及实施记录保留追溯，当前顺序以主计划Next Step为准。不重新实施A/B或重派已关闭外包卡。
+
 > 2026-10-04 当前状态：N4A scope与N4B预算/factory/正式batch/恢复、终态降容已实现；节点A/B的集中回归与CLI/HTTP/kill/ACK合同已绿。N4C（真实多类型样本、并行吞吐与空间增量实测）仍未做。**主计划当前先收口G1门禁精简，再收口S3 SourceRef/SourceExport虚拟化；G1/S3完成后才进入N4C。** 本卡保留N4C施工细节，不改变主计划顺序。G-A/N3a/G-C、B1/B3/B4已完成，见[实际整理收尾](harness_lanes/results/gd_b3_retirement_2026-10-03.md)。不启动旧normalize Worker。只在A/B/C大节点验收，helper不增加审查；原件/来源事实保留。
 
 ## 1. 已核缺口与目标

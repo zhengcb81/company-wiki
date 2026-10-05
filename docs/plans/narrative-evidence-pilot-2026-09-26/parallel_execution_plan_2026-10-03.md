@@ -28,7 +28,7 @@ ET-DEADLINE独占worktree仍未提交。MAIN只读集中责任包91 passed、1 f
 
 1. CWP来源reader/as-of/resolver/gap_plan/canonical_writer与FF SourceRef v2资格门已按TDD收敛；真实SHA、身份/期次/公开日、可回放locator保持自动验证，采集描述缺失仅诊断。
 2. G1-LEGACY旧入口退役及46项当前状态分类完成；CloseGapBinding、旧whole-catalog LLM summarizer及archive/prune代码未发现生产caller，不作为用户门，后续若无调用者随S5/S6清理。
-3. G1/S3已完成，ET-DEADLINE已集中验收并合入main63c4090。ET-LIVE一次请求被FMP HTTP 402拒绝，尚无live原文导入。MAIN正在推进N4C；当前独立包为N4-T1/T2及MeetingConverter CI，不重派已交付旧包。
+3. G1/S3已完成，ET-DEADLINE已集中验收并合入main63c4090。ET-LIVE一次请求被FMP HTTP 402拒绝，尚无live原文导入。N4-T1/T2及MeetingConverter CI均已交付并收口，不重派。2026-10-05 MAIN完成N4C阶段耗时调查与版本修复后按用户要求暂停；当前恢复接口见[收尾收据](harness_lanes/results/n4c_latency_version_closeout_2026-10-05.md)，当前没有新派发包。
 4. 接收外线commit与短报告，核diff/接口/相关测试，解决冲突和跨仓接线。MAIN统一发布；外线不自己合main、不写他仓、不安装全局技能。
 5. 测试全用独立根，退出恢复原样；不丢原件。不造签名、人工授权文件、每helper审批或固定场景数。
 
@@ -108,7 +108,7 @@ FF `codex/transcript-companion@29085f7`现存工作树改动`fetch_filing.py`/`f
 
 ## 2026-10-04 新增三张互斥施工卡
 
-以下三卡已写成可以单独交给外部harness的完整接口，用户已派发；N4-T1已交付并集成MAIN、MeetingConverter已合master且新主线CI绿，N4-T2待交付。以下写集为原卡接口，不重派已完成任务。与之前已验收的StockQAbyLLM、MeetingConverter只读盘点卡区分：这里的MeetingConverter是后续CI零任务根因与快速门施工；若远端最新CI已正常运行测试，卡片要求只交现状证据，不制造无必要改动。
+以下三卡均已交付：N4-T1已集成MAIN、MeetingConverter已合master且主线CI绿，N4-T2已差异对账并选择性集成`0657579d`，主线CI绿。以下写集为原卡接口，不重派已完成任务。与之前已验收的StockQAbyLLM、MeetingConverter只读盘点卡区分：这里的MeetingConverter是后续CI零任务根因与快速门施工；若远端最新CI已正常运行测试，卡片要求只交现状证据，不制造无必要改动。
 
 | 卡 | 仓库 | 独占目录与文件写集 | 依赖 / 主线合入 |
 |---|---|---|---|
@@ -132,11 +132,11 @@ G1-LEGACY 写集已关闭；G1 总阶段仍因 FF SourceRef v2 资格门而保�
 
 - N4-T1：4a53080 → MAIN 5de9154，跨层114+1项通过；[收据](harness_lanes/results/n4t1_model_transport_acceptance_2026-10-04.md)。不改外线worktree；T2若以4a53080为base，MAIN只集成之后的T2提交。
 - MeetingConverter：master/origin/master同为8a33a7f，PR1已merged，新主线CI真实job成功22秒；[收据](harness_lanes/results/meetingconverter_ci_acceptance_2026-10-04.md)。独立卡收尾，不进N4C关键路径。
-- N4-T2与N4C尚待交付/验收；S5首批缓存和旧section公开入口退出已完成，不重复施工。
+- N4-T2已交付并验收；N4C真实provider/消费者/总空间大节点仍待验收。S5首批缓存和旧section公开入口退出已完成，不重复施工。
 
 ## 2026-10-05 MAIN/外线当前接口状态
 
-- N4-T1 已集成并推送（`5de9154`，包含于 MAIN `66808ee`；最终文档收据`e6b884a`），主线run37241977614 success。N4-T2仍待外线交付，只提交其新文件/提交，不重做T1。
+- N4-T1 已集成并推送（`5de9154`，包含于 MAIN `66808ee`；最终文档收据`e6b884a`），主线run37241977614 success。N4-T2已收口，见[验收收据](harness_lanes/results/n4t2_selector_acceptance_2026-10-05.md)；不得重复合入T1或T2。
 - MeetingConverter施工卡已快进并推送master@`8a33a7f`，CI run37241709261 success；该线关闭。
 - MAIN独占的S5旧整库Worker/阶段策略已退役，保留按需normalized读写直到RF与CWP locator消费者迁移；worker状态/停止清理命令继续保留。细节见S5/S6主计划及旧Worker集成测试收据（本轮记录在progress/findings）。
 - RF复核仍以远端main `8a153f3387ae75fb172e70f8ab63ffd38100779a`为准；fcap仅weekly assurance两处owner改动未触碰。

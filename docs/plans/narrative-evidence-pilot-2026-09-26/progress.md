@@ -554,3 +554,23 @@ S0/N4A及S2模型预算基础、CLI阶段与CI修复已正常发布，当前CI�
 - 本轮交付完成：外包N4-T2差异已评估，安全且有数据依据的词汇/事件补充已选择性合入；测试、真实Worker P1/P2/P4复测、CI与PWF收据均已完成和发布。代码提交`0657579d`的Actions成功；收尾文档提交`7b87ff3`已推送。
 - 用户要求“把手头任务做完，然后更新PWF文档，暂停”。当前停止点是**N4-T2已关闭、N4C尚未继续**；未启动新的E6、RF consumer联调或其他写入。唯一下一步（用户恢复后）：先归因E6队列等待/handler延迟升高，再以有限P4候选推进N4C和RF N3a消费实测。
 - 用户配置`config/source_acquisition.yaml`仍是唯一工作树未提交项，保持原样。主线已推送到远端，代码CI结果及验收报告已记录。整体目标尚未完成，暂停不等于完成。
+
+## 2026-10-05 — 恢复N4C，先作阶段耗时控制实验
+
+- 用户恢复整体目标；工具实读active，上一目标turn已完成N4-T2代码/测试/远端CI与PWF发布，属于progress。
+- CWP仍为`master@f26a712`，只有既有用户配置未提交。RF正常账号只读核实fcap `5319ee26`、本地main `6fb2def7`、origin/main及live main同为`8a153f3`；未提交只有weekly_alert.jsonl、weekly_manifest.json两文件。RF旧execution_runs沙箱ACL拒绝所呈现的3,833删除并非正常账号工作树删除；本线没有修改RF。
+- RF正式N3a交接不在fcap checkout，已从origin/main提交读取；复用其reference/read DTO、bounded subprocess和stdout结果，不另造接口。初次sandbox广域diff产生大量ACL拒绝；改正常账号聚合计数后结果明确。PWF恢复脚本已显式解析到本计划目录，未更换共享active pointer。
+- 下一动作是同一真实PDF字节上的旧/新选择器控制实验：分别计parse/select/replay及CPU/wall，原件只读，摘要/正文不输出；只导出四个旧源码模块到新建独立测试根，结束删除该根。不能因Worker池拓扑未变便断言选择器不影响延迟。
+
+## 2026-10-05 — 当前耗时调查与版本修复收尾，随后暂停
+
+- 用户最新指令是完成手头任务、更新PWF并暂停。仅收口控制实验和版本修复；没有执行新的付费模型批次、RF消费联调或S5/S6删除。
+- 两轮对照（cProfile三PDF、无profiler招股书）均结束且诊断根恢复；完整聚合结果在[本次收尾收据](harness_lanes/results/n4c_latency_version_closeout_2026-10-05.md)。当前招股书40.194s/旧37.417s，表格发现26.726s、84/144空结果；选材增量不足以解释旧E6差异，不编造已知全根因。
+- TDD RED：当前与强制旧`0.2.0` batch hash相同；将`NARRATIVE_SELECTOR_VERSION`升为`0.3.0`后input hash和event ID均不同。聚焦`test_narrative_batch/evidence/select_handler/selection_architecture`共117 passed/1.62s，独立root恢复；只有插件关闭造成的asyncio配置提示及sandbox pytest-cache权限提示。
+- 字面版本搜索发现英文召回测试旧固定`0.2.0`，实跑得到一个旧pin失败和9个sandbox默认TEMP setup权限错误。版本断言改为召回引入版本下界，保留parser和真实行为断言；后续完整Unit用正常用户账号、独立短根`tmp/n4u`、cacheprovider关闭，避免该环境误报。更早`rg`通配目录参数触发Windows错误123，改为目录配`-g`；不重复同错误命令。
+- 主计划顶部、S4状态、Next Step及N4实施卡已统一；更正RF ACL误读计数和RSS把B误标MiB的当前表述，N4-T2已关闭，不再等待外包交付。真实provider下一run最多剩49,675 tokens/$0.094742，旧未知预留保留；暂停期间不执行。
+- 完整Unit首次结果：**1425 passed/1 failed/185.74s**。唯一失败为`test_git_changes_stay_inside_the_card_write_set`，它把已结束G1-LEGACY卡写集套在整个脏checkout，拒绝用户配置及新计划/版本改动。移除该项及同类删除集合检查（共2项）、不用的allowlist，保留所有产品行为与原件夹具保护。独立`tmp/n4u`已finally恢复；不为这次目录门修改而再跑三分钟全Unit，最终以远端同SHA完整Unit及push精选门验收。
+- 4个Python文件的Ruff、mypy合同与host-assumption hooks均通过，config doctor无相关改动按范围跳过；代码提交`b09e845a845e172a3659acef6ad6d172f7565d2f`。commit hook临时保存/恢复未暂存文档与用户config后成功；只提交本轮4文件。
+- 发布验证完成：`b09e845`已推到`origin/master`，live `ls-remote`匹配完整SHA；实际push运行精选契约门GREEN。Actions [37354477263](https://github.com/zhengcb81/company-wiki/actions/runs/37354477263)匹配该SHA且completed/success，job为18:14:46–18:16:03 UTC（77秒），完整Unit、精选合同及静态/CLI检查全绿。没有为日常commit恢复pytest门。
+- 最后清理核验：`tmp/n4c-timing-20261005`、`tmp/n4c-stage-benchmark.py`、`tmp/n4u`及请求的版本测试根均不存在；自动迁移basetemp的cleanup removed=true。原件未写，用户`config/source_acquisition.yaml`收尾前后SHA一致（`3609e707466e…`），未暂存或提交。其他仓无写入。
+- 本轮主计划、findings、progress、N4实施卡、并行总计划与新收尾收据统一为同一停止点及恢复动作；6份文档随收尾提交发布。用户明确要求暂停，目标在这些交付完成后设置paused；整体S4/S5/S6尚未完成，暂停不等于完成。

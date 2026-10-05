@@ -452,3 +452,27 @@ Git写入/联网用正常用户，sandbox .git只读不是产品权限。测试�
 
 - N4-T2 acceptance and selective integration are complete and pushed (`0657579d` code; `7b87ff3` receipt). The user explicitly asked to finish the current item, update PWF, then pause.
 - N4C has **not** been resumed beyond the completed post-selector E6 P1/P2/P4 replay. No additional consumer test, latency experiment, or RF edit is authorized by the current pause instruction. On resume, first investigate why queue/handler timing is materially higher than the earlier E6 run; then continue the planned bounded consumer-integrated N4C stage. Keep the user's dirty `config/source_acquisition.yaml` unchanged.
+
+## 2026-10-05 — resumed state and latency hypothesis
+
+- Goal is active again. RF main was checked live at `8a153f3`; its normal-user checkout has only two assurance owner edits. The earlier 3,833 historical deletions observed under the sandbox were ACL failures, not confirmed deletions. Do not propagate that count as normal-user state.
+- RF N3a consumer and its handoff are committed on origin/main but absent from the active fcap checkout. Use the committed main implementation read-only; do not modify or switch the owner's checkout.
+- E6 fixes the local model delay at 0.8 seconds/call, so 4 calls cannot explain a 60+ second profile solely through configured model latency. Handler measurements include PDF selection/replay and other work; queue timestamps currently begin for all jobs before their dependencies finish, so the reported queue p95 also includes dependency wait. Stage timing is needed before interpreting it as scheduler contention.
+- Prior claim that unchanged Worker topology excludes selector-caused slowdown is unsupported. The candidate regex/rules changed and may affect compute cost; a same-source old/current parse-select-replay experiment will test that hypothesis.
+
+### Controlled profile result
+
+- Same three real PDFs were SHA-checked before/after, parsed in memory using baseline `069c8d4`'s four selector modules versus current modules, with identical current dependencies. Under cProfile: annual baseline parse/select/replay 16.333/4.579/3.727s; current17.980/5.081/3.577s. Prospectus baseline45.731/9.199/6.048s; current47.032/9.804/6.425s. IR baseline1.476/0.037/0.456s (7 spans/1,619 B); current1.367/0.047/0.964s (11 spans/3,920 B).
+- Prospectus profile shows PyMuPDF `find_tables` dominates: baseline143 calls/39.083s versus current146/40.465s; selected source bytes and span count remain10,391 B/160. Current rules add a modest amount of CPU work, not the 2.4x observed E6 wall increase. cProfile overhead affects absolute numbers; next use an unprofiled prospectus control to quantify table discovery costs and empty calls before changing parsing.
+- Diagnostic root was removed by finally and restoration marker returned. No source text/results copied or model/provider call made. Source fingerprints and exact SHA passed.
+- Found a separate versioning gap: N4-T2 changed selection behavior but `NARRATIVE_SELECTOR_VERSION` is still0.2.0, also used in batch input hash. A newly computed selector result can share an old generation binding. Before real model batch, add a failing legacy-generation hash test and release the current selection behavior under a new version.
+
+## 2026-10-05 — 无profiler复核、版本修复及暂停收口
+
+- 同招股书、同依赖、旧四模块overlay对照：无profiler旧parse/select/replay为27.730/4.890/4.797s，当前30.165/4.988/5.041s，总37.417→40.194s（约7.4%）。两边160 span/10,391 B并全部locator replay通过。当前表格发现144次/26.726s，84次空结果，占parse约88.6%。这是实测的解析成本；不能据此声称已解释整个E6涨幅，亦不能直接跳过无框表格/IR问答扫描。
+- 已修复selector版本到`0.3.0`，parser仍`0.1.0`。新增batch input hash与event ID不得复用旧`0.2.0`的RED→GREEN回归；同版本幂等行为由既有测试保持。旧英文测试改为最早召回版本下界，全部英文原文/定位行为断言保留，避免未来合法版本升级被旧常量误挡。
+- 117项聚焦回归绿，完整Unit及发布结果见progress。本次未重跑三档E6、未调用模型或写生产catalog。诊断根两次finally恢复，临时脚本删除；原件SHA/size/mtime不变。
+- RF正常账号状态更正已写回主计划：只有两个assurance owner文件修改，旧3,833删除计数来自sandbox ACL误读；N3a源码和交接在已提交main，不在active fcap目录。
+- 用户最新要求当前工作收尾后暂停。统一停止点和唯一恢复动作见[收尾收据](harness_lanes/results/n4c_latency_version_closeout_2026-10-05.md)，不启动后续真实模型/消费者/存储迁移。此前活动状态和旧暂停记录只表示各自时刻。
+- 完整Unit首次1425 passed/1 failed：唯一失败是已完成G1-LEGACY外包卡用`git status`限制整个当前checkout写集；用户配置及本次计划/修复因此被误拒。这是一次性交付审计被混入永久产品Unit的缺陷。移除该测试、同类删除集合检查和仅供它们的allowlist，保留旧入口动态退出、初始化/写入陷阱、原件夹具快照、已退役工具/导入链等行为测试。外包写集审计保留在交付收据，不扩旧白名单、不清理用户修改来骗绿。
+- 修复`b09e845`发布后实际快速push门和精确SHA的Actions [37354477263](https://github.com/zhengcb81/company-wiki/actions/runs/37354477263)均GREEN；完整CI job约77秒。这关闭本次版本/测试收尾，不解决尚未完成的真实模型/消费者大节点。原件与用户配置保持原样；目标按用户要求暂停。
