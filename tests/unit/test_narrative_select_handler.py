@@ -24,6 +24,11 @@ from company_wiki.automation.narrative_contracts import (
 )
 from company_wiki.automation.narrative_select import NarrativeSelectHandler
 from company_wiki.source_catalog.narrative_document import NarrativeEvidencePackage
+from company_wiki.source_catalog.narrative_evidence import (
+    parse_pdf_bytes,
+    select_narrative_evidence,
+    verify_pdf_evidence_spans_bytes,
+)
 from company_wiki.source_catalog.source_reader import (
     ReviewSnapshot,
     SourceRef,
@@ -48,7 +53,25 @@ def _pdf_bytes(text: str) -> bytes:
     fitz = pytest.importorskip("fitz")
     document = fitz.open()
     page = document.new_page()
-    page.insert_text((72, 72), text)
+    page.insert_text((72, 72), text, fontname="china-s")
+    data = document.tobytes()
+    document.close()
+    return data
+
+
+def _quarterly_category_pdf_bytes() -> bytes:
+    fitz = pytest.importorskip("fitz")
+    document = fitz.open()
+    for text in (
+        "报告期内，行业景气度持续回升，带动公司主要产品需求稳定增长。",
+        "报告期内，公司生产装置运行平稳，主要产品产销量同比增长。",
+        "公司新设立精密零部件事业部，启动高纯材料新产品的工艺开发。",
+        "报告期内，境外业务收入同比增长，成为公司重要的增长来源。",
+        "本公司保证所披露的信息真实、准确、完整，不存在虚假记载或误导性陈述。",
+        "第一节 重要提示 .......... 2",
+    ):
+        page = document.new_page()
+        page.insert_text((72, 72), text, fontname="china-s")
     data = document.tobytes()
     document.close()
     return data
@@ -57,7 +80,7 @@ def _pdf_bytes(text: str) -> bytes:
 def _payload(
     data: bytes,
     *,
-    title: str,
+    title: str | None,
     document_kind: str,
     language: str,
     mime_type: str,
@@ -246,6 +269,71 @@ def test_select_handler_reads_pdf_bytes_for_high_value_document_types(
     assert result.evidence_spans
     assert result.source_ref.content_sha256 == _sha(data)
     assert checkpoint_count >= 4
+
+
+@pytest.mark.parametrize("document_kind", ["quarterly_report", "investor_relations"])
+def test_select_handler_recovers_titleless_quarterly_business_narrative_with_replay(
+    document_kind: str,
+) -> None:
+    data = _quarterly_category_pdf_bytes()
+    payload = _payload(
+        data,
+        title=None,
+        document_kind=document_kind,
+        language="zh",
+        mime_type="application/pdf",
+    )
+
+    raw, _ = _run(payload, data)
+
+    assert raw.outcome is HandlerOutcome.SUCCEEDED
+    result = NarrativeSelectResult.from_dict(raw.result)
+    assert result.selection.status == "partial"
+    assert result.selection.coverage_complete is False
+    selected_text = [span.raw_text for span in result.evidence_spans]
+    expected = (
+        "行业景气度持续回升",
+        "生产装置运行平稳",
+        "新设立精密零部件事业部",
+        "境外业务收入同比增长",
+    )
+    for fragment in expected:
+        assert any(fragment in text for text in selected_text), fragment
+    assert not any("保证所披露的信息" in text for text in selected_text)
+    assert not any("重要提示" in text for text in selected_text)
+    assert all(span.coordinates.page_number is not None for span in result.evidence_spans)
+    assert all(span.source_id == result.source_ref.source_id for span in result.evidence_spans)
+    verified, failed = verify_pdf_evidence_spans_bytes(
+        data,
+        source_id=result.source_ref.source_id,
+        source_sha256=result.source_ref.content_sha256,
+        evidence_spans=result.evidence_spans,
+    )
+    assert failed == ()
+    assert verified == tuple(span.span_id for span in result.evidence_spans)
+
+
+def test_titleless_signal_free_quarterly_remains_reviewable() -> None:
+    data = _pdf_bytes("本报告仅说明财务数据列报规则，未描述具体业务动态。")
+    digest = _sha(data)
+    source_id = source_id_for_sha256(digest)
+    parsed = parse_pdf_bytes(
+        data,
+        source_id=source_id,
+        source_sha256=digest,
+        language="zh",
+        full_table_scan=True,
+    )
+
+    package = select_narrative_evidence(
+        parsed,
+        title="",
+        existing_kind="quarterly_report",
+    )
+
+    assert package.status == "needs_review"
+    assert package.coverage_complete is True
+    assert package.evidence_spans == ()
 
 
 def test_select_handler_does_not_require_prompt_review_receipt() -> None:
