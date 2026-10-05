@@ -49,7 +49,13 @@ def main(
         if loaded_model_options is not None and isinstance(raw, dict):
             # Composition owns model settings. The finite run hash pins the
             # configured values, not a competing copy in a request file.
-            raw["model"] = loaded_model_options
+            limits = raw.get("model", {})
+            limits = {field: limits[field] for field in (
+                "timeout_seconds", "max_request_bytes", "max_response_bytes",
+            ) if isinstance(limits, dict) and field in limits}
+            # Per-operation transport caps remain effective. They are not
+            # competing provider/model/generation configuration.
+            raw["model"] = {**limits, **loaded_model_options}
         request = NarrativeBatchRequest.from_dict(raw)
     except (OSError, TypeError, ValueError):
         print(canonical_json({"schema_version": "narrative-batch-result/1", "status": "failed",

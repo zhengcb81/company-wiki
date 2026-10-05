@@ -606,3 +606,5 @@ S0/N4A及S2模型预算基础、CLI阶段与CI修复已正常发布，当前CI�
 - 集中责任包104 passed/30.13s，覆盖既有配置、HTTP、batch DTO、factory、真实child Worker/本地HTTP及恢复；随后配置13 passed/0.85s补齐6个新边界（7个已含在前轮），共110个不同case通过。Ruff、git diff --check绿。默认命令帮助可正常启动；正常账号只读Config.load确认实际国内模型参数及key存在，不打印凭证。
 - 自建n4cfgred/green/green2/cli/node/final与n4aliasred目录已精确清理；policy/原件测试夹具由finally恢复。未实施alias草稿移除，下一节点再以现配置写真实RED，不把collection失败或旧2400阈值算alias通过。离线旧请求大小收据标记为historical/hardcoded，保留测量限制。
 - 临时真实driver已接配置入口并扣除run02与旧unknown：下一run最多26,340 tokens/83,420 microUSD；未启动run03。PWF主计划/N4卡统一下一步，P5外线继续互斥施工。本轮零HTTP模型/零下载，用户config SHA仍3609e707466e…；RF仅原有两份assurance owner修改，其他仓无写入。
+
+- 发布：`f099288`已推到master，正常pre-push快速合同GREEN；精确SHA CI [37361729624](https://github.com/zhengcb81/company-wiki/actions/runs/37361729624)当前queued，尚无远端测试结果，不冒称GREEN。收口复查补齐配置组合仍保留请求原有timeout/max-request/max-response caps，generation设置仍全由Config控制；配置14 passed/0.90s，合计111个不同case，实际CLI恢复复测GREEN。测试目录恢复，零新增paid call。

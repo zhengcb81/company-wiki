@@ -503,3 +503,5 @@ Git写入/联网用正常用户，sandbox .git只读不是产品权限。测试�
 - 权威配置和.env优先级在scripts/config.py已定义，legacy LLMClient也已有minimax/mimo用max_completion_tokens及MiniMax reasoning_split策略。typed package配置没有credential/dotenv加载能力，本次没有新建第三个loader或provider默认表。模型配置只在composition复制非秘密设置；child-local adapter保持独立限流/预算，无legacy全局客户端。
 - 新scripts/narrative_batch_configured.py复用Config.load，向既有有限batch CLI注入配置快照；请求内旧model/thinking参数不能覆盖它，输入hash固定真实配置。未配置thinking保持省略。HTTP增加可选temperature/reasoning_split/token-field，DTO/factory透传及run hash同步；旧纯DTO/测试请求省略时保持原形。
 - 正常账号加载现配置成功，credential_present=true，值未输出。当前错误不是本机缺key。国内正式价格/当前配置请求准入仍待验证，不能把国际报价当国内账单或按2400输出继续假设额度够用。N4C真实final/消费者仍未绿。
+
+- 发布：`f099288`已推到master，正常pre-push快速合同GREEN；精确SHA CI [37361729624](https://github.com/zhengcb81/company-wiki/actions/runs/37361729624)当前queued，尚无远端测试结果，不冒称GREEN。收口复查补齐配置组合仍保留请求原有timeout/max-request/max-response caps，generation设置仍全由Config控制；配置14 passed/0.90s，合计111个不同case，实际CLI恢复复测GREEN。测试目录恢复，零新增paid call。

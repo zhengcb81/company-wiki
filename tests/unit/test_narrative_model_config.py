@@ -95,3 +95,34 @@ def test_configuration_identity_includes_real_generation_parameters():
                          ("output_token_field", "max_tokens")):
         raw["model"] = {**original.model_options, field: value}
         assert NarrativeBatchRequest.from_dict(raw).input_hash != original.input_hash
+
+
+def test_configured_composition_preserves_explicit_transport_caps(tmp_path, monkeypatch):
+    from company_wiki.automation import narrative_batch_cli as cli
+    raw = {"schema_version": "narrative-batch-request/1", "run_id": "transport-fixture",
+           "sources": [_selection().source_ref.to_dict()], "profile": "P1",
+           "max_seconds": 30, "max_tokens": 60000, "max_cost_usd": "0.10",
+           "pricing": {"version": "fixture", "input_micro_usd_per_million_tokens": 1,
+                       "output_micro_usd_per_million_tokens": 1},
+           "model": {"model_id": "stale", "max_output_tokens": 1, "thinking": "disabled",
+                     "timeout_seconds": 4, "max_request_bytes": 3000, "max_response_bytes": 5000}}
+    request_path = tmp_path / "request.json"
+    request_path.write_text(json.dumps(raw), encoding="utf-8")
+    before = request_path.read_bytes()
+    captured = []
+
+    def run(request, **_kwargs):
+        captured.append(request)
+        return {"status": "completed"}
+
+    monkeypatch.setattr(cli, "run_batch", run)
+    options = model_options_from_config(LLMConfig())
+    args = ["--request", str(request_path)]
+    for field in ("project-root", "catalog-config", "automation-db", "work-dir"):
+        args += ["--" + field, str(tmp_path / field)]
+    assert cli.main(args, loaded_model_options=options) == 0
+    actual = captured[0].model_options
+    assert all(actual[field] == value for field, value in options.items())
+    for field in ("timeout_seconds", "max_request_bytes", "max_response_bytes"):
+        assert actual[field] == raw["model"][field]
+    assert "thinking" not in actual and request_path.read_bytes() == before
