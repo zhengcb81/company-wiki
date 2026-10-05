@@ -1,0 +1,186 @@
+{
+  "schema_version": "cwp-parallel-handoff/2",
+  "lane_id": "P5-STORAGE",
+  "status": "complete",
+  "repo": "C:/Users/郑曾波/Projects/company-wiki",
+  "worktree": "C:/Users/郑曾波/Projects/cwp-lanes-20261005/cwp-storage-tool",
+  "branch": "codex/p5-storage-retirement",
+  "base_head": "a2563f9dc29f2295e146342ec88c4f84dda6e53b",
+  "delivery_head": "7ac1e3d236e22a263b88540f89a611675b5b8ab1",
+  "commits": ["7ac1e3d236e22a263b88540f89a611675b5b8ab1"],
+  "changed_paths": [
+    "tools/legacy_storage_retirement.py",
+    "tools/legacy_storage/__init__.py",
+    "tools/legacy_storage/core.py",
+    "tools/legacy_storage/facts.py",
+    "tools/legacy_storage/inventory.py",
+    "tools/legacy_storage/retirement.py",
+    "tools/legacy_storage/selection.py",
+    "tools/legacy_storage/shrink.py",
+    "tools/legacy_storage/spans.py",
+    "tests/unit/test_p5_storage_retirement_common.py",
+    "tests/unit/test_p5_storage_retirement_boundary.py",
+    "tests/unit/test_p5_storage_retirement_spans.py",
+    "tests/unit/test_p5_storage_retirement_vacuum.py",
+    "tests/integration/test_p5_storage_retirement_e2e.py",
+    ".planning/p5-storage-retirement/task_plan.md",
+    ".planning/p5-storage-retirement/progress.md",
+    "docs/implementation/handoffs/P5-STORAGE/samples/sample_manifest.json",
+    "docs/implementation/handoffs/P5-STORAGE/samples/sample_retire-derived_receipt.json",
+    "docs/implementation/handoffs/P5-STORAGE/samples/sample_prune-spans_receipt.json",
+    "docs/implementation/handoffs/P5-STORAGE/samples/sample_vacuum_receipt.json"
+  ],
+  "upstream": [
+    {
+      "repo": "company-wiki",
+      "head": "a2563f9dc29f2295e146342ec88c4f84dda6e53b",
+      "interfaces": [
+        "CatalogStore schema 1.2.0 (_DDL, WAL, foreign_keys=ON)",
+        "validate_artifact consume gate (status=='completed')",
+        "NarrativeArtifactStore.prepare/activate (narrative-bundle/2.0)",
+        "SourceReader v2 SourceRef (source_reader_cli)",
+        "narrative-ref/1 + narrative-read-request/1 transport",
+        "report schema cwp-storage-retirement/1 (new, tool-local)"
+      ]
+    }
+  ],
+  "entrypoints": [
+    {
+      "command": "python tools/legacy_storage_retirement.py inventory --config <catalog cfg> --output <manifest.json>",
+      "output_contract": "cwp-storage-retirement/1 report + cwp-storage-manifest/1 manifest (read-only)"
+    },
+    {
+      "command": "python tools/legacy_storage_retirement.py retire-derived --config <catalog cfg> --manifest <manifest.json> --receipt <retire.json> --apply",
+      "output_contract": "cwp-storage-retirement/1 receipt"
+    },
+    {
+      "command": "python tools/legacy_storage_retirement.py prune-spans --config <catalog cfg> --selection <sel.json> --keep-refs <refs.jsonl> --receipt <prune.json> --apply",
+      "output_contract": "cwp-storage-retirement/1 receipt"
+    },
+    {
+      "command": "python tools/legacy_storage_retirement.py vacuum --config <catalog cfg> --receipt <vacuum.json> --apply",
+      "output_contract": "cwp-storage-retirement/1 receipt"
+    }
+  ],
+  "tests": [
+    {
+      "command": "PYTHONPATH=src python -m pytest tests/unit/test_p5_storage_retirement_boundary.py tests/unit/test_p5_storage_retirement_spans.py tests/unit/test_p5_storage_retirement_vacuum.py -q",
+      "exit_code": 0,
+      "passed": 26,
+      "failed": 0,
+      "skipped": 0,
+      "elapsed_seconds": 62
+    },
+    {
+      "command": "PYTHONPATH=src python -m pytest tests/contract/test_source_version_reader.py tests/unit/test_narrative_artifact_store.py tests/contract/test_narrative_transport_cli.py tests/integration/test_narrative_transport.py -q",
+      "exit_code": 1,
+      "passed": 79,
+      "failed": 1,
+      "skipped": 0,
+      "elapsed_seconds": 126
+    },
+    {
+      "command": "PYTHONPATH=src python -m pytest tests/integration/test_p5_storage_retirement_e2e.py -q -m slow",
+      "exit_code": 0,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "elapsed_seconds": 174
+    }
+  ],
+  "real_samples": [
+    {
+      "kind": "annual_report",
+      "source_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "metadata_is_fixture": true
+    }
+  ],
+  "cleanup": {
+    "test_root": "pytest basetemp short root under %TEMP%",
+    "before_digest": "absent",
+    "after_digest": "absent",
+    "restored": true
+  },
+  "protection": {
+    "originals_unchanged": true,
+    "owner_files_unchanged": true,
+    "production_written": false
+  },
+  "calls": {"network": 0, "download": 0, "llm": 0},
+  "metrics": {
+    "fixture_inventory_aggregate": {
+      "candidate_count": 5,
+      "candidate_bytes": 8131,
+      "derived_files_bytes": 8131,
+      "derived_file_count": 8,
+      "excluded_count": 0,
+      "unreferenced_count": 0,
+      "dangling_record_count": 0,
+      "span_total": 10,
+      "span_parser_counts": [
+        {"parser_name": "plain_text", "parser_version": "1.0.0", "count": 10}
+      ],
+      "source_facts_table_count": 17,
+      "protected_object_bytes": 53,
+      "protected_object_files": 1
+    },
+    "retire-derived": {
+      "deleted_entries": 8,
+      "already_absent": 0,
+      "files_bytes": [8131, 0],
+      "database_bytes": [282624, 282624],
+      "page_count": [69, 69],
+      "freelist": [0, 0],
+      "integrity_check": "ok",
+      "foreign_key_check": [],
+      "source_facts_equal": true
+    },
+    "prune-spans": {
+      "deleted_spans": 9,
+      "kept_protected_pairs": 1,
+      "already_absent": 1,
+      "files_bytes": [282624, 282624],
+      "database_bytes": [282624, 282624],
+      "page_count": [69, 69],
+      "freelist": [0, 4],
+      "integrity_check": "ok",
+      "foreign_key_check": [],
+      "source_facts_equal": true
+    },
+    "vacuum": {
+      "deleted_spans": 0,
+      "already_absent": 0,
+      "database_bytes": [282624, 266240],
+      "page_count": [69, 65],
+      "freelist": [4, 0],
+      "integrity_check": "ok",
+      "foreign_key_check": [],
+      "source_facts_equal": true
+    },
+    "e2e_real_bytes": {
+      "annual_report_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "raw_open_purpose": "source_export",
+      "raw_read_before_after": "exit 0 + sha match",
+      "narrative_replay_before_after": "exit 0 + identical stdout sha",
+      "pdf_spans_deleted": "all (parser-filtered)",
+      "txt_spans_survived": true,
+      "legacy_completed_handles_remaining": 0,
+      "visible_new_finals": 1
+    },
+    "lint": {"ruff_new_files": "pass", "pre_commit_hooks": "pass"}
+  },
+  "integration_notes": [
+    "tools/ is NOT a python package; tests locate it by inserting REPO/tools into sys.path (see tests/unit/test_p5_storage_retirement_common.py).",
+    "Legacy statuses: tools write artifacts.status='retired' (schema-supported non-reusable state; DDL has no CHECK on this column; validate_artifact accepts only 'completed'), so retired handles cannot be resurrected as consumable.",
+    "Sources tables have NO artifact_id linkage in evidence_spans; prune selection is by (parser_name[, parser_version][, source_ids][, document_ids]).",
+    "Sections DB row points at sections/index.json; each index entry path is retired as managed_files of the bundle.",
+    "Pre-existing failure on MAIN too: tests/contract/test_narrative_transport_cli.py::test_current_public_producer_regenerates_normalized_txt_golden (bundle_producer 0.1.0 vs 0.3.0) — independent of this lane (no src/ changes).",
+    "MAIN wiring required: retire RF old-SourceBundle callers (P5-RF lane), retire CWP normalized-text readers (llm_summarizer/section_extractor/summarizer), define quality/metadata_only semantics, then run the four operations against production with receipts.",
+    "No second Store/task DB/worker introduced; no schema/DDL/config/pyproject/CI changes; production DB untouched by this lane."
+  ],
+  "remaining": [
+    "MAIN: consumer migration/retirement (RF default + CWP body readers) before any production deletion.",
+    "MAIN: decide compact-vs-keep classification for any parser without sufficient evidence of being legacy full-volume (tool reports per-parser counts; no implicit delete).",
+    "Push: origin remote exists; codex/ branch pushable by MAIN if desired (this lane committed locally only)."
+  ]
+}
