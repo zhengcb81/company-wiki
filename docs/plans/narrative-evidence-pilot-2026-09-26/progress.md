@@ -651,3 +651,4 @@ S0/N4A及S2模型预算基础、CLI阶段与CI修复已正常发布，当前CI�
 - 测试夹具初版被PYTEST_CURRENT_TEST跳过dotenv，出现不正确RED路径；改成模拟真实默认loader后环境存在case复现覆盖RED、补缺case通过。最终25配置tests+9 defaults=34 passed（10.20s）。修后正式配置两家/models均200，mimo-v2.6-flash与deepseek-flash均存在，环境密钥保留true；小JSON无key/正文，零模型POST。之前请求用户修复DeepSeekkey的问题已失效，已明确告知用户无需更换。
 - 下一真实provider批次需160k token cap问题答复，仍限累计$0.10。Flash代理价与Credits已同步临时driver/交接报告；不声称摘要已完成。配置修正前的旧报告保持历史事实，最新Next Step和preflight报告已经纠正。
 - 发布前Ruff/diff-check GREEN，用户source_acquisition配置SHA仍3609e707466e…，不暂存。本线测试根全部恢复：正常账号删除5个早期sandbox创建的RED目录遇到ACL拒绝，转回创建它们的sandbox执行经绝对路径验证的同一范围删除成功；不是生产权限变更，也未改ACL。旧未知费用SQLite与临时待用driver保留，原件/外包目录未清理。
+- 已发布：a0ea41bd1aef8ffcdf535e065cb9ed5836abaf2b提交/推送成功；commit Ruff/mypy/config-doctor/host guard与正常pre-push快速合同均GREEN。精确SHA CI37368647773 queued，尚无远端结果。本地仅config/source_acquisition.yaml用户既有变更，SHA3609e707466e…完全相同。

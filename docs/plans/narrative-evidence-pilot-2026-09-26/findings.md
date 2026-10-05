@@ -539,6 +539,7 @@ Git写入/联网用正常用户，sandbox .git只读不是产品权限。测试�
 - 用户指出DeepSeek key在环境变量。加载前捕获进程环境（与Windows User scope相同）再请求同一/models：200、flash存在；加载后的key与加载前不同，使用加载后key才401。确定根因是本仓managed dotenv强制覆盖环境密钥。此前“已排除环境覆盖/用户需修复key”的结论撤回：那个比较是在覆盖后进行，没有比较加载前值，证据不充分。
 - TDD纠正环境密钥测试一度被PYTEST_CURRENT_TEST跳过dotenv，修正夹具模拟真实默认load后复现覆盖RED。现在DeepSeek环境优先、dotenv只补缺；MiniMax/MiMo项目受管凭证规则保留。更新旧默认断言并验证：53配置/旧客户端责任tests、16 defaults/legacy来源适配、34最终配置/环境优先tests均GREEN。改后的真实Config `/models`两家均200、Flash都列出，DeepSeek environment_preserved=true；仅安全元数据保存到n4c_flash_preflight_2026-10-05.json，零模型POST。
 - Flash预算代理按[MiMo国内官方价](https://mimo.mi.com/docs/en-US/price/pay-as-you-go)1/2 CNY与FX floor6：0.166667/0.333334 USD每百万；Token Plan [规则](https://mimo.mi.com/docs/en-US/price/token-plan)输入未缓存100、输出200 Credits/token。此前Pro价格是旧配置历史准备依据，未来run不再使用。新driver仍保留旧未知账及$0.10总cap；已发出的160k token cap问题尚未收到批准，真实摘要调用未执行。
+- 配置/诊断修复已发布a0ea41bd1aef8ffcdf535e065cb9ed5836abaf2b，正常pre-push GREEN，精确SHA远端CI37368647773最后queued；本机只剩用户既有配置变更，SHA不变。不得把清单认证200说成模型摘要验收成功。
 
 
 ## 2026-10-05 — run03零费用失败与空间采样竞态
