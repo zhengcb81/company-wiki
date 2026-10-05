@@ -498,3 +498,12 @@ S0/N4A及S2模型预算基础、CLI阶段与CI修复已正常发布，当前CI�
 - 完整离线端到端：`PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 PYTHON_DOTENV_DISABLED=1 RF_RUN_NARRATIVE_REAL_SAMPLES=1 COMPANY_WIKI_NETWORK=blocked`，`CWP_NARRATIVE_CODE_ROOT=<CWP root>`，pytest经`PYTHONPATH=<CWP root>/tests;<CWP root>`加载CWP producer与RF快照。`tests/test_narrative_source_preparation_e2e.py` **15 passed / 39.81s**，含四类文件、拒绝/限额输入和真实P01年报PDF+T01电话会TXT；真实原件SHA/mtime与CWP生产fingerprint测试前后不变，RF从CWP pathless CLI得到正文和locator。
 - 输出只证明已存在RF N3a bounded subprocess能消费真实CWP叙述transport，不证明预测计算、N4 Worker摘要/并发、季报选择或SourceBundle默认路径已经迁移。pytest唯一warning是禁用插件后的既有`asyncio_mode`未知选项。
 - Path guard自动将basetemp移到TEMP，运行后确认`removed=true`；CWP隔离导出目录经绝对路径范围检查后删除，`scratch_removed=True`。无网络/付费API调用、无生产原件/catalog/database写入，RF无写入；CWP状态仍只有原用户修改`config/source_acquisition.yaml`。对应findings与总计划已同步此收据，下一步仍是N4-T2联合验收后做实际Worker批次，不重复跑空fixture adapter测试。
+
+## 2026-10-05 — 主线Worker并行档与恢复能力的三项大节点验证
+
+- 依据CodeGraph与`profile_slots`源码确认worker采用多进程档：P1=1 mixed；P2=1 compute+1 model；P4=3 compute+1 model。所有profile保持单model slot。扩大profile能让多个文档在选择/验证阶段并行，并让不同文档的计算与模型阶段重叠；不会并行发送多个LLM请求。
+- 扩展真实样本E6测试以覆盖P4并更名为`test_e6_real_samples_run_isolated_p1_p2_p4_and_restore_test_root`。完整重跑命令使用`COMPANY_WIKI_RUN_E6=1`、`COMPANY_WIKI_E6_TEST_BASE=tmp/e6p4`、插件自动加载关闭及本地network-blocked replay模型；**1 passed / 101.44s**。四类现场原件P01/P04/P07/T01加格式化skip样本，P1/P2/P4全通过，同为5 visible artifacts/4 model calls，0 retry/SQLite busy，object bytes 419,428、skip 1,441；原件及生产fingerprint保持不变。
+- 实测 profile 收据：P1 36.296s、359,493,632 B peak RSS、396.7 docs/h；P2 34.384s、437,956,608 B、418.8 docs/h；P4 29.091s、630,353,920 B、495.0 docs/h。P4比P2快15.4%、内存1.44倍；目前只能推荐P4作为下一次有界N4C集成批次的candidate。E6每档仅一轮，且sqlite busy p95/catalog lock wait未测，不能外推生产100文档吞吐。
+- `COMPANY_WIKI_RUN_E7_BENCHMARK=1`运行合成45-job、三档各两轮：**1 passed / 77.10s**。median wall P1/P2/P4为13.735/10.409/6.830s；对应max concurrency 1/2/4；E7定义的相对throughput指标P2/P4分别+32.0%/+52.4%。P4/P2 peak RSS中位数为267,538,432/170,479,616 B（1.57倍）；满足既有speed/RSS candidate threshold；busy error与retry皆0，但lock p95字段未测。
+- `test_e7_r11_100_narrative_jobs_recover_after_worker_restart_without_duplicates`：**1 passed / 19.43s**。34个测试文档、102个作业中，强制杀死一名compute worker后租约过期、重启recovery；34个bundle各自唯一可见、34 distinct work keys、34次模型夹具调用，目标作业一次`LEASE_EXPIRED`后一次成功，raw hashes不变。
+- E6专用数据根、旧/新basetemp、E7与R11 pytest scratch均已按绝对路径校验并删除，E6的测试根在用例退出时为空。唯一warning仍是缺插件时pytest.ini中的`asyncio_mode` unknown option。无provider/LLM外调或生产写入。此处只有E6 opt-in integration test改动；N4-T2卡不包含此文件、不重叠。N4-T2仍待交付；合入其selector修复后，MAIN要在P4 candidate档把改良选择、实际Worker摘要、CWP公开读取与RF N3a合成一轮真实业务样本验到底。

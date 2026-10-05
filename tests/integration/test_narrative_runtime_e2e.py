@@ -1842,7 +1842,7 @@ def _e6_run_profile(
             catalog.close()
 
 
-def test_e6_real_samples_run_isolated_p1_p2_and_restore_test_root(
+def test_e6_real_samples_run_isolated_p1_p2_p4_and_restore_test_root(
     tmp_path: Path,
 ) -> None:
     if os.environ.get("COMPANY_WIKI_RUN_E6") != "1":
@@ -1892,18 +1892,16 @@ def test_e6_real_samples_run_isolated_p1_p2_and_restore_test_root(
             copied_samples[sample_id] = (sample, copied, copied_path)
 
         profile_results: dict[str, dict[str, object]] = {}
-        for profile in ("P1", "P2"):
+        for profile in ("P1", "P2", "P4"):
             profile_results[profile] = _e6_run_profile(
                 run_root,
                 profile=profile,
                 copied_samples=copied_samples,
             )
-        assert profile_results["P1"]["visible_count"] == 5
-        assert profile_results["P2"]["visible_count"] == 5
-        assert profile_results["P1"]["model_calls"] == 4
-        assert profile_results["P2"]["model_calls"] == 4
-        assert profile_results["P1"]["object_bytes"] / profile_results["P1"]["raw_bytes"] <= 0.03
-        assert profile_results["P2"]["object_bytes"] / profile_results["P2"]["raw_bytes"] <= 0.03
+        for profile in ("P1", "P2", "P4"):
+            assert profile_results[profile]["visible_count"] == 5
+            assert profile_results[profile]["model_calls"] == 4
+            assert profile_results[profile]["object_bytes"] / profile_results[profile]["raw_bytes"] <= 0.03
         metric_keys = (
             "wall_seconds",
             "narrative_documents_per_hour",
