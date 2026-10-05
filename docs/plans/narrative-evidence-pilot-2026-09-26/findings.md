@@ -476,3 +476,11 @@ Git写入/联网用正常用户，sandbox .git只读不是产品权限。测试�
 - 用户最新要求当前工作收尾后暂停。统一停止点和唯一恢复动作见[收尾收据](harness_lanes/results/n4c_latency_version_closeout_2026-10-05.md)，不启动后续真实模型/消费者/存储迁移。此前活动状态和旧暂停记录只表示各自时刻。
 - 完整Unit首次1425 passed/1 failed：唯一失败是已完成G1-LEGACY外包卡用`git status`限制整个当前checkout写集；用户配置及本次计划/修复因此被误拒。这是一次性交付审计被混入永久产品Unit的缺陷。移除该测试、同类删除集合检查和仅供它们的allowlist，保留旧入口动态退出、初始化/写入陷阱、原件夹具快照、已退役工具/导入链等行为测试。外包写集审计保留在交付收据，不扩旧白名单、不清理用户修改来骗绿。
 - 修复`b09e845`发布后实际快速push门和精确SHA的Actions [37354477263](https://github.com/zhengcb81/company-wiki/actions/runs/37354477263)均GREEN；完整CI job约77秒。这关闭本次版本/测试收尾，不解决尚未完成的真实模型/消费者大节点。原件与用户配置保持原样；目标按用户要求暂停。
+
+## 2026-10-05 — P5可独立施工的真实缺口
+
+- RF已发布main仍把SourceRef v2作为opt-in，默认legacy source preparation实读normalized/summary/sections。现有v2 builder/reader/三仓E2E已经在main；需要迁默认及真实调用者，不重写N3a或预测模型。这是S5释放derived的直接依赖。
+- FF v2 CLI已自动设SourceRef route，不再派一个重复“v2默认化”包。剩余`PausedWorkerScope`及磁盘refcount/owner可以退出；主JSON runner与transcript runner先capture再限长，filing还按字符计数而非UTF-8 bytes。既有32MiB cap要在读期间执行，共用deadline/有限树回收，保持wire。
+- 旧derived和active旧span降容可以提前实现独立tools与隔离fixture测试；它不修改CWP当前src/schema，也不在外线执行生产删除。S5消费者迁移与N4C只是MAIN live执行前置，非外线编码前置。现有retired-only prune不解决active全量span，不应再安排完整只读审计或大备份。
+- P5三包源仓RF/FF/CWP，实际目录为`Projects/cwp-lanes-20261005`下三个互不包含的兄弟worktree；storage源码写集仅新增tools/tests，与MAIN runtime/core无重叠。共享wire固定；每包有独立上下文/PWF/测试/交接，MAIN统一合入和最终清理。
+- StockWiki已完成N3b/SourceExport/W01–W04，ET deadline已完成；不以新名字重复旧工作。三新包是ready并非running，外部harness不可见部分不推测；IQS仍不碰，Dayu零代码写入。

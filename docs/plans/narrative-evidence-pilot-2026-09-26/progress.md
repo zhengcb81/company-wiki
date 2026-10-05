@@ -574,3 +574,13 @@ S0/N4A及S2模型预算基础、CLI阶段与CI修复已正常发布，当前CI�
 - 发布验证完成：`b09e845`已推到`origin/master`，live `ls-remote`匹配完整SHA；实际push运行精选契约门GREEN。Actions [37354477263](https://github.com/zhengcb81/company-wiki/actions/runs/37354477263)匹配该SHA且completed/success，job为18:14:46–18:16:03 UTC（77秒），完整Unit、精选合同及静态/CLI检查全绿。没有为日常commit恢复pytest门。
 - 最后清理核验：`tmp/n4c-timing-20261005`、`tmp/n4c-stage-benchmark.py`、`tmp/n4u`及请求的版本测试根均不存在；自动迁移basetemp的cleanup removed=true。原件未写，用户`config/source_acquisition.yaml`收尾前后SHA一致（`3609e707466e…`），未暂存或提交。其他仓无写入。
 - 本轮主计划、findings、progress、N4实施卡、并行总计划与新收尾收据统一为同一停止点及恢复动作；6份文档随收尾提交发布。用户明确要求暂停，目标在这些交付完成后设置paused；整体S4/S5/S6尚未完成，暂停不等于完成。
+
+## 2026-10-05 — 再次恢复，新增三个互斥P5施工包
+
+- 用户恢复运行，工具确认goal active。CWP `f775406`与live master一致，只有原有用户provider配置dirty；RF正常账号仍2份assurance owner变化，main/live `8a153f33`。凭证仅检查存在性，未输出或调用模型。
+- 用户随后要求几个可独立较大施工包，作为当前主线的并行拆分。只读盘点确认RF默认source-preparation仍legacy；FF v2 CLI已自动pathless、旧Worker scope还在、两个JSON runner为capture后限长且filing用字符计数。StockWiki narrative consumer和ET deadline均已完成，不凑数重派；IQS/Dayu不写。
+- 新建`harness_lanes/p5_parallel_packages_2026-10-05.md`及3张自包含卡：P5-RF默认SourceRef迁移、P5-FF旧Worker/实际有界进程、P5-STORAGE独立旧派生/span/VACUUM工具。各自新兄弟worktree、独立PWF/HANDOFF与测试包；storage只写新增tools/tests，不改MAIN src。均ready尚未派发；没有新建外仓工作树或修改外仓。
+- MAIN继续N4C真实模型/消费者，源wire固定，RF/FF两包可对当前正式接口独立测试；storage工具只对隔离fixture执行，生产清理前置留MAIN。统一handoff JSON/MD仅作交接，不是新人工许可/签名门；大节点验收不变。
+- 调查过程修正：第一次假设FF/StockWiki有`src/`得到路径不存在，改`rg --files`核实际`scripts/`和`stockwiki/`；RF sandbox git-show被dubious ownership拒绝，改正常用户只读，不写global safe.directory。一次无命中字面检索exit1属未命中，不当成功或阻塞。
+- 本轮只新增计划/卡片，未运行新Worker/provider/模型，未改原件、生产DB/config或owner文件；下一MAIN动作仍是有界N4C，不重复已绿E6。
+- 文档校验：4份P5总包/卡片相对链接无缺失，storage专属新tools/tests路径当前均未占用，`git diff --check`通过。handoff明确delivery_head取功能提交、报告可另commit，避免自引用SHA循环；本地Replay/fake调用与真实外部调用分开，不造0计数。纯文档交付不重复运行长行为包；正常commit/push保已有hook。

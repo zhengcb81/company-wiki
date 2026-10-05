@@ -1,6 +1,16 @@
 # 并行总计划：门禁先行，独立目录施工，MAIN统一打通
 
-> 2026-10-04复核。补充[task_plan](task_plan.md)，不产生第二套全项目顺序。G1/S3已收口，当前N4C，随后S5/S6。当前三张ready卡见下方“新增三张互斥施工卡”；ready不等于running。其余同日较早章节为历史过程，不再产生待办。
+> **2026-10-05最新覆盖：**用户已恢复。当前可派发的是[P5三包](harness_lanes/p5_parallel_packages_2026-10-05.md)：RF默认来源迁移、FF旧Worker/有界进程、CWP新降容工具，均ready尚未派发。MAIN继续N4C；旧N4-T1/T2与MeetingConverter卡均已完成。下方旧日期过程只供追溯，不再产生待办或屏障。
+
+## 当前可立即并行的P5包
+
+| 包 | 独占目录 | 接口与交接 | 何时开工 |
+|---|---|---|---|
+| [P5-RF](harness_lanes/p5_rf_source_default_migration.md) | `Projects/cwp-lanes-20261005/rf-source-v2` | RF SourceRecord/reuse receipt沿用已发布wire；仅RF默认入口迁移 | 现在；不等FF新卡或MAIN模型 |
+| [P5-FF](harness_lanes/p5_ff_runtime_simplification.md) | `Projects/cwp-lanes-20261005/ff-runtime-cleanup` | SourceRef/companion wire不变；删除旧编排、共用有界进程 | 现在；不等RF默认迁移 |
+| [P5-STORAGE](harness_lanes/p5_storage_retirement_engine.md) | `Projects/cwp-lanes-20261005/cwp-storage-tool` | 新tools/专属tests；四维护操作及`cwp-storage-retirement/1`小报告 | 现在编码/fixture执行；生产清理由MAIN在迁caller后做 |
+
+绝对目录、准备命令、精确写集、测试/清根及统一handoff字段见[P5总包](harness_lanes/p5_parallel_packages_2026-10-05.md)。各卡可独立交给外部harness；本总表与CWP总PWF只由MAIN改。未收到派发消息不把ready写成running。
 
 ## 现在能交给外部harness的包
 
