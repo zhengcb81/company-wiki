@@ -160,7 +160,8 @@ def test_compute_constructs_no_model_or_budget_caller_and_reads_no_credentials(r
 
 
 @pytest.mark.parametrize("role", ["model", "mixed"])
-def test_model_roles_wire_one_child_local_http_model_and_budget_caller(run_state, monkeypatch, role):
+@pytest.mark.parametrize("thinking", [None, "disabled"])
+def test_model_roles_wire_one_child_local_http_model_and_budget_caller(run_state, monkeypatch, role, thinking):
     monkeypatch.setenv(KEY_ENV, KEY)
     factory = _factory()
     captured = []
@@ -171,12 +172,16 @@ def test_model_roles_wire_one_child_local_http_model_and_budget_caller(run_state
         register(registrar, dependencies)
 
     monkeypatch.setattr(factory, "register_narrative_handlers", capture)
-    spec = _spec(run_state, role=role)
+    options = json.loads(canonical_json(run_state.options))
+    if thinking is not None:
+        options["model"]["thinking"] = thinking
+    spec = _spec(run_state, role=role, options=options)
     runtime = factory.create_runtime(spec)
     assert len(captured) == 1
     dependencies = captured[0]
     assert dependencies.model is runtime.model_client
     assert isinstance(dependencies.model, factory.NarrativeHTTPModel)
+    assert dependencies.model.thinking == thinking
     assert isinstance(dependencies.model_caller, factory.BudgetedNarrativeCaller)
     assert KEY not in spec.runtime_options_json and KEY not in repr(runtime.model_client)
 

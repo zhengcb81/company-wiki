@@ -97,6 +97,7 @@ class NarrativeHTTPModel:
         max_request_bytes: int = 262_144,
         max_response_bytes: int = 262_144,
         allow_local_http: bool = False,
+        thinking: str | None = None,
     ) -> None:
         if (
             not isinstance(model_id, str)
@@ -151,6 +152,11 @@ class NarrativeHTTPModel:
             max_response_bytes, "max_response_bytes"
         )
         self.timeout_seconds = float(timeout_seconds)
+        if thinking is not None and (
+            not isinstance(thinking, str) or thinking not in {"disabled", "adaptive"}
+        ):
+            raise ValueError("thinking must be disabled, adaptive or omitted")
+        self.thinking = thinking
         self._scheme = parsed.scheme
         self._host = parsed.hostname
         self._port = parsed.port
@@ -169,6 +175,8 @@ class NarrativeHTTPModel:
             "max_tokens": self.max_output_tokens,
             "response_format": {"type": "json_object"},
         }
+        if self.thinking is not None:
+            payload["thinking"] = {"type": self.thinking}
         try:
             body = json.dumps(
                 payload, ensure_ascii=False, separators=(",", ":")
@@ -256,6 +264,9 @@ class NarrativeHTTPModel:
             payload = json.loads(body.decode("utf-8"))
             choice = payload["choices"][0]
             content = choice["message"]["content"]
+            truncated = choice.get("finish_reason") == "length"
+            if content is None and truncated:
+                content = ""
             if not isinstance(content, str):
                 raise ValueError("invalid content")
             encoded = content.encode("utf-8")
@@ -284,7 +295,7 @@ class NarrativeHTTPModel:
         ):
             input_tokens = output_tokens = None
         duration_ms = max(0, int((time.monotonic() - started) * 1000))
-        if choice.get("finish_reason") == "length":
+        if truncated:
             raise ModelOutputTruncatedError(
                 model_id=actual_model,
                 input_tokens=input_tokens,

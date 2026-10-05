@@ -1,5 +1,9 @@
 # N4：可运行的叙述批次、真实模型计量与持久恢复
 
+> **当前run02结果覆盖：**用户永久授权MiniMax，P5三线已开工。真实batch终态budget_exhausted，无final/消费者真实read；总charged含旧unknown33,660 tokens/16,580 microUSD（不是账单），下次剩余26,340/$0.083420。先定位HTTP客户端拒绝、请求保守预留和synthetic skip parse，不扩大cap/盲重试。测试根已恢复，原件/生产/owner不变；详见run02收据与主计划Next Step。
+
+> **2026-10-05 provider预检补充（MAIN）：**RF已提交main仍`8a153f3`，正常账号仅两份assurance owner修改，N3a公开CLI可复用。旧账本unknown预留10,325 tokens/$0.005258仍保留，新run累计剩余49,675/$0.094742。官方OpenAI兼容接口说明M3默认thinking开启、思考计入max_tokens，支持`thinking={type:disabled}`；`reasoning_effort=none`不可用。先RED修“finish_reason=length且content=null仍保留真实usage”，再接入可选thinking配置并绑定run hash，保持省略时旧请求形状/hash；真实小批显式disabled，不能扩大预算或清旧未知项。文档来源：https://platform.minimax.io/docs/api-reference/text-openai-api 。这是已证代码缺口，不声称已证明旧失败的供应商原始响应（未留正文）。节点测试后才发provider。
+
 > **2026-10-05恢复覆盖：**用户已恢复，MAIN继续N4C真实provider/Worker/消费者节点；P5三个外包可并行编码，见[P5接口总包](harness_lanes/p5_parallel_packages_2026-10-05.md)。不等三卡交齐，外线不改本卡runtime/core，MAIN不改其独占写集。旧未知预算保留；总剩余上限仍49,675 tokens/$0.094742，本次准备卡没有模型调用。
 
 > **2026-10-05 当前状态覆盖：**G1/S3、N4A/B和N4-T1/T2已收口；真实原件配本地Replay的E6 P1/P2/P4已绿。耗时控制实验及selector `0.3.0`批次版本修复完成后按用户要求暂停；不代表N4C真实provider/消费者/总空间验收完成。[收尾收据](harness_lanes/results/n4c_latency_version_closeout_2026-10-05.md)给出测量限制、剩余额度、独立测试目录恢复规则与唯一恢复动作。下方2026-10-04状态及实施记录保留追溯，当前顺序以主计划Next Step为准。不重新实施A/B或重派已关闭外包卡。

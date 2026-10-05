@@ -100,6 +100,19 @@ def test_batch_identity_includes_catalog_metadata_and_read_policy():
     assert module.build_batch_events(request, reader, now="2026-10-03T10:00:00Z").input_hash != first.input_hash
 
 
+def test_batch_thinking_control_is_optional_and_binds_run_generation():
+    original = _request()
+    wire = original.to_dict()
+    assert "thinking" not in wire["model"]
+    assert NarrativeBatchRequest.from_dict(wire).input_hash == original.input_hash
+    wire["model"]["thinking"] = "disabled"
+    disabled = NarrativeBatchRequest.from_dict(wire)
+    assert disabled.model_options["thinking"] == "disabled"
+    assert disabled.input_hash != original.input_hash
+    wire["model"]["thinking"] = "adaptive"
+    assert NarrativeBatchRequest.from_dict(wire).input_hash != disabled.input_hash
+
+
 def test_current_selection_never_reuses_pre_n4t2_batch_hash(monkeypatch):
     # Published 0.2.0 predates the Chinese business-progress/empty-result fix.
     # Reusing its run identity would silently retain old selected evidence.

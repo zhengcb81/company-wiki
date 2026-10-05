@@ -262,12 +262,12 @@ def test_streaming_body_cannot_reset_the_overall_read_deadline(stub):
         (None, (None, None)),
     ],
 )
+@pytest.mark.parametrize("content", [None, "", KEY + REQUEST.data_json])
 def test_truncated_output_carries_metering_without_content_or_secret(
-    stub, usage, expected_tokens
+    stub, usage, expected_tokens, content
 ):
     from company_wiki.automation.narrative_http_model import ModelOutputTruncatedError
 
-    content = KEY + REQUEST.data_json
     stub.body = _response(
         choices=[{"message": {"content": content}, "finish_reason": "length"}],
         usage=usage,
@@ -279,9 +279,28 @@ def test_truncated_output_carries_metering_without_content_or_secret(
     assert error.value.model_id == "actual-provider-model"
     assert (error.value.input_tokens, error.value.output_tokens) == expected_tokens
     assert type(error.value.duration_ms) is int and error.value.duration_ms >= 0
-    assert KEY not in repr(error.value) and content not in repr(error.value)
+    assert KEY not in repr(error.value)
+    if content:
+        assert content not in repr(error.value)
     assert not hasattr(error.value, "response_bytes")
     assert len(stub.calls) == 1
+
+
+@pytest.mark.parametrize("thinking", ["disabled", "adaptive"])
+def test_explicit_thinking_control_reaches_the_one_bounded_post(stub, thinking):
+    model = _model(endpoint=stub.endpoint, allow_local_http=True, thinking=thinking)
+    result = model.generate(REQUEST)
+    assert (result.input_tokens, result.output_tokens) == (73, 19)
+    assert len(stub.calls) == 1
+    assert json.loads(stub.calls[0][2])["thinking"] == {"type": thinking}
+    assert stub.calls[0][2] == model.request_bytes(REQUEST)
+
+
+@pytest.mark.parametrize("thinking", [False, "none", "", {}, ["disabled"]])
+def test_invalid_thinking_control_is_rejected_without_a_request(stub, thinking):
+    with pytest.raises(ValueError, match="thinking"):
+        _model(endpoint=stub.endpoint, allow_local_http=True, thinking=thinking)
+    assert stub.calls == []
 
 
 @pytest.mark.parametrize(

@@ -6,7 +6,7 @@
 
 完成八束整套简化：一个下载请求入口、一套pathless来源接口、一套AUTO任务系统，按需选择业务叙述、摘要和检索；停止全量永久转换与重复正文；完成真实模型、持久预算、可恢复多文档处理及消费者接线，然后分批删除无调用者的旧派生。原件、来源/版本事实不丢。RF/FF/ET/StockWiki/IQS各仓独占写入，不修改其他owner未提交工作。
 
-**当前恢复点（2026-10-05）：**用户恢复运行，目标工具已确认active，随后要求新增独立施工包。本次已完成[P5三包及接口](harness_lanes/p5_parallel_packages_2026-10-05.md)：RF默认SourceRef迁移、FF旧Worker/有界进程、CWP独立降容工具；均ready尚未派发，不重复已完外包卡。MAIN继续N4C真实模型/Worker与RF N3a实读，外线不改MAIN核心写集。此前耗时调查及selector `0.3.0`修复已发布；本次尚未启动新的provider请求。RF live main仍`8a153f3`，正常账号只有两份assurance owner改动。
+**当前恢复点（2026-10-05）：**目标active；用户确认[P5三卡](harness_lanes/p5_parallel_packages_2026-10-05.md)已开工，RF/FF/新存储工具独占写集保留。MAIN模型thinking/null截断计量修复92 Unit、正式CLI 2 E2E GREEN；用户已明确永久授权指定公开来源向MiniMax做原语言摘要。真实run02终态budget_exhausted，IR/TXT收到HTTP客户端拒绝（当前收据未保留数字status），年报/招股在保守token预留前拒绝，synthetic skip PDF为PARSER_INCOMPLETE；无新final，RF真实消费未验收。总charged含旧unknown为33,660 tokens/$0.016580（保守预留，不是供应商账单）；下次剩余26,340/$0.083420，先查拒绝和计量/入场原因，不盲目扩大cap或重复付费。原件/生产/用户配置/RF owner不变，测试根恢复absent，收据[n4c run02](harness_lanes/results/n4c_live_2026-10-05_run02.json)。RF固定已提交main8a153f3只读复用，不切owner树。
 
 **最近发布验收：**修复提交`b09e845a845e172a3659acef6ad6d172f7565d2f`已推送`origin/master`，快速pre-push契约门GREEN；[精确SHA的CI](https://github.com/zhengcb81/company-wiki/actions/runs/37354477263) completed/success（job约77秒，含完整Unit）。清除两个旧卡永久Git工作树门；保留所有产品/原件保护测试。收尾文档`f775406`已发布；当时paused状态已由本次用户恢复撤销。
 
@@ -117,7 +117,7 @@ TDD框住公开行为，不把旧签收规则写进新测试。仅S0相关收口
 
 ## Next Step
 
-**MAIN下一动作：**按[既有恢复接口](harness_lanes/results/n4c_latency_version_closeout_2026-10-05.md)建立新的独立run，以selector `0.3.0`和剩余最多49,675 tokens / $0.094742执行一个有限真实模型批次，随后通过CWP公开read交给RF已提交N3a消费者实读。用户已恢复，不再等恢复确认；已绿Replay不等于真实provider计量，一次大节点核耗时/引用/语言/目录恢复/空间/预算。P5-RF独占默认来源迁移，P5-FF独占旧编排及有界进程，P5-STORAGE独占新维护工具；MAIN不改它们的写集，各自完成后随到随合，不等齐。实际生产清理仍在调用者迁移及新final验收之后，由MAIN执行S5/S6；原件、来源版本和用户配置保留。
+**MAIN下一动作：**先提交/推送已绿模型适配器修复与实际收据，离线查明run02的请求准入/skip parser问题，并用供应商正式只读能力及安全数字status定位HTTP拒绝；没有证据前不盲目重复paid call。下次预算最多26,340 tokens/$0.083420，永久MiniMax授权已取得，旧unknown保留。只有真实final产生并被CWP公开read/RF已提交N3a实读后才关闭N4C。P5-RF独占默认来源迁移，P5-FF独占旧编排及有界进程，P5-STORAGE独占新维护工具；MAIN不改它们的写集，各自完成后随到随合，不等齐。实际生产清理仍在调用者迁移及新final验收之后，由MAIN执行S5/S6；原件、来源版本和用户配置保留。
 
 ## 2026-10-04：新增三张可独立派发的施工卡
 

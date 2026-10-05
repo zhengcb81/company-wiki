@@ -90,7 +90,7 @@ class NarrativeBatchRequest:
         if isinstance(seconds, bool) or not isinstance(seconds, (int, float)) or not math.isfinite(seconds) or seconds <= 0:
             raise ValueError("max_seconds must be finite and positive")
         model_raw = value["model"]
-        if not isinstance(model_raw, dict) or not {"model_id", "endpoint", "api_key_env"} <= model_raw.keys() or not model_raw.keys() <= (set(_MODEL_DEFAULTS) | {"model_id", "endpoint", "api_key_env"}):
+        if not isinstance(model_raw, dict) or not {"model_id", "endpoint", "api_key_env"} <= model_raw.keys() or not model_raw.keys() <= (set(_MODEL_DEFAULTS) | {"model_id", "endpoint", "api_key_env", "thinking"}):
             raise ValueError("model options must contain supported non-secret fields only")
         model = {**_MODEL_DEFAULTS, **model_raw}
         if type(model["allow_local_http"]) is not bool:

@@ -1,5 +1,17 @@
 # Findings：当前事实与待验证项
 
+## 2026-10-05 MAIN模型预检与P5开工
+
+- 新证据：项目config.yaml的非秘密模型配置为MiniMax-M3、base_url=https://api.minimaxi.com/v1。相同当前env key下，国际站GET /v1/models返回401，已配置国内站返回200并列出MiniMax-M3；因此站点不匹配是已证问题。N4C测试端点应复用当前配置国内站，不自动fallback或轮换secret。官方国内文档已重定向到https://platform.minimax.cn/docs/api-reference/text-openai-api，支持M3显式thinking disabled。旧两个拒绝仍按unknown保守留账，不因只读401检查退款或假造供应商usage。
+
+- N4C run02真实CLI已终态，39.106s，采样process-tree RSS峰499,916,800 B，测试树峰21,647,101 B。IR/TXT两个HTTP客户端拒绝留下unknown，年报/招股保守预留denied，synthetic skip PDF parser incomplete；没有任何final，也没有RF真实read结果。明确N4C未通过，不用先前Replay绿替代本次真实绿。
+- 本次账本charged23,335 tokens/11,322 microUSD；与旧unknown合计33,660/16,580，剩余26,340/83,420。unknown不是实际账单，也不假称HTTP拒绝收费为0。小型reservation事实已写根外JSON，测试DB/raw/log/worker根全部删除恢复absent。下一步收集安全数字HTTP status（本次driver漏采）、请求准入体积及skip parse错误；不重复paid retry猜参数。
+
+- 用户确认P5三线均已开工，保留RF/FF/新存储工具独占写集。RF正常账号仅两份assurance owner变更，origin/main为8a153f3；N3a公开CLI及reader可读，不切owner checkout。
+- 官方MiniMax OpenAI接口说明M3 thinking默认开启且计入输出token额度，支持显式disabled；不能使用reasoning_effort=none。适配器先解析content再usage，真实同型fixture证明finish_reason=length且content=null丢失usage。未保留旧provider正文，故这是已证代码缺口，不断言旧失败必然属于此型。来源：https://platform.minimax.io/docs/api-reference/text-openai-api。
+- RED：10 failed/4 passed（null截断与新thinking配置）；旧unknown仍10,325 tokens/$0.005258，新批累计剩余49,675/$0.094742。修复须保留省略thinking时旧请求hash、绑定显式模式并贯通child factory，不清未知费用、不扩大上限。
+- 两项读路径猜测错误已校正：NarrativeModelRequest位于narrative_model.py；RF读取须git show origin/main:scripts/narrative_source_preparation.py。一次patch因request_bytes实际已有payload局部变量而未应用，读准确代码后重做，无部分写入。
+
 > 2026-10-03已采纳激进方案。完整历史已保存在固定Git版本：https://github.com/zhengcb81/company-wiki/blob/bff81afe7cbb11c895764a94c2eabd121539e248/docs/plans/narrative-evidence-pilot-2026-09-26/findings.md；当前不恢复旧门禁/审批/重复任务。
 
 ## 已验证事实

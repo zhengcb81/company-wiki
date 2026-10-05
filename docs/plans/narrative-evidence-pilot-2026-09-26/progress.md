@@ -1,5 +1,19 @@
 # Progress：激进简化实施
 
+## 2026-10-05 — MAIN provider预检、P5三卡运行
+
+- 只读接口调查确认测试端点错用国际站：api.minimax.io/v1/models=401；项目已配置api.minimaxi.com/v1/models=200/MiniMax-M3可用。两次GET无文档/推理；不输出key。下一真实批使用既有国内端点；先离线量长文请求并查skip错误，不盲重试。官方CN价格页web访问失败，未据此猜人民币/USD计价。
+
+- run02收尾：正式batch 39.106s，budget_exhausted；两个真实HTTP客户端拒绝/usage unknown，年报招股预算预留拒绝，synthetic skip parser incomplete。0 final、RF消费者实际读取未完成。原件/生产/用户配置/RF owner fingerprint全同、测试根absent。实测收据n4c_live_2026-10-05_run02.json保存保守budget/reservations，旧未知不清零；剩余26,340 tokens/$0.083420。不能用REPLAY验收标真实节点完成。
+
+- 第一次真实批次观测器遇到正常消失的SQLite SHM文件，stat抛FileNotFoundError，测试driver提前停止。已确认所创建CLI/child终止、原件/生产/owner不变、目录恢复；持久账本0个reservation/0新增费用，收据n4c_live_2026-10-05.json保留。修正观测器对临时文件消失容忍，新的run02独立root重新执行，不因超时误重启活进程、不清旧预算。
+
+- 自动审批先拒绝具体MiniMax批次，要求资料/供应商明确。用户回复“给你永久授权”，明确覆盖本批四份公开来源向api.minimax.io做原语言业务摘要；同类授权沿用，不再重复询问。预算仍含旧unknown，最多60,000 tokens/$0.10；本次剩余49,675/$0.094742。不扩展为修改原件/翻译/购买套餐授权。
+- 集中GREEN：92 Unit（8.03s）及正式batch CLI 2 E2E（23.71s），新thinking穿过spawn factory，双语言/skip/同run恢复/真实费用和hash拒绝均通过；Ruff绿。一次测试插入误把原read-policy断言移入新用例导致NameError，已恢复原断言归属后全绿。测试根n4green/n4green2/n4cli均已关闭并清除。
+
+- P5三卡由用户确认已开工；MAIN不进入其写集。RF固定main N3a CLI只读复用，owner两份assurance文件不动。
+- 先RED模型截断/usage与显式thinking：10 failed/4 passed，loopback无外发。实现null length先归类计量，thinking可选disabled/adaptive并绑定run配置、贯通factory；正在集中GREEN与真实小批准备。没有新的provider请求。
+
 > 历史Phase 1–64及详细运行记录：https://github.com/zhengcb81/company-wiki/blob/bff81afe7cbb11c895764a94c2eabd121539e248/docs/plans/narrative-evidence-pilot-2026-09-26/progress.md。当前只记录本计划的真实完成项与下一步，不重复旧验收。
 
 ## 2026-10-03 — 采纳方案、恢复实施

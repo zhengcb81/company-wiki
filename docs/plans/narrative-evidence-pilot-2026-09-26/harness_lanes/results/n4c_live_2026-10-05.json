@@ -1,0 +1,51 @@
+{
+  "schema_version": "n4c-live-experiment/1",
+  "run_id": "n4c-20261005-live-disabled-01",
+  "model": "MiniMax-M3",
+  "thinking": "disabled",
+  "metadata_is_fixture": true,
+  "rf_head": "8a153f3387ae75fb172e70f8ab63ffd38100779a",
+  "prior_budget": {
+    "run_id": "n4c-20261004-wave1",
+    "charged_tokens": 10325,
+    "charged_micro_usd": 5258,
+    "charged_output_bytes": 0,
+    "unknown_reservations": 1,
+    "unsettled_reservations": 0
+  },
+  "caps": {
+    "tokens": 49675,
+    "micro_usd": 94742,
+    "model_concurrency": 1,
+    "profile": "P4"
+  },
+  "samples": [],
+  "checks": {
+    "originals_unchanged": true,
+    "production_unchanged": true,
+    "user_config_unchanged": true,
+    "rf_owner_unchanged": true
+  },
+  "cleanup": {
+    "before": "absent",
+    "after": "absent",
+    "restored": true
+  },
+  "batch_pid": 13864,
+  "experiment_error": {
+    "type": "FileNotFoundError",
+    "detail": "[WinError 2] 系统找不到指定的文件。: 'C:\\\\Users\\\\郑曾波\\\\Projects\\\\company-wiki\\\\tmp\\\\n4live05\\\\automation.db-shm'"
+  },
+  "reservations": [],
+  "final_budget": {
+    "run_id": "n4c-20261005-live-disabled-01",
+    "charged_tokens": 0,
+    "charged_micro_usd": 0,
+    "charged_output_bytes": 0,
+    "unknown_reservations": 0,
+    "unsettled_reservations": 0
+  },
+  "overall_charged_tokens": 10325,
+  "overall_charged_micro_usd": 5258,
+  "total_seconds": 3.396
+}

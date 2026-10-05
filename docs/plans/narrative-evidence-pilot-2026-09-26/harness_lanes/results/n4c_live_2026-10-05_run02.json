@@ -1,0 +1,250 @@
+{
+  "schema_version": "n4c-live-experiment/1",
+  "run_id": "n4c-20261005-live-disabled-02",
+  "model": "MiniMax-M3",
+  "thinking": "disabled",
+  "metadata_is_fixture": true,
+  "rf_head": "8a153f3387ae75fb172e70f8ab63ffd38100779a",
+  "prior_budget": {
+    "run_id": "n4c-20261004-wave1",
+    "charged_tokens": 10325,
+    "charged_micro_usd": 5258,
+    "charged_output_bytes": 0,
+    "unknown_reservations": 1,
+    "unsettled_reservations": 0
+  },
+  "caps": {
+    "tokens": 49675,
+    "micro_usd": 94742,
+    "model_concurrency": 1,
+    "profile": "P4"
+  },
+  "samples": [
+    {
+      "sample_id": "P01",
+      "kind": "annual_report",
+      "source_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "batch_status": "blocked_human",
+      "errors": [
+        "DEPENDENCY_TERMINAL",
+        "MODEL_BUDGET_DENIED"
+      ]
+    },
+    {
+      "sample_id": "P04",
+      "kind": "prospectus",
+      "source_sha256": "19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+      "batch_status": "blocked_human",
+      "errors": [
+        "DEPENDENCY_TERMINAL",
+        "MODEL_BUDGET_DENIED"
+      ]
+    },
+    {
+      "sample_id": "P07",
+      "kind": "investor_relations",
+      "source_sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+      "batch_status": "blocked_human",
+      "errors": [
+        "DEPENDENCY_TERMINAL",
+        "MODEL_HTTP_CLIENT_ERROR"
+      ]
+    },
+    {
+      "sample_id": "T01",
+      "kind": "investor_call_transcript",
+      "source_sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+      "batch_status": "blocked_human",
+      "errors": [
+        "DEPENDENCY_TERMINAL",
+        "MODEL_HTTP_CLIENT_ERROR"
+      ]
+    },
+    {
+      "sample_id": "SKIP",
+      "kind": "ir_policy",
+      "source_sha256": "76cb7691dca60ff38ea8250a9435a30fe0d3a16c397bee6ee17a4321f0ccd3d9",
+      "batch_status": "blocked_human",
+      "errors": [
+        "DEPENDENCY_TERMINAL",
+        "DEPENDENCY_TERMINAL",
+        "PARSER_INCOMPLETE"
+      ]
+    }
+  ],
+  "checks": {
+    "budget_with_old_unknown": true,
+    "all_documents_completed": false,
+    "originals_unchanged": true,
+    "production_unchanged": true,
+    "user_config_unchanged": true,
+    "rf_owner_unchanged": true
+  },
+  "cleanup": {
+    "before": "absent",
+    "after": "absent",
+    "restored": true
+  },
+  "batch_pid": 7352,
+  "batch_result": {
+    "budget": {
+      "estimated_micro_usd": 11322,
+      "tokens": 23335,
+      "unknown_reservations": 2,
+      "unsettled_reservations": 0
+    },
+    "documents": [
+      {
+        "artifact_ref": null,
+        "document_id": "urn:company-wiki:document:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+        "errors": [
+          "DEPENDENCY_TERMINAL",
+          "MODEL_BUDGET_DENIED"
+        ],
+        "status": "blocked_human"
+      },
+      {
+        "artifact_ref": null,
+        "document_id": "urn:company-wiki:document:sha256:19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+        "errors": [
+          "DEPENDENCY_TERMINAL",
+          "MODEL_BUDGET_DENIED"
+        ],
+        "status": "blocked_human"
+      },
+      {
+        "artifact_ref": null,
+        "document_id": "urn:company-wiki:document:sha256:221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+        "errors": [
+          "DEPENDENCY_TERMINAL",
+          "MODEL_HTTP_CLIENT_ERROR"
+        ],
+        "status": "blocked_human"
+      },
+      {
+        "artifact_ref": null,
+        "document_id": "urn:company-wiki:document:sha256:4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+        "errors": [
+          "DEPENDENCY_TERMINAL",
+          "MODEL_HTTP_CLIENT_ERROR"
+        ],
+        "status": "blocked_human"
+      },
+      {
+        "artifact_ref": null,
+        "document_id": "urn:company-wiki:document:sha256:76cb7691dca60ff38ea8250a9435a30fe0d3a16c397bee6ee17a4321f0ccd3d9",
+        "errors": [
+          "DEPENDENCY_TERMINAL",
+          "DEPENDENCY_TERMINAL",
+          "PARSER_INCOMPLETE"
+        ],
+        "status": "blocked_human"
+      }
+    ],
+    "run_id": "n4c-20261005-live-disabled-02",
+    "schema_version": "narrative-batch-result/1",
+    "status": "budget_exhausted",
+    "storage": {
+      "persistent_added_bytes": 685874,
+      "scratch_peak_bytes": 0
+    }
+  },
+  "returncode": 2,
+  "batch_seconds": 39.106,
+  "peak_process_tree_rss": 499916800,
+  "peak_test_root_bytes": 21647101,
+  "reservations": [
+    {
+      "attempt_id": "4010350a943243eca57759530881203a",
+      "run_id": "n4c-20261005-live-disabled-02",
+      "job_id": "ad5cf697e0370fc6",
+      "request_sha256": "9903efd0dc484caca0c02fe3fc02e9baa98d29e50dff8ba54ff9ff8eeec91651",
+      "input_tokens_bound": 10364,
+      "max_output_tokens": 2400,
+      "output_bytes_bound": 2097152,
+      "reserved_micro_usd": 5990,
+      "usage_status": "unknown",
+      "input_tokens": null,
+      "output_tokens": null,
+      "estimated_micro_usd": null,
+      "response_sha256": null,
+      "error_code": "MODEL_HTTP_CLIENT_ERROR",
+      "output_bytes": 0,
+      "output_sha256": null,
+      "reserved_at": "2026-10-05T18:49:28Z",
+      "usage_settled_at": "2026-10-05T18:49:29Z",
+      "output_settled_at": "2026-10-05T18:49:29Z"
+    },
+    {
+      "attempt_id": "e750945f77174040bbe765335fe68000",
+      "run_id": "n4c-20261005-live-disabled-02",
+      "job_id": "a54db8c234d8a622",
+      "request_sha256": "d069fda66ce823bf6f0a9d1b07e8d578fccfb0c147013906a1cad1a3218ba8a6",
+      "input_tokens_bound": 8171,
+      "max_output_tokens": 2400,
+      "output_bytes_bound": 2097152,
+      "reserved_micro_usd": 5332,
+      "usage_status": "unknown",
+      "input_tokens": null,
+      "output_tokens": null,
+      "estimated_micro_usd": null,
+      "response_sha256": null,
+      "error_code": "MODEL_HTTP_CLIENT_ERROR",
+      "output_bytes": 0,
+      "output_sha256": null,
+      "reserved_at": "2026-10-05T18:49:29Z",
+      "usage_settled_at": "2026-10-05T18:49:30Z",
+      "output_settled_at": "2026-10-05T18:49:30Z"
+    }
+  ],
+  "model_attempt_reservations": 2,
+  "confirmed_metered_responses": 0,
+  "overall_charged_tokens": 33660,
+  "overall_charged_micro_usd": 16580,
+  "final_files": {
+    "automation.db": 638976,
+    "automation.db-shm": 32768,
+    "automation.db-wal": 0,
+    "automation.db.batch-owner.lock": 1,
+    "request.json": 2684,
+    "stderr.log": 1691,
+    "stdout.json": 1411,
+    "catalog\\catalog.sqlite3": 319488,
+    "catalog\\catalog.sqlite3-shm": 32768,
+    "catalog\\catalog.sqlite3-wal": 12392,
+    "catalog\\operation.lock.acquire": 1,
+    "config\\catalog.json": 270,
+    "rf-consumer\\company_wiki_narrative_contracts.py": 25847,
+    "rf-consumer\\company_wiki_narrative_process.py": 8500,
+    "rf-consumer\\company_wiki_narrative_reader.py": 3348,
+    "rf-consumer\\narrative_source_preparation.py": 2400,
+    "run-work\\storage-baseline.json": 116,
+    "run-work\\logs\\compute-1.stderr.log": 0,
+    "run-work\\logs\\compute-1.stdout.log": 87,
+    "run-work\\logs\\compute-2.stderr.log": 0,
+    "run-work\\logs\\compute-2.stdout.log": 87,
+    "run-work\\logs\\compute-3.stderr.log": 0,
+    "run-work\\logs\\compute-3.stdout.log": 87,
+    "run-work\\logs\\model-1.stderr.log": 1361,
+    "run-work\\logs\\model-1.stdout.log": 0,
+    "companies\\中微公司\\raw\\prospectus\\中微公司：首次公开发行股票并在科创板上市招股说明书.pdf": 11211796,
+    "companies\\中微公司\\raw\\prospectus\\中微公司：首次公开发行股票并在科创板上市招股说明书.pdf.source.json": 1095,
+    "companies\\中微公司\\raw\\financial_reports\\annual\\中微公司：2025年年度报告.pdf": 9165875,
+    "companies\\中微公司\\raw\\financial_reports\\annual\\中微公司：2025年年度报告.pdf.source.json": 840,
+    "companies\\万润股份\\raw\\investor_relations\\万润股份：投资者关系活动记录表20260515.pdf": 153851,
+    "companies\\万润股份\\raw\\investor_relations\\万润股份：投资者关系活动记录表20260515.pdf.source.json": 945,
+    "companies\\MSFT\\raw\\investor_relations\\transcripts\\MSFT_Q4_2026_earnings_call.txt": 66324,
+    "companies\\MSFT\\raw\\investor_relations\\transcripts\\MSFT_Q4_2026_earnings_call.txt.source.json": 725,
+    "companies\\Acme\\raw\\investor_relations\\policy.pdf": 843,
+    "companies\\Acme\\raw\\investor_relations\\policy.pdf.source.json": 619
+  },
+  "final_budget": {
+    "run_id": "n4c-20261005-live-disabled-02",
+    "charged_tokens": 23335,
+    "charged_micro_usd": 11322,
+    "charged_output_bytes": 0,
+    "unknown_reservations": 2,
+    "unsettled_reservations": 0
+  },
+  "total_seconds": 40.922
+}

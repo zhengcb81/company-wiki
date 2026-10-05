@@ -113,10 +113,15 @@ def test_cli_p2_publishes_two_languages_and_skips_policy_without_model_call(
             sparse_metadata=sparse_metadata,
         )
         try:
+            request = json.loads(state.request_path.read_text(encoding="utf-8"))
+            request["model"]["thinking"] = "disabled"
+            state.request_path.write_text(json.dumps(request), encoding="utf-8")
             originals = _originals(state)
             process, result = _invoke(state)
             assert process.returncode == 0 and result["status"] == "completed", (process.stderr, result)
             assert loopback_model_server.errors == [] and len(loopback_model_server.requests) == 2
+            assert all(json.loads(body)["thinking"] == {"type": "disabled"}
+                       for _data, body in loopback_model_server.requests)
             assert {data["source"]["language"] for data, _body in loopback_model_server.requests} == {"en", "zh"}
             assert result["budget"]["tokens"] == 184 and result["budget"]["estimated_micro_usd"] == 222
             assert result["budget"]["unknown_reservations"] == 0

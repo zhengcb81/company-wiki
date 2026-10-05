@@ -1,6 +1,6 @@
 # P5并行施工总包：来源默认迁移、FF简化、存储降容工具
 
-状态：**ready，尚未派发/运行**。2026-10-05只读核对后建立；不是旧N4-T1/T2、StockWiki narrative consumer或SPACE-S5审计的重复任务。MAIN继续N4C，三个包可现在独立开工。
+状态：**in_progress，用户于2026-10-05确认三卡均已开工**。2026-10-05只读核对后建立；不是旧N4-T1/T2、StockWiki narrative consumer或SPACE-S5审计的重复任务。MAIN继续N4C，三个外线独占写集保留，收到交付后逐包验收合入。
 
 ## 分工与物理隔离
 
