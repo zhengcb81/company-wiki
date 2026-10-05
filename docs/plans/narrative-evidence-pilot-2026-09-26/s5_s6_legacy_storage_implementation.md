@@ -73,3 +73,10 @@ CodeGraph首查未收录部分旧模块/函数，不能以其“无调用者”�
 生产源码/脚本没有`SourceCatalogWorker`导入者；其原始CLI启动入口已早先退出，现场另查无对应进程与计划任务。删除`source_catalog/worker.py`、仅供该循环使用的`scheduler_policy.py`及专属调度/Worker可靠性测试；保留控制面status/stop/uninstall。为了保住仍工作的读取和迁移夹具，不删除`SourceCatalog.normalize/summarize/summarize_with_llm`、低层normalizer、摘要实现、EvidenceSpan、normalized artifacts或RF消费接口。RF默认`source_reader_v2=False`，仍读旧SourceBundle normalized角色。CWP evidence-query直接查DB span；extraction-quality查DB artifact状态/metadata与span，均不打开Markdown正文。正文读取代码仍见于CWP `llm_summarizer.py`、`section_extractor.py`、`summarizer.py`，其生产调用者需逐项核清。后续切分为两个大节点：先迁移/退休全部normalized正文消费者，更新artifact句柄与quality语义并删除物理Markdown；DB EvidenceSpan保留，待S6单独核消费者和压缩收益。此前“查询/质量直接依赖normalized文件”的表述过宽，本段按源码实际读路径更正。
 
 旧Worker退役集中责任包：`test_source_catalog_legacy_cli_retirement.py`、background/control/architecture、tier1、fingerprint、现有summary/pipeline/section tests，**127 passed / 64.28s**。第一次受限sandbox执行125 passed、两失败（spawned parser与python-docx原生扩展被系统限制）；同一正常用户上下文单测复核两项通过，完整同集重跑127项通过。测试专用目录已清理。调试脚本最初从stdin运行不适用于Windows multiprocessing，改用带`__main__`的短文件后诊断并删除。一次跨用户权限清理测试目录被拒，原创建者清理后在同一正常用户作业中创建/清理专用根。
+
+
+## 2026-10-05 工具节点已完成后的顺序
+
+P5-STORAGE四操作工具已通过53个不同case分步验收并合入master@e570daf；真实年报+MSFT TXT原文/叙述完整回放和fixture恢复均GREEN。只读预览、当前对象绑定、未unlink恢复、范围SQL切片、实际空间/VACUUM和失败观测已落实；没有执行生产删除。工具位于tools/legacy_storage_retirement.py，操作说明在tools/legacy_storage/README.md；最新节点收据在总PWF/harness_lanes/results/p5_storage_integration_acceptance_2026-10-05.json。旧handoff样本只作历史追溯。
+
+MAIN接下来核实际旧底层generator/EvidenceQuery/ExtractionQuality caller，落实metadata_only与精选叙述reader行为，然后验收RF默认SourceRef迁移。在消费者/质量语义已迁且原文/新final读取可用后，才用该工具处理生产的known legacy范围，报告生产前后实际空间。仍不做全备份恢复演练、不新增人工签收、不重跑每文件小门。

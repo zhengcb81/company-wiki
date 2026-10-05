@@ -8,7 +8,7 @@
 |---|---|---|---|
 | [P5-RF](harness_lanes/p5_rf_source_default_migration.md) | `Projects/cwp-lanes-20261005/rf-source-v2` | RF SourceRecord/reuse receipt沿用已发布wire；仅RF默认入口迁移 | 现在；不等FF新卡或MAIN模型 |
 | [P5-FF](harness_lanes/p5_ff_runtime_simplification.md) | `Projects/cwp-lanes-20261005/ff-runtime-cleanup` | SourceRef/companion wire不变；删除旧编排、共用有界进程 | 现在；不等RF默认迁移 |
-| [P5-STORAGE](harness_lanes/p5_storage_retirement_engine.md) | `Projects/cwp-lanes-20261005/cwp-storage-tool` | 新tools/专属tests；四维护操作及`cwp-storage-retirement/1`小报告 | 现在编码/fixture执行；生产清理由MAIN在迁caller后做 |
+| [P5-STORAGE](harness_lanes/p5_storage_retirement_engine.md) | `Projects/cwp-lanes-20261005/cwp-storage-tool` | 新tools/专属tests；四维护操作及`cwp-storage-retirement/1`小报告 | 已验收合入/发布e570daf，53项分步GREEN；生产清理由MAIN在迁caller后做，不重派 |
 
 绝对目录、准备命令、精确写集、测试/清根及统一handoff字段见[P5总包](harness_lanes/p5_parallel_packages_2026-10-05.md)。各卡可独立交给外部harness；本总表与CWP总PWF只由MAIN改。未收到派发消息不把ready写成running。
 

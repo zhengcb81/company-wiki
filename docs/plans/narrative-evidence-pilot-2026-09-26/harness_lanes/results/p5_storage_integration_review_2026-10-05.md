@@ -1,6 +1,6 @@
 # P5-STORAGE 集成审查与修复顺序（2026-10-05）
 
-状态：**交付已收到，尚未验收合入，不执行生产删除**。
+状态：**工具验收通过并合入主线 e570daf；不执行生产删除**。最终实测见 [验收 JSON](p5_storage_integration_acceptance_2026-10-05.json)。下方四项失败是原交付复核历史，均已修复。
 
 - 功能提交：7ac1e3d236e22a263b88540f89a611675b5b8ab1；交接文档：f8f414a。
 - base：a2563f9。17个功能新文件/3181行均在允许写集；handoff列出的报告在后续文档提交中，不能把未提交文件当功能提交的一部分。
@@ -49,3 +49,13 @@
 
 
 - 72b1116存储工具节点一候选已推到origin/codex/p5-storage-integration；从primary checkout运行相同baseline的正常快速pre-push GREEN，新工具专属行为此前在实际候选树验证。未merge主线、未伪称工具整体验收或生产释放。
+
+## MAIN节点二最终验收（2026-10-05）
+
+候选9fa216677826fe90f2db3b35c08327e5732d4d47已正常合入master@e570dafb92a3f6aaec51176682d348a1c9303535。53个不同case在组合运行中全部GREEN，不声称单次53全跑。节点二12 RED→12 GREEN；原47个case业务通过后发现测试夹具未关闭SourceCatalog缓存reader，ExitStack关闭后具体E2E+新增路径/事务/锁6 GREEN（196.98s）。输出路径3 RED后修复；压缩后观测失败1 RED后修复，正常VACUUM+该故障6 GREEN（14.63s）。Ruff/diff-check和正常候选pre-push均GREEN。日常Unit CI不新增真实解析长包。
+
+最终真实年报+微软Q4 2026 TXT副本链：9个旧派生文件6,360,944→0 B，删除15,962旧PDF spans，DB32,792,576→2,174,976 B（释放30,617,600 B），freelist7473→0；新final24,637 B及source facts未变，实际PDF/TXT stdout SHA和新叙述完整locator replay前后通过。所有唯一测试根恢复absent，原件及用户配置SHA与固定基准全等。公网/下载/模型POST均0。仅小型JUnit聚合指标归入验收JSON，不保留样本副本或库。
+
+工具现在使用当前对象绑定、已验证sections scope、metadata先退/逐文件续删、真实只读预览、显式范围SQL剪裁和真实前后VACUUM数据；未增加许可文件/人工签收。低空间与busy自动拒绝，SQL回滚不虚报删除，压缩后不可观测值是null/after_measurement_available=false。报告写入不能覆盖配置/catalog/资料根。一次性交付生成器移除，历史样本留追溯。
+
+**生产待办仍是CWP旧底层正文/quality语义及RF默认SourceRef迁移，再执行S5/S6生产处置。**RF远端main只读复核8a153f33、两份assurance owner改动保留；RF/FF约定P5交付尚未到。不得把本副本释放量当生产清理或把旧span空结果当全文已解析。

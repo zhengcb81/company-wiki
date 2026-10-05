@@ -1,0 +1,135 @@
+{
+  "schema_version": "cwp-storage-integration/1",
+  "date": "2026-10-05",
+  "status": "accepted_for_main",
+  "production_cleanup_executed": false,
+  "code_baseline": "18da250006cb9e409b519198c3f58913b01f0f17",
+  "node1_candidate": "72b11160b926e7ead0f163786f141ce2ead5f470",
+  "tests": {
+    "node2_red": {
+      "failed": 12,
+      "seconds": 30.75
+    },
+    "node2_first_green": {
+      "passed": 12,
+      "seconds": 28.42
+    },
+    "combined_first": {
+      "passed": 47,
+      "teardown_errors": 1,
+      "seconds": 256.28
+    },
+    "output_path_red": {
+      "failed": 3,
+      "seconds": 7.68
+    },
+    "exact_e2e_and_new_failures": {
+      "passed": 6,
+      "errors": 0,
+      "seconds": 196.98
+    },
+    "measurement_failure_red": {
+      "failed": 1,
+      "seconds": 3.67
+    },
+    "measurement_and_vacuum_final": {
+      "passed": 6,
+      "errors": 0,
+      "seconds": 14.63
+    },
+    "distinct_cases_green_in_combined_runs": 53,
+    "single_53_case_run_claimed": false,
+    "daily_unit_ci_unchanged": true
+  },
+  "real_fixture_metrics": {
+    "prune.json": {
+      "db_after": 32792576,
+      "db_before": 32792576,
+      "deleted": 15962,
+      "error_code": null,
+      "files_after": 32792576,
+      "files_before": 32792576,
+      "freelist_after": 7473,
+      "freelist_before": 341,
+      "integrity": "ok",
+      "new_final_count": null,
+      "object_bytes": null,
+      "source_facts_equal": true,
+      "status": "succeeded"
+    },
+    "retire.json": {
+      "db_after": 32792576,
+      "db_before": 29507584,
+      "deleted": 9,
+      "error_code": null,
+      "files_after": 0,
+      "files_before": 6360944,
+      "freelist_after": 341,
+      "freelist_before": 0,
+      "integrity": "ok",
+      "new_final_count": 1,
+      "object_bytes": 24637,
+      "source_facts_equal": true,
+      "status": "succeeded"
+    },
+    "vacuum.json": {
+      "db_after": 2174976,
+      "db_before": 32792576,
+      "deleted": 0,
+      "error_code": null,
+      "files_after": 2174976,
+      "files_before": 32792576,
+      "freelist_after": 0,
+      "freelist_before": 7473,
+      "integrity": "ok",
+      "new_final_count": 1,
+      "object_bytes": 24637,
+      "source_facts_equal": true,
+      "status": "succeeded"
+    }
+  },
+  "original_sha256": {
+    "annual": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+    "transcript": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a"
+  },
+  "final_payload_sha256": "d30527558fc9df013c4dd721bea416fac61be4bc90ef28f2b7323bbb91862f40",
+  "actual_public_reads": {
+    "pdf_and_txt_stdout_sha_before_after": true,
+    "narrative_reference_read_full_locator_replay_before_after": true
+  },
+  "external_calls": {
+    "network": 0,
+    "downloads": 0,
+    "model_posts": 0
+  },
+  "test_model": "local Replay; no external provider claims",
+  "restored_absent_test_roots": [
+    "p5n2red",
+    "p5n2green",
+    "p5pathred",
+    "p5unknownred",
+    "p5node2final",
+    "p5measure"
+  ],
+  "already_restored_failed_root": "p5node2",
+  "user_config_sha256": "3609e707466eeb3e0f685e14f2637c6afa39ba900edef1be4814433a43300a01",
+  "main_code_ci_before_integration": {
+    "run_id": 37371220690,
+    "attempt": 2,
+    "conclusion": "success",
+    "head_sha": "18da250006cb9e409b519198c3f58913b01f0f17"
+  },
+  "consumer_migration_still_required": [
+    "P5-RF default SourceRef v2 and actual callers",
+    "CWP legacy body/quality and metadata_only semantics"
+  ],
+  "candidate_head": "9fa216677826fe90f2db3b35c08327e5732d4d47",
+  "merged_and_published_main": "e570dafb92a3f6aaec51176682d348a1c9303535",
+  "code_ci": {
+    "run_id": 37375836745,
+    "head_sha": "e570dafb92a3f6aaec51176682d348a1c9303535",
+    "status": "completed",
+    "conclusion": "success"
+  },
+  "owned_integration_worktree_archived": true
+}

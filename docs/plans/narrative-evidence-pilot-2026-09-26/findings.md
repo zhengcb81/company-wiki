@@ -574,3 +574,14 @@ Git写入/联网用正常用户，sandbox .git只读不是产品权限。测试�
 
 
 - CI37371220690后续读取：attempt1 completed/failure，唯一job cancelled、runner空、steps0，check-run无summary/原因annotation；源远端仍18da250。只请求同SHA重跑一次HTTP201（既有Git凭证仅内存传递，未输出/落盘），不是重复改代码或重跑全仓本地包。收尾只有PWF/receipt，不触发新的代码CI来取消这个重跑。
+
+## 2026-10-05 — P5-STORAGE 节点二依据
+
+- 复核主线4df5d12/候选72b1116，候选干净；RF普通沙箱status因旧临时目录读权限出现伪删除，正常账号只读复核实际只有两份assurance owner改动，HEAD5319ee26、origin/main8a153f33。RF/FF约定交付目录尚不存在，保持写集隔离。
+- 工具core.read_connection只用mode=ro，会生成WAL/SHM；prune的dry-run也开RW+BEGIN IMMEDIATE。复用主线EvidenceQueryService/ExtractionQualityService的静态immutable-read策略，活动WAL缺SHM具名诊断。主线CodeGraph已给出代码；候选树没有独立index，新增工具文件用明确路径读，不为本节点再建第二索引。
+- SQLite官方说明VACUUM最多需要原库两倍大小的额外空闲空间，且无INTEGER PRIMARY KEY的表可能改变ROWID。故空间预检按实际页数/文件量取最大值，fact digest按列/主键排序并有界读取；压缩前后的事实必须真正分别取样。保持标准VACUUM，不用VACUUM INTO制造第二份完整库。依据：[SQLite VACUUM](https://www.sqlite.org/lang_vacuum.html)。
+- 测试先覆盖零预览写入（包括WAL/SHM）、有界span报告、严格parser范围、keep计数、压缩前事实变化和低磁盘空间；再一次集中工具/真实年报TXT E2E。0外部模型POST，不动原件/生产库。两个误猜vacuum.py/compaction.py路径及一次PWF patch定位失败均无写入，已按实际shrink.py继续。
+
+## P5工具主线验收收口
+
+e570daf已发布，精确CI37375836745 success。53个不同case分步GREEN。真实年报/MSFT TXT stdout SHA及新摘要完整locator replay、实际source facts/new final保持，测试根已恢复；副本derived释放6,360,944B、DB释放30,617,600B，不是生产数字。保留的路径/身份/SHA/事务/资源校验均有实际原件破坏或错误计量RED支撑，没有新增人工签收。工具和测试记录见P5集成审查/验收JSON；下一步实际caller与metadata_only语义迁移。

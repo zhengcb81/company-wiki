@@ -678,3 +678,32 @@ S0/N4A及S2模型预算基础、CLI阶段与CI修复已正常发布，当前CI�
 
 
 - CI37371220690后续读取：attempt1 completed/failure，唯一job cancelled、runner空、steps0，check-run无summary/原因annotation；源远端仍18da250。只请求同SHA重跑一次HTTP201（既有Git凭证仅内存传递，未输出/落盘），不是重复改代码或重跑全仓本地包。收尾只有PWF/receipt，不触发新的代码CI来取消这个重跑。
+
+## 2026-10-05 — 节点二开工
+
+- 主线精确代码SHA18da250的CI37371220690 attempt2 completed/success；第一轮零step取消后只重跑同SHA一次，代码未为CI改动。PWF收尾4df5d12不触发替代代码CI。[同SHA结果](https://github.com/zhengcb81/company-wiki/actions/runs/37371220690)。
+- 候选72b1116新增12个真实schema行为case，先RED：包括所有预览拒绝写连接、静态WAL sidecar、1200段聚合报告、keep计数、无效scope不扩大、压缩前事实/空闲空间、runtime对象根、ROWID顺序无关digest。测试只在tmp/p5n2red；不会进入日常Unit CI。
+
+## 2026-10-05 — 节点二首次 GREEN
+
+- 12项先行测试12 RED/30.75s，再12 GREEN/28.42s；静态WAL read确实创建两个sidecar、1200段dry-run报告183,867B、保留行误计absent1、无效scope未拒绝、before实际取在压缩后、runtime对象53B误计0，以及带空格未来表名未引用均已在fixture中实证。新span实现单次显式范围SQL DELETE，内存仅实际keep refs；聚合报告无逐span列表。标准VACUUM分别前后digest，排序不依赖ROWID，实测空闲空间和checkpoint。生产未删件。
+- 为避免压缩前重复全库hash，空间预检只取page/文件数，进入既有operation锁后才取一次完整before；失败不报database untouched。真实E2E升级为固定SHA的AMEC年度PDF+微软Q4 2026电话会原TXT，原文stdout实际计算SHA，不用旧永真断言。SQLite连接显式closing；模块fixture finally恢复唯一样本根。旧交接一次性生成器移除，保留历史收据。
+- 一次收口脚本相对路径误用候选cwd，未执行写入；改主仓绝对脚本路径后成功。Ruff两个旧E2E晚置/未使用subprocess导入随实际E2E收口删除；diff-check/Ruff GREEN。集中47项责任+真实四操作CLI验收已启动，句柄48508；不因观察超时重启。
+
+- CLI报告路径另外3项具体RED/7.68s：--output误指raw/new final/数据库均会写坏fixture数据并报成功。MAIN新增自动路径保护；只限定收据不得写穿资料/目录，不加人工许可。真实47项包当时在跑，保持被测工具不变，先完成该包再改CLI；新case独立根p5pathred，原件/生产无写。
+
+## 2026-10-05 — 集中验收首次结果与 teardown 定位
+
+- 47业务case passed/256.28s，但模块teardown有1 error，工具整体尚未GREEN。真实PDF解析setup143.09s、四操作/原文read/final replay12.90s。实际副本retire9 files，derived6,360,914→0B；删15,962旧PDF spans；VACUUM DB32,796,672→2,174,976B、freelist7474→0，新final24,637B，事实相等/完整性ok。不是生产释放量。
+- WinError32发生在删除mx/catalog/catalog.sqlite3。根因是_new_catalog返回的SourceCatalog缓存ReadOnlyCatalogReader持有连接，测试build helper没有close；Store短事务/4 CLI操作均已正常结束。主线SourceCatalog.close文档明确该生命周期责任。使用ExitStack登记catalog.close，保证setup失败/成功都在rmtree前关闭；不加盲目sleep/删除重试，也不放松测试恢复断言。
+- 小型实测收据保存根外tmp/p5node2-space-metrics.json，测试进程退出后按绝对tmp路径核验删除p5node2成功。原AMEC/MSFT原件及用户配置SHA与固定基线全等。Ruff/diff-check GREEN。新3个报告路径RED经自动保护复跑，另加目录锁/SQL错误回滚两项；只复跑这5项+具体失败的真实E2E（句柄37533），不重跑47全包。E2E用JUnit property存根外聚合计量，测试根仍须finally恢复absent。
+
+- 后续异常观测新增1 RED/3.67s：VACUUM已经执行、post-read失败时，旧report把before数值当after。将after不可观测明确表示null/after_measurement_available=false；不冒称数据库没变。修复只改失败报告逻辑，正常压缩由现有实际vacuum责任包覆盖。
+- 第一轮集中包basetemp tmp/p5node2与本轮自建临时施工payload同名，pytest清掉了本任务自己的临时payload；无用户文件。已执行的payload无保留需求，根在失败后已恢复absent。后续最终测试用独立p5node2final；剩余编辑payload另用p5-edit，今后运行前确认测试根不存在，不混入施工脚本。此项不改变原文/费用历史根。
+
+## 2026-10-05 — P5 工具合入与发布收口
+
+- 候选9fa216677826fe90f2db3b35c08327e5732d4d47正常push后合入master@e570dafb92a3f6aaec51176682d348a1c9303535并发布，两次正常pre-push精选合同GREEN。精确主线CI37375836745 completed/success，没有重试。[远端结果](https://github.com/zhengcb81/company-wiki/actions/runs/37375836745)。53个不同case分步GREEN，不增加日常慢包。
+- 真实E2E+路径/锁/回滚6 passed/196.98s（setup158.44s、call19.76s）；已关闭缓存reader，唯一真实fixture恢复absent。最后post-readback不可测RED修复，正常vacuum+该异常6 passed/14.63s。最新副本数据是derived6,360,944→0B，span删15,962，DB32,792,576→2,174,976B；完整source/new-final及PDF/TXT原文SHA/locator replay全等。验收JSON保存根外聚合实测，不存正文/库副本。
+- 主/分PWF、S5/S6细则、并行总表、集成审查与小JSON已同步。P5-STORAGE不再派发；所建托管验收树已归档，工具/测试分支全部推送；原外包树保持未改。RF/FF交付尚未到，RF remote main8a153f33，owner两份assurance修改仍原样。
+- 下一动作是CWP旧底层caller/质量metadata_only语义，随后接RF默认SourceRef迁移再做生产处置。生产derived/DB本轮没有清理、0外部模型POST；N4C累计token cap问题仍待答，不把key修复或GET200当付费摘要成功。

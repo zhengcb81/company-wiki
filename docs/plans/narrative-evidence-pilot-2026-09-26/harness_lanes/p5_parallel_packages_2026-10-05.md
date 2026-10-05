@@ -83,3 +83,9 @@ MAIN保持本机配置/原件和其他owner工作。production清理前只做一
 `delivery_head`指最后的功能/测试提交；handoff文档可随后另commit，无需把包含报告本身的commit SHA反复写回报告。`commits`列功能范围，MAIN另从Git读取当前交付分支tip。清理根起初不存在时before/after digest可填`absent`，并明确两个状态。`calls`计真实外部network/provider/LLM；本地Replay、fake-provider及fixture下载事件另填metrics，不能用它们伪称真实API测过，也不能把实际download outcome/count清零。
 
 MAIN验收看实际commit/diff、公开入口、已执行测试、临时根恢复和资源/原件事实；不增加人工review receipt/授权JSON。外线交付不代表已经合入main或生产数据已清理。
+
+
+## 2026-10-05 集成交付状态
+
+- P5-STORAGE已完成MAIN两节点TDD/真实资料验收，候选9fa2166已合入并推到master@e570daf；53个不同case分步GREEN，测试根恢复。专属慢测试在integration；不重派本卡，也不凭工具通过执行生产删除。正式receipt见results/p5_storage_integration_acceptance_2026-10-05.json。
+- RF远端main只读复核8a153f33；RF/FF约定HANDOFF尚未收到，保持独立owner写集。MAIN继续CWP旧底层caller/metadata_only语义，收到两线后再集中联调并线，生产清理由MAIN在实际caller退出后执行。
