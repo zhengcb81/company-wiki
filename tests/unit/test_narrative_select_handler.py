@@ -48,7 +48,7 @@ def _pdf_bytes(text: str) -> bytes:
     fitz = pytest.importorskip("fitz")
     document = fitz.open()
     page = document.new_page()
-    page.insert_text((72, 72), text)
+    page.insert_text((72, 72), text, fontname="china-s")
     data = document.tobytes()
     document.close()
     return data
@@ -57,7 +57,7 @@ def _pdf_bytes(text: str) -> bytes:
 def _payload(
     data: bytes,
     *,
-    title: str,
+    title: str | None,
     document_kind: str,
     language: str,
     mime_type: str,
@@ -263,7 +263,10 @@ def test_select_handler_does_not_require_prompt_review_receipt() -> None:
     raw, _ = _run(payload, data, reader=reader)
 
     assert raw.outcome is HandlerOutcome.SUCCEEDED
-    assert NarrativeSelectResult.from_dict(raw.result).prompt_review.status == "not_reviewed"
+    assert (
+        NarrativeSelectResult.from_dict(raw.result).prompt_review.status
+        == "not_reviewed"
+    )
 
 
 @pytest.mark.parametrize("mime_type", ["text/plain", "text/html"])
@@ -304,7 +307,9 @@ def test_select_handler_transcript_keeps_only_selected_original_byte_bindings(
 
 
 def test_select_handler_complete_low_value_pdf_emits_small_skip() -> None:
-    data = _pdf_bytes("This policy describes meeting administration and filing procedures.")
+    data = _pdf_bytes(
+        "This policy describes meeting administration and filing procedures."
+    )
     payload = _payload(
         data,
         title="投资者关系管理办法（2025年8月）.pdf",
@@ -459,3 +464,41 @@ def test_select_handler_cap_and_path_leak_fail_with_zero_effect(
     assert raw.outcome is HandlerOutcome.TERMINAL_FAILURE
     assert raw.error is not None and raw.error.code == error_code
     assert raw.effects == ()
+
+
+def test_select_handler_signal_free_quarterly_report_returns_clean_skip() -> None:
+    data = _pdf_bytes("本报告仅列示报告编制规则，未描述任何具体业务事件。")
+    payload = _payload(
+        data,
+        title=None,
+        document_kind="quarterly_report",
+        language="zh",
+        mime_type="application/pdf",
+    )
+
+    raw, _ = _run(payload, data)
+
+    assert raw.outcome is HandlerOutcome.SUCCEEDED
+    result = NarrativeSelectResult.from_dict(raw.result)
+    assert result.selection.status == "skipped_no_narrative"
+    assert result.selection.coverage_complete is True
+    assert result.evidence_spans == ()
+
+
+def test_select_handler_quarterly_pdf_with_narrative_recovers_spans() -> None:
+    data = _pdf_bytes("报告期内，公司生产装置运行平稳，主要产品产销量同比增长。")
+    payload = _payload(
+        data,
+        title=None,
+        document_kind="quarterly_report",
+        language="zh",
+        mime_type="application/pdf",
+    )
+
+    raw, _ = _run(payload, data)
+
+    assert raw.outcome is HandlerOutcome.SUCCEEDED
+    result = NarrativeSelectResult.from_dict(raw.result)
+    assert result.evidence_spans
+    assert result.selection.status == "partial"
+    assert "装置运行平稳" in result.evidence_spans[0].raw_text

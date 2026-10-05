@@ -77,7 +77,15 @@ class _Signals:
     project_rationale: bool
     downstream_extension: bool
     current_industry: bool
+    current_operations: bool
     project: bool
+
+
+# Topics that may anchor a current-period operating narrative without a
+# dedicated event verb: concrete business/operations language only.
+_CURRENTLY_OPERATING_TOPICS = frozenset(
+    {"core_business", "products_rd", "orders_customers", "overseas"}
+)
 
 
 def _match(pattern: re.Pattern[str], text: str) -> bool:
@@ -107,6 +115,10 @@ def _signals(text: str, topics: tuple[str, ...], rules: CandidateRules) -> _Sign
                 _match(rules.strategic_plan, text),
                 certification,
             )
+        ),
+        current_operations=(
+            _match(rules.recency, text)
+            and bool(set(topics) & _CURRENTLY_OPERATING_TOPICS)
         ),
     )
 
@@ -145,13 +157,12 @@ def _eligible(signals: _Signals) -> bool:
         signals.project_rationale,
         signals.project_certification_timeline,
         signals.progress and signals.current_industry,
+        signals.progress and signals.current_operations,
     )
     return any(core)
 
 
-def _fallback_topics(
-    topics: tuple[str, ...], signals: _Signals
-) -> tuple[str, ...]:
+def _fallback_topics(topics: tuple[str, ...], signals: _Signals) -> tuple[str, ...]:
     if topics:
         return topics
     if signals.event or signals.positioning:
@@ -174,6 +185,7 @@ def _reasons(signals: _Signals, source_role: str) -> tuple[str, ...]:
         (signals.downstream_extension, "downstream_business_extension"),
         (signals.project, "project_plan_or_status"),
         (signals.current_industry, "current_industry_context"),
+        (signals.current_operations, "current_operations_progress"),
         (source_role == "management", "management_statement"),
     )
     return (
@@ -197,7 +209,11 @@ def _score(unit: NarrativeUnit, topics: tuple[str, ...], signals: _Signals) -> i
         (signals.downstream_extension, 3),
     )
     table_bonus = 1 if unit.unit_kind == "pdf_table_row" else 0
-    return len(topics) + sum(weight for enabled, weight in weighted if enabled) + table_bonus
+    return (
+        len(topics)
+        + sum(weight for enabled, weight in weighted if enabled)
+        + table_bonus
+    )
 
 
 def assess_unit(unit: NarrativeUnit, rules: CandidateRules) -> CandidateAssessment:
@@ -227,9 +243,21 @@ def assess_unit(unit: NarrativeUnit, rules: CandidateRules) -> CandidateAssessme
     )
 
 
+def text_has_narrative_signal(text: str, rules: CandidateRules) -> bool:
+    """Enough deterministic gate evidence that narrative material may exist."""
+    return bool(rules.topics(text) or _pre_signal(text, rules))
+
+
+def has_narrative_signal(units: Sequence[NarrativeUnit], rules: CandidateRules) -> bool:
+    """Conservative guard over whole units; false means no gate ever fired."""
+    return any(text_has_narrative_signal(unit.raw_text, rules) for unit in units)
+
+
 __all__ = [
     "CandidateAssessment",
     "CandidateRules",
     "EvidenceCandidate",
     "assess_unit",
+    "has_narrative_signal",
+    "text_has_narrative_signal",
 ]

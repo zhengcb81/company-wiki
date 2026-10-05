@@ -18,8 +18,14 @@ from company_wiki.source_catalog.narrative_context import (
     ContextRules,
     build_section_context,
 )
-from company_wiki.source_catalog.narrative_document import DocumentStructure, NarrativeUnit
-from company_wiki.source_catalog.narrative_evidence import NarrativeParseResult, _make_unit
+from company_wiki.source_catalog.narrative_document import (
+    DocumentStructure,
+    NarrativeUnit,
+)
+from company_wiki.source_catalog.narrative_evidence import (
+    NarrativeParseResult,
+    _make_unit,
+)
 from company_wiki.source_catalog.narrative_group_candidates import (
     GroupCandidateRules,
     enrich_context_groups,
@@ -34,7 +40,10 @@ from company_wiki.source_catalog.narrative_pdf_groups import (
 )
 from company_wiki.source_catalog.narrative_replay import prepare_pdf_replay
 from company_wiki.source_catalog.narrative_finalize import finalize_selection
-from company_wiki.source_catalog.narrative_routing import route_document
+from company_wiki.source_catalog.narrative_routing import (
+    DEFAULT_SELECTION_LIMIT,
+    route_document,
+)
 from company_wiki.source_contract import EvidenceCoordinates, source_id_for_sha256
 
 
@@ -128,7 +137,9 @@ def test_pdf_groups_join_visual_continuations_but_isolate_headings() -> None:
     assert groups[1][2] == first.raw_text + second.raw_text
 
 
-def test_pdf_replay_plan_binds_hash_source_version_and_table_pages(tmp_path: Path) -> None:
+def test_pdf_replay_plan_binds_hash_source_version_and_table_pages(
+    tmp_path: Path,
+) -> None:
     raw = b"immutable-pdf-fixture"
     path = tmp_path / "source.pdf"
     path.write_bytes(raw)
@@ -227,7 +238,9 @@ def test_budget_reserves_high_value_extension_before_round_robin() -> None:
             reasons=("downstream_business_extension",),
             score=1,
         ),
-        _budget_item("risk", page=2, reasons=("business_risk_or_constraint",), score=20),
+        _budget_item(
+            "risk", page=2, reasons=("business_risk_or_constraint",), score=20
+        ),
     )
 
     selected = select_budget_items(items, limit=2)
@@ -361,7 +374,11 @@ def test_section_context_is_bounded_by_the_next_heading() -> None:
 
     groups = (
         ("heading", (unit("项目建设必要性", 0),), "项目建设必要性"),
-        ("body", (unit("本项目用于新产品产业化并拓展海外客户。", 1),), "本项目用于新产品产业化并拓展海外客户。"),
+        (
+            "body",
+            (unit("本项目用于新产品产业化并拓展海外客户。", 1),),
+            "本项目用于新产品产业化并拓展海外客户。",
+        ),
         ("next", (unit("三、财务会计信息", 2),), "三、财务会计信息"),
         ("outside", (unit("本段不属于项目上下文。", 3),), "本段不属于项目上下文。"),
     )
@@ -371,9 +388,7 @@ def test_section_context_is_bounded_by_the_next_heading() -> None:
         heading_only=re.compile(r"^[一二三四五六七八九十]+、"),
     )
 
-    context = build_section_context(
-        "equity_offering_prospectus", groups, rules
-    )
+    context = build_section_context("equity_offering_prospectus", groups, rules)
 
     assert context.project_scores == {"body": 120}
     assert "outside" not in context.project_scores
@@ -528,3 +543,83 @@ def test_finalize_deduplicates_pdf_views_and_prefers_table_locator() -> None:
     assert len(package.evidence_spans) == 1
     assert package.evidence_spans[0].structured_value["unit_kind"] == "pdf_table_row"
 
+
+@pytest.mark.parametrize(
+    ("existing_kind", "expected_kind"),
+    [
+        ("quarterly_report", "quarterly_report"),
+        ("investor_relations", "investor_relations"),
+    ],
+)
+def test_route_document_keeps_known_kind_when_title_is_absent(
+    existing_kind: str,
+    expected_kind: str,
+) -> None:
+    route = route_document("", existing_kind=existing_kind)
+
+    assert route.document_kind == expected_kind
+    assert route.selection_limit == DEFAULT_SELECTION_LIMIT
+    assert route.empty_result_may_skip is False
+    assert DEFAULT_SELECTION_LIMIT == 96
+
+
+def _empty_quarterly_structure() -> DocumentStructure:
+    digest = "2" * 64
+    return DocumentStructure(
+        source_id=source_id_for_sha256(digest),
+        source_sha256=digest,
+        language="zh",
+        units=(),
+        page_count=3,
+        pages_read=3,
+    )
+
+
+def test_finalize_keeps_legacy_conservative_status_by_default() -> None:
+    package = finalize_selection(
+        _empty_quarterly_structure(),
+        route_document("2026年第一季度报告.pdf"),
+        (),
+        group_ids={},
+        heading_pattern=re.compile(r"a^"),
+        dropped_financial_count=0,
+    )
+    assert package.status == "needs_review"
+
+
+def test_finalize_allows_no_narrative_skip_only_for_proven_zero_signal() -> None:
+    structure = _empty_quarterly_structure()
+    route = route_document("2026年第一季度报告.pdf")
+
+    proven = finalize_selection(
+        structure,
+        route,
+        (),
+        group_ids={},
+        heading_pattern=re.compile(r"a^"),
+        dropped_financial_count=0,
+        narrative_signal_present=False,
+    )
+    assert proven.status == "skipped_no_narrative"
+
+    with_signal = finalize_selection(
+        structure,
+        route,
+        (),
+        group_ids={},
+        heading_pattern=re.compile(r"a^"),
+        dropped_financial_count=0,
+        narrative_signal_present=True,
+    )
+    assert with_signal.status == "needs_review"
+
+    dropped_financial = finalize_selection(
+        structure,
+        route,
+        (),
+        group_ids={},
+        heading_pattern=re.compile(r"a^"),
+        dropped_financial_count=1,
+        narrative_signal_present=False,
+    )
+    assert dropped_financial.status == "needs_review"

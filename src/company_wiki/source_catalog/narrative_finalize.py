@@ -113,6 +113,8 @@ def _status(
     route: DocumentRoute,
     spans: tuple[EvidenceSpan, ...],
     omitted: int,
+    *,
+    signal_free_skip: bool = False,
 ) -> SelectionStatus:
     if spans and any("locator_unstable" in span.quality_flags for span in spans):
         return "needs_review"
@@ -122,7 +124,9 @@ def _status(
         return "blocked"
     if not structure.coverage_complete:
         return "needs_review"
-    return "skipped_no_narrative" if route.empty_result_may_skip else "needs_review"
+    if route.empty_result_may_skip or signal_free_skip:
+        return "skipped_no_narrative"
+    return "needs_review"
 
 
 def finalize_selection(
@@ -133,8 +137,16 @@ def finalize_selection(
     group_ids: Mapping[str, str],
     heading_pattern: re.Pattern[str],
     dropped_financial_count: int,
+    narrative_signal_present: bool | None = None,
 ) -> NarrativeEvidencePackage:
-    """Create the compact package after deterministic candidate enrichment."""
+    """Create the compact package after deterministic candidate enrichment.
+
+    ``narrative_signal_present=False`` means the composer proved that no unit
+    and no joined PDF group text ever fired a business-signal gate, and
+    ``dropped_financial_count==0`` proves the financial gate dropped nothing.
+    Only that combination turns a complete scan into a clean skip; True or
+    unknown keeps the legacy conservative review status.
+    """
     deduplicated = _deduplicate(candidates)
     budget_items = tuple(
         _budget_item(candidate, group_ids, heading_pattern)
@@ -147,11 +159,20 @@ def finalize_selection(
     omitted = max(0, len(deduplicated) - len(selected))
     selected.sort(key=lambda item: (item.unit.coordinates.locator(), item.unit.unit_id))
     spans = _evidence_spans(selected, group_ids)
+    signal_free_skip = (
+        narrative_signal_present is False and dropped_financial_count == 0
+    )
     return NarrativeEvidencePackage(
         source_id=structure.source_id,
         source_sha256=structure.source_sha256,
         document_kind=route.document_kind,
-        status=_status(structure, route, spans, omitted),
+        status=_status(
+            structure,
+            route,
+            spans,
+            omitted,
+            signal_free_skip=signal_free_skip,
+        ),
         evidence_spans=spans,
         selection_limit=route.selection_limit,
         candidate_count=len(deduplicated),

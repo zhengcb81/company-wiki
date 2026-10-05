@@ -79,20 +79,31 @@ def test_pilot_anchor_mapping_returns_only_supporting_span_window() -> None:
 
 
 def test_sample_document_titles_separate_offering_types_and_ir_negatives() -> None:
-    assert classify_document_kind(
-        "三角防务：1-1向不特定对象发行可转换公司债券募集说明书.PDF",
-        "other",
-    ) == "convertible_bond_prospectus"
-    assert classify_document_kind(
-        "三角防务：向特定对象发行股票并在创业板上市募集说明书（注册稿）.PDF",
-        "other",
-    ) == "equity_offering_prospectus"
-    assert classify_document_kind(
-        "中微公司：首次公开发行股票并在科创板上市招股说明书.pdf",
-        "other",
-    ) == "prospectus"
+    assert (
+        classify_document_kind(
+            "三角防务：1-1向不特定对象发行可转换公司债券募集说明书.PDF",
+            "other",
+        )
+        == "convertible_bond_prospectus"
+    )
+    assert (
+        classify_document_kind(
+            "三角防务：向特定对象发行股票并在创业板上市募集说明书（注册稿）.PDF",
+            "other",
+        )
+        == "equity_offering_prospectus"
+    )
+    assert (
+        classify_document_kind(
+            "中微公司：首次公开发行股票并在科创板上市招股说明书.pdf",
+            "other",
+        )
+        == "prospectus"
+    )
     assert classify_document_kind("投资者关系管理办法（2025年8月）.pdf") == "ir_policy"
-    assert classify_document_kind("关于召开年度业绩说明会的通知.pdf") == "meeting_notice"
+    assert (
+        classify_document_kind("关于召开年度业绩说明会的通知.pdf") == "meeting_notice"
+    )
 
 
 def test_pdf_parser_keeps_text_with_a_page_locator(tmp_path: Path) -> None:
@@ -115,7 +126,9 @@ def test_pdf_parser_keeps_text_with_a_page_locator(tmp_path: Path) -> None:
         source_sha256=actual_sha,
         language="en",
     )
-    package = select_narrative_evidence(parsed, title="样本年报.pdf", existing_kind="annual_report")
+    package = select_narrative_evidence(
+        parsed, title="样本年报.pdf", existing_kind="annual_report"
+    )
 
     assert parsed.page_count == parsed.pages_read == 1
     assert parsed.coverage_complete
@@ -142,14 +155,20 @@ def test_financial_table_rows_are_dropped_but_business_rows_are_selected() -> No
         source_id=source_id,
         coords=EvidenceCoordinates(page_number=2, table_index=0, row_index=1),
         kind="pdf_table_row",
-        metadata={"row_cells": ("营业收入", "100.0亿元"), "table_headers": ("项目", "本期发生额")},
+        metadata={
+            "row_cells": ("营业收入", "100.0亿元"),
+            "table_headers": ("项目", "本期发生额"),
+        },
     )
     business = _unit(
         "海外市场的新产线已完成调试，预计第四季度投产并服务新增客户。",
         source_id=source_id,
         coords=EvidenceCoordinates(page_number=2, table_index=1, row_index=2),
         kind="pdf_table_row",
-        metadata={"row_cells": ("海外市场", "新产线已完成调试"), "table_headers": ("项目", "进展")},
+        metadata={
+            "row_cells": ("海外市场", "新产线已完成调试"),
+            "table_headers": ("项目", "进展"),
+        },
     )
     parsed = NarrativeParseResult(
         source_id=source_id,
@@ -204,7 +223,9 @@ def test_complete_known_notice_can_be_skipped_without_saving_evidence() -> None:
 
 
 def test_semiannual_title_is_not_misclassified_as_annual() -> None:
-    assert classify_document_kind("中微公司：2025年半年度报告.pdf") == "semi_annual_report"
+    assert (
+        classify_document_kind("中微公司：2025年半年度报告.pdf") == "semi_annual_report"
+    )
 
 
 def test_transcript_parser_excludes_editorial_and_keeps_qa_question_context() -> None:
@@ -226,7 +247,10 @@ def test_transcript_parser_excludes_editorial_and_keeps_qa_question_context() ->
     roles = [span.structured_value["source_role"] for span in package.evidence_spans]
     assert "management" in roles
     assert "analyst" in roles  # context, never management attribution
-    assert any("too early to speculate" in (span.raw_text or "") for span in package.evidence_spans)
+    assert any(
+        "too early to speculate" in (span.raw_text or "")
+        for span in package.evidence_spans
+    )
     assert all(span.parser_version == "0.1.0" for span in package.evidence_spans)
     verified, failed = verify_transcript_evidence_spans(
         text,
@@ -255,17 +279,24 @@ def test_transcript_q_and_a_transition_and_two_question_links_are_preserved() ->
     questions = [unit for unit in parsed.units if unit.source_role == "analyst"]
     package = select_narrative_evidence(parsed, title="MSFT_Q4_2026_earnings_call.txt")
     selected_questions = [
-        span for span in package.evidence_spans
+        span
+        for span in package.evidence_spans
         if span.structured_value["source_role"] == "analyst"
     ]
 
     assert len(questions) == 2
     assert questions[0].metadata["qa_group_id"] != questions[1].metadata["qa_group_id"]
     assert {span.structured_value["qa_group_id"] for span in selected_questions} == {
-        questions[0].metadata["qa_group_id"], questions[1].metadata["qa_group_id"]
+        questions[0].metadata["qa_group_id"],
+        questions[1].metadata["qa_group_id"],
     }
-    assert any("starter doses" in (span.raw_text or "") for span in package.evidence_spans)
-    assert any("too early to speculate" in (span.raw_text or "") for span in package.evidence_spans)
+    assert any(
+        "starter doses" in (span.raw_text or "") for span in package.evidence_spans
+    )
+    assert any(
+        "too early to speculate" in (span.raw_text or "")
+        for span in package.evidence_spans
+    )
 
 
 def test_transcript_without_recognized_start_is_blocked_not_skipped() -> None:
@@ -280,7 +311,9 @@ def test_transcript_without_recognized_start_is_blocked_not_skipped() -> None:
     assert parsed.errors == ("transcript_start_missing",)
 
 
-def test_summary_draft_requires_real_evidence_ids_and_preserves_source_language() -> None:
+def test_summary_draft_requires_real_evidence_ids_and_preserves_source_language() -> (
+    None
+):
     source_id, source_sha = _source()
     unit = _unit(
         "公司新产品已通过客户验证并获得重复订单。",
@@ -367,7 +400,8 @@ def test_analyst_question_cannot_be_used_as_company_fact() -> None:
     )
     package = select_narrative_evidence(parsed, title="call transcript.txt")
     question_span = next(
-        span for span in package.evidence_spans
+        span
+        for span in package.evidence_spans
         if span.structured_value["source_role"] == "analyst"
     )
     draft = SourceSummaryDraft(
@@ -394,7 +428,9 @@ def test_analyst_question_cannot_be_used_as_company_fact() -> None:
         )
 
 
-def test_static_topic_mentions_are_not_selected_without_a_change_or_current_event() -> None:
+def test_static_topic_mentions_are_not_selected_without_a_change_or_current_event() -> (
+    None
+):
     source_id, source_sha = _source()
     static = _unit(
         "公司主营业务包括高端装备研发、生产和销售，持续关注行业发展。",
@@ -415,7 +451,9 @@ def test_static_topic_mentions_are_not_selected_without_a_change_or_current_even
     assert package.status == "needs_review"
 
 
-def test_specific_emerging_business_positions_are_selected_without_generic_product_noise() -> None:
+def test_specific_emerging_business_positions_are_selected_without_generic_product_noise() -> (
+    None
+):
     source_id, source_sha = _source()
     low_altitude = _unit(
         "公司聚焦核心主业，拓展低空经济产业链。",
@@ -444,10 +482,15 @@ def test_specific_emerging_business_positions_are_selected_without_generic_produ
     package = select_narrative_evidence(parsed, title="年报及投资者关系记录.pdf")
 
     assert {span.coordinates.page_number for span in package.evidence_spans} == {2, 16}
-    assert any("低空经济产业链" in (span.raw_text or "") for span in package.evidence_spans)
-    assert any("CPO全光互连" in (span.raw_text or "") for span in package.evidence_spans)
+    assert any(
+        "低空经济产业链" in (span.raw_text or "") for span in package.evidence_spans
+    )
+    assert any(
+        "CPO全光互连" in (span.raw_text or "") for span in package.evidence_spans
+    )
     assert all(
-        "specific_emerging_business_positioning" in span.structured_value["selection_reasons"]
+        "specific_emerging_business_positioning"
+        in span.structured_value["selection_reasons"]
         for span in package.evidence_spans
     )
 
@@ -476,15 +519,23 @@ def test_capacity_risk_and_operating_permit_milestones_are_selected() -> None:
     package = select_narrative_evidence(parsed, title="首次公开发行招股说明书.pdf")
 
     assert len(package.evidence_spans) == 2
-    risk_span = next(span for span in package.evidence_spans if "饱和" in (span.raw_text or ""))
+    risk_span = next(
+        span for span in package.evidence_spans if "饱和" in (span.raw_text or "")
+    )
     permit_span = next(
         span for span in package.evidence_spans if "生产许可" in (span.raw_text or "")
     )
-    assert "business_risk_or_constraint" in risk_span.structured_value["selection_reasons"]
-    assert "specific_business_event" in permit_span.structured_value["selection_reasons"]
+    assert (
+        "business_risk_or_constraint" in risk_span.structured_value["selection_reasons"]
+    )
+    assert (
+        "specific_business_event" in permit_span.structured_value["selection_reasons"]
+    )
 
 
-def test_explicit_capacity_and_certification_constraints_win_tight_prospectus_budget() -> None:
+def test_explicit_capacity_and_certification_constraints_win_tight_prospectus_budget() -> (
+    None
+):
     source_id, source_sha = _source()
     capacity_limit = _unit(
         "报告期内，公司氟碳类产品的产能已趋饱和。",
@@ -554,7 +605,13 @@ def test_product_name_context_and_permit_milestone_survive_prospectus_budget() -
         source_id=source_id,
         source_sha256=source_sha,
         language="zh",
-        units=(capacity_limit, permit_milestone, named_product, product_milestone, *generic_events),
+        units=(
+            capacity_limit,
+            permit_milestone,
+            named_product,
+            product_milestone,
+            *generic_events,
+        ),
         page_count=295,
         pages_read=295,
     )
@@ -618,7 +675,9 @@ def test_pdf_candidate_budget_reserves_first_pass_coverage_across_pages() -> Non
     assert package.candidate_count > 2
     assert {span.coordinates.page_number for span in package.evidence_spans} == {1, 2}
     assert package.omitted_candidate_count == package.candidate_count - 2
-    assert any("产能已趋饱和" in (span.raw_text or "") for span in package.evidence_spans)
+    assert any(
+        "产能已趋饱和" in (span.raw_text or "") for span in package.evidence_spans
+    )
     assert package.status == "partial"
 
 
@@ -663,7 +722,11 @@ def test_visual_context_groups_are_atomic_and_never_exceed_the_span_budget(
                 (group_first, group_second),
                 "本项目建成后将实现航空产业升级并带动外协加工需求持续增长。",
             ),
-            ("urn:company-wiki:context-group:standalone", (standalone,), standalone.raw_text),
+            (
+                "urn:company-wiki:context-group:standalone",
+                (standalone,),
+                standalone.raw_text,
+            ),
             (
                 "urn:company-wiki:context-group:standalone-second",
                 (standalone_second,),
@@ -741,9 +804,10 @@ def test_numbered_project_rationale_heading_survives_a_tight_budget() -> None:
 
     assert len(package.evidence_spans) == 1
     assert "航空产业形成" in (package.evidence_spans[0].raw_text or "")
-    assert "specific_project_rationale" in package.evidence_spans[0].structured_value[
-        "selection_reasons"
-    ]
+    assert (
+        "specific_project_rationale"
+        in package.evidence_spans[0].structured_value["selection_reasons"]
+    )
 
 
 def test_split_project_rationale_heading_keeps_its_short_continuation() -> None:
@@ -786,12 +850,15 @@ def test_split_project_rationale_heading_keeps_its_short_continuation() -> None:
     ]
     assert [span.coordinates.paragraph_index for span in selected] == [3, 4]
     assert "需求旺盛" in "".join(span.raw_text or "" for span in selected)
-    assert len(
-        {span.structured_value.get("selection_group_id") for span in selected[:3]}
-    ) == 1
+    assert (
+        len({span.structured_value.get("selection_group_id") for span in selected[:3]})
+        == 1
+    )
 
 
-def test_project_certification_timeline_is_selected_as_a_narrow_fragment_group() -> None:
+def test_project_certification_timeline_is_selected_as_a_narrow_fragment_group() -> (
+    None
+):
     source_id, source_sha = _source()
     generic_certification = _unit(
         "供应商认证一般需要1-3个月，具体根据客户要求及项目情况而定。",
@@ -819,7 +886,12 @@ def test_project_certification_timeline_is_selected_as_a_narrow_fragment_group()
         source_id=source_id,
         source_sha256=source_sha,
         language="zh",
-        units=(generic_certification, generic_event, project_name_prefix, project_timeline),
+        units=(
+            generic_certification,
+            generic_event,
+            project_name_prefix,
+            project_timeline,
+        ),
         page_count=3,
         pages_read=3,
     )
@@ -834,12 +906,19 @@ def test_project_certification_timeline_is_selected_as_a_narrow_fragment_group()
         project_name_prefix.raw_text,
         project_timeline.raw_text,
     ]
-    assert "project_certification_timeline" in package.evidence_spans[1].structured_value[
-        "selection_reasons"
-    ]
-    assert len(
-        {span.structured_value.get("selection_group_id") for span in package.evidence_spans}
-    ) == 1
+    assert (
+        "project_certification_timeline"
+        in package.evidence_spans[1].structured_value["selection_reasons"]
+    )
+    assert (
+        len(
+            {
+                span.structured_value.get("selection_group_id")
+                for span in package.evidence_spans
+            }
+        )
+        == 1
+    )
 
 
 def test_prospectus_reserves_extension_and_named_timeline_groups() -> None:
@@ -883,7 +962,14 @@ def test_prospectus_reserves_extension_and_named_timeline_groups() -> None:
         source_id=source_id,
         source_sha256=source_sha,
         language="zh",
-        units=(generic_event, project_intro, extension, certification, timeline_name, timeline),
+        units=(
+            generic_event,
+            project_intro,
+            extension,
+            certification,
+            timeline_name,
+            timeline,
+        ),
         page_count=3,
         pages_read=3,
     )
@@ -904,20 +990,29 @@ def test_prospectus_reserves_extension_and_named_timeline_groups() -> None:
         timeline_name.raw_text,
         timeline.raw_text,
     ]
-    assert "downstream_business_extension" in selected[1].structured_value[
-        "selection_reasons"
-    ]
-    assert len(
-        {span.structured_value.get("selection_group_id") for span in selected[:3]}
-    ) == 1
-    timeline_span = next(span for span in selected if span.raw_text == timeline.raw_text)
-    assert "downstream_center_certification_timeline" in timeline_span.structured_value[
-        "selection_reasons"
-    ]
-    assert len({span.structured_value.get("selection_group_id") for span in selected}) == 2
+    assert (
+        "downstream_business_extension"
+        in selected[1].structured_value["selection_reasons"]
+    )
+    assert (
+        len({span.structured_value.get("selection_group_id") for span in selected[:3]})
+        == 1
+    )
+    timeline_span = next(
+        span for span in selected if span.raw_text == timeline.raw_text
+    )
+    assert (
+        "downstream_center_certification_timeline"
+        in timeline_span.structured_value["selection_reasons"]
+    )
+    assert (
+        len({span.structured_value.get("selection_group_id") for span in selected}) == 2
+    )
 
 
-def test_prospectus_defaults_to_more_narrative_capacity_than_quarterly_reports() -> None:
+def test_prospectus_defaults_to_more_narrative_capacity_than_quarterly_reports() -> (
+    None
+):
     source_id, source_sha = _source()
     units = tuple(
         _unit(
@@ -965,10 +1060,15 @@ def test_future_market_coverage_plan_is_selected_as_a_plan() -> None:
     package = select_narrative_evidence(parsed, title="半年报.pdf")
 
     assert len(package.evidence_spans) == 1
-    assert "project_plan_or_status" in package.evidence_spans[0].structured_value["selection_reasons"]
+    assert (
+        "project_plan_or_status"
+        in package.evidence_spans[0].structured_value["selection_reasons"]
+    )
 
 
-def test_split_quantified_market_coverage_target_is_kept_as_one_budgeted_group() -> None:
+def test_split_quantified_market_coverage_target_is_kept_as_one_budgeted_group() -> (
+    None
+):
     source_id, source_sha = _source()
     prefix_text = "预计未来五到十年，中微公司将通过自主研发以及携手行业合作伙伴，覆盖集成电路关键领域超"
     suffix_text = "过60%的设备市场。"
@@ -1008,16 +1108,28 @@ def test_split_quantified_market_coverage_target_is_kept_as_one_budgeted_group()
 
     package = select_narrative_evidence(parsed, title="半年报.pdf", max_selected=2)
 
-    assert {span.coordinates.paragraph_index for span in package.evidence_spans} == {3, 4}
+    assert {span.coordinates.paragraph_index for span in package.evidence_spans} == {
+        3,
+        4,
+    }
     assert len(package.evidence_spans) == 2
-    assert len({span.structured_value["selection_group_id"] for span in package.evidence_spans}) == 1
+    assert (
+        len(
+            {
+                span.structured_value["selection_group_id"]
+                for span in package.evidence_spans
+            }
+        )
+        == 1
+    )
     assert all(
-        "quantified_market_coverage_target" in span.structured_value["selection_reasons"]
+        "quantified_market_coverage_target"
+        in span.structured_value["selection_reasons"]
         for span in package.evidence_spans
     )
-    assert _anchor_evidence_ids(
-        list(package.evidence_spans), "60%的设备市场"
-    ) == (package.evidence_spans[1].span_id,)
+    assert _anchor_evidence_ids(list(package.evidence_spans), "60%的设备市场") == (
+        package.evidence_spans[1].span_id,
+    )
 
 
 def test_adjacent_product_context_is_retained_for_a_validation_event() -> None:
@@ -1043,7 +1155,10 @@ def test_adjacent_product_context_is_retained_for_a_validation_event() -> None:
 
     package = select_narrative_evidence(parsed, title="一季报.pdf")
 
-    assert {span.coordinates.paragraph_index for span in package.evidence_spans} == {24, 25}
+    assert {span.coordinates.paragraph_index for span in package.evidence_spans} == {
+        24,
+        25,
+    }
     assert any(
         "adjacent_subject_context" in span.structured_value["selection_reasons"]
         for span in package.evidence_spans
@@ -1101,9 +1216,10 @@ def test_specific_cooperation_event_does_not_require_a_predeclared_topic_word() 
 
     assert len(package.evidence_spans) == 1
     assert package.evidence_spans[0].structured_value["topics"] == ("new_business",)
-    assert "specific_business_event" in package.evidence_spans[0].structured_value[
-        "selection_reasons"
-    ]
+    assert (
+        "specific_business_event"
+        in package.evidence_spans[0].structured_value["selection_reasons"]
+    )
 
 
 def test_pilot_line_milestone_is_classified_as_operational_evidence() -> None:
@@ -1128,19 +1244,25 @@ def test_pilot_line_milestone_is_classified_as_operational_evidence() -> None:
     assert package.status == "selected"
 
 
-def test_table_scan_signal_requires_a_specific_event_or_current_industry_context() -> None:
+def test_table_scan_signal_requires_a_specific_event_or_current_industry_context() -> (
+    None
+):
     assert not _table_scan_signal("市场需求持续增长，公司研发项目较多。")
     assert _table_scan_signal("2025年新产线已完成客户验证并进入量产。")
     assert _table_scan_signal("本报告期行业竞争格局和政策变化明显。")
     assert _table_scan_signal("问：新产品什么时候量产？答：已通过客户验证。")
 
 
-def test_pdf_investor_question_is_selected_only_as_context_for_a_selected_answer() -> None:
+def test_pdf_investor_question_is_selected_only_as_context_for_a_selected_answer() -> (
+    None
+):
     source_id, source_sha = _source()
     question = _unit(
         "问：新产品什么时候通过客户验证？",
         source_id=source_id,
-        coords=EvidenceCoordinates(page_number=5, table_index=0, row_index=0, column_index=1),
+        coords=EvidenceCoordinates(
+            page_number=5, table_index=0, row_index=0, column_index=1
+        ),
         kind="pdf_table_qa_fragment",
         role="investor_question",
         metadata={"qa_group_id": "p5:t0:r0:c1:q1", "qa_state": "question_paired"},
@@ -1148,7 +1270,9 @@ def test_pdf_investor_question_is_selected_only_as_context_for_a_selected_answer
     answer = _unit(
         "答：新产品已通过客户验证并取得首批订单。",
         source_id=source_id,
-        coords=EvidenceCoordinates(page_number=5, table_index=0, row_index=0, column_index=1),
+        coords=EvidenceCoordinates(
+            page_number=5, table_index=0, row_index=0, column_index=1
+        ),
         kind="pdf_table_qa_fragment",
         role="management",
         metadata={"qa_group_id": "p5:t0:r0:c1:q1", "qa_state": "answer_paired"},
@@ -1213,18 +1337,24 @@ def test_financing_project_heading_selects_and_groups_split_paragraph_context() 
     assert len(group_ids) == 1
     summary_group = package.summary_input()["evidence"][0]
     assert summary_group["context_member_count"] == 2
-    assert summary_group["evidence_ids"] == [span.span_id for span in package.evidence_spans]
+    assert summary_group["evidence_ids"] == [
+        span.span_id for span in package.evidence_spans
+    ]
     assert summary_group["raw_text"] == first_line.raw_text + second_line.raw_text
     assert len(summary_group["locators"]) == 2
 
 
-def test_company_statement_rejects_unknown_roles_and_unstable_locators_need_review() -> None:
+def test_company_statement_rejects_unknown_roles_and_unstable_locators_need_review() -> (
+    None
+):
     source_id, source_sha = _source()
     # Rebuild an unstable EvidenceSpan through the normal unit constructor.
     unstable_unit = _make_unit(
         source_id=source_id,
         parser_version="0.1.0",
-        coordinates=EvidenceCoordinates(page_number=1, table_index=0, row_index=0, column_index=1),
+        coordinates=EvidenceCoordinates(
+            page_number=1, table_index=0, row_index=0, column_index=1
+        ),
         raw_text="新产品已通过客户验证并获得订单。",
         unit_kind="pdf_table_qa_fragment",
         source_role="company_filing",
@@ -1288,3 +1418,104 @@ def test_company_statement_rejects_unknown_roles_and_unstable_locators_need_revi
             language="zh",
             evidence_spans=(unknown_unit,),
         )
+
+
+QUARTERLY_NARRATIVE_CATEGORIES = (
+    ("industry", "报告期内，行业景气度持续回升，带动公司主要产品需求稳定增长。"),
+    ("operations", "报告期内，公司生产装置运行平稳，主要产品产销量同比增长。"),
+    ("new_business", "公司新设立精密零部件事业部，启动高纯材料新产品的工艺开发。"),
+    ("overseas", "报告期内，境外业务收入同比增长，成为公司重要的增长来源。"),
+)
+_QUARTERLY_CONTROL_TEXTS = (
+    "本公司保证所披露的信息真实、准确、完整，不存在虚假记载或误导性陈述。",
+    "第一节 重要提示 .......... 2",
+)
+
+
+def _category_pdf(tmp_path: Path) -> tuple[Path, str, str]:
+    fitz = pytest.importorskip("fitz")
+    document = fitz.open()
+    for _, text in QUARTERLY_NARRATIVE_CATEGORIES:
+        page = document.new_page()
+        page.insert_text((72.0, 72.0), text, fontname="china-s")
+    for text in _QUARTERLY_CONTROL_TEXTS:
+        page = document.new_page()
+        page.insert_text((72.0, 72.0), text, fontname="china-s")
+    path = tmp_path / "quarterly-sample.pdf"
+    document.save(path)
+    document.close()
+    data = path.read_bytes()
+    sha = hashlib.sha256(data).hexdigest()
+    return path, source_id_for_sha256(sha), sha
+
+
+@pytest.mark.parametrize(
+    ("title", "existing_kind"),
+    [("", "quarterly_report"), ("", "investor_relations")],
+)
+def test_quarterly_and_ir_narrative_categories_survive_missing_title_with_replay(
+    tmp_path: Path, title: str, existing_kind: str
+) -> None:
+    path, source_id, sha = _category_pdf(tmp_path)
+    parsed = parse_pdf(
+        path,
+        source_id=source_id,
+        source_sha256=sha,
+        language="zh",
+        full_table_scan=True,
+    )
+
+    package = select_narrative_evidence(
+        parsed, title=title, existing_kind=existing_kind
+    )
+
+    assert package.document_kind == existing_kind
+    assert package.status == "selected"
+    raw_texts = [span.raw_text for span in package.evidence_spans]
+    for _kind, text in QUARTERLY_NARRATIVE_CATEGORIES:
+        assert text in raw_texts
+    for text in _QUARTERLY_CONTROL_TEXTS:
+        assert text not in raw_texts
+    for span in package.evidence_spans:
+        assert span.coordinates.page_number is not None
+        assert span.source_id == source_id
+    verified, failed = verify_pdf_evidence_spans(
+        path,
+        source_id=source_id,
+        source_sha256=sha,
+        evidence_spans=package.evidence_spans,
+    )
+    assert failed == ()
+    assert verified == tuple(span.span_id for span in package.evidence_spans)
+
+
+def test_fully_scanned_signal_free_quarterly_skips_cleanly() -> None:
+    source_id, source_sha = _source()
+    toc = _unit(
+        "第一节 重要提示 .......... 2",
+        source_id=source_id,
+        coords=EvidenceCoordinates(page_number=1, paragraph_index=0),
+    )
+    note = _unit(
+        "本报告的编制仅说明财务数据的列报规则，未描述任何具体业务事件。",
+        source_id=source_id,
+        coords=EvidenceCoordinates(page_number=2, paragraph_index=0),
+    )
+    parsed = NarrativeParseResult(
+        source_id=source_id,
+        source_sha256=source_sha,
+        language="zh",
+        units=(toc, note),
+        page_count=3,
+        pages_read=3,
+    )
+
+    package = select_narrative_evidence(
+        parsed,
+        title="2026年第一季度报告.pdf",
+        existing_kind="quarterly_report",
+    )
+
+    assert package.status == "skipped_no_narrative"
+    assert package.evidence_spans == ()
+    assert package.coverage_complete
