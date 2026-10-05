@@ -705,5 +705,7 @@ S0/N4A及S2模型预算基础、CLI阶段与CI修复已正常发布，当前CI�
 
 - 候选9fa216677826fe90f2db3b35c08327e5732d4d47正常push后合入master@e570dafb92a3f6aaec51176682d348a1c9303535并发布，两次正常pre-push精选合同GREEN。精确主线CI37375836745 completed/success，没有重试。[远端结果](https://github.com/zhengcb81/company-wiki/actions/runs/37375836745)。53个不同case分步GREEN，不增加日常慢包。
 - 真实E2E+路径/锁/回滚6 passed/196.98s（setup158.44s、call19.76s）；已关闭缓存reader，唯一真实fixture恢复absent。最后post-readback不可测RED修复，正常vacuum+该异常6 passed/14.63s。最新副本数据是derived6,360,944→0B，span删15,962，DB32,792,576→2,174,976B；完整source/new-final及PDF/TXT原文SHA/locator replay全等。验收JSON保存根外聚合实测，不存正文/库副本。
-- 主/分PWF、S5/S6细则、并行总表、集成审查与小JSON已同步。P5-STORAGE不再派发；所建托管验收树已归档，工具/测试分支全部推送；原外包树保持未改。RF/FF交付尚未到，RF remote main8a153f33，owner两份assurance修改仍原样。
+- 主/分PWF、S5/S6细则、并行总表、集成审查与小JSON已同步。P5-STORAGE不再派发；托管验收树已发起归档（附件状态archived，物理删除仍待核），工具/测试分支全部推送；原外包树保持未改。RF/FF交付尚未到，RF remote main8a153f33，owner两份assurance修改仍原样。
 - 下一动作是CWP旧底层caller/质量metadata_only语义，随后接RF默认SourceRef迁移再做生产处置。生产derived/DB本轮没有清理、0外部模型POST；N4C累计token cap问题仍待答，不把key修复或GET200当付费摘要成功。
+
+- 托管归档工具返回queued，附件随后显示archived；正常账号再次核对，Git仍注册且checkout目录存在。手工删除预检因仍注册而停止，零删除；不重复归档/强删。收据更正为物理归档未完成，后续只读复核后台状态，不阻S5代码工作。所有测试根已恢复absent，已发布代码/CI不受影响。
