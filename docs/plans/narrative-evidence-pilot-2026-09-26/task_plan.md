@@ -6,7 +6,7 @@
 
 完成八束整套简化：一个下载请求入口、一套pathless来源接口、一套AUTO任务系统，按需选择业务叙述、摘要和检索；停止全量永久转换与重复正文；完成真实模型、持久预算、可恢复多文档处理及消费者接线，然后分批删除无调用者的旧派生。原件、来源/版本事实不丢。RF/FF/ET/StockWiki/IQS各仓独占写入，不修改其他owner未提交工作。
 
-**当前恢复点（2026-10-06，最新）：**目标active。P5-FF已验收/并入本地远端main758e8f4，精确CI37385101051一次GREEN；P5-STORAGE工具已验收/发布e570daf，生产未删。CWP剩余全量generator已退出安装包，原文临时parser/指纹保留且补上解析前后SHA与候选manifest绑定；代码b148123已推master，精确CI37388329668 attempt1 completed/success，所有步骤GREEN。节点229个不同case分步GREEN（含新增诊断case），真实年报PDF/TXT公开scan→fingerprint-backfill→幂等通过，0新artifact/span/derived、原SHA和来源事实不变、测试根恢复。RF外线8a153f33仍WIP、无HANDOFF；其默认SourceBundle迁移是生产处置前剩余消费者事项。真实Config的DeepSeek/MiMo保持deepseek-flash/mimo-v2.6-flash、8192/温度1.0，N4C摘要POST仍待累计token cap答复，旧账不退。
+**当前恢复点（2026-10-06，最新）：**目标active。P5-FF已验收/并入本地远端main758e8f4，精确CI37385101051一次GREEN；P5-STORAGE工具已验收/发布e570daf，生产未删。CWP剩余全量generator已退出安装包，原文临时parser/指纹保留且补上解析前后SHA与候选manifest绑定；代码b148123已推master，精确CI37388329668 attempt1 completed/success，所有步骤GREEN。节点229个不同case分步GREEN（含新增诊断case），真实年报PDF/TXT公开scan→fingerprint-backfill→幂等通过，0新artifact/span/derived、原SHA和来源事实不变、测试根恢复。RF交付已到达：干净a74b9ceb（代码31fe65e6），MAIN独立整合树已ff-only接入；远端main仍8a153f33，尚未完成MAIN验收/发布。其默认来源迁移是生产处置前剩余消费者事项。真实Config的DeepSeek/MiMo保持deepseek-flash/mimo-v2.6-flash、8192/温度1.0，N4C摘要POST仍待累计token cap答复，旧账不退。
 
 **最近发布验收：**FF758e8f4/CI37385101051、精选1b0feb4/CI37381429717、质量dd35d2f/CI37378430383、STORAGE e570daf/CI37375836745均success。本轮b148123正常commit/pre-push GREEN且已推master，精确代码CI37388329668全部GREEN；纯PWF收尾不触发替代长测，user source_acquisition SHA保持。
 
@@ -25,7 +25,7 @@
 
 **N4-T2 selector实现状态：**基础实现`ea9dd26`基于`4807c01`并已发布；选择性吸收外包差异的实现提交`0657579d`已发布，Actions #37273071081对精确SHA成功。外包交付`2b5bec9`基于N4-T1提交`4a53080`，82项测试、Ruff与diff check全绿，工作树干净，但无正式外包验收文档。逐路径对比后未整支并入：主线多数行为已存在；保留外包对景气/生产运营/境外业务用词及新设业务单元事件的高价值补充，拒绝去掉具体动作条件、以及按“无词汇命中”自动跳过季度/业务文档。主线新增合成PDF覆盖四类业务信号、titleless季度/IR路由、套话/目录排除和每个span的字节定位回放；信号全无的真实季度仍`needs_review`。改良选择器后的E6真实Worker P1/P2/P4复测为1 passed/246.39s，详细吞吐、队列等待和内存数据见[MAIN selector实现与验收](harness_lanes/results/n4t2_selector_acceptance_2026-10-05.md)。N4-T2外包差异已收口，接下来推进N4C，不再等待或合并重复分支。
 
-**S5当前边界（2026-10-05）：**公开全文writer与旧evidence/evidence-list/sections-list运行入口、EvidenceQuery public exports均已退出；显式历史backend仅供读夹具兼容。正式transport提供固定版本精选list/lookup/search，原件SHA/全部locator回放后才返回；搜索内存BM25，不新增持久索引/权限门。102个不同case分步GREEN，1b0feb4已发布/精确CI绿。质量v2 dd35d2f不打开normalized正文；未请求/retired为metadata_only。scanner引用保护与stats计量保留，不触发旧全文重建。底层generators及RF默认旧SourceBundle仍待收口；RF main8a153f33、owner两份assurance改动不动，FF已收到交付但未并线。生产降容未执行。
+**S5当前边界（2026-10-05）：**公开全文writer与旧evidence/evidence-list/sections-list运行入口、EvidenceQuery public exports均已退出；显式历史backend仅供读夹具兼容。正式transport提供固定版本精选list/lookup/search，原件SHA/全部locator回放后才返回；搜索内存BM25，不新增持久索引/权限门。102个不同case分步GREEN，1b0feb4已发布/精确CI绿。质量v2 dd35d2f不打开normalized正文；未请求/retired为metadata_only。scanner引用保护与stats计量保留，不触发旧全文重建。底层generators已由b148123退出生产安装包；RF默认迁移仍待MAIN集成验收/发布，owner两份assurance改动保持。FF已验收并线758e8f4。生产降容未执行。
 
 **S5空间实测（2026-10-05，真实用户工作目录，只读）：**`.source_catalog/derived` 为7,104个文件/2,826,010,634 B：3,528个 `normalized.md` 共2,748,621,075 B（约97.3%），596个 `sections` 文件共67,624,394 B，2,980个 `summary.md` 共9,765,165 B。normalized是降容的首要目标；成功迁移前不得删。只读SQLite结果为page_count 746,055、freelist 0、EvidenceSpan 1,490,530；artifact行有normalized completed 4,842/partial 127/unsupported 15、sections completed 238、summary completed 2,969。该扫描不触碰companies原件、不写数据库；文件逻辑长度不是已释放磁盘空间，未来删除后仍需实测free-space。
 
@@ -117,7 +117,7 @@ TDD框住公开行为，不把旧签收规则写进新测试。仅S0相关收口
 
 ## Next Step
 
-**MAIN单一下一动作：验收P5-RF默认v2交付并线；未交付时做现有存储工具的生产只读预览与处置清单准备。**CWP运行旧generators已收口b148123，代码CI37388329668已completed/success；历史测试夹具不进入安装包，343份生产Python无tests/support imports。FF和STORAGE均已验收，不重派/不复跑历史大包。RF专用树仍8a153f33/WIP/无HANDOFF，不修改其文件；生产derived/span/VACUUM须等其默认迁移验收，原件不删。N4C模型预算问题独立等待，不阻只读准备。
+**MAIN单一下一动作：按[P5-RF整合细则](harness_lanes/results/p5_rf_main_integration_plan_2026-10-06.md)完成默认v2迁移验收、当前依赖/快速CI收口并发布。**CWP运行旧generators已收口b148123，代码CI37388329668已completed/success；历史测试夹具不进入安装包，343份生产Python无tests/support imports。FF和STORAGE均已验收，不重派/不复跑历史大包。RF交付已到达：干净a74b9ceb（代码31fe65e6），MAIN独立整合树已ff-only接入；远端main仍8a153f33，尚未完成MAIN验收/发布。外包交付树不改；生产derived/span/VACUUM须等其默认迁移验收，原件不删。N4C模型预算问题独立等待，不阻只读准备。
 
 P5-STORAGE已验收并合入/发布：候选`9fa2166`，主线代码`e570dafb92a3f6aaec51176682d348a1c9303535`。53个不同case分步GREEN，真实AMEC年报+微软电话会TXT的原文stdout SHA、新NarrativeRef完整locator replay前后通过，连接关闭及测试根恢复均通过；没有生产删除。工具预览不写库/sidecar、不拿写锁；切片单次范围SQL/聚合小报告；压缩真实前后计量/空间检查，观测失败明确null。所有细节及实际副本空间见[集成审查](harness_lanes/results/p5_storage_integration_review_2026-10-05.md)、[小验收收据](harness_lanes/results/p5_storage_integration_acceptance_2026-10-05.json)、[工具说明](../../../tools/legacy_storage/README.md)。日常Unit CI不添加多分钟解析包。精确新代码[CI37375836745](https://github.com/zhengcb81/company-wiki/actions/runs/37375836745)已completed/success；此前18da250同SHA重跑CI也已success。
 

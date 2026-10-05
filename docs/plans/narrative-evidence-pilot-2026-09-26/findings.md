@@ -1,5 +1,13 @@
 # Findings：当前事实与待验证项
 
+## 2026-10-06 — P5-FF / P5-STORAGE交付复核收口
+
+- 用户通知交付后重核原始handoff、Git ancestry与GitHub exact SHA：FF ab9ce33在main758e8f4中，STORAGE 9fa2166在master历史中；CI37385101051/37375836745均attempt1 completed/success。沿用已经执行的集中53个不同case分步GREEN及真实三仓/原件测试，不重复长包、不增加小节点门禁。
+- FF外包报告的无预算旧下载fixture与POSIX待验证项已由MAIN修复、真实Linux CI执行；不再作为当前待办。FF仓内MAIN_ACCEPTANCE.md仍保留发布前过程，当前发布事实以CWP正式JSON receipt为准。STORAGE未知parser分类仍由MAIN明确保留/处置，生产删除不由外包签收自动触发。
+- 本轮再核原件：AMEC 9,165,875B/d64c4108…，MSFT 66,324B/4ac3b4f0…，与既有签收完全一致；用户配置3609e707…不变，FMP密钥不读。RF新交付已进入干净MAIN整合树，尚未发布；全套PWF修正过期“WIP/无HANDOFF/FF未并线”描述。
+- 环境误差记录：此前RF相对路径命令未进入指定目录，出现file-not-found/0 collected，不是行为RED；后续跨仓命令显式Set-Location并验证根。本轮一次PowerShell花括号路径展开语法错误改为逐个显式路径，无项目写入。
+- 本轮0生产原件/派生/span删除、0VACUUM、0LLM/provider调用；没有宣称新增释放空间。下一动作仍为P5-RF MAIN整合节点。
+
 ## 2026-10-06 S5剩余caller
 
 - tracked AST补足CodeGraph imports：service导入normalizer.backfill_text_fingerprints；__init__为未使用的LLMSummaryError/SectionSlice加载旧writer；三个旧writer依赖normalized_artifact_reader。其他直接调用在tests，历史artifacts不是正式入口。

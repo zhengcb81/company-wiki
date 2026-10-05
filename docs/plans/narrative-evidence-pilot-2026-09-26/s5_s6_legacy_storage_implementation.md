@@ -2,6 +2,10 @@
 
 > MAIN负责执行，不是新的外包卡。复用总计划S5/S6存储节点，不增加逐文件或逐helper审查。N4-T1/T2保持各自写集，本文件不授权修改它们的施工目录。原件、来源版本和撤回事实保留。
 
+## 2026-10-06交付验收恢复点
+
+P5-FF与P5-STORAGE均已验收并发布，精确CI已再核success。CWP旧生成器b148123已退出生产安装包；RF交付已到达：干净a74b9ceb（代码31fe65e6），MAIN独立整合树已ff-only接入；远端main仍8a153f33，尚未完成MAIN验收/发布。生产derived/span/VACUUM仍未执行，空间收益须实际处置后测量。下一步复用[P5-RF整合细则](harness_lanes/results/p5_rf_main_integration_plan_2026-10-06.md)，不重跑工具已签收的长验收。
+
 ## 依据与边界
 
 - SPACE-S5报告：`C:/Users/郑曾波/Projects/company-wiki-storage-audit-20261003/results/storage_audit.{md,json}`。报告的138,648,023 B缓存、2,826,010,634 B derived、3,055,800,320 B DB是当时实测，下一批只核变化的集合。

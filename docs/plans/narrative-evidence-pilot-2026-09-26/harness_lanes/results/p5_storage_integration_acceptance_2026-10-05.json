@@ -1,7 +1,7 @@
 {
   "schema_version": "cwp-storage-integration/1",
   "date": "2026-10-05",
-  "status": "accepted_for_main",
+  "status": "published_green",
   "production_cleanup_executed": false,
   "code_baseline": "18da250006cb9e409b519198c3f58913b01f0f17",
   "node1_candidate": "72b11160b926e7ead0f163786f141ce2ead5f470",
@@ -138,5 +138,6 @@
     "git_registered": true,
     "physical_checkout_exists": true,
     "manual_deletion_executed": false
-  }
+  },
+  "publication_reverified_date": "2026-10-06"
 }

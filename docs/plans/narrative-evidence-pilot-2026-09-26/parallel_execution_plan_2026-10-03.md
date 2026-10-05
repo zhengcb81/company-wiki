@@ -1,12 +1,12 @@
 # 并行总计划：门禁先行，独立目录施工，MAIN统一打通
 
-> **2026-10-06最新覆盖：**P5-FF已验收并入main758e8f4/精确CI37385101051 GREEN；P5-STORAGE已验收e570daf，生产处置未执行。RF默认迁移专用树仍WIP/无HANDOFF，不重派或写穿。MAIN运行旧generator已退出安装包b148123，229个不同case分步GREEN、真实PDF/TXT原件/来源事实保持且0新全文派生；CI37388329668已completed/success。质量/正式精选接口已发布绿。下方旧日期仅作追溯，不产生待办或签收。
+> **2026-10-06最新覆盖：**P5-FF已验收并入main758e8f4/精确CI37385101051 GREEN；P5-STORAGE已验收e570daf，生产处置未执行。RF交付已到达：干净a74b9ceb（代码31fe65e6），MAIN独立整合树已ff-only接入；远端main仍8a153f33，尚未完成MAIN验收/发布。不重派或写穿。MAIN运行旧generator已退出安装包b148123，229个不同case分步GREEN、真实PDF/TXT原件/来源事实保持且0新全文派生；CI37388329668已completed/success。质量/正式精选接口已发布绿。下方旧日期仅作追溯，不产生待办或签收。
 
 ## 当前可立即并行的P5包
 
 | 包 | 独占目录 | 接口与交接 | 何时开工 |
 |---|---|---|---|
-| [P5-RF](harness_lanes/p5_rf_source_default_migration.md) | `Projects/cwp-lanes-20261005/rf-source-v2` | RF SourceRecord/reuse receipt沿用已发布wire；仅RF默认入口迁移 | 已在施工；无HANDOFF，不碰其写集/不重派 |
+| [P5-RF](harness_lanes/p5_rf_source_default_migration.md) | `Projects/cwp-lanes-20261005/rf-source-v2` | RF SourceRecord/reuse receipt沿用已发布wire；仅RF默认入口迁移 | 已交付a74b9ceb，MAIN独立整合验收中；不重派 |
 | [P5-FF](harness_lanes/p5_ff_runtime_simplification.md) | `Projects/cwp-lanes-20261005/ff-runtime-cleanup` | SourceRef/companion wire不变；共用有界进程、一次请求限额 | 已验收并入本地/远端main758e8f4，精确CI GREEN；不重派 |
 | [P5-STORAGE](harness_lanes/p5_storage_retirement_engine.md) | `Projects/cwp-lanes-20261005/cwp-storage-tool` | 新tools/专属tests；四维护操作及`cwp-storage-retirement/1`小报告 | 已验收合入/发布e570daf，53项分步GREEN；生产清理由MAIN在迁caller后做，不重派 |
 

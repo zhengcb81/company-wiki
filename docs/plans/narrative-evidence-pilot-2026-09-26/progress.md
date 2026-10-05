@@ -1,5 +1,19 @@
 # Progress：激进简化实施
 
+## 2026-10-06 — P5-FF / P5-STORAGE交付复核收口
+
+- 用户通知交付后重核原始handoff、Git ancestry与GitHub exact SHA：FF ab9ce33在main758e8f4中，STORAGE 9fa2166在master历史中；CI37385101051/37375836745均attempt1 completed/success。沿用已经执行的集中53个不同case分步GREEN及真实三仓/原件测试，不重复长包、不增加小节点门禁。
+- FF外包报告的无预算旧下载fixture与POSIX待验证项已由MAIN修复、真实Linux CI执行；不再作为当前待办。FF仓内MAIN_ACCEPTANCE.md仍保留发布前过程，当前发布事实以CWP正式JSON receipt为准。STORAGE未知parser分类仍由MAIN明确保留/处置，生产删除不由外包签收自动触发。
+- 本轮再核原件：AMEC 9,165,875B/d64c4108…，MSFT 66,324B/4ac3b4f0…，与既有签收完全一致；用户配置3609e707…不变，FMP密钥不读。RF新交付已进入干净MAIN整合树，尚未发布；全套PWF修正过期“WIP/无HANDOFF/FF未并线”描述。
+- 环境误差记录：此前RF相对路径命令未进入指定目录，出现file-not-found/0 collected，不是行为RED；后续跨仓命令显式Set-Location并验证根。本轮一次PowerShell花括号路径展开语法错误改为逐个显式路径，无项目写入。
+- 本轮0生产原件/派生/span删除、0VACUUM、0LLM/provider调用；没有宣称新增释放空间。下一动作仍为P5-RF MAIN整合节点。
+
+## 2026-10-06 — P5-RF交付到达，优先主线整合
+
+- 上一目标turn为progress：CWP b148123生成器退出/精确CI全绿及f65e8c9 PWF均已发布。本轮fresh RF交付由WIP变为干净a74b9ceb（代码31fe65e6），HANDOFF位于docs/implementation/handoffs/P5-RF而非.planning；remote main仍8a153f33。
+- 复用9项TDD/98相关回归/2项CLI签收，MAIN只补当前FF/CWP及部署/CI节点。确认旧compat FF不支持v2、新E2E默认skip、已删evaluate_review测试及RF重复长CI是真实待收口项；先写MAIN整体整合步骤，不走一步猜一步。
+- 原RF owner2份weekly日志、rf-impl main树242项staged WIP均保留，干净旧整合树可复用。没有生产删除或新模型外发。本轮计划见harness_lanes/results/p5_rf_main_integration_plan_2026-10-06.md。
+
 ## 2026-10-06 — S5剩余生成器分层接续
 
 - P5-FF已主线758e8f4/精确CI GREEN、P5-STORAGE已主线e570daf/验收，未执行生产删除。fresh RF独立树8a153f33仍WIP、无HANDOFF，owner仍两份assurance，不修改它。
