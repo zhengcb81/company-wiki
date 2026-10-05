@@ -107,4 +107,6 @@ MAIN接下来核实际旧底层generator/EvidenceQuery/ExtractionQuality caller�
 5. 同步退出source-catalog旧evidence/evidence-list/sections-list运行命令及旧公共backend exports，保留显式历史backend fixture读兼容；旧CLI成功测试改测退出公开入口与正式view，不弱化当前原文/引用校验。scanner引用保护与status计量保留：它们没有生产调度/重建语义。更新运行文档和PWF后commit/push，精确代码CI绿。
 6. RF/FF外线文件不动，生产derived/span暂不删除。新版view接通后仍待RF默认卡验收和旧generator/reader实际caller收口，最后生产处置。已有reference/read/SourceRef/SourceExport正式合同不升级，也不另加人工签收。
 
-**本节点本地验收完成：**102个不同case分步GREEN，集中100 passed/2失败后仅6受影响cases GREEN23.41s，非重跑全包。两处修正是公开错误名与退役旧CLI断言；来源/旧backend事实校验未放宽。真实MSFT TXT search→lookup/全部引用回放/原始SHA、四类型持久文件集合/SHA不变及s5vred/green/final测试根恢复均通过。实际read/reference goldens保持原字节；0外部model POST，0生产删除。Ruff/diff-check GREEN；发布与精确CI待收口。[小收据](harness_lanes/results/s5_selected_retrieval_acceptance_2026-10-05.json)。
+**本节点验收完成：**102个不同case分步GREEN，集中100 passed/2失败后仅6受影响cases GREEN23.41s，非重跑全包。两处修正是公开错误名与退役旧CLI断言；来源/旧backend事实校验未放宽。真实MSFT TXT search→lookup/全部引用回放/原始SHA、四类型持久文件集合/SHA不变及s5vred/green/final测试根恢复均通过。实际read/reference goldens保持原字节；0外部model POST，0生产删除。Ruff/diff-check GREEN；1b0feb4已发布/精确CI绿。[小收据](harness_lanes/results/s5_selected_retrieval_acceptance_2026-10-05.json)。
+
+**发布已完成：**代码1b0feb44ff1695a8bae761eac538ce68236c04d6已推送master；正常commit/pre-push均GREEN，用户配置SHA保持。CI37381429717 attempt1 completed/success，所有步骤GREEN。质量/公开精选读取两个节点已关闭，整体S5仍待FF/RF外线、旧generator实际caller与生产处置，不复跑本节点102项。

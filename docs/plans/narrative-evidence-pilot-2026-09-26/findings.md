@@ -618,3 +618,6 @@ e570daf已发布，精确CI37375836745 success。53个不同case分步GREEN。�
 - 正式view节点现已本地GREEN：102个不同case分步过；全来源verify/replay后才查询，过期裸locator无转换。固定旧版本在新partial final可见后仍返旧spans，技术partial/coverage显式展示；skip零items，所有输入资源边界在打开前验证。summary_input仅抽纯分组函数，旧read/reference golden字节不变。没有调用早期physical resolver或新DB/index。
 - 新测试首猜hash_mismatch再猜resolver内部content_sha256_mismatch均非公开wire；实读SourceVersionReader._verified_version证明SHA失败按location聚合，公开unavailable/no_verified_location。修测试与公开协议一致，完整raw SHA验证不改。历史backend的archive/readonly/hash等测试仍保留，旧CLI迁为未注册断言。
 - FF交接由缺失变已到：实际干净codex/p5-ff-runtime-cleanup@ab9ce33，code7c6cf48，handoff机器schema/2的delivery b5c1c82之后仅文档收尾；尚未MAIN验收。报告463过/10 baseline-red/14skip不是全绿；10处下载fixture未提供CWP限额，下一阶段补fixture真实合同，不新增或放宽门。RF远端仍8a153f33/owner两处assurance、尚无HANDOFF。沙箱读FF Git报dubious ownership，改用真实所有者正常上下文只读，不增加全局safe.directory或改文件。
+
+- S5正式精选节点1b0feb4已发布/正常钩子GREEN，CI37381429717 attempt1 success、所有步骤成功，无重跑。代码CI不由后续纯文档收据覆盖。生产原件/derived/span零删除，user配置原SHA保持。
+- FF额外只读实测：受控实际child输出9/10/11 bytes对10B cap依次ok/OutputLimitExceeded/OutputLimitExceeded（0.399/0.051/0.057s）；等于cap的有效输出被错误拒绝，交付不可直接签全绿。源码另见stdin同步写发生在期限起算前、两管道EOF后proc.wait()无timeout、只等双EOF可能不及时响应单流overflow、POSIX父退出后getpgid(pid)失效等风险；后三者当前是读码推断而非已跑证明，需下一节点受控watchdog TDD。零网络/项目写入；读取不存在FF AGENTS.md失败无写，不创建文件。

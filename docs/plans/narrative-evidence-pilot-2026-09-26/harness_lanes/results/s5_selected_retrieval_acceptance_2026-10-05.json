@@ -1,10 +1,10 @@
 {
   "schema_version": "main-node-acceptance/1",
   "node": "S5 selected narrative retrieval",
-  "state": "local_green_publication_pending",
-  "code_head": null,
+  "state": "published_green",
+  "code_head": "1b0feb44ff1695a8bae761eac538ce68236c04d6",
   "published_branch": "master",
-  "ci": null,
+  "ci": {"run_id": 37381429717, "attempt": 1, "conclusion": "success", "url": "https://github.com/zhengcb81/company-wiki/actions/runs/37381429717"},
   "tests": {
     "initial": {"failed": 17, "passed": 38, "seconds": 43.14},
     "affected_package": {"passed": 100, "failed": 2, "seconds": 106.08},
@@ -33,5 +33,5 @@
   "production_span_prune_permitted": false,
   "rf_main": "8a153f3387ae75fb172e70f8ab63ffd38100779a",
   "ff_delivery_observed": {"head": "ab9ce33", "code": "7c6cf48", "accepted": false},
-  "next": "Publish exact code/CI, accept FF delivery, close legacy generator callers and RF default migration before production retirement."
+  "next": "Fix concrete FF transport boundary/lifecycle refusals and accept delivery; close legacy generator callers and RF default migration before production retirement."
 }

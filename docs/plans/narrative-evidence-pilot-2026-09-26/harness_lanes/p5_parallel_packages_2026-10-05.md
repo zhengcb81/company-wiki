@@ -1,8 +1,10 @@
 # P5并行施工总包：来源默认迁移、FF简化、存储降容工具
 
-状态：**in_progress，用户于2026-10-05确认三卡均已开工**。2026-10-05只读核对后建立；不是旧N4-T1/T2、StockWiki narrative consumer或SPACE-S5审计的重复任务。MAIN继续N4C，三个外线独占写集保留，收到交付后逐包验收合入。
+状态：**in_progress，用户于2026-10-05确认三卡均已开工**。2026-10-05只读核对后建立；不是旧N4-T1/T2、StockWiki narrative consumer或SPACE-S5审计的重复任务。MAIN离线S5与交付验收继续，N4C仅模型额度待答复；三个外线独占写集保留，收到交付后逐包验收合入。
 
-**最新进度覆盖（2026-10-05）：**STORAGE已验收合入/发布e570daf、53个不同case分步GREEN，生产未删；FF已交付、干净HEAD ab9ce33（code7c6cf48），HANDOFF报告18+194责任项绿但全仓有10项baseline-red，MAIN需按当前CWP实际下载合同补隔离fixture限额并复用FF→ET→CWP离线链验收，不把交付当已合入。RF独立p5-rf-source-default工作树仍WIP，无正式HANDOFF，live main8a153f33不变。MAIN质量v2已发布/CI绿，正式精选检索102个不同case分步GREEN待发布；N4C模型cap问题不阻该离线迁移。下面f775406等为开卡基线，不是当前MAIN HEAD；三卡不重派。
+**最新进度覆盖（2026-10-05）：**STORAGE已验收合入/发布e570daf、53个不同case分步GREEN，生产未删；FF已交付、干净HEAD ab9ce33（code7c6cf48），HANDOFF报告18+194责任项绿但全仓有10项baseline-red，MAIN需修实际进程边界、补隔离fixture限额并复用FF→ET→CWP离线链验收，不把交付当已合入。RF独立p5-rf-source-default工作树仍WIP，无正式HANDOFF，live main8a153f33不变。MAIN质量v2与正式精选检索1b0feb4已发布/精确CI绿，后者102个不同case分步GREEN；N4C模型cap问题不阻该离线迁移。下面f775406等为开卡基线，不是当前MAIN HEAD；三卡不重派。
+
+正式精选检索已发布1b0feb4、CI37381429717 attempt1 success。FF MAIN实测9/10/11B对10B cap：9成功、10错误拒绝、11正确拒绝；另有流EOF后无期限wait与stdin期限覆盖读码风险。下一步按[具体预验收修复步骤](results/p5_ff_main_preacceptance_2026-10-05.md)集中处理，再做跨仓汇合；不因hand-off报告GREEN提前并线。
 
 ## 分工与物理隔离
 

@@ -735,3 +735,6 @@ S0/N4A及S2模型预算基础、CLI阶段与CI修复已正常发布，当前CI�
 
 - 六个受影响case复核6 passed/6 deselected、23.41s；s5vfinal根恢复absent。节点102个不同case已分步GREEN，四类持久文件集合/bytes、实际TXT原始文件与引用仍相等。Ruff/diff-check GREEN；用户配置SHA原样，0模型POST/0生产删件。
 - FF正式handoff现已收到，正常OS账号Git核干净ab9ce33；报告code7c6cf48/18+194责任项GREEN，全仓10baseline-red需MAIN按当前下载合同补隔离fixture限额。暂未验收合入。RF远端只读复核仍8a153f33、两处assurance WIP不碰，HANDOFF未到。已校正并行总计划旧“均ready未派发”过期状态，不新建重复卡。当前下一动作是本节点正常commit/push和精确CI，不重复已绿长包。
+
+- S5精选代码已提交/推送1b0feb44ff1695a8bae761eac538ce68236c04d6；正常commit及快速pre-push均GREEN，原用户配置被正规stash/restore且SHA一致。精确CI37381429717一次attempt completed/success，全steps成功，无rerun。三根s5vred/green/final已恢复；没有生产释放或新model POST。最后同步PWF/小收据，只做文档提交，不触发新的长代码CI。
+- FF只读接续预验收3个实际短child：9B/10B/11B对10B限额为ok/OutputLimitExceeded/OutputLimitExceeded，等号边界确实错误；无网络/项目写入。其stdin、EOF/process wait、单流overflow与POSIX孤儿进程风险仅从源码确认结构，尚待受控watchdog试验。已把下一节点TDD/修复/限额fixture/三仓E2E/正常并线顺序写在独立预验收报告，不触FF owner/源码，不把源码推断冒充实测。
