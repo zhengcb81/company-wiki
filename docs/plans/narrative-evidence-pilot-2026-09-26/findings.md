@@ -383,3 +383,9 @@ Git写入/联网用正常用户，sandbox .git只读不是产品权限。测试�
 - 当前CWP源码中，`EvidenceQueryService`从SQLite EvidenceSpan行返回raw_text/span_json、locator与来源事实；`ExtractionQualityService`读SQLite artifact状态/metadata与EvidenceSpan，不读normalized Markdown正文。直接正文读取点见 `llm_summarizer.py`、`section_extractor.py`、`summarizer.py`。这意味着物理Markdown删除与DB EvidenceSpan删除可分阶段，但artifact状态/句柄和quality语义需同步，且所有真实正文consumer先迁移或退休。
 - 本机只读ref核对为RF `fcap@5319ee263c4af41ac255938c25bebd32cce56f66`、缓存 `origin/main@8a153f3387ae75fb172e70f8ab63ffd38100779a`。本轮网络连接GitHub失败，故远端SHA使用此前已验证的live检查，不把缓存ref冒称为本轮live结果。无RF写入。
 - `codex/rf-state-audit@447d1c7`补充报告称6处ACL不可读、全量分类未完成、确认安全释放为0；它与主线已有同路径报告冲突且没有新增删除候选。结论仅记录为审计限制，不覆盖较完整主线报告，不执行清理。
+
+## 2026-10-05 — CWP当前真实原件transport回放
+
+- 当前主线 `tests/e2e/test_narrative_transport_real_samples.py` 将真实原始字节及预期SHA复制到隔离发布fixture，再经CWP公开transport CLI读取bundle并完整重放locator；production capture metadata明确是测试fixture，不宣称现场目录具备准入资格。
+- 这次4项样本是2025年报PDF、招股说明书PDF、投资者关系活动记录PDF和Microsoft Q4 2026 earnings-call TXT，均断言原件SHA、公开CLI工件hash、至少一个EvidenceSpan locator及 `replay_status=verified`；同时断言生产fingerprint、原件SHA/mtime不变。未包含季报，未调用网络，未覆盖RF adapter、正式Worker摘要或并发吞吐。
+- pytest执行结果4 passed / 31.70s。Path guard因requested basetemp长度72超过阈值60，将测试目录移至短TEMP路径；退出输出`cleanup removed=true`。禁用第三方插件后有既有`asyncio_mode` unknown-option警告，pytest cache目录因当前sandbox ACL拒绝写入warning；二者均未导致失败，且没有重试或放宽测试断言。

@@ -483,3 +483,10 @@ S0/N4A及S2模型预算基础、CLI阶段与CI修复已正常发布，当前CI�
 - PWF三文件已更新：总计划写明N3a消费边界、未接预测入口及后续实测；S5/S6细则分开物理derived、artifact metadata、EvidenceSpan；findings/progress记载证据与限制。初次细则补丁因目标句实际位于总计划而匹配失败，没有落盘；重新读取定位后已修正确切段落。
 - 本轮没有跑产品测试（代码未改）；下一大节点仍是N4-T2交付与N4C真实样本，随后用当前RF/CWP代码运行pathless N3a离线真实文档端到端。仅Markdown改动，后续执行`git diff --check`与本计划声明核对；不得称RF live ref本轮可达，也不得删除normalized正文或旧span。
 - Git暂存首次因sandbox账户无`.git/index.lock`写权限而失败；未创建/残留index lock，未暂存任何文件。按用户此前授权改用正常权限，只暂存本段列出的四份PWF文档；`config/source_acquisition.yaml`继续排除。
+
+## 2026-10-05 — CWP真实原件transport/locator E2E
+
+- 为独立验证当前CWP读取端，运行 `PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 COMPANY_WIKI_RUN_EXTERNAL_DATA_TESTS=1 python -B -m pytest -q tests/e2e/test_narrative_transport_real_samples.py --basetemp tmp/ptnarrative-real-current-20261005`。实际结果 **4 passed / 31.70s**，4类是年报PDF、招股说明书PDF、投资者关系活动记录PDF、电话会TXT。
+- 测试读取现场原始字节和SHA，但在独立`published_fixture`根内发布/读取；验证hash绑定、公开CLI输出与artifact hash一致、locator>0且replay verified，生产fingerprint、原件hash和mtime前后不变。测试文件声明no network/no production catalog write。它不是实际N4 Worker/summary run，metadata是隔离fixture，也不覆盖RF N3a外部CLI adapter或季度选择缺口。
+- Path guard将长度72的requested basetemp自动移至TEMP短目录；运行结束事件明确`removed=true`。pytest报告两个无失败warning：插件禁用时缺asyncio插件的`asyncio_mode`选项，以及现有`.pytest_cache` ACL写入拒绝。测试没有因warning失败，没有再次重跑。目标requested目录由本会话finally逻辑按workspace包含检查后清理。
+- 本轮任务计划合并补丁第一次因过长上下文不匹配失败，未落盘；读取精确行后用较小范围补丁更新S4进度与本节点收据。没有产品代码改动，下一动作仍是接N4-T2后跑集成Worker/N3a消费与真实批次；本收据不能算N4C完成。
