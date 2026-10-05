@@ -496,3 +496,10 @@ Git写入/联网用正常用户，sandbox .git只读不是产品权限。测试�
 - 旧derived和active旧span降容可以提前实现独立tools与隔离fixture测试；它不修改CWP当前src/schema，也不在外线执行生产删除。S5消费者迁移与N4C只是MAIN live执行前置，非外线编码前置。现有retired-only prune不解决active全量span，不应再安排完整只读审计或大备份。
 - P5三包源仓RF/FF/CWP，实际目录为`Projects/cwp-lanes-20261005`下三个互不包含的兄弟worktree；storage源码写集仅新增tools/tests，与MAIN runtime/core无重叠。共享wire固定；每包有独立上下文/PWF/测试/交接，MAIN统一合入和最终清理。
 - StockWiki已完成N3b/SourceExport/W01–W04，ET deadline已完成；不以新名字重复旧工作。三新包是ready并非running，外部harness不可见部分不推测；IQS仍不碰，Dayu零代码写入。
+
+## 2026-10-05 — 用户纠正后的LLM配置遵从
+
+- 真实错误来自试点composition绕过既有配置：Config.load默认MiniMax-M3/API国内api.minimaxi.com/v1、8192输出、temperature1.0、reasoning_split=true；旧driver另写api.minimax.io、2400和thinking disabled。正常用户只读GET国内/models200/国际401，返回内容没有文档或推理；该结果支持端点错配，不能回填run02未保存的POST numeric status，旧unknown不退费。
+- 权威配置和.env优先级在scripts/config.py已定义，legacy LLMClient也已有minimax/mimo用max_completion_tokens及MiniMax reasoning_split策略。typed package配置没有credential/dotenv加载能力，本次没有新建第三个loader或provider默认表。模型配置只在composition复制非秘密设置；child-local adapter保持独立限流/预算，无legacy全局客户端。
+- 新scripts/narrative_batch_configured.py复用Config.load，向既有有限batch CLI注入配置快照；请求内旧model/thinking参数不能覆盖它，输入hash固定真实配置。未配置thinking保持省略。HTTP增加可选temperature/reasoning_split/token-field，DTO/factory透传及run hash同步；旧纯DTO/测试请求省略时保持原形。
+- 正常账号加载现配置成功，credential_present=true，值未输出。当前错误不是本机缺key。国内正式价格/当前配置请求准入仍待验证，不能把国际报价当国内账单或按2400输出继续假设额度够用。N4C真实final/消费者仍未绿。

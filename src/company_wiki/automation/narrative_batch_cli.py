@@ -33,7 +33,9 @@ def _failure_receipt(request, db_path, status, error):
             "budget": budget}
 
 
-def main(argv: Sequence[str] | None = None) -> int:
+def main(
+    argv: Sequence[str] | None = None, *, loaded_model_options: dict | None = None,
+) -> int:
     parser = argparse.ArgumentParser(description="Process explicit source references without translation")
     for argument in ("project-root", "catalog-config", "automation-db", "work-dir", "request"):
         parser.add_argument("--" + argument, required=True, type=Path)
@@ -43,7 +45,12 @@ def main(argv: Sequence[str] | None = None) -> int:
             content = stream.read(262145)
         if len(content) > 262144:
             raise ValueError("request exceeds byte limit")
-        request = NarrativeBatchRequest.from_dict(json.loads(content.decode("utf-8", errors="strict")))
+        raw = json.loads(content.decode("utf-8", errors="strict"))
+        if loaded_model_options is not None and isinstance(raw, dict):
+            # Composition owns model settings. The finite run hash pins the
+            # configured values, not a competing copy in a request file.
+            raw["model"] = loaded_model_options
+        request = NarrativeBatchRequest.from_dict(raw)
     except (OSError, TypeError, ValueError):
         print(canonical_json({"schema_version": "narrative-batch-result/1", "status": "failed",
                               "error": "NARRATIVE_BATCH_INVALID_REQUEST"}))

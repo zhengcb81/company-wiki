@@ -1,59 +1,15 @@
 """Model input stays lean while the full replayable evidence remains canonical."""
 
 from dataclasses import replace
-import hashlib
 import json
 
 import pytest
 
-from company_wiki.automation.narrative_contracts import NarrativeSelectResult
 from company_wiki.automation.narrative_http_model import NarrativeHTTPModel
 from company_wiki.automation.narrative_model import NarrativeModelRequest
-from company_wiki.source_contract import EvidenceCoordinates, EvidenceSpan, source_id_for_sha256
 
 
-def _selection(count=1, *, role="company_filing", flags=(), text_suffix=""):
-    digest = hashlib.sha256(b"synthetic immutable original").hexdigest()
-    source_id = source_id_for_sha256(digest)
-    spans = [EvidenceSpan.create(
-        source_id=source_id,
-        coordinates=EvidenceCoordinates(page_number=index + 1, paragraph_index=0),
-        raw_text=f"公司新产品已完成海外客户认证，正在推进新业务项目。{index}{text_suffix}",
-        structured_value={
-            "source_role": role,
-            "language": "zh",
-            "topics": ["overseas", "business_progress"],
-            "selection_reasons": ["diagnostic_rule_" + str(n) for n in range(20)],
-            "bbox": [72.123456, 180.654321, 500.123456, 600.654321],
-            "block_sha256": digest,
-            "text_sha256": digest,
-            "selection_group_id": "urn:company-wiki:group:sha256:" + digest,
-        },
-        parser_name="synthetic-parser", parser_version="1.0.0",
-        parse_status="parsed", quality_flags=flags,
-    ).to_dict() for index in range(count)]
-    return NarrativeSelectResult.from_dict({
-        "schema_version": "narrative-select-result/2.0",
-        "source_ref": {"schema_version": "2.0", "document_id": "doc-prompt-test",
-                       "source_id": source_id, "content_sha256": digest,
-                       "byte_size": 28, "mime_type": "application/pdf"},
-        "expected_read_policy_sha256": digest,
-        "source_metadata": {"source_class": "filing", "title": "合成招股说明书",
-                            "document_kind": "prospectus", "language": "zh"},
-        "parser": {"name": "synthetic-parser", "version": "1.0.0"},
-        "selector": {"name": "synthetic-selector", "version": "1.0.0"},
-        "selection": {"status": "partial", "coverage_complete": True,
-                      "source_units": count + 20, "candidate_count": count + 20,
-                      "selected_count": count, "omitted_candidate_count": 20,
-                      "dropped_financial_count": 10, "pages_total": count,
-                      "pages_read": count, "lines_total": 0,
-                      "tables_total": 0, "tables_scanned": 0},
-        "evidence_spans": spans,
-        "prompt_review": {"status": "not_reviewed", "source_sha256": None,
-                          "evidence_sha256": None, "policy_hash": None, "reviewed_at": None},
-        "transcript_lineage": None, "transcript_byte_bindings": [],
-        "summary_scope": "selected_evidence_only",
-    })
+from support.narrative_model_request_fixture import selection as _selection
 
 
 def test_long_selection_fits_budget_without_losing_any_evidence_or_replay_metadata():

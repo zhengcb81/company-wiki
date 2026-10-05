@@ -1,14 +1,12 @@
 # N4：可运行的叙述批次、真实模型计量与持久恢复
 
-> **当前run02结果覆盖：**用户永久授权MiniMax，P5三线已开工。真实batch终态budget_exhausted，无final/消费者真实read；总charged含旧unknown33,660 tokens/16,580 microUSD（不是账单），下次剩余26,340/$0.083420。先定位HTTP客户端拒绝、请求保守预留和synthetic skip parse，不扩大cap/盲重试。测试根已恢复，原件/生产/owner不变；详见run02收据与主计划Next Step。
+> **2026-10-05 当前状态：配置遵从修正已实现并完成离线节点验收。**真实入口使用 `scripts/narrative_batch_configured.py` → 既有 `Config.load()` → child-local HTTP Worker；model/base_url/key-env/max_tokens/temperature/reasoning_split均来自既有配置。当前为国内端点、MiniMax-M3、8192、1.0、reasoning_split=true；没有配置的 thinking 不擅自设置。请求文件里旧模型参数不能覆盖配置。零外部LLM调用完成配置测试；真实N4C仍未通过。
 
-> **2026-10-05 provider预检补充（MAIN）：**RF已提交main仍`8a153f3`，正常账号仅两份assurance owner修改，N3a公开CLI可复用。旧账本unknown预留10,325 tokens/$0.005258仍保留，新run累计剩余49,675/$0.094742。官方OpenAI兼容接口说明M3默认thinking开启、思考计入max_tokens，支持`thinking={type:disabled}`；`reasoning_effort=none`不可用。先RED修“finish_reason=length且content=null仍保留真实usage”，再接入可选thinking配置并绑定run hash，保持省略时旧请求形状/hash；真实小批显式disabled，不能扩大预算或清旧未知项。文档来源：https://platform.minimax.io/docs/api-reference/text-openai-api 。这是已证代码缺口，不声称已证明旧失败的供应商原始响应（未留正文）。节点测试后才发provider。
+> **N4C预算与事实：**run02终态budget_exhausted，无final/RF实读；含旧unknown累计33,660 tokens/16,580 microUSD（不是账单），下一批最多26,340 tokens/$0.083420。国内只读models认证200、国际401证明之前试点端点绕过配置；不把GET结果冒称run02的POST status，也不退未知费用。两次live测试根已恢复，原件/生产/owner不变。截断null-content usage修复 `c543f6a` 的精确SHA CI已绿。
 
-> **2026-10-05恢复覆盖：**用户已恢复，MAIN继续N4C真实provider/Worker/消费者节点；P5三个外包可并行编码，见[P5接口总包](harness_lanes/p5_parallel_packages_2026-10-05.md)。不等三卡交齐，外线不改本卡runtime/core，MAIN不改其独占写集。旧未知预算保留；总剩余上限仍49,675 tokens/$0.094742，本次准备卡没有模型调用。
+> **MAIN下一动作：**按现有配置离线量请求与准入预算，随后TDD压缩模型私有citation投影；保留每条选中原文、角色、quality_flags及canonical ID/locator，input hash绑定完整别名映射，final公开wire不改。不按2400输出额度设计阈值，不擅自关闭思考，不删证据凑预算。alias当前尚未实现/验收；先前RED草稿没有作为永久测试发布。synthetic policy metadata路由也需用一个小夹具定位，修好后才做新paid batch。
 
-> **2026-10-05 当前状态覆盖：**G1/S3、N4A/B和N4-T1/T2已收口；真实原件配本地Replay的E6 P1/P2/P4已绿。耗时控制实验及selector `0.3.0`批次版本修复完成后按用户要求暂停；不代表N4C真实provider/消费者/总空间验收完成。[收尾收据](harness_lanes/results/n4c_latency_version_closeout_2026-10-05.md)给出测量限制、剩余额度、独立测试目录恢复规则与唯一恢复动作。下方2026-10-04状态及实施记录保留追溯，当前顺序以主计划Next Step为准。不重新实施A/B或重派已关闭外包卡。
-
-> 2026-10-04 当前状态：N4A scope与N4B预算/factory/正式batch/恢复、终态降容已实现；节点A/B的集中回归与CLI/HTTP/kill/ACK合同已绿。N4C（真实多类型样本、并行吞吐与空间增量实测）仍未做。**主计划当前先收口G1门禁精简，再收口S3 SourceRef/SourceExport虚拟化；G1/S3完成后才进入N4C。** 本卡保留N4C施工细节，不改变主计划顺序。G-A/N3a/G-C、B1/B3/B4已完成，见[实际整理收尾](harness_lanes/results/gd_b3_retirement_2026-10-03.md)。不启动旧normalize Worker。只在A/B/C大节点验收，helper不增加审查；原件/来源事实保留。
+> **并行与已完成边界：**G1/S3、N4A/B和N4-T1/T2已收口，不重复施工。P5三个外包用户已确认开工，见[P5接口总包](harness_lanes/p5_parallel_packages_2026-10-05.md)；MAIN不改它们的独占写集，交付随到随验收。下方旧记录为追溯背景，当前顺序以主计划Next Step为准。
 
 ## 1. 已核缺口与目标
 
@@ -88,6 +86,12 @@ GREEN集中验证请求大小、角色/不稳定定位/原语言、证据保留�
 所有测试配置/控制/DB/cache/temp/log 均在 unique run root；finally 仅删除本次创建子树，原件 SHA/mtime 与生产配置/控制 fingerprint 前后相同，目录恢复基线。不得把外发凭证写计划或收据。普通 commit/push、已有精简 CI 绿后记录发布。通过并不自动启动无限 daemon；先有限显式批次，再按吞吐/增量逐批扩展。
 
 ## 4. 顺序与完成定义
+
+### 2026-10-05 配置遵从修正（当前先做）
+
+真实模型的 composition 必须先调用已有 `scripts/config.py::Config.load()`，遵守项目 `.env` 对受管 LLM key 的既定优先级；不复制 provider 默认表、不自选国际端点、不写死模型或输出上限。将加载后的 `config.llm` 转为无秘密的 HTTP options，转发 model/base_url/api_key_env/max_tokens/temperature 及既定 MiniMax reasoning_split，输出字段遵守现有 LLMClient 的 provider 策略。当前配置没有关闭 thinking，试点不得擅自添加 `thinking=disabled`。模型进程保持 child-local，不复用 legacy 全局 LLMClient；凭证值只留进程环境，不能进入 request、账本或报告。
+
+已用配置→HTTP 请求及实际 CLI/Worker 的离线测试框住实现。正式 composition 入口是 `python -B scripts/narrative_batch_configured.py`，其余 `--project-root/--catalog-config/--automation-db/--work-dir/--request` 沿用有限batch CLI；request的model可省略，真实参数从默认 `Config.load()` 取得。`--llm-config`只选已有加载器的配置路径；离线测试使用独立fixture YAML和显式loopback开关，不改生产配置。底层DTO CLI仍保留纯组合能力，后续真实试点使用配置入口。单次/累计 token 与费用预算是资源限制，不能被用作理由悄悄改写配置中的模型参数。下一真实批最多 26,340 tokens/$0.083420；先完成离线准入测量，不够则拆批，不能重复无证据 paid call。prompt alias 优化在该修正之后实施，保留完整选中正文及 canonical citation 映射，不删证据凑额度。
 
 1. G-C来源消费及B1/B3/B4已完成；现在按task_plan先S0收口、N4A独占并行，不重新恢复/重hash已删除归档或重做旧checkout整理。
 2. N4A scope 先 RED→GREEN；与独立模型 HTTP 新文件可以并行，共享 Store/schema/prompt 只由一条 owner 实施。

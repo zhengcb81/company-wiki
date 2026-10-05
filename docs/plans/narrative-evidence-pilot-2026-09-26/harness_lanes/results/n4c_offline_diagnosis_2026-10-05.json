@@ -1,0 +1,146 @@
+{
+  "schema_version": "n4c-offline-diagnosis/1",
+  "network_calls": 0,
+  "llm_calls": 0,
+  "metadata_is_fixture": true,
+  "samples": [
+    {
+      "sample_id": "P01",
+      "sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "outcome": "succeeded",
+      "select_seconds": 6.841,
+      "selection": {
+        "status": "partial",
+        "coverage_complete": false,
+        "source_units": 6733,
+        "candidate_count": 182,
+        "selected_count": 96,
+        "omitted_candidate_count": 86,
+        "dropped_financial_count": 85,
+        "pages_total": 259,
+        "pages_read": 259,
+        "lines_total": 0,
+        "tables_total": 259,
+        "tables_scanned": 58
+      },
+      "raw_bytes": 9165875,
+      "selected_utf8_bytes": 10551,
+      "prompt_bytes": 33125,
+      "reserved_tokens": 35653,
+      "span_id_bytes": 9792,
+      "evidence_json_bytes": 28919
+    },
+    {
+      "sample_id": "P04",
+      "sha256": "19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+      "outcome": "succeeded",
+      "select_seconds": 17.062,
+      "selection": {
+        "status": "partial",
+        "coverage_complete": false,
+        "source_units": 14646,
+        "candidate_count": 415,
+        "selected_count": 160,
+        "omitted_candidate_count": 255,
+        "dropped_financial_count": 311,
+        "pages_total": 429,
+        "pages_read": 429,
+        "lines_total": 0,
+        "tables_total": 429,
+        "tables_scanned": 144
+      },
+      "raw_bytes": 11211796,
+      "selected_utf8_bytes": 10391,
+      "prompt_bytes": 45450,
+      "reserved_tokens": 47978,
+      "span_id_bytes": 16320,
+      "evidence_json_bytes": 40801
+    },
+    {
+      "sample_id": "P07",
+      "sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+      "outcome": "succeeded",
+      "select_seconds": 0.401,
+      "selection": {
+        "status": "needs_review",
+        "coverage_complete": true,
+        "source_units": 263,
+        "candidate_count": 11,
+        "selected_count": 11,
+        "omitted_candidate_count": 0,
+        "dropped_financial_count": 0,
+        "pages_total": 6,
+        "pages_read": 6,
+        "lines_total": 0,
+        "tables_total": 6,
+        "tables_scanned": 6
+      },
+      "raw_bytes": 153851,
+      "selected_utf8_bytes": 3920,
+      "prompt_bytes": 10236,
+      "reserved_tokens": 12764,
+      "span_id_bytes": 1122,
+      "evidence_json_bytes": 6474
+    },
+    {
+      "sample_id": "T01",
+      "sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+      "outcome": "succeeded",
+      "select_seconds": 0.427,
+      "selection": {
+        "status": "selected",
+        "coverage_complete": true,
+        "source_units": 498,
+        "candidate_count": 14,
+        "selected_count": 14,
+        "omitted_candidate_count": 0,
+        "dropped_financial_count": 0,
+        "pages_total": 0,
+        "pages_read": 0,
+        "lines_total": 175,
+        "tables_total": 0,
+        "tables_scanned": 0
+      },
+      "raw_bytes": 66324,
+      "selected_utf8_bytes": 1809,
+      "prompt_bytes": 8043,
+      "reserved_tokens": 10571,
+      "span_id_bytes": 1428,
+      "evidence_json_bytes": 4389
+    },
+    {
+      "sample_id": "SKIP",
+      "sha256": "382b18369034f7659a0e039a9a670335b85d2fb4080ddba903b0e8526c75ce7e",
+      "outcome": "terminal_failure",
+      "select_seconds": 0.011,
+      "error": {
+        "code": "PARSER_INCOMPLETE",
+        "detail": "valuable source has no replayable selected evidence"
+      },
+      "parser": {
+        "errors": [],
+        "opaque_pages": [],
+        "units": 1,
+        "pages_read": 1
+      },
+      "selector": {
+        "status": "skipped_no_narrative",
+        "complete": true,
+        "selected": 0,
+        "candidates": 0
+      }
+    }
+  ],
+  "originals_unchanged": true,
+  "test_root_restored": true,
+  "prompt_version": "1.2.0",
+  "model_options_snapshot": {
+    "model_id": "MiniMax-M3",
+    "endpoint": "https://api.minimaxi.com/v1/chat/completions",
+    "api_key_env": "MINIMAX_API_KEY",
+    "max_output_tokens": 2400,
+    "thinking": "disabled"
+  },
+  "configuration_followed": false,
+  "measurement_note": "Historical offline projection with hardcoded settings, no HTTP. Current entrypoint derives existing project config (8192 output tokens); do not use these bounds as current admission proof."
+}

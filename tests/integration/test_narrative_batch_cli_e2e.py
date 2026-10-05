@@ -78,14 +78,18 @@ def _prepare(
         raise
 
 
-def _invoke(state):
+def _invoke(state, *, llm_config=None):
     env = dict(os.environ)
     env["PYTHONPATH"] = str(Path(__file__).resolve().parents[2] / "src")
     env["PYTHONDONTWRITEBYTECODE"] = "1"
     env["PYTHONUTF8"] = "1"
     env["PYTHON_DOTENV_DISABLED"] = "1"
+    entrypoint = [sys.executable, "-m", "company_wiki.automation.narrative_batch_cli"]
+    if llm_config is not None:
+        entrypoint = [sys.executable, str(Path(__file__).resolve().parents[2] / "scripts/narrative_batch_configured.py"),
+                      "--llm-config", str(llm_config), "--allow-local-model-http"]
     process = subprocess.run([
-        sys.executable, "-m", "company_wiki.automation.narrative_batch_cli",
+        *entrypoint,
         "--project-root", str(state.root), "--catalog-config", str(state.config_path),
         "--automation-db", str(state.store.db_path), "--work-dir", str(state.root / "run-work"),
         "--request", str(state.request_path),
@@ -96,6 +100,47 @@ def _invoke(state):
     assert isinstance(result, dict) and result["schema_version"] == "narrative-batch-result/1"
     assert result["run_id"] == "cli-e2e"
     return process, result
+
+
+def test_configured_entrypoint_uses_existing_loader_through_real_worker_and_resume(
+    tmp_path_factory, loopback_model_server, monkeypatch,
+):
+    monkeypatch.setenv("MINIMAX_API_KEY", KEY)
+    with isolated_batch_directory(tmp_path_factory) as root:
+        state = _prepare(root, loopback_model_server.endpoint, one_source=True)
+        try:
+            config_path = root / "llm.yaml"
+            config_path.write_text(
+                "llm:\n  provider: minimax\n  model: stub-model\n"
+                f"  base_url: {loopback_model_server.endpoint.removesuffix('/chat/completions')}\n"
+                "  max_tokens: 8192\n  temperature: 0.7\n  reasoning_split: true\n",
+                encoding="utf-8",
+            )
+            config_before = config_path.read_bytes()
+            raw = json.loads(state.request_path.read_text(encoding="utf-8"))
+            # A stale competing copy cannot change the configured invocation.
+            raw["model"].update(model_id="stale-model", endpoint="https://wrong.invalid/v1/chat/completions",
+                                max_output_tokens=1, thinking="disabled")
+            state.request_path.write_text(json.dumps(raw), encoding="utf-8")
+            originals = _originals(state)
+            process, result = _invoke(state, llm_config=config_path)
+            assert process.returncode == 0 and result["status"] == "completed", (process.stderr, result)
+            assert loopback_model_server.errors == [] and len(loopback_model_server.requests) == 1
+            body = json.loads(loopback_model_server.requests[0][1])
+            assert body["model"] == "stub-model" and body["max_completion_tokens"] == 8192
+            assert body["temperature"] == 0.7 and body["reasoning_split"] is True
+            assert "max_tokens" not in body and "thinking" not in body
+            again, repeated = _invoke(state, llm_config=config_path)
+            assert again.returncode == 0 and repeated["status"] == "completed"
+            assert repeated["documents"] == result["documents"]
+            assert repeated["budget"] == result["budget"]
+            assert repeated["storage"]["persistent_added_bytes"] == result["storage"]["persistent_added_bytes"]
+            assert len(loopback_model_server.requests) == 1  # Resume never repays.
+            assert config_path.read_bytes() == config_before
+            assert_originals_and_foreign_jobs_untouched(state, originals,
+                output=process.stdout + process.stderr + again.stdout + again.stderr)
+        finally:
+            state.catalog.close()
 
 
 def _originals(state):

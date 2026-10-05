@@ -117,7 +117,7 @@ TDD框住公开行为，不把旧签收规则写进新测试。仅S0相关收口
 
 ## Next Step
 
-**MAIN下一动作：**先提交/推送已绿模型适配器修复与实际收据，离线查明run02的请求准入/skip parser问题，并用供应商正式只读能力及安全数字status定位HTTP拒绝；没有证据前不盲目重复paid call。下次预算最多26,340 tokens/$0.083420，永久MiniMax授权已取得，旧unknown保留。只有真实final产生并被CWP公开read/RF已提交N3a实读后才关闭N4C。P5-RF独占默认来源迁移，P5-FF独占旧编排及有界进程，P5-STORAGE独占新维护工具；MAIN不改它们的写集，各自完成后随到随合，不等齐。实际生产清理仍在调用者迁移及新final验收之后，由MAIN执行S5/S6；原件、来源版本和用户配置保留。
+**MAIN下一动作：**配置遵从修正已实现：真实运行用 `scripts/narrative_batch_configured.py` 复用既有 `Config.load()`，国内端点、模型、8192输出额度、温度/reasoning_split及项目.env优先级均已核实；不再写死国际端点或关闭thinking。配置→HTTP与真实CLI/Worker/幂等恢复离线测试已绿，本节点没有额外模型调用。发布该修正后，按配置做离线请求准入测量和私有citation别名压缩TDD，并用小policy夹具定位metadata路由。下一真实批最多26,340 tokens/$0.083420，旧unknown保留，缺正式价格/足够准入预算时不盲重试。只有真实final被CWP公开read/RF已提交N3a实读后才关闭N4C。P5三线已开工，MAIN不改其写集，交付随到随合；实际S5/S6清理仍等调用者迁移及新final验收，原件、来源版本和用户配置保留。
 
 ## 2026-10-04：新增三张可独立派发的施工卡
 

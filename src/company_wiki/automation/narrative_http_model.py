@@ -10,6 +10,7 @@ import os
 import re
 import socket
 import time
+from typing import Any, Protocol
 from urllib.parse import urlsplit
 
 from .narrative_model import (
@@ -81,6 +82,38 @@ def _positive_integer(value: int, name: str) -> int:
     return value
 
 
+class _LLMConfig(Protocol):
+    provider: str
+    model: str
+    base_url: str
+    api_key_env: str
+    max_tokens: int
+    temperature: float
+    reasoning_split: bool
+
+
+def model_options_from_config(llm: _LLMConfig) -> dict[str, Any]:
+    """Project already loaded its config; copy settings, never credential values.
+
+    This is composition, not another config loader or provider defaults table.
+    The token-field and reasoning policy matches the existing LLMClient.
+    """
+    if llm.provider not in {"minimax", "mimo", "deepseek", "openai"}:
+        raise ValueError("configured provider is not OpenAI-compatible")
+    options: dict[str, Any] = {
+        "model_id": llm.model,
+        "endpoint": llm.base_url.rstrip("/") + "/chat/completions",
+        "api_key_env": llm.api_key_env,
+        "max_output_tokens": llm.max_tokens,
+        "temperature": llm.temperature,
+        "output_token_field": "max_completion_tokens"
+        if llm.provider in {"minimax", "mimo"} else "max_tokens",
+    }
+    if llm.provider == "minimax" and llm.reasoning_split:
+        options["reasoning_split"] = True
+    return options
+
+
 class NarrativeHTTPModel:
     """Stateless request adapter; a durable caller owns retry and fee accounting."""
 
@@ -98,6 +131,9 @@ class NarrativeHTTPModel:
         max_response_bytes: int = 262_144,
         allow_local_http: bool = False,
         thinking: str | None = None,
+        temperature: float | None = None,
+        reasoning_split: bool | None = None,
+        output_token_field: str = "max_tokens",
     ) -> None:
         if (
             not isinstance(model_id, str)
@@ -157,6 +193,20 @@ class NarrativeHTTPModel:
         ):
             raise ValueError("thinking must be disabled, adaptive or omitted")
         self.thinking = thinking
+        if temperature is not None and (
+            isinstance(temperature, bool)
+            or not isinstance(temperature, (float, int))
+            or not math.isfinite(temperature)
+            or not 0 <= temperature <= 2
+        ):
+            raise ValueError("temperature must be finite and within [0, 2]")
+        if reasoning_split is not None and type(reasoning_split) is not bool:
+            raise ValueError("reasoning_split must be boolean or omitted")
+        if output_token_field not in {"max_tokens", "max_completion_tokens"}:
+            raise ValueError("output_token_field must name a supported token limit")
+        self.temperature = temperature
+        self.reasoning_split = reasoning_split
+        self.output_token_field = output_token_field
         self._scheme = parsed.scheme
         self._host = parsed.hostname
         self._port = parsed.port
@@ -172,11 +222,15 @@ class NarrativeHTTPModel:
                 {"role": "system", "content": request.instruction},
                 {"role": "user", "content": request.data_json},
             ],
-            "max_tokens": self.max_output_tokens,
+            self.output_token_field: self.max_output_tokens,
             "response_format": {"type": "json_object"},
         }
         if self.thinking is not None:
             payload["thinking"] = {"type": self.thinking}
+        if self.temperature is not None:
+            payload["temperature"] = self.temperature
+        if self.reasoning_split is not None:
+            payload["reasoning_split"] = self.reasoning_split
         try:
             body = json.dumps(
                 payload, ensure_ascii=False, separators=(",", ":")

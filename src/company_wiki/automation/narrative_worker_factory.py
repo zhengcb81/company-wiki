@@ -29,6 +29,7 @@ _OPTION_FIELDS = {
 _MODEL_FIELDS = {
     "model_id", "endpoint", "api_key_env", "max_output_tokens", "timeout_seconds",
     "max_request_bytes", "max_response_bytes", "allow_local_http", "thinking",
+    "temperature", "reasoning_split", "output_token_field",
 }
 _JOB_TYPES = {"source.narrative_select", "source.narrative_summarize", "source.narrative_verify"}
 

@@ -598,3 +598,11 @@ S0/N4A及S2模型预算基础、CLI阶段与CI修复已正常发布，当前CI�
 - 调查过程修正：第一次假设FF/StockWiki有`src/`得到路径不存在，改`rg --files`核实际`scripts/`和`stockwiki/`；RF sandbox git-show被dubious ownership拒绝，改正常用户只读，不写global safe.directory。一次无命中字面检索exit1属未命中，不当成功或阻塞。
 - 本轮只新增计划/卡片，未运行新Worker/provider/模型，未改原件、生产DB/config或owner文件；下一MAIN动作仍是有界N4C，不重复已绿E6。
 - 文档校验：4份P5总包/卡片相对链接无缺失，storage专属新tools/tests路径当前均未占用，`git diff --check`通过。handoff明确delivery_head取功能提交、报告可另commit，避免自引用SHA循环；本地Replay/fake调用与真实外部调用分开，不造0计数。纯文档交付不重复运行长行为包；正常commit/push保已有hook。
+
+## 2026-10-05 — LLM配置遵从修正（零新增外部调用）
+
+- 用户要求必须遵守已配好的LLM使用方式。先写配置→HTTP和配置身份测试，再实现无秘密转换；权威入口使用已有Config.load及受管.env优先级，转发model/base_url/key-env/8192输出/temperature/reasoning_split、既有max_completion_tokens策略。测试与真实入口均移除另写国际端点和默认thinking disabled。源配置没有改写。
+- 配置单元首轮RED为新API缺失；实现后发现跨unit测试import路径无package，改为共享support夹具（不复制selection实现）。实际CLI首轮模型参数全部正确，唯一失败是复用scratch峰值0与首次峰值4059不能相等；收据断言改为同产物、同预算、同持久增量、零重复HTTP，而不要求临时峰值相等。
+- 集中责任包104 passed/30.13s，覆盖既有配置、HTTP、batch DTO、factory、真实child Worker/本地HTTP及恢复；随后配置13 passed/0.85s补齐6个新边界（7个已含在前轮），共110个不同case通过。Ruff、git diff --check绿。默认命令帮助可正常启动；正常账号只读Config.load确认实际国内模型参数及key存在，不打印凭证。
+- 自建n4cfgred/green/green2/cli/node/final与n4aliasred目录已精确清理；policy/原件测试夹具由finally恢复。未实施alias草稿移除，下一节点再以现配置写真实RED，不把collection失败或旧2400阈值算alias通过。离线旧请求大小收据标记为historical/hardcoded，保留测量限制。
+- 临时真实driver已接配置入口并扣除run02与旧unknown：下一run最多26,340 tokens/83,420 microUSD；未启动run03。PWF主计划/N4卡统一下一步，P5外线继续互斥施工。本轮零HTTP模型/零下载，用户config SHA仍3609e707466e…；RF仅原有两份assurance owner修改，其他仓无写入。
