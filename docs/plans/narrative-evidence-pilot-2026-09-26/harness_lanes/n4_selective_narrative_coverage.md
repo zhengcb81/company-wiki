@@ -1,8 +1,10 @@
 # N4-T2：Chinese report and IR narrative selection coverage
 
-Status: DISPATCHED / AWAITING DELIVERY
+Status: MAIN IMPLEMENTATION PUSHED (`ea9dd26`); CI SUCCESS; EXTERNAL HARNESS STILL RUNNING; RECONCILIATION PENDING
 Card date: 2026-10-04
 Owner: isolated harness; MAIN owns final real-data batch, provider calls, storage measurement, and shared PWF.
+
+MAIN has independently implemented the same selector scope and published commit `ea9dd26`. The originally dispatched external harness is still running per user update, and its write set overlaps these selector/test paths. Its worktree has not been read or changed. Do not merge its eventual delivery blindly; compare its base..head against `ea9dd26` and carry forward only distinct, useful changes. Final card closeout remains pending that reconciliation.
 
 ## Goal
 
