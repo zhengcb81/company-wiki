@@ -1,0 +1,305 @@
+{
+ "already_absent": [],
+ "created_at": "2026-10-05T20:11:46Z",
+ "database_bytes_after": 282624,
+ "database_bytes_before": 282624,
+ "deleted": [
+  {
+   "artifact_id": "urn:company-wiki:artifact:sha256:f6feb1ab5fac267aa5ba7e73f5dbd8964a2ab3b807aeeb7bfc77f9e2cb77d3de",
+   "artifact_role": "normalized",
+   "byte_size": 2124,
+   "content_sha256": "b7d3b927b0a009497f51eb82f2df389f232dc465fc1d7aee85fe7ef8108c6025",
+   "document_id": "urn:company-wiki:document:sha256:f84bc2a4804abe075b37ef09cb7e1b2d6fe4f600cfef70ef0c687b525c5b36ed",
+   "generator_name": "source_catalog_normalizer",
+   "generator_version": "1.0.0",
+   "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\p5-handoff-3fl7fmyp\\catalog\\derived\\f8\\f84bc2a4804abe075b37ef09cb7e1b2d6fe4f600cfef70ef0c687b525c5b36ed\\normalized.md",
+   "status": "completed"
+  },
+  {
+   "artifact_id": "urn:company-wiki:artifact:sha256:a41a0cc42870925cbc1ed5b10deb4fbe0aab033c75809f55ea2905932c2ae8ca",
+   "artifact_role": "normalized",
+   "byte_size": 1284,
+   "content_sha256": "78759a9ce7978b672265e18692feb6601eefb4af012aa68610323e6f885712c3",
+   "document_id": "urn:company-wiki:document:sha256:38ecfc7384ccf31a8a12c7e96ac3ccc462aba761fbfcfe075fa40b8155419c7d",
+   "generator_name": "source_catalog_normalizer",
+   "generator_version": "1.0.0",
+   "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\p5-handoff-3fl7fmyp\\catalog\\derived\\38\\38ecfc7384ccf31a8a12c7e96ac3ccc462aba761fbfcfe075fa40b8155419c7d\\normalized.md",
+   "status": "completed"
+  },
+  {
+   "artifact_id": "urn:company-wiki:artifact:sha256:2ca911ef8f80d56a56d3762a7f0f13b83e3032ab262493f8b8ee8d9973dd6946",
+   "artifact_role": "summary",
+   "byte_size": 1628,
+   "content_sha256": "d91198d40436a1c2ae6226312ebed5f6bba343934a7e321d7c3519a4c6337e4d",
+   "document_id": "urn:company-wiki:document:sha256:f84bc2a4804abe075b37ef09cb7e1b2d6fe4f600cfef70ef0c687b525c5b36ed",
+   "generator_name": "source_catalog_extractive_summary",
+   "generator_version": "1.0.0",
+   "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\p5-handoff-3fl7fmyp\\catalog\\derived\\f8\\f84bc2a4804abe075b37ef09cb7e1b2d6fe4f600cfef70ef0c687b525c5b36ed\\summary.md",
+   "status": "completed"
+  },
+  {
+   "artifact_id": "urn:company-wiki:artifact:sha256:e1bc7d221a46c95c72eb7518b8f6c78129eb51099d3296577d263da099f73a21",
+   "artifact_role": "summary",
+   "byte_size": 1354,
+   "content_sha256": "ca9f7705bb309aceda60752fa3d1c8144883e7a2e98410e4b2eff6643343e902",
+   "document_id": "urn:company-wiki:document:sha256:38ecfc7384ccf31a8a12c7e96ac3ccc462aba761fbfcfe075fa40b8155419c7d",
+   "generator_name": "source_catalog_extractive_summary",
+   "generator_version": "1.0.0",
+   "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\p5-handoff-3fl7fmyp\\catalog\\derived\\38\\38ecfc7384ccf31a8a12c7e96ac3ccc462aba761fbfcfe075fa40b8155419c7d\\summary.md",
+   "status": "completed"
+  },
+  {
+   "artifact_id": "urn:company-wiki:artifact:sha256:b8b9bee26719a3dd0eb9b6371a0258d759b2a2703bf34d82ba2639bb61b44d8f",
+   "artifact_role": "sections",
+   "byte_size": 1197,
+   "content_sha256": "3c1759904dfd6ecac769597bc2fafc5f9e60ff8489bfe3e31b4df05035ff895b",
+   "document_id": "urn:company-wiki:document:sha256:f84bc2a4804abe075b37ef09cb7e1b2d6fe4f600cfef70ef0c687b525c5b36ed",
+   "generator_name": "source_catalog_section_extractor",
+   "generator_version": "1.0.0",
+   "managed_files": [
+    {
+     "byte_size": 208,
+     "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\p5-handoff-3fl7fmyp\\catalog\\derived\\b7\\b7d3b927b0a009497f51eb82f2df389f232dc465fc1d7aee85fe7ef8108c6025\\sections\\business_overview.md",
+     "role": "business_overview"
+    },
+    {
+     "byte_size": 196,
+     "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\p5-handoff-3fl7fmyp\\catalog\\derived\\b7\\b7d3b927b0a009497f51eb82f2df389f232dc465fc1d7aee85fe7ef8108c6025\\sections\\mda.md",
+     "role": "mda"
+    },
+    {
+     "byte_size": 140,
+     "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\p5-handoff-3fl7fmyp\\catalog\\derived\\b7\\b7d3b927b0a009497f51eb82f2df389f232dc465fc1d7aee85fe7ef8108c6025\\sections\\risk_factors.md",
+     "role": "risk_factors"
+    }
+   ],
+   "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\p5-handoff-3fl7fmyp\\catalog\\derived\\b7\\b7d3b927b0a009497f51eb82f2df389f232dc465fc1d7aee85fe7ef8108c6025\\sections\\index.json",
+   "status": "completed"
+  },
+  {
+   "artifact_id": null,
+   "artifact_role": "sections",
+   "byte_size": 208,
+   "generator_name": "source_catalog_section_extractor",
+   "managed_by": "urn:company-wiki:artifact:sha256:b8b9bee26719a3dd0eb9b6371a0258d759b2a2703bf34d82ba2639bb61b44d8f",
+   "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\p5-handoff-3fl7fmyp\\catalog\\derived\\b7\\b7d3b927b0a009497f51eb82f2df389f232dc465fc1d7aee85fe7ef8108c6025\\sections\\business_overview.md"
+  },
+  {
+   "artifact_id": null,
+   "artifact_role": "sections",
+   "byte_size": 196,
+   "generator_name": "source_catalog_section_extractor",
+   "managed_by": "urn:company-wiki:artifact:sha256:b8b9bee26719a3dd0eb9b6371a0258d759b2a2703bf34d82ba2639bb61b44d8f",
+   "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\p5-handoff-3fl7fmyp\\catalog\\derived\\b7\\b7d3b927b0a009497f51eb82f2df389f232dc465fc1d7aee85fe7ef8108c6025\\sections\\mda.md"
+  },
+  {
+   "artifact_id": null,
+   "artifact_role": "sections",
+   "byte_size": 140,
+   "generator_name": "source_catalog_section_extractor",
+   "managed_by": "urn:company-wiki:artifact:sha256:b8b9bee26719a3dd0eb9b6371a0258d759b2a2703bf34d82ba2639bb61b44d8f",
+   "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\p5-handoff-3fl7fmyp\\catalog\\derived\\b7\\b7d3b927b0a009497f51eb82f2df389f232dc465fc1d7aee85fe7ef8108c6025\\sections\\risk_factors.md"
+  }
+ ],
+ "dry_run": false,
+ "error_code": null,
+ "excluded": [],
+ "files_bytes_after": 0,
+ "files_bytes_before": 8131,
+ "foreign_key_check": [],
+ "freelist_after": 0,
+ "freelist_before": 0,
+ "handle_verification": {
+  "legacy_record_tables": [
+   "artifacts",
+   "evidence_spans"
+  ],
+  "legacy_roles": [
+   "markdown",
+   "normalized",
+   "sections",
+   "summary"
+  ],
+  "remaining_completed_handles": []
+ },
+ "integrity_check": "ok",
+ "operation": "retire-derived",
+ "page_count_after": 69,
+ "page_count_before": 69,
+ "protected_objects_after": {
+  "new_final_count": 1,
+  "new_final_items": [
+   {
+    "artifact_version_id": "narrative-7e6f29ebb9a446dbbefe69cd34f61dc3",
+    "content_sha256": "ca58225fe65e490957c96c6f455486b0e0df8d33b18caa7d4b8126524a63c07f",
+    "object_key": "objects/sha256/ca/ca58225fe65e490957c96c6f455486b0e0df8d33b18caa7d4b8126524a63c07f.json",
+    "source_id": "urn:company-wiki:source:sha256:f84bc2a4804abe075b37ef09cb7e1b2d6fe4f600cfef70ef0c687b525c5b36ed",
+    "status": "visible"
+   }
+  ],
+  "object_bytes": 53,
+  "object_file_count": 1,
+  "raw_original_locations": 2
+ },
+ "protected_objects_before": {
+  "new_final_count": 1,
+  "new_final_items": [
+   {
+    "artifact_version_id": "narrative-7e6f29ebb9a446dbbefe69cd34f61dc3",
+    "content_sha256": "ca58225fe65e490957c96c6f455486b0e0df8d33b18caa7d4b8126524a63c07f",
+    "object_key": "objects/sha256/ca/ca58225fe65e490957c96c6f455486b0e0df8d33b18caa7d4b8126524a63c07f.json",
+    "source_id": "urn:company-wiki:source:sha256:f84bc2a4804abe075b37ef09cb7e1b2d6fe4f600cfef70ef0c687b525c5b36ed",
+    "status": "visible"
+   }
+  ],
+  "object_bytes": 53,
+  "object_file_count": 1,
+  "raw_original_locations": 2
+ },
+ "resume_notes": [],
+ "schema_version": "cwp-storage-retirement/1",
+ "selection": {
+  "manifest_candidates": 5
+ },
+ "source_facts_after": {
+  "activation_journal": {
+   "count": 0,
+   "digest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "catalog_meta": {
+   "count": 1,
+   "digest": "7cb1722a5a4beb7fb78e6544b8b141f5cdd83243d760159f4877f97ee99053be"
+  },
+  "document_entities": {
+   "count": 0,
+   "digest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "document_fingerprint_state": {
+   "count": 0,
+   "digest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "document_restore_audit": {
+   "count": 0,
+   "digest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "document_retire_audit": {
+   "count": 0,
+   "digest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "documents": {
+   "count": 2,
+   "digest": "e9b749d7e403eeec97ef677a695ce4ee7f243c514d01db97a2f56d20e179cb85"
+  },
+  "entities": {
+   "count": 0,
+   "digest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "llm_summary_failures": {
+   "count": 0,
+   "digest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "locations": {
+   "count": 2,
+   "digest": "659e71863e849877b630ff6ab567d1eb23d57424330ae0356557f0371fecc46a"
+  },
+  "narrative_artifact_versions": {
+   "count": 1,
+   "digest": "c177e5837e8ce23a97c9daa4ed964621ee485620d5eed77046e3ba6cf63e4013"
+  },
+  "producer_events": {
+   "count": 5,
+   "digest": "b79b33fd221eea12c2f5846142d00e170ed783d0fa007c146a9a218f4a56a416"
+  },
+  "remediation_proposals": {
+   "count": 0,
+   "digest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "roots": {
+   "count": 1,
+   "digest": "e95a35ff25763d6a75e2ca2e3f13e3d2ea9b8cdd15d7568fffdc21b352b48602"
+  },
+  "scan_runs": {
+   "count": 0,
+   "digest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "source_metadata_assertions": {
+   "count": 0,
+   "digest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "sources": {
+   "count": 2,
+   "digest": "0bbce0776808b5e399dd1cfcb58f1c9b143fa5e85110f0d9aac0cf7490ee2308"
+  }
+ },
+ "source_facts_before": {
+  "activation_journal": {
+   "count": 0,
+   "digest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "catalog_meta": {
+   "count": 1,
+   "digest": "7cb1722a5a4beb7fb78e6544b8b141f5cdd83243d760159f4877f97ee99053be"
+  },
+  "document_entities": {
+   "count": 0,
+   "digest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "document_fingerprint_state": {
+   "count": 0,
+   "digest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "document_restore_audit": {
+   "count": 0,
+   "digest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "document_retire_audit": {
+   "count": 0,
+   "digest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "documents": {
+   "count": 2,
+   "digest": "e9b749d7e403eeec97ef677a695ce4ee7f243c514d01db97a2f56d20e179cb85"
+  },
+  "entities": {
+   "count": 0,
+   "digest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "llm_summary_failures": {
+   "count": 0,
+   "digest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "locations": {
+   "count": 2,
+   "digest": "659e71863e849877b630ff6ab567d1eb23d57424330ae0356557f0371fecc46a"
+  },
+  "narrative_artifact_versions": {
+   "count": 1,
+   "digest": "c177e5837e8ce23a97c9daa4ed964621ee485620d5eed77046e3ba6cf63e4013"
+  },
+  "producer_events": {
+   "count": 5,
+   "digest": "b79b33fd221eea12c2f5846142d00e170ed783d0fa007c146a9a218f4a56a416"
+  },
+  "remediation_proposals": {
+   "count": 0,
+   "digest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "roots": {
+   "count": 1,
+   "digest": "e95a35ff25763d6a75e2ca2e3f13e3d2ea9b8cdd15d7568fffdc21b352b48602"
+  },
+  "scan_runs": {
+   "count": 0,
+   "digest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "source_metadata_assertions": {
+   "count": 0,
+   "digest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "sources": {
+   "count": 2,
+   "digest": "0bbce0776808b5e399dd1cfcb58f1c9b143fa5e85110f0d9aac0cf7490ee2308"
+  }
+ },
+ "status": "succeeded"
+}
