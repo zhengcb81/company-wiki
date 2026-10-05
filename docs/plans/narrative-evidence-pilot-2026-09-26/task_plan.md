@@ -21,6 +21,8 @@
 
 **MAIN当前下一步：**N4-T2仍待交付；收到后与已合入N4-T1联合验收，再以改进后的selector跑最终N4C真实多类型Worker批次。RF主线已有正式N3a叙述消费者；本地已缓存的`origin/main@8a153f3387ae75fb172e70f8ab63ffd38100779a`快照经完整`tests/`/`scripts/`导出后，CWP真实producer→公开CLI→RF bounded subprocess离线实样联调15 passed/39.81秒，含年报和电话会原文；此轮不能连GitHub核验更新的live ref，结果只绑定该SHA。Worker并发已用真实四类文档做P1/P2/P4对比：P4 29.091秒、最大4并发、峰值约601 MiB，比P2的34.384秒快15.4%，RSS为P2的1.44倍；同一profile另有34份文档/102作业的worker强制中断、租约过期、重试后34个bundle唯一可见的恢复测试。合成六轮P1/P2/P4也通过，但锁等待分位数仍未测；P4仅作为下一次有界N4C批次的候选档，不据此放开模型并发（仍为单模型slot）或宣称大规模吞吐。N3a仍未接收入预测计算；SourceRef v2另一读取路径仍是opt-in，默认SourceBundle继续读取normalized/summary/sections。S5存储审计需区分物理normalized文件与SQLite EvidenceSpan/质量元数据：evidence-query直接读DB span，extraction-quality读artifact状态/metadata和span，不直接打开normalized正文文件。真正的normalized正文读取点和RF默认SourceBundle仍须逐个迁移/退休，未完成前不删派生文件；N4-T2 selector集成、季报/IR覆盖、预测接线和DB/derived主体迁移仍未完成。
 
+**N4-T2真实来源基线：**正式只读复核已证实IR默认解析57 units/2,350字符后表格完整扫描为67/4,689字符，完整覆盖仍零候选；现有3个IR group同时出现业务/出海主题、进展、时间和具体行动，但候选规则只放行industry进展+时间组合。季报完整扫描13页/192 units/11,645字符后仍零既有主题命中，不能以旧词典零命中直接宣称可安全skip。见[诊断收据](harness_lanes/results/n4t2_real_source_diagnostic_2026-10-05.md)。N4-T2仍待交付；交付后联合N4-T1验收中文四类动态、titleless kind-fallback、金融表/套话负例和每个选中span的locator replay，再跑N4C真实Worker批次。
+
 ## 当前基线（2026-10-04正常用户上下文复核）
 
 | 项目 | 已发布/已验收事实 | 本机状态与本轮边界 |

@@ -406,3 +406,12 @@ Git写入/联网用正常用户，sandbox .git只读不是产品权限。测试�
 - 独立合成profile基准`test_e7_profiles_measure_bounded_worker_throughput_and_space`显式设`COMPANY_WIKI_RUN_E7_BENCHMARK=1`后 **1 passed / 77.10s**；45个本地作业、P1/P2/P4各两轮，最大并发分别1/2/4，median wall分别13.735/10.409/6.830s；P2相对P1速度指标+32.0%，P4相对P2+52.4%。P4中位RSS 267,538,432 B、P2为170,479,616 B（1.57倍），P4满足原speed/RSS候选阈值；六轮均0 SQLite busy error、retry 0，但busy p95/catalog lock wait未埋点，不能当成已经测得。
 - 实际中断恢复合同`test_e7_r11_100_narrative_jobs_recover_after_worker_restart_without_duplicates` **1 passed / 19.43s**：34个合成来源生成102个选择/摘要/验证作业；强制杀死一个compute worker，租约过期后由新supervisor重跑；最终34个bundle均唯一可见、34个distinct work key/对象、模型调用34，目标作业恰有一次`LEASE_EXPIRED`与一次成功重试，原文hash不变。证明丢worker可恢复和效果幂等，不等价于真实网络传输中断或外部provider超时/计费语义。
 - 真实E6中`tmp/e6p4`与pytest的`tmp/pt6p4`、E7/R11各自scratch都经绝对路径范围核验后清除；E6工作根在退出断言为空，之后才删除。无外部API/网络/生产写入。N4-T2只改source_catalog与其selector测试，不与本轮E6 integration test重叠；N4-T2的selector交付后仍需用P4候选档做一次新的集成真实批次。P4可作为有界N4C candidate，不应宣称已经验证大批量真实锁争用或收入预测consumer接线。
+
+## 2026-10-05 — N4-T2真实季报/IR来源只读诊断
+
+诊断收据：[n4t2_real_source_diagnostic_2026-10-05.md](harness_lanes/results/n4t2_real_source_diagnostic_2026-10-05.md)。本轮重新核对RF：本地 `origin/main` 缓存仍为 `8a153f3387ae75fb172e70f8ab63ffd38100779a`；`fcap` 与 `rf-impl` owner工作区的未提交/历史 execution_runs 状态未改。远端实时访问不可用，不声称刷新live ref。
+
+- 用正式 `SourceVersionReader.open_version` 与当前read-policy pin，按完整字节SHA/size验证N4C请求中的IR和季报PDF；内存解析，无网络、模型、生产写入、字节副本或正文输出。
+- IR SHA前缀 `3e25aab404a1` 默认扫描复现旧样本57 units/2,350字符，表格完整扫描为67/4,689字符且coverage complete；完整扫描后仍零candidate。已有new-business/overseas主题的3个PDF group同时含进度与时间线索、并命中特定行动词，但不命中high-value-event；候选资格仅对 `industry_dynamics` 放行progress+recency，确认是业务/出海叙述选材漏检。
+- 季报SHA前缀 `37f0eb13fc97` 完整扫描为13页、192 units/11,645字符、零解析错误/opaque、coverage complete；当前7个主题类和事件模式均零命中，仍有少量宽泛进展/时间词。它不能仅因“当前词典零命中”就安全skip，应由扩展后的测试证明何时是真正无业务叙述。
+- N4-T2须补具象业务进展 fallback、中文四类别及titleless kind-fallback合成测试，并对每个选中span执行locator replay；不扩大仅按零候选自动skip的类型范围。代码仍无改动，N4-T2仍awaiting delivery，MAIN后续做真实Worker/N3a/P4验收。

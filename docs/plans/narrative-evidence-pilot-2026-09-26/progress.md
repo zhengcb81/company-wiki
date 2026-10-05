@@ -508,3 +508,10 @@ S0/N4A及S2模型预算基础、CLI阶段与CI修复已正常发布，当前CI�
 - `test_e7_r11_100_narrative_jobs_recover_after_worker_restart_without_duplicates`：**1 passed / 19.43s**。34个测试文档、102个作业中，强制杀死一名compute worker后租约过期、重启recovery；34个bundle各自唯一可见、34 distinct work keys、34次模型夹具调用，目标作业一次`LEASE_EXPIRED`后一次成功，raw hashes不变。
 - E6专用数据根、旧/新basetemp、E7与R11 pytest scratch均已按绝对路径校验并删除，E6的测试根在用例退出时为空。唯一warning仍是缺插件时pytest.ini中的`asyncio_mode` unknown option。无provider/LLM外调或生产写入。此处只有E6 opt-in integration test改动；N4-T2卡不包含此文件、不重叠。N4-T2仍待交付；合入其selector修复后，MAIN要在P4 candidate档把改良选择、实际Worker摘要、CWP公开读取与RF N3a合成一轮真实业务样本验到底。
 - 发布收据：上述opt-in E6 P4覆盖和三份PWF以`069c8d4db0d1e4537c1de1e79d7784201c45ff66`提交并推送。Pre-commit Ruff和host-assumption guard通过；pre-push fast contract smoke通过。GitHub Actions [37253121382](https://github.com/zhengcb81/company-wiki/actions/runs/37253121382) head SHA匹配、唯一`Fast checks (Python 3.12)` job **73秒 completed/success**，包含Ruff、严格类型检查、compile/config doctor、unit、focused contract、CLI smoke及secret scan。提交后`master`与`origin/master`同步；仅保留用户原有`config/source_acquisition.yaml`未提交变化。此后新增本段是docs-only，按CI的`paths-ignore`不触发Actions。
+
+## 2026-10-05 — N4-T2真实季报/IR选择器基线
+
+- 交接收据：[n4t2_real_source_diagnostic_2026-10-05.md](harness_lanes/results/n4t2_real_source_diagnostic_2026-10-05.md)。重新检查RF，本地 `origin/main` cached ref仍为`8a153f3387ae75fb172e70f8ab63ffd38100779a`；owner `fcap`未提交assurance与大量历史execution_runs状态保持原样，没有RF改动。此工作区不能fresh核验GitHub live ref。
+- IR真实SourceRef `3e25aab404a1`经正式SourceVersionReader验证。默认解析57单位/2,350字符、覆盖不完整；延后表格扫描后67/4,689字符、完整覆盖、零错误/opaque，但仍没有候选。完整扫描有3个PDF group共同包含new-business/overseas主题、progress、recency及具体行动信号，然而当前candidate rule只允许industry progress+recency。这是具体规则漏检，N4-T2应给其他目标业务主题补有界进展条件，并用真实PDF locator replay验收。
+- 季报真实SourceRef `37f0eb13fc97`完整扫描13页/192 units/11,645字符，覆盖完整、无解析错误/opaque，7类既有主题和high-value event均零命中；不能将“现词库未识别”当作“无业务内容”。保留needs_review，直到更高召回覆盖和负例证明可以跳过。当前catalog标题并非空值，titleless fallback仍须用synthetic empty-title+known-kind测试。
+- 无原文打印/存盘、无临时字节副本、无模型/provider/network和生产写入。该诊断没有改代码；N4-T2仍待交付，下一阶段仍要联合N4-T1、测试locator与skip边界，之后再跑N4C真实Worker/P4/RF N3a消费。
