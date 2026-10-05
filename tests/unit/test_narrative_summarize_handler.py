@@ -302,8 +302,8 @@ class ReplayModel:
             "claims": [
                 {
                     "claim_id": "claim-001",
-                    "text": evidence[0]["raw_text"],
-                    "evidence_ids": [evidence[0]["span_id"]],
+                    "text": evidence[0][1],
+                    "evidence_ids": [evidence[0][0]],
                     "claim_type": "company_statement",
                     "modality": "actual",
                     "needs_review": False,

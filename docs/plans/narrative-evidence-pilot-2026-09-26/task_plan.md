@@ -117,7 +117,7 @@ TDD框住公开行为，不把旧签收规则写进新测试。仅S0相关收口
 
 ## Next Step
 
-**MAIN下一动作：**配置遵从修正已实现：真实运行用 `scripts/narrative_batch_configured.py` 复用既有 `Config.load()`，国内端点、模型、8192输出额度、温度/reasoning_split及项目.env优先级均已核实；不再写死国际端点或关闭thinking。配置→HTTP与真实CLI/Worker/幂等恢复离线测试已绿，本节点没有额外模型调用。发布该修正后，按配置做离线请求准入测量和私有citation别名压缩TDD，并用小policy夹具定位metadata路由。下一真实批最多26,340 tokens/$0.083420，旧unknown保留，缺正式价格/足够准入预算时不盲重试。只有真实final被CWP公开read/RF已提交N3a实读后才关闭N4C。P5三线已开工，MAIN不改其写集，交付随到随合；实际S5/S6清理仍等调用者迁移及新final验收，原件、来源版本和用户配置保留。
+**MAIN下一动作：**发布本轮私有请求降重及英文policy修复（prompt1.3.0/private schema1.1/selector0.3.1）：134项集中回归+3实际CLI/Worker E2E已GREEN。配置入口仍Config.load，未改8192/温度/reasoning。真实请求现为年报15,805 B/24,125token上界，招股16,543 B/24,863，IR8,035 B/16,355，TXT5,810 B/14,130；原文/选集未减，政策零模型skip。下一先核当前配置的实际套餐/价格，再只用最难P04+policy做明确有限批，最多26,340tokens/$0.083420，累计旧unknown保留；拿实际usage、final/CWP公开read/RF N3a实读后按余量处理其他类型，不盲跑四份（合计79,473最坏token）。没有新的paid call或生产清理。P5三外线互斥且尚无约定handoff，交付随到随合；MAIN不改其owner文件。整体N4C、S5/S6仍未完成。
 
 ## 2026-10-04：新增三张可独立派发的施工卡
 

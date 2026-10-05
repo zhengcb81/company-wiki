@@ -10,7 +10,7 @@ import time
 from typing import Protocol, TYPE_CHECKING
 
 from .execution_context import JobExecutionContext
-from .models import HandlerMetrics, HandlerOutcome
+from .models import HandlerMetrics, HandlerOutcome, canonical_json_hash
 from .narrative_http_model import (
     ModelCredentialsError,
     ModelHTTPError,
@@ -110,7 +110,11 @@ class BudgetedNarrativeCaller:
                 attempt_id=attempt.attempt_id,
                 lease_token=attempt.lease_token,
                 runtime_generation=attempt.runtime_generation,
-                request_sha256=hashlib.sha256(body).hexdigest(),
+                request_sha256=canonical_json_hash({
+                    "schema_version": "narrative-model-attempt/2",
+                    "model_input_sha256": request.input_sha256,
+                    "http_body_sha256": hashlib.sha256(body).hexdigest(),
+                }),
                 model_id=self._model.model_id,
                 prompt_version=request.prompt_version,
                 pricing_version=run.pricing_version,

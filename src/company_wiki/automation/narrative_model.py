@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from collections import Counter
 import hashlib
 import json
 from typing import Any, Protocol
@@ -11,8 +12,8 @@ from .models import canonical_json, canonical_json_hash
 from .narrative_contracts import NarrativeSelectResult
 
 
-MODEL_REQUEST_SCHEMA = "narrative-model-request/1.0"
-NARRATIVE_PROMPT_VERSION = "1.2.0"
+MODEL_REQUEST_SCHEMA = "narrative-model-request/1.1"
+NARRATIVE_PROMPT_VERSION = "1.3.0"
 MODEL_RESPONSE_MAX_BYTES = 128 * 1024
 
 _INSTRUCTION = (
@@ -20,7 +21,8 @@ _INSTRUCTION = (
     "response_schema JSON; response_example is shape-only. Copy source identity "
     "and language; do not translate. Summarize concrete industry/business/new-product/"
     "overseas changes; exclude financial tables, boilerplate, outside facts and "
-    "investment conclusions/valuation/ratings. Cite supplied span_id only. Preserve "
+    "investment conclusions/valuation/ratings. Cite supplied id aliases only. "
+    "Evidence rows follow evidence_columns; missing trailing cells inherit default_* values. Preserve "
     "source_role and modality: company_filing/management=company_statement; "
     "analyst/investor_question=analyst_question+question; other=uncertain. Uncertain "
     "claims or locator_unstable evidence require needs_review=true and status "
@@ -74,7 +76,7 @@ def _response_example(selected: NarrativeSelectResult) -> dict[str, Any] | None:
         "language": selected.source_metadata.language,
         "claims": [{
             "claim_id": "claim-001", "text": span.raw_text[:200],
-            "evidence_ids": [span.span_id], "claim_type": claim_type,
+            "evidence_ids": ["e1"], "claim_type": claim_type,
             "modality": "question" if claim_type == "analyst_question" else "uncertain",
             "needs_review": needs_review,
         }],
@@ -98,6 +100,17 @@ class ModelResponseError(NarrativeModelError):
     """The provider response cannot satisfy the transport contract."""
 
 
+class ModelCitationError(ModelResponseError):
+    """A model citation is absent from the pinned selection."""
+
+
+def _citation_mapping(selected: NarrativeSelectResult) -> dict[str, str]:
+    ids = [span.span_id for span in selected.evidence_spans]
+    if len(set(ids)) != len(ids):
+        raise ModelCitationError("duplicate canonical citation ids")
+    return {f"e{index}": span_id for index, span_id in enumerate(ids, start=1)}
+
+
 @dataclass(frozen=True)
 class NarrativeModelRequest:
     """Canonical prompt instruction plus a selected-evidence-only data envelope."""
@@ -109,6 +122,12 @@ class NarrativeModelRequest:
 
     @classmethod
     def from_selection(cls, selected: NarrativeSelectResult) -> "NarrativeModelRequest":
+        mapping = _citation_mapping(selected)
+        roles = [span.structured_value.get("source_role", "unknown") for span in selected.evidence_spans]
+        roles = [role if isinstance(role, str) else "unknown" for role in roles]
+        default_role = Counter(roles).most_common(1)[0][0] if roles else "unknown"
+        flags = [span.quality_flags for span in selected.evidence_spans]
+        default_flags = Counter(flags).most_common(1)[0][0] if flags else ()
         envelope = {
             "schema_version": MODEL_REQUEST_SCHEMA,
             "source": {
@@ -121,14 +140,15 @@ class NarrativeModelRequest:
             # The full spans stay in the canonical select result for validation
             # and replay. The model needs content and citation/role diagnostics,
             # not per-span copies of source hashes, parser versions and boxes.
-            "evidence": [{
-                "span_id": span.span_id,
-                "raw_text": span.raw_text,
-                **({"quality_flags": list(span.quality_flags)} if span.quality_flags else {}),
-                "structured_value": {
-                    "source_role": span.structured_value.get("source_role", "unknown"),
-                },
-            } for span in selected.evidence_spans],
+            "default_source_role": default_role,
+            "default_quality_flags": list(default_flags),
+            "evidence_columns": ["id", "raw_text", "source_role", "quality_flags"],
+            "evidence": [
+                [alias, span.raw_text]
+                + ([role] if role != default_role or span.quality_flags != default_flags else [])
+                + ([list(span.quality_flags)] if span.quality_flags != default_flags else [])
+                for alias, span, role in zip(mapping, selected.evidence_spans, roles, strict=True)
+            ],
             "selection": selected.selection.to_dict(),
             "response_schema": _RESPONSE_SCHEMA,
             "response_example": _response_example(selected),
@@ -143,6 +163,7 @@ class NarrativeModelRequest:
             "prompt_version": NARRATIVE_PROMPT_VERSION,
             "instruction": _INSTRUCTION,
             "data_json": data_json,
+            "citation_mapping": mapping,
         }
         return cls(
             NARRATIVE_PROMPT_VERSION,
@@ -200,7 +221,9 @@ def _unique_object(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
     return value
 
 
-def decode_model_draft(response: NarrativeModelResponse) -> dict[str, Any]:
+def decode_model_draft(
+    response: NarrativeModelResponse, *, selected: NarrativeSelectResult,
+) -> dict[str, Any]:
     """Decode exactly one draft object without retaining the raw model response."""
     if response.prompt_version != NARRATIVE_PROMPT_VERSION:
         raise ModelResponseError("model response prompt version differs from request")
@@ -214,6 +237,19 @@ def decode_model_draft(response: NarrativeModelResponse) -> dict[str, Any]:
     draft = payload["draft"]
     if not isinstance(draft, dict):
         raise ModelResponseError("model draft must be an object")
+    mapping = _citation_mapping(selected)
+    canonical = set(mapping.values())
+    claims = draft.get("claims")
+    if isinstance(claims, list):
+        for claim in claims:
+            if not isinstance(claim, dict) or not isinstance(claim.get("evidence_ids"), list):
+                continue  # The canonical draft validator owns malformed shapes.
+            ids = claim["evidence_ids"]
+            if not all(isinstance(value, str) for value in ids):
+                continue
+            if any(value not in mapping and value not in canonical for value in ids):
+                raise ModelCitationError("model citation is not in the pinned selection")
+            claim["evidence_ids"] = [mapping.get(value, value) for value in ids]
     return draft
 
 

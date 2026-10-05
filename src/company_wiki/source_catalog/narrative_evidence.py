@@ -49,11 +49,12 @@ from .narrative_routing import (
 NARRATIVE_PARSER_NAME = "selective_narrative_parser"
 NARRATIVE_PARSER_VERSION = "0.1.0"
 NARRATIVE_SELECTOR_NAME = "select_narrative_evidence"
-# 0.3.0 adds concrete current Chinese operating/new-business/overseas progress
+# 0.3.1 recognizes administrative English IR policy titles; 0.3.0 added
+# concrete current Chinese operating/new-business/overseas progress
 # and keeps unrecognized business documents reviewable. The version also pins
 # batch generation identity, so old selection results cannot be silently reused.
 # Parsing, source bytes and locator construction remain unchanged.
-NARRATIVE_SELECTOR_VERSION = "0.3.0"
+NARRATIVE_SELECTOR_VERSION = "0.3.1"
 _FINANCIAL_TERMS = re.compile(
     r"资产负债表|利润表|现金流量表|每股收益|归母净利润|营业收入|营业成本|"
     r"货币资金|应收账款|存货|固定资产|加权平均|基本每股|稀释每股|"

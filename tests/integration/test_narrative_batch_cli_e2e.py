@@ -40,6 +40,7 @@ def _prepare(
     include_mixed=False,
     include_annual_pdf=False,
     include_policy=True,
+    policy_title=None,
 ):
     state = prepare_source_catalog(
         root,
@@ -48,6 +49,7 @@ def _prepare(
         include_mixed=include_mixed,
         include_annual_pdf=include_annual_pdf,
         include_policy=include_policy,
+        policy_title=policy_title,
     )
     try:
         state.store = AutomationStore(root / "automation.db")
@@ -156,6 +158,7 @@ def test_cli_p2_publishes_two_languages_and_skips_policy_without_model_call(
             root,
             loopback_model_server.endpoint,
             sparse_metadata=sparse_metadata,
+            policy_title="Investor Relations Policy" if sparse_metadata else None,
         )
         try:
             request = json.loads(state.request_path.read_text(encoding="utf-8"))

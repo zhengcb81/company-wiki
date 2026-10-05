@@ -24,14 +24,14 @@ def test_long_selection_fits_budget_without_losing_any_evidence_or_replay_metada
     assert len(model.request_bytes(request)) + 128 + model.max_output_tokens < 60_000
     assert len(envelope["evidence"]) == 160
     canonical_by_id = {item["span_id"]: item for item in before["evidence_spans"]}
-    for projected, span in zip(envelope["evidence"], selected.evidence_spans, strict=True):
-        assert projected["span_id"] == span.span_id
-        assert projected["raw_text"] == span.raw_text
-        assert projected.get("quality_flags", []) == list(span.quality_flags)
-        assert projected["structured_value"] == {"source_role": "company_filing"}
-        assert set(projected) == {"span_id", "raw_text", "structured_value"}
+    for index, (projected, span) in enumerate(zip(envelope["evidence"], selected.evidence_spans, strict=True), start=1):
+        assert projected[0] == f"e{index}"
+        assert projected[1] == span.raw_text
+        assert (projected[3] if len(projected) > 3 else envelope["default_quality_flags"]) == list(span.quality_flags)
+        assert (projected[2] if len(projected) > 2 else envelope["default_source_role"]) == "company_filing"
+        assert len(projected) == 2
         # Citation IDs still resolve to the unchanged canonical source locator.
-        assert canonical_by_id[projected["span_id"]]["locator"] == span.locator
+        assert canonical_by_id[span.span_id]["locator"] == span.locator
     assert envelope["selection"] == selected.selection.to_dict()
     assert selected.to_dict() == before  # canonical replay fields are still intact
     assert all(span.parser_version == "1.0.0" for span in selected.evidence_spans)
@@ -46,8 +46,9 @@ def test_prompt_preserves_role_quality_source_identity_and_original_language(rol
     assert envelope["source"]["source_id"] == selected.source_ref.source_id
     assert envelope["source"]["source_sha256"] == selected.source_ref.content_sha256
     assert envelope["source"]["language"] == "zh"
-    assert envelope["evidence"][0]["structured_value"]["source_role"] == role
-    assert envelope["evidence"][0].get("quality_flags", []) == list(flags)
+    span = envelope["evidence"][0]
+    assert (span[2] if len(span) > 2 else envelope["default_source_role"]) == role
+    assert (span[3] if len(span) > 3 else envelope["default_quality_flags"]) == list(flags)
     assert envelope["constraints"]["translate"] is False
     assert envelope["selection"]["omitted_candidate_count"] == 20
     assert request.prompt_version != "1.1.0"

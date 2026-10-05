@@ -107,7 +107,7 @@ def _pdf_bytes(text):
         document.close()
 
 
-def source_documents(*, include_mixed=False, include_annual_pdf=False, include_policy=True):
+def source_documents(*, include_mixed=False, include_annual_pdf=False, include_policy=True, policy_title=None):
     documents = [
         ("en", "call-en.txt", "Acme 2026 Q1 earnings call", "investor_call_transcript",
          b"Full Conference Call Transcript\nCEO: We launched a new product and expanded overseas capacity.\n"),
@@ -116,7 +116,7 @@ def source_documents(*, include_mixed=False, include_annual_pdf=False, include_p
     ]
     if include_policy:
         documents.append((
-            "en", "ir-policy.pdf", "投资者关系管理办法（2025年8月）.pdf", "ir_policy",
+            "en", "ir-policy.pdf", policy_title or "投资者关系管理办法（2025年8月）.pdf", "ir_policy",
             _pdf_bytes("This policy describes meeting administration procedures."),
         ))
     if include_mixed:
@@ -157,12 +157,14 @@ def prepare_source_catalog(
     include_mixed=False,
     include_annual_pdf=False,
     include_policy=True,
+    policy_title=None,
 ):
     """Scan real PDF/TXT bytes without materializing a batch or leasing work."""
     all_sources = source_documents(
         include_mixed=include_mixed,
         include_annual_pdf=include_annual_pdf,
         include_policy=include_policy,
+        policy_title=policy_title,
     )
     sources = all_sources[:1] if one_source else all_sources
     paths = {}

@@ -25,7 +25,7 @@ class ReplayNarrativeModel:
         if not evidence:
             raise AssertionError("replay model must not be called for an empty selection")
         first = evidence[0]
-        role = first["structured_value"].get("source_role")
+        role = first[2] if len(first) > 2 else envelope["default_source_role"]
         if role in {"analyst", "investor_question"}:
             claim_type = "analyst_question"
             modality = "question"
@@ -43,7 +43,7 @@ class ReplayNarrativeModel:
             modality = "uncertain"
             needs_review = True
             draft_status = "needs_review"
-        if "locator_unstable" in first.get("quality_flags", []):
+        if "locator_unstable" in (first[3] if len(first) > 3 else envelope["default_quality_flags"]):
             needs_review = True
             draft_status = "needs_review"
         draft = {
@@ -53,8 +53,8 @@ class ReplayNarrativeModel:
             "claims": [
                 {
                     "claim_id": "claim-replay-001",
-                    "text": first["raw_text"],
-                    "evidence_ids": [first["span_id"]],
+                    "text": first[1],
+                    "evidence_ids": [first[0]],
                     "claim_type": claim_type,
                     "modality": modality,
                     "needs_review": needs_review,

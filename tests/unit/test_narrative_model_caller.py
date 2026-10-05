@@ -1,6 +1,7 @@
 """A model attempt has durable admission and accounting around one call."""
 
 from types import SimpleNamespace
+from dataclasses import replace
 
 import pytest
 
@@ -128,6 +129,16 @@ def test_reserve_then_http_then_settle_even_when_draft_bytes_are_invalid():
     assert (metrics.tokens, metrics.cost_usd, metrics.duration_ms) == (60, 0.000012, 18)
     assert response.response_bytes == b"invalid draft JSON"
     assert ledger.settlements[0]["response_sha256"] == response.response_sha256
+
+
+def test_reservation_hash_binds_local_citation_mapping_even_for_identical_http_body():
+    hashes = []
+    for request in (REQUEST, replace(REQUEST, input_sha256="b" * 64)):
+        ledger = Ledger()
+        model = Model(ledger)
+        _caller(ledger, model).generate(_context(), request)
+        hashes.append(ledger.events[0][1]["request_sha256"])
+    assert hashes[0] != hashes[1]
 
 
 @pytest.mark.parametrize("case", ["denied", "duplicate"])

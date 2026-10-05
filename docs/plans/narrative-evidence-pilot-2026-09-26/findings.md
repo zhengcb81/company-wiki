@@ -505,3 +505,15 @@ Git写入/联网用正常用户，sandbox .git只读不是产品权限。测试�
 - 正常账号加载现配置成功，credential_present=true，值未输出。当前错误不是本机缺key。国内正式价格/当前配置请求准入仍待验证，不能把国际报价当国内账单或按2400输出继续假设额度够用。N4C真实final/消费者仍未绿。
 
 - 发布：`f099288`已推到master，正常pre-push快速合同GREEN；精确SHA CI [37361729624](https://github.com/zhengcb81/company-wiki/actions/runs/37361729624)当前queued，尚无远端测试结果，不冒称GREEN。收口复查补齐配置组合仍保留请求原有timeout/max-request/max-response caps，generation设置仍全由Config控制；配置14 passed/0.90s，合计111个不同case，实际CLI恢复复测GREEN。测试目录恢复，零新增paid call。
+
+## 2026-10-05 — 私有请求降重和英文政策实际路由修复
+
+- RF live main仍8a153f33，正常账号仅两份assurance owner修改；三个P5 worktree存在，约定handoff路径尚无新交付，保持各线写集独占。上一配置修正3daa9cc精确SHA CI37362106534已completed/success。
+- 先写9项别名RED，修正两个非法测试夹具：EvidenceSpan的output/span哈希不能靠replace篡改，改用正式create生成角色/定位差异。生产私有prompt1.3.0、请求schema1.1采用columns+短alias行、常用role/flags默认值，逐条原文完整保留；例外角色及空flags覆盖也保留。选集不变，模型draft入canonical层前恢复完整span IDs，未知引用静态拒绝，final/SourceRef公开wire未改。
+- 持久预算原本只hash HTTP body，未绑定本地alias映射。独立RED复现相同body/不同mapping得到同hash；现在请求身份同时绑定HTTP bytes SHA与model input SHA（后者含完整映射），不新增DB/签收表。旧run绑定prompt/selector版本，不静默重用。
+- policy小探针证明不是PDF损坏：旧ir_policy或canonical investor_relations入库后，都得到通用IR类型及完整英文标题；两者英文都失败，中文policy标题成功。英文IR Policy/Management Policy规则缺失。修规则且selector升0.3.1；真实SourceCatalog→SourceRef→handler三小夹具全部skipped_no_narrative/coverage_complete，零模型请求。未将业务文件无候选或不完整扫描改成自动skip。
+- 134项集中Unit/选择/预算/摘要回归GREEN（4.97s）；真实有限CLI+spawned Worker+loopback HTTP三case GREEN（39.28s），包含原语言中英输出、配置8192/reasoning、full canonical引用、相同run零重复HTTP、稀疏元数据英文policy跳过及原件/foreign jobs不变。Ruff/diff-check绿。
+- 同一真实四份选集、同一已有LLM配置，对照3daa9cc私有prompt的最终测量：P01 33146→15805 B/上界24125tokens；P04 45471→16543 B/上界24863tokens；P07 10257→8035 B/上界16355tokens；T01 8064→5810 B/上界14130tokens。年报96 spans/10,551 B正文，招股160/10,391 B，IR11/3,920 B、TXT14/1,809 B，均未减证据或换输出上限。结果是HTTP输入降重，不是已释放GB；诊断根finally恢复、原件SHA不变。本轮没有新的模型HTTP/下载。
+- 下一P04最坏24,863tokens可以进入剩余26,340额度；四份全部最坏预留79,473，大于剩余额度，不能承诺单批全成功。先从最难招股书+policy有限批取实际usage/final/RF公开read，再按实际余量推进其他类型；未知旧预留不退。国内pricing页面不可访问，官方input_tokens仅是Responses估算接口，与当前Chat Completions不是同一wire，不用估算替代硬上界，不切模型/协议/思考参数。价格与套餐事实先核，避免新的盲paid call。
+
+- 正常账号只读Config确认仍为MiniMax-M3/国内base，key存在；未匹配官方sk-cp订阅Key前缀，不据此推定无订阅或实际费率，不输出key。国内公开pricing读取失败已记为待查；未发新的模型POST。列名与行位一致的9项最终检查通过，临时测试/诊断根全部恢复。本轮中间object投影收据未发布，仅保留最终测量和必要policy前后证据。

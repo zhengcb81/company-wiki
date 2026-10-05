@@ -391,13 +391,15 @@ def test_select_handler_transcript_keeps_only_selected_original_byte_bindings(
     assert "summary_input" not in result.to_dict()
 
 
-def test_select_handler_complete_low_value_pdf_emits_small_skip() -> None:
+@pytest.mark.parametrize("title", ["投资者关系管理办法（2025年8月）.pdf",
+                                   "Investor Relations Policy", "INVESTOR RELATIONS MANAGEMENT POLICY"])
+def test_select_handler_complete_low_value_pdf_emits_small_skip(title: str) -> None:
     data = _pdf_bytes("This policy describes meeting administration and filing procedures.")
     payload = _payload(
         data,
-        title="投资者关系管理办法（2025年8月）.pdf",
-        document_kind="ir_policy",
-        language="zh",
+        title=title,
+        document_kind="investor_relations",
+        language="en",
         mime_type="application/pdf",
     )
 

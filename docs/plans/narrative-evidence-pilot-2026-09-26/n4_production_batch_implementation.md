@@ -4,7 +4,7 @@
 
 > **N4C预算与事实：**run02终态budget_exhausted，无final/RF实读；含旧unknown累计33,660 tokens/16,580 microUSD（不是账单），下一批最多26,340 tokens/$0.083420。国内只读models认证200、国际401证明之前试点端点绕过配置；不把GET结果冒称run02的POST status，也不退未知费用。两次live测试根已恢复，原件/生产/owner不变。截断null-content usage修复 `c543f6a` 的精确SHA CI已绿。
 
-> **MAIN下一动作：**按现有配置离线量请求与准入预算，随后TDD压缩模型私有citation投影；保留每条选中原文、角色、quality_flags及canonical ID/locator，input hash绑定完整别名映射，final公开wire不改。不按2400输出额度设计阈值，不擅自关闭思考，不删证据凑预算。alias当前尚未实现/验收；先前RED草稿没有作为永久测试发布。synthetic policy metadata路由也需用一个小夹具定位，修好后才做新paid batch。
+> **2026-10-05 追加完成：**私有投影prompt1.3.0/request schema1.1：`evidence_columns=[id,raw_text,source_role,quality_flags]`，`evidence`用行数组；省略的末尾role/flags继承default_*，例外与空flags逐条保留。每条原文不改，alias→canonical ID仅本地映射，model input hash及持久attempt request hash绑定该映射；摘要入库前还原并验证正式引用。未知/重复映射拒绝，公开SourceRef/Narrative wire不改。selector0.3.1补英文政策标题；通用IR类型也可正确route，完整空扫描才skip。134 Unit+3实际CLI/Worker E2E GREEN。真实招股请求45,471→16,543 B、含8192输出最坏24,863tokens，下一先核价格/套餐再只做P04+policy有限批，以actualusage滚动余量；不一次发四份/不改配置/不退unknown。N4C最终验收仍未完成。
 
 > **并行与已完成边界：**G1/S3、N4A/B和N4-T1/T2已收口，不重复施工。P5三个外包用户已确认开工，见[P5接口总包](harness_lanes/p5_parallel_packages_2026-10-05.md)；MAIN不改它们的独占写集，交付随到随验收。下方旧记录为追溯背景，当前顺序以主计划Next Step为准。
 

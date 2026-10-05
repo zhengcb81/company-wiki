@@ -12,7 +12,8 @@ PROSPECTUS_SELECTION_LIMIT = 160
 _DOCUMENT_KIND_PATTERNS = (
     (r"可转换公司债券|可转债", "convertible_bond_prospectus"),
     (r"向特定对象发行股票|定向增发|增发新股|非公开发行股票", "equity_offering_prospectus"),
-    (r"投资者关系管理办法|投资者关系管理制度", "ir_policy"),
+    (r"投资者关系管理办法|投资者关系管理制度|\binvestor relations (?:management )?polic(?:y|ies)\b|"
+     r"\bpolic(?:y|ies) (?:on|for) investor relations\b", "ir_policy"),
     (r"关于召开.*(?:业绩说明会|投资者说明会)|会议通知", "meeting_notice"),
     (r"招股说明书", "prospectus"),
     (r"半年度报告|半年报", "semi_annual_report"),

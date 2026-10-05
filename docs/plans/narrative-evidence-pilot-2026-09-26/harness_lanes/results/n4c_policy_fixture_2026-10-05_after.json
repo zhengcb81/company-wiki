@@ -1,0 +1,85 @@
+{
+  "schema_version": "n4c-policy-fixture-diagnosis/1",
+  "llm_calls": 0,
+  "network_calls": 0,
+  "metadata_is_fixture": true,
+  "selector_version": "0.3.1",
+  "cases": [
+    {
+      "name": "old-invalid-kind",
+      "event_metadata": {
+        "document_kind": "investor_relations",
+        "language": "en",
+        "source_class": "filing",
+        "title": "Investor relations policy"
+      },
+      "outcome": "succeeded",
+      "error": null,
+      "selection": {
+        "status": "skipped_no_narrative",
+        "coverage_complete": true,
+        "source_units": 1,
+        "candidate_count": 0,
+        "selected_count": 0,
+        "omitted_candidate_count": 0,
+        "dropped_financial_count": 0,
+        "pages_total": 1,
+        "pages_read": 1,
+        "lines_total": 0,
+        "tables_total": 1,
+        "tables_scanned": 1
+      }
+    },
+    {
+      "name": "canonical-english-title",
+      "event_metadata": {
+        "document_kind": "investor_relations",
+        "language": "en",
+        "source_class": "filing",
+        "title": "Investor relations policy"
+      },
+      "outcome": "succeeded",
+      "error": null,
+      "selection": {
+        "status": "skipped_no_narrative",
+        "coverage_complete": true,
+        "source_units": 1,
+        "candidate_count": 0,
+        "selected_count": 0,
+        "omitted_candidate_count": 0,
+        "dropped_financial_count": 0,
+        "pages_total": 1,
+        "pages_read": 1,
+        "lines_total": 0,
+        "tables_total": 1,
+        "tables_scanned": 1
+      }
+    },
+    {
+      "name": "canonical-policy-title",
+      "event_metadata": {
+        "document_kind": "investor_relations",
+        "language": "en",
+        "source_class": "filing",
+        "title": "投资者关系管理办法（测试夹具）"
+      },
+      "outcome": "succeeded",
+      "error": null,
+      "selection": {
+        "status": "skipped_no_narrative",
+        "coverage_complete": true,
+        "source_units": 1,
+        "candidate_count": 0,
+        "selected_count": 0,
+        "omitted_candidate_count": 0,
+        "dropped_financial_count": 0,
+        "pages_total": 1,
+        "pages_read": 1,
+        "lines_total": 0,
+        "tables_total": 1,
+        "tables_scanned": 1
+      }
+    }
+  ],
+  "test_root_restored": true
+}

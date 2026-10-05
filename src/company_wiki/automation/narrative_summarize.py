@@ -20,6 +20,7 @@ from .narrative_contracts import (
     SourceRevisionEventPayload,
 )
 from .narrative_model import (
+    ModelCitationError,
     ModelRateLimitError,
     ModelResponseError,
     ModelTimeoutError,
@@ -243,7 +244,11 @@ class NarrativeSummarizeHandler:
         review: PromptReviewValue,
         response: NarrativeModelResponse,
     ) -> NarrativeSummaryResult:
-        draft = decode_model_draft(response)
+        try:
+            draft = decode_model_draft(response, selected=selected)
+        except ModelCitationError as exc:
+            raise _SummaryFailure("SUMMARY_INVALID", HandlerOutcome.TERMINAL_FAILURE,
+                                  "model draft cites evidence outside its selection") from exc
         raw: Mapping[str, Any] = {
             "schema_version": SUMMARY_RESULT_SCHEMA,
             "source_ref": selected.source_ref.to_dict(),
