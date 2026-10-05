@@ -50,6 +50,19 @@ TDD至少框住：精确source+locator能验原件并回放；原件hash不符/l
 
 ## 一个存储大节点的验收接口
 
+### B剩余生成器分层节点（2026-10-06，先计划后实施）
+
+前置事实：P5-FF已main758e8f4/精确CI GREEN；STORAGE已验收e570daf，生产处置未执行。RF专用树8a153f33、有17份tracked WIP及两份新增测试、无HANDOFF，MAIN不碰。CodeGraph首查后以当前tracked AST补足imports：正式代码通过service指纹补算及__init__两个历史类型加载旧生成器；正文reader生产caller只有旧生成器自身。零caller不能单独证明无依赖。
+
+写集仅CWP source_catalog、相关tests/support和测试、MAIN PWF/收据；保持SourceRef/NarrativeRef、指纹算法及历史artifact字段/hash。其他仓库、生产raw/derived/span零写入，不加许可flag。
+
+1. TDD：安装包不存在全文normalize/summary/sections writer及其正文reader，普通catalog导入不加载旧生成器/测试模块。指纹实跑只存小型状态、不建artifact/span/derived且重复幂等。原文篡改、解析期间换字节、manifest与候选来源不符均具名失败，后续健康文件照常完成。
+2. normalizer保留临时格式解析、子进程期限/清理、raw-text指纹算法及retry状态；移出normalize_catalog、frontmatter和全量写入。旧造数器/summary/sections/正文reader仅放tests/support以保留历史读/清理夹具，不复制原文解析器；setuptools仅打包src，src/scripts/tools不导入测试模块。此节点不冒称已删除所有历史专属测试。
+3. 删除未被实际产品使用的LLMSummaryError/SectionSlice public导出；历史generator registry/version作为旧artifact识别数据保留。读链计数删除退休writer，旧生产者源码断言改为安装包无writer与历史metadata绑定，不虚构路径维持门禁。
+4. 指纹复用manifest实字节验证，解析前/后检查原件，manifest source_id/SHA必须与调度row相等。不加人工review/ACL/新库。历史fixture故障注入指向真实所属层，不能为GREEN恢复runtime writer。
+5. 大节点集中测公开退休、原文parser/指纹、受影响历史读/质量/清理及有限Worker E2E。真实年报PDF+电话会TXT仅复制到独立短根：原SHA不变，artifact/span/derived零新增，parser临时结果清理，finally恢复absent；零外部下载/模型请求，不逐helper签收。
+6. GREEN后正常commit/push、核精确CI、更新caller收据/PWF。生产2.826GB派生及旧span/VACUUM仍待RF默认v2验收，代码边界完成不等于已释放生产空间。
+
 交付字段：代码HEAD/远端HEAD、实际退出/迁移入口、集中测试命令与结果、集合前后files/bytes、DB前后bytes/page_count/freelist、保留事实摘要、真实原件CLI读数、新summary引用回放、network/model调用数、残留问题及下一动作。
 
 不增加release授权文件、人工签名、逐文件签收或固定场景数量。A可在N4外线施工期间先做；B–D由MAIN协调共享接口，N4C成果可用后再做集中存储迁移验收。本卡尚未宣称B–D已实现。
@@ -110,3 +123,9 @@ MAIN接下来核实际旧底层generator/EvidenceQuery/ExtractionQuality caller�
 **本节点验收完成：**102个不同case分步GREEN，集中100 passed/2失败后仅6受影响cases GREEN23.41s，非重跑全包。两处修正是公开错误名与退役旧CLI断言；来源/旧backend事实校验未放宽。真实MSFT TXT search→lookup/全部引用回放/原始SHA、四类型持久文件集合/SHA不变及s5vred/green/final测试根恢复均通过。实际read/reference goldens保持原字节；0外部model POST，0生产删除。Ruff/diff-check GREEN；1b0feb4已发布/精确CI绿。[小收据](harness_lanes/results/s5_selected_retrieval_acceptance_2026-10-05.json)。
 
 **发布已完成：**代码1b0feb44ff1695a8bae761eac538ce68236c04d6已推送master；正常commit/pre-push均GREEN，用户配置SHA保持。CI37381429717 attempt1 completed/success，所有步骤GREEN。质量/公开精选读取两个节点已关闭，整体S5仍待FF/RF外线、旧generator实际caller与生产处置，不复跑本节点102项。
+
+## B剩余生成器边界验收（2026-10-06）
+
+代码b148123d1ada7d0d222574b6b5852f976c2985e8已master发布，精确CI37388329668已completed/success，所有步骤GREEN。公开/指纹/读链65 passed，兼容160 passed/2 skipped，Worker+工具3 passed，stdout修复后解析/指纹31 passed；229个不同case分步GREEN，非单次全包。真实年报PDF+电话会TXT通过公开scan/backfill/重复backfill，原SHA及来源事实不变、0新artifact/span/derived、短根恢复absent。运行模块净退出2182行旧生成器，343份生产Python无test-support imports；历史generator registry/version是旧数据识别，造数器仅在tests/support，不是生产入口。小收据见harness_lanes/results/s5_generator_retirement_acceptance_2026-10-06.json。
+
+未完成的边界：RF默认v2交付仍无HANDOFF，兼容SourceBundle还可能读旧artifact；生产处置须等该卡验收。FF758e8f4已并线/精确CI绿，STORAGE工具e570daf已验收；不能再写两卡待验收。下一步用已验收工具只读预览生产清单、核RF交付，然后做已规划retire-derived/prune/VACUUM大节点；不新增签收、完整备份或逐文件测试。

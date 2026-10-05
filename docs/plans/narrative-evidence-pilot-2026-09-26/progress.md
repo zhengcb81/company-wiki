@@ -1,5 +1,10 @@
 # Progress：激进简化实施
 
+## 2026-10-06 — S5剩余生成器分层接续
+
+- P5-FF已主线758e8f4/精确CI GREEN、P5-STORAGE已主线e570daf/验收，未执行生产删除。fresh RF独立树8a153f33仍WIP、无HANDOFF，owner仍两份assurance，不修改它。
+- CodeGraph+tracked AST确认canonical导入仍经指纹和历史public类型载入全量生成器；正文reader只有旧writer使用。原文临时parser和去重指纹有实际职责，不能整文件删除。先写详细分层/TDD/真实副本验收顺序，再实施；当前尚无代码改动或生产降容。
+
 ## 2026-10-05 — MAIN provider预检、P5三卡运行
 
 - 只读接口调查确认测试端点错用国际站：api.minimax.io/v1/models=401；项目已配置api.minimaxi.com/v1/models=200/MiniMax-M3可用。两次GET无文档/推理；不输出key。下一真实批使用既有国内端点；先离线量长文请求并查skip错误，不盲重试。官方CN价格页web访问失败，未据此猜人民币/USD计价。
@@ -770,3 +775,12 @@ S0/N4A及S2模型预算基础、CLI阶段与CI修复已正常发布，当前CI�
 - FF owner唯一dirty测试再次核24f3a727…，与已提交integration文件字节相同；正规restore该文件后switch main，再--ff-only到758e8f4，最终该测试SHA仍原样。此前local main实际停在c9799b7（owner fcap才是d4d2fac），本次同时补齐66份已有commits，未rebase/reset/force。现在本地main和remote main一致，tracked干净，仅FMP_API_KEY.txt未跟踪并未读/暂存。真实owner目录三仓config_doctor --require-revenue-config GREEN，不再依赖独立树skip结论。
 
 - FF精确CI37385101051/758e8f4 attempt1 completed/success，所有步骤GREEN，含新POSIX生命周期责任包、原精选回归、三仓doctor。前次失败未重跑；正常新SHA修复通过。所有10个本轮ffm测试根逐一Test-Path=false；原用户配置仍3609e707…，e570daf确认在CWP主线。一次rg整个tmp遇到其他历史受限目录，仅只读失败，随后只检查本次确切根，不清他人目录。FF accepted_main收据与总PWF/并行包/预验收历史状态同步；STORAGE已验收状态不重做，生产0删除。下一步剩余旧generator caller及RF交付验收，不新增权限门。
+
+### S5生成器边界节点收口（b148123，CI待核）
+
+- 10项TDD初跑9 failed/1 passed、4.99s；修复后65项入口/指纹/读链25.10s GREEN，兼容包160 passed/2 skipped、121.50s，新Worker双语言/policy与存储smoke 3 passed、25.45s。新增stdout案例1项RED后，解析/指纹31 passed、80.12s。229个不同case分步GREEN，并非单次229项全包；两项跳过来自已有夹具，不冒称已验证。一次命令选错不存在的test name为选择错误，未当产品RED。
+- 旧全文generator/正文reader移到tests/support/legacy_catalog，normalizer仍独占临时原文格式解析/指纹。运行层减少2182行；343份tracked生产Python无test-support导入。历史generator metadata仍为读兼容保留，不等于生产writer。
+- 真实年报副本初跑与有限诊断复跑均在JSON协议处失败：PyMuPDF安装建议污染stdout，实际report completed=2。未放宽JSON；真实子进程Python/native输出TDD复现，生产child诊断统一stderr。最后实际scan/backfill/重复backfill GREEN：AMEC 9165875B及MSFT 66324B原SHA不变，sources/documents/locations事实不变，0artifact/span/derived，最终tmp/s5g-oa0wgnpp恢复absent；0外部LLM/download、0生产删除。
+- 已正常commit/push b148123d1ada7d0d222574b6b5852f976c2985e8，静态commit与快速pre-push GREEN；用户配置SHA原样。精确CI37388329668进行中，待核结果后发纯PWF收尾。RF仍无HANDOFF，不碰WIP，下一步接收RF或生产只读预览。
+
+- S5生成器节点最终收口：精确代码b148123/CI37388329668 attempt1 completed/success，全部步骤GREEN，无rerun。本节点所有s5g*测试根已恢复absent；源配置原SHA保持。MAIN下一动作为RF默认迁移验收，未交付时仅做生产只读预览；0生产删除。代码CI以b148123为准，纯PWF [skip ci]收尾不替换该收据。

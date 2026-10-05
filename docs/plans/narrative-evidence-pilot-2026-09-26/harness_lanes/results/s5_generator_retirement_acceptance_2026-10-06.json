@@ -1,0 +1,93 @@
+{
+  "schema_version": "main-node-acceptance/1",
+  "node": "S5 runtime whole-document generator retirement",
+  "state": "published_green",
+  "code_head": "b148123d1ada7d0d222574b6b5852f976c2985e8",
+  "published_branch": "master",
+  "ci": {
+    "run_id": 37388329668,
+    "attempt": 1,
+    "conclusion": "success",
+    "url": "https://github.com/zhengcb81/company-wiki/actions/runs/37388329668",
+    "all_steps_green": true,
+    "status": "completed"
+  },
+  "tests": {
+    "first_red": {
+      "failed": 9,
+      "passed": 1,
+      "seconds": 4.99
+    },
+    "entry_fingerprint_read_chain": {
+      "passed": 65,
+      "seconds": 25.1
+    },
+    "historical_compatibility": {
+      "passed": 160,
+      "skipped": 2,
+      "seconds": 121.5
+    },
+    "worker_storage_smoke": {
+      "passed": 3,
+      "seconds": 25.45
+    },
+    "diagnostic_red": {
+      "failed": 1,
+      "seconds": 1.73
+    },
+    "post_diagnostic_parser_fingerprint": {
+      "passed": 31,
+      "seconds": 80.12
+    },
+    "distinct_cases_green_across_runs": 229,
+    "single_full_green_run_claimed": false
+  },
+  "runtime_boundary": {
+    "runtime_lines_removed": 2182,
+    "runtime_python_files_checked": 343,
+    "test_support_imports": 0,
+    "historical_fixture_generation_retained": true
+  },
+  "real_data_e2e": {
+    "raw": [
+      {
+        "name": "AMEC FY2025 annual report",
+        "bytes": 9165875,
+        "sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5"
+      },
+      {
+        "name": "MSFT Q4 FY2026 original TXT",
+        "bytes": 66324,
+        "sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a"
+      }
+    ],
+    "cli": [
+      "scan",
+      "fingerprint-backfill",
+      "fingerprint-backfill"
+    ],
+    "source_facts_unchanged": true,
+    "originals_preserved": true,
+    "artifacts": 0,
+    "evidence_spans": 0,
+    "derived_created": false,
+    "test_root_restored_absent": true,
+    "test_root": "tmp/s5g-oa0wgnpp",
+    "external_llm_posts": 0,
+    "downloads": 0,
+    "initial_json_pollution_fixed_without_loosening_protocol": true
+  },
+  "pytest_roots_restored_absent": [
+    "tmp/s5gred",
+    "tmp/s5ggreen",
+    "tmp/s5gcompat",
+    "tmp/s5gchain",
+    "tmp/s5gstdoutred",
+    "tmp/s5gstdoutgreen"
+  ],
+  "preserved_user_config_sha256": "3609e707466eeb3e0f685e14f2637c6afa39ba900edef1be4814433a43300a01",
+  "production_deletions": 0,
+  "production_cleanup_executed": false,
+  "rf_delivery_received": false,
+  "next": "Accept P5-RF default v2 delivery; prepare production read-only inventory while its WIP remains owner-controlled."
+}

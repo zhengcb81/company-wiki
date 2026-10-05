@@ -1,5 +1,10 @@
 # Findings：当前事实与待验证项
 
+## 2026-10-06 S5剩余caller
+
+- tracked AST补足CodeGraph imports：service导入normalizer.backfill_text_fingerprints；__init__为未使用的LLMSummaryError/SectionSlice加载旧writer；三个旧writer依赖normalized_artifact_reader。其他直接调用在tests，历史artifacts不是正式入口。
+- 指纹链解析没有复核原文SHA，扫描后换字节可把新正文指纹写到旧source行。分层节点先TDD原文/manifest绑定及解析前后实字节真实性，复用SourceManifest.verify_file，不引入人工门禁。
+
 ## 2026-10-05 MAIN模型预检与P5开工
 
 - 新证据：项目config.yaml的非秘密模型配置为MiniMax-M3、base_url=https://api.minimaxi.com/v1。相同当前env key下，国际站GET /v1/models返回401，已配置国内站返回200并列出MiniMax-M3；因此站点不匹配是已证问题。N4C测试端点应复用当前配置国内站，不自动fallback或轮换secret。官方国内文档已重定向到https://platform.minimax.cn/docs/api-reference/text-openai-api，支持M3显式thinking disabled。旧两个拒绝仍按unknown保守留账，不因只读401检查退款或假造供应商usage。
@@ -634,3 +639,11 @@ e570daf已发布，精确CI37375836745 success。53个不同case分步GREEN。�
 - FF原活动fcap是d4d2fac，但旧local main停c9799b7。只有一份未提交测试，SHA与已提交交付相等；最终main快进758e8f4补全66commit，文件SHA仍24f3a727…；仅FMP key未跟踪且未读。真实owner的三仓config doctor GREEN；独立整合树pre-push的doctor SKIP不能替代这项。
 
 - 最终精确CI37385101051/758e8f4 attempt1全部GREEN；实际Ubuntu运行新生命周期用例，POSIX session/父退出孙持pipe也完成验证。FF本地/远端main已一致，原owner已交付WIP收口。生产清理仍未执行，P5-STORAGE工具验收与P5-FF消费/进程验收是两个不同完成节点；不把工具可用当已释放生产字节。
+
+### S5分层验收事实（2026-10-06）
+
+- 指纹真实性缺口已TDD修复：manifest必须匹配调度source_id/SHA，解析前/后实字节核验；同大小替换/解析中替换/错source manifest均retryable具名失败，后续健康文件完成。来源事实与原件不改。
+- 真实PDF揭示第二缺口：PyMuPDF直接打印“Consider using…”到stdout，污染CLI JSON。完整report其实completed=2；复现后将child的Python及原生fd诊断送stderr，保留可观测性和严格JSON，最终真实CLI验收GREEN，不用最后一行猜JSON。
+- 退出的是安装包全量生成能力，历史测试造数器尚保留；它们复用唯一原文parser、不被343份生产Python导入。2.826GB生产derived及3.056GB来源库尚未删除/收缩；剩余实际默认消费者迁移是RF外包卡。
+
+- S5生成器节点最终收口：精确代码b148123/CI37388329668 attempt1 completed/success，全部步骤GREEN，无rerun。本节点所有s5g*测试根已恢复absent；源配置原SHA保持。MAIN下一动作为RF默认迁移验收，未交付时仅做生产只读预览；0生产删除。代码CI以b148123为准，纯PWF [skip ci]收尾不替换该收据。
