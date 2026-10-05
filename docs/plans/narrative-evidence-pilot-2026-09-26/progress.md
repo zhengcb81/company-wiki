@@ -515,3 +515,10 @@ S0/N4A及S2模型预算基础、CLI阶段与CI修复已正常发布，当前CI�
 - IR真实SourceRef `3e25aab404a1`经正式SourceVersionReader验证。默认解析57单位/2,350字符、覆盖不完整；延后表格扫描后67/4,689字符、完整覆盖、零错误/opaque，但仍没有候选。完整扫描有3个PDF group共同包含new-business/overseas主题、progress、recency及具体行动信号，然而当前candidate rule只允许industry progress+recency。这是具体规则漏检，N4-T2应给其他目标业务主题补有界进展条件，并用真实PDF locator replay验收。
 - 季报真实SourceRef `37f0eb13fc97`完整扫描13页/192 units/11,645字符，覆盖完整、无解析错误/opaque，7类既有主题和high-value event均零命中；不能将“现词库未识别”当作“无业务内容”。保留needs_review，直到更高召回覆盖和负例证明可以跳过。当前catalog标题并非空值，titleless fallback仍须用synthetic empty-title+known-kind测试。
 - 无原文打印/存盘、无临时字节副本、无模型/provider/network和生产写入。该诊断没有改代码；N4-T2仍待交付，下一阶段仍要联合N4-T1、测试locator与skip边界，之后再跑N4C真实Worker/P4/RF N3a消费。
+
+## 2026-10-05 — S5旧写者与RF默认reader只读对账
+
+- 重新核对CWP：`master`与`origin/master`均为`5cabe47`；N4-T2尚无可见交付分支/worktree/任务结果。唯一dirty文件为用户配置`config/source_acquisition.yaml`，保持未读写入范围之外。
+- CodeGraph与定向源码检索确认旧`SourceCatalog`全文normalize/summarize API仍存在，旧合同测试仍调用；`src/`、`scripts/`未发现这些包装方法的业务入口直接调用。旧LLM/extractive summary与sections流程仍读取normalized正文。CodeGraph对同名方法caller存在错配风险，未用其零结果作为删除依据。
+- 先检查RF：用只读的每命令`safe.directory`参数读取本地refs，未改全局Git配置。RF当前本地`main@6fb2def7`、`fcap@5319ee26`、缓存`origin/main@8a153f33`；tracked owner改动共3,835项，含3,833项execution_runs删除和2项weekly assurance修改。读取缓存`origin/main`源码确认`source_reader_v2=False`；本轮没有网络live检查，也没有修改RF。
+- 这让S5下一动作更明确：先完成N4-T2与N4C，使新叙述reader有实际Worker产物和RF N3a实样证据；RF默认SourceBundle转换之前不得删除旧normalized/summary/sections或span。旧写者代码退役、物理文件清理、DB span收缩分别保留为不同的大节点。本轮为PWF只读收据，未改生产代码或数据。

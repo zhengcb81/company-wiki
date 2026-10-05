@@ -415,3 +415,10 @@ Git写入/联网用正常用户，sandbox .git只读不是产品权限。测试�
 - IR SHA前缀 `3e25aab404a1` 默认扫描复现旧样本57 units/2,350字符，表格完整扫描为67/4,689字符且coverage complete；完整扫描后仍零candidate。已有new-business/overseas主题的3个PDF group同时含进度与时间线索、并命中特定行动词，但不命中high-value-event；候选资格仅对 `industry_dynamics` 放行progress+recency，确认是业务/出海叙述选材漏检。
 - 季报SHA前缀 `37f0eb13fc97` 完整扫描为13页、192 units/11,645字符、零解析错误/opaque、coverage complete；当前7个主题类和事件模式均零命中，仍有少量宽泛进展/时间词。它不能仅因“当前词典零命中”就安全skip，应由扩展后的测试证明何时是真正无业务叙述。
 - N4-T2须补具象业务进展 fallback、中文四类别及titleless kind-fallback合成测试，并对每个选中span执行locator replay；不扩大仅按零候选自动skip的类型范围。代码仍无改动，N4-T2仍awaiting delivery，MAIN后续做真实Worker/N3a/P4验收。
+
+## 2026-10-05 — S5旧写者调用面与RF默认读取复核
+
+- CWP当前 `master@5cabe47` 与 `origin/master` 同步，唯一未提交改动仍是用户的 `config/source_acquisition.yaml`。本地refs、linked worktrees及可见Codex任务列表均未出现N4-T2交付；这不能证明外部 harness 已停止，因此不复制或修改该卡专属的selector文件。
+- CWP CodeGraph确认 `SourceCatalog` 仍暴露 `normalize/summarize/summarize_with_llm` 包装方法；针对 `src/` 和 `scripts/` 的精确引用核验未发现生产代码直接调用这些包装方法，旧合同/单测仍直接调用。service wrapper仍连到旧normalizer、summarizer和LLM summarizer；后者以及`section_extractor.py`仍经`read_verified_normalized_text`打开物理normalized正文。CodeGraph同名调用关系有歧义，故不把其“零caller”单独当作退役证据；结论以源码引用核验和RF合同共同约束。
+- RF当前本地只读refs为 `main@6fb2def7`、`fcap@5319ee26`、缓存 `origin/main@8a153f33`。owner工作树3,835项tracked变化由3,833项 `.planning/.../execution_runs`删除与2项`assurance/runs/weekly_{alert,manifest}.json`修改构成，全部保持原样。只读检查缓存 `origin/main:scripts/source_preparation.py` 确认 `source_reader_v2` 默认 `false`；本轮未做live fetch，所以不将该缓存SHA称为实时远端HEAD。
+- 当前安全实施边界：N4-T2交付后先完成N4C真实有限Worker及RF N3a消费验证；RF owner切换默认SourceBundle路线之前，保留normalized/summary/sections文件、可读句柄和DB span。后续退役生成器与删除文件分为两个不同动作；旧文件reader迁移与EvidenceSpan表收缩也分开验收。无RF/CWP生产数据改动。

@@ -23,6 +23,8 @@
 
 **N4-T2真实来源基线：**正式只读复核已证实IR默认解析57 units/2,350字符后表格完整扫描为67/4,689字符，完整覆盖仍零候选；现有3个IR group同时出现业务/出海主题、进展、时间和具体行动，但候选规则只放行industry进展+时间组合。季报完整扫描13页/192 units/11,645字符后仍零既有主题命中，不能以旧词典零命中直接宣称可安全skip。见[诊断收据](harness_lanes/results/n4t2_real_source_diagnostic_2026-10-05.md)。N4-T2仍待交付；交付后联合N4-T1验收中文四类动态、titleless kind-fallback、金融表/套话负例和每个选中span的locator replay，再跑N4C真实Worker批次。
 
+**S5旧写者与RF依赖核验（2026-10-05）：**CWP `SourceCatalog` 仍公开 `normalize/summarize/summarize_with_llm` 包装方法，底层旧normalizer、extractive/LLM summarizer与section extractor仍在；针对 `src/` 和 `scripts/` 的精确引用检索没有发现业务入口直接调用这些包装方法，旧合同测试仍大量调用。`llm_summarizer.py`、`summarizer.py`、`section_extractor.py` 仍经 `read_verified_normalized_text` 读取物理normalized正文。RF缓存 `origin/main@8a153f3` 的 `source_reader_v2` 默认值仍是 `false`，旧SourceBundle仍承担默认读取。故先在N4C验证新叙述产物，再由RF owner切换并验默认消费；之前保留旧reader、artifact句柄和文件，不能把“CWP没有自动Worker”当成“RF已不读旧产物”。RF当前本地 `main@6fb2def`、`fcap@5319ee2` 与缓存 `origin/main@8a153f3` 不同；工作树有3,835项tracked变化（3,833项历史execution_runs删除、2项assurance文件修改），均为owner状态，本线不清理/修改。本轮未做live fetch。
+
 ## 当前基线（2026-10-04正常用户上下文复核）
 
 | 项目 | 已发布/已验收事实 | 本机状态与本轮边界 |
