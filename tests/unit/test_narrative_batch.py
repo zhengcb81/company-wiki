@@ -100,6 +100,25 @@ def test_batch_identity_includes_catalog_metadata_and_read_policy():
     assert module.build_batch_events(request, reader, now="2026-10-03T10:00:00Z").input_hash != first.input_hash
 
 
+def test_current_selection_never_reuses_pre_n4t2_batch_hash(monkeypatch):
+    # Published 0.2.0 predates the Chinese business-progress/empty-result fix.
+    # Reusing its run identity would silently retain old selected evidence.
+    request_module = importlib.import_module(
+        "company_wiki.automation.narrative_batch_request"
+    )
+    module = _module()
+    request, reader = _request(), Reader()
+    current = module.build_batch_events(request, reader, now="2026-10-05T12:00:00Z")
+    with monkeypatch.context() as legacy:
+        legacy.setattr(request_module, "NARRATIVE_SELECTOR_VERSION", "0.2.0")
+        previous = module.build_batch_events(
+            request, reader, now="2026-10-05T12:00:00Z"
+        )
+
+    assert current.input_hash != previous.input_hash
+    assert current.events[0].event_id != previous.events[0].event_id
+
+
 def test_batch_infers_missing_language_from_verified_source_bytes_and_pins_it():
     body = (
         "Full Conference Call Transcript\nCEO: 公司完成海外产能扩张，"

@@ -147,5 +147,7 @@ def test_english_financial_table_remains_dropped_and_business_milestone_stays_se
 
 
 def test_recall_semantics_are_versioned_without_changing_source_parser():
-    assert NARRATIVE_SELECTOR_VERSION == "0.2.0"
+    # English milestone recall started in 0.2.0; later recall improvements
+    # retain the same parser/locators and are covered by the behavior tests.
+    assert tuple(int(part) for part in NARRATIVE_SELECTOR_VERSION.split(".")) >= (0, 2, 0)
     assert NARRATIVE_PARSER_VERSION == "0.1.0"

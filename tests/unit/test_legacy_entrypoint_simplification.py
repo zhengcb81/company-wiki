@@ -9,7 +9,9 @@ Frames the card's behaviour contract before the implementation change:
   LLM, network or write initialization, with or without ``python -S``;
 * the six completed one-off retirement tools and their dedicated test chain
   are gone from the tree, with no remaining import chain;
-* deletions stay inside the card's planned Git path set.
+
+The one-off card's Git write-set/deletion audit belongs in its delivery
+receipt. It must not constrain unrelated work or a user's dirty checkout.
 """
 
 from __future__ import annotations
@@ -88,20 +90,6 @@ REMOVED_MODULE_TOKENS = (
     "retire_derived_archives",
     "derived_archive_fixture",
 )
-
-# Card write set: everything this card may modify/add, besides REMOVED_PATHS.
-ALLOWED_GIT_PATHS = frozenset(
-    {
-        "scripts/writer_policy.py",
-        "scripts/sitecustomize.py",
-        "scripts/common.py",
-        "tests/unit/test_writer_freeze.py",
-        "tests/unit/test_common.py",
-        "tests/unit/test_legacy_entrypoint_simplification.py",
-        "docs/implementation/g1-legacy-entry-retirement-handoff.md",
-    }
-)
-ALLOWED_GIT_PREFIXES = (".planning/g1-legacy-entry-retirement-20261004/",)
 
 # Pre-existing defects outside this card's write set: the guard is
 # unreachable because module-level third-party imports fail first.  The
@@ -525,59 +513,6 @@ def test_one_off_retirement_tools_left_no_import_chain() -> None:
                 if token in source:
                     hits.append(f"{path.relative_to(ROOT).as_posix()}:{token}")
     assert not hits, hits
-
-
-def test_git_changes_stay_inside_the_card_write_set() -> None:
-    completed = subprocess.run(
-        ["git", "status", "--porcelain"],
-        cwd=ROOT,
-        capture_output=True,
-        text=True,
-        encoding="utf-8",
-        errors="replace",
-        timeout=30,
-        check=False,
-    )
-    assert completed.returncode == 0, completed.stderr
-    unexpected: list[str] = []
-    for line in completed.stdout.splitlines():
-        if not line.strip():
-            continue
-        code, path = line[:2], line[3:].strip().strip('"')
-        is_deletion = "D" in code
-        allowed = (
-            path in REMOVED_PATHS
-            or path in ALLOWED_GIT_PATHS
-            or path == ".planning/"
-            or any(path.startswith(prefix) for prefix in ALLOWED_GIT_PREFIXES)
-        )
-        if not allowed:
-            unexpected.append(f"[{code}] {path} ({'delete' if is_deletion else 'change'})")
-    assert not unexpected, unexpected
-
-
-def test_deletions_are_limited_to_the_planned_code_paths() -> None:
-    completed = subprocess.run(
-        ["git", "status", "--porcelain"],
-        cwd=ROOT,
-        capture_output=True,
-        text=True,
-        encoding="utf-8",
-        errors="replace",
-        timeout=30,
-        check=False,
-    )
-    assert completed.returncode == 0, completed.stderr
-    deleted = {
-        line[3:].strip().strip('"')
-        for line in completed.stdout.splitlines()
-        if line[:2].replace(" ", "") == "D"
-    }
-    assert deleted <= set(REMOVED_PATHS), deleted - set(REMOVED_PATHS)
-    # Production retirement records are not Git-tracked here; the card only
-    # removes code inside this worktree.
-    for path in deleted:
-        assert path.startswith(("scripts/", "tests/")), path
 
 
 # ── dynamic exit contract (plain and python -S) ───────────────────────────
