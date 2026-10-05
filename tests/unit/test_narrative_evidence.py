@@ -23,6 +23,7 @@ from company_wiki.source_catalog.narrative_evidence import (
     verify_pdf_evidence_spans,
     verify_transcript_evidence_spans,
 )
+from company_wiki.source_catalog.narrative_replay import verify_replayed_pdf_spans
 from company_wiki.source_contract import EvidenceCoordinates, source_id_for_sha256
 
 
@@ -169,7 +170,11 @@ def test_financial_table_rows_are_dropped_but_business_rows_are_selected() -> No
     assert package.evidence_spans[0].coordinates.row_index == 2
 
 
-def test_incomplete_scan_never_auto_skips_as_no_narrative() -> None:
+@pytest.mark.parametrize(
+    "title",
+    ("投资者关系管理办法.pdf", "2026年第一季度报告.pdf"),
+)
+def test_incomplete_scan_never_auto_skips_as_no_narrative(title: str) -> None:
     source_id, source_sha = _source()
     parsed = NarrativeParseResult(
         source_id=source_id,
@@ -180,7 +185,7 @@ def test_incomplete_scan_never_auto_skips_as_no_narrative() -> None:
         pages_read=7,
         opaque_pages=(4,),
     )
-    package = select_narrative_evidence(parsed, title="投资者关系管理办法.pdf")
+    package = select_narrative_evidence(parsed, title=title)
     assert package.status == "needs_review"
     assert not package.coverage_complete
 
@@ -201,6 +206,23 @@ def test_complete_known_notice_can_be_skipped_without_saving_evidence() -> None:
     )
     assert package.status == "skipped_no_narrative"
     assert package.evidence_spans == ()
+
+
+def test_complete_unknown_document_with_no_candidates_requires_review() -> None:
+    source_id, source_sha = _source("n4t2:unknown")
+    parsed = NarrativeParseResult(
+        source_id=source_id,
+        source_sha256=source_sha,
+        language="zh",
+        units=(),
+        page_count=1,
+        pages_read=1,
+    )
+
+    package = select_narrative_evidence(parsed, title="unclassified.pdf")
+
+    assert package.status == "needs_review"
+    assert package.coverage_complete is True
 
 
 def test_semiannual_title_is_not_misclassified_as_annual() -> None:
@@ -413,6 +435,7 @@ def test_static_topic_mentions_are_not_selected_without_a_change_or_current_even
 
     assert package.evidence_spans == ()
     assert package.status == "needs_review"
+    assert package.coverage_complete is True
 
 
 def test_specific_emerging_business_positions_are_selected_without_generic_product_noise() -> None:
@@ -450,6 +473,141 @@ def test_specific_emerging_business_positions_are_selected_without_generic_produ
         "specific_emerging_business_positioning" in span.structured_value["selection_reasons"]
         for span in package.evidence_spans
     )
+
+
+@pytest.mark.parametrize(
+    ("text", "document_kind", "expected_topic"),
+    (
+        (
+            "2025年报告期，行业供需格局持续收紧，客户验证周期明显缩短。",
+            "quarterly_report",
+            "industry_dynamics",
+        ),
+        (
+            "报告期内，公司主营业务的交付效率持续提升。",
+            "quarterly_report",
+            "core_business",
+        ),
+        (
+            "截至2025年，公司第二曲线业务的商业化能力持续提升。",
+            "investor_relations",
+            "new_business",
+        ),
+        (
+            "报告期内，公司募投项目的建设进度持续加快。",
+            "quarterly_report",
+            "capacity_projects",
+        ),
+        (
+            "2025年报告期，公司海外市场本地化服务响应能力持续提升。",
+            "investor_relations",
+            "overseas",
+        ),
+    ),
+)
+def test_current_operating_progress_is_selected_for_titleless_known_documents(
+    text: str, document_kind: str, expected_topic: str
+) -> None:
+    source_id, source_sha = _source(f"n4t2:{document_kind}:{expected_topic}")
+    unit = _unit(
+        text,
+        source_id=source_id,
+        coords=EvidenceCoordinates(page_number=7, paragraph_index=2),
+    )
+    parsed = NarrativeParseResult(
+        source_id=source_id,
+        source_sha256=source_sha,
+        language="zh",
+        units=(unit,),
+        page_count=9,
+        pages_read=9,
+    )
+
+    package = select_narrative_evidence(
+        parsed,
+        title="",
+        existing_kind=document_kind,
+    )
+
+    assert package.document_kind == document_kind
+    assert package.status == "selected"
+    assert len(package.evidence_spans) == 1
+    span = package.evidence_spans[0]
+    assert span.source_id == source_id
+    assert span.coordinates.page_number == 7
+    assert expected_topic in span.structured_value["topics"]
+    verified, failed = verify_replayed_pdf_spans(package.evidence_spans, parsed.units)
+    assert verified == (span.span_id,)
+    assert failed == ()
+
+
+@pytest.mark.parametrize(
+    "text",
+    (
+        "报告期内，公司持续关注海外市场动态，积极做好主营业务经营管理。",
+        "公司主营业务是指高端装备研发、生产和销售，海外市场是公司未来的发展方向。",
+        "主营业务进展……………………12",
+    ),
+)
+def test_complete_report_with_boilerplate_static_background_or_contents_requires_review(
+    text: str,
+) -> None:
+    source_id, source_sha = _source(f"n4t2:negative:{text}")
+    unit = _unit(
+        text,
+        source_id=source_id,
+        coords=EvidenceCoordinates(page_number=1, paragraph_index=0),
+    )
+    parsed = NarrativeParseResult(
+        source_id=source_id,
+        source_sha256=source_sha,
+        language="zh",
+        units=(unit,),
+        page_count=1,
+        pages_read=1,
+    )
+
+    package = select_narrative_evidence(
+        parsed,
+        title="",
+        existing_kind="quarterly_report",
+    )
+
+    assert package.evidence_spans == ()
+    assert package.status == "needs_review"
+    assert package.coverage_complete is True
+
+
+def test_complete_quarterly_financial_table_can_skip_as_non_narrative() -> None:
+    source_id, source_sha = _source("n4t2:financial")
+    financial = _unit(
+        "营业收入 | 100.0亿元",
+        source_id=source_id,
+        coords=EvidenceCoordinates(page_number=1, table_index=0, row_index=1),
+        kind="pdf_table_row",
+        metadata={
+            "row_cells": ("营业收入", "100.0亿元"),
+            "table_headers": ("项目", "本期发生额"),
+        },
+    )
+    parsed = NarrativeParseResult(
+        source_id=source_id,
+        source_sha256=source_sha,
+        language="zh",
+        units=(financial,),
+        page_count=1,
+        pages_read=1,
+    )
+
+    package = select_narrative_evidence(
+        parsed,
+        title="",
+        existing_kind="quarterly_report",
+    )
+
+    assert package.evidence_spans == ()
+    assert package.dropped_financial_count == 1
+    assert package.status == "skipped_no_narrative"
 
 
 def test_capacity_risk_and_operating_permit_milestones_are_selected() -> None:

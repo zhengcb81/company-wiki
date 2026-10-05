@@ -39,25 +39,29 @@ from company_wiki.source_contract import EvidenceCoordinates, source_id_for_sha2
 
 
 @pytest.mark.parametrize(
-    ("title", "existing_kind", "expected_kind", "expected_limit"),
+    ("title", "existing_kind", "expected_kind", "expected_limit", "expected_skip"),
     (
-        ("2025年度报告.pdf", "unknown", "annual_report", 96),
-        ("2026年半年度报告.pdf", "unknown", "semi_annual_report", 96),
-        ("2026年第一季度报告.pdf", "unknown", "quarterly_report", 96),
-        ("首次公开发行招股说明书.pdf", "unknown", "prospectus", 160),
+        ("2025年度报告.pdf", "unknown", "annual_report", 96, False),
+        ("2026年半年度报告.pdf", "unknown", "semi_annual_report", 96, False),
+        ("2026年第一季度报告.pdf", "unknown", "quarterly_report", 96, False),
+        ("首次公开发行招股说明书.pdf", "unknown", "prospectus", 160, False),
         (
             "向特定对象发行股票募集说明书.pdf",
             "unknown",
             "equity_offering_prospectus",
             160,
+            False,
         ),
         (
             "向不特定对象发行可转换公司债券募集说明书.pdf",
             "unknown",
             "convertible_bond_prospectus",
             160,
+            False,
         ),
-        ("2026_Q2_earnings_call.txt", "unknown", "investor_call_transcript", 96),
+        ("2026_Q2_earnings_call.txt", "unknown", "investor_call_transcript", 96, False),
+        ("", "earnings_call_transcript", "earnings_call_transcript", 96, False),
+        ("other.pdf", "unknown", "unknown", 96, False),
     ),
 )
 def test_route_document_owns_kind_and_default_budget(
@@ -65,12 +69,13 @@ def test_route_document_owns_kind_and_default_budget(
     existing_kind: str,
     expected_kind: str,
     expected_limit: int,
+    expected_skip: bool,
 ) -> None:
     route = route_document(title, existing_kind=existing_kind)
 
     assert route.document_kind == expected_kind
     assert route.selection_limit == expected_limit
-    assert route.empty_result_may_skip is False
+    assert route.empty_result_may_skip is expected_skip
 
 
 @pytest.mark.parametrize(
@@ -78,14 +83,31 @@ def test_route_document_owns_kind_and_default_budget(
     (
         "投资者关系管理办法（2025年8月）.pdf",
         "关于召开2025年度业绩说明会的通知.pdf",
+        "2025年度报告.pdf",
+        "2026年半年度报告.pdf",
+        "2026年第一季度报告.pdf",
+        "投资者关系活动记录.pdf",
+        "招股说明书.pdf",
+        "可转债募集说明书.pdf",
+        "向特定对象发行股票募集说明书.pdf",
+        "2026_Q2_earnings_call.txt",
     ),
 )
-def test_only_known_format_documents_may_skip_after_complete_coverage(
+def test_empty_results_skip_only_for_administrative_ir_documents(
     title: str,
 ) -> None:
     route = route_document(title)
 
-    assert route.empty_result_may_skip is True
+    assert route.empty_result_may_skip is (
+        route.document_kind in {"ir_policy", "meeting_notice"}
+    )
+
+
+def test_unknown_document_route_cannot_auto_skip_an_empty_result() -> None:
+    route = route_document("unclassified.pdf")
+
+    assert route.document_kind == "unknown"
+    assert route.empty_result_may_skip is False
 
 
 def test_route_document_keeps_explicit_budget_and_rejects_invalid_values() -> None:
@@ -343,6 +365,42 @@ def test_candidate_engine_reports_financial_drop_without_candidate() -> None:
     assert assessment.dropped_financial is True
 
 
+@pytest.mark.parametrize(
+    ("text", "expected_candidate"),
+    (
+        ("报告期内，主营业务的交付效率持续提升。", True),
+        ("报告期内，主营业务持续关注海外市场动态。", False),
+        ("主营业务的交付效率持续提升。", False),
+    ),
+)
+def test_candidate_engine_requires_specific_action_and_recency_for_business_progress(
+    text: str, expected_candidate: bool
+) -> None:
+    source_id = source_id_for_sha256("d" * 64)
+    unit = _make_unit(
+        source_id=source_id,
+        parser_version="0.1.0",
+        coordinates=EvidenceCoordinates(page_number=4, paragraph_index=1),
+        raw_text=text,
+        unit_kind="pdf_text_block",
+        source_role="company_filing",
+        language="zh",
+        metadata={},
+    )
+    rules = CandidateRules(
+        topics=lambda _text: ("core_business",),
+        progress=re.compile(r"持续|提升"),
+        recency=re.compile(r"报告期"),
+        business_progress_action=re.compile(r"交付效率.{0,12}提升"),
+    )
+
+    assessment = assess_unit(unit, rules)
+
+    assert (assessment.candidate is not None) is expected_candidate
+    if assessment.candidate is not None:
+        assert "current_business_progress" in assessment.candidate.reasons
+
+
 def test_section_context_is_bounded_by_the_next_heading() -> None:
     digest = "d" * 64
     source_id = source_id_for_sha256(digest)
@@ -528,3 +586,21 @@ def test_finalize_deduplicates_pdf_views_and_prefers_table_locator() -> None:
     assert len(package.evidence_spans) == 1
     assert package.evidence_spans[0].structured_value["unit_kind"] == "pdf_table_row"
 
+
+@pytest.mark.parametrize(
+    ("title", "existing_kind"),
+    (
+        ("2025年度报告.pdf", "unknown"),
+        ("2026年半年度报告.pdf", "unknown"),
+        ("2026年第一季度报告.pdf", "unknown"),
+        ("投资者关系活动记录.pdf", "unknown"),
+        ("首次公开发行招股说明书.pdf", "unknown"),
+        ("", "investor_call_transcript"),
+    ),
+)
+def test_business_documents_with_zero_candidates_remain_reviewable(
+    title: str, existing_kind: str
+) -> None:
+    route = route_document(title, existing_kind=existing_kind)
+
+    assert route.empty_result_may_skip is False

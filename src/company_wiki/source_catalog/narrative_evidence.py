@@ -115,6 +115,24 @@ _PROGRESS = re.compile(
     r"delivered|planned|expected|progressed|increased|grew|commercialized",
     re.IGNORECASE,
 )
+_BUSINESS_PROGRESS_ACTION = re.compile(
+    r"(?:"
+    r"(?:主营业务|核心业务|业务线|第二曲线|新业务|新兴业务|新产品|产品线|产品|"
+    r"募投项目|项目|产线|产能|海外市场|境外市场|国际市场|海外客户|境外客户|"
+    r"客户|订单|交付效率|交付量|本地化服务|服务能力|服务网络|商业化|建设进度|"
+    r"验证周期|研发进展|市场覆盖|渠道|团队)"
+    r".{0,20}(?:提升|增长|改善|扩大|加快|缩短|收紧|增强|下降|加速|增加|上升|"
+    r"完成|建成|投产|量产|试产|交付|获得|取得|通过|新增|进入|拓展|落地|上线|"
+    r"扩建|开拓|实现|签约|签订|获批|导入|验证|认证|扩容)|"
+    r"(?:完成|建成|投产|量产|试产|交付|获得|取得|通过|新增|进入|拓展|落地|"
+    r"上线|扩建|开拓|实现|签约|签订|获批|导入|验证|认证|扩容)"
+    r".{0,20}(?:主营业务|核心业务|业务线|第二曲线|新业务|新兴业务|新产品|产品线|"
+    r"产品|募投项目|项目|产线|产能|海外市场|境外市场|国际市场|海外客户|境外客户|"
+    r"客户|订单|交付效率|交付量|本地化服务|服务能力|服务网络|商业化|建设进度|"
+    r"验证周期|研发进展|市场覆盖|渠道|团队)"
+    r")",
+    re.IGNORECASE,
+)
 _RECENCY = re.compile(
     r"(?:20\d{2}\s*年|本期|报告期|当年|本年度|近期|目前|截至|当前|最新|"
     r"year|quarter|recent|currently|as of|latest|during the period)",
@@ -1290,6 +1308,7 @@ def _candidate_rules() -> CandidateRules:
         business_risk=_BUSINESS_RISK_SIGNAL,
         project_rationale=_PROJECT_RATIONALE_SIGNAL,
         progress=_PROGRESS,
+        business_progress_action=_BUSINESS_PROGRESS_ACTION,
         direct_capacity_constraint=_DIRECT_CAPACITY_CONSTRAINT,
         long_customer_qualification=_LONG_CUSTOMER_QUALIFICATION,
         project_certification_timeline=_PROJECT_CERTIFICATION_TIMELINE,

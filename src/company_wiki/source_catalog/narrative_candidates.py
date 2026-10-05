@@ -15,6 +15,16 @@ _NEVER = re.compile(r"(?!x)x")
 _EXCLUDED_ROLES = frozenset(
     {"analyst", "investor_question", "operator", "editorial", "qa_text_shadow"}
 )
+_CURRENT_BUSINESS_TOPICS = frozenset(
+    {
+        "core_business",
+        "new_business",
+        "overseas",
+        "products_rd",
+        "capacity_projects",
+        "orders_customers",
+    }
+)
 
 
 def _no_topics(_text: str) -> tuple[str, ...]:
@@ -37,6 +47,7 @@ class CandidateRules:
     business_risk: re.Pattern[str] = _NEVER
     project_rationale: re.Pattern[str] = _NEVER
     progress: re.Pattern[str] = _NEVER
+    business_progress_action: re.Pattern[str] = _NEVER
     direct_capacity_constraint: re.Pattern[str] = _NEVER
     long_customer_qualification: re.Pattern[str] = _NEVER
     project_certification_timeline: re.Pattern[str] = _NEVER
@@ -77,6 +88,7 @@ class _Signals:
     project_rationale: bool
     downstream_extension: bool
     current_industry: bool
+    current_business_progress: bool
     project: bool
 
 
@@ -100,6 +112,12 @@ def _signals(text: str, topics: tuple[str, ...], rules: CandidateRules) -> _Sign
         downstream_extension=_match(rules.downstream_extension, text),
         current_industry=(
             "industry_dynamics" in topics and _match(rules.recency, text)
+        ),
+        current_business_progress=(
+            bool(_CURRENT_BUSINESS_TOPICS.intersection(topics))
+            and _match(rules.progress, text)
+            and _match(rules.recency, text)
+            and _match(rules.business_progress_action, text)
         ),
         project=any(
             (
@@ -145,6 +163,7 @@ def _eligible(signals: _Signals) -> bool:
         signals.project_rationale,
         signals.project_certification_timeline,
         signals.progress and signals.current_industry,
+        signals.current_business_progress,
     )
     return any(core)
 
@@ -174,6 +193,7 @@ def _reasons(signals: _Signals, source_role: str) -> tuple[str, ...]:
         (signals.downstream_extension, "downstream_business_extension"),
         (signals.project, "project_plan_or_status"),
         (signals.current_industry, "current_industry_context"),
+        (signals.current_business_progress, "current_business_progress"),
         (source_role == "management", "management_statement"),
     )
     return (

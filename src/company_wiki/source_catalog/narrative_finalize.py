@@ -113,6 +113,7 @@ def _status(
     route: DocumentRoute,
     spans: tuple[EvidenceSpan, ...],
     omitted: int,
+    dropped_financial_count: int,
 ) -> SelectionStatus:
     if spans and any("locator_unstable" in span.quality_flags for span in spans):
         return "needs_review"
@@ -122,6 +123,8 @@ def _status(
         return "blocked"
     if not structure.coverage_complete:
         return "needs_review"
+    if structure.units and dropped_financial_count == len(structure.units):
+        return "skipped_no_narrative"
     return "skipped_no_narrative" if route.empty_result_may_skip else "needs_review"
 
 
@@ -151,7 +154,9 @@ def finalize_selection(
         source_id=structure.source_id,
         source_sha256=structure.source_sha256,
         document_kind=route.document_kind,
-        status=_status(structure, route, spans, omitted),
+        status=_status(
+            structure, route, spans, omitted, dropped_financial_count
+        ),
         evidence_spans=spans,
         selection_limit=route.selection_limit,
         candidate_count=len(deduplicated),

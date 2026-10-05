@@ -24,6 +24,9 @@ _DOCUMENT_KIND_PATTERNS = (
 _PROSPECTUS_KINDS = frozenset(
     {"prospectus", "convertible_bond_prospectus", "equity_offering_prospectus"}
 )
+# Only administrative IR policies and meeting notices may skip an empty result
+# based on document kind. Business-bearing filings remain reviewable because a
+# complete scan does not prove the selector vocabulary covers every narrative.
 _EMPTY_SKIP_KINDS = frozenset({"ir_policy", "meeting_notice"})
 
 
