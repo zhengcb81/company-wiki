@@ -19,7 +19,7 @@ import json
 import sys
 from pathlib import Path
 
-from legacy_storage.core import write_json
+from legacy_storage.core import directed_inside, normalized, write_json
 from legacy_storage.shrink import run_vacuum
 from legacy_storage.spans import run_prune_spans
 from legacy_storage.retirement import run_retire_derived, _load_manifest
@@ -61,6 +61,16 @@ def main(argv: list[str] | None = None) -> int:
 
     args = parser.parse_args(argv)
     config = _load_config(args.config)
+    target = getattr(args, "output", None) or getattr(args, "receipt", None)
+    if target is not None and (
+        normalized(target) == normalized(args.config)
+        or any(normalized(target) == normalized(root) or directed_inside(target, root)
+               for root in (Path(config.catalog_dir), *(r.path for r in config.roots)))
+    ):
+        sys.stderr.write(json.dumps({"schema_version": REPORT_SCHEMA,
+                                    "operation": args.operation, "status": "refused",
+                                    "error_code": "report_path_overlaps_data"}) + "\n")
+        return 2
 
     if args.operation == "inventory":
         from legacy_storage.inventory import run_inventory
@@ -69,7 +79,7 @@ def main(argv: list[str] | None = None) -> int:
         if args.output is not None:
             result.write_manifest(args.output)
         _emit(args.output, result.report, args.config)
-        return 0
+        return 0 if result.report["status"] == "succeeded" else 2
 
     if args.operation == "retire-derived":
         manifest = _load_manifest(args.manifest)
@@ -81,10 +91,10 @@ def main(argv: list[str] | None = None) -> int:
         selection = json.loads(args.selection.read_text(encoding="utf-8"))
         keep_refs = []
         if args.keep_refs is not None:
-            for line in Path(args.keep_refs).read_text(encoding="utf-8").splitlines():
-                line = line.strip()
-                if line:
-                    keep_refs.append(json.loads(line))
+            with Path(args.keep_refs).open(encoding="utf-8") as stream:
+                for line in stream:
+                    if line.strip():
+                        keep_refs.append(json.loads(line))
         report = run_prune_spans(
             config, selection, keep_refs=keep_refs, dry_run=not args.apply
         )
@@ -107,7 +117,7 @@ def _emit(output_ms, manifest, config_path) -> None:
             "schema_version": REPORT_SCHEMA,
             "manifest_emitted": None if output_ms is None else str(output_ms),
             "operation": "inventory",
-            "status": "succeeded",
+            "status": manifest["status"],
         },
         sort_keys=True,
     )

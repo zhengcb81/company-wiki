@@ -5,7 +5,7 @@ from __future__ import annotations
 import hashlib
 import json
 import os
-from contextlib import contextmanager
+from contextlib import contextmanager, nullcontext
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Iterator
@@ -73,7 +73,12 @@ def read_connection(database_path: Path) -> Iterator["object"]:
     db = Path(database_path)
     if not db.is_file():
         raise FileNotFoundError(f"database not found: {db}")
+    wal, shm = Path(str(db) + "-wal"), Path(str(db) + "-shm")
+    if wal.exists() and not shm.is_file():
+        raise sqlite3.OperationalError("catalog WAL requires existing shared memory for readonly access")
     uri = db.resolve().as_uri() + "?mode=ro"
+    if not wal.exists():
+        uri += "&immutable=1"
     connection = sqlite3.connect(uri, uri=True, timeout=30.0)
     try:
         connection.execute("PRAGMA query_only=ON")
@@ -124,8 +129,8 @@ def tree_stats(root: Path) -> dict[str, int]:
     return {"files": count, "bytes": total}
 
 
-def db_numbers(database_path: Path) -> dict[str, int]:
-    with read_connection(database_path) as conn:
+def db_numbers(database_path: Path, *, connection=None) -> dict[str, int]:
+    with (nullcontext(connection) if connection is not None else read_connection(database_path)) as conn:
         page_count = int(conn.execute("PRAGMA page_count").fetchone()[0])
         freelist = int(conn.execute("PRAGMA freelist_count").fetchone()[0])
         page_size = int(conn.execute("PRAGMA page_size").fetchone()[0])
@@ -157,7 +162,12 @@ def canonical_row_text(cursor, row) -> str:
 
 def table_digest(connection, table: str) -> dict[str, object]:
     """Streaming deterministic count+digest for one table (never loads raw text)."""
-    cursor = connection.execute(f"SELECT * FROM {table}")
+    quoted = '"' + table.replace('"', '""') + '"'
+    columns = list(connection.execute(f"PRAGMA table_info({quoted})"))
+    # Explicit stable order, including tables whose ROWID is repacked by VACUUM.
+    ordered = sorted((column for column in columns if column[5]), key=lambda column: column[5]) or columns
+    order_sql = ",".join('"' + column[1].replace('"', '""') + '"' for column in ordered)
+    cursor = connection.execute(f"SELECT * FROM {quoted} ORDER BY {order_sql}")
     digest = hashlib.sha256()
     count = 0
     while True:
@@ -187,10 +197,10 @@ def _classify_tables(connection, names: tuple[str, ...]) -> dict[str, tuple[str,
     }
 
 
-def source_facts(database_path: Path) -> dict[str, dict[str, object]]:
+def source_facts(database_path: Path, *, connection=None) -> dict[str, dict[str, object]]:
     """Deterministic per-table count/digest over source-fact + protected tables."""
     result: dict[str, dict[str, object]] = {}
-    with read_connection(database_path) as connection:
+    with (nullcontext(connection) if connection is not None else read_connection(database_path)) as connection:
         names = tuple(
             row[0]
             for row in connection.execute(
@@ -228,9 +238,9 @@ def facts_overview(database_path: Path) -> dict[str, object]:
     return overview
 
 
-def protected_objects(database_path: Path, catalog_dir: Path) -> dict[str, object]:
+def protected_objects(database_path: Path, catalog_dir: Path, *, connection=None) -> dict[str, object]:
     """New narrative finals + raw originals summary (numbers only, no contents)."""
-    with read_connection(database_path) as connection:
+    with (nullcontext(connection) if connection is not None else read_connection(database_path)) as connection:
         new_finals = [
             {
                 "artifact_version_id": row[0],
@@ -247,8 +257,9 @@ def protected_objects(database_path: Path, catalog_dir: Path) -> dict[str, objec
         originals = connection.execute(
             "SELECT COUNT(*) FROM locations WHERE role='original_primary'"
         ).fetchone()[0]
-    objects_root = catalog_dir / "objects"
-    objects_stats = tree_stats(objects_root)
+    roots = (catalog_dir / "objects", catalog_dir / "artifacts" / "objects")
+    measured = [tree_stats(root) for root in roots]
+    objects_stats = {key: sum(item[key] for item in measured) for key in ("bytes", "files")}
     return {
         "new_final_items": new_finals,
         "new_final_count": len(new_finals),

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from contextlib import closing
 import sqlite3
 from datetime import UTC, datetime
 from pathlib import Path
@@ -34,21 +35,22 @@ def test_vacuum_measures_real_physical_release(tmp_path: Path) -> None:
     # generate logical free pages for a measurable release
     conn = sqlite3.connect(config.database_path)
     with conn:
-        for _ in range(50):
+        for number in range(200):
             conn.execute(
                 "INSERT OR REPLACE INTO entities (entity_id, name, entity_kind)"
                 " VALUES (?, ?, ?)",
-                (f"e-{_now().timestamp()}", "x", "company"),
+                (f"e-{number}", "x" * 2048, "company"),
             )
         for _ in range(50):
-            conn.execute("DELETE FROM entities WHERE name='x'")
+            conn.execute("DELETE FROM entities WHERE entity_id LIKE 'e-%'")
     conn.close()
     report = run_vacuum(config, now=_now())
     assert report["status"] == "succeeded"
     assert report["operation"] == "vacuum"
     assert report["freelist_after"] == 0
-    assert report["freelist_before"] >= 0
-    assert report["database_bytes_after"] <= report["database_bytes_before"]
+    assert report["freelist_before"] > 0
+    assert report["database_bytes_after"] < report["database_bytes_before"]
+    assert report["database_file_bytes_released"] > 0
     assert report["page_count_before"] >= report["page_count_after"]
     assert report["foreign_key_check"] == []
     assert report["integrity_check"] == "ok"
@@ -59,7 +61,7 @@ def test_vacuum_measures_real_physical_release(tmp_path: Path) -> None:
 def test_vacuum_preserves_source_facts_and_raw_files(tmp_path: Path) -> None:
     config, _, _ = build_catalog(tmp_path)
     report = run_vacuum(config, now=_now())
-    with sqlite3.connect(config.database_path) as conn:
+    with closing(sqlite3.connect(config.database_path)) as conn:
         assert conn.execute("SELECT COUNT(*) FROM documents").fetchone()[0] == 2
     assert report["source_facts_after"]["sources"]["count"] == 2
 

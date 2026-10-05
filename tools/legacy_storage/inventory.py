@@ -36,7 +36,6 @@ def run_inventory(config, *, now: datetime | None = None) -> InventoryResult:
     catalog_dir = Path(config.catalog_dir)
     database_path = Path(config.database_path)
     derived_dir = Path(config.derived_dir)
-    objects_stats = tree_stats(catalog_dir / "objects")
 
     facts = source_facts(database_path)
     db_stats = db_numbers(database_path)
@@ -67,8 +66,8 @@ def run_inventory(config, *, now: datetime | None = None) -> InventoryResult:
         "span_total": view["span_total"],
         "span_parser_counts": view["span_parser_counts"],
         "source_facts_table_count": len(facts),
-        "protected_object_bytes": objects_stats["bytes"],
-        "protected_object_files": objects_stats["files"],
+        "protected_object_bytes": protected["object_bytes"],
+        "protected_object_files": protected["object_file_count"],
     }
     manifest = {
         "schema_version": MANIFEST_SCHEMA,

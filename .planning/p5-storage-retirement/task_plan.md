@@ -51,3 +51,12 @@
   (no million-entry set/list/JSON); actual pre/post VACUUM snapshots/disk space;
   protected object root accuracy; consolidated real annual/TXT raw/final E2E.
   Tools NOT ACCEPTED for main or production deletion yet.
+
+## MAIN integration node 2 (2026-10-05)
+
+- 12 real-schema tests first RED/30.75s, then GREEN/28.42s: readonly sidecars/write connection, bounded 1200-paragraph report, actual kept count, malformed scope refusal, actual pre-VACUUM facts, scratch-space checks, runtime object root and deterministic quoted-table digests.
+- Consolidated 47 cases passed/256.28s but E2E teardown failed: fixture retained SourceCatalog cached readonly connection. Registered catalog.close with ExitStack before root deletion. Three CLI output-path REDs/7.68s then fixed; five output/lock/SQL-rollback cases plus exact real annual/MSFT TXT E2E passed/196.98s. Fixture root restored absent; originals and production config SHA unchanged.
+- Real final run: old derived 6,360,944 -> 0 B; 15,962 PDF spans pruned; DB 32,792,576 -> 2,174,976 B, freelist 7473 -> 0; final 24,637 B survives. Public raw CLI checks actual PDF/TXT stdout SHA, narrative CLI does complete replay before/after. These are isolated fixture measurements, not production savings.
+- Post-VACUUM readback failure also first RED; after values must be null/after_measurement_available=false when unavailable. Normal vacuum and failure responsibility tests run once after that repair. No new manual gates, permissions, backups or src/config/DDL changes.
+- Original one-off handoff sample generator removed; historical samples/HANDOFF remain. Tests are integration opt-in; everyday Unit CI unchanged. Tools ready for MAIN integration after final failure-report test receipt; production cleanup waits for actual caller migration.
+- Final post-readback failure + real vacuum responsibility: 6 passed/14.63s. Current tool acceptance is GREEN: 53 distinct cases passed in combined runs (not one 53-case invocation). All six test roots and the earlier failed root restored absent, compact E2E/space receipt lives in MAIN PWF. Ready for normal MAIN merge and publish; no production deletion executed.

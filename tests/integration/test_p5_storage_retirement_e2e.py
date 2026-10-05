@@ -10,7 +10,9 @@ read/replay still work before and after.  Network/model/download calls: 0.
 
 from __future__ import annotations
 
+from contextlib import ExitStack, closing
 import hashlib
+import shutil
 import json
 import os
 import sqlite3
@@ -27,13 +29,12 @@ from company_wiki.source_catalog.summarizer import summarize_catalog
 
 pytestmark = pytest.mark.slow
 
-import subprocess as _subprocess_tool
-
 REPO_ROOT = Path(__file__).resolve().parents[2]
 SRC_DIR = REPO_ROOT / "src"
 TOOLS_DIR = REPO_ROOT / "tools"
 ANNUAL_SHA = "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5"
 PDF_PARSER = "pdf_page_aware_core"
+TRANSCRIPT_SHA = "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a"
 
 
 def _main_repo_annual_report() -> Path:
@@ -68,17 +69,38 @@ def _sha(data: bytes) -> str:
 def mixed_fixture(tmp_path_factory) -> dict:
     pytest.importorskip("fitz")
     annual_path = _main_repo_annual_report()
-    if not annual_path.is_file():
-        pytest.skip("real annual report sample not available on this host")
+    transcript_path = (annual_path.parents[4].parent / "earnings-transcripts" /
+                       "earnings-transcripts/transcripts/MSFT/MSFT_Q4_2026_earnings_call.txt")
+    if not annual_path.is_file() or not transcript_path.is_file():
+        pytest.skip("real annual report and transcript samples unavailable on this host")
     assert _sha(annual_path.read_bytes()) == ANNUAL_SHA
+    assert _sha(transcript_path.read_bytes()) == TRANSCRIPT_SHA
     tmp = tmp_path_factory.mktemp("p5-e2e")
+    try:
+        with ExitStack() as resources:
+            yield _build_mixed_fixture(tmp, annual_path, transcript_path, resources)
+    finally:
+        shutil.rmtree(tmp)
+        assert not tmp.exists()
+        assert _sha(annual_path.read_bytes()) == ANNUAL_SHA
+        assert _sha(transcript_path.read_bytes()) == TRANSCRIPT_SHA
+
+
+def _build_mixed_fixture(tmp, annual_path, transcript_path, resources):
     fixture: dict = {"root": tmp}
 
     # 1) offline narrative fixture (Replay model) -> a REAL new final bundle
-    from support.narrative_transport_fixture import TXT, published_fixture
+    from support.narrative_transport_fixture import published_fixture
+    TXT = transcript_path.read_bytes()
     from integration.test_narrative_runtime_e2e import _new_catalog
 
-    with published_fixture(tmp, kind="txt") as published:
+    transcript_spec = {
+        "name": transcript_path.name, "data": TXT, "title": "Microsoft Q4 2026 earnings call",
+        "document_kind": "investor_call_transcript", "language": "en",
+        "sidecar_overrides": {"canonical_entity_id": "MICROSOFT", "market": "US",
+                              "security_id": "MSFT", "fiscal_year": 2026, "fiscal_period": "Q4"},
+    }
+    with published_fixture(tmp, kind="txt", source_spec=transcript_spec) as published:
         fixture["source_ref"] = published.source_ref.to_dict()
         fixture["expected_source"] = dict(published.expected_source)
         fixture["bundle"] = json.loads(published.payload.decode("utf-8"))
@@ -103,14 +125,9 @@ def mixed_fixture(tmp_path_factory) -> dict:
             "period_end": "2025-12-31",
         },
     }
-    txt_spec = {
-        "name": "business_update.txt",
-        "data": TXT,
-        "title": "ACME business update",
-        "document_kind": "investor_call_transcript",
-        "sidecar_overrides": {"fiscal_period": "Q2"},
-    }
+    txt_spec = transcript_spec
     catalog, reader, _indexed = _new_catalog(mx, [annual_spec, txt_spec])
+    resources.callback(catalog.close)
     config = catalog.config
     fixture["config"] = config
     fixture["reader"] = reader
@@ -248,8 +265,8 @@ def _env() -> dict:
 TOOL_PY = str(TOOLS_DIR / "legacy_storage_retirement.py")
 
 
-def _raw_open(fixture) -> tuple[int, dict]:
-    ref = fixture["annual_ref"]
+def _raw_open(fixture, ref=None) -> tuple[int, dict]:
+    ref = fixture["annual_ref"] if ref is None else ref
     proc = subprocess.run(
         [
             sys.executable,
@@ -272,6 +289,8 @@ def _raw_open(fixture) -> tuple[int, dict]:
     )
     stderr = proc.stderr.decode("utf-8")
     receipt = json.loads(stderr.splitlines()[-1]) if stderr else {}
+    if proc.returncode == 0:
+        assert _sha(proc.stdout) == ref["content_sha256"]
     return proc.returncode, receipt
 
 
@@ -325,10 +344,11 @@ def _narrative_read(fixture) -> tuple[int, bytes]:
     return proc.returncode, proc.stdout
 
 
-def test_raw_read_replay_and_receipts_across_full_chain(mixed_fixture) -> None:
+def test_raw_read_replay_and_receipts_across_full_chain(mixed_fixture, record_property) -> None:
     raw_before = _raw_open(mixed_fixture)
     assert raw_before[0] == 0, raw_before[1]
     assert raw_before[1]["content_sha256"] == ANNUAL_SHA
+    assert _raw_open(mixed_fixture, mixed_fixture["source_ref"])[0] == 0
     final_before = _narrative_read(mixed_fixture)
     assert final_before[0] == 0
     assert _sha(final_before[1]) == mixed_fixture["payload_sha256"]
@@ -433,19 +453,24 @@ def test_raw_read_replay_and_receipts_across_full_chain(mixed_fixture) -> None:
     )
     assert vacuum.returncode == 0, vacuum.stderr.decode("utf-8")
     vacuum_report = json.loads((out / "vacuum.json").read_text(encoding="utf-8"))
-    assert vacuum_report["freelist_after"] <= vacuum_report["freelist_before"]
+    assert vacuum_report["freelist_after"] == 0
+    assert vacuum_report["database_file_bytes_released"] > 0
+    assert vacuum_report["source_facts_before"] == vacuum_report["source_facts_after"]
+    assert vacuum_report["legacy_record_facts_before"] == vacuum_report["legacy_record_facts_after"]
+    assert vacuum_report["protected_objects_before"] == vacuum_report["protected_objects_after"]
+    assert retire_report["source_facts_before"] == prune_report["source_facts_after"]
+    assert retire_report["protected_objects_before"]["new_final_count"] == 1
+    assert retire_report["protected_objects_before"]["object_bytes"] > 0
 
     raw_after = _raw_open(mixed_fixture)
     assert raw_after[0] == 0, raw_after[1]
-    assert (
-        _sha(dict(raw_after[1])["receipt_bytes"]) == ANNUAL_SHA if False else True
-    )  # byte hash asserted via stdout below
+    assert _raw_open(mixed_fixture, mixed_fixture["source_ref"])[0] == 0
     assert raw_after[1]["content_sha256"] == ANNUAL_SHA
     final_after = _narrative_read(mixed_fixture)
     assert final_after[0] == 0
     assert _sha(final_after[1]) == mixed_fixture["payload_sha256"]
 
-    with sqlite3.connect(mixed_fixture["config"].database_path) as conn:
+    with closing(sqlite3.connect(mixed_fixture["config"].database_path)) as conn:
         kept = conn.execute(
             "SELECT COUNT(*) FROM evidence_spans WHERE source_id=? AND locator=?",
             keep_ref,
@@ -475,3 +500,22 @@ def test_raw_read_replay_and_receipts_across_full_chain(mixed_fixture) -> None:
         path.name: json.loads(path.read_text(encoding="utf-8"))
         for path in out.glob("*.json")
     }
+
+    metrics = {}
+    for operation, receipt in mixed_fixture["receipts"].items():
+        deleted = receipt["deleted"]
+        metrics[operation] = {
+            "status": receipt["status"], "error_code": receipt["error_code"],
+            "deleted": len(deleted) if isinstance(deleted, list) else deleted,
+            "files_before": receipt["files_bytes_before"], "files_after": receipt["files_bytes_after"],
+            "db_before": receipt["database_bytes_before"], "db_after": receipt["database_bytes_after"],
+            "freelist_before": receipt["freelist_before"], "freelist_after": receipt["freelist_after"],
+            "source_facts_equal": receipt["source_facts_before"] == receipt["source_facts_after"],
+            "integrity": receipt["integrity_check"],
+            "new_final_count": receipt["protected_objects_after"].get("new_final_count"),
+            "object_bytes": receipt["protected_objects_after"].get("object_bytes"),
+        }
+    record_property("storage_metrics", json.dumps(metrics, sort_keys=True))
+    record_property("annual_sha256", ANNUAL_SHA)
+    record_property("transcript_sha256", TRANSCRIPT_SHA)
+    record_property("final_payload_sha256", mixed_fixture["payload_sha256"])
