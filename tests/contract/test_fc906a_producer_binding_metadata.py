@@ -186,7 +186,7 @@ def test_sections_artifact_is_v2_bindable(tmp_path: Path):
     doc_id = catalog.store.fetchone(
         "SELECT document_id FROM documents WHERE document_kind='annual_report'"
     )["document_id"]
-    from company_wiki.source_catalog.section_extractor import extract_sections_catalog
+    from support.legacy_catalog.section_extractor import extract_sections_catalog
 
     report = extract_sections_catalog(catalog.config, catalog.store, document_id=doc_id)
     assert report.completed == 1, f"sections did not complete: {report!r}"

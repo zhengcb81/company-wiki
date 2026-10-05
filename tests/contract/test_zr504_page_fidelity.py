@@ -33,11 +33,8 @@ from company_wiki.parser_adapters.pdf_page_aware import (  # noqa: E402
     PageAwarePDFAdapterError,
     adapt_pdf_pages,
 )
-from company_wiki.source_catalog.normalizer import (  # noqa: E402
-    _Normalized,
-    _frontmatter,
-    _render_page_aware_markdown,
-)
+from company_wiki.source_catalog.normalizer import (_Normalized, _render_page_aware_markdown)
+from support.legacy_catalog.normalizer import (_frontmatter)
 from company_wiki.source_contract.source_manifest import (  # noqa: E402
     ImmutableStatus,
     SourceManifest,

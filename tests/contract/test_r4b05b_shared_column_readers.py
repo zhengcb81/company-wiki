@@ -135,7 +135,7 @@ def test_the_summarizer_selection_survives_a_malformed_shared_column(
     "it did not raise" meaningless).  Eligibility itself (a normalized artifact row plus
     gate roots) is NOT seeded here - the positive path is covered by the existing
     summarizer suites."""
-    from company_wiki.source_catalog.llm_summarizer import summarize_catalog_with_llm
+    from support.legacy_catalog.llm_summarizer import summarize_catalog_with_llm
 
     store, database = _seed_catalog(tmp_path)
     _corrupt(database, raw)
@@ -169,7 +169,7 @@ def test_the_selection_query_is_the_one_under_test(tmp_path, monkeypatch):
     """Pin the anti-vacuity mechanism itself: the query text the counting wrapper sees is
     the guarded selection (json_valid present), so the resilience cases above cannot pass
     by skipping the SQL."""
-    from company_wiki.source_catalog.llm_summarizer import summarize_catalog_with_llm
+    from support.legacy_catalog.llm_summarizer import summarize_catalog_with_llm
 
     store, database = _seed_catalog(tmp_path)
     _corrupt(database, "{not json")

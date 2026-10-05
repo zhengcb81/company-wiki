@@ -23,7 +23,7 @@ PRODUCER_ROLE_VALUES = {
 }
 # FC-1203 (assurance/fc/FC-1203/03_change_contract_fc1203.md): the
 # extractive summarizer is a deliberate SECOND producer of the summary role
-# (production CLI entry SourceCatalog.summarize).  Per this contract's own
+# (historical producer SourceCatalog.summarize (now retired)).  Per this contract's own
 # protocol, adding a producer requires amending this test + the role
 # contract — never silently.
 EXTRA_PRODUCER_GENERATORS = ("source_catalog_extractive_summary",)
@@ -65,30 +65,13 @@ def test_catalog_producers_write_only_registered_roles():
         assert not any(role in name for name in GENERATOR_REGISTRY), (
             f"catalog producer for non-catalog role {role!r} must not exist"
         )
-    # Producer INSERT role values (source of truth in the producer modules) are
-    # exactly the three registered roles.
-    producer_modules = {
-        "normalizer.py": ("normalized", "source_catalog_normalizer"),
-        "llm_summarizer.py": ("summary", "source_catalog_llm_summary"),
-        "section_extractor.py": ("sections", "source_catalog_section_extractor"),
-        "summarizer.py": ("summary", "source_catalog_extractive_summary"),
-    }
-    src = _repo_root() / "src" / "company_wiki" / "source_catalog"
-    for module, (role, generator) in producer_modules.items():
-        text = (src / module).read_text(encoding="utf-8")
-        # The role appears as a literal in INSERT position or in the role
-        # constant (section_extractor uses SECTION_ARTIFACT_ROLE = "sections").
-        assert f'"{role}"' in text, f"{module} must declare role {role!r}"
-        assert generator in text, f"{module} must declare generator {generator!r}"
-        for banned in NON_CATALOG_ROLES:
-            # A role literal in INSERT/artifact-role position is the smoking
-            # gun of an unregistered write path.  We match the artifact_role
-            # parameter shape (`"role",` in the INSERT tuple or
-            # `"artifact_role": "role"`), NOT any incidental word — e.g.
-            # mime_type "text/markdown" or a docstring mention must not trip.
-            assert f'"{banned}",' not in text and (
-                f'"artifact_role": "{banned}"' not in text
-            ), f"{module} writes non-catalog role {banned!r}"
+    # These names identify historical artifacts, not installed generators.
+    # Whole-document production retired in S5; only test fixtures can seed it.
+    import importlib.util
+    from company_wiki.source_catalog import normalizer
+    assert not hasattr(normalizer, "normalize_catalog")
+    for name in ("llm_summarizer", "section_extractor", "summarizer"):
+        assert importlib.util.find_spec("company_wiki.source_catalog." + name) is None
 
 
 def test_role_contract_document_is_valid():

@@ -288,7 +288,7 @@ def test_provider_failure_requests_global_retry_without_document_quarantine(tmp_
 
 
 def test_configured_llm_uses_mimo_when_primary_credentials_are_absent(monkeypatch):
-    from company_wiki.source_catalog.llm_summarizer import build_configured_llm_client
+    from support.legacy_catalog.llm_summarizer import build_configured_llm_client
 
     project = Path(__file__).resolve().parents[2]
     monkeypatch.delenv("MINIMAX_API_KEY", raising=False)
@@ -307,7 +307,7 @@ def test_configured_llm_uses_project_dotenv_over_stale_inherited_keys(
     tmp_path, monkeypatch
 ):
     import config as config_module
-    from company_wiki.source_catalog.llm_summarizer import build_configured_llm_client
+    from support.legacy_catalog.llm_summarizer import build_configured_llm_client
 
     project = Path(__file__).resolve().parents[2]
     runtime_config = tmp_path / "config.yaml"

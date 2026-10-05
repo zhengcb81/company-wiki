@@ -87,7 +87,6 @@ FROZEN = {
     "identity_cli.py": 82,
     "legacy_close_gate.py": 85,
     "llm_failure_policy.py": 100,
-    "llm_summarizer.py": 82,
     "lock.py": 61,
     "migration_ledger.py": 86,
     "models.py": 85,
@@ -100,13 +99,11 @@ FROZEN = {
     "reconciliation.py": 91,
     "remediation.py": 79,
     "scanner.py": 91,
-    "section_extractor.py": 87,
     "section_query.py": 87,
     "security_identity.py": 77,
     "shadow_parity.py": 87,
     "startup.py": 35,
     "store.py": 83,
-    "summarizer.py": 87,
     "trace_parity.py": 82,
     "worker.py": 78
 }

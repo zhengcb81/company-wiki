@@ -16,15 +16,15 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Callable
 
-from .admission import processing_priority_sql
-from .artifact_handle import ARTIFACT_HANDLE_SCHEMA_VERSION
-from .models import CatalogConfig, ProcessingReport, SECTION_EXTRACTOR_VERSION
+from company_wiki.source_catalog.admission import processing_priority_sql
+from company_wiki.source_catalog.artifact_handle import ARTIFACT_HANDLE_SCHEMA_VERSION
+from company_wiki.source_catalog.models import CatalogConfig, ProcessingReport, SECTION_EXTRACTOR_VERSION
 from .normalized_artifact_reader import (
     NormalizedArtifactReadError,
     preferred_normalized_artifact_predicate,
     read_verified_normalized_text,
 )
-from .store import CatalogStore, canonical_json
+from company_wiki.source_catalog.store import CatalogStore, canonical_json
 
 
 SECTION_EXTRACTOR_NAME = "source_catalog_section_extractor"

@@ -8,7 +8,7 @@ import json
 import pytest
 
 from company_wiki.source_catalog.models import NORMALIZER_VERSION
-from company_wiki.source_catalog.normalized_artifact_reader import (
+from support.legacy_catalog.normalized_artifact_reader import (
     NormalizedArtifactReadError,
     read_verified_normalized_text,
 )

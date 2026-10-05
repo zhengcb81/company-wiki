@@ -12,7 +12,8 @@ from __future__ import annotations
 
 import json
 
-from company_wiki.source_catalog.normalizer import _Normalized, _frontmatter
+from company_wiki.source_catalog.normalizer import (_Normalized)
+from support.legacy_catalog.normalizer import (_frontmatter)
 
 SECURITY_ID = "601899"
 READABLE = json.dumps(

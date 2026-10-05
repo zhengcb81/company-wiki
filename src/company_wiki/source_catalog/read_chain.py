@@ -130,7 +130,6 @@ COLUMN_VALUE_HANDOFFS: dict[str, str] = {
     "canonical_writer.py::CanonicalSourceWriter._verify_unknown_date_index": "1",
     "extraction_quality.py::ExtractionQualityService._artifact": "1",
     "migration_ledger.py::build_quality_ledger": "1",
-    "normalizer.py::normalize_catalog": "1",
     "resolver.py::_metadata_conflict_reason": "1",
     # One decoded object is reused by both priority branches in the scanner.
     "scanner.py::_merge_document_row": "3",
@@ -224,7 +223,6 @@ GATE_BOUNDARIES: dict[str, str] = {
 #:   * ``store.py::read_pipeline_status``    - a FALSE POSITIVE (parses ``report_json``).
 HEURISTIC_READER_CANDIDATES: tuple[str, ...] = (
     "extraction_quality.py::ExtractionQualityService._artifact",
-    "normalizer.py::normalize_catalog",
     "prompt_injection.py::read_prompt_injection_review",
     "scanner.py::_merge_metadata_json",
     "service.py::_read_shared_metadata",

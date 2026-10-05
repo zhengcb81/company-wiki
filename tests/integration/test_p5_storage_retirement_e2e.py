@@ -22,10 +22,10 @@ from pathlib import Path
 
 import pytest
 
-from company_wiki.source_catalog.normalizer import normalize_catalog
-from company_wiki.source_catalog.section_extractor import extract_sections_catalog
+from support.legacy_catalog.normalizer import (normalize_catalog)
+from support.legacy_catalog.section_extractor import extract_sections_catalog
 from company_wiki.source_catalog.store import CatalogStore
-from company_wiki.source_catalog.summarizer import summarize_catalog
+from support.legacy_catalog.summarizer import summarize_catalog
 
 pytestmark = pytest.mark.slow
 

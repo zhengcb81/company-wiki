@@ -29,10 +29,8 @@ from company_wiki.source_catalog.homepage_identity import (  # noqa: E402
     assess_homepage_identity,
     homepage_identity_quality_flag,
 )
-from company_wiki.source_catalog.normalizer import (  # noqa: E402
-    _Normalized,
-    _frontmatter,
-)
+from company_wiki.source_catalog.normalizer import (_Normalized)
+from support.legacy_catalog.normalizer import (_frontmatter)
 
 
 # ---------------------------------------------------------------------------

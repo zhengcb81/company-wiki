@@ -28,10 +28,8 @@ from company_wiki.source_catalog.entity_detection import (  # noqa: E402
     detect_entities,
     multi_entity_quality_flag,
 )
-from company_wiki.source_catalog.normalizer import (  # noqa: E402
-    _Normalized,
-    _frontmatter,
-)
+from company_wiki.source_catalog.normalizer import (_Normalized)
+from support.legacy_catalog.normalizer import (_frontmatter)
 
 _CHANGJIANG_SHA256 = (
     "273d450887eff7c079b28f394c4831092fa3abbb81db86f2544cab425c2719d7"

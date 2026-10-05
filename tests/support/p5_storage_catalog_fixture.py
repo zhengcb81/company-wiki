@@ -1,6 +1,6 @@
 """Shared real-schema fixtures for the P5 storage-retirement tool tests.
 
-Builds catalogs with the production CatalogStore DDL and the real legacy
+Builds catalogs with the production CatalogStore DDL and frozen fixture
 producers (normalizer / extractive summary / section extractor).  No tests
 live here; every test module in this package imports the helpers by name.
 """
@@ -24,10 +24,10 @@ from company_wiki.source_catalog.narrative_artifact_store import (  # noqa: E402
     NarrativeArtifactDraft,
     NarrativeArtifactStore,
 )
-from company_wiki.source_catalog.normalizer import normalize_catalog  # noqa: E402
-from company_wiki.source_catalog.section_extractor import extract_sections_catalog  # noqa: E402
+from support.legacy_catalog.normalizer import normalize_catalog  # noqa: E402
+from support.legacy_catalog.section_extractor import extract_sections_catalog  # noqa: E402
 from company_wiki.source_catalog.store import CatalogStore  # noqa: E402
-from company_wiki.source_catalog.summarizer import summarize_catalog  # noqa: E402
+from support.legacy_catalog.summarizer import summarize_catalog  # noqa: E402
 from company_wiki.source_contract.source_manifest import source_id_for_sha256  # noqa: E402
 
 NOW = "2026-01-01T00:00:00Z"

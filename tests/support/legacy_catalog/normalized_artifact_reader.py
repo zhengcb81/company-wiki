@@ -14,7 +14,7 @@ from typing import Any
 
 import yaml
 
-from .models import NORMALIZER_VERSION
+from company_wiki.source_catalog.models import NORMALIZER_VERSION
 
 
 _SHA256 = re.compile(r"[0-9a-f]{64}\Z")

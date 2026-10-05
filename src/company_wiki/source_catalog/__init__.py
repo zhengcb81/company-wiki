@@ -1,4 +1,4 @@
-"""Multi-root source catalog, normalization, summary, and index API."""
+"""Multi-root immutable source catalog and versioned read APIs."""
 
 from .config import CatalogConfigError, load_catalog_config
 from .models import (
@@ -32,7 +32,6 @@ from .source_reader import (
     VerifiedContent,
 )
 from .lock import CatalogOperationLockedError
-from .llm_summarizer import LLMSummaryError
 from .acquisition import (
     ACQUISITION_SCHEMA_VERSION,
     AcquisitionCoordinator,
@@ -97,7 +96,6 @@ from .extraction_quality import (
     ExtractionQualityState,
     ExtractionQualityUnavailableError,
 )
-from .section_extractor import SectionSlice
 from .dayu_cli_adapter import DayuCliAdapterError, DayuCliDownloadAdapter
 from .security_identity import (
     CNINFO_STOCK_URL,
@@ -172,7 +170,6 @@ __all__ = [
     "ExtractionQualityService",
     "ExtractionQualityState",
     "ExtractionQualityUnavailableError",
-    "LLMSummaryError",
     "HKEX_ACTIVE_STOCK_URL",
     "HKEX_INACTIVE_STOCK_URL",
     "HKEX_SECURITIES_URL",
@@ -200,7 +197,6 @@ __all__ = [
     "SUMMARIZER_VERSION",
     "ScanReport",
     "SECTION_EXTRACTOR_VERSION",
-    "SectionSlice",
     "SourceCatalog",
     "SourceAcquisitionService",
     "SourceEnsureResult",

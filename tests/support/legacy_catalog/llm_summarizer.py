@@ -20,15 +20,15 @@ from typing import Any, Callable
 
 import yaml
 
-from .admission import processing_priority_sql
-from .artifact_handle import ARTIFACT_HANDLE_SCHEMA_VERSION
-from .models import CatalogConfig, ProcessingReport, SUMMARIZER_VERSION
+from company_wiki.source_catalog.admission import processing_priority_sql
+from company_wiki.source_catalog.artifact_handle import ARTIFACT_HANDLE_SCHEMA_VERSION
+from company_wiki.source_catalog.models import CatalogConfig, ProcessingReport, SUMMARIZER_VERSION
 from .normalized_artifact_reader import (
     preferred_normalized_artifact_predicate,
     read_verified_normalized_text,
 )
-from .store import CatalogStore, canonical_json
-from .llm_failure_policy import is_permanent_llm_summary_error
+from company_wiki.source_catalog.store import CatalogStore, canonical_json
+from company_wiki.source_catalog.llm_failure_policy import is_permanent_llm_summary_error
 
 _GENERATOR_NAME = "source_catalog_llm_summary"
 _PROMPT_VERSION = "1.0.0"

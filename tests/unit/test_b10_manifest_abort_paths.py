@@ -18,7 +18,8 @@ from pathlib import Path
 
 from company_wiki.source_catalog.config import CatalogConfig
 from company_wiki.source_catalog.models import RootSpec
-from company_wiki.source_catalog.normalizer import _manifest_from_column, normalize_catalog
+from company_wiki.source_catalog.normalizer import (_manifest_from_column)
+from support.legacy_catalog.normalizer import (normalize_catalog)
 from company_wiki.source_catalog.store import CatalogStore
 from company_wiki.source_contract.source_manifest import source_id_for_sha256
 

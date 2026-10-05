@@ -21,10 +21,8 @@ import pytest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "src"))
 
-from company_wiki.source_catalog.normalizer import (  # noqa: E402
-    _Normalized,
-    _frontmatter,
-)
+from company_wiki.source_catalog.normalizer import (_Normalized)
+from support.legacy_catalog.normalizer import (_frontmatter)
 from company_wiki.source_catalog.section_chunk_fact import (  # noqa: E402
     chunk_spans,
     detect_sections,

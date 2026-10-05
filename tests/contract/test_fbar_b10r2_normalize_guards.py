@@ -28,10 +28,10 @@ import sqlite3
 from pathlib import Path
 
 
-from company_wiki.source_catalog import normalizer as normalizer_module
+from support.legacy_catalog import normalizer as normalizer_module
 from company_wiki.source_catalog.config import CatalogConfig
 from company_wiki.source_catalog.models import RootSpec
-from company_wiki.source_catalog.normalizer import _ingest_without_raising, normalize_catalog
+from support.legacy_catalog.normalizer import (_ingest_without_raising, normalize_catalog)
 from company_wiki.source_catalog.store import CatalogStore
 from company_wiki.source_contract.source_manifest import source_id_for_sha256
 

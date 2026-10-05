@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from company_wiki.source_catalog.section_extractor import (
+from support.legacy_catalog.section_extractor import (
     SECTION_ARTIFACT_ROLE,
     SectionSlice,
     chapter_page_range,
@@ -412,7 +412,7 @@ def test_broker_report_extracts_known_keywords():
     """Broker research reports use investment keywords like 报告要点/
     投资建议/风险提示/盈利预测 — these must be recognized and mapped
     to semantic roles even without the 第X节 convention."""
-    from company_wiki.source_catalog.section_extractor import (
+    from support.legacy_catalog.section_extractor import (
         extract_broker_sections_from_text,
     )
 
@@ -432,7 +432,7 @@ def test_broker_report_unknown_numbered_sections_not_emitted():
     where SECTION_RE matches all 第X节 lines — broker regex only matches
     keyword lines, so non-keyword headings are absorbed into the
     preceding keyword section's body)."""
-    from company_wiki.source_catalog.section_extractor import (
+    from support.legacy_catalog.section_extractor import (
         extract_broker_sections_from_text,
     )
 
@@ -447,7 +447,7 @@ def test_broker_report_unknown_numbered_sections_not_emitted():
 
 
 def test_broker_report_contiguous_slices():
-    from company_wiki.source_catalog.section_extractor import (
+    from support.legacy_catalog.section_extractor import (
         extract_broker_sections_from_text,
     )
 
@@ -460,7 +460,7 @@ def test_broker_report_contiguous_slices():
 def test_broker_no_sections_for_prose_report():
     """A broker report that is pure flowing prose with no recognized
     keywords returns zero slices (fail-closed; no fake sections)."""
-    from company_wiki.source_catalog.section_extractor import (
+    from support.legacy_catalog.section_extractor import (
         extract_broker_sections_from_text,
     )
 
@@ -470,7 +470,7 @@ def test_broker_no_sections_for_prose_report():
 
 def test_broker_keyword_investment_rating_variant():
     """投资评级 is a common synonym for 投资建议."""
-    from company_wiki.source_catalog.section_extractor import (
+    from support.legacy_catalog.section_extractor import (
         extract_broker_sections_from_text,
     )
 
@@ -486,7 +486,7 @@ def test_broker_skips_cover_page_matches():
     盈利预测与财务指标 appear on page 1 as cover fields, not sections) —
     matching must start AFTER page 1 when `## Page` markers exist, so the
     cover hit does not produce a section that swallows the whole body."""
-    from company_wiki.source_catalog.section_extractor import (
+    from support.legacy_catalog.section_extractor import (
         extract_broker_sections_from_text,
     )
 
@@ -547,7 +547,7 @@ document_id: urn:test:broker-list-style
 def test_broker_list_style_numbered_headings_extracted():
     """Numbered broker headings with a whitespace separator and a
     descriptive suffix must be recognized as section boundaries."""
-    from company_wiki.source_catalog.section_extractor import (
+    from support.legacy_catalog.section_extractor import (
         extract_broker_sections_from_text,
     )
 
@@ -562,7 +562,7 @@ def test_broker_list_style_numbered_headings_extracted():
 
 
 def test_broker_list_style_slices_are_contiguous():
-    from company_wiki.source_catalog.section_extractor import (
+    from support.legacy_catalog.section_extractor import (
         extract_broker_sections_from_text,
     )
 
@@ -577,7 +577,7 @@ def test_broker_list_style_slices_are_contiguous():
 def test_broker_chinese_numbered_heading_with_suffix():
     """The same suffix shape appears with Chinese numbering ("四、 盈利预测
     与投资建议"), including when the keyword sits on the next line."""
-    from company_wiki.source_catalog.section_extractor import (
+    from support.legacy_catalog.section_extractor import (
         extract_broker_sections_from_text,
     )
 
@@ -592,7 +592,7 @@ def test_broker_unnumbered_suffix_lines_are_not_headings():
     may carry a descriptive suffix.  Un-numbered lines that merely start
     with a keyword are body text (inline 风险提示：... sentences) or
     back-matter headings (投资评级说明), never sections."""
-    from company_wiki.source_catalog.section_extractor import (
+    from support.legacy_catalog.section_extractor import (
         extract_broker_sections_from_text,
     )
 
@@ -610,7 +610,7 @@ def test_broker_numbered_non_keyword_headings_still_not_boundaries():
     """The list-style extension must not turn arbitrary numbered lines into
     boundaries: only numbered lines whose title STARTS with a known keyword
     qualify (a numbered 事件：/财务分析 heading stays body text)."""
-    from company_wiki.source_catalog.section_extractor import (
+    from support.legacy_catalog.section_extractor import (
         extract_broker_sections_from_text,
     )
 
@@ -628,7 +628,7 @@ def test_c9_dispatch_broker_kind_routes_to_broker_extraction():
     other kinds go through extract_sections_from_text (第X节 headings).
     This covers the dispatch branch that integration tests miss (they call
     the legacy extract_sections_catalog function which routes internally)."""
-    from company_wiki.source_catalog.section_extractor import (
+    from support.legacy_catalog.section_extractor import (
         _extract_sections_for_kind,
     )
 

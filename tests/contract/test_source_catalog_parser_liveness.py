@@ -56,6 +56,29 @@ def _fast_parser(
     return _normalized(manifest)
 
 
+def _noisy_parser(path: Path, manifest: SourceManifest, docling_path: Path | None) -> _Normalized:
+    del path, docling_path
+    print("parser Python diagnostic", flush=True)
+    os.write(1, b"parser native diagnostic\n")
+    return _normalized(manifest)
+
+
+def test_parser_diagnostics_cannot_pollute_machine_readable_stdout(tmp_path, capfd):
+    source = tmp_path / "source.txt"
+    source.write_text("Business expansion.", encoding="utf-8")
+    result = _run_parser_isolated(
+        source, _manifest(source), None, parser=_noisy_parser,
+        timeout_seconds=5, heartbeat_interval_seconds=0.1,
+        result_max_bytes=100_000, temp_dir=tmp_path / "parser-results",
+    )
+    assert result.body == "parsed text"
+    captured = capfd.readouterr()
+    assert captured.out == ""
+    assert "parser Python diagnostic" in captured.err
+    assert "parser native diagnostic" in captured.err
+    assert list((tmp_path / "parser-results").iterdir()) == []
+
+
 def _slow_parser(
     path: Path, manifest: SourceManifest, docling_path: Path | None
 ) -> _Normalized:

@@ -9,11 +9,9 @@ from typing import Any
 
 CORE_SOURCE_PATHS = (
     "src/company_wiki/source_catalog/code_identity.py",
-    "src/company_wiki/source_catalog/worker.py",
     "src/company_wiki/source_catalog/lock.py",
     "src/company_wiki/source_catalog/store.py",
     "src/company_wiki/source_catalog/normalizer.py",
-    "src/company_wiki/source_catalog/llm_summarizer.py",
     "src/company_wiki/source_catalog/llm_failure_policy.py",
     "src/company_wiki/source_catalog/service.py",
     "src/company_wiki/source_catalog/admission.py",
