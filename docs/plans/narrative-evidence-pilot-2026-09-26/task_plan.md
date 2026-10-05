@@ -8,7 +8,7 @@
 
 执行已恢复。最新 `get_goal` 实读为 **active**（2026-10-04）；此前工具无resume接口的限制已由应用实际恢复解决，不再把旧paused快照当当前状态。目标未完成，不标complete。
 
-## 2026-10-04 四仓并线与交接更新
+## 2026-10-05 四仓状态与当前主线
 
 本节为当前执行状态，优先于下方较早的baseline、并行线状态和 Next Step 历史文本。
 
@@ -19,7 +19,7 @@
 - **外部审计卡**：StockQAbyLLM 与 MeetingConverter 报告已收到并验收，唯一运行数据保留。invest-quick-scan 另有独立项目正在进行；本线不检查、不修改、不重复派发该仓任务。
 - RF worktree audit 外线分支 `codex/rf-state-audit@447d1c7` 已有一份受 ACL/长路径限制的补充报告；它与主线已有同名完整报告冲突，不能直接覆盖或并入。补充报告没有可安全删除候选；本机 `config/source_acquisition.yaml` 用户改动和本计划审计结果目录继续排除在本线写集之外。
 
-**MAIN当前下一步：**N4-T2仍待交付；收到后与已合入N4-T1联合验收，再推进N4C真实多类型批次。RF已有正式N3a叙述消费者：RF经bounded subprocess调用CWP `company-wiki-narrative-read`，验证叙述包、原文、身份/期次/as-of、locator和引用；该入口在RF主线的交接明确“未接入收入计算”。另一个SourceRef v2文件读取路径仍是opt-in，默认SourceBundle路径继续读取normalized/summary/sections。复用N3a接口，不另造transport；N4-T2/N4C通过后先做CWP→RF现有N3a入口的真实样本离线端到端，再依RF当前PWF把它接入预测输入。S5存储审计需区分物理normalized文件与SQLite EvidenceSpan/质量元数据：evidence-query直接读DB span，extraction-quality读artifact状态/metadata和span，不直接打开normalized正文文件。真正的normalized正文读取点和RF默认SourceBundle仍须逐个迁移/退休，未完成前不删派生文件；迁移后先处置文件句柄与质量语义，再评估DB span收缩。N4C真实摘要、ET TXT来源和DB/derived主体迁移仍未完成。
+**MAIN当前下一步：**N4-T2仍待交付；收到后与已合入N4-T1联合验收，再推进N4C真实多类型Worker批次。RF主线已有正式N3a叙述消费者；本地已缓存的`origin/main@8a153f3387ae75fb172e70f8ab63ffd38100779a`快照经完整`tests/`/`scripts/`导出后，CWP真实producer→公开CLI→RF bounded subprocess的离线实样联调为15 passed/39.81秒，包含年报和电话会原文。此轮不能连GitHub确认更新的live ref，结果仅绑定该SHA。N3a仍未接收入预测计算。另一个SourceRef v2文件读取路径仍是opt-in，默认SourceBundle路径继续读取normalized/summary/sections。复用N3a接口，不另造transport；N4C接下来验证实际Worker产出的选材摘要能否由现有consumer读取并保留locator/citation，而非重复测试空fixture接口。S5存储审计需区分物理normalized文件与SQLite EvidenceSpan/质量元数据：evidence-query直接读DB span，extraction-quality读artifact状态/metadata和span，不直接打开normalized正文文件。真正的normalized正文读取点和RF默认SourceBundle仍须逐个迁移/退休，未完成前不删派生文件；迁移后先处置文件句柄与质量语义，再评估DB span收缩。N4C真实Worker摘要/并发，季报选材、ET TXT来源和DB/derived主体迁移仍未完成。
 
 ## 当前基线（2026-10-04正常用户上下文复核）
 
@@ -44,7 +44,7 @@ StockWiki/IQS已有owner工作及消费者交付，本轮只读，不重复分�
 | S2 N4B | complete（节点A/B集中验收已绿；整体N4仍待独立S4/N4C） | real factory/HTTP adapter/full prompt; persistent token/cost reservation in AUTO; finite batch CLI; unique final artifact and small recovery receipt; public legacy whole-catalog Worker and startup routes removed | node A accounting/concurrency green; node B formal CLI/HTTP/kill/ACK and focused regression green; CWP producer limits are now connected and have real-data E2E evidence; proceed to N4C after G1/S3 closeout |
 | G1 残余门禁/签收精简（第一优先） | complete（CWP来源链与G1-LEGACY已合入；FF SourceRef v2于`e1eda60`推送） | 46项清单已分为已退出、必要自动校验、能力边界及外仓owner事项；未找到生产调用者的旧摘要/binding/archive工具不再作为当前门，留待S5/S6 caller清理 | CWP来源/as-of 64项、resolver/planner/canonical 100项与G1-LEGACY 170 passed / 1 deselected既有收据；FF集中回归177 passed / 1 skipped / 39 subtests，Ruff及push gate GREEN；电话会provider→CWP导入端到端12 passed。保留SHA、来源身份/期间/公开日、可回放引用和资源限制 |
 | S3 SourceRef/SourceExport 虚拟化与来源默认收敛（第二优先） | **complete**（FF `eb0af13`、ET `63c4090`已推送；CWP SourceExport已发布；合入后FF→ET→CWP链及各仓责任集均GREEN。live FMP仍受HTTP 402权益限制，不影响接口合同完成） | 上层只用SourceRef/SourceExport v2；复用FF exact/latest_as_of和pathless reader，不依赖物理目录；电话会走正式ET CLI并由CWP持有原件；provider定位仍在adapter层 | ET deadline分支已快进到main；其`/1`、`/2`、discovery/candidate wire与goldens未改，CWP importer现有provider-aware FMP JSON合同经真实三仓离线链验证。跨仓脚本验证FF uppercase exchange转ET小写、精确FY/Q、FMP原JSON与canonical text各自SHA/size、unknown publication、pathless SourceRef、重复读取不触provider，以及超时后worker结果清理。合并后ET `tests/test_retrieval_cli_e2e.py` 6 passed、10 goldens matched；FF companion 5 passed且Ruff clean；CWP FMP importer 5 passed。FF只在owner目录用`eb0af13`修正交易所slug与3秒清理窗口；ET只更新过期golden说明并合入`63c4090`。旧“Motley 24字段唯一可导入”记录已由当前源码/测试更正。真实FMP HTTP 402不作为代码合同门；正费用额度没有实际账单计量，本计划只声称FF zero-cost拒绝与单次provider请求，不声称美元账单cap已实测。 |
-| S4 N4C real samples and storage plan | in_progress（CWP当前真实raw→published bundle→public CLI locator replay覆盖年报、招股书、IR、电话会TXT：4 passed/31.70s；capture metadata仍是隔离fixture。N4-T2仍待交付；未验季报选择改进、真实Worker summary、RF subprocess接线和P1/P2/P4） | four real document types / actual bounded batch and consumer reads / language and citation coverage / total incremental bytes; retain only status/stop/uninstall compatibility for old worker process cleanup | node C; first finish N4-T2 and integrated bounded run, then measure 1/2/4; at least four types among annual, prospectus/financing, IR and transcript/quarterly; log summary locators and total space |
+| S4 N4C real samples and storage plan | in_progress（CWP真实raw→published bundle→public CLI覆盖年报、招股书、IR、电话会TXT：4 passed/31.70s；capture metadata为隔离fixture。RF `origin/main@8a153f3` 的N3a真实年报+电话会由CWP producer→CLI→RF subprocess离线读取：15 passed/39.81s，绑定本地缓存SHA；本轮无法访问GitHub确认live ref。N4-T2仍待交付；真实Worker summary/并发、季报选材和P1/P2/P4未验） | four real document types / actual bounded batch and consumer reads / language and citation coverage / total incremental bytes; retain only status/stop/uninstall compatibility for old worker process cleanup | node C; first finish N4-T2 and integrated bounded run, then measure 1/2/4; at least four types among annual, prospectus/financing, IR and transcript/quarterly; log summary locators and total space |
 | S5 B2逐caller清理 | in_progress（首批缓存、extract-sections、旧自动 Worker/阶段策略与旧WorkerSession启动/心跳API已退出；normalized/summarize按需接口等RF与CWP读者迁移后再退） | [S5/S6实施细则](s5_s6_legacy_storage_implementation.md)；不再有旧Worker创建入口，worker-status/stop保留并检查既存旧runtime snapshot；旧 normalized/summary 数据和 API 未删。RF远端 main 已有SourceRef v2 opt-in，但默认旧SourceBundle artifact bundle仍消费 normalized。历史 derived 2.826 GB / 8,191路径引用仍保留，等待caller迁移 | 旧Worker主循环集中127 passed；本轮status/stop、CLI保留与AUTO暂停互锁集中55 passed，commit `a9b1a06` 已推送，CI run `37246820601` success；每个存储大节点复核来源事实/消费者与前后空间；不逐文件签收 |
 | S6 DB事实收缩与收尾 | pending | 表级盘点，删除不可再消费派生/废索引并收缩，来源版本/撤回事实保留；旁路兼容、docs/hook残留清完 | 同一存储节点；commit/push、PWF收尾 |
 | 可选 exact-SHA原件对象去重 | 不阻S0–S6完成 | 先用已有SHA/size找候选、逐候选验字节，保留所有source/location版本事实 | 有真实收益才实施；不报未测节省量 |
@@ -109,7 +109,7 @@ TDD框住公开行为，不把旧签收规则写进新测试。仅S0相关收口
 
 ## Next Step
 
-**MAIN下一动作：**N4-T2尚未交付，先收它的独立新增提交并与已集成T1联合验收；不改T2独占选材文件。其间按已验证的N3a合同准备N4C实样与跨仓测试输入，不调用付费API/模型、不写生产库。RF N3a现在能经CWP CLI读取已选叙述包，但尚未连接收入计算；旧SourceBundle默认也尚未切换。存储迁移先分开标记物理derived正文、artifact元数据和EvidenceSpan行；删除每一类前分别确认生产读者和旧句柄状态。原件、来源版本事实和用户配置继续保留。
+**MAIN下一动作：**N4-T2尚未交付，先收它的独立新增提交并与已集成T1联合验收；不改T2独占选材文件。其间N3a pathless接口的真实样本离线联调已完成（见progress收据），下一次跨仓测试应与N4C实际Worker产物读取结合，避免重复空接口测试；不调用付费API/模型、不写生产库。RF N3a现在能经CWP CLI读取已选叙述包，但尚未连接收入计算；旧SourceBundle默认也尚未切换。存储迁移先分开标记物理derived正文、artifact元数据和EvidenceSpan行；删除每一类前分别确认生产读者和旧句柄状态。原件、来源版本事实和用户配置继续保留。
 
 ## 2026-10-04：新增三张可独立派发的施工卡
 
@@ -183,4 +183,4 @@ CNINFO bounded provider已进入隔离 owner集成工作树；CWP配置 `config/
 - **CWP文件/DB依赖更正**：当前 `EvidenceQueryService` 从SQLite读 `evidence_spans.raw_text/span_json` 与source/document/location事实，不读normalized Markdown文件。`ExtractionQualityService` 从SQLite读normalized artifact状态/metadata及EvidenceSpan，不打开artifact正文。CWP当前直接调用 `read_verified_normalized_text` 的源码位置是 `llm_summarizer.py`、`section_extractor.py`、`summarizer.py`；section-extractor的公开CLI/Service入口已退休，但不能据此把低层函数/所有调用者都算已清除。故保留EvidenceSpan行不必然阻止物理Markdown释放；但必须先迁移RF的旧SourceBundle读者和CWP仍在用的摘要/章节读者，并处理artifact记录指向已删除文件与quality status的含义。物理文件与数据库span分阶段处置，不能捆成一次删除。
 - **RF worktree audit交付状态**：`codex/rf-state-audit`两条仅文档提交新增了受限报告；它因6处ACL拒绝而停止全量未跟踪分类，0 bytes列为“已确认可安全释放”。主线同路径已经存在更详细的audit报告，且明确不可读子树是覆盖/删除结论的边界。保留补充报告的限制结论，不覆盖主线报告、不从该分支执行任何RF操作。
 - **CWP真实原件transport E2E（仅子节点）**：2026-10-05在当前代码执行`test_narrative_transport_real_samples.py`，4项通过/31.70秒；覆盖年报、招股书、IR活动记录、电话会TXT的原件SHA、实际公开CLI返回、完整locator replay。Capture metadata来自隔离fixture；这不代表生产catalog准入、N4 selector/Worker摘要、RF bounded consumer接线或N4C批次已验收。basetemp按项目path guard自动重定位，报告退出已清理；详情在progress/findings。
-- **后续大节点**：先收N4-T2；N4C复用已发布N3a read/reference合同，做年报/招股或再融资/季报或IR/电话会TXT样本中的四类，记select/skip原因、语言、locator replay、实际输出字节和consumer read。真实业务样本不付费测试通过后，另按RF当时的PWF与owner工作树建立单独的预测输入接线变更；在那之前不改RF。S5先退CWP旧正文读者/元数据句柄，再迁移SourceBundle默认；DB spans保留至S6单独验收。
+- **后续大节点**：先收N4-T2；N4C复用已发布N3a read/reference合同，结合实际Worker生成结果做年报/招股或再融资/季报或IR/电话会TXT样本中的四类，记select/skip原因、语言、locator replay、实际输出字节和consumer read。N3a真实年报+电话会的独立adapter联调已通过，不重复跑同一合同夹具。真实业务样本不付费测试通过后，另按RF当时的PWF与owner工作树建立单独的预测输入接线变更；在那之前不改RF。S5先退CWP旧正文读者/元数据句柄，再迁移SourceBundle默认；DB spans保留至S6单独验收。

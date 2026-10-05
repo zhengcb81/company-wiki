@@ -490,3 +490,11 @@ S0/N4A及S2模型预算基础、CLI阶段与CI修复已正常发布，当前CI�
 - 测试读取现场原始字节和SHA，但在独立`published_fixture`根内发布/读取；验证hash绑定、公开CLI输出与artifact hash一致、locator>0且replay verified，生产fingerprint、原件hash和mtime前后不变。测试文件声明no network/no production catalog write。它不是实际N4 Worker/summary run，metadata是隔离fixture，也不覆盖RF N3a外部CLI adapter或季度选择缺口。
 - Path guard将长度72的requested basetemp自动移至TEMP短目录；运行结束事件明确`removed=true`。pytest报告两个无失败warning：插件禁用时缺asyncio插件的`asyncio_mode`选项，以及现有`.pytest_cache` ACL写入拒绝。测试没有因warning失败，没有再次重跑。目标requested目录由本会话finally逻辑按workspace包含检查后清理。
 - 本轮任务计划合并补丁第一次因过长上下文不匹配失败，未落盘；读取精确行后用较小范围补丁更新S4进度与本节点收据。没有产品代码改动，下一动作仍是接N4-T2后跑集成Worker/N3a消费与真实批次；本收据不能算N4C完成。
+
+## 2026-10-05 — RF N3a pathless真实年报/电话会离线联调
+
+- 开始前只读核查RF：当前owner checkout为`fcap@5319ee263c4af41ac255938c25bebd32cce56f66`，cached `origin/main@8a153f3387ae75fb172e70f8ab63ffd38100779a`。fresh `ls-remote`因sandbox至GitHub HTTPS/443连接失败；N3a状态与测试结果只绑定该已缓存commit，不声称它是本轮实时远端HEAD。RF owner约3,835项tracked WIP原样保留。
+- 第一次归档只带N3a直接脚本，15项在子进程导入缺失的RF `company_wiki_narrative_tree`时失败。结果属于临时harness漏打包依赖，尚未触及CWP读取断言；随后从同一commit归档完整`scripts/`和`tests/`，显式让真实CWP只读样本fingerprint helper可导入后重跑。
+- 完整离线端到端：`PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 PYTHON_DOTENV_DISABLED=1 RF_RUN_NARRATIVE_REAL_SAMPLES=1 COMPANY_WIKI_NETWORK=blocked`，`CWP_NARRATIVE_CODE_ROOT=<CWP root>`，pytest经`PYTHONPATH=<CWP root>/tests;<CWP root>`加载CWP producer与RF快照。`tests/test_narrative_source_preparation_e2e.py` **15 passed / 39.81s**，含四类文件、拒绝/限额输入和真实P01年报PDF+T01电话会TXT；真实原件SHA/mtime与CWP生产fingerprint测试前后不变，RF从CWP pathless CLI得到正文和locator。
+- 输出只证明已存在RF N3a bounded subprocess能消费真实CWP叙述transport，不证明预测计算、N4 Worker摘要/并发、季报选择或SourceBundle默认路径已经迁移。pytest唯一warning是禁用插件后的既有`asyncio_mode`未知选项。
+- Path guard自动将basetemp移到TEMP，运行后确认`removed=true`；CWP隔离导出目录经绝对路径范围检查后删除，`scratch_removed=True`。无网络/付费API调用、无生产原件/catalog/database写入，RF无写入；CWP状态仍只有原用户修改`config/source_acquisition.yaml`。对应findings与总计划已同步此收据，下一步仍是N4-T2联合验收后做实际Worker批次，不重复跑空fixture adapter测试。

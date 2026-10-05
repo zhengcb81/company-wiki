@@ -389,3 +389,11 @@ Git写入/联网用正常用户，sandbox .git只读不是产品权限。测试�
 - 当前主线 `tests/e2e/test_narrative_transport_real_samples.py` 将真实原始字节及预期SHA复制到隔离发布fixture，再经CWP公开transport CLI读取bundle并完整重放locator；production capture metadata明确是测试fixture，不宣称现场目录具备准入资格。
 - 这次4项样本是2025年报PDF、招股说明书PDF、投资者关系活动记录PDF和Microsoft Q4 2026 earnings-call TXT，均断言原件SHA、公开CLI工件hash、至少一个EvidenceSpan locator及 `replay_status=verified`；同时断言生产fingerprint、原件SHA/mtime不变。未包含季报，未调用网络，未覆盖RF adapter、正式Worker摘要或并发吞吐。
 - pytest执行结果4 passed / 31.70s。Path guard因requested basetemp长度72超过阈值60，将测试目录移至短TEMP路径；退出输出`cleanup removed=true`。禁用第三方插件后有既有`asyncio_mode` unknown-option警告，pytest cache目录因当前sandbox ACL拒绝写入warning；二者均未导致失败，且没有重试或放宽测试断言。
+
+## 2026-10-05 — RF N3a pathless消费者跨仓真实样本联调
+
+- RF `fcap`本地HEAD为`5319ee263c4af41ac255938c25bebd32cce56f66`，cached `origin/main`为`8a153f3387ae75fb172e70f8ab63ffd38100779a`；本轮sandbox连接GitHub HTTPS/443失败，未声称fresh live检查。只用该已提交origin/main快照；owner checkout中3,835项tracked变化（3,833项execution_runs删除、两项weekly assurance修改）未触碰。
+- 首次临时导出只含N3a四个模块，15项均在RF子进程导入缺失的`company_wiki_narrative_tree`时失败；未到达consumer断言，判定为测试快照漏带依赖，不是产品失败。纠正后从同一SHA完整导出51个`scripts/`文件和149个`tests/`文件（未包含`.git`或owner未提交内容），并显式从CWP `tests/`导入真实样本的只读fingerprint helper。
+- 运行RF `tests/test_narrative_source_preparation_e2e.py`，由CWP已发布producer写入隔离fixture，再经公开CLI和RF bounded subprocess；设置`RF_RUN_NARRATIVE_REAL_SAMPLES=1`及`COMPANY_WIKI_NETWORK=blocked`。**15 passed / 39.81s**：txt/JSON/PDF/skip四种路径、实体/年度/期间/as-of/artifact/raw tamper拒绝、未知公开日期、畸形/超限输入，以及现场P01年报PDF和T01电话会TXT读取。
+- 真实样本测试校验原件SHA和mtime、RF上下文中的原文SHA、至少一个EvidenceSpan locator及production fingerprint不变；夹具内也检查SQLite字节hash不变和scratch恢复。该实测证明RF现有N3a pathless子进程接口可读取CWP当前叙述包，不证明RF收入预测公式接线、CWP实际Worker并发/摘要、季报选材或SourceBundle默认切换。
+- requested basetemp超过60字符预算，项目guard自动迁至TEMP；退出事件明确`removed=true`。独立CWP `tmp/rf-n3a-main-e2e-20261005b`通过绝对路径包含校验后清除，`scratch_removed=True`。仅有既有`asyncio_mode` unknown-option warning。无网络请求、生产catalog/raw/database写入；CWP只保留既有`config/source_acquisition.yaml`用户修改，RF未写入。
