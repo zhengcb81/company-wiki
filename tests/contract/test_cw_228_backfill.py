@@ -8,6 +8,7 @@ from __future__ import annotations
 from pathlib import Path
 
 import pytest
+from support.legacy_source_artifact_fixture import legacy_normalize
 
 pytestmark = pytest.mark.slow
 
@@ -34,7 +35,7 @@ def _catalog_with_docs(tmp_path: Path, files: dict[str, str]):
         )
     )
     catalog.scan()
-    catalog.normalize()
+    legacy_normalize(catalog)
     return catalog
 
 
@@ -306,7 +307,7 @@ def test_t2_07_should_stop_finishes_current_file_then_stops(tmp_path):
         )
     )
     catalog.scan()
-    catalog.normalize()
+    legacy_normalize(catalog)
 
     with catalog.store.transaction() as conn:
         conn.execute("UPDATE documents SET text_fingerprint=NULL")

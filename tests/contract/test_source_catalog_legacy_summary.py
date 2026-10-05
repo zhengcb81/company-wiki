@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+from support.legacy_source_artifact_fixture import legacy_normalize, legacy_summarize, legacy_summarize_with_llm
 
 
 def _catalog(tmp_path: Path):
@@ -24,7 +25,7 @@ def _catalog(tmp_path: Path):
         )
     )
     catalog.scan()
-    catalog.normalize()
+    legacy_normalize(catalog)
     return catalog, sources
 
 
@@ -67,7 +68,7 @@ def test_llm_summary_is_source_bound_auditable_and_replaces_extractive_summary(
 ):
     catalog, source_root = _catalog(tmp_path)
     before = source_root.joinpath("meeting.txt").read_bytes()
-    catalog.summarize()
+    legacy_summarize(catalog)
     client = _FakeLLM(
         json.dumps(
             {
@@ -85,7 +86,7 @@ def test_llm_summary_is_source_bound_auditable_and_replaces_extractive_summary(
     )
 
     progress_events: list[dict] = []
-    report = catalog.summarize_with_llm(
+    report = legacy_summarize_with_llm(catalog,
         limit=1,
         llm_client_factory=lambda: client,
         max_input_chars=120000,
@@ -132,7 +133,7 @@ def test_llm_summary_deterministically_bounds_overlong_lists(tmp_path):
         )
     )
 
-    report = catalog.summarize_with_llm(
+    report = legacy_summarize_with_llm(catalog,
         limit=1,
         llm_client_factory=lambda: client,
         max_input_chars=120000,
@@ -163,7 +164,7 @@ def test_llm_summary_rejects_generated_investment_conclusions(tmp_path):
         )
     )
 
-    report = catalog.summarize_with_llm(
+    report = legacy_summarize_with_llm(catalog,
         limit=1,
         llm_client_factory=lambda: client,
         max_input_chars=120000,
@@ -209,7 +210,7 @@ def test_document_scoped_llm_failure_does_not_block_the_next_document(tmp_path):
             ensure_ascii=False,
         )
     )
-    first = catalog.summarize_with_llm(
+    first = legacy_summarize_with_llm(catalog,
         limit=1,
         llm_client_factory=lambda: bad_client,
         max_input_chars=120000,
@@ -221,7 +222,7 @@ def test_document_scoped_llm_failure_does_not_block_the_next_document(tmp_path):
         "2026年新增订单20亿元，交付产品1000台。", encoding="utf-8"
     )
     catalog.scan()
-    catalog.normalize()
+    legacy_normalize(catalog)
     good_client = _FakeLLM(
         json.dumps(
             {
@@ -234,7 +235,7 @@ def test_document_scoped_llm_failure_does_not_block_the_next_document(tmp_path):
         )
     )
 
-    second = catalog.summarize_with_llm(
+    second = legacy_summarize_with_llm(catalog,
         limit=1,
         llm_client_factory=lambda: good_client,
         max_input_chars=120000,
@@ -250,7 +251,7 @@ def test_document_scoped_llm_failure_does_not_block_the_next_document(tmp_path):
     assert status["llm_summary"]["pending"] == 0
 
     no_retry_client = _FakeLLM(good_client.content)
-    deferred_document = catalog.summarize_with_llm(
+    deferred_document = legacy_summarize_with_llm(catalog,
         limit=1,
         llm_client_factory=lambda: no_retry_client,
         max_input_chars=120000,
@@ -265,7 +266,7 @@ def test_provider_failure_requests_global_retry_without_document_quarantine(tmp_
     catalog, _ = _catalog(tmp_path)
     client = _ProviderFailingLLM("")
 
-    report = catalog.summarize_with_llm(
+    report = legacy_summarize_with_llm(catalog,
         limit=1,
         llm_client_factory=lambda: client,
         max_input_chars=120000,

@@ -5,6 +5,7 @@ from __future__ import annotations
 from pathlib import Path
 
 import pytest
+from support.legacy_source_artifact_fixture import legacy_normalize
 
 
 def _catalog_with(tmp_path: Path, files: dict[str, str]):
@@ -23,7 +24,7 @@ def _catalog_with(tmp_path: Path, files: dict[str, str]):
         )
     )
     catalog.scan()
-    catalog.normalize()
+    legacy_normalize(catalog)
     return catalog
 
 

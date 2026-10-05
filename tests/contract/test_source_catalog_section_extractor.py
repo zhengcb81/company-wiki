@@ -9,6 +9,7 @@ from company_wiki.source_catalog.section_extractor import (
     extract_sections_catalog,
     extract_sections_from_text,
 )
+from support.legacy_source_artifact_fixture import legacy_normalize
 
 
 ANNUAL = """\
@@ -147,7 +148,7 @@ def test_extract_sections_writes_artifact_and_is_idempotent(tmp_path):
         )
     )
     catalog.scan()
-    catalog.normalize()
+    legacy_normalize(catalog)
     # Deterministic selection: for a generic "directory" root the legacy
     # scanner ALSO registers the .source.json sidecar file as its own
     # standalone document (kind=broker_research), so a bare first-row
@@ -224,7 +225,7 @@ def test_section_extractor_refuses_tampered_normalized_bytes(tmp_path):
         )
     )
     catalog.scan()
-    catalog.normalize()
+    legacy_normalize(catalog)
     normalized = catalog.store.fetchone(
         "SELECT a.document_id,a.path FROM artifacts a JOIN documents d "
         "ON d.document_id=a.document_id WHERE a.artifact_role='normalized' "
@@ -266,7 +267,7 @@ def test_section_extractor_accepts_hash_bound_legacy_normalized(tmp_path):
         )
     )
     catalog.scan()
-    catalog.normalize()
+    legacy_normalize(catalog)
     doc_id = catalog.store.fetchone(
         "SELECT document_id FROM documents WHERE document_kind='annual_report'"
     )["document_id"]
@@ -308,7 +309,7 @@ def test_section_extractor_selects_one_deterministic_legacy_artifact(tmp_path):
         )
     )
     catalog.scan()
-    catalog.normalize()
+    legacy_normalize(catalog)
     doc_id = catalog.store.fetchone(
         "SELECT document_id FROM documents WHERE document_kind='annual_report'"
     )["document_id"]

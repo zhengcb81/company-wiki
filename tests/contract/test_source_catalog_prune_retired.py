@@ -12,6 +12,7 @@ from company_wiki.source_catalog.archive_retired_evidence import (
     archive_retired_evidence,
 )
 from company_wiki.source_catalog.store import retire_document
+from support.legacy_source_artifact_fixture import legacy_normalize
 
 
 ANNUAL = """\
@@ -48,7 +49,7 @@ def _retired_catalog(tmp_path: Path):
         )
     )
     catalog.scan()
-    catalog.normalize()
+    legacy_normalize(catalog)
     doc = catalog.store.fetchone("SELECT document_id FROM documents")
     retire_document(
         catalog.store,

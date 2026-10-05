@@ -9,6 +9,7 @@ from company_wiki.source_catalog.normalizer import (
     backfill_text_fingerprints,
     compute_text_fingerprint,
 )
+from support.legacy_source_artifact_fixture import legacy_normalize
 
 
 def test_fingerprint_is_stable_and_whitespace_insensitive():
@@ -54,7 +55,7 @@ def _catalog_with(tmp_path: Path, files: dict[str, str]):
         )
     )
     catalog.scan()
-    catalog.normalize()
+    legacy_normalize(catalog)
     return catalog
 
 

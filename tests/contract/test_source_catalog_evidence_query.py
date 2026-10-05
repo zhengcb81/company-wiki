@@ -10,6 +10,7 @@ import sqlite3
 from typing import Any
 
 import pytest
+from support.legacy_source_artifact_fixture import legacy_normalize
 
 
 def _catalog_module():
@@ -89,7 +90,7 @@ roots:
         )
     )
     catalog.scan()
-    catalog.normalize()
+    legacy_normalize(catalog)
     main = catalog.store.fetchone(
         "SELECT source_id,document_id FROM evidence_spans "
         "WHERE table_index IS NOT NULL LIMIT 1"

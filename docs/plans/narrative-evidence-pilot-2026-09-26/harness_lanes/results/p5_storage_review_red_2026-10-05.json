@@ -1,0 +1,33 @@
+{
+  "schema_version": "p5-storage-integration-review/1",
+  "delivery_head": "7ac1e3d236e22a263b88540f89a611675b5b8ab1",
+  "fixture_only": true,
+  "network_calls": 0,
+  "llm_calls": 0,
+  "production_written": false,
+  "outcomes": {
+    "managed_raw": {
+      "original_fixture_preserved": false,
+      "report_status": "succeeded",
+      "source_fact_digest_unchanged": true,
+      "test_root_restored": true
+    },
+    "orphan_index": {
+      "unreferenced_fixture_preserved": false,
+      "report_status": "succeeded",
+      "test_root_restored": true
+    },
+    "resume_retired": {
+      "remaining_known_file": true,
+      "deleted_count": 0,
+      "report_status": "succeeded",
+      "test_root_restored": true
+    },
+    "missing_handle": {
+      "handle_status": "completed",
+      "report_status": "failed",
+      "already_absent": 1,
+      "test_root_restored": true
+    }
+  }
+}

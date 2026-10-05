@@ -32,6 +32,7 @@ from company_wiki.source_catalog.artifact_handle import (
     validate_artifact,
 )
 from company_wiki.source_catalog.source_bundle import GENERATOR_REGISTRY
+from support.legacy_source_artifact_fixture import legacy_normalize, legacy_summarize_with_llm
 
 # Far-future stamp so producer-written created_at (real wall-clock) is never future.
 _NOW = "2099-12-31T23:59:59Z"
@@ -98,7 +99,7 @@ def _external_catalog(tmp_path: Path) -> SourceCatalog:
         )
     )
     catalog.scan()
-    catalog.normalize()
+    legacy_normalize(catalog)
     return catalog
 
 
@@ -116,7 +117,7 @@ def _focus_catalog(tmp_path: Path) -> SourceCatalog:
         )
     )
     catalog.scan()
-    catalog.normalize()
+    legacy_normalize(catalog)
     return catalog
 
 
@@ -219,7 +220,7 @@ def test_llm_summary_artifact_is_v2_bindable(tmp_path: Path):
         def generate(self, prompt: str, **_kwargs):
             return _Response()
 
-    report = catalog.summarize_with_llm(
+    report = legacy_summarize_with_llm(catalog,
         limit=1,
         llm_client_factory=_Client,
         max_input_chars=10_000,

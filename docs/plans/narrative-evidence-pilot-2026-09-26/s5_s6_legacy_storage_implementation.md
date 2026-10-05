@@ -54,6 +54,16 @@ TDD至少框住：精确source+locator能验原件并回放；原件hash不符/l
 
 不增加release授权文件、人工签名、逐文件签收或固定场景数量。A可在N4外线施工期间先做；B–D由MAIN协调共享接口，N4C成果可用后再做集中存储迁移验收。本卡尚未宣称B–D已实现。
 
+## B 本仓旧写入 API 退出（2026-10-05，MAIN当前执行）
+
+CodeGraph首查未收录部分旧模块/函数，不能以其“无调用者”证明不存在；补充当前Git tracked src/scripts/root Python AST核查，334个文件只有service内部调用旧batch writers，另有artifacts/gates旧演练调用。运行入口已不注册normalize/summarize/extract-sections；正式有限叙述Worker从verified raw选材，不依赖这些方法。本轮仅退出CWP public writer，不改RF/P5外包写集和生产资料。
+
+1. 先写公开行为TDD：SourceCatalog不存在normalize/summarize/summarize_with_llm/extract_sections；实例化或拒绝旧CLI不创建catalog/derived、不调用网络。scan/source reader/指纹按需backfill及新有限Worker仍可使用。
+2. 删除service的三个legacy writer forwarders及对应imports；public类只保留来源/原件索引与读接口，实际叙述任务由现有automation管。不能替换成另一套同名writer，也不新增环境/许可flag控制旧入口。
+3. 历史fixture测试仍需构造旧artifact以验证读兼容、SHA、撤回及未来清理。不让这些测试要求恢复正式旧writer：仅在tests/support增加明确的legacy造数helper，接受已有fixture catalog，调用尚未退休的底层legacy parser/fixture generation，保持测试目录隔离。把调用public旧方法的夹具准备改为这些helper；保留读行为断言。该helper不得被src/scripts/tools导入，不是新运行接口。旧writer内部实现与专属测试在所有读消费者迁移后下一集中节点继续删除，不冒称本轮已完成全部legacy正文模块退役。
+4. 旧slow-canary演练是历史artifact，未作为生产入口。公开入口退役后不得将它用于新项目运行；从当前运行指引剔除，不以它恢复旧normalize。原始公司文件、历史来源事实、DB spans/artifact句柄均不变。
+5. 集中验证：公开退役合同、受影响的历史读/清理/指纹/质量fixture tests，以及正式有限Worker独立CLI E2E；无付费模型/真实下载。只跑相关包，暂不删除2.826GB derived或3.06GB DB。完成后提交/推送、核CI并更新PWF。RF默认消费切换仍归P5-RF，物理删除仍待B其余消费者和C记录状态语义完成。
+
 ## 2026-10-04 B步骤当前进度
 
 公开extract-sections CLI与SourceCatalog.extract_sections方法已在71f867a退休；入口TDD 3项RED后，入口/纯章节解析/历史artifact binding集中48项GREEN。保留低级章节解析用于历史隔离夹具，不将其算当前公开生产入口。旧normalize/summarize库兼容方法、RF旧默认及旧derived/artifact/span主体仍待迁移，B–D没有整体完成；原件/生产库未变。

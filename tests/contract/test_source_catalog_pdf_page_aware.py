@@ -9,6 +9,7 @@ from pathlib import Path
 from typing import Any
 
 import pytest
+from support.legacy_source_artifact_fixture import legacy_normalize
 
 
 def _catalog_module():
@@ -83,10 +84,10 @@ def test_source_catalog_persists_paragraphs_empty_pages_and_stable_global_offset
     catalog = _catalog(module, project=project, source_root=source_root)
 
     catalog.scan()
-    report = catalog.normalize()
+    report = legacy_normalize(catalog)
     first = _evidence(catalog)
     first_ids = [item["span_id"] for item in first]
-    catalog.normalize(force=True)
+    legacy_normalize(catalog, force=True)
     second = _evidence(catalog)
 
     assert report.partial == 1
@@ -146,7 +147,7 @@ def test_source_catalog_persists_table_cells_without_duplicate_narrative(tmp_pat
     catalog = _catalog(module, project=project, source_root=source_root)
 
     catalog.scan()
-    report = catalog.normalize()
+    report = legacy_normalize(catalog)
     evidence = _evidence(catalog)
 
     assert report.completed == 1
@@ -239,7 +240,7 @@ def test_corrupt_pdf_remains_fail_closed_and_source_immutable(tmp_path):
     catalog = _catalog(module, project=project, source_root=source_root)
 
     catalog.scan()
-    report = catalog.normalize()
+    report = legacy_normalize(catalog)
 
     # Deterministic corruption maps to unsupported, never to a retryable
     # failed state (WR-10.13 unsupported/failed mutual exclusivity).

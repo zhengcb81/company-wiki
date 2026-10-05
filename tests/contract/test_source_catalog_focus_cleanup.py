@@ -10,6 +10,7 @@ import yaml
 
 from company_wiki.source_catalog import CatalogConfig, RootSpec, SourceCatalog
 from company_wiki.source_catalog.focus_cleanup import FocusScopeCleanupService
+from support.legacy_source_artifact_fixture import legacy_normalize, legacy_summarize
 
 
 def _sha(path: Path) -> str:
@@ -65,8 +66,8 @@ def _legacy_catalog(tmp_path: Path):
         )
     )
     catalog.scan()
-    catalog.normalize()
-    catalog.summarize()
+    legacy_normalize(catalog)
+    legacy_summarize(catalog)
 
     focus = root / "重点关注"
     legacy.rename(focus)

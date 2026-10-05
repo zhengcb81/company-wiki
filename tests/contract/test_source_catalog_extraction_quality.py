@@ -9,6 +9,7 @@ from pathlib import Path
 import sqlite3
 
 import pytest
+from support.legacy_source_artifact_fixture import legacy_normalize
 
 
 def _catalog_module():
@@ -64,7 +65,7 @@ roots:
     )
     catalog.scan()
     if normalize:
-        catalog.normalize()
+        legacy_normalize(catalog)
     row = catalog.store.fetchone(
         "SELECT document_id,primary_source_id FROM documents LIMIT 1"
     )
@@ -101,7 +102,7 @@ def _pdf_catalog(tmp_path: Path, *, corrupt: bool = False):
         )
     )
     catalog.scan()
-    catalog.normalize()
+    legacy_normalize(catalog)
     row = catalog.store.fetchone(
         "SELECT document_id,primary_source_id FROM documents LIMIT 1"
     )

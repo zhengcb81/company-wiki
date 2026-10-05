@@ -15,6 +15,7 @@ from company_wiki.source_catalog import CatalogConfig, RootSpec, SourceCatalog
 from company_wiki.source_catalog.prompt_injection import (
     record_prompt_injection_review,
 )
+from support.legacy_source_artifact_fixture import legacy_normalize, legacy_summarize_with_llm
 
 # ---------------------------------------------------------------------------
 # fixture: two directory roots (one private_user), one document each
@@ -56,7 +57,7 @@ def _catalog(
         )
     )
     catalog.scan()
-    catalog.normalize()
+    legacy_normalize(catalog)
     return catalog
 
 
@@ -131,7 +132,7 @@ def _review(catalog, document_id: str, *, source_sha256: str | None = None) -> N
 
 
 def _summarize(catalog, client: _FakeLLM):
-    return catalog.summarize_with_llm(
+    return legacy_summarize_with_llm(catalog,
         limit=10,
         llm_client_factory=lambda: client,
         max_input_chars=120000,

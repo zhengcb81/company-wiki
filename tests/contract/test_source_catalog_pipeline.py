@@ -10,6 +10,7 @@ from pathlib import Path
 import sqlite3
 
 import pytest
+from support.legacy_source_artifact_fixture import legacy_normalize, legacy_summarize
 
 
 def _catalog_module():
@@ -472,8 +473,8 @@ def test_normalize_summarize_and_export_index_every_original_and_derived_artifac
     )
 
     catalog.scan()
-    normalized = catalog.normalize()
-    summarized = catalog.summarize()
+    normalized = legacy_normalize(catalog)
+    summarized = legacy_summarize(catalog)
     exported = catalog.export_indexes()
 
     assert normalized.completed == 2
@@ -594,7 +595,7 @@ def test_page_aware_pdf_and_office_adapters_emit_markdown_or_truthful_stub(tmp_p
         )
     )
     catalog.scan()
-    result = catalog.normalize()
+    result = legacy_normalize(catalog)
     rows = catalog.query(limit=20)
 
     assert result.completed == 4
@@ -717,14 +718,14 @@ def test_catalog_writer_lock_and_repeatable_processing_batches(tmp_path):
         with pytest.raises(module.CatalogOperationLockedError):
             catalog.scan()
 
-    first = catalog.normalize(limit=1)
-    second = catalog.normalize(limit=1)
+    first = legacy_normalize(catalog, limit=1)
+    second = legacy_normalize(catalog, limit=1)
     assert first.completed == 1
     assert second.completed == 1
     assert catalog.status()["normalized_artifacts"] == 2
 
-    first_summary = catalog.summarize(limit=1)
-    second_summary = catalog.summarize(limit=1)
+    first_summary = legacy_summarize(catalog, limit=1)
+    second_summary = legacy_summarize(catalog, limit=1)
     assert first_summary.completed == 1
     assert second_summary.completed == 1
     assert catalog.status()["summary_artifacts"] == 2

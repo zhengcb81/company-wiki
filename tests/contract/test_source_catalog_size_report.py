@@ -5,6 +5,7 @@ from __future__ import annotations
 from pathlib import Path
 
 from company_wiki.source_catalog.catalog_size_report import catalog_size_report
+from support.legacy_source_artifact_fixture import legacy_normalize
 
 
 ANNUAL = """\
@@ -55,7 +56,7 @@ def test_size_report_fields_are_consistent(tmp_path):
 
 def test_size_report_reflects_retired_and_spans(tmp_path):
     catalog = _catalog(tmp_path)
-    catalog.normalize()
+    legacy_normalize(catalog)
     from company_wiki.source_catalog.store import retire_document
 
     doc = catalog.store.fetchone("SELECT document_id FROM documents")

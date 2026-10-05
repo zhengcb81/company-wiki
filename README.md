@@ -131,7 +131,7 @@ python -m company_wiki.source_catalog.cli --config config/source_catalog.yaml en
   --allow-download
 ```
 
-旧的全库 `normalize`、`summarize`、`run`、常驻 Worker 和登录启动入口已从公开 CLI 退役。叙述性文档通过有限批次处理；批次的接口、空间上限与实施进度见[当前主计划](docs/plans/narrative-evidence-pilot-2026-09-26/task_plan.md)。历史操作说明保留在 [分布式原始资料目录与 Markdown 索引](docs/source-catalog.md)，其中旧 Worker 的命令和行为不再是当前使用方式。
+旧的全库 `normalize`、`summarize`、`run`、常驻 Worker 和登录启动入口已退役，`SourceCatalog` 也不再提供整篇转换/摘要写入方法。叙述性文档通过有限批次处理；当前用法见[来源目录、原文读取与有限叙述批次](docs/source-catalog.md)，接口、空间上限与迁移进度见[主计划](docs/plans/narrative-evidence-pilot-2026-09-26/task_plan.md)。旧派生数据仍等实际读者迁移完成后处置。
 
 ### 8. 使用系统
 

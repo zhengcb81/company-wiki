@@ -652,3 +652,14 @@ S0/N4A及S2模型预算基础、CLI阶段与CI修复已正常发布，当前CI�
 - 下一真实provider批次需160k token cap问题答复，仍限累计$0.10。Flash代理价与Credits已同步临时driver/交接报告；不声称摘要已完成。配置修正前的旧报告保持历史事实，最新Next Step和preflight报告已经纠正。
 - 发布前Ruff/diff-check GREEN，用户source_acquisition配置SHA仍3609e707466e…，不暂存。本线测试根全部恢复：正常账号删除5个早期sandbox创建的RED目录遇到ACL拒绝，转回创建它们的sandbox执行经绝对路径验证的同一范围删除成功；不是生产权限变更，也未改ACL。旧未知费用SQLite与临时待用driver保留，原件/外包目录未清理。
 - 已发布：a0ea41bd1aef8ffcdf535e065cb9ed5836abaf2b提交/推送成功；commit Ruff/mypy/config-doctor/host guard与正常pre-push快速合同均GREEN。精确SHA CI37368647773 queued，尚无远端结果。本地仅config/source_acquisition.yaml用户既有变更，SHA3609e707466e…完全相同。
+
+
+## 2026-10-05 — S5公开writer退休节点与P5存储交付复核
+
+- structural-first CodeGraph遗漏旧模块，补充当前Git tracked AST后，运行src/scripts内部仅service连接三个旧批量writer；历史canary不是当前入口。删除SourceCatalog.normalize/summarize/summarize_with_llm，不添替代flag或writer。21测试模块66处造数改到tests/support；读校验、指纹、撤回、清理断言保留，底层legacy函数暂留等待读者迁移。
+- 公开入口TDD先4 RED，退出后23 GREEN。受影响集中包首轮235 collected：231 passed/4 failed，388.78s。两项操作文档过期、一项已删控制面板脚本断言、一项子进程PYTHONPATH缺tests/support。更新当前操作说明、退休已删面板测试、修父进程fixture路径；三个具体红灯+两个正式有限CLI中英/幂等E2E共5 passed/25.11s。原包有效234个case已分步绿，另2 CLI；不重复6分钟全包、不加日常CI慢门。
+- P5报告的TXT golden RED亦在MAIN复现。公开producer/read重生成时先证明除selector/prompt版本和Replay响应hash外，source/spans/summary全等；更新bundle/ref/request/receipt/metadata哈希，单case GREEN3.14s。固化refresh工具与fixture说明，零外部模型；不能照旧报告归因bundle_producer版本，实际bundle_producer仍1.0.0。
+- Ruff/diff-check GREEN；四个S5测试根已恢复absent。用户配置SHA仍3609e707466e…，生产原件/库没有执行写入或删除，本节点没有重新制造生产全库前后快照。生成golden的TEMP由finally恢复。DeepSeek/MiMo配置修正a0ea41b精确CI37368647773 success。
+- 新收到P5-STORAGE delivery7ac1e3d（handoff文档f8f414a），真实功能diff17个新文件/3181行；未整支合入。四个真实schema独立fixture小试验实证：修改managed_files能删raw副本并仍报succeeded/来源DBdigest不变；全局index sweep删未登记孤立index；已retired但未unlink的文件rerun不续删；missing file仍留completed句柄。四根均恢复；没有生产删件/外部调用。正式JSON与修复顺序另存review，验收尚未通过。
+- Probe先误以raw直接含md，两次StopIteration；读实际fixture后改为locations登记路径。一次PowerShell替换引号解析失败未改文件；改apply_patch。probe自己sqlite with不关闭导致一处WinError32，显式closing后修复并精确清除该scratch，再完成四项。不是生产权限/数据故障。
+- RF live main只读核8a153f33、仅两份assurance owner修改；RF/FF无约定HANDOFF，写集不碰。旧N4C token cap问题仍无答复；本轮新增model POST/download均0，未重算或退款旧未知预留。

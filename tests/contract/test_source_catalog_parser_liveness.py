@@ -24,6 +24,7 @@ from company_wiki.source_catalog.normalizer import (
     _run_parser_isolated,
 )
 from company_wiki.source_contract import SourceManifest, SourceType
+from support.legacy_source_artifact_fixture import legacy_normalize
 
 
 PROJECT = Path(__file__).resolve().parents[2]
@@ -342,11 +343,11 @@ def test_normalize_timeout_retries_once_then_becomes_terminal(tmp_path, monkeypa
 
     monkeypatch.setattr(normalizer, "_run_parser_isolated", fake_isolated)
 
-    first = catalog.normalize(limit=2, retry_limit=2, retry_backoff_seconds=0)
+    first = legacy_normalize(catalog, limit=2, retry_limit=2, retry_backoff_seconds=0)
     first_status = read_pipeline_status(catalog.config.database_path)["markdown"]
-    second = catalog.normalize(limit=2, retry_limit=2, retry_backoff_seconds=0)
+    second = legacy_normalize(catalog, limit=2, retry_limit=2, retry_backoff_seconds=0)
     second_status = read_pipeline_status(catalog.config.database_path)["markdown"]
-    third = catalog.normalize(limit=2, retry_limit=2, retry_backoff_seconds=0)
+    third = legacy_normalize(catalog, limit=2, retry_limit=2, retry_backoff_seconds=0)
 
     assert (first.completed, first.failed) == (1, 1)
     assert first_status["retryable_failed"] == 1
@@ -372,7 +373,7 @@ def test_normalize_stop_does_not_write_failure_or_consume_retry(tmp_path, monkey
 
     monkeypatch.setattr(normalizer, "_run_parser_isolated", fake_isolated)
 
-    report = catalog.normalize(limit=1)
+    report = legacy_normalize(catalog, limit=1)
     markdown = read_pipeline_status(catalog.config.database_path)["markdown"]
 
     assert (report.partial, report.failed) == (1, 0)
@@ -451,8 +452,8 @@ def test_corrupt_xls_is_terminal_unsupported_instead_of_retryable(tmp_path):
     )
     catalog.scan()
 
-    first = catalog.normalize(limit=1, retry_limit=3, retry_backoff_seconds=0)
-    second = catalog.normalize(limit=1, retry_limit=3, retry_backoff_seconds=0)
+    first = legacy_normalize(catalog, limit=1, retry_limit=3, retry_backoff_seconds=0)
+    second = legacy_normalize(catalog, limit=1, retry_limit=3, retry_backoff_seconds=0)
     markdown = read_pipeline_status(catalog.config.database_path)["markdown"]
 
     assert (first.unsupported, first.failed) == (1, 0)
@@ -543,7 +544,8 @@ _run_parser_isolated(
 """
     env = dict(os.environ)
     env["PYTHONPATH"] = os.pathsep.join(
-        [str(PROJECT / "tests" / "contract"), str(PROJECT / "src"), env.get("PYTHONPATH", "")]
+        [str(PROJECT / "tests" / "contract"), str(PROJECT / "tests"),
+         str(PROJECT / "src"), env.get("PYTHONPATH", "")]
     )
     env["PARSER_SOURCE"] = str(source)
     env["PARSER_PID_FILE"] = str(pid_file)

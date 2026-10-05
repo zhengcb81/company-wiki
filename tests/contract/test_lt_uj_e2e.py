@@ -45,6 +45,7 @@ from company_wiki.source_catalog.acquisition import (  # noqa: E402
     DownloadCandidate,
     DownloadReceipt,
 )
+from support.legacy_source_artifact_fixture import legacy_normalize
 
 
 # ---------------------------------------------------------------------------
@@ -304,7 +305,7 @@ def test_uj03_old_reused_new_downloaded_artifacts_generated(tmp_path: Path) -> N
 
     # Phase 3: normalize both (artifact generation)
     catalog.scan()
-    catalog.normalize(limit=10)
+    legacy_normalize(catalog, limit=10)
 
     # Verify artifacts exist
     rows = catalog.store.fetchall(
@@ -340,7 +341,7 @@ def test_uj05_full_pipeline_then_complete_reuse(tmp_path: Path) -> None:
 
     # Scan + normalize (processing step)
     catalog.scan()
-    catalog.normalize(limit=10)
+    legacy_normalize(catalog, limit=10)
 
     # Verify the document and its artifact
     doc = catalog.store.fetchone(

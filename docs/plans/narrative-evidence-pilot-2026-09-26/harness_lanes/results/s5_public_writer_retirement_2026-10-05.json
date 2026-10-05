@@ -1,0 +1,57 @@
+{
+  "schema_version": "s5-public-writer-retirement/1",
+  "status": "focused_verification_green",
+  "originals": {
+    "P01": {
+      "byte_size": 9165875,
+      "matches_pinned_original_sha": true
+    },
+    "P04": {
+      "byte_size": 11211796,
+      "matches_pinned_original_sha": true
+    },
+    "P07": {
+      "byte_size": 153851,
+      "matches_pinned_original_sha": true
+    },
+    "T01": {
+      "byte_size": 66324,
+      "matches_pinned_original_sha": true
+    }
+  },
+  "user_config_sha256": "3609e707466eeb3e0f685e14f2637c6afa39ba900edef1be4814433a43300a01",
+  "tests": {
+    "initial_affected_package": {
+      "collected": 235,
+      "passed": 231,
+      "failed": 4,
+      "elapsed_seconds": 388.78
+    },
+    "retired_obsolete_panel_case": 1,
+    "fixes_and_actual_cli_e2e": {
+      "passed": 5,
+      "deselected": 10,
+      "elapsed_seconds": 25.11
+    },
+    "golden_regeneration_case": {
+      "passed": 1,
+      "elapsed_seconds": 3.14
+    },
+    "final_distinct_effective_cases_green": 237
+  },
+  "cleanup": {
+    "owned_test_roots": [
+      "s5writer-red",
+      "s5writer-green",
+      "s5writer-node",
+      "s5writer-final"
+    ],
+    "restored": true
+  },
+  "production_delete_executed": false,
+  "production_snapshot_scope": "four original SHA compared to pinned known originals; no new whole-catalog before/after snapshot",
+  "network_model_calls": 0,
+  "download_calls": 0,
+  "low_level_legacy_generators_retained": true,
+  "physical_derived_and_spans_retained": true
+}

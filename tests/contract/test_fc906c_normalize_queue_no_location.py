@@ -24,6 +24,7 @@ from company_wiki.source_catalog import (
     RootSpec,
     SourceCatalog,
 )
+from support.legacy_source_artifact_fixture import legacy_normalize
 
 # Location-bearing document (real parser path would run; we only assert queue
 # ORDER/selection, so a tiny text file is fine and fast).
@@ -85,7 +86,7 @@ def test_normalize_queue_prefers_document_with_active_location(tmp_path: Path):
     catalog = _catalog(tmp_path)
     locless = _insert_locationless_document(catalog)
 
-    report = catalog.normalize(limit=1)
+    report = legacy_normalize(catalog, limit=1)
     # The location-less document must NOT be the one picked & failed.
     assert report.failed == 0, (
         f"queue picked the location-less document and failed: {report!r}"
@@ -98,7 +99,7 @@ def test_normalize_queue_prefers_document_with_active_location(tmp_path: Path):
     )
     # The location-less document must not be stuck as 'eligible' forever:
     # a second run with limit=1 must NOT keep failing on it either.
-    report2 = catalog.normalize(limit=1)
+    report2 = legacy_normalize(catalog, limit=1)
     assert report2.failed == 0, f"second run still fails: {report2!r}"
 
 
@@ -173,7 +174,7 @@ def test_primary_none_is_recorded_diagnostically(tmp_path: Path):
     con2.commit()
     con2.close()
 
-    report = catalog.normalize(limit=1)
+    report = legacy_normalize(catalog, limit=1)
     assert report.failed == 1, f"mismatch doc must fail primary check: {report!r}"
     assert report.last_failed_document_id == doc_id, (
         "primary-None failure must record the document id"

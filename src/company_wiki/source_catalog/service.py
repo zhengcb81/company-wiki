@@ -10,13 +10,11 @@ from typing import Any, Callable
 
 from .models import CatalogConfig, ProcessingReport, ScanReport
 from .acquisition_journal import AcquisitionJournal
-from .llm_summarizer import summarize_catalog_with_llm
 from .lock import CatalogOperationLock
-from .normalizer import backfill_text_fingerprints, normalize_catalog
+from .normalizer import backfill_text_fingerprints
 from .scanner import R4_PROVENANCE_KEY, scan_catalog, v2_scan_shadow_from_snapshot
 from .store import CatalogStore, metadata_object, metadata_state
 from .reader import ReadOnlyCatalogReader
-from .summarizer import summarize_catalog
 
 
 _EXACT_DUPLICATE_PREFIX = "urn:company-wiki:duplicate:exact:sha256:"
@@ -176,34 +174,6 @@ class SourceCatalog:
                 v2_scan_shadow=v2_scan_shadow,
             )
 
-    def normalize(
-        self,
-        *,
-        limit: int | None = None,
-        force: bool = False,
-        progress: Callable[..., None] | None = None,
-        should_stop: Callable[[], bool] | None = None,
-        parser_timeout_seconds: float = 3600,
-        parser_heartbeat_interval_seconds: float = 15,
-        parser_result_max_bytes: int = 268_435_456,
-        retry_limit: int = 3,
-        retry_backoff_seconds: int = 900,
-    ) -> ProcessingReport:
-        with CatalogOperationLock(self.config.catalog_dir, operation="normalize"):
-            return normalize_catalog(
-                self.config,
-                self.store,
-                limit=limit,
-                force=force,
-                progress=progress,
-                should_stop=should_stop,
-                parser_timeout_seconds=parser_timeout_seconds,
-                parser_heartbeat_interval_seconds=parser_heartbeat_interval_seconds,
-                parser_result_max_bytes=parser_result_max_bytes,
-                retry_limit=retry_limit,
-                retry_backoff_seconds=retry_backoff_seconds,
-            )
-
     def backfill_text_fingerprints(
         self,
         *,
@@ -232,34 +202,6 @@ class SourceCatalog:
                 parser_timeout_seconds=parser_timeout_seconds,
                 parser_heartbeat_interval_seconds=parser_heartbeat_interval_seconds,
                 parser_result_max_bytes=parser_result_max_bytes,
-            )
-
-    def summarize(
-        self, *, limit: int | None = None, force: bool = False
-    ) -> ProcessingReport:
-        with CatalogOperationLock(self.config.catalog_dir, operation="summarize"):
-            return summarize_catalog(self.config, self.store, limit=limit, force=force)
-
-    def summarize_with_llm(
-        self,
-        *,
-        limit: int,
-        llm_client_factory,
-        max_input_chars: int,
-        max_output_tokens: int,
-        retry_backoff_seconds: int = 3600,
-        progress: Callable[..., None] | None = None,
-    ) -> ProcessingReport:
-        with CatalogOperationLock(self.config.catalog_dir, operation="summarize_llm"):
-            return summarize_catalog_with_llm(
-                self.config,
-                self.store,
-                limit=limit,
-                llm_client_factory=llm_client_factory,
-                max_input_chars=max_input_chars,
-                max_output_tokens=max_output_tokens,
-                retry_backoff_seconds=retry_backoff_seconds,
-                progress=progress,
             )
 
     def status(self) -> dict[str, int]:

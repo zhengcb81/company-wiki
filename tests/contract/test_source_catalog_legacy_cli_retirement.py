@@ -70,7 +70,7 @@ def test_normalized_section_writer_is_not_a_catalog_api(tmp_path):
         catalog.close()
 
 
-def test_legacy_automatic_worker_is_retired_while_on_demand_sources_remain():
+def test_legacy_automatic_worker_and_full_document_writers_are_retired():
     import company_wiki.source_catalog as public
     from company_wiki.source_catalog.service import SourceCatalog
 
@@ -80,9 +80,27 @@ def test_legacy_automatic_worker_is_retired_while_on_demand_sources_remain():
     )
     assert public.SourceCatalog is SourceCatalog
     assert not hasattr(public, "SourceOnlySchedulerPolicy")
-    assert callable(SourceCatalog.normalize)
-    assert callable(SourceCatalog.summarize)
-    assert callable(SourceCatalog.summarize_with_llm)
+    for name in ("normalize", "summarize", "summarize_with_llm", "extract_sections"):
+        assert not hasattr(SourceCatalog, name)
+    for name in ("scan", "backfill_text_fingerprints", "query_filing_candidates"):
+        assert callable(getattr(SourceCatalog, name))
+
+
+@pytest.mark.parametrize("method", ["normalize", "summarize", "summarize_with_llm"])
+def test_retired_writer_cannot_create_storage_or_call_a_model(tmp_path, monkeypatch, method):
+    from company_wiki.source_catalog.models import CatalogConfig, RootSpec
+    from company_wiki.source_catalog.service import SourceCatalog
+    catalog = SourceCatalog(CatalogConfig(
+        project_root=tmp_path, catalog_dir=tmp_path / "catalog",
+        roots=(RootSpec("fixture", tmp_path / "raw", "directory"),)))
+    monkeypatch.setattr("socket.create_connection", lambda *_args, **_kwargs: pytest.fail("network opened"))
+    try:
+        with pytest.raises(AttributeError):
+            getattr(catalog, method)()
+        assert not (tmp_path / "catalog").exists()
+        assert not (tmp_path / "derived").exists()
+    finally:
+        catalog.close()
 
 
 def test_legacy_worker_keeps_cleanup_controls_without_a_session_launcher():

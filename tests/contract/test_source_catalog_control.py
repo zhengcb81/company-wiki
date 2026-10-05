@@ -7,6 +7,7 @@ import os
 from pathlib import Path
 
 import pytest
+from support.legacy_source_artifact_fixture import legacy_normalize
 
 
 class _FakeProcesses:
@@ -576,7 +577,7 @@ def test_read_pipeline_status_reports_scan_index_and_processing_queues(tmp_path)
     assert any(item["detail"] == "enumerating root source" for item in scan_progress)
 
     normalize_progress: list[dict] = []
-    catalog.normalize(progress=lambda **details: normalize_progress.append(details))
+    legacy_normalize(catalog, progress=lambda **details: normalize_progress.append(details))
     after = read_pipeline_status(catalog.config.database_path)
 
     assert after["markdown"]["pending"] == 0
@@ -626,7 +627,7 @@ def test_pipeline_status_separates_retryable_permanent_and_legacy_failures(tmp_p
         )
     )
     catalog.scan()
-    catalog.normalize()
+    legacy_normalize(catalog)
     documents = catalog.store.fetchall(
         "SELECT document_id FROM documents ORDER BY document_id"
     )

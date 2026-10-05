@@ -12,6 +12,7 @@ from company_wiki.source_catalog.admission import (
     evaluate_admission,
     processing_priority,
 )
+from support.legacy_source_artifact_fixture import legacy_normalize, legacy_summarize, legacy_summarize_with_llm
 
 
 def _decision(relative_path: str, metadata: dict[str, object] | None = None):
@@ -198,7 +199,7 @@ def test_normalize_limit_dispatches_prospectus_before_broker_research(tmp_path: 
     )
     catalog.scan()
 
-    report = catalog.normalize(limit=1)
+    report = legacy_normalize(catalog, limit=1)
 
     assert report.completed == 1
     row = catalog.store.fetchone(
@@ -255,9 +256,9 @@ def test_both_summary_queues_dispatch_prospectus_first(tmp_path: Path):
         encoding="utf-8",
     )
     catalog.scan()
-    catalog.normalize()
+    legacy_normalize(catalog)
 
-    report = catalog.summarize(limit=1)
+    report = legacy_summarize(catalog, limit=1)
     assert report.completed + report.partial == 1
     extractive = catalog.store.fetchone(
         """SELECT d.document_kind FROM artifacts a
@@ -292,7 +293,7 @@ def test_both_summary_queues_dispatch_prospectus_first(tmp_path: Path):
             prompts.append(prompt)
             return _Response()
 
-    llm_report = catalog.summarize_with_llm(
+    llm_report = legacy_summarize_with_llm(catalog,
         limit=1,
         llm_client_factory=_Client,
         max_input_chars=10_000,
@@ -301,14 +302,6 @@ def test_both_summary_queues_dispatch_prospectus_first(tmp_path: Path):
     assert llm_report.completed == 1
     assert len(prompts) == 1
     assert "文档类型：prospectus" in prompts[0]
-
-
-def test_control_panel_exposes_policy_exclusions_separately():
-    project_root = Path(__file__).resolve().parents[2]
-    script = (project_root / "scripts" / "source_catalog_control.ps1").read_text(
-        encoding="utf-8"
-    )
-    assert "$Scan.policy_excluded" in script
 
 
 # --- Rollout blocker regression contracts (Preflight 1) ---

@@ -28,6 +28,7 @@ from company_wiki.source_catalog.artifact_handle import (
     validate_artifact,
 )
 from company_wiki.source_catalog.source_bundle import GENERATOR_REGISTRY
+from support.legacy_source_artifact_fixture import legacy_normalize, legacy_summarize
 
 # Far-future stamp so producer-written created_at (real wall-clock) is never future.
 _NOW = "2099-12-31T23:59:59Z"
@@ -69,7 +70,7 @@ def _external_catalog(tmp_path: Path) -> SourceCatalog:
         )
     )
     catalog.scan()
-    catalog.normalize()
+    legacy_normalize(catalog)
     return catalog
 
 
@@ -129,7 +130,7 @@ def test_extractive_summary_generator_is_registered() -> None:
 
 def test_extractive_summary_artifact_is_v2_bindable(tmp_path: Path) -> None:
     catalog = _external_catalog(tmp_path)
-    report = catalog.summarize()
+    report = legacy_summarize(catalog)
     assert report.completed >= 1, f"summarize did not complete: {report!r}"
     handle, meta = _summary_handle(catalog, tmp_path)
     assert meta.get("schema_version") == ARTIFACT_HANDLE_SCHEMA_VERSION
@@ -142,7 +143,7 @@ def test_extractive_summary_writes_schema_version_column(tmp_path: Path) -> None
     # FC-906-d contract: the bundle consumer reads the COLUMN — metadata-only
     # stamping leaves production bundles empty (the exact gap FC-906-d fixed).
     catalog = _external_catalog(tmp_path)
-    catalog.summarize()
+    legacy_summarize(catalog)
     row = catalog.store.fetchone(
         "SELECT schema_version FROM artifacts WHERE artifact_role='summary' "
         "AND generator_name='source_catalog_extractive_summary' LIMIT 1"
@@ -164,7 +165,7 @@ def test_extractive_summary_refuses_tampered_normalized_bytes(tmp_path: Path) ->
     path = Path(normalized["path"])
     path.write_bytes(path.read_bytes() + b"\nTampered content outside the recorded digest.\n")
 
-    report = catalog.summarize()
+    report = legacy_summarize(catalog)
     assert report.failed >= 1
     assert catalog.store.fetchone(
         "SELECT artifact_id FROM artifacts WHERE document_id=? "
@@ -181,7 +182,7 @@ def test_extractive_summary_accepts_hash_bound_legacy_normalized(tmp_path: Path)
             "metadata_json='{}' WHERE artifact_role='normalized'"
         )
 
-    report = catalog.summarize()
+    report = legacy_summarize(catalog)
     assert report.completed >= 1
     assert catalog.store.fetchone(
         "SELECT artifact_id FROM artifacts WHERE artifact_role='summary' LIMIT 1"
@@ -214,7 +215,7 @@ def test_extractive_summary_selects_one_modern_artifact_per_document(tmp_path: P
     catalog = _external_catalog(tmp_path)
     _add_legacy_normalized(catalog)
 
-    report = catalog.summarize()
+    report = legacy_summarize(catalog)
     assert report.completed == 1
     assert report.failed == 0
     assert catalog.store.fetchone(
@@ -237,7 +238,7 @@ def test_extractive_summary_does_not_fallback_after_modern_digest_failure(
     _add_legacy_normalized(catalog, path=legacy_path)
     modern_path.write_bytes(modern_path.read_bytes() + b"\nTampered modern bytes.\n")
 
-    report = catalog.summarize()
+    report = legacy_summarize(catalog)
     assert report.completed == 0
     assert report.failed == 1
     assert catalog.store.fetchone(
