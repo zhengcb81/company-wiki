@@ -80,7 +80,7 @@ def _prepare(
         raise
 
 
-def _invoke(state, *, llm_config=None):
+def _invoke(state, *, llm_config=None, launcher=None):
     env = dict(os.environ)
     env["PYTHONPATH"] = str(Path(__file__).resolve().parents[2] / "src")
     env["PYTHONDONTWRITEBYTECODE"] = "1"
@@ -90,6 +90,8 @@ def _invoke(state, *, llm_config=None):
     if llm_config is not None:
         entrypoint = [sys.executable, str(Path(__file__).resolve().parents[2] / "scripts/narrative_batch_configured.py"),
                       "--llm-config", str(llm_config), "--allow-local-model-http"]
+    elif launcher is not None:
+        entrypoint = [sys.executable, str(launcher)]
     process = subprocess.run([
         *entrypoint,
         "--project-root", str(state.root), "--catalog-config", str(state.config_path),
@@ -102,6 +104,64 @@ def _invoke(state, *, llm_config=None):
     assert isinstance(result, dict) and result["schema_version"] == "narrative-batch-result/1"
     assert result["run_id"] == "cli-e2e"
     return process, result
+
+
+def test_cli_finishes_when_owned_storage_file_disappears_during_sampling(
+    tmp_path_factory, loopback_model_server,
+):
+    with isolated_batch_directory(tmp_path_factory) as root:
+        state = _prepare(root, loopback_model_server.endpoint, one_source=True)
+        try:
+            launcher = root / "storage_race.py"
+            launcher.write_text('''from pathlib import Path
+import sys
+import company_wiki.automation.narrative_batch as batch
+from company_wiki.automation.narrative_batch_cli import main
+
+original_tree_bytes = batch._tree_bytes
+original_stat = Path.stat
+transient = None
+injected = False
+removed = False
+
+def stat_then_remove(path, *args, **kwargs):
+    global removed
+    result = original_stat(path, *args, **kwargs)
+    if path == transient and not removed:
+        removed = True
+        path.unlink()
+    return result
+
+def measured(path):
+    global transient, injected
+    if path.name == "run-work" and (path / "storage-baseline.json").exists() and not injected:
+        transient = path / "sampling.tmp"
+        transient.write_bytes(b"bounded transient fixture")
+        injected = True
+    return original_tree_bytes(path)
+
+if __name__ == "__main__":
+    Path.stat = stat_then_remove
+    batch._tree_bytes = measured
+    try:
+        code = main()
+    finally:
+        print(f"storage_race_injected={int(injected and removed)}", file=sys.stderr)
+    raise SystemExit(code)
+''', encoding="utf-8")
+            originals = _originals(state)
+            process, result = _invoke(state, launcher=launcher)
+            assert "storage_race_injected=1" in process.stderr
+            assert process.returncode == 0 and result["status"] == "completed", (process.stderr, result)
+            assert len(loopback_model_server.requests) == 1
+            assert all(item["artifact_ref"] is not None for item in result["documents"])
+            assert result["budget"]["unknown_reservations"] == 0
+            assert result["budget"]["unsettled_reservations"] == 0
+            assert not (root / "run-work/sampling.tmp").exists()
+            assert_originals_and_foreign_jobs_untouched(state, originals,
+                output=process.stdout + process.stderr)
+        finally:
+            state.catalog.close()
 
 
 def test_configured_entrypoint_uses_existing_loader_through_real_worker_and_resume(

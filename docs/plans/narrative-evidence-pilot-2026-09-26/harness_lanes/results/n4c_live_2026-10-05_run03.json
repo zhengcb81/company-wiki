@@ -1,0 +1,120 @@
+{
+  "schema_version": "n4c-live-experiment/1",
+  "run_id": "n4c-20261005-live-configured-03",
+  "metadata_is_fixture": true,
+  "rf_head": "8a153f3387ae75fb172e70f8ab63ffd38100779a",
+  "model_options": {
+    "allow_local_http": false,
+    "api_key_env": "MINIMAX_API_KEY",
+    "endpoint": "https://api.minimaxi.com/v1/chat/completions",
+    "max_output_tokens": 8192,
+    "max_request_bytes": 262144,
+    "max_response_bytes": 262144,
+    "model_id": "MiniMax-M3",
+    "output_token_field": "max_completion_tokens",
+    "reasoning_split": true,
+    "temperature": 1.0,
+    "timeout_seconds": 60
+  },
+  "caps": {
+    "tokens": 26340,
+    "micro_usd": 80656,
+    "profile": "P4"
+  },
+  "batch_result": {
+    "budget": {
+      "estimated_micro_usd": 0,
+      "tokens": 0,
+      "unknown_reservations": 0,
+      "unsettled_reservations": 0
+    },
+    "documents": [
+      {
+        "artifact_ref": null,
+        "document_id": "urn:company-wiki:document:sha256:19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+        "status": "failed"
+      },
+      {
+        "artifact_ref": null,
+        "document_id": "urn:company-wiki:document:sha256:60607ccb6bba0e460c33355c7d6bebb2d42a0b6855f38ed42719538e869473d9",
+        "status": "failed"
+      }
+    ],
+    "error": "NARRATIVE_BATCH_FileNotFoundError",
+    "run_id": "n4c-20261005-live-configured-03",
+    "schema_version": "narrative-batch-result/1",
+    "status": "failed"
+  },
+  "reservations": [],
+  "model_attempt_reservations": 0,
+  "final_budget": {
+    "run_id": "n4c-20261005-live-configured-03",
+    "charged_tokens": 0,
+    "charged_micro_usd": 0,
+    "charged_output_bytes": 0,
+    "unknown_reservations": 0,
+    "unsettled_reservations": 0
+  },
+  "overall_charged_tokens": 33660,
+  "overall_charged_micro_usd": 16580,
+  "historical_fx_guard_micro": 2764,
+  "attempt_diagnostics": [
+    {
+      "job_type": "source.narrative_select",
+      "attempt_id": "7e6781caaf5f41c09ab6f280149d7b53",
+      "started_at": "2026-10-05T19:41:26Z",
+      "finished_at": null,
+      "error_code": null,
+      "error_detail": null
+    },
+    {
+      "job_type": "source.narrative_select",
+      "attempt_id": "99daa2a24a8e46b88d120d68a609cf98",
+      "started_at": "2026-10-05T19:41:26Z",
+      "finished_at": "2026-10-05T19:41:26Z",
+      "error_code": null,
+      "error_detail": null
+    },
+    {
+      "job_type": "source.narrative_summarize",
+      "attempt_id": "e529b0ab1a7c49edbe9b2b666cfcb915",
+      "started_at": "2026-10-05T19:41:27Z",
+      "finished_at": "2026-10-05T19:41:27Z",
+      "error_code": null,
+      "error_detail": null
+    },
+    {
+      "job_type": "source.narrative_verify",
+      "attempt_id": "1f39603bc6994308b482da89e2c2426e",
+      "started_at": "2026-10-05T19:41:27Z",
+      "finished_at": "2026-10-05T19:41:27Z",
+      "error_code": null,
+      "error_detail": null
+    }
+  ],
+  "samples": [
+    {
+      "sample_id": "P04",
+      "source_sha256": "19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67"
+    }
+  ],
+  "checks": {
+    "original_sha256_verified": true,
+    "production_and_owner_writes": false,
+    "rf_consumer_read_completed": false,
+    "user_config_unchanged": true
+  },
+  "lost_observation_fields": [
+    "wall_seconds",
+    "peak_process_tree_rss",
+    "peak_test_root_bytes",
+    "pre_post_production_fingerprint"
+  ],
+  "cleanup": {
+    "before": "absent",
+    "initial": "failed WinError32 caused by unclosed diagnostic SQLite connection",
+    "restored": true,
+    "after": "absent",
+    "recovery": "saved ledger/CLI/attempt facts, then removed the exact owned scratch root after process exit"
+  }
+}

@@ -117,7 +117,7 @@ TDD框住公开行为，不把旧签收规则写进新测试。仅S0相关收口
 
 ## Next Step
 
-**MAIN下一动作：**发布本轮私有请求降重及英文policy修复（prompt1.3.0/private schema1.1/selector0.3.1）：134项集中回归+3实际CLI/Worker E2E已GREEN。配置入口仍Config.load，未改8192/温度/reasoning。真实请求现为年报15,805 B/24,125token上界，招股16,543 B/24,863，IR8,035 B/16,355，TXT5,810 B/14,130；原文/选集未减，政策零模型skip。下一先核当前配置的实际套餐/价格，再只用最难P04+policy做明确有限批，最多26,340tokens/$0.083420，累计旧unknown保留；拿实际usage、final/CWP公开read/RF N3a实读后按余量处理其他类型，不盲跑四份（合计79,473最坏token）。没有新的paid call或生产清理。P5三外线互斥且尚无约定handoff，交付随到随合；MAIN不改其owner文件。整体N4C、S5/S6仍未完成。
+**MAIN下一动作：**私有请求降重及英文policy修复已发布`e1cc87f`（134集中回归+3实际CLI/Worker E2E GREEN，精确SHA CI37364555560当前queued）。run03模型前FNF失败且0新增费用，采样竞态TDD修复31 Unit+1 CLI E2E GREEN，独立根已恢复；现在仅做P04+policy有限真实run04，实际入口`scripts/narrative_batch_configured.py`仍由Config.load提供国内MiniMax-M3/8192/温度/reasoning，不临时替换。国内标准价已核：2.10/8.40 CNY每百万input/output（官方pricing/overview，2026-10-05）。账户订阅不推断、不购买，按全额PAYG保守计量；用CNY/USD下限6折算0.35/1.40 USD每百万，并为旧代理价另预留2,764 microUSD汇率余量，不改旧账。run04最多26,340tokens/$0.080656；招股最坏24,863tokens可入场。拿实际usage、final/CWP公开read/RF N3a实读后再按余量推进其他类型，不盲跑四份。原件/生产不改，独立根退出恢复；P5三外线约定handoff尚未交，互斥写集不动。整体N4C、S5/S6仍未完成。
 
 ## 2026-10-04：新增三张可独立派发的施工卡
 

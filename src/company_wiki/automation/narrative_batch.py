@@ -6,6 +6,7 @@ from dataclasses import asdict, dataclass
 from datetime import datetime, timedelta, timezone
 import json
 from pathlib import Path
+import stat
 import time
 from typing import Any
 
@@ -101,11 +102,23 @@ class StorageSnapshot:
 
 
 def _tree_bytes(path: Path) -> int:
-    if not path.exists():
+    try:
+        info = path.stat()
+    except FileNotFoundError:
         return 0
-    if path.is_file():
-        return path.stat().st_size
-    return sum(item.stat().st_size for item in path.rglob("*") if item.is_file())
+    if stat.S_ISREG(info.st_mode):
+        return info.st_size
+    total = 0
+    for item in path.rglob("*"):
+        try:
+            info = item.stat()
+        except FileNotFoundError:
+            # SQLite sidecars and atomic object files may be reclaimed while
+            # sampling. Their disappearance releases storage, not a run error.
+            continue
+        if stat.S_ISREG(info.st_mode):
+            total += info.st_size
+    return total
 
 
 class BatchStorageBudget:

@@ -3,6 +3,7 @@
 from dataclasses import replace
 import hashlib
 import importlib
+from pathlib import Path
 from types import SimpleNamespace
 
 import pytest
@@ -73,6 +74,43 @@ class SparseMetadataReader(Reader):
 
 def _module():
     return importlib.import_module("company_wiki.automation.narrative_batch")
+
+
+@pytest.mark.parametrize("name", ["catalog.db-shm", "artifact.tmp"])
+def test_owned_storage_sample_tolerates_file_removal_between_stats(tmp_path, monkeypatch, name):
+    transient = tmp_path / name
+    transient.write_bytes(b"transient")
+    original_stat = Path.stat
+    seen = False
+
+    def stat_then_remove(path, *args, **kwargs):
+        nonlocal seen
+        result = original_stat(path, *args, **kwargs)
+        if path == transient and not seen:
+            seen = True
+            path.unlink()
+        return result
+
+    monkeypatch.setattr(Path, "stat", stat_then_remove)
+    # The file existed for one instant during the sample. Either observation
+    # is valid; aborting a whole batch because it was reclaimed is not.
+    assert _module()._tree_bytes(tmp_path) in {0, len(b"transient")}
+    assert seen and not transient.exists()
+
+
+def test_owned_storage_sample_preserves_access_errors(tmp_path, monkeypatch):
+    inaccessible = tmp_path / "catalog.db"
+    inaccessible.write_bytes(b"retained")
+    original_stat = Path.stat
+
+    def reject_stat(path, *args, **kwargs):
+        if path == inaccessible:
+            raise PermissionError("fixture storage is inaccessible")
+        return original_stat(path, *args, **kwargs)
+
+    monkeypatch.setattr(Path, "stat", reject_stat)
+    with pytest.raises(PermissionError):
+        _module()._tree_bytes(tmp_path)
 
 
 def test_batch_identity_binds_execution_configuration_and_preserves_source_metadata():

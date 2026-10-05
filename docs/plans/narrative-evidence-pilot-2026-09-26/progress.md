@@ -620,3 +620,17 @@ S0/N4A及S2模型预算基础、CLI阶段与CI修复已正常发布，当前CI�
 - 下一P04最坏24,863tokens可以进入剩余26,340额度；四份全部最坏预留79,473，大于剩余额度，不能承诺单批全成功。先从最难招股书+policy有限批取实际usage/final/RF公开read，再按实际余量推进其他类型；未知旧预留不退。国内pricing页面不可访问，官方input_tokens仅是Responses估算接口，与当前Chat Completions不是同一wire，不用估算替代硬上界，不切模型/协议/思考参数。价格与套餐事实先核，避免新的盲paid call。
 
 - 正常账号只读Config确认仍为MiniMax-M3/国内base，key存在；未匹配官方sk-cp订阅Key前缀，不据此推定无订阅或实际费率，不输出key。国内公开pricing读取失败已记为待查；未发新的模型POST。列名与行位一致的9项最终检查通过，临时测试/诊断根全部恢复。本轮中间object投影收据未发布，仅保留最终测量和必要policy前后证据。
+# 2026-10-05 — 配置修正发布及run03准备
+
+- 134集中回归+3实际CLI/Worker E2E节点提交`e1cc87f`已推送master；pre-push GREEN，精确SHA CI37364555560 queued，未冒称成功。
+- 沿用PWF指定plan；用户配置SHA不变。RF main live核对8a153f33，owner两份assurance原样；只查约定P5 handoff目录，暂无新交付。
+- 官方国内价格现可读取，基于2.10/8.40 CNY与保守汇率下限6构造本次版本化费用代理；保留旧账并加历史汇率余量2,764microUSD。run03仅P04+policy、26,340tokens/80,656microUSD；配置入口/原参数/凭证不改。账户权益不猜，按全额PAYG上界估计，不新增购买或订阅。
+- 临时driver只调整有限样本和计量依据，加入attempt数字HTTP诊断的清理前保存；原件保护/独立根finally恢复继续执行。第一次patch匹配旧pricing版本字符串失败，atomic未改文件，修正精确字符串后成功；语法解析通过。此记录时尚未发送新模型POST。
+
+
+## 2026-10-05 — run03零费用失败与空间采样竞态
+
+- run03正式配置入口仅P04+English policy，CLI报NARRATIVE_BATCH_FileNotFoundError。账本模型预留/新增tokens/费用均0，policy三阶段成功，P04 select未结束，没有RF实读；异常栈未保存，不声称唯一定位那次FNF。
+- 确定性两个RED复现_tree_bytes的is_file→stat间文件删除竞态；修为一次stat，仅忽略FNF，PermissionError保留。31批次/请求责任测试GREEN，正式CLI+spawned Worker+loopback HTTP删除竞态故障注入1项GREEN（4.75s），原件/foreign jobs不变、final可用、根恢复。Ruff通过。
+- 临时driver的with sqlite3.connect未关闭连接，cleanup WinError32；进程退出后保存小型run03费用/attempt收据，再按绝对路径验证删除唯一scratch。原件SHA和用户配置SHA一致；丢失的峰值/耗时/生产前后fingerprint列明，不伪造。driver已显式close，今后清理前先保存账本，避免丢费用事实。
+- 下一run04仍只P04+policy，配置模型/8192/reasoning不动；run03不增加旧总额，保留26,340tokens/80,656microUSD与2,764microUSD历史汇率余量。N4C未完成，P5写集继续保留。详见harness_lanes/results/n4c_storage_sampling_fix_2026-10-05.md。
