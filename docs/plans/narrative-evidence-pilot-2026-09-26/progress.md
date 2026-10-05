@@ -548,3 +548,9 @@ S0/N4A及S2模型预算基础、CLI阶段与CI修复已正常发布，当前CI�
 - 新selector完成E6真实Worker P1/P2/P4复测：**1 passed / 246.39s**，四类原件年报、招股书、IR活动PDF、电话会TXT，加一类格式化IR文档skip。每profile可见5对象/4模型调用，真实原件共20,597,846 B，叙述对象445,842 B（2.16%），skip对象1,441 B；重试0、SQLite busy 0、WAL 0。生产目录/原件/配置指纹和locator replay断言通过，退出后E6工作根与pytest basetemp均不存在。
 - 当前profile：P1 93.006s、154.8文档/小时、queue p95 76.177s、handler p95 41.639s、RSS 373,583,872 B；P2 89.453s、161.0/小时、queue p95 73.355s、handler p95 40.521s、RSS 459,042,816 B；P4 62.527s、230.3/小时、queue p95 41.893s、handler p95 38.773s、RSS 686,489,600 B。相较先前E6记录P2 34.384s/P4 29.091s明显变慢，P4又有更高内存；不将一次profile提升解释为默认并发可扩。N4C接下来先看真实调用trace/handler与等待时间来源，再以有限P4为候选接RF N3a公开reader，核summary/citation/language、空间和预算。
 - 验收收据：[n4t2_selector_acceptance_2026-10-05.md](harness_lanes/results/n4t2_selector_acceptance_2026-10-05.md)。外包差异已关闭；选择性吸收提交`0657579d43dc51f327991a0e41aee552e18eb483`已推送`origin/master`，pre-push fast contract GREEN，GitHub Actions [37273071081](https://github.com/zhengcb81/company-wiki/actions/runs/37273071081)匹配该SHA且completed/success。`config/source_acquisition.yaml`及RF/ET/其他仓库owner工作均未改动。
+
+## 2026-10-05 — 按用户要求暂停于N4-T2验收后
+
+- 本轮交付完成：外包N4-T2差异已评估，安全且有数据依据的词汇/事件补充已选择性合入；测试、真实Worker P1/P2/P4复测、CI与PWF收据均已完成和发布。代码提交`0657579d`的Actions成功；收尾文档提交`7b87ff3`已推送。
+- 用户要求“把手头任务做完，然后更新PWF文档，暂停”。当前停止点是**N4-T2已关闭、N4C尚未继续**；未启动新的E6、RF consumer联调或其他写入。唯一下一步（用户恢复后）：先归因E6队列等待/handler延迟升高，再以有限P4候选推进N4C和RF N3a消费实测。
+- 用户配置`config/source_acquisition.yaml`仍是唯一工作树未提交项，保持原样。主线已推送到远端，代码CI结果及验收报告已记录。整体目标尚未完成，暂停不等于完成。
