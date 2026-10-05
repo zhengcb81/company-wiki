@@ -1,0 +1,33 @@
+{
+  "schema_version": "main-node-acceptance/1",
+  "node": "S5 extraction quality v2",
+  "code_head": "dd35d2fc8abb9f7d72e36c0fbc27e7299c6c05f6",
+  "published_branch": "master",
+  "ci": {"run_id": 37378430383, "attempt": 1, "conclusion": "success", "url": "https://github.com/zhengcb81/company-wiki/actions/runs/37378430383"},
+  "tests": {
+    "initial": {"failed": 10, "passed": 1, "seconds": 15.51},
+    "affected_package": {"passed": 50, "failed": 1, "seconds": 43.04},
+    "expanded_node": {"passed": 13, "failed": 2, "seconds": 24.69},
+    "concrete_static_fixture_fix": {"passed": 2, "seconds": 2.22},
+    "distinct_cases_green_across_runs": 55,
+    "single_full_55_case_run_claimed": false
+  },
+  "real_data_e2e": {
+    "original": "MSFT_Q4_2026_earnings_call.txt",
+    "original_bytes": 66324,
+    "sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+    "real_three_job_dag": true,
+    "summary_model": "local ReplayNarrativeModel",
+    "quality_cli": true,
+    "narrative_reference_and_read_cli": true,
+    "complete_locator_replay": true,
+    "original_preserved": true,
+    "fixture_restored": true,
+    "external_llm_posts": 0
+  },
+  "test_roots_restored_absent": ["tmp/s5qred", "tmp/s5qgreen", "tmp/s5qfinal", "tmp/s5qwal", "tmp/s5qstatic"],
+  "preserved_user_config_sha256": "3609e707466eeb3e0f685e14f2637c6afa39ba900edef1be4814433a43300a01",
+  "production_deletions": 0,
+  "production_span_prune_permitted": false,
+  "next": "Migrate or retire actual EvidenceQuery/legacy body consumers, accept RF default SourceRef card, then production storage retirement."
+}

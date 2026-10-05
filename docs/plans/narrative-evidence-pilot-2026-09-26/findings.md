@@ -600,3 +600,7 @@ e570daf已发布，精确CI37375836745 success。53个不同case分步GREEN。�
 
 - 静态快照前只关闭cached reader不足以清空旧WAL，改在fixture setup阶段正规checkpoint/关闭；没有在实际quality里执行checkpoint或写SQL，也没有删除WAL绕过验证。活动WAL独立测试保留DB/WAL/原件及全部持久内容相等，容许仅SHM协调读标记变化。SQLite官方说明reader有end mark，wal-index使用映射共享内存，最后关闭会checkpoint/清理旁文件：[SQLite WAL](https://www.sqlite.org/wal.html)。本机SHM变化与read mark机制一致，属于由官方机制及实测作出的判断。
 - 最终质量v2 55个不同case分步GREEN，真实TXT回放/恢复通过。新增final大小在读取前检查，精确版本固定后读，policy/selection绑定冲突不静默fallback。schema只升级该诊断2.0.0，不改变NarrativeRef/read/SourceRef及RF正式wire。生产没有执行清理，EvidenceQuery旧span依赖仍待下一节点。
+
+- 发布dd35d2f、精确CI37378430383 attempt1 GREEN。pre-push第一次是本任务禁用插件环境导致--timeout选项不识别，移除该临时变量即GREEN，没有CI代码缺陷或新门。一次误猜tools/pre_commit_gate.py读取失败无写，使用实际正常hook。
+- 328份当前生产Python AST只见normalizer的fingerprint backfill与两项public类型导入（LLMSummaryError/SectionSlice），没有旧batch writer的直接导入。第一次git pathspec *.py也匹配tests，计740；过滤生产前缀后才得328。三外仓当前tracked运行脚本未发现旧EvidenceQuery/质量CLI literal引用；RF有大量.planning/assurance历史复制，不算活动消费者。尚未覆盖动态生成命令或用户手动脚本，不以零匹配证明任意未知消费者不存在。
+- 后续不能把不同parser/version的loc:v1裸坐标默认混用：旧normalizer与当前selector的段落切分可能不同。优先复用已绑定artifact版本的NarrativeRef与完整transport回放；保留source-only查询/预览责任，而不是恢复1.49M永久全量span。此为下一节点实施细则，不冒称已迁。

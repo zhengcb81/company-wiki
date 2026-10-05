@@ -719,3 +719,7 @@ S0/N4A及S2模型预算基础、CLI阶段与CI修复已正常发布，当前CI�
 - 集中51项50 passed/1 failed43.04s；剩余是已有活动SHM read mark被误计数据变更。关闭cached reader仍可留下WAL，15项随后13 passed/2 failed24.69s（四个新case已绿）。静态夹具改为在快照前正规checkpoint/关闭，另独立实测活动WAL可读到新提交source状态，原件、DB/WAL及全部持久文件不变，仅允许SQLite共享读标记。两具体红灯2 passed2.22s。共55个不同case已分步GREEN，不重跑全部旧慢包。
 - 真实原TXT66324B固定SHA通过真实三任务select→Replay summary→verify/publish，再经质量CLI和正式reference/read CLI全引用回放；实际final计数与bundle相等，原件前后SHA不变，退出唯一测试根恢复。0外部模型/网络请求；不是MiMo/DeepSeek live摘要收据。五个本轮basetemp均按绝对tmp范围核验并删除。
 - Ruff/diff-check GREEN，用户配置SHA保持。新15项解析/CLI测试在integration，未添加日常全Unit/快速CI慢门。下一步正常commit/push，精确代码CI后收口PWF发布字段。
+
+- 代码dd35d2fc8abb9f7d72e36c0fbc27e7299c6c05f6已commit/push；正常commit GREEN。首次pre-push因本轮临时PYTEST_DISABLE_PLUGIN_AUTOLOAD=1未加载timeout插件而退出，零远端push；仅移除临时变量，正常精选pre-push GREEN后推送成功。没有改门或跳过检查。精确CI37378430383 attempt1 completed/success，全部步骤成功；不是取消后rerun。
+- 后续只读caller调查：328份当前src/scripts/root Python AST仅导入fingerprint backfill、LLMSummaryError和SectionSlice，无旧batch writer直接运行导入；后两项只是public类型兼容，不能据此断言所有动态调用不存在。RF/FF/StockWiki排除.planning、assurance、tests、docs/artifacts后，没有旧EvidenceQuery/quality CLI运行literal引用；初搜未排除历史复制导致噪声，已收敛，不把审计快照当生产caller。RF remote main仍8a153f33/owner两份assurance改动，外线HANDOFF仍未到。
+- 当前生产0删除、0模型POST，用户配置SHA保持3609e707466e…；下一集中节点是旧查询运行入口/精选消费，不复跑已绿quality或P5四操作包。PWF代码发布状态已收口。

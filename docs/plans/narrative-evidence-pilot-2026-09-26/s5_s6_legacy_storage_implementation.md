@@ -88,3 +88,12 @@ MAIN接下来核实际旧底层generator/EvidenceQuery/ExtractionQuality caller�
 3. TDD先覆盖原件only、retired+旧span、selected/skip/partial final优先与无旧span依赖、prepared不提前可见、损坏final拒绝、body-free/只读/locator限额。复用已有真实三任务DAG夹具；关键CLI E2E增加固定SHA的微软原TXT副本，查询质量后正式transport回放，退出恢复测试目录。零网络与外部模型。
 4. 集中相关quality/artifact/transport回归；只新增低成本公开行为到适合的责任包，真实解析E2E仍在integration。不添加日常长CI、逐文件审查或人工授权文件。完成commit/push并观察精确代码SHA CI。
 5. 本节点不等于EvidenceQuery已迁，也不允许生产prune。下一个节点把evidence lookup/list接原件回放/精选包或明确metadata_only；再接RF外线默认v2交付，最后实际旧derived/span处置。
+
+**本节点已完成：**dd35d2f已在master/远端，55个不同case分步GREEN，真实TXT质量CLI/正式transport原件SHA与全部引用回放、目录恢复通过。精确CI37378430383 attempt1 success。[实际收据](harness_lanes/results/s5_quality_migration_acceptance_2026-10-05.json)。quality不再依赖退休旧span；EvidenceQuery/sections-list/scanner/stats以及RF默认仍需下一节点核清，生产不能提前prune。
+
+### 下一查询节点的具体边界
+
+- 已查当前328份生产Python直接imports和RF/FF/StockWiki运行literal references；旧EvidenceQuery唯一明确公开运行入口是CWP evidence/evidence-list。补核实际v1 caller后，没有活动消费者可明确退休旧全量CLI，既有原件SourceRef读取与NarrativeRef精选读取负责资料访问；不重新造query库/任务表/存储配置。
+- 新读取必须绑定现有artifact版本及source SHA，不以裸loc:v1坐标猜新parser的段落。原始正文读取用现有SourceVersionReader、精选引用用正式transport完整回放；quality v2只用于body-free状态/locator展示，不等于raw验证。
+- TDD集中覆盖退休入口拒绝不建目录/不写库、正常SourceRef原文读、NarrativeRef精选body/locator实读、未请求metadata_only、损坏原件/版本变化具名失败、跳过不造span。对尚有真实v1消费者的路径先迁或仅保留其确实引用的小集合。历史夹具仍可构造旧span，但不得被生产导入。
+- 同节点核sections-list、scanner存在性判断、stats旧artifact/span依赖，分别判定纯诊断可留还是正文入口需退；不能为了删表破坏合法来源检索，也不能因空span自动重建全量。仅在这些责任及RF默认迁移交付已通过后，执行生产C/D。
