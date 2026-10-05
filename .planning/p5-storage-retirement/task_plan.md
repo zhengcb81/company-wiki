@@ -26,3 +26,28 @@
 
 ## 边界
 - 不写 src/、现有测试、DDL、config、pyproject/CI；不建第二个 Store/Worker；不做生产删除、不备份全库；0 网络调用；报告只在收据里填实测值，不填伪 0/估值。
+
+
+## MAIN integration node 1 (2026-10-05)
+
+- Candidate integration tree: .codex/worktrees/p5-storage-integration/company-wiki,
+  branch codex/p5-storage-integration, baseline MAIN 18da250 plus original
+  delivery code/docs cherry-picks d6b6e36 / 4387661.
+- Eight real-schema original/path/managed-byte/resume/unlink behavior tests first
+  RED (8 failed / 26.63s). Fixed current-record bindings, sections index scope,
+  pinned child hashes, lock+metadata-first retirement, bounded resume metadata,
+  missing-file handle retirement, actual unlink failure statuses; removed global
+  index sweep. No source/raw/new-final mutations, no production clean-up.
+- Recovery+existing boundary package: 20 passed / 1 failed / 60.48s. Failure was a
+  missing artifact_id=None on managed child report, fixed; exact idempotent case
+  GREEN / 3.64s. Eight safety tests and all 13 boundary cases green in combined
+  runs. Ruff all tool files/helper/recovery test green after removing unused var.
+- These tests invoke real parser subprocesses and SQLite: moved boundary/spans/
+  vacuum/recovery to tests/integration/test_p5_storage_retirement_*.py. Common
+  fixture moved to tests/support/p5_storage_catalog_fixture.py. Thus everyday
+  tests/unit collection gains no parser suite. Original HANDOFF remains the
+  historical delivery evidence; final acceptance must cite current paths.
+- Node 2 pending: true read-only dry-run/WAL handling; streaming exact span prune
+  (no million-entry set/list/JSON); actual pre/post VACUUM snapshots/disk space;
+  protected object root accuracy; consolidated real annual/TXT raw/final E2E.
+  Tools NOT ACCEPTED for main or production deletion yet.

@@ -65,7 +65,7 @@ def classify_artifact_rows(database_path: Path, derived_dir: Path) -> dict:
         if not directed_inside(path, derived_dir):
             excluded.append(dict(entry, reason="path_outside_derived"))
             continue
-        if status != "completed":
+        if status not in {"completed", "partial", "unsupported", "failed", "retired"}:
             excluded.append(dict(entry, reason=f"status_{status}"))
             continue
         if not path.is_file() or path.is_symlink():
@@ -85,11 +85,11 @@ def classify_artifact_rows(database_path: Path, derived_dir: Path) -> dict:
     return {"candidates": candidates, "excluded": excluded, "dangling": dangling}
 
 
-def _sections_managed_files(
-    index_path: Path, derived_dir: Path
-) -> tuple[list, str | None]:
+def _sections_managed_files(index_path: Path, derived_dir: Path) -> tuple[list, str | None]:
     import json
 
+    if index_path.name != "index.json" or index_path.parent.name != "sections":
+        return [], "index_not_legacy_sections"
     try:
         payload = json.loads(index_path.read_text(encoding="utf-8"))
     except (OSError, UnicodeError, ValueError):
@@ -99,22 +99,21 @@ def _sections_managed_files(
     managed = []
     for item in payload:
         if not isinstance(item, dict):
-            continue
-        section_path = item.get("path")
+            return [], "index_member_invalid"
+        role, section_path = item.get("role"), item.get("path")
+        if not isinstance(role, str) or not role or not all(c.isascii() and (c.isalnum() or c == "_") for c in role):
+            return [], "index_role_invalid"
         if not isinstance(section_path, str) or not section_path:
-            continue
+            return [], "index_path_invalid"
         target = Path(section_path)
-        if not directed_inside(target, derived_dir):
-            return [], "managed_path_outside_derived"
-        if not target.is_file():
-            continue
-        managed.append(
-            {
-                "path": str(target),
-                "byte_size": target.stat().st_size,
-                "role": item.get("role"),
-            }
-        )
+        from legacy_storage.core import normalized
+        if not directed_inside(target, derived_dir) or normalized(target) != normalized(index_path.parent / (role + ".md")):
+            return [], "managed_path_not_index_member"
+        if target.is_symlink() or (target.exists() and not target.is_file()):
+            return [], "managed_path_not_file"
+        managed.append({"path": str(target), "role": role,
+                        "byte_size": target.stat().st_size if target.is_file() else 0,
+                        "content_sha256": file_sha256(target) if target.is_file() else None})
     return managed, None
 
 

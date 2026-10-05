@@ -6,7 +6,7 @@ import sqlite3
 from datetime import UTC, datetime
 from pathlib import Path
 
-from unit.test_p5_storage_retirement_common import build_catalog
+from support.p5_storage_catalog_fixture import build_catalog
 
 from legacy_storage.retirement import run_retire_derived
 from legacy_storage.inventory import run_inventory

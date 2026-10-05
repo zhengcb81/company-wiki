@@ -16,7 +16,7 @@ import json
 from datetime import UTC, datetime
 from pathlib import Path
 
-from unit.test_p5_storage_retirement_common import (
+from support.p5_storage_catalog_fixture import (
     NOW,
     build_catalog,
     count_rows,

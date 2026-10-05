@@ -5,7 +5,7 @@ from __future__ import annotations
 from datetime import UTC, datetime
 from pathlib import Path
 
-from unit.test_p5_storage_retirement_common import build_catalog
+from support.p5_storage_catalog_fixture import build_catalog
 
 from legacy_storage.spans import run_prune_spans
 from legacy_storage.inventory import run_inventory
@@ -147,7 +147,7 @@ def test_prune_reports_integrity_and_fk(tmp_path: Path) -> None:
 
 
 def test_span_selection_supports_document_scope(tmp_path: Path) -> None:
-    from unit.test_p5_storage_retirement_common import count_rows
+    from support.p5_storage_catalog_fixture import count_rows
 
     config, store, facts = build_catalog(tmp_path)
     annual_docs = store.fetchall(

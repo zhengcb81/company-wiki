@@ -1,401 +1,262 @@
-"""retire-derived: retire legacy artifact handles, then unlink exactly those files."""
-
+"""Retire only current registered legacy objects; resume interrupted unlinks."""
 from __future__ import annotations
 
+from contextlib import nullcontext
 from datetime import datetime
+import json
 from pathlib import Path
+import sqlite3
 
+from company_wiki.source_catalog.lock import CatalogOperationLock
 from legacy_storage.core import (
-    LEGACY_RECORD_TABLES,
-    REPORT_SCHEMA,
-    db_numbers,
-    directed_inside,
-    file_sha256,
-    
-    protected_objects,
-    read_connection,
-    source_facts,
-    tree_stats,
-    utc_now_text,
+    db_numbers, directed_inside, empty_report, file_sha256, normalized,
+    protected_objects, read_connection, source_facts, tree_stats, utc_now_text,
 )
-from legacy_storage.selection import LEGACY_ROLES
+from legacy_storage.selection import LEGACY_GENERATORS, LEGACY_ROLES, _sections_managed_files
 
 RETIRE_STATUS = "retired"
+_RESUME_KEY = "legacy_storage_retirement"
+_IDENTITY = ("document_id", "artifact_role", "path", "content_sha256", "byte_size",
+             "generator_name", "generator_version")
+_ELIGIBLE = {"completed", "partial", "unsupported", "failed", "retired"}
 
 
 def _load_manifest(path: Path) -> dict:
-    import json
-
     return json.loads(Path(path).read_text(encoding="utf-8"))
 
 
-def _live_rows(database_path: Path) -> dict[str, dict]:
-    with read_connection(database_path) as conn:
-        return {
-            row[0]: {"status": row[1], "sha": row[2], "path": row[3]}
-            for row in conn.execute(
-                "SELECT artifact_id, status, content_sha256, path FROM artifacts"
-            )
-        }
+def _live_rows(database_path: Path):
+    with read_connection(database_path) as connection:
+        connection.row_factory = sqlite3.Row
+        rows = {row["artifact_id"]: dict(row) for row in connection.execute("SELECT * FROM artifacts")}
+        originals = {normalized(Path(row[0])) for row in connection.execute("SELECT absolute_path FROM locations")}
+    return rows, originals
 
 
-def _verify_candidate(entry: dict, derived_dir: Path) -> tuple[str, dict | None]:
-    path = Path(entry["path"])
-    entry = dict(entry, path=str(path))
-    if not directed_inside(path, derived_dir):
-        return "path_outside_derived", None
-    if not path.is_file() or path.is_symlink():
-        return "file_missing", entry
-    if file_sha256(path) != entry["content_sha256"]:
-        return "content_hash_mismatch", None
-    return "ok", entry
+def _safe_path(path: Path, derived: Path, originals: set) -> bool:
+    if not path.is_absolute() or not directed_inside(path, derived) or normalized(path) in originals:
+        return False
+    current = path
+    boundary = derived.absolute()
+    while True:
+        try:
+            attrs = current.lstat()
+        except FileNotFoundError:
+            attrs = None
+        if current.is_symlink() or (attrs is not None and getattr(attrs, "st_file_attributes", 0) & 0x400):
+            return False
+        if current == boundary:
+            return True
+        if current == current.parent:
+            return False
+        current = current.parent
 
 
-def run_retire_derived(
-    config, manifest: dict, *, now: datetime | None = None, dry_run: bool = False
-) -> dict:
-    """Retire legacy derived artifacts (metadata first, then precise unlinks)."""
-    catalog_dir = Path(config.catalog_dir)
-    database_path = Path(config.database_path)
-    derived_dir = Path(config.derived_dir)
-    created_at = utc_now_text(now)
-    notes: list[str] = []
+def _check_target(target: dict, derived: Path, originals: set) -> str | None:
+    path = Path(target["path"])
+    if not _safe_path(path, derived, originals):
+        return "path_not_managed_derived"
+    if not path.exists():
+        return None
+    if not path.is_file() or file_sha256(path) != target.get("content_sha256"):
+        return "content_hash_mismatch"
+    if path.stat().st_size != target.get("byte_size"):
+        return "byte_size_mismatch"
+    return None
 
+
+def _managed_scope(row: dict, entry: dict, derived: Path, originals: set):
+    if row["artifact_role"] != "sections":
+        if entry.get("managed_files"):
+            return [], "unexpected_managed_files"
+        return [], None
+    index = Path(row["path"])
+    if index.name != "index.json" or index.parent.name != "sections":
+        return [], "index_not_legacy_sections"
+    metadata = json.loads(row.get("metadata_json") or "{}")
+    if not isinstance(metadata, dict):
+        return [], "metadata_unreadable"
+    saved = metadata.get(_RESUME_KEY)
+    if isinstance(saved, dict) and saved.get("index_sha256") == row["content_sha256"]:
+        managed = saved["managed_files"]
+    elif index.is_file():
+        managed, error = _sections_managed_files(index, derived)
+        if error:
+            return [], error
+        declared = {item["path"]: item for item in entry.get("managed_files", [])}
+        if set(declared) != {item["path"] for item in managed}:
+            return [], "managed_scope_changed"
+        # The index hash pins its paths; the observed section hashes pin bytes.
+        for item in managed:
+            observation = declared[item["path"]]
+            if Path(item["path"]).exists() and any(
+                item.get(field) != observation.get(field) for field in ("role", "content_sha256", "byte_size")
+            ):
+                return [], "managed_bytes_changed"
+    else:
+        if entry.get("managed_files"):
+            return [], "managed_resume_metadata_missing"
+        managed = []
+    for item in managed:
+        path = Path(item["path"])
+        role = item.get("role")
+        if not isinstance(role, str) or not role or not all(c.isascii() and (c.isalnum() or c == "_") for c in role):
+            return [], "managed_role_invalid"
+        if normalized(path) != normalized(index.parent / (role + ".md")):
+            return [], "managed_path_not_index_member"
+        error = _check_target(item, derived, originals)
+        if error:
+            return [], error
+    return managed, None
+
+
+def run_retire_derived(config, manifest: dict, *, now: datetime | None = None, dry_run: bool = False) -> dict:
+    report = empty_report("retire-derived", now=now)
+    report["dry_run"] = dry_run
+    report["created_at"] = utc_now_text(now)
     entries = list(manifest.get("candidates") or [])
     if not entries:
-        report = _base_report(
-            dry_run=dry_run,
-            status="refused",
-            error_code="empty_candidate_scope",
-            notes=["manifest has no candidate scope"],
-            entries_text=True,
-        )
-        _ = created_at
+        report.update(status="refused", error_code="empty_candidate_scope")
         return report
+    database = Path(config.database_path)
+    catalog = Path(config.catalog_dir)
+    if manifest.get("schema_version") != "cwp-storage-manifest/1" or (
+        normalized(Path(manifest.get("catalog_dir", ""))) != normalized(catalog)
+        or normalized(Path(manifest.get("database_path", ""))) != normalized(database)
+    ):
+        report.update(status="refused", error_code="manifest_catalog_mismatch")
+        return report
+    lock = nullcontext() if dry_run else CatalogOperationLock(catalog, operation="retire-derived")
+    with lock:
+        return _execute(config, entries, report)
 
-    facts_before = source_facts(database_path)
-    protected_before = protected_objects(database_path, catalog_dir)
-    derived_stats_before = tree_stats(derived_dir)
-    db_before = db_numbers(database_path)
 
-    actionable: dict[str, dict] = {}
-    excluded: list[dict] = []
-    already_absent: list[dict] = []
-    live = _live_rows(database_path)
+def _execute(config, entries: list, report: dict) -> dict:
+    database, derived, catalog = Path(config.database_path), Path(config.derived_dir), Path(config.catalog_dir)
+    report["source_facts_before"] = source_facts(database)
+    report["protected_objects_before"] = protected_objects(database, catalog)
+    files_before = tree_stats(derived)
+    before = db_numbers(database)
+    live, originals = _live_rows(database)
+    actions, excluded = {}, []
     for entry in entries:
-        artifact_id = entry["artifact_id"]
-        row_live = live.get(artifact_id)
-        if row_live is None:
-            excluded.append(dict(entry, reason="record_absent"))
-            already_absent.append(entry)
+        row = live.get(entry.get("artifact_id"))
+        reason = None
+        if row is None:
+            reason = "record_absent"
+        elif row["generator_name"] not in LEGACY_GENERATORS or row["artifact_role"] not in LEGACY_ROLES:
+            reason = "current_record_not_legacy"
+        elif row["status"] not in _ELIGIBLE:
+            reason = "state_changed"
+        elif any(row[field] != entry.get(field) for field in _IDENTITY):
+            reason = "record_binding_changed"
+        if reason:
+            excluded.append(dict(entry, reason=reason))
             continue
-        if row_live["status"] == RETIRE_STATUS:
-            excluded.append(dict(entry, reason="already_retired"))
+        target = {field: row[field] for field in ("artifact_id", *_IDENTITY)}
+        reason = _check_target(target, derived, originals)
+        if reason:
+            excluded.append(dict(entry, reason=reason))
             continue
-        if (
-            row_live["status"] != "completed"
-            or row_live["sha"] != entry["content_sha256"]
-        ):
-            excluded.append(dict(entry, reason="state_changed"))
-            continue
-        verdict, verified = _verify_candidate(entry, derived_dir)
-        if verdict == "file_missing":
-            already_absent.append(verified)
-            excluded.append(dict(entry, reason="file_missing"))
-            continue
-        if verdict != "ok":
-            excluded.append(dict(entry, reason=verdict))
-            continue
-        actionable[artifact_id] = verified
-
-    deleted: list[dict] = []
-    metadata_error: str | None = None
-    if not dry_run and actionable:
-        import sqlite3
-
-        conn = sqlite3.connect(database_path, timeout=30.0)
         try:
-            conn.execute("PRAGMA foreign_keys=ON")
-            conn.execute("BEGIN IMMEDIATE")
-            for artifact_id, entry in actionable.items():
-                cursor = conn.execute(
-                    "UPDATE artifacts SET status=? WHERE artifact_id=?"
-                    " AND status='completed' AND content_sha256=?",
-                    (RETIRE_STATUS, artifact_id, entry["content_sha256"]),
+            managed, reason = _managed_scope(row, entry, derived, originals)
+        except (KeyError, TypeError, ValueError, OSError):
+            managed, reason = [], "managed_scope_unreadable"
+        if reason:
+            excluded.append(dict(entry, reason=reason))
+            continue
+        actions[row["artifact_id"]] = (row, target, managed)
+    report.update(candidates=entries, excluded=excluded, selection={"manifest_candidates": len(entries)})
+    if not report["dry_run"] and actions:
+        connection = sqlite3.connect(database, timeout=30)
+        try:
+            connection.execute("PRAGMA foreign_keys=ON")
+            connection.execute("BEGIN IMMEDIATE")
+            for row, target, managed in actions.values():
+                metadata = json.loads(row.get("metadata_json") or "{}")
+                saved_scope = {"index_sha256": row["content_sha256"], "managed_files": managed}
+                if row["status"] == "retired" and (
+                    row["artifact_role"] != "sections" or metadata.get(_RESUME_KEY) == saved_scope
+                ):
+                    continue
+                if row["artifact_role"] == "sections":
+                    metadata[_RESUME_KEY] = {"index_sha256": row["content_sha256"], "managed_files": managed}
+                cursor = connection.execute(
+                    "UPDATE artifacts SET status='retired', metadata_json=? WHERE artifact_id=?"
+                    " AND status=? AND " + " AND ".join(field + "=?" for field in _IDENTITY),
+                    (json.dumps(metadata, ensure_ascii=False), row["artifact_id"], row["status"],
+                     *(row[field] for field in _IDENTITY)),
                 )
                 if cursor.rowcount != 1:
-                    raise RuntimeError(f"artifact state changed mid-run: {artifact_id}")
-            conn.commit()
-        except Exception as exc:  # noqa: BLE001 - single batch aborted, kept facts
-            conn.rollback()
-            metadata_error = f"{type(exc).__name__}: {exc}"
-            notes.append("metadata transaction failed; no file was unlinked")
+                    raise RuntimeError("artifact state changed during retirement")
+            connection.commit()
+        except (sqlite3.Error, RuntimeError, ValueError, TypeError):
+            connection.rollback()
+            report.update(status="failed", error_code="metadata_update_failed")
+            return _finish(config, report, files_before, before)
         finally:
-            conn.close()
-    if metadata_error is not None:
-        report = _build_report(
-            catalog_dir,
-            database_path,
-            derived_dir,
-            facts_before,
-            protected_before,
-            derived_stats_before,
-            db_before,
-            entries,
-            deleted=[],
-            already_absent=[],
-            excluded=[
-                dict(e, reason="metadata_update_failed") for e in actionable.values()
-            ]
-            + excluded,
-            notes=notes,
-            dry_run=dry_run,
-            status="failed",
-            error_code="metadata_update_failed",
-        )
-        return report
-
-    if not dry_run:
-        for artifact_id, entry in actionable.items():
-            path = Path(entry["path"])
-            verdict, _ = _verify_candidate(entry, derived_dir)
-            if verdict == "file_missing":
-                already_absent.append(entry)
-                continue
-            if verdict != "ok":
-                excluded.append(dict(entry, reason=verdict))
-                notes.append(f"skipped, candidate changed after verification: {path}")
-                continue
-            try:
-                path.unlink()
-            except FileNotFoundError:
-                already_absent.append(entry)
-            except OSError as exc:
-                excluded.append(dict(entry, reason=f"unlink_failed:{exc.errno}"))
-                notes.append(f"unlink failed, file kept: {path}")
-                continue
-            deleted.append(entry)
-            for managed in entry.get("managed_files") or []:
-                managed_path = Path(managed["path"])
+            connection.close()
+        seen = set()
+        for row, target, managed in actions.values():
+            # Keep the pinned index until every managed child is resolved.
+            group_failed = False
+            for member in [*managed, target]:
+                item = member if member is target else dict(
+                    member, artifact_id=None, artifact_role="sections",
+                    generator_name=row["generator_name"], managed_by=row["artifact_id"])
+                path = Path(item["path"])
+                identity = normalized(path)
+                if identity in seen:
+                    continue
+                if item is target and group_failed:
+                    break
+                error = _check_target(item, derived, originals)
+                if error:
+                    report["excluded"].append(dict(item, reason=error))
+                    group_failed = True
+                    continue
+                if not path.exists():
+                    report["already_absent"].append(dict(item))
+                    seen.add(identity)
+                    continue
+                actual_size = path.stat().st_size
                 try:
-                    managed_path.unlink()
-                    deleted.append({
-                        "artifact_id": None,
-                        "artifact_role": "sections",
-                        "generator_name": entry["generator_name"],
-                        "path": str(managed_path),
-                        "byte_size": managed["byte_size"],
-                        "managed_by": artifact_id,
-                    })
+                    path.unlink()
                 except FileNotFoundError:
-                    already_absent.append({
-                        "artifact_id": None, "artifact_role": "sections",
-                        "path": str(managed_path),
-                        "byte_size": managed["byte_size"],
-                        "managed_by": artifact_id,
-                    })
-                except OSError as exc2:
-                    excluded.append({
-                        "artifact_id": None,
-                        "artifact_role": "sections",
-                        "path": str(managed_path),
-                        "reason": f"unlink_failed:{getattr(exc2, 'errno', '?')}",
-                    })
-        deleted.extend(_sections_index_sweep(derived_dir))
-        _prune_empty_dirs(derived_dir)
-    if dry_run:
-        notes.append(
-            f"dry run: {len(actionable)} candidate(s) would be retired; nothing deleted"
-        )
-
-    leftovers: list[str] = []
-    if entries:
-        with read_connection(database_path) as conn:
-            leftovers = [
-                row[0]
-                for row in conn.execute(
-                    "SELECT artifact_id FROM artifacts WHERE status='completed'"
-                    " AND artifact_id IN (%s)" % ",".join("?" * len(entries)),
-                    tuple(e["artifact_id"] for e in entries),
-                )
-            ]
-    if leftovers:
-        notes.append(f"completed handles remain for {len(leftovers)} manifest rows")
-
-    report = _build_report(
-        catalog_dir,
-        database_path,
-        derived_dir,
-        facts_before,
-        protected_before,
-        derived_stats_before,
-        db_before,
-        entries,
-        deleted=deleted,
-        already_absent=already_absent,
-        excluded=excluded,
-        notes=notes,
-        dry_run=dry_run,
-        status="succeeded" if not leftovers else "failed",
-        error_code=None if not leftovers else "handle_still_completed",
-    )
-    report["created_at"] = created_at
-    report["handle_verification"] = {
-        "remaining_completed_handles": leftovers,
-        "legacy_roles": sorted(LEGACY_ROLES),
-        "legacy_record_tables": sorted(LEGACY_RECORD_TABLES),
-    }
-    return report
+                    report["already_absent"].append(dict(item))
+                except OSError as error:
+                    report["excluded"].append(dict(item, reason=f"unlink_failed:{error.errno}"))
+                    group_failed = True
+                    continue
+                else:
+                    report["deleted"].append(dict(item, byte_size=actual_size))
+                seen.add(identity)
+    report["status"] = "failed" if report["excluded"] else "succeeded"
+    report["error_code"] = "candidate_changed_or_unlink_failed" if report["excluded"] else None
+    return _finish(config, report, files_before, before)
 
 
-def _sections_index_sweep(derived_dir: Path) -> list[dict]:
-    """Delete sections/index.json once every section file of that dir is gone
-    AND the dir holds nothing but that index."""
-    removed: list[dict] = []
-    if not derived_dir.is_dir():
-        return removed
-    for index in derived_dir.rglob("index.json"):
-        parent = index.parent
-        if parent.name != "sections":
-            continue
-        siblings = [p for p in parent.iterdir() if p.is_file()]
-        if siblings != [index]:
-            continue
-        size = index.stat().st_size
-        try:
-            index.unlink()
-        except OSError:
-            continue
-        removed.append(
-            {
-                "artifact_id": None,
-                "artifact_role": "sections",
-                "generator_name": "source_catalog_section_extractor",
-                "path": str(index),
-                "byte_size": size,
-            }
-        )
-    return removed
-
-
-def _prune_empty_dirs(derived_dir: Path) -> None:
-    if not derived_dir.is_dir():
-        return
-    for path in sorted(
-        derived_dir.rglob("*"), key=lambda p: len(p.parts), reverse=True
-    ):
-        if path.is_dir():
-            try:
-                path.rmdir()
-            except OSError:
-                pass
-
-
-def report_base(operation: str) -> dict:
-    return {
-        "schema_version": REPORT_SCHEMA,
-        "operation": operation,
-        "dry_run": True,
-        "status": "succeeded",
-        "error_code": None,
-        "selection": {},
-        "source_facts_before": {},
-        "source_facts_after": {},
-        "protected_objects_before": {},
-        "protected_objects_after": {},
-        "candidates": [],
-        "deleted": [],
-        "already_absent": [],
-        "files_bytes_before": 0,
-        "files_bytes_after": 0,
-        "database_bytes_before": 0,
-        "database_bytes_after": 0,
-        "page_count_before": 0,
-        "page_count_after": 0,
-        "freelist_before": 0,
-        "freelist_after": 0,
-        "foreign_key_check": [],
-        "integrity_check": "ok",
-        "resume_notes": [],
-    }
-
-
-def _base_report(
-    *,
-    dry_run: bool,
-    status: str,
-    error_code: str | None,
-    notes: list[str],
-    entries_text: bool = False,
-) -> dict:
-    report = report_base("retire-derived")
-    report["dry_run"] = dry_run
-    report["status"] = status
-    report["error_code"] = error_code
-    report["resume_notes"] = notes
-    _ = entries_text
-    return report
-
-
-def _build_report(
-    catalog_dir,
-    database_path,
-    derived_dir,
-    facts_before,
-    protected_before,
-    derived_stats_before,
-    db_before,
-    entries,
-    *,
-    deleted,
-    already_absent,
-    excluded,
-    notes,
-    dry_run,
-    status,
-    error_code,
-) -> dict:
-    facts_after = source_facts(database_path)
-    protected_after = protected_objects(database_path, catalog_dir)
-    derived_stats_after = tree_stats(derived_dir)
-    db_after = db_numbers(database_path)
-    report = report_base("retire-derived")
-    report.update(
-        {
-            "dry_run": dry_run,
-            "status": status,
-            "error_code": error_code,
-            "selection": {"manifest_candidates": len(entries)},
-            "source_facts_before": facts_before,
-            "source_facts_after": facts_after,
-            "protected_objects_before": protected_before,
-            "protected_objects_after": protected_after,
-            "candidates": entries,
-            "deleted": deleted,
-            "already_absent": already_absent,
-            "excluded": excluded,
-            "files_bytes_before": derived_stats_before["bytes"],
-            "files_bytes_after": derived_stats_after["bytes"],
-            "database_bytes_before": db_before["file_bytes"],
-            "database_bytes_after": db_after["file_bytes"],
-            "page_count_before": db_before["page_count"],
-            "page_count_after": db_after["page_count"],
-            "freelist_before": db_before["freelist"],
-            "freelist_after": db_after["freelist"],
-            "foreign_key_check": integrity_probe_write(database_path),
-            "integrity_check": integrity_status(database_path),
-            "resume_notes": notes,
-        }
-    )
+def _finish(config, report, files_before, before):
+    database, catalog = Path(config.database_path), Path(config.catalog_dir)
+    after = db_numbers(database)
+    report.update(source_facts_after=source_facts(database),
+                  protected_objects_after=protected_objects(database, catalog),
+                  files_bytes_before=files_before["bytes"], files_bytes_after=tree_stats(Path(config.derived_dir))["bytes"],
+                  database_bytes_before=before["file_bytes"], database_bytes_after=after["file_bytes"],
+                  page_count_before=before["page_count"], page_count_after=after["page_count"],
+                  freelist_before=before["freelist"], freelist_after=after["freelist"],
+                  foreign_key_check=integrity_probe_write(database), integrity_check=integrity_status(database))
+    if report["source_facts_before"] != report["source_facts_after"] or report["protected_objects_before"] != report["protected_objects_after"]:
+        report.update(status="failed", error_code="protected_facts_changed")
     return report
 
 
 def integrity_probe_write(database_path: Path) -> list:
-    with read_connection(database_path) as conn:
-        return [tuple(row) for row in conn.execute("PRAGMA foreign_key_check")]
+    with read_connection(database_path) as connection:
+        return [tuple(row) for row in connection.execute("PRAGMA foreign_key_check")]
 
 
-def integrity_status(database_path: Path) -> object:
-    with read_connection(database_path) as conn:
-        rows = [row[0] for row in conn.execute("PRAGMA integrity_check")]
+def integrity_status(database_path: Path):
+    with read_connection(database_path) as connection:
+        rows = [row[0] for row in connection.execute("PRAGMA integrity_check")]
     return "ok" if rows == ["ok"] else rows
