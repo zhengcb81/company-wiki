@@ -8,7 +8,7 @@
 
 **当前恢复点（2026-10-05，最新）：**目标active。Flash配置与DeepSeek环境优先已发布；真实 `/models` 两家200，摘要POST尚待token cap答复。N4C累计旧未知账58,523 tokens/33,884microUSD，另保留2,764 FX余量；旧60k只余1,477，不能按8192输出配置再调用。MAIN已退出CWP三个公开全文writer，读兼容夹具在tests/support，旧物理derived/DB spans仍保留。P5-STORAGE交付已到，四项真实schema小试验暴露managed路径误删fixture原文、越界清扫孤立index、中断不续删及缺失文件completed句柄；未验收、未生产清理。RF/FF两线暂无约定HANDOFF，owner工作保持不动。
 
-**最近发布验收：**`a0ea41bd1aef8ffcdf535e065cb9ed5836abaf2b`已推送，commit/pre-push GREEN；[精确SHA CI](https://github.com/zhengcb81/company-wiki/actions/runs/37368647773) completed/success。S5公开writer退休本轮集中回归已收口，待正常提交推送；本节不提前给未发布代码填SHA。
+**最近发布验收：**`a0ea41bd1aef8ffcdf535e065cb9ed5836abaf2b`已推送，commit/pre-push GREEN；[精确SHA CI](https://github.com/zhengcb81/company-wiki/actions/runs/37368647773) completed/success。S5公开writer退休已发布18da250006cb9e409b519198c3f58913b01f0f17；正常pre-push GREEN，精确CI37371220690首attempt失败，唯一job cancelled/runner未分配/steps0；无原因annotation。已同SHA rerun一次HTTP201，远端尚未GREEN。
 
 ## 2026-10-05 四仓状态与当前主线
 
@@ -117,7 +117,8 @@ TDD框住公开行为，不把旧签收规则写进新测试。仅S0相关收口
 
 ## Next Step
 
-**MAIN单一下一动作：收口并发布本轮S5公开全文writer退休，随后修P5-STORAGE的已复现四项缺口再合入。**只修交付工具及其专属测试，不改未交付RF/FF线。先TDD框住：manifest的managed path不能删原件；未被当前DB/index登记的孤立index保留；已退休但未unlink的已知文件rerun续删；缺失旧文件也退休completed句柄。检查schema/当前DB角色、generator、路径与字节，重算安全的managed集合，不把manifest当删除权限；去掉全derived index sweep。复用既有catalog锁和小恢复manifest，零人工签收/新权限表。进一步核只读dry-run、流式span剪裁和VACUUM真实前后事实，不能在150万span上造第二份大清单。先隔离fixture及正式raw/final CLI端到端GREEN，再正常提交/推送。完整细则见[集成审查](harness_lanes/results/p5_storage_integration_review_2026-10-05.md)。生产derived和DB缩减仍等RF/CWP实际caller迁移与quality语义完成。
+**MAIN单一下一动作：继续P5-STORAGE节点二（真实只读dry-run、流式span剪裁和真实VACUUM前后事实/临时空间），然后一次当前工具真实年报+TXT组合E2E再合入。**节点一已在独立托管树 `C:/Users/郑曾波/.codex/worktrees/p5-storage-integration/company-wiki` 的 `codex/p5-storage-integration@72b11160b926e7ead0f163786f141ce2ead5f470` 完成：八项原文/当前对象/中断恢复RED先行，修复后8 GREEN，既有13边界case也分步GREEN；没有全目录sweep、没有新增权限/人工签收。报告managed子项ID缺失的具体失败已修复并复跑，慢parser/DB测试改到integration保持日常CI轻。交付工具仍未验收/未合main，生产derived和DB未清理；RF/FF两线不改。完整实证与节点二细则见[集成审查](harness_lanes/results/p5_storage_integration_review_2026-10-05.md)。测试根全部恢复，原始4份资料SHA仍与固定基准一致。
+
 
 N4C真实MiMo/DeepSeek实验继续待累计token cap160k问题答复，费用上限仍$0.10；原8192/温度/thinking/端点/凭证由Config加载。旧账不退、不从清单200冒称摘要成功。授权到达后两家分别P07中文IR、T01英文电话会+零模型policy，run独立、费用累计，完整Worker→CWP→RF N3a读与引用/原语言/恢复、Credit和保守费用、峰值数据同一大节点验收。当前DeepSeek环境key已有效，无需换key。
 ## 2026-10-04：新增三张可独立派发的施工卡
@@ -193,3 +194,9 @@ CNINFO bounded provider已进入隔离 owner集成工作树；CWP配置 `config/
 - **RF worktree audit交付状态**：`codex/rf-state-audit`两条仅文档提交新增了受限报告；它因6处ACL拒绝而停止全量未跟踪分类，0 bytes列为“已确认可安全释放”。主线同路径已经存在更详细的audit报告，且明确不可读子树是覆盖/删除结论的边界。保留补充报告的限制结论，不覆盖主线报告、不从该分支执行任何RF操作。
 - **CWP真实原件transport E2E（仅子节点）**：2026-10-05在当前代码执行`test_narrative_transport_real_samples.py`，4项通过/31.70秒；覆盖年报、招股书、IR活动记录、电话会TXT的原件SHA、实际公开CLI返回、完整locator replay。Capture metadata来自隔离fixture；这不代表生产catalog准入、N4 selector/Worker摘要、RF bounded consumer接线或N4C批次已验收。basetemp按项目path guard自动重定位，报告退出已清理；详情在progress/findings。
 - **后续大节点（收尾后更新）**：N4-T2已收齐，改良选择器E6 P1/P2/P4已复测。用户恢复后按Next Step执行一个有限真实provider批次，复用已提交RF N3a read/reference合同，对实际Worker产物记select/skip、语言、完整locator replay、usage、总字节及consumer read；不重复Replay三档或空fixture合同。后续将叙述接入预测计算/切换SourceBundle默认，由RF owner按届时PWF负责；之前不改RF。S5物理正文、artifact句柄与S6数据库span仍分阶段迁移。
+
+
+- 72b1116存储工具节点一候选已推到origin/codex/p5-storage-integration；从primary checkout运行相同baseline的正常快速pre-push GREEN，新工具专属行为此前在实际候选树验证。未merge主线、未伪称工具整体验收或生产释放。
+
+
+- CI37371220690后续读取：attempt1 completed/failure，唯一job cancelled、runner空、steps0，check-run无summary/原因annotation；源远端仍18da250。只请求同SHA重跑一次HTTP201（既有Git凭证仅内存传递，未输出/落盘），不是重复改代码或重跑全仓本地包。收尾只有PWF/receipt，不触发新的代码CI来取消这个重跑。

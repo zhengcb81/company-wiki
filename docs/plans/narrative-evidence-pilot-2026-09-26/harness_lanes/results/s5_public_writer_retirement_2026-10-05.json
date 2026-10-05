@@ -53,5 +53,17 @@
   "network_model_calls": 0,
   "download_calls": 0,
   "low_level_legacy_generators_retained": true,
-  "physical_derived_and_spans_retained": true
+  "physical_derived_and_spans_retained": true,
+  "publication": {
+    "code_head": "18da250006cb9e409b519198c3f58913b01f0f17",
+    "pushed": true,
+    "pre_push_fast_gate": "green",
+    "ci_id": 37371220690,
+    "ci_last_status": "attempt_1_failure_job_cancelled_zero_steps",
+    "ci_runner_assigned": false,
+    "ci_steps_executed": 0,
+    "ci_annotation_reason": null,
+    "ci_rerun_once_requested": true,
+    "ci_rerun_http_status": 201
+  }
 }
