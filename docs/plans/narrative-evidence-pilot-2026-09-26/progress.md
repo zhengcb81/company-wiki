@@ -738,3 +738,35 @@ S0/N4A及S2模型预算基础、CLI阶段与CI修复已正常发布，当前CI�
 
 - S5精选代码已提交/推送1b0feb44ff1695a8bae761eac538ce68236c04d6；正常commit及快速pre-push均GREEN，原用户配置被正规stash/restore且SHA一致。精确CI37381429717一次attempt completed/success，全steps成功，无rerun。三根s5vred/green/final已恢复；没有生产释放或新model POST。最后同步PWF/小收据，只做文档提交，不触发新的长代码CI。
 - FF只读接续预验收3个实际短child：9B/10B/11B对10B限额为ok/OutputLimitExceeded/OutputLimitExceeded，等号边界确实错误；无网络/项目写入。其stdin、EOF/process wait、单流overflow与POSIX孤儿进程风险仅从源码确认结构，尚待受控watchdog试验。已把下一节点TDD/修复/限额fixture/三仓E2E/正常并线顺序写在独立预验收报告，不触FF owner/源码，不把源码推断冒充实测。
+
+## 2026-10-05 — MAIN FF整合接续
+
+- 上轮为progress：正式精选检索1b0feb4及PWF3fe77ae均已发布、精确代码CI GREEN。本轮fresh RF main仍8a153f33、owner两份assurance、无P5-RF HANDOFF。FF正式fcap仍d4d2fac，新增未提交test_source_ref_v2_db_query.py；SHA24f3a727…与已提交外包文件完全相同（mock接缝迁移），保留不reset，FMP key不读。外包树干净ab9ce33。
+- 创建全新独立ff-main-integration，codex/p5-ff-main-integration基于ab9ce33，不修改原FF活动目录、交付树或外线.planning。遵循已发布预验收顺序，下一步实际child/watchdog RED→单生命周期实现；当前未验收并线/生产清理/外部模型调用。
+
+- MAIN实际生命周期TDD：19 collected，14 failed/5 passed，33.81s。stdout/stderr等于cap的两项、七项无效资源预检及五项实际生命周期均RED；五项生命周期由独立watchdog终止自建树，不是无限等待。证明stdin阻塞、双管道关闭但进程未退出、单流溢出和孙进程持pipe都必须纳入同一个期限。短根tmp/ffmred已恢复absent，0网络/0模型/0真实下载。下一步实现Windows先入job再释放bootstrap及POSIX保存自有PGID，异常先终止树再收线程；API/caps/费用与原件保持。
+- 用户再次交付P5-FF/P5-STORAGE：STORAGE主线e570daf及精确CI37375836745已验收，生产清理仍未执行；FF以MAIN实际RED为准，不能直接把交付complete等同可并线。
+
+- 首次修复集中37项：18 failed/19 passed，77.56s，ffmgreen恢复absent。无效资源预检及三个期限/回收场景已GREEN。对同一短命令进行独立Popen对照，实证Windows启动器未显式传stdio会丢输出；显式stdin/stdout/stderr后完整得到hello/error。修启动器句柄接线，不放宽字节断言。另两项旧测试指向根本不存在的_run_bounded别名，实际两个runner都使用_run_bounded_json，更新为同一实际函数identity检查。sandbox Ruff cache写失败，无代码诊断，改同所有者--no-cache执行。0原件/网络/模型。
+
+- 修stdio后集中37 passed/11.08s，ffmgreen2恢复absent；包括提前派生同步场景、孙持pipe、stdin阻塞、单流overflow、恰好cap、全部deadline和真实thread/PID回收。随后报告中的10处旧下载红灯全部实际复现（10 failed/10 deselected、43.50s），公开结果为ensure fatal。按当前下载合同只补测试请求的acquisition_limits，不降低生产校验；下一步复核这10项及三仓离线链/真实年报。
+- 当前Config.load再次实读DeepSeek环境变量存在且与实际LLM key相等，加载前后不变；DeepSeek=deepseek-flash、MiMo=mimo-v2.6-flash，两家8192/1.0，endpoint沿配置。只输出布尔和非密配置，零模型POST。
+
+- 10项fixture补limits后的复核仍10 RED/19.92s：真实原因是1.1/1.2 validator根本禁止已有acquisition_limits字段，不能仅补fixture就修复。这纠正交付报告及MAIN初判“仅fixture”的结论。MAIN兼容修法为旧请求也接受同一个可选、明确的acquisition_limits对象并复用现有验证/argv/共享deadline，不猜预算或放宽CWP；已有response/handle/golden与版本不变，v2复用禁limits规则不变。先追加8项legacy限额TDD，再实施薄兼容；普通无限额历史reuse保持。
+
+- 旧限额TDD8 RED/0.12s；实施后集中53项45 passed/8 failed、84.83s：8个legacy/23生命周期均绿，剩余一个复杂度、四个spy、三个noop下载。实际gap的provider_reason明确是spy-provider不支持bounded acquisition（0次provider），并非生产下载器错误。为离线fake adapter补supports_acquisition_budget和真实模拟字节usage/预写限额；noop无外网/正文返回零usage，不放宽生产能力校验。资源输入按期限/caps/命令三个责任拆纯验证函数；mypy四处是OS条件原语和异常推断，已按实际平台类型修正，公开两文件mypy GREEN。下一步只复核剩余8项并增强孙PID同步，不重复53项长包。
+
+- 剩余风险复核10 passed/35 deselected、57.17s，包括加强真实grand PID同步、legacy下载fake预算/计量及Worker状态。37项进程责任加本节点53个不同case已分步GREEN，不声称一次53全绿。FF→ET→CWP正式offline acceptance GREEN：真实三仓代码，FMP provider HTTP由私有worker seam替换，重复0provider，2秒provider deadline与ET临时根清理、原语言JSON/text各自SHA/size通过。ffme2e恢复absent；同次自建真实年报脚本只因把v2 source_candidate/filing误当v1 capture_ready/handle而RED，修断言为既有公开v2合同，生产接口未改，单独复核原字节。ET主线63c4090，两份未跟踪owner文件保持；原件SHA仍固定，0网络/模型/生产删件。
+
+- 实际中微年报单独复核GREEN：9165875B、d64c4108…固定SHA；真实FF v2两次source_candidate/pending_verified_open→CWP公开source_reader_cli返回完整原字节及SHA/size receipt。重复provider0、pause文件0、fixture根内部finally回原样，ffmreal整体恢复absent。身份/期间/公开日是标注fixture，不冒称live元数据验证。正常发布前RF owner仍5319ee26/two assurance WIP，FF远端main仍d4d2fac无并发推进；外线历史/owner/Dayu/ET未改。MAIN验收说明保存FF新MAIN_ACCEPTANCE，不覆盖原handoff；现有一个Ubuntu CI仅加入短生命周期与legacy限额用例，实际POSIX待精确远端CI验证，不加矩阵/日常大E2E。
+
+- 正常FF commit被既有host-assumption静态门拒绝：Linux procfs PID状态（/proc/）被当机器路径，真实中微固定内容SHA未登记。Ruff/mypy均绿；没有提交/push。按已有门的具体登记机制写明理由：procfs仅Linux分支、文件存在才读且用于区分已终止zombie；内容SHA由用户明确原件固定、CLI输入路径不固定。没有拼接路径绕过、删除验证或改三仓vendored检查器。
+
+- 正常commit/pre-push GREEN，FF58568e70cae3c275da9df47a96a49b74a6b13770已推origin/main（d4d2fac→58568e7非强制快进，包含完整外包历史）。独立树pre-push三仓doctor因无RF同级目录明确SKIP，未伪称执行；远端单Ubuntu job需实际验证。gh缺失只读失败，改公开API查精确CI。原owner仍d4d2fac、dirty测试SHA保持24f3a727…与交付一致；RF外线有源准备/相关测试WIP，无HANDOFF，未碰。
+
+- 精确CI37384744223 attempt1 failure：Ubuntu mypy在原生Windows错误构造的5处识别WinError/get_last_error不可用（10 attr-defined），不是进程行为红灯；测试步骤尚未运行。用Git既有凭证仅内存读取具体日志，未输出/落盘secret。Windows本地mypy平台不同，解释了同一工具本地绿、CI红；把既有单mypy目标固定linux以对齐CI，不新增commit测试。用sys.platform守卫集中Windows错误构造，另手动两个type platform核验。Linux外层watchdog自身session不能包含生产新session，记录本调用自建PGID供watchdog回收，不扫描其他进程；Windowsjob保护不变。原CI不盲rerun，修具体代码后新SHA发布。
+
+- FF修正已正常提交/推main758e8f4c116ef9760c657433e4ccbfbd10652029；local linux/win32类型均GREEN，两个具体生命周期case2 passed/1.73s、ffmcifix恢复absent。CI37385101051 attempt1开始。
+- FF owner唯一dirty测试再次核24f3a727…，与已提交integration文件字节相同；正规restore该文件后switch main，再--ff-only到758e8f4，最终该测试SHA仍原样。此前local main实际停在c9799b7（owner fcap才是d4d2fac），本次同时补齐66份已有commits，未rebase/reset/force。现在本地main和remote main一致，tracked干净，仅FMP_API_KEY.txt未跟踪并未读/暂存。真实owner目录三仓config_doctor --require-revenue-config GREEN，不再依赖独立树skip结论。
+
+- FF精确CI37385101051/758e8f4 attempt1 completed/success，所有步骤GREEN，含新POSIX生命周期责任包、原精选回归、三仓doctor。前次失败未重跑；正常新SHA修复通过。所有10个本轮ffm测试根逐一Test-Path=false；原用户配置仍3609e707…，e570daf确认在CWP主线。一次rg整个tmp遇到其他历史受限目录，仅只读失败，随后只检查本次确切根，不清他人目录。FF accepted_main收据与总PWF/并行包/预验收历史状态同步；STORAGE已验收状态不重做，生产0删除。下一步剩余旧generator caller及RF交付验收，不新增权限门。

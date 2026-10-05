@@ -621,3 +621,16 @@ e570daf已发布，精确CI37375836745 success。53个不同case分步GREEN。�
 
 - S5正式精选节点1b0feb4已发布/正常钩子GREEN，CI37381429717 attempt1 success、所有步骤成功，无重跑。代码CI不由后续纯文档收据覆盖。生产原件/derived/span零删除，user配置原SHA保持。
 - FF额外只读实测：受控实际child输出9/10/11 bytes对10B cap依次ok/OutputLimitExceeded/OutputLimitExceeded（0.399/0.051/0.057s）；等于cap的有效输出被错误拒绝，交付不可直接签全绿。源码另见stdin同步写发生在期限起算前、两管道EOF后proc.wait()无timeout、只等双EOF可能不及时响应单流overflow、POSIX父退出后getpgid(pid)失效等风险；后三者当前是读码推断而非已跑证明，需下一节点受控watchdog TDD。零网络/项目写入；读取不存在FF AGENTS.md失败无写，不创建文件。
+
+- fresh FF owner未提交测试只是已交付mock接缝迁移的相同bytes，双方SHA24f3a7272c28aaf1ebbf0e932ee62aa9187feb0e848c8453f3bc09a8c4b35c9d；仍不在活动树施工或reset。MAIN独立整合树从干净ab9ce33创建。外线task_plan checkbox尚未随handoff逐项勾选，不能拿checkbox当产品通过/失败证明；以代码与实际责任测试验收，不增人工补签。
+
+- 受控实际child/watchdog19项有14RED，已把先前读码风险升级为实证。原实现依赖Popen之后的pywin32 job赋值，父退出后POSIX动态getpgid也不能回收已存在组；采用标准库Windows原生Job和先阻塞的启动器，job赋值后才允许运行实际命令；POSIX自建session并保存PGID。进程整个生命周期使用spawn前的一个绝对deadline，精确cap再读一个byte判EOF，stdout/stderr任一错误及时唤醒，stdin独立写入线程；最后先终止树再有界join。依据：[Microsoft AssignProcessToJobObject](https://learn.microsoft.com/en-us/windows/win32/api/jobapi2/nf-jobapi2-assignprocesstojobobject)、[Job limit structure](https://learn.microsoft.com/en-us/windows/win32/api/winnt/ns-winnt-jobobject_extended_limit_information)、[Python subprocess](https://docs.python.org/3/library/subprocess.html)。这是待GREEN验证的实现方案，不冒称Windows/POSIX都已通过。
+
+## P5-FF MAIN验收收口（2026-10-05）
+
+- 真正原因包含三层：进程层生命周期缺陷；legacy 1.1/1.2禁止传上游必需限额；离线spy/noop fixture未声明预算能力/返回usage。不是统一“上游坏了”或只改测试期望。分别修共享进程层、复用已有可选限额对象验证、fake-provider实际计量，响应/golden/原文校验保持。37项进程责任11.08s及53个不同节点case分步GREEN；真实三仓chain与9165875B年报公开v2/原字节读取通过，测试根恢复。
+- Windows stdio必须显式从bootstrap传给实际child；不使用丢状态的os.execv或Popen后实际命令已运行才assign job。本机所有期限/PID/线程边界已实测；POSIX真实执行待Ubuntu CI，类型已在linux/win32目标均通过。
+- 首发58568e7的CI37384744223仅Linux类型失败，因本地同mypy按Windows stub执行。WinError构造改sys.platform守卫，本地既有mypy目标改linux与CI一致，不增加新hook或commit pytest。修正758e8f4已正常推main，CI37385101051进行中。
+- FF原活动fcap是d4d2fac，但旧local main停c9799b7。只有一份未提交测试，SHA与已提交交付相等；最终main快进758e8f4补全66commit，文件SHA仍24f3a727…；仅FMP key未跟踪且未读。真实owner的三仓config doctor GREEN；独立整合树pre-push的doctor SKIP不能替代这项。
+
+- 最终精确CI37385101051/758e8f4 attempt1全部GREEN；实际Ubuntu运行新生命周期用例，POSIX session/父退出孙持pipe也完成验证。FF本地/远端main已一致，原owner已交付WIP收口。生产清理仍未执行，P5-STORAGE工具验收与P5-FF消费/进程验收是两个不同完成节点；不把工具可用当已释放生产字节。

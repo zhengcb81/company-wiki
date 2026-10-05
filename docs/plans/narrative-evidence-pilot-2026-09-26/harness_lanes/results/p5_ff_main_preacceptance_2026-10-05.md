@@ -1,6 +1,6 @@
 # P5-FF MAIN预验收与下一节点施工细则
 
-状态：收到交付、尚未验收/并线。FF独立树干净`ab9ce33`，base
+状态覆盖（2026-10-05）：**accepted_main**。本地责任节点/实际三仓离线链/固定年报原字节读取已GREEN，MAIN修复已合入并推FF `main@758e8f4`、原owner也同步且tracked干净；精确CI37385101051 attempt1全部步骤GREEN，[正式收据](p5_ff_main_acceptance_2026-10-05.json)。下方为原预验收及实际施工依据，不是待重做任务。FF独立交付树干净`ab9ce33`，base
 `d4d2fac4c690bfb8b1368d2ca140fd75150fd288`，功能commit
 `7c6cf48c5aa890fe34cb8304830246d4c20f16fa`；b5c1c82/5a5006e/ab9ce33
 是PWF/交接收尾。源码位置与原卡见[p5_ff_runtime_simplification](../p5_ff_runtime_simplification.md)。
@@ -64,4 +64,4 @@ MAIN零网络/零项目写入的三个实际受控child，`stdout_cap_bytes=10`�
 不新增公开wire字段、备用provider、自动无限重试/后台Worker或投资研究状态。
 单次受控Download费用0、network0、translation false；测试真实原文副本必须
 核`d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5`。
-这份结果是普通交接/施工记录，不是运行时授权合同。下一步执行第2项RED。
+这份结果是普通交接/施工记录，不是运行时授权合同。第1–5项均已执行完成，正常发布/本地主线同步/精确CI和正式收据已收口。

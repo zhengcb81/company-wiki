@@ -1,0 +1,132 @@
+{
+  "schema_version": "cwp-ff-main-integration/1",
+  "date": "2026-10-05",
+  "status": "accepted_main",
+  "delivery": {
+    "base": "d4d2fac4c690bfb8b1368d2ca140fd75150fd288",
+    "feature": "7c6cf48c5aa890fe34cb8304830246d4c20f16fa",
+    "head": "ab9ce33b88d2e2ed914b95ac864fba80d8363c0a"
+  },
+  "main": {
+    "branch": "main",
+    "head": "758e8f4c116ef9760c657433e4ccbfbd10652029",
+    "preceding_main_fix": "58568e70cae3c275da9df47a96a49b74a6b13770",
+    "local_owner_synced": true,
+    "remote_synced": true,
+    "tracked_clean": true,
+    "original_owner_branch": "fcap",
+    "prior_owner_head": "d4d2fac4c690bfb8b1368d2ca140fd75150fd288",
+    "prior_local_main": "c9799b7",
+    "delivered_dirty_test_sha_preserved": "24f3a7272c28aaf1ebbf0e932ee62aa9187feb0e848c8453f3bc09a8c4b35c9d"
+  },
+  "producer": {
+    "company_wiki_code": "1b0feb44ff1695a8bae761eac538ce68236c04d6",
+    "earnings_transcripts": "63c4090",
+    "revenue_forecast_main_last_verified": "8a153f3387ae75fb172e70f8ab63ffd38100779a"
+  },
+  "tests": {
+    "lifecycle_red": {
+      "failed": 14,
+      "passed": 5,
+      "seconds": 33.81
+    },
+    "process_worker_green": {
+      "passed": 37,
+      "seconds": 11.08
+    },
+    "legacy_input_red": {
+      "failed": 8,
+      "seconds": 0.12
+    },
+    "download_baseline_red": {
+      "failed": 10,
+      "seconds": 43.5
+    },
+    "node_first": {
+      "passed": 45,
+      "failed": 8,
+      "seconds": 84.83
+    },
+    "remaining_green": {
+      "passed": 10,
+      "deselected": 35,
+      "seconds": 57.17
+    },
+    "distinct_node_cases_green_across_runs": 53,
+    "single_53_case_green_run_claimed": false,
+    "linux_and_win32_type_targets": "green",
+    "specific_ci_fix_cases": {
+      "passed": 2,
+      "deselected": 21,
+      "seconds": 1.73
+    },
+    "formal_ff_et_cwp_offline": "green",
+    "owner_three_repo_config_doctor": "green",
+    "normal_hooks": "green"
+  },
+  "ci": {
+    "previous_run": 37384744223,
+    "previous_head": "58568e70cae3c275da9df47a96a49b74a6b13770",
+    "previous_failure": "Linux typing Windows-only error APIs; test step not reached",
+    "run": 37385101051,
+    "head": "758e8f4c116ef9760c657433e4ccbfbd10652029",
+    "attempt": 1,
+    "status": "completed",
+    "conclusion": "success",
+    "all_steps_success": true,
+    "url": "https://github.com/zhengcb81/filing-fetch/actions/runs/37385101051",
+    "posix_lifecycle_executed": true,
+    "failed_head_rerun": false
+  },
+  "raw_e2e": {
+    "sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+    "byte_size": 9165875,
+    "original_bytes_equal_before_after": true,
+    "public_ff_v2": "source_candidate/pending_verified_open",
+    "public_cwp_verified_open": "exact original bytes and SHA/size receipt",
+    "metadata": "synthetic identity/period/publication fixture; not live verification",
+    "repeat_provider_calls": 0,
+    "legacy_pause_files": 0
+  },
+  "cleanup": {
+    "roots_restored_absent": [
+      "ffmred",
+      "ffmgreen",
+      "ffmgreen2",
+      "ffmbase",
+      "ffmbasegreen",
+      "ffmfinal",
+      "ffmfix",
+      "ffme2e",
+      "ffmreal",
+      "ffmcifix"
+    ],
+    "production_originals_deleted": 0,
+    "production_derived_deleted": 0,
+    "production_spans_deleted": 0,
+    "user_config_sha_unchanged": "3609e707466eeb3e0f685e14f2637c6afa39ba900edef1be4814433a43300a01"
+  },
+  "calls": {
+    "external_provider_http": 0,
+    "llm_post": 0,
+    "translation": 0,
+    "paid_fmp": 0
+  },
+  "wire": {
+    "existing_response_versions_and_goldens_unchanged": true,
+    "legacy_optional_existing_acquisition_limits_accepted": true,
+    "v2_reuse_only_rules_unchanged": true,
+    "stdout_max_bytes": 33554432,
+    "stderr_max_bytes": 65536,
+    "cleanup_grace_seconds": 2.5,
+    "et_outer_grace_seconds": 3
+  },
+  "protection": {
+    "fmp_key_read": false,
+    "fmp_key_staged": false,
+    "dayu_code_changed": false,
+    "rf_et_stockwiki_owner_changed": false,
+    "external_delivery_tree_changed": false
+  },
+  "next": "Receive and accept P5-RF default v2 delivery; close remaining CWP legacy generator callers, then execute planned production derived/span retirement."
+}
