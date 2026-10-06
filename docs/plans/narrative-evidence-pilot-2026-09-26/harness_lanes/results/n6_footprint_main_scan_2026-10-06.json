@@ -1,0 +1,419 @@
+{
+ "schema_version": "cwp-storage-footprint/1",
+ "scope": {
+  "project_root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+  "started_at": "2026-10-06T22:44:56Z",
+  "finished_at": "2026-10-06T22:45:15Z",
+  "complete": true,
+  "stop_reason": "complete"
+ },
+ "limits": {
+  "max_files": 100000,
+  "max_seconds": 60.0
+ },
+ "totals": {
+  "entries_seen": 58493,
+  "directories_seen": 3188,
+  "files_measured": 54298,
+  "logical_path_bytes": 24365900191,
+  "allocated_bytes": null,
+  "unknown_files": 3685,
+  "skipped_files": 1007,
+  "skipped_links": 0,
+  "skipped_cloud_placeholders": 1007
+ },
+ "categories": [
+  {
+   "category": "raw_originals",
+   "label": "raw/原始TXT/来源侧录",
+   "files": 32301,
+   "logical_path_bytes": 23462933638,
+   "share_of_logical_bytes": 0.962941
+  },
+  {
+   "category": "curated_final_summaries",
+   "label": "精选/最终摘要",
+   "files": 46,
+   "logical_path_bytes": 2002058,
+   "share_of_logical_bytes": 8.2e-05
+  },
+  {
+   "category": "databases",
+   "label": "数据库/WAL/SHM",
+   "files": 27,
+   "logical_path_bytes": 293049104,
+   "share_of_logical_bytes": 0.012027
+  },
+  {
+   "category": "auto_recovery_materials",
+   "label": "恢复中的AUTO任务材料",
+   "files": 8,
+   "logical_path_bytes": 461338,
+   "share_of_logical_bytes": 1.9e-05
+  },
+  {
+   "category": "tmp_test_cache",
+   "label": "tmp/测试/缓存",
+   "files": 12079,
+   "logical_path_bytes": 277935342,
+   "share_of_logical_bytes": 0.011407
+  },
+  {
+   "category": "plans_reports",
+   "label": "计划/报告",
+   "files": 941,
+   "logical_path_bytes": 86179558,
+   "share_of_logical_bytes": 0.003537
+  },
+  {
+   "category": "git_code",
+   "label": "Git与已跟踪代码",
+   "files": 5211,
+   "logical_path_bytes": 236479574,
+   "share_of_logical_bytes": 0.009705
+  },
+  {
+   "category": "unknown",
+   "label": "未知",
+   "files": 3685,
+   "logical_path_bytes": 6859579,
+   "share_of_logical_bytes": 0.000282
+  }
+ ],
+ "top_directories": [
+  {
+   "path": "companies",
+   "files": 32126,
+   "logical_path_bytes": 22841698904
+  },
+  {
+   "path": "sectors",
+   "files": 195,
+   "logical_path_bytes": 564155447
+  },
+  {
+   "path": "companies/阿里巴巴",
+   "files": 139,
+   "logical_path_bytes": 450762087
+  },
+  {
+   "path": "companies/阿里巴巴/raw",
+   "files": 139,
+   "logical_path_bytes": 450762087
+  },
+  {
+   "path": "companies/阿里巴巴/raw/research",
+   "files": 131,
+   "logical_path_bytes": 373714357
+  },
+  {
+   "path": ".source_catalog",
+   "files": 193,
+   "logical_path_bytes": 289679284
+  },
+  {
+   "path": "companies/迈瑞医疗",
+   "files": 230,
+   "logical_path_bytes": 283402704
+  },
+  {
+   "path": "companies/迈瑞医疗/raw",
+   "files": 230,
+   "logical_path_bytes": 283402704
+  },
+  {
+   "path": "companies/中信建投",
+   "files": 175,
+   "logical_path_bytes": 248613836
+  },
+  {
+   "path": "companies/中信建投/raw",
+   "files": 175,
+   "logical_path_bytes": 248613836
+  },
+  {
+   "path": "companies/中微公司",
+   "files": 239,
+   "logical_path_bytes": 240879213
+  },
+  {
+   "path": "companies/密尔克卫",
+   "files": 271,
+   "logical_path_bytes": 240714157
+  },
+  {
+   "path": "companies/密尔克卫/raw",
+   "files": 271,
+   "logical_path_bytes": 240714157
+  },
+  {
+   "path": "companies/中微公司/raw",
+   "files": 218,
+   "logical_path_bytes": 240450796
+  },
+  {
+   "path": "companies/海康威视",
+   "files": 322,
+   "logical_path_bytes": 238387691
+  },
+  {
+   "path": "companies/海康威视/raw",
+   "files": 322,
+   "logical_path_bytes": 238387691
+  },
+  {
+   "path": "companies/索菲亚",
+   "files": 395,
+   "logical_path_bytes": 234831099
+  },
+  {
+   "path": "companies/索菲亚/raw",
+   "files": 395,
+   "logical_path_bytes": 234831099
+  },
+  {
+   "path": "companies/长安汽车",
+   "files": 356,
+   "logical_path_bytes": 230299701
+  },
+  {
+   "path": "companies/长安汽车/raw",
+   "files": 356,
+   "logical_path_bytes": 230299701
+  },
+  {
+   "path": "companies/小米集团",
+   "files": 188,
+   "logical_path_bytes": 230002192
+  },
+  {
+   "path": "companies/小米集团/raw",
+   "files": 188,
+   "logical_path_bytes": 230002192
+  },
+  {
+   "path": "companies/小米集团/raw/research",
+   "files": 184,
+   "logical_path_bytes": 229996343
+  },
+  {
+   "path": "companies/飞凯材料",
+   "files": 196,
+   "logical_path_bytes": 228309051
+  },
+  {
+   "path": "companies/飞凯材料/raw",
+   "files": 196,
+   "logical_path_bytes": 228309051
+  }
+ ],
+ "retention_notes": [
+  {
+   "category": "raw_originals",
+   "category_label": "raw/原始TXT/来源侧录",
+   "bucket": "keep_now",
+   "bucket_label": "现在保留",
+   "files": 32301,
+   "logical_path_bytes": 23462933638,
+   "reason": "原件/来源侧录、精选final、计划报告与仓库代码属读取与审计材料；本工具零删除，不提出释放",
+   "gain_basis": "不产生释放：零删除测量口径，无收益可计",
+   "cost_or_condition": "保留成本=持续占用；无处置动作，本工具不执行删除"
+  },
+  {
+   "category": "curated_final_summaries",
+   "category_label": "精选/最终摘要",
+   "bucket": "keep_now",
+   "bucket_label": "现在保留",
+   "files": 46,
+   "logical_path_bytes": 2002058,
+   "reason": "原件/来源侧录、精选final、计划报告与仓库代码属读取与审计材料；本工具零删除，不提出释放",
+   "gain_basis": "不产生释放：零删除测量口径，无收益可计",
+   "cost_or_condition": "保留成本=持续占用；无处置动作，本工具不执行删除"
+  },
+  {
+   "category": "databases",
+   "category_label": "数据库/WAL/SHM",
+   "bucket": "keep_now",
+   "bucket_label": "现在保留",
+   "files": 11,
+   "logical_path_bytes": 247042048,
+   "reason": "原件/来源侧录、精选final、计划报告与仓库代码属读取与审计材料；本工具零删除，不提出释放",
+   "gain_basis": "不产生释放：零删除测量口径，无收益可计",
+   "cost_or_condition": "保留成本=持续占用；无处置动作，本工具不执行删除"
+  },
+  {
+   "category": "databases",
+   "category_label": "数据库/WAL/SHM",
+   "bucket": "separate_disposal_review",
+   "bucket_label": "可另开处置",
+   "files": 16,
+   "logical_path_bytes": 46007056,
+   "reason": "逻辑字节仅是可另开处置的候选上界：需确认可重建且没有正在使用；本工具不执行 purge/hardlink/delete",
+   "gain_basis": "收益口径=logical_path_bytes（逻辑字节上界；allocated_bytes=null，未做内容/重复验证，不等于已确认可删收益）",
+   "cost_or_condition": "需确认可重建且没有正在使用；本工具不实现 purge/hardlink/delete"
+  },
+  {
+   "category": "auto_recovery_materials",
+   "category_label": "恢复中的AUTO任务材料",
+   "bucket": "undetermined",
+   "bucket_label": "无法判断",
+   "files": 8,
+   "logical_path_bytes": 461338,
+   "reason": "active/retry/prepared/未ACK 或类别无法只读证实终态，不凭 mtime 判断；原件永不进入删除建议",
+   "gain_basis": "无收益口径：只读无法证实终态，不得计入任何释放估算",
+   "cost_or_condition": "需可只读证实的状态证据后重评；绝不凭 mtime 判断"
+  },
+  {
+   "category": "tmp_test_cache",
+   "category_label": "tmp/测试/缓存",
+   "bucket": "separate_disposal_review",
+   "bucket_label": "可另开处置",
+   "files": 12079,
+   "logical_path_bytes": 277935342,
+   "reason": "逻辑字节仅是可另开处置的候选上界：需确认可重建且没有正在使用；本工具不执行 purge/hardlink/delete",
+   "gain_basis": "收益口径=logical_path_bytes（逻辑字节上界；allocated_bytes=null，未做内容/重复验证，不等于已确认可删收益）",
+   "cost_or_condition": "需确认可重建且没有正在使用；本工具不实现 purge/hardlink/delete"
+  },
+  {
+   "category": "plans_reports",
+   "category_label": "计划/报告",
+   "bucket": "keep_now",
+   "bucket_label": "现在保留",
+   "files": 941,
+   "logical_path_bytes": 86179558,
+   "reason": "原件/来源侧录、精选final、计划报告与仓库代码属读取与审计材料；本工具零删除，不提出释放",
+   "gain_basis": "不产生释放：零删除测量口径，无收益可计",
+   "cost_or_condition": "保留成本=持续占用；无处置动作，本工具不执行删除"
+  },
+  {
+   "category": "git_code",
+   "category_label": "Git与已跟踪代码",
+   "bucket": "keep_now",
+   "bucket_label": "现在保留",
+   "files": 5211,
+   "logical_path_bytes": 236479574,
+   "reason": "原件/来源侧录、精选final、计划报告与仓库代码属读取与审计材料；本工具零删除，不提出释放",
+   "gain_basis": "不产生释放：零删除测量口径，无收益可计",
+   "cost_or_condition": "保留成本=持续占用；无处置动作，本工具不执行删除"
+  },
+  {
+   "category": "unknown",
+   "category_label": "未知",
+   "bucket": "undetermined",
+   "bucket_label": "无法判断",
+   "files": 3685,
+   "logical_path_bytes": 6859579,
+   "reason": "active/retry/prepared/未ACK 或类别无法只读证实终态，不凭 mtime 判断；原件永不进入删除建议",
+   "gain_basis": "无收益口径：只读无法证实终态，不得计入任何释放估算",
+   "cost_or_condition": "需可只读证实的状态证据后重评；绝不凭 mtime 判断"
+  }
+ ],
+ "errors": [],
+ "skipped_samples": [
+  {
+   "path": "companies/七一二/raw/prospectus/七一二：首次公开发行股票招股说明书.PDF",
+   "kind": "cloud"
+  },
+  {
+   "path": "companies/三德科技/raw/financial_reports/三德科技：2016年年度报告.PDF",
+   "kind": "cloud"
+  },
+  {
+   "path": "companies/三德科技/raw/financial_reports/三德科技：2017年年度报告.PDF",
+   "kind": "cloud"
+  },
+  {
+   "path": "companies/三德科技/raw/financial_reports/三德科技：2018年年度报告.PDF",
+   "kind": "cloud"
+  },
+  {
+   "path": "companies/三德科技/raw/financial_reports/三德科技：2019年年度报告.PDF",
+   "kind": "cloud"
+  },
+  {
+   "path": "companies/三德科技/raw/financial_reports/三德科技：2020年年度报告.PDF",
+   "kind": "cloud"
+  },
+  {
+   "path": "companies/三德科技/raw/financial_reports/三德科技：2021年年度报告.PDF",
+   "kind": "cloud"
+  },
+  {
+   "path": "companies/三德科技/raw/financial_reports/三德科技：2022年半年度报告.PDF",
+   "kind": "cloud"
+  },
+  {
+   "path": "companies/三德科技/raw/financial_reports/三德科技：2022年年度报告.PDF",
+   "kind": "cloud"
+  },
+  {
+   "path": "companies/三德科技/raw/financial_reports/三德科技：2023年半年度报告.PDF",
+   "kind": "cloud"
+  },
+  {
+   "path": "companies/三德科技/raw/prospectus/三德科技：首次公开发行股票并在创业板上市招股说明书.PDF",
+   "kind": "cloud"
+  },
+  {
+   "path": "companies/三德科技/raw/research/三德科技：300515三德科技业绩说明会、路演活动等20210427.PDF",
+   "kind": "cloud"
+  },
+  {
+   "path": "companies/三德科技/raw/research/三德科技：300515三德科技调研活动信息20220916.PDF",
+   "kind": "cloud"
+  },
+  {
+   "path": "companies/三德科技/raw/research/三德科技：投资者关系活动记录表20230823.PDF",
+   "kind": "cloud"
+  },
+  {
+   "path": "companies/三德科技/raw/research/三德科技：投资者关系活动记录表20230921.PDF",
+   "kind": "cloud"
+  },
+  {
+   "path": "companies/三德科技/raw/research/三德科技：投资者关系活动记录表20231103.PDF",
+   "kind": "cloud"
+  },
+  {
+   "path": "companies/三环集团/raw/financial_reports/三环集团：2019年半年度报告.PDF",
+   "kind": "cloud"
+  },
+  {
+   "path": "companies/三环集团/raw/research/三环集团：2017年11月14日投资者关系活动记录表.DOCX",
+   "kind": "cloud"
+  },
+  {
+   "path": "companies/三环集团/raw/research/三环集团：2018年11月19日投资者关系活动记录表.DOCX",
+   "kind": "cloud"
+  },
+  {
+   "path": "companies/三角防务/raw/prospectus/三角防务：首次公开发行股票并在创业板上市招股说明书.PDF",
+   "kind": "cloud"
+  }
+ ],
+ "calls": {
+  "original_body_reads": 0,
+  "llm": 0,
+  "network": 0,
+  "deleted": 0
+ },
+ "limitations": [
+  "allocated_bytes is null: no evidenced metadata-only allocation API on this platform; logical sizes are not disk allocation and OS compressed-size or cluster estimates are not used as a substitute",
+  "measurement window 2026-10-06T22:44:56Z..2026-10-06T22:45:15Z; the tree can change concurrently (shared Git objects); this is not an atomic filesystem snapshot",
+  "metadata only: no file content read, no SHA-256 computed; duplicate_path_links are path-alias candidates, not content-verified duplicates and not confirmed reclaimable bytes",
+  "classification follows documented path/layout rules (tools/storage_footprint/README.md); git tracked status is not verified",
+  "only the explicit project_root is scanned; external configured roots, other worktrees and cloud roots are excluded",
+  "reparse/symlink/cloud entries skipped without following or hydrating: skipped_files=1007 (links=0, cloud=1007); their disposition is undetermined",
+  "file identity unknown (st_ino absent) for 1 measured files; duplicate detection covers the remaining measured files only"
+ ],
+ "duplicate_path_links": {
+  "method": "st_dev+st_ino metadata identity only; no file content read",
+  "identity_available": false,
+  "identity_known_files": 54297,
+  "groups": 0,
+  "paths": 0,
+  "extra_logical_bytes": 0,
+  "unknown_identity_files": 1,
+  "note": "candidate path aliasing only: not content-verified, not confirmed reclaimable, never added to a deletion benefit"
+ }
+}

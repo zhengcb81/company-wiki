@@ -1,0 +1,228 @@
+{
+ "schema_version": "cwp-storage-footprint-protection/1",
+ "lane_id": "N6-FOOTPRINT",
+ "source_root": "C:/Users/郑曾波/Projects/company-wiki",
+ "procedure": "config sha256 + production DB stat/listing + originals metadata (zero original body reads), before and after one bounded CLI scan",
+ "started_at_utc": "2026-10-06T22:19:19Z",
+ "finished_at_utc": "2026-10-06T22:19:42Z",
+ "scan_elapsed_seconds": 23.363,
+ "scan_exit_code": 0,
+ "scan_stdout": "{\"status\": \"written\", \"schema_version\": \"cwp-storage-footprint/1\", \"output\": \"C:\\\\Users\\\\郑曾波\\\\Projects\\\\cwp-lanes-20261006\\\\n6-footprint\\\\tmp\\\\n6-footprint\\\\real_scan_report.json\", \"complete\": true, \"stop_reason\": \"complete\", \"files_measured\": 54129, \"logical_path_bytes\": 24364743714, \"report_bytes\": 13717}",
+ "scan_stderr_bytes": 0,
+ "before": {
+  "config_sha256": {
+   "config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+   "config.yaml": "2f4df37c3d39ef380caf476b6b678949a1e4b7604bdb95b73b0033804209c589"
+  },
+  "config_stat": {
+   "config\\source_catalog.yaml": {
+    "size": 866,
+    "mtime_ns": 1790542565101886700,
+    "ino": 7036874417784125
+   },
+   "config.yaml": {
+    "size": 3602,
+    "mtime_ns": 1791230922098841600,
+    "ino": 7881299347967845
+   }
+  },
+  "database_stat": {
+   ".source_catalog\\catalog.sqlite3": {
+    "size": 222408704,
+    "mtime_ns": 1791248158420833300,
+    "ino": 41939771531881038
+   },
+   ".source_catalog\\catalog.sqlite3-wal": {
+    "size": 0,
+    "mtime_ns": 1791248176091635700,
+    "ino": 65583669573584099
+   },
+   ".source_catalog\\catalog.sqlite3-shm": {
+    "size": 32768,
+    "mtime_ns": 1791320595536540200,
+    "ino": 130885864170456376
+   }
+  },
+  "catalog_dir_listing": [
+   "acquisition_attempts.jsonl",
+   "acquisition_attempts.jsonl.acquire",
+   "archive-cleanup",
+   "artifacts",
+   "catalog.db",
+   "catalog.sqlite3",
+   "catalog.sqlite3-shm",
+   "catalog.sqlite3-wal",
+   "control_center.log",
+   "derived",
+   "fc204_apply_receipt_2026-08-10.json",
+   "fc204_baseline_2026-08-10.json",
+   "focus_cleanup_archive",
+   "legacy_periods.json",
+   "live_canary",
+   "operation.lock.acquire",
+   "paused_acquisition.log",
+   "retirement",
+   "runtime_policy.json",
+   "security_master",
+   "snapshot-cleanup",
+   "staging",
+   "waves",
+   "worker_console.log",
+   "worker_control.json",
+   "worker_launcher.lock",
+   "worker_launcher_events.jsonl",
+   "worker_process_events.jsonl",
+   "worker_state.json"
+  ],
+  "originals_metadata": {
+   "companies\\Alphabet Inc\\raw\\financial_reports\\annual\\2026-02-05_sec_0001652044-26-000018_Alphabet Inc. 10-K 2025-12-31.htm": {
+    "size": 2616499,
+    "mtime_ns": 1785619671091490500,
+    "ino": 4785074604667228
+   },
+   "companies\\AMD\\raw\\news\\2026-04-12_19021a1d_Advanced_Micro_Devices_Inc__Stock_Quote_.md": {
+    "size": 510,
+    "mtime_ns": 1779222894853210300,
+    "ino": 3096224743828480
+   },
+   "companies\\Apple Inc\\raw\\financial_reports\\annual\\2025-10-31_sec_0000320193-25-000079_Apple Inc. 10-K 2025-09-27.htm": {
+    "size": 1520208,
+    "mtime_ns": 1784839326411872600,
+    "ino": 11258999070265143
+   },
+   "companies\\MICROSOFT CORP\\raw\\other\\.source.json": {
+    "size": 3816,
+    "mtime_ns": 1790439670498758300,
+    "ino": 24769797951521330
+   },
+   "companies\\MongoDB, Inc\\raw\\financial_reports\\annual\\2026-03-11_sec_0001628280-26-016799_MongoDB, Inc. 10-K 2026-01-31.htm": {
+    "size": 2218293,
+    "mtime_ns": 1785578568580092300,
+    "ino": 19140298417885689
+   }
+  },
+  "originals_content_reads": 0
+ },
+ "after": {
+  "config_sha256": {
+   "config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+   "config.yaml": "2f4df37c3d39ef380caf476b6b678949a1e4b7604bdb95b73b0033804209c589"
+  },
+  "config_stat": {
+   "config\\source_catalog.yaml": {
+    "size": 866,
+    "mtime_ns": 1790542565101886700,
+    "ino": 7036874417784125
+   },
+   "config.yaml": {
+    "size": 3602,
+    "mtime_ns": 1791230922098841600,
+    "ino": 7881299347967845
+   }
+  },
+  "database_stat": {
+   ".source_catalog\\catalog.sqlite3": {
+    "size": 222408704,
+    "mtime_ns": 1791248158420833300,
+    "ino": 41939771531881038
+   },
+   ".source_catalog\\catalog.sqlite3-wal": {
+    "size": 0,
+    "mtime_ns": 1791248176091635700,
+    "ino": 65583669573584099
+   },
+   ".source_catalog\\catalog.sqlite3-shm": {
+    "size": 32768,
+    "mtime_ns": 1791320595536540200,
+    "ino": 130885864170456376
+   }
+  },
+  "catalog_dir_listing": [
+   "acquisition_attempts.jsonl",
+   "acquisition_attempts.jsonl.acquire",
+   "archive-cleanup",
+   "artifacts",
+   "catalog.db",
+   "catalog.sqlite3",
+   "catalog.sqlite3-shm",
+   "catalog.sqlite3-wal",
+   "control_center.log",
+   "derived",
+   "fc204_apply_receipt_2026-08-10.json",
+   "fc204_baseline_2026-08-10.json",
+   "focus_cleanup_archive",
+   "legacy_periods.json",
+   "live_canary",
+   "operation.lock.acquire",
+   "paused_acquisition.log",
+   "retirement",
+   "runtime_policy.json",
+   "security_master",
+   "snapshot-cleanup",
+   "staging",
+   "waves",
+   "worker_console.log",
+   "worker_control.json",
+   "worker_launcher.lock",
+   "worker_launcher_events.jsonl",
+   "worker_process_events.jsonl",
+   "worker_state.json"
+  ],
+  "originals_metadata": {
+   "companies\\Alphabet Inc\\raw\\financial_reports\\annual\\2026-02-05_sec_0001652044-26-000018_Alphabet Inc. 10-K 2025-12-31.htm": {
+    "size": 2616499,
+    "mtime_ns": 1785619671091490500,
+    "ino": 4785074604667228
+   },
+   "companies\\AMD\\raw\\news\\2026-04-12_19021a1d_Advanced_Micro_Devices_Inc__Stock_Quote_.md": {
+    "size": 510,
+    "mtime_ns": 1779222894853210300,
+    "ino": 3096224743828480
+   },
+   "companies\\Apple Inc\\raw\\financial_reports\\annual\\2025-10-31_sec_0000320193-25-000079_Apple Inc. 10-K 2025-09-27.htm": {
+    "size": 1520208,
+    "mtime_ns": 1784839326411872600,
+    "ino": 11258999070265143
+   },
+   "companies\\MICROSOFT CORP\\raw\\other\\.source.json": {
+    "size": 3816,
+    "mtime_ns": 1790439670498758300,
+    "ino": 24769797951521330
+   },
+   "companies\\MongoDB, Inc\\raw\\financial_reports\\annual\\2026-03-11_sec_0001628280-26-016799_MongoDB, Inc. 10-K 2026-01-31.htm": {
+    "size": 2218293,
+    "mtime_ns": 1785578568580092300,
+    "ino": 19140298417885689
+   }
+  },
+  "originals_content_reads": 0
+ },
+ "unchanged": {
+  "config_sha256": true,
+  "config_stat": true,
+  "database_stat": true,
+  "catalog_dir_listing": true,
+  "originals_metadata": true
+ },
+ "original_body_reads": 0,
+ "report": {
+  "path": "docs/implementation/handoffs/N6-FOOTPRINT/real_scan_report.json",
+  "schema_version": "cwp-storage-footprint/1",
+  "complete": true,
+  "stop_reason": "complete",
+  "files_measured": 54129,
+  "logical_path_bytes": 24364743714,
+  "report_bytes": 13717,
+  "calls": {
+   "original_body_reads": 0,
+   "llm": 0,
+   "network": 0,
+   "deleted": 0
+  },
+  "measurement_window": [
+   "2026-10-06T22:19:19Z",
+   "2026-10-06T22:19:42Z"
+  ]
+ },
+ "all_unchanged": true
+}

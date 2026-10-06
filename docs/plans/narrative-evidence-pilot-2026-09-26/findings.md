@@ -874,3 +874,7 @@ build_batch_events确用request中selector/parser/prompt hash划新身份；正�
 完成证据旧N5待交付状态与总计划矛盾，已修成ET/RAW/DOCSET实际并线SHA与精确CI，以及当前N6/S7未完；未来RF owner保护按执行前status再读，目前三份。四tmp根恢复absent，产品/外线/外仓零写。此节点复用AUTO与reader，没有第二任务库/来源合同，也未加日常CI长测。
 
 实际发布55a55c2，精确CI37536310001一次success/全部step绿/job54秒；已保存真实head/job/start/end/steps。本地新责任case的16.33秒与远端日常快集合证据分开，整体目标不因本项通过而complete。
+
+## N6-FOOTPRINT验收发现（2026-10-06）
+
+路径叫tmp/cache不能覆盖已知原件或采集staging的保留身份；automation.*不是可证的Store标记，更不能把根目录及全部子树归为AUTO。目录枚举属于时间预算责任，单次OS阻塞仍不可抢占。MAIN修正并以52反例/责任测试验证。报告只列逻辑量，不把stat当已证磁盘分配量；本目录96.2941%为原件，旧清理没有把原件删掉，新派生只有约2MB。不新增处置审批文件；可重建/未使用是实际正确性检查。新小报告/保护收据在results，详情见n6_budget_footprint_main_acceptance.md。

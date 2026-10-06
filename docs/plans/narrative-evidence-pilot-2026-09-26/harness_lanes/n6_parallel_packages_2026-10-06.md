@@ -33,3 +33,7 @@ MAIN最终节点额外核：0.3.2已落盘final在新选择/去重代码下仍�
 MAIN已完成先行[冻结旧final兼容包](../n6_main_compatibility_implementation.md)，9项/4.85秒绿，17KB历史夹具不在两质量线写集内；最终新代码并入后再跑一次。统一[33点业务解释](../n6_main_business_expectations_2026-10-06.md)保留原golden/分母，只解释经营事实、上下文与财务/provider边界。候选卡更正S07 G01为境内占比22%，原件/golden不变；外线输入副本不跨写，交接时MAIN核此语义。
 
 MAIN的[最终业务E2E施工框架](../n6_main_business_e2e_implementation.md)独立完成：三类合成原件经正式configured Worker/RF读取/search/exact/恢复，27.65秒绿；电话会字节绑定通过CWP正式read取得，未扩RF投影。真实S01/S07/S09四个关键经营点的同入口验收已写但尚未运行，须候选/预算合入与MAIN接线后在最终大节点运行；不冒称当前质量缺口已修，也不增加外线等待。
+
+## 2026-10-06 实际交付覆盖历史启动状态
+
+空间7f27f63、预算18dbd0e均交付。MAIN按用户顺序先验空间，52责任项及真实限额扫描绿；预算补14个真实上下文/组ID反例后修正。候选仍独立施工。预算先独立发布0.3.3，候选合入再更新实际selector，避免已改变预算却沿用旧批次身份；最终质量节点仍等两线结合，不以手工候选推算13/33冒称真实达标。详见[MAIN验收](../n6_budget_footprint_main_acceptance.md)。

@@ -1077,3 +1077,13 @@ N6启动PWF和INPUT_CARD已各自纯文档提交并推分支，工作树干净�
 这三个回合没有MAIN实质实施进展，不将目录/状态查询算测试或新进展；未重复已绿长测、模型、源码备份或新增小节点门。询问实际施工目录/分支的问题仍待答，以防外线在其他位置交付。主线自动目标将标blocked等待外部交付，不暂停或取消外线，完整目标不缩减，当前质量仍12/33，禁止提前complete。
 
 恢复入口：先核RF当前HEAD/owner和N6准确交付路径；收到任一完整交接就接收合法写集与已有责任测试，空间线可独立合入；两质量线齐备后候选→预算实际merge，MAIN按main_wiring共享接线/实际selector版本，再一次九样本、正式业务E2E、冻结兼容和升级隔离集中节点。无需重派、reset外线或重跑已绿付费试点。空间线交接时核known raw/staging的保留建议不会被tmp/cache路径覆盖，AUTO目录标记不会误覆盖整仓，报告不引入新的人工处置审批要求；当前只是owner计划风险提示，不冒称实现失败。
+
+## 2026-10-06 — N6-FOOTPRINT MAIN验收
+
+用户交付预算/空间两线；按新指示先收空间。budget首次暂存merge安全abort，外线零写，14个上下文/组ID/逆序反例已RED，待重新接线。预算最新交接18dbd0e，空间7f27f63均已提交；不要求补人工签收。
+
+FOOTPRINT修正原件/staging优先、AUTO精确非根标记、有限deadline、显式根及父路径reparse保护、目录枚举期间deadline，以及报告内重复人工审批措辞。MAIN12反例RED后52项GREEN/7.70秒，含外线40项和CLI零正文读审计；Ruff/diff绿。枚举桩首次类型错误改成真实os.scandir迭代器后，旧实现访问100条才停的反例明确RED。详见[n6集中验收](n6_budget_footprint_main_acceptance.md)。
+
+最终真实metadata扫描18.969秒，完整54298文件/逻辑24365900191 B；raw23462933638 B占96.2941%，tmp277935342 B+tmp DB45232912 B仅是323168254 B候选上界，不是实际可删/已释放。1007云占位跳过，allocated=null。旧报告保留，新报告与保护收据放harness_lanes/results/n6_footprint_main_*.json。五原件/DB metadata、用户配置/配置/RF三owner SHA一致。0原件正文/模型/下载/删除。
+
+首次扫描脚本保护键拼错在扫描前失败，空scratch已清理；首次stdout编码不匹配但保存JSON合法，明确PYTHONUTF8后重测stdout/file对账且stderr空。自己的pytest-855/856和临时脚本已删除恢复absent，未碰并发owner的pytest-857。空间准备正常并线提交推送，日常CI没有加入新长套件，S7完整质量仍待候选线。
