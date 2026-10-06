@@ -6,11 +6,13 @@ from collections.abc import Callable, Sequence
 from dataclasses import dataclass
 import re
 
+from .n6_candidate_operating_facts import OperatingFact, detect_operating_fact
 from .narrative_document import NarrativeUnit
 
 
 TopicClassifier = Callable[[str], tuple[str, ...]]
 FinancialClassifier = Callable[[NarrativeUnit, Sequence[str]], bool]
+OperatingFactDetector = Callable[[str], OperatingFact]
 _NEVER = re.compile(r"(?!x)x")
 _EXCLUDED_ROLES = frozenset(
     {"analyst", "investor_question", "operator", "editorial", "qa_text_shadow"}
@@ -39,6 +41,7 @@ def _not_financial(_unit: NarrativeUnit, _topics: Sequence[str]) -> bool:
 class CandidateRules:
     topics: TopicClassifier = _no_topics
     financial_table: FinancialClassifier = _not_financial
+    operating_facts: OperatingFactDetector = detect_operating_fact
     high_value_event: re.Pattern[str] = _NEVER
     project_plan: re.Pattern[str] = _NEVER
     strategic_plan: re.Pattern[str] = _NEVER
@@ -140,6 +143,7 @@ def _pre_signal(text: str, rules: CandidateRules) -> bool:
             rules.positioning,
             rules.business_risk,
             rules.project_rationale,
+            rules.project_certification_timeline,
         )
     )
 
@@ -169,16 +173,20 @@ def _eligible(signals: _Signals) -> bool:
 
 
 def _fallback_topics(
-    topics: tuple[str, ...], signals: _Signals
+    topics: tuple[str, ...], signals: _Signals, fact: OperatingFact
 ) -> tuple[str, ...]:
     if topics:
         return topics
+    if fact.eligible and fact.topics:
+        return fact.topics
     if signals.event or signals.positioning:
         return ("new_business",)
     return ("capacity_projects",)
 
 
-def _reasons(signals: _Signals, source_role: str) -> tuple[str, ...]:
+def _reasons(
+    signals: _Signals, source_role: str, fact: OperatingFact
+) -> tuple[str, ...]:
     choices = (
         (signals.progress, "progress_or_change_language"),
         (signals.event, "specific_business_event"),
@@ -196,13 +204,20 @@ def _reasons(signals: _Signals, source_role: str) -> tuple[str, ...]:
         (signals.current_business_progress, "current_business_progress"),
         (source_role == "management", "management_statement"),
     )
-    return (
-        "business_narrative_signal",
-        *(reason for enabled, reason in choices if enabled),
+    return tuple(
+        dict.fromkeys(
+            (
+                "business_narrative_signal",
+                *fact.reasons,
+                *(reason for enabled, reason in choices if enabled),
+            )
+        )
     )
 
 
-def _score(unit: NarrativeUnit, topics: tuple[str, ...], signals: _Signals) -> int:
+def _score(
+    unit: NarrativeUnit, topics: tuple[str, ...], signals: _Signals, fact: OperatingFact
+) -> int:
     weighted = (
         (signals.progress, 2),
         (signals.event, 3),
@@ -217,32 +232,47 @@ def _score(unit: NarrativeUnit, topics: tuple[str, ...], signals: _Signals) -> i
         (signals.downstream_extension, 3),
     )
     table_bonus = 1 if unit.unit_kind == "pdf_table_row" else 0
-    return len(topics) + sum(weight for enabled, weight in weighted if enabled) + table_bonus
+    return (
+        len(topics)
+        + sum(weight for enabled, weight in weighted if enabled)
+        + table_bonus
+        + fact.score
+    )
+
+
+_EMPTY_FACT = OperatingFact()
 
 
 def assess_unit(unit: NarrativeUnit, rules: CandidateRules) -> CandidateAssessment:
     """Classify one unit without mutating selection or storage state."""
     if unit.source_role in _EXCLUDED_ROLES:
         return CandidateAssessment(None)
-    topics = rules.topics(unit.raw_text)
-    if rules.financial_table(unit, topics):
+    text = unit.raw_text
+    fact = rules.operating_facts(text)
+    topics = rules.topics(text)
+    if rules.financial_table(unit, topics) and not fact.financial_exempt:
         return CandidateAssessment(None, dropped_financial=True)
-    if not topics and not _pre_signal(unit.raw_text, rules):
+    if not topics and not _pre_signal(text, rules) and not fact.eligible:
         return CandidateAssessment(None)
-    signals = _signals(unit.raw_text, topics, rules)
-    topics = _fallback_topics(topics, signals)
+    signals = _signals(text, topics, rules)
     if _excluded(unit, rules):
         return CandidateAssessment(None)
-    if not _eligible(signals):
+    baseline_eligible = _eligible(signals)
+    if not (baseline_eligible or fact.eligible):
         return CandidateAssessment(None)
-    if _match(rules.static_definition, unit.raw_text):
+    # Generic operating facts only contribute when the injected signal rules
+    # alone would not have selected the unit, so existing selections keep
+    # byte-identical topics, reasons and scores.
+    earned = fact if fact.eligible and not baseline_eligible else _EMPTY_FACT
+    topics = _fallback_topics(topics, signals, fact)
+    if _match(rules.static_definition, text):
         return CandidateAssessment(None)
     return CandidateAssessment(
         EvidenceCandidate(
             unit=unit,
             topics=topics,
-            reasons=_reasons(signals, unit.source_role),
-            score=_score(unit, topics, signals),
+            reasons=_reasons(signals, unit.source_role, earned),
+            score=_score(unit, topics, signals, earned),
         )
     )
 

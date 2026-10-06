@@ -7,12 +7,24 @@ from dataclasses import dataclass
 import re
 from types import MappingProxyType
 
+from .n6_candidate_completion import (
+    BUSINESS_CHARACTER_WINDOW,
+    PROJECT_CHARACTER_WINDOW,
+    completion_indices,
+    members_linkable,
+)
+from .n6_candidate_operating_facts import (
+    OPERATING_FACT_JOIN,
+    OperatingFact,
+    detect_operating_fact,
+)
 from .narrative_candidates import EvidenceCandidate
 from .narrative_context import PdfContextGroup
 from .narrative_document import NarrativeUnit
 
 
 TopicClassifier = Callable[[str], tuple[str, ...]]
+OperatingFactDetector = Callable[[str], OperatingFact]
 WindowFinder = Callable[
     [Sequence[NarrativeUnit], re.Pattern[str]], tuple[tuple[int, int], ...]
 ]
@@ -21,6 +33,7 @@ _EXCLUDED_ROLES = frozenset(
     {"analyst", "investor_question", "operator", "editorial", "qa_text_shadow"}
 )
 _ENDS_SENTENCE = re.compile(r"[。！？!?；;]$")
+_EMPTY_FACT = OperatingFact()
 
 
 def _no_topics(_text: str) -> tuple[str, ...]:
@@ -37,6 +50,7 @@ def _no_windows(
 class GroupCandidateRules:
     topics: TopicClassifier = _no_topics
     window_finder: WindowFinder = _no_windows
+    operating_facts: OperatingFactDetector = detect_operating_fact
     project_heading: re.Pattern[str] = _NEVER
     business_heading: re.Pattern[str] = _NEVER
     high_value_event: re.Pattern[str] = _NEVER
@@ -99,6 +113,14 @@ class _CandidateStore:
             None,
         )
 
+    def assign_group(self, unit_id: str, group_id: str) -> bool:
+        """Record one membership; an existing different group is never replaced."""
+        existing = self.group_ids.get(unit_id)
+        if existing is not None and existing != group_id:
+            return False
+        self.group_ids[unit_id] = group_id
+        return True
+
     def add(
         self,
         unit: NarrativeUnit,
@@ -108,7 +130,9 @@ class _CandidateStore:
         group_id: str | None = None,
     ) -> None:
         if group_id is not None:
-            self.group_ids[unit.unit_id] = group_id
+            self.assign_group(unit.unit_id, group_id)
+        if self.index(unit.unit_id) is not None:
+            return
         self.candidates.append(EvidenceCandidate(unit, topics, reasons, score))
 
     def boost(self, unit_id: str, reason: str, score: int) -> bool:
@@ -213,7 +237,8 @@ def _add_timeline_window(
     for unit in members:
         if not _usable_unit(unit, rules):
             continue
-        store.group_ids[unit.unit_id] = selection_id
+        if not store.assign_group(unit.unit_id, selection_id):
+            continue
         added.add(unit.unit_id)
         if store.index(unit.unit_id) is not None:
             if downstream:
@@ -301,7 +326,8 @@ def _add_extension_window(
     for unit in members:
         if not _usable_unit(unit, rules):
             continue
-        store.group_ids[unit.unit_id] = selection_id
+        if not store.assign_group(unit.unit_id, selection_id):
+            continue
         added.add(unit.unit_id)
         if store.boost(unit.unit_id, "downstream_business_extension", 3):
             continue
@@ -374,7 +400,8 @@ def _add_coverage_window(
     for unit in members:
         if not _usable_unit(unit, rules):
             continue
-        store.group_ids[unit.unit_id] = selection_id
+        if not store.assign_group(unit.unit_id, selection_id):
+            continue
         added.add(unit.unit_id)
         if store.boost(unit.unit_id, "quantified_market_coverage_target", 4):
             continue
@@ -415,6 +442,68 @@ def _add_coverage_windows(
     return added
 
 
+def _merge_fact_windows(
+    windows: Sequence[tuple[int, int]],
+) -> tuple[tuple[int, int], ...]:
+    """Union overlapping minimal windows so one fact locus stays one group."""
+    merged: list[tuple[int, int]] = []
+    for start, end in sorted(windows):
+        if merged and start <= merged[-1][1]:
+            merged[-1] = (merged[-1][0], max(merged[-1][1], end))
+        else:
+            merged.append((start, end))
+    return tuple(merged)
+
+
+def _add_operating_fact_windows(
+    store: _CandidateStore,
+    group_id: str,
+    members: Sequence[NarrativeUnit],
+    topics: tuple[str, ...],
+    rules: GroupCandidateRules,
+) -> set[str]:
+    """Select minimal unit windows whose joined text expresses one fact."""
+    added: set[str] = set()
+    windows = _merge_fact_windows(rules.window_finder(members, OPERATING_FACT_JOIN))
+    for index, (start, end) in enumerate(windows):
+        window_members = members[start : end + 1]
+        window_text = "".join(unit.raw_text for unit in window_members)
+        if len(window_text) > PROJECT_CHARACTER_WINDOW:
+            continue
+        if _invalid_group(window_text, rules):
+            continue
+        fact = detect_operating_fact(window_text)
+        if not fact.eligible or not fact.reasons:
+            continue
+        selection_id = f"{group_id}:operating-fact:{index}"
+        for unit in window_members:
+            if not _usable_unit(unit, rules):
+                continue
+            if not store.assign_group(unit.unit_id, selection_id):
+                continue
+            added.add(unit.unit_id)
+            if store.boost(unit.unit_id, fact.reasons[0], fact.score):
+                continue
+            unit_topics = _unit_topics(
+                unit, topics, fact.topics or ("core_business",), rules
+            )
+            store.add(
+                unit,
+                unit_topics,
+                _member_reasons(
+                    unit,
+                    (
+                        "business_narrative_signal",
+                        "pdf_visual_context_group",
+                        *fact.reasons,
+                    ),
+                ),
+                len(unit_topics) + fact.score,
+                selection_id,
+            )
+    return added
+
+
 def _general_relevant(signals: _GroupSignals, in_context: bool) -> bool:
     return any(
         (
@@ -428,6 +517,14 @@ def _general_relevant(signals: _GroupSignals, in_context: bool) -> bool:
             signals.progress and signals.current_industry,
             in_context,
         )
+    )
+
+
+def _section_barrier(unit: NarrativeUnit, rules: GroupCandidateRules) -> bool:
+    return (
+        _match(rules.project_heading, unit.raw_text)
+        or _match(rules.business_heading, unit.raw_text)
+        or _match(rules.table_of_contents, unit.raw_text)
     )
 
 
@@ -446,10 +543,20 @@ def _general_topics(
     signals: _GroupSignals,
     in_project: bool,
     in_business: bool,
+    fact: OperatingFact,
 ) -> tuple[str, ...]:
     if topics:
         return topics
-    if any((in_project, signals.project, signals.business_risk, signals.market_coverage_target)):
+    if fact.eligible and fact.topics:
+        return fact.topics
+    if any(
+        (
+            in_project,
+            signals.project,
+            signals.business_risk,
+            signals.market_coverage_target,
+        )
+    ):
         return ("capacity_projects",)
     if in_business:
         return ("core_business",)
@@ -457,7 +564,10 @@ def _general_topics(
 
 
 def _general_reasons(
-    signals: _GroupSignals, in_project: bool, in_business: bool
+    signals: _GroupSignals,
+    in_project: bool,
+    in_business: bool,
+    fact: OperatingFact,
 ) -> tuple[str, ...]:
     choices = (
         (signals.progress, "progress_or_change_language"),
@@ -475,10 +585,15 @@ def _general_reasons(
         (in_business, "business_section_context"),
         (signals.current_industry, "current_industry_context"),
     )
-    return (
-        "business_narrative_signal",
-        "pdf_visual_context_group",
-        *(reason for enabled, reason in choices if enabled),
+    return tuple(
+        dict.fromkeys(
+            (
+                "business_narrative_signal",
+                "pdf_visual_context_group",
+                *fact.reasons,
+                *(reason for enabled, reason in choices if enabled),
+            )
+        )
     )
 
 
@@ -487,6 +602,7 @@ def _general_score(
     signals: _GroupSignals,
     project_score: int | None,
     business_score: int | None,
+    fact: OperatingFact,
 ) -> int:
     weights = (
         (signals.progress, 2),
@@ -506,6 +622,7 @@ def _general_score(
         + sum(weight for enabled, weight in weights if enabled)
         + (project_score or 0)
         + (business_score or 0)
+        + fact.score
     )
 
 
@@ -517,29 +634,83 @@ def _outside_page_body(unit: NarrativeUnit) -> bool:
     return y < 60.0 or y > 750.0
 
 
+def _member_reasons(unit: NarrativeUnit, reasons: tuple[str, ...]) -> tuple[str, ...]:
+    if unit.source_role == "management":
+        return (*reasons, "management_statement")
+    return reasons
+
+
 def _add_general_members(
     store: _CandidateStore,
     *,
-    group_id: str,
+    group_id: str | None,
     members: Sequence[NarrativeUnit],
     excluded_ids: set[str],
     topics: tuple[str, ...],
     reasons: tuple[str, ...],
     score: int,
     rules: GroupCandidateRules,
+    character_budget: int,
 ) -> None:
+    remaining = character_budget
     for unit in members:
         if not _usable_unit(unit, rules):
             continue
         if unit.unit_id in excluded_ids:
+            # Window-selected text still occupies the group's reading window.
+            remaining -= len(unit.raw_text)
             continue
         if _outside_page_body(unit):
             continue
+        size = len(unit.raw_text)
+        if size > remaining:
+            break
+        remaining -= size
         member_topics = rules.topics(unit.raw_text) or topics
-        member_reasons = reasons
-        if unit.source_role == "management":
-            member_reasons = (*member_reasons, "management_statement")
-        store.add(unit, member_topics, member_reasons, score, group_id)
+        store.add(unit, member_topics, _member_reasons(unit, reasons), score, group_id)
+
+
+def _add_completion_members(
+    store: _CandidateStore,
+    *,
+    group_id: str,
+    linkable: bool,
+    members: Sequence[NarrativeUnit],
+    hit_indices: Sequence[int],
+    excluded_ids: set[str],
+    topics: tuple[str, ...],
+    reasons: tuple[str, ...],
+    score: int,
+    rules: GroupCandidateRules,
+) -> None:
+    remaining = PROJECT_CHARACTER_WINDOW
+    assigned: set[int] = set()
+    for hit in hit_indices:
+        anchor: str | None = None
+        if linkable:
+            anchor = store.group_ids.get(members[hit].unit_id) or group_id
+        indices = completion_indices(
+            members,
+            hit,
+            barrier=lambda unit: _section_barrier(unit, rules),
+        )
+        for index in indices:
+            if index in assigned:
+                continue
+            unit = members[index]
+            if not _usable_unit(unit, rules) or unit.unit_id in excluded_ids:
+                continue
+            if _outside_page_body(unit):
+                continue
+            size = len(unit.raw_text)
+            if size > remaining:
+                return
+            remaining -= size
+            assigned.add(index)
+            member_topics = rules.topics(unit.raw_text) or topics
+            store.add(
+                unit, member_topics, _member_reasons(unit, reasons), score, anchor
+            )
 
 
 def _enrich_group(
@@ -551,32 +722,60 @@ def _enrich_group(
     rules: GroupCandidateRules,
 ) -> None:
     group_id, members, text = group
+    if not members:
+        return
     topics = rules.topics(text)
     signals = _signals(text, topics, rules)
-    special_ids = _special_ids(
-        store, group_id, members, topics, signals, rules
-    )
+    fact = rules.operating_facts(text)
     in_project = group_id in project_scores
     in_business = group_id in business_scores
     in_context = in_project or in_business
-    if not _expand_general(
-        text, members, topics, signals, in_context, initial_ids, rules
-    ):
-        return
-    topics = _general_topics(topics, signals, in_project, in_business)
-    reasons = _general_reasons(signals, in_project, in_business)
-    score = _general_score(
-        topics, signals, project_scores.get(group_id), business_scores.get(group_id)
+    special_ids = _special_ids(
+        store, group_id, members, topics, signals, rules, in_context=in_context
     )
+    base_relevant = _general_relevant(signals, in_context)
+    if not _expand_general(text, topics, signals, in_context, rules, fact):
+        return
+    earned = fact if fact.eligible and not base_relevant else _EMPTY_FACT
+    topics = _general_topics(topics, signals, in_project, in_business, earned)
+    reasons = _general_reasons(signals, in_project, in_business, earned)
+    score = _general_score(
+        topics,
+        signals,
+        project_scores.get(group_id),
+        business_scores.get(group_id),
+        earned,
+    )
+    linkable = members_linkable(members)
+    hit_indices = [
+        index for index, unit in enumerate(members) if unit.unit_id in initial_ids
+    ]
+    if hit_indices and not in_context:
+        _add_completion_members(
+            store,
+            group_id=group_id,
+            linkable=linkable,
+            members=members,
+            hit_indices=hit_indices,
+            excluded_ids=special_ids,
+            topics=topics,
+            reasons=reasons,
+            score=score,
+            rules=rules,
+        )
+        return
     _add_general_members(
         store,
-        group_id=group_id,
+        group_id=group_id if linkable else None,
         members=members,
         excluded_ids=special_ids,
         topics=topics,
         reasons=reasons,
         score=score,
         rules=rules,
+        character_budget=(
+            BUSINESS_CHARACTER_WINDOW if in_business else PROJECT_CHARACTER_WINDOW
+        ),
     )
 
 
@@ -587,35 +786,35 @@ def _special_ids(
     topics: tuple[str, ...],
     signals: _GroupSignals,
     rules: GroupCandidateRules,
+    *,
+    in_context: bool,
 ) -> set[str]:
+    if not members_linkable(members):
+        return set()
     ids = _add_timeline_windows(store, group_id, members, topics, signals, rules)
     ids.update(_add_extension_windows(store, group_id, members, topics, signals, rules))
     ids.update(_add_coverage_windows(store, group_id, members, topics, signals, rules))
+    if not in_context:
+        # Section-context groups are added as one atomic unit below; carving
+        # fact windows out of them would split an existing context bundle.
+        ids.update(_add_operating_fact_windows(store, group_id, members, topics, rules))
     return ids
 
 
 def _expand_general(
     text: str,
-    members: Sequence[NarrativeUnit],
     topics: tuple[str, ...],
     signals: _GroupSignals,
     in_context: bool,
-    initial_ids: frozenset[str],
     rules: GroupCandidateRules,
+    fact: OperatingFact,
 ) -> bool:
-    if not topics and not in_context and not _general_relevant(signals, False):
+    base_relevant = _general_relevant(signals, in_context)
+    if not topics and not in_context and not base_relevant and not fact.eligible:
         return False
-    if _invalid_group(text, rules) or not _general_relevant(signals, in_context):
+    if _invalid_group(text, rules) or not (base_relevant or fact.eligible):
         return False
-    if in_context:
-        return True
-    return not _has_initial_member(members, initial_ids)
-
-
-def _has_initial_member(
-    members: Sequence[NarrativeUnit], initial_ids: frozenset[str]
-) -> bool:
-    return any(unit.unit_id in initial_ids for unit in members)
+    return True
 
 
 def enrich_context_groups(
@@ -634,9 +833,7 @@ def enrich_context_groups(
         text = group[2]
         if _match(rules.project_heading, text) or _match(rules.business_heading, text):
             continue
-        _enrich_group(
-            store, group, initial_ids, project_scores, business_scores, rules
-        )
+        _enrich_group(store, group, initial_ids, project_scores, business_scores, rules)
     return GroupEnrichmentResult(
         candidates=tuple(store.candidates),
         group_ids=MappingProxyType(store.group_ids),

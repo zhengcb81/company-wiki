@@ -53,7 +53,7 @@ topics/reasons优先复用既有词汇（如specific_business_event、current_in
 只读实际原件的根：CWP `C:/Users/郑曾波/Projects/company-wiki`；ET `C:/Users/郑曾波/Projects/earnings-transcripts/earnings-transcripts/transcripts`。样本相对路径/SHA从只读samples.json取；local配置放本线tmp或ignored文件，不写主仓。全部0下载/LLM/付费。
 
 - S01 G01页32/G03页40，S02 G02/G03页18/G04页31，S03 G03页3：parsed完整但候选缺必要片段。
-- S07 G01页1：海外营收占比；S08 G01页3：克重/一口价产品组合，不能因程序性标签整份skip。
+- S07 G01页1：境内收入约8.19亿元/占比约22%及同比结构变化，不能写成海外22%；S08 G01页3：克重/一口价产品组合，不能因程序性标签整份skip。
 - S09 G05行200/UTF8字节32538–32593：需求超产能；G01在正文marker前的provider摘要不当管理层原话。
 - S04页34/49、S06页43：募集项目名称、用途、投产/产能；纯融资数额不能当业务进展。
 

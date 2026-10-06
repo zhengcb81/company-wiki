@@ -80,9 +80,13 @@ def _match(pattern: re.Pattern[str], text: str) -> bool:
 
 def _unit_by_location(
     units: Sequence[NarrativeUnit],
-) -> dict[tuple[int | None, int | None], NarrativeUnit]:
+) -> dict[tuple[str, int | None, int | None], NarrativeUnit]:
     return {
-        (unit.coordinates.page_number, unit.coordinates.paragraph_index): unit
+        (
+            unit.source_id,
+            unit.coordinates.page_number,
+            unit.coordinates.paragraph_index,
+        ): unit
         for unit in units
         if unit.unit_kind == "pdf_text_block"
     }
@@ -104,6 +108,8 @@ def _valid_previous(
     if previous is None or previous.unit_id in selected_ids:
         return False
     if previous.source_role != event.source_role:
+        return False
+    if previous.language != event.language:
         return False
     if not _subject_signal(previous, rules) or len(previous.raw_text) < 12:
         return False
@@ -136,15 +142,13 @@ def _add_adjacent_subjects(
     by_location = _unit_by_location(units)
     selected_ids = store.ids()
     for candidate in tuple(store.candidates):
-        _add_adjacent_subject(
-            store, candidate, by_location, selected_ids, rules
-        )
+        _add_adjacent_subject(store, candidate, by_location, selected_ids, rules)
 
 
 def _add_adjacent_subject(
     store: _Store,
     candidate: EvidenceCandidate,
-    by_location: Mapping[tuple[int | None, int | None], NarrativeUnit],
+    by_location: Mapping[tuple[str, int | None, int | None], NarrativeUnit],
     selected_ids: set[str],
     rules: NeighborRules,
 ) -> None:
@@ -153,7 +157,11 @@ def _add_adjacent_subject(
         return
     if not _match(rules.high_value_event, event.raw_text):
         return
-    key = (event.coordinates.page_number, (event.coordinates.paragraph_index or 0) - 1)
+    key = (
+        event.source_id,
+        event.coordinates.page_number,
+        (event.coordinates.paragraph_index or 0) - 1,
+    )
     previous = by_location.get(key)
     if not _valid_previous(previous, event, selected_ids, rules):
         return
@@ -168,7 +176,10 @@ def _add_adjacent_subject(
     reasons = _adjacent_reasons_and_boost(
         store, event.unit_id, previous.raw_text, rules
     )
-    store.add(EvidenceCandidate(previous, rules.topics(previous.raw_text), reasons, 0), group_id)
+    store.add(
+        EvidenceCandidate(previous, rules.topics(previous.raw_text), reasons, 0),
+        group_id,
+    )
     selected_ids.add(previous.unit_id)
 
 
@@ -191,6 +202,8 @@ def _valid_continuation(
         return False
     if continuation.source_role != heading.source_role:
         return False
+    if continuation.language != heading.language:
+        return False
     if not 1 <= len(continuation.raw_text) < 12:
         return False
     if not re.search(r"[\u3400-\u9fffA-Za-z0-9]", continuation.raw_text):
@@ -208,15 +221,13 @@ def _add_heading_continuations(
     by_location = _unit_by_location(units)
     selected_ids = store.ids()
     for candidate in tuple(store.candidates):
-        _add_heading_continuation(
-            store, candidate, by_location, selected_ids, rules
-        )
+        _add_heading_continuation(store, candidate, by_location, selected_ids, rules)
 
 
 def _add_heading_continuation(
     store: _Store,
     candidate: EvidenceCandidate,
-    by_location: Mapping[tuple[int | None, int | None], NarrativeUnit],
+    by_location: Mapping[tuple[str, int | None, int | None], NarrativeUnit],
     selected_ids: set[str],
     rules: NeighborRules,
 ) -> None:
@@ -225,7 +236,11 @@ def _add_heading_continuation(
         return
     if not _match(rules.project_rationale, heading.raw_text):
         return
-    key = (heading.coordinates.page_number, (heading.coordinates.paragraph_index or 0) + 1)
+    key = (
+        heading.source_id,
+        heading.coordinates.page_number,
+        (heading.coordinates.paragraph_index or 0) + 1,
+    )
     continuation = by_location.get(key)
     if not _valid_continuation(continuation, heading, selected_ids, rules):
         return
