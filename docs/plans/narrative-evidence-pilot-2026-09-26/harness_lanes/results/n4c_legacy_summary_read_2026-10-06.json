@@ -1,6 +1,8 @@
 {
   "schema_version": "n4c-legacy-summary-compatibility/1",
-  "status": "verified_locally",
+  "status": "published_green",
+  "test_commit": "86c8793901f9254e922cadf00fda9bf120156df8",
+  "ci": {"run_id": 37512605771, "attempt": 1, "conclusion": "success", "job_seconds": 75, "receipt": "n4c_legacy_summary_ci_2026-10-06.json", "compatibility_case_run_locally": true, "daily_ci_repeats_compatibility_case": false},
   "production_code_head": "4d019b5435b8b277c059f6d4abbe62cc09f684f3",
   "fixture": "synthetic immutable transcript with 25 distinct management operating paragraphs; simulated old prompt 1.4.0",
   "new_generation_prompt": "1.5.0",
