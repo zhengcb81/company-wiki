@@ -28,6 +28,6 @@
 - [x] ruff `tools/raw_duplicate_audit` 全绿。
 - [x] 集中一次 Unit/Integration/E2E 验收（命令见 handoff）。
 - [x] 集中验收（最后一次，与提交内容一致）：`python -m pytest tools/raw_duplicate_audit/tests -q --no-header -p no:cacheprovider` → 31 passed / 150.40 s；`python -m ruff check tools/raw_duplicate_audit` → All checks passed；`git diff --check` → 干净。
-- [ ] 提交代码 + `docs/implementation/handoffs/N5-RAW-DUP/{HANDOFF.md,handoff.json}`。
+- [x] 提交：`87a7e603470243074a62fe0a07afa5fe6d84fd1e`（工具+测试+PWF+收据）、`a1418a0b901bd91146c69be3e1b28cde790d9908`（E2E 临时侧文件收进 pytest tmp + 刷新收据）；`delivery_head = a1418a0b901bd91146c69be3e1b28cde790d9908`，`docs/implementation/handoffs/N5-RAW-DUP/{HANDOFF.md,handoff.json}` 随后单独提交。
 - 测试临时 root：pytest basetemp 由根 `conftest.py` 管理；本 lane 没有留下临时目录，
   本机绝对路径输出写在系统 temp（未进 Git）。
