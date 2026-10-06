@@ -1,18 +1,40 @@
 {
   "schema_version": "cwp-main-upgrade-execution/1",
-  "status": "local_passed_publication_pending",
+  "status": "published_ci_passed",
   "code_parent": "6b68b78a2a34369da789aeb7da2d2236cc9040db",
   "rf_head": "6e6b817a1a6e4567293a4dcb835815f3be508a03",
   "test": "tests/integration/test_n6_batch_upgrade_identity.py",
   "fixture": "one synthetic policy PDF, actual AUTO CLI/subprocess workers, next version simulated in isolated test bootstrap",
   "framework_failures": [
-    {"seconds": 7.09, "reason": "internal SourceRef passed instead of public SourceRefValue"},
-    {"seconds": 6.48, "reason": "test expected ir_policy instead of catalog-normalized investor_relations"},
-    {"seconds": 15.41, "reason": "test launcher needed __main__ guard for Windows spawn"}
+    {
+      "seconds": 7.09,
+      "reason": "internal SourceRef passed instead of public SourceRefValue"
+    },
+    {
+      "seconds": 6.48,
+      "reason": "test expected ir_policy instead of catalog-normalized investor_relations"
+    },
+    {
+      "seconds": 15.41,
+      "reason": "test launcher needed __main__ guard for Windows spawn"
+    }
   ],
   "product_failures_claimed": false,
-  "green": {"passed": 1, "seconds": 16.33, "command": "PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 python -B -m pytest -p no:cacheprovider --basetemp tmp/n6uy tests/integration/test_n6_batch_upgrade_identity.py"},
-  "verified": ["current version finishes old run", "upgraded version refuses old run reuse without changing jobs or ledger", "new run and dedicated work-dir create three separate jobs", "new final pins upgraded version", "old reference returns original bytes after new publication", "upgraded run resume adds no jobs", "policy skips model", "foreign jobs and raw/config/catalog untouched"],
+  "green": {
+    "passed": 1,
+    "seconds": 16.33,
+    "command": "PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 python -B -m pytest -p no:cacheprovider --basetemp tmp/n6uy tests/integration/test_n6_batch_upgrade_identity.py"
+  },
+  "verified": [
+    "current version finishes old run",
+    "upgraded version refuses old run reuse without changing jobs or ledger",
+    "new run and dedicated work-dir create three separate jobs",
+    "new final pins upgraded version",
+    "old reference returns original bytes after new publication",
+    "upgraded run resume adds no jobs",
+    "policy skips model",
+    "foreign jobs and raw/config/catalog untouched"
+  ],
   "old_selector_version": "0.3.2",
   "simulated_new_selector_version": "0.3.2.n6-test-next",
   "model_posts": 0,
@@ -24,11 +46,111 @@
   "remaining": "actual candidate/budget implementation and MAIN wiring, nine-sample quality benchmark and real business E2E still pending",
   "ruff": "passed",
   "diff_check": "passed",
-  "scratch_absent": ["tmp/n6uv", "tmp/n6uw", "tmp/n6ux", "tmp/n6uy"],
+  "scratch_absent": [
+    "tmp/n6uv",
+    "tmp/n6uw",
+    "tmp/n6ux",
+    "tmp/n6uy"
+  ],
   "rf_owner_sha256": {
     "daily_alert.jsonl": "0aee073f56c133786365ab96899edf4d91c0f9e1a0e13ab61b2a6bffd8316270",
     "weekly_alert.jsonl": "b617b0b00ff1a758b5b46299e3e5db3115f56efd90d212154abe988e5ea9fee5",
     "weekly_manifest.json": "0d55cb8c81f12b663e330819da3037bb69ce8564ac41a686b578a99f78f948bf"
   },
-  "user_config_sha256": "3609e707466eeb3e0f685e14f2637c6afa39ba900edef1be4814433a43300a01"
+  "user_config_sha256": "3609e707466eeb3e0f685e14f2637c6afa39ba900edef1be4814433a43300a01",
+  "code_commit": "55a55c291e77ae7a824240b2903f48bfcf63ef03",
+  "ci": {
+    "run_id": 37536310001,
+    "attempt": 1,
+    "head_sha": "55a55c291e77ae7a824240b2903f48bfcf63ef03",
+    "status": "completed",
+    "conclusion": "success",
+    "job_id": 112518036680,
+    "job_seconds": 54.0,
+    "job_started_at": "2026-10-06T21:47:17Z",
+    "job_completed_at": "2026-10-06T21:48:11Z",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "Run actions/checkout@v4",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "Set up Python 3.12",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "Install dependencies",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "Ruff lint",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "Strict type check on contract modules",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "Compileall and config doctor",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "Unit tests",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "Unit test failure summary",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "Focused contract tests",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "Focused contract failure summary",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "CLI smoke test",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "Scan for hardcoded secrets",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "Post Set up Python 3.12",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "Post Run actions/checkout@v4",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success"
+      }
+    ],
+    "url": "https://github.com/zhengcb81/company-wiki/actions/runs/37536310001"
+  }
 }

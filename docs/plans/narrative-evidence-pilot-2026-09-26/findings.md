@@ -872,3 +872,5 @@ MAIN已实际推0947cea，精确CI37532408169 attempt1 success/job80秒，普通
 build_batch_events确用request中selector/parser/prompt hash划新身份；正式CLI/Worker实证旧run拒绝复用、新run/目录三job独立、new artifact绑定测试下一版本、旧ref继续返回旧字节、新run恢复不增任务。1 passed/16.33秒，纯流程PDF0模型。只改变测试子进程bootstrap的版本常量，不能代替未来实际候选/预算业务验收。Windows测试launcher须__main__保护；SourceRef内部DTO与public SourceRefValue、ir_policy路由标签与investor_relations来源身份必须分清，不放松产品合同迁就测试。
 
 完成证据旧N5待交付状态与总计划矛盾，已修成ET/RAW/DOCSET实际并线SHA与精确CI，以及当前N6/S7未完；未来RF owner保护按执行前status再读，目前三份。四tmp根恢复absent，产品/外线/外仓零写。此节点复用AUTO与reader，没有第二任务库/来源合同，也未加日常CI长测。
+
+实际发布55a55c2，精确CI37536310001一次success/全部step绿/job54秒；已保存真实head/job/start/end/steps。本地新责任case的16.33秒与远端日常快集合证据分开，整体目标不因本项通过而complete。

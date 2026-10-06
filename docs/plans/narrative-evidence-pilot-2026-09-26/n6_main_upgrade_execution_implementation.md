@@ -23,6 +23,6 @@ $env:PYTEST_DISABLE_PLUGIN_AUTOLOAD='1'
 python -B -m pytest -p no:cacheprovider --basetemp tmp/n6uv tests/integration/test_n6_batch_upgrade_identity.py
 ```
 
-状态：local_complete，1 passed/16.33秒、Ruff绿；当前版本旧run与模拟下一版本新run均正式完成，三个job ID集合分离，新artifact绑定下一版本，旧reference字节保持，新run恢复无新任务/模型调用。实际版本更新后仍在最终大节点运行此case；不声称新selector业务已完成。
+状态：published_complete，代码55a55c2已推master、精确CI37536310001一次全步骤绿/job54秒；[收据](harness_lanes/results/n6_main_upgrade_execution_2026-10-06.json)。本地1 passed/16.33秒、Ruff绿；当前版本旧run与模拟下一版本新run均正式完成，三个job ID集合分离，新artifact绑定下一版本，旧reference字节保持，新run恢复无新任务/模型调用。实际版本更新后仍在最终大节点运行此case；不声称新selector业务已完成。
 
 前三次失败均为测试组合问题：内部SourceRef误当公共DTO（7.09秒）、ir_policy标签误当规范化catalog身份（6.48秒）、Windows spawn重载无入口保护launcher造成额外stdout（15.41秒）。按既有公共DTO转换、catalog既定investor_relations身份、__main__入口保护修正，不改产品SHA/身份校验或Worker。没有虚报产品RED。所有运行0 HTTP/费用，四个自有pytest根收口恢复absent。
