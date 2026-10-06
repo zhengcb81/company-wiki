@@ -63,7 +63,7 @@ Phase 4: run the full 9-sample benchmark to produce `report.json`, then Integrat
 ## Session 2 尾声 — 推送与门
 
 - 首次 `git push` 被 `.githooks/pre-push` 拦下：`tools/pre_push_gate.py` 的 `_run_pytest_gate`
-  强制 basetemp ≤60 字符，本 lane worktree cwd 57 字符 → `<worktree>	mp\ppXXXXXXXX` = 72，
+  强制 basetemp ≤60 字符，本 lane worktree cwd 57 字符 → `<worktree>/tmp/ppXXXXXXXX` = 72，
   **在跑任何测试之前**即 `GATE RED at: CI fast contract smoke set`（路径约束，非测试失败）。
 - 根因核对：同一条命令在主检出（cwd 40 字符）跑出 `pytest basetemp verified… ok` +
   `pre-push gate GREEN`；本 lane 提交只新增 `benchmarks/`、`docs/implementation/handoffs/`、
