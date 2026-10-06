@@ -1,6 +1,8 @@
 # P5并行施工总包：来源默认迁移、FF简化、存储降容工具
 
-状态：**in_progress，用户于2026-10-05确认三卡均已开工**。2026-10-05只读核对后建立；不是旧N4-T1/T2、StockWiki narrative consumer或SPACE-S5审计的重复任务。MAIN离线S5与交付验收继续，N4C仅模型额度待答复；三个外线独占写集保留，收到交付后逐包验收合入。
+状态：**三卡均已交付、MAIN验收并发布，不再派发。** 本页保留2026-10-05开卡范围及交接格式；当前剩余工作属于MAIN，不是外线交付屏障。
+
+**2026-10-06最新复核：**FF外线ab9ce33完整包含于远端main758e8f4；STORAGE外线7ac1e3d/f8f414a经选择性吸收及修复进入master（集成9fa2166、后续96f44a1），不要求再merge旧分支。两外线工作树均干净，没有新增交付；GitHub官方API复核三个精确代码CI37385101051、37375836745、37394193179均attempt1 success。CWP本地/远端master均ed86940，实际生产清理及来源事实验证已完成，净释放5.659GB，见[生产结果](results/s5_production_storage_acceptance_2026-10-06.json)。不重复长测试或清理操作；MAIN下一动作仍S6说明/钩子残留核销，再回N4C。
 
 **最新进度覆盖（2026-10-05）：**STORAGE已验收合入/发布e570daf、53个不同case分步GREEN，生产未删。FF交付ab9ce33及MAIN实际修复均已合入/推送main758e8f4，本地main同步/仅凭证未跟踪，53个不同节点case分步GREEN、37项进程责任包/三仓离线链/固定真实年报读取通过；精确CI37385101051 attempt1全部步骤GREEN，先前58568e7的Linux类型失败已具体修正，无盲rerun，[FF验收收据](results/p5_ff_main_acceptance_2026-10-05.json)。RF已验收并推main ca67eab7（默认链代码b110502f）；精确CI37391526925一次全绿、job32秒。本地正式revenue-forecast已切main同步，旧rf-impl WIP原样保留在独立分支；三处已安装来源入口SHA与主线一致。MAIN质量v2与正式精选检索1b0feb4已发布/精确CI绿，后者102个不同case分步GREEN；N4C模型cap问题不阻该离线迁移。下面f775406等为开卡基线，不是当前MAIN HEAD；三卡不重派。
 
@@ -89,7 +91,7 @@ MAIN保持本机配置/原件和其他owner工作。production清理前只做一
 MAIN验收看实际commit/diff、公开入口、已执行测试、临时根恢复和资源/原件事实；不增加人工review receipt/授权JSON。外线交付不代表已经合入main或生产数据已清理。
 
 
-## 2026-10-05 集成交付状态
+## 2026-10-05 集成交付状态（历史快照，不产生当前待办）
 
 - P5-STORAGE已完成MAIN两节点TDD/真实资料验收，候选9fa2166已合入并推到master@e570daf；53个不同case分步GREEN，测试根恢复。专属慢测试在integration；不重派本卡，也不凭工具通过执行生产删除。正式receipt见results/p5_storage_integration_acceptance_2026-10-05.json。
 - RF远端main仍8a153f33；RF/FF HANDOFF均已收到，FF已正式验收并线，RF按MAIN整合细则验收。保持独立owner写集。MAIN继续CWP旧底层caller/metadata_only语义，收到两线后再集中联调并线，生产清理由MAIN在实际caller退出后执行。

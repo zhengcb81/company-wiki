@@ -1,5 +1,11 @@
 # Progress：激进简化实施
 
+## 最新交付核对（2026-10-06，覆盖下方历史P5状态）
+
+- 已接收P5-FF/P5-STORAGE通知并核对原始handoff、工作树及Git提交：两线无新增提交/dirty。FF已整支包含于远端main758e8f4；STORAGE已选择性集成9fa2166并由MAIN补充修复，旧交付分支不再merge覆盖当前工具。
+- 远端HEAD与官方Actions API复核成功：FF CI37385101051、STORAGE集成37375836745、后续修复37394193179均attempt1 success。已有责任测试、FF→ET→CWP联调及生产原文保护结果继续有效，不重复长测/删除/VACUUM。修正施工卡和并行总包的开工状态；Next Step仍S6当前说明/钩子残留核销，然后N4C。
+- 本轮只改本线PWF；用户配置SHA3609e707…保持，外线目录/其他owner文件不改。gh不在PATH导致只读CI命令失败，改官方API后成功；没有实际产品测试失败。
+
 ## 2026-10-06 — RF MAIN稀疏环境根因确认
 
 - 前一目标turn为progress：两份P5交付重核精确CI/原件SHA，PWF 2145661已推送，正常pre-push GREEN。本轮fresh RF remote main仍8a153f33、MAIN树干净a74b9ceb。

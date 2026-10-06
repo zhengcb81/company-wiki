@@ -1,5 +1,11 @@
 # Findings：当前事实与待验证项
 
+## 最新交付核对（2026-10-06，覆盖下方历史P5状态）
+
+- 用户再次通知P5-FF/P5-STORAGE完成，实读两份原始handoff及两个干净工作树，tip仍ab9ce33/f8f414a，没有新增交付。FF交付完整为main758e8f4祖先；STORAGE原分支未整支合并，MAIN集成9fa2166为当前master祖先，后续保护/共享引用修复保留，不回退旧实现。
+- 实时ls-remote确认FF main758e8f4、CWP master ed86940；GitHub官方API确认CI37385101051、37375836745、37394193179均精确SHA、attempt1、completed/success。沿用已执行的集中责任测试，不再跑长包。生产降容已经完成，以s5_production_storage_acceptance_2026-10-06.json为准；本次没有新删除/压缩/模型或provider调用。
+- 修正STORAGE卡仍写ready、并行总包仍写in_progress的过期状态；保留历史施工方法，不再派发。用户配置SHA3609e707…不变，凭证未读。工具环境gh不在PATH，改用无需凭证的官方API成功复核，不安装工具或读取密钥。
+
 ## 2026-10-06 — P5-FF / P5-STORAGE交付复核收口
 
 - 用户通知交付后重核原始handoff、Git ancestry与GitHub exact SHA：FF ab9ce33在main758e8f4中，STORAGE 9fa2166在master历史中；CI37385101051/37375836745均attempt1 completed/success。沿用已经执行的集中53个不同case分步GREEN及真实三仓/原件测试，不重复长包、不增加小节点门禁。
