@@ -1,0 +1,29 @@
+{
+  "bundle_sha256": "0e692afb8df9096e8024a9291829614dce567f685bbe38df64aac7f28b0eb114",
+  "bundle_utf8": "{\"evidence_spans\":[{\"coordinates\":{\"char_end\":null,\"char_start\":null,\"column_index\":null,\"page_number\":1,\"paragraph_index\":0,\"row_index\":null,\"table_index\":null},\"locator\":\"loc:v1/page:1/paragraph:0\",\"output_sha256\":\"cfd27e12e9a7d17b16570b767c3663379fa971a2c914d48f35f9eb2f8ee7a6fd\",\"parse_status\":\"parsed\",\"parser_name\":\"selective_narrative_parser\",\"parser_version\":\"0.1.0\",\"quality_flags\":[],\"raw_text\":\"Company launched a new product and expanded overseas capacity for customers.\",\"schema_version\":\"1.0.0\",\"source_id\":\"urn:company-wiki:source:sha256:a539ec3829d6a786598b0ef477a670fc9cc125203a68762891775d5bfd299d90\",\"span_id\":\"urn:company-wiki:evidence-span:sha256:9f7963b7a00b8d242617ec69c0a5b5482440c66255fde1f96f23d4efcd580536\",\"structured_value\":{\"bbox\":[72.0,60.17499923706055,475.52398681640625,75.28900146484375],\"block_char_end\":76,\"block_char_start\":0,\"block_sha256\":\"bb64751875eaff6a5c398abc29ec5f8e7310850a5b47d2f1ec7086c1a958a47f\",\"language\":\"en\",\"pdf_block\":0,\"selection_reasons\":[\"business_narrative_signal\",\"progress_or_change_language\",\"specific_business_event\"],\"source_role\":\"company_filing\",\"text_sha256\":\"bb64751875eaff6a5c398abc29ec5f8e7310850a5b47d2f1ec7086c1a958a47f\",\"topics\":[\"new_business\",\"overseas\",\"orders_customers\",\"capacity_projects\",\"products_rd\"],\"unit_kind\":\"pdf_text_block\"}}],\"expected_read_policy_sha256\":\"ca8ef1c423884e20552a2e31a6057127be9af43fc268f9c21ab7cf02c185ce8e\",\"prompt_review\":{\"evidence_sha256\":null,\"policy_hash\":null,\"reviewed_at\":null,\"source_sha256\":null,\"status\":\"not_reviewed\"},\"quality_status\":\"verified\",\"replay\":{\"locator_count\":1,\"required\":true},\"schema_version\":\"narrative-bundle/2.0\",\"selection\":{\"candidate_count\":1,\"coverage_complete\":true,\"dropped_financial_count\":0,\"lines_total\":0,\"omitted_candidate_count\":0,\"pages_read\":1,\"pages_total\":1,\"selected_count\":1,\"source_units\":1,\"status\":\"selected\",\"tables_scanned\":1,\"tables_total\":1},\"source_metadata\":{\"document_kind\":\"annual_report\",\"language\":\"en\",\"source_class\":\"filing\",\"title\":\"ACME business update\"},\"source_ref\":{\"byte_size\":836,\"content_sha256\":\"a539ec3829d6a786598b0ef477a670fc9cc125203a68762891775d5bfd299d90\",\"document_id\":\"urn:company-wiki:document:sha256:a539ec3829d6a786598b0ef477a670fc9cc125203a68762891775d5bfd299d90\",\"mime_type\":\"application/pdf\",\"schema_version\":\"2.0\",\"source_id\":\"urn:company-wiki:source:sha256:a539ec3829d6a786598b0ef477a670fc9cc125203a68762891775d5bfd299d90\"},\"summary\":{\"draft\":{\"claims\":[{\"claim_id\":\"claim-replay-001\",\"claim_type\":\"company_statement\",\"evidence_ids\":[\"urn:company-wiki:evidence-span:sha256:9f7963b7a00b8d242617ec69c0a5b5482440c66255fde1f96f23d4efcd580536\"],\"modality\":\"actual\",\"needs_review\":false,\"text\":\"Company launched a new product and expanded overseas capacity for customers.\"}],\"language\":\"en\",\"source_id\":\"urn:company-wiki:source:sha256:a539ec3829d6a786598b0ef477a670fc9cc125203a68762891775d5bfd299d90\",\"source_sha256\":\"a539ec3829d6a786598b0ef477a670fc9cc125203a68762891775d5bfd299d90\",\"status\":\"draft\"},\"model\":{\"adapter_id\":\"replay\",\"model_id\":\"fixture-v1\",\"prompt_version\":\"1.5.1\",\"response_sha256\":\"ed9ea2faba7a239263aba25891aac9b1660f921f47cd245443b1983783077815\"},\"status\":\"completed\",\"translate\":false},\"transcript_byte_bindings\":[],\"transcript_lineage\":null,\"versions\":{\"bundle_producer\":\"1.0.0\",\"material\":null,\"model\":\"fixture-v1\",\"parser\":\"0.1.0\",\"prompt\":\"1.5.1\",\"selector\":\"0.3.2\"}}",
+  "expected_source": {
+    "canonical_entity_id": "ent-acme",
+    "document_kind": "annual_report",
+    "fiscal_period": "FY",
+    "fiscal_year": 2026,
+    "market": "US",
+    "security_id": "ACME"
+  },
+  "provenance": {
+    "code_head": "ca6d9ced5981f4f84a247ef5b90095d651ccb805",
+    "parser_version": "0.1.0",
+    "producer": "real select/summarize/verify jobs and outbox; synthetic raw; local deterministic model",
+    "selector_version": "0.3.2"
+  },
+  "schema_version": "n6-frozen-narrative-fixture/1",
+  "source_base64": "JVBERi0xLjcKJcK1wrYKCjEgMCBvYmoKPDwvVHlwZS9DYXRhbG9nL1BhZ2VzIDIgMCBSPj4KZW5kb2JqCgoyIDAgb2JqCjw8L1R5cGUvUGFnZXMvQ291bnQgMS9LaWRzWzQgMCBSXT4+CmVuZG9iagoKMyAwIG9iago8PC9Gb250PDwvaGVsdiA1IDAgUj4+Pj4KZW5kb2JqCgo0IDAgb2JqCjw8L1R5cGUvUGFnZS9NZWRpYUJveFswIDAgNTk1IDg0Ml0vUm90YXRlIDAvUmVzb3VyY2VzIDMgMCBSL1BhcmVudCAyIDAgUi9Db250ZW50c1s2IDAgUl0+PgplbmRvYmoKCjUgMCBvYmoKPDwvVHlwZS9Gb250L1N1YnR5cGUvVHlwZTEvQmFzZUZvbnQvSGVsdmV0aWNhL0VuY29kaW5nL1dpbkFuc2lFbmNvZGluZz4+CmVuZG9iagoKNiAwIG9iago8PC9MZW5ndGggMTQyL0ZpbHRlci9GbGF0ZURlY29kZT4+CnN0cmVhbQp42i1OOwoCQQztc4q5gZNk5r1dEAvBxk6YTqx0FgstbDy/mXUJIbxfEvnIsYmmHKWJlsic2lt2z/76JtXUlnTdF8eCBzMUnbNl3KGs6HBMqCjBaHRHJS0z08JfwuFctVDGrJy4oS21EMEaPbDSg/GYw+OYWdZbCJcNhZWxb3zyz1g/3NpZTk0u8gN4hyyCCmVuZHN0cmVhbQplbmRvYmoKCnhyZWYKMCA3CjAwMDAwMDAwMDAgNjU1MzUgZiAKMDAwMDAwMDAxNiAwMDAwMCBuIAowMDAwMDAwMDYyIDAwMDAwIG4gCjAwMDAwMDAxMTQgMDAwMDAgbiAKMDAwMDAwMDE1NSAwMDAwMCBuIAowMDAwMDAwMjYyIDAwMDAwIG4gCjAwMDAwMDAzNTEgMDAwMDAgbiAKCnRyYWlsZXIKPDwvU2l6ZSA3L1Jvb3QgMSAwIFIvSURbPDM0MEU0MEMyOEZDM0I2MjBDM0JGQzI4QzQwQzM4MjNFPjxDOTRGN0U5M0Y4NjczRkRCNDAwQkQwMTJDOTk3NjEzQz5dPj4Kc3RhcnR4cmVmCjU2MgolJUVPRgo=",
+  "source_sha256": "a539ec3829d6a786598b0ef477a670fc9cc125203a68762891775d5bfd299d90",
+  "source_spec": {
+    "document_kind": "annual_report",
+    "name": "source.pdf",
+    "sidecar_overrides": {
+      "fiscal_period": "FY"
+    },
+    "title": "ACME business update"
+  }
+}

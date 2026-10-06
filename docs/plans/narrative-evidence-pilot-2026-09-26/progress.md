@@ -1029,3 +1029,15 @@ DOCSET实际merge58b74d07dd4f8b589c134ef9060a689864a8c089已推master，2c3583e�
 三树只取已跟踪代码文档，单树逻辑74490854 B、三树约223MB，共享Git历史/不复制ignored原件；验收后MAIN清理自己创建的worktree并先核需要ignored材料。新卡均有输入副本和PLAN_ID唯一PWF草稿。ROOT目标仍active，S7业务required12/33残缺；任务包ready不等于实现完成。FOOTPRINT只测本CWP占用与保留事实，不自动删/迁移/启动监控，不将跨根重复上界当已释放量。
 
 N6启动PWF和INPUT_CARD已各自纯文档提交并推分支，工作树干净：候选81d4524、预算9495459、空间ec7a573，均以58b74d0为代码祖先；master卡/CI收据cc0c032也已推。不存在未提交的启动WIP，不需要harness重复建目录、拉最新main或reset。所有runtime代码仍原基线。
+
+## 2026-10-06 — N6已分派与MAIN先行兼容/业务标准
+
+用户明确三施工包已分派；ROOT总卡标已分派待交付，只读三worktree尚无新修改，不据此宣称存在live进程。上一目标回合是实际进展（DOCSET发布、独立PWF/card/branch推送），本回合继续MAIN独占材料，不跨写外线或RF。
+
+先核RF main6e6b817a及其两owner日志、CWP user config SHA，与上一节点一致。发现旧isolated-pilot NarrativeEvidenceResolver重跑selector且限制版本；正式NarrativeTransportReader存完整EvidenceSpan，只重放原bytes，不存在相同耦合。未改旧pilot为第二canonical，不通过放宽ID/hash修它。路由只配置96/160/空结果策略，未候选前hard skip行政标题，不需要修改外线。
+
+在代码ca6d9ce/selector0.3.2下，一次通过正式3 job/outbox与确定性本地模型生成TXT/JSON/PDF历史final；冻结3 JSON共17056 B，含README18247 B。新MAIN Integration最初9红均为夹具将catalog内部ID错比public URN，改成完整SourceRef对比后9绿，强化篡改前后成功读取/legacy spans0后最终9 passed/4.85秒、Ruff/diff绿；没有声称产品RED。模拟未来0.4.0且当前selector不可调用，旧bytes/IDs保持；新canonical group IDs产物同时合法读，旧reference仍pin旧bytes；等长raw篡改拒绝并恢复后成功。persistent文件无变化（SQLite SHM read marks除外），0网络/paid/生产写。
+
+统一33个required业务解释表已写，原golden/86点/报告/分母零改：28经营点+1项目引句上下文，3纯财务金额/指引不独立作为业务摘要，1正文外provider摘要不冒充management。读原quote发现S07是境内收入占比约22%而非海外22%，更正ROOT候选卡/S7；S08历史2023产品克重口径、S06历史2016—2020进口替代也明确时间边界，不为模型/选择器凑绿。外线INPUT_CARD副本不写，最终MAIN核交付语义。
+
+自有tmp/n6freeze、n6mct及两生成脚本均核绝对路径/无reparse/实际恢复absent；原测试fixture保留已存在keep文件。RF2 owner SHA和用户config SHA实测保持，Dayu/IQS/StockWiki/ET零写。查询曾猜不存在的pilot/reader/view模块名和Windows rg通配路径报错，改为已知正式模块/目录，不当产品缺陷或新增门。当前准备正常commit/push与精确CI；S7质量两线未交，完整目标active。

@@ -17,7 +17,7 @@ MAIN独占运行时代码、共享合同、合入与总PWF；已交DOCSET/RAW-DU
 | 中文正文及跨块上下文 | S01 G01页32、G03页40；S02 G02/G03页18、G04页31；S03 G03页3 | parsed完整，candidate不完整/缺失；保留刻蚀应用、并购业务扩展、行业景气、已投用产能和薄膜第二曲线，不靠单个词命中 |
 | 固定预算下的排序 | S01 G02页40、G05页75；S05 G03页101；S06 G02/G03页43 | 诊断candidate完整但selected漏；先去重、按具体经营事件/业务章节分配，不直接扩96/160限额 |
 | 募投项目上下文 | S04 G03页34、G04页49；S06 G02/G03页43、G04页87 | 资金引导句、项目名称、建成产能常分块；完整项目逻辑有价值，不能把通用融资数额当业务结论 |
-| IR表格问答 | S07 G01页1；S08 G01页3 | parsed完整，但candidate漏；海外业务占比与产品组合是业务事实；S08虽为程序性标签仍有一条事实，不得全类型skip |
+| IR表格问答 | S07 G01页1；S08 G01页3 | parsed完整，但candidate漏；S07原文是境内收入约8.19亿元/占比约22%的结构变化，不是海外22%；产品组合也是业务事实；S08虽为程序性标签仍有一条事实，不得全类型skip |
 | 英文需求描述 | S09 G05行200/字节32538–32593 | parsed完整，candidate漏；“需求持续超过可用产能”应保留；已有数据中心G02从旧miss变full不重做 |
 | scope/产品边界 | S09 G01行30在正文marker前；G03/G04为收入guidance；S06 G01仅融资总额 | provider摘要不得冒充管理层原话；纯金额/guidance的漏项不自动当缺陷。旧golden/分母保留，在解释表明确处理理由，不改成易过的答案 |
 
@@ -61,4 +61,6 @@ python -m pytest -p no:cacheprovider --basetemp tmp/docset-next-tests benchmarks
 
 限定页诊断复现算法：以samples中的原件SHA/source_id调用现有`parse_pdf(..., table_pages=golden.read_scope.pages_read)`，TXT用`parse_transcript_text`；在独立Python进程中暂时包装`narrative_evidence.finalize_selection`捕获第三参数candidates，并在finally恢复函数。parsed.units与candidate.unit各调用`to_evidence_span(topics=(), selection_reasons=())`，分别与最终package.evidence_spans交给现有`evaluator.match_positive`，只报告原基准漏项。它是诊断，不能把限定表页的候选计数/排名当全表或生产指标；正式验收继续用runner及默认处理入口。读取与输出仍遵守上述独立根和原件指纹要求。
 
-交接须附代码SHA/selector版本、新旧报告、具体golden ID/locator/阶段结果/处理理由、责任测试命令与结果、E2E是否fixture、根恢复/原件与owner指纹、0模型费用。若未修复项仍影响具体经营事实，将其列为remaining，不把工具通过或全定位合法当产品语义完成。此卡当前**ready**，工具并线后由MAIN实施一、二，最后一次节点验收三。
+交接须附代码SHA/selector版本、新旧报告、具体golden ID/locator/阶段结果/处理理由、责任测试命令与结果、E2E是否fixture、根恢复/原件与owner指纹、0模型费用。若未修复项仍影响具体经营事实，将其列为remaining，不把工具通过或全定位合法当产品语义完成。此卡当前**in_progress**：候选/预算步骤已按N6独立写集分派，MAIN负责共享接线和最后一次节点验收三，不在本树重复做外线实现。
+
+MAIN先行材料：[0.3.2冻结final兼容](n6_main_compatibility_implementation.md)、[33点统一业务解释](n6_main_business_expectations_2026-10-06.md)。9项兼容测试已绿；最终新代码仍要重跑该责任包。原required33、旧报告及golden不改，scope/纯财务边界不靠减分母让报告变绿。

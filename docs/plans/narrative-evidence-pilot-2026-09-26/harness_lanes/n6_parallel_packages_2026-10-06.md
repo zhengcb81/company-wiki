@@ -1,6 +1,6 @@
 # N6：质量整改与空间盘点并行总包
 
-**三张卡ready、三份独立worktree已建，可同时给不同harness。** 固定代码基线58b74d07dd4f8b589c134ef9060a689864a8c089，DOCSET实际merge已推master，精确CI37528050044已一次成功/75秒。N5三包已接收，不重派。
+**三张卡已由用户分派（2026-10-06），三份独立worktree已建，待各自完整交付。** 固定代码基线58b74d07dd4f8b589c134ef9060a689864a8c089，DOCSET实际merge已推master，精确CI37528050044已一次成功/75秒。N5三包已接收，不重派；已分派不代替具体live进程证据。
 
 启动文档也已分别提交/推远端，三个工作树干净：候选HEAD81d4524471c59ff053e013b181d3c227ddb8a1f0，预算HEAD949545957f0b3499f48219a124623b33ba8ba065，空间HEADec7a5735e3c47a366c6de01073e87226f02c52ae。这些都是58b之上的纯文档bootstrap，代码仍为共同基线；不要因HEAD多一条启动提交去reset。独立PWF/card均在各树里，可直接开工。
 
@@ -29,3 +29,5 @@ RF/ET/StockWiki/IQS/Dayu只读或不碰，不另开它们的任务。N5工具长
 每卡各自完整上下文、固定base、独立PWF、测试包、精确写集、输出schema和完成标准。交接HANDOFF.md/handoff.json统一cwp-independent-handoff/1，记录代码commit、写集、RED/GREEN与命令/秒、真实/fixture、原件/生产保护、tmp恢复、calls、remaining；外线只推自己的codex分支。完整交接不等于研究语义或全项目已完成。
 
 MAIN最终节点额外核：0.3.2已落盘final在新选择/去重代码下仍能按原evidence_id/locator读出、回放，不因新canonical组/筛选改变而把历史合法资料变成不可读。旧职责测试若与新策略冲突，由MAIN核事实/规范再调整，外线不得删断言凑绿。规则接线/版本与旧artifact兼容是MAIN剩余任务，不放给两个外线交叉写。
+
+MAIN已完成先行[冻结旧final兼容包](../n6_main_compatibility_implementation.md)，9项/4.85秒绿，17KB历史夹具不在两质量线写集内；最终新代码并入后再跑一次。统一[33点业务解释](../n6_main_business_expectations_2026-10-06.md)保留原golden/分母，只解释经营事实、上下文与财务/provider边界。候选卡更正S07 G01为境内占比22%，原件/golden不变；外线输入副本不跨写，交接时MAIN核此语义。

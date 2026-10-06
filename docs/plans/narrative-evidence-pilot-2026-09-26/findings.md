@@ -848,3 +848,11 @@ DOCSET实际merge58b74d07dd4f8b589c134ef9060a689864a8c089已推master，2c3583e�
 三树只取已跟踪代码文档，单树逻辑74490854 B、三树约223MB，共享Git历史/不复制ignored原件；验收后MAIN清理自己创建的worktree并先核需要ignored材料。新卡均有输入副本和PLAN_ID唯一PWF草稿。ROOT目标仍active，S7业务required12/33残缺；任务包ready不等于实现完成。FOOTPRINT只测本CWP占用与保留事实，不自动删/迁移/启动监控，不将跨根重复上界当已释放量。
 
 N6启动PWF和INPUT_CARD已各自纯文档提交并推分支，工作树干净：候选81d4524、预算9495459、空间ec7a573，均以58b74d0为代码祖先；master卡/CI收据cc0c032也已推。不存在未提交的启动WIP，不需要harness重复建目录、拉最新main或reset。所有runtime代码仍原基线。
+
+## 2026-10-06 — MAIN兼容与业务标准先行
+
+N6三包人类已分派，MAIN只做共享责任。正式final按完整EvidenceSpan/parser定位回放，不重跑selector；旧summary-only孤立pilot相反，不能把pilot风险外推成正式reader缺陷。冻结旧0.3.2、模拟当前0.4.0且禁用selector的9项真实catalog/artifact Integration已过4.85秒，包含新group IDs发布后旧ref不变、raw等长篡改与恢复、legacy spans0/持久字节不变。fixture由正式Worker/outbox生成一次，3格式合成原件+local模型，冻结JSON17KB，不在未来实现下重新造oracle。无运行时代码修改或新门。
+
+33 required保留原分母与golden不变，独立业务解释划28经营事实+1项目完整上下文、3纯财务指引/金额、1正文外provider摘要。主要语义修正：S07 G01是境内约8.19亿元/22%，不能标成海外22%；S08是历史2023克重口径产品组合，不称2026数据；S06行业进口替代为2016—2020回顾。industry forecast、拟收购/认证/建成投产/意向书和actual必须按原话保留。统一表绑定实际golden/samples字节SHA与quote SHA/locator，未来仍报告实际/33及每点原因，不用业务分类把漏项清零。
+
+RF6e6b817a/2 owner SHA与CWP user config3609e707保持，三外线零写。独立scratch和两生成脚本均absent；正式9样本新selector基准与Worker→search/exact→RF仍等质量代码交付后做一个大节点，没用本回合合成compat冒称新实际质量已完成。

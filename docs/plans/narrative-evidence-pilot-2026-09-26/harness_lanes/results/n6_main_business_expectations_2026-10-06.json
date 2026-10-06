@@ -1,0 +1,497 @@
+{
+  "schema_version": "n6-main-business-expectations/1",
+  "input_golden_sha256": "1375cc7d5ca18359ff85de00fdcdd99eae57f93e6df4f80b9ac62b807fd2e361",
+  "input_samples_sha256": "f5ff565cab4514fa89aa92c8f07bdd156344b1180ea3613652abbb94e28b2fcb",
+  "original_required_count": 33,
+  "product_treatment_counts": {
+    "retain_business": 28,
+    "retain_project_context": 1,
+    "not_independent_financial": 3,
+    "not_management_quote": 1
+  },
+  "policy": "Keep the original golden/report/33 denominator unchanged; explain product scope separately. This policy is not generated from selector output and is not a runtime gate or public DTO.",
+  "points": [
+    {
+      "sample_id": "S01",
+      "golden_id": "G-S01-01",
+      "source_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "quote_sha256": "8ecb53a76ad6245cd460a4d2a19d85cee8e08a786c0e24a89ae986d9c8a85e44",
+      "locator": {
+        "page_number": 32
+      },
+      "original_expected_role": "company_statement",
+      "original_modality": "actual",
+      "product_treatment": "retain_business",
+      "rationale": "具体产品、行业、客户、产能或业务布局的可追溯叙述，应保留最小完整事件。",
+      "context_requirement": "保留原句的主体、动作、时点及否定/计划；角色来自原文，不由分类标签推断。"
+    },
+    {
+      "sample_id": "S01",
+      "golden_id": "G-S01-02",
+      "source_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "quote_sha256": "303ea785ccccaa43531a1e168f2ff61c123ac5c631e5ebf0937879e1acceddda",
+      "locator": {
+        "page_number": 40
+      },
+      "original_expected_role": "company_statement",
+      "original_modality": "actual",
+      "product_treatment": "retain_business",
+      "rationale": "具体产品、行业、客户、产能或业务布局的可追溯叙述，应保留最小完整事件。",
+      "context_requirement": "保留原句的主体、动作、时点及否定/计划；角色来自原文，不由分类标签推断。"
+    },
+    {
+      "sample_id": "S01",
+      "golden_id": "G-S01-03",
+      "source_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "quote_sha256": "8cb9c2db26cf74676ed7ff99138c4492ac1865818d2fad9471101568b308bab9",
+      "locator": {
+        "page_number": 40
+      },
+      "original_expected_role": "company_statement",
+      "original_modality": "planned",
+      "product_treatment": "retain_business",
+      "rationale": "具体产品、行业、客户、产能或业务布局的可追溯叙述，应保留最小完整事件。",
+      "context_requirement": "保留拟收购、拟业务延伸的计划情态，不改为交易完成。"
+    },
+    {
+      "sample_id": "S01",
+      "golden_id": "G-S01-04",
+      "source_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "quote_sha256": "7ca934e27415a5eb4b4a1108a44946e7df1cf1b23c84713b4930124ed98e5388",
+      "locator": {
+        "page_number": 40
+      },
+      "original_expected_role": "company_statement",
+      "original_modality": "planned",
+      "product_treatment": "retain_business",
+      "rationale": "具体产品、行业、客户、产能或业务布局的可追溯叙述，应保留最小完整事件。",
+      "context_requirement": "拆分已开工与预计建成/投产，不把整个时间表描述为已完成。"
+    },
+    {
+      "sample_id": "S01",
+      "golden_id": "G-S01-05",
+      "source_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "quote_sha256": "1edfc8f5a9a829f098e06da2b6296ea10b700cb0690f75f0e71fe1eb8e513024",
+      "locator": {
+        "page_number": 75
+      },
+      "original_expected_role": "company_statement",
+      "original_modality": "forecast",
+      "product_treatment": "retain_business",
+      "rationale": "具体产品、行业、客户、产能或业务布局的可追溯叙述，应保留最小完整事件。",
+      "context_requirement": "明确这是文件引用的SEMI行业预测，不是公司已实现销售或独立验证的市场事实。"
+    },
+    {
+      "sample_id": "S02",
+      "golden_id": "G-S02-01",
+      "source_sha256": "91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+      "quote_sha256": "ef20e88d9880d66c3dd4ac322e15cdb5af559f4ae3144da7bad70fabe939132a",
+      "locator": {
+        "page_number": 21
+      },
+      "original_expected_role": "company_statement",
+      "original_modality": "forecast",
+      "product_treatment": "retain_business",
+      "rationale": "具体产品、行业、客户、产能或业务布局的可追溯叙述，应保留最小完整事件。",
+      "context_requirement": "保留预计、未来五到十年的目标期限，不当作现有份额。"
+    },
+    {
+      "sample_id": "S02",
+      "golden_id": "G-S02-02",
+      "source_sha256": "91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+      "quote_sha256": "bbb86f2a8bab182b0c8f42c3da76e79249da517180d7c6d73a1d73a34c50abe1",
+      "locator": {
+        "page_number": 18
+      },
+      "original_expected_role": "company_statement",
+      "original_modality": "forecast",
+      "product_treatment": "retain_business",
+      "rationale": "具体产品、行业、客户、产能或业务布局的可追溯叙述，应保留最小完整事件。",
+      "context_requirement": "明确行业规模/区域结构预测及其原来源，不当作公司收入。"
+    },
+    {
+      "sample_id": "S02",
+      "golden_id": "G-S02-03",
+      "source_sha256": "91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+      "quote_sha256": "7ad96805070448c8ba94f3cd01ae9e18a691bf54f8b3cb0a1e063268516aefef",
+      "locator": {
+        "page_number": 18
+      },
+      "original_expected_role": "company_statement",
+      "original_modality": "actual",
+      "product_treatment": "retain_business",
+      "rationale": "具体产品、行业、客户、产能或业务布局的可追溯叙述，应保留最小完整事件。",
+      "context_requirement": "保留原句的主体、动作、时点及否定/计划；角色来自原文，不由分类标签推断。"
+    },
+    {
+      "sample_id": "S02",
+      "golden_id": "G-S02-04",
+      "source_sha256": "91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+      "quote_sha256": "706e110c2cb87a40f3d84b9df953e1a6c9a5e752ae0da93d7592f9a1f2c03836",
+      "locator": {
+        "page_number": 31
+      },
+      "original_expected_role": "company_statement",
+      "original_modality": "actual",
+      "product_treatment": "retain_business",
+      "rationale": "具体产品、行业、客户、产能或业务布局的可追溯叙述，应保留最小完整事件。",
+      "context_requirement": "保留原句的主体、动作、时点及否定/计划；角色来自原文，不由分类标签推断。"
+    },
+    {
+      "sample_id": "S03",
+      "golden_id": "G-S03-01",
+      "source_sha256": "ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+      "quote_sha256": "e209ff5851423148983e46ec89fdb28a633849aed580cf524750ec7eee026aeb",
+      "locator": {
+        "page_number": 2
+      },
+      "original_expected_role": "company_statement",
+      "original_modality": "actual",
+      "product_treatment": "retain_business",
+      "rationale": "具体产品、行业、客户、产能或业务布局的可追溯叙述，应保留最小完整事件。",
+      "context_requirement": "保留原句的主体、动作、时点及否定/计划；角色来自原文，不由分类标签推断。"
+    },
+    {
+      "sample_id": "S03",
+      "golden_id": "G-S03-02",
+      "source_sha256": "ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+      "quote_sha256": "1742deb3d1a70739bd0aaedafde0effa20ae0e14c782e831b3f977406ad1929a",
+      "locator": {
+        "page_number": 2
+      },
+      "original_expected_role": "company_statement",
+      "original_modality": "actual",
+      "product_treatment": "retain_business",
+      "rationale": "具体产品、行业、客户、产能或业务布局的可追溯叙述，应保留最小完整事件。",
+      "context_requirement": "保留原句的主体、动作、时点及否定/计划；角色来自原文，不由分类标签推断。"
+    },
+    {
+      "sample_id": "S03",
+      "golden_id": "G-S03-03",
+      "source_sha256": "ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+      "quote_sha256": "48e6dca1343ec048f198b9fe5cecafab21c202c86417fd5bda7099bd491f9d90",
+      "locator": {
+        "page_number": 3
+      },
+      "original_expected_role": "company_statement",
+      "original_modality": "actual",
+      "product_treatment": "retain_business",
+      "rationale": "具体产品、行业、客户、产能或业务布局的可追溯叙述，应保留最小完整事件。",
+      "context_requirement": "具体薄膜业务第二曲线+增速+新引擎是一条经营事件，不能被纯财务行过滤。"
+    },
+    {
+      "sample_id": "S03",
+      "golden_id": "G-S03-04",
+      "source_sha256": "ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+      "quote_sha256": "3c8b06825e72f0235c2a390245281bc85ddfadddb2ba8e97b3d2fccac48bb0e4",
+      "locator": {
+        "page_number": 3
+      },
+      "original_expected_role": "company_statement",
+      "original_modality": "actual",
+      "product_treatment": "retain_business",
+      "rationale": "具体产品、行业、客户、产能或业务布局的可追溯叙述，应保留最小完整事件。",
+      "context_requirement": "保留原句的主体、动作、时点及否定/计划；角色来自原文，不由分类标签推断。"
+    },
+    {
+      "sample_id": "S04",
+      "golden_id": "G-S04-01",
+      "source_sha256": "19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+      "quote_sha256": "482eadce99ee3acfa3d5e5d02bba8176ca70fd5e00680b6093cd04b572fe3198",
+      "locator": {
+        "page_number": 114
+      },
+      "original_expected_role": "company_statement",
+      "original_modality": "actual",
+      "product_treatment": "retain_business",
+      "rationale": "具体产品、行业、客户、产能或业务布局的可追溯叙述，应保留最小完整事件。",
+      "context_requirement": "保留原句的主体、动作、时点及否定/计划；角色来自原文，不由分类标签推断。"
+    },
+    {
+      "sample_id": "S04",
+      "golden_id": "G-S04-03",
+      "source_sha256": "19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+      "quote_sha256": "916e7383c995516d1f1a32a9c523ee66eb3832b96b3a93d5cb7e31c5b6e94796",
+      "locator": {
+        "page_number": 34
+      },
+      "original_expected_role": "company_statement",
+      "original_modality": "planned",
+      "product_treatment": "retain_project_context",
+      "rationale": "这句只有募资投向引导语。必须与紧邻的具体项目名称/用途组成可回放事件，不能单独摘要成经营进展。",
+      "context_requirement": "保留原句的主体、动作、时点及否定/计划；角色来自原文，不由分类标签推断。"
+    },
+    {
+      "sample_id": "S04",
+      "golden_id": "G-S04-04",
+      "source_sha256": "19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+      "quote_sha256": "431a3b12d06da51af7d5f117d06774b75a260ecb18e6cdbc4843db5612df4667",
+      "locator": {
+        "page_number": 49
+      },
+      "original_expected_role": "company_statement",
+      "original_modality": "planned",
+      "product_treatment": "retain_business",
+      "rationale": "具体产品、行业、客户、产能或业务布局的可追溯叙述，应保留最小完整事件。",
+      "context_requirement": "保留具体扩产/研发项目名称与拟用途；不只选补充流动资金或融资金额。"
+    },
+    {
+      "sample_id": "S05",
+      "golden_id": "G-S05-01",
+      "source_sha256": "cd803fe9528f4646f8f29b518a450ae4bd5b5968c482eb49789f9786b523595b",
+      "quote_sha256": "140b12c8482b7f5a1d8207f5a2a81b3c5d8bb25c419a73f14cffaea719100d07",
+      "locator": {
+        "page_number": 3
+      },
+      "original_expected_role": "company_statement",
+      "original_modality": "planned",
+      "product_treatment": "retain_business",
+      "rationale": "具体产品、行业、客户、产能或业务布局的可追溯叙述，应保留最小完整事件。",
+      "context_requirement": "保留现有锻件业务、向装配下游延伸及认证约束的完整项目逻辑。"
+    },
+    {
+      "sample_id": "S05",
+      "golden_id": "G-S05-02",
+      "source_sha256": "cd803fe9528f4646f8f29b518a450ae4bd5b5968c482eb49789f9786b523595b",
+      "quote_sha256": "5a78e0b60f9b4fc04ec292e43479fc5c22affcff2c0fc516141b2fb3acae1700",
+      "locator": {
+        "page_number": 3
+      },
+      "original_expected_role": "company_statement",
+      "original_modality": "planned",
+      "product_treatment": "retain_business",
+      "rationale": "具体产品、行业、客户、产能或业务布局的可追溯叙述，应保留最小完整事件。",
+      "context_requirement": "预计认证周期不是已获认证；月份范围及产品认证对象保持。"
+    },
+    {
+      "sample_id": "S05",
+      "golden_id": "G-S05-03",
+      "source_sha256": "cd803fe9528f4646f8f29b518a450ae4bd5b5968c482eb49789f9786b523595b",
+      "quote_sha256": "2b8454111a882d30a52f1405b79bcfffe84b365d3838bf1867d8e5c51b594ce0",
+      "locator": {
+        "page_number": 101
+      },
+      "original_expected_role": "company_statement",
+      "original_modality": "forecast",
+      "product_treatment": "retain_business",
+      "rationale": "具体产品、行业、客户、产能或业务布局的可追溯叙述，应保留最小完整事件。",
+      "context_requirement": "属于行业市场前景判断，不改写成已获得订单。"
+    },
+    {
+      "sample_id": "S06",
+      "golden_id": "G-S06-01",
+      "source_sha256": "c6ed566631e123f159abf2697c157f1868f8e994ccf8e3352132046a6c5ca0a1",
+      "quote_sha256": "8d3f9e2b9eedb9ffeb2411fd83ff7306a5b050bb8cffb2a17e1e55eca3611290",
+      "locator": {
+        "page_number": 4
+      },
+      "original_expected_role": "company_statement",
+      "original_modality": "planned",
+      "product_treatment": "not_independent_financial",
+      "rationale": "只有募集资金上限，不是项目用途/产能/业务里程碑；不独立进入业务摘要，不要求扩大切片配额保留。",
+      "context_requirement": "保留原句的主体、动作、时点及否定/计划；角色来自原文，不由分类标签推断。"
+    },
+    {
+      "sample_id": "S06",
+      "golden_id": "G-S06-02",
+      "source_sha256": "c6ed566631e123f159abf2697c157f1868f8e994ccf8e3352132046a6c5ca0a1",
+      "quote_sha256": "69b6d4629b78f7fe1527ce0b8cd112da3ecec41053312740b57a546fcce9b4e1",
+      "locator": {
+        "page_number": 43
+      },
+      "original_expected_role": "company_statement",
+      "original_modality": "planned",
+      "product_treatment": "retain_business",
+      "rationale": "具体产品、行业、客户、产能或业务布局的可追溯叙述，应保留最小完整事件。",
+      "context_requirement": "保留两条具体建设项目，而非只保留募集资金引句。"
+    },
+    {
+      "sample_id": "S06",
+      "golden_id": "G-S06-03",
+      "source_sha256": "c6ed566631e123f159abf2697c157f1868f8e994ccf8e3352132046a6c5ca0a1",
+      "quote_sha256": "0d400f1390555b171ae9c0f6f4d540b7106d7126df6b570d7510e9230bff5653",
+      "locator": {
+        "page_number": 43
+      },
+      "original_expected_role": "company_statement",
+      "original_modality": "planned",
+      "product_treatment": "retain_business",
+      "rationale": "具体产品、行业、客户、产能或业务布局的可追溯叙述，应保留最小完整事件。",
+      "context_requirement": "预计达产新增产能是条件性计划，项目、单位、两个产能值完整。"
+    },
+    {
+      "sample_id": "S06",
+      "golden_id": "G-S06-04",
+      "source_sha256": "c6ed566631e123f159abf2697c157f1868f8e994ccf8e3352132046a6c5ca0a1",
+      "quote_sha256": "85a2447e96aa5ede1657f3cf4458be22c4715fad49be8c3e6d7fffac8c55a498",
+      "locator": {
+        "page_number": 87
+      },
+      "original_expected_role": "company_statement",
+      "original_modality": "actual",
+      "product_treatment": "retain_business",
+      "rationale": "具体产品、行业、客户、产能或业务布局的可追溯叙述，应保留最小完整事件。",
+      "context_requirement": "这是2016—2020年行业结构回顾，保留历史期间和公司解释，不称当前最新数据。"
+    },
+    {
+      "sample_id": "S07",
+      "golden_id": "G-S07-01",
+      "source_sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+      "quote_sha256": "2ae2af6afbaad8f117ae5b28ac013320421685aa68f70b8fccc10ec4d0c905b4",
+      "locator": {
+        "page_number": 1
+      },
+      "original_expected_role": "company_statement",
+      "original_modality": "actual",
+      "product_treatment": "retain_business",
+      "rationale": "具体产品、行业、客户、产能或业务布局的可追溯叙述，应保留最小完整事件。",
+      "context_requirement": "原文为境内收入约8.19亿元、占比约22%，较2024年提升。严禁标成境外22%；不凭这句独立断言境外78%。"
+    },
+    {
+      "sample_id": "S07",
+      "golden_id": "G-S07-02",
+      "source_sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+      "quote_sha256": "bfa1e192543e2e40713e1cd2c73885c0e0b4d0da7db6ef2c34234eed980676de",
+      "locator": {
+        "page_number": 6
+      },
+      "original_expected_role": "company_statement",
+      "original_modality": "planned",
+      "product_treatment": "retain_business",
+      "rationale": "具体产品、行业、客户、产能或业务布局的可追溯叙述，应保留最小完整事件。",
+      "context_requirement": "建设正在推进、预计六月底完成并开展中试，不能改为已经中试或量产。"
+    },
+    {
+      "sample_id": "S07",
+      "golden_id": "G-S07-03",
+      "source_sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+      "quote_sha256": "8247a247458c09ded2f1210315d6292ae2ee28d136cd8e042fc04d91275a4172",
+      "locator": {
+        "page_number": 6
+      },
+      "original_expected_role": "company_statement",
+      "original_modality": "actual",
+      "product_treatment": "retain_business",
+      "rationale": "具体产品、行业、客户、产能或业务布局的可追溯叙述，应保留最小完整事件。",
+      "context_requirement": "区分已签意向书与已有产品销售，不扩大为全面商业化。"
+    },
+    {
+      "sample_id": "S07",
+      "golden_id": "G-S07-04",
+      "source_sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+      "quote_sha256": "46e3b1928335b8badb2fb6655394203d4d6ae0f5ca6a5cf9a1e02a9d05f69de0",
+      "locator": {
+        "page_number": 5
+      },
+      "original_expected_role": "company_statement",
+      "original_modality": "planned",
+      "product_treatment": "retain_business",
+      "rationale": "具体产品、行业、客户、产能或业务布局的可追溯叙述，应保留最小完整事件。",
+      "context_requirement": "已启动建设的项目与拟产能，不当作已全部投产。"
+    },
+    {
+      "sample_id": "S08",
+      "golden_id": "G-S08-01",
+      "source_sha256": "f6d50d717efd5e84e400a28b51bb0c73e2e2a712e828cd3fb6d872469718fd2b",
+      "quote_sha256": "0c2c4ee63cbd8a5a8bb05814389972b82b0d603aa76c5df49d7ba69ed59199c8",
+      "locator": {
+        "page_number": 3
+      },
+      "original_expected_role": "company_statement",
+      "original_modality": "actual",
+      "product_treatment": "retain_business",
+      "rationale": "具体产品、行业、客户、产能或业务布局的可追溯叙述，应保留最小完整事件。",
+      "context_requirement": "这是克重口径的产品结构区间。文档为历史2023记录，不称2026最新销量/收入；程序性标题不能掩盖事实。"
+    },
+    {
+      "sample_id": "S09",
+      "golden_id": "G-S09-01",
+      "source_sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+      "quote_sha256": "df755df66e6545642484195b79122ed3372f45b6b68ded4d0d30e365c549bba0",
+      "locator": {
+        "line_start": 30,
+        "line_end": 30,
+        "parser_region": "before_transcript_start",
+        "byte_start": 991,
+        "byte_end": 1118
+      },
+      "original_expected_role": "company_statement",
+      "original_modality": "actual",
+      "product_treatment": "not_management_quote",
+      "rationale": "原TXT正文marker前的provider摘要，不是管理层原话。相同产能约束可由正文G-S09-05保留，不要求扩parser范围冒充管理层。",
+      "context_requirement": "保留原句的主体、动作、时点及否定/计划；角色来自原文，不由分类标签推断。"
+    },
+    {
+      "sample_id": "S09",
+      "golden_id": "G-S09-02",
+      "source_sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+      "quote_sha256": "8ee17207751ef15143fa01fa10e7c0e40d6db3899aa69a8dbd21792d00109b0f",
+      "locator": {
+        "line_start": 138,
+        "line_end": 138,
+        "parser_region": "prepared_remarks",
+        "byte_start": 10913,
+        "byte_end": 11073
+      },
+      "original_expected_role": "company_statement",
+      "original_modality": "actual",
+      "product_treatment": "retain_business",
+      "rationale": "具体产品、行业、客户、产能或业务布局的可追溯叙述，应保留最小完整事件。",
+      "context_requirement": "公司当季新增与当年累计数据中心、地域和需求背景一起保留，不丢this quarter/this year区分。"
+    },
+    {
+      "sample_id": "S09",
+      "golden_id": "G-S09-03",
+      "source_sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+      "quote_sha256": "5708c43149bf175e4c62816a8f077aaf746fcc40f33d024090e2158109cdca99",
+      "locator": {
+        "line_start": 226,
+        "line_end": 226,
+        "parser_region": "parsed",
+        "byte_start": 41662,
+        "byte_end": 41751
+      },
+      "original_expected_role": "company_statement",
+      "original_modality": "forecast",
+      "product_treatment": "not_independent_financial",
+      "rationale": "纯公司收入金额/增速指引，没有具体经营对象的动作或约束；不独立作为业务摘要。不能因forecast情态把财务指引变成经营事件。",
+      "context_requirement": "保留原句的主体、动作、时点及否定/计划；角色来自原文，不由分类标签推断。"
+    },
+    {
+      "sample_id": "S09",
+      "golden_id": "G-S09-04",
+      "source_sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+      "quote_sha256": "6ce9141b925bd447a1e56d2386bec94a7a999edc9cf4af55963e3e827da7d0d5",
+      "locator": {
+        "line_start": 222,
+        "line_end": 222,
+        "parser_region": "parsed",
+        "byte_start": 40209,
+        "byte_end": 40285
+      },
+      "original_expected_role": "company_statement",
+      "original_modality": "forecast",
+      "product_treatment": "not_independent_financial",
+      "rationale": "纯Azure收入增速指引；业务名称本身不使纯财务数值成为业务进展，不要求据此扩大容量。",
+      "context_requirement": "保留原句的主体、动作、时点及否定/计划；角色来自原文，不由分类标签推断。"
+    },
+    {
+      "sample_id": "S09",
+      "golden_id": "G-S09-05",
+      "source_sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+      "quote_sha256": "8479930a13d519e64d5930202d10c72ff7473d941965a1897d96b24d208022be",
+      "locator": {
+        "line_start": 200,
+        "line_end": 200,
+        "parser_region": "parsed",
+        "byte_start": 32538,
+        "byte_end": 32593
+      },
+      "original_expected_role": "company_statement",
+      "original_modality": "actual",
+      "product_treatment": "retain_business",
+      "rationale": "具体产品、行业、客户、产能或业务布局的可追溯叙述，应保留最小完整事件。",
+      "context_requirement": "保留正文管理层关于需求超出可用产能的陈述，不用provider摘要替代。"
+    }
+  ]
+}

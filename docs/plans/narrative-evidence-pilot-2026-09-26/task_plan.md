@@ -33,7 +33,7 @@ python -B tools/n4c_live_preflight.py --rf-root 'C:/Users/郑曾波/Projects/rev
 
 ## 实施顺序与当前完成范围
 
-优先事项G1门禁精简、S3虚拟化已完成，S5/S6生产清理完成。S4真实业务效果已验证，完成审计发现的[R6局部摘要恢复](r6_partial_summary_implementation_2026-10-06.md)已补齐并推/精确CI绿；DOCSET与RAW-DUP并线已发布。当前N6三卡准备并行，不新增小节点门。
+优先事项G1门禁精简、S3虚拟化已完成，S5/S6生产清理完成。S4真实业务效果已验证，完成审计发现的[R6局部摘要恢复](r6_partial_summary_implementation_2026-10-06.md)已补齐并推/精确CI绿；DOCSET与RAW-DUP并线已发布。N6三卡已由用户分派；MAIN先行历史final兼容9项/4.85秒绿和33点业务解释完成，不新增小节点门。
 
 | 步骤 | 状态 | 范围与证据 |
 |---|---|---|
@@ -89,7 +89,7 @@ TDD 框住具体公开行为。只在 N4 A/B/C、存储迁移等大节点集中�
 
 ## Next Step
 
-**按[N6并行总包](harness_lanes/n6_parallel_packages_2026-10-06.md)开展S7。** 三卡ready、三独立工作树已建立，可由用户同时分派；候选/上下文与固定预算/去重各独占4/2源文件，空间只读工具独占新目录。MAIN先准备共享规则组合/版本与最终节点，不抢外线写集；收到两质量线后接线并做一次9样本/正式Worker-RF E2E，空间工具独立接收不阻质量。DOCSET已并线58b74d0/精确CI75秒绿，43不同case通过；当前required12/33、744定位合法不等于语义已达标。具体仍取[S7细则](s7_document_quality_implementation_2026-10-06.md)，不重派旧N5或重复付费。
+**按[N6并行总包](harness_lanes/n6_parallel_packages_2026-10-06.md)接收已分派三线。** 候选/上下文与固定预算/去重各独占4/2源文件，空间只读工具独占新目录，MAIN不抢外线写集。MAIN先行[0.3.2冻结兼容包](n6_main_compatibility_implementation.md)9项/4.85秒绿，[33点业务解释](n6_main_business_expectations_2026-10-06.md)已写；下一收到完整质量交接后实际merge、按main_wiring组合规则/更新selector版本，再一次真实9样本/正式Worker-RF E2E和冻结兼容测试。空间工具可独立接收不阻质量。DOCSET已并线58b74d0/精确CI75秒绿，43不同case通过；当前required12/33、744定位合法不等于语义已达标，不重派旧N5或重复付费。
 
 run10与ET-TXT已完成并推adc9d6b；保留真实结果、旧失败与非穷尽边界。RAW-DUP已有完整交接，MAIN发现并修复输出/预算/分配量/云属性/报告/ACL测试缺口，51责任项/9.09秒与两CLI联调绿，原件删除0；[验收卡](harness_lanes/n5_raw_duplicate_main_acceptance_2026-10-06.md)。历史7.27GiB为跨根候选上界，仅3组151MiB实读，不计释放、不自动迁移；DOCSET已交9份真实资料/86标注点与完整报告；报告基于旧selector0.3.1，required11/33，不能当当前0.3.2结论。下一步按N6候选/预算独立卡并行整改，MAIN接线后集中质量验收。不凭目录文件或日志声称有确认live进程，不自动删原件/hydrate。
 

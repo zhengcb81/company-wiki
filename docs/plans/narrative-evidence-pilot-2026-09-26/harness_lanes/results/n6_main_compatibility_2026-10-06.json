@@ -1,0 +1,60 @@
+{
+  "schema_version": "cwp-n6-main-compatibility/1",
+  "status": "local_verified_publication_pending",
+  "fixture_generation_head": "ca6d9ced5981f4f84a247ef5b90095d651ccb805",
+  "historical_selector_version": "0.3.2",
+  "simulated_new_selector_version": "0.4.0",
+  "source_formats": ["txt", "json", "pdf"],
+  "sources_are_synthetic": true,
+  "historical_bundles_generated_by_actual_jobs_and_outbox": true,
+  "historical_fixtures_regenerated_during_test": false,
+  "fixture_json_bytes": 17056,
+  "fixture_total_bytes_including_readme": 18247,
+  "tests": {
+    "command": "python -B -m pytest -p no:cacheprovider --basetemp tmp/n6mct tests/integration/test_n6_persisted_selection_compatibility.py",
+    "passed": 9,
+    "failed": 0,
+    "seconds": 4.85,
+    "ruff": "passed",
+    "initial_fixture_failure": "catalog internal document ID was compared with public URN; replaced with comparison of the complete public SourceRef, no production changes",
+    "product_red_demonstrated": false,
+    "coverage": [
+      "exact historical bytes and evidence IDs/locators survive disabled current selector",
+      "old artifact references remain pinned after publication of new canonical group IDs",
+      "new grouping artifact also replays original locators",
+      "same-size raw tampering still fails, read succeeds before tampering and after restoration",
+      "empty legacy evidence_spans table is sufficient",
+      "read-only persistent bytes unchanged excluding SQLite SHM read marks",
+      "fixture lake and files removed in finally, preexisting test material preserved"
+    ]
+  },
+  "cleanup": {
+    "tmp/n6freeze": "absent",
+    "tmp/n6mct": "absent",
+    "tmp/n6_main_freeze.py": "absent",
+    "tmp/n6_main_policy.py": "absent"
+  },
+  "protected_state": {
+    "production_raw_or_catalog_used": false,
+    "runtime_source_code_changed": false,
+    "external_owner_worktrees_written": false,
+    "user_config_sha256": "3609e707466eeb3e0f685e14f2637c6afa39ba900edef1be4814433a43300a01",
+    "rf_head": "6e6b817a1a6e4567293a4dcb835815f3be508a03",
+    "rf_weekly_alert_sha256": "b617b0b00ff1a758b5b46299e3e5db3115f56efd90d212154abe988e5ea9fee5",
+    "rf_weekly_manifest_sha256": "0d55cb8c81f12b663e330819da3037bb69ce8564ac41a686b578a99f78f948bf"
+  },
+  "calls": {"external_llm": 0, "provider_download": 0, "cost_micro_usd": 0},
+  "quality_expectations": {
+    "original_required_denominator": 33,
+    "original_golden_or_reports_changed": false,
+    "treatments": {"retain_business": 28, "retain_project_context": 1, "not_independent_financial": 3, "not_management_quote": 1},
+    "s07_correction": "G-S07-01 is domestic revenue share about 22%, not overseas share 22%"
+  },
+  "remaining": [
+    "N6 external quality implementations and main_wiring have not been delivered",
+    "actual new selector merge/version/rule composition must rerun frozen compatibility tests",
+    "final real-nine-source benchmark and formal Worker/search/exact/RF E2E remain pending"
+  ],
+  "published_head": null,
+  "exact_ci": null
+}

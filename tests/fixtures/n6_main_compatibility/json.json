@@ -1,0 +1,29 @@
+{
+  "bundle_sha256": "d278abd27212100fab7d49a886b086305e754fc08fa1c556566de74b5d2bf8fa",
+  "bundle_utf8": "{\"evidence_spans\":[{\"coordinates\":{\"char_end\":57,\"char_start\":0,\"column_index\":null,\"page_number\":null,\"paragraph_index\":1,\"row_index\":null,\"table_index\":null},\"locator\":\"loc:v1/paragraph:1/chars:0-57\",\"output_sha256\":\"ceba9c5ed4217ba66e7a96eec10f36125c514d30b10d344e3f898a5553f9e6d2\",\"parse_status\":\"parsed\",\"parser_name\":\"selective_narrative_parser\",\"parser_version\":\"0.1.0\",\"quality_flags\":[],\"raw_text\":\"We launched a new product and expanded overseas capacity.\",\"schema_version\":\"1.0.0\",\"source_id\":\"urn:company-wiki:source:sha256:1b7ed024fcee466552e4775743d956daa367cd7ca177f9cd401e952ffdd93f91\",\"span_id\":\"urn:company-wiki:evidence-span:sha256:7ea170e7857eec289bd675a8dfd268cb7e42ab5a02f1f644aab83ed594298f35\",\"structured_value\":{\"language\":\"en\",\"line_end\":2,\"line_start\":2,\"qa_group_id\":null,\"qa_parent_id\":null,\"section\":\"prepared_remarks\",\"selection_reasons\":[\"business_narrative_signal\",\"progress_or_change_language\",\"specific_business_event\",\"management_statement\"],\"source_role\":\"management\",\"speaker\":\"CEO\",\"speaker_title\":null,\"text_char_end\":57,\"text_char_start\":0,\"text_sha256\":\"413bce6616d620db182914bf2d28abf0abdf3b5fa5a45725765e26b2adb01199\",\"topics\":[\"new_business\",\"overseas\",\"capacity_projects\",\"products_rd\"],\"unit_kind\":\"transcript_speaker_block\"}}],\"expected_read_policy_sha256\":\"ca8ef1c423884e20552a2e31a6057127be9af43fc268f9c21ab7cf02c185ce8e\",\"prompt_review\":{\"evidence_sha256\":null,\"policy_hash\":null,\"reviewed_at\":null,\"source_sha256\":null,\"status\":\"not_reviewed\"},\"quality_status\":\"verified\",\"replay\":{\"locator_count\":1,\"required\":true},\"schema_version\":\"narrative-bundle/2.0\",\"selection\":{\"candidate_count\":1,\"coverage_complete\":true,\"dropped_financial_count\":0,\"lines_total\":4,\"omitted_candidate_count\":0,\"pages_read\":0,\"pages_total\":0,\"selected_count\":1,\"source_units\":2,\"status\":\"selected\",\"tables_scanned\":0,\"tables_total\":0},\"source_metadata\":{\"document_kind\":\"investor_call_transcript\",\"language\":\"en\",\"source_class\":\"transcript\",\"title\":\"ACME business update\"},\"source_ref\":{\"byte_size\":256,\"content_sha256\":\"1b7ed024fcee466552e4775743d956daa367cd7ca177f9cd401e952ffdd93f91\",\"document_id\":\"urn:company-wiki:document:sha256:1b7ed024fcee466552e4775743d956daa367cd7ca177f9cd401e952ffdd93f91\",\"mime_type\":\"application/json\",\"schema_version\":\"2.0\",\"source_id\":\"urn:company-wiki:source:sha256:1b7ed024fcee466552e4775743d956daa367cd7ca177f9cd401e952ffdd93f91\"},\"summary\":{\"draft\":{\"claims\":[{\"claim_id\":\"claim-replay-001\",\"claim_type\":\"company_statement\",\"evidence_ids\":[\"urn:company-wiki:evidence-span:sha256:7ea170e7857eec289bd675a8dfd268cb7e42ab5a02f1f644aab83ed594298f35\"],\"modality\":\"actual\",\"needs_review\":false,\"text\":\"We launched a new product and expanded overseas capacity.\"}],\"language\":\"en\",\"source_id\":\"urn:company-wiki:source:sha256:1b7ed024fcee466552e4775743d956daa367cd7ca177f9cd401e952ffdd93f91\",\"source_sha256\":\"1b7ed024fcee466552e4775743d956daa367cd7ca177f9cd401e952ffdd93f91\",\"status\":\"draft\"},\"model\":{\"adapter_id\":\"replay\",\"model_id\":\"fixture-v1\",\"prompt_version\":\"1.5.1\",\"response_sha256\":\"0a7b39b239bcddb454be8e05142832d77b38d25b88488ee891c60caeb66d819e\"},\"status\":\"completed\",\"translate\":false},\"transcript_byte_bindings\":[{\"evidence_id\":\"urn:company-wiki:evidence-span:sha256:7ea170e7857eec289bd675a8dfd268cb7e42ab5a02f1f644aab83ed594298f35\",\"material_line_end\":2,\"material_line_start\":2,\"source_byte_ranges\":[{\"end\":186,\"start\":124}]}],\"transcript_lineage\":{\"extractor_version\":\"transcript-original-json/1.0.0\",\"line_count\":4,\"original_byte_size\":256,\"original_mime_type\":\"application/json\",\"original_sha256\":\"1b7ed024fcee466552e4775743d956daa367cd7ca177f9cd401e952ffdd93f91\",\"original_source_id\":\"urn:company-wiki:source:sha256:1b7ed024fcee466552e4775743d956daa367cd7ca177f9cd401e952ffdd93f91\",\"schema_version\":\"transcript-material/2\",\"text_byte_size\":158,\"text_sha256\":\"0dab86616cffd0943b32ec6ef28a945d5eb9346fcf0fafc97edfafa6b73f908c\"},\"versions\":{\"bundle_producer\":\"1.0.0\",\"material\":\"transcript-original-json/1.0.0\",\"model\":\"fixture-v1\",\"parser\":\"0.1.0\",\"prompt\":\"1.5.1\",\"selector\":\"0.3.2\"}}",
+  "expected_source": {
+    "canonical_entity_id": "ent-acme",
+    "document_kind": "investor_call_transcript",
+    "fiscal_period": "Q2",
+    "fiscal_year": 2026,
+    "market": "US",
+    "security_id": "ACME"
+  },
+  "provenance": {
+    "code_head": "ca6d9ced5981f4f84a247ef5b90095d651ccb805",
+    "parser_version": "0.1.0",
+    "producer": "real select/summarize/verify jobs and outbox; synthetic raw; local deterministic model",
+    "selector_version": "0.3.2"
+  },
+  "schema_version": "n6-frozen-narrative-fixture/1",
+  "source_base64": "W3sic3ltYm9sIjogIkFDTUUiLCAieWVhciI6IDIwMjYsICJxdWFydGVyIjogMiwgImRhdGUiOiAiMjAyNi0wOC0wMSAxMjowMDowMCIsICJjb250ZW50IjogIkZ1bGwgQ29uZmVyZW5jZSBDYWxsIFRyYW5zY3JpcHRcbkNFTzogV2UgbGF1bmNoZWQgYSBuZXcgcHJvZHVjdCBhbmQgZXhwYW5kZWQgb3ZlcnNlYXMgY2FwYWNpdHkuXG5RdWVzdGlvbnMgJiBBbnN3ZXJzXG5BbmFseXN0OiBJcyBjb21tZXJjaWFsIGxhdW5jaCBvbiBzY2hlZHVsZT9cbiJ9XQ==",
+  "source_sha256": "1b7ed024fcee466552e4775743d956daa367cd7ca177f9cd401e952ffdd93f91",
+  "source_spec": {
+    "document_kind": "investor_call_transcript",
+    "name": "source.json",
+    "sidecar_overrides": {
+      "fiscal_period": "Q2"
+    },
+    "title": "ACME business update"
+  }
+}
