@@ -10,7 +10,7 @@
 
 ## Next Step
 
-全部阶段完成，等待 MAIN 验收。验收后由 MAIN 决定是否将处置建议与现有存储层对接；done 仅指工具可信、真实限额扫描与小报告交付，不等于空间已释放。
+已推送 `origin/codex/n6-footprint`=`12f73db`（delivery `ba19571` + handoff `12f73db`，pre-push 门禁 GREEN），全部阶段完成，等待 MAIN 验收。验收后由 MAIN 决定是否将处置建议与现有存储层对接；done 仅指工具可信、真实限额扫描与小报告交付，不等于空间已释放。
 
 启动先核HEAD/status，输入PWF/card是MAIN创建的新文档，可随本线提交；不执行旧N5/根总计划。无原件/配置/owner写入、0付费模型，临时根恢复原样。
 
@@ -35,3 +35,4 @@
 | symlink 创建被拒（WinError 1314 权限） | 1 | `make_dir_link` 回退 `cmd /c mklink /J`（junction 无需管理员） |
 | ruff F841：未使用变量 `root` | 1 | 删除该 fixture 行 |
 | 保护收据 `originals_sampled=0` | 1 | `raw/` 下只有子目录，改 `rglob` 每家公司取 1 份、共 5 份原件 metadata |
+| pre-push 门禁结构红：lane 工作树 basetemp 68>60 字符 | 1 | 不 `--no-verify`、不改共享门禁（写集外）；按 owner 选定改用短路径临时 worktree 完整过门禁后推送，随即删除临时 worktree |
