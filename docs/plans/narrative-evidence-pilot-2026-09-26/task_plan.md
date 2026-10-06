@@ -89,14 +89,10 @@ TDD 框住具体公开行为。只在 N4 A/B/C、存储迁移等大节点集中�
 
 ## Next Step
 
-**按[N6并行总包](harness_lanes/n6_parallel_packages_2026-10-06.md)接收已分派三线。** 候选/上下文与固定预算/去重各独占4/2源文件，空间只读工具独占新目录，MAIN不抢外线写集。MAIN先行[0.3.2冻结兼容包](n6_main_compatibility_implementation.md)9项/4.85秒绿，[33点业务解释](n6_main_business_expectations_2026-10-06.md)已写；[业务E2E施工框架](n6_main_business_e2e_implementation.md)已用三类合成原件验证，最终1项/27.65秒绿，正式configured Worker→RF→search/exact→恢复及TXT字节映射均走通，真实质量节点明确未运行。当前RF6e6b817a有daily/weekly/manifest三份owner日志改动，全部只读保护，不恢复。下一收到完整质量交接后实际merge、按main_wiring组合规则/更新selector版本，再一次真实9样本/正式Worker-RF E2E和冻结兼容测试。空间工具可独立接收不阻质量。DOCSET已并线58b74d0/精确CI75秒绿，43不同case通过；当前required12/33、744定位合法不等于语义已达标，不重派旧N5或重复付费。
+**接收 N6-CANDIDATE 的实际交付，随后执行 S7 一个集中质量节点。** N6-FOOTPRINT 已合入/推 cf24f34，精确 CI37542743196 全步骤成功/68秒，52项责任测试绿；N6-BUDGET 18dbd0e 已交付，MAIN 修正后145项/7.46秒及真实电话会+AUTO升级2项/23.73秒绿，selector0.3.3，准备正常并线发布。详见[n6 MAIN验收](n6_budget_footprint_main_acceptance.md)。
 
-run10与ET-TXT已完成并推adc9d6b；保留真实结果、旧失败与非穷尽边界。RAW-DUP已有完整交接，MAIN发现并修复输出/预算/分配量/云属性/报告/ACL测试缺口，51责任项/9.09秒与两CLI联调绿，原件删除0；[验收卡](harness_lanes/n5_raw_duplicate_main_acceptance_2026-10-06.md)。历史7.27GiB为跨根候选上界，仅3组151MiB实读，不计释放、不自动迁移；DOCSET已交9份真实资料/86标注点与完整报告；报告基于旧selector0.3.1，required11/33，不能当当前0.3.2结论。下一步按N6候选/预算独立卡并行整改，MAIN接线后集中质量验收。不凭目录文件或日志声称有确认live进程，不自动删原件/hydrate。
+候选线继续独占四模块，不重派/跨写。最终按main_wiring合规则再更新实际selector版本，一次真实9样本（原33 required/86点/golden不改）和正式Worker→RF→search/exact→恢复验收。0.3.2最近实测12/33仍是已知基准；手工候选推算13/33不能替代新版本实际质量证明。既有冻结兼容9项在0.3.3实际新代码已绿。失败只修责任包，不逐helper审批、不加日常CI长测试。
 
-N5外线独立实施，MAIN只在完整交付后验收；最终完成以本页每项责任和实际收据审计，不将当前证据缩成更容易通过的目标。
+最新单根空间报告逻辑24,365,900,191 B，其中原件23,462,933,638 B占96.2941%；tmp/测试与tmp DB候选323,168,254 B，未证实全部可删/实际分配量，原件删除0。工具零正文/联网/LLM，只报告；不用新增人工审批文件。1007云占位跳过，旧37G/46G与这次单根stat口径不混用。生产 S5/S6净释放5659443210 B仍按原正式收据。
 
-MAIN先行[执行升级隔离](n6_main_upgrade_execution_implementation.md)已本地16.33秒绿：正式旧run/新run任务与artifact版本分离，旧run拒绝误复用、旧reference仍可读取、新run恢复幂等，纯流程PDF零模型。模拟版本传播只证明AUTO身份和传播；实际两线合入后仍用当前真实版本执行大节点。最后质量节点同时跑此case、冻结兼容9项与正式业务E2E，不加逐helper门。
-
-### 2026-10-06 接收状态覆盖
-
-N6-FOOTPRINT 7f27f63已交付，MAIN修正后52项/7.70秒与真实限额扫描绿，准备正常并线推送；N6-BUDGET 18dbd0e已交付，MAIN14反例已RED，随后修正/接线。N6-CANDIDATE仍独占，不抢写。当前单一步骤：发布FOOTPRINT后重新merge预算，集中通过责任测试并更新共享selector版本。两质量线最后一起做真实九样本和正式Worker/RF大节点，原golden不生成新答案，不新增小节点审查。
+RF仍main6e6b817a，daily/weekly/manifest三份owner日志保护；用户source_acquisition.yaml SHA3609e707保持独立未提交，Dayu/IQS/StockWiki/ET零写。收到交付后有实质进展即可实施，不把此前blocked等待状态当当前权限门；总体S7尚未完成。

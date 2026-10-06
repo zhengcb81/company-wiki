@@ -878,3 +878,7 @@ build_batch_events确用request中selector/parser/prompt hash划新身份；正�
 ## N6-FOOTPRINT验收发现（2026-10-06）
 
 路径叫tmp/cache不能覆盖已知原件或采集staging的保留身份；automation.*不是可证的Store标记，更不能把根目录及全部子树归为AUTO。目录枚举属于时间预算责任，单次OS阻塞仍不可抢占。MAIN修正并以52反例/责任测试验证。报告只列逻辑量，不把stat当已证磁盘分配量；本目录96.2941%为原件，旧清理没有把原件删掉，新派生只有约2MB。不新增处置审批文件；可重建/未使用是实际正确性检查。新小报告/保护收据在results，详情见n6_budget_footprint_main_acceptance.md。
+
+## N6-BUDGET验收发现（2026-10-06）
+
+整组内容集合相同不足以证明同一事件：相同答案可能属于两个问题，相同表格行可能在不同年份表头下。来源/解析版本/语言/精确角色/QA父问题与发言上下文均保守绑定；跨组比较保留句子顺序，混合summary组拆分且不与现有ID碰撞；budget group/item键也必须分命名空间。15个反例RED→GREEN，实际0.3.3责任145及真实TXT/AUTO2绿。旧0.3.2final不用重跑选择器，冻结9项通过。候选算法还未交，不能把hand-built候选的13/33预测记成正式质量达标。空间工具精确CI已全绿68秒，预算发布之后补本线精确CI。

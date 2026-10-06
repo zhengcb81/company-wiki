@@ -1087,3 +1087,13 @@ FOOTPRINT修正原件/staging优先、AUTO精确非根标记、有限deadline、
 最终真实metadata扫描18.969秒，完整54298文件/逻辑24365900191 B；raw23462933638 B占96.2941%，tmp277935342 B+tmp DB45232912 B仅是323168254 B候选上界，不是实际可删/已释放。1007云占位跳过，allocated=null。旧报告保留，新报告与保护收据放harness_lanes/results/n6_footprint_main_*.json。五原件/DB metadata、用户配置/配置/RF三owner SHA一致。0原件正文/模型/下载/删除。
 
 首次扫描脚本保护键拼错在扫描前失败，空scratch已清理；首次stdout编码不匹配但保存JSON合法，明确PYTHONUTF8后重测stdout/file对账且stderr空。自己的pytest-855/856和临时脚本已删除恢复absent，未碰并发owner的pytest-857。空间准备正常并线提交推送，日常CI没有加入新长套件，S7完整质量仍待候选线。
+
+## 2026-10-06 — N6-BUDGET MAIN集中验收
+
+实际merge交接18dbd0e，外线提交完整保留，未写候选线/外仓。先14个反例RED/0.89秒证明文本相同不能跨来源、语言、问答、发言人、表头互删，混合summary组与逆序事件/派生组ID碰撞也不合法。新增预算item/group键碰撞先1 RED/1.50秒。MAIN修正保守context key、顺序子序列包含、稳定无碰撞组ID和bundle命名空间；按首内容索引可能包含组，避免无关候选全量两两比较。原件/定位不改，96/160不扩，原golden不生成。
+
+最终145责任项/7.46秒（外线32+旧选择89+MAIN15+冻结兼容9），Ruff、3源模块mypy、diff绿。真实微软TXT search/exact与实际0.3.3 AUTO批次升级隔离2项/23.73秒绿，补掉外线仅因worktree缺sibling原件的那个失败，不改该旧测试。原件字节SHA回放且目录恢复、升级任务/旧ref/恢复幂等通过；0供应商调用/费用。三个tmp/n6ba/bb/bc核绝对路径非reparse后删除恢复absent。共享selector0.3.3区分新的预算算法批次，候选合入后再更新版本。
+
+FOOTPRINT已实际推cf24f3455f01b5e143107f1584cc47fa1ceb9d83，精确CI37542743196 job112539384015/68秒全部步骤success，收据已补。两外包HANDOFF中的手工候选覆盖与需要另开人工处置审批/golden重生成建议不成为MAIN规范：新真实质量与业务大节点仍等候选；原golden/33分母不变；处置只查可重建/未使用，不新增人签。
+
+当前准备预算正常提交推送并核精确代码CI。S7未complete；下一接候选线，统一真实九样本及正式Worker/RF节点。RF6e6b817a三owner、用户config3609e707继续保护。

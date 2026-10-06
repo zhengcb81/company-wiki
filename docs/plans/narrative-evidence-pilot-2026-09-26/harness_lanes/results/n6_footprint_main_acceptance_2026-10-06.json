@@ -1,122 +1,284 @@
 {
- "schema_version": "n6-footprint-main-acceptance/1",
- "lane_head": "7f27f633dc977b2d09978f5b34b49d75055af267",
- "corrected_classification": true,
- "protected_before": {
-  "metadata": {
-   "companies\\Alphabet Inc\\raw\\financial_reports\\annual\\2026-02-05_sec_0001652044-26-000018_Alphabet Inc. 10-K 2025-12-31.htm": [
-    2616499,
-    1785619671091490500,
-    4785074604667228
-   ],
-   "companies\\AMD\\raw\\news\\2026-04-12_19021a1d_Advanced_Micro_Devices_Inc__Stock_Quote_.md": [
-    510,
-    1779222894853210300,
-    3096224743828480
-   ],
-   "companies\\Apple Inc\\raw\\financial_reports\\annual\\2025-10-31_sec_0000320193-25-000079_Apple Inc. 10-K 2025-09-27.htm": [
-    1520208,
-    1784839326411872600,
-    11258999070265143
-   ],
-   "companies\\MICROSOFT CORP\\raw\\other\\.source.json": [
-    3816,
-    1790439670498758300,
-    24769797951521330
-   ],
-   "companies\\MongoDB, Inc\\raw\\financial_reports\\annual\\2026-03-11_sec_0001628280-26-016799_MongoDB, Inc. 10-K 2026-01-31.htm": [
-    2218293,
-    1785578568580092300,
-    19140298417885689
-   ],
-   ".source_catalog\\catalog.sqlite3": [
-    222408704,
-    1791248158420833300,
-    41939771531881038
-   ],
-   ".source_catalog\\catalog.sqlite3-wal": [
-    0,
-    1791248176091635700,
-    65583669573584099
-   ],
-   ".source_catalog\\catalog.sqlite3-shm": [
-    32768,
-    1791320595536540200,
-    130885864170456376
-   ]
+  "schema_version": "n6-footprint-main-acceptance/1",
+  "lane_head": "7f27f633dc977b2d09978f5b34b49d75055af267",
+  "corrected_classification": true,
+  "protected_before": {
+    "metadata": {
+      "companies\\Alphabet Inc\\raw\\financial_reports\\annual\\2026-02-05_sec_0001652044-26-000018_Alphabet Inc. 10-K 2025-12-31.htm": [
+        2616499,
+        1785619671091490500,
+        4785074604667228
+      ],
+      "companies\\AMD\\raw\\news\\2026-04-12_19021a1d_Advanced_Micro_Devices_Inc__Stock_Quote_.md": [
+        510,
+        1779222894853210300,
+        3096224743828480
+      ],
+      "companies\\Apple Inc\\raw\\financial_reports\\annual\\2025-10-31_sec_0000320193-25-000079_Apple Inc. 10-K 2025-09-27.htm": [
+        1520208,
+        1784839326411872600,
+        11258999070265143
+      ],
+      "companies\\MICROSOFT CORP\\raw\\other\\.source.json": [
+        3816,
+        1790439670498758300,
+        24769797951521330
+      ],
+      "companies\\MongoDB, Inc\\raw\\financial_reports\\annual\\2026-03-11_sec_0001628280-26-016799_MongoDB, Inc. 10-K 2026-01-31.htm": [
+        2218293,
+        1785578568580092300,
+        19140298417885689
+      ],
+      ".source_catalog\\catalog.sqlite3": [
+        222408704,
+        1791248158420833300,
+        41939771531881038
+      ],
+      ".source_catalog\\catalog.sqlite3-wal": [
+        0,
+        1791248176091635700,
+        65583669573584099
+      ],
+      ".source_catalog\\catalog.sqlite3-shm": [
+        32768,
+        1791320595536540200,
+        130885864170456376
+      ]
+    },
+    "config_and_owner_sha256": {
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_acquisition.yaml": "3609e707466eeb3e0f685e14f2637c6afa39ba900edef1be4814433a43300a01",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\config.yaml": "2f4df37c3d39ef380caf476b6b678949a1e4b7604bdb95b73b0033804209c589",
+      "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\daily_alert.jsonl": "0aee073f56c133786365ab96899edf4d91c0f9e1a0e13ab61b2a6bffd8316270",
+      "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_alert.jsonl": "b617b0b00ff1a758b5b46299e3e5db3115f56efd90d212154abe988e5ea9fee5",
+      "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_manifest.json": "0d55cb8c81f12b663e330819da3037bb69ce8564ac41a686b578a99f78f948bf"
+    }
   },
-  "config_and_owner_sha256": {
-   "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_acquisition.yaml": "3609e707466eeb3e0f685e14f2637c6afa39ba900edef1be4814433a43300a01",
-   "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
-   "C:\\Users\\郑曾波\\Projects\\company-wiki\\config.yaml": "2f4df37c3d39ef380caf476b6b678949a1e4b7604bdb95b73b0033804209c589",
-   "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\daily_alert.jsonl": "0aee073f56c133786365ab96899edf4d91c0f9e1a0e13ab61b2a6bffd8316270",
-   "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_alert.jsonl": "b617b0b00ff1a758b5b46299e3e5db3115f56efd90d212154abe988e5ea9fee5",
-   "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_manifest.json": "0d55cb8c81f12b663e330819da3037bb69ce8564ac41a686b578a99f78f948bf"
-  }
- },
- "protected_after": {
-  "metadata": {
-   "companies\\Alphabet Inc\\raw\\financial_reports\\annual\\2026-02-05_sec_0001652044-26-000018_Alphabet Inc. 10-K 2025-12-31.htm": [
-    2616499,
-    1785619671091490500,
-    4785074604667228
-   ],
-   "companies\\AMD\\raw\\news\\2026-04-12_19021a1d_Advanced_Micro_Devices_Inc__Stock_Quote_.md": [
-    510,
-    1779222894853210300,
-    3096224743828480
-   ],
-   "companies\\Apple Inc\\raw\\financial_reports\\annual\\2025-10-31_sec_0000320193-25-000079_Apple Inc. 10-K 2025-09-27.htm": [
-    1520208,
-    1784839326411872600,
-    11258999070265143
-   ],
-   "companies\\MICROSOFT CORP\\raw\\other\\.source.json": [
-    3816,
-    1790439670498758300,
-    24769797951521330
-   ],
-   "companies\\MongoDB, Inc\\raw\\financial_reports\\annual\\2026-03-11_sec_0001628280-26-016799_MongoDB, Inc. 10-K 2026-01-31.htm": [
-    2218293,
-    1785578568580092300,
-    19140298417885689
-   ],
-   ".source_catalog\\catalog.sqlite3": [
-    222408704,
-    1791248158420833300,
-    41939771531881038
-   ],
-   ".source_catalog\\catalog.sqlite3-wal": [
-    0,
-    1791248176091635700,
-    65583669573584099
-   ],
-   ".source_catalog\\catalog.sqlite3-shm": [
-    32768,
-    1791320595536540200,
-    130885864170456376
-   ]
+  "protected_after": {
+    "metadata": {
+      "companies\\Alphabet Inc\\raw\\financial_reports\\annual\\2026-02-05_sec_0001652044-26-000018_Alphabet Inc. 10-K 2025-12-31.htm": [
+        2616499,
+        1785619671091490500,
+        4785074604667228
+      ],
+      "companies\\AMD\\raw\\news\\2026-04-12_19021a1d_Advanced_Micro_Devices_Inc__Stock_Quote_.md": [
+        510,
+        1779222894853210300,
+        3096224743828480
+      ],
+      "companies\\Apple Inc\\raw\\financial_reports\\annual\\2025-10-31_sec_0000320193-25-000079_Apple Inc. 10-K 2025-09-27.htm": [
+        1520208,
+        1784839326411872600,
+        11258999070265143
+      ],
+      "companies\\MICROSOFT CORP\\raw\\other\\.source.json": [
+        3816,
+        1790439670498758300,
+        24769797951521330
+      ],
+      "companies\\MongoDB, Inc\\raw\\financial_reports\\annual\\2026-03-11_sec_0001628280-26-016799_MongoDB, Inc. 10-K 2026-01-31.htm": [
+        2218293,
+        1785578568580092300,
+        19140298417885689
+      ],
+      ".source_catalog\\catalog.sqlite3": [
+        222408704,
+        1791248158420833300,
+        41939771531881038
+      ],
+      ".source_catalog\\catalog.sqlite3-wal": [
+        0,
+        1791248176091635700,
+        65583669573584099
+      ],
+      ".source_catalog\\catalog.sqlite3-shm": [
+        32768,
+        1791320595536540200,
+        130885864170456376
+      ]
+    },
+    "config_and_owner_sha256": {
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_acquisition.yaml": "3609e707466eeb3e0f685e14f2637c6afa39ba900edef1be4814433a43300a01",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\config.yaml": "2f4df37c3d39ef380caf476b6b678949a1e4b7604bdb95b73b0033804209c589",
+      "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\daily_alert.jsonl": "0aee073f56c133786365ab96899edf4d91c0f9e1a0e13ab61b2a6bffd8316270",
+      "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_alert.jsonl": "b617b0b00ff1a758b5b46299e3e5db3115f56efd90d212154abe988e5ea9fee5",
+      "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_manifest.json": "0d55cb8c81f12b663e330819da3037bb69ce8564ac41a686b578a99f78f948bf"
+    }
   },
-  "config_and_owner_sha256": {
-   "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_acquisition.yaml": "3609e707466eeb3e0f685e14f2637c6afa39ba900edef1be4814433a43300a01",
-   "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
-   "C:\\Users\\郑曾波\\Projects\\company-wiki\\config.yaml": "2f4df37c3d39ef380caf476b6b678949a1e4b7604bdb95b73b0033804209c589",
-   "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\daily_alert.jsonl": "0aee073f56c133786365ab96899edf4d91c0f9e1a0e13ab61b2a6bffd8316270",
-   "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_alert.jsonl": "b617b0b00ff1a758b5b46299e3e5db3115f56efd90d212154abe988e5ea9fee5",
-   "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_manifest.json": "0d55cb8c81f12b663e330819da3037bb69ce8564ac41a686b578a99f78f948bf"
+  "elapsed_seconds": 18.969,
+  "code_sha": "cf24f3455f01b5e143107f1584cc47fa1ceb9d83",
+  "scratch_restored_absent": true,
+  "calls": {
+    "original_body_reads": 0,
+    "llm": 0,
+    "network": 0,
+    "deleted": 0
+  },
+  "tests": {
+    "passed": 52,
+    "seconds": 7.7
+  },
+  "ci": {
+    "jobs": [
+      {
+        "id": 112539384015,
+        "run_id": 37542743196,
+        "workflow_name": "CI",
+        "head_branch": "master",
+        "run_url": "https://api.github.com/repos/zhengcb81/company-wiki/actions/runs/37542743196",
+        "run_attempt": 1,
+        "node_id": "CR_kwDOSGURns8AAAAaM964zw",
+        "head_sha": "cf24f3455f01b5e143107f1584cc47fa1ceb9d83",
+        "url": "https://api.github.com/repos/zhengcb81/company-wiki/actions/jobs/112539384015",
+        "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/37542743196/job/112539384015",
+        "status": "completed",
+        "conclusion": "success",
+        "created_at": "2026-10-06T22:47:04Z",
+        "started_at": "2026-10-06T22:47:07Z",
+        "completed_at": "2026-10-06T22:48:15Z",
+        "name": "Fast checks (Python 3.12)",
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1,
+            "started_at": "2026-10-06T22:47:08Z",
+            "completed_at": "2026-10-06T22:47:08Z"
+          },
+          {
+            "name": "Run actions/checkout@v4",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 2,
+            "started_at": "2026-10-06T22:47:08Z",
+            "completed_at": "2026-10-06T22:47:11Z"
+          },
+          {
+            "name": "Set up Python 3.12",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 3,
+            "started_at": "2026-10-06T22:47:11Z",
+            "completed_at": "2026-10-06T22:47:13Z"
+          },
+          {
+            "name": "Install dependencies",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 4,
+            "started_at": "2026-10-06T22:47:13Z",
+            "completed_at": "2026-10-06T22:47:35Z"
+          },
+          {
+            "name": "Ruff lint",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 5,
+            "started_at": "2026-10-06T22:47:35Z",
+            "completed_at": "2026-10-06T22:47:36Z"
+          },
+          {
+            "name": "Strict type check on contract modules",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 6,
+            "started_at": "2026-10-06T22:47:36Z",
+            "completed_at": "2026-10-06T22:47:38Z"
+          },
+          {
+            "name": "Compileall and config doctor",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 7,
+            "started_at": "2026-10-06T22:47:38Z",
+            "completed_at": "2026-10-06T22:47:40Z"
+          },
+          {
+            "name": "Unit tests",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 8,
+            "started_at": "2026-10-06T22:47:40Z",
+            "completed_at": "2026-10-06T22:48:11Z"
+          },
+          {
+            "name": "Unit test failure summary",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 9,
+            "started_at": "2026-10-06T22:48:11Z",
+            "completed_at": "2026-10-06T22:48:11Z"
+          },
+          {
+            "name": "Focused contract tests",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 10,
+            "started_at": "2026-10-06T22:48:11Z",
+            "completed_at": "2026-10-06T22:48:13Z"
+          },
+          {
+            "name": "Focused contract failure summary",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 11,
+            "started_at": "2026-10-06T22:48:13Z",
+            "completed_at": "2026-10-06T22:48:13Z"
+          },
+          {
+            "name": "CLI smoke test",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 12,
+            "started_at": "2026-10-06T22:48:13Z",
+            "completed_at": "2026-10-06T22:48:13Z"
+          },
+          {
+            "name": "Scan for hardcoded secrets",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 13,
+            "started_at": "2026-10-06T22:48:13Z",
+            "completed_at": "2026-10-06T22:48:13Z"
+          },
+          {
+            "name": "Post Set up Python 3.12",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 25,
+            "started_at": "2026-10-06T22:48:13Z",
+            "completed_at": "2026-10-06T22:48:13Z"
+          },
+          {
+            "name": "Post Run actions/checkout@v4",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 26,
+            "started_at": "2026-10-06T22:48:13Z",
+            "completed_at": "2026-10-06T22:48:13Z"
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 27,
+            "started_at": "2026-10-06T22:48:13Z",
+            "completed_at": "2026-10-06T22:48:13Z"
+          }
+        ],
+        "check_run_url": "https://api.github.com/repos/zhengcb81/company-wiki/check-runs/112539384015",
+        "labels": [
+          "ubuntu-latest"
+        ],
+        "runner_id": 1000001945,
+        "runner_name": "GitHub Actions 1000001945",
+        "runner_group_id": 0,
+        "runner_group_name": "GitHub Actions"
+      }
+    ],
+    "head_sha": "cf24f3455f01b5e143107f1584cc47fa1ceb9d83",
+    "run_id": 37542743196
   }
- },
- "elapsed_seconds": 18.969,
- "code_sha": "pending normal commit",
- "scratch_restored_absent": true,
- "calls": {
-  "original_body_reads": 0,
-  "llm": 0,
-  "network": 0,
-  "deleted": 0
- },
- "tests": {
-  "passed": 52,
-  "seconds": 7.7
- }
 }

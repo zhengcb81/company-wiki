@@ -1,0 +1,733 @@
+{
+ "schema_version": "n6-budget-real-candidates/1",
+ "provenance": {
+  "real_vs_fixture": "real_original_text_hand_assembled_candidates",
+  "note": "Every unit's raw_text, coordinates and source_sha256 come verbatim from the registered original named in samples.json (read-only). The candidate rows (topics/reasons/score/group_id) are hand-assembled for this test and are NOT the production parser/selector output.",
+  "originals_read": "read-only, no download, no model call",
+  "registered_manifest": "benchmarks/narrative_document_types/samples.json"
+ },
+ "samples": [
+  {
+   "sample_id": "S01",
+   "title": "中微公司：2025年年度报告.pdf",
+   "existing_kind": "annual_report",
+   "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+   "source_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+   "registered_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+   "document_kind": "annual_report",
+   "selection_limit": 96,
+   "units": [
+    {
+     "unit_id": "urn:company-wiki:narrative-unit:sha256:8b517cc4482c96d2789fa7b773d6984574e8651b27ee57ed0f256881a317f1e8",
+     "page": 40,
+     "paragraph": 4,
+     "table": null,
+     "row": null,
+     "column": null,
+     "char_start": null,
+     "char_end": null,
+     "text": "LPCVD 薄膜设备和ALD 薄膜设备，已有多款新型设备顺利进入市场并获得重要客户的重复性订",
+     "unit_kind": "pdf_text_block",
+     "source_role": "company_filing",
+     "language": "zh",
+     "parser_version": "0.1.0",
+     "quality_flags": [],
+     "topics": [
+      "new_business"
+     ],
+     "reasons": [
+      "business_narrative_signal",
+      "progress_or_change_language",
+      "specific_business_event",
+      "named_product_milestone_context"
+     ],
+     "score": 10,
+     "group_id": "urn:company-wiki:context-group:sha256:78b3fd76ccfc1c4808fc0a074071d5a654a31e788e80e1c3bcfb4f0e141ad341",
+     "text_sha256": "a9fa2b64ab93d10f19ef1c206eac83df76f54bd83d93a44a7d9126ff4f3a8a18"
+    },
+    {
+     "unit_id": "urn:company-wiki:narrative-unit:sha256:1777ddf3576524a3bf8c18038a0115059480ccb380a6504ef1db14a610825214",
+     "page": 40,
+     "paragraph": 7,
+     "table": null,
+     "row": null,
+     "column": null,
+     "char_start": null,
+     "char_end": null,
+     "text": "发进程均比较顺利，有望尽快进入客户验证阶段。",
+     "unit_kind": "pdf_text_block",
+     "source_role": "company_filing",
+     "language": "zh",
+     "parser_version": "0.1.0",
+     "quality_flags": [],
+     "topics": [
+      "orders_customers"
+     ],
+     "reasons": [
+      "business_narrative_signal",
+      "progress_or_change_language",
+      "specific_business_event"
+     ],
+     "score": 6,
+     "group_id": "urn:company-wiki:context-group:sha256:83b11849b36c5b371a118b124861a8466b5003c47fc47e490c1a72da636c9723",
+     "text_sha256": "048376e1eb64b34f6aad1d83441b62cde5de76ed668e915d0626870c015d62de"
+    },
+    {
+     "unit_id": "urn:company-wiki:narrative-unit:sha256:1d4d86949cdf3772b58017fc09e580300647572c887a22ab5dd5b5e8a3719e1c",
+     "page": 40,
+     "paragraph": 8,
+     "table": null,
+     "row": null,
+     "column": null,
+     "char_start": null,
+     "char_end": null,
+     "text": "公司EPI 设备已进入客户端量产验证阶段。",
+     "unit_kind": "pdf_text_block",
+     "source_role": "company_filing",
+     "language": "zh",
+     "parser_version": "0.1.0",
+     "quality_flags": [],
+     "topics": [
+      "products_rd"
+     ],
+     "reasons": [
+      "business_narrative_signal",
+      "progress_or_change_language",
+      "specific_business_event"
+     ],
+     "score": 6,
+     "group_id": null,
+     "text_sha256": "a130920a27ee6f458eb332b202467cd6eea4988b080d41240555a150769d9ad0"
+    },
+    {
+     "unit_id": "urn:company-wiki:narrative-unit:sha256:2052707008ca35d9412e9b780d43810d3bcfba53b187e9d4bc26b491e86e5eb1",
+     "page": 40,
+     "paragraph": 10,
+     "table": null,
+     "row": null,
+     "column": null,
+     "char_start": null,
+     "char_end": null,
+     "text": "司在Micro-LED 和高端显示领域的MOCVD 设备开发及客户验证上取得了良好进展，并正在开发",
+     "unit_kind": "pdf_text_block",
+     "source_role": "company_filing",
+     "language": "zh",
+     "parser_version": "0.1.0",
+     "quality_flags": [],
+     "topics": [
+      "orders_customers"
+     ],
+     "reasons": [
+      "business_narrative_signal",
+      "progress_or_change_language",
+      "specific_business_event"
+     ],
+     "score": 6,
+     "group_id": null,
+     "text_sha256": "d4492269e6afa95fddc29fa89d6b25c6b85a4bd9fc03c71d3520b15a6eabaa97"
+    },
+    {
+     "unit_id": "urn:company-wiki:narrative-unit:sha256:6ce0d00b77303556a0f51b8d78ec936a5da8249ecb022cf575f9ab8c414bff45",
+     "page": 75,
+     "paragraph": 2,
+     "table": null,
+     "row": null,
+     "column": null,
+     "char_start": null,
+     "char_end": null,
+     "text": "六、公司关于公司未来发展的讨论与分析",
+     "unit_kind": "pdf_text_block",
+     "source_role": "company_filing",
+     "language": "zh",
+     "parser_version": "0.1.0",
+     "quality_flags": [],
+     "topics": [
+      "industry_dynamics",
+      "core_business",
+      "new_business",
+      "capacity_projects"
+     ],
+     "reasons": [
+      "business_narrative_signal",
+      "pdf_visual_context_group",
+      "progress_or_change_language",
+      "current_industry_context"
+     ],
+     "score": 14,
+     "group_id": "urn:company-wiki:context-group:sha256:3a81262de24840235645343e3b1bf8f20518211bd7d8d2798fc874492e368bd1",
+     "text_sha256": "d170ccc83c5915be8d81cdea5a2b27095da4f175228f81c81a25df887814545e"
+    },
+    {
+     "unit_id": "urn:company-wiki:narrative-unit:sha256:2be9b80d20b0012fa09e3c19d02d54817961463be6c37ef60d06a214a80b8270",
+     "page": 75,
+     "paragraph": 3,
+     "table": null,
+     "row": null,
+     "column": null,
+     "char_start": null,
+     "char_end": null,
+     "text": "(一) 行业格局和趋势",
+     "unit_kind": "pdf_text_block",
+     "source_role": "company_filing",
+     "language": "zh",
+     "parser_version": "0.1.0",
+     "quality_flags": [],
+     "topics": [
+      "industry_dynamics"
+     ],
+     "reasons": [
+      "business_narrative_signal",
+      "pdf_visual_context_group",
+      "progress_or_change_language",
+      "current_industry_context"
+     ],
+     "score": 14,
+     "group_id": "urn:company-wiki:context-group:sha256:3a81262de24840235645343e3b1bf8f20518211bd7d8d2798fc874492e368bd1",
+     "text_sha256": "da2875bc985786fe011713239a3b02158fbfa4ce83588b24fac0e5a3a2b6cddd"
+    },
+    {
+     "unit_id": "urn:company-wiki:narrative-unit:sha256:dbffc643a24bd7e09002be37a38147d55d726fec77b76cddb4391a2372478559",
+     "page": 75,
+     "paragraph": 4,
+     "table": null,
+     "row": null,
+     "column": null,
+     "char_start": null,
+     "char_end": null,
+     "text": "√适用\n□不适用\n数码产业的发展正在改变人类的生产和生活方式。",
+     "unit_kind": "pdf_text_block",
+     "source_role": "company_filing",
+     "language": "zh",
+     "parser_version": "0.1.0",
+     "quality_flags": [],
+     "topics": [
+      "industry_dynamics",
+      "core_business",
+      "new_business",
+      "capacity_projects"
+     ],
+     "reasons": [
+      "business_narrative_signal",
+      "pdf_visual_context_group",
+      "progress_or_change_language",
+      "current_industry_context"
+     ],
+     "score": 14,
+     "group_id": "urn:company-wiki:context-group:sha256:3a81262de24840235645343e3b1bf8f20518211bd7d8d2798fc874492e368bd1",
+     "text_sha256": "0a5ef7357ab5b35bd0f60dcdb513fa838a1365c5d1296cc73da4474b4166819c"
+    },
+    {
+     "unit_id": "urn:company-wiki:narrative-unit:sha256:de5b4d05b82ec0612bda2243cd2265aed19ef9a66a51d23f2f346393ee7d91ab",
+     "page": 75,
+     "paragraph": 21,
+     "table": null,
+     "row": null,
+     "column": null,
+     "char_start": null,
+     "char_end": null,
+     "text": "而波动，据国际半导体产业协会（SEMI）预测，全球半导体制造装备销售额今年将达1330 亿美",
+     "unit_kind": "pdf_text_block",
+     "source_role": "company_filing",
+     "language": "zh",
+     "parser_version": "0.1.0",
+     "quality_flags": [],
+     "topics": [
+      "industry_dynamics"
+     ],
+     "reasons": [
+      "business_narrative_signal",
+      "pdf_visual_context_group",
+      "progress_or_change_language",
+      "current_industry_context"
+     ],
+     "score": 14,
+     "group_id": "urn:company-wiki:context-group:sha256:3a81262de24840235645343e3b1bf8f20518211bd7d8d2798fc874492e368bd1",
+     "text_sha256": "b7918d23a726828a7f1344a6b357f0a41b76082c38dd51597f79247da53aadc2"
+    },
+    {
+     "unit_id": "urn:company-wiki:narrative-unit:sha256:9848fa6efcd88c968e7021e4b85ab12bed4d2e76f597c5723f2614c83e42f2a7",
+     "page": 75,
+     "paragraph": 22,
+     "table": null,
+     "row": null,
+     "column": null,
+     "char_start": null,
+     "char_end": null,
+     "text": "元，同比增加13.7%；",
+     "unit_kind": "pdf_text_block",
+     "source_role": "company_filing",
+     "language": "zh",
+     "parser_version": "0.1.0",
+     "quality_flags": [],
+     "topics": [
+      "industry_dynamics",
+      "core_business",
+      "new_business",
+      "capacity_projects"
+     ],
+     "reasons": [
+      "business_narrative_signal",
+      "pdf_visual_context_group",
+      "progress_or_change_language",
+      "current_industry_context"
+     ],
+     "score": 14,
+     "group_id": "urn:company-wiki:context-group:sha256:3a81262de24840235645343e3b1bf8f20518211bd7d8d2798fc874492e368bd1",
+     "text_sha256": "afb6d85fe1dbb7dd78bd28b4bc7babb094e5004d55a5e9e8e68d81cc80848d25"
+    }
+   ]
+  },
+  {
+   "sample_id": "S05",
+   "title": "三角防务：西安三角防务股份有限公司向特定对象发行股票并在创业板上市募集说明书（注册稿）.PDF",
+   "existing_kind": "other",
+   "source_id": "urn:company-wiki:source:sha256:cd803fe9528f4646f8f29b518a450ae4bd5b5968c482eb49789f9786b523595b",
+   "source_sha256": "cd803fe9528f4646f8f29b518a450ae4bd5b5968c482eb49789f9786b523595b",
+   "registered_sha256": "cd803fe9528f4646f8f29b518a450ae4bd5b5968c482eb49789f9786b523595b",
+   "document_kind": "equity_offering_prospectus",
+   "selection_limit": 160,
+   "units": [
+    {
+     "unit_id": "urn:company-wiki:narrative-unit:sha256:a9b5584dda783b0de6f6a205dcfb6e5e94f4ae78e59a01aa81a22e54735a0d98",
+     "page": 3,
+     "paragraph": 37,
+     "table": null,
+     "row": null,
+     "column": null,
+     "char_start": null,
+     "char_end": null,
+     "text": "航空数字",
+     "unit_kind": "pdf_text_block",
+     "source_role": "company_filing",
+     "language": "zh",
+     "parser_version": "0.1.0",
+     "quality_flags": [],
+     "topics": [
+      "capacity_projects"
+     ],
+     "reasons": [
+      "business_narrative_signal",
+      "project_certification_timeline",
+      "project_plan_or_status",
+      "pdf_visual_context_group",
+      "downstream_center_certification_timeline",
+      "short_fragment_continuation"
+     ],
+     "score": 5,
+     "group_id": "urn:company-wiki:context-group:sha256:ef1dabf119f683b653908e7a3352fef0dfb436a44e1d605cb42bfd9d31d96ad5:certification-timeline:1",
+     "text_sha256": "16a698a5db33af16b16a188967dcaa25926af88c146615c44e01c4adf3d161a7"
+    },
+    {
+     "unit_id": "urn:company-wiki:narrative-unit:sha256:b391dc0f94eda420af6be8e0ebab7938f7726cb7021033bbc13815589773dea4",
+     "page": 3,
+     "paragraph": 38,
+     "table": null,
+     "row": null,
+     "column": null,
+     "char_start": null,
+     "char_end": null,
+     "text": "化集成中心项目需要进行合格供应商认证和产品认证，预计需要4-9 个月。",
+     "unit_kind": "pdf_text_block",
+     "source_role": "company_filing",
+     "language": "zh",
+     "parser_version": "0.1.0",
+     "quality_flags": [],
+     "topics": [
+      "capacity_projects"
+     ],
+     "reasons": [
+      "business_narrative_signal",
+      "project_certification_timeline",
+      "project_plan_or_status",
+      "pdf_visual_context_group",
+      "downstream_center_certification_timeline"
+     ],
+     "score": 5,
+     "group_id": "urn:company-wiki:context-group:sha256:ef1dabf119f683b653908e7a3352fef0dfb436a44e1d605cb42bfd9d31d96ad5:certification-timeline:1",
+     "text_sha256": "6384b0af79f042b780a2af292cb3af113d63265c25482f133d85e59dc1226921"
+    },
+    {
+     "unit_id": "urn:company-wiki:narrative-unit:sha256:dcb6aaa2544ebb8831e1899a9eb8c457c8c9c1b4fce8b7a81577b938651d208e",
+     "page": 101,
+     "paragraph": 3,
+     "table": null,
+     "row": null,
+     "column": null,
+     "char_start": null,
+     "char_end": null,
+     "text": "（1）航空产业形成“小核心、大协作”的发展格局，主机厂中小锻件外协需",
+     "unit_kind": "pdf_text_block",
+     "source_role": "company_filing",
+     "language": "zh",
+     "parser_version": "0.1.0",
+     "quality_flags": [],
+     "topics": [
+      "capacity_projects"
+     ],
+     "reasons": [
+      "business_narrative_signal",
+      "specific_project_rationale",
+      "short_fragment_continuation"
+     ],
+     "score": 5,
+     "group_id": "urn:company-wiki:context-group:sha256:78904189fbc45aa4b382d0f7a739c8b4518edf52cab0e8fe499b30914737bde4",
+     "text_sha256": "ee55933fda1efc84d74fb9982f90c9d652afc9eafbb84ca42e96036d9951612a"
+    },
+    {
+     "unit_id": "urn:company-wiki:narrative-unit:sha256:dcb6aaa2544ebb8831e1899a9eb8c457c8c9c1b4fce8b7a81577b938651d208e",
+     "page": 101,
+     "paragraph": 3,
+     "table": null,
+     "row": null,
+     "column": null,
+     "char_start": null,
+     "char_end": null,
+     "text": "（1）航空产业形成“小核心、大协作”的发展格局，主机厂中小锻件外协需",
+     "unit_kind": "pdf_text_block",
+     "source_role": "company_filing",
+     "language": "zh",
+     "parser_version": "0.1.0",
+     "quality_flags": [],
+     "topics": [
+      "capacity_projects"
+     ],
+     "reasons": [
+      "business_narrative_signal",
+      "pdf_visual_context_group",
+      "specific_project_rationale",
+      "project_plan_or_status",
+      "project_section_context"
+     ],
+     "score": 133,
+     "group_id": "urn:company-wiki:context-group:sha256:78904189fbc45aa4b382d0f7a739c8b4518edf52cab0e8fe499b30914737bde4",
+     "text_sha256": "ee55933fda1efc84d74fb9982f90c9d652afc9eafbb84ca42e96036d9951612a"
+    },
+    {
+     "unit_id": "urn:company-wiki:narrative-unit:sha256:9c8f457f2570e440222c77f22c92d581972fb45aa159884dd776b1ede1bcef4d",
+     "page": 101,
+     "paragraph": 5,
+     "table": null,
+     "row": null,
+     "column": null,
+     "char_start": null,
+     "char_end": null,
+     "text": "我国航空产业链以航空工业集团等下属主机厂为主导，配套单位以航空工业",
+     "unit_kind": "pdf_text_block",
+     "source_role": "company_filing",
+     "language": "zh",
+     "parser_version": "0.1.0",
+     "quality_flags": [],
+     "topics": [
+      "capacity_projects"
+     ],
+     "reasons": [
+      "business_narrative_signal",
+      "pdf_visual_context_group",
+      "progress_or_change_language",
+      "project_plan_or_status",
+      "project_section_context"
+     ],
+     "score": 131,
+     "group_id": "urn:company-wiki:context-group:sha256:89213273096976fac892900ae60c6d57a199d81a09e10d979db3e7aa9ecc8814",
+     "text_sha256": "f230d1a18502a8f42350447d39ef52b9fc2307f006c94c03b7fc983f10a74f27"
+    },
+    {
+     "unit_id": "urn:company-wiki:narrative-unit:sha256:b3d06e1f39cb3c3d0673bd3be36aedddf9b37485799c0a66ed2c691a9be6ea2d",
+     "page": 101,
+     "paragraph": 6,
+     "table": null,
+     "row": null,
+     "column": null,
+     "char_start": null,
+     "char_end": null,
+     "text": "集团下属单位为主和以部分民营企业为辅，形成“小核心、大协作”的发展格局。",
+     "unit_kind": "pdf_text_block",
+     "source_role": "company_filing",
+     "language": "zh",
+     "parser_version": "0.1.0",
+     "quality_flags": [],
+     "topics": [
+      "capacity_projects"
+     ],
+     "reasons": [
+      "business_narrative_signal",
+      "pdf_visual_context_group",
+      "progress_or_change_language",
+      "project_plan_or_status",
+      "project_section_context"
+     ],
+     "score": 131,
+     "group_id": "urn:company-wiki:context-group:sha256:89213273096976fac892900ae60c6d57a199d81a09e10d979db3e7aa9ecc8814",
+     "text_sha256": "d708ba99b00c0bac8ac74fe0cbb79a9fce44c3c6ac69f04f4a0e4ec4314af00e"
+    },
+    {
+     "unit_id": "urn:company-wiki:narrative-unit:sha256:794a06d3862d3a35b2f2c257cc39dd737d11c3402326b04703fcbcaa19a4e117",
+     "page": 161,
+     "paragraph": 25,
+     "table": null,
+     "row": null,
+     "column": null,
+     "char_start": null,
+     "char_end": null,
+     "text": "航空数字",
+     "unit_kind": "pdf_text_block",
+     "source_role": "company_filing",
+     "language": "zh",
+     "parser_version": "0.1.0",
+     "quality_flags": [],
+     "topics": [
+      "capacity_projects"
+     ],
+     "reasons": [
+      "business_narrative_signal",
+      "project_certification_timeline",
+      "project_plan_or_status",
+      "pdf_visual_context_group",
+      "downstream_center_certification_timeline",
+      "short_fragment_continuation"
+     ],
+     "score": 5,
+     "group_id": "urn:company-wiki:context-group:sha256:d6fb2db4d3e8bb0d2671ca208b1e4bf88fbda1e55aa6f05827f47ccb2f31cecc:certification-timeline:1",
+     "text_sha256": "16a698a5db33af16b16a188967dcaa25926af88c146615c44e01c4adf3d161a7"
+    },
+    {
+     "unit_id": "urn:company-wiki:narrative-unit:sha256:2e44c290a9bbf3f3f267fce1c86c977c967b739db986cd8414a6dc3e1dd057c2",
+     "page": 161,
+     "paragraph": 26,
+     "table": null,
+     "row": null,
+     "column": null,
+     "char_start": null,
+     "char_end": null,
+     "text": "化集成中心项目需要进行合格供应商认证和产品认证，预计需要4-9 个月。",
+     "unit_kind": "pdf_text_block",
+     "source_role": "company_filing",
+     "language": "zh",
+     "parser_version": "0.1.0",
+     "quality_flags": [],
+     "topics": [
+      "capacity_projects"
+     ],
+     "reasons": [
+      "business_narrative_signal",
+      "project_certification_timeline",
+      "project_plan_or_status",
+      "pdf_visual_context_group",
+      "downstream_center_certification_timeline"
+     ],
+     "score": 5,
+     "group_id": "urn:company-wiki:context-group:sha256:d6fb2db4d3e8bb0d2671ca208b1e4bf88fbda1e55aa6f05827f47ccb2f31cecc:certification-timeline:1",
+     "text_sha256": "6384b0af79f042b780a2af292cb3af113d63265c25482f133d85e59dc1226921"
+    }
+   ]
+  },
+  {
+   "sample_id": "S06",
+   "title": "华锐精密：向不特定对象发行可转换公司债券证券募集说明书.PDF",
+   "existing_kind": "other",
+   "source_id": "urn:company-wiki:source:sha256:c6ed566631e123f159abf2697c157f1868f8e994ccf8e3352132046a6c5ca0a1",
+   "source_sha256": "c6ed566631e123f159abf2697c157f1868f8e994ccf8e3352132046a6c5ca0a1",
+   "registered_sha256": "c6ed566631e123f159abf2697c157f1868f8e994ccf8e3352132046a6c5ca0a1",
+   "document_kind": "convertible_bond_prospectus",
+   "selection_limit": 160,
+   "units": [
+    {
+     "unit_id": "urn:company-wiki:narrative-unit:sha256:47b3b724d6c86ec4d27dcac6fac785a05f3049b952405ab7d09efce1eb3e17aa",
+     "page": 43,
+     "paragraph": 10,
+     "table": null,
+     "row": null,
+     "column": null,
+     "char_start": null,
+     "char_end": null,
+     "text": "本次募集资金除补充流动资金外，拟投资于精密数控刀体生产线建设项目",
+     "unit_kind": "pdf_text_block",
+     "source_role": "company_filing",
+     "language": "zh",
+     "parser_version": "0.1.0",
+     "quality_flags": [],
+     "topics": [
+      "capacity_projects"
+     ],
+     "reasons": [
+      "business_narrative_signal",
+      "progress_or_change_language",
+      "project_plan_or_status"
+     ],
+     "score": 3,
+     "group_id": "urn:company-wiki:context-group:sha256:f09a06913e239c38f1a4f8a57df37b545a32d09a79b8e297575d8577a59c140e",
+     "text_sha256": "bbe17b89c2c1b41eaf0fc18a6fe79b4ef68f41e971ad6f2eb17db55295c09325"
+    },
+    {
+     "unit_id": "urn:company-wiki:narrative-unit:sha256:47b3b724d6c86ec4d27dcac6fac785a05f3049b952405ab7d09efce1eb3e17aa",
+     "page": 43,
+     "paragraph": 10,
+     "table": null,
+     "row": null,
+     "column": null,
+     "char_start": null,
+     "char_end": null,
+     "text": "本次募集资金除补充流动资金外，拟投资于精密数控刀体生产线建设项目",
+     "unit_kind": "pdf_text_block",
+     "source_role": "company_filing",
+     "language": "zh",
+     "parser_version": "0.1.0",
+     "quality_flags": [],
+     "topics": [
+      "capacity_projects"
+     ],
+     "reasons": [
+      "business_narrative_signal",
+      "pdf_visual_context_group",
+      "progress_or_change_language",
+      "specific_business_event",
+      "project_plan_or_status",
+      "project_section_context"
+     ],
+     "score": 94,
+     "group_id": "urn:company-wiki:context-group:sha256:f09a06913e239c38f1a4f8a57df37b545a32d09a79b8e297575d8577a59c140e",
+     "text_sha256": "bbe17b89c2c1b41eaf0fc18a6fe79b4ef68f41e971ad6f2eb17db55295c09325"
+    },
+    {
+     "unit_id": "urn:company-wiki:narrative-unit:sha256:67e4bd21be1210352331e427ce233451db62561a047594234f2ab4721655dfb4",
+     "page": 43,
+     "paragraph": 11,
+     "table": null,
+     "row": null,
+     "column": null,
+     "char_start": null,
+     "char_end": null,
+     "text": "和高效钻削刀具生产线建设项目。",
+     "unit_kind": "pdf_text_block",
+     "source_role": "company_filing",
+     "language": "zh",
+     "parser_version": "0.1.0",
+     "quality_flags": [],
+     "topics": [
+      "capacity_projects"
+     ],
+     "reasons": [
+      "business_narrative_signal",
+      "pdf_visual_context_group",
+      "progress_or_change_language",
+      "specific_business_event",
+      "project_plan_or_status",
+      "project_section_context"
+     ],
+     "score": 94,
+     "group_id": "urn:company-wiki:context-group:sha256:f09a06913e239c38f1a4f8a57df37b545a32d09a79b8e297575d8577a59c140e",
+     "text_sha256": "d790ce3b760a8473d3d6550dc9d8e53517369cb32ec8c171d5187dde2d3060a3"
+    },
+    {
+     "unit_id": "urn:company-wiki:narrative-unit:sha256:8d7c51812bebc7554a111f34b9fd6a980445d7515f0d13488c6c8ebfb094d5df",
+     "page": 43,
+     "paragraph": 21,
+     "table": null,
+     "row": null,
+     "column": null,
+     "char_start": null,
+     "char_end": null,
+     "text": "公司现有主要产品硬质合金数控刀片2021 年的产能约为6,300 万片，通过",
+     "unit_kind": "pdf_text_block",
+     "source_role": "company_filing",
+     "language": "zh",
+     "parser_version": "0.1.0",
+     "quality_flags": [],
+     "topics": [
+      "capacity_projects"
+     ],
+     "reasons": [
+      "business_narrative_signal",
+      "progress_or_change_language",
+      "specific_business_event",
+      "current_business_progress"
+     ],
+     "score": 6,
+     "group_id": "urn:company-wiki:context-group:sha256:7e5bd672b3a8051734e022057172b6505b68d4d6a9a5bc4337dba2251c0f54a2",
+     "text_sha256": "9141763f7a6a639f1ba9228159163eb8a667c614173c37c7e4ea15d4eacf7a08"
+    },
+    {
+     "unit_id": "urn:company-wiki:narrative-unit:sha256:308e7c7235d50aa6ed2d60872ba46ef4d1ba77b30dcd442c08967bd6800ee391",
+     "page": 43,
+     "paragraph": 25,
+     "table": null,
+     "row": null,
+     "column": null,
+     "char_start": null,
+     "char_end": null,
+     "text": "本次募投项目达产后，公司预计新增精密数控刀体产品50",
+     "unit_kind": "pdf_text_block",
+     "source_role": "company_filing",
+     "language": "zh",
+     "parser_version": "0.1.0",
+     "quality_flags": [],
+     "topics": [
+      "capacity_projects"
+     ],
+     "reasons": [
+      "business_narrative_signal",
+      "progress_or_change_language",
+      "specific_business_event",
+      "project_plan_or_status"
+     ],
+     "score": 6,
+     "group_id": "urn:company-wiki:context-group:sha256:7e5bd672b3a8051734e022057172b6505b68d4d6a9a5bc4337dba2251c0f54a2",
+     "text_sha256": "735142aed860bf9f5c97e1fe3913e1dff76af80582146e6040cfe26b413fe883"
+    },
+    {
+     "unit_id": "urn:company-wiki:narrative-unit:sha256:b40e0f00f768f62e51780c3e2558eedb81576be4ff39f07e6787d71e12f3dc2f",
+     "page": 43,
+     "paragraph": 30,
+     "table": null,
+     "row": null,
+     "column": null,
+     "char_start": null,
+     "char_end": null,
+     "text": "本次募投项目是公司顺应国家产业政策，实现公司发展战略目标的必经之路，",
+     "unit_kind": "pdf_text_block",
+     "source_role": "company_filing",
+     "language": "zh",
+     "parser_version": "0.1.0",
+     "quality_flags": [],
+     "topics": [
+      "capacity_projects"
+     ],
+     "reasons": [
+      "business_narrative_signal",
+      "specific_business_event"
+     ],
+     "score": 4,
+     "group_id": "urn:company-wiki:context-group:sha256:1cad549eea5aa1e00f7e677d47ac3d1d31452d3fe9b75b35d10e17bd044890b6",
+     "text_sha256": "fbce0e29cedb4ea085a92f06779c243cd2aa121a3e4ef455ad9db1495972ed95"
+    },
+    {
+     "unit_id": "urn:company-wiki:narrative-unit:sha256:8b0826847e1acbc49a77534de1932cd15de7aef5a4cbdce82c4070200a6a3245",
+     "page": 43,
+     "paragraph": 32,
+     "table": null,
+     "row": null,
+     "column": null,
+     "char_start": null,
+     "char_end": null,
+     "text": "竞争态势等出现不利变化，公司将面临新增产能无法及时消化从而对公司经营",
+     "unit_kind": "pdf_text_block",
+     "source_role": "company_filing",
+     "language": "zh",
+     "parser_version": "0.1.0",
+     "quality_flags": [],
+     "topics": [
+      "capacity_projects"
+     ],
+     "reasons": [
+      "business_narrative_signal",
+      "progress_or_change_language",
+      "business_risk_or_constraint"
+     ],
+     "score": 5,
+     "group_id": "urn:company-wiki:context-group:sha256:1cad549eea5aa1e00f7e677d47ac3d1d31452d3fe9b75b35d10e17bd044890b6",
+     "text_sha256": "53ca16f651e9554c667afebd34b1504858ce7a56e0314b4b53dc228d6a7febf1"
+    }
+   ]
+  }
+ ]
+}

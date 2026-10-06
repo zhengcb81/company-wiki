@@ -2,7 +2,7 @@
 
 **最新DOCSET补证：**工具范围接收通过，43不同责任case、本机9原件/86标注实读、744 locator回放、正式来源reader三PDF E2E271定位，0模型/下载。新0.3.2报告required12/33，不能将工具完成说成业务质量完成；后续唯一质量施工入口为[S7细则](s7_document_quality_implementation_2026-10-06.md)。旧报告/标注保持，小空间量测与原件保护修复见[MAIN接收](harness_lanes/n5_docset_main_acceptance_2026-10-06.md)。N5三包均交付，不重派；正文中的旧“待交付”属于历史。
 
-截至 CWP 已发布代码`4826ad9c67bce3d3e2b977173d283341d18bc141`（精确CI37514053091一次全绿/52秒）、RF main`6e6b817a1a6e4567293a4dcb835815f3be508a03`、ET本地/真实远端main`2b9fb84660f98ce27a05709a7e31342ab044b4d2`。S0–S6既有核心节点有收据；完成审计发现R6局部容错未实装，现已184责任测试、正式离线E2E/RF消费和eae2dd4精确CI59秒绿。N5-RAW-DUP已集中修正/51项与CLI绿、已合入master a41244a并推远端、精确CI37523080920/57秒绿，DOCSET交接2c3583e已到待MAIN验收；**不宣称全部扩展工作完成**，不增加人工门或小节点复核。
+截至 CWP 已发布代码`4826ad9c67bce3d3e2b977173d283341d18bc141`（精确CI37514053091一次全绿/52秒）、RF main`6e6b817a1a6e4567293a4dcb835815f3be508a03`、ET本地/真实远端main`2b9fb84660f98ce27a05709a7e31342ab044b4d2`。S0–S6既有核心节点有收据；完成审计发现R6局部容错未实装，现已184责任测试、正式离线E2E/RF消费和eae2dd4精确CI59秒绿。N5-RAW-DUP已集中修正/51项与CLI绿、已合入master a41244a并推远端、精确CI37523080920/57秒绿，DOCSET已验收/并线58b74d0，真实0.3.2 required12/33；N6预算已交付、空间已并线；**不宣称全部扩展工作完成**，不增加人工门或小节点复核。
 
 | 原目标/责任 | 已有权威证据 | 当前边界/下一动作 |
 |---|---|---|
@@ -45,3 +45,8 @@ run10只做一次DeepSeek T01+零模型policy：batch35.217秒/总42.828秒，20
 ## N5-RAW-DUP接收边界
 
 [MAIN集中验收](harness_lanes/n5_raw_duplicate_main_acceptance_2026-10-06.md)与[小收据](harness_lanes/results/n5_raw_duplicate_main_acceptance_2026-10-06.json)：51项/9.09秒，原件0删除、测试根恢复absent；逻辑候选上界7.27GiB，只有3组151MiB实际SHA复核，3528组未实读。历史Windows物理指标无效，不算释放；跨company_raw/Dropbox/Dayu的登记字节不是CWP目录磁盘占用。可选原件去重不阻核心完成、现不自动实施。
+
+
+## N6 两线接收更新（2026-10-06）
+
+FOOTPRINT cf24f34已并线/推，CI37542743196全部步骤成功/68秒；52责任测试、修正后真实单根扫描和保护收据已完成。约96.3%逻辑量为原件，空间工具不删除；预算18dbd0e已交付，MAIN补15个语境/顺序/组ID反例并修正，145项/7.46秒+真实电话会与AUTO升级2项/23.73秒绿，selector0.3.3准备发布。旧final兼容已在实际新代码验证。完整九样本语义/真实业务E2E仍待候选线，当前已测12/33基准不变。只读手工候选测量与正式pipeline测量分清，golden永不重新生成。详情与下一动作见总task_plan和n6_budget_footprint_main_acceptance.md。

@@ -1,0 +1,38 @@
+{
+ "schema_version": "n6-budget-main-acceptance/1",
+ "lane_head": "18dbd0e2034f4737a32b937847371d6bd373210a",
+ "selector_version": "0.3.3",
+ "code_sha": "pending normal commit",
+ "red": {
+  "context_cases": 14,
+  "seconds": 0.89,
+  "budget_key_alias_cases": 1,
+  "alias_seconds": 1.5
+ },
+ "green": {
+  "responsibility_cases": 145,
+  "seconds": 7.46,
+  "real_transcript_and_generation_cases": 2,
+  "e2e_seconds": 23.73
+ },
+ "static": {
+  "ruff": "passed",
+  "mypy_3_modules": "passed"
+ },
+ "scope": "same original/role/language/discourse, ordered containment, collision-free group keys; cap96/160 unchanged",
+ "historical_final_0_3_2_compatibility_cases": 9,
+ "formal_nine_sample_quality_node": "pending N6-CANDIDATE",
+ "original_goldens_changed": false,
+ "required_denominator": 33,
+ "provider_http": 0,
+ "provider_model_posts": 0,
+ "raw_deleted": 0,
+ "scratch": {
+  "tmp/n6ba": "restored absent",
+  "tmp/n6bb": "restored absent",
+  "tmp/n6bc": "restored absent"
+ },
+ "protected_user_config_sha256": "3609e707466eeb3e0f685e14f2637c6afa39ba900edef1be4814433a43300a01",
+ "rf_head": "6e6b817a1a6e4567293a4dcb835815f3be508a03",
+ "rf_owner_files_written": 0
+}

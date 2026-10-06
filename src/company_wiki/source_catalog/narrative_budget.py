@@ -1,4 +1,13 @@
-"""Pure, atomic evidence-budget selection for narrative candidates."""
+"""Pure, deterministic evidence-budget selection for narrative candidates.
+
+A bundle is one atomic event group and costs exactly its span count. Reserved
+reasons are placed first, then every page keeps proposing its best remaining
+bundle in rounds so page coverage survives a tight cap, while a soft
+per-category fair share stops one high-frequency reason class (generic risk or
+vague commitment language) from spending the whole budget before industry,
+project, product or capacity evidence gets its turn. The planner reads only
+the items it is given.
+"""
 
 from __future__ import annotations
 
@@ -116,9 +125,7 @@ def _priority(item: BudgetItem[Any]) -> Priority:
     return (rank, -item.score, item.order_key, item.item_id)
 
 
-def _make_bundle(
-    key: str, items: list[BudgetItem[PayloadT]]
-) -> _Bundle[PayloadT]:
+def _make_bundle(key: str, items: list[BudgetItem[PayloadT]]) -> _Bundle[PayloadT]:
     ordered = tuple(sorted(items, key=_priority))
     first = ordered[0]
     categories = {_category(frozenset(item.reasons)) for item in ordered}
@@ -136,7 +143,7 @@ def _make_bundle(
 def _bundles(items: tuple[BudgetItem[PayloadT], ...]) -> tuple[_Bundle[PayloadT], ...]:
     grouped: dict[str, list[BudgetItem[PayloadT]]] = {}
     for item in items:
-        key = item.group_id or f"item:{item.item_id}"
+        key = f"group:{item.group_id}" if item.group_id is not None else f"item:{item.item_id}"
         grouped.setdefault(key, []).append(item)
     return tuple(_make_bundle(key, values) for key, values in grouped.items())
 
@@ -165,21 +172,13 @@ def _reserve(
             and any(reason in item.reasons for item in bundle.items)
         ]
         options.sort(key=_bundle_sort_key)
-        if options and sum(bundle.cost for bundle in reserved) + options[0].cost <= limit:
+        if (
+            options
+            and sum(bundle.cost for bundle in reserved) + options[0].cost <= limit
+        ):
             reserved.append(options[0])
             keys.add(options[0].key)
     return reserved, keys
-
-
-def _page_order(by_page: dict[PageKey, list[_Bundle[PayloadT]]]) -> tuple[PageKey, ...]:
-    return tuple(sorted(
-        by_page,
-        key=lambda key: (
-            min(CATEGORY_ORDER.index(bundle.category) for bundle in by_page[key]),
-            -max(bundle.score for bundle in by_page[key]),
-            *_page_sort_key(key),
-        ),
-    ))
 
 
 def _page_sort_key(key: PageKey) -> tuple[int, int, str]:
@@ -188,63 +187,135 @@ def _page_sort_key(key: PageKey) -> tuple[int, int, str]:
     return (1, 0, str(key[1]))
 
 
-def _page_queue(bundles: list[_Bundle[PayloadT]]) -> list[_Bundle[PayloadT]]:
-    buckets: dict[str, list[_Bundle[PayloadT]]] = {name: [] for name in CATEGORY_ORDER}
-    for bundle in bundles:
-        buckets[bundle.category].append(bundle)
-    for values in buckets.values():
-        values.sort(key=lambda item: (item.priority, item.cost, item.key))
-    staged = [values[0] for values in buckets.values() if values]
-    staged_keys = {bundle.key for bundle in staged}
-    remainder = [bundle for bundle in bundles if bundle.key not in staged_keys]
-    remainder.sort(
-        key=lambda item: (
-            CATEGORY_ORDER.index(item.category), item.priority, item.cost, item.key
-        )
-    )
-    return [*staged, *remainder]
+def _fair_share(limit: int, categories: set[str]) -> int | None:
+    """Span budget one category may claim, or ``None`` when it must not bind.
+
+    The soft quota only exists while the cap can still leave every active
+    category two shares of the budget; tighter budgets keep the historical
+    priority order plus page rotation untouched.
+    """
+    if limit < 2 * len(categories):
+        return None
+    return max(1, -(-limit // len(categories)))
 
 
-def _remaining_by_page(
-    bundles: tuple[_Bundle[PayloadT], ...], reserved_keys: set[str]
-) -> dict[PageKey, list[_Bundle[PayloadT]]]:
-    by_page: dict[PageKey, list[_Bundle[PayloadT]]] = {}
-    for bundle in bundles:
-        if bundle.key not in reserved_keys:
-            by_page.setdefault(bundle.page_key, []).append(bundle)
-    return {key: _page_queue(values) for key, values in by_page.items()}
+def _over_share(taken: int, fair_share: int | None) -> bool:
+    return fair_share is not None and taken >= fair_share
 
 
-def _fill_round_robin(
-    selected: list[_Bundle[PayloadT]],
-    by_page: dict[PageKey, list[_Bundle[PayloadT]]],
-    limit: int,
-) -> None:
-    if not by_page:
-        return
-    for rank in range(max(len(items) for items in by_page.values())):
-        for page_key in _page_order(by_page):
-            page_items = by_page[page_key]
-            if rank < len(page_items) and sum(item.cost for item in selected) + page_items[rank].cost <= limit:
-                selected.append(page_items[rank])
-
-
-def select_budget_items(
-    items: tuple[BudgetItem[PayloadT], ...], *, limit: int
-) -> tuple[BudgetItem[PayloadT], ...]:
-    """Select whole context groups within a hard span budget."""
+def _plan(
+    items: tuple[BudgetItem[PayloadT], ...], limit: int
+) -> tuple[tuple[BudgetItem[PayloadT], ...], tuple[BudgetDiagnostic, ...]]:
     if limit < 1:
         raise ValueError("limit must be positive")
     item_ids = [item.item_id for item in items]
     if len(item_ids) != len(set(item_ids)):
         raise ValueError("item_id values must be unique")
     if len(items) <= limit:
-        return items
+        return items, ()
+
     bundles = _bundles(items)
     selected, reserved_keys = _reserve(bundles, limit)
-    by_page = _remaining_by_page(bundles, reserved_keys)
-    _fill_round_robin(selected, by_page, limit)
-    return tuple(item for bundle in selected for item in bundle.items)
+    counts: dict[str, int] = {}
+    for bundle in selected:
+        counts[bundle.category] = counts.get(bundle.category, 0) + bundle.cost
+    spent = sum(bundle.cost for bundle in selected)
+    fair_share = _fair_share(limit, {bundle.category for bundle in bundles})
+
+    remaining: dict[PageKey, list[_Bundle[PayloadT]]] = {}
+    for bundle in bundles:
+        if bundle.key not in reserved_keys:
+            remaining.setdefault(bundle.page_key, []).append(bundle)
+    for values in remaining.values():
+        values.sort(key=lambda bundle: (bundle.priority, bundle.cost, bundle.key))
+
+    def offer_key(page_key: PageKey, bundle: _Bundle[PayloadT]) -> tuple[object, ...]:
+        taken = counts.get(bundle.category, 0)
+        return (
+            _over_share(taken, fair_share),
+            CATEGORY_ORDER.index(bundle.category),
+            bundle.priority,
+            -bundle.cost,
+            bundle.key,
+            _page_sort_key(page_key),
+        )
+
+    def best_offer(page_key: PageKey) -> _Bundle[PayloadT] | None:
+        values = remaining[page_key]
+        if not values:
+            return None
+        return min(values, key=lambda bundle: offer_key(page_key, bundle))
+
+    dropped: list[tuple[_Bundle[PayloadT], str]] = []
+    ranks = max((len(values) for values in remaining.values()), default=0)
+    for _rank in range(ranks):
+        pending: list[tuple[PageKey, _Bundle[PayloadT]]] = []
+        for page_key in remaining:
+            offer = best_offer(page_key)
+            if offer is not None:
+                pending.append((page_key, offer))
+        while pending:
+            pending.sort(key=lambda pair: offer_key(pair[0], pair[1]))
+            page_key, bundle = pending.pop(0)
+            remaining[page_key].remove(bundle)
+            if spent + bundle.cost <= limit:
+                selected.append(bundle)
+                counts[bundle.category] = counts.get(bundle.category, 0) + bundle.cost
+                spent += bundle.cost
+            else:
+                reason = "group_exceeds_limit" if bundle.cost > limit else "budget_full"
+                dropped.append((bundle, reason))
+
+    diagnostics = tuple(
+        BudgetDiagnostic(
+            item_id=bundle.items[0].item_id,
+            bundle_key=bundle.key,
+            group_id=bundle.items[0].group_id,
+            category=bundle.category,
+            item_count=bundle.cost,
+            item_ids=tuple(item.item_id for item in bundle.items),
+            locator=bundle.items[0].locator,
+            reason=reason,
+        )
+        for bundle, reason in sorted(
+            dropped, key=lambda row: (row[0].items[0].locator, row[0].key)
+        )
+    )
+    return tuple(item for bundle in selected for item in bundle.items), diagnostics
 
 
-__all__ = ["BudgetItem", "CATEGORY_ORDER", "select_budget_items"]
+def select_budget_items(
+    items: tuple[BudgetItem[PayloadT], ...], *, limit: int
+) -> tuple[BudgetItem[PayloadT], ...]:
+    """Select whole context groups within a hard span budget."""
+    return _plan(items, limit)[0]
+
+
+@dataclass(frozen=True)
+class BudgetDiagnostic:
+    """Why one context group did not enter the selected package."""
+
+    item_id: str
+    bundle_key: str
+    group_id: str | None
+    category: str
+    item_count: int
+    item_ids: tuple[str, ...]
+    locator: str
+    reason: str
+
+
+def budget_diagnostics(
+    items: tuple[BudgetItem[PayloadT], ...], *, limit: int
+) -> tuple[BudgetDiagnostic, ...]:
+    """Explain every bundle left outside the budget for the same inputs."""
+    return _plan(items, limit)[1]
+
+
+__all__ = [
+    "BudgetDiagnostic",
+    "BudgetItem",
+    "CATEGORY_ORDER",
+    "budget_diagnostics",
+    "select_budget_items",
+]
