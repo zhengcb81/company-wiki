@@ -21,7 +21,7 @@
 |---|---|---|
 | 阶段1 接口核对与TDD反例RED | complete | RED 18失败/12通过/3.24s，已记录 |
 | 阶段2 本线实现（GREEN） | complete | GREEN 30通过/0.99s + ruff全绿；既有相关测试181全绿未改动 |
-| 阶段3 集中验收/真实定位回放/交接 | complete | 真实14/14点候选层恢复、原件sha/size/mtime不变、HANDOFF已提交推送 |
+| 阶段3 集中验收/真实定位回放/交接 | complete | 真实14/14点候选层恢复、原件sha/size/mtime不变、HANDOFF已提交；推送按主检出门禁裁定执行（详见progress） |
 
 ## 决策记录
 
