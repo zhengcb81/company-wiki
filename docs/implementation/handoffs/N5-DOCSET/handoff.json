@@ -1,0 +1,231 @@
+{
+  "schema_version": "cwp-independent-handoff/1",
+  "lane_id": "N5-DOCSET",
+  "status": "complete",
+  "repo": "C:/Users/郑曾波/Projects/company-wiki",
+  "worktree": "C:/Users/郑曾波/Projects/cwp-lanes-20261006/document-quality",
+  "branch": "codex/n5-document-quality",
+  "base_head": "e46108b4f30d5b7e47bfc712e360f173c00b702c",
+  "delivery_head": "9ff251ec9ce5b29b294477d66f84336a464fc29c",
+  "commits": [
+    "9ff251ec9ce5b29b294477d66f84336a464fc29c"
+  ],
+  "changed_paths": [
+    ".planning/n5-document-quality/findings.md",
+    ".planning/n5-document-quality/progress.md",
+    ".planning/n5-document-quality/task_plan.md",
+    "benchmarks/narrative_document_types/.gitignore",
+    "benchmarks/narrative_document_types/README.md",
+    "benchmarks/narrative_document_types/evaluator.py",
+    "benchmarks/narrative_document_types/golden.json",
+    "benchmarks/narrative_document_types/report.json",
+    "benchmarks/narrative_document_types/run_benchmark.py",
+    "benchmarks/narrative_document_types/samples.json",
+    "benchmarks/narrative_document_types/tests/conftest.py",
+    "benchmarks/narrative_document_types/tests/test_e2e_catalog.py",
+    "benchmarks/narrative_document_types/tests/test_evaluator_unit.py",
+    "benchmarks/narrative_document_types/tests/test_selection_integration.py",
+    "benchmarks/narrative_document_types/tools/extract_pages.py",
+    "docs/implementation/handoffs/N5-DOCSET/HANDOFF.md",
+    "docs/implementation/handoffs/N5-DOCSET/handoff.json"
+  ],
+  "upstream_pins": {
+    "baseline": "e46108b4f30d5b7e47bfc712e360f173c00b702c",
+    "parser": {
+      "name": "selective_narrative_parser",
+      "version": "0.1.0"
+    },
+    "selector": {
+      "name": "select_narrative_evidence",
+      "version": "0.3.1"
+    },
+    "evidence_span_schema": "1.0.0",
+    "report_schema": "narrative-document-quality/1",
+    "goldens_schema": "narrative-document-quality-golden/1",
+    "samples_schema": "narrative-document-quality-samples/1"
+  },
+  "public_commands": [
+    "python benchmarks/narrative_document_types/run_benchmark.py --output benchmarks/narrative_document_types/report.json --overwrite",
+    "PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 CW_BASETEMP_FALLBACK_ROOT=$PWD/tmp python -m pytest -p no:cacheprovider --basetemp tmp/n5-docset-test benchmarks/narrative_document_types/tests -q",
+    "ruff check benchmarks/narrative_document_types"
+  ],
+  "tests": [
+    {
+      "command": "PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 CW_BASETEMP_FALLBACK_ROOT=$PWD/tmp python -m pytest -p no:cacheprovider --basetemp tmp/n5-docset-test benchmarks/narrative_document_types/tests -q",
+      "passed": 29,
+      "failed": 0,
+      "skipped": 0,
+      "seconds": 37.62
+    },
+    {
+      "command": "ruff check benchmarks/narrative_document_types",
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "seconds": 1.0
+    },
+    {
+      "command": "python benchmarks/narrative_document_types/run_benchmark.py --output benchmarks/narrative_document_types/report.json --overwrite",
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "seconds": 260.82
+    }
+  ],
+  "real_samples": [
+    {
+      "sample_id": "S01",
+      "doc_type": "annual_report",
+      "language": "zh",
+      "sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "byte_size": 9165875,
+      "metadata_is_fixture": false,
+      "root_key": "company_raw"
+    },
+    {
+      "sample_id": "S02",
+      "doc_type": "semi_annual_report",
+      "language": "zh",
+      "sha256": "91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+      "byte_size": 6361468,
+      "metadata_is_fixture": false,
+      "root_key": "company_raw"
+    },
+    {
+      "sample_id": "S03",
+      "doc_type": "quarterly_report",
+      "language": "zh",
+      "sha256": "ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+      "byte_size": 217264,
+      "metadata_is_fixture": false,
+      "root_key": "company_raw"
+    },
+    {
+      "sample_id": "S04",
+      "doc_type": "prospectus",
+      "language": "zh",
+      "sha256": "19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+      "byte_size": 11211796,
+      "metadata_is_fixture": false,
+      "root_key": "company_raw"
+    },
+    {
+      "sample_id": "S05",
+      "doc_type": "equity_offering_prospectus",
+      "language": "zh",
+      "sha256": "cd803fe9528f4646f8f29b518a450ae4bd5b5968c482eb49789f9786b523595b",
+      "byte_size": 5595592,
+      "metadata_is_fixture": false,
+      "root_key": "company_raw"
+    },
+    {
+      "sample_id": "S06",
+      "doc_type": "convertible_bond_prospectus",
+      "language": "zh",
+      "sha256": "c6ed566631e123f159abf2697c157f1868f8e994ccf8e3352132046a6c5ca0a1",
+      "byte_size": 4756322,
+      "metadata_is_fixture": false,
+      "root_key": "company_raw"
+    },
+    {
+      "sample_id": "S07",
+      "doc_type": "investor_relations_valuable",
+      "language": "zh",
+      "sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+      "byte_size": 153851,
+      "metadata_is_fixture": false,
+      "root_key": "company_raw"
+    },
+    {
+      "sample_id": "S08",
+      "doc_type": "investor_relations_procedural",
+      "language": "zh",
+      "sha256": "f6d50d717efd5e84e400a28b51bb0c73e2e2a712e828cd3fb6d872469718fd2b",
+      "byte_size": 414544,
+      "metadata_is_fixture": false,
+      "root_key": "company_raw"
+    },
+    {
+      "sample_id": "S09",
+      "doc_type": "investor_call_transcript",
+      "language": "en",
+      "sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+      "byte_size": 66324,
+      "metadata_is_fixture": false,
+      "root_key": "earnings_transcripts"
+    }
+  ],
+  "protection": {
+    "originals_unchanged": true,
+    "production_state_unchanged": true,
+    "owner_files_unchanged": true
+  },
+  "cleanup": {
+    "before": "absent (no n5 scratch under tmp/, local.json present only untracked)",
+    "after": "same as before (extraction scratch removed, pytest basetemp roots removed, e2e catalog tmp root removed, runner measurement files unlinked)",
+    "restored": true
+  },
+  "calls": {
+    "model_posts": 0,
+    "provider_http": 0,
+    "downloads": 0
+  },
+  "open_items": [
+    {
+      "id": "N5-DOCSET-OI-1",
+      "area": "selector_recall",
+      "input": "benchmarks/narrative_document_types/report.json samples[*].golden_results (11/33 required matched)",
+      "expected": "required business statements marked by a human reader appear in the selected spans",
+      "actual": "required coverage 0.3333; budget truncation (S01 omitted 86, S04 256, S05 685) plus candidate-rule misses (S06 0/4 while 160 spans were selected)",
+      "replay": "python benchmarks/narrative_document_types/run_benchmark.py --output <tmp>/report.json --overwrite"
+    },
+    {
+      "id": "N5-DOCSET-OI-2",
+      "area": "transcript_candidates",
+      "input": "S09 MSFT_Q4_2026_earnings_call.txt (498 parsed units)",
+      "expected": "management prepared-remarks sentences become candidates",
+      "actual": "only 14 candidates produced; 0/5 required golden points matched",
+      "replay": "python benchmarks/narrative_document_types/run_benchmark.py --sample-id S09 --output <tmp>/s09.json --overwrite"
+    },
+    {
+      "id": "N5-DOCSET-OI-3",
+      "area": "skip_semantics",
+      "input": "S08 procedural investor-relations record (0 units became candidates)",
+      "expected": "a procedural document with no factual progress can be skipped",
+      "actual": "status needs_review because _EMPTY_SKIP_KINDS does not include investor_relations",
+      "replay": "python benchmarks/narrative_document_types/run_benchmark.py --sample-id S08 --output <tmp>/s08.json --overwrite"
+    },
+    {
+      "id": "N5-DOCSET-OI-4",
+      "area": "locator_stability",
+      "input": "S07/S08 QA table-cell spans",
+      "expected": "downstream accepts or remediates locator_unstable spans",
+      "actual": "status needs_review for both IR samples although every locator replays successfully",
+      "replay": "python -m pytest -p no:cacheprovider benchmarks/narrative_document_types/tests/test_selection_integration.py -q"
+    },
+    {
+      "id": "N5-DOCSET-OI-5",
+      "area": "parser_scope",
+      "input": "S09 lines 26-60 (highlight block before the transcript start marker)",
+      "expected": "headline metrics are available to selection",
+      "actual": "region is not parsed; golden point G-S09-01 tagged parser_region=before_transcript_start and reports as a miss",
+      "replay": "python benchmarks/narrative_document_types/run_benchmark.py --sample-id S09 --output <tmp>/s09.json --overwrite"
+    },
+    {
+      "id": "N5-DOCSET-OI-6",
+      "area": "cross_block_sentences",
+      "input": "S03 golden point G-S03-03 (quote spans two PDF text blocks)",
+      "expected": "the continuation block is selected with its lead fragment",
+      "actual": "lead fragment selected, continuation dropped; the selected output carries only half the sentence",
+      "replay": "python benchmarks/narrative_document_types/run_benchmark.py --sample-id S03 --output <tmp>/s03.json --overwrite"
+    },
+    {
+      "id": "N5-DOCSET-OI-7",
+      "area": "duplicate_selection",
+      "input": "S05/S06 selected spans",
+      "expected": "repeated commitment paragraphs are deduplicated across the document",
+      "actual": "overall duplicate ratio 0.0674 (S05 24/160, S06 14/160)",
+      "replay": "python benchmarks/narrative_document_types/run_benchmark.py --output <tmp>/report.json --overwrite"
+    }
+  ]
+}

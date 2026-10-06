@@ -9,11 +9,11 @@
 
 ## Next Step
 
-Phase 2 进行中：完成 9 份样本 SHA/size/fingerprint 实测并写 `samples.json` + `local.json`，随后逐份实读原文产出 `golden.json`。
+已完成全部阶段；等待 MAIN 按 `docs/implementation/handoffs/N5-DOCSET/` 验收合入。
 
 ## Current Phase
 
-Phase 2
+Phase 6
 
 ## Phases
 
@@ -27,39 +27,38 @@ Phase 2
 
 ### Phase 2: 样本冻结与人工 Golden
 
-- [ ] 选定 9 份样本，实测 SHA256/byte_size/mtime，写 `samples.json`（无绝对路径）与 `local.json`（本机只读根，非 Git）
-- [ ] 逐份实读原文（页/TXT 段），每份写 6–15 个 golden 标注点（正/负例、required/optional、角色、情态、locator、短引文+hash、选择理由）
-- [ ] 每份注明已读页段、未覆盖范围与歧义
-- **Status:** in_progress
+- [x] 选定 9 份样本，实测 SHA256/byte_size/mtime，写 `samples.json`（无绝对路径）与 `local.json`（本机只读根，非 Git）
+- [x] 逐份实读原文（页/TXT 段），共 86 个 golden 标注点（每份 8–12 个）
+- [x] 每份注明已读页段、未覆盖范围与歧义；全部引文回原件核验并写入 `quote_sha256`
+- **Status:** complete
 
 ### Phase 3: 评估器与 TDD 反例
 
-- [ ] 定义 `narrative-document-quality/1` report schema 与评估器语义（required 覆盖率、噪声率、角色/情态混淆、duplicate ratio、scope 分母）
-- [ ] TDD 反例：页码偏一、相似段落误命中、未知 golden 引用、错误 SHA、无标注范围、角色错配 —— 先红后绿
-- [ ] 评估器标准不因实现改成“全过”
-- **Status:** pending
+- [x] `evaluator.py`：`evaluate()` + `validate_report()`，schema `narrative-document-quality/1`
+- [x] TDD 反例 22 条（页码偏一、相似段落、未知 golden、错误 SHA、无范围、角色/情态错配、篡改引文哈希、抬高分子、删 golden、缺分母），先 RED 后 GREEN
+- [x] 评估器标准不随实现改成全过
+- **Status:** complete
 
 ### Phase 4: 跑批 CLI 与真实报告
 
-- [ ] 复用现有 parse/select/verify 产出选择结果（无 LLM），写 `run_benchmark.py`
-- [ ] 一次汇总全部类型，产出真实 `report.json`（含耗时、临时峰值、UTF8/raw bytes、real/fixture 说明）
-- [ ] 不为有噪声的基准调阈值“修到全绿”
-- **Status:** pending
+- [x] `run_benchmark.py` 复用现有 parse/select/verify，零 LLM/网络
+- [x] 真实 `report.json`：9 份 / 86 点 / 712 span，回放 712 通过 0 失败，耗时 260.8s，临时峰值 152,604B
+- [x] 未调阈值：required 0.3333、噪声 0.0833、重复 0.0674 如实入库
+- **Status:** complete
 
 ### Phase 5: 测试（Unit / Integration / E2E）
 
-- [ ] Unit：评估器集中验证
-- [ ] Integration：实际现有 parser/selector 产出对比
-- [ ] E2E：独立 catalog + 半年报/季报/再融资 ≥3 份原件走正式只读接口，locator 回放、SHA 不变、tmp 根恢复
-- [ ] 本包 lint + ruff + git diff --check
-- **Status:** pending
+- [x] Unit 22 / Integration 6 / E2E 1 = 29 passed（37.62s）
+- [x] E2E：独立 catalog + S02/S03/S05 走 `open_version(purpose=narrative_derivation)`，271 span 回放全通过，原件指纹与 tmp 根恢复
+- [x] `ruff check benchmarks/narrative_document_types` 全绿；`git diff --check` 干净
+- **Status:** complete
 
 ### Phase 6: 交付
 
-- [ ] 提交代码/goldens/小报告（总提交 ≤2MiB，不入库原文/绝对路径）
-- [ ] `docs/implementation/handoffs/N5-DOCSET/HANDOFF.md` + `handoff.json`
-- [ ] 产品缺陷列 MAIN open_items
-- **Status:** pending
+- [x] 代码提交 `9ff251ec9ce5b29b294477d66f84336a464fc29c`（15 文件 7,164 行 ≈350KB，≤2MiB；无原文、无绝对源路径）
+- [x] `docs/implementation/handoffs/N5-DOCSET/HANDOFF.md` + `handoff.json`（7 条 open_items）
+- [x] 产品缺陷移交 MAIN，外线不自改主线
+- **Status:** complete
 
 ## Key Questions
 
