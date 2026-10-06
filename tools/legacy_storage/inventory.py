@@ -10,6 +10,7 @@ from legacy_storage.core import (
     REPORT_SCHEMA,
     db_numbers,
     integrity_probe,
+    normalized,
     protected_objects,
     source_facts,
     tree_stats,
@@ -49,14 +50,15 @@ def run_inventory(config, *, now: datetime | None = None) -> InventoryResult:
         integrity = integrity_probe(probe)
 
     candidates = view["candidates"]
-    candidate_bytes = sum(
-        c["byte_size"]
-        + sum(m["byte_size"] for m in c.get("managed_files") or [])
-        for c in candidates
-    )
+    physical = {}
+    for candidate in candidates:
+        for item in [candidate, *candidate.get("managed_files", [])]:
+            physical[normalized(Path(item["path"]))] = item["byte_size"]
+    candidate_bytes = sum(physical.values())
     aggregated = {
         "candidate_count": len(candidates),
         "candidate_bytes": candidate_bytes,
+        "candidate_file_count": len(physical),
         "derived_files_bytes": derived_stats["bytes"],
         "derived_file_count": derived_stats["files"],
         "excluded_count": len(view["excluded"]),

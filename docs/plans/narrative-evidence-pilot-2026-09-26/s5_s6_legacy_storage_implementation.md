@@ -8,6 +8,8 @@ P5-FF与P5-STORAGE均已验收并发布，精确CI已再核success。CWP旧生�
 
 ## 2026-10-06生产盘点后必须收口的共享路径问题
 
+**实现恢复点：**共享路径闭合、事务内当前引用集合复核、sections所有权及物理字节去重已实现。新增16项责任测试连同既有恢复/边界/规模共49 passed/87.25s，Ruff与diff检查GREEN，测试根均恢复absent；收据为[harness_lanes/results/s5_shared_path_acceptance_2026-10-06.json](harness_lanes/results/s5_shared_path_acceptance_2026-10-06.json)。生产尚未处置，下一动作是正常发布/精确CI及旧manifest范围补充预览，再进入第5项实际降容。不是重新签收P5-STORAGE或新增小节点。
+
 RF默认链已经main发布/精确CI绿，本地与安装生产依赖同步。一次inventory已成功结束，真实aggregate见[harness_lanes/results/s5_production_preflight_2026-10-06.json](harness_lanes/results/s5_production_preflight_2026-10-06.json)。操作manifest为tmp/s5-storage-20261006/manifest.json（5588419B，恢复输入，不提交Git）；不重复多分钟的全legacy表摘要盘点，只对修正相关范围核验。
 
 当前6479个候选artifact指向6479个主文件；1712个excluded中1477个直接parser标签行与候选共享同路径/同document_id（0跨document冲突），其中814哈希相同、663旧哈希已失配；另235个summary行generator/version为空。这不是未知原件，而是需要验证/退休的旧派生元数据。按现工具直接apply会留下1477条completed/partial等别名指向已删除文件；生产不能据旧53项fixture签收跳过这项具体缺口。

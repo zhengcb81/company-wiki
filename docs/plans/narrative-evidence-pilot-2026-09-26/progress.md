@@ -838,3 +838,10 @@ S0/N4A及S2模型预算基础、CLI阶段与CI修复已正常发布，当前CI�
 - 本次直接读取 GitHub 公共 Actions API：FF 37385101051 对应758e8f4、STORAGE 37375836745 对应e570daf，均 completed/success、attempt1。git ls-remote确认FF main758e8f4与本地一致，CWP master c46560a与本地一致且包含e570daf。
 - 保持两卡 accepted/published_green；生产清理仍未执行。下一动作仍为共享路径退休与物理字节去重TDD修复，覆盖1477条同路径旧handle；不将工具验收等同生产空间释放。用户source_acquisition改动与未跟踪FMP密钥未读写/暂存。
 - 复核工具错误：gh未在PATH，改公共REST API成功；rg通配符路径在Windows无效，改用已知文件；一次空标题patch未匹配且未产生写入，改为明确日志追加。没有重复失败或新增人工门。
+
+## 2026-10-06 — 共享路径实际TDD开工
+
+- 上一交付复核未推进产品实现；本轮转入可执行下一动作。RF仍main/origin main6e6b817a，仅owner原两周日志dirty，本线零写RF。
+- 新真实schema小夹具责任包12 collected，12 RED/22.73s；11项证实同路径handle未同步退休、未知/active/跨document共享引用可被删、事务快照后新增alias未阻止物理删除、重复字节累计及空标签summary不识别。1项测试夹具给不存在source_id违反外键，改为另一个已存在来源，保持拒绝跨来源要求。
+- CodeGraph未覆盖tools旧清理模块，返回来源类入口；沿已知工具文件检查。历史0254847 parser metadata/summary.md布局及生产exact parser版本提供窄识别依据。实现已开始；不自动放开unknown，不写生产库，不重建旧转换。短根s5sharedred已finally恢复absent。
+- 新增切片成员与独立记录重合、未知index传递阻断、未选index子文件保护、direct parser及空标签summary实际退休；最终存储集中节点49 passed/87.25s，Ruff和git diff --check GREEN。s5sharedred/green/node均恢复absent，user config SHA保持，生产0删除。收据s5_shared_path_acceptance_2026-10-06.json已写；准备正常发布，不增加日常慢CI。

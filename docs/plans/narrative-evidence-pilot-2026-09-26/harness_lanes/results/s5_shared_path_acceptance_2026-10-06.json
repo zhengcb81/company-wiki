@@ -1,0 +1,37 @@
+{
+  "schema_version": "cwp-storage-shared-path-acceptance/1",
+  "date": "2026-10-06",
+  "status": "node_green_pending_publish",
+  "red": {"collected": 12, "failed": 12, "seconds": 22.73, "fixture_errors": 1},
+  "first_green": {"passed": 20, "seconds": 36.68},
+  "concentrated_node": {
+    "passed": 49,
+    "seconds": 87.25,
+    "files": [
+      "tests/integration/test_p5_storage_shared_paths.py",
+      "tests/integration/test_p5_storage_retirement_recovery.py",
+      "tests/integration/test_p5_storage_retirement_boundary.py",
+      "tests/integration/test_p5_storage_retirement_scaling.py"
+    ]
+  },
+  "ruff": "green",
+  "covered": [
+    "same-document/source legacy aliases retired atomically before unlink",
+    "stale alias hashes preserved and never used as deletion proof",
+    "unknown/active/cross-document/cross-source aliases preserve whole object",
+    "alias inserted after snapshot refuses before status update or unlink",
+    "unlink failure resumes using original manifest",
+    "sections child ownership and transitive blocked scope",
+    "physical path byte deduplication including sections members",
+    "exact historical parser versions and canonical blank-generator summary scope",
+    "readonly previews, source facts, new final and originals preserved"
+  ],
+  "restored_absent_test_roots": ["tmp/s5sharedred", "tmp/s5sharedgreen", "tmp/s5sharednode"],
+  "user_config_sha256": "3609e707466eeb3e0f685e14f2637c6afa39ba900edef1be4814433a43300a01",
+  "rf_observed_main": "6e6b817a1a6e4567293a4dcb835815f3be508a03",
+  "rf_writes": 0,
+  "production_cleanup_executed": false,
+  "external_downloads": 0,
+  "model_posts": 0,
+  "daily_ci_slow_tests_added": false
+}

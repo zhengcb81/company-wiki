@@ -12,13 +12,67 @@ from legacy_storage.core import (
     db_numbers, directed_inside, empty_report, file_sha256, normalized,
     protected_objects, read_connection, source_facts, tree_stats, utc_now_text,
 )
-from legacy_storage.selection import LEGACY_GENERATORS, LEGACY_ROLES, _sections_managed_files
+from legacy_storage.selection import is_legacy_artifact, _sections_managed_files
 
 RETIRE_STATUS = "retired"
 _RESUME_KEY = "legacy_storage_retirement"
 _IDENTITY = ("document_id", "artifact_role", "path", "content_sha256", "byte_size",
              "generator_name", "generator_version")
 _ELIGIBLE = {"completed", "partial", "unsupported", "failed", "retired"}
+
+
+def _action_paths(action):
+    _, target, managed = action
+    return {normalized(Path(item["path"])) for item in [target, *managed]}
+
+
+def _affected_rows(live, paths):
+    # An unselected sections index also owns its children. Do not strand it by
+    # deleting a separately registered child behind its back.
+    parents = {path.parent for path in paths}
+    return {
+        key: row for key, row in live.items()
+        if normalized(Path(row["path"])) in paths or (
+            row["artifact_role"] == "sections" and row["status"] != "retired"
+            and normalized(Path(row["path"])).parent in parents
+        )
+    }
+
+
+def _shared_handles(actions, live, derived):
+    """Close same-object legacy aliases; unsafe aliases block the whole group."""
+    owners, path_actions = {}, {}
+    for key, action in actions.items():
+        row = action[0]
+        for path in _action_paths(action):
+            owners.setdefault(path, set()).add((row["document_id"], row["source_id"]))
+            path_actions.setdefault(path, set()).add(key)
+    blocked = set()
+    affected = _affected_rows(live, set(owners))
+    for key, row in affected.items():
+        path = normalized(Path(row["path"]))
+        scope = path_actions.get(path, set())
+        if not scope:  # Unselected sections owner of a selected child.
+            if key not in actions:
+                for child, keys in path_actions.items():
+                    if child.parent == path.parent:
+                        blocked.update(keys)
+            continue
+        if (not is_legacy_artifact(row, derived) or row["status"] not in _ELIGIBLE
+                or owners[path] != {(row["document_id"], row["source_id"])}):
+            blocked.update(scope)
+    # Block transitively: a rejected index must keep all of its children, even
+    # when another selected row also points at one of those physical files.
+    while True:
+        blocked_paths = set().union(*(_action_paths(actions[key]) for key in blocked)) if blocked else set()
+        expanded = blocked | {key for key, action in actions.items() if _action_paths(action) & blocked_paths}
+        if expanded == blocked:
+            break
+        blocked = expanded
+    kept = {key: action for key, action in actions.items() if key not in blocked}
+    paths = set().union(*(_action_paths(a) for a in kept.values())) if kept else set()
+    handles = {key: row for key, row in affected.items() if normalized(Path(row["path"])) in paths}
+    return kept, handles, blocked
 
 
 def _load_manifest(path: Path) -> dict:
@@ -144,7 +198,7 @@ def _execute(config, entries: list, report: dict) -> dict:
         reason = None
         if row is None:
             reason = "record_absent"
-        elif row["generator_name"] not in LEGACY_GENERATORS or row["artifact_role"] not in LEGACY_ROLES:
+        elif not is_legacy_artifact(row, derived):
             reason = "current_record_not_legacy"
         elif row["status"] not in _ELIGIBLE:
             reason = "state_changed"
@@ -166,14 +220,34 @@ def _execute(config, entries: list, report: dict) -> dict:
             excluded.append(dict(entry, reason=reason))
             continue
         actions[row["artifact_id"]] = (row, target, managed)
-    report.update(candidates=entries, excluded=excluded, selection={"manifest_candidates": len(entries)})
+    actions, handles, blocked = _shared_handles(actions, live, derived)
+    excluded.extend(dict(live[key], reason="shared_handle_not_retirable") for key in sorted(blocked))
+    paths = set().union(*(_action_paths(a) for a in actions.values())) if actions else set()
+    report.update(candidates=entries, excluded=excluded, selection={
+        "manifest_candidates": len(entries), "retirement_handle_count": len(handles),
+        "shared_alias_count": len(set(handles) - set(actions)),
+    })
     if not report["dry_run"] and actions:
         connection = sqlite3.connect(database, timeout=30)
         try:
             connection.execute("PRAGMA foreign_keys=ON")
             connection.execute("BEGIN IMMEDIATE")
-            for row, target, managed in actions.values():
+            connection.row_factory = sqlite3.Row
+            current = {r["artifact_id"]: dict(r) for r in connection.execute("SELECT * FROM artifacts")}
+            if _affected_rows(current, paths) != _affected_rows(live, paths):
+                raise RuntimeError("shared artifact bindings changed during retirement")
+            current_originals = {normalized(Path(r[0])) for r in connection.execute("SELECT absolute_path FROM locations")}
+            for action in actions.values():
+                for item in [action[1], *action[2]]:
+                    if _check_target(item, derived, current_originals):
+                        raise RuntimeError("physical deletion target changed during retirement")
+            for key, row in handles.items():
+                # A stale alias SHA is historical metadata, never the deletion
+                # proof. Only the verified manifest action authorizes bytes.
+                managed = actions[key][2] if key in actions else []
                 metadata = json.loads(row.get("metadata_json") or "{}")
+                if not isinstance(metadata, dict):
+                    raise ValueError("artifact metadata must be an object")
                 saved_scope = {"index_sha256": row["content_sha256"], "managed_files": managed}
                 if row["status"] == "retired" and (
                     row["artifact_role"] != "sections" or metadata.get(_RESUME_KEY) == saved_scope

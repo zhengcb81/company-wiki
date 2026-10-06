@@ -27,6 +27,8 @@ python tools/legacy_storage_retirement.py vacuum --config <catalog-config> --rec
 
 - manifest 只是选择和已有观察值。删除前读取当前 DB 身份、路径、hash；不递归扫删未知文件。
 - 先退休旧 artifact 句柄，再删其已验证文件。中断后复用同一 manifest；已退休未删除的文件可续删，缺失仅计 `already_absent`。sections 恢复只保存小型路径/hash，正文不备份。
+- 同一路径的已知旧parser别名一并在事务内退休，历史失配SHA保持原样，删除只用已验证候选的实际字节。未知/活跃/跨document或source共享引用阻止整个物理组删除；未选中sections的子文件不能单独删除。事务内再次复核共享行集合，新增或变化即拒绝，不会先删后发现。
+- `candidate_bytes` 按规范化物理路径去重，sections成员与独立记录共享时仅算一次；`candidate_count`仍是记录数，`candidate_file_count`是唯一候选路径数。实际释放以删除记录与前后计量为准。空generator仅在绑定document SHA的旧`derived/{sha[:2]}/{sha}/summary.md`布局识别，其他未知对象保留。
 - span 删除在既有 catalog 锁与单个 SQLite 事务内执行，保留 keep/范围外 parser。报告聚合数量，不输出百万 span 清单。保留行计 `kept_pairs`，不计 `already_absent`。
 - 静态库预览不创建 WAL/SHM；活动 WAL 需要既有 SHM。预览不拿写锁或修改库。
 - VACUUM 前后分别核 source、新 final、旧记录的确定性 digest、完整性和物理页数。额外空闲空间保守按当前库两倍检查；标准 VACUUM 会使用 SQLite 临时空间，不创建永久第二份完整库。磁盘 free-space 与 DB 文件释放量分列。

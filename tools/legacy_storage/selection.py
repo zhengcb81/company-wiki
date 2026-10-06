@@ -15,6 +15,7 @@ from legacy_storage.core import (
     PROTECTED_TABLES,
     directed_inside,
     file_sha256,
+    normalized,
     read_connection,
     table_digest,
 )
@@ -29,6 +30,34 @@ LEGACY_GENERATORS = frozenset(
     }
 )
 LEGACY_STATUS_RETIRED = "retired"
+
+# Direct parser labels used before the source_catalog_* writer namespace.
+# Version and role are deliberately pinned: new parsers are not cleanup targets.
+LEGACY_PARSERS = frozenset({
+    ("html_markdownify", "1.0.0"), ("structured_text", "1.0.0"),
+    ("pymupdf_page_text", "1.26.7"), ("plain_text", "1.0.0"),
+    ("python_docx", "1.0.0"), ("unsupported_format", "1.0.0"),
+    ("antiword", "1.0.0"), ("dayu_docling", "1.10.0"),
+    ("openpyxl", "3.1.5"), ("pdf_page_aware_core", "1.26.7"),
+})
+
+
+def is_legacy_artifact(row: dict, derived: Path) -> bool:
+    role = row["artifact_role"]
+    if role not in LEGACY_ROLES:
+        return False
+    if row["generator_name"] in LEGACY_GENERATORS:
+        return True
+    if role == "normalized" and (row["generator_name"], row["generator_version"]) in LEGACY_PARSERS:
+        return True
+    # The oldest summary writer had empty generator columns. Its SHA-addressed
+    # summary.md layout, role and document binding distinguish it from unknowns.
+    digest = row["document_id"].rsplit(":", 1)[-1]
+    return (
+        role == "summary" and row["generator_name"] == row["generator_version"] == ""
+        and len(digest) == 64 and all(c in "0123456789abcdef" for c in digest)
+        and normalized(Path(row["path"])) == normalized(derived / digest[:2] / digest / "summary.md")
+    )
 
 
 def classify_artifact_rows(database_path: Path, derived_dir: Path) -> dict:
@@ -55,7 +84,7 @@ def classify_artifact_rows(database_path: Path, derived_dir: Path) -> dict:
             "generator_version": row[7],
             "status": status,
         }
-        if generator not in LEGACY_GENERATORS:
+        if not is_legacy_artifact(entry, derived_dir):
             excluded.append(dict(entry, reason="unknown_generator"))
             continue
         if role not in LEGACY_ROLES:
