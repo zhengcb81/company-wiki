@@ -1,0 +1,35 @@
+{
+  "schema_version": "n4c-prompt-node/1",
+  "status": "local_green_pending_publication",
+  "base_head": "7c665b5cf85a0e341e1b665773b966334e0c34a9",
+  "rf_head": "6e6b817a1a6e4567293a4dcb835815f3be508a03",
+  "prompt_version": "1.4.0",
+  "model_request_schema": "narrative-model-request/1.2",
+  "public_wire_changed": false,
+  "summary_contract_relaxed": false,
+  "tests": {
+    "diagnostic_tdd": {"initial_red": 8, "related_passed": 71},
+    "prompt_tdd": {"initial_red": 1},
+    "unit_node": {"passed": 146, "failed": 0, "seconds": 5.35},
+    "integration_first": {"passed": 13, "failed": 1, "seconds": 79.41,
+      "command": "python -m pytest tests/integration/test_narrative_batch_cli_e2e.py tests/integration/test_narrative_batch_cross_run_e2e.py tests/integration/test_narrative_batch_recovery_e2e.py -q --basetemp=tmp/n4promptint",
+      "failure": "Only sparse-language test still read the removed duplicate constraints object; actual CLI and bundle checks passed."},
+    "integration_corrected": {"passed": 1, "failed": 0, "seconds": 10.73,
+      "command": "python -m pytest tests/integration/test_narrative_batch_cli_e2e.py::test_cli_infers_sparse_languages_from_verified_pdf_and_transcript_bytes -q --basetemp=tmp/n4promptintfix"},
+    "integration_distinct_cases_green_across_runs": 14,
+    "ruff": "passed",
+    "mypy": {"passed_files": 2, "command": "python -m mypy src/company_wiki/automation/narrative_model.py src/company_wiki/automation/narrative_summarize.py"}
+  },
+  "checks": {
+    "all_160_evidence_texts_preserved": true,
+    "roles_flags_aliases_preserved": true,
+    "canonical_selection_and_hash_binding_preserved": true,
+    "no_translation_checked_in_http_and_final_bundle": true,
+    "errors_remain_terminal_with_static_rule_only": true,
+    "user_config_sha256": "3609e707466eeb3e0f685e14f2637c6afa39ba900edef1be4814433a43300a01",
+    "rf_owner_files_not_written": true
+  },
+  "cleanup": {"owned_roots": ["n4diagred", "n4diaggreen", "n4promptred", "n4promptnode", "n4promptint", "n4promptintfix"], "after": "absent", "restored": true},
+  "calls": {"model_posts": 0, "provider_http": 0},
+  "limitations": ["Old invalid provider response was not retained; this node does not prove its specific rule failure.", "Offline request metadata is fixture-derived. Paid IPO recheck and exact-SHA CI remain pending."]
+}

@@ -10,7 +10,7 @@
 
 > **2026-10-06 当前交接（覆盖下方2026-10-03/05旧恢复点）：**P5-FF/STORAGE/RF已验收并发布，RF正式main6e6b817a与安装依赖一致；旧全量writer退出，生产存储清理与S6说明/控制收尾已完成，e481578/CI37399248994一次全绿，不重做A/B、P5、清理或三个并行档试验。真实N4C摘要POST尚未验收。正式MiMo为`mimo-v2.6-flash`（`https://token-plan-cn.xiaomimimo.com/v1`），DeepSeek为`deepseek-flash`（`https://api.deepseek.com`），均读取既有Config与环境密钥、8192/温度1.0；[配置只读收据](harness_lanes/results/n4c_flash_preflight_2026-10-05.json)两家GET200不等于摘要成功。旧`mimo-v2.5-pro`与401说明只作历史记录，不能据此再改模型或要求换key。
 >
-> **最新累计预算恢复点：**[run04](harness_lanes/results/n4c_live_2026-10-05_run04.json)之后保守已占58,523 tokens/33,884 microUSD，另留历史FX余量2,764；60k只剩1,477 tokens，不能容纳配置8192的输出预留。160k累计token cap问题尚待答复，美元仍上限$0.10，不退未知账，不重启旧run清账。授权到达后按当前细则滚动做MiMo P01年报/P04招股、DeepSeek P07中文IR/T01英文电话会，每批加零模型policy对照，provider分run、账本统一累计、RF实际读取与引用/原语言/恢复/总空间同一大节点验收；不把models清单、HTTP200或未生成final当完成证据。当前唯一施工顺序以[总计划Next Step](task_plan.md#next-step)为准。
+> **历史run04预算恢复点（不可再用于启动）：**[run04](harness_lanes/results/n4c_live_2026-10-05_run04.json)之后保守已占58,523 tokens/33,884 microUSD、另留FX2,764，当时160k尚待答复。此状态已被已授权的run05/06覆盖；现在累计136108tokens/63228microUSD、unknown6，不退款或重启清账。当前唯一施工顺序及余额以[总计划Next Step](task_plan.md#next-step)为准。
 
 > **2026-10-05 当前状态：配置遵从修正已实现并完成离线节点验收。**真实入口使用 `scripts/narrative_batch_configured.py` → 既有 `Config.load()` → child-local HTTP Worker；model/base_url/key-env/max_tokens/temperature/reasoning_split均来自既有配置。当前为国内端点、MiniMax-M3、8192、1.0、reasoning_split=true；没有配置的 thinking 不擅自设置。请求文件里旧模型参数不能覆盖配置。零外部LLM调用完成配置测试；真实N4C仍未通过。
 
@@ -21,6 +21,12 @@
 > **并行与已完成边界：**G1/S3、N4A/B和N4-T1/T2已收口，不重复施工。P5三个外包用户已确认开工，见[P5接口总包](harness_lanes/p5_parallel_packages_2026-10-05.md)；MAIN不改它们的独占写集，交付随到随验收。下方旧记录为追溯背景，当前顺序以主计划Next Step为准。
 
 ## 1. 已核缺口与目标
+
+### 2026-10-06招股失败后的MAIN修复节点
+
+- 旧run05未保留invalid draft，不能倒推具体规则；新增仅输出静态rule的SUMMARY_INVALID诊断，仍严格拒绝错误source/language/字段/角色/质量状态，不保存模型正文或未知字段名。8反例RED后相关71项GREEN。
+- 零模型重建固定SHA招股同一160段选择结果：原body16525 B、最坏24845tokens，重建元数据来自fixture。重复schema/example及辅助数据造成实际边界不足；私有prompt1.4.0/request1.2只传一份完整response_schema，删除重复示例/约束对象，指令仍要求原语言、source-only、严格角色/情态/引用、质量标记。完整160段raw_text/role/flags/alias及canonical select/locators不删；model只见status/coverage_complete/omitted_count，全部selection计数仍进入input hash。
+- 新body15479 B、最坏23799，已在剩23892内；模型8192/温度/端点/思考选项未变，不调整token估算法、退款或丢业务片段。fake provider测试改为独立生成合法响应，不回显prompt示例；一个投影行为RED后146相关Unit/5.35s+Ruff GREEN。CLI/HTTP、跨run及kill恢复首轮13 passed/1 failed/79.41s，唯一失败是旧测试仍读取已删除的重复constraints字段；改为核真实HTTP system指令的No translation，最终bundle仍检查translate=false/原语言，单独复测1 passed/10.73s。共14项分两次全过，聚焦mypy2文件GREEN；六个测试根都恢复absent。正常发布后只对招股+policy执行一次MiMo真实复测，计量够预留才POST，不自动增加预算或绕过质量校验。
 
 ### 2026-10-06 N4C恢复准备（MAIN独占，不新建审批门）
 

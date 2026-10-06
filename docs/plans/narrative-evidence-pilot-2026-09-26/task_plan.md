@@ -125,7 +125,7 @@ TDD框住公开行为，不把旧签收规则写进新测试。仅S0相关收口
 
 ## Next Step
 
-**MAIN单一下一动作：诊断真实招股书SUMMARY_INVALID的具体规则原因，再确定能在剩余额度内完成的修复与一次复测；不盲重跑。**run05/06证明年报、IR、英文电话会及policy对照真实通过，招股未生成合法final；旧unknown继续计入，remaining tokens23892/费用34008microUSD，不擅改Config 8192或退款。现招股请求最坏24863 tokens大于剩余23892，原请求不能直接复测；先查失败信息、summary合同与输入投影，若修复不能降低真实请求预留或无需POST证明，须如实保留缺项。S5/S6/P5已完成，不重跑长测、清理或VACUUM；RF/FF/ET主线与owner不动。N5三包可独立启动，MAIN不等它们才修当前失败。
+**MAIN单一下一动作：发布已通过集中验证的安全规则诊断与prompt精简，再用MiMo复测P04招股书+零模型policy一次。**旧失败响应未保留，不能断言其具体原因；新增固定rule诊断便于定位下一次真实失败，严格合同未放松。私有prompt1.4.0/request1.2去掉重复示例/约束，160段正文、角色、flags、引用和canonical selection完整保留；实测body15479 B/最坏预留23799tokens，低于剩余23892。146项Unit、CLI/cross-run/recovery共14项分两次全过、Ruff及聚焦mypy已绿。旧unknown继续计入，费用剩34008microUSD，不改Config 8192/温度1.0/端点、不退款；正式run仍须以实际admission和账本为准。S5/S6/P5已完成，不重跑长测、清理或VACUUM；RF/FF/ET主线与owner不动。N5三包可独立启动，MAIN不等它们才修当前失败。
 
 P5-STORAGE已验收并合入/发布：候选`9fa2166`，主线代码`e570dafb92a3f6aaec51176682d348a1c9303535`。53个不同case分步GREEN，真实AMEC年报+微软电话会TXT的原文stdout SHA、新NarrativeRef完整locator replay前后通过，连接关闭及测试根恢复均通过；没有生产删除。工具预览不写库/sidecar、不拿写锁；切片单次范围SQL/聚合小报告；压缩真实前后计量/空间检查，观测失败明确null。所有细节及实际副本空间见[集成审查](harness_lanes/results/p5_storage_integration_review_2026-10-05.md)、[小验收收据](harness_lanes/results/p5_storage_integration_acceptance_2026-10-05.json)、[工具说明](../../../tools/legacy_storage/README.md)。日常Unit CI不添加多分钟解析包。精确新代码[CI37375836745](https://github.com/zhengcb81/company-wiki/actions/runs/37375836745)已completed/success；此前18da250同SHA重跑CI也已success。
 

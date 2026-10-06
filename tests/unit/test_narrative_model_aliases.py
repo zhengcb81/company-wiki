@@ -10,7 +10,7 @@ from company_wiki.automation.narrative_http_model import NarrativeHTTPModel, mod
 from company_wiki.automation.narrative_model import (
     ModelResponseError, NarrativeModelRequest, NarrativeModelResponse, decode_model_draft,
 )
-from support.narrative_model_request_fixture import selection
+from support.narrative_model_request_fixture import response_draft, selection
 from company_wiki.source_contract import EvidenceCoordinates, EvidenceSpan
 
 
@@ -26,7 +26,7 @@ def _span(base, *, page_number, role=None, flags=None):
 
 def _reply(selected, evidence_ids):
     request = NarrativeModelRequest.from_selection(selected)
-    value = json.loads(request.data_json)["response_example"]
+    value = response_draft(json.loads(request.data_json))
     value["draft"]["claims"][0]["evidence_ids"] = evidence_ids
     return NarrativeModelResponse("fixture", "fixture", request.prompt_version,
                                   json.dumps(value, ensure_ascii=False).encode())

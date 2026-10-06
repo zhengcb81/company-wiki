@@ -308,7 +308,10 @@ def test_cli_infers_sparse_languages_from_verified_pdf_and_transcript_bytes(
             assert {data["source"]["language"] for data, _body in loopback_model_server.requests} == {
                 "en", "zh", "mixed",
             }
-            assert all(data["constraints"]["translate"] is False for data, _body in loopback_model_server.requests)
+            assert all(
+                "No translation" in json.loads(body)["messages"][0]["content"]
+                for _data, body in loopback_model_server.requests
+            )
 
             documents = {item["document_id"]: item for item in result["documents"]}
             assert documents.keys() == state.indexed.keys()

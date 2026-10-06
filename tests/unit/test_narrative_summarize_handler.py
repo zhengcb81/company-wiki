@@ -331,6 +331,36 @@ class ReviewLoader:
         return self.value
 
 
+@pytest.mark.parametrize("overrides,rule", [
+    ({"status": "completed"}, "DRAFT_STATUS"),
+    ({"language": "en"}, "SOURCE_LANGUAGE"),
+    ({"source_sha256": "0" * 64}, "SOURCE_IDENTITY"),
+    ({"claims": []}, "CLAIMS_EMPTY"),
+    ({"claims": "not-an-array"}, "CLAIMS_SHAPE"),
+    ({"secret-provider-field-do-not-log": "opaque-provider-body"}, "DRAFT_FIELDS"),
+])
+def test_failed_summary_persists_a_static_contract_rule_without_provider_values(overrides, rule):
+    selected = _selection()
+    result, _, _ = _run(selected, model=ReplayModel(draft_overrides=overrides))
+    assert result.outcome is HandlerOutcome.TERMINAL_FAILURE
+    assert result.error is not None and result.error.code == "SUMMARY_INVALID"
+    assert f"rule={rule}" in result.error.detail
+    assert "secret-provider-field" not in result.error.detail
+    assert "opaque-provider-body" not in result.error.detail
+    assert result.result == {} and result.artifacts == () and result.effects == ()
+
+
+@pytest.mark.parametrize("role,flags,rule", [
+    ("analyst", (), "CLAIM_ROLE"),
+    ("company_filing", ("locator_unstable",), "LOCATOR_REVIEW_STATUS"),
+])
+def test_failed_summary_role_and_quality_rules_remain_failures_with_diagnostics(role, flags, rule):
+    result, _, _ = _run(_selection(role=role, quality_flags=flags), model=ReplayModel())
+    assert result.outcome is HandlerOutcome.TERMINAL_FAILURE
+    assert result.error is not None and result.error.code == "SUMMARY_INVALID"
+    assert f"rule={rule}" in result.error.detail
+
+
 def _run(
     selected: NarrativeSelectResult,
     *,
@@ -609,16 +639,18 @@ def test_model_prompt_teaches_wire_schema_to_an_unconfigured_model() -> None:
         ("zh", "unknown", ("locator_unstable",)),
     ],
 )
-def test_prompt_wire_example_passes_the_actual_summary_contract(
+def test_schema_guided_provider_fixture_passes_the_actual_summary_contract(
     language, role, flags
 ) -> None:
     selected = _selection(language=language, role=role, quality_flags=flags)
     envelope = json.loads(NarrativeModelRequest.from_selection(selected).data_json)
+    from support.narrative_model_request_fixture import response_draft
+
     response = NarrativeModelResponse(
         "example",
         "shape-only",
         NARRATIVE_PROMPT_VERSION,
-        canonical_json(envelope["response_example"]).encode("utf-8"),
+        canonical_json(response_draft(envelope)).encode("utf-8"),
     )
     result = NarrativeSummarizeHandler._completed_result(
         selected, selected.prompt_review, response

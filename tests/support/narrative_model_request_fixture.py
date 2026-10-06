@@ -6,6 +6,26 @@ from company_wiki.automation.narrative_contracts import NarrativeSelectResult
 from company_wiki.source_contract import EvidenceCoordinates, EvidenceSpan, source_id_for_sha256
 
 
+def response_draft(data):
+    """Fake provider output, built independently of any prompt example."""
+    row = data["evidence"][0]
+    role = row[2] if len(row) > 2 else data["default_source_role"]
+    flags = row[3] if len(row) > 3 else data["default_quality_flags"]
+    claim_type = ("company_statement" if role in {"company_filing", "management"}
+                  else "analyst_question" if role in {"analyst", "investor_question"}
+                  else "uncertain")
+    review = claim_type == "uncertain" or "locator_unstable" in flags
+    return {"draft": {
+        "source_id": data["source"]["source_id"],
+        "source_sha256": data["source"]["source_sha256"],
+        "language": data["source"]["language"],
+        "claims": [{"claim_id": "claim-001", "text": row[1][:200], "evidence_ids": [row[0]],
+                    "claim_type": claim_type, "modality": "question" if claim_type == "analyst_question" else "uncertain",
+                    "needs_review": review}],
+        "status": "needs_review" if review else "draft",
+    }}
+
+
 def selection(count=1, *, role="company_filing", flags=(), text_suffix=""):
     digest = hashlib.sha256(b"synthetic immutable original").hexdigest()
     source_id = source_id_for_sha256(digest)

@@ -40,6 +40,42 @@ class _SummaryFailure(Exception):
     detail: str
 
 
+def _summary_contract_rule(error: NarrativeContractError) -> str:
+    """Return only a fixed rule label; never retain a provider key or value."""
+    message = str(error)
+    exact = {
+        "summary draft status is invalid": "DRAFT_STATUS",
+        "summary claim type is invalid": "CLAIM_TYPE",
+        "summary claim modality is invalid": "CLAIM_MODALITY",
+        "summary claim needs_review must be boolean": "CLAIM_REVIEW_TYPE",
+        "summary draft source differs from source_ref": "SOURCE_IDENTITY",
+        "summary source identity/hash does not match": "SOURCE_IDENTITY",
+        "summary draft language differs from result": "SOURCE_LANGUAGE",
+        "summary language must match the source language": "SOURCE_LANGUAGE",
+        "summary draft must contain at least one claim": "CLAIMS_EMPTY",
+        "summary claims must be an array": "CLAIMS_SHAPE",
+        "summary claim refers to unknown evidence IDs": "EVIDENCE_REFERENCE",
+        "every summary claim requires evidence IDs": "EVIDENCE_REFERENCE",
+        "non-company evidence cannot support a company statement": "CLAIM_ROLE",
+        "analyst-question claims must cite question evidence only": "CLAIM_ROLE",
+        "unstable evidence locators require needs_review status": "LOCATOR_REVIEW_STATUS",
+        "review-required claims require a needs_review draft": "DRAFT_REVIEW_STATUS",
+    }
+    if message in exact:
+        return exact[message]
+    for prefix, rule in (
+        ("summary draft unknown fields:", "DRAFT_FIELDS"),
+        ("summary draft missing fields:", "DRAFT_FIELDS"),
+        ("summary claim unknown fields:", "CLAIM_FIELDS"),
+        ("summary claim missing fields:", "CLAIM_FIELDS"),
+        ("summary claim text must", "CLAIM_TEXT"),
+        ("summary draft source_sha256 must", "SOURCE_HASH_FORMAT"),
+    ):
+        if message.startswith(prefix):
+            return rule
+    return "CONTRACT_INVALID"
+
+
 def _failure(
     code: str,
     outcome: HandlerOutcome,
@@ -284,7 +320,8 @@ class NarrativeSummarizeHandler:
             raise _SummaryFailure(
                 "SUMMARY_INVALID",
                 HandlerOutcome.TERMINAL_FAILURE,
-                "model draft violates the summary contract",
+                "model draft violates the summary contract "
+                f"(rule={_summary_contract_rule(exc)})",
             ) from exc
 
 

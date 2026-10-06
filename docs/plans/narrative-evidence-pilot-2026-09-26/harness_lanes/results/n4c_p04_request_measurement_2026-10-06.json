@@ -1,0 +1,27 @@
+{
+  "schema_version": "n4c-request-size-measurement/1",
+  "sample_id": "P04",
+  "source_sha256": "19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+  "metadata_is_fixture": true,
+  "selected_count": 160,
+  "http_body_bytes": 16525,
+  "conservative_token_reservation": 24845,
+  "prompt_instruction_bytes": 761,
+  "envelope_component_bytes": {
+    "constraints": 96,
+    "default_quality_flags": 2,
+    "default_source_role": 16,
+    "evidence": 12214,
+    "evidence_columns": 47,
+    "response_example": 481,
+    "response_schema": 981,
+    "schema_version": 29,
+    "selection": 261,
+    "source": 329
+  },
+  "model_output_tokens": 8192,
+  "calls": {
+    "model_posts": 0,
+    "provider_http": 0
+  }
+}

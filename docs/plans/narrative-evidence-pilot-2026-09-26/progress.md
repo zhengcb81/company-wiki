@@ -913,3 +913,12 @@ S0/N4A及S2模型预算基础、CLI阶段与CI修复已正常发布，当前CI�
 - DB退休前3055841280 B，退休metadata更新后/压缩前3059736576 B，最终222408704 B。VACUUM阶段减2837327872 B，但整个节点DB净减2833432576 B；加旧文件后净减5659443210 B（5.659GB/5.271GiB），不使用更大的压缩前基线多报收益。
 - 正式小收据s5_production_storage_acceptance_2026-10-06.json保存原文/来源事实/8类计数/实际净空间与代码CI，10KB级；验证成功后按绝对路径/reparse检查清除唯一tmp/s5-storage-20261006，操作恢复点/清单/大报告/脚本186486185 B移除，目录恢复absent。临时材料清理不额外加进5.659GB净释放，未做完整3GB/46GB备份或恢复演练。
 - S5标complete；S6库收缩完成，剩当前docs/hook兼容引用核销再回N4C。49集中责任测试/96f44a1精确CI37394193179一次全绿复用，不新增小节点验收或日常慢CI；N4C累计预算问题仍独立等待，目标保持active，未宣称真实多provider批次已完成。
+
+## 2026-10-06 — SUMMARY_INVALID诊断与prompt精简集中节点
+
+- 本轮先核RF main/origin main6e6b817a，仅原owner两周日志dirty；零写RF/FF/ET/Dayu。用户source_acquisition SHA3609e707保持并排除提交。
+- 旧MiMo招股响应已随隔离根清理，不能推断具体失败规则。新增只输出固定rule标签的安全诊断，错误source/language/role/fields/quality仍终态拒绝，不留provider未知键或正文。8项TDD RED，相关71项GREEN。
+- 1项prompt投影TDD RED后实现私有prompt1.4.0/request1.2：完整严格schema只传一次，移除重复示例/constraints及模型无需的辅助计数；160段原文、角色、flags、alias、canonical selection/locator全保留，完整selection仍参与输入hash。实测body16525→15479 B、保守预留24845→23799，旧账仍136108tokens/63228microUSD，剩23892/费用34008microUSD。配置8192/温度1.0/端点和估算法不变。
+- 146相关Unit/5.35s、Ruff、mypy2文件GREEN。正式CLI/HTTP、跨run及kill恢复首轮13 passed/1 failed/79.41s；唯一过期断言读constraints.translate，改查真实HTTP No translation且最终bundle仍验translate=false，单项1 passed/10.73s。14项分两次全过，不伪称整包单次全绿，不再重跑79秒已绿范围。
+- 六个明确测试根绝对路径/无reparse检查后恢复absent；固定旧unknown账本不动。小收据n4c_prompt_node_2026-10-06.json与两份零POST请求测量已落盘；正常发布后仅MiMo P04+policy复测一次，不盲循环或自增预算。
+- 一次PWF补丁因假定progress标题为# Progress未匹配而拒绝，未产生该次写入；改精确N4段落和追加日志。没有修改产品要求或增加小节点门。

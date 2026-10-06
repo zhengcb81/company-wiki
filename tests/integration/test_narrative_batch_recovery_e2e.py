@@ -158,8 +158,10 @@ def interrupted_model_server(monkeypatch, hermetic_runtime):
                 request = json.loads(body)
                 assert [message["role"] for message in request["messages"]] == ["system", "user"]
                 data = json.loads(request["messages"][1]["content"])
-                assert data["constraints"]["translate"] is False
-                draft = data["response_example"]
+                from support.narrative_model_request_fixture import response_draft
+
+                assert "No translation" in request["messages"][0]["content"]
+                draft = response_draft(data)
                 assert draft is not None and draft["draft"]["language"] == "en"
                 state.requests.append(data)
                 if len(state.requests) == 1:

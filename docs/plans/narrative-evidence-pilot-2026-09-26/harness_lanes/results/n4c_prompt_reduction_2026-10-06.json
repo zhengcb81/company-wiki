@@ -1,0 +1,24 @@
+{
+  "schema_version": "n4c-prompt-reduction/1",
+  "sample_id": "P04",
+  "metadata_is_fixture": true,
+  "source_sha256": "19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+  "prompt_version": "1.4.0",
+  "before_body_bytes": 16525,
+  "after_body_bytes": 15479,
+  "before_reservation": 24845,
+  "after_reservation": 23799,
+  "selected_count": 160,
+  "canonical_selection_sha256": "d13c64abe2f2aac50a05aed0f7b97ae285f95a6bf7857c56ec11c1fd94758c06",
+  "checks": {
+    "full_selection_unchanged": true,
+    "all_text_role_quality_rows_retained": true,
+    "full_wire_schema_retained": true,
+    "configured_model_options_unchanged": true,
+    "model_input_hash_includes_full_selection": true
+  },
+  "calls": {
+    "model_posts": 0,
+    "provider_http": 0
+  }
+}

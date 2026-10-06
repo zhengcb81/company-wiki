@@ -17,6 +17,7 @@ from company_wiki.automation.narrative_contracts import SourceRevisionEventPaylo
 from company_wiki.source_catalog import SourceCatalog
 from company_wiki.source_catalog.config import load_catalog_config
 from company_wiki.source_catalog.source_reader import SourceVersionReader
+from support.narrative_model_request_fixture import response_draft
 
 
 KEY_ENV = "NARRATIVE_PRODUCTION_E2E_KEY"
@@ -42,8 +43,8 @@ def loopback_model_server(monkeypatch, hermetic_runtime):
                 request = json.loads(body)
                 assert [message["role"] for message in request["messages"]] == ["system", "user"]
                 data = json.loads(request["messages"][1]["content"])
-                draft = data["response_example"]
-                assert draft is not None and data["constraints"]["translate"] is False
+                draft = response_draft(data)
+                assert "No translation" in request["messages"][0]["content"]
                 state.requests.append((data, body))
                 reply = json.dumps({
                     "model": "stub-model", "choices": [{"message": {"content": json.dumps(draft, ensure_ascii=False)},

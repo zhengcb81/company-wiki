@@ -34,6 +34,7 @@ from support.narrative_batch_fixtures import (
     isolated_batch_directory,
     prepare_source_catalog,
 )
+from support.narrative_model_request_fixture import response_draft
 
 
 @pytest.fixture
@@ -54,8 +55,8 @@ def cross_run_model_server(monkeypatch, hermetic_runtime):
                 request = json.loads(body)
                 assert [message["role"] for message in request["messages"]] == ["system", "user"]
                 data = json.loads(request["messages"][1]["content"])
-                assert data["constraints"]["translate"] is False
-                draft = json.loads(json.dumps(data["response_example"]))
+                assert "No translation" in request["messages"][0]["content"]
+                draft = response_draft(data)
                 assert draft is not None and draft["draft"]["language"] == "en"
                 if state.alternate:
                     claim = draft["draft"]["claims"][0]
