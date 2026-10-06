@@ -938,3 +938,11 @@ S0/N4A及S2模型预算基础、CLI阶段与CI修复已正常发布，当前CI�
 - 新正例先8 RED，再补充效率/席位/商业模式4 RED；实现selector0.3.2，parser0.1.0不变。新23＋原通用46项69 passed/2.84s。检查原英文23项发现1条收入句中的customers补语误召回，增加句中非财务主语条件，新/旧英文46项passed/1.58s。总92个不同case分步通过，Ruff/mypy绿；不伪称全部单包一次绿，不重跑既绿的长E6/storage包。
 - T01只读对比f264609：原14段/1809 B（管理层6）→46段/6852 B（管理层35），新数据中心、模型、Fabric采用、GPU交付效率、Copilot席位、seat+usage六个管理层原文点均选中，46/46引用回放。第一版测量误把实际“paid Fabric customers”写成“paid customers”，两次断言失败后逐字读原文修正测量短语；没有调整生产规则迎合品牌。runpy首次导入support失败已补tests到sys.path，均零POST、不改原件。
 - 按Config DeepSeek测量body10228 B、保守18548tokens/14376microUSD，在批准余量内。小收据n4c_english_selection及n4c_english_node落盘，无原文/请求大副本；下一正常发布/精确CI后只复测同一T01＋零模型policy一次。用户source_acquisition与RF owner不动，N5独立写集保持。
+
+## 2026-10-06 — 电话会截断、短摘要目标与费用恢复点
+
+- 英文选材代码27d51d5已正常提交/推送，精确CI37510236806 attempt1全部job/步骤success，72秒，小CI收据落盘。RF正常账号HEAD/origin/main/live main仍6e6b817a，owner两文件与用户配置SHA保持。
+- run09单次T01+policy真实DeepSeek：batch36.024s/总40.269s，finish_reason=length、input2305/output8192，MODEL_OUTPUT_TRUNCATED终态拒绝发布。已知10497tokens/11692microUSD；policy skip/0model/RF read0，全部保护检查通过，根恢复absent。累计180884tokens/90649microUSD，unknown7/unsettled0，余19116tokens/扣FX后6587microUSD。未把failed/legacy blocked_human当新人工门，未丢usage或把截断算成功。
+- 原prompt无输出长度目标，更多业务证据可能诱发逐段膨胀。DeepSeek官方当前pricing/model页明确Flash默认thinking（https://api-docs.deepseek.com/quick_start/pricing/），但run09未保留reasoning/content分项，只能确认总输出8192/length；两次thinking-guide页面读取timeout，精确站内搜索无结果，不猜测具体推理耗时。
+- 按实施卡先2 RED/6 passed，再实现私有prompt1.5的20条/280字符/8alias目标及管理层优先、去重，不裁选材、不改公共reader与配置。相关59项Unit/4.17s、现有双语言正式CLI E2E2项/24.07s、Ruff/mypy GREEN。第一次测试命令猜了不存在的model_decode.py（0tests），只读命令也误读不存在model.py并使用Windows不展开的glob；随后按真实文件列表改model_aliases.py，不以文件不存在冒充测试绿。
+- 新零POST真实请求10435 B，预留18755tokens/14445microUSD；token足够但费用不足。已向用户提出累计费用$0.12、同一T01→DeepSeek单次复测，token200k/Config8192/温度1.0和全部旧费不变；截至本记录答复未到，不增加paid calls。短摘要目标本地完成不等于真实业务摘要已完成，目标保持active。两份节点/请求小收据、run09和CI更新PWF，正常提交发布。

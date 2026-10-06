@@ -13,7 +13,7 @@ from .narrative_contracts import NarrativeSelectResult
 
 
 MODEL_REQUEST_SCHEMA = "narrative-model-request/1.2"
-NARRATIVE_PROMPT_VERSION = "1.4.0"
+NARRATIVE_PROMPT_VERSION = "1.5.0"
 MODEL_RESPONSE_MAX_BYTES = 128 * 1024
 
 _INSTRUCTION = (
@@ -21,6 +21,8 @@ _INSTRUCTION = (
     "Keep source identity/language. No translation, outside facts, financial tables, "
     "boilerplate, investment conclusions/valuation/ratings, paths or Markdown. "
     "Summarize industry/business/product/overseas changes. Cite supplied aliases. "
+    "Merge duplicates; do not enumerate each row. Prioritize concrete company/management "
+    "updates; keep only material analyst questions. Obey schema length limits. "
     "Rows use evidence_columns/default_*; coverage=excerpts. source_role: "
     "company_filing/management=company_statement; analyst/investor_question="
     "analyst_question/question; other=uncertain. Preserve modality. "
@@ -34,8 +36,8 @@ _CLAIM_SCHEMA = {
     "additionalProperties": False,
     "properties": {
         "claim_id": {"type": "string", "minLength": 1},
-        "text": {"type": "string", "minLength": 1},
-        "evidence_ids": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+        "text": {"type": "string", "minLength": 1, "maxLength": 280},
+        "evidence_ids": {"type": "array", "minItems": 1, "maxItems": 8, "items": {"type": "string", "minLength": 1}},
         "claim_type": {"enum": ["company_statement", "analyst_question", "editorial", "uncertain"]},
         "modality": {"enum": ["actual", "planned", "forecast", "question", "negation", "uncertain"]},
         "needs_review": {"type": "boolean"},
@@ -51,7 +53,7 @@ _RESPONSE_SCHEMA = {
             "source_id": {"type": "string", "minLength": 1},
             "source_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
             "language": {"type": "string", "minLength": 1},
-            "claims": {"type": "array", "minItems": 1, "items": _CLAIM_SCHEMA},
+            "claims": {"type": "array", "minItems": 1, "maxItems": 20, "items": _CLAIM_SCHEMA},
             "status": {"enum": ["draft", "needs_review"]},
         },
     }},

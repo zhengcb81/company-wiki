@@ -82,3 +82,27 @@ def test_model_receives_one_strict_schema_and_excerpt_scope_without_duplicate_ex
     other = NarrativeModelRequest.from_selection(changed)
     assert other.data_json == request.data_json  # Full counts stay canonical, outside model prose.
     assert other.input_sha256 != request.input_sha256
+
+
+def test_large_selection_requests_short_merged_claims_without_removing_source_evidence():
+    selected = _selection(160, role="management")
+    original = selected.to_dict()
+    request = NarrativeModelRequest.from_selection(selected)
+    envelope = json.loads(request.data_json)
+    claims = envelope["response_schema"]["properties"]["draft"]["properties"]["claims"]
+    assert claims["maxItems"] == 20
+    assert claims["items"]["properties"]["text"]["maxLength"] == 280
+    assert claims["items"]["properties"]["evidence_ids"]["maxItems"] == 8
+    assert len(envelope["evidence"]) == 160
+    assert [row[1] for row in envelope["evidence"]] == [span.raw_text for span in selected.evidence_spans]
+    assert "Merge" in request.instruction and "Prioritize" in request.instruction
+    assert selected.to_dict() == original
+
+
+def test_summary_length_policy_does_not_reuse_old_prompt_generation(monkeypatch):
+    from company_wiki.automation import narrative_model
+    selected = _selection()
+    request = NarrativeModelRequest.from_selection(selected)
+    monkeypatch.setattr(narrative_model, "NARRATIVE_PROMPT_VERSION", "1.4.0")
+    previous = NarrativeModelRequest.from_selection(selected)
+    assert previous.input_sha256 != request.input_sha256

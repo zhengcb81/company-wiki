@@ -1,0 +1,23 @@
+{
+  "schema_version": "n4c-short-summary-node/1",
+  "status": "verified_locally_release_pending",
+  "prompt_version": "1.5.0",
+  "public_wire_changed": false,
+  "llm_configuration_changed": false,
+  "truncated_response_published": false,
+  "request_targets": {"max_claims": 20, "max_claim_characters": 280, "max_citation_aliases_per_claim": 8},
+  "canonical_evidence_preserved": true,
+  "canonical_draft_reader_claim_count_gate_added": false,
+  "tests": {
+    "tdd_red": {"failed": 2, "passed": 6, "seconds": 3.37},
+    "unit_green": {"passed": 59, "seconds": 4.17},
+    "unit_command": "python -m pytest tests/unit/test_narrative_model_request.py tests/unit/test_narrative_model_aliases.py tests/unit/test_narrative_summarize_handler.py -q -o addopts= --basetemp tmp/n4sumgreen2",
+    "formal_cli_e2e": {"passed": 2, "seconds": 24.07},
+    "cli_command": "python -m pytest tests/integration/test_narrative_batch_cli_e2e.py::test_cli_p2_publishes_two_languages_and_skips_policy_without_model_call -q -o addopts= --basetemp tmp/n4sumcli",
+    "ruff": "passed", "mypy_changed_module": "passed"
+  },
+  "model_posts": 0,
+  "request_measurement": "n4c_short_summary_request_2026-10-06.json",
+  "trigger_receipt": "n4c_live_2026-10-05_run09.json",
+  "limits": ["request targets do not prove the provider follows them", "thinking/content usage split of run09 is unavailable", "real T01 business-summary acceptance remains pending", "current cost cap cannot reserve another unchanged-config request"]
+}

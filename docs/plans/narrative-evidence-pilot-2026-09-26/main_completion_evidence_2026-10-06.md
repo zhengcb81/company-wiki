@@ -1,6 +1,6 @@
 # MAIN当前完成证据与真实缺口
 
-截至CWP代码`891dd414e1277823c029a5db77833917041723ec`、RF main/真实远端`6e6b817a1a6e4567293a4dcb835815f3be508a03`。这是阶段核对，**不是整体完成签收**，不增加人工门或小节点复核。以可重放行为、已发布代码和真实结果区分完成与未完成。
+截至CWP已发布代码`27d51d5a8ec416c02b1037c7bc0cf57b510883cf`（CI37510236806一次全绿/72秒）、RF main/真实远端`6e6b817a1a6e4567293a4dcb835815f3be508a03`。私有prompt1.5短摘要目标本地相关测试已绿、正在正常发布。这是阶段核对，**不是整体完成签收**，不增加人工门或小节点复核。
 
 | 原目标/责任 | 已有权威证据 | 当前边界/下一动作 |
 |---|---|---|
@@ -18,10 +18,14 @@ P04已由run08 DeepSeek一次请求完成。MiMo run05两次MODEL_TIMEOUT后SUMM
 
 旧T01电话会真实摘要遗漏新数据中心、GPU交付效率、模型发布、客户采用、付费席位和商业模式变化。MAIN已先写跨行业经营正例/财务套话反例TDD，再实现selector0.3.2通用规则，parser0.1.0与locator不变；92个不同责任case分步GREEN。原文六类管理层进展全部选中，46/46引用回放，[零外发测量](harness_lanes/results/n4c_english_selection_2026-10-06.json)给出旧/新数量及按Config的请求预留。此证据证明选择修复，还未证明新模型摘要覆盖。
 
-用户“给你授权”已批准累计200000tokens/$0.10及P04→DeepSeek；T01→DeepSeek既有明确外发授权继续有效。当前累计170387tokens/78957microUSD、unknown7/unsettled0；余29613tokens，扣历史FX2764后18279microUSD。新T01请求预留18548tokens/14376microUSD在余量内；仍按Config的deepseek-flash、8192/温度1.0，不擅改timeout、思考或stream。旧未知费照计，代理费用不冒充供应商现金账单。
+run09已按已批准预算做过一次修复后T01复测：供应商finish_reason=length，input2305/output8192、MODEL_OUTPUT_TRUNCATED，系统拒绝发布半截摘要。失败不是人工许可，未知费也不是零。保护检查与隔离根清理全部通过，policy仍零模型。当前累计180884tokens/90649microUSD、unknown7/unsettled0；余19116tokens，扣FX2764后6587microUSD。结果见[run09](harness_lanes/results/n4c_live_2026-10-05_run09.json)。
+
+当前提示词没有输出长度目标，增加证据后机械逐条输出存在膨胀风险；官方[模型说明](https://api-docs.deepseek.com/quick_start/pricing/)称Flash默认thinking。本次没有reasoning/content分项，不断言截断来自哪部分。已按TDD实现私有prompt1.5最多20条/280字符/8个alias，并优先管理层具体更新、去重；160段正文/角色/全部原文定位不减，公共reader/既有草案不加此硬门。2 RED→59相关Unit与2正式双语言CLI E2E GREEN，Ruff/mypy绿；不改Config、max_tokens、thinking、stream或超时。
+
+[新真实请求测量](harness_lanes/results/n4c_short_summary_request_2026-10-06.json)零POST，body10435 B，预留18755tokens/14445microUSD；token足够、费用不足。已提出累计费用$0.12，当前尚待用户答复；未答不得外发，不使用临时off-peak折价绕过预算、不退旧未知账。费用代理仍不冒充供应商现金账单。
 
 ## 外线与交接
 
 [N5总包](harness_lanes/n5_parallel_packages_2026-10-06.md)三卡可立即独立开工，写集不交叉，交付才验收/合入。现在未收到N5交付，不声称它们实现了质量基准、原件对象去重或ET本地收据。RF/IQS/StockWiki owner树不另写；总PWF与公共接口仍由MAIN维护。
 
-下一个大节点是发布英文选择修复→一次T01真实final→RF读取→业务内容/角色/全部引用/语言/预算/目录恢复，随后核对N4C完成条件。不重跑已绿长测，不建立第二套任务库或人工门。**整体目标保持active。**
+下一个大节点是发布短摘要目标→精确CI→费用获答后一次T01真实final→RF读取→业务内容/角色/全部引用/语言/预算/目录恢复，随后核对N4C。不重跑已绿长测，不建立第二任务库或人工门。**整体目标保持active。**
