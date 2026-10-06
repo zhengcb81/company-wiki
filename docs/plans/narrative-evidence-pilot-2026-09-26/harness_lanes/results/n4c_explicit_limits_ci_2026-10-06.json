@@ -1,0 +1,99 @@
+{
+  "id": 37514053091,
+  "status": "completed",
+  "conclusion": "success",
+  "head_sha": "4826ad9c67bce3d3e2b977173d283341d18bc141",
+  "run_attempt": 1,
+  "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/37514053091",
+  "jobs": [
+    {
+      "id": 112442291299,
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-10-06T18:47:55Z",
+      "completed_at": "2026-10-06T18:48:47Z",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Set up Python 3.12",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install dependencies",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Ruff lint",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Strict type check on contract modules",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Compileall and config doctor",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Unit tests",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Unit test failure summary",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Focused contract tests",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Focused contract failure summary",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "CLI smoke test",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Scan for hardcoded secrets",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Set up Python 3.12",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ]
+}

@@ -967,3 +967,5 @@ S0/N4A及S2模型预算基础、CLI阶段与CI修复已正常发布，当前CI�
 - 累计$0.12仍待答，run10未启动，S4不标complete。此轮有具体工具修复与真实离线证据，目标保持active；不重跑已绿长测、不代做N5、不写RF/IQS/Dayu/StockWiki owner树。完成代码后正常commit/push与精确CI。
 
 - 收尾检查发现task_plan多余EOF空行，已去掉；实际code/doc差异仅本线。离线收据全部保护true/零外发，计划所有本地链接存在。旧run与费用历史保留。
+
+- 发布：4826ad9c67bce3d3e2b977173d283341d18bc141已推origin/master，正常pre-commit/pre-push GREEN；CI37514053091 attempt1全部job/step success，52秒，精确小收据已保存。当前总计划215→93行、45067→11142字节（发布状态行更新前），所有历史全文保留659bcefc链接。唯一未提交仍用户config，SHA不变；run10 receipt absent、0新POST，累计费用提高未获答。

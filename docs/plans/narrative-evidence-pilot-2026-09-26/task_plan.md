@@ -10,7 +10,7 @@
 
 ## 当前恢复点（2026-10-06）
 
-- CWP 已发布基线 `659bcefc9d49a7e7f7fdc58e9c11d46e45da49ab`；短摘要代码 `4d019b5` 和历史长草案兼容测试 `86c8793` 已发布。精确代码 CI 分别一次通过，76/75 秒。
+- CWP 当前代码 `4826ad9c67bce3d3e2b977173d283341d18bc141` 已发布；显式预算修复的 [CI37514053091](harness_lanes/results/n4c_explicit_limits_ci_2026-10-06.json)一次全绿/52秒。短摘要代码 `4d019b5` 和历史长草案兼容测试 `86c8793` 已发布，精确代码 CI 分别一次通过，76/75秒。
 - RF 正式 main `6e6b817a1a6e4567293a4dcb835815f3be508a03`，已有默认 v2 与真实原文读取验收；FF main `758e8f4`，ET main `63c4090`。不要重派 P5 已完成交付。
 - 当前 RF 正常用户上下文只有两份 owner weekly 日志修改，本线不改；旧 rf-impl WIP 保存在独立分支。本机 CWP `config/source_acquisition.yaml` 是用户改动，SHA `3609e707466eeb3e0f685e14f2637c6afa39ba900edef1be4814433a43300a01`，不暂存、不覆盖。
 - 当前核心缺口只有 S4 的修复后真实电话会业务摘要验收；没有 live 模型任务，run10 尚未启动。目标未完成。
