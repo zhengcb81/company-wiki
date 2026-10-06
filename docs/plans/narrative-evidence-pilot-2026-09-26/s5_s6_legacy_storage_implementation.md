@@ -4,7 +4,7 @@
 
 ## 2026-10-06交付验收恢复点
 
-**最终当前状态（覆盖下方执行中/未删的历史记录）：**生产存储节点已完成并验证成功。derived7104文件/2826010634 B清零，8191旧handle retired、1490530旧span清零；DB整批3055841280→222408704 B，净减少5659443210 B（5.66GB/5.27GiB）。来源17表/四份公开原文SHA及固定年报/电话会TXT均不变，FK/完整性通过；原件0删除。恢复点、大清单/报告和脚本共186486185 B已清除，tmp/s5-storage-20261006恢复absent；这个临时清理量不另加进净释放。正式小收据[harness_lanes/results/s5_production_storage_acceptance_2026-10-06.json](harness_lanes/results/s5_production_storage_acceptance_2026-10-06.json)。所有执行进程已terminal，不再等待旧handle/复跑inventory、retire、prune、VACUUM或长测试；下一仅做S6现行docs/hook核销并回N4C，总目标尚未完成。
+**最终当前状态（覆盖下方执行中/未删的历史记录）：**生产存储节点已完成并验证成功。derived7104文件/2826010634 B清零，8191旧handle retired、1490530旧span清零；DB整批3055841280→222408704 B，净减少5659443210 B（5.66GB/5.27GiB）。来源17表/四份公开原文SHA及固定年报/电话会TXT均不变，FK/完整性通过；原件0删除。恢复点、大清单/报告和脚本共186486185 B已清除，tmp/s5-storage-20261006恢复absent；这个临时清理量不另加进净释放。正式小收据[harness_lanes/results/s5_production_storage_acceptance_2026-10-06.json](harness_lanes/results/s5_production_storage_acceptance_2026-10-06.json)。所有执行进程已terminal，不再等待旧handle/复跑inventory、retire、prune、VACUUM或长测试；S6现行docs/hook/控制已收尾，e481578已发布、精确CI37399248994一次全绿；下一N4C真实模型批次，累计token cap答复待定，总目标尚未完成。
 
 P5-FF与P5-STORAGE均已验收并发布，精确CI已再核success。CWP旧生成器b148123已退出生产安装包；RF已验收并推main ca67eab7（默认链代码b110502f）；精确CI37391526925一次全绿、job32秒。本地正式revenue-forecast已切main同步，旧rf-impl WIP原样保留在独立分支；三处已安装来源入口SHA与主线一致。生产derived/span/VACUUM仍未执行，空间收益须实际处置后测量。下一步复用[P5-RF整合细则](harness_lanes/results/p5_rf_main_integration_plan_2026-10-06.md)，不重跑工具已签收的长验收。
 

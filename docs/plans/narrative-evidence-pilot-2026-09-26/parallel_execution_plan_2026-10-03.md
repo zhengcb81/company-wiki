@@ -1,8 +1,8 @@
 # 并行总计划：门禁先行，独立目录施工，MAIN统一打通
 
-> **2026-10-06最新覆盖：**P5-FF已验收并入main758e8f4/精确CI37385101051 GREEN；P5-STORAGE已验收e570daf，生产处置未执行。RF已验收并推main ca67eab7（默认链代码b110502f）；精确CI37391526925一次全绿、job32秒。本地正式revenue-forecast已切main同步，旧rf-impl WIP原样保留在独立分支；三处已安装来源入口SHA与主线一致。不重派或写穿。MAIN运行旧generator已退出安装包b148123，229个不同case分步GREEN、真实PDF/TXT原件/来源事实保持且0新全文派生；CI37388329668已completed/success。质量/正式精选接口已发布绿。下方旧日期仅作追溯，不产生待办或签收。
+> **2026-10-06最新覆盖：**P5-FF已验收并入main758e8f4/精确CI37385101051 GREEN；P5-STORAGE已验收e570daf，生产处置与S6收尾均已完成。RF已验收并推main ca67eab7（默认链代码b110502f）；精确CI37391526925一次全绿、job32秒。本地正式revenue-forecast已切main同步，旧rf-impl WIP原样保留在独立分支；三处已安装来源入口SHA与主线一致。不重派或写穿。MAIN运行旧generator已退出安装包b148123，229个不同case分步GREEN、真实PDF/TXT原件/来源事实保持且0新全文派生；CI37388329668已completed/success。质量/正式精选接口已发布绿。下方旧日期仅作追溯，不产生待办或签收。
 
-## 当前可立即并行的P5包
+## P5交付与独占目录（均已完成，不再派发）
 
 | 包 | 独占目录 | 接口与交接 | 何时开工 |
 |---|---|---|---|
@@ -153,4 +153,4 @@ G1-LEGACY 写集已关闭；G1 总阶段仍因 FF SourceRef v2 资格门而保�
 
 ## 2026-10-06 MAIN汇总更新
 
-P5三包均已收口且已发布，不再派发。MAIN共享路径修复96f44a1/精确CI37394193179全绿，生产旧派生7104文件、8191 handle和1490530旧span处置完成；DB3055841280→222408704 B，整个旧派生+DB净减5659443210 B，原件/17表来源事实保持。正式小收据见harness_lanes/results/s5_production_storage_acceptance_2026-10-06.json；恢复点和一次性操作目录已删除。下一MAIN独占S6 docs/hook核销与N4C，后者累计token cap答复仍待；外线不重复删库/重跑inventory、不处理owner WIP、不修改Dayu。
+P5三包均已收口且已发布，不再派发。MAIN共享路径修复96f44a1/精确CI37394193179全绿，生产旧派生7104文件、8191 handle和1490530旧span处置完成；DB3055841280→222408704 B，整个旧派生+DB净减5659443210 B，原件/17表来源事实保持。正式小收据见harness_lanes/results/s5_production_storage_acceptance_2026-10-06.json；恢复点和一次性操作目录已删除。S6 docs/hook/控制文件已收尾并发布e481578，精确CI37399248994一次全绿。下一MAIN独占N4C，累计token cap答复仍待；外线不重复删库/重跑inventory、不处理owner WIP、不修改Dayu。

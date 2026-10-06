@@ -1,5 +1,7 @@
 # S6：当前入口、门禁与运维说明收尾
 
+**状态：complete。**代码e481578872309f50141fcd2555b1e8a206bd7a47已发布master；[精确CI37399248994](https://github.com/zhengcb81/company-wiki/actions/runs/37399248994) attempt1 completed/success。38责任测试/当前12项smoke/显式架构检查/18链接GREEN，测试根恢复；原件、用户配置和RF owner均不改。下方为本节点施工追溯，不再开工。
+
 ## 2026-10-06 施工范围
 
 RF main与origin/main均6e6b817a，两份owner日志SHA未变。本节点只写company-wiki代码/文档；原件、来源库、用户source_acquisition配置及外仓不改。生产存储清理已完成，不再重复执行。

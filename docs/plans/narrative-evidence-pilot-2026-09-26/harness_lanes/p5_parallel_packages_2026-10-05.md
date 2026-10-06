@@ -2,7 +2,7 @@
 
 状态：**三卡均已交付、MAIN验收并发布，不再派发。** 本页保留2026-10-05开卡范围及交接格式；当前剩余工作属于MAIN，不是外线交付屏障。
 
-**2026-10-06最新复核：**FF外线ab9ce33完整包含于远端main758e8f4；STORAGE外线7ac1e3d/f8f414a经选择性吸收及修复进入master（集成9fa2166、后续96f44a1），不要求再merge旧分支。两外线工作树均干净，没有新增交付；GitHub官方API复核三个精确代码CI37385101051、37375836745、37394193179均attempt1 success。CWP本地/远端master均ed86940，实际生产清理及来源事实验证已完成，净释放5.659GB，见[生产结果](results/s5_production_storage_acceptance_2026-10-06.json)。不重复长测试或清理操作；MAIN下一动作仍S6说明/钩子残留核销，再回N4C。
+**2026-10-06最新复核：**FF外线ab9ce33完整包含于远端main758e8f4；STORAGE外线7ac1e3d/f8f414a经选择性吸收及修复进入master（集成9fa2166、后续96f44a1），不要求再merge旧分支。两外线工作树均干净，没有新增交付；GitHub官方API复核三个精确代码CI37385101051、37375836745、37394193179均attempt1 success。CWP本地/远端master均ed86940，实际生产清理及来源事实验证已完成，净释放5.659GB，见[生产结果](results/s5_production_storage_acceptance_2026-10-06.json)。不重复长测试或清理操作；S6说明/控制/钩子收尾已发布e481578、精确CI37399248994一次全绿，MAIN下一动作是N4C真实模型批次，累计token cap答复待定。
 
 **最新进度覆盖（2026-10-05）：**STORAGE已验收合入/发布e570daf、53个不同case分步GREEN，生产未删。FF交付ab9ce33及MAIN实际修复均已合入/推送main758e8f4，本地main同步/仅凭证未跟踪，53个不同节点case分步GREEN、37项进程责任包/三仓离线链/固定真实年报读取通过；精确CI37385101051 attempt1全部步骤GREEN，先前58568e7的Linux类型失败已具体修正，无盲rerun，[FF验收收据](results/p5_ff_main_acceptance_2026-10-05.json)。RF已验收并推main ca67eab7（默认链代码b110502f）；精确CI37391526925一次全绿、job32秒。本地正式revenue-forecast已切main同步，旧rf-impl WIP原样保留在独立分支；三处已安装来源入口SHA与主线一致。MAIN质量v2与正式精选检索1b0feb4已发布/精确CI绿，后者102个不同case分步GREEN；N4C模型cap问题不阻该离线迁移。下面f775406等为开卡基线，不是当前MAIN HEAD；三卡不重派。
 

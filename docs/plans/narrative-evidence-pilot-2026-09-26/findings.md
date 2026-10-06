@@ -2,6 +2,8 @@
 
 ## S6收尾实读（2026-10-06）
 
+- 完成态：e481578已发布，精确CI37399248994 attempt1 success；38集中测试、12项smoke及当前架构配置GREEN，三个测试根恢复，18当前链接有效。S6complete，唯一下一步N4C；预算答复待定，未开始新POST。保留driver确实存在tmp/n4c_provider_live_driver.py，但RF固定SHA是旧8a153f33，开批前需要对齐当前正式RF并先做零模型CLI导入验证。
+
 - RF远端/本地主线6e6b817a及两份owner日志SHA不变；CWP只保留用户配置dirty。当前README/运维说明推荐已冻结writer和旧模型，control旧Reviewer/lock规则没有运行代码引用，architecture规则仍有实际调用者。两旧cron壳未检查子命令退出且末尾echo假成功。先按s6_documentation_runtime_closeout.md集中收尾，不重复生产清理/长测试。
 - 四个当前smoke候选先跑4 passed/0.58s，数量不增加。实读wrapper发现help先加载配置且不显示自身provider/config参数；两项新反例2 RED/0.98s，修复为先输出两层help再退出，无生产配置/凭证加载。误读不存在narrative_model_config.py/source-export-v2.md，仅只读错误，后续定位实际narrative_http_model与v2 CLI。PowerShell写文档多一个EOF空行已修正；ARCHITECTURE真实Git路径为大写，链接按实际路径改。
 

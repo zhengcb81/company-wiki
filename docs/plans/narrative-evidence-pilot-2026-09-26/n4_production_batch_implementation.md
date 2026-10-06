@@ -1,6 +1,6 @@
 # N4：可运行的叙述批次、真实模型计量与持久恢复
 
-> **2026-10-06 当前交接（覆盖下方2026-10-03/05旧恢复点）：**P5-FF/STORAGE/RF已验收并发布，RF正式main6e6b817a与安装依赖一致；旧全量writer退出，存储节点正按总计划执行，不重做A/B、P5或三个并行档试验。真实N4C摘要POST尚未验收。正式MiMo为`mimo-v2.6-flash`（`https://token-plan-cn.xiaomimimo.com/v1`），DeepSeek为`deepseek-flash`（`https://api.deepseek.com`），均读取既有Config与环境密钥、8192/温度1.0；[配置只读收据](harness_lanes/results/n4c_flash_preflight_2026-10-05.json)两家GET200不等于摘要成功。旧`mimo-v2.5-pro`与401说明只作历史记录，不能据此再改模型或要求换key。
+> **2026-10-06 当前交接（覆盖下方2026-10-03/05旧恢复点）：**P5-FF/STORAGE/RF已验收并发布，RF正式main6e6b817a与安装依赖一致；旧全量writer退出，生产存储清理与S6说明/控制收尾已完成，e481578/CI37399248994一次全绿，不重做A/B、P5、清理或三个并行档试验。真实N4C摘要POST尚未验收。正式MiMo为`mimo-v2.6-flash`（`https://token-plan-cn.xiaomimimo.com/v1`），DeepSeek为`deepseek-flash`（`https://api.deepseek.com`），均读取既有Config与环境密钥、8192/温度1.0；[配置只读收据](harness_lanes/results/n4c_flash_preflight_2026-10-05.json)两家GET200不等于摘要成功。旧`mimo-v2.5-pro`与401说明只作历史记录，不能据此再改模型或要求换key。
 >
 > **最新累计预算恢复点：**[run04](harness_lanes/results/n4c_live_2026-10-05_run04.json)之后保守已占58,523 tokens/33,884 microUSD，另留历史FX余量2,764；60k只剩1,477 tokens，不能容纳配置8192的输出预留。160k累计token cap问题尚待答复，美元仍上限$0.10，不退未知账，不重启旧run清账。授权到达后执行既有driver的P07中文IR/T01英文电话会+零模型policy对照，provider分run、账本统一累计、RF实际读取与引用/原语言/恢复/总空间同一大节点验收；不把models清单、HTTP200或未生成final当完成证据。当前唯一施工顺序以[总计划Next Step](task_plan.md#next-step)为准。
 
