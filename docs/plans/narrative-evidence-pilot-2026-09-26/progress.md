@@ -1,5 +1,10 @@
 # Progress：激进简化实施
 
+## 2026-10-06 — RF MAIN稀疏环境根因确认
+
+- 前一目标turn为progress：两份P5交付重核精确CI/原件SHA，PWF 2145661已推送，正常pre-push GREEN。本轮fresh RF remote main仍8a153f33、MAIN树干净a74b9ceb。
+- 显式Set-Location后文件仍缺失；git sparse-checkout list及git ls-files -t证明MAIN旧审计树仅展开日志/UC，源码、tests、quality.yml均为skip-worktree。此前相对路径错误判断不充分，实际根因是稀疏checkout，不是产品RED。只展开MAIN专属干净树；owner/外包树不变，随后实跑默认CLI节点。
+
 ## 2026-10-06 — P5-FF / P5-STORAGE交付复核收口
 
 - 用户通知交付后重核原始handoff、Git ancestry与GitHub exact SHA：FF ab9ce33在main758e8f4中，STORAGE 9fa2166在master历史中；CI37385101051/37375836745均attempt1 completed/success。沿用已经执行的集中53个不同case分步GREEN及真实三仓/原件测试，不重复长包、不增加小节点门禁。
@@ -798,3 +803,31 @@ S0/N4A及S2模型预算基础、CLI阶段与CI修复已正常发布，当前CI�
 - 已正常commit/push b148123d1ada7d0d222574b6b5852f976c2985e8，静态commit与快速pre-push GREEN；用户配置SHA原样。精确CI37388329668进行中，待核结果后发纯PWF收尾。RF仍无HANDOFF，不碰WIP，下一步接收RF或生产只读预览。
 
 - S5生成器节点最终收口：精确代码b148123/CI37388329668 attempt1 completed/success，全部步骤GREEN，无rerun。本节点所有s5g*测试根已恢复absent；源配置原SHA保持。MAIN下一动作为RF默认迁移验收，未交付时仅做生产只读预览；0生产删除。代码CI以b148123为准，纯PWF [skip ci]收尾不替换该收据。
+
+## 2026-10-06 — P5-RF默认链与短CI主线节点
+
+- 稀疏树展开后新默认/真实CLI11 passed、1旧evaluate_review失败，18.27s。TDD短CI先2 RED/1旧opt-in skip，3.72s，修改后5 passed/0.92s。集中来源/核心计算107 passed、1新schema夹具误用source_id失败，16.10s；改primary_source_id后唯一失败及相关5 passed/7.23s，共108不同case分步GREEN。
+- 补强删除E2E的空目录假设：在真实catalog_dir/derived先创建三份旧文件和artifact行，实际删除后默认CLI仍raw-only。固定真实AMEC年报公开RF CLI三次成功+篡改一次拒绝，来源事实不变、原SHA不变、三文件/行删除仅在fixture、测试根恢复、0外部调用。
+- RF b110502f已正常推main；pre-commit静态与pre-push同CI精选107 passed/19.74s，保留原owner周日志SHA和rf-impl 242份WIP摘要。CI37391276302确认live，停留checkout未执行测试；未称CI绿。
+- root量化RF .planning47079、assurance1392、scripts51/tests151跟踪文件；新ca67eab7把daily checkout限定责任代码/配置（官方checkout文档验证），不删历史原件/记录。107 passed/18.17s正常push gate绿，首次推送GitHub remote500，复核远端后正常重试同commit；不是代码RED或盲CI rerun。
+- 默认E2E无env不skip，current pins为published FF758e8f4/CWP2145661；旧workflow byte签名专属测试退出默认收集，Gitrevision保留。每天一Ubuntu、一个pytest、无全量coverage第二遍/Windows历史审计/安装同步/生产库门/人工签收。
+- 只读S5真实inventory已启动，等待实际清单；无生产删除/span prune/VACUUM。模型预算问题仍独立，不阻本节点。
+
+## 2026-10-06 — RF实际发布与部署闭环
+
+- ca67eab7正常推main，GitHub CI37391526925 attempt1全部步骤completed/success，单job32秒，checkout1秒、安装7秒、兄弟仓7秒、共享检查11秒。107项本地pre-push19.12秒。未把缓存jobs null当全绿；加fresh query后核完整步骤。
+- RF正式root已切main与远端同SHA；fcap祖先校验exit0。旧rf-impl只更名分支，242条status和1704098B staged diff的SHA完全不变；owner两weekly日志SHA未变。三处installed source_preparation实读都为19e329c5…，无需额外安装改写；sandbox拒绝读不能当副本不存在。
+- 正式完整收据p5_rf_main_acceptance_2026-10-06.json。S5只读inventory session30784仍confirmed live，未删除生产derived/spans或压缩DB；随后按实际parser/引用清单推进。
+
+## 2026-10-06 — 存储范围与安装依赖补核
+
+- 实读readonly/immutable库聚合：db3055841280B，新narrative versions0；legacy spans1490530，parser/version为antiword1.0.0=16、dayu_docling1.10.0=6230、html_markdownify1.0.0=6、openpyxl3.1.5=22、pdf_page_aware_core1.26.7=1479827、plain_text1.0.0=4040、python_docx1.0.0=28、structured_text1.0.0=361。这里只聚合，不删除，不把页数变化伪称释放空间。
+- installed入口SHA一致不能证明整个package一致。进一步实读72份生产代码/config/schema/SKILL，发现每个独立安装7项滞后（research coverage/drivers及5份schema说明）；仅同步这14份已发布文件到agents/codex，claude是agents别名，随后全部72逐字节一致。安装config/output未变；正式receipt修正“无安装写入”的先前局部观察，记录实际部署。
+- inventory session30784仍live；源码证实正在做单次旧文件SHA、百万legacy表流式摘要和完整性，不写production DB/原件。观察超时不重启。下一存储选择须覆盖明确旧parser，并保留实际refs/unknown表，不凭这份计数立即删。
+
+## 2026-10-06 — 生产inventory完成、修正下一施工点
+
+- session30784已terminal exit0/succeeded；manifest5588419B保存tmp/s5-storage-20261006/manifest.json供恢复处置，不把一次性大清单纳入Git。小型preflight正式JSON只列聚合与缺口。原件/生产库未修改。
+- 新生产反例：1712 excluded含1477个直接parser旧行，全部同document_id/同候选路径，814 hash相同、663旧hash失配；另235个空generator/version summary。当前工具只退休候选row后unlink会留下共享路径旧handle。candidate_bytes还因managed成员重合高于physical derived；不能立即apply或按行总和报空间收益。
+- 下一大节点明确TDD共享路径原子退休/未知现代alias拒绝/空标签旧summary判据/物理路径计量。具体步骤已写S5/S6细则，不多加小节点门、不重新盘点全legacy表，不执行整库恢复演练。
+- RF收尾6e6b817a已正常提交推送，本地main同步；精确代码ca67eab7的CI37391526925保持全绿，纯文档未另触发长CI。两周日志SHA再次相同。目标active，尚未完成生产清理与N4C真实模型批次。

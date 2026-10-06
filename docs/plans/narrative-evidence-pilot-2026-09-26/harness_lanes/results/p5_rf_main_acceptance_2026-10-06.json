@@ -1,0 +1,111 @@
+{
+  "schema_version": "cwp-rf-main-integration/1",
+  "date": "2026-10-06",
+  "status": "published_green",
+  "delivery_head": "a74b9ceb8aa97072f41992a2bbf062809c7f16da",
+  "delivery_code": "31fe65e6bf673a29f1ab3ac6f7b64248246ca6a2",
+  "main_code": "b110502faab3ffc22930240e66d72d59699c2c2f",
+  "published_head": "6e6b817a1a6e4567293a4dcb835815f3be508a03",
+  "local_main_synced": true,
+  "owner_directory": "C:/Users/郑曾波/Projects/revenue-forecast",
+  "ci": {
+    "run_id": 37391526925,
+    "attempt": 1,
+    "head_sha": "ca67eab7cfa994328c8a782b3fb30c6a95e2e45d",
+    "conclusion": "success",
+    "all_steps_success": true,
+    "job_seconds": 32,
+    "checkout_seconds": 1,
+    "dependency_install_seconds": 7,
+    "sibling_seconds": 7,
+    "shared_checks_seconds": 11,
+    "url": "https://github.com/zhengcb81/revenue-forecast/actions/runs/37391526925"
+  },
+  "tests": {
+    "baseline": {
+      "passed": 11,
+      "failed": 1,
+      "seconds": 18.27
+    },
+    "fast_ci_tdd": {
+      "failed": 2,
+      "skipped": 1,
+      "seconds": 3.72
+    },
+    "node_first": {
+      "passed": 107,
+      "failed": 1,
+      "seconds": 16.1
+    },
+    "fixture_correction": {
+      "passed": 5,
+      "seconds": 7.23
+    },
+    "distinct_cases_green_across_runs": 108,
+    "single_108_case_run_claimed": false,
+    "normal_pre_push": {
+      "passed": 107,
+      "seconds": 19.12
+    },
+    "real_default_cli_reads": 3,
+    "real_tamper_refusals": 1
+  },
+  "raw": {
+    "sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+    "bytes": 9165875,
+    "metadata": "labelled synthetic fixture",
+    "original_unchanged": true,
+    "source_facts_unchanged": true,
+    "legacy_files_deleted_in_fixture": 3,
+    "legacy_rows_deleted_in_fixture": 3
+  },
+  "protection": {
+    "weekly_alert_sha256": "b617b0b00ff1a758b5b46299e3e5db3115f56efd90d212154abe988e5ea9fee5",
+    "weekly_manifest_sha256": "0d55cb8c81f12b663e330819da3037bb69ce8564ac41a686b578a99f78f948bf",
+    "rf_impl_wip_entries": 242,
+    "rf_impl_status_sha256": "06aa41622133a616767a1c5b4e0e835748b17c526c4a44ba93e63a63684370a1",
+    "rf_impl_staged_sha256": "7037dddd90e0b66989de7dd03ca19614a9e62542370065175acd2d4fdeb7892a",
+    "rf_impl_branch_preserved": "codex/rf-preserved-main-wip-20261006",
+    "wip_bytes_unchanged": true,
+    "installed_source_preparation_sha256": "19e329c56265b46a96a33886b4eabb52fbadda4564b995cbb114e0ac2cd034e6",
+    "installed_source_entry_verified": [
+      ".agents",
+      ".codex",
+      ".claude"
+    ],
+    "installation_writes_executed": 14,
+    "installed_production_files_per_unique_root": 72,
+    "unique_installed_roots": 2,
+    "installed_production_all_equal": true,
+    "installed_configuration_unchanged": true,
+    "installed_output_unchanged": true
+  },
+  "cleanup": {
+    "test_roots_restored_absent": [
+      "rfmcurrent",
+      "rfmfastred",
+      "rfmfastgreen",
+      "rfmnode",
+      "rfmfix",
+      "rfmreal"
+    ],
+    "production_originals_deleted": 0,
+    "production_derived_deleted": 0,
+    "production_spans_deleted": 0,
+    "vacuum_executed": false
+  },
+  "calls": {
+    "provider_http": 0,
+    "model_posts": 0
+  },
+  "notes": [
+    "Sparse MAIN worktree expanded before actual tests; earlier file-not-found was not product RED.",
+    "First checkout-heavy run superseded by sparse checkout configuration; no blind rerun.",
+    "One push returned GitHub remote500; same commit successfully retried after remote verification.",
+    "Historical workflow byte-signature tests retired; current byte/identity/asof/forecast behavior retained.",
+    "Broader installation read found seven stale code/reference files per unique install after entry hash matched; synchronized only those14 files and then verified all72 production files equal. Claude resolves to agents."
+  ],
+  "next": "Finish current read-only production inventory, classify exact legacy parser scope/references, then run the planned storage retirement node.",
+  "published_code_head": "ca67eab7cfa994328c8a782b3fb30c6a95e2e45d",
+  "documentation_closeout_head": "6e6b817a1a6e4567293a4dcb835815f3be508a03"
+}

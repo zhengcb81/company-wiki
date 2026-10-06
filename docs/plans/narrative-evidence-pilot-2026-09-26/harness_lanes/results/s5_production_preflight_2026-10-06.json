@@ -1,0 +1,112 @@
+{
+  "schema_version": "cwp-storage-production-preflight/1",
+  "date": "2026-10-06",
+  "status": "needs_shared_path_fix",
+  "inventory_succeeded": true,
+  "production_cleanup_executed": false,
+  "manifest_bytes": 5588419,
+  "aggregate": {
+    "candidate_bytes": 2826149019,
+    "candidate_count": 6479,
+    "dangling_record_count": 0,
+    "derived_file_count": 7104,
+    "derived_files_bytes": 2826010634,
+    "excluded_count": 1712,
+    "protected_object_bytes": 0,
+    "protected_object_files": 0,
+    "source_facts_table_count": 17,
+    "span_parser_counts": [
+      {
+        "count": 16,
+        "parser_name": "antiword",
+        "parser_version": "1.0.0"
+      },
+      {
+        "count": 6230,
+        "parser_name": "dayu_docling",
+        "parser_version": "1.10.0"
+      },
+      {
+        "count": 6,
+        "parser_name": "html_markdownify",
+        "parser_version": "1.0.0"
+      },
+      {
+        "count": 22,
+        "parser_name": "openpyxl",
+        "parser_version": "3.1.5"
+      },
+      {
+        "count": 1479827,
+        "parser_name": "pdf_page_aware_core",
+        "parser_version": "1.26.7"
+      },
+      {
+        "count": 4040,
+        "parser_name": "plain_text",
+        "parser_version": "1.0.0"
+      },
+      {
+        "count": 28,
+        "parser_name": "python_docx",
+        "parser_version": "1.0.0"
+      },
+      {
+        "count": 361,
+        "parser_name": "structured_text",
+        "parser_version": "1.0.0"
+      }
+    ],
+    "span_total": 1490530,
+    "unreferenced_bytes": 828582,
+    "unreferenced_count": 267
+  },
+  "parser_counts": [
+    {
+      "count": 16,
+      "parser_name": "antiword",
+      "parser_version": "1.0.0"
+    },
+    {
+      "count": 6230,
+      "parser_name": "dayu_docling",
+      "parser_version": "1.10.0"
+    },
+    {
+      "count": 6,
+      "parser_name": "html_markdownify",
+      "parser_version": "1.0.0"
+    },
+    {
+      "count": 22,
+      "parser_name": "openpyxl",
+      "parser_version": "3.1.5"
+    },
+    {
+      "count": 1479827,
+      "parser_name": "pdf_page_aware_core",
+      "parser_version": "1.26.7"
+    },
+    {
+      "count": 4040,
+      "parser_name": "plain_text",
+      "parser_version": "1.0.0"
+    },
+    {
+      "count": 28,
+      "parser_name": "python_docx",
+      "parser_version": "1.0.0"
+    },
+    {
+      "count": 361,
+      "parser_name": "structured_text",
+      "parser_version": "1.0.0"
+    }
+  ],
+  "excluded_candidate_path_alias_count": 1477,
+  "alias_same_document_count": 1477,
+  "alias_hash_matches_current": 814,
+  "unknown_separate_path_count": 235,
+  "next": "TDD shared-path classification/atomic alias retirement and unique-byte accounting before production apply; classify235 blank-generator summary rows explicitly.",
+  "operational_manifest": "C:/Users/郑曾波/Projects/company-wiki/tmp/s5-storage-20261006/manifest.json"
+}

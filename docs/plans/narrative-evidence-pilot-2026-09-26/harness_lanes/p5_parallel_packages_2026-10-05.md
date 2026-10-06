@@ -2,7 +2,7 @@
 
 状态：**in_progress，用户于2026-10-05确认三卡均已开工**。2026-10-05只读核对后建立；不是旧N4-T1/T2、StockWiki narrative consumer或SPACE-S5审计的重复任务。MAIN离线S5与交付验收继续，N4C仅模型额度待答复；三个外线独占写集保留，收到交付后逐包验收合入。
 
-**最新进度覆盖（2026-10-05）：**STORAGE已验收合入/发布e570daf、53个不同case分步GREEN，生产未删。FF交付ab9ce33及MAIN实际修复均已合入/推送main758e8f4，本地main同步/仅凭证未跟踪，53个不同节点case分步GREEN、37项进程责任包/三仓离线链/固定真实年报读取通过；精确CI37385101051 attempt1全部步骤GREEN，先前58568e7的Linux类型失败已具体修正，无盲rerun，[FF验收收据](results/p5_ff_main_acceptance_2026-10-05.json)。RF交付已到达：干净a74b9ceb（代码31fe65e6），MAIN独立整合树已ff-only接入；远端main仍8a153f33，尚未完成MAIN验收/发布。MAIN质量v2与正式精选检索1b0feb4已发布/精确CI绿，后者102个不同case分步GREEN；N4C模型cap问题不阻该离线迁移。下面f775406等为开卡基线，不是当前MAIN HEAD；三卡不重派。
+**最新进度覆盖（2026-10-05）：**STORAGE已验收合入/发布e570daf、53个不同case分步GREEN，生产未删。FF交付ab9ce33及MAIN实际修复均已合入/推送main758e8f4，本地main同步/仅凭证未跟踪，53个不同节点case分步GREEN、37项进程责任包/三仓离线链/固定真实年报读取通过；精确CI37385101051 attempt1全部步骤GREEN，先前58568e7的Linux类型失败已具体修正，无盲rerun，[FF验收收据](results/p5_ff_main_acceptance_2026-10-05.json)。RF已验收并推main ca67eab7（默认链代码b110502f）；精确CI37391526925一次全绿、job32秒。本地正式revenue-forecast已切main同步，旧rf-impl WIP原样保留在独立分支；三处已安装来源入口SHA与主线一致。MAIN质量v2与正式精选检索1b0feb4已发布/精确CI绿，后者102个不同case分步GREEN；N4C模型cap问题不阻该离线迁移。下面f775406等为开卡基线，不是当前MAIN HEAD；三卡不重派。
 
 正式精选检索已发布1b0feb4、CI37381429717 attempt1 success。FF预验收发现的cap、stdin期限、单流overflow/双EOF继续运行、孙持pipe和早派生问题均已通过实际子进程复核；[原预验收细则](results/p5_ff_main_preacceptance_2026-10-05.md)保留历史过程，新状态以MAIN收口记录为准。三仓线已汇合，没有三线全交付屏障。
 

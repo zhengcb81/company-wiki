@@ -655,3 +655,22 @@ e570daf已发布，精确CI37375836745 success。53个不同case分步GREEN。�
 - 退出的是安装包全量生成能力，历史测试造数器尚保留；它们复用唯一原文parser、不被343份生产Python导入。2.826GB生产derived及3.056GB来源库尚未删除/收缩；剩余实际默认消费者迁移是RF外包卡。
 
 - S5生成器节点最终收口：精确代码b148123/CI37388329668 attempt1 completed/success，全部步骤GREEN，无rerun。本节点所有s5g*测试根已恢复absent；源配置原SHA保持。MAIN下一动作为RF默认迁移验收，未交付时仅做生产只读预览；0生产删除。代码CI以b148123为准，纯PWF [skip ci]收尾不替换该收据。
+
+## 2026-10-06 — RF实际发布与部署闭环
+
+- ca67eab7正常推main，GitHub CI37391526925 attempt1全部步骤completed/success，单job32秒，checkout1秒、安装7秒、兄弟仓7秒、共享检查11秒。107项本地pre-push19.12秒。未把缓存jobs null当全绿；加fresh query后核完整步骤。
+- RF正式root已切main与远端同SHA；fcap祖先校验exit0。旧rf-impl只更名分支，242条status和1704098B staged diff的SHA完全不变；owner两weekly日志SHA未变。三处installed source_preparation实读都为19e329c5…，无需额外安装改写；sandbox拒绝读不能当副本不存在。
+- 正式完整收据p5_rf_main_acceptance_2026-10-06.json。S5只读inventory session30784仍confirmed live，未删除生产derived/spans或压缩DB；随后按实际parser/引用清单推进。
+
+## 2026-10-06 — 存储范围与安装依赖补核
+
+- 实读readonly/immutable库聚合：db3055841280B，新narrative versions0；legacy spans1490530，parser/version为antiword1.0.0=16、dayu_docling1.10.0=6230、html_markdownify1.0.0=6、openpyxl3.1.5=22、pdf_page_aware_core1.26.7=1479827、plain_text1.0.0=4040、python_docx1.0.0=28、structured_text1.0.0=361。这里只聚合，不删除，不把页数变化伪称释放空间。
+- installed入口SHA一致不能证明整个package一致。进一步实读72份生产代码/config/schema/SKILL，发现每个独立安装7项滞后（research coverage/drivers及5份schema说明）；仅同步这14份已发布文件到agents/codex，claude是agents别名，随后全部72逐字节一致。安装config/output未变；正式receipt修正“无安装写入”的先前局部观察，记录实际部署。
+- inventory session30784仍live；源码证实正在做单次旧文件SHA、百万legacy表流式摘要和完整性，不写production DB/原件。观察超时不重启。下一存储选择须覆盖明确旧parser，并保留实际refs/unknown表，不凭这份计数立即删。
+
+## 2026-10-06 — 生产inventory完成、修正下一施工点
+
+- session30784已terminal exit0/succeeded；manifest5588419B保存tmp/s5-storage-20261006/manifest.json供恢复处置，不把一次性大清单纳入Git。小型preflight正式JSON只列聚合与缺口。原件/生产库未修改。
+- 新生产反例：1712 excluded含1477个直接parser旧行，全部同document_id/同候选路径，814 hash相同、663旧hash失配；另235个空generator/version summary。当前工具只退休候选row后unlink会留下共享路径旧handle。candidate_bytes还因managed成员重合高于physical derived；不能立即apply或按行总和报空间收益。
+- 下一大节点明确TDD共享路径原子退休/未知现代alias拒绝/空标签旧summary判据/物理路径计量。具体步骤已写S5/S6细则，不多加小节点门、不重新盘点全legacy表，不执行整库恢复演练。
+- RF收尾6e6b817a已正常提交推送，本地main同步；精确代码ca67eab7的CI37391526925保持全绿，纯文档未另触发长CI。两周日志SHA再次相同。目标active，尚未完成生产清理与N4C真实模型批次。

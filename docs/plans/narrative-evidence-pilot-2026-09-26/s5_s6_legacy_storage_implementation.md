@@ -4,7 +4,22 @@
 
 ## 2026-10-06交付验收恢复点
 
-P5-FF与P5-STORAGE均已验收并发布，精确CI已再核success。CWP旧生成器b148123已退出生产安装包；RF交付已到达：干净a74b9ceb（代码31fe65e6），MAIN独立整合树已ff-only接入；远端main仍8a153f33，尚未完成MAIN验收/发布。生产derived/span/VACUUM仍未执行，空间收益须实际处置后测量。下一步复用[P5-RF整合细则](harness_lanes/results/p5_rf_main_integration_plan_2026-10-06.md)，不重跑工具已签收的长验收。
+P5-FF与P5-STORAGE均已验收并发布，精确CI已再核success。CWP旧生成器b148123已退出生产安装包；RF已验收并推main ca67eab7（默认链代码b110502f）；精确CI37391526925一次全绿、job32秒。本地正式revenue-forecast已切main同步，旧rf-impl WIP原样保留在独立分支；三处已安装来源入口SHA与主线一致。生产derived/span/VACUUM仍未执行，空间收益须实际处置后测量。下一步复用[P5-RF整合细则](harness_lanes/results/p5_rf_main_integration_plan_2026-10-06.md)，不重跑工具已签收的长验收。
+
+## 2026-10-06生产盘点后必须收口的共享路径问题
+
+RF默认链已经main发布/精确CI绿，本地与安装生产依赖同步。一次inventory已成功结束，真实aggregate见[harness_lanes/results/s5_production_preflight_2026-10-06.json](harness_lanes/results/s5_production_preflight_2026-10-06.json)。操作manifest为tmp/s5-storage-20261006/manifest.json（5588419B，恢复输入，不提交Git）；不重复多分钟的全legacy表摘要盘点，只对修正相关范围核验。
+
+当前6479个候选artifact指向6479个主文件；1712个excluded中1477个直接parser标签行与候选共享同路径/同document_id（0跨document冲突），其中814哈希相同、663旧哈希已失配；另235个summary行generator/version为空。这不是未知原件，而是需要验证/退休的旧派生元数据。按现工具直接apply会留下1477条completed/partial等别名指向已删除文件；生产不能据旧53项fixture签收跳过这项具体缺口。
+
+MAIN下一集中实现/验收：
+
+1. TDD使用小型真实schema/原文夹具：已识别旧候选与直接parser历史别名共享一个文件，退休时全部相关旧handle在同一事务不可消费后才unlink；同路径的失配旧hash仍保留诊断事实，不假造校验通过。任一共享行属于未知现代generator/非legacy角色/跨document冲突时，整个物理对象拒绝删除，不能只排除该行后删文件。测试恢复/幂等及范围外原件/新final不变。
+2. 根据历史parser/writer代码和已核生产标签，明确识别旧direct parser生成normalized的名称与版本，补上235条空标签summary的可证明路径/role规则。保持新NarrativeRef对象/其他角色/未知对象受保护；不要把所有unknown_generator放开，不新增人工签收或权限flag。
+3. 候选/实际释放字节按规范化物理路径去重。sections的managed成员可能与其他条目重合，禁止重复累计/重复unlink导致误报。已知candidate_bytes2826149019大于实际derived2826010634，显示不能把行级字节总和当物理释放量。
+4. 在已有catalog锁与事务内复核整个路径的当前行集合及身份；元数据退休必须涵盖受影响旧别名，恢复重试用原manifest/当前DB事实。先修工具/责任测试再正常发布及精确CI；这一组是存储大节点的一部分，不逐helper审批。
+5. 复用已完成RF真实年报/原件transport与工具真实样本签收，新增相关共享路径/空标签/unique-byte责任包集中验证。随后以修正工具对现manifest做一次范围预览，保存17张来源事实/新final的小摘要恢复点，再执行retire-derived→明确8类legacy span scope prune→VACUUM；实际引用保留集合和未知表保持，不完整备份或演练恢复3GB库。
+6. 原件、来源版本/位置/公开日/撤回事实与当前新final保持；0模型/外部下载。实际物理释放和DB shrink分别写小收据，测试材料finally恢复，生产manifest在成功收尾后删除。不能把当前只读盘点说成生产清理完成。
 
 ## 依据与边界
 

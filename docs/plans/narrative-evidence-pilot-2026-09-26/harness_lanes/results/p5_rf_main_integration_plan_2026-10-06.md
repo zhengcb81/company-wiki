@@ -1,5 +1,9 @@
 # P5-RF MAIN 整合节点 — 2026-10-06
 
+## 当前结果
+
+本整合节点已完成：RF main ca67eab7、本地正式目录同步、精确CI37391526925 attempt1全部步骤GREEN/job32秒；真实原年报公开默认CLI/删除旧派生/篡改恢复通过。旧rf-impl工作树242份WIP、两份weekly日志原字节保持；三处安装来源入口SHA实读与主线一致，未执行安装写入。详细实际计数/环境错误/根恢复见[p5_rf_main_acceptance_2026-10-06.json](p5_rf_main_acceptance_2026-10-06.json)。下方开工事实与顺序为历史，存储生产处置尚未执行。
+
 ## 已核事实和单一目标
 
 交付树 `cwp-lanes-20261005/rf-source-v2` 干净，代码31fe65e6、报告a74b9ceb，均基于已发布8a153f33但尚未push。9项TDD及98责任回归、2项公开CLI已由外线实跑，MAIN复用收据，不重跑全仓/生产数据包。当前FF main758e8f4、CWP master f65e8c9（生成器代码b148123），均已发布/精确CI绿。
