@@ -74,3 +74,7 @@ MAIN先行材料：[0.3.2冻结final兼容](n6_main_compatibility_implementation
 首次完整基准18/33，但有年报G04回退和混合IR噪声；已保留报告与RED，不能当S7收官。责任修正后最终基准执行中，最终覆盖及remaining见n6_candidate_main_acceptance_2026-10-07.md及结果JSON。后续施工以最终逐点差距为准，不重派已交卡，不重复旧兼容长测。重点剩余：融资/招股的具体项目/产能与行业事实阶段归因，以及S08数字编号Q&A/混合cell的可回放拆分（必须先写parser/fragment/旧final合同测试，不能静默改变0.1.0解析去掩盖噪声）。parser版本若确需升级，由MAIN统一梳理原locator旧回放/批次身份传播，消费者继续pathless不猜目录。
 
 每个后续缺口先在同原件有限表页做parsed/candidate/selected小探针，保留原golden/hash/33分母，附一般表达反例再修责任层；修成一组后才跑受影响真实入口或全九样本节点，避免一helper一全表。四个scope/纯财务点继续按33点解释记录，不强行补provider前言或财务金额。此质量卡仍in_progress，工具/传输与具体业务覆盖分别验收。
+
+## 2026-10-07 发布已完成（覆盖前述等待状态）
+
+候选actual merge e8c645e7afa6e2e60ddfa532e612ba0580d15560已推master，交付f31cc0d为主线祖先。精确CI37547043642 attempt1全部job/step success，job112553429162用时53秒。正常commit/pre-push绿，0日常长测试新增；原件/用户配置/RF三owner/外线保护保持，8个本次tmp根恢复absent。最终nine-doc21/33、old-full零回退、重复3、764定位零失败；269责任项+11真实/兼容/升级节点绿。N6三线实施交付已接收发布，S7继续处理验收单明确的9个业务漏点与3噪声，不冒称整体质量已全达标。[完整收据](harness_lanes/results/n6_candidate_main_acceptance_2026-10-07.json)。

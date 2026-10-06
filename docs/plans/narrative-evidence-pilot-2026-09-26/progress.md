@@ -1117,3 +1117,9 @@ S08新增噪声实证来自一个orphan_answer_needs_review的pdf_table_qa_fragm
 最终九样本全表372.044秒：21/33（旧12/33）、optional5/17（旧4/17），全部旧full无回退，764 locator/0失败，重复3（旧48），精选66195B，scratch峰值61277B。正式业务节点+旧9+升级1共11项66.48秒绿。业务/项目上下文解释子集20/29（不改33分母），remaining9个业务点详见验收单；3噪声为年报重复1与S08 orphan cell两条套话，保留原标注。实现可正常合入，S7语义整改不complete。
 
 已验证绝对路径均在本仓tmp且无root/子级reparse，n6cr/ct/ce与n6q-input/scratch/final-scratch/report/final-report均恢复absent；自己的pytest新副本、DB、包装配置/报告临时副本删除，保留≤2MiB小报告/逐点收据，原件与RF三owner/user config保护不变。初次清理PowerShell foreach直接pipe语法错误发生在任何删除前，包数组后执行成功；不碰其他并发tmp。准备正常merge commit/push，日常CI没有新增长套件。
+
+正常merge commit/pre-commit全部通过，e8c645e7afa6e2e60ddfa532e612ba0580d15560已实际推master；短pre-push合同包绿。f31cc0d候选分支已为master祖先，user source_acquisition SHA3609e707仍独立dirty，外线工作树仍干净f31cc0d。精确CI37547043642已启动，等待全部步骤结论后补最终小收据；未用旧DOCSET CI作验收。报告运行时8个源文件SHA与合入工作树一致，另记录实际published Git blob SHA（避免把Windows换行差异当代码变化）。
+
+## 2026-10-07 发布已完成（覆盖前述等待状态）
+
+候选actual merge e8c645e7afa6e2e60ddfa532e612ba0580d15560已推master，交付f31cc0d为主线祖先。精确CI37547043642 attempt1全部job/step success，job112553429162用时53秒。正常commit/pre-push绿，0日常长测试新增；原件/用户配置/RF三owner/外线保护保持，8个本次tmp根恢复absent。最终nine-doc21/33、old-full零回退、重复3、764定位零失败；269责任项+11真实/兼容/升级节点绿。N6三线实施交付已接收发布，S7继续处理验收单明确的9个业务漏点与3噪声，不冒称整体质量已全达标。[完整收据](harness_lanes/results/n6_candidate_main_acceptance_2026-10-07.json)。

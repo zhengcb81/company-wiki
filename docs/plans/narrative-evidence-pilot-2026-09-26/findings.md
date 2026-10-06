@@ -898,3 +898,7 @@ build_batch_events确用request中selector/parser/prompt hash划新身份；正�
 初次full18/33不作为最终完成证明；已保留报告。S08两噪声实读同一219字orphan_answer cell，含数字4/5题与接待套话，旧问答parser未分段；保留质量诊断与原golden，后续解析责任整改，不能为噪声删掉占比事实或静默篡改旧parser回放。全文→永久MD没有恢复，此次仅tmp解析与小报告。
 
 最终正式全表在集中修正后21/33、optional5/17，旧所有full无回退；业务/项目上下文20/29只是解释子集，原正式33分母不变。764定位0失败、重复3、精选66195B；372.044秒只用于大节点、非日常CI。明确remaining9与IR两套话/年报重复1进入S7后续；原required3个scope漏项及incidental guidance命中不当业务增益。详细逐点对照、8源模块精确SHA、原件9SHA、user config/生产配置/RF三owner和scratch恢复在n6_candidate_main_acceptance_2026-10-07.json。
+
+## 2026-10-07 发布已完成（覆盖前述等待状态）
+
+候选actual merge e8c645e7afa6e2e60ddfa532e612ba0580d15560已推master，交付f31cc0d为主线祖先。精确CI37547043642 attempt1全部job/step success，job112553429162用时53秒。正常commit/pre-push绿，0日常长测试新增；原件/用户配置/RF三owner/外线保护保持，8个本次tmp根恢复absent。最终nine-doc21/33、old-full零回退、重复3、764定位零失败；269责任项+11真实/兼容/升级节点绿。N6三线实施交付已接收发布，S7继续处理验收单明确的9个业务漏点与3噪声，不冒称整体质量已全达标。[完整收据](harness_lanes/results/n6_candidate_main_acceptance_2026-10-07.json)。

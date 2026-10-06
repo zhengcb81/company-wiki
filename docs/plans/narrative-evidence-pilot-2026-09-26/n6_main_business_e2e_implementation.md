@@ -43,3 +43,7 @@ python -B -m pytest -p no:cacheprovider --basetemp tmp/n6be tests/integration/te
 ## 2026-10-07 当前真实节点已执行
 
 实际0.4.0候选/预算组合后真实年报S01、IR S07、原始英文TXT S09经configured Worker/outbox→CWP→导出的已提交RF6e6b817a consumer→search/exact→同run恢复通过；四个业务断言（EPI量产验证、境内22%、中试线计划、capacity constraint）全部full，不删断言凑绿。三次本地loopback POST，原语言、不翻译、0供应商/费用。首次两次因产品选材失败而RED，按句补全理由/组和预算责任层修正后，真实节点+冻结旧final9+实际AUTO升级1共11 passed/66.48秒。框架与新selector的业务路径现已实测；不能把这当所有文档覆盖或供应商摘要质量。最终基准剩余项与精确发布CI跟随n6_candidate_main_acceptance_2026-10-07.md，不再等待候选bootstrap。
+
+## 2026-10-07 发布已完成（覆盖前述等待状态）
+
+候选actual merge e8c645e7afa6e2e60ddfa532e612ba0580d15560已推master，交付f31cc0d为主线祖先。精确CI37547043642 attempt1全部job/step success，job112553429162用时53秒。正常commit/pre-push绿，0日常长测试新增；原件/用户配置/RF三owner/外线保护保持，8个本次tmp根恢复absent。最终nine-doc21/33、old-full零回退、重复3、764定位零失败；269责任项+11真实/兼容/升级节点绿。N6三线实施交付已接收发布，S7继续处理验收单明确的9个业务漏点与3噪声，不冒称整体质量已全达标。[完整收据](harness_lanes/results/n6_candidate_main_acceptance_2026-10-07.json)。

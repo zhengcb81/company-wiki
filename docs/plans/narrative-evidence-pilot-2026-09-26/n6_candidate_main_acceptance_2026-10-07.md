@@ -32,3 +32,7 @@
 - 两次benchmark的scratch与本次8个测试/包装根均恢复absent；小报告与逐点对照收据保存，原件0删除/修改、外仓/owner/生产配置零写、0供应商/下载/费用。正常并线提交推送与精确CI随后写入同一收据。
 
 [最终全表报告](harness_lanes/results/n6_combined_quality_final_2026-10-07.json)、[MAIN逐点对照/保护/发布收据](harness_lanes/results/n6_candidate_main_acceptance_2026-10-07.json)。实现集中验收本地passed；S7仍in_progress，不能以三张外包卡结束冒充整体资料质量全部完成。
+
+## 2026-10-07 发布已完成（覆盖前述等待状态）
+
+候选actual merge e8c645e7afa6e2e60ddfa532e612ba0580d15560已推master，交付f31cc0d为主线祖先。精确CI37547043642 attempt1全部job/step success，job112553429162用时53秒。正常commit/pre-push绿，0日常长测试新增；原件/用户配置/RF三owner/外线保护保持，8个本次tmp根恢复absent。最终nine-doc21/33、old-full零回退、重复3、764定位零失败；269责任项+11真实/兼容/升级节点绿。N6三线实施交付已接收发布，S7继续处理验收单明确的9个业务漏点与3噪声，不冒称整体质量已全达标。[完整收据](harness_lanes/results/n6_candidate_main_acceptance_2026-10-07.json)。

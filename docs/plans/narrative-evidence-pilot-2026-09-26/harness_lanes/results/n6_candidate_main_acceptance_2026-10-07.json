@@ -1,11 +1,11 @@
 {
   "schema_version": "n6-candidate-main-acceptance/1",
-  "status": "local_acceptance_passed_pending_publish",
+  "status": "published_exact_ci_passed",
   "lane_head": "f31cc0d4f012d5a73773b270008d0aa84939394a",
   "implementation_head": "9a4b81518d7b966744fdcce9768c801686e83351",
   "selector_version": "0.4.0",
   "parser_version": "0.1.0",
-  "code_sha": null,
+  "code_sha": "e8c645e7afa6e2e60ddfa532e612ba0580d15560",
   "red": {
     "initial_boundary_failed": 9,
     "initial_boundary_passed": 2,
@@ -694,7 +694,107 @@
     "tmp/n6q-report.json": "restored absent",
     "tmp/n6q-final-report.json": "restored absent"
   },
-  "ci": null,
+  "ci": {
+    "id": 37547043642,
+    "head_sha": "e8c645e7afa6e2e60ddfa532e612ba0580d15560",
+    "status": "completed",
+    "conclusion": "success",
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/37547043642",
+    "run_attempt": 1,
+    "jobs": [
+      {
+        "id": 112553429162,
+        "name": "Fast checks (Python 3.12)",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-10-06T23:31:43Z",
+        "completed_at": "2026-10-06T23:32:36Z",
+        "seconds": 53.0,
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run actions/checkout@v4",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Set up Python 3.12",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Install dependencies",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Ruff lint",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Strict type check on contract modules",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Compileall and config doctor",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Unit tests",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Unit test failure summary",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Focused contract tests",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Focused contract failure summary",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "CLI smoke test",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Scan for hardcoded secrets",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Set up Python 3.12",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Run actions/checkout@v4",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success"
+          }
+        ]
+      }
+    ]
+  },
   "runtime_source_sha256": {
     "src/company_wiki/source_catalog/n6_candidate_completion.py": "71cd2996d3cc3a6fa9a4309a7246df2914511717178401d81d68dd00e02391cb",
     "src/company_wiki/source_catalog/n6_candidate_operating_facts.py": "fd7a8dff58699f77ec7ca2328a64a9c73d154b07654f388dfb4678bfce553a44",
@@ -704,5 +804,15 @@
     "src/company_wiki/source_catalog/narrative_neighbors.py": "3c6f735fd034caef8074b4f70673b0708be00e9bb6415043fd6cfd4b958a1ade",
     "src/company_wiki/source_catalog/narrative_budget.py": "77401428494fc4e565d551bc24c76232898b22a696a06aca17694cb0c28a5d72",
     "src/company_wiki/source_catalog/narrative_evidence.py": "663ea1ad674c02978f4ba4a1694064e1f0f4ac0d9d4aa68839f5ac5b1ef47843"
+  },
+  "published_git_blob_sha256": {
+    "src/company_wiki/source_catalog/n6_candidate_completion.py": "638500fd208127b221181844d948b97cec5347780a70051904efe843d105c14f",
+    "src/company_wiki/source_catalog/n6_candidate_operating_facts.py": "1bbc13df9d3c870feb954272d8a75f0179f90e5db0cc4d57ef6d9a30a62d83c3",
+    "src/company_wiki/source_catalog/narrative_candidates.py": "1b8cc470ae146593e862ec4bbb28794dbc1edb9eb3770bc291fb8a4ba671abf5",
+    "src/company_wiki/source_catalog/narrative_context.py": "abd8436b1d517c2e6e7aafb0b21586609e7c378b36ebb282b625d57a3cfdb893",
+    "src/company_wiki/source_catalog/narrative_group_candidates.py": "81a37020ddc8558fea1e7952547237c8e52472b1d1d58b8a028085a9143d0e3f",
+    "src/company_wiki/source_catalog/narrative_neighbors.py": "58141948589363fda799daacee13fdf1c2e1b1b014b8ba9f503f6b45a9c23f24",
+    "src/company_wiki/source_catalog/narrative_budget.py": "75105742066f7f06168f5301a3c32d2aead4578ed675f46f8b05660b56986ec4",
+    "src/company_wiki/source_catalog/narrative_evidence.py": "b3d1fef57717559bce8049197f1ea57af17a7f31d2977809f90d2c34dc817f2f"
   }
 }

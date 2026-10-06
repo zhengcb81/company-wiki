@@ -44,3 +44,7 @@ MAIN的[最终业务E2E施工框架](../n6_main_business_e2e_implementation.md)�
 ## 2026-10-07 最后三包均已收到，MAIN组合验收
 
 候选f31cc0d（实现9a4b815）已实际无冲突merge待正常提交，外线worktree零写；MAIN17个边界/组合反例与共享接线269项2.81秒绿，selector0.4.0。正式真实年报/IR/英文TXT四个业务点、RF/search/exact/恢复+旧final9+实际AUTO升级1共11项66.48秒绿。初次全表18/33带年报旧点回退与IR混合cell噪声，已按责任修选择、最终报告运行中。不得重派三张已交卡，后续依最终差距另列独立责任工作；空间与预算此前精确CI绿已发布。集中验收/最终发布收据见../n6_candidate_main_acceptance_2026-10-07.md，S7整体不冒称已完成。
+
+## 2026-10-07 发布已完成（覆盖前述等待状态）
+
+候选actual merge e8c645e7afa6e2e60ddfa532e612ba0580d15560已推master，交付f31cc0d为主线祖先。精确CI37547043642 attempt1全部job/step success，job112553429162用时53秒。正常commit/pre-push绿，0日常长测试新增；原件/用户配置/RF三owner/外线保护保持，8个本次tmp根恢复absent。最终nine-doc21/33、old-full零回退、重复3、764定位零失败；269责任项+11真实/兼容/升级节点绿。N6三线实施交付已接收发布，S7继续处理验收单明确的9个业务漏点与3噪声，不冒称整体质量已全达标。[完整收据](results/n6_candidate_main_acceptance_2026-10-07.json)。

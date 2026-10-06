@@ -28,3 +28,7 @@ python -B -m pytest -p no:cacheprovider --basetemp tmp/n6uv tests/integration/te
 前三次失败均为测试组合问题：内部SourceRef误当公共DTO（7.09秒）、ir_policy标签误当规范化catalog身份（6.48秒）、Windows spawn重载无入口保护launcher造成额外stdout（15.41秒）。按既有公共DTO转换、catalog既定investor_relations身份、__main__入口保护修正，不改产品SHA/身份校验或Worker。没有虚报产品RED。所有运行0 HTTP/费用，四个自有pytest根收口恢复absent。
 
 2026-10-07：已在实际MAIN selector0.4.0中重跑此case，并与冻结0.3.2兼容9和真实三类业务E2E一起11 passed/66.48秒。新版本批次隔离、旧ref可读和恢复幂等仍通过；正式质量覆盖以九样本报告为准。
+
+## 2026-10-07 发布已完成（覆盖前述等待状态）
+
+候选actual merge e8c645e7afa6e2e60ddfa532e612ba0580d15560已推master，交付f31cc0d为主线祖先。精确CI37547043642 attempt1全部job/step success，job112553429162用时53秒。正常commit/pre-push绿，0日常长测试新增；原件/用户配置/RF三owner/外线保护保持，8个本次tmp根恢复absent。最终nine-doc21/33、old-full零回退、重复3、764定位零失败；269责任项+11真实/兼容/升级节点绿。N6三线实施交付已接收发布，S7继续处理验收单明确的9个业务漏点与3噪声，不冒称整体质量已全达标。[完整收据](harness_lanes/results/n6_candidate_main_acceptance_2026-10-07.json)。

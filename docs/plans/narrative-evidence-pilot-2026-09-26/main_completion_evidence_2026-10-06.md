@@ -54,3 +54,7 @@ FOOTPRINT cf24f34已并线/推，CI37542743196全部步骤成功/68秒；52责�
 ## N6三线组合本地节点（2026-10-07）
 
 候选f31cc0d已实际merge待提交；MAIN修正局部补全/上下文/注入规则/多reason/忙页预算与通用验证、工程timeline，selector0.4.0。269责任项2.81秒、静态绿；真实年报/IR/TXT四业务点→正式Worker/RF/search/exact/恢复+旧final9+实际AUTO升级1共11项66.48秒绿。最终九样本21/33（旧12/33），optional5/17、旧full零回退、764定位零失败、重复48→3、精选66195B；0供应商/费用/下载，原件和owner不变，测试根恢复。收据见n6_candidate_main_acceptance_2026-10-07.md。N6实现可接收，S7仍有9个业务上下文漏项与IR混合cell/重复噪声整改，不将此表当S7全完成。精确提交/推送/CI后补入收据。
+
+## 2026-10-07 发布已完成（覆盖前述等待状态）
+
+候选actual merge e8c645e7afa6e2e60ddfa532e612ba0580d15560已推master，交付f31cc0d为主线祖先。精确CI37547043642 attempt1全部job/step success，job112553429162用时53秒。正常commit/pre-push绿，0日常长测试新增；原件/用户配置/RF三owner/外线保护保持，8个本次tmp根恢复absent。最终nine-doc21/33、old-full零回退、重复3、764定位零失败；269责任项+11真实/兼容/升级节点绿。N6三线实施交付已接收发布，S7继续处理验收单明确的9个业务漏点与3噪声，不冒称整体质量已全达标。[完整收据](harness_lanes/results/n6_candidate_main_acceptance_2026-10-07.json)。

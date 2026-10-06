@@ -10,6 +10,8 @@
 
 ## 当前恢复点（2026-10-07）
 
+- **最新：N6三包全部实际并线/推送。** 候选merge e8c645e、精确CI37547043642全部步骤成功/job53秒；共享selector0.4.0。269短责任项+11真实/兼容/升级组合通过，完整九文档21/33、旧full无回退、重复48→3、764定位全通过。S7剩余9个业务点与IR混合cell/重复噪声，继续施工，不重派已交卡。最新验收/保护/发布证据见[n6集中验收](n6_candidate_main_acceptance_2026-10-07.md)。
+
 - DOCSET真实merge `58b74d07dd4f8b589c134ef9060a689864a8c089`已推master，精确CI37528050044一次成功/75秒；43不同责任case和真实9样本已接收，工具完成而质量required12/33仍待改。MAIN先行兼容/业务标准已发布`0947cea63140d515620f563daf2058f4520cd6a3`、精确CI37532408169一次成功/80秒，无运行代码变更。RAW-DUP a41244a/CI57秒、R6 eae2dd4/CI59秒等已完成证据不重跑。
 - RF 正式 main `6e6b817a1a6e4567293a4dcb835815f3be508a03`，已有默认 v2 与真实原文读取验收；FF main `758e8f4`，ET 本地/真实远端 main 已快进到 `2b9fb84660f98ce27a05709a7e31342ab044b4d2`，包含 N5-ET-TXT。不要重派已完成交付。
 - 当前 RF 正常用户上下文有三份 owner daily/weekly/manifest 日志修改，本线不改；旧 rf-impl WIP 保存在独立分支。本机 CWP `config/source_acquisition.yaml` 是用户改动，SHA `3609e707466eeb3e0f685e14f2637c6afa39ba900edef1be4814433a43300a01`，不暂存、不覆盖。
@@ -89,7 +91,7 @@ TDD 框住具体公开行为。只在 N4 A/B/C、存储迁移等大节点集中�
 
 ## Next Step
 
-**N6-CANDIDATE 本地集中验收已通过，完成正常并线提交/推送与精确CI；随后继续S7剩余质量整改。** 外线f31cc0d（实现9a4b815）已实际无冲突merge，MAIN补17个边界/组合反例与修正，selector0.4.0，269责任项/2.81秒与Ruff/mypy绿。真实年报/IR/TXT四个经营点经正式Worker→outbox→RF→search/exact→恢复已绿；最终旧final9、升级1和九样本结果以[集中验收](n6_candidate_main_acceptance_2026-10-07.md)及其收据为准。提交不跑长pytest，日常CI没有加入大基准或真实长E2E。
+**继续S7剩余质量整改；N6三线验收、实际并线和推送已完成。** 外线f31cc0d（实现9a4b815）已实际无冲突merge e8c645e并推master、精确CI37547043642全步骤绿53秒；MAIN补17个边界/组合反例与修正，selector0.4.0，269责任项/2.81秒与Ruff/mypy绿。真实年报/IR/TXT四个经营点经正式Worker→outbox→RF→search/exact→恢复已绿；最终旧final9、升级1和九样本结果以[集中验收](n6_candidate_main_acceptance_2026-10-07.md)及其收据为准。提交不跑长pytest，日常CI没有加入大基准或真实长E2E。
 
 首次组合全表403.731秒实测18/33（旧12/33）、764定位零失败、重复3（旧48）。已保留初次报告；其中年报G04发生回退及EPI正式E2E失败，MAIN按句理由/组、忙页分类offer、完整fact reasons及工程时间表责任修正，最终集中复验已完成：21/33、可选5/17、764定位零失败、重复3、精选66195B、372.044秒，旧required/optional full均无回退。不用手推覆盖或旧CI替代。原golden/86点/33分母、parser0.1.0、原件与96/160限额不变。**N6实现合入与S7全部业务质量完成分别记录。**
 
