@@ -37,3 +37,5 @@ python -B -m pytest -p no:cacheprovider --basetemp tmp/n6be tests/integration/te
 ```
 
 框架complete：首次RED为既有私有测试helper缺少timeout_seconds参数（不是产品失败）；新增可选参数保持原默认60秒。首次框架1 passed/27.79秒；检查RF已提交实际context后发现绑定投影假设与range形状不符，修正并在合成TXT中实测原字节→material映射，最终1 passed/27.65秒、1真实节点deselected、Ruff绿。三份合成原件/3次本地POST，恢复不重复调用；RF六个已提交模块只导出到tmp。无真实供应商调用或费用，无日常CI新增长测。最终真实质量节点pending，仍待新selector代码。同步沿用上一轮冻结compat9项，合入后才重跑。
+
+代码13bba07已推master，精确CI37534879855一次成功/job74秒；[完整收据](harness_lanes/results/n6_main_business_framework_2026-10-06.json)。三个本线tmp测试根恢复absent，生产/原件/owner指纹保持，用户config仍原独立dirty状态。

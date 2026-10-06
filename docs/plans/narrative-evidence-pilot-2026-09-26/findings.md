@@ -864,3 +864,5 @@ MAIN已实际推0947cea，精确CI37532408169 attempt1 success/job80秒，普通
 复用正式configured batch/Worker/outbox与RF六模块committed export，三类合成PDF/TXT最终1 passed/27.65秒，恢复无新增POST。正式RF校验所有transcript bindings但context不返回它们；因此E2E从CWP同ref的正式read取得bundle，核artifact SHA和RF spans一致后按start/end对象映射原文quote字节到material行。不能直接把golden原TXT行号当material行，也不能扩大RF公开投影只为测试方便。合成TXT已实际覆盖映射路径，真实节点仍待新selector合入，未运行不计绿。
 
 只有测试helper增加可选timeout，默认60秒不变；真实180秒batch/240秒subprocess为明确fixture请求，不改生产限时。没有运行时代码/外线写入/供应商调用/日常CI长测。RF owner新增daily日志，三个SHA实读保持；三个自有tmp根已恢复absent。框架receipt与施工细则在MAIN独占目录，后续验收按原四个不可变业务点与九类完整基准，不修改golden或分母。
+
+框架实际发布13bba07/远端master一致，精确CI37534879855一次success，全部step绿/job74秒。本地Integration和CI快集合分别记账，不假报远端跑了此新长测试。三外线仍独占bootstrap工作树，MAIN只读核对不恢复/跨写；下一实际交付后统一合入，当前质量仍12/33。

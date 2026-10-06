@@ -1055,3 +1055,5 @@ N6启动PWF和INPUT_CARD已各自纯文档提交并推分支，工作树干净�
 三类合成原件/3次本地HTTP→configured Worker/outbox→RF reference/read→CWP search/exact→同run恢复，模型恢复0新增POST。真供应商请求/费用0；raw/config/catalog/RF owner指纹由fixture前后验证，用户config SHA3609e707保持。三个本线tmp根n6br/n6bp/n6bq核绝对路径/非reparse后用ErrorAction Stop清理并确认absent。查询曾误猜transport模块路径与CodeGraph参数，随后按实际结构定位和已提交合同核对；不当产品错误。
 
 真实S01/S07/S09四经营点入口已写、明确待两质量线交付接线后执行，不拿合成绿当required12/33已改善，不再跑旧长基准/付费模型。当前准备正常commit/push/精确CI，整体S7/目标仍active。
+
+实际提交13bba07f9e848fac4194b17313c4f4a608775a1c已推master且ls-remote一致；正常commit及pre-push快合同GREEN，用户配置由正常hook临时stash/restored并保持原SHA，未stage。精确CI37534879855 attempt1 completed/success，job112513173461全部step成功，21:34:50→21:36:04 UTC/74秒。此次代码CI仅执行原快集合，27.65秒合成E2E为本地大节点测试，未混作CI内测试。收据已转published_ci_passed；最终收据文档skip ci发布，不重复已绿代码CI。
