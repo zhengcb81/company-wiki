@@ -1,5 +1,10 @@
 # Findings：当前事实与待验证项
 
+## N4C预算阻塞解除（2026-10-06）
+
+- 用户批准待答的160k累计token方案，美元cap未变；不退旧账或降低模型配置。官方MiMo价格仍国内Flash输入¥1/输出¥2每百万，Token Plan与PAYG不互通；DeepSeek官方USD peak输入$0.3/输出$1.2低于既有CNY/FX6保守proxy，沿用旧proxy不记真实invoice。来源：https://mimo.mi.com/docs/en-US/price/pay-as-you-go 、https://api-docs.deepseek.com/quick_start/pricing/ 。中文DeepSeek页首次超时，英文官方页成功，未调用模型。
+- 自动审批拒绝此次具体MiMo资料外发，未开始进程；用户原预算答复不能被当作新增目的地外发授权。已明确提示风险、列两家目的地及各自原文，一次UI请求，未重试绕过。不是模型API/凭证故障，未知费用事实不变。
+
 ## N4C实际driver计费缺口（2026-10-06）
 
 - 原临时driver与已提交preflight的算法分化：前者固定Oct5，后者glob全部日期并拒绝重复run。已删除driver重复算法，直接复用后者；跨日期、重复run及默认预算不足提前退出均实际验证，0模型请求。临时driver按N4细则可重建，不新增数据库或永久模型参数配置。

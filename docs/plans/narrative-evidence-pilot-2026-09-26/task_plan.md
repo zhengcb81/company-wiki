@@ -4,6 +4,10 @@
 
 ## Goal
 
+**2026-10-06用户预算答复：**已明确批准提高累计token预算至160,000；累计费用仍限$0.10，历史unknown及FX余量继续计入，配置8192/温度1.0/模型与端点不改。下方“预算答复待定/60k不足”是此前恢复点，本轮直接按Next Step执行N4C，不再以预算答复阻断。
+
+**当前执行阻塞：**自动审批在启动run05前拒绝MiMo外发，理由是具体资料/目的地授权仅明确覆盖MiniMax。已一次询问MiMo年报/招股与DeepSeek IR/英文电话会的具体授权；在答复前不执行POST。token预算已经批准，不再问预算、不改端点绕过；拒绝未产生进程、测试根或付费收据。
+
 完成八束整套简化：一个下载请求入口、一套pathless来源接口、一套AUTO任务系统，按需选择业务叙述、摘要和检索；停止全量永久转换与重复正文；完成真实模型、持久预算、可恢复多文档处理及消费者接线，然后分批删除无调用者的旧派生。原件、来源/版本事实不丢。RF/FF/ET/StockWiki/IQS各仓独占写入，不修改其他owner未提交工作。
 
 **当前恢复点（2026-10-06，最新）：**目标尚未完成，N4C累计预算答复待定；独立准备已完成。S5生产旧派生/切片清理已完成，7104文件/2826010634 B删除，8191旧handle退休，1490530旧span删除；DB3055841280→222408704 B，整批净减少5659443210 B（5.66GB/5.27GiB）。17表来源事实、四份公开原文读取、原始年报/电话会TXT固定SHA及用户配置保持；原件0删除，新final实际0且保留语义不变。161MB source-only恢复点及全部一次性材料已清除，正式小收据见s5_production_storage_acceptance_2026-10-06.json。工具修复96f44a1已发布、精确CI37394193179一次全绿；RF正式main6e6b817a与安装依赖同步，FF main758e8f4/ET main63c4090已签收。不重派已完成P5；S6说明/控制/快速smoke已发布e481578，精确CI37399248994一次success，S6complete；下一步N4C真实模型批次。MiMo/DeepSeek仍按Config的mimo-v2.6-flash/deepseek-flash、8192/温度1.0；累计token cap答复仍待，旧未知账不退。
@@ -119,7 +123,7 @@ TDD框住公开行为，不把旧签收规则写进新测试。仅S0相关收口
 
 ## Next Step
 
-**MAIN单一下一动作：累计token cap答复到达后执行N4C MiMo/DeepSeek真实模型批次；不改配置或重做已完成节点。**当前四原件SHA/旧账/配置及RF6模块离线预检已发布061f534、精确CI37400256960 attempt1 success；0新POST，独立准备没有剩余待执行项。S6代码e481578已发布，精确CI37399248994 attempt1全部GREEN。本地38责任测试、同一12项smoke、当前架构规则及18链接GREEN，三个测试根已恢复；见[S6细则](s6_documentation_runtime_closeout.md)。存储节点已完成并保存[s5生产正式收据](harness_lanes/results/s5_production_storage_acceptance_2026-10-06.json)，0 derived/0旧spans/DB222408704 B，原件和17表事实不变；不重跑已完成的inventory/49责任包/删除/VACUUM，不再保留source-only恢复点或大操作材料。RF main6e6b817a/FF main758e8f4/ET main63c4090已签收，不碰外包交付树与owner WIP。N4C预算160k问题尚待答复，费用仍$0.10；未获答复前不越过60k累计token cap、不擅改8192、不退旧账，配置只读GET200不算摘要成功。
+**MAIN单一下一动作：执行已获160k累计token授权的N4C MiMo/DeepSeek真实模型批次；不改配置或重做已完成节点。**四原件SHA/旧账/配置及RF6模块离线预检已发布061f534；S5/S6及P5已完成，沿用正式收据，不重复长测、生产清理或VACUUM。RF main6e6b817a/FF main758e8f4/ET main63c4090已签收，不碰外包交付树与owner WIP。模型provider分run滚动使用剩余预算，费用仍$0.10，旧unknown及FX余量照计；不擅改8192。实际摘要、消费者读取、原语言和全引用回放、恢复及空间通过才关闭N4C。
 
 P5-STORAGE已验收并合入/发布：候选`9fa2166`，主线代码`e570dafb92a3f6aaec51176682d348a1c9303535`。53个不同case分步GREEN，真实AMEC年报+微软电话会TXT的原文stdout SHA、新NarrativeRef完整locator replay前后通过，连接关闭及测试根恢复均通过；没有生产删除。工具预览不写库/sidecar、不拿写锁；切片单次范围SQL/聚合小报告；压缩真实前后计量/空间检查，观测失败明确null。所有细节及实际副本空间见[集成审查](harness_lanes/results/p5_storage_integration_review_2026-10-05.md)、[小验收收据](harness_lanes/results/p5_storage_integration_acceptance_2026-10-05.json)、[工具说明](../../../tools/legacy_storage/README.md)。日常Unit CI不添加多分钟解析包。精确新代码[CI37375836745](https://github.com/zhengcb81/company-wiki/actions/runs/37375836745)已completed/success；此前18da250同SHA重跑CI也已success。
 

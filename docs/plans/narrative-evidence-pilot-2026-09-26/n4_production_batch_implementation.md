@@ -1,5 +1,9 @@
 # N4：可运行的叙述批次、真实模型计量与持久恢复
 
+> **2026-10-06预算已答复：**用户“批准提高token预算”，对应待答的累计160,000方案；费用仍$0.10，保留全部旧未知账与FX余量，不改Config。RF fresh main/remote均6e6b817a，owner两份周日志保持。以下待答描述仅为历史；现在按provider分run执行实际MiMo P01/P04、DeepSeek P07/T01及各自零模型policy。价格已复核官方页，保守沿用既有无缓存国内/FX6 proxy，不凭GET/套餐估算冒充真实账单。
+
+> **本轮启动被自动审批拒绝：**run05命令未创建进程；原因是审批认为此前具体外发目的地仅MiniMax，未明确覆盖MiMo与两份原文。已在UI一次列出MiMo P01/P04和DeepSeek P07/T01、原语言精选片段及两家端点请求授权。答复之前保持0 POST；原token阻塞已解除，不能把此次拒绝当缺凭证/产品测试失败，也不能换命令或端点绕过。
+
 > **2026-10-06 当前交接（覆盖下方2026-10-03/05旧恢复点）：**P5-FF/STORAGE/RF已验收并发布，RF正式main6e6b817a与安装依赖一致；旧全量writer退出，生产存储清理与S6说明/控制收尾已完成，e481578/CI37399248994一次全绿，不重做A/B、P5、清理或三个并行档试验。真实N4C摘要POST尚未验收。正式MiMo为`mimo-v2.6-flash`（`https://token-plan-cn.xiaomimimo.com/v1`），DeepSeek为`deepseek-flash`（`https://api.deepseek.com`），均读取既有Config与环境密钥、8192/温度1.0；[配置只读收据](harness_lanes/results/n4c_flash_preflight_2026-10-05.json)两家GET200不等于摘要成功。旧`mimo-v2.5-pro`与401说明只作历史记录，不能据此再改模型或要求换key。
 >
 > **最新累计预算恢复点：**[run04](harness_lanes/results/n4c_live_2026-10-05_run04.json)之后保守已占58,523 tokens/33,884 microUSD，另留历史FX余量2,764；60k只剩1,477 tokens，不能容纳配置8192的输出预留。160k累计token cap问题尚待答复，美元仍上限$0.10，不退未知账，不重启旧run清账。授权到达后按当前细则滚动做MiMo P01年报/P04招股、DeepSeek P07中文IR/T01英文电话会，每批加零模型policy对照，provider分run、账本统一累计、RF实际读取与引用/原语言/恢复/总空间同一大节点验收；不把models清单、HTTP200或未生成final当完成证据。当前唯一施工顺序以[总计划Next Step](task_plan.md#next-step)为准。

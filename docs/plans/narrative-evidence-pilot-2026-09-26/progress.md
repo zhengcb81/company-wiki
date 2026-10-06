@@ -1,5 +1,10 @@
 # Progress：激进简化实施
 
+## 2026-10-06 — N4C预算答复到达，恢复真实节点
+
+- 用户明确批准累计token从60k提高至160k；费用仍$0.10，旧58523tokens/33884microUSD及unknown4、FX2764照计。RF本地/remote main仍6e6b817a，仅owner两份周日志dirty。先MiMo年报/招股，再按实际余量DeepSeek IR/英文电话会，配置参数保持，不再等待预算答复。
+- MiMo run05 exec在CreateProcess前被自动审批拒绝，尚无live handle/模型请求。理由为资料/目的地授权未具体覆盖MiMo（此前MiniMax明确授权）；已一次UI询问两家与各自两份资料，不换端点绕过。run05测试根/付费收据未创建，账本不增加。批准预算与此次外发权限是两个不同事实，等待仅具体外发答复。
+
 ## 2026-10-06 — N4C跨日计费接线补漏
 
 - 上一turn为progress：P5-RF卡状态修正及PWF 11cffb2已发布，pre-push GREEN。fresh RF main/remote仍6e6b817a，仅owner原有两份周日志dirty。
