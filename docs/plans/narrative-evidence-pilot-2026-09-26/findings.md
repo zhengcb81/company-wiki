@@ -846,3 +846,5 @@ DOCSET实际merge58b74d07dd4f8b589c134ef9060a689864a8c089已推master，2c3583e�
 按人类新要求已准备N6-CANDIDATE、N6-BUDGET、N6-FOOTPRINT三张完整卡与三个独立物理worktree，全部固定已绿58b74d0。候选4文件/预算2文件/空间新目录互斥，独立测试夹具/PWF/handoff，MAIN拥有shared入口/版本/最终联调；三条ready但未宣称人类已分派或已开跑。候选接口设计经只读结构审查：QA不同角色绝不混组、NarrativeUnit无source_sha256属性、旧Rules可选默认值与MAIN注入职责明确。不改RF/IQS/Dayu/ET/StockWiki，不重派旧N5。
 
 三树只取已跟踪代码文档，单树逻辑74490854 B、三树约223MB，共享Git历史/不复制ignored原件；验收后MAIN清理自己创建的worktree并先核需要ignored材料。新卡均有输入副本和PLAN_ID唯一PWF草稿。ROOT目标仍active，S7业务required12/33残缺；任务包ready不等于实现完成。FOOTPRINT只测本CWP占用与保留事实，不自动删/迁移/启动监控，不将跨根重复上界当已释放量。
+
+N6启动PWF和INPUT_CARD已各自纯文档提交并推分支，工作树干净：候选81d4524、预算9495459、空间ec7a573，均以58b74d0为代码祖先；master卡/CI收据cc0c032也已推。不存在未提交的启动WIP，不需要harness重复建目录、拉最新main或reset。所有runtime代码仍原基线。

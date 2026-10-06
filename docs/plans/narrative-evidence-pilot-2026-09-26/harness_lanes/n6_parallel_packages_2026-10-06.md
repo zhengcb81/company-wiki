@@ -2,6 +2,8 @@
 
 **三张卡ready、三份独立worktree已建，可同时给不同harness。** 固定代码基线58b74d07dd4f8b589c134ef9060a689864a8c089，DOCSET实际merge已推master，精确CI37528050044已一次成功/75秒。N5三包已接收，不重派。
 
+启动文档也已分别提交/推远端，三个工作树干净：候选HEAD81d4524471c59ff053e013b181d3c227ddb8a1f0，预算HEAD949545957f0b3499f48219a124623b33ba8ba065，空间HEADec7a5735e3c47a366c6de01073e87226f02c52ae。这些都是58b之上的纯文档bootstrap，代码仍为共同基线；不要因HEAD多一条启动提交去reset。独立PWF/card均在各树里，可直接开工。
+
 | 包 | 任务 | 独立施工目录 | 独占运行代码 | 卡 |
 |---|---|---|---|---|
 | N6-CANDIDATE | 经营事实召回、跨块完整事件、IR/英文，较大 | C:/Users/郑曾波/Projects/cwp-lanes-20261006/n6-candidates | candidates/context/group_candidates/neighbors与私有n6_candidate_* | [独立卡](n6_candidates.md) |
