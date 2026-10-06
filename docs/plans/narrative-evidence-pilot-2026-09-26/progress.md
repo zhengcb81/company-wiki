@@ -1,5 +1,12 @@
 # Progress：激进简化实施
 
+## 2026-10-06 — N4C离线恢复点实证
+
+- 上一目标turn属于progress：S6实际控制/说明/短smoke收尾及精确CI绿已发布5339eac。本轮fresh RF main/remote6e6b817a、owner周日志SHA不变，新增可提交tools/n4c_live_preflight.py并实跑零模型入口。
+- 原旧AUTO及保存收据合计58523tokens/33884microUSD，unknown4/unsettled0；60k剩1477、扣FX后美元proxy剩63352microUSD。四真实raw SHA/size、当前RF6模块bootstrap/help、Config加载两家Flash均通过；独立n4pf根finally消失，原件/生产/用户配置/owner不变。报告n4c_current_main_preflight_2026-10-06.json不含秘密或原正文，0外部provider/POST/download。
+- 待用临时driver RF_HEAD改当前6e6b817a，样本参数支持P01/P04和P07/T01两小批，实际help成功；节点C仍需四类型真实产物+RF消费，不能用两种样本或GET/Replay代替。160k累计token cap答复仍待，未改默认60k/费用$0.10/模型8192参数。
+- 首次Ruff E402来自必须的项目loader bootstrap，明确标注后GREEN；一次无匹配rg inventory exit1不代表运行失败。下一提交发布preflight与交接，之后预算答复到达才能实际POST；没有重新清库、长E6或修改RF/Dayu。
+
 ## 2026-10-06 — S6当前流程与无效控制收尾（已发布，精确CI一次GREEN）
 
 - 上次目标turn属于progress（P5交付状态修正已推送）；本次完成S6，代码e481578872309f50141fcd2555b1e8a206bd7a47正常commit/push，钩子GREEN。官方API确认CI37399248994 attempt1 completed/success，所有job绿，不重试旧失败SHA。S6complete，全目标仍active，未宣称N4C真实摘要成功。

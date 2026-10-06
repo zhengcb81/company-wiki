@@ -1,5 +1,13 @@
 # Findings：当前事实与待验证项
 
+## N4C当前准备缺口（2026-10-06）
+
+- 新preflight已实跑：当前RF6模块CLI help成功，四份原件SHA准确，旧账58523 tokens/33884 microUSD、unknown4/unsettled0。预算输出预留不可满足（1477<8192），费用剩63352microUSD；确认是真实预算约束，不是凭证/CI问题。配置MiMo/DeepSeek flash与现有端点准确，0 provider/POST/download；n4pf根恢复，生产/owner/用户配置不变。临时driver已更新RF SHA及sample-ids可分两批覆盖四类型，未开始POST。
+- 首次Ruff报告bootstrap三项E402，已为必要路径bootstrap明确标注并通过；SHA流式读取支持项目Python3.10，不使用3.11新增file_digest。预检不产生新的运行授权文件或控制库，也不声称真实摘要或RF业务实读通过。
+
+- RF main/remote仍6e6b817a，两份owner日志SHA不变。临时provider driver读取原旧AUTO预算（只读NarrativeRunStore）及run02/03/04收据，保留unknown；finally先保存计费再清根。它仍固定旧RF8a153f33、样本只有P07/T01，不能代表节点C四类型完成。
+- MAIN先新增可提交的零模型preflight，验证当前RF提交CLI闭包、四原件SHA和真实旧账，复用Config加载器/原Schema，不重复消费者实现。首次literal工具文件inventory无匹配导致rg exit1，无运行故障。累计cap仍待答复，不执行POST。
+
 ## S6收尾实读（2026-10-06）
 
 - 完成态：e481578已发布，精确CI37399248994 attempt1 success；38集中测试、12项smoke及当前架构配置GREEN，三个测试根恢复，18当前链接有效。S6complete，唯一下一步N4C；预算答复待定，未开始新POST。保留driver确实存在tmp/n4c_provider_live_driver.py，但RF固定SHA是旧8a153f33，开批前需要对齐当前正式RF并先做零模型CLI导入验证。

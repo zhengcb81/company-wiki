@@ -124,7 +124,7 @@ TDD框住公开行为，不把旧签收规则写进新测试。仅S0相关收口
 P5-STORAGE已验收并合入/发布：候选`9fa2166`，主线代码`e570dafb92a3f6aaec51176682d348a1c9303535`。53个不同case分步GREEN，真实AMEC年报+微软电话会TXT的原文stdout SHA、新NarrativeRef完整locator replay前后通过，连接关闭及测试根恢复均通过；没有生产删除。工具预览不写库/sidecar、不拿写锁；切片单次范围SQL/聚合小报告；压缩真实前后计量/空间检查，观测失败明确null。所有细节及实际副本空间见[集成审查](harness_lanes/results/p5_storage_integration_review_2026-10-05.md)、[小验收收据](harness_lanes/results/p5_storage_integration_acceptance_2026-10-05.json)、[工具说明](../../../tools/legacy_storage/README.md)。日常Unit CI不添加多分钟解析包。精确新代码[CI37375836745](https://github.com/zhengcb81/company-wiki/actions/runs/37375836745)已completed/success；此前18da250同SHA重跑CI也已success。
 
 
-N4C真实MiMo/DeepSeek实验继续待累计token cap160k问题答复，费用上限仍$0.10；原8192/温度/thinking/端点/凭证由Config加载。旧账不退、不从清单200冒称摘要成功。授权到达后两家分别P07中文IR、T01英文电话会+零模型policy，run独立、费用累计，完整Worker→CWP→RF N3a读与引用/原语言/恢复、Credit和保守费用、峰值数据同一大节点验收。当前DeepSeek环境key已有效，无需换key。
+N4C真实MiMo/DeepSeek实验继续待累计token cap160k问题答复，费用上限仍$0.10；原8192/温度/thinking/端点/凭证由Config加载。旧账不退、不从清单200冒称摘要成功。当前RF6模块CLI、四份原件SHA及旧账已通过tools/n4c_live_preflight.py离线验证（0POST）。授权到达后MiMo P01年报/P04招股、DeepSeek P07中文IR/T01英文电话会分批滚动，各加零模型policy，run独立、费用累计，完整Worker→CWP→RF N3a读与引用/原语言/恢复、Credit和保守费用、峰值数据同一大节点验收。当前DeepSeek环境key已有效，无需换key。
 ## 2026-10-04：新增三张可独立派发的施工卡
 
 三张卡均已交付：N4-T1已集成MAIN；MeetingConverter已验收、合入并发布master且主线CI绿；N4-T2已完成差异对账、选择性吸收及验收。本段原写集和接口仅供交付追溯，不重派已完成卡。StockQAbyLLM 与 MeetingConverter 先前的只读盘点交付仍按已有收据验收；invest-quick-scan 仍由其独立任务负责，本计划不检查、不修改、不重复派发。

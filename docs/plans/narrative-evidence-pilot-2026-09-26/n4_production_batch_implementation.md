@@ -2,7 +2,7 @@
 
 > **2026-10-06 当前交接（覆盖下方2026-10-03/05旧恢复点）：**P5-FF/STORAGE/RF已验收并发布，RF正式main6e6b817a与安装依赖一致；旧全量writer退出，生产存储清理与S6说明/控制收尾已完成，e481578/CI37399248994一次全绿，不重做A/B、P5、清理或三个并行档试验。真实N4C摘要POST尚未验收。正式MiMo为`mimo-v2.6-flash`（`https://token-plan-cn.xiaomimimo.com/v1`），DeepSeek为`deepseek-flash`（`https://api.deepseek.com`），均读取既有Config与环境密钥、8192/温度1.0；[配置只读收据](harness_lanes/results/n4c_flash_preflight_2026-10-05.json)两家GET200不等于摘要成功。旧`mimo-v2.5-pro`与401说明只作历史记录，不能据此再改模型或要求换key。
 >
-> **最新累计预算恢复点：**[run04](harness_lanes/results/n4c_live_2026-10-05_run04.json)之后保守已占58,523 tokens/33,884 microUSD，另留历史FX余量2,764；60k只剩1,477 tokens，不能容纳配置8192的输出预留。160k累计token cap问题尚待答复，美元仍上限$0.10，不退未知账，不重启旧run清账。授权到达后执行既有driver的P07中文IR/T01英文电话会+零模型policy对照，provider分run、账本统一累计、RF实际读取与引用/原语言/恢复/总空间同一大节点验收；不把models清单、HTTP200或未生成final当完成证据。当前唯一施工顺序以[总计划Next Step](task_plan.md#next-step)为准。
+> **最新累计预算恢复点：**[run04](harness_lanes/results/n4c_live_2026-10-05_run04.json)之后保守已占58,523 tokens/33,884 microUSD，另留历史FX余量2,764；60k只剩1,477 tokens，不能容纳配置8192的输出预留。160k累计token cap问题尚待答复，美元仍上限$0.10，不退未知账，不重启旧run清账。授权到达后按当前细则滚动做MiMo P01年报/P04招股、DeepSeek P07中文IR/T01英文电话会，每批加零模型policy对照，provider分run、账本统一累计、RF实际读取与引用/原语言/恢复/总空间同一大节点验收；不把models清单、HTTP200或未生成final当完成证据。当前唯一施工顺序以[总计划Next Step](task_plan.md#next-step)为准。
 
 > **2026-10-05 当前状态：配置遵从修正已实现并完成离线节点验收。**真实入口使用 `scripts/narrative_batch_configured.py` → 既有 `Config.load()` → child-local HTTP Worker；model/base_url/key-env/max_tokens/temperature/reasoning_split均来自既有配置。当前为国内端点、MiniMax-M3、8192、1.0、reasoning_split=true；没有配置的 thinking 不擅自设置。请求文件里旧模型参数不能覆盖配置。零外部LLM调用完成配置测试；真实N4C仍未通过。
 
@@ -13,6 +13,20 @@
 > **并行与已完成边界：**G1/S3、N4A/B和N4-T1/T2已收口，不重复施工。P5三个外包用户已确认开工，见[P5接口总包](harness_lanes/p5_parallel_packages_2026-10-05.md)；MAIN不改它们的独占写集，交付随到随验收。下方旧记录为追溯背景，当前顺序以主计划Next Step为准。
 
 ## 1. 已核缺口与目标
+
+### 2026-10-06 N4C恢复准备（MAIN独占，不新建审批门）
+
+上一节点S6已发布/CI绿，本节点先核RF main6e6b817a及owner日志。新增`tools/n4c_live_preflight.py`作为可提交的零模型准备入口：读取原有AUTO未知账+run02及后续小收据，推导剩余预算，不退款；实读P01年报/P04招股/P07 IR/T01 TXT固定SHA，不复制raw；从明确RF提交只读导出当前narrative CLI依赖闭包，在独立短根执行help后清根。配置只经Config.load读取，报告只存无秘密字段。原件/生产/owner前后不变，0模型/下载；预算不足只如实报告，不调整cap或参数。
+
+离线预检只证明资料、账本、配置与consumer bootstrap可用，不等于摘要/真实消费验收。实际四类型覆盖按节点C滚动完成；两家各分run，复用同一累计费用，先小批确认usage再扩展，不用两类样本宣称四类真实模型全过。旧tmp driver在POST前须更新RF固定SHA并通过本入口；收据保存与finally恢复由实际driver承担，不另建控制数据库。
+
+离线预检已实跑GREEN：当前RF6e6b817a的6模块闭包help退出0，四份原件固定SHA/size通过；真实旧账58523 tokens/33884 microUSD，unknown 4、unsettled 0；费用扣FX余量后剩63352 microUSD，token仅剩1477。正式小收据见[harness_lanes/results/n4c_current_main_preflight_2026-10-06.json](harness_lanes/results/n4c_current_main_preflight_2026-10-06.json)。独立n4pf根恢复absent，原件、生产、owner/用户配置不变，0 provider/POST/download。现有收据不覆盖，后续状态变动用新的output文件名重跑。
+
+```powershell
+python tools/n4c_live_preflight.py --rf-root 'C:/Users/郑曾波/Projects/revenue-forecast' --rf-head 6e6b817a1a6e4567293a4dcb835815f3be508a03 --output '<新的小收据JSON路径>'
+```
+
+待用`tmp/n4c_provider_live_driver.py`已对齐当前RF，新增`--sample-ids P01 P04`或`P07 T01`供小批覆盖；help已验证。累计token授权到达后先MiMo年报/招股两份，再按实际账单proxy/usage余量做DeepSeek IR/英文电话会（每批另加零模型policy），不要直接同时发四份或两provider同时发。序号用尚未有报告的新run-number，原件/metadata为现有fixture，不能把合成身份当live验证。失败记录照计；全部四类实际生成、真实RF消费/引用回放、原语言、空间/恢复通过才关闭N4C。
 
 1. 生产factory、薄HTTP、完整prompt1.1、真实usage与同AUTO持久预算已发布9ccd29f；测试Replay不当真实provider能力。
 2. scope已贯通claim/promotion/reaper/outbox/prepared，S0/N4A发布ff5396c；不重新实现同一范围接口。

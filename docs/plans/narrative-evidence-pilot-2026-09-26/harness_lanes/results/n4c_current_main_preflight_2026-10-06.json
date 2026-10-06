@@ -1,0 +1,119 @@
+{
+  "schema_version": "n4c-offline-preflight/1",
+  "status": "verified_offline",
+  "rf_head": "6e6b817a1a6e4567293a4dcb835815f3be508a03",
+  "rf_committed_modules": [
+    "company_wiki_narrative_contracts",
+    "company_wiki_narrative_posix",
+    "company_wiki_narrative_process",
+    "company_wiki_narrative_reader",
+    "company_wiki_narrative_tree",
+    "narrative_source_preparation"
+  ],
+  "samples": [
+    {
+      "sample_id": "P01",
+      "kind": "annual_report",
+      "language": "zh",
+      "sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "byte_size": 9165875
+    },
+    {
+      "sample_id": "P04",
+      "kind": "prospectus",
+      "language": "zh",
+      "sha256": "19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+      "byte_size": 11211796
+    },
+    {
+      "sample_id": "P07",
+      "kind": "investor_relations",
+      "language": "zh",
+      "sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+      "byte_size": 153851
+    },
+    {
+      "sample_id": "T01",
+      "kind": "investor_call_transcript",
+      "language": "en",
+      "sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+      "byte_size": 66324
+    }
+  ],
+  "configured_models": {
+    "mimo": {
+      "model_id": "mimo-v2.6-flash",
+      "endpoint": "https://token-plan-cn.xiaomimimo.com/v1/chat/completions",
+      "api_key_env": "MIMO_API_KEY",
+      "max_output_tokens": 8192,
+      "temperature": 1.0
+    },
+    "deepseek": {
+      "model_id": "deepseek-flash",
+      "endpoint": "https://api.deepseek.com/chat/completions",
+      "api_key_env": "DEEPSEEK_API_KEY",
+      "max_output_tokens": 8192,
+      "temperature": 1.0
+    }
+  },
+  "prior_budget": {
+    "entries": [
+      {
+        "origin": "original_auto_ledger",
+        "run_id": "n4c-20261004-wave1",
+        "charged_tokens": 10325,
+        "charged_micro_usd": 5258,
+        "charged_output_bytes": 0,
+        "unknown_reservations": 1,
+        "unsettled_reservations": 0
+      },
+      {
+        "origin": "n4c_live_2026-10-05_run02.json",
+        "run_id": "n4c-20261005-live-disabled-02",
+        "charged_tokens": 23335,
+        "charged_micro_usd": 11322,
+        "charged_output_bytes": 0,
+        "unknown_reservations": 2,
+        "unsettled_reservations": 0
+      },
+      {
+        "origin": "n4c_live_2026-10-05_run03.json",
+        "run_id": "n4c-20261005-live-configured-03",
+        "charged_tokens": 0,
+        "charged_micro_usd": 0,
+        "charged_output_bytes": 0,
+        "unknown_reservations": 0,
+        "unsettled_reservations": 0
+      },
+      {
+        "origin": "n4c_live_2026-10-05_run04.json",
+        "run_id": "n4c-20261005-live-configured-04",
+        "charged_tokens": 24863,
+        "charged_micro_usd": 17304,
+        "charged_output_bytes": 0,
+        "unknown_reservations": 1,
+        "unsettled_reservations": 0
+      }
+    ],
+    "charged_tokens": 58523,
+    "charged_micro_usd": 33884,
+    "unknown_reservations": 4,
+    "unsettled_reservations": 0
+  },
+  "current_campaign_token_cap": 60000,
+  "tokens_remaining": 1477,
+  "micro_usd_remaining_after_fx_guard": 63352,
+  "budget_can_reserve_configured_output": false,
+  "calls": {
+    "provider_http": 0,
+    "model_posts": 0,
+    "download": 0
+  },
+  "checks": {
+    "originals_unchanged": true,
+    "production_unchanged": true,
+    "owner_and_user_config_unchanged": true,
+    "test_root_restored_absent": true
+  },
+  "real_summary_or_consumer_read_claimed": false
+}
