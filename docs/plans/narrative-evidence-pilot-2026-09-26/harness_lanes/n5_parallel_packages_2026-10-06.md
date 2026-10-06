@@ -2,6 +2,8 @@
 
 MAIN仍负责N4C真实模型、共享接口、生产状态、所有合入和总PWF。本总包不增加N4C完成屏障；三个包无需等MAIN，可分别交给三个harness。不改IQS、RF、Dayu、StockWiki；StockWiki当前未找到独立未完成范围，旧consumer/身份/gate不重派。
 
+**2026-10-06实际目录核对：**三个工作树均已存在。DOCSET已有本线PWF/benchmarks未提交材料；RAW-DUP已有本线PWF/tools未提交材料；ET-TXT新增代码提交`96c9bc8b0b4610a4e4660918bbfb9cbe80fa0395`，工作树暂时干净。三者尚无卡指定的完整HANDOFF.md/handoff.json，MAIN未验收、不合入、不接管写集；文件/commit变化不冒称已确认live进程。外线完整交付后分别验收，不要求等待MAIN的真实模型费用答复。
+
 | 包 | 任务/规模 | 源仓库 | 独占工作目录 | 卡 |
 |---|---|---|---|---|
 | N5-DOCSET | 多类型真实文档质量基准，较大 | company-wiki | `C:/Users/郑曾波/Projects/cwp-lanes-20261006/document-quality` | [质量卡](n5_document_quality_benchmark.md) |

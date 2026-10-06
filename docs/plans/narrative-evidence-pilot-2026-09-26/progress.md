@@ -969,3 +969,11 @@ S0/N4A及S2模型预算基础、CLI阶段与CI修复已正常发布，当前CI�
 - 收尾检查发现task_plan多余EOF空行，已去掉；实际code/doc差异仅本线。离线收据全部保护true/零外发，计划所有本地链接存在。旧run与费用历史保留。
 
 - 发布：4826ad9c67bce3d3e2b977173d283341d18bc141已推origin/master，正常pre-commit/pre-push GREEN；CI37514053091 attempt1全部job/step success，52秒，精确小收据已保存。当前总计划215→93行、45067→11142字节（发布状态行更新前），所有历史全文保留659bcefc链接。唯一未提交仍用户config，SHA不变；run10 receipt absent、0新POST，累计费用提高未获答。
+
+## 2026-10-06 — 核心收尾阻塞复核与N5实际材料
+
+- 上一goal turn是progress：显式预算工具修复、五项TDD、真实零网络preflight及4826ad9精确CI52秒绿色；1b8c54c收尾已推远端。此轮不重复已绿包、不启动费用不足的请求。
+- 正常用户fresh CWP HEAD/cached master1b8c54c，仅用户config dirty且固定SHA保持；RF HEAD/cached main6e6b817a仅两weekly owner文件。prior_budget实际仍180884 tokens/90649microUSD、unknown7/unsettled0；余19116/6587，既有prompt1.5请求预留18755/14445。当前真实费用阻塞没有消失，run10 receipt absent，没有可等待的live模型/CI句柄。
+- 新发现：三份N5实际工作树已存在。DOCSET基线e46108b、未提交本线PWF/benchmarks；RAW-DUP同基线、未提交本线PWF/tools；ET从63c4090推进到96c9bc8代码commit、当前干净，三者都缺指定HANDOFF.md/handoff.json，未达到交付，不提前验收/合入或修改owner代码。早先仅-uno看不到CWP两包新目录，已补正常untracked只读状态；一次PowerShell混合对象表格隐藏目录字段，改JSON确认。没有依据声称已确认live进程。
+- RAW-DUP的工作进度里出现metadata候选逻辑重复上界约7.44GiB、1007云占位文件；尚未提供本卡真实字节复核报告，不能称已确认重复收益，更不能删原件或触发云hydrate。本线净释放数字仍取S5实际收据，不加此估计。
+- 核心阻塞审计：同一$0.12费用未答在短摘要修复后、历史草案兼容验收后、显式额度修复后及本轮连续存在，已超过三goal turn；期间有独立进展，但现在所有不依赖该答复的核心工作已完成，N5没有完整交付可接收。无法以离线/Replay冒充剩余真实效果，不擅改配置/降低证据/退款unknown来绕费用。本轮记录外线实际状态后，主线达到blocked条件；不是整体complete或用户requested pause。外线保持独立，费用答复或完整交付到达后恢复对应工作。
