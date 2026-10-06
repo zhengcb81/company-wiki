@@ -882,3 +882,7 @@ build_batch_events确用request中selector/parser/prompt hash划新身份；正�
 ## N6-BUDGET验收发现（2026-10-06）
 
 整组内容集合相同不足以证明同一事件：相同答案可能属于两个问题，相同表格行可能在不同年份表头下。来源/解析版本/语言/精确角色/QA父问题与发言上下文均保守绑定；跨组比较保留句子顺序，混合summary组拆分且不与现有ID碰撞；budget group/item键也必须分命名空间。15个反例RED→GREEN，实际0.3.3责任145及真实TXT/AUTO2绿。旧0.3.2final不用重跑选择器，冻结9项通过。候选算法还未交，不能把hand-built候选的13/33预测记成正式质量达标。空间工具精确CI已全绿68秒，预算发布之后补本线精确CI。
+
+实际budget3cd4960已并线/推，footprintcf24f34已并线/推；git祖先核查两分支均包含于master。候选新交接ce61cdd只读可见，下一MAIN集中验收，不重派旧卡。最终S7完整节点仍未执行。
+
+两个代码提交精确CI各68/72秒成功；无新增日常长测试。GitHub同URL状态缓存需nonce/no-cache复核，避免过时in_progress误导。下一候选新交接只读可见，正式S7仍需统一真实质量节点。

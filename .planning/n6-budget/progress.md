@@ -11,4 +11,3 @@
 2026-10-06 按既定裁定从主检出上下文推送：`git -C C:/Users/郑曾波/Projects/company-wiki push -u origin codex/n6-budget` → `pytest basetemp verified: short, repository-local, and not relocated` + `pre-push gate GREEN — safe to push`，推送成功 `9495459..0c5d53e`；**未用 `--no-verify`，未改任何门/CI 文件**。
 2026-10-06 CI 核对：`.github/workflows/ci.yml` `on.push.branches=[master]`，`actions/runs?branch=codex/n6-budget` → `total_count 0`，lane 分支推送不触发 CI，CI 在 MAIN 合入 master（或开 PR）时触发；未擅自开 PR。
 2026-10-06 交付状态：代码 head `805420a`（实现+测试+夹具+PWF+HANDOFF.md），文档 head `0c5d53e`（handoff.json）；本线完成。
-

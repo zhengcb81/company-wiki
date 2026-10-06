@@ -1,38 +1,202 @@
 {
- "schema_version": "n6-budget-main-acceptance/1",
- "lane_head": "18dbd0e2034f4737a32b937847371d6bd373210a",
- "selector_version": "0.3.3",
- "code_sha": "pending normal commit",
- "red": {
-  "context_cases": 14,
-  "seconds": 0.89,
-  "budget_key_alias_cases": 1,
-  "alias_seconds": 1.5
- },
- "green": {
-  "responsibility_cases": 145,
-  "seconds": 7.46,
-  "real_transcript_and_generation_cases": 2,
-  "e2e_seconds": 23.73
- },
- "static": {
-  "ruff": "passed",
-  "mypy_3_modules": "passed"
- },
- "scope": "same original/role/language/discourse, ordered containment, collision-free group keys; cap96/160 unchanged",
- "historical_final_0_3_2_compatibility_cases": 9,
- "formal_nine_sample_quality_node": "pending N6-CANDIDATE",
- "original_goldens_changed": false,
- "required_denominator": 33,
- "provider_http": 0,
- "provider_model_posts": 0,
- "raw_deleted": 0,
- "scratch": {
-  "tmp/n6ba": "restored absent",
-  "tmp/n6bb": "restored absent",
-  "tmp/n6bc": "restored absent"
- },
- "protected_user_config_sha256": "3609e707466eeb3e0f685e14f2637c6afa39ba900edef1be4814433a43300a01",
- "rf_head": "6e6b817a1a6e4567293a4dcb835815f3be508a03",
- "rf_owner_files_written": 0
+  "schema_version": "n6-budget-main-acceptance/1",
+  "lane_head": "18dbd0e2034f4737a32b937847371d6bd373210a",
+  "selector_version": "0.3.3",
+  "code_sha": "3cd49606eee2a9b752bc5f22bf84ca00bb5d8ba4",
+  "red": {
+    "context_cases": 14,
+    "seconds": 0.89,
+    "budget_key_alias_cases": 1,
+    "alias_seconds": 1.5
+  },
+  "green": {
+    "responsibility_cases": 145,
+    "seconds": 7.46,
+    "real_transcript_and_generation_cases": 2,
+    "e2e_seconds": 23.73
+  },
+  "static": {
+    "ruff": "passed",
+    "mypy_3_modules": "passed"
+  },
+  "scope": "same original/role/language/discourse, ordered containment, collision-free group keys; cap96/160 unchanged",
+  "historical_final_0_3_2_compatibility_cases": 9,
+  "formal_nine_sample_quality_node": "pending N6-CANDIDATE",
+  "original_goldens_changed": false,
+  "required_denominator": 33,
+  "provider_http": 0,
+  "provider_model_posts": 0,
+  "raw_deleted": 0,
+  "scratch": {
+    "tmp/n6ba": "restored absent",
+    "tmp/n6bb": "restored absent",
+    "tmp/n6bc": "restored absent"
+  },
+  "protected_user_config_sha256": "3609e707466eeb3e0f685e14f2637c6afa39ba900edef1be4814433a43300a01",
+  "rf_head": "6e6b817a1a6e4567293a4dcb835815f3be508a03",
+  "rf_owner_files_written": 0,
+  "ci": {
+    "jobs": [
+      {
+        "id": 112541358759,
+        "run_id": 37543349021,
+        "workflow_name": "CI",
+        "head_branch": "master",
+        "run_url": "https://api.github.com/repos/zhengcb81/company-wiki/actions/runs/37543349021",
+        "run_attempt": 1,
+        "node_id": "CR_kwDOSGURns8AAAAaM_zapw",
+        "head_sha": "3cd49606eee2a9b752bc5f22bf84ca00bb5d8ba4",
+        "url": "https://api.github.com/repos/zhengcb81/company-wiki/actions/jobs/112541358759",
+        "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/37543349021/job/112541358759",
+        "status": "completed",
+        "conclusion": "success",
+        "created_at": "2026-10-06T22:53:02Z",
+        "started_at": "2026-10-06T22:53:05Z",
+        "completed_at": "2026-10-06T22:54:17Z",
+        "name": "Fast checks (Python 3.12)",
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1,
+            "started_at": "2026-10-06T22:53:06Z",
+            "completed_at": "2026-10-06T22:53:06Z"
+          },
+          {
+            "name": "Run actions/checkout@v4",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 2,
+            "started_at": "2026-10-06T22:53:06Z",
+            "completed_at": "2026-10-06T22:53:08Z"
+          },
+          {
+            "name": "Set up Python 3.12",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 3,
+            "started_at": "2026-10-06T22:53:08Z",
+            "completed_at": "2026-10-06T22:53:10Z"
+          },
+          {
+            "name": "Install dependencies",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 4,
+            "started_at": "2026-10-06T22:53:10Z",
+            "completed_at": "2026-10-06T22:53:35Z"
+          },
+          {
+            "name": "Ruff lint",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 5,
+            "started_at": "2026-10-06T22:53:35Z",
+            "completed_at": "2026-10-06T22:53:35Z"
+          },
+          {
+            "name": "Strict type check on contract modules",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 6,
+            "started_at": "2026-10-06T22:53:35Z",
+            "completed_at": "2026-10-06T22:53:37Z"
+          },
+          {
+            "name": "Compileall and config doctor",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 7,
+            "started_at": "2026-10-06T22:53:37Z",
+            "completed_at": "2026-10-06T22:53:41Z"
+          },
+          {
+            "name": "Unit tests",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 8,
+            "started_at": "2026-10-06T22:53:41Z",
+            "completed_at": "2026-10-06T22:54:13Z"
+          },
+          {
+            "name": "Unit test failure summary",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 9,
+            "started_at": "2026-10-06T22:54:13Z",
+            "completed_at": "2026-10-06T22:54:13Z"
+          },
+          {
+            "name": "Focused contract tests",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 10,
+            "started_at": "2026-10-06T22:54:13Z",
+            "completed_at": "2026-10-06T22:54:15Z"
+          },
+          {
+            "name": "Focused contract failure summary",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 11,
+            "started_at": "2026-10-06T22:54:15Z",
+            "completed_at": "2026-10-06T22:54:15Z"
+          },
+          {
+            "name": "CLI smoke test",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 12,
+            "started_at": "2026-10-06T22:54:15Z",
+            "completed_at": "2026-10-06T22:54:15Z"
+          },
+          {
+            "name": "Scan for hardcoded secrets",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 13,
+            "started_at": "2026-10-06T22:54:15Z",
+            "completed_at": "2026-10-06T22:54:15Z"
+          },
+          {
+            "name": "Post Set up Python 3.12",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 25,
+            "started_at": "2026-10-06T22:54:15Z",
+            "completed_at": "2026-10-06T22:54:15Z"
+          },
+          {
+            "name": "Post Run actions/checkout@v4",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 26,
+            "started_at": "2026-10-06T22:54:15Z",
+            "completed_at": "2026-10-06T22:54:15Z"
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 27,
+            "started_at": "2026-10-06T22:54:15Z",
+            "completed_at": "2026-10-06T22:54:15Z"
+          }
+        ],
+        "check_run_url": "https://api.github.com/repos/zhengcb81/company-wiki/check-runs/112541358759",
+        "labels": [
+          "ubuntu-latest"
+        ],
+        "runner_id": 1000001946,
+        "runner_name": "GitHub Actions 1000001946",
+        "runner_group_id": 0,
+        "runner_group_name": "GitHub Actions"
+      }
+    ],
+    "head_sha": "3cd49606eee2a9b752bc5f22bf84ca00bb5d8ba4",
+    "conclusion": "success",
+    "run_id": 37543349021
+  },
+  "status": "published_ci_passed"
 }

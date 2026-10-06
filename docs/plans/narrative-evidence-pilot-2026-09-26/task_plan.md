@@ -45,7 +45,7 @@ python -B tools/n4c_live_preflight.py --rf-root 'C:/Users/郑曾波/Projects/rev
 | S4 N4C与R6实际效果 | complete | 四类真实final/RF读取与run10业务复核完成；R6 TDD→184责任测试→正式离线E2E/RF→代码eae2dd4/CI59秒绿，保留好claim，坏片段不进入产物，不重跑真实模型 |
 | S5 逐 caller 与派生清理 | complete | 旧全文 writer/消费者退出；生产 7104 旧文件、8191 handle 退休；原件与来源事实保持 |
 | S6 DB 收缩与收尾 | complete | 1490530 旧 span 删除；DB 3055841280→222408704 B；说明/控制/短 smoke 已发布，精确 CI 绿 |
-| S7 N5-DOCSET质量对照与整改 | in_progress | 工具已集中修正/43不同case通过；当前0.3.2真实9样本required12/33、744定位全回放，不能认为语义完成。[S7细则](s7_document_quality_implementation_2026-10-06.md)按候选完整上下文→固定预算去重/排序→一次质量节点执行，不扩预算/改golden凑绿 |
+| S7 N5-DOCSET质量对照与整改 | in_progress | 工具已集中修正/43不同case通过；已测0.3.2真实9样本required12/33、744定位全回放，不能认为语义完成。[S7细则](s7_document_quality_implementation_2026-10-06.md)按候选完整上下文→固定预算去重/排序→一次质量节点执行，不扩预算/改golden凑绿 |
 | 可选原件 exact-SHA 去重 | 不阻 S0–S6 完成 | 先只读实证收益，保留来源/location 版本；未测重复 raw 不计节省，不自动删原件 |
 
 [完成证据与真实缺口](main_completion_evidence_2026-10-06.md)分别说明 fixture/真实模型/消费者读取的证明范围。生产清理净释放 **5659443210 B**，原件删除 **0**，17 表事实及四份真实 raw 前后读取一致；正式证据：[生产存储收据](harness_lanes/results/s5_production_storage_acceptance_2026-10-06.json)。没有完整恢复 46GB 备份演练。
@@ -89,9 +89,9 @@ TDD 框住具体公开行为。只在 N4 A/B/C、存储迁移等大节点集中�
 
 ## Next Step
 
-**接收 N6-CANDIDATE 的实际交付，随后执行 S7 一个集中质量节点。** N6-FOOTPRINT 已合入/推 cf24f34，精确 CI37542743196 全步骤成功/68秒，52项责任测试绿；N6-BUDGET 18dbd0e 已交付，MAIN 修正后145项/7.46秒及真实电话会+AUTO升级2项/23.73秒绿，selector0.3.3，准备正常并线发布。详见[n6 MAIN验收](n6_budget_footprint_main_acceptance.md)。
+**验收 N6-CANDIDATE 的新交接 ce61cdd，随后执行 S7 一个集中质量节点。** N6-FOOTPRINT 已合入/推 cf24f34，精确 CI37542743196 全步骤成功/68秒，52项责任测试绿；N6-BUDGET 18dbd0e 已交付，MAIN 修正后145项/7.46秒及真实电话会+AUTO升级2项/23.73秒绿，selector0.3.3，已正常并线/推3cd4960，精确CI37543349021全部步骤绿/72秒。详见[n6 MAIN验收](n6_budget_footprint_main_acceptance.md)。
 
-候选线继续独占四模块，不重派/跨写。最终按main_wiring合规则再更新实际selector版本，一次真实9样本（原33 required/86点/golden不改）和正式Worker→RF→search/exact→恢复验收。0.3.2最近实测12/33仍是已知基准；手工候选推算13/33不能替代新版本实际质量证明。既有冻结兼容9项在0.3.3实际新代码已绿。失败只修责任包，不逐helper审批、不加日常CI长测试。
+只读已见候选线提交 ce61cdd 及 HANDOFF（实现9a4b815）；本回合只正式收预算与空间，下一验其接口/责任测试，不重派/跨写 owner。最终按main_wiring合规则再更新实际selector版本，一次真实9样本（原33 required/86点/golden不改）和正式Worker→RF→search/exact→恢复验收。0.3.2最近实测12/33仍是已知基准；手工候选推算13/33不能替代新版本实际质量证明。既有冻结兼容9项在0.3.3实际新代码已绿。失败只修责任包，不逐helper审批、不加日常CI长测试。
 
 最新单根空间报告逻辑24,365,900,191 B，其中原件23,462,933,638 B占96.2941%；tmp/测试与tmp DB候选323,168,254 B，未证实全部可删/实际分配量，原件删除0。工具零正文/联网/LLM，只报告；不用新增人工审批文件。1007云占位跳过，旧37G/46G与这次单根stat口径不混用。生产 S5/S6净释放5659443210 B仍按原正式收据。
 
