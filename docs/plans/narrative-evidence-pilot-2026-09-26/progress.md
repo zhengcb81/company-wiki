@@ -985,3 +985,11 @@ S0/N4A及S2模型预算基础、CLI阶段与CI修复已正常发布，当前CI�
 4. ET首次真实只读audit脚本路径键KeyError，finally清理；编排没在exit1后中断，main快进/推送先发生。修改脚本相对路径as_posix后，在已经合入的正式main实际audit通过：43 TXT全legacy_unverified，原件SHA/size/mtime、ET配置SHA保持，0写收据，tmp/n5etread恢复absent。独立spot MSFT Q1 2025为60363 B/SHA ac1cc6170dcfaa68e586dfcdc6c5bf2e4de05cc0bfb7836013c37cc60eb701ae。依赖修改以后显式检查退出码，不能把失败前命令拼接当成功。
 5. ET local main/真实远端main均2b9fb84660f98ce27a05709a7e31342ab044b4d2，代码96c9bc8包含其中；只保留owner .workbuddy-ai/、eval_results.json。正式n5_et_text_main_acceptance_2026-10-06.json说明green为MAIN责任测试/goldens/Ruff，不冒称无workflow仓库远端CI已绿。
 6. 更新当前task_plan、完成证据、N4恢复细则、并行总计划/N5总包/ET卡与findings/progress，S4有限样本complete、S0–S6核心收口；N5-DOCSET/RAW-DUP未完整交付，整体目标active。当前代码CI4826ad9/37514053091已一次全绿52秒，纯文档与收据复用此代码证明，不新增慢测试或小节点门。本记录随本轮文档/小收据正常commit/push；精确文档提交由git log检索，不暂存用户config。发布前diff --check发现两日志末尾空行，已清除，单独检查退出0后才提交。
+
+## 2026-10-06 — R6局部摘要容错集中节点与RAW-DUP交接
+
+完成审计发现R6已采纳要求未实装，重新打开S4具体缺口并先写实施卡。TDD初30项17失败/13通过；严格JSON非有限数三反例先失败再修。私有模型adapter丢整条坏claim、忽略未消费扩展，保留好claim及其原引用/角色；全局身份/语言/显式translate仍拒绝，公共合同不放宽。partial用现行needs_review质量诊断，无人工许可。最终184责任测试/2.04秒、Ruff及两个模块mypy绿。
+
+正式configured CLI离线E2E 1 passed/16.62秒，真实原件字节+隔离Acme元数据+loopback响应，Worker/outbox→public读/检索/exact→RF已提交consumer，46定位回放、同run无重复POST，原件/生产/配置/RF owner保护通过。两次E2E初红因测试config不在config/导致默认project-root不同；仅修fixture标准布局，RF零改。mypy两处schema类型红修显式注解。七个本线测试根核绝对路径/无reparse后恢复absent，0真实外发/费用。receipt r6_partial_summary_node_2026-10-06.json；代码发布CI尚待。
+
+人类通知N5-RAW-DUP已交付，完整handoff与clean branch e40b4ec/a1418a0已读。只读产出约7.27GiB逻辑候选上界、3组158223532 B已实读潜在重复，deleted0；不计已释放。审查发现需验证物理allocated口径、硬字节上限、local-output与原件路径隔离，MAIN集中处理后才并线，不接管DOCSET。worktree无CodeGraph索引，用已知交接列出的模块读取；两次猜测文件名不存在已改实际模块名，不修改owner设置。

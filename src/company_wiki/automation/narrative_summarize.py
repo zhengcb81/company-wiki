@@ -58,6 +58,8 @@ def _summary_contract_rule(error: NarrativeContractError) -> str:
         "every summary claim requires evidence IDs": "EVIDENCE_REFERENCE",
         "non-company evidence cannot support a company statement": "CLAIM_ROLE",
         "analyst-question claims must cite question evidence only": "CLAIM_ROLE",
+        "analyst-question claims must preserve question modality": "CLAIM_MODALITY",
+        "summary claim IDs are duplicated": "CLAIM_DUPLICATE_ID",
         "unstable evidence locators require needs_review status": "LOCATOR_REVIEW_STATUS",
         "review-required claims require a needs_review draft": "DRAFT_REVIEW_STATUS",
     }
@@ -289,6 +291,14 @@ class NarrativeSummarizeHandler:
         except ModelCitationError as exc:
             raise _SummaryFailure("SUMMARY_INVALID", HandlerOutcome.TERMINAL_FAILURE,
                                   "model draft cites evidence outside its selection") from exc
+        except PhysicalPathLeakError as exc:
+            raise ModelResponseError("model response contains a physical path") from exc
+        except NarrativeContractError as exc:
+            raise _SummaryFailure(
+                "SUMMARY_INVALID", HandlerOutcome.TERMINAL_FAILURE,
+                "model draft violates the summary contract "
+                f"(rule={_summary_contract_rule(exc)})",
+            ) from exc
         raw: Mapping[str, Any] = {
             "schema_version": SUMMARY_RESULT_SCHEMA,
             "source_ref": selected.source_ref.to_dict(),

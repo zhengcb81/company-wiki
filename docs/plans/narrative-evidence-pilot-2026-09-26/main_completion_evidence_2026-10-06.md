@@ -1,6 +1,6 @@
 # MAIN当前完成证据与真实缺口
 
-截至 CWP 已发布代码`4826ad9c67bce3d3e2b977173d283341d18bc141`（精确CI37514053091一次全绿/52秒）、RF main`6e6b817a1a6e4567293a4dcb835815f3be508a03`、ET本地/真实远端main`2b9fb84660f98ce27a05709a7e31342ab044b4d2`。S0–S6核心节点已有实际收据，N5-DOCSET/RAW-DUP尚未交付；**不宣称全部扩展工作完成**，不增加人工门或小节点复核。
+截至 CWP 已发布代码`4826ad9c67bce3d3e2b977173d283341d18bc141`（精确CI37514053091一次全绿/52秒）、RF main`6e6b817a1a6e4567293a4dcb835815f3be508a03`、ET本地/真实远端main`2b9fb84660f98ce27a05709a7e31342ab044b4d2`。S0–S6既有核心节点有收据；完成审计发现R6局部容错未实装，现已184责任测试与正式离线E2E绿、待代码发布CI。N5-RAW-DUP已交完整交接待MAIN验收，DOCSET仍待交付；**不宣称全部扩展工作完成**，不增加人工门或小节点复核。
 
 | 原目标/责任 | 已有权威证据 | 当前边界/下一动作 |
 |---|---|---|
@@ -35,3 +35,7 @@ run10只做一次DeepSeek T01+零模型policy：batch35.217秒/总42.828秒，20
 [N5总包](harness_lanes/n5_parallel_packages_2026-10-06.md)已分派，ET-TXT已验收并线，DOCSET/RAW-DUP尚待完整交接。不要重派或提前声称已完成质量基准/原件去重；metadata估计不计空间释放，不删原件。RF/IQS/StockWiki owner树不另写，总PWF与共享接口仍由MAIN维护。
 
 下一动作只取总task_plan：接收下一份N5完整交接后集中验收/并线，不重跑已绿长测，不建立第二任务库或人工门。S0–S6核心完成，**含未交付扩展的整体目标仍active**。
+
+## R6补齐
+
+[R6实施卡](r6_partial_summary_implementation_2026-10-06.md)与[集中节点](harness_lanes/results/r6_partial_summary_node_2026-10-06.json)记录局部坏引用只丢该claim、未知扩展不落盘、其余严格来源绑定不放松。184责任测试与实际原件字节/loopback模型正式CLI E2E、RF消费通过；不完整质量可读，无人工签收。新代码精确CI取得后才关闭此缺口；不重复付费run10。

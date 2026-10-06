@@ -1,0 +1,37 @@
+{
+  "schema": "cwp-main-node-receipt/1",
+  "node": "R6 partial model summary",
+  "date": "2026-10-06",
+  "status": "local_green_pending_exact_code_ci",
+  "prompt_version": "1.5.1",
+  "tdd": {"initial_failed": 17, "initial_passed": 13, "non_json_number_failed_before_fix": 3},
+  "responsibility_tests": {"files": 7, "passed": 184, "seconds": 2.04},
+  "formal_offline_e2e": {
+    "test": "tests/integration/test_narrative_batch_cli_e2e.py::test_partial_model_summary_configured_cli_public_views_and_committed_rf",
+    "passed": 1, "seconds": 16.62,
+    "real_raw_bytes": 66324,
+    "raw_sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+    "source_metadata": "isolated Acme US Q1 fixture, not production MSFT metadata",
+    "model": "configured factory with loopback deterministic response, not a vendor call",
+    "local_posts": 1, "resume_additional_posts": 0,
+    "kept_claims": 1, "discarded_claims": 1,
+    "quality": "needs_review, visible and readable; no human permission",
+    "locator_replay_count": 46,
+    "public_reference_read_search_exact": "passed",
+    "rf_committed_consumer": "passed",
+    "rf_head": "6e6b817a1a6e4567293a4dcb835815f3be508a03",
+    "external_posts": 0, "external_cost_micro_usd": 0,
+    "fake_usage": "73 input + 19 output tokens, 111 microUSD; not real campaign usage"
+  },
+  "ruff": "passed",
+  "mypy_model_and_summarize": "passed",
+  "git_diff_check": "passed",
+  "original_config_production_rf_owner_fingerprints": "unchanged",
+  "cleanup": {"restored_absent": ["tmp/r6red", "tmp/r6green", "tmp/r6e2e", "tmp/r6probe", "tmp/r6final", "tmp/r6numred", "tmp/r6node"]},
+  "errors": [
+    "Two E2E attempts failed reader availability because fixture config was outside config/; standard fixture layout fixed, no production/RF policy change",
+    "Two schema typing errors fixed with explicit dict[str, Any] annotations",
+    "NaN/Infinity rejection tests failed before strict parse_constant was added"
+  ],
+  "limits": ["No semantic entailment guarantee", "No new vendor/model benchmark", "No public enum/schema relaxation", "Source binding and all retained references remain strict"]
+}

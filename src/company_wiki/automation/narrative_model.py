@@ -6,14 +6,21 @@ from dataclasses import dataclass
 from collections import Counter
 import hashlib
 import json
-from typing import Any, Protocol
+from typing import Any, NoReturn, Protocol
 
 from .models import canonical_json, canonical_json_hash
-from .narrative_contracts import NarrativeSelectResult
+from company_wiki.source_catalog.narrative_evidence import (
+    SummaryValidationError, validate_summary_claim, validate_summary_identity,
+)
+
+from .narrative_contracts import (
+    NarrativeContractError, NarrativeSelectResult, _claim_from_dict, _draft_from_dict,
+    assert_no_physical_paths,
+)
 
 
 MODEL_REQUEST_SCHEMA = "narrative-model-request/1.2"
-NARRATIVE_PROMPT_VERSION = "1.5.0"
+NARRATIVE_PROMPT_VERSION = "1.5.1"
 MODEL_RESPONSE_MAX_BYTES = 128 * 1024
 
 _INSTRUCTION = (
@@ -30,7 +37,7 @@ _INSTRUCTION = (
 )
 
 
-_CLAIM_SCHEMA = {
+_CLAIM_SCHEMA: dict[str, Any] = {
     "type": "object",
     "required": ["claim_id", "text", "evidence_ids", "claim_type", "modality", "needs_review"],
     "additionalProperties": False,
@@ -43,7 +50,7 @@ _CLAIM_SCHEMA = {
         "needs_review": {"type": "boolean"},
     },
 }
-_RESPONSE_SCHEMA = {
+_RESPONSE_SCHEMA: dict[str, Any] = {
     "type": "object", "required": ["draft"], "additionalProperties": False,
     "properties": {"draft": {
         "type": "object",
@@ -193,36 +200,92 @@ def _unique_object(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
     return value
 
 
+def _invalid_json_number(_value: str) -> NoReturn:
+    raise ModelResponseError("model response contains a non-JSON numeric literal")
+
+
 def decode_model_draft(
     response: NarrativeModelResponse, *, selected: NarrativeSelectResult,
 ) -> dict[str, Any]:
-    """Decode exactly one draft object without retaining the raw model response."""
+    """Recover usable claims at the model boundary, then use strict canonical data.
+
+    Unknown provider extensions are never persisted. Source binding is global;
+    an unsupported claim is discarded as a whole, never fixed by deleting just
+    one citation. The existing needs_review flag describes incomplete quality,
+    without a manual permission requirement or a new public wire format.
+    """
     if response.prompt_version != NARRATIVE_PROMPT_VERSION:
         raise ModelResponseError("model response prompt version differs from request")
     try:
         decoded = response.response_bytes.decode("utf-8")
-        payload = json.loads(decoded, object_pairs_hook=_unique_object)
+        payload = json.loads(decoded, object_pairs_hook=_unique_object,
+                             parse_constant=_invalid_json_number)
     except (UnicodeDecodeError, json.JSONDecodeError, RecursionError) as exc:
         raise ModelResponseError("model response is not strict UTF-8 JSON") from exc
-    if not isinstance(payload, dict) or set(payload) != {"draft"}:
-        raise ModelResponseError("model response must contain exactly one draft")
-    draft = payload["draft"]
-    if not isinstance(draft, dict):
-        raise ModelResponseError("model draft must be an object")
+    if not isinstance(payload, dict) or "draft" not in payload:
+        raise ModelResponseError("model response must contain a draft")
+    _reject_translation(payload)
+    draft = _model_projection(payload["draft"], _RESPONSE_SCHEMA["properties"]["draft"]["required"], "summary draft")
+    claims = draft.get("claims")
+    if not isinstance(claims, list):
+        raise NarrativeContractError("summary claims must be an array")
+    header = _draft_from_dict({**draft, "claims": []})
+    try:
+        validate_summary_identity(header, source_id=selected.source_ref.source_id,
+                                  source_sha256=selected.source_ref.content_sha256,
+                                  language=selected.source_metadata.language)
+    except SummaryValidationError as exc:
+        raise NarrativeContractError(str(exc)) from exc
     mapping = _citation_mapping(selected)
     canonical = set(mapping.values())
-    claims = draft.get("claims")
-    if isinstance(claims, list):
-        for claim in claims:
-            if not isinstance(claim, dict) or not isinstance(claim.get("evidence_ids"), list):
-                continue  # The canonical draft validator owns malformed shapes.
-            ids = claim["evidence_ids"]
-            if not all(isinstance(value, str) for value in ids):
-                continue
-            if any(value not in mapping and value not in canonical for value in ids):
-                raise ModelCitationError("model citation is not in the pinned selection")
-            claim["evidence_ids"] = [mapping.get(value, value) for value in ids]
+    known = {span.span_id: span for span in selected.evidence_spans}
+    id_counts = Counter(raw["claim_id"] for raw in claims if isinstance(raw, dict)
+                        and isinstance(raw.get("claim_id"), str))
+    retained = []
+    first_error: NarrativeContractError | ModelResponseError | None = None
+    for raw in claims:
+        # Explicit translation is a whole-response contradiction, not an extension.
+        if isinstance(raw, dict):
+            _reject_translation(raw)
+        try:
+            claim = _model_projection(raw, _CLAIM_SCHEMA["required"], "summary claim")
+            ids = claim.get("evidence_ids")
+            if isinstance(ids, list) and all(isinstance(value, str) for value in ids):
+                if any(value not in mapping and value not in canonical for value in ids):
+                    raise ModelCitationError("model citation is not in the pinned selection")
+                claim["evidence_ids"] = [mapping.get(value, value) for value in ids]
+            assert_no_physical_paths(claim)
+            typed = _claim_from_dict(claim)
+            if id_counts[typed.claim_id] != 1:
+                raise NarrativeContractError("summary claim IDs are duplicated")
+            try:
+                validate_summary_claim(typed, known, header.status)
+            except SummaryValidationError as exc:
+                raise NarrativeContractError(str(exc)) from exc
+            retained.append(claim)
+        except (NarrativeContractError, ModelResponseError) as exc:
+            if first_error is None:
+                first_error = exc
+    if not retained:
+        if first_error is not None:
+            raise first_error
+        raise NarrativeContractError("summary draft must contain at least one claim")
+    draft["claims"] = retained
+    if len(retained) != len(claims):
+        draft["status"] = "needs_review"
     return draft
+
+
+def _reject_translation(value: dict[str, Any]) -> None:
+    if "translate" in value and value["translate"] is not False:
+        raise ModelResponseError("model response contradicts the untranslated source contract")
+
+
+def _model_projection(value: object, fields: list[str], name: str) -> dict[str, Any]:
+    if not isinstance(value, dict):
+        raise NarrativeContractError(f"{name} must be an object")
+    _reject_translation(value)
+    return {key: value[key] for key in fields if key in value}
 
 
 __all__ = [

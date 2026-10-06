@@ -337,7 +337,6 @@ class ReviewLoader:
     ({"source_sha256": "0" * 64}, "SOURCE_IDENTITY"),
     ({"claims": []}, "CLAIMS_EMPTY"),
     ({"claims": "not-an-array"}, "CLAIMS_SHAPE"),
-    ({"secret-provider-field-do-not-log": "opaque-provider-body"}, "DRAFT_FIELDS"),
 ])
 def test_failed_summary_persists_a_static_contract_rule_without_provider_values(overrides, rule):
     selected = _selection()

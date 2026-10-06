@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import hashlib
 import os
 from pathlib import Path
 import subprocess
@@ -25,9 +26,156 @@ from support.narrative_batch_fixtures import (
     KEY, KEY_ENV, T0, assert_originals_and_foreign_jobs_untouched,
     foreign_ready_jobs, isolated_batch_directory, prepare_source_catalog,
 )
+from tools.n4c_live_preflight import consumer_bootstrap
 
 
 loopback_model_server = batch_fixtures.loopback_model_server
+
+
+@pytest.fixture
+def r6_protected_inputs():
+    """Check real read-only inputs even if the end-to-end assertion fails."""
+    def snapshot(path):
+        if not path.exists():
+            return None
+        digest = hashlib.sha256()
+        with path.open("rb") as stream:
+            for block in iter(lambda: stream.read(1024 * 1024), b""):
+                digest.update(block)
+        return path.stat().st_size, path.stat().st_mtime_ns, digest.hexdigest()
+
+    repo = Path(__file__).resolve().parents[2]
+    protected = {p: snapshot(p) for p in [repo / "config/source_catalog.yaml",
+                  repo / "config/source_acquisition.yaml", repo / ".source_catalog/catalog.sqlite3"]}
+
+    def capture(paths):
+        protected.update({p: snapshot(p) for p in paths})
+
+    try:
+        yield capture
+    finally:
+        assert {p: snapshot(p) for p in protected} == protected, "read-only inputs changed"
+
+
+@pytest.mark.real_data
+@pytest.mark.e2e
+def test_partial_model_summary_configured_cli_public_views_and_committed_rf(
+    tmp_path_factory, loopback_model_server, monkeypatch, r6_protected_inputs,
+):
+    """Real immutable TXT; fixture identity and HTTP, never a live supplier call."""
+    transcript = os.environ.get("CWP_E2E_TRANSCRIPT_PATH")
+    rf_project = os.environ.get("CWP_RF_PROJECT_ROOT")
+    if not transcript or not rf_project:
+        pytest.skip("requires explicit read-only original and RF checkout inputs")
+    original_path, rf_root = Path(transcript), Path(rf_project)
+    original = original_path.read_bytes()
+    original_before = (original_path.stat().st_size, original_path.stat().st_mtime_ns,
+                       hashlib.sha256(original).hexdigest())
+    assert original_before[2] == "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a"
+    rf_head = "6e6b817a1a6e4567293a4dcb835815f3be508a03"
+    owner_paths = [rf_root / "assurance/runs/weekly_alert.jsonl", rf_root / "assurance/runs/weekly_manifest.json"]
+    owner_before = {p: p.read_bytes() for p in owner_paths}
+    r6_protected_inputs([original_path, *owner_paths])
+    monkeypatch.setenv("DEEPSEEK_API_KEY", KEY)
+    monkeypatch.setattr(batch_fixtures, "source_documents", lambda **_kwargs: [
+        ("en", "real-body.txt", "Isolated real transcript bytes", "investor_call_transcript", original),
+    ])
+    sentinel = "PROVIDER_UNUSED_EXTENSION_SENTINEL"
+
+    def partial_response(data):
+        row = next(row for row in data["evidence"] if
+                   (row[2] if len(row) > 2 else data["default_source_role"]) == "management")
+        claim = {"claim_id": "kept", "text": row[1][:200].strip(), "evidence_ids": [row[0]],
+                 "claim_type": "company_statement", "modality": "actual", "needs_review": False}
+        return {"draft": {"source_id": data["source"]["source_id"],
+                          "source_sha256": data["source"]["source_sha256"],
+                          "language": data["source"]["language"], "status": "draft",
+                          "claims": [claim, {**claim, "claim_id": "discarded",
+                                             "evidence_ids": [row[0], "e404"]}],
+                          "provider_unused": sentinel}}
+
+    monkeypatch.setattr(batch_fixtures, "response_draft", partial_response)
+    with isolated_batch_directory(tmp_path_factory) as root:
+        state = _prepare(root, loopback_model_server.endpoint, one_source=True)
+        try:
+            # Public readers infer the project from config/<file>; batch CLI
+            # also supplies project-root explicitly. Use one fixture layout.
+            public_config = root / "config/catalog.json"
+            public_config.parent.mkdir()
+            public_config.write_bytes(state.config_path.read_bytes())
+            state.config_path = public_config
+            config_path = root / "llm.yaml"
+            config_path.write_text("llm:\n  provider: deepseek\n  model: stub-model\n  base_url: "
+                                   + loopback_model_server.endpoint.removesuffix('/chat/completions')
+                                   + "\n  max_tokens: 8192\n  temperature: 0.7\n", encoding="utf-8")
+            originals, config_before = _originals(state), config_path.read_bytes()
+            process, result = _invoke(state, llm_config=config_path)
+            assert process.returncode == 0 and result["status"] == "completed", (process.stderr, result)
+            assert len(loopback_model_server.requests) == 1 and loopback_model_server.errors == []
+            assert result["budget"] == {"tokens": 92, "estimated_micro_usd": 111,
+                                        "unknown_reservations": 0, "unsettled_reservations": 0}
+            assert result["documents"][0]["artifact_ref"] is not None
+            exported = root / "rf-consumer"
+            exported.mkdir()
+            assert len(consumer_bootstrap(rf_root, rf_head, exported)) == 6
+            env = dict(os.environ, PYTHONPATH=str(Path(__file__).resolve().parents[2] / "src"),
+                       PYTHONDONTWRITEBYTECODE="1", PYTHONUTF8="1", PYTHON_DOTENV_DISABLED="1")
+
+            def invoke(command, request):
+                call = subprocess.run(command, input=json.dumps(request).encode(), env=env,
+                                      cwd=root, capture_output=True, timeout=40)
+                assert call.returncode == 0, call.stderr.decode(errors="replace")
+                assert KEY.encode() not in call.stdout + call.stderr
+                return call
+
+            ref, _language, _kind = next(iter(state.indexed.values()))
+            source_ref = {"schema_version": ref.schema_version, "document_id": ref.document_id,
+                          "source_id": ref.source_id, "content_sha256": ref.content_sha256,
+                          "byte_size": ref.byte_size, "mime_type": ref.mime_type}
+            transport = [sys.executable, "-B", "-m", "company_wiki.source_catalog.narrative_transport_cli",
+                         "--config", str(state.config_path)]
+            direct_reference = json.loads(invoke(transport + ["--operation", "reference"],
+                                                {"schema_version": "narrative-reference-request/1",
+                                                 "source_ref": source_ref}).stdout)
+            rf_command = [sys.executable, "-B", str(exported / "narrative_source_preparation.py"),
+                          "--company-wiki-catalog-config", str(state.config_path)]
+            reference = json.loads(invoke(rf_command + ["--operation", "reference"],
+                                          {"schema_version": "narrative-reference-request/1",
+                                           "source_ref": source_ref}).stdout)
+            assert reference == direct_reference
+            request = {"schema_version": "narrative-read-request/1", "narrative_ref": reference,
+                       "as_of_date": "2026-10-06", "expected_source": {
+                           "canonical_entity_id": "ent-acme", "market": "US", "security_id": "ACME",
+                           "document_kind": "investor_call_transcript", "fiscal_year": 2026,
+                           "fiscal_period": "Q1"}}
+            context = json.loads(invoke(rf_command, request).stdout)
+            assert context["quality_status"] == "needs_review"
+            assert context["read_receipt"]["replay_status"] == "verified"
+            assert context["summary"]["translate"] is False
+            assert [claim["claim_id"] for claim in context["summary"]["draft"]["claims"]] == ["kept"]
+            assert context["summary"]["draft"]["status"] == "needs_review"
+            assert sentinel not in json.dumps(context)
+            span = context["evidence_spans"][0]
+            for operation, options in [("evidence-search", ["--query", "Copilot"]),
+                                       ("evidence-lookup", ["--span-id", span["span_id"]])]:
+                viewed = invoke(transport + ["--operation", operation, *options], request)
+                view, receipt = json.loads(viewed.stdout), json.loads(viewed.stderr)
+                assert view["quality_status"] == "needs_review" and view["items"]
+                assert receipt["replay_status"] == "verified"
+                assert receipt["locator_count"] == len(context["evidence_spans"])
+            again, resumed = _invoke(state, llm_config=config_path)
+            assert again.returncode == 0 and resumed["documents"] == result["documents"]
+            assert resumed["budget"] == result["budget"] and len(loopback_model_server.requests) == 1
+            record, = NarrativeRunStore(state.store.db_path).reservations_for_run("cli-e2e")
+            assert record.usage_status == "known" and (record.input_tokens, record.output_tokens) == (73, 19)
+            assert config_path.read_bytes() == config_before
+            assert_originals_and_foreign_jobs_untouched(state, originals,
+                output=process.stdout + process.stderr + again.stdout + again.stderr)
+        finally:
+            state.catalog.close()
+    assert original_before == (original_path.stat().st_size, original_path.stat().st_mtime_ns,
+                               hashlib.sha256(original_path.read_bytes()).hexdigest())
+    assert {p: p.read_bytes() for p in owner_paths} == owner_before
 
 
 def _prepare(

@@ -806,3 +806,9 @@ e570daf已发布，精确CI37375836745 success。53个不同case分步GREEN。�
 - MAIN集中验收受影响3个测试文件92 passed/26.24秒、10 goldens matched、相关Ruff绿，未重复外线234项/77.76秒全包。正式ET main只读审计43份真实TXT，全legacy_unverified、0收据写入，所有原件SHA/size/mtime和ignored配置SHA保持，独立报告目录/测试根恢复absent，0HTTP/翻译/模型。已从63c4090快进并推main2b9fb84；真实git ls-remote核一致。该仓未配置CI，不冒称远端CI绿。
 - S0–S6核心已有实际收据；N5-DOCSET/RAW-DUP扩展仍由外线负责，未收到完整交接，不接管/重派/标完成；RAW-DUP约7.44GiB只是元数据上界。用户CWP source_acquisition修改、RF owner两日志和ET两个untracked文件全部保留，Dayu/IQS零写。
 - 工具/验证夹具错误：run10前sandbox psutil DLL拒绝访问，在POST前失败，正常用户环境运行成功，未改配置/依赖；ET首轮audit索引Windows反斜杠、查询用斜杠而KeyError，改相对路径as_posix并在已合入主线实际核验43份通过。首轮编排未因退出码截断，导致并线先于该只读audit，代码责任包与public wire已先绿；后续依赖mutation必须检查返回码。电话会离线首轮直接decode原TXT导致span IDs不匹配，改复用产品material规范化后原断言全通过，没有放松引用校验或改产品代码。
+
+## 2026-10-06 — R6实际缺口、兼容容错与RAW-DUP审查入口
+
+- 已采纳R6与旧实现存在差距：任一未知citation/extra会整体失败。新私有边界投影仅保留canonical字段，坏claim整条丢；来源/语言/全坏/翻译与严格JSON仍失败。RF质量枚举不支持新增partial，因此复用needs_review表示摘要不完整、无人工签收；public parser继续严格。共享identity/claim纯验证器，分析师问题必须question，费用在解码前结算。prompt1.5.1绑定请求hash，不改Config或付费预算。
+- 184责任Unit及真实字节/确定性模型正式CLI离线E2E通过；不会把loopback称新vendor验收，也不拿citation合格冒称语义蕴含正确。两次reader unavailable是fixture config布局错误，修标准config/后CWP与RF读均绿，不改生产接口。测试根已恢复absent。
+- N5-RAW-DUP完整交付e40b4ec，7,804,167,537 B逻辑重复候选上界不是磁盘释放；只有3组/158,223,532 B实际SHA复核，3528组未实读，deleted0。MAIN审查物理空间测量/预算/输出路径，未验收，不自动删除原件。

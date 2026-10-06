@@ -13,7 +13,7 @@
 - CWP 当前代码 `4826ad9c67bce3d3e2b977173d283341d18bc141` 已发布；显式预算修复的 [CI37514053091](harness_lanes/results/n4c_explicit_limits_ci_2026-10-06.json)一次全绿/52秒。短摘要代码 `4d019b5` 和历史长草案兼容测试 `86c8793` 已发布，精确代码 CI 分别一次通过，76/75秒。
 - RF 正式 main `6e6b817a1a6e4567293a4dcb835815f3be508a03`，已有默认 v2 与真实原文读取验收；FF main `758e8f4`，ET 本地/真实远端 main 已快进到 `2b9fb84660f98ce27a05709a7e31342ab044b4d2`，包含 N5-ET-TXT。不要重派已完成交付。
 - 当前 RF 正常用户上下文只有两份 owner weekly 日志修改，本线不改；旧 rf-impl WIP 保存在独立分支。本机 CWP `config/source_acquisition.yaml` 是用户改动，SHA `3609e707466eeb3e0f685e14f2637c6afa39ba900edef1be4814433a43300a01`，不暂存、不覆盖。
-- S4 修复后真实电话会 run10 已完成：20 条摘要、15 条管理层陈述、46 个定位全部回放，RF 正式读取通过；六类业务主题全部在精选证据中，短摘要覆盖五类，GPU 交付效率未单列，不能声称穷尽。S0–S6 核心节点已收口；N5-DOCSET/RAW-DUP 尚待外线完整交付和 MAIN 验收，整体目标仍 active。
+- S4 修复后真实电话会 run10 已完成：20 条摘要、15 条管理层陈述、46 个定位全部回放，RF 正式读取通过；六类业务主题精选6/6、短摘要5/6，GPU效率未单列，不能声称穷尽。完成审计新发现已采纳R6的局部坏引用恢复未实装，S4重新打开这一具体缺口；其余核心证据不重做。N5-DOCSET/RAW-DUP尚待完整交付，整体目标active。
 
 ## 已批准预算与配置
 
@@ -33,7 +33,7 @@ python -B tools/n4c_live_preflight.py --rf-root 'C:/Users/郑曾波/Projects/rev
 
 ## 实施顺序与当前完成范围
 
-优先事项 G1 门禁精简、S3 虚拟化已经完成；不再串行重做。S4 已有修复后真实业务效果收据，S5/S6 生产清理完成。扩展质量实证与原件去重调查由两个 N5 外线继续，不新增核心节点屏障。
+优先事项G1门禁精简、S3虚拟化已完成，S5/S6生产清理完成。S4真实业务效果已验证，当前先补完成审计发现的[R6局部摘要恢复](r6_partial_summary_implementation_2026-10-06.md)；不把旧成功缩成整体完成。两个N5外线保持独立，不新增小节点门。
 
 | 步骤 | 状态 | 范围与证据 |
 |---|---|---|
@@ -42,7 +42,7 @@ python -B tools/n4c_live_preflight.py --rf-root 'C:/Users/郑曾波/Projects/rev
 | S2 N4B | complete | 隔离子进程客户端、真实 HTTP/factory、有限 batch、持久预算、lease/generation/kill/ACK 恢复；节点 A/B 集中验收绿 |
 | G1 多余门禁/签收 | complete | 46 项已分类；private/public、prompt 人工复核阻断、签名/TTL、reviewer 必填、双授权及旧审批工具退出；CWP/FF/ET 责任测试绿 |
 | S3 来源虚拟化 | complete | SourceRef/SourceExport v2、FF→ET→CWP 正式 CLI 离线链、迁根/只读/去重/SHA/语言/超时清理验收；RF 默认 v2 已发布，StockWiki 现有只读消费者复用 |
-| S4 N4C 真实业务效果 | complete，有限样本范围 | 年报/招股/IR 有真实 final/RF 读取；电话会 run10 修复后实际通过，20 claims/46 locators/RF 读取0；[业务复核](harness_lanes/results/n4c_live_business_review_2026-10-06.json)明确短摘要5/6主题、精选6/6，不声称全类型/全主题穷尽 |
+| S4 N4C与R6实际效果 | in_progress，MAIN独占局部容错 | 四类真实final/RF读取与run10业务复核已完成；R6局部坏引用仍整体失败的缺口先TDD修复，再一次正式离线E2E/RF消费，不重跑既有真实模型 |
 | S5 逐 caller 与派生清理 | complete | 旧全文 writer/消费者退出；生产 7104 旧文件、8191 handle 退休；原件与来源事实保持 |
 | S6 DB 收缩与收尾 | complete | 1490530 旧 span 删除；DB 3055841280→222408704 B；说明/控制/短 smoke 已发布，精确 CI 绿 |
 | 可选原件 exact-SHA 去重 | 不阻 S0–S6 完成 | 先只读实证收益，保留来源/location 版本；未测重复 raw 不计节省，不自动删原件 |
@@ -88,8 +88,8 @@ TDD 框住具体公开行为。只在 N4 A/B/C、存储迁移等大节点集中�
 
 ## Next Step
 
-**接收 N5-DOCSET / N5-RAW-DUP 下一份完整交接，按各自卡的集中节点验收后统一并线。**两线保持独立写集；无交付时只记录实际状态，不接管或重派。
+**发布R6已绿实现并取得精确代码CI，然后集中验收已收到的N5-RAW-DUP交接。**[R6实施卡](r6_partial_summary_implementation_2026-10-06.md)已完成184责任测试与正式离线E2E/RF消费，0外部模型/下载/费用，来源身份/语言和剩余引用不放松。
 
-run10 与 ET-TXT 已完成、已写小收据；本轮 PWF/收据正常提交推送。S4 的真实结果、旧失败及非穷尽边界均保留，不把 Replay 当真实模型；已批准配置、旧 charges/unknown/FX 不动。N5-DOCSET若发现新的实质缺口，再据输入/期望/实际另列 MAIN 运行时修复；RAW-DUP 元数据估计不算实测收益、不触发原件删除或云 hydrate。
+run10与ET-TXT已完成并推adc9d6b；保留真实结果、旧失败与非穷尽边界。N5-DOCSET/RAW-DUP下一完整交接到达后分别集中验收，不接管/重派。RAW-DUP已有本线staged工具与自报3组实读/158223532 B潜在逻辑副本减少，但尚未交HANDOFF，MAIN未验收，不计已释放；DOCSET已选9份真资料/86标注点，尚待全基准和交接。不凭目录文件或日志声称有确认live进程，不自动删原件/hydrate。
 
 N5外线独立实施，MAIN只在完整交付后验收；最终完成以本页每项责任和实际收据审计，不将当前证据缩成更容易通过的目标。

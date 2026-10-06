@@ -1530,20 +1530,30 @@ def validate_summary_draft(
     evidence_spans: Sequence[EvidenceSpan],
 ) -> None:
     """Validate citations and roles; this is not a semantic truth review."""
-    if draft.source_id != source_id or draft.source_sha256 != source_sha256:
-        raise SummaryValidationError("summary source identity/hash does not match")
-    if draft.language != language:
-        raise SummaryValidationError("summary language must match the source language")
+    validate_summary_identity(
+        draft, source_id=source_id, source_sha256=source_sha256, language=language,
+    )
     known = {span.span_id: span for span in evidence_spans}
     if not draft.claims:
         raise SummaryValidationError("summary draft must contain at least one claim")
     for claim in draft.claims:
-        _validate_summary_claim(claim, known, draft.status)
+        validate_summary_claim(claim, known, draft.status)
     # A citation-valid draft remains a draft. Semantic entailment, contradictory
-    # evidence, modality, negation, and speaker accuracy require G1 review.
+    # evidence, modality, negation, and speaker accuracy remain quality questions,
+    # not permission to publish or read a source-oriented draft.
 
 
-def _validate_summary_claim(
+def validate_summary_identity(
+    draft: SourceSummaryDraft, *, source_id: str, source_sha256: str, language: str,
+) -> None:
+    """Check the whole-draft binding before inspecting recoverable claims."""
+    if draft.source_id != source_id or draft.source_sha256 != source_sha256:
+        raise SummaryValidationError("summary source identity/hash does not match")
+    if draft.language != language:
+        raise SummaryValidationError("summary language must match the source language")
+
+
+def validate_summary_claim(
     claim: SummaryClaim, known: Mapping[str, EvidenceSpan], draft_status: str
 ) -> None:
     if not claim.text.strip():
@@ -1567,6 +1577,8 @@ def _validate_claim_roles(claim: SummaryClaim, known: Mapping[str, EvidenceSpan]
         not roles or not roles <= {"analyst", "investor_question"}
     ):
         raise SummaryValidationError("analyst-question claims must cite question evidence only")
+    if claim.claim_type == "analyst_question" and claim.modality != "question":
+        raise SummaryValidationError("analyst-question claims must preserve question modality")
 
 
 def _validate_claim_review_status(
