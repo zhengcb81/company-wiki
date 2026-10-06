@@ -1,0 +1,268 @@
+{
+  "schema_version": "cwp-independent-handoff/1",
+  "lane_id": "N6-BUDGET",
+  "status": "complete",
+  "repo": "C:/Users/郑曾波/Projects/company-wiki",
+  "worktree": "C:/Users/郑曾波/Projects/cwp-lanes-20261006/n6-budget",
+  "branch": "codex/n6-budget",
+  "base_head": "58b74d07dd4f8b589c134ef9060a689864a8c089",
+  "lane_input_head": "949545957f0b3499f48219a124623b33ba8ba065",
+  "delivery_head": "805420a46dad90e893291503c07ebfe7059d72a4",
+  "commits": [
+    "805420a46dad90e893291503c07ebfe7059d72a4"
+  ],
+  "pushed_to": "codex/n6-budget",
+  "changed_paths": [
+    ".planning/n6-budget/findings.md",
+    ".planning/n6-budget/progress.md",
+    ".planning/n6-budget/task_plan.md",
+    "docs/implementation/handoffs/N6-BUDGET/HANDOFF.md",
+    "docs/implementation/handoffs/N6-BUDGET/handoff.json",
+    "src/company_wiki/source_catalog/n6_budget_dedup.py",
+    "src/company_wiki/source_catalog/narrative_budget.py",
+    "src/company_wiki/source_catalog/narrative_finalize.py",
+    "tests/fixtures/n6_budget/real_candidates.json",
+    "tests/integration/test_n6_budget_packages.py",
+    "tests/unit/test_n6_budget_selection.py",
+    "tests/unit/test_n6_group_dedup.py"
+  ],
+  "not_touched": [
+    "narrative_evidence/document/routing/candidates/context/group_candidates/neighbors/pdf_groups",
+    "existing tests (including tests/unit/test_narrative_evidence.py and tests/unit/test_narrative_selection_architecture.py)",
+    "benchmarks/ golden.json report*.json evaluator.py run_benchmark.py",
+    "config/ originals/ databases/ CI/ external repos",
+    "_source reader public contract, selector parser version, summary model"
+  ],
+  "upstream_pins": {
+    "company-wiki": {
+      "head": "58b74d07dd4f8b589c134ef9060a689864a8c089",
+      "interfaces": [
+        "EvidenceCandidate(unit, topics, reasons, score)",
+        "group_ids: Mapping[str, str] (unit_id -> input event group id)",
+        "BudgetItem(item_id, group_id, page_key, locator, order_key, reasons, score, is_heading, payload)",
+        "select_budget_items(items, *, limit) -> tuple[BudgetItem, ...] (signature unchanged)",
+        "finalize_selection(structure, route, candidates, *, group_ids, heading_pattern, dropped_financial_count) -> NarrativeEvidencePackage (signature unchanged)",
+        "NarrativeEvidencePackage field set unchanged; source_id/source_sha256/locators/unit ids unchanged",
+        "new: n6_budget_dedup.deduplicate_candidates -> DedupResult(candidates, group_ids, drops)",
+        "new: narrative_budget.budget_diagnostics -> tuple[BudgetDiagnostic, ...]",
+        "candidate_count is now the pre-dedup candidate count; omitted_candidate_count = candidate_count - selected"
+      ]
+    }
+  },
+  "public_commands": {
+    "green": "PLAN_ID=n6-budget PYTHONPATH=$PWD/src PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 CW_BASETEMP_FALLBACK_ROOT=$PWD/tmp python -m pytest -p no:cacheprovider --basetemp tmp/n6bt tests/unit/test_n6_budget_selection.py tests/unit/test_n6_group_dedup.py tests/integration/test_n6_budget_packages.py",
+    "existing_selection": "PLAN_ID=n6-budget PYTHONPATH=$PWD/src PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 CW_BASETEMP_FALLBACK_ROOT=$PWD/tmp python -m pytest -p no:cacheprovider --basetemp tmp/n6bt tests/unit/test_narrative_evidence.py tests/unit/test_narrative_selection_architecture.py",
+    "existing_narrative_unit": "PLAN_ID=n6-budget PYTHONPATH=$PWD/src PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 CW_BASETEMP_FALLBACK_ROOT=$PWD/tmp python -m pytest -p no:cacheprovider --basetemp tmp/n6bt tests/unit -k narrative",
+    "ruff": "python -m ruff check src/company_wiki/source_catalog/narrative_finalize.py src/company_wiki/source_catalog/narrative_budget.py src/company_wiki/source_catalog/n6_budget_dedup.py tests/unit/test_n6_budget_selection.py tests/unit/test_n6_group_dedup.py tests/integration/test_n6_budget_packages.py"
+  },
+  "tests": [
+    {
+      "stage": "red_missing_api",
+      "command": "public_commands.green",
+      "passed": 0,
+      "failed": 0,
+      "errors": 3,
+      "seconds": 2.38
+    },
+    {
+      "stage": "red_behavioral_with_legacy_stub",
+      "command": "public_commands.green",
+      "passed": 19,
+      "failed": 13,
+      "errors": 0,
+      "seconds": 1.6
+    },
+    {
+      "stage": "green_final",
+      "command": "public_commands.green",
+      "passed": 32,
+      "failed": 0,
+      "errors": 0,
+      "seconds": 1.57
+    },
+    {
+      "stage": "existing_selection_and_evidence",
+      "command": "public_commands.existing_selection",
+      "passed": 121,
+      "failed": 0,
+      "errors": 0,
+      "seconds": 1.91
+    },
+    {
+      "stage": "existing_narrative_unit",
+      "command": "public_commands.existing_narrative_unit",
+      "passed": 584,
+      "failed": 0,
+      "errors": 0,
+      "seconds": 55.19
+    },
+    {
+      "stage": "budget_dedup_related_short",
+      "command": "python -m pytest ... tests/unit/test_narrative_partial_summary.py tests/unit/test_narrative_english_business_recall.py tests/unit/test_narrative_evidence_view_query.py tests/unit/test_narrative_select_handler.py tests/unit/test_narrative_retrieval.py tests/integration/test_narrative_run_budget.py tests/integration/test_s5_narrative_evidence_view.py",
+      "passed": 122,
+      "failed": 1,
+      "failed_detail": "tests/integration/test_s5_narrative_evidence_view.py::test_real_transcript_search_lookup_and_directory_restoration fails at line 245 original.read_bytes() because the external sibling root ../earnings-transcripts/... is absent next to this lane worktree; failure precedes any selection code, unchanged by this lane, test not edited",
+      "seconds": 53.31
+    },
+    {
+      "stage": "ruff",
+      "command": "public_commands.ruff",
+      "passed": 6,
+      "failed": 0,
+      "seconds": null
+    }
+  ],
+  "interface_compatibility": {
+    "signatures_unchanged": true,
+    "return_shapes_unchanged": true,
+    "old_evidence_id_and_locator_unchanged": true,
+    "selection_group_id_unchanged_except_role_split": "identical ids for homogeneous groups; only input groups mixing company_filing/management with analyst/investor_question gain a ':statement'/':question' suffix",
+    "counts_redefined": "candidate_count = pre-dedup candidates; omitted_candidate_count = candidate_count - selected (dedup removals stay visible); equivalence omitted==0 <=> status=='selected' preserved",
+    "contract_old_assertions_conflicts": [],
+    "pre_commit_hooks": "ruff + mypy contract (FC-1204-c) + host guard passed on commit 805420a"
+  },
+  "dedup_rationale": [
+    "dedup unit is the event group (same selection_group_id the budget and summary use), never a bare text hash; no global SHA-based removal of originals",
+    "one record per narrative unit, richest enrichment wins (score, then table row), so identical candidates on the same unit cannot destabilize selection",
+    "inside a group only identical (normalized text, source role) copies collapse and the table row view wins; the group keeps at least one member and is never split",
+    "across groups a group is dropped only when its whole signature is equal to or contained in a surviving group's signature, so every surviving sentence still exists once and no unique content is lost (asserted by the integration test)",
+    "partial overlaps are conservatively kept: similar sentences that differ in project, period, company, role or negation normalize differently and are never merged",
+    "question and company-answer candidates never share one selection_group_id"
+  ],
+  "selection_rationale": [
+    "hard cap 96/160 unchanged; a bundle costs exactly its span count and is selected whole or not at all",
+    "reserved reasons (downstream_center_certification_timeline, downstream_business_extension) are still placed first, and one proposal per page per round keeps cross-page coverage",
+    "soft per-category fair share ceil(limit / active categories) counted in spans: a category that reaches its share is ranked behind categories still under share, so high-frequency generic risk/commitment language cannot crowd out product validation, capacity/fundraising and industry demand; the quota never removes an item, so budget still fills when other categories run out",
+    "the quota only engages when limit >= 2 x active categories, so tight budgets keep the historical priority order plus page rotation",
+    "oversized groups (cost > limit) are dropped whole and reported as group_exceeds_limit; otherwise budget_full; ordering ties resolve to category order, priority, larger bundle, bundle key, then numeric page order, so input order and equal scores cannot change the result",
+    "planner reads only the items passed in: no disk, no model, no network (asserted by tests that fail on builtins.open)"
+  ],
+  "measured_on_real_candidates": {
+    "scope": "S01-S08 captured finalize_selection inputs replayed read-only; S09 has no local original on this machine",
+    "baseline_vs_n6": {
+      "required_matched_of_28": [11, 12],
+      "optional_matched": [3, 3],
+      "negative_points_hit": [1, 1],
+      "selected_duplicates": [48, 2],
+      "S04_top_category_share": ["event 146/160", "event 76/160"],
+      "S05_top_category_share": ["event 114/160", "event 88/160"],
+      "S06_selected": ["160/160", "159/160 (one group dropped whole as budget_full)"]
+    },
+    "projected_with_S09": "required 12/33 -> 13/33; final coverage is MAIN's call on the 9-sample benchmark",
+    "selection_limit_changed": false
+  },
+  "real_vs_fixture": {
+    "fixture": "tests/fixtures/n6_budget/real_candidates.json",
+    "schema": "n6-budget-real-candidates/1",
+    "real": "every unit raw_text, coordinates, source_id and source_sha256 are verbatim from the registered originals in benchmarks/narrative_document_types/samples.json (read-only), self-checked against the manifest",
+    "hand_built": "candidate rows (topics/reasons/score/group_id) are hand-assembled for this test and are NOT production parser/selector output (declared in the fixture provenance block)",
+    "synthetic": "unit tests build synthetic NarrativeUnit/BudgetItem values on the frozen interfaces",
+    "metadata_is_fixture": false,
+    "originals_read_only": true
+  },
+  "real_samples": [
+    {
+      "sample_id": "n6_budget_real_candidates",
+      "path": "tests/fixtures/n6_budget/real_candidates.json",
+      "sha256": "5b226c7296a581960ac398efd494ecee02e97cd097dcbe9fb72394028ce653b0",
+      "byte_size": 26727,
+      "metadata_is_fixture": true
+    },
+    {
+      "sample_id": "S01",
+      "source_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "opened_read_only": true,
+      "metadata_is_fixture": false
+    },
+    {
+      "sample_id": "S05",
+      "source_sha256": "cd803fe9528f4646f8f29b518a450ae4bd5b5968c482eb49789f9786b523595b",
+      "opened_read_only": true,
+      "metadata_is_fixture": false
+    },
+    {
+      "sample_id": "S06",
+      "source_sha256": "c6ed566631e123f159abf2697c157f1868f8e994ccf8e3352132046a6c5ca0a1",
+      "opened_read_only": true,
+      "metadata_is_fixture": false
+    }
+  ],
+  "examples": [
+    {
+      "sample_id": "S01",
+      "before": "5 groups: two singletons on page 40 (cost 1 each), one page-75 industry group (cost 5), two page-40 groups (cost 1 each)",
+      "after": "kept=9 candidates, drops=0",
+      "budget": "selected_spans=9 (4 groups), dropped_groups=0",
+      "drop_reasons": []
+    },
+    {
+      "sample_id": "S05",
+      "before": "4 groups over 8 candidate records (7 distinct units): page101 x2 (cost 2 each), page161 certification-timeline group (cost 2), page3 certification-timeline group (cost 2)",
+      "after": "kept=5, drops=3",
+      "budget": "selected_spans=5 (3 groups), dropped_groups=0",
+      "drop_reasons": [
+        "same_unit_repeat loc:v1/page:101/paragraph:3 kept=<unit …651d208e> text_sha256=ee55933fda1efc84…",
+        "duplicate_event_group loc:v1/page:161/paragraph:25 kept=<unit …735a0d98> text_sha256=16a698a5db33af16…",
+        "duplicate_event_group loc:v1/page:161/paragraph:26 kept=<unit …9b773dea> text_sha256=6384b0af79f042b7…"
+      ],
+      "note": "page 3 and page 161 certification-timeline groups carry identical signatures (航空数字 / 化集成中心项目需要进行合格供应商认证和产品认证，预计需要4-9 个月。); the page 3 group wins on numeric coordinate order and the page 161 group is dropped whole"
+    },
+    {
+      "sample_id": "S06",
+      "before": "3 groups over 7 candidate records (6 distinct units): page43 groups of cost 3, 2 and 2",
+      "after": "kept=6, drops=1",
+      "budget": "selected_spans=6 (3 groups), dropped_groups=0",
+      "drop_reasons": [
+        "same_unit_repeat loc:v1/page:43/paragraph:10 kept=<unit …eb3e17aa> text_sha256=bbe17b89c2c1b41e…"
+      ]
+    },
+    {
+      "sample_id": "synthetic_oversized_group",
+      "before": "one group of 5 spans on page 1 plus 3 singletons on pages 2-4",
+      "after": "no dedup removal",
+      "budget": "selected_spans=3 singletons under limit=4; the group of 5 is dropped whole",
+      "drop_reasons": [
+        "group_exceeds_limit group=big cost=5 item_count=5 item_ids=[big-0..big-4] locator=<page1 paragraph0>"
+      ]
+    },
+    {
+      "sample_id": "synthetic_budget_full",
+      "before": "group of exactly `limit` spans plus one singleton",
+      "after": "no dedup removal",
+      "budget": "selected_spans=limit (the whole group); the singleton is dropped",
+      "drop_reasons": ["budget_full group=(none) cost=1"]
+    }
+  ],
+  "protection": {
+    "originals_unchanged": true,
+    "production_state_unchanged": true,
+    "owner_files_unchanged": true,
+    "production_config_unchanged": true,
+    "benchmark_and_golden_unchanged": true
+  },
+  "cleanup": {
+    "before": "absent",
+    "after": "absent",
+    "restored": true,
+    "detail": "pytest --basetemp tmp/n6bt removed after the run; development replay scripts and captured inputs stay under gitignored tmp/ and are not committed"
+  },
+  "calls": {
+    "model_posts": 0,
+    "provider_http": 0,
+    "downloads": 0,
+    "network": "blocked by hermetic conftest"
+  },
+  "main_wiring": [
+    "Run the 9-sample benchmark and the Worker -> retrieval -> RF end-to-end after merging; recompute required/optional/noise/duplicate and decide whether report/golden are regenerated",
+    "Propagate the count semantics: candidate_count is pre-dedup and omitted_candidate_count includes dedup drops; any consumer estimating 'candidates left' must follow omitted_candidate_count",
+    "Optional QA hooks: n6_budget_dedup.deduplicate_candidates(...).drops and narrative_budget.budget_diagnostics(...) give drop reason + real locator; persisting them is MAIN's schema decision",
+    "Check downstream assertions that match selection_group_id literally: only mixed statement/question input groups gain a ':statement'/':question' suffix",
+    "Re-run tests/integration/test_s5_narrative_evidence_view.py::test_real_transcript_search_lookup_and_directory_restoration where the external ../earnings-transcripts root exists"
+  ],
+  "open_items": [
+    "S09 (earnings transcript) had no local original next to this worktree, so it is excluded from the measured table; MAIN's benchmark covers it",
+    "Diagnostics exist in memory only; no persistent field was added",
+    "Empty-result policy and the division of labor on _status / whether an IR document may be skipped remain MAIN's",
+    "The S06 159/160 result is one group refused for lack of room (budget_full); raising the cap is explicitly out of scope for this lane"
+  ]
+}
