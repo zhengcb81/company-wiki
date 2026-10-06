@@ -1,5 +1,10 @@
 # Progress：激进简化实施
 
+## 2026-10-06 — P5-RF交付通知复核收口
+
+- 交付worktree干净，a74b9ceb完整为main祖先、main..交付分支无提交；RF本地/远端main均6e6b817a。官方API再次确认代码ca67eab7的CI37391526925 attempt1 completed/success。沿用正式MAIN验收收据中的108个不同case分步GREEN、107项pre-push及真实默认CLI/篡改反例，不重复长测或合并。
+- 修正RF独立施工卡过期ready标题，P5三线均已验收发布。owner周日志SHA不变，未改RF代码/原件/用户配置，0模型调用。沙箱git status产生大量ACL假删除，正常用户环境只读重核后确认仅原有两份周日志dirty；不据假删除恢复或清理文件。N4C累计token cap答复仍待，交付通知不视为预算授权。
+
 ## 2026-10-06 — N4C离线恢复点实证
 
 - 代码061f534d941054d6489d4a2147e24be6f89b62b8已正常提交/推送，pre-push GREEN；精确CI37400256960 attempt1 completed/success、job73秒。没有盲重跑。当前模型cap待答复这一条件在P5交付复核、S6收尾和本轮预算实读中连续存在；独立S6及当前RF/四样本/账本准备已经做完，CI也已terminal。剩余真实POST/产物/消费者/空间验收需要预算答复，无运行任务可继续等待，不额外新增审查或无关清理。

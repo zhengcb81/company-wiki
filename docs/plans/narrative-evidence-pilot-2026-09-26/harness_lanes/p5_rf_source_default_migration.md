@@ -1,6 +1,10 @@
 # P5-RF：默认来源准备迁至现有SourceRef v2
 
-**ready，可以立即开工；较大代码包。** 仅负责revenue-forecast，与P5-FF/P5-STORAGE和MAIN的CWP N4C并行。不是已经完成的RF N3a叙述consumer卡。
+**complete：MAIN已验收、并入本地及远端main，不再派发。** 2026-10-06再次核对：交付树干净，tip `a74b9ceb`（代码 `31fe65e6`）完整为main `6e6b817a`的祖先，没有未合入提交。以下为原施工范围，不能作为重新开工指令。
+
+验收以[MAIN正式收据](results/p5_rf_main_acceptance_2026-10-06.json)为准：默认链代码 `b110502f`，发布代码 `ca67eab7` 的[CI37391526925](https://github.com/zhengcb81/revenue-forecast/actions/runs/37391526925) attempt1 success（32秒）；后续文档提交至 `6e6b817a`。已执行108个不同case的分步GREEN、正常pre-push 107 passed、真实原件默认CLI读取3次及篡改拒绝1次，不声称一次108项整包运行。测试根已恢复，owner两份周日志SHA保持；原始handoff的旧FF pin/环境skip等hold已由MAIN整合解决。
+
+本包默认读取原件且不依赖旧normalized/summary/sections；CWP生产旧派生和旧span也已在后续S5/S6独立节点清理完成。N4C真实模型与消费者产物验收仍由MAIN完成，不重新派发RF迁移。
 
 ## 1. 背景与验收目标
 
