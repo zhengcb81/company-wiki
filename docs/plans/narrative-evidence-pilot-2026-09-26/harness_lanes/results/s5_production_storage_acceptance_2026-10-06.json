@@ -1,0 +1,294 @@
+{
+  "ci_run": 37394193179,
+  "code_head": "96f44a14127b40d97d00f30fa7ebbb183d94064a",
+  "database_after_bytes": 222408704,
+  "database_before_bytes": 3055841280,
+  "database_before_retirement_bytes": 3055841280,
+  "database_before_vacuum_bytes": 3059736576,
+  "database_net_released_bytes": 2833432576,
+  "database_released_bytes": 2833432576,
+  "deleted_file_bytes": 2825969544,
+  "deleted_file_count": 7072,
+  "derived_after_bytes": 0,
+  "derived_after_files": 0,
+  "derived_before_bytes": 2826010634,
+  "empty_legacy_directories_removed": 4240,
+  "external_calls": 0,
+  "foreign_key_check": [],
+  "full_db_backup_or_restore_rehearsal": false,
+  "handle_selection": {
+    "manifest_candidates": 6714,
+    "retirement_handle_count": 8191,
+    "shared_alias_count": 1477
+  },
+  "integrity_check": "ok",
+  "model_posts": 0,
+  "new_final_count": 0,
+  "operational_cleanup_bytes_are_not_added_to_legacy_net_release": true,
+  "operational_materials_bytes_deleted": 186486185,
+  "operational_materials_cleanup": "completed; tmp/s5-storage-20261006 restored absent",
+  "original_files_deleted": 0,
+  "orphan_bytes_deleted": 41090,
+  "orphan_files_deleted": 32,
+  "pinned_original_checks": [
+    {
+      "byte_size": 9165875,
+      "sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "unchanged": true
+    },
+    {
+      "byte_size": 66324,
+      "sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+      "unchanged": true
+    }
+  ],
+  "prune_scopes": [
+    {
+      "deleted": 16,
+      "parser_name": "antiword",
+      "parser_version": "1.0.0"
+    },
+    {
+      "deleted": 6230,
+      "parser_name": "dayu_docling",
+      "parser_version": "1.10.0"
+    },
+    {
+      "deleted": 6,
+      "parser_name": "html_markdownify",
+      "parser_version": "1.0.0"
+    },
+    {
+      "deleted": 22,
+      "parser_name": "openpyxl",
+      "parser_version": "3.1.5"
+    },
+    {
+      "deleted": 1479827,
+      "parser_name": "pdf_page_aware_core",
+      "parser_version": "1.26.7"
+    },
+    {
+      "deleted": 4040,
+      "parser_name": "plain_text",
+      "parser_version": "1.0.0"
+    },
+    {
+      "deleted": 28,
+      "parser_name": "python_docx",
+      "parser_version": "1.0.0"
+    },
+    {
+      "deleted": 361,
+      "parser_name": "structured_text",
+      "parser_version": "1.0.0"
+    }
+  ],
+  "public_read_purpose": "preview; no filing-reuse eligibility claim",
+  "public_reads_after": [
+    {
+      "byte_size": 4826662,
+      "content_sha256": "efe2ccd923b744eb69166aebf5f9b32ab7560efe3f6c44f2c6bcf4672fec1fa8",
+      "document_id": "urn:company-wiki:document:sha256:efe2ccd923b744eb69166aebf5f9b32ab7560efe3f6c44f2c6bcf4672fec1fa8",
+      "source_id": "urn:company-wiki:source:sha256:efe2ccd923b744eb69166aebf5f9b32ab7560efe3f6c44f2c6bcf4672fec1fa8"
+    },
+    {
+      "byte_size": 7073891,
+      "content_sha256": "02adc989d182ee2f9417920b9f521396149bf626ce8e9e9166b93c0be6bc6a16",
+      "document_id": "urn:company-wiki:document:sha256:02adc989d182ee2f9417920b9f521396149bf626ce8e9e9166b93c0be6bc6a16",
+      "source_id": "urn:company-wiki:source:sha256:02adc989d182ee2f9417920b9f521396149bf626ce8e9e9166b93c0be6bc6a16"
+    },
+    {
+      "byte_size": 133294,
+      "content_sha256": "3e25aab404a10661d067653e74ec576956c5bb15b55f5c337cf2a87c42bab2f4",
+      "document_id": "urn:company-wiki:document:sha256:3e25aab404a10661d067653e74ec576956c5bb15b55f5c337cf2a87c42bab2f4",
+      "source_id": "urn:company-wiki:source:sha256:3e25aab404a10661d067653e74ec576956c5bb15b55f5c337cf2a87c42bab2f4"
+    },
+    {
+      "byte_size": 309955,
+      "content_sha256": "37f0eb13fc9748d6f2f56e76e9a586bcee7cc9482dd77cdceb7a37fc0890ba2f",
+      "document_id": "urn:company-wiki:document:sha256:37f0eb13fc9748d6f2f56e76e9a586bcee7cc9482dd77cdceb7a37fc0890ba2f",
+      "source_id": "urn:company-wiki:source:sha256:37f0eb13fc9748d6f2f56e76e9a586bcee7cc9482dd77cdceb7a37fc0890ba2f"
+    }
+  ],
+  "public_reads_before": [
+    {
+      "byte_size": 4826662,
+      "content_sha256": "efe2ccd923b744eb69166aebf5f9b32ab7560efe3f6c44f2c6bcf4672fec1fa8",
+      "document_id": "urn:company-wiki:document:sha256:efe2ccd923b744eb69166aebf5f9b32ab7560efe3f6c44f2c6bcf4672fec1fa8",
+      "source_id": "urn:company-wiki:source:sha256:efe2ccd923b744eb69166aebf5f9b32ab7560efe3f6c44f2c6bcf4672fec1fa8"
+    },
+    {
+      "byte_size": 7073891,
+      "content_sha256": "02adc989d182ee2f9417920b9f521396149bf626ce8e9e9166b93c0be6bc6a16",
+      "document_id": "urn:company-wiki:document:sha256:02adc989d182ee2f9417920b9f521396149bf626ce8e9e9166b93c0be6bc6a16",
+      "source_id": "urn:company-wiki:source:sha256:02adc989d182ee2f9417920b9f521396149bf626ce8e9e9166b93c0be6bc6a16"
+    },
+    {
+      "byte_size": 133294,
+      "content_sha256": "3e25aab404a10661d067653e74ec576956c5bb15b55f5c337cf2a87c42bab2f4",
+      "document_id": "urn:company-wiki:document:sha256:3e25aab404a10661d067653e74ec576956c5bb15b55f5c337cf2a87c42bab2f4",
+      "source_id": "urn:company-wiki:source:sha256:3e25aab404a10661d067653e74ec576956c5bb15b55f5c337cf2a87c42bab2f4"
+    },
+    {
+      "byte_size": 309955,
+      "content_sha256": "37f0eb13fc9748d6f2f56e76e9a586bcee7cc9482dd77cdceb7a37fc0890ba2f",
+      "document_id": "urn:company-wiki:document:sha256:37f0eb13fc9748d6f2f56e76e9a586bcee7cc9482dd77cdceb7a37fc0890ba2f",
+      "source_id": "urn:company-wiki:source:sha256:37f0eb13fc9748d6f2f56e76e9a586bcee7cc9482dd77cdceb7a37fc0890ba2f"
+    }
+  ],
+  "raw_copies_written": 0,
+  "raw_originals_preserved": true,
+  "remaining_live_artifact_rows": 0,
+  "schema_version": "cwp-production-storage-node/1",
+  "source_facts_after": {
+    "activation_journal": {
+      "count": 1,
+      "digest": "6088030d350e6fba148547539440e64d53d418fe2cafa915c780033691ef34a0"
+    },
+    "catalog_meta": {
+      "count": 5,
+      "digest": "c751a23b4eedddc7ec730c126b4e9c6e6691fdd30b90597a3e4df7cfa67657c4"
+    },
+    "document_entities": {
+      "count": 23709,
+      "digest": "d6efb541c386d54984e103b07b915ac9b432d51e106266645d448c35947eb1c4"
+    },
+    "document_fingerprint_state": {
+      "count": 23529,
+      "digest": "7005c861dc6c1dffb64c1f304c1c16162db843d9921e2ecdc3c8de1b67a7991b"
+    },
+    "document_restore_audit": {
+      "count": 1,
+      "digest": "cd0e2af61f07636d8e0899fec4142970c4b8c6302b82360e1cd7584a6cea5a27"
+    },
+    "document_retire_audit": {
+      "count": 19000,
+      "digest": "c845fc06215ea230fe5b36629436a88faf285fabf1bed70e367799ff822bc23d"
+    },
+    "documents": {
+      "count": 23530,
+      "digest": "7c9ecd7a6a099fe19068ede9933b1371da98991f33088f460ab26da9dbf329a9"
+    },
+    "entities": {
+      "count": 271,
+      "digest": "bcb010d0fbc0de71288c60bd5c1645930f4321b4d35756da79371304564d1cd4"
+    },
+    "llm_summary_failures": {
+      "count": 651,
+      "digest": "d9adc391cb29879c776c838430733bd75fef450c854597877723dd0fa42b9c86"
+    },
+    "locations": {
+      "count": 46606,
+      "digest": "225a47f449e601ced439d0d5da0c63612410c4ff6dc7a7fa60692689d6295fb3"
+    },
+    "narrative_artifact_versions": {
+      "count": 0,
+      "digest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "producer_events": {
+      "count": 473,
+      "digest": "b50dac2604336ac74eaadb46f93080d7ddbbeadb62ff77a53094afff7f145777"
+    },
+    "remediation_proposals": {
+      "count": 0,
+      "digest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "roots": {
+      "count": 4,
+      "digest": "f606bb413c58656596173333df003761c814441d2e2d9c000c45a47519c1f0b9"
+    },
+    "scan_runs": {
+      "count": 481,
+      "digest": "40e56d057a75290a1e91649d10d1db23548ad735f2313d8195a2231df41c66d5"
+    },
+    "source_metadata_assertions": {
+      "count": 22,
+      "digest": "751c15cf47823d77e6b310db75bcb3271f9d3ee8486ac6e8151ffa9b96825328"
+    },
+    "sources": {
+      "count": 43112,
+      "digest": "d9c53e1008b9cdecd870209b4857b402b0efe47c725382dfc70afc3d67e86f0d"
+    }
+  },
+  "source_facts_before": {
+    "activation_journal": {
+      "count": 1,
+      "digest": "6088030d350e6fba148547539440e64d53d418fe2cafa915c780033691ef34a0"
+    },
+    "catalog_meta": {
+      "count": 5,
+      "digest": "c751a23b4eedddc7ec730c126b4e9c6e6691fdd30b90597a3e4df7cfa67657c4"
+    },
+    "document_entities": {
+      "count": 23709,
+      "digest": "d6efb541c386d54984e103b07b915ac9b432d51e106266645d448c35947eb1c4"
+    },
+    "document_fingerprint_state": {
+      "count": 23529,
+      "digest": "7005c861dc6c1dffb64c1f304c1c16162db843d9921e2ecdc3c8de1b67a7991b"
+    },
+    "document_restore_audit": {
+      "count": 1,
+      "digest": "cd0e2af61f07636d8e0899fec4142970c4b8c6302b82360e1cd7584a6cea5a27"
+    },
+    "document_retire_audit": {
+      "count": 19000,
+      "digest": "c845fc06215ea230fe5b36629436a88faf285fabf1bed70e367799ff822bc23d"
+    },
+    "documents": {
+      "count": 23530,
+      "digest": "7c9ecd7a6a099fe19068ede9933b1371da98991f33088f460ab26da9dbf329a9"
+    },
+    "entities": {
+      "count": 271,
+      "digest": "bcb010d0fbc0de71288c60bd5c1645930f4321b4d35756da79371304564d1cd4"
+    },
+    "llm_summary_failures": {
+      "count": 651,
+      "digest": "d9adc391cb29879c776c838430733bd75fef450c854597877723dd0fa42b9c86"
+    },
+    "locations": {
+      "count": 46606,
+      "digest": "225a47f449e601ced439d0d5da0c63612410c4ff6dc7a7fa60692689d6295fb3"
+    },
+    "narrative_artifact_versions": {
+      "count": 0,
+      "digest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "producer_events": {
+      "count": 473,
+      "digest": "b50dac2604336ac74eaadb46f93080d7ddbbeadb62ff77a53094afff7f145777"
+    },
+    "remediation_proposals": {
+      "count": 0,
+      "digest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "roots": {
+      "count": 4,
+      "digest": "f606bb413c58656596173333df003761c814441d2e2d9c000c45a47519c1f0b9"
+    },
+    "scan_runs": {
+      "count": 481,
+      "digest": "40e56d057a75290a1e91649d10d1db23548ad735f2313d8195a2231df41c66d5"
+    },
+    "source_metadata_assertions": {
+      "count": 22,
+      "digest": "751c15cf47823d77e6b310db75bcb3271f9d3ee8486ac6e8151ffa9b96825328"
+    },
+    "sources": {
+      "count": 43112,
+      "digest": "d9c53e1008b9cdecd870209b4857b402b0efe47c725382dfc70afc3d67e86f0d"
+    }
+  },
+  "source_facts_equal": true,
+  "source_only_checkpoint_bytes": 161251328,
+  "spans_after": 0,
+  "status": "succeeded",
+  "total_derived_bytes_deleted": 2826010634,
+  "total_derived_files_deleted": 7104,
+  "total_net_legacy_bytes_released": 5659443210,
+  "user_config_sha256": "3609e707466eeb3e0f685e14f2637c6afa39ba900edef1be4814433a43300a01",
+  "vacuum_shrink_bytes": 2837327872,
+  "verification": "49 concentrated cases and exact code CI green; production source facts equal, actual four public preview reads before/after, pinned PDF/TXT hashes unchanged"
+}

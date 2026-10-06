@@ -150,3 +150,7 @@ G1-LEGACY 写集已关闭；G1 总阶段仍因 FF SourceRef v2 资格门而保�
 - MeetingConverter施工卡已快进并推送master@`8a33a7f`，CI run37241709261 success；该线关闭。
 - MAIN独占的S5旧整库Worker/阶段策略已退役，保留按需normalized读写直到RF与CWP locator消费者迁移；worker状态/停止清理命令继续保留。细节见S5/S6主计划及旧Worker集成测试收据（本轮记录在progress/findings）。
 - RF复核仍以远端main `8a153f3387ae75fb172e70f8ab63ffd38100779a`为准；fcap仅weekly assurance两处owner改动未触碰。
+
+## 2026-10-06 MAIN汇总更新
+
+P5三包均已收口且已发布，不再派发。MAIN共享路径修复96f44a1/精确CI37394193179全绿，生产旧派生7104文件、8191 handle和1490530旧span处置完成；DB3055841280→222408704 B，整个旧派生+DB净减5659443210 B，原件/17表来源事实保持。正式小收据见harness_lanes/results/s5_production_storage_acceptance_2026-10-06.json；恢复点和一次性操作目录已删除。下一MAIN独占S6 docs/hook核销与N4C，后者累计token cap答复仍待；外线不重复删库/重跑inventory、不处理owner WIP、不修改Dayu。

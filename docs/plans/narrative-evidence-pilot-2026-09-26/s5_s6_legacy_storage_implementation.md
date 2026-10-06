@@ -4,9 +4,13 @@
 
 ## 2026-10-06交付验收恢复点
 
+**最终当前状态（覆盖下方执行中/未删的历史记录）：**生产存储节点已完成并验证成功。derived7104文件/2826010634 B清零，8191旧handle retired、1490530旧span清零；DB整批3055841280→222408704 B，净减少5659443210 B（5.66GB/5.27GiB）。来源17表/四份公开原文SHA及固定年报/电话会TXT均不变，FK/完整性通过；原件0删除。恢复点、大清单/报告和脚本共186486185 B已清除，tmp/s5-storage-20261006恢复absent；这个临时清理量不另加进净释放。正式小收据[harness_lanes/results/s5_production_storage_acceptance_2026-10-06.json](harness_lanes/results/s5_production_storage_acceptance_2026-10-06.json)。所有执行进程已terminal，不再等待旧handle/复跑inventory、retire、prune、VACUUM或长测试；下一仅做S6现行docs/hook核销并回N4C，总目标尚未完成。
+
 P5-FF与P5-STORAGE均已验收并发布，精确CI已再核success。CWP旧生成器b148123已退出生产安装包；RF已验收并推main ca67eab7（默认链代码b110502f）；精确CI37391526925一次全绿、job32秒。本地正式revenue-forecast已切main同步，旧rf-impl WIP原样保留在独立分支；三处已安装来源入口SHA与主线一致。生产derived/span/VACUUM仍未执行，空间收益须实际处置后测量。下一步复用[P5-RF整合细则](harness_lanes/results/p5_rf_main_integration_plan_2026-10-06.md)，不重跑工具已签收的长验收。
 
 ## 2026-10-06生产盘点后必须收口的共享路径问题
+
+**终态收尾补充：**主节点已succeeded，1490530条旧span删除，VACUUM完成，同四份原文/17表事实均保持。剩32文件41090 B已逐个实读frontmatter：21份structured_text旧normalized、11份旧LLM summary，全部为`.PDF.source`等侧车元数据产生的无registered handle缓存，非原始PDF或新final。MAIN仅对此精确列表按当前SHA/size、SHA目录与header身份、角色/版本、无artifact引用及非locations原件复核后unlink；空目录只rmdir，不递归扫未知对象。随后把整体基线修正为退休前DB3055841280→222408704 B（压缩前3059736576是退休元数据临时增长后的值，不能多报整批净释放），保存小聚合/PWF再清除17表恢复点、大manifest/阶段收据与一次性脚本。原件/新final/源码不再修改，不增加小节点测试或签收。
 
 **当前实际运行：**代码96f44a1已推master，精确CI37394193179 attempt1全绿。生产readonly预览结束：6714候选、7072唯一文件/2825969544 B、8191相关旧handle（1477共享alias）、excluded0。实际节点`tmp/s5-storage-20261006/execute_storage_node.py`正在运行；会话15696、当次PID39672只作定位线索，恢复时必须确认真实进程或工具handle仍live，不能仅看文件。四份生产原文公开CLI `--purpose preview` SHA/size已通过，17表source-only checkpoint161251328 B与preview事实完全一致；没有整库备份/恢复演练。当前stage为retire，未见终态收据时不能报告释放量。
 

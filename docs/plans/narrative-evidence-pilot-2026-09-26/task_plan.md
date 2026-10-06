@@ -6,13 +6,13 @@
 
 完成八束整套简化：一个下载请求入口、一套pathless来源接口、一套AUTO任务系统，按需选择业务叙述、摘要和检索；停止全量永久转换与重复正文；完成真实模型、持久预算、可恢复多文档处理及消费者接线，然后分批删除无调用者的旧派生。原件、来源/版本事实不丢。RF/FF/ET/StockWiki/IQS各仓独占写入，不修改其他owner未提交工作。
 
-**当前恢复点（2026-10-06，最新）：**目标active。P5-FF已验收/并入本地远端main758e8f4，精确CI37385101051一次GREEN；P5-STORAGE工具已验收/发布e570daf，生产未删。CWP剩余全量generator已退出安装包，原文临时parser/指纹保留且补上解析前后SHA与候选manifest绑定；代码b148123已推master，精确CI37388329668 attempt1 completed/success，所有步骤GREEN。节点229个不同case分步GREEN（含新增诊断case），真实年报PDF/TXT公开scan→fingerprint-backfill→幂等通过，0新artifact/span/derived、原SHA和来源事实不变、测试根恢复。RF已验收并推main ca67eab7（默认链代码b110502f；PWF收尾6e6b817a）；精确CI37391526925一次全绿、job32秒。本地正式revenue-forecast已切main同步，旧rf-impl WIP原样保留在独立分支；三处已安装来源入口SHA与主线一致。其默认来源迁移前置已满足；生产处置仍须按清单范围与引用保留执行。真实Config的DeepSeek/MiMo保持deepseek-flash/mimo-v2.6-flash、8192/温度1.0，N4C摘要POST仍待累计token cap答复，旧账不退。
+**当前恢复点（2026-10-06，最新）：**目标active。S5生产旧派生/切片清理已完成，7104文件/2826010634 B删除，8191旧handle退休，1490530旧span删除；DB3055841280→222408704 B，整批净减少5659443210 B（5.66GB/5.27GiB）。17表来源事实、四份公开原文读取、原始年报/电话会TXT固定SHA及用户配置保持；原件0删除，新final实际0且保留语义不变。161MB source-only恢复点及全部一次性材料已清除，正式小收据见s5_production_storage_acceptance_2026-10-06.json。工具修复96f44a1已发布、精确CI37394193179一次全绿；RF正式main6e6b817a与安装依赖同步，FF main758e8f4/ET main63c4090已签收。不重派已完成P5；下一S6只核销当前docs/hook残留，再回N4C真实模型批次。MiMo/DeepSeek仍按Config的mimo-v2.6-flash/deepseek-flash、8192/温度1.0；累计token cap答复仍待，旧未知账不退。
 
 **最近发布验收：**FF758e8f4/CI37385101051、精选1b0feb4/CI37381429717、质量dd35d2f/CI37378430383、STORAGE e570daf/CI37375836745均success。本轮b148123正常commit/pre-push GREEN且已推master，精确代码CI37388329668全部GREEN；纯PWF收尾不触发替代长测，user source_acquisition SHA保持。
 
 ## 2026-10-05 四仓状态与当前主线
 
-**2026-10-06最新生产执行状态（覆盖上方“生产未删”及下方历史空间值）：**共享路径工具修复96f44a1已发布且精确CI37394193179 attempt1全绿；生产preview零排除。实际retire已succeeded：7072文件/2825969544 B删除，8191旧handle退休（1477共享alias），derived从2826010634降至41090 B，17表来源事实、新final和user config不变、integrity ok。实际节点会话15696正继续8类旧parser范围prune与VACUUM，当前还不能报告DB物理释放或整个S5/S6完成。161251328 B source-only恢复点和操作manifest/收据保留至最终公开原文与来源事实校验成功。
+**2026-10-06最新生产执行状态（覆盖下方历史空间值）：**实际S5/S6存储节点已succeeded，精确代码CI全绿；7072已注册文件加32已识别孤立侧车派生全部删除，derived为0文件/0 B，4240个空旧缓存目录已rmdir。DB整批基线3055841280→222408704 B；压缩前3059736576是退休元数据临时增长后的阶段值，不用它多报整批净释放。来源事实/原件校验全部通过、来源表恢复点及大清单/脚本已清除；结果以[harness_lanes/results/s5_production_storage_acceptance_2026-10-06.json](harness_lanes/results/s5_production_storage_acceptance_2026-10-06.json)为准，旧preflight缺口已修复。
 
 本节为当前执行状态，优先于下方较早的baseline、并行线状态和 Next Step 历史文本。
 
@@ -55,8 +55,8 @@ StockWiki/IQS已有owner工作及消费者交付，本轮只读，不重复分�
 | G1 残余门禁/签收精简（第一优先） | complete（CWP来源链与G1-LEGACY已合入；FF SourceRef v2于`e1eda60`推送） | 46项清单已分为已退出、必要自动校验、能力边界及外仓owner事项；未找到生产调用者的旧摘要/binding/archive工具不再作为当前门，留待S5/S6 caller清理 | CWP来源/as-of 64项、resolver/planner/canonical 100项与G1-LEGACY 170 passed / 1 deselected既有收据；FF集中回归177 passed / 1 skipped / 39 subtests，Ruff及push gate GREEN；电话会provider→CWP导入端到端12 passed。保留SHA、来源身份/期间/公开日、可回放引用和资源限制 |
 | S3 SourceRef/SourceExport 虚拟化与来源默认收敛（第二优先） | **complete**（FF `eb0af13`、ET `63c4090`已推送；CWP SourceExport已发布；合入后FF→ET→CWP链及各仓责任集均GREEN。live FMP仍受HTTP 402权益限制，不影响接口合同完成） | 上层只用SourceRef/SourceExport v2；复用FF exact/latest_as_of和pathless reader，不依赖物理目录；电话会走正式ET CLI并由CWP持有原件；provider定位仍在adapter层 | ET deadline分支已快进到main；其`/1`、`/2`、discovery/candidate wire与goldens未改，CWP importer现有provider-aware FMP JSON合同经真实三仓离线链验证。跨仓脚本验证FF uppercase exchange转ET小写、精确FY/Q、FMP原JSON与canonical text各自SHA/size、unknown publication、pathless SourceRef、重复读取不触provider，以及超时后worker结果清理。合并后ET `tests/test_retrieval_cli_e2e.py` 6 passed、10 goldens matched；FF companion 5 passed且Ruff clean；CWP FMP importer 5 passed。FF只在owner目录用`eb0af13`修正交易所slug与3秒清理窗口；ET只更新过期golden说明并合入`63c4090`。旧“Motley 24字段唯一可导入”记录已由当前源码/测试更正。真实FMP HTTP 402不作为代码合同门；正费用额度没有实际账单计量，本计划只声称FF zero-cost拒绝与单次provider请求，不声称美元账单cap已实测。 |
 | S4 N4C real samples and storage plan | **in_progress; 已恢复，MAIN独占**（CWP transport真实四类型4 passed；RF N3a真实年报+电话会15 passed；E6 P1/P2/P4通过：当前93.006/89.453/62.527s，RSS分别373,583,872/459,042,816/686,489,600 B；旧P4 29.091s/630,353,920 B。已完成新旧parse/select/replay对照及`0.3.0`版本修复，不放开并发。RF/CWP跨仓实Worker消费、真实provider usage、第二IR/季度叙述覆盖及总增量空间仍待完成） | four real document types / actual bounded batch and consumer reads / language and citation coverage / total incremental bytes; retain only status/stop/uninstall compatibility for old worker process cleanup | 运行一个有限批次及RF N3a读取，一次大节点记录阶段耗时、总字节、预算、重试/锁、引用/语言与目录恢复；不重复已绿A/B与三档E6。P5三外线均已验收/发布，不作为N4C屏障 |
-| S5 B2逐caller清理 | in_progress（CWP运行旧writer/generator与旧全量查询已退出，b148123已发布/精确CI GREEN；正式精选1b0feb4、质量v2 dd35d2f、工具e570daf及FF758e8f4已发布/精确CI绿；RF默认迁移已验收/发布ca67eab7，进入生产处置） | [实施细则](s5_s6_legacy_storage_implementation.md)；原文临时parser/指纹及精选transport/BM25保留。历史造数器只在tests/support，不进入安装包；不重建全文索引。生产derived/span尚未删；RF已默认SourceRef v2、正式本地与安装生产依赖同步 | 原文parser/指纹与历史读兼容229个不同case分步GREEN，新Worker/存储3项、真实PDF/TXT CLI幂等与目录恢复通过；不增加日常慢CI或逐文件签收 |
-| S6 DB事实收缩与收尾 | pending | 表级盘点，删除不可再消费派生/废索引并收缩，来源版本/撤回事实保留；旁路兼容、docs/hook残留清完 | 同一存储节点；commit/push、PWF收尾 |
+| S5 B2逐caller清理 | **complete**（旧writer/全量正文消费者退出，RF默认v2已main发布，生产derived已清零） | 原文临时parser/指纹及精选transport/BM25保留；8191退休handle、7104旧文件删除、原件/来源事实不变 | 工具49集中测试和精确CI绿；生产四份公开原文前后读取/固定PDF与TXT SHA、17表digest/完整性通过；操作材料已收尾 |
+| S6 DB事实收缩与收尾 | **in_progress：生产收缩完成；剩当前docs/hook兼容残留核销** | 1490530旧span删除，DB3.056GB→222.409MB；来源17表/版本/撤回事实保持，新final0；不再做全量备份恢复演练 | 同一存储节点已succeeded，正式小收据已保存；收尾后回N4C |
 | 可选 exact-SHA原件对象去重 | 不阻S0–S6完成 | 先用已有SHA/size找候选、逐候选验字节，保留所有source/location版本事实 | 有真实收益才实施；不报未测节省量 |
 
 ## S0已完成技术记录
@@ -119,7 +119,7 @@ TDD框住公开行为，不把旧签收规则写进新测试。仅S0相关收口
 
 ## Next Step
 
-**MAIN单一下一动作：按[S5生产盘点补充细则](s5_s6_legacy_storage_implementation.md)完成修正清单的生产范围预览，精确代码CI绿后执行实际退役/切片处置/压缩大节点。**共享路径退休/物理字节去重已TDD收口，集中49 passed/87.25s，代码96f44a1已正常commit/push，CI37394193179已确认live（未完成前不宣称GREEN）；生产预览使用旧manifest补充235空标签summary，不重新生成百万legacy表摘要。CWP运行旧generators已收口b148123，FF和STORAGE均已验收，不重派/不复跑历史大包。RF正式本地/远端main6e6b817a、精确代码CI37391526925全绿，owner两周日志与旧WIP不变。生产尚未删除；原件和新final保持，消费者迁移前置已满足。N4C模型预算问题独立等待，不阻存储节点。
+**MAIN单一下一动作：核销S6当前docs/hook兼容残留，保持实际入口与接手说明一致，再回N4C真实模型批次。**存储节点已完成并保存[s5生产正式收据](harness_lanes/results/s5_production_storage_acceptance_2026-10-06.json)，0 derived/0旧spans/DB222408704 B，原件和17表事实不变；不重跑已完成的inventory/49责任包/删除/VACUUM，不再保留source-only恢复点或大操作材料。代码96f44a1精确CI37394193179全绿，RF main6e6b817a/FF main758e8f4/ET main63c4090已签收，不碰外包交付树与owner WIP。N4C预算160k问题尚待答复，费用仍$0.10；未获答复前不越过60k累计token cap、不擅改8192、不退旧账，配置只读GET200不算摘要成功。
 
 P5-STORAGE已验收并合入/发布：候选`9fa2166`，主线代码`e570dafb92a3f6aaec51176682d348a1c9303535`。53个不同case分步GREEN，真实AMEC年报+微软电话会TXT的原文stdout SHA、新NarrativeRef完整locator replay前后通过，连接关闭及测试根恢复均通过；没有生产删除。工具预览不写库/sidecar、不拿写锁；切片单次范围SQL/聚合小报告；压缩真实前后计量/空间检查，观测失败明确null。所有细节及实际副本空间见[集成审查](harness_lanes/results/p5_storage_integration_review_2026-10-05.md)、[小验收收据](harness_lanes/results/p5_storage_integration_acceptance_2026-10-05.json)、[工具说明](../../../tools/legacy_storage/README.md)。日常Unit CI不添加多分钟解析包。精确新代码[CI37375836745](https://github.com/zhengcb81/company-wiki/actions/runs/37375836745)已completed/success；此前18da250同SHA重跑CI也已success。
 

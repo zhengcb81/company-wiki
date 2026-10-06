@@ -681,3 +681,11 @@ e570daf已发布，精确CI37375836745 success。53个不同case分步GREEN。�
 - 采用物理对象为删除单位：已验证manifest提供SHA/size证明，闭合所有同document+source旧handle；失配旧hash不改写，未知现代/准备中/跨来源引用阻止整个共享组。sections对子文件有所有权，阻断沿组传递；BEGIN IMMEDIATE中复核相关当前完整row集合再统一退休，之后才unlink。
 - 已确认历史reader具有pymupdf_page_text→pdf_page_aware_core兼容别名，现parser/version与生产盘点一致；空标签summary只按历史SHA目录+summary.md+role识别，不解除所有unknown保护。
 - 本轮误读不存在tools/legacy_storage/cli.py、__main__.py和migrations.py，仅只读错误；由rg --files定位真实入口tools/legacy_storage_retirement.py，继续按实际文件施工。
+
+## 2026-10-06 — S5生产清理/来源库物理降容完成
+
+- 实际节点session15696 terminal exit0/succeeded：8个明确parser/version共1490530旧span全部删除，当前span0/可消费legacy artifact0；8191旧handle均retired。原件0删除，17表source facts的count/digest逐表完全一致，FK空/完整性ok，四份公开原文preview stdout SHA/size前后相同；中微2025年报/微软Q4 FY2026 TXT固定SHA另实读匹配。RF/FF/ET/Dayu源码零写，本地user config SHA不变。
+- 主retire7072文件2825969544 B，剩32文件41090 B逐个实读证实21 structured_text normalized+11旧LLM summary，都是侧车元数据的无registered handle缓存；在同一catalog锁下按精确SHA/header角色/源SHA目录、非locations原件、无artifact引用再次核实后unlink。最终derived7104文件2826010634 B全清零，4240空目录只rmdir；没有泛扫未知对象。
+- DB退休前3055841280 B，退休metadata更新后/压缩前3059736576 B，最终222408704 B。VACUUM阶段减2837327872 B，但整个节点DB净减2833432576 B；加旧文件后净减5659443210 B（5.659GB/5.271GiB），不使用更大的压缩前基线多报收益。
+- 正式小收据s5_production_storage_acceptance_2026-10-06.json保存原文/来源事实/8类计数/实际净空间与代码CI，10KB级；验证成功后按绝对路径/reparse检查清除唯一tmp/s5-storage-20261006，操作恢复点/清单/大报告/脚本186486185 B移除，目录恢复absent。临时材料清理不额外加进5.659GB净释放，未做完整3GB/46GB备份或恢复演练。
+- S5标complete；S6库收缩完成，剩当前docs/hook兼容引用核销再回N4C。49集中责任测试/96f44a1精确CI37394193179一次全绿复用，不新增小节点验收或日常慢CI；N4C累计预算问题仍独立等待，目标保持active，未宣称真实多provider批次已完成。

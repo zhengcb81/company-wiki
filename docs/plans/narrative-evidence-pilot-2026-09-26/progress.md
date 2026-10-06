@@ -854,3 +854,11 @@ S0/N4A及S2模型预算基础、CLI阶段与CI修复已正常发布，当前CI�
 - 修正preview目的后的实际节点session15696 confirmed live，production.before已ready：同四份raw公开stdout SHA/size通过，17表source-only checkpoint161251328 B（不包含artifacts/evidence全文或原件），checkpoint事实digest与当前17表一致。进入retire执行；尚未终态前不声称生产释放字节，恢复清单/checkpoint/分阶段报告保留。
 - production.retire已succeeded：实际删除7072文件2825969544 B，derived2826010634→41090 B；8191旧handle退休，1477共享alias闭合；excluded0，source facts17表完全一致，新final0→0、integrity ok。当前session15696继续prune/VACUUM，不把freelist变化报为物理释放。来源恢复点与大操作材料仍保留；终态前不写总体成功。
 - 顺手强化N4实施卡顶部交接：纠正旧run02余额/旧MiMo Pro/DeepSeek401历史恢复点，引用实际flash配置GET200与run04保守账；160k/$0.10授权问题尚待答复、旧未知账不退，不能依据旧段落重跑或更改参数。读tmp全路径遇旧cw-retire-r1 ACL仅只读失败，后续改精确已知报告路径。
+
+## 2026-10-06 — S5生产清理/来源库物理降容完成
+
+- 实际节点session15696 terminal exit0/succeeded：8个明确parser/version共1490530旧span全部删除，当前span0/可消费legacy artifact0；8191旧handle均retired。原件0删除，17表source facts的count/digest逐表完全一致，FK空/完整性ok，四份公开原文preview stdout SHA/size前后相同；中微2025年报/微软Q4 FY2026 TXT固定SHA另实读匹配。RF/FF/ET/Dayu源码零写，本地user config SHA不变。
+- 主retire7072文件2825969544 B，剩32文件41090 B逐个实读证实21 structured_text normalized+11旧LLM summary，都是侧车元数据的无registered handle缓存；在同一catalog锁下按精确SHA/header角色/源SHA目录、非locations原件、无artifact引用再次核实后unlink。最终derived7104文件2826010634 B全清零，4240空目录只rmdir；没有泛扫未知对象。
+- DB退休前3055841280 B，退休metadata更新后/压缩前3059736576 B，最终222408704 B。VACUUM阶段减2837327872 B，但整个节点DB净减2833432576 B；加旧文件后净减5659443210 B（5.659GB/5.271GiB），不使用更大的压缩前基线多报收益。
+- 正式小收据s5_production_storage_acceptance_2026-10-06.json保存原文/来源事实/8类计数/实际净空间与代码CI，10KB级；验证成功后按绝对路径/reparse检查清除唯一tmp/s5-storage-20261006，操作恢复点/清单/大报告/脚本186486185 B移除，目录恢复absent。临时材料清理不额外加进5.659GB净释放，未做完整3GB/46GB备份或恢复演练。
+- S5标complete；S6库收缩完成，剩当前docs/hook兼容引用核销再回N4C。49集中责任测试/96f44a1精确CI37394193179一次全绿复用，不新增小节点验收或日常慢CI；N4C累计预算问题仍独立等待，目标保持active，未宣称真实多provider批次已完成。
