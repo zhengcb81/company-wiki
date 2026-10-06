@@ -1,0 +1,1036 @@
+{
+ "schema": "cwp-independent-handoff/1",
+ "lane_id": "n6-candidates",
+ "base_head": "58b74d07dd4f8b589c134ef9060a689864a8c089",
+ "delivery_head": "9a4b815",
+ "delivery_head_full": "9a4b81518d7b966744fdcce9768c801686e83351",
+ "branch": "codex/n6-candidates",
+ "worktree": "C:/Users/郑曾波/Projects/cwp-lanes-20261006/n6-candidates",
+ "source_repo": "C:/Users/郑曾波/Projects/company-wiki (read-only)",
+ "changed_paths": [
+  "src/company_wiki/source_catalog/narrative_candidates.py",
+  "src/company_wiki/source_catalog/narrative_context.py",
+  "src/company_wiki/source_catalog/narrative_group_candidates.py",
+  "src/company_wiki/source_catalog/narrative_neighbors.py",
+  "src/company_wiki/source_catalog/n6_candidate_operating_facts.py (new)",
+  "src/company_wiki/source_catalog/n6_candidate_completion.py (new)",
+  "tests/unit/test_n6_candidate_recall.py (new)",
+  "tests/unit/test_n6_context_boundaries.py (new)",
+  "tests/integration/test_n6_candidate_pipeline.py (new)",
+  "docs/implementation/handoffs/N6-CANDIDATE/INPUT_CARD.md (sync with updated card)",
+  ".planning/n6-candidates/{task_plan,findings,progress}.md",
+  "docs/implementation/handoffs/N6-CANDIDATE/{HANDOFF.md,handoff.json}"
+ ],
+ "out_of_write_set_touches": "none; tmp/ scratch verification scripts were deleted",
+ "red": {
+  "command": "python -m pytest -p no:cacheprovider --basetemp tmp/n6ct tests/unit/test_n6_candidate_recall.py tests/unit/test_n6_context_boundaries.py tests/integration/test_n6_candidate_pipeline.py",
+  "failed": 18,
+  "passed": 12,
+  "seconds": 3.24,
+  "note": "run before implementation on the same worktree, 2026-10-06"
+ },
+ "green": {
+  "command": "python -m pytest -p no:cacheprovider --basetemp tmp/n6ct tests/unit/test_n6_candidate_recall.py tests/unit/test_n6_context_boundaries.py tests/integration/test_n6_candidate_pipeline.py",
+  "passed": 30,
+  "seconds": 0.99,
+  "ruff_command": "python -m ruff check src/company_wiki/source_catalog/narrative_candidates.py src/company_wiki/source_catalog/narrative_context.py src/company_wiki/source_catalog/narrative_group_candidates.py src/company_wiki/source_catalog/narrative_neighbors.py tests/unit/test_n6_candidate_recall.py tests/unit/test_n6_context_boundaries.py tests/integration/test_n6_candidate_pipeline.py",
+  "ruff": "All checks passed",
+  "mypy_contract_hook": "passed on commit (1 fixed assignment typing in narrative_group_candidates completion anchor)"
+ },
+ "existing_short_tests": {
+  "files": [
+   "tests/unit/test_narrative_evidence.py",
+   "tests/unit/test_narrative_selection_architecture.py",
+   "tests/unit/test_narrative_english_business_recall.py",
+   "tests/unit/test_narrative_english_operations.py",
+   "tests/unit/test_narrative_pdf_bytes.py",
+   "tests/unit/test_narrative_retrieval.py",
+   "tests/unit/test_narrative_select_handler.py",
+   "tests/unit/test_narrative_verify_handler.py"
+  ],
+  "passed": 181,
+  "failed": 0,
+  "modified": "none; no old assertion conflicted with the new spec",
+  "combined_with_new": "211 passed in 2.91s"
+ },
+ "interfaces": {
+  "unchanged_signatures": [
+   "assess_unit(unit: NarrativeUnit, rules: CandidateRules) -> CandidateAssessment",
+   "build_section_context(document_kind, groups, rules: ContextRules) -> SectionContext",
+   "enrich_context_groups(groups, *, initial_candidates, initial_group_ids, project_scores, business_scores, rules: GroupCandidateRules) -> GroupEnrichmentResult",
+   "enrich_neighbor_context(units, *, initial_candidates, initial_group_ids, rules: NeighborRules) -> NeighborEnrichmentResult",
+   "EvidenceCandidate(unit, topics, reasons, score); group_ids: Mapping[str, str]"
+  ],
+  "new_optional_rule_fields": [
+   {
+    "field": "CandidateRules.operating_facts",
+    "type": "Callable[[str], OperatingFact]",
+    "default": "n6_candidate_operating_facts.detect_operating_fact",
+    "breaking": false
+   },
+   {
+    "field": "GroupCandidateRules.operating_facts",
+    "type": "Callable[[str], OperatingFact]",
+    "default": "n6_candidate_operating_facts.detect_operating_fact",
+    "breaking": false
+   }
+  ],
+  "no_new_required_fields": true,
+  "new_reasons": [
+   "quantified_operating_status"
+  ],
+  "reused_reasons": [
+   "specific_business_event",
+   "project_plan_or_status",
+   "current_industry_context",
+   "direct_capacity_constraint",
+   "business_narrative_signal",
+   "pdf_visual_context_group",
+   "progress_or_change_language",
+   "project_section_context",
+   "management_statement"
+  ],
+  "new_selection_group_id_pattern": "{visual_group_id}:operating-fact:{index} (same family as :certification-timeline: / :market-coverage-target:)",
+  "unknown_reason_budget_behavior": "quantified_operating_status falls to category 'other'/rank 7 in narrative_budget until MAIN adds a mapping"
+ },
+ "main_wiring": [
+  {
+   "item": "narrative_evidence.py::_candidate_rules",
+   "action": "no change required; keep injecting topics/financial_table and all existing signal patterns exactly as today",
+   "detail": "operating_facts defaults to the built-in detector inside CandidateRules; MAIN may pass it explicitly for visibility: CandidateRules(topics=_topics, financial_table=_financial_table, ..., operating_facts=detect_operating_fact)"
+  },
+  {
+   "item": "_topics / _financial_table",
+   "action": "still required as today",
+   "detail": "financial_table remains the primary drop path; assess_unit now consults it AFTER a conservative operating-fact check and only exempts rows whose text has a specific operating object + action/status + digits. Pure P&L/total/financing rows are still dropped (dropped_financial=True)."
+  },
+  {
+   "item": "ContextRules / GroupCandidateRules / NeighborRules construction in select_narrative_evidence",
+   "action": "no change required",
+   "detail": "GroupCandidateRules.window_finder (= _minimal_matching_unit_windows) is now also called with OPERATING_FACT_JOIN for minimal fact windows; the same injected field covers it. NeighborRules unchanged (no new fields)."
+  },
+  {
+   "item": "narrative_budget.py::_REASON_PRIORITY/_REASON_CATEGORY",
+   "action": "optional",
+   "detail": "quantified_operating_status currently maps to 'other'; MAIN may add a priority/category if it should rank explicitly. Nothing breaks without it."
+  },
+  {
+   "item": "NARRATIVE_SELECTOR_VERSION",
+   "action": "required",
+   "detail": "still 0.3.2 in narrative_evidence.py (not writable by this lane); MAIN must bump when merging so old selection results are not reused."
+  },
+  {
+   "item": "final integration",
+   "action": "required",
+   "detail": "MAIN merges both lanes, runs the 9-sample benchmark, exact CI (37528050044) and the formal Worker -> retrieval -> RF E2E once. Helper green does not equal full business quality."
+  }
+ ],
+ "real_samples": [
+  {
+   "sample_id": "S01",
+   "doc_type": "annual_report",
+   "source_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+   "source_relative_path": "companies/中微公司/raw/financial_reports/中微公司：2025年年度报告.pdf",
+   "root_key": "company_raw",
+   "document_kind": "annual_report",
+   "table_scan_mode": "targeted golden pages [32, 40] only (differs from benchmark full_table_scan=true; text extraction is full-document)",
+   "package_status": "partial",
+   "package_spans": 96,
+   "package_candidate_count": 382,
+   "dropped_financial_count": 0,
+   "span_quality_flags": [],
+   "points": [
+    {
+     "golden_id": "G-S01-01",
+     "locator": {
+      "page_number": 32
+     },
+     "quote_sha256": "8ecb53a76ad6245cd460a4d2a19d85cee8e08a786c0e24a89ae986d9c8a85e44",
+     "hits": [
+      {
+       "unit_id": "urn:company-wiki:narrative-unit:sha256:7c41ea41b2bafb62456e8467988a4c627a6ebf65b53b0a1b434fed5b09b6eae7",
+       "role": "company_filing",
+       "unit_kind": "pdf_text_block",
+       "locator": "loc:v1/page:32/paragraph:7",
+       "text_head": "公司刻蚀设备已应用于全球先进的3 纳米及以下集成电路加工制造生产线。",
+       "stage": {
+        "initial_assess": true,
+        "group_neighbor_enriched": true,
+        "reasons": [
+         "business_narrative_signal",
+         "specific_business_event"
+        ],
+        "topics": [
+         "capacity_projects"
+        ],
+        "score": 7,
+        "group_id": "urn:company-wiki:context-group:sha256:1580288b90c6eaed5b1f03b55bdc727151474f9e1515a3e384b08d6b7acfab6d:operating-fact:0",
+        "group_member_count": 1
+       },
+       "final_selected_within_budget": false
+      },
+      {
+       "unit_id": "urn:company-wiki:narrative-unit:sha256:4e77bd2b0a4be2ca132f2330cd5ee4c204698e62f9a88bf7c6aba4966ef6e642",
+       "role": "company_filing",
+       "unit_kind": "pdf_text_block",
+       "locator": "loc:v1/page:32/paragraph:9",
+       "text_head": "芯片生产线及下一代更先进的生产线上，公司的CCP 刻蚀设备均实现了批量销售。",
+       "stage": {
+        "initial_assess": true,
+        "group_neighbor_enriched": true,
+        "reasons": [
+         "business_narrative_signal",
+         "specific_business_event"
+        ],
+        "topics": [
+         "capacity_projects"
+        ],
+        "score": 7,
+        "group_id": "urn:company-wiki:context-group:sha256:1580288b90c6eaed5b1f03b55bdc727151474f9e1515a3e384b08d6b7acfab6d:operating-fact:1",
+        "group_member_count": 2
+       },
+       "final_selected_within_budget": true
+      }
+     ],
+     "recovered_at_candidate_stage": true
+    },
+    {
+     "golden_id": "G-S01-03",
+     "locator": {
+      "page_number": 40
+     },
+     "quote_sha256": "8cb9c2db26cf74676ed7ff99138c4492ac1865818d2fad9471101568b308bab9",
+     "hits": [
+      {
+       "unit_id": "urn:company-wiki:narrative-unit:sha256:9bd2b4b0a0dae4f139e90f1c34e3013143d6979b4d93fbe8c91527ae585aa2c4",
+       "role": "company_filing",
+       "unit_kind": "pdf_text_block",
+       "locator": "loc:v1/page:40/paragraph:12",
+       "text_head": "同时，公司拟通过发行股份及支付现金购买资产并募集配套资金的方式购买杭州众硅电子科",
+       "stage": {
+        "initial_assess": false,
+        "group_neighbor_enriched": true,
+        "reasons": [
+         "business_narrative_signal",
+         "pdf_visual_context_group",
+         "project_plan_or_status"
+        ],
+        "topics": [
+         "core_business",
+         "new_business",
+         "orders_customers",
+         "capacity_projects",
+         "products_rd"
+        ],
+        "score": 7,
+        "group_id": "urn:company-wiki:context-group:sha256:f5abcb586522f2e655330e6ea75cb1613da40b5599e0595e9f1b70706ad01d99:operating-fact:4",
+        "group_member_count": 2
+       },
+       "final_selected_within_budget": false
+      },
+      {
+       "unit_id": "urn:company-wiki:narrative-unit:sha256:d583bb7c3ce34914a8a91fc5335dd7b1321863062fe1d5fe49542d616026feb3",
+       "role": "company_filing",
+       "unit_kind": "pdf_text_block",
+       "locator": "loc:v1/page:40/paragraph:13",
+       "text_head": "技有限公司控股权实现从“干法”向“干法+湿法”整体解决方案的关键跨越。",
+       "stage": {
+        "initial_assess": false,
+        "group_neighbor_enriched": true,
+        "reasons": [
+         "business_narrative_signal",
+         "pdf_visual_context_group",
+         "project_plan_or_status"
+        ],
+        "topics": [
+         "core_business",
+         "new_business",
+         "orders_customers",
+         "capacity_projects",
+         "products_rd"
+        ],
+        "score": 7,
+        "group_id": "urn:company-wiki:context-group:sha256:f5abcb586522f2e655330e6ea75cb1613da40b5599e0595e9f1b70706ad01d99:operating-fact:4",
+        "group_member_count": 2
+       },
+       "final_selected_within_budget": false
+      }
+     ],
+     "recovered_at_candidate_stage": true
+    }
+   ]
+  },
+  {
+   "sample_id": "S02",
+   "doc_type": "semi_annual_report",
+   "source_sha256": "91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+   "source_relative_path": "companies/中微公司/raw/financial_reports/中微公司：2025年半年度报告.pdf",
+   "root_key": "company_raw",
+   "document_kind": "semi_annual_report",
+   "table_scan_mode": "targeted golden pages [18, 31] only (differs from benchmark full_table_scan=true; text extraction is full-document)",
+   "package_status": "partial",
+   "package_spans": 96,
+   "package_candidate_count": 224,
+   "dropped_financial_count": 0,
+   "span_quality_flags": [],
+   "points": [
+    {
+     "golden_id": "G-S02-02",
+     "locator": {
+      "page_number": 18
+     },
+     "quote_sha256": "bbb86f2a8bab182b0c8f42c3da76e79249da517180d7c6d73a1d73a34c50abe1",
+     "hits": [
+      {
+       "unit_id": "urn:company-wiki:narrative-unit:sha256:866a98042593296fb1a57ca047a2cb863eee2234fb12cb74e02fdf6ea42eb4ec",
+       "role": "company_filing",
+       "unit_kind": "pdf_text_block",
+       "locator": "loc:v1/page:18/paragraph:14",
+       "text_head": "制造设备销售额有望进一步提高至1,300 亿美元，中国大陆、中国台湾和韩国仍将是设备支出的",
+       "stage": {
+        "initial_assess": true,
+        "group_neighbor_enriched": true,
+        "reasons": [
+         "business_narrative_signal",
+         "current_industry_context"
+        ],
+        "topics": [
+         "industry_dynamics"
+        ],
+        "score": 5,
+        "group_id": "urn:company-wiki:context-group:sha256:4f933d9cf2125b5ea43234d0c32c11f23be5ec1952c2371d43f0984af4be8eb3:operating-fact:1",
+        "group_member_count": 4
+       },
+       "final_selected_within_budget": true
+      }
+     ],
+     "recovered_at_candidate_stage": true
+    },
+    {
+     "golden_id": "G-S02-03",
+     "locator": {
+      "page_number": 18
+     },
+     "quote_sha256": "7ad96805070448c8ba94f3cd01ae9e18a691bf54f8b3cb0a1e063268516aefef",
+     "hits": [
+      {
+       "unit_id": "urn:company-wiki:narrative-unit:sha256:47ee633ef4ea977a73adb6cd0b9184973edfa93d7b358fe3778400d8eac2d2de",
+       "role": "company_filing",
+       "unit_kind": "pdf_text_block",
+       "locator": "loc:v1/page:18/paragraph:23",
+       "text_head": "公司的等离子体刻蚀设备已应用在国际一线客户从65至5 纳米及其他先进的集成电路加工制",
+       "stage": {
+        "initial_assess": true,
+        "group_neighbor_enriched": true,
+        "reasons": [
+         "business_narrative_signal",
+         "specific_business_event"
+        ],
+        "topics": [
+         "core_business"
+        ],
+        "score": 7,
+        "group_id": "urn:company-wiki:context-group:sha256:487364abac7d82422d4a7bcd7d4441bec0f8445ee8fc58c2b5215fc9bf4cbf07:operating-fact:0",
+        "group_member_count": 2
+       },
+       "final_selected_within_budget": true
+      }
+     ],
+     "recovered_at_candidate_stage": true
+    },
+    {
+     "golden_id": "G-S02-04",
+     "locator": {
+      "page_number": 31
+     },
+     "quote_sha256": "706e110c2cb87a40f3d84b9df953e1a6c9a5e752ae0da93d7592f9a1f2c03836",
+     "hits": [
+      {
+       "unit_id": "urn:company-wiki:narrative-unit:sha256:511a7471a7819f3d71dc1d04c4ff2ca2c80713d435bc836a0762ee6e6d47289b",
+       "role": "company_filing",
+       "unit_kind": "pdf_text_block",
+       "locator": "loc:v1/page:31/paragraph:3",
+       "text_head": "公司位于南昌的约14 万平方米的生产和研发基地、在上海临港的约18 万平方米的生产和研",
+       "stage": {
+        "initial_assess": false,
+        "group_neighbor_enriched": true,
+        "reasons": [
+         "business_narrative_signal",
+         "pdf_visual_context_group",
+         "specific_business_event",
+         "quantified_operating_status",
+         "progress_or_change_language"
+        ],
+        "topics": [
+         "new_business",
+         "capacity_projects"
+        ],
+        "score": 17,
+        "group_id": "urn:company-wiki:context-group:sha256:c6de3e351393f340241a320321fbdf7cbcb1a62b1abf77cc8ddd55384e67563d:operating-fact:0",
+        "group_member_count": 3
+       },
+       "final_selected_within_budget": true
+      },
+      {
+       "unit_id": "urn:company-wiki:narrative-unit:sha256:20dae212e0ef9860f6c6291156b606d4a1f78e4f83c97e441a6d57446d2f08f5",
+       "role": "company_filing",
+       "unit_kind": "pdf_text_block",
+       "locator": "loc:v1/page:31/paragraph:4",
+       "text_head": "发基地已投入使用，产能大幅提升；",
+       "stage": {
+        "initial_assess": true,
+        "group_neighbor_enriched": true,
+        "reasons": [
+         "business_narrative_signal",
+         "specific_business_event",
+         "quantified_operating_status"
+        ],
+        "topics": [
+         "capacity_projects"
+        ],
+        "score": 11,
+        "group_id": "urn:company-wiki:context-group:sha256:c6de3e351393f340241a320321fbdf7cbcb1a62b1abf77cc8ddd55384e67563d:operating-fact:0",
+        "group_member_count": 3
+       },
+       "final_selected_within_budget": true
+      }
+     ],
+     "recovered_at_candidate_stage": true
+    }
+   ]
+  },
+  {
+   "sample_id": "S03",
+   "doc_type": "quarterly_report",
+   "source_sha256": "ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+   "source_relative_path": "companies/中微公司/raw/financial_reports/中微公司：2026年第一季度报告.pdf",
+   "root_key": "company_raw",
+   "document_kind": "quarterly_report",
+   "table_scan_mode": "targeted golden pages [3] only (differs from benchmark full_table_scan=true; text extraction is full-document)",
+   "package_status": "partial",
+   "package_spans": 28,
+   "package_candidate_count": 28,
+   "dropped_financial_count": 0,
+   "span_quality_flags": [],
+   "points": [
+    {
+     "golden_id": "G-S03-03",
+     "locator": {
+      "page_number": 3
+     },
+     "quote_sha256": "48e6dca1343ec048f198b9fe5cecafab21c202c86417fd5bda7099bd491f9d90",
+     "hits": [
+      {
+       "unit_id": "urn:company-wiki:narrative-unit:sha256:b6390b0b337506b3f4bb6b5c8dae9fd358242c8bdf628b4ce6a24b69a01678b7",
+       "role": "company_filing",
+       "unit_kind": "pdf_text_block",
+       "locator": "loc:v1/page:3/paragraph:11",
+       "text_head": "薄膜设备营收同比大幅增长约224.23%，成为公司业绩增长的重要新引擎。",
+       "stage": {
+        "initial_assess": true,
+        "group_neighbor_enriched": true,
+        "reasons": [
+         "business_narrative_signal",
+         "quantified_operating_status",
+         "progress_or_change_language"
+        ],
+        "topics": [
+         "new_business"
+        ],
+        "score": 9,
+        "group_id": "urn:company-wiki:context-group:sha256:6badd6b112849029c94c45f49e3acd1ba1d1ec2b647cbebc8b270f0773ddc59f:operating-fact:1",
+        "group_member_count": 1
+       },
+       "final_selected_within_budget": true
+      }
+     ],
+     "recovered_at_candidate_stage": true
+    }
+   ]
+  },
+  {
+   "sample_id": "S04",
+   "doc_type": "prospectus",
+   "source_sha256": "19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+   "source_relative_path": "companies/中微公司/raw/prospectus/中微公司：首次公开发行股票并在科创板上市招股说明书.pdf",
+   "root_key": "company_raw",
+   "document_kind": "prospectus",
+   "table_scan_mode": "targeted golden pages [34, 49] only (differs from benchmark full_table_scan=true; text extraction is full-document)",
+   "package_status": "partial",
+   "package_spans": 160,
+   "package_candidate_count": 920,
+   "dropped_financial_count": 4,
+   "span_quality_flags": [],
+   "points": [
+    {
+     "golden_id": "G-S04-03",
+     "locator": {
+      "page_number": 34
+     },
+     "quote_sha256": "916e7383c995516d1f1a32a9c523ee66eb3832b96b3a93d5cb7e31c5b6e94796",
+     "hits": [
+      {
+       "unit_id": "urn:company-wiki:narrative-unit:sha256:272504ec49de6648274e32ef45bd1f63b3dca215b734c6f0bbdd022aef98131b",
+       "role": "company_filing",
+       "unit_kind": "pdf_text_block",
+       "locator": "loc:v1/page:34/paragraph:14",
+       "text_head": "本次向社会公众公开发行新股的募集资金扣除发行费用后将按轻重缓急顺",
+       "stage": {
+        "initial_assess": false,
+        "group_neighbor_enriched": true,
+        "reasons": [
+         "business_narrative_signal",
+         "pdf_visual_context_group",
+         "project_plan_or_status"
+        ],
+        "topics": [
+         "capacity_projects"
+        ],
+        "score": 4,
+        "group_id": "urn:company-wiki:context-group:sha256:6563f813201215383dbe03536a0d66c2a7b1275e4391e46b8212758f15b8c44f:operating-fact:0",
+        "group_member_count": 2
+       },
+       "final_selected_within_budget": false
+      }
+     ],
+     "recovered_at_candidate_stage": true
+    },
+    {
+     "golden_id": "G-S04-04",
+     "locator": {
+      "page_number": 49
+     },
+     "quote_sha256": "431a3b12d06da51af7d5f117d06774b75a260ecb18e6cdbc4843db5612df4667",
+     "hits": [
+      {
+       "unit_id": "urn:company-wiki:narrative-unit:sha256:1d2adf18a3fe561f8d6899645e9ad2567bc4020de1c779a39c750de7f4a0df59",
+       "role": "company_filing",
+       "unit_kind": "pdf_text_block",
+       "locator": "loc:v1/page:49/paragraph:22",
+       "text_head": "本次募集资金在扣除发行相关费用后拟用于高端半导体设备扩产升级项目、",
+       "stage": {
+        "initial_assess": true,
+        "group_neighbor_enriched": true,
+        "reasons": [
+         "business_narrative_signal",
+         "project_plan_or_status"
+        ],
+        "topics": [
+         "capacity_projects"
+        ],
+        "score": 4,
+        "group_id": "urn:company-wiki:context-group:sha256:a332d98ec1169a00234f66c6b710edc9f919bf19f03447fbc2a2daeb8c7867fd:operating-fact:0",
+        "group_member_count": 2
+       },
+       "final_selected_within_budget": false
+      },
+      {
+       "unit_id": "urn:company-wiki:narrative-unit:sha256:2ab14bec47c20bac744b69e740957ee41ed3b9429cb5e145274ad376dfc7b437",
+       "role": "company_filing",
+       "unit_kind": "pdf_text_block",
+       "locator": "loc:v1/page:49/paragraph:23",
+       "text_head": "技术研发中心建设升级项目和补充流动资金。",
+       "stage": {
+        "initial_assess": false,
+        "group_neighbor_enriched": true,
+        "reasons": [
+         "business_narrative_signal",
+         "pdf_visual_context_group",
+         "progress_or_change_language",
+         "project_plan_or_status"
+        ],
+        "topics": [
+         "capacity_projects"
+        ],
+        "score": 11,
+        "group_id": "urn:company-wiki:context-group:sha256:a332d98ec1169a00234f66c6b710edc9f919bf19f03447fbc2a2daeb8c7867fd:operating-fact:0",
+        "group_member_count": 2
+       },
+       "final_selected_within_budget": false
+      }
+     ],
+     "recovered_at_candidate_stage": true
+    }
+   ]
+  },
+  {
+   "sample_id": "S06",
+   "doc_type": "convertible_bond_prospectus",
+   "source_sha256": "c6ed566631e123f159abf2697c157f1868f8e994ccf8e3352132046a6c5ca0a1",
+   "source_relative_path": "companies/华锐精密/raw/research/华锐精密：向不特定对象发行可转换公司债券证券募集说明书.PDF",
+   "root_key": "company_raw",
+   "document_kind": "convertible_bond_prospectus",
+   "table_scan_mode": "targeted golden pages [43] only (differs from benchmark full_table_scan=true; text extraction is full-document)",
+   "package_status": "partial",
+   "package_spans": 160,
+   "package_candidate_count": 381,
+   "dropped_financial_count": 0,
+   "span_quality_flags": [],
+   "points": [
+    {
+     "golden_id": "G-S06-02",
+     "locator": {
+      "page_number": 43
+     },
+     "quote_sha256": "69b6d4629b78f7fe1527ce0b8cd112da3ecec41053312740b57a546fcce9b4e1",
+     "hits": [
+      {
+       "unit_id": "urn:company-wiki:narrative-unit:sha256:47b3b724d6c86ec4d27dcac6fac785a05f3049b952405ab7d09efce1eb3e17aa",
+       "role": "company_filing",
+       "unit_kind": "pdf_text_block",
+       "locator": "loc:v1/page:43/paragraph:10",
+       "text_head": "本次募集资金除补充流动资金外，拟投资于精密数控刀体生产线建设项目",
+       "stage": {
+        "initial_assess": true,
+        "group_neighbor_enriched": true,
+        "reasons": [
+         "business_narrative_signal",
+         "progress_or_change_language",
+         "project_plan_or_status"
+        ],
+        "topics": [
+         "capacity_projects"
+        ],
+        "score": 3,
+        "group_id": "urn:company-wiki:context-group:sha256:f09a06913e239c38f1a4f8a57df37b545a32d09a79b8e297575d8577a59c140e",
+        "group_member_count": 6
+       },
+       "final_selected_within_budget": false
+      },
+      {
+       "unit_id": "urn:company-wiki:narrative-unit:sha256:67e4bd21be1210352331e427ce233451db62561a047594234f2ab4721655dfb4",
+       "role": "company_filing",
+       "unit_kind": "pdf_text_block",
+       "locator": "loc:v1/page:43/paragraph:11",
+       "text_head": "和高效钻削刀具生产线建设项目。",
+       "stage": {
+        "initial_assess": false,
+        "group_neighbor_enriched": true,
+        "reasons": [
+         "business_narrative_signal",
+         "pdf_visual_context_group",
+         "progress_or_change_language",
+         "specific_business_event",
+         "project_plan_or_status",
+         "project_section_context"
+        ],
+        "topics": [
+         "capacity_projects"
+        ],
+        "score": 94,
+        "group_id": "urn:company-wiki:context-group:sha256:f09a06913e239c38f1a4f8a57df37b545a32d09a79b8e297575d8577a59c140e",
+        "group_member_count": 6
+       },
+       "final_selected_within_budget": false
+      }
+     ],
+     "recovered_at_candidate_stage": true
+    },
+    {
+     "golden_id": "G-S06-03",
+     "locator": {
+      "page_number": 43
+     },
+     "quote_sha256": "0d400f1390555b171ae9c0f6f4d540b7106d7126df6b570d7510e9230bff5653",
+     "hits": [
+      {
+       "unit_id": "urn:company-wiki:narrative-unit:sha256:af79f8ed65282509ee8e452c553fd814133c0080da5c29be54efb47751e4a285",
+       "role": "company_filing",
+       "unit_kind": "pdf_text_block",
+       "locator": "loc:v1/page:43/paragraph:12",
+       "text_head": "本次募投项目达产后，公司将每年新增折旧",
+       "stage": {
+        "initial_assess": true,
+        "group_neighbor_enriched": true,
+        "reasons": [
+         "business_narrative_signal",
+         "progress_or_change_language",
+         "specific_business_event",
+         "project_plan_or_status"
+        ],
+        "topics": [
+         "capacity_projects"
+        ],
+        "score": 6,
+        "group_id": "urn:company-wiki:context-group:sha256:f09a06913e239c38f1a4f8a57df37b545a32d09a79b8e297575d8577a59c140e",
+        "group_member_count": 6
+       },
+       "final_selected_within_budget": false
+      },
+      {
+       "unit_id": "urn:company-wiki:narrative-unit:sha256:308e7c7235d50aa6ed2d60872ba46ef4d1ba77b30dcd442c08967bd6800ee391",
+       "role": "company_filing",
+       "unit_kind": "pdf_text_block",
+       "locator": "loc:v1/page:43/paragraph:25",
+       "text_head": "本次募投项目达产后，公司预计新增精密数控刀体产品50",
+       "stage": {
+        "initial_assess": true,
+        "group_neighbor_enriched": true,
+        "reasons": [
+         "business_narrative_signal",
+         "progress_or_change_language",
+         "specific_business_event",
+         "project_plan_or_status"
+        ],
+        "topics": [
+         "capacity_projects"
+        ],
+        "score": 6,
+        "group_id": "urn:company-wiki:context-group:sha256:7e5bd672b3a8051734e022057172b6505b68d4d6a9a5bc4337dba2251c0f54a2",
+        "group_member_count": 6
+       },
+       "final_selected_within_budget": false
+      },
+      {
+       "unit_id": "urn:company-wiki:narrative-unit:sha256:ddab26f929b47968f3d55ba98bc48d8de594d84d74048e0232f8ccb28f984af4",
+       "role": "company_filing",
+       "unit_kind": "pdf_text_block",
+       "locator": "loc:v1/page:43/paragraph:26",
+       "text_head": "万件和各类高效钻削刀具140 万支。",
+       "stage": {
+        "initial_assess": false,
+        "group_neighbor_enriched": true,
+        "reasons": [
+         "business_narrative_signal",
+         "pdf_visual_context_group",
+         "progress_or_change_language",
+         "specific_business_event",
+         "project_plan_or_status",
+         "project_section_context"
+        ],
+        "topics": [
+         "capacity_projects"
+        ],
+        "score": 94,
+        "group_id": "urn:company-wiki:context-group:sha256:7e5bd672b3a8051734e022057172b6505b68d4d6a9a5bc4337dba2251c0f54a2",
+        "group_member_count": 6
+       },
+       "final_selected_within_budget": false
+      }
+     ],
+     "recovered_at_candidate_stage": true
+    }
+   ]
+  },
+  {
+   "sample_id": "S07",
+   "doc_type": "investor_relations_valuable",
+   "source_sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+   "source_relative_path": "companies/万润股份/raw/research/万润股份：投资者关系活动记录表20260515.pdf",
+   "root_key": "company_raw",
+   "document_kind": "investor_relations",
+   "table_scan_mode": "targeted golden pages [1] only (differs from benchmark full_table_scan=true; text extraction is full-document)",
+   "package_status": "needs_review",
+   "package_spans": 2,
+   "package_candidate_count": 2,
+   "dropped_financial_count": 0,
+   "span_quality_flags": [
+    "locator_unstable"
+   ],
+   "points": [
+    {
+     "golden_id": "G-S07-01",
+     "locator": {
+      "page_number": 1
+     },
+     "quote_sha256": "2ae2af6afbaad8f117ae5b28ac013320421685aa68f70b8fccc10ec4d0c905b4",
+     "hits": [
+      {
+       "unit_id": "urn:company-wiki:narrative-unit:sha256:d7f6fd4f756e2bce6556ef3ac57d125b196671c2ca8b1c611ebfcac8fb3a92d6",
+       "role": "qa_text_shadow",
+       "unit_kind": "pdf_text_block",
+       "locator": "loc:v1/page:1/paragraph:28",
+       "text_head": "高公司的抗风险能力，2025 年度公司境内收入约8.19 亿元，占比约22%，",
+       "stage": {
+        "enriched": false,
+        "note": "qa_text_shadow duplicate excluded by role"
+       },
+       "final_selected_within_budget": false
+      },
+      {
+       "unit_id": "urn:company-wiki:narrative-unit:sha256:9b0bb9dccc2599f648184bf420c7312f1ae6019912c48174b1f0961d1a03e43c",
+       "role": "qa_text_shadow",
+       "unit_kind": "pdf_text_block",
+       "locator": "loc:v1/page:1/paragraph:29",
+       "text_head": "较比2024 年度有所提升。",
+       "stage": {
+        "enriched": false,
+        "note": "qa_text_shadow duplicate excluded by role"
+       },
+       "final_selected_within_budget": false
+      },
+      {
+       "unit_id": "urn:company-wiki:narrative-unit:sha256:143e0c462649b276f5bf4baf6d850dfb445941e8173b0eecec87b95514d08eeb",
+       "role": "management",
+       "unit_kind": "pdf_table_qa_fragment",
+       "locator": "loc:v1/page:1/table:0/row:6/column:1",
+       "text_head": "答：您好，公司积极开发国内市场，持续完善国内市场战略布局，提\n高公司的抗风险能力，2025 年度公司境内收入约8.19 亿元，占比约22%，\n较比 2024 年度有所提升。未来公司也会努力在电子信息材料产业、环保\n材料产业、新能源材料产业、生命科学与医药产业四大领域向国内市场提\n供更多优质产品。感谢您对公司的关注！",
+       "stage": {
+        "initial_assess": true,
+        "group_neighbor_enriched": true,
+        "reasons": [
+         "business_narrative_signal",
+         "quantified_operating_status",
+         "progress_or_change_language",
+         "management_statement"
+        ],
+        "topics": [
+         "core_business"
+        ],
+        "score": 5,
+        "group_id": null,
+        "group_member_count": 0
+       },
+       "final_selected_within_budget": true
+      }
+     ],
+     "recovered_at_candidate_stage": true
+    }
+   ]
+  },
+  {
+   "sample_id": "S08",
+   "doc_type": "investor_relations_procedural",
+   "source_sha256": "f6d50d717efd5e84e400a28b51bb0c73e2e2a712e828cd3fb6d872469718fd2b",
+   "source_relative_path": "companies/周大生/raw/research/周大生：2023年6月26日-6月28日投资者关系活动记录表.pdf",
+   "root_key": "company_raw",
+   "document_kind": "investor_relations",
+   "table_scan_mode": "targeted golden pages [3] only (differs from benchmark full_table_scan=true; text extraction is full-document)",
+   "package_status": "needs_review",
+   "package_spans": 1,
+   "package_candidate_count": 1,
+   "dropped_financial_count": 0,
+   "span_quality_flags": [
+    "locator_unstable"
+   ],
+   "points": [
+    {
+     "golden_id": "G-S08-01",
+     "locator": {
+      "page_number": 3
+     },
+     "quote_sha256": "0c2c4ee63cbd8a5a8bb05814389972b82b0d603aa76c5df49d7ba69ed59199c8",
+     "hits": [
+      {
+       "unit_id": "urn:company-wiki:narrative-unit:sha256:0fbcfa905af493cd51758924de3dc3e946259b170a5db7548a76b0359babfb9b",
+       "role": "qa_text_shadow",
+       "unit_kind": "pdf_text_block",
+       "locator": "loc:v1/page:3/paragraph:2",
+       "text_head": "答：从克重口径看，目前达到一个稳定的状态，一口价黄金占比",
+       "stage": {
+        "enriched": false,
+        "note": "qa_text_shadow duplicate excluded by role"
+       },
+       "final_selected_within_budget": false
+      },
+      {
+       "unit_id": "urn:company-wiki:narrative-unit:sha256:309f976c0b5eb34f02147ce4a43b681ec5a632ed14f7ea70d3ae8b88ef80f704",
+       "role": "qa_text_shadow",
+       "unit_kind": "pdf_text_block",
+       "locator": "loc:v1/page:3/paragraph:3",
+       "text_head": "在15%-20%，克重黄金占比在80%-85%。",
+       "stage": {
+        "enriched": false,
+        "note": "qa_text_shadow duplicate excluded by role"
+       },
+       "final_selected_within_budget": false
+      },
+      {
+       "unit_id": "urn:company-wiki:narrative-unit:sha256:d487c7d14a6ea936ae67c317f4303a6ac8f88c8a58e9b72a7876d40645223c85",
+       "role": "management",
+       "unit_kind": "pdf_table_qa_fragment",
+       "locator": "loc:v1/page:3/table:0/row:0/column:1",
+       "text_head": "答：黄金产品。\n4： 黄金产品一口价转克重的情况一直在变化吗？\n答：从克重口径看，目前达到一个稳定的状态，一口价黄金占比\n在15%-20%，克重黄金占比在80%-85%。\n5： 悦己消费比往年是否有一定的增长？\n答：是的。\n各方还就 IP产品等内容进行了交流，可参阅前次活动记录表之问答\n和已披露公告。\n接待过程中,公司严格按照《信息披露管理制度》等规定,保证信息披\n露的真实、准确、完整、及时、公平，没有出现未公开重大信息泄露等\n情况。",
+       "stage": {
+        "initial_assess": true,
+        "group_neighbor_enriched": true,
+        "reasons": [
+         "business_narrative_signal",
+         "quantified_operating_status",
+         "progress_or_change_language",
+         "management_statement"
+        ],
+        "topics": [
+         "core_business"
+        ],
+        "score": 5,
+        "group_id": null,
+        "group_member_count": 0
+       },
+       "final_selected_within_budget": true
+      }
+     ],
+     "recovered_at_candidate_stage": true
+    }
+   ]
+  },
+  {
+   "sample_id": "S09",
+   "doc_type": "investor_call_transcript",
+   "source_sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+   "source_relative_path": "MSFT/MSFT_Q4_2026_earnings_call.txt",
+   "root_key": "earnings_transcripts",
+   "document_kind": "investor_call_transcript",
+   "table_scan_mode": "targeted golden pages [] only (differs from benchmark full_table_scan=true; text extraction is full-document)",
+   "package_status": "selected",
+   "package_spans": 49,
+   "package_candidate_count": 49,
+   "dropped_financial_count": 0,
+   "span_quality_flags": [],
+   "points": [
+    {
+     "golden_id": "G-S09-01",
+     "locator": {
+      "line_start": 30,
+      "line_end": 30,
+      "parser_region": "before_transcript_start",
+      "byte_start": 991,
+      "byte_end": 1118
+     },
+     "quote_sha256": "df755df66e6545642484195b79122ed3372f45b6b68ded4d0d30e365c549bba0",
+     "hits": [
+      {
+       "unit_id": "urn:company-wiki:narrative-unit:sha256:a81897c75bf9505e412a9e2a8f02bc664d374dc92e3d8a61aa34640ff3f18e0a",
+       "role": "management",
+       "unit_kind": "transcript_speaker_block",
+       "locator": "loc:v1/paragraph:181/chars:6498-6553",
+       "text_head": "Customer demand continues to exceed available capacity.",
+       "stage": {
+        "initial_assess": true,
+        "group_neighbor_enriched": true,
+        "reasons": [
+         "business_narrative_signal",
+         "direct_capacity_constraint",
+         "management_statement"
+        ],
+        "topics": [
+         "industry_dynamics",
+         "orders_customers",
+         "capacity_projects"
+        ],
+        "score": 5,
+        "group_id": null,
+        "group_member_count": 0
+       },
+       "final_selected_within_budget": true
+      },
+      {
+       "unit_id": "urn:company-wiki:narrative-unit:sha256:3c98cdf7c6d50d550a15c8ab7bdc58194d86458eede0567ca5cd3f593ed77bce",
+       "role": "management",
+       "unit_kind": "transcript_speaker_block",
+       "locator": "loc:v1/paragraph:253/chars:185-217",
+       "text_head": "And that certainly remains true.",
+       "stage": {
+        "enriched": false,
+        "note": "not selected by any stage"
+       },
+       "final_selected_within_budget": false
+      }
+     ],
+     "recovered_at_candidate_stage": true
+    },
+    {
+     "golden_id": "G-S09-05",
+     "locator": {
+      "line_start": 200,
+      "line_end": 200,
+      "parser_region": "parsed",
+      "byte_start": 32538,
+      "byte_end": 32593
+     },
+     "quote_sha256": "8479930a13d519e64d5930202d10c72ff7473d941965a1897d96b24d208022be",
+     "hits": [
+      {
+       "unit_id": "urn:company-wiki:narrative-unit:sha256:a81897c75bf9505e412a9e2a8f02bc664d374dc92e3d8a61aa34640ff3f18e0a",
+       "role": "management",
+       "unit_kind": "transcript_speaker_block",
+       "locator": "loc:v1/paragraph:181/chars:6498-6553",
+       "text_head": "Customer demand continues to exceed available capacity.",
+       "stage": {
+        "initial_assess": true,
+        "group_neighbor_enriched": true,
+        "reasons": [
+         "business_narrative_signal",
+         "direct_capacity_constraint",
+         "management_statement"
+        ],
+        "topics": [
+         "industry_dynamics",
+         "orders_customers",
+         "capacity_projects"
+        ],
+        "score": 5,
+        "group_id": null,
+        "group_member_count": 0
+       },
+       "final_selected_within_budget": true
+      }
+     ],
+     "recovered_at_candidate_stage": true
+    }
+   ]
+  }
+ ],
+ "real_samples_summary": {
+  "target_points": 14,
+  "recovered_at_candidate_stage": 14,
+  "also_selected_within_96_160_budget": 9,
+  "roots": {
+   "company_raw": "C:/Users/郑曾波/Projects/company-wiki",
+   "earnings_transcripts": "C:/Users/郑曾波/Projects/earnings-transcripts/earnings-transcripts/transcripts"
+  },
+  "integrity": "all 9 samples.json sha256 verified before parse and again after; byte_size and mtime_ns unchanged for every original",
+  "s09_g01_note": "line 30 lies in parser_region before_transcript_start; the provider summary bytes 991-1118 are not parsed into any unit at all, so it can never be attributed to management. The parsed line-200 twin 'Customer demand continues to exceed available capacity.' is selected with role=management and reason direct_capacity_constraint.",
+  "s07_direction_note": "domestic revenue unit carries topics=['core_business']; no span has topics containing 'overseas' (checked in unit test and replay)."
+ },
+ "protection": {
+  "downloads_llm_paid": "0; parse_pdf/parse_transcript_text only, no network",
+  "originals": "read-only; sha256 + byte_size + mtime_ns verified unchanged after all runs for S01,S02,S03,S04,S05,S06,S07,S08,S09",
+  "config_db_acl": "no writes to config/database; no ACL fault tests",
+  "benchmarks": "samples.json/golden.json/reports read-only; no golden or report modified",
+  "other_lanes": "no other worktree or repository touched; no skills installed; no CI changes",
+  "unit_bytes_locators": "source units are frozen; tests assert identity, raw_text and coordinates unchanged after enrichment"
+ },
+ "cleanup": {
+  "tmp_scratch": "tmp/n6_real_samples.py, tmp/n6_real_points.py, tmp/n6_real_samples.json, tmp/n6_real_points.json deleted after handoff generation",
+  "pytest_basetemp": "each run's tmp/<timestamp> dir removed by the fixture cleanup hook and verified absent in the run output",
+  "original_copies": "no copies of originals were made"
+ },
+ "calls": [
+  {
+   "kind": "pytest",
+   "command": "python -m pytest -p no:cacheprovider --basetemp tmp/n6ct tests/unit/test_n6_candidate_recall.py tests/unit/test_n6_context_boundaries.py tests/integration/test_n6_candidate_pipeline.py",
+   "result": "RED 18f/12p/3.24s -> GREEN 30p/0.99s"
+  },
+  {
+   "kind": "ruff",
+   "command": "python -m ruff check src/company_wiki/source_catalog/narrative_candidates.py src/company_wiki/source_catalog/narrative_context.py src/company_wiki/source_catalog/narrative_group_candidates.py src/company_wiki/source_catalog/narrative_neighbors.py tests/unit/test_n6_candidate_recall.py tests/unit/test_n6_context_boundaries.py tests/integration/test_n6_candidate_pipeline.py",
+   "result": "All checks passed"
+  },
+  {
+   "kind": "pytest",
+   "command": "8 existing related files",
+   "result": "181 passed"
+  },
+  {
+   "kind": "python",
+   "command": "tmp/n6_real_samples.py + tmp/n6_real_points.py (targeted real-sample replay, inline/scratch)",
+   "result": "14/14 candidate-stage recovery; originals unchanged"
+  },
+  {
+   "kind": "git",
+   "command": "commit on codex/n6-candidates (pre-commit ruff+mypy+guards passed)",
+   "result": "9a4b815"
+  }
+ ],
+ "remaining": [
+  "G-S06-01 (pure financing total '募集资金总额不超过40,000.00万元') intentionally stays a non-candidate per the card's negative list; if the benchmark expects 发行规模 as required, MAIN/budget lane must decide the owning rule.",
+  "G-S09-03 / G-S09-04 (revenue guidance lines) were not in this card's target list and remain baseline-MISS at assess level (out of scope).",
+  "G-S09-01 provider summary before the transcript marker is not parsed at all (start-marker lives in narrative_evidence.py, not writable). The 'must not be a management quote' requirement holds by non-parsing; selecting that text at all would need a MAIN/parser decision.",
+  "5/14 points are candidates but fall outside the 96/160 budget selection (S01-G03, S04-G03, S04-G04, S06-G02, S06-G03). Per card, final budget ranking is not asserted by this lane.",
+  "S07/S08 packages report status=needs_review because selected table-cell spans carry the parser-declared locator_unstable quality flag (narrative_document/evidence not writable by this lane).",
+  "NARRATIVE_SELECTOR_VERSION bump, 9-sample benchmark, exact CI and formal E2E remain MAIN's merge-time work.",
+  "narrative_budget may optionally map quantified_operating_status; without it budget treats it as category 'other' (documented degradation)."
+ ],
+ "helper_status": "helper complete (own tests green, interfaces backward compatible, real locators replayable, roots restored, no egress); shared-entry work and final quality gates remain with MAIN"
+}
