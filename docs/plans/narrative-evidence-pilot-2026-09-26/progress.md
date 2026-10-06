@@ -1057,3 +1057,13 @@ N6启动PWF和INPUT_CARD已各自纯文档提交并推分支，工作树干净�
 真实S01/S07/S09四经营点入口已写、明确待两质量线交付接线后执行，不拿合成绿当required12/33已改善，不再跑旧长基准/付费模型。当前准备正常commit/push/精确CI，整体S7/目标仍active。
 
 实际提交13bba07f9e848fac4194b17313c4f4a608775a1c已推master且ls-remote一致；正常commit及pre-push快合同GREEN，用户配置由正常hook临时stash/restored并保持原SHA，未stage。精确CI37534879855 attempt1 completed/success，job112513173461全部step成功，21:34:50→21:36:04 UTC/74秒。此次代码CI仅执行原快集合，27.65秒合成E2E为本地大节点测试，未混作CI内测试。收据已转published_ci_passed；最终收据文档skip ci发布，不重复已绿代码CI。
+
+## 2026-10-06 — MAIN实际批次的升级隔离
+
+上一回合为progress：主线框架/收据已推并精确CI绿。本轮权威核CWP6b68b78、RF6e6b817a三owner、三外线仍bootstrap且干净；没有已确认live句柄，不记verified wait。MAIN不抢外线任务，先写执行升级实施卡，补旧artifact读取兼容以外的实际AUTO generation责任。
+
+一份合成纯流程PDF，当前版本旧run完成后保存正式ref/字节/job/账；scratch版本bootstrap进入新Python及Worker子进程，仅模拟下一selector常量，不改实现。旧run/work-dir拒绝误复用且全部job/run账不变；新run ID/独立work-dir完成三新job、new artifact绑定模拟版本；旧ref仍旧字节，新run恢复不新增job。全部0 POST/tokens/费用，foreign jobs与raw/生产fixture保护保持。最终1 passed/16.33秒、Ruff/diff绿；三个先行红为测试DTO/规范化身份/Windows launcher入口问题（7.09/6.48/15.41秒），不宣称产品失败，不改SHA/身份或Worker生产代码。_invoke可选expected_run_id默认不变。
+
+四个自有根tmp/n6uv/n6uw/n6ux/n6uy全部核绝对路径/非reparse，用ErrorAction Stop清理并实证absent；用户config SHA3609e707及RF三owner SHA保持。无生产原件/外仓/外线写入，不重复已绿长测或模型；实际质量12/33不变。main_completion_evidence中N5待交付/下一收N5的旧状态已纠正为三包完成、下一N6/S7，避免弱模型恢复旧队列；S7未来保护owner数更新三份。
+
+当前准备正常commit/push/精确CI，最终实际版本接线与九样本/业务E2E仍待两线交付，整体目标active。

@@ -46,7 +46,7 @@ MAIN独占运行时代码、共享合同、合入与总PWF；已交DOCSET/RAW-DU
 - Unit：新语义正反例、分组完整、角色/否定、去重/固定预算、scope不足不skip，及现有责任包；先见RED再实现，不改断言适应错误产品。
 - Integration：同一不可变golden和9样本，以新selector再跑一次零LLM基准，另存≤2MiB新报告；记录实际HEAD/工具SHA、原来的12/33及逐点改进/剩余原因。新增独立业务表达不反向改旧分母。精确定位0失败，已命中业务点不能回退；scope外/不符合业务目标的点明确列理由，不伪装全覆盖。
 - E2E：独立短tmp，正式SourceVersionReader→现有AUTO Select/Worker/outbox→确定性模型响应→正式search/exact→RF已提交consumer。真实年报/IR/英文TXT字节，身份/日期使用明确fixture侧录；覆盖固定预算、混合文档零噪声、坏claim容错/同语言、全部locator回放与终态清理。不称为真实provider摘要质量，0付费/下载；已绿并发kill/ACK长包不重跑。
-- 测试根起初不存在，finally关闭SQLite/子进程并恢复absent。大节点前后核原件SHA/size/mtime、生产库/配置、用户config及RF两owner日志；不把新副本/DB留下，不做46GB恢复备份演练。
+- 测试根起初不存在，finally关闭SQLite/子进程并恢复absent。大节点前后核原件SHA/size/mtime、生产库/配置、用户config及RF当前三owner日志（daily_alert、weekly_alert、weekly_manifest；执行前再实读status）；不把新副本/DB留下，不做46GB恢复备份演练。
 - 日常commit静态检查、pre-push短集合、既有单Python快速CI保持；新完整9样本长测不放到CI。MAIN正常提交/推送，核精确代码SHA的CI；最终小收据与PWF更新，不能拿别的提交的绿灯替代。
 
 ## 可执行复现与交接
@@ -64,3 +64,5 @@ python -m pytest -p no:cacheprovider --basetemp tmp/docset-next-tests benchmarks
 交接须附代码SHA/selector版本、新旧报告、具体golden ID/locator/阶段结果/处理理由、责任测试命令与结果、E2E是否fixture、根恢复/原件与owner指纹、0模型费用。若未修复项仍影响具体经营事实，将其列为remaining，不把工具通过或全定位合法当产品语义完成。此卡当前**in_progress**：候选/预算步骤已按N6独立写集分派，MAIN负责共享接线和最后一次节点验收三，不在本树重复做外线实现。
 
 MAIN先行材料：[0.3.2冻结final兼容](n6_main_compatibility_implementation.md)、[33点统一业务解释](n6_main_business_expectations_2026-10-06.md)。9项兼容测试已绿；最终新代码仍要重跑该责任包。原required33、旧报告及golden不改，scope/纯财务边界不靠减分母让报告变绿。
+
+另有[正式业务E2E框架](n6_main_business_e2e_implementation.md)已合成三文档27.65秒绿/13bba07精确CI74秒绿、[执行升级隔离](n6_main_upgrade_execution_implementation.md)纯流程PDF16.33秒绿。后者真实AUTO运行当前与模拟下一版本，证明新旧job/artifact独立、旧ref可读、同run恢复幂等，不证明外线未交付的业务规则。最终只在大节点重跑这些MAIN责任包，不扩日常CI。

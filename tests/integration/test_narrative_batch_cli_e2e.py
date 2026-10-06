@@ -228,7 +228,8 @@ def _prepare(
         raise
 
 
-def _invoke(state, *, llm_config=None, llm_provider=None, launcher=None, timeout_seconds=60):
+def _invoke(state, *, llm_config=None, llm_provider=None, launcher=None, timeout_seconds=60,
+            expected_run_id="cli-e2e"):
     env = dict(os.environ)
     env["PYTHONPATH"] = str(Path(__file__).resolve().parents[2] / "src")
     env["PYTHONDONTWRITEBYTECODE"] = "1"
@@ -252,7 +253,7 @@ def _invoke(state, *, llm_config=None, llm_provider=None, launcher=None, timeout
     assert process.stdout.strip(), process.stderr
     result = json.loads(process.stdout)
     assert isinstance(result, dict) and result["schema_version"] == "narrative-batch-result/1"
-    assert result["run_id"] == "cli-e2e"
+    assert result["run_id"] == expected_run_id
     return process, result
 
 

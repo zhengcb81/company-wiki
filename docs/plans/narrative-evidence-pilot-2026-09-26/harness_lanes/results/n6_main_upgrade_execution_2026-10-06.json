@@ -1,0 +1,34 @@
+{
+  "schema_version": "cwp-main-upgrade-execution/1",
+  "status": "local_passed_publication_pending",
+  "code_parent": "6b68b78a2a34369da789aeb7da2d2236cc9040db",
+  "rf_head": "6e6b817a1a6e4567293a4dcb835815f3be508a03",
+  "test": "tests/integration/test_n6_batch_upgrade_identity.py",
+  "fixture": "one synthetic policy PDF, actual AUTO CLI/subprocess workers, next version simulated in isolated test bootstrap",
+  "framework_failures": [
+    {"seconds": 7.09, "reason": "internal SourceRef passed instead of public SourceRefValue"},
+    {"seconds": 6.48, "reason": "test expected ir_policy instead of catalog-normalized investor_relations"},
+    {"seconds": 15.41, "reason": "test launcher needed __main__ guard for Windows spawn"}
+  ],
+  "product_failures_claimed": false,
+  "green": {"passed": 1, "seconds": 16.33, "command": "PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 python -B -m pytest -p no:cacheprovider --basetemp tmp/n6uy tests/integration/test_n6_batch_upgrade_identity.py"},
+  "verified": ["current version finishes old run", "upgraded version refuses old run reuse without changing jobs or ledger", "new run and dedicated work-dir create three separate jobs", "new final pins upgraded version", "old reference returns original bytes after new publication", "upgraded run resume adds no jobs", "policy skips model", "foreign jobs and raw/config/catalog untouched"],
+  "old_selector_version": "0.3.2",
+  "simulated_new_selector_version": "0.3.2.n6-test-next",
+  "model_posts": 0,
+  "vendor_cost_usd": 0,
+  "product_code_changed": false,
+  "external_worktree_writes": 0,
+  "originals_deleted": 0,
+  "daily_ci_expansion": false,
+  "remaining": "actual candidate/budget implementation and MAIN wiring, nine-sample quality benchmark and real business E2E still pending",
+  "ruff": "passed",
+  "diff_check": "passed",
+  "scratch_absent": ["tmp/n6uv", "tmp/n6uw", "tmp/n6ux", "tmp/n6uy"],
+  "rf_owner_sha256": {
+    "daily_alert.jsonl": "0aee073f56c133786365ab96899edf4d91c0f9e1a0e13ab61b2a6bffd8316270",
+    "weekly_alert.jsonl": "b617b0b00ff1a758b5b46299e3e5db3115f56efd90d212154abe988e5ea9fee5",
+    "weekly_manifest.json": "0d55cb8c81f12b663e330819da3037bb69ce8564ac41a686b578a99f78f948bf"
+  },
+  "user_config_sha256": "3609e707466eeb3e0f685e14f2637c6afa39ba900edef1be4814433a43300a01"
+}

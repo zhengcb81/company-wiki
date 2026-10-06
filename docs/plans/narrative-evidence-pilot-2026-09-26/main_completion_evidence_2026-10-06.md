@@ -34,9 +34,9 @@ run10只做一次DeepSeek T01+零模型policy：batch35.217秒/总42.828秒，20
 
 ## 外线与交接
 
-[N5总包](harness_lanes/n5_parallel_packages_2026-10-06.md)已分派，ET-TXT已验收并线，DOCSET/RAW-DUP尚待完整交接。不要重派或提前声称已完成质量基准/原件去重；metadata估计不计空间释放，不删原件。RF/IQS/StockWiki owner树不另写，总PWF与共享接口仍由MAIN维护。
+[N5总包](harness_lanes/n5_parallel_packages_2026-10-06.md)三线均已交付验收并线：ET-TXT main2b9fb84、RAW-DUP master a41244a（精确CI57秒）、DOCSET master58b74d0（精确CI75秒）。不要把本文早期“尚待交付”恢复成队列；metadata估计不计空间释放、不删原件。RF/IQS/StockWiki owner树不另写，总PWF与共享接口仍由MAIN维护。
 
-下一动作只取总task_plan：接收下一份N5完整交接后集中验收/并线，不重跑已绿长测，不建立第二任务库或人工门。S0–S6核心完成，**含未交付扩展的整体目标仍active**。
+下一动作只取总task_plan：[N6候选/预算/空间三包](harness_lanes/n6_parallel_packages_2026-10-06.md)已分派，待各自完整交接；MAIN不跨写。DOCSET实际0.3.2九类对照required12/33、744定位合法说明业务漏项仍真实存在，S7整改in_progress，不以N5工具并线当语义完成。两质量线合入后MAIN共享接线/版本更新、一次九样本与正式业务E2E/兼容大节点，空间线可独立接收。S0–S6完成，**整体目标仍active**，不建立第二任务库/人工门，不重复付费或恢复全量派生。
 
 ## R6补齐
 

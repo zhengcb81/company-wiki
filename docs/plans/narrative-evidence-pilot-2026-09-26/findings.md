@@ -866,3 +866,9 @@ MAIN已实际推0947cea，精确CI37532408169 attempt1 success/job80秒，普通
 只有测试helper增加可选timeout，默认60秒不变；真实180秒batch/240秒subprocess为明确fixture请求，不改生产限时。没有运行时代码/外线写入/供应商调用/日常CI长测。RF owner新增daily日志，三个SHA实读保持；三个自有tmp根已恢复absent。框架receipt与施工细则在MAIN独占目录，后续验收按原四个不可变业务点与九类完整基准，不修改golden或分母。
 
 框架实际发布13bba07/远端master一致，精确CI37534879855一次success，全部step绿/job74秒。本地Integration和CI快集合分别记账，不假报远端跑了此新长测试。三外线仍独占bootstrap工作树，MAIN只读核对不恢复/跨写；下一实际交付后统一合入，当前质量仍12/33。
+
+## 2026-10-06 — 升级隔离实证与旧队列修正
+
+build_batch_events确用request中selector/parser/prompt hash划新身份；正式CLI/Worker实证旧run拒绝复用、新run/目录三job独立、new artifact绑定测试下一版本、旧ref继续返回旧字节、新run恢复不增任务。1 passed/16.33秒，纯流程PDF0模型。只改变测试子进程bootstrap的版本常量，不能代替未来实际候选/预算业务验收。Windows测试launcher须__main__保护；SourceRef内部DTO与public SourceRefValue、ir_policy路由标签与investor_relations来源身份必须分清，不放松产品合同迁就测试。
+
+完成证据旧N5待交付状态与总计划矛盾，已修成ET/RAW/DOCSET实际并线SHA与精确CI，以及当前N6/S7未完；未来RF owner保护按执行前status再读，目前三份。四tmp根恢复absent，产品/外线/外仓零写。此节点复用AUTO与reader，没有第二任务库/来源合同，也未加日常CI长测。

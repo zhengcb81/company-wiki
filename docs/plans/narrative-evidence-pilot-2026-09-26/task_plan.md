@@ -94,3 +94,5 @@ TDD 框住具体公开行为。只在 N4 A/B/C、存储迁移等大节点集中�
 run10与ET-TXT已完成并推adc9d6b；保留真实结果、旧失败与非穷尽边界。RAW-DUP已有完整交接，MAIN发现并修复输出/预算/分配量/云属性/报告/ACL测试缺口，51责任项/9.09秒与两CLI联调绿，原件删除0；[验收卡](harness_lanes/n5_raw_duplicate_main_acceptance_2026-10-06.md)。历史7.27GiB为跨根候选上界，仅3组151MiB实读，不计释放、不自动迁移；DOCSET已交9份真实资料/86标注点与完整报告；报告基于旧selector0.3.1，required11/33，不能当当前0.3.2结论。下一步按N6候选/预算独立卡并行整改，MAIN接线后集中质量验收。不凭目录文件或日志声称有确认live进程，不自动删原件/hydrate。
 
 N5外线独立实施，MAIN只在完整交付后验收；最终完成以本页每项责任和实际收据审计，不将当前证据缩成更容易通过的目标。
+
+MAIN先行[执行升级隔离](n6_main_upgrade_execution_implementation.md)已本地16.33秒绿：正式旧run/新run任务与artifact版本分离，旧run拒绝误复用、旧reference仍可读取、新run恢复幂等，纯流程PDF零模型。模拟版本传播只证明AUTO身份和传播；实际两线合入后仍用当前真实版本执行大节点。最后质量节点同时跑此case、冻结兼容9项与正式业务E2E，不加逐helper门。
