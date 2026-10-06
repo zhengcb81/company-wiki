@@ -1,5 +1,12 @@
 # Progress：激进简化实施
 
+## 2026-10-06 — N4C跨日计费接线补漏
+
+- 上一turn为progress：P5-RF卡状态修正及PWF 11cffb2已发布，pre-push GREEN。fresh RF main/remote仍6e6b817a，仅owner原有两份周日志dirty。
+- 发现待用driver只算Oct5收据，替换为已提交preflight.prior_budget统一汇总；所有日期/unknown计入、重复run拒绝。实际小夹具验证跨日+107 tokens/+211 microUSD与重复拒绝，finally清根；真实账58523/33884、unknown4不变。报告n4c_campaign_accounting_check_2026-10-06.json。
+- 默认60k真实命令在ROOT/POST之前exit1，明确预算不能预留配置8192；run05收据/测试根未创建。help正常，0 provider/模型/下载。沙箱psutil DLL被ACL拒绝，正常用户环境执行后成功显示help及预期预算拒绝，不是产品故障。临时driver改动和重新构造步骤已记入N4实施细则；没有新增生产控制或更改配置/cap。
+- 剩余N4C真实产物、consumer与总空间验收依赖累计token cap答复；没有live进程或待运行CI可当作verified wait，不改变目标或宣称完成。
+
 ## 2026-10-06 — P5-RF交付通知复核收口
 
 - 交付worktree干净，a74b9ceb完整为main祖先、main..交付分支无提交；RF本地/远端main均6e6b817a。官方API再次确认代码ca67eab7的CI37391526925 attempt1 completed/success。沿用正式MAIN验收收据中的108个不同case分步GREEN、107项pre-push及真实默认CLI/篡改反例，不重复长测或合并。

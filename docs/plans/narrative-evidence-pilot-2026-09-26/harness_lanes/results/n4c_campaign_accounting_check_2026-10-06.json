@@ -1,0 +1,21 @@
+{
+  "schema_version": "n4c-accounting-readiness/1",
+  "status": "verified_offline",
+  "actual_charged_tokens": 58523,
+  "actual_charged_micro_usd": 33884,
+  "unknown_reservations": 4,
+  "checks": {
+    "cross_date_receipt_included": true,
+    "duplicate_run_rejected": true,
+    "isolated_fixture_restored_absent": true,
+    "default_cap_driver_refused_before_root_creation": true
+  },
+  "driver_exit": 1,
+  "driver_error": "CAMPAIGN_BUDGET_CANNOT_RESERVE_CONFIGURED_OUTPUT",
+  "calls": {
+    "model_posts": 0,
+    "provider_http": 0,
+    "download": 0
+  },
+  "new_paid_receipt_created": false
+}

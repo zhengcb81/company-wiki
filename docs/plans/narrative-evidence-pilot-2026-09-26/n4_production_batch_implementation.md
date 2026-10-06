@@ -28,6 +28,10 @@ python tools/n4c_live_preflight.py --rf-root 'C:/Users/郑曾波/Projects/revenu
 
 待用`tmp/n4c_provider_live_driver.py`已对齐当前RF，新增`--sample-ids P01 P04`或`P07 T01`供小批覆盖；help已验证。累计token授权到达后先MiMo年报/招股两份，再按实际账单proxy/usage余量做DeepSeek IR/英文电话会（每批另加零模型policy），不要直接同时发四份或两provider同时发。序号用尚未有报告的新run-number，原件/metadata为现有fixture，不能把合成身份当live验证。失败记录照计；全部四类实际生成、真实RF消费/引用回放、原语言、空间/恢复通过才关闭N4C。
 
+**2026-10-06计费接线补漏：**临时driver原先只glob `n4c_live_2026-10-05_run*.json`，跨日收据可能漏计；现已把重复的旧账/run02/run03/后续序号求和删除，增加tools到导入路径并直接调用已提交的`n4c_live_preflight.prior_budget()`。累计tokens/microUSD取该结果，报告的`prior_budget`保存同一结果；全部日期、unknown及重复run拒绝语义因此一致。重新构造driver时必须复用这一个汇总入口，不复制旧日期硬编码算法。计算余量后、创建ROOT之前，若余量不足`model_options['max_output_tokens']`或费用余量≤0，抛出`CAMPAIGN_BUDGET_CANNOT_RESERVE_CONFIGURED_OUTPUT`；这是现有资源上限执行，不增加授权文件。
+
+真实默认60k命令已零模型验证为exit1/上述错误，`tmp/n4live05x5`及run05付费收据仍absent，help正常。跨日+107 tokens/+211 microUSD的隔离夹具正确累加，重复run拒绝，夹具finally恢复absent；真实累计58523/33884和unknown4未改。小结果见[计费接线验证](harness_lanes/results/n4c_campaign_accounting_check_2026-10-06.json)。此结果不是真实摘要验收，token cap答复仍待；不要为绕开拒绝降低已配置输出参数或清空旧账。
+
 1. 生产factory、薄HTTP、完整prompt1.1、真实usage与同AUTO持久预算已发布9ccd29f；测试Replay不当真实provider能力。
 2. scope已贯通claim/promotion/reaper/outbox/prepared，S0/N4A发布ff5396c；不重新实现同一范围接口。
 3. 有限batch CLI已串event/DAG/Supervisor/dispatcher。67项集中绿验证同run幂等/预算/源SHA/空间cap/目录恢复；生产小批前还要跨run、父kill/ACK与统一owner恢复收口。
