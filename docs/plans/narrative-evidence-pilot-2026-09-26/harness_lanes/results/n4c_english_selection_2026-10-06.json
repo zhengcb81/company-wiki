@@ -1,0 +1,71 @@
+{
+  "schema_version": "n4c-english-business-coverage/1",
+  "source_sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+  "original_bytes": 66324,
+  "baseline_head": "f26460991710f08520174482319cd000f5e2227f",
+  "metadata_is_fixture": true,
+  "parser_version": "0.1.0",
+  "anchors": {
+    "before": {
+      "new_data_centers": false,
+      "new_models": false,
+      "customer_adoption": false,
+      "gpu_delivery_efficiency": false,
+      "copilot_paid_seats": false,
+      "monetization_change": false
+    },
+    "after": {
+      "new_data_centers": true,
+      "new_models": true,
+      "customer_adoption": true,
+      "gpu_delivery_efficiency": true,
+      "copilot_paid_seats": true,
+      "monetization_change": true
+    }
+  },
+  "external_calls": 0,
+  "before": {
+    "selector_version": "0.3.1",
+    "selected_count": 14,
+    "candidate_count": 14,
+    "selected_bytes": 1809,
+    "management_count": 6,
+    "analyst_count": 8,
+    "replay_verified": 14,
+    "source_units": 498,
+    "coverage_complete": true,
+    "omitted_candidate_count": 0
+  },
+  "after": {
+    "selector_version": "0.3.2",
+    "selected_count": 46,
+    "candidate_count": 46,
+    "selected_bytes": 6852,
+    "management_count": 35,
+    "analyst_count": 11,
+    "replay_verified": 46,
+    "source_units": 498,
+    "coverage_complete": true,
+    "omitted_candidate_count": 0
+  },
+  "request_measurement": {
+    "body_bytes": 10228,
+    "request_sha256": "3b07ca0b660f8e669f9d172ae2efa4024dca8170151434dd265bc0f94d5dc9d6",
+    "input_reservation_bound": 10356,
+    "configured_output_tokens": 8192,
+    "token_reservation": 18548,
+    "micro_usd_reservation": 14376,
+    "campaign_tokens_remaining": 29613,
+    "campaign_micro_usd_remaining_after_fx": 18279,
+    "within_authorized_budget": true,
+    "configured_options": {
+      "model_id": "deepseek-flash",
+      "endpoint": "https://api.deepseek.com/chat/completions",
+      "api_key_env": "DEEPSEEK_API_KEY",
+      "max_output_tokens": 8192,
+      "temperature": 1.0,
+      "output_token_field": "max_tokens"
+    }
+  },
+  "original_unchanged": true
+}

@@ -49,12 +49,13 @@ from .narrative_routing import (
 NARRATIVE_PARSER_NAME = "selective_narrative_parser"
 NARRATIVE_PARSER_VERSION = "0.1.0"
 NARRATIVE_SELECTOR_NAME = "select_narrative_evidence"
+# 0.3.2 adds concrete English operating actions and adoption, without brand rules.
 # 0.3.1 recognizes administrative English IR policy titles; 0.3.0 added
 # concrete current Chinese operating/new-business/overseas progress
 # and keeps unrecognized business documents reviewable. The version also pins
 # batch generation identity, so old selection results cannot be silently reused.
 # Parsing, source bytes and locator construction remain unchanged.
-NARRATIVE_SELECTOR_VERSION = "0.3.1"
+NARRATIVE_SELECTOR_VERSION = "0.3.2"
 _FINANCIAL_TERMS = re.compile(
     r"资产负债表|利润表|现金流量表|每股收益|归母净利润|营业收入|营业成本|"
     r"货币资金|应收账款|存货|固定资产|加权平均|基本每股|稀释每股|"
@@ -80,12 +81,14 @@ _SIGNALS: dict[str, tuple[str, ...]] = {
         "关键设备领域", "设备市场", "设备产品", "core business", "business development",
         "生产装置", "装置运行", "产销量", "产销率", "产能利用率", "营业规模",
         "commercial operations", "commercial deployment", "distribution network", "sales office",
+        "throughput", "operating efficiency",
     ),
     "new_business": (
         "新业务", "第二曲线", "新产品", "新市场", "业务开拓", "新兴业务",
         "投资和并购", "投资并购", "产业链上下游", "新兴领域", "市场布局", "自主研发",
         "new business", "new product", "new market", "pipeline", "model choice",
         "open and custom models", "frontier models", "multiple models", "commercial approach",
+        "new model", "new service", "new platform", "new solution",
     ),
     "overseas": (
         "出海", "海外市场", "境外市场", "国际化", "海外客户", "出口业务",
@@ -103,6 +106,7 @@ _SIGNALS: dict[str, tuple[str, ...]] = {
         "产能", "产线", "中试线", "扩产", "投产", "募投项目", "项目建设", "基地建设",
         "项目以", "精密加工业务", "产业链延伸", "向下游延伸", "零件交付",
         "capacity", "production line", "pilot line", "facility", "capital project",
+        "data center", "data centre", "manufacturing site",
     ),
     "products_rd": (
         "研发项目", "研发进展", "技术突破", "核心技术", "量产", "试产", "中试", "产品验证", "产品迭代", "临床",
@@ -196,6 +200,41 @@ _EXCLUDED_NARRATIVE_CONTEXT = re.compile(
 _HEADING_ONLY = re.compile(
     r"^[（(]?[一二三四五六七八九十\d]+[）).、]\s*[^。！？!?；;]{1,24}(?:风险|项目|方案|安排)$"
 )
+_ENGLISH_OPERATING_OBJECT = (
+    r"(?:data cent(?:er|re)s?|manufacturing sites?|production lines?|"
+    r"products?|services?|platforms?|solutions?|models?|agents?|"
+    r"customers?|users?|paid seats?|workloads?|throughput|capacity)"
+)
+# A business noun alone is not a milestone. Keep a nearby operating action or
+# explicit current adoption count, and exclude a financial subject in the gap.
+_ENGLISH_FINANCIAL_MEASURE = r"(?:revenues?|earnings|income|profits?|margins?|EPS|dividends?)"
+_ENGLISH_OPERATING_GAP = r"(?:(?!\b" + _ENGLISH_FINANCIAL_MEASURE + r"\b)[^.!?;\n]){0,80}"
+_ENGLISH_OPERATING_EVENT = (
+    r"\b(?:added|built|opened|expanded|launched|introduced|announced|released|"
+    r"deployed|rolled out|increased|scaled|commissioned)\b"
+    + _ENGLISH_OPERATING_GAP + r"\b" + _ENGLISH_OPERATING_OBJECT
+    + r"\b(?!\s*(?:'s\s+)?" + _ENGLISH_FINANCIAL_MEASURE + r"\b)|"
+    r"(?:^|[.!?;\n])\s*" + _ENGLISH_OPERATING_GAP
+    + r"\b(?:customers?|users?|paid seats?|workloads?|throughput|capacity)\b"
+    + _ENGLISH_OPERATING_GAP + r"\b(?:increased|expanded|grew|doubled|tripled|scaled)\b|"
+    r"\b(?:now|currently)\s+(?:have|serve|support)\s+"
+    r"(?:(?:over|more than|approximately|about)\s+)?[\d,]+"
+    r"(?:\s+\w+){0,6}\s+(?:customers?|users?|seats?|deployments?)\b|"
+    r"(?:^|[.!?;\n])\s*" + _ENGLISH_OPERATING_GAP
+    + r"\b(?:customers?|users?|seats?|deployments?)\b"
+    + _ENGLISH_OPERATING_GAP
+    + r"\b(?:surpassed|reached|crossed|now\s+(?:over|above))\s+[\d,]+\b|"
+    r"\b(?:reduced|shortened|decreased)\b"
+    + _ENGLISH_OPERATING_GAP
+    + r"\b(?:dock[- ]to[- ]live|delivery|deployment|lead|fulfillment)\s+times?\b|"
+    r"\b(?:transitioning|evolving|shifting|changed|adopting)\b"
+    + _ENGLISH_OPERATING_GAP
+    + r"\b(?:business|monetization|pricing|subscription)\s+models?\b|"
+    r"\b(?:now|currently)\s+(?:have|use|offer)\b"
+    + _ENGLISH_OPERATING_GAP
+    + r"\b(?:per\s+seat|usage|consumption|subscription|licensing)\s+"
+    r"(?:business\s+)?models?\b"
+)
 _HIGH_VALUE_EVENT = re.compile(
     r"(?:新产品|新业务|第二曲线|新市场).{0,24}(?:推出|发布|验证|认证|量产|试产|投产|销售|订单|客户|开拓|拓展|落地)|"
     r"(?:设立|成立|启动).{0,28}(?:新业务|新产品|新材料|新装置|事业部|研究院|研究所|研发项目)|"
@@ -227,7 +266,8 @@ _HIGH_VALUE_EVENT = re.compile(
     r"market expansion|starter doses|prescription trends.{0,60}"
     r"(?:increased|declined|grew|slowed|currently|reached|prescriptions)|"
     r"too early to speculate|non-inferiority|superiority|"
-    r"(?:phase|trial).{0,35}(?:clinical|superiority|results)",
+    r"(?:phase|trial).{0,35}(?:clinical|superiority|results)|"
+    + _ENGLISH_OPERATING_EVENT,
     re.IGNORECASE,
 )
 _SPECIFIC_BUSINESS_POSITIONING = re.compile(

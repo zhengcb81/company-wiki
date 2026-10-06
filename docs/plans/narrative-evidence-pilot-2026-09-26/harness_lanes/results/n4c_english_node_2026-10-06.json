@@ -1,0 +1,22 @@
+{
+  "schema_version": "n4c-english-selection-node/1",
+  "status": "verified_locally_release_pending",
+  "selector_version": "0.3.2",
+  "parser_version": "0.1.0",
+  "tdd": {
+    "initial_positive_red": {"failed": 8, "passed": 7},
+    "additional_milestone_red": {"failed": 4, "passed": 18},
+    "operations_and_general_green": {"passed": 69, "seconds": 2.84},
+    "existing_english_regression": {"failed": 1, "passed": 22, "seconds": 2.36},
+    "regression_reason": "financial revenue clause with customers as complement matched reverse operating growth rule",
+    "operations_and_existing_english_green": {"passed": 46, "seconds": 1.58},
+    "distinct_verified_cases_across_runs": 92,
+    "single_all_tests_green_claimed": false
+  },
+  "static_checks": {"ruff": "passed", "mypy_changed_module": "passed"},
+  "real_source_receipt": "n4c_english_selection_2026-10-06.json",
+  "llm_configuration_changed": false,
+  "provider_posts": 0,
+  "business_rule_contains_company_brands": false,
+  "known_limits": ["six manually read management anchors are sample-level coverage, not an exhaustive document benchmark", "new live summary and exact code CI remain pending", "metadata comes from isolated fixture"]
+}

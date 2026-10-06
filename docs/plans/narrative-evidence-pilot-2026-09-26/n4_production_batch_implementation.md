@@ -1,5 +1,11 @@
 # N4：可运行的叙述批次、真实模型计量与持久恢复
 
+> **英文经营叙述修复准备完成：**selector0.3.2使用动作与经营对象、采用数量、交付时间和商业模式变化，不包含Microsoft/Copilot等品牌规则。新23项＋原通用46项＝69 passed/2.84s；原英文23项发现1条财务补语误召回，限制句中非财务主语后新/旧英文46项passed/1.58s，共92个不同case分次通过。Ruff/mypy绿色。真实T01不改字节：旧14段（管理层6）→46段（管理层35），六类人工读出的管理层进展均选中、46/46原文回放。请求按Config测量10228 B，保守18548tokens/14376microUSD，低于余29613/18279；小收据n4c_english_selection_2026-10-06.json。下一动作：正常发布和精确代码CI后一次T01+policy真实DeepSeek复测，逐条看最终摘要效果，不将选择覆盖等同于摘要覆盖。
+
+> **run08已完成与新的实际质量缺口：**DeepSeek P04完成25claims/160locators、238766 B final、RF读取0/verified；政策skip/0model，全部保护/清理通过，累计170387tokens/78957microUSD，unknown7/unsettled0，余29613tokens/费用扣FX后18279microUSD。形式上的四类型provider/consumer链已打通，但T01真实输出14claims中9条为分析师问题、管理层仅5条多为泛述，原文的新数据中心/Copilot/新模型/客户采用明显遗漏，不能据此标业务效果完成。MAIN下一节点先用真实原文和跨行业反例写RED，修通用英文经营动作+对象识别、正确bump selector；不加品牌词凑样本、不放松财务过滤或引用。先零LLM实读/回放/尺寸测量，再判断已批准预算内的必要一次电话会复测。N5写集不变、runtime仅MAIN改。
+
+> **最新授权已到达：**用户“给你授权”对应累计200000tokens/$0.10不变与中微招股P04同一精选片段明确外发DeepSeek https://api.deepseek.com / deepseek-flash的单次复测。旧累计159907tokens/68560microUSD与FX2764保持，新token余量40093/费用28676microUSD；Config8192/温度1.0/既有60秒默认不变，不翻译、不改原件。现在run08 P04+零模型policy，不等N5，不再重复申请；下方“待答”是历史。
+
 > **最新run07终态（覆盖下方余额）：**891dd41诊断/prompt精简已发布、CI37506642500全部步骤success/83秒。MiMo P04+policy唯一POST在约60秒MODEL_TIMEOUT，后续MODEL_BUDGET_DENIED在外发前拒绝；batch127.140s、RSS471945216 B、测试根峰值12087501 B。保守再计23799tokens/5332microUSD，累计159907tokens/68560microUSD、unknown7/unsettled0，剩93tokens/费用扣FX后28676microUSD。policy skip/0model/RF读取0，全部保护checks与cleanup true；招股没有final，N4C未完成。新增200k及P04精选片段向DeepSeek单次复测方案待用户答复，未获答复零POST，保留Config8192/温度1.0、默认60秒及所有旧未知账。不能盲重跑MiMo或从下方历史恢复点重新计算余额。
 
 > **2026-10-06预算已答复：**用户“批准提高token预算”，对应待答的累计160,000方案；费用仍$0.10，保留全部旧未知账与FX余量，不改Config。RF fresh main/remote均6e6b817a，owner两份周日志保持。以下待答描述仅为历史；现在按provider分run执行实际MiMo P01/P04、DeepSeek P07/T01及各自零模型policy。价格已复核官方页，保守沿用既有无缓存国内/FX6 proxy，不凭GET/套餐估算冒充真实账单。

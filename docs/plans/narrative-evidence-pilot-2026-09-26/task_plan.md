@@ -4,9 +4,11 @@
 
 ## Goal
 
+**最新授权（2026-10-06）：**用户对待答的明确方案回复“给你授权”：累计token上限200000，累计费用仍$0.10；中微上市招股书P04同一精选业务片段可发给DeepSeek https://api.deepseek.com / deepseek-flash做一次原语言摘要及RF读取验收，已执行run08并通过。Config8192/温度1.0、原件不改、不翻译，全部旧unknown与FX余量保持。此前160k及“200k待答”段落均为历史，不得继续阻断或重问。T01电话会→DeepSeek的既有明确外发授权继续有效，必要一次质量修复复测受累计200k/$0.10约束。
+
 **2026-10-06用户预算答复：**已明确批准提高累计token预算至160,000；累计费用仍限$0.10，历史unknown及FX余量继续计入，配置8192/温度1.0/模型与端点不改。下方“预算答复待定/60k不足”是此前恢复点，本轮直接按Next Step执行N4C，不再以预算答复阻断。
 
-**当前执行状态：**年报、IR、英文电话会真实摘要/RF读取/引用回放通过，招股仍未完成。规则诊断与完整正文prompt精简已发布891dd41、精确CI37506642500全绿/83秒；run07 MiMo招股+policy已终态budget_exhausted并恢复测试根：唯一POST在约60秒超时，后续预算拒绝未外发，无P04 final、无新SUMMARY_INVALID。累计159907tokens/68560microUSD，unknown7/unsettled0；扣历史FX2764后费用剩28676microUSD，tokens只余93。已提出200000tokens及P04向DeepSeek同一片段单次复测的明确授权，尚未答复不得POST或提高cap。三份真实收据见results/n4c_live_2026-10-05_run05.json、run06.json、run07.json（文件日期属于Oct5起始campaign，实际为Oct6）。
+**当前执行状态：**run08 DeepSeek招股已完成25claims/160locators、238766 B final，RF读取0/replay verified，policy skip/0model，隔离根恢复absent；四类资料的真实provider/消费者接口链已通过。累计170387tokens/78957microUSD，unknown7/unsettled0，余29613tokens/扣FX后18279microUSD。英文电话会旧结果的业务覆盖不够，不能用合法引用代替效果验收；MAIN已TDD修通用英文经营动作/采用数量/交付效率/商业模式，selector0.3.2，parser不变。92个不同相关Unit分步通过；真实原文六类管理层进展全部选中、46/46引用回放，零外发测得请求10228 B，预留18548tokens/14376microUSD在余量内。下一动作见唯一Next Step。收据run05–08与n4c_english_selection_2026-10-06.json（run文件日期为Oct5起始campaign，实际为Oct6）。
 
 **新的可独立施工包：**[N5总包](harness_lanes/n5_parallel_packages_2026-10-06.md)包含DOCSET质量基准、RAW-DUP只读原件重复工具、ET-TXT本地复用修复。三份独立目录/写集/接口，不修改MAIN runtime或生产状态；可同时启动，不是N4C完成屏障。MAIN统一验收合入。
 
@@ -60,7 +62,7 @@ StockWiki/IQS已有owner工作及消费者交付，本轮只读，不重复分�
 | S2 N4B | complete（节点A/B集中验收已绿；整体N4仍待独立S4/N4C） | real factory/HTTP adapter/full prompt; persistent token/cost reservation in AUTO; finite batch CLI; unique final artifact and small recovery receipt; public legacy whole-catalog Worker and startup routes removed | node A accounting/concurrency green; node B formal CLI/HTTP/kill/ACK and focused regression green; CWP producer limits are now connected and have real-data E2E evidence; proceed to N4C after G1/S3 closeout |
 | G1 残余门禁/签收精简（第一优先） | complete（CWP来源链与G1-LEGACY已合入；FF SourceRef v2于`e1eda60`推送） | 46项清单已分为已退出、必要自动校验、能力边界及外仓owner事项；未找到生产调用者的旧摘要/binding/archive工具不再作为当前门，留待S5/S6 caller清理 | CWP来源/as-of 64项、resolver/planner/canonical 100项与G1-LEGACY 170 passed / 1 deselected既有收据；FF集中回归177 passed / 1 skipped / 39 subtests，Ruff及push gate GREEN；电话会provider→CWP导入端到端12 passed。保留SHA、来源身份/期间/公开日、可回放引用和资源限制 |
 | S3 SourceRef/SourceExport 虚拟化与来源默认收敛（第二优先） | **complete**（FF `eb0af13`、ET `63c4090`已推送；CWP SourceExport已发布；合入后FF→ET→CWP链及各仓责任集均GREEN。live FMP仍受HTTP 402权益限制，不影响接口合同完成） | 上层只用SourceRef/SourceExport v2；复用FF exact/latest_as_of和pathless reader，不依赖物理目录；电话会走正式ET CLI并由CWP持有原件；provider定位仍在adapter层 | ET deadline分支已快进到main；其`/1`、`/2`、discovery/candidate wire与goldens未改，CWP importer现有provider-aware FMP JSON合同经真实三仓离线链验证。跨仓脚本验证FF uppercase exchange转ET小写、精确FY/Q、FMP原JSON与canonical text各自SHA/size、unknown publication、pathless SourceRef、重复读取不触provider，以及超时后worker结果清理。合并后ET `tests/test_retrieval_cli_e2e.py` 6 passed、10 goldens matched；FF companion 5 passed且Ruff clean；CWP FMP importer 5 passed。FF只在owner目录用`eb0af13`修正交易所slug与3秒清理窗口；ET只更新过期golden说明并合入`63c4090`。旧“Motley 24字段唯一可导入”记录已由当前源码/测试更正。真实FMP HTTP 402不作为代码合同门；正费用额度没有实际账单计量，本计划只声称FF zero-cost拒绝与单次provider请求，不声称美元账单cap已实测。 |
-| S4 N4C real samples and storage plan | **in_progress；MAIN独占**（年报/IR/英文电话会真实provider final、RF读取和引用回放已通过；P1/P2/P4确定性模型实字节实验已绿。MiMo招股run07再次超时，后续预算拒绝，累计159907/160000tokens仅余93；诊断/prompt修复891dd41精确CI绿） | four real document types / actual bounded batch and consumer reads / language and citation coverage / total incremental bytes | 招股真实final仍缺；新增200k及P04→DeepSeek一次方案待答复。参数/旧未知账/费用上限保持；不重复已绿A/B、三档E6、存储清理。详见main_completion_evidence_2026-10-06.md |
+| S4 N4C real samples and storage plan | **in_progress；MAIN独占**（四类provider final/RF读取/定位已过，run08招股通过；电话会业务漏选已TDD修复，真实管理层六类进展与全部引用离线通过） | four real document types / actual bounded batch and consumer reads / language and citation coverage / total incremental bytes | 正常发布selector0.3.2后，在已批准200k/$0.10内一次T01+policy真实质量复测；不重跑已绿A/B、三档E6、存储清理。详见main_completion_evidence_2026-10-06.md |
 | S5 B2逐caller清理 | **complete**（旧writer/全量正文消费者退出，RF默认v2已main发布，生产derived已清零） | 原文临时parser/指纹及精选transport/BM25保留；8191退休handle、7104旧文件删除、原件/来源事实不变 | 工具49集中测试和精确CI绿；生产四份公开原文前后读取/固定PDF与TXT SHA、17表digest/完整性通过；操作材料已收尾 |
 | S6 DB事实收缩与收尾 | **complete：生产收缩及说明/控制收尾均已发布、精确CI绿** | 1490530旧span删除，DB3.056GB→222.409MB；取消无调用者人工lock/Reviewer文件及两个旧cron壳；重写当前说明，4个旧smoke换为当前行为，数量仍12 | 38责任测试/短smoke/显式架构检查GREEN，三个测试根恢复absent，18文档链接有效；e481578/CI37399248994 attempt1 success；下一N4C |
 | 可选 exact-SHA原件对象去重 | 不阻S0–S6完成 | 先用已有SHA/size找候选、逐候选验字节，保留所有source/location版本事实 | 有真实收益才实施；不报未测节省量 |
@@ -126,12 +128,12 @@ TDD框住公开行为，不把旧签收规则写进新测试。仅S0相关收口
 
 ## Next Step
 
-**MAIN单一下一动作：完成run07终态/精确CI收据发布及当前完成条件核对；得到新增200000tokens与P04向DeepSeek的授权后，才执行一次P04+policy复测。**当前仅93tokens，任何8192输出预留都不允许外发；旧unknown7及FX余量继续计入，不退款、不改Config/思考/stream/超时。run07仅超时，没有摘要结果，不能证实旧SUMMARY_INVALID具体原因或把N4C标complete。已绿146Unit、14个分两次全过的CLI/cross-run/recovery以及精确CI不重复重跑。S5/S6/P5已完成，RF/FF/ET主线与owner不动。N5三包可独立启动，MAIN不等待它们作为当前节点门。
+**MAIN单一下一动作：正常提交/推送英文经营叙述选择修复及run08收据，精确代码CI绿后执行一次T01+policy真实DeepSeek质量复测。**累计cap200000/$0.10已批准，当前170387tokens/78957microUSD，剩29613tokens/费用扣FX后18279microUSD；已明确外发的同一T01资料/目的地、Config8192/温度1.0保持。旧unknown7及FX余量照计，不退款、不擅改思考/stream/超时。逐条读摘要核经营内容、管理层/分析师角色、全部引用回放、RF消费、总空间及目录恢复后收口N4C。既绿146Unit、14个分两次全过CLI/cross-run/recovery与三档E6不重复。S5/S6/P5已完成，RF/FF/ET主线与owner不动；N5三包可独立启动，不是本节点门。
 
 P5-STORAGE已验收并合入/发布：候选`9fa2166`，主线代码`e570dafb92a3f6aaec51176682d348a1c9303535`。53个不同case分步GREEN，真实AMEC年报+微软电话会TXT的原文stdout SHA、新NarrativeRef完整locator replay前后通过，连接关闭及测试根恢复均通过；没有生产删除。工具预览不写库/sidecar、不拿写锁；切片单次范围SQL/聚合小报告；压缩真实前后计量/空间检查，观测失败明确null。所有细节及实际副本空间见[集成审查](harness_lanes/results/p5_storage_integration_review_2026-10-05.md)、[小验收收据](harness_lanes/results/p5_storage_integration_acceptance_2026-10-05.json)、[工具说明](../../../tools/legacy_storage/README.md)。日常Unit CI不添加多分钟解析包。精确新代码[CI37375836745](https://github.com/zhengcb81/company-wiki/actions/runs/37375836745)已completed/success；此前18da250同SHA重跑CI也已success。
 
 
-N4C原160k预算及MiMo P01/P04、DeepSeek P07/T01具体外发均已获授权并执行；仅招股仍失败。新增200k及P04→DeepSeek方案尚待明确答复，不沿用旧两家授权推定此新组合。费用仍$0.10、模型参数仍Config原值，旧unknown保留。无需重问既有凭证/资料授权；当前余额与动作只取顶部恢复点。
+N4C原160k及MiMo P01/P04、DeepSeek P07/T01具体外发均已获授权；新增200k及P04→DeepSeek亦已明确批准、run08成功。费用仍$0.10、模型参数仍Config原值，旧unknown保留；当前余额与动作只取顶部恢复点，旧待授权段落为历史。
 ## 2026-10-04：新增三张可独立派发的施工卡
 
 三张卡均已交付：N4-T1已集成MAIN；MeetingConverter已验收、合入并发布master且主线CI绿；N4-T2已完成差异对账、选择性吸收及验收。本段原写集和接口仅供交付追溯，不重派已完成卡。StockQAbyLLM 与 MeetingConverter 先前的只读盘点交付仍按已有收据验收；invest-quick-scan 仍由其独立任务负责，本计划不检查、不修改、不重复派发。

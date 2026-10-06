@@ -750,3 +750,11 @@ e570daf已发布，精确CI37375836745 success。53个不同case分步GREEN。�
 - MiMo官方API Integration FAQ（2026-10-06读取，更新2026-09-20）建议合理连接/读取超时、指数退避，长响应使用stream；速度还受请求复杂度、服务负载/地域与stream影响。来源：https://mimo.mi.com/docs/en-US/quick-start/faq/api-integration 。这是后续传输策略设计依据，不是本次超时根因证据；未采用第三方论坛推论、未偷偷增加paid calls或provider fallback。
 - 当前既定token cap不允许任何8192输出预留。已向用户提出累计200000tokens+$0.10不变、P04同一精选片段明确外发DeepSeek的单次方案，待答期间零POST。旧unknown不退，现有三类型成功保留。891dd41精确CI37506642500 attempt1全部job/步骤GREEN，单job83秒，正式小CI收据已保存。
 - 只读观察先误用jobs.state列，PRAGMA核实际status后修正；两份猜测计划文件及两份猜测模块不存在，已改已知具体文件/rg --files；一次rg字面*.py在Windows失败，后续统一目录+-g过滤。这些读取错误不改生产或放松产品校验。
+
+## 2026-10-06 — run08招股成功与英文经营业务修复节点
+
+- 用户明确授权累计200000tokens/$0.10与P04→DeepSeek后，run08完成：batch83.159s、峰值RSS481517568 B、隔离根峰值12576222 B；10480tokens/10397microUSD、unknown0。招股25claims/160locators、238766 B final、RF read0/verified、原语言不翻译；policy skip/0model，全部保护与目录恢复通过。累计170387tokens/78957microUSD，历史unknown7/unsettled0保留，余29613tokens/扣FX后18279microUSD。
+- 读T01真实摘要发现14claims中9条分析师问题，管理层五条多为泛述；原文六类重要经营更新漏选，形式上四类型链绿不代表实际业务效果合格。根因是英语规则识别范围过窄；动作+经营对象、当前采用数量、交付时间、商业模式变化缺失，不能靠品牌词和财务增长扩大召回。
+- 新正例先8 RED，再补充效率/席位/商业模式4 RED；实现selector0.3.2，parser0.1.0不变。新23＋原通用46项69 passed/2.84s。检查原英文23项发现1条收入句中的customers补语误召回，增加句中非财务主语条件，新/旧英文46项passed/1.58s。总92个不同case分步通过，Ruff/mypy绿；不伪称全部单包一次绿，不重跑既绿的长E6/storage包。
+- T01只读对比f264609：原14段/1809 B（管理层6）→46段/6852 B（管理层35），新数据中心、模型、Fabric采用、GPU交付效率、Copilot席位、seat+usage六个管理层原文点均选中，46/46引用回放。第一版测量误把实际“paid Fabric customers”写成“paid customers”，两次断言失败后逐字读原文修正测量短语；没有调整生产规则迎合品牌。runpy首次导入support失败已补tests到sys.path，均零POST、不改原件。
+- 按Config DeepSeek测量body10228 B、保守18548tokens/14376microUSD，在批准余量内。小收据n4c_english_selection及n4c_english_node落盘，无原文/请求大副本；下一正常发布/精确CI后只复测同一T01＋零模型policy一次。用户source_acquisition与RF owner不动，N5独立写集保持。
