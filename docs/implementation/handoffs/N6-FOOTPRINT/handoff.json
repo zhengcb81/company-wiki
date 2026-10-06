@@ -1,0 +1,144 @@
+{
+ "schema_version": "cwp-independent-handoff/1",
+ "lane_id": "N6-FOOTPRINT",
+ "status": "complete",
+ "repo": "C:/Users/郑曾波/Projects/company-wiki",
+ "worktree": "C:/Users/郑曾波/Projects/cwp-lanes-20261006/n6-footprint",
+ "branch": "codex/n6-footprint",
+ "base_head": "ec7a5735e3c47a366c6de01073e87226f02c52ae",
+ "delivery_head": "ba195710b95878ededbe1a60ca0bc569bf740bcc",
+ "card_baseline": "58b74d07dd4f8b589c134ef9060a689864a8c089",
+ "commits": [
+  "ba195710b95878ededbe1a60ca0bc569bf740bcc"
+ ],
+ "changed_paths": [
+  ".planning/n6-footprint/findings.md",
+  ".planning/n6-footprint/progress.md",
+  ".planning/n6-footprint/task_plan.md",
+  "docs/implementation/handoffs/N6-FOOTPRINT/HANDOFF.md",
+  "docs/implementation/handoffs/N6-FOOTPRINT/handoff.json",
+  "docs/implementation/handoffs/N6-FOOTPRINT/real_scan_protection.json",
+  "docs/implementation/handoffs/N6-FOOTPRINT/real_scan_report.json",
+  "tools/storage_footprint/README.md",
+  "tools/storage_footprint/__init__.py",
+  "tools/storage_footprint/classify.py",
+  "tools/storage_footprint/core.py",
+  "tools/storage_footprint/report.py",
+  "tools/storage_footprint/run.py",
+  "tools/storage_footprint/runner.py",
+  "tools/storage_footprint/scan.py",
+  "tools/storage_footprint/tests/conftest.py",
+  "tools/storage_footprint/tests/e2e_hook/sitecustomize.py",
+  "tools/storage_footprint/tests/fixtures.py",
+  "tools/storage_footprint/tests/fixtures/static_root/.pytest_cache/scratch.txt",
+  "tools/storage_footprint/tests/fixtures/static_root/README.md",
+  "tools/storage_footprint/tests/fixtures/static_root/companies/demo/annual_note.txt",
+  "tools/storage_footprint/tests/fixtures/static_root/companies/demo/wiki/demo_timeline.md",
+  "tools/storage_footprint/tests/fixtures/static_root/docs/plans/n6_note.md",
+  "tools/storage_footprint/tests/fixtures/static_root/mystery/thing.bin",
+  "tools/storage_footprint/tests/fixtures/static_root/src/app_module.py",
+  "tools/storage_footprint/tests/test_storage_footprint_cli_e2e.py",
+  "tools/storage_footprint/tests/test_storage_footprint_fixture_integration.py",
+  "tools/storage_footprint/tests/test_storage_footprint_unit.py"
+ ],
+ "tests": {
+  "red": {
+   "command": "PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 CW_BASETEMP_FALLBACK_ROOT=$PWD/tmp python -m pytest -p no:cacheprovider --basetemp tmp/n6ft tools/storage_footprint/tests",
+   "result": "collected 0 items / 1 error",
+   "error": "ImportError: cannot import name 'classify' from 'storage_footprint'",
+   "seconds": 0.43
+  },
+  "green_unit": {
+   "result": "28 passed",
+   "seconds": 2.14
+  },
+  "final": {
+   "result": "40 passed / 0 failed",
+   "seconds": 2.53
+  },
+  "ruff": "python -m ruff check tools/storage_footprint -> All checks passed",
+  "diff_check": "git diff --check -> OK",
+  "notes": "no new slow tests, no platform matrix, no real-ACL tests; permission errors injected by mock"
+ },
+ "public_commands": [
+  "python tools/storage_footprint/run.py --project-root 'C:/Users/郑曾波/Projects/company-wiki' --max-files 100000 --max-seconds 60 --output '<new-report.json>'",
+  "PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 CW_BASETEMP_FALLBACK_ROOT=$PWD/tmp python -m pytest -p no:cacheprovider --basetemp tmp/n6ft tools/storage_footprint/tests",
+  "python -m ruff check tools/storage_footprint"
+ ],
+ "report": {
+  "schema": "cwp-storage-footprint/1",
+  "path": "docs/implementation/handoffs/N6-FOOTPRINT/real_scan_report.json",
+  "bytes": 13717,
+  "max_bytes": 262144,
+  "protection_receipt_schema": "cwp-storage-footprint-protection/1",
+  "protection_receipt": "docs/implementation/handoffs/N6-FOOTPRINT/real_scan_protection.json"
+ },
+ "real_vs_fixture": {
+  "real": {
+   "root": "C:/Users/郑曾波/Projects/company-wiki",
+   "complete": true,
+   "stop_reason": "complete",
+   "measurement_window": [
+    "2026-10-06T22:19:19Z",
+    "2026-10-06T22:19:42Z"
+   ],
+   "scan_seconds": 23.363,
+   "entries_seen": 58309,
+   "files_measured": 54129,
+   "logical_path_bytes": 24364743714,
+   "errors": 0,
+   "skipped_files": 1007
+  },
+  "fixture": {
+   "static_root_files": 7,
+   "runtime_spec_files": 11,
+   "location": "tools/storage_footprint/tests/fixtures + pytest basetemp",
+   "cli_e2e": "real subprocess runs of tools/storage_footprint/run.py"
+  }
+ },
+ "completeness": {
+  "kind": "complete",
+  "limits_hit": [],
+  "basis": "54129 < 100000 files and 23.363s < 60s; stop_reason=complete",
+  "partial_rule": "budget hit -> complete=false, stop_reason=budget, totals cover visited portion only, limitations records 'partial scan'; traversal errors -> stop_reason=errors",
+  "snapshot_caveat": "declared measurement window, not an atomic filesystem snapshot; parallel harnesses share Git objects"
+ },
+ "protection": {
+  "config_sha256_unchanged": true,
+  "database_stat_and_listing_unchanged": true,
+  "originals_metadata_unchanged": true,
+  "originals_sampled": 5,
+  "original_body_reads": 0,
+  "production_sqlite_opens": 0,
+  "reparse_and_cloud": "never followed, never hydrated; 1007 cloud placeholders skipped with 20 samples listed",
+  "source_repo_writes": 0,
+  "calls": {
+   "original_body_reads": 0,
+   "llm": 0,
+   "network": 0,
+   "deleted": 0
+  }
+ },
+ "cleanup": {
+  "lane_tmp": "tmp/n6-footprint removed, tree restored to original",
+  "pytest_basetemp": "handled by root conftest, removed at session end",
+  "temp_outputs": "atomic temp+replace with cleanup on failure; no *.tmp residue",
+  "owner_production_files": "untouched; source repo git status only shows the pre-existing config/source_acquisition.yaml modification",
+  "other_worktrees_and_repos": "zero writes",
+  "new_automation_or_state_stores": "none"
+ },
+ "recommendations": {
+  "keep_now_bytes": 24034258944,
+  "separate_disposal_review_bytes": 319033982,
+  "undetermined_bytes": 11450788,
+  "basis": "logical bytes upper bound only; allocated_bytes=null; no content or duplicate verification; originals never enter a deletion list",
+  "executed": false
+ },
+ "open_items": [
+  "MAIN decides whether to open a separate disposition approval for tmp_test_cache (273801070 B) and tmp databases (45232912 B)",
+  "1007 OneDrive-unpinned cloud placeholder PDFs are not measured (no hydrate); local/logical accounting for them is a product decision",
+  "unknown category (3685 files, 6859579 B) may get more layout rules later; no extrapolation in this lane",
+  "stray root 'nul' device pseudo-file (0 B, st_ino=0) is source-repo litter outside this lane's write set",
+  "lane does not block the candidates/budget quality lanes; done != space released"
+ ]
+}
