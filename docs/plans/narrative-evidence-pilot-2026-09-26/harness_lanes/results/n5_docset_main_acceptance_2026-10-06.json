@@ -1,7 +1,7 @@
 {
   "schema_version": "n5-docset-main-acceptance/1",
   "lane_id": "N5-DOCSET",
-  "status": "accepted_pending_publication",
+  "status": "complete",
   "delivery_head": "2c3583e084a6fc632bd0970db02a439187214c0f",
   "runtime_baseline": "c8bf461c763afc25838cd21e749523ca763ddf53",
   "runtime_code_sha256": {
@@ -123,5 +123,17 @@
     "downloads": 0,
     "cost_micro_usd": 0
   },
-  "originals_deleted": 0
+  "originals_deleted": 0,
+  "main_commit": "58b74d07dd4f8b589c134ef9060a689864a8c089",
+  "remote_master_verified": true,
+  "delivery_is_main_ancestor": true,
+  "ci": {
+    "run_id": 37528050044,
+    "head_sha": "58b74d07dd4f8b589c134ef9060a689864a8c089",
+    "status": "completed",
+    "conclusion": "success",
+    "attempt": 1,
+    "job_seconds": 75,
+    "scope": "existing fast CI; benchmark responsibility tests run separately at MAIN node"
+  }
 }

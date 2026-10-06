@@ -1019,3 +1019,11 @@ RAW-DUP实际merge a41244a4994643551d314618146d0074fc4e6221已推master，git me
 一次限定表页诊断21漏项：20 parsed完整，5 candidate完整但最终漏、1 candidate部分；唯一未parsed点为电话会marker前provider摘要。多数不是PDF识别失败或简单扩大cap能解决。S08实际页3有克重/一口价产品组合事实，程序性标签不能整份skip。已写S7细则，候选最小上下文→固定预算去重/排序→一次质量节点/正式Worker-RF E2E，0新模型，不改golden凑绿，不自动原件去重。
 
 9原件、2配置、生产catalog、RF2 owner共14份SHA/size/mtime前后保持，RF6e6b817a；user config SHA3609e707保留，外仓零写。待最终清理自有测试根/local配置与实际merge/push、精确CI；工具接收不等于整体语义完成。人类随后要求新的独立施工包，MAIN在完成发布后按不同物理worktree与互斥写集拆N6，不重复已交N5、不接管IQS/Dayu。
+
+## 2026-10-06 — DOCSET正式发布与N6三包准备
+
+DOCSET实际merge58b74d07dd4f8b589c134ef9060a689864a8c089已推master，2c3583e为祖先，ls-remote一致，pre-push快合同GREEN；精确CI37528050044 attempt1全部job成功，75秒。7个本线测试根、临时local配置、辅助脚本/保护capsule与新增benchmark字节码恢复absent，原件0删除、user config SHA3609e707保持。前一文档复合补丁因卡首行只截半句原子拒写，随后用完整原行修正，未丢更新。
+
+按人类新要求已准备N6-CANDIDATE、N6-BUDGET、N6-FOOTPRINT三张完整卡与三个独立物理worktree，全部固定已绿58b74d0。候选4文件/预算2文件/空间新目录互斥，独立测试夹具/PWF/handoff，MAIN拥有shared入口/版本/最终联调；三条ready但未宣称人类已分派或已开跑。候选接口设计经只读结构审查：QA不同角色绝不混组、NarrativeUnit无source_sha256属性、旧Rules可选默认值与MAIN注入职责明确。不改RF/IQS/Dayu/ET/StockWiki，不重派旧N5。
+
+三树只取已跟踪代码文档，单树逻辑74490854 B、三树约223MB，共享Git历史/不复制ignored原件；验收后MAIN清理自己创建的worktree并先核需要ignored材料。新卡均有输入副本和PLAN_ID唯一PWF草稿。ROOT目标仍active，S7业务required12/33残缺；任务包ready不等于实现完成。FOOTPRINT只测本CWP占用与保留事实，不自动删/迁移/启动监控，不将跨根重复上界当已释放量。

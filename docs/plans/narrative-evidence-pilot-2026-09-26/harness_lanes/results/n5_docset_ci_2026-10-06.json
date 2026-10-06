@@ -1,0 +1,147 @@
+{
+  "schema_version": "cwp-ci-receipt/1",
+  "head_sha": "58b74d07dd4f8b589c134ef9060a689864a8c089",
+  "run_id": 37528050044,
+  "status": "completed",
+  "conclusion": "success",
+  "run_attempt": 1,
+  "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/37528050044",
+  "jobs": {
+    "id": 112489998670,
+    "name": "Fast checks (Python 3.12)",
+    "status": "completed",
+    "conclusion": "success",
+    "started_at": "2026-10-06T20:39:06Z",
+    "completed_at": "2026-10-06T20:40:21Z",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-06T20:39:07Z",
+        "completed_at": "2026-10-06T20:39:08Z"
+      },
+      {
+        "name": "Run actions/checkout@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-06T20:39:08Z",
+        "completed_at": "2026-10-06T20:39:11Z"
+      },
+      {
+        "name": "Set up Python 3.12",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-06T20:39:11Z",
+        "completed_at": "2026-10-06T20:39:14Z"
+      },
+      {
+        "name": "Install dependencies",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-06T20:39:14Z",
+        "completed_at": "2026-10-06T20:39:35Z"
+      },
+      {
+        "name": "Ruff lint",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-10-06T20:39:35Z",
+        "completed_at": "2026-10-06T20:39:35Z"
+      },
+      {
+        "name": "Strict type check on contract modules",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-10-06T20:39:35Z",
+        "completed_at": "2026-10-06T20:39:37Z"
+      },
+      {
+        "name": "Compileall and config doctor",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-10-06T20:39:37Z",
+        "completed_at": "2026-10-06T20:39:38Z"
+      },
+      {
+        "name": "Unit tests",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8,
+        "started_at": "2026-10-06T20:39:38Z",
+        "completed_at": "2026-10-06T20:40:16Z"
+      },
+      {
+        "name": "Unit test failure summary",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-10-06T20:40:16Z",
+        "completed_at": "2026-10-06T20:40:16Z"
+      },
+      {
+        "name": "Focused contract tests",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 10,
+        "started_at": "2026-10-06T20:40:16Z",
+        "completed_at": "2026-10-06T20:40:17Z"
+      },
+      {
+        "name": "Focused contract failure summary",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 11,
+        "started_at": "2026-10-06T20:40:17Z",
+        "completed_at": "2026-10-06T20:40:17Z"
+      },
+      {
+        "name": "CLI smoke test",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 12,
+        "started_at": "2026-10-06T20:40:17Z",
+        "completed_at": "2026-10-06T20:40:17Z"
+      },
+      {
+        "name": "Scan for hardcoded secrets",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 13,
+        "started_at": "2026-10-06T20:40:17Z",
+        "completed_at": "2026-10-06T20:40:17Z"
+      },
+      {
+        "name": "Post Set up Python 3.12",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 25,
+        "started_at": "2026-10-06T20:40:17Z",
+        "completed_at": "2026-10-06T20:40:18Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 26,
+        "started_at": "2026-10-06T20:40:18Z",
+        "completed_at": "2026-10-06T20:40:18Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 27,
+        "started_at": "2026-10-06T20:40:18Z",
+        "completed_at": "2026-10-06T20:40:18Z"
+      }
+    ]
+  }
+}

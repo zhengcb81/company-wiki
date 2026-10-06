@@ -27,4 +27,4 @@ MAIN拥有接收与总PWF，保留用户source_acquisition修改SHA3609e707、RF
 
 修复实际HEAD标记、TXT字节/行双核、范围外golden拒绝、输出/未知旧文件/生产根保护、失败scratch恢复absent、事后真实SHA、2MiB原子报告及重复计算peak。标注抽页只写tmp新目录、不覆原件/预存材料。9原件+2配置+生产DB+RF两owner的14份SHA/size/mtime始终保持；0模型/下载/费用/原件删除。不扩日常CI。
 
-**Status: acceptance_passed，待完成本次merge/push与精确CI收口。** 后续产品工作按S7施工，不重派N5工具卡。
+**Status: complete（工具范围）。** 实际merge58b74d07dd4f8b589c134ef9060a689864a8c089已推master，交付2c3583e是主线祖先；精确CI37528050044一次success，job75秒。7测试根/临时local配置/本线辅助脚本与新benchmark字节码均恢复absent，用户config SHA3609e707保持。后续产品工作按S7/N6施工，不重派N5工具卡。
