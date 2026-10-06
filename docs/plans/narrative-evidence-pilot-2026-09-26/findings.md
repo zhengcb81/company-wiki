@@ -812,3 +812,15 @@ e570daf已发布，精确CI37375836745 success。53个不同case分步GREEN。�
 - 已采纳R6与旧实现存在差距：任一未知citation/extra会整体失败。新私有边界投影仅保留canonical字段，坏claim整条丢；来源/语言/全坏/翻译与严格JSON仍失败。RF质量枚举不支持新增partial，因此复用needs_review表示摘要不完整、无人工签收；public parser继续严格。共享identity/claim纯验证器，分析师问题必须question，费用在解码前结算。prompt1.5.1绑定请求hash，不改Config或付费预算。
 - 184责任Unit及真实字节/确定性模型正式CLI离线E2E通过；不会把loopback称新vendor验收，也不拿citation合格冒称语义蕴含正确。两次reader unavailable是fixture config布局错误，修标准config/后CWP与RF读均绿，不改生产接口。测试根已恢复absent。
 - N5-RAW-DUP完整交付e40b4ec，7,804,167,537 B逻辑重复候选上界不是磁盘释放；只有3组/158,223,532 B实际SHA复核，3528组未实读，deleted0。MAIN审查物理空间测量/预算/输出路径，未验收，不自动删除原件。
+
+## 2026-10-06 — R6发布绿与N5-RAW-DUP集中接收
+
+R6代码eae2dd4557491e6621ddbe73f972f01a841a8f00已推master，对应CI37521679387 attempt1 success、job59秒；S4具体缺口关闭。RF6e6b817a与用户config SHA3609e707保持。
+
+RAW-DUP交付e40b4ec/a1418a0原包30项6.63秒绿，完整报告Git blob SHA/体积与真实数字核一致；metadata上界7804167537 B，3组实读158223532 B、读316447064 B、原件deleted0，3528组未实读。WindowsGetCompressedFileSizeW字段不是簇分配量，保留历史报告但主收据判该字段无效，当前工具null；不能算释放或CWP目录实际占用。所列510组497为CWP/Dropbox、11为CWP/Dayu、1三根、1仅CWP，未外推全量。暂不生产迁移/硬链接，不动外部项目与云原件。
+
+MAIN同一集中节点TDD16初红/1绿，修双输出与未知旧文件保护、独占随机.tmp、非整块硬cap/精确EOF/partial账、云候选与读取前ID/path变化；再补2.69MB诊断反例/路径反例，原路径断言repr转义假绿修为精确静态标签后RED，实现列表截断+精确report_bytes/静态错误。最终51项/9.09秒含两实际CLI隔离联调、Ruff/diff绿，1生产长E2E明确deselected而非假报MAIN新live验证。保留外线已有生产实测收据，不重复150秒全测、不扩CI。
+
+清理初轮Remove-Item非终止error导致exit0但四个ACL夹具仍在；后续逐项实际检查，icacls/remove与Set-Acl均AccessDenied。核自有tmp绝对路径后直接File.Delete四个测试新文件再Remove-Item，恢复absent；产品原件与系统ACL零修改。旧测试finally未检查恢复exit是根因，改PermissionError注入，最后rawclean目录正常清理。全部8个测试根恢复absent；以后清理用ErrorAction Stop且检查实际结果。一次文档大补丁误猜README标题被拒、原子未写，读取实际标题后重做；CodeGraph外worktree无索引，主图也无相关tools符号，按交接已知文件读取，不改索引/权限。
+
+接收卡与JSON已写；下一完成merge/push精确CI，DOCSET保持独立。原始报告不改、不假称任何空间已释放。

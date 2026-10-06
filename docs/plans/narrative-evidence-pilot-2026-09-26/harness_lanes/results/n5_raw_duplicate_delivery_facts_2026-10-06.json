@@ -1,0 +1,26 @@
+{
+  "scan": {
+    "blob_bytes": 1048266,
+    "blob_sha256": "fbdaeaed24f10a0d1b7ec190268e9cfcaaecac799611c595aa47b9f8d1234e3a",
+    "candidate_groups": 3531,
+    "verified_groups": 0,
+    "read_bytes": 0,
+    "upper_bound": 7804167537,
+    "verified_duplicate_bytes": 0,
+    "deleted_bytes": 0,
+    "protected_unchanged": true
+  },
+  "verify": {
+    "blob_bytes": 1046591,
+    "blob_sha256": "ba057e5c2017ad628344901287935ea68caed9e84b868bdbe392a3caa14a2f33",
+    "candidate_groups": 3531,
+    "verified_groups": 3,
+    "read_bytes": 316447064,
+    "upper_bound": 7804167537,
+    "verified_duplicate_bytes": 158223532,
+    "deleted_bytes": 0,
+    "protected_unchanged": true
+  },
+  "user_config_sha256": "3609e707466eeb3e0f685e14f2637c6afa39ba900edef1be4814433a43300a01",
+  "rf_head": "6e6b817a1a6e4567293a4dcb835815f3be508a03"
+}

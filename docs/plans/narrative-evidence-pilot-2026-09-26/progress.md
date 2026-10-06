@@ -993,3 +993,15 @@ S0/N4A及S2模型预算基础、CLI阶段与CI修复已正常发布，当前CI�
 正式configured CLI离线E2E 1 passed/16.62秒，真实原件字节+隔离Acme元数据+loopback响应，Worker/outbox→public读/检索/exact→RF已提交consumer，46定位回放、同run无重复POST，原件/生产/配置/RF owner保护通过。两次E2E初红因测试config不在config/导致默认project-root不同；仅修fixture标准布局，RF零改。mypy两处schema类型红修显式注解。七个本线测试根核绝对路径/无reparse后恢复absent，0真实外发/费用。receipt r6_partial_summary_node_2026-10-06.json；代码发布CI尚待。
 
 人类通知N5-RAW-DUP已交付，完整handoff与clean branch e40b4ec/a1418a0已读。只读产出约7.27GiB逻辑候选上界、3组158223532 B已实读潜在重复，deleted0；不计已释放。审查发现需验证物理allocated口径、硬字节上限、local-output与原件路径隔离，MAIN集中处理后才并线，不接管DOCSET。worktree无CodeGraph索引，用已知交接列出的模块读取；两次猜测文件名不存在已改实际模块名，不修改owner设置。
+
+## 2026-10-06 — R6发布绿与N5-RAW-DUP集中接收
+
+R6代码eae2dd4557491e6621ddbe73f972f01a841a8f00已推master，对应CI37521679387 attempt1 success、job59秒；S4具体缺口关闭。RF6e6b817a与用户config SHA3609e707保持。
+
+RAW-DUP交付e40b4ec/a1418a0原包30项6.63秒绿，完整报告Git blob SHA/体积与真实数字核一致；metadata上界7804167537 B，3组实读158223532 B、读316447064 B、原件deleted0，3528组未实读。WindowsGetCompressedFileSizeW字段不是簇分配量，保留历史报告但主收据判该字段无效，当前工具null；不能算释放或CWP目录实际占用。所列510组497为CWP/Dropbox、11为CWP/Dayu、1三根、1仅CWP，未外推全量。暂不生产迁移/硬链接，不动外部项目与云原件。
+
+MAIN同一集中节点TDD16初红/1绿，修双输出与未知旧文件保护、独占随机.tmp、非整块硬cap/精确EOF/partial账、云候选与读取前ID/path变化；再补2.69MB诊断反例/路径反例，原路径断言repr转义假绿修为精确静态标签后RED，实现列表截断+精确report_bytes/静态错误。最终51项/9.09秒含两实际CLI隔离联调、Ruff/diff绿，1生产长E2E明确deselected而非假报MAIN新live验证。保留外线已有生产实测收据，不重复150秒全测、不扩CI。
+
+清理初轮Remove-Item非终止error导致exit0但四个ACL夹具仍在；后续逐项实际检查，icacls/remove与Set-Acl均AccessDenied。核自有tmp绝对路径后直接File.Delete四个测试新文件再Remove-Item，恢复absent；产品原件与系统ACL零修改。旧测试finally未检查恢复exit是根因，改PermissionError注入，最后rawclean目录正常清理。全部8个测试根恢复absent；以后清理用ErrorAction Stop且检查实际结果。一次文档大补丁误猜README标题被拒、原子未写，读取实际标题后重做；CodeGraph外worktree无索引，主图也无相关tools符号，按交接已知文件读取，不改索引/权限。
+
+接收卡与JSON已写；下一完成merge/push精确CI，DOCSET保持独立。原始报告不改、不假称任何空间已释放。

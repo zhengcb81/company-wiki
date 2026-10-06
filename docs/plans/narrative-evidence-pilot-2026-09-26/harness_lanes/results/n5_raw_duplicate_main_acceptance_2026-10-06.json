@@ -1,0 +1,120 @@
+{
+  "schema": "cwp-main-acceptance/1",
+  "lane_id": "N5-RAW-DUP",
+  "date": "2026-10-06",
+  "status": "local_green_pending_merge_code_ci",
+  "delivery_branch": "codex/n5-raw-duplicate-audit",
+  "delivery_head": "e40b4ec1c1613fe6ff1e1dd51679e2a7347792b3",
+  "code_before_handoff": "a1418a0b901bd91146c69be3e1b28cde790d9908",
+  "main_repairs": [
+    "Both outputs protect originals/config/catalog and each other; overwrite only own schema reports",
+    "Exclusive random temporary report; unknown adjacent .tmp untouched",
+    "Non-aligned hard read cap and exact EOF; partial read bytes accounted",
+    "Windows optional allocation metric null, not logical GetCompressedFileSizeW result",
+    "Cloud candidates excluded; fresh attributes, physical identity, path/size/mtime checked before read",
+    "Static OS error diagnostics; all report lists bounded to 1MiB",
+    "PermissionError fixture injection replaces unsafe real Windows ACL mutation"
+  ],
+  "tdd": {
+    "first_failed": 16,
+    "first_passed": 1,
+    "additional_counterexamples_failed_before_fix": 2
+  },
+  "tests": {
+    "delivered_responsibility": {
+      "passed": 30,
+      "deselected_production_e2e": 1,
+      "seconds": 6.63
+    },
+    "final_main_responsibility": {
+      "passed": 51,
+      "deselected_production_e2e": 1,
+      "seconds": 9.09
+    },
+    "real_cli_fixture_cases": 2,
+    "ruff": "passed",
+    "diff_check": "passed",
+    "external_production_e2e": "delivery reports verified by Git blob SHA; not repeated by MAIN"
+  },
+  "production_delivery_observations": {
+    "blob_bytes": 1046591,
+    "blob_sha256": "ba057e5c2017ad628344901287935ea68caed9e84b868bdbe392a3caa14a2f33",
+    "candidate_groups": 3531,
+    "verified_groups": 3,
+    "read_bytes": 316447064,
+    "upper_bound": 7804167537,
+    "verified_duplicate_bytes": 158223532,
+    "deleted_bytes": 0,
+    "protected_unchanged": true,
+    "catalog_location_rows": 46605,
+    "registered_sources": 43112,
+    "registered_logical_bytes_across_roots": 35110881225,
+    "unverified_groups": 3528,
+    "listed_groups": 510,
+    "physical_allocated_bytes": null,
+    "physical_metric_correction": "Historical value 7804167537 is not cluster allocation; original reports preserved but this field invalid for physical savings.",
+    "freed_bytes": 0,
+    "listed_only_root_distribution": [
+      {
+        "roots": [
+          "company_raw",
+          "dropbox_stock"
+        ],
+        "groups": 497,
+        "logical_bytes": 3662194610
+      },
+      {
+        "roots": [
+          "company_raw",
+          "dayu_portfolio"
+        ],
+        "groups": 11,
+        "logical_bytes": 86420853
+      },
+      {
+        "roots": [
+          "company_raw",
+          "dayu_portfolio",
+          "dropbox_stock"
+        ],
+        "groups": 1,
+        "logical_bytes": 9260120
+      },
+      {
+        "roots": [
+          "company_raw"
+        ],
+        "groups": 1,
+        "logical_bytes": 4248292
+      }
+    ]
+  },
+  "cleanup": {
+    "restored_absent": [
+      "tmp/rawaccept",
+      "tmp/rawred",
+      "tmp/rawgreen",
+      "tmp/rawfinal",
+      "tmp/rawdiagred",
+      "tmp/rawpathred",
+      "tmp/rawnode",
+      "tmp/rawclean"
+    ],
+    "originals_deleted": 0,
+    "failed_original_acl_fixture_cleanup": "Old test left four temporary deny-read files. icacls removal and Set-Acl failed; direct deletion of verified owned temporary files and directory cleanup succeeded. Final tests perform no ACL changes."
+  },
+  "user_config_sha256": "3609e707466eeb3e0f685e14f2637c6afa39ba900edef1be4814433a43300a01",
+  "rf_head_unchanged": "6e6b817a1a6e4567293a4dcb835815f3be508a03",
+  "calls": {
+    "model_posts": 0,
+    "provider_http": 0,
+    "downloads": 0
+  },
+  "limits": [
+    "Read-only assessment only; no production deletion/object migration performed",
+    "Historical upper bound needs fresh scan before migration; original physical metric invalid",
+    "Registered bytes sum multiple roots, not CWP physical directory usage",
+    "Deadline is cooperative at observation/read boundaries; blocked filesystem I/O not instantly interruptible",
+    "Do not alter Dayu/Dropbox originals or substitute cloud-only copies for retained CWP originals"
+  ]
+}

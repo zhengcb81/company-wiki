@@ -1,6 +1,6 @@
 # MAIN当前完成证据与真实缺口
 
-截至 CWP 已发布代码`4826ad9c67bce3d3e2b977173d283341d18bc141`（精确CI37514053091一次全绿/52秒）、RF main`6e6b817a1a6e4567293a4dcb835815f3be508a03`、ET本地/真实远端main`2b9fb84660f98ce27a05709a7e31342ab044b4d2`。S0–S6既有核心节点有收据；完成审计发现R6局部容错未实装，现已184责任测试与正式离线E2E绿、待代码发布CI。N5-RAW-DUP已交完整交接待MAIN验收，DOCSET仍待交付；**不宣称全部扩展工作完成**，不增加人工门或小节点复核。
+截至 CWP 已发布代码`4826ad9c67bce3d3e2b977173d283341d18bc141`（精确CI37514053091一次全绿/52秒）、RF main`6e6b817a1a6e4567293a4dcb835815f3be508a03`、ET本地/真实远端main`2b9fb84660f98ce27a05709a7e31342ab044b4d2`。S0–S6既有核心节点有收据；完成审计发现R6局部容错未实装，现已184责任测试、正式离线E2E/RF消费和eae2dd4精确CI59秒绿。N5-RAW-DUP已集中修正/51项与CLI绿、待合并代码CI，DOCSET仍待交付；**不宣称全部扩展工作完成**，不增加人工门或小节点复核。
 
 | 原目标/责任 | 已有权威证据 | 当前边界/下一动作 |
 |---|---|---|
@@ -38,4 +38,8 @@ run10只做一次DeepSeek T01+零模型policy：batch35.217秒/总42.828秒，20
 
 ## R6补齐
 
-[R6实施卡](r6_partial_summary_implementation_2026-10-06.md)与[集中节点](harness_lanes/results/r6_partial_summary_node_2026-10-06.json)记录局部坏引用只丢该claim、未知扩展不落盘、其余严格来源绑定不放松。184责任测试与实际原件字节/loopback模型正式CLI E2E、RF消费通过；不完整质量可读，无人工签收。新代码精确CI取得后才关闭此缺口；不重复付费run10。
+[R6实施卡](r6_partial_summary_implementation_2026-10-06.md)与[集中节点](harness_lanes/results/r6_partial_summary_node_2026-10-06.json)记录局部坏引用只丢该claim、未知扩展不落盘、其余严格来源绑定不放松。184责任测试与实际原件字节/loopback模型正式CLI E2E、RF消费通过；不完整质量可读，无人工签收。新代码eae2dd4精确CI37521679387一次全绿/59秒，已关闭此缺口；不重复付费run10。
+
+## N5-RAW-DUP接收边界
+
+[MAIN集中验收](harness_lanes/n5_raw_duplicate_main_acceptance_2026-10-06.md)与[小收据](harness_lanes/results/n5_raw_duplicate_main_acceptance_2026-10-06.json)：51项/9.09秒，原件0删除、测试根恢复absent；逻辑候选上界7.27GiB，只有3组151MiB实际SHA复核，3528组未实读。历史Windows物理指标无效，不算释放；跨company_raw/Dropbox/Dayu的登记字节不是CWP目录磁盘占用。可选原件去重不阻核心完成、现不自动实施。

@@ -1,5 +1,7 @@
 # N5：三个已分派的独立施工包
 
+> **最新：N5-RAW-DUP已交付e40b4ec并经MAIN集中修正；51项/9.09秒、两CLI与Ruff绿，待合并代码CI。** [验收卡](n5_raw_duplicate_main_acceptance_2026-10-06.md)；ET已验收，DOCSET仍待交付，不重派。下方旧未交付叙述属历史。
+
 MAIN负责共享接口、生产状态、所有合入和总PWF，N4C真实有限样本已收口。本总包不增加N4C完成屏障；三个包已交不同harness，不重派。不改IQS、RF、Dayu、StockWiki；旧consumer/身份/gate不重派。
 
 **2026-10-06最新交付状态：**ET-TXT已交完整HANDOFF.md/handoff.json，MAIN验收92项/26.24秒、10 goldens及相关Ruff；43份真实TXT只读audit保持原件与配置，零网络/翻译/收据写入。已快进并推本地/真实远端 main `2b9fb84660f98ce27a05709a7e31342ab044b4d2`，见[收据](results/n5_et_text_main_acceptance_2026-10-06.json)。DOCSET/RAW-DUP仍有各自PWF/工具未提交材料，尚无完整交付；MAIN不接管写集、不冒称已确认live进程。RAW-DUP约7.44GiB只是元数据逻辑上界，不是确认可删或已释放量。

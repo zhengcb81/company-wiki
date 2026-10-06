@@ -1,0 +1,111 @@
+{
+  "schema_version": "cwp-independent-handoff/1",
+  "lane_id": "N5-RAW-DUP",
+  "status": "complete",
+  "repo": "C:/Users/郑曾波/Projects/company-wiki",
+  "worktree": "C:/Users/郑曾波/Projects/cwp-lanes-20261006/raw-duplicate-audit",
+  "branch": "codex/n5-raw-duplicate-audit",
+  "base_head": "e46108b4f30d5b7e47bfc712e360f173c00b702c",
+  "delivery_head": "a1418a0b901bd91146c69be3e1b28cde790d9908",
+  "commits": [
+    "87a7e603470243074a62fe0a07afa5fe6d84fd1e",
+    "a1418a0b901bd91146c69be3e1b28cde790d9908"
+  ],
+  "changed_paths": [
+    "docs/implementation/handoffs/N5-RAW-DUP/HANDOFF.md",
+    "docs/implementation/handoffs/N5-RAW-DUP/handoff.json",
+    ".planning/n5-raw-duplicate-audit/findings.md",
+    ".planning/n5-raw-duplicate-audit/progress.md",
+    ".planning/n5-raw-duplicate-audit/raw_duplicate_report_e2e.json",
+    ".planning/n5-raw-duplicate-audit/raw_duplicate_report_scan.json",
+    ".planning/n5-raw-duplicate-audit/task_plan.md",
+    "tools/raw_duplicate_audit/README.md",
+    "tools/raw_duplicate_audit/__init__.py",
+    "tools/raw_duplicate_audit/assessment.py",
+    "tools/raw_duplicate_audit/catalog.py",
+    "tools/raw_duplicate_audit/classify.py",
+    "tools/raw_duplicate_audit/cli.py",
+    "tools/raw_duplicate_audit/core.py",
+    "tools/raw_duplicate_audit/report.py",
+    "tools/raw_duplicate_audit/verify.py",
+    "tools/raw_duplicate_audit/tests/conftest.py",
+    "tools/raw_duplicate_audit/tests/test_raw_duplicate_audit_accounting.py",
+    "tools/raw_duplicate_audit/tests/test_raw_duplicate_audit_budget.py",
+    "tools/raw_duplicate_audit/tests/test_raw_duplicate_audit_e2e.py",
+    "tools/raw_duplicate_audit/tests/test_raw_duplicate_audit_fixture_set.py"
+  ],
+  "upstream_pins": {
+    "company-wiki": {
+      "head": "e46108b4f30d5b7e47bfc712e360f173c00b702c",
+      "interfaces": [
+        "source_catalog schema 1.2.0 (store.py _DDL)",
+        "load_catalog_config(config/source_catalog.yaml) -> CatalogConfig/RootSpec",
+        "ReadOnlyCatalogReader semantics: sqlite3 uri mode=ro + PRAGMA query_only=ON (this lane adds immutable=1 when -wal is absent so no side file is created)",
+        "sources.content_sha256 (UNIQUE) + sources.byte_size as registered digest/size",
+        "locations(root_id, relative_path, absolute_path, source_id, document_id, role, location_status, observed_size, observed_mtime_ns)",
+        "report schema raw-duplicate-assessment/1 (new, tool-local)",
+        "local side-file schema raw-duplicate-assessment-local-paths/1 (new, tool-local, non-Git)"
+      ]
+    },
+    "source_catalog_config_sha256": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+    "source_catalog_database": {
+      "byte_size": 222408704,
+      "mtime_ns": 1791248158420833300,
+      "schema_version": "1.2.0"
+    }
+  },
+  "public_commands": [
+    "python -m pytest tools/raw_duplicate_audit/tests -q --no-header -p no:cacheprovider",
+    "python -m ruff check tools/raw_duplicate_audit",
+    "git diff --check",
+    "PYTHONPATH=src python tools/raw_duplicate_audit/cli.py scan --config config/source_catalog.yaml --output .planning/n5-raw-duplicate-audit/raw_duplicate_report_scan.json --overwrite",
+    "PYTHONPATH=src python tools/raw_duplicate_audit/cli.py verify --config config/source_catalog.yaml --output .planning/n5-raw-duplicate-audit/raw_duplicate_report_e2e.json --local-output %TEMP%\\n5_raw_dup_local_paths.json --max-groups 3 --max-read-bytes 536870912 --deadline-seconds 300 --overwrite"
+  ],
+  "tests": [
+    {
+      "command": "python -m pytest tools/raw_duplicate_audit/tests -q --no-header -p no:cacheprovider",
+      "passed": 31,
+      "failed": 0,
+      "skipped": 0,
+      "seconds": 150
+    }
+  ],
+  "real_samples": [
+    {
+      "sample_id": "raw_duplicate_report_scan",
+      "sha256": "fbdaeaed24f10a0d1b7ec190268e9cfcaaecac799611c595aa47b9f8d1234e3a",
+      "byte_size": 1048266,
+      "metadata_is_fixture": false
+    },
+    {
+      "sample_id": "raw_duplicate_report_e2e",
+      "sha256": "ba057e5c2017ad628344901287935ea68caed9e84b868bdbe392a3caa14a2f33",
+      "byte_size": 1046591,
+      "metadata_is_fixture": false
+    }
+  ],
+  "protection": {
+    "originals_unchanged": true,
+    "production_state_unchanged": true,
+    "owner_files_unchanged": true
+  },
+  "cleanup": {
+    "before": "absent",
+    "after": "absent",
+    "restored": true
+  },
+  "calls": {
+    "model_posts": 0,
+    "provider_http": 0,
+    "downloads": 0
+  },
+  "open_items": [
+    "Real scope (see HANDOFF.md): production catalog 46605 location rows / 43112 sources / 35110881225 registered bytes; 3531 candidate groups; logical_duplicate_bytes_upper_bound=7804167537 (22.2% of registered bytes); physical_allocated_bytes=7804167537; verified_duplicate_bytes=158223532; deleted_bytes=0.",
+    "Only 3 of 3531 groups were actually re-read (max-groups=3, 316447064 bytes over 6 files); the other 3528 groups are metadata-level upper bound only and were never opened.",
+    "Report lists 510 of 3531 groups: detail_rows=1039/5000, dropped_groups_by_row_cap=1043, dropped_groups_by_size_cap=1978, dropped_groups_total=3021, report_bytes=1046597/1048576; counts.duplicate_groups_full=3531 keeps the full-population figure.",
+    "limits_hit contains scope caps (max_groups, detail_rows, report_bytes); status stays succeeded because deadline and read_bytes were never hit.",
+    "Full confirmation of the remaining groups requires an explicit higher --max-groups with proportionally more read volume and runtime.",
+    "hardlink and ACL integration assertions skip on platforms without os.link or icacls; both passed on this machine.",
+    "Whether to implement production dedup, and under which option, is MAIN's decision based on the measured benefit and reference compatibility; this lane provides no deletion list and no migration plan."
+  ]
+}

@@ -31,7 +31,7 @@ MAIN独占此修复，RF当前main6e6b817a与owner两日志只读，复用它的
 
 ## 当前阶段
 
-**Status: implemented，待发布代码对应CI**。
+**Status: complete** — 代码eae2dd4557491e6621ddbe73f972f01a841a8f00已推master；[精确CI37521679387](harness_lanes/results/r6_partial_summary_ci_2026-10-06.json)attempt1全绿/59秒。
 
 - TDD初轮30项：17 RED/13 GREEN；另三项NaN/Infinity严格JSON反例先RED再修。最终7个责任文件184 passed/2.04秒，相关Ruff与两模块mypy绿。
 - 正式离线CLI E2E 1 passed/16.62秒：真实66324 B电话会字节、loopback模型响应一好一坏引用，正式Worker/outbox→public reference/read/search/exact→RF已提交六模块读取，46个locator全部回放；只保留好claim且needs_review可读，同run恢复零重复POST。没有真实供应商请求/费用。
