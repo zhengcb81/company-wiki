@@ -59,3 +59,17 @@ Phase 4: run the full 9-sample benchmark to produce `report.json`, then Integrat
 | E2E（独立 catalog + 正式只读接口 + 回放 + 恢复） | 1 passed |
 | ruff（本包） | All checks passed |
 | 全节点 | 29 passed in 37.62s |
+
+## Session 2 尾声 — 推送与门
+
+- 首次 `git push` 被 `.githooks/pre-push` 拦下：`tools/pre_push_gate.py` 的 `_run_pytest_gate`
+  强制 basetemp ≤60 字符，本 lane worktree cwd 57 字符 → `<worktree>	mp\ppXXXXXXXX` = 72，
+  **在跑任何测试之前**即 `GATE RED at: CI fast contract smoke set`（路径约束，非测试失败）。
+- 根因核对：同一条命令在主检出（cwd 40 字符）跑出 `pytest basetemp verified… ok` +
+  `pre-push gate GREEN`；本 lane 提交只新增 `benchmarks/`、`docs/implementation/handoffs/`、
+  `.planning/`，不在门的 `src|tests/unit|tests/contract|scripts` 检查面内。
+- 按用户裁定：**从主检出上下文推送**（`git -C <source repo> push -u origin codex/n5-document-quality`），
+  门在合规路径上真实跑通后推送成功；**未使用 `--no-verify`，未修改任何门/CI 文件**。
+- 推送后按协议查 GitHub Actions：`actions/runs?branch=codex/n5-document-quality` → `total_count 0`；
+  `.github/workflows/ci.yml` 的 `on.push.branches` 只有 `[master]`（另有 `pull_request`），
+  故 lane 分支推送本身不产生 CI 运行，CI 将在 MAIN 合入 master（或开 PR）时触发——已如实记录，未擅自开 PR。
