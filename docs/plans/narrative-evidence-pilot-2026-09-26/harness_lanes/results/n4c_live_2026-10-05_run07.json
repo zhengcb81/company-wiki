@@ -1,0 +1,337 @@
+{
+  "schema_version": "n4c-live-experiment/1",
+  "run_id": "n4c-20261005-live-mimo-07",
+  "model_options": {
+    "model_id": "mimo-v2.6-flash",
+    "endpoint": "https://token-plan-cn.xiaomimimo.com/v1/chat/completions",
+    "api_key_env": "MIMO_API_KEY",
+    "max_output_tokens": 8192,
+    "temperature": 1.0,
+    "output_token_field": "max_completion_tokens"
+  },
+  "metadata_is_fixture": true,
+  "rf_head": "6e6b817a1a6e4567293a4dcb835815f3be508a03",
+  "prior_budget": {
+    "entries": [
+      {
+        "origin": "original_auto_ledger",
+        "run_id": "n4c-20261004-wave1",
+        "charged_tokens": 10325,
+        "charged_micro_usd": 5258,
+        "charged_output_bytes": 0,
+        "unknown_reservations": 1,
+        "unsettled_reservations": 0
+      },
+      {
+        "origin": "n4c_live_2026-10-05_run02.json",
+        "run_id": "n4c-20261005-live-disabled-02",
+        "charged_tokens": 23335,
+        "charged_micro_usd": 11322,
+        "charged_output_bytes": 0,
+        "unknown_reservations": 2,
+        "unsettled_reservations": 0
+      },
+      {
+        "origin": "n4c_live_2026-10-05_run03.json",
+        "run_id": "n4c-20261005-live-configured-03",
+        "charged_tokens": 0,
+        "charged_micro_usd": 0,
+        "charged_output_bytes": 0,
+        "unknown_reservations": 0,
+        "unsettled_reservations": 0
+      },
+      {
+        "origin": "n4c_live_2026-10-05_run04.json",
+        "run_id": "n4c-20261005-live-configured-04",
+        "charged_tokens": 24863,
+        "charged_micro_usd": 17304,
+        "charged_output_bytes": 0,
+        "unknown_reservations": 1,
+        "unsettled_reservations": 0
+      },
+      {
+        "origin": "n4c_live_2026-10-05_run05.json",
+        "run_id": "n4c-20261005-live-mimo-05",
+        "charged_tokens": 63919,
+        "charged_micro_usd": 14431,
+        "charged_output_bytes": 2246934,
+        "unknown_reservations": 2,
+        "unsettled_reservations": 0
+      },
+      {
+        "origin": "n4c_live_2026-10-05_run06.json",
+        "run_id": "n4c-20261005-live-deepseek-06",
+        "charged_tokens": 13666,
+        "charged_micro_usd": 14913,
+        "charged_output_bytes": 95614,
+        "unknown_reservations": 0,
+        "unsettled_reservations": 0
+      }
+    ],
+    "charged_tokens": 136108,
+    "charged_micro_usd": 63228,
+    "unknown_reservations": 6,
+    "unsettled_reservations": 0
+  },
+  "pricing_basis": {
+    "official_url": "https://mimo.mi.com/docs/en-US/price/pay-as-you-go",
+    "checked_date": "2026-10-06",
+    "currency": "CNY",
+    "input_per_million_tokens": "1.00",
+    "output_per_million_tokens": "2.00",
+    "tier": "no cache/off-peak discount assumed; operation proxy uses domestic price and FX floor6",
+    "fx_reference_url": "https://www.ecb.europa.eu/stats/shared/pdf/eurofxref.pdf",
+    "fx_reference_date": "2026-10-02",
+    "eur_usd": "1.1225",
+    "eur_cny": "7.5259",
+    "accounting_cny_per_usd_floor": "6",
+    "historical_fx_guard_micro": 2764,
+    "billing_mode": "Token Plan endpoint; PAYG equivalent proxy, not cash invoice",
+    "cost_is_provider_invoice": false
+  },
+  "caps": {
+    "campaign_tokens": 160000,
+    "tokens": 23892,
+    "micro_usd": 34008,
+    "model_concurrency": 1,
+    "profile": "P4"
+  },
+  "samples": [
+    {
+      "sample_id": "P04",
+      "kind": "prospectus",
+      "source_sha256": "19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+      "batch_status": "blocked_human",
+      "errors": [
+        "MODEL_BUDGET_DENIED",
+        "DEPENDENCY_TERMINAL"
+      ]
+    },
+    {
+      "sample_id": "SKIP",
+      "kind": "ir_policy",
+      "source_sha256": "1e71782f1c385df37744033644b5fad182cb0619829e3ca877279b9cb98509f5",
+      "batch_status": "completed",
+      "errors": [],
+      "rf_reference_exit": 0,
+      "rf_read_exit": 0,
+      "selection": {
+        "candidate_count": 0,
+        "coverage_complete": true,
+        "dropped_financial_count": 0,
+        "lines_total": 0,
+        "omitted_candidate_count": 0,
+        "pages_read": 1,
+        "pages_total": 1,
+        "selected_count": 0,
+        "source_units": 1,
+        "status": "skipped_no_narrative",
+        "tables_scanned": 1,
+        "tables_total": 1
+      },
+      "quality": "skipped_no_narrative",
+      "language": "en",
+      "artifact_bytes": 1418,
+      "locator_count": 0,
+      "claims": [],
+      "replay_status": "verified"
+    }
+  ],
+  "checks": {
+    "budget_with_old_unknown": true,
+    "all_documents_completed": false,
+    "originals_unchanged": true,
+    "production_unchanged": true,
+    "user_config_unchanged": true,
+    "rf_owner_unchanged": true
+  },
+  "cleanup": {
+    "before": "absent",
+    "after": "absent",
+    "restored": true
+  },
+  "rf_exported_modules": [
+    "company_wiki_narrative_contracts",
+    "company_wiki_narrative_posix",
+    "company_wiki_narrative_process",
+    "company_wiki_narrative_reader",
+    "company_wiki_narrative_tree",
+    "narrative_source_preparation"
+  ],
+  "batch_pid": 8624,
+  "batch_result": {
+    "budget": {
+      "estimated_micro_usd": 5332,
+      "tokens": 23799,
+      "unknown_reservations": 1,
+      "unsettled_reservations": 0
+    },
+    "documents": [
+      {
+        "artifact_ref": null,
+        "document_id": "urn:company-wiki:document:sha256:19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+        "errors": [
+          "MODEL_BUDGET_DENIED",
+          "DEPENDENCY_TERMINAL"
+        ],
+        "status": "blocked_human"
+      },
+      {
+        "artifact_ref": {
+          "artifact_version_id": "narrative-4a3563a5be1745cb88811778bc29ee77",
+          "byte_size": 1418,
+          "content_sha256": "404ad4f817b559e3f0eb2ea0085b033ec112494b031f9c91fb2df4c508cf46bd",
+          "document_id": "urn:company-wiki:document:sha256:1e71782f1c385df37744033644b5fad182cb0619829e3ca877279b9cb98509f5",
+          "source_id": "urn:company-wiki:source:sha256:1e71782f1c385df37744033644b5fad182cb0619829e3ca877279b9cb98509f5",
+          "source_sha256": "1e71782f1c385df37744033644b5fad182cb0619829e3ca877279b9cb98509f5"
+        },
+        "document_id": "urn:company-wiki:document:sha256:1e71782f1c385df37744033644b5fad182cb0619829e3ca877279b9cb98509f5",
+        "errors": [],
+        "status": "completed"
+      }
+    ],
+    "run_id": "n4c-20261005-live-mimo-07",
+    "schema_version": "narrative-batch-result/1",
+    "status": "budget_exhausted",
+    "storage": {
+      "persistent_added_bytes": 473020,
+      "scratch_peak_bytes": 1418
+    }
+  },
+  "returncode": 2,
+  "batch_seconds": 127.14,
+  "peak_process_tree_rss": 471945216,
+  "peak_test_root_bytes": 12087501,
+  "reservations": [
+    {
+      "attempt_id": "26174e8cb1434f9fbcc9586adc83d7a6",
+      "run_id": "n4c-20261005-live-mimo-07",
+      "job_id": "aa89399b74fa475a",
+      "request_sha256": "df34f3b1806d06a0ecc50703f6eae46b7de853502a8e77dc0ec0756a284a26d5",
+      "input_tokens_bound": 15607,
+      "max_output_tokens": 8192,
+      "output_bytes_bound": 2097152,
+      "reserved_micro_usd": 5332,
+      "usage_status": "unknown",
+      "input_tokens": null,
+      "output_tokens": null,
+      "estimated_micro_usd": null,
+      "response_sha256": null,
+      "error_code": "MODEL_TIMEOUT",
+      "output_bytes": 0,
+      "output_sha256": null,
+      "reserved_at": "2026-10-06T17:51:11Z",
+      "usage_settled_at": "2026-10-06T17:52:11Z",
+      "output_settled_at": "2026-10-06T17:52:11Z"
+    }
+  ],
+  "model_attempt_reservations": 1,
+  "confirmed_metered_responses": 0,
+  "overall_charged_tokens": 159907,
+  "overall_charged_micro_usd": 68560,
+  "final_files": {
+    "automation.db": 397312,
+    "automation.db-shm": 32768,
+    "automation.db-wal": 0,
+    "automation.db.batch-owner.lock": 1,
+    "request.json": 1560,
+    "stderr.log": 0,
+    "stdout.json": 1158,
+    "catalog\\catalog.sqlite3": 282624,
+    "catalog\\catalog.sqlite3-shm": 32768,
+    "catalog\\catalog.sqlite3-wal": 41232,
+    "catalog\\operation.lock.acquire": 1,
+    "config\\catalog.json": 270,
+    "rf-consumer\\company_wiki_narrative_contracts.py": 25847,
+    "rf-consumer\\company_wiki_narrative_posix.py": 2824,
+    "rf-consumer\\company_wiki_narrative_process.py": 8500,
+    "rf-consumer\\company_wiki_narrative_reader.py": 3348,
+    "rf-consumer\\company_wiki_narrative_tree.py": 6960,
+    "rf-consumer\\narrative_source_preparation.py": 2400,
+    "run-work\\storage-baseline.json": 116,
+    "run-work\\logs\\compute-1.stderr.log": 0,
+    "run-work\\logs\\compute-1.stdout.log": 0,
+    "run-work\\logs\\compute-2.stderr.log": 0,
+    "run-work\\logs\\compute-2.stdout.log": 87,
+    "run-work\\logs\\compute-3.stderr.log": 0,
+    "run-work\\logs\\compute-3.stdout.log": 87,
+    "run-work\\logs\\model-1.stderr.log": 0,
+    "run-work\\logs\\model-1.stdout.log": 0,
+    "companies\\中微公司\\raw\\prospectus\\中微公司：首次公开发行股票并在科创板上市招股说明书.pdf": 11211796,
+    "companies\\中微公司\\raw\\prospectus\\中微公司：首次公开发行股票并在科创板上市招股说明书.pdf.source.json": 1095,
+    "companies\\Acme\\raw\\investor_relations\\policy.pdf": 843,
+    "companies\\Acme\\raw\\investor_relations\\policy.pdf.source.json": 628,
+    "catalog\\objects\\sha256\\40\\404ad4f817b559e3f0eb2ea0085b033ec112494b031f9c91fb2df4c508cf46bd.json": 1418
+  },
+  "final_budget": {
+    "run_id": "n4c-20261005-live-mimo-07",
+    "charged_tokens": 23799,
+    "charged_micro_usd": 5332,
+    "charged_output_bytes": 0,
+    "unknown_reservations": 1,
+    "unsettled_reservations": 0
+  },
+  "attempt_diagnostics": [
+    {
+      "job_id": "16e3cd53bcaf9e69",
+      "job_type": "source.narrative_summarize",
+      "attempt_id": "ecba3e860c9540719f67e942209e95b7",
+      "started_at": "2026-10-06T17:50:44Z",
+      "finished_at": "2026-10-06T17:50:44Z",
+      "outcome": "succeeded",
+      "error_code": null,
+      "error_detail": null
+    },
+    {
+      "job_id": "7fb32904e054c5e3",
+      "job_type": "source.narrative_select",
+      "attempt_id": "241828ad3aec428cb67c44bf99340ccc",
+      "started_at": "2026-10-06T17:50:43Z",
+      "finished_at": "2026-10-06T17:50:44Z",
+      "outcome": "succeeded",
+      "error_code": null,
+      "error_detail": null
+    },
+    {
+      "job_id": "8ef403d3e067021e",
+      "job_type": "source.narrative_select",
+      "attempt_id": "79c7a6ddc6484fc5a60453ecbd5d3e43",
+      "started_at": "2026-10-06T17:50:43Z",
+      "finished_at": "2026-10-06T17:51:10Z",
+      "outcome": "succeeded",
+      "error_code": null,
+      "error_detail": null
+    },
+    {
+      "job_id": "aa89399b74fa475a",
+      "job_type": "source.narrative_summarize",
+      "attempt_id": "26174e8cb1434f9fbcc9586adc83d7a6",
+      "started_at": "2026-10-06T17:51:10Z",
+      "finished_at": "2026-10-06T17:52:11Z",
+      "outcome": "retryable",
+      "error_code": "MODEL_TIMEOUT",
+      "error_detail": "metered model attempt did not complete"
+    },
+    {
+      "job_id": "aa89399b74fa475a",
+      "job_type": "source.narrative_summarize",
+      "attempt_id": "e53827e771104fe4b4dc4d609391c75b",
+      "started_at": "2026-10-06T17:52:47Z",
+      "finished_at": "2026-10-06T17:52:47Z",
+      "outcome": "terminal_failure",
+      "error_code": "MODEL_BUDGET_DENIED",
+      "error_detail": "metered model attempt did not complete"
+    },
+    {
+      "job_id": "de4a9778659e86cb",
+      "job_type": "source.narrative_verify",
+      "attempt_id": "11d47a76ce2b46faa19e1871c4470ade",
+      "started_at": "2026-10-06T17:50:44Z",
+      "finished_at": "2026-10-06T17:50:44Z",
+      "outcome": "succeeded",
+      "error_code": null,
+      "error_detail": null
+    }
+  ],
+  "total_seconds": 131.382
+}

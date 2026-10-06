@@ -1,5 +1,7 @@
 # N4：可运行的叙述批次、真实模型计量与持久恢复
 
+> **最新run07终态（覆盖下方余额）：**891dd41诊断/prompt精简已发布、CI37506642500全部步骤success/83秒。MiMo P04+policy唯一POST在约60秒MODEL_TIMEOUT，后续MODEL_BUDGET_DENIED在外发前拒绝；batch127.140s、RSS471945216 B、测试根峰值12087501 B。保守再计23799tokens/5332microUSD，累计159907tokens/68560microUSD、unknown7/unsettled0，剩93tokens/费用扣FX后28676microUSD。policy skip/0model/RF读取0，全部保护checks与cleanup true；招股没有final，N4C未完成。新增200k及P04精选片段向DeepSeek单次复测方案待用户答复，未获答复零POST，保留Config8192/温度1.0、默认60秒及所有旧未知账。不能盲重跑MiMo或从下方历史恢复点重新计算余额。
+
 > **2026-10-06预算已答复：**用户“批准提高token预算”，对应待答的累计160,000方案；费用仍$0.10，保留全部旧未知账与FX余量，不改Config。RF fresh main/remote均6e6b817a，owner两份周日志保持。以下待答描述仅为历史；现在按provider分run执行实际MiMo P01/P04、DeepSeek P07/T01及各自零模型policy。价格已复核官方页，保守沿用既有无缓存国内/FX6 proxy，不凭GET/套餐估算冒充真实账单。
 
 > **具体外发授权已答复：**用户明确授权MiMo P01/P04和DeepSeek P07/T01原语言精选片段向各自指定端点外发；run05已启动。此前拒绝是历史过程，无模型请求产生，不作为新门。累计160k/$0.10以及全部旧账保持；真实产物、consumer、引用/语言、恢复与空间仍须实际验收。

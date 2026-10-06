@@ -742,3 +742,11 @@ e570daf已发布，精确CI37375836745 success。53个不同case分步GREEN。�
 - 146相关Unit/5.35s、Ruff、mypy2文件GREEN。正式CLI/HTTP、跨run及kill恢复首轮13 passed/1 failed/79.41s；唯一过期断言读constraints.translate，改查真实HTTP No translation且最终bundle仍验translate=false，单项1 passed/10.73s。14项分两次全过，不伪称整包单次全绿，不再重跑79秒已绿范围。
 - 六个明确测试根绝对路径/无reparse检查后恢复absent；固定旧unknown账本不动。小收据n4c_prompt_node_2026-10-06.json与两份零POST请求测量已落盘；正常发布后仅MiMo P04+policy复测一次，不盲循环或自增预算。
 - 一次PWF补丁因假定progress标题为# Progress未匹配而拒绝，未产生该次写入；改精确N4段落和追加日志。没有修改产品要求或增加小节点门。
+
+## 2026-10-06 — run07真实超时与客户端边界调查
+
+- 唯一新MiMo P04+policy复测终态budget_exhausted，batch127.140s/总131.382s；MODEL_TIMEOUT attempt61秒、随后MODEL_BUDGET_DENIED在外发前终态拒绝。实际POST1、unknown1/unsettled0、保守23799tokens/5332microUSD，累计159907tokens/68560microUSD、unknown7；扣历史FX2764后费用剩28676microUSD，tokens仅93。没有合法P04 final、没有新SUMMARY_INVALID，不能声称诊断修复解决了旧合同失败。policy仍skip/0model/RF read0，所有protected checks true，短根恢复absent。
+- HTTP adapter、batch model defaults及旧LLMClient均为60秒；配置LLMConfig没有timeout字段，当前configured wrapper投影保持该既有默认。61秒终态与此一致，但没有分阶段header/body证据，不能断言供应商算力、队列、网络或thinking哪一个导致耗时。没有擅改timeout/stream/thinking或模型配置。
+- MiMo官方API Integration FAQ（2026-10-06读取，更新2026-09-20）建议合理连接/读取超时、指数退避，长响应使用stream；速度还受请求复杂度、服务负载/地域与stream影响。来源：https://mimo.mi.com/docs/en-US/quick-start/faq/api-integration 。这是后续传输策略设计依据，不是本次超时根因证据；未采用第三方论坛推论、未偷偷增加paid calls或provider fallback。
+- 当前既定token cap不允许任何8192输出预留。已向用户提出累计200000tokens+$0.10不变、P04同一精选片段明确外发DeepSeek的单次方案，待答期间零POST。旧unknown不退，现有三类型成功保留。891dd41精确CI37506642500 attempt1全部job/步骤GREEN，单job83秒，正式小CI收据已保存。
+- 只读观察先误用jobs.state列，PRAGMA核实际status后修正；两份猜测计划文件及两份猜测模块不存在，已改已知具体文件/rg --files；一次rg字面*.py在Windows失败，后续统一目录+-g过滤。这些读取错误不改生产或放松产品校验。

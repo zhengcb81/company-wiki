@@ -6,7 +6,7 @@
 
 **2026-10-06用户预算答复：**已明确批准提高累计token预算至160,000；累计费用仍限$0.10，历史unknown及FX余量继续计入，配置8192/温度1.0/模型与端点不改。下方“预算答复待定/60k不足”是此前恢复点，本轮直接按Next Step执行N4C，不再以预算答复阻断。
 
-**当前执行状态：**用户已明确授权两家及对应资料外发；run05/06已终态并恢复测试根。年报、IR、英文电话会真实摘要/RF读取/引用回放通过，招股书两次MODEL_TIMEOUT后SUMMARY_INVALID，N4C仍未完成。累计136108tokens/63228microUSD，unknown6/unsettled0；扣历史FX2764后费用剩34008microUSD，tokens剩23892。下一动作先诊断摘要合同失败及有限重试/资源消耗，不盲重跑同请求或清旧账。两份真实收据见results/n4c_live_2026-10-05_run05.json、run06.json（文件日期属于Oct5起始campaign，不是本次执行日期）。
+**当前执行状态：**年报、IR、英文电话会真实摘要/RF读取/引用回放通过，招股仍未完成。规则诊断与完整正文prompt精简已发布891dd41、精确CI37506642500全绿/83秒；run07 MiMo招股+policy已终态budget_exhausted并恢复测试根：唯一POST在约60秒超时，后续预算拒绝未外发，无P04 final、无新SUMMARY_INVALID。累计159907tokens/68560microUSD，unknown7/unsettled0；扣历史FX2764后费用剩28676microUSD，tokens只余93。已提出200000tokens及P04向DeepSeek同一片段单次复测的明确授权，尚未答复不得POST或提高cap。三份真实收据见results/n4c_live_2026-10-05_run05.json、run06.json、run07.json（文件日期属于Oct5起始campaign，实际为Oct6）。
 
 **新的可独立施工包：**[N5总包](harness_lanes/n5_parallel_packages_2026-10-06.md)包含DOCSET质量基准、RAW-DUP只读原件重复工具、ET-TXT本地复用修复。三份独立目录/写集/接口，不修改MAIN runtime或生产状态；可同时启动，不是N4C完成屏障。MAIN统一验收合入。
 
@@ -60,7 +60,7 @@ StockWiki/IQS已有owner工作及消费者交付，本轮只读，不重复分�
 | S2 N4B | complete（节点A/B集中验收已绿；整体N4仍待独立S4/N4C） | real factory/HTTP adapter/full prompt; persistent token/cost reservation in AUTO; finite batch CLI; unique final artifact and small recovery receipt; public legacy whole-catalog Worker and startup routes removed | node A accounting/concurrency green; node B formal CLI/HTTP/kill/ACK and focused regression green; CWP producer limits are now connected and have real-data E2E evidence; proceed to N4C after G1/S3 closeout |
 | G1 残余门禁/签收精简（第一优先） | complete（CWP来源链与G1-LEGACY已合入；FF SourceRef v2于`e1eda60`推送） | 46项清单已分为已退出、必要自动校验、能力边界及外仓owner事项；未找到生产调用者的旧摘要/binding/archive工具不再作为当前门，留待S5/S6 caller清理 | CWP来源/as-of 64项、resolver/planner/canonical 100项与G1-LEGACY 170 passed / 1 deselected既有收据；FF集中回归177 passed / 1 skipped / 39 subtests，Ruff及push gate GREEN；电话会provider→CWP导入端到端12 passed。保留SHA、来源身份/期间/公开日、可回放引用和资源限制 |
 | S3 SourceRef/SourceExport 虚拟化与来源默认收敛（第二优先） | **complete**（FF `eb0af13`、ET `63c4090`已推送；CWP SourceExport已发布；合入后FF→ET→CWP链及各仓责任集均GREEN。live FMP仍受HTTP 402权益限制，不影响接口合同完成） | 上层只用SourceRef/SourceExport v2；复用FF exact/latest_as_of和pathless reader，不依赖物理目录；电话会走正式ET CLI并由CWP持有原件；provider定位仍在adapter层 | ET deadline分支已快进到main；其`/1`、`/2`、discovery/candidate wire与goldens未改，CWP importer现有provider-aware FMP JSON合同经真实三仓离线链验证。跨仓脚本验证FF uppercase exchange转ET小写、精确FY/Q、FMP原JSON与canonical text各自SHA/size、unknown publication、pathless SourceRef、重复读取不触provider，以及超时后worker结果清理。合并后ET `tests/test_retrieval_cli_e2e.py` 6 passed、10 goldens matched；FF companion 5 passed且Ruff clean；CWP FMP importer 5 passed。FF只在owner目录用`eb0af13`修正交易所slug与3秒清理窗口；ET只更新过期golden说明并合入`63c4090`。旧“Motley 24字段唯一可导入”记录已由当前源码/测试更正。真实FMP HTTP 402不作为代码合同门；正费用额度没有实际账单计量，本计划只声称FF zero-cost拒绝与单次provider请求，不声称美元账单cap已实测。 |
-| S4 N4C real samples and storage plan | **in_progress; 已恢复，MAIN独占**（CWP transport真实四类型4 passed；RF N3a真实年报+电话会15 passed；E6 P1/P2/P4通过：当前93.006/89.453/62.527s，RSS分别373,583,872/459,042,816/686,489,600 B；旧P4 29.091s/630,353,920 B。已完成新旧parse/select/replay对照及`0.3.0`版本修复，不放开并发。RF/CWP跨仓实Worker消费、真实provider usage、第二IR/季度叙述覆盖及总增量空间仍待完成） | four real document types / actual bounded batch and consumer reads / language and citation coverage / total incremental bytes; retain only status/stop/uninstall compatibility for old worker process cleanup | 运行一个有限批次及RF N3a读取，一次大节点记录阶段耗时、总字节、预算、重试/锁、引用/语言与目录恢复；不重复已绿A/B与三档E6。P5三外线均已验收/发布，不作为N4C屏障 |
+| S4 N4C real samples and storage plan | **in_progress；MAIN独占**（年报/IR/英文电话会真实provider final、RF读取和引用回放已通过；P1/P2/P4确定性模型实字节实验已绿。MiMo招股run07再次超时，后续预算拒绝，累计159907/160000tokens仅余93；诊断/prompt修复891dd41精确CI绿） | four real document types / actual bounded batch and consumer reads / language and citation coverage / total incremental bytes | 招股真实final仍缺；新增200k及P04→DeepSeek一次方案待答复。参数/旧未知账/费用上限保持；不重复已绿A/B、三档E6、存储清理。详见main_completion_evidence_2026-10-06.md |
 | S5 B2逐caller清理 | **complete**（旧writer/全量正文消费者退出，RF默认v2已main发布，生产derived已清零） | 原文临时parser/指纹及精选transport/BM25保留；8191退休handle、7104旧文件删除、原件/来源事实不变 | 工具49集中测试和精确CI绿；生产四份公开原文前后读取/固定PDF与TXT SHA、17表digest/完整性通过；操作材料已收尾 |
 | S6 DB事实收缩与收尾 | **complete：生产收缩及说明/控制收尾均已发布、精确CI绿** | 1490530旧span删除，DB3.056GB→222.409MB；取消无调用者人工lock/Reviewer文件及两个旧cron壳；重写当前说明，4个旧smoke换为当前行为，数量仍12 | 38责任测试/短smoke/显式架构检查GREEN，三个测试根恢复absent，18文档链接有效；e481578/CI37399248994 attempt1 success；下一N4C |
 | 可选 exact-SHA原件对象去重 | 不阻S0–S6完成 | 先用已有SHA/size找候选、逐候选验字节，保留所有source/location版本事实 | 有真实收益才实施；不报未测节省量 |
@@ -120,17 +120,18 @@ TDD框住公开行为，不把旧签收规则写进新测试。仅S0相关收口
 - [46项原审计基线及2026-10-04覆盖更新](gate_permission_inventory_2026-10-03.md)，基线日期不变；当前状态以新增覆盖节为准
 - [最新空间收据](harness_lanes/results/gd_storage_final_cleanup_2026-10-03.md)
 - [S5/S6旧派生退出与来源库降容实施细则](s5_s6_legacy_storage_implementation.md)
+- [当前完成证据与真实缺口](main_completion_evidence_2026-10-06.md)
 - [findings](findings.md)、[progress](progress.md)
 - 旧implementation/execution/worker/review/space卡保技术背景，其流程/顺序由本页覆盖。已交付harness不再派发同一工作。
 
 ## Next Step
 
-**MAIN单一下一动作：发布已通过集中验证的安全规则诊断与prompt精简，再用MiMo复测P04招股书+零模型policy一次。**旧失败响应未保留，不能断言其具体原因；新增固定rule诊断便于定位下一次真实失败，严格合同未放松。私有prompt1.4.0/request1.2去掉重复示例/约束，160段正文、角色、flags、引用和canonical selection完整保留；实测body15479 B/最坏预留23799tokens，低于剩余23892。146项Unit、CLI/cross-run/recovery共14项分两次全过、Ruff及聚焦mypy已绿。旧unknown继续计入，费用剩34008microUSD，不改Config 8192/温度1.0/端点、不退款；正式run仍须以实际admission和账本为准。S5/S6/P5已完成，不重跑长测、清理或VACUUM；RF/FF/ET主线与owner不动。N5三包可独立启动，MAIN不等它们才修当前失败。
+**MAIN单一下一动作：完成run07终态/精确CI收据发布及当前完成条件核对；得到新增200000tokens与P04向DeepSeek的授权后，才执行一次P04+policy复测。**当前仅93tokens，任何8192输出预留都不允许外发；旧unknown7及FX余量继续计入，不退款、不改Config/思考/stream/超时。run07仅超时，没有摘要结果，不能证实旧SUMMARY_INVALID具体原因或把N4C标complete。已绿146Unit、14个分两次全过的CLI/cross-run/recovery以及精确CI不重复重跑。S5/S6/P5已完成，RF/FF/ET主线与owner不动。N5三包可独立启动，MAIN不等待它们作为当前节点门。
 
 P5-STORAGE已验收并合入/发布：候选`9fa2166`，主线代码`e570dafb92a3f6aaec51176682d348a1c9303535`。53个不同case分步GREEN，真实AMEC年报+微软电话会TXT的原文stdout SHA、新NarrativeRef完整locator replay前后通过，连接关闭及测试根恢复均通过；没有生产删除。工具预览不写库/sidecar、不拿写锁；切片单次范围SQL/聚合小报告；压缩真实前后计量/空间检查，观测失败明确null。所有细节及实际副本空间见[集成审查](harness_lanes/results/p5_storage_integration_review_2026-10-05.md)、[小验收收据](harness_lanes/results/p5_storage_integration_acceptance_2026-10-05.json)、[工具说明](../../../tools/legacy_storage/README.md)。日常Unit CI不添加多分钟解析包。精确新代码[CI37375836745](https://github.com/zhengcb81/company-wiki/actions/runs/37375836745)已completed/success；此前18da250同SHA重跑CI也已success。
 
 
-N4C的160k预算及两家具体资料外发均已获授权，run05/06真实执行和RF消费已结束；仅招股书仍失败。费用上限仍$0.10、模型参数仍Config原值，旧unknown保留。无需重问凭证或外发权限；下一调查/修复以顶部当前执行状态和本节唯一动作所列证据为准。
+N4C原160k预算及MiMo P01/P04、DeepSeek P07/T01具体外发均已获授权并执行；仅招股仍失败。新增200k及P04→DeepSeek方案尚待明确答复，不沿用旧两家授权推定此新组合。费用仍$0.10、模型参数仍Config原值，旧unknown保留。无需重问既有凭证/资料授权；当前余额与动作只取顶部恢复点。
 ## 2026-10-04：新增三张可独立派发的施工卡
 
 三张卡均已交付：N4-T1已集成MAIN；MeetingConverter已验收、合入并发布master且主线CI绿；N4-T2已完成差异对账、选择性吸收及验收。本段原写集和接口仅供交付追溯，不重派已完成卡。StockQAbyLLM 与 MeetingConverter 先前的只读盘点交付仍按已有收据验收；invest-quick-scan 仍由其独立任务负责，本计划不检查、不修改、不重复派发。

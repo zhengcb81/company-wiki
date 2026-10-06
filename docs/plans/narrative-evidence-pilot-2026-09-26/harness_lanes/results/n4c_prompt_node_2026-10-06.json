@@ -1,6 +1,8 @@
 {
   "schema_version": "n4c-prompt-node/1",
-  "status": "local_green_pending_publication",
+  "status": "published_green",
+  "code_head": "891dd414e1277823c029a5db77833917041723ec",
+  "ci": {"run_id": 37506642500, "attempt": 1, "conclusion": "success", "all_jobs_and_steps_success": true, "job_seconds": 83, "receipt": "n4c_prompt_ci_2026-10-06.json"},
   "base_head": "7c665b5cf85a0e341e1b665773b966334e0c34a9",
   "rf_head": "6e6b817a1a6e4567293a4dcb835815f3be508a03",
   "prompt_version": "1.4.0",
@@ -31,5 +33,5 @@
   },
   "cleanup": {"owned_roots": ["n4diagred", "n4diaggreen", "n4promptred", "n4promptnode", "n4promptint", "n4promptintfix"], "after": "absent", "restored": true},
   "calls": {"model_posts": 0, "provider_http": 0},
-  "limitations": ["Old invalid provider response was not retained; this node does not prove its specific rule failure.", "Offline request metadata is fixture-derived. Paid IPO recheck and exact-SHA CI remain pending."]
+  "limitations": ["Old invalid provider response was not retained; this node does not prove its specific rule failure.", "Offline request metadata is fixture-derived. Paid IPO recheck run07 timed out and exhausted the available token reservation; N4C is not complete."]
 }
