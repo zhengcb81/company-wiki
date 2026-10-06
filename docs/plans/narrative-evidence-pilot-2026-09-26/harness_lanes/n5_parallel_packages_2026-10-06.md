@@ -1,6 +1,6 @@
 # N5：三个已分派的独立施工包
 
-> **最新：N5-RAW-DUP已交付e40b4ec并经MAIN集中修正；51项/9.09秒、两CLI与Ruff绿，待合并代码CI。** [验收卡](n5_raw_duplicate_main_acceptance_2026-10-06.md)；ET已验收，DOCSET仍待交付，不重派。下方旧未交付叙述属历史。
+> **最新：N5-RAW-DUP已交付e40b4ec并经MAIN集中修正；51项/9.09秒、两CLI与Ruff绿，已合入master a41244a并推远端、精确CI37523080920/57秒绿。** [验收卡](n5_raw_duplicate_main_acceptance_2026-10-06.md)；ET已验收，DOCSET交接2c3583e已到待MAIN验收，不重派。下方旧未交付叙述属历史。
 
 MAIN负责共享接口、生产状态、所有合入和总PWF，N4C真实有限样本已收口。本总包不增加N4C完成屏障；三个包已交不同harness，不重派。不改IQS、RF、Dayu、StockWiki；旧consumer/身份/gate不重派。
 

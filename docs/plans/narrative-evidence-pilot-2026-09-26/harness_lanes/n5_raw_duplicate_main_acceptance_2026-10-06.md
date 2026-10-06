@@ -27,4 +27,4 @@ Windows可选分配量现在null。微软[GetCompressedFileSizeW官方说明](ht
 
 截断列出的510组中497组为CWP/Dropbox跨根候选、11组CWP/Dayu，只有1组CWP内部；这只是所列子集，不能外推全部3531组。下一阶段先核独立物理盘/云文件与引用迁移，再决定是否值得做CWP内部一份原件；现阶段不实施全库对象迁移/硬链接，不动Dayu或Dropbox。读取deadline是边界协作检查，不能冒称阻塞文件系统I/O精确可中断。
 
-**Status: local_green，待合并提交对应CI。** [主验收收据](results/n5_raw_duplicate_main_acceptance_2026-10-06.json)、[交付blob事实](results/n5_raw_duplicate_delivery_facts_2026-10-06.json)。
+**Status: complete。** 真实merge a41244a4994643551d314618146d0074fc4e6221已推master，交付e40b4ec为主线祖先；[CI37523080920](results/n5_raw_duplicate_ci_2026-10-06.json)attempt1全绿/57秒。 [主验收收据](results/n5_raw_duplicate_main_acceptance_2026-10-06.json)、[交付blob事实](results/n5_raw_duplicate_delivery_facts_2026-10-06.json)。

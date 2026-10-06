@@ -824,3 +824,7 @@ MAIN同一集中节点TDD16初红/1绿，修双输出与未知旧文件保护、
 清理初轮Remove-Item非终止error导致exit0但四个ACL夹具仍在；后续逐项实际检查，icacls/remove与Set-Acl均AccessDenied。核自有tmp绝对路径后直接File.Delete四个测试新文件再Remove-Item，恢复absent；产品原件与系统ACL零修改。旧测试finally未检查恢复exit是根因，改PermissionError注入，最后rawclean目录正常清理。全部8个测试根恢复absent；以后清理用ErrorAction Stop且检查实际结果。一次文档大补丁误猜README标题被拒、原子未写，读取实际标题后重做；CodeGraph外worktree无索引，主图也无相关tools符号，按交接已知文件读取，不改索引/权限。
 
 接收卡与JSON已写；下一完成merge/push精确CI，DOCSET保持独立。原始报告不改、不假称任何空间已释放。
+
+RAW发布期间只读复核DOCSET工作树，发现完整交接已到且干净，HEAD2c3583e084a6fc632bd0970db02a439187214c0f、代码9ff251ec、已推独立分支，不再写待交付。旧selector0.3.1基准9原件/86golden/required11of33、712定位全回放，英文0of5/程序性IR0候选未skip/融资预算截断等需当前0.3.2对照，不能把旧报33%当现行效果或马上改预算。MAIN下一次集中验收基准代码/独立标注与parser scope，再一次零LLM当前主线实证；残留真实缺口先TDD修，不改golden凑绿，不自动加预算，不触碰外线或生产。整体目标仍active，RAW只读包完成不意味着文档质量任务全部完成。
+
+RAW-DUP实际merge a41244a4994643551d314618146d0074fc4e6221已推master，git merge-base确认e40b4ec为祖先，ls-remote核master一致；CI37523080920 attempt1 completed/success、job57秒（19:59:56→20:00:53 UTC），主验收complete，小CI收据落盘。旧无nonce GET返回过时in_progress，jobs steps已全complete，再fresh query取得明确终态，不用缓存假报。只有用户config dirty且SHA3609e707保持，不改RF/Dayu/IQS；纯文档最终发布采用skip ci，不重复已绿代码测试。S7记录DOCSET待MAIN对照，整个目标仍active，不自动实施原件去重。

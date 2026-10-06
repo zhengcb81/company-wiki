@@ -1,0 +1,15 @@
+{
+  "lane_id": "N5-RAW-DUP",
+  "code_head": "a41244a4994643551d314618146d0074fc4e6221",
+  "run_id": 37523080920,
+  "attempt": 1,
+  "url": "https://github.com/zhengcb81/company-wiki/actions/runs/37523080920",
+  "status": "completed",
+  "conclusion": "success",
+  "job": "Fast checks (Python 3.12)",
+  "job_started_at": "2026-10-06T19:59:56Z",
+  "job_completed_at": "2026-10-06T20:00:53Z",
+  "job_seconds": 57,
+  "scope": "Exact merge code SHA; root responsibility tool tests separately 51 passed",
+  "delivery_head_is_ancestor": true
+}

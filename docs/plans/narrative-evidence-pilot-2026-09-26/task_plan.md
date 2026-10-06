@@ -10,10 +10,10 @@
 
 ## 当前恢复点（2026-10-06）
 
-- CWP 当前代码 `eae2dd4557491e6621ddbe73f972f01a841a8f00` 已发布；R6局部摘要容错184责任测试、正式CLI离线E2E/RF消费及[CI37521679387](harness_lanes/results/r6_partial_summary_ci_2026-10-06.json)一次全绿/59秒；显式预算修复的 [CI37514053091](harness_lanes/results/n4c_explicit_limits_ci_2026-10-06.json)一次全绿/52秒。短摘要代码 `4d019b5` 和历史长草案兼容测试 `86c8793` 已发布，精确代码 CI 分别一次通过，76/75秒。
+- CWP当前已发布主线 `a41244a4994643551d314618146d0074fc4e6221`，RAW-DUP真实合入/精确CI37523080920一次绿57秒；R6局部摘要容错184责任测试、正式CLI离线E2E/RF消费及[CI37521679387](harness_lanes/results/r6_partial_summary_ci_2026-10-06.json)一次全绿/59秒；显式预算修复的 [CI37514053091](harness_lanes/results/n4c_explicit_limits_ci_2026-10-06.json)一次全绿/52秒。短摘要代码 `4d019b5` 和历史长草案兼容测试 `86c8793` 已发布，精确代码 CI 分别一次通过，76/75秒。
 - RF 正式 main `6e6b817a1a6e4567293a4dcb835815f3be508a03`，已有默认 v2 与真实原文读取验收；FF main `758e8f4`，ET 本地/真实远端 main 已快进到 `2b9fb84660f98ce27a05709a7e31342ab044b4d2`，包含 N5-ET-TXT。不要重派已完成交付。
 - 当前 RF 正常用户上下文只有两份 owner weekly 日志修改，本线不改；旧 rf-impl WIP 保存在独立分支。本机 CWP `config/source_acquisition.yaml` 是用户改动，SHA `3609e707466eeb3e0f685e14f2637c6afa39ba900edef1be4814433a43300a01`，不暂存、不覆盖。
-- S4 修复后真实电话会 run10 已完成：20 条摘要、15 条管理层陈述、46 个定位全部回放，RF 正式读取通过；六类业务主题精选6/6、短摘要5/6，GPU效率未单列，不能声称穷尽。完成审计发现R6具体缺口，现已TDD修复并发布/精确CI绿，S4关闭；其余核心证据不重做。N5-RAW-DUP完整交付已集中修正/51项绿，待合并代码CI；DOCSET仍待交付，整体目标active。
+- S4 修复后真实电话会 run10 已完成：20 条摘要、15 条管理层陈述、46 个定位全部回放，RF 正式读取通过；六类业务主题精选6/6、短摘要5/6，GPU效率未单列，不能声称穷尽。完成审计发现R6具体缺口，现已TDD修复并发布/精确CI绿，S4关闭；其余核心证据不重做。N5-RAW-DUP完整交付已集中修正/51项绿，已合入master a41244a并推远端、精确CI37523080920/57秒绿；DOCSET完整交接2c3583e已到，尚待MAIN验证当前主线质量，整体目标active。
 
 ## 已批准预算与配置
 
@@ -45,6 +45,7 @@ python -B tools/n4c_live_preflight.py --rf-root 'C:/Users/郑曾波/Projects/rev
 | S4 N4C与R6实际效果 | complete | 四类真实final/RF读取与run10业务复核完成；R6 TDD→184责任测试→正式离线E2E/RF→代码eae2dd4/CI59秒绿，保留好claim，坏片段不进入产物，不重跑真实模型 |
 | S5 逐 caller 与派生清理 | complete | 旧全文 writer/消费者退出；生产 7104 旧文件、8191 handle 退休；原件与来源事实保持 |
 | S6 DB 收缩与收尾 | complete | 1490530 旧 span 删除；DB 3055841280→222408704 B；说明/控制/短 smoke 已发布，精确 CI 绿 |
+| S7 N5-DOCSET质量对照 | in_progress | 完整交接2c3583e已到；旧0.3.1报告required11/33不代表现0.3.2。MAIN先验收标注/评估器，再当前主线零LLM对照，真实残留缺口按TDD处理，不自动扩预算或改golden凑绿 |
 | 可选原件 exact-SHA 去重 | 不阻 S0–S6 完成 | 先只读实证收益，保留来源/location 版本；未测重复 raw 不计节省，不自动删原件 |
 
 [完成证据与真实缺口](main_completion_evidence_2026-10-06.md)分别说明 fixture/真实模型/消费者读取的证明范围。生产清理净释放 **5659443210 B**，原件删除 **0**，17 表事实及四份真实 raw 前后读取一致；正式证据：[生产存储收据](harness_lanes/results/s5_production_storage_acceptance_2026-10-06.json)。没有完整恢复 46GB 备份演练。
@@ -65,9 +66,9 @@ MAIN 独占共享接口、总 PWF、生产状态和所有合入；外线独占�
 
 G1-LEGACY、ET-DEADLINE、FF/ET-S3、P5-FF/STORAGE/RF、N4-T1/T2、StockWiki 来源/身份线与 MeetingConverter CI 卡已交付，不重派。相关功能并线不等于每仓所有历史 WIP 都已消失；Dayu 现有提交只有本地集成，远端 push 曾 403，不宣称远端同步。
 
-已分派的 [N5 三包](harness_lanes/n5_parallel_packages_2026-10-06.md)：DOCSET多类型真实质量基准继续由外线负责；RAW-DUP已完整交付并经MAIN集中修正/51项与CLI绿，待合并CI；ET-TXT已验收并线。卡内有独占目录、写集、接口、测试和交接，不重派、不新增 N4C 屏障。半年报、季报、融资/可转债、招股、IR 等的更广质量实证进入 DOCSET，不以选择器输出自己生成 golden。
+已分派的 [N5 三包](harness_lanes/n5_parallel_packages_2026-10-06.md)：DOCSET多类型真实质量基准继续由外线负责；RAW-DUP已完整交付并经MAIN集中修正/51项与CLI绿，已合入master a41244a并推、精确CI57秒绿；ET-TXT已验收并线。卡内有独占目录、写集、接口、测试和交接，不重派、不新增 N4C 屏障。半年报、季报、融资/可转债、招股、IR 等的更广质量实证进入 DOCSET，不以选择器输出自己生成 golden。
 
-2026-10-06 已核对三个独立目录均存在。DOCSET尚未交完整收据；RAW-DUP交付e40b4ec已收到，见[MAIN验收](harness_lanes/n5_raw_duplicate_main_acceptance_2026-10-06.md)。ET 代码`96c9bc8`、交接`2b9fb84`已验收并推 main：MAIN 92项/26.24秒、10 goldens、相关 Ruff 绿，主线真实43份TXT只读 audit/0写收据/原件与配置不变，测试根恢复 absent；[正式验收](harness_lanes/results/n5_et_text_main_acceptance_2026-10-06.json)。不重复外线234项已绿全包，不改公开 wire，也没有新增人工签收。
+2026-10-06 已核对三个独立目录均存在。DOCSET完整交接2c3583e已到，待MAIN验收；RAW-DUP交付e40b4ec已收到，见[MAIN验收](harness_lanes/n5_raw_duplicate_main_acceptance_2026-10-06.md)。ET 代码`96c9bc8`、交接`2b9fb84`已验收并推 main：MAIN 92项/26.24秒、10 goldens、相关 Ruff 绿，主线真实43份TXT只读 audit/0写收据/原件与配置不变，测试根恢复 absent；[正式验收](harness_lanes/results/n5_et_text_main_acceptance_2026-10-06.json)。不重复外线234项已绿全包，不改公开 wire，也没有新增人工签收。
 
 FMP 真实 HTTP 402 说明套餐能力边界，不冒充 live 下载通过；已有三仓离线链通过。FF 的正美元额度没有实际 FMP 账单计量，不声称已经实测该能力。RF 当前接通来源读取/准备，不冒充已把摘要全部接入预测计算。
 
@@ -88,8 +89,8 @@ TDD 框住具体公开行为。只在 N4 A/B/C、存储迁移等大节点集中�
 
 ## Next Step
 
-**完成RAW-DUP合并提交/推送并核对应代码CI。**[R6实施卡](r6_partial_summary_implementation_2026-10-06.md)已完成184责任测试与正式离线E2E/RF消费，0外部模型/下载/费用，来源身份/语言和剩余引用不放松。
+**验收已到的DOCSET独立工具和标注，再以当前主线对照九类真实资料。** RAW-DUP已验收、真实merge并推a41244a/精确CI57秒绿，不重派；[R6实施卡](r6_partial_summary_implementation_2026-10-06.md)已完成184责任测试与正式离线E2E/RF消费，0外部模型/下载/费用，来源身份/语言和剩余引用不放松。
 
-run10与ET-TXT已完成并推adc9d6b；保留真实结果、旧失败与非穷尽边界。RAW-DUP已有完整交接，MAIN发现并修复输出/预算/分配量/云属性/报告/ACL测试缺口，51责任项/9.09秒与两CLI联调绿，原件删除0；[验收卡](harness_lanes/n5_raw_duplicate_main_acceptance_2026-10-06.md)。历史7.27GiB为跨根候选上界，仅3组151MiB实读，不计释放、不自动迁移；DOCSET已选9份真资料/86标注点，尚待全基准和交接。不凭目录文件或日志声称有确认live进程，不自动删原件/hydrate。
+run10与ET-TXT已完成并推adc9d6b；保留真实结果、旧失败与非穷尽边界。RAW-DUP已有完整交接，MAIN发现并修复输出/预算/分配量/云属性/报告/ACL测试缺口，51责任项/9.09秒与两CLI联调绿，原件删除0；[验收卡](harness_lanes/n5_raw_duplicate_main_acceptance_2026-10-06.md)。历史7.27GiB为跨根候选上界，仅3组151MiB实读，不计释放、不自动迁移；DOCSET已交9份真实资料/86标注点与完整报告；报告基于旧selector0.3.1，required11/33，不能当当前0.3.2结论。下一步先验收基准/标注和当前主线对照，再处理确实残留的覆盖/跳过/重复/片段完整性问题。不凭目录文件或日志声称有确认live进程，不自动删原件/hydrate。
 
 N5外线独立实施，MAIN只在完整交付后验收；最终完成以本页每项责任和实际收据审计，不将当前证据缩成更容易通过的目标。
