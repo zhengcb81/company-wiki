@@ -93,6 +93,11 @@ git diff --check   # clean
 - 生产状态：未写任何生产 catalog、索引、配置、数据库；E2E 只用自建 catalog。
 - 所有测试 DB/WAL/复制件/度量文件都在本线 `tmp/` 短根内，运行结束为空。
 - `local.json` 被 `benchmarks/narrative_document_types/.gitignore` 排除；跟踪文件中无机器绝对目录。
+- **并发说明**：交付时源仓工作区带有其他会话正在进行的未提交改动
+  （`narrative_model.py`、`narrative_summarize.py`、`narrative_evidence.py`、若干 tests 与新文档），
+  **本 lane 未写入其中任何文件**；本线全部代码与测试只导入自己 worktree 里基线
+  `e46108b4` 的已提交 src，与源仓未提交改动互不依赖。`protection.owner_files_unchanged` 指“本 lane 未改动 owner 文件”。
+- 跟踪的交付载荷合计 329,728 B（≈322 KiB，≤2 MiB）。
 
 ## 5. 移交 MAIN 的 open_items（产品缺陷，外线不自行改主线）
 
