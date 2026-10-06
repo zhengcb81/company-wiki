@@ -28,11 +28,13 @@ _REASON_PRIORITY = (
     ("quantified_market_coverage_target", -1),
     ("named_product_milestone_context", -1),
     ("project_certification_timeline", 0),
+    ("project_execution_timeline", 0),
     ("permit_acquired_milestone", 0),
     ("new_product_commercialization_milestone", 0),
     ("business_risk_or_constraint", 1),
     ("specific_project_rationale", 2),
     ("specific_business_event", 3),
+    ("quantified_operating_status", 3),
     ("specific_emerging_business_positioning", 4),
     ("project_plan_or_status", 5),
     ("current_industry_context", 6),
@@ -44,11 +46,13 @@ _REASON_CATEGORY = (
     ("quantified_market_coverage_target", "market_coverage_target"),
     ("permit_acquired_milestone", "milestone"),
     ("project_certification_timeline", "project_timeline"),
+    ("project_execution_timeline", "project_timeline"),
     ("named_product_milestone_context", "named_product_milestone"),
     ("new_product_commercialization_milestone", "product_milestone"),
     ("business_risk_or_constraint", "risk"),
     ("specific_project_rationale", "rationale"),
     ("specific_business_event", "event"),
+    ("quantified_operating_status", "operating_status"),
     ("specific_emerging_business_positioning", "positioning"),
     ("project_plan_or_status", "project"),
     ("current_industry_context", "industry"),
@@ -64,6 +68,7 @@ CATEGORY_ORDER = (
     "risk",
     "rationale",
     "event",
+    "operating_status",
     "positioning",
     "project",
     "industry",
@@ -217,8 +222,11 @@ def _plan(
     bundles = _bundles(items)
     selected, reserved_keys = _reserve(bundles, limit)
     counts: dict[str, int] = {}
+    page_visits: dict[tuple[str, PageKey], int] = {}
     for bundle in selected:
         counts[bundle.category] = counts.get(bundle.category, 0) + bundle.cost
+        key = (bundle.category, bundle.page_key)
+        page_visits[key] = page_visits.get(key, 0) + 1
     spent = sum(bundle.cost for bundle in selected)
     fair_share = _fair_share(limit, {bundle.category for bundle in bundles})
 
@@ -234,7 +242,9 @@ def _plan(
         return (
             _over_share(taken, fair_share),
             CATEGORY_ORDER.index(bundle.category),
-            bundle.priority,
+            bundle.priority[0],
+            page_visits.get((bundle.category, page_key), 0) if fair_share else 0,
+            bundle.priority[1:],
             -bundle.cost,
             bundle.key,
             _page_sort_key(page_key),
@@ -261,10 +271,19 @@ def _plan(
             if spent + bundle.cost <= limit:
                 selected.append(bundle)
                 counts[bundle.category] = counts.get(bundle.category, 0) + bundle.cost
+                key = (bundle.category, page_key)
+                page_visits[key] = page_visits.get(key, 0) + 1
                 spent += bundle.cost
             else:
                 reason = "group_exceeds_limit" if bundle.cost > limit else "budget_full"
                 dropped.append((bundle, reason))
+            if fair_share is not None:
+                # Re-offer a busy page immediately: its next category must
+                # compete before unrelated pages exhaust the whole budget.
+                # Per-category page visits still rotate equally ranked facts.
+                offer = best_offer(page_key)
+                if offer is not None:
+                    pending.append((page_key, offer))
 
     diagnostics = tuple(
         BudgetDiagnostic(

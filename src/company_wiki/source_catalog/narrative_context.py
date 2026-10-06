@@ -7,6 +7,7 @@ from dataclasses import dataclass
 import re
 from types import MappingProxyType
 
+from .n6_candidate_completion import BUSINESS_CHARACTER_WINDOW, PROJECT_CHARACTER_WINDOW
 from .narrative_document import NarrativeUnit
 
 
@@ -72,6 +73,11 @@ def _scan_page(
         if remaining <= 0:
             active = False
             continue
+        if len(text) > remaining:
+            # A group that does not fit the bounded window would otherwise
+            # swallow a whole page into the section context.
+            active = False
+            continue
         scores[group_id] = score
         remaining -= len(text)
     return scores
@@ -115,7 +121,7 @@ def build_section_context(
             groups,
             start_pattern=rules.project_heading,
             heading_pattern=rules.heading_only,
-            character_budget=1_600,
+            character_budget=PROJECT_CHARACTER_WINDOW,
             score_policy=_project_score,
         )
     if document_kind == "prospectus":
@@ -123,7 +129,7 @@ def build_section_context(
             groups,
             start_pattern=rules.business_heading,
             heading_pattern=rules.heading_only,
-            character_budget=1_200,
+            character_budget=BUSINESS_CHARACTER_WINDOW,
             score_policy=_business_score,
         )
     return SectionContext(

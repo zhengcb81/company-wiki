@@ -1,0 +1,2969 @@
+{
+  "schema_version": "narrative-document-quality/1",
+  "evaluator_version": "1.0.0",
+  "totals": {
+    "documents": 9,
+    "golden_points": 86,
+    "required_points": 33,
+    "required_matched": 18,
+    "optional_points": 17,
+    "optional_matched": 4,
+    "negative_points": 36,
+    "negative_points_hit": 3,
+    "selected_span_count": 764,
+    "selected_in_scope": 180,
+    "judged_in_scope": 33,
+    "noise_spans": 3,
+    "role_confusion": 0,
+    "modality_confusion": 0,
+    "duplicate_span_count": 3,
+    "selected_utf8_bytes": 67047,
+    "locator_roundtrip_verified": 764,
+    "locator_roundtrip_failed": 0,
+    "required_coverage_rate": 0.5455,
+    "optional_coverage_rate": 0.2353,
+    "selected_noise_rate": 0.0909,
+    "duplicate_ratio": 0.0039
+  },
+  "samples": [
+    {
+      "sample_id": "S01",
+      "doc_type": "annual_report",
+      "language": "zh",
+      "source_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "source_byte_size": 9165875,
+      "metadata_is_fixture": false,
+      "annotation_scope": {
+        "unit": "pdf_page",
+        "pages_read": [
+          19,
+          21,
+          25,
+          32,
+          40,
+          49,
+          64,
+          75,
+          101,
+          109,
+          118,
+          121,
+          122,
+          125
+        ],
+        "pages_total": 259,
+        "uncovered": "245 of 259 pages were not read in full (audited sections, financial statements, governance, bond and share-change sections). Annotation is a targeted sample of the management-discussion, TOC, statements and fundraising sections, not an exhaustive read.",
+        "ambiguities": [
+          "Printed folio differs from the PDF page index (e.g. extracted page 21 prints 21/259; other documents differ by one), so every locator uses the PDF page index."
+        ]
+      },
+      "parse": {
+        "page_count": 259,
+        "pages_read": 259,
+        "opaque_pages": [],
+        "table_scan_page_count": 259,
+        "deferred_table_pages": [],
+        "line_count": 0,
+        "errors": [],
+        "coverage_complete": true,
+        "parser_name": "selective_narrative_parser",
+        "parser_version": "0.1.0",
+        "selector_name": "select_narrative_evidence",
+        "selector_version": "0.4.0"
+      },
+      "selection": {
+        "status": "partial",
+        "document_kind": "annual_report",
+        "selection_limit": 96,
+        "candidate_count": 399,
+        "source_units": 8887,
+        "omitted_candidate_count": 303,
+        "dropped_financial_count": 1413,
+        "selected_span_count": 96,
+        "locator_roundtrip_verified": 96,
+        "locator_roundtrip_failed": 0,
+        "coverage_complete": true
+      },
+      "parser_options": {
+        "full_table_scan": true
+      },
+      "golden_results": [
+        {
+          "golden_id": "G-S01-01",
+          "topic": "主营进展",
+          "polarity": "positive",
+          "priority": "required",
+          "negative_kind": null,
+          "expected_role_class": "statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 32
+          },
+          "quote_sha256": "8ecb53a76ad6245cd460a4d2a19d85cee8e08a786c0e24a89ae986d9c8a85e44",
+          "verified": true,
+          "result": "miss",
+          "matched_span_ids": [],
+          "matched_roles": [],
+          "coverage_ratio": 0.4684,
+          "role_confusion": false,
+          "modality_confusion": false
+        },
+        {
+          "golden_id": "G-S01-02",
+          "topic": "主营进展",
+          "polarity": "positive",
+          "priority": "required",
+          "negative_kind": null,
+          "expected_role_class": "statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 40
+          },
+          "quote_sha256": "303ea785ccccaa43531a1e168f2ff61c123ac5c631e5ebf0937879e1acceddda",
+          "verified": true,
+          "result": "miss",
+          "matched_span_ids": [],
+          "matched_roles": [],
+          "coverage_ratio": 0.1053,
+          "role_confusion": false,
+          "modality_confusion": false
+        },
+        {
+          "golden_id": "G-S01-03",
+          "topic": "新业务/出海",
+          "polarity": "positive",
+          "priority": "required",
+          "negative_kind": null,
+          "expected_role_class": "statement",
+          "modality": "planned",
+          "locator": {
+            "page_number": 40
+          },
+          "quote_sha256": "8cb9c2db26cf74676ed7ff99138c4492ac1865818d2fad9471101568b308bab9",
+          "verified": true,
+          "result": "miss",
+          "matched_span_ids": [],
+          "matched_roles": [],
+          "coverage_ratio": 0.0282,
+          "role_confusion": false,
+          "modality_confusion": false
+        },
+        {
+          "golden_id": "G-S01-04",
+          "topic": "产能/项目",
+          "polarity": "positive",
+          "priority": "required",
+          "negative_kind": null,
+          "expected_role_class": "statement",
+          "modality": "planned",
+          "locator": {
+            "page_number": 40
+          },
+          "quote_sha256": "7ca934e27415a5eb4b4a1108a44946e7df1cf1b23c84713b4930124ed98e5388",
+          "verified": true,
+          "result": "miss",
+          "matched_span_ids": [],
+          "matched_roles": [],
+          "coverage_ratio": 0.0238,
+          "role_confusion": false,
+          "modality_confusion": false
+        },
+        {
+          "golden_id": "G-S01-05",
+          "topic": "行业动态",
+          "polarity": "positive",
+          "priority": "required",
+          "negative_kind": null,
+          "expected_role_class": "statement",
+          "modality": "forecast",
+          "locator": {
+            "page_number": 75
+          },
+          "quote_sha256": "1edfc8f5a9a829f098e06da2b6296ea10b700cb0690f75f0e71fe1eb8e513024",
+          "verified": true,
+          "result": "miss",
+          "matched_span_ids": [],
+          "matched_roles": [],
+          "coverage_ratio": 0.0962,
+          "role_confusion": false,
+          "modality_confusion": false
+        },
+        {
+          "golden_id": "G-S01-06",
+          "topic": "行业动态",
+          "polarity": "positive",
+          "priority": "optional",
+          "negative_kind": null,
+          "expected_role_class": "statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 75
+          },
+          "quote_sha256": "6b147ba9dca3571a2075348d4a9b840a4b6d43b4286d0499254f3727445d6551",
+          "verified": true,
+          "result": "miss",
+          "matched_span_ids": [],
+          "matched_roles": [],
+          "coverage_ratio": 0.3571,
+          "role_confusion": false,
+          "modality_confusion": false
+        },
+        {
+          "golden_id": "G-S01-07",
+          "topic": "主营进展",
+          "polarity": "positive",
+          "priority": "optional",
+          "negative_kind": null,
+          "expected_role_class": "statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 64
+          },
+          "quote_sha256": "cba61c85a29e033f4a82cb465e1f00475bd57dfacfaffe0ba8fb797455306a2a",
+          "verified": true,
+          "result": "miss",
+          "matched_span_ids": [],
+          "matched_roles": [],
+          "coverage_ratio": 0.0328,
+          "role_confusion": false,
+          "modality_confusion": false
+        },
+        {
+          "golden_id": "G-S01-08",
+          "topic": "负例",
+          "polarity": "negative",
+          "priority": "reference",
+          "negative_kind": "table_of_contents",
+          "expected_role_class": "statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 21
+          },
+          "quote_sha256": "1db4800b4733e5955da4e19a3ec8197f5ae8f27057ab8aa6d673e95737ff48a9",
+          "verified": true,
+          "result": "clean",
+          "matched_span_ids": [],
+          "matched_roles": [],
+          "coverage_ratio": 0.0,
+          "role_confusion": false,
+          "modality_confusion": false
+        },
+        {
+          "golden_id": "G-S01-09",
+          "topic": "负例",
+          "polarity": "negative",
+          "priority": "reference",
+          "negative_kind": "pure_financial_table",
+          "expected_role_class": "statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 25
+          },
+          "quote_sha256": "d9129c3546a50de73d56a54fc8028b5f5a305b57d9013a2d1626b1b10557482f",
+          "verified": true,
+          "result": "clean",
+          "matched_span_ids": [],
+          "matched_roles": [],
+          "coverage_ratio": 0.0,
+          "role_confusion": false,
+          "modality_confusion": false
+        },
+        {
+          "golden_id": "G-S01-10",
+          "topic": "负例",
+          "polarity": "negative",
+          "priority": "reference",
+          "negative_kind": "legal_boilerplate",
+          "expected_role_class": "statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 19
+          },
+          "quote_sha256": "5f71847ebd9495827badd689149b53ef44f6786f11373605efe6efb8e1ec8f15",
+          "verified": true,
+          "result": "clean",
+          "matched_span_ids": [],
+          "matched_roles": [],
+          "coverage_ratio": 0.0,
+          "role_confusion": false,
+          "modality_confusion": false
+        },
+        {
+          "golden_id": "G-S01-11",
+          "topic": "负例",
+          "polarity": "negative",
+          "priority": "reference",
+          "negative_kind": "repeated_paragraph",
+          "expected_role_class": "statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 101
+          },
+          "quote_sha256": "1d1bb98defb5d0f50f7a90df4f08754c4f225078455ff0e6e8620ee0d28db47a",
+          "verified": true,
+          "result": "noise",
+          "matched_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:9df637d8ebc75f9bc1a49351d3ff50b8de5550207af0ef8a7b513f9fe48c9b9c",
+            "urn:company-wiki:evidence-span:sha256:94ec2a56c87134e60d673dbd02bb573959b4c562908c8c46bec598cfc8626f47"
+          ],
+          "matched_roles": [
+            "company_filing"
+          ],
+          "coverage_ratio": 1.0,
+          "role_confusion": false,
+          "modality_confusion": false
+        }
+      ],
+      "required_coverage": {
+        "numerator": 0,
+        "denominator": 5,
+        "rate": 0.0,
+        "unverified_required_excluded": 0,
+        "definition": "required positive golden points that are verified at their locator and fully contained in selected text on the cited page/lines"
+      },
+      "optional_coverage": {
+        "numerator": 0,
+        "denominator": 2,
+        "rate": 0.0,
+        "definition": "same rule as required_coverage for optional points"
+      },
+      "noise": {
+        "negative_points": 4,
+        "negative_points_hit": 1,
+        "selected_span_count": 96,
+        "selected_in_scope": 32,
+        "judged_in_scope": 2,
+        "unjudged_in_scope": 30,
+        "noise_spans": 2,
+        "selected_noise_rate": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0,
+          "definition": "selected spans inside the annotation scope that carry a negative golden quote, over all in-scope selected spans judged by any golden point"
+        }
+      },
+      "duplicate": {
+        "duplicate_span_count": 0,
+        "total_selected": 96,
+        "duplicate_ratio": 0.0,
+        "definition": "1 - unique normalized selected texts / selected spans"
+      },
+      "role_confusion": {
+        "count": 0,
+        "golden_ids": []
+      },
+      "modality_confusion": {
+        "count": 0,
+        "golden_ids": []
+      },
+      "bytes": {
+        "selected_utf8_bytes": 7877,
+        "source_raw_bytes": 9165875,
+        "selected_to_source_ratio": 0.000859,
+        "selected_char_count": 2849
+      },
+      "elapsed_seconds": 89.514
+    },
+    {
+      "sample_id": "S02",
+      "doc_type": "semi_annual_report",
+      "language": "zh",
+      "source_sha256": "91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+      "source_byte_size": 6361468,
+      "metadata_is_fixture": false,
+      "annotation_scope": {
+        "unit": "pdf_page",
+        "pages_read": [
+          11,
+          17,
+          18,
+          21,
+          31,
+          43,
+          50,
+          56,
+          65
+        ],
+        "pages_total": 188,
+        "uncovered": "179 of 188 pages not read in full; targeted read of TOC, industry/business discussion, production bases, risks, subsidiaries and fundraising sections.",
+        "ambiguities": [
+          "Printed folio is one less than the PDF page index (extracted page 21 prints 20/188); locators use the PDF page index."
+        ]
+      },
+      "parse": {
+        "page_count": 188,
+        "pages_read": 188,
+        "opaque_pages": [],
+        "table_scan_page_count": 188,
+        "deferred_table_pages": [],
+        "line_count": 0,
+        "errors": [],
+        "coverage_complete": true,
+        "parser_name": "selective_narrative_parser",
+        "parser_version": "0.1.0",
+        "selector_name": "select_narrative_evidence",
+        "selector_version": "0.4.0"
+      },
+      "selection": {
+        "status": "partial",
+        "document_kind": "semi_annual_report",
+        "selection_limit": 96,
+        "candidate_count": 236,
+        "source_units": 6534,
+        "omitted_candidate_count": 140,
+        "dropped_financial_count": 1238,
+        "selected_span_count": 96,
+        "locator_roundtrip_verified": 96,
+        "locator_roundtrip_failed": 0,
+        "coverage_complete": true
+      },
+      "parser_options": {
+        "full_table_scan": true
+      },
+      "golden_results": [
+        {
+          "golden_id": "G-S02-01",
+          "topic": "主营进展",
+          "polarity": "positive",
+          "priority": "required",
+          "negative_kind": null,
+          "expected_role_class": "statement",
+          "modality": "forecast",
+          "locator": {
+            "page_number": 21
+          },
+          "quote_sha256": "ef20e88d9880d66c3dd4ac322e15cdb5af559f4ae3144da7bad70fabe939132a",
+          "verified": true,
+          "result": "full",
+          "matched_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:e3ac0d9553f7299115932630275a7d9b0827588ae03943739e1c73be34168cec",
+            "urn:company-wiki:evidence-span:sha256:cb4e8542055b772089f9cf047f4306b0a9106ddb3ce4d0910716727206de3ff1"
+          ],
+          "matched_roles": [
+            "company_filing"
+          ],
+          "coverage_ratio": 1.0,
+          "role_confusion": false,
+          "modality_confusion": false
+        },
+        {
+          "golden_id": "G-S02-02",
+          "topic": "行业动态",
+          "polarity": "positive",
+          "priority": "required",
+          "negative_kind": null,
+          "expected_role_class": "statement",
+          "modality": "forecast",
+          "locator": {
+            "page_number": 18
+          },
+          "quote_sha256": "bbb86f2a8bab182b0c8f42c3da76e79249da517180d7c6d73a1d73a34c50abe1",
+          "verified": true,
+          "result": "miss",
+          "matched_span_ids": [],
+          "matched_roles": [],
+          "coverage_ratio": 0.0862,
+          "role_confusion": false,
+          "modality_confusion": false
+        },
+        {
+          "golden_id": "G-S02-03",
+          "topic": "主营进展",
+          "polarity": "positive",
+          "priority": "required",
+          "negative_kind": null,
+          "expected_role_class": "statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 18
+          },
+          "quote_sha256": "7ad96805070448c8ba94f3cd01ae9e18a691bf54f8b3cb0a1e063268516aefef",
+          "verified": true,
+          "result": "full",
+          "matched_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:38c675e67a7cfe79b1609f5f57e2217541daa4a2d142011e1ab0b0d48bdaefbc",
+            "urn:company-wiki:evidence-span:sha256:22927ecce39daf0c32a97693132468879a94682f6a6c6b49e3aacac2babfe450"
+          ],
+          "matched_roles": [
+            "company_filing"
+          ],
+          "coverage_ratio": 1.0,
+          "role_confusion": false,
+          "modality_confusion": false
+        },
+        {
+          "golden_id": "G-S02-04",
+          "topic": "产能/项目",
+          "polarity": "positive",
+          "priority": "required",
+          "negative_kind": null,
+          "expected_role_class": "statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 31
+          },
+          "quote_sha256": "706e110c2cb87a40f3d84b9df953e1a6c9a5e752ae0da93d7592f9a1f2c03836",
+          "verified": true,
+          "result": "full",
+          "matched_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:d0f4692d83940a119381ba6003940ebf95516635678264f0cd094cb2cf22f648",
+            "urn:company-wiki:evidence-span:sha256:8d2503b41977d60a0a0163b89b9defa8f72a54231c3c98395a509cc3bb36d553"
+          ],
+          "matched_roles": [
+            "company_filing"
+          ],
+          "coverage_ratio": 1.0,
+          "role_confusion": false,
+          "modality_confusion": false
+        },
+        {
+          "golden_id": "G-S02-05",
+          "topic": "主营进展",
+          "polarity": "positive",
+          "priority": "optional",
+          "negative_kind": null,
+          "expected_role_class": "statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 31
+          },
+          "quote_sha256": "bbd66c932b0a301e0eb3e242e9c2932898cb4e85c1b16820012005ab2807b878",
+          "verified": true,
+          "result": "miss",
+          "matched_span_ids": [],
+          "matched_roles": [],
+          "coverage_ratio": 0.0714,
+          "role_confusion": false,
+          "modality_confusion": false
+        },
+        {
+          "golden_id": "G-S02-06",
+          "topic": "新业务/出海",
+          "polarity": "positive",
+          "priority": "optional",
+          "negative_kind": null,
+          "expected_role_class": "statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 50
+          },
+          "quote_sha256": "2bce85e9d070446ce39115ae55fa5335688f23239393986f7182a35718281df6",
+          "verified": true,
+          "result": "full",
+          "matched_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:8dffe6a961c4d99862c6d57cf9e19fda16611f5b91a5277af54c7dc4953dd43f"
+          ],
+          "matched_roles": [
+            "company_filing"
+          ],
+          "coverage_ratio": 1.0,
+          "role_confusion": false,
+          "modality_confusion": false
+        },
+        {
+          "golden_id": "G-S02-07",
+          "topic": "负例",
+          "polarity": "negative",
+          "priority": "reference",
+          "negative_kind": "table_of_contents",
+          "expected_role_class": "statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 11
+          },
+          "quote_sha256": "e93fcd030c752050d96edb1e1c212dba48cce0cedce88849f4987a646a760c41",
+          "verified": true,
+          "result": "clean",
+          "matched_span_ids": [],
+          "matched_roles": [],
+          "coverage_ratio": 0.0,
+          "role_confusion": false,
+          "modality_confusion": false
+        },
+        {
+          "golden_id": "G-S02-08",
+          "topic": "负例",
+          "polarity": "negative",
+          "priority": "reference",
+          "negative_kind": "pure_financial_table",
+          "expected_role_class": "statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 17
+          },
+          "quote_sha256": "012ca3bf81e6ece4d6707398b7c0249cd35deb24b8b77da51da71411ae2398b8",
+          "verified": true,
+          "result": "clean",
+          "matched_span_ids": [],
+          "matched_roles": [],
+          "coverage_ratio": 0.0,
+          "role_confusion": false,
+          "modality_confusion": false
+        },
+        {
+          "golden_id": "G-S02-09",
+          "topic": "负例",
+          "polarity": "negative",
+          "priority": "reference",
+          "negative_kind": "legal_boilerplate",
+          "expected_role_class": "statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 56
+          },
+          "quote_sha256": "3a075c29bde5864ec6a982870a1607288d1a564fd88c8e955bd9b2e36a54c01f",
+          "verified": true,
+          "result": "clean",
+          "matched_span_ids": [],
+          "matched_roles": [],
+          "coverage_ratio": 0.0,
+          "role_confusion": false,
+          "modality_confusion": false
+        },
+        {
+          "golden_id": "G-S02-10",
+          "topic": "负例",
+          "polarity": "negative",
+          "priority": "reference",
+          "negative_kind": "repeated_paragraph",
+          "expected_role_class": "statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 56
+          },
+          "quote_sha256": "4020cc13b56864f32669645d4d73cfbdad9d1d085498f1d740254be0908019fc",
+          "verified": true,
+          "result": "clean",
+          "matched_span_ids": [],
+          "matched_roles": [],
+          "coverage_ratio": 0.0,
+          "role_confusion": false,
+          "modality_confusion": false
+        }
+      ],
+      "required_coverage": {
+        "numerator": 3,
+        "denominator": 4,
+        "rate": 0.75,
+        "unverified_required_excluded": 0,
+        "definition": "required positive golden points that are verified at their locator and fully contained in selected text on the cited page/lines"
+      },
+      "optional_coverage": {
+        "numerator": 1,
+        "denominator": 2,
+        "rate": 0.5,
+        "definition": "same rule as required_coverage for optional points"
+      },
+      "noise": {
+        "negative_points": 4,
+        "negative_points_hit": 0,
+        "selected_span_count": 96,
+        "selected_in_scope": 20,
+        "judged_in_scope": 7,
+        "unjudged_in_scope": 13,
+        "noise_spans": 0,
+        "selected_noise_rate": {
+          "numerator": 0,
+          "denominator": 7,
+          "rate": 0.0,
+          "definition": "selected spans inside the annotation scope that carry a negative golden quote, over all in-scope selected spans judged by any golden point"
+        }
+      },
+      "duplicate": {
+        "duplicate_span_count": 1,
+        "total_selected": 96,
+        "duplicate_ratio": 0.0104,
+        "definition": "1 - unique normalized selected texts / selected spans"
+      },
+      "role_confusion": {
+        "count": 0,
+        "golden_ids": []
+      },
+      "modality_confusion": {
+        "count": 0,
+        "golden_ids": []
+      },
+      "bytes": {
+        "selected_utf8_bytes": 8889,
+        "source_raw_bytes": 6361468,
+        "selected_to_source_ratio": 0.001397,
+        "selected_char_count": 3343
+      },
+      "elapsed_seconds": 45.343
+    },
+    {
+      "sample_id": "S03",
+      "doc_type": "quarterly_report",
+      "language": "zh",
+      "source_sha256": "ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+      "source_byte_size": 217264,
+      "metadata_is_fixture": false,
+      "annotation_scope": {
+        "unit": "pdf_page",
+        "pages_read": [
+          1,
+          2,
+          3,
+          5
+        ],
+        "pages_total": 15,
+        "uncovered": "11 of 15 pages not read (shareholder tables and financial statements sections). The business-discussion and non-recurring items sections were read.",
+        "ambiguities": [
+          "Quarterly narrative is concentrated on pages 2-3; a quarterly with no narrative would not be presumed valueless, but this one does carry narrative."
+        ]
+      },
+      "parse": {
+        "page_count": 15,
+        "pages_read": 15,
+        "opaque_pages": [],
+        "table_scan_page_count": 15,
+        "deferred_table_pages": [],
+        "line_count": 0,
+        "errors": [],
+        "coverage_complete": true,
+        "parser_name": "selective_narrative_parser",
+        "parser_version": "0.1.0",
+        "selector_name": "select_narrative_evidence",
+        "selector_version": "0.4.0"
+      },
+      "selection": {
+        "status": "selected",
+        "document_kind": "quarterly_report",
+        "selection_limit": 96,
+        "candidate_count": 29,
+        "source_units": 823,
+        "omitted_candidate_count": 0,
+        "dropped_financial_count": 154,
+        "selected_span_count": 29,
+        "locator_roundtrip_verified": 29,
+        "locator_roundtrip_failed": 0,
+        "coverage_complete": true
+      },
+      "parser_options": {
+        "full_table_scan": true
+      },
+      "golden_results": [
+        {
+          "golden_id": "G-S03-01",
+          "topic": "主营进展",
+          "polarity": "positive",
+          "priority": "required",
+          "negative_kind": null,
+          "expected_role_class": "statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 2
+          },
+          "quote_sha256": "e209ff5851423148983e46ec89fdb28a633849aed580cf524750ec7eee026aeb",
+          "verified": true,
+          "result": "full",
+          "matched_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:63ea932ad278394cefc2f99e61dfe28580d29c11184323b17beedf507ead20bb"
+          ],
+          "matched_roles": [
+            "company_filing"
+          ],
+          "coverage_ratio": 1.0,
+          "role_confusion": false,
+          "modality_confusion": false
+        },
+        {
+          "golden_id": "G-S03-02",
+          "topic": "主营进展",
+          "polarity": "positive",
+          "priority": "required",
+          "negative_kind": null,
+          "expected_role_class": "statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 2
+          },
+          "quote_sha256": "1742deb3d1a70739bd0aaedafde0effa20ae0e14c782e831b3f977406ad1929a",
+          "verified": true,
+          "result": "full",
+          "matched_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:51b11418f94faeb23bfd5086b759e6a3610e696d29adba5312b57eb9fde1c38a"
+          ],
+          "matched_roles": [
+            "company_filing"
+          ],
+          "coverage_ratio": 1.0,
+          "role_confusion": false,
+          "modality_confusion": false
+        },
+        {
+          "golden_id": "G-S03-03",
+          "topic": "新业务/出海",
+          "polarity": "positive",
+          "priority": "required",
+          "negative_kind": null,
+          "expected_role_class": "statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 3
+          },
+          "quote_sha256": "48e6dca1343ec048f198b9fe5cecafab21c202c86417fd5bda7099bd491f9d90",
+          "verified": true,
+          "result": "full",
+          "matched_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:2e9aafb09b1b63ca23aa54ee19375b8412ec81cf9ac0c289a0a7df170340a89a",
+            "urn:company-wiki:evidence-span:sha256:d93f16c68836c21e55e0357e03f1aa1180201a682c12d031cab229714843f6cd"
+          ],
+          "matched_roles": [
+            "company_filing"
+          ],
+          "coverage_ratio": 1.0,
+          "role_confusion": false,
+          "modality_confusion": false
+        },
+        {
+          "golden_id": "G-S03-04",
+          "topic": "主营进展",
+          "polarity": "positive",
+          "priority": "required",
+          "negative_kind": null,
+          "expected_role_class": "statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 3
+          },
+          "quote_sha256": "3c8b06825e72f0235c2a390245281bc85ddfadddb2ba8e97b3d2fccac48bb0e4",
+          "verified": true,
+          "result": "full",
+          "matched_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:c87a3fc470e345d05103ae730167d97a02282a490bfddff83539f9559d26081d",
+            "urn:company-wiki:evidence-span:sha256:6a1581e42f8560556677d3e889bd4792edc685b0d58a62c763563d1defc9013c"
+          ],
+          "matched_roles": [
+            "company_filing"
+          ],
+          "coverage_ratio": 1.0,
+          "role_confusion": false,
+          "modality_confusion": false
+        },
+        {
+          "golden_id": "G-S03-05",
+          "topic": "主营进展",
+          "polarity": "positive",
+          "priority": "optional",
+          "negative_kind": null,
+          "expected_role_class": "statement",
+          "modality": "planned",
+          "locator": {
+            "page_number": 3
+          },
+          "quote_sha256": "c6c847908f89797f89021d04720e0a73ff652862a07f1657acc850d3d78751e6",
+          "verified": true,
+          "result": "full",
+          "matched_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:300c9ea9889de9283a334b816e331aca0e252d8ab92697657516c59e7cb497e6"
+          ],
+          "matched_roles": [
+            "company_filing"
+          ],
+          "coverage_ratio": 1.0,
+          "role_confusion": false,
+          "modality_confusion": false
+        },
+        {
+          "golden_id": "G-S03-06",
+          "topic": "负例",
+          "polarity": "negative",
+          "priority": "reference",
+          "negative_kind": "legal_boilerplate",
+          "expected_role_class": "statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 1
+          },
+          "quote_sha256": "fb94438f166602cf7b519c8af1d1ee103e83147f9e79e33d3e56885b4fd773b3",
+          "verified": true,
+          "result": "clean",
+          "matched_span_ids": [],
+          "matched_roles": [],
+          "coverage_ratio": 0.0,
+          "role_confusion": false,
+          "modality_confusion": false
+        },
+        {
+          "golden_id": "G-S03-07",
+          "topic": "负例",
+          "polarity": "negative",
+          "priority": "reference",
+          "negative_kind": "pure_financial_table",
+          "expected_role_class": "statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 2
+          },
+          "quote_sha256": "8844f63a8c5564d11c29257c77447bc6afecb5f15299918fa9716eba312f145a",
+          "verified": true,
+          "result": "clean",
+          "matched_span_ids": [],
+          "matched_roles": [],
+          "coverage_ratio": 0.0,
+          "role_confusion": false,
+          "modality_confusion": false
+        },
+        {
+          "golden_id": "G-S03-08",
+          "topic": "负例",
+          "polarity": "negative",
+          "priority": "reference",
+          "negative_kind": "pure_financial_table",
+          "expected_role_class": "statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 3
+          },
+          "quote_sha256": "ad0950428c01b93a2deae653b9ce4d9e89842cc1488e851f3c477464a73e8179",
+          "verified": true,
+          "result": "clean",
+          "matched_span_ids": [],
+          "matched_roles": [],
+          "coverage_ratio": 0.0,
+          "role_confusion": false,
+          "modality_confusion": false
+        }
+      ],
+      "required_coverage": {
+        "numerator": 4,
+        "denominator": 4,
+        "rate": 1.0,
+        "unverified_required_excluded": 0,
+        "definition": "required positive golden points that are verified at their locator and fully contained in selected text on the cited page/lines"
+      },
+      "optional_coverage": {
+        "numerator": 1,
+        "denominator": 1,
+        "rate": 1.0,
+        "definition": "same rule as required_coverage for optional points"
+      },
+      "noise": {
+        "negative_points": 3,
+        "negative_points_hit": 0,
+        "selected_span_count": 29,
+        "selected_in_scope": 29,
+        "judged_in_scope": 7,
+        "unjudged_in_scope": 22,
+        "noise_spans": 0,
+        "selected_noise_rate": {
+          "numerator": 0,
+          "denominator": 7,
+          "rate": 0.0,
+          "definition": "selected spans inside the annotation scope that carry a negative golden quote, over all in-scope selected spans judged by any golden point"
+        }
+      },
+      "duplicate": {
+        "duplicate_span_count": 0,
+        "total_selected": 29,
+        "duplicate_ratio": 0.0,
+        "definition": "1 - unique normalized selected texts / selected spans"
+      },
+      "role_confusion": {
+        "count": 0,
+        "golden_ids": []
+      },
+      "modality_confusion": {
+        "count": 0,
+        "golden_ids": []
+      },
+      "bytes": {
+        "selected_utf8_bytes": 3174,
+        "source_raw_bytes": 217264,
+        "selected_to_source_ratio": 0.014609,
+        "selected_char_count": 1226
+      },
+      "elapsed_seconds": 6.453
+    },
+    {
+      "sample_id": "S04",
+      "doc_type": "prospectus",
+      "language": "zh",
+      "source_sha256": "19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+      "source_byte_size": 11211796,
+      "metadata_is_fixture": false,
+      "annotation_scope": {
+        "unit": "pdf_page",
+        "pages_read": [
+          13,
+          31,
+          34,
+          49,
+          114,
+          133
+        ],
+        "pages_total": 429,
+        "uncovered": "423 of 429 pages not read in full; targeted read of the TOC, overview/fundraising summary, risk factors, business-and-technology and policy sections.",
+        "ambiguities": [
+          "Prospectus printed folio (1-1-114) differs from the PDF page index; locators use the PDF page index."
+        ]
+      },
+      "parse": {
+        "page_count": 429,
+        "pages_read": 429,
+        "opaque_pages": [],
+        "table_scan_page_count": 429,
+        "deferred_table_pages": [],
+        "line_count": 0,
+        "errors": [],
+        "coverage_complete": true,
+        "parser_name": "selective_narrative_parser",
+        "parser_version": "0.1.0",
+        "selector_name": "select_narrative_evidence",
+        "selector_version": "0.4.0"
+      },
+      "selection": {
+        "status": "partial",
+        "document_kind": "prospectus",
+        "selection_limit": 160,
+        "candidate_count": 947,
+        "source_units": 16880,
+        "omitted_candidate_count": 787,
+        "dropped_financial_count": 1797,
+        "selected_span_count": 160,
+        "locator_roundtrip_verified": 160,
+        "locator_roundtrip_failed": 0,
+        "coverage_complete": true
+      },
+      "parser_options": {
+        "full_table_scan": true
+      },
+      "golden_results": [
+        {
+          "golden_id": "G-S04-01",
+          "topic": "主营进展",
+          "polarity": "positive",
+          "priority": "required",
+          "negative_kind": null,
+          "expected_role_class": "statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 114
+          },
+          "quote_sha256": "482eadce99ee3acfa3d5e5d02bba8176ca70fd5e00680b6093cd04b572fe3198",
+          "verified": true,
+          "result": "full",
+          "matched_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:fee3bd0d3d187df4de31fcc7554d0827d6c33be8002c61802c76e5f96714dcd6",
+            "urn:company-wiki:evidence-span:sha256:c5073f06a3daca767799d5b9c5df7c0c44e0949bf6d8400383afe4451c29b92a"
+          ],
+          "matched_roles": [
+            "company_filing"
+          ],
+          "coverage_ratio": 1.0,
+          "role_confusion": false,
+          "modality_confusion": false
+        },
+        {
+          "golden_id": "G-S04-02",
+          "topic": "新业务/出海",
+          "polarity": "positive",
+          "priority": "optional",
+          "negative_kind": null,
+          "expected_role_class": "statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 114
+          },
+          "quote_sha256": "3338c421dae9e66a27d130ce60daed96101cefaa48965c12d8c84eabe3ca17b9",
+          "verified": true,
+          "result": "miss",
+          "matched_span_ids": [],
+          "matched_roles": [],
+          "coverage_ratio": 0.1212,
+          "role_confusion": false,
+          "modality_confusion": false
+        },
+        {
+          "golden_id": "G-S04-03",
+          "topic": "募集资金用途/项目逻辑",
+          "polarity": "positive",
+          "priority": "required",
+          "negative_kind": null,
+          "expected_role_class": "statement",
+          "modality": "planned",
+          "locator": {
+            "page_number": 34
+          },
+          "quote_sha256": "916e7383c995516d1f1a32a9c523ee66eb3832b96b3a93d5cb7e31c5b6e94796",
+          "verified": true,
+          "result": "miss",
+          "matched_span_ids": [],
+          "matched_roles": [],
+          "coverage_ratio": 0.0,
+          "role_confusion": false,
+          "modality_confusion": false
+        },
+        {
+          "golden_id": "G-S04-04",
+          "topic": "募集资金用途/项目逻辑",
+          "polarity": "positive",
+          "priority": "required",
+          "negative_kind": null,
+          "expected_role_class": "statement",
+          "modality": "planned",
+          "locator": {
+            "page_number": 49
+          },
+          "quote_sha256": "431a3b12d06da51af7d5f117d06774b75a260ecb18e6cdbc4843db5612df4667",
+          "verified": true,
+          "result": "miss",
+          "matched_span_ids": [],
+          "matched_roles": [],
+          "coverage_ratio": 0.0,
+          "role_confusion": false,
+          "modality_confusion": false
+        },
+        {
+          "golden_id": "G-S04-05",
+          "topic": "主营进展",
+          "polarity": "positive",
+          "priority": "optional",
+          "negative_kind": null,
+          "expected_role_class": "statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 49
+          },
+          "quote_sha256": "78d9c06d252297e96c5434ca60c6dfacba5380923dd5b91a645987e4d3466b4d",
+          "verified": true,
+          "result": "miss",
+          "matched_span_ids": [],
+          "matched_roles": [],
+          "coverage_ratio": 0.0,
+          "role_confusion": false,
+          "modality_confusion": false
+        },
+        {
+          "golden_id": "G-S04-06",
+          "topic": "负例",
+          "polarity": "negative",
+          "priority": "reference",
+          "negative_kind": "table_of_contents",
+          "expected_role_class": "statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 13
+          },
+          "quote_sha256": "e44db01fe767d30e6602559a9c2130d57b4d5d966fb87ab218da228f77f844c5",
+          "verified": true,
+          "result": "clean",
+          "matched_span_ids": [],
+          "matched_roles": [],
+          "coverage_ratio": 0.0,
+          "role_confusion": false,
+          "modality_confusion": false
+        },
+        {
+          "golden_id": "G-S04-07",
+          "topic": "负例",
+          "polarity": "negative",
+          "priority": "reference",
+          "negative_kind": "static_reference",
+          "expected_role_class": "statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 133
+          },
+          "quote_sha256": "b11f3e659d535ea93e37aa8721700279181213ed0c167aa5a2cd4902ecc928cb",
+          "verified": true,
+          "result": "clean",
+          "matched_span_ids": [],
+          "matched_roles": [],
+          "coverage_ratio": 0.0,
+          "role_confusion": false,
+          "modality_confusion": false
+        },
+        {
+          "golden_id": "G-S04-08",
+          "topic": "负例",
+          "polarity": "negative",
+          "priority": "reference",
+          "negative_kind": "legal_boilerplate",
+          "expected_role_class": "statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 34
+          },
+          "quote_sha256": "bd906767c0f580843b17ef25574ad47b344b541a217904f19d6c3ef3b08fe4ad",
+          "verified": true,
+          "result": "clean",
+          "matched_span_ids": [],
+          "matched_roles": [],
+          "coverage_ratio": 0.0,
+          "role_confusion": false,
+          "modality_confusion": false
+        }
+      ],
+      "required_coverage": {
+        "numerator": 1,
+        "denominator": 3,
+        "rate": 0.3333,
+        "unverified_required_excluded": 0,
+        "definition": "required positive golden points that are verified at their locator and fully contained in selected text on the cited page/lines"
+      },
+      "optional_coverage": {
+        "numerator": 0,
+        "denominator": 2,
+        "rate": 0.0,
+        "definition": "same rule as required_coverage for optional points"
+      },
+      "noise": {
+        "negative_points": 3,
+        "negative_points_hit": 0,
+        "selected_span_count": 160,
+        "selected_in_scope": 8,
+        "judged_in_scope": 2,
+        "unjudged_in_scope": 6,
+        "noise_spans": 0,
+        "selected_noise_rate": {
+          "numerator": 0,
+          "denominator": 2,
+          "rate": 0.0,
+          "definition": "selected spans inside the annotation scope that carry a negative golden quote, over all in-scope selected spans judged by any golden point"
+        }
+      },
+      "duplicate": {
+        "duplicate_span_count": 1,
+        "total_selected": 160,
+        "duplicate_ratio": 0.0063,
+        "definition": "1 - unique normalized selected texts / selected spans"
+      },
+      "role_confusion": {
+        "count": 0,
+        "golden_ids": []
+      },
+      "modality_confusion": {
+        "count": 0,
+        "golden_ids": []
+      },
+      "bytes": {
+        "selected_utf8_bytes": 11410,
+        "source_raw_bytes": 11211796,
+        "selected_to_source_ratio": 0.001018,
+        "selected_char_count": 4272
+      },
+      "elapsed_seconds": 129.53
+    },
+    {
+      "sample_id": "S05",
+      "doc_type": "equity_offering_prospectus",
+      "language": "zh",
+      "source_sha256": "cd803fe9528f4646f8f29b518a450ae4bd5b5968c482eb49789f9786b523595b",
+      "source_byte_size": 5595592,
+      "metadata_is_fixture": false,
+      "annotation_scope": {
+        "unit": "pdf_page",
+        "pages_read": [
+          3,
+          8,
+          13,
+          15,
+          16,
+          71,
+          95,
+          101,
+          169
+        ],
+        "pages_total": 191,
+        "uncovered": "182 of 191 pages not read in full; targeted read of the major-notices, risk, TOC, quarterly financials, R&D progress, project necessity and declaration sections.",
+        "ambiguities": [
+          "Printed folio 1-1-2 corresponds to PDF page 3; locators use the PDF page index."
+        ]
+      },
+      "parse": {
+        "page_count": 191,
+        "pages_read": 191,
+        "opaque_pages": [],
+        "table_scan_page_count": 191,
+        "deferred_table_pages": [],
+        "line_count": 0,
+        "errors": [],
+        "coverage_complete": true,
+        "parser_name": "selective_narrative_parser",
+        "parser_version": "0.1.0",
+        "selector_name": "select_narrative_evidence",
+        "selector_version": "0.4.0"
+      },
+      "selection": {
+        "status": "partial",
+        "document_kind": "equity_offering_prospectus",
+        "selection_limit": 160,
+        "candidate_count": 1099,
+        "source_units": 6891,
+        "omitted_candidate_count": 939,
+        "dropped_financial_count": 620,
+        "selected_span_count": 160,
+        "locator_roundtrip_verified": 160,
+        "locator_roundtrip_failed": 0,
+        "coverage_complete": true
+      },
+      "parser_options": {
+        "full_table_scan": true
+      },
+      "golden_results": [
+        {
+          "golden_id": "G-S05-01",
+          "topic": "募集资金用途/项目逻辑",
+          "polarity": "positive",
+          "priority": "required",
+          "negative_kind": null,
+          "expected_role_class": "statement",
+          "modality": "planned",
+          "locator": {
+            "page_number": 3
+          },
+          "quote_sha256": "140b12c8482b7f5a1d8207f5a2a81b3c5d8bb25c419a73f14cffaea719100d07",
+          "verified": true,
+          "result": "full",
+          "matched_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:8f2e06baf0d4a3a9c078727df19d5366ee0362be6741a356de35cd5200c70f98",
+            "urn:company-wiki:evidence-span:sha256:c0836b8ef6c7b1dae701adc5f81c99625150b4faa9ba920e170550d06e397051",
+            "urn:company-wiki:evidence-span:sha256:91ad646ab1c1ea936e504542bd1e8656212886867699fb233ae3f387ac7f74fc"
+          ],
+          "matched_roles": [
+            "company_filing"
+          ],
+          "coverage_ratio": 1.0,
+          "role_confusion": false,
+          "modality_confusion": false
+        },
+        {
+          "golden_id": "G-S05-02",
+          "topic": "募集资金用途/项目逻辑",
+          "polarity": "positive",
+          "priority": "required",
+          "negative_kind": null,
+          "expected_role_class": "statement",
+          "modality": "planned",
+          "locator": {
+            "page_number": 3
+          },
+          "quote_sha256": "5a78e0b60f9b4fc04ec292e43479fc5c22affcff2c0fc516141b2fb3acae1700",
+          "verified": true,
+          "result": "full",
+          "matched_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:6fcecd37583e77313d375a2b28625dded1b13b02d0302fa14e32d03ac7eaada6",
+            "urn:company-wiki:evidence-span:sha256:3e1f56bbd6ede7c526e024e92bc8d810b28fb3c7d7ea079ca3426429137585d1"
+          ],
+          "matched_roles": [
+            "company_filing"
+          ],
+          "coverage_ratio": 1.0,
+          "role_confusion": false,
+          "modality_confusion": false
+        },
+        {
+          "golden_id": "G-S05-03",
+          "topic": "行业动态",
+          "polarity": "positive",
+          "priority": "required",
+          "negative_kind": null,
+          "expected_role_class": "statement",
+          "modality": "forecast",
+          "locator": {
+            "page_number": 101
+          },
+          "quote_sha256": "2b8454111a882d30a52f1405b79bcfffe84b365d3838bf1867d8e5c51b594ce0",
+          "verified": true,
+          "result": "miss",
+          "matched_span_ids": [],
+          "matched_roles": [],
+          "coverage_ratio": 0.0426,
+          "role_confusion": false,
+          "modality_confusion": false
+        },
+        {
+          "golden_id": "G-S05-04",
+          "topic": "主营进展",
+          "polarity": "positive",
+          "priority": "optional",
+          "negative_kind": null,
+          "expected_role_class": "statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 71
+          },
+          "quote_sha256": "27262108c5c8525f6c0d6446da9a1064ea80e3be82cb60c4e66bed7655addf58",
+          "verified": true,
+          "result": "miss",
+          "matched_span_ids": [],
+          "matched_roles": [],
+          "coverage_ratio": 0.0,
+          "role_confusion": false,
+          "modality_confusion": false
+        },
+        {
+          "golden_id": "G-S05-05",
+          "topic": "募集资金用途/项目逻辑",
+          "polarity": "positive",
+          "priority": "optional",
+          "negative_kind": null,
+          "expected_role_class": "statement",
+          "modality": "forecast",
+          "locator": {
+            "page_number": 8
+          },
+          "quote_sha256": "9e3df0d7532c8fc0c61cef1476057116f1d5e948a233b95ad3a20537be49e70d",
+          "verified": true,
+          "result": "miss",
+          "matched_span_ids": [],
+          "matched_roles": [],
+          "coverage_ratio": 0.0357,
+          "role_confusion": false,
+          "modality_confusion": false
+        },
+        {
+          "golden_id": "G-S05-06",
+          "topic": "负例",
+          "polarity": "negative",
+          "priority": "reference",
+          "negative_kind": "table_of_contents",
+          "expected_role_class": "statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 16
+          },
+          "quote_sha256": "2b8746ee3c059060fd16ea40cf3a47905b212a65391d986250bd5561bcd84ad6",
+          "verified": true,
+          "result": "clean",
+          "matched_span_ids": [],
+          "matched_roles": [],
+          "coverage_ratio": 0.0,
+          "role_confusion": false,
+          "modality_confusion": false
+        },
+        {
+          "golden_id": "G-S05-07",
+          "topic": "负例",
+          "polarity": "negative",
+          "priority": "reference",
+          "negative_kind": "pure_financial_table",
+          "expected_role_class": "statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 15
+          },
+          "quote_sha256": "c3d7aa8eb54a3e5c158700151646dab5a447687546292eccfefe395f0338b8e2",
+          "verified": true,
+          "result": "clean",
+          "matched_span_ids": [],
+          "matched_roles": [],
+          "coverage_ratio": 0.0,
+          "role_confusion": false,
+          "modality_confusion": false
+        },
+        {
+          "golden_id": "G-S05-08",
+          "topic": "负例",
+          "polarity": "negative",
+          "priority": "reference",
+          "negative_kind": "legal_boilerplate",
+          "expected_role_class": "statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 169
+          },
+          "quote_sha256": "7f76378d963dd5bf33af5ed12f796a33eb48e11d3751da4e645eaf471ccc1f5a",
+          "verified": true,
+          "result": "clean",
+          "matched_span_ids": [],
+          "matched_roles": [],
+          "coverage_ratio": 0.0,
+          "role_confusion": false,
+          "modality_confusion": false
+        }
+      ],
+      "required_coverage": {
+        "numerator": 2,
+        "denominator": 3,
+        "rate": 0.6667,
+        "unverified_required_excluded": 0,
+        "definition": "required positive golden points that are verified at their locator and fully contained in selected text on the cited page/lines"
+      },
+      "optional_coverage": {
+        "numerator": 0,
+        "denominator": 2,
+        "rate": 0.0,
+        "definition": "same rule as required_coverage for optional points"
+      },
+      "noise": {
+        "negative_points": 3,
+        "negative_points_hit": 0,
+        "selected_span_count": 160,
+        "selected_in_scope": 17,
+        "judged_in_scope": 5,
+        "unjudged_in_scope": 12,
+        "noise_spans": 0,
+        "selected_noise_rate": {
+          "numerator": 0,
+          "denominator": 5,
+          "rate": 0.0,
+          "definition": "selected spans inside the annotation scope that carry a negative golden quote, over all in-scope selected spans judged by any golden point"
+        }
+      },
+      "duplicate": {
+        "duplicate_span_count": 1,
+        "total_selected": 160,
+        "duplicate_ratio": 0.0063,
+        "definition": "1 - unique normalized selected texts / selected spans"
+      },
+      "role_confusion": {
+        "count": 0,
+        "golden_ids": []
+      },
+      "modality_confusion": {
+        "count": 0,
+        "golden_ids": []
+      },
+      "bytes": {
+        "selected_utf8_bytes": 11503,
+        "source_raw_bytes": 5595592,
+        "selected_to_source_ratio": 0.002056,
+        "selected_char_count": 3987
+      },
+      "elapsed_seconds": 48.305
+    },
+    {
+      "sample_id": "S06",
+      "doc_type": "convertible_bond_prospectus",
+      "language": "zh",
+      "source_sha256": "c6ed566631e123f159abf2697c157f1868f8e994ccf8e3352132046a6c5ca0a1",
+      "source_byte_size": 4756322,
+      "metadata_is_fixture": false,
+      "annotation_scope": {
+        "unit": "pdf_page",
+        "pages_read": [
+          4,
+          8,
+          13,
+          29,
+          39,
+          43,
+          52,
+          68,
+          75,
+          87
+        ],
+        "pages_total": 227,
+        "uncovered": "217 of 227 pages not read in full; targeted read of issuance summary, TOC, bond terms, risks, fundraising-project risk, policy table, market position and industry sections.",
+        "ambiguities": [
+          "Printed folio differs from the PDF page index (page 4 prints 3); locators use the PDF page index."
+        ]
+      },
+      "parse": {
+        "page_count": 227,
+        "pages_read": 227,
+        "opaque_pages": [],
+        "table_scan_page_count": 227,
+        "deferred_table_pages": [],
+        "line_count": 0,
+        "errors": [],
+        "coverage_complete": true,
+        "parser_name": "selective_narrative_parser",
+        "parser_version": "0.1.0",
+        "selector_name": "select_narrative_evidence",
+        "selector_version": "0.4.0"
+      },
+      "selection": {
+        "status": "partial",
+        "document_kind": "convertible_bond_prospectus",
+        "selection_limit": 160,
+        "candidate_count": 388,
+        "source_units": 8967,
+        "omitted_candidate_count": 228,
+        "dropped_financial_count": 1052,
+        "selected_span_count": 160,
+        "locator_roundtrip_verified": 160,
+        "locator_roundtrip_failed": 0,
+        "coverage_complete": true
+      },
+      "parser_options": {
+        "full_table_scan": true
+      },
+      "golden_results": [
+        {
+          "golden_id": "G-S06-01",
+          "topic": "募集资金用途/项目逻辑",
+          "polarity": "positive",
+          "priority": "required",
+          "negative_kind": null,
+          "expected_role_class": "statement",
+          "modality": "planned",
+          "locator": {
+            "page_number": 4
+          },
+          "quote_sha256": "8d3f9e2b9eedb9ffeb2411fd83ff7306a5b050bb8cffb2a17e1e55eca3611290",
+          "verified": true,
+          "result": "miss",
+          "matched_span_ids": [],
+          "matched_roles": [],
+          "coverage_ratio": 0.0,
+          "role_confusion": false,
+          "modality_confusion": false
+        },
+        {
+          "golden_id": "G-S06-02",
+          "topic": "募集资金用途/项目逻辑",
+          "polarity": "positive",
+          "priority": "required",
+          "negative_kind": null,
+          "expected_role_class": "statement",
+          "modality": "planned",
+          "locator": {
+            "page_number": 43
+          },
+          "quote_sha256": "69b6d4629b78f7fe1527ce0b8cd112da3ecec41053312740b57a546fcce9b4e1",
+          "verified": true,
+          "result": "miss",
+          "matched_span_ids": [],
+          "matched_roles": [],
+          "coverage_ratio": 0.0652,
+          "role_confusion": false,
+          "modality_confusion": false
+        },
+        {
+          "golden_id": "G-S06-03",
+          "topic": "募集资金用途/项目逻辑",
+          "polarity": "positive",
+          "priority": "required",
+          "negative_kind": null,
+          "expected_role_class": "statement",
+          "modality": "planned",
+          "locator": {
+            "page_number": 43
+          },
+          "quote_sha256": "0d400f1390555b171ae9c0f6f4d540b7106d7126df6b570d7510e9230bff5653",
+          "verified": true,
+          "result": "miss",
+          "matched_span_ids": [],
+          "matched_roles": [],
+          "coverage_ratio": 0.1429,
+          "role_confusion": false,
+          "modality_confusion": false
+        },
+        {
+          "golden_id": "G-S06-04",
+          "topic": "行业动态",
+          "polarity": "positive",
+          "priority": "required",
+          "negative_kind": null,
+          "expected_role_class": "statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 87
+          },
+          "quote_sha256": "85a2447e96aa5ede1657f3cf4458be22c4715fad49be8c3e6d7fffac8c55a498",
+          "verified": true,
+          "result": "miss",
+          "matched_span_ids": [],
+          "matched_roles": [],
+          "coverage_ratio": 0.0429,
+          "role_confusion": false,
+          "modality_confusion": false
+        },
+        {
+          "golden_id": "G-S06-05",
+          "topic": "主营进展",
+          "polarity": "positive",
+          "priority": "optional",
+          "negative_kind": null,
+          "expected_role_class": "statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 75
+          },
+          "quote_sha256": "62e47f43240dd21dc55116bd1b951f214aa82270216000ec33a7d9cc0f9a90bf",
+          "verified": true,
+          "result": "miss",
+          "matched_span_ids": [],
+          "matched_roles": [],
+          "coverage_ratio": 0.0,
+          "role_confusion": false,
+          "modality_confusion": false
+        },
+        {
+          "golden_id": "G-S06-06",
+          "topic": "主营进展",
+          "polarity": "positive",
+          "priority": "optional",
+          "negative_kind": null,
+          "expected_role_class": "statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 75
+          },
+          "quote_sha256": "8ae29465e4682858ea00d328431863d3a67e127eb6080c3a0f4c2c970849005a",
+          "verified": true,
+          "result": "miss",
+          "matched_span_ids": [],
+          "matched_roles": [],
+          "coverage_ratio": 0.0,
+          "role_confusion": false,
+          "modality_confusion": false
+        },
+        {
+          "golden_id": "G-S06-07",
+          "topic": "负例",
+          "polarity": "negative",
+          "priority": "reference",
+          "negative_kind": "table_of_contents",
+          "expected_role_class": "statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 13
+          },
+          "quote_sha256": "66eb4a1bb88289c68f0efa9d1247423e242634184819d0fee7dbdb369f1f247e",
+          "verified": true,
+          "result": "clean",
+          "matched_span_ids": [],
+          "matched_roles": [],
+          "coverage_ratio": 0.0,
+          "role_confusion": false,
+          "modality_confusion": false
+        },
+        {
+          "golden_id": "G-S06-08",
+          "topic": "负例",
+          "polarity": "negative",
+          "priority": "reference",
+          "negative_kind": "pure_financial_table",
+          "expected_role_class": "statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 39
+          },
+          "quote_sha256": "6606fab4fe20d192e7c1a7bf197abd33157294d295e5bf00d8ddd838ca5c7fe4",
+          "verified": true,
+          "result": "clean",
+          "matched_span_ids": [],
+          "matched_roles": [],
+          "coverage_ratio": 0.0,
+          "role_confusion": false,
+          "modality_confusion": false
+        },
+        {
+          "golden_id": "G-S06-09",
+          "topic": "负例",
+          "polarity": "negative",
+          "priority": "reference",
+          "negative_kind": "static_reference",
+          "expected_role_class": "statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 68
+          },
+          "quote_sha256": "880b7c4943e7b1f0e4b97b79c2464e503e4e13997e9d6c4f2e7ff0a282b353a7",
+          "verified": true,
+          "result": "clean",
+          "matched_span_ids": [],
+          "matched_roles": [],
+          "coverage_ratio": 0.0,
+          "role_confusion": false,
+          "modality_confusion": false
+        },
+        {
+          "golden_id": "G-S06-10",
+          "topic": "负例",
+          "polarity": "negative",
+          "priority": "reference",
+          "negative_kind": "legal_boilerplate",
+          "expected_role_class": "statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 8
+          },
+          "quote_sha256": "cc324ad7095ccb745a09cc49da286a5d8060fde1649a413ff105d742b509c833",
+          "verified": true,
+          "result": "clean",
+          "matched_span_ids": [],
+          "matched_roles": [],
+          "coverage_ratio": 0.0,
+          "role_confusion": false,
+          "modality_confusion": false
+        },
+        {
+          "golden_id": "G-S06-11",
+          "topic": "负例",
+          "polarity": "negative",
+          "priority": "reference",
+          "negative_kind": "legal_boilerplate",
+          "expected_role_class": "statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 29
+          },
+          "quote_sha256": "918877f5450df23150690bb0a00f8d4c2c20f7c01b790461803514bf30c3b560",
+          "verified": true,
+          "result": "clean",
+          "matched_span_ids": [],
+          "matched_roles": [],
+          "coverage_ratio": 0.0,
+          "role_confusion": false,
+          "modality_confusion": false
+        }
+      ],
+      "required_coverage": {
+        "numerator": 0,
+        "denominator": 4,
+        "rate": 0.0,
+        "unverified_required_excluded": 0,
+        "definition": "required positive golden points that are verified at their locator and fully contained in selected text on the cited page/lines"
+      },
+      "optional_coverage": {
+        "numerator": 0,
+        "denominator": 2,
+        "rate": 0.0,
+        "definition": "same rule as required_coverage for optional points"
+      },
+      "noise": {
+        "negative_points": 5,
+        "negative_points_hit": 0,
+        "selected_span_count": 160,
+        "selected_in_scope": 12,
+        "judged_in_scope": 0,
+        "unjudged_in_scope": 12,
+        "noise_spans": 0,
+        "selected_noise_rate": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null,
+          "definition": "selected spans inside the annotation scope that carry a negative golden quote, over all in-scope selected spans judged by any golden point"
+        }
+      },
+      "duplicate": {
+        "duplicate_span_count": 0,
+        "total_selected": 160,
+        "duplicate_ratio": 0.0,
+        "definition": "1 - unique normalized selected texts / selected spans"
+      },
+      "role_confusion": {
+        "count": 0,
+        "golden_ids": []
+      },
+      "modality_confusion": {
+        "count": 0,
+        "golden_ids": []
+      },
+      "bytes": {
+        "selected_utf8_bytes": 11864,
+        "source_raw_bytes": 4756322,
+        "selected_to_source_ratio": 0.002494,
+        "selected_char_count": 4086
+      },
+      "elapsed_seconds": 77.925
+    },
+    {
+      "sample_id": "S07",
+      "doc_type": "investor_relations_valuable",
+      "language": "zh",
+      "source_sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+      "source_byte_size": 153851,
+      "metadata_is_fixture": false,
+      "annotation_scope": {
+        "unit": "pdf_page",
+        "pages_read": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "pages_total": 6,
+        "uncovered": "Full document read.",
+        "ambiguities": [
+          "Record-form content sits inside table cells; the printed page number equals the PDF page index for this document."
+        ]
+      },
+      "parse": {
+        "page_count": 6,
+        "pages_read": 6,
+        "opaque_pages": [],
+        "table_scan_page_count": 6,
+        "deferred_table_pages": [],
+        "line_count": 0,
+        "errors": [],
+        "coverage_complete": true,
+        "parser_name": "selective_narrative_parser",
+        "parser_version": "0.1.0",
+        "selector_name": "select_narrative_evidence",
+        "selector_version": "0.4.0"
+      },
+      "selection": {
+        "status": "needs_review",
+        "document_kind": "investor_relations",
+        "selection_limit": 96,
+        "candidate_count": 13,
+        "source_units": 263,
+        "omitted_candidate_count": 0,
+        "dropped_financial_count": 0,
+        "selected_span_count": 13,
+        "locator_roundtrip_verified": 13,
+        "locator_roundtrip_failed": 0,
+        "coverage_complete": true
+      },
+      "parser_options": {
+        "full_table_scan": true
+      },
+      "golden_results": [
+        {
+          "golden_id": "G-S07-01",
+          "topic": "主营进展",
+          "polarity": "positive",
+          "priority": "required",
+          "negative_kind": null,
+          "expected_role_class": "statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 1
+          },
+          "quote_sha256": "2ae2af6afbaad8f117ae5b28ac013320421685aa68f70b8fccc10ec4d0c905b4",
+          "verified": true,
+          "result": "full",
+          "matched_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:d3d2b33f1d1d422d4318bfce05d4010eed4fcac354618c0a56fdf227b2d1f021"
+          ],
+          "matched_roles": [
+            "management"
+          ],
+          "coverage_ratio": 1.0,
+          "role_confusion": false,
+          "modality_confusion": false
+        },
+        {
+          "golden_id": "G-S07-02",
+          "topic": "新业务/出海",
+          "polarity": "positive",
+          "priority": "required",
+          "negative_kind": null,
+          "expected_role_class": "statement",
+          "modality": "planned",
+          "locator": {
+            "page_number": 6
+          },
+          "quote_sha256": "bfa1e192543e2e40713e1cd2c73885c0e0b4d0da7db6ef2c34234eed980676de",
+          "verified": true,
+          "result": "full",
+          "matched_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:8af8274dafc6fc9f88b2842401a2c410cdbc740cec4a4fd8d5b4d73ab79abda9"
+          ],
+          "matched_roles": [
+            "management"
+          ],
+          "coverage_ratio": 1.0,
+          "role_confusion": false,
+          "modality_confusion": false
+        },
+        {
+          "golden_id": "G-S07-03",
+          "topic": "新业务/出海",
+          "polarity": "positive",
+          "priority": "required",
+          "negative_kind": null,
+          "expected_role_class": "statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 6
+          },
+          "quote_sha256": "8247a247458c09ded2f1210315d6292ae2ee28d136cd8e042fc04d91275a4172",
+          "verified": true,
+          "result": "full",
+          "matched_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:174a1dbc2dd333bf4c47be03ae46290f7d6cc16fd2a56c3a211935d68df93640"
+          ],
+          "matched_roles": [
+            "management"
+          ],
+          "coverage_ratio": 1.0,
+          "role_confusion": false,
+          "modality_confusion": false
+        },
+        {
+          "golden_id": "G-S07-04",
+          "topic": "产能/项目",
+          "polarity": "positive",
+          "priority": "required",
+          "negative_kind": null,
+          "expected_role_class": "statement",
+          "modality": "planned",
+          "locator": {
+            "page_number": 5
+          },
+          "quote_sha256": "46e3b1928335b8badb2fb6655394203d4d6ae0f5ca6a5cf9a1e02a9d05f69de0",
+          "verified": true,
+          "result": "full",
+          "matched_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:62b10040bd561612fff8d79fe9e341f339b31e235ce252b1d0fc4a134779e71b"
+          ],
+          "matched_roles": [
+            "management"
+          ],
+          "coverage_ratio": 1.0,
+          "role_confusion": false,
+          "modality_confusion": false
+        },
+        {
+          "golden_id": "G-S07-05",
+          "topic": "主营进展",
+          "polarity": "positive",
+          "priority": "optional",
+          "negative_kind": null,
+          "expected_role_class": "statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 2
+          },
+          "quote_sha256": "9a7d4a79cf302b488d1dd8d3fdf80f9fe658d870df5a844a56504904be93b879",
+          "verified": true,
+          "result": "miss",
+          "matched_span_ids": [],
+          "matched_roles": [],
+          "coverage_ratio": 0.0192,
+          "role_confusion": false,
+          "modality_confusion": false
+        },
+        {
+          "golden_id": "G-S07-06",
+          "topic": "新业务/出海",
+          "polarity": "positive",
+          "priority": "optional",
+          "negative_kind": null,
+          "expected_role_class": "statement",
+          "modality": "planned",
+          "locator": {
+            "page_number": 3
+          },
+          "quote_sha256": "5a24e710be8b102a99e0f10882abca4e0c48dd0b069f451890cc164015b75e84",
+          "verified": true,
+          "result": "miss",
+          "matched_span_ids": [],
+          "matched_roles": [],
+          "coverage_ratio": 0.0345,
+          "role_confusion": false,
+          "modality_confusion": false
+        },
+        {
+          "golden_id": "G-S07-07",
+          "topic": "提问",
+          "polarity": "positive",
+          "priority": "optional",
+          "negative_kind": null,
+          "expected_role_class": "question",
+          "modality": "question",
+          "locator": {
+            "page_number": 2
+          },
+          "quote_sha256": "19c39048021a3d2d082ca5556a73ed0a0654ee3dbd62ad6c08a5ef0b91b7ffb8",
+          "verified": true,
+          "result": "full",
+          "matched_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:33fba183d9e0b00fa257ab2e3bb8489c47d031554fe2eb70be015d4be89e37ab"
+          ],
+          "matched_roles": [
+            "investor_question"
+          ],
+          "coverage_ratio": 1.0,
+          "role_confusion": false,
+          "modality_confusion": false
+        },
+        {
+          "golden_id": "G-S07-08",
+          "topic": "负例",
+          "polarity": "negative",
+          "priority": "reference",
+          "negative_kind": "procedural_form",
+          "expected_role_class": "statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 1
+          },
+          "quote_sha256": "0cbf6bf13f3c641b33202ee0b9ffd92709c7fba7dde8e1099259c036e1462744",
+          "verified": true,
+          "result": "clean",
+          "matched_span_ids": [],
+          "matched_roles": [],
+          "coverage_ratio": 0.0,
+          "role_confusion": false,
+          "modality_confusion": false
+        },
+        {
+          "golden_id": "G-S07-09",
+          "topic": "负例",
+          "polarity": "negative",
+          "priority": "reference",
+          "negative_kind": "repeated_paragraph",
+          "expected_role_class": "statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 4
+          },
+          "quote_sha256": "84a501f18ba5559834293734bdd0dd4b5662181bdbac110d34db38d5a64ff7c2",
+          "verified": true,
+          "result": "clean",
+          "matched_span_ids": [],
+          "matched_roles": [],
+          "coverage_ratio": 0.0,
+          "role_confusion": false,
+          "modality_confusion": false
+        },
+        {
+          "golden_id": "G-S07-10",
+          "topic": "负例",
+          "polarity": "negative",
+          "priority": "reference",
+          "negative_kind": "procedural_form",
+          "expected_role_class": "statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 6
+          },
+          "quote_sha256": "ca5a44ba713821bb83e6ac7e483fec9b37a7726736c700a53c70ad6dc3fa19ed",
+          "verified": true,
+          "result": "clean",
+          "matched_span_ids": [],
+          "matched_roles": [],
+          "coverage_ratio": 0.0,
+          "role_confusion": false,
+          "modality_confusion": false
+        }
+      ],
+      "required_coverage": {
+        "numerator": 4,
+        "denominator": 4,
+        "rate": 1.0,
+        "unverified_required_excluded": 0,
+        "definition": "required positive golden points that are verified at their locator and fully contained in selected text on the cited page/lines"
+      },
+      "optional_coverage": {
+        "numerator": 1,
+        "denominator": 3,
+        "rate": 0.3333,
+        "definition": "same rule as required_coverage for optional points"
+      },
+      "noise": {
+        "negative_points": 3,
+        "negative_points_hit": 0,
+        "selected_span_count": 13,
+        "selected_in_scope": 13,
+        "judged_in_scope": 5,
+        "unjudged_in_scope": 8,
+        "noise_spans": 0,
+        "selected_noise_rate": {
+          "numerator": 0,
+          "denominator": 5,
+          "rate": 0.0,
+          "definition": "selected spans inside the annotation scope that carry a negative golden quote, over all in-scope selected spans judged by any golden point"
+        }
+      },
+      "duplicate": {
+        "duplicate_span_count": 0,
+        "total_selected": 13,
+        "duplicate_ratio": 0.0,
+        "definition": "1 - unique normalized selected texts / selected spans"
+      },
+      "role_confusion": {
+        "count": 0,
+        "golden_ids": []
+      },
+      "modality_confusion": {
+        "count": 0,
+        "golden_ids": []
+      },
+      "bytes": {
+        "selected_utf8_bytes": 4504,
+        "source_raw_bytes": 153851,
+        "selected_to_source_ratio": 0.029275,
+        "selected_char_count": 1658
+      },
+      "elapsed_seconds": 2.131
+    },
+    {
+      "sample_id": "S08",
+      "doc_type": "investor_relations_procedural",
+      "language": "zh",
+      "source_sha256": "f6d50d717efd5e84e400a28b51bb0c73e2e2a712e828cd3fb6d872469718fd2b",
+      "source_byte_size": 414544,
+      "metadata_is_fixture": false,
+      "annotation_scope": {
+        "unit": "pdf_page",
+        "pages_read": [
+          1,
+          2,
+          3
+        ],
+        "pages_total": 3,
+        "uncovered": "Full document read.",
+        "ambiguities": [
+          "This record is attendance-list heavy with short formulaic answers; only one answer carries a quantified business fact, so the required set is small by design rather than by omission."
+        ]
+      },
+      "parse": {
+        "page_count": 3,
+        "pages_read": 3,
+        "opaque_pages": [],
+        "table_scan_page_count": 3,
+        "deferred_table_pages": [],
+        "line_count": 0,
+        "errors": [],
+        "coverage_complete": true,
+        "parser_name": "selective_narrative_parser",
+        "parser_version": "0.1.0",
+        "selector_name": "select_narrative_evidence",
+        "selector_version": "0.4.0"
+      },
+      "selection": {
+        "status": "needs_review",
+        "document_kind": "investor_relations",
+        "selection_limit": 96,
+        "candidate_count": 1,
+        "source_units": 81,
+        "omitted_candidate_count": 0,
+        "dropped_financial_count": 0,
+        "selected_span_count": 1,
+        "locator_roundtrip_verified": 1,
+        "locator_roundtrip_failed": 0,
+        "coverage_complete": true
+      },
+      "parser_options": {
+        "full_table_scan": true
+      },
+      "golden_results": [
+        {
+          "golden_id": "G-S08-01",
+          "topic": "主营进展",
+          "polarity": "positive",
+          "priority": "required",
+          "negative_kind": null,
+          "expected_role_class": "statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 3
+          },
+          "quote_sha256": "0c2c4ee63cbd8a5a8bb05814389972b82b0d603aa76c5df49d7ba69ed59199c8",
+          "verified": true,
+          "result": "full",
+          "matched_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:d4993e81881bd31e0fe50856d5fb5b5f65b4fb44d96444d68de3ad899c2808c6"
+          ],
+          "matched_roles": [
+            "management"
+          ],
+          "coverage_ratio": 1.0,
+          "role_confusion": false,
+          "modality_confusion": false
+        },
+        {
+          "golden_id": "G-S08-02",
+          "topic": "主营进展",
+          "polarity": "positive",
+          "priority": "optional",
+          "negative_kind": null,
+          "expected_role_class": "statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 2
+          },
+          "quote_sha256": "9b2c3c7c0a8afef5934d6eda33fe2a3bf3af3691e313b00c6e0f71214cc37657",
+          "verified": true,
+          "result": "miss",
+          "matched_span_ids": [],
+          "matched_roles": [],
+          "coverage_ratio": 0.0,
+          "role_confusion": false,
+          "modality_confusion": false
+        },
+        {
+          "golden_id": "G-S08-03",
+          "topic": "负例",
+          "polarity": "negative",
+          "priority": "reference",
+          "negative_kind": "procedural_form",
+          "expected_role_class": "statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 1
+          },
+          "quote_sha256": "cff2931a77340536f073b5d145a34ee9df6bf4404b6c88a84084784aafe19dd0",
+          "verified": true,
+          "result": "clean",
+          "matched_span_ids": [],
+          "matched_roles": [],
+          "coverage_ratio": 0.0,
+          "role_confusion": false,
+          "modality_confusion": false
+        },
+        {
+          "golden_id": "G-S08-04",
+          "topic": "负例",
+          "polarity": "negative",
+          "priority": "reference",
+          "negative_kind": "procedural_form",
+          "expected_role_class": "statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 1
+          },
+          "quote_sha256": "6411d43dc74d33ff5f40f65672599240fa5bf518fe737a4e6e4fa6a5f6a4dd2b",
+          "verified": true,
+          "result": "clean",
+          "matched_span_ids": [],
+          "matched_roles": [],
+          "coverage_ratio": 0.0,
+          "role_confusion": false,
+          "modality_confusion": false
+        },
+        {
+          "golden_id": "G-S08-05",
+          "topic": "负例",
+          "polarity": "negative",
+          "priority": "reference",
+          "negative_kind": "legal_boilerplate",
+          "expected_role_class": "statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 3
+          },
+          "quote_sha256": "5244012503328149614cb87f75ffadb2682a758ed7fde186149bd2a78c18fe33",
+          "verified": true,
+          "result": "noise",
+          "matched_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:d4993e81881bd31e0fe50856d5fb5b5f65b4fb44d96444d68de3ad899c2808c6"
+          ],
+          "matched_roles": [
+            "management"
+          ],
+          "coverage_ratio": 1.0,
+          "role_confusion": false,
+          "modality_confusion": false
+        },
+        {
+          "golden_id": "G-S08-06",
+          "topic": "负例",
+          "polarity": "negative",
+          "priority": "reference",
+          "negative_kind": "repeated_paragraph",
+          "expected_role_class": "statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 3
+          },
+          "quote_sha256": "f2e4806563cba843a3d2b05b72646d8d6b0684928b38f1590b647e8c145891fb",
+          "verified": true,
+          "result": "noise",
+          "matched_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:d4993e81881bd31e0fe50856d5fb5b5f65b4fb44d96444d68de3ad899c2808c6"
+          ],
+          "matched_roles": [
+            "management"
+          ],
+          "coverage_ratio": 1.0,
+          "role_confusion": false,
+          "modality_confusion": false
+        },
+        {
+          "golden_id": "G-S08-07",
+          "topic": "负例",
+          "polarity": "negative",
+          "priority": "reference",
+          "negative_kind": "procedural_form",
+          "expected_role_class": "statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 2
+          },
+          "quote_sha256": "0cbf6bf13f3c641b33202ee0b9ffd92709c7fba7dde8e1099259c036e1462744",
+          "verified": true,
+          "result": "clean",
+          "matched_span_ids": [],
+          "matched_roles": [],
+          "coverage_ratio": 0.0,
+          "role_confusion": false,
+          "modality_confusion": false
+        },
+        {
+          "golden_id": "G-S08-08",
+          "topic": "负例",
+          "polarity": "negative",
+          "priority": "reference",
+          "negative_kind": "procedural_form",
+          "expected_role_class": "statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 3
+          },
+          "quote_sha256": "e5b6b54df142fe778ac602ab53cd21c87b62c798def598163113c5c864f00d5c",
+          "verified": true,
+          "result": "clean",
+          "matched_span_ids": [],
+          "matched_roles": [],
+          "coverage_ratio": 0.0,
+          "role_confusion": false,
+          "modality_confusion": false
+        }
+      ],
+      "required_coverage": {
+        "numerator": 1,
+        "denominator": 1,
+        "rate": 1.0,
+        "unverified_required_excluded": 0,
+        "definition": "required positive golden points that are verified at their locator and fully contained in selected text on the cited page/lines"
+      },
+      "optional_coverage": {
+        "numerator": 0,
+        "denominator": 1,
+        "rate": 0.0,
+        "definition": "same rule as required_coverage for optional points"
+      },
+      "noise": {
+        "negative_points": 6,
+        "negative_points_hit": 2,
+        "selected_span_count": 1,
+        "selected_in_scope": 1,
+        "judged_in_scope": 1,
+        "unjudged_in_scope": 0,
+        "noise_spans": 1,
+        "selected_noise_rate": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0,
+          "definition": "selected spans inside the annotation scope that carry a negative golden quote, over all in-scope selected spans judged by any golden point"
+        }
+      },
+      "duplicate": {
+        "duplicate_span_count": 0,
+        "total_selected": 1,
+        "duplicate_ratio": 0.0,
+        "definition": "1 - unique normalized selected texts / selected spans"
+      },
+      "role_confusion": {
+        "count": 0,
+        "golden_ids": []
+      },
+      "modality_confusion": {
+        "count": 0,
+        "golden_ids": []
+      },
+      "bytes": {
+        "selected_utf8_bytes": 591,
+        "source_raw_bytes": 414544,
+        "selected_to_source_ratio": 0.001426,
+        "selected_char_count": 219
+      },
+      "elapsed_seconds": 0.642
+    },
+    {
+      "sample_id": "S09",
+      "doc_type": "investor_call_transcript",
+      "language": "en",
+      "source_sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+      "source_byte_size": 66324,
+      "metadata_is_fixture": false,
+      "annotation_scope": {
+        "unit": "txt_line",
+        "lines_read": [
+          [
+            1,
+            60
+          ],
+          [
+            108,
+            157
+          ],
+          [
+            176,
+            289
+          ]
+        ],
+        "lines_total": 340,
+        "uncovered": "Lines 61-107 (glossary), 158-175 and 290-340 were not read in full.",
+        "ambiguities": [
+          "The parser starts at the first 'Full Conference Call Transcript' line (line 124); the highlight block at lines 26-60 precedes it. Points in that block are tagged parser_region=before_transcript_start so a miss can be attributed to parser scope rather than selector choice."
+        ]
+      },
+      "parse": {
+        "page_count": 0,
+        "pages_read": 0,
+        "opaque_pages": [],
+        "table_scan_page_count": 0,
+        "deferred_table_pages": [],
+        "line_count": 340,
+        "errors": [],
+        "coverage_complete": true,
+        "parser_name": "selective_narrative_parser",
+        "parser_version": "0.1.0",
+        "selector_name": "select_narrative_evidence",
+        "selector_version": "0.4.0"
+      },
+      "selection": {
+        "status": "selected",
+        "document_kind": "investor_call_transcript",
+        "selection_limit": 96,
+        "candidate_count": 49,
+        "source_units": 498,
+        "omitted_candidate_count": 0,
+        "dropped_financial_count": 0,
+        "selected_span_count": 49,
+        "locator_roundtrip_verified": 49,
+        "locator_roundtrip_failed": 0,
+        "coverage_complete": true
+      },
+      "parser_options": {},
+      "golden_results": [
+        {
+          "golden_id": "G-S09-01",
+          "topic": "主营进展",
+          "polarity": "positive",
+          "priority": "required",
+          "negative_kind": null,
+          "expected_role_class": "statement",
+          "modality": "actual",
+          "locator": {
+            "line_start": 30,
+            "line_end": 30,
+            "parser_region": "before_transcript_start",
+            "byte_start": 991,
+            "byte_end": 1118
+          },
+          "quote_sha256": "df755df66e6545642484195b79122ed3372f45b6b68ded4d0d30e365c549bba0",
+          "verified": true,
+          "result": "miss",
+          "matched_span_ids": [],
+          "matched_roles": [],
+          "coverage_ratio": 0.0,
+          "role_confusion": false,
+          "modality_confusion": false
+        },
+        {
+          "golden_id": "G-S09-02",
+          "topic": "产能/项目",
+          "polarity": "positive",
+          "priority": "required",
+          "negative_kind": null,
+          "expected_role_class": "statement",
+          "modality": "actual",
+          "locator": {
+            "line_start": 138,
+            "line_end": 138,
+            "parser_region": "prepared_remarks",
+            "byte_start": 10913,
+            "byte_end": 11073
+          },
+          "quote_sha256": "8ee17207751ef15143fa01fa10e7c0e40d6db3899aa69a8dbd21792d00109b0f",
+          "verified": true,
+          "result": "full",
+          "matched_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:844c6b89f278d854d8e774df460a6eab600db1c5bee5b442eb9852b17fc88d9d"
+          ],
+          "matched_roles": [
+            "management"
+          ],
+          "coverage_ratio": 1.0,
+          "role_confusion": false,
+          "modality_confusion": false
+        },
+        {
+          "golden_id": "G-S09-03",
+          "topic": "业绩指引",
+          "polarity": "positive",
+          "priority": "required",
+          "negative_kind": null,
+          "expected_role_class": "statement",
+          "modality": "forecast",
+          "locator": {
+            "line_start": 226,
+            "line_end": 226,
+            "parser_region": "parsed",
+            "byte_start": 41662,
+            "byte_end": 41751
+          },
+          "quote_sha256": "5708c43149bf175e4c62816a8f077aaf746fcc40f33d024090e2158109cdca99",
+          "verified": true,
+          "result": "miss",
+          "matched_span_ids": [],
+          "matched_roles": [],
+          "coverage_ratio": 0.1096,
+          "role_confusion": false,
+          "modality_confusion": false
+        },
+        {
+          "golden_id": "G-S09-04",
+          "topic": "业绩指引",
+          "polarity": "positive",
+          "priority": "required",
+          "negative_kind": null,
+          "expected_role_class": "statement",
+          "modality": "forecast",
+          "locator": {
+            "line_start": 222,
+            "line_end": 222,
+            "parser_region": "parsed",
+            "byte_start": 40209,
+            "byte_end": 40285
+          },
+          "quote_sha256": "6ce9141b925bd447a1e56d2386bec94a7a999edc9cf4af55963e3e827da7d0d5",
+          "verified": true,
+          "result": "full",
+          "matched_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:77f6a2bc38fdebb08b7a9d1bd13ec61c5d9a9f58b604799f81bdb05cdf65a0c1"
+          ],
+          "matched_roles": [
+            "management"
+          ],
+          "coverage_ratio": 1.0,
+          "role_confusion": false,
+          "modality_confusion": false
+        },
+        {
+          "golden_id": "G-S09-05",
+          "topic": "主营进展",
+          "polarity": "positive",
+          "priority": "required",
+          "negative_kind": null,
+          "expected_role_class": "statement",
+          "modality": "actual",
+          "locator": {
+            "line_start": 200,
+            "line_end": 200,
+            "parser_region": "parsed",
+            "byte_start": 32538,
+            "byte_end": 32593
+          },
+          "quote_sha256": "8479930a13d519e64d5930202d10c72ff7473d941965a1897d96b24d208022be",
+          "verified": true,
+          "result": "full",
+          "matched_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:4cad6d49bfa376c83ceffc78552d95bde7f9adabd2b5817cc8f6b18a9c55fcc1"
+          ],
+          "matched_roles": [
+            "management"
+          ],
+          "coverage_ratio": 1.0,
+          "role_confusion": false,
+          "modality_confusion": false
+        },
+        {
+          "golden_id": "G-S09-06",
+          "topic": "提问",
+          "polarity": "positive",
+          "priority": "optional",
+          "negative_kind": null,
+          "expected_role_class": "question",
+          "modality": "question",
+          "locator": {
+            "line_start": 252,
+            "line_end": 252,
+            "parser_region": "parsed",
+            "byte_start": 47440,
+            "byte_end": 47490
+          },
+          "quote_sha256": "6e197a19e908f218623ee30c69df692b4ee536eae126354f1d3851fae96b9e6f",
+          "verified": true,
+          "result": "full",
+          "matched_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:c6c5bab70d26c25eebefa45577d5e7d195310c85a9ea79471eb798fc18feb904"
+          ],
+          "matched_roles": [
+            "analyst"
+          ],
+          "coverage_ratio": 1.0,
+          "role_confusion": false,
+          "modality_confusion": false
+        },
+        {
+          "golden_id": "G-S09-07",
+          "topic": "产能/项目",
+          "polarity": "positive",
+          "priority": "optional",
+          "negative_kind": null,
+          "expected_role_class": "statement",
+          "modality": "planned",
+          "locator": {
+            "line_start": 208,
+            "line_end": 208,
+            "parser_region": "parsed",
+            "byte_start": 36044,
+            "byte_end": 36139
+          },
+          "quote_sha256": "9a5b0478287345ecc4cc3bfc062089d15f0839e638e5521905e5d710f5eb40d2",
+          "verified": true,
+          "result": "miss",
+          "matched_span_ids": [],
+          "matched_roles": [],
+          "coverage_ratio": 0.1585,
+          "role_confusion": false,
+          "modality_confusion": false
+        },
+        {
+          "golden_id": "G-S09-08",
+          "topic": "负例",
+          "polarity": "negative",
+          "priority": "reference",
+          "negative_kind": "legal_boilerplate",
+          "expected_role_class": "statement",
+          "modality": "actual",
+          "locator": {
+            "line_start": 132,
+            "line_end": 132,
+            "parser_region": "parsed",
+            "byte_start": 9614,
+            "byte_end": 9754
+          },
+          "quote_sha256": "38c8613e95109e8b4c707dd2fea6fbc504713b1de240c257c5c1c28e565233b0",
+          "verified": true,
+          "result": "clean",
+          "matched_span_ids": [],
+          "matched_roles": [],
+          "coverage_ratio": 0.0,
+          "role_confusion": false,
+          "modality_confusion": false
+        },
+        {
+          "golden_id": "G-S09-09",
+          "topic": "负例",
+          "polarity": "negative",
+          "priority": "reference",
+          "negative_kind": "legal_boilerplate",
+          "expected_role_class": "statement",
+          "modality": "actual",
+          "locator": {
+            "line_start": 134,
+            "line_end": 134,
+            "parser_region": "parsed",
+            "byte_start": 9870,
+            "byte_end": 9971
+          },
+          "quote_sha256": "4bef2c6d6407803f020fcea9c197e81c066c36951b104e0c47bf3dce5a9d3222",
+          "verified": true,
+          "result": "clean",
+          "matched_span_ids": [],
+          "matched_roles": [],
+          "coverage_ratio": 0.0,
+          "role_confusion": false,
+          "modality_confusion": false
+        },
+        {
+          "golden_id": "G-S09-10",
+          "topic": "负例",
+          "polarity": "negative",
+          "priority": "reference",
+          "negative_kind": "procedural_form",
+          "expected_role_class": "statement",
+          "modality": "actual",
+          "locator": {
+            "line_start": 126,
+            "line_end": 126,
+            "parser_region": "parsed",
+            "byte_start": 7385,
+            "byte_end": 7482
+          },
+          "quote_sha256": "c6e4999a911db6ec09bb58f55774f2295951a42937b3c06edead37bc61d4830f",
+          "verified": true,
+          "result": "clean",
+          "matched_span_ids": [],
+          "matched_roles": [],
+          "coverage_ratio": 0.0,
+          "role_confusion": false,
+          "modality_confusion": false
+        },
+        {
+          "golden_id": "G-S09-11",
+          "topic": "负例",
+          "polarity": "negative",
+          "priority": "reference",
+          "negative_kind": "metadata_header",
+          "expected_role_class": "statement",
+          "modality": "actual",
+          "locator": {
+            "line_start": 8,
+            "line_end": 8,
+            "parser_region": "before_transcript_start",
+            "byte_start": 293,
+            "byte_end": 328
+          },
+          "quote_sha256": "8615205acfa30d2f71f6368bcff2c77a020d9880cc4dd54ab8a702245d8f1ef7",
+          "verified": true,
+          "result": "clean",
+          "matched_span_ids": [],
+          "matched_roles": [],
+          "coverage_ratio": 0.0,
+          "role_confusion": false,
+          "modality_confusion": false
+        },
+        {
+          "golden_id": "G-S09-12",
+          "topic": "负例",
+          "polarity": "negative",
+          "priority": "reference",
+          "negative_kind": "procedural_form",
+          "expected_role_class": "statement",
+          "modality": "actual",
+          "locator": {
+            "line_start": 14,
+            "line_end": 14,
+            "parser_region": "before_transcript_start",
+            "byte_start": 467,
+            "byte_end": 484
+          },
+          "quote_sha256": "84e06e33e7449c79645090476411afa132c5046e1280b0c8b85d9e1f9ee64d1e",
+          "verified": true,
+          "result": "clean",
+          "matched_span_ids": [],
+          "matched_roles": [],
+          "coverage_ratio": 0.0,
+          "role_confusion": false,
+          "modality_confusion": false
+        }
+      ],
+      "required_coverage": {
+        "numerator": 3,
+        "denominator": 5,
+        "rate": 0.6,
+        "unverified_required_excluded": 0,
+        "definition": "required positive golden points that are verified at their locator and fully contained in selected text on the cited page/lines"
+      },
+      "optional_coverage": {
+        "numerator": 1,
+        "denominator": 2,
+        "rate": 0.5,
+        "definition": "same rule as required_coverage for optional points"
+      },
+      "noise": {
+        "negative_points": 5,
+        "negative_points_hit": 0,
+        "selected_span_count": 49,
+        "selected_in_scope": 48,
+        "judged_in_scope": 4,
+        "unjudged_in_scope": 44,
+        "noise_spans": 0,
+        "selected_noise_rate": {
+          "numerator": 0,
+          "denominator": 4,
+          "rate": 0.0,
+          "definition": "selected spans inside the annotation scope that carry a negative golden quote, over all in-scope selected spans judged by any golden point"
+        }
+      },
+      "duplicate": {
+        "duplicate_span_count": 0,
+        "total_selected": 49,
+        "duplicate_ratio": 0.0,
+        "definition": "1 - unique normalized selected texts / selected spans"
+      },
+      "role_confusion": {
+        "count": 0,
+        "golden_ids": []
+      },
+      "modality_confusion": {
+        "count": 0,
+        "golden_ids": []
+      },
+      "bytes": {
+        "selected_utf8_bytes": 7235,
+        "source_raw_bytes": 66324,
+        "selected_to_source_ratio": 0.109086,
+        "selected_char_count": 7235
+      },
+      "elapsed_seconds": 1.81
+    }
+  ],
+  "baseline": "3f0bc2a87a74487860a64d3e352e0ac3f2963399",
+  "card_baseline": "e46108b4f30d5b7e47bfc712e360f173c00b702c",
+  "runtime_code_sha256": {
+    "run_benchmark.py": "5da181c99d3a95d35c9b1acd9b45bf4ff62cfd1c2915c0a9543da5bed4d98b1a",
+    "evaluator.py": "afe8262e18a3a6e20fa35cfd2879dac8abb8a50c96f9388884275737a985f966",
+    "narrative_evidence.py": "4919521ca0bce861a6bdd637767e3ce169775c4af36352ae2a76e7374041cd4e"
+  },
+  "generated_at": "2026-10-06T23:15:10+00:00",
+  "runner": "benchmarks/narrative_document_types/run_benchmark.py",
+  "parser": {
+    "name": "selective_narrative_parser",
+    "version": "0.1.0"
+  },
+  "selector": {
+    "name": "select_narrative_evidence",
+    "version": "0.4.0"
+  },
+  "scope": {
+    "definition": "9 real originals across annual/semi/quarterly/prospectus/equity-offering/convertible/procedural-IR/valuable-IR/earnings-call types. Golden points were written after reading the cited pages or lines; the selector output was never used as the answer key. Coverage denominators only count golden points that are verified at their cited locator and that sit inside the sample's declared read_scope; noise and duplicate denominators are stated per row.",
+    "denominators": {
+      "required_coverage": "verified required positive golden points inside the declared read_scope of each sample",
+      "selected_noise_rate": "in-scope selected spans that carry at least one golden point (positive or negative)",
+      "duplicate_ratio": "all selected spans of the sample",
+      "source_bytes": "byte_size of the registered original"
+    },
+    "samples_declared": 9,
+    "samples_evaluated": 9,
+    "golden_points_declared": 86
+  },
+  "real_vs_fixture": {
+    "real_originals_read": 9,
+    "synthetic_samples": 0,
+    "metadata_is_fixture_samples": [],
+    "notes": [
+      "Every sample is a real on-disk original opened read-only from a root in local.json.",
+      "SHA-256 and byte size are checked before parsing and again after the run.",
+      "Golden quotes are re-read from the original at their cited locator on every run."
+    ]
+  },
+  "original_fingerprints": {
+    "S01": {
+      "sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "byte_size": 9165875,
+      "mtime_ns": 1775986949114724400
+    },
+    "S02": {
+      "sha256": "91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+      "byte_size": 6361468,
+      "mtime_ns": 1775986992765548800
+    },
+    "S03": {
+      "sha256": "ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+      "byte_size": 217264,
+      "mtime_ns": 1779046989673803600
+    },
+    "S04": {
+      "sha256": "19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+      "byte_size": 11211796,
+      "mtime_ns": 1776287132568457600
+    },
+    "S05": {
+      "sha256": "cd803fe9528f4646f8f29b518a450ae4bd5b5968c482eb49789f9786b523595b",
+      "byte_size": 5595592,
+      "mtime_ns": 1671984894000000000
+    },
+    "S06": {
+      "sha256": "c6ed566631e123f159abf2697c157f1868f8e994ccf8e3352132046a6c5ca0a1",
+      "byte_size": 4756322,
+      "mtime_ns": 1664747887000000000
+    },
+    "S07": {
+      "sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+      "byte_size": 153851,
+      "mtime_ns": 1779228233262998600
+    },
+    "S08": {
+      "sha256": "f6d50d717efd5e84e400a28b51bb0c73e2e2a712e828cd3fb6d872469718fd2b",
+      "byte_size": 414544,
+      "mtime_ns": 1780086651533168000
+    },
+    "S09": {
+      "sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+      "byte_size": 66324,
+      "mtime_ns": 1788471885465276900
+    }
+  },
+  "elapsed_seconds": 403.731,
+  "temp_peak_bytes": 60660,
+  "limitations": [
+    "A targeted read of the cited sections, not an exhaustive read of every page of every filing; uncovered ranges are recorded per sample.",
+    "A golden miss means the selector did not reproduce the quoted passage inside its selected spans, not that the passage is unimportant.",
+    "Noise rate is judged only over in-scope selected spans that a golden point can adjudicate; unjudged in-scope spans are reported separately.",
+    "Locators use the 1-based PDF page index, which can differ from the printed folio on the page.",
+    "No model call, no network, and no download is performed by this runner.",
+    "modality_confusion measures question/statement role mismatches only; actual/planned/forecast/negation qualifiers are annotations, not automatically validated semantics.",
+    "temp_peak_bytes measures this runner's sampled scratch files, not process memory, parser internals, or production storage."
+  ],
+  "output_scope": "source-only",
+  "modality_measurement_scope": "question_statement_role_only"
+}

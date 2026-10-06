@@ -39,3 +39,7 @@ python -B -m pytest -p no:cacheprovider --basetemp tmp/n6be tests/integration/te
 框架complete：首次RED为既有私有测试helper缺少timeout_seconds参数（不是产品失败）；新增可选参数保持原默认60秒。首次框架1 passed/27.79秒；检查RF已提交实际context后发现绑定投影假设与range形状不符，修正并在合成TXT中实测原字节→material映射，最终1 passed/27.65秒、1真实节点deselected、Ruff绿。三份合成原件/3次本地POST，恢复不重复调用；RF六个已提交模块只导出到tmp。无真实供应商调用或费用，无日常CI新增长测。最终真实质量节点pending，仍待新selector代码。同步沿用上一轮冻结compat9项，合入后才重跑。
 
 代码13bba07已推master，精确CI37534879855一次成功/job74秒；[完整收据](harness_lanes/results/n6_main_business_framework_2026-10-06.json)。三个本线tmp测试根恢复absent，生产/原件/owner指纹保持，用户config仍原独立dirty状态。
+
+## 2026-10-07 当前真实节点已执行
+
+实际0.4.0候选/预算组合后真实年报S01、IR S07、原始英文TXT S09经configured Worker/outbox→CWP→导出的已提交RF6e6b817a consumer→search/exact→同run恢复通过；四个业务断言（EPI量产验证、境内22%、中试线计划、capacity constraint）全部full，不删断言凑绿。三次本地loopback POST，原语言、不翻译、0供应商/费用。首次两次因产品选材失败而RED，按句补全理由/组和预算责任层修正后，真实节点+冻结旧final9+实际AUTO升级1共11 passed/66.48秒。框架与新selector的业务路径现已实测；不能把这当所有文档覆盖或供应商摘要质量。最终基准剩余项与精确发布CI跟随n6_candidate_main_acceptance_2026-10-07.md，不再等待候选bootstrap。

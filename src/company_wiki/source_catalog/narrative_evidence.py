@@ -49,6 +49,7 @@ from .narrative_routing import (
 NARRATIVE_PARSER_NAME = "selective_narrative_parser"
 NARRATIVE_PARSER_VERSION = "0.1.0"
 NARRATIVE_SELECTOR_NAME = "select_narrative_evidence"
+# 0.4.0 completes bounded business facts and preserves discourse boundaries.
 # 0.3.3 adds context-safe whole-group dedup and fixed-budget category fairness.
 # 0.3.2 adds concrete English operating actions and adoption, without brand rules.
 # 0.3.1 recognizes administrative English IR policy titles; 0.3.0 added
@@ -56,7 +57,7 @@ NARRATIVE_SELECTOR_NAME = "select_narrative_evidence"
 # and keeps unrecognized business documents reviewable. The version also pins
 # batch generation identity, so old selection results cannot be silently reused.
 # Parsing, source bytes and locator construction remain unchanged.
-NARRATIVE_SELECTOR_VERSION = "0.3.3"
+NARRATIVE_SELECTOR_VERSION = "0.4.0"
 _FINANCIAL_TERMS = re.compile(
     r"资产负债表|利润表|现金流量表|每股收益|归母净利润|营业收入|营业成本|"
     r"货币资金|应收账款|存货|固定资产|加权平均|基本每股|稀释每股|"
@@ -321,7 +322,9 @@ _PERMIT_ACQUIRED_MILESTONE = re.compile(
 _NEW_PRODUCT_COMMERCIALIZATION = re.compile(
     r"(?:新产品|新业务).{0,36}(?:量产|试产|投产|实现销售|终端客户.{0,10}认证)|"
     r"(?:量产|试产|投产|实现销售).{0,24}(?:新产品|新业务)|"
-    r"新产品.{0,36}(?:通过|获得|完成).{0,12}(?:客户|产品)?认证",
+    r"新产品.{0,36}(?:通过|获得|完成).{0,12}(?:客户|产品)?认证|"
+    r"(?:设备|产品|型号|机型).{0,24}(?:已|已经)(?:进入|通过|完成|获得)"
+    r".{0,16}(?:客户端|客户|量产|试产).{0,8}(?:验证|认证)",
     re.IGNORECASE,
 )
 _NAMED_PRODUCT_CONTEXT = re.compile(

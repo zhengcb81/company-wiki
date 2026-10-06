@@ -66,3 +66,11 @@ python -m pytest -p no:cacheprovider --basetemp tmp/docset-next-tests benchmarks
 MAIN先行材料：[0.3.2冻结final兼容](n6_main_compatibility_implementation.md)、[33点统一业务解释](n6_main_business_expectations_2026-10-06.md)。9项兼容测试已绿；最终新代码仍要重跑该责任包。原required33、旧报告及golden不改，scope/纯财务边界不靠减分母让报告变绿。
 
 另有[正式业务E2E框架](n6_main_business_e2e_implementation.md)已合成三文档27.65秒绿/13bba07精确CI74秒绿、[执行升级隔离](n6_main_upgrade_execution_implementation.md)纯流程PDF16.33秒绿。后者真实AUTO运行当前与模拟下一版本，证明新旧job/artifact独立、旧ref可读、同run恢复幂等，不证明外线未交付的业务规则。最终只在大节点重跑这些MAIN责任包，不扩日常CI。
+
+## 2026-10-07 当前MAIN执行覆盖旧“待交付”状态
+
+三条N6线已交付。候选f31cc0d已实际merge（实现9a4b815），预算/空间此前已发布；共享selector0.4.0，原parser0.1.0和96/160不变。MAIN按责任反例修正8-unit边界、discourse/来源/语言关联、注入规则、忙页下一类别offer、局部句子分类与句子组（不能继承全页milestone）、量产验证与一般工程时间表以及全部fact reasons传播。269项2.81秒、Ruff与8源模块mypy绿；真实S01/S07/S09四个业务点正式Worker→RF/search/exact→恢复+旧final9+AUTO升级1共11项66.48秒绿。
+
+首次完整基准18/33，但有年报G04回退和混合IR噪声；已保留报告与RED，不能当S7收官。责任修正后最终基准执行中，最终覆盖及remaining见n6_candidate_main_acceptance_2026-10-07.md及结果JSON。后续施工以最终逐点差距为准，不重派已交卡，不重复旧兼容长测。重点剩余：融资/招股的具体项目/产能与行业事实阶段归因，以及S08数字编号Q&A/混合cell的可回放拆分（必须先写parser/fragment/旧final合同测试，不能静默改变0.1.0解析去掩盖噪声）。parser版本若确需升级，由MAIN统一梳理原locator旧回放/批次身份传播，消费者继续pathless不猜目录。
+
+每个后续缺口先在同原件有限表页做parsed/candidate/selected小探针，保留原golden/hash/33分母，附一般表达反例再修责任层；修成一组后才跑受影响真实入口或全九样本节点，避免一helper一全表。四个scope/纯财务点继续按33点解释记录，不强行补provider前言或财务金额。此质量卡仍in_progress，工具/传输与具体业务覆盖分别验收。

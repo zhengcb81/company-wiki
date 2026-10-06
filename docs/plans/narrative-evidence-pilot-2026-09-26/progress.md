@@ -1101,3 +1101,19 @@ FOOTPRINT已实际推cf24f3455f01b5e143107f1584cc47fa1ceb9d83，精确CI37542743
 实际预算并线提交3cd49606eee2a9b752bc5f22bf84ca00bb5d8ba4已推master，正常commit/pre-push绿；远端master实读一致，两外线分支均为master祖先。空间CI37542743196全步骤绿68秒。只读发现候选线新交接ce61cdd（实现9a4b815）已存在，下一MAIN验收而非重派/等bootstrap；本回合不抢其写集。暂记预算CI37543349021运行中，结果以最终收据为准。
 
 最终预算精确CI37543349021 attempt1全部step/job success，job112541358759/72秒，实际代码3cd4960与远端一致；空间cf24f34同样全绿68秒，收据均published_ci_passed。API复用同URL曾返回过时in_progress；用nonce/no-cache核当前状态与精确head/全部steps，不把旧缓存当CI仍在执行。RF三owner实际SHA与前一收据一致，用户config SHA3609e707保持。最后纯文档skip ci发布，不重复已绿代码CI。导入预算PWF曾有末尾多空行导致diff --check提示，MAIN只去掉空白，未改owner施工树；最终diff绿。
+
+## 2026-10-07 — N6-CANDIDATE MAIN集中验收启动
+
+只读核交接f31cc0d（实现9a4b815），实际无冲突merge到MAIN待验收。先写11个边界用例，旧实现9失败/2通过/0.82秒：八片段上限多取一个、英语句号不终止、跨问答/发言人/section补全、绕过注入detector、跨来源/语言关联问题。按测试修正，原golden与96/160预算不动；详细执行单n6_candidate_main_acceptance_2026-10-07.md。用户source_acquisition.yaml和RF三owner文件继续保护。S7尚未完成，不拿旧DOCSET CI替代新代码验收。
+
+组合真实E2E首次1失败/10通过/54.16秒：旧final9与实际AUTO升级1均绿，失败在G-S01-02 EPI完整业务断言，不改断言。默认解析诊断annual396候选/393去重/96精选，EPI位于page40 paragraph8，真实原文完整但仅event分类且budget_full；页40其他项目/并购同样遭截断。补两个独立合成责任反例：忙页第二category仍须进入预算竞争、设备客户端量产验证必须作产品里程碑。两者明确RED（测试夹具最初漏language/错误coverage字段已修复后才确认产品RED）。九样本全表原运行仍在执行，源代码待其结束后集中修正，避免运行期间混合源码。
+
+首次正式九样本全表403.731秒：required18/33（旧12/33）、764定位零失败、重复3（旧48）、精选67047B。不能宣告质量完成：G-S01-04旧full退为miss，S08增加两条套话噪声，EPI真实E2E失败。保留初次报告n6_combined_quality_initial_2026-10-07.json供对比。两个责任RED修正后266项2.98秒绿：客户端量产验证按一般产品里程碑分类（无公司名规则），soft quota有效时忙页即时重offer下一category，保留同category/page轮转与极小budget历史策略。等待真实E2E责任重验，先做定位诊断，集中修正后再做最终全表一次，不逐helper重复。
+
+忙页/产品分类修正后真实E2E仍失败EPI（1失败/10通过/53秒），未隐瞒或放松。深入抓包发现whole-page completion继承全页理由，普通尾句变product_milestone且score20，挤掉真实EPI score11。新增局部理由反例明确RED后修正按句计算topics/reasons/score与sentence group，EPI默认解析短探针已full。补工程时间表反例与多reason注入反例两RED，修正一般开工→未来建成/投产分类（保留计划原文），已有candidate保留所有窗口reason，避免只保留第一条而丢产品/项目语义。最终269责任项2.81秒、全CI范围Ruff及8模块mypy绿。
+
+S08新增噪声实证来自一个orphan_answer_needs_review的pdf_table_qa_fragment：旧parser不识别“4：/5：”问题，219字整cell包含有价值占比+两段套话；不是跨speaker拼接。不得为此删整条事实或放宽定位；QA解析/局部可回放单元整改进入S7 remaining，原golden/噪声计数保留，不改parser/version来掩盖。集中修改后启动最终全九样本（另存final报告）与真实E2E+旧9+升级1责任复验，不加CI长套件。
+
+最终九样本全表372.044秒：21/33（旧12/33）、optional5/17（旧4/17），全部旧full无回退，764 locator/0失败，重复3（旧48），精选66195B，scratch峰值61277B。正式业务节点+旧9+升级1共11项66.48秒绿。业务/项目上下文解释子集20/29（不改33分母），remaining9个业务点详见验收单；3噪声为年报重复1与S08 orphan cell两条套话，保留原标注。实现可正常合入，S7语义整改不complete。
+
+已验证绝对路径均在本仓tmp且无root/子级reparse，n6cr/ct/ce与n6q-input/scratch/final-scratch/report/final-report均恢复absent；自己的pytest新副本、DB、包装配置/报告临时副本删除，保留≤2MiB小报告/逐点收据，原件与RF三owner/user config保护不变。初次清理PowerShell foreach直接pipe语法错误发生在任何删除前，包数组后执行成功；不碰其他并发tmp。准备正常merge commit/push，日常CI没有新增长套件。

@@ -8,11 +8,11 @@
 
 一个下载请求入口、一套 pathless 来源接口、一套 AUTO 任务系统；按需处理有价值的业务叙述，停止全量永久 PDF→MD 和重复正文。原件及来源/版本事实不丢。company-wiki 只供应资料和可定位证据，投资研究语义属于 StockWiki。
 
-## 当前恢复点（2026-10-06）
+## 当前恢复点（2026-10-07）
 
 - DOCSET真实merge `58b74d07dd4f8b589c134ef9060a689864a8c089`已推master，精确CI37528050044一次成功/75秒；43不同责任case和真实9样本已接收，工具完成而质量required12/33仍待改。MAIN先行兼容/业务标准已发布`0947cea63140d515620f563daf2058f4520cd6a3`、精确CI37532408169一次成功/80秒，无运行代码变更。RAW-DUP a41244a/CI57秒、R6 eae2dd4/CI59秒等已完成证据不重跑。
 - RF 正式 main `6e6b817a1a6e4567293a4dcb835815f3be508a03`，已有默认 v2 与真实原文读取验收；FF main `758e8f4`，ET 本地/真实远端 main 已快进到 `2b9fb84660f98ce27a05709a7e31342ab044b4d2`，包含 N5-ET-TXT。不要重派已完成交付。
-- 当前 RF 正常用户上下文只有两份 owner weekly 日志修改，本线不改；旧 rf-impl WIP 保存在独立分支。本机 CWP `config/source_acquisition.yaml` 是用户改动，SHA `3609e707466eeb3e0f685e14f2637c6afa39ba900edef1be4814433a43300a01`，不暂存、不覆盖。
+- 当前 RF 正常用户上下文有三份 owner daily/weekly/manifest 日志修改，本线不改；旧 rf-impl WIP 保存在独立分支。本机 CWP `config/source_acquisition.yaml` 是用户改动，SHA `3609e707466eeb3e0f685e14f2637c6afa39ba900edef1be4814433a43300a01`，不暂存、不覆盖。
 - S4 修复后真实电话会 run10 已完成：20 条摘要、15 条管理层陈述、46 个定位全部回放，RF 正式读取通过；六类业务主题精选6/6、短摘要5/6，GPU效率未单列，不能声称穷尽。完成审计发现R6具体缺口，现已TDD修复并发布/精确CI绿，S4关闭；其余核心证据不重做。N5-RAW-DUP完整交付已集中修正/51项绿，已合入master a41244a并推远端、精确CI37523080920/57秒绿；DOCSET已接收并推58b74d0/CI75秒绿，当前required12/33按S7/N6整改，整体目标active。
 
 ## 已批准预算与配置
@@ -89,10 +89,16 @@ TDD 框住具体公开行为。只在 N4 A/B/C、存储迁移等大节点集中�
 
 ## Next Step
 
-**验收 N6-CANDIDATE 的新交接 ce61cdd，随后执行 S7 一个集中质量节点。** N6-FOOTPRINT 已合入/推 cf24f34，精确 CI37542743196 全步骤成功/68秒，52项责任测试绿；N6-BUDGET 18dbd0e 已交付，MAIN 修正后145项/7.46秒及真实电话会+AUTO升级2项/23.73秒绿，selector0.3.3，已正常并线/推3cd4960，精确CI37543349021全部步骤绿/72秒。详见[n6 MAIN验收](n6_budget_footprint_main_acceptance.md)。
+**N6-CANDIDATE 本地集中验收已通过，完成正常并线提交/推送与精确CI；随后继续S7剩余质量整改。** 外线f31cc0d（实现9a4b815）已实际无冲突merge，MAIN补17个边界/组合反例与修正，selector0.4.0，269责任项/2.81秒与Ruff/mypy绿。真实年报/IR/TXT四个经营点经正式Worker→outbox→RF→search/exact→恢复已绿；最终旧final9、升级1和九样本结果以[集中验收](n6_candidate_main_acceptance_2026-10-07.md)及其收据为准。提交不跑长pytest，日常CI没有加入大基准或真实长E2E。
 
-只读已见候选线提交 ce61cdd 及 HANDOFF（实现9a4b815）；本回合只正式收预算与空间，下一验其接口/责任测试，不重派/跨写 owner。最终按main_wiring合规则再更新实际selector版本，一次真实9样本（原33 required/86点/golden不改）和正式Worker→RF→search/exact→恢复验收。0.3.2最近实测12/33仍是已知基准；手工候选推算13/33不能替代新版本实际质量证明。既有冻结兼容9项在0.3.3实际新代码已绿。失败只修责任包，不逐helper审批、不加日常CI长测试。
+首次组合全表403.731秒实测18/33（旧12/33）、764定位零失败、重复3（旧48）。已保留初次报告；其中年报G04发生回退及EPI正式E2E失败，MAIN按句理由/组、忙页分类offer、完整fact reasons及工程时间表责任修正，最终集中复验已完成：21/33、可选5/17、764定位零失败、重复3、精选66195B、372.044秒，旧required/optional full均无回退。不用手推覆盖或旧CI替代。原golden/86点/33分母、parser0.1.0、原件与96/160限额不变。**N6实现合入与S7全部业务质量完成分别记录。**
 
-最新单根空间报告逻辑24,365,900,191 B，其中原件23,462,933,638 B占96.2941%；tmp/测试与tmp DB候选323,168,254 B，未证实全部可删/实际分配量，原件删除0。工具零正文/联网/LLM，只报告；不用新增人工审批文件。1007云占位跳过，旧37G/46G与这次单根stat口径不混用。生产 S5/S6净释放5659443210 B仍按原正式收据。
+S7后续按最终逐点差距处理，不重派已交三包：
 
-RF仍main6e6b817a，daily/weekly/manifest三份owner日志保护；用户source_acquisition.yaml SHA3609e707保持独立未提交，Dayu/IQS/StockWiki/ET零写。收到交付后有实质进展即可实施，不把此前blocked等待状态当当前权限门；总体S7尚未完成。
+1. 先修真实融资/招股项目与行业描述剩余候选或排序问题；按同原件parsed→candidate→selected定位责任，新增跨公司合成反例，修具体经营事实，不为纯财务/provider缺口扩大正文范围或切片配额。最终业务remaining9：S01 G01/G03/G05、S02 G02/G03、S04 G03（项目引导上下文）、S06 G02/G03/G04；原required剩余12另含3个纯金额/正文外scope点，仍按原33分母报告。
+2. 修IR数字编号问题/多问答混合cell：S08现有0.1.0 parser把“4：/5：”和两条套话留在一个219字orphan_answer单元。先测试数值口径、提问/答复角色、原始cell字符范围、负例和旧final回放；评估最小可回放片段与parser版本传播。不能删整条有价值占比或屏蔽noise/needs_review，不能跨仓改RF合同。
+3. 最终针对改变的格式跑责任测试和真实入口大节点；只有具体剩余风险才重跑全九样本，不每个helper重跑。业务覆盖未完成仍列remaining，不拿全定位绿冒充语义完成。
+
+空间cf24f34/CI37542743196全绿68秒，预算3cd4960/CI37543349021全绿72秒均已实际并线/推，不重复验收。最新单根逻辑24,365,900,191 B，raw23,462,933,638 B占96.2941%；tmp+tmp DB候选323,168,254 B仅候选上界，未自动删除/声称物理释放；1007云占位跳过。生产S5/S6净释放5,659,443,210 B沿原收据。
+
+RF main6e6b817a三owner SHA保持；用户source_acquisition.yaml SHA3609e707独立dirty且不stage。Dayu/IQS/StockWiki/ET与外线worktree零写。详细剩余ID、最终实测覆盖、scratch恢复和精确CI发布记录在验收单/收据。不要把历史等待blocked状态当权限门，不增加人工签收。

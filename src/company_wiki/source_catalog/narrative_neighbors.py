@@ -10,6 +10,7 @@ from types import MappingProxyType
 from typing import Literal
 
 from .narrative_candidates import EvidenceCandidate
+from .n6_candidate_completion import linkable
 from .narrative_document import NarrativeUnit
 
 
@@ -80,9 +81,13 @@ def _match(pattern: re.Pattern[str], text: str) -> bool:
 
 def _unit_by_location(
     units: Sequence[NarrativeUnit],
-) -> dict[tuple[int | None, int | None], NarrativeUnit]:
+) -> dict[tuple[str, int | None, int | None], NarrativeUnit]:
     return {
-        (unit.coordinates.page_number, unit.coordinates.paragraph_index): unit
+        (
+            unit.source_id,
+            unit.coordinates.page_number,
+            unit.coordinates.paragraph_index,
+        ): unit
         for unit in units
         if unit.unit_kind == "pdf_text_block"
     }
@@ -103,7 +108,7 @@ def _valid_previous(
 ) -> bool:
     if previous is None or previous.unit_id in selected_ids:
         return False
-    if previous.source_role != event.source_role:
+    if not linkable(previous, event):
         return False
     if not _subject_signal(previous, rules) or len(previous.raw_text) < 12:
         return False
@@ -136,15 +141,13 @@ def _add_adjacent_subjects(
     by_location = _unit_by_location(units)
     selected_ids = store.ids()
     for candidate in tuple(store.candidates):
-        _add_adjacent_subject(
-            store, candidate, by_location, selected_ids, rules
-        )
+        _add_adjacent_subject(store, candidate, by_location, selected_ids, rules)
 
 
 def _add_adjacent_subject(
     store: _Store,
     candidate: EvidenceCandidate,
-    by_location: Mapping[tuple[int | None, int | None], NarrativeUnit],
+    by_location: Mapping[tuple[str, int | None, int | None], NarrativeUnit],
     selected_ids: set[str],
     rules: NeighborRules,
 ) -> None:
@@ -153,7 +156,11 @@ def _add_adjacent_subject(
         return
     if not _match(rules.high_value_event, event.raw_text):
         return
-    key = (event.coordinates.page_number, (event.coordinates.paragraph_index or 0) - 1)
+    key = (
+        event.source_id,
+        event.coordinates.page_number,
+        (event.coordinates.paragraph_index or 0) - 1,
+    )
     previous = by_location.get(key)
     if not _valid_previous(previous, event, selected_ids, rules):
         return
@@ -168,7 +175,10 @@ def _add_adjacent_subject(
     reasons = _adjacent_reasons_and_boost(
         store, event.unit_id, previous.raw_text, rules
     )
-    store.add(EvidenceCandidate(previous, rules.topics(previous.raw_text), reasons, 0), group_id)
+    store.add(
+        EvidenceCandidate(previous, rules.topics(previous.raw_text), reasons, 0),
+        group_id,
+    )
     selected_ids.add(previous.unit_id)
 
 
@@ -189,7 +199,7 @@ def _valid_continuation(
 ) -> bool:
     if continuation is None or continuation.unit_id in selected_ids:
         return False
-    if continuation.source_role != heading.source_role:
+    if not linkable(continuation, heading):
         return False
     if not 1 <= len(continuation.raw_text) < 12:
         return False
@@ -208,15 +218,13 @@ def _add_heading_continuations(
     by_location = _unit_by_location(units)
     selected_ids = store.ids()
     for candidate in tuple(store.candidates):
-        _add_heading_continuation(
-            store, candidate, by_location, selected_ids, rules
-        )
+        _add_heading_continuation(store, candidate, by_location, selected_ids, rules)
 
 
 def _add_heading_continuation(
     store: _Store,
     candidate: EvidenceCandidate,
-    by_location: Mapping[tuple[int | None, int | None], NarrativeUnit],
+    by_location: Mapping[tuple[str, int | None, int | None], NarrativeUnit],
     selected_ids: set[str],
     rules: NeighborRules,
 ) -> None:
@@ -225,7 +233,11 @@ def _add_heading_continuation(
         return
     if not _match(rules.project_rationale, heading.raw_text):
         return
-    key = (heading.coordinates.page_number, (heading.coordinates.paragraph_index or 0) + 1)
+    key = (
+        heading.source_id,
+        heading.coordinates.page_number,
+        (heading.coordinates.paragraph_index or 0) + 1,
+    )
     continuation = by_location.get(key)
     if not _valid_continuation(continuation, heading, selected_ids, rules):
         return
@@ -278,17 +290,20 @@ def _add_linked_questions(
     rules: NeighborRules,
 ) -> None:
     selected_ids = store.ids()
-    answer_groups = {
-        candidate.unit.metadata.get("qa_group_id")
-        for candidate in store.candidates
-        if candidate.unit.metadata.get("qa_group_id") is not None
-    }
+    answer_groups: dict[tuple[str, str, str, str], set[object]] = {}
+    for candidate in store.candidates:
+        answer = candidate.unit
+        qa_group = answer.metadata.get("qa_group_id")
+        if qa_group is not None:
+            key = (answer.source_id, answer.language, answer.parser_name, answer.parser_version)
+            answer_groups.setdefault(key, set()).add(qa_group)
     for unit in units:
         if unit.source_role not in {"analyst", "investor_question"}:
             continue
         if unit.unit_id in selected_ids:
             continue
-        if not _qa_linked(unit.metadata.get("qa_group_id"), answer_groups):
+        key = (unit.source_id, unit.language, unit.parser_name, unit.parser_version)
+        if not _qa_linked(unit.metadata.get("qa_group_id"), answer_groups.get(key, set())):
             continue
         if not _question_has_context(unit, rules):
             continue

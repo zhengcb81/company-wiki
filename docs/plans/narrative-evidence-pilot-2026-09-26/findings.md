@@ -886,3 +886,15 @@ build_batch_events确用request中selector/parser/prompt hash划新身份；正�
 实际budget3cd4960已并线/推，footprintcf24f34已并线/推；git祖先核查两分支均包含于master。候选新交接ce61cdd只读可见，下一MAIN集中验收，不重派旧卡。最终S7完整节点仍未执行。
 
 两个代码提交精确CI各68/72秒成功；无新增日常长测试。GitHub同URL状态缓存需nonce/no-cache复核，避免过时in_progress误导。下一候选新交接只读可见，正式S7仍需统一真实质量节点。
+
+## N6-CANDIDATE MAIN责任审查（2026-10-07）
+
+外线9a4b815保留原locator/parser0.1.0与原语言；MAIN实际合入f31cc0d。先RED的9个边界失败已修正，另一个固定预算竞争反例证明quantified_operating_status原先掉入other，使具体经营结构输给笼统行业背景；映射经营状态rank3/独立category后GREEN。共享selector升0.4.0，原96/160不扩、原golden/33分母不动。264项责任包3.20秒绿（外线30+MAIN12+预算/旧选择/解析/检索），Ruff与7源模块mypy绿。
+
+并线没有文本冲突不代表语义组合正确。补全现在同时校验source/parser/language/role/page和问答、speaker、section；关联问句在相同source/parser/language中找answer，允许问答角色不同。经营窗口统一调用传入OperatingFactDetector。九文档正式全表与真实Worker/RF/search/exact/恢复、旧final9和升级1正在独立tmp执行；0模型供应商请求。不把候选覆盖手推值或旧CI作为本次完成证明。
+
+真实组合E2E两次因EPI遗漏失败，默认annual396候选/393去重/96精选证明不是PDF丢字。第二次深入候选显示补全普通尾句继承全页product_milestone/score20而挤掉真实EPI11。修正逐句topics/reasons/score和独立sentence组；一般开工→未来投产timeline单独表达、已有候选保留全部fact reasons。最终269项2.81秒、Ruff/8模块mypy、真实三样本四经营点+旧9+升级1共11项66.48秒绿。原parser0.1.0/原定位/96与160不变，0供应商/费用。
+
+初次full18/33不作为最终完成证明；已保留报告。S08两噪声实读同一219字orphan_answer cell，含数字4/5题与接待套话，旧问答parser未分段；保留质量诊断与原golden，后续解析责任整改，不能为噪声删掉占比事实或静默篡改旧parser回放。全文→永久MD没有恢复，此次仅tmp解析与小报告。
+
+最终正式全表在集中修正后21/33、optional5/17，旧所有full无回退；业务/项目上下文20/29只是解释子集，原正式33分母不变。764定位0失败、重复3、精选66195B；372.044秒只用于大节点、非日常CI。明确remaining9与IR两套话/年报重复1进入S7后续；原required3个scope漏项及incidental guidance命中不当业务增益。详细逐点对照、8源模块精确SHA、原件9SHA、user config/生产配置/RF三owner和scratch恢复在n6_candidate_main_acceptance_2026-10-07.json。
