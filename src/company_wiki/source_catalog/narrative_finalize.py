@@ -3,13 +3,13 @@
 from __future__ import annotations
 
 from collections.abc import Mapping, Sequence
-import hashlib
 import json
 import re
 from typing import Literal
 
 from company_wiki.source_contract import EvidenceSpan
 
+from .n6_budget_dedup import deduplicate_candidates
 from .narrative_budget import BudgetItem, select_budget_items
 from .narrative_candidates import EvidenceCandidate
 from .narrative_document import DocumentStructure, NarrativeEvidencePackage
@@ -19,37 +19,6 @@ from .narrative_routing import DocumentRoute
 SelectionStatus = Literal[
     "selected", "partial", "skipped_no_narrative", "needs_review", "blocked"
 ]
-
-
-def _deduplicate(
-    candidates: Sequence[EvidenceCandidate],
-) -> tuple[EvidenceCandidate, ...]:
-    by_text: dict[tuple[str, int | None, str], EvidenceCandidate] = {}
-    for candidate in candidates:
-        unit = candidate.unit
-        text_key = hashlib.sha256(
-            " ".join(unit.raw_text.split()).encode("utf-8")
-        ).hexdigest()
-        key = (text_key, unit.coordinates.page_number, unit.source_role)
-        previous = by_text.get(key)
-        if previous is None or _prefer_table(candidate, previous):
-            by_text[key] = candidate
-    return tuple(sorted(by_text.values(), key=_candidate_order))
-
-
-def _prefer_table(candidate: EvidenceCandidate, previous: EvidenceCandidate) -> bool:
-    return bool(
-        candidate.unit.unit_kind == "pdf_table_row"
-        and previous.unit.unit_kind != "pdf_table_row"
-    )
-
-
-def _candidate_order(candidate: EvidenceCandidate) -> tuple[object, ...]:
-    return (
-        -candidate.score,
-        candidate.unit.coordinates.locator(),
-        candidate.unit.unit_id,
-    )
 
 
 def _page_key(candidate: EvidenceCandidate) -> tuple[str, int | str]:
@@ -137,29 +106,33 @@ def finalize_selection(
     heading_pattern: re.Pattern[str],
     dropped_financial_count: int,
 ) -> NarrativeEvidencePackage:
-    """Create the compact package after deterministic candidate enrichment."""
-    deduplicated = _deduplicate(candidates)
+    """Create the compact package after deterministic candidate enrichment.
+
+    ``candidate_count`` counts every candidate handed in, and
+    ``omitted_candidate_count`` is exactly ``candidate_count - selected``, so
+    both conservative deduplication and budget refusal stay visible instead of
+    shrinking the counters after the fact.
+    """
+    deduplicated = deduplicate_candidates(candidates, group_ids)
     budget_items = tuple(
-        _budget_item(candidate, group_ids, heading_pattern)
-        for candidate in deduplicated
+        _budget_item(candidate, deduplicated.group_ids, heading_pattern)
+        for candidate in deduplicated.candidates
     )
     selected = [
         item.payload
         for item in select_budget_items(budget_items, limit=route.selection_limit)
     ]
-    omitted = max(0, len(deduplicated) - len(selected))
+    omitted = max(0, len(candidates) - len(selected))
     selected.sort(key=lambda item: (item.unit.coordinates.locator(), item.unit.unit_id))
-    spans = _evidence_spans(selected, group_ids)
+    spans = _evidence_spans(selected, deduplicated.group_ids)
     return NarrativeEvidencePackage(
         source_id=structure.source_id,
         source_sha256=structure.source_sha256,
         document_kind=route.document_kind,
-        status=_status(
-            structure, route, spans, omitted, dropped_financial_count
-        ),
+        status=_status(structure, route, spans, omitted, dropped_financial_count),
         evidence_spans=spans,
         selection_limit=route.selection_limit,
-        candidate_count=len(deduplicated),
+        candidate_count=len(candidates),
         dropped_financial_count=dropped_financial_count,
         source_units=len(structure.units),
         omitted_candidate_count=omitted,
