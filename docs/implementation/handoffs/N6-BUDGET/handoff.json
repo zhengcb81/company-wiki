@@ -9,7 +9,8 @@
   "lane_input_head": "949545957f0b3499f48219a124623b33ba8ba065",
   "delivery_head": "805420a46dad90e893291503c07ebfe7059d72a4",
   "commits": [
-    "805420a46dad90e893291503c07ebfe7059d72a4"
+    "805420a46dad90e893291503c07ebfe7059d72a4",
+    "0c5d53ef1b3abe74ca5ca9d52ad127007977c39b"
   ],
   "pushed_to": "codex/n6-budget",
   "changed_paths": [
@@ -140,13 +141,34 @@
   "measured_on_real_candidates": {
     "scope": "S01-S08 captured finalize_selection inputs replayed read-only; S09 has no local original on this machine",
     "baseline_vs_n6": {
-      "required_matched_of_28": [11, 12],
-      "optional_matched": [3, 3],
-      "negative_points_hit": [1, 1],
-      "selected_duplicates": [48, 2],
-      "S04_top_category_share": ["event 146/160", "event 76/160"],
-      "S05_top_category_share": ["event 114/160", "event 88/160"],
-      "S06_selected": ["160/160", "159/160 (one group dropped whole as budget_full)"]
+      "required_matched_of_28": [
+        11,
+        12
+      ],
+      "optional_matched": [
+        3,
+        3
+      ],
+      "negative_points_hit": [
+        1,
+        1
+      ],
+      "selected_duplicates": [
+        48,
+        2
+      ],
+      "S04_top_category_share": [
+        "event 146/160",
+        "event 76/160"
+      ],
+      "S05_top_category_share": [
+        "event 114/160",
+        "event 88/160"
+      ],
+      "S06_selected": [
+        "160/160",
+        "159/160 (one group dropped whole as budget_full)"
+      ]
     },
     "projected_with_S09": "required 12/33 -> 13/33; final coverage is MAIN's call on the 9-sample benchmark",
     "selection_limit_changed": false
@@ -230,7 +252,9 @@
       "before": "group of exactly `limit` spans plus one singleton",
       "after": "no dedup removal",
       "budget": "selected_spans=limit (the whole group); the singleton is dropped",
-      "drop_reasons": ["budget_full group=(none) cost=1"]
+      "drop_reasons": [
+        "budget_full group=(none) cost=1"
+      ]
     }
   ],
   "protection": {
@@ -264,5 +288,22 @@
     "Diagnostics exist in memory only; no persistent field was added",
     "Empty-result policy and the division of labor on _status / whether an IR document may be skipped remain MAIN's",
     "The S06 159/160 result is one group refused for lack of room (budget_full); raising the cap is explicitly out of scope for this lane"
-  ]
+  ],
+  "push": {
+    "first_attempt": "blocked in the lane worktree: pre-push gate requires a pytest basetemp path <= 60 chars, this worktree resolves to 65 chars, failed before running any test (path constraint, not a test failure; same root cause as N5-DOCSET, origin/codex/n5-document-quality 99c7e51)",
+    "resolution": "git -C C:/Users/郑曾波/Projects/company-wiki push -u origin codex/n6-budget (push executed from the main checkout context)",
+    "gate_result": "pytest basetemp verified: short, repository-local, and not relocated; pre-push gate GREEN - safe to push",
+    "result": "9495459..0c5d53e pushed to origin/codex/n6-budget",
+    "no_verify_used": false,
+    "gate_or_ci_files_modified": false
+  },
+  "ci": {
+    "workflow": ".github/workflows/ci.yml",
+    "push_triggers": [
+      "master"
+    ],
+    "actions_runs_for_branch": 0,
+    "note": "lane-branch pushes do not trigger CI; CI runs when MAIN merges to master or opens a pull request",
+    "pull_request_opened_by_lane": false
+  }
 }

@@ -148,6 +148,13 @@ S06 少 1 个 span 是某组出价时放不下被**整组**舍弃（诊断 `budg
 - `calls`：`model_posts=0, provider_http=0, downloads=0`；网络由 hermetic conftest 硬阻断，未绕过。
 - 未做真实 ACL、未做完整大备份演练；未跑 9 样本正式 benchmark（归 MAIN 收口节点）。
 
+### 7.1 推送与 CI
+
+- 首次 `git push`（lane worktree 内）被 pre-push 门拦下：`tools/pre_push_gate.py` 要求 pytest basetemp 绝对路径 ≤60 字符，本 worktree 为 65 字符，**在跑任何测试之前**即 `GATE RED at: CI fast contract smoke set`（路径约束，非测试失败，与本批 N5-DOCSET 同根因，见 origin/codex/n5-document-quality `99c7e51`）。
+- 按既定裁定从主检出上下文推送：`git -C C:/Users/郑曾波/Projects/company-wiki push -u origin codex/n6-budget` → `pytest basetemp verified: short, repository-local, and not relocated`、`pre-push gate GREEN — safe to push`，推送成功 `9495459..0c5d53e`。**未使用 `--no-verify`，未修改任何门/CI 文件。**
+- 提交前本地钩子（本 worktree 内）已真实通过：ruff check、mypy contract（FC-1204-c）、host assumption guard。
+- CI：`.github/workflows/ci.yml` 的 `on.push.branches` 只有 `[master]`，`actions/runs?branch=codex/n6-budget` → `total_count 0`，lane 分支推送本身不产生 CI 运行，CI 在 MAIN 合入 master（或开 PR）时触发；未擅自开 PR。
+
 ## 8. main_wiring / remaining
 
 **MAIN 需要做的**
