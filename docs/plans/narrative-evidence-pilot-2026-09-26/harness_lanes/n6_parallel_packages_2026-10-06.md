@@ -31,3 +31,5 @@ RF/ET/StockWiki/IQS/Dayu只读或不碰，不另开它们的任务。N5工具长
 MAIN最终节点额外核：0.3.2已落盘final在新选择/去重代码下仍能按原evidence_id/locator读出、回放，不因新canonical组/筛选改变而把历史合法资料变成不可读。旧职责测试若与新策略冲突，由MAIN核事实/规范再调整，外线不得删断言凑绿。规则接线/版本与旧artifact兼容是MAIN剩余任务，不放给两个外线交叉写。
 
 MAIN已完成先行[冻结旧final兼容包](../n6_main_compatibility_implementation.md)，9项/4.85秒绿，17KB历史夹具不在两质量线写集内；最终新代码并入后再跑一次。统一[33点业务解释](../n6_main_business_expectations_2026-10-06.md)保留原golden/分母，只解释经营事实、上下文与财务/provider边界。候选卡更正S07 G01为境内占比22%，原件/golden不变；外线输入副本不跨写，交接时MAIN核此语义。
+
+MAIN的[最终业务E2E施工框架](../n6_main_business_e2e_implementation.md)独立完成：三类合成原件经正式configured Worker/RF读取/search/exact/恢复，27.65秒绿；电话会字节绑定通过CWP正式read取得，未扩RF投影。真实S01/S07/S09四个关键经营点的同入口验收已写但尚未运行，须候选/预算合入与MAIN接线后在最终大节点运行；不冒称当前质量缺口已修，也不增加外线等待。

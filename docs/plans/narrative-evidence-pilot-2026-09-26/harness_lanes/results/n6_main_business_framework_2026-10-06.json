@@ -1,0 +1,34 @@
+{
+  "schema_version": "cwp-main-business-framework/1",
+  "status": "local_passed_publication_pending",
+  "code_parent": "ccd9589b6da73d8d8022d49c6a6a0ef819477b7e",
+  "rf_committed_head": "6e6b817a1a6e4567293a4dcb835815f3be508a03",
+  "framework_red": {"failed": 1, "seconds": 2.47, "reason": "test helper lacked optional timeout_seconds, not product failure"},
+  "first_green": {"passed": 1, "deselected": 1, "seconds": 27.79},
+  "final_green": {
+    "command": "CWP_RF_PROJECT_ROOT=<read-only RF root> PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 python -B -m pytest -p no:cacheprovider --basetemp tmp/n6bq tests/integration/test_n6_business_cli_e2e.py -k synthetic",
+    "passed": 1, "deselected": 1, "seconds": 27.65,
+    "known_warning": "asyncio_mode config option with automatic plugin loading disabled"
+  },
+  "documents": ["synthetic annual PDF", "synthetic IR PDF", "synthetic English earnings-call TXT"],
+  "verified": ["configured CLI and real local HTTP", "finite subprocess Worker and outbox", "committed RF reference/read", "public evidence search/exact lookup", "same-run resume without extra model calls", "CWP original TXT byte bindings and full-quote coverage", "catalog/config/originals/foreign jobs protected", "independent test directory restored"],
+  "loopback_posts": 3,
+  "new_posts_on_resume": 0,
+  "vendor_requests": 0,
+  "vendor_cost_usd": 0,
+  "originals_deleted": 0,
+  "production_writes": 0,
+  "external_project_writes": 0,
+  "ruff": "passed",
+  "diff_check": "passed",
+  "scratch_absent": ["tmp/n6br", "tmp/n6bp", "tmp/n6bq"],
+  "user_config_sha256": "3609e707466eeb3e0f685e14f2637c6afa39ba900edef1be4814433a43300a01",
+  "rf_owner_sha256": {
+    "daily_alert.jsonl": "0aee073f56c133786365ab96899edf4d91c0f9e1a0e13ab61b2a6bffd8316270",
+    "weekly_alert.jsonl": "b617b0b00ff1a758b5b46299e3e5db3115f56efd90d212154abe988e5ea9fee5",
+    "weekly_manifest.json": "0d55cb8c81f12b663e330819da3037bb69ce8564ac41a686b578a99f78f948bf"
+  },
+  "real_combined_quality_node": "not_run_pending_N6_candidate_budget_handoffs_and_MAIN_wiring",
+  "daily_ci_expansion": false,
+  "quality_baseline_unchanged": "selector 0.3.2 required 12/33"
+}

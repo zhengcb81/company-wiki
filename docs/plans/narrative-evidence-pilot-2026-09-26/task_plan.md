@@ -89,7 +89,7 @@ TDD 框住具体公开行为。只在 N4 A/B/C、存储迁移等大节点集中�
 
 ## Next Step
 
-**按[N6并行总包](harness_lanes/n6_parallel_packages_2026-10-06.md)接收已分派三线。** 候选/上下文与固定预算/去重各独占4/2源文件，空间只读工具独占新目录，MAIN不抢外线写集。MAIN先行[0.3.2冻结兼容包](n6_main_compatibility_implementation.md)9项/4.85秒绿，[33点业务解释](n6_main_business_expectations_2026-10-06.md)已写；下一收到完整质量交接后实际merge、按main_wiring组合规则/更新selector版本，再一次真实9样本/正式Worker-RF E2E和冻结兼容测试。空间工具可独立接收不阻质量。DOCSET已并线58b74d0/精确CI75秒绿，43不同case通过；当前required12/33、744定位合法不等于语义已达标，不重派旧N5或重复付费。
+**按[N6并行总包](harness_lanes/n6_parallel_packages_2026-10-06.md)接收已分派三线。** 候选/上下文与固定预算/去重各独占4/2源文件，空间只读工具独占新目录，MAIN不抢外线写集。MAIN先行[0.3.2冻结兼容包](n6_main_compatibility_implementation.md)9项/4.85秒绿，[33点业务解释](n6_main_business_expectations_2026-10-06.md)已写；[业务E2E施工框架](n6_main_business_e2e_implementation.md)已用三类合成原件验证，最终1项/27.65秒绿，正式configured Worker→RF→search/exact→恢复及TXT字节映射均走通，真实质量节点明确未运行。当前RF6e6b817a有daily/weekly/manifest三份owner日志改动，全部只读保护，不恢复。下一收到完整质量交接后实际merge、按main_wiring组合规则/更新selector版本，再一次真实9样本/正式Worker-RF E2E和冻结兼容测试。空间工具可独立接收不阻质量。DOCSET已并线58b74d0/精确CI75秒绿，43不同case通过；当前required12/33、744定位合法不等于语义已达标，不重派旧N5或重复付费。
 
 run10与ET-TXT已完成并推adc9d6b；保留真实结果、旧失败与非穷尽边界。RAW-DUP已有完整交接，MAIN发现并修复输出/预算/分配量/云属性/报告/ACL测试缺口，51责任项/9.09秒与两CLI联调绿，原件删除0；[验收卡](harness_lanes/n5_raw_duplicate_main_acceptance_2026-10-06.md)。历史7.27GiB为跨根候选上界，仅3组151MiB实读，不计释放、不自动迁移；DOCSET已交9份真实资料/86标注点与完整报告；报告基于旧selector0.3.1，required11/33，不能当当前0.3.2结论。下一步按N6候选/预算独立卡并行整改，MAIN接线后集中质量验收。不凭目录文件或日志声称有确认live进程，不自动删原件/hydrate。
 

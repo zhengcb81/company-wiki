@@ -858,3 +858,9 @@ N6三包人类已分派，MAIN只做共享责任。正式final按完整EvidenceS
 RF6e6b817a/2 owner SHA与CWP user config3609e707保持，三外线零写。独立scratch和两生成脚本均absent；正式9样本新selector基准与Worker→search/exact→RF仍等质量代码交付后做一个大节点，没用本回合合成compat冒称新实际质量已完成。
 
 MAIN已实际推0947cea，精确CI37532408169 attempt1 success/job80秒，普通CI没有新增长Integration。请求input_hash已有selector/parser/prompt，批次生成身份包含此请求，shared selector_version更新会区分新批次；最终fresh process联调需复核实际传播。保存CI JSON里的job/steps已实读验证；OrderedDictionary的Select-Object显示null是输出展示问题，未影响真实收据。
+
+## 2026-10-06 — MAIN业务路径施工框架
+
+复用正式configured batch/Worker/outbox与RF六模块committed export，三类合成PDF/TXT最终1 passed/27.65秒，恢复无新增POST。正式RF校验所有transcript bindings但context不返回它们；因此E2E从CWP同ref的正式read取得bundle，核artifact SHA和RF spans一致后按start/end对象映射原文quote字节到material行。不能直接把golden原TXT行号当material行，也不能扩大RF公开投影只为测试方便。合成TXT已实际覆盖映射路径，真实节点仍待新selector合入，未运行不计绿。
+
+只有测试helper增加可选timeout，默认60秒不变；真实180秒batch/240秒subprocess为明确fixture请求，不改生产限时。没有运行时代码/外线写入/供应商调用/日常CI长测。RF owner新增daily日志，三个SHA实读保持；三个自有tmp根已恢复absent。框架receipt与施工细则在MAIN独占目录，后续验收按原四个不可变业务点与九类完整基准，不修改golden或分母。

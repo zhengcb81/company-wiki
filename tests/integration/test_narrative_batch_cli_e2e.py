@@ -228,7 +228,7 @@ def _prepare(
         raise
 
 
-def _invoke(state, *, llm_config=None, llm_provider=None, launcher=None):
+def _invoke(state, *, llm_config=None, llm_provider=None, launcher=None, timeout_seconds=60):
     env = dict(os.environ)
     env["PYTHONPATH"] = str(Path(__file__).resolve().parents[2] / "src")
     env["PYTHONDONTWRITEBYTECODE"] = "1"
@@ -247,7 +247,7 @@ def _invoke(state, *, llm_config=None, llm_provider=None, launcher=None):
         "--project-root", str(state.root), "--catalog-config", str(state.config_path),
         "--automation-db", str(state.store.db_path), "--work-dir", str(state.root / "run-work"),
         "--request", str(state.request_path),
-    ], cwd=state.root, env=env, capture_output=True, text=True, encoding="utf-8", timeout=60)
+    ], cwd=state.root, env=env, capture_output=True, text=True, encoding="utf-8", timeout=timeout_seconds)
     assert KEY not in process.stdout + process.stderr
     assert process.stdout.strip(), process.stderr
     result = json.loads(process.stdout)

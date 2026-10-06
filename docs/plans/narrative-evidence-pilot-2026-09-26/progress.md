@@ -1045,3 +1045,13 @@ N6启动PWF和INPUT_CARD已各自纯文档提交并推分支，工作树干净�
 本轮实际发布0947cea63140d515620f563daf2058f4520cd6a3已推master，ls-remote一致，正常commit/pre-push绿。精确CI37532408169 attempt1全部步骤/job completed/success，job112504813892/80秒；9项新Integration只本地节点运行，不扩日常CI。CI收据先用PowerShell OrderedDictionary直接Select-Object打印null，文件内JSON实际字段完整；从保存文件反序列化后验证job ID/seconds/全部step结果，不能拿空打印作为证据。
 
 已核NarrativeBatchRequest.input_hash确实包含selector/parser/prompt、build_batch_events纳入生成身份，narrative_select结果也绑定共享版本；最终两质量线合入后从新进程执行既有generation责任测试，不改历史read版本门。最后文档/收据用skip ci发布，用户config保持独立未提交；三外线原写集与INPUT_CARD副本不写。MAIN先行完成不等于S7整体质量完成。
+
+## 2026-10-06 — MAIN业务E2E框架独立完成
+
+三外包已由用户分派，MAIN不写外线六个模块/工具/独立PWF。RF main仍6e6b817a，新增daily_alert.jsonl owner改动与旧weekly/manifest一起保护，当前三份日志，不恢复。新增主线E2E细则先于实施；复用既有_prepare/_invoke/隔离目录/loopback/生产保护fixture和committed RF六模块导出，不复制任务库或修改生产模型配置。
+
+首RED 1 failed/2.47秒为私有测试helper缺少timeout_seconds参数，零模型请求，非产品RED；加可选参数且默认60秒不变后1 passed/27.79秒。只读RF合同发现context投影不返回transcript_byte_bindings，且正式range是start/end对象；改成同ref从CWP正式read取原bundle，核artifact SHA/回放/evidence_spans与RF一致，再核原TXT quote字节/SHA/完整覆盖→material行。合成TXT实际走这个分支，最终1 passed/27.65秒，真实分支1 deselected，Ruff/diff绿。一次pytest关闭插件时出现既有asyncio_mode配置warning，不改全局设置去消除它。
+
+三类合成原件/3次本地HTTP→configured Worker/outbox→RF reference/read→CWP search/exact→同run恢复，模型恢复0新增POST。真供应商请求/费用0；raw/config/catalog/RF owner指纹由fixture前后验证，用户config SHA3609e707保持。三个本线tmp根n6br/n6bp/n6bq核绝对路径/非reparse后用ErrorAction Stop清理并确认absent。查询曾误猜transport模块路径与CodeGraph参数，随后按实际结构定位和已提交合同核对；不当产品错误。
+
+真实S01/S07/S09四经营点入口已写、明确待两质量线交付接线后执行，不拿合成绿当required12/33已改善，不再跑旧长基准/付费模型。当前准备正常commit/push/精确CI，整体S7/目标仍active。
