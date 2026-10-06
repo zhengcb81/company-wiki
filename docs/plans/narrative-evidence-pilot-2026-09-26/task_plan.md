@@ -6,11 +6,13 @@
 
 **2026-10-06用户预算答复：**已明确批准提高累计token预算至160,000；累计费用仍限$0.10，历史unknown及FX余量继续计入，配置8192/温度1.0/模型与端点不改。下方“预算答复待定/60k不足”是此前恢复点，本轮直接按Next Step执行N4C，不再以预算答复阻断。
 
-**当前执行阻塞：**自动审批在启动run05前拒绝MiMo外发，理由是具体资料/目的地授权仅明确覆盖MiniMax。已一次询问MiMo年报/招股与DeepSeek IR/英文电话会的具体授权；在答复前不执行POST。token预算已经批准，不再问预算、不改端点绕过；拒绝未产生进程、测试根或付费收据。
+**当前执行状态：**用户已明确授权两家及对应资料外发；run05/06已终态并恢复测试根。年报、IR、英文电话会真实摘要/RF读取/引用回放通过，招股书两次MODEL_TIMEOUT后SUMMARY_INVALID，N4C仍未完成。累计136108tokens/63228microUSD，unknown6/unsettled0；扣历史FX2764后费用剩34008microUSD，tokens剩23892。下一动作先诊断摘要合同失败及有限重试/资源消耗，不盲重跑同请求或清旧账。两份真实收据见results/n4c_live_2026-10-05_run05.json、run06.json（文件日期属于Oct5起始campaign，不是本次执行日期）。
+
+**新的可独立施工包：**[N5总包](harness_lanes/n5_parallel_packages_2026-10-06.md)包含DOCSET质量基准、RAW-DUP只读原件重复工具、ET-TXT本地复用修复。三份独立目录/写集/接口，不修改MAIN runtime或生产状态；可同时启动，不是N4C完成屏障。MAIN统一验收合入。
 
 完成八束整套简化：一个下载请求入口、一套pathless来源接口、一套AUTO任务系统，按需选择业务叙述、摘要和检索；停止全量永久转换与重复正文；完成真实模型、持久预算、可恢复多文档处理及消费者接线，然后分批删除无调用者的旧派生。原件、来源/版本事实不丢。RF/FF/ET/StockWiki/IQS各仓独占写入，不修改其他owner未提交工作。
 
-**当前恢复点（2026-10-06，最新）：**目标尚未完成，N4C累计预算答复待定；独立准备已完成。S5生产旧派生/切片清理已完成，7104文件/2826010634 B删除，8191旧handle退休，1490530旧span删除；DB3055841280→222408704 B，整批净减少5659443210 B（5.66GB/5.27GiB）。17表来源事实、四份公开原文读取、原始年报/电话会TXT固定SHA及用户配置保持；原件0删除，新final实际0且保留语义不变。161MB source-only恢复点及全部一次性材料已清除，正式小收据见s5_production_storage_acceptance_2026-10-06.json。工具修复96f44a1已发布、精确CI37394193179一次全绿；RF正式main6e6b817a与安装依赖同步，FF main758e8f4/ET main63c4090已签收。不重派已完成P5；S6说明/控制/快速smoke已发布e481578，精确CI37399248994一次success，S6complete；下一步N4C真实模型批次。MiMo/DeepSeek仍按Config的mimo-v2.6-flash/deepseek-flash、8192/温度1.0；累计token cap答复仍待，旧未知账不退。
+**预算答复前恢复点（2026-10-06，历史）：**目标尚未完成，N4C累计预算答复待定；独立准备已完成。S5生产旧派生/切片清理已完成，7104文件/2826010634 B删除，8191旧handle退休，1490530旧span删除；DB3055841280→222408704 B，整批净减少5659443210 B（5.66GB/5.27GiB）。17表来源事实、四份公开原文读取、原始年报/电话会TXT固定SHA及用户配置保持；原件0删除，新final实际0且保留语义不变。161MB source-only恢复点及全部一次性材料已清除，正式小收据见s5_production_storage_acceptance_2026-10-06.json。工具修复96f44a1已发布、精确CI37394193179一次全绿；RF正式main6e6b817a与安装依赖同步，FF main758e8f4/ET main63c4090已签收。不重派已完成P5；S6说明/控制/快速smoke已发布e481578，精确CI37399248994一次success，S6complete；下一步N4C真实模型批次。MiMo/DeepSeek仍按Config的mimo-v2.6-flash/deepseek-flash、8192/温度1.0；累计token cap答复仍待，旧未知账不退。
 
 **最近发布验收：**FF758e8f4/CI37385101051、精选1b0feb4/CI37381429717、质量dd35d2f/CI37378430383、STORAGE e570daf/CI37375836745均success。本轮b148123正常commit/pre-push GREEN且已推master，精确代码CI37388329668全部GREEN；纯PWF收尾不触发替代长测，user source_acquisition SHA保持。
 
@@ -123,12 +125,12 @@ TDD框住公开行为，不把旧签收规则写进新测试。仅S0相关收口
 
 ## Next Step
 
-**MAIN单一下一动作：执行已获160k累计token授权的N4C MiMo/DeepSeek真实模型批次；不改配置或重做已完成节点。**四原件SHA/旧账/配置及RF6模块离线预检已发布061f534；S5/S6及P5已完成，沿用正式收据，不重复长测、生产清理或VACUUM。RF main6e6b817a/FF main758e8f4/ET main63c4090已签收，不碰外包交付树与owner WIP。模型provider分run滚动使用剩余预算，费用仍$0.10，旧unknown及FX余量照计；不擅改8192。实际摘要、消费者读取、原语言和全引用回放、恢复及空间通过才关闭N4C。
+**MAIN单一下一动作：诊断真实招股书SUMMARY_INVALID的具体规则原因，再确定能在剩余额度内完成的修复与一次复测；不盲重跑。**run05/06证明年报、IR、英文电话会及policy对照真实通过，招股未生成合法final；旧unknown继续计入，remaining tokens23892/费用34008microUSD，不擅改Config 8192或退款。现招股请求最坏24863 tokens大于剩余23892，原请求不能直接复测；先查失败信息、summary合同与输入投影，若修复不能降低真实请求预留或无需POST证明，须如实保留缺项。S5/S6/P5已完成，不重跑长测、清理或VACUUM；RF/FF/ET主线与owner不动。N5三包可独立启动，MAIN不等它们才修当前失败。
 
 P5-STORAGE已验收并合入/发布：候选`9fa2166`，主线代码`e570dafb92a3f6aaec51176682d348a1c9303535`。53个不同case分步GREEN，真实AMEC年报+微软电话会TXT的原文stdout SHA、新NarrativeRef完整locator replay前后通过，连接关闭及测试根恢复均通过；没有生产删除。工具预览不写库/sidecar、不拿写锁；切片单次范围SQL/聚合小报告；压缩真实前后计量/空间检查，观测失败明确null。所有细节及实际副本空间见[集成审查](harness_lanes/results/p5_storage_integration_review_2026-10-05.md)、[小验收收据](harness_lanes/results/p5_storage_integration_acceptance_2026-10-05.json)、[工具说明](../../../tools/legacy_storage/README.md)。日常Unit CI不添加多分钟解析包。精确新代码[CI37375836745](https://github.com/zhengcb81/company-wiki/actions/runs/37375836745)已completed/success；此前18da250同SHA重跑CI也已success。
 
 
-N4C真实MiMo/DeepSeek实验继续待累计token cap160k问题答复，费用上限仍$0.10；原8192/温度/thinking/端点/凭证由Config加载。旧账不退、不从清单200冒称摘要成功。当前RF6模块CLI、四份原件SHA及旧账已通过tools/n4c_live_preflight.py离线验证（0POST）。授权到达后MiMo P01年报/P04招股、DeepSeek P07中文IR/T01英文电话会分批滚动，各加零模型policy，run独立、费用累计，完整Worker→CWP→RF N3a读与引用/原语言/恢复、Credit和保守费用、峰值数据同一大节点验收。当前DeepSeek环境key已有效，无需换key。
+N4C的160k预算及两家具体资料外发均已获授权，run05/06真实执行和RF消费已结束；仅招股书仍失败。费用上限仍$0.10、模型参数仍Config原值，旧unknown保留。无需重问凭证或外发权限；下一调查/修复以顶部当前执行状态和本节唯一动作所列证据为准。
 ## 2026-10-04：新增三张可独立派发的施工卡
 
 三张卡均已交付：N4-T1已集成MAIN；MeetingConverter已验收、合入并发布master且主线CI绿；N4-T2已完成差异对账、选择性吸收及验收。本段原写集和接口仅供交付追溯，不重派已完成卡。StockQAbyLLM 与 MeetingConverter 先前的只读盘点交付仍按已有收据验收；invest-quick-scan 仍由其独立任务负责，本计划不检查、不修改、不重复派发。

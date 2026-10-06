@@ -1,0 +1,706 @@
+{
+  "schema_version": "n4c-live-experiment/1",
+  "run_id": "n4c-20261005-live-mimo-05",
+  "model_options": {
+    "model_id": "mimo-v2.6-flash",
+    "endpoint": "https://token-plan-cn.xiaomimimo.com/v1/chat/completions",
+    "api_key_env": "MIMO_API_KEY",
+    "max_output_tokens": 8192,
+    "temperature": 1.0,
+    "output_token_field": "max_completion_tokens"
+  },
+  "metadata_is_fixture": true,
+  "rf_head": "6e6b817a1a6e4567293a4dcb835815f3be508a03",
+  "prior_budget": {
+    "entries": [
+      {
+        "origin": "original_auto_ledger",
+        "run_id": "n4c-20261004-wave1",
+        "charged_tokens": 10325,
+        "charged_micro_usd": 5258,
+        "charged_output_bytes": 0,
+        "unknown_reservations": 1,
+        "unsettled_reservations": 0
+      },
+      {
+        "origin": "n4c_live_2026-10-05_run02.json",
+        "run_id": "n4c-20261005-live-disabled-02",
+        "charged_tokens": 23335,
+        "charged_micro_usd": 11322,
+        "charged_output_bytes": 0,
+        "unknown_reservations": 2,
+        "unsettled_reservations": 0
+      },
+      {
+        "origin": "n4c_live_2026-10-05_run03.json",
+        "run_id": "n4c-20261005-live-configured-03",
+        "charged_tokens": 0,
+        "charged_micro_usd": 0,
+        "charged_output_bytes": 0,
+        "unknown_reservations": 0,
+        "unsettled_reservations": 0
+      },
+      {
+        "origin": "n4c_live_2026-10-05_run04.json",
+        "run_id": "n4c-20261005-live-configured-04",
+        "charged_tokens": 24863,
+        "charged_micro_usd": 17304,
+        "charged_output_bytes": 0,
+        "unknown_reservations": 1,
+        "unsettled_reservations": 0
+      }
+    ],
+    "charged_tokens": 58523,
+    "charged_micro_usd": 33884,
+    "unknown_reservations": 4,
+    "unsettled_reservations": 0
+  },
+  "pricing_basis": {
+    "official_url": "https://mimo.mi.com/docs/en-US/price/pay-as-you-go",
+    "checked_date": "2026-10-06",
+    "currency": "CNY",
+    "input_per_million_tokens": "1.00",
+    "output_per_million_tokens": "2.00",
+    "tier": "no cache/off-peak discount assumed; operation proxy uses domestic price and FX floor6",
+    "fx_reference_url": "https://www.ecb.europa.eu/stats/shared/pdf/eurofxref.pdf",
+    "fx_reference_date": "2026-10-02",
+    "eur_usd": "1.1225",
+    "eur_cny": "7.5259",
+    "accounting_cny_per_usd_floor": "6",
+    "historical_fx_guard_micro": 2764,
+    "billing_mode": "Token Plan endpoint; PAYG equivalent proxy, not cash invoice",
+    "cost_is_provider_invoice": false
+  },
+  "caps": {
+    "campaign_tokens": 160000,
+    "tokens": 101477,
+    "micro_usd": 63352,
+    "model_concurrency": 1,
+    "profile": "P4"
+  },
+  "samples": [
+    {
+      "sample_id": "P01",
+      "kind": "annual_report",
+      "source_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "batch_status": "completed",
+      "errors": [],
+      "rf_reference_exit": 0,
+      "rf_read_exit": 0,
+      "selection": {
+        "candidate_count": 182,
+        "coverage_complete": false,
+        "dropped_financial_count": 85,
+        "lines_total": 0,
+        "omitted_candidate_count": 86,
+        "pages_read": 259,
+        "pages_total": 259,
+        "selected_count": 96,
+        "source_units": 6733,
+        "status": "partial",
+        "tables_scanned": 58,
+        "tables_total": 259
+      },
+      "quality": "verified",
+      "language": "zh",
+      "artifact_bytes": 149782,
+      "locator_count": 96,
+      "claims": [
+        {
+          "claim_id": "claim-001",
+          "claim_type": "company_statement",
+          "evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:586f197f8c140b04f95cd4935868e48a546bfd2f674b9d1c74eb23b314fe24d2",
+            "urn:company-wiki:evidence-span:sha256:01980df6983311a15308b6460f0459fbc7a7b2f2e63eef00aae2afac8329005c",
+            "urn:company-wiki:evidence-span:sha256:e8190e6bf401cb861781c133f824262468bd93a74d02d6c0d1ac8a592dfc5dfc"
+          ],
+          "modality": "actual",
+          "needs_review": false,
+          "text": "报告期内公司主要从事高端半导体设备及泛半导体设备的研发、生产和销售，基于在半导体设备制造产业积累的专业技术，涉足半导体集成电路制造、先进半导体等领域。"
+        },
+        {
+          "claim_id": "claim-002",
+          "claim_type": "company_statement",
+          "evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:46e18d49914a3c242876a4f4ce1ce42977ddbcad9a15d57e02e800442a6b5fd2",
+            "urn:company-wiki:evidence-span:sha256:37b1143016a5b8dc385c650c9ef7fcbdcd7385d96a04242647adfbb4ccd793af",
+            "urn:company-wiki:evidence-span:sha256:84fcaff469a6c1a3a39140ac7c6b15ffd3b404f32af2690758d5340437fb4777",
+            "urn:company-wiki:evidence-span:sha256:f02164adaf1a126665fe3d5513360da5bd038e7f4caed7ca4a5609d8f9e59205",
+            "urn:company-wiki:evidence-span:sha256:72ea637e9b3748706619796d386b1848ecd243cdfcb944870a388a1aa223fb4d"
+          ],
+          "modality": "actual",
+          "needs_review": false,
+          "text": "公司通过向下游集成电路、LED外延片、先进封装、MEMS等制造公司销售刻蚀设备、薄膜设备和MOCVD设备并提供配件及服务实现收入和利润；主营业务收入来源于半导体设备产品销售，其他收入来源于设备相关配件销售及设备支持服务。"
+        },
+        {
+          "claim_id": "claim-003",
+          "claim_type": "company_statement",
+          "evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:a495eee2784e9609ede9542be40772d2ffecb97d3feb3e59186bb60660109968",
+            "urn:company-wiki:evidence-span:sha256:c6aef96fbd0587678eccfe5923389eec17bc5c482d513f3ed9833e759351935c"
+          ],
+          "modality": "actual",
+          "needs_review": false,
+          "text": "公司主要采取自主研发模式，并根据产品成熟度设置研发流程。"
+        },
+        {
+          "claim_id": "claim-004",
+          "claim_type": "company_statement",
+          "evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:0492c5472f1a5098742862f5a492f96c1724923c273d2206dd0ca09c5c1ad885"
+          ],
+          "modality": "actual",
+          "needs_review": false,
+          "text": "公司采取直销为主的销售模式，因欧洲市场客户较为分散，该区域通过代理商模式开展销售。"
+        },
+        {
+          "claim_id": "claim-005",
+          "claim_type": "company_statement",
+          "evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:1a8bba7158977e4e8dac319eed0faeb195510f52c8410b8d375402b60cc25d49",
+            "urn:company-wiki:evidence-span:sha256:4c3bcfdcf5f1940e98286b2aa72f7cc03d734494c55307f73b1a9552369501bd"
+          ],
+          "modality": "actual",
+          "needs_review": false,
+          "text": "公司针对先进逻辑和存储器件制造中关键刻蚀工艺的高端产品新增付运量显著提升，相关关键刻蚀工艺在先进逻辑器件和先进存储器件中实现大规模量产。"
+        },
+        {
+          "claim_id": "claim-006",
+          "claim_type": "company_statement",
+          "evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:8c83142ba65642f76b97f050101c5cd75ec115da7b0015e7fa8099eb6a43f5e8",
+            "urn:company-wiki:evidence-span:sha256:233f316a78ec9e34f632565b82f92d6b18b26b3d4d43d5747355eb7d5cd1c07b",
+            "urn:company-wiki:evidence-span:sha256:d685cfadef032df9d9a3cc82b21a6f7e9c50bdcfcc2ce551bbd8a9b32f0917de",
+            "urn:company-wiki:evidence-span:sha256:9d6b3a58671476772d16f7e52a4142a478e2d646c5aa754f351ffe6bb68dbff1",
+            "urn:company-wiki:evidence-span:sha256:04393814a696227b95fda18c3d62ca4e5dd26c9b5e52d55008d50526a34493e5"
+          ],
+          "modality": "actual",
+          "needs_review": false,
+          "text": "近两年新开发的LPCVD薄膜设备和ALD薄膜设备已有多款新型设备进入市场，部分设备已获重要客户重复性订单，LPCVD设备累计出货量持续提升。"
+        },
+        {
+          "claim_id": "claim-007",
+          "claim_type": "company_statement",
+          "evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:4fd67d213eb91704d88cd49f9133c028dbc2ec793a30661aeeda87672ac9847e",
+            "urn:company-wiki:evidence-span:sha256:6ef57abe2ac79a35982f21f2048b32b34d49d2787417200cd4f09e02703e51cb"
+          ],
+          "modality": "actual",
+          "needs_review": false,
+          "text": "Primo、HD-RIE等刻蚀产品已广泛应用于国内外一线客户生产线，2025年继续保持高速增长态势，单年付运量提升；另有几款MOCVD新产品进入客户端验证阶段。"
+        },
+        {
+          "claim_id": "claim-008",
+          "claim_type": "company_statement",
+          "evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:f55061dda6f43232da7b16597e3ae22c6bf9601fc2d8ee5d102d9f15dfc53a33",
+            "urn:company-wiki:evidence-span:sha256:33a8b7c396f9755f3089fbcf425eefb52e144ff179574b49f115da97ed46e446",
+            "urn:company-wiki:evidence-span:sha256:3830ff3905159eb06da91f302372257144d875d12df38f43fc30c601f6de0765"
+          ],
+          "modality": "actual",
+          "needs_review": false,
+          "text": "用于LED和功率器件外延片生产的MOCVD设备已在客户生产线量产；面向氮化镓功率器件的MOCVD设备PRISMO PD5已交付客户生产验证，实现8英寸工艺便捷切换并在客户产线上验证通过、获得重复订单。"
+        },
+        {
+          "claim_id": "claim-009",
+          "claim_type": "company_statement",
+          "evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:fd42a34b1d43e906447b40337d461589494190f36c3dd5f52dd7cf34084b2d7f",
+            "urn:company-wiki:evidence-span:sha256:aa6b74886666a307eefbbe8776760d0e2a52e342f1e2c180e91a103e07351f11",
+            "urn:company-wiki:evidence-span:sha256:580fcaf667afa874d4afc2c25d91e95badb79ce9c05cf3f6d4d00613ac0e2f88"
+          ],
+          "modality": "actual",
+          "needs_review": false,
+          "text": "基于Micro-LED的高端显示产品开始实现小规模试生产，公司已完成行业头部Micro-LED外延公司的量产验证，并正推进相关新产品在Micro-LED市场的应用拓展与推广。"
+        },
+        {
+          "claim_id": "claim-010",
+          "claim_type": "company_statement",
+          "evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:0a7595e2dc10b6904b5e494ef9c5628766fe2757a2029472eb1046389096461b",
+            "urn:company-wiki:evidence-span:sha256:10505048aeba93f47831828662ce0682d11e6899abd50bdcaa0b6c4629cce81e"
+          ],
+          "modality": "actual",
+          "needs_review": false,
+          "text": "公司EPI设备研发团队通过基础研究和关键客户技术反馈开发出具有自主知识产权的产品，报告期内样机验证进展顺利，性能与可靠性满足客户产线要求并获得重复订单。"
+        },
+        {
+          "claim_id": "claim-011",
+          "claim_type": "company_statement",
+          "evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:4f9cc71df77fe93aac1452e16c94c762d405708484ea5644f4110d47f90470cd"
+          ],
+          "modality": "actual",
+          "needs_review": false,
+          "text": "用于2.5D、3D先进封装硅通孔的Primo TSV 300E产品持续服务客户。"
+        },
+        {
+          "claim_id": "claim-012",
+          "claim_type": "company_statement",
+          "evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:025d348647dc4c275ee87d523bc04dae5ed11e756611eb9e47f0cc82cd5f12d5"
+          ],
+          "modality": "actual",
+          "needs_review": false,
+          "text": "Preciomo Udx设备已在领先客户生产线上验证通过并获得重复订单。"
+        },
+        {
+          "claim_id": "claim-013",
+          "claim_type": "company_statement",
+          "evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:513e22b9e4811911baec45e98c82b2b65408a170c7fa97fa09f0af642eddddb0",
+            "urn:company-wiki:evidence-span:sha256:23226c2994e9675718e4e3655a196529d4bb4981c64b46cbc592e3e90a7aef52"
+          ],
+          "modality": "actual",
+          "needs_review": false,
+          "text": "在研项目中，用于新一代存储芯片制造的ICP刻蚀机Beta机已在3D NAND和DRAM客户产线上通过多个技术节点的多个ICP刻蚀工艺验证，部分工艺作为基线设备投入大量生产；锗硅选择性外延设备客户端Beta机完成28nm/22nm成熟制程量产验证，7nm及以下先进制程进入客户验证，部分先进工艺进入量产验证。"
+        },
+        {
+          "claim_id": "claim-014",
+          "claim_type": "company_statement",
+          "evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:e4ec93b82baaf4e3ff7036ae687dd70eb404b333aa39005f864ce72a2c49c08f",
+            "urn:company-wiki:evidence-span:sha256:659e7b6e0c3528c0b70fbd806c10e3e3782f324ba3aacde3b2de40b981a78ff7",
+            "urn:company-wiki:evidence-span:sha256:9465160e367cd2228fae0308025105e5f8bad28d12bbf8e2f53d9d6995269253"
+          ],
+          "modality": "actual",
+          "needs_review": false,
+          "text": "在研项目中，SiC功率器件外延生长设备处于客户端验证阶段，目标满足八英寸碳化硅功率器件外延生产要求；用于先进存储芯片的氮化钛设备已完成先进逻辑客户验证并持续拓展新客户交付验证；10nm以下PVD/CVD/ALD种子层集成系统已完成基本工艺需求及客户样品验证。"
+        },
+        {
+          "claim_id": "claim-015",
+          "claim_type": "company_statement",
+          "evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:8e6728806a1506f36e7c2338032ddaa0e80be284ea50364cff545a723b1ebdd6",
+            "urn:company-wiki:evidence-span:sha256:460bab6efced3fa49dd4d82422d15f618b3eb8dfb11b81d7ba29005a25180a27"
+          ],
+          "modality": "actual",
+          "needs_review": false,
+          "text": "公司目前在研项目涵盖六类设备、超二十款新设备的开发；新产品开发速度显著加快，过去通常需三到五年开发一款新设备，现在只需两年或更短时间即可开发出有竞争力的新设备并进入市场。"
+        },
+        {
+          "claim_id": "claim-016",
+          "claim_type": "company_statement",
+          "evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:3c216c04841bfc722a396a03f6816bb012f2e91a0797cd7447cc1650fbe21dc8",
+            "urn:company-wiki:evidence-span:sha256:8a645111eb4f042d64d3d8d57739b8d15dcacfd62ac5359b131bac226b98fc7b"
+          ],
+          "modality": "planned",
+          "needs_review": false,
+          "text": "2025年9月开工建设的一期项目占地约50亩，预计2026年年底建成、2027年投产。"
+        },
+        {
+          "claim_id": "claim-017",
+          "claim_type": "company_statement",
+          "evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:e73e0367acd2de749152bb4394e994d8955e5e34dfd9b4857d33a4877dc73847",
+            "urn:company-wiki:evidence-span:sha256:147b6d2e911612cc6c8d47f22955c17c1bed41c24f088482399aff42ff3e97f8",
+            "urn:company-wiki:evidence-span:sha256:4c52090d17b1921903fa599835cb22b69b31e8318612b6c74b59c79479fc4802"
+          ],
+          "modality": "planned",
+          "needs_review": false,
+          "text": "公司坚持内生性增长与外延式并购相结合的发展策略，在强化内生成长的同时考虑通过并购等外延式成长途径扩大产品和市场覆盖，并继续探索核心技术在国计民生中的创新性应用。"
+        },
+        {
+          "claim_id": "claim-018",
+          "claim_type": "company_statement",
+          "evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:7c9123d5d0f083cc290b1f073d901424a56cf8e442a63049873249dd86d9741c",
+            "urn:company-wiki:evidence-span:sha256:19fe76110eeafdba532c245d602b0a756b1850cd87e8634ee6d009866c1f66f4",
+            "urn:company-wiki:evidence-span:sha256:1716146588298267bc90b8eac63ece7f2db3ebe9ccc53a20d0bdde09257e6849",
+            "urn:company-wiki:evidence-span:sha256:9dfde81f2c81518016af97b0590d6b3c9307c154d6708155cb37d2b8d2d2afd0",
+            "urn:company-wiki:evidence-span:sha256:4f6cbe8b1c97f0a4e09c4b73a54b21e371aab3bd68578dd6e161cbdacba476de",
+            "urn:company-wiki:evidence-span:sha256:8b5932c55f7fc8410bd5ba6352ccf38696d4fa1e5e1093b6793e754e4a957ebd",
+            "urn:company-wiki:evidence-span:sha256:116610e017fccbdbdf03ff3c78f37a78048ef9b3993e598746186d57d14f95ec"
+          ],
+          "modality": "planned",
+          "needs_review": false,
+          "text": "公司发展战略以半导体前道生产的等离子体刻蚀设备、薄膜沉积设备等关键设备为主，并开发先进封装、MEMS、蓝绿光及紫外LED、Mini-LED、Micro-LED等泛半导体设备产品；未来将继续通过自主研发提高产品竞争力、提升市场份额，引领国内半导体设备和技术的发展。"
+        },
+        {
+          "claim_id": "claim-019",
+          "claim_type": "company_statement",
+          "evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:bfde7e29701d72875a7c076aeeb6879b7c81a74dea4f4b8254a7bf0414304805",
+            "urn:company-wiki:evidence-span:sha256:e759e82f059b237c234445a02fa22581cf6ed65b662544659f93306d0fb82de4",
+            "urn:company-wiki:evidence-span:sha256:8d3eb31145213261a887909af51d192b6c5990fb4dc5fb75c5667a6178d944be"
+          ],
+          "modality": "actual",
+          "needs_review": false,
+          "text": "公司践行外延式发展策略，下属的中微汇链、中微惠创、芯汇康在新业务拓展领域开展投资并购及合作开发。"
+        },
+        {
+          "claim_id": "claim-020",
+          "claim_type": "company_statement",
+          "evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:29a9e4d241a108ecf1f9f580e9a0bf79418072896cace5629a6550629f743ab4",
+            "urn:company-wiki:evidence-span:sha256:b2663cd4630d169972e90fc5ed817b46602ac8fa4b9a8ff6edbf63571e378006",
+            "urn:company-wiki:evidence-span:sha256:2dedd40f9ccac017853b1d2b86e5033ee394c5d8ec31fa8c4d844c2085647910",
+            "urn:company-wiki:evidence-span:sha256:64d78acc6dbeec2e820482d7ecffa13b5792969097e8db282c6b35e1c5e11751",
+            "urn:company-wiki:evidence-span:sha256:c5b503f16da11f22a94418096d20520e512266e2c6378fc4114357ac18fbf5c0",
+            "urn:company-wiki:evidence-span:sha256:82a0a83f8139bdb3c7eddd4b6685274a6140414439cf427b10092b58f6616aa0"
+          ],
+          "modality": "actual",
+          "needs_review": false,
+          "text": "公司推动科技创新，将环境友好、资源高效、安全可靠理念融入产品全生命周期，通过优化研发流程、强化资源投入、完善激励机制和构建开放生态提升自主创新能力；同时按作原则建立完善的供应商管理体系，强化供应链ESG风险管控。"
+        }
+      ],
+      "replay_status": "verified"
+    },
+    {
+      "sample_id": "P04",
+      "kind": "prospectus",
+      "source_sha256": "19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+      "batch_status": "blocked_human",
+      "errors": [
+        "SUMMARY_INVALID",
+        "DEPENDENCY_TERMINAL"
+      ]
+    },
+    {
+      "sample_id": "SKIP",
+      "kind": "ir_policy",
+      "source_sha256": "94d5371d95ce806401536e683a68c82ccddbbda8eaf17b1dcdf19cfedfe6d99f",
+      "batch_status": "completed",
+      "errors": [],
+      "rf_reference_exit": 0,
+      "rf_read_exit": 0,
+      "selection": {
+        "candidate_count": 0,
+        "coverage_complete": true,
+        "dropped_financial_count": 0,
+        "lines_total": 0,
+        "omitted_candidate_count": 0,
+        "pages_read": 1,
+        "pages_total": 1,
+        "selected_count": 0,
+        "source_units": 1,
+        "status": "skipped_no_narrative",
+        "tables_scanned": 1,
+        "tables_total": 1
+      },
+      "quality": "skipped_no_narrative",
+      "language": "en",
+      "artifact_bytes": 1418,
+      "locator_count": 0,
+      "claims": [],
+      "replay_status": "verified"
+    }
+  ],
+  "checks": {
+    "budget_with_old_unknown": true,
+    "all_documents_completed": false,
+    "originals_unchanged": true,
+    "production_unchanged": true,
+    "user_config_unchanged": true,
+    "rf_owner_unchanged": true
+  },
+  "cleanup": {
+    "before": "absent",
+    "after": "absent",
+    "restored": true
+  },
+  "rf_exported_modules": [
+    "company_wiki_narrative_contracts",
+    "company_wiki_narrative_posix",
+    "company_wiki_narrative_process",
+    "company_wiki_narrative_reader",
+    "company_wiki_narrative_tree",
+    "narrative_source_preparation"
+  ],
+  "batch_pid": 16956,
+  "batch_result": {
+    "budget": {
+      "estimated_micro_usd": 14431,
+      "tokens": 63919,
+      "unknown_reservations": 2,
+      "unsettled_reservations": 0
+    },
+    "documents": [
+      {
+        "artifact_ref": {
+          "artifact_version_id": "narrative-dfd9c28ea8494a089c0e577207c9234c",
+          "byte_size": 149782,
+          "content_sha256": "1847ce99947f1b01d16c4f1b301a21d86e874bc84cd1951b798ab5515db6d051",
+          "document_id": "urn:company-wiki:document:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+          "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+          "source_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5"
+        },
+        "document_id": "urn:company-wiki:document:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+        "errors": [],
+        "status": "completed"
+      },
+      {
+        "artifact_ref": null,
+        "document_id": "urn:company-wiki:document:sha256:19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+        "errors": [
+          "SUMMARY_INVALID",
+          "DEPENDENCY_TERMINAL"
+        ],
+        "status": "blocked_human"
+      },
+      {
+        "artifact_ref": {
+          "artifact_version_id": "narrative-aab39fe4579a4058a2e0bead03a92c9e",
+          "byte_size": 1418,
+          "content_sha256": "f99bf3770d2fe1edb28820e328402f66711eeec5f040fbbbcfbcaaa3c27fc49e",
+          "document_id": "urn:company-wiki:document:sha256:94d5371d95ce806401536e683a68c82ccddbbda8eaf17b1dcdf19cfedfe6d99f",
+          "source_id": "urn:company-wiki:source:sha256:94d5371d95ce806401536e683a68c82ccddbbda8eaf17b1dcdf19cfedfe6d99f",
+          "source_sha256": "94d5371d95ce806401536e683a68c82ccddbbda8eaf17b1dcdf19cfedfe6d99f"
+        },
+        "document_id": "urn:company-wiki:document:sha256:94d5371d95ce806401536e683a68c82ccddbbda8eaf17b1dcdf19cfedfe6d99f",
+        "errors": [],
+        "status": "completed"
+      }
+    ],
+    "run_id": "n4c-20261005-live-mimo-05",
+    "schema_version": "narrative-batch-result/1",
+    "status": "failed",
+    "storage": {
+      "persistent_added_bytes": 967121,
+      "scratch_peak_bytes": 149782
+    }
+  },
+  "returncode": 2,
+  "batch_seconds": 362.258,
+  "peak_process_tree_rss": 497098752,
+  "peak_test_root_bytes": 21769241,
+  "reservations": [
+    {
+      "attempt_id": "09764ef47aea45cbbe267becb44976dc",
+      "run_id": "n4c-20261005-live-mimo-05",
+      "job_id": "a2fd55f0eba72c27",
+      "request_sha256": "fecead139e81b836c71a74933c6316238ced976a4be06e5f382ac9672b6108ef",
+      "input_tokens_bound": 16653,
+      "max_output_tokens": 8192,
+      "output_bytes_bound": 2097152,
+      "reserved_micro_usd": 5507,
+      "usage_status": "unknown",
+      "input_tokens": null,
+      "output_tokens": null,
+      "estimated_micro_usd": null,
+      "response_sha256": null,
+      "error_code": "MODEL_TIMEOUT",
+      "output_bytes": 0,
+      "output_sha256": null,
+      "reserved_at": "2026-10-06T17:19:30Z",
+      "usage_settled_at": "2026-10-06T17:20:30Z",
+      "output_settled_at": "2026-10-06T17:20:30Z"
+    },
+    {
+      "attempt_id": "4fbac90b44744699b2965c2f24705bc0",
+      "run_id": "n4c-20261005-live-mimo-05",
+      "job_id": "a2fd55f0eba72c27",
+      "request_sha256": "fecead139e81b836c71a74933c6316238ced976a4be06e5f382ac9672b6108ef",
+      "input_tokens_bound": 16653,
+      "max_output_tokens": 8192,
+      "output_bytes_bound": 2097152,
+      "reserved_micro_usd": 5507,
+      "usage_status": "known",
+      "input_tokens": 4067,
+      "output_tokens": 3586,
+      "estimated_micro_usd": 1874,
+      "response_sha256": "a22d189e037c96a561e039942c0e08a48624d5c33bd063ae237e5cf5b5adb468",
+      "error_code": null,
+      "output_bytes": null,
+      "output_sha256": null,
+      "reserved_at": "2026-10-06T17:23:28Z",
+      "usage_settled_at": "2026-10-06T17:24:16Z",
+      "output_settled_at": null
+    },
+    {
+      "attempt_id": "76cd1e1d82374e76a72b3f4a6b6cf3e8",
+      "run_id": "n4c-20261005-live-mimo-05",
+      "job_id": "592a7b6b6a0f7205",
+      "request_sha256": "46282f3b339bbb02cf5360e53e70643c1c698e12912c4cffae1b41c1a7df1ade",
+      "input_tokens_bound": 15915,
+      "max_output_tokens": 8192,
+      "output_bytes_bound": 2097152,
+      "reserved_micro_usd": 5384,
+      "usage_status": "known",
+      "input_tokens": 3900,
+      "output_tokens": 2676,
+      "estimated_micro_usd": 1543,
+      "response_sha256": "dd5a01c82365a7869b2c5ac021d10984142db32f81423425bb76b814caa0147a",
+      "error_code": null,
+      "output_bytes": 149782,
+      "output_sha256": "1847ce99947f1b01d16c4f1b301a21d86e874bc84cd1951b798ab5515db6d051",
+      "reserved_at": "2026-10-06T17:18:34Z",
+      "usage_settled_at": "2026-10-06T17:19:30Z",
+      "output_settled_at": "2026-10-06T17:24:17Z"
+    },
+    {
+      "attempt_id": "b862d17378df485ea254e8e319eb92a4",
+      "run_id": "n4c-20261005-live-mimo-05",
+      "job_id": "a2fd55f0eba72c27",
+      "request_sha256": "fecead139e81b836c71a74933c6316238ced976a4be06e5f382ac9672b6108ef",
+      "input_tokens_bound": 16653,
+      "max_output_tokens": 8192,
+      "output_bytes_bound": 2097152,
+      "reserved_micro_usd": 5507,
+      "usage_status": "unknown",
+      "input_tokens": null,
+      "output_tokens": null,
+      "estimated_micro_usd": null,
+      "response_sha256": null,
+      "error_code": "MODEL_TIMEOUT",
+      "output_bytes": 0,
+      "output_sha256": null,
+      "reserved_at": "2026-10-06T17:21:14Z",
+      "usage_settled_at": "2026-10-06T17:22:14Z",
+      "output_settled_at": "2026-10-06T17:22:14Z"
+    }
+  ],
+  "model_attempt_reservations": 4,
+  "confirmed_metered_responses": 2,
+  "overall_charged_tokens": 122442,
+  "overall_charged_micro_usd": 48315,
+  "final_files": {
+    "automation.db": 712704,
+    "automation.db-shm": 32768,
+    "automation.db-wal": 0,
+    "automation.db.batch-owner.lock": 1,
+    "request.json": 1956,
+    "stderr.log": 0,
+    "stdout.json": 1790,
+    "catalog\\catalog.sqlite3": 294912,
+    "catalog\\catalog.sqlite3-shm": 32768,
+    "catalog\\catalog.sqlite3-wal": 70072,
+    "catalog\\operation.lock.acquire": 1,
+    "config\\catalog.json": 270,
+    "rf-consumer\\company_wiki_narrative_contracts.py": 25847,
+    "rf-consumer\\company_wiki_narrative_posix.py": 2824,
+    "rf-consumer\\company_wiki_narrative_process.py": 8500,
+    "rf-consumer\\company_wiki_narrative_reader.py": 3348,
+    "rf-consumer\\company_wiki_narrative_tree.py": 6960,
+    "rf-consumer\\narrative_source_preparation.py": 2400,
+    "run-work\\storage-baseline.json": 116,
+    "run-work\\logs\\compute-1.stderr.log": 0,
+    "run-work\\logs\\compute-1.stdout.log": 87,
+    "run-work\\logs\\compute-2.stderr.log": 0,
+    "run-work\\logs\\compute-2.stdout.log": 87,
+    "run-work\\logs\\compute-3.stderr.log": 0,
+    "run-work\\logs\\compute-3.stdout.log": 87,
+    "run-work\\logs\\model-1.stderr.log": 0,
+    "run-work\\logs\\model-1.stdout.log": 0,
+    "companies\\中微公司\\raw\\prospectus\\中微公司：首次公开发行股票并在科创板上市招股说明书.pdf": 11211796,
+    "companies\\中微公司\\raw\\prospectus\\中微公司：首次公开发行股票并在科创板上市招股说明书.pdf.source.json": 1095,
+    "companies\\中微公司\\raw\\financial_reports\\annual\\中微公司：2025年年度报告.pdf": 9165875,
+    "companies\\中微公司\\raw\\financial_reports\\annual\\中微公司：2025年年度报告.pdf.source.json": 840,
+    "companies\\Acme\\raw\\investor_relations\\policy.pdf": 843,
+    "companies\\Acme\\raw\\investor_relations\\policy.pdf.source.json": 628,
+    "catalog\\objects\\sha256\\18\\1847ce99947f1b01d16c4f1b301a21d86e874bc84cd1951b798ab5515db6d051.json": 149782,
+    "catalog\\objects\\sha256\\f9\\f99bf3770d2fe1edb28820e328402f66711eeec5f040fbbbcfbcaaa3c27fc49e.json": 1418
+  },
+  "final_budget": {
+    "run_id": "n4c-20261005-live-mimo-05",
+    "charged_tokens": 63919,
+    "charged_micro_usd": 14431,
+    "charged_output_bytes": 2246934,
+    "unknown_reservations": 2,
+    "unsettled_reservations": 0
+  },
+  "attempt_diagnostics": [
+    {
+      "job_id": "0470dbfe7c887da7",
+      "job_type": "source.narrative_select",
+      "attempt_id": "9be87190432743e5800ea62ab5320f1e",
+      "started_at": "2026-10-06T17:18:17Z",
+      "finished_at": "2026-10-06T17:18:50Z",
+      "outcome": "succeeded",
+      "error_code": null,
+      "error_detail": null
+    },
+    {
+      "job_id": "48a666a8e2712963",
+      "job_type": "source.narrative_verify",
+      "attempt_id": "6d9a652f4eca4fd381f735324fba5aec",
+      "started_at": "2026-10-06T17:19:31Z",
+      "finished_at": "2026-10-06T17:19:32Z",
+      "outcome": "succeeded",
+      "error_code": null,
+      "error_detail": null
+    },
+    {
+      "job_id": "592a7b6b6a0f7205",
+      "job_type": "source.narrative_summarize",
+      "attempt_id": "76cd1e1d82374e76a72b3f4a6b6cf3e8",
+      "started_at": "2026-10-06T17:18:33Z",
+      "finished_at": "2026-10-06T17:19:30Z",
+      "outcome": "succeeded",
+      "error_code": null,
+      "error_detail": null
+    },
+    {
+      "job_id": "863ab61c7e4e3726",
+      "job_type": "source.narrative_verify",
+      "attempt_id": "2d7fd589ef5246c29e89ea438e9844af",
+      "started_at": "2026-10-06T17:18:18Z",
+      "finished_at": "2026-10-06T17:18:18Z",
+      "outcome": "succeeded",
+      "error_code": null,
+      "error_detail": null
+    },
+    {
+      "job_id": "97642256b77eda17",
+      "job_type": "source.narrative_select",
+      "attempt_id": "3f7ff5750e9f458897ba5eeec4c63873",
+      "started_at": "2026-10-06T17:18:17Z",
+      "finished_at": "2026-10-06T17:18:18Z",
+      "outcome": "succeeded",
+      "error_code": null,
+      "error_detail": null
+    },
+    {
+      "job_id": "a2fd55f0eba72c27",
+      "job_type": "source.narrative_summarize",
+      "attempt_id": "09764ef47aea45cbbe267becb44976dc",
+      "started_at": "2026-10-06T17:19:30Z",
+      "finished_at": "2026-10-06T17:20:30Z",
+      "outcome": "retryable",
+      "error_code": "MODEL_TIMEOUT",
+      "error_detail": "metered model attempt did not complete"
+    },
+    {
+      "job_id": "a2fd55f0eba72c27",
+      "job_type": "source.narrative_summarize",
+      "attempt_id": "b862d17378df485ea254e8e319eb92a4",
+      "started_at": "2026-10-06T17:21:14Z",
+      "finished_at": "2026-10-06T17:22:14Z",
+      "outcome": "retryable",
+      "error_code": "MODEL_TIMEOUT",
+      "error_detail": "metered model attempt did not complete"
+    },
+    {
+      "job_id": "a2fd55f0eba72c27",
+      "job_type": "source.narrative_summarize",
+      "attempt_id": "4fbac90b44744699b2965c2f24705bc0",
+      "started_at": "2026-10-06T17:23:28Z",
+      "finished_at": "2026-10-06T17:24:16Z",
+      "outcome": "terminal_failure",
+      "error_code": "SUMMARY_INVALID",
+      "error_detail": "model draft violates the summary contract"
+    },
+    {
+      "job_id": "e62322e60ea20a29",
+      "job_type": "source.narrative_select",
+      "attempt_id": "e1ccdb8f12274fdeac6547629adb9d43",
+      "started_at": "2026-10-06T17:18:17Z",
+      "finished_at": "2026-10-06T17:18:33Z",
+      "outcome": "succeeded",
+      "error_code": null,
+      "error_detail": null
+    },
+    {
+      "job_id": "f4cb42096ef31450",
+      "job_type": "source.narrative_summarize",
+      "attempt_id": "2280e949bfec457294e91e7ff4c60cf9",
+      "started_at": "2026-10-06T17:18:18Z",
+      "finished_at": "2026-10-06T17:18:18Z",
+      "outcome": "succeeded",
+      "error_code": null,
+      "error_detail": null
+    }
+  ],
+  "total_seconds": 369.567
+}

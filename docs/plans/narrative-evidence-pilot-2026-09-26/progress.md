@@ -1,9 +1,17 @@
 # Progress：激进简化实施
 
+## 2026-10-06 — N4C两家真实批次与N5三包
+
+- MiMo run05已终态failed/362.258s：年报P01实际摘要20claims/96locators、RF read0、quality verified；招股P04两次MODEL_TIMEOUT后返回计量但SUMMARY_INVALID，无final；policy skip/RF read0/0LLM。DeepSeek run06 completed/48.427s：IR13claims/11locators与英文电话会14claims/14locators，RF read0、完整引用回放、原语言通过；IR needs_review仅质量诊断。receipt中中文实际无U+FFFD，shell显示乱码来自stdout编码，不改原文。
+- 两批终于finally恢复根absent，原件/生产/用户配置/owner不变。峰值root21769241/1221344 B、RSS497098752/353435648 B；实际三个real final共245396 B，policy2×1418 B，未保留生产新final。旧账+本轮累计136108tokens/63228microUSD，unknown6/unsettled0，费用扣FX后余34008microUSD、token23892。招股同请求最坏24863不可直接复测；先诊断规则，再修复/合理降低输入预留，不能改8192/清账/冒称四类全过。
+- 初次只读状态probe用relative.as_uri失败已改用现成RunStore；后续一次对已终态session读取Unknown process id，直接验run06终态收据，未重启批次。两次猜不存在summary文件/Windowsrg glob读取错误仅是定位问题，后续使用CodeGraph定位，不能当产品RED。
+- 新N5施工总包和3独立卡已写：CWP仅新benchmarks质量目录；CWP仅新只读raw_duplicate_audit工具目录；ET仅本地scraper/TXT receipt，三独立worktree且物理/写集不重叠。StockWiki只读调查无明确独立待办，CodeGraph索引陈旧不据之编造任务；ET真实空/错期/Characters虚报复用缺口已Mock复现。未启动外包，不等N5才处理MAIN招股失败。
+
 ## 2026-10-06 — N4C预算答复到达，恢复真实节点
 
 - 用户明确批准累计token从60k提高至160k；费用仍$0.10，旧58523tokens/33884microUSD及unknown4、FX2764照计。RF本地/remote main仍6e6b817a，仅owner两份周日志dirty。先MiMo年报/招股，再按实际余量DeepSeek IR/英文电话会，配置参数保持，不再等待预算答复。
 - MiMo run05 exec在CreateProcess前被自动审批拒绝，尚无live handle/模型请求。理由为资料/目的地授权未具体覆盖MiMo（此前MiniMax明确授权）；已一次UI询问两家与各自两份资料，不换端点绕过。run05测试根/付费收据未创建，账本不增加。批准预算与此次外发权限是两个不同事实，等待仅具体外发答复。
+- 用户随后明确授权上述两家及对应资料外发，run05已实际启动（MiMo、年报/招股+policy、P4计算/单model）。此前拒绝不重复问、不绕过；运行结果待实际终态，未称通过。
 
 ## 2026-10-06 — N4C跨日计费接线补漏
 

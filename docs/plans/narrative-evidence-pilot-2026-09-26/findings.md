@@ -1,5 +1,11 @@
 # Findings：当前事实与待验证项
 
+## N4C真实结果与新并行范围（2026-10-06）
+
+- MiMo年报真实summary/consumer通过，招股两次timeout+SUMMARY_INVALID；DeepSeek IR/英文电话会真实完成。故真实能力不是全部失败，也不是四类已过；需针对招股摘要合同继续调查。现只有通用安全错误信息，原invalid draft随finally清理，不能凭记忆推断是哪一条规则。已知actualusage与unknown全部计入，剩23892tokens小于原请求24863最坏预留，不能直接盲重试。
+- 三个真实final合计245396 B，不到0.25MB；独立root峰值主要含测试raw副本与数据库，结束全部恢复，不是生产空间反弹。IR needs_review仍可通过RF读，这是质量事实而非权限签收。两批原件、生产事实、配置/owner均保持；完整结果见run05/06小收据。
+- N5-DOCSET补半年报/季报/再融资等黄金评估，标准先读原文而非从selector反推；N5-RAW-DUP给原件exact-SHA重复的真实有限实读收益，不删原件；N5-ET-TXT修本地旧文件空/错期也reused、Characters冒充bytes的已证实问题。三个写集独立，不动当前runtime/shared contracts。ET免费Motley被现有policy禁用、FMP发布日缺失不能造字段，不以这个本地TXT修复声称主线免费抓取升级。
+
 ## N4C预算阻塞解除（2026-10-06）
 
 - 用户批准待答的160k累计token方案，美元cap未变；不退旧账或降低模型配置。官方MiMo价格仍国内Flash输入¥1/输出¥2每百万，Token Plan与PAYG不互通；DeepSeek官方USD peak输入$0.3/输出$1.2低于既有CNY/FX6保守proxy，沿用旧proxy不记真实invoice。来源：https://mimo.mi.com/docs/en-US/price/pay-as-you-go 、https://api-docs.deepseek.com/quick_start/pricing/ 。中文DeepSeek页首次超时，英文官方页成功，未调用模型。

@@ -1,5 +1,7 @@
 # 并行总计划：门禁先行，独立目录施工，MAIN统一打通
 
+> **2026-10-06新可启动范围：**见[N5三包总计划](harness_lanes/n5_parallel_packages_2026-10-06.md)：DOCSET真实文档质量基准、RAW-DUP只读原件重复工具、ET-TXT本地TXT验真。新独立worktree、写集不重叠，均无需等待MAIN真实N4C；不重派下方已完成P5/StockWiki消费者，不碰IQS/Dayu/RF。
+
 > **2026-10-06最新覆盖：**P5-FF已验收并入main758e8f4/精确CI37385101051 GREEN；P5-STORAGE已验收e570daf，生产处置与S6收尾均已完成。RF已验收并推main ca67eab7（默认链代码b110502f）；精确CI37391526925一次全绿、job32秒。本地正式revenue-forecast已切main同步，旧rf-impl WIP原样保留在独立分支；三处已安装来源入口SHA与主线一致。不重派或写穿。MAIN运行旧generator已退出安装包b148123，229个不同case分步GREEN、真实PDF/TXT原件/来源事实保持且0新全文派生；CI37388329668已completed/success。质量/正式精选接口已发布绿。下方旧日期仅作追溯，不产生待办或签收。
 
 ## P5交付与独占目录（均已完成，不再派发）
