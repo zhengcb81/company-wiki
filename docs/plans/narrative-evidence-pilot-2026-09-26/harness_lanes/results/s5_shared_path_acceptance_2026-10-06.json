@@ -1,7 +1,10 @@
 {
   "schema_version": "cwp-storage-shared-path-acceptance/1",
   "date": "2026-10-06",
-  "status": "node_green_pending_publish",
+  "status": "published_green",
+  "code_head": "96f44a14127b40d97d00f30fa7ebbb183d94064a",
+  "ci": {"run_id": 37394193179, "status": "completed", "conclusion": "success", "attempt": 1, "job_seconds": 75},
+  "production_preview": {"status": "succeeded", "candidate_records": 6714, "unique_files": 7072, "unique_bytes": 2825969544, "retirement_handles": 8191, "shared_aliases": 1477, "blank_summaries_added": 235, "excluded": 0},
   "red": {"collected": 12, "failed": 12, "seconds": 22.73, "fixture_errors": 1},
   "first_green": {"passed": 20, "seconds": 36.68},
   "concentrated_node": {

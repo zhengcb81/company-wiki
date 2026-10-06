@@ -12,6 +12,8 @@
 
 ## 2026-10-05 四仓状态与当前主线
 
+**2026-10-06最新生产执行状态（覆盖上方“生产未删”及下方历史空间值）：**共享路径工具修复96f44a1已发布且精确CI37394193179 attempt1全绿；生产preview零排除。实际retire已succeeded：7072文件/2825969544 B删除，8191旧handle退休（1477共享alias），derived从2826010634降至41090 B，17表来源事实、新final和user config不变、integrity ok。实际节点会话15696正继续8类旧parser范围prune与VACUUM，当前还不能报告DB物理释放或整个S5/S6完成。161251328 B source-only恢复点和操作manifest/收据保留至最终公开原文与来源事实校验成功。
+
 本节为当前执行状态，优先于下方较早的baseline、并行线状态和 Next Step 历史文本。
 
 - **Revenue Forecast**：fcap 的 DWA-04R 有价值证据载体/账本以 merge commit `8a153f3387ae75fb172e70f8ab63ffd38100779a` 推到 `origin/main`；保留主线 UC/hash-pending 语义，UC 聚焦测试 29 passed。稀疏 worktree 的 `tools/pre_push_gate.py` 不存在，故只记录对应钩子跳过，不宣称该门通过。
@@ -117,7 +119,7 @@ TDD框住公开行为，不把旧签收规则写进新测试。仅S0相关收口
 
 ## Next Step
 
-**MAIN单一下一动作：按[S5生产盘点补充细则](s5_s6_legacy_storage_implementation.md)修复存储工具的共享路径退休/物理字节去重，再集中验收并执行生产处置大节点。**CWP运行旧generators已收口b148123，代码CI37388329668已completed/success；历史测试夹具不进入安装包，343份生产Python无tests/support imports。FF和STORAGE均已验收，不重派/不复跑历史大包。RF已验收并推main ca67eab7（默认链代码b110502f；PWF收尾6e6b817a）；精确CI37391526925一次全绿、job32秒。本地正式revenue-forecast已切main同步，旧rf-impl WIP原样保留在独立分支；三处已安装来源入口SHA与主线一致。外包交付树不改；生产derived/span/VACUUM的消费者迁移前置已满足；下一步按实际清单范围执行，原件不删。N4C模型预算问题独立等待，不阻只读准备。
+**MAIN单一下一动作：按[S5生产盘点补充细则](s5_s6_legacy_storage_implementation.md)完成修正清单的生产范围预览，精确代码CI绿后执行实际退役/切片处置/压缩大节点。**共享路径退休/物理字节去重已TDD收口，集中49 passed/87.25s，代码96f44a1已正常commit/push，CI37394193179已确认live（未完成前不宣称GREEN）；生产预览使用旧manifest补充235空标签summary，不重新生成百万legacy表摘要。CWP运行旧generators已收口b148123，FF和STORAGE均已验收，不重派/不复跑历史大包。RF正式本地/远端main6e6b817a、精确代码CI37391526925全绿，owner两周日志与旧WIP不变。生产尚未删除；原件和新final保持，消费者迁移前置已满足。N4C模型预算问题独立等待，不阻存储节点。
 
 P5-STORAGE已验收并合入/发布：候选`9fa2166`，主线代码`e570dafb92a3f6aaec51176682d348a1c9303535`。53个不同case分步GREEN，真实AMEC年报+微软电话会TXT的原文stdout SHA、新NarrativeRef完整locator replay前后通过，连接关闭及测试根恢复均通过；没有生产删除。工具预览不写库/sidecar、不拿写锁；切片单次范围SQL/聚合小报告；压缩真实前后计量/空间检查，观测失败明确null。所有细节及实际副本空间见[集成审查](harness_lanes/results/p5_storage_integration_review_2026-10-05.md)、[小验收收据](harness_lanes/results/p5_storage_integration_acceptance_2026-10-05.json)、[工具说明](../../../tools/legacy_storage/README.md)。日常Unit CI不添加多分钟解析包。精确新代码[CI37375836745](https://github.com/zhengcb81/company-wiki/actions/runs/37375836745)已completed/success；此前18da250同SHA重跑CI也已success。
 

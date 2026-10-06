@@ -845,3 +845,12 @@ S0/N4A及S2模型预算基础、CLI阶段与CI修复已正常发布，当前CI�
 - 新真实schema小夹具责任包12 collected，12 RED/22.73s；11项证实同路径handle未同步退休、未知/active/跨document共享引用可被删、事务快照后新增alias未阻止物理删除、重复字节累计及空标签summary不识别。1项测试夹具给不存在source_id违反外键，改为另一个已存在来源，保持拒绝跨来源要求。
 - CodeGraph未覆盖tools旧清理模块，返回来源类入口；沿已知工具文件检查。历史0254847 parser metadata/summary.md布局及生产exact parser版本提供窄识别依据。实现已开始；不自动放开unknown，不写生产库，不重建旧转换。短根s5sharedred已finally恢复absent。
 - 新增切片成员与独立记录重合、未知index传递阻断、未选index子文件保护、direct parser及空标签summary实际退休；最终存储集中节点49 passed/87.25s，Ruff和git diff --check GREEN。s5sharedred/green/node均恢复absent，user config SHA保持，生产0删除。收据s5_shared_path_acceptance_2026-10-06.json已写；准备正常发布，不增加日常慢CI。
+- 代码96f44a14127b40d97d00f30fa7ebbb183d94064a已正常commit/push，pre-commit与pre-push GREEN。GitHub精确CI37394193179 attempt1 completed/success，全部job成功（75秒）；不是未提交候选或旧SHA重跑。
+- 原manifest保留，tmp/s5-storage-20261006/preview_shared_scope.py按已识别范围补充空标签summary并按实际唯一物理路径计量。修正manifest已写，生产readonly retire-derived preview session56274 confirmed live；0生产删除，等待同一handle，不因观察超时重启。
+- 生产preview session56274 terminal exit0/succeeded：补235空标签summary，6714候选记录/7072唯一文件/2825969544 B，8191退休handle含1477共享alias，excluded0；来源17表/新final/配置SHA均保持。旧manifest与修正manifest都保留供恢复。独立只读SQL证实共享document/source冲突0，新final0，其他表没有span/locator列引用，保持来源事实全部不变。
+- 已启动已授权实际S5/S6节点execute_storage_node.py：先四份公开原文CLI字节核验和17表小型source-only checkpoint；再retire、8类明确旧parser范围prune、VACUUM、同四份原文与事实校验。不完整备份3GB库/恢复演练，不调用模型/下载。只在成功小收据写出后清理临时操作材料；失败保留恢复点。
+- 修正前日志通配路径又一次只读rg错误，已改精确文件列表；不再使用Windows rg字面通配路径。
+- 第一次实际节点exit1，在before原文CLI遇capture_incomplete；尚未创建checkpoint/retire/prune/VACUUM，生产零删除。原因是施工脚本省略purpose导致default filing_reuse，四份历史原文有缺公开日期的资料；本存储验收应为已有preview模式的原字节可读，不应伪报财报复用资格。核当前reader后显式--purpose preview再执行，保持财报身份/期次/公开日校验和原SHA断言，不修改产品门禁或生产来源字段。
+- 修正preview目的后的实际节点session15696 confirmed live，production.before已ready：同四份raw公开stdout SHA/size通过，17表source-only checkpoint161251328 B（不包含artifacts/evidence全文或原件），checkpoint事实digest与当前17表一致。进入retire执行；尚未终态前不声称生产释放字节，恢复清单/checkpoint/分阶段报告保留。
+- production.retire已succeeded：实际删除7072文件2825969544 B，derived2826010634→41090 B；8191旧handle退休，1477共享alias闭合；excluded0，source facts17表完全一致，新final0→0、integrity ok。当前session15696继续prune/VACUUM，不把freelist变化报为物理释放。来源恢复点与大操作材料仍保留；终态前不写总体成功。
+- 顺手强化N4实施卡顶部交接：纠正旧run02余额/旧MiMo Pro/DeepSeek401历史恢复点，引用实际flash配置GET200与run04保守账；160k/$0.10授权问题尚待答复、旧未知账不退，不能依据旧段落重跑或更改参数。读tmp全路径遇旧cw-retire-r1 ACL仅只读失败，后续改精确已知报告路径。

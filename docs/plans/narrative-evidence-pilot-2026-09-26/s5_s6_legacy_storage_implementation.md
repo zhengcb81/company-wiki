@@ -8,6 +8,10 @@ P5-FF与P5-STORAGE均已验收并发布，精确CI已再核success。CWP旧生�
 
 ## 2026-10-06生产盘点后必须收口的共享路径问题
 
+**当前实际运行：**代码96f44a1已推master，精确CI37394193179 attempt1全绿。生产readonly预览结束：6714候选、7072唯一文件/2825969544 B、8191相关旧handle（1477共享alias）、excluded0。实际节点`tmp/s5-storage-20261006/execute_storage_node.py`正在运行；会话15696、当次PID39672只作定位线索，恢复时必须确认真实进程或工具handle仍live，不能仅看文件。四份生产原文公开CLI `--purpose preview` SHA/size已通过，17表source-only checkpoint161251328 B与preview事实完全一致；没有整库备份/恢复演练。当前stage为retire，未见终态收据时不能报告释放量。
+
+**中断接手规则：**先读同目录`production.before.json`、`production.retire.json`、各`production.prune.*.json`、`production.vacuum.json`与`production.aggregate.json`，再核当前DB/文件。进程live就等待原进程，不另启动；只有terminal/missing且未成功才接续。保留原before/checkpoint/manifest和已成功阶段收据，不盲重跑或覆盖整个一次性脚本；用正式`tools/legacy_storage_retirement.py`仅重试未完成操作，retire复用`manifest.revised.json`，输出新命名的恢复收据。prune仅用原manifest的8个精确parser/version，保留引用集合本次实际为空（production新final0、其他表无span/locator字段或evidence外键）；若后来新增final则重新取当前keep refs。VACUUM成功后对比原before的17表digest、同四份preview stdout SHA/size、配置SHA和实际文件/DB字节，再写聚合并清除一次性材料。失败保留小恢复点，不恢复全文缓存、不备份/还原整库，不重新做49项/历史53项长测。
+
 **实现恢复点：**共享路径闭合、事务内当前引用集合复核、sections所有权及物理字节去重已实现。新增16项责任测试连同既有恢复/边界/规模共49 passed/87.25s，Ruff与diff检查GREEN，测试根均恢复absent；收据为[harness_lanes/results/s5_shared_path_acceptance_2026-10-06.json](harness_lanes/results/s5_shared_path_acceptance_2026-10-06.json)。生产尚未处置，下一动作是正常发布/精确CI及旧manifest范围补充预览，再进入第5项实际降容。不是重新签收P5-STORAGE或新增小节点。
 
 RF默认链已经main发布/精确CI绿，本地与安装生产依赖同步。一次inventory已成功结束，真实aggregate见[harness_lanes/results/s5_production_preflight_2026-10-06.json](harness_lanes/results/s5_production_preflight_2026-10-06.json)。操作manifest为tmp/s5-storage-20261006/manifest.json（5588419B，恢复输入，不提交Git）；不重复多分钟的全legacy表摘要盘点，只对修正相关范围核验。
