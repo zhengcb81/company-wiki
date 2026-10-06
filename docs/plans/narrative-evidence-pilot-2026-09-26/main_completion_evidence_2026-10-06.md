@@ -22,6 +22,8 @@ run09已按已批准预算做过一次修复后T01复测：供应商finish_reaso
 
 当前提示词没有输出长度目标，增加证据后机械逐条输出存在膨胀风险；官方[模型说明](https://api-docs.deepseek.com/quick_start/pricing/)称Flash默认thinking。本次没有reasoning/content分项，不断言截断来自哪部分。已按TDD实现私有prompt1.5最多20条/280字符/8个alias，并优先管理层具体更新、去重；160段正文/角色/全部原文定位不减，公共reader/既有草案不加此硬门。2 RED→59相关Unit与2正式双语言CLI E2E GREEN，Ruff/mypy绿；不改Config、max_tokens、thinking、stream或超时。
 
+兼容性直接验证：新增integration case建立独立原文/catalog，用25个管理层段落及每条超过280字符的模拟旧prompt1.4草案，经真实artifact prepare/activate和当前public transport读取，stdout bytes保持原样、全部locator replay verified、原件不变；1 passed/3.09s。首轮夹具把多句当完整span而StopIteration，改为单句原文，不改产品解析或校验。[小收据](harness_lanes/results/n4c_legacy_summary_read_2026-10-06.json)明确这是合成兼容测试，不是新真实模型验收。
+
 [新真实请求测量](harness_lanes/results/n4c_short_summary_request_2026-10-06.json)零POST，body10435 B，预留18755tokens/14445microUSD；token足够、费用不足。已提出累计费用$0.12，当前尚待用户答复；未答不得外发，不使用临时off-peak折价绕过预算、不退旧未知账。费用代理仍不冒充供应商现金账单。
 
 ## 外线与交接

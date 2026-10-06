@@ -1,0 +1,16 @@
+{
+  "schema_version": "n4c-legacy-summary-compatibility/1",
+  "status": "verified_locally",
+  "production_code_head": "4d019b5435b8b277c059f6d4abbe62cc09f684f3",
+  "fixture": "synthetic immutable transcript with 25 distinct management operating paragraphs; simulated old prompt 1.4.0",
+  "new_generation_prompt": "1.5.0",
+  "old_summary": {"claims": 25, "all_claims_longer_than_characters": 280},
+  "command": "python -m pytest tests/integration/test_narrative_transport.py::test_current_reader_preserves_older_summary_above_new_generation_targets -q -o addopts= --basetemp tmp/n4oldfix",
+  "test_result": {"passed": 1, "seconds": 3.09, "ruff": "passed"},
+  "initial_fixture_failure": "StopIteration: multi-sentence original was incorrectly assumed to be one parsed span; fixture changed to one sentence, product parser unchanged",
+  "checks": {"actual_artifact_prepare_activate": true, "public_transport_read": true, "persisted_payload_returned_unchanged": true, "original_unchanged": true, "replay_status": "verified"},
+  "model_posts": 0,
+  "production_writes": 0,
+  "cleanup": {"roots": ["tmp/n4oldread", "tmp/n4oldfix"], "after": "absent", "restored": true},
+  "remaining_goal_gap": "new real T01 business summary quality; current cost cap cannot reserve another unchanged-config request"
+}

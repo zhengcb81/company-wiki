@@ -768,3 +768,9 @@ e570daf已发布，精确CI37375836745 success。53个不同case分步GREEN。�
 - 新零POST真实请求10435 B，预留18755tokens/14445microUSD；token足够但费用不足。已向用户提出累计费用$0.12、同一T01→DeepSeek单次复测，token200k/Config8192/温度1.0和全部旧费不变；截至本记录答复未到，不增加paid calls。短摘要目标本地完成不等于真实业务摘要已完成，目标保持active。两份节点/请求小收据、run09和CI更新PWF，正常提交发布。
 
 - 最终发布复核：短摘要代码4d019b5435b8b277c059f6d4abbe62cc09f684f3与origin/master一致，正常commit/pre-push GREEN；精确CI37511515796 attempt1所有job/步骤success，76秒，小收据与节点状态已更新。仅用户source_acquisition.yaml仍dirty，SHA3609e707保持；其他仓零写。run08/run09/本轮11个明确测试根全部恢复absent；N4本轮小收据总计约0.2MB，不留大正文/请求/无效响应。累计费用$0.12答复仍未到，未提高执行cap、未再POST，目标active且唯一Next Step明确。
+
+## 2026-10-06 — 自动续跑：旧长草案读取兼容与完成证据核对
+
+- 前一goal turn为实质进展（两次代码发布及精确CI、run08/09真实证据、prompt修复），非无进展等待。本轮重新实读CWP master/origin master b32cc2e；RF HEAD/origin/main6e6b817a仅原owner两文件dirty、三份保护SHA保持。$0.12费用答复尚未到，无live模型任务，未重启run09或提高执行cap。
+- 具体未直接验证的承诺是私有输出目标不能使public reader拒绝旧长草案；新增一个integration case，25个真实临时原文段落、25条>280字符的模拟旧prompt1.4草案，真实artifact prepare/activate及public transport原字节读取、完整引用回放/原件不变通过，1 passed/3.09s、Ruff绿。首轮StopIteration来自夹具把多句当完整span，改单句夹具、不改解析/产品代码；不算TDD产品RED。两个独立根已恢复absent，0POST/0生产写入，收据明确合成兼容证据，不冒充真实模型效果。
+- 完成核对仍仅N4C业务效果待实测。修正task_plan的160k历史授权段与S4表中陈旧的“待发布/待CI”，唯一Next Step保持费用答复后同一T01一次，已绿长包不再重跑。N5三卡未收交付、不代写外线。目标保持active；此轮有具体兼容证据及已提交测试进展，未达到真正无可推进的三轮blocked阈值。

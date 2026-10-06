@@ -95,6 +95,41 @@ def test_old_reference_reads_old_artifact_after_new_version_is_published(tmp_pat
         assert transport.read(_request(fixture, reference)).data == fixture.payload
 
 
+def test_current_reader_preserves_older_summary_above_new_generation_targets(tmp_path: Path) -> None:
+    """Private short-output targets must not become public read-time gates."""
+    # Every statement is backed by a distinct, replayable management paragraph.
+    statements = [
+        f"We launched a new product for customer segment {index} with "
+        + "customer validation continuing under limited pilot availability and " * 4
+        + "further rollout subject to completed validation."
+        for index in range(25)
+    ]
+    source = ("Full Conference Call Transcript\nCEO: " + "\n".join(statements)).encode()
+    with published_fixture(tmp_path, source_spec={"data": source}) as fixture:
+        value = json.loads(fixture.payload)
+        spans = value["evidence_spans"]
+        assert len(spans) >= 25
+        claims = [{
+            "claim_id": f"old-{index}", "text": statement,
+            "evidence_ids": [next(span["span_id"] for span in spans if span["raw_text"] == statement)],
+            "claim_type": "company_statement", "modality": "actual", "needs_review": False,
+        } for index, statement in enumerate(statements)]
+        value["summary"]["draft"]["claims"] = claims
+        value["summary"]["model"]["prompt_version"] = "1.4.0"
+        value["versions"]["prompt"] = "1.4.0"
+        payload = canonical_json(value).encode()
+        _copy_version(fixture, payload)
+        reader = NarrativeTransportReader(fixture.artifacts, fixture.reader)
+        reference = reader.reference(fixture.source_ref)
+        result = reader.read(_request(fixture, reference))
+        assert result.data == payload
+        assert result.receipt["replay_status"] == "verified"
+        draft = NarrativeBundle.from_dict(json.loads(result.data)).summary.draft
+        assert draft is not None and len(draft.claims) == 25
+        assert all(len(claim.text) > 280 for claim in draft.claims)
+        assert fixture.raw_path.read_bytes() == source
+
+
 def test_reference_is_metadata_only_and_raw_integrity_is_checked_at_read(tmp_path: Path) -> None:
     with published_fixture(tmp_path) as fixture:
         fixture.raw_path.write_bytes(b"X" * len(fixture.raw_bytes))
