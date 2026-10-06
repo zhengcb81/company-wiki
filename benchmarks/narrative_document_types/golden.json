@@ -1,0 +1,1497 @@
+{
+  "schema_version": "narrative-document-quality-golden/1",
+  "annotation_method": "Each point was written after reading the original page/line text extracted with benchmarks/narrative_document_types/tools/extract_pages.py (read-only). The selector output was NOT used as ground truth; it is the system under test. quote_sha256 is SHA-256 of the exact quote string in UTF-8 and is re-verified by the evaluator.",
+  "locator_conventions": {
+    "pdf": "page_number is the 1-based PDF page index used by the parser/locator (loc:v1/page:N), which can differ from the printed folio printed on the page.",
+    "txt": "line_start/line_end are 1-based lines of the original TXT file; byte_start/byte_end are UTF-8 byte offsets of the quote inside the original file."
+  },
+  "samples": {
+    "S01": {
+      "read_scope": {
+        "unit": "pdf_page",
+        "pages_read": [
+          19,
+          21,
+          25,
+          32,
+          40,
+          49,
+          64,
+          75,
+          101,
+          109,
+          118,
+          121,
+          122,
+          125
+        ],
+        "pages_total": 259,
+        "uncovered": "245 of 259 pages were not read in full (audited sections, financial statements, governance, bond and share-change sections). Annotation is a targeted sample of the management-discussion, TOC, statements and fundraising sections, not an exhaustive read.",
+        "ambiguities": [
+          "Printed folio differs from the PDF page index (e.g. extracted page 21 prints 21/259; other documents differ by one), so every locator uses the PDF page index."
+        ]
+      },
+      "points": [
+        {
+          "golden_id": "G-S01-01",
+          "topic": "主营进展",
+          "polarity": "positive",
+          "priority": "required",
+          "expected_role": "company_statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 32
+          },
+          "quote": "公司刻蚀设备已应用于全球先进的3 纳米及以下集成电路加工制造生产线。在海外先进的3 纳米芯片生产线及下一代更先进的生产线上，公司的CCP 刻蚀设备均实现了批量销售。",
+          "quote_sha256": "8ecb53a76ad6245cd460a4d2a19d85cee8e08a786c0e24a89ae986d9c8a85e44",
+          "reason": "海外先进产线批量销售是可回放的经营进展事实。"
+        },
+        {
+          "golden_id": "G-S01-02",
+          "topic": "主营进展",
+          "polarity": "positive",
+          "priority": "required",
+          "expected_role": "company_statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 40
+          },
+          "quote": "公司EPI 设备已进入客户端量产验证阶段",
+          "quote_sha256": "303ea785ccccaa43531a1e168f2ff61c123ac5c631e5ebf0937879e1acceddda",
+          "reason": "新产品量产验证里程碑。"
+        },
+        {
+          "golden_id": "G-S01-03",
+          "topic": "新业务/出海",
+          "polarity": "positive",
+          "priority": "required",
+          "expected_role": "company_statement",
+          "modality": "planned",
+          "locator": {
+            "page_number": 40
+          },
+          "quote": "公司拟通过发行股份及支付现金购买资产并募集配套资金的方式购买杭州众硅电子科技有限公司控股权实现从“干法”向“干法+湿法”整体解决方案的关键跨越",
+          "quote_sha256": "8cb9c2db26cf74676ed7ff99138c4492ac1865818d2fad9471101568b308bab9",
+          "reason": "并购与业务延伸的计划性陈述，检验计划情态。"
+        },
+        {
+          "golden_id": "G-S01-04",
+          "topic": "产能/项目",
+          "polarity": "positive",
+          "priority": "required",
+          "expected_role": "company_statement",
+          "modality": "planned",
+          "locator": {
+            "page_number": 40
+          },
+          "quote": "2025 年9 月开工建设的一期项目占地约50 亩，预计2026 年年底建成，2027 年投产",
+          "quote_sha256": "7ca934e27415a5eb4b4a1108a44946e7df1cf1b23c84713b4930124ed98e5388",
+          "reason": "华南基地建设时间表，属产能项目计划。"
+        },
+        {
+          "golden_id": "G-S01-05",
+          "topic": "行业动态",
+          "polarity": "positive",
+          "priority": "required",
+          "expected_role": "company_statement",
+          "modality": "forecast",
+          "locator": {
+            "page_number": 75
+          },
+          "quote": "据国际半导体产业协会（SEMI）预测，全球半导体制造装备销售额今年将达1330 亿美元，同比增加13.7%",
+          "quote_sha256": "1edfc8f5a9a829f098e06da2b6296ea10b700cb0690f75f0e71fe1eb8e513024",
+          "reason": "行业规模预测，检验预测情态是否被选中。"
+        },
+        {
+          "golden_id": "G-S01-06",
+          "topic": "行业动态",
+          "polarity": "positive",
+          "priority": "optional",
+          "expected_role": "company_statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 75
+          },
+          "quote": "半导体设备国产化在进一步提速",
+          "quote_sha256": "6b147ba9dca3571a2075348d4a9b840a4b6d43b4286d0499254f3727445d6551",
+          "reason": "短句行业趋势判断，检验短文本是否被丢弃。"
+        },
+        {
+          "golden_id": "G-S01-07",
+          "topic": "主营进展",
+          "polarity": "positive",
+          "priority": "optional",
+          "expected_role": "company_statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 64
+          },
+          "quote": "2025 年刻蚀设备销售约98.32 亿元，同比增长约35.12%；LPCVD 设备销售约5.06 亿元，同比增长约224.23%",
+          "quote_sha256": "cba61c85a29e033f4a82cb465e1f00475bd57dfacfaffe0ba8fb797455306a2a",
+          "reason": "分产品收入进展叙述，非表格。"
+        },
+        {
+          "golden_id": "G-S01-08",
+          "topic": "负例",
+          "negative_kind": "table_of_contents",
+          "polarity": "negative",
+          "priority": "reference",
+          "expected_role": "company_statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 21
+          },
+          "quote": "第三节 管理层讨论与分析",
+          "quote_sha256": "1db4800b4733e5955da4e19a3ec8197f5ae8f27057ab8aa6d673e95737ff48a9",
+          "reason": "目录条目，不含事实进展，选中即噪声。"
+        },
+        {
+          "golden_id": "G-S01-09",
+          "topic": "负例",
+          "negative_kind": "pure_financial_table",
+          "polarity": "negative",
+          "priority": "reference",
+          "expected_role": "company_statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 25
+          },
+          "quote": "归属于上市公司股东的净利润 2,111,472,990.43",
+          "quote_sha256": "d9129c3546a50de73d56a54fc8028b5f5a305b57d9013a2d1626b1b10557482f",
+          "reason": "纯财务数据表格行，选中即噪声。"
+        },
+        {
+          "golden_id": "G-S01-10",
+          "topic": "负例",
+          "negative_kind": "legal_boilerplate",
+          "polarity": "negative",
+          "priority": "reference",
+          "expected_role": "company_statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 19
+          },
+          "quote": "本公司董事会及董事、高级管理人员保证年度报告内容的真实性、准确性、完整性，不存在虚假记载、误导性陈述或重大遗漏",
+          "quote_sha256": "5f71847ebd9495827badd689149b53ef44f6786f11373605efe6efb8e1ec8f15",
+          "reason": "法定声明套话，无业务事实。"
+        },
+        {
+          "golden_id": "G-S01-11",
+          "topic": "负例",
+          "negative_kind": "repeated_paragraph",
+          "polarity": "negative",
+          "priority": "reference",
+          "expected_role": "company_statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 101
+          },
+          "quote": "更多内容请参见公司于2026 年3 月31 日在上海证券交易所网站（www.sse.com.cn）披露的《中微公司2025 年环境、社会及公司治理报告》。",
+          "quote_sha256": "1d1bb98defb5d0f50f7a90df4f08754c4f225078455ff0e6e8620ee0d28db47a",
+          "reason": "同页重复4次的外链指引段落，选中即重复噪声。"
+        }
+      ]
+    },
+    "S02": {
+      "read_scope": {
+        "unit": "pdf_page",
+        "pages_read": [
+          11,
+          17,
+          18,
+          21,
+          31,
+          43,
+          50,
+          56,
+          65
+        ],
+        "pages_total": 188,
+        "uncovered": "179 of 188 pages not read in full; targeted read of TOC, industry/business discussion, production bases, risks, subsidiaries and fundraising sections.",
+        "ambiguities": [
+          "Printed folio is one less than the PDF page index (extracted page 21 prints 20/188); locators use the PDF page index."
+        ]
+      },
+      "points": [
+        {
+          "golden_id": "G-S02-01",
+          "topic": "主营进展",
+          "polarity": "positive",
+          "priority": "required",
+          "expected_role": "company_statement",
+          "modality": "forecast",
+          "locator": {
+            "page_number": 21
+          },
+          "quote": "预计未来五到十年，中微公司将通过自主研发以及携手行业合作伙伴，覆盖集成电路关键领域超过60%的设备市场。",
+          "quote_sha256": "ef20e88d9880d66c3dd4ac322e15cdb5af559f4ae3144da7bad70fabe939132a",
+          "reason": "长期战略目标（预测情态），既有C02锚点页。"
+        },
+        {
+          "golden_id": "G-S02-02",
+          "topic": "行业动态",
+          "polarity": "positive",
+          "priority": "required",
+          "expected_role": "company_statement",
+          "modality": "forecast",
+          "locator": {
+            "page_number": 18
+          },
+          "quote": "2026 年半导体制造设备销售额有望进一步提高至1,300 亿美元，中国大陆、中国台湾和韩国仍将是设备支出的前三大区域。",
+          "quote_sha256": "bbb86f2a8bab182b0c8f42c3da76e79249da517180d7c6d73a1d73a34c50abe1",
+          "reason": "行业规模与区域结构预测。"
+        },
+        {
+          "golden_id": "G-S02-03",
+          "topic": "主营进展",
+          "polarity": "positive",
+          "priority": "required",
+          "expected_role": "company_statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 18
+          },
+          "quote": "公司的等离子体刻蚀设备已应用在国际一线客户从65 至5 纳米及其他先进的集成电路加工制造生产线及先进封装生产线。",
+          "quote_sha256": "7ad96805070448c8ba94f3cd01ae9e18a691bf54f8b3cb0a1e063268516aefef",
+          "reason": "主营业务实际落地情况。"
+        },
+        {
+          "golden_id": "G-S02-04",
+          "topic": "产能/项目",
+          "polarity": "positive",
+          "priority": "required",
+          "expected_role": "company_statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 31
+          },
+          "quote": "公司位于南昌的约14 万平方米的生产和研发基地、在上海临港的约18 万平方米的生产和研发基地已投入使用，产能大幅提升",
+          "quote_sha256": "706e110c2cb87a40f3d84b9df953e1a6c9a5e752ae0da93d7592f9a1f2c03836",
+          "reason": "基地投产的实际产能进展。"
+        },
+        {
+          "golden_id": "G-S02-05",
+          "topic": "主营进展",
+          "polarity": "positive",
+          "priority": "optional",
+          "expected_role": "company_statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 31
+          },
+          "quote": "报告期内，公司新增专利申请130 项，其中发明专利85 项。",
+          "quote_sha256": "bbd66c932b0a301e0eb3e242e9c2932898cb4e85c1b16820012005ab2807b878",
+          "reason": "研发进展的可核对事实。"
+        },
+        {
+          "golden_id": "G-S02-06",
+          "topic": "新业务/出海",
+          "polarity": "positive",
+          "priority": "optional",
+          "expected_role": "company_statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 50
+          },
+          "quote": "主要负责公司海外的销售",
+          "quote_sha256": "2bce85e9d070446ce39115ae55fa5335688f23239393986f7182a35718281df6",
+          "reason": "海外销售主体的表格叙述，检验表格中的业务事实是否被选择。"
+        },
+        {
+          "golden_id": "G-S02-07",
+          "topic": "负例",
+          "negative_kind": "table_of_contents",
+          "polarity": "negative",
+          "priority": "reference",
+          "expected_role": "company_statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 11
+          },
+          "quote": "第八节 财务报告",
+          "quote_sha256": "e93fcd030c752050d96edb1e1c212dba48cce0cedce88849f4987a646a760c41",
+          "reason": "目录条目。"
+        },
+        {
+          "golden_id": "G-S02-08",
+          "topic": "负例",
+          "negative_kind": "pure_financial_table",
+          "polarity": "negative",
+          "priority": "reference",
+          "expected_role": "company_statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 17
+          },
+          "quote": "归属于上市公司股东的扣除非经常性损益的净利润 538,767,846.46",
+          "quote_sha256": "012ca3bf81e6ece4d6707398b7c0249cd35deb24b8b77da51da71411ae2398b8",
+          "reason": "非会计准则指标纯财务表格。"
+        },
+        {
+          "golden_id": "G-S02-09",
+          "topic": "负例",
+          "negative_kind": "legal_boilerplate",
+          "polarity": "negative",
+          "priority": "reference",
+          "expected_role": "company_statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 56
+          },
+          "quote": "一、发行人不存在不符合发行上市条件而以欺骗手段骗取发行注册的情形。",
+          "quote_sha256": "3a075c29bde5864ec6a982870a1607288d1a564fd88c8e955bd9b2e36a54c01f",
+          "reason": "承诺表格中的法定套话。"
+        },
+        {
+          "golden_id": "G-S02-10",
+          "topic": "负例",
+          "negative_kind": "repeated_paragraph",
+          "polarity": "negative",
+          "priority": "reference",
+          "expected_role": "company_statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 56
+          },
+          "quote": "二、若因发行人本次发行上市的招股说明书有虚假记载、误导性陈述或者重大遗漏",
+          "quote_sha256": "4020cc13b56864f32669645d4d73cfbdad9d1d085498f1d740254be0908019fc",
+          "reason": "同页多处重复的承诺句式，选中即重复噪声。"
+        }
+      ]
+    },
+    "S03": {
+      "read_scope": {
+        "unit": "pdf_page",
+        "pages_read": [
+          1,
+          2,
+          3,
+          5
+        ],
+        "pages_total": 15,
+        "uncovered": "11 of 15 pages not read (shareholder tables and financial statements sections). The business-discussion and non-recurring items sections were read.",
+        "ambiguities": [
+          "Quarterly narrative is concentrated on pages 2-3; a quarterly with no narrative would not be presumed valueless, but this one does carry narrative."
+        ]
+      },
+      "points": [
+        {
+          "golden_id": "G-S03-01",
+          "topic": "主营进展",
+          "polarity": "positive",
+          "priority": "required",
+          "expected_role": "company_statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 2
+          },
+          "quote": "公司累计已有超过8300 个反应台在国内外180 余条客户芯片及LED 生产线全面量产。",
+          "quote_sha256": "e209ff5851423148983e46ec89fdb28a633849aed580cf524750ec7eee026aeb",
+          "reason": "装机规模的经营事实，证明季报并非无信号。"
+        },
+        {
+          "golden_id": "G-S03-02",
+          "topic": "主营进展",
+          "polarity": "positive",
+          "priority": "required",
+          "expected_role": "company_statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 2
+          },
+          "quote": "下一代90:1 超高深宽比低温刻蚀设备已运付客户端进行验证",
+          "quote_sha256": "1742deb3d1a70739bd0aaedafde0effa20ae0e14c782e831b3f977406ad1929a",
+          "reason": "新产品验证进展。"
+        },
+        {
+          "golden_id": "G-S03-03",
+          "topic": "新业务/出海",
+          "polarity": "positive",
+          "priority": "required",
+          "expected_role": "company_statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 3
+          },
+          "quote": "2025 年薄膜设备营收同比大幅增长约224.23%，成为公司业绩增长的重要新引擎",
+          "quote_sha256": "48e6dca1343ec048f198b9fe5cecafab21c202c86417fd5bda7099bd491f9d90",
+          "reason": "新业务线成为增长引擎的陈述。"
+        },
+        {
+          "golden_id": "G-S03-04",
+          "topic": "主营进展",
+          "polarity": "positive",
+          "priority": "required",
+          "expected_role": "company_statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 3
+          },
+          "quote": "四款MOCVD 新产品包括用于SiC 和GaN 功率器件的MOCVD，用于Micro LED 的GaN MOCVD 和用于红黄光LED 的GaAs MOCVD 设备已进入客户端验证阶段，并且部分得到批量订货。",
+          "quote_sha256": "3c8b06825e72f0235c2a390245281bc85ddfadddb2ba8e97b3d2fccac48bb0e4",
+          "reason": "新产品验证与批量订货的双重进展。"
+        },
+        {
+          "golden_id": "G-S03-05",
+          "topic": "主营进展",
+          "polarity": "positive",
+          "priority": "optional",
+          "expected_role": "company_statement",
+          "modality": "planned",
+          "locator": {
+            "page_number": 3
+          },
+          "quote": "常压外延设备现已完成开发，进入晶圆验证阶段。",
+          "quote_sha256": "c6c847908f89797f89021d04720e0a73ff652862a07f1657acc850d3d78751e6",
+          "reason": "设备开发阶段推进。"
+        },
+        {
+          "golden_id": "G-S03-06",
+          "topic": "负例",
+          "negative_kind": "legal_boilerplate",
+          "polarity": "negative",
+          "priority": "reference",
+          "expected_role": "company_statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 1
+          },
+          "quote": "本公司董事会及全体董事保证本公告内容不存在任何虚假记载、误导性陈述或者重大遗漏",
+          "quote_sha256": "fb94438f166602cf7b519c8af1d1ee103e83147f9e79e33d3e56885b4fd773b3",
+          "reason": "封面法定声明套话。"
+        },
+        {
+          "golden_id": "G-S03-07",
+          "topic": "负例",
+          "negative_kind": "pure_financial_table",
+          "polarity": "negative",
+          "priority": "reference",
+          "expected_role": "company_statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 2
+          },
+          "quote": "归属于上市公司股东的扣除非经常性损益的净利润 477,558,746.17",
+          "quote_sha256": "8844f63a8c5564d11c29257c77447bc6afecb5f15299918fa9716eba312f145a",
+          "reason": "主要财务数据纯表格行。"
+        },
+        {
+          "golden_id": "G-S03-08",
+          "topic": "负例",
+          "negative_kind": "pure_financial_table",
+          "polarity": "negative",
+          "priority": "reference",
+          "expected_role": "company_statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 3
+          },
+          "quote": "非经常性损益项目 本期金额 说明",
+          "quote_sha256": "ad0950428c01b93a2deae653b9ce4d9e89842cc1488e851f3c477464a73e8179",
+          "reason": "非经常性损益表头，纯财务表格。"
+        }
+      ]
+    },
+    "S04": {
+      "read_scope": {
+        "unit": "pdf_page",
+        "pages_read": [
+          13,
+          31,
+          34,
+          49,
+          114,
+          133
+        ],
+        "pages_total": 429,
+        "uncovered": "423 of 429 pages not read in full; targeted read of the TOC, overview/fundraising summary, risk factors, business-and-technology and policy sections.",
+        "ambiguities": [
+          "Prospectus printed folio (1-1-114) differs from the PDF page index; locators use the PDF page index."
+        ]
+      },
+      "points": [
+        {
+          "golden_id": "G-S04-01",
+          "topic": "主营进展",
+          "polarity": "positive",
+          "priority": "required",
+          "expected_role": "company_statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 114
+          },
+          "quote": "公司的MOCVD 设备在行业领先客户的生产线上大规模投入量产，公司已成为世界排名前列、国内占领先地位的氮化镓基LED 设备制造商。",
+          "quote_sha256": "482eadce99ee3acfa3d5e5d02bba8176ca70fd5e00680b6093cd04b572fe3198",
+          "reason": "业务与技术章节的核心经营事实（既有C04锚点页）。"
+        },
+        {
+          "golden_id": "G-S04-02",
+          "topic": "新业务/出海",
+          "polarity": "positive",
+          "priority": "optional",
+          "expected_role": "company_statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 114
+          },
+          "quote": "中微公司是一家以中国为基地、面向全球的高端半导体微观加工设备公司。",
+          "quote_sha256": "3338c421dae9e66a27d130ce60daed96101cefaa48965c12d8c84eabe3ca17b9",
+          "reason": "全球化定位陈述。"
+        },
+        {
+          "golden_id": "G-S04-03",
+          "topic": "募集资金用途/项目逻辑",
+          "polarity": "positive",
+          "priority": "required",
+          "expected_role": "company_statement",
+          "modality": "planned",
+          "locator": {
+            "page_number": 34
+          },
+          "quote": "本次向社会公众公开发行新股的募集资金扣除发行费用后将按轻重缓急顺序投资于以下项目：",
+          "quote_sha256": "916e7383c995516d1f1a32a9c523ee66eb3832b96b3a93d5cb7e31c5b6e94796",
+          "reason": "募集资金投向的总括陈述。"
+        },
+        {
+          "golden_id": "G-S04-04",
+          "topic": "募集资金用途/项目逻辑",
+          "polarity": "positive",
+          "priority": "required",
+          "expected_role": "company_statement",
+          "modality": "planned",
+          "locator": {
+            "page_number": 49
+          },
+          "quote": "本次募集资金在扣除发行相关费用后拟用于高端半导体设备扩产升级项目、技术研发中心建设升级项目和补充流动资金。",
+          "quote_sha256": "431a3b12d06da51af7d5f117d06774b75a260ecb18e6cdbc4843db5612df4667",
+          "reason": "募投项目构成的项目逻辑陈述。"
+        },
+        {
+          "golden_id": "G-S04-05",
+          "topic": "主营进展",
+          "polarity": "positive",
+          "priority": "optional",
+          "expected_role": "company_statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 49
+          },
+          "quote": "报告期内，前五名客户收入占当期营业收入总额的比重分别为85.74%、74.52%和60.55%，占比逐年降低",
+          "quote_sha256": "78d9c06d252297e96c5434ca60c6dfacba5380923dd5b91a645987e4d3466b4d",
+          "reason": "客户结构变化的经营叙述。"
+        },
+        {
+          "golden_id": "G-S04-06",
+          "topic": "负例",
+          "negative_kind": "table_of_contents",
+          "polarity": "negative",
+          "priority": "reference",
+          "expected_role": "company_statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 13
+          },
+          "quote": "第四节 风险因素",
+          "quote_sha256": "e44db01fe767d30e6602559a9c2130d57b4d5d966fb87ab218da228f77f844c5",
+          "reason": "目录条目。"
+        },
+        {
+          "golden_id": "G-S04-07",
+          "topic": "负例",
+          "negative_kind": "static_reference",
+          "polarity": "negative",
+          "priority": "reference",
+          "expected_role": "company_statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 133
+          },
+          "quote": "《国务院关于加快培育和发展战略性新兴产业的决定》",
+          "quote_sha256": "b11f3e659d535ea93e37aa8721700279181213ed0c167aa5a2cd4902ecc928cb",
+          "reason": "历史政策罗列表，静态背景无事实进展。"
+        },
+        {
+          "golden_id": "G-S04-08",
+          "topic": "负例",
+          "negative_kind": "legal_boilerplate",
+          "polarity": "negative",
+          "priority": "reference",
+          "expected_role": "company_statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 34
+          },
+          "quote": "本次募集资金将严格按照规定存储在董事会指定的专门账户集中管理，专款专用，规范使用募集资金。",
+          "quote_sha256": "bd906767c0f580843b17ef25574ad47b344b541a217904f19d6c3ef3b08fe4ad",
+          "reason": "标准化募集资金管理承诺套话。"
+        }
+      ]
+    },
+    "S05": {
+      "read_scope": {
+        "unit": "pdf_page",
+        "pages_read": [
+          3,
+          8,
+          13,
+          15,
+          16,
+          71,
+          95,
+          101,
+          169
+        ],
+        "pages_total": 191,
+        "uncovered": "182 of 191 pages not read in full; targeted read of the major-notices, risk, TOC, quarterly financials, R&D progress, project necessity and declaration sections.",
+        "ambiguities": [
+          "Printed folio 1-1-2 corresponds to PDF page 3; locators use the PDF page index."
+        ]
+      },
+      "points": [
+        {
+          "golden_id": "G-S05-01",
+          "topic": "募集资金用途/项目逻辑",
+          "polarity": "positive",
+          "priority": "required",
+          "expected_role": "company_statement",
+          "modality": "planned",
+          "locator": {
+            "page_number": 3
+          },
+          "quote": "航空数字化集成中心项目属于在公司现有业务锻件制造的基础上，向下游装配产业领域的延伸和拓展，需要进行合格供应商认证和产品认证",
+          "quote_sha256": "140b12c8482b7f5a1d8207f5a2a81b3c5d8bb25c419a73f14cffaea719100d07",
+          "reason": "募投项目的产业链延伸逻辑（既有C06锚点页）。"
+        },
+        {
+          "golden_id": "G-S05-02",
+          "topic": "募集资金用途/项目逻辑",
+          "polarity": "positive",
+          "priority": "required",
+          "expected_role": "company_statement",
+          "modality": "planned",
+          "locator": {
+            "page_number": 3
+          },
+          "quote": "航空数字化集成中心项目需要进行合格供应商认证和产品认证，预计需要4-9 个月",
+          "quote_sha256": "5a78e0b60f9b4fc04ec292e43479fc5c22affcff2c0fc516141b2fb3acae1700",
+          "reason": "认证周期的量化项目时间表。"
+        },
+        {
+          "golden_id": "G-S05-03",
+          "topic": "行业动态",
+          "polarity": "positive",
+          "priority": "required",
+          "expected_role": "company_statement",
+          "modality": "forecast",
+          "locator": {
+            "page_number": 101
+          },
+          "quote": "随着航空及其他军品市场、高端民品市场、外贸市场的不断扩大，中小型飞机锻件业务亦有广阔的市场空间",
+          "quote_sha256": "2b8454111a882d30a52f1405b79bcfffe84b365d3838bf1867d8e5c51b594ce0",
+          "reason": "行业需求前景判断（预测情态）。"
+        },
+        {
+          "golden_id": "G-S05-04",
+          "topic": "主营进展",
+          "polarity": "positive",
+          "priority": "optional",
+          "expected_role": "company_statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 71
+          },
+          "quote": "关键技术研发阶段，已完成首批鉴定及装机考核",
+          "quote_sha256": "27262108c5c8525f6c0d6446da9a1064ea80e3be82cb60c4e66bed7655addf58",
+          "reason": "研发项目进展表格中的实质进展。"
+        },
+        {
+          "golden_id": "G-S05-05",
+          "topic": "募集资金用途/项目逻辑",
+          "polarity": "positive",
+          "priority": "optional",
+          "expected_role": "company_statement",
+          "modality": "forecast",
+          "locator": {
+            "page_number": 8
+          },
+          "quote": "公司预计，航空精密模锻产业深化提升项目正常运行可实现年营业收入28,000.00 万元和净利润7,088.51 万元",
+          "quote_sha256": "9e3df0d7532c8fc0c61cef1476057116f1d5e948a233b95ad3a20537be49e70d",
+          "reason": "募投项目效益测算（预测情态）。"
+        },
+        {
+          "golden_id": "G-S05-06",
+          "topic": "负例",
+          "negative_kind": "table_of_contents",
+          "polarity": "negative",
+          "priority": "reference",
+          "expected_role": "company_statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 16
+          },
+          "quote": "四、本次发行募集资金投向",
+          "quote_sha256": "2b8746ee3c059060fd16ea40cf3a47905b212a65391d986250bd5561bcd84ad6",
+          "reason": "目录条目。"
+        },
+        {
+          "golden_id": "G-S05-07",
+          "topic": "负例",
+          "negative_kind": "pure_financial_table",
+          "polarity": "negative",
+          "priority": "reference",
+          "expected_role": "company_statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 15
+          },
+          "quote": "营业收入 146,274.71 117,233.75",
+          "quote_sha256": "c3d7aa8eb54a3e5c158700151646dab5a447687546292eccfefe395f0338b8e2",
+          "reason": "合并利润表主要数据纯表格行。"
+        },
+        {
+          "golden_id": "G-S05-08",
+          "topic": "负例",
+          "negative_kind": "legal_boilerplate",
+          "polarity": "negative",
+          "priority": "reference",
+          "expected_role": "company_statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 169
+          },
+          "quote": "本公司及全体董事、监事、高级管理人员承诺本募集说明书内容真实、准确、完整，不存在虚假记载、误导性陈述或重大遗漏",
+          "quote_sha256": "7f76378d963dd5bf33af5ed12f796a33eb48e11d3751da4e645eaf471ccc1f5a",
+          "reason": "声明章节法定套话。"
+        }
+      ]
+    },
+    "S06": {
+      "read_scope": {
+        "unit": "pdf_page",
+        "pages_read": [
+          4,
+          8,
+          13,
+          29,
+          39,
+          43,
+          52,
+          68,
+          75,
+          87
+        ],
+        "pages_total": 227,
+        "uncovered": "217 of 227 pages not read in full; targeted read of issuance summary, TOC, bond terms, risks, fundraising-project risk, policy table, market position and industry sections.",
+        "ambiguities": [
+          "Printed folio differs from the PDF page index (page 4 prints 3); locators use the PDF page index."
+        ]
+      },
+      "points": [
+        {
+          "golden_id": "G-S06-01",
+          "topic": "募集资金用途/项目逻辑",
+          "polarity": "positive",
+          "priority": "required",
+          "expected_role": "company_statement",
+          "modality": "planned",
+          "locator": {
+            "page_number": 4
+          },
+          "quote": "公司本次可转债计划募集资金总额不超过人民币40,000.00 万元（含本数）",
+          "quote_sha256": "8d3f9e2b9eedb9ffeb2411fd83ff7306a5b050bb8cffb2a17e1e55eca3611290",
+          "reason": "发行规模与募资计划。"
+        },
+        {
+          "golden_id": "G-S06-02",
+          "topic": "募集资金用途/项目逻辑",
+          "polarity": "positive",
+          "priority": "required",
+          "expected_role": "company_statement",
+          "modality": "planned",
+          "locator": {
+            "page_number": 43
+          },
+          "quote": "本次募集资金除补充流动资金外，拟投资于精密数控刀体生产线建设项目和高效钻削刀具生产线建设项目",
+          "quote_sha256": "69b6d4629b78f7fe1527ce0b8cd112da3ecec41053312740b57a546fcce9b4e1",
+          "reason": "募投项目构成。"
+        },
+        {
+          "golden_id": "G-S06-03",
+          "topic": "募集资金用途/项目逻辑",
+          "polarity": "positive",
+          "priority": "required",
+          "expected_role": "company_statement",
+          "modality": "planned",
+          "locator": {
+            "page_number": 43
+          },
+          "quote": "本次募投项目达产后，公司预计新增精密数控刀体产品50 万件和各类高效钻削刀具140 万支",
+          "quote_sha256": "0d400f1390555b171ae9c0f6f4d540b7106d7126df6b570d7510e9230bff5653",
+          "reason": "达产产能的量化项目逻辑。"
+        },
+        {
+          "golden_id": "G-S06-04",
+          "topic": "行业动态",
+          "polarity": "positive",
+          "priority": "required",
+          "expected_role": "company_statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 87
+          },
+          "quote": "2016—2020 年进口刀具占总消费的比重从37.17%下降至31.12%，一定程度上说明我国数控刀具的自给能力在逐步增强，进口替代速度加快",
+          "quote_sha256": "85a2447e96aa5ede1657f3cf4458be22c4715fad49be8c3e6d7fffac8c55a498",
+          "reason": "进口替代的行业结构变化。"
+        },
+        {
+          "golden_id": "G-S06-05",
+          "topic": "主营进展",
+          "polarity": "positive",
+          "priority": "optional",
+          "expected_role": "company_statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 75
+          },
+          "quote": "公司硬质合金数控刀片产量在国内企业中2020 年排名第二、2019 年排名第三、2018 年排名第二",
+          "quote_sha256": "62e47f43240dd21dc55116bd1b951f214aa82270216000ec33a7d9cc0f9a90bf",
+          "reason": "市场地位事实。"
+        },
+        {
+          "golden_id": "G-S06-06",
+          "topic": "主营进展",
+          "polarity": "positive",
+          "priority": "optional",
+          "expected_role": "company_statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 75
+          },
+          "quote": "截至目前，公司已取得授权专利45 项，其中发明专利18 项。",
+          "quote_sha256": "8ae29465e4682858ea00d328431863d3a67e127eb6080c3a0f4c2c970849005a",
+          "reason": "研发资产事实。"
+        },
+        {
+          "golden_id": "G-S06-07",
+          "topic": "负例",
+          "negative_kind": "table_of_contents",
+          "polarity": "negative",
+          "priority": "reference",
+          "expected_role": "company_statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 13
+          },
+          "quote": "第三节 风险因素",
+          "quote_sha256": "66eb4a1bb88289c68f0efa9d1247423e242634184819d0fee7dbdb369f1f247e",
+          "reason": "目录条目。"
+        },
+        {
+          "golden_id": "G-S06-08",
+          "topic": "负例",
+          "negative_kind": "pure_financial_table",
+          "polarity": "negative",
+          "priority": "reference",
+          "expected_role": "company_statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 39
+          },
+          "quote": "碳化钨 金额 1,028.38 2,056.76",
+          "quote_sha256": "6606fab4fe20d192e7c1a7bf197abd33157294d295e5bf00d8ddd838ca5c7fe4",
+          "reason": "原材料价格敏感性测算纯财务表格。"
+        },
+        {
+          "golden_id": "G-S06-09",
+          "topic": "负例",
+          "negative_kind": "static_reference",
+          "polarity": "negative",
+          "priority": "reference",
+          "expected_role": "company_statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 68
+          },
+          "quote": "《湖南省国民经济和社会发展第十四个五年规划和二〇三五年远景目标纲要》",
+          "quote_sha256": "880b7c4943e7b1f0e4b97b79c2464e503e4e13997e9d6c4f2e7ff0a282b353a7",
+          "reason": "政策罗列表，静态背景。"
+        },
+        {
+          "golden_id": "G-S06-10",
+          "topic": "负例",
+          "negative_kind": "legal_boilerplate",
+          "polarity": "negative",
+          "priority": "reference",
+          "expected_role": "company_statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 8
+          },
+          "quote": "公司对制定填补回报措施不等于对公司未来利润做出保证",
+          "quote_sha256": "cc324ad7095ccb745a09cc49da286a5d8060fde1649a413ff105d742b509c833",
+          "reason": "填补即期回报标准承诺套话。"
+        },
+        {
+          "golden_id": "G-S06-11",
+          "topic": "负例",
+          "negative_kind": "legal_boilerplate",
+          "polarity": "negative",
+          "priority": "reference",
+          "expected_role": "company_statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 29
+          },
+          "quote": "本次发行的可转换公司债券采用每年付息一次的付息方式",
+          "quote_sha256": "918877f5450df23150690bb0a00f8d4c2c20f7c01b790461803514bf30c3b560",
+          "reason": "债券条款的结构性描述，非业务进展。"
+        }
+      ]
+    },
+    "S07": {
+      "read_scope": {
+        "unit": "pdf_page",
+        "pages_read": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "pages_total": 6,
+        "uncovered": "Full document read.",
+        "ambiguities": [
+          "Record-form content sits inside table cells; the printed page number equals the PDF page index for this document."
+        ]
+      },
+      "points": [
+        {
+          "golden_id": "G-S07-01",
+          "topic": "主营进展",
+          "polarity": "positive",
+          "priority": "required",
+          "expected_role": "company_statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 1
+          },
+          "quote": "2025 年度公司境内收入约8.19 亿元，占比约22%，较比2024 年度有所提升",
+          "quote_sha256": "2ae2af6afbaad8f117ae5b28ac013320421685aa68f70b8fccc10ec4d0c905b4",
+          "reason": "境内外收入结构变化的经营事实。"
+        },
+        {
+          "golden_id": "G-S07-02",
+          "topic": "新业务/出海",
+          "polarity": "positive",
+          "priority": "required",
+          "expected_role": "company_statement",
+          "modality": "planned",
+          "locator": {
+            "page_number": 6
+          },
+          "quote": "公司固态电池材料硫化锂的中试线建设工作正在按计划推进中，根据目前情况看可以在6 月底之前完成建设并投入开展中试工作",
+          "quote_sha256": "bfa1e192543e2e40713e1cd2c73885c0e0b4d0da7db6ef2c34234eed980676de",
+          "reason": "新业务中试线进度（既有C07锚点页）。"
+        },
+        {
+          "golden_id": "G-S07-03",
+          "topic": "新业务/出海",
+          "polarity": "positive",
+          "priority": "required",
+          "expected_role": "company_statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 6
+          },
+          "quote": "2025 年公司与中国石化催化剂有限公司签署《项目合作意向书》，现已有产品实现销售",
+          "quote_sha256": "8247a247458c09ded2f1210315d6292ae2ee28d136cd8e042fc04d91275a4172",
+          "reason": "新领域合作已落地销售（既有C08锚点页）。"
+        },
+        {
+          "golden_id": "G-S07-04",
+          "topic": "产能/项目",
+          "polarity": "positive",
+          "priority": "required",
+          "expected_role": "company_statement",
+          "modality": "planned",
+          "locator": {
+            "page_number": 5
+          },
+          "quote": "2025 年公司启动了万润工业园二期C05 建设项目，该项目包含半导体光刻胶用相关材料产能约751 吨/年",
+          "quote_sha256": "46e3b1928335b8badb2fb6655394203d4d6ae0f5ca6a5cf9a1e02a9d05f69de0",
+          "reason": "新产能项目的量化计划。"
+        },
+        {
+          "golden_id": "G-S07-05",
+          "topic": "主营进展",
+          "polarity": "positive",
+          "priority": "optional",
+          "expected_role": "company_statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 2
+          },
+          "quote": "九目化学已于3 月11 日收到北交所第二轮审核问询函，因前期报送的财务数据有效期已过，九目化学申请了中止审核",
+          "quote_sha256": "9a7d4a79cf302b488d1dd8d3fdf80f9fe658d870df5a844a56504904be93b879",
+          "reason": "子公司资本运作进展。"
+        },
+        {
+          "golden_id": "G-S07-06",
+          "topic": "新业务/出海",
+          "polarity": "positive",
+          "priority": "optional",
+          "expected_role": "company_statement",
+          "modality": "planned",
+          "locator": {
+            "page_number": 3
+          },
+          "quote": "中国节能与宁德时代已经建立了联系，并希望建立业务协同与合作",
+          "quote_sha256": "5a24e710be8b102a99e0f10882abca4e0c48dd0b069f451890cc164015b75e84",
+          "reason": "股东层面的合作意向。"
+        },
+        {
+          "golden_id": "G-S07-07",
+          "topic": "提问",
+          "polarity": "positive",
+          "priority": "optional",
+          "expected_role": "question",
+          "modality": "question",
+          "locator": {
+            "page_number": 2
+          },
+          "quote": "公司的研发费用日益增长，占比已经超过营收的10%",
+          "quote_sha256": "19c39048021a3d2d082ca5556a73ed0a0654ee3dbd62ad6c08a5ef0b91b7ffb8",
+          "reason": "投资者提问，用于角色/情态一致性检查（提问不应被当作公司陈述）。"
+        },
+        {
+          "golden_id": "G-S07-08",
+          "topic": "负例",
+          "negative_kind": "procedural_form",
+          "polarity": "negative",
+          "priority": "reference",
+          "expected_role": "company_statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 1
+          },
+          "quote": "上市公司接待人员姓名",
+          "quote_sha256": "0cbf6bf13f3c641b33202ee0b9ffd92709c7fba7dde8e1099259c036e1462744",
+          "reason": "记录表表头字段，无业务事实。"
+        },
+        {
+          "golden_id": "G-S07-09",
+          "topic": "负例",
+          "negative_kind": "repeated_paragraph",
+          "polarity": "negative",
+          "priority": "reference",
+          "expected_role": "company_statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 4
+          },
+          "quote": "公司每年现金分红金额不低于当年实现可供分配利润的20%",
+          "quote_sha256": "84a501f18ba5559834293734bdd0dd4b5662181bdbac110d34db38d5a64ff7c2",
+          "reason": "同页两处问答重复的分红承诺句。"
+        },
+        {
+          "golden_id": "G-S07-10",
+          "topic": "负例",
+          "negative_kind": "procedural_form",
+          "polarity": "negative",
+          "priority": "reference",
+          "expected_role": "company_statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 6
+          },
+          "quote": "关于本次活动是否涉及应披露重大信息的说明",
+          "quote_sha256": "ca5a44ba713821bb83e6ac7e483fec9b37a7726736c700a53c70ad6dc3fa19ed",
+          "reason": "程序性说明字段。"
+        }
+      ]
+    },
+    "S08": {
+      "read_scope": {
+        "unit": "pdf_page",
+        "pages_read": [
+          1,
+          2,
+          3
+        ],
+        "pages_total": 3,
+        "uncovered": "Full document read.",
+        "ambiguities": [
+          "This record is attendance-list heavy with short formulaic answers; only one answer carries a quantified business fact, so the required set is small by design rather than by omission."
+        ]
+      },
+      "points": [
+        {
+          "golden_id": "G-S08-01",
+          "topic": "主营进展",
+          "polarity": "positive",
+          "priority": "required",
+          "expected_role": "company_statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 3
+          },
+          "quote": "从克重口径看，目前达到一个稳定的状态，一口价黄金占比在15%-20%，克重黄金占比在80%-85%",
+          "quote_sha256": "0c2c4ee63cbd8a5a8bb05814389972b82b0d603aa76c5df49d7ba69ed59199c8",
+          "reason": "产品结构占比的量化经营事实。"
+        },
+        {
+          "golden_id": "G-S08-02",
+          "topic": "主营进展",
+          "polarity": "positive",
+          "priority": "optional",
+          "expected_role": "company_statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 2
+          },
+          "quote": "主要以加盟为主",
+          "quote_sha256": "9b2c3c7c0a8afef5934d6eda33fe2a3bf3af3691e313b00c6e0f71214cc37657",
+          "reason": "渠道结构的简短事实性回答。"
+        },
+        {
+          "golden_id": "G-S08-03",
+          "topic": "负例",
+          "negative_kind": "procedural_form",
+          "polarity": "negative",
+          "priority": "reference",
+          "expected_role": "company_statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 1
+          },
+          "quote": "参与单位名称及人员姓名",
+          "quote_sha256": "cff2931a77340536f073b5d145a34ee9df6bf4404b6c88a84084784aafe19dd0",
+          "reason": "表单字段。"
+        },
+        {
+          "golden_id": "G-S08-04",
+          "topic": "负例",
+          "negative_kind": "procedural_form",
+          "polarity": "negative",
+          "priority": "reference",
+          "expected_role": "company_statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 1
+          },
+          "quote": "共计80 位投资者（排名不分先后）",
+          "quote_sha256": "6411d43dc74d33ff5f40f65672599240fa5bf518fe737a4e6e4fa6a5f6a4dd2b",
+          "reason": "参会名单，无业务事实。"
+        },
+        {
+          "golden_id": "G-S08-05",
+          "topic": "负例",
+          "negative_kind": "legal_boilerplate",
+          "polarity": "negative",
+          "priority": "reference",
+          "expected_role": "company_statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 3
+          },
+          "quote": "接待过程中,公司严格按照《信息披露管理制度》等规定,保证信息披露的真实、准确、完整、及时、公平",
+          "quote_sha256": "5244012503328149614cb87f75ffadb2682a758ed7fde186149bd2a78c18fe33",
+          "reason": "合规声明套话。"
+        },
+        {
+          "golden_id": "G-S08-06",
+          "topic": "负例",
+          "negative_kind": "repeated_paragraph",
+          "polarity": "negative",
+          "priority": "reference",
+          "expected_role": "company_statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 3
+          },
+          "quote": "各方还就IP产品等内容进行了交流，可参阅前次活动记录表之问答和已披露公告",
+          "quote_sha256": "f2e4806563cba843a3d2b05b72646d8d6b0684928b38f1590b647e8c145891fb",
+          "reason": "指向既有记录的重复引用段。"
+        },
+        {
+          "golden_id": "G-S08-07",
+          "topic": "负例",
+          "negative_kind": "procedural_form",
+          "polarity": "negative",
+          "priority": "reference",
+          "expected_role": "company_statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 2
+          },
+          "quote": "上市公司接待人员姓名",
+          "quote_sha256": "0cbf6bf13f3c641b33202ee0b9ffd92709c7fba7dde8e1099259c036e1462744",
+          "reason": "表单字段。"
+        },
+        {
+          "golden_id": "G-S08-08",
+          "topic": "负例",
+          "negative_kind": "procedural_form",
+          "polarity": "negative",
+          "priority": "reference",
+          "expected_role": "company_statement",
+          "modality": "actual",
+          "locator": {
+            "page_number": 3
+          },
+          "quote": "附件清单（如有）",
+          "quote_sha256": "e5b6b54df142fe778ac602ab53cd21c87b62c798def598163113c5c864f00d5c",
+          "reason": "表单字段。"
+        }
+      ]
+    },
+    "S09": {
+      "read_scope": {
+        "unit": "txt_line",
+        "lines_read": [
+          [
+            1,
+            60
+          ],
+          [
+            108,
+            157
+          ],
+          [
+            176,
+            289
+          ]
+        ],
+        "lines_total": 340,
+        "uncovered": "Lines 61-107 (glossary), 158-175 and 290-340 were not read in full.",
+        "ambiguities": [
+          "The parser starts at the first 'Full Conference Call Transcript' line (line 124); the highlight block at lines 26-60 precedes it. Points in that block are tagged parser_region=before_transcript_start so a miss can be attributed to parser scope rather than selector choice."
+        ]
+      },
+      "points": [
+        {
+          "golden_id": "G-S09-01",
+          "topic": "主营进展",
+          "polarity": "positive",
+          "priority": "required",
+          "expected_role": "company_statement",
+          "modality": "actual",
+          "locator": {
+            "line_start": 30,
+            "line_end": 30,
+            "parser_region": "before_transcript_start",
+            "byte_start": 991,
+            "byte_end": 1118
+          },
+          "quote": "Azure and Other Cloud Services Revenue-- Grew 43% year over year, with customer demand continuing to exceed available capacity.",
+          "quote_sha256": "df755df66e6545642484195b79122ed3372f45b6b68ded4d0d30e365c549bba0",
+          "reason": "标题摘要区的产能约束事实，用于检验解析起始行之前的内容是否被漏掉。"
+        },
+        {
+          "golden_id": "G-S09-02",
+          "topic": "产能/项目",
+          "polarity": "positive",
+          "priority": "required",
+          "expected_role": "company_statement",
+          "modality": "actual",
+          "locator": {
+            "line_start": 138,
+            "line_end": 138,
+            "parser_region": "prepared_remarks",
+            "byte_start": 10913,
+            "byte_end": 11073
+          },
+          "quote": "We added 31 new data centers across 5 continents this quarter, bringing the total to 88 this year as we expand our footprint in response to accelerating demand.",
+          "quote_sha256": "8ee17207751ef15143fa01fa10e7c0e40d6db3899aa69a8dbd21792d00109b0f",
+          "reason": "数据中心扩张的量化进展（解析区间内）。"
+        },
+        {
+          "golden_id": "G-S09-03",
+          "topic": "业绩指引",
+          "polarity": "positive",
+          "priority": "required",
+          "expected_role": "company_statement",
+          "modality": "forecast",
+          "locator": {
+            "line_start": 226,
+            "line_end": 226,
+            "parser_region": "parsed",
+            "byte_start": 41662,
+            "byte_end": 41751
+          },
+          "quote": "revenue should be between USD 89.85 billion and USD 90.95 billion or growth of 16% to 17%",
+          "quote_sha256": "5708c43149bf175e4c62816a8f077aaf746fcc40f33d024090e2158109cdca99",
+          "reason": "下季度收入指引（预测情态）。"
+        },
+        {
+          "golden_id": "G-S09-04",
+          "topic": "业绩指引",
+          "polarity": "positive",
+          "priority": "required",
+          "expected_role": "company_statement",
+          "modality": "forecast",
+          "locator": {
+            "line_start": 222,
+            "line_end": 222,
+            "parser_region": "parsed",
+            "byte_start": 40209,
+            "byte_end": 40285
+          },
+          "quote": "In Azure, we expect revenue growth of approximately 45% in constant currency",
+          "quote_sha256": "6ce9141b925bd447a1e56d2386bec94a7a999edc9cf4af55963e3e827da7d0d5",
+          "reason": "Azure 增速指引（预测情态）。"
+        },
+        {
+          "golden_id": "G-S09-05",
+          "topic": "主营进展",
+          "polarity": "positive",
+          "priority": "required",
+          "expected_role": "company_statement",
+          "modality": "actual",
+          "locator": {
+            "line_start": 200,
+            "line_end": 200,
+            "parser_region": "parsed",
+            "byte_start": 32538,
+            "byte_end": 32593
+          },
+          "quote": "Customer demand continues to exceed available capacity.",
+          "quote_sha256": "8479930a13d519e64d5930202d10c72ff7473d941965a1897d96b24d208022be",
+          "reason": "管理层关于供需缺口的陈述。"
+        },
+        {
+          "golden_id": "G-S09-06",
+          "topic": "提问",
+          "polarity": "positive",
+          "priority": "optional",
+          "expected_role": "question",
+          "modality": "question",
+          "locator": {
+            "line_start": 252,
+            "line_end": 252,
+            "parser_region": "parsed",
+            "byte_start": 47440,
+            "byte_end": 47490
+          },
+          "quote": "mainly the question is around capacity constraints",
+          "quote_sha256": "6e197a19e908f218623ee30c69df692b4ee536eae126354f1d3851fae96b9e6f",
+          "reason": "分析师提问，用于角色/情态一致性检查。"
+        },
+        {
+          "golden_id": "G-S09-07",
+          "topic": "产能/项目",
+          "polarity": "positive",
+          "priority": "optional",
+          "expected_role": "company_statement",
+          "modality": "planned",
+          "locator": {
+            "line_start": 208,
+            "line_end": 208,
+            "parser_region": "parsed",
+            "byte_start": 36044,
+            "byte_end": 36139
+          },
+          "quote": "the shift from finance to operating leases adjust our expectation to approximately $175 billion",
+          "quote_sha256": "9a5b0478287345ecc4cc3bfc062089d15f0839e638e5521905e5d710f5eb40d2",
+          "reason": "资本开支口径变化的计划陈述。"
+        },
+        {
+          "golden_id": "G-S09-08",
+          "topic": "负例",
+          "negative_kind": "legal_boilerplate",
+          "polarity": "negative",
+          "priority": "reference",
+          "expected_role": "company_statement",
+          "modality": "actual",
+          "locator": {
+            "line_start": 132,
+            "line_end": 132,
+            "parser_region": "parsed",
+            "byte_start": 9614,
+            "byte_end": 9754
+          },
+          "quote": "During this call, we will be making forward-looking statements, which are predictions, projections, or other statements about future events.",
+          "quote_sha256": "38c8613e95109e8b4c707dd2fea6fbc504713b1de240c257c5c1c28e565233b0",
+          "reason": "前瞻性声明法定套话（解析区间内）。"
+        },
+        {
+          "golden_id": "G-S09-09",
+          "topic": "负例",
+          "negative_kind": "legal_boilerplate",
+          "polarity": "negative",
+          "priority": "reference",
+          "expected_role": "company_statement",
+          "modality": "actual",
+          "locator": {
+            "line_start": 134,
+            "line_end": 134,
+            "parser_region": "parsed",
+            "byte_start": 9870,
+            "byte_end": 9971
+          },
+          "quote": "Actual results could materially differ because of factors discussed in today's earnings press release",
+          "quote_sha256": "4bef2c6d6407803f020fcea9c197e81c066c36951b104e0c47bf3dce5a9d3222",
+          "reason": "风险声明套话。"
+        },
+        {
+          "golden_id": "G-S09-10",
+          "topic": "负例",
+          "negative_kind": "procedural_form",
+          "polarity": "negative",
+          "priority": "reference",
+          "expected_role": "company_statement",
+          "modality": "actual",
+          "locator": {
+            "line_start": 126,
+            "line_end": 126,
+            "parser_region": "parsed",
+            "byte_start": 7385,
+            "byte_end": 7482
+          },
+          "quote": "Greetings, and welcome to the Microsoft Fiscal Year 2026 Fourth Quarter Earnings Conference Call.",
+          "quote_sha256": "c6e4999a911db6ec09bb58f55774f2295951a42937b3c06edead37bc61d4830f",
+          "reason": "接线员开场程序性用语。"
+        },
+        {
+          "golden_id": "G-S09-11",
+          "topic": "负例",
+          "negative_kind": "metadata_header",
+          "polarity": "negative",
+          "priority": "reference",
+          "expected_role": "company_statement",
+          "modality": "actual",
+          "locator": {
+            "line_start": 8,
+            "line_end": 8,
+            "parser_region": "before_transcript_start",
+            "byte_start": 293,
+            "byte_end": 328
+          },
+          "quote": "Scraped: 2026-09-03T22:44:45.464617",
+          "quote_sha256": "8615205acfa30d2f71f6368bcff2c77a020d9880cc4dd54ab8a702245d8f1ef7",
+          "reason": "抓取元数据头，无业务内容。"
+        },
+        {
+          "golden_id": "G-S09-12",
+          "topic": "负例",
+          "negative_kind": "procedural_form",
+          "polarity": "negative",
+          "priority": "reference",
+          "expected_role": "company_statement",
+          "modality": "actual",
+          "locator": {
+            "line_start": 14,
+            "line_end": 14,
+            "parser_region": "before_transcript_start",
+            "byte_start": 467,
+            "byte_end": 484
+          },
+          "quote": "CALL PARTICIPANTS",
+          "quote_sha256": "84e06e33e7449c79645090476411afa132c5046e1280b0c8b85d9e1f9ee64d1e",
+          "reason": "参会人名单标题，程序性内容。"
+        }
+      ]
+    }
+  }
+}
