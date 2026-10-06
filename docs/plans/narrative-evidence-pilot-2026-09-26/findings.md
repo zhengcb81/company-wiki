@@ -766,3 +766,5 @@ e570daf已发布，精确CI37375836745 success。53个不同case分步GREEN。�
 - 原prompt无输出长度目标，更多业务证据可能诱发逐段膨胀。DeepSeek官方当前pricing/model页明确Flash默认thinking（https://api-docs.deepseek.com/quick_start/pricing/），但run09未保留reasoning/content分项，只能确认总输出8192/length；两次thinking-guide页面读取timeout，精确站内搜索无结果，不猜测具体推理耗时。
 - 按实施卡先2 RED/6 passed，再实现私有prompt1.5的20条/280字符/8alias目标及管理层优先、去重，不裁选材、不改公共reader与配置。相关59项Unit/4.17s、现有双语言正式CLI E2E2项/24.07s、Ruff/mypy GREEN。第一次测试命令猜了不存在的model_decode.py（0tests），只读命令也误读不存在model.py并使用Windows不展开的glob；随后按真实文件列表改model_aliases.py，不以文件不存在冒充测试绿。
 - 新零POST真实请求10435 B，预留18755tokens/14445microUSD；token足够但费用不足。已向用户提出累计费用$0.12、同一T01→DeepSeek单次复测，token200k/Config8192/温度1.0和全部旧费不变；截至本记录答复未到，不增加paid calls。短摘要目标本地完成不等于真实业务摘要已完成，目标保持active。两份节点/请求小收据、run09和CI更新PWF，正常提交发布。
+
+- 最终发布复核：短摘要代码4d019b5435b8b277c059f6d4abbe62cc09f684f3与origin/master一致，正常commit/pre-push GREEN；精确CI37511515796 attempt1所有job/步骤success，76秒，小收据与节点状态已更新。仅用户source_acquisition.yaml仍dirty，SHA3609e707保持；其他仓零写。run08/run09/本轮11个明确测试根全部恢复absent；N4本轮小收据总计约0.2MB，不留大正文/请求/无效响应。累计费用$0.12答复仍未到，未提高执行cap、未再POST，目标active且唯一Next Step明确。

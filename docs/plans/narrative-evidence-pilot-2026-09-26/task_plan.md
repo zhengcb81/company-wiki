@@ -128,7 +128,7 @@ TDD框住公开行为，不把旧签收规则写进新测试。仅S0相关收口
 
 ## Next Step
 
-**MAIN单一下一动作：正常提交/推送prompt1.5短摘要修复及run09失败收据，保存精确代码CI；待累计费用$0.12答复后才复测同一T01→DeepSeek一次。**实际授权仍200000tokens/$0.10，累计180884tokens/90649microUSD、unknown7/FX2764不退，余19116tokens/6587microUSD；新请求预留18755tokens/14445microUSD，费用不足，未答不得POST。Config8192/温度1.0、默认thinking与60秒不动。通过后逐条核业务内容/角色、全部引用、RF消费、空间与目录恢复；不给新增费用则保留实现/真实缺口并停止paid任务。已绿长包不重复；RF/FF/ET owner不动，N5三卡可独立启动。
+**MAIN单一下一动作：待累计费用$0.12答复后，才复测同一T01→DeepSeek一次；新代码4d019b5及精确CI37511515796已一次全绿/76秒，不再重复发布前测试。**当前授权仍200000tokens/$0.10，累计180884tokens/90649microUSD、unknown7/FX2764不退，余19116tokens/6587microUSD；新请求预留18755tokens/14445microUSD，费用不足，未答不得POST。Config8192/温度1.0、默认thinking与60秒不动。若批准，仅将campaign累计cost cap明确改120000microUSD（旧charges逐项保持）、新run10/测试根和receipt必须不存在，T01+policy一次；相同requests/价格策略，不使用新off-peak折扣凑预算。逐条核业务内容/角色、全部引用、RF消费、空间与目录恢复；拒绝/未答则保留真实缺口，目标active、不伪报完成。RF/FF/ET owner不动，N5三卡可独立启动。
 
 P5-STORAGE已验收并合入/发布：候选`9fa2166`，主线代码`e570dafb92a3f6aaec51176682d348a1c9303535`。53个不同case分步GREEN，真实AMEC年报+微软电话会TXT的原文stdout SHA、新NarrativeRef完整locator replay前后通过，连接关闭及测试根恢复均通过；没有生产删除。工具预览不写库/sidecar、不拿写锁；切片单次范围SQL/聚合小报告；压缩真实前后计量/空间检查，观测失败明确null。所有细节及实际副本空间见[集成审查](harness_lanes/results/p5_storage_integration_review_2026-10-05.md)、[小验收收据](harness_lanes/results/p5_storage_integration_acceptance_2026-10-05.json)、[工具说明](../../../tools/legacy_storage/README.md)。日常Unit CI不添加多分钟解析包。精确新代码[CI37375836745](https://github.com/zhengcb81/company-wiki/actions/runs/37375836745)已completed/success；此前18da250同SHA重跑CI也已success。
 

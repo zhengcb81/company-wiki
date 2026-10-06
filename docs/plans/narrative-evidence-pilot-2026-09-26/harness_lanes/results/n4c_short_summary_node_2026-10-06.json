@@ -1,6 +1,8 @@
 {
   "schema_version": "n4c-short-summary-node/1",
-  "status": "verified_locally_release_pending",
+  "status": "published_green_live_recheck_pending",
+  "code_head": "4d019b5435b8b277c059f6d4abbe62cc09f684f3",
+  "ci": {"run_id": 37511515796, "attempt": 1, "conclusion": "success", "job_seconds": 76, "receipt": "n4c_short_summary_ci_2026-10-06.json"},
   "prompt_version": "1.5.0",
   "public_wire_changed": false,
   "llm_configuration_changed": false,
@@ -17,6 +19,7 @@
     "ruff": "passed", "mypy_changed_module": "passed"
   },
   "model_posts": 0,
+  "cleanup": {"owned_test_roots": 4, "after": "absent", "restored": true},
   "request_measurement": "n4c_short_summary_request_2026-10-06.json",
   "trigger_receipt": "n4c_live_2026-10-05_run09.json",
   "limits": ["request targets do not prove the provider follows them", "thinking/content usage split of run09 is unavailable", "real T01 business-summary acceptance remains pending", "current cost cap cannot reserve another unchanged-config request"]

@@ -1,5 +1,7 @@
 # N4：可运行的叙述批次、真实模型计量与持久恢复
 
+> **最新发布恢复点：**短摘要目标prompt1.5已正常发布4d019b5435b8b277c059f6d4abbe62cc09f684f3，精确CI37511515796 attempt1全部success/76秒；59 Unit、2正式CLI E2E及四个测试根恢复收据完整，不重跑。当前唯一阻止下一paid T01质量复测的是累计费用答复，当前$0.10不允许14445microUSD的预留；$0.12只是已提出待答方案。下面施工步骤①②已完成，③未执行；不能把本地/CI绿当新真实摘要效果已通过。
+
 > **run09实际终态及下一实施细则（覆盖下方成功准备点）：**一次DeepSeek T01返回finish_reason=length，input2305/output8192，MODEL_OUTPUT_TRUNCATED终态且不发布半截summary。batch36.024s/总40.269s，10497tokens/11692microUSD已知计费；policy仍skip/0model/RF读取0，原件/生产/用户配置/RF owner及测试根恢复均通过。累计180884tokens/90649microUSD、unknown7/unsettled0，余19116tokens/扣FX后6587microUSD；按现配置请求预留18560tokens/14379microUSD，费用不允许再次POST。
 >
 > **下一大节点计划先实施后真实验收：**① TDD要求完整160段证据保留，但模型只输出去重短摘要（至多20条、每条280字符、至多8个短引用alias）；管理层具体业务进展优先，分析师问题保留角色，不按每个span机械生成一条。只改私有prompt/schema并bump prompt，公共bundle/reader与既有25条草案仍可读；不新增人工门。② 原token/温度/模型/端点/默认thinking/超时保持Config；相关Unit和一个现有正式CLI E2E验证，精确代码CI，真实请求尺寸再次零POST测量。③ 旧费用不退，向用户报告具体剩余额度并仅询问必要的累计费用增量，得到答复后同一T01→DeepSeek单次复测；不给预算则停paid任务，保留已完成实现及缺口。官方当前DeepSeek Flash默认thinking，但run09没有保存reasoning/content分项，不能断言截断全部来自thinking或正文。来源https://api-docs.deepseek.com/quick_start/pricing/（2026-10-06）；不为凑预算擅改思考模式、off-peak计价、max_tokens或裁掉原文。
