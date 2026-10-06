@@ -2,6 +2,8 @@
 
 ## N4C当前准备缺口（2026-10-06）
 
+- 预检工具061f534已发布，精确CI37400256960 attempt1 success（73秒）。独立准备已完成，尚无预算答复，0新POST；不以“offline verified”代替N4C完成。唯一旧unknown根461338 B、账本425984 B，继续保留，不属于原46GB旧缓存反弹。
+
 - 新preflight已实跑：当前RF6模块CLI help成功，四份原件SHA准确，旧账58523 tokens/33884 microUSD、unknown4/unsettled0。预算输出预留不可满足（1477<8192），费用剩63352microUSD；确认是真实预算约束，不是凭证/CI问题。配置MiMo/DeepSeek flash与现有端点准确，0 provider/POST/download；n4pf根恢复，生产/owner/用户配置不变。临时driver已更新RF SHA及sample-ids可分两批覆盖四类型，未开始POST。
 - 首次Ruff报告bootstrap三项E402，已为必要路径bootstrap明确标注并通过；SHA流式读取支持项目Python3.10，不使用3.11新增file_digest。预检不产生新的运行授权文件或控制库，也不声称真实摘要或RF业务实读通过。
 

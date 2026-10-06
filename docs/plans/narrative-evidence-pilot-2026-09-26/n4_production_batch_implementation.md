@@ -20,7 +20,7 @@
 
 离线预检只证明资料、账本、配置与consumer bootstrap可用，不等于摘要/真实消费验收。实际四类型覆盖按节点C滚动完成；两家各分run，复用同一累计费用，先小批确认usage再扩展，不用两类样本宣称四类真实模型全过。旧tmp driver在POST前须更新RF固定SHA并通过本入口；收据保存与finally恢复由实际driver承担，不另建控制数据库。
 
-离线预检已实跑GREEN：当前RF6e6b817a的6模块闭包help退出0，四份原件固定SHA/size通过；真实旧账58523 tokens/33884 microUSD，unknown 4、unsettled 0；费用扣FX余量后剩63352 microUSD，token仅剩1477。正式小收据见[harness_lanes/results/n4c_current_main_preflight_2026-10-06.json](harness_lanes/results/n4c_current_main_preflight_2026-10-06.json)。独立n4pf根恢复absent，原件、生产、owner/用户配置不变，0 provider/POST/download。现有收据不覆盖，后续状态变动用新的output文件名重跑。
+离线预检已实跑GREEN并发布061f534，精确CI37400256960 attempt1 success：当前RF6e6b817a的6模块闭包help退出0，四份原件固定SHA/size通过；真实旧账58523 tokens/33884 microUSD，unknown 4、unsettled 0；费用扣FX余量后剩63352 microUSD，token仅剩1477。正式小收据见[harness_lanes/results/n4c_current_main_preflight_2026-10-06.json](harness_lanes/results/n4c_current_main_preflight_2026-10-06.json)。独立n4pf根恢复absent，原件、生产、owner/用户配置不变，0 provider/POST/download。现有收据不覆盖，后续状态变动用新的output文件名重跑。
 
 ```powershell
 python tools/n4c_live_preflight.py --rf-root 'C:/Users/郑曾波/Projects/revenue-forecast' --rf-head 6e6b817a1a6e4567293a4dcb835815f3be508a03 --output '<新的小收据JSON路径>'
