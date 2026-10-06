@@ -831,3 +831,10 @@ S0/N4A及S2模型预算基础、CLI阶段与CI修复已正常发布，当前CI�
 - 新生产反例：1712 excluded含1477个直接parser旧行，全部同document_id/同候选路径，814 hash相同、663旧hash失配；另235个空generator/version summary。当前工具只退休候选row后unlink会留下共享路径旧handle。candidate_bytes还因managed成员重合高于physical derived；不能立即apply或按行总和报空间收益。
 - 下一大节点明确TDD共享路径原子退休/未知现代alias拒绝/空标签旧summary判据/物理路径计量。具体步骤已写S5/S6细则，不多加小节点门、不重新盘点全legacy表，不执行整库恢复演练。
 - RF收尾6e6b817a已正常提交推送，本地main同步；精确代码ca67eab7的CI37391526925保持全绿，纯文档未另触发长CI。两周日志SHA再次相同。目标active，尚未完成生产清理与N4C真实模型批次。
+
+## 2026-10-06 — P5-FF / P5-STORAGE 交付复核
+
+- 用户再次通知交付；核对现有正式收据，确认是已验收并发布的同一交付，无需重派或重跑已绿大包。
+- 本次直接读取 GitHub 公共 Actions API：FF 37385101051 对应758e8f4、STORAGE 37375836745 对应e570daf，均 completed/success、attempt1。git ls-remote确认FF main758e8f4与本地一致，CWP master c46560a与本地一致且包含e570daf。
+- 保持两卡 accepted/published_green；生产清理仍未执行。下一动作仍为共享路径退休与物理字节去重TDD修复，覆盖1477条同路径旧handle；不将工具验收等同生产空间释放。用户source_acquisition改动与未跟踪FMP密钥未读写/暂存。
+- 复核工具错误：gh未在PATH，改公共REST API成功；rg通配符路径在Windows无效，改用已知文件；一次空标题patch未匹配且未产生写入，改为明确日志追加。没有重复失败或新增人工门。
