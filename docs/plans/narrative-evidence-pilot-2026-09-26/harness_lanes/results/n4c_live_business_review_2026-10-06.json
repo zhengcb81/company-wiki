@@ -1,0 +1,64 @@
+{
+  "schema_version": "n4c-live-business-review/1",
+  "live_run": "n4c-20261005-live-deepseek-10",
+  "status": "real_bounded_summary_verified",
+  "source_sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+  "metadata_is_fixture": true,
+  "evidence_role_binding_checked": true,
+  "live_rf_read_exit": 0,
+  "live_replay_status": "verified",
+  "claims": 20,
+  "company_statements": 15,
+  "analyst_questions": 5,
+  "old_claim_types": {
+    "analyst_question": 8,
+    "company_statement": 6
+  },
+  "themes": {
+    "new_data_centers": {
+      "in_selected_evidence": true,
+      "in_short_summary": true
+    },
+    "new_models": {
+      "in_selected_evidence": true,
+      "in_short_summary": true
+    },
+    "customer_adoption": {
+      "in_selected_evidence": true,
+      "in_short_summary": true
+    },
+    "gpu_delivery_efficiency": {
+      "in_selected_evidence": true,
+      "in_short_summary": false
+    },
+    "copilot_paid_seats": {
+      "in_selected_evidence": true,
+      "in_short_summary": true
+    },
+    "monetization_change": {
+      "in_selected_evidence": true,
+      "in_short_summary": true
+    }
+  },
+  "selected_business_themes": 6,
+  "short_summary_business_themes": 5,
+  "summary_is_exhaustive": false,
+  "boundary": "GPU delivery efficiency is in selected evidence but not separately stated in the 20-claim summary; full citation replay is not an exhaustive summary-quality claim.",
+  "final_bytes": 99479,
+  "campaign_tokens": 190035,
+  "campaign_micro_usd": 100502,
+  "historical_fx_guard_micro_usd": 2764,
+  "remaining_tokens": 9965,
+  "remaining_micro_usd_after_fx": 16734,
+  "new_usage_unknown": 0,
+  "new_model_requests": 1,
+  "calls_for_this_review": {
+    "model_posts": 0,
+    "downloads": 0
+  },
+  "checks": {
+    "original_unchanged": true,
+    "all_live_protection_checks": true,
+    "live_cleanup_restored": true
+  }
+}

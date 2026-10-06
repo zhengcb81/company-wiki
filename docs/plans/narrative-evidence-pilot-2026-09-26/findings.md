@@ -797,3 +797,12 @@ e570daf已发布，精确CI37375836745 success。53个不同case分步GREEN。�
 - 新发现：三份N5实际工作树已存在。DOCSET基线e46108b、未提交本线PWF/benchmarks；RAW-DUP同基线、未提交本线PWF/tools；ET从63c4090推进到96c9bc8代码commit、当前干净，三者都缺指定HANDOFF.md/handoff.json，未达到交付，不提前验收/合入或修改owner代码。早先仅-uno看不到CWP两包新目录，已补正常untracked只读状态；一次PowerShell混合对象表格隐藏目录字段，改JSON确认。没有依据声称已确认live进程。
 - RAW-DUP的工作进度里出现metadata候选逻辑重复上界约7.44GiB、1007云占位文件；尚未提供本卡真实字节复核报告，不能称已确认重复收益，更不能删原件或触发云hydrate。本线净释放数字仍取S5实际收据，不加此估计。
 - 核心阻塞审计：同一$0.12费用未答在短摘要修复后、历史草案兼容验收后、显式额度修复后及本轮连续存在，已超过三goal turn；期间有独立进展，但现在所有不依赖该答复的核心工作已完成，N5没有完整交付可接收。无法以离线/Replay冒充剩余真实效果，不擅改配置/降低证据/退款unknown来绕费用。本轮记录外线实际状态后，主线达到blocked条件；不是整体complete或用户requested pause。外线保持独立，费用答复或完整交付到达后恢复对应工作。
+# 2026-10-06 — run10真实业务效果与N5-ET-TXT验收更新
+
+- 用户已明确批准累计费用$0.12，token cap200000不变，原模型配置/端点/默认thinking/8192输出保持。run10 DeepSeek电话会一次POST成功：20 claims，其中15 management陈述/5 analyst问题；46个locator回放全部通过，RF正式reference/read退出0。最终包99479 B，batch35.217秒/总42.828秒，试点根峰值1016373 B/RSS324960256 B，零生产final持久化。
+- 业务复核复用生产的`extract_transcript_material`规范化再parse/select，逐条验证实际claim的evidence ID与角色。六类重点经营主题均在精选原文证据，短摘要覆盖五类：31座数据中心、新模型、Fabric客户采用、Copilot付费席位、seat+usage商业模式。GPU dock-to-live效率未单列，不伪称穷尽；该片段仍可由精选证据读取。旧run06真实收据计数为8 analyst/6 management，纠正此前9/5粗读数字。全部合法引用不能代替摘要内容覆盖。
+- 本次已知9151tokens/9853microUSD，新unknown0/unsettled0；累计190035/100502，历史unknown7和FX2764保留；200000/$0.12下余9965tokens/16734microUSD。费用仍是配置价格代理，不冒充现金账单。同配置完整请求预留18755tokens大于余额，不再次盲POST。N4C原定有限样本节点达成，不宣称全类型穷尽、多provider同时外发或MiMo稳定性已证明。
+- N5-ET-TXT交付96c9bc8代码+2b9fb84交接，复用唯一纯验证器：严格UTF8、真实body/file SHA与字节、头部/receipt ticker与期间；错身份/坏字节具名冲突且原件不丢，无下载receipt旧文件只诊断legacy_unverified。新下载加约618 B sidecar，与TXT一起计输出预算；audit默认只读，不增人工签名/许可文件，不改公开wire。
+- MAIN集中验收受影响3个测试文件92 passed/26.24秒、10 goldens matched、相关Ruff绿，未重复外线234项/77.76秒全包。正式ET main只读审计43份真实TXT，全legacy_unverified、0收据写入，所有原件SHA/size/mtime和ignored配置SHA保持，独立报告目录/测试根恢复absent，0HTTP/翻译/模型。已从63c4090快进并推main2b9fb84；真实git ls-remote核一致。该仓未配置CI，不冒称远端CI绿。
+- S0–S6核心已有实际收据；N5-DOCSET/RAW-DUP扩展仍由外线负责，未收到完整交接，不接管/重派/标完成；RAW-DUP约7.44GiB只是元数据上界。用户CWP source_acquisition修改、RF owner两日志和ET两个untracked文件全部保留，Dayu/IQS零写。
+- 工具/验证夹具错误：run10前sandbox psutil DLL拒绝访问，在POST前失败，正常用户环境运行成功，未改配置/依赖；ET首轮audit索引Windows反斜杠、查询用斜杠而KeyError，改相对路径as_posix并在已合入主线实际核验43份通过。首轮编排未因退出码截断，导致并线先于该只读audit，代码责任包与public wire已先绿；后续依赖mutation必须检查返回码。电话会离线首轮直接decode原TXT导致span IDs不匹配，改复用产品material规范化后原断言全通过，没有放松引用校验或改产品代码。

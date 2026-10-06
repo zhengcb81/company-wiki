@@ -1,0 +1,51 @@
+{
+  "schema_version": "n5-et-main-acceptance/1",
+  "delivery_code_head": "96c9bc8b0b4610a4e4660918bbfb9cbe80fa0395",
+  "delivery_head": "2b9fb84660f98ce27a05709a7e31342ab044b4d2",
+  "status": "accepted_published_green",
+  "publication": {
+    "method": "fast_forward_main_then_push",
+    "local_main": "2b9fb84660f98ce27a05709a7e31342ab044b4d2",
+    "live_remote_main": "2b9fb84660f98ce27a05709a7e31342ab044b4d2",
+    "verified_by": "git ls-remote origin refs/heads/main",
+    "remote_ci": "not_configured_not_claimed",
+    "green_scope": "main_affected_tests_goldens_related_ruff"
+  },
+  "tests": {
+    "affected_cases": 92,
+    "failed": 0,
+    "seconds": 26.24,
+    "goldens_matched": 10,
+    "related_ruff": "green"
+  },
+  "calls": {
+    "model_posts": 0,
+    "provider_http": 0,
+    "downloads": 0
+  },
+  "full_234_suite_repeated": false,
+  "real_audit": {
+    "files": 43,
+    "counts": {
+      "legacy_unverified": 43
+    },
+    "write_receipts": false
+  },
+  "spot_sample": {
+    "id": "MSFT/MSFT_Q1_2025_earnings_call.txt",
+    "byte_size": 60363,
+    "sha256": "ac1cc6170dcfaa68e586dfcdc6c5bf2e4de05cc0bfb7836013c37cc60eb701ae"
+  },
+  "checks": {
+    "all_originals_and_receipts_unchanged": true,
+    "et_user_config_unchanged": true,
+    "public_protocol_changed_paths": [],
+    "tests_root_restored_absent": true
+  },
+  "cleanup": {
+    "before": "absent",
+    "after": "absent",
+    "restored": true
+  },
+  "real_audit_seconds": 0.431
+}

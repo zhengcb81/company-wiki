@@ -977,3 +977,11 @@ S0/N4A及S2模型预算基础、CLI阶段与CI修复已正常发布，当前CI�
 - 新发现：三份N5实际工作树已存在。DOCSET基线e46108b、未提交本线PWF/benchmarks；RAW-DUP同基线、未提交本线PWF/tools；ET从63c4090推进到96c9bc8代码commit、当前干净，三者都缺指定HANDOFF.md/handoff.json，未达到交付，不提前验收/合入或修改owner代码。早先仅-uno看不到CWP两包新目录，已补正常untracked只读状态；一次PowerShell混合对象表格隐藏目录字段，改JSON确认。没有依据声称已确认live进程。
 - RAW-DUP的工作进度里出现metadata候选逻辑重复上界约7.44GiB、1007云占位文件；尚未提供本卡真实字节复核报告，不能称已确认重复收益，更不能删原件或触发云hydrate。本线净释放数字仍取S5实际收据，不加此估计。
 - 核心阻塞审计：同一$0.12费用未答在短摘要修复后、历史草案兼容验收后、显式额度修复后及本轮连续存在，已超过三goal turn；期间有独立进展，但现在所有不依赖该答复的核心工作已完成，N5没有完整交付可接收。无法以离线/Replay冒充剩余真实效果，不擅改配置/降低证据/退款unknown来绕费用。本轮记录外线实际状态后，主线达到blocked条件；不是整体complete或用户requested pause。外线保持独立，费用答复或完整交付到达后恢复对应工作。
+# 2026-10-06 — 用户费用批准、run10与ET-TXT实际收口
+
+1. 人类对累计$0.12回复“批准”，目标active；唯一run10按Config执行T01 DeepSeek+零模型policy。终态succeeded：20 claims/46 locators/15管理层陈述/5问题，RF reference/read0、replay verified、English/translate=false，99479 B final；batch35.217s/总42.828s，原件/生产/user config/RF owner全部checks true，tmp/n4live05x10恢复absent。没有新unknown，本次9151tokens/9853microUSD；累计190035/100502，历史unknown7/FX2764保持。正式小收据n4c_live_2026-10-05_run10.json。
+2. 零POST独立复核真实claims。首轮原TXT直接decode与生产material规范化不同，span IDs断言红；复用生产extract_transcript_material+verify后ID/角色绑定全部通过，6类主题精选覆盖6/6、短摘要5/6，GPU效率未单列。业务收据n4c_live_business_review_2026-10-06.json记录非穷尽边界、原件保护和当前余额9965tokens/16734microUSD；旧run06实数8问题/6管理层，纠正历史粗读9/5，不改旧收据。
+3. 收到N5-ET-TXT完整交接，读取卡/PWF/HANDOFF/Git差异，public wire/goldens零改；正常用户责任包92 passed/26.24s，10 goldens matched、相关Ruff绿。只重复3个受影响文件，未重跑外线234项已绿全包。ET worktree/tmp/n5accept恢复absent，0真实HTTP/LLM/下载。
+4. ET首次真实只读audit脚本路径键KeyError，finally清理；编排没在exit1后中断，main快进/推送先发生。修改脚本相对路径as_posix后，在已经合入的正式main实际audit通过：43 TXT全legacy_unverified，原件SHA/size/mtime、ET配置SHA保持，0写收据，tmp/n5etread恢复absent。独立spot MSFT Q1 2025为60363 B/SHA ac1cc6170dcfaa68e586dfcdc6c5bf2e4de05cc0bfb7836013c37cc60eb701ae。依赖修改以后显式检查退出码，不能把失败前命令拼接当成功。
+5. ET local main/真实远端main均2b9fb84660f98ce27a05709a7e31342ab044b4d2，代码96c9bc8包含其中；只保留owner .workbuddy-ai/、eval_results.json。正式n5_et_text_main_acceptance_2026-10-06.json说明green为MAIN责任测试/goldens/Ruff，不冒称无workflow仓库远端CI已绿。
+6. 更新当前task_plan、完成证据、N4恢复细则、并行总计划/N5总包/ET卡与findings/progress，S4有限样本complete、S0–S6核心收口；N5-DOCSET/RAW-DUP未完整交付，整体目标active。当前代码CI4826ad9/37514053091已一次全绿52秒，纯文档与收据复用此代码证明，不新增慢测试或小节点门。本记录随本轮文档/小收据正常commit/push；精确文档提交由git log检索，不暂存用户config。发布前diff --check发现两日志末尾空行，已清除，单独检查退出0后才提交。

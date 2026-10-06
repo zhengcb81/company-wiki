@@ -1,6 +1,8 @@
 # N5-ET-TXT：本地电话会TXT正确复用与小收据
 
-**ready，可立即启动；中等代码修复包。** 这是ET本地scraper批次资料可靠性修复，不是已完成的bounded/deadline/P5，不解锁FMP付费权益，也不改变FF→ET→CWP公共合同。
+**已验收并入本地/远端 main，不再派发。** 2026-10-06：交付代码 `96c9bc8b0b4610a4e4660918bbfb9cbe80fa0395`、交接 `2b9fb84660f98ce27a05709a7e31342ab044b4d2`；MAIN 92项测试、10 goldens、相关 Ruff 通过，真实43份TXT只读 audit 全为 legacy_unverified，原件/配置不变、测试根清理。见[验收收据](results/n5_et_text_main_acceptance_2026-10-06.json)。以下是原施工边界与重放方法，不能据此再次开工。
+
+这是ET本地scraper批次资料可靠性修复，不解锁FMP付费权益，也不改变FF→ET→CWP公共合同。旧无收据TXT仅证明当前头部与字节可读，不能冒充已验证的下载完整性。
 
 ## 1. 已证实缺口
 

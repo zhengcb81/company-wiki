@@ -1,5 +1,15 @@
 # N4：可运行的叙述批次、真实模型计量与持久恢复
 
+## 当前节点已收口（2026-10-06，覆盖全部下方过程记录）
+
+用户已批准累计200000 tokens/$0.12。run10同配置DeepSeek T01只发一次请求，真实20 claims/46 locators、15管理层/5分析师问题，99479 B final；RF reference/read0、replay verified、原语言/不翻译、policy skip/0model，原件/生产/配置/RF owner保持、测试根恢复absent。batch35.217秒/总42.828秒；[真实收据](harness_lanes/results/n4c_live_2026-10-05_run10.json)、[独立业务与角色复核](harness_lanes/results/n4c_live_business_review_2026-10-06.json)。
+
+六类重点经营主题全部进入精选证据，短摘要覆盖五类，GPU交付效率未单列；不伪报穷尽。四类真实原件/provider final/消费者读取已有分批证据，P1/P2/P4测量、节点A/B恢复和生产S5/S6收据已有，不重复重跑。N4C有限样本验收完成；MiMo超时/旧SUMMARY_INVALID、run09截断和未知账仍是历史真实风险，不承诺每次调用成功。
+
+累计190035tokens/100502microUSD、历史unknown7/unsettled0、FX2764，余9965tokens/16734microUSD。费用是代理估算。现配置完整请求预留18755tokens，余额不够，不自动重复付费/提高额度/更改Config。当前下一动作是总task_plan的N5交接；ET-TXT已验收并推main2b9fb84，不重派。
+
+## 历史过程记录（以下待答、下一步和旧额度不再生效）
+
 > **最新发布恢复点：**短摘要目标prompt1.5已正常发布4d019b5435b8b277c059f6d4abbe62cc09f684f3，精确CI37511515796 attempt1全部success/76秒；59 Unit、2正式CLI E2E及四个测试根恢复收据完整，不重跑。当前唯一阻止下一paid T01质量复测的是累计费用答复，当前$0.10不允许14445microUSD的预留；$0.12只是已提出待答方案。下面施工步骤①②已完成，③未执行；不能把本地/CI绿当新真实摘要效果已通过。
 
 > **run09实际终态及下一实施细则（覆盖下方成功准备点）：**一次DeepSeek T01返回finish_reason=length，input2305/output8192，MODEL_OUTPUT_TRUNCATED终态且不发布半截summary。batch36.024s/总40.269s，10497tokens/11692microUSD已知计费；policy仍skip/0model/RF读取0，原件/生产/用户配置/RF owner及测试根恢复均通过。累计180884tokens/90649microUSD、unknown7/unsettled0，余19116tokens/扣FX后6587microUSD；按现配置请求预留18560tokens/14379microUSD，费用不允许再次POST。

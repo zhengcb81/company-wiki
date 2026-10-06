@@ -11,29 +11,29 @@
 ## 当前恢复点（2026-10-06）
 
 - CWP 当前代码 `4826ad9c67bce3d3e2b977173d283341d18bc141` 已发布；显式预算修复的 [CI37514053091](harness_lanes/results/n4c_explicit_limits_ci_2026-10-06.json)一次全绿/52秒。短摘要代码 `4d019b5` 和历史长草案兼容测试 `86c8793` 已发布，精确代码 CI 分别一次通过，76/75秒。
-- RF 正式 main `6e6b817a1a6e4567293a4dcb835815f3be508a03`，已有默认 v2 与真实原文读取验收；FF main `758e8f4`，ET main `63c4090`。不要重派 P5 已完成交付。
+- RF 正式 main `6e6b817a1a6e4567293a4dcb835815f3be508a03`，已有默认 v2 与真实原文读取验收；FF main `758e8f4`，ET 本地/真实远端 main 已快进到 `2b9fb84660f98ce27a05709a7e31342ab044b4d2`，包含 N5-ET-TXT。不要重派已完成交付。
 - 当前 RF 正常用户上下文只有两份 owner weekly 日志修改，本线不改；旧 rf-impl WIP 保存在独立分支。本机 CWP `config/source_acquisition.yaml` 是用户改动，SHA `3609e707466eeb3e0f685e14f2637c6afa39ba900edef1be4814433a43300a01`，不暂存、不覆盖。
-- 当前核心缺口只有 S4 的修复后真实电话会业务摘要验收；没有 live 模型任务，run10 尚未启动。目标未完成。
+- S4 修复后真实电话会 run10 已完成：20 条摘要、15 条管理层陈述、46 个定位全部回放，RF 正式读取通过；六类业务主题全部在精选证据中，短摘要覆盖五类，GPU 交付效率未单列，不能声称穷尽。S0–S6 核心节点已收口；N5-DOCSET/RAW-DUP 尚待外线完整交付和 MAIN 验收，整体目标仍 active。
 
 ## 已批准预算与配置
 
-当前明确批准的累计上限是 **200000 tokens / $0.10**。此前 60000/160000 与待提高 token 的记录是历史。P04 招股同一业务片段→DeepSeek 已获批准并在 run08 成功；T01 电话会→DeepSeek 的明确外发授权继续有效。
+当前明确批准的累计上限是 **200000 tokens / $0.12**（用户在本轮对费用提高回复“批准”）。此前60000/160000、$0.10和费用待答记录是历史。P04 招股同一业务片段→DeepSeek 已获批准并在 run08 成功；T01 电话会→DeepSeek 的明确外发授权继续有效。
 
-累计使用 `180884 tokens / 90649 microUSD`，unknown 7、unsettled 0；历史 FX guard `2764 microUSD` 保留。余 `19116 tokens / 6587 microUSD`。新 T01 请求预留 `18755 tokens / 14445 microUSD`：token 足够，费用不足。**$0.12 费用上限仍待用户答复，不得据此 POST。**
+run10 已执行一次 T01+零模型 policy，实际新增 `9151 tokens / 9853 microUSD`，新 unknown0/unsettled0。累计 `190035 tokens / 100502 microUSD`，历史 unknown7/unsettled0、FX guard `2764 microUSD` 保留；余 `9965 tokens / 16734 microUSD`（含 FX 扣减）。费用是配置价格代理，不能冒充供应商现金账单。没有必要再重复付费；现配置完整请求预留18755 tokens也不符合剩余 token，不自动重试或提高预算。
 
 模型严格经 `Config.load / model_options_from_config`：MiMo `mimo-v2.6-flash`（`https://token-plan-cn.xiaomimimo.com/v1`），DeepSeek `deepseek-flash`（`https://api.deepseek.com`）；输出 8192、温度 1.0，现有 timeout/default thinking 不擅改。不退款旧 unknown、不用临时折价凑预算、不增加第二账本。
 
 零网络准备工具现要求显式传入两项累计上限，避免旧 60000 默认误报；这是资源输入，不是人工许可文件。下列命令只读资料、只导出 RF 已提交六模块、清理临时根；输出路径必须原先不存在：
 
 ```powershell
-python -B tools/n4c_live_preflight.py --rf-root 'C:/Users/郑曾波/Projects/revenue-forecast' --rf-head 6e6b817a1a6e4567293a4dcb835815f3be508a03 --campaign-token-cap 200000 --campaign-cost-cap-micro-usd 100000 --output '<新的小收据JSON路径>'
+python -B tools/n4c_live_preflight.py --rf-root 'C:/Users/郑曾波/Projects/revenue-forecast' --rf-head 6e6b817a1a6e4567293a4dcb835815f3be508a03 --campaign-token-cap 200000 --campaign-cost-cap-micro-usd 120000 --output '<新的小收据JSON路径>'
 ```
 
 报告的 `budget_can_reserve_configured_output` 只检查输出 token；不能作为完整请求或费用通过的证明。全部日期真实旧账统一取 `prior_budget()`。当前实读证据：[显式额度离线准备](harness_lanes/results/n4c_explicit_limits_preflight_2026-10-06.json)。
 
 ## 实施顺序与当前完成范围
 
-优先事项 G1 门禁精简、S3 虚拟化已经完成；不再串行重做。当前执行 S4，S5/S6 已利用外发等待完成。
+优先事项 G1 门禁精简、S3 虚拟化已经完成；不再串行重做。S4 已有修复后真实业务效果收据，S5/S6 生产清理完成。扩展质量实证与原件去重调查由两个 N5 外线继续，不新增核心节点屏障。
 
 | 步骤 | 状态 | 范围与证据 |
 |---|---|---|
@@ -42,7 +42,7 @@ python -B tools/n4c_live_preflight.py --rf-root 'C:/Users/郑曾波/Projects/rev
 | S2 N4B | complete | 隔离子进程客户端、真实 HTTP/factory、有限 batch、持久预算、lease/generation/kill/ACK 恢复；节点 A/B 集中验收绿 |
 | G1 多余门禁/签收 | complete | 46 项已分类；private/public、prompt 人工复核阻断、签名/TTL、reviewer 必填、双授权及旧审批工具退出；CWP/FF/ET 责任测试绿 |
 | S3 来源虚拟化 | complete | SourceRef/SourceExport v2、FF→ET→CWP 正式 CLI 离线链、迁根/只读/去重/SHA/语言/超时清理验收；RF 默认 v2 已发布，StockWiki 现有只读消费者复用 |
-| S4 N4C 真实业务效果 | **in_progress，MAIN 独占** | 年报、招股、IR、旧电话会有真实 final/RF 读取；电话会漏选已修，run09 截断未发布；prompt1.5 修复/CI 绿，但新真实效果待验收 |
+| S4 N4C 真实业务效果 | complete，有限样本范围 | 年报/招股/IR 有真实 final/RF 读取；电话会 run10 修复后实际通过，20 claims/46 locators/RF 读取0；[业务复核](harness_lanes/results/n4c_live_business_review_2026-10-06.json)明确短摘要5/6主题、精选6/6，不声称全类型/全主题穷尽 |
 | S5 逐 caller 与派生清理 | complete | 旧全文 writer/消费者退出；生产 7104 旧文件、8191 handle 退休；原件与来源事实保持 |
 | S6 DB 收缩与收尾 | complete | 1490530 旧 span 删除；DB 3055841280→222408704 B；说明/控制/短 smoke 已发布，精确 CI 绿 |
 | 可选原件 exact-SHA 去重 | 不阻 S0–S6 完成 | 先只读实证收益，保留来源/location 版本；未测重复 raw 不计节省，不自动删原件 |
@@ -65,9 +65,9 @@ MAIN 独占共享接口、总 PWF、生产状态和所有合入；外线独占�
 
 G1-LEGACY、ET-DEADLINE、FF/ET-S3、P5-FF/STORAGE/RF、N4-T1/T2、StockWiki 来源/身份线与 MeetingConverter CI 卡已交付，不重派。相关功能并线不等于每仓所有历史 WIP 都已消失；Dayu 现有提交只有本地集成，远端 push 曾 403，不宣称远端同步。
 
-当前可独立启动的 [N5 三包](harness_lanes/n5_parallel_packages_2026-10-06.md)：DOCSET 多类型真实质量基准、RAW-DUP 只读重复原件工具、ET-TXT 本地复用验真。卡内有独占目录、写集、接口、测试和交接；未收到交付，不宣称完成，不新增 N4C 屏障。半年报、季报、融资/可转债、招股、IR 等的更广质量实证进入 DOCSET，不以选择器输出自己生成 golden。
+已分派的 [N5 三包](harness_lanes/n5_parallel_packages_2026-10-06.md)：DOCSET 多类型真实质量基准、RAW-DUP 只读重复原件工具继续由外线负责；ET-TXT 本地复用验真已验收并线。卡内有独占目录、写集、接口、测试和交接，不重派、不新增 N4C 屏障。半年报、季报、融资/可转债、招股、IR 等的更广质量实证进入 DOCSET，不以选择器输出自己生成 golden。
 
-2026-10-06已核对三个独立目录均存在、各有本线施工材料；ET代码已提交`96c9bc8`，但三者完整交接文件均未出现。保留外线写集，不重派、不提前合入。核心S4收尾等待费用答复；主线blocked不暂停外线独立工作，交付或费用答复到达后恢复对应验收。
+2026-10-06 已核对三个独立目录均存在。DOCSET/RAW-DUP 未交完整收据；ET 代码`96c9bc8`、交接`2b9fb84`已验收并推 main：MAIN 92项/26.24秒、10 goldens、相关 Ruff 绿，主线真实43份TXT只读 audit/0写收据/原件与配置不变，测试根恢复 absent；[正式验收](harness_lanes/results/n5_et_text_main_acceptance_2026-10-06.json)。不重复外线234项已绿全包，不改公开 wire，也没有新增人工签收。
 
 FMP 真实 HTTP 402 说明套餐能力边界，不冒充 live 下载通过；已有三仓离线链通过。FF 的正美元额度没有实际 FMP 账单计量，不声称已经实测该能力。RF 当前接通来源读取/准备，不冒充已把摘要全部接入预测计算。
 
@@ -88,8 +88,8 @@ TDD 框住具体公开行为。只在 N4 A/B/C、存储迁移等大节点集中�
 
 ## Next Step
 
-**待用户明确提高累计费用上限至 $0.12 后，MAIN 才做同一 T01→DeepSeek 一次修复后真实验收。**当前仍按 200000/$0.10；不得 POST，不重跑已绿长包，不把离线或 Replay 当真实质量通过。
+**接收 N5-DOCSET / N5-RAW-DUP 下一份完整交接，按各自卡的集中节点验收后统一并线。**两线保持独立写集；无交付时只记录实际状态，不接管或重派。
 
-若批准：只把 campaign cost cap 明确设 `120000 microUSD`；所有旧 charges/unknown/FX 保持，模型配置不动。先核 RF 当前主线与 owner 指纹、预算和新 run10/root/receipt 原先不存在，再执行 T01+policy 一次；逐条核具体管理层经营进展、角色、全部 locator、RF 正式读取、原语言、费用、空间及测试目录恢复。失败照实记终态，不自动多次重试或再次提高预算。
+run10 与 ET-TXT 已完成、已写小收据；本轮 PWF/收据正常提交推送。S4 的真实结果、旧失败及非穷尽边界均保留，不把 Replay 当真实模型；已批准配置、旧 charges/unknown/FX 不动。N5-DOCSET若发现新的实质缺口，再据输入/期望/实际另列 MAIN 运行时修复；RAW-DUP 元数据估计不算实测收益、不触发原件删除或云 hydrate。
 
-若未批准：保留 S4 真实缺口，不标整体完成，不制造新权限、重复测试或另一账本。N5 外线可独立实施；MAIN 在交付后统一验收。最终完成以本页每项责任和实际收据审计，不能把当前证据缩成更容易通过的目标。
+N5外线独立实施，MAIN只在完整交付后验收；最终完成以本页每项责任和实际收据审计，不将当前证据缩成更容易通过的目标。
