@@ -1,6 +1,6 @@
 {
   "schema_version": "cwp-n6-main-compatibility/1",
-  "status": "local_verified_publication_pending",
+  "status": "published_complete_for_main_preparation",
   "fixture_generation_head": "ca6d9ced5981f4f84a247ef5b90095d651ccb805",
   "historical_selector_version": "0.3.2",
   "simulated_new_selector_version": "0.4.0",
@@ -55,6 +55,14 @@
     "actual new selector merge/version/rule composition must rerun frozen compatibility tests",
     "final real-nine-source benchmark and formal Worker/search/exact/RF E2E remain pending"
   ],
-  "published_head": null,
-  "exact_ci": null
+  "published_head": "0947cea63140d515620f563daf2058f4520cd6a3",
+  "exact_ci": {
+    "run_id": 37532408169,
+    "run_attempt": 1,
+    "status": "completed",
+    "conclusion": "success",
+    "job_seconds": 80,
+    "new_integration_in_daily_ci": false,
+    "receipt": "n6_main_ci_2026-10-06.json"
+  }
 }

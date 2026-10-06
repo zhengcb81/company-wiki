@@ -10,7 +10,7 @@
 
 ## 当前恢复点（2026-10-06）
 
-- CWP当前已发布代码 `58b74d07dd4f8b589c134ef9060a689864a8c089`，DOCSET真实merge已推master，精确CI37528050044一次成功/75秒；43不同责任case和真实9样本已接收，工具完成而质量required12/33仍待改。RAW-DUP a41244a/CI57秒、R6 eae2dd4/CI59秒等已完成证据不重跑。
+- DOCSET真实merge `58b74d07dd4f8b589c134ef9060a689864a8c089`已推master，精确CI37528050044一次成功/75秒；43不同责任case和真实9样本已接收，工具完成而质量required12/33仍待改。MAIN先行兼容/业务标准已发布`0947cea63140d515620f563daf2058f4520cd6a3`、精确CI37532408169一次成功/80秒，无运行代码变更。RAW-DUP a41244a/CI57秒、R6 eae2dd4/CI59秒等已完成证据不重跑。
 - RF 正式 main `6e6b817a1a6e4567293a4dcb835815f3be508a03`，已有默认 v2 与真实原文读取验收；FF main `758e8f4`，ET 本地/真实远端 main 已快进到 `2b9fb84660f98ce27a05709a7e31342ab044b4d2`，包含 N5-ET-TXT。不要重派已完成交付。
 - 当前 RF 正常用户上下文只有两份 owner weekly 日志修改，本线不改；旧 rf-impl WIP 保存在独立分支。本机 CWP `config/source_acquisition.yaml` 是用户改动，SHA `3609e707466eeb3e0f685e14f2637c6afa39ba900edef1be4814433a43300a01`，不暂存、不覆盖。
 - S4 修复后真实电话会 run10 已完成：20 条摘要、15 条管理层陈述、46 个定位全部回放，RF 正式读取通过；六类业务主题精选6/6、短摘要5/6，GPU效率未单列，不能声称穷尽。完成审计发现R6具体缺口，现已TDD修复并发布/精确CI绿，S4关闭；其余核心证据不重做。N5-RAW-DUP完整交付已集中修正/51项绿，已合入master a41244a并推远端、精确CI37523080920/57秒绿；DOCSET已接收并推58b74d0/CI75秒绿，当前required12/33按S7/N6整改，整体目标active。

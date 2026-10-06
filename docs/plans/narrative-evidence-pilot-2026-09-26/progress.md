@@ -1041,3 +1041,7 @@ N6启动PWF和INPUT_CARD已各自纯文档提交并推分支，工作树干净�
 统一33个required业务解释表已写，原golden/86点/报告/分母零改：28经营点+1项目引句上下文，3纯财务金额/指引不独立作为业务摘要，1正文外provider摘要不冒充management。读原quote发现S07是境内收入占比约22%而非海外22%，更正ROOT候选卡/S7；S08历史2023产品克重口径、S06历史2016—2020进口替代也明确时间边界，不为模型/选择器凑绿。外线INPUT_CARD副本不写，最终MAIN核交付语义。
 
 自有tmp/n6freeze、n6mct及两生成脚本均核绝对路径/无reparse/实际恢复absent；原测试fixture保留已存在keep文件。RF2 owner SHA和用户config SHA实测保持，Dayu/IQS/StockWiki/ET零写。查询曾猜不存在的pilot/reader/view模块名和Windows rg通配路径报错，改为已知正式模块/目录，不当产品缺陷或新增门。当前准备正常commit/push与精确CI；S7质量两线未交，完整目标active。
+
+本轮实际发布0947cea63140d515620f563daf2058f4520cd6a3已推master，ls-remote一致，正常commit/pre-push绿。精确CI37532408169 attempt1全部步骤/job completed/success，job112504813892/80秒；9项新Integration只本地节点运行，不扩日常CI。CI收据先用PowerShell OrderedDictionary直接Select-Object打印null，文件内JSON实际字段完整；从保存文件反序列化后验证job ID/seconds/全部step结果，不能拿空打印作为证据。
+
+已核NarrativeBatchRequest.input_hash确实包含selector/parser/prompt、build_batch_events纳入生成身份，narrative_select结果也绑定共享版本；最终两质量线合入后从新进程执行既有generation责任测试，不改历史read版本门。最后文档/收据用skip ci发布，用户config保持独立未提交；三外线原写集与INPUT_CARD副本不写。MAIN先行完成不等于S7整体质量完成。

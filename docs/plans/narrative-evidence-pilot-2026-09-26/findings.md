@@ -856,3 +856,5 @@ N6三包人类已分派，MAIN只做共享责任。正式final按完整EvidenceS
 33 required保留原分母与golden不变，独立业务解释划28经营事实+1项目完整上下文、3纯财务指引/金额、1正文外provider摘要。主要语义修正：S07 G01是境内约8.19亿元/22%，不能标成海外22%；S08是历史2023克重口径产品组合，不称2026数据；S06行业进口替代为2016—2020回顾。industry forecast、拟收购/认证/建成投产/意向书和actual必须按原话保留。统一表绑定实际golden/samples字节SHA与quote SHA/locator，未来仍报告实际/33及每点原因，不用业务分类把漏项清零。
 
 RF6e6b817a/2 owner SHA与CWP user config3609e707保持，三外线零写。独立scratch和两生成脚本均absent；正式9样本新selector基准与Worker→search/exact→RF仍等质量代码交付后做一个大节点，没用本回合合成compat冒称新实际质量已完成。
+
+MAIN已实际推0947cea，精确CI37532408169 attempt1 success/job80秒，普通CI没有新增长Integration。请求input_hash已有selector/parser/prompt，批次生成身份包含此请求，shared selector_version更新会区分新批次；最终fresh process联调需复核实际传播。保存CI JSON里的job/steps已实读验证；OrderedDictionary的Select-Object显示null是输出展示问题，未影响真实收据。

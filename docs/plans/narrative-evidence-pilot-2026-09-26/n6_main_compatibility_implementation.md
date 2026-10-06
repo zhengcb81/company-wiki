@@ -21,6 +21,8 @@ MAIN独占新tests/integration/test_n6_persisted_selection_compatibility.py和�
 
 ## 状态
 
-兼容责任包已完成（最终发布收据随本轮补齐）：实际冻结3份0.3.2产物，共17056 B（含README共18247 B）；强化后的Integration 9项通过/4.85秒，Ruff绿，legacy spans表为零、篡改前后成功读取证明通过。初轮9红是本线夹具误拿catalog内部ID与public URN比较，改成对比完整SourceRef后通过；没有产品RED、不改正式reader。旧试点version耦合不改成canonical。
+兼容责任包已完成并发布：实际冻结3份0.3.2产物，共17056 B（含README共18247 B）；强化后的Integration 9项通过/4.85秒，Ruff绿，legacy spans表为零、篡改前后成功读取证明通过。初轮9红是本线夹具误拿catalog内部ID与public URN比较，改成对比完整SourceRef后通过；没有产品RED、不改正式reader。旧试点version耦合不改成canonical。发布0947cea63140d515620f563daf2058f4520cd6a3已推master，精确CI37532408169 attempt1 success/80秒；9项新Integration不加日常CI，[实际节点收据](harness_lanes/results/n6_main_compatibility_2026-10-06.json)。
 
 共享入口也已只读复核：route_document只提供默认96/160与empty_result_may_skip，未在候选前hard skip行政标题，混合文档由候选与finalize按内容处理；不需要抢外线文件或先改路由。用户已通知三线分派，尚未收到新交付；不据此宣称进程live或已经完成。
+
+已核生成版本传播：narrative_batch_request.NarrativeBatchRequest.input_hash包含selector/parser/prompt，build_batch_events把请求SHA纳入input_hash/event/policy identity；新规则批次不能复用旧generation。narrative_select导入相同共享version常量，并在结果记selector版本。最终合入后通过新进程加载版本并复核既有generation责任测试；不靠热改模块常量替代真正部署，也不改变历史final读合同。CodeGraph变量impact只给定义文件两符号，不把它冒充所有导入消费者清单。
