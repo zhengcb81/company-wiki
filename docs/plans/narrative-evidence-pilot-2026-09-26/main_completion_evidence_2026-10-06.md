@@ -14,6 +14,8 @@
 
 ## 当前真实业务效果缺口
 
+当前零网络准备已按显式200000 tokens/100000 microUSD重跑：四份真实raw、RF已提交六模块、生产/原件/owner与测试根恢复均通过，累计旧账不变；[当前离线收据](harness_lanes/results/n4c_explicit_limits_preflight_2026-10-06.json)。工具不再默用旧60000，输出token够不能证明完整请求费用足够；5项预算/CLI回归通过。这不是新增真实摘要验收，$0.12仍未获答。
+
 P04已由run08 DeepSeek一次请求完成。MiMo run05两次MODEL_TIMEOUT后SUMMARY_INVALID、run07一次61秒MODEL_TIMEOUT无正文仍为真实历史；不将超时计成功、不推断旧失败规则。run08的25条招股业务摘要已实际返回并由RF核验。
 
 旧T01电话会真实摘要遗漏新数据中心、GPU交付效率、模型发布、客户采用、付费席位和商业模式变化。MAIN已先写跨行业经营正例/财务套话反例TDD，再实现selector0.3.2通用规则，parser0.1.0与locator不变；92个不同责任case分步GREEN。原文六类管理层进展全部选中，46/46引用回放，[零外发测量](harness_lanes/results/n4c_english_selection_2026-10-06.json)给出旧/新数量及按Config的请求预留。此证据证明选择修复，还未证明新模型摘要覆盖。

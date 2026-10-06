@@ -776,3 +776,14 @@ e570daf已发布，精确CI37375836745 success。53个不同case分步GREEN。�
 - 完成核对仍仅N4C业务效果待实测。修正task_plan的160k历史授权段与S4表中陈旧的“待发布/待CI”，唯一Next Step保持费用答复后同一T01一次，已绿长包不再重跑。N5三卡未收交付、不代写外线。目标保持active；此轮有具体兼容证据及已提交测试进展，未达到真正无可推进的三轮blocked阈值。
 
 - 发布结果：86c8793901f9254e922cadf00fda9bf120156df8已推origin/master，正常pre-commit/pre-push绿；精确CI37512605771 attempt1全部job/steps success/75秒。新增兼容integration case本地1 passed，日常CI不重复这项integration，仅运行既有Unit/短contract/compile等，收据明确区分范围。费用答复仍未到，本轮新POST0，目标未完成；保护配置SHA及RF owner保持。
+
+## 2026-10-06 — 当前计划收敛与显式预算准备修复
+
+- 前一用户状态答复没有改变权威状态，本轮继续核查后发现真实交接风险：task_plan仍有已完成S3/S5的“下一步”、旧施工卡和160k/60k恢复段。总计划现只保当前恢复点、S0–S6状态、资源/职责、N5外线、唯一Next Step；旧全文以已发布659bcefc Git链接保留，不丢技术记录、不产生新签收。
+- 正常用户只读复核CWP HEAD659bcefc、RF HEAD/cached main6e6b817a，RF tracked dirty仅两weekly日志；sandbox首次status出现大量假删除/ACL警告，未作清理，正常用户复核排除。CWP用户source_acquisition SHA3609e707保持。
+- 发现离线preflight仍写死60000 tokens/$0.10，当前累计180884会误报余额。公开CLI现要求显式--campaign-token-cap和--campaign-cost-cap-micro-usd，计算复用原prior_budget，不改原账/模型/生产配置。报告schema /2并说明configured-output bool只评估输出token，不表示完整费用请求可行。
+- 新责任测试第一轮3 RED/2 PASS，两个CLI case是未知flag引发exit2的假通过；强化错误原因断言后5 RED/1.96s，修复后5 passed/0.70s、Ruff和diff check GREEN。120000费用仅测试假设，不是实际授权；未扩大日常CI矩阵。
+- 实际零网络CLI按已批准200000/100000运行exit0：四份真实raw指纹、RF已提交六模块help、配置/生产/owner保持、短根恢复absent均true；旧账仍180884/90649，unknown7/unsettled0，FX2764后剩19116 tokens/6587microUSD。小收据n4c_explicit_limits_preflight_2026-10-06.json，provider/model/download均0。
+- 累计$0.12仍待答，run10未启动，S4不标complete。此轮有具体工具修复与真实离线证据，目标保持active；不重跑已绿长测、不代做N5、不写RF/IQS/Dayu/StockWiki owner树。完成代码后正常commit/push与精确CI。
+
+- 收尾检查发现task_plan多余EOF空行，已去掉；实际code/doc差异仅本线。离线收据全部保护true/零外发，计划所有本地链接存在。旧run与费用历史保留。

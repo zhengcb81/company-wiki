@@ -1,215 +1,93 @@
-# 公司来源平台：门禁先行、虚拟化收口与叙述批次总计划
+# 公司来源平台：当前总计划
 
-> 2026-10-03 用户采纳八束激进方案并要求继续实施。本页是唯一当前施工顺序；旧Phase 1–64、W/G卡和审查要求只供技术追溯，不再产生任务或签收门。历史版本：https://github.com/zhengcb81/company-wiki/blob/bff81afe7cbb11c895764a94c2eabd121539e248/docs/plans/narrative-evidence-pilot-2026-09-26/task_plan.md。原文不丢；旧无限Worker保持paused，新的显式有限批次按本计划上线。
+> 本页是唯一当前施工入口。旧步骤、旧预算答复和已交付卡不产生新的任务或人工签收。历史细节保留在 [收敛前版本](https://github.com/zhengcb81/company-wiki/blob/659bcefc9d49a7e7f7fdc58e9c11d46e45da49ab/docs/plans/narrative-evidence-pilot-2026-09-26/task_plan.md)、findings/progress 和阶段收据中。
 
 ## Goal
 
-**最新授权（2026-10-06）：**用户对待答的明确方案回复“给你授权”：累计token上限200000，累计费用仍$0.10；中微上市招股书P04同一精选业务片段可发给DeepSeek https://api.deepseek.com / deepseek-flash做一次原语言摘要及RF读取验收，已执行run08并通过。Config8192/温度1.0、原件不改、不翻译，全部旧unknown与FX余量保持。此前160k及“200k待答”段落均为历史，不得继续阻断或重问。T01电话会→DeepSeek的既有明确外发授权继续有效，必要一次质量修复复测受累计200k/$0.10约束。
+逐步完成 company-wiki 叙述性证据选择、摘要/检索、Worker 多文档并发、跨项目消费接口和低价值原文/派生处置计划；每阶段先核查 revenue-forecast 当前实施状态，复用其正式合同与组件，避免修改对方文件或重复实现，并保留用户已批准的安全边界。
 
-**2026-10-06此前预算答复（历史）：**160,000 tokens随后被明确提高到200,000；累计费用仍限$0.10。现在待答的是费用$0.12，不是此前token/资料外发授权。当前操作只按唯一Next Step，旧60k/160k待答段落不产生阻断。
+一个下载请求入口、一套 pathless 来源接口、一套 AUTO 任务系统；按需处理有价值的业务叙述，停止全量永久 PDF→MD 和重复正文。原件及来源/版本事实不丢。company-wiki 只供应资料和可定位证据，投资研究语义属于 StockWiki。
 
-**当前执行状态：**run08招股已完成25claims/160locators/238766 B，RF读取0、policy skip/0model；四类资料的provider/消费者接口链通过。英文业务漏选修复selector0.3.2已发布27d51d5、精确CI37510236806一次全绿/72秒；六类管理层进展选中、46/46回放。run09真实电话会输出在配置8192 tokens处截断，终态拒绝发布；10497tokens/11692microUSD已计入，目录恢复absent，保护检查全通过。累计180884tokens/90649microUSD、unknown7/unsettled0，余19116tokens/扣FX后6587microUSD。已完成私有prompt1.5短摘要目标TDD：保全部证据、最多20条/280字符/8引用alias，59项Unit及2项正式CLI E2E、Ruff/mypy通过；不改Config和public wire。新真实请求预留18755tokens/14445microUSD，原费用cap不足。已询问累计费用$0.12，仅获答后可复测同一T01；200k tokens与旧账不动。详见run09、n4c_short_summary_request与main_completion_evidence。
+## 当前恢复点（2026-10-06）
 
-**新的可独立施工包：**[N5总包](harness_lanes/n5_parallel_packages_2026-10-06.md)包含DOCSET质量基准、RAW-DUP只读原件重复工具、ET-TXT本地复用修复。三份独立目录/写集/接口，不修改MAIN runtime或生产状态；可同时启动，不是N4C完成屏障。MAIN统一验收合入。
+- CWP 已发布基线 `659bcefc9d49a7e7f7fdc58e9c11d46e45da49ab`；短摘要代码 `4d019b5` 和历史长草案兼容测试 `86c8793` 已发布。精确代码 CI 分别一次通过，76/75 秒。
+- RF 正式 main `6e6b817a1a6e4567293a4dcb835815f3be508a03`，已有默认 v2 与真实原文读取验收；FF main `758e8f4`，ET main `63c4090`。不要重派 P5 已完成交付。
+- 当前 RF 正常用户上下文只有两份 owner weekly 日志修改，本线不改；旧 rf-impl WIP 保存在独立分支。本机 CWP `config/source_acquisition.yaml` 是用户改动，SHA `3609e707466eeb3e0f685e14f2637c6afa39ba900edef1be4814433a43300a01`，不暂存、不覆盖。
+- 当前核心缺口只有 S4 的修复后真实电话会业务摘要验收；没有 live 模型任务，run10 尚未启动。目标未完成。
 
-完成八束整套简化：一个下载请求入口、一套pathless来源接口、一套AUTO任务系统，按需选择业务叙述、摘要和检索；停止全量永久转换与重复正文；完成真实模型、持久预算、可恢复多文档处理及消费者接线，然后分批删除无调用者的旧派生。原件、来源/版本事实不丢。RF/FF/ET/StockWiki/IQS各仓独占写入，不修改其他owner未提交工作。
+## 已批准预算与配置
 
-**预算答复前恢复点（2026-10-06，历史）：**目标尚未完成，N4C累计预算答复待定；独立准备已完成。S5生产旧派生/切片清理已完成，7104文件/2826010634 B删除，8191旧handle退休，1490530旧span删除；DB3055841280→222408704 B，整批净减少5659443210 B（5.66GB/5.27GiB）。17表来源事实、四份公开原文读取、原始年报/电话会TXT固定SHA及用户配置保持；原件0删除，新final实际0且保留语义不变。161MB source-only恢复点及全部一次性材料已清除，正式小收据见s5_production_storage_acceptance_2026-10-06.json。工具修复96f44a1已发布、精确CI37394193179一次全绿；RF正式main6e6b817a与安装依赖同步，FF main758e8f4/ET main63c4090已签收。不重派已完成P5；S6说明/控制/快速smoke已发布e481578，精确CI37399248994一次success，S6complete；下一步N4C真实模型批次。MiMo/DeepSeek仍按Config的mimo-v2.6-flash/deepseek-flash、8192/温度1.0；累计token cap答复仍待，旧未知账不退。
+当前明确批准的累计上限是 **200000 tokens / $0.10**。此前 60000/160000 与待提高 token 的记录是历史。P04 招股同一业务片段→DeepSeek 已获批准并在 run08 成功；T01 电话会→DeepSeek 的明确外发授权继续有效。
 
-**最近发布验收：**FF758e8f4/CI37385101051、精选1b0feb4/CI37381429717、质量dd35d2f/CI37378430383、STORAGE e570daf/CI37375836745均success。本轮b148123正常commit/pre-push GREEN且已推master，精确代码CI37388329668全部GREEN；纯PWF收尾不触发替代长测，user source_acquisition SHA保持。
+累计使用 `180884 tokens / 90649 microUSD`，unknown 7、unsettled 0；历史 FX guard `2764 microUSD` 保留。余 `19116 tokens / 6587 microUSD`。新 T01 请求预留 `18755 tokens / 14445 microUSD`：token 足够，费用不足。**$0.12 费用上限仍待用户答复，不得据此 POST。**
 
-## 2026-10-05 四仓历史快照（当前状态见顶部恢复点及实施表）
+模型严格经 `Config.load / model_options_from_config`：MiMo `mimo-v2.6-flash`（`https://token-plan-cn.xiaomimimo.com/v1`），DeepSeek `deepseek-flash`（`https://api.deepseek.com`）；输出 8192、温度 1.0，现有 timeout/default thinking 不擅改。不退款旧 unknown、不用临时折价凑预算、不增加第二账本。
 
-**2026-10-06最新生产执行状态（覆盖下方历史空间值）：**实际S5/S6存储节点已succeeded，精确代码CI全绿；7072已注册文件加32已识别孤立侧车派生全部删除，derived为0文件/0 B，4240个空旧缓存目录已rmdir。DB整批基线3055841280→222408704 B；压缩前3059736576是退休元数据临时增长后的阶段值，不用它多报整批净释放。来源事实/原件校验全部通过、来源表恢复点及大清单/脚本已清除；结果以[harness_lanes/results/s5_production_storage_acceptance_2026-10-06.json](harness_lanes/results/s5_production_storage_acceptance_2026-10-06.json)为准，旧preflight缺口已修复。
+零网络准备工具现要求显式传入两项累计上限，避免旧 60000 默认误报；这是资源输入，不是人工许可文件。下列命令只读资料、只导出 RF 已提交六模块、清理临时根；输出路径必须原先不存在：
 
-下方2026-10-05条目保留历史追溯，不覆盖顶部2026-10-06恢复点、实施表或唯一Next Step。
+```powershell
+python -B tools/n4c_live_preflight.py --rf-root 'C:/Users/郑曾波/Projects/revenue-forecast' --rf-head 6e6b817a1a6e4567293a4dcb835815f3be508a03 --campaign-token-cap 200000 --campaign-cost-cap-micro-usd 100000 --output '<新的小收据JSON路径>'
+```
 
-- **Revenue Forecast**：fcap 的 DWA-04R 有价值证据载体/账本以 merge commit `8a153f3387ae75fb172e70f8ab63ffd38100779a` 推到 `origin/main`；保留主线 UC/hash-pending 语义，UC 聚焦测试 29 passed。稀疏 worktree 的 `tools/pre_push_gate.py` 不存在，故只记录对应钩子跳过，不宣称该门通过。
-- **StockInfoDLSimple**：`codex/cninfo-bounded-budget` 已快进并推送目标支线 `v2-clean-rewrite@8ed5fdd`；provider 单测 171 passed，CWP provider contract/E2E 20 passed。owner checkout 剩余 WIP 保留，CWP 用户配置未动。
-- **filing-fetch**：SourceRef v2/companion 功能已在主线；旧 schema 原型不并入。PWF 收尾提交 `d4d2fac` 已推送 `fcap:main`，plan claims 与 push 选择门通过。
-- **Dayu**：用户本轮要求的唯一现有 `opt/cn_score@76037b2` 提交已快进到本地 main，相关 focused tests 87 passed；远端 push 被 HTTP 403 拒绝，停止重试。该项是已有提交的本地集成，不代表远端已更新。
-- **外部审计卡**：StockQAbyLLM 与 MeetingConverter 报告已收到并验收，唯一运行数据保留。invest-quick-scan 另有独立项目正在进行；本线不检查、不修改、不重复派发该仓任务。
-- RF worktree audit 外线分支 `codex/rf-state-audit@447d1c7` 已有一份受 ACL/长路径限制的补充报告；它与主线已有同名完整报告冲突，不能直接覆盖或并入。补充报告没有可安全删除候选；本机 `config/source_acquisition.yaml` 用户改动和本计划审计结果目录继续排除在本线写集之外。
+报告的 `budget_can_reserve_configured_output` 只检查输出 token；不能作为完整请求或费用通过的证明。全部日期真实旧账统一取 `prior_budget()`。当前实读证据：[显式额度离线准备](harness_lanes/results/n4c_explicit_limits_preflight_2026-10-06.json)。
 
-**MAIN当前顺序：**见下方唯一Next Step。模型额度待答复时推进不依赖外部模型的S5；不重复已绿N4 A/B及三档E6，不触RF/FF外包写集。
+## 实施顺序与当前完成范围
 
-**N4-T2 selector实现状态：**基础实现`ea9dd26`基于`4807c01`并已发布；选择性吸收外包差异的实现提交`0657579d`已发布，Actions #37273071081对精确SHA成功。外包交付`2b5bec9`基于N4-T1提交`4a53080`，82项测试、Ruff与diff check全绿，工作树干净，但无正式外包验收文档。逐路径对比后未整支并入：主线多数行为已存在；保留外包对景气/生产运营/境外业务用词及新设业务单元事件的高价值补充，拒绝去掉具体动作条件、以及按“无词汇命中”自动跳过季度/业务文档。主线新增合成PDF覆盖四类业务信号、titleless季度/IR路由、套话/目录排除和每个span的字节定位回放；信号全无的真实季度仍`needs_review`。改良选择器后的E6真实Worker P1/P2/P4复测为1 passed/246.39s，详细吞吐、队列等待和内存数据见[MAIN selector实现与验收](harness_lanes/results/n4t2_selector_acceptance_2026-10-05.md)。N4-T2外包差异已收口，接下来推进N4C，不再等待或合并重复分支。
+优先事项 G1 门禁精简、S3 虚拟化已经完成；不再串行重做。当前执行 S4，S5/S6 已利用外发等待完成。
 
-**S5当前边界（2026-10-05）：**公开全文writer与旧evidence/evidence-list/sections-list运行入口、EvidenceQuery public exports均已退出；显式历史backend仅供读夹具兼容。正式transport提供固定版本精选list/lookup/search，原件SHA/全部locator回放后才返回；搜索内存BM25，不新增持久索引/权限门。102个不同case分步GREEN，1b0feb4已发布/精确CI绿。质量v2 dd35d2f不打开normalized正文；未请求/retired为metadata_only。scanner引用保护与stats计量保留，不触发旧全文重建。底层generators已由b148123退出生产安装包；RF默认迁移已MAIN验收/发布ca67eab7，owner两份assurance改动保持。FF已验收并线758e8f4。生产降容未执行。
-
-**S5空间实测（2026-10-05，真实用户工作目录，只读）：**`.source_catalog/derived` 为7,104个文件/2,826,010,634 B：3,528个 `normalized.md` 共2,748,621,075 B（约97.3%），596个 `sections` 文件共67,624,394 B，2,980个 `summary.md` 共9,765,165 B。normalized是降容的首要目标；成功迁移前不得删。只读SQLite结果为page_count 746,055、freelist 0、EvidenceSpan 1,490,530；artifact行有normalized completed 4,842/partial 127/unsupported 15、sections completed 238、summary completed 2,969。该扫描不触碰companies原件、不写数据库；文件逻辑长度不是已释放磁盘空间，未来删除后仍需实测free-space。
-
-## 开工基线历史（2026-10-04正常用户上下文复核）
-
-| 项目 | 已发布/已验收事实 | 本机状态与本轮边界 |
+| 步骤 | 状态 | 范围与证据 |
 |---|---|---|
-| CWP | `master@9d97814`与`origin/master`基线一致；G1-LEGACY、SourceExport等已发布 | 本轮PWF/E2E文件为本线改动；本机 `config/source_acquisition.yaml` 与repository-audit结果文件保持用户/审计线原样，不纳入本线 |
-| RF | `revenue-forecast fcap@5319ee26`；N3a pathless消费者已有 | 提升权限复核确认仅2项tracked变更（weekly alert/manifest）；owner文件保持不动。`rf-impl` 当前工作树也不作为本线写集 |
-| FF | `eb0af13`已推送`origin/main`；SourceRef v2和FF→ET companion接线已测 | 本地`fcap`与远端main相同；未跟踪`config/FMP_API_KEY.txt`保持未读、未暂存、未推送 |
-| ET | ET-S3、bounded-runtime和deadline hardening均已在`main@63c4090`，远端同步 | ET deadline候选已按快进合入；`.workbuddy-ai/`和`eval_results.json`仍是未跟踪并原样保留 |
-| N4 | scope、持久预算、factory、有限batch、kill/ACK恢复与终态降容节点A/B已有集中GREEN | N4C真实多类型批次、1/2/4并行与总空间实测仍待做，不重复开发A/B |
-| 空间 | 最新完整盘点32,821,613,206 B是首批清理前历史值；原件25.20GB、DB3.06GB；此前释放13.06GB，本轮另删除138.65MB | 本轮923缓存文件已删除；derived约2.826GB仍须迁caller，DB旧全量span未删；不把算术减法当重新完整实测，原件不进清理候选 |
-| CI | 单Python快速代码CI约56–62秒；commit无pytest，push/CI同一精选集合 | 不恢复全Contract/coverage日常门；纯Markdown不要求新CI |
+| S0 简化收口 | complete | gold/shadow/Work Unit 人工链退出；commit 无 pytest，config doctor 仅相关改动触发；`ff5396c`/CI 绿 |
+| S1 N4A | complete | scope 贯通 Store/Worker/Supervisor/outbox/prepared；空范围零修改，SQL 范围先于 LIMIT；节点 A 绿 |
+| S2 N4B | complete | 隔离子进程客户端、真实 HTTP/factory、有限 batch、持久预算、lease/generation/kill/ACK 恢复；节点 A/B 集中验收绿 |
+| G1 多余门禁/签收 | complete | 46 项已分类；private/public、prompt 人工复核阻断、签名/TTL、reviewer 必填、双授权及旧审批工具退出；CWP/FF/ET 责任测试绿 |
+| S3 来源虚拟化 | complete | SourceRef/SourceExport v2、FF→ET→CWP 正式 CLI 离线链、迁根/只读/去重/SHA/语言/超时清理验收；RF 默认 v2 已发布，StockWiki 现有只读消费者复用 |
+| S4 N4C 真实业务效果 | **in_progress，MAIN 独占** | 年报、招股、IR、旧电话会有真实 final/RF 读取；电话会漏选已修，run09 截断未发布；prompt1.5 修复/CI 绿，但新真实效果待验收 |
+| S5 逐 caller 与派生清理 | complete | 旧全文 writer/消费者退出；生产 7104 旧文件、8191 handle 退休；原件与来源事实保持 |
+| S6 DB 收缩与收尾 | complete | 1490530 旧 span 删除；DB 3055841280→222408704 B；说明/控制/短 smoke 已发布，精确 CI 绿 |
+| 可选原件 exact-SHA 去重 | 不阻 S0–S6 完成 | 先只读实证收益，保留来源/location 版本；未测重复 raw 不计节省，不自动删原件 |
 
-StockWiki/IQS已有owner工作及消费者交付，本轮只读，不重复分派。Dayu为纯外部项目，零代码修改。已验收细节留在findings/progress和既有报告，未提交内容不自动视为已合入。
+[完成证据与真实缺口](main_completion_evidence_2026-10-06.md)分别说明 fixture/真实模型/消费者读取的证明范围。生产清理净释放 **5659443210 B**，原件删除 **0**，17 表事实及四份真实 raw 前后读取一致；正式证据：[生产存储收据](harness_lanes/results/s5_production_storage_acceptance_2026-10-06.json)。没有完整恢复 46GB 备份演练。
 
-## 实施顺序与完成条件
+## 最小自动正确性与各层责任
 
-| 步骤 | 当前状态 | 实现范围与输出 | 验收合入位置 |
-|---|---|---|---|
-| S0 简化收口 | complete（ff5396c，CI绿） | PWF只留当前入口；删除R1旁路签收/shadow/gold；commit移除pytest、config doctor按相关文件触发 | 一次相关Unit/混合行为回归与正常发布；不逐文件签收 |
-| S1 N4A | complete（ff5396c，CI绿） | scope贯通Store/Worker/Supervisor/outbox/prepared，None兼容、空scope零修改、范围SQL先于LIMIT | N4节点A，确定性RED先行 |
-| S2 N4B | complete（节点A/B集中验收已绿；整体N4仍待独立S4/N4C） | real factory/HTTP adapter/full prompt; persistent token/cost reservation in AUTO; finite batch CLI; unique final artifact and small recovery receipt; public legacy whole-catalog Worker and startup routes removed | node A accounting/concurrency green; node B formal CLI/HTTP/kill/ACK and focused regression green; CWP producer limits are now connected and have real-data E2E evidence; proceed to N4C after G1/S3 closeout |
-| G1 残余门禁/签收精简（第一优先） | complete（CWP来源链与G1-LEGACY已合入；FF SourceRef v2于`e1eda60`推送） | 46项清单已分为已退出、必要自动校验、能力边界及外仓owner事项；未找到生产调用者的旧摘要/binding/archive工具不再作为当前门，留待S5/S6 caller清理 | CWP来源/as-of 64项、resolver/planner/canonical 100项与G1-LEGACY 170 passed / 1 deselected既有收据；FF集中回归177 passed / 1 skipped / 39 subtests，Ruff及push gate GREEN；电话会provider→CWP导入端到端12 passed。保留SHA、来源身份/期间/公开日、可回放引用和资源限制 |
-| S3 SourceRef/SourceExport 虚拟化与来源默认收敛（第二优先） | **complete**（FF `eb0af13`、ET `63c4090`已推送；CWP SourceExport已发布；合入后FF→ET→CWP链及各仓责任集均GREEN。live FMP仍受HTTP 402权益限制，不影响接口合同完成） | 上层只用SourceRef/SourceExport v2；复用FF exact/latest_as_of和pathless reader，不依赖物理目录；电话会走正式ET CLI并由CWP持有原件；provider定位仍在adapter层 | ET deadline分支已快进到main；其`/1`、`/2`、discovery/candidate wire与goldens未改，CWP importer现有provider-aware FMP JSON合同经真实三仓离线链验证。跨仓脚本验证FF uppercase exchange转ET小写、精确FY/Q、FMP原JSON与canonical text各自SHA/size、unknown publication、pathless SourceRef、重复读取不触provider，以及超时后worker结果清理。合并后ET `tests/test_retrieval_cli_e2e.py` 6 passed、10 goldens matched；FF companion 5 passed且Ruff clean；CWP FMP importer 5 passed。FF只在owner目录用`eb0af13`修正交易所slug与3秒清理窗口；ET只更新过期golden说明并合入`63c4090`。旧“Motley 24字段唯一可导入”记录已由当前源码/测试更正。真实FMP HTTP 402不作为代码合同门；正费用额度没有实际账单计量，本计划只声称FF zero-cost拒绝与单次provider请求，不声称美元账单cap已实测。 |
-| S4 N4C real samples and storage plan | **in_progress；MAIN独占**（四类provider final/RF读取/定位已过；英文漏选与prompt1.5均已发布/精确CI绿，run09输出截断；旧25条长草案读取兼容验证通过） | four real document types / actual bounded batch and consumer reads / language and citation coverage / total incremental bytes | 累计费用$0.12待用户答复；不重复发布前测试，不能按原剩6587microUSD外发需14445预留的请求。同一T01真实业务摘要效果仍待 |
-| S5 B2逐caller清理 | **complete**（旧writer/全量正文消费者退出，RF默认v2已main发布，生产derived已清零） | 原文临时parser/指纹及精选transport/BM25保留；8191退休handle、7104旧文件删除、原件/来源事实不变 | 工具49集中测试和精确CI绿；生产四份公开原文前后读取/固定PDF与TXT SHA、17表digest/完整性通过；操作材料已收尾 |
-| S6 DB事实收缩与收尾 | **complete：生产收缩及说明/控制收尾均已发布、精确CI绿** | 1490530旧span删除，DB3.056GB→222.409MB；取消无调用者人工lock/Reviewer文件及两个旧cron壳；重写当前说明，4个旧smoke换为当前行为，数量仍12 | 38责任测试/短smoke/显式架构检查GREEN，三个测试根恢复absent，18文档链接有效；e481578/CI37399248994 attempt1 success；下一N4C |
-| 可选 exact-SHA原件对象去重 | 不阻S0–S6完成 | 先用已有SHA/size找候选、逐候选验字节，保留所有source/location版本事实 | 有真实收益才实施；不报未测节省量 |
+1. 存储层：immutable raw、实际 open 的 bytes SHA、路径包含与写入归属；上层不重复解释 company-wiki/dayu/Dropbox 目录。
+2. 来源层：公司/证券/期间/公开日期、版本/撤回事实；非核心采集字段缺失只诊断，不用 capture_ready/URL/collector 描述阻断真实字节读取。默认公开日期 cutoff，后来下载的旧公开资料可用。
+3. 解析/摘要层：精选业务证据、同原语言、parser/prompt/version、全部 locator 回放；引用有依据，partial 不需要人工签收。只产生来源资料，不生成投资结论。
+4. 调度层：一套 AUTO 的事务、lease/generation、幂等/outbox；计算锁外，提交复核来源版本；有限批次，不重启旧无限 Worker。
+5. 资源层：文件/字节/时间/token/费用上限及未知 usage 预留；不新增角色、人工授权文件或签收服务。
 
-## S0已完成技术记录
+原件一份，最终摘要和精选证据一份，小型事实/usage 记录一份。全文转换是临时材料；active/retry/prepared/未 ACK 恢复材料保留，终态成功后清理重复正文。典型 final 20–100KB 是目标，实测招股 238766 B；单 final 2MiB、批次持久增量 1GiB、scratch 2GiB 为现有限额，不因超限删除 raw。新生产 final 仍为 0，隔离试点全部恢复目录原样。
 
-- 删除scripts/gate_runner.py、reviewer_gate.py、gate_state.py、gold_review_gate.py；删除automation/handlers/gold_review.py、human_inbox.py与source_catalog/source_lifecycle.py、readiness_graph.py及仅服务它们的测试。
-- registry/planner/doctor同步去gold/analysis占位映射，保留timer与通用历史BLOCKED_HUMAN状态；不DROP历史表、不改Store lease/fence/预算。
-- 混合测试迁移环境隔离到已有clean_env_gate helper，保留原件不入candidate、生产原件不变和故障真实失败断言；不能整文件删test_writer_freeze/hermetic/acceptance。
-- read_chain删已退出shadow模块的handoff，writer_policy删不存在脚本的旧allowlist。AGENTS/architecture静态引用随实际功能退出；已停用研究writer可分批删空壳，来源职责仍保留。
-- activation/rollback/restore reviewer已改可选运行记录。prompt签名/TTL旧写工具已在G1退役并保留旧诊断读取；六个完成的一次性archive工具已核caller，改由G1-LEGACY优先退出，不再等S6。签名格式若有真实消费者先薄兼容，不能伪造host_signed。
-- commit保相关Ruff、有限mypy/路径静态检查，无pytest；config doctor仅config/配置加载代码改变时触发。push精选一次、CI全Unit与同精选一次。coverage/complexity数字改诊断，不为数字拆helper。
+## 并行所有权与外仓边界
 
-## 最小正确性与接口责任
+MAIN 独占共享接口、总 PWF、生产状态和所有合入；外线独占各自 worktree/测试/计划，不交叉写。RF、StockWiki、IQS owner 工作树不另写；IQS 有独立项目，不盘点、不重新分派。Dayu 为纯外部项目，**零代码修改**；不支持真实硬限额的路由外发前拒绝。CN 使用 StockInfoDLSimple，目标交付 `v2-clean-rewrite@8ed5fdd`，不维护 StockInfoDownloader 主线。
 
-1. 存储层：原件immutable、实际open验bytes SHA、路径包含与写入归属。上层只用SourceRef，不重复判断company-wiki/dayu/Dropbox目录。
-2. 来源层：公司/证券/期次/公开时间、版本与撤回事实；缺非核心采集字段可partial，不伪报verified。默认公开日期cutoff；当前不为未有需求的retrieved-at严格快照新增模式或配置。
-3. 解析/摘要层：selected evidence/locator可回放、parser/prompt/version、同原语言；source-only，无正式投资判断。保留final短引用，locator-only另演进现有bundle，不破现有consumer。
-4. 调度层：Store事务、lease/generation、幂等attempt/effect/outbox；解析/HTTP锁外，提交验来源版本。后台pause不阻一次明确主动下载。
-5. 资源层：一次操作真实执行文件/字节/时间/token/费用上限；未知usage保留reservation。限额不是人工授权文件，不写第二CSV或任务库。
+G1-LEGACY、ET-DEADLINE、FF/ET-S3、P5-FF/STORAGE/RF、N4-T1/T2、StockWiki 来源/身份线与 MeetingConverter CI 卡已交付，不重派。相关功能并线不等于每仓所有历史 WIP 都已消失；Dayu 现有提交只有本地集成，远端 push 曾 403，不宣称远端同步。
 
-## 原件与降容规则
+当前可独立启动的 [N5 三包](harness_lanes/n5_parallel_packages_2026-10-06.md)：DOCSET 多类型真实质量基准、RAW-DUP 只读重复原件工具、ET-TXT 本地复用验真。卡内有独占目录、写集、接口、测试和交接；未收到交付，不宣称完成，不新增 N4C 屏障。半年报、季报、融资/可转债、招股、IR 等的更广质量实证进入 DOCSET，不以选择器输出自己生成 golden。
 
-- 未解析资料metadata_only；高价值请求优先。格式化/重复模板skip只留source、原因、coverage；财务表格不全量建span。
-- 一份raw、一份最终摘要+精选引用、一份小型来源/usage记录。active/retry/prepared/未ACK保留恢复材料；DAG终态且final visible后去重复正文。
-- 全文转换临时；典型final20–100KB是待测目标，2MiB仅紧急cap；新持久增量1GiB、批次scratch峰值2GiB沿N4实施，不因超限删原件。
-- 不自动全DB/旧span/derived压缩备份。不可再生metadata迁移仅一个小库恢复点，成功后收尾；不完整恢复46GB备份演练。
-- B2无引用的集合可提前退出；DB3.06GB不是可删量。SQLite逻辑删除与真实文件释放分别记录。
-
-## 并行所有权
-
-[并行总计划](parallel_execution_plan_2026-10-03.md)统一列分工与合入；MAIN保持G1→S3→N4C→S5/S6顺序。当前可给外部harness的独立包：
-
-| 包 | 独占实际工作目录 | 写入责任 | 合入位置 |
-|---|---|---|---|
-| [G1-LEGACY](harness_lanes/g1_legacy_entry_and_retirement.md) | `Projects/company-wiki-g1-legacy` | 明确脚本/专属测试；不改src、共享Contract、配置和总PWF | 第一优先G1 |
-| [ET-DEADLINE](harness_lanes/et_retrieval_deadline_closeout.md) | `Projects/earnings-transcripts-s3-deadline` | ET正式两个入口硬采集deadline及子进程测试；已验收并合入 | 已在`main@63c4090`，不再派发 |
-| [ET-LIVE](harness_lanes/et_transcript_live_import_acceptance.md)（已完成一次性尝试） | `Projects/company-wiki-et-live-20261004` | 单次真实工具调用与临时根报告；生产仓只读 | 报告已交；FMP HTTP 402 entitlement，live import 为 NOT RUN |
-
-G1-LEGACY已合入；ET-DEADLINE交付和只读盘点已接收：`0017f24`为远端支线唯一独有提交，worktree干净。旧责任包91/1失败是此前快照，交付人报告已修正夹具并记录92责任项、全量172 passed、10 goldens；只读审计没有重跑，缺独立CI链接。ET-LIVE一次性报告为HTTP 402且未重试。MAIN独占CWP共享接口、总PWF与最终跨仓合入；先跑隔离fake-provider跨仓CLI→importer→SourceRef联调，绿后再并线。
-
-FF-S3、ET-S3、SPACE-S5、StockWiki W01/W04、SourceExport与既有消费者线均已交付，不再重派。RF/StockWiki/IQS active owner树不另开代码线；Dayu不改。需要共享接口变更，外线交root协调，不擅自升级wire或扩张写集。
+FMP 真实 HTTP 402 说明套餐能力边界，不冒充 live 下载通过；已有三仓离线链通过。FF 的正美元额度没有实际 FMP 账单计量，不声称已经实测该能力。RF 当前接通来源读取/准备，不冒充已把摘要全部接入预测计算。
 
 ## 验收与发布
 
-TDD框住公开行为，不把旧签收规则写进新测试。仅S0相关收口、N4 A/B/C、存储迁移几个大节点；helper/每文档/每删除文件没有人工审查。修复具体红灯后重跑相关包，不为了可选复杂度/覆盖率/固定场景数量全仓长测。
+TDD 框住具体公开行为。只在 N4 A/B/C、存储迁移等大节点集中检查；helper、每份文档、每个删除文件没有人工签收。修复红灯只跑责任包，不重复已绿长测、不扩 coverage/多平台日常矩阵。
 
-正式端到端测试使用独立短根、同OS账号创建/执行/finally清理；本地HTTP/模型请求也必须显式测试预算。真实资料副本原来不存在则退出删除。生产配置/control/原件fingerprint前后不变；不把失败夹具留在生产或仓库。正常commit/push，代码CI绿后记录；纯Markdown不要求新CI。
+正式 E2E 使用独立短根，同 OS 账号创建/执行/finally 清理，测试前后核原件/配置/生产/owner 指纹；新下载或副本原先不存在则结束删除。正常 commit/push；提交不跑 pytest，推送短集合，代码 CI 单 Python 全 Unit + 精选合同；纯文档不要求新 CI。CI 收据必须对应实际代码 SHA，不能拿另一提交或本地集成测试冒充。
 
 ## 当前文档导航
 
-- [已采纳的八束方案](radical_simplification_proposal_2026-10-03.md)
-- [G1收口施工细则](gate_simplification_closeout_2026-10-04.md)
-- [G1-LEGACY独立代码包](harness_lanes/g1_legacy_entry_and_retirement.md)、[ET-DEADLINE独立代码包](harness_lanes/et_retrieval_deadline_closeout.md)
-- [N4接口/TDD/正式batch详细卡](n4_production_batch_implementation.md)
-- [ET-LIVE电话会原文导入与虚拟化独立验收卡](harness_lanes/et_transcript_live_import_acceptance.md)
-- [46项原审计基线及2026-10-04覆盖更新](gate_permission_inventory_2026-10-03.md)，基线日期不变；当前状态以新增覆盖节为准
-- [最新空间收据](harness_lanes/results/gd_storage_final_cleanup_2026-10-03.md)
-- [S5/S6旧派生退出与来源库降容实施细则](s5_s6_legacy_storage_implementation.md)
-- [当前完成证据与真实缺口](main_completion_evidence_2026-10-06.md)
+- [八束已采纳方案](radical_simplification_proposal_2026-10-03.md)、[G1 实施细则](gate_simplification_closeout_2026-10-04.md)、[46 项历史审计](gate_permission_inventory_2026-10-03.md)
+- [N4 实施与真实批次恢复细则](n4_production_batch_implementation.md)、[S5/S6 清理细则](s5_s6_legacy_storage_implementation.md)
+- [完成证据](main_completion_evidence_2026-10-06.md)、[并行总计划](parallel_execution_plan_2026-10-03.md)、[N5 三包](harness_lanes/n5_parallel_packages_2026-10-06.md)
 - [findings](findings.md)、[progress](progress.md)
-- 旧implementation/execution/worker/review/space卡保技术背景，其流程/顺序由本页覆盖。已交付harness不再派发同一工作。
+
+历史卡只解释已做工作，不能将“待测试/待并线/下一步”的旧文字恢复成当前门。
 
 ## Next Step
 
-**MAIN单一下一动作：待累计费用$0.12答复后，才复测同一T01→DeepSeek一次；新代码4d019b5及精确CI37511515796已一次全绿/76秒，不再重复发布前测试。**当前授权仍200000tokens/$0.10，累计180884tokens/90649microUSD、unknown7/FX2764不退，余19116tokens/6587microUSD；新请求预留18755tokens/14445microUSD，费用不足，未答不得POST。Config8192/温度1.0、默认thinking与60秒不动。若批准，仅将campaign累计cost cap明确改120000microUSD（旧charges逐项保持）、新run10/测试根和receipt必须不存在，T01+policy一次；相同requests/价格策略，不使用新off-peak折扣凑预算。逐条核业务内容/角色、全部引用、RF消费、空间与目录恢复；拒绝/未答则保留真实缺口，目标active、不伪报完成。RF/FF/ET owner不动，N5三卡可独立启动。
+**待用户明确提高累计费用上限至 $0.12 后，MAIN 才做同一 T01→DeepSeek 一次修复后真实验收。**当前仍按 200000/$0.10；不得 POST，不重跑已绿长包，不把离线或 Replay 当真实质量通过。
 
-P5-STORAGE已验收并合入/发布：候选`9fa2166`，主线代码`e570dafb92a3f6aaec51176682d348a1c9303535`。53个不同case分步GREEN，真实AMEC年报+微软电话会TXT的原文stdout SHA、新NarrativeRef完整locator replay前后通过，连接关闭及测试根恢复均通过；没有生产删除。工具预览不写库/sidecar、不拿写锁；切片单次范围SQL/聚合小报告；压缩真实前后计量/空间检查，观测失败明确null。所有细节及实际副本空间见[集成审查](harness_lanes/results/p5_storage_integration_review_2026-10-05.md)、[小验收收据](harness_lanes/results/p5_storage_integration_acceptance_2026-10-05.json)、[工具说明](../../../tools/legacy_storage/README.md)。日常Unit CI不添加多分钟解析包。精确新代码[CI37375836745](https://github.com/zhengcb81/company-wiki/actions/runs/37375836745)已completed/success；此前18da250同SHA重跑CI也已success。
+若批准：只把 campaign cost cap 明确设 `120000 microUSD`；所有旧 charges/unknown/FX 保持，模型配置不动。先核 RF 当前主线与 owner 指纹、预算和新 run10/root/receipt 原先不存在，再执行 T01+policy 一次；逐条核具体管理层经营进展、角色、全部 locator、RF 正式读取、原语言、费用、空间及测试目录恢复。失败照实记终态，不自动多次重试或再次提高预算。
 
-
-N4C原160k及MiMo P01/P04、DeepSeek P07/T01具体外发均已获授权；新增200k及P04→DeepSeek亦已明确批准、run08成功。费用仍$0.10、模型参数仍Config原值，旧unknown保留；当前余额与动作只取顶部恢复点，旧待授权段落为历史。
-## 2026-10-04：新增三张可独立派发的施工卡
-
-三张卡均已交付：N4-T1已集成MAIN；MeetingConverter已验收、合入并发布master且主线CI绿；N4-T2已完成差异对账、选择性吸收及验收。本段原写集和接口仅供交付追溯，不重派已完成卡。StockQAbyLLM 与 MeetingConverter 先前的只读盘点交付仍按已有收据验收；invest-quick-scan 仍由其独立任务负责，本计划不检查、不修改、不重复派发。
-
-| 卡 | 仓库 / 隔离工作树 | 精确责任 | 与其他卡的隔离方式 |
-|---|---|---|---|
-| [N4-T1 模型传输错误诊断](harness_lanes/n4_model_transport_diagnostics.md) | company-wiki 新建独立 worktree | automation 的HTTP模型适配、错误分类、预算账本诊断及对应测试；不修改选择器/调度/配置/生产来源 | 与N4-T2代码目录及测试文件完全不重叠；两者只共享只读的当前主线基线 |
-| [N4-T2 中文叙述选材覆盖](harness_lanes/n4_selective_narrative_coverage.md) | company-wiki专用worktree；串行可复用T1目录 | source_catalog选材/路由/收尾与selector测试；增强中文季报、IR中的行业、业务进展、新业务、出海证据选取 | 不修改automation模型传输、Worker/AUTO、共享wire、配置或PWF；只提交本线分支，不合main |
-| [MeetingConverter CI 快速门](harness_lanes/meetingconverter_ci_fast_gate.md) | MeetingConverter 新建独立 worktree | 只调查和修复CI零任务/无实际测试问题，限定CI工作流、专用配置测试和本线HANDOFF | 在独立仓库施工，不读写company-wiki业务代码、StockQAbyLLM、IQS或任何转录资料 |
-
-N4-T1与N4-T2文件写集互斥。并行施工时从同一已提交主线基线创建两个worktree；串行施工时可复用一个专用worktree，T1测试结束且commit后再做T2，T2以T1交付HEAD为base，分别报告每张卡的commit范围。无需每张卡再等人工许可；同目录不能同时施工，也不使用MAIN当前checkout。两卡交付后由MAIN按先后顺序整合并运行跨模块测试及Worker端到端验收。MeetingConverter卡与CWP N4C完全异步，可以独立完成，不进入N4C关键路径。卡片中的路径、测试、边界、handoff字段和禁止操作是交付接口；外部harness只需拿对应卡，无需本总计划全文。
-
-### N4C复盘：已证实的问题与尚未证实的原因
-
-- 2026-10-04隔离运行n4c-20261004-wave1已停止且不重跑：四个SourceRef的原件SHA/身份可验证；年报选择出3条span，招股书选择出160条span但summary触发预算拒绝；中文季报和IR均零候选/零span并报PARSER_INCOMPLETE。失败账本没有HTTP状态/响应摘要，因此不能反推MiniMax那次请求究竟因HTTP错误还是2xx响应格式失败。
-- 此前可观测性缺口已由N4-T1修复：HTTP状态按4xx/5xx归类且安全数字状态保存在attempt中，未知用量保守计费不变。MAIN已有持久账本E2E证据；不能宣称这已证明旧请求根因，也不能降低未知用量按预留上限计费的规则。
-- 季报和IR的正式来源读取、PDF抽取、表格覆盖均成功；选择器仍未选到业务叙述。N4-T2优先以离线合成中文案例证明选材与跳过逻辑；不得把解析未覆盖当成“无叙述可跳过”，也不能以财报数字span代替主营进展证据。
-- 旧运行约0.005258美元的未知预留继续保留在旧run账本；不得复用该run id或把未知费用清零。新真实模型检查由MAIN在两张N4卡集成且离线验收后另建run，并受剩余批次预算约束。
-
-### 新施工卡导航
-
-- [N4-T1 模型传输诊断卡](harness_lanes/n4_model_transport_diagnostics.md)
-- [N4-T2 叙述选材卡](harness_lanes/n4_selective_narrative_coverage.md)
-- [MeetingConverter CI快门卡](harness_lanes/meetingconverter_ci_fast_gate.md)
-- [并行总计划与隔离合同](parallel_execution_plan_2026-10-03.md)
-
-### 已完成：ET-DEADLINE 并线前 FF→ET→CWP 离线契约联调
-
-**目的：**验证已交付deadline分支通过真实命令行/子进程，被FF实际调用并由CWP importer接收，最后通过CWP exact query与SourceVersionReader verified-open读回。测试覆盖ET分支 `0017f24`，不以独立ET单测或历史Motley E2E代替此链路。
-
-- **测试布置：**从CWP根运行 `python -B tests/e2e/run_ff_et_cwp_offline_acceptance.py --ff-root <filing-fetch> --et-root <earnings-transcripts-s3-deadline>`。脚本创建唯一TEMP scratch；FF使用真实`resolve_companion_transcript`与`EarningsTranscriptsTransport`，执行候选分支正式ET CLI；ET `transcript_tool.main`→supervisor→worker→FMP parser/serializer照常运行，只有HTTP session由私有launcher注入有限假响应；CWP真实`source_query_cli`、`transcript_import_cli`、`source_reader_cli`与catalog运行。脚本不是CI长测，不mock ET抓取、FF调用或CWP导入。
-- **成功/幂等断言：**精确MSFT/FY2026/Q3请求；provider golden字节原样存储、SHA/size/MIME一致，原语言且不翻译；SourceRef只有公开pathless字段，unknown publication不伪造日期且不进入历史as-of；第二次同请求返回同一SourceRef、provider调用为0、raw仅1份。key不进入输出/日志，HTTP调用计数为1，ET worker结果目录为空，scratch退出后确已删除。
-- **当前FMP合同事实：**ET `/2` FMP golden为26字段JSON；当前CWP有独立FMP provider合同并已能精确存储原JSON字节，unknown-publication过滤由`tests/contract/test_transcript_import_cli_e2e.py::test_fmp_unknown_publication_cli_stores_original_but_excludes_historical_cutoff`覆盖。此前“CWP只接Motley 24字段”的只读发现和ET golden README均已过期；本轮不增加CWP adapter，不改ET wire，不伪造publication date。ET-LIVE HTTP 402只说明真实provider权益未确认，fake契约测试照常运行。
-- **费用语义：**FF目前只将`max_cost_usd=0`作为禁止provider调用的条件；ET wire不返回实际美元计费。本次验证exactly-one provider request与请求内的正费用门槛，不声称positive dollar cap已按实际账单计量。若FMP未来按请求额外收费，需先确认计价规则，再由owner把“请求次数/价格”映射到预算；不能把subscription entitlement猜成0成本。
-- **截止时间/恢复断言：**集成脚本另用5秒有限fake响应和2秒provider cap，检查FF的外层等待是否覆盖ET worker deadline及清理宽限；超时不得导入raw，worker和ET结果scratch必须为空，随后整个测试scratch消失。首次运行复现了旧FF行为：FF与ET同为2秒外层timeout，7秒后ET `et-retrieval-*`仍遗留；FF已改为ET最大60秒合同、先预留3秒清理时间，外层子进程等待最多“ET worker deadline+3秒”，总FF余时不足3秒时不启动下载。
-- **已执行验收：**三仓离线脚本先在候选`0017f24`、再在合入后的ET main上均成功；包括提供商slow response deadline和目录清理。FF `tests/test_transcript_companion_transport.py` **5 passed**、Ruff clean；ET `tests/test_retrieval_cli_e2e.py` **6 passed**、10 goldens matched；CWP FMP importer **5 passed**。pytest basetemp和三仓脚本scratch逐一确认删除。没有付费网络或LLM请求。
-- **并线收据：**FF adapter修复`eb0af13`已推送FF `main`；ET文档说明修正`63c4090`随deadline实现快进合入并推送ET `main`。ET main/candidate同指`63c4090`；ET原先未跟踪的`.workbuddy-ai/`、`eval_results.json`保持原样。CWP源catalog配置未改。
-- **关口结论：**成功原文hash/size、FMP与canonical text哈希分离、身份和FY/Q、unknown-publication、幂等、pathless reader、timeout/worker cleanup及测试scratch恢复均通过。无需再改CWP importer；不等付费FMP账户证明fake provider合同，也不声称positive dollar limit被实际计价。
-
-该门通过后，按顺序进入N4C真实样本/并发/空间测量，再做S5/S6；不额外增加逐helper或逐文档人工审查。
-
-**外线状态：**G1-LEGACY和ET-DEADLINE已合入；FF companion deadline/exchange修正和ET consumer-contract说明均已推送。ET-LIVE因HTTP 402没有可导入付费正文，因此N4C如需ET样本应先检查现有本地TXT来源是否已合法进入CWP；不把live provider entitlement当作代码验收。所有跨仓验收使用fake-provider；MAIN保留共享合同协调权，不重派ET工作、不加逐helper/逐文档审查。
-
-以下保留已验收producer桥接技术细节，**不是新的下一步**：
-
-旧 Worker 的公开执行与启动链已退役，生产无残留进程/登录任务。CWP producer-budget 集中回归 **41 passed / 14.83s**，模拟HTTP跨仓E2E发现1个候选、PDF 399 B、发现+下载计费713 B且精确吻合。StockInfo隔离分支 `codex/cninfo-bounded-budget@8ed5fdd` 已实现流式CNINFO discovery/PDF限额和JSON-only stdout；原 `v2-clean-rewrite` owner工作树保持隔离。CWP已切换到该集成工作树、配置provider 1.2.0并显式声明budget capability。2026-10-04以 BYD FY2024真实CNINFO年报跑通 FF-S3→CWP→StockInfo正式入口：实际下载10,092,140 B；PDF、SourceRef SHA-256与字节数一致。`latest_as_of + reuse_only` 带5MB/90s/$0限额只查询元数据，0缺件且无文件/hash变化；legacy v1 exact reuse也未增加下载。legacy v1缺件且无额度参数时返回码2并未写公司文件。所有独立测试root已清理，生产配置/identity snapshot指纹前后未变。Dayu保持不改，遇到无法真实施加硬上限的请求仍外发前拒绝。FF-S3 `1d0c73c` 已快进推入main；Actions #52/#53/#54实际失败在Linux FC-1204-c mypy。Python 3.12/mypy 1.19 指定Linux目标复现并修复 `CREATE_NO_WINDOW` 存根问题；TDD回归转绿，FF完整精选CI **361 passed / 5 skipped / 78 subtests**，GitHub Actions #55 completed/success。另将安装清单假key测试隔离到pytest临时树，解决其在本地 fcap key 工作树上的独立失败。fcap同步到1d0c73c，未跟踪API key仍未读未动。
-
-### S3 bounded provider transport：固定桥接合同
-
-- 唯一先实现的生产 transport 是 CNINFO。StockInfo 原工作区在实施前有24个tracked修改和未跟踪CNINFO adapter/client/test；已基于 `1693045` 建立隔离分支 `codex/cninfo-bounded-budget`，commit `947e839`（13个精确相关文件），实现provider-local预算和CNINFO discovery/PDF流式读取。依用户2026-10-04授权，对原工作区只移除两个无调用者且与CWP路径抽象冲突的辅助脚本、一个0字节误生成文件，并将11个仅有import/格式调整的tracked文件恢复至HEAD（index未动）；其余adapter、源码、测试、夹具、公司名单与功能改动保留。原工作区代码未整体恢复。GitHub API核对远端ref等于 `947e839`，owner集成分支 `v2-clean-rewrite` 仍等于父提交 `1693045`；它与默认main没有共同祖先，只有配置明确使用的v2路线可作为本项集成目标。provider仓未发现Actions workflow。Dayu 是纯外部项目，代码不改；HK/US 遇到硬下载 cap 继续外发前拒绝。
-- CWP `JsonCommandAdapter` 增加 `discover_bounded` / `fetch_bounded`。子进程 JSON 请求附加 `acquisition_budget`：恰含 `schema_version="1.0"`、`max_response_bytes`（本阶段剩余额度）、`timeout_seconds`（单调 deadline 剩余秒）、`max_cost_usd`（十进制字符串）。CWP subprocess timeout 取配置 timeout 与同一剩余秒数的较小值。
-- 支持 bounded 的 provider 对每个 discovery JSON / PDF HTTP响应按块读取；检查本阶段 deadline，并在接纳每块前拒绝超过 `max_response_bytes` 的响应。成功 JSON 必须包含 `acquisition_usage`，恰含 `schema_version="1.0"`、`response_bytes`、`cost_usd`；CWP 校验形状后把两项记入共享 `AcquisitionBudget`。漏报、额外字段、非法数、超预算、进程超时一律失败；fetch回执大小还须由 CWP 独立复核。
-- 一个 `AcquisitionBudget` 对象贯穿 ensure/close-gap 锁外及锁内 metadata discovery、CNINFO分页、fetch与staging，不因子进程/分页重置；未知失败不重试已部分消费的预算。CNINFO当前收费为零，由provider明确报告 `"0"`，不将“没有成本数据”伪报为零。provider CLI 无预算的 legacy调用保持既有合同。
-- TDD 大节点：CWP 命令适配器进程测试证明预算被传递、真实elapsed timeout、usage缺失/少报/超额失败；StockInfo 测试用分块假响应覆盖 discovery 与 PDF cap边界、deadline、cleanup `.part`；正式短根跨进程 E2E 从 CWP budgeted `ensure` 到 StockInfo JSON CLI，确认发现+下载共享总字节、精确SHA/回执、第二次失败时不留part/staging且没有第三方/生产文件变化。Dayu负例确认子进程 marker不存在。集中责任包通过后才启用CN bounded能力并与FF-S3运行正式E2E/汇合。
-
-CNINFO bounded provider已进入隔离 owner集成工作树；CWP配置 `config/source_acquisition.yaml` 使用provider 1.2.0并启用 `supports_acquisition_budget`。正式真实数据E2E验证了FF→CWP→StockInfo的实际PDF下载、SHA/size闭环、latest_as_of只读复用、legacy v1复用及无预算v1缺件fail-closed。StockInfo focused suite 62项通过；CWP限额/来源适配器责任集32项通过。FF-S3的latest_as_of只读元数据预算语义与legacy exact复用/缺件合同测试共23项通过，提交 `1d0c73c` 已快进推到远端main。Actions #52/#53/#54都失败在FC-1204-c的Linux mypy；根因是传输模块无保护地引用Windows专属常量，Python 3.12/mypy 1.19 Linux目标回归与修复已验证通过。新的完整精选集361 passed / 5 skipped / 78 subtests，Actions #55 `37182527153` 已 completed/success。之前 `2936ad1` 的安装清单假key隔离只修正本地有key工作树的独立测试脆弱点，不能算远端CI根因修复。Dayu未改，硬限额仍只支持具备真实bounded transport的CNINFO。CWP producer-budget此前已推送为 `288b028`，CI `37162544905` success。当前先完成G1本仓门禁精简与审计更新；随后收口S3余下安装示例与来源默认/缺元数据语义检查，再进入S4真实样本多文档批次与空间测量；不重复跑全仓慢测试。
-
-## S2 当前交接与下一集中节点
-
-- N4A scope、N4B 真实模型计量、持久预算、production factory、有限 CLI、终态降容、跨 run 工件绑定、run/generation 自动 owner、父进程 kill 恢复与提交 ACK 丢失幂等已实现；相关提交 `ff5396c`、`9ccd29f`、`9041543`、`d2250b7`、`54db2a2` 均已推送。
-- 2026-10-03 只读现场检查：旧 worker `desired_state=paused`、`runtime_state=stopped`；匹配 worker/supervisor 均为 0，Windows startup task 未安装。随后删除旧全库 CLI、启动/恢复/暂停与安装任务入口、Windows 启动器/控制菜单及旧启动专属测试；保留 `worker-status`、身份核验 `worker-stop` 与启动任务检查/卸载。旧 raw、SQLite、worker state 和日志均未触碰。
-- 155 项相关回归此前 153 项通过；两项失败都是过期断言（deletion manifest 已退役、旧 `resume` 方法已删除），更正后对应 2 项单测复跑通过。CLI/显式下载退役合同另有 18 项通过。
-- 当前按节点分清状态：S2/N4B节点A/B已验收；整体N4仍未完成，因为独立S4/N4C的真实模型多文档、消费者实读、引用/语言coverage与总新增空间峰值未验收。producer limits已完成，本轮先G1→S3，再N4C；不把N4C待验收写回S2重新开工。
-
-## 2026-10-05 — RF叙述消费者与S5物理依赖复核
-
-- **RF状态先查**：本次正常用户会话最近一次 live 检查记录 `origin/main@8a153f3387ae75fb172e70f8ab63ffd38100779a`；本 sandbox 不能连 GitHub（HTTPS/443受限），只读本地确认 `fcap@5319ee263c4af41ac255938c25bebd32cce56f66`，其本地 `origin/main` ref 仍为 `8a153f3`。不得把缓存 ref说成本轮新鲜live远端检查；跨仓实施前须先重查 owner/PWF/远端。
-- **RF已有叙述合同**：`docs/implementation/reviews/narrative-consumer/N3a-RF-2026-10-03.md` 定义 RF `narrative_source_preparation.py` 通过 bounded subprocess 使用 CWP `company-wiki-narrative-read`；`NarrativeRef` 是 metadata-only，read 输出来源叙述、选中EvidenceSpan/locator、摘要草案及可核验receipt。报告包含89项E2E责任集（含年报PDF与电话会TXT本地原文样本），没有声明把结果写入收入预测。该报告明确标注“未接入收入计算”。
-- **两条路径不得混称**：RF N3a叙述消费者与 RF filing `source_reader_v2` opt-in 是不同接口。后者在 `source_preparation.py` 默认仍为 `false`，当前默认 `SourceBundle` 继续读取旧 normalized/summary/sections角色；N3a能够读叙述包不能证明默认财报准备和收入计算已经接线。复用已有N3a，不再新建CWP/RF wire合同。
-- **CWP文件/DB依赖更正**：当前 `EvidenceQueryService` 从SQLite读 `evidence_spans.raw_text/span_json` 与source/document/location事实，不读normalized Markdown文件。`ExtractionQualityService` 从SQLite读normalized artifact状态/metadata及EvidenceSpan，不打开artifact正文。CWP当前直接调用 `read_verified_normalized_text` 的源码位置是 `llm_summarizer.py`、`section_extractor.py`、`summarizer.py`；section-extractor的公开CLI/Service入口已退休，但不能据此把低层函数/所有调用者都算已清除。故保留EvidenceSpan行不必然阻止物理Markdown释放；但必须先迁移RF的旧SourceBundle读者和CWP仍在用的摘要/章节读者，并处理artifact记录指向已删除文件与quality status的含义。物理文件与数据库span分阶段处置，不能捆成一次删除。
-- **RF worktree audit交付状态**：`codex/rf-state-audit`两条仅文档提交新增了受限报告；它因6处ACL拒绝而停止全量未跟踪分类，0 bytes列为“已确认可安全释放”。主线同路径已经存在更详细的audit报告，且明确不可读子树是覆盖/删除结论的边界。保留补充报告的限制结论，不覆盖主线报告、不从该分支执行任何RF操作。
-- **CWP真实原件transport E2E（仅子节点）**：2026-10-05在当前代码执行`test_narrative_transport_real_samples.py`，4项通过/31.70秒；覆盖年报、招股书、IR活动记录、电话会TXT的原件SHA、实际公开CLI返回、完整locator replay。Capture metadata来自隔离fixture；这不代表生产catalog准入、N4 selector/Worker摘要、RF bounded consumer接线或N4C批次已验收。basetemp按项目path guard自动重定位，报告退出已清理；详情在progress/findings。
-- **后续大节点（收尾后更新）**：N4-T2已收齐，改良选择器E6 P1/P2/P4已复测。用户恢复后按Next Step执行一个有限真实provider批次，复用已提交RF N3a read/reference合同，对实际Worker产物记select/skip、语言、完整locator replay、usage、总字节及consumer read；不重复Replay三档或空fixture合同。后续将叙述接入预测计算/切换SourceBundle默认，由RF owner按届时PWF负责；之前不改RF。S5物理正文、artifact句柄与S6数据库span仍分阶段迁移。
-
-
-- 72b1116存储工具节点一候选已推到origin/codex/p5-storage-integration；从primary checkout运行相同baseline的正常快速pre-push GREEN，新工具专属行为此前在实际候选树验证。未merge主线、未伪称工具整体验收或生产释放。
-
-
-- CI37371220690后续读取：attempt1 completed/failure，唯一job cancelled、runner空、steps0，check-run无summary/原因annotation；源远端仍18da250。只请求同SHA重跑一次HTTP201（既有Git凭证仅内存传递，未输出/落盘），不是重复改代码或重跑全仓本地包。收尾只有PWF/receipt，不触发新的代码CI来取消这个重跑。
+若未批准：保留 S4 真实缺口，不标整体完成，不制造新权限、重复测试或另一账本。N5 外线可独立实施；MAIN 在交付后统一验收。最终完成以本页每项责任和实际收据审计，不能把当前证据缩成更容易通过的目标。

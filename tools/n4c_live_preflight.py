@@ -52,6 +52,18 @@ def prior_budget() -> dict:
                ("charged_tokens", "charged_micro_usd", "unknown_reservations", "unsettled_reservations")}}
 
 
+def campaign_budget_facts(budget: dict, token_cap: int, cost_cap: int) -> dict:
+    """Report explicit limits, retaining historical unknown usage and FX guard.
+
+    This read-only calculation does not authorize an external request. Negative
+    balances remain visible when inspecting an older, already exceeded limit.
+    """
+    return {"current_campaign_token_cap": token_cap,
+            "current_campaign_cost_cap_micro_usd": cost_cap,
+            "tokens_remaining": token_cap - budget["charged_tokens"],
+            "micro_usd_remaining_after_fx_guard": cost_cap - budget["charged_micro_usd"] - 2764}
+
+
 def consumer_bootstrap(rf: Path, head: str, root: Path) -> list[str]:
     """Exercise exact committed RF CLI imports, without reading or writing RF state."""
     pending = ["narrative_source_preparation"]
@@ -90,7 +102,13 @@ def main() -> int:
     parser.add_argument("--rf-root", type=Path, required=True)
     parser.add_argument("--rf-head", required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--campaign-token-cap", type=int, required=True,
+                        help="Explicit cumulative token limit for this read-only report")
+    parser.add_argument("--campaign-cost-cap-micro-usd", type=int, required=True,
+                        help="Explicit cumulative USD limit in millionths, not new spending authority")
     args = parser.parse_args()
+    if args.campaign_token_cap < 1 or args.campaign_cost_cap_micro_usd < 1:
+        parser.error("campaign limits must be positive integers")
     if len(args.rf_head) != 40 or any(c not in "0123456789abcdef" for c in args.rf_head):
         parser.error("rf-head requires an exact lowercase commit SHA")
     if args.output.exists():
@@ -127,12 +145,14 @@ def main() -> int:
         "test_root_restored_absent": not root.exists()}
     if not all(checks.values()):
         raise ValueError("preflight changed a protected input")
-    tokens_remaining = 60000 - budget["charged_tokens"]
-    report = {"schema_version": "n4c-offline-preflight/1", "status": "verified_offline",
+    budget_facts = campaign_budget_facts(
+        budget, args.campaign_token_cap, args.campaign_cost_cap_micro_usd)
+    tokens_remaining = budget_facts["tokens_remaining"]
+    report = {"schema_version": "n4c-offline-preflight/2", "status": "verified_offline",
               "rf_head": args.rf_head, "rf_committed_modules": modules, "samples": samples,
               "configured_models": options, "prior_budget": budget,
-              "current_campaign_token_cap": 60000, "tokens_remaining": tokens_remaining,
-              "micro_usd_remaining_after_fx_guard": 100000 - budget["charged_micro_usd"] - 2764,
+              **budget_facts,
+              "budget_readiness_scope": "output_tokens_only; full request and cost reservation not evaluated",
               "budget_can_reserve_configured_output": all(
                   tokens_remaining >= item["max_output_tokens"] for item in options.values()),
               "calls": {"provider_http": 0, "model_posts": 0, "download": 0},

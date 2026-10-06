@@ -51,7 +51,7 @@
 离线预检已实跑GREEN并发布061f534，精确CI37400256960 attempt1 success：当前RF6e6b817a的6模块闭包help退出0，四份原件固定SHA/size通过；真实旧账58523 tokens/33884 microUSD，unknown 4、unsettled 0；费用扣FX余量后剩63352 microUSD，token仅剩1477。正式小收据见[harness_lanes/results/n4c_current_main_preflight_2026-10-06.json](harness_lanes/results/n4c_current_main_preflight_2026-10-06.json)。独立n4pf根恢复absent，原件、生产、owner/用户配置不变，0 provider/POST/download。现有收据不覆盖，后续状态变动用新的output文件名重跑。
 
 ```powershell
-python tools/n4c_live_preflight.py --rf-root 'C:/Users/郑曾波/Projects/revenue-forecast' --rf-head 6e6b817a1a6e4567293a4dcb835815f3be508a03 --output '<新的小收据JSON路径>'
+python tools/n4c_live_preflight.py --rf-root 'C:/Users/郑曾波/Projects/revenue-forecast' --rf-head 6e6b817a1a6e4567293a4dcb835815f3be508a03 --campaign-token-cap 200000 --campaign-cost-cap-micro-usd 100000 --output '<新的小收据JSON路径>'
 ```
 
 待用`tmp/n4c_provider_live_driver.py`已对齐当前RF，新增`--sample-ids P01 P04`或`P07 T01`供小批覆盖；help已验证。累计token授权到达后先MiMo年报/招股两份，再按实际账单proxy/usage余量做DeepSeek IR/英文电话会（每批另加零模型policy），不要直接同时发四份或两provider同时发。序号用尚未有报告的新run-number，原件/metadata为现有fixture，不能把合成身份当live验证。失败记录照计；全部四类实际生成、真实RF消费/引用回放、原语言、空间/恢复通过才关闭N4C。
