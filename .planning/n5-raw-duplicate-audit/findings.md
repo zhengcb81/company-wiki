@@ -19,7 +19,7 @@
 | 候选组（≥2 个同 digest location） | **3,531** |
 | `logical_duplicate_bytes_upper_bound` | **7,804,167,537 B ≈ 7.27 GiB** |
 | 占已登记原件比例 | **22.2%** |
-| `physical_allocated_bytes` | **7,804,167,537 B**（可得，非 null） |
+| `physical_allocated_bytes` | **7,804,167,537 B**（可得，非 null；与上界相等说明所有副本都占满本地分配） |
 | `deleted_bytes` | **0**（本次未删除任何文件） |
 | `similar_groups`（同 size 不同 digest，贡献 0 字节） | 100（上限） |
 | `uncertain_groups` / `unresolved_groups` | 0 / 0 |
@@ -47,10 +47,11 @@
 |---|---|---|---|---|---|
 | `scan`（冷缓存首跑） | 101.761 s | 0 | 0 | `detail_rows`, `report_bytes` | succeeded |
 | `verify`（冷缓存首跑，max-groups 3） | 96.715 s | 316,447,064 | 6 | `max_groups`, `detail_rows`, `report_bytes` | succeeded |
-| `scan`（随包提交的报告，热缓存） | 63.461 s | 0 | 0 | `detail_rows`, `report_bytes` | succeeded |
-| `verify`（随包提交的报告，热缓存） | 65.154 s | 316,447,064 | 6 | `max_groups`, `detail_rows`, `report_bytes` | succeeded |
+| `scan`（随包提交的报告） | 66.839 s | 0 | 0 | `detail_rows`, `report_bytes` | succeeded |
+| `verify`（随包提交的报告） | 74.594 s | 316,447,064 | 6 | `max_groups`, `detail_rows`, `report_bytes` | succeeded |
 
-四次均在默认 300 s 截止内完成。提交的两份报告 1,048,266 B / 1,046,591 B，均 ≤ 1 MiB。
+四次均在默认 300 s 截止内完成。提交的两份报告 1,048,266 B / 1,046,591 B，均 ≤ 1 MiB
+（`sha256` 分别为 `fbdaeaed…8d1234e3a`、`ba057e5c…aa14a2f33`，按仓库 blob 的 LF 字节计）。
 
 ## 5. 只读与保护实测
 

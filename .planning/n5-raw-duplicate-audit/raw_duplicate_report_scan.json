@@ -24632,7 +24632,7 @@
    }
   }
  ],
- "elapsed_seconds": 63.461,
+ "elapsed_seconds": 66.839,
  "error_code": null,
  "limits": {
   "deadline_seconds": 300.0,
@@ -24660,7 +24660,7 @@
  "physical_allocated_bytes_partial": 7804167537,
  "physical_allocated_bytes_unavailable_groups": 0,
  "protected_after": {
-  "captured_at": "2026-10-06T19:24:26Z",
+  "captured_at": "2026-10-06T19:32:26Z",
   "config_sha256": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
   "database": {
    "byte_size": 222408704,
@@ -24689,7 +24689,7 @@
   }
  },
  "protected_before": {
-  "captured_at": "2026-10-06T19:23:23Z",
+  "captured_at": "2026-10-06T19:31:20Z",
   "config_sha256": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
   "database": {
    "byte_size": 222408704,
@@ -25906,7 +25906,7 @@
    "source_count": 2
   }
  ],
- "started_at": "2026-10-06T19:23:23Z",
+ "started_at": "2026-10-06T19:31:19Z",
  "status": "succeeded",
  "truncated": {
   "detail_rows": 1033,

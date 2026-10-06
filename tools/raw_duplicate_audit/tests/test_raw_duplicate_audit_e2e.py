@@ -10,7 +10,6 @@ from __future__ import annotations
 
 import json
 import os
-import tempfile
 from pathlib import Path
 
 import pytest
@@ -80,7 +79,7 @@ def _targets_from(scan_report: dict, root_paths: dict[str, Path]) -> list[Path]:
     return targets
 
 
-def test_production_catalog_duplicate_assessment_is_read_only_and_bounded():
+def test_production_catalog_duplicate_assessment_is_read_only_and_bounded(tmp_path):
     _require_production()
     PLANNING_DIR.mkdir(parents=True, exist_ok=True)
     inputs = load_inputs(CONFIG_PATH)
@@ -111,7 +110,7 @@ def test_production_catalog_duplicate_assessment_is_read_only_and_bounded():
     targets = _targets_from(scan_report, root_paths)
     before = _snapshot(targets)
 
-    local_output = Path(tempfile.mkdtemp(prefix="n5-raw-dup-")) / "local_paths.json"
+    local_output = tmp_path / "local_paths.json"
     verify_report = run_assessment(
         mode="verify",
         config_path=CONFIG_PATH,
