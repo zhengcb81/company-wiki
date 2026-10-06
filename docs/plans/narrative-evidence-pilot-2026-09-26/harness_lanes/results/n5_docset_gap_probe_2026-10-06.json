@@ -1,0 +1,785 @@
+{
+  "schema_version": "n5-docset-gap-probe/1",
+  "baseline": "c8bf461c763afc25838cd21e749523ca763ddf53",
+  "scope": "All PDF text, tables only on declared golden pages; not the full-table benchmark or default production Worker. In-memory candidate capture, zero model/download/production writes.",
+  "entries": [
+    {
+      "sample_id": "S01",
+      "golden_id": "G-S01-01",
+      "locator": {
+        "page_number": 32
+      },
+      "full_benchmark_result": "miss",
+      "probe_table_pages": [
+        19,
+        21,
+        25,
+        32,
+        40,
+        49,
+        64,
+        75,
+        101,
+        109,
+        118,
+        121,
+        122,
+        125
+      ],
+      "probe_candidate_count": 170,
+      "probe_omitted": 74,
+      "stages": {
+        "parsed": {
+          "result": "full",
+          "ratio": 1.0,
+          "matched_count": 3
+        },
+        "candidate": {
+          "result": "miss",
+          "ratio": 0.4684,
+          "matched_count": 0
+        },
+        "selected": {
+          "result": "miss",
+          "ratio": 0.0253,
+          "matched_count": 0
+        }
+      }
+    },
+    {
+      "sample_id": "S01",
+      "golden_id": "G-S01-02",
+      "locator": {
+        "page_number": 40
+      },
+      "full_benchmark_result": "miss",
+      "probe_table_pages": [
+        19,
+        21,
+        25,
+        32,
+        40,
+        49,
+        64,
+        75,
+        101,
+        109,
+        118,
+        121,
+        122,
+        125
+      ],
+      "probe_candidate_count": 170,
+      "probe_omitted": 74,
+      "stages": {
+        "parsed": {
+          "result": "full",
+          "ratio": 1.0,
+          "matched_count": 3
+        },
+        "candidate": {
+          "result": "full",
+          "ratio": 1.0,
+          "matched_count": 1
+        },
+        "selected": {
+          "result": "miss",
+          "ratio": 0.1053,
+          "matched_count": 0
+        }
+      }
+    },
+    {
+      "sample_id": "S01",
+      "golden_id": "G-S01-03",
+      "locator": {
+        "page_number": 40
+      },
+      "full_benchmark_result": "miss",
+      "probe_table_pages": [
+        19,
+        21,
+        25,
+        32,
+        40,
+        49,
+        64,
+        75,
+        101,
+        109,
+        118,
+        121,
+        122,
+        125
+      ],
+      "probe_candidate_count": 170,
+      "probe_omitted": 74,
+      "stages": {
+        "parsed": {
+          "result": "full",
+          "ratio": 1.0,
+          "matched_count": 2
+        },
+        "candidate": {
+          "result": "miss",
+          "ratio": 0.0282,
+          "matched_count": 0
+        },
+        "selected": {
+          "result": "miss",
+          "ratio": 0.0282,
+          "matched_count": 0
+        }
+      }
+    },
+    {
+      "sample_id": "S01",
+      "golden_id": "G-S01-05",
+      "locator": {
+        "page_number": 75
+      },
+      "full_benchmark_result": "miss",
+      "probe_table_pages": [
+        19,
+        21,
+        25,
+        32,
+        40,
+        49,
+        64,
+        75,
+        101,
+        109,
+        118,
+        121,
+        122,
+        125
+      ],
+      "probe_candidate_count": 170,
+      "probe_omitted": 74,
+      "stages": {
+        "parsed": {
+          "result": "full",
+          "ratio": 1.0,
+          "matched_count": 2
+        },
+        "candidate": {
+          "result": "full",
+          "ratio": 1.0,
+          "matched_count": 2
+        },
+        "selected": {
+          "result": "miss",
+          "ratio": 0.0962,
+          "matched_count": 0
+        }
+      }
+    },
+    {
+      "sample_id": "S02",
+      "golden_id": "G-S02-02",
+      "locator": {
+        "page_number": 18
+      },
+      "full_benchmark_result": "miss",
+      "probe_table_pages": [
+        11,
+        17,
+        18,
+        21,
+        31,
+        43,
+        50,
+        56,
+        65
+      ],
+      "probe_candidate_count": 95,
+      "probe_omitted": 0,
+      "stages": {
+        "parsed": {
+          "result": "full",
+          "ratio": 1.0,
+          "matched_count": 3
+        },
+        "candidate": {
+          "result": "miss",
+          "ratio": 0.0517,
+          "matched_count": 0
+        },
+        "selected": {
+          "result": "miss",
+          "ratio": 0.0517,
+          "matched_count": 0
+        }
+      }
+    },
+    {
+      "sample_id": "S02",
+      "golden_id": "G-S02-03",
+      "locator": {
+        "page_number": 18
+      },
+      "full_benchmark_result": "miss",
+      "probe_table_pages": [
+        11,
+        17,
+        18,
+        21,
+        31,
+        43,
+        50,
+        56,
+        65
+      ],
+      "probe_candidate_count": 95,
+      "probe_omitted": 0,
+      "stages": {
+        "parsed": {
+          "result": "full",
+          "ratio": 1.0,
+          "matched_count": 2
+        },
+        "candidate": {
+          "result": "miss",
+          "ratio": 0.0556,
+          "matched_count": 0
+        },
+        "selected": {
+          "result": "miss",
+          "ratio": 0.0556,
+          "matched_count": 0
+        }
+      }
+    },
+    {
+      "sample_id": "S02",
+      "golden_id": "G-S02-04",
+      "locator": {
+        "page_number": 31
+      },
+      "full_benchmark_result": "miss",
+      "probe_table_pages": [
+        11,
+        17,
+        18,
+        21,
+        31,
+        43,
+        50,
+        56,
+        65
+      ],
+      "probe_candidate_count": 95,
+      "probe_omitted": 0,
+      "stages": {
+        "parsed": {
+          "result": "full",
+          "ratio": 1.0,
+          "matched_count": 2
+        },
+        "candidate": {
+          "result": "miss",
+          "ratio": 0.0,
+          "matched_count": 0
+        },
+        "selected": {
+          "result": "miss",
+          "ratio": 0.0,
+          "matched_count": 0
+        }
+      }
+    },
+    {
+      "sample_id": "S03",
+      "golden_id": "G-S03-03",
+      "locator": {
+        "page_number": 3
+      },
+      "full_benchmark_result": "miss",
+      "probe_table_pages": [
+        1,
+        2,
+        3,
+        5
+      ],
+      "probe_candidate_count": 15,
+      "probe_omitted": 0,
+      "stages": {
+        "parsed": {
+          "result": "full",
+          "ratio": 1.0,
+          "matched_count": 2
+        },
+        "candidate": {
+          "result": "miss",
+          "ratio": 0.125,
+          "matched_count": 0
+        },
+        "selected": {
+          "result": "miss",
+          "ratio": 0.125,
+          "matched_count": 0
+        }
+      }
+    },
+    {
+      "sample_id": "S04",
+      "golden_id": "G-S04-03",
+      "locator": {
+        "page_number": 34
+      },
+      "full_benchmark_result": "miss",
+      "probe_table_pages": [
+        13,
+        31,
+        34,
+        49,
+        114,
+        133
+      ],
+      "probe_candidate_count": 408,
+      "probe_omitted": 248,
+      "stages": {
+        "parsed": {
+          "result": "full",
+          "ratio": 1.0,
+          "matched_count": 2
+        },
+        "candidate": {
+          "result": "miss",
+          "ratio": 0.0,
+          "matched_count": 0
+        },
+        "selected": {
+          "result": "miss",
+          "ratio": 0.0,
+          "matched_count": 0
+        }
+      }
+    },
+    {
+      "sample_id": "S04",
+      "golden_id": "G-S04-04",
+      "locator": {
+        "page_number": 49
+      },
+      "full_benchmark_result": "miss",
+      "probe_table_pages": [
+        13,
+        31,
+        34,
+        49,
+        114,
+        133
+      ],
+      "probe_candidate_count": 408,
+      "probe_omitted": 248,
+      "stages": {
+        "parsed": {
+          "result": "full",
+          "ratio": 1.0,
+          "matched_count": 2
+        },
+        "candidate": {
+          "result": "partial",
+          "ratio": 0.6226,
+          "matched_count": 1
+        },
+        "selected": {
+          "result": "miss",
+          "ratio": 0.0,
+          "matched_count": 0
+        }
+      }
+    },
+    {
+      "sample_id": "S05",
+      "golden_id": "G-S05-03",
+      "locator": {
+        "page_number": 101
+      },
+      "full_benchmark_result": "miss",
+      "probe_table_pages": [
+        3,
+        8,
+        13,
+        15,
+        16,
+        71,
+        95,
+        101,
+        169
+      ],
+      "probe_candidate_count": 843,
+      "probe_omitted": 683,
+      "stages": {
+        "parsed": {
+          "result": "full",
+          "ratio": 1.0,
+          "matched_count": 2
+        },
+        "candidate": {
+          "result": "full",
+          "ratio": 1.0,
+          "matched_count": 2
+        },
+        "selected": {
+          "result": "miss",
+          "ratio": 0.0426,
+          "matched_count": 0
+        }
+      }
+    },
+    {
+      "sample_id": "S06",
+      "golden_id": "G-S06-01",
+      "locator": {
+        "page_number": 4
+      },
+      "full_benchmark_result": "miss",
+      "probe_table_pages": [
+        4,
+        8,
+        13,
+        29,
+        39,
+        43,
+        52,
+        68,
+        75,
+        87
+      ],
+      "probe_candidate_count": 179,
+      "probe_omitted": 19,
+      "stages": {
+        "parsed": {
+          "result": "full",
+          "ratio": 1.0,
+          "matched_count": 2
+        },
+        "candidate": {
+          "result": "miss",
+          "ratio": 0.0,
+          "matched_count": 0
+        },
+        "selected": {
+          "result": "miss",
+          "ratio": 0.0,
+          "matched_count": 0
+        }
+      }
+    },
+    {
+      "sample_id": "S06",
+      "golden_id": "G-S06-02",
+      "locator": {
+        "page_number": 43
+      },
+      "full_benchmark_result": "miss",
+      "probe_table_pages": [
+        4,
+        8,
+        13,
+        29,
+        39,
+        43,
+        52,
+        68,
+        75,
+        87
+      ],
+      "probe_candidate_count": 179,
+      "probe_omitted": 19,
+      "stages": {
+        "parsed": {
+          "result": "full",
+          "ratio": 1.0,
+          "matched_count": 2
+        },
+        "candidate": {
+          "result": "full",
+          "ratio": 1.0,
+          "matched_count": 2
+        },
+        "selected": {
+          "result": "miss",
+          "ratio": 0.0652,
+          "matched_count": 0
+        }
+      }
+    },
+    {
+      "sample_id": "S06",
+      "golden_id": "G-S06-03",
+      "locator": {
+        "page_number": 43
+      },
+      "full_benchmark_result": "miss",
+      "probe_table_pages": [
+        4,
+        8,
+        13,
+        29,
+        39,
+        43,
+        52,
+        68,
+        75,
+        87
+      ],
+      "probe_candidate_count": 179,
+      "probe_omitted": 19,
+      "stages": {
+        "parsed": {
+          "result": "full",
+          "ratio": 1.0,
+          "matched_count": 2
+        },
+        "candidate": {
+          "result": "full",
+          "ratio": 1.0,
+          "matched_count": 2
+        },
+        "selected": {
+          "result": "miss",
+          "ratio": 0.1429,
+          "matched_count": 0
+        }
+      }
+    },
+    {
+      "sample_id": "S06",
+      "golden_id": "G-S06-04",
+      "locator": {
+        "page_number": 87
+      },
+      "full_benchmark_result": "miss",
+      "probe_table_pages": [
+        4,
+        8,
+        13,
+        29,
+        39,
+        43,
+        52,
+        68,
+        75,
+        87
+      ],
+      "probe_candidate_count": 179,
+      "probe_omitted": 19,
+      "stages": {
+        "parsed": {
+          "result": "full",
+          "ratio": 1.0,
+          "matched_count": 2
+        },
+        "candidate": {
+          "result": "miss",
+          "ratio": 0.0,
+          "matched_count": 0
+        },
+        "selected": {
+          "result": "miss",
+          "ratio": 0.0,
+          "matched_count": 0
+        }
+      }
+    },
+    {
+      "sample_id": "S07",
+      "golden_id": "G-S07-01",
+      "locator": {
+        "page_number": 1
+      },
+      "full_benchmark_result": "miss",
+      "probe_table_pages": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "probe_candidate_count": 11,
+      "probe_omitted": 0,
+      "stages": {
+        "parsed": {
+          "result": "full",
+          "ratio": 1.0,
+          "matched_count": 2
+        },
+        "candidate": {
+          "result": "miss",
+          "ratio": 0.0,
+          "matched_count": 0
+        },
+        "selected": {
+          "result": "miss",
+          "ratio": 0.0,
+          "matched_count": 0
+        }
+      }
+    },
+    {
+      "sample_id": "S08",
+      "golden_id": "G-S08-01",
+      "locator": {
+        "page_number": 3
+      },
+      "full_benchmark_result": "miss",
+      "probe_table_pages": [
+        1,
+        2,
+        3
+      ],
+      "probe_candidate_count": 0,
+      "probe_omitted": 0,
+      "stages": {
+        "parsed": {
+          "result": "full",
+          "ratio": 1.0,
+          "matched_count": 1
+        },
+        "candidate": {
+          "result": "miss",
+          "ratio": 0.0,
+          "matched_count": 0
+        },
+        "selected": {
+          "result": "miss",
+          "ratio": 0.0,
+          "matched_count": 0
+        }
+      }
+    },
+    {
+      "sample_id": "S09",
+      "golden_id": "G-S09-01",
+      "locator": {
+        "line_start": 30,
+        "line_end": 30,
+        "parser_region": "before_transcript_start",
+        "byte_start": 991,
+        "byte_end": 1118
+      },
+      "full_benchmark_result": "miss",
+      "probe_table_pages": null,
+      "probe_candidate_count": 46,
+      "probe_omitted": 0,
+      "stages": {
+        "parsed": {
+          "result": "miss",
+          "ratio": 0.0,
+          "matched_count": 0
+        },
+        "candidate": {
+          "result": "miss",
+          "ratio": 0.0,
+          "matched_count": 0
+        },
+        "selected": {
+          "result": "miss",
+          "ratio": 0.0,
+          "matched_count": 0
+        }
+      }
+    },
+    {
+      "sample_id": "S09",
+      "golden_id": "G-S09-03",
+      "locator": {
+        "line_start": 226,
+        "line_end": 226,
+        "parser_region": "parsed",
+        "byte_start": 41662,
+        "byte_end": 41751
+      },
+      "full_benchmark_result": "miss",
+      "probe_table_pages": null,
+      "probe_candidate_count": 46,
+      "probe_omitted": 0,
+      "stages": {
+        "parsed": {
+          "result": "full",
+          "ratio": 1.0,
+          "matched_count": 1
+        },
+        "candidate": {
+          "result": "miss",
+          "ratio": 0.0959,
+          "matched_count": 0
+        },
+        "selected": {
+          "result": "miss",
+          "ratio": 0.0959,
+          "matched_count": 0
+        }
+      }
+    },
+    {
+      "sample_id": "S09",
+      "golden_id": "G-S09-04",
+      "locator": {
+        "line_start": 222,
+        "line_end": 222,
+        "parser_region": "parsed",
+        "byte_start": 40209,
+        "byte_end": 40285
+      },
+      "full_benchmark_result": "miss",
+      "probe_table_pages": null,
+      "probe_candidate_count": 46,
+      "probe_omitted": 0,
+      "stages": {
+        "parsed": {
+          "result": "full",
+          "ratio": 1.0,
+          "matched_count": 1
+        },
+        "candidate": {
+          "result": "miss",
+          "ratio": 0.2923,
+          "matched_count": 0
+        },
+        "selected": {
+          "result": "miss",
+          "ratio": 0.2923,
+          "matched_count": 0
+        }
+      }
+    },
+    {
+      "sample_id": "S09",
+      "golden_id": "G-S09-05",
+      "locator": {
+        "line_start": 200,
+        "line_end": 200,
+        "parser_region": "parsed",
+        "byte_start": 32538,
+        "byte_end": 32593
+      },
+      "full_benchmark_result": "miss",
+      "probe_table_pages": null,
+      "probe_candidate_count": 46,
+      "probe_omitted": 0,
+      "stages": {
+        "parsed": {
+          "result": "full",
+          "ratio": 1.0,
+          "matched_count": 1
+        },
+        "candidate": {
+          "result": "miss",
+          "ratio": 0.1837,
+          "matched_count": 0
+        },
+        "selected": {
+          "result": "miss",
+          "ratio": 0.1837,
+          "matched_count": 0
+        }
+      }
+    }
+  ]
+}

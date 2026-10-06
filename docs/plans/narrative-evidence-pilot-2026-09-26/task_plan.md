@@ -45,7 +45,7 @@ python -B tools/n4c_live_preflight.py --rf-root 'C:/Users/郑曾波/Projects/rev
 | S4 N4C与R6实际效果 | complete | 四类真实final/RF读取与run10业务复核完成；R6 TDD→184责任测试→正式离线E2E/RF→代码eae2dd4/CI59秒绿，保留好claim，坏片段不进入产物，不重跑真实模型 |
 | S5 逐 caller 与派生清理 | complete | 旧全文 writer/消费者退出；生产 7104 旧文件、8191 handle 退休；原件与来源事实保持 |
 | S6 DB 收缩与收尾 | complete | 1490530 旧 span 删除；DB 3055841280→222408704 B；说明/控制/短 smoke 已发布，精确 CI 绿 |
-| S7 N5-DOCSET质量对照 | in_progress | 完整交接2c3583e已到；旧0.3.1报告required11/33不代表现0.3.2。MAIN先验收标注/评估器，再当前主线零LLM对照，真实残留缺口按TDD处理，不自动扩预算或改golden凑绿 |
+| S7 N5-DOCSET质量对照与整改 | in_progress | 工具已集中修正/43不同case通过；当前0.3.2真实9样本required12/33、744定位全回放，不能认为语义完成。[S7细则](s7_document_quality_implementation_2026-10-06.md)按候选完整上下文→固定预算去重/排序→一次质量节点执行，不扩预算/改golden凑绿 |
 | 可选原件 exact-SHA 去重 | 不阻 S0–S6 完成 | 先只读实证收益，保留来源/location 版本；未测重复 raw 不计节省，不自动删原件 |
 
 [完成证据与真实缺口](main_completion_evidence_2026-10-06.md)分别说明 fixture/真实模型/消费者读取的证明范围。生产清理净释放 **5659443210 B**，原件删除 **0**，17 表事实及四份真实 raw 前后读取一致；正式证据：[生产存储收据](harness_lanes/results/s5_production_storage_acceptance_2026-10-06.json)。没有完整恢复 46GB 备份演练。
@@ -89,7 +89,7 @@ TDD 框住具体公开行为。只在 N4 A/B/C、存储迁移等大节点集中�
 
 ## Next Step
 
-**验收已到的DOCSET独立工具和标注，再以当前主线对照九类真实资料。** RAW-DUP已验收、真实merge并推a41244a/精确CI57秒绿，不重派；[R6实施卡](r6_partial_summary_implementation_2026-10-06.md)已完成184责任测试与正式离线E2E/RF消费，0外部模型/下载/费用，来源身份/语言和剩余引用不放松。
+**完成DOCSET发布，然后按[S7实施细则](s7_document_quality_implementation_2026-10-06.md)修候选完整性与固定预算排序。** 工具已接收、真实9样本对照完成：required12/33、optional4/17、744定位全回放；限定页诊断确认20/21漏项已parsed，只有provider highlight在正文scope外。43不同责任case通过（39项集中包+新增4项工具单测，不虚报一次43项全跑）。MAIN掌握共享入口与最后联调；新的并行包按独占写集交付，不重派旧N5。RAW-DUP已验收、真实merge并推a41244a/精确CI57秒绿；R6已绿且不重复真实模型。
 
 run10与ET-TXT已完成并推adc9d6b；保留真实结果、旧失败与非穷尽边界。RAW-DUP已有完整交接，MAIN发现并修复输出/预算/分配量/云属性/报告/ACL测试缺口，51责任项/9.09秒与两CLI联调绿，原件删除0；[验收卡](harness_lanes/n5_raw_duplicate_main_acceptance_2026-10-06.md)。历史7.27GiB为跨根候选上界，仅3组151MiB实读，不计释放、不自动迁移；DOCSET已交9份真实资料/86标注点与完整报告；报告基于旧selector0.3.1，required11/33，不能当当前0.3.2结论。下一步先验收基准/标注和当前主线对照，再处理确实残留的覆盖/跳过/重复/片段完整性问题。不凭目录文件或日志声称有确认live进程，不自动删原件/hydrate。
 

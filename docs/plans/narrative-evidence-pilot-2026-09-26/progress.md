@@ -1009,3 +1009,13 @@ MAIN同一集中节点TDD16初红/1绿，修双输出与未知旧文件保护、
 RAW发布期间只读复核DOCSET工作树，发现完整交接已到且干净，HEAD2c3583e084a6fc632bd0970db02a439187214c0f、代码9ff251ec、已推独立分支，不再写待交付。旧selector0.3.1基准9原件/86golden/required11of33、712定位全回放，英文0of5/程序性IR0候选未skip/融资预算截断等需当前0.3.2对照，不能把旧报33%当现行效果或马上改预算。MAIN下一次集中验收基准代码/独立标注与parser scope，再一次零LLM当前主线实证；残留真实缺口先TDD修，不改golden凑绿，不自动加预算，不触碰外线或生产。整体目标仍active，RAW只读包完成不意味着文档质量任务全部完成。
 
 RAW-DUP实际merge a41244a4994643551d314618146d0074fc4e6221已推master，git merge-base确认e40b4ec为祖先，ls-remote核master一致；CI37523080920 attempt1 completed/success、job57秒（19:59:56→20:00:53 UTC），主验收complete，小CI收据落盘。旧无nonce GET返回过时in_progress，jobs steps已全complete，再fresh query取得明确终态，不用缓存假报。只有用户config dirty且SHA3609e707保持，不改RF/Dayu/IQS；纯文档最终发布采用skip ci，不重复已绿代码测试。S7记录DOCSET待MAIN对照，整个目标仍active，不自动实施原件去重。
+
+## 2026-10-06 — N5-DOCSET集中接收与真实主线对照
+
+完整交接2c3583e已读，真实no-commit/no-ff merge已暂存。17路径写集仅本线工具/标注/交接，无运行时代码或生产写入。MAIN新增10反例先全RED，修运行HEAD、TXT字节/行双核、scope外标注、原件/未知输出路径、失败scratch、事后实字节SHA、peak双计与原子2MiB报告；原有22单测一起绿。标注辅助两覆盖反例再RED，改只写tmp新目录/失败清理，增加clean clone与成功路径证明。不同case合计43：一次39项/57.83秒含6 Integration、真实3PDF正式reader E2E271 locator；最终14 MAIN单测/1.10秒含新增4项，未虚报一次43项全跑。Ruff绿。
+
+当前c8bf461c/selector0.3.2真实九类全表基准378.983秒，12/33 required、4/17 optional、744定位全回放、48重复、72042 B精选正文、76302 B runner scratch峰值。旧0.3.1报告11/33/golden不改；新报告另名、实际HEAD与源码SHA明确。noise2/25与136个in-scope未判定不能外推整体，情态0仅问句/陈述角色。读新报告首次误猜selected_noise键而KeyError，改读真实noise/duplicate字段，不当成功。
+
+一次限定表页诊断21漏项：20 parsed完整，5 candidate完整但最终漏、1 candidate部分；唯一未parsed点为电话会marker前provider摘要。多数不是PDF识别失败或简单扩大cap能解决。S08实际页3有克重/一口价产品组合事实，程序性标签不能整份skip。已写S7细则，候选最小上下文→固定预算去重/排序→一次质量节点/正式Worker-RF E2E，0新模型，不改golden凑绿，不自动原件去重。
+
+9原件、2配置、生产catalog、RF2 owner共14份SHA/size/mtime前后保持，RF6e6b817a；user config SHA3609e707保留，外仓零写。待最终清理自有测试根/local配置与实际merge/push、精确CI；工具接收不等于整体语义完成。人类随后要求新的独立施工包，MAIN在完成发布后按不同物理worktree与互斥写集拆N6，不重复已交N5、不接管IQS/Dayu。

@@ -1,6 +1,6 @@
 # N5-DOCSET：多文档类型真实质量基准
 
-**ready，可立即启动；较大独立包。** 它回答“挑出来的是否真是有价值业务描述，漏掉多少、夹杂多少”，不是重跑已绿N4四份transport/E6。没有模型调用，不改selector/Worker/公共合同；发现缺陷由MAIN修复。
+**complete（工具范围），不重派。** 交接2c3583e已集中接收，43不同case通过、当前主线9原件/86点/744定位全回放；required12/33的产品缺口由MAIN按[S7细则](../s7_document_quality_implementation_2026-10-06.md)推进。见[MAIN验收](n5_docset_main_acceptance_2026-10-06.md)。下方是原施工要求，不能恢复成新任务；零LLM/下载，旧golden/报告保留。
 
 ## 1. 独占目录与基线
 

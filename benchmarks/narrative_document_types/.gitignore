@@ -1,0 +1,3 @@
+# Machine-local read-only source roots: never committed.
+local.json
+# Scratch extraction output lives under the worktree tmp/ root (repo-ignored).

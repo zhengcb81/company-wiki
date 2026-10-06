@@ -1,0 +1,127 @@
+{
+  "schema_version": "n5-docset-main-acceptance/1",
+  "lane_id": "N5-DOCSET",
+  "status": "accepted_pending_publication",
+  "delivery_head": "2c3583e084a6fc632bd0970db02a439187214c0f",
+  "runtime_baseline": "c8bf461c763afc25838cd21e749523ca763ddf53",
+  "runtime_code_sha256": {
+    "run_benchmark.py": "5da181c99d3a95d35c9b1acd9b45bf4ff62cfd1c2915c0a9543da5bed4d98b1a",
+    "evaluator.py": "afe8262e18a3a6e20fa35cfd2879dac8abb8a50c96f9388884275737a985f966",
+    "narrative_evidence.py": "4e112d947611e45f39663f6ace6e123236261851ecbaba29f3542e10d6b2e979"
+  },
+  "old_report": "benchmarks/narrative_document_types/report.json",
+  "current_report": "benchmarks/narrative_document_types/report-main-2026-10-06.json",
+  "tests": [
+    {
+      "scope": "initial MAIN counterexamples",
+      "failed": 10,
+      "passed": 0,
+      "seconds": 1.33
+    },
+    {
+      "scope": "annotation overwrite counterexamples",
+      "failed": 2,
+      "passed": 0,
+      "seconds": 1.23
+    },
+    {
+      "scope": "concentrated Unit/Integration/official source-reader E2E",
+      "passed": 39,
+      "failed": 0,
+      "skipped": 0,
+      "seconds": 57.83
+    },
+    {
+      "scope": "final MAIN units including 4 additional tests; overlaps 10 concentrated cases",
+      "passed": 14,
+      "failed": 0,
+      "seconds": 1.1
+    }
+  ],
+  "unique_cases_passed": 43,
+  "ruff": "passed",
+  "e2e": {
+    "real_pdf_sample_ids": [
+      "S02",
+      "S03",
+      "S05"
+    ],
+    "locators_replayed": 271,
+    "identity_metadata": "synthetic sidecars in independent catalog",
+    "parser_policy": "default auto table scan; no full scan retry",
+    "statuses": [
+      "partial",
+      "partial",
+      "partial"
+    ],
+    "provider_model": "none"
+  },
+  "benchmark": {
+    "totals": {
+      "documents": 9,
+      "golden_points": 86,
+      "required_points": 33,
+      "required_matched": 12,
+      "optional_points": 17,
+      "optional_matched": 4,
+      "negative_points": 36,
+      "negative_points_hit": 1,
+      "selected_span_count": 744,
+      "selected_in_scope": 161,
+      "judged_in_scope": 25,
+      "noise_spans": 2,
+      "role_confusion": 0,
+      "modality_confusion": 0,
+      "duplicate_span_count": 48,
+      "selected_utf8_bytes": 72042,
+      "locator_roundtrip_verified": 744,
+      "locator_roundtrip_failed": 0,
+      "required_coverage_rate": 0.3636,
+      "optional_coverage_rate": 0.2353,
+      "selected_noise_rate": 0.08,
+      "duplicate_ratio": 0.0645
+    },
+    "seconds": 378.983,
+    "temp_peak_bytes": 76302,
+    "scope": "full-table benchmark, not production default",
+    "report_bytes": 98813
+  },
+  "measurement_limits": [
+    "noise judged over 25 selected spans, not all 744",
+    "modality counter only question/statement roles",
+    "scratch sampler not process memory or total disk allocation",
+    "business coverage remains incomplete; tool acceptance is separate"
+  ],
+  "gap_probe": "harness_lanes/results/n5_docset_gap_probe_2026-10-06.json",
+  "next_plan": "s7_document_quality_implementation_2026-10-06.md",
+  "protection": {
+    "files": 14,
+    "originals": 9,
+    "configs": 2,
+    "production_catalog": 1,
+    "rf_owner_logs": 2,
+    "sha_size_mtime_unchanged": true,
+    "rf_head": "6e6b817a1a6e4567293a4dcb835815f3be508a03"
+  },
+  "cleanup": {
+    "owned_test_roots": [
+      "tmp/dcu",
+      "tmp/dcg",
+      "tmp/dce",
+      "tmp/dcl",
+      "tmp/dcx",
+      "tmp/dch",
+      "tmp/dcb"
+    ],
+    "restored_absent": true,
+    "temporary_local_config_sha256": "8d77644b864ae02c0b88d589708ff894ae40dd292844b4df45c83f9eee55102b",
+    "local_config_restored_absent": true
+  },
+  "calls": {
+    "llm": 0,
+    "provider_http": 0,
+    "downloads": 0,
+    "cost_micro_usd": 0
+  },
+  "originals_deleted": 0
+}
