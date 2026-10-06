@@ -1,22 +1,9 @@
-# 实施控制目录
+# 自动架构检查配置
 
-本目录把 `task_plan.md` 中的自然语言约束变成机器可检查的验收规范。
+此目录只保留 `architecture.json`，供显式 `scripts/architecture_gate.py` 调用；它不是发布授权或人工签收文件。规则变化可与实现一起提交，用有关测试验证，不需要独立 Reviewer、Human Owner、lock 或 Gate Runner receipt。
 
-## 权威边界
+规则只检查当前批次接现有配置加载器/有限runtime、来源层不导入下游研究实现。已取消旧proposal人工批准规则、冻结ingest/scheduler必须接线及全scripts零文件写入等过期约束。详细行为由各层测试负责，不用正则代替预算/恢复/来源验证。
 
-- `acceptance.json`、`acceptance.lock.json`、`tests/acceptance/` 和 gold expected 属于 Reviewer。
-- Implementer 不得在实现 Work Unit 中修改 Reviewer-owned 文件。
-- Implementer 只能把 Work Unit 标记为 `candidate`。
-- `verified/completed` 必须来自 Gate Runner receipt 和独立 Reviewer。
+日常检查由 `.pre-commit-config.yaml`、`.githooks/pre-push`、`tools/pre_push_gate.py` 和 `.github/workflows/ci.yml` 定义。commit 不跑行为测试；push 与 CI 共享短 smoke；大型集成/真实资料测试在实施节点运行。
 
-## 硬规则
-
-- 任何 failed、collection error、unexpected skip/xpass 或 pytest return warning 都阻断。
-- 低于硬阈值时 `pass_with_notes` 无效。
-- 普通 Gate 禁止真实网络、真实 LLM 和正式数据写入。
-- Gate 必须在 clean worktree/venv 安装当前项目，不接受测试文件自行注入 `PYTHONPATH` 作为 clean-install 证据。
-- 已验证 commit/tree 发生变化后，旧 receipt 自动 stale。
-
-## 修改规范
-
-规范变更必须独立 Work Unit，由 Human Owner/Reviewer 批准并重新生成 lock；不得与业务实现混在同一个 diff。
+旧 acceptance/lock、known_bad、work_units 和 full-pytest 控制文件没有运行调用者，已移除；原文在 Git 历史。不把历史测试夹具的 gold expected 变成人工权限边界。source_catalog 的职责/导入检查、原件 SHA、来源身份/时间、引用回放、预算和恢复校验保留。

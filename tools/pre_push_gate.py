@@ -12,8 +12,8 @@ Run without flags for the optional full local validation suite:
   3. config_doctor                                       (CI WU-7.1)
   4. host-assumption guard                              (CI meta-gate, FC-1307-a)
   5. Full unit suite                                     (CI Unit tests)
-  6. The focused high-risk contract tests (including the shared-column reader,
-     receipt-envelope, and B10 handoff contracts) plus the gate's own regression tests.
+  6. The current narrative selection, source-hash replay, receipt-envelope,
+     and read-chain tests plus the gate's own regression tests.
 
 The unit suite includes the second-order F-B01-9 regression: on CI run
 34751519232 the NEW guard step itself failed `test_writer_freeze.py`, a test
@@ -52,11 +52,11 @@ CURRENT_CI_REGRESSION_CASES = (
 )
 FAST_CONTRACT_CASES = (
     *CURRENT_CI_REGRESSION_CASES,
-    "tests/contract/test_source_catalog_section_extractor.py::test_annual_report_extracts_mda_and_business_overview",
-    "tests/contract/test_source_catalog_section_extractor.py::test_prospectus_uses_zhang_heading",
-    "tests/contract/test_fc906a_producer_binding_metadata.py::test_sections_artifact_is_v2_bindable",
+    "tests/unit/test_narrative_evidence.py::test_financial_table_rows_are_dropped_but_business_rows_are_selected",
+    "tests/unit/test_narrative_evidence.py::test_numbered_project_rationale_heading_survives_a_tight_budget",
+    "tests/unit/test_narrative_transport_contracts.py::test_frozen_producer_golden_contract_and_hash_bindings",
     "tests/contract/test_fc905_receipt_envelope.py::test_pi03_no_review_is_explicit_not_reviewed",
-    "tests/contract/test_r4b05b_shared_column_readers.py::test_the_summarizer_selection_survives_a_malformed_shared_column",
+    "tests/unit/test_narrative_retrieval.py::test_resolver_fails_closed_when_raw_source_hash_changes",
     "tests/contract/test_b10_read_chain.py::test_b10_scan_is_not_vacuous",
 )
 
@@ -156,11 +156,11 @@ def main(argv: list[str] | None = None) -> int:
     ]
     focused_contract_gate = (
             [sys.executable, "-m", "pytest", "-q", "--tb=short", "--timeout=180",
-             "tests/contract/test_source_catalog_section_extractor.py",
-             "tests/contract/test_fc906a_producer_binding_metadata.py",
+             "tests/unit/test_narrative_evidence.py",
+             "tests/unit/test_narrative_transport_contracts.py",
              "tests/contract/test_legacy_observation.py",
              "tests/contract/test_zr506_section_chunk_fact.py",
-             "tests/contract/test_r4b05b_shared_column_readers.py",
+             "tests/unit/test_narrative_retrieval.py",
              "tests/contract/test_fc905_receipt_envelope.py",
              "tests/contract/test_b10_read_chain.py",
              "tests/unit/test_writer_freeze.py",

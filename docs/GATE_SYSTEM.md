@@ -1,3 +1,5 @@
+> 历史说明：本文描述旧流水线与Gate/审核机制，不作为当前运行指令或人工权限要求。当前用法见[运维说明](OPERATIONS.md)、[来源目录](source-catalog.md)和[总计划](plans/narrative-evidence-pilot-2026-09-26/task_plan.md)。
+
 # Gate 系统操作手册
 
 > 配置化、可诊断、可重试的 Pipeline 质量控制框架

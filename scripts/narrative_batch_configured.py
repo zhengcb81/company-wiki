@@ -13,11 +13,16 @@ from company_wiki.automation.models import canonical_json
 
 
 def main(argv: Sequence[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(add_help=False, allow_abbrev=False)
+    parser = argparse.ArgumentParser(
+        description=__doc__, add_help=False, allow_abbrev=False,
+    )
     parser.add_argument("--llm-config", type=Path)
     parser.add_argument("--llm-provider", choices=("minimax", "mimo", "deepseek", "openai"))
     parser.add_argument("--allow-local-model-http", action="store_true")
     args, batch_args = parser.parse_known_args(argv)
+    if "--help" in batch_args or "-h" in batch_args:
+        parser.print_help()
+        return batch_main(["--help"])
     try:
         options = model_options_from_config(
             Config.load(args.llm_config, llm_provider=args.llm_provider).llm)

@@ -46,10 +46,11 @@ StockWiki 独占投资研究语义和下游状态。company-wiki 不得生成或
 - `index.md` — 全局索引
 - `log.md` — 操作日志（append-only）
 
-文件来源：
-- `collect_news.py` → 新闻存入 `companies/{name}/raw/news/*.md`
-- `StockInfoDownloader` → 财报/研报直接存入 `companies/{name}/*.pdf`
-- `ingest.py` → 扫描 `companies/{name}/` 下所有非 wiki 文件
+当前文件来源：
+- filing-fetch / source_catalog acquisition：A股使用StockInfoDLSimple，下载原件由CWP校验并入库公司目录；不维护StockInfoDownloader主线。
+- earnings-transcripts：电话会原语言TXT/JSON由CWP统一登记，不翻译。
+- source_catalog scan：登记配置根内的既有原件，目录定位由存储层处理；消费者使用SourceRef/SourceExport v2。
+- `collect_news.py`、`ingest.py`是冻结的历史writer，不作为新采集/处理入口。
 
 ## Legacy Wiki 文档格式（兼容规范，非 canonical 目标）
 
@@ -167,7 +168,7 @@ tags: [tag1, tag2]
 
 - **职责单一**：canonical 对象仅限 SourceRecord/source manifest、EvidenceSpan、extraction quality、原文索引和 source-oriented projection；不得引入投资研究 state 或估值链。
 - **跨仓只读**：与 StockWiki 通过版本化 export 交换 ID/hash 引用，不共享可变数据库，不跨仓写文件。
-- **单线程**：整个系统以单线程顺序执行。`LLMClient` 不是线程安全的（包含全局状态和限流状态）。如需多线程，须重构为无状态设计。
+- **并发隔离**：旧`LLMClient`包含全局/限流状态，不能跨线程共享。当前有限叙述Worker使用隔离子进程，每个子进程持自己的客户端；解析与模型并发分别有界，现有AUTO Store统一预算、lease/generation与outbox恢复，不增加第二任务库。显式批次与profile按当前配置/请求执行，不启动无限常驻转换。
 - **两套 Graph 实现**：`scripts/graph.py` 是规范实现（被 39+ 脚本使用）。`scripts/models/` 是类型化版本，已弃用，仅供测试和归档脚本使用。
 - **两大部分**：`llm_client.py` 分基础设施（API/限流/成本）和业务方法（分析/评估/查询）两部分。
 

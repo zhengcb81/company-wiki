@@ -38,4 +38,4 @@ python tools/legacy_storage_retirement.py vacuum --config <catalog-config> --rec
 
 所有专属测试在 `tests/integration/test_p5_storage*.py`，共享真实 schema/parser 夹具在 `tests/support/p5_storage_catalog_fixture.py`。真实年度 PDF + 微软电话会 TXT E2E 为 `slow`，只在存储迁移节点运行；日常全 Unit CI 不新增这个长包。E2E 使用公开原文及叙述 reader/完整 locator replay，最终关闭连接并删除唯一测试根，小型空间计量通过 JUnit property 保存。
 
-原交付收据在 `docs/implementation/handoffs/P5-STORAGE/`；最新主线验收以总 PWF 的 `harness_lanes/results/p5_storage_integration_review_2026-10-05.md` 为准。生产删除仍等待 RF 默认来源读取迁移与 CWP 旧正文/质量调用者退出。
+原交付收据在 `docs/implementation/handoffs/P5-STORAGE/`；集成验收以总 PWF 的 `harness_lanes/results/p5_storage_integration_review_2026-10-05.md` 为准。RF默认来源迁移与CWP旧正文/质量调用者退出已经完成；2026-10-06生产清理及压缩结果见 `harness_lanes/results/s5_production_storage_acceptance_2026-10-06.json`，原件和来源事实保留。不要把本页示例当作再次执行全库清理的指令。

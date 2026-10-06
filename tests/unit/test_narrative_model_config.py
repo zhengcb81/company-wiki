@@ -12,6 +12,24 @@ from support.narrative_model_request_fixture import selection as _selection
 from company_wiki.automation.narrative_model import NarrativeModelRequest
 
 
+@pytest.mark.parametrize("flag", ["--help", "-h"])
+def test_configured_batch_help_shows_provider_and_batch_options_without_loading_config(
+    monkeypatch, capsys, flag,
+):
+    import narrative_batch_configured as wrapper
+
+    def no_config(*_args, **_kwargs):
+        pytest.fail("help must not load production configuration or credentials")
+
+    monkeypatch.setattr(wrapper.Config, "load", no_config)
+    with pytest.raises(SystemExit) as exit_info:
+        wrapper.main([flag])
+    assert exit_info.value.code == 0
+    output = capsys.readouterr().out
+    assert "--llm-provider" in output and "--llm-config" in output
+    assert "--project-root" in output and "--request" in output
+
+
 @pytest.mark.parametrize("provider,token_field", [
     ("minimax", "max_completion_tokens"), ("mimo", "max_completion_tokens"),
     ("deepseek", "max_tokens"), ("openai", "max_tokens"),

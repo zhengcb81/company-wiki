@@ -1,6 +1,6 @@
 # 来源目录、原文读取与有限叙述批次
 
-> 当前接口说明（2026-10-05）。进度及存储迁移顺序见[主计划](plans/narrative-evidence-pilot-2026-09-26/task_plan.md)，接口定义见 `docs/contracts/`。历史实现可查 Git，不按旧常驻 Worker 的流程操作。
+> 当前接口说明（2026-10-06）。进度及存储迁移顺序见[主计划](plans/narrative-evidence-pilot-2026-09-26/task_plan.md)，接口定义见 `docs/contracts/`。历史实现可查 Git，不按旧常驻 Worker 的流程操作。
 
 ## 职责与存储
 
@@ -17,7 +17,7 @@ company-wiki 保存来源身份、不可变原件 SHA-256、来源版本与位�
 | documents | 逻辑文档及其来源状态、类型、期间、实体 |
 | EvidenceSpan | 绑定 source ID、locator、parser/version 和质量的可回放片段 |
 | NarrativeRef / final 包 | 有限任务生成的精选片段和原语言来源摘要 |
-| legacy artifacts / spans | 旧 normalized、summary、sections 与全量 span；仍有读者时保留 |
+| legacy artifacts / spans | 旧生成记录已退休，全量span已清除；不重建整篇派生 |
 
 ## 常用来源命令
 
@@ -77,8 +77,8 @@ python -m company_wiki.source_catalog.cli --config config/source_catalog.yaml ex
 
 公开 CLI 不提供整库 `normalize`、`summarize`、`run`、旧 Worker 启动/恢复及安装登录任务。`SourceCatalog.normalize`、`summarize`、`summarize_with_llm`、`extract_sections` 也已退出；历史隔离测试通过 `tests/support` 准备旧产物，不能从生产代码导入该夹具。
 
-旧source-catalog `evidence`、`evidence-list`、`sections-list`及公共EvidenceQueryService导出也已退出。明确历史backend仍能读隔离fixture；新运行精选检索不依赖旧SQLite全量span，实际旧数据尚待S6处置。
+旧source-catalog `evidence`、`evidence-list`、`sections-list`及公共EvidenceQueryService导出也已退出。明确历史backend仍能读隔离fixture；新运行精选检索不依赖旧SQLite全量span，生产旧数据已于2026-10-06清理。
 
-`worker-status`、`worker-stop`、`startup-status`、`uninstall-startup` 仅用于检查和收尾既存旧进程/任务，不启动新常驻转换。低层 legacy generators 和读者尚在迁移；本页不声称这些模块全部删除。
+`worker-status`、`worker-stop`、`startup-status`、`uninstall-startup` 仅用于检查和收尾既存旧进程/任务，不启动新常驻转换。旧全文generators已退出生产安装包；历史夹具只在tests/support准备，不能从生产代码恢复旧writer。
 
-`.source_catalog/derived` 和旧全量 EvidenceSpan 尚未清理。RF 默认消费切换、CWP 旧正文读者退出、artifact 退休状态和质量语义完成后才删旧物理产物；数据库 span 与压缩单独验收。不删除原件，不保留指向已删文件的 completed 句柄，不要求把所有历史来源重新跑一次模型。
+RF默认SourceRef v2迁移、CWP旧正文读者退出及质量语义已经完成。生产`.source_catalog/derived`的7104文件已清零、1490530旧span已删除，8191旧handle退休；来源库约222MB，原件及17表来源事实保持。见[正式结果](plans/narrative-evidence-pilot-2026-09-26/harness_lanes/results/s5_production_storage_acceptance_2026-10-06.json)。不要求把所有历史来源重新跑一次模型，N4C真实批次仍按主计划推进。

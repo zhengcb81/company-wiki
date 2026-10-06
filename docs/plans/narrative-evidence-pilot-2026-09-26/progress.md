@@ -1,5 +1,13 @@
 # Progress：激进简化实施
 
+## 2026-10-06 — S6当前流程与无效控制收尾（本地GREEN，待发布）
+
+- RF fresh主线/remote6e6b817a，owner两份周日志SHA未变；不写外仓。重写README/OPERATIONS/ARCHITECTURE，更新source-catalog/AGENTS当前provider、目录抽象、独立进程并发及存储已完成状态，三份旧手册/调用者审计标为历史。
+- 移除无运行调用者的10份acceptance/lock/known_bad/work-unit/full-pytest控制JSON及2个忽略失败的旧cron壳。保留显式架构检查器，规则改为当前Config/有限runtime接线及source不导入下游；取消旧proposal人工审批/冻结writer强制接线/全scripts零写入正则。
+- 四项旧全文producer日常smoke换为当前业务证据、招股书上下文、final/golden绑定和原件SHA更换拒绝；数量仍12，既有6项真实CI回归与诊断/read-chain保持。候选4 passed/0.58s，集中38 passed/1.59s、Ruff/同组fast smoke/实际架构命令GREEN。
+- help新反例2 RED/0.98s，修复wrapper先显示自身与batch参数、不加载配置/凭证；真实help显示provider/config，配置测试通过。三个短测试根s6baseline/s6helpred/s6node已精确移除恢复absent，18当前文档链接有效；配置SHA3609e707…不变，0生产/原件/模型/provider操作。
+- 只读误读不存在的narrative_model_config.py/source-export-v2.md后改实际路径；文档EOF空行diff check失败已纠正，真实ARCHITECTURE大小写已校正。未增加CI矩阵或日常长测试。Next Step发布精确CI，绿后S6complete/回N4C。
+
 ## 最新交付核对（2026-10-06，覆盖下方历史P5状态）
 
 - 已接收P5-FF/P5-STORAGE通知并核对原始handoff、工作树及Git提交：两线无新增提交/dirty。FF已整支包含于远端main758e8f4；STORAGE已选择性集成9fa2166并由MAIN补充修复，旧交付分支不再merge覆盖当前工具。

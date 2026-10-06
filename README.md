@@ -1,360 +1,61 @@
 # company-wiki
 
-StockWiki 的上游公司资料供应与来源智能平台：采集并不可变保存上市公司资料，生成可追溯的 source manifest 与 EvidenceSpan，提供资料检索和只读 export。
+StockWiki 等研究项目的上游资料系统：保存原始文档和来源事实，按需提取业务叙述，提供可回放的证据和只读接口。
 
-## 产品边界
+## 当前工作流
 
-company-wiki 只拥有上游来源与解析职责；StockWiki 独占研究语义、人工证据裁决、投资模型、研究 Wiki 和报告发布。两者通过版本化、只读的 ID/hash 契约集成，不共享可变数据库，也不互相写目录。
+1. 登记或获取公司文档，原件保持原语言、不可变保存。
+2. 根据文档类型选择主营业务、行业变化、新业务、出海、产能及项目进展。财务表格和通用格式化材料不全量切片。
+3. 有限 Worker 批次临时解析，生成一份精选引用与来源摘要；已完成任务清除重复正文。
+4. 下游用 SourceRef / SourceExport v2、NarrativeRef 读取；存在哪个目录由存储层处理。
 
-本项目不生成或保存目标价、评级、仓位建议、估值/SOTP、正式研究报告或 accepted/rejected 投资结论。历史 `companies/**/wiki`、行业/主题 Wiki 和相关 writer 仅作只读兼容或 source-oriented projection，不能形成第二套 authoritative research state。
+company-wiki 不写 StockWiki 的目录或数据库，不生成评级、目标价、仓位、估值或正式研究报告。
 
-## 功能特性
+## 安装与配置
 
-- 📰 **新闻采集**: 自动搜索和采集上市公司新闻
-- 📊 **财报下载**: 自动下载年报、季报、招股说明书等
-- 🔒 **不可变来源**: 保存原文、SHA-256、采集器版本和来源时间
-- 🧭 **证据定位**: 解析页码、段落、表格坐标和稳定 locator
-- 🔍 **资料查询**: 返回带 `source_id + locator` 的答案或 evidence bundle
-- 📦 **只读导出**: 向 StockWiki 等消费者提供版本化、可重放的来源契约
+需要 Python 3.10+；开发和 CI 使用 requirements 文件：
 
-## 快速开始
-
-### 1. 安装依赖
-
-```bash
-# 克隆仓库
-git clone <repo-url>
-cd company-wiki
-
-# 安装 Python 依赖
-pip install -r requirements.txt
+```powershell
+python -m pip install -r requirements.txt -r requirements-test.txt
+python -m pip install -e .
+python scripts/config_doctor.py
 ```
 
-### 2. 配置环境变量
+来源根配置在 `config/source_catalog.yaml`，provider 配置在 `config/source_acquisition.yaml`。模型经现有 `Config.load` 加载，沿用 `config.yaml`、供应商配置和环境变量，不另造密钥文件。MiMo 使用 `mimo-v2.6-flash`，DeepSeek 使用 `deepseek-flash`；实际端点和生成参数由配置决定。API key 不写进请求、报告或 Git。无需模型的来源查询和原文读取不需要 LLM 凭证。
 
-```bash
-# 复制示例配置
-cp .env.example .env
+## 来源登记与读取
 
-# 编辑 .env 文件，填入 API 密钥
-export MINIMAX_API_KEY="your_minimax_api_key"
-# 可选：MiMo 2.5 Pro 通用次模型
-export MIMO_API_KEY="your_mimo_api_key"
-export TAVILY_API_KEY="your_tavily_api_key"
-```
-
-### 3. 初始化数据
-
-```bash
-# 检查配置
-python3 scripts/config.py
-
-# 采集新闻
-python3 scripts/collect_news.py
-
-# 运行当前兼容 ingest（CW-2 将收敛为 canonical IngestService）
-python3 scripts/ingest.py
-```
-
-### 4. 采集一份交易所原公告
-
-```bash
-python -m company_wiki.source_contract.announcement_cli \
-  --root . \
-  --company 中微公司 \
-  --entity-id SSE:688012 \
-  --url https://star.sse.com.cn/.../announcement.pdf \
-  --title 关于召开2025年度业绩说明会的公告 \
-  --published-date 2026-03-25
-```
-
-该命令只接受显式 SSE/SZSE 官方 HTTPS URL，单线程下载并验证 PDF，以 content-addressed、create-once 方式生成 raw、source manifest 和 provenance；重复采集同一内容不会改写文件。完整边界见 [Announcement Collector v1](docs/contracts/announcement-collector-v1.md)。
-
-### 5. 验证并导出 source contract
-
-```bash
-python -m company_wiki.source_contract.cli export \
-  --root . \
-  --manifests manifests.jsonl \
-  --spans evidence-spans.jsonl
-```
-
-CLI 会重新校验 manifest 指向的 raw，并只向 stdout 输出一行确定性 bundle；add-only 增量重放使用 `--base previous-export.json`。完整输入格式、hash 算法和失败语义见 [Source Export v1](docs/contracts/source-export-v1.md)。
-
-### 6. 将 parser result 接入 canonical ingest
-
-```python
-from pathlib import Path
-
-from company_wiki.ingest import IngestService, ParserResult
-from company_wiki.source_contract import EvidenceCoordinates, ParseStatus
-
-result = ParserResult(
-    source_id=manifest.source_id,
-    coordinates=EvidenceCoordinates(page_number=1, paragraph_index=0),
-    raw_text="原文……",
-    structured_value=None,
-    parser_name="pdf_parser",
-    parser_version="1.0.0",
-    parse_status=ParseStatus.PARSED,
-    quality_flags=(),
-)
-bundle = IngestService(root=Path(".")).ingest(
-    manifest=manifest,
-    parser_results=(result,),
-)
-```
-
-该服务只验证 immutable raw/source identity，并生成 `EvidenceSpan` 与确定性 `SourceExportBundle`；不下载、不写 raw/Wiki/StockWiki，也不生成研究语义。公告 receipt 可用 `ingest_announcement()` 接入同一路径。完整合同见 [Canonical IngestService v1](docs/contracts/ingest-service-v1.md)。legacy parser/scheduler 的批量迁移仍属于 CW-2 后续工作，不能用旧 research writer 代替。
-
-consumer 在读取 bundle 前必须按 [Source Contract Compatibility Policy v1](docs/contracts/source-contract-compatibility-v1.md) 声明三个契约的精确稳定 SemVer 并完成 `exact_highest` 协商；任一契约无共同版本时整组 fail closed。
-
-### 7. 来源目录与叙述处理
-
-当前受支持的维护命令：
-
-```bash
-# 只读统计候选文件
+```powershell
 python -m company_wiki.source_catalog.cli --config config/source_catalog.yaml scan --dry-run
-
-# 查看来源目录状态
+python -m company_wiki.source_catalog.cli --config config/source_catalog.yaml scan
 python -m company_wiki.source_catalog.cli --config config/source_catalog.yaml status
-
-# 查看或停止仍残留的旧 Worker；卸载旧登录任务
-python -m company_wiki.source_catalog.cli --config config/source_catalog.yaml worker-status
-python -m company_wiki.source_catalog.cli --config config/source_catalog.yaml worker-stop
-python -m company_wiki.source_catalog.cli --config config/source_catalog.yaml uninstall-startup
-
-# 仅对一个明确公司/期次执行来源下载
-python -m company_wiki.source_catalog.cli --config config/source_catalog.yaml ensure \
-  --entity "公司名" --document-kind annual_report --as-of-date YYYY-MM-DD \
-  --allow-download
+python -m company_wiki.source_catalog.cli --config config/source_catalog.yaml query "中微公司"
+python -m company_wiki.source_catalog.source_export_v2_cli --help
+python -m company_wiki.source_catalog.source_reader_cli --help
 ```
 
-旧的全库 `normalize`、`summarize`、`run`、常驻 Worker 和登录启动入口已退役，`SourceCatalog` 也不再提供整篇转换/摘要写入方法。叙述性文档通过有限批次处理；当前用法见[来源目录、原文读取与有限叙述批次](docs/source-catalog.md)，接口、空间上限与迁移进度见[主计划](docs/plans/narrative-evidence-pilot-2026-09-26/task_plan.md)。旧派生数据仍等实际读者迁移完成后处置。
+`scan --dry-run` 是可选预览，`scan` 登记来源。上层使用逻辑 ID/hash，不直接遍历各存储目录。精确原文 reader 的 stdout 是字节，stderr 是收据；消费者检查 exit 0、SHA 和字节数。
 
-### 8. 使用系统
+下载优先通过 filing-fetch 的明确公司/期次请求，复用现有原件；A 股使用 StockInfoDLSimple，电话会调用 earnings-transcripts 并入库到公司目录。Dayu 是外部项目，不修改其代码。CWP 的 `ensure --help` 列出底层入口；`--allow-download` 选择获取模式，须同时给字节、时间、费用上限，不需要人工签收文件。
 
-```bash
-# 查看产业链概览
-python3 scripts/graph.py --overview
+## 有限叙述处理与检索
 
-# 查询公司资料；输出应包含 source ID 与 locator
-python3 scripts/query.py "中微公司的刻蚀设备进展？"
-
-# 检查文档覆盖
-python3 scripts/download_reports_v2.py --check
+```powershell
+python scripts/narrative_batch_configured.py --llm-provider mimo --project-root . --catalog-config config/source_catalog.yaml --automation-db .source_catalog/automation.sqlite3 --work-dir .source_catalog/narrative-work --request request.json
+python -m company_wiki.source_catalog.narrative_transport_cli --help
+python -m company_wiki.source_catalog.cli --config config/source_catalog.yaml extraction-quality --help
 ```
 
-## 项目结构
+批次需要符合已有 schema 的明确请求，限定 sources、并发 profile、时间和累计 token/费用。子 Worker 各持自己的客户端，共享持久预算；未知 usage 保留预留，重启复用已有 run，不重复生成 final。provider 通过 wrapper 参数显式选择；不能把配置里的备用模型当作已实现的自动 failover。
 
-```
-company-wiki/
-├── config.yaml              # 主配置文件
-├── config_rules.yaml        # 分类规则配置
-├── graph.yaml               # 公司/行业/主题数据
-├── scripts/                 # 脚本目录
-│   ├── config.py           # 统一配置管理
-│   ├── logger.py           # 统一日志管理
-│   ├── graph.py            # 图数据查询
-│   ├── ingest.py           # 数据整理
-│   ├── collect_news.py     # 新闻采集
-│   ├── query.py            # 智能查询
-│   ├── models/             # 数据模型
-│   ├── storage/            # 存储层
-│   └── ...
-├── companies/               # 公司数据
-│   └── {公司名}/
-│       ├── raw/            # 原始文档
-│       │   ├── news/       # 新闻
-│       │   ├── financial_reports/  # 财报
-│       │   ├── prospectus/ # 招股说明书
-│       │   └── investor_relations/ # 投资者关系
-│       └── wiki/           # legacy 只读兼容/source-oriented projection
-├── sectors/                 # 行业数据
-├── themes/                  # 主题数据
-├── tests/                   # 测试目录
-└── docs/                    # 文档目录
-```
+精选 list/lookup/search 在固定版本上验证原文 SHA 并回放 locator；搜索只建内存 BM25。未处理资料可以保持 `metadata_only`，完整检查确无业务叙述后才标记跳过，不把解析失败当成功。
 
-## 核心模块
+详细请求、读取合同与恢复步骤见[来源目录说明](docs/source-catalog.md)、[运维说明](docs/OPERATIONS.md)、[架构](docs/ARCHITECTURE.md)和[主计划](docs/plans/narrative-evidence-pilot-2026-09-26/task_plan.md)。
 
-### 配置管理
+## 测试与维护
 
-```python
-from config import Config
+commit 只做相关静态检查；push 跑一组快速行为测试，CI 跑全 Unit 与同组 smoke。完整集成、真实资料 E2E 在大的实施节点运行，测试根恢复原样；不要求 Reviewer、授权 JSON 或人工 lock。
 
-# 加载配置
-config = Config.load()
+2026-10-06 旧 derived 与全量 span 清理已完成，来源库降至约 222MB，原件保留。详情见[生产清理结果](docs/plans/narrative-evidence-pilot-2026-09-26/harness_lanes/results/s5_production_storage_acceptance_2026-10-06.json)。不要求历史来源全部重跑模型。N4C 真实模型批次仍按主计划推进，不能把 Replay 或工具测试当作实际 LLM 验收。
 
-# 访问配置
-print(config.llm.provider)
-print(config.search.api_key)
-print(config.paths.wiki_root)
-```
-
-### 图数据查询
-
-```python
-from graph import Graph
-
-# 创建 Graph 实例
-g = Graph()
-
-# 查询公司
-company = g.get_company("中微公司")
-print(company["ticker"])
-
-# 查询行业
-sector = g.get_sector("半导体设备")
-print(sector["companies"])
-```
-
-### 数据整理（legacy 兼容入口）
-
-以下 API 说明当前兼容实现，不代表新的 source contract 已交付；新功能不得继续扩建研究 Wiki writer。
-
-```python
-from ingest import IngestPipeline
-from config import Config
-
-# 创建流水线
-config = Config.load()
-pipeline = IngestPipeline(config)
-
-# 运行整理
-result = pipeline.run(company="中微公司")
-print(result.summary())
-```
-
-## 常用命令
-
-### 数据采集
-
-```bash
-# 采集新闻
-python3 scripts/collect_news.py
-
-# 下载财报
-python3 scripts/download_reports_v2.py --company 中微公司
-
-# 从 Windows 同步文件
-python3 scripts/download_reports_v2.py --sync
-```
-
-### 数据处理（上游解析）
-
-```bash
-# 整理数据
-python3 scripts/ingest.py
-
-# 分类文档
-python3 scripts/classify_documents.py
-
-# legacy 诊断；不得把结果升级为投资结论
-python3 scripts/contradiction_detector.py
-```
-
-### 资料发现
-
-```bash
-# 查看产业链
-python3 scripts/graph.py --overview
-
-# 查询公司资料；不得自动存回研究结论
-python3 scripts/query.py "问题"
-
-# 发现新公司
-python3 scripts/auto_discover.py
-```
-
-## 配置说明
-
-### 环境变量
-
-| 变量名 | 说明 | 必需 |
-|--------|------|------|
-| `MINIMAX_API_KEY` | MiniMax-M3 主 LLM API Key | ✅ |
-| `MIMO_API_KEY` | MiMo 2.5 Pro 通用次 LLM API Key | ❌ |
-| `TAVILY_API_KEY` | Tavily 搜索 API Key | ✅ |
-| `WIKI_ROOT` | legacy projection 根目录 | ❌ |
-
-### config.yaml
-
-```yaml
-# LLM 配置
-llm:
-  provider: "minimax"
-  model: "MiniMax-M3"
-  base_url: "https://api.minimaxi.com/v1"
-  fallback:
-    provider: "mimo"
-    model: "mimo-v2.5-pro"
-    base_url: "https://token-plan-cn.xiaomimimo.com/v1"
-    usage_scope: "general"
-
-# 搜索配置
-search:
-  engine: "tavily"
-  tavily_api_key: ""  # 使用环境变量
-
-# 路径配置
-paths:
-  wiki_root: "~/company-wiki"
-```
-
-## 测试
-
-```bash
-# 运行所有测试
-python3 -m pytest tests/ -v
-
-# 运行单元测试
-python3 -m pytest tests/unit/ -v
-
-# 运行端到端测试（注：tests/e2e/ 目前只有 config 加载冒烟测试；
-# 真实管线覆盖在 tests/integration/ — tests/test_full_pipeline.py 等）
-python3 -m pytest tests/e2e/ tests/integration/ -v
-```
-
-## 文档
-
-- [架构与职责边界](docs/ARCHITECTURE.md)
-- [安全运维入口](docs/OPERATIONS.md)
-- [ADR 适用范围](docs/adr/README.md)
-- [Source Manifest v1 合同](docs/contracts/source-manifest-v1.md)
-- [Announcement Collector v1 合同](docs/contracts/announcement-collector-v1.md)
-- [Evidence Span v1 合同](docs/contracts/evidence-span-v1.md)
-- [Source Export v1 合同与只读 CLI](docs/contracts/source-export-v1.md)
-- [Canonical IngestService v1 合同](docs/contracts/ingest-service-v1.md)
-- [PDF Extract v3 纯适配器合同](docs/contracts/pdf-extract-v3-adapter-v1.md)
-- [Page-aware PDF Parser 纯适配器合同](docs/contracts/pdf-page-aware-parser-v1.md)
-- [Source Contract Compatibility Policy v1](docs/contracts/source-contract-compatibility-v1.md)
-- [重构计划](REFACTORING_PLAN.md)
-- [测试指南](TESTING.md)
-- [代码审查](CODE_REVIEW.md)
-- [实施步骤](IMPLEMENTATION_STEPS.md)
-
-## 贡献
-
-1. Fork 项目
-2. 创建特性分支 (`git checkout -b feature/xxx`)
-3. 提交更改 (`git commit -m 'Add xxx'`)
-4. 推送到分支 (`git push origin feature/xxx`)
-5. 创建 Pull Request
-
-## 许可证
-
-MIT License
-
-## 致谢
-
-- 基于 [Karpathy LLM Wiki](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f) 概念
-- 使用 [StockInfoDLSimple](https://github.com/zhengcb81/StockInfoDLSimple) 作为 A 股下载 provider；正式入库走 company-wiki Source Catalog
-
-
-> Indexed does not equal reusable: only active, capture-ready documents under a registered reusable root kind are reuse candidates.
-
-> Indexed does not equal reusable: only active, capture-ready documents under a registered reusable root kind are reuse candidates.
-
-> Production truth boundaries (2026-08-09): real-root probes and canaries are read-only and never write to Dropbox/dayu/companies. Production reuse of Dropbox-only filings (WU-1303), v2 backfill (WU-902), and binding-valid processed artifacts (WU-1304) is **not yet claimed**: legacy evidence lacks strong identity/period/binding (0/7712 artifacts carry source binding; 0/23513 documents carry provable period_end). Fixture-level E2E stays green; production claims stay unclaimed until observation periods and the remediation window complete. See audit_review/2026-08-09_data_lake_refactor_plan/receipts/.
+旧 collect_news、ingest、研究 Wiki writer、全库 normalize/summarize、常驻 Worker 启动及旧 cron 包装器均不作为运行入口。旧 Source Export v1 合同供显式兼容；新消费者默认 v2。

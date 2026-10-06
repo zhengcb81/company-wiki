@@ -1,3 +1,5 @@
+> 历史快照：2026-07的调用者清单，不是当前入口或待办。旧全文generator、常驻Worker和签收控制已退出。当前入口见[来源目录](../source-catalog.md)，实施状态见[总计划](../plans/narrative-evidence-pilot-2026-09-26/task_plan.md)。
+
 # Legacy caller reachability inventory v1
 
 Status: CW-3.1 Phase 1 audit evidence (2026-07-19)
