@@ -1,8 +1,10 @@
 # 当前执行入口
 
+**新增G5独立包（2026-10-07）：**[三卡总包](harness_lanes/g5_parallel_packages_2026-10-07.md)ready，可现在分别交harness；CWP六旧工程/批处理壳退休、SID纯API解耦与身份查询预算、RF定点安装工具/三tmp验收，分别独占`Projects/_g5/cwp|sid|rf`不同项目工作树。当前目录尚未创建，未代用户启动。G3/G4已完成不重派；MAIN保留G2-12/FF/公共CLI/指纹/工程清单、真实安装与生产/总PWF/并线。目标继续paused，本次仅制卡和发布。
+
 **最新G4验收（2026-10-07）：**两包已验收、并入实际执行分支并推远端。CWP `df7d7ba`：冻结Pipeline/Gate0–5整族退休及CN 1.3.0路由配套，211责任用例绿；精确CI37673393822所有步骤绿/74秒。SID `eb8495c`：latest分页矛盾TDD修复，127责任/真实CLI离线联调用例绿，已推`v2-clean-rewrite`；该仓无workflow，不声称远端CI。见[G4正式验收](g4_main_acceptance_2026-10-07.md)。G4不再派发。G2-03完成；完整G2-12 ensure/FF/ET/CWP入库与复用仍未提交，其他G2、R2生产应用/R3/R5未完成。总目标保持paused，本次没有恢复生产或付费批次。
 
-上一批G3已验收并线：CWP维护退休/来源事实与RF历史质量/仓内包装；RF `ab7a7a44`已推main，实际用户安装同步仍待办。G2/G3/G4已交付卡不重复派发。
+上一批G3已验收并线：CWP维护退休/来源事实与RF历史质量/仓内包装；RF `ab7a7a44`已推main，实际用户安装同步仍待办。G2/G3/G4已交付卡不重复派发；G5是当前可新派发的独立剩余工作。
 
 ## 恢复后的顺序
 
@@ -16,7 +18,7 @@
 - [findings](findings.md)、[progress](progress.md)：事实/验收/错误；旧active/ready均是历史时点。
 - [G2全面补漏](gate_simplification_reaudit_2026-10-07.md)、[G2-12详细实施单](g2_latest_acquisition_implementation_2026-10-07.md)：剩余接口/反例/责任包。
 - [全部PWF落地](all_pwf_completion_implementation_2026-10-07.md)：R2/R3/R5实际待办。
-- [并行总计划](parallel_execution_plan_2026-10-03.md)、[G4两个包](harness_lanes/g4_parallel_packages_2026-10-07.md)：所有权与实际交付，已完成卡不重派。
+- [并行总计划](parallel_execution_plan_2026-10-03.md)、[G5当前三卡](harness_lanes/g5_parallel_packages_2026-10-07.md)：当前独立工作目录/写集/冻结接口与交接；G3/G4卡仅作历史。
 - [G3验收](g3_main_acceptance_2026-10-07.md)、[G4验收](g4_main_acceptance_2026-10-07.md)：实际代码SHA、测试、精确CI和保护。
 - [有限批次/模型配置](n4_production_batch_implementation.md)、[空间清理](s5_s6_legacy_storage_implementation.md)：已验收历史与正式运行接口。
 

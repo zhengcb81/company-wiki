@@ -1,0 +1,110 @@
+{
+  "schema_version": "g5-package-inventory/1",
+  "state": "ready_not_started",
+  "overall_goal": "paused",
+  "worktrees_created": false,
+  "packages": [
+    {
+      "id": "G5-CWP-CHECKS",
+      "card": "g5_cwp_legacy_checks_retirement.md",
+      "repo": "C:/Users/郑曾波/Projects/company-wiki",
+      "worktree": "C:/Users/郑曾波/Projects/_g5/cwp",
+      "branch": "codex/g5-cwp-checks",
+      "base_commit": "5d0ad75504a9815febc1bddbe76ae2f667c3e74a",
+      "plan_id": "g5-cwp-checks",
+      "owned_files": [
+        "scripts/semantic_gate.py",
+        "scripts/architecture_gate.py",
+        "scripts/clean_env_gate.py",
+        "scripts/gold_gate.py",
+        "scripts/test_framework.py",
+        "scripts/batch_process.py",
+        "scripts/writer_policy.py",
+        "control/architecture.json",
+        "control/README.md",
+        "tests/support/isolated_environment.py",
+        "tests/unit/test_semantic_gate.py",
+        "tests/unit/test_architecture_gate.py",
+        "tests/unit/test_clean_env_gate.py",
+        "tests/unit/test_hermetic_runtime.py",
+        "tests/unit/test_common.py",
+        "tests/unit/test_legacy_entrypoint_simplification.py",
+        "tests/unit/test_writer_freeze.py",
+        "tests/acceptance/test_control_bootstrap.py",
+        "tests/contract/test_gold_evaluator.py",
+        "tests/contract/test_gold_mutations.py",
+        "tests/contract/test_legacy_caller_reachability.py",
+        "tests/helpers/gold_evaluator.py",
+        "tests/unit/test_g5_legacy_checks_retirement.py",
+        "tests/integration/test_g5_legacy_checks_retirement_e2e.py",
+        ".planning/g5-cwp-checks/**"
+      ]
+    },
+    {
+      "id": "G5-SID-RUNTIME",
+      "card": "g5_sid_browserless_bounded_provider.md",
+      "repo": "C:/Users/郑曾波/Projects/StockInfoDLSimple/v2-clean-rewrite",
+      "worktree": "C:/Users/郑曾波/Projects/_g5/sid",
+      "branch": "codex/g5-sid-runtime",
+      "base_commit": "0cb3c1f0b4a5784757971265b2b20a7a0b4c5104",
+      "plan_id": "g5-sid-runtime",
+      "frozen_cwp_consumer": "df7d7ba58955e224c1799355f479ad5378ef38a7",
+      "owned_files": [
+        "src/company_wiki_adapter.py",
+        "src/company_wiki_adapter_cli.py",
+        "src/cninfo_api.py",
+        "src/acquisition_budget.py",
+        "src/cninfo_identity.py",
+        "src/disclosure_matching.py",
+        "tests/unit/test_company_wiki_adapter.py",
+        "tests/unit/test_company_wiki_adapter_cli.py",
+        "tests/unit/test_company_wiki_adapter_cli_budget.py",
+        "tests/unit/test_cninfo_api.py",
+        "tests/unit/test_cninfo_api_budget.py",
+        "tests/unit/test_cninfo_api_fixture_contract.py",
+        "tests/unit/test_g4_latest_discovery.py",
+        "tests/e2e/test_g4_latest_cli_offline.py",
+        "tests/unit/test_g5_provider_runtime.py",
+        "tests/e2e/test_g5_browserless_provider.py",
+        "tests/fixtures/g5_provider/**",
+        ".planning/g5-sid-runtime/**"
+      ]
+    },
+    {
+      "id": "G5-RF-INSTALL",
+      "card": "g5_rf_selective_installation.md",
+      "repo": "C:/Users/郑曾波/Projects/revenue-forecast",
+      "worktree": "C:/Users/郑曾波/Projects/_g5/rf",
+      "branch": "codex/g5-rf-install",
+      "base_commit": "ab7a7a4434bbb4c52a5bd2a6cd6ed710d7151eee",
+      "plan_id": "g5-rf-install",
+      "owned_files": [
+        "tools/sync_installations.py",
+        "tools/tests/test_sync_installations.py",
+        "tools/tests/test_g3_skill_package.py",
+        "tools/tests/test_g5_selective_install.py",
+        ".planning/g5-rf-install/**"
+      ],
+      "observed_installation_delta_per_target": 8,
+      "observed_config_delta": 0,
+      "live_installs_written": false
+    }
+  ],
+  "main_reserved": [
+    "CWP src/company_wiki/**",
+    "FF acquisition/intent/install wiring",
+    "CWP config/** and pyproject/hooks/CI/code_identity",
+    "shared PWF",
+    "real home installation writes",
+    "production metadata/finals",
+    "actual branch merges/publication"
+  ],
+  "protection": {
+    "sha_equal_nonplan_dirty_files": 74,
+    "protected_inventory_sha256": "ed063b5fbe8d178b22440f470c1ca6f86cc98d5c885489d4157bb268441be443",
+    "reference": "../g4_protection_before_2026-10-07.json",
+    "production_raw_deletions": 0,
+    "production_writes": 0,
+    "paid_calls": 0
+  }
+}

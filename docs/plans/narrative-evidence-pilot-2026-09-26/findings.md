@@ -1,8 +1,10 @@
 # Findings：当前事实与待验证项
 
+**新增G5独立包（2026-10-07）：**[三卡总包](harness_lanes/g5_parallel_packages_2026-10-07.md)ready，可现在分别交harness；CWP六旧工程/批处理壳退休、SID纯API解耦与身份查询预算、RF定点安装工具/三tmp验收，分别独占`Projects/_g5/cwp|sid|rf`不同项目工作树。当前目录尚未创建，未代用户启动。G3/G4已完成不重派；MAIN保留G2-12/FF/公共CLI/指纹/工程清单、真实安装与生产/总PWF/并线。目标继续paused，本次仅制卡和发布。
+
 **最新G4验收（2026-10-07）：**两包已验收、并入实际执行分支并推远端。CWP `df7d7ba`：冻结Pipeline/Gate0–5整族退休及CN 1.3.0路由配套，211责任用例绿；精确CI37673393822所有步骤绿/74秒。SID `eb8495c`：latest分页矛盾TDD修复，127责任/真实CLI离线联调用例绿，已推`v2-clean-rewrite`；该仓无workflow，不声称远端CI。见[G4正式验收](g4_main_acceptance_2026-10-07.md)。G4不再派发。G2-03完成；完整G2-12 ensure/FF/ET/CWP入库与复用仍未提交，其他G2、R2生产应用/R3/R5未完成。总目标保持paused，本次没有恢复生产或付费批次。
 
-## G4两个包正在MAIN验收（2026-10-07）
+## G4初查记录（历史；正式验收见页首G4段）
 
 Pipeline已合独立mc，211责任绿38.78s；SID新ms的120责任最终并集绿，13初始pytest缺父目录仅setup错误已定点复测13绿0.36s。源码发现latest最后页与totalRecordNum矛盾会误称完整，先TDD修后再并SID。CN版本/执行根/bounded三pending配置归正式1.3路由定点接线；其他76份初始未提交文件有SHA保护清单。总目标paused，仅执行G4查收；详见[g4_main_acceptance](g4_main_acceptance_2026-10-07.md)。
 
@@ -1138,3 +1140,14 @@ MAIN新exact读取schema3和batch binding/2已实施，24项初始绿12.45秒（
 ### G2-01b最新实际发布与消费验证
 
 四个新增scoped bundle TXT/JSON/PDF/skip消费者反例发现真正遗漏：当前receipt仍global，原bundle生成pin本就只是lineage。已同步NarrativeTransport读取前后使用当前exact source pin，原generation原样；4真实RED→60责任绿，唯一旧current-global期待改为source-scoped且仍检查真实priority变化后1绿。没有改公开DTO或RF/SW代码。11tmp/自有脚本全部恢复absent，63268991B残余精确清理，不删raw。22dcc927已正常推送，精确CI37603212398 attempt1全job/step success75秒（Unit36秒），收据已落盘。goal active，MAIN下一12单意图latest事务。
+
+## G5 新独立包调查（2026-10-07；仅准备卡）
+
+三仓当前基线 CWP5d0ad75、SID0cb3c1f、RFab7a7a44。CWP仍有semantic/architecture/clean_env/gold脚本与旧batch/test_framework，源码引用和责任测试须整族迁移；clean_env.sanitized_environment被现行hermetic测试使用，不能整删后丢失隔离行为。CodeGraph初次宽query返回已被G4删除的旧Gate，不能据该陈旧片段扩大写集；精确symbol查询与已打开文件的literal引用明确当前范围。
+
+SID已发布API发现/读取，但adapter/CLI依赖StockDownloader；访问.mapping会先self.browser初始化，orgid旧requests.post与浏览器fallback不在ProviderAcquisitionBudget中。这是实际依赖/资源边界遗漏，可在provider专属层修复，不改11个owner文件。RF只读installation_diff显示.agents/.claude/.codex各8差异（1scripts/4references/1agents及两root文件），config差异0。G3已完成runtime闭包/临时安装，不能再派同卡；新包仅补可选择文件、只写真正差异、失败事实/幂等恢复和24条定点交接，不在harness阶段写真实安装目录。
+
+只读定位错误：RF仓无AGENTS.md/requirements-test.txt；SID仓无control，已改用实际文件枚举/父级规范，不造缺文件；原仓未执行测试、下载或生产修改。新的_g5根未发现；本次交卡不代用户启动harness、不恢复paused目标。MAIN保留完整G2-12/FF/公共配置/指纹/工程接线和生产实施，三个外线不写这些文件。
+
+
+G5计划恢复修正：初次把PWF_PLAN_ROOT设为docs/plans会让resolver寻找不存在的docs/plans/.planning，因此输出空；随后取消该env pin，以PLAN_ID配显式-PlanRoot docs/plans，确实返回唯一现有总计划目录。外线改用工作树根PWF_PLAN_ROOT与标准.planning/g5-id，避免G4那样产生未跟踪镜像。仓外都是只读，不创建新worktree/安装；施工卡已定义真实输出和单卡完工集中测试，不增加小节点门。

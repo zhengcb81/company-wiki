@@ -1,5 +1,7 @@
 # Progress：激进简化实施
 
+**新增G5独立包（2026-10-07）：**[三卡总包](harness_lanes/g5_parallel_packages_2026-10-07.md)ready，可现在分别交harness；CWP六旧工程/批处理壳退休、SID纯API解耦与身份查询预算、RF定点安装工具/三tmp验收，分别独占`Projects/_g5/cwp|sid|rf`不同项目工作树。当前目录尚未创建，未代用户启动。G3/G4已完成不重派；MAIN保留G2-12/FF/公共CLI/指纹/工程清单、真实安装与生产/总PWF/并线。目标继续paused，本次仅制卡和发布。
+
 **最新G4验收（2026-10-07）：**两包已验收、并入实际执行分支并推远端。CWP `df7d7ba`：冻结Pipeline/Gate0–5整族退休及CN 1.3.0路由配套，211责任用例绿；精确CI37673393822所有步骤绿/74秒。SID `eb8495c`：latest分页矛盾TDD修复，127责任/真实CLI离线联调用例绿，已推`v2-clean-rewrite`；该仓无workflow，不声称远端CI。见[G4正式验收](g4_main_acceptance_2026-10-07.md)。G4不再派发。G2-03完成；完整G2-12 ensure/FF/ET/CWP入库与复用仍未提交，其他G2、R2生产应用/R3/R5未完成。总目标保持paused，本次没有恢复生产或付费批次。
 
 ## G4初查记录（历史；最终验收见页首）
@@ -1401,3 +1403,12 @@ R2系统性节点：有限登记与全库发现分离，三adapter不重复算SH
 9合同API RED、1真实CLI旧binding schema RED（首轮错误run_id夹具已纠正）；新schema3 reader/binding2实施后24初始责任/实际CLI绿12.45秒。扩展原责任168项167pass/1运输golden旧版本fail103.30秒：实读差异仅5版本provenance，所有source/span ID/sha/locator/structured/summary相同；按既有refresh工具同步嵌入span.parser_version和五文件hash，52最终新旧绑定/来源事实/golden项18.81秒绿。新旧绑定均参数化保留原events/预算，不把不可逆旧全局SHA当成可推导的scoped历史。source身份反例首次错写metadata顶层4夹具失败，改acquisition后绿，非产品RED。
 
 真实微软TXT66324B只读复制到owned根，完成正式CLI和真实DB/raw root迁址、零再HTTP后，负例4096B竟小于真实raw，正确返回root_admission_denied而测试期待policy changed；已按实际size+4096构造仍准入的规则变化，并独立增加1B真拒绝，集中双样本E2E在跑。此错误是测试尺寸假定，未放宽正确性或源码。r6_protected_inputs前后核原件/生产DB/config。没有外发、生产写、外仓写或付费预算变化。golden旧文件猜测路径、findings概括标题和文档整行补丁定位错误均无写，已改按实际清单/目标路径。
+
+
+## G5制卡与发布（2026-10-07）
+
+只读三仓/PWF/实际代码：CWP5d0ad75、SID0cb3c1f、RFab7a7a44；当前总目标实读paused。发现并划清三个真实剩余，创建三单卡/G5总包；每卡给冻结commit/独占短目录/明确可写禁写、公共接口、TDD责任/真实CLI离线E2E、finally恢复、统一g5-handoff/1与MAIN最后接线。G3/G4已完成不重派，新的_g5未创建，未启动harness/pytest/download/模型/生产/实际安装。
+
+已核RF三副本各8drift/config0，仅只读hash；新卡不重新复制整套runtime/工程tests，不修改home。SID现浏览器/身份网络budget遗漏从真实源码证实，未在生产试错。CWP清理保留环境隔离和真正quality反例；Graph宽query的过期G4节点不作为现行caller。错误记录见findings；正常提交仅本次卡/导航/计划，不stage G2源码/测试/原临时目录，提交后复核原SHA并推远端。
+
+制卡校验完成：三冻结Git对象可解析，三个目标工作目录仍absent且互不包含/分属不同repo，短测试路径均<=60；统一handoff JSONSchema与三示例有效、四卡链接/代码围栏和git diff --check绿，74个非plan既有dirty文件完整SHA不变。这是文档/范围验证，不冒称三施工包实现已测试。仅正常提交13个卡/schema/清单/导航文件；使用独立短发布树运行既有prepush，不让原仓未完G2实现影响纯制卡发布。harness/production/paid继续未启动。

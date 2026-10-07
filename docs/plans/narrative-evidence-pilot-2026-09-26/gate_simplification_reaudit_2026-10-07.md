@@ -123,6 +123,8 @@ CWP `df7d7ba`已并入master/推远端；211责任用例绿，精确CI3767339382
 
 ### G2-07 / P1：CWP 工程检查与退休清单同步
 
+**最新分工：**[G5-CWP-CHECKS](harness_lanes/g5_cwp_legacy_checks_retirement.md)ready，独占六旧工程/批处理scripts、只涉及本族的writer_policy和精确责任测试；公共CLI/acquisition/code_identity/config/hook/CI禁写，仍MAIN。clean_env的真hermetic隔离helper与gold来源质量反例保留，不以退休旧资格为由删掉现行正确性。G4 gate_system家族已完成，不重做。
+
 **现行小门与可选旧工具混合。** host-assumption regex 曾误拒测试中故意的 `C:/absolute.pdf`；mypy/hook/CI 仍包含旧 canary/维护模块，另有 optional coverage/complexity ratchet 历史测试。
 
 **实施：**保留真正可移植行为的责任测试，将误伤合法反例/注释的字符串扫描收敛为诊断或语法范围检查，不增加 allowlist 签收表；同一退休模块在 package、tests、hook、CI、pre-push 清单一起移除。覆盖率/复杂度数值报告化，当前快 CI 维持单 Python，不恢复全合同/多平台矩阵。Ruff、实际公开 DTO 类型、相关配置体检和密钥泄露检查保留，不重复全仓无关检查。
@@ -132,6 +134,8 @@ CWP `df7d7ba`已并入master/推远端；211责任用例绿，精确CI3767339382
 **具体同步写集：**CWP `pyproject.toml`现console入口、`src/company_wiki/source_catalog/cli.py/code_identity.py`、`.pre-commit-config.yaml`、`.github/workflows/ci.yml`、`.githooks/pre-push`、`tools/pre_push_gate.py`及其实际退休模块清单测试；源职责约束/CLI合同只改被退休的入口，不删除真身份/SHA/Locator行为。CI/commit/push各清单同步移除已退休模块，source源码指纹清单同时更新，避免删源码后整个新batch无法执行。保留当前快CI和便宜静态，N4历史A/B/C已验收，不重新跑。
 
 ### G2-08 / P1：FF v1 兼容与安装入口最终收敛
+
+**最新分工：**[G5-RF-INSTALL](harness_lanes/g5_rf_selective_installation.md)ready；RF现三安装各8runtime差异/config0，补现工具--file/只差异写/plan/partial幂等。外线只改RF工具/tests、只在tmp验收，不重做G3闭包；MAIN合入后定点24文件应用，真实安装仍MAIN。FF v1/统一获取/安装接线不在此卡，MAIN负责。
 
 **v2 正确；v1 残留需 caller 审计。** 旧 `--allow-download` 与 request authorization 兼容仍在，不能算到 v2 单意图上。两份安装技能已推荐 v2，但 legacy 附录和摘要会让较弱模型反复询问授权。
 
@@ -143,9 +147,11 @@ CWP `df7d7ba`已并入master/推远端；211责任用例绿，精确CI3767339382
 
 **三外线交付后MAIN具体补漏：**RF六个工程测试引用repo-only tools，三安装副本本次只按用户具体授权定点同步18文件；不能据此声称安装内工程全包可运行或全MATCH。G2-08先查实际技能caller，再明确工程tools/tests属于仓库验证职责，用户技能所需代码/配置/引用才进入安装表；不盲目复制第二套签收或整套工程目录。RF `uc.quality.strict_targets`的旧workflow字面解析、coverage 84→0仍当弱化的旧ratchet、checkout mtime被误作事实完整性，均已有真实报告，归MAIN P1：先核当前caller/默认CLI，退休无职责的资格判断，保留实际指定SHA/size/配置/工具异常反例，不改owner日志或重冻历史manifest，不反向恢复coverage数字门。
 
-其中RF历史工具与包装代码由[G3-RF-ASSURANCE](harness_lanes/g3_rf_assurance_and_packaging.md)独立施工，ready未启动；只在tmp安装根验证，真实三副本仍MAIN发布后定点处理。FF v1/安装与当前latest获取仍MAIN，不与该卡共享写集。
+RF历史工具与包装已由[G3-RF-ASSURANCE](harness_lanes/g3_rf_assurance_and_packaging.md)完成；真实三副本仍MAIN定点处理，工具选择范围/失败事实补齐归G5。FF v1/安装与当前latest获取仍MAIN，不与该卡共享写集。
 
 ### G2-09 / 已核能力边界：ET、provider 和外发文案
+
+**新实证：**SID已经API发现/读取，却在CWP缺org_id时访问downloader.mapping→browser.initialize，旧orgid HTTP/浏览器fallback未计当前budget。已拆[G5-SID-RUNTIME](harness_lanes/g5_sid_browserless_bounded_provider.md)，只在SID provider/CLI/预算/身份模块施工，legacy owner下载器不改；wire1.0/adapter1.3.0及latest/exact不变，不将no-browser写成另一权限。MeetingConverter/ET未发现新实际问题，不强加卡。
 
 ET `ProviderSettings` 仍称 Reviewed runtime availability，但实际是单运行能力配置；没有发现新的人工 receipt。`download_authorized` 是一次请求网络意图。FMP 402、缺凭证、disabled provider 是现实能力，不能为“简化”冒充可以付费下载。只清理误导文案/重复问答；已有 TXT 在 provider 关闭、无翻译 LLM 凭证时也应正常零 HTTP 复用。MiniMax/MiMo/DeepSeek 必须继续遵守已配置模型与预算，持续外发授权不意味着无限预算。
 
@@ -260,4 +266,4 @@ MAIN 是唯一集成与生产变更负责人。此表是施工顺序，不是新
 
 ## Next Step
 
-**目标active；核心93ac5a5、Store13/b202d07、scoped pin01b/22dcc927均已发布且精确CI全绿。** 三外线已验收并入各主线；RF/SQA已推且精确CI全绿，SQA包含文档构建/部署，SW无remote。MAIN继续[G2-12具体实施](g2_latest_acquisition_implementation_2026-10-07.md)：新13反例绿，旧测试/CLI/FF/跨进程仍待完成，再P1旧家族/质量读取器/安装职责→G2A/B→R2/R3。没有新增小节点签收，不重复已绿长包，不自动启动付费批次，不把本子集冒称全面完成。
+**目标paused；G5三卡可由用户现在启动，MAIN恢复后再继续。核心93ac5a5、Store13/b202d07、scoped pin01b/22dcc927均已发布且精确CI全绿。** 三外线已验收并入各主线；RF/SQA已推且精确CI全绿，SQA包含文档构建/部署，SW无remote。MAIN继续[G2-12具体实施](g2_latest_acquisition_implementation_2026-10-07.md)：新13反例绿，旧测试/CLI/FF/跨进程仍待完成，再P1旧家族/质量读取器/安装职责→G2A/B→R2/R3。没有新增小节点签收，不重复已绿长包，不自动启动付费批次，不把本子集冒称全面完成。

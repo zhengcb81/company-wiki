@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "G5 harness handoff facts",
+  "type": "object",
+  "required": ["schema_version", "package_id", "repo", "worktree", "branch", "base_commit", "implementation_commit", "owned_files", "public_contracts", "tests", "protection", "cleanup", "main_wiring", "remaining", "delivery_status"],
+  "properties": {
+    "schema_version": {"const": "g5-handoff/1"},
+    "package_id": {"enum": ["G5-CWP-CHECKS", "G5-SID-RUNTIME", "G5-RF-INSTALL"]},
+    "repo": {"type": "string", "minLength": 1},
+    "worktree": {"type": "string", "minLength": 1},
+    "branch": {"type": "string", "pattern": "^codex/"},
+    "base_commit": {"$ref": "#/$defs/commit"},
+    "implementation_commit": {"$ref": "#/$defs/commit"},
+    "owned_files": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "public_contracts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "compatibility", "detail"],
+        "properties": {
+          "name": {"type": "string"},
+          "compatibility": {"enum": ["unchanged", "compatible_extension", "retired"]},
+          "detail": {"type": "string"}
+        }
+      }
+    },
+    "tests": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "command", "status", "exit_code", "elapsed_seconds", "replace_seams", "external_network_requests"],
+        "properties": {
+          "name": {"type": "string"},
+          "command": {"type": "string", "minLength": 1},
+          "status": {"enum": ["red", "green", "not_run", "blocked"]},
+          "exit_code": {"type": ["integer", "null"]},
+          "elapsed_seconds": {"type": ["number", "null"], "minimum": 0},
+          "passed": {"type": ["integer", "null"], "minimum": 0},
+          "failed": {"type": ["integer", "null"], "minimum": 0},
+          "skipped": {"type": ["integer", "null"], "minimum": 0},
+          "replace_seams": {"type": "array", "items": {"type": "string"}},
+          "external_network_requests": {"type": ["integer", "null"], "minimum": 0}
+        }
+      }
+    },
+    "protection": {
+      "type": "object",
+      "required": ["owner_files", "production_writes", "raw_deletions", "paid_calls"],
+      "properties": {
+        "owner_files": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["path", "before_sha256", "after_sha256"],
+            "properties": {
+              "path": {"type": "string"},
+              "before_sha256": {"$ref": "#/$defs/hash"},
+              "after_sha256": {"$ref": "#/$defs/hash"}
+            }
+          }
+        },
+        "production_writes": {"type": "integer", "minimum": 0},
+        "raw_deletions": {"type": "integer", "minimum": 0},
+        "paid_calls": {"type": "integer", "minimum": 0}
+      }
+    },
+    "cleanup": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["path", "before", "after", "owned"],
+        "properties": {
+          "path": {"type": "string"},
+          "before": {"enum": ["absent", "present"]},
+          "after": {"enum": ["absent", "restored", "preserved", "remaining"]},
+          "owned": {"type": "boolean"},
+          "detail": {"type": "string"}
+        }
+      }
+    },
+    "main_wiring": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["repo", "path", "action", "reason"],
+        "properties": {
+          "repo": {"type": "string"},
+          "path": {"type": "string"},
+          "action": {"enum": ["no_change", "change", "verify", "apply_after_merge"]},
+          "reason": {"type": "string"},
+          "symbol": {"type": "string"}
+        }
+      }
+    },
+    "remaining": {"type": "array", "items": {"type": "string"}},
+    "delivery_status": {"enum": ["ready_for_main", "partial", "blocked"]}
+  },
+  "$defs": {
+    "commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  }
+}
