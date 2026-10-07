@@ -13,7 +13,7 @@ import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from g3_source_facts.budget import BudgetExceeded, ReadBudget
+from g3_source_facts.budget import ReadBudget
 
 
 def _git_common_dir() -> Path:

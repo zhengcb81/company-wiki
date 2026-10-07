@@ -10,12 +10,10 @@ as internal savings.
 from __future__ import annotations
 
 import hashlib
-import json
 import sqlite3
 from pathlib import Path
 import sys
 
-import pytest
 
 from g3_source_facts.raw_space import internal_groups
 

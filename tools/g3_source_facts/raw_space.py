@@ -9,7 +9,7 @@ the report actually proves them, and ``deleted_bytes`` is always 0.
 
 from __future__ import annotations
 
-from typing import Any, Iterable, Sequence
+from typing import Any, Sequence
 
 INTERNAL_ROOT_ID = "company_raw"
 SCOPE = "company_raw"
