@@ -16,6 +16,7 @@ from typing import TYPE_CHECKING, Any, Mapping
 from company_wiki.source_contract import source_id_for_sha256
 
 from .acquisition import DownloadCandidate, DownloadReceipt
+from .download_budget import AcquisitionBudget
 from .lock import CatalogOperationLock
 from .resolver import ResolutionResult, ResolutionStatus, SourceRequest, SourceResolver
 from .registration_scope import SourceRegistrationScope, register_catalog_sources
@@ -147,6 +148,7 @@ class CanonicalSourceWriter:
         receipt: DownloadReceipt,
         *,
         provenance_extensions: Mapping[str, Any] | None = None,
+        budget: AcquisitionBudget | None = None,
     ) -> CanonicalImportResult:
         if not isinstance(request, SourceRequest):
             raise TypeError("request must be SourceRequest")
@@ -173,7 +175,10 @@ class CanonicalSourceWriter:
         with CatalogOperationLock(
             self.catalog.config.catalog_dir,
             operation="canonical_import",
+            budget=budget,
         ):
+            if budget is not None:
+                budget.ensure_open()
             self._reactivate_if_retired(receipt.content_sha256)
             existing = self._existing_original(receipt.content_sha256)
             if existing is not None:

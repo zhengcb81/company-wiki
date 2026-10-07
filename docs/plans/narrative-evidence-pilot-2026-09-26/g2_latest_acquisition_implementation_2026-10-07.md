@@ -1,5 +1,9 @@
 # G2-12：一次请求、一次发现、一个获取事务
 
+**当前验收（2026-10-07）：**实现与本地集中节点已通过，正在正常提交；不代表全部G2完成。CWP109/FF41/变动85/最后39项各自绿，计数有重叠；真实离线FF v1/v2、ET supervisor/worker、CWP canonical writer及binary reader三案例绿。CN一次metadata/一次fetch/一次入库，第二次metadata复核、fetch0；US真实HTML复用+一次ET HTTP fixture，电话会原始JSON入库、重复provider0。四份实际返回字节SHA核对，电话会preview用途仍明确publication未知，US最新因Dayu无真实读取预算返回诚实GAP/零Dayu执行。[本地验收](harness_lanes/results/g2_single_intent_main_acceptance_2026-10-07.json)、[实际CLI](harness_lanes/results/g2_chain_e2e_accepted_2026-10-07.json)、[临时清理](harness_lanes/results/g2_temp_cleanup_2026-10-07.json)。原件/生产不变，费用/翻译0。
+
+锁键不含TTL/hash/请求caps；同target互斥覆盖暂存到真实最终解析，不同target能并行。canonical短锁等待使用同一实际deadline，staged SHA只核一次；可恢复kill和已入库复用责任保持。CloseGap是公共ensure薄包装；FF旧scope随第一次ensure传递，临时scope文件finally删除，无二次发现/下载。内部gap诊断按实际交易终态投影，不再令已完成v2请求伪装GAP。Python3.10无add_note时保留原清理异常与失败journal，责任测试绿。以下旧“paused/尚未联调/自然年猜测”为历史施工记录。
+
 **G4接收后的继续点：**CWP已发布df7d7ba，SID正式执行分支已发布eb8495c/adapter1.3.0；CN路由root回到v2-clean-rewrite、version1.3.0、bounded=true三个值已由MAIN定点接管，其他配置值保持。最新年/半年/季报不再要求猜fiscal_year，SID五页有限窗口只在完整时返回真实候选；discovery_incomplete/bounded_discovery_empty应保留具名GAP，不能复用旧本地文件冒充latest。127 provider/CWP消费责任已绿；本单CWP获取源码仍未提交，下一节点是实际统一ensure/FF/ET/CWP下载→入库→只下载一次/幂等复用/清理。不要重复已绿G4包，不用未提交owner代码给联调伪造成功。目标paused；恢复后先做本线。旧预算工作树/1.2和强制latest年提示是历史记录，不能作为现行接线。
 
 状态：in_progress。MAIN独占CWP、FF接线；SW/StockQA/RF三个外包写集不参与。本单细化已有G2-12，沿用G2A/G2B两个大节点，不新建每步签收。G2-01b已发布22dcc927，精确CI37603212398全部绿。

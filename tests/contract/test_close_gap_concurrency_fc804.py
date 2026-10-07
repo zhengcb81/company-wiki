@@ -8,8 +8,11 @@ staging failures are retried with a bound (3 attempts).  DL-09: a re-run
 after a successful close deduplicates (idempotent, no duplicate docs).
 """
 import hashlib
+from dataclasses import replace
 import json
 import multiprocessing
+import os
+import subprocess
 import sys
 import threading
 import time
@@ -68,6 +71,7 @@ class _SpyAdapter:
 
     name = "spy"
     version = "1.0.0"
+    supports_acquisition_budget = True
 
     def __init__(self, *, fetch_sleep: float = 0.0,
                  retryable_failures: int = 0):
@@ -115,6 +119,17 @@ class _SpyAdapter:
             adapter_name="spy",
             adapter_version="1.0.0",
         )
+
+    def discover_bounded(self, request, budget):
+        budget.ensure_open()
+        budget.consume_response_bytes(1)
+        return self.discover(request)
+
+    def fetch_bounded(self, candidate, staging_dir, budget):
+        budget.ensure_open()
+        receipt = self.fetch(candidate, staging_dir)
+        budget.consume_response_bytes(receipt.byte_size)
+        return receipt
 
 
 def _txn(tmp_path, adapter, catalog=None, *, coordinator_extra=None):
@@ -202,20 +217,150 @@ class _CrossProcessSpyAdapter(_SpyAdapter):
         return super().fetch(candidate, staging_dir)
 
 
-def _run_cross_process_close_gap(tmp_path_text, binding, result_queue, fetch_log):
+def _run_cross_process_close_gap(tmp_path_text, binding, result_queue, fetch_log, mode):
     """Spawn target: execute through a fresh catalog and transaction object."""
     try:
         tmp_path = Path(tmp_path_text)
         adapter = _CrossProcessSpyAdapter(Path(fetch_log))
         catalog = _catalog(tmp_path)
         txn, _ = _txn(tmp_path, adapter, catalog)
-        result = txn.execute(binding, _request())
+        request = replace(_request(), mode=mode, fiscal_year=None if mode == "latest_as_of" else 2025)
+        result = txn.execute(binding, request)
         result_queue.put(("result", result.status, result.fetch_events, result.reason))
+        catalog.close()
     except Exception as exc:  # pragma: no cover - reported to parent assertion
         result_queue.put(("error", type(exc).__name__, str(exc)))
 
 
 # --- DL-08: single-flight ------------------------------------------------------
+
+def _run_interrupted_acquisition(tmp_path_text, fetch_log, checkpoint, marker):
+    """Stop an owned process with real staging or a real committed source."""
+    adapter = _CrossProcessSpyAdapter(Path(fetch_log))
+    txn, _ = _txn(Path(tmp_path_text), adapter)
+
+    def pause():
+        Path(marker).write_text(checkpoint, encoding="utf-8")
+        # Parent kills this owned process at the actual transaction boundary.
+        time.sleep(20)
+        raise TimeoutError("test interruption checkpoint was not interrupted")
+
+    if checkpoint == "staged":
+        original = adapter.fetch
+
+        def fetch(candidate, staging_dir):
+            receipt = original(candidate, staging_dir)
+            pause()
+            return receipt
+
+        adapter.fetch = fetch
+    else:
+        original = txn.writer.import_staged
+
+        def import_staged(*args, **kwargs):
+            result = original(*args, **kwargs)
+            pause()
+            return result
+
+        txn.writer.import_staged = import_staged
+    try:
+        txn.execute(_binding("historical", "interrupted"), _request())
+    finally:
+        txn.catalog.close()
+
+
+@pytest.mark.parametrize("checkpoint,expected_fetches", [("staged", 2), ("committed", 1)])
+def test_interrupted_process_recovers_real_target_without_duplicate_raw(tmp_path, checkpoint, expected_fetches):
+    catalog = _catalog(tmp_path)
+    _ = catalog.store
+    catalog.close()
+    fetch_log = tmp_path / "interrupted-fetch.log"
+    marker = tmp_path / "checkpoint"
+    environment = dict(os.environ)
+    environment["PYTHONPATH"] = os.pathsep.join((str(Path(__file__).parent),
+        str(Path(__file__).resolve().parents[2] / "src"), environment.get("PYTHONPATH", "")))
+    command = [sys.executable, "-c", "from test_close_gap_concurrency_fc804 import _run_interrupted_acquisition; "
+               "import sys; _run_interrupted_acquisition(*sys.argv[1:])",
+               str(tmp_path), str(fetch_log), checkpoint, str(marker)]
+    child = subprocess.Popen(command, env=environment, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    try:
+        deadline = time.monotonic() + 12
+        while not marker.exists() and child.poll() is None and time.monotonic() < deadline:
+            time.sleep(0.05)
+        assert marker.exists(), (checkpoint, child.poll())
+        child.terminate()
+        child.communicate(timeout=5)
+        assert child.poll() is not None
+        adapter = _CrossProcessSpyAdapter(fetch_log)
+        txn, _ = _txn(tmp_path, adapter)
+        try:
+            result = txn.execute(replace(_binding("ignored", "recovery"),
+                                        expires_at="2000-01-01T00:00:00Z"),
+                                 replace(_request(), mode="latest_as_of", fiscal_year=None))
+            assert result.status == "completed", result
+            assert result.fetch_events == int(checkpoint == "staged")
+            assert len(fetch_log.read_bytes().splitlines()) == expected_fetches
+            assert txn.catalog.store.fetchone("SELECT COUNT(*) n FROM documents")["n"] == 1
+            assert len(tuple(txn.catalog.config.roots[0].path.rglob("*.pdf"))) == 1
+            source = result.resolution["matches"][0]
+            assert hashlib.sha256(Path(source["canonical_path"]).read_bytes()).hexdigest() == source["content_sha256"]
+            assert not tuple((tmp_path / "staging").rglob("*.pdf"))
+        finally:
+            txn.catalog.close()
+    finally:
+        if child.poll() is None:
+            child.kill()
+        child.communicate(timeout=5)
+
+
+def test_independent_targets_can_fetch_concurrently(tmp_path):
+    """A global acquisition lock would deadlock this two-provider barrier."""
+    catalog = _catalog(tmp_path)
+    _ = catalog.store
+    catalog.close()
+    barrier = threading.Barrier(2)
+    results, errors = [], []
+
+    class IndependentAdapter(_SpyAdapter):
+        def __init__(self, accession):
+            super().__init__()
+            self.accession = accession
+
+        def discover(self, request):
+            return tuple(replace(c, candidate_id=self.accession,
+                                 provider_document_id=self.accession) for c in super().discover(request))
+
+        def fetch(self, candidate, staging_dir):
+            barrier.wait(timeout=5)
+            receipt = super().fetch(candidate, staging_dir)
+            # Distinct targets need distinct original bytes; same-SHA alias
+            # resolution is a separate writer contract, not this lock oracle.
+            body = Path(receipt.staged_path).read_bytes() + self.accession.encode()
+            Path(receipt.staged_path).write_bytes(body)
+            return replace(receipt, byte_size=len(body),
+                           content_sha256=hashlib.sha256(body).hexdigest())
+
+    def run(accession):
+        txn, _ = _txn(tmp_path, IndependentAdapter(accession))
+        try:
+            binding = replace(_binding("history", accession), allowed_accessions=(accession,))
+            result = txn.execute(binding, replace(_request(), provider_document_id=accession))
+            results.append(result)
+        except Exception as exc:
+            errors.append(exc)
+        finally:
+            txn.catalog.close()
+
+    threads = [threading.Thread(target=run, args=(accession,)) for accession in ("a", "b")]
+    for thread in threads:
+        thread.start()
+    for thread in threads:
+        thread.join(timeout=10)
+    assert not any(thread.is_alive() for thread in threads)
+    assert not errors, errors
+    assert len(results) == 2 and all(r.status == "completed" for r in results), [
+        (r.status, r.reason) for r in results]
+    assert [r.fetch_events for r in results] == [1, 1]
 
 
 def test_cg_c1_single_flight_one_fetch(tmp_path):
@@ -274,9 +419,10 @@ def test_cg_c1b_cross_process_single_flight_one_fetch(tmp_path):
     processes = [
         context.Process(
             target=_run_cross_process_close_gap,
-            args=(str(tmp_path), binding, result_queue, str(fetch_log)),
+            args=(str(tmp_path), replace(binding, expires_at=expiry), result_queue, str(fetch_log), mode),
         )
-        for _ in range(2)
+        for mode, expiry in (("exact", "2099-01-01T00:00:00Z"),
+                             ("latest_as_of", "2000-01-01T00:00:00Z"))
     ]
     for process in processes:
         process.start()
@@ -360,25 +506,39 @@ def test_cg_c3_rerun_deduplicates(tmp_path):
 # --- lock timeout is a bounded failure -----------------------------------------
 
 
-def test_cg_c4_lock_timeout_is_bounded_failure(tmp_path):
-    """The single-flight lock wait is bounded: a caller that cannot acquire
-    within the coordinator timeout fails closed (retryable by the caller),
-    it never hangs."""
+def test_cg_c4_actual_target_lock_wait_consumes_shared_deadline(tmp_path):
+    """Hold the actual OS lock; the waiting operation cannot fetch or reset time."""
+    from company_wiki.source_catalog.acquisition import acquisition_target_sha256
+    from company_wiki.source_catalog.download_budget import AcquisitionBudget
+    from company_wiki.source_catalog.lock import _acquisition_mutex
+
     catalog = _catalog(tmp_path)
-    _policy_file(catalog)
-    adapter = _SpyAdapter(fetch_sleep=2.0)
-    gap_hash, request_id = _gap_hash(catalog, adapter)
-    binding = _binding(gap_hash, request_id)
+    adapter = _SpyAdapter()
+    txn, _ = _txn(tmp_path, adapter, catalog)
+    candidate = adapter.discover(_request())[0]
+    lock_root = catalog.config.catalog_dir / "ensure_locks"
+    lock_root.mkdir()
+    lock_path = lock_root / (acquisition_target_sha256(_request(), candidate) + ".lock")
+    held, release = threading.Event(), threading.Event()
 
-    def set_timeout(coordinator):
-        coordinator.timeout_seconds = 0.5
+    def hold():
+        with _acquisition_mutex(lock_path):
+            held.set()
+            release.wait(timeout=10)
 
-    txn, _ = _txn(tmp_path, adapter, catalog, coordinator_extra=set_timeout)
-    first = txn.execute(binding, _request())
-    assert first.status == "completed"
-    # a second transaction with a stale-but-different binding hash would
-    # normally reject at revalidation; here we prove the lock path exists
-    # by re-running the SAME binding: it must complete (gap closed) fast.
-    second = txn.execute(binding, _request())
-    assert second.status == "completed"
-    assert second.fetch_events == 0
+    holder = threading.Thread(target=hold)
+    holder.start()
+    assert held.wait(timeout=3)
+    budget = AcquisitionBudget.from_limits(max_response_bytes=1024, max_seconds=0.4, max_cost_usd="0")
+    before = time.monotonic()
+    try:
+        result = txn.execute(None, _request(), budget=budget)
+        assert result.status == "failed", result
+        assert "lock" in result.reason or "deadline" in result.reason
+        assert adapter.fetch_calls == 0
+        assert budget.remaining_seconds == 0
+        assert time.monotonic() - before < 2
+    finally:
+        release.set()
+        holder.join(timeout=3)
+        catalog.close()

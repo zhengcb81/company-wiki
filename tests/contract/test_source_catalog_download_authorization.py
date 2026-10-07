@@ -16,7 +16,6 @@ from __future__ import annotations
 import sys
 from pathlib import Path
 
-import pytest
 
 
 WIKI_ROOT = Path(__file__).resolve().parents[2]
@@ -154,6 +153,21 @@ def test_validate_rejects_over_byte_cap(tmp_path):
     assert "byte" in error
 
 
+class _BoundedFixture:
+    supports_acquisition_budget = True
+
+    def discover_bounded(self, request, budget):
+        budget.ensure_open()
+        budget.consume_response_bytes(1)
+        return self.discover(request)
+
+    def fetch_bounded(self, candidate, staging_dir, budget):
+        budget.ensure_open()
+        receipt = self.fetch(candidate, staging_dir)
+        budget.consume_response_bytes(receipt.byte_size)
+        return receipt
+
+
 def test_coordinator_authorized_download_proceeds(tmp_path):
     """An exact+allow_download request with a valid authorization for the
     discovered accession proceeds to staging (fetch=1)."""
@@ -182,7 +196,7 @@ def test_coordinator_authorized_download_proceeds(tmp_path):
     )
     catalog.store.status()
 
-    class FakeAdapter:
+    class FakeAdapter(_BoundedFixture):
         name = "fake"
         version = "1.0.0"
 
@@ -244,7 +258,7 @@ def test_coordinator_authorized_download_proceeds(tmp_path):
     assert result.status is AcquisitionStatus.STAGED, result
 
 
-def test_coordinator_rejects_unauthorized_accession(tmp_path):
+def test_coordinator_excludes_accessions_outside_legacy_request_scope(tmp_path):
     """An exact+allow_download request whose discovered accession is NOT in
     the receipt must fail closed (no fetch, no staging)."""
     from company_wiki.source_catalog import (
@@ -271,7 +285,7 @@ def test_coordinator_rejects_unauthorized_accession(tmp_path):
     )
     catalog.store.status()
 
-    class FakeAdapter:
+    class FakeAdapter(_BoundedFixture):
         name = "fake"
         version = "1.0.0"
 
@@ -308,11 +322,9 @@ def test_coordinator_rejects_unauthorized_accession(tmp_path):
         document_kind="annual_report", as_of_date="2026-07-31",
         allow_download=True,
     )
-    from company_wiki.source_catalog.acquisition import AcquisitionError
-
-    with pytest.raises(AcquisitionError) as exc:
-        coordinator.resolve_or_stage(request, authorization=auth)
-    assert "not authorized" in str(exc.value)
+    result = coordinator.resolve_or_stage(request, authorization=auth)
+    assert result.status.value == "missing"
+    assert result.reason == "adapter_discovery_returned_no_candidate"
     assert not (tmp_path / "staging").exists()
 
 

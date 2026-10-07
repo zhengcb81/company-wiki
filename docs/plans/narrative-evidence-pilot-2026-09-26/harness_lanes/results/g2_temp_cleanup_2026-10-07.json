@@ -1,0 +1,134 @@
+{
+  "preserved_historical_dirs": [
+    "g2-latest-red",
+    "g2cliR",
+    "g2g2",
+    "g2g3",
+    "g2r2"
+  ],
+  "failed_receipts_compacted": 15,
+  "owned_roots": [
+    {
+      "name": "g2t",
+      "restored_absent": true,
+      "bytes": 19656263.0
+    },
+    {
+      "name": "g2r",
+      "restored_absent": true,
+      "bytes": 1109768.0
+    },
+    {
+      "name": "g2c",
+      "restored_absent": true,
+      "bytes": 1636946.0
+    },
+    {
+      "name": "g2s",
+      "restored_absent": true,
+      "bytes": 1228629.0
+    },
+    {
+      "name": "g2u",
+      "restored_absent": true,
+      "bytes": 8866306.0
+    },
+    {
+      "name": "g2f",
+      "restored_absent": true,
+      "bytes": 242.0
+    },
+    {
+      "name": "g2v",
+      "restored_absent": true,
+      "bytes": 242.0
+    },
+    {
+      "name": "g2x",
+      "restored_absent": true,
+      "bytes": 409233.0
+    },
+    {
+      "name": "g2y",
+      "restored_absent": true,
+      "bytes": 1639744.0
+    },
+    {
+      "name": "g2z",
+      "restored_absent": true,
+      "bytes": 1639744.0
+    },
+    {
+      "name": "g2k",
+      "restored_absent": true,
+      "bytes": 3344728.0
+    },
+    {
+      "name": "g2n",
+      "restored_absent": true,
+      "bytes": 408809.0
+    },
+    {
+      "name": "g2q",
+      "restored_absent": true,
+      "bytes": 22825469.0
+    },
+    {
+      "name": "g2a",
+      "restored_absent": true,
+      "bytes": 523358.0
+    },
+    {
+      "name": "g2b",
+      "restored_absent": true,
+      "bytes": 1224044.0
+    },
+    {
+      "name": "g2d",
+      "restored_absent": true,
+      "bytes": 23.0
+    },
+    {
+      "name": "g2p",
+      "restored_absent": true,
+      "bytes": 23643365.0
+    },
+    {
+      "name": "g2j",
+      "restored_absent": true,
+      "bytes": 415198.0
+    },
+    {
+      "name": "g2h",
+      "restored_absent": true,
+      "bytes": 2459616.0
+    },
+    {
+      "name": "g2i",
+      "restored_absent": true,
+      "bytes": 10388764.0
+    },
+    {
+      "name": "g2o",
+      "restored_absent": true,
+      "bytes": 10387420.0
+    },
+    {
+      "name": "g2e",
+      "restored_absent": true,
+      "bytes": 21033691.0
+    },
+    {
+      "name": "g2unit",
+      "restored_absent": true,
+      "bytes": 83095955.0
+    },
+    {
+      "name": "g2fg",
+      "restored_absent": true,
+      "bytes": 14130814.0
+    }
+  ],
+  "schema_version": "g2-temp-cleanup/1",
+  "original_files_deleted": 0
+}

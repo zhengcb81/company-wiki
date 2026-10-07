@@ -233,6 +233,30 @@ def test_ensure_v2_preserves_metadata_gap_without_paths_or_false_not_found(tmp_p
     assert str(tmp_path) not in str(result)
 
 
+@pytest.mark.parametrize("status", ["imported", "deduplicated", "reused"])
+def test_completed_ensure_keeps_discovery_diagnostic_out_of_actionable_gap(tmp_path, status):
+    payload = _formal_completed_payload(tmp_path)
+    payload["status"] = status
+    gap = _formal_gap_payload(tmp_path)["source_ensure"]["acquisition"]["gap_plan"]
+    gap["request_id"] = "urn:req:1"
+    payload["acquisition"]["gap_plan"] = gap
+
+    result = project_operation_result(payload, operation="ensure", reader=_Reader())
+
+    assert result["status"] == "completed"
+    assert result["source_ref"]["source_id"] == SOURCE
+    assert result["gap_plan"] is None
+    assert not _contains_physical_field(result)
+
+
+def test_honest_latest_gap_is_not_replaced_by_local_match(tmp_path):
+    payload = _formal_gap_payload(tmp_path)
+    payload["source_ensure"]["resolution"]["matches"] = [_resolved_handle(tmp_path).to_dict()]
+    result = project_operation_result(payload, operation="ensure", reader=_Reader())
+    assert result["status"] == "gap"
+    assert result["source_ref"] is None
+
+
 def test_ensure_gap_rejects_nonexistent_acquisition_result_alias() -> None:
     payload = {
         "source_ensure": {

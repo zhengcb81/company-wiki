@@ -1,5 +1,33 @@
 # Progress：激进简化实施
 
+## G2单请求实际链通过，开始G5三包MAIN验收
+
+用户报告三包完成；三个clean工作树/ready_for_main已确认，MAIN实读代码/反例/接线表并建立[g5_main_acceptance](g5_main_acceptance_2026-10-07.md)。四仓fetch正常，CWP/RF/SID当前执行分支与remote均0 ahead/behind，未覆盖owner文件。
+
+电话会失败根因已分清：测试fixture多加quarter（消费者要求标准五字段）；下载完成首次status应为downloaded且publication=null/cutoff=false，不能期待lookup的unknown_publication；额外byte read错误使用filing_reuse（要求真实公开日），改为FF实际用的preview并保留未知公开日，不改产品验真。最终真实FF→ET→CWP三案例全部通过，四次正式binary reader返回字节SHA一致、第二次下载/provider调用0、US最新honest GAP。生产/原件保护及test根恢复通过，付费/翻译0。
+
+39项最后责任绿7.135秒；CWP109/FF41/变动85先前GREEN继续有效，不相加。Python>=3.10却直接add_note的异常遮蔽修为可选diagnostic，现清理责任含无该接口场景；CloseGap改调用公共ensure。FF CI仅加入四个便宜single-intent责任例，不加入真实长链。15次失败联调小事实/SHA压入单验收记录，自身pytest复制/SQLite/全文tmp精确清理见[g2_temp_cleanup](harness_lanes/results/g2_temp_cleanup_2026-10-07.json)；保留五个此前归属待核目录。没有重新做完整备份恢复。
+
+本地G2源码尚未发布，G5待MAIN合入后的集中节点；R2/R3/R5仍待做。错误：首次猜ff_transcript_companion.py不存在，立即用实际文件清单定位transcript_companion.py；一次diff check末尾空行已定点规范化。没有据夹具失败弱化公开日期、身份、SHA或资源合同。
+
+## 最新整体进度复核（2026-10-07；覆盖下方旧现场状态）
+
+用户要求整体进度图。本轮只读核Git、JUnit与实际交接后更新状态，没有实施代码、生产操作、新测试或付费调用。目标active；G3/G4已并线发布，当前G2单请求源码仍未提交。现存JUnit证明CWP109项、FF41项和变动责任85项分别绿，不能相加冒充互不重叠的测试总量。实际链最新diagnosis收据status=failed：CN v1/v2完成下载/复用，电话会导入拒绝FMP原始字段集合；原件/生产保护通过、测试根恢复absent。此前全Unit1916项中1915pass/1个退休目录pyc残留失败，已精确清掉229188B缓存并定点复测通过，不声称该次全Unit报告本身全绿。
+
+G5最新三工作树均clean、handoff均ready_for_main：CWP实现b3e7f74/tip9aa2dbb；SID实现7a4bf0d/tip47e1059；RF实现a2116ca6/tip0d8b5ded。外线报告各自责任测试绿，只证明交付材料存在与报告结论，尚未MAIN正式验收/并线。RF三真实安装仍待MAIN定点同步。StockWiki04dfc51 clean、ET2b9fb84保留两owner未跟踪材料、RFab7a7a44保留三owner日志；Dayu/IQS无写。R2/R3/R5和正式生产final仍未完成；不输出虚构百分比或把试点代替生产。一次交接JSON完整展开输出过大，改按明确字段提取，本次没有据截断内容宣称审查完整交付。
+
+## 最新现场进度核对（2026-10-07）
+
+用户要求整体进度图，本轮只读复核目标、Git、当前PWF和本地JUnit。CWP G2-12责任109/109绿（28.831秒），FF责任41/41绿（61.698秒）；本轮源代码仍未提交，完整实际ET CLI链工具尚未执行，不冒称已发布或全部G2完成。此前抽象层/并发恢复/清理验收有效，R2生产metadata、R3正式生产final与消费者、R5收口仍待办；新生产final记录仍0。
+
+新发现G5实际工作树均已存在：CWP codex/g5-cwp-checks@9aa2dbb clean，有实现b3e7f74及handoff；SID codex/g5-sid-runtime@7a4bf0d有handoff和一个未跟踪main_wiring.md；两包仅确认交接材料存在，尚未MAIN验收/并线。RF codex/g5-rf-install有同步工具/测试未提交，当前progress仍模板，无完成交接。StockWiki master已到04dfc51/clean，新增SW-READY-01属于其独立quick-scan项目，不由本线改动或冒充本线交付。RF三owner日志、ET两owner未跟踪材料保持。历史G5 ready/paused由本条和总计划当前入口覆盖。
+
+未跑新长测试、网络/模型/生产操作，未改外仓。一次递归列举RF历史planning输出过大被截断，随即改为仅读取三个明确G5计划路径，不将历史材料当本轮交接。
+
+## 2026-10-07 总目标恢复：MAIN获取链收尾
+
+目标服务实读active；上一状态说明回合仅盘点，无实现进度，本次重新核当前dirty与实施单后继续G2-12。保留现有9个已改文件、新单意图测试及五个历史临时目录；不reset、不取其他owner改动。当前选中总PWF正确，下一次实际动作是集中责任测试与公开CLI/FF链调查。G3/G4已发布证据沿用，G5仍ready；不重复长包，不启动付费模型/生产批次。首次更新补丁误用不存在的progress英文标题，校验拒绝且无文件写入，改用实际标题后重试。
+
 **新增G5独立包（2026-10-07）：**[三卡总包](harness_lanes/g5_parallel_packages_2026-10-07.md)ready，可现在分别交harness；CWP六旧工程/批处理壳退休、SID纯API解耦与身份查询预算、RF定点安装工具/三tmp验收，分别独占`Projects/_g5/cwp|sid|rf`不同项目工作树。当前目录尚未创建，未代用户启动。G3/G4已完成不重派；MAIN保留G2-12/FF/公共CLI/指纹/工程清单、真实安装与生产/总PWF/并线。目标继续paused，本次仅制卡和发布。
 
 **最新G4验收（2026-10-07）：**两包已验收、并入实际执行分支并推远端。CWP `df7d7ba`：冻结Pipeline/Gate0–5整族退休及CN 1.3.0路由配套，211责任用例绿；精确CI37673393822所有步骤绿/74秒。SID `eb8495c`：latest分页矛盾TDD修复，127责任/真实CLI离线联调用例绿，已推`v2-clean-rewrite`；该仓无workflow，不声称远端CI。见[G4正式验收](g4_main_acceptance_2026-10-07.md)。G4不再派发。G2-03完成；完整G2-12 ensure/FF/ET/CWP入库与复用仍未提交，其他G2、R2生产应用/R3/R5未完成。总目标保持paused，本次没有恢复生产或付费批次。

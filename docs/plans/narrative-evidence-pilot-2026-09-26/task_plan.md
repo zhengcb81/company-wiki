@@ -1,5 +1,7 @@
 # 公司来源平台：当前总计划
 
+**当前进度（2026-10-07最新验收）：**目标active。G2-12本地109/41/85/最后39责任各自绿，实际FF→ET→CWP三案例及四次binary source reader验证已passed，原件/生产不变、tmp恢复absent；夹具字段/状态/用途错误已纠正，产品公开日期和SHA规则未放松。G2获取代码正在正常提交，尚未推送。G5三包全部ready_for_main，用户已要求查收；MAIN已核代码/反例/接线，开始合入后集中验收，尚不称完成。G3/G4已发布；G2剩余接线、R2生产metadata、R3正式生产final/消费、R5仍待做。下方旧“联调failed/未执行/施工中/未创建/paused”是历史时点。
+
 **新增G5独立包（2026-10-07）：**[三卡总包](harness_lanes/g5_parallel_packages_2026-10-07.md)ready，可现在分别交harness；CWP六旧工程/批处理壳退休、SID纯API解耦与身份查询预算、RF定点安装工具/三tmp验收，分别独占`Projects/_g5/cwp|sid|rf`不同项目工作树。当前目录尚未创建，未代用户启动。G3/G4已完成不重派；MAIN保留G2-12/FF/公共CLI/指纹/工程清单、真实安装与生产/总PWF/并线。目标继续paused，本次仅制卡和发布。
 
 **最新G4验收（2026-10-07）：**两包已验收、并入实际执行分支并推远端。CWP `df7d7ba`：冻结Pipeline/Gate0–5整族退休及CN 1.3.0路由配套，211责任用例绿；精确CI37673393822所有步骤绿/74秒。SID `eb8495c`：latest分页矛盾TDD修复，127责任/真实CLI离线联调用例绿，已推`v2-clean-rewrite`；该仓无workflow，不声称远端CI。见[G4正式验收](g4_main_acceptance_2026-10-07.md)。G4不再派发。G2-03完成；完整G2-12 ensure/FF/ET/CWP入库与复用仍未提交，其他G2、R2生产应用/R3/R5未完成。总目标保持paused，本次没有恢复生产或付费批次。
@@ -129,18 +131,16 @@ TDD 框住具体公开行为。只在 N4 A/B/C、存储迁移等大节点集中�
 
 | 阶段 | 状态 | 下一责任 |
 |---|---|---|
-| G2门禁全面补漏/P0 | in_progress；目标服务paused | 核心93ac5a5、13/b202d07、01b/22dcc927已发布/精确CI绿；SW0b48919本地主线，RF1a2f9428及SQA0f8fbfa均并主线/已推/精确CI绿（含SQA文档构建与部署）；MAIN12新13反例绿，但旧测试/CLI/FF/并发联调未完成；P1家族/质量读取器/包装待办，仍只两大节点 |
+| G2门禁全面补漏/P0 | in_progress；目标服务active | 已发布核心/13/01b及G2/G3/G4成果保持；MAIN12集中责任与实际三案例CLI链通过，获取源码正在提交；G5三包开始MAIN合入后集中验收及定点安装，尚未验收完成/发布 |
 | R0完整对账 | complete | 已确认真实生产metadata/分类/ET登记缺口；已完成核心不重做 |
 | R1融资文档正式分类 | complete | 66ce0467已发布，真实两PDF CLI与分类责任包绿，精确CI37578307854绿 |
 | R2真实生产来源/预算准备 | in_progress；生产步骤顺延G2后 | 全库发现/有限登记/AUTO范围代码2cad90d已推且精确CI绿；G2先清旧控制面，再核公开日/retired/ET，不猜metadata |
 | R3正式生产与跨仓消费 | pending | 有价值final+零模型skip、真实ref/search/exact/消费者/同run恢复/空间 |
-| R4原件去重决策 | pending | 只核CWP内部真实收益，原件不丢、外部根不动 |
+| R4原件去重决策 | complete（G3实际收益调查） | 当前注册重复收益不足，决定不做对象化迁移；不冒称已释放原件空间 |
 | R5PWF与发布收口 | pending | 历史Git、简化当前入口、正常并线/push/精确CI |
 
 ## Next Step
 
-当前本次交付是[G4独立包](harness_lanes/g4_parallel_packages_2026-10-07.md)，并修正G3已建立工作树事实。总目标服务实读paused，以下MAIN实施动作是恢复后的待办，不表示本次已执行。G4两条线可由用户现在启动，不等待MAIN；MAIN保留公共接口接线、工程清单、生产和合入职责。
+MAIN正常提交已验证[G2-12](g2_latest_acquisition_implementation_2026-10-07.md)，按[G5 MAIN验收](g5_main_acceptance_2026-10-07.md)合入三包并集中验收、实际定点安装及FF兼容pin接线，随后正常推送/精确CI；不恢复退休签收、不重复付费或已绿长包。
 
-MAIN继续[G2-12实施单](g2_latest_acquisition_implementation_2026-10-07.md)：统一服务、目标锁、预算异常传播、失败清理与共享预算重试的13项新反例已绿1.68秒；尚未发布，先完成旧责任测试合同同步、latest期间语义、可选binding CLI、FF接线和跨进程/真实离线E2E，再集中发布。不把13项试点当whole G2B。旧三外线已验收并线，精确主线CI见[收据](harness_lanes/results/g2_parallel_exact_ci_2026-10-07.json)，不重派。
-
-用户现请求新独立包：[G3总包](harness_lanes/g3_parallel_packages_2026-10-07.md)及三单卡ready，未启动/未创建工作树；RF历史质量/包装、CWP维护后端、来源事实/内部空间只读核实各独占根/写集，均可同时开工。MAIN独占公共CLI/FF/指纹/工程清单/生产/技能安装与合入。G3代码接入既有G2A/B，调查供应R2/R4；不增加小节点门。然后G2A/B→R2/R3/R4/R5。01b旧binding1保留原账，不推导不可逆历史pin、不付费重跑，既有验收继续有效。
+G3/G4已验收并线，不重派。G5三包已全部交付，下一并线节点由MAIN验收/接线；其工作树/写集与MAIN获取服务无重叠。G2收口后按R2生产准备→R3正式运行→R5发布收口实施；R4决策已完成。保留原件、Dayu/IQS零写、现有模型配置及累计额度。

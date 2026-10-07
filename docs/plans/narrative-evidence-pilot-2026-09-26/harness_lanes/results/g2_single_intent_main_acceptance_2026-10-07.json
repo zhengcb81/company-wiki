@@ -1,0 +1,184 @@
+{
+  "schema_version": "g2-single-intent-main/1",
+  "status": "local_verified_not_published",
+  "responsibility_suites": {
+    "g2p-result.xml": [
+      {
+        "tests": "109",
+        "failures": "0",
+        "errors": "0",
+        "time": "28.831"
+      }
+    ],
+    "g2j/result.xml": [
+      {
+        "tests": "41",
+        "failures": "0",
+        "errors": "0",
+        "time": "61.698"
+      }
+    ],
+    "g2e-result.xml": [
+      {
+        "tests": "85",
+        "failures": "0",
+        "errors": "0",
+        "time": "17.325"
+      }
+    ],
+    "g2fg-result.xml": [
+      {
+        "tests": "39",
+        "failures": "0",
+        "errors": "0",
+        "time": "7.135"
+      }
+    ]
+  },
+  "suite_counts_overlap": true,
+  "real_cli_chain": {
+    "path": "g2_chain_e2e_accepted_2026-10-07.json",
+    "sha256": "7fba117b45b2daf1daea3a1df2ef184eb7d28ff390f9827bf94ed70d772d520c",
+    "cases": 3,
+    "supplier_boundary": "real FF/CWP CLIs and ET supervisor/worker; offline identity, acquisition provider and ET HTTP session"
+  },
+  "retired_controls": [
+    "snapshot license",
+    "gap/policy digest authorization",
+    "expiry authorization",
+    "second FF close-gap request"
+  ],
+  "retained_correctness": [
+    "one request budget",
+    "candidate identity/period/cutoff",
+    "actual SHA/type/path",
+    "per-target lock",
+    "canonical short lock",
+    "bounded recovery"
+  ],
+  "failed_attempts_compacted": [
+    {
+      "name": "g2_chain_e2e_2026-10-07.json",
+      "sha256": "3efb3e5cab894b0eeb8b067f2fd5e1084438272c4399f86bb09597cfd4f49097",
+      "error_type": "RuntimeError",
+      "test_root_restored_absent": true,
+      "protected_originals_and_production_unchanged": true
+    },
+    {
+      "name": "g2_chain_e2e_diagnosis_2026-10-07.json",
+      "sha256": "44de8e8fdd76f8249b73a2052389b1c41d2c0a0e02e8673983142adbc3e9caec",
+      "error_type": "AssertionError",
+      "test_root_restored_absent": true,
+      "protected_originals_and_production_unchanged": true
+    },
+    {
+      "name": "g2_chain_e2e_final_2026-10-07.json",
+      "sha256": "bf51d9962776364fcc16ac021f7b67c1edeb606043274deb693ecd32626ef3f1",
+      "error_type": "AssertionError",
+      "test_root_restored_absent": true,
+      "protected_originals_and_production_unchanged": true
+    },
+    {
+      "name": "g2_chain_e2e_green_2026-10-07.json",
+      "sha256": "a71308c77c4062331664a445c0c434ae9cc2df6378ed94b9c5878217795fe064",
+      "error_type": "AssertionError",
+      "test_root_restored_absent": true,
+      "protected_originals_and_production_unchanged": true
+    },
+    {
+      "name": "g2_chain_e2e_pass_2026-10-07.json",
+      "sha256": "679a56af9ed45ebfa0051260044ad150f861ba35707ddd4d42bb8b9f2aeb9e8f",
+      "error_type": "AssertionError",
+      "test_root_restored_absent": true,
+      "protected_originals_and_production_unchanged": true
+    },
+    {
+      "name": "g2_chain_e2e_retry1_2026-10-07.json",
+      "sha256": "798734d8a57a9a47d22d96ebee0d2d1e243e8b15910cd40c703fe715d9061c05",
+      "error_type": "RuntimeError",
+      "test_root_restored_absent": true,
+      "protected_originals_and_production_unchanged": true
+    },
+    {
+      "name": "g2_chain_e2e_retry2_2026-10-07.json",
+      "sha256": "97b1578feabf61b2f6c9fa135355c4f45070b5b95a0652d7d6fdd6ef5dc2faeb",
+      "error_type": "RuntimeError",
+      "test_root_restored_absent": true,
+      "protected_originals_and_production_unchanged": true
+    },
+    {
+      "name": "g2_chain_e2e_retry3_2026-10-07.json",
+      "sha256": "b5c9ccb85c3f456b42cb2d84fbae2e3a30a77f63cbcd8d30bf3d8d89ed4227b9",
+      "error_type": "RuntimeError",
+      "test_root_restored_absent": true,
+      "protected_originals_and_production_unchanged": true
+    },
+    {
+      "name": "g2_chain_e2e_retry4_2026-10-07.json",
+      "sha256": "f4a642ae112198d960b41ec3fb6696a4e17e52ab3d5ec79be3d61d7549bf6058",
+      "error_type": "RuntimeError",
+      "test_root_restored_absent": true,
+      "protected_originals_and_production_unchanged": true
+    },
+    {
+      "name": "g2_chain_e2e_retry5_2026-10-07.json",
+      "sha256": "a1f99ceb61ea6521629c8bbf10670428b222f752058eca8d444e5662688dc5c1",
+      "error_type": "RuntimeError",
+      "test_root_restored_absent": true,
+      "protected_originals_and_production_unchanged": true
+    },
+    {
+      "name": "g2_chain_e2e_retry6_2026-10-07.json",
+      "sha256": "6a090c126bf37253d0ad1d563b74209c56650f0d35cc0b8ca0cb8595af2f03c0",
+      "error_type": "AssertionError",
+      "test_root_restored_absent": true,
+      "protected_originals_and_production_unchanged": true
+    },
+    {
+      "name": "g2_chain_e2e_retry7_2026-10-07.json",
+      "sha256": "dd8cdacddf9052a92900498e2c46b95e2cabdccd7a9f04ba8318f8b83d782c07",
+      "error_type": "AssertionError",
+      "test_root_restored_absent": true,
+      "protected_originals_and_production_unchanged": true
+    },
+    {
+      "name": "g2_chain_e2e_retry8_2026-10-07.json",
+      "sha256": "679a56af9ed45ebfa0051260044ad150f861ba35707ddd4d42bb8b9f2aeb9e8f",
+      "error_type": "AssertionError",
+      "test_root_restored_absent": true,
+      "protected_originals_and_production_unchanged": true
+    },
+    {
+      "name": "g2_chain_e2e_trace_2026-10-07.json",
+      "sha256": "8104a242c9f233fe26e7242a46594f534e81c711cccda7c7f4ca0ebff644633d",
+      "error_type": "AssertionError",
+      "test_root_restored_absent": true,
+      "protected_originals_and_production_unchanged": true
+    },
+    {
+      "name": "g2_chain_e2e_verified_2026-10-07.json",
+      "sha256": "adef9bc8deaae677dea6d447a43f68d8148a2bd19dd1ff5d27df7f1006566387",
+      "error_type": "AssertionError",
+      "test_root_restored_absent": true,
+      "protected_originals_and_production_unchanged": true
+    }
+  ],
+  "unit_before_merge": [
+    {
+      "tests": "1916",
+      "failures": "1",
+      "errors": "0",
+      "time": "125.901"
+    }
+  ],
+  "unit_cache_failure": "1915 pass / one stale retired gate_system pyc namespace failure; cache removed, exact case rerun passed. Final merged Unit node still required.",
+  "fixture_corrections": [
+    "FMP original has exactly symbol/period/year/date/content; quarter extra removed",
+    "first FMP import is downloaded with unknown publication; reuse remains unknown_publication",
+    "unknown-publication raw read uses the real FF preview purpose; filing_reuse refusal was correct"
+  ],
+  "raw_deleted": 0,
+  "paid_calls": 0,
+  "translation_calls": 0,
+  "production_writes": 0
+}

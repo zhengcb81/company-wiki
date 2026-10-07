@@ -1,18 +1,12 @@
-"""FC-801 RED/acceptance tests: CloseGap transaction contract.
-SCENARIO: DL-02 DL-03 DL-07 DL-09 LT-10
+"""Close-gap compatibility: scope, bytes, idempotency and real failure.
 
-The transaction binds request_id + gap hash + policy hash + provider +
-allowed accessions + caps + expiry, and walks the FIXED steps
-(rediscover/validate -> fetch staging -> validate -> canonical commit ->
-re-resolve).  Scenarios: DL-02 (expired/wrong authorization -> fetch=0),
-DL-03 (stale gap/policy hash -> fetch=0), DL-07 (invalid staging -> no
-commit + cleanup), DL-09 (idempotent recovery), LT-10 (partial failure
-never reports complete).
+Old policy/gap hashes and expiry are diagnostic. The real amendment and final
+accession read are covered by test_single_intent_latest_acquisition, replacing
+the old mock of an implementation-specific _finalize method.
 """
 import hashlib
 import json
 import sys
-from types import SimpleNamespace
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "src"))
@@ -82,6 +76,7 @@ def _binding(
 class _FakeAdapter:
     name = "fake"
     version = "1.0.0"
+    supports_acquisition_budget = True
 
     def __init__(self, *, fetch_error: Exception | None = None,
                  corrupt_receipt: bool = False):
@@ -128,6 +123,17 @@ class _FakeAdapter:
             adapter_name="fake",
             adapter_version="1.0.0",
         )
+
+    def discover_bounded(self, request, budget):
+        budget.ensure_open()
+        budget.consume_response_bytes(1)
+        return self.discover(request)
+
+    def fetch_bounded(self, candidate, staging_dir, budget):
+        budget.ensure_open()
+        receipt = self.fetch(candidate, staging_dir)
+        budget.consume_response_bytes(receipt.byte_size)
+        return receipt
 
 
 def _txn(tmp_path, adapter=None, catalog=None):
@@ -192,42 +198,37 @@ def _current_gap_hash(catalog, adapter):
 # --- DL-03: stale policy / gap hash -------------------------------------------
 
 
-def test_cg01_stale_policy_hash_fetch_zero(tmp_path):
-    """DL-03: a download bound to a different policy hash is rejected with
-    fetch=0 — old authorizations are never reusable."""
+def test_cg01_old_policy_hash_does_not_block_explicit_request(tmp_path):
+    """An unsigned historical policy digest is not a download permission."""
     catalog = _catalog(tmp_path)
     _policy_file(catalog, "a" * 64)
     adapter = _FakeAdapter()
     txn = _txn(tmp_path, adapter, catalog)
     result = txn.execute(
         _binding("1" * 64, policy_hash="b" * 64), _request())
-    assert result.status == "rejected"
-    assert result.reason == "stale_policy_hash"
-    assert result.fetch_events == 0
-    assert adapter.fetch_calls == 0
+    assert result.status == "completed", result
+    assert result.fetch_events == 1
+    assert adapter.fetch_calls == 1
 
 
-def test_cg02_stale_gap_hash_fetch_zero(tmp_path):
-    """DL-03: the authorized gap hash no longer matches the rediscovered
-    plan (provider state changed) -> rejected, fetch=0."""
+def test_cg02_old_gap_hash_does_not_block_current_target_verification(tmp_path):
+    """Current metadata and bytes decide the result, not an old plan hash."""
     catalog = _catalog(tmp_path)
     _policy_file(catalog, "a" * 64)
     adapter = _FakeAdapter()
     txn = _txn(tmp_path, adapter, catalog)
     result = txn.execute(
         _binding("d" * 64, policy_hash="a" * 64), _request())
-    assert result.status == "rejected"
-    assert result.reason == "stale_gap_hash"
-    assert result.fetch_events == 0
-    assert adapter.fetch_calls == 0
+    assert result.status == "completed", result
+    assert result.fetch_events == 1
+    assert adapter.fetch_calls == 1
 
 
 # --- DL-02: expired / wrong authorization -------------------------------------
 
 
-def test_cg03_expired_authorization_fetch_zero(tmp_path):
-    """DL-02: an expired authorization is rejected with a precise reason
-    and zero fetches."""
+def test_cg03_old_expiry_does_not_block_explicit_request(tmp_path):
+    """Old TTLs are diagnostics; the shared operation deadline is enforced."""
     catalog = _catalog(tmp_path)
     _policy_file(catalog, "a" * 64)
     adapter = _FakeAdapter()
@@ -238,10 +239,9 @@ def test_cg03_expired_authorization_fetch_zero(tmp_path):
                   request_id=_request().request_id,
                  expires_at="2020-01-01T00:00:00Z"),
         _request())
-    assert result.status == "rejected"
-    assert "expired" in result.reason
-    assert result.fetch_events == 0
-    assert adapter.fetch_calls == 0
+    assert result.status == "completed", result
+    assert result.fetch_events == 1
+    assert adapter.fetch_calls == 1
 
 
 # --- DL-07: invalid staging -> no commit + cleanup -----------------------------
@@ -287,7 +287,7 @@ def test_cg05_rerun_is_idempotent(tmp_path):
     second = txn.execute(_binding(gap_hash, policy_hash="a" * 64), _request())
     assert second.status == "completed"
     assert second.fetch_events == 0
-    assert second.outcome == "reused_before_download"
+    assert second.outcome == "reused_after_discovery"
     docs = catalog.store.fetchall("SELECT COUNT(*) c FROM documents")[0]["c"]
     assert docs == 1, "rerun duplicated the document"
 
@@ -384,9 +384,9 @@ def test_close_gap_reuses_one_budget_across_revalidation_and_fetch(tmp_path):
     )
 
     assert result.status == "completed"
-    assert len(adapter.seen_budgets) == 4
+    assert len(adapter.seen_budgets) == 2
     assert all(seen is budget for seen in adapter.seen_budgets)
-    assert budget.response_bytes_used == 3 + len(b"%PDF-2025")
+    assert budget.response_bytes_used == 1 + len(b"%PDF-2025")
 
 
 def test_provider_unavailable_is_not_reported_as_gap_closed(tmp_path):
@@ -403,91 +403,6 @@ def test_provider_unavailable_is_not_reported_as_gap_closed(tmp_path):
         _request(),
     )
 
-    assert result.status == "rejected"
-    assert result.reason == "provider_unavailable_during_gap_revalidation"
+    assert result.status == "failed"
+    assert "provider is offline" in result.reason
     assert result.fetch_events == 0
-
-
-def test_zr407_newer_revision_is_actionable_authorized_candidate(tmp_path):
-    """ZR-407: a same-period amendment is an actionable gap, not an
-    already-closed plan.  The transaction must stage exactly that candidate
-    under the pre-bound authorization."""
-    from company_wiki.source_catalog import AcquisitionStatus, DownloadCandidate
-    from company_wiki.source_catalog.close_gap import CloseGapResult
-
-    catalog = _catalog(tmp_path)
-    _policy_file(catalog, "a" * 64)
-    candidate = DownloadCandidate(
-        candidate_id="c-2025-amend",
-        provider="sec",
-        provider_document_id="acc-2025-amend",
-        market="US",
-        entity="ACME",
-        title="ACME 2025 annual amendment",
-        source_url="https://www.sec.gov/x/2025-amend.pdf",
-        document_kind="annual_report",
-        form_type="annual_report",
-        filing_date="2026-05-01",
-        fiscal_year=2025,
-    )
-    plan = SimpleNamespace(missing=(), newer_revision=(candidate,), gap_hash="r" * 64)
-    calls = []
-
-    class _RevisionCoordinator:
-        timeout_seconds = 1
-
-        def resolve_or_stage(self, request, *, authorization=None):
-            calls.append((request, authorization))
-            if request.mode == "latest_as_of":
-                return SimpleNamespace(
-                    status=AcquisitionStatus.GAP, gap_plan=plan
-                )
-            assert request.mode == "exact"
-            assert request.provider_document_id == "acc-2025-amend"
-            assert authorization is not None
-            return SimpleNamespace(
-                status=AcquisitionStatus.STAGED,
-                candidate=candidate,
-                receipt=SimpleNamespace(content_sha256="f" * 64),
-                adapter_name="fake",
-                reason="staged",
-            )
-
-    class _Writer:
-        def import_staged(self, request, staged_candidate, receipt):
-            assert staged_candidate is candidate
-            return SimpleNamespace(status=SimpleNamespace(value="imported_new"))
-
-    txn = _txn(tmp_path, _FakeAdapter(), catalog)
-    txn.coordinator = _RevisionCoordinator()
-    txn.writer = _Writer()
-
-    def _finalize(request, txn_id, outcome, *, fetch_events):
-        return CloseGapResult(
-            schema_version="1.0",
-            txn_id=txn_id,
-            status="completed",
-            reason="test",
-            fetch_events=fetch_events,
-            outcome=outcome,
-            resolution={},
-            envelope={},
-        )
-
-    txn._finalize = _finalize
-
-    result = txn.execute(
-        _binding(
-            "r" * 64,
-            policy_hash="a" * 64,
-            request_id=_request().request_id,
-            accessions=("acc-2025-amend",),
-        ),
-        _request(),
-    )
-
-    assert result.status == "completed"
-    assert result.fetch_events == 1
-    staged_calls = [call for call in calls if call[0].mode == "exact"]
-    assert len(staged_calls) == 1
-    assert staged_calls[0][1].allowed_accessions == ("acc-2025-amend",)

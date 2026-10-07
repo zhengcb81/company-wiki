@@ -350,8 +350,8 @@ def _parser() -> argparse.ArgumentParser:
         "--mode",
         choices=("exact", "latest_as_of"),
         help=(
-            "FC-802: latest_as_of always returns the metadata-only gap plan "
-            "(WU-4.2) — nothing is downloaded; exact keeps the legacy path"
+            "latest_as_of checks current provider metadata; an explicit download "
+            "intent can fetch the unique latest source within the supplied limits"
         ),
     )
     ensure.add_argument(
@@ -367,6 +367,8 @@ def _parser() -> argparse.ArgumentParser:
     ensure.add_argument("--max-download-bytes", type=int)
     ensure.add_argument("--max-download-seconds", type=float)
     ensure.add_argument("--max-download-cost-usd")
+    ensure.add_argument("--binding-file", type=Path,
+                        help="optional legacy download target scope; hashes/expiry do not grant permission")
     ensure.add_argument(
         "--allow-acquisition-while-paused",
         action="store_true",
@@ -390,14 +392,15 @@ def _parser() -> argparse.ArgumentParser:
     close_gap = subparsers.add_parser(
         "close-gap",
         help=(
-            "FC-801: execute one authorized close-gap transaction — binding "
-            "from a JSON file, request from the shared identity/period args"
+            "fetch a missing source through the same bounded service as ensure; "
+            "an optional legacy binding only narrows provider/accession scope"
         ),
     )
     close_gap_identity = close_gap.add_mutually_exclusive_group(required=True)
     close_gap_identity.add_argument("--entity")
     close_gap_identity.add_argument("--company-query")
-    close_gap.add_argument("--binding-file", type=Path, required=True)
+    close_gap.add_argument("--binding-file", type=Path,
+                           help="optional target scope; old hashes/expiry are diagnostic")
     close_gap.add_argument("--max-download-bytes", type=int)
     close_gap.add_argument("--max-download-seconds", type=float)
     close_gap.add_argument("--max-download-cost-usd")
@@ -647,6 +650,32 @@ def _acquisition_budget_from_args(
     )
 
 
+def _acquisition_binding_from_args(args, request, budget, project_root):
+    """Read optional legacy target/cap data shared by both CLI wrappers."""
+    from .close_gap import CloseGapBinding
+
+    binding_path = args.binding_file
+    if binding_path is None:
+        return None
+    if not binding_path.is_absolute():
+        binding_path = project_root / binding_path
+    payload = json.loads(binding_path.read_text(encoding="utf-8"))
+    if not isinstance(payload, dict):
+        raise ValueError("acquisition scope must be a JSON object")
+    accessions = payload.get("allowed_accessions")
+    if not isinstance(accessions, list):
+        raise ValueError("allowed_accessions must be an array")
+    return CloseGapBinding(
+        request_id=str(payload.get("request_id", request.request_id)),
+        gap_plan_hash=str(payload.get("gap_plan_hash", "")),
+        policy_hash=str(payload.get("policy_hash", "")),
+        provider=payload["provider"], allowed_accessions=tuple(accessions),
+        max_items=payload.get("max_items", 1),
+        max_bytes=payload.get("max_bytes", budget.max_response_bytes),
+        expires_at=str(payload.get("expires_at", "")),
+    )
+
+
 def _run_ensure_command(
     args: argparse.Namespace,
     config: Any,
@@ -660,6 +689,10 @@ def _run_ensure_command(
         args,
         required=args.allow_download or request.mode == "latest_as_of",
     )
+    if args.binding_file is not None and not args.allow_download:
+        raise ValueError("download target scope requires an explicit download operation")
+    binding = _acquisition_binding_from_args(args, request, budget, project_root)
+    candidate_scope = binding.restrict(budget) if binding is not None else None
     if not args.allow_download and request.mode != "latest_as_of":
         result = _read_only_ensure_result(SourceResolver(get_catalog()).resolve(request))
         return (
@@ -692,7 +725,7 @@ def _run_ensure_command(
                 get_catalog(), staging_root=acquisition_config.staging_root
             ),
             journal=AcquisitionJournal(config.catalog_dir),
-        ).ensure(request, budget=budget),
+        ).ensure(request, budget=budget, candidate_scope=candidate_scope),
         action="ensure",
     )
 
@@ -709,7 +742,7 @@ def _run_ensure_command(
         )
         resolution_dict["resolution_envelope"] = build_resolution_envelope(
             ensured.resolution,
-            policy_snapshot=ensure_policy,
+            policy_snapshot={"policy_hash": resolution_dict["policy_export"]["policy_hash"]},
             journal=AcquisitionJournal(config.catalog_dir),
             bundle=get_catalog().bundle_for_resolution(ensured.resolution),
             store=get_catalog().store,
@@ -1022,7 +1055,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             # document was reused (SELECT-only; fail-closed on hash drift).
             source_resolution["resolution_envelope"] = build_resolution_envelope(
                 resolution,
-                policy_snapshot=policy,
+                policy_snapshot={"policy_hash": source_resolution["policy_export"]["policy_hash"]},
                 journal=AcquisitionJournal(config.catalog_dir),
                 bundle=get_catalog().bundle_for_resolution(resolution),
                 store=get_catalog().reader,
@@ -1043,24 +1076,13 @@ def main(argv: Sequence[str] | None = None) -> int:
             )
         elif args.command == "close-gap":
             from .acquisition_journal import AcquisitionJournal
-            from .close_gap import CloseGapBinding, CloseGapTransaction
+            from .close_gap import CloseGapTransaction
 
-            # ZR-203: write entrypoint — writer initializer may create the
-            # catalog before the read-only resolver reads it.
-            _ = get_catalog().store
             request, identity = source_request()
-            binding_payload = json.loads(args.binding_file.read_text(encoding="utf-8"))
-            binding = CloseGapBinding(
-                request_id=str(binding_payload["request_id"]),
-                gap_plan_hash=str(binding_payload["gap_plan_hash"]),
-                policy_hash=str(binding_payload["policy_hash"]),
-                provider=str(binding_payload["provider"]),
-                allowed_accessions=tuple(binding_payload["allowed_accessions"]),
-                max_items=int(binding_payload["max_items"]),
-                max_bytes=int(binding_payload["max_bytes"]),
-                expires_at=str(binding_payload["expires_at"]),
-            )
             budget = _acquisition_budget_from_args(args, required=True)
+            binding = _acquisition_binding_from_args(args, request, budget, project_root)
+            # Only the actual acquisition writer initializes the catalog.
+            _ = get_catalog().store
             acquisition_config_path = args.acquisition_config
             if not acquisition_config_path.is_absolute():
                 acquisition_config_path = project_root / acquisition_config_path

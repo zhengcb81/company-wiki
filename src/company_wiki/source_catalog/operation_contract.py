@@ -109,10 +109,8 @@ def _validate_gap_status(status: str, gap: dict[str, Any] | None) -> None:
         raise SourceOperationProjectionError(
             "source_ensure gap result is missing acquisition.gap_plan"
         )
-    if status != "gap" and gap is not None:
-        raise SourceOperationProjectionError(
-            "acquisition.gap_plan requires source_ensure status gap"
-        )
+    # Discovery diagnostics survive fetch/import/reuse. They describe the
+    # selection step, not a second acquisition or an incomplete final result.
 
 
 def _request_id(values: tuple[object, ...]) -> str | None:

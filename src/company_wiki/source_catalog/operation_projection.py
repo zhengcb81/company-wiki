@@ -99,7 +99,7 @@ def _status_and_source(
     operation_input: SourceOperationInput,
     reader: VersionReader,
 ) -> tuple[str, SourceRef | None, dict[str, object] | None]:
-    if operation_input.gap_plan is not None:
+    if operation_input.producer_status == "gap":
         return "gap", None, None
     resolved = _resolved_source(operation_input, reader)
     if resolved is not None:
@@ -136,7 +136,7 @@ def project_source_operation(
         "policy_hash": operation_input.policy_hash,
         "source_ref": asdict(ref) if ref is not None else None,
         "candidate": candidate,
-        "gap_plan": _gap_projection(operation_input.gap_plan),
+        "gap_plan": _gap_projection(operation_input.gap_plan) if status == "gap" else None,
     }
     if _contains_physical_field(result):
         raise SourceOperationProjectionError(

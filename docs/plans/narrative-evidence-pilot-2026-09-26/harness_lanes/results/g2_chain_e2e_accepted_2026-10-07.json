@@ -1,0 +1,97 @@
+{
+  "schema_version": "g2-acquisition-chain-e2e/1",
+  "status": "passed",
+  "boundary": "real FF/CWP CLIs and ET supervisor/worker; offline identity, acquisition provider and ET HTTP session",
+  "live_provider_calls": 0,
+  "model_calls": 0,
+  "translation_calls": 0,
+  "production_writes": 0,
+  "cases": [
+    {
+      "schema": "1.2",
+      "market": "CN",
+      "original_sha256": "e9c2d7fdd088e151ccb6c8ad3d95587b2b014b10f2c9731508d23ce07fde4de3",
+      "provider_actions": [
+        "discover",
+        "fetch",
+        "discover"
+      ],
+      "first_downloads": 1,
+      "second_downloads": 0,
+      "first_status": "capture_ready",
+      "second_status": "capture_ready",
+      "filing_verified_read": {
+        "status": "verified",
+        "purpose": "filing_reuse",
+        "source_id": "urn:company-wiki:source:sha256:e9c2d7fdd088e151ccb6c8ad3d95587b2b014b10f2c9731508d23ce07fde4de3",
+        "sha256": "e9c2d7fdd088e151ccb6c8ad3d95587b2b014b10f2c9731508d23ce07fde4de3",
+        "byte_size": 10092140,
+        "source_read_policy_sha256": "40faa9c46b24647ac02c769d7df31b567f0eb5443db97209294da21ed9be5c33"
+      },
+      "transcript_verified_read": null,
+      "unsupported_latest_status": null,
+      "transcript_first_status": null,
+      "transcript_second_provider_calls": null,
+      "offline_et_http_calls": 0
+    },
+    {
+      "schema": "2.0",
+      "market": "CN",
+      "original_sha256": "e9c2d7fdd088e151ccb6c8ad3d95587b2b014b10f2c9731508d23ce07fde4de3",
+      "provider_actions": [
+        "discover",
+        "fetch",
+        "discover"
+      ],
+      "first_downloads": 1,
+      "second_downloads": 0,
+      "first_status": "source_candidate",
+      "second_status": "source_candidate",
+      "filing_verified_read": {
+        "status": "verified",
+        "purpose": "filing_reuse",
+        "source_id": "urn:company-wiki:source:sha256:e9c2d7fdd088e151ccb6c8ad3d95587b2b014b10f2c9731508d23ce07fde4de3",
+        "sha256": "e9c2d7fdd088e151ccb6c8ad3d95587b2b014b10f2c9731508d23ce07fde4de3",
+        "byte_size": 10092140,
+        "source_read_policy_sha256": "c62c076f27bea3a38893a07a585f1a4d3d0ba5e5baafc5f67247d3a0a9e10c90"
+      },
+      "transcript_verified_read": null,
+      "unsupported_latest_status": null,
+      "transcript_first_status": "not_requested",
+      "transcript_second_provider_calls": null,
+      "offline_et_http_calls": 0
+    },
+    {
+      "schema": "2.0",
+      "market": "US",
+      "original_sha256": "e3de0053021c02b033272b55551e383b31dba288c86cc12da2e32375e40ecfff",
+      "provider_actions": [],
+      "first_downloads": 0,
+      "second_downloads": 0,
+      "first_status": "source_candidate",
+      "second_status": "source_candidate",
+      "filing_verified_read": {
+        "status": "verified",
+        "purpose": "filing_reuse",
+        "source_id": "urn:company-wiki:source:sha256:e3de0053021c02b033272b55551e383b31dba288c86cc12da2e32375e40ecfff",
+        "sha256": "e3de0053021c02b033272b55551e383b31dba288c86cc12da2e32375e40ecfff",
+        "byte_size": 8585615,
+        "source_read_policy_sha256": "f0dc45914fe93b56f76d64be7d42272486ee72ed33038179ae587b3fa035f615"
+      },
+      "transcript_verified_read": {
+        "status": "verified",
+        "purpose": "preview",
+        "source_id": "urn:company-wiki:source:sha256:89239b88c33dbc8bb65d181b143b6beaf53545adaea1a987833b57725cf03ad7",
+        "sha256": "89239b88c33dbc8bb65d181b143b6beaf53545adaea1a987833b57725cf03ad7",
+        "byte_size": 66429,
+        "source_read_policy_sha256": "f0dc45914fe93b56f76d64be7d42272486ee72ed33038179ae587b3fa035f615"
+      },
+      "unsupported_latest_status": "gap",
+      "transcript_first_status": "downloaded",
+      "transcript_second_provider_calls": 0,
+      "offline_et_http_calls": 1
+    }
+  ],
+  "test_root_restored_absent": true,
+  "protected_originals_and_production_unchanged": true
+}

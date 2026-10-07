@@ -174,9 +174,8 @@ def test_gap_hash_order_independent_same_period_multi_accession(tmp_path):
     assert p1.gap_hash == p2.gap_hash
 
 
-def test_latest_as_of_with_allow_download_still_returns_gap(tmp_path):
-    """Reviewer finding: latest_as_of + allow_download=True must NOT bypass
-    the plan — metadata-only first, nothing fetched."""
+def test_latest_as_of_download_intent_stages_discovered_gap(tmp_path):
+    """An explicit intent stages one verified target after metadata discovery."""
     import hashlib
     import json
     import sqlite3
@@ -294,7 +293,8 @@ def test_latest_as_of_with_allow_download_still_returns_gap(tmp_path):
 
         def fetch(self, candidate, staging_dir):
             fetch_calls["n"] += 1
-            raise AssertionError("fetch must not be called")
+            from test_source_catalog_acquisition import _FakeAdapter
+            return _FakeAdapter().fetch(candidate, staging_dir)
 
     coordinator = AcquisitionCoordinator(
         catalog=catalog,
@@ -307,10 +307,10 @@ def test_latest_as_of_with_allow_download_still_returns_gap(tmp_path):
         as_of_date="2026-07-31", allow_download=True,
     )
     result = coordinator.resolve_or_stage(request)
-    assert result.status is AcquisitionStatus.GAP, result
+    assert result.status is AcquisitionStatus.STAGED, result
     assert result.gap_plan is not None
-    assert fetch_calls["n"] == 0
-    assert not (tmp_path / "staging").exists()
+    assert fetch_calls["n"] == 1
+    assert Path(result.receipt.staged_path).is_relative_to(tmp_path / "staging")
 
 
 def test_coordinator_latest_as_of_returns_gap_without_fetch(tmp_path):

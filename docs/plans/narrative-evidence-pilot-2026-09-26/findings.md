@@ -1,5 +1,23 @@
 # Findings：当前事实与待验证项
 
+**最新G2验收纠正：**真实三CLI链已passed，见g2_chain_e2e_accepted；先前字段错误/状态期待/preview用途是夹具问题，不是生产者失败。FMP ET能解析quarter或period，但现行CWP生产者原文合同严格五字段；本轮模拟标准period，不新增额外quarter。publication始终unknown；实际下载状态与公开日资格是不同事实。完整读取必须使用公开调用者的实际用途；电话会原始预览不冒充filing_reuse或as-of预测可用。全链原件/生产不变、测试根absent。G5三包收到用户正式查收请求，MAIN开始验收并线，目标active。
+
+## 最新状态纠正（2026-10-07整体进度询问）
+
+RF G5已完成交接而非仍在施工；当前CWP/SID/RF三handoff均ready_for_main，tip分别9aa2dbb/47e1059/0d8b5ded，三个工作树clean。MAIN尚未正式验收/合入这些包，外线测试报告不能替代该节点。实际FF→ET→CWP链已执行且整链failed，CN两分支已过；电话会拒绝原始FMP字段集合，下一步应读生产者/消费者原始字段合同，辨明夹具错误或产品缺陷，不能先放松验真。测试根已恢复、原件/生产未变。当前RF compatibility/current.json仍指旧CWP/FF pin；发布新链时需同步真实兼容版本，避免CI拉旧代码。R2/R3/R5与新生产final=0仍是实质待办。
+
+## G2-12实际链补漏（2026-10-07）
+
+前回合盘点提供新G5交付证据但不等于完成实现；本回合继续真实FF→ET→CWP。109项CWP/41项FF原集中绿后，实际v2 CLI发现保留的acquisition.gap_plan诊断被旧parse_operation_payload拒绝，或被projection一律当作未完成gap。新增7个真实RED/3pass后修为按producer实际终态投影：gap必须有诊断，成功仍需真实reader核来源；已完成交易的内部发现诊断不外发为可执行gap。readonly resolve仍回旧snapshot RootPolicy hash，已使其与ensure一样返回当前根配置真实hash。
+
+现行steady责任44项绿；新增v2夹具最初误沿用显式schema1+假旧hash，触发历史reader的runtime_policy_mismatch，这是有意保留的历史兼容规则，不据此修改reader。改成有效schema2 steady+旧观察hash，仍证明新流程不受观察hash阻断；旧schema1及坏当前pin/坏字节责任保持。最终85项变动责任集中绿17.34秒，不重复无关全包。
+
+联调工具错误已明确：SecurityRecord没有verified字段；HK/US配置不能假装json_command有预算，保留真实Dayu能力边界，CN v1/v2下载真实PDF，US复用真实HTML接实际ET，另验证US latest诚实GAP/零Dayu执行；US财报夹具迁到正式raw/financial_reports/annual。ET私有launcher实签名为(spec,context)，Session需headers，响应需effective URL，FMP JSON需period=Q4；FMP零成本额度真实拒绝正确，离线夹具仅给予显式$0.01上限，实际HTTP/费用/模型0，不改变累计生产预算。FMP只提供call date，publication_date仍unknown，不得据夹具date冒充公开日期确认。
+
+所有失败联调均记录原件/生产SHA不变、测试根恢复absent；失败收据将在最终验收摘要后压缩，不保留重复大DTO。一次findings段落patch因整行不匹配拒绝且无写；前段98项计数为笔误，真实为100项99pass/1fail。一次猜FF响应模块文件不存在，已停止猜路径、以实际fetch_filing.py/已有公开测试核DTO。FF Ruff沙箱缓存写拒绝，--no-cache复核通过。
+
+**当前现场复核（2026-10-07）：**目标active；G2-12 CWP109项/FF41项JUnit均0失败/0错误，完整实际ET CLI联调工具未执行、本轮实现未提交。G5工作树均已存在，CWP9aa2dbb与SID7a4bf0d有交接待MAIN验收，RF仍未提交施工；下方“ready/未创建/paused”为历史时点。StockWiki最新04dfc51 clean属于独立SW-READY-01，不扩本线写集。R2/R3/R5未完成，不能拿隔离试点代替生产落地。
+
 **新增G5独立包（2026-10-07）：**[三卡总包](harness_lanes/g5_parallel_packages_2026-10-07.md)ready，可现在分别交harness；CWP六旧工程/批处理壳退休、SID纯API解耦与身份查询预算、RF定点安装工具/三tmp验收，分别独占`Projects/_g5/cwp|sid|rf`不同项目工作树。当前目录尚未创建，未代用户启动。G3/G4已完成不重派；MAIN保留G2-12/FF/公共CLI/指纹/工程清单、真实安装与生产/总PWF/并线。目标继续paused，本次仅制卡和发布。
 
 **最新G4验收（2026-10-07）：**两包已验收、并入实际执行分支并推远端。CWP `df7d7ba`：冻结Pipeline/Gate0–5整族退休及CN 1.3.0路由配套，211责任用例绿；精确CI37673393822所有步骤绿/74秒。SID `eb8495c`：latest分页矛盾TDD修复，127责任/真实CLI离线联调用例绿，已推`v2-clean-rewrite`；该仓无workflow，不声称远端CI。见[G4正式验收](g4_main_acceptance_2026-10-07.md)。G4不再派发。G2-03完成；完整G2-12 ensure/FF/ET/CWP入库与复用仍未提交，其他G2、R2生产应用/R3/R5未完成。总目标保持paused，本次没有恢复生产或付费批次。
@@ -1151,3 +1169,15 @@ SID已发布API发现/读取，但adapter/CLI依赖StockDownloader；访问.mapp
 
 
 G5计划恢复修正：初次把PWF_PLAN_ROOT设为docs/plans会让resolver寻找不存在的docs/plans/.planning，因此输出空；随后取消该env pin，以PLAN_ID配显式-PlanRoot docs/plans，确实返回唯一现有总计划目录。外线改用工作树根PWF_PLAN_ROOT与标准.planning/g5-id，避免G4那样产生未跟踪镜像。仓外都是只读，不创建新worktree/安装；施工卡已定义真实输出和单卡完工集中测试，不增加小节点门。
+
+## 2026-10-07 G2-12恢复后的真实RED/GREEN
+
+首轮94项因沙箱长临时根创建失败，业务代码未运行（87 setup errors/7pass），不计产品RED。换沙箱外自有短根后91pass/3fail：两项CLI夹具错误将company root显式配置成write+external reusable，已移除该错误；一项真正暂存丢gap_plan，已保留选择诊断，三责任项3pass。新G4-CN annual不猜财年真实RED（1fail/3pass）及ensure scope CLI真实RED（1fail/3pass）；统一provider discovery原请求与ensure可选scope后25单意图责任绿。未降低来源/预算检查。
+
+FF MAIN现有工作树codex/p5-ff-main-integration初态clean/HEAD758e8f4，与FF主仓仅未跟踪密钥分开；不读密钥。新增4项反例全RED：旧expiry仍必填、ensure未转scope、GAP仍额外close-gap。接下来使旧scope只缩目标/字节，单次ensure完成或诚实GAP；同一request deadline和资源限额保留。一次CWP目录误读FF filing_contracts.py不存在，无写，改用外仓具体路径。
+
+## 2026-10-07 G2真实并发/FF联调补漏
+
+98项旧/新责任最初99pass/1fail（新增不同目标并发）：不同target已能并发fetch，但短canonical writer锁非阻塞，导致第二份CatalogOperationLockedError。服务层重试整次import会重复验真；已改为锁层使用同一AcquisitionBudget有界等待，writer仅验真一次，源码和测试仍待集中发布。真实中断在staged/committed后恢复8项已绿，早先测试finally操作共享multiprocessing.Event在子进程被杀后卡住；核实仅本次PID92524仍活且无child，停止该owned测试，改用subprocess/文件检查点，保留真实OS锁/SQLite/原文验证，不降产品断言。
+
+FF真实CLI联调发现当前ensure envelope仍载旧snapshot policy_hash，与当前root export不一致。新增2个真实RED；现在ensure用当前根配置的真实hash（根校验保留），4责任GREEN。未来候选旧夹具在显式accession范围外，修成范围内未来候选仍零fetch；第二请求按新合同应返回真实reuse而非旧GAP。退休helper的limits测试已改为一次ensure scope/相同上限/临时文件清理测试；不取消限额断言。ET CodeGraph尚未初始化，已有全局初始化授权未需重复询问，目前只读实际工具文件，不写外仓。另两次猜错文件路径未写入，已改用实际模块定位。

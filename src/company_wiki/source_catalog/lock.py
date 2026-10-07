@@ -10,10 +10,12 @@ import json
 import os
 from pathlib import Path
 import subprocess
+import time
 from typing import Iterator
 import uuid
 
 from company_wiki._file_mutex import FileMutexLockedError, os_file_mutex
+from .download_budget import AcquisitionBudget
 
 
 class CatalogOperationLockedError(RuntimeError):
@@ -316,9 +318,12 @@ def operation_lock_status(catalog_dir: Path) -> dict[str, object]:
 
 
 class CatalogOperationLock(AbstractContextManager["CatalogOperationLock"]):
-    def __init__(self, catalog_dir: Path, *, operation: str):
+    def __init__(self, catalog_dir: Path, *, operation: str, budget: AcquisitionBudget | None = None):
+        if budget is not None and not isinstance(budget, AcquisitionBudget):
+            raise TypeError("budget must be AcquisitionBudget")
         self.path = catalog_dir / "operation.lock"
         self.operation = operation
+        self.budget = budget
         self.token = uuid.uuid4().hex
         self._owned = False
 
@@ -334,7 +339,20 @@ class CatalogOperationLock(AbstractContextManager["CatalogOperationLock"]):
             payload["process_creation_time"] = identity["creation_time"]
         if identity.get("executable"):
             payload["executable"] = identity["executable"]
-        with _acquisition_mutex(self.path):
+        while True:
+            if self.budget is not None:
+                self.budget.ensure_open()
+            try:
+                return self._acquire_once(payload)
+            except CatalogOperationLockedError:
+                if self.budget is None:
+                    raise
+                self.budget.ensure_open()
+                time.sleep(min(0.05, self.budget.remaining_seconds))
+
+    def _acquire_once(self, payload):
+        timeout = 10.0 if self.budget is None else self.budget.remaining_seconds
+        with _acquisition_mutex(self.path, timeout_seconds=timeout):
             for attempt in range(3):
                 try:
                     descriptor = os.open(

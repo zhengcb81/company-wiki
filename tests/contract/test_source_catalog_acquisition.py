@@ -183,7 +183,9 @@ def test_missing_hk_source_routes_to_adapter_and_only_writes_request_staging(tmp
     assert result.receipt is not None
     staged = Path(result.receipt.staged_path)
     assert staged.is_file()
-    assert staged.is_relative_to(staging_root / result.resolution.request_id.rsplit(":", 1)[-1])
+    assert staged.is_relative_to(staging_root)
+    assert len(staged.parent.name) == 64
+    assert staged.parent.parent == staging_root
     assert not list(catalog.config.project_root.rglob("*.pdf"))
 
 
