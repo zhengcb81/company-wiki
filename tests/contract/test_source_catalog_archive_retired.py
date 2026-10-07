@@ -1,13 +1,25 @@
-"""Contracts for retired-evidence archiving (catalog-space-remediation Phase 2.1)."""
+"""Retired-evidence archiving is retired (G3-CWP-MAINT).
+
+The legacy ``archive_retired_evidence`` entry — CLI shape without ``now``,
+explicit ``now``, or no catalog at all — must fail closed with the unified
+retirement signal BEFORE opening the catalog or creating any archive
+directory: 0 Store, 0 lock, 0 files.
+"""
 
 from __future__ import annotations
 
-import gzip
+import hashlib
+import sqlite3
 from datetime import datetime, timezone
 from pathlib import Path
 
+import pytest
+
 from company_wiki.source_catalog.archive_retired_evidence import (
     archive_retired_evidence,
+)
+from company_wiki.source_catalog.maintenance_retirement import (
+    RetiredMaintenanceError,
 )
 from company_wiki.source_catalog.store import retire_document
 from support.legacy_source_artifact_fixture import legacy_normalize
@@ -28,6 +40,19 @@ ANNUAL = """\
 """
 
 NOW = datetime(2026, 8, 15, tzinfo=timezone.utc)
+
+
+def _sha(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def _count(db: Path, table: str) -> int:
+    with sqlite3.connect(f"file:{db}?mode=ro", uri=True) as con:
+        return int(con.execute(f"SELECT COUNT(*) FROM {table}").fetchone()[0])
+
+
+def _tree(root: Path) -> list[str]:
+    return sorted(str(p.relative_to(root)).replace("\\", "/") for p in root.rglob("*"))
 
 
 def _catalog_with_retired_doc(tmp_path: Path):
@@ -56,65 +81,34 @@ def _catalog_with_retired_doc(tmp_path: Path):
     return catalog
 
 
-def test_archive_exports_retired_evidence_with_row_reconciliation(tmp_path):
+def test_archive_entry_retires_for_cli_shape_and_with_now_with_zero_writes(tmp_path):
     catalog = _catalog_with_retired_doc(tmp_path)
     manifests = tmp_path / "manifests"
-    report = archive_retired_evidence(
-        catalog.config.database_path, manifests, now=NOW
-    )
+    database = catalog.config.database_path
+    db_sha = _sha(database)
+    spans_before = _count(database, "evidence_spans")
+    tree_before = _tree(tmp_path)
 
-    assert report.ok
-    assert report.rows_written == report.rows_in_catalog
-    assert report.rows_written > 0
+    for kwargs in ({}, {"now": NOW}):  # CLI passes no ``now``
+        with pytest.raises(RetiredMaintenanceError) as exc:
+            archive_retired_evidence(database, manifests, **kwargs)
+        assert exc.value.operation == "archive-retired-evidence"
+        assert not isinstance(exc.value, TypeError)
 
-    path = Path(report.archive_path)
-    assert path.exists()
-    assert path.name.startswith("retired-evidence-")
-    assert path.name.endswith(".jsonl.gz")
-    assert "archive" in str(path)
-
-    with gzip.open(path, "rt", encoding="utf-8") as fh:
-        lines = sum(1 for _ in fh)
-    assert lines == report.rows_written
-
-    # First line carries the document/source/locator contract fields.
-    import json
-
-    with gzip.open(path, "rt", encoding="utf-8") as fh:
-        first = json.loads(fh.readline())
-    assert first["document_id"] == catalog.store.fetchone(
-        "SELECT document_id FROM documents"
-    )["document_id"]
-    for key in (
-        "source_id",
-        "locator",
-        "page_number",
-        "paragraph_index",
-        "span_json",
-        "parser_name",
-        "parser_version",
-        "parse_status",
-    ):
-        assert key in first
+    assert not manifests.exists()
+    assert _sha(database) == db_sha
+    assert _count(database, "evidence_spans") == spans_before
+    assert _tree(tmp_path) == tree_before
 
 
-def test_archive_empty_when_no_retired_documents(tmp_path):
-    import company_wiki.source_catalog as module
+def test_archive_entry_retires_without_any_catalog(tmp_path):
+    missing_db = tmp_path / "missing.sqlite3"
+    manifests = tmp_path / "manifests"
 
-    project = tmp_path / "project"
-    source_root = tmp_path / "sources"
-    source_root.mkdir()
-    (source_root / "a.txt").write_text(ANNUAL, encoding="utf-8")
-    catalog = module.SourceCatalog(
-        module.CatalogConfig(
-            project_root=project,
-            catalog_dir=project / ".source_catalog",
-            roots=(module.RootSpec("external", source_root, "directory"),),
-        )
-    )
-    catalog.scan()
-    report = archive_retired_evidence(
-        catalog.config.database_path, tmp_path / "manifests", now=NOW
-    )
-    assert report.ok
-    assert report.rows_written == 0
+    with pytest.raises(RetiredMaintenanceError) as exc:
+        archive_retired_evidence(missing_db, manifests, now=NOW)
+    assert exc.value.operation == "archive-retired-evidence"
+
+    assert not missing_db.exists()
+    assert not manifests.exists()
+    assert _tree(tmp_path) == []

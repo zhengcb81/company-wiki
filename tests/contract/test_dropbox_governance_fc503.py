@@ -8,6 +8,7 @@ NEVER writes: the report embeds a per-file fingerprint so a second run
 proves zero writes, and companies copies are never touched (no deletion
 to fabricate Dropbox-only proof).
 """
+
 import hashlib
 import json
 import sqlite3
@@ -16,8 +17,6 @@ import time
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "src"))
-
-import pytest  # noqa: E402
 
 from company_wiki.source_catalog.models import RootSpec  # noqa: E402
 
@@ -86,12 +85,8 @@ def _mini_catalog(tmp_path: Path, *rows) -> Path:
           role TEXT, location_status TEXT);
         """
     )
-    con.executemany(
-        "INSERT INTO sources VALUES (?,?,?,?)", rows[0]["sources"]
-    )
-    con.executemany(
-        "INSERT INTO documents VALUES (?,?,?,?)", rows[0]["documents"]
-    )
+    con.executemany("INSERT INTO sources VALUES (?,?,?,?)", rows[0]["sources"])
+    con.executemany("INSERT INTO documents VALUES (?,?,?,?)", rows[0]["documents"])
     con.executemany(
         "INSERT INTO locations VALUES (?,?,?,?,?,?,?,?)",
         rows[0]["locations"],
@@ -136,8 +131,11 @@ def test_fc503_pingan_weak_identity_stays_unprovable(tmp_path):
     pingan.mkdir(parents=True)
     body = b"%PDF-1.4 pingan"
     _write_sidecar(
-        pingan, "中国平安：2017年年度报告.pdf", body,
-        display_name="中国平安", security_id="中国平安",
+        pingan,
+        "中国平安：2017年年度报告.pdf",
+        body,
+        display_name="中国平安",
+        security_id="中国平安",
         canonical_entity_id="中国平安",
     )
     report = inventory_dropbox(root)
@@ -160,8 +158,10 @@ def test_fc503_filename_hint_never_upgrades_pingan(tmp_path):
     pingan.mkdir(parents=True)
     body = b"%PDF-1.4 pingan"
     _write_sidecar(
-        pingan, "20190429-长江证券-中国平安-601318-深度报告：解密高ROE.pdf",
-        body, security_id=None,
+        pingan,
+        "20190429-长江证券-中国平安-601318-深度报告：解密高ROE.pdf",
+        body,
+        security_id=None,
     )
     report = inventory_dropbox(root)
     assert report["pingan"]["path_candidates"] == 1
@@ -172,10 +172,11 @@ def test_fc503_filename_hint_never_upgrades_pingan(tmp_path):
     assert "601318" not in json.dumps(report["missing_fields"])
 
 
-def test_fc503_pingan_guard_blocks_unreviewed_promotion(tmp_path):
-    """A 中国平安-path candidate must not become eligible from on-disk
-    sidecar evidence alone — eligibility requires reviewer-completed
-    evidence (FC-403 remediation), so the inventory fails closed."""
+def test_fc503_no_company_special_case_for_complete_sidecars(tmp_path):
+    """G3-CWP-MAINT: the 中国平安 manual-review throw is retired.  The same
+    complete sidecar evidence classifies identically no matter which company
+    name or path carries it; company-specific counters stay diagnostics only.
+    An incomplete identity never upgrades, for any company."""
     from company_wiki.source_catalog.dropbox_governance import (
         GovernanceError,
         inventory_dropbox,
@@ -184,16 +185,59 @@ def test_fc503_pingan_guard_blocks_unreviewed_promotion(tmp_path):
     root = _dropbox_root(tmp_path)
     pingan = root.path / "金融" / "保险" / "中国平安"
     pingan.mkdir(parents=True)
-    body = b"%PDF-1.4 pingan"
-    # complete-looking sidecar (strong ticker + all fields) on a
-    # 中国平安-path candidate — unreviewed evidence must NOT promote it
+    other = root.path / "其他公司"
+    other.mkdir(parents=True)
+
+    # identical COMPLETE evidence under the 中国平安 path — no longer blocked
+    pingan_body = b"%PDF-1.4 pingan complete"
     _write_sidecar(
-        pingan, "20190429-中国平安-601318-深度报告.pdf", body,
-        display_name="中国平安", security_id="601318",
+        pingan,
+        "中国平安-601318-深度报告.pdf",
+        pingan_body,
+        display_name="中国平安",
+        security_id="601318",
         canonical_entity_id="中国平安",
     )
-    with pytest.raises(GovernanceError):
-        inventory_dropbox(root)
+    # the SAME complete sidecar, company name swapped to another company
+    _write_sidecar(
+        other,
+        "贵州茅台-600519-深度报告.pdf",
+        b"%PDF-1.4 moutai complete",
+        display_name="贵州茅台",
+        security_id="600519",
+        canonical_entity_id="ent-moutai",
+    )
+    # and the swapped evidence back under the 中国平安 path: same result
+    _write_sidecar(
+        pingan,
+        "600519-swapped.pdf",
+        b"%PDF-1.4 swapped complete",
+        display_name="贵州茅台",
+        security_id="600519",
+        canonical_entity_id="ent-moutai",
+    )
+    # missing identity stays unprovable for a normal company too
+    _write_sidecar(
+        other,
+        "no-identity.pdf",
+        b"%PDF-1.4 no identity",
+        security_id=None,
+    )
+
+    report = inventory_dropbox(root)  # must NOT raise GovernanceError
+
+    assert report["candidates_total"] == 4
+    assert report["buckets"]["eligible"] == 3
+    assert report["buckets"]["unprovable"] == 1
+    assert "security_id" in report["missing_fields"]
+    # company-specific counters are diagnostics, not gates
+    assert report["pingan"]["path_candidates"] == 2
+    assert report["pingan"]["eligible"] == 2
+    assert report["pingan"]["unprovable"] == 0
+    assert report["inventory_only"] is True
+    assert report["writes"] == 0
+    # the guard exception type stays importable for legacy catchers
+    assert issubclass(GovernanceError, RuntimeError)
 
 
 # --- missing fields reported per bucket -------------------------------------
@@ -232,8 +276,7 @@ def test_fc503_duplicate_location_sets_reported_no_delete(tmp_path):
     digest = hashlib.sha256(body).hexdigest()
     # the sidecar declares a WRONG content hash — governance must still
     # match the duplicate by the actual file bytes
-    _write_sidecar(root.path, "dup2025.pdf", body,
-                   content_sha256="b" * 64)
+    _write_sidecar(root.path, "dup2025.pdf", body, content_sha256="b" * 64)
     companies = tmp_path / "companies"
     companies.mkdir(parents=True)
     company_copy = companies / "dup2025.pdf"
@@ -244,23 +287,44 @@ def test_fc503_duplicate_location_sets_reported_no_delete(tmp_path):
     catalog = _mini_catalog(
         tmp_path,
         {
-            "sources": [("s-dropbox", digest, len(body), "application/pdf"),
-                        ("s-companies", digest, len(body), "application/pdf")],
-            "documents": [("d-dropbox", "s-dropbox", "dup2025", "active"),
-                          ("d-companies", "s-companies", "dup2025", "active")],
+            "sources": [
+                ("s-dropbox", digest, len(body), "application/pdf"),
+                ("s-companies", digest, len(body), "application/pdf"),
+            ],
+            "documents": [
+                ("d-dropbox", "s-dropbox", "dup2025", "active"),
+                ("d-companies", "s-companies", "dup2025", "active"),
+            ],
             "locations": [
-                ("l-dropbox", "dropbox_stock", "dup2025.pdf", "x",
-                 "s-dropbox", "d-dropbox", "original_primary", "active"),
-                ("l-companies", "company_raw", "dup2025.pdf", "x",
-                 "s-companies", "d-companies", "original_primary", "active"),
+                (
+                    "l-dropbox",
+                    "dropbox_stock",
+                    "dup2025.pdf",
+                    "x",
+                    "s-dropbox",
+                    "d-dropbox",
+                    "original_primary",
+                    "active",
+                ),
+                (
+                    "l-companies",
+                    "company_raw",
+                    "dup2025.pdf",
+                    "x",
+                    "s-companies",
+                    "d-companies",
+                    "original_primary",
+                    "active",
+                ),
             ],
         },
     )
     counts_before = _catalog_counts(catalog)
-    report = inventory_dropbox(root, catalog=catalog,
-                              other_root_ids=("company_raw",))
+    report = inventory_dropbox(root, catalog=catalog, other_root_ids=("company_raw",))
     assert report["duplicate_location_sets"]["count"] == 1
-    assert report["duplicate_location_sets"]["samples"][0]["root_ids"] == ["company_raw"]
+    assert report["duplicate_location_sets"]["samples"][0]["root_ids"] == [
+        "company_raw"
+    ]
     # catalog unchanged (read-only) and the companies copy still intact
     assert _catalog_counts(catalog) == counts_before
     after_copy = (company_copy.stat().st_size, company_copy.stat().st_mtime_ns)
@@ -292,8 +356,7 @@ def test_fc503_inventory_read_only_and_deterministic(tmp_path):
     (root.path / "研究.pdf").write_bytes(b"%PDF-1.4 research")
     time.sleep(0.05)
     files_before = {
-        p.name: (p.stat().st_size, p.stat().st_mtime_ns)
-        for p in root.path.iterdir()
+        p.name: (p.stat().st_size, p.stat().st_mtime_ns) for p in root.path.iterdir()
     }
     first = inventory_dropbox(root)
     second = inventory_dropbox(root)
@@ -301,8 +364,7 @@ def test_fc503_inventory_read_only_and_deterministic(tmp_path):
     assert first["buckets"] == second["buckets"]
     assert first["missing_fields"] == second["missing_fields"]
     files_after = {
-        p.name: (p.stat().st_size, p.stat().st_mtime_ns)
-        for p in root.path.iterdir()
+        p.name: (p.stat().st_size, p.stat().st_mtime_ns) for p in root.path.iterdir()
     }
     assert files_after == files_before
     assert first["writes"] == 0

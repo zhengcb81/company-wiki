@@ -1,20 +1,29 @@
-"""User-selected, fail-closed recycling of indexed exact-copy locations."""
+"""Duplicate maintenance: read-only inventory retained, writes retired.
+
+The user-selected recycling flow (preview → confirmation token → recycle bin
+→ tombstone + journal events) is retired (G3-CWP-MAINT): the destructive
+permission chain and its confirmation token are gone, and raw originals are
+never deleted through this path.  What remains:
+
+* :meth:`DuplicateCleanupService.list_groups` — the read-only inventory entry
+  (source/document/location IDs, SHA, root order, canonical vs semantic,
+  pagination) served from the zero-write ``catalog.reader``;
+* :meth:`DuplicateCleanupJournal.read_all` — historical journal reading;
+* thin retired entries for preview / recycle / recycle-bin / journal record,
+  each raising the unified retirement signal (delivered through
+  ``DuplicateMaintenanceRetired``, which is a ``RetiredMaintenanceError`` for
+  new consumers and still a ``DuplicateCleanupError`` for legacy catchers)
+  BEFORE any Store, hash, root, token or journal check runs.
+"""
 
 from __future__ import annotations
 
-import ctypes
-from ctypes import wintypes
-from datetime import UTC, datetime
-import hashlib
 import json
-import os
 from pathlib import Path
 from typing import Any, Callable
-import uuid
 
-from .lock import CatalogOperationLock
+from .maintenance_retirement import RetiredMaintenanceError
 from .service import SourceCatalog
-from .store import canonical_json
 
 
 DUPLICATE_CLEANUP_SCHEMA_VERSION = "1.0"
@@ -25,56 +34,26 @@ class DuplicateCleanupError(RuntimeError):
     """Raised when a requested duplicate recycle action is unsafe or incomplete."""
 
 
-def _utc_now() -> str:
-    return datetime.now(UTC).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+class DuplicateMaintenanceRetired(RetiredMaintenanceError, DuplicateCleanupError):
+    """A retired duplicate-maintenance write entry was called.
 
-
-def _sha256_file(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as stream:
-        for chunk in iter(lambda: stream.read(1024 * 1024), b""):
-            digest.update(chunk)
-    return digest.hexdigest()
+    The canonical signal is :class:`RetiredMaintenanceError` (``code`` and
+    ``operation``); the second base keeps legacy ``DuplicateCleanupError``
+    catchers working for the retired preview/recycle entries.
+    """
 
 
 def recycle_to_windows_bin(path: Path) -> None:
-    """Move one file to the Windows Recycle Bin without showing shell prompts."""
-    if os.name != "nt":
-        raise DuplicateCleanupError("Windows Recycle Bin is unavailable on this platform")
-    if not isinstance(path, Path):
-        raise TypeError("path must be pathlib.Path")
-    if not path.is_file() or path.is_symlink():
-        raise DuplicateCleanupError("recycle target must be one existing regular file")
-
-    class SHFileOperationStruct(ctypes.Structure):
-        _fields_ = [
-            ("hwnd", wintypes.HWND),
-            ("wFunc", wintypes.UINT),
-            ("pFrom", wintypes.LPCWSTR),
-            ("pTo", wintypes.LPCWSTR),
-            ("fFlags", ctypes.c_ushort),
-            ("fAnyOperationsAborted", wintypes.BOOL),
-            ("hNameMappings", wintypes.LPVOID),
-            ("lpszProgressTitle", wintypes.LPCWSTR),
-        ]
-
-    shell32 = ctypes.WinDLL("shell32", use_last_error=True)
-    shell32.SHFileOperationW.argtypes = (ctypes.POINTER(SHFileOperationStruct),)
-    shell32.SHFileOperationW.restype = ctypes.c_int
-    operation = SHFileOperationStruct()
-    operation.wFunc = 3  # FO_DELETE
-    operation.pFrom = str(path) + "\0\0"
-    operation.pTo = None
-    operation.fFlags = 0x0040 | 0x0010 | 0x0004 | 0x0400  # ALLOWUNDO, no UI
-    result = shell32.SHFileOperationW(ctypes.byref(operation))
-    if result != 0:
-        raise DuplicateCleanupError(f"Windows Recycle Bin operation failed: code={result}")
-    if operation.fAnyOperationsAborted:
-        raise DuplicateCleanupError("Windows Recycle Bin operation was aborted")
+    """Retired: never moves a file again; raises before touching the path."""
+    raise DuplicateMaintenanceRetired("duplicate-recycle-bin")
 
 
 class DuplicateCleanupJournal:
-    """Append-only audit events; callers hold the catalog writer lock."""
+    """Append-only audit events; callers hold the catalog writer lock.
+
+    Reading (``read_all``) is retained for historical audit/export; writing
+    (``record``) is retired and fails closed before creating the file.
+    """
 
     def __init__(self, catalog_dir: Path):
         self.path = catalog_dir / "duplicate_cleanup_events.jsonl"
@@ -93,30 +72,7 @@ class DuplicateCleanupJournal:
         error_type: str | None = None,
         error: str | None = None,
     ) -> dict[str, Any]:
-        if event not in {"requested", "recycled", "failed"}:
-            raise ValueError(f"unsupported duplicate cleanup event: {event}")
-        values = {
-            "schema_version": DUPLICATE_CLEANUP_SCHEMA_VERSION,
-            "event_id": "urn:company-wiki:duplicate-cleanup-event:uuid:" + uuid.uuid4().hex,
-            "action_id": action_id,
-            "event": event,
-            "recorded_at": _utc_now(),
-            "location_id": location_id,
-            "absolute_path": absolute_path,
-            "canonical_location_id": canonical_location_id,
-            "canonical_path": canonical_path,
-            "source_id": source_id,
-            "content_sha256": content_sha256,
-            "error_type": error_type,
-            "error": error,
-        }
-        self.path.parent.mkdir(parents=True, exist_ok=True)
-        encoded = (canonical_json(values) + "\n").encode("utf-8")
-        with self.path.open("ab") as stream:
-            stream.write(encoded)
-            stream.flush()
-            os.fsync(stream.fileno())
-        return values
+        raise DuplicateMaintenanceRetired("duplicate-journal-record")
 
     def read_all(self) -> tuple[dict[str, Any], ...]:
         if not self.path.is_file():
@@ -162,7 +118,11 @@ class DuplicateCleanupJournal:
 
 
 class DuplicateCleanupService:
-    """Present and recycle exact copies by stable catalog location ID only."""
+    """Read-only exact-copy inventory; every write entry is retired.
+
+    Construction keeps the catalog reference without opening a Store; the
+    inventory reads through ``catalog.reader`` only.
+    """
 
     def __init__(
         self,
@@ -178,18 +138,24 @@ class DuplicateCleanupService:
 
     def list_groups(
         self,
-        *,
         text: str | None = None,
         limit: int = 50,
         offset: int = 0,
         include_semantic: bool = False,
     ) -> dict[str, Any]:
+        """Read-only inventory of exact-copy (and optional semantic) groups.
+
+        Inventory only: ``eligible_for_recycle`` is uniformly false, no
+        confirmation token is minted, and ``reclaimable_*`` totals are the
+        registered upper bound — nothing here authorises a deletion.
+        """
         if limit <= 0 or limit > 200:
             raise ValueError("limit must be between 1 and 200")
         if offset < 0:
             raise ValueError("offset must be non-negative")
         normalized_text = text.casefold().strip() if text else ""
-        location_rows = self.catalog.store.fetchall(
+        reader = self.catalog.reader
+        location_rows = reader.fetchall(
             """WITH duplicate_keys AS (
                 SELECT document_id,source_id
                 FROM locations
@@ -209,13 +175,15 @@ class DuplicateCleanupService:
             WHERE l.role='original_primary' AND l.location_status='active'
             ORDER BY d.document_id,l.source_id,r.priority,l.root_id,l.relative_path,l.location_id"""
         )
-        entity_rows = self.catalog.store.fetchall(
+        entity_rows = reader.fetchall(
             """SELECT de.document_id,e.name FROM document_entities de
             JOIN entities e ON e.entity_id=de.entity_id ORDER BY de.document_id,e.entity_id"""
         )
         entities_by_document: dict[str, list[str]] = {}
         for item in entity_rows:
-            entities_by_document.setdefault(item["document_id"], []).append(item["name"])
+            entities_by_document.setdefault(item["document_id"], []).append(
+                item["name"]
+            )
         locations_by_key: dict[tuple[str, str], list[dict[str, Any]]] = {}
         for item in location_rows:
             locations_by_key.setdefault(
@@ -238,7 +206,11 @@ class DuplicateCleanupService:
                 protection_reason="canonical_copy",
             )
             public_duplicates = [
-                self._public_location(item, eligible=True, protection_reason=None)
+                self._public_location(
+                    item,
+                    eligible=False,
+                    protection_reason="maintenance_retired",
+                )
                 for item in duplicates
             ]
             entity_names = entities_by_document.get(document_id, [])
@@ -282,7 +254,9 @@ class DuplicateCleanupService:
                 )
                 public_duplicates = [
                     self._public_location(
-                        item, eligible=False, protection_reason="semantic_review_only"
+                        item,
+                        eligible=False,
+                        protection_reason="semantic_review_only",
                     )
                     for item in semantic["duplicates"]
                 ]
@@ -328,6 +302,9 @@ class DuplicateCleanupService:
         total_bytes = sum(int(item["reclaimable_bytes"]) for item in groups)
         return {
             "schema_version": DUPLICATE_CLEANUP_SCHEMA_VERSION,
+            "inventory_only": True,
+            "original_delete_count": 0,
+            "reclaimable_is_upper_bound": True,
             "total_groups": total_groups,
             "total_reclaimable_copies": total_copies,
             "total_reclaimable_bytes": total_bytes,
@@ -357,24 +334,7 @@ class DuplicateCleanupService:
         }
 
     def preview(self, location_id: str) -> dict[str, Any]:
-        prepared = self._prepare(location_id)
-        token = self._confirmation_token(prepared)
-        return {
-            "schema_version": DUPLICATE_CLEANUP_SCHEMA_VERSION,
-            "status": "ready",
-            "location_id": prepared["location"]["location_id"],
-            "absolute_path": str(prepared["path"]),
-            "root_id": prepared["location"]["root_id"],
-            "size_bytes": prepared["path_stat"].st_size,
-            "source_id": prepared["source_id"],
-            "content_sha256": prepared["content_sha256"],
-            "canonical_location_id": prepared["canonical"]["location_id"],
-            "canonical_path": str(prepared["canonical_path"]),
-            "confirmation_token": token,
-            "confirmation_phrase": "RECYCLE " + token[-8:].upper(),
-            "action": "move_to_windows_recycle_bin",
-            "recoverable": True,
-        }
+        raise DuplicateMaintenanceRetired("duplicate-preview")
 
     def recycle(
         self,
@@ -382,185 +342,7 @@ class DuplicateCleanupService:
         *,
         confirmation_token: str,
     ) -> dict[str, Any]:
-        if not isinstance(confirmation_token, str) or not confirmation_token:
-            raise DuplicateCleanupError("confirmation token is required")
-        with CatalogOperationLock(
-            self.catalog.config.catalog_dir,
-            operation="duplicate_recycle",
-        ):
-            prepared = self._prepare(location_id)
-            expected_token = self._confirmation_token(prepared)
-            if confirmation_token != expected_token:
-                raise DuplicateCleanupError(
-                    "confirmation token is stale; preview the duplicate again"
-                )
-            path = prepared["path"]
-            canonical_path = prepared["canonical_path"]
-            content_sha256 = prepared["content_sha256"]
-            if _sha256_file(canonical_path) != content_sha256:
-                raise DuplicateCleanupError("canonical file hash no longer matches the catalog")
-            if _sha256_file(path) != content_sha256:
-                raise DuplicateCleanupError("duplicate file hash no longer matches the catalog")
-
-            action_id = "urn:company-wiki:duplicate-cleanup-action:uuid:" + uuid.uuid4().hex
-            event_values = {
-                "action_id": action_id,
-                "location_id": prepared["location"]["location_id"],
-                "absolute_path": str(path),
-                "canonical_location_id": prepared["canonical"]["location_id"],
-                "canonical_path": str(canonical_path),
-                "source_id": prepared["source_id"],
-                "content_sha256": content_sha256,
-            }
-            self.journal.record(event="requested", **event_values)
-            try:
-                self.recycler(path)
-                if path.exists():
-                    raise DuplicateCleanupError(
-                        "recycler returned without removing the selected copy"
-                    )
-                with self.catalog.store.transaction() as connection:
-                    cursor = connection.execute(
-                        """UPDATE locations SET location_status='missing'
-                        WHERE location_id=? AND location_status='active' AND source_id=?""",
-                        (prepared["location"]["location_id"], prepared["source_id"]),
-                    )
-                    if cursor.rowcount != 1:
-                        raise DuplicateCleanupError(
-                            "catalog location changed while the file was being recycled"
-                        )
-            except Exception as exc:
-                self.journal.record(
-                    event="failed",
-                    error_type=type(exc).__name__,
-                    error=str(exc),
-                    **event_values,
-                )
-                if isinstance(exc, DuplicateCleanupError):
-                    raise
-                raise DuplicateCleanupError(str(exc)) from exc
-            self.journal.record(event="recycled", **event_values)
-            return {
-                "schema_version": DUPLICATE_CLEANUP_SCHEMA_VERSION,
-                "status": "recycled",
-                "action_id": action_id,
-                "location_id": prepared["location"]["location_id"],
-                "absolute_path": str(path),
-                "canonical_location_id": prepared["canonical"]["location_id"],
-                "canonical_path": str(canonical_path),
-                "content_sha256": content_sha256,
-                "recoverable": True,
-                "recovery_location": "Windows Recycle Bin",
-            }
-
-    def _prepare(self, location_id: str) -> dict[str, Any]:
-        if not isinstance(location_id, str) or not location_id.strip():
-            raise DuplicateCleanupError("location_id must be non-empty text")
-        indexed = self.catalog.store.fetchone(
-            """SELECT l.location_id,l.document_id,l.root_id,l.relative_path,l.absolute_path,
-            l.source_id,l.role,l.location_status,l.observed_size,l.observed_mtime_ns,
-            r.priority AS root_priority FROM locations l JOIN roots r ON r.root_id=l.root_id
-            WHERE l.location_id=?""",
-            (location_id,),
-        )
-        if indexed is None:
-            raise DuplicateCleanupError("location is not an indexed exact-copy")
-        target = dict(indexed)
-        if (
-            target["role"] != "original_primary"
-            or target["location_status"] != "active"
-            or not target["document_id"]
-            or not target["source_id"]
-        ):
-            raise DuplicateCleanupError(
-                "location is not an active noncanonical exact-copy"
-            )
-        peers = [
-            dict(item)
-            for item in self.catalog.store.fetchall(
-                """SELECT l.location_id,l.document_id,l.root_id,l.relative_path,l.absolute_path,
-                l.source_id,l.role,l.location_status,l.observed_size,l.observed_mtime_ns,
-                r.priority AS root_priority FROM locations l JOIN roots r ON r.root_id=l.root_id
-                WHERE l.document_id=? AND l.source_id=? AND l.role='original_primary'
-                AND l.location_status='active'
-                ORDER BY r.priority,l.root_id,l.relative_path,l.location_id""",
-                (target["document_id"], target["source_id"]),
-            )
-        ]
-        if len(peers) <= 1:
-            raise DuplicateCleanupError("location is not an indexed exact-copy")
-        annotated = self.catalog._annotate_locations(target["document_id"], peers)
-        target = next(item for item in annotated if item["location_id"] == location_id)
-        if target["is_canonical"]:
-            raise DuplicateCleanupError("canonical copy is protected and cannot be recycled")
-        if target["duplicate_relation"] != "exact_copy":
-            raise DuplicateCleanupError(
-                "location is not an active noncanonical exact-copy"
-            )
-        canonical = next(item for item in annotated if item["is_canonical"])
-        source = self.catalog.store.fetchone(
-            "SELECT content_sha256 FROM sources WHERE source_id=?",
-            (target["source_id"],),
-        )
-        if source is None:
-            raise DuplicateCleanupError("source hash is unavailable")
-        path, path_stat = self._validated_path(target)
-        canonical_path, canonical_stat = self._validated_path(canonical)
-        if path == canonical_path:
-            raise DuplicateCleanupError("duplicate and canonical resolve to the same path")
-        return {
-            "location": target,
-            "canonical": canonical,
-            "path": path,
-            "path_stat": path_stat,
-            "canonical_path": canonical_path,
-            "canonical_stat": canonical_stat,
-            "source_id": target["source_id"],
-            "content_sha256": source["content_sha256"],
-        }
-
-    def _validated_path(self, location: dict[str, Any]) -> tuple[Path, os.stat_result]:
-        root = next(
-            (
-                item
-                for item in self.catalog.config.roots
-                if item.root_id == location["root_id"]
-            ),
-            None,
-        )
-        if root is None:
-            raise DuplicateCleanupError("location root is no longer configured")
-        indexed_path = Path(location["absolute_path"])
-        if indexed_path.is_symlink():
-            raise DuplicateCleanupError("symbolic-link locations cannot be recycled")
-        try:
-            resolved_root = root.path.resolve(strict=True)
-            resolved_path = indexed_path.resolve(strict=True)
-            relative_parts = Path(location["relative_path"]).parts
-            expected_path = resolved_root.joinpath(*relative_parts).resolve(strict=True)
-        except (FileNotFoundError, OSError) as exc:
-            raise DuplicateCleanupError("indexed file or configured root no longer exists") from exc
-        if not resolved_path.is_relative_to(resolved_root) or resolved_path != expected_path:
-            raise DuplicateCleanupError("indexed path is outside its configured root")
-        if not resolved_path.is_file() or resolved_path.is_symlink():
-            raise DuplicateCleanupError("indexed location is not one regular file")
-        return resolved_path, resolved_path.stat()
-
-    @staticmethod
-    def _confirmation_token(prepared: dict[str, Any]) -> str:
-        values = {
-            "location_id": prepared["location"]["location_id"],
-            "canonical_location_id": prepared["canonical"]["location_id"],
-            "source_id": prepared["source_id"],
-            "content_sha256": prepared["content_sha256"],
-            "absolute_path": str(prepared["path"]),
-            "canonical_path": str(prepared["canonical_path"]),
-            "size": prepared["path_stat"].st_size,
-            "mtime_ns": prepared["path_stat"].st_mtime_ns,
-            "canonical_size": prepared["canonical_stat"].st_size,
-            "canonical_mtime_ns": prepared["canonical_stat"].st_mtime_ns,
-        }
-        return hashlib.sha256(canonical_json(values).encode("utf-8")).hexdigest()
+        raise DuplicateMaintenanceRetired("duplicate-recycle")
 
 
 __all__ = [
@@ -568,5 +350,6 @@ __all__ = [
     "DuplicateCleanupError",
     "DuplicateCleanupJournal",
     "DuplicateCleanupService",
+    "DuplicateMaintenanceRetired",
     "recycle_to_windows_bin",
 ]

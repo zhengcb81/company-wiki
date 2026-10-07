@@ -1,0 +1,157 @@
+{
+  "schema_version": "g3-handoff/1",
+  "lane": "G3-CWP-MAINT",
+  "base_commit": "5930a644453ed46494c2c83c5ecfb97767fa9492",
+  "head_commit": "245a7f773a75a7e757ce71b9fca093d99788a9e6",
+  "branch": "codex/g3-cwp-maint",
+  "worktree": "C:/Users/郑曾波/Projects/_g3/CWP-MAINT/company-wiki",
+  "commits": [
+    "245a7f773a75a7e757ce71b9fca093d99788a9e6"
+  ],
+  "changed_paths": [
+    "src/company_wiki/source_catalog/maintenance_retirement.py",
+    "src/company_wiki/source_catalog/focus_cleanup.py",
+    "src/company_wiki/source_catalog/archive_retired_evidence.py",
+    "src/company_wiki/source_catalog/prune_retired_evidence.py",
+    "src/company_wiki/source_catalog/duplicate_cleanup.py",
+    "src/company_wiki/source_catalog/dropbox_governance.py",
+    "tools/dropbox_governance_replay.py",
+    "tests/contract/test_g3_retired_maintenance.py",
+    "tests/contract/test_g3_readonly_inventory.py",
+    "tests/contract/test_source_catalog_focus_cleanup.py",
+    "tests/contract/test_source_catalog_archive_retired.py",
+    "tests/contract/test_source_catalog_prune_retired.py",
+    "tests/contract/test_source_catalog_duplicate_cleanup.py",
+    "tests/contract/test_dropbox_governance_fc503.py",
+    "docs/implementation/g3-cwp-maint/task_plan.md",
+    "docs/implementation/g3-cwp-maint/findings.md",
+    "docs/implementation/g3-cwp-maint/progress.md",
+    "docs/implementation/g3-cwp-maint/HANDOFF.md",
+    "docs/implementation/g3-cwp-maint/main_wiring.md",
+    "docs/implementation/g3-cwp-maint/handoff.json"
+  ],
+  "tests": [
+    {
+      "command": "python -m pytest -q tests/contract/test_g3_retired_maintenance.py tests/contract/test_g3_readonly_inventory.py tests/contract/test_source_catalog_focus_cleanup.py tests/contract/test_source_catalog_archive_retired.py tests/contract/test_source_catalog_prune_retired.py tests/contract/test_source_catalog_duplicate_cleanup.py tests/contract/test_dropbox_governance_fc503.py",
+      "exit_code": 0,
+      "seconds": 40,
+      "passed": 35,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "command": "python -m pytest -q tests/contract/test_r4b02_candidate_selection.py tests/contract/test_architecture_gate.py tests/unit/test_architecture_gate.py tests/contract/test_future_root_config_only.py tests/contract/test_three_root_consistency_fc604.py tests/contract/test_r9_v1_removal_gate.py tests/contract/test_fc1204_coverage_ratchet.py tests/contract/test_check_unique_test_symbols.py",
+      "exit_code": 0,
+      "seconds": 8,
+      "passed": 52,
+      "failed": 0,
+      "skipped": 6
+    },
+    {
+      "command": "python -m pytest -q tests/contract/test_source_catalog_semantic_duplicates.py tests/contract/test_zr203_reader_rewire.py tests/contract/test_fc1201_root_hardcode_gate.py tests/contract/test_fc1203_dead_helpers_absent.py tests/contract/test_source_catalog_code_identity.py",
+      "exit_code": 1,
+      "seconds": 12,
+      "passed": 22,
+      "failed": 1,
+      "skipped": 0
+    },
+    {
+      "command": "python -m pytest -q tests/contract/test_dropbox_config_invariants.py tests/contract/test_dropbox_root_policy_fc501.py tests/contract/test_source_catalog_dropbox_probe.py",
+      "exit_code": 0,
+      "seconds": 2,
+      "passed": 11,
+      "failed": 0,
+      "skipped": 1
+    },
+    {
+      "command": "python -m pytest -q tests/contract/test_source_catalog_export_index.py tests/contract/test_source_catalog_control.py",
+      "exit_code": 0,
+      "seconds": 18,
+      "passed": 32,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "command": "python -m pytest -q tests/contract/test_source_catalog_pipeline.py tests/contract/test_source_catalog_background_reliability.py",
+      "exit_code": 0,
+      "seconds": 17,
+      "passed": 19,
+      "failed": 0,
+      "skipped": 0
+    }
+  ],
+  "behavior_changes": [
+    "legacy write entries (focus-cleanup preview/apply, focus restore_files/restore_database, archive-retired-evidence, prune-retired-evidence, duplicate-preview, duplicate-recycle, recycle_to_windows_bin, DuplicateCleanupJournal.record) raise maintenance_retirement.RetiredMaintenanceError (code=MAINTENANCE_OPERATION_RETIRED, operation=<entry name>) BEFORE any Store, operation lock, file or journal access, for every historical call shape (missing now, unknown confirmation token, dry-run, --apply, nonexistent paths)",
+    "archive_retired_evidence/prune_retired_evidence now is optional so historical callers that pass no now hit the retirement signal instead of a TypeError",
+    "DuplicateCleanupService.list_groups reads exclusively through catalog.reader (0 CatalogStore construction); eligible_for_recycle is uniformly false; the report carries inventory_only=true, original_delete_count=0 and reclaimable_is_upper_bound=true while keeping total_reclaimable_* as the registered upper bound; no confirmation token is ever minted",
+    "inventory_dropbox drops the company-specific 中国平安 eligible throw: identical evidence classifies identically for every company, pingan counters stay diagnostics, report adds inventory_only, identity-incomplete candidates remain unprovable via the generic classifier, real read errors propagate, nothing writes back",
+    "tools/dropbox_governance_replay.py becomes a read-only report entry: no production config/catalog resolution, no company manual sign-off, no real Dropbox scan unless an explicit --root is supplied",
+    "destructive archive/manifest/prune/focus-cleanup/restore implementations and their dead helpers deleted (~2600 lines removed from the five legacy modules)"
+  ],
+  "compatibility": [
+    "package exports unchanged and importable: FOCUS_CLEANUP_SCHEMA_VERSION, FocusScopeCleanupService, DUPLICATE_CLEANUP_SCHEMA_VERSION, DuplicateCleanupError, DuplicateCleanupJournal, DuplicateCleanupService, recycle_to_windows_bin",
+    "duplicate write entries raise DuplicateMaintenanceRetired(RetiredMaintenanceError, DuplicateCleanupError): canonical signal for MAIN's CLI mapping while legacy DuplicateCleanupError catchers keep working (test_source_catalog_semantic_duplicates.py untouched and green)",
+    "list_groups signature is positional-or-keyword (text, limit, offset, include_semantic): a superset of the previous keyword-only shape; all existing keyword callers behave identically",
+    "GovernanceError remains importable (documented as never raised); RETENTION_DAYS and DuplicateCleanupJournal.record(...) signature retained as thin compat",
+    "cli.py untouched: retired branches currently fail closed through structured_error as fatal/exit 1; the named non-zero mapping and help cleanup are MAIN's wiring work"
+  ],
+  "protected_state": {
+    "production_raw_deleted": 0,
+    "production_db_writes": 0,
+    "real_dropbox_scanned": false,
+    "recycle_bin_executed": false,
+    "restored_46g": false,
+    "config_or_acquisition_files_touched": false,
+    "main_uncommitted_changes_borrowed": false,
+    "cli_code_identity_hooks_ci_untouched": true
+  },
+  "cleanup": {
+    "roots": [
+      ".planning/g3-cwp-maint"
+    ],
+    "restored": true
+  },
+  "external_effects": {
+    "network_requests": 0,
+    "model_posts": 0,
+    "raw_deleted": 0,
+    "production_writes": 0
+  },
+  "remaining": [
+    "MAIN: cli.py parser/import/handler retirement, RetiredMaintenanceError -> named non-zero result, and old write guidance removal from help (main_wiring.md section 1) — NOT claimed complete by this lane",
+    "MAIN: decide package-level export of RetiredMaintenanceError and whether maintenance_retirement.py joins code_identity CORE_SOURCE_PATHS (main_wiring.md sections 2-3)",
+    "MAIN: fc1204 coverage floors re-measured in the CI coverage round for the stubbed modules; fc1201 frozen allowlist deliberately untouched",
+    "pre-existing red unrelated to this lane: tests/contract/test_zr203_reader_rewire.py::test_write_paths_still_use_store also fails on master HEAD (service.py 'self.store,' count 3 < 4 since 18da250; service.py is outside this card's write set)",
+    "MAIN: if the DuplicateMaintenanceRetired dual base is ever dropped, replace pytest.raises(DuplicateCleanupError) in tests/contract/test_source_catalog_semantic_duplicates.py::test_semantic_member_is_not_recyclable"
+  ],
+  "main_integration": {
+    "retirement_error": "maintenance_retirement.RetiredMaintenanceError",
+    "cli_branches": [
+      "cli.py:28 import DuplicateCleanupService (keep for duplicates)",
+      "cli.py:31 import FocusScopeCleanupService",
+      "cli.py:203-213 focus-cleanup parser",
+      "cli.py:897-931 focus-cleanup handler",
+      "cli.py:289-293 archive-retired-evidence parser",
+      "cli.py:1024-1030 archive-retired-evidence handler",
+      "cli.py:294-298 prune-retired-evidence parser",
+      "cli.py:1031-1037 prune-retired-evidence handler",
+      "cli.py:314-327 duplicates parser (read-only, keep)",
+      "cli.py:1049-1055 duplicates handler (read-only, keep)",
+      "cli.py:329-333 duplicate-preview parser",
+      "cli.py:1056-1057 duplicate-preview handler",
+      "cli.py:335-340 duplicate-recycle parser",
+      "cli.py:1058-1061 duplicate-recycle handler",
+      "cli.py:1385 except Exception -> structured_error (insert RetiredMaintenanceError branch before it)"
+    ],
+    "code_identity_paths": [
+      "src/company_wiki/source_catalog/code_identity.py (CORE_SOURCE_PATHS still pins focus_cleanup.py, whose content changed; sync loaded-code fingerprints on integration)",
+      "src/company_wiki/source_catalog/focus_cleanup.py"
+    ],
+    "engineering_lists": [
+      "tests/contract/test_fc1204_coverage_ratchet.py floors: dropbox_governance.py 95 (TIER1), archive_retired_evidence.py 95, duplicate_cleanup.py 74, focus_cleanup.py 86, prune_retired_evidence.py 87",
+      "tests/contract/test_fc1201_root_hardcode_gate.py FC_1201_FROZEN_ALLOWLIST + architecture_gate.py allowlist both keep focus_cleanup.py (unchanged)",
+      "tools/pre_push_gate.py FAST_CONTRACT_CASES / CI smoke membership for the new g3 tests",
+      "tests/contract/test_zr203_reader_rewire.py::test_write_paths_still_use_store pre-existing failure owned by MAIN (service.py)"
+    ]
+  }
+}

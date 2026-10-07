@@ -1,4 +1,14 @@
-"""Safety contracts for user-selected exact-copy recycling."""
+"""Safety contracts for duplicate maintenance after the G3-CWP-MAINT retirement.
+
+The read surface (``list_groups``) stays: canonical/exact-copy inventory with
+``eligible_for_recycle`` uniformly false, inventory-only reporting and no
+confirmation tokens.  The write surface (preview / recycle / recycle-bin /
+journal record) fails closed with the unified retirement signal before any
+hash, root, token or journal check — and the CLI branches fail closed the
+same way.  The stale ``scripts/source_catalog_control.ps1`` entry assertion
+was removed with the retired flow (the script no longer exists; it is not
+rebuilt).
+"""
 
 from __future__ import annotations
 
@@ -7,6 +17,10 @@ import os
 from pathlib import Path
 
 import pytest
+
+from company_wiki.source_catalog.maintenance_retirement import (
+    RetiredMaintenanceError,
+)
 
 
 def _catalog_module():
@@ -52,6 +66,9 @@ def test_duplicate_inventory_exposes_only_noncanonical_exact_copies(tmp_path):
     inventory = service.list_groups(limit=10)
 
     assert inventory["schema_version"] == "1.0"
+    assert inventory["inventory_only"] is True
+    assert inventory["original_delete_count"] == 0
+    assert inventory["reclaimable_is_upper_bound"] is True
     assert inventory["total_groups"] == 1
     assert inventory["total_reclaimable_copies"] == 2
     group = inventory["groups"][0]
@@ -62,70 +79,60 @@ def test_duplicate_inventory_exposes_only_noncanonical_exact_copies(tmp_path):
         str(paths[1].resolve()),
         str(paths[2].resolve()),
     ]
-    assert all(item["eligible_for_recycle"] for item in group["duplicates"])
+    assert all(item["eligible_for_recycle"] is False for item in group["duplicates"])
+    assert all(item["protection_reason"] for item in group["duplicates"])
     assert "confirmation_token" not in group["duplicates"][0]
 
-    preview = service.preview(group["duplicates"][0]["location_id"])
-    assert preview["status"] == "ready"
-    assert preview["confirmation_phrase"] == (
-        "RECYCLE " + preview["confirmation_token"][-8:].upper()
-    )
-    with pytest.raises(module.DuplicateCleanupError, match="canonical"):
-        service.preview(group["canonical"]["location_id"])
 
-
-def test_recycle_selected_copy_preserves_other_files_and_tombstones_location(tmp_path):
+def test_duplicate_preview_and_recycle_retire_and_preserve_everything(tmp_path):
     module, catalog, paths = _catalog_with_three_copies(tmp_path)
-    recycled: list[Path] = []
-
-    def recycler(path: Path) -> None:
-        recycled.append(path)
-        path.unlink()
-
-    service = module.DuplicateCleanupService(catalog, recycler=recycler)
-    selected = service.list_groups(limit=10)["groups"][0]["duplicates"][0]
-    preview = service.preview(selected["location_id"])
-
-    result = service.recycle(
-        selected["location_id"],
-        confirmation_token=preview["confirmation_token"],
+    recycler_calls: list[Path] = []
+    service = module.DuplicateCleanupService(
+        catalog,
+        recycler=lambda path: recycler_calls.append(path),
     )
+    selected = service.list_groups(limit=10)["groups"][0]["duplicates"][0]
+    tree_before = sorted(str(p.relative_to(tmp_path)) for p in tmp_path.rglob("*"))
 
-    assert result["status"] == "recycled"
-    assert result["recoverable"] is True
-    assert recycled == [paths[1].resolve()]
-    assert paths[0].is_file()
-    assert not paths[1].exists()
-    assert paths[2].is_file()
+    with pytest.raises(RetiredMaintenanceError) as exc:
+        service.preview(selected["location_id"])
+    assert exc.value.operation == "duplicate-preview"
+    assert isinstance(exc.value, module.DuplicateCleanupError)
+
+    with pytest.raises(RetiredMaintenanceError) as exc:
+        service.recycle(
+            selected["location_id"],
+            confirmation_token="stale-token",
+        )
+    assert exc.value.operation == "duplicate-recycle"
+    assert isinstance(exc.value, module.DuplicateCleanupError)
+
+    assert recycler_calls == []
+    assert all(path.is_file() for path in paths)
     row = catalog.store.fetchone(
         "SELECT location_status FROM locations WHERE location_id=?",
         (selected["location_id"],),
     )
-    assert row is not None and row["location_status"] == "missing"
-    remaining = service.list_groups(limit=10)
-    assert remaining["total_groups"] == 1
-    assert remaining["total_reclaimable_copies"] == 1
-
+    assert row is not None and row["location_status"] == "active"
     journal_path = catalog.config.catalog_dir / "duplicate_cleanup_events.jsonl"
-    events = [json.loads(line) for line in journal_path.read_text(encoding="utf-8").splitlines()]
-    assert [item["event"] for item in events] == ["requested", "recycled"]
-    assert {item["action_id"] for item in events} == {result["action_id"]}
-    exported = catalog.export_indexes()
-    audit_csv = exported["duplicate_cleanup_events_csv"].read_text(encoding="utf-8-sig")
-    assert result["action_id"] in audit_csv
-    assert "requested" in audit_csv and "recycled" in audit_csv
+    assert not journal_path.exists()
+    assert service.journal.read_all() == ()
+    assert sorted(str(p.relative_to(tmp_path)) for p in tmp_path.rglob("*")) == (
+        tree_before
+    )
 
 
-def test_recycle_revalidates_hash_boundary_and_failure_before_catalog_mutation(tmp_path):
+def test_retirement_skips_hash_root_and_token_validation_entirely(tmp_path):
+    """Tampered bytes, a moved path and a stale token used to raise specific
+    DuplicateCleanupErrors; the retired entries never reach those checks."""
     module, catalog, paths = _catalog_with_three_copies(tmp_path)
     recycler_calls: list[Path] = []
-
-    def recycler(path: Path) -> None:
-        recycler_calls.append(path)
-
-    service = module.DuplicateCleanupService(catalog, recycler=recycler)
+    service = module.DuplicateCleanupService(
+        catalog,
+        recycler=lambda path: recycler_calls.append(path),
+    )
     selected = service.list_groups(limit=10)["groups"][0]["duplicates"][0]
-    preview = service.preview(selected["location_id"])
+
     original_stat = paths[1].stat()
     tampered = bytearray(paths[1].read_bytes())
     tampered[0] ^= 1
@@ -134,18 +141,12 @@ def test_recycle_revalidates_hash_boundary_and_failure_before_catalog_mutation(t
         paths[1],
         ns=(original_stat.st_atime_ns, original_stat.st_mtime_ns),
     )
-
-    with pytest.raises(module.DuplicateCleanupError, match="hash"):
+    with pytest.raises(RetiredMaintenanceError) as exc:
         service.recycle(
             selected["location_id"],
-            confirmation_token=preview["confirmation_token"],
+            confirmation_token="whatever",
         )
-    assert recycler_calls == []
-    row = catalog.store.fetchone(
-        "SELECT location_status FROM locations WHERE location_id=?",
-        (selected["location_id"],),
-    )
-    assert row is not None and row["location_status"] == "active"
+    assert exc.value.operation == "duplicate-recycle"
 
     paths[1].write_bytes(paths[0].read_bytes())
     outside = tmp_path / "outside.pdf"
@@ -155,74 +156,49 @@ def test_recycle_revalidates_hash_boundary_and_failure_before_catalog_mutation(t
             "UPDATE locations SET absolute_path=? WHERE location_id=?",
             (str(outside.resolve()), selected["location_id"]),
         )
-    with pytest.raises(module.DuplicateCleanupError, match="configured root"):
+    with pytest.raises(RetiredMaintenanceError) as exc:
         service.preview(selected["location_id"])
-    assert outside.is_file()
-    assert recycler_calls == []
-
-
-def test_recycler_failure_keeps_location_active_and_records_failure(tmp_path):
-    module, catalog, paths = _catalog_with_three_copies(tmp_path)
-
-    def broken_recycler(path: Path) -> None:
-        raise OSError("recycle bin unavailable")
-
-    service = module.DuplicateCleanupService(catalog, recycler=broken_recycler)
-    selected = service.list_groups(limit=10)["groups"][0]["duplicates"][0]
-    preview = service.preview(selected["location_id"])
-
-    with pytest.raises(module.DuplicateCleanupError, match="recycle bin unavailable"):
-        service.recycle(
-            selected["location_id"],
-            confirmation_token=preview["confirmation_token"],
-        )
-
-    assert paths[1].is_file()
-    row = catalog.store.fetchone(
-        "SELECT location_status FROM locations WHERE location_id=?",
-        (selected["location_id"],),
-    )
-    assert row is not None and row["location_status"] == "active"
-    journal_path = catalog.config.catalog_dir / "duplicate_cleanup_events.jsonl"
-    events = [json.loads(line) for line in journal_path.read_text(encoding="utf-8").splitlines()]
-    assert [item["event"] for item in events] == ["requested", "failed"]
-
-
-def test_stale_confirmation_and_missing_canonical_fail_before_recycler(tmp_path):
-    module, catalog, paths = _catalog_with_three_copies(tmp_path)
-    recycler_calls: list[Path] = []
-    service = module.DuplicateCleanupService(
-        catalog,
-        recycler=lambda path: recycler_calls.append(path),
-    )
-    selected = service.list_groups(limit=10)["groups"][0]["duplicates"][0]
-    preview = service.preview(selected["location_id"])
-    current = paths[1].stat()
-    os.utime(
-        paths[1],
-        ns=(current.st_atime_ns, current.st_mtime_ns + 1_000_000_000),
-    )
-
-    with pytest.raises(module.DuplicateCleanupError, match="stale"):
-        service.recycle(
-            selected["location_id"],
-            confirmation_token=preview["confirmation_token"],
-        )
-    assert recycler_calls == []
+    assert exc.value.operation == "duplicate-preview"
 
     paths[0].unlink()
-    with pytest.raises(module.DuplicateCleanupError, match="no longer exists"):
+    with pytest.raises(RetiredMaintenanceError) as exc:
         service.preview(selected["location_id"])
+    assert exc.value.operation == "duplicate-preview"
+
+    assert outside.is_file()
     assert paths[1].is_file()
     assert paths[2].is_file()
     assert recycler_calls == []
 
 
-def test_duplicate_cli_lists_previews_and_recycles_only_by_location_id(
-    tmp_path, monkeypatch, capsys
-):
+def test_recycle_bin_helper_and_journal_record_retire(tmp_path):
+    module, catalog, paths = _catalog_with_three_copies(tmp_path)
+    target = paths[1]
+    before = target.read_bytes()
+
+    with pytest.raises(RetiredMaintenanceError) as exc:
+        module.recycle_to_windows_bin(target)
+    assert exc.value.operation == "duplicate-recycle-bin"
+    assert target.read_bytes() == before
+
+    with pytest.raises(RetiredMaintenanceError) as exc:
+        module.DuplicateCleanupJournal(catalog.config.catalog_dir).record(
+            action_id="action-1",
+            event="requested",
+            location_id="loc-1",
+            absolute_path=str(target),
+            canonical_location_id="loc-0",
+            canonical_path=str(paths[0]),
+            source_id="src-1",
+            content_sha256="a" * 64,
+        )
+    assert exc.value.operation == "duplicate-journal-record"
+    assert not (catalog.config.catalog_dir / "duplicate_cleanup_events.jsonl").exists()
+    assert all(path.is_file() for path in paths)
+
+
+def test_duplicate_cli_lists_inventory_but_write_entries_retire(tmp_path, capsys):
     import company_wiki.source_catalog.cli as cli
-    import company_wiki.source_catalog.duplicate_cleanup as cleanup
 
     _module, catalog, paths = _catalog_with_three_copies(tmp_path)
     config_path = catalog.config.project_root / "config" / "source_catalog.yaml"
@@ -250,58 +226,48 @@ def test_duplicate_cli_lists_previews_and_recycles_only_by_location_id(
         encoding="utf-8",
     )
 
+    # read-only inventory branch still works
     assert cli.main(["--config", str(config_path), "duplicates", "--limit", "5"]) == 0
     inventory = json.loads(capsys.readouterr().out)
+    assert inventory["inventory_only"] is True
     selected = inventory["groups"][0]["duplicates"][0]
 
-    assert (
-        cli.main(
-            [
-                "--config",
-                str(config_path),
-                "duplicate-preview",
-                "--location-id",
-                selected["location_id"],
-            ]
-        )
-        == 0
+    # write branches fail closed as retired, before any state change
+    exit_code = cli.main(
+        [
+            "--config",
+            str(config_path),
+            "duplicate-preview",
+            "--location-id",
+            selected["location_id"],
+        ]
     )
-    preview = json.loads(capsys.readouterr().out)
-    monkeypatch.setattr(cleanup, "recycle_to_windows_bin", lambda path: path.unlink())
+    error = json.loads(capsys.readouterr().err)
+    assert exit_code == 1
+    assert error["status"] == "failed"
+    assert "retired" in error["error"]
+    assert "duplicate-preview" in error["error"]
 
-    assert (
-        cli.main(
-            [
-                "--config",
-                str(config_path),
-                "duplicate-recycle",
-                "--location-id",
-                selected["location_id"],
-                "--confirmation-token",
-                preview["confirmation_token"],
-            ]
-        )
-        == 0
+    exit_code = cli.main(
+        [
+            "--config",
+            str(config_path),
+            "duplicate-recycle",
+            "--location-id",
+            selected["location_id"],
+            "--confirmation-token",
+            "any-token",
+        ]
     )
-    result = json.loads(capsys.readouterr().out)
-    assert result["status"] == "recycled"
-    assert paths[0].is_file()
-    assert not paths[1].exists()
-    assert paths[2].is_file()
+    error = json.loads(capsys.readouterr().err)
+    assert exit_code == 1
+    assert "retired" in error["error"]
+    assert "duplicate-recycle" in error["error"]
 
-
-def test_control_center_exposes_browse_preview_and_single_copy_recycle_flow():
-    project_root = Path(__file__).resolve().parents[2]
-    script = (project_root / "scripts" / "source_catalog_control.ps1").read_text(
-        encoding="utf-8"
+    assert all(path.is_file() for path in paths)
+    row = catalog.store.fetchone(
+        "SELECT location_status FROM locations WHERE location_id=?",
+        (selected["location_id"],),
     )
-
-    assert "Show-DuplicateCenter" in script
-    assert "duplicates" in script
-    assert "duplicate-preview" in script
-    assert "duplicate-recycle" in script
-    assert "confirmation_phrase" in script
-    assert "'--location-id'" in script
-    assert "'--path'" not in script
-    assert "Remove-Item" not in script
-    assert "DELETE FROM" not in script
+    assert row is not None and row["location_status"] == "active"
+    assert not (catalog.config.catalog_dir / "duplicate_cleanup_events.jsonl").exists()

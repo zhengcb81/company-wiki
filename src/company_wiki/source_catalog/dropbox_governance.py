@@ -9,6 +9,13 @@ unprovable.  The inventory NEVER writes: the report embeds a per-file
 fingerprint so a second run proves zero writes, the catalog is opened
 read-only, and other roots' copies are never deleted to fabricate
 exclusive-source proof.
+
+G3-CWP-MAINT: the company-specific 中国平安 manual-review throw is retired.
+The same evidence always yields the same classification regardless of the
+company name or path; company-specific counters stay diagnostics only and
+never gate eligibility.  Identity that is incomplete remains
+unknown/unprovable through the generic classifier — nothing is upgraded for
+simplification, and external file content is only ever data.
 """
 
 from __future__ import annotations
@@ -26,7 +33,11 @@ PINGAN_PATH_HINT = "中国平安"
 
 
 class GovernanceError(RuntimeError):
-    """Raised when the inventory guard fails closed."""
+    """Legacy inventory guard type, kept for import compatibility only.
+
+    The company-specific eligibility throw it used to raise is retired; the
+    read-only inventory no longer raises it.
+    """
 
 
 def _is_pingan_candidate(relative_path: str, group_metadata: dict) -> bool:
@@ -90,8 +101,11 @@ def _duplicate_sets(
         {
             "content_sha256": h,
             "relative_path": str(
-                next(relative for relative, (_s, _m, digest) in fingerprint.items()
-                     if digest == h and not relative.endswith(".source.json")),
+                next(
+                    relative
+                    for relative, (_s, _m, digest) in fingerprint.items()
+                    if digest == h and not relative.endswith(".source.json")
+                ),
             ),
             "root_ids": sorted(slot["root_ids"]),
             "other_root_locations": slot["locations"],
@@ -123,7 +137,9 @@ def inventory_dropbox(
     candidates = scan_root_via_adapter(root, company_names)
     by_role: dict[str, int] = {}
     buckets: dict[str, int] = {
-        "eligible": 0, "needs_review": 0, "unprovable": 0,
+        "eligible": 0,
+        "needs_review": 0,
+        "unprovable": 0,
         "retired_or_conflict": 0,
     }
     missing_fields: dict[str, int] = {}
@@ -143,18 +159,29 @@ def inventory_dropbox(
                 hashlib.sha256(primary.read_bytes()).hexdigest(),
             )
         if sidecar.is_file():
-            fingerprint[sidecar.relative_to(root.path).as_posix()] = (
-                _fingerprint_file(sidecar)
+            fingerprint[sidecar.relative_to(root.path).as_posix()] = _fingerprint_file(
+                sidecar
             )
         by_role[candidate.role] = by_role.get(candidate.role, 0) + 1
         pingan = _is_pingan_candidate(relative, candidate.group_metadata)
         if pingan:
             pingan_path += 1
-        acq = {k: v for k, v in candidate.group_metadata.items()
-               if k not in ("schema_version", "adapter_id",
-                            "adapter_version", "normalization_status",
-                            "published_at", "filed_at", "accepted_at",
-                            "language", "revision_id")}
+        acq = {
+            k: v
+            for k, v in candidate.group_metadata.items()
+            if k
+            not in (
+                "schema_version",
+                "adapter_id",
+                "adapter_version",
+                "normalization_status",
+                "published_at",
+                "filed_at",
+                "accepted_at",
+                "language",
+                "revision_id",
+            )
+        }
         # the sidecar declares document_kind; it serves as the strong gate's
         # form_type (declared metadata, never inferred from the file name)
         if acq.get("document_kind") and not acq.get("form_type"):
@@ -164,14 +191,12 @@ def inventory_dropbox(
         for field in missing:
             missing_fields[field] = missing_fields.get(field, 0) + 1
         if pingan:
+            # company-specific counters are diagnostics only: eligibility is
+            # decided by the generic classifier, never by the company name
             if bucket == "unprovable":
                 pingan_unprovable += 1
             if bucket == "eligible":
                 pingan_eligible += 1
-                raise GovernanceError(
-                    f"FC-503: 中国平安 candidate {relative!r} classified "
-                    f"eligible without reviewer-completed evidence"
-                )
     return {
         "candidates_total": len(candidates),
         "by_role": by_role,
@@ -179,7 +204,8 @@ def inventory_dropbox(
         "missing_fields": missing_fields,
         "duplicate_location_sets": (
             _duplicate_sets(catalog, fingerprint, other_root_ids)
-            if catalog else {"count": 0, "samples": []}
+            if catalog
+            else {"count": 0, "samples": []}
         ),
         "pingan": {
             "path_candidates": pingan_path,
@@ -188,6 +214,7 @@ def inventory_dropbox(
         },
         "fingerprint": fingerprint,
         "catalog_counts": counts_before,
+        "inventory_only": True,
         "writes": 0,
     }
 

@@ -1,15 +1,28 @@
-"""Contracts for retired-evidence pruning (catalog-space-remediation Phase 2.3)."""
+"""Retired-evidence pruning is retired (G3-CWP-MAINT).
+
+Every legacy prune shape — dry-run, ``apply=True``, explicit ``now``, the
+CLI shape without ``now``, and a frozen-plan argument — fails closed with the
+unified retirement signal BEFORE the operation lock, receipt, manifest scan
+or any delete: 0 Store, 0 lock, 0 receipts, 0 deleted rows.
+"""
 
 from __future__ import annotations
 
+import hashlib
+import sqlite3
 from datetime import datetime, timezone
 from pathlib import Path
 
-from company_wiki.source_catalog.prune_retired_evidence import (
-    prune_retired_evidence,
-)
+import pytest
+
 from company_wiki.source_catalog.archive_retired_evidence import (
     archive_retired_evidence,
+)
+from company_wiki.source_catalog.maintenance_retirement import (
+    RetiredMaintenanceError,
+)
+from company_wiki.source_catalog.prune_retired_evidence import (
+    prune_retired_evidence,
 )
 from company_wiki.source_catalog.store import retire_document
 from support.legacy_source_artifact_fixture import legacy_normalize
@@ -32,6 +45,19 @@ ANNUAL = """\
 NOW = datetime(2026, 8, 15, tzinfo=timezone.utc)
 OLD_ARCHIVE = datetime(2026, 5, 1, tzinfo=timezone.utc)
 CURRENT_ARCHIVE = datetime(2026, 8, 7, tzinfo=timezone.utc)
+
+
+def _sha(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def _count(db: Path, table: str) -> int:
+    with sqlite3.connect(f"file:{db}?mode=ro", uri=True) as con:
+        return int(con.execute(f"SELECT COUNT(*) FROM {table}").fetchone()[0])
+
+
+def _tree(root: Path) -> list[str]:
+    return sorted(str(p.relative_to(root)).replace("\\", "/") for p in root.rglob("*"))
 
 
 def _retired_catalog(tmp_path: Path):
@@ -60,60 +86,65 @@ def _retired_catalog(tmp_path: Path):
     return catalog
 
 
-def test_prune_dry_run_reports_span_volume(tmp_path):
+def test_prune_retires_for_dry_run_apply_and_every_clock_shape(tmp_path):
     catalog = _retired_catalog(tmp_path)
     archive = tmp_path / "manifests"
-    archive_retired_evidence(catalog.config.database_path, archive, now=OLD_ARCHIVE)
-    report = prune_retired_evidence(catalog.config, archive, now=NOW)
-    assert report.dry_run is True
-    assert report.span_rows > 0
-    assert report.retired_documents == 1
-    oldest_archive = Path(report.oldest_archive)
-    assert oldest_archive.parent.name == "2026-05-01"
-    assert oldest_archive.name.startswith("retired-evidence-")
-    assert report.due is True
+    database = catalog.config.database_path
+    db_sha = _sha(database)
+    spans_before = _count(database, "evidence_spans")
+    tree_before = _tree(tmp_path)
+
+    for kwargs in (
+        {},  # CLI shape: no ``now``, no ``apply``
+        {"now": NOW},
+        {"apply": True, "now": NOW},
+        {"apply": True},  # destructive flag without a clock
+        {"apply": False, "now": NOW, "retention_days": 90},
+        {"apply": True, "now": NOW, "plan": object()},
+    ):
+        with pytest.raises(RetiredMaintenanceError) as exc:
+            prune_retired_evidence(catalog.config, archive, **kwargs)
+        assert exc.value.operation == "prune-retired-evidence"
+        assert not isinstance(exc.value, TypeError)
+
+    assert not archive.exists()
+    assert not (catalog.config.catalog_dir / "artifacts").exists()
+    assert _sha(database) == db_sha
+    assert _count(database, "evidence_spans") == spans_before
+    assert _tree(tmp_path) == tree_before
 
 
-def test_prune_apply_deletes_spans_when_due(tmp_path):
+def test_archive_then_prune_chain_retires_before_any_manifest(tmp_path):
     catalog = _retired_catalog(tmp_path)
     archive = tmp_path / "manifests"
-    archive_retired_evidence(catalog.config.database_path, archive, now=OLD_ARCHIVE)
-    before = catalog.store.fetchone(
-        "SELECT COUNT(*) FROM evidence_spans"
-    )[0]
-    dry_run = prune_retired_evidence(catalog.config, archive, now=NOW)
-    assert dry_run.due is True
+    tree_before = _tree(tmp_path)
 
-    report = prune_retired_evidence(
-        catalog.config,
-        archive,
-        apply=True,
-        now=NOW,
-        plan=dry_run.plan,
-    )
-    assert report.dry_run is False
-    assert report.due is True
-    assert report.deleted_rows == before
-    assert report.receipt_path is not None
-    assert Path(report.receipt_path).exists()
+    with pytest.raises(RetiredMaintenanceError) as exc:
+        archive_retired_evidence(catalog.config.database_path, archive, now=OLD_ARCHIVE)
+    assert exc.value.operation == "archive-retired-evidence"
 
-    remaining = catalog.store.fetchone("SELECT COUNT(*) FROM evidence_spans")[0]
-    assert remaining == 0
+    with pytest.raises(RetiredMaintenanceError) as exc:
+        prune_retired_evidence(catalog.config, archive, now=NOW, apply=True)
+    assert exc.value.operation == "prune-retired-evidence"
+
+    assert not archive.exists()
+    assert _tree(tmp_path) == tree_before  # no receipts or lock artifacts
+    assert not (catalog.config.catalog_dir / "artifacts").exists()
 
 
-def test_prune_apply_within_retention_does_nothing(tmp_path):
+def test_prune_retires_for_archive_windows_that_used_to_be_due(tmp_path):
+    """The retention windows from the historical contracts (due / not due)
+    no longer matter: the entry retires before reading any manifest."""
     catalog = _retired_catalog(tmp_path)
     archive = tmp_path / "manifests"
-    archive_retired_evidence(
-        catalog.config.database_path, archive, now=CURRENT_ARCHIVE
-    )
-    report = prune_retired_evidence(
-        catalog.config,
-        archive,
-        apply=True,
-        now=CURRENT_ARCHIVE,
-    )
-    assert report.due is False
-    assert report.deleted_rows == 0
-    remaining = catalog.store.fetchone("SELECT COUNT(*) FROM evidence_spans")[0]
-    assert remaining > 0
+
+    for moment in (OLD_ARCHIVE, CURRENT_ARCHIVE):
+        with pytest.raises(RetiredMaintenanceError) as exc:
+            archive_retired_evidence(catalog.config.database_path, archive, now=moment)
+        assert exc.value.operation == "archive-retired-evidence"
+        with pytest.raises(RetiredMaintenanceError) as exc:
+            prune_retired_evidence(catalog.config, archive, now=NOW, apply=True)
+        assert exc.value.operation == "prune-retired-evidence"
+
+    assert not archive.exists()
+    assert _count(catalog.config.database_path, "evidence_spans") > 0
