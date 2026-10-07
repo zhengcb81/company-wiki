@@ -46,5 +46,10 @@
 - `.planning/g3-cwp-maint/`（含空scratch）：本卡创建、结束时删除恢复absent（删除前核对绝对路径包含 `.planning/g3-cwp-maint` 且无reparse）。
 - 测试数据库/日志均在pytest临时目录与本卡worktree `__pycache__`（gitignored）。
 
+### Commits & push
+- `245a7f773a75a7e757ce71b9fca093d99788a9e6` 代码+测试+文档（pre-commit: ruff Passed、host guard Passed）
+- `53cb25b` handoff.json（g3-handoff/1，head_commit=245a7f7）
+- 首推在lane worktree被 pre-push basetemp≤60字符规则拦下（64字符，未跑任何测试；同 N5-DOCSET/N6-BUDGET 根因）→ 按既定裁定从主检出上下文 `git -C C:/Users/郑曾波/Projects/company-wiki push -u origin codex/g3-cwp-maint` → gate GREEN，推送成功；未用 --no-verify，未改任何门/CI文件。
+
 ## Next Step
-写入 HANDOFF/main_wiring/handoff.json → 正常commit（代码+文档），handoff.json 随后补head_commit → push自己的分支。
+本卡完成；交 MAIN 集成（见 main_wiring.md）。

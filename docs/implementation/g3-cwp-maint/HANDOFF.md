@@ -54,3 +54,9 @@ worktree `C:/Users/郑曾波/Projects/_g3/CWP-MAINT/company-wiki`
 - 真实CLI的help/子命令删除与具名非零映射**尚未接线**（cli.py不在写集）；当前行为=fail closed `fatal`，不是最终形态。
 - `fc1204` 覆盖率门禁需完整coverage run 才判定；本卡未跑全量（按卡不跑跨仓包）。stub化只会提高这些模块覆盖，CI覆盖率轮次应无风险，但由MAIN在覆盖率轮次复核。
 - editable安装指向原仓src：worktree代码只经 `tests/conftest.py` 的 `sys.path` 注入生效（与其它worktree一致）；`tools/dropbox_governance_replay.py` 自行插入本仓 `src`。
+
+## 6. 推送记录（push gate 根因与处置）
+
+- 首次在本lane worktree内 `git push` 被 pre-push 门拦下：`tools/pre_push_gate.py` 要求 pytest basetemp 绝对路径 ≤60 字符（`_run_pytest_gate` 在 `PROJECT_ROOT/tmp/ppXXXXXX` 下建临时目录），本 worktree 解析出 64 字符 → **在跑任何测试之前**即 `GATE RED at: CI fast contract smoke set`（路径约束，非测试失败）。
+- 同根因先例：N5-DOCSET（origin/codex/n5-document-quality `99c7e51`）与 N6-BUDGET（`docs/implementation/handoffs/N6-BUDGET/HANDOFF.md` §推送）。
+- 按既定裁定从主检出上下文推送：`git -C C:/Users/郑曾波/Projects/company-wiki push -u origin codex/g3-cwp-maint` → `pytest basetemp verified: short, repository-local, and not relocated`、**pre-push gate GREEN — safe to push**，`codex/g3-cwp-maint` 推送成功（245a7f7 + 53cb25b）。**未使用 `--no-verify`，未修改任何门/CI/pre_push_gate 文件**；分支合入master不在本卡范围。
