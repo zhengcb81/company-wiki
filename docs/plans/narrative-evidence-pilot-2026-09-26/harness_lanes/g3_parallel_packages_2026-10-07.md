@@ -1,6 +1,6 @@
 # G3：第二批独立施工包
 
-**当前状态：三个G3包均已完成MAIN验收和本地主线并入，不再派发。** RF已正常推main，CWP正在发布；[统一验收](../g3_main_acceptance_2026-10-07.md)列准确代码/测试/CI与剩余。公共CLI和tmp包装MAIN接线已完成；真实技能安装与生产metadata应用不包含在本批，G2-12保留未提交，总目标paused。
+**当前状态：三个G3包均已完成MAIN验收和本地主线并入，不再派发。** RF已正常推main，CWP已推master，两仓精确CI均绿；[统一验收](../g3_main_acceptance_2026-10-07.md)列准确代码/测试/CI与剩余。公共CLI和tmp包装MAIN接线已完成；真实技能安装与生产metadata应用不包含在本批，G2-12保留未提交，总目标paused。
 
 
 **最新状态：三工作树已实际建立，RF/SOURCE-FACTS已有独立task_plan，尚未发现完整交接。不重复派发、不重建其目录；原卡的实现边界继续有效。** 创建时ready/未启动属于历史，不推断代码已完成。新增可分派包见[G4](g4_parallel_packages_2026-10-07.md)。

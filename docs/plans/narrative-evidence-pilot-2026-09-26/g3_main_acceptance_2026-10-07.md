@@ -37,7 +37,10 @@ MAIN最终更新三卡/并行总包/总PWF/README和此单，保存真实命令�
 - 只有CLI未完成G2补丁需要单文件stash：旧、新增删内容各44行完全一致，已成功apply/drop原stash。其余10份CWP保护文件与RF三日志SHA全部不变；配置owner不stage。保护明细见before/after小JSON；临时快照经核后删除。
 - SOURCE-FACTS建议修正：S08身份与公开日冲突可分开；缺source_url/旧receipt不产生新人工许可；S09先正式legacy登记，无假回执/强制重抓。原观察报告保持历史，MAIN修正见docs/implementation/g3-source-facts/MAIN_ACCEPTANCE.md。
 - R4可选决策已按证据完成“不迁移”；注册上界94.3MiB、实读额外副本34.5MiB，allocated/releasable未知、删除0。不是大规模空间释放，也不添加256MiB门槛。
-- 待记录：CWP正常推送、精确CI两仓、测试根恢复、最终仅文档收据。
+- CWP `4bde75a83e888071ab06a11676bc3d98a971d3a4`已正常推远端master；prepush既有短12项集合绿，未绕hook。精确[CI37665222739](https://github.com/zhengcb81/company-wiki/actions/runs/37665222739)执行Ruff/公开类型/compile/config/Unit/精选合同/CLI smoke均success，job84秒。
+- RF `ab7a7a4434bbb4c52a5bd2a6cd6ed710d7151eee`精确[CI37664909065](https://github.com/zhengcb81/revenue-forecast/actions/runs/37664909065)共享local/CI实际检查success，job31秒。不是跳过状态，也没更改workflow放过失败。
+- 所有本次MC/MR pytest根和root单文件暂存目录在子进程/reader关闭后已恢复absent，清理前校验精确绝对owned路径及无reparse；两个接收树Git clean，旧G2测试目录和三个外线工作树未清理。前后保护14文件中除合法G3升级CLI外13 SHA一致，CLI原未完成增删44行完整保留；正常doc hook后再次核绿，root CLI纯内存compile成功。
+- 本次模型/付费/下载/生产源登记/生产raw删/Dayu/IQS写均0。生产状态仍未迁移；R2/R3不能称完成。之后只补纯MD收据，不重跑长测试或要求新代码CI。
 
 ## 后续唯一入口
 
