@@ -2,8 +2,6 @@
 tests/unit/test_deployment.py — 部署管理测试
 """
 
-
-
 from company_wiki.deployment import (
     DeploymentConfig,
     DeploymentManager,
@@ -16,6 +14,7 @@ from company_wiki.scheduler import SchedulerDB
 
 
 # ── DeploymentMetrics 测试 ──────────────────────────────
+
 
 class TestDeploymentMetrics:
     def test_metrics_healthy(self):
@@ -46,6 +45,7 @@ class TestDeploymentMetrics:
 
 
 # ── DeploymentManager 测试 ──────────────────────────────
+
 
 class TestDeploymentManager:
     def _make_manager(self, tmp_path) -> DeploymentManager:
@@ -232,6 +232,7 @@ class TestDeploymentManager:
         assert "generated_at" in report
         assert "current_stage" in report
         assert report["current_stage"] == "shadow"
+        assert "failure_drills" in report
         assert len(report["legacy_entries"]) == 4
 
         # 检查 legacy entries
@@ -245,8 +246,40 @@ class TestDeploymentManager:
             for entry in report["legacy_entries"]
         )
 
+    def test_retirement_report_recommends_current_source_cli_only(self, tmp_path):
+        """退役报告不再推荐 scheduler/ingest/migration 旧 writer。"""
+        manager = self._make_manager(tmp_path)
+
+        report = manager.generate_retirement_report()
+        entries = report["legacy_entries"]
+
+        for entry in entries:
+            assert entry["status"] == "retired", entry
+            assert entry["reason"], entry
+            recommendation = entry["replacement"]
+            assert any(
+                current_cli in recommendation
+                for current_cli in (
+                    "company-wiki-source-catalog",
+                    "company-wiki-source-read",
+                    "company-wiki-source-query",
+                    "company-wiki-source-export-v2",
+                )
+            ), entry
+            for legacy_writer in ("scheduler.py", "ingest.py", "migration.py"):
+                assert legacy_writer not in recommendation, entry
+                assert legacy_writer not in entry["reason"], entry
+            assert "COMPANY_WIKI_" not in str(entry), entry
+
+        serialized = str(report)
+        for frozen_writer in ("scheduler.py", "migration.py"):
+            assert frozen_writer not in serialized
+        assert "review_queue" not in serialized
+        assert "human_review" not in serialized
+
 
 # ── create_deployment_manager 测试 ──────────────────────────────
+
 
 class TestCreateDeploymentManager:
     def test_create_manager(self, tmp_path):

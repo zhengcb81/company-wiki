@@ -15,28 +15,31 @@ from .scheduler import SchedulerDB, WriteMode
 
 class DeploymentStage(str, Enum):
     """部署阶段"""
-    SHADOW = "shadow"        # 只分析，不写入
-    CANARY = "canary"        # 只写入 allowlist 中的实体
-    COHORT_A = "cohort_a"    # 核心持仓
-    COHORT_B = "cohort_b"    # 重点观察
-    COHORT_C = "cohort_c"    # 机会池
-    FULL = "full"            # 完全开放
+
+    SHADOW = "shadow"  # 只分析，不写入
+    CANARY = "canary"  # 只写入 allowlist 中的实体
+    COHORT_A = "cohort_a"  # 核心持仓
+    COHORT_B = "cohort_b"  # 重点观察
+    COHORT_C = "cohort_c"  # 机会池
+    FULL = "full"  # 完全开放
 
 
 class FailureDrillType(str, Enum):
     """故障演练类型"""
-    REPEAT_RUN = "repeat_run"              # 重复运行
+
+    REPEAT_RUN = "repeat_run"  # 重复运行
     INTERRUPT_RECOVERY = "interrupt_recovery"  # 中断恢复
-    PARTIAL_FAILURE = "partial_failure"    # 部分失败
+    PARTIAL_FAILURE = "partial_failure"  # 部分失败
     BUDGET_EXHAUSTION = "budget_exhaustion"  # 预算耗尽
     REVIEW_REJECTION = "review_rejection"  # 审核拒绝
-    ROLLBACK = "rollback"                  # 回滚
-    KILL_SWITCH = "kill_switch"            # 紧急停止
+    ROLLBACK = "rollback"  # 回滚
+    KILL_SWITCH = "kill_switch"  # 紧急停止
 
 
 @dataclass
 class DeploymentConfig:
     """部署配置"""
+
     stage: DeploymentStage = DeploymentStage.SHADOW
     allowlist: list[str] = field(default_factory=list)
     kill_switch: bool = False
@@ -48,6 +51,7 @@ class DeploymentConfig:
 @dataclass
 class FailureDrill:
     """故障演练记录"""
+
     drill_id: str
     drill_type: FailureDrillType
     started_at: datetime
@@ -61,6 +65,7 @@ class FailureDrill:
 @dataclass
 class DeploymentMetrics:
     """部署指标"""
+
     raw_deleted: int = 0
     duplicate_deliveries: int = 0
     provenance_coverage: float = 0.0
@@ -101,7 +106,10 @@ class DeploymentManager:
 
     @property
     def is_write_enabled(self) -> bool:
-        return self._config.stage != DeploymentStage.SHADOW and not self._config.kill_switch
+        return (
+            self._config.stage != DeploymentStage.SHADOW
+            and not self._config.kill_switch
+        )
 
     def advance_stage(self, metrics: DeploymentMetrics) -> bool:
         """
@@ -200,7 +208,9 @@ class DeploymentManager:
             drill.error_message = str(e)
 
         drill.completed_at = datetime.now()
-        drill.recovery_time_seconds = (drill.completed_at - drill.started_at).total_seconds()
+        drill.recovery_time_seconds = (
+            drill.completed_at - drill.started_at
+        ).total_seconds()
 
         self._drills.append(drill)
         return drill
@@ -217,30 +227,36 @@ class DeploymentManager:
             "legacy_entries": [
                 {
                     "name": "full_pipeline.py",
-                    "status": "blocked",
-                    "replacement": "scheduler.py",
-                    "reason": "由调度器替代",
+                    "status": "retired",
+                    "replacement": (
+                        "company-wiki-source-catalog（现行来源 CLI）；"
+                        "有限叙述运行见 scripts/narrative_evidence_pilot.py"
+                    ),
+                    "reason": "旧统一 Gate/金融 Pipeline 入口，已随旧 Gate 族整体退休",
                     "rollback": "不支持环境变量回退；使用替代入口",
                 },
                 {
                     "name": "batch_process.py",
-                    "status": "blocked",
-                    "replacement": "scheduler.py",
-                    "reason": "由调度器替代",
+                    "status": "retired",
+                    "replacement": "company-wiki-source-catalog（现行来源 CLI）",
+                    "reason": "旧批量研究处理入口，按研究 writer 边界永久退休",
                     "rollback": "不支持环境变量回退；使用替代入口",
                 },
                 {
                     "name": "batch_ingest.py",
-                    "status": "blocked",
-                    "replacement": "ingest.py",
-                    "reason": "由新 IngestService 替代",
+                    "status": "retired",
+                    "replacement": "company-wiki-source-catalog scan/import（现行来源入库）",
+                    "reason": "旧 Wiki ingest 批处理入口，随 legacy writer 族退休",
                     "rollback": "不支持环境变量回退；使用替代入口",
                 },
                 {
                     "name": "cleanup_junk.py",
-                    "status": "blocked",
-                    "replacement": "migration.py",
-                    "reason": "由迁移框架替代",
+                    "status": "retired",
+                    "replacement": (
+                        "company-wiki-source-catalog scan（只诊断不删除；"
+                        "immutable raw 无删除替代）"
+                    ),
+                    "reason": "破坏性清理入口，按来源不可变边界永久退休",
                     "rollback": "不支持环境变量回退；使用替代入口",
                 },
             ],
@@ -321,7 +337,9 @@ class DeploymentManager:
         return success
 
 
-def create_deployment_manager(db_path: Path, allowlist: Optional[list[str]] = None) -> DeploymentManager:
+def create_deployment_manager(
+    db_path: Path, allowlist: Optional[list[str]] = None
+) -> DeploymentManager:
     """创建部署管理器"""
     db = SchedulerDB(db_path)
     config = DeploymentConfig(

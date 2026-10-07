@@ -99,7 +99,6 @@ PRE_GUARD_CRASH = {
     ("refine.py", "plain"): "missing scripts/extract.py",
     ("refine.py", "nosite"): "missing scripts/extract.py",
     ("build_links.py", "nosite"): "module-level import yaml under -S",
-    ("full_pipeline.py", "nosite"): "module-level gate/yaml import under -S",
     ("generate_index.py", "nosite"): "module-level import yaml under -S",
     ("generate_slides.py", "nosite"): "module-level import yaml under -S",
     ("stage3_analyze.py", "nosite"): "module-level from config import Config under -S",
@@ -110,7 +109,7 @@ PRE_GUARD_CRASH = {
 CONFIG_PRE_GUARD = {("auto_discover.py", "plain")}
 
 
-HARNESS_SOURCE = r'''
+HARNESS_SOURCE = r"""
 import builtins
 import os
 import runpy
@@ -249,7 +248,7 @@ except BaseException as exc:
     raise SystemExit(97)
 else:
     print("G1-EXIT 0", flush=True)
-'''
+"""
 
 
 def _child_environment(**extra: str) -> dict[str, str]:
@@ -281,9 +280,7 @@ def _run_child(
 ) -> subprocess.CompletedProcess[str]:
     env_extra: dict[str, str] = dict(extra_env or {})
     if pythonpath_scripts:
-        env_extra["PYTHONPATH"] = os.pathsep.join(
-            (str(SCRIPTS), str(ROOT / "src"))
-        )
+        env_extra["PYTHONPATH"] = os.pathsep.join((str(SCRIPTS), str(ROOT / "src")))
     return subprocess.run(
         args,
         cwd=str(cwd or ROOT),
@@ -383,7 +380,9 @@ def test_public_entry_policy_signatures_are_preserved() -> None:
         "script_path",
         "environment",
     ]
-    assert list(inspect.signature(common.require_legacy_writer_permission).parameters) == [
+    assert list(
+        inspect.signature(common.require_legacy_writer_permission).parameters
+    ) == [
         "script_name",
     ]
 
