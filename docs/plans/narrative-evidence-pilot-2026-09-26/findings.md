@@ -1,5 +1,13 @@
 # Findings：当前事实与待验证项
 
+## 最新：新增独立包前的实际归属核对（2026-10-07）
+
+用户再次请求可独立开工的大任务。本次实读发现 `_g3/RF-ASSURANCE`、`_g3/CWP-MAINT`、`_g3/SOURCE-FACTS` 三工作树均已建立；RF与SOURCE-FACTS已有本卡 task_plan，尚未见交接。此前“未创建工作树”已是历史，不能重复派发这三卡。MAIN未提交获取线、owner配置及五个自身pytest目录保持。目标服务实读paused；本次只编制新施工包，不自动继续生产或付费实施。
+
+新的真实可拆范围：G2-03冻结Pipeline/gate家族退休，与G3维护后端及MAIN获取/CLI写集分离；SID `AdapterDiscoveryRequest.fiscal_year`和真实CLI仍强制整数，无法承接无年提示的latest季度/半年报，应由provider按as-of发现真实期间，而非CWP猜自然年。SID基线8ed5fdde，11个tracked owner改动及资料/脚本仍保留，新卡必须另建worktree。CodeGraph无文档索引改用rg实际枚举；首次误读G3总包位置、SID仓内AGENTS不存在均为只读定位错误，后续使用实际路径，不创建替代规范。PWF resolver使用显式PLAN_ID；CheckAmbiguity只探针，不能称返回了目录。
+
+已冻结G4接口：Pipeline纯stdlib/exit78/import0初始化，删除gate专属族，保留现行PDF责任，部署报告不再推荐退休writer；SID schema1.0保持、adapter1.3.0由MAIN配套路由version、latest忽略猜年提示但exact严格，按as-of三年窗口/最多五页，共享既有budget，incomplete/bounded-empty不报完整。读取实际ProviderAcquisitionBudget.from_payload确认其四字段及字符串cost，卡内给最小stdin和五类边界夹具。G4与G3源码写集和MAIN共享接线无交叉；没有强凑第三包。
+
 ## 最新：第二批独立施工包调查（2026-10-07）
 
 新卡从真实剩余工作拆分，不重派已完成的G2三卡：RF历史uc.quality/manifest及安装职责；CWP旧维护后端退休与只读清单；R2来源事实和R4内部原件收益的只读核实。CWP当前master5930a644、RF main1a2f9428；MAIN未提交G2-12三个acquisition/close_gap文件与新合同测试不进入冻结基线。RF owner三日志、CWP owner配置保留。外线独占新目录，生产/共享CLI/总PWF/安装副本/并线仍MAIN负责。

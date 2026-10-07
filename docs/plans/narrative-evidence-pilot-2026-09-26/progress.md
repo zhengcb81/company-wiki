@@ -1,5 +1,21 @@
 # Progress：激进简化实施
 
+## 最新：新增G4两项独立大卡（2026-10-07）
+
+用户请求互不影响的大施工包。实读G3三个工作树已经存在，RF/SOURCE-FACTS有自身计划、无完整交接，修正旧“未创建”状态，不重复分派。新G4-CWP-PIPELINE承担既有G2-03整族退休、真实-S入口/解析反例/部署报告；G4-SID-LATEST承担已证CN fiscal_year强制导致的latest季度/H1与年初年报缺口，定义官方as-of有限窗口、分页完整性、共享预算、真实JSON CLI和1.3.0路由交接。两个独占新根/分支、源码/test写集互不包含，也不占G3/MAIN接口/总PWF/生产；单卡各自有PWF、TDD、一次集中验收、finally恢复与机器交接。未创建G4工作树、未启动harness、未运行模型或写外仓。
+
+目标服务本次实读paused，本次只编制计划；现有未提交G2-12/五个自身pytest目录/owner配置全部保留。MAIN恢复后的接口/版本接线与总G2A/B节点保持，不新增人工门、不改阶段次序。两张卡作为较大的真实待办，未强凑第三个重叠任务。
+
+只读定位错误已纠正：G3总包实际在harness_lanes；SID没有仓内AGENTS，按实际上级规则；两个猜测test文件及src/company_wiki/writer_policy不存在，CodeGraph定位真实scripts/common/writer_policy和writer_freeze；一条git show误在CWP查询SID blob失败，随后带准确-C只读成功；PowerShell未引号^{commit}被解析为scriptblock，改引号后两基线对象存在。未发生产品运行/原件变更，不将这些工具错误算产品RED。
+
+文档收口：三G4文件链接/围栏/交接JSON/最小budget四字段及字符串cost全通过，G4-CWP与MAIN/G3维护源码集0交叉，G4根仍不存在，git diff --check绿。记录12个owner/MAIN未提交保护文件SHA用于正常提交前后核，不stage它们。一次多文件patch的progress句子不是完整行导致原子拒绝，删除不匹配hunk后成功，无部分写入；本次没有执行pytest或生产步骤。正常提交仅本次卡与导航/状态文档。
+
+## 最新：G2-12新增真实反例与责任修复（2026-10-07）
+
+上一goal turn为进展：G3三个独立包已正式推远端，不重定义总目标。本轮继续MAIN获取线，已核G3白名单不占acquisition/close_gap/CLI/FF。新增5个行为RED、旧13pass，根因为美港/季度错误自然年提示、误配暂存到原件根、清理失败重复成功journal；系统修复后18pass/3.40秒。保留原件，旧CloseGap重复步骤docstring/未调用helper已删除；新测试绿色不等于旧责任与G2联调收口。
+
+测试red使用自身`.planning/g2-latest-red`；green1先核不存在，被现有pytest路径器迁到20261007-113132-03e115e2并自动清理removed=true。red初始清单未单独记，不能冒称已有完整前镜像；最终仅按已确认由本轮pytest创建的内容精确清理。Windows原生rg不展开传给它的wildcard，已用rg --files -g实际枚举；不存在的fc805猜名未写入实施。后续集中测试用新短根、运行前记录absent，结束恢复。代码尚未提交，owner配置保持。
+
 ## 最新：新G3独立施工包 ready（2026-10-07）
 
 用户再次请求互不影响的较大任务。核当前CWP5930a644/RF1a2f9428已发布基线、实际CodeGraph结构/文件、历史质量/mtime/安装集合、CWP旧维护API/CLIcaller及现成RAW-DUP接口后，创建G3总包和三份自包含单卡：RF历史质量/包装、CWP维护后端退休、R2元数据/R4内部原件空间只读核实。独占三个新worktree及互不重叠写集，库层退休错误/报告JSON/MAIN wiring与测试恢复接口已明确；未启动harness/未创建目录/未写外仓/未调用模型或修改生产。

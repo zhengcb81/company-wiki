@@ -1,6 +1,6 @@
 # G3-RF-ASSURANCE：历史质量工具与技能包装职责收敛
 
-**状态：ready，可现在独立开工。施工仓：revenue-forecast；MAIN负责最终并线/安装。**
+**最新状态：本卡工作树及独立task_plan已实际建立，尚待交接，不重复派发/重建。施工仓：revenue-forecast；原写集继续有效，MAIN负责最终并线/安装。**
 
 ## 1. 目标和已知事实
 

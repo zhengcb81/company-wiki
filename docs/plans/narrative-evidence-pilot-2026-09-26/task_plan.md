@@ -1,5 +1,7 @@
 # 公司来源平台：当前总计划
 
+> **最新分包状态（2026-10-07）：**目标服务此刻实读paused；本次按用户请求只编制新施工包，不自动继续生产/付费。G3三工作树已建立、待交接，旧“未创建/未启动”仅历史。新增[G4两张独立大卡](harness_lanes/g4_parallel_packages_2026-10-07.md)ready：CWP冻结Pipeline整族退休、SID按as-of发现最新财报，可现在分别交给两个harness；源码写集与G3/MAIN互不重叠。后续明确恢复总目标时仍按G2→R2→R3→R4→R5，未提交G2-12及owner文件保留。
+
 > 本页是唯一当前施工入口。旧步骤、旧预算答复和已交付卡不产生新的任务或人工签收。历史细节保留在 [收敛前版本](https://github.com/zhengcb81/company-wiki/blob/659bcefc9d49a7e7f7fdc58e9c11d46e45da49ab/docs/plans/narrative-evidence-pilot-2026-09-26/task_plan.md)、findings/progress 和阶段收据中。
 
 ## 当前最高优先级：G2 门禁全面补漏（2026-10-07）
@@ -129,6 +131,8 @@ TDD 框住具体公开行为。只在 N4 A/B/C、存储迁移等大节点集中�
 | R5PWF与发布收口 | pending | 历史Git、简化当前入口、正常并线/push/精确CI |
 
 ## Next Step
+
+当前本次交付是[G4独立包](harness_lanes/g4_parallel_packages_2026-10-07.md)，并修正G3已建立工作树事实。总目标服务实读paused，以下MAIN实施动作是恢复后的待办，不表示本次已执行。G4两条线可由用户现在启动，不等待MAIN；MAIN保留公共接口接线、工程清单、生产和合入职责。
 
 MAIN继续[G2-12实施单](g2_latest_acquisition_implementation_2026-10-07.md)：统一服务、目标锁、预算异常传播、失败清理与共享预算重试的13项新反例已绿1.68秒；尚未发布，先完成旧责任测试合同同步、latest期间语义、可选binding CLI、FF接线和跨进程/真实离线E2E，再集中发布。不把13项试点当whole G2B。旧三外线已验收并线，精确主线CI见[收据](harness_lanes/results/g2_parallel_exact_ci_2026-10-07.json)，不重派。
 

@@ -76,6 +76,8 @@ HEAD/文件 SHA/工作树/现场 policy 原文见[只读审计收据](harness_la
 
 ### G2-03 / P1：冻结 Pipeline 的 gate 家族还在
 
+该明确剩余已拆为[G4-CWP-PIPELINE](harness_lanes/g4_cwp_frozen_pipeline_retirement.md)，可现在独立开工；只写旧家族/配置、纯stdlib退休入口、部署报告和精确责任测试，公共CLI/指纹/工程清单仍MAIN。与G3-MAINT写集无交叉。
+
 **冻结历史链，不是现行摘要 worker。** `config/pipeline_rules.yaml` 仍有 Gate0–5、approval_threshold、human_review；`scripts/gate_system/` 和 `full_pipeline.py` 保留旧评审/金融 writer。`writer_policy` 已将 full_pipeline 永久退休，所以不能把这些描述成正在阻断每份新文档。
 
 **实施：**以 CodeGraph/公开 entrypoint/package/test import 为依据退休无当前生产消费者的整条配置/模块/控制面，而非留下“disabled approval”空壳。仅将仍有价值的来源解析反例迁到当前 parser/selector 包。删旧专属测试和 CI/mypy/hook 清单项；不重新启用投资 writer，也不把 writer freeze 当个人权限移除。历史说明用 Git 链接，不新复制大 archive。
@@ -173,6 +175,8 @@ StockInfoDLSimple 的 provider host、include/exclude 是来源发现和过滤�
 公开兼容字段可以保留，最终值由单处投影确定；若实际输出合同/prompt/handler解释变化，同步现有版本字段与消费者契约测试，不能重签历史final、更改旧费用或把整个provider响应重存一份。
 
 ### G2-12 / P0-B：CWP latest下载仍分叉到旧gap签收协议
+
+调查另证SID实际CLI/AdapterDiscoveryRequest强制fiscal_year，CN latest季度/半年报无年提示直接失败，年报提示也可能误过滤旧年最新件。该provider侧能力补齐委托[G4-SID-LATEST](harness_lanes/g4_sid_latest_discovery.md)，从8ed5fdde独立worktree做as-of窗口/分页/真实期间与预算；不占MAIN CWP/FF写集、不改SID owner原仓。MAIN仍完成本节统一事务和最终新1.3.0路由/ensure联调，不能把外线metadata绿称整链完成。
 
 **仍在执行，不能归入仅FF v1历史。** CWP exact `ensure --allow-download`已用单意图和AcquisitionBudget、不要求DownloadAuthorization；但latest_as_of即使允许下载也无条件只回GAP。公开`close-gap`强制binding-file、runtime snapshot/plan/policy hash/expiry/accessions，新默认无snapshot的steady库还会被`no_runtime_policy`拒绝。FF v2明确不走旧close-gap，收到GAP只返回，故latest缺件不能自动补齐。已核真实CLI help与实际类调用，非搜索单词推断。
 

@@ -1,6 +1,6 @@
 # G3-CWP-MAINT：旧维护后端退休与只读库存
 
-**状态：ready，可现在独立开工。施工仓：company-wiki独立worktree；公共CLI由MAIN接线。**
+**最新状态：本卡工作树已实际建立，尚待交接，不重复派发/重建。施工仓：company-wiki独立worktree；原写集继续有效，公共CLI由MAIN接线。**
 
 ## 1. 目标与真实剩余
 

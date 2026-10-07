@@ -1,5 +1,16 @@
 # 并行总计划：门禁先行，独立目录施工，MAIN统一打通
 
+> **最新（2026-10-07）：**G3三工作树已建立，RF/SOURCE-FACTS已有独立计划，未见交接；不再次派发。当前可新派发的是[G4两张大卡](harness_lanes/g4_parallel_packages_2026-10-07.md)：CWP冻结Pipeline整族退休、SID最新财报发现，各独占`Projects/_g4/`新根，互不影响G3/MAIN。总目标服务实读paused，本次仅编制卡；MAIN恢复后仍负责全部公共接线/生产/安装/合入。下方旧未启动文字是历史。
+
+## 当前新增可分派：G4两条线
+
+| 卡 | 独占目录 | 责任 | 状态 |
+|---|---|---|---|
+| [G4-CWP-PIPELINE](harness_lanes/g4_cwp_frozen_pipeline_retirement.md) | `Projects/_g4/CWP-PIPELINE/company-wiki` | G2-03旧Gate家族/配置退出、stdlib退休壳、部署报告与责任测试 | ready，可现在开工 |
+| [G4-SID-LATEST](harness_lanes/g4_sid_latest_discovery.md) | `Projects/_g4/SID-LATEST/StockInfoDLSimple` | 按as-of有界发现年报/半年报/季报，期间/分页/预算/真实JSON CLI | ready，可现在开工 |
+
+精确代码写集和统一交接见[G4总包](harness_lanes/g4_parallel_packages_2026-10-07.md)。外线不合主线/不写生产；MAIN集中接线与既有G2A/B验收，不增加小节点签收。
+
 > **2026-10-07当前：**目标active，先G2再R2/R3/R4/R5。上一批G2三包全部验收并线；13/01b已发布，MAIN继续12及公共接线。[新G3三卡](harness_lanes/g3_parallel_packages_2026-10-07.md)ready，可同时分派，未启动；独占新工作树和互不重叠写集。MAIN负责总PWF/生产/安装/主线，Dayu/IQS零写。
 
 ## 当前可分派：G3三个互不重叠包
@@ -8,9 +19,9 @@
 
 | 卡 | 实际独占目录 | 责任 | 状态 |
 |---|---|---|---|
-| [G3-RF-ASSURANCE](harness_lanes/g3_rf_assurance_and_packaging.md) | `Projects/_g3/RF-ASSURANCE/revenue-forecast` | RF历史质量/manifest时间语义与安装runtime职责，代码+测试 | ready，未启动 |
-| [G3-CWP-MAINT](harness_lanes/g3_cwp_maintenance_retirement.md) | `Projects/_g3/CWP-MAINT/company-wiki` | 维护后端退休与只读清单，MAIN再接CLI/工程清单 | ready，未启动 |
-| [G3-SOURCE-FACTS](harness_lanes/g3_source_metadata_and_raw_space.md) | `Projects/_g3/SOURCE-FACTS/company-wiki` | R2真实来源metadata/R4内部原件收益只读核实，MAIN再应用生产 | ready，未启动 |
+| [G3-RF-ASSURANCE](harness_lanes/g3_rf_assurance_and_packaging.md) | `Projects/_g3/RF-ASSURANCE/revenue-forecast` | RF历史质量/manifest时间语义与安装runtime职责，代码+测试 | 工作树/本卡计划已建立，待交接，不重派 |
+| [G3-CWP-MAINT](harness_lanes/g3_cwp_maintenance_retirement.md) | `Projects/_g3/CWP-MAINT/company-wiki` | 维护后端退休与只读清单，MAIN再接CLI/工程清单 | 工作树已建立，待交接，不重派 |
+| [G3-SOURCE-FACTS](harness_lanes/g3_source_metadata_and_raw_space.md) | `Projects/_g3/SOURCE-FACTS/company-wiki` | R2真实来源metadata/R4内部原件收益只读核实，MAIN再应用生产 | 工作树/本卡计划已建立，待交接，不重派 |
 
 写集/冻结基线/交接/一个集中测试节点见[G3总包](harness_lanes/g3_parallel_packages_2026-10-07.md)。不同工作树之外，源文件范围也不重叠；均不改MAIN获取/CLI/FF/生产/安装。三个包不互相等待。
 

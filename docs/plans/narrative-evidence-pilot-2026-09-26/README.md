@@ -1,5 +1,7 @@
 # 当前执行入口
 
+**最新：**本次按用户请求发布[G4两项独立大任务](harness_lanes/g4_parallel_packages_2026-10-07.md)，可现在分别给两个harness；[冻结Pipeline退休](harness_lanes/g4_cwp_frozen_pipeline_retirement.md)与[SID最新财报发现](harness_lanes/g4_sid_latest_discovery.md)各有独占工作树/写集/接口/测试/交接。G3三个工作树已建立、待交接，不重复派发；目标服务此刻实读paused，本次不恢复生产/付费。下方此前ready/active为历史时点，当前分工取此节及task_plan。
+
 2026-10-07目标服务active。先G2，再生产落地；已完成的有界验收不等于整个计划完成。上一批G2三卡已验收并线，不重派；[新G3三卡](harness_lanes/g3_parallel_packages_2026-10-07.md)ready，可交不同harness同时开工，尚未启动。
 
 八仓/14组补漏已写细；核心93ac5a5、G2-13/b202d07、01b/22dcc927已发布/精确CI绿；SW0b48919本地主线，RF1a2f9428与StockQA0f8fbfa远端主线均绿。MAIN当前G2-12统一获取流程尚未提交，继续旧责任/CLI/FF/并发联调；G3承担独立P1和只读调查，公共接线/生产/安装仍MAIN负责。
