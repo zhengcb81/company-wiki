@@ -1,5 +1,12 @@
 # Findings：当前事实与待验证项
 
+**最新G4验收（2026-10-07）：**两包已验收、并入实际执行分支并推远端。CWP `df7d7ba`：冻结Pipeline/Gate0–5整族退休及CN 1.3.0路由配套，211责任用例绿；精确CI37673393822所有步骤绿/74秒。SID `eb8495c`：latest分页矛盾TDD修复，127责任/真实CLI离线联调用例绿，已推`v2-clean-rewrite`；该仓无workflow，不声称远端CI。见[G4正式验收](g4_main_acceptance_2026-10-07.md)。G4不再派发。G2-03完成；完整G2-12 ensure/FF/ET/CWP入库与复用仍未提交，其他G2、R2生产应用/R3/R5未完成。总目标保持paused，本次没有恢复生产或付费批次。
+
+## G4两个包正在MAIN验收（2026-10-07）
+
+Pipeline已合独立mc，211责任绿38.78s；SID新ms的120责任最终并集绿，13初始pytest缺父目录仅setup错误已定点复测13绿0.36s。源码发现latest最后页与totalRecordNum矛盾会误称完整，先TDD修后再并SID。CN版本/执行根/bounded三pending配置归正式1.3路由定点接线；其他76份初始未提交文件有SHA保护清单。总目标paused，仅执行G4查收；详见[g4_main_acceptance](g4_main_acceptance_2026-10-07.md)。
+
+
 **最新G3验收（2026-10-07）：**三个包已接收并补齐MAIN接线，两个本地主线已并入。RF `ab7a7a44`已正常推远端main（107快测绿）；CWP接线代码`b2c9e66`随`4bde75a`已正常推master，115责任用例最终绿、1921单元绿；精确CI37665222739成功84秒，RF精确CI37664909065成功31秒。详情见[g3_main_acceptance](g3_main_acceptance_2026-10-07.md)。G3不再派发；G2-04旧维护退休已完成，R4依据现有注册重复上界决定不做对象化迁移（不是释放空间）。RF真实用户安装未同步；G2-12/其他G2、R2元数据生产应用、R3和R5仍未完成。目标服务保持paused，本次仅执行用户明确要求的G3验收，并未恢复总目标/付费/生产批次。
 
 本次实际证据：RF78责任绿+107正常prepush绿；CWP115责任用例并集绿+1921 Unit绿。主目录G2未完成源码/测试、owner配置和RF三日志均保留；唯一重叠CLI增删补丁44行前后相同。保护及恢复细节见g3_main_acceptance与before/after JSON。

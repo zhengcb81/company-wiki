@@ -1,16 +1,18 @@
 # 并行总计划：门禁先行，独立目录施工，MAIN统一打通
 
+**最新G4验收（2026-10-07）：**两包已验收、并入实际执行分支并推远端。CWP `df7d7ba`：冻结Pipeline/Gate0–5整族退休及CN 1.3.0路由配套，211责任用例绿；精确CI37673393822所有步骤绿/74秒。SID `eb8495c`：latest分页矛盾TDD修复，127责任/真实CLI离线联调用例绿，已推`v2-clean-rewrite`；该仓无workflow，不声称远端CI。见[G4正式验收](g4_main_acceptance_2026-10-07.md)。G4不再派发。G2-03完成；完整G2-12 ensure/FF/ET/CWP入库与复用仍未提交，其他G2、R2生产应用/R3/R5未完成。总目标保持paused，本次没有恢复生产或付费批次。
+
 **最新G3验收（2026-10-07）：**三个包已接收并补齐MAIN接线，两个本地主线已并入。RF `ab7a7a44`已正常推远端main（107快测绿）；CWP接线代码`b2c9e66`随`4bde75a`已正常推master，115责任用例最终绿、1921单元绿；精确CI37665222739成功84秒，RF精确CI37664909065成功31秒。详情见[g3_main_acceptance](g3_main_acceptance_2026-10-07.md)。G3不再派发；G2-04旧维护退休已完成，R4依据现有注册重复上界决定不做对象化迁移（不是释放空间）。RF真实用户安装未同步；G2-12/其他G2、R2元数据生产应用、R3和R5仍未完成。目标服务保持paused，本次仅执行用户明确要求的G3验收，并未恢复总目标/付费/生产批次。
 
 
-> **最新（2026-10-07）：**G3三工作树已建立，RF/SOURCE-FACTS已有独立计划，未见交接；不再次派发。当前可新派发的是[G4两张大卡](harness_lanes/g4_parallel_packages_2026-10-07.md)：CWP冻结Pipeline整族退休、SID最新财报发现，各独占`Projects/_g4/`新根，互不影响G3/MAIN。总目标服务实读paused，本次仅编制卡；MAIN恢复后仍负责全部公共接线/生产/安装/合入。下方旧未启动文字是历史。
+> **当前：**G3/G4均已交付、验收、并线；没有这两批待分派卡。独立worker工作树和历史收据保留；MAIN本次短接收树/测试根恢复absent。目标保持paused，完整G2-12与生产/安装仍由MAIN后续负责。
 
-## 当前新增可分派：G4两条线
+## 已交付并线：G4两条线
 
 | 卡 | 独占目录 | 责任 | 状态 |
 |---|---|---|---|
-| [G4-CWP-PIPELINE](harness_lanes/g4_cwp_frozen_pipeline_retirement.md) | `Projects/_g4/CWP-PIPELINE/company-wiki` | G2-03旧Gate家族/配置退出、stdlib退休壳、部署报告与责任测试 | ready，可现在开工 |
-| [G4-SID-LATEST](harness_lanes/g4_sid_latest_discovery.md) | `Projects/_g4/SID-LATEST/StockInfoDLSimple` | 按as-of有界发现年报/半年报/季报，期间/分页/预算/真实JSON CLI | ready，可现在开工 |
+| [G4-CWP-PIPELINE](harness_lanes/g4_cwp_frozen_pipeline_retirement.md) | `Projects/_g4/CWP-PIPELINE/company-wiki` | G2-03旧Gate家族/配置退出、stdlib退休壳、部署报告与责任测试 | accepted，已并线/推送 |
+| [G4-SID-LATEST](harness_lanes/g4_sid_latest_discovery.md) | `Projects/_g4/SID-LATEST/StockInfoDLSimple` | 按as-of有界发现年报/半年报/季报，期间/分页/预算/真实JSON CLI | accepted，已并线/推送 |
 
 精确代码写集和统一交接见[G4总包](harness_lanes/g4_parallel_packages_2026-10-07.md)。外线不合主线/不写生产；MAIN集中接线与既有G2A/B验收，不增加小节点签收。
 

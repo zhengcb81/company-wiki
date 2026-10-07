@@ -77,23 +77,17 @@ HEAD/文件 SHA/工作树/现场 policy 原文见[只读审计收据](harness_la
 
 **新增漏项与实施边界：**实际helper的catalog_unavailable应为IO_TRANSIENT有界重试；failed/historical blocked父任务的子任务必须进入DEPENDENCY_TERMINAL，不能永久PLANNED。重试同时尊重持久job.max_attempts。三narrative handler升1.1.0，timer保留1.0.0。prompt/handler升级后，旧终态run必须先验证冻结请求身份/真实来源/effective pin，再只读final，零materialize/worker/settle；不能套当前registry导致DAG冲突。只在既有AUTO narrative_runs增加nullable小binding_json，冻结不含密钥的request SHA、执行版本和source facts，旧无绑定或schema1 pin不可证明时明确需new run，原final/费用/未知账保留；非终态旧执行版本不支持时零模型拒绝，不添加人工重开许可。这属于G2A一次恢复责任测试，不另加签收或第二Store。
 
-### G2-03 / P1：冻结 Pipeline 的 gate 家族还在
+### G2-03 / P1：冻结 Pipeline gate 整族已退休
 
-该明确剩余已拆为[G4-CWP-PIPELINE](harness_lanes/g4_cwp_frozen_pipeline_retirement.md)，可现在独立开工；只写旧家族/配置、纯stdlib退休入口、部署报告和精确责任测试，公共CLI/指纹/工程清单仍MAIN。与G3-MAINT写集无交叉。
+**Status: complete（G4 MAIN验收）。** 旧`config/pipeline_rules.yaml`、11个`scripts/gate_system/`实现和专属测试已删除；`full_pipeline.py`仅保留纯stdlib薄退休stub，direct CLI含-S明确exit78，import零初始化。Deployment退休报告和当前用户指南不再推荐scheduler/ingest。当前PDF解析测试保留；工程hook/CI/mypy清单无旧族import，无需制造新门。
 
-**冻结历史链，不是现行摘要 worker。** `config/pipeline_rules.yaml` 仍有 Gate0–5、approval_threshold、human_review；`scripts/gate_system/` 和 `full_pipeline.py` 保留旧评审/金融 writer。`writer_policy` 已将 full_pipeline 永久退休，所以不能把这些描述成正在阻断每份新文档。
-
-**实施：**以 CodeGraph/公开 entrypoint/package/test import 为依据退休无当前生产消费者的整条配置/模块/控制面，而非留下“disabled approval”空壳。仅将仍有价值的来源解析反例迁到当前 parser/selector 包。删旧专属测试和 CI/mypy/hook 清单项；不重新启用投资 writer，也不把 writer freeze 当个人权限移除。历史说明用 Git 链接，不新复制大 archive。
-
-已核具体写集：退休`config/pipeline_rules.yaml`和`scripts/gate_system/`旧评审实现/专属unit测试；`scripts/full_pipeline.py`保留仅stdlib退休stub及direct CLI exit78（含-S），不再import金融writer。`tests/integration/test_full_pipeline.py`实际测纯PDF提取，有现行价值，保留对应反例，不能按名字误删。
-
-`deployment.generate_retirement_report`仍推荐旧scheduler/ingest，同步换成当前来源CLI；不把旧部署说明作为重启无限worker的授权。
+CWP `df7d7ba`已并入master/推远端；211责任用例绿，精确CI37673393822所有步骤绿74秒。详见[G4正式验收](g4_main_acceptance_2026-10-07.md)与[已完成卡](harness_lanes/g4_cwp_frozen_pipeline_retirement.md)。历史Gate家族不再是剩余；其他mixed-frozen stage/caller和G2兼容/安装仍分别对账，不称全面清理完成。
 
 ### G2-04 / P1：公开旧维护命令和特例审查
 
 **本组已完成（G3验收）：**库层旧写链退休、公共help/具名无配置退休、只读inventory、公司特例诊断及worker指纹同步已接入主线；旧调用0写，不重新提示token/签收。历史现状描述保留在下方，不代表当前还开放这些写命令。工程其他家族/FF兼容和真实安装仍独立待办。
 
-独立库层施工见[G3-CWP-MAINT](harness_lanes/g3_cwp_maintenance_retirement.md)，ready可开工；它不写cli.py/code_identity/hook/CI，交统一退休异常和精确wiring表，MAIN同次接线验收发布。只读清单与历史journal保留，原件0删除。
+独立库层施工见[G3-CWP-MAINT](harness_lanes/g3_cwp_maintenance_retirement.md)，已验收完成；该卡未写cli.py/code_identity/hook/CI，交统一退休异常和精确wiring表，MAIN同次接线验收发布。只读清单与历史journal保留，原件0删除。
 
 **可调用工具残留。** CLI 仍提供 `archive-retired-evidence`、`prune-retired-evidence`、`focus-cleanup`、`duplicate-recycle`；后两者有 confirmation-token。旧审计“无生产 caller”没覆盖到公开 CLI，结论过宽。`dropbox_governance.inventory_dropbox` 仍有平安特例“eligible without reviewer-completed evidence”，实 caller 是可选 `tools/dropbox_governance_replay.py` 和旧测试，不是正常 reader。
 
@@ -181,7 +175,7 @@ StockInfoDLSimple 的 provider host、include/exclude 是来源发现和过滤�
 
 ### G2-12 / P0-B：CWP latest下载仍分叉到旧gap签收协议
 
-调查另证SID实际CLI/AdapterDiscoveryRequest强制fiscal_year，CN latest季度/半年报无年提示直接失败，年报提示也可能误过滤旧年最新件。该provider侧能力补齐委托[G4-SID-LATEST](harness_lanes/g4_sid_latest_discovery.md)，从8ed5fdde独立worktree做as-of窗口/分页/真实期间与预算；不占MAIN CWP/FF写集、不改SID owner原仓。MAIN仍完成本节统一事务和最终新1.3.0路由/ensure联调，不能把外线metadata绿称整链完成。
+调查另证SID实际CLI/AdapterDiscoveryRequest强制fiscal_year，CN latest季度/半年报无年提示直接失败，年报提示也可能误过滤旧年最新件。该provider侧能力已由[G4-SID-LATEST](harness_lanes/g4_sid_latest_discovery.md)完成，SID eb8495c已推执行分支，CWP df7d7ba已接1.3.0/bounded正式路由；127责任/真实CLI离线绿，含分页矛盾修复。MAIN仍需完成本节统一ensure/FF/ET/CWP入库与复用联调；不能把provider/consumer合同绿称整链完成。
 
 **仍在执行，不能归入仅FF v1历史。** CWP exact `ensure --allow-download`已用单意图和AcquisitionBudget、不要求DownloadAuthorization；但latest_as_of即使允许下载也无条件只回GAP。公开`close-gap`强制binding-file、runtime snapshot/plan/policy hash/expiry/accessions，新默认无snapshot的steady库还会被`no_runtime_policy`拒绝。FF v2明确不走旧close-gap，收到GAP只返回，故latest缺件不能自动补齐。已核真实CLI help与实际类调用，非搜索单词推断。
 

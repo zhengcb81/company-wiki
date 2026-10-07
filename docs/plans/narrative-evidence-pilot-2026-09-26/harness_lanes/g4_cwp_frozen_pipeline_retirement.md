@@ -1,6 +1,8 @@
 # G4-CWP-PIPELINE：冻结旧处理链整体退休
 
-**状态：ready，可以现在独立开工。施工项目：company-wiki，必须使用下述新工作树。**
+**状态：complete / accepted / published。CWP df7d7ba已并master/推远端，211责任绿，精确CI37673393822全部步骤绿74秒；MAIN指南/工程清单接线已完成。**
+
+正式收据：[G4 MAIN验收](../g4_main_acceptance_2026-10-07.md)。以下为已完成施工细则/历史基线，不再重新开工。
 
 ## 1. 背景与完成目标
 

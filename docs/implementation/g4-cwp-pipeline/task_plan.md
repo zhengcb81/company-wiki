@@ -1,5 +1,7 @@
 # G4-CWP-PIPELINE — 任务计划
 
+**MAIN latest status:** accepted and published in CWP master; code df7d7ba58955e224c1799355f479ad5378ef38a7. 211 concentrated responsibility cases pass; exact CI37673393822 all steps succeeded in 74s. Gate/user guides and canonical CN 1.3.0 bounded route are integrated. Overall goal remains paused; unfinished G2-12 is not included. See [MAIN_ACCEPTANCE](MAIN_ACCEPTANCE.md). Earlier worker status is historical.
+
 **卡**：`docs/plans/narrative-evidence-pilot-2026-09-26/harness_lanes/g4_cwp_frozen_pipeline_retirement.md`
 **Worktree**：`C:/Users/郑曾波/Projects/_g4/CWP-PIPELINE/company-wiki` 分支 `codex/g4-cwp-pipeline`
 **Base**：`5930a644453ed46494c2c83c5ecfb97767fa9492`

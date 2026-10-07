@@ -1,0 +1,534 @@
+[
+  {
+    "repo": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "path": "config/source_acquisition.yaml",
+    "status": " M",
+    "sha256": "3609e707466eeb3e0f685e14f2637c6afa39ba900edef1be4814433a43300a01",
+    "size": 1213
+  },
+  {
+    "repo": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "path": "docs/plans/narrative-evidence-pilot-2026-09-26/g2_latest_acquisition_implementation_2026-10-07.md",
+    "status": " M",
+    "sha256": "cb80faf7af0dfe482799cf37350d77c739224726a19c560167fb195c5e5b799e",
+    "size": 8327
+  },
+  {
+    "repo": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "path": "src/company_wiki/source_catalog/acquisition.py",
+    "status": " M",
+    "sha256": "e78918bfd7d3d77145753f8ca957c14cc9ca8adf8cd6d13e858308e450cf032f",
+    "size": 33743
+  },
+  {
+    "repo": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "path": "src/company_wiki/source_catalog/acquisition_service.py",
+    "status": " M",
+    "sha256": "b9693ec0f3a536a8e802af964cc1640cda192db65471c5ef8f93571686104938",
+    "size": 11086
+  },
+  {
+    "repo": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "path": "src/company_wiki/source_catalog/cli.py",
+    "status": " M",
+    "sha256": "41ee11ac74afe54d8820a2eb5e83b6741d92449db7e7d33c97f90ed5205f96d0",
+    "size": 57450
+  },
+  {
+    "repo": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "path": "src/company_wiki/source_catalog/close_gap.py",
+    "status": " M",
+    "sha256": "25e8e06abdf5b8b11c3689d9c51df27a65b2109d82c41f1bb36b67d668dcbf11",
+    "size": 7851
+  },
+  {
+    "repo": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "path": "tests/contract/test_close_gap_concurrency_fc804.py",
+    "status": " M",
+    "sha256": "05164b96f5230a9feb9f101ded2a8e5f0d8d61f8005d676b4d9291164f7c8584",
+    "size": 16547
+  },
+  {
+    "repo": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "path": "tests/contract/test_close_gap_fc801.py",
+    "status": " M",
+    "sha256": "a816ee5f57c89aa8f62ea3d2d035a408ca866ba4a4ed988b80899566d41c0e2d",
+    "size": 15397
+  },
+  {
+    "repo": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "path": "tests/contract/test_source_catalog_acquisition.py",
+    "status": " M",
+    "sha256": "47008f720b140d778f54a8bbca6d8ca2e6710a254f7b23df9f611535a92d3e32",
+    "size": 21746
+  },
+  {
+    "repo": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "path": "tests/contract/test_source_catalog_download_authorization.py",
+    "status": " M",
+    "sha256": "812a23e584392b8475c192ed0fe666f370296eddbb2271d615a1b1600a8178b4",
+    "size": 12074
+  },
+  {
+    "repo": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "path": "tests/contract/test_source_catalog_gap_plan.py",
+    "status": " M",
+    "sha256": "e359274331b93c797d8b2e76622f1b9d6482f239e338a15efe76002cfc414078",
+    "size": 24989
+  },
+  {
+    "repo": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "path": ".planning/g2-latest-red/test_invalid_receipt_cleans_on0/staging/other-target/keep.txt",
+    "status": "??",
+    "sha256": "6149def9073b14a6ff441c56ce1453abc68c25d7e25e0326497e7c13b6e7476b",
+    "size": 27
+  },
+  {
+    "repo": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "path": ".planning/g2cliR/test_close_gap_cli_uses_one_in0/project/config/source_acquisition.yaml",
+    "status": "??",
+    "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "size": 2
+  },
+  {
+    "repo": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "path": ".planning/g2cliR/test_close_gap_cli_uses_one_in0/project/config/source_catalog.yaml",
+    "status": "??",
+    "sha256": "ba5799cf74a7d041070024dd239a7ba91269ebd895b805c4acc3ef213d88f76a",
+    "size": 277
+  },
+  {
+    "repo": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "path": ".planning/g2cliR/test_close_gap_cli_uses_one_in0/project/config/source_catalog_worker.yaml",
+    "status": "??",
+    "sha256": "053f8e36a2fcc06bdb5c59335219a8d4a1f50f9e950c46eee0980e43068bfdd5",
+    "size": 23
+  },
+  {
+    "repo": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "path": ".planning/g2cliR/test_close_gap_cli_uses_one_in1/project/config/source_acquisition.yaml",
+    "status": "??",
+    "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "size": 2
+  },
+  {
+    "repo": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "path": ".planning/g2cliR/test_close_gap_cli_uses_one_in1/project/config/source_catalog.yaml",
+    "status": "??",
+    "sha256": "ba5799cf74a7d041070024dd239a7ba91269ebd895b805c4acc3ef213d88f76a",
+    "size": 277
+  },
+  {
+    "repo": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "path": ".planning/g2cliR/test_close_gap_cli_uses_one_in1/project/config/source_catalog_worker.yaml",
+    "status": "??",
+    "sha256": "053f8e36a2fcc06bdb5c59335219a8d4a1f50f9e950c46eee0980e43068bfdd5",
+    "size": 23
+  },
+  {
+    "repo": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "path": ".planning/g2cliR/test_close_gap_cli_uses_one_in1/project/scope.json",
+    "status": "??",
+    "sha256": "88651fbf9ae335478b204abc14a0d51119e367cb540b2b29a24200ad1d17eb50",
+    "size": 72
+  },
+  {
+    "repo": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "path": ".planning/g2g2/test_acquisition_config_builds0/project/source_acquisition.yaml",
+    "status": "??",
+    "sha256": "2479df2405b6fa5874a5af3bf6f9d252d6182ee8ca4239e5e6084bfbc1e4edf4",
+    "size": 668
+  },
+  {
+    "repo": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "path": ".planning/g2g2/test_adapter_process_error_deg0/adapter/legacy_error.py",
+    "status": "??",
+    "sha256": "e3f77dd8d310ed99f594a483df774e0cc4bebdedd6bc84d2c67c1b8134ba5803",
+    "size": 131
+  },
+  {
+    "repo": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "path": ".planning/g2g2/test_adapter_process_error_exp0/adapter/typed_error.py",
+    "status": "??",
+    "sha256": "2c58fe6949d2f3aee61d2ea12dd822fe87e60f3f75b2267d5ab09ab76d551075",
+    "size": 550
+  },
+  {
+    "repo": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "path": ".planning/g2g2/test_e2e_f02_same_accession_se0/journal/acquisition_attempts.jsonl",
+    "status": "??",
+    "sha256": "f3ba0eefb6d35655aaf1f17271b78ff02de3da73fcebbd0727f5bd6a1172b04b",
+    "size": 1511
+  },
+  {
+    "repo": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "path": ".planning/g2g2/test_e2e_f02_same_accession_se0/journal/acquisition_attempts.jsonl.acquire",
+    "status": "??",
+    "sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+    "size": 1
+  },
+  {
+    "repo": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "path": ".planning/g2g2/test_invalid_receipt_cleans_on0/staging/other-target/keep.txt",
+    "status": "??",
+    "sha256": "6149def9073b14a6ff441c56ce1453abc68c25d7e25e0326497e7c13b6e7476b",
+    "size": 27
+  },
+  {
+    "repo": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "path": ".planning/g2g2/test_json_command_adapter_pres0/adapter/fake_adapter.py",
+    "status": "??",
+    "sha256": "a3f1a75c65866eed30d102221358f3c6f66ca69e9e03fd6dfa1bd9b134f8948e",
+    "size": 2307
+  },
+  {
+    "repo": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "path": ".planning/g2g2/test_placeholder_with_missing_0/dayu/portfolio/Zijin/filings/fil_2025/meta.json",
+    "status": "??",
+    "sha256": "4277e136271aa75eebc2f885df9aee91671e2699256bd39ed13bb4241eac3150",
+    "size": 213
+  },
+  {
+    "repo": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "path": ".planning/g2g2/test_service_ensure_latest_as_0/journal/acquisition_attempts.jsonl",
+    "status": "??",
+    "sha256": "0307c42ca75fe873a5f0142a1cb2af700acf5a3e45bcb326b28635ce413f03f7",
+    "size": 539
+  },
+  {
+    "repo": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "path": ".planning/g2g2/test_service_ensure_latest_as_0/journal/acquisition_attempts.jsonl.acquire",
+    "status": "??",
+    "sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+    "size": 1
+  },
+  {
+    "repo": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "path": ".planning/g2g2/test_source_acquisition_servic0/journal/acquisition_attempts.jsonl",
+    "status": "??",
+    "sha256": "53b26c12a03a8c13786e4f325efff983e25f258e51b29c32a4c5986c5aeccc25",
+    "size": 937
+  },
+  {
+    "repo": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "path": ".planning/g2g2/test_source_acquisition_servic0/journal/acquisition_attempts.jsonl.acquire",
+    "status": "??",
+    "sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+    "size": 1
+  },
+  {
+    "repo": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "path": ".planning/g2g2/test_writer_dedup_ignores_dayu0/dayu/portfolio/MDB/filings/fil_x/same.htm",
+    "status": "??",
+    "sha256": "e7975329c29e48242a591f56ddbe76ed17937b31c758fecdb1f83e96a1d19f70",
+    "size": 38
+  },
+  {
+    "repo": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "path": ".planning/g2g3/test_acquisition_config_builds0/project/source_acquisition.yaml",
+    "status": "??",
+    "sha256": "2479df2405b6fa5874a5af3bf6f9d252d6182ee8ca4239e5e6084bfbc1e4edf4",
+    "size": 668
+  },
+  {
+    "repo": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "path": ".planning/g2g3/test_adapter_process_error_deg0/adapter/legacy_error.py",
+    "status": "??",
+    "sha256": "e3f77dd8d310ed99f594a483df774e0cc4bebdedd6bc84d2c67c1b8134ba5803",
+    "size": 131
+  },
+  {
+    "repo": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "path": ".planning/g2g3/test_adapter_process_error_exp0/adapter/typed_error.py",
+    "status": "??",
+    "sha256": "2c58fe6949d2f3aee61d2ea12dd822fe87e60f3f75b2267d5ab09ab76d551075",
+    "size": 550
+  },
+  {
+    "repo": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "path": ".planning/g2g3/test_cg_c1b_cross_process_sing0/cross-process-fetch.log",
+    "status": "??",
+    "sha256": "cba5ce66195b98f97ba72e70af5641f86babd66939301cc6d7a5c287d0afd5ec",
+    "size": 6
+  },
+  {
+    "repo": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "path": ".planning/g2g3/test_close_gap_cli_uses_one_in0/project/config/source_acquisition.yaml",
+    "status": "??",
+    "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "size": 2
+  },
+  {
+    "repo": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "path": ".planning/g2g3/test_close_gap_cli_uses_one_in0/project/config/source_catalog.yaml",
+    "status": "??",
+    "sha256": "db3c18ffe1b216a80e06e3f77d219ecae7e4a96b2da066457fe8c4a5256ebdf1",
+    "size": 238
+  },
+  {
+    "repo": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "path": ".planning/g2g3/test_close_gap_cli_uses_one_in0/project/config/source_catalog_worker.yaml",
+    "status": "??",
+    "sha256": "053f8e36a2fcc06bdb5c59335219a8d4a1f50f9e950c46eee0980e43068bfdd5",
+    "size": 23
+  },
+  {
+    "repo": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "path": ".planning/g2g3/test_close_gap_cli_uses_one_in1/project/config/source_acquisition.yaml",
+    "status": "??",
+    "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "size": 2
+  },
+  {
+    "repo": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "path": ".planning/g2g3/test_close_gap_cli_uses_one_in1/project/config/source_catalog.yaml",
+    "status": "??",
+    "sha256": "db3c18ffe1b216a80e06e3f77d219ecae7e4a96b2da066457fe8c4a5256ebdf1",
+    "size": 238
+  },
+  {
+    "repo": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "path": ".planning/g2g3/test_close_gap_cli_uses_one_in1/project/config/source_catalog_worker.yaml",
+    "status": "??",
+    "sha256": "053f8e36a2fcc06bdb5c59335219a8d4a1f50f9e950c46eee0980e43068bfdd5",
+    "size": 23
+  },
+  {
+    "repo": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "path": ".planning/g2g3/test_close_gap_cli_uses_one_in1/project/scope.json",
+    "status": "??",
+    "sha256": "88651fbf9ae335478b204abc14a0d51119e367cb540b2b29a24200ad1d17eb50",
+    "size": 72
+  },
+  {
+    "repo": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "path": ".planning/g2g3/test_close_gap_does_not_consul0/binding.json",
+    "status": "??",
+    "sha256": "3c72e2a37be6ae60258f67e43a94c6a2e107bcd754fc3217c7f9bd1253265019",
+    "size": 339
+  },
+  {
+    "repo": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "path": ".planning/g2g3/test_close_gap_does_not_consul0/project/config/source_catalog.yaml",
+    "status": "??",
+    "sha256": "593244746823ac5b90e2bde0751c81c25dfc750634518fa0fbb75fc7dcba7909",
+    "size": 185
+  },
+  {
+    "repo": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "path": ".planning/g2g3/test_close_gap_does_not_consul0/project/config/source_catalog_worker.yaml",
+    "status": "??",
+    "sha256": "053f8e36a2fcc06bdb5c59335219a8d4a1f50f9e950c46eee0980e43068bfdd5",
+    "size": 23
+  },
+  {
+    "repo": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "path": ".planning/g2g3/test_e2e_f02_same_accession_se0/journal/acquisition_attempts.jsonl",
+    "status": "??",
+    "sha256": "ef200a23c4cb350d4c11cfd5c6f287ac9704851609d279980fbc31f70ace7a5a",
+    "size": 1511
+  },
+  {
+    "repo": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "path": ".planning/g2g3/test_e2e_f02_same_accession_se0/journal/acquisition_attempts.jsonl.acquire",
+    "status": "??",
+    "sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+    "size": 1
+  },
+  {
+    "repo": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "path": ".planning/g2g3/test_explicit_ensure_download_0/project/config/source_catalog.yaml",
+    "status": "??",
+    "sha256": "593244746823ac5b90e2bde0751c81c25dfc750634518fa0fbb75fc7dcba7909",
+    "size": 185
+  },
+  {
+    "repo": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "path": ".planning/g2g3/test_explicit_ensure_download_0/project/config/source_catalog_worker.yaml",
+    "status": "??",
+    "sha256": "053f8e36a2fcc06bdb5c59335219a8d4a1f50f9e950c46eee0980e43068bfdd5",
+    "size": 23
+  },
+  {
+    "repo": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "path": ".planning/g2g3/test_explicit_ensure_download_1/project/config/source_catalog.yaml",
+    "status": "??",
+    "sha256": "593244746823ac5b90e2bde0751c81c25dfc750634518fa0fbb75fc7dcba7909",
+    "size": 185
+  },
+  {
+    "repo": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "path": ".planning/g2g3/test_explicit_ensure_download_1/project/config/source_catalog_worker.yaml",
+    "status": "??",
+    "sha256": "053f8e36a2fcc06bdb5c59335219a8d4a1f50f9e950c46eee0980e43068bfdd5",
+    "size": 23
+  },
+  {
+    "repo": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "path": ".planning/g2g3/test_invalid_receipt_cleans_on0/staging/other-target/keep.txt",
+    "status": "??",
+    "sha256": "6149def9073b14a6ff441c56ce1453abc68c25d7e25e0326497e7c13b6e7476b",
+    "size": 27
+  },
+  {
+    "repo": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "path": ".planning/g2g3/test_json_command_adapter_pres0/adapter/fake_adapter.py",
+    "status": "??",
+    "sha256": "a3f1a75c65866eed30d102221358f3c6f66ca69e9e03fd6dfa1bd9b134f8948e",
+    "size": 2307
+  },
+  {
+    "repo": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "path": ".planning/g2g3/test_placeholder_with_missing_0/dayu/portfolio/Zijin/filings/fil_2025/meta.json",
+    "status": "??",
+    "sha256": "4277e136271aa75eebc2f885df9aee91671e2699256bd39ed13bb4241eac3150",
+    "size": 213
+  },
+  {
+    "repo": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "path": ".planning/g2g3/test_service_ensure_latest_as_0/journal/acquisition_attempts.jsonl",
+    "status": "??",
+    "sha256": "3c3e45543a088ce7dd6b30885bdfa44c380046efe243c69b7109c82bd310dd5a",
+    "size": 539
+  },
+  {
+    "repo": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "path": ".planning/g2g3/test_service_ensure_latest_as_0/journal/acquisition_attempts.jsonl.acquire",
+    "status": "??",
+    "sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+    "size": 1
+  },
+  {
+    "repo": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "path": ".planning/g2g3/test_source_acquisition_servic0/journal/acquisition_attempts.jsonl",
+    "status": "??",
+    "sha256": "a42b3968f5f7693ad3dad8cf1c21a98cc12663712b6178d6c3d7b7d6a91fe766",
+    "size": 937
+  },
+  {
+    "repo": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "path": ".planning/g2g3/test_source_acquisition_servic0/journal/acquisition_attempts.jsonl.acquire",
+    "status": "??",
+    "sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+    "size": 1
+  },
+  {
+    "repo": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "path": ".planning/g2g3/test_writer_dedup_ignores_dayu0/dayu/portfolio/MDB/filings/fil_x/same.htm",
+    "status": "??",
+    "sha256": "e7975329c29e48242a591f56ddbe76ed17937b31c758fecdb1f83e96a1d19f70",
+    "size": 38
+  },
+  {
+    "repo": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "path": ".planning/g2r2/test_invalid_receipt_cleans_on0/staging/other-target/keep.txt",
+    "status": "??",
+    "sha256": "6149def9073b14a6ff441c56ce1453abc68c25d7e25e0326497e7c13b6e7476b",
+    "size": 27
+  },
+  {
+    "repo": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "path": "tests/contract/test_single_intent_latest_acquisition.py",
+    "status": "??",
+    "sha256": "85c8782c07065f66394e3de74eb99a7884faddda0b88addd3631c5e223ae91f0",
+    "size": 18602
+  },
+  {
+    "repo": "C:\\Users\\郑曾波\\Projects\\StockInfoDLSimple\\v2-clean-rewrite",
+    "path": "README.md",
+    "status": " M",
+    "sha256": "974b9f2eec5a680206c9c18a9e6151c7dbd2946be6b1302fb13d9e5e218e1f89",
+    "size": 9400
+  },
+  {
+    "repo": "C:\\Users\\郑曾波\\Projects\\StockInfoDLSimple\\v2-clean-rewrite",
+    "path": "config_template.json",
+    "status": " M",
+    "sha256": "d35cf7c7b24e9fcf75eba3dc94d721cc05b2ae8438a673b512a40012e9d796fc",
+    "size": 1135
+  },
+  {
+    "repo": "C:\\Users\\郑曾波\\Projects\\StockInfoDLSimple\\v2-clean-rewrite",
+    "path": "main.py",
+    "status": " M",
+    "sha256": "3aa0cc8400126d575af9b088e4f6a29486f66a196bf19d38dd5e74d37df77d2c",
+    "size": 10623
+  },
+  {
+    "repo": "C:\\Users\\郑曾波\\Projects\\StockInfoDLSimple\\v2-clean-rewrite",
+    "path": "src/browser.py",
+    "status": " M",
+    "sha256": "ac55d0a3ae84d6361423612ec0565dc46787907d1bb64ff3c057fc996f217ae1",
+    "size": 21324
+  },
+  {
+    "repo": "C:\\Users\\郑曾波\\Projects\\StockInfoDLSimple\\v2-clean-rewrite",
+    "path": "src/downloader.py",
+    "status": " M",
+    "sha256": "14238f8ab5df830caad3a9011addcde089197297cf72ea52b353de3e100e6637",
+    "size": 25792
+  },
+  {
+    "repo": "C:\\Users\\郑曾波\\Projects\\StockInfoDLSimple\\v2-clean-rewrite",
+    "path": "src/logger.py",
+    "status": " M",
+    "sha256": "72b22c63b48099cbf89836b7da4ee41c85ff9fc623c23c8fad0c97f507b63769",
+    "size": 989
+  },
+  {
+    "repo": "C:\\Users\\郑曾波\\Projects\\StockInfoDLSimple\\v2-clean-rewrite",
+    "path": "src/mapping.py",
+    "status": " M",
+    "sha256": "40d9114a2feb24800f5e665282bf1244212e72fc0773a9b7a6171a0b1b30482a",
+    "size": 8633
+  },
+  {
+    "repo": "C:\\Users\\郑曾波\\Projects\\StockInfoDLSimple\\v2-clean-rewrite",
+    "path": "src/models.py",
+    "status": " M",
+    "sha256": "b280c14eddeee78ae7ab5d116d4e2be7145a5f3bdbdc742c7a0268f2e696395d",
+    "size": 1893
+  },
+  {
+    "repo": "C:\\Users\\郑曾波\\Projects\\StockInfoDLSimple\\v2-clean-rewrite",
+    "path": "tests/e2e/official_e2e_test.py",
+    "status": " M",
+    "sha256": "e56e1ef5cfcea9e89022f816d7ccfa923f0a039af60c2511ba9ed3c5fe4d3242",
+    "size": 17344
+  },
+  {
+    "repo": "C:\\Users\\郑曾波\\Projects\\StockInfoDLSimple\\v2-clean-rewrite",
+    "path": "tests/unit/test_downloader.py",
+    "status": " M",
+    "sha256": "8dbed9a7cfc55bbab3aeb755557307b2027bb820a6ad06ef3eed252f7ceef213",
+    "size": 19612
+  },
+  {
+    "repo": "C:\\Users\\郑曾波\\Projects\\StockInfoDLSimple\\v2-clean-rewrite",
+    "path": "tests/unit/test_official_e2e_contract.py",
+    "status": " M",
+    "sha256": "453eed3e3c177eb45ff5d02d0fbd555b43ea93cb2ed6f7b02384f1c20a59b2ae",
+    "size": 9729
+  },
+  {
+    "repo": "C:\\Users\\郑曾波\\Projects\\StockInfoDLSimple\\v2-clean-rewrite",
+    "path": "a_share_companies.txt",
+    "status": "??",
+    "sha256": "16a94e94b9bbbe384e3523537d968a512dd5d2f910f7e6584316a8a45e0a5ce4",
+    "size": 3898
+  },
+  {
+    "repo": "C:\\Users\\郑曾波\\Projects\\StockInfoDLSimple\\v2-clean-rewrite",
+    "path": "companies.txt",
+    "status": "??",
+    "sha256": "4210e4653f69e9ce6a8a6dfded6d71c604ced79ef280e31adfde0d165a4845ce",
+    "size": 137
+  },
+  {
+    "repo": "C:\\Users\\郑曾波\\Projects\\StockInfoDLSimple\\v2-clean-rewrite",
+    "path": "scripts/capture_byd_fy2024_fixture.py",
+    "status": "??",
+    "sha256": "86ad034fc79e04025e48d5c5c821298620b926838ba757f4482c9bc765a52914",
+    "size": 8544
+  }
+]

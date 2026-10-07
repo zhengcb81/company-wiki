@@ -1,8 +1,8 @@
 # G4：两项新增、可同时开工的大任务
 
-**状态：ready，尚未创建 G4 工作树、尚未代用户启动 harness。两张单卡均可现在交付执行。**
+**状态：两包已验收、并线及远端发布；不再派发。** CWP df7d7ba/精确CI74秒绿；SID eb8495c/127责任和真实离线合同绿，无workflow。MAIN短接收树与测试根恢复absent，外线工作树/记录保留。完整G2-12仍未完成；总目标保持paused。见[正式收据](../g4_main_acceptance_2026-10-07.md)。
 
-2026-10-07实读：上一批G3的三个工作树已经存在，RF/SOURCE-FACTS已有独立task_plan，未见完整交接。G3不重复派发。本批分别取自现有G2-03退休待办和G2-12调查中已证实的CN provider能力缺口；不增加新阶段或人工门禁。
+发卡时记录（现G3已验收）：上一批G3的三个工作树已经存在，RF/SOURCE-FACTS已有独立task_plan，未见完整交接。G3不重复派发。本批分别取自现有G2-03退休待办和G2-12调查中已证实的CN provider能力缺口；不增加新阶段或人工门禁。
 
 ## 1. 两张施工卡
 
@@ -30,7 +30,7 @@ CWP SourceRef/SourceExport v2、NarrativeRef、FF/ET协议不变。SID成功/失
 
 ## 4. 接收与合入顺序
 
-两包不等待MAIN即可完工，也不互相依赖。MAIN先收完G2-12统一事务，再按交付先后接入：
+两包不等待MAIN即可完工，也不互相依赖。已执行：MAIN先独立接收两包，SID provider与路由合同可先并线；完整G2-12事务仍待后续集中节点，不将provider交付阻塞在未完主线之后。具体责任：
 
 1. PIPELINE库层/脚本退休与MAIN工程清单同次集成；G3-MAINT的公共CLI接线单独归MAIN，避免两外线同时编辑清单。
 2. SID的CLI/共享预算JSON先通过已发布CWP `JsonCommandAdapter.discover_bounded`消费合同，再由MAIN在统一ensure中验证实际最新期间、只下载一次、重复复用和清理。CN latest发现成功不等于US/HK外部provider硬限额已支持。

@@ -1,0 +1,70 @@
+{
+  "schema_version": "g4-main-acceptance/1",
+  "status": "accepted_published",
+  "overall_goal": "paused",
+  "cwp": {
+    "delivery": "6e6f77c1e1686bd161ce82271922c07ee1ca9746",
+    "code_commit": "df7d7ba58955e224c1799355f479ad5378ef38a7",
+    "branch": "master",
+    "remote_published": true,
+    "responsibility_passed": 211,
+    "elapsed_seconds": 38.78,
+    "ci": {
+      "run_id": 37673393822,
+      "job_id": 112970591926,
+      "conclusion": "success",
+      "all_steps": "success",
+      "elapsed_seconds": 74
+    }
+  },
+  "sid": {
+    "delivery": "201a8f059b658eb0b3c12cb7e4db2ef08e3907da",
+    "code_commit": "eb8495ceb76892ff6f4a95889b6a19f0a78d769c",
+    "branch": "v2-clean-rewrite",
+    "remote_published": true,
+    "responsibility_passed": 127,
+    "elapsed_seconds": 27.02,
+    "workflow_present": false,
+    "ci_success_claimed": false,
+    "documentation_commit": "0cb3c1f0b4a5784757971265b2b20a7a0b4c5104"
+  },
+  "tdd": {
+    "pagination_contradictions_initial_failed": 3,
+    "pagination_contradictions_final_passed": 3,
+    "committed_route_initial_failed": 4,
+    "committed_route_final_passed": 4
+  },
+  "protection": {
+    "initial_files": 76,
+    "after_fast_forward_sha_equal": 75,
+    "only_changed": "config/source_acquisition.yaml",
+    "config_changed_keys": [
+      "adapters.cn.project_root",
+      "adapters.cn.version",
+      "adapters.cn.supports_acquisition_budget"
+    ],
+    "all_other_config_values_equal": true,
+    "g2_uncommitted_source_preserved": true,
+    "sid_owner_files_preserved": true,
+    "production_raw_deletions": 0,
+    "production_writes": 0,
+    "live_network_requests": 0,
+    "paid_calls": 0
+  },
+  "test_roots": {
+    "cwp_g4t": "absent",
+    "sid_g4r_g4t": "absent",
+    "sid_ruff_cache": "absent",
+    "removed_bytes": 1011593,
+    "receiver_worktrees": "remove_after_final_docs_publish",
+    "worker_worktrees": "preserved",
+    "sid_receiver_worktree": "absent"
+  },
+  "remaining": [
+    "G2-12 complete unified ensure/FF/ET/CWP acquisition and reuse",
+    "other G2 compatibility/installation inventory",
+    "R2 production metadata",
+    "R3 production narrative batch and consumers",
+    "R5 closeout"
+  ]
+}

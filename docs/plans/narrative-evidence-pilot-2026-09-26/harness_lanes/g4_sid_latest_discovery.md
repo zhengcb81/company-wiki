@@ -1,6 +1,8 @@
 # G4-SID-LATEST：按as-of发现A股最新财报
 
-**状态：ready，可以现在独立开工。施工项目：StockInfoDLSimple的新工作树；不在原目录施工。**
+**状态：complete / accepted / published（provider范围）。SID eb8495c已并/推正式v2-clean-rewrite；CWP df7d7ba路由已接1.3.0，127责任/真实离线CLI合同绿。完整ensure/FF/ET/CWP入库复用仍归MAIN G2-12，不是本卡已完成范围。**
+
+正式收据：[G4 MAIN验收](../g4_main_acceptance_2026-10-07.md)。以下为已完成施工细则/历史基线，不再重新开工。
 
 ## 1. 已证实缺口与目标
 

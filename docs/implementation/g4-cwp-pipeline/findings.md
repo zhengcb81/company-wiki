@@ -1,5 +1,7 @@
 # G4-CWP-PIPELINE — Findings
 
+**MAIN latest status:** accepted and published in CWP master; code df7d7ba58955e224c1799355f479ad5378ef38a7. 211 concentrated responsibility cases pass; exact CI37673393822 all steps succeeded in 74s. Gate/user guides and canonical CN 1.3.0 bounded route are integrated. Overall goal remains paused; unfinished G2-12 is not included. See [MAIN_ACCEPTANCE](MAIN_ACCEPTANCE.md). Earlier worker status is historical.
+
 **Base**：`5930a644453ed46494c2c83c5ecfb97767fa9492`（worktree 已建，分支 `codex/g4-cwp-pipeline`，原仓有未提交 G2 获取线，非本包依赖、未触碰）。
 
 ## 1. 旧族现状（开工时事实）

@@ -1,12 +1,16 @@
 # G2-12：一次请求、一次发现、一个获取事务
 
+**G4接收后的继续点：**CWP已发布df7d7ba，SID正式执行分支已发布eb8495c/adapter1.3.0；CN路由root回到v2-clean-rewrite、version1.3.0、bounded=true三个值已由MAIN定点接管，其他配置值保持。最新年/半年/季报不再要求猜fiscal_year，SID五页有限窗口只在完整时返回真实候选；discovery_incomplete/bounded_discovery_empty应保留具名GAP，不能复用旧本地文件冒充latest。127 provider/CWP消费责任已绿；本单CWP获取源码仍未提交，下一节点是实际统一ensure/FF/ET/CWP下载→入库→只下载一次/幂等复用/清理。不要重复已绿G4包，不用未提交owner代码给联调伪造成功。目标paused；恢复后先做本线。旧预算工作树/1.2和强制latest年提示是历史记录，不能作为现行接线。
+
 状态：in_progress。MAIN独占CWP、FF接线；SW/StockQA/RF三个外包写集不参与。本单细化已有G2-12，沿用G2A/G2B两个大节点，不新建每步签收。G2-01b已发布22dcc927，精确CI37603212398全部绿。
+
+**最新施工：**G3三卡已ready并推7f678f7，其白名单不含本线获取/CLI/FF；外线若分派，MAIN不写其维护/RF/调查文件。新增财年、原件根重叠和清理失败journal的5项真实RED（旧13pass），责任修复后18pass/3.40秒；原件根隔离、仅CN年报API必要报告年提示、成功journal在暂存清理后写入。当前仍未发布，旧责任/CLI/FF/并发集中节点尚未完成。
 
 实际施工：8项初始TDD为6RED/2pass，分层初版7pass/旧CloseGap1RED。93项扩展责任88pass/5fail尚待合同同步与真实反例补齐。整体替换CloseGap曾被自动审批拒绝且未执行，用户随后明确授权核心重写；这属于本次工具审批记录，不在项目中增加授权文件门。集中补充预算异常传播、target暂存安全清理、一次失败journal、共享budget有界重试、跨进程与真实最终读取后才发布。
 
 ## 基线与保护
 
-- CWP master9946117；仅owner `config/source_acquisition.yaml` dirty，内容SHA3609e707466eeb3e0f685e14f2637c6afa39ba900edef1be4814433a43300a01。不stage、覆盖、测试写入。
+- CWP master9946117；发卡时owner `config/source_acquisition.yaml` dirty，SHA3609e707；G4已验证仅三个CN字段并替代，其他字段未变，现配置已提交。该SHA为历史保护基线；测试仍不得写穿生产配置。
 - FF main758e8f4c116ef9760c657433e4ccbfbd10652029；仅owner未跟踪`config/FMP_API_KEY.txt`，不读取密钥正文、不stage。MAIN用自己的FF工作树，先核已有目录归属/clean，再复用或新建，不能覆盖其他任务。
 - Dayu/IQS零写；StockInfoDLSimple只调用现有已交付预算接口，不修改其owner文件。测试fake/loopback资料只在独立根，结束恢复absent；生产raw和17事实表保持，网络/供应商费用0。
 
