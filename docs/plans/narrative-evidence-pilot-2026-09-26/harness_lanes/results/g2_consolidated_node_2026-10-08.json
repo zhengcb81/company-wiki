@@ -1,0 +1,197 @@
+{
+  "schema_version": "g2-consolidated-node/1",
+  "status": "verified_publication_pending",
+  "boundary": "real source bytes; fixture identity/publication; loopback model; committed consumer CLIs",
+  "consumer_heads": {
+    "rf": "436fed68d8ba334ae568de296636904c5cc3e6cf",
+    "stockwiki": "04dfc5190589a8bbe224a47e94b045779c884b80"
+  },
+  "sources": [
+    {
+      "source_sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+      "source_id": "urn:company-wiki:source:sha256:221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+      "document_id": "urn:company-wiki:document:sha256:221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+      "language": "zh",
+      "span_count": 9,
+      "zero_model_skip": false,
+      "current_consumers_match": true,
+      "replay_status": "verified"
+    },
+    {
+      "source_sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+      "source_id": "urn:company-wiki:source:sha256:4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+      "document_id": "urn:company-wiki:document:sha256:4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+      "language": "en",
+      "span_count": 49,
+      "zero_model_skip": false,
+      "current_consumers_match": true,
+      "replay_status": "verified"
+    },
+    {
+      "source_sha256": "76e146985388c926f2683e24af47e6a1ab0ce8a156864fb16e7df9a2cc99b678",
+      "source_id": "urn:company-wiki:source:sha256:76e146985388c926f2683e24af47e6a1ab0ce8a156864fb16e7df9a2cc99b678",
+      "document_id": "urn:company-wiki:document:sha256:76e146985388c926f2683e24af47e6a1ab0ce8a156864fb16e7df9a2cc99b678",
+      "language": "zh",
+      "span_count": 0,
+      "zero_model_skip": true,
+      "current_consumers_match": true,
+      "replay_status": "verified"
+    },
+    {
+      "source_sha256": "e9699886d539afebab6f8aa970d6db2e62b488606dcfc0bf0c486c18a8994380",
+      "source_id": "urn:company-wiki:source:sha256:e9699886d539afebab6f8aa970d6db2e62b488606dcfc0bf0c486c18a8994380",
+      "document_id": "urn:company-wiki:document:sha256:e9699886d539afebab6f8aa970d6db2e62b488606dcfc0bf0c486c18a8994380",
+      "language": "zh",
+      "span_count": 12,
+      "zero_model_skip": false,
+      "current_consumers_match": true,
+      "replay_status": "verified"
+    }
+  ],
+  "model_loopback_posts": 3,
+  "resume_new_posts": 0,
+  "live_provider_posts": 0,
+  "paid_calls": 0,
+  "production_writes": 0,
+  "budget": {
+    "estimated_micro_usd": 333,
+    "tokens": 276,
+    "unknown_reservations": 0,
+    "unsettled_reservations": 0
+  },
+  "fixture_root_restored_absent": true,
+  "tests": {
+    "major_initial": [
+      {
+        "name": "pytest",
+        "errors": "0",
+        "failures": "1",
+        "skipped": "0",
+        "tests": "43",
+        "time": "15.157",
+        "timestamp": "2026-10-08T00:09:07.392827+01:00",
+        "hostname": "DESKTOP-156V213"
+      }
+    ],
+    "four_behavior_red": [
+      {
+        "name": "pytest",
+        "errors": "0",
+        "failures": "4",
+        "skipped": "0",
+        "tests": "4",
+        "time": "2.558",
+        "timestamp": "2026-10-08T00:13:30.762775+01:00",
+        "hostname": "DESKTOP-156V213"
+      }
+    ],
+    "responsibility_before_fixture_close": [
+      {
+        "name": "pytest",
+        "errors": "0",
+        "failures": "3",
+        "skipped": "0",
+        "tests": "60",
+        "time": "8.699",
+        "timestamp": "2026-10-08T00:14:23.298289+01:00",
+        "hostname": "DESKTOP-156V213"
+      }
+    ],
+    "responsibility_final": [
+      {
+        "name": "pytest",
+        "errors": "0",
+        "failures": "0",
+        "skipped": "0",
+        "tests": "60",
+        "time": "8.105",
+        "timestamp": "2026-10-08T00:15:44.446175+01:00",
+        "hostname": "DESKTOP-156V213"
+      }
+    ],
+    "major_final": [
+      {
+        "name": "pytest",
+        "errors": "0",
+        "failures": "0",
+        "skipped": "0",
+        "tests": "1",
+        "time": "61.611",
+        "timestamp": "2026-10-08T00:18:32.115855+01:00",
+        "hostname": "DESKTOP-156V213"
+      }
+    ],
+    "hash_registry_red": [
+      {
+        "name": "pytest",
+        "errors": "0",
+        "failures": "5",
+        "skipped": "0",
+        "tests": "6",
+        "time": "1.146",
+        "timestamp": "2026-10-08T00:27:05.033323+01:00",
+        "hostname": "DESKTOP-156V213"
+      }
+    ],
+    "hash_registry_stale_baseline": [
+      {
+        "name": "pytest",
+        "errors": "0",
+        "failures": "1",
+        "skipped": "0",
+        "tests": "28",
+        "time": "5.161",
+        "timestamp": "2026-10-08T00:27:47.401104+01:00",
+        "hostname": "DESKTOP-156V213"
+      }
+    ],
+    "hash_registry_final": [
+      {
+        "name": "pytest",
+        "errors": "0",
+        "failures": "0",
+        "skipped": "0",
+        "tests": "28",
+        "time": "4.650",
+        "timestamp": "2026-10-08T00:28:25.694168+01:00",
+        "hostname": "DESKTOP-156V213"
+      }
+    ]
+  },
+  "counts_overlap_do_not_add": true,
+  "root_cause": "Derived catalog document_kind overwrote ignored source declaration; identical registration then invented capture disagreement. Classifier and declaration alignment now share one type map; original unsupported labels retained; casefold comparison; genuinely different declarations rejected.",
+  "harness_errors": [
+    "SourceRef is a dataclass, not a to_dict DTO; changed test serialization to asdict",
+    "Committed StockWiki CLI imports its public llm_providers.yaml; included the exact committed runtime config in isolated export",
+    "Git ZIP includes config directory entry; validate containment, skip non-materialized directories"
+  ],
+  "warning_resolution": "Old B05 fixture factory left cached SQLite readers unclosed on Python3.13. Track owned catalog instances and close in finally, without relaxing business assertions or suppressing warnings.",
+  "production_raw_and_owner_changes": 0,
+  "paid_quality_proved": false,
+  "reuse_receipts": [
+    "g2_core_implementation_acceptance_2026-10-07.json",
+    "g2_exact_source_binding_acceptance_2026-10-07.json",
+    "g2_store_initialization_acceptance_2026-10-07.json",
+    "g2_chain_e2e_accepted_2026-10-07.json",
+    "final_asof_implementation_2026-10-07.json",
+    "g5_main_acceptance_2026-10-07.json",
+    "g208_main_acceptance_2026-10-07.json"
+  ],
+  "temp_cleanup_receipt": "g2_node_temp_cleanup_2026-10-08.json",
+  "owned_temp_roots_restored_absent": true,
+  "protected_production_owner_sha256_unchanged": 18,
+  "commit_hook_findings": {
+    "initial_commit_created": false,
+    "cause": "two immutable original content SHA constants rejected by an unnecessary manual hash registry",
+    "fix": "retired hash rule and its entire registry; retained host path, capability, syntax and unreadable checks",
+    "registry_entries_retired": 11,
+    "baseline_before": 71,
+    "baseline_after": 62,
+    "baseline_removed": 9,
+    "baseline_added": 0,
+    "removed_entries_git_deletion": "73de6be6adff3e8873c97e96c31b130f0a0f2711",
+    "guard_final_passed": 28,
+    "guard_final_skipped": 0,
+    "normal_commit_and_exact_ci": "pending"
+  }
+}

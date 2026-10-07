@@ -102,7 +102,8 @@ repos:
 
       # FC-1307-a: the host-assumption classes that passed every local hook and
       # broke CI (findings F-B01-9) - a host path baked into a test, an unguarded
-      # capability call, a machine-scoped digest frozen as a constant.  It scans
+      # capability call.  The hash whitelist is retired: source digests are data,
+      # verified by the reader rather than a manual registration.  This scans
       # tests/ and src/ (not the whole tree) and takes no filenames; rule 1 is
       # scoped to tests/ on purpose, see the script's docstring for the honest
       # scope (it does NOT cover assertion-layer host dependence).

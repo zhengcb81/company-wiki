@@ -29,6 +29,8 @@ import sqlite3
 import sys
 from pathlib import Path
 
+import pytest
+
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "src"))
 
@@ -41,6 +43,25 @@ from company_wiki.source_catalog.prompt_injection import (  # noqa: E402
 BODY = b"%PDF-1.4 r4b05-provenance"
 DIGEST = hashlib.sha256(BODY).hexdigest()
 CANARY = "DO-NOT-STORE-THIS-RAW-FRAGMENT-7f3c1b9d4e2a"
+
+
+@pytest.fixture(autouse=True)
+def close_fixture_catalogs(monkeypatch):
+    """The fixture factory owns cached readers, including assertion failures."""
+    created = []
+    original = _catalog
+
+    def tracked(*args, **kwargs):
+        catalog = original(*args, **kwargs)
+        created.append(catalog)
+        return catalog
+
+    monkeypatch.setattr(sys.modules[__name__], "_catalog", tracked)
+    try:
+        yield
+    finally:
+        for catalog in created:
+            catalog.close()
 
 
 def _sidecar(

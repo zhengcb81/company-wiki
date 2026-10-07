@@ -20,10 +20,11 @@ where Linux legitimately returns none).  A syntax gate cannot see that class; it
 covered by running the contract suite before pushing.  What the capability rule
 DOES cover: a new, unguarded capability call in a file the local gate never runs.
 
-``scripts/host_assumption_guard.py`` catches those syntax-level classes; this file
-makes CI enforce it AND regression-tests the guard itself, so a weakened rule fails
-here rather than in production.  Every case below corresponds to a property the
-first review either verified or found broken (B-VR1307-01/-02/-03/-04/-05/-06/-07).
+``scripts/host_assumption_guard.py`` catches literal paths and unguarded capability
+calls.  Its old hash whitelist is retired: a content digest cannot reveal whether
+its payload depends on a host.  Runtime byte checks and relocation tests own that
+responsibility.  These tests enforce both the useful checks and registry-free SHA
+fixtures, without introducing a replacement permission file.
 """
 
 from __future__ import annotations
@@ -62,7 +63,8 @@ def test_fc1307a_the_repository_has_no_new_host_assumptions():
 def _fake_repo(tmp_path, monkeypatch, case_body: str, baseline: list[str] | None = None,
                registry: str | None = None):
     """A throwaway repo whose paths look real (``tests/`` in the parts), with the
-    guard's three module-level paths redirected into it.
+    guard's repository and baseline paths redirected into it.  A legacy registry,
+    if supplied, is merely a file in the fake checkout and must never be read.
 
     ``resolve()`` matters: the guard compares a resolved violation path against
     REPO, so a tmp root that is itself a symlink (macOS ``/tmp``) would otherwise
@@ -82,7 +84,6 @@ def _fake_repo(tmp_path, monkeypatch, case_body: str, baseline: list[str] | None
         registry_path.write_text(registry, encoding="utf-8")
     monkeypatch.setattr(guard, "REPO", repo)
     monkeypatch.setattr(guard, "BASELINE", baseline_path)
-    monkeypatch.setattr(guard, "REGISTRY", registry_path)
     return repo, case, baseline_path
 
 
@@ -218,35 +219,31 @@ def _write(tmp_path: Path, name: str, body: str) -> Path:
 
 
 # ---------------------------------------------------------------------------
-# Rule 3 - frozen machine-scoped digests
+# Content digests are data, not host capabilities or permissions
 # ---------------------------------------------------------------------------
 
 
-def test_fc1307a_a_frozen_digest_without_a_rationale_is_flagged(tmp_path):
-    rules = _rules(tmp_path, 'SHA = "' + "a" * 64 + '"\n')
-    assert guard.RULE_FROZEN_HASH in rules, rules
+@pytest.mark.parametrize("digest", ["a" * 64, "A" * 64])
+def test_content_digest_needs_no_registration(tmp_path, digest):
+    assert _rules(tmp_path, f'SHA = "{digest}"\n') == []
 
 
-def test_fc1307a_an_uppercase_digest_is_flagged_too(tmp_path):
-    """B-VR1307-05: the URL rule used re.IGNORECASE and the digest rule did not, so
-    an upper-case SHA (what many tools print) walked straight through."""
-    assert guard.RULE_FROZEN_HASH in _rules(tmp_path, 'SHA = "' + "A" * 64 + '"\n')
+@pytest.mark.parametrize("legacy_registry", [None, "{not json"])
+def test_legacy_hash_registry_cannot_block_content_verification(
+    tmp_path, monkeypatch, legacy_registry,
+):
+    _fake_repo(tmp_path, monkeypatch, 'SHA = "' + "b" * 64 + '"\n',
+               registry=legacy_registry)
+    assert guard.main(["--roots", "tests"]) == 0
 
 
-def test_fc1307a_every_registered_digest_carries_a_rationale():
-    """A registry entry without a reason is how a wrong freeze gets blessed; the
-    registry therefore has to say WHERE it is and WHY it is host-independent."""
-    registry = json.loads(
-        (REPO / "tests" / "contract" / "host_assumption_allowlist.json").read_text(
-            encoding="utf-8"
-        )
-    )
-    entries = registry["registered_hashes"]
-    assert entries, "an empty registry would mean the rule never fires"
-    for digest, entry in entries.items():
-        assert len(digest) == 64 and digest == digest.lower(), digest
-        assert entry.get("where"), digest
-        assert len(entry.get("rationale", "")) > 40, digest
+def test_digest_does_not_hide_an_actual_host_path(tmp_path, monkeypatch, capsys):
+    _fake_repo(tmp_path, monkeypatch,
+               'SHA = "' + "c" * 64 + '"\nHOST = "C:/Windows/win.ini"\n')
+    assert guard.main(["--roots", "tests"]) == 1
+    output = capsys.readouterr().out
+    assert guard.RULE_PATHS in output
+    assert "unregistered-frozen-hash" not in output
 
 
 # ---------------------------------------------------------------------------
@@ -336,9 +333,9 @@ def test_fc1307a_a_root_outside_the_repository_is_refused(tmp_path, monkeypatch)
     assert repo.is_dir()
 
 
-def test_fc1307a_a_malformed_registry_is_refused(tmp_path, monkeypatch):
-    repo, _case, _baseline = _fake_repo(tmp_path, monkeypatch, "X = 1\n",
-                                        registry="{not json")
+def test_fc1307a_a_malformed_baseline_is_refused(tmp_path, monkeypatch):
+    repo, _case, baseline = _fake_repo(tmp_path, monkeypatch, "X = 1\n")
+    baseline.write_text("{not json", encoding="utf-8")
     with pytest.raises(SystemExit) as excinfo:
         guard.main(["--roots", "tests"])
     assert "not readable JSON" in str(excinfo.value)

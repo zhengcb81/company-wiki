@@ -1,0 +1,208 @@
+{
+  "schema_version": "g2-node-temp-cleanup/1",
+  "status": "restored_absent",
+  "date": "2026-10-08",
+  "entries": [
+    {
+      "name": "g2ab",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\g2ab",
+      "existed_before_cleanup": true,
+      "bytes": 261,
+      "files": 5,
+      "restored_absent": true
+    },
+    {
+      "name": "g2ac",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\g2ac",
+      "existed_before_cleanup": true,
+      "bytes": 1411072,
+      "files": 28,
+      "restored_absent": true
+    },
+    {
+      "name": "g2ad",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\g2ad",
+      "existed_before_cleanup": true,
+      "bytes": 10917200,
+      "files": 196,
+      "restored_absent": true
+    },
+    {
+      "name": "g2ae",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\g2ae",
+      "existed_before_cleanup": true,
+      "bytes": 21,
+      "files": 1,
+      "restored_absent": true
+    },
+    {
+      "name": "g2af",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\g2af",
+      "existed_before_cleanup": true,
+      "bytes": 10892552,
+      "files": 196,
+      "restored_absent": true
+    },
+    {
+      "name": "g2ag",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\g2ag",
+      "existed_before_cleanup": true,
+      "bytes": 21,
+      "files": 1,
+      "restored_absent": true
+    },
+    {
+      "name": "g2ah",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\g2ah",
+      "existed_before_cleanup": true,
+      "bytes": 21,
+      "files": 1,
+      "restored_absent": true
+    },
+    {
+      "name": "g2ai",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\g2ai",
+      "existed_before_cleanup": true,
+      "bytes": 21,
+      "files": 1,
+      "restored_absent": true
+    },
+    {
+      "name": "g2ab-review",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\g2ab-review",
+      "existed_before_cleanup": true,
+      "bytes": 92694,
+      "files": 2,
+      "restored_absent": true
+    },
+    {
+      "name": "g2ab-result.xml",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\g2ab-result.xml",
+      "existed_before_cleanup": true,
+      "bytes": 9184,
+      "files": 1,
+      "restored_absent": true
+    },
+    {
+      "name": "g2ac-red.xml",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\g2ac-red.xml",
+      "existed_before_cleanup": true,
+      "bytes": 4103,
+      "files": 1,
+      "restored_absent": true
+    },
+    {
+      "name": "g2ad-green.xml",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\g2ad-green.xml",
+      "existed_before_cleanup": true,
+      "bytes": 24769,
+      "files": 1,
+      "restored_absent": true
+    },
+    {
+      "name": "g2ae-result.xml",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\g2ae-result.xml",
+      "existed_before_cleanup": true,
+      "bytes": 886,
+      "files": 1,
+      "restored_absent": true
+    },
+    {
+      "name": "g2af-green.xml",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\g2af-green.xml",
+      "existed_before_cleanup": true,
+      "bytes": 11321,
+      "files": 1,
+      "restored_absent": true
+    },
+    {
+      "name": "g2ag-result.xml",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\g2ag-result.xml",
+      "existed_before_cleanup": true,
+      "bytes": 5022,
+      "files": 1,
+      "restored_absent": true
+    },
+    {
+      "name": "g2ah-result.xml",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\g2ah-result.xml",
+      "existed_before_cleanup": true,
+      "bytes": 1742,
+      "files": 1,
+      "restored_absent": true
+    },
+    {
+      "name": "g2ai-result.xml",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\g2ai-result.xml",
+      "existed_before_cleanup": true,
+      "bytes": 419,
+      "files": 1,
+      "restored_absent": true
+    },
+    {
+      "name": "g2ab-node.json",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\g2ab-node.json",
+      "existed_before_cleanup": true,
+      "bytes": 2685,
+      "files": 1,
+      "restored_absent": true
+    },
+    {
+      "name": "g2aj",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\g2aj",
+      "existed_before_cleanup": true,
+      "bytes": 424,
+      "files": 8,
+      "restored_absent": true
+    },
+    {
+      "name": "g2ak",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\g2ak",
+      "existed_before_cleanup": true,
+      "bytes": 3136,
+      "files": 32,
+      "restored_absent": true
+    },
+    {
+      "name": "g2al",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\g2al",
+      "existed_before_cleanup": true,
+      "bytes": 3136,
+      "files": 32,
+      "restored_absent": true
+    },
+    {
+      "name": "g2aj-red.xml",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\g2aj-red.xml",
+      "existed_before_cleanup": true,
+      "bytes": 13218,
+      "files": 2,
+      "restored_absent": true
+    },
+    {
+      "name": "g2ak-green.xml",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\g2ak-green.xml",
+      "existed_before_cleanup": true,
+      "bytes": 11730,
+      "files": 2,
+      "restored_absent": true
+    },
+    {
+      "name": "g2al-green.xml",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\g2al-green.xml",
+      "existed_before_cleanup": true,
+      "bytes": 10038,
+      "files": 2,
+      "restored_absent": true
+    }
+  ],
+  "measured_bytes": 23415676,
+  "measured_files": 518,
+  "guard": "Exact owned untracked paths within CWP/.planning, no reparse; inventory persisted before native removal",
+  "protected_files_unchanged": 18,
+  "raw_deleted": 0,
+  "owner_deleted": 0,
+  "historical_five_roots_preserved": true,
+  "delivery_worktrees_preserved": true,
+  "owned_entries": 24
+}

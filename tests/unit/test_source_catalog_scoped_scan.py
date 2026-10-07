@@ -1,6 +1,7 @@
 """A single import must not rehash or retire the rest of the data lake."""
 
 from dataclasses import replace
+import json
 from pathlib import Path
 
 import pytest
@@ -122,5 +123,46 @@ def test_registration_service_uses_configured_reader_without_old_rollout_scan(tm
         result = catalog.register_sources(root_id="company_raw", relative_paths={
             first.relative_to(config.roots[0].path).as_posix()})
         assert result.files_seen == 1 and result.errors == 0
+    finally:
+        catalog.close()
+
+
+@pytest.mark.parametrize("declared_kind", ["ir_policy", "meeting_notice", "10-K", "Annual_Report"])
+def test_repeated_registration_preserves_capture_kind_without_inventing_conflict(tmp_path, declared_kind):
+    from company_wiki.source_catalog.service import SourceCatalog
+    from company_wiki.source_catalog.source_reader import SourceReadError, SourceVersionReader
+
+    config, first, _ = _lake(tmp_path)
+    config = replace(config, roots=(replace(config.roots[0], adapter_id="company_raw_v1"),))
+    first.with_name(first.name + ".source.json").write_text(json.dumps({
+        "source_title": "Investor relations record", "document_kind": declared_kind,
+        "market": "CN", "security_id": "688012", "filing_date": "2026-03-31",
+    }), encoding="utf-8")
+    catalog = SourceCatalog(config)
+    try:
+        catalog.scan()
+        row = catalog.reader.fetchone("SELECT d.document_id,d.primary_source_id,s.content_sha256 "
+            "FROM documents d JOIN sources s ON s.source_id=d.primary_source_id "
+            "WHERE d.title='Investor relations record'")
+        reader = SourceVersionReader(catalog)
+        ref = reader.query_ref(row["document_id"], row["primary_source_id"], row["content_sha256"])
+        before = reader.describe_version(ref)
+        for _ in range(2):
+            catalog.register_sources(root_id="company_raw", relative_paths={
+                first.relative_to(config.roots[0].path).as_posix()})
+            assert reader.describe_version(ref) == before
+        metadata = json.loads(catalog.reader.fetchone("SELECT metadata_json FROM documents "
+            "WHERE document_id=?", (ref.document_id,))["metadata_json"])
+        assert not any(item.get("conflicts") for item in metadata["r4_provenance"]["fields"].values())
+        assert metadata["acquisition"]["document_kind"].casefold() == declared_kind.casefold()
+        # A genuinely different declaration still fails; no blanket conflict waiver.
+        sidecar = first.with_name(first.name + ".source.json")
+        changed = json.loads(sidecar.read_text(encoding="utf-8"))
+        changed["document_kind"] = "prospectus"
+        sidecar.write_text(json.dumps(changed), encoding="utf-8")
+        catalog.register_sources(root_id="company_raw", relative_paths={
+            first.relative_to(config.roots[0].path).as_posix()})
+        with pytest.raises(SourceReadError, match="metadata_conflict"):
+            reader.describe_version(ref)
     finally:
         catalog.close()

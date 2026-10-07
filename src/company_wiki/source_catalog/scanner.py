@@ -113,6 +113,21 @@ def _published_date(text: str) -> str | None:
         return None
 
 
+_SIDECAR_KIND_MAP = {
+    "annual_report": (SourceType.REGULATORY_FILING, "annual_report"),
+    "semi_annual_report": (SourceType.REGULATORY_FILING, "semi_annual_report"),
+    "quarterly_report": (SourceType.REGULATORY_FILING, "quarterly_report"),
+    "regulatory_filing": (SourceType.REGULATORY_FILING, "regulatory_filing"),
+    "broker_research": (SourceType.BROKER_RESEARCH, "broker_research"),
+    "investor_relations": (SourceType.INVESTOR_RELATIONS, "investor_relations"),
+    "investor_call_transcript": (SourceType.INVESTOR_RELATIONS, "investor_call_transcript"),
+    "prospectus": (SourceType.PROSPECTUS, "prospectus"),
+    "equity_offering_prospectus": (SourceType.PROSPECTUS, "equity_offering_prospectus"),
+    "convertible_bond_prospectus": (SourceType.PROSPECTUS, "convertible_bond_prospectus"),
+    "news": (SourceType.ORIGINAL_NEWS, "news"),
+}
+
+
 def _classification(path: Path, *, root_kind: str, metadata: dict[str, Any]) -> tuple[str, SourceType]:
     form = str(metadata.get("form_type") or "").casefold()
     text = re.sub(
@@ -123,26 +138,9 @@ def _classification(path: Path, *, root_kind: str, metadata: dict[str, Any]) -> 
     # --- trust order: sidecar > form_type > precise keywords > weak keywords ---
     # 1. explicit sidecar document_kind (highest trust)
     sidecar_kind = str(metadata.get("document_kind") or "").strip().lower()
-    if sidecar_kind:
-        _SIDECAR_MAP = {
-            "annual_report": (SourceType.REGULATORY_FILING, "annual_report"),
-            "semi_annual_report": (SourceType.REGULATORY_FILING, "semi_annual_report"),
-            "quarterly_report": (SourceType.REGULATORY_FILING, "quarterly_report"),
-            "regulatory_filing": (SourceType.REGULATORY_FILING, "regulatory_filing"),
-            "broker_research": (SourceType.BROKER_RESEARCH, "broker_research"),
-            "investor_relations": (SourceType.INVESTOR_RELATIONS, "investor_relations"),
-            "investor_call_transcript": (
-                SourceType.INVESTOR_RELATIONS,
-                "investor_call_transcript",
-            ),
-            "prospectus": (SourceType.PROSPECTUS, "prospectus"),
-            "equity_offering_prospectus": (SourceType.PROSPECTUS, "equity_offering_prospectus"),
-            "convertible_bond_prospectus": (SourceType.PROSPECTUS, "convertible_bond_prospectus"),
-            "news": (SourceType.ORIGINAL_NEWS, "news"),
-        }
-        if sidecar_kind in _SIDECAR_MAP:
-            st, kind = _SIDECAR_MAP[sidecar_kind]
-            return kind, st
+    if sidecar_kind in _SIDECAR_KIND_MAP:
+        st, kind = _SIDECAR_KIND_MAP[sidecar_kind]
+        return kind, st
     # 2. broker research commentary must precede annual/semi/quarterly checks
     if any(token in text for token in ("点评", "深度报告", "调研报告")):
         return "broker_research", SourceType.BROKER_RESEARCH
@@ -1437,6 +1435,12 @@ def _merge_metadata_json(
                     continue
                 for key in keys:
                     if key in payload:
+                        # A derived catalog type is not a sidecar declaration.
+                        # Preserve ignored original labels (e.g. ir_policy or
+                        # 10-K); writing a broad type into them manufactures a
+                        # capture disagreement on the next identical scan.
+                        if column == "document_kind" and str(payload[key]).strip().casefold() not in _SIDECAR_KIND_MAP:
+                            continue
                         payload[key] = value
     previous = stored.get(R4_PROVENANCE_KEY)
     fields: dict[str, Any] = {}
@@ -1827,7 +1831,7 @@ def _merge_document_row(
             incoming_value = new_inner.get(key)
             if stored_value in (None, "") or incoming_value in (None, ""):
                 continue
-            if str(stored_value).strip() == str(incoming_value).strip():
+            if _declaration_matches(key, stored_value, incoming_value):
                 continue
             capture_conflicts[f"capture.{key}"] = _provenance_record(
                 value_hash=_short_value_hash(stored_value),

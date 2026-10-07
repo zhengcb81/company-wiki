@@ -8,6 +8,10 @@ company-wiki 保存来源身份、不可变原件 SHA-256、来源版本与位�
 
 扫描只登记原件，不要求先转成整篇 Markdown。上层通过 SourceRef / SourceExport v2 访问来源；多个目录只是存储适配细节。相同字节归为一个 source，不把同内容的每个物理位置重复解析和摘要。原件保持原语言，不翻译。
 
+来源声明与标准分类分开维护。分类器未采用的原始类别（如 `ir_policy`、`10-K`）保留在 acquisition 中，不能被派生列覆写后制造重复登记冲突；类别比较采用分类器相同的大小写语义，真正不同声明仍记录冲突。已有冲突不会自动擦除。
+
+文件名只辅助路由，不能证明正文无价值。套话较多的 IR、甚至文件名写“管理制度”的调研仍可能有业务证据，应按正文精选；真正纯流程制度且无业务候选才零模型跳过。`review_required/not_reviewed` 为技术诊断，不要求人工签收才能消费。
+
 默认配置 `config/source_catalog.yaml` 使用 `${PROJECT_ROOT}` 和 `${USER_PROFILE}` 定位公司资料、Dayu portfolio 与 Dropbox 来源。测试必须使用独立配置和临时根，不修改生产配置。外部根只读；新下载的 canonical 原件由本项目 acquisition writer 导入自己的公司目录，Dayu 源码与长期 workspace 不修改。
 
 | 对象 | 含义 |
