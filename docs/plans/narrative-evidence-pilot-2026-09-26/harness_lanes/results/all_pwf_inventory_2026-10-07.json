@@ -1,0 +1,722 @@
+{
+  "schema_version": "all-pwf-plan-inventory/1",
+  "status": "inventory_complete_decisions_in_implementation_plan",
+  "plan_root": "docs/plans/narrative-evidence-pilot-2026-09-26",
+  "items": [
+    {
+      "path": "ci_red_handoff_2026-10-02.md",
+      "sha256": "a36ec4a54052213bba806fb7a0d4a526f9dde0e49286215a7e5fca6247945350",
+      "title": "CI Contract 红灯修复交接卡（2026-10-02）",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "clean_architecture_tdd_execution_plan_2026-09-27.md",
+      "sha256": "1d1959cd381be5000ab5bf08d0be6dcf92edb8cf38b72e41aa202a01e92dc2dc",
+      "title": "company-wiki 清洁架构与 TDD 实施总图（2026-09-27）",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "cross_project_coordination_2026-09-26.md",
+      "sha256": "b53e7f502d2fa897edfc74c8cb5efd01dfc20cea295ddb0baf5d2c724a473254",
+      "title": "与 revenue-forecast 三项目大计划的交叉及执行门禁",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "cross_repo_mainline_and_delivery_plan_2026-09-28.md",
+      "sha256": "dc9d506f61aa8b61d25123ac2efdb09a5ba54ec6fb6b816245ed5b4ffe7bee86",
+      "title": "跨仓主线整合与 company-wiki 后续交付总计划（2026-09-28）",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "d0_inventory_receipt_2026-09-27.md",
+      "sha256": "4c6a9a7b9020853586f2f6e0f2a4ba39986f8c65b4093298c7856a36073f31fa",
+      "title": "D0 原文与派生物只读盘点收据（2026-09-27）",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "data_lake_boundary_review_2026-09-27.md",
+      "sha256": "03473e9f85678f3d716d52b57e326d15a9c6d723947d82b841c75c05603e7978",
+      "title": "数据湖边界复核：目录、来源与消费者（2026-09-27）",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "early_catalog_retirement.md",
+      "sha256": "0e39917a86c4d12a0e8a9d9aa6cd41606a78f4f8b8a80a25fe8a3bfe47a291a3",
+      "title": "46 GiB 旧库提前退役：可执行审查卡",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "earnings_transcripts_vs_platforms_2026-09-27.md",
+      "sha256": "069d8836f30f9e1726842de9d5e52ca5a4f1330fe13a9c95f0c70e42c770d707",
+      "title": "earnings-transcripts 与 Koyfin、Seeking Alpha 的电话会议能力对照（2026-09-27）",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "end_to_end_test_plan.md",
+      "sha256": "c1cb88be693f915e71bb842d0667f3902806544e85217ef0a5ec3977573480b2",
+      "title": "关键节点端到端测试与测试目录恢复方案",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "execution_cards.md",
+      "sha256": "f63c468dd659dcc928f8c8bbf6ef63f642b34e3e8504113a9d27867217db4117",
+      "title": "执行卡：叙述性证据流水线 W0–W7",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "filing_fetch_transcript_integration_v1.md",
+      "sha256": "99d4e097ee4c7f336e03d83b2b007b9af0bcd963f69fa5556e079701fc1abfb3",
+      "title": "Filing Fetch × Earnings Transcripts × Company Wiki（v1 草案已退役）",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "final_batch_deadline_closeout_2026-10-07.md",
+      "sha256": "ae3f4a793dcbdd7618ab2c74752ebddc60e46a9d274d15e570d48cbc47a5a766",
+      "title": "完成核查发现的批次准备时间预算：窄幅收口",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "final_consumer_asof_alignment_2026-10-07.md",
+      "sha256": "26034e80324b114d10671e5f4cb62e2c537d806c0e9eb36ab7b00e39db374f0d",
+      "title": "完整核查：消费者历史日期合同对齐",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "final_scope_audit_2026-10-07.md",
+      "sha256": "8f0dac9ef4d56c9cb50efec21cdbb7f7725eaa77b1af6289b2e72b5c8e9d75ca",
+      "title": "原目标逐项核查与主线验收",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "findings.md",
+      "sha256": "5c26199f2e771efce9f52c19adfc7526113f0ade4ca1033de5237b4f32532832",
+      "title": "Findings：当前事实与待验证项",
+      "unchecked_items": 0,
+      "role": "current_entry"
+    },
+    {
+      "path": "g1_summary_source_support_audit_v1.md",
+      "sha256": "f0c205d08fda288ace4b7d76dcf6c7c705998b87c5a9161b23148a1564eff23c",
+      "title": "G1 人工摘要来源支持审查 v1",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "ga1_fmp_admission_implementation.md",
+      "sha256": "5e7398b52ab302f322f6aa701f69e7d66b0b47663dff0fbf70f37d627a184b5b",
+      "title": "G-A1：FMP 原件入库与未知公开日期（施工细则）",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "gate_and_contract_simplification_2026-09-29.md",
+      "sha256": "b010b29bbe536cc89466537002902b4b7379f323c00d996e0565360baad7ff4b",
+      "title": "多余门禁、权限与工程签收统一清理方案（2026-09-29）",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "gate_permission_inventory_2026-10-03.md",
+      "sha256": "78848ce67c4af609734a0ffb29490ea2e4741ce1b2240eaf00b2fead1f4f12c7",
+      "title": "门禁与权限现状：逐项审查清单（2026-10-03）",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "gate_simplification_closeout_2026-10-04.md",
+      "sha256": "ebba9f3c578bce81cf6208c699eaf3b191c94df333f4974354778ebea9bed536",
+      "title": "G1 收口：先去掉多余阻断，再完成虚拟化",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "gd_b3_archive_retirement_implementation.md",
+      "sha256": "1a0ec6b8d3e79a52574b26b745e552464a3c5f5f7c17b6c10b2bd83a85c7b343",
+      "title": "G-D B3：两个旧派生归档精确退役",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "gd_b4_historical_receipts_cleanup_2026-10-03.md",
+      "sha256": "9a27dc1dd447c25bc0bca50a59258468dc78daeab18bd24cf57e810e1fb5070c",
+      "title": "B4补批：保留历史Git引用，删除四个旧审查checkout",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "gd_b4_test_scratch_cleanup_2026-10-03.md",
+      "sha256": "9ef27d5c3d5c2b748fdfebfbaa2eb34176921171ec15f7733c5513256eac02ac",
+      "title": "B4补批：旧测试临时目录清理（2026-10-03）",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "gd_b4_worktree_cleanup_2026-10-03.md",
+      "sha256": "68c963d67e8dfa7535a392d57bb4fb1cf30b4691f48c8c163f4137bedb20ed0b",
+      "title": "G-D B4: exact historical worktree cleanup",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "gd_storage_batches_2026-10-03.md",
+      "sha256": "f5094f1afefa639eba6d7511bcfef63ce567bc13d4b7e755eb7d8e1beea1e76f",
+      "title": "G-D：当前空间与分批实施",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "harness_lanes/company_wiki.md",
+      "sha256": "1ae33a909a44447d313376fc62ef0ca7a47bf995a6fe02c4706f65b8771aece8",
+      "title": "CWP 独占施工卡：来源、叙述证据与 Worker",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "harness_lanes/earnings_transcripts.md",
+      "sha256": "36c5089293fb42e8c57494c5bdda8144ef968441d76f3743f6aeca68b3d7e057",
+      "title": "ET 独占施工卡：精确期次的原语言电话会议工具",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "harness_lanes/et_retrieval_deadline_closeout.md",
+      "sha256": "e7a4b2813ec82d886a53e0c11ebc6f2546b6969a82e20477583105c4742b7965",
+      "title": "ET-DEADLINE：电话会议采集硬截止时间收口",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "harness_lanes/et_transcript_live_import_acceptance.md",
+      "sha256": "27ccb75b103c1352217b4f5385945db827fcc2decbc7df8441151938f6155073",
+      "title": "ET-LIVE：电话会议原文导入与 SourceRef 虚拟化验收",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "harness_lanes/filing_fetch.md",
+      "sha256": "9cc35f815505da32a39bbe5378f1141562d8ada2b1a512d44e3e2631fdd3a8cc",
+      "title": "FF 独占施工卡：财报复用、精确下载与电话会议编排",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "harness_lanes/g1_legacy_entry_and_retirement.md",
+      "sha256": "ccc9aac2b3b8d4721d7966343e16ae0aed6e8f69f1420331fa613fba0d02da32",
+      "title": "G1-LEGACY：旧入口许可收敛与已完成运维工具退役",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "harness_lanes/invest_quick_scan.md",
+      "sha256": "5b9101fad9e47fadc1d1ab8e02233f17e679d24b87c508de24029e4b2650e19e",
+      "title": "IQS 独占施工卡：身份包与工程签收简化",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "harness_lanes/meetingconverter_ci_fast_gate.md",
+      "sha256": "25342658f89463320f17f16af46f14069ae44afdfdbcef7a081ba8b83afe992a",
+      "title": "MeetingConverter：CI 零任务根因与快速可靠门",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "harness_lanes/n4_model_transport_diagnostics.md",
+      "sha256": "d847feb7a8b5fc5ff17d219d2bda77c14cb9c0f2c5841c7810b2e5fc54509a07",
+      "title": "N4-T1：MiniMax transport error diagnostics and budget settlement",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "harness_lanes/n4_selective_narrative_coverage.md",
+      "sha256": "825f067339422d4fef95b5da3054bc43dba470eafd3551d9f5d8dfb1d78968bb",
+      "title": "N4-T2：Chinese report and IR narrative selection coverage",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "harness_lanes/n5_docset_main_acceptance_2026-10-06.md",
+      "sha256": "93c75d8a9a947ac4f38ef83a953dd23d926792cabef265c7a509638e2e2b720a",
+      "title": "N5-DOCSET：MAIN接收、当前主线对照与缺口归因",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "harness_lanes/n5_document_quality_benchmark.md",
+      "sha256": "e068dc55cf1cab0bf682befa8d0487dbfda809283d5bf6c29e5a13bf17c738af",
+      "title": "N5-DOCSET：多文档类型真实质量基准",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "harness_lanes/n5_et_local_text_integrity.md",
+      "sha256": "ea49fc7124acc2dafb7992de96e9d6840b572ce645dfcc0b84158c20f7c2a667",
+      "title": "N5-ET-TXT：本地电话会TXT正确复用与小收据",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "harness_lanes/n5_parallel_packages_2026-10-06.md",
+      "sha256": "31cb696ebee8a710d7acb6226ad26d1a082e39191bcca074d5f8a021453e4dd5",
+      "title": "N5：三个已分派的独立施工包",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "harness_lanes/n5_raw_duplicate_audit.md",
+      "sha256": "27304fa3dd5996eff23b048622141419501d23b78c0492a03cb0e97e7d9c623b",
+      "title": "N5-RAW-DUP：原件重复空间只读实证与工具",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "harness_lanes/n5_raw_duplicate_main_acceptance_2026-10-06.md",
+      "sha256": "f9cba7a8e802638f3302c36b894328ad33da18948df80140f07b68130dd30d2f",
+      "title": "N5-RAW-DUP：MAIN集中验收与修正",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "harness_lanes/n6_budget.md",
+      "sha256": "53024dc926fcf3af4a362fca53bcacf4b5c7575049356144652882fca0ed5e26",
+      "title": "N6-BUDGET：固定配额的整组去重与业务选材",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "harness_lanes/n6_candidates.md",
+      "sha256": "b1bd1ca8b31112939b0b0eabce9a13bf53c8086e4b4b250be11e7eb4b4b1ac99",
+      "title": "N6-CANDIDATE：经营事实候选与最小上下文",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "harness_lanes/n6_parallel_packages_2026-10-06.md",
+      "sha256": "6ae7c76398dab1e29e575e48474003002b1ce60f422bb34925b8f5c96389ea2e",
+      "title": "N6：质量整改与空间盘点并行总包",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "harness_lanes/n6_storage_footprint.md",
+      "sha256": "ceab6f4063ce71c905b4335d4bd08c41605e19840866c28a4e9f58d2bb9c362c",
+      "title": "N6-FOOTPRINT：实际空间占用与保留状态的只读盘点工具",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "harness_lanes/p5_ff_runtime_simplification.md",
+      "sha256": "8f705068c3b0572ba9000ee46307d03870ada7d030eced57c936f0ceb1e85a9b",
+      "title": "P5-FF：旧Worker编排退出与真正有界的JSON进程",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "harness_lanes/p5_parallel_packages_2026-10-05.md",
+      "sha256": "cb7566adad555bf0fbb974dcd9bf3cb28569ee2b1c6d7053c8a06a5d1fb86a3f",
+      "title": "P5并行施工总包：来源默认迁移、FF简化、存储降容工具",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "harness_lanes/p5_rf_source_default_migration.md",
+      "sha256": "6a8ac537a8d7b28ca0f8e0b5628597d4dff319ffb6b438c0374837fb0aa3f55b",
+      "title": "P5-RF：默认来源准备迁至现有SourceRef v2",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "harness_lanes/p5_storage_retirement_engine.md",
+      "sha256": "fa9de79293f3775760033f6c3d8c9734bf60694e2dd333e7cbb4e7ea4c324254",
+      "title": "P5-STORAGE：旧派生与数据库降容执行工具",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "harness_lanes/revenue_forecast.md",
+      "sha256": "bf7dd25818a604442883a3b4454055d5796292ba5d4894deecf2c26e50357afd",
+      "title": "RF 独占施工卡：来源读取与 closure 证据诊断",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "harness_lanes/revenue_forecast_asof_alignment.md",
+      "sha256": "41975cc562ddc8d82e546baac43ae901648b67f05dfccc430f00b5a5f8ab7c13",
+      "title": "RF 独立施工卡：叙述来源按公开日过滤",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "harness_lanes/revenue_forecast_narrative_consumer.md",
+      "sha256": "52b5e0638ac6b65d4758e5a4f21c30fafc70ee01493c79a8059f0938c0f90900",
+      "title": "RF 独占任务：持久叙述证据薄 consumer",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "harness_lanes/revenue_forecast_worktree_audit_2026-10-01.md",
+      "sha256": "627e760de9441b8701625645d0864577b7da533d5b5a1c435e6d219731897ec1",
+      "title": "RF 本地未提交状态只读审计卡（2026-10-01）",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "harness_lanes/s3_earnings_transcripts_runtime.md",
+      "sha256": "190f00a2494f7363f36469846d77f8220416ac9e63d2cd5aae66cbcfac4e50c2",
+      "title": "ET-S3 独立任务：统一电话会采集入口与有限批次",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "harness_lanes/s3_filing_fetch_single_request_limits.md",
+      "sha256": "4d145fdca497fa33a818eaf2a9c95de39fc2242cf8cf07acfb76bdc616a17f1a",
+      "title": "FF-S3 独立任务：一请求、实际限额与安装面简化",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "harness_lanes/s5_storage_audit.md",
+      "sha256": "8468e804f06364e077a293aa12e66dab74d762d36007ce48b17be2b2ce0713e3",
+      "title": "SPACE-S5 独立任务：B2/DB/原件重复量的只读审计",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "harness_lanes/stockwiki.md",
+      "sha256": "2271bef48e56e8b844d6e8107db34e924aa8c9e16b4f3c4ad7f3262f856376ad",
+      "title": "StockWiki 独占施工卡：来源 reader、QuickScanStore 与身份消费",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "harness_lanes/stockwiki_asof_alignment.md",
+      "sha256": "9bce7260ababed4b06d919ae52da370eb3c28ff44815f7704bc0d7bdf33b0e84",
+      "title": "StockWiki 独立施工卡：叙述来源公开日合同对齐",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "harness_lanes/stockwiki_engineering_gate_simplification.md",
+      "sha256": "545ac14e7b021abf2fbb2164bc20dcc739a62b6cdde13f04be68a77ea464df61",
+      "title": "StockWiki 独立施工卡：简化重复工程测试门",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "harness_lanes/stockwiki_g2b_owner_context.md",
+      "sha256": "6507d16bd6471a153e1d63d5cd285f45de6288fce07094a4a4f97b4111158446",
+      "title": "StockWiki 独占施工卡 W04：G2b owner identity context 与公开导出",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "harness_lanes/stockwiki_identity_snapshot.md",
+      "sha256": "d11a5bde1a8b2630829f04a4d4fe88112b1d553578fe960e4d006ad2fac93876",
+      "title": "StockWiki 独占施工卡：身份快照与四态映射（W02/W03）",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "harness_lanes/stockwiki_mainline_integration.md",
+      "sha256": "33c73fe2ceca9e7e4f2e3a5812e05df460c24bf7e044b5424835dbf8ee761e63",
+      "title": "StockWiki 独立施工卡：已完成 reader 与 identity lanes 并入主线",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "harness_lanes/stockwiki_narrative_consumer.md",
+      "sha256": "1b16c9f176c4d67ea505bed9467945fc6ff480f039c080762a9bc501d5ee1661",
+      "title": "StockWiki 独占任务：持久叙述证据薄 consumer",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "harness_lanes/stockwiki_source_reader.md",
+      "sha256": "bacb2896693674ec857e7a1d53dbe72b421a23dabd7c7d3f119349279ef1d3b8",
+      "title": "StockWiki 独立并行线：SourceExport v2 来源 reader",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "implementation_plan.md",
+      "sha256": "e8bf4d8105645e69631859798161da1e9af7b9ebb64452ec0dbfffd50bb20620",
+      "title": "叙述性证据流水线：拟议实施方案",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "implementation_run_2026-09-26.md",
+      "sha256": "f0b5d40d56dda505961c710792e5806afd39acc93b445d574ed94887e8bf7353",
+      "title": "实施运行卡：旧主库提前退役与后续选择性来源迁移",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "main_completion_evidence_2026-10-06.md",
+      "sha256": "3186d9848193f0e915613b32b98bb602f0453749d8c21869a36cf1d891411ba0",
+      "title": "MAIN当前完成证据与真实缺口",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "milestone_review_cadence.md",
+      "sha256": "e7d65fa8d76d0a29bec89e44242c437e350fc4af7d763465f50ac014981fc2b9",
+      "title": "按大节点审查与测试：执行节奏修订（2026-09-26）",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "n4_production_batch_implementation.md",
+      "sha256": "9be3e885ddb41cc9fdb6dcacbf8bee8fa7daaf3a02eed0da849c9367800139a7",
+      "title": "N4：可运行的叙述批次、真实模型计量与持久恢复",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "n6_budget_footprint_main_acceptance.md",
+      "sha256": "42168e38fca3ad9888525f8e407b10c751ee2bc33c348f821464a7dd22be88ad",
+      "title": "N6-BUDGET / N6-FOOTPRINT 主线集中验收",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "n6_candidate_main_acceptance_2026-10-07.md",
+      "sha256": "9630d4ebac74fdef2c9c722d55eb5b6256fdd427c84261a13f0f2792cb2e2a4b",
+      "title": "N6-CANDIDATE 主线集中验收与两质量线组合",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "n6_main_business_e2e_implementation.md",
+      "sha256": "40c6108e9ba481123187387223c0f9053ee8f2380422fa9e2d01f3fb3b740234",
+      "title": "N6 MAIN：最终业务E2E施工细则",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "n6_main_business_expectations_2026-10-06.md",
+      "sha256": "197b1312068b4d1ae042609b9ccd1d313b7d2dca129b5a725c959ba86e761a84",
+      "title": "N6 MAIN：统一业务验收解释",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "n6_main_compatibility_implementation.md",
+      "sha256": "c7b2f37d16bb575dd0bbdad6a68b04823e63a3eb1bda5604b241d9e6cef6b9f8",
+      "title": "N6 MAIN：选择器升级后的历史 final 兼容",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "n6_main_upgrade_execution_implementation.md",
+      "sha256": "0169b64be9e7ac2889211d21cec202a335bd2c0fc25bb5108644f760bf6c7ea9",
+      "title": "N6 MAIN：版本升级后的批次执行隔离",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "narrative_transport_handoff.md",
+      "sha256": "c5c5267fb7cdebaf553c30f1be7d7a56279aed2c2c280a7f549950c9e211bc4b",
+      "title": "N3a producer 交接：RF / StockWiki selected 消费",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "narrative_transport_implementation.md",
+      "sha256": "f869eca95cbfc3e8fe09975244bc2763424ee25bc539ca4298ec26dddfdfb475",
+      "title": "N3a：持久叙述包跨进程读取",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "parallel_execution_plan_2026-10-03.md",
+      "sha256": "8e74b97e90911b1ef59681d0ea1e867ef971dd8b511a4228887afe4b43d20dc0",
+      "title": "并行总计划：门禁先行，独立目录施工，MAIN统一打通",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "parallel_harness_orchestration_2026-09-29.md",
+      "sha256": "e1b36efea57cdb3bf75896ee3624c4f7dc5def0e026f1887dc968c151c1ce583",
+      "title": "六仓独占施工与总指挥集成计划（2026-09-29）",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "phase_d_m2_provider_implementation_spec_2026-09-28.md",
+      "sha256": "a2a96f1528ff1a413a730ae8ff16a6d2a0e756b66bde2273243f75ea1c86463d",
+      "title": "Phase D / M2-provider 实施细则（2026-09-28）",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "phase_e_e4_narrative_handler_implementation_spec_2026-09-28.md",
+      "sha256": "6b1009fb1d5d090a482f1085bede63c310fd6f96cc5dcd011ba07f1aba9e25cd",
+      "title": "Phase E / E4：Narrative handlers 详细实施规格（2026-09-28）",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "phase_e_m3_worker_implementation_spec_2026-09-28.md",
+      "sha256": "e0c24475e6e3646abbe60d5ed3e67321e31443e697619c5355b3a3b21338881f",
+      "title": "Phase E / M3：多文档并发 Worker 详细施工卡（2026-09-28）",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "progress.md",
+      "sha256": "95f97c32660f8dcd22b57c7f9ce0a7f3304e0ce6e2562decd4d7e6c5af9327bd",
+      "title": "Progress：激进简化实施",
+      "unchecked_items": 0,
+      "role": "current_entry"
+    },
+    {
+      "path": "provider_cost_and_capability_2026-09-27.md",
+      "sha256": "15c0a617185363b5e541f95e82989299a4789645c092ea0ec24c88b0a5f70dc3",
+      "title": "外部数据源、月调用预算与采购闸门（2026-09-27）",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "r6_partial_summary_implementation_2026-10-06.md",
+      "sha256": "724ccd56565324b0f0c3e2644917fecfc4aa1c3d529efd1e15eb94c12a9aa37c",
+      "title": "R6：局部坏模型片段不阻断可用摘要",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "radical_simplification_proposal_2026-10-03.md",
+      "sha256": "8fa5cc488230139cd42b92ace04c25cb9b9a5b633bd02ace3c6c903422180244",
+      "title": "更激进的简化建议：整套退役、按需派生（2026-10-03）",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "raw_disposition_plan.md",
+      "sha256": "7f99b91333b31f963362722fd15dd2f6ed7672e419c804fb5c09d0cdebcde03b",
+      "title": "不重要来源的判定与逐文档原文回收（D0–D5）",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "README.md",
+      "sha256": "982752f795cea81a066977f7d38f7045429a5a1185b1c6178b9fa196b66b8986",
+      "title": "当前执行入口",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "review_protocol.md",
+      "sha256": "83488c3181db463d31af6133f350907c51001dc94b19c400771bb66b827ecee3",
+      "title": "自动化验收规则",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "s0a_observed_interfaces_2026-09-29.md",
+      "sha256": "978e7d4b58bdf164282dd423df10583a983c2f99c24d8ec7866c50053f0cdb1b",
+      "title": "S0a 现场接口与样本输入（2026-09-29）",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "s5_s6_legacy_storage_implementation.md",
+      "sha256": "2a0a7ddc1ba6abe46a5cb8f1677e86d64c2425e667e6d372f6c02349fd653557",
+      "title": "S5/S6：旧派生退出与来源库降容实施细则",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "s6_documentation_runtime_closeout.md",
+      "sha256": "de364eca303ad4e576e4c01d420b0337ad73fb978dc2597e0e9faf2580ed488b",
+      "title": "S6：当前入口、门禁与运维说明收尾",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "s7_adoption_fundraising_implementation_2026-10-07.md",
+      "sha256": "ee86fa2ecb677c4583d3dc482403f482935c9196444a03bd73ed1e5a4c1cd476",
+      "title": "S7 客户采用与募投表上下文：实施细则",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "s7_document_quality_implementation_2026-10-06.md",
+      "sha256": "46e8c20f0d353085213f3e1d90639fcaf04e5ade569727f2b6178218e1882307",
+      "title": "S7：真实文档选择质量改进细则",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "s7_followup_quality_implementation_2026-10-07.md",
+      "sha256": "905e7e463c4e560bf2d7757033d15b49c6d042442d3db896e2de2c457ff7bda0",
+      "title": "S7 后续质量整改实施单（2026-10-07）",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "space_reduction_upgrade.md",
+      "sha256": "542086ea99d31c060e46e70ba730523686bbd8d5f78b36b41844fb704ed7e8bf",
+      "title": "46 GiB catalog 的降容升级方案（设计与验证计划）",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "stepwise_space_budget.md",
+      "sha256": "dc0dacd93bb13ccfd8d3b60a3f74599363c32b971671c633a7781316c0aad056",
+      "title": "新方案逐步空间账（2026-09-26 实施结果）",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "task_plan.md",
+      "sha256": "e36d9005b4a0ecaa489dafcbba991437c20793a1cf83280cf4866048cb042d26",
+      "title": "公司来源平台：当前总计划",
+      "unchecked_items": 0,
+      "role": "current_entry"
+    },
+    {
+      "path": "test_acceptance_plan.md",
+      "sha256": "d6f2a191dc4162b9ecb719554b5d6c85ec0ae07ef878e093885dd6f81ff930bc",
+      "title": "测试与验收计划：叙述性证据流水线",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "transcript_provider_rights_contract_v1.md",
+      "sha256": "e2194dac5ac01b870dc2ad4378f8ef457460c6698a8d7a5c89c96f2353d93c3b",
+      "title": "Transcript Provider Rights Contract v1（已退役）",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "worker_parallel_execution_plan.md",
+      "sha256": "7f3b67b87905e4d40dbd7e827f860f22b3d49ba37bacd1acd67b5bcc0ca2478e",
+      "title": "多文档并发 Worker：可实施设计与验收手册",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    },
+    {
+      "path": "worker_parallel_recovery.md",
+      "sha256": "5398df06f8f239688c3f9d8eff338e8c87d83f39a408a824feb68d2e6a524c10",
+      "title": "Worker 并发与丢任务恢复：设计补充",
+      "unchecked_items": 0,
+      "role": "instruction_or_historical_card"
+    }
+  ],
+  "source_body_saved": false
+}

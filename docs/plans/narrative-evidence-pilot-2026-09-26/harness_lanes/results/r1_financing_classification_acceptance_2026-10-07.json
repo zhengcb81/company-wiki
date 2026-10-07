@@ -1,0 +1,57 @@
+{
+  "schema_version": "r1-financing-scanner-acceptance/1",
+  "status": "local_green_publication_pending",
+  "scanner_version": "1.0.1",
+  "classification_and_refinement_red": {
+    "failed": 10,
+    "passed": 6,
+    "seconds": 1.15
+  },
+  "intermediate_classification_only": {
+    "failed": 2,
+    "passed": 18,
+    "seconds": 1.23
+  },
+  "responsibility_green": {
+    "passed": 45,
+    "seconds": 4.27
+  },
+  "real_pdf_cli_green": {
+    "passed": 2,
+    "seconds": 7.67,
+    "samples": [
+      "S05",
+      "S06"
+    ],
+    "same_raw_source_document_identity": true,
+    "second_scan_idempotent": true,
+    "fixture_metadata_only": true
+  },
+  "lint": "all_changed_python_files_passed",
+  "production_migration_done": false,
+  "production_database_unchanged": true,
+  "protected_unchanged": {
+    "config\\source_catalog.yaml": true,
+    "config\\source_acquisition.yaml": true,
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\daily_alert.jsonl": true,
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_alert.jsonl": true,
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_manifest.json": true
+  },
+  "provider_calls": 0,
+  "errors": [
+    "initial test import/interface collection errors corrected; not product RED",
+    "first real CLI fixture schema 1.0.0 and subprocess GBK corrected to schema 1.0 and explicit UTF-8; semantic assertions unchanged"
+  ],
+  "cleanup": {
+    "fresh_test_roots_absent": [
+      "r1-red",
+      "r1-red2",
+      "r1-green",
+      "r1-green2",
+      "r1-e2e",
+      "r1-e2e2"
+    ],
+    "removed_logical_test_bytes": 30525858,
+    "production_space_saving": 0
+  }
+}

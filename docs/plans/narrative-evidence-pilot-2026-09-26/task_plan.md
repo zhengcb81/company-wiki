@@ -91,8 +91,29 @@ TDD 框住具体公开行为。只在 N4 A/B/C、存储迁移等大节点集中�
 
 历史卡只解释已做工作，不能将“待测试/待并线/下一步”的旧文字恢复成当前门。
 
+## 当前新增目标（2026-10-07）
+
+用户明确要求完成全部PWF计划内容。上一轮S0–S7与日期合同的已发布验收保持，但新目标继续active，不能把有界试点等同全部计划落地。MAIN先盘点全部引用细则及交付，再按实际剩余步骤实施；不缩范围，不重跑已绿旧节点，不无限扩展初稿。
+
+### R0 完整计划与实际待办核对
+
+**Status:** complete
+
+逐份引用细则、生产状态和消费者入口对账，形成可执行步骤与明确完成条件。重点核查生产final0、原文去重可选实施、召回差距真实原因、RF/StockWiki实际使用链及尚未同步的交付；AGENTS来源供应边界与预算上限保持。
+
+## 新目标实施顺序
+
+[全部PWF实施细则](all_pwf_completion_implementation_2026-10-07.md)为唯一新增施工入口；逐份计划[目录](harness_lanes/results/all_pwf_inventory_2026-10-07.json)与历史收据保留。
+
+| 阶段 | 状态 | 下一责任 |
+|---|---|---|
+| R0完整对账 | complete | 已确认真实生产metadata/分类/ET登记缺口；已完成核心不重做 |
+| R1融资文档正式分类 | in_progress | Unit先RED→scanner最小实现→隔离扫描/幂等责任节点 |
+| R2真实生产来源/预算准备 | pending | 核公开日/retired原因/ET导入，生成可恢复真实请求，不猜metadata |
+| R3正式生产与跨仓消费 | pending | 有价值final+零模型skip、真实ref/search/exact/消费者/同run恢复/空间 |
+| R4原件去重决策 | pending | 只核CWP内部真实收益，原件不丢、外部根不动 |
+| R5PWF与发布收口 | pending | 历史Git、简化当前入口、正常并线/push/精确CI |
+
 ## Next Step
 
-**本轮目标完成，必要施工无剩余。** CWP ee0d1e7已推送，精确CI37575052423全部步骤绿70秒；RF e241389已推送/CI绿30秒，StockWiki9f552a6已合入本地master（无远端）。两个施工卡不再分派。原16项在明确范围内已验收，见[最终结论](final_scope_audit_2026-10-07.md)和[主线验收收据](harness_lanes/results/final_asof_implementation_2026-10-07.json)。
-
-可选原件exact-SHA去重、全历史资料生产处理、新provider、自动投资研究不属于本轮强制收口；以后需要时独立立项。四个required miss/optional三取舍、生产final仍为0等限制公开，不缩原golden分母。用户source_acquisition和RF owner三日志保留，全部本次临时根已恢复，不重跑已绿测试或付费模型。
+先完成R1融资文档分类TDD。生产S05/S06仍other，核心分类映射未落地；不重派已交卡、不改模型预算或原件。之后R2准备真实生产来源及完整请求预算，必要增量在具体请求可审查后询问。目标active，全部R阶段完成前不关闭。

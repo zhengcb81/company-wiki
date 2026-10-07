@@ -136,6 +136,8 @@ def _classification(path: Path, *, root_kind: str, metadata: dict[str, Any]) -> 
                 "investor_call_transcript",
             ),
             "prospectus": (SourceType.PROSPECTUS, "prospectus"),
+            "equity_offering_prospectus": (SourceType.PROSPECTUS, "equity_offering_prospectus"),
+            "convertible_bond_prospectus": (SourceType.PROSPECTUS, "convertible_bond_prospectus"),
             "news": (SourceType.ORIGINAL_NEWS, "news"),
         }
         if sidecar_kind in _SIDECAR_MAP:
@@ -176,6 +178,9 @@ def _classification(path: Path, *, root_kind: str, metadata: dict[str, Any]) -> 
         return "investor_call_transcript", SourceType.INVESTOR_RELATIONS
     if any(token in text for token in ("投资者关系", "调研", "路演", "业绩说明会", "investor relation")):
         return "investor_relations", SourceType.INVESTOR_RELATIONS
+    financing_kind = _financing_prospectus_kind(text)
+    if financing_kind is not None:
+        return financing_kind, SourceType.PROSPECTUS
     if any(token in text for token in ("招股", "prospectus")):
         return "prospectus", SourceType.PROSPECTUS
     if root_kind == "directory":
@@ -183,6 +188,21 @@ def _classification(path: Path, *, root_kind: str, metadata: dict[str, Any]) -> 
     if path.suffix.lower() == ".md" and "news" in {part.casefold() for part in path.parts}:
         return "news", SourceType.ORIGINAL_NEWS
     return "other", SourceType.OTHER
+
+
+def _financing_prospectus_kind(text: str) -> str | None:
+    """Recognize financing prospectuses, not notices merely announcing issuance."""
+    if "convertible bond prospectus" in text:
+        return "convertible_bond_prospectus"
+    if "equity offering prospectus" in text:
+        return "equity_offering_prospectus"
+    if "募集说明书" not in text and "募集說明書" not in text:
+        return None
+    if any(token in text for token in ("可转换公司债券", "可转换债券", "可轉換公司債券", "可轉換債券")):
+        return "convertible_bond_prospectus"
+    if "发行股票" in text or "發行股票" in text:
+        return "equity_offering_prospectus"
+    return None
 
 
 def _entity(entity_name: str | None, root_id: str) -> tuple[str, str, str, float, str]:
@@ -1526,9 +1546,22 @@ def _merge_columns(
     """
     merged: dict[str, Any] = {}
     conflicted: list[str] = []
+    # "other" inferred by the old scanner is an absence of classification,
+    # not a conflicting filing declaration. Refine the pair for the same raw
+    # identity; declared kinds, dates and disagreements still use normal rules.
+    refine_financing = (
+        source_id is not None and stored.get("primary_source_id") == source_id
+        and stored.get("document_kind") == "other" and stored.get("source_type") == "other"
+        and not (stored_declared or {}).get("document_kind")
+        and not (stored_declared or {}).get("source_type")
+        and incoming.get("document_kind") in {"equity_offering_prospectus", "convertible_bond_prospectus"}
+        and incoming.get("source_type") == SourceType.PROSPECTUS.value
+    )
     for column, new_value in incoming.items():
         stored_value = stored.get(column)
-        has_stored = stored_value not in (None, "")
+        has_stored = stored_value not in (None, "") and not (
+            refine_financing and column in {"document_kind", "source_type"}
+        )
         has_new = new_value not in (None, "")
         new_declares = bool((incoming_declared or {}).get(column))
         stored_declares = bool((stored_declared or {}).get(column))

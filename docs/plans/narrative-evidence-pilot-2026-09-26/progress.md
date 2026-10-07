@@ -1240,3 +1240,13 @@ aa52cbd82b5f21eea54929cadab520f16a0a9df9正常commit/pre-push绿并推master，�
 本次两个独立worktree和三个测试根恢复absent，移除136471537 B临时代码/测试资料，不计为生产清理收益。九原件SHA/size/mtime、生产DB完整SHA及六个配置/owner文件指纹保持。RF三owner日志和CWP source_acquisition用户修改不暂存、不覆盖；StockWiki owner工作树clean，quick-scan/IQS未改。两套安装技能仅在校验旧主线字节后同步本次两文件，其他本地内容保留，不宣称整套安装完全一致。
 
 完整[主线验收收据](harness_lanes/results/final_asof_implementation_2026-10-07.json)、[RF独立交接](harness_lanes/results/final_rf_asof_handoff_2026-10-07.json)、[StockWiki独立交接](harness_lanes/results/final_stockwiki_asof_handoff_2026-10-07.json)。历史RED/提案GREEN收据保留，不能替代本次实际主线结果。CWP本次测试/文档已正常提交推送：ee0d1e7，精确CI37575052423/job112641956369全部步骤绿70秒；六跨仓CLI为另行本地集中验收，不冒称日常CI执行外仓E2E。本轮必要施工全部完成。
+
+## 2026-10-07 全部PWF继续实施
+
+新目标active。正在R0：逐份计划核实际代码和后续交付，区分已完成、仍待实施、需求边界冲突及可选项；保留原件、owner未提交配置/RF日志和独立IQS项目。尚未调用供应商/模型、未改生产库。
+
+## R1 融资扫描分类集中节点
+
+新行为10真实RED/6pass；只修分类后迁移仍2RED，调查merge后仅对同原SHA、未声明的other/other成对细化，不覆盖日期、已声明分类或retired状态。责任45pass/4.27秒；实际S05/S06 PDF公共CLI首次/旧other迁移/重扫2pass/7.67秒，原件/生产DB/用户配置及RF日志保护通过。Ruff绿；scanner1.0.1。真实CLI首轮schema与Windows编码错误已修，不计产品RED；先前两个猜测测试文件不存在已按实际责任包读取。没有生产迁移或模型调用。发布/清理仍待完成。
+
+只读追溯S01旧retire原因是legacy sidecar缺source_url（2026-08-01），不是撤回；原sidecar只有market/security/title。须核官方同SHA来源再经restore入口处理，不能全库复活。

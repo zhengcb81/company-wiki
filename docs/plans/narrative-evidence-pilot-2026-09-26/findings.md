@@ -997,3 +997,19 @@ S7最终发布证据：9bf25a5/CI37550268890全部步骤绿71秒，真实业务�
 本次两个独立worktree和三个测试根恢复absent，移除136471537 B临时代码/测试资料，不计为生产清理收益。九原件SHA/size/mtime、生产DB完整SHA及六个配置/owner文件指纹保持。RF三owner日志和CWP source_acquisition用户修改不暂存、不覆盖；StockWiki owner工作树clean，quick-scan/IQS未改。两套安装技能仅在校验旧主线字节后同步本次两文件，其他本地内容保留，不宣称整套安装完全一致。
 
 完整[主线验收收据](harness_lanes/results/final_asof_implementation_2026-10-07.json)、[RF独立交接](harness_lanes/results/final_rf_asof_handoff_2026-10-07.json)、[StockWiki独立交接](harness_lanes/results/final_stockwiki_asof_handoff_2026-10-07.json)。历史RED/提案GREEN收据保留，不能替代本次实际主线结果。CWP本次测试/文档已正常提交推送：ee0d1e7，精确CI37575052423/job112641956369全部步骤绿70秒；六跨仓CLI为另行本地集中验收，不冒称日常CI执行外仓E2E。本轮必要施工全部完成。
+
+## 2026-10-07 用户新目标：全部PWF内容完成
+
+用户明确要求“完成全部PWF计划内容，一步一步实施直到全部做完”。上一轮已交付的16项有界验收继续有效，但不能拿它替代生产使用与尚未覆盖的计划条目。新目标已建立，MAIN重新盘点当前总计划及引用细则；历史收据的旧待办只在与实际代码/后续收据比对后决定是否仍需施工。核心已绿节点不重复。
+
+初步事实：生产新final仍0；九文档required29/33，其中两个是纯金额/财务guidance、一个正文外provider highlight、一个同源其他页canonical产能已覆盖，不能盲目加分或改golden。完整预测/研究写入受AGENTS上游边界限制，若计划有消费者落地步骤应在消费者目录隔离实现；CWP不生成投资研究state。累计预算现余9965tokens/$0.016734，不能以新目标暗自提高既有付费额度。接下来先核对全部计划条目并制定实际生产落地范围、成本和恢复步骤。
+
+### R0实际生产差距（只读）
+
+生产九样本对应：S01–S04 retired且published_date null；S05/S06 active但document_kind other；S07 active但公开日null；S08 active但公开日2023-12-31与标题2023-06-26/28冲突；S09ET TXT未登记。正式scanner._classification sidecar只覆盖普通prospectus，精确融资类型/募集说明书标题无映射。这是W1真实未落地缺口，先TDD修正式classification，再在R2用可核来源依据处理生产metadata。不得复活retired、猜日期或把fixture投入生产。R0目录/实施顺序已写all_pwf_completion细则，R1开始，供应商POST0。
+
+## R1 融资扫描分类集中节点
+
+新行为10真实RED/6pass；只修分类后迁移仍2RED，调查merge后仅对同原SHA、未声明的other/other成对细化，不覆盖日期、已声明分类或retired状态。责任45pass/4.27秒；实际S05/S06 PDF公共CLI首次/旧other迁移/重扫2pass/7.67秒，原件/生产DB/用户配置及RF日志保护通过。Ruff绿；scanner1.0.1。真实CLI首轮schema与Windows编码错误已修，不计产品RED；先前两个猜测测试文件不存在已按实际责任包读取。没有生产迁移或模型调用。发布/清理仍待完成。
+
+只读追溯S01旧retire原因是legacy sidecar缺source_url（2026-08-01），不是撤回；原sidecar只有market/security/title。须核官方同SHA来源再经restore入口处理，不能全库复活。
