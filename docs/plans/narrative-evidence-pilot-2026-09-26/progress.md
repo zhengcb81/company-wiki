@@ -1180,3 +1180,7 @@ N6交付再次实读确认f31cc0d已是本地与真实远端master5f8a3ef祖先�
 完整九文档364.548秒完成：required27→29/33、optional2/17不变、原full零回退、761定位全回放/0失败、角色错配0、精选62953→63073B（仅+120B）。负例命中1/噪声span2不变，重复4→6，增加实际在S04（1→3），不能称重复无增长。第一次按年报猜测重复位置的局部探针为空；随后以报告逐文档字段定位S04，不用猜测替代证据。PowerShell foreach直接接管道解析错误，改ForEach-Object只读输出。第7页canonical产能风险专门按当前默认parse/selector验证：原G-S06-03完整原句full、2span、17.848秒，原43页golden不改。FF main758e8f4、ET main2b9fb84仍为正式交付，N4与精简节点为当前master祖先，生产库仍222408704B。已清测试根s7pr-e1及12093066B类型缓存；剩余自身脚本/PNG随后统一清理。源码保持冻结，准备正常提交/推送与精确CI；总目标不据此自动complete。
 
 募投重复已按默认招股实读：新增两条是34/353页相同的引导句两片段，属于不同完整项目组；旧重复为114/122页业务引导。不拆必要事件组去凑字符串重复为0，保留6/761与+120B代价。已删除空年报诊断及全部自身s7pf脚本/PNG；6个新测试/包装/缓存路径全部恢复absent。小收据记录canonical、duplicate及源码/原件/owner保护，准备正常提交；精确CI未完成不标published。
+
+## 2026-10-07 应用/募投节点发布完成
+
+aa52cbd82b5f21eea54929cadab520f16a0a9df9正常commit/pre-push绿并推master，真实远端一致；精确CI37555504675 attempt1全部job/step success，job112580676245/81秒（其中Unit35秒、依赖26秒）。全Unit与短合同绿，未增加日常长测。正式收据published_exact_ci_passed，补实际运行源码及Git blob SHA。用户配置SHA3609e707保持独立dirty，外仓/原件零写；新六tmp路径absent。总PWF新增final_scope_audit_2026-10-07.md，下一唯一动作按完整原要求核现状和覆盖，不再重复本节点；整体目标active，S7实施/发布完成但整体完成尚未证实。

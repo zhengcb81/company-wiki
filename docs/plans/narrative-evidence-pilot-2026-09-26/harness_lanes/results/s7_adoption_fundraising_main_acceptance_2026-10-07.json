@@ -1,8 +1,8 @@
 {
   "schema_version": "s7-adoption-fundraising-node/1",
-  "status": "local_passed_awaiting_publication",
+  "status": "published_exact_ci_passed",
   "base": "5f8a3ef3625ece16e13f2d2d121bee5c90b268c9",
-  "code_sha": null,
+  "code_sha": "aa52cbd82b5f21eea54929cadab520f16a0a9df9",
   "selector": "0.4.2",
   "parser": "0.1.1",
   "rf_head": "6e6b817a1a6e4567293a4dcb835815f3be508a03",
@@ -179,7 +179,104 @@
     "tmp/s7pr-q": "restored absent",
     "tmp/s7pr-quality.json": "restored absent"
   },
-  "ci": null,
+  "ci": {
+    "id": 37555504675,
+    "head_sha": "aa52cbd82b5f21eea54929cadab520f16a0a9df9",
+    "status": "completed",
+    "conclusion": "success",
+    "run_attempt": 1,
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/37555504675",
+    "jobs": [
+      {
+        "id": 112580676245,
+        "name": "Fast checks (Python 3.12)",
+        "conclusion": "success",
+        "seconds": 81.0,
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run actions/checkout@v4",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Set up Python 3.12",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Install dependencies",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Ruff lint",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Strict type check on contract modules",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Compileall and config doctor",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Unit tests",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Unit test failure summary",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Focused contract tests",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Focused contract failure summary",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "CLI smoke test",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Scan for hardcoded secrets",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Set up Python 3.12",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Run actions/checkout@v4",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success"
+          }
+        ]
+      }
+    ]
+  },
   "notes": [
     "Full-nine wrapper output path rejected before parsing; reran with output under tmp, then saved only <=2MiB report.",
     "No daily long tests or human approval gates added."
@@ -198,5 +295,18 @@
     "changed_sample": "S04",
     "before": 4,
     "added": "same two introduction fragments at pages34 and353 in different whole project contexts"
+  },
+  "published_git_blob_sha256": {
+    "src/company_wiki/source_catalog/n6_candidate_completion.py": "638500fd208127b221181844d948b97cec5347780a70051904efe843d105c14f",
+    "src/company_wiki/source_catalog/n6_candidate_operating_facts.py": "aba98f41992f10f99132adc0939a762232ae5d183487d3539cafc33d332650ca",
+    "src/company_wiki/source_catalog/narrative_budget.py": "88a25a1854449224f20606e9949adda3649d77aa04b45f2c9cc7dfe07943b404",
+    "src/company_wiki/source_catalog/narrative_candidates.py": "0c8840a79465a517a77098c234f8b7aff772a211079b1fbb94657f737461245a",
+    "src/company_wiki/source_catalog/narrative_context.py": "abd8436b1d517c2e6e7aafb0b21586609e7c378b36ebb282b625d57a3cfdb893",
+    "src/company_wiki/source_catalog/narrative_evidence.py": "296ae43c96b900bc31bac735137ae14311b7986587f6934d5c682f73165e092d",
+    "src/company_wiki/source_catalog/narrative_group_candidates.py": "254ea539eaf629e2908d0532ce66c4e6d3c97f246282ce89286339e167d86259",
+    "src/company_wiki/source_catalog/narrative_neighbors.py": "58141948589363fda799daacee13fdf1c2e1b1b014b8ba9f503f6b45a9c23f24",
+    "src/company_wiki/source_catalog/narrative_pdf_qa.py": "f06ff742370f8d68b18f283869b31a223dffced7d1472bf489baad153312a5b1",
+    "src/company_wiki/source_catalog/narrative_project_context.py": "918bc36a7a5de03c9163855eff2a216cb15099a9896d78d60f5af22a5422f65e",
+    "src/company_wiki/source_catalog/narrative_replay.py": "02f6a812ff929dc403b06881487cac5db49c59f10061cdec75b5e2f403184390"
   }
 }

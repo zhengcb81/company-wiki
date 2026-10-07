@@ -45,3 +45,5 @@ MAIN 5f8a3ef；运行代码c1295b1，selector0.4.1/parser0.1.1，精确CI3755260
 布局/预算调查及A/B实现已完成；初始8功能RED后28新责任项及既有共200项/1.65秒通过，完整CI范围Ruff/47源mypy绿。selector0.4.2/parser0.1.1，真实局部探针31.596秒年报五required、招股table34三required full；局部证据不冒充默认/全表。当前C正式入口和全九集中验收，保持运行源码冻结，不边跑大基准边改源码；未发布前状态不标complete。
 
 C本地验收已通过：正式真实入口/冻结旧final9/selector升级11项122.26秒，九文档364.548秒29/33，761定位零失败、旧full零回退、精选63073B/+120B。当前默认pipeline另验S06 canonical page7原句full；四个正式剩余ID不改分母。重复4→6实读为招股34/353页引导句两片段，属于不同完整项目上下文，不拆事件组凑零重复。自身tmp六路径恢复absent、原件/用户配置/RF三owner保护不变。下一正常提交/推送与精确代码CI，再整体需求审计；小收据[s7_adoption_fundraising_main_acceptance_2026-10-07.json](harness_lanes/results/s7_adoption_fundraising_main_acceptance_2026-10-07.json)。
+
+发布完成：aa52cbd已推master，精确CI37555504675 attempt1全部步骤成功/81秒，正式收据状态published_exact_ci_passed。此前等待/本地状态仅属历史；本单全部实施项已完成，不重跑。下一按总task_plan的[完整目标核查单](final_scope_audit_2026-10-07.md)继续，不仅凭本单宣布整个目标完成。
