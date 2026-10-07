@@ -1,5 +1,15 @@
 # Findings：当前事实与待验证项
 
+## 当前事实：2026-10-07 G2全面补漏优先
+
+八仓当前入口/运行配置/工程检查及两份安装FF技能只读复核完成，结论和实施细节见[G2](gate_simplification_reaudit_2026-10-07.md)/[固定收据](harness_lanes/results/g2_gate_reaudit_2026-10-07.json)。发现：live旧canary未迁移；CatalogConfig全字段pin仍绑定privacy/cohort兼容标签；AUTO普通解析/配置/来源/locator故障仍可转blocked_human；公开旧archive/prune/confirmation CLI与可选Dropbox平安review特例仍在；RF可选发布绑197场景/三HEAD/backup并有check写副作用；StockWiki要求commit前全套和73/40覆盖率；StockQA CI87与本地60不一致、tee无pipefail可能假绿；CWP旧Pipeline冻结但家族/清单未退休；摘要层因模型needs_review与draft状态矛盾拒绝claim，改为程序派生诊断的方案列P0。区别当前有效、可选和冻结历史，不把所有review字样当权限。
+
+2cad90d系统性代码已推、202项/64.81秒、精确CI37582474369全绿；steady源码完成但现场510B policy仍canary。16active/verified断言不能因直接删JSON隐藏，2legacy/verified、4candidate保持边界；真实预检已生成小snapshot与16条对照，生产写0。新优先级G2/P0先于R2metadata/R3/R4，总目标active，不新增审批/小节点测试，不重复已绿202或paid模型。
+
+RF三owner日志、CWP source_acquisition.yaml保留；StockWikiclean；StockInfoDLSimple/v2-clean-rewrite有11tracked修改及未跟踪数据；StockQA有pilot等已暂存owner修改；MeetingConverter .coverage dirty。未来工程清理仅隔离本仓目录，不碰这些改动。FF两安装技能字节SHA一致、v2推荐正确，ET provider设置是能力而非人工receipt；FMP402/缺凭证/有限预算不虚称取消。Dayu/IQS零写。
+
+原件不丢、真实SHA/版本/身份/公开日/locator、路径写入归属及budget/lease/outbox保留为层级自动正确性。数字覆盖率、固定历史样本、无关HEAD、备份目录、逐commit全套和人造签收退出。下面历史blocked/完成/待授权段落仅解释当时进度，当前以本节/task_plan为准。
+
 ## 2026-10-07 隔离日期修复获授权
 
 用户明确“授权隔离修复并线”，前置条件解除，目标active。只读核RF6e6b817a/三owner日志、StockWiki3fe5008 clean/无remote、FF与ET不动。MAIN创建两独占worktree，先责任TDD，再大节点/跨仓六CLI和正常主线并线；不改owner未提交文件、IQS或原件，不再请求同一许可。

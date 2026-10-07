@@ -1,5 +1,7 @@
 # 并行总计划：门禁先行，独立目录施工，MAIN统一打通
 
+> **2026-10-07当前：**先按[G2全面补漏](gate_simplification_reaudit_2026-10-07.md)处理实际门禁遗漏，再R2/R3/R4/R5；八仓归属与当前owner变更见G2收据。以下既有外包已交付，不重新派卡，本轮不启动新harness。MAIN独占现场/共享接口；跨仓改动仅各自隔离目录，Dayu/IQS零写。旧“待DOCSET验收”等不代表当前状态。
+
 > **最新：N5-RAW-DUP已交付e40b4ec并经MAIN集中修正；51项/9.09秒、两CLI与Ruff绿，已合入master a41244a并推远端、精确CI37523080920/57秒绿。** [验收卡](harness_lanes/n5_raw_duplicate_main_acceptance_2026-10-06.md)；ET已验收，DOCSET交接2c3583e已到待MAIN验收，不重派。下方旧未交付叙述属历史。
 
 > **2026-10-06当前并行状态：**见[N5三包总计划](harness_lanes/n5_parallel_packages_2026-10-06.md)：DOCSET真实文档质量基准、RAW-DUP只读原件重复工具已分派，尚待完整交接；ET-TXT已验收并推本地/远端main `2b9fb84`，92项+10 goldens与43份真实TXT只读audit通过。MAIN真实N4C run10已收口，短摘要保留非穷尽边界。各线写集不重叠，不重派已完成包，不碰IQS/Dayu/RF。下方旧“待验收/待清理”仅为历史，当前动作只取总task_plan。

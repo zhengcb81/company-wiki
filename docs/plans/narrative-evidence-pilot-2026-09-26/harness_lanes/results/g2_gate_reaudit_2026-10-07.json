@@ -1,0 +1,346 @@
+{
+  "schema_version": "gate-simplification-reaudit/1",
+  "audited_at_utc": "2026-10-07T06:50:34.738055+00:00",
+  "scope": "8 source-chain repositories, public runtime/CLI, local hooks/CI and 2 installed FF skills; not every historic worktree",
+  "method": [
+    "CodeGraph structural callers/context",
+    "literal configuration and error-branch inspection",
+    "read-only current Git HEAD/status",
+    "live canary policy and prior assertion preflight"
+  ],
+  "repositories": {
+    "company-wiki": {
+      "directory": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "head": {
+        "exit_code": 0,
+        "stdout": "2cad90db1b15b05085d6afa4582030a4a14323bd"
+      },
+      "branch": {
+        "exit_code": 0,
+        "stdout": "master"
+      },
+      "status": {
+        "exit_code": 0,
+        "stdout": "M config/source_acquisition.yaml\n?? docs/plans/narrative-evidence-pilot-2026-09-26/harness_lanes/results/r2_canary_retirement_preflight_2026-10-07.json\n?? docs/plans/narrative-evidence-pilot-2026-09-26/harness_lanes/results/r2_steady_runtime_policy_payload_2026-10-07.json\n?? docs/plans/narrative-evidence-pilot-2026-09-26/harness_lanes/results/r2_systemic_exact_ci_2026-10-07.json"
+      },
+      "audited_files": {
+        "src/company_wiki/source_catalog/source_read_policy.py": {
+          "exists": true,
+          "bytes": 2405,
+          "sha256": "8e41cfa8b7a9693749fc32337510a4716ff646da6dad9b27a255da7445064494"
+        },
+        "src/company_wiki/automation/registry.py": {
+          "exists": true,
+          "bytes": 5609,
+          "sha256": "111a3fa2579465468087a44a4a651776ede9dc479627f0b91cc094c1f6b76eba"
+        },
+        "src/company_wiki/automation/retry.py": {
+          "exists": true,
+          "bytes": 2339,
+          "sha256": "f09837f7bc9df8eb1c8ccc670596b1337620cd8a9c5a8e3cb2f3c98c3b3d8526"
+        },
+        "src/company_wiki/source_catalog/cli.py": {
+          "exists": true,
+          "bytes": 59653,
+          "sha256": "544954e5013296e03337d7e14bf34acabb045a61a5a76e901017fbdf05ba3f9f"
+        },
+        "src/company_wiki/source_catalog/dropbox_governance.py": {
+          "exists": true,
+          "bytes": 7407,
+          "sha256": "92126c353c8f8fc7c19cac7c39f50aba0784b04fcc35c60513aa69b35bbe606b"
+        },
+        "config/pipeline_rules.yaml": {
+          "exists": true,
+          "bytes": 7943,
+          "sha256": "abf3cdd460796f03d183863eccae818b95bdb644cf444217ef00ad67eb771598"
+        },
+        "scripts/writer_policy.py": {
+          "exists": true,
+          "bytes": 6766,
+          "sha256": "c0c2df92e303f0c9d993f462c9a723a375017ae8a88596501df9d52ae5475eb1"
+        },
+        ".pre-commit-config.yaml": {
+          "exists": true,
+          "bytes": 6252,
+          "sha256": "ecb4f155b2711406b834b8ed8bcb7c23d3702c6f515cf154972768ace671c021"
+        },
+        ".github/workflows/ci.yml": {
+          "exists": true,
+          "bytes": 6109,
+          "sha256": "0ab0e193e7bd53feb0bf6367aa2250865674d861483cfb9bc426f505968f2025"
+        },
+        "src/company_wiki/source_catalog/narrative_evidence.py": {
+          "exists": true,
+          "bytes": 74310,
+          "sha256": "556ebb17b1657131e20cd951778073903fc707c307ae20f34d1aaf2053a058de"
+        },
+        "src/company_wiki/automation/narrative_summarize.py": {
+          "exists": true,
+          "bytes": 13376,
+          "sha256": "db6797c75468443a6bbb57fae50960e680941263ec887a7896e92a268ab84552"
+        }
+      }
+    },
+    "filing-fetch": {
+      "directory": "C:\\Users\\郑曾波\\Projects\\filing-fetch",
+      "head": {
+        "exit_code": 0,
+        "stdout": "758e8f4c116ef9760c657433e4ccbfbd10652029"
+      },
+      "branch": {
+        "exit_code": 0,
+        "stdout": "main"
+      },
+      "status": {
+        "exit_code": 0,
+        "stdout": "?? config/FMP_API_KEY.txt"
+      },
+      "audited_files": {
+        ".pre-commit-config.yaml": {
+          "exists": true,
+          "bytes": 1709,
+          "sha256": "bef039f5b98dae910b29e417807da7c0f20386a47ac30fb10b48279bb7c68c90"
+        },
+        "scripts/fetch_filing.py": {
+          "exists": true,
+          "bytes": 69230,
+          "sha256": "1c6a2a5c17cdec4370c1da3cf17dc3bc44fc66b9575a9305babfec24e46129b3"
+        },
+        "SKILL.md": {
+          "exists": true,
+          "bytes": 17880,
+          "sha256": "94b2024d1326365fae5b7d051e0122b46050e17c76c3ae0909682e78af352640"
+        }
+      }
+    },
+    "earnings-transcripts": {
+      "directory": "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts",
+      "head": {
+        "exit_code": 0,
+        "stdout": "2b9fb84660f98ce27a05709a7e31342ab044b4d2"
+      },
+      "branch": {
+        "exit_code": 0,
+        "stdout": "main"
+      },
+      "status": {
+        "exit_code": 0,
+        "stdout": "?? .workbuddy-ai/\n?? eval_results.json"
+      },
+      "audited_files": {
+        "transcript_api.py": {
+          "exists": true,
+          "bytes": 48798,
+          "sha256": "eca4758ecf435133ee24c2693745274fc5c14aed57650607b69e782f6d58b161"
+        }
+      }
+    },
+    "revenue-forecast": {
+      "directory": "C:\\Users\\郑曾波\\Projects\\revenue-forecast",
+      "head": {
+        "exit_code": 0,
+        "stdout": "e241389adeda37bc9cbb53d7831063718552a936"
+      },
+      "branch": {
+        "exit_code": 0,
+        "stdout": "main"
+      },
+      "status": {
+        "exit_code": 0,
+        "stdout": "M assurance/runs/daily_alert.jsonl\n M assurance/runs/weekly_alert.jsonl\n M assurance/runs/weekly_manifest.json"
+      },
+      "audited_files": {
+        "tools/release_readiness.py": {
+          "exists": true,
+          "bytes": 6957,
+          "sha256": "0409a8f132136d6b60346b904ae858072195157dd53c213bbed86100b15d17f9"
+        },
+        "tools/run_coverage_gates.py": {
+          "exists": true,
+          "bytes": 3744,
+          "sha256": "2e15bc135fcbed726f22056c0272bfab4265670c31e40c494778c66fb32cd790"
+        }
+      }
+    },
+    "StockWiki": {
+      "directory": "C:\\Users\\郑曾波\\Projects\\StockWiki",
+      "head": {
+        "exit_code": 0,
+        "stdout": "9f552a6741dd093dc760ad6965458989cd027251"
+      },
+      "branch": {
+        "exit_code": 0,
+        "stdout": "master"
+      },
+      "status": {
+        "exit_code": 0,
+        "stdout": ""
+      },
+      "audited_files": {
+        "AGENTS.md": {
+          "exists": true,
+          "bytes": 3048,
+          "sha256": "a6aae66c405a278db4619aa579cbe4f04aa17c4dd8cf2e84b6cbab9e5ce4ebb3"
+        },
+        "scripts/check_all.sh": {
+          "exists": true,
+          "bytes": 2997,
+          "sha256": "6312a32b858d8c0feaf6b6da574969ab420023b3e76d9f2cc80fc0f29a06090a"
+        }
+      }
+    },
+    "StockInfoDLSimple": {
+      "directory": "C:\\Users\\郑曾波\\Projects\\StockInfoDLSimple\\v2-clean-rewrite",
+      "head": {
+        "exit_code": 0,
+        "stdout": "8ed5fdde5e88c13470c120665ff3074a7f44a052"
+      },
+      "branch": {
+        "exit_code": 0,
+        "stdout": "v2-clean-rewrite"
+      },
+      "status": {
+        "exit_code": 0,
+        "stdout": "M README.md\n M config_template.json\n M main.py\n M src/browser.py\n M src/downloader.py\n M src/logger.py\n M src/mapping.py\n M src/models.py\n M tests/e2e/official_e2e_test.py\n M tests/unit/test_downloader.py\n M tests/unit/test_official_e2e_contract.py\n?? a_share_companies.txt\n?? companies.txt\n?? scripts/"
+      },
+      "audited_files": {
+        "src/company_wiki_adapter.py": {
+          "exists": true,
+          "bytes": 14673,
+          "sha256": "dda7939bd32ba38bd7f5be5d0752b50f27c6361049dbab989eac603fe0a408f2"
+        }
+      }
+    },
+    "MeetingConverter": {
+      "directory": "C:\\Users\\郑曾波\\Projects\\MeetingConverter",
+      "head": {
+        "exit_code": 0,
+        "stdout": "8a33a7f96292af8e6574d98b959703c6d11919eb"
+      },
+      "branch": {
+        "exit_code": 0,
+        "stdout": "master"
+      },
+      "status": {
+        "exit_code": 0,
+        "stdout": "M .coverage"
+      },
+      "audited_files": {
+        ".github/workflows/ci.yml": {
+          "exists": true,
+          "bytes": 497,
+          "sha256": "e32cd3f571418973e5217310bf470953472c363024fa15989bc23420778fc4e3"
+        }
+      }
+    },
+    "StockQAbyLLM": {
+      "directory": "C:\\Users\\郑曾波\\Projects\\StockQAbyLLM",
+      "head": {
+        "exit_code": 0,
+        "stdout": "34493d5d34522fb2b1818c3869d5874b8c076875"
+      },
+      "branch": {
+        "exit_code": 0,
+        "stdout": "master"
+      },
+      "status": {
+        "exit_code": 0,
+        "stdout": "M  .secrets.baseline\nA  pilot_runs/b01b_method_2026-10-07/__pycache__/runner.cpython-313.pyc\nA  pilot_runs/b01b_method_2026-10-07/cn_a_dryrun_analysis.json\nA  pilot_runs/b01b_method_2026-10-07/diag_batch30_hk.json\nM  pilot_runs/b01b_method_2026-10-07/method_ledger.json\nA  pilot_runs/b01b_method_2026-10-07/method_ledger_run2b_partial.json\nA  pilot_runs/b01b_method_2026-10-07/method_ledger_run3_base.json\nA  pilot_runs/b01b_method_2026-10-07/method_matrix_analysis.json\nA  pilot_runs/b01b_method_2026-10-07/method_matrix_analysis_run3_base.json\nM  pilot_runs/b01b_method_2026-10-07/method_plan.json\nM  pilot_runs/b01b_method_2026-10-07/method_results.json\nA  pilot_runs/b01b_method_2026-10-07/method_results_run2b_partial.json\nA  pilot_runs/b01b_method_2026-10-07/method_results_run3_base.json\nM  pilot_runs/b01b_method_2026-10-07/method_run_receipt.json\nA  pilot_runs/b01b_method_2026-10-07/method_run_receipt_run2b_partial.json\nA  pilot_runs/b01b_method_2026-10-07/method_run_receipt_run3_base.json\nA  pilot_runs/b01b_method_2026-10-07/rerun_groups_stdout.log\nM  pilot_runs/b01b_method_2026-10-07/runner.py\nM  pilot_runs/b01b_method_2026-10-07/runner_stdout.log\n?? .codegraph/\n?? .workbuddy-ai/\n?? nul\n?? pilot_runs/b2a_2026-10-03/\n?? pilot_runs/g2b_alphabet_2026-10-04/\n?? pilot_runs/l02_2026-10-04/\n?? progress_update.txt"
+      },
+      "audited_files": {
+        ".github/workflows/ci.yml": {
+          "exists": true,
+          "bytes": 6454,
+          "sha256": "1d16441ccfbf49429b5e6f1602804c009f3f40ae08dce48fc4646aec984fa9e6"
+        },
+        "scripts/run_ci.sh": {
+          "exists": true,
+          "bytes": 7038,
+          "sha256": "5fa9f4c8dda6edaafda9d0fab8b5e2329506c57b24287776263ad2b48586a020"
+        }
+      }
+    }
+  },
+  "installed_filing_fetch_skills": {
+    "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\SKILL.md": {
+      "exists": true,
+      "bytes": 17956,
+      "sha256": "f6d7cf1d11a3983e5a84804af8d827bd0161a820f59e378583974e4e242afa92"
+    },
+    "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch\\SKILL.md": {
+      "exists": true,
+      "bytes": 17956,
+      "sha256": "f6d7cf1d11a3983e5a84804af8d827bd0161a820f59e378583974e4e242afa92"
+    }
+  },
+  "live_runtime_policy": {
+    "active_cohorts": [
+      "canary-2026-08-10"
+    ],
+    "current_epoch": "epoch-canary-2026-08-10",
+    "flags": {
+      "legacy_bridge_enabled": false,
+      "v2_bundle_active": false,
+      "v2_persist_assertions": true,
+      "v2_resolve_active": true,
+      "v2_resolve_shadow": true,
+      "v2_scan_shadow": true
+    },
+    "policy_hash": "c773099b3dcfa2cc0f8e4b1c3e2f783f9c8f9715a415ba708c12bf79398675dd",
+    "schema_version": "1.0",
+    "snapshot_sha256": "732ee6185635d36d3fa67bbd86605f5ad30c4b35f0c36e392439044b8f17ea5c",
+    "updated_at": "2026-09-02T18:34:03.610353+00:00"
+  },
+  "protected": {
+    "config\\source_catalog.yaml": {
+      "exists": true,
+      "bytes": 866,
+      "sha256": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968"
+    },
+    "config\\source_acquisition.yaml": {
+      "exists": true,
+      "bytes": 1213,
+      "sha256": "3609e707466eeb3e0f685e14f2637c6afa39ba900edef1be4814433a43300a01"
+    },
+    ".source_catalog\\catalog.sqlite3": {
+      "exists": true,
+      "bytes": 222408704,
+      "sha256": "0081ee5c3daf85abd71253e6069d08b1cdde46fe216326c10f0bf897a6a6bb62"
+    }
+  },
+  "code_publication": {
+    "head_sha": "2cad90db1b15b05085d6afa4582030a4a14323bd",
+    "exact_ci_run": 37582474369,
+    "status": "completed",
+    "conclusion": "success",
+    "responsibility_tests": 202,
+    "production_policy_migration": "pending"
+  },
+  "findings": {
+    "G2-00": "P0 live old canary; steady code is green but production is unmigrated",
+    "G2-01": "P0 whole-config read pin includes privacy/cohort compatibility labels; field-by-field behavior projection needed",
+    "G2-02": "P0 active AUTO human error classification for parser/source/model/locator failures; not an approval receipt requirement",
+    "G2-03": "P1 frozen Pipeline gate/config/test family remains; public retired CLI stays blocked",
+    "G2-04": "P1 public old maintenance CLI and optional Dropbox reviewer guard remain",
+    "G2-05": "P1 optional RF release check fixed 197 scenarios, 3 sibling repos, backup probe/write effects; not daily CI",
+    "G2-06": "P1 StockWiki before-commit full-suite requirement plus 73/40 coverage and size gates",
+    "G2-07": "P1 CWP host regex false positive, retired module check lists and remaining metric tools",
+    "G2-08": "P1 FF v1 optional double-intent compatibility route and installed documentation; v2 primary already correct",
+    "G2-09": "confirmed capability-only ET/provider bounds; simplify obsolete reviewed wording, no forced paid provider enablement",
+    "G2-10": "P1 StockQA CI 87 coverage vs local 60, duplicated pipelines and missing pipefail false-green risk",
+    "G2-11": "P0 current summary validation rejects review-label contradictions; derive diagnostic state in code without admitting invalid citations"
+  },
+  "excluded_write_owners": [
+    "Dayu external project",
+    "invest-quick-scan independent project",
+    "unrelated owner working-tree edits",
+    "original raw documents"
+  ],
+  "effects": {
+    "production_writes": 0,
+    "external_repository_writes": 0,
+    "raw_deleted": 0,
+    "paid_provider_posts": 0,
+    "full_backup_rehearsals": 0
+  }
+}

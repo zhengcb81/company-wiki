@@ -1,5 +1,13 @@
 # Progress：激进简化实施
 
+## 当前恢复点：2026-10-07 G2全面审查与计划提升
+
+按用户最新要求完成八仓当前门禁入口/配置/hook/CI与两FF安装技能只读复核，CodeGraph查结构、literal查实际错误/配置，保存[g2审计](harness_lanes/results/g2_gate_reaudit_2026-10-07.json)。12组结论进入[G2独立细则](gate_simplification_reaudit_2026-10-07.md)：P0现场steady、有效pin、AUTO机器错误、派生质量状态；P1旧Pipeline/公开维护、RF/StockWiki/StockQA工程工具、FF兼容安装；ET和其他provider保留能力边界，不强行制造改造。同步总task_plan/全部PWF/R2/G1旧收口/46项/README/findings导航，覆盖历史全面完成与过宽无caller结论。只两个大节点，先TDD，测试独立根恢复，没有新签收。
+
+2cad90d已正常commit/push，精确代码CI37582474369全部job/step success（71秒执行），202责任项/64.81秒沿用。更新R2发布收据，不重跑已绿节点；steady现场还未应用、生产final0/R2metadata/R3未完成，目标active，下一G2-00真实锁/CAS迁移与16断言/旧原件对照。production/外仓/原件/付费POST均0。
+
+StockInfoDLSimple沙箱dubious ownership用真实OS身份只读解决，没有加safe.directory或改ACL；外仓owner未提交/已暂存变更均只记录。若干混用workdir/猜src路径的读命令返回找不到文件，随后按实际各仓路径读取，未当代码缺陷。首次多文件PWF patch因Next Step整行不符被原子拒绝，git diff确认无半写，读取后正确更新。steady提案原13:00Z是未来的任意时间，已用实际UTC重新build_snapshot，投影不变、旧时间修正记录保留，现场仍未写。临时receipt脚本和两host-fix测试根由MAIN精确清理；生产DB222408704B与两配置SHA核前后不变，无全备份演练。
+
 ## 2026-10-07 隔离日期修复获授权
 
 用户明确“授权隔离修复并线”，前置条件解除，目标active。只读核RF6e6b817a/三owner日志、StockWiki3fe5008 clean/无remote、FF与ET不动。MAIN创建两独占worktree，先责任TDD，再大节点/跨仓六CLI和正常主线并线；不改owner未提交文件、IQS或原件，不再请求同一许可。

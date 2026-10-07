@@ -2,13 +2,19 @@
 
 > 本页是唯一当前施工入口。旧步骤、旧预算答复和已交付卡不产生新的任务或人工签收。历史细节保留在 [收敛前版本](https://github.com/zhengcb81/company-wiki/blob/659bcefc9d49a7e7f7fdc58e9c11d46e45da49ab/docs/plans/narrative-evidence-pilot-2026-09-26/task_plan.md)、findings/progress 和阶段收据中。
 
+## 当前最高优先级：G2 门禁全面补漏（2026-10-07）
+
+**总目标 active。当前次序为 G2/P0 → R2生产准备 → R3正式运行 → R4收益决策 → R5收口。** 已只读审查八仓当前入口、生产配置、工程检查和两份安装技能，确认旧 canary 现场未迁移、全配置读取 pin、AUTO 普通错误转人工，以及 RF/StockWiki/StockQA 工程工具等遗漏。[G2详细实施单](gate_simplification_reaudit_2026-10-07.md)列出12组结论、归属、接口、先写测试和仅两个大节点；[当前审计收据](harness_lanes/results/g2_gate_reaudit_2026-10-07.json)固定主线与实际状态。
+
+G1历史验收继续有效，但不能宣称全面清理已完成。2cad90d系统性代码已推、202项责任绿、精确CI37582474369成功；生产仍为旧canary，下一先迁移。没有新增人工签收，不重复付费模型/已绿大包；Dayu/IQS/原件/owner未提交文件保持边界。
+
 ## Goal
 
 逐步完成 company-wiki 叙述性证据选择、摘要/检索、Worker 多文档并发、跨项目消费接口和低价值原文/派生处置计划；每阶段先核查 revenue-forecast 当前实施状态，复用其正式合同与组件，避免修改对方文件或重复实现，并保留用户已批准的安全边界。
 
 一个下载请求入口、一套 pathless 来源接口、一套 AUTO 任务系统；按需处理有价值的业务叙述，停止全量永久 PDF→MD 和重复正文。原件及来源/版本事实不丢。company-wiki 只供应资料和可定位证据，投资研究语义属于 StockWiki。
 
-## 当前恢复点（2026-10-07）
+## 上一阶段恢复点（非当前总目标完成声明）
 
 - **原目标16项已在明确范围内验收：**A12/A13最后两处下载日误拒已实际修复并线；其余14项沿用已发布证据，不重复已绿节点。[逐项结论](final_scope_audit_2026-10-07.md)、[实际主线验收](harness_lanes/results/final_asof_implementation_2026-10-07.json)。
 - **RF已发布、StockWiki本地主线已合入：**RF e241389/精确CI37574397700全部步骤绿30秒；StockWiki9f552a6无远端，明确只验收本地master。六正式跨仓CLI6pass/29.63秒，晚下载成功、未来公开拒绝，证据逐条一致；两仓责任反例保持。
@@ -43,7 +49,7 @@ G1门禁精简、S3虚拟化本次最后两消费者公开日期合同已修复�
 | S0 简化收口 | complete | gold/shadow/Work Unit 人工链退出；commit 无 pytest，config doctor 仅相关改动触发；`ff5396c`/CI 绿 |
 | S1 N4A | complete | scope 贯通 Store/Worker/Supervisor/outbox/prepared；空范围零修改，SQL 范围先于 LIMIT；节点 A 绿 |
 | S2 N4B | complete | 隔离子进程客户端、真实 HTTP/factory、有限 batch、持久预算、lease/generation/kill/ACK 恢复；节点 A/B 集中验收绿 |
-| G1 多余门禁/签收 | complete（约定范围） | 46项分类/人工审批链退出；RF e241389/StockWiki9f552a6下载日误拒实际修复，六正式CLI通过，保留公开日/SHA/身份/预算等自动正确性 |
+| G1 多余门禁/签收 | complete（原约定范围）；G2补漏in_progress | 人工审批链/下载日误拒已退出；当前重新核出canary、读取pin、AUTO错误和工程工具遗留，优先按G2清理，保留公开日/SHA/身份/预算等自动正确性 |
 | S3 来源虚拟化 | complete（来源供应与消费接口） | SourceRef/SourceExport v2、FF→ET→CWP离线链、迁根/只读/SHA/语言/清理及当前两仓主线六CLI已验收；不等同自动投资研究计算 |
 | S4 N4C与R6实际效果 | complete | 四类真实final/RF读取与run10业务复核完成；R6 TDD→184责任测试→正式离线E2E/RF→代码eae2dd4/CI59秒绿，保留好claim，坏片段不进入产物，不重跑真实模型 |
 | S5 逐 caller 与派生清理 | complete | 旧全文 writer/消费者退出；生产 7104 旧文件、8191 handle 退休；原件与来源事实保持 |
@@ -84,6 +90,7 @@ TDD 框住具体公开行为。只在 N4 A/B/C、存储迁移等大节点集中�
 ## 当前文档导航
 
 - [八束已采纳方案](radical_simplification_proposal_2026-10-03.md)、[G1 实施细则](gate_simplification_closeout_2026-10-04.md)、[46 项历史审计](gate_permission_inventory_2026-10-03.md)
+- [G2 当前全面补漏与优先实施](gate_simplification_reaudit_2026-10-07.md)：覆盖历史收口文字，12组结论、两大节点，不增加人工门禁。
 - [N4 实施与真实批次恢复细则](n4_production_batch_implementation.md)、[S5/S6 清理细则](s5_s6_legacy_storage_implementation.md)
 - [完成证据](main_completion_evidence_2026-10-06.md)、[并行总计划](parallel_execution_plan_2026-10-03.md)、[N5 三包](harness_lanes/n5_parallel_packages_2026-10-06.md)
 - [findings](findings.md)、[progress](progress.md)
@@ -107,13 +114,14 @@ TDD 框住具体公开行为。只在 N4 A/B/C、存储迁移等大节点集中�
 
 | 阶段 | 状态 | 下一责任 |
 |---|---|---|
+| G2门禁全面补漏/P0 | in_progress | 八仓审计完成；先现场steady迁移，再有效读取pin/AUTO机器错误、历史CLI与跨仓工程工具；只两个大节点 |
 | R0完整对账 | complete | 已确认真实生产metadata/分类/ET登记缺口；已完成核心不重做 |
 | R1融资文档正式分类 | complete | 66ce0467已发布，真实两PDF CLI与分类责任包绿，精确CI37578307854绿 |
-| R2真实生产来源/预算准备 | in_progress | 系统性分离全库发现/有限登记/AUTO范围；清理旧canary遗留，核公开日/retired/ET，不猜metadata |
+| R2真实生产来源/预算准备 | in_progress；生产步骤顺延G2后 | 全库发现/有限登记/AUTO范围代码2cad90d已推且精确CI绿；G2先清旧控制面，再核公开日/retired/ET，不猜metadata |
 | R3正式生产与跨仓消费 | pending | 有价值final+零模型skip、真实ref/search/exact/消费者/同run恢复/空间 |
 | R4原件去重决策 | pending | 只核CWP内部真实收益，原件不丢、外部根不动 |
 | R5PWF与发布收口 | pending | 历史Git、简化当前入口、正常并线/push/精确CI |
 
 ## Next Step
 
-执行[R2系统性效率细则](r2_systemic_efficiency_implementation_2026-10-07.md)：有限登记与适配器重复SHA已修复；继续AUTO范围查询/终态恢复、旧canary统一退役及生产来源准备，再集中验收发布。生产S05/S06分类仍待有限登记；不重派已交卡、不改模型配置或原件。具体真实请求预算不足时一次说明必要增量。目标active，全部R阶段完成前不关闭。
+执行[G2-00](gate_simplification_reaudit_2026-10-07.md)：先核现场无活跃writer/AUTO lease，用既有操作锁与CAS应用已发布steady快照，验真实旧来源与16条active断言不丢；随后先TDD收敛有效读取pin、AUTO机器错误和程序派生质量状态。生产S05/S06有限登记及R3付费请求在G2之后，不改配置模型/预算，不重派已交卡。总目标active，全部约定阶段完成前不关闭。

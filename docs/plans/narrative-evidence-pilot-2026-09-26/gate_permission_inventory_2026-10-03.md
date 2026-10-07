@@ -1,4 +1,4 @@
-> 2026-10-03 用户已采纳八束激进方案；本文是实施前审计基线，当前状态及下一步只以[task_plan](task_plan.md)和[progress](progress.md)为准。已退役机制不再构成执行许可。
+> 2026-10-03 用户已采纳八束激进方案；本文是历史审计基线。2026-10-07 已完成八仓当前入口全面补漏，[G2](gate_simplification_reaudit_2026-10-07.md)覆盖本文/10-04收口的遗漏和过宽结论，并升为当前P0；只读证据见[g2收据](harness_lanes/results/g2_gate_reaudit_2026-10-07.json)。当前状态及下一步只以[task_plan](task_plan.md)和[progress](progress.md)为准，已批准精简不再逐项重新要许可。
 
 # 门禁与权限现状：逐项审查清单（2026-10-03）
 

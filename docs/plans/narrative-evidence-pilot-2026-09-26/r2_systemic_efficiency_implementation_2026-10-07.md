@@ -46,4 +46,4 @@ AUTO调用图又发现batch准备/收尾反复list_jobs全任务库，以及终�
 
 ## 当前状态
 
-in_progress。系统性代码集中202项/64.81秒绿，全部改动Python Ruff、新纯scope/登记mypy绿；包含真实融资PDF公共register以及三配置provider本地HTTP/真实子进程恢复，不是付费供应商请求。14隔离测试根恢复absent，生产DB/两配置SHA保持。代码正在发布，随后才迁移现场canary；生产来源metadata/正式运行R3未完成，不据此标R2完成。下一步精确代码CI→现场steady CAS与真实旧资料读验收→有限登记/恢复生产来源→真实请求预算。
+in_progress。系统性代码2cad90d已推，精确CI37582474369全部步骤success；集中202项/64.81秒绿，全部改动Python Ruff、新纯scope/登记mypy绿，真实融资PDF公共register及三配置provider本地HTTP/子进程恢复完成，付费POST0。14隔离测试根恢复absent，生产DB/两配置SHA保持。现场canary与默认steady收敛现在由优先级更高的[G2-00](gate_simplification_reaudit_2026-10-07.md)接管；G2还先处理无效pin/AUTO故障/旧CLI和工程工具，随后回本阶段有限登记/恢复生产来源及真实请求预算。生产metadata/正式运行R3未完成，不据源码绿标R2完成。

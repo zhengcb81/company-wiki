@@ -1,13 +1,13 @@
 # G1 收口：先去掉多余阻断，再完成虚拟化
 
-> 本卡是 [task_plan](task_plan.md) 的当前第一优先施工细则，覆盖旧审计中的下一步；不是新的审批合同。基线代码 `1cfec10` 已发布，CI37188829582 success；文档基线 `376ed90`。只在 G1 收口、S3 联调两个大节点集中验证。总指挥独占共享计划及合入。
+> 本卡记录 G1 原约定范围的已交付收口，不是当前完整门禁结论。2026-10-07 全面复核发现现场 canary、读取配置 pin、AUTO human_errors 和工程工具漏项，当前最高优先施工单为 [G2](gate_simplification_reaudit_2026-10-07.md)，执行次序以 [task_plan](task_plan.md) 为准。旧验收保持，不重新产生审批或逐小节点门。
 
 ## 已完成，不再开工
 
 - private/public访问与外部LLM逐文档人工许可已取消；prompt review、待修复提案与 review store故障只是诊断。
 - AUTO Approval 公共类型/CRUD、gold/shadow/Work Unit人工签收已退役，历史事实表保留。
 - activation/rollback/restore/map的 reviewer 已可省略，自动记 actor；签名、信任根、TTL evaluator已退出。
-- reader pin已缩到实际读取字段；全snapshot完整性仍自动校验。
+- reader pin已缩掉无效runtime开关，但CatalogConfig全量字段仍入hash；G2-01继续收敛实际有效读取维度，不能宣称此项全面完成。snapshot完整性仍自动校验。
 - 旧全库Worker启动/执行链已退出；新有限批次N4A/N4B已集中验收。commit不跑pytest，日常push/CI只有快速集合。
 - `secret_audit` 的 ignored本机凭证已只作诊断，不再为此安排代码改造；真实待发布密钥检查保留。
 

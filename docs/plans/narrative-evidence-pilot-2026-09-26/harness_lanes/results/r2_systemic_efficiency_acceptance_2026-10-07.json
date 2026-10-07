@@ -1,7 +1,7 @@
 {
   "schema_version": "r2-systemic-efficiency-acceptance/1",
   "date": "2026-10-07",
-  "status": "local_green_publication_pending",
+  "status": "published_code_exact_ci_green_production_pending",
   "node": {
     "passed": 202,
     "seconds": 64.81,
@@ -37,7 +37,7 @@
     ".source_catalog/catalog.sqlite3": true
   },
   "paid_provider_posts": 0,
-  "production_migration": "pending, old canary still present until exact code CI",
+  "production_migration": "pending G2-00; exact code CI is green; old live canary remains",
   "cleanup": {
     "test_roots_absent": [
       "r2-system",
@@ -57,5 +57,16 @@
     ],
     "production_space_saving": 0,
     "removed_logical_test_bytes": 121909495
-  }
+  },
+  "code_publication": {
+    "head_sha": "2cad90db1b15b05085d6afa4582030a4a14323bd",
+    "remote_branch": "master",
+    "exact_ci_run_id": 37582474369,
+    "conclusion": "success",
+    "receipt": "r2_systemic_exact_ci_2026-10-07.json"
+  },
+  "commit_hook_fixture_errors_corrected_before_publication": [
+    "intentional C:/absolute.pdf rejection test triggered host regex",
+    "host-portable test correction initially lacked pathlib.Path import; corrected and 5 relevant tests green"
+  ]
 }
