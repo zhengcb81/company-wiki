@@ -3,13 +3,15 @@
   "lane": "G3-SOURCE-FACTS",
   "card": "docs/plans/narrative-evidence-pilot-2026-09-26/harness_lanes/g3_source_metadata_and_raw_space.md",
   "base": "5930a644453ed46494c2c83c5ecfb97767fa9492",
-  "head": "fe6d00cc89d7b9936b9df46238cca68bb55e82e8",
-  "head_note": "head is the last code commit before this handoff record; this handoff file is committed afterwards, so `git log --oneline -3` shows one further docs commit on top",
+  "head": "8856d98f951f11aacae44cc8b7e6133bff6eeb9c",
+  "head_note": "head is the last commit known when this record was written; only the commit that lands this very edit can follow it (git log --oneline shows the trailing docs commit)",
   "branch": "codex/g3-source-facts",
   "worktree": "C:/Users/郑曾波/Projects/_g3/SOURCE-FACTS/company-wiki",
   "commits": [
     "fdde475f28f2b998de085f743b9c7cebba24e777 feat: add G3 read-only source facts and company_raw space decision",
-    "fe6d00cc89d7b9936b9df46238cca68bb55e82e8 chore: drop unused imports in the G3 evidence package"
+    "fe6d00cc89d7b9936b9df46238cca68bb55e82e8 chore: drop unused imports in the G3 evidence package",
+    "193f692fcbd7d13855a5bd9518890c001368bb47 docs: record G3 lane handoff with observed evidence",
+    "8856d98f951f11aacae44cc8b7e6133bff6eeb9c test: validate G3 deliverable contracts"
   ],
   "changed_paths": [
     "docs/implementation/g3-source-facts/HANDOFF.md",
