@@ -1,8 +1,8 @@
 {
   "schema_version": "s7-followup-quality-node/1",
-  "status": "local_passed_pending_publish",
+  "status": "published_exact_ci_passed",
   "base": "6906bbba258decab97e5f63dd6887f768267a411",
-  "code_sha": null,
+  "code_sha": "c1295b12b652006ec4713e1155170ac66cad7406",
   "parser": "0.1.1",
   "selector": "0.4.1",
   "rf_head": "6e6b817a1a6e4567293a4dcb835815f3be508a03",
@@ -52,7 +52,8 @@
         "selector",
         "parser"
       ]
-    }
+    },
+    "exact_ci_whole_unit_and_fast_contracts": "all steps passed on published code SHA"
   },
   "static": {
     "ruff": "CI scope and affected integration files passed",
@@ -204,7 +205,18 @@
     "src/company_wiki/source_catalog/narrative_pdf_qa.py": "f06ff742370f8d68b18f283869b31a223dffced7d1472bf489baad153312a5b1",
     "src/company_wiki/source_catalog/narrative_replay.py": "02f6a812ff929dc403b06881487cac5db49c59f10061cdec75b5e2f403184390"
   },
-  "published_git_blob_sha256": {},
+  "published_git_blob_sha256": {
+    "src/company_wiki/source_catalog/n6_candidate_completion.py": "638500fd208127b221181844d948b97cec5347780a70051904efe843d105c14f",
+    "src/company_wiki/source_catalog/n6_candidate_operating_facts.py": "1d781c1eaf7afc2dcca4054f97066798e7f70211be43fc2748b1e3dc0d0378c2",
+    "src/company_wiki/source_catalog/narrative_candidates.py": "0c8840a79465a517a77098c234f8b7aff772a211079b1fbb94657f737461245a",
+    "src/company_wiki/source_catalog/narrative_context.py": "abd8436b1d517c2e6e7aafb0b21586609e7c378b36ebb282b625d57a3cfdb893",
+    "src/company_wiki/source_catalog/narrative_group_candidates.py": "254ea539eaf629e2908d0532ce66c4e6d3c97f246282ce89286339e167d86259",
+    "src/company_wiki/source_catalog/narrative_neighbors.py": "58141948589363fda799daacee13fdf1c2e1b1b014b8ba9f503f6b45a9c23f24",
+    "src/company_wiki/source_catalog/narrative_budget.py": "63fc00a8e7b77df72dd0e58c308c0eed98acd092666fd47c8723eff89a758027",
+    "src/company_wiki/source_catalog/narrative_evidence.py": "ea9d5f547b25e99eb4c5990f7e24d2da59e4f7d6887d7c5d9d2fe36b1d6d5d01",
+    "src/company_wiki/source_catalog/narrative_pdf_qa.py": "f06ff742370f8d68b18f283869b31a223dffced7d1472bf489baad153312a5b1",
+    "src/company_wiki/source_catalog/narrative_replay.py": "02f6a812ff929dc403b06881487cac5db49c59f10061cdec75b5e2f403184390"
+  },
   "vendor_calls": 0,
   "downloads": 0,
   "translations": 0,
@@ -222,7 +234,108 @@
     "tmp/s7ir-state.json": true,
     "tmp/s7ir_run.py": true,
     "tmp/s7ir_accept.py": true,
-    "tmp/s7ir-m1": true
+    "tmp/s7ir-m1": true,
+    "tmp/s7ir-ci.json": true
   },
-  "ci": null
+  "ci": {
+    "id": 37552600440,
+    "head_sha": "c1295b12b652006ec4713e1155170ac66cad7406",
+    "status": "completed",
+    "conclusion": "success",
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/37552600440",
+    "run_attempt": 1,
+    "jobs": [
+      {
+        "id": 112571348105,
+        "name": "Fast checks (Python 3.12)",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-10-07T00:33:36Z",
+        "completed_at": "2026-10-07T00:34:51Z",
+        "seconds": 75.0,
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run actions/checkout@v4",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Set up Python 3.12",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Install dependencies",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Ruff lint",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Strict type check on contract modules",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Compileall and config doctor",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Unit tests",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Unit test failure summary",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Focused contract tests",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Focused contract failure summary",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "CLI smoke test",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Scan for hardcoded secrets",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Set up Python 3.12",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Run actions/checkout@v4",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success"
+          }
+        ]
+      }
+    ]
+  }
 }
