@@ -1,5 +1,13 @@
 # Progress：激进简化实施
 
+## 最新：G2-01b已发布，进入latest单请求（2026-10-07）
+
+22dcc9271548372006f85f82b45875b424127923正常commit/pre-push/push均绿；精确CI37603212398 attempt1/job112732363266所有step/job success，75秒，其中全Unit36秒，未增加日常真实长E2E。[精确CI](harness_lanes/results/g2_exact_source_binding_exact_ci_2026-10-07.json)及[已发布验收](harness_lanes/results/g2_exact_source_binding_acceptance_2026-10-07.json)完整。先前准备/等待文字由本条覆盖。
+
+三个新运输tmp已恢复absent（共11根）；4真实消费者scope反例从RED修为GREEN、60责任项先绿，唯一global旧期待改为当前exact pin实际随priority变化后1项绿。原bundle generation lineage保持。生产/用户配置/真实TXT保护通过，不重跑paid或下游代码。
+
+开始G2-12调查：FF main758e8f4，仅未跟踪config/FMP_API_KEY.txt由owner持有、不读取内容、不stage；默认沙箱跨仓git读取Permission denied，改真实OS账户只读成功。旧CloseGap确实仍snapshot/plan/policy/TTL签收、4次metadata、TTL参与mutex；MAIN接下来先把服务统一与责任测试具体化，再TDD。未改FF/Dayu/IQS或三个外包worktree。
+
 ## 最新：G2-01b精确来源/消费接线实际验收（2026-10-07）
 
 scoped schema3/binding2、reader→batch→storage baseline→Narrative transport已打通。24初始绿、52最终新旧绑定/身份/运输golden责任绿；双样本正式CLI（合成和真实微软TXT66324B只读复制）39.31秒绿：无关根新增、DB/objects和原件根迁址仍同run/原final/原账目，恢复零新增HTTP；有关规则变化、真byte超限、坏原文、绑定损坏均真实拒绝。

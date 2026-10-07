@@ -56,7 +56,7 @@ HEAD/文件 SHA/工作树/现场 policy 原文见[只读审计收据](harness_la
 
 **先写测试：**无效标签变化不使当前读取或同 run 恢复失效；真实路由/状态/格式/根或来源字节变化仍可检测；v2 CLI → FF → RF/StockWiki 结果一致。不能仅修改原测试的期望来证明实现正确。
 
-**G2-01b / 后续仍pending：全catalog绑定范围仍过大。** 本次schema2已去掉无效字段，但仍hash全部roots/DB位置；`build_batch_events`及storage baseline将全局pin进入input identity。finished exact SourceRef只读实际注册副本，不做全局候选选择，新增无关root仍可能拒绝恢复。不能声称这一问题已解决。下一施工应区分查询选源的全局identity与单source/batch实际副本/准入identity，共用同一责任层；先写“新增无关根/迁DB后精确读取和终态复用不失效、有关副本/准入/字节变化仍拒绝”的公共反例，再同步reader→batch/storage guard→消费合同。MAIN定义版本与旧pin兼容，不能临时接受任意旧pin或重签旧费用；放在G2内、R2之前，不另设签收节点。
+**G2-01b / 已发布22dcc927、精确CI37603212398全绿75秒。** 先前schema2仍hash全部roots/DB位置，使无关root令finished exact批次失效；现已区分全局schema2选源与单source schema3/binding2，reader→batch/storage baseline→消费当前读取receipt全部接线。真实CLI迁DB/objects/raw根、零重模型/账目变化和有关事实/准入/坏字节反例通过；旧binding1只在原全局规则等价时复用，不从SHA伪造旧规则、重签费用或自动重跑。见[验收](harness_lanes/results/g2_exact_source_binding_acceptance_2026-10-07.json)，不另设签收节点，也不代表whole G2A。
 
 已核公开reader合同明确`reusable_for_filing=false`仍可query_local/preview/精确filing_reuse；该旧标签在legacy resolver选源里有作用，但不能作为已选SourceRef读取权限。实际旧工作目录错误为`BATCH_WORK_DIRECTORY_CONFLICT`。后续query投影也须按实际当前caller字段，不自动恢复旧复用门。
 
@@ -251,4 +251,4 @@ MAIN 是唯一集成与生产变更负责人。此表是施工顺序，不是新
 
 ## Next Step
 
-**目标active；核心93ac5a5与Store13/b202d07均已发布并精确CI绿。** MAIN现收口发布01b scoped pin/binding2（52责任与双样本实际CLI迁址39.31秒绿），随后12/CWP和FF latest单请求→P1家族/清单→G2A/B→R2。两仓日常门/RF工具三卡用户已分派、待交接；不占其独占写集。没有新增小节点签收、不重复已绿长包、不自动启动付费批次，不把本子集冒称全面完成。
+**目标active；核心93ac5a5、Store13/b202d07、scoped pin01b/22dcc927均已发布且精确CI全绿。** MAIN下一G2-12/CWP和FF latest单请求→P1家族/清单→G2A/B→R2。两仓日常门/RF工具三卡用户已分派、待交接；不占其独占写集。没有新增小节点签收、不重复已绿长包、不自动启动付费批次，不把本子集冒称全面完成。

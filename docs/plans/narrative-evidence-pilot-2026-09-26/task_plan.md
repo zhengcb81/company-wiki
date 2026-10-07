@@ -130,4 +130,4 @@ TDD 框住具体公开行为。只在 N4 A/B/C、存储迁移等大节点集中�
 
 ## Next Step
 
-G2-13已发布/精确CI绿。G2-01b schema3 scoped pin/binding2已实施：24初始责任、52最终新旧绑定/事实/golden责任和两样本正式CLI迁址E2E绿（真实TXT只读复制，零再HTTP/账目变化）；八own tmp已恢复absent。MAIN当前唯一动作是正常发布01b并核精确CI，然后CWP/FF latest单请求/P0-B→其余P1及G2A/B→R2/R3。三外线独立运行，待交接，不占其写集。旧binding1保留原账；无法从旧全局SHA推导scoped事实时明确拒绝，不自动付费重跑。详细证据见[G2实施单](gate_simplification_reaudit_2026-10-07.md)，不冒称whole G2A/全部计划完成。
+G2-13已发布/精确CI绿；G2-01b已正常推送22dcc927，精确CI37603212398/job112732363266全部步骤绿75秒。24初始责任、52最终新旧绑定/事实/golden责任、双样本正式CLI迁址E2E39.31秒和61消费责任（60先绿+唯一旧期待修正后1绿）已验收；11 own tmp/诊断脚本恢复absent。MAIN下一唯一施工为CWP/FF latest单请求/G2-12（P0-B），然后其余P1及G2A/B→R2/R3。三外线独立运行待交接，不占其写集。旧binding1保留原账；无法从旧全局SHA推导scoped规则时明确拒绝、不付费重跑。详见[01b验收](harness_lanes/results/g2_exact_source_binding_acceptance_2026-10-07.json)，不冒称whole G2A/全部计划完成。

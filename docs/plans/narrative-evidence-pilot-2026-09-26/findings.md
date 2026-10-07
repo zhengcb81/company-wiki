@@ -1079,3 +1079,7 @@ R1代码66ce046已推master，精确CI37578307854全部步骤绿79秒。准备�
 MAIN新exact读取schema3和batch binding/2已实施，24项初始绿12.45秒（含真实CLI完成/无关根新增/DB和raw根迁址/零再次HTTP/账目与摘要不变）。全局schema2继续用于选源及显式旧pin；新pin仅该source登记根的有效规则和可见核心事实，真正open独立核SHA、长度、路径包含和当前准入。旧binding/1缺原规则只有全局SHA，不能声称从SHA恢复原子投影；全局未变可继续原事件/费用，全局改变明确拒绝、不补签。
 
 扩展责任167绿/1失败103.30秒：失败为既存运输golden仍parser0.1.0/selector0.3.1/prompt1.3.0，与此前已发布parser0.1.1/selector0.4.2/prompt1.6.0不符；正在逐字段核是否只有provenance变化，不能盲目改golden或取消测试。新旧binding各自实际来源+调度会员反例参数化扩展。新增精确事实夹具4失败来自误写metadata顶层，真正可见字段在acquisition；已改写负责字段，夹具错误不计产品RED。文档尝试用不存在的概括标题应用补丁一次失败无写，采用Add-Content准确目标；之前golden猜测路径不存在，无写，已按实际fixture清单查明。
+
+### G2-01b最新实际发布与消费验证
+
+四个新增scoped bundle TXT/JSON/PDF/skip消费者反例发现真正遗漏：当前receipt仍global，原bundle生成pin本就只是lineage。已同步NarrativeTransport读取前后使用当前exact source pin，原generation原样；4真实RED→60责任绿，唯一旧current-global期待改为source-scoped且仍检查真实priority变化后1绿。没有改公开DTO或RF/SW代码。11tmp/自有脚本全部恢复absent，63268991B残余精确清理，不删raw。22dcc927已正常推送，精确CI37603212398 attempt1全job/step success75秒（Unit36秒），收据已落盘。goal active，MAIN下一12单意图latest事务。
