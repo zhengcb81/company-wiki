@@ -1,5 +1,11 @@
 # Progress：激进简化实施
 
+## 最新：新G3独立施工包 ready（2026-10-07）
+
+用户再次请求互不影响的较大任务。核当前CWP5930a644/RF1a2f9428已发布基线、实际CodeGraph结构/文件、历史质量/mtime/安装集合、CWP旧维护API/CLIcaller及现成RAW-DUP接口后，创建G3总包和三份自包含单卡：RF历史质量/包装、CWP维护后端退休、R2元数据/R4内部原件空间只读核实。独占三个新worktree及互不重叠写集，库层退休错误/报告JSON/MAIN wiring与测试恢复接口已明确；未启动harness/未创建目录/未写外仓/未调用模型或修改生产。
+
+MAIN继续未提交G2-12，外线不触碰CLI/FF/指纹/hook/生产/安装/总PWF。上批G2三卡已完成，不重派；新卡ready尚未分派。更新all_pwf/task_plan/findings/README/G2/parallel导航，修复旧待交接及01b pending顶部文字。开发责任/TDD、完工一个集中节点、MAIN在既有G2A/B接线，不增加小步签收。4文件链接/ready/代码围栏/交接/TDD/清理标签检查0问题，git diff --check绿；首次标签检查RF正文虽已有RED步骤但无TDD字样，补标题后通过。原owner配置SHA3609e707及三个未提交核心文件/新合同测试指纹已记录供提交后核。正常文档commit/push随后执行，不将未完成代码或owner配置入提交。
+
 ## 最新：三外线正式验收/并线/发布全部完成（2026-10-07）
 
 SW master0b489190为本地主线，无remote。RF main1a2f9428已推，精确CI37608673031/job112750312883全部steps绿29秒。SQA master0f8fbfa已推，修复后精确CI37609783778/job112753964115全部实际steps绿35秒；Documentation37609783853构建job112753964763绿21秒、部署job112754114941绿7秒。正常commit/hooks/merge/push，未绕过失败；旧4757088文档RED保留事实，但不覆盖已修复结果。每个job/step与精确SHA收据已保存[g2_parallel_exact_ci](harness_lanes/results/g2_parallel_exact_ci_2026-10-07.json)。三卡/并行总包/总计划/G2实施顺序已同步，不重派三包、不重跑外线已绿full。

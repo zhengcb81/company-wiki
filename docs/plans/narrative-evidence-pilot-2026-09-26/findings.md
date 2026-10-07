@@ -1,5 +1,13 @@
 # Findings：当前事实与待验证项
 
+## 最新：第二批独立施工包调查（2026-10-07）
+
+新卡从真实剩余工作拆分，不重派已完成的G2三卡：RF历史uc.quality/manifest及安装职责；CWP旧维护后端退休与只读清单；R2来源事实和R4内部原件收益的只读核实。CWP当前master5930a644、RF main1a2f9428；MAIN未提交G2-12三个acquisition/close_gap文件与新合同测试不进入冻结基线。RF owner三日志、CWP owner配置保留。外线独占新目录，生产/共享CLI/总PWF/安装副本/并线仍MAIN负责。
+
+已核实际接口：RF strict_targets字面解析旧workflow、manifest默认strict mtime、tools/sync_installations.py把全部tests列入安装；CWP list_groups两处用store、四个公开维护入口仍有调用，archive/prune CLI漏now；Dropbox有平安eligible人工特例。CodeGraph返回无caller不代替已打开CLI中的实际import/分支。RAW-DUP已有scan/verify及预算参数，不能重造工具或把历史跨根158MB当内部收益。
+
+调查中猜测的__main__.py、retired_evidence.py、根sync_installations.py、n5_docset_benchmark.md、catalog.py均不存在；已改用CodeGraph实际文件和已存在manifest，不将缺文件写入施工命令。当前all_pwf细则/README的待外线交接与01b pending文字已过时，本轮统一修导航。未启动外部harness、未写外仓、未运行模型或生产写操作。
+
 ## 最新：外线工程收口已完整发布（2026-10-07）
 
 SW0b48919已本地并主线；RF1a2f9428远端main/精确CI29秒绿；SQA0f8fbfa远端master/精确日常CI35秒及文档构建/部署全绿。文档真正错误仍非零（实际非法主题exit1），旧docstring4warning只诊断，单次build artifact复用，未放宽业务来源/预算/身份。三个各仓手工full收据复用；本轮MAIN303/254/107短责任为另行真实运行，不合并计数冒称一条全套。

@@ -130,4 +130,6 @@ TDD 框住具体公开行为。只在 N4 A/B/C、存储迁移等大节点集中�
 
 ## Next Step
 
-MAIN继续[G2-12实施单](g2_latest_acquisition_implementation_2026-10-07.md)：统一服务、目标锁、预算异常传播、失败清理与共享预算重试的13项新反例已绿1.68秒；尚未发布，先完成旧责任测试合同同步、latest期间语义、可选binding CLI、FF接线和跨进程/真实离线E2E，再集中发布。不把13项试点当whole G2B。三外线已验收并线，精确主线CI见[收据](harness_lanes/results/g2_parallel_exact_ci_2026-10-07.json)；不重派或重跑其已绿完整测试。RF报告的旧uc.quality解析/coverage数值/mtime冻结漂移及repo-only测试包装职责归MAIN P1；然后G2A/B→R2/R3/R4/R5。01b旧binding1保留原账，不推导不可逆历史pin、不付费重跑，既有验收继续有效。
+MAIN继续[G2-12实施单](g2_latest_acquisition_implementation_2026-10-07.md)：统一服务、目标锁、预算异常传播、失败清理与共享预算重试的13项新反例已绿1.68秒；尚未发布，先完成旧责任测试合同同步、latest期间语义、可选binding CLI、FF接线和跨进程/真实离线E2E，再集中发布。不把13项试点当whole G2B。旧三外线已验收并线，精确主线CI见[收据](harness_lanes/results/g2_parallel_exact_ci_2026-10-07.json)，不重派。
+
+用户现请求新独立包：[G3总包](harness_lanes/g3_parallel_packages_2026-10-07.md)及三单卡ready，未启动/未创建工作树；RF历史质量/包装、CWP维护后端、来源事实/内部空间只读核实各独占根/写集，均可同时开工。MAIN独占公共CLI/FF/指纹/工程清单/生产/技能安装与合入。G3代码接入既有G2A/B，调查供应R2/R4；不增加小节点门。然后G2A/B→R2/R3/R4/R5。01b旧binding1保留原账，不推导不可逆历史pin、不付费重跑，既有验收继续有效。

@@ -2,11 +2,11 @@
 
 ## 用户目标与当前基线
 
-用户要求完成全部PWF计划内容并逐步实施。代码2cad90d/CI37582474369是前一发布，审计计划8ffd3f0已推；RF e241389、StockWiki9f552a6、StockQA最新6a9ff138。先前16项有界验收继续有效。目标服务最新实读active，继续下列次序。MAIN独占总计划/共享接口/生产/合入，各大节点一次，不增签收或小节点门。
+用户要求完成全部PWF计划内容并逐步实施。当前CWP master5930a644、RF main1a2f9428、StockWiki master0b48919（无remote）、StockQA master0f8fbfa；已发布代码的精确CI和本地责任见总task_plan/交接收据。先前16项有界验收继续有效。目标服务active，继续下列次序。MAIN独占总计划/共享接口/生产/合入，各大节点一次，不增签收或小节点门。
 
-**当前并行：**[三个新施工包](harness_lanes/g2_parallel_packages_2026-10-07.md)已由用户分派，待交接：SW日常检查、StockQA工程入口/四workflow、RF可选工具/清单。各仓独占目录、自己的PWF/测试/交接，未代用户启动。MAIN13/01b/12不等待外线；MAIN收交接统一合入，纳入既有G2B，不添加小节点签收。单卡已补RF历史caller兼容与StockQA额外workflow/真实import隔离，不缩R2–R5范围。
+**当前并行：**[上一批G2三卡](harness_lanes/g2_parallel_packages_2026-10-07.md)均已验收并线，SW本地主线、RF/SQA远端主线及精确CI绿，不重新分派。用户现要求新包，[G3总包](harness_lanes/g3_parallel_packages_2026-10-07.md)提供RF历史质量/包装、CWP维护后端、来源事实/内部空间只读调查三卡，ready可同时分派，未代用户启动；各独占新工作树和互不重叠写集。MAIN继续12及公共接线，生产/技能安装/总PWF/并线仍MAIN负责。G3不新增小节点门、不缩R2–R5。
 
-**2026-10-07优先级更新：**先[G2全面补漏](gate_simplification_reaudit_2026-10-07.md)，再R2/R3/R4/R5。现场steady小配置迁移已完成；默认读取/有效pin/AUTO错误/摘要质量/版本恢复核心93ac5a5已推，精确CI37590638806全部步骤绿90秒。Store轻初始化b202d07已推/精确CI绿；scoped pin仍P0，SW/StockQA日常全测/联网hook/隐藏阈值、CWP/FF latest统一请求升P0-B，RF可选发布/会话强制清单、CWP公开旧CLI/写Store库存与冻结gate家族有具体同步写集。G2只重排，不缩原目标，仍仅两个大节点。R2 metadata/正式生产登记和R3 paid没有执行。
+**2026-10-07优先级更新：**先[G2全面补漏](gate_simplification_reaudit_2026-10-07.md)，再R2/R3/R4/R5。现场steady迁移、核心93ac5a5、Store b202d07、scoped pin22dcc927均已发布/精确CI绿；SW/SQA日常工程门与RF可选工具已交付。MAIN当前CWP/FF latest统一请求G2-12尚未提交，13项新反例绿不等于旧责任/CLI/FF/跨进程联调完成。CWP公开旧维护与冻结家族、RF历史质量读取器/技能包装、FF安装/兼容仍是实际待办；G3仅分离其中独立写集。G2仍仅两个大节点。R2生产metadata/正式登记和R3 paid没有执行。
 
 计划文件以[逐份目录及SHA](harness_lanes/results/all_pwf_inventory_2026-10-07.json)登记。旧执行卡W0–W7、F/D卡、各并行卡与其后继方案按下表对账；不能重复跑旧命令恢复已删除全文，不能将旧审批流程或唯一raw删除重新启用。当前用户原件不丢、Dayu零代码修改、IQS独立项目不动优先。
 
@@ -40,6 +40,8 @@
 
 本阶段有限登记/单次权威SHA/AUTO范围SQL与终态零子进程/steady源码已发布2cad90d，202责任项与精确CI绿。现场steady迁移归G2-00首先实施；其他生产metadata和正式请求在G2两个节点后继续，不重复已绿代码验收。
 
+只读事实调查可由[G3-SOURCE-FACTS](harness_lanes/g3_source_metadata_and_raw_space.md)提前完成，不修改生产。MAIN收到metadata_proposals后核当前事实，经本阶段正式有限入口应用；调查报告不代表已登记或已生成生产final。
+
 已修复历史缺陷：CanonicalSourceWriter曾每次新增全扫company_raw，扫描器曾没有按文件入口。2cad90d已TDD实现单根显式relative_paths有限登记：保留相同group完整成员，未选组及根完整扫描水位不改，不做missing sweep；拒绝空集/越界/未命中。常规全扫描保留，canonical import仅登记刚写入组；202责任与精确CI已绿，不重造scanner或重跑该节点。当前R2生产metadata更新直接使用此正式入口，不patch扫描器、不全库23GB重扫。
 
 1. 只读核实际来源、位置/版本、acquisition sidecar与原件；S01–S04retired原因按正式journal/scan记录追溯，不能因文件在就复活撤回版本。S05/S06以明确来源类型迁移，不改raw或source SHA；S08表中活动日期与published_date2023-12-31冲突须记录，不能直接抄文件名为公开日。
@@ -63,6 +65,8 @@
 **Status:** pending
 
 复用N5工具只读元数据候选，精确限定company_raw内部distinct physical copies，有限读取预算、拒绝云占位hydrate，原件不修改。所有source/version/location引用保留；输出实际实读duplicate上界与allocation未知。只有可量化收益与现行reader调用者迁移充分时才写下一步对象化施工细则；若只存在跨根副本/收益小，本计划以“不做无收益迁移”的证据决策完成本可选项，不假称已释放。用户最新“全部计划”不等于删除唯一原件或写外部Dayu。
+
+本轮调查输出委托G3-SOURCE-FACTS同一只读卡，主线保留最终收益决策与任何后续迁移设计。它不重做N5工具、不把跨根历史样本当内部物理收益。
 
 ## R5 最终PWF/主线发布收口
 

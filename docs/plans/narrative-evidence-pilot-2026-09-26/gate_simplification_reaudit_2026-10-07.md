@@ -4,7 +4,7 @@
 
 这是 2026-10-07 用户“全面审查、查缺补漏、加到 PWF 并提高优先级”的实际施工入口。G1 的已发布成果继续有效，但其“约定范围完成”不能代表所有遗留机制已清空。目标服务最新实读active，当前顺序仍为G2→R2→R3→R4→R5，不增加角色、人工签收、授权文件或逐小节点检查。
 
-用户现要求独立并行施工包，已拆出[G2三个新包](harness_lanes/g2_parallel_packages_2026-10-07.md)：SW06/StockQA10各P0-B，RF05为可并行P1。三卡用户已分派，待交接；独占工作树/写集/测试/交接各自完整，MAIN仍独占CWP13/01b/12和总PWF/生产/并线。不是重派旧完成卡。
+上一批[G2三包](harness_lanes/g2_parallel_packages_2026-10-07.md)均已验收并线，SW/SQA日常门和RF可选工具完成。新[G3总包](harness_lanes/g3_parallel_packages_2026-10-07.md)ready：RF历史质量/包装、CWP维护后端、来源/空间只读调查；尚未分派，不重派旧卡。MAIN继续12/CLI/FF/指纹/hook清单、其他退休家族、总PWF/生产/安装/并线；13/01b已发布。
 
 ## 1. 审计范围和证据
 
@@ -86,6 +86,8 @@ HEAD/文件 SHA/工作树/现场 policy 原文见[只读审计收据](harness_la
 
 ### G2-04 / P1：公开旧维护命令和特例审查
 
+独立库层施工见[G3-CWP-MAINT](harness_lanes/g3_cwp_maintenance_retirement.md)，ready可开工；它不写cli.py/code_identity/hook/CI，交统一退休异常和精确wiring表，MAIN同次接线验收发布。只读清单与历史journal保留，原件0删除。
+
 **可调用工具残留。** CLI 仍提供 `archive-retired-evidence`、`prune-retired-evidence`、`focus-cleanup`、`duplicate-recycle`；后两者有 confirmation-token。旧审计“无生产 caller”没覆盖到公开 CLI，结论过宽。`dropbox_governance.inventory_dropbox` 仍有平安特例“eligible without reviewer-completed evidence”，实 caller 是可选 `tools/dropbox_governance_replay.py` 和旧测试，不是正常 reader。
 
 **实施：**逐项对账 S5/S6 已完成的数据迁移和当前合法消费者。无再用需求的派生清理/archive/prune 整体退出公开 CLI；原件处置先变成只读报告或退休旧破坏入口，不能只去确认 token 后开放随意删 raw。真实维护仍需要的集合版本一致性用 machine CAS，取消人造签收与重复 smoke/强制全量备份。Dropbox 工具取消公司特例人工签收；身份不明仅报告不明，不能靠文件名升级 verified，不写外部 Dropbox。
@@ -139,6 +141,8 @@ HEAD/文件 SHA/工作树/现场 policy 原文见[只读审计收据](harness_la
 **验收：**正式 FF→ET→CWP 离线链走三个真实 CLI、复用零 provider、语言/SHA/清理正确；相同 intent 的库与 CLI 一致，未来公开和预算拒绝仍明确。使用既有链测试入口，不新增十套 request contract。
 
 **三外线交付后MAIN具体补漏：**RF六个工程测试引用repo-only tools，三安装副本本次只按用户具体授权定点同步18文件；不能据此声称安装内工程全包可运行或全MATCH。G2-08先查实际技能caller，再明确工程tools/tests属于仓库验证职责，用户技能所需代码/配置/引用才进入安装表；不盲目复制第二套签收或整套工程目录。RF `uc.quality.strict_targets`的旧workflow字面解析、coverage 84→0仍当弱化的旧ratchet、checkout mtime被误作事实完整性，均已有真实报告，归MAIN P1：先核当前caller/默认CLI，退休无职责的资格判断，保留实际指定SHA/size/配置/工具异常反例，不改owner日志或重冻历史manifest，不反向恢复coverage数字门。
+
+其中RF历史工具与包装代码由[G3-RF-ASSURANCE](harness_lanes/g3_rf_assurance_and_packaging.md)独立施工，ready未启动；只在tmp安装根验证，真实三副本仍MAIN发布后定点处理。FF v1/安装与当前latest获取仍MAIN，不与该卡共享写集。
 
 ### G2-09 / 已核能力边界：ET、provider 和外发文案
 

@@ -1,16 +1,28 @@
 # 并行总计划：门禁先行，独立目录施工，MAIN统一打通
 
-> **2026-10-07当前：**目标active，先G2再R2/R3/R4/R5。用户确认三个新包已分派，待交接；MAIN未代用户启动外部harness。MAIN独占CWP/FF共享接口、总PWF、生产与并线，继续13/01b。下方原卡/状态为历史，不重派；Dayu/IQS零写。
+> **2026-10-07当前：**目标active，先G2再R2/R3/R4/R5。上一批G2三包全部验收并线；13/01b已发布，MAIN继续12及公共接线。[新G3三卡](harness_lanes/g3_parallel_packages_2026-10-07.md)ready，可同时分派，未启动；独占新工作树和互不重叠写集。MAIN负责总PWF/生产/安装/主线，Dayu/IQS零写。
 
-## 当前已分派：三个互不重叠的新包（待交接）
+## 当前可分派：G3三个互不重叠包
+
+单卡各自完整，交给独立harness即可：
+
+| 卡 | 实际独占目录 | 责任 | 状态 |
+|---|---|---|---|
+| [G3-RF-ASSURANCE](harness_lanes/g3_rf_assurance_and_packaging.md) | `Projects/_g3/RF-ASSURANCE/revenue-forecast` | RF历史质量/manifest时间语义与安装runtime职责，代码+测试 | ready，未启动 |
+| [G3-CWP-MAINT](harness_lanes/g3_cwp_maintenance_retirement.md) | `Projects/_g3/CWP-MAINT/company-wiki` | 维护后端退休与只读清单，MAIN再接CLI/工程清单 | ready，未启动 |
+| [G3-SOURCE-FACTS](harness_lanes/g3_source_metadata_and_raw_space.md) | `Projects/_g3/SOURCE-FACTS/company-wiki` | R2真实来源metadata/R4内部原件收益只读核实，MAIN再应用生产 | ready，未启动 |
+
+写集/冻结基线/交接/一个集中测试节点见[G3总包](harness_lanes/g3_parallel_packages_2026-10-07.md)。不同工作树之外，源文件范围也不重叠；均不改MAIN获取/CLI/FF/生产/安装。三个包不互相等待。
+
+## 上一批G2：全部完成，禁止重派
 
 完整目录/冻结依赖/共同交接见[G2并行总包](harness_lanes/g2_parallel_packages_2026-10-07.md)。各卡单独交付即可实施，不需要其他卡上下文。
 
 | 卡 | 实际独占目录 | 施工范围 | 当前状态 |
 |---|---|---|---|
-| [G2-SW-DAILY](harness_lanes/g2_stockwiki_daily_checks.md) | `Projects/_g2/sw/StockWiki` | 单检查入口、日常/集中分离、指标诊断、真实来源消费者回归 | dispatched，待交接；不是旧工程卡重派 |
-| [G2-SQA-CHECKS](harness_lanes/g2_stockqa_engineering_checks.md) | `Projects/_g2/StockQAbyLLM` | sh/bat/CI/hook统一，真实退出码和关联security/release/docs workflow | dispatched，待交接；不写业务src或IQS |
-| [G2-RF-TOOLS](harness_lanes/g2_revenue_forecast_optional_tools.md) | `Projects/_g2/revenue-forecast` | 可选发布/覆盖率/会话清单及历史兼容 | dispatched，待交接；不写forecast/evidence或日常精选门 |
+| [G2-SW-DAILY](harness_lanes/g2_stockwiki_daily_checks.md) | `Projects/_g2/sw/StockWiki` | 单检查入口、日常/集中分离、指标诊断、真实来源消费者回归 | complete，master0b48919本地（无remote） |
+| [G2-SQA-CHECKS](harness_lanes/g2_stockqa_engineering_checks.md) | `Projects/_g2/StockQAbyLLM` | sh/bat/CI/hook统一，真实退出码和关联security/release/docs workflow | complete，master0f8fbfa已推/精确CI绿 |
+| [G2-RF-TOOLS](harness_lanes/g2_revenue_forecast_optional_tools.md) | `Projects/_g2/revenue-forecast` | 可选发布/覆盖率/会话清单及历史兼容 | complete，main1a2f9428已推/精确CI绿 |
 
 每仓仅自己的计划、源码白名单、测试和交接写入；三根互不包含。StockWiki使用已发布CWP代码临时导出，不能读取MAIN正在变化的代码作为测试依赖。各线一个集中节点，MAIN合入复用责任证据，纳入既有G2B；不追加逐helper签收。交付本仓正常commit，MAIN统一接线；创建card不代表已经启动、交付或并线。
 
