@@ -1,0 +1,437 @@
+{
+  "schema_version": "g5-handoff/1",
+  "package_id": "G5-CWP-CHECKS",
+  "repo": "C:/Users/郑曾波/Projects/company-wiki",
+  "worktree": "C:/Users/郑曾波/Projects/_g5/cwp",
+  "branch": "codex/g5-cwp-checks",
+  "base_commit": "5d0ad75504a9815febc1bddbe76ae2f667c3e74a",
+  "implementation_commit": "b3e7f74bf5892f2d1acb766ab4b08f05d90e348e",
+  "owned_files": [
+    "scripts/architecture_gate.py",
+    "scripts/batch_process.py",
+    "scripts/clean_env_gate.py",
+    "scripts/gold_gate.py",
+    "scripts/semantic_gate.py",
+    "scripts/test_framework.py",
+    "scripts/writer_policy.py",
+    "control/README.md",
+    "control/architecture.json",
+    "tests/support/isolated_environment.py",
+    "tests/unit/test_g5_legacy_checks_retirement.py",
+    "tests/integration/test_g5_legacy_checks_retirement_e2e.py",
+    "tests/unit/test_hermetic_runtime.py",
+    "tests/unit/test_common.py",
+    "tests/unit/test_legacy_entrypoint_simplification.py",
+    "tests/unit/test_semantic_gate.py",
+    "tests/unit/test_architecture_gate.py",
+    "tests/unit/test_clean_env_gate.py",
+    "tests/acceptance/test_control_bootstrap.py",
+    "tests/contract/test_gold_evaluator.py",
+    "tests/contract/test_gold_mutations.py",
+    "tests/contract/test_legacy_caller_reachability.py",
+    ".planning/g5-cwp-checks/task_plan.md",
+    ".planning/g5-cwp-checks/findings.md",
+    ".planning/g5-cwp-checks/progress.md",
+    ".planning/g5-cwp-checks/HANDOFF.md",
+    ".planning/g5-cwp-checks/main_wiring.md",
+    ".planning/g5-cwp-checks/retirement_map.json",
+    ".planning/g5-cwp-checks/handoff.json"
+  ],
+  "public_contracts": [
+    {
+      "name": "scripts/{semantic_gate,architecture_gate,clean_env_gate,gold_gate,test_framework,batch_process}.py direct invocation",
+      "compatibility": "retired",
+      "detail": "legacy arguments, --help and python -S all print LEGACY_ENGINEERING_TOOL_RETIRED and exit 78 before argv is parsed; no argparse usage, no receipt, no candidate copy, no model/Store/downloader construction."
+    },
+    {
+      "name": "import and main() of the six retired shells",
+      "compatibility": "retired",
+      "detail": "import succeeds with the project dependency stack blocked by a meta_path finder and initialises nothing; main() returns 78, prints the marker and performs zero writes or connections."
+    },
+    {
+      "name": "writer_policy.CONTROL_TOOL_ALLOWLIST",
+      "compatibility": "compatible_extension",
+      "detail": "architecture_gate.py, clean_env_gate.py and semantic_gate.py removed (no longer supported control tools); the five other allowlist entries unchanged."
+    },
+    {
+      "name": "writer_policy.RETIRED_ENGINEERING_TOOL_SCRIPTS",
+      "compatibility": "compatible_extension",
+      "detail": "New category containing exactly the six names; legacy_script_execution_allowed returns False for them and blocked_message reports the engineering retirement marker. PERMANENTLY_RETIRED_SCRIPTS (R1-R5) is byte-for-byte unchanged."
+    },
+    {
+      "name": "clean_env_gate.sanitized_environment",
+      "compatibility": "retired",
+      "detail": "Implementation moved to tests/support/isolated_environment.py, a test-only stdlib helper; behaviour (strip *_API_KEY, drop COMPANY_WIKI_WRITE_MODE/LEGACY_WRITERS, pin PIP_NO_INDEX/PYTHON_DOTENV_DISABLED/COMPANY_WIKI_NETWORK/COMPANY_WIKI_REAL_LLM/NO_PROXY) is unchanged and still consumed by the hermetic runtime tests."
+    },
+    {
+      "name": "tests/helpers/gold_evaluator.py evaluate/load_gold/receipt_sha256",
+      "compatibility": "unchanged",
+      "detail": "Real evaluation algorithm untouched (no CLI receipt coupling existed inside it); its independent counterexamples remain contract tests and are no longer a release-signoff service."
+    },
+    {
+      "name": "control/architecture.json",
+      "compatibility": "retired",
+      "detail": "Deleted after confirming scripts/architecture_gate.py:87 was the only code consumer; control/README.md keeps the historical/current note. artifacts/gates/*.json snapshots that mention it are immutable history and were not edited."
+    },
+    {
+      "name": "public entry points, hooks and CI",
+      "compatibility": "unchanged",
+      "detail": "pyproject [project.scripts], .pre-commit-config.yaml, .github/workflows/ci.yml, .githooks/pre-push, tools/pre_push_gate.py and src/** were not modified; no new CLI, flag, approval variable, quality service or signature schema was added."
+    }
+  ],
+  "tests": [
+    {
+      "name": "G5 retirement unit behaviour RED (before implementation)",
+      "command": "python -m pytest tests/unit/test_g5_legacy_checks_retirement.py -q --tb=line --basetemp .planning/test-tmp/g5-checks",
+      "status": "red",
+      "exit_code": 1,
+      "elapsed_seconds": 11.36,
+      "passed": 1,
+      "failed": 53,
+      "skipped": 0,
+      "replace_seams": [
+        "subprocess sys.executable launched in an isolated empty tmp cwd",
+        "runpy trap harness blocking Path/os/shutil writes and socket/urllib connections",
+        "meta_path blocker raising ImportError for the project dependency stack"
+      ],
+      "external_network_requests": 0
+    },
+    {
+      "name": "G5 retirement unit behaviour GREEN (after implementation)",
+      "command": "python -m pytest tests/unit/test_g5_legacy_checks_retirement.py -q --tb=short --basetemp .planning/test-tmp/g5-checks",
+      "status": "green",
+      "exit_code": 0,
+      "elapsed_seconds": 9.24,
+      "passed": 54,
+      "failed": 0,
+      "skipped": 0,
+      "replace_seams": [
+        "subprocess sys.executable launched in an isolated empty tmp cwd",
+        "runpy trap harness blocking Path/os/shutil writes and socket/urllib connections",
+        "meta_path blocker raising ImportError for the project dependency stack"
+      ],
+      "external_network_requests": 0
+    },
+    {
+      "name": "centralized G5 responsibility set (new unit/integration + retained hermetic/common/writer-freeze/legacy-caller + gold evaluator/mutations + precisely migrated legacy-entrypoint and acceptance)",
+      "command": "python -m pytest tests/unit/test_g5_legacy_checks_retirement.py tests/integration/test_g5_legacy_checks_retirement_e2e.py tests/unit/test_hermetic_runtime.py tests/unit/test_common.py tests/unit/test_writer_freeze.py tests/unit/test_legacy_entrypoint_simplification.py tests/contract/test_legacy_caller_reachability.py tests/contract/test_gold_evaluator.py tests/contract/test_gold_mutations.py tests/acceptance/test_control_bootstrap.py -q --tb=short --basetemp .planning/test-tmp/g5-checks",
+      "status": "green",
+      "exit_code": 0,
+      "elapsed_seconds": 59.34,
+      "passed": 295,
+      "failed": 0,
+      "skipped": 0,
+      "replace_seams": [
+        "subprocess with sanitized child environment (no *_API_KEY, PYTHONPATH dropped, PYTHON_DOTENV_DISABLED=1, COMPANY_WIKI_NETWORK=blocked, COMPANY_WIKI_REAL_LLM=0)",
+        "socket/urllib trap harness",
+        "tests/conftest.py autouse hermetic socket block"
+      ],
+      "external_network_requests": 0
+    },
+    {
+      "name": "CI unit suite",
+      "command": "python -m pytest tests/unit -q --tb=short --basetemp .planning/test-tmp/g5-checks",
+      "status": "green",
+      "exit_code": 0,
+      "elapsed_seconds": 155.85,
+      "passed": 1955,
+      "failed": 0,
+      "skipped": 0,
+      "replace_seams": [
+        "tests/conftest.py autouse hermetic socket block",
+        "subprocess tests use sanitized child environment"
+      ],
+      "external_network_requests": 0
+    },
+    {
+      "name": "CI fast contract smoke (pre-push gate)",
+      "command": "python tools/pre_push_gate.py --fast-contracts-only",
+      "status": "green",
+      "exit_code": 0,
+      "elapsed_seconds": null,
+      "passed": null,
+      "failed": null,
+      "skipped": null,
+      "replace_seams": [
+        "gate runs pytest with a repository-local short --basetemp and -p no:cacheprovider"
+      ],
+      "external_network_requests": 0
+    },
+    {
+      "name": "ruff, CI lint scope",
+      "command": "ruff check src tests/unit tests/contract tests/e2e scripts tests/integration/test_narrative_runtime_e2e.py tests/support/narrative_model_fixture.py",
+      "status": "green",
+      "exit_code": 0,
+      "elapsed_seconds": null,
+      "passed": null,
+      "failed": null,
+      "skipped": null,
+      "replace_seams": [],
+      "external_network_requests": 0
+    },
+    {
+      "name": "ruff, in-write-set files outside the CI lint scope",
+      "command": "ruff check tests/support/isolated_environment.py tests/integration/test_g5_legacy_checks_retirement_e2e.py tests/acceptance/test_control_bootstrap.py",
+      "status": "green",
+      "exit_code": 0,
+      "elapsed_seconds": null,
+      "passed": null,
+      "failed": null,
+      "skipped": null,
+      "replace_seams": [],
+      "external_network_requests": 0
+    },
+    {
+      "name": "compileall src scripts tests",
+      "command": "python -m compileall -q src scripts tests",
+      "status": "green",
+      "exit_code": 0,
+      "elapsed_seconds": null,
+      "passed": null,
+      "failed": null,
+      "skipped": null,
+      "replace_seams": [],
+      "external_network_requests": 0
+    },
+    {
+      "name": "host assumption guard (FC-1307-a)",
+      "command": "python scripts/host_assumption_guard.py",
+      "status": "green",
+      "exit_code": 0,
+      "elapsed_seconds": null,
+      "passed": null,
+      "failed": null,
+      "skipped": null,
+      "replace_seams": [],
+      "external_network_requests": 0
+    },
+    {
+      "name": "config doctor in the CI-equivalent environment",
+      "command": "CI=true PYTHONPATH=src python scripts/config_doctor.py",
+      "status": "green",
+      "exit_code": 0,
+      "elapsed_seconds": null,
+      "passed": null,
+      "failed": null,
+      "skipped": null,
+      "replace_seams": [],
+      "external_network_requests": 0
+    },
+    {
+      "name": "config doctor without CI=true in a fresh worktree (environment fact, not a card regression)",
+      "command": "PYTHONPATH=src python scripts/config_doctor.py",
+      "status": "blocked",
+      "exit_code": 1,
+      "elapsed_seconds": null,
+      "passed": null,
+      "failed": null,
+      "skipped": null,
+      "replace_seams": [],
+      "external_network_requests": 0
+    }
+  ],
+  "protection": {
+    "owner_files": [
+      {
+        "path": "scripts/common.py",
+        "before_sha256": "075c7fc9394760b46e38268f7df2d011e9a8c75ea85e6c3f1189b86eb6f99b7d",
+        "after_sha256": "075c7fc9394760b46e38268f7df2d011e9a8c75ea85e6c3f1189b86eb6f99b7d"
+      },
+      {
+        "path": "scripts/sitecustomize.py",
+        "before_sha256": "233b39533a27e8d1db08fe4e698ed64fa4886e75ddeaf88fa0ab38753bbe4781",
+        "after_sha256": "233b39533a27e8d1db08fe4e698ed64fa4886e75ddeaf88fa0ab38753bbe4781"
+      },
+      {
+        "path": "tests/helpers/gold_evaluator.py",
+        "before_sha256": "a1b037562a45eb0aec78d7ff425661ed1fb174c7d5684ba000ce2d8577a91044",
+        "after_sha256": "a1b037562a45eb0aec78d7ff425661ed1fb174c7d5684ba000ce2d8577a91044"
+      },
+      {
+        "path": "tools/pre_push_gate.py",
+        "before_sha256": "e156006efe2de36837fefdd827eaa29b3f4db5cfb0f3edaf506164155ae18ae9",
+        "after_sha256": "e156006efe2de36837fefdd827eaa29b3f4db5cfb0f3edaf506164155ae18ae9"
+      },
+      {
+        "path": ".pre-commit-config.yaml",
+        "before_sha256": "ecb4f155b2711406b834b8ed8bcb7c23d3702c6f515cf154972768ace671c021",
+        "after_sha256": "ecb4f155b2711406b834b8ed8bcb7c23d3702c6f515cf154972768ace671c021"
+      },
+      {
+        "path": ".github/workflows/ci.yml",
+        "before_sha256": "0ab0e193e7bd53feb0bf6367aa2250865674d861483cfb9bc426f505968f2025",
+        "after_sha256": "0ab0e193e7bd53feb0bf6367aa2250865674d861483cfb9bc426f505968f2025"
+      },
+      {
+        "path": ".githooks/pre-push",
+        "before_sha256": "4df43889718c59075319eaeb1c5963b55cff4bbba30537c262861c48fcf7aadf",
+        "after_sha256": "4df43889718c59075319eaeb1c5963b55cff4bbba30537c262861c48fcf7aadf"
+      },
+      {
+        "path": "pyproject.toml",
+        "before_sha256": "9d6fa3e0fefe530331b4e80347292111466cc6f71d823206443f409f429a9f65",
+        "after_sha256": "9d6fa3e0fefe530331b4e80347292111466cc6f71d823206443f409f429a9f65"
+      },
+      {
+        "path": "config/source_catalog.yaml",
+        "before_sha256": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+        "after_sha256": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968"
+      },
+      {
+        "path": "src/company_wiki/source_catalog/architecture_gate.py",
+        "before_sha256": "7fe30a9f611851d19d8942e8f431fac426220d553dd6b7af4f160c096fe63818",
+        "after_sha256": "7fe30a9f611851d19d8942e8f431fac426220d553dd6b7af4f160c096fe63818"
+      },
+      {
+        "path": "src/company_wiki/deployment.py",
+        "before_sha256": "fe20585e798188bab9df7b6ffd6c613f84dc978a8cfcc52bfcdb711e01d7ec56",
+        "after_sha256": "fe20585e798188bab9df7b6ffd6c613f84dc978a8cfcc52bfcdb711e01d7ec56"
+      },
+      {
+        "path": "tests/contract/test_gold_corpus.py",
+        "before_sha256": "d5c5f7f2dd61143d2ffeec22ae1f977e3138fc0802f61e3b1a953c31d7819bdc",
+        "after_sha256": "d5c5f7f2dd61143d2ffeec22ae1f977e3138fc0802f61e3b1a953c31d7819bdc"
+      },
+      {
+        "path": "tests/unit/test_deployment.py",
+        "before_sha256": "084490486df9d059dde5028404c060879651d0cc86962afedd5ead021204a1dd",
+        "after_sha256": "084490486df9d059dde5028404c060879651d0cc86962afedd5ead021204a1dd"
+      }
+    ],
+    "production_writes": 0,
+    "raw_deletions": 0,
+    "paid_calls": 0
+  },
+  "cleanup": [
+    {
+      "path": "C:/Users/郑曾波/Projects/_g5/cwp/.planning/test-tmp/g5-checks",
+      "before": "absent",
+      "after": "absent",
+      "owned": true,
+      "detail": "本卡短 basetemp 根；删除前校验 absolute、包含工作树、basename 为 g5-checks、非 reparse point，只读夹具对象先 chmod 再删；复核 absent。"
+    },
+    {
+      "path": "C:/Users/郑曾波/Projects/_g5/cwp/.planning/test-tmp",
+      "before": "absent",
+      "after": "absent",
+      "owned": true,
+      "detail": "父目录由本卡创建；删除 g5-checks 后为空，一并删除并复核 absent。"
+    },
+    {
+      "path": "C:/Users/郑曾波/Projects/_g5/cwp/.source_catalog",
+      "before": "absent",
+      "after": "absent",
+      "owned": true,
+      "detail": "config_doctor 诊断期间临时 mkdir 空目录，复核后 rmdir；未复制原仓生产数据。"
+    },
+    {
+      "path": "C:/Users/郑曾波/Projects/_g5/cwp/control/architecture.json",
+      "before": "present",
+      "after": "absent",
+      "owned": true,
+      "detail": "按卡删除：全仓唯一代码消费者是退休的 scripts/architecture_gate.py；原文在 Git 历史，未复制 archive。"
+    },
+    {
+      "path": "C:/Users/郑曾波/Projects/_g5/cwp/.planning/g5-cwp-checks",
+      "before": "absent",
+      "after": "preserved",
+      "owned": true,
+      "detail": "本卡交接目录（task_plan/findings/progress/HANDOFF/handoff/main_wiring/retirement_map），已提交，未当 temp 删除。"
+    },
+    {
+      "path": "C:/Users/郑曾波/Projects/company-wiki/.planning/g2-latest-red 等原仓 untracked",
+      "before": "present",
+      "after": "preserved",
+      "owned": false,
+      "detail": "原仓 G2-12 未提交改动与 untracked 未被复制进本工作树，未触碰。"
+    }
+  ],
+  "main_wiring": [
+    {
+      "repo": "company-wiki",
+      "path": "src/company_wiki/deployment.py",
+      "action": "no_change",
+      "symbol": "LEGACY_ENTRIES (含 \"batch_process.py\" 字面量)",
+      "reason": "退役报告只输出名字字符串，不依赖文件存在也不 import；src/** 禁写。可复现：python -m pytest tests/unit/test_deployment.py -q 全绿。"
+    },
+    {
+      "repo": "company-wiki",
+      "path": "docs/implementation/g4-cwp-pipeline/retirement_map.json",
+      "action": "verify",
+      "symbol": "scripts/test_framework.py:109,139; scripts/batch_process.py:110",
+      "reason": "G4 把二者记为仍以子进程命令串引用 scripts/full_pipeline.py 并建议下一卡整族退休；本卡即那一卡，命令串随实现消失。历史交付文档不在写集内，不回改。"
+    },
+    {
+      "repo": "company-wiki",
+      "path": "docs/contracts/legacy-caller-reachability-v1.md",
+      "action": "verify",
+      "symbol": "test_framework.py",
+      "reason": "合同把它列为未正规化混合旧入口；行为结论（legacy_script_execution_allowed 恒 False）不变，分类措辞已过时，文档不在写集内。"
+    },
+    {
+      "repo": "company-wiki",
+      "path": "control/architecture.json",
+      "action": "no_change",
+      "symbol": "scripts/architecture_gate.py:87 (--config 默认值)",
+      "reason": "唯一代码消费者是退休工具，已按卡删除；hook/CI/tools/pre_push_gate.py 均无引用，artifacts/gates/*.json 中的命中是不可变历史快照。"
+    },
+    {
+      "repo": "company-wiki",
+      "path": "scripts/sitecustomize.py",
+      "action": "verify",
+      "symbol": "enforce_direct_cli(\"__main__\", sys.argv[0])",
+      "reason": "三个 gate 移出 CONTROL_TOOL_ALLOWLIST 后自动被拦截，blocked_message 新分支给出工程退休 banner；实测 plain 启动 exit 78 + LEGACY_ENGINEERING_TOOL_RETIRED。"
+    },
+    {
+      "repo": "company-wiki",
+      "path": "scripts/config_doctor.py",
+      "action": "verify",
+      "symbol": "catalog_dir / security_master 检查",
+      "reason": "环境事实：.source_catalog/ 被 .gitignore 忽略，新鲜工作树没有；非 CI 环境 exit 1，CI=true 时 :57 跳过该分支且实测 exit 0。本卡未改 config/** 与 config_doctor.py。"
+    },
+    {
+      "repo": "company-wiki",
+      "path": ".pre-commit-config.yaml",
+      "action": "no_change",
+      "symbol": "ruff files 正则",
+      "reason": "已覆盖新增 tests/unit/test_g5_legacy_checks_retirement.py 与 scripts/*.py；tests/support、tests/integration（除已列名）、tests/acceptance 不在 scope，已单独手跑 ruff 全绿。hook 禁写。"
+    },
+    {
+      "repo": "company-wiki",
+      "path": ".github/workflows/ci.yml",
+      "action": "no_change",
+      "symbol": "CLI smoke test (collect_news.py --help)",
+      "reason": "该冒烟针对 collect_news.py，不在本卡六名内，行为未变；六名由 tests/unit/test_g5_legacy_checks_retirement.py 覆盖。CI 禁写。"
+    },
+    {
+      "repo": "company-wiki",
+      "path": ".githooks/pre-push",
+      "action": "no_change",
+      "symbol": "tools/pre_push_gate.py --fast-contracts-only",
+      "reason": "清单不含 gold/gate 测试；实测 GREEN。禁写。"
+    },
+    {
+      "repo": "company-wiki",
+      "path": "pyproject.toml",
+      "action": "no_change",
+      "symbol": "[project.scripts]",
+      "reason": "未新增 CLI 入口或签名；禁写。"
+    },
+    {
+      "repo": "company-wiki",
+      "path": "artifacts/gates/*.json",
+      "action": "no_change",
+      "symbol": "control/architecture.json 与六个 scripts/*.py 历史条目",
+      "reason": "历史收据含旧文件 sha/清单，属 immutable raw 语义，不得因本卡编辑。"
+    }
+  ],
+  "remaining": [
+    "MAIN 负责最终合入：接收 codex/g5-cwp-checks 完整提交历史，集中验收后合 master、核精确代码 CI、更新总 PWF；本卡未自行合 master、未推 master。",
+    "原仓 G2-12 仍未提交（8 个改动 + 6 个 untracked），本卡未复制也未处理；MAIN 总目标仍 paused。",
+    "本卡只退休这六个旧工程门禁/批处理外壳，不能宣称全面门禁都已取消：.pre-commit-config.yaml、.githooks/pre-push、tools/pre_push_gate.py、.github/workflows/ci.yml 与 src/company_wiki/source_catalog/architecture_gate.py 的现行检查全部保留且未改动。",
+    "main_wiring 中 11 条均为 no_change/verify，没有需要 MAIN 追加的工程清单接线；G4 记录的 test_framework/batch_process → full_pipeline 残余子进程调用已随本卡消失。",
+    "环境事实：config_doctor 在新鲜工作树非 CI 环境下因缺少 gitignored 的 .source_catalog 而 exit 1，CI=true 下 exit 0；是否要在仓库层面处理由 MAIN 决定。",
+    "未跑全契约套件与真实模型用例（按卡不重跑）；CI 之外的长集成由 MAIN 决定。"
+  ],
+  "delivery_status": "ready_for_main"
+}
