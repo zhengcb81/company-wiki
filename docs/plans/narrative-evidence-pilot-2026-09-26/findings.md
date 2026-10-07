@@ -1,5 +1,16 @@
 # Findings：当前事实与待验证项
 
+**最新G3验收（2026-10-07）：**三个包已接收并补齐MAIN接线，两个本地主线已并入。RF `ab7a7a44`已正常推远端main（107快测绿）；CWP接线代码`b2c9e66`，115责任用例最终绿、1921单元绿，正在正常发布。详情见[g3_main_acceptance](g3_main_acceptance_2026-10-07.md)。G3不再派发；G2-04旧维护退休已完成，R4依据现有注册重复上界决定不做对象化迁移（不是释放空间）。RF真实用户安装未同步；G2-12/其他G2、R2元数据生产应用、R3和R5仍未完成。目标服务保持paused，本次仅执行用户明确要求的G3验收，并未恢复总目标/付费/生产批次。
+
+本次实际证据：RF78责任绿+107正常prepush绿；CWP115责任用例并集绿+1921 Unit绿。主目录G2未完成源码/测试、owner配置和RF三日志均保留；唯一重叠CLI增删补丁44行前后相同。保护及恢复细节见g3_main_acceptance与before/after JSON。
+
+
+## 最新：G3三份正式交接已收到（2026-10-07）
+
+RF实现e9f94059/交接tip4a936395，CWP-MAINT实现245a7f77/tip34d020f，SOURCE-FACTS tip3292eb5；三工作树clean，实际diff各落独占写集。RF74责任绿但W1版本manifest集合仍含tests、W2测试写真实安装目录，预push105pass/2fail缺邻仓且base同样；CWP35核心绿，公共CLI/help仍待接线，旧store文本计数3<4是历史测试问题，不应加无用store访问。SOURCE-FACTS55绿，S05/S06融资/S07身份有提案；内部重复上界98845393B、实读36191979B、allocated/releasable unknown，0删除。新256MiB阈值仅外线决策代理，不采纳为项目门。
+
+本次用户查收授权按[g3_main_acceptance](g3_main_acceptance_2026-10-07.md)验收/必要接线并线，不恢复paused总目标或生产paid。未提交获取线与配置、RF日志、G4/Dayu/IQS保持。长交接工具首次合并输出截断，后按每包摘要和准确HANDOFF/wiring读，不把截断内容当已审完整报告。
+
 ## 最新：新增独立包前的实际归属核对（2026-10-07）
 
 用户再次请求可独立开工的大任务。本次实读发现 `_g3/RF-ASSURANCE`、`_g3/CWP-MAINT`、`_g3/SOURCE-FACTS` 三工作树均已建立；RF与SOURCE-FACTS已有本卡 task_plan，尚未见交接。此前“未创建工作树”已是历史，不能重复派发这三卡。MAIN未提交获取线、owner配置及五个自身pytest目录保持。目标服务实读paused；本次只编制新施工包，不自动继续生产或付费实施。

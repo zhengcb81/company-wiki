@@ -1,5 +1,14 @@
 # Progress：激进简化实施
 
+**最新G3验收（2026-10-07）：**三个包已接收并补齐MAIN接线，两个本地主线已并入。RF `ab7a7a44`已正常推远端main（107快测绿）；CWP接线代码`b2c9e66`，115责任用例最终绿、1921单元绿，正在正常发布。详情见[g3_main_acceptance](g3_main_acceptance_2026-10-07.md)。G3不再派发；G2-04旧维护退休已完成，R4依据现有注册重复上界决定不做对象化迁移（不是释放空间）。RF真实用户安装未同步；G2-12/其他G2、R2元数据生产应用、R3和R5仍未完成。目标服务保持paused，本次仅执行用户明确要求的G3验收，并未恢复总目标/付费/生产批次。
+
+本次实际证据：RF78责任绿+107正常prepush绿；CWP115责任用例并集绿+1921 Unit绿。主目录G2未完成源码/测试、owner配置和RF三日志均保留；唯一重叠CLI增删补丁44行前后相同。保护及恢复细节见g3_main_acceptance与before/after JSON。
+
+
+## 最新：G3三个交付MAIN验收启动（2026-10-07）
+
+用户报告三包全部完成。实际三工作树clean、完整提交与HANDOFF/handoff.json均存在；读Git diff及集中责任/真实pending，建立[g3_main_acceptance](g3_main_acceptance_2026-10-07.md)。本次完成查收/验收/必要接线及并线，不恢复paused整体目标，不改production/paid；G2-12与owner配置/RF日志保留。RF安装版本集/真实安装测试及邻仓缺失、CWP公共CLI/指纹与旧文本计数、来源报告生产提案/空间decision为本次具体责任，不重复已绿全仓包。
+
 ## 最新：新增G4两项独立大卡（2026-10-07）
 
 用户请求互不影响的大施工包。实读G3三个工作树已经存在，RF/SOURCE-FACTS有自身计划、无完整交接，修正旧“未创建”状态，不重复分派。新G4-CWP-PIPELINE承担既有G2-03整族退休、真实-S入口/解析反例/部署报告；G4-SID-LATEST承担已证CN fiscal_year强制导致的latest季度/H1与年初年报缺口，定义官方as-of有限窗口、分页完整性、共享预算、真实JSON CLI和1.3.0路由交接。两个独占新根/分支、源码/test写集互不包含，也不占G3/MAIN接口/总PWF/生产；单卡各自有PWF、TDD、一次集中验收、finally恢复与机器交接。未创建G4工作树、未启动harness、未运行模型或写外仓。

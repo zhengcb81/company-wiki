@@ -1,10 +1,13 @@
 # G2：门禁与权限全面补漏及优先实施单
 
+**最新G3验收（2026-10-07）：**三个包已接收并补齐MAIN接线，两个本地主线已并入。RF `ab7a7a44`已正常推远端main（107快测绿）；CWP接线代码`b2c9e66`，115责任用例最终绿、1921单元绿，正在正常发布。详情见[g3_main_acceptance](g3_main_acceptance_2026-10-07.md)。G3不再派发；G2-04旧维护退休已完成，R4依据现有注册重复上界决定不做对象化迁移（不是释放空间）。RF真实用户安装未同步；G2-12/其他G2、R2元数据生产应用、R3和R5仍未完成。目标服务保持paused，本次仅执行用户明确要求的G3验收，并未恢复总目标/付费/生产批次。
+
+
 **状态：审计完成；实施 in_progress。优先级：P0，先于 R2 生产来源准备、R3 摘要运行和 R4 可选去重。**
 
 这是 2026-10-07 用户“全面审查、查缺补漏、加到 PWF 并提高优先级”的实际施工入口。G1 的已发布成果继续有效，但其“约定范围完成”不能代表所有遗留机制已清空。目标服务最新实读active，当前顺序仍为G2→R2→R3→R4→R5，不增加角色、人工签收、授权文件或逐小节点检查。
 
-上一批[G2三包](harness_lanes/g2_parallel_packages_2026-10-07.md)均已验收并线，SW/SQA日常门和RF可选工具完成。新[G3总包](harness_lanes/g3_parallel_packages_2026-10-07.md)ready：RF历史质量/包装、CWP维护后端、来源/空间只读调查；尚未分派，不重派旧卡。MAIN继续12/CLI/FF/指纹/hook清单、其他退休家族、总PWF/生产/安装/并线；13/01b已发布。
+上一批[G2三包](harness_lanes/g2_parallel_packages_2026-10-07.md)均已验收并线，SW/SQA日常门和RF可选工具完成。此前发布的[G3总包](harness_lanes/g3_parallel_packages_2026-10-07.md)已验收：RF历史质量/包装、CWP维护后端、来源/空间只读调查；本批不再分派，见顶部接收记录。MAIN继续12/CLI/FF/指纹/hook清单、其他退休家族、总PWF/生产/安装/并线；13/01b已发布。
 
 ## 1. 审计范围和证据
 
@@ -87,6 +90,8 @@ HEAD/文件 SHA/工作树/现场 policy 原文见[只读审计收据](harness_la
 `deployment.generate_retirement_report`仍推荐旧scheduler/ingest，同步换成当前来源CLI；不把旧部署说明作为重启无限worker的授权。
 
 ### G2-04 / P1：公开旧维护命令和特例审查
+
+**本组已完成（G3验收）：**库层旧写链退休、公共help/具名无配置退休、只读inventory、公司特例诊断及worker指纹同步已接入主线；旧调用0写，不重新提示token/签收。历史现状描述保留在下方，不代表当前还开放这些写命令。工程其他家族/FF兼容和真实安装仍独立待办。
 
 独立库层施工见[G3-CWP-MAINT](harness_lanes/g3_cwp_maintenance_retirement.md)，ready可开工；它不写cli.py/code_identity/hook/CI，交统一退休异常和精确wiring表，MAIN同次接线验收发布。只读清单与历史journal保留，原件0删除。
 

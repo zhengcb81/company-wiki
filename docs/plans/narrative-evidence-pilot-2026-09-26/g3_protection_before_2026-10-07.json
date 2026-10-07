@@ -1,0 +1,100 @@
+[
+  {
+    "repo": "company-wiki",
+    "path": "config/source_acquisition.yaml",
+    "sha": "3609e707466eeb3e0f685e14f2637c6afa39ba900edef1be4814433a43300a01",
+    "size": 1213,
+    "mtime": "2026-10-07T12:19:42.6149328Z"
+  },
+  {
+    "repo": "company-wiki",
+    "path": "src/company_wiki/source_catalog/acquisition.py",
+    "sha": "e78918bfd7d3d77145753f8ca957c14cc9ca8adf8cd6d13e858308e450cf032f",
+    "size": 33743,
+    "mtime": "2026-10-07T12:19:42.6184929Z"
+  },
+  {
+    "repo": "company-wiki",
+    "path": "src/company_wiki/source_catalog/acquisition_service.py",
+    "sha": "b9693ec0f3a536a8e802af964cc1640cda192db65471c5ef8f93571686104938",
+    "size": 11086,
+    "mtime": "2026-10-07T12:19:42.6195946Z"
+  },
+  {
+    "repo": "company-wiki",
+    "path": "src/company_wiki/source_catalog/cli.py",
+    "sha": "f631405cfa12d9d9e058d5cec241a1cad7fb55505addae8217742e7b6be15a80",
+    "size": 60333,
+    "mtime": "2026-10-07T12:19:42.6214309Z"
+  },
+  {
+    "repo": "company-wiki",
+    "path": "src/company_wiki/source_catalog/close_gap.py",
+    "sha": "25e8e06abdf5b8b11c3689d9c51df27a65b2109d82c41f1bb36b67d668dcbf11",
+    "size": 7851,
+    "mtime": "2026-10-07T12:19:42.6224715Z"
+  },
+  {
+    "repo": "company-wiki",
+    "path": "tests/contract/test_close_gap_concurrency_fc804.py",
+    "sha": "05164b96f5230a9feb9f101ded2a8e5f0d8d61f8005d676b4d9291164f7c8584",
+    "size": 16547,
+    "mtime": "2026-10-07T12:19:42.6236384Z"
+  },
+  {
+    "repo": "company-wiki",
+    "path": "tests/contract/test_close_gap_fc801.py",
+    "sha": "a816ee5f57c89aa8f62ea3d2d035a408ca866ba4a4ed988b80899566d41c0e2d",
+    "size": 15397,
+    "mtime": "2026-10-07T12:19:42.6246478Z"
+  },
+  {
+    "repo": "company-wiki",
+    "path": "tests/contract/test_source_catalog_acquisition.py",
+    "sha": "47008f720b140d778f54a8bbca6d8ca2e6710a254f7b23df9f611535a92d3e32",
+    "size": 21746,
+    "mtime": "2026-10-07T12:19:42.6256588Z"
+  },
+  {
+    "repo": "company-wiki",
+    "path": "tests/contract/test_source_catalog_download_authorization.py",
+    "sha": "812a23e584392b8475c192ed0fe666f370296eddbb2271d615a1b1600a8178b4",
+    "size": 12074,
+    "mtime": "2026-10-07T12:19:42.6266595Z"
+  },
+  {
+    "repo": "company-wiki",
+    "path": "tests/contract/test_source_catalog_gap_plan.py",
+    "sha": "e359274331b93c797d8b2e76622f1b9d6482f239e338a15efe76002cfc414078",
+    "size": 24989,
+    "mtime": "2026-10-07T12:19:42.6286584Z"
+  },
+  {
+    "repo": "company-wiki",
+    "path": "tests/contract/test_single_intent_latest_acquisition.py",
+    "sha": "85c8782c07065f66394e3de74eb99a7884faddda0b88addd3631c5e223ae91f0",
+    "size": 18602,
+    "mtime": "2026-10-07T11:48:11.6789111Z"
+  },
+  {
+    "repo": "revenue-forecast",
+    "path": "assurance/runs/daily_alert.jsonl",
+    "sha": "0aee073f56c133786365ab96899edf4d91c0f9e1a0e13ab61b2a6bffd8316270",
+    "size": 1143,
+    "mtime": "2026-10-06T21:03:15.9684816Z"
+  },
+  {
+    "repo": "revenue-forecast",
+    "path": "assurance/runs/weekly_alert.jsonl",
+    "sha": "b617b0b00ff1a758b5b46299e3e5db3115f56efd90d212154abe988e5ea9fee5",
+    "size": 753,
+    "mtime": "2026-10-04T03:30:23.2816204Z"
+  },
+  {
+    "repo": "revenue-forecast",
+    "path": "assurance/runs/weekly_manifest.json",
+    "sha": "0d55cb8c81f12b663e330819da3037bb69ce8564ac41a686b578a99f78f948bf",
+    "size": 364,
+    "mtime": "2026-10-04T03:30:23.2776178Z"
+  }
+]

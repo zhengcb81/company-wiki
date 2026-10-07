@@ -1,14 +1,17 @@
 # 公司来源平台：当前总计划
 
-> **最新分包状态（2026-10-07）：**目标服务此刻实读paused；本次按用户请求只编制新施工包，不自动继续生产/付费。G3三工作树已建立、待交接，旧“未创建/未启动”仅历史。新增[G4两张独立大卡](harness_lanes/g4_parallel_packages_2026-10-07.md)ready：CWP冻结Pipeline整族退休、SID按as-of发现最新财报，可现在分别交给两个harness；源码写集与G3/MAIN互不重叠。后续明确恢复总目标时仍按G2→R2→R3→R4→R5，未提交G2-12及owner文件保留。
+**最新G3验收（2026-10-07）：**三个包已接收并补齐MAIN接线，两个本地主线已并入。RF `ab7a7a44`已正常推远端main（107快测绿）；CWP接线代码`b2c9e66`，115责任用例最终绿、1921单元绿，正在正常发布。详情见[g3_main_acceptance](g3_main_acceptance_2026-10-07.md)。G3不再派发；G2-04旧维护退休已完成，R4依据现有注册重复上界决定不做对象化迁移（不是释放空间）。RF真实用户安装未同步；G2-12/其他G2、R2元数据生产应用、R3和R5仍未完成。目标服务保持paused，本次仅执行用户明确要求的G3验收，并未恢复总目标/付费/生产批次。
+
+
+> **此前分包记录（G3验收前）：**目标服务此刻实读paused；本次按用户请求只编制新施工包，不自动继续生产/付费。G3三工作树已建立、待交接，旧“未创建/未启动”仅历史。新增[G4两张独立大卡](harness_lanes/g4_parallel_packages_2026-10-07.md)ready：CWP冻结Pipeline整族退休、SID按as-of发现最新财报，可现在分别交给两个harness；源码写集与G3/MAIN互不重叠。后续明确恢复总目标时仍按G2→R2→R3→R4→R5，未提交G2-12及owner文件保留。
 
 > 本页是唯一当前施工入口。旧步骤、旧预算答复和已交付卡不产生新的任务或人工签收。历史细节保留在 [收敛前版本](https://github.com/zhengcb81/company-wiki/blob/659bcefc9d49a7e7f7fdc58e9c11d46e45da49ab/docs/plans/narrative-evidence-pilot-2026-09-26/task_plan.md)、findings/progress 和阶段收据中。
 
 ## 当前最高优先级：G2 门禁全面补漏（2026-10-07）
 
-**目标服务最新实读active。当前次序为G2/P0→R2生产准备→R3正式运行→R4收益决策→R5收口。** 已审查八仓入口/生产配置/工程检查/两份安装技能；旧canary现场已迁移，默认steady/有效pin/AUTO机器错误/派生质量/版本化终态恢复核心代码93ac5a5已正常推送，精确CI37590638806全部步骤绿90秒。StockWiki/StockQA日常全套、联网hook和隐藏阈值升P0-B，具体工具/默认配置/AGENTS同步写集已加[G2实施单](gate_simplification_reaudit_2026-10-07.md)，仅两个大节点。[原审计收据](harness_lanes/results/g2_gate_reaudit_2026-10-07.json)、[现场迁移](harness_lanes/results/g2_steady_production_migration_2026-10-07.json)和[核心实现验收](harness_lanes/results/g2_core_implementation_acceptance_2026-10-07.json)各自明确证明范围。
+**此前恢复运行时点实读active（本次保持paused）。当前次序为G2/P0→R2生产准备→R3正式运行→R4收益决策→R5收口。** 已审查八仓入口/生产配置/工程检查/两份安装技能；旧canary现场已迁移，默认steady/有效pin/AUTO机器错误/派生质量/版本化终态恢复核心代码93ac5a5已正常推送，精确CI37590638806全部步骤绿90秒。StockWiki/StockQA日常全套、联网hook和隐藏阈值升P0-B，具体工具/默认配置/AGENTS同步写集已加[G2实施单](gate_simplification_reaudit_2026-10-07.md)，仅两个大节点。[原审计收据](harness_lanes/results/g2_gate_reaudit_2026-10-07.json)、[现场迁移](harness_lanes/results/g2_steady_production_migration_2026-10-07.json)和[核心实现验收](harness_lanes/results/g2_core_implementation_acceptance_2026-10-07.json)各自明确证明范围。
 
-**三个独立施工包已由用户分派，待交接：**[StockWiki日常检查](harness_lanes/g2_stockwiki_daily_checks.md)、[StockQA工程入口/workflow](harness_lanes/g2_stockqa_engineering_checks.md)、[RF可选工具](harness_lanes/g2_revenue_forecast_optional_tools.md)。[并行总包](harness_lanes/g2_parallel_packages_2026-10-07.md)定义互不包含的工作树、冻结依赖、输出接口与MAIN接线责任。未代用户启动外部harness；MAIN继续G2-13/01b/CWP和FF共享接口，外线不等待MAIN改代码、不写CWP总PWF。StockWiki是新的剩余范围，不重派已完成旧工程卡。StockQA另外三workflow、RF release_checklist和历史读取器同步责任已纳入单卡。
+**上一批G2施工包分派历史（已验收并线）：**[StockWiki日常检查](harness_lanes/g2_stockwiki_daily_checks.md)、[StockQA工程入口/workflow](harness_lanes/g2_stockqa_engineering_checks.md)、[RF可选工具](harness_lanes/g2_revenue_forecast_optional_tools.md)。[并行总包](harness_lanes/g2_parallel_packages_2026-10-07.md)定义互不包含的工作树、冻结依赖、输出接口与MAIN接线责任。未代用户启动外部harness；MAIN继续G2-13/01b/CWP和FF共享接口，外线不等待MAIN改代码、不写CWP总PWF。StockWiki是新的剩余范围，不重派已完成旧工程卡。StockQA另外三workflow、RF release_checklist和历史读取器同步责任已纳入单卡。
 
 G1历史验收继续有效，但不能宣称全面清理已完成。现场仅小policy变为steady，16有效断言/17事实表/原件/数据库/owner配置不变；S07旧security标签及生产metadata仍待R2。2cad90d/202责任/CI37582474369是此前代码的证据，不能冒充本次新代码已发布。没有新增人工签收，不重复付费模型/已绿大包；Dayu/IQS/原件/owner文件边界保持。
 
