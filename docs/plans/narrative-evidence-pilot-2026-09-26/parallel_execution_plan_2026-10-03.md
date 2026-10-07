@@ -1,16 +1,16 @@
 # 并行总计划：门禁先行，独立目录施工，MAIN统一打通
 
-> **2026-10-07当前：**目标active，先G2再R2/R3/R4/R5。新三卡ready，可现在同时交给三个外部harness；未代用户启动。MAIN独占CWP/FF共享接口、总PWF、生产与并线，继续13/01b。下方原卡/状态为历史，不重派；Dayu/IQS零写。
+> **2026-10-07当前：**目标active，先G2再R2/R3/R4/R5。用户确认三个新包已分派，待交接；MAIN未代用户启动外部harness。MAIN独占CWP/FF共享接口、总PWF、生产与并线，继续13/01b。下方原卡/状态为历史，不重派；Dayu/IQS零写。
 
-## 当前可派发：三个互不重叠的新包
+## 当前已分派：三个互不重叠的新包（待交接）
 
 完整目录/冻结依赖/共同交接见[G2并行总包](harness_lanes/g2_parallel_packages_2026-10-07.md)。各卡单独交付即可实施，不需要其他卡上下文。
 
 | 卡 | 实际独占目录 | 施工范围 | 当前状态 |
 |---|---|---|---|
-| [G2-SW-DAILY](harness_lanes/g2_stockwiki_daily_checks.md) | `Projects/_g2/sw/StockWiki` | 单检查入口、日常/集中分离、指标诊断、真实来源消费者回归 | ready；不是已完成旧工程卡重派 |
-| [G2-SQA-CHECKS](harness_lanes/g2_stockqa_engineering_checks.md) | `Projects/_g2/StockQAbyLLM` | sh/bat/CI/hook统一，真实退出码和关联security/release/docs workflow | ready；不写业务src或IQS |
-| [G2-RF-TOOLS](harness_lanes/g2_revenue_forecast_optional_tools.md) | `Projects/_g2/revenue-forecast` | 可选发布/覆盖率/会话清单及历史兼容 | ready；不写forecast/evidence或日常精选门 |
+| [G2-SW-DAILY](harness_lanes/g2_stockwiki_daily_checks.md) | `Projects/_g2/sw/StockWiki` | 单检查入口、日常/集中分离、指标诊断、真实来源消费者回归 | dispatched，待交接；不是旧工程卡重派 |
+| [G2-SQA-CHECKS](harness_lanes/g2_stockqa_engineering_checks.md) | `Projects/_g2/StockQAbyLLM` | sh/bat/CI/hook统一，真实退出码和关联security/release/docs workflow | dispatched，待交接；不写业务src或IQS |
+| [G2-RF-TOOLS](harness_lanes/g2_revenue_forecast_optional_tools.md) | `Projects/_g2/revenue-forecast` | 可选发布/覆盖率/会话清单及历史兼容 | dispatched，待交接；不写forecast/evidence或日常精选门 |
 
 每仓仅自己的计划、源码白名单、测试和交接写入；三根互不包含。StockWiki使用已发布CWP代码临时导出，不能读取MAIN正在变化的代码作为测试依赖。各线一个集中节点，MAIN合入复用责任证据，纳入既有G2B；不追加逐helper签收。交付本仓正常commit，MAIN统一接线；创建card不代表已经启动、交付或并线。
 

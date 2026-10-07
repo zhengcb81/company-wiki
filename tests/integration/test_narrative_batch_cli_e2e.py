@@ -379,9 +379,26 @@ def test_completed_resume_starts_zero_children_and_reads_only_bound_jobs(
             assert first.returncode == 0 and expected["status"] == "completed", first.stderr
             launcher = root / "resume_without_children.py"
             launcher.write_text('''import sys
+import sqlite3
 from company_wiki.automation.store import AutomationStore
 from company_wiki.automation.supervisor import AutomationSupervisor
 from company_wiki.automation.narrative_batch_cli import main
+
+original_connect = sqlite3.connect
+def deny_work(action, first, second, database, context):
+    if action == sqlite3.SQLITE_PRAGMA and first.lower() in {"integrity_check", "foreign_key_check"}:
+        return sqlite3.SQLITE_DENY
+    if action in {sqlite3.SQLITE_INSERT, sqlite3.SQLITE_UPDATE, sqlite3.SQLITE_DELETE,
+                  sqlite3.SQLITE_CREATE_TABLE, sqlite3.SQLITE_CREATE_INDEX,
+                  sqlite3.SQLITE_CREATE_TRIGGER, sqlite3.SQLITE_ALTER_TABLE}:
+        return sqlite3.SQLITE_DENY
+    return sqlite3.SQLITE_OK
+def bounded_connect(database, *args, **kwargs):
+    connection = original_connect(database, *args, **kwargs)
+    if str(database) != ":memory:":
+        connection.set_authorizer(deny_work)
+    return connection
+sqlite3.connect = bounded_connect
 
 original = AutomationStore.list_jobs
 def scoped(self, **kwargs):

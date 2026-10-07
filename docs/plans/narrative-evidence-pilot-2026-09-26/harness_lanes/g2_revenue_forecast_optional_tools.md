@@ -1,6 +1,8 @@
 # G2-RF-TOOLS：RF可选工程工具和收尾流程简化
 
-**ready，现在可独立启动。** 这是RF仓内一整组可选工程工具改造，不依赖MAIN的CWP Store/pin改动。不要把它扩展为新的forecast/evidence/source adapter项目；本卡可单独交给一个harness。
+> 当前状态：用户2026-10-07确认已分包，待交接。实现接口与原发出版本1a9b9d3不变，MAIN仅更新分派状态。
+
+**实施依赖已备齐。** 这是RF仓内一整组可选工程工具改造，不依赖MAIN的CWP Store/pin改动。不要把它扩展为新的forecast/evidence/source adapter项目；本卡可单独交给一个harness。
 
 ## 1. 已核基线与目标
 

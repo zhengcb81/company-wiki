@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from contextlib import contextmanager
 from datetime import datetime, timezone
+from functools import lru_cache
 import json
 from pathlib import Path
 import sqlite3
@@ -1008,6 +1009,95 @@ def metadata_object(raw: Any) -> dict[str, Any]:
     return metadata_state(raw)[0]
 
 
+def _catalog_schema_version(connection: sqlite3.Connection) -> str | None:
+    tables = {row[0] for row in connection.execute(
+        "SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%'"
+    )}
+    if "catalog_meta" not in tables:
+        if tables:
+            raise ValueError("source catalog schema structure: missing catalog_meta")
+        return None
+    row = connection.execute(
+        "SELECT value FROM catalog_meta WHERE key='schema_version'"
+    ).fetchone()
+    recorded = row[0] if row else None
+    if recorded is not None and recorded not in _UPGRADEABLE_SCHEMA_VERSIONS | {CATALOG_SCHEMA_VERSION}:
+        raise ValueError(f"unsupported source catalog schema version: {recorded!r}")
+    return recorded
+
+
+def _execute_catalog_ddl(connection: sqlite3.Connection) -> None:
+    """Keep DDL, trigger creation, seed and version bump in the same transaction.
+
+    executescript commits an existing transaction. complete_statement also keeps
+    the multi-statement artifact trigger intact, unlike splitting on semicolons.
+    """
+    pending = ""
+    for line in _DDL.splitlines(keepends=True):
+        pending += line
+        if sqlite3.complete_statement(pending):
+            connection.execute(pending)
+            pending = ""
+    if pending.strip():
+        raise ValueError("incomplete source catalog schema statement")
+
+
+def _catalog_structure(connection: sqlite3.Connection) -> dict[str, dict]:
+    """Read only schema metadata, including keys and query indexes."""
+    result = {}
+    for row in connection.execute(
+        "SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%'"
+    ).fetchall():
+        table = str(row[0]).replace('"', '""')
+        columns = {col[1]: tuple(col)[1:] for col in connection.execute(f'PRAGMA table_info("{table}")')}
+        keys = {tuple(key)[1:] for key in connection.execute(f'PRAGMA foreign_key_list("{table}")')}
+        indexes = set()
+        for index in connection.execute(f'PRAGMA index_list("{table}")').fetchall():
+            name = str(index[1]).replace('"', '""')
+            fields = tuple(col[2] for col in connection.execute(f'PRAGMA index_info("{name}")'))
+            # Autoindex names can differ after a legitimate additive migration.
+            indexes.add((index[1] if index[3] == "c" else None, fields, index[2], index[4]))
+        result[row[0]] = {"columns": columns, "keys": keys, "indexes": indexes}
+    return result
+
+
+@lru_cache(maxsize=1)
+def _expected_catalog_structure() -> dict[str, dict]:
+    """Compile the schema definition, never cache a database health decision."""
+    connection = sqlite3.connect(":memory:")
+    connection.row_factory = sqlite3.Row
+    try:
+        _execute_catalog_ddl(connection)
+        CatalogStore._apply_additive_migrations(connection)
+        return _catalog_structure(connection)
+    finally:
+        connection.close()
+
+
+def _require_catalog_structure(connection: sqlite3.Connection) -> None:
+    actual = _catalog_structure(connection)
+    for table, expected in _expected_catalog_structure().items():
+        found = actual.get(table)
+        if found is None:
+            raise ValueError(f"source catalog schema structure drift in {table}")
+        bad_columns = any(
+            found["columns"].get(name) != definition
+            for name, definition in expected["columns"].items()
+        )
+        if (bad_columns or not expected["keys"].issubset(found["keys"])
+                or not expected["indexes"].issubset(found["indexes"])):
+            raise ValueError(f"source catalog schema structure drift in {table}")
+
+
+def _require_catalog_integrity(connection: sqlite3.Connection) -> None:
+    integrity = connection.execute("PRAGMA integrity_check").fetchone()[0]
+    if integrity != "ok":
+        raise ValueError(f"source catalog integrity_check failed: {integrity}")
+    violations = connection.execute("PRAGMA foreign_key_check").fetchall()
+    if violations:
+        raise ValueError(f"source catalog foreign_key_check violations: {[tuple(row) for row in violations]}")
+
+
 class CatalogStore:
     def __init__(self, database_path: Path):
         if not isinstance(database_path, Path):
@@ -1084,8 +1174,21 @@ class CatalogStore:
     def _initialize(self) -> None:
         connection = self._connect()
         try:
+            connection.execute("BEGIN")
+            recorded = _catalog_schema_version(connection)
+            if recorded == CATALOG_SCHEMA_VERSION:
+                _require_catalog_structure(connection)
+                connection.rollback()
+                return
+            connection.rollback()
             connection.execute("PRAGMA journal_mode=WAL")
-            connection.executescript(_DDL)
+            connection.execute("BEGIN IMMEDIATE")
+            # Another initializer may have finished while we waited for the lock.
+            if _catalog_schema_version(connection) == CATALOG_SCHEMA_VERSION:
+                _require_catalog_structure(connection)
+                connection.commit()
+                return
+            _execute_catalog_ddl(connection)
             self._apply_additive_migrations(connection)
             existing = connection.execute(
                 "SELECT value FROM catalog_meta WHERE key='schema_version'"
@@ -1097,7 +1200,12 @@ class CatalogStore:
                 )
             elif existing["value"] != CATALOG_SCHEMA_VERSION:
                 raise ValueError("unsupported source catalog schema version")
+            _require_catalog_structure(connection)
+            _require_catalog_integrity(connection)
             connection.commit()
+        except BaseException:
+            connection.rollback()
+            raise
         finally:
             connection.close()
 
@@ -1110,7 +1218,7 @@ class CatalogStore:
             ``_DDL``; no version bump here (``_initialize`` inserts it);
           * recorded in ``_UPGRADEABLE_SCHEMA_VERSIONS`` (1.0.0, 1.1.0) — run
             additive steps, seed fingerprint state, bump to current;
-          * recorded == current — run idempotent additive steps + seed only;
+          * recorded == current — constructors skip this migration entirely;
           * any other (unknown/future) version — fail closed BEFORE any data
             write (§12.3 rule 12: zero partial writes).
         """

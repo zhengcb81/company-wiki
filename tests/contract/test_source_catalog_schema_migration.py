@@ -219,9 +219,12 @@ def test_t2_02_migration_is_idempotent(tmp_path):
     _catalog_store_cls()(db_path)
     _insert_document(db_path, "d1", content_sha="ee" * 32, fingerprint=None)
     _insert_document(db_path, "d2", content_sha="ff" * 32, fingerprint="fp2")
-    # First reopen seeds the new docs (seed runs on every open for missing rows).
+    # Seeding belongs to a real upgrade, never an ordinary current-schema open.
+    with sqlite3.connect(db_path) as conn:
+        conn.execute("UPDATE catalog_meta SET value='1.1.0' WHERE key='schema_version'")
     _catalog_store_cls()(db_path)
     counts_before = _fingerprint_state_counts(db_path)
+    assert counts_before == {"pending": 1, "completed": 1}
     with sqlite3.connect(db_path) as conn:
         row_before = conn.execute(
             "SELECT status, attempt_count, source_sha256 FROM document_fingerprint_state "

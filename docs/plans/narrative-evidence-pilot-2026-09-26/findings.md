@@ -1,5 +1,13 @@
 # Findings：当前事实与待验证项
 
+## 最新：G2-13责任完成，下一精确来源绑定（2026-10-07）
+
+AUTO普通打开0深检；显式/new/实际升级各一轮。Catalog当前版本0DDL/0全库seed，未知版本先拒绝，真实升级原子回滚；无state新文档仍可dispatch/UPSERT。新增SchemaStructure不虚报健康。三损坏账目字段实际RED证明SQL隐式数字转换会低估token或抛无分类错误，改为当前run的记录统一校验后精确Python计算。
+
+初始17项11RED/6PASS→17GREEN；迁移/Store/指纹132项绿13.31秒；增加ledger反例与两真实CLI后54项绿27.86秒。生产schema只读101条元数据SQL、0业务行扫描/深检/写；DB222408704B/SHA0081ee5c及配置内容保持，6自身tmp删41509985B恢复absent。新账目夹具第一次误取ReservationAdmission.reserved_tokens导致3AttributeError，改.record后才记录真实3RED；不将夹具错误冒称代码缺陷。
+
+[G2-13收据](harness_lanes/results/g2_store_initialization_acceptance_2026-10-07.json)目前local_verified，正常发布/精确CI尚待。用户确认SW/StockQA/RF三包已分派，MAIN不介入其写集，下一01b。
+
 ## 最新：三个独立施工包（2026-10-07）
 
 目标服务实际active。按用户请求只读复核SW9f552a6/StockQA6a9ff138/RFe241389的工程工具、工作树与caller后，写出[并行总包](harness_lanes/g2_parallel_packages_2026-10-07.md)及三个完整单卡：SW日常检查、StockQA本地/CI/hook/workflow、RF可选工具。各独占worktree，ready可同时派发，未代用户启动或写外仓；MAIN继续G2-13→01b→12，共享PWF/生产/并线由MAIN负责。

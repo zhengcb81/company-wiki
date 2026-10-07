@@ -1,6 +1,8 @@
 # G2-SQA-CHECKS：StockQA工程入口与workflow统一
 
-**ready，现在可独立启动。** 这是StockQAbyLLM工程工具实现包，无CWP/StockWiki/RF新接口依赖；不触invest-quick-scan/IQS活动项目。请完整读本卡，所有必要上下文均在此，不需要读CWP历史长计划。
+> 当前状态：用户2026-10-07确认已分包，待交接。实现接口与原发出版本1a9b9d3不变，MAIN仅更新分派状态。
+
+**实施依赖已备齐。** 这是StockQAbyLLM工程工具实现包，无CWP/StockWiki/RF新接口依赖；不触invest-quick-scan/IQS活动项目。请完整读本卡，所有必要上下文均在此，不需要读CWP历史长计划。
 
 ## 1. 目标和基线
 

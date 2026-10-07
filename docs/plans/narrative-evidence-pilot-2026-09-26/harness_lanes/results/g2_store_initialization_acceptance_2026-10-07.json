@@ -1,0 +1,61 @@
+{
+  "schema_version": "g2-store-initialization-acceptance/1",
+  "status": "local_verified_publication_pending",
+  "scope": "G2-13 responsibility only; not whole G2A/G2 or production metadata/summaries",
+  "implemented": [
+    "AUTO current-schema opens inspect metadata without scanning data",
+    "SchemaStructure explicitly makes no data-integrity claim",
+    "AUTO new/actual migration and explicit deep report perform one integrity/FK pair",
+    "Catalog current-schema opens skip WAL mutation, DDL and global fingerprint seed",
+    "Catalog actual migrations keep DDL, trigger, seed and version in one transaction",
+    "Unknown catalog version rejected before DDL; actual drift is not silently repaired",
+    "Missing fingerprint state remains dispatchable and transactionally upserts",
+    "Selected run/reservation accounting validates stored types before exact Python arithmetic"
+  ],
+  "tests": {
+    "initial_behavior_red": {"passed": 6, "failed": 11, "seconds": 2.12},
+    "first_behavior_green": {"passed": 17, "seconds": 1.72},
+    "initial_responsibility_group": {"passed": 132, "seconds": 13.31},
+    "ledger_fixture_error": "three AttributeErrors on ReservationAdmission; corrected to .record before classifying product RED",
+    "actual_ledger_red": {"passed": 0, "failed": 3, "seconds": 1.30},
+    "final_changed_responsibility_and_cli": {"passed": 54, "seconds": 27.86},
+    "actual_cli_nodes": [
+      "test_completed_resume_starts_zero_children_and_reads_only_bound_jobs",
+      "test_actual_completed_cli_survives_execution_upgrade_without_rework_or_ledger_changes"
+    ],
+    "terminal_cli_guard": "SQLite authorizer denies data writes, DDL and integrity/FK scans on actual file connections; in-memory schema compilation allowed",
+    "ruff": "passed for all changed Python files",
+    "mypy": "passed for three changed source files",
+    "diff_check": "passed"
+  },
+  "sql_trace": {
+    "current_auto_and_run_opens": {"repetitions": 3, "old_deep_statements": 18, "new_deep_statements": 0},
+    "auto_explicit_report": {"old_deep_pairs": 2, "new_deep_pairs": 1},
+    "auto_new_database": {"old_deep_pairs": 5, "new_deep_pairs": 1},
+    "auto_v4_upgrade": {"old_deep_pairs": 3, "new_deep_pairs": 1},
+    "catalog_current_open": {"ddl": 0, "global_seed": 0, "deep_checks": 0},
+    "catalog_new_or_actual_upgrade": {"deep_pairs": 1, "before_commit": true},
+    "production_read_only_schema_probe": {"version": "1.2.0", "metadata_sql_count": 101, "business_row_scans": 0, "deep_checks": 0}
+  },
+  "production_protection": {
+    "database_bytes": 222408704,
+    "database_sha256": "0081ee5c3daf85abd71253e6069d08b1cdde46fe216326c10f0bf897a6a6bb62",
+    "database_mtime_ns": 1791248158420833300,
+    "source_config_sha256": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+    "owner_acquisition_config_sha256": "3609e707466eeb3e0f685e14f2637c6afa39ba900edef1be4814433a43300a01",
+    "steady_policy_sha256": "722f8344ee3764609ff51fda6109334b873fb26846f000934d49437269ee96f6",
+    "probe_before_after_equal": true
+  },
+  "cleanup": {
+    "owned_roots": ["cwp-g213-red-20261007", "cwp-g213-green-20261007", "cwp-g213-node-20261007", "cwp-g213-ledger-red-20261007", "cwp-g213-ledger-r2-20261007", "cwp-g213-final-20261007"],
+    "all_absent": true,
+    "temporary_bytes_removed": 41509985,
+    "full_backup_restore": false
+  },
+  "external_supplier_calls": 0,
+  "paid_calls": 0,
+  "production_writes": 0,
+  "raw_deleted": 0,
+  "other_repository_writes": 0,
+  "remaining": ["normal commit/push and exact source CI", "G2-01b scoped pin", "other G2 groups and R2-R5"]
+}

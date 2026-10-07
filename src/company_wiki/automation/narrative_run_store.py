@@ -96,6 +96,16 @@ class RunRecord:
     last_runtime_generation: int | None = None
     binding_json: str | None = None
 
+    def __post_init__(self) -> None:
+        try:
+            for name in (
+                "input_micro_usd_per_million_tokens", "output_micro_usd_per_million_tokens",
+                "max_tokens", "max_micro_usd", "max_output_bytes",
+            ):
+                _integer(getattr(self, name), name)
+        except ValueError as exc:
+            raise NarrativeRunError("invalid stored run accounting") from exc
+
     @property
     def blocked(self) -> bool:
         return self.state == "blocked"
@@ -122,6 +132,26 @@ class ReservationRecord:
     reserved_at: str
     usage_settled_at: str | None
     output_settled_at: str | None
+
+    def __post_init__(self) -> None:
+        try:
+            for name in (
+                "input_tokens_bound", "max_output_tokens", "output_bytes_bound",
+                "reserved_micro_usd",
+            ):
+                _integer(getattr(self, name), name)
+            for name in ("input_tokens", "output_tokens", "estimated_micro_usd", "output_bytes"):
+                value = getattr(self, name)
+                if value is not None:
+                    _integer(value, name)
+            if self.usage_status not in {"reserved", "unknown", "known"}:
+                raise ValueError("invalid usage status")
+            if self.usage_status == "known" and any(
+                value is None for value in (self.input_tokens, self.output_tokens, self.estimated_micro_usd)
+            ):
+                raise ValueError("known usage lacks actual accounting")
+        except ValueError as exc:
+            raise NarrativeRunError("invalid stored reservation accounting") from exc
 
     @property
     def reserved_tokens(self) -> int:
@@ -211,23 +241,20 @@ def _required_reservation(
 
 def _budget(connection: sqlite3.Connection, run_id: str) -> RunBudgetSnapshot:
     rows = connection.execute(
-        """SELECT CASE WHEN usage_status='known' THEN input_tokens+output_tokens
-                    ELSE input_tokens_bound+max_output_tokens END AS charged_tokens,
-                  COALESCE(estimated_micro_usd,reserved_micro_usd) AS charged_micro_usd,
-                  COALESCE(output_bytes,output_bytes_bound) AS charged_output_bytes,
-                  usage_status
-           FROM narrative_model_reservations WHERE run_id=?""",
+        "SELECT * FROM narrative_model_reservations WHERE run_id=?",
         (run_id,),
     ).fetchall()
-    # Exact Python sums also report anomalous provider totals beyond SQLite's
-    # integer range. Admission still holds the same BEGIN IMMEDIATE transaction.
+    records = [ReservationRecord(**dict(row)) for row in rows]
+    # Validate this run's ledger before arithmetic; SQLite would silently coerce
+    # malformed text in an addition. Python also preserves exact large totals.
+    # Admission still holds the same BEGIN IMMEDIATE transaction.
     return RunBudgetSnapshot(
         run_id=run_id,
-        charged_tokens=sum(row["charged_tokens"] for row in rows),
-        charged_micro_usd=sum(row["charged_micro_usd"] for row in rows),
-        charged_output_bytes=sum(row["charged_output_bytes"] for row in rows),
-        unknown_reservations=sum(row["usage_status"] == "unknown" for row in rows),
-        unsettled_reservations=sum(row["usage_status"] == "reserved" for row in rows),
+        charged_tokens=sum(record.charged_tokens for record in records),
+        charged_micro_usd=sum(record.charged_micro_usd for record in records),
+        charged_output_bytes=sum(record.charged_output_bytes for record in records),
+        unknown_reservations=sum(record.usage_status == "unknown" for record in records),
+        unsettled_reservations=sum(record.usage_status == "reserved" for record in records),
     )
 
 
@@ -252,7 +279,7 @@ class NarrativeRunStore:
     """Read an initialized current AUTO database; never initialize or migrate it."""
 
     def __init__(self, db_path: Path) -> None:
-        report = migrations.validate_database(db_path)
+        report = migrations.inspect_schema(db_path)
         if report.user_version != migrations.SCHEMA_VERSION:
             raise NarrativeRunError(
                 "run store requires an explicitly migrated current AUTO database"

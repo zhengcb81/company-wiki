@@ -48,6 +48,10 @@ SourceRef / SourceExport v2 不暴露物理路径。原文 reader 输出真实�
 
 ## 验证与发布
 
+Store 日常打开只验证当前版本、必要表/列/键及 AUTO singleton，不对所有业务数据做深检，也不把结构通过表述为整库健康。新建和真实升级在同一事务提交前做一次 integrity/FK 检查；升级失败回滚。当前来源库打开不执行DDL或全量fingerprint seed，无state的新文档仍按pending选择并在自身事务UPSERT。账目读取只校验当前run的字段，再做精确计算；损坏记录失败，不能转为零费用。
+
+显式AUTO数据库体检使用`company_wiki.automation.migrations.validate_database(path)`或`AutomationStore.schema_report()`；只查版本/结构使用`inspect_schema(path)`，返回值没有integrity_ok字段。体检放在相关大节点或确实怀疑损坏时，不放进每个Worker构造、预算查询或终态恢复。
+
 - commit：相关 Ruff、类型/配置和路径静态检查，不跑 pytest。
 - push：`python tools/pre_push_gate.py --fast-contracts-only`，与 CI 同一快速集合。
 - CI：全 Unit、同组 smoke 和静态检查，单 Python 环境。

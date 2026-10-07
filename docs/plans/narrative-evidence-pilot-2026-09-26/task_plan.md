@@ -6,7 +6,7 @@
 
 **目标服务最新实读active。当前次序为G2/P0→R2生产准备→R3正式运行→R4收益决策→R5收口。** 已审查八仓入口/生产配置/工程检查/两份安装技能；旧canary现场已迁移，默认steady/有效pin/AUTO机器错误/派生质量/版本化终态恢复核心代码93ac5a5已正常推送，精确CI37590638806全部步骤绿90秒。StockWiki/StockQA日常全套、联网hook和隐藏阈值升P0-B，具体工具/默认配置/AGENTS同步写集已加[G2实施单](gate_simplification_reaudit_2026-10-07.md)，仅两个大节点。[原审计收据](harness_lanes/results/g2_gate_reaudit_2026-10-07.json)、[现场迁移](harness_lanes/results/g2_steady_production_migration_2026-10-07.json)和[核心实现验收](harness_lanes/results/g2_core_implementation_acceptance_2026-10-07.json)各自明确证明范围。
 
-**新增三个独立施工包均ready，用户可现在分别交给三个harness：**[StockWiki日常检查](harness_lanes/g2_stockwiki_daily_checks.md)、[StockQA工程入口/workflow](harness_lanes/g2_stockqa_engineering_checks.md)、[RF可选工具](harness_lanes/g2_revenue_forecast_optional_tools.md)。[并行总包](harness_lanes/g2_parallel_packages_2026-10-07.md)定义互不包含的工作树、冻结依赖、输出接口与MAIN接线责任。未代用户启动外部harness；MAIN继续G2-13/01b/CWP和FF共享接口，外线不等待MAIN改代码、不写CWP总PWF。StockWiki是新的剩余范围，不重派已完成旧工程卡。StockQA另外三workflow、RF release_checklist和历史读取器同步责任已纳入单卡。
+**三个独立施工包已由用户分派，待交接：**[StockWiki日常检查](harness_lanes/g2_stockwiki_daily_checks.md)、[StockQA工程入口/workflow](harness_lanes/g2_stockqa_engineering_checks.md)、[RF可选工具](harness_lanes/g2_revenue_forecast_optional_tools.md)。[并行总包](harness_lanes/g2_parallel_packages_2026-10-07.md)定义互不包含的工作树、冻结依赖、输出接口与MAIN接线责任。未代用户启动外部harness；MAIN继续G2-13/01b/CWP和FF共享接口，外线不等待MAIN改代码、不写CWP总PWF。StockWiki是新的剩余范围，不重派已完成旧工程卡。StockQA另外三workflow、RF release_checklist和历史读取器同步责任已纳入单卡。
 
 G1历史验收继续有效，但不能宣称全面清理已完成。现场仅小policy变为steady，16有效断言/17事实表/原件/数据库/owner配置不变；S07旧security标签及生产metadata仍待R2。2cad90d/202责任/CI37582474369是此前代码的证据，不能冒充本次新代码已发布。没有新增人工签收，不重复付费模型/已绿大包；Dayu/IQS/原件/owner文件边界保持。
 
@@ -120,7 +120,7 @@ TDD 框住具体公开行为。只在 N4 A/B/C、存储迁移等大节点集中�
 
 | 阶段 | 状态 | 下一责任 |
 |---|---|---|
-| G2门禁全面补漏/P0 | in_progress；目标服务active | 14组+scoped pin；现场steady及核心93ac5a5已推，精确CI37590638806全部步骤绿90秒；MAIN先Store轻初始化/P0；SW/StockQA/RF三卡ready可并行，未代用户派发；CWP/FF latest/P0-B及其余家族pending；只两个大节点 |
+| G2门禁全面补漏/P0 | in_progress；目标服务active | 14组+scoped pin；现场steady及核心93ac5a5已推，精确CI37590638806全部步骤绿90秒；MAIN13责任/CLI已绿待发布，下一01b；SW/StockQA/RF三卡用户已分派待交接；CWP/FF latest/P0-B及其余家族pending；只两个大节点 |
 | R0完整对账 | complete | 已确认真实生产metadata/分类/ET登记缺口；已完成核心不重做 |
 | R1融资文档正式分类 | complete | 66ce0467已发布，真实两PDF CLI与分类责任包绿，精确CI37578307854绿 |
 | R2真实生产来源/预算准备 | in_progress；生产步骤顺延G2后 | 全库发现/有限登记/AUTO范围代码2cad90d已推且精确CI绿；G2先清旧控制面，再核公开日/retired/ET，不猜metadata |
@@ -130,4 +130,4 @@ TDD 框住具体公开行为。只在 N4 A/B/C、存储迁移等大节点集中�
 
 ## Next Step
 
-MAIN下一施工为[G2-13/P0 Store轻初始化TDD](gate_simplification_reaudit_2026-10-07.md)，然后01b精确读pin→CWP/FF latest单请求/P0-B→其余P1及G2A/B→R2/R3。三外线按[新并行总包](harness_lanes/g2_parallel_packages_2026-10-07.md)独立运行，MAIN收到交接后统一合入/发布；等待外线不阻断MAIN13/01b，未收到交接不能报完成。不重跑已绿核心大包、不改模型预算、不重派已交卡、不宣布全部完成。
+G2-13轻初始化/选中账目校验已通过责任与实际CLI节点，正在正常发布；MAIN下一施工为[G2-01b精确读pin](gate_simplification_reaudit_2026-10-07.md)→CWP/FF latest单请求/P0-B→其余P1及G2A/B→R2/R3。三外线按[新并行总包](harness_lanes/g2_parallel_packages_2026-10-07.md)独立运行，MAIN收到交接后统一合入/发布；等待外线不阻断MAIN13/01b，未收到交接不能报完成。不重跑已绿核心大包、不改模型预算、不重派已交卡、不宣布全部完成。

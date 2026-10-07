@@ -1,5 +1,11 @@
 # Progress：激进简化实施
 
+## 最新：G2-13责任与真实恢复CLI收口，三外包已分派（2026-10-07）
+
+初始结构/扫描行为11RED/6PASS→17GREEN，132责任项13.31秒绿。账目夹具纠正.record后真实3RED→最终54责任/两实际CLI27.86秒绿；终态SQLite authorizer禁止深检/DDL/数据写仍completed、零worker/零新增HTTP，执行版本恢复保持原账。Ruff/三源mypy/diff绿；生产只读metadata确认当前schema兼容，DB/四文件前后保持。6own tmp精确清回absent，41509985B临时材料，无原件删除/生产写/付费/外仓代码写。
+
+实施及边界见[G2-13收据](harness_lanes/results/g2_store_initialization_acceptance_2026-10-07.json)，待正常commit/push/精确CI，不冒称whole G2A完成。用户确认三包已分派，卡仅更新状态不改接口。MAIN下一01b精确读pin；实际文档rg glob曾无匹配，改已存在docs/OPERATIONS.md，未据此改代码/测试。
+
 ## 最新：G2三个并行施工包已准备（2026-10-07）
 
 实读目标active，三仓当前基线/owner/caller已核。新增[并行总包](harness_lanes/g2_parallel_packages_2026-10-07.md)及SW/StockQA/RF三卡，独占根互不包含、各仓写集/接口/RED→GREEN/集中测试/清理/交接/提交要求完整，用户现在可分别交harness。未代用户启动，未创建外部worktree、未跑长测或付费、未写外仓/生产/raw；仅本仓planning文档变化，source_acquisition.yaml owner修改保持不stage。

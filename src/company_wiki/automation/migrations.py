@@ -5,6 +5,9 @@ read-only schema report.  It deliberately depends only on the Python standard
 library: it does not import the legacy scheduler, generate business IDs, perform
 CRUD, read configuration/environment variables, or open a default database path.
 
+Ordinary opens inspect version/structure. Data integrity and foreign keys are
+scanned once before actual migration commits, or by explicit validate_database.
+
 Hard rules (enforced by tests M01-M17 and the boundary scan):
 
 * The DDL statements are frozen; a missing table, extra table, altered column,
@@ -331,10 +334,16 @@ class MigrationReport:
 
 
 @dataclass(frozen=True)
-class SchemaReport:
+class SchemaStructure:
+    """Metadata inspection only; makes no claim about stored data health."""
+
     user_version: int
     tables: tuple[str, ...]
     schema_fingerprint: str
+
+
+@dataclass(frozen=True)
+class SchemaReport(SchemaStructure):
     integrity_ok: bool
     foreign_key_violations: tuple[tuple, ...]
 
@@ -569,7 +578,7 @@ def _require_expected_structure(
     if version >= 2:
         gate_rows = connection.execute(
             "SELECT singleton_id, desired_state, control_generation, updated_at "
-            "FROM runtime_gate"
+            "FROM runtime_gate LIMIT 2"
         ).fetchall()
         if len(gate_rows) != 1:
             raise SchemaDriftError("runtime_gate must contain exactly one row")
@@ -584,6 +593,10 @@ def _require_expected_structure(
         )
         if not gate_valid:
             raise SchemaDriftError("runtime_gate row is invalid")
+
+
+def _require_database_integrity(connection: sqlite3.Connection) -> None:
+    """Scan data once, at an explicit check or before a real migration commits."""
     integrity = connection.execute("PRAGMA integrity_check").fetchone()[0]
     if integrity != "ok":
         raise SchemaDriftError(f"integrity_check failed: {integrity}")
@@ -756,6 +769,7 @@ def _apply_write_migration(
             f"DDL execution failed and was rolled back: {exc}"
         ) from exc
     _require_expected_structure(connection, version=SCHEMA_VERSION)
+    _require_database_integrity(connection)
     return MigrationReport(
         from_version,
         SCHEMA_VERSION,
@@ -774,7 +788,8 @@ def migrate_database(
     frozen, valid v1/v2/v3 database requires a successful explicit backup hook before
     it is upgraded in one transaction. The v4-to-v5 nullable binding column is
     additive and atomic, so it needs no full database backup or human receipt.
-    Existing v5 databases are validated read-only.
+    Existing v5 databases get read-only schema inspection, without a data scan.
+    New databases and actual upgrades get one integrity/FK check before commit.
     """
     db_path = _require_valid_path_object(db_path)
     _require_writable_target(db_path)
@@ -816,39 +831,55 @@ def migrate_database(
         connection.close()
 
 
-def validate_database(db_path: Path) -> SchemaReport:
-    """Read-only structural report.  Never creates or repairs a database."""
+def _inspect_schema(connection: sqlite3.Connection) -> SchemaStructure:
+    version = _user_version(connection)
+    if version > SCHEMA_VERSION:
+        raise UnsupportedSchemaVersionError(
+            f"user_version {version} is newer than supported {SCHEMA_VERSION}"
+        )
+    tables = _user_tables(connection)
+    if version in (1, 2, 3, 4, 5):
+        _require_expected_structure(connection, version=version)
+        fingerprint = _fingerprint(connection, version=version)
+    else:
+        unknown = [name for name in tables if name not in EXPECTED_TABLES_V1]
+        if unknown:
+            raise UnknownSchemaError(f"unrecognized tables in database: {unknown}")
+        fingerprint = hashlib.sha256(
+            _canonical_json({"version": 0, "tables": tables}).encode("utf-8")
+        ).hexdigest()
+    return SchemaStructure(version, tuple(tables), fingerprint)
+
+
+def _inspection_connection(db_path: Path) -> sqlite3.Connection:
     db_path = _require_valid_path_object(db_path)
     if not db_path.exists() or not db_path.is_file():
         raise InvalidDatabasePathError(f"database file does not exist: {db_path}")
     _ensure_sqlite_file(db_path)
+    return _open_readonly_connection(db_path)
 
-    connection = _open_readonly_connection(db_path)
+
+def inspect_schema(db_path: Path) -> SchemaStructure:
+    """Read-only version/structure inspection; never scans all stored rows."""
+    connection = _inspection_connection(db_path)
     try:
-        version = _user_version(connection)
-        if version > SCHEMA_VERSION:
-            raise UnsupportedSchemaVersionError(
-                f"user_version {version} is newer than supported {SCHEMA_VERSION}"
-            )
-        tables = _user_tables(connection)
-        if version in (1, 2, 3, 4, 5):
-            _require_expected_structure(connection, version=version)
-            fingerprint = _fingerprint(connection, version=version)
-        else:  # uninitialized v0
-            unknown = [name for name in tables if name not in EXPECTED_TABLES_V1]
-            if unknown:
-                raise UnknownSchemaError(f"unrecognized tables in database: {unknown}")
-            fingerprint = hashlib.sha256(
-                _canonical_json({"version": 0, "tables": tables}).encode("utf-8")
-            ).hexdigest()
-        integrity = connection.execute("PRAGMA integrity_check").fetchone()[0]
-        violations = connection.execute("PRAGMA foreign_key_check").fetchall()
+        return _inspect_schema(connection)
+    finally:
+        connection.close()
+
+
+def validate_database(db_path: Path) -> SchemaReport:
+    """Explicit, read-only deep check; never creates or repairs a database."""
+    connection = _inspection_connection(db_path)
+    try:
+        structure = _inspect_schema(connection)
+        _require_database_integrity(connection)
         return SchemaReport(
-            user_version=version,
-            tables=tuple(tables),
-            schema_fingerprint=fingerprint,
-            integrity_ok=(integrity == "ok"),
-            foreign_key_violations=tuple(tuple(row) for row in violations),
+            user_version=structure.user_version,
+            tables=structure.tables,
+            schema_fingerprint=structure.schema_fingerprint,
+            integrity_ok=True,
+            foreign_key_violations=(),
         )
     finally:
         connection.close()
@@ -859,6 +890,7 @@ __all__ = [
     "EXPECTED_TABLES",
     "BackupHook",
     "MigrationReport",
+    "SchemaStructure",
     "SchemaReport",
     "AutomationMigrationError",
     "InvalidDatabasePathError",
@@ -868,6 +900,7 @@ __all__ = [
     "SchemaDriftError",
     "MigrationExecutionError",
     "BackupError",
+    "inspect_schema",
     "migrate_database",
     "validate_database",
 ]
