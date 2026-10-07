@@ -1,4 +1,11 @@
-"""Reference-aware cleanup contracts for the focus admission policy."""
+"""Reference-aware focus cleanup is retired (G3-CWP-MAINT).
+
+The legacy focus-cleanup preview/apply/restore entries fail closed with the
+unified retirement signal before any Store, lock, file or receipt is
+touched.  What stays asserted is the honest read behaviour: originals are
+preserved, rescans stay stable, and the CLI branch fails closed as retired
+without writing a receipt or snapshot.
+"""
 
 from __future__ import annotations
 
@@ -6,15 +13,23 @@ import hashlib
 import json
 from pathlib import Path
 
+import pytest
 import yaml
 
 from company_wiki.source_catalog import CatalogConfig, RootSpec, SourceCatalog
 from company_wiki.source_catalog.focus_cleanup import FocusScopeCleanupService
+from company_wiki.source_catalog.maintenance_retirement import (
+    RetiredMaintenanceError,
+)
 from support.legacy_source_artifact_fixture import legacy_normalize, legacy_summarize
 
 
 def _sha(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def _tree(root: Path) -> list[str]:
+    return sorted(str(p.relative_to(root)).replace("\\", "/") for p in root.rglob("*"))
 
 
 def _legacy_catalog(tmp_path: Path):
@@ -113,10 +128,8 @@ def _legacy_catalog(tmp_path: Path):
     }
 
 
-def test_focus_cleanup_preview_is_read_only_and_reference_aware(tmp_path: Path):
-    fixture = _legacy_catalog(tmp_path)
-    catalog = fixture["catalog"]
-    before = {
+def _counts(catalog) -> dict[str, int]:
+    return {
         table: catalog.store.fetchone(f"SELECT count(*) AS n FROM {table}")["n"]
         for table in (
             "locations",
@@ -127,184 +140,63 @@ def test_focus_cleanup_preview_is_read_only_and_reference_aware(tmp_path: Path):
         )
     }
 
-    preview = FocusScopeCleanupService(catalog).preview(
-        root_id="dropbox_stock", relative_prefix="重点关注"
-    )
 
-    after = {
-        table: catalog.store.fetchone(f"SELECT count(*) AS n FROM {table}")["n"]
-        for table in before
-    }
-    assert after == before
-    assert preview["mode"] == "dry_run"
-    assert preview["original_delete_count"] == 0
-    assert preview["sidecars_to_delete"] == 2
-    assert preview["shared_documents_preserved"] == 1
-    assert preview["orphan_documents_to_delete"] >= 1
-    assert preview["confirmation_token"]
-
-
-def test_focus_cleanup_apply_dedupes_duplicate_artifact_paths(tmp_path: Path):
-    # Multiple artifact rows may reference the same derived file; apply must
-    # archive/delete each file exactly once and still report completed.
-    fixture = _legacy_catalog(tmp_path)
-    catalog = fixture["catalog"]
-    service = FocusScopeCleanupService(catalog)
-    archive_dir = tmp_path / "dedupe-archive"
-    preview = service.preview(root_id="dropbox_stock", relative_prefix="重点关注")
-    duplicate_path = fixture["orphan_artifact_paths"][0]
-    with catalog.store.transaction() as connection:
-        row = connection.execute(
-            "SELECT * FROM artifacts WHERE path=? LIMIT 1", (str(duplicate_path),)
-        ).fetchone()
-        connection.execute(
-            """INSERT INTO artifacts(artifact_id,document_id,source_id,artifact_role,
-            path,content_sha256,byte_size,mime_type,generator_name,generator_version,
-            status,error,metadata_json,created_at)
-            VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)""",
-            (
-                str(row["artifact_id"]) + "-dup",
-                row["document_id"],
-                row["source_id"],
-                str(row["artifact_role"]) + "_duplicate",
-                row["path"],
-                row["content_sha256"],
-                row["byte_size"],
-                row["mime_type"],
-                row["generator_name"],
-                row["generator_version"],
-                row["status"],
-                row["error"],
-                row["metadata_json"],
-                row["created_at"],
-            ),
-        )
-
-    result = service.apply(
-        root_id="dropbox_stock",
-        relative_prefix="重点关注",
-        confirmation_token=preview["confirmation_token"],
-        snapshot_path=tmp_path / "dedupe-snapshot.jsonl",
-        receipt_path=tmp_path / "dedupe-receipt.json",
-        archive_dir=archive_dir,
-    )
-
-    assert result["status"] == "completed"
-    assert result["filesystem_errors"] == []
-    assert result["archived_files"] >= 1
-    assert not duplicate_path.exists()
-    manifest = json.loads((archive_dir / "manifest.json").read_text(encoding="utf-8"))
-    paths = [entry["original_path"] for entry in manifest["files"]]
-    assert paths.count(str(duplicate_path)) == 1
-
-
-def test_focus_cleanup_apply_preserves_originals_and_shared_document(tmp_path: Path):
-    fixture = _legacy_catalog(tmp_path)
-    catalog = fixture["catalog"]
-    service = FocusScopeCleanupService(catalog)
-    preview = service.preview(root_id="dropbox_stock", relative_prefix="重点关注")
-    snapshot = tmp_path / "affected-rows.jsonl"
-    receipt = tmp_path / "cleanup-receipt.json"
-
-    result = service.apply(
-        root_id="dropbox_stock",
-        relative_prefix="重点关注",
-        confirmation_token=preview["confirmation_token"],
-        snapshot_path=snapshot,
-        receipt_path=receipt,
-    )
-
-    assert result["status"] == "completed"
-    assert result["original_delete_count"] == 0
-    assert snapshot.is_file() and receipt.is_file()
-    assert all(path.is_file() for path in fixture["originals"])
-    assert {
-        str(path): (_sha(path), path.stat().st_mtime_ns)
-        for path in fixture["originals"]
-    } == fixture["original_manifest"]
-    assert not (fixture["focus"] / "投资笔记.txt.source.json").exists()
-    assert not (fixture["focus"] / "股票池.txt.source.json").exists()
-    assert fixture["allowed_sidecar"].is_file()
-
-    shared = catalog.store.fetchone(
-        "SELECT document_id FROM documents WHERE document_id=?",
-        (fixture["shared_document"],),
-    )
-    orphan = catalog.store.fetchone(
-        "SELECT document_id FROM documents WHERE document_id=?",
-        (fixture["orphan_document"],),
-    )
-    assert shared is not None
-    assert orphan is None
-    assert (
-        catalog.store.fetchone(
-            """SELECT count(*) AS n FROM locations
-        WHERE document_id=? AND relative_path='其他/copy.txt'""",
-            (fixture["shared_document"],),
-        )["n"]
-        == 1
-    )
-    assert all(not path.exists() for path in fixture["orphan_artifact_paths"])
-    assert catalog.store.fetchone("PRAGMA foreign_key_check") is None
-
-    second = service.preview(root_id="dropbox_stock", relative_prefix="重点关注")
-    second_result = service.apply(
-        root_id="dropbox_stock",
-        relative_prefix="重点关注",
-        confirmation_token=second["confirmation_token"],
-        snapshot_path=tmp_path / "affected-rows-2.jsonl",
-        receipt_path=tmp_path / "cleanup-receipt-2.json",
-    )
-    assert second_result["database_locations_deleted"] == 0
-    assert second_result["sidecars_deleted"] == 0
-
-
-def test_focus_cleanup_two_rescans_do_not_recreate_rejected_catalog_state(
+def test_focus_cleanup_entries_retire_without_touching_catalog_or_files(
     tmp_path: Path,
 ):
     fixture = _legacy_catalog(tmp_path)
     catalog = fixture["catalog"]
     service = FocusScopeCleanupService(catalog)
-    preview = service.preview(root_id="dropbox_stock", relative_prefix="重点关注")
-    service.apply(
-        root_id="dropbox_stock",
-        relative_prefix="重点关注",
-        confirmation_token=preview["confirmation_token"],
-        snapshot_path=tmp_path / "snapshot.jsonl",
-        receipt_path=tmp_path / "receipt.json",
-    )
+    before = _counts(catalog)
+    tree_before = _tree(tmp_path)
 
-    first = catalog.scan(root_ids={"dropbox_stock"})
-    document_count_after_first = catalog.store.fetchone(
-        "SELECT count(*) AS n FROM documents"
-    )["n"]
-    second = catalog.scan(root_ids={"dropbox_stock"})
+    with pytest.raises(RetiredMaintenanceError) as exc:
+        service.preview(root_id="dropbox_stock", relative_prefix="重点关注")
+    assert exc.value.operation == "focus-cleanup"
 
-    target_rows = catalog.store.fetchall(
-        """SELECT l.relative_path,l.role,d.document_kind
-        FROM locations l JOIN documents d ON d.document_id=l.document_id
-        WHERE l.root_id='dropbox_stock' AND l.relative_path LIKE '重点关注/%'
-        ORDER BY l.relative_path"""
-    )
-    assert [
-        (row["relative_path"], row["role"], row["document_kind"]) for row in target_rows
-    ] == [
-        ("重点关注/Acme招股说明书.txt", "original_primary", "prospectus"),
-        ("重点关注/Acme招股说明书.txt.source.json", "metadata", "prospectus"),
-    ]
-    assert first.policy_excluded == 2
-    assert second.policy_excluded == 2
-    assert catalog.store.fetchone("SELECT count(*) AS n FROM documents")["n"] == (
-        document_count_after_first
-    )
-    assert not (fixture["focus"] / "投资笔记.txt.source.json").exists()
-    assert not (fixture["focus"] / "股票池.txt.source.json").exists()
+    with pytest.raises(RetiredMaintenanceError) as exc:
+        service.apply(
+            root_id="dropbox_stock",
+            relative_prefix="重点关注",
+            confirmation_token="stale-token",
+            snapshot_path=tmp_path / "snapshot.jsonl",
+            receipt_path=tmp_path / "receipt.json",
+        )
+    assert exc.value.operation == "focus-cleanup"
+
+    with pytest.raises(RetiredMaintenanceError) as exc:
+        service.restore_files(
+            manifest_path=tmp_path / "missing-manifest.json",
+            dest_root=tmp_path / "restored",
+        )
+    assert exc.value.operation == "focus-cleanup-restore-files"
+
+    with pytest.raises(RetiredMaintenanceError) as exc:
+        service.restore_database(
+            snapshot_path=tmp_path / "missing-snapshot.jsonl",
+            database_path=catalog.config.database_path,
+        )
+    assert exc.value.operation == "focus-cleanup-restore-database"
+
+    assert _counts(catalog) == before
+    assert _tree(tmp_path) == tree_before
+    assert all(path.is_file() for path in fixture["originals"])
+    assert {
+        str(path): (_sha(path), path.stat().st_mtime_ns)
+        for path in fixture["originals"]
+    } == fixture["original_manifest"]
+    assert (fixture["focus"] / "投资笔记.txt.source.json").is_file()
+    assert (fixture["focus"] / "股票池.txt.source.json").is_file()
+    assert fixture["allowed_sidecar"].is_file()
+    assert not (tmp_path / "snapshot.jsonl").exists()
+    assert not (tmp_path / "receipt.json").exists()
+    assert not (catalog.config.catalog_dir / "focus_cleanup_archive").exists()
 
 
-def test_focus_cleanup_rejects_wrong_scope_and_stale_confirmation(tmp_path: Path):
+def test_focus_cleanup_scope_and_token_validation_is_retired(tmp_path: Path):
     fixture = _legacy_catalog(tmp_path)
     service = FocusScopeCleanupService(fixture["catalog"])
-    preview = service.preview(root_id="dropbox_stock", relative_prefix="重点关注")
+    preview_token = "any-token"
 
     for root_id, prefix in (
         ("company_raw", "重点关注"),
@@ -312,116 +204,67 @@ def test_focus_cleanup_rejects_wrong_scope_and_stale_confirmation(tmp_path: Path
         ("dropbox_stock", "重点关注旧"),
         ("dropbox_stock", "../重点关注"),
     ):
-        try:
+        with pytest.raises(RetiredMaintenanceError) as exc:
             service.preview(root_id=root_id, relative_prefix=prefix)
-        except ValueError:
-            pass
-        else:
-            raise AssertionError("unsafe cleanup scope was accepted")
+        assert exc.value.operation == "focus-cleanup"
 
     (fixture["focus"] / "新投资笔记.txt").write_text("new", encoding="utf-8")
-    try:
+    with pytest.raises(RetiredMaintenanceError) as exc:
         service.apply(
             root_id="dropbox_stock",
             relative_prefix="重点关注",
-            confirmation_token=preview["confirmation_token"],
+            confirmation_token=preview_token,
             snapshot_path=tmp_path / "snapshot.jsonl",
             receipt_path=tmp_path / "receipt.json",
         )
-    except ValueError as exc:
-        assert "confirmation" in str(exc).lower()
-    else:
-        raise AssertionError("stale cleanup confirmation was accepted")
+    assert exc.value.operation == "focus-cleanup"
+    assert not (tmp_path / "snapshot.jsonl").exists()
+    assert not (tmp_path / "receipt.json").exists()
 
 
-def test_focus_cleanup_apply_archives_deleted_files_and_restores(tmp_path: Path):
-    # Blocker 4+5: deleted sidecars/derived files must be archived with SHA and
-    # restorable byte-for-byte; DB rows must be rebuildable from the snapshot.
+def test_focus_cleanup_retirement_keeps_rescan_state_stable(tmp_path: Path):
     fixture = _legacy_catalog(tmp_path)
     catalog = fixture["catalog"]
     service = FocusScopeCleanupService(catalog)
-    archive_dir = tmp_path / "cleanup-archive"
-    preview = service.preview(root_id="dropbox_stock", relative_prefix="重点关注")
-    snapshot = tmp_path / "affected-rows.jsonl"
-    receipt = tmp_path / "cleanup-receipt.json"
+    tree_before = _tree(tmp_path)
 
-    deleted_sidecars = [
-        fixture["focus"] / "投资笔记.txt.source.json",
-        fixture["focus"] / "股票池.txt.source.json",
-    ]
-    before_bytes = {str(p): p.read_bytes() for p in deleted_sidecars}
-    before_sha = {
-        str(p): hashlib.sha256(p.read_bytes()).hexdigest() for p in deleted_sidecars
-    }
-    before_counts = {
-        table: catalog.store.fetchone(f"SELECT count(*) AS n FROM {table}")["n"]
-        for table in ("locations", "documents", "sources", "artifacts")
-    }
-
-    result = service.apply(
-        root_id="dropbox_stock",
-        relative_prefix="重点关注",
-        confirmation_token=preview["confirmation_token"],
-        snapshot_path=snapshot,
-        receipt_path=receipt,
-        archive_dir=archive_dir,
-    )
-
-    assert result["status"] == "completed"
-    assert not any(p.exists() for p in deleted_sidecars)
-    manifest_path = archive_dir / "manifest.json"
-    assert manifest_path.is_file()
-    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
-    archived = {
-        entry["original_path"]: entry
-        for entry in manifest["files"]
-        if entry["original_path"] in before_sha
-    }
-    assert set(archived) == set(before_sha)
-    for original_path, entry in archived.items():
-        assert entry["content_sha256"] == before_sha[original_path]
-        member = archive_dir / entry["archive_member"]
-        assert (
-            hashlib.sha256(member.read_bytes()).hexdigest() == entry["content_sha256"]
+    with pytest.raises(RetiredMaintenanceError):
+        service.apply(
+            root_id="dropbox_stock",
+            relative_prefix="重点关注",
+            confirmation_token="stale",
+            snapshot_path=tmp_path / "snapshot.jsonl",
+            receipt_path=tmp_path / "receipt.json",
         )
 
-    # Restore drill: bytes come back identical.
-    restore_dir = tmp_path / "restored"
-    service.restore_files(manifest_path=manifest_path, dest_root=restore_dir)
-    for path_text, data in before_bytes.items():
-        original = Path(path_text)
-        relative = original.relative_to(fixture["focus"].parent)
-        restored = restore_dir / relative
-        assert restored.is_file()
-        assert restored.read_bytes() == data
+    def snapshot():
+        scan = catalog.scan(root_ids={"dropbox_stock"})
+        rows = catalog.store.fetchall(
+            """SELECT l.relative_path,l.role,d.document_kind
+            FROM locations l JOIN documents d ON d.document_id=l.document_id
+            WHERE l.root_id='dropbox_stock' AND l.relative_path LIKE '重点关注/%'
+            ORDER BY l.relative_path"""
+        )
+        return (
+            scan.policy_excluded,
+            [tuple(row) for row in rows],
+            _counts(catalog),
+        )
 
-    # DB row rebuild from the JSONL snapshot (FK-safe reverse order).
-    restored = service.restore_database(
-        snapshot_path=snapshot,
-        database_path=catalog.config.database_path,
-    )
-    assert restored["total_rows"] > 0
-    assert restored["foreign_key_violations"] == 0
-    after_counts = {
-        table: catalog.store.fetchone(f"SELECT count(*) AS n FROM {table}")["n"]
-        for table in before_counts
-    }
-    assert after_counts == before_counts
-    shared = catalog.store.fetchone(
-        "SELECT document_id FROM documents WHERE document_id=?",
-        (fixture["shared_document"],),
-    )
-    orphan = catalog.store.fetchone(
-        "SELECT document_id FROM documents WHERE document_id=?",
-        (fixture["orphan_document"],),
-    )
-    assert shared is not None and orphan is not None
-    assert catalog.store.fetchone("PRAGMA foreign_key_check") is None
+    first = snapshot()
+    second = snapshot()
+    assert first == second  # two rescans do not drift without the cleanup
+    assert (fixture["focus"] / "投资笔记.txt.source.json").is_file()
+    assert (fixture["focus"] / "股票池.txt.source.json").is_file()
+    assert fixture["allowed_sidecar"].is_file()
+    assert _tree(tmp_path) == tree_before
+    assert {
+        str(path): (_sha(path), path.stat().st_mtime_ns)
+        for path in fixture["originals"]
+    } == fixture["original_manifest"]
 
 
-def test_focus_cleanup_cli_defaults_to_dry_run_and_apply_requires_all_guards(
-    tmp_path: Path, capsys
-):
+def test_focus_cleanup_cli_fails_closed_as_retired(tmp_path: Path, capsys):
     import company_wiki.source_catalog.cli as cli
 
     fixture = _legacy_catalog(tmp_path)
@@ -450,6 +293,7 @@ def test_focus_cleanup_cli_defaults_to_dry_run_and_apply_requires_all_guards(
     dry_receipt = tmp_path / "cli-dry-run.json"
     before = catalog.store.fetchone("SELECT count(*) AS n FROM locations")["n"]
 
+    # dry-run branch reaches the retired library entry: named failure, no receipt
     exit_code = cli.main(
         [
             "--config",
@@ -463,12 +307,15 @@ def test_focus_cleanup_cli_defaults_to_dry_run_and_apply_requires_all_guards(
             str(dry_receipt),
         ]
     )
-    output = json.loads(capsys.readouterr().out)
-    assert exit_code == 0
-    assert output["mode"] == "dry_run"
-    assert dry_receipt.is_file()
+    error = json.loads(capsys.readouterr().err)
+    assert exit_code == 1
+    assert error["status"] == "failed"
+    assert "retired" in error["error"]
+    assert "focus-cleanup" in error["error"]
+    assert not dry_receipt.exists()
     assert catalog.store.fetchone("SELECT count(*) AS n FROM locations")["n"] == before
 
+    # cli.py still enforces its own --apply guard surface (MAIN's write set)
     exit_code = cli.main(
         [
             "--config",
@@ -485,4 +332,32 @@ def test_focus_cleanup_cli_defaults_to_dry_run_and_apply_requires_all_guards(
     assert exit_code == 1
     assert error["error_type"] == "fatal"
     assert "requires" in error["error"]
+    assert catalog.store.fetchone("SELECT count(*) AS n FROM locations")["n"] == before
+
+    # --apply with every guard supplied still fails closed as retired, 0 writes
+    snapshot_path = tmp_path / "cli-snapshot.jsonl"
+    receipt_path = tmp_path / "cli-receipt.json"
+    exit_code = cli.main(
+        [
+            "--config",
+            str(config_path),
+            "focus-cleanup",
+            "--root-id",
+            "dropbox_stock",
+            "--relative-prefix",
+            "重点关注",
+            "--apply",
+            "--confirmation-token",
+            "any-token",
+            "--snapshot-path",
+            str(snapshot_path),
+            "--receipt-path",
+            str(receipt_path),
+        ]
+    )
+    error = json.loads(capsys.readouterr().err)
+    assert exit_code == 1
+    assert "retired" in error["error"]
+    assert not snapshot_path.exists()
+    assert not receipt_path.exists()
     assert catalog.store.fetchone("SELECT count(*) AS n FROM locations")["n"] == before
