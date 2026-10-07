@@ -10,7 +10,7 @@
 
 ## 当前恢复点（2026-10-07）
 
-- **原目标16项核查已执行：14项在明确范围内有证据，A12/A13两项部分成立但当前消费者日期语义不符合。** [逐项结论](final_scope_audit_2026-10-07.md)、[当前HEAD/祖先/保护/收据核查](harness_lanes/results/final_scope_acceptance_2026-10-07.json)。不再恢复已完成节点为施工队列；总体仍active。
+- **原目标16项核查已执行：14项在明确范围内有证据，A12/A13两项部分成立但当前消费者日期语义不符合。** [逐项结论](final_scope_audit_2026-10-07.md)、[当前HEAD/祖先/保护/收据核查](harness_lanes/results/final_scope_acceptance_2026-10-07.json)。不再恢复已完成节点为施工队列；总体blocked（等待外仓实施方式答复；未完成，非用户暂停）。
 - **唯一已证剩余施工：RF/StockWiki下载日误拒。** RF6e6b817a、StockWiki3fe5008真实六CLI4pass/2fail；最小临时副本6pass/25.17秒，但外仓未落地。已请求隔离worktree修复或交owner，答复前外仓只读。两卡prepared/not-dispatched，详见[日期实施单](final_consumer_asof_alignment_2026-10-07.md)。证据代码a8f2513/精确CWP CI37558926678全部步骤绿73秒不能替代外仓修复。
 - **当前运行时节点已发布：** selector0.4.2/parser0.1.1代码aa52cbd/CI37555504675全部步骤81秒绿；完整九原件86点、29/33、761定位全回放、精选63073B。200责任项及11真实/兼容/升级绿；四required miss、optional三取舍与重复6公开，见[S7收据](harness_lanes/results/s7_adoption_fundraising_main_acceptance_2026-10-07.json)。N6三包全部合入/推，f31cc0d/e8c645e为当前祖先，不重派、不重合并。
 - **准备deadline缺口已收口：**7aa88ae/精确CI37557509249全部步骤73秒绿；57责任项/五CLI、47源mypy/Ruff通过，十自身根absent；一入口deadline覆盖准备和执行，到期停止新读取/任务/HTTP，保留旧付费账。是协作式截止，不宣称能瞬间中断同步I/O。
@@ -98,4 +98,4 @@ TDD 框住具体公开行为。只在 N4 A/B/C、存储迁移等大节点集中�
 
 答复后先核当前两仓HEAD/计划；各仓补责任RED→最小实现→大节点责任测试→正常合入/push，再跑当前CWP→实际两消费者同六CLI，检查保护与独立根恢复。不能把临时提案GREEN当已发布GREEN；不重跑九样本、付费模型或已绿kill/ACK节点。具体文件/接口/反例/交接见[RF卡](harness_lanes/revenue_forecast_asof_alignment.md)和[StockWiki卡](harness_lanes/stockwiki_asof_alignment.md)。
 
-16项核查已经执行，详见[结论表](final_scope_audit_2026-10-07.md)；其余已证明节点不再施工。A12/A13两行在真实消费者落地前仍不符合，总体目标active。关闭两行后仅复核变动范围再决定目标完成。可选原件去重、全历史资料生产处理和自动投资研究不是当前强制收口步骤。
+16项核查已经执行，详见[结论表](final_scope_audit_2026-10-07.md)；其余已证明节点不再施工。A12/A13两行在真实消费者落地前仍不符合。日期提案、完整核查和本次只读复核连续保留同一外仓归属待答条件；可独立完成的必要工作已收口，目标blocked，收到答复后恢复并按两卡实施。关闭两行后仅复核变动范围再决定目标完成。可选原件去重、全历史资料生产处理和自动投资研究不是当前强制收口步骤。
