@@ -5,9 +5,10 @@ before project configuration, dotenv loading, network clients, or writer
 modules are imported.
 
 Entry classification is static: supported control and source-workflow tools
-always run, permanently retired research/Wiki writers never run, and every
-other legacy entry stays frozen until it is normalized or retired.  The
-historic ``COMPANY_WIKI_WRITE_MODE`` / ``COMPANY_WIKI_LEGACY_WRITERS``
+always run, permanently retired research/Wiki writers never run, the retired
+engineering gate/batch shells report ``LEGACY_ENGINEERING_TOOL_RETIRED`` and
+exit 78, and every other legacy entry stays frozen until it is normalized or
+retired.  The historic ``COMPANY_WIKI_WRITE_MODE`` / ``COMPANY_WIKI_LEGACY_WRITERS``
 permission pair no longer changes any result.
 """
 
@@ -25,17 +26,35 @@ SCRIPTS_DIR = Path(__file__).resolve().parent
 # Production-data writers, test frameworks, cleanup tools, and migration tools
 # are intentionally absent.  config_doctor is the read-only production-config
 # maintenance entry (R4.1/N-05) and must behave the same in every startup mode.
+# The retired engineering gates/batch shells left this list in G5-CWP-CHECKS;
+# they now belong to RETIRED_ENGINEERING_TOOL_SCRIPTS below.
 CONTROL_TOOL_ALLOWLIST = frozenset(
     {
-        "architecture_gate.py",
-        "clean_env_gate.py",
         "config_doctor.py",
         "legacy_observer.py",
         "recovery_baseline.py",
         "secret_audit.py",
-        "semantic_gate.py",
         "snapshot_manifest.py",
         "wr109_step6_capture.py",
+    }
+)
+
+# G5-CWP-CHECKS retirement category: the six old engineering gates and batch
+# shells are standard-library-only stubs.  Direct invocation (legacy arguments,
+# ``--help``, ``python -S``) prints ``LEGACY_ENGINEERING_TOOL_RETIRED`` and
+# exits 78; importing them initialises nothing.  They are not supported control
+# tools, they are not research/Wiki writers, and no environment value, flag or
+# approval re-enables the old chain.  Current checks live in
+# .pre-commit-config.yaml, .githooks/pre-push, tools/pre_push_gate.py and
+# .github/workflows/ci.yml.
+RETIRED_ENGINEERING_TOOL_SCRIPTS = frozenset(
+    {
+        "architecture_gate.py",
+        "batch_process.py",
+        "clean_env_gate.py",
+        "gold_gate.py",
+        "semantic_gate.py",
+        "test_framework.py",
     }
 )
 
@@ -127,6 +146,8 @@ def legacy_script_execution_allowed(
     """
     del environment
     name = _script_name(script_path)
+    if name in RETIRED_ENGINEERING_TOOL_SCRIPTS:
+        return False
     if name in PERMANENTLY_RETIRED_SCRIPTS:
         return False
     return _supported_tool(name)
@@ -149,6 +170,22 @@ def is_legacy_script_cli(script_path: str | os.PathLike[str]) -> bool:
 
 def blocked_message(script_name: str) -> str:
     script_name = _script_name(script_name)
+    if script_name in RETIRED_ENGINEERING_TOOL_SCRIPTS:
+        # Checked first: batch_process.py is also permanently retired, but both
+        # startup paths (sitecustomize here, the stub under `python -S`) must
+        # report the same engineering retirement marker.
+        return (
+            "=" * 60
+            + f"\n  LEGACY ENGINEERING TOOL RETIRED: {script_name}\n"
+            + "  LEGACY_ENGINEERING_TOOL_RETIRED\n\n"
+            + "  This old engineering gate / batch shell is retired.  It no longer\n"
+            + "  evaluates rules, copies candidate trees, writes receipts or starts\n"
+            + "  any pipeline.  Current checks live in .pre-commit-config.yaml,\n"
+            + "  .githooks/pre-push, tools/pre_push_gate.py and\n"
+            + "  .github/workflows/ci.yml; see control/README.md for the history.\n"
+            + "  Environment overrides cannot re-enable this entry.\n"
+            + "=" * 60
+        )
     if script_name in PERMANENTLY_RETIRED_SCRIPTS:
         return (
             "=" * 60

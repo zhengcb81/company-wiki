@@ -1,0 +1,307 @@
+{
+  "schema_version": "g5-retirement-map/1",
+  "package_id": "G5-CWP-CHECKS",
+  "base_commit": "5d0ad75504a9815febc1bddbe76ae2f667c3e74a",
+  "note": "逐函数记录：原位置、真实 caller、处理、替代位置/反例。不是人工签收表；caller 由全仓 grep（import 语句 + scripts/<name>.py 路径字符串）得到，artifacts/gates/*.json 中的命中是历史快照，不是运行 caller。",
+  "functions": [
+    {
+      "symbol": "semantic_gate.load_json",
+      "original_location": "scripts/semantic_gate.py:14",
+      "callers": ["scripts/semantic_gate.py:48,54,60,105,118,136 (内部)"],
+      "disposition": "retire",
+      "replacement": null,
+      "counterexample": null
+    },
+    {
+      "symbol": "semantic_gate.source_id_from_markdown",
+      "original_location": "scripts/semantic_gate.py:21",
+      "callers": ["scripts/semantic_gate.py:33 (内部)"],
+      "disposition": "retire",
+      "replacement": "tests/helpers/gold_evaluator.py::_parse_frontmatter_body + corpus_manifest 登记校验",
+      "counterexample": "tests/contract/test_gold_mutations.py::test_unregistered_source_is_rejected"
+    },
+    {
+      "symbol": "semantic_gate.evaluate_gold_integrity(gold_root, min_sources)",
+      "original_location": "scripts/semantic_gate.py:29",
+      "callers": [
+        "scripts/semantic_gate.py:173 (main)",
+        "tests/unit/test_semantic_gate.py:41,52,67,76",
+        "tests/acceptance/test_control_bootstrap.py:72"
+      ],
+      "disposition": "retire",
+      "replacement": "tests/helpers/gold_evaluator.py::load_gold / evaluate（真实来源质量与失败传播计算）",
+      "counterexample": [
+        "tests/contract/test_gold_mutations.py::TestCorpusIntegrityMutations::test_routing_source_reference_is_rejected (新)",
+        "tests/contract/test_gold_mutations.py::TestCorpusIntegrityMutations::test_claim_source_reference_is_rejected (新)",
+        "tests/contract/test_gold_mutations.py::TestCorpusIntegrityMutations::test_broken_claim_span_reference_is_rejected",
+        "tests/contract/test_gold_mutations.py::TestCorpusIntegrityMutations::test_span_offset_shift_is_rejected",
+        "tests/contract/test_gold_mutations.py::TestPredictionMutations::_assert_metric_failed (all_critical_pass=False)",
+        "tests/contract/test_gold_mutations.py::test_threshold_file_is_definition_only",
+        "tests/acceptance/test_control_bootstrap.py::test_quality_below_threshold_is_reported_as_failure_not_success (新)"
+      ],
+      "removed_counterexamples": [
+        "test_valid_minimal_gold_is_computed_as_pass — 资格门 pass 路径，退休后不再存在",
+        "test_minimum_source_count_is_hard_failure — source-count 资格专属，按卡删除",
+        "test_handwritten_pass_cannot_override_failed_threshold — 由阈值 definition-only + all_critical_pass=False 反例承接"
+      ]
+    },
+    {
+      "symbol": "semantic_gate.build_parser / main",
+      "original_location": "scripts/semantic_gate.py:161,169",
+      "callers": ["scripts/semantic_gate.py:182 (__main__)"],
+      "disposition": "retire",
+      "replacement": "scripts/semantic_gate.py::main (退休薄壳)",
+      "counterexample": "tests/unit/test_g5_legacy_checks_retirement.py::test_retired_cli_reports_marker_from_an_empty_cwd"
+    },
+    {
+      "symbol": "architecture_gate.load_config",
+      "original_location": "scripts/architecture_gate.py:14",
+      "callers": ["scripts/architecture_gate.py:98 (main)"],
+      "disposition": "retire",
+      "replacement": null,
+      "counterexample": null
+    },
+    {
+      "symbol": "architecture_gate._excluded",
+      "original_location": "scripts/architecture_gate.py:21",
+      "callers": ["scripts/architecture_gate.py:39 (内部)"],
+      "disposition": "retire",
+      "replacement": null,
+      "counterexample": null
+    },
+    {
+      "symbol": "architecture_gate.evaluate_architecture(root, config)",
+      "original_location": "scripts/architecture_gate.py:26",
+      "callers": [
+        "scripts/architecture_gate.py:98 (main)",
+        "tests/unit/test_architecture_gate.py:19,34,55,77",
+        "tests/acceptance/test_control_bootstrap.py:36"
+      ],
+      "disposition": "retire",
+      "replacement": null,
+      "counterexample": "无替代实现：regex/计数规则门按卡删除；职责由 .pre-commit-config.yaml / tools/pre_push_gate.py / .github/workflows/ci.yml 的真实检查承担"
+    },
+    {
+      "symbol": "architecture_gate.build_parser / main",
+      "original_location": "scripts/architecture_gate.py:84,92",
+      "callers": ["scripts/architecture_gate.py:107 (__main__)"],
+      "disposition": "retire",
+      "replacement": "scripts/architecture_gate.py::main (退休薄壳)",
+      "counterexample": "tests/unit/test_g5_legacy_checks_retirement.py::test_retired_cli_reports_marker_from_an_empty_cwd"
+    },
+    {
+      "symbol": "clean_env_gate.EXCLUDED_PREFIXES / EXCLUDED_NAMES / _git_paths / sha256_file",
+      "original_location": "scripts/clean_env_gate.py:18,28,39,59",
+      "callers": ["scripts/clean_env_gate.py (内部，仅 materialize_candidate 消费)"],
+      "disposition": "retire",
+      "replacement": null,
+      "counterexample": "候选整树复制专属实现，无存活消费者"
+    },
+    {
+      "symbol": "clean_env_gate.is_candidate_path(relative)",
+      "original_location": "scripts/clean_env_gate.py:50",
+      "callers": [
+        "scripts/clean_env_gate.py:82 (materialize_candidate)",
+        "tests/unit/test_clean_env_gate.py:16-21",
+        "tests/acceptance/test_control_bootstrap.py:17-19"
+      ],
+      "disposition": "retire",
+      "replacement": null,
+      "counterexample": "候选整树复制链专属；生产数据排除在 E2E 哨兵里继续验证（tests/integration/test_g5_legacy_checks_retirement_e2e.py）"
+    },
+    {
+      "symbol": "clean_env_gate.materialize_candidate(source, destination)",
+      "original_location": "scripts/clean_env_gate.py:67",
+      "callers": [
+        "scripts/clean_env_gate.py:232 (main)",
+        "tests/unit/test_clean_env_gate.py:37,49"
+      ],
+      "disposition": "retire",
+      "replacement": null,
+      "counterexample": "tests/integration/test_g5_legacy_checks_retirement_e2e.py::test_retired_scripts_never_copy_the_source_tree"
+    },
+    {
+      "symbol": "clean_env_gate.sanitized_environment",
+      "original_location": "scripts/clean_env_gate.py:111",
+      "callers": [
+        "scripts/clean_env_gate.py:137 (run_clean_gate)",
+        "tests/unit/test_hermetic_runtime.py:18",
+        "tests/unit/test_clean_env_gate.py:6,57"
+      ],
+      "disposition": "migrate",
+      "replacement": "tests/support/isolated_environment.py::sanitized_environment",
+      "counterexample": [
+        "tests/unit/test_hermetic_runtime.py::test_isolated_environment_disables_dotenv_and_strips_api_keys (迁移 import 并补 CUSTOM_API_KEY / COMPANY_WIKI_* / PIP_NO_INDEX / NO_PROXY 断言)",
+        "tests/unit/test_g5_legacy_checks_retirement.py::test_isolated_environment_strips_fake_keys_and_disables_dotenv",
+        "tests/integration/test_g5_legacy_checks_retirement_e2e.py::test_isolation_helper_subprocess_counterexample_uses_only_fake_keys"
+      ]
+    },
+    {
+      "symbol": "clean_env_gate.run_clean_gate(candidate, commands, timeout_s)",
+      "original_location": "scripts/clean_env_gate.py:135",
+      "callers": ["scripts/clean_env_gate.py:233 (main)"],
+      "disposition": "retire",
+      "replacement": null,
+      "counterexample": null
+    },
+    {
+      "symbol": "clean_env_gate.build_parser / main",
+      "original_location": "scripts/clean_env_gate.py:207,218",
+      "callers": ["scripts/clean_env_gate.py:247 (__main__)"],
+      "disposition": "retire",
+      "replacement": "scripts/clean_env_gate.py::main (退休薄壳)",
+      "counterexample": "tests/unit/test_g5_legacy_checks_retirement.py::test_retired_cli_reports_marker_from_an_empty_cwd"
+    },
+    {
+      "symbol": "gold_gate._parser",
+      "original_location": "scripts/gold_gate.py:25",
+      "callers": ["scripts/gold_gate.py:73 (main)"],
+      "disposition": "retire",
+      "replacement": null,
+      "counterexample": "tests/contract/test_gold_evaluator.py::TestRetiredGoldGateCli::test_help_reports_retirement_instead_of_usage"
+    },
+    {
+      "symbol": "gold_gate._load_predictions(path)",
+      "original_location": "scripts/gold_gate.py:42",
+      "callers": ["scripts/gold_gate.py:79 (main)"],
+      "disposition": "retire",
+      "replacement": "tests/helpers/gold_evaluator.py::evaluate（直接接收 predictions 对象）",
+      "counterexample": "tests/contract/test_gold_evaluator.py::TestPerfectPrediction"
+    },
+    {
+      "symbol": "gold_gate._write_receipt(path, receipt)",
+      "original_location": "scripts/gold_gate.py:52",
+      "callers": ["scripts/gold_gate.py:88 (main)"],
+      "disposition": "retire",
+      "replacement": "无：收据写入不再由 CLI 承担（退休零写）",
+      "counterexample": "tests/contract/test_gold_evaluator.py::TestRetiredGoldGateCli::test_run_writes_no_receipt_at_all"
+    },
+    {
+      "symbol": "gold_gate.main(argv)",
+      "original_location": "scripts/gold_gate.py:72",
+      "callers": [
+        "scripts/gold_gate.py:107 (__main__)",
+        "tests/contract/test_gold_evaluator.py:60-95 (subprocess)"
+      ],
+      "disposition": "retire",
+      "replacement": "scripts/gold_gate.py::main (退休薄壳)；真实评价算法保留在 tests/helpers/gold_evaluator.py（未改动）",
+      "counterexample": "tests/contract/test_gold_evaluator.py::TestRetiredGoldGateCli"
+    },
+    {
+      "symbol": "test_framework.run_command / run_unit_tests / run_integration_tests / run_gate_tests / run_section_discovery_test / run_framework_loader_test",
+      "original_location": "scripts/test_framework.py:30,69,100,130,176,197",
+      "callers": ["scripts/test_framework.py:369-381 (main，自身 mixed-frozen 不可执行)"],
+      "disposition": "retire",
+      "replacement": "pytest（CI: tests/unit + tools/pre_push_gate.py --fast-contracts-only）",
+      "counterexample": "tests/unit/test_g5_legacy_checks_retirement.py::test_retired_cli_never_writes_or_opens_the_network"
+    },
+    {
+      "symbol": "test_framework.save_test_results / update_review_log / generate_report",
+      "original_location": "scripts/test_framework.py:218,249,285",
+      "callers": ["scripts/test_framework.py:384,387,359 (main)"],
+      "disposition": "retire",
+      "replacement": null,
+      "counterexample": "退休零写：tests/unit/test_g5_legacy_checks_retirement.py::test_main_reports_retirement_with_zero_initialisation"
+    },
+    {
+      "symbol": "test_framework.main",
+      "original_location": "scripts/test_framework.py:336",
+      "callers": ["scripts/test_framework.py:416 (__main__，被 enforce_direct_cli 拦截)"],
+      "disposition": "retire",
+      "replacement": "scripts/test_framework.py::main (退休薄壳)",
+      "counterexample": "tests/unit/test_g5_legacy_checks_retirement.py::test_main_reports_retirement_with_zero_initialisation"
+    },
+    {
+      "symbol": "batch_process.TIER_1_COMPANIES / TIER_2_COMPANIES / get_companies_by_tier",
+      "original_location": "scripts/batch_process.py:21,34,45",
+      "callers": ["scripts/batch_process.py:228 (main)"],
+      "disposition": "retire",
+      "replacement": null,
+      "counterexample": null
+    },
+    {
+      "symbol": "batch_process.check_company_status",
+      "original_location": "scripts/batch_process.py:55",
+      "callers": ["scripts/batch_process.py:93,246"],
+      "disposition": "retire",
+      "replacement": null,
+      "counterexample": null
+    },
+    {
+      "symbol": "batch_process.process_company",
+      "original_location": "scripts/batch_process.py:86",
+      "callers": ["scripts/batch_process.py:258 (main，PERMANENTLY_RETIRED 不可执行)"],
+      "disposition": "retire",
+      "replacement": null,
+      "counterexample": "旧链整族退休；G4 retirement_map 记录的 scripts/full_pipeline.py 子进程命令串随本卡消失"
+    },
+    {
+      "symbol": "batch_process.generate_report",
+      "original_location": "scripts/batch_process.py:152",
+      "callers": ["scripts/batch_process.py:262 (main)"],
+      "disposition": "retire",
+      "replacement": null,
+      "counterexample": "退休零写"
+    },
+    {
+      "symbol": "batch_process.main",
+      "original_location": "scripts/batch_process.py:213",
+      "callers": ["scripts/batch_process.py:273 (__main__，被 enforce_direct_cli 拦截)"],
+      "disposition": "retire",
+      "replacement": "scripts/batch_process.py::main (退休薄壳)",
+      "counterexample": "tests/unit/test_g5_legacy_checks_retirement.py::test_main_reports_retirement_with_zero_initialisation"
+    },
+    {
+      "symbol": "control/architecture.json",
+      "original_location": "control/architecture.json",
+      "callers": ["scripts/architecture_gate.py:87 (--config 默认值，唯一代码消费者)"],
+      "disposition": "retire",
+      "replacement": "control/README.md（历史/当前说明）",
+      "counterexample": "tests/unit/test_g5_legacy_checks_retirement.py::test_control_architecture_rules_config_has_no_surviving_consumer"
+    }
+  ],
+  "policy_changes": [
+    {
+      "symbol": "writer_policy.CONTROL_TOOL_ALLOWLIST",
+      "change": "移除 architecture_gate.py / clean_env_gate.py / semantic_gate.py",
+      "reason": "退休后不再是受支持控制工具；移出后 is_legacy_script_cli 与 sitecustomize 继续 fail-closed"
+    },
+    {
+      "symbol": "writer_policy.RETIRED_ENGINEERING_TOOL_SCRIPTS",
+      "change": "新增，恰好包含六名",
+      "reason": "卡片只允许改这六个名字的类别；PERMANENTLY_RETIRED_SCRIPTS（R1-R5）被冻结等值断言保护，不并入"
+    },
+    {
+      "symbol": "writer_policy.legacy_script_execution_allowed",
+      "change": "对 RETIRED_ENGINEERING_TOOL_SCRIPTS 直接返回 False",
+      "reason": "环境变量/flag 永不放行"
+    },
+    {
+      "symbol": "writer_policy.blocked_message",
+      "change": "工程退休分支置于永久退休分支之前",
+      "reason": "batch_process.py 双族重叠；plain（sitecustomize）与 python -S（stub）两条启动路径必须报告同一 LEGACY_ENGINEERING_TOOL_RETIRED marker"
+    }
+  ],
+  "no_change": [
+    {
+      "path": "tests/unit/test_writer_freeze.py",
+      "reason": "六 stub 不再含 .write_text( / .unlink( / os.replace( 且不在 allowlist，两条扫描测试自动跳过；实测 10 passed"
+    },
+    {
+      "path": "tests/helpers/gold_evaluator.py",
+      "reason": "真实评价算法保留，未拆 CLI 收据耦合（收据耦合只在已退休的 gold_gate 内），故按卡不修改"
+    },
+    {
+      "path": "scripts/sitecustomize.py",
+      "reason": "继续作为解释器启动拦截；消息经 writer_policy 新分支变为工程退休 banner"
+    },
+    {
+      "path": ".pre-commit-config.yaml / .github/workflows/ci.yml / .githooks/pre-push / tools/pre_push_gate.py",
+      "reason": "全仓无六脚本引用；不改 hook/CI/总 PWF（禁写）"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/architecture_gate.py",
+      "reason": "与已退休的 scripts/architecture_gate.py 同名不同物，禁写，未触碰"
+    }
+  ]
+}

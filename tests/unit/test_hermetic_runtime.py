@@ -1,4 +1,9 @@
-"""Executable contracts for no-network, no-dotenv test and Gate runtimes."""
+"""Executable contracts for the no-network, no-dotenv test runtime.
+
+The environment isolation itself migrated out of the retired
+``scripts/clean_env_gate.py`` into ``tests/support/isolated_environment.py``
+(G5-CWP-CHECKS); these tests keep consuming it.
+"""
 
 from __future__ import annotations
 
@@ -15,7 +20,7 @@ ROOT = Path(__file__).resolve().parents[2]
 SCRIPTS = ROOT / "scripts"
 sys.path.insert(0, str(SCRIPTS))
 
-from clean_env_gate import sanitized_environment as clean_environment
+from support.isolated_environment import sanitized_environment as clean_environment
 
 
 def test_isolated_environment_disables_dotenv_and_strips_api_keys(monkeypatch) -> None:
@@ -23,14 +28,22 @@ def test_isolated_environment_disables_dotenv_and_strips_api_keys(monkeypatch) -
     monkeypatch.setenv("MINIMAX_API_KEY", "must-not-survive")
     monkeypatch.setenv("MIMO_API_KEY", "must-not-survive")
     monkeypatch.setenv("TAVILY_API_KEY", "must-not-survive")
+    monkeypatch.setenv("CUSTOM_API_KEY", "must-not-survive")
+    monkeypatch.setenv("COMPANY_WIKI_WRITE_MODE", "legacy")
+    monkeypatch.setenv("COMPANY_WIKI_LEGACY_WRITERS", "allow")
     environment = clean_environment()
     assert "DEEPSEEK_API_KEY" not in environment
     assert "MINIMAX_API_KEY" not in environment
     assert "MIMO_API_KEY" not in environment
     assert "TAVILY_API_KEY" not in environment
+    assert "CUSTOM_API_KEY" not in environment
+    assert "COMPANY_WIKI_WRITE_MODE" not in environment
+    assert "COMPANY_WIKI_LEGACY_WRITERS" not in environment
     assert environment["PYTHON_DOTENV_DISABLED"] == "1"
     assert environment["COMPANY_WIKI_NETWORK"] == "blocked"
     assert environment["COMPANY_WIKI_REAL_LLM"] == "0"
+    assert environment["PIP_NO_INDEX"] == "1"
+    assert environment["NO_PROXY"] == "*"
 
 
 def test_config_cannot_reload_repository_dotenv_when_disabled() -> None:
