@@ -1,6 +1,6 @@
 {
   "schema_version": "consumer-asof-main-acceptance/1",
-  "status": "main_integrated_actual_e2e_green_rf_ci_green_cleanup_complete_pending_cwp_publication",
+  "status": "complete_with_documented_scope_bounds",
   "authorization": "用户：授权隔离修复并线",
   "rf_base": "6e6b817a1a6e4567293a4dcb835815f3be508a03",
   "stockwiki_base": "3fe5008c1ea18c363296121b8b0ee3a7b2db2212",
@@ -374,5 +374,107 @@
     "copies_or_backups_created": 0
   },
   "cleanup_logical_bytes": 136471537.0,
-  "cleanup_production_savings_claimed": false
+  "cleanup_production_savings_claimed": false,
+  "cwp_code_sha": "ee0d1e7af6a5f6eeda4dce33bc0cda2318e82010",
+  "cwp_ci": {
+    "run_id": 37575052423,
+    "head_sha": "ee0d1e7af6a5f6eeda4dce33bc0cda2318e82010",
+    "run_attempt": 1,
+    "status": "completed",
+    "conclusion": "success",
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/37575052423",
+    "jobs": [
+      {
+        "id": 112641956369,
+        "name": "Fast checks (Python 3.12)",
+        "conclusion": "success",
+        "seconds": 70.0,
+        "steps": [
+          {
+            "name": "Set up job",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run actions/checkout@v4",
+            "conclusion": "success"
+          },
+          {
+            "name": "Set up Python 3.12",
+            "conclusion": "success"
+          },
+          {
+            "name": "Install dependencies",
+            "conclusion": "success"
+          },
+          {
+            "name": "Ruff lint",
+            "conclusion": "success"
+          },
+          {
+            "name": "Strict type check on contract modules",
+            "conclusion": "success"
+          },
+          {
+            "name": "Compileall and config doctor",
+            "conclusion": "success"
+          },
+          {
+            "name": "Unit tests",
+            "conclusion": "success"
+          },
+          {
+            "name": "Unit test failure summary",
+            "conclusion": "success"
+          },
+          {
+            "name": "Focused contract tests",
+            "conclusion": "success"
+          },
+          {
+            "name": "Focused contract failure summary",
+            "conclusion": "success"
+          },
+          {
+            "name": "CLI smoke test",
+            "conclusion": "success"
+          },
+          {
+            "name": "Scan for hardcoded secrets",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Set up Python 3.12",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Run actions/checkout@v4",
+            "conclusion": "success"
+          },
+          {
+            "name": "Complete job",
+            "conclusion": "success"
+          }
+        ]
+      }
+    ],
+    "all_jobs_and_executed_steps_success": true
+  },
+  "required_remaining": [],
+  "final_audit": {
+    "requirements": 16,
+    "proved_with_explicit_bounds": 16,
+    "previous_partial": [
+      "A12",
+      "A13"
+    ],
+    "closed_by_actual_main_e2e": true,
+    "scope_document": "../../final_scope_audit_2026-10-07.md",
+    "optional_excluded": [
+      "raw exact-SHA physical dedup",
+      "whole historical corpus production run",
+      "automatic investment research/forecast generation",
+      "new paid provider purchase"
+    ],
+    "cwp_ci_scope": "existing unit and fast contracts; six cross-repo CLI cases separately executed locally"
+  }
 }

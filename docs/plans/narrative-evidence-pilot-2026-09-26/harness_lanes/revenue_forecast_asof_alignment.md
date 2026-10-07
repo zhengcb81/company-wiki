@@ -32,4 +32,4 @@ RF main6e6b817a，CWP848cacf/运行7aa88ae。真实CWP发布原文：公开2026-
 
 本次两个独立worktree和三个测试根恢复absent，移除136471537 B临时代码/测试资料，不计为生产清理收益。九原件SHA/size/mtime、生产DB完整SHA及六个配置/owner文件指纹保持。RF三owner日志和CWP source_acquisition用户修改不暂存、不覆盖；StockWiki owner工作树clean，quick-scan/IQS未改。两套安装技能仅在校验旧主线字节后同步本次两文件，其他本地内容保留，不宣称整套安装完全一致。
 
-完整[主线验收收据](results/final_asof_implementation_2026-10-07.json)、[RF独立交接](results/final_rf_asof_handoff_2026-10-07.json)、[StockWiki独立交接](results/final_stockwiki_asof_handoff_2026-10-07.json)。历史RED/提案GREEN收据保留，不能替代本次实际主线结果。CWP本次测试/文档正常提交推送并记录对应代码CI后，完成最后发布收尾。
+完整[主线验收收据](results/final_asof_implementation_2026-10-07.json)、[RF独立交接](results/final_rf_asof_handoff_2026-10-07.json)、[StockWiki独立交接](results/final_stockwiki_asof_handoff_2026-10-07.json)。历史RED/提案GREEN收据保留，不能替代本次实际主线结果。CWP本次测试/文档已正常提交推送：ee0d1e7，精确CI37575052423/job112641956369全部步骤绿70秒；六跨仓CLI为另行本地集中验收，不冒称日常CI执行外仓E2E。本轮必要施工全部完成。

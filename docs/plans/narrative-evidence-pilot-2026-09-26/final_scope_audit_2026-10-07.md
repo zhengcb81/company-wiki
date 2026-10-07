@@ -1,6 +1,6 @@
 # 原目标逐项核查与主线验收
 
-> 2026-10-07：16项在下述明确范围内已有实现及验收证据。原A12/A13两处日期语义缺口已获授权、TDD修复、实际主线六CLI验收；最后CWP提交/精确CI发布收尾。不是全历史资料和自动投资研究均已生产运行的声明，不新增人工签收或日常长测试。
+> 2026-10-07：16项在下述明确范围内已有实现及验收证据。原A12/A13两处日期语义缺口已获授权、TDD修复、实际主线六CLI验收；CWP ee0d1e7已推送，精确CI37575052423全部步骤绿70秒，必要施工无剩余。不是全历史资料和自动投资研究均已生产运行的声明，不新增人工签收或日常长测试。
 
 ## 当前权威状态
 
@@ -55,6 +55,6 @@ RF main/远端 e241389，精确CI全部步骤绿30秒；StockWiki本地master9f5
 
 本次两个独立worktree和三个测试根恢复absent，移除136471537 B临时代码/测试资料，不计为生产清理收益。九原件SHA/size/mtime、生产DB完整SHA及六个配置/owner文件指纹保持。RF三owner日志和CWP source_acquisition用户修改不暂存、不覆盖；StockWiki owner工作树clean，quick-scan/IQS未改。两套安装技能仅在校验旧主线字节后同步本次两文件，其他本地内容保留，不宣称整套安装完全一致。
 
-完整[主线验收收据](harness_lanes/results/final_asof_implementation_2026-10-07.json)、[RF独立交接](harness_lanes/results/final_rf_asof_handoff_2026-10-07.json)、[StockWiki独立交接](harness_lanes/results/final_stockwiki_asof_handoff_2026-10-07.json)。历史RED/提案GREEN收据保留，不能替代本次实际主线结果。CWP本次测试/文档正常提交推送并记录对应代码CI后，完成最后发布收尾。
+完整[主线验收收据](harness_lanes/results/final_asof_implementation_2026-10-07.json)、[RF独立交接](harness_lanes/results/final_rf_asof_handoff_2026-10-07.json)、[StockWiki独立交接](harness_lanes/results/final_stockwiki_asof_handoff_2026-10-07.json)。历史RED/提案GREEN收据保留，不能替代本次实际主线结果。CWP本次测试/文档已正常提交推送：ee0d1e7，精确CI37575052423/job112641956369全部步骤绿70秒；六跨仓CLI为另行本地集中验收，不冒称日常CI执行外仓E2E。本轮必要施工全部完成。
 
 无其他已证必要施工待办。可选raw去重、全历史资料生产处理或自动投资研究不混入本轮收口。

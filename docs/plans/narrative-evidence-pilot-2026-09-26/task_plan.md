@@ -14,7 +14,7 @@
 - **RF已发布、StockWiki本地主线已合入：**RF e241389/精确CI37574397700全部步骤绿30秒；StockWiki9f552a6无远端，明确只验收本地master。六正式跨仓CLI6pass/29.63秒，晚下载成功、未来公开拒绝，证据逐条一致；两仓责任反例保持。
 - **运行节点与范围：**selector0.4.2/parser0.1.1 aa52cbd、deadline7aa88ae及N6三包均已发布，既有精确CI绿。九样本29/33、761定位全回放；四required miss、optional三取舍和重复6仍公开，未降低标准。
 - **保护与空间：**生产DB222408704B完整指纹、九原件及六保护文件不变；S5/S6净释放5659443210B/raw删除0。本次新建工作树和测试根全absent，临时清理136471537B另计。未重跑付费模型、九样本或备份恢复。
-- **owner边界：**RF三日志dirty、CWP source_acquisition.yaml独立dirty均保留，不stage/覆盖；StockWiki主线clean；Dayu/IQS/quick-scan本轮无写。CWP本次测试与PWF发布收尾中，最后代码CI记录后关闭目标。
+- **owner边界：**RF三日志dirty、CWP source_acquisition.yaml独立dirty均保留，不stage/覆盖；StockWiki主线clean；Dayu/IQS/quick-scan本轮无写。CWP ee0d1e7已推送，精确CI37575052423全部步骤绿70秒；本轮目标完成，必要施工无剩余。
 
 历史恢复细节见[收口前已提交版本](https://github.com/zhengcb81/company-wiki/blob/1fb3cff6c1e32c01bfa5adbb4365b382a4d40b8b/docs/plans/narrative-evidence-pilot-2026-09-26/task_plan.md)与各节点收据；历史“未提交/待CI”不代表当前状态。
 
@@ -93,6 +93,6 @@ TDD 框住具体公开行为。只在 N4 A/B/C、存储迁移等大节点集中�
 
 ## Next Step
 
-最后发布收尾：本次CWP测试与PWF正常提交推送，记录精确代码CI；变动范围保护和清理已通过，发布成功后关闭目标。**没有其他已证必要施工待办。** 两张日期卡由MAIN完成，不再分派，不重跑九样本、付费模型和已绿长测试。
+**本轮目标完成，必要施工无剩余。** CWP ee0d1e7已推送，精确CI37575052423全部步骤绿70秒；RF e241389已推送/CI绿30秒，StockWiki9f552a6已合入本地master（无远端）。两个施工卡不再分派。原16项在明确范围内已验收，见[最终结论](final_scope_audit_2026-10-07.md)和[主线验收收据](harness_lanes/results/final_asof_implementation_2026-10-07.json)。
 
-完成范围及限制以[16项结论表](final_scope_audit_2026-10-07.md)为准。可选原件exact-SHA去重、全历史资料生产处理、新provider、自动投资研究不属于本轮强制收口；以后需要时独立立项。原件和当前用户未提交配置继续保留。
+可选原件exact-SHA去重、全历史资料生产处理、新provider、自动投资研究不属于本轮强制收口；以后需要时独立立项。四个required miss/optional三取舍、生产final仍为0等限制公开，不缩原golden分母。用户source_acquisition和RF owner三日志保留，全部本次临时根已恢复，不重跑已绿测试或付费模型。
