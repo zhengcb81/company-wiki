@@ -1,6 +1,6 @@
 # G2-SQA-CHECKS：StockQA工程入口与workflow统一
 
-> 当前状态：用户2026-10-07确认已分包，待交接。实现接口与原发出版本1a9b9d3不变，MAIN仅更新分派状态。
+> 当前状态：2026-10-07 MAIN已验收254项/静态/真实smoke绿，快进master，补提交被*.json忽略的机器交接4757088。文档strict警告误拒已真实复现/修复，主线0f8fbfa已推，精确日常CI37609783778绿35秒，文档CI37609783853构建21秒/部署7秒全部绿。owner工作保持。见[MAIN收据](results/g2_stockqabyllm_main_acceptance_2026-10-07.json)与[精确CI](results/g2_parallel_exact_ci_2026-10-07.json)。本卡已交付，不再开工；下文为原施工合同。
 
 **实施依赖已备齐。** 这是StockQAbyLLM工程工具实现包，无CWP/StockWiki/RF新接口依赖；不触invest-quick-scan/IQS活动项目。请完整读本卡，所有必要上下文均在此，不需要读CWP历史长计划。
 

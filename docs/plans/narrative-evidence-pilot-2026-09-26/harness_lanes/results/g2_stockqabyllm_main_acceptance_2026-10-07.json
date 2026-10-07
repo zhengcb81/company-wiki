@@ -1,0 +1,110 @@
+{
+  "schema_version": "g2-main-lane-acceptance/1",
+  "lane_id": "G2-SQA-CHECKS",
+  "status": "accepted_merged_pushed_exact_ci_passed",
+  "base_commit": "6a9ff13864ebb160d5c4ab3cf2f42155d9f4aa99",
+  "delivery_commit": "57dca677d505809e74cd50a57ce5475d2e2e1f82",
+  "main_commit": "0f8fbfa49c212b6bbcc986f876f80eb53e6bde5d",
+  "owner_before": {
+    "status": " M .gitignore\u0000 M main_with_llm.py\u0000 M src/runners/llm_runner.py\u0000 M src/utils/quick_scan_work_store.py\u0000?? .codegraph/\u0000?? .workbuddy-ai/\u0000?? docs/handoff/\u0000?? examples/quick_scan_search_policy.example.json\u0000?? nul\u0000?? pilot_runs/b2a_2026-10-03/\u0000?? pilot_runs/g2b_alphabet_2026-10-04/\u0000?? pilot_runs/l02_2026-10-04/\u0000?? progress_update.txt\u0000?? src/config/quick_scan_c06_authority.schema.json\u0000?? src/config/quick_scan_search_policy.py\u0000?? src/config/quick_scan_search_policy.schema.json\u0000?? src/providers/continuation_protocol.py\u0000?? src/providers/external_search_parsers.py\u0000?? src/providers/search_capability.py\u0000?? src/utils/quick_scan_c06_authority.py\u0000?? src/utils/quick_scan_delivery_seal.py\u0000?? src/utils/quick_scan_evidence.py\u0000?? src/utils/quick_scan_question_manifest.py\u0000?? tests/integration/test_qa_net01_cli_e2e.py\u0000?? tests/unit/test_qa_net01_c06_seal.py\u0000?? tests/unit/test_qa_net01_question_manifest.py\u0000?? tests/unit/test_qa_net01_search_boundary.py\u0000",
+    "names": [
+      ".codegraph/",
+      ".gitignore",
+      ".workbuddy-ai/",
+      "docs/handoff/",
+      "examples/quick_scan_search_policy.example.json",
+      "main_with_llm.py",
+      "nul",
+      "pilot_runs/b2a_2026-10-03/",
+      "pilot_runs/g2b_alphabet_2026-10-04/",
+      "pilot_runs/l02_2026-10-04/",
+      "progress_update.txt",
+      "src/config/quick_scan_c06_authority.schema.json",
+      "src/config/quick_scan_search_policy.py",
+      "src/config/quick_scan_search_policy.schema.json",
+      "src/providers/continuation_protocol.py",
+      "src/providers/external_search_parsers.py",
+      "src/providers/search_capability.py",
+      "src/runners/llm_runner.py",
+      "src/utils/quick_scan_c06_authority.py",
+      "src/utils/quick_scan_delivery_seal.py",
+      "src/utils/quick_scan_evidence.py",
+      "src/utils/quick_scan_question_manifest.py",
+      "src/utils/quick_scan_work_store.py",
+      "tests/integration/test_qa_net01_cli_e2e.py",
+      "tests/unit/test_qa_net01_c06_seal.py",
+      "tests/unit/test_qa_net01_question_manifest.py",
+      "tests/unit/test_qa_net01_search_boundary.py"
+    ],
+    "file_count": 470,
+    "fingerprint_sha256": "f2799edc162736b12a966059ad92c9bf542a8ffb2ca909ffcd0c062a23ac56d9",
+    "opaque_status_only": [
+      "nul"
+    ]
+  },
+  "owner_after": {
+    "status": " M .gitignore\u0000 M main_with_llm.py\u0000 M src/runners/llm_runner.py\u0000 M src/utils/quick_scan_work_store.py\u0000?? .codegraph/\u0000?? .workbuddy-ai/\u0000?? docs/handoff/\u0000?? examples/quick_scan_search_policy.example.json\u0000?? nul\u0000?? pilot_runs/b2a_2026-10-03/\u0000?? pilot_runs/g2b_alphabet_2026-10-04/\u0000?? pilot_runs/l02_2026-10-04/\u0000?? progress_update.txt\u0000?? src/config/quick_scan_c06_authority.schema.json\u0000?? src/config/quick_scan_search_policy.py\u0000?? src/config/quick_scan_search_policy.schema.json\u0000?? src/providers/continuation_protocol.py\u0000?? src/providers/external_search_parsers.py\u0000?? src/providers/search_capability.py\u0000?? src/utils/quick_scan_c06_authority.py\u0000?? src/utils/quick_scan_delivery_seal.py\u0000?? src/utils/quick_scan_evidence.py\u0000?? src/utils/quick_scan_question_manifest.py\u0000?? tests/integration/test_qa_net01_cli_e2e.py\u0000?? tests/unit/test_qa_net01_c06_seal.py\u0000?? tests/unit/test_qa_net01_question_manifest.py\u0000?? tests/unit/test_qa_net01_search_boundary.py\u0000",
+    "names": [
+      ".codegraph/",
+      ".gitignore",
+      ".workbuddy-ai/",
+      "docs/handoff/",
+      "examples/quick_scan_search_policy.example.json",
+      "main_with_llm.py",
+      "nul",
+      "pilot_runs/b2a_2026-10-03/",
+      "pilot_runs/g2b_alphabet_2026-10-04/",
+      "pilot_runs/l02_2026-10-04/",
+      "progress_update.txt",
+      "src/config/quick_scan_c06_authority.schema.json",
+      "src/config/quick_scan_search_policy.py",
+      "src/config/quick_scan_search_policy.schema.json",
+      "src/providers/continuation_protocol.py",
+      "src/providers/external_search_parsers.py",
+      "src/providers/search_capability.py",
+      "src/runners/llm_runner.py",
+      "src/utils/quick_scan_c06_authority.py",
+      "src/utils/quick_scan_delivery_seal.py",
+      "src/utils/quick_scan_evidence.py",
+      "src/utils/quick_scan_question_manifest.py",
+      "src/utils/quick_scan_work_store.py",
+      "tests/integration/test_qa_net01_cli_e2e.py",
+      "tests/unit/test_qa_net01_c06_seal.py",
+      "tests/unit/test_qa_net01_question_manifest.py",
+      "tests/unit/test_qa_net01_search_boundary.py"
+    ],
+    "file_count": 470,
+    "fingerprint_sha256": "f2799edc162736b12a966059ad92c9bf542a8ffb2ca909ffcd0c062a23ac56d9",
+    "opaque_status_only": [
+      "nul"
+    ]
+  },
+  "owner_unchanged": true,
+  "main_test": {
+    "exit_code": 0,
+    "passed": 254,
+    "pytest_seconds": 42.7,
+    "command": "python -B scripts/checks.py",
+    "cwd": "C:\\Users\\郑曾波\\Projects\\_g2\\StockQAbyLLM",
+    "full_repeated": false
+  },
+  "production_writes": 0,
+  "raw_deleted": 0,
+  "paid_calls": 0,
+  "remaining": [
+    "Whole G2B current producer integration remains; unrelated owner work preserved."
+  ],
+  "known_rf_legacy_drift": [],
+  "exact_ci_run_ids": [
+    37609783778,
+    37609783853
+  ],
+  "exact_ci_receipt": "g2_parallel_exact_ci_2026-10-07.json",
+  "main_followup_commits": [
+    "47570889b164001dfa6d800912021db7540f28c9",
+    "0f8fbfa49c212b6bbcc986f876f80eb53e6bde5d"
+  ],
+  "machine_handoff_was_ignored": "Old *.json rule; force-staged exactly the handoff JSON, owner .gitignore unchanged.",
+  "docs_ci_followup": "Actual RED four docstring warnings; ordinary build GREEN; real invalid config exit1. One artifact build; existing deployment succeeded.",
+  "owner_scope": "Full status/SHA/mtime aggregate verified across original fast-forward; later docs merge verified status and four tracked owner content hashes. No whole-turn mtime claim across normal hook stash/restore."
+}

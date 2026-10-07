@@ -1,0 +1,341 @@
+{
+  "schema_version": "g2-parallel-exact-ci/1",
+  "status": "all_published_remote_jobs_passed",
+  "runs": [
+    {
+      "repo": "revenue-forecast",
+      "run_id": 37608673031,
+      "head_sha": "1a2f9428a599504eb8355fcaebf86c6cbcaccbb3",
+      "head_branch": "main",
+      "run_attempt": 1,
+      "conclusion": "success",
+      "html_url": "https://github.com/zhengcb81/revenue-forecast/actions/runs/37608673031",
+      "jobs": {
+        "id": 112750312883,
+        "name": "verify",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-10-07T10:37:54Z",
+        "completed_at": "2026-10-07T10:38:23Z",
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1,
+            "started_at": "2026-10-07T10:37:55Z",
+            "completed_at": "2026-10-07T10:37:55Z"
+          },
+          {
+            "name": "Run actions/checkout@v4",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 2,
+            "started_at": "2026-10-07T10:37:55Z",
+            "completed_at": "2026-10-07T10:37:57Z"
+          },
+          {
+            "name": "Run actions/setup-python@v5",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 3,
+            "started_at": "2026-10-07T10:37:57Z",
+            "completed_at": "2026-10-07T10:37:57Z"
+          },
+          {
+            "name": "Install dependencies",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 4,
+            "started_at": "2026-10-07T10:37:57Z",
+            "completed_at": "2026-10-07T10:38:04Z"
+          },
+          {
+            "name": "Fetch pinned source dependencies",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 5,
+            "started_at": "2026-10-07T10:38:04Z",
+            "completed_at": "2026-10-07T10:38:09Z"
+          },
+          {
+            "name": "Shared local and CI checks",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 6,
+            "started_at": "2026-10-07T10:38:09Z",
+            "completed_at": "2026-10-07T10:38:21Z"
+          },
+          {
+            "name": "Post Run actions/setup-python@v5",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 11,
+            "started_at": "2026-10-07T10:38:21Z",
+            "completed_at": "2026-10-07T10:38:21Z"
+          },
+          {
+            "name": "Post Run actions/checkout@v4",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 12,
+            "started_at": "2026-10-07T10:38:21Z",
+            "completed_at": "2026-10-07T10:38:22Z"
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 13,
+            "started_at": "2026-10-07T10:38:22Z",
+            "completed_at": "2026-10-07T10:38:22Z"
+          }
+        ]
+      }
+    },
+    {
+      "repo": "StockQAbyLLM",
+      "run_id": 37609783778,
+      "head_sha": "0f8fbfa49c212b6bbcc986f876f80eb53e6bde5d",
+      "head_branch": "master",
+      "run_attempt": 1,
+      "conclusion": "success",
+      "html_url": "https://github.com/zhengcb81/StockQAbyLLM/actions/runs/37609783778",
+      "jobs": {
+        "id": 112753964115,
+        "name": "Checks",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-10-07T10:48:06Z",
+        "completed_at": "2026-10-07T10:48:41Z",
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1,
+            "started_at": "2026-10-07T10:48:07Z",
+            "completed_at": "2026-10-07T10:48:09Z"
+          },
+          {
+            "name": "Checkout code",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 2,
+            "started_at": "2026-10-07T10:48:09Z",
+            "completed_at": "2026-10-07T10:48:10Z"
+          },
+          {
+            "name": "Set up Python",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 3,
+            "started_at": "2026-10-07T10:48:10Z",
+            "completed_at": "2026-10-07T10:48:12Z"
+          },
+          {
+            "name": "Install dependencies (once)",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 4,
+            "started_at": "2026-10-07T10:48:12Z",
+            "completed_at": "2026-10-07T10:48:24Z"
+          },
+          {
+            "name": "Run unified checks",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 5,
+            "started_at": "2026-10-07T10:48:24Z",
+            "completed_at": "2026-10-07T10:48:37Z"
+          },
+          {
+            "name": "Upload metrics report",
+            "status": "completed",
+            "conclusion": "skipped",
+            "number": 6,
+            "started_at": "2026-10-07T10:48:37Z",
+            "completed_at": "2026-10-07T10:48:37Z"
+          },
+          {
+            "name": "Upload coverage to Codecov",
+            "status": "completed",
+            "conclusion": "skipped",
+            "number": 7,
+            "started_at": "2026-10-07T10:48:37Z",
+            "completed_at": "2026-10-07T10:48:37Z"
+          },
+          {
+            "name": "Post Set up Python",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 13,
+            "started_at": "2026-10-07T10:48:37Z",
+            "completed_at": "2026-10-07T10:48:39Z"
+          },
+          {
+            "name": "Post Checkout code",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 14,
+            "started_at": "2026-10-07T10:48:39Z",
+            "completed_at": "2026-10-07T10:48:39Z"
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 15,
+            "started_at": "2026-10-07T10:48:39Z",
+            "completed_at": "2026-10-07T10:48:39Z"
+          }
+        ]
+      }
+    },
+    {
+      "repo": "StockQAbyLLM",
+      "run_id": 37609783853,
+      "head_sha": "0f8fbfa49c212b6bbcc986f876f80eb53e6bde5d",
+      "head_branch": "master",
+      "run_attempt": 1,
+      "conclusion": "success",
+      "html_url": "https://github.com/zhengcb81/StockQAbyLLM/actions/runs/37609783853",
+      "jobs": [
+        {
+          "id": 112753964763,
+          "name": "Build Documentation",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-10-07T10:48:08Z",
+          "completed_at": "2026-10-07T10:48:29Z",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1,
+              "started_at": "2026-10-07T10:48:08Z",
+              "completed_at": "2026-10-07T10:48:10Z"
+            },
+            {
+              "name": "Checkout code",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2,
+              "started_at": "2026-10-07T10:48:10Z",
+              "completed_at": "2026-10-07T10:48:12Z"
+            },
+            {
+              "name": "Set up Python",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3,
+              "started_at": "2026-10-07T10:48:12Z",
+              "completed_at": "2026-10-07T10:48:14Z"
+            },
+            {
+              "name": "Install documentation dependencies",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4,
+              "started_at": "2026-10-07T10:48:14Z",
+              "completed_at": "2026-10-07T10:48:22Z"
+            },
+            {
+              "name": "Build documentation with MkDocs",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5,
+              "started_at": "2026-10-07T10:48:22Z",
+              "completed_at": "2026-10-07T10:48:25Z"
+            },
+            {
+              "name": "Upload documentation artifacts",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6,
+              "started_at": "2026-10-07T10:48:25Z",
+              "completed_at": "2026-10-07T10:48:26Z"
+            },
+            {
+              "name": "Check for broken links",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 7,
+              "started_at": "2026-10-07T10:48:26Z",
+              "completed_at": "2026-10-07T10:48:26Z"
+            },
+            {
+              "name": "Post Set up Python",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 13,
+              "started_at": "2026-10-07T10:48:26Z",
+              "completed_at": "2026-10-07T10:48:26Z"
+            },
+            {
+              "name": "Post Checkout code",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 14,
+              "started_at": "2026-10-07T10:48:26Z",
+              "completed_at": "2026-10-07T10:48:26Z"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 15,
+              "started_at": "2026-10-07T10:48:26Z",
+              "completed_at": "2026-10-07T10:48:26Z"
+            }
+          ]
+        },
+        {
+          "id": 112754114941,
+          "name": "Deploy to GitHub Pages",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-10-07T10:48:32Z",
+          "completed_at": "2026-10-07T10:48:39Z",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1,
+              "started_at": "2026-10-07T10:48:33Z",
+              "completed_at": "2026-10-07T10:48:34Z"
+            },
+            {
+              "name": "Download the already built documentation",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2,
+              "started_at": "2026-10-07T10:48:34Z",
+              "completed_at": "2026-10-07T10:48:35Z"
+            },
+            {
+              "name": "Deploy to GitHub Pages",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3,
+              "started_at": "2026-10-07T10:48:35Z",
+              "completed_at": "2026-10-07T10:48:38Z"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4,
+              "started_at": "2026-10-07T10:48:38Z",
+              "completed_at": "2026-10-07T10:48:38Z"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "stockwiki": "No remote; local acceptance only",
+  "actual_calls": "Existing CI only; no live provider or paid model tests"
+}

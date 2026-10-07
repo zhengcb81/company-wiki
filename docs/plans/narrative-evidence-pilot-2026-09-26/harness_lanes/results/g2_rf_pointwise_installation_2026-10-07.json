@@ -1,0 +1,138 @@
+{
+  "schema_version": "g2-pointwise-installation/1",
+  "canonical_commit": "1a2f9428a599504eb8355fcaebf86c6cbcaccbb3",
+  "user_authorized": true,
+  "status": "completed",
+  "files": [
+    {
+      "root": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast",
+      "relative": "tests/test_ca303_arch_quality.py",
+      "before_sha256": "4715145ac49af60fbf1bc4bee0c7fc7ebee36e4daa31ca2c8f9c364d9e0a63ee",
+      "after_sha256": "778033ca443277e4363d5b786d409fb42ef656419c4d601afdf8567451dc2fcb",
+      "size": 7592
+    },
+    {
+      "root": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast",
+      "relative": "tests/test_rf_coverage_report.py",
+      "before_sha256": null,
+      "after_sha256": "4020d3e9377ce35f80bd025517090fbe76542807579402b0b58a97611e7d6d65",
+      "size": 10255
+    },
+    {
+      "root": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast",
+      "relative": "tests/test_rf_optional_tools_e2e.py",
+      "before_sha256": null,
+      "after_sha256": "5350d12510fcab1d3154d9105f58fe1d9e0aa1ab45c937312e626cf48a513ffa",
+      "size": 12372
+    },
+    {
+      "root": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast",
+      "relative": "tests/test_rf_release_checklist.py",
+      "before_sha256": null,
+      "after_sha256": "5ab32eb15e793b6fcec22112991d0e17b65d4fb189462b04571b469d78ed678b",
+      "size": 6198
+    },
+    {
+      "root": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast",
+      "relative": "tests/test_zr1001_release_readiness.py",
+      "before_sha256": "6188aaba6626108ce696e116beee4ed0fe366575fc7aeea206035e09d8296778",
+      "after_sha256": "5e792ac63b176326140e3c5a6dbbbc3b482db952e3e55959efca29e481586a2b",
+      "size": 14715
+    },
+    {
+      "root": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast",
+      "relative": "tests/test_zr906_final_ratchet.py",
+      "before_sha256": "ddd1719c8d815633802c7650398f9a6a7f2e31bb2ad2d5b4938b5623439818fd",
+      "after_sha256": "aca1a5b0964903f83b8f5508ee1139066417b127d6e4bb96abd83913a50f85c0",
+      "size": 12220
+    },
+    {
+      "root": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast",
+      "relative": "tests/test_ca303_arch_quality.py",
+      "before_sha256": "4715145ac49af60fbf1bc4bee0c7fc7ebee36e4daa31ca2c8f9c364d9e0a63ee",
+      "after_sha256": "778033ca443277e4363d5b786d409fb42ef656419c4d601afdf8567451dc2fcb",
+      "size": 7592
+    },
+    {
+      "root": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast",
+      "relative": "tests/test_rf_coverage_report.py",
+      "before_sha256": null,
+      "after_sha256": "4020d3e9377ce35f80bd025517090fbe76542807579402b0b58a97611e7d6d65",
+      "size": 10255
+    },
+    {
+      "root": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast",
+      "relative": "tests/test_rf_optional_tools_e2e.py",
+      "before_sha256": null,
+      "after_sha256": "5350d12510fcab1d3154d9105f58fe1d9e0aa1ab45c937312e626cf48a513ffa",
+      "size": 12372
+    },
+    {
+      "root": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast",
+      "relative": "tests/test_rf_release_checklist.py",
+      "before_sha256": null,
+      "after_sha256": "5ab32eb15e793b6fcec22112991d0e17b65d4fb189462b04571b469d78ed678b",
+      "size": 6198
+    },
+    {
+      "root": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast",
+      "relative": "tests/test_zr1001_release_readiness.py",
+      "before_sha256": "6188aaba6626108ce696e116beee4ed0fe366575fc7aeea206035e09d8296778",
+      "after_sha256": "5e792ac63b176326140e3c5a6dbbbc3b482db952e3e55959efca29e481586a2b",
+      "size": 14715
+    },
+    {
+      "root": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast",
+      "relative": "tests/test_zr906_final_ratchet.py",
+      "before_sha256": "ddd1719c8d815633802c7650398f9a6a7f2e31bb2ad2d5b4938b5623439818fd",
+      "after_sha256": "aca1a5b0964903f83b8f5508ee1139066417b127d6e4bb96abd83913a50f85c0",
+      "size": 12220
+    },
+    {
+      "root": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast",
+      "relative": "tests/test_ca303_arch_quality.py",
+      "before_sha256": "4715145ac49af60fbf1bc4bee0c7fc7ebee36e4daa31ca2c8f9c364d9e0a63ee",
+      "after_sha256": "778033ca443277e4363d5b786d409fb42ef656419c4d601afdf8567451dc2fcb",
+      "size": 7592
+    },
+    {
+      "root": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast",
+      "relative": "tests/test_rf_coverage_report.py",
+      "before_sha256": null,
+      "after_sha256": "4020d3e9377ce35f80bd025517090fbe76542807579402b0b58a97611e7d6d65",
+      "size": 10255
+    },
+    {
+      "root": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast",
+      "relative": "tests/test_rf_optional_tools_e2e.py",
+      "before_sha256": null,
+      "after_sha256": "5350d12510fcab1d3154d9105f58fe1d9e0aa1ab45c937312e626cf48a513ffa",
+      "size": 12372
+    },
+    {
+      "root": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast",
+      "relative": "tests/test_rf_release_checklist.py",
+      "before_sha256": null,
+      "after_sha256": "5ab32eb15e793b6fcec22112991d0e17b65d4fb189462b04571b469d78ed678b",
+      "size": 6198
+    },
+    {
+      "root": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast",
+      "relative": "tests/test_zr1001_release_readiness.py",
+      "before_sha256": "6188aaba6626108ce696e116beee4ed0fe366575fc7aeea206035e09d8296778",
+      "after_sha256": "5e792ac63b176326140e3c5a6dbbbc3b482db952e3e55959efca29e481586a2b",
+      "size": 14715
+    },
+    {
+      "root": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast",
+      "relative": "tests/test_zr906_final_ratchet.py",
+      "before_sha256": "ddd1719c8d815633802c7650398f9a6a7f2e31bb2ad2d5b4938b5623439818fd",
+      "after_sha256": "aca1a5b0964903f83b8f5508ee1139066417b127d6e4bb96abd83913a50f85c0",
+      "size": 12220
+    }
+  ],
+  "whole_skill_replacement": false,
+  "directory_deletions": 0,
+  "config_output_other_files_written": 0,
+  "limitation": "This receipt covers exactly six engineering tests per installed copy; no global installation MATCH claimed."
+}

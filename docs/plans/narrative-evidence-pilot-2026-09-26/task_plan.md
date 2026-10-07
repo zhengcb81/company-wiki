@@ -120,7 +120,7 @@ TDD 框住具体公开行为。只在 N4 A/B/C、存储迁移等大节点集中�
 
 | 阶段 | 状态 | 下一责任 |
 |---|---|---|
-| G2门禁全面补漏/P0 | in_progress；目标服务active | 14组+scoped pin；现场steady及核心93ac5a5已推，精确CI37590638806全部步骤绿90秒；MAIN13已发布/精确CI绿，下一01b；SW/StockQA/RF三卡用户已分派待交接；CWP/FF latest/P0-B及其余家族pending；只两个大节点 |
+| G2门禁全面补漏/P0 | in_progress；目标服务active | 核心93ac5a5、13/b202d07、01b/22dcc927已发布/精确CI绿；SW0b48919本地主线，RF1a2f9428及SQA0f8fbfa均并主线/已推/精确CI绿（含SQA文档构建与部署）；MAIN12新13反例绿，但旧测试/CLI/FF/并发联调未完成；P1家族/质量读取器/包装待办，仍只两大节点 |
 | R0完整对账 | complete | 已确认真实生产metadata/分类/ET登记缺口；已完成核心不重做 |
 | R1融资文档正式分类 | complete | 66ce0467已发布，真实两PDF CLI与分类责任包绿，精确CI37578307854绿 |
 | R2真实生产来源/预算准备 | in_progress；生产步骤顺延G2后 | 全库发现/有限登记/AUTO范围代码2cad90d已推且精确CI绿；G2先清旧控制面，再核公开日/retired/ET，不猜metadata |
@@ -130,4 +130,4 @@ TDD 框住具体公开行为。只在 N4 A/B/C、存储迁移等大节点集中�
 
 ## Next Step
 
-G2-13已发布/精确CI绿；G2-01b已正常推送22dcc927，精确CI37603212398/job112732363266全部步骤绿75秒。24初始责任、52最终新旧绑定/事实/golden责任、双样本正式CLI迁址E2E39.31秒和61消费责任（60先绿+唯一旧期待修正后1绿）已验收；11 own tmp/诊断脚本恢复absent。MAIN下一唯一施工为CWP/FF latest单请求/G2-12（P0-B），然后其余P1及G2A/B→R2/R3。三外线独立运行待交接，不占其写集。旧binding1保留原账；无法从旧全局SHA推导scoped规则时明确拒绝、不付费重跑。详见[01b验收](harness_lanes/results/g2_exact_source_binding_acceptance_2026-10-07.json)，不冒称whole G2A/全部计划完成。
+MAIN继续[G2-12实施单](g2_latest_acquisition_implementation_2026-10-07.md)：统一服务、目标锁、预算异常传播、失败清理与共享预算重试的13项新反例已绿1.68秒；尚未发布，先完成旧责任测试合同同步、latest期间语义、可选binding CLI、FF接线和跨进程/真实离线E2E，再集中发布。不把13项试点当whole G2B。三外线已验收并线，精确主线CI见[收据](harness_lanes/results/g2_parallel_exact_ci_2026-10-07.json)；不重派或重跑其已绿完整测试。RF报告的旧uc.quality解析/coverage数值/mtime冻结漂移及repo-only测试包装职责归MAIN P1；然后G2A/B→R2/R3/R4/R5。01b旧binding1保留原账，不推导不可逆历史pin、不付费重跑，既有验收继续有效。

@@ -1,0 +1,195 @@
+{
+  "schema_version": "g2-main-lane-acceptance/1",
+  "lane_id": "G2-SW-DAILY",
+  "status": "accepted_merged_local_main",
+  "base_commit": "9f552a6741dd093dc760ad6965458989cd027251",
+  "delivery_commit": "0b48919065a912f1da10d89d36bf6bf1e659db88",
+  "main_commit": "0b48919065a912f1da10d89d36bf6bf1e659db88",
+  "review": "Single daily/static/full entry; real errors nonzero; coverage/size diagnostic; source/research DTO unchanged.",
+  "main_test": {
+    "command": "python -B scripts/checks.py",
+    "cwd": "C:\\Users\\郑曾波\\Projects\\_g2\\sw\\StockWiki",
+    "exit_code": 0,
+    "pytest_passed": 303,
+    "pytest_seconds": 23.21,
+    "pytest_step_seconds": 26.3,
+    "static": "Ruff and framework assets green",
+    "full_repeated": false
+  },
+  "delivery_evidence": "docs/implementation/g2-sw-daily/handoff.json",
+  "owner_before": {
+    "status": " M stockwiki/cli_parsers/backup.py\u0000 M stockwiki/quick_scan_query.py\u0000 M stockwiki/services/backup.py\u0000 M stockwiki/ui.py\u0000 M stockwiki/ui_static/index.html\u0000?? docs/handoff/\u0000?? stockwiki/quick_scan_backup.py\u0000?? stockwiki/quick_scan_profiles.py\u0000?? stockwiki/ui_quick_scan.py\u0000?? tests/test_quick_scan_backup.py\u0000?? tests/test_quick_scan_profiles.py\u0000?? tests/test_ui_quick_scan.py\u0000",
+    "files": {
+      "stockwiki/quick_scan_query.py": {
+        "size": 27962,
+        "mtime_ns": 1791368443556743200,
+        "sha256": "ca3d92ed93cad8b09590f1356e18f6f66da8796b7965eefdf1b2ae84f80d28c6"
+      },
+      "stockwiki/services/backup.py": {
+        "size": 4591,
+        "mtime_ns": 1791367356015705800,
+        "sha256": "67c732d5c42ad71523d038481746af5054f419ee790fc3393d128d324f604b33"
+      },
+      "stockwiki/quick_scan_profiles.py": {
+        "size": 21726,
+        "mtime_ns": 1791368443556743200,
+        "sha256": "8d4ba62c0d04ece7031091bb492b7f5a9eb62895fe0f222e741be38eb2066742"
+      },
+      "stockwiki/ui.py": {
+        "size": 13735,
+        "mtime_ns": 1791368809116172100,
+        "sha256": "b518e6e5239c1140cf94dc9f0f1a28bfc6543fac2a552d7b3980f78970a41e57"
+      },
+      "stockwiki/ui_quick_scan.py": {
+        "size": 4328,
+        "mtime_ns": 1791368692192106800,
+        "sha256": "dd319b2385c42e8e448051426ea4fc093cb3dae3747eade0be52bc9784baf9b6"
+      },
+      "docs/handoff/SW-READY-01/logs/GREEN-u01-u02-http-routes.txt": {
+        "size": 100,
+        "mtime_ns": 1791368845832804600,
+        "sha256": "43c239d85c36d397f73a8c11839bb8eadbd0f33a72329e74ee82adbc138ef822"
+      },
+      "docs/handoff/SW-READY-01/logs/GREEN-u01-u02-projection.txt": {
+        "size": 101,
+        "mtime_ns": 1791368549019387800,
+        "sha256": "1c886318d88ca7ff900bbc1c83228beea9e7878f7ecca56ba3d40a25eeb827ca"
+      },
+      "docs/handoff/SW-READY-01/logs/GREEN-w12-backup.txt": {
+        "size": 101,
+        "mtime_ns": 1791367515381122900,
+        "sha256": "ec265e341fe3f577633513b446d52bd06c1b1f88d0d543021bb212ab35d75b56"
+      },
+      "docs/handoff/SW-READY-01/logs/RED-u01-u02-projection.txt": {
+        "size": 947,
+        "mtime_ns": 1791367850920796700,
+        "sha256": "7f0db1f78379263ac7df5e429b9dc557bdb38d4d8993761df3a982290bb39772"
+      },
+      "docs/handoff/SW-READY-01/logs/RED-w12-backup.txt": {
+        "size": 937,
+        "mtime_ns": 1791366927804584700,
+        "sha256": "aa5683b6898a53a59143f67a2f69f309a071d41a0ae2d49a9750730feb46ba99"
+      },
+      "stockwiki/quick_scan_backup.py": {
+        "size": 29324,
+        "mtime_ns": 1791367535196212700,
+        "sha256": "6c92eb6ad365a09756732824df38e57b7c6ed625e5cdb7d0a68f4ccaefb15989"
+      },
+      "tests/test_ui_quick_scan.py": {
+        "size": 9647,
+        "mtime_ns": 1791368813472188600,
+        "sha256": "d49f1dba180b45a80007a271fb05fd067e24c35a1b7fc1ee7553eb33274e7658"
+      },
+      "stockwiki/cli_parsers/backup.py": {
+        "size": 2612,
+        "mtime_ns": 1791367281799588300,
+        "sha256": "bc20a70e48f24a54693aa1baf20da291da07a5c41dabeba5d5c131376a240d99"
+      },
+      "tests/test_quick_scan_profiles.py": {
+        "size": 20629,
+        "mtime_ns": 1791368526388465200,
+        "sha256": "5a4e05ae0206af77ab04b34e9c809bca42958f675c7098a9e5df6af5b5b250ec"
+      },
+      "stockwiki/ui_static/index.html": {
+        "size": 14382,
+        "mtime_ns": 1791368933314211000,
+        "sha256": "d134b0de93341e3d0ad15591ee697e3b67efd55e1ce716ea5d5ad691a32589d3"
+      },
+      "tests/test_quick_scan_backup.py": {
+        "size": 23219,
+        "mtime_ns": 1791367485735603700,
+        "sha256": "065b4ff5d25e8662ffd93726ad3ba3c6c98667f7ad588e4223322ffccb7a5d96"
+      }
+    }
+  },
+  "owner_after": {
+    "status": " M stockwiki/cli_parsers/backup.py\u0000 M stockwiki/quick_scan_query.py\u0000 M stockwiki/services/backup.py\u0000 M stockwiki/ui.py\u0000 M stockwiki/ui_static/index.html\u0000?? docs/handoff/\u0000?? stockwiki/quick_scan_backup.py\u0000?? stockwiki/quick_scan_profiles.py\u0000?? stockwiki/ui_quick_scan.py\u0000?? tests/test_quick_scan_backup.py\u0000?? tests/test_quick_scan_profiles.py\u0000?? tests/test_ui_quick_scan.py\u0000",
+    "files": {
+      "stockwiki/quick_scan_query.py": {
+        "size": 27962,
+        "mtime_ns": 1791368443556743200,
+        "sha256": "ca3d92ed93cad8b09590f1356e18f6f66da8796b7965eefdf1b2ae84f80d28c6"
+      },
+      "stockwiki/services/backup.py": {
+        "size": 4591,
+        "mtime_ns": 1791367356015705800,
+        "sha256": "67c732d5c42ad71523d038481746af5054f419ee790fc3393d128d324f604b33"
+      },
+      "stockwiki/quick_scan_profiles.py": {
+        "size": 21726,
+        "mtime_ns": 1791368443556743200,
+        "sha256": "8d4ba62c0d04ece7031091bb492b7f5a9eb62895fe0f222e741be38eb2066742"
+      },
+      "stockwiki/ui.py": {
+        "size": 13735,
+        "mtime_ns": 1791368809116172100,
+        "sha256": "b518e6e5239c1140cf94dc9f0f1a28bfc6543fac2a552d7b3980f78970a41e57"
+      },
+      "stockwiki/ui_quick_scan.py": {
+        "size": 4328,
+        "mtime_ns": 1791368692192106800,
+        "sha256": "dd319b2385c42e8e448051426ea4fc093cb3dae3747eade0be52bc9784baf9b6"
+      },
+      "docs/handoff/SW-READY-01/logs/GREEN-u01-u02-http-routes.txt": {
+        "size": 100,
+        "mtime_ns": 1791368845832804600,
+        "sha256": "43c239d85c36d397f73a8c11839bb8eadbd0f33a72329e74ee82adbc138ef822"
+      },
+      "docs/handoff/SW-READY-01/logs/GREEN-u01-u02-projection.txt": {
+        "size": 101,
+        "mtime_ns": 1791368549019387800,
+        "sha256": "1c886318d88ca7ff900bbc1c83228beea9e7878f7ecca56ba3d40a25eeb827ca"
+      },
+      "docs/handoff/SW-READY-01/logs/GREEN-w12-backup.txt": {
+        "size": 101,
+        "mtime_ns": 1791367515381122900,
+        "sha256": "ec265e341fe3f577633513b446d52bd06c1b1f88d0d543021bb212ab35d75b56"
+      },
+      "docs/handoff/SW-READY-01/logs/RED-u01-u02-projection.txt": {
+        "size": 947,
+        "mtime_ns": 1791367850920796700,
+        "sha256": "7f0db1f78379263ac7df5e429b9dc557bdb38d4d8993761df3a982290bb39772"
+      },
+      "docs/handoff/SW-READY-01/logs/RED-w12-backup.txt": {
+        "size": 937,
+        "mtime_ns": 1791366927804584700,
+        "sha256": "aa5683b6898a53a59143f67a2f69f309a071d41a0ae2d49a9750730feb46ba99"
+      },
+      "stockwiki/quick_scan_backup.py": {
+        "size": 29324,
+        "mtime_ns": 1791367535196212700,
+        "sha256": "6c92eb6ad365a09756732824df38e57b7c6ed625e5cdb7d0a68f4ccaefb15989"
+      },
+      "tests/test_ui_quick_scan.py": {
+        "size": 9647,
+        "mtime_ns": 1791368813472188600,
+        "sha256": "d49f1dba180b45a80007a271fb05fd067e24c35a1b7fc1ee7553eb33274e7658"
+      },
+      "stockwiki/cli_parsers/backup.py": {
+        "size": 2612,
+        "mtime_ns": 1791367281799588300,
+        "sha256": "bc20a70e48f24a54693aa1baf20da291da07a5c41dabeba5d5c131376a240d99"
+      },
+      "tests/test_quick_scan_profiles.py": {
+        "size": 20629,
+        "mtime_ns": 1791368526388465200,
+        "sha256": "5a4e05ae0206af77ab04b34e9c809bca42958f675c7098a9e5df6af5b5b250ec"
+      },
+      "stockwiki/ui_static/index.html": {
+        "size": 14382,
+        "mtime_ns": 1791368933314211000,
+        "sha256": "d134b0de93341e3d0ad15591ee697e3b67efd55e1ce716ea5d5ad691a32589d3"
+      },
+      "tests/test_quick_scan_backup.py": {
+        "size": 23219,
+        "mtime_ns": 1791367485735603700,
+        "sha256": "065b4ff5d25e8662ffd93726ad3ba3c6c98667f7ad588e4223322ffccb7a5d96"
+      }
+    }
+  },
+  "owner_unchanged": true,
+  "source_raw_deleted": 0,
+  "production_data_writes": 0,
+  "remote": "none; no remote push or CI claimed",
+  "remaining": "Whole G2B current producer integration remains; other owner work is preserved."
+}

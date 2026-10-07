@@ -1,5 +1,26 @@
 # Findings：当前事实与待验证项
 
+## 最新：外线工程收口已完整发布（2026-10-07）
+
+SW0b48919已本地并主线；RF1a2f9428远端main/精确CI29秒绿；SQA0f8fbfa远端master/精确日常CI35秒及文档构建/部署全绿。文档真正错误仍非零（实际非法主题exit1），旧docstring4warning只诊断，单次build artifact复用，未放宽业务来源/预算/身份。三个各仓手工full收据复用；本轮MAIN303/254/107短责任为另行真实运行，不合并计数冒称一条全套。
+
+20 owned临时目标恢复absent，共97045759 B，不计生产收益；保留三个用户工作树。user已明确授权安装六文件×三副本，全部旧preimage先核；配置/output/其他0写。P1仍有真实RF历史质量读取器漂移与安装工程测试职责问题；G2-12尚未发布，不能将三外线完成等同总计划完成。
+
+
+## 最新：三外线正式接收后的具体遗留（2026-10-07）
+
+三仓交付已正常并入主线且owner保持；RF精确远端CI29秒绿，StockQA日常CI42秒绿。SQA旧*.json规则漏提交机器交接，已用仅该文件的正常commit补齐；未改owner .gitignore。SQA文档strict失败真实复现为4个docstring警告；工程模式不应把警告数当资格门。MAIN在独占worktree做单次真实build与artifact复用，真实错误不吞，不改业务src的注释。RF未扩大写集的三个遗留：uc.quality.strict_targets按旧workflow字面找mypy，coverage 84→0旧ratchet读数及checkout mtime冻结误拒，加入MAIN P1现有清单，不能说整套质量工具皆绿。
+
+RF本次18个安装测试已定点同步，用户明确授权、旧字节先核、无整套目录替换。六测试会引用repo-only tools；这份同步只证明安装字节一致，不能声称安装副本完整工程工具可运行。后续G2-08应审视技能包装职责，避免把repo工程测试/固定签收重复包装给技能用户。
+
+
+## 最新：G2-12与StockWiki交付（2026-10-07）
+
+一次选源和target锁的初版仍需集中补齐：provider metadata预算异常不能吞成普通GAP；错误暂存仅清本target，不能留下正文或删除邻居；入库/最终解析失败应只记一个真实失败；重试只限adapter明确retryable且共用原budget/target。US/HK季度和非12月年结不能一律把latest fiscal_year写成as-of减一。旧CloseGap独立签收/多次发现仍未替换。上述是当前真实施工缺口，不恢复人工审批或降低SHA/身份/cutoff条件。
+
+StockWiki独立交付HEAD0b48919、base9f552a6，daily实测303绿；源码检查编排真实失败累积并非零，尺寸/coverage只诊断，显式own root及env防止默认workspace落生产。生产master仍9f552a6，有另一独立线程的11个dirty条目；本交付不含其backup/query/UI文件。未查明“narrative-evidence-pilot完成”所指施工包，不把目录名当验收证明。
+
+
 ## 最新：G2-13责任完成，下一精确来源绑定（2026-10-07）
 
 AUTO普通打开0深检；显式/new/实际升级各一轮。Catalog当前版本0DDL/0全库seed，未知版本先拒绝，真实升级原子回滚；无state新文档仍可dispatch/UPSERT。新增SchemaStructure不虚报健康。三损坏账目字段实际RED证明SQL隐式数字转换会低估token或抛无分类错误，改为当前run的记录统一校验后精确Python计算。

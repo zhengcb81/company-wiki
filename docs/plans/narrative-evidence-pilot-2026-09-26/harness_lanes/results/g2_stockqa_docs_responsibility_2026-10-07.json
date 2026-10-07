@@ -1,0 +1,15 @@
+{
+  "schema_version": "g2-docs-responsibility/1",
+  "status": "published_exact_ci_passed",
+  "red": "Actual mkdocs --strict build aborted with 4 existing griffe docstring warnings",
+  "green": "Actual ordinary mkdocs build completed; index.html exists; warnings remain visible",
+  "real_bad_config_exit_code": 1,
+  "bad_theme_error_observed": true,
+  "workflow_builds": 1,
+  "deployment_uses_existing_artifact": true,
+  "publication_scope": "Existing docs deployment only; no new credentials/permissions or destination",
+  "operation_error": "First green attempt ran from CWP cwd and correctly refused missing mkdocs.yml; not a product failure or pass",
+  "commit": "0f8fbfa49c212b6bbcc986f876f80eb53e6bde5d",
+  "exact_ci_run_id": 37609783853,
+  "ordinary_build_seconds": 11.3
+}

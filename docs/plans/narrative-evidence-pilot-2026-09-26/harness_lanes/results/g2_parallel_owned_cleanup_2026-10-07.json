@@ -1,0 +1,131 @@
+{
+  "schema_version": "g2-owned-test-cleanup/1",
+  "status": "complete",
+  "targets": [
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp-g2-latest-red",
+      "existed": true,
+      "removed_bytes": 2297540.0,
+      "restored_absent": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp-g2-latest-g1",
+      "existed": true,
+      "removed_bytes": 2416290.0,
+      "restored_absent": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp-g2-latest-r2",
+      "existed": true,
+      "removed_bytes": 3873960.0,
+      "restored_absent": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp-g2-latest-g3",
+      "existed": true,
+      "removed_bytes": 4142959.0,
+      "restored_absent": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp-g2-sqa-docs",
+      "existed": true,
+      "removed_bytes": 5710917.0,
+      "restored_absent": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp-g2-sqa-docs-g",
+      "existed": true,
+      "removed_bytes": 5711264.0,
+      "restored_absent": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp-g2-sqa-docs-bad-site",
+      "existed": false,
+      "removed_bytes": 0,
+      "restored_absent": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp-g2-replace-close-gap.py",
+      "existed": true,
+      "removed_bytes": 4931.0,
+      "restored_absent": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp-g2-sw-main.py",
+      "existed": true,
+      "removed_bytes": 2954.0,
+      "restored_absent": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp-g2-merge-lane.py",
+      "existed": true,
+      "removed_bytes": 3431.0,
+      "restored_absent": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp-g2-rf-install.py",
+      "existed": true,
+      "removed_bytes": 3246.0,
+      "restored_absent": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp-g2-sqa-docs-fix.py",
+      "existed": true,
+      "removed_bytes": 1188.0,
+      "restored_absent": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp-g2-sqa-docs-verify.py",
+      "existed": true,
+      "removed_bytes": 2534.0,
+      "restored_absent": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp-g2-finalize-receipts.py",
+      "existed": true,
+      "removed_bytes": 2282.0,
+      "restored_absent": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cw-pytest-basetemp\\20261007-102617-10bf136c",
+      "existed": true,
+      "removed_bytes": 872448.0,
+      "restored_absent": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\_g2\\StockQAbyLLM\\.mypy_cache",
+      "existed": true,
+      "removed_bytes": 62653873.0,
+      "restored_absent": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\_g2\\StockQAbyLLM\\.ruff_cache",
+      "existed": true,
+      "removed_bytes": 5223.0,
+      "restored_absent": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\_g2\\StockQAbyLLM\\logs",
+      "existed": true,
+      "removed_bytes": 95997.0,
+      "restored_absent": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\_g2\\revenue-forecast\\.mypy_cache",
+      "existed": true,
+      "removed_bytes": 9233473.0,
+      "restored_absent": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\_g2\\revenue-forecast\\.ruff_cache",
+      "existed": true,
+      "removed_bytes": 11249.0,
+      "restored_absent": true
+    }
+  ],
+  "removed_bytes": 97045759.0,
+  "production_raw_deleted": 0,
+  "user_harness_worktrees_retained": true,
+  "main_doc_worktree_removed": "C:/Users/郑曾波/Projects/_g2/sqa-docs-main",
+  "scope": "Temporary tests/cache/build only; not production storage savings"
+}

@@ -1,0 +1,56 @@
+{
+  "schema_version": "g2-main-lane-acceptance/1",
+  "lane_id": "G2-RF-TOOLS",
+  "status": "accepted_merged_pushed_exact_ci_passed",
+  "base_commit": "e241389adeda37bc9cbb53d7831063718552a936",
+  "delivery_commit": "1a2f9428a599504eb8355fcaebf86c6cbcaccbb3",
+  "main_commit": "1a2f9428a599504eb8355fcaebf86c6cbcaccbb3",
+  "owner_before": {
+    "status": " M assurance/runs/daily_alert.jsonl\u0000 M assurance/runs/weekly_alert.jsonl\u0000 M assurance/runs/weekly_manifest.json\u0000",
+    "names": [
+      "assurance/runs/daily_alert.jsonl",
+      "assurance/runs/weekly_alert.jsonl",
+      "assurance/runs/weekly_manifest.json"
+    ],
+    "file_count": 3,
+    "fingerprint_sha256": "9c39832f3cc19116698508dd16099e429b3759b84d6a583f9e9e406965fc47af",
+    "opaque_status_only": []
+  },
+  "owner_after": {
+    "status": " M assurance/runs/daily_alert.jsonl\u0000 M assurance/runs/weekly_alert.jsonl\u0000 M assurance/runs/weekly_manifest.json\u0000",
+    "names": [
+      "assurance/runs/daily_alert.jsonl",
+      "assurance/runs/weekly_alert.jsonl",
+      "assurance/runs/weekly_manifest.json"
+    ],
+    "file_count": 3,
+    "fingerprint_sha256": "9c39832f3cc19116698508dd16099e429b3759b84d6a583f9e9e406965fc47af",
+    "opaque_status_only": []
+  },
+  "owner_unchanged": true,
+  "main_test": {
+    "exit_code": 0,
+    "passed": 107,
+    "pytest_seconds": 21.41,
+    "command": "python -B tools/pre_push_gate.py",
+    "cwd": "C:\\Users\\郑曾波\\Projects\\_g2\\revenue-forecast",
+    "full_repeated": false
+  },
+  "production_writes": 0,
+  "raw_deleted": 0,
+  "paid_calls": 0,
+  "remaining": [
+    "Whole G2B current producer integration remains; unrelated owner work preserved."
+  ],
+  "known_rf_legacy_drift": [
+    "strict_targets old workflow parsing",
+    "old coverage ratchet reader",
+    "checkout mtime manifest"
+  ],
+  "exact_ci_run_ids": [
+    37608673031
+  ],
+  "exact_ci_receipt": "g2_parallel_exact_ci_2026-10-07.json",
+  "installation_sync": "Six engineering tests per copy (18 files), explicit authorization, completed pointwise.",
+  "legacy_quality_reader_followup": "MAIN P1: old strict_targets/coverage numeric ratchet/checkout mtime semantics."
+}

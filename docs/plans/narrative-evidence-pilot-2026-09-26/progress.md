@@ -1,5 +1,30 @@
 # Progress：激进简化实施
 
+## 最新：三外线正式验收/并线/发布全部完成（2026-10-07）
+
+SW master0b489190为本地主线，无remote。RF main1a2f9428已推，精确CI37608673031/job112750312883全部steps绿29秒。SQA master0f8fbfa已推，修复后精确CI37609783778/job112753964115全部实际steps绿35秒；Documentation37609783853构建job112753964763绿21秒、部署job112754114941绿7秒。正常commit/hooks/merge/push，未绕过失败；旧4757088文档RED保留事实，但不覆盖已修复结果。每个job/step与精确SHA收据已保存[g2_parallel_exact_ci](harness_lanes/results/g2_parallel_exact_ci_2026-10-07.json)。三卡/并行总包/总计划/G2实施顺序已同步，不重派三包、不重跑外线已绿full。
+
+MAIN自建SQA文档fix工作树已正常移除；20个准确owned测试/工具脚本/新缓存/日志/构建产物目标已校包含与无reparse后恢复absent，释放97045759 B临时材料，生产raw删除0。三个用户harness工作树仍保留。此临时空间不是生产清理收益。owner CWP source_acquisition SHA3609e707保持；RF三owner日志与SW/SQA其他线程内容保留。RF18安装测试定点同步已完成，非整套安装MATCH门。
+
+当前主线唯一继续事项为G2-12：源码acquisition/service/CloseGap与新13项测试尚未commit/发布；旧93项责任5个期待已识别但未集中同步、CLI binding可选/FF/期间语义/跨进程/真实链尚待完成。新13项已全绿和Ruff绿，不等同G2完成；目标继续active。下列此前“待新CI/文档修复中”是历史时点，已由本条覆盖。
+
+
+## 最新：三个G2交付已验收并线，文档CI集中修复中（2026-10-07）
+
+用户澄清第二包为G2-STOCKQA-CHECKS，并确认第三RF包完成。MAIN实测：SW303pass/23.21秒，StockQA254pass/42.70秒及black/isort/mypy/bandit/真实smoke均绿，RF107pass/21.41秒及Ruff/公开契约mypy绿；不重复外线完整包。SW正常快进master0b48919，无remote；RF快进main1a2f9428并正常hook107pass/23.21秒、推origin/main，精确CI37608673031全部step绿29秒；SQA快进master57dca67，发现机器handoff.json被旧*.json忽略，MAIN只补提交该JSON4757088，正常hook绿并推origin/master。SW16个owner文件、RF3份日志、SQA470个owner文件/目录内文件的SHA/mtime聚合及status在并线前后保持；opaque的nul只记录status，不能冒称验证其字节。
+
+SQA精确日常CI37608756608/4757088全部真实步骤绿42秒（指标上传按非metrics设计skip）；另一路Documentation37608756521失败于mkdocs --strict。MAIN在隔离根复现4条旧函数docstring警告造成abort；真实build并未报语法/插件缺失错误。主线独占worktree _g2/sqa-docs-main修复为警告诊断、真实build失败仍非零，部署下载现有artifact，取消第二次install/build。一次GREEN命令误在CWP cwd运行报缺mkdocs.yml，只是操作错误、无成功计数，已在正确cwd重跑。
+
+RF安装工具只读调用被自动审批拒绝（含整套替换/删除函数）。MAIN先静态核明确六文件差异，用户明确授权后仅同步18个指定测试文件到三副本，全部旧preimage先核Git字节/CRLF等价字节，再原子替换；配置/output/其他文件0写，目录删除0，不宣称整套MATCH。收据[g2_rf_pointwise_installation](harness_lanes/results/g2_rf_pointwise_installation_2026-10-07.json)。当前G2-12五个责任RED已全部修复，13项绿1.68秒；旧测试、CLI/FF接线和并发大节点仍待做，未发布半成品。
+
+
+## 最新：G2-12施工与外线交付查收（2026-10-07）
+
+G2-12新实施单已建立，先8项TDD得到6个产品RED/2pass；选源/暂存服务分层后7pass，剩余旧CloseGap的snapshot阻断。扩大现有责任包93项得到88pass/5fail：一个旧request staging路径期待、两个旧无界fake不支持预算、一个旧latest即使允许也不下载的期待，以及尚未替换的CloseGap。不将这些结果冒称验收通过。自动审批此前拒绝整体替换CloseGap，替换脚本尚未执行；用户现已明确授权核心重写，必须保留目标范围、真实资源、事务锁、原件验真、失败清理和最终实际解析。
+
+用户报告G2-SW-DAILY完成，已只读查收120c1e5/0b48919及handoff；MAIN实跑唯一daily接口303pass/23.21秒（pytest），整步26.3秒，Ruff与静态framework绿。交付额外三个CLI/facade文件用于静态资产入口/旧尺寸白名单移除，属同一工程接口；来源/研究DTO没有改。StockWiki主目录新增另一独立工作的11个dirty条目，全部在本交付写集之外，保留并在并线前后核指纹。不重跑外线955pass/18skip的全包。另一项“narrative-evidence-pilot完成”的具体交接范围已请求澄清，不能据此宣称总计划完成。
+
+
 ## 最新：G2-01b已发布，进入latest单请求（2026-10-07）
 
 22dcc9271548372006f85f82b45875b424127923正常commit/pre-push/push均绿；精确CI37603212398 attempt1/job112732363266所有step/job success，75秒，其中全Unit36秒，未增加日常真实长E2E。[精确CI](harness_lanes/results/g2_exact_source_binding_exact_ci_2026-10-07.json)及[已发布验收](harness_lanes/results/g2_exact_source_binding_acceptance_2026-10-07.json)完整。先前准备/等待文字由本条覆盖。

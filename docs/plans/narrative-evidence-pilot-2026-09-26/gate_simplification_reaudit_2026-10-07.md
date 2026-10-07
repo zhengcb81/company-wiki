@@ -138,6 +138,8 @@ HEAD/文件 SHA/工作树/现场 policy 原文见[只读审计收据](harness_la
 
 **验收：**正式 FF→ET→CWP 离线链走三个真实 CLI、复用零 provider、语言/SHA/清理正确；相同 intent 的库与 CLI 一致，未来公开和预算拒绝仍明确。使用既有链测试入口，不新增十套 request contract。
 
+**三外线交付后MAIN具体补漏：**RF六个工程测试引用repo-only tools，三安装副本本次只按用户具体授权定点同步18文件；不能据此声称安装内工程全包可运行或全MATCH。G2-08先查实际技能caller，再明确工程tools/tests属于仓库验证职责，用户技能所需代码/配置/引用才进入安装表；不盲目复制第二套签收或整套工程目录。RF `uc.quality.strict_targets`的旧workflow字面解析、coverage 84→0仍当弱化的旧ratchet、checkout mtime被误作事实完整性，均已有真实报告，归MAIN P1：先核当前caller/默认CLI，退休无职责的资格判断，保留实际指定SHA/size/配置/工具异常反例，不改owner日志或重冻历史manifest，不反向恢复coverage数字门。
+
 ### G2-09 / 已核能力边界：ET、provider 和外发文案
 
 ET `ProviderSettings` 仍称 Reviewed runtime availability，但实际是单运行能力配置；没有发现新的人工 receipt。`download_authorized` 是一次请求网络意图。FMP 402、缺凭证、disabled provider 是现实能力，不能为“简化”冒充可以付费下载。只清理误导文案/重复问答；已有 TXT 在 provider 关闭、无翻译 LLM 凭证时也应正常零 HTTP 复用。MiniMax/MiMo/DeepSeek 必须继续遵守已配置模型与预算，持续外发授权不意味着无限预算。
@@ -212,9 +214,9 @@ MAIN 是唯一集成与生产变更负责人。此表是施工顺序，不是新
 |---|---|---|---|
 | 1 | G2-00 steady现场迁移/默认新库收敛 | 当前policy、旧小snapshot、真实读和16断言 | 现场complete；默认核心93ac5a5已推，精确CI37590638806全部步骤绿90秒 |
 | 2 | G2-01 effective read pin + G2-02 AUTO机器错误/版本恢复 + G2-11派生质量状态 | 版本化读取语义、同AUTO单库恢复、单处质量诊断 | 核心责任/E2E已收口、93ac5a5已推，精确CI37590638806全部步骤绿90秒；不等于完整A |
-| 3 | G2-13日常Store轻初始化 → G2-01b精确来源scoped pin | 去除隐含整库检查/补种及无关root对精确批次的阻断 | 13已发布/精确CI绿，01b仍pending/P0；先于R2，沿用同一G2A集中节点 |
-| 4 | G2-06 StockWiki/G2-10 StockQA日常工程门 + G2-12 CWP/FF统一latest单请求 | 各仓独占目录，MAIN接线；共享ensure事务/唯一intent、工具/CI/hook/默认配置同步 | P0-B；SW/StockQA用户已分派待交接；MAIN独占12 |
-| 5 | G2-03/04/07 CWP旧家族/公开维护/检查清单、G2-05 RF可选工具、G2-08安装/v1、G2-09能力文案 | CLI/import/package/清单/安装及指导同步；不启用raw破坏入口 | P1；RF新卡用户已分派待交接，其余由MAIN按P0/P0-B后续；不恢复旧签收 |
+| 3 | G2-13日常Store轻初始化 → G2-01b精确来源scoped pin | 去除隐含整库检查/补种及无关root对精确批次的阻断 | 两项均已发布/精确CI绿；13=b202d07、01b=22dcc927；不等同整个G2A |
+| 4 | G2-06 StockWiki/G2-10 StockQA日常工程门 + G2-12 CWP/FF统一latest单请求 | 各仓独占目录，MAIN接线；共享ensure事务/唯一intent、工具/CI/hook/默认配置同步 | SW/StockQA已验收并主线；SQA0f8fbfa已推、精确日常CI及文档构建/部署均绿；MAIN12的13新反例已绿，旧测试/CLI/FF/跨进程仍pending，不发布半成品 |
+| 5 | G2-03/04/07 CWP旧家族/公开维护/检查清单、G2-05 RF可选工具、G2-08安装/v1、G2-09能力文案 | CLI/import/package/清单/安装及指导同步；不启用raw破坏入口 | RF工具已验收并线推/CI29秒绿、定点安装同步完成；MAIN P1补旧uc.quality workflow解析/coverage数值/mtime漂移及repo-only测试包装职责；其余按P0-B后续，不恢复旧签收 |
 | 大节点 A | CWP最终写集完成后的当前链集中责任/E2E | isolated真实IR PDF/英文TXT；read/有限登记/零模型skip/loopback；现场小对照 | pending；核心子集先收口发布，复用已绿202/历史节点，不等同整个A完成 |
 | 大节点 B | 三仓离线链 + 当前消费者 + 发布 | FF→ET→CWP、RF/SW 读取；每仓对应代码 CI；保护/临时根清理 | pending；不重复付费模型 |
 | 6 | 回 R2 metadata/有限登记 → R3 → R4 → R5 | 原目标全部待办继续；G2 非缩减目标 | pending |
@@ -251,4 +253,4 @@ MAIN 是唯一集成与生产变更负责人。此表是施工顺序，不是新
 
 ## Next Step
 
-**目标active；核心93ac5a5、Store13/b202d07、scoped pin01b/22dcc927均已发布且精确CI全绿。** MAIN下一G2-12/CWP和FF latest单请求→P1家族/清单→G2A/B→R2。两仓日常门/RF工具三卡用户已分派、待交接；不占其独占写集。没有新增小节点签收、不重复已绿长包、不自动启动付费批次，不把本子集冒称全面完成。
+**目标active；核心93ac5a5、Store13/b202d07、scoped pin01b/22dcc927均已发布且精确CI全绿。** 三外线已验收并入各主线；RF/SQA已推且精确CI全绿，SQA包含文档构建/部署，SW无remote。MAIN继续[G2-12具体实施](g2_latest_acquisition_implementation_2026-10-07.md)：新13反例绿，旧测试/CLI/FF/跨进程仍待完成，再P1旧家族/质量读取器/安装职责→G2A/B→R2/R3。没有新增小节点签收，不重复已绿长包，不自动启动付费批次，不把本子集冒称全面完成。

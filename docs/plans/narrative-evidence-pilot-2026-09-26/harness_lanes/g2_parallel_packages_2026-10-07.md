@@ -1,6 +1,8 @@
 # G2并行施工总包：三仓独立工程线
 
-**状态：用户确认三卡已经分派，待各仓交接。MAIN未代用户启动外部harness；不推测具体运行进度。**
+**状态：2026-10-07三卡均已交付，MAIN责任验收并正常并入各仓主线。SW0b48919本地主线（无remote），RF1a2f9428已推/精确CI29秒绿，StockQA0f8fbfa已推/精确日常CI35秒绿、文档构建21秒及部署7秒均绿。owner工作保留；不再分派这三卡。**
+
+正式接收：[SW](results/g2_stockwiki_daily_main_acceptance_2026-10-07.json)、[StockQA](results/g2_stockqabyllm_main_acceptance_2026-10-07.json)、[RF](results/g2_revenue-forecast_main_acceptance_2026-10-07.json)。大节点全包复用外线已绿收据，MAIN只补日常责任与真实剩余错误，不增加每小步审批。RF报告的历史质量读取器漂移及技能包装职责进入MAIN P1，G2B跨仓当前producer仍在总计划中。
 
 用户2026-10-07要求较大且互不影响的独立施工包。本包从G2真实剩余中拆分，复用已完成reader/身份/旧工程卡；不重派已交付功能。MAIN继续CWP G2-13轻初始化、01b精确读pin、CWP/FF latest单请求及共享接口接线。目标服务已实读active，原paused文字属于上一轮时点。
 
