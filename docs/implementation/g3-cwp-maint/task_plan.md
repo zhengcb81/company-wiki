@@ -23,7 +23,7 @@
 - [x] `tools/dropbox_governance_replay.py` 改只读报告入口（不扫真实Dropbox）
 - [x] 责任命令 GREEN（35 passed / 0 failed，39.72s）
 
-## Phase 4 验证与交接 — Status: in_progress
+## Phase 4 验证与交接 — Status: complete
 - [x] 邻接测试sanity（唯一红为预存在 test_write_paths_still_use_store）（semantic/r4b02/zr203/fc1201/fc1203/architecture/code_identity/control）
 - [x] Ruff全CI范围/mypy六模块/host-guard new=0/unique symbols/compileall 全过
 - [ ] `docs/implementation/g3-cwp-maint/{task_plan,findings,progress,HANDOFF,handoff.json,main_wiring}.md`
@@ -43,4 +43,4 @@
 | 基线commit早于卡片发布docs commit | 1 | 卡片指定基线5930a64，其后4个commit均为docs-only，src等价；维持卡片基线 |
 
 ## Next Step
-提交代码+文档，补录 handoff.json（head_commit），删除 `.planning/g3-cwp-maint` scratch，push 自己分支。
+无 —— 本卡完成（commits 245a7f7 / 53cb25b / e00208d + 收口commit，已push `codex/g3-cwp-maint`，不合master）；交 MAIN 按 main_wiring.md 集成。
