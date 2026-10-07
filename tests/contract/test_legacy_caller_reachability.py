@@ -305,6 +305,13 @@ def test_every_retired_script_has_an_explicit_direct_cli_guard() -> None:
     missing = []
     for script_name in sorted(EXPECTED_PERMANENTLY_RETIRED):
         source = (SCRIPTS / script_name).read_text(encoding="utf-8-sig")
+        if script_name in writer_policy.RETIRED_ENGINEERING_TOOL_SCRIPTS:
+            # G5-CWP-CHECKS: the engineering shells are unconditional stdlib
+            # stubs.  They report the engineering marker and exit 78 without
+            # importing any policy module, so the marker is their guard.
+            if "LEGACY_ENGINEERING_TOOL_RETIRED" not in source:
+                missing.append(script_name)
+            continue
         if "enforce_direct_cli" not in source:
             missing.append(script_name)
     assert not missing

@@ -53,9 +53,10 @@ ENV_VARIANTS: tuple[dict[str, str], ...] = (
 
 # Mixed legacy entries: not on the support list, not permanently retired.
 # They must not become executable merely because the env gate disappears.
+# G5-CWP-CHECKS moved test_framework.py into the engineering retirement
+# category, so it is covered by test_g5_legacy_checks_retirement.py instead.
 MIXED_SAMPLES = (
     "collect_reports.py",
-    "test_framework.py",
     "source_catalog_pilot_check.py",
     "graph.py",
 )
@@ -469,7 +470,7 @@ def test_permanently_retired_entry_is_blocked_with_sitecustomize_active(
 
 @pytest.mark.parametrize(
     "script_name",
-    ["collect_reports.py", "test_framework.py", "source_catalog_pilot_check.py"],
+    ["collect_reports.py", "source_catalog_pilot_check.py"],
 )
 @pytest.mark.parametrize(
     "pythonpath_scripts", [False, True], ids=["plain", "scripts-on-pythonpath"]
@@ -552,7 +553,15 @@ def test_permanently_retired_entry_exits_before_initialization(
 
     assert completed.returncode == BLOCKED_EXIT_CODE, stdout + completed.stderr
     assert "G1-EXIT 78" in stdout, stdout
-    assert "PERMANENTLY RETIRED" in stdout, stdout
+    # G5-CWP-CHECKS: batch_process.py also belongs to the engineering
+    # retirement family, so both startup paths report that marker instead of
+    # the research-writer banner.  The exit contract is unchanged.
+    expected_marker = (
+        "LEGACY_ENGINEERING_TOOL_RETIRED"
+        if script_name in writer_policy.RETIRED_ENGINEERING_TOOL_SCRIPTS
+        else "PERMANENTLY RETIRED"
+    )
+    assert expected_marker in stdout, stdout
     assert "unrecognized arguments" not in completed.stderr
 
     forbidden = [

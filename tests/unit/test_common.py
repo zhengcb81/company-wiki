@@ -207,12 +207,29 @@ class TestLegacyWriterPermission:
             "config_doctor.py",
             "narrative_evidence_pilot.py",
             "narrative_summary_review_pilot.py",
-            "clean_env_gate.py",
         )
         for environment in self.ENV_VARIANTS:
             self._apply(monkeypatch, environment)
             for script_name in supported:
                 assert require_legacy_writer_permission(script_name) is True, (
+                    script_name,
+                    environment,
+                )
+
+    def test_retired_engineering_shells_stay_denied(self, monkeypatch):
+        """G5-CWP-CHECKS：六个旧工程门禁/批处理外壳不是受支持工具。"""
+        retired = (
+            "architecture_gate.py",
+            "batch_process.py",
+            "clean_env_gate.py",
+            "gold_gate.py",
+            "semantic_gate.py",
+            "test_framework.py",
+        )
+        for environment in self.ENV_VARIANTS:
+            self._apply(monkeypatch, environment)
+            for script_name in retired:
+                assert require_legacy_writer_permission(script_name) is False, (
                     script_name,
                     environment,
                 )

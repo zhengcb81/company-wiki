@@ -120,6 +120,31 @@ class TestCorpusIntegrityMutations:
         with pytest.raises(ValueError, match="span offset"):
             load_gold(corpus)
 
+    def test_routing_source_reference_is_rejected(self, tmp_path):
+        # Migrated from the retired semantic_gate routing counterexample
+        # (G5-CWP-CHECKS): a routing case may never cite a source that is not
+        # in the corpus manifest.
+        corpus = _copy_corpus(tmp_path)
+        path = corpus / "annotations" / "routing_targets.json"
+        document = _read_json(path)
+        document["routing"][0]["source_id"] = "S-NOT-IN-MANIFEST"
+        _write_json(path, document)
+
+        with pytest.raises(ValueError, match="routing source reference missing"):
+            load_gold(corpus)
+
+    def test_claim_source_reference_is_rejected(self, tmp_path):
+        # Counterpart of the retired semantic_gate claim counterexample: a
+        # claim may never cite a source that is not in the corpus manifest.
+        corpus = _copy_corpus(tmp_path)
+        path = corpus / "annotations" / "material_claims.json"
+        document = _read_json(path)
+        document["claims"][0]["source_id"] = "S-NOT-IN-MANIFEST"
+        _write_json(path, document)
+
+        with pytest.raises(ValueError, match="claim source reference missing"):
+            load_gold(corpus)
+
 
 class TestPredictionMutations:
     def test_evidence_offset_shift_fails_exactness(self, gold, predictions):
@@ -190,9 +215,7 @@ class TestPredictionMutations:
         route = next(item for item in predictions["routes"] if item["has_ambiguity"])
         route["targets"] = [{"entity_id": "错误实体", "confidence": "high"}]
 
-        _assert_metric_failed(
-            evaluate(predictions, gold), "ambiguity_detection_recall"
-        )
+        _assert_metric_failed(evaluate(predictions, gold), "ambiguity_detection_recall")
 
     def test_irrelevant_requires_explicit_rejection_flag(self, gold, predictions):
         route = next(item for item in predictions["routes"] if item["is_irrelevant"])
@@ -203,15 +226,11 @@ class TestPredictionMutations:
 
     def test_aggregation_without_canonical_source_fails_dedup(self, gold, predictions):
         route = next(
-            item
-            for item in predictions["routes"]
-            if item.get("canonical_source_id")
+            item for item in predictions["routes"] if item.get("canonical_source_id")
         )
         route["canonical_source_id"] = None
 
-        _assert_metric_failed(
-            evaluate(predictions, gold), "aggregation_dedup_accuracy"
-        )
+        _assert_metric_failed(evaluate(predictions, gold), "aggregation_dedup_accuracy")
 
     def test_dropping_required_fanout_fails_routing_recall(self, gold, predictions):
         for route in predictions["routes"]:

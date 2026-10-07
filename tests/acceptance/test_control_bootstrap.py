@@ -1,76 +1,106 @@
-"""Regression cases for fixture isolation and honest quality checks."""
+"""Regression cases for fixture isolation and honest quality checks.
+
+G5-CWP-CHECKS retired the old control gates, so this acceptance module no
+longer imports ``architecture_gate`` / ``clean_env_gate`` / ``semantic_gate``
+and ``control/architecture.json`` is gone with them.  What must survive:
+
+* fixture isolation — the migrated helper in
+  ``tests/support/isolated_environment.py`` keeps API keys, dotenv and the
+  network switched off for the acceptance runtime;
+* honest quality — a below-threshold result is computed as a failure and can
+  never be relabelled as a pass, and thresholds stay definition-only.
+"""
+
+from __future__ import annotations
 
 import json
+import os
+import subprocess
+import sys
 from pathlib import Path
 
-from architecture_gate import evaluate_architecture
-from clean_env_gate import is_candidate_path
-from semantic_gate import evaluate_gold_integrity
+ROOT = Path(__file__).resolve().parents[2]
+SCRIPTS = ROOT / "scripts"
+TESTS = ROOT / "tests"
+sys.path.insert(0, str(SCRIPTS))
+sys.path.insert(0, str(TESTS))
+
+from helpers.gold_evaluator import (  # noqa: E402
+    evaluate,
+    gold_to_perfect_predictions,
+    load_gold,
+)
+
+CORPUS = TESTS / "fixtures" / "gold_corpus"
 
 
-def write_json(path: Path, value) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(value), encoding="utf-8")
+def test_migrated_isolation_helper_blocks_repository_dotenv_reload() -> None:
+    from support.isolated_environment import sanitized_environment
+
+    environment = sanitized_environment()
+    for key in ("MINIMAX_API_KEY", "MIMO_API_KEY", "TAVILY_API_KEY"):
+        environment.pop(key, None)
+    environment["PYTHONPATH"] = str(SCRIPTS)
+    code = (
+        "import os, config; config._load_dotenv(); "
+        "print(int('MINIMAX_API_KEY' in os.environ), int('MIMO_API_KEY' in os.environ), "
+        "int('TAVILY_API_KEY' in os.environ))"
+    )
+    completed = subprocess.run(
+        [sys.executable, "-c", code],
+        cwd=ROOT,
+        env=environment,
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+        errors="replace",
+        timeout=30,
+        check=False,
+    )
+    assert completed.returncode == 0, completed.stderr
+    assert completed.stdout.strip() == "0 0 0"
 
 
-def test_bad_5_production_data_is_excluded_from_clean_candidate():
-    assert not is_candidate_path("companies/北方华创/raw/report.pdf")
-    assert not is_candidate_path("sectors/半导体设备/wiki/行业概览.md")
-    assert is_candidate_path("tests/fixtures/mini_wiki/raw/北方华创/fixture.md")
+def test_quality_below_threshold_is_reported_as_failure_not_success() -> None:
+    gold = load_gold(CORPUS)
+    perfect = gold_to_perfect_predictions(gold)
+    ceiling = evaluate(perfect, gold)
+    assert ceiling["all_critical_pass"] is True
 
+    claim = next(item for item in perfect["claims"] if item.get("numeric"))
+    claim["numeric"] = None
+    degraded = evaluate(perfect, gold)
 
-def test_bad_6_constant_success_failure_drill_is_rejected(tmp_path):
-    deployment = tmp_path / "deployment.py"
-    deployment.write_text("def drill():\n    return True\n", encoding="utf-8")
-    config = {
-        "schema_version": 1,
-        "rules": [
-            {
-                "id": "constant-drill",
-                "kind": "forbidden_regex",
-                "glob": "deployment.py",
-                "regex": "return\\s+True",
-            }
-        ],
+    assert (
+        degraded["metrics"]["numeric_exactness"]
+        < degraded["thresholds"]["numeric_exactness"]
+    )
+    assert degraded["all_critical_pass"] is False
+    assert "numeric_exactness" in {
+        failure["metric"] for failure in degraded["failures"]
     }
-    assert evaluate_architecture(tmp_path, config)["result"] == "fail"
 
 
-def make_bad_gold(tmp_path: Path) -> Path:
-    gold = tmp_path / "gold"
-    source = gold / "sources" / "A" / "source.md"
-    source.parent.mkdir(parents=True)
-    source.write_text("---\nsource_id: S1\n---\nEvidence", encoding="utf-8")
-    full_text = source.read_text(encoding="utf-8")
-    start = full_text.index("Evidence")
-    write_json(
-        gold / "annotations" / "evidence_spans.json",
-        {"spans": {"S1": [{"span_id": "E1", "start": start, "end": start + 8, "text": "Evidence"}]}},
+def test_thresholds_stay_definition_only_so_status_cannot_override_them() -> None:
+    document = json.loads(
+        (CORPUS / "expected" / "quality_metrics.json").read_text(encoding="utf-8")
     )
-    write_json(
-        gold / "annotations" / "material_claims.json",
-        {"claims": [{"claim_id": "C1", "source_id": "S1", "evidence_spans": ["E1"]}]},
-    )
-    write_json(
-        gold / "annotations" / "routing_targets.json",
-        {"routing": [{"source_id": "S1", "expected_targets": [{"entity_id": "A"}]}]},
-    )
-    write_json(gold / "annotations" / "contradictions.json", {"contradictions": []})
-    write_json(
-        gold / "expected" / "quality_metrics.json",
-        {
-            "metrics": {
-                "source_coverage": {"total_sources": 1, "actual": 1.0, "target": 1.0, "status": "pass"},
-                "numeric_exactness": {"actual": 0.8, "target": 0.95, "status": "pass_with_notes"},
-            }
-        },
-    )
-    return gold
+    serialized = json.dumps(document, ensure_ascii=False)
+    for forbidden in ("actual", "status", "ready_for_canary"):
+        assert f'"{forbidden}"' not in serialized, forbidden
+    assert "handwritten" not in serialized
 
 
-def test_bad_7_below_threshold_pass_with_notes_is_rejected(tmp_path):
-    result = evaluate_gold_integrity(make_bad_gold(tmp_path), min_sources=1)
-    assert any(
-        violation["id"] == "handwritten-status-contradicts-threshold"
-        for violation in result["violations"]
-    )
+def test_acceptance_runtime_never_carries_repository_credentials() -> None:
+    for name in (
+        "OPENAI_API_KEY",
+        "DEEPSEEK_API_KEY",
+        "MINIMAX_API_KEY",
+        "MIMO_API_KEY",
+        "TAVILY_API_KEY",
+        "ANTHROPIC_API_KEY",
+    ):
+        assert os.environ.get(name) is None, name
+    assert os.environ.get("PYTHON_DOTENV_DISABLED") == "1"
+    assert os.environ.get("COMPANY_WIKI_NETWORK") == "blocked"
+    assert os.environ.get("COMPANY_WIKI_REAL_LLM") == "0"
