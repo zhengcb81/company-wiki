@@ -1,6 +1,6 @@
 {
   "schema_version": "batch-preparation-deadline-acceptance/1",
-  "status": "local_acceptance_passed",
+  "status": "published_exact_ci_passed",
   "base": "ae3328ef966e90ad3b0a6d41042f98eff513ba15",
   "rf_head": "6e6b817a1a6e4567293a4dcb835815f3be508a03",
   "red": {
@@ -114,5 +114,24 @@
     "First Ruff found unused json import; corrected to json.loads.",
     "Audit guessed tools/narrative_docset/runner.py and samples ET root missing transcripts; used actual benchmark register and inspected actual ET transcripts directory.",
     "Two documentation patches rejected unmatched context atomically; corrected exact headings."
-  ]
+  ],
+  "code_sha": "7aa88aec057ea392a343fa43bc6d1accaeb1f24e",
+  "ci": {
+    "run_id": 37557509249,
+    "head_sha": "7aa88aec057ea392a343fa43bc6d1accaeb1f24e",
+    "attempt": 1,
+    "status": "completed",
+    "conclusion": "success",
+    "all_jobs_and_steps_success": true,
+    "job_id": 112587036410,
+    "job_seconds": 73,
+    "url": "https://github.com/zhengcb81/company-wiki/actions/runs/37557509249"
+  },
+  "published_git_blob_sha256": {
+    "src/company_wiki/automation/narrative_batch.py": "61f0358054f68f9a6102154f998fd3e5d0533cb4f3ff7444c6c1fbcba3ac0def",
+    "src/company_wiki/automation/narrative_batch_cli.py": "a332adfd3ab324a7f158aab0c6ab5acf1eab1f43ddde15524e101d117c12e3a5",
+    "tests/unit/test_batch_preparation_deadline.py": "2823e658aae88fac210524ff607dbe00e22baf209db24219f9e4c65fc327de58",
+    "tests/integration/test_batch_preparation_deadline_cli.py": "c7c750e0a9d3e74d8ca843abeea5f77dbd5a3f50f03d5ac8aaf79f26e118ad5b"
+  },
+  "cleanup_still_absent": true
 }

@@ -1,5 +1,9 @@
 # Progress：激进简化实施
 
+## 2026-10-07 deadline发布收口
+
+7aa88aec057ea392a343fa43bc6d1accaeb1f24e正常提交/短push门绿，真实远端一致；精确CI37557509249 attempt1全部job/step success，job112587036410/73秒，CI全Unit与短合同绿。发布收据含实际Git blob SHA、保护与十tmp仍absent。仅user source_acquisition.yaml dirty，不暂存不覆盖。RF6e6b817a、FF758e8f4、ET2b9fb84保持；StockWiki已推进3fe5008独立quick-scan变更，后续只读核来源接口。FF→ET→CWP手动正式脚本run_ff_et_cwp_offline_acceptance及FF MAIN_ACCEPTANCE实读确认真实三仓CLI/私有HTTP seam与重复0provider/语言SHA/timeoutcleanup覆盖，不复跑。总PWF下一完整需求表逐项闭合，不据一deadline宣称整体完成。
+
 ## 2026-10-07 准备deadline本地集中节点通过
 
 57 Unit/12.58秒、五正式CLI/35.78秒、全CI Ruff+新Integration与47源mypy全绿。两到期用例验证新任务/HTTP零启动、付费旧账不归零、同锁随后正常恢复，三配置入口保持。10自身tmp/明确RED子目录恢复absent，删除29351660B临时材料。生产严格只读17表与S5全部相同、九raw SHA/size/mtime及用户config/RF保护与S7相同，DB222408704B/0free、前后完整DB SHA相同，0备份/写库。audit首次猜ET根遗漏transcripts而FileNotFound、tools/narrative_docset/runner.py不存在，rg PS通配无效；均改实际路径/目录参数后成功，未据此改产品。小收据保存，下一正常commit/push/精确CI；整体核查仍未闭合。

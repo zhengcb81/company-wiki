@@ -10,6 +10,8 @@
 
 ## 当前恢复点（2026-10-07）
 
+- **完整核查发现的准备deadline缺口已修复并发布。** 代码7aa88ae，精确CI37557509249 attempt1全部job/step success/73秒。五功能反例RED后57责任项/12.58秒及五真实CLI/35.78秒绿，47源mypy与CI Ruff绿；到期后停止新的准备读取/任务/HTTP，旧付费账保留，正常配置与恢复保持。十自身测试路径absent，生产17表/九原件/用户配置/RF owner复核不变，DB222408704B。没有扩大供应商/权限/预算或日常长测；[正式收据](harness_lanes/results/final_batch_deadline_acceptance_2026-10-07.json)。整体目标active，下一完整核查剩余外仓公开接口和要求逐项闭合。
+
 - **N6-CANDIDATE最新查收复核通过。** f31cc0d/e8c645e均已在当前主线，远端master ed2dc51；实时精确CI37547043642全部步骤success。本次四文件短包47项/0.79秒绿，tmp/n6-rcheck恢复absent，11份相关源代码与已发布S7 Git blob一致。详见[N6验收单最新复核](n6_candidate_main_acceptance_2026-10-07.md)。本次不重合并、不重跑九样本；整体Next Step保持完整目标核查，准备阶段deadline未提交改动仍属该核查的独立未完成修复。
 
 - **当前最新完成：客户采用/募投上下文selector0.4.2已发布aa52cbd，精确CI37555504675全部步骤绿/81秒。** 200责任项/1.65秒、CI全范围Ruff/47源mypy、正式真实S01/S04/S09消费者链+旧final9/selector升级11项122.26秒通过；完整九文档364.548秒29/33、761定位零失败、旧full零回退、精选63073B/+120B。当前默认S06 page7 canonical原句full。重复4→6的募投引导上下文取舍保留，原86点/33分母及96/160不变。六自身tmp根恢复absent、原件/RF/用户配置保护保持，0供应商/下载/翻译。详见[实施单](s7_adoption_fundraising_implementation_2026-10-07.md)及[正式收据](harness_lanes/results/s7_adoption_fundraising_main_acceptance_2026-10-07.json)。整体目标仍active，下一完整需求核查，不再重跑本节点。
@@ -100,7 +102,7 @@ TDD 框住具体公开行为。只在 N4 A/B/C、存储迁移等大节点集中�
 
 ## Next Step
 
-核查已发现实际准备时间预算缺口：[窄幅实施单](final_batch_deadline_closeout_2026-10-07.md)。先收口五类TDD反例及真实CLI故障/恢复节点、精确发布，再继续下述完整目标核查；不重跑已绿业务全九或付费模型。
+准备时间预算缺口已收口：[窄幅实施单](final_batch_deadline_closeout_2026-10-07.md)，7aa88ae/精确CI73秒全绿。下一继续下述完整目标核查，重点逐项核当前跨仓公开接口和已交付合同覆盖；不重跑已绿业务全九、付费模型或本次deadline节点。StockWiki当前3fe5008另有独立项目推进，接口核查只读，不改IQS/owner树；RF6e6b817a、FF758e8f4、ET2b9fb84未变。
 
 **下一唯一施工动作：按[完整目标核查单](final_scope_audit_2026-10-07.md)核现状与原要求，补确有缺口后才决定整体完成。** selector0.4.2代码aa52cbd已推主线、精确CI37555504675全部步骤81秒绿。本单正式真实入口、九文档、canonical风险与测试根恢复已验证，不重跑已绿长节点，不提高96/160、不改原86点/33分母。四个required miss保持透明：S06另页canonical产能（当前默认full）、纯融资金额和两个provider/guidance边界。不能只凭九样本定位绿宣布整体目标complete。
 

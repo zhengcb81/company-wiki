@@ -17,6 +17,8 @@
 
 ## 状态
 
+**已发布。** 正常提交7aa88aec057ea392a343fa43bc6d1accaeb1f24e已推master；精确CI37557509249 attempt1全部job/step success，job112587036410/73秒。正常钩子通过；最新节点JSON为published_exact_ci_passed。历史下文“待发布”已被本段覆盖，勿重跑；继续完整目标核查。
+
 本地集中节点已完成：57责任Unit/12.58秒、五个真实CLI/35.78秒（新超时两类及原配置三类），Ruff全CI范围+新Integration、47源mypy绿。真实到期后无第二原文读取/新AUTO任务/模型HTTP，既有付费费用原样保持，同一锁正常恢复成功。10个自身测试/缓存路径恢复absent，清除29351660B临时材料，原件零删；生产17表count/digest与S5收据完全一致、9raw SHA/size/mtime与S7发布相同、DB222408704B/无free页且检查前后SHA不变，RF owner/config保持。正式[节点收据](harness_lanes/results/final_batch_deadline_acceptance_2026-10-07.json)、[当前事实](harness_lanes/results/final_current_source_facts_2026-10-07.json)。正常提交/精确CI尚待发布，不冒称整体完成。
 
 功能TDD已实测：五类配置/目录/元数据/语言/原文验证预算耗尽反例在旧实现5 failed / 0.90秒，全部错误地进入AUTO初始化。窄幅修复后五项0.65秒通过；初次57项责任包56绿/1失败是验证阶段耗尽前已收集两份元数据的测试期望错误，已改为允许到期前元数据但严格禁止到期后第二原文读取。配置到期还明确断言不得打开Catalog。Ruff初查新CLI测试有unused json import，改为直接json.loads。下一运行新真实CLI两类及既有配置入口，再集中静态/发布；无九文档或付费重测。

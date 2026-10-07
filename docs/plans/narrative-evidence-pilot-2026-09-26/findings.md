@@ -1,5 +1,7 @@
 # Findings：当前事实与待验证项
 
+deadline节点7aa88ae已推且精确CI37557509249全步骤成功/73秒；未增加日常长测试。跨仓实际HEAD：RF6e6b817a、FF758e8f4、ET2b9fb84、StockWiki3fe5008（独立quick-scan工作），本线零写外仓。FF正式离线脚本确实走FF companion→ET真实CLI/supervisor/worker/serializer→CWP import/query/open，仅替换provider HTTP；不能把fixture变成live FMP成功。RF source_preparation当前默认pathless v2，旧legacy仅历史helper；StockWiki叙述consumer文档为显式读取，不是自动全库投资研究同步，后续按当前代码接口核对应实际责任边界。
+
 ## 2026-10-07 完整核查的真实时间缺口修复
 
 准备阶段原来在配置/元数据/语言/原件SHA耗尽后继续物化任务，五个功能反例实证RED；现单一请求入口deadline贯通，57责任项与五真实CLI通过，到期后停新的读取/任务/HTTP，旧费用保留、正常配置与恢复不变。此为协作式截止，已开始的同步有界I/O和收尾不能强制即时打断。生产只读复核17表count/digest、9原件与用户/RF保护全一致；DB仍222408704B/0free、前后SHA相同。原件已占约96.3%逻辑量，不以测试缓存删除冒称再释放原件GB或新资料全已生产处理。
