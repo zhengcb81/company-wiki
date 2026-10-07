@@ -1,5 +1,17 @@
 # Progress：激进简化实施
 
+## 最新审计补漏与当前责任施工（2026-10-07，覆盖下方旧状态）
+
+8ffd3f0审计计划已正常commit/push。后续三内部子任务独占CWP有效pin、AUTO错误/版本恢复、摘要质量文件；外仓仅只读审查，MAIN独占总PWF/生产，未给用户另开harness。G2新增完整同步写集：SW pyproject fail_under73/hook间接600/1000/AGENTS；StockQA always_run联网pip-audit+pytest、默认coverage XML/HTML、Black/mypy/pylint异义及bat；RF final_ratchet/coveragerc/旧session_checklist；CWP公开archive/prune缺now、focus代码指纹、duplicates只读却construct Store/历史journal保留、旧部署writer说明。SW/StockQA日常门升P0-B，仍仅两个大节点。
+
+现场steady迁移已完成：已发布2cad90d代码导出到独立小tmp，操作锁/CAS，小旧policy留收据；16有效断言/17事实表/生产DB SHA及原件/六保护文件不变，重复CAS零写，0生产AUTO Store/paid/raw删除/完整备份。第二脚本验证通过后receipt误调用SourceRef.to_dict；没有重启/回滚已成功迁移，按asdict重新只读完成收据并明确事后重建旧视图。第一脚本Windows字典key斜杠错误在任何生产写前失败；均已记入正式收据。
+
+默认steady新增6真实行为测试：2RED/4PASS（有效断言/完整期间被旧默认隐藏）→89责任GREEN/6.59秒。关联历史解析责任72PASS/2FAIL：一项schema2错标旧v2语义，另一AST旧owner门误拒当前canonical capture；改schema1夹具并退休全AST门/源码evil probe，保留SHA/身份/retired/桥开关行为，FC701五项GREEN/1.02秒。不重跑已绿历史长套件。
+
+错误记录：几次猜测不存在的测试路径和qualified CodeGraph symbol失败，均转实际文件清单/CodeGraph_search，不改生产；一次合并PWF patch因findings不存在的#锚点失败，确认零写后按真实标题重做。目标服务实读paused，与旧PWF active文字不一致，已纠正当前入口；不调用status complete/blocked/paused工具或自动恢复。核心代码/版本恢复仍待集中发布，未冒称全面验收。
+
+二次审计新增G2-12：真实CWP/FF latest分叉旧binding/snapshot/hash/expiry签收，exact已简化、latest仍不能自动补缺；新无snapshot稳态还被close-gap拒绝。完整service/CLI/FF/安装/预算与并发反例写入P0-B，不顺手扩AUTO下载。新增[G2补充审计收据](harness_lanes/results/g2_gate_reaudit_followup_2026-10-07.json)，原审计收据保持历史时点。来源pin仍catalog-wide的精确run过度失效列G2-01b pending。当前CI范围Ruff全绿、45源mypy绿（最终批次恢复后需核最终写集），0paid/外仓写/原件删除；未把本地subset冒称全部G2A或新提交远端CI。
+
 ## 当前恢复点：2026-10-07 G2全面审查与计划提升
 
 按用户最新要求完成八仓当前门禁入口/配置/hook/CI与两FF安装技能只读复核，CodeGraph查结构、literal查实际错误/配置，保存[g2审计](harness_lanes/results/g2_gate_reaudit_2026-10-07.json)。12组结论进入[G2独立细则](gate_simplification_reaudit_2026-10-07.md)：P0现场steady、有效pin、AUTO机器错误、派生质量状态；P1旧Pipeline/公开维护、RF/StockWiki/StockQA工程工具、FF兼容安装；ET和其他provider保留能力边界，不强行制造改造。同步总task_plan/全部PWF/R2/G1旧收口/46项/README/findings导航，覆盖历史全面完成与过宽无caller结论。只两个大节点，先TDD，测试独立根恢复，没有新签收。

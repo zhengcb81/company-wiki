@@ -2,7 +2,7 @@
 
 **状态：审计完成；实施 in_progress。优先级：P0，先于 R2 生产来源准备、R3 摘要运行和 R4 可选去重。**
 
-这是 2026-10-07 用户“全面审查、查缺补漏、加到 PWF 并提高优先级”的实际施工入口。G1 的已发布成果继续有效，但其“约定范围完成”不能代表所有遗留机制已清空。总目标保持 active，不增加角色、人工签收、授权文件或逐小节点检查。
+这是 2026-10-07 用户“全面审查、查缺补漏、加到 PWF 并提高优先级”的实际施工入口。G1 的已发布成果继续有效，但其“约定范围完成”不能代表所有遗留机制已清空。本次按用户明确的审计补漏任务推进；目标服务实读为 paused，旧文档的 active 文字不代表已恢复。下一次恢复后的顺序仍为 G2→R2→R3→R4→R5，不增加角色、人工签收、授权文件或逐小节点检查。
 
 ## 1. 审计范围和证据
 
@@ -17,9 +17,11 @@
 | StockWiki | 9f552a6 | check_all、AGENTS、覆盖率/体量硬门 | 隔离修改；投资研究状态不改 |
 | StockInfoDLSimple/v2-clean-rewrite | 8ed5fdd | 当前 CWP adapter、Git 工作树 | 有 11 个 tracked 修改和未跟踪文件，保留 owner 改动 |
 | MeetingConverter | 8a33a7f | 已交付 CI 精简、运行入口 | 未发现需恢复人工审批的新问题 |
-| StockQAbyLLM | 34493d5 | CI 与本地检查一致性、指标门、重复 job | owner有已暂存pilot/其他改动，工程工具仅隔离目录清理 |
+| StockQAbyLLM | 原审计34493d5；后续实读6a9ff138 | CI/本地/hook/默认pytest配置一致性、指标门、重复 job | 最新staged/unstaged均0、untracked7；实施前再核，工程工具仅隔离目录清理 |
 
 HEAD/文件 SHA/工作树/现场 policy 原文见[只读审计收据](harness_lanes/results/g2_gate_reaudit_2026-10-07.json)。这是入口和机制审计，**不声称逐行读完全部历史 worktree**。Dayu 是纯外部项目，零代码变更；IQS 有独立项目，不介入。沙箱/操作系统/供应商套餐限制不是项目内人工权限，不能通过修改项目声称取消了它们。
+
+再次追链的13组、scoped pin边界、StockQA最新HEAD、具体同步写集/能力保护与核心本地证据见[补充审计收据](harness_lanes/results/g2_gate_reaudit_followup_2026-10-07.json)。原收据保持原时点，不回写成新状态。
 
 ## 2. 已完成项继续保留，不重复施工
 
@@ -28,19 +30,19 @@ HEAD/文件 SHA/工作树/现场 policy 原文见[只读审计收据](harness_la
 - FF v2 以一次 `filing_intent` 驱动下载，ET 为原语言 TXT；两份已安装 FF 技能都以 v2 为推荐入口，不能误报“还在默认 v1”。
 - RF 人工 release_authorization 已退出；来源公开日而非下载日的跨仓合同已并线、正式六 CLI 已验收。
 - CWP commit 已不跑 pytest；当前单 Python 快 CI 已绿。2cad90d 的 202 项责任节点/64.81 秒与[精确 CI 37582474369](harness_lanes/results/r2_systemic_exact_ci_2026-10-07.json)复用，不因补计划再次跑全部长测。
-- 全根发现、有限登记、适配器重复 SHA、AUTO 范围 SQL、终态恢复零子进程的系统性修复已发布；生产配置迁移尚未执行，不能把源码绿冒充现场完成。
+- 全根发现、有限登记、适配器重复 SHA、AUTO 范围 SQL、同版本终态恢复零子进程的系统性修复已发布。现场steady迁移本次已完成，不能将此等同新版读取pin/handler的发布或生产摘要完成。
 
 ## 3. 漏项清单：按实际影响排序
 
-### G2-00 / P0：现场 canary 未迁移（实施中）
+### G2-00 / P0：现场 canary 与默认读取路径（现场已迁移；默认代码待发布）
 
-**正在生效。** `.source_catalog/runtime_policy.json` 仍为 2026-08 canary，六个 flag、epoch/cohort 和关闭的 legacy bridge 影响当前 metadata 可见性。510B 并不占空间，却让旧 capture 字段被隐藏，是 G1 运行迁移漏项。
+**原审计确实生效；现已迁移。** `.source_catalog/runtime_policy.json` 原为2026-08 canary，六flag/epoch/cohort/关闭legacy bridge隐藏capture，是G1漏项。现在以已发布2cad90d代码、现有锁/CAS切为285B schema2 steady；16条有效断言保持、17张事实表/222408704B数据库/原件及owner配置不变，同payload重复CAS零写。[现场收据](harness_lanes/results/g2_steady_production_migration_2026-10-07.json)明确旧视图是迁移后用原小snapshot及同一只读DB重建，没有伪造迁移前采样或完整备份。
 
 已核 16 条 active/verified、2 条 legacy/verified、4 条 candidate。直接删除 JSON 会退回 v1 默认并隐藏已生效断言，不能这么做。schema 2 `steady` 已在 2cad90d 发布、CI 绿，排除 shadow/candidate/rejected，断言优先、legacy capture 仅补缺，仍绑定真实来源 SHA。
 
 **实施：**先核实际无活跃 writer/AUTO lease；用现有 `CatalogOperationLock` 和 `save_runtime_policy_cas`，比较旧 snapshot SHA/current root policy，再应用[已生成 steady payload](harness_lanes/results/r2_steady_runtime_policy_payload_2026-10-07.json)。旧小配置已在[预检](harness_lanes/results/r2_canary_retirement_preflight_2026-10-07.json)保存，不备份整个库。保留 activation journal，旧 schema 仅历史解码/迁移兼容；默认新库也应采用 steady，不能迁完旧库后新库又默认 canary/v1 控制面。
 
-**完成条件：**真实 S07 原件打开 SHA 不变，capture 缺项可见；16 条原 active 非空字段保留；candidate/shadow 不能提升；17 张来源事实表不变；相同 payload 重复应用零写。迁移前后的 read pin 可识别真正语义变化，不悄悄重签旧任务。
+**完成条件：**现场部分已满足上述小收据；S07 security_id仍是旧公司名标签，期间/公开日修正属于R2，不能声称metadata全部完备。另用新库真实读反例验证无snapshot默认steady：2个语义RED→89项责任GREEN；显式schema1兼容保留。默认实现及readpin尚未提交，须与G2A代码一同发布，不能迁完旧库后新库又默认v1。
 
 ### G2-01 / P0：读取指纹仍绑定整个配置
 
@@ -48,9 +50,13 @@ HEAD/文件 SHA/工作树/现场 policy 原文见[只读审计收据](harness_la
 
 **实施：**先逐字段追踪 reader/resolver/adapter 的实际使用，形成 `effective_read_policy` 显式投影；只纳入会改变本次读取/来源准入的字段。检查外层 RootPolicy hash、export/read_request/批次 event hash，防止删一层仍间接绑定标签。privacy_class 不再当权限；steady 不再受 cohort 标签影响。旧 v1 下真实影响可见性的 cohort 仅留历史兼容，不能在 steady 内偷偷复活。
 
-保留当前根定位、适配器/格式、实际准入状态/路由/文件限制、来源版本与字节 SHA、期间/公开日等有效维度。路径迁根是否影响已有引用按现有虚拟化合同验证，不把目录细节重新传给消费者。若 fingerprint 解释改变，明确版本升级与旧 pin 报错/新 run 重绑；不更改旧费用或伪造旧包 pin。
+只保留已登记读取实际使用的catalog位置、根ID/位置/种类/排序/有效复用、准入kind/status/文件上限和实际metadata可见性；schema2中privacy/cohort/写目标、发现adapter/routes、未被reader执行的encoding/symlink等声明不作读取pin。后者仍由发现/配置/真实路径包含等所属层校验，不能用修改标签开放坏路径。来源字节、身份/期间/公开日/locator另由责任层验证，不把目录细节传给消费者。指纹解释版本明确升2.0，schema1旧pin不可证明等价时明确报错；不改旧费用或伪造旧pin。
 
 **先写测试：**无效标签变化不使当前读取或同 run 恢复失效；真实路由/状态/格式/根或来源字节变化仍可检测；v2 CLI → FF → RF/StockWiki 结果一致。不能仅修改原测试的期望来证明实现正确。
+
+**G2-01b / 后续仍pending：全catalog绑定范围仍过大。** 本次schema2已去掉无效字段，但仍hash全部roots/DB位置；`build_batch_events`及storage baseline将全局pin进入input identity。finished exact SourceRef只读实际注册副本，不做全局候选选择，新增无关root仍可能拒绝恢复。不能声称这一问题已解决。下一施工应区分查询选源的全局identity与单source/batch实际副本/准入identity，共用同一责任层；先写“新增无关根/迁DB后精确读取和终态复用不失效、有关副本/准入/字节变化仍拒绝”的公共反例，再同步reader→batch/storage guard→消费合同。MAIN定义版本与旧pin兼容，不能临时接受任意旧pin或重签旧费用；放在G2内、R2之前，不另设签收节点。
+
+已核公开reader合同明确`reusable_for_filing=false`仍可query_local/preview/精确filing_reuse；该旧标签在legacy resolver选源里有作用，但不能作为已选SourceRef读取权限。实际旧工作目录错误为`BATCH_WORK_DIRECTORY_CONFLICT`。后续query投影也须按实际当前caller字段，不自动恢复旧复用门。
 
 ### G2-02 / P0：AUTO 普通故障仍转“人工阻塞”
 
@@ -62,11 +68,17 @@ HEAD/文件 SHA/工作树/现场 policy 原文见[只读审计收据](harness_la
 
 新 registry/handler 的错误语义变化须同步 handler_version；旧任务按既有 version 解码/明确恢复，不能同一个持久版本悄悄换含义。复用原 error/retry/lease Store，不新增泛化“权限中心”或人工重开任务接口。
 
+**新增漏项与实施边界：**实际helper的catalog_unavailable应为IO_TRANSIENT有界重试；failed/historical blocked父任务的子任务必须进入DEPENDENCY_TERMINAL，不能永久PLANNED。重试同时尊重持久job.max_attempts。三narrative handler升1.1.0，timer保留1.0.0。prompt/handler升级后，旧终态run必须先验证冻结请求身份/真实来源/effective pin，再只读final，零materialize/worker/settle；不能套当前registry导致DAG冲突。只在既有AUTO narrative_runs增加nullable小binding_json，冻结不含密钥的request SHA、执行版本和source facts，旧无绑定或schema1 pin不可证明时明确需new run，原final/费用/未知账保留；非终态旧执行版本不支持时零模型拒绝，不添加人工重开许可。这属于G2A一次恢复责任测试，不另加签收或第二Store。
+
 ### G2-03 / P1：冻结 Pipeline 的 gate 家族还在
 
 **冻结历史链，不是现行摘要 worker。** `config/pipeline_rules.yaml` 仍有 Gate0–5、approval_threshold、human_review；`scripts/gate_system/` 和 `full_pipeline.py` 保留旧评审/金融 writer。`writer_policy` 已将 full_pipeline 永久退休，所以不能把这些描述成正在阻断每份新文档。
 
 **实施：**以 CodeGraph/公开 entrypoint/package/test import 为依据退休无当前生产消费者的整条配置/模块/控制面，而非留下“disabled approval”空壳。仅将仍有价值的来源解析反例迁到当前 parser/selector 包。删旧专属测试和 CI/mypy/hook 清单项；不重新启用投资 writer，也不把 writer freeze 当个人权限移除。历史说明用 Git 链接，不新复制大 archive。
+
+已核具体写集：退休`config/pipeline_rules.yaml`和`scripts/gate_system/`旧评审实现/专属unit测试；`scripts/full_pipeline.py`保留仅stdlib退休stub及direct CLI exit78（含-S），不再import金融writer。`tests/integration/test_full_pipeline.py`实际测纯PDF提取，有现行价值，保留对应反例，不能按名字误删。
+
+`deployment.generate_retirement_report`仍推荐旧scheduler/ingest，同步换成当前来源CLI；不把旧部署说明作为重启无限worker的授权。
 
 ### G2-04 / P1：公开旧维护命令和特例审查
 
@@ -76,6 +88,8 @@ HEAD/文件 SHA/工作树/现场 policy 原文见[只读审计收据](harness_la
 
 **完成条件：**help/CLI 不再引导旧审批维护；旧入口给明确退休说明且零写；保留原件、来源版本/location；没有把来源质量错误改成通过。
 
+**本次追加的入口/数据层细节：**archive/prune公开分支没传必需now，实际会TypeError，不能因CodeGraph无caller声称已退役。focus文件还在`code_identity.CORE_SOURCE_PATHS`，退休须同步指纹清单。`duplicate_cleanup`不能整模块删除：`list_groups`只读清单与`DuplicateCleanupJournal.read_all`仍被当前CLI/export历史审计消费；仅recycler/preview/token破坏链退出，`list_groups`两处查询改现有`catalog.reader`，避免只读命令初始化写Store。`eligible_for_recycle`改成inventory诊断，不引导raw删除。旧测试要求不存在的`scripts/source_catalog_control.ps1`是过期入口断言，应替换当前只读CLI/退休零写反例，不造回旧脚本。
+
 ### G2-05 / P1：RF 可选发布工具仍绑三个仓库和固定样本
 
 **可选，不在当前日常 CI。** `tools/release_readiness.py` 仍要求三 repo HEAD、恰好 197 场景、backup 目录；`backup_readable` 实际写 `.read-probe`，`run_checks` 写 rollback_manifest，检查名称与效果不符。直接定位 sibling CWP SQLite 也违反抽象边界。
@@ -84,19 +98,25 @@ HEAD/文件 SHA/工作树/现场 policy 原文见[只读审计收据](harness_la
 
 **先写测试：**无 sibling 仓/无 backup、样本数量变化、check-only 无写仍可检查；消费的证据 bytes 不符仍失败。只在 RF 隔离目录实施，三个 owner 日志不动，不跨仓写。
 
-### G2-06 / P1：StockWiki 每次提交全套与数字门仍保留
+完整同步写集还包括`.coveragerc`、`tools/final_ratchet.py`和`tools/session_checklist.md`：final_ratchet仍驱动全tests/900秒、84% overall和8模块40–80%以及固定mypy错误数69；checklist仍要求每会话全测/真实E2E/安装全MATCH并apply、CWPconfig等HEAD/checkout。全改为相关大节点和owner保护，不因旧文案恢复这些要求。现日常`quality.yml→pre_push_gate.py`单Python/11精选包已合理，保留。用户后续已放松缺hash闭环要求：缺hash仅诊断，提供hash而实际不符仍失败，本卡不能恢复早期强制所有路径有hash规则。
 
-**现行脚本和 AGENTS 均生效。** `scripts/check_all.sh` 全 pytest 包 coverage，73% overall/40% ui 是硬门；AGENTS 仍说 Before commit；framework 新模块 600/god-module 1000 行也硬失败。上次外线消除了两遍 pytest，未取消这些要求。
+### G2-06 / P0-B：StockWiki 日常全套与数字门仍保留
+
+**现行CI脚本和AGENTS均生效；hook本身没有pytest。** `scripts/check_all.sh`仍被CI调用，全pytest+73% overall/40% ui硬门；AGENTS仍要求Before commit。hook的validate-framework间接执行600/1000行硬门，注释却称warning；`pyproject.toml`另有fail_under=73。必须统一清理，单删check_all参数会漏底层配置。上次外线只消除了重复pytest。
 
 **实施：**提交只运行改动责任范围的便宜静态/行为检查；全套真实工作区 E2E 只在相关大节点/显式运行一次。覆盖率、体量变成诊断，framework 的实际配置/模块一致性错误继续失败。同步 AGENTS/脚本/文档，不留“脚本精简但接手模型每 commit 必须全测”的冲突。投资研究 accepted/rejected 属 StockWiki 业务状态，本卡不取消投资结论语义。
 
 **验收：**hook/docs 不触发全套、指标低于旧阈值本身不失败；一个真实责任测试故意失败时整体 exit 非零。一次相关来源 CLI/E2E 节点即可，不因小改动重复 935 项。
+
+推荐一份`scripts/checks.py`供CI与sh薄包装共用，默认Ruff/真实framework一致性/identity和SourceExport/NarrativeReader精选行为；全真实工作区和coverage显式大节点。责任复用`test_check_all_script.py`当前shim、framework反例、identity/source/narrative CLI包；`test_e2e_real_workspace.py`保留真实数据行为，体量仅诊断。`test_data_contract.py`是业务成熟度，与投资accepted/rejected一起保留，移到相关大节点，不能当权限删掉。
 
 ### G2-07 / P1：CWP 工程检查与退休清单同步
 
 **现行小门与可选旧工具混合。** host-assumption regex 曾误拒测试中故意的 `C:/absolute.pdf`；mypy/hook/CI 仍包含旧 canary/维护模块，另有 optional coverage/complexity ratchet 历史测试。
 
 **实施：**保留真正可移植行为的责任测试，将误伤合法反例/注释的字符串扫描收敛为诊断或语法范围检查，不增加 allowlist 签收表；同一退休模块在 package、tests、hook、CI、pre-push 清单一起移除。覆盖率/复杂度数值报告化，当前快 CI 维持单 Python，不恢复全合同/多平台矩阵。Ruff、实际公开 DTO 类型、相关配置体检和密钥泄露检查保留，不重复全仓无关检查。
+
+**本次实际补漏：**FC701历史snapshot测试误标schema2（现在定义steady），改为真实schema1保留原v2无bridge/错误断言；禁止所有新模块读取acquisition字符串的冻结owner AST门误拒当前合法canonical登记，还在源码目录临时写evil_probe。整条AST所有者名单/两个扫描测试退休，来源身份/SHA/retired/历史可见性行为反例保留；不是加一个允许owner名字凑绿。72项行为绿、2项上述历史失败定位后，剩余FC701五项真实行为全部绿。源码不因capture这个合法字段名被拒绝。
 
 ### G2-08 / P1：FF v1 兼容与安装入口最终收敛
 
@@ -112,13 +132,15 @@ ET `ProviderSettings` 仍称 Reviewed runtime availability，但实际是单运�
 
 StockInfoDLSimple 的 provider host、include/exclude 是来源发现和过滤，不是个人权限。MeetingConverter 当前快 CI 未见新人工审批门。此两仓无明确问题就不强加施工；StockInfoDLSimple dirty 不由本卡顺手清除。Dayu/IQS 无写。
 
-### G2-10 / P1：StockQA CI 与本地脚本不一致
+### G2-10 / P0-B：StockQA CI、本地、hook和pytest默认不一致
 
 **远端正在生效。** CI 两 Python、独立 type/lint/black/bandit/radon/build/report，多次安装同类依赖；coverage 门 87%，本地 run_ci 却 60%。本地 `command | tee` 没有 pipefail，会吞失败退出码；pylint `--exit-zero` 却称“质量通过”。这能解释一类本地绿/远端红，不能假称是此前全部 CI 失败的唯一根因。
 
 **实施：**一份短检查定义供本地/CI 共用；保留实际行为、类型/格式错误，coverage/pylint/radon 分数仅诊断。日常单受支持 Python，额外兼容测试显式大节点；依赖安装一次，不因报告/格式再建六 job。脚本真实失败退出码贯通，成功报告不能来自 tee；报告准确区分检测通过与指标统计。不削弱真实 failed test，不加新的人工质量签收。
 
 **先写测试：**伪 pytest/type/format 返回失败时本地与 CI 共用入口非零，tee 不掩盖；低覆盖率本身成功，实际反例失败；无密钥离线执行短责任包。独立测试目录最终恢复原样。
+
+**新增完整写集：**`run_ci.bat`、`.pre-commit-config.yaml`、`pyproject.toml`与dev工具版本必须同时收敛。现9个实际runner/8次准备，hook always_run pytest和联网pip-audit，Black24.10对CI26、mypy strict不一致、pylint≥9阻断对本地exit-zero虚称≥8；pytest默认生成XML/HTML/coverage，轻测试也增文件。一份Python短编排供sh/bat/CI共用，默认pytest无覆盖率、提交只便宜静态、网络审计显式大节点；真实失败返回码保留。现build smoke只import空src包，换真实公开CLI/module导入。离线models/config/basic_runner/main行为和quick_scan/Q07预算恢复反例保留，live/收费默认关闭。基线必须从最新6a9ff138再核，不覆盖7个untracked资料。
 
 ### G2-11 / P0：摘要质量标记由模型重复维护并硬校验
 
@@ -130,22 +152,36 @@ StockInfoDLSimple 的 provider host、include/exclude 是来源发现和过滤�
 
 公开兼容字段可以保留，最终值由单处投影确定；若实际输出合同/prompt/handler解释变化，同步现有版本字段与消费者契约测试，不能重签历史final、更改旧费用或把整个provider响应重存一份。
 
+### G2-12 / P0-B：CWP latest下载仍分叉到旧gap签收协议
+
+**仍在执行，不能归入仅FF v1历史。** CWP exact `ensure --allow-download`已用单意图和AcquisitionBudget、不要求DownloadAuthorization；但latest_as_of即使允许下载也无条件只回GAP。公开`close-gap`强制binding-file、runtime snapshot/plan/policy hash/expiry/accessions，新默认无snapshot的steady库还会被`no_runtime_policy`拒绝。FF v2明确不走旧close-gap，收到GAP只返回，故latest缺件不能自动补齐。已核真实CLI help与实际类调用，非搜索单词推断。
+
+旧receipt只是无签名的确定性摘要；remote_size只能估计，读取中的AcquisitionBudget才有真正限额。一条旧latest流程可重复四次metadata discovery，TTL还进入事务锁键；这既增加多余门，也浪费查询。`missing_download_authorization`等有些仅是观测字典标签，无当前执行路径，不能只删标签冒称已修。HTTP bearer脱敏继续保留。
+
+**统一接口：**复用SourceRequest一次allow_download/FF filing_intent和现有AcquisitionBudget，不加新授权DTO。reuse_only的exact纯复用、latest有界发现；fetch_if_missing在同一服务最多补齐一个明确目标。latest的GAP仅内部发现结果，按公司/市场/kind/期次/as-of/provider/accession选目标，真正歧义零下载。锁键由规范请求/目标生成、不含签收TTL；锁等待/发现/读取共用剩余deadline/累计bytes/cost，二次subprocess和重试不能重置。保留single-flight、锁内本地再解析、暂存验真、唯一canonical writer/journal/最终真实再解析，不重复四次发现。
+
+**旧入口迁移：**close-gap只薄转发到同一服务；旧binding含明确accession或更低上限时仍约束请求范围，忽略旧expiry/plan/policy“签收”字段，不扩用户范围。authorization.py退休或仅旧输入转换，不再创建receipt/临时binding。FF v1/v2都调用同一ensure，保留v2 pathless SourceRef形状。当前根/config/实际bytes由程序现场核验，不要求用户保存/刷新hash文件。用户持续授权继续适用，限额和供应商能力仍真实。
+
+**完整独占写集：**MAIN的CWP`acquisition.py/acquisition_service.py/close_gap.py/authorization.py/cli.py/observability.py`，必要时`source_operation.py/lock.py`及OPERATIONS/当前合同说明；FF独立checkout仅`scripts/fetch_filing.py/filing_contracts.py`、SKILL/reference ownership和对应测试，发布后再同步安装副本。无Dayu/IQS/生产配置/raw改动，公共SourceRequest request_id算法不必变。
+
+**先写反例并并入G2B一次联调：**新steady无snapshot/binding仍可latest明确下载一次，再请求复用零fetch；旧expired/stale签收不影响相同范围有效请求；不同旧TTL并发仍最多一fetch/canonical。无intent/真实歧义/错身份期次/未来公开零fetch；假SHA/PDF、越界、未计量响应、实际超byte/time/cost不入库；provider unavailable/提交或最终再解析失败不能报completed。真实离线subprocess核FF v1/v2→ET/CWP一致、预算不重置、pathless与计数保留。复用close_gap FC801/804、download_authorization/gap_plan/acquisition/canonical_writer/adapter_process/ensure_paused/source_operation_v2及FF FC802/S3/v2责任包；删除签收本身的旧期待，保留资源/身份/SHA/幂等反例。不为此重复paid HTTP。
+
 ## 4. 实施次序、所有权和接口
 
 MAIN 是唯一集成与生产变更负责人。此表是施工顺序，不是新增 11 次签收。
 
 | 顺序 | 工作 | 输出/责任 | 状态 |
 |---|---|---|---|
-| 1 | G2-00 steady 现场迁移/默认新库收敛 | 当前 policy、旧小 snapshot、来源实际读和 16 断言对照 | in_progress；代码已绿，现场未切 |
-| 2 | G2-01 effective read pin + G2-02 AUTO 机器错误 + G2-11派生质量状态 | 版本化读取语义、现有 AUTO 单库/恢复错误合同、单处计算质量诊断 | pending；先 TDD |
+| 1 | G2-00 steady 现场迁移/默认新库收敛 | 当前policy、旧小snapshot、真实读和16断言 | 现场complete；默认路径TDD绿、待代码发布 |
+| 2 | G2-01 effective read pin + G2-02 AUTO 机器错误/版本恢复 + G2-11派生质量状态 | 版本化读取语义、同AUTO单库恢复、单处质量诊断 | in_progress；核心责任绿，批次恢复及集中发布待完成 |
 | 3 | G2-03/04/07 CWP 冻结家族/公开维护/检查清单清理 | installed/import/CLI/help/CI 同步；不启用 raw 破坏入口 | pending |
 | 大节点 A | CWP 当前链集中责任/E2E | isolated 真实 IR PDF/英文 TXT；公开 read/有限登记/零模型 skip/loopback worker；canary 现场小对照 | pending；复用已绿 202 与旧大节点 |
-| 4 | G2-05 RF、G2-06 StockWiki、G2-10 StockQA 工程工具 | 各自独占目录/提交，MAIN 集成；仅本仓写 | pending；可独立但本轮不派新 harness |
-| 5 | G2-08 FF 安装/v1 收敛、G2-09 文案和能力核对 | 唯一 v2 intent 与配置能力；main/installed 版本说明 | pending |
+| 4 | 优先G2-06 StockWiki/G2-10 StockQA，再G2-05 RF可选工具 | 各仓独占目录/提交，MAIN集成；工具/CI/hook/默认配置/文案同改 | pending；日常全套/联网门升P0-B；本次只读调查，不在owner目录施工 |
+| 5 | 优先G2-12 CWP/FF统一latest单请求，再G2-08安装/v1收敛、G2-09能力文案 | ensure/close-gap同一资源事务、无TTL签收分叉、唯一intent与installed版本 | pending；实际latest缺件仍只回GAP，新steady旧close-gap被拒 |
 | 大节点 B | 三仓离线链 + 当前消费者 + 发布 | FF→ET→CWP、RF/SW 读取；每仓对应代码 CI；保护/临时根清理 | pending；不重复付费模型 |
 | 6 | 回 R2 metadata/有限登记 → R3 → R4 → R5 | 原目标全部待办继续；G2 非缩减目标 | pending |
 
-跨仓公共接口继续为 SourceRef/SourceExport v2、NarrativeRef/只读消费者、FF 单 intent 和 ET TXT 工具，不以 reviewer DTO、文件路径或共享可变数据库接线。若 wire 有变化，MAIN 先定版本化接口，责任仓只实现本仓部分；其他 owner 工作区修改先保留，隔离集成不覆盖。当前无重复目录写分包，不在用户没安排时启动新 agent。
+跨仓公共接口继续为SourceRef/SourceExport v2、NarrativeRef、FF单intent和ET TXT，不以reviewer DTO、路径或共享可变DB接线。MAIN独占总PWF/生产/合入；本次三个内部子任务仅在已划分互不重叠的CWP文件实现或外仓只读调查，不代用户新建harness任务。外仓后续只在各自独立checkout施工，集成前复核最新HEAD/status并保留owner资料。
 
 ## 5. 两个大节点的测试包和验收边界
 
@@ -175,4 +211,4 @@ MAIN 是唯一集成与生产变更负责人。此表是施工顺序，不是新
 
 ## Next Step
 
-**先完成 G2-00：核无活跃运行，以既有锁/CAS 应用已发布 steady policy，集中验真实旧来源与 16 条断言；随后按 G2-01/02/11 的测试合同收敛读取投影、AUTO 错误和派生质量状态。** 未实施项明确 pending，不用“审计已完成”冒充“门禁已全部清空”。
+**收口当前核心代码：默认steady、有效pin、机器错误、程序质量及版本化终态恢复责任/E2E→正常提交推送→精确代码CI；更新PWF真实状态。** 全G2A还含scoped pin/旧家族清理，不能用核心子集代替。下一恢复时先P0-B两仓日常门和CWP/FF latest单请求，再P1家族/工程清单、集中G2A/B，之后回R2。目标服务paused，不自动恢复旧长跑或付费批次，不把审计/核心修复冒称全面完成。

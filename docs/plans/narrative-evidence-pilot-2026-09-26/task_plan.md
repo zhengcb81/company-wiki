@@ -4,9 +4,11 @@
 
 ## 当前最高优先级：G2 门禁全面补漏（2026-10-07）
 
-**总目标 active。当前次序为 G2/P0 → R2生产准备 → R3正式运行 → R4收益决策 → R5收口。** 已只读审查八仓当前入口、生产配置、工程检查和两份安装技能，确认旧 canary 现场未迁移、全配置读取 pin、AUTO 普通错误转人工，以及 RF/StockWiki/StockQA 工程工具等遗漏。[G2详细实施单](gate_simplification_reaudit_2026-10-07.md)列出12组结论、归属、接口、先写测试和仅两个大节点；[当前审计收据](harness_lanes/results/g2_gate_reaudit_2026-10-07.json)固定主线与实际状态。
+**本次执行用户明确的全面审计补漏任务；目标服务实读paused，未自行恢复。恢复后的次序为G2/P0→R2生产准备→R3正式运行→R4收益决策→R5收口。** 已审查八仓入口/生产配置/工程检查/两份安装技能；旧canary现场已迁移，读取pin/AUTO普通错误/冗余摘要状态核心责任测试绿，批次版本恢复和集中代码发布正在收口。StockWiki/StockQA日常全套、联网hook和隐藏阈值升P0-B，具体工具/默认配置/AGENTS同步写集已加[G2实施单](gate_simplification_reaudit_2026-10-07.md)，仅两个大节点。[原审计收据](harness_lanes/results/g2_gate_reaudit_2026-10-07.json)与[现场迁移收据](harness_lanes/results/g2_steady_production_migration_2026-10-07.json)分别证明原状态与此次变更。
 
-G1历史验收继续有效，但不能宣称全面清理已完成。2cad90d系统性代码已推、202项责任绿、精确CI37582474369成功；生产仍为旧canary，下一先迁移。没有新增人工签收，不重复付费模型/已绿大包；Dayu/IQS/原件/owner未提交文件保持边界。
+G1历史验收继续有效，但不能宣称全面清理已完成。现场仅小policy变为steady，16有效断言/17事实表/原件/数据库/owner配置不变；S07旧security标签及生产metadata仍待R2。2cad90d/202责任/CI37582474369是此前代码的证据，不能冒充本次新代码已发布。没有新增人工签收，不重复付费模型/已绿大包；Dayu/IQS/原件/owner文件边界保持。
+
+二次追链新增第13组G2-12：exact下载已单请求，latest却只返GAP并分叉到binding/snapshot/hash/expiry旧签收，新steady无snapshot也被旧close-gap拒绝，FF v2无法自动补缺；统一ensure资源事务列P0-B。另G2-01b无关root/DB位置仍令终态批次失效，明确pending。详细单给出完整代码/入口/测试/指导文件写集，保留真SHA/身份/期间/公开日/预算，而非放过坏资料。
 
 ## Goal
 
@@ -114,7 +116,7 @@ TDD 框住具体公开行为。只在 N4 A/B/C、存储迁移等大节点集中�
 
 | 阶段 | 状态 | 下一责任 |
 |---|---|---|
-| G2门禁全面补漏/P0 | in_progress | 八仓审计完成；先现场steady迁移，再有效读取pin/AUTO机器错误、历史CLI与跨仓工程工具；只两个大节点 |
+| G2门禁全面补漏/P0 | in_progress（本次审计补漏收口；目标服务paused） | 13组+scoped pin漏项；现场steady已完成，核心责任绿/版本恢复及发布待收口；SW/StockQA日常门与CWP/FF latest升P0-B，家族/跨仓工具pending；只两个大节点 |
 | R0完整对账 | complete | 已确认真实生产metadata/分类/ET登记缺口；已完成核心不重做 |
 | R1融资文档正式分类 | complete | 66ce0467已发布，真实两PDF CLI与分类责任包绿，精确CI37578307854绿 |
 | R2真实生产来源/预算准备 | in_progress；生产步骤顺延G2后 | 全库发现/有限登记/AUTO范围代码2cad90d已推且精确CI绿；G2先清旧控制面，再核公开日/retired/ET，不猜metadata |
@@ -124,4 +126,4 @@ TDD 框住具体公开行为。只在 N4 A/B/C、存储迁移等大节点集中�
 
 ## Next Step
 
-执行[G2-00](gate_simplification_reaudit_2026-10-07.md)：先核现场无活跃writer/AUTO lease，用既有操作锁与CAS应用已发布steady快照，验真实旧来源与16条active断言不丢；随后先TDD收敛有效读取pin、AUTO机器错误和程序派生质量状态。生产S05/S06有限登记及R3付费请求在G2之后，不改配置模型/预算，不重派已交卡。总目标active，全部约定阶段完成前不关闭。
+收口[G2A当前责任代码](gate_simplification_reaudit_2026-10-07.md)：集中检验默认steady/有效pin/AUTO机器错误/质量投影/版本化零模型恢复，正常提交推送并核精确代码CI；本次审计任务外仓只读结论写清，不扩大施工。目标服务实读paused。下一恢复时先P0-B的StockWiki/StockQA日常工程门，再其余G2清理及G2B，之后R2/R3；不改模型预算、不重派已交卡、不宣布全部完成。

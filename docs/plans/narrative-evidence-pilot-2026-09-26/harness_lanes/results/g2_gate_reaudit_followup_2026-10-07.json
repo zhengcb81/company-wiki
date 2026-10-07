@@ -1,0 +1,157 @@
+{
+  "schema_version": "gate-simplification-reaudit-followup/1",
+  "audited_at_utc": "2026-10-07 07:33:38 UTC",
+  "original_audit": "g2_gate_reaudit_2026-10-07.json",
+  "scope": "8 repositories from original audit plus current CLI/data-flow/hooks/config/instructions follow-up, not every historical branch or every code line",
+  "latest_confirmed_heads": {
+    "company-wiki": "8ffd3f0a309f2322f64754a7f8e9fb02b268f006",
+    "revenue-forecast": "e241389adeda37bc9cbb53d7831063718552a936",
+    "StockWiki": "9f552a6741dd093dc760ad6965458989cd027251",
+    "StockQAbyLLM": "6a9ff13864ebb160d5c4ab3cf2f42155d9f4aa99"
+  },
+  "stockqa_current_status": "staged0/unstaged0/untracked7; later pilot commit preserved, isolated engineering checkout required",
+  "goal_service_status_observed": "paused; explicit human audit task continues, no automatic goal resume",
+  "findings": [
+    {
+      "id": "G2-00",
+      "priority": "P0",
+      "status": "production_steady_applied_default_code_local_green",
+      "scope": "CWP runtime policy and default public reader",
+      "implementation": "Lock/CAS, 16 assertions retained, 17 fact tables/raw/owner hashes unchanged",
+      "receipt": "g2_steady_production_migration_2026-10-07.json"
+    },
+    {
+      "id": "G2-01",
+      "priority": "P0",
+      "status": "local_green_remaining_scoped_pin_pending",
+      "scope": "CWP effective read fingerprint + SourceReader",
+      "remaining": "Global roots/physical DB location and legacy reuse selection still bind exact SourceRef batch identity. Distinguish query selection and scoped actual reads; no historical pin re-signing."
+    },
+    {
+      "id": "G2-02",
+      "priority": "P0",
+      "status": "local_green_versioned_resume_in_progress",
+      "scope": "CWP existing AUTO errors and persistent runs",
+      "remaining": "Single nullable binding_json in existing narrative_runs, versioned terminal zero-writer recovery and bounded WAL contention responsibility test."
+    },
+    {
+      "id": "G2-03",
+      "priority": "P1",
+      "status": "pending",
+      "scope": "CWP frozen gate family",
+      "files": [
+        "config/pipeline_rules.yaml",
+        "scripts/gate_system/",
+        "scripts/full_pipeline.py",
+        "tests/unit/test_gate_system.py"
+      ],
+      "keep": "stdlib retirement exit78 including -S, source PDF extraction behavior, deployment guidance points to current source CLI"
+    },
+    {
+      "id": "G2-04",
+      "priority": "P1",
+      "status": "pending",
+      "scope": "CWP public maintenance CLI and Dropbox exception",
+      "remaining": "archive/prune entrypoint missing required now; retire destructive chain. Keep duplicate list/historical journal, use reader instead of Store; remove focus code_identity reference; obsolete absent control script assertion retired."
+    },
+    {
+      "id": "G2-05",
+      "priority": "P1",
+      "status": "pending",
+      "scope": "RF optional tools and instructions",
+      "files": [
+        "tools/release_readiness.py",
+        "tools/run_coverage_gates.py",
+        "tools/final_ratchet.py",
+        "tools/session_checklist.md",
+        ".coveragerc"
+      ],
+      "keep": "Current single-Python curated 11-file daily check; optional missing evidence hash diagnostic per later user authorization, supplied bad hash fails."
+    },
+    {
+      "id": "G2-06",
+      "priority": "P0-B",
+      "status": "pending",
+      "scope": "StockWiki daily CI + AGENTS + indirect hooks",
+      "files": [
+        "scripts/check_all.sh",
+        "AGENTS.md",
+        ".pre-commit-config.yaml",
+        "pyproject.toml",
+        ".github/workflows",
+        "framework validation tools"
+      ],
+      "remaining": "73%/40%, hidden fail_under73, 600/1000 hard size gates, Before commit full suite. Hook itself has no pytest; remove misleading instruction, retain real framework/source/investment behavior."
+    },
+    {
+      "id": "G2-07",
+      "priority": "P1",
+      "status": "partial_local_cleanup_pending",
+      "scope": "CWP engineering checks and retired lists",
+      "completed": "Retired blanket legacy acquisition-owner AST gate and production-source evil probe, historical snapshot fixture corrected to schema1; behavior retained.",
+      "remaining": "Host literal scan false positives, retired mypy/hook/CI/package lists and optional numerical tooling."
+    },
+    {
+      "id": "G2-08",
+      "priority": "P1",
+      "status": "pending",
+      "scope": "FF v1 compatibility and two installed skills",
+      "remaining": "One v2 intent and published installation; retire double authorization without restoring it through guidance."
+    },
+    {
+      "id": "G2-09",
+      "priority": "capability_boundary",
+      "status": "audited_no_forced_provider_addition",
+      "scope": "ET/SID/MC/provider settings",
+      "keep": "Single download intent, real disabled credentials/FMP402/deadline/response bytes/budget; ET local TXT reusable without translation credentials; Dayu/IQS untouched."
+    },
+    {
+      "id": "G2-10",
+      "priority": "P0-B",
+      "status": "pending",
+      "scope": "StockQA daily CI + shell/bat + hook + pytest defaults",
+      "files": [
+        ".github/workflows/ci.yml",
+        "run_ci.sh",
+        "run_ci.bat",
+        ".pre-commit-config.yaml",
+        "pyproject.toml",
+        "development tool pins"
+      ],
+      "remaining": "9 actual runners, 87/60 numerical gates, tee swallowed failure, always-run pytest/network pip-audit, coverage XML/HTML by default, inconsistent Black/mypy/pylint, empty-src import smoke."
+    },
+    {
+      "id": "G2-11",
+      "priority": "P0",
+      "status": "local_green_not_yet_published",
+      "scope": "CWP derived summary quality",
+      "implementation": "Single program projection, model uncertainty retained; actual locator/SHA/role/language validation remains. Prompt1.6.0/request1.3/handlers1.1.0; no public canonical shape expansion."
+    },
+    {
+      "id": "G2-12",
+      "priority": "P0-B",
+      "status": "pending",
+      "scope": "Current CWP latest acquisition + FF v1/v2",
+      "remaining": "latest allow_download still returns GAP; close-gap requires binding/snapshot/plan/policy/expiry and rejects new no-snapshot steady catalogs; FF v2 does not bridge it. Unify existing ensure/AcquisitionBudget/single-flight with one intent, no receipt/TTL, budget shared across discovery/wait/read/subprocess."
+    }
+  ],
+  "local_evidence": {
+    "default_steady_tdd": "2 real semantic failures/4 passes then89 responsibility passes6.59s",
+    "historical_reader_responsibility": "72pass/2 historical failures; schema2 fixture incorrect for old canary corrected to schema1, obsolete owner AST gate removed; remainingFC701 behavior5pass1.02s",
+    "effective_read_projection": "49 then50 responsibility passes; broader reader/export106passes",
+    "auto_error_semantics": "163passes, helper10realRED then22passes; version-resume follow-up not yet final",
+    "summary_quality": "148passes, actual configured loopback/resume1pass5.75s",
+    "ci_scope_static": "Ruff full current CI scope passed; exact current CI mypy45source files passed before final version-resume changes",
+    "scope_limit": "Core local green does not prove complete G2A, full G2, production summaries or exact new commit CI"
+  },
+  "effects": {
+    "production_policy_files_changed": 1,
+    "production_database_writes": 0,
+    "raw_deleted": 0,
+    "external_repository_writes": 0,
+    "paid_provider_posts": 0,
+    "full_backup_rehearsals": 0
+  },
+  "priorities": "G2 core/P0 then scoped pin + SW/StockQA daily gates + CWP/FF latest/P0-B, legacy/tool cleanup and two concentrated G2A/G2B nodes, then R2/R3/R4/R5",
+  "unchanged_protections": "Original raw, actual SHA/identity/period/publication/locator, source-only scope, current paths/ownership, finite budgets/unknown usage, one AUTO lease/generation/outbox, actual schema/types/config/credential redaction"
+}

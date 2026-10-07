@@ -1,5 +1,21 @@
 # Findings：当前事实与待验证项
 
+## 最新补漏与实际状态（覆盖下方同日旧恢复点）
+
+已在G2详细单补足代码→公开CLI→hook/CI→默认配置→AGENTS/会话文档的完整清理写集，而非仅搜gate关键字。SW/StockQA正在日常生效的全套/联网/隐藏阈值升P0-B，先于生产来源和摘要。RF可选工程工具仍P1，现日常11精选包不强行改。StockQA实读HEAD已到6a9ff138，staged/unstaged0、untracked7，原审计34493d5仅历史基线。
+
+现场旧canary已用发布2cad90d的小锁/CAS迁steady：16有效断言保持，17事实表/生产222408704B DB完整SHA不变，原件/用户配置/RF三owner日志不变。只迁小配置；旧视图明确为事后同DB+原snapshot重建，没做整库备份或paid。S07旧证券名标签/NULL公开日仍待R2，不能猜metadata。新库无snapshot默认v1是另一个实证漏项，2语义RED→89责任GREEN；当前代码未发布。
+
+AUTO根因包括：普通错误落人工语义、catalog暂时不可用误判永久来源错误、失败父任务使子任务卡PLANNED，以及重试忽略持久job额度。新增请求身份/执行版本绑定只在既有AUTO narrative_runs小JSON字段，终态旧run可证明当前有效规则/真实来源时只读复用；不可证明的旧schema1 pin明确需newrun，不重签/改账。模型质量标签改为单处程序诊断，原SHA/locator/角色/语言责任保留。
+
+历史FC701有两种问题：snapshot写schema2却断言旧canary行为；冻结AST owner表按字段名禁止合法capture并向源码写evil_probe。已改真实schema1夹具保留行为，退休两项AST扫描，不扩大owner白名单；72行为绿后剩余FC701五项复验绿。读取不再以无效标签/未执行发现声明/外层RootPolicy大hash制造额外门；真实路径/准入/字节仍检查。
+
+目标服务本次实读paused；只按用户明确审计任务收口当前责任代码与PWF，不自动开始R2/R3或付费。完整G2清理未完成，外仓/旧公开维护/FF收敛仍pending。
+
+再次只读review明确剩余G2-01b：schema2仍catalog-wide，新增无关root也进入batch input/storage baseline，completed exact run会先拒绝。这是过宽状态绑定，已列G2内/R2前的具体后续接口与TDD；本次实现只解决无效字段与外层大hash，不能冒称全部pin耦合清空。全局query选源与精确SourceRef实际副本应按任务范围承担各自身份。
+
+新增G2-12是当前功能链漏项：CWP exact单intent可下载，latest即使allow_download仍只回GAP；公开close-gap强制binding+snapshot/hash/expiry，新steady无snapshot被拒；FF v2不调用该旧协议，latest自动补缺断开。旧receipt无签名不新增真实性，四次metadata discovery和TTL锁键浪费。已列P0-B统一ensure事务/预算与FF单入口的完整施工写集/离线反例，复用真资源、SHA、身份、公开日、幂等，不再保留签收文件。AUTO无该下载caller，Worker写集不随此扩张。仅观测字典授权词不是活跃门，凭证脱敏继续保留。
+
 ## 当前事实：2026-10-07 G2全面补漏优先
 
 八仓当前入口/运行配置/工程检查及两份安装FF技能只读复核完成，结论和实施细节见[G2](gate_simplification_reaudit_2026-10-07.md)/[固定收据](harness_lanes/results/g2_gate_reaudit_2026-10-07.json)。发现：live旧canary未迁移；CatalogConfig全字段pin仍绑定privacy/cohort兼容标签；AUTO普通解析/配置/来源/locator故障仍可转blocked_human；公开旧archive/prune/confirmation CLI与可选Dropbox平安review特例仍在；RF可选发布绑197场景/三HEAD/backup并有check写副作用；StockWiki要求commit前全套和73/40覆盖率；StockQA CI87与本地60不一致、tee无pipefail可能假绿；CWP旧Pipeline冻结但家族/清单未退休；摘要层因模型needs_review与draft状态矛盾拒绝claim，改为程序派生诊断的方案列P0。区别当前有效、可选和冻结历史，不把所有review字样当权限。
