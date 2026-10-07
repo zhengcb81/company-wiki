@@ -1,5 +1,13 @@
 # Progress：激进简化实施
 
+## 2026-10-07 准备deadline本地集中节点通过
+
+57 Unit/12.58秒、五正式CLI/35.78秒、全CI Ruff+新Integration与47源mypy全绿。两到期用例验证新任务/HTTP零启动、付费旧账不归零、同锁随后正常恢复，三配置入口保持。10自身tmp/明确RED子目录恢复absent，删除29351660B临时材料。生产严格只读17表与S5全部相同、九raw SHA/size/mtime及用户config/RF保护与S7相同，DB222408704B/0free、前后完整DB SHA相同，0备份/写库。audit首次猜ET根遗漏transcripts而FileNotFound、tools/narrative_docset/runner.py不存在，rg PS通配无效；均改实际路径/目录参数后成功，未据此改产品。小收据保存，下一正常commit/push/精确CI；整体核查仍未闭合。
+
+## 2026-10-07 继续准备deadline实证
+
+RF仍6e6b817a/三个owner日志不变。五类准备耗尽反例旧实现5 failed/0.90秒；修复后57项56pass/1failed为到期前元数据收集的期望错误，改为只禁止到期后新的原文读取，五项复核0.65秒全绿。Ruff unused json import已改直接json.loads；新真实CLI两类未跑。文档patch一次误把总计划完整长行当短行匹配被原子拒绝，未写文件；移除无效匹配后应用。当前不宣称发布/完整目标完成。
+
 ## 2026-10-07 N6-CANDIDATE再次查收
 
 正式交接f31cc0d与merge e8c645e已为当前主线祖先；真实远端master ed2dc51，CI37547043642实时查询全部步骤success。本次47责任case/0.79秒绿，独立tmp/n6-rcheck前后absent，11份相关源码与S7已发布Git blob一致。仅更新PWF，不重复合并、九样本或付费测试，其他准备阶段deadline未提交代码独立保留。本次文档patch第一次以不存在的progress标题为上下文被原子拒绝，未写任何文件；读取真实标题后一次正确应用。SHA初查比较了CRLF工作副本与LF Git blob导致8项假差异，改为HEAD/发布blob及换行归一的工作副本比较全部一致，源码未改。

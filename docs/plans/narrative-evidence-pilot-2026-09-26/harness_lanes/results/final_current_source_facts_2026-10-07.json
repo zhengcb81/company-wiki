@@ -1,0 +1,176 @@
+{
+  "schema_version": "current-source-facts-audit/1",
+  "status": "passed",
+  "seconds": 4.091,
+  "read_only": true,
+  "production_database_before": {
+    "sha256": "0081ee5c3daf85abd71253e6069d08b1cdde46fe216326c10f0bf897a6a6bb62",
+    "size": 222408704,
+    "mtime_ns": 1791248158420833300
+  },
+  "production_database_after": {
+    "sha256": "0081ee5c3daf85abd71253e6069d08b1cdde46fe216326c10f0bf897a6a6bb62",
+    "size": 222408704,
+    "mtime_ns": 1791248158420833300
+  },
+  "database_unchanged": true,
+  "numbers": {
+    "page_count": 54299,
+    "freelist": 0,
+    "page_size": 4096,
+    "logical_bytes": 222408704,
+    "file_bytes": 222408704
+  },
+  "source_facts": {
+    "activation_journal": {
+      "count": 1,
+      "digest": "6088030d350e6fba148547539440e64d53d418fe2cafa915c780033691ef34a0"
+    },
+    "catalog_meta": {
+      "count": 5,
+      "digest": "c751a23b4eedddc7ec730c126b4e9c6e6691fdd30b90597a3e4df7cfa67657c4"
+    },
+    "document_entities": {
+      "count": 23709,
+      "digest": "d6efb541c386d54984e103b07b915ac9b432d51e106266645d448c35947eb1c4"
+    },
+    "document_fingerprint_state": {
+      "count": 23529,
+      "digest": "7005c861dc6c1dffb64c1f304c1c16162db843d9921e2ecdc3c8de1b67a7991b"
+    },
+    "document_restore_audit": {
+      "count": 1,
+      "digest": "cd0e2af61f07636d8e0899fec4142970c4b8c6302b82360e1cd7584a6cea5a27"
+    },
+    "document_retire_audit": {
+      "count": 19000,
+      "digest": "c845fc06215ea230fe5b36629436a88faf285fabf1bed70e367799ff822bc23d"
+    },
+    "documents": {
+      "count": 23530,
+      "digest": "7c9ecd7a6a099fe19068ede9933b1371da98991f33088f460ab26da9dbf329a9"
+    },
+    "entities": {
+      "count": 271,
+      "digest": "bcb010d0fbc0de71288c60bd5c1645930f4321b4d35756da79371304564d1cd4"
+    },
+    "llm_summary_failures": {
+      "count": 651,
+      "digest": "d9adc391cb29879c776c838430733bd75fef450c854597877723dd0fa42b9c86"
+    },
+    "locations": {
+      "count": 46606,
+      "digest": "225a47f449e601ced439d0d5da0c63612410c4ff6dc7a7fa60692689d6295fb3"
+    },
+    "narrative_artifact_versions": {
+      "count": 0,
+      "digest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "producer_events": {
+      "count": 473,
+      "digest": "b50dac2604336ac74eaadb46f93080d7ddbbeadb62ff77a53094afff7f145777"
+    },
+    "remediation_proposals": {
+      "count": 0,
+      "digest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "roots": {
+      "count": 4,
+      "digest": "f606bb413c58656596173333df003761c814441d2e2d9c000c45a47519c1f0b9"
+    },
+    "scan_runs": {
+      "count": 481,
+      "digest": "40e56d057a75290a1e91649d10d1db23548ad735f2313d8195a2231df41c66d5"
+    },
+    "source_metadata_assertions": {
+      "count": 22,
+      "digest": "751c15cf47823d77e6b310db75bcb3271f9d3ee8486ac6e8151ffa9b96825328"
+    },
+    "sources": {
+      "count": 43112,
+      "digest": "d9c53e1008b9cdecd870209b4857b402b0efe47c725382dfc70afc3d67e86f0d"
+    }
+  },
+  "source_facts_equal_s5_receipt": true,
+  "table_count": 17,
+  "current_table_counts": {
+    "activation_journal": 1,
+    "artifacts": 8191,
+    "catalog_meta": 5,
+    "document_entities": 23709,
+    "document_fingerprint_state": 23529,
+    "document_restore_audit": 1,
+    "document_retire_audit": 19000,
+    "documents": 23530,
+    "entities": 271,
+    "evidence_spans": 0,
+    "llm_summary_failures": 651,
+    "locations": 46606,
+    "narrative_artifact_versions": 0,
+    "producer_events": 473,
+    "remediation_proposals": 0,
+    "roots": 4,
+    "scan_runs": 481,
+    "source_metadata_assertions": 22,
+    "sources": 43112
+  },
+  "protected": {
+    "config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+    "config\\source_acquisition.yaml": "3609e707466eeb3e0f685e14f2637c6afa39ba900edef1be4814433a43300a01",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\daily_alert.jsonl": "0aee073f56c133786365ab96899edf4d91c0f9e1a0e13ab61b2a6bffd8316270",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_alert.jsonl": "b617b0b00ff1a758b5b46299e3e5db3115f56efd90d212154abe988e5ea9fee5",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_manifest.json": "0d55cb8c81f12b663e330819da3037bb69ce8564ac41a686b578a99f78f948bf"
+  },
+  "protected_equal_published": true,
+  "raw": {
+    "S01": {
+      "sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "byte_size": 9165875,
+      "mtime_ns": 1775986949114724400
+    },
+    "S02": {
+      "sha256": "91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+      "byte_size": 6361468,
+      "mtime_ns": 1775986992765548800
+    },
+    "S03": {
+      "sha256": "ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+      "byte_size": 217264,
+      "mtime_ns": 1779046989673803600
+    },
+    "S04": {
+      "sha256": "19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+      "byte_size": 11211796,
+      "mtime_ns": 1776287132568457600
+    },
+    "S05": {
+      "sha256": "cd803fe9528f4646f8f29b518a450ae4bd5b5968c482eb49789f9786b523595b",
+      "byte_size": 5595592,
+      "mtime_ns": 1671984894000000000
+    },
+    "S06": {
+      "sha256": "c6ed566631e123f159abf2697c157f1868f8e994ccf8e3352132046a6c5ca0a1",
+      "byte_size": 4756322,
+      "mtime_ns": 1664747887000000000
+    },
+    "S07": {
+      "sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+      "byte_size": 153851,
+      "mtime_ns": 1779228233262998600
+    },
+    "S08": {
+      "sha256": "f6d50d717efd5e84e400a28b51bb0c73e2e2a712e828cd3fb6d872469718fd2b",
+      "byte_size": 414544,
+      "mtime_ns": 1780086651533168000
+    },
+    "S09": {
+      "sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+      "byte_size": 66324,
+      "mtime_ns": 1788471885465276900
+    }
+  },
+  "nine_raw_equal_published": true,
+  "copies_or_backups_created": 0,
+  "provider_calls": 0,
+  "production_writes": 0
+}

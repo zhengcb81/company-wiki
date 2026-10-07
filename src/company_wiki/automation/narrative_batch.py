@@ -51,15 +51,28 @@ class BatchEvents:
     events: tuple[Event, ...]
 
 
-def build_batch_events(request: NarrativeBatchRequest, reader: SourceVersionReader, *, now: str) -> BatchEvents:
+class BatchPreparationDeadlineExceeded(TimeoutError):
+    """The existing request time budget was spent before workers started."""
+
+
+def _check_preparation_deadline(deadline: float | None) -> None:
+    if deadline is not None and time.monotonic() >= deadline:
+        raise BatchPreparationDeadlineExceeded("BATCH_PREPARATION_DEADLINE_EXCEEDED")
+
+
+def build_batch_events(request: NarrativeBatchRequest, reader: SourceVersionReader, *, now: str,
+                       deadline: float | None = None) -> BatchEvents:
     """Bind current source facts and execution settings before materializing jobs."""
+    _check_preparation_deadline(deadline)
     policy = reader.read_policy_sha256()
     payloads = []
     for ref in request.sources:
+        _check_preparation_deadline(deadline)
         current = reader.query_ref(ref.document_id, ref.source_id, ref.content_sha256)
         if asdict(current) != ref.to_dict():
             raise ValueError("SOURCE_REF_CHANGED")
         metadata = reader.describe_version(current)
+        _check_preparation_deadline(deadline)
         kind = metadata["document_kind"]
         language = metadata.get("language")
         if language is None:
@@ -68,6 +81,7 @@ def build_batch_events(request: NarrativeBatchRequest, reader: SourceVersionRead
                 purpose="narrative_derivation",
                 expected_read_policy_sha256=policy,
             )
+            _check_preparation_deadline(deadline)
             try:
                 validate_opened_source(
                     current,
@@ -79,12 +93,14 @@ def build_batch_events(request: NarrativeBatchRequest, reader: SourceVersionRead
                     raise ValueError("SOURCE_LANGUAGE_SOURCE_MISMATCH") from exc
                 raise
             language = detect_narrative_language(opened.data, current.mime_type)
+            _check_preparation_deadline(deadline)
         payloads.append(SourceRevisionEventPayload.from_dict({
             "schema_version": "source-revision-event/2.0", "source_ref": ref.to_dict(),
             "expected_read_policy_sha256": policy,
             "source_metadata": {"source_class": "transcript" if kind == "investor_call_transcript" else "filing",
                                 "title": metadata["title"], "document_kind": kind, "language": language},
         }))
+    _check_preparation_deadline(deadline)
     input_hash = canonical_json_hash({"request_sha256": request.input_hash,
                                       "source_payloads": [payload.to_dict() for payload in payloads]})
     return BatchEvents(input_hash, tuple(Event(
@@ -206,28 +222,36 @@ def _preflight_storage(request):
 def run_batch(request: NarrativeBatchRequest, *, project_root: Path, catalog_config_path: Path,
               db_path: Path, work_dir: Path) -> dict[str, Any]:
     """Run or resume this exact finite request; paid uncertainty stays reserved."""
+    deadline = time.monotonic() + request.max_seconds
     project_root, catalog_config_path, db_path, work_dir = (
         path.resolve() for path in (project_root, catalog_config_path, db_path, work_dir))
     if not db_path.parent.is_dir():
         raise ValueError("AUTOMATION_DATABASE_PARENT_MISSING")
     _preflight_storage(request)
+    _check_preparation_deadline(deadline)
     with os_file_mutex(db_path.with_name(db_path.name + ".batch-owner.lock"), timeout_seconds=0.2):
-        catalog = SourceCatalog(load_catalog_config(catalog_config_path, project_root=project_root))
+        _check_preparation_deadline(deadline)
+        config = load_catalog_config(catalog_config_path, project_root=project_root)
+        _check_preparation_deadline(deadline)
+        catalog = SourceCatalog(config)
         try:
-            return _run_owned(request, catalog, project_root, catalog_config_path, db_path, work_dir)
+            return _run_owned(request, catalog, project_root, catalog_config_path, db_path, work_dir,
+                              deadline=deadline)
         finally:
             catalog.close()
 
 
-def _run_owned(request, catalog, project_root, config_path, db_path, work_dir):
-    deadline = time.monotonic() + request.max_seconds
+def _run_owned(request, catalog, project_root, config_path, db_path, work_dir, *, deadline):
+    _check_preparation_deadline(deadline)
     reader = SourceVersionReader(catalog)
-    binding = build_batch_events(request, reader, now=_now())
+    binding = build_batch_events(request, reader, now=_now(), deadline=deadline)
     # Verify raw bytes before materializing anything, including a completed resume.
     for event in binding.events:
+        _check_preparation_deadline(deadline)
         payload = SourceRevisionEventPayload.from_dict(json.loads(event.payload_json))
         reader.open_version(source_ref(payload), purpose="narrative_derivation",
                             expected_read_policy_sha256=payload.expected_read_policy_sha256)
+        _check_preparation_deadline(deadline)
     # This directory is dedicated to batch records/logs. It must not contain or
     # be an ancestor of raw/config/catalog/database paths being measured.
     protected = (project_root, catalog.config.catalog_dir, db_path, config_path) + tuple(root.path for root in catalog.config.roots)
@@ -235,6 +259,7 @@ def _run_owned(request, catalog, project_root, config_path, db_path, work_dir):
         raise ValueError("BATCH_WORK_DIRECTORY_OVERLAPS_STORAGE")
     if work_dir.exists() and any(work_dir.iterdir()) and not (work_dir / "storage-baseline.json").exists():
         raise ValueError("BATCH_WORK_DIRECTORY_NOT_EMPTY")
+    _check_preparation_deadline(deadline)
     work_dir.mkdir(parents=True, exist_ok=True)
     # Save the baseline before AUTO initialization/materialization grows files.
     guard = _storage_guard(request, catalog, db_path, work_dir, binding.input_hash)
