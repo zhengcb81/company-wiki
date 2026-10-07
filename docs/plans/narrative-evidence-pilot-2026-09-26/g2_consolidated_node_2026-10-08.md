@@ -1,6 +1,6 @@
 # G2 最后两个大节点：覆盖对账与实施（2026-10-08）
 
-目标 active。本卡补 G2 当前组合行为；R2 生产元数据、R3 真实模型、R5 收口仍未完成。
+**Status: complete（G2 A/B已正式验收发布）。** 目标active；R2生产元数据、R3真实模型、R5收口仍未完成。源码50e42f2已推master；[精确CI37702678973](https://github.com/zhengcb81/company-wiki/actions/runs/37702678973)全部步骤success，约81秒。下文pending为实施时点，当前结论以页首为准。
 
 ## 十四组当前对账
 
@@ -13,7 +13,7 @@
 | 04 | 旧维护公开入口退休 | 已发布 | [G3](g3_main_acceptance_2026-10-07.md) |
 | 05 | RF 可选工程工具及数字诊断 | 已发布 | [RF](harness_lanes/results/g2_revenue-forecast_main_acceptance_2026-10-07.json)、[G3](g3_main_acceptance_2026-10-07.md) |
 | 06 | StockWiki 日常检查 | 已合本地主线 | [SW](harness_lanes/results/g2_stockwiki_daily_main_acceptance_2026-10-07.json) |
-| 07 | CWP 六旧工程入口及清单；固定哈希登记门退休 | 六入口已发布；哈希门收尾中 | [G5](g5_main_acceptance_2026-10-07.md) |
+| 07 | CWP 六旧工程入口及清单；固定哈希登记门退休 | 全部已发布 | [G5](g5_main_acceptance_2026-10-07.md) |
 | 08 | FF 单意图与保留用户文件的安装 | 已发布、实际安装 | [G2-08](g2_ff_installation_acceptance_2026-10-07.md) |
 | 09 | 实际 provider 能力与单网络意图 | 已验证；文案另核 | [实际链](harness_lanes/results/g2_chain_e2e_accepted_2026-10-07.json) |
 | 10 | StockQA 统一短检查 | 已发布 | [SQA](harness_lanes/results/g2_stockqabyllm_main_acceptance_2026-10-07.json) |
@@ -41,7 +41,7 @@ A 已有新库 steady、标签稳定/真实准入拒绝、版本化恢复、Stor
 
 ## Next Step
 
-MAIN 实施上述单次节点，核当前指导；通过后写结构化收据、标 G2 A/B 收口并回 R2。正常提交推送测试/指导/PWF，不增加 CI job 或小节点签收。
+G2 A/B、正式源码发布与精确CI已经完成；MAIN回R2核生产来源元数据/ET登记，再R3→R5。真实组合节点为loopback，不冒充生产final/真实供应商质量。
 
 ## 实际发现与先测后修
 

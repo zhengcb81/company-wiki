@@ -1,6 +1,6 @@
 {
   "schema_version": "g2-consolidated-node/1",
-  "status": "verified_publication_pending",
+  "status": "verified_published",
   "boundary": "real source bytes; fixture identity/publication; loopback model; committed consumer CLIs",
   "consumer_heads": {
     "rf": "436fed68d8ba334ae568de296636904c5cc3e6cf",
@@ -192,6 +192,22 @@
     "removed_entries_git_deletion": "73de6be6adff3e8873c97e96c31b130f0a0f2711",
     "guard_final_passed": 28,
     "guard_final_skipped": 0,
-    "normal_commit_and_exact_ci": "pending"
-  }
+    "normal_commit_and_exact_ci": "passed"
+  },
+  "source_publication": {
+    "branch": "master",
+    "head_sha": "50e42f292619327f8705b4196b07644bef999eae",
+    "pushed": true,
+    "normal_commit_hooks": "passed",
+    "normal_pre_push": "passed",
+    "exact_ci": 37702678973,
+    "exact_ci_conclusion": "success",
+    "exact_ci_receipt": "g2_exact_source_ci_2026-10-08.json"
+  },
+  "g2_major_a_b_status": "complete",
+  "remaining_pwf": [
+    "R2 production metadata and legacy TXT registration",
+    "R3 real bounded model final, consumers, resume and footprint",
+    "R5 current plan and final publication cleanup"
+  ]
 }
