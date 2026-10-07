@@ -65,7 +65,7 @@
 
 | 检查 | 结果 |
 |---|---|
-| `python -m pytest -q tools/g3_source_facts/tests` | **exit 0，48 passed，3.39 s** |
+| `python -m pytest -q tools/g3_source_facts/tests` | **exit 0，55 passed，7.2 s** |
 | 生产 `config/source_catalog.yaml` SHA256（前后） | `3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968`（不变） |
 | 9 份原件 bytes/SHA vs `samples.json`（前后） | 全部一致 |
 | 生产 DB | schema 1.2.0、sources 43,112、locations 46,606、documents 23,530、status active 25,048/missing 6/quarantined 1/retired 21,551；`PRAGMA query_only` 会话 `total_changes=0`；db 222,408,704 B、`-wal` 0 B、`-shm` 32,768 B |

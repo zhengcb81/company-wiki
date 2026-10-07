@@ -17,11 +17,11 @@
 | 4 | scratch 调查配置（只含 company_raw、catalog_dir 绝对指生产库）→ RAW-DUP `scan` → `verify` | scan 49.457 s / verify 60.011 s，`succeeded`，`read_bytes=122,369,272` |
 | 4 | `metadata_bound.py` 只读 SQL 聚合注册上界 | 52 组 / 98,845,393 B |
 | 4 | `cli.py raw-space` → `raw_space_decision.json` | `no_migration_recommended`，`deleted_bytes=0` |
-| 5 | 集中验证：责任测试 + 生产 config/原件/DB 复核 | `pytest -q tools/g3_source_facts/tests` → exit 0 / 48 passed / 3.39 s；config SHA 不变；9 样本 bytes+SHA 全一致；DB `total_changes=0`、8 样本状态不变 |
+| 5 | 集中验证：责任测试 + 生产 config/原件/DB 复核 | `pytest -q tools/g3_source_facts/tests` → exit 0 / 55 passed / 7.2 s；config SHA 不变；9 样本 bytes+SHA 全一致；DB `total_changes=0`、8 样本状态不变 |
 | 6 | `HANDOFF.md` + `evidence_index.md` + `handoff.json`，清理 scratch，分两次 commit | 见 HANDOFF §5 |
 
 ### 集中验证（Phase 5）
-- 责任测试：`python -m pytest -q tools/g3_source_facts/tests` → **48 passed**，exit 0
+- 责任测试：`python -m pytest -q tools/g3_source_facts/tests` → **55 passed**，exit 0
 - 生产配置字节：见 HANDOFF `protected_state`
 - 九样本复核：见 HANDOFF `protected_state`
 - DB 只读关键事实复核：见 HANDOFF `protected_state`
@@ -46,7 +46,7 @@
 
 ## 集中验证结果（Phase 5 实测）
 
-- `python -m pytest -q tools/g3_source_facts/tests` → **exit 0，48 passed，3.39 s**
+- `python -m pytest -q tools/g3_source_facts/tests` → **exit 0，55 passed，7.2 s**
 - 生产 `config/source_catalog.yaml`：`3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968`（前=后）
 - 9 份原件：bytes/SHA 与 `samples.json` 前后全一致
 - 生产 DB（mode=ro + query_only，单读事务）：schema 1.2.0、sources 43112、locations 46606、documents 23530、status active 25048/missing 6/quarantined 1/retired 21551、`total_changes=0`、db 222408704 B、`-wal` 0 B、`-shm` 32768 B；8 样本 location/document 状态与开工一致

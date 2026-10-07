@@ -41,9 +41,9 @@
     {
       "command": "python -m pytest -q tools/g3_source_facts/tests",
       "exit": 0,
-      "seconds": 3.39,
+      "seconds": 7.2,
       "counts": {
-        "passed": 48,
+        "passed": 55,
         "failed": 0,
         "skipped": 0,
         "errors": 0

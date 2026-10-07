@@ -87,7 +87,7 @@
 
 ## Phase 5 实测
 
-- `python -m pytest -q tools/g3_source_facts/tests` → exit 0，48 passed，3.39 s
+- `python -m pytest -q tools/g3_source_facts/tests` → exit 0，55 passed，7.2 s
 - 生产 `config/source_catalog.yaml` SHA256 运行前后同为 `3d159a4e…e3f968`
 - 9 份原件复核：bytes/SHA 与 `samples.json` 全部一致
 - 生产 DB 复核：schema 1.2.0、sources 43112、locations 46606、documents 23530、statuses active 25048/missing 6/quarantined 1/retired 21551、`total_changes=0`、db 222,408,704 B、`-wal` 0 B、`-shm` 32,768 B；8 样本 location/document 状态与开工时一致
