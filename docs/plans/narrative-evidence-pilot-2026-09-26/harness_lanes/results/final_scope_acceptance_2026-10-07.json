@@ -1,0 +1,156 @@
+{
+  "schema_version": "original-scope-audit/1",
+  "status": "audit_executed_two_downstream_date_defects_open",
+  "date": "2026-10-07",
+  "heads": {
+    "cwp": {
+      "head": "1fb3cff6c1e32c01bfa5adbb4365b382a4d40b8b",
+      "dirty": [
+        " M config/source_acquisition.yaml"
+      ]
+    },
+    "rf": {
+      "head": "6e6b817a1a6e4567293a4dcb835815f3be508a03",
+      "dirty": [
+        " M assurance/runs/daily_alert.jsonl",
+        " M assurance/runs/weekly_alert.jsonl",
+        " M assurance/runs/weekly_manifest.json"
+      ]
+    },
+    "stockwiki": {
+      "head": "3fe5008c1ea18c363296121b8b0ee3a7b2db2212",
+      "dirty": []
+    },
+    "ff": {
+      "head": "758e8f4c116ef9760c657433e4ccbfbd10652029",
+      "dirty": [
+        "?? config/FMP_API_KEY.txt"
+      ]
+    },
+    "et": {
+      "head": "2b9fb84660f98ce27a05709a7e31342ab044b4d2",
+      "dirty": [
+        "?? .workbuddy-ai/",
+        "?? eval_results.json"
+      ]
+    }
+  },
+  "accepted_cwp_nodes_are_ancestors": {
+    "aa52cbd": true,
+    "7aa88ae": true,
+    "ff5396c": true,
+    "891dd414": true,
+    "e8c645e": true,
+    "3cd4960": true,
+    "cf24f34": true,
+    "96f44a1": true
+  },
+  "existing_receipts": {
+    "s7_adoption_fundraising_main_acceptance_2026-10-07.json": {
+      "sha256": "b11abe8f13e75579faf9ed5dfb185593d9eaa2cda3bc79a95bb9d01318a62b1b",
+      "status": "published_exact_ci_passed"
+    },
+    "final_batch_deadline_acceptance_2026-10-07.json": {
+      "sha256": "c4c7ff038f7b68e029807640c3027ac11cb98e60dc80812a065b922cbdfc2caa",
+      "status": "published_exact_ci_passed"
+    },
+    "final_consumer_asof_audit_2026-10-07.json": {
+      "sha256": "c778e861fe6eb9227f677fd7596be9811302fbd9014d03056d6a347616cfb634",
+      "status": "current_consumers_red_isolated_proposal_green_not_merged"
+    },
+    "p5_ff_main_acceptance_2026-10-05.json": {
+      "sha256": "4affa79432d2639195c76c96e18e25237715002ab16a3ce77445c46098690378",
+      "status": "accepted_main"
+    },
+    "p5_rf_main_acceptance_2026-10-06.json": {
+      "sha256": "9ca29872ba358adb605c9267e5ad662102e30f3e40d563b76e6a593a10454213",
+      "status": "published_green"
+    },
+    "n5_et_text_main_acceptance_2026-10-06.json": {
+      "sha256": "72c79deccd46f2c2d9f11b04b1faf8a63b5bddfc7c2afeae241919657e5c9d59",
+      "status": "accepted_published_green"
+    },
+    "s5_production_storage_acceptance_2026-10-06.json": {
+      "sha256": "d6206f56bde08e035d17e2fd42c83a0f5bde1d2a9a81b20b877834794fc9f567",
+      "status": "succeeded"
+    },
+    "final_current_source_facts_2026-10-07.json": {
+      "sha256": "76d8da0b7add6acfef51ebbb3cd1a92f083cf0a469cc365b19504c7465f3af5a",
+      "status": "passed"
+    },
+    "n4c_prompt_node_2026-10-06.json": {
+      "sha256": "2ad7462835d318393cd8288e86e811b555cab515f9853ddc867e4b5acebbd87c",
+      "status": "published_green"
+    },
+    "n6_budget_main_acceptance_2026-10-06.json": {
+      "sha256": "7a35ac64d92abc036f6bb36453524d4d2e34bcd6c8dffde3d837eb8974bb8fec",
+      "status": "published_ci_passed"
+    },
+    "n6_footprint_main_acceptance_2026-10-06.json": {
+      "sha256": "ee384098db3c2726984ec308fd3ccf7d3f263a282df44e02c097b33e9d4ef491",
+      "status": "published_ci_passed"
+    }
+  },
+  "scope": {
+    "requirements": 16,
+    "proved_with_documented_bounds": 14,
+    "partially_proved_but_nonconforming": 2,
+    "nonconforming_rows": [
+      "A12",
+      "A13"
+    ],
+    "goal_complete": false
+  },
+  "protected_equal_previous": true,
+  "protected": {
+    "config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+    "config\\source_acquisition.yaml": "3609e707466eeb3e0f685e14f2637c6afa39ba900edef1be4814433a43300a01",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\daily_alert.jsonl": "0aee073f56c133786365ab96899edf4d91c0f9e1a0e13ab61b2a6bffd8316270",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_alert.jsonl": "b617b0b00ff1a758b5b46299e3e5db3115f56efd90d212154abe988e5ea9fee5",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_manifest.json": "0d55cb8c81f12b663e330819da3037bb69ce8564ac41a686b578a99f78f948bf"
+  },
+  "new_tests_run": 0,
+  "reason_no_repeated_tests": "Current relevant implementation history and published responsibility/E2E receipts inspected; no implementation change or new test risk in this audit.",
+  "calls": {
+    "model_posts": 0,
+    "provider_http": 0
+  },
+  "writes": {
+    "external_repositories": 0,
+    "raw": 0,
+    "production_database": 0
+  },
+  "remaining": [
+    {
+      "id": "ASOF-RF",
+      "file": "scripts/company_wiki_narrative_contracts.py",
+      "implementation": "current production still rejects late download of earlier public source",
+      "authorization": "pending isolated worktree or owner delivery"
+    },
+    {
+      "id": "ASOF-STOCKWIKI",
+      "file": "stockwiki/_narrative_bundle.py",
+      "implementation": "current production still rejects late download of earlier public source",
+      "authorization": "pending isolated worktree or owner delivery"
+    }
+  ],
+  "not_claimed": [
+    "whole historical corpus processed",
+    "automatic daily investment research",
+    "all providers live downloaded",
+    "full financial forecast integration",
+    "unbounded concurrent model calls",
+    "physical raw dedup savings"
+  ],
+  "cleanup": {
+    "new_test_roots_created": 0,
+    "new_raw_copies_created": 0,
+    "temporary_runtime_code_created": 0
+  },
+  "test_run_scope": "No manually repeated responsibility or long suites; normal commit/pre-push hooks will run on publication.",
+  "document_links_checked": [
+    "final_scope_audit_2026-10-07.md",
+    "task_plan.md"
+  ],
+  "broken_document_links": 0
+}

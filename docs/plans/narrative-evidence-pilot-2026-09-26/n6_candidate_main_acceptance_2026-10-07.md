@@ -6,7 +6,7 @@
 
 本次仅运行候选召回、上下文边界、MAIN边界和候选pipeline四文件：47 passed / 0.79秒；独立tmp/n6-rcheck测试前后均absent。11份相关当前源代码与后续已发布aa52cbd的Git blob一致，工作副本仅Windows CRLF换行差异；首次直接比较工作副本SHA与Git blob SHA得到8项不同，按正确比较域复核后全部一致，无源码修改。
 
-原交付节点九样本21/33、764定位；后续S7已达到29/33、761定位（精选总量改变），不得混为同一次测量。当前四个required miss与optional取舍继续取总计划及S7收据。本次0供应商/下载/翻译，不改原件/生产配置/外仓；用户source_acquisition.yaml保持原SHA3609e707独立dirty。准备阶段deadline修复是另一未完成工作，不纳入本卡验收，不随本次文档提交。
+原交付节点九样本21/33、764定位；后续S7已达到29/33、761定位（精选总量改变），不得混为同一次测量。当前四个required miss与optional取舍继续取总计划及S7收据。本次0供应商/下载/翻译，不改原件/生产配置/外仓；用户source_acquisition.yaml保持原SHA3609e707独立dirty。准备阶段deadline修复当时是另一未完成工作；现已独立发布7aa88ae/精确CI37557509249全绿，不属于N6候选验收，也不再待施工。
 
 2026-10-07。接收 codex/n6-candidates@f31cc0d（实现9a4b815、交接ce61cdd），保留外线提交，MAIN负责修正与共享接线。当前master3f0bc2a、预算selector0.3.3已发布；RF main6e6b817a三owner日志、用户source_acquisition.yaml SHA3609e707只读保护，不跨写外线/外仓，不改生产配置/原件。
 

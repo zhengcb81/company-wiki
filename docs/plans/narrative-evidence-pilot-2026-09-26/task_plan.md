@@ -10,26 +10,14 @@
 
 ## 当前恢复点（2026-10-07）
 
-本次日期缺口实证/测试/提案已推a8f2513，精确CWP CI37558926678 attempt1全部job/step success/73秒；此绿仅证明本仓正常回归，当前RF/StockWiki两例真实RED仍待授权落地。原件、owner与用户配置不变，七tmp根absent，下一仅按日期实施单推进，不重新做已绿业务/模型节点。
+- **原目标16项核查已执行：14项在明确范围内有证据，A12/A13两项部分成立但当前消费者日期语义不符合。** [逐项结论](final_scope_audit_2026-10-07.md)、[当前HEAD/祖先/保护/收据核查](harness_lanes/results/final_scope_acceptance_2026-10-07.json)。不再恢复已完成节点为施工队列；总体仍active。
+- **唯一已证剩余施工：RF/StockWiki下载日误拒。** RF6e6b817a、StockWiki3fe5008真实六CLI4pass/2fail；最小临时副本6pass/25.17秒，但外仓未落地。已请求隔离worktree修复或交owner，答复前外仓只读。两卡prepared/not-dispatched，详见[日期实施单](final_consumer_asof_alignment_2026-10-07.md)。证据代码a8f2513/精确CWP CI37558926678全部步骤绿73秒不能替代外仓修复。
+- **当前运行时节点已发布：** selector0.4.2/parser0.1.1代码aa52cbd/CI37555504675全部步骤81秒绿；完整九原件86点、29/33、761定位全回放、精选63073B。200责任项及11真实/兼容/升级绿；四required miss、optional三取舍与重复6公开，见[S7收据](harness_lanes/results/s7_adoption_fundraising_main_acceptance_2026-10-07.json)。N6三包全部合入/推，f31cc0d/e8c645e为当前祖先，不重派、不重合并。
+- **准备deadline缺口已收口：**7aa88ae/精确CI37557509249全部步骤73秒绿；57责任项/五CLI、47源mypy/Ruff通过，十自身根absent；一入口deadline覆盖准备和执行，到期停止新读取/任务/HTTP，保留旧付费账。是协作式截止，不宣称能瞬间中断同步I/O。
+- **来源与空间事实：**生产17表/九raw/五配置和RF保护已对已发布收据复核一致；DB222408704B，S5/S6净释放5659443210B、原件删除0。单根逻辑约24.37GB、raw约96.3%，不能以删测试缓存声称删原件GB。新生产final未在试点生成，隔离试点都已清理。
+- **归属：**RF三份daily/weekly/manifest owner日志dirty；StockWiki3fe5008工作树clean但独立项目在推进；FF758e8f4、ET2b9fb84交付一致。CWP用户source_acquisition.yaml SHA3609e707独立dirty，不stage/覆盖。Dayu/IQS和所有外仓本轮零写。
 
-- **完整核查发现两个真实下游日期门，尚未生产落地。** 当前RF6e6b817a/StockWiki3fe5008会拒绝“8月公开、9月下载、as-of9月1日”的有效叙述来源，CWP相同原件verified正常。六真实CLI4pass/2fail；最小隔离副本改用公开日截止后六例25.17秒全绿，未来公开仍拒绝。两仓owner零写；已提交可审查提案及[具体细则](final_consumer_asof_alignment_2026-10-07.md)，异步询问是否允许两仓隔离落地，两张互斥卡尚未派发。本缺口解决前不把G1/S3跨仓整体或整个目标标complete。
-
-- **完整核查发现的准备deadline缺口已修复并发布。** 代码7aa88ae，精确CI37557509249 attempt1全部job/step success/73秒。五功能反例RED后57责任项/12.58秒及五真实CLI/35.78秒绿，47源mypy与CI Ruff绿；到期后停止新的准备读取/任务/HTTP，旧付费账保留，正常配置与恢复保持。十自身测试路径absent，生产17表/九原件/用户配置/RF owner复核不变，DB222408704B。没有扩大供应商/权限/预算或日常长测；[正式收据](harness_lanes/results/final_batch_deadline_acceptance_2026-10-07.json)。整体目标active，下一完整核查剩余外仓公开接口和要求逐项闭合。
-
-- **N6-CANDIDATE最新查收复核通过。** f31cc0d/e8c645e均已在当前主线，远端master ed2dc51；实时精确CI37547043642全部步骤success。本次四文件短包47项/0.79秒绿，tmp/n6-rcheck恢复absent，11份相关源代码与已发布S7 Git blob一致。详见[N6验收单最新复核](n6_candidate_main_acceptance_2026-10-07.md)。本次不重合并、不重跑九样本；整体Next Step保持完整目标核查，准备阶段deadline未提交改动仍属该核查的独立未完成修复。
-
-- **当前最新完成：客户采用/募投上下文selector0.4.2已发布aa52cbd，精确CI37555504675全部步骤绿/81秒。** 200责任项/1.65秒、CI全范围Ruff/47源mypy、正式真实S01/S04/S09消费者链+旧final9/selector升级11项122.26秒通过；完整九文档364.548秒29/33、761定位零失败、旧full零回退、精选63073B/+120B。当前默认S06 page7 canonical原句full。重复4→6的募投引导上下文取舍保留，原86点/33分母及96/160不变。六自身tmp根恢复absent、原件/RF/用户配置保护保持，0供应商/下载/翻译。详见[实施单](s7_adoption_fundraising_implementation_2026-10-07.md)及[正式收据](harness_lanes/results/s7_adoption_fundraising_main_acceptance_2026-10-07.json)。整体目标仍active，下一完整需求核查，不再重跑本节点。
-
-- **当前最新完成：IR parser0.1.1已发布c1295b1，精确CI37552600440全部步骤绿/75秒。** selector0.4.1不变；143责任项/1.35秒、45个CI源mypy/Ruff绿，真实S07/S08/S09正式链/冻结旧final9/两种AUTO升级12项52.16秒绿，CI全Unit及短合同全绿。完整九文档27/33、761定位零失败、精选62953B、IR两套话clean；optional3/17→2/17的一条泛答提问取舍保留。11个自身临时路径已恢复absent，原件/用户配置/RF6e6b817a保护不变，0供应商/下载/翻译。详见[IR发布收据](harness_lanes/results/s7_ir_main_acceptance_2026-10-07.json)。S7整体仍in_progress。
-
-- **此前完成：S7经营语义集中节点已发布：9bf25a5，精确CI37550268890全部步骤绿/71秒。** 按[后续实施单](s7_followup_quality_implementation_2026-10-07.md)完成具体经营reason、量化行业独立类别和有界未完句合组；selector0.4.1、parser仍0.1.0。293责任项/3.60秒、真实S01/S02/S06正式链路7点/97.74秒及既有节点/旧final/generation11项通过。完整九文档27/33（原21/33），764定位全绿、必需旧full无退步；optional5/17→3/17的两项取舍完整保留，不能宣称所有旧full无回退。精选66215B（原66195B）、重复4（原3）。当时S04及S08仍未施工；S08现已由上述IR发布节点完成，S7不complete。详见[s7节点收据](harness_lanes/results/s7_operating_main_acceptance_2026-10-07.json)。
-
-- **N6交付已完成（此前节点证据）。** 三包实际并线/推送，候选merge e8c645e、精确CI37547043642全部步骤成功/job53秒；当时selector0.4.0、269责任项+11真实/兼容/升级通过、九文档21/33。当前质量与剩余项以上方S7节点及下方Next Step为准，不重派已交卡；[N6收据](n6_candidate_main_acceptance_2026-10-07.md)保留历史保护/发布事实。
-
-- DOCSET真实merge `58b74d07dd4f8b589c134ef9060a689864a8c089`已推master，精确CI37528050044一次成功/75秒；43不同责任case和真实9样本已接收，工具完成而质量required12/33仍待改。MAIN先行兼容/业务标准已发布`0947cea63140d515620f563daf2058f4520cd6a3`、精确CI37532408169一次成功/80秒，无运行代码变更。RAW-DUP a41244a/CI57秒、R6 eae2dd4/CI59秒等已完成证据不重跑。
-- RF 正式 main `6e6b817a1a6e4567293a4dcb835815f3be508a03`，已有默认 v2 与真实原文读取验收；FF main `758e8f4`，ET 本地/真实远端 main 已快进到 `2b9fb84660f98ce27a05709a7e31342ab044b4d2`，包含 N5-ET-TXT。不要重派已完成交付。
-- 当前 RF 正常用户上下文有三份 owner daily/weekly/manifest 日志修改，本线不改；旧 rf-impl WIP 保存在独立分支。本机 CWP `config/source_acquisition.yaml` 是用户改动，SHA `3609e707466eeb3e0f685e14f2637c6afa39ba900edef1be4814433a43300a01`，不暂存、不覆盖。
-- S4 修复后真实电话会 run10 已完成：20 条摘要、15 条管理层陈述、46 个定位全部回放，RF 正式读取通过；六类业务主题精选6/6、短摘要5/6，GPU效率未单列，不能声称穷尽。完成审计发现R6具体缺口，现已TDD修复并发布/精确CI绿，S4关闭；其余核心证据不重做。N5-RAW-DUP完整交付已集中修正/51项绿，已合入master a41244a并推远端、精确CI37523080920/57秒绿；DOCSET已接收并推58b74d0/CI75秒绿；初测12/33已被最新S7的27/33覆盖，整体目标active。
+历史恢复细节见[收口前已提交版本](https://github.com/zhengcb81/company-wiki/blob/1fb3cff6c1e32c01bfa5adbb4365b382a4d40b8b/docs/plans/narrative-evidence-pilot-2026-09-26/task_plan.md)与各节点收据；历史“未提交/待CI”不代表当前状态。
 
 ## 已批准预算与配置
 
@@ -49,7 +37,7 @@ python -B tools/n4c_live_preflight.py --rf-root 'C:/Users/郑曾波/Projects/rev
 
 ## 实施顺序与当前完成范围
 
-优先事项G1门禁精简、S3虚拟化已完成，S5/S6生产清理完成。S4真实业务效果已验证，完成审计发现的[R6局部摘要恢复](r6_partial_summary_implementation_2026-10-06.md)已补齐并推/精确CI绿；DOCSET与RAW-DUP并线已发布。N6三卡已由用户分派；MAIN先行历史final兼容9项/4.85秒绿和33点业务解释完成，不新增小节点门。
+G1门禁精简、S3虚拟化的主要实现已发布，但两消费者下载日重复门待修；S5/S6生产清理完成。S4真实业务效果已验证，完成审计发现的[R6局部摘要恢复](r6_partial_summary_implementation_2026-10-06.md)已补齐并推/精确CI绿；DOCSET与RAW-DUP并线已发布。N6三卡已验收并线/推送；MAIN先行历史final兼容9项/4.85秒绿和33点业务解释完成，不新增小节点门。
 
 | 步骤 | 状态 | 范围与证据 |
 |---|---|---|
@@ -61,7 +49,7 @@ python -B tools/n4c_live_preflight.py --rf-root 'C:/Users/郑曾波/Projects/rev
 | S4 N4C与R6实际效果 | complete | 四类真实final/RF读取与run10业务复核完成；R6 TDD→184责任测试→正式离线E2E/RF→代码eae2dd4/CI59秒绿，保留好claim，坏片段不进入产物，不重跑真实模型 |
 | S5 逐 caller 与派生清理 | complete | 旧全文 writer/消费者退出；生产 7104 旧文件、8191 handle 退休；原件与来源事实保持 |
 | S6 DB 收缩与收尾 | complete | 1490530 旧 span 删除；DB 3055841280→222408704 B；说明/控制/短 smoke 已发布，精确 CI 绿 |
-| S7 N5-DOCSET质量对照与整改 | in_progress（实现/发布已完成，待整体核查） | selector0.4.2/parser0.1.1已发布aa52cbd/精确CI81秒绿；九样本29/33、761定位全回放，200责任项与真实链/旧pin/升级11项通过。四个正式miss及canonical另页full、三项optional取舍/重复6保留；原分母/额度不变，不再重做已绿节点 |
+| S7 N5-DOCSET质量对照与整改 | complete（有界九样本与正式入口验收，剩余范围公开） | selector0.4.2/parser0.1.1已发布aa52cbd/精确CI81秒绿；九样本29/33、761定位全回放，200责任项与真实链/旧pin/升级11项通过。四个正式miss及canonical另页full、三项optional取舍/重复6保留；原分母/额度不变，不再重做已绿节点 |
 | 可选原件 exact-SHA 去重 | 不阻 S0–S6 完成 | 先只读实证收益，保留来源/location 版本；未测重复 raw 不计节省，不自动删原件 |
 
 [完成证据与真实缺口](main_completion_evidence_2026-10-06.md)分别说明 fixture/真实模型/消费者读取的证明范围。生产清理净释放 **5659443210 B**，原件删除 **0**，17 表事实及四份真实 raw 前后读取一致；正式证据：[生产存储收据](harness_lanes/results/s5_production_storage_acceptance_2026-10-06.json)。没有完整恢复 46GB 备份演练。
@@ -106,26 +94,8 @@ TDD 框住具体公开行为。只在 N4 A/B/C、存储迁移等大节点集中�
 
 ## Next Step
 
-**当前唯一下一动作：收口两消费者已实证的下载日重复限制。** 见[日期合同实施单](final_consumer_asof_alignment_2026-10-07.md)和[当前RED/提案GREEN收据](harness_lanes/results/final_consumer_asof_audit_2026-10-07.json)。由于PWF此前约束外仓owner只读，已请求用户明确隔离worktree落地或交owner；答复前不写RF/StockWiki。七自身测试/提案根恢复absent，只留小收据/diff及两互斥施工卡。下方deadline及原业务节点已完成不再重复。
+**唯一已证剩余施工：收口RF/StockWiki下载日重复限制。** 按[日期实施单](final_consumer_asof_alignment_2026-10-07.md)，当前已请求外仓隔离worktree实施或交owner，答复前不写外仓。两张独占卡prepared/not-dispatched；不改owner日志、IQS/quick-scan或原件。
 
-准备时间预算缺口已收口：[窄幅实施单](final_batch_deadline_closeout_2026-10-07.md)，7aa88ae/精确CI73秒全绿。下一继续下述完整目标核查，重点逐项核当前跨仓公开接口和已交付合同覆盖；不重跑已绿业务全九、付费模型或本次deadline节点。StockWiki当前3fe5008另有独立项目推进，接口核查只读，不改IQS/owner树；RF6e6b817a、FF758e8f4、ET2b9fb84未变。
+答复后先核当前两仓HEAD/计划；各仓补责任RED→最小实现→大节点责任测试→正常合入/push，再跑当前CWP→实际两消费者同六CLI，检查保护与独立根恢复。不能把临时提案GREEN当已发布GREEN；不重跑九样本、付费模型或已绿kill/ACK节点。具体文件/接口/反例/交接见[RF卡](harness_lanes/revenue_forecast_asof_alignment.md)和[StockWiki卡](harness_lanes/stockwiki_asof_alignment.md)。
 
-**下一唯一施工动作：按[完整目标核查单](final_scope_audit_2026-10-07.md)核现状与原要求，补确有缺口后才决定整体完成。** selector0.4.2代码aa52cbd已推主线、精确CI37555504675全部步骤81秒绿。本单正式真实入口、九文档、canonical风险与测试根恢复已验证，不重跑已绿长节点，不提高96/160、不改原86点/33分母。四个required miss保持透明：S06另页canonical产能（当前默认full）、纯融资金额和两个provider/guidance边界。不能只凭九样本定位绿宣布整体目标complete。
-
-selector0.4.1经营节点9bf25a5与parser0.1.1 IR节点c1295b1均已推主线且精确CI绿。旧0.1.0结果按旧pin读取，新版本进入现AUTO generation，不共享第二任务库；原文范围/SHA/角色核验属于自动正确性检查，不需要人工签收。当前与后续以本节上方唯一施工动作和最新收据为准。
-
-首次组合全表403.731秒实测18/33（旧12/33）、764定位零失败、重复3（旧48）。已保留初次报告；其中年报G04发生回退及EPI正式E2E失败，MAIN按句理由/组、忙页分类offer、完整fact reasons及工程时间表责任修正，最终集中复验已完成：21/33、可选5/17、764定位零失败、重复3、精选66195B、372.044秒，旧required/optional full均无回退。不用手推覆盖或旧CI替代。原golden/86点/33分母、parser0.1.0、原件与96/160限额不变。**N6实现合入与S7全部业务质量完成分别记录。**
-
-S7后续按最终逐点差距处理，不重派已交三包：
-
-**以最新0.4.1结果覆盖下面历史9点清单：** 必需remaining6：G-S01-01（海外批量销售已保留、全球应用前一句未全部选）、G-S04-03（募投引导句/项目表联系）、G-S06-03（page43 oracle miss、同原件page7完整产能已canonical保留）、纯融资金额G-S06-01、正文外provider G-S09-01、纯guidance G-S09-03。业务/项目解释子集26/29，不能替代正式27/33。IR解析噪声已整改；下一按实际资料价值处理S01/募投上下文；不强行塞融资总额或guidance凑分。
-
-本项目不把“每个optional旧full必须永久保持”设为自动发布门：本轮G-S02-06静态海外销售主体职责、G-S05-05项目营收/利润测算退步，已查原句并按“业务动态优先、财务工具负责纯数值”明确记录。原标注、全部必需业务断言与定位真实性不变；以后optional退步仍逐项说明，不能用此项泛化为允许丢订单/产能/项目进展。
-
-1. 剩余选择问题只针对S01全球应用前句及S04募投intro/具体项目表联系，按同原件parsed→candidate→selected和PDF视觉位置定位，新增一般性责任反例。S06 G03已canonical保留在同原件page7，不复制page43重复原文以凑golden；正式miss保留。纯财务/provider缺口不扩大正文范围或切片配额。
-2. IR数字问答节点已完成：按真实cell范围拆句、角色/QA关联和旧pin回放，剔除S08两条套话且保留产品占比；c1295b1/精确CI75秒绿。不要再次执行；实施/兼容/恢复细节在IR收据。
-3. 最终针对改变的格式跑责任测试和真实入口大节点；只有具体剩余风险才重跑全九样本，不每个helper重跑。业务覆盖未完成仍列remaining，不拿全定位绿冒充语义完成。
-
-空间cf24f34/CI37542743196全绿68秒，预算3cd4960/CI37543349021全绿72秒均已实际并线/推，不重复验收。最新单根逻辑24,365,900,191 B，raw23,462,933,638 B占96.2941%；tmp+tmp DB候选323,168,254 B仅候选上界，未自动删除/声称物理释放；1007云占位跳过。生产S5/S6净释放5,659,443,210 B沿原收据。
-
-RF main6e6b817a三owner SHA保持；用户source_acquisition.yaml SHA3609e707独立dirty且不stage。Dayu/IQS/StockWiki/ET与外线worktree零写。详细剩余ID、最终实测覆盖、scratch恢复和精确CI发布记录在验收单/收据。不要把历史等待blocked状态当权限门，不增加人工签收。
+16项核查已经执行，详见[结论表](final_scope_audit_2026-10-07.md)；其余已证明节点不再施工。A12/A13两行在真实消费者落地前仍不符合，总体目标active。关闭两行后仅复核变动范围再决定目标完成。可选原件去重、全历史资料生产处理和自动投资研究不是当前强制收口步骤。

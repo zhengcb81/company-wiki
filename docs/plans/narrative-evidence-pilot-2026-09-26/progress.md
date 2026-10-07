@@ -1,5 +1,9 @@
 # Progress：激进简化实施
 
+## 2026-10-07 原目标逐项核查执行完成
+
+已读原始设计/架构、当前公开入口与责任测试，16项逐项给结论：14项在公开有界范围内有证据，A12/A13两消费者日期合同实际不符合，整体active。核当前RF6e6b817a三owner日志、StockWiki3fe5008 clean独立quick-scan、FF758e8f4、ET2b9fb84；五保护SHA一致、八已验收CWP节点均祖先，十一份收据SHA固定。并发测试实际时间重叠、ACK测试先commit后抛超时，不能以普通resume替代故障测试。总task_plan移除已完成/冲突Next Step，S7有界验收complete而整体不complete；独占日期卡仍prepared/not-dispatched，外仓授权答复pending。本轮未重跑责任/长测试，0新tmp/模型/外仓/原件/生产写；正常push短门另执行；只生成小scope收据和改PWF。沙箱Git外仓dubious ownership改用已授权正常OS只读；gc收据最初路径少harness_lanes/results及两次猜不存在run_owner/recovery测试，已rg实际文件定位，未改配置或测试。
+
 ## 2026-10-07 日期实证提交发布
 
 a8f2513ef4c4814fa4329a3bbf506342edb69c81正常提交/push绿并同步master；精确CWP CI37558926678 attempt1全job/step success，job112591530802/73秒。本仓CI未增加跨仓长节点，集成反例为显式opt-in；实证JSON保留current_consumers_red_isolated_proposal_green_not_merged，与本仓CI success严格分开。当前仅用户source_acquisition.yaml dirty，RF/StockWiki没有代码写入。外仓落地问题仍pending；总体active，非暂停或完成。
