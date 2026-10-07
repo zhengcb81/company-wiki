@@ -182,8 +182,8 @@ def test_downstream_waits_for_success_result_payload(tmp_path: Path) -> None:
     assert store.get_job(child.job_id).status is JobStatus.READY
 
 
-@pytest.mark.parametrize("terminal_status", ["cancelled", "dead_letter"])
-def test_terminal_predecessor_blocks_downstream_with_diagnostic(
+@pytest.mark.parametrize("terminal_status", ["cancelled", "dead_letter", "blocked_human"])
+def test_terminal_predecessor_fails_downstream_with_diagnostic(
     tmp_path: Path,
     terminal_status: str,
 ) -> None:
@@ -208,7 +208,7 @@ def test_terminal_predecessor_blocks_downstream_with_diagnostic(
     assert store.promote_ready_jobs(now=LATER) == ()
     blocked = store.get_job(child.job_id)
     assert blocked is not None
-    assert blocked.status is JobStatus.BLOCKED_HUMAN
+    assert blocked.status is JobStatus.DEAD_LETTER
     assert blocked.last_error_code == "DEPENDENCY_TERMINAL"
     assert root.job_id in (blocked.last_error_detail or "")
     assert terminal_status in (blocked.last_error_detail or "")

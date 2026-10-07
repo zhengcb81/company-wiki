@@ -18,6 +18,7 @@ from company_wiki.source_catalog.narrative_evidence import (
     _table_scan_signal,
     parse_pdf,
     parse_transcript_text,
+    project_summary_quality,
     select_narrative_evidence,
     validate_summary_draft,
     verify_pdf_evidence_spans,
@@ -1406,14 +1407,15 @@ def test_company_statement_rejects_unknown_roles_and_unstable_locators_need_revi
         ),
     )
 
-    with pytest.raises(SummaryValidationError, match="unstable evidence locators"):
-        validate_summary_draft(
-            draft,
-            source_id=source_id,
-            source_sha256=source_sha,
-            language="zh",
-            evidence_spans=(unstable_unit,),
-        )
+    # Status is program-owned quality metadata, not a second citation gate.
+    validate_summary_draft(
+        draft, source_id=source_id, source_sha256=source_sha, language="zh",
+        evidence_spans=(unstable_unit,),
+    )
+    projected = project_summary_quality(draft, evidence_spans=(unstable_unit,))
+    assert projected.status == "needs_review"
+    assert projected.claims[0].needs_review is True
+    assert projected.claims[0].text == draft.claims[0].text
 
     unknown_unit = _make_unit(
         source_id=source_id,

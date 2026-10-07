@@ -44,13 +44,16 @@ def classify_outcome(
 ) -> tuple[JobStatus, str | None]:
     """Map handler outcome to the next job status and error code.
 
-    Returns ``(next_status, error_code_or_None)``.
+    Returns ``(next_status, error_code_or_None)``. Historical ``human_errors``
+    and ``blocked_human`` outcomes are readable compatibility inputs, now
+    classified as machine failures. Correct inputs/configuration in a new
+    event/run; no review receipt can turn invalid evidence into valid data.
     """
     if outcome is HandlerOutcome.SUCCEEDED:
         return JobStatus.SUCCEEDED, None
 
     if outcome is HandlerOutcome.BLOCKED_HUMAN:
-        return JobStatus.BLOCKED_HUMAN, error_code
+        return JobStatus.DEAD_LETTER, error_code
 
     if outcome is HandlerOutcome.TERMINAL_FAILURE:
         return JobStatus.DEAD_LETTER, error_code
@@ -59,7 +62,7 @@ def classify_outcome(
     if error_code in terminal_errors:
         return JobStatus.DEAD_LETTER, error_code
     if error_code in human_errors:
-        return JobStatus.BLOCKED_HUMAN, error_code
+        return JobStatus.DEAD_LETTER, error_code
     if error_code in retryable_errors:
         if attempt_no >= max_attempts:
             return JobStatus.DEAD_LETTER, error_code

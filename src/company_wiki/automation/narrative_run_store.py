@@ -14,7 +14,8 @@ from typing import Callable, TypeVar
 from company_wiki._id_scope import normalize_id_scope
 
 from . import migrations
-from .models import RuntimeGate, RuntimeState, canonical_json_hash, require_sha256, require_utc_timestamp
+from .models import (RuntimeGate, RuntimeState, canonical_json_hash,
+                     require_canonical_json, require_sha256, require_utc_timestamp)
 from .store import (
     ConcurrentUpdateError, StoreBusyError, _read_runtime_gate_in_transaction,
     _require_active_attempt, _set_runtime_gate_in_transaction,
@@ -93,6 +94,7 @@ class RunRecord:
     updated_at: str
     job_ids: tuple[str, ...]
     last_runtime_generation: int | None = None
+    binding_json: str | None = None
 
     @property
     def blocked(self) -> bool:
@@ -285,6 +287,16 @@ class NarrativeRunStore:
     def get_run(self, run_id: str) -> RunRecord | None:
         return self._read(lambda connection: _run(connection, run_id))
 
+    def job_bindings(self, run_id: str) -> dict[str, tuple[str, str]]:
+        """Read the immutable execution membership captured on first creation."""
+        def read(connection):
+            return {row["job_id"]: (row["input_hash"], row["handler_version"])
+                    for row in connection.execute(
+                        "SELECT job_id,input_hash,handler_version FROM narrative_run_jobs WHERE run_id=?",
+                        (run_id,),
+                    )}
+        return self._read(read)
+
     def activate_run(
         self, run_id: str, *, expected_generation: int, updated_at: str,
     ) -> RuntimeGate:
@@ -404,6 +416,7 @@ class NarrativeRunStore:
         max_micro_usd: int,
         max_output_bytes: int,
         created_at: str,
+        binding_json: str | None = None,
     ) -> RunRecord:
         for name, value in (
             ("run_id", run_id),
@@ -414,6 +427,10 @@ class NarrativeRunStore:
             _name(value, name)
         require_sha256(input_hash, field_name="input_hash")
         require_utc_timestamp(created_at)
+        if binding_json is not None:
+            require_canonical_json(binding_json)
+            if len(binding_json.encode("utf-8")) > 262144:
+                raise ValueError("narrative run binding exceeds its byte limit")
         scope = normalize_id_scope(job_ids, name="job_ids")
         if scope is None:
             raise TypeError("job_ids must be a tuple")
@@ -430,6 +447,7 @@ class NarrativeRunStore:
             max_tokens=max_tokens,
             max_micro_usd=max_micro_usd,
             max_output_bytes=max_output_bytes,
+            binding_json=binding_json,
         )
         for name, cap_value in (
             ("input_micro_usd_per_million_tokens", input_micro_usd_per_million_tokens),

@@ -48,11 +48,10 @@ def _complete(selected, payload):
     {**_claim("bad"), "claim_type": "invented_type"},
     {**_claim("bad"), "modality": "invented_modality"},
     {**_claim("bad"), "needs_review": "false"},
-    {**_claim("bad"), "needs_review": True},
     {k: v for k, v in _claim("bad").items() if k != "text"},
     "not a claim",
 ], ids=["unknown", "mixed-citations", "blank", "no-citations", "bad-citation-shape",
-        "wrong-role", "bad-type", "bad-modality", "bad-review-type", "unmarked-review",
+        "wrong-role", "bad-type", "bad-modality", "bad-review-type",
         "missing-field", "scalar"])
 def test_one_bad_claim_preserves_valid_claim_and_visible_quality(bad):
     selected = selection(2)

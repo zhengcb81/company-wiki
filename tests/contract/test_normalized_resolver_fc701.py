@@ -1,4 +1,4 @@
-"""FC-701 RED/acceptance tests: normalized-only resolver.
+"""Historical normalized-only resolver snapshot compatibility.
 
 With the RuntimePolicySnapshot pinned to the v2 reader
 (``v2_resolve_active`` + epoch + active cohort + legacy bridge OFF), the
@@ -7,10 +7,9 @@ acquisition/dayu_meta containers are never read (observer records zero
 legacy_bridge_hit).  Without an active assertion the resolver fails
 closed (no bridge fallback).  Pending remediation proposals, retired
 documents and unprovable evidence are explicitly excluded with a trace
-reason.  An AST gate forbids legacy-container reads anywhere except the
-resolver's gated bridge.
+reason. Current steady visibility is tested separately. Capture containers
+are supported input facts, with correctness checked through public behavior.
 """
-import ast
 import hashlib
 import json
 import sys
@@ -66,7 +65,7 @@ def _catalog(tmp_path: Path, dropbox_dir: Path):
 
 def _v2_snapshot(epoch="e1", cohort="dropbox-cohort") -> dict:
     return {
-        "schema_version": "2.0",
+        "schema_version": "1.0",
         "flags": {"v2_resolve_active": True, "legacy_bridge_enabled": False},
         "current_epoch": epoch,
         "active_cohorts": [cohort],
@@ -268,74 +267,3 @@ def test_fc701_retired_document_excluded(tmp_path):
     # retired documents are excluded at the candidate query level
     # (source_statuses=("active",)) — never offered for reuse
     assert result.status is not ResolutionStatus.REUSED_EXACT
-
-
-# --- AST gate: legacy containers read only in the gated bridge ---------------
-
-
-_LEGACY_OWNERS = frozenset({
-    # the gated bridge and the documented legacy container handlers —
-    # migration/backfill/stats/persist/bridge-helper each own their seam;
-    # FC-701 freezes the set: NO new production caller may read the
-    # acquisition/dayu_meta containers as an identity source.
-    "resolver.py", "backfill_v2.py", "migration_ledger.py",
-    "normalizer.py", "scanner.py", "visibility_bridge.py", "dayu.py",
-})
-
-
-def _legacy_reads(src_dir) -> list[str]:
-    violations = []
-    for py_file in sorted(src_dir.rglob("*.py")):
-        if py_file.name.startswith("test_") or py_file.name.startswith("__"):
-            continue
-        if py_file.name in _LEGACY_OWNERS:
-            continue
-        tree = ast.parse(py_file.read_text(encoding="utf-8"))
-        for node in ast.walk(tree):
-            key = None
-            if isinstance(node, ast.Subscript) and isinstance(node.slice, ast.Constant):
-                key = node.slice.value
-            elif isinstance(node, ast.Call) and isinstance(node.func, ast.Attribute)                     and node.func.attr == "get" and node.args                     and isinstance(node.args[0], ast.Constant):
-                key = node.args[0].value
-            # SourceEnsureResult has a top-level acquisition envelope; it is
-            # distinct from legacy metadata_json.acquisition.
-            if (
-                py_file.name == "operation_contract.py"
-                and key == "acquisition"
-                and isinstance(node, ast.Call)
-                and isinstance(node.func.value, ast.Name)
-                and node.func.value.id == "result"
-            ):
-                continue
-            if key in ("acquisition", "dayu_meta"):
-                violations.append(f"{py_file.name}:{node.lineno}:{key}")
-    return violations
-
-
-def test_fc701_legacy_container_read_only_in_bridge():
-    """AST gate: the legacy containers may be read only by the documented
-    owners (the resolver's gated bridge + migration/persist seams).  A NEW
-    production caller reading acquisition/dayu_meta is a violation — the
-    resolver consumes normalized assertions only."""
-    src_dir = (Path(__file__).resolve().parents[2] / "src"
-               / "company_wiki" / "source_catalog")
-    violations = _legacy_reads(src_dir)
-    assert not violations, (
-        f"legacy container read by a new production caller: {violations}")
-
-
-def test_fc701_legacy_gate_rejects_new_caller(tmp_path):
-    """Adversarial: a NEW module reading acquisition is rejected by the
-    gate — FC-701 forbids new legacy-container callers."""
-    src_dir = (Path(__file__).resolve().parents[2] / "src"
-               / "company_wiki" / "source_catalog")
-    evil = src_dir / "_fc701_evil_probe.py"
-    evil.write_text(
-        'metadata = {}\nvalue = metadata.get("acquisition")\n',
-        encoding="utf-8")
-    try:
-        violations = _legacy_reads(src_dir)
-        assert any("_fc701_evil_probe" in v for v in violations), (
-            f"evil probe not detected: {violations}")
-    finally:
-        evil.unlink()

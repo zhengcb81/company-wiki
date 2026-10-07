@@ -15,7 +15,7 @@ from company_wiki.source_catalog.narrative_evidence import (
 from .models import canonical_json, canonical_json_hash
 from .narrative_contracts import SourceRefValue
 from .narrative_http_model import NarrativeHTTPModel
-from .narrative_model import NARRATIVE_PROMPT_VERSION
+from .narrative_model import MODEL_REQUEST_SCHEMA, NARRATIVE_PROMPT_VERSION
 
 
 BATCH_REQUEST_SCHEMA = "narrative-batch-request/1"
@@ -127,6 +127,22 @@ class NarrativeBatchRequest:
                 "output_micro_usd_per_million_tokens": self.output_micro_usd_per_million_tokens},
             "max_final_bytes": self.max_final_bytes,
             "max_persistent_bytes": self.max_persistent_bytes, "max_scratch_bytes": self.max_scratch_bytes,
+        }
+
+    @property
+    def request_sha256(self) -> str:
+        """Exact normalized intent, independent of installed execution versions."""
+        return canonical_json_hash(self.to_dict())
+
+    @property
+    def execution_versions(self) -> dict[str, str]:
+        """Freeze these once on a new run; never substitute them on resume."""
+        return {
+            "adapter": NarrativeHTTPModel.adapter_id,
+            "model_request_schema": MODEL_REQUEST_SCHEMA,
+            "prompt": NARRATIVE_PROMPT_VERSION,
+            "parser": NARRATIVE_PARSER_VERSION,
+            "selector": NARRATIVE_SELECTOR_VERSION,
         }
 
     @property

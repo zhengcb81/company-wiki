@@ -1633,6 +1633,7 @@ def validate_summary_identity(
 def validate_summary_claim(
     claim: SummaryClaim, known: Mapping[str, EvidenceSpan], draft_status: str
 ) -> None:
+    """Validate content binding; the legacy status argument is diagnostic only."""
     if not claim.text.strip():
         raise SummaryValidationError("summary claim text must not be blank")
     if not claim.evidence_ids:
@@ -1640,7 +1641,6 @@ def validate_summary_claim(
     if set(claim.evidence_ids) - set(known):
         raise SummaryValidationError("summary claim refers to unknown evidence IDs")
     _validate_claim_roles(claim, known)
-    _validate_claim_review_status(claim, known, draft_status)
 
 
 def _validate_claim_roles(claim: SummaryClaim, known: Mapping[str, EvidenceSpan]) -> None:
@@ -1658,12 +1658,36 @@ def _validate_claim_roles(claim: SummaryClaim, known: Mapping[str, EvidenceSpan]
         raise SummaryValidationError("analyst-question claims must preserve question modality")
 
 
-def _validate_claim_review_status(
-    claim: SummaryClaim, known: Mapping[str, EvidenceSpan], draft_status: str
-) -> None:
-    cited_spans = [known[evidence_id] for evidence_id in claim.evidence_ids]
-    if any("locator_unstable" in span.quality_flags for span in cited_spans):
-        if not claim.needs_review or draft_status != "needs_review":
-            raise SummaryValidationError("unstable evidence locators require needs_review status")
-    if claim.needs_review and draft_status != "needs_review":
-        raise SummaryValidationError("review-required claims require a needs_review draft")
+def project_summary_quality(
+    draft: SourceSummaryDraft, *, evidence_spans: Sequence[EvidenceSpan],
+    discarded_claims: bool = False,
+) -> SourceSummaryDraft:
+    """Compute quality once after claim recovery, without a manual review gate.
+
+    Model uncertainty remains in claim_type/modality. Redundant model status
+    labels cannot invalidate grounded content or declare it verified. This is
+    a diagnostic projection; publication still requires original-byte replay
+    of every selected locator in the verify handler.
+    """
+    known = {span.span_id: span for span in evidence_spans}
+    projected = []
+    for claim in draft.claims:
+        validate_summary_claim(claim, known, draft.status)
+        cited = [known[evidence_id] for evidence_id in claim.evidence_ids]
+        needs_review = (
+            claim.claim_type == "uncertain" or claim.modality == "uncertain"
+            or any(span.quality_flags or span.parse_status != "parsed" for span in cited)
+            or any(span.structured_value.get("source_role", "unknown") == "unknown"
+                   for span in cited)
+        )
+        projected.append(replace(claim, needs_review=needs_review))
+    # All selected spans remain in the exported bundle and are replayed, even
+    # when the compact summary does not repeat each span as a separate claim.
+    review_required = (
+        discarded_claims or any(claim.needs_review for claim in projected)
+        or any(span.quality_flags or span.parse_status != "parsed" for span in evidence_spans)
+    )
+    return replace(
+        draft, claims=tuple(projected),
+        status="needs_review" if review_required else "draft",
+    )

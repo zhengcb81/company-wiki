@@ -1,4 +1,4 @@
-"""AUTO-2 migration contract tests (M01-M17), carried forward to schema v4.
+"""AUTO-2 migration contract tests (M01-M17), carried forward to schema v5.
 
 Each test asserts the production module path exists before importing it, so the
 red phase fails as a normal assertion rather than a collection/import error.  No
@@ -26,6 +26,61 @@ def _migrations():
     assert MIGRATIONS_PATH.is_file(), "expected red: automation/migrations.py is not implemented"
     from company_wiki.automation import migrations
     return migrations
+
+
+def _frozen_v4_with_run(migrations, db):
+    connection = sqlite3.connect(db)
+    try:
+        for statements in (migrations._DDL_V1_STATEMENTS, migrations._DDL_V2_STATEMENTS,
+                           migrations._DDL_V3_STATEMENTS, migrations._DDL_V4_STATEMENTS):
+            for statement in statements:
+                connection.execute(statement)
+        connection.execute("PRAGMA user_version=4")
+        connection.execute(
+            "INSERT INTO narrative_runs (run_id,input_hash,scope_sha256,model_id,prompt_version,"
+            "pricing_version,input_micro_usd_per_million_tokens,output_micro_usd_per_million_tokens,"
+            "max_tokens,max_micro_usd,max_output_bytes,state,created_at,updated_at) "
+            "VALUES (?,?,?,?,?,?,?,?,?,?,?,'open',?,?)",
+            ("historical", "a" * 64, "b" * 64, "old-model", "1.5.0", "price/1", 1, 2,
+             10000, 100000, 65536, "2026-10-06T00:00:00Z", "2026-10-06T00:00:00Z"),
+        )
+        connection.commit()
+        return connection.execute("SELECT * FROM narrative_runs").fetchone()
+    finally:
+        connection.close()
+
+
+def test_v4_binding_column_upgrade_is_atomic_and_preserves_historical_run(tmp_path):
+    migrations = _migrations()
+    db = tmp_path / "existing.db"
+    before = _frozen_v4_with_run(migrations, db)
+    report = migrations.migrate_database(db)
+    assert (report.from_version, report.to_version, report.applied_versions) == (4, 5, (5,))
+    assert report.backup_path is None
+    with sqlite3.connect(db) as connection:
+        after = connection.execute("SELECT * FROM narrative_runs").fetchone()
+        assert after[:-1] == before and after[-1] is None
+    assert migrations.migrate_database(db).applied_versions == ()
+    assert {path.name for path in tmp_path.iterdir()} <= {"existing.db", "existing.db-wal", "existing.db-shm"}
+
+
+def test_v4_binding_upgrade_failure_rolls_back_without_touching_historical_run(tmp_path, monkeypatch):
+    migrations = _migrations()
+    db = tmp_path / "existing.db"
+    before = _frozen_v4_with_run(migrations, db)
+    original = migrations._execute_statement
+
+    def fail_after_ddl(connection, statement):
+        original(connection, statement)
+        if "binding_json" in statement:
+            raise sqlite3.OperationalError("injected migration failure")
+
+    monkeypatch.setattr(migrations, "_execute_statement", fail_after_ddl)
+    with pytest.raises(migrations.MigrationExecutionError):
+        migrations.migrate_database(db)
+    with sqlite3.connect(db) as connection:
+        assert connection.execute("PRAGMA user_version").fetchone()[0] == 4
+        assert connection.execute("SELECT * FROM narrative_runs").fetchone() == before
 
 
 def _connect_readonly(db_path: Path) -> sqlite3.Connection:
@@ -61,7 +116,7 @@ def _create_frozen_v1_database(migrations, db: Path) -> None:
 # --------------------------------------------------------------------------- #
 # M01: new Path initializes v1, v2 and v3 in one transaction
 # --------------------------------------------------------------------------- #
-def test_m01_new_path_initializes_schema_at_version_4(tmp_path):
+def test_m01_new_path_initializes_schema_at_version_5(tmp_path):
     migrations = _migrations()
     db = tmp_path / "automation.db"
     report = migrations.migrate_database(db)
@@ -69,11 +124,11 @@ def test_m01_new_path_initializes_schema_at_version_4(tmp_path):
     conn = _connect_readonly(db)
     try:
         assert set(_user_tables(conn)) == EXPECTED_TABLES
-        assert _user_version(conn) == 4
+        assert _user_version(conn) == 5
     finally:
         conn.close()
-    assert report.to_version == 4
-    assert report.applied_versions == (1, 2, 3, 4)
+    assert report.to_version == 5
+    assert report.applied_versions == (1, 2, 3, 4, 5)
 
 
 # --------------------------------------------------------------------------- #
@@ -319,7 +374,7 @@ def test_m03_journal_mode_persists_and_pragmas_are_issued(tmp_path):
 # --------------------------------------------------------------------------- #
 # M04: repeated open of a v3 database is a no-op with a stable fingerprint
 # --------------------------------------------------------------------------- #
-def test_m04_repeated_v4_open_is_noop_with_stable_fingerprint(tmp_path):
+def test_m04_repeated_v5_open_is_noop_with_stable_fingerprint(tmp_path):
     migrations = _migrations()
     db = tmp_path / "automation.db"
     first = migrations.migrate_database(db)
@@ -328,8 +383,8 @@ def test_m04_repeated_v4_open_is_noop_with_stable_fingerprint(tmp_path):
     for _ in range(9):
         report = migrations.migrate_database(db)
         assert report.applied_versions == ()
-        assert report.from_version == 4
-        assert report.to_version == 4
+        assert report.from_version == 5
+        assert report.to_version == 5
         assert report.schema_fingerprint == fingerprint
         assert report.backup_path is None
 
@@ -351,13 +406,13 @@ def test_m05_preexisting_empty_v0_file_migrates_with_one_backup(tmp_path):
 
     report = migrations.migrate_database(db, backup_hook=backup_hook)
     assert report.from_version == 0
-    assert report.to_version == 4
-    assert report.applied_versions == (1, 2, 3, 4)
+    assert report.to_version == 5
+    assert report.applied_versions == (1, 2, 3, 4, 5)
     assert len(calls) == 1
-    assert calls[0][1] == 0 and calls[0][2] == 4
+    assert calls[0][1] == 0 and calls[0][2] == 5
     conn = _connect_readonly(db)
     try:
-        assert _user_version(conn) == 4
+        assert _user_version(conn) == 5
         assert set(_user_tables(conn)) == EXPECTED_TABLES
     finally:
         conn.close()
@@ -395,22 +450,22 @@ def test_m06_v0_with_unknown_user_table_is_unknown_schema(tmp_path):
 
 
 # --------------------------------------------------------------------------- #
-# M07: user_version > 4 -> UnsupportedSchemaVersionError, no downgrade
+# M07: user_version > 5 -> UnsupportedSchemaVersionError, no downgrade
 # --------------------------------------------------------------------------- #
 def test_m07_higher_user_version_is_unsupported(tmp_path):
     migrations = _migrations()
     db = tmp_path / "automation.db"
     conn = sqlite3.connect(db)
-    conn.execute("PRAGMA user_version = 5")
+    conn.execute("PRAGMA user_version = 6")
     conn.commit()
     conn.close()
     before = db.read_bytes()
     with pytest.raises(migrations.UnsupportedSchemaVersionError):
         migrations.migrate_database(db)
-    # user_version must remain 5 (no downgrade/clear)
+    # user_version must remain 6 (no downgrade/clear)
     conn = _connect_readonly(db)
     try:
-        assert _user_version(conn) == 5
+        assert _user_version(conn) == 6
     finally:
         conn.close()
     assert db.read_bytes() == before
@@ -584,9 +639,9 @@ def test_m13_backup_hook_invalid_receipt_is_backup_error(tmp_path):
 
 
 # --------------------------------------------------------------------------- #
-# M14: two instances concurrently initializing the same new DB -> one v3 schema
+# M14: two instances concurrently initializing the same new DB -> one v5 schema
 # --------------------------------------------------------------------------- #
-def test_m14_concurrent_init_produces_one_v4_schema(tmp_path):
+def test_m14_concurrent_init_produces_one_v5_schema(tmp_path):
     threading = pytest.importorskip("threading")
     migrations = _migrations()
     db = tmp_path / "automation.db"
@@ -608,12 +663,80 @@ def test_m14_concurrent_init_produces_one_v4_schema(tmp_path):
     assert errors == []
     conn = _connect_readonly(db)
     try:
-        assert _user_version(conn) == 4
+        assert _user_version(conn) == 5
         assert set(_user_tables(conn)) == EXPECTED_TABLES
         report = migrations.validate_database(db)
         assert report.integrity_ok
     finally:
         conn.close()
+
+
+def test_wal_connection_retry_yields_until_concurrent_initializer_can_finish(tmp_path, monkeypatch):
+    from threading import Event, Timer
+    migrations = _migrations()
+    peer_finished = Event()
+    original = migrations._configure_connection
+    calls = []
+    timer = Timer(0.03, peer_finished.set)
+
+    def configure(connection, **kwargs):
+        first = not calls
+        calls.append(connection)
+        if first:
+            timer.start()
+            raise sqlite3.OperationalError("database is locked")
+        if not peer_finished.is_set():
+            raise sqlite3.OperationalError("database is locked")
+        original(connection, **kwargs)
+
+    monkeypatch.setattr(migrations, "_configure_connection", configure)
+    try:
+        connection = migrations._open_connection(tmp_path / "wal.db")
+        connection.close()
+        assert len(calls) > 1
+        for closed in calls:
+            with pytest.raises(sqlite3.ProgrammingError):
+                closed.execute("SELECT 1")
+    finally:
+        timer.cancel()
+        if timer.ident is not None:
+            timer.join()
+
+
+def test_wal_connection_permanent_lock_stops_at_deadline_and_nonbusy_fails_immediately(tmp_path, monkeypatch):
+    from types import SimpleNamespace
+    migrations = _migrations()
+    monkeypatch.setattr(migrations, "_CONNECT_TIMEOUT_S", 0.04)
+    calls = []
+    elapsed = [0.0]
+
+    def advance(seconds):
+        elapsed[0] += seconds
+
+    monkeypatch.setattr(migrations, "time", SimpleNamespace(
+        monotonic=lambda: elapsed[0], sleep=advance))
+
+    def locked(connection, **_kwargs):
+        calls.append(connection)
+        raise sqlite3.OperationalError("database is locked")
+
+    monkeypatch.setattr(migrations, "_configure_connection", locked)
+    with pytest.raises(sqlite3.OperationalError, match="database is locked"):
+        migrations._open_connection(tmp_path / "locked.db")
+    assert elapsed[0] == pytest.approx(0.04)
+    for closed in calls:
+        with pytest.raises(sqlite3.ProgrammingError):
+            closed.execute("SELECT 1")
+    calls.clear()
+
+    def broken(connection, **_kwargs):
+        calls.append(connection)
+        raise sqlite3.OperationalError("disk I/O error")
+
+    monkeypatch.setattr(migrations, "_configure_connection", broken)
+    with pytest.raises(sqlite3.OperationalError, match="disk I/O error"):
+        migrations._open_connection(tmp_path / "broken.db")
+    assert len(calls) == 1
 
 
 def test_m14_classification_uses_one_snapshot_during_concurrent_init(
@@ -665,11 +788,11 @@ def test_m14_classification_uses_one_snapshot_during_concurrent_init(
         assert not writer.is_alive(), "concurrent initializer leaked a thread"
 
     assert errors == []
-    assert writer_reports[0].applied_versions == (1, 2, 3, 4)
+    assert writer_reports[0].applied_versions == (1, 2, 3, 4, 5)
     assert reader_report.applied_versions == ()
     assert reader_report.schema_fingerprint == writer_reports[0].schema_fingerprint
     report = migrations.validate_database(db)
-    assert report.user_version == 4
+    assert report.user_version == 5
     assert set(report.tables) == EXPECTED_TABLES
     assert report.integrity_ok
 

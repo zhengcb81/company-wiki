@@ -197,13 +197,13 @@ def test_classify_outcome_terminal():
     assert status is m.JobStatus.DEAD_LETTER
 
 
-def test_classify_outcome_blocked_human():
+def test_classify_legacy_blocked_outcome_is_machine_failure():
     r = _retry_mod()
     m = _models()
     status, code = r.classify_outcome(
         m.HandlerOutcome.BLOCKED_HUMAN, "REVIEW_PENDING", (), ("REVIEW_PENDING",), (), 1, 3
     )
-    assert status is m.JobStatus.BLOCKED_HUMAN
+    assert status is m.JobStatus.DEAD_LETTER
 
 
 # --------------------------------------------------------------------------- #
@@ -281,7 +281,7 @@ def test_worker_dead_letters_on_terminal_error(tmp_path):
     assert job.status is m.JobStatus.DEAD_LETTER
 
 
-def test_worker_blocks_on_human_error(tmp_path):
+def test_worker_legacy_review_error_is_machine_failure(tmp_path):
     w = _worker_mod()
     s = _store_mod()
     r = _registry_mod()
@@ -298,7 +298,7 @@ def test_worker_blocks_on_human_error(tmp_path):
     worker = w.Worker(store, reg, executor, clock=clock, id_gen=id_gen, lease_seconds=60)
     assert worker.process_one() is True
     job = store.get_job("job-auto4-001")
-    assert job.status is m.JobStatus.BLOCKED_HUMAN
+    assert job.status is m.JobStatus.DEAD_LETTER
 
 
 def test_worker_reaps_expired_leases(tmp_path):

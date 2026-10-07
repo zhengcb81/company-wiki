@@ -60,8 +60,6 @@ def _summary_contract_rule(error: NarrativeContractError) -> str:
         "analyst-question claims must cite question evidence only": "CLAIM_ROLE",
         "analyst-question claims must preserve question modality": "CLAIM_MODALITY",
         "summary claim IDs are duplicated": "CLAIM_DUPLICATE_ID",
-        "unstable evidence locators require needs_review status": "LOCATOR_REVIEW_STATUS",
-        "review-required claims require a needs_review draft": "DRAFT_REVIEW_STATUS",
     }
     if message in exact:
         return exact[message]

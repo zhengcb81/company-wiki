@@ -147,7 +147,7 @@ def test_promotion_scopes_child_but_can_read_outside_terminal_parent(tmp_path):
     store.add_job_dependency(inside.job_id, parent.job_id)
     store.add_job_dependency(outside.job_id, parent.job_id)
     assert store.promote_ready_jobs(now=T3, allowed_job_ids=(inside.job_id, ready.job_id)) == (ready.job_id,)
-    assert store.get_job(inside.job_id).status is models.JobStatus.BLOCKED_HUMAN
+    assert store.get_job(inside.job_id).status is models.JobStatus.DEAD_LETTER
     assert store.get_job(outside.job_id) == outside
     assert store.get_job(outside_due.job_id) == outside_due
     assert store.get_job(parent.job_id) == parent

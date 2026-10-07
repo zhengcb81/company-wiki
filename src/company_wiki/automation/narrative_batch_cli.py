@@ -10,7 +10,7 @@ from typing import Sequence
 from company_wiki.source_catalog.source_reader import SourceReadError
 
 from .models import canonical_json
-from .narrative_batch import BatchPreparationDeadlineExceeded, run_batch
+from .narrative_batch import BatchPreparationDeadlineExceeded, BatchResumeError, run_batch
 from .narrative_batch_request import NarrativeBatchRequest
 from .narrative_run_store import NarrativeRunStore
 
@@ -70,6 +70,9 @@ def main(
         return 2
     except SourceReadError as exc:
         print(canonical_json(_failure_receipt(request, args.automation_db, "failed", exc.reason)))
+        return 2
+    except BatchResumeError as exc:
+        print(canonical_json(_failure_receipt(request, args.automation_db, "failed", exc.code)))
         return 2
     except ValueError as exc:
         status = "storage_exhausted" if str(exc) in {

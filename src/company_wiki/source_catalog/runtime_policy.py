@@ -1,15 +1,9 @@
-"""FC-201: persistent, versioned RuntimePolicySnapshot (ActivationSnapshot 1.0).
+"""Steady source visibility and historical rollout snapshot compatibility.
 
-The snapshot is the single activation authority (ADR-010): it carries the
-v2 flag set, the current activation epoch, the active cohorts, and the
-RootPolicy hash.  Request start pins the snapshot; the flag set alone can
-hide active rows even when the database contains them; reads fail closed
-(missing / corrupt / unknown flag / illegal dependency / placeholder hash
-are all errors, never silent defaults); writes are compare-and-swap so a
-stale writer can never clobber a concurrent activation flip.
-
-This module replaces the hardcoded flag dicts in WU scripts (FC-201
-deletion deadline per ADR-010).  Resolver SQL enforcement lands in FC-202.
+New catalogs use steady verified facts without a snapshot. Schema 2 stores
+that mode explicitly; schema 1 decodes old activation flags/epochs/cohorts
+for existing history. A present corrupt snapshot is an error. Policy writes
+use compare-and-swap so concurrent changes cannot be silently overwritten.
 """
 
 from __future__ import annotations
@@ -216,7 +210,7 @@ def save_runtime_policy_cas(
 
 
 def reader_mode(snapshot: dict[str, Any]) -> str:
-    """Return the effective reader: 'v2' only when v2_resolve_active is on."""
+    """Return steady, or the explicit schema-1 historical reader mode."""
     return resolver_visibility_projection(snapshot)["reader"]
 
 

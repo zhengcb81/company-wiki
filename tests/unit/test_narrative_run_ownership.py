@@ -253,7 +253,11 @@ def test_run_record_new_field_is_defaulted_after_the_old_positional_fields():
     record = ledger.RunRecord("run", SHA, SHA, "model", "prompt", "price", 1, 1,
                               100, 100, 100, "open", None, T0, T0, ())
     assert record.last_runtime_generation is None
-    assert fields(record)[-1].name == "last_runtime_generation"
+    assert record.binding_json is None
+    assert [field.name for field in fields(record)[-2:]] == ["last_runtime_generation", "binding_json"]
+    old_positional_owner = ledger.RunRecord("run", SHA, SHA, "model", "prompt", "price", 1, 1,
+                                           100, 100, 100, "open", None, T0, T0, (), 2)
+    assert old_positional_owner.last_runtime_generation == 2 and old_positional_owner.binding_json is None
 
 
 def _insert(connection, table, values):
@@ -311,15 +315,15 @@ def test_v3_upgrade_preserves_all_facts_and_leaves_old_owner_unbound(tmp_path):
         return shutil.copy2(source, tmp_path / "before-v3.db")
 
     report = migrations.migrate_database(database, backup_hook=backup)
-    assert report.to_version == 4 and report.applied_versions == (4,)
-    assert calls == [(3, 4)]
+    assert report.to_version == 5 and report.applied_versions == (4, 5)
+    assert calls == [(3, 5)]
     assert (tmp_path / "before-v3.db").read_bytes() == original_bytes
     after = _facts(database)
     assert after.keys() == before.keys()
     for table in before.keys() - {"narrative_runs"}:
         assert after[table] == before[table]
-    assert [row[:-1] for row in after["narrative_runs"]] == before["narrative_runs"]
-    assert after["narrative_runs"][0][-1] is None
+    assert [row[:-2] for row in after["narrative_runs"]] == before["narrative_runs"]
+    assert after["narrative_runs"][0][-2:] == (None, None)
     auto = AutomationStore(database)
     runs = ledger.NarrativeRunStore(database)
     _assert_owner_denied(auto, runs, "run-legacy", 2)

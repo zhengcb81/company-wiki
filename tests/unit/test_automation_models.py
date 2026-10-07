@@ -143,16 +143,16 @@ def test_job_status_transition_table_is_exact():
     m = load_models()
     expected = {
         m.JobStatus.DETECTED: {m.JobStatus.PLANNED, m.JobStatus.CANCELLED},
-        m.JobStatus.PLANNED: {m.JobStatus.READY, m.JobStatus.BLOCKED_HUMAN, m.JobStatus.CANCELLED},
+        m.JobStatus.PLANNED: {m.JobStatus.READY, m.JobStatus.DEAD_LETTER, m.JobStatus.CANCELLED},
         m.JobStatus.READY: {m.JobStatus.LEASED, m.JobStatus.CANCELLED},
         m.JobStatus.LEASED: {m.JobStatus.RUNNING, m.JobStatus.READY},
         m.JobStatus.RUNNING: {
             m.JobStatus.VERIFYING, m.JobStatus.RETRY_WAIT,
-            m.JobStatus.BLOCKED_HUMAN, m.JobStatus.DEAD_LETTER,
+            m.JobStatus.DEAD_LETTER,
         },
         m.JobStatus.VERIFYING: {
             m.JobStatus.SUCCEEDED, m.JobStatus.RETRY_WAIT,
-            m.JobStatus.BLOCKED_HUMAN, m.JobStatus.DEAD_LETTER,
+            m.JobStatus.DEAD_LETTER,
         },
         m.JobStatus.RETRY_WAIT: {m.JobStatus.READY, m.JobStatus.DEAD_LETTER},
         m.JobStatus.BLOCKED_HUMAN: {m.JobStatus.READY, m.JobStatus.CANCELLED},

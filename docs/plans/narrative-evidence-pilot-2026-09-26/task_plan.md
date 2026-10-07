@@ -10,6 +10,8 @@ G1历史验收继续有效，但不能宣称全面清理已完成。现场仅小
 
 二次追链新增第13组G2-12：exact下载已单请求，latest却只返GAP并分叉到binding/snapshot/hash/expiry旧签收，新steady无snapshot也被旧close-gap拒绝，FF v2无法自动补缺；统一ensure资源事务列P0-B。另G2-01b无关root/DB位置仍令终态批次失效，明确pending。详细单给出完整代码/入口/测试/指导文件写集，保留真SHA/身份/期间/公开日/预算，而非放过坏资料。
 
+最终追链补第14组G2-13/P0：日常AUTO/RunStore构造会做一轮/两轮整库integrity/FK检查，终态读和每worker启动合计三轮；CatalogStore当前schema每次仍全库fingerprint seed。预算同实例按run_id查询没有此问题。先系统拆开结构检查/显式深检并退出日常全库seed，再进入R2；具体写集/SQL trace反例加入G2A，仍仅两个大节点。
+
 ## Goal
 
 逐步完成 company-wiki 叙述性证据选择、摘要/检索、Worker 多文档并发、跨项目消费接口和低价值原文/派生处置计划；每阶段先核查 revenue-forecast 当前实施状态，复用其正式合同与组件，避免修改对方文件或重复实现，并保留用户已批准的安全边界。
@@ -92,7 +94,7 @@ TDD 框住具体公开行为。只在 N4 A/B/C、存储迁移等大节点集中�
 ## 当前文档导航
 
 - [八束已采纳方案](radical_simplification_proposal_2026-10-03.md)、[G1 实施细则](gate_simplification_closeout_2026-10-04.md)、[46 项历史审计](gate_permission_inventory_2026-10-03.md)
-- [G2 当前全面补漏与优先实施](gate_simplification_reaudit_2026-10-07.md)：覆盖历史收口文字，12组结论、两大节点，不增加人工门禁。
+- [G2 当前全面补漏与优先实施](gate_simplification_reaudit_2026-10-07.md)：覆盖历史收口文字，14组结论、两大节点，不增加人工门禁。
 - [N4 实施与真实批次恢复细则](n4_production_batch_implementation.md)、[S5/S6 清理细则](s5_s6_legacy_storage_implementation.md)
 - [完成证据](main_completion_evidence_2026-10-06.md)、[并行总计划](parallel_execution_plan_2026-10-03.md)、[N5 三包](harness_lanes/n5_parallel_packages_2026-10-06.md)
 - [findings](findings.md)、[progress](progress.md)
@@ -102,7 +104,7 @@ TDD 框住具体公开行为。只在 N4 A/B/C、存储迁移等大节点集中�
 
 ## 当前新增目标（2026-10-07）
 
-用户明确要求完成全部PWF计划内容。上一轮S0–S7与日期合同的已发布验收保持，但新目标继续active，不能把有界试点等同全部计划落地。MAIN先盘点全部引用细则及交付，再按实际剩余步骤实施；不缩范围，不重跑已绿旧节点，不无限扩展初稿。
+用户明确要求完成全部PWF计划内容。上一轮S0–S7与日期合同的已发布验收保持，但整个目标仍未完成；目标服务当前paused，明确恢复后继续。不能把有界试点等同全部计划落地。MAIN先盘点全部引用细则及交付，再按实际剩余步骤实施；不缩范围，不重跑已绿旧节点，不无限扩展初稿。
 
 ### R0 完整计划与实际待办核对
 
@@ -116,7 +118,7 @@ TDD 框住具体公开行为。只在 N4 A/B/C、存储迁移等大节点集中�
 
 | 阶段 | 状态 | 下一责任 |
 |---|---|---|
-| G2门禁全面补漏/P0 | in_progress（本次审计补漏收口；目标服务paused） | 13组+scoped pin漏项；现场steady已完成，核心责任绿/版本恢复及发布待收口；SW/StockQA日常门与CWP/FF latest升P0-B，家族/跨仓工具pending；只两个大节点 |
+| G2门禁全面补漏/P0 | in_progress（本次审计补漏收口；目标服务paused） | 14组+scoped pin漏项；现场steady已完成，核心责任绿/发布待收口；Store轻初始化/P0、SW/StockQA日常门和CWP/FF latest/P0-B优先，家族/跨仓工具pending；只两个大节点 |
 | R0完整对账 | complete | 已确认真实生产metadata/分类/ET登记缺口；已完成核心不重做 |
 | R1融资文档正式分类 | complete | 66ce0467已发布，真实两PDF CLI与分类责任包绿，精确CI37578307854绿 |
 | R2真实生产来源/预算准备 | in_progress；生产步骤顺延G2后 | 全库发现/有限登记/AUTO范围代码2cad90d已推且精确CI绿；G2先清旧控制面，再核公开日/retired/ET，不猜metadata |
@@ -126,4 +128,4 @@ TDD 框住具体公开行为。只在 N4 A/B/C、存储迁移等大节点集中�
 
 ## Next Step
 
-收口[G2A当前责任代码](gate_simplification_reaudit_2026-10-07.md)：集中检验默认steady/有效pin/AUTO机器错误/质量投影/版本化零模型恢复，正常提交推送并核精确代码CI；本次审计任务外仓只读结论写清，不扩大施工。目标服务实读paused。下一恢复时先P0-B的StockWiki/StockQA日常工程门，再其余G2清理及G2B，之后R2/R3；不改模型预算、不重派已交卡、不宣布全部完成。
+收口[G2A当前责任代码](gate_simplification_reaudit_2026-10-07.md)：集中检验默认steady/有效pin/AUTO机器错误/质量投影/版本化零模型恢复，正常提交推送并核精确代码CI；本次审计任务外仓只读结论写清，不扩大施工。目标服务实读paused。下一恢复队列G2-13轻初始化→G2-01b精确读pin→P0-B的StockWiki/StockQA日常工程门与CWP/FF latest单请求→其余P1及G2A/B，之后R2/R3；不改模型预算、不重派已交卡、不宣布全部完成。

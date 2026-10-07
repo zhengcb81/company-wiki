@@ -31,6 +31,7 @@ from company_wiki.source_catalog.narrative_evidence import (
 )
 from company_wiki.source_catalog.source_reader import (
     ReviewSnapshot,
+    SourceReadError,
     SourceRef,
     VerifiedContent,
 )
@@ -238,6 +239,46 @@ def _run(
     )
     result = handler(_context(payload, lambda: checkpoints.append(1)))
     return result, len(checkpoints)
+
+
+@pytest.mark.parametrize(
+    ("status", "reason", "code", "outcome"),
+    [
+        ("unavailable", "catalog_unavailable", "IO_TRANSIENT", HandlerOutcome.RETRYABLE),
+        ("not_indexed", "document_not_indexed", "SOURCE_UNAVAILABLE", HandlerOutcome.TERMINAL_FAILURE),
+        ("not_indexed", "source_version_not_indexed", "SOURCE_UNAVAILABLE", HandlerOutcome.TERMINAL_FAILURE),
+        ("unavailable", "no_indexed_location", "SOURCE_UNAVAILABLE", HandlerOutcome.TERMINAL_FAILURE),
+        ("unavailable", "no_verified_location", "SOURCE_UNAVAILABLE", HandlerOutcome.TERMINAL_FAILURE),
+        ("unavailable", "expected_version_mismatch", "SOURCE_HASH_MISMATCH", HandlerOutcome.TERMINAL_FAILURE),
+        ("unavailable", "source_ref_changed", "SOURCE_HASH_MISMATCH", HandlerOutcome.TERMINAL_FAILURE),
+        ("blocked", "read_policy_mismatch", "POLICY_DENIED", HandlerOutcome.TERMINAL_FAILURE),
+    ],
+)
+def test_select_handler_machine_read_error_semantics(
+    monkeypatch, status: str, reason: str, code: str, outcome: HandlerOutcome,
+) -> None:
+    from company_wiki.automation.registry import create_default_registry
+    from company_wiki.automation.retry import classify_outcome
+
+    data = b"Full Conference Call Transcript\nCEO: We launched a new product.\n"
+    payload = _payload(data, title="Original call", document_kind="earnings_call_transcript",
+                       language="en", mime_type="text/plain")
+    reader = FakeReader(payload, data)
+
+    def unavailable(*_args, **_kwargs):
+        raise SourceReadError(status, reason)
+
+    monkeypatch.setattr(reader, "open_version", unavailable)
+    raw, _ = _run(payload, data, reader=reader)
+    assert raw.outcome is outcome
+    assert raw.error is not None and (raw.error.code, raw.error.detail) == (code, reason)
+    assert raw.effects == () and raw.metrics.tokens == 0
+    spec = create_default_registry().get("source.narrative_select")
+    statuses = [classify_outcome(raw.outcome, raw.error.code, spec.retryable_errors,
+                                spec.human_errors, spec.terminal_errors, attempt, 3)[0]
+                for attempt in (1, 3)]
+    assert statuses == ([JobStatus.RETRY_WAIT, JobStatus.DEAD_LETTER]
+                        if outcome is HandlerOutcome.RETRYABLE else [JobStatus.DEAD_LETTER] * 2)
 
 
 @pytest.mark.parametrize(

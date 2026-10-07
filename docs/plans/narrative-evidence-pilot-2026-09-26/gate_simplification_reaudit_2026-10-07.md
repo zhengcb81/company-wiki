@@ -21,7 +21,7 @@
 
 HEAD/文件 SHA/工作树/现场 policy 原文见[只读审计收据](harness_lanes/results/g2_gate_reaudit_2026-10-07.json)。这是入口和机制审计，**不声称逐行读完全部历史 worktree**。Dayu 是纯外部项目，零代码变更；IQS 有独立项目，不介入。沙箱/操作系统/供应商套餐限制不是项目内人工权限，不能通过修改项目声称取消了它们。
 
-再次追链的13组、scoped pin边界、StockQA最新HEAD、具体同步写集/能力保护与核心本地证据见[补充审计收据](harness_lanes/results/g2_gate_reaudit_followup_2026-10-07.json)。原收据保持原时点，不回写成新状态。
+再次追链的14组、scoped pin边界、StockQA最新HEAD、具体同步写集/能力保护与核心本地证据见[补充审计收据](harness_lanes/results/g2_gate_reaudit_followup_2026-10-07.json)。原收据保持原时点，不回写成新状态。
 
 ## 2. 已完成项继续保留，不重复施工
 
@@ -36,7 +36,7 @@ HEAD/文件 SHA/工作树/现场 policy 原文见[只读审计收据](harness_la
 
 ### G2-00 / P0：现场 canary 与默认读取路径（现场已迁移；默认代码待发布）
 
-**原审计确实生效；现已迁移。** `.source_catalog/runtime_policy.json` 原为2026-08 canary，六flag/epoch/cohort/关闭legacy bridge隐藏capture，是G1漏项。现在以已发布2cad90d代码、现有锁/CAS切为285B schema2 steady；16条有效断言保持、17张事实表/222408704B数据库/原件及owner配置不变，同payload重复CAS零写。[现场收据](harness_lanes/results/g2_steady_production_migration_2026-10-07.json)明确旧视图是迁移后用原小snapshot及同一只读DB重建，没有伪造迁移前采样或完整备份。
+**原审计确实生效；现已迁移。** `.source_catalog/runtime_policy.json` 原为2026-08 canary，六flag/epoch/cohort/关闭legacy bridge隐藏capture，是G1漏项。现在以已发布2cad90d代码、现有锁/CAS切为264B schema2 steady；16条有效断言保持、17张事实表/222408704B数据库/原件及owner配置不变，同payload重复CAS零写。[现场收据](harness_lanes/results/g2_steady_production_migration_2026-10-07.json)明确旧视图是迁移后用原小snapshot及同一只读DB重建，没有伪造迁移前采样或完整备份。
 
 已核 16 条 active/verified、2 条 legacy/verified、4 条 candidate。直接删除 JSON 会退回 v1 默认并隐藏已生效断言，不能这么做。schema 2 `steady` 已在 2cad90d 发布、CI 绿，排除 shadow/candidate/rejected，断言优先、legacy capture 仅补缺，仍绑定真实来源 SHA。
 
@@ -57,6 +57,8 @@ HEAD/文件 SHA/工作树/现场 policy 原文见[只读审计收据](harness_la
 **G2-01b / 后续仍pending：全catalog绑定范围仍过大。** 本次schema2已去掉无效字段，但仍hash全部roots/DB位置；`build_batch_events`及storage baseline将全局pin进入input identity。finished exact SourceRef只读实际注册副本，不做全局候选选择，新增无关root仍可能拒绝恢复。不能声称这一问题已解决。下一施工应区分查询选源的全局identity与单source/batch实际副本/准入identity，共用同一责任层；先写“新增无关根/迁DB后精确读取和终态复用不失效、有关副本/准入/字节变化仍拒绝”的公共反例，再同步reader→batch/storage guard→消费合同。MAIN定义版本与旧pin兼容，不能临时接受任意旧pin或重签旧费用；放在G2内、R2之前，不另设签收节点。
 
 已核公开reader合同明确`reusable_for_filing=false`仍可query_local/preview/精确filing_reuse；该旧标签在legacy resolver选源里有作用，但不能作为已选SourceRef读取权限。实际旧工作目录错误为`BATCH_WORK_DIRECTORY_CONFLICT`。后续query投影也须按实际当前caller字段，不自动恢复旧复用门。
+
+**01b独占范围与版本约定：**MAIN仅改`source_catalog/source_read_policy.py/source_reader.py`及实际reader manifest调用处，`automation/narrative_batch.py/narrative_batch_request.py/narrative_run_store.py`现有绑定/storage guard，既有`test_source_read_policy.py/test_source_version_reader.py/test_narrative_versioned_resume.py`及正式CLI恢复责任包。查询选源pin保持全局语义，exact SourceRef/batch改为独立、版本化的已选来源有效读取投影；源ID/SHA、当前身份/期间/公开日、当前真实准入/路径包含/open验证仍保留，不把物理DB位置/无关root作为精确来源事实。先定义新解释版本与绑定schema，保留schema2查询/旧final读；旧记录无法证明等价时明确解释不可复用，不补签旧final/费用。公开SourceRef/SourceExport v2/NarrativeRef形状不扩权限字段；RF/SW只核既有读pin消费合同，若确需改consumer则各独立checkout、本仓责任测试。不得一律忽略所有pin或复制路径给上层。
 
 ### G2-02 / P0：AUTO 普通故障仍转“人工阻塞”
 
@@ -104,11 +106,13 @@ HEAD/文件 SHA/工作树/现场 policy 原文见[只读审计收据](harness_la
 
 **现行CI脚本和AGENTS均生效；hook本身没有pytest。** `scripts/check_all.sh`仍被CI调用，全pytest+73% overall/40% ui硬门；AGENTS仍要求Before commit。hook的validate-framework间接执行600/1000行硬门，注释却称warning；`pyproject.toml`另有fail_under=73。必须统一清理，单删check_all参数会漏底层配置。上次外线只消除了重复pytest。
 
-**实施：**提交只运行改动责任范围的便宜静态/行为检查；全套真实工作区 E2E 只在相关大节点/显式运行一次。覆盖率、体量变成诊断，framework 的实际配置/模块一致性错误继续失败。同步 AGENTS/脚本/文档，不留“脚本精简但接手模型每 commit 必须全测”的冲突。投资研究 accepted/rejected 属 StockWiki 业务状态，本卡不取消投资结论语义。
+**实施：**commit只运行便宜静态检查，不新增pytest hook；真实行为由短CI/相关大节点验收，全套真实工作区 E2E 只在相关大节点/显式运行一次。覆盖率、体量变成诊断，framework 的实际配置/模块一致性错误继续失败。同步 AGENTS/脚本/文档，不留“脚本精简但接手模型每 commit 必须全测”的冲突。投资研究 accepted/rejected 属 StockWiki 业务状态，本卡不取消投资结论语义。
 
 **验收：**hook/docs 不触发全套、指标低于旧阈值本身不失败；一个真实责任测试故意失败时整体 exit 非零。一次相关来源 CLI/E2E 节点即可，不因小改动重复 935 项。
 
 推荐一份`scripts/checks.py`供CI与sh薄包装共用，默认Ruff/真实framework一致性/identity和SourceExport/NarrativeReader精选行为；全真实工作区和coverage显式大节点。责任复用`test_check_all_script.py`当前shim、framework反例、identity/source/narrative CLI包；`test_e2e_real_workspace.py`保留真实数据行为，体量仅诊断。`test_data_contract.py`是业务成熟度，与投资accepted/rejected一起保留，移到相关大节点，不能当权限删掉。
+
+**具体同步写集：**StockWiki `.github/workflows/ci.yml`、`.pre-commit-config.yaml`、`pyproject.toml`、`AGENTS.md`、`scripts/check_all.sh`及新薄编排，`stockwiki/framework_validators_okf.py`现600/1000体量硬门与`tests/test_framework_validation.py/tests/test_check_all_script.py`；`stockwiki/cli.py`只在现validate-framework返回诊断所需时修改，不改业务研究writer。当前没有远端，本地主线发布需准确表述，不能假造远端CI。
 
 ### G2-07 / P1：CWP 工程检查与退休清单同步
 
@@ -118,11 +122,15 @@ HEAD/文件 SHA/工作树/现场 policy 原文见[只读审计收据](harness_la
 
 **本次实际补漏：**FC701历史snapshot测试误标schema2（现在定义steady），改为真实schema1保留原v2无bridge/错误断言；禁止所有新模块读取acquisition字符串的冻结owner AST门误拒当前合法canonical登记，还在源码目录临时写evil_probe。整条AST所有者名单/两个扫描测试退休，来源身份/SHA/retired/历史可见性行为反例保留；不是加一个允许owner名字凑绿。72项行为绿、2项上述历史失败定位后，剩余FC701五项真实行为全部绿。源码不因capture这个合法字段名被拒绝。
 
+**具体同步写集：**CWP `pyproject.toml`现console入口、`src/company_wiki/source_catalog/cli.py/code_identity.py`、`.pre-commit-config.yaml`、`.github/workflows/ci.yml`、`.githooks/pre-push`、`tools/pre_push_gate.py`及其实际退休模块清单测试；源职责约束/CLI合同只改被退休的入口，不删除真身份/SHA/Locator行为。CI/commit/push各清单同步移除已退休模块，source源码指纹清单同时更新，避免删源码后整个新batch无法执行。保留当前快CI和便宜静态，N4历史A/B/C已验收，不重新跑。
+
 ### G2-08 / P1：FF v1 兼容与安装入口最终收敛
 
 **v2 正确；v1 残留需 caller 审计。** 旧 `--allow-download` 与 request authorization 兼容仍在，不能算到 v2 单意图上。两份安装技能已推荐 v2，但 legacy 附录和摘要会让较弱模型反复询问授权。
 
 **实施：**查 RF/其他正式 caller 的 schema；无合法新下载 caller 则退休 v1 下载路由，必要只读复用留薄兼容，不继续支持两套审批协议。库和 CLI 使用同一个 intent，不二次 ask。同步 repo skill 与两个安装副本的实际脚本/文档，仅从对应已发布版本安装；哈希差异先解释，不覆盖用户密钥/配置。当前持续授权作为上下文使用，`reuse_only` 仍零网络；限时/字节/费用不是人工签收。
+
+安装位置为`C:/Users/郑曾波/.agents/skills/filing-fetch`和`C:/Users/郑曾波/.codex/skills/filing-fetch`：仅同步已发布且本次改过的SKILL.md、scripts/fetch_filing.py/filing_contracts.py及直接依赖的reference文件；实际文件清单先核安装入口，未改文件/密钥/用户配置保留。RF安装副本若确有调用本次可选工具的正式caller，同样只同步必要文件，不恢复“全MATCH才可用”的门。
 
 **验收：**正式 FF→ET→CWP 离线链走三个真实 CLI、复用零 provider、语言/SHA/清理正确；相同 intent 的库与 CLI 一致，未来公开和预算拒绝仍明确。使用既有链测试入口，不新增十套 request contract。
 
@@ -166,22 +174,38 @@ StockInfoDLSimple 的 provider host、include/exclude 是来源发现和过滤�
 
 **先写反例并并入G2B一次联调：**新steady无snapshot/binding仍可latest明确下载一次，再请求复用零fetch；旧expired/stale签收不影响相同范围有效请求；不同旧TTL并发仍最多一fetch/canonical。无intent/真实歧义/错身份期次/未来公开零fetch；假SHA/PDF、越界、未计量响应、实际超byte/time/cost不入库；provider unavailable/提交或最终再解析失败不能报completed。真实离线subprocess核FF v1/v2→ET/CWP一致、预算不重置、pathless与计数保留。复用close_gap FC801/804、download_authorization/gap_plan/acquisition/canonical_writer/adapter_process/ensure_paused/source_operation_v2及FF FC802/S3/v2责任包；删除签收本身的旧期待，保留资源/身份/SHA/幂等反例。不为此重复paid HTTP。
 
+### G2-13 / P0：构造Store暗含整库深检和全量补种
+
+**实际调用链存在系统性重复扫描；次数是结构审计，不冒称实测生产耗时。** 当前v5库每次`AutomationStore.__init__→migrate_database→_validate_current_readonly→_require_expected_structure`做一轮`PRAGMA integrity_check/foreign_key_check`；`NarrativeRunStore.__init__→validate_database`做两轮，因为后者重复检查。完成run的零worker恢复、每个worker启动/重启均构造两种Store，仍有三轮整库检查；失败CLI新构造RunStore又两轮。同一RunStore的`budget_snapshot`只是按run_id查询，没有每次深检，不能误报。
+
+CatalogStore当前版本每次`_initialize→_apply_additive_migrations→_seed_fingerprint_state`还执行DDL探测与`INSERT…SELECT documents JOIN sources WHERE NOT EXISTS`全库补种。只读SourceReader已避开writer，但正常写Store仍会随全库规模增长。这与已修复WAL争锁时间让步是两个问题，不能拿WAL绿灯声称本项完成。
+
+**实施接口与写集：**同一AUTO/来源库中拆开轻量current-schema验证与显式深检。构造只查版本、必要表/列/键/singleton，不扫描业务数据，不宣称`integrity_ok=true`；新建、真实迁移提交前、显式`validate_database`大节点各执行一次深检，消除内部重复。旧/未来版本和非SQLite、必要结构损坏仍明确拒绝，迁移失败原子回滚；实际业务查询异常和FK执行仍保留。复用`automation/migrations.py`的结构函数、`store.py`及`narrative_run_store.py`构造入口，不增加健康服务、第二Store、缓存许可或签收文件。
+
+CatalogStore已是当前schema时不DDL/全库seed，未知版本在DDL前拒绝；seed仅新建/真实升级一次。现`select_fingerprint_batch`已将无state文档视为pending、`record_fingerprint_outcome`已UPSERT，优先沿用此责任；如新登记需要初始化，只在对应文档事务内做，不补扫全库。独占写集为`source_catalog/store.py`及确有必要的fingerprint责任文件；不能将优化转成全库metadata重写。
+
+**TDD并入同一G2A：**SQL trace证明current库重复构造、预算、终态恢复/worker factory不执行整库PRAGMA/DDL/seed；显式深检一轮，新建/真实迁移一次且损坏/FK孤儿被诊断，失败回滚。轻入口不虚报完整健康；真实选中资料/账目读取异常不得变成零费用/成功。原run scope、lease/generation、未知账、CAS负例保留；无state新文档仍可选择并保存结果。使用已有migrations/store/atomic/run-store责任包及一条实际CLI恢复，不每日全库check，不增加审查节点。
+
+显式深检直接沿用`company_wiki.automation.migrations.validate_database(Path)`公共API及既有迁移测试，不另造doctor服务。当前AUTO CLI doctor只是模块可导入诊断，不能冒称已做DB完整性检查；调用方报告必须区分结构检查与实际深检。
+
 ## 4. 实施次序、所有权和接口
 
-MAIN 是唯一集成与生产变更负责人。此表是施工顺序，不是新增 11 次签收。
+MAIN 是唯一集成与生产变更负责人。此表是施工顺序，不是新增逐组签收。
 
 | 顺序 | 工作 | 输出/责任 | 状态 |
 |---|---|---|---|
 | 1 | G2-00 steady 现场迁移/默认新库收敛 | 当前policy、旧小snapshot、真实读和16断言 | 现场complete；默认路径TDD绿、待代码发布 |
 | 2 | G2-01 effective read pin + G2-02 AUTO 机器错误/版本恢复 + G2-11派生质量状态 | 版本化读取语义、同AUTO单库恢复、单处质量诊断 | in_progress；核心责任绿，批次恢复及集中发布待完成 |
-| 3 | G2-03/04/07 CWP 冻结家族/公开维护/检查清单清理 | installed/import/CLI/help/CI 同步；不启用 raw 破坏入口 | pending |
-| 大节点 A | CWP 当前链集中责任/E2E | isolated 真实 IR PDF/英文 TXT；公开 read/有限登记/零模型 skip/loopback worker；canary 现场小对照 | pending；复用已绿 202 与旧大节点 |
-| 4 | 优先G2-06 StockWiki/G2-10 StockQA，再G2-05 RF可选工具 | 各仓独占目录/提交，MAIN集成；工具/CI/hook/默认配置/文案同改 | pending；日常全套/联网门升P0-B；本次只读调查，不在owner目录施工 |
-| 5 | 优先G2-12 CWP/FF统一latest单请求，再G2-08安装/v1收敛、G2-09能力文案 | ensure/close-gap同一资源事务、无TTL签收分叉、唯一intent与installed版本 | pending；实际latest缺件仍只回GAP，新steady旧close-gap被拒 |
+| 3 | G2-13日常Store轻初始化 → G2-01b精确来源scoped pin | 去除隐含整库检查/补种及无关root对精确批次的阻断 | pending/P0；先于R2，沿用同一G2A集中节点 |
+| 4 | G2-06 StockWiki/G2-10 StockQA日常工程门 + G2-12 CWP/FF统一latest单请求 | 各仓独占目录，MAIN接线；共享ensure事务/唯一intent、工具/CI/hook/默认配置同步 | pending/P0-B；本次外仓只读，后续隔离施工，不与owner目录重叠 |
+| 5 | G2-03/04/07 CWP旧家族/公开维护/检查清单、G2-05 RF可选工具、G2-08安装/v1、G2-09能力文案 | CLI/import/package/清单/安装及指导同步；不启用raw破坏入口 | pending/P1；在上述P0/P0-B后，不顺序恢复旧签收 |
+| 大节点 A | CWP最终写集完成后的当前链集中责任/E2E | isolated真实IR PDF/英文TXT；read/有限登记/零模型skip/loopback；现场小对照 | pending；核心子集先收口发布，复用已绿202/历史节点，不等同整个A完成 |
 | 大节点 B | 三仓离线链 + 当前消费者 + 发布 | FF→ET→CWP、RF/SW 读取；每仓对应代码 CI；保护/临时根清理 | pending；不重复付费模型 |
 | 6 | 回 R2 metadata/有限登记 → R3 → R4 → R5 | 原目标全部待办继续；G2 非缩减目标 | pending |
 
 跨仓公共接口继续为SourceRef/SourceExport v2、NarrativeRef、FF单intent和ET TXT，不以reviewer DTO、路径或共享可变DB接线。MAIN独占总PWF/生产/合入；本次三个内部子任务仅在已划分互不重叠的CWP文件实现或外仓只读调查，不代用户新建harness任务。外仓后续只在各自独立checkout施工，集成前复核最新HEAD/status并保留owner资料。
+
+施工优先顺序统一为13→01b→06/10和12→其余P1。A在本仓最终写集完成时集中验收，B在跨仓接线完成时集中验收；这些节点不是每组都跑全套。核心已发布责任包后续按实际影响补反例，不再重跑已绿长包。
 
 ## 5. 两个大节点的测试包和验收边界
 
@@ -211,4 +235,4 @@ MAIN 是唯一集成与生产变更负责人。此表是施工顺序，不是新
 
 ## Next Step
 
-**收口当前核心代码：默认steady、有效pin、机器错误、程序质量及版本化终态恢复责任/E2E→正常提交推送→精确代码CI；更新PWF真实状态。** 全G2A还含scoped pin/旧家族清理，不能用核心子集代替。下一恢复时先P0-B两仓日常门和CWP/FF latest单请求，再P1家族/工程清单、集中G2A/B，之后回R2。目标服务paused，不自动恢复旧长跑或付费批次，不把审计/核心修复冒称全面完成。
+**收口当前核心代码：默认steady、有效pin、机器错误、程序质量及版本化终态恢复责任/E2E→正常提交推送→精确代码CI；更新PWF真实状态。** 全G2A还含Store轻初始化/scoped pin/旧家族清理，不能用核心子集代替。下一恢复时先G2-13/01b及P0-B两仓日常门、CWP/FF latest单请求，再P1家族/工程清单、集中G2A/B，之后回R2。目标服务paused，不自动恢复旧长跑或付费批次，不把审计/核心修复冒称全面完成。

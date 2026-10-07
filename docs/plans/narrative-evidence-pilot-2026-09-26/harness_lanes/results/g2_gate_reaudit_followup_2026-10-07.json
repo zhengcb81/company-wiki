@@ -30,9 +30,9 @@
     {
       "id": "G2-02",
       "priority": "P0",
-      "status": "local_green_versioned_resume_in_progress",
+      "status": "local_accepted_pending_publication",
       "scope": "CWP existing AUTO errors and persistent runs",
-      "remaining": "Single nullable binding_json in existing narrative_runs, versioned terminal zero-writer recovery and bounded WAL contention responsibility test."
+      "remaining": "Core versioned terminal recovery and WAL fix accepted; G2-13 full-scan constructor split remains pending."
     },
     {
       "id": "G2-03",
@@ -133,16 +133,60 @@
       "status": "pending",
       "scope": "Current CWP latest acquisition + FF v1/v2",
       "remaining": "latest allow_download still returns GAP; close-gap requires binding/snapshot/plan/policy/expiry and rejects new no-snapshot steady catalogs; FF v2 does not bridge it. Unify existing ensure/AcquisitionBudget/single-flight with one intent, no receipt/TTL, budget shared across discovery/wait/read/subprocess."
+    },
+    {
+      "id": "G2-13",
+      "priority": "P0",
+      "status": "pending",
+      "scope": "Existing AUTO/RunStore/CatalogStore initialization",
+      "evidence": "AUTO one full-check pair/RunStore two, terminal/factory three; current CatalogStore full fingerprint seed. Counts structural, no production timing claim; same-instance budget only run SQL.",
+      "implementation": "Separate cheap current structure from explicit validate_database once-only integrity/FK; full checks only create/real migrate/explicit node; current CatalogStore no DDL/all-row seed, pending selection already supports missing state.",
+      "tests": "SQL trace counts, explicit corruption/FK/migration rollback, actual selected read/ledger failures, terminal zero-model, pending new fingerprints; same G2A node, no extra gate"
     }
   ],
   "local_evidence": {
     "default_steady_tdd": "2 real semantic failures/4 passes then89 responsibility passes6.59s",
     "historical_reader_responsibility": "72pass/2 historical failures; schema2 fixture incorrect for old canary corrected to schema1, obsolete owner AST gate removed; remainingFC701 behavior5pass1.02s",
     "effective_read_projection": "49 then50 responsibility passes; broader reader/export106passes",
-    "auto_error_semantics": "163passes, helper10realRED then22passes; version-resume follow-up not yet final",
+    "auto_error_semantics": "111passes30.43s; true zero-writer resume1pass20.10s; final deadline/fixtures78passes25.82s",
     "summary_quality": "148passes, actual configured loopback/resume1pass5.75s",
-    "ci_scope_static": "Ruff full current CI scope passed; exact current CI mypy45source files passed before final version-resume changes",
-    "scope_limit": "Core local green does not prove complete G2A, full G2, production summaries or exact new commit CI"
+    "ci_scope_static": "Final Ruff current CI and new E2E scope green; exact CI mypy45 source modules green after deadline fix",
+    "scope_limit": "Core local green does not prove complete G2A, full G2, production summaries or exact new commit CI",
+    "final_core": {
+      "initial_full_unit_checkpoint": {
+        "tests": 1877,
+        "failures": 4,
+        "errors": 0,
+        "seconds": 151.073,
+        "passed": 1873,
+        "status": "failed_before_fix"
+      },
+      "failure_causes": [
+        "three stale schema4/last-field fixtures; retain historic field position/ledger/NULL binding assertions",
+        "real verification deadline regression allowed AUTO initialization; fixed ordering and actual elapsed guard"
+      ],
+      "fix_checkpoint_agent_report": {
+        "passed": 78,
+        "seconds": 25.82,
+        "scope": "four responsibility Unit files plus actual versioned terminal CLI; not a second full Unit run",
+        "new_counterexamples": "existing AUTO bytes unchanged on preparation timeout; zero workdir"
+      },
+      "current_cli_two_languages_and_zero_model_skip": {
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "seconds": 14.389
+      },
+      "prior_concentrated_nodes": [
+        "default reader89passes6.59s; projection50 and broader106",
+        "summary148passes1.97s; configured loopback/resume1pass5.75s",
+        "AUTO111passes30.43s; last true zero-writer/foreign-worker CLI1pass20.10s"
+      ],
+      "ruff_current_ci_and_new_e2e": "passed",
+      "mypy_exact_current_ci_45_sources": "passed_before_final_deadline_fix; affected batch module rechecked by agent",
+      "paid_provider_posts": 0,
+      "real_live_source_read": "S07 153851B exact SourceReader, no writable CatalogStore"
+    }
   },
   "effects": {
     "production_policy_files_changed": 1,
@@ -152,6 +196,9 @@
     "paid_provider_posts": 0,
     "full_backup_rehearsals": 0
   },
-  "priorities": "G2 core/P0 then scoped pin + SW/StockQA daily gates + CWP/FF latest/P0-B, legacy/tool cleanup and two concentrated G2A/G2B nodes, then R2/R3/R4/R5",
-  "unchanged_protections": "Original raw, actual SHA/identity/period/publication/locator, source-only scope, current paths/ownership, finite budgets/unknown usage, one AUTO lease/generation/outbox, actual schema/types/config/credential redaction"
+  "priorities": "G2-13 -> G2-01b -> SW/StockQA daily gates and CWP/FF latest -> remaining P1 -> concentrated G2A/B -> R2/R3/R4/R5",
+  "unchanged_protections": "Original raw, actual SHA/identity/period/publication/locator, source-only scope, current paths/ownership, finite budgets/unknown usage, one AUTO lease/generation/outbox, actual schema/types/config/credential redaction",
+  "latest_reviewed_at_utc": "2026-10-07T08:55:13.092845+01:00",
+  "finding_groups": 14,
+  "core_receipt": "g2_core_implementation_acceptance_2026-10-07.json"
 }

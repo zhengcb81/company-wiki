@@ -109,6 +109,8 @@ def _failure(code: str, outcome: HandlerOutcome, detail: str) -> HandlerResult:
 
 
 def _read_error_result(error: SourceReadError) -> HandlerResult:
+    if error.reason == "catalog_unavailable":
+        return _failure("IO_TRANSIENT", HandlerOutcome.RETRYABLE, error.reason)
     if error.reason in {
         "read_policy_mismatch",
         "invalid_read_policy_pin",
@@ -124,7 +126,7 @@ def _read_error_result(error: SourceReadError) -> HandlerResult:
             "SOURCE_HASH_MISMATCH", HandlerOutcome.TERMINAL_FAILURE, error.reason
         )
     return _failure(
-        "SOURCE_UNAVAILABLE", HandlerOutcome.RETRYABLE, error.reason
+        "SOURCE_UNAVAILABLE", HandlerOutcome.TERMINAL_FAILURE, error.reason
     )
 
 

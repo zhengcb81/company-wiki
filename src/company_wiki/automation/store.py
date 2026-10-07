@@ -407,8 +407,6 @@ def _finish_target(result: HandlerResult, *, has_effects: bool) -> JobStatus:
         return JobStatus.VERIFYING if has_effects else JobStatus.SUCCEEDED
     if result.outcome is HandlerOutcome.RETRYABLE:
         return JobStatus.RETRY_WAIT
-    if result.outcome is HandlerOutcome.BLOCKED_HUMAN:
-        return JobStatus.BLOCKED_HUMAN
     return JobStatus.DEAD_LETTER
 
 
@@ -564,7 +562,7 @@ def _resolve_idempotency(
     )
 
 
-def _block_terminal_dependencies(
+def _fail_terminal_dependencies(
     connection: sqlite3.Connection,
     *,
     now: str,
@@ -572,7 +570,8 @@ def _block_terminal_dependencies(
 ) -> None:
     scope_sql = ""
     parameters: tuple[object, ...] = (
-        JobStatus.PLANNED.value, JobStatus.DEAD_LETTER.value, JobStatus.CANCELLED.value,
+        JobStatus.PLANNED.value, JobStatus.DEAD_LETTER.value,
+        JobStatus.CANCELLED.value, JobStatus.BLOCKED_HUMAN.value,
     )
     if allowed_job_ids is not None:
         scope_sql = "AND child.job_id IN (" + ",".join("?" for _ in allowed_job_ids) + ") "
@@ -582,7 +581,7 @@ def _block_terminal_dependencies(
         "parent.status AS parent_status FROM jobs child "
         "JOIN job_dependencies d ON d.job_id = child.job_id "
         "JOIN jobs parent ON parent.job_id = d.depends_on_job_id "
-        "WHERE child.status = ? AND parent.status IN (?, ?) "
+        "WHERE child.status = ? AND parent.status IN (?, ?, ?) "
         f"{scope_sql}"
         "ORDER BY child.job_id, parent.job_id",
         parameters,
@@ -597,7 +596,7 @@ def _block_terminal_dependencies(
         _transition_job_in_transaction(
             connection,
             child,
-            target=JobStatus.BLOCKED_HUMAN,
+            target=JobStatus.DEAD_LETTER,
             updated_at=now,
             error_code="DEPENDENCY_TERMINAL",
             error_detail="terminal dependencies: " + ", ".join(details),
@@ -1299,6 +1298,14 @@ class AutomationStore:
     ) -> Attempt:
         if not isinstance(result, HandlerResult):
             raise TypeError("result must be HandlerResult")
+        if result.outcome is HandlerOutcome.BLOCKED_HUMAN:
+            # Legacy callers remain decodable, but cannot create a new manual
+            # gate. Preserve the complete result/error/metrics in this attempt.
+            result = HandlerResult(
+                outcome=HandlerOutcome.TERMINAL_FAILURE, result=dict(result.result),
+                artifacts=result.artifacts, effects=result.effects,
+                metrics=result.metrics, error=result.error,
+            )
 
         def _op(conn):
             attempt, job = _require_active_attempt(
@@ -1336,7 +1343,7 @@ class AutomationStore:
         if allowed_job_ids == ():
             return ()
         def _op(conn):
-            _block_terminal_dependencies(conn, now=now, allowed_job_ids=allowed_job_ids)
+            _fail_terminal_dependencies(conn, now=now, allowed_job_ids=allowed_job_ids)
             scope_sql = ""
             parameters: tuple[object, ...] = (JobStatus.PLANNED.value, JobStatus.RETRY_WAIT.value, now)
             if allowed_job_ids is not None:

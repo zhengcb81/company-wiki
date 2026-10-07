@@ -10,7 +10,8 @@ from typing import Any, NoReturn, Protocol
 
 from .models import canonical_json, canonical_json_hash
 from company_wiki.source_catalog.narrative_evidence import (
-    SummaryValidationError, validate_summary_claim, validate_summary_identity,
+    SummaryValidationError, project_summary_quality, validate_summary_claim,
+    validate_summary_identity,
 )
 
 from .narrative_contracts import (
@@ -19,8 +20,8 @@ from .narrative_contracts import (
 )
 
 
-MODEL_REQUEST_SCHEMA = "narrative-model-request/1.2"
-NARRATIVE_PROMPT_VERSION = "1.5.1"
+MODEL_REQUEST_SCHEMA = "narrative-model-request/1.3"
+NARRATIVE_PROMPT_VERSION = "1.6.0"
 MODEL_RESPONSE_MAX_BYTES = 128 * 1024
 
 _INSTRUCTION = (
@@ -33,13 +34,14 @@ _INSTRUCTION = (
     "Rows use evidence_columns/default_*; coverage=excerpts. source_role: "
     "company_filing/management=company_statement; analyst/investor_question="
     "analyst_question/question; other=uncertain. Preserve modality. "
-    "Uncertain/locator_unstable requires needs_review=true,status=needs_review."
+    "Preserve uncertainty in claim_type/modality. Omit needs_review/status; "
+    "the program projects quality from evidence, including locator_unstable."
 )
 
 
 _CLAIM_SCHEMA: dict[str, Any] = {
     "type": "object",
-    "required": ["claim_id", "text", "evidence_ids", "claim_type", "modality", "needs_review"],
+    "required": ["claim_id", "text", "evidence_ids", "claim_type", "modality"],
     "additionalProperties": False,
     "properties": {
         "claim_id": {"type": "string", "minLength": 1},
@@ -54,7 +56,7 @@ _RESPONSE_SCHEMA: dict[str, Any] = {
     "type": "object", "required": ["draft"], "additionalProperties": False,
     "properties": {"draft": {
         "type": "object",
-        "required": ["source_id", "source_sha256", "language", "claims", "status"],
+        "required": ["source_id", "source_sha256", "language", "claims"],
         "additionalProperties": False,
         "properties": {
             "source_id": {"type": "string", "minLength": 1},
@@ -211,8 +213,9 @@ def decode_model_draft(
 
     Unknown provider extensions are never persisted. Source binding is global;
     an unsupported claim is discarded as a whole, never fixed by deleting just
-    one citation. The existing needs_review flag describes incomplete quality,
-    without a manual permission requirement or a new public wire format.
+    one citation. Public quality labels are projected after recovery from
+    evidence and claim uncertainty. Legacy model labels are optional and never
+    act as permission; the canonical public wire shape remains unchanged.
     """
     if response.prompt_version != NARRATIVE_PROMPT_VERSION:
         raise ModelResponseError("model response prompt version differs from request")
@@ -225,7 +228,8 @@ def decode_model_draft(
     if not isinstance(payload, dict) or "draft" not in payload:
         raise ModelResponseError("model response must contain a draft")
     _reject_translation(payload)
-    draft = _model_projection(payload["draft"], _RESPONSE_SCHEMA["properties"]["draft"]["required"], "summary draft")
+    draft = _model_projection(payload["draft"], list(_RESPONSE_SCHEMA["properties"]["draft"]["properties"]), "summary draft")
+    draft.setdefault("status", "draft")
     claims = draft.get("claims")
     if not isinstance(claims, list):
         raise NarrativeContractError("summary claims must be an array")
@@ -248,7 +252,8 @@ def decode_model_draft(
         if isinstance(raw, dict):
             _reject_translation(raw)
         try:
-            claim = _model_projection(raw, _CLAIM_SCHEMA["required"], "summary claim")
+            claim = _model_projection(raw, list(_CLAIM_SCHEMA["properties"]), "summary claim")
+            claim.setdefault("needs_review", False)
             ids = claim.get("evidence_ids")
             if isinstance(ids, list) and all(isinstance(value, str) for value in ids):
                 if any(value not in mapping and value not in canonical for value in ids):
@@ -271,8 +276,13 @@ def decode_model_draft(
             raise first_error
         raise NarrativeContractError("summary draft must contain at least one claim")
     draft["claims"] = retained
-    if len(retained) != len(claims):
-        draft["status"] = "needs_review"
+    projected = project_summary_quality(
+        _draft_from_dict(draft), evidence_spans=selected.evidence_spans,
+        discarded_claims=len(retained) != len(claims),
+    )
+    for claim, quality in zip(retained, projected.claims, strict=True):
+        claim["needs_review"] = quality.needs_review
+    draft["status"] = projected.status
     return draft
 
 

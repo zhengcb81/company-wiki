@@ -149,7 +149,7 @@ class SourceVersionReader:
     def _resolver_and_read_policy(
         self, expected_read_policy_sha256: str | None = None
     ) -> tuple[SourceResolver, str]:
-        """Pin activation and all root admission fields for one operation."""
+        """Pin current effective read rules for one operation."""
         policy_path = self.catalog.config.catalog_dir / "runtime_policy.json"
         policy = None
         if policy_path.exists():
@@ -157,9 +157,14 @@ class SourceVersionReader:
                 policy = load_runtime_policy(policy_path)
             except RuntimePolicyError:
                 raise SourceReadError("blocked", "runtime_policy_invalid") from None
-            current_policy_hash, _ = export_policy_2x(self.catalog.config)
-            if policy.get("policy_hash") != current_policy_hash:
-                raise SourceReadError("blocked", "runtime_policy_mismatch")
+            # Steady has no rollout authorization. Its broad RootPolicy hash
+            # is a historical observation, while current roots/admission are
+            # checked by the effective pin and again against actual bytes.
+            # Old activation snapshots retain their exact compatibility check.
+            if policy.get("schema_version") != "2.0":
+                current_policy_hash, _ = export_policy_2x(self.catalog.config)
+                if policy.get("policy_hash") != current_policy_hash:
+                    raise SourceReadError("blocked", "runtime_policy_mismatch")
         read_policy_sha256 = source_read_policy_sha256(self.catalog.config, policy)
         if expected_read_policy_sha256 is not None:
             if not isinstance(expected_read_policy_sha256, str) or not _SHA256.fullmatch(

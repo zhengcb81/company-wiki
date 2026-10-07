@@ -181,6 +181,18 @@ class Worker:
                 checkpoint = (
                     heartbeat.raise_if_failed if heartbeat is not None else lambda: None
                 )
+                if (
+                    job.job_type in {
+                        "source.narrative_select", "source.narrative_summarize",
+                        "source.narrative_verify",
+                    }
+                    and job.handler_version != spec.handler_version
+                ):
+                    raise HandlerVersionMismatchError(
+                        f"persisted handler version {job.handler_version} differs from "
+                        f"current {spec.handler_version}; create a current-version event/run "
+                        "after correcting the source/input/configuration; prior usage remains recorded"
+                    )
                 context = self._context_factory.create(
                     claimed, now=self._clock.now(), checkpoint=checkpoint
                 )
@@ -188,7 +200,12 @@ class Worker:
                     job.job_type,
                     context,
                 )
-                result, target = _classify_result(raw_result, spec, attempt.attempt_no)
+                result, target = _classify_result(
+                    raw_result, spec, attempt.attempt_no, max_attempts=job.max_attempts,
+                )
+            except HandlerVersionMismatchError as exc:
+                result = _handler_exception_result(exc, code="HANDLER_VERSION_MISMATCH")
+                target = JobStatus.DEAD_LETTER
             except Exception as exc:  # noqa: BLE001 - handler boundary
                 result = _handler_exception_result(exc)
                 target = JobStatus.DEAD_LETTER
@@ -240,7 +257,7 @@ class Worker:
 
 
 def _classify_result(
-    result: HandlerResult, spec: HandlerSpec, attempt_no: int
+    result: HandlerResult, spec: HandlerSpec, attempt_no: int, *, max_attempts: int | None = None,
 ) -> tuple[HandlerResult, JobStatus]:
     error_code = result.error.code if result.error is not None else None
     target, _classified_code = classify_outcome(
@@ -250,12 +267,11 @@ def _classify_result(
         spec.human_errors,
         spec.terminal_errors,
         attempt_no,
-        spec.default_max_attempts,
+        min(spec.default_max_attempts, max_attempts) if max_attempts is not None else spec.default_max_attempts,
     )
     desired = {
         JobStatus.SUCCEEDED: HandlerOutcome.SUCCEEDED,
         JobStatus.RETRY_WAIT: HandlerOutcome.RETRYABLE,
-        JobStatus.BLOCKED_HUMAN: HandlerOutcome.BLOCKED_HUMAN,
         JobStatus.DEAD_LETTER: HandlerOutcome.TERMINAL_FAILURE,
     }[target]
     if result.outcome is desired:
@@ -273,14 +289,18 @@ def _classify_result(
     )
 
 
-def _handler_exception_result(exc: Exception) -> HandlerResult:
+class HandlerVersionMismatchError(ValueError):
+    """A queued narrative job cannot silently acquire new handler semantics."""
+
+
+def _handler_exception_result(exc: Exception, *, code: str = "HANDLER_EXCEPTION") -> HandlerResult:
     return HandlerResult(
         outcome=HandlerOutcome.TERMINAL_FAILURE,
         result={},
         artifacts=(),
         effects=(),
         metrics=HandlerMetrics(tokens=0, cost_usd=0.0, duration_ms=0),
-        error=HandlerError(code="HANDLER_EXCEPTION", detail=str(exc)),
+        error=HandlerError(code=code, detail=str(exc)),
     )
 
 

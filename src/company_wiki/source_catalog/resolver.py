@@ -728,8 +728,8 @@ def resolver_visibility(
     snapshot: dict[str, Any],
 ) -> tuple[str, str | None, tuple[str, ...], bool]:
     """Derive (reader, current_epoch, active_cohorts, legacy_bridge_allowed)
-    from a RuntimePolicySnapshot (FC-201).  flag=false -> v1 reader, so
-    active rows are never visible (CTRL-01)."""
+    from a snapshot. Schema 2 is steady; schema 1 retains historical
+    flag/epoch/cohort visibility for compatibility."""
     projection = resolver_visibility_projection(snapshot)
     return (
         projection["reader"],
@@ -1346,12 +1346,11 @@ class SourceResolver:
         # B02: optional injected read budget (tests / caller cancellation).
         # It is consumed by ONE resolve() call — counters are per request.
         self.read_budget = read_budget
-        # FC-202: the RuntimePolicySnapshot is pinned at request start.
-        # Absent snapshot = v1 reader with the legacy bridge on (the
-        # pre-FC-201 production default); a snapshot governs reader mode,
-        # epoch, cohorts and bridge allowance (CTRL-01/02).
+        # New catalogs use steady verified facts without a rollout snapshot.
+        # Explicit schema-1 snapshots retain historical visibility semantics;
+        # the public reader validates a present snapshot before injecting it.
         if runtime_policy is None:
-            self.reader = "v1"
+            self.reader = "steady"
             self.current_epoch = None
             self.active_cohorts: tuple[str, ...] = ()
             self.legacy_bridge_allowed = True

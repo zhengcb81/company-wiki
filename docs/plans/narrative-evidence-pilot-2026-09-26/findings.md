@@ -1045,3 +1045,9 @@ S7最终发布证据：9bf25a5/CI37550268890全部步骤绿71秒，真实业务�
 R1代码66ce046已推master，精确CI37578307854全部步骤绿79秒。准备生产时发现canonical import全根扫描，现按实际效率缺口TDD添加单根relative_paths入口，保留source/metadata完整组，不hash/改未选来源，不执行missing sweep、不冒写根完整扫描水位。company_raw直接列明确原件/sidecar，不走全raw目录。首轮6签名RED及1测试夹具漏raw错误；修fixture后有限行为和契约验证。R1六测试根已恢复absent。官方两PDF流式核SHA完全相同，共9319726B网络读取、0保存，公开元数据准备有真实依据。新增执行细则已先记录。
 
 2026-10-07 R2续：真实旧canary配置仍存在，六flag中legacy_bridge关闭，导致legacy来源capture字段隐藏；人工门清理不等于运行迁移清理完成。将全入口收口、统一退役、同旧snapshot隔离复现纳入系统性步骤。AUTO同样发现全库list_jobs及终态resume无效spawn，按SQL范围与0spawn计数测试，不用删除字节验证提速。
+
+## 2026-10-07 G2最终补漏：正常构造不应整库验收
+
+八仓入口/工具/默认配置/安装技能复查共14组（G2-00至13），原G1全面收口措辞由当前G2覆盖。新增G2-13/P0：AutomationStore已有v5构造深检一轮、NarrativeRunStore两轮，终态读取或每worker启动合计三轮；失败费用报告重建RunStore又两轮。budget_snapshot同实例只有run_id查询，不混淆为每预算查询全检。CatalogStore当前schema每构造还全库fingerprint seed。结构调用链已核，未实测生产耗时；轻量schema与显式深检必须系统分层，不能仅少构造对象掩盖问题。具体写集/迁移/SQL trace/实际损坏反例写入G2实施单，pending且升P0、先于R2，不增加新的审查节点。
+
+当前核心实现默认steady、schema2有效读pin、机器终态/有界IO重试、单处摘要质量投影、版本化终态零writer/零模型恢复已经集中责任绿；读pin仍catalog-wide、G2-13和当前latest下载旧签收链、SW/StockQA日常工程门、旧公开维护/冻结家族均未完成，不能以核心绿灯宣称整个门禁清理完成。生产仅runtime小policy迁移264B，16断言/17表事实/DB/raw/owner不变；S07真实只读open153851B成功但security标签/公开日期仍R2缺口。

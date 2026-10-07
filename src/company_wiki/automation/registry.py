@@ -36,7 +36,7 @@ class HandlerSpec:
     llm: bool
     default_max_attempts: int
     retryable_errors: tuple[str, ...]
-    human_errors: tuple[str, ...]
+    human_errors: tuple[str, ...]  # Legacy constructor field; new specs leave it empty.
     terminal_errors: tuple[str, ...]
 
 
@@ -67,7 +67,7 @@ class HandlerRegistry:
 _KNOWN_SPECS: tuple[HandlerSpec, ...] = (
     HandlerSpec(
         job_type="source.narrative_select",
-        handler_version="1.0.0",
+        handler_version="1.1.0",
         input_schema=SOURCE_REVISION_EVENT_SCHEMA,
         result_schema=SELECT_RESULT_SCHEMA,
         effect_class="artifact_only",
@@ -76,8 +76,10 @@ _KNOWN_SPECS: tuple[HandlerSpec, ...] = (
         llm=False,
         default_max_attempts=3,
         retryable_errors=("IO_TRANSIENT", "STORE_BUSY", "LEASE_LOST"),
-        human_errors=("PARSER_INCOMPLETE", "SOURCE_UNAVAILABLE"),
+        human_errors=(),
         terminal_errors=(
+            "PARSER_INCOMPLETE",
+            "SOURCE_UNAVAILABLE",
             "INPUT_SCHEMA_INVALID",
             "SOURCE_HASH_MISMATCH",
             "POLICY_DENIED",
@@ -87,7 +89,7 @@ _KNOWN_SPECS: tuple[HandlerSpec, ...] = (
     ),
     HandlerSpec(
         job_type="source.narrative_summarize",
-        handler_version="1.0.0",
+        handler_version="1.1.0",
         input_schema=SOURCE_REVISION_EVENT_SCHEMA,
         result_schema=SUMMARY_RESULT_SCHEMA,
         effect_class="artifact_only",
@@ -101,8 +103,9 @@ _KNOWN_SPECS: tuple[HandlerSpec, ...] = (
             "IO_TRANSIENT",
             "LEASE_LOST",
         ),
-        human_errors=("MODEL_NOT_CONFIGURED",),
+        human_errors=(),
         terminal_errors=(
+            "MODEL_NOT_CONFIGURED",
             "INPUT_SCHEMA_INVALID",
             "DEPENDENCY_INVALID",
             "POLICY_DENIED",
@@ -122,7 +125,7 @@ _KNOWN_SPECS: tuple[HandlerSpec, ...] = (
     ),
     HandlerSpec(
         job_type="source.narrative_verify",
-        handler_version="1.0.0",
+        handler_version="1.1.0",
         input_schema=SOURCE_REVISION_EVENT_SCHEMA,
         result_schema=BUNDLE_SCHEMA,
         effect_class="knowledge_write",
@@ -131,11 +134,10 @@ _KNOWN_SPECS: tuple[HandlerSpec, ...] = (
         llm=False,
         default_max_attempts=2,
         retryable_errors=("IO_TRANSIENT", "STORE_BUSY", "LEASE_LOST"),
-        human_errors=(
+        human_errors=(),
+        terminal_errors=(
             "LOCATOR_REPLAY_FAILED",
             "SOURCE_UNAVAILABLE",
-        ),
-        terminal_errors=(
             "INPUT_SCHEMA_INVALID",
             "DEPENDENCY_INVALID",
             "SOURCE_HASH_MISMATCH",

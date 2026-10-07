@@ -102,7 +102,7 @@ def test_registry_unknown_job_type_raises():
         (
             "source.narrative_select",
             {
-                "handler_version": "1.0.0",
+                "handler_version": "1.1.0",
                 "input_schema": "source-revision-event/2.0",
                 "result_schema": "narrative-select-result/2.0",
                 "effect_class": "artifact_only",
@@ -110,8 +110,10 @@ def test_registry_unknown_job_type_raises():
                 "llm": False,
                 "default_max_attempts": 3,
                 "retryable_errors": ("IO_TRANSIENT", "STORE_BUSY", "LEASE_LOST"),
-                "human_errors": ("PARSER_INCOMPLETE", "SOURCE_UNAVAILABLE"),
+                "human_errors": (),
                 "terminal_errors": (
+                    "PARSER_INCOMPLETE",
+                    "SOURCE_UNAVAILABLE",
                     "INPUT_SCHEMA_INVALID",
                     "SOURCE_HASH_MISMATCH",
                     "POLICY_DENIED",
@@ -123,7 +125,7 @@ def test_registry_unknown_job_type_raises():
         (
             "source.narrative_summarize",
             {
-                "handler_version": "1.0.0",
+                "handler_version": "1.1.0",
                 "input_schema": "source-revision-event/2.0",
                 "result_schema": "narrative-summary-result/2.0",
                 "effect_class": "artifact_only",
@@ -136,10 +138,9 @@ def test_registry_unknown_job_type_raises():
                     "IO_TRANSIENT",
                     "LEASE_LOST",
                 ),
-                "human_errors": (
-                    "MODEL_NOT_CONFIGURED",
-                ),
+                "human_errors": (),
                 "terminal_errors": (
+                    "MODEL_NOT_CONFIGURED",
                     "INPUT_SCHEMA_INVALID",
                     "DEPENDENCY_INVALID",
                     "POLICY_DENIED",
@@ -161,7 +162,7 @@ def test_registry_unknown_job_type_raises():
         (
             "source.narrative_verify",
             {
-                "handler_version": "1.0.0",
+                "handler_version": "1.1.0",
                 "input_schema": "source-revision-event/2.0",
                 "result_schema": "narrative-bundle/2.0",
                 "effect_class": "knowledge_write",
@@ -169,11 +170,10 @@ def test_registry_unknown_job_type_raises():
                 "llm": False,
                 "default_max_attempts": 2,
                 "retryable_errors": ("IO_TRANSIENT", "STORE_BUSY", "LEASE_LOST"),
-                "human_errors": (
+                "human_errors": (),
+                "terminal_errors": (
                     "LOCATOR_REPLAY_FAILED",
                     "SOURCE_UNAVAILABLE",
-                ),
-                "terminal_errors": (
                     "INPUT_SCHEMA_INVALID",
                     "DEPENDENCY_INVALID",
                     "SOURCE_HASH_MISMATCH",

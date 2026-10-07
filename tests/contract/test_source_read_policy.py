@@ -2,7 +2,9 @@
 
 from __future__ import annotations
 
-from dataclasses import replace
+from dataclasses import asdict, replace
+import hashlib
+import json
 from pathlib import Path
 import re
 import sys
@@ -39,24 +41,19 @@ def _config(tmp_path: Path) -> CatalogConfig:
 @pytest.mark.parametrize(
     "change",
     (
-        {"privacy_class": "private_user"},
         {"max_file_size": 42},
         {"allowed_statuses": ("quarantined",)},
-        {"symlink_policy": "allow_internal"},
-        {"routes": (RouteSpec(include=("reports/**",), exclude=("secret/**",)),)},
-        {"adapter_version_range": ">=2.0"},
-        {"sidecar_suffixes": (".source.json",)},
-        {"encoding": "gb18030"},
+        {"priority": 5},
     ),
 )
-def test_read_policy_pin_covers_every_admission_dimension(tmp_path, change):
+def test_read_policy_pin_covers_effective_admission_dimensions(tmp_path, change):
     config = _config(tmp_path)
     first = source_read_policy_sha256(config, None)
     changed = replace(config, roots=(replace(config.roots[0], **change),))
     second = source_read_policy_sha256(changed, None)
     assert re.fullmatch(r"[0-9a-f]{64}", first)
     assert second != first
-    if set(change) <= {"privacy_class", "max_file_size", "allowed_statuses"}:
+    if set(change) <= {"max_file_size", "allowed_statuses"}:
         assert export_policy_2x(config)[0] == export_policy_2x(changed)[0]
 
 
@@ -137,8 +134,14 @@ def test_read_policy_pin_ignores_timestamp_and_unrelated_runtime_flags(tmp_path)
 @pytest.mark.parametrize(
     "changes",
     (
-        {"current_epoch": "epoch-b"},
-        {"active_cohorts": ("cohort-b",)},
+        {"current_epoch": "epoch-b", "flag_changes": {
+            "v2_scan_shadow": True, "v2_persist_assertions": True,
+            "v2_resolve_shadow": True, "v2_resolve_active": True,
+        }},
+        {"active_cohorts": ("cohort-b",), "flag_changes": {
+            "v2_scan_shadow": True, "v2_persist_assertions": True,
+            "v2_resolve_shadow": True, "v2_resolve_active": True,
+        }},
         {"flag_changes": {
             "v2_scan_shadow": True,
             "v2_persist_assertions": True,
@@ -156,3 +159,181 @@ def test_read_policy_pin_changes_with_effective_reader_visibility(tmp_path, chan
     assert source_read_policy_sha256(config, baseline) != source_read_policy_sha256(
         config, changed
     )
+
+
+def _indexed_reader(tmp_path, request):
+    from company_wiki.source_catalog import SourceCatalog, SourceVersionReader
+
+    config = _config(tmp_path)
+    raw = config.roots[0].path / "2025.txt"
+    raw.parent.mkdir()
+    body = b"Revenue increased through expansion of our product portfolio."
+    raw.write_bytes(body)
+    digest = hashlib.sha256(body).hexdigest()
+    raw.with_name(raw.name + ".source.json").write_text(json.dumps({
+        "schema_version": "1.0", "canonical_entity_id": "ent-acme",
+        "display_name": "Acme", "market": "US", "security_id": "ACME",
+        "document_kind": "annual_report", "source_title": "Acme annual report",
+        "fiscal_year": 2025, "period_end": "2025-12-31", "filing_date": "2026-02-20",
+        "form_type": "10-K", "provider": "sec", "provider_document_id": "doc-1",
+        "content_sha256": digest, "language": "en",
+    }), encoding="utf-8")
+    catalog = SourceCatalog(config)
+    request.addfinalizer(catalog.close)
+    catalog.scan()
+    row = catalog.reader.fetchone(
+        "SELECT d.document_id, d.primary_source_id AS source_id "
+        "FROM documents d JOIN sources s ON s.source_id=d.primary_source_id "
+        "WHERE s.content_sha256=?", (digest,),
+    )
+    assert row is not None
+    reader = SourceVersionReader(catalog)
+    ref = reader.query_ref(row["document_id"], row["source_id"], digest)
+    return catalog, reader, ref, raw, body
+
+
+def _steady_runtime(config):
+    return build_snapshot({
+        "schema_version": "2.0", "mode": "steady",
+        "policy_hash": export_policy_2x(config)[0],
+        "updated_at": "2026-10-07T00:00:00Z",
+    })
+
+
+def _batch_request(ref):
+    from company_wiki.automation.narrative_batch_request import NarrativeBatchRequest
+
+    return NarrativeBatchRequest.from_dict({
+        "schema_version": "narrative-batch-request/1", "run_id": "pin-resume",
+        "sources": [asdict(ref)], "profile": "P1", "max_seconds": 30,
+        "max_tokens": 1000, "max_cost_usd": "0.01",
+        "model": {"model_id": "test-model", "endpoint": "https://example.invalid/v1",
+                  "api_key_env": "TEST_PIN_UNUSED_KEY"},
+        "pricing": {"version": "test", "input_micro_usd_per_million_tokens": 1,
+                    "output_micro_usd_per_million_tokens": 1},
+    })
+
+
+@pytest.mark.parametrize("change", (
+    {"privacy_class": "diagnostic-label"}, {"cohort": "diagnostic-label"},
+    {"canonical_write_target": "diagnostic-label"},
+    {"adapter_id": "company_raw_v1"}, {"encoding": "gb18030"}, {"read_only": False},
+    {"routes": (RouteSpec(include=("reports/**",), exclude=("secret/**",)),)},
+))
+def test_steady_nonread_config_change_preserves_actual_open_and_batch_identity(tmp_path, request, change):
+    from company_wiki.automation.narrative_batch import build_batch_events
+
+    catalog, reader, ref, _, body = _indexed_reader(tmp_path, request)
+    policy_path = catalog.config.catalog_dir / "runtime_policy.json"
+    policy_path.write_text(json.dumps(_steady_runtime(catalog.config)), encoding="utf-8")
+    pin = reader.read_policy_sha256()
+    batch = _batch_request(ref)
+    first = build_batch_events(batch, reader, now="2026-10-07T00:00:00Z")
+    catalog.config = replace(catalog.config, roots=(replace(
+        catalog.config.roots[0], **change,
+    ),))
+    assert reader.open_version(ref, expected_read_policy_sha256=pin).data == body
+    second = build_batch_events(batch, reader, now="2026-10-07T00:00:00Z")
+    assert second.input_hash == first.input_hash
+    assert second.events == first.events
+
+
+@pytest.mark.parametrize("change", (
+    {"max_file_size": 1}, {"allowed_statuses": ("quarantined",)},
+    {"allowed_document_kinds": ("quarterly_report",)},
+))
+def test_changed_actual_admission_refuses_existing_pin_and_unpinned_open(tmp_path, request, change):
+    from company_wiki.source_catalog import SourceReadError
+
+    catalog, reader, ref, _, _ = _indexed_reader(tmp_path, request)
+    pin = reader.read_policy_sha256()
+    catalog.config = replace(catalog.config, roots=(replace(catalog.config.roots[0], **change),))
+    with pytest.raises(SourceReadError, match="read_policy_mismatch"):
+        reader.open_version(ref, expected_read_policy_sha256=pin)
+    with pytest.raises(SourceReadError, match="root_admission_denied"):
+        reader.open_version(ref)
+
+
+def test_effective_pin_upgrade_explicitly_refuses_old_full_config_pin(tmp_path, request):
+    from company_wiki.source_catalog import SourceReadError
+
+    catalog, reader, ref, _, body = _indexed_reader(tmp_path, request)
+
+    def plain(value):
+        if isinstance(value, Path):
+            return str(value.resolve(strict=False))
+        if isinstance(value, dict):
+            return {key: plain(item) for key, item in value.items()}
+        if isinstance(value, (tuple, list)):
+            return [plain(item) for item in value]
+        return value
+
+    old_payload = {"schema_version": "1.0", "catalog_config": plain(asdict(catalog.config)),
+                   "runtime_read_activation": None}
+    old_pin = hashlib.sha256(json.dumps(
+        old_payload, ensure_ascii=False, sort_keys=True, separators=(",", ":"), allow_nan=False,
+    ).encode("utf-8")).hexdigest()
+    with pytest.raises(SourceReadError, match="read_policy_mismatch"):
+        reader.open_version(ref, expected_read_policy_sha256=old_pin)
+    new_pin = reader.read_policy_sha256()
+    assert new_pin != old_pin
+    assert reader.open_version(ref, expected_read_policy_sha256=new_pin).data == body
+
+
+def test_labels_do_not_disable_actual_byte_verification(tmp_path, request):
+    from company_wiki.source_catalog import SourceReadError
+
+    catalog, reader, ref, raw, body = _indexed_reader(tmp_path, request)
+    pin = reader.read_policy_sha256()
+    catalog.config = replace(catalog.config, roots=(replace(
+        catalog.config.roots[0], privacy_class="private_user",
+    ),))
+    raw.write_bytes(b"x" * len(body))
+    with pytest.raises(SourceReadError, match="content_sha256_mismatch"):
+        reader.open_version(ref)
+    assert reader.read_policy_sha256() == pin
+
+
+def test_steady_effective_rules_still_refuse_changed_root_with_old_pin(tmp_path, request):
+    from company_wiki.source_catalog import SourceReadError
+
+    catalog, reader, ref, _, _ = _indexed_reader(tmp_path, request)
+    (catalog.config.catalog_dir / "runtime_policy.json").write_text(
+        json.dumps(_steady_runtime(catalog.config)), encoding="utf-8",
+    )
+    pin = reader.read_policy_sha256()
+    catalog.config = replace(catalog.config, roots=(replace(
+        catalog.config.roots[0], path=tmp_path / "unregistered-lake",
+    ),))
+    with pytest.raises(SourceReadError, match="read_policy_mismatch"):
+        reader.open_version(ref, expected_read_policy_sha256=pin)
+    with pytest.raises(SourceReadError, match="no_verified_location"):
+        reader.open_version(ref)
+
+
+def test_steady_runtime_snapshot_hash_is_still_verified(tmp_path, request):
+    from company_wiki.source_catalog import SourceReadError
+
+    catalog, reader, _, _, _ = _indexed_reader(tmp_path, request)
+    snapshot = _steady_runtime(catalog.config)
+    snapshot["policy_hash"] = "a" * 64  # do not rebuild snapshot hash
+    (catalog.config.catalog_dir / "runtime_policy.json").write_text(
+        json.dumps(snapshot), encoding="utf-8",
+    )
+    with pytest.raises(SourceReadError, match="runtime_policy_invalid"):
+        reader.read_policy_sha256()
+
+
+def test_legacy_runtime_keeps_full_rootpolicy_binding(tmp_path, request):
+    from company_wiki.source_catalog import SourceReadError
+
+    catalog, reader, _, _, _ = _indexed_reader(tmp_path, request)
+    (catalog.config.catalog_dir / "runtime_policy.json").write_text(
+        json.dumps(_runtime_snapshot(catalog.config)), encoding="utf-8",
+    )
+    reader.read_policy_sha256()
+    catalog.config = replace(catalog.config, roots=(replace(
+        catalog.config.roots[0], cohort="changed-old-cohort",
+    ),))
+    with pytest.raises(SourceReadError, match="runtime_policy_mismatch"):
+        reader.read_policy_sha256()

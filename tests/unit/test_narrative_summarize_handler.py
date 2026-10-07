@@ -351,9 +351,8 @@ def test_failed_summary_persists_a_static_contract_rule_without_provider_values(
 
 @pytest.mark.parametrize("role,flags,rule", [
     ("analyst", (), "CLAIM_ROLE"),
-    ("company_filing", ("locator_unstable",), "LOCATOR_REVIEW_STATUS"),
 ])
-def test_failed_summary_role_and_quality_rules_remain_failures_with_diagnostics(role, flags, rule):
+def test_failed_summary_role_rules_remain_failures_with_diagnostics(role, flags, rule):
     result, _, _ = _run(_selection(role=role, quality_flags=flags), model=ReplayModel())
     assert result.outcome is HandlerOutcome.TERMINAL_FAILURE
     assert result.error is not None and result.error.code == "SUMMARY_INVALID"
@@ -548,11 +547,10 @@ def test_summarize_handler_rejects_model_path_leak_and_keeps_only_hash() -> None
     assert raw.effects == ()
 
 
-@pytest.mark.parametrize("case", ["unknown_evidence", "role", "blank", "unstable"])
+@pytest.mark.parametrize("case", ["unknown_evidence", "role", "blank"])
 def test_summarize_handler_rejects_invalid_summary_claims(case: str) -> None:
     role = "analyst" if case == "role" else "company_filing"
-    flags = ("locator_unstable",) if case == "unstable" else ()
-    selected = _selection(role=role, quality_flags=flags)
+    selected = _selection(role=role)
     overrides: dict[str, Any] = {}
     if case == "unknown_evidence":
         overrides["claims"] = [

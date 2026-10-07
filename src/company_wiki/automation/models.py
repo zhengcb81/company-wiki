@@ -28,7 +28,7 @@ class JobStatus(str, Enum):
     RUNNING = "running"
     VERIFYING = "verifying"
     RETRY_WAIT = "retry_wait"
-    BLOCKED_HUMAN = "blocked_human"
+    BLOCKED_HUMAN = "blocked_human"  # Historical records only; new work uses machine failures.
     DEAD_LETTER = "dead_letter"
     CANCELLED = "cancelled"
     SUCCEEDED = "succeeded"
@@ -37,7 +37,7 @@ class JobStatus(str, Enum):
 class HandlerOutcome(str, Enum):
     SUCCEEDED = "succeeded"
     RETRYABLE = "retryable"
-    BLOCKED_HUMAN = "blocked_human"
+    BLOCKED_HUMAN = "blocked_human"  # Decode historical results without rewriting their usage.
     TERMINAL_FAILURE = "terminal_failure"
 
 
@@ -64,19 +64,17 @@ class RuntimeState(str, Enum):
 
 JOB_STATUS_TRANSITIONS: dict[JobStatus, set[JobStatus]] = {
     JobStatus.DETECTED: {JobStatus.PLANNED, JobStatus.CANCELLED},
-    JobStatus.PLANNED: {JobStatus.READY, JobStatus.BLOCKED_HUMAN, JobStatus.CANCELLED},
+    JobStatus.PLANNED: {JobStatus.READY, JobStatus.DEAD_LETTER, JobStatus.CANCELLED},
     JobStatus.READY: {JobStatus.LEASED, JobStatus.CANCELLED},
     JobStatus.LEASED: {JobStatus.RUNNING, JobStatus.READY},
     JobStatus.RUNNING: {
         JobStatus.VERIFYING,
         JobStatus.RETRY_WAIT,
-        JobStatus.BLOCKED_HUMAN,
         JobStatus.DEAD_LETTER,
     },
     JobStatus.VERIFYING: {
         JobStatus.SUCCEEDED,
         JobStatus.RETRY_WAIT,
-        JobStatus.BLOCKED_HUMAN,
         JobStatus.DEAD_LETTER,
     },
     JobStatus.RETRY_WAIT: {JobStatus.READY, JobStatus.DEAD_LETTER},

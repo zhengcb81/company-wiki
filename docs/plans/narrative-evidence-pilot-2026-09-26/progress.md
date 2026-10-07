@@ -1276,3 +1276,15 @@ aa52cbd82b5f21eea54929cadab520f16a0a9df9正常commit/pre-push绿并推master，�
 R1代码66ce046已推master，精确CI37578307854全部步骤绿79秒。准备生产时发现canonical import全根扫描，现按实际效率缺口TDD添加单根relative_paths入口，保留source/metadata完整组，不hash/改未选来源，不执行missing sweep、不冒写根完整扫描水位。company_raw直接列明确原件/sidecar，不走全raw目录。首轮6签名RED及1测试夹具漏raw错误；修fixture后有限行为和契约验证。R1六测试根已恢复absent。官方两PDF流式核SHA完全相同，共9319726B网络读取、0保存，公开元数据准备有真实依据。新增执行细则已先记录。
 
 R2系统性节点：有限登记与全库发现分离，三adapter不重复算SHA，sidecar SHA变更不能绕缓存；AUTO按SQL范围查任务，终态同run不spawn。steady2.0退役六flag/epoch/cohort，保留16条已生效及legacy verified事实，补旧capture且SHA不符/未生效断言不进入。202责任项pass/64.81秒（含两真实融资PDF与配置三provider本地HTTP，不是付费供应商）；全部写集Ruff绿/新模块mypy2绿。14测试根恢复absent，移除121909495B临时副本，不计生产空间收益；生产DB与两配置完整SHA保持。当前代码待提交/精确CI，现场旧canary未迁移，不将R2生产步骤标完成。
+
+## 2026-10-07 G2核心收口大节点与最终补漏
+
+目标服务实读paused，本次明确审计任务继续，不自动启动R2/R3/付费批次。最终结构审计新增G2-13/P0 Store构造隐含整库深检/seed，14组和scoped pin均已写主计划/实施细则/README/findings，只有两个G2大节点。外仓本次零写，保护owner及原件。
+
+源文件分工全部freeze后，本次一次全Unit大节点1873pass/4fail/151.21秒；三项当前schema5/追加binding字段后旧测试仍写死4/末字段，一项真实回归：准备验证阶段超时后先初始化AUTO。交原AUTO线按责任修复，保留“超时不能初始化/物化任务”的负例；不删失败测试、不会以放宽deadline凑绿。全CI范围Ruff及实际CI命令45源mypy、diffcheck在该节点前绿，最终状态以修复和精确代码CI为准，不重复全Unit长测。
+
+协作记录：文档提交294cacf在AUTO线仍运行时触发pre-commit临时stash，2秒后正常恢复；子线实读确认源码完整、当时无测试竞态。此为协调疏漏，后续源码提交必须待全部写者freeze。新增文档读取一次误猜all_pwf文件名不存在，后改rg --files定位真实implementation文件，无资料写入；不再靠猜路径重试。
+
+最终修复已freeze：4项有效RED4fail/46pass→四责任文件及实际版本恢复CLI78pass/25.82秒；补existing AUTO超时负例、原库字节保持、work不创建。先纯来源事实/实际SHA/receipt/deadline，之后访问AUTO；恢复复用同轮事实，不二次准备。schema5三旧fixture仍保留旧字段位置/旧owner未绑定/全部历史账/binding NULL反例。MAIN当前真实CLI双语言+零模型skip2pass/14.40秒，最终CI范围Ruff绿；测试未删、deadline未放宽，全Unit仅首轮一次，后续精确CI才证明整套最终绿。
+
+四主PWF只读交叉审查修正恢复顺序/paused与历史active冲突、R2重复施工文字，并补齐01b版本迁移、SW实际framework文件/CWP入口/CI/hook清单/两安装副本同步写集；commit仅静态，N4历史节点不复跑。本轮另有PowerShell rg路径通配符无效、默认沙箱读自身tmp拒绝、gh不在PATH、benchmark local.json未创建的检查失误，均未写生产；后续用-g目录匹配、实际OS账号和公开GitHub Actions API，不创建本机根配置。不将API/工具缺失当项目数据错误。

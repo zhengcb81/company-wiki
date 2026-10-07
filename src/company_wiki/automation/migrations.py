@@ -23,12 +23,13 @@ import functools
 import hashlib
 import json
 import sqlite3
+import time
 from collections.abc import Callable
 from dataclasses import dataclass
 from pathlib import Path
 
 
-SCHEMA_VERSION = 4
+SCHEMA_VERSION = 5
 
 EXPECTED_TABLES_V1 = frozenset(
     {
@@ -271,6 +272,10 @@ _DDL_V4_STATEMENTS: tuple[str, ...] = (
              (typeof(last_runtime_generation)='integer' AND last_runtime_generation>=1))""",
 )
 
+_DDL_V5_STATEMENTS: tuple[str, ...] = (
+    "ALTER TABLE narrative_runs ADD COLUMN binding_json TEXT",
+)
+
 
 # --------------------------------------------------------------------------- #
 # Migration errors (stable code strings; original exceptions chained).
@@ -378,9 +383,13 @@ def _ensure_sqlite_file(db_path: Path) -> None:
 # --------------------------------------------------------------------------- #
 # Connection helpers.
 # --------------------------------------------------------------------------- #
-def _configure_connection(connection: sqlite3.Connection, *, read_only: bool) -> None:
+def _configure_connection(connection: sqlite3.Connection, *, read_only: bool,
+                          busy_timeout_ms: int = 5000) -> None:
     connection.execute("PRAGMA foreign_keys = ON")
-    connection.execute("PRAGMA busy_timeout = 5000")
+    if busy_timeout_ms == 5000:
+        connection.execute("PRAGMA busy_timeout = 5000")
+    else:
+        connection.execute(f"PRAGMA busy_timeout = {busy_timeout_ms}")
     if not read_only:
         connection.execute("PRAGMA journal_mode = WAL")
         connection.execute("PRAGMA synchronous = FULL")
@@ -392,23 +401,38 @@ def _open_connection(db_path: Path) -> sqlite3.Connection:
     # race the first WAL switch and raise ``database is locked``.  Because WAL
     # mode is persisted in the database header, once a concurrent initializer
     # completes the switch our retried ``PRAGMA journal_mode = WAL`` is a
-    # no-op.  Re-open on a lock failure instead of raising (M14 contract).
-    for attempt in range(3):
+    # no-op. Yield bounded time so the peer can finish; three immediate retries
+    # raced the same lock. One total deadline also bounds SQLite's busy waits.
+    deadline = time.monotonic() + _CONNECT_TIMEOUT_S
+    while True:
+        remaining = max(0.001, deadline - time.monotonic())
         connection = sqlite3.connect(
-            str(db_path), timeout=_CONNECT_TIMEOUT_S, isolation_level=None
+            str(db_path), timeout=remaining, isolation_level=None
         )
         connection.row_factory = sqlite3.Row
         try:
-            _configure_connection(connection, read_only=False)
+            _configure_connection(connection, read_only=False,
+                                  busy_timeout_ms=max(1, int(remaining * 1000)))
             return connection
         except sqlite3.OperationalError as exc:
             connection.close()
             message = str(exc).lower()
-            if "database is locked" not in message:
+            error_code = getattr(exc, "sqlite_errorcode", None)
+            locked = (error_code is not None and (error_code & 255) in
+                      {sqlite3.SQLITE_BUSY, sqlite3.SQLITE_LOCKED})
+            if not locked and not any(term in message for term in (
+                "database is locked", "database table is locked", "database schema is locked",
+            )):
                 raise
-            if attempt == 2:
+            remaining = deadline - time.monotonic()
+            if remaining <= 0:
                 raise
-    raise RuntimeError("unreachable: connection open loop always returns or raises")
+            time.sleep(min(0.01, remaining))
+            if time.monotonic() >= deadline:
+                raise
+        except BaseException:
+            connection.close()
+            raise
 
 
 def _open_readonly_connection(db_path: Path) -> sqlite3.Connection:
@@ -494,23 +518,26 @@ def _read_structure(
     return structure
 
 
-@functools.lru_cache(maxsize=4)
+@functools.lru_cache(maxsize=5)
 def _expected_structure(version: int) -> dict:
     connection = sqlite3.connect(":memory:")
     connection.row_factory = sqlite3.Row
     try:
         for statement in _DDL_V1_STATEMENTS:
             connection.execute(statement)
-        if version in (2, 3, 4):
+        if version in (2, 3, 4, 5):
             for statement in _DDL_V2_STATEMENTS:
                 connection.execute(statement)
             tables = EXPECTED_TABLES_V2
-            if version in (3, 4):
+            if version in (3, 4, 5):
                 for statement in _DDL_V3_STATEMENTS:
                     connection.execute(statement)
                 tables = EXPECTED_TABLES
-                if version == 4:
+                if version in (4, 5):
                     for statement in _DDL_V4_STATEMENTS:
+                        connection.execute(statement)
+                if version == 5:
+                    for statement in _DDL_V5_STATEMENTS:
                         connection.execute(statement)
         elif version == 1:
             tables = EXPECTED_TABLES_V1
@@ -590,7 +617,7 @@ def _tables_for_version(version: int) -> frozenset[str]:
         return EXPECTED_TABLES_V1
     if version == 2:
         return EXPECTED_TABLES_V2
-    if version in (3, 4):
+    if version in (3, 4, 5):
         return EXPECTED_TABLES
     raise ValueError(f"unsupported schema version: {version}")
 
@@ -637,7 +664,7 @@ def _classify_existing(db_path: Path) -> str:
         tables = _user_tables(connection)
         if version == SCHEMA_VERSION:
             return f"v{version}"
-        if version in (1, 2, 3):
+        if version in (1, 2, 3, 4, 5):
             _require_expected_structure(connection, version=version)
             return f"v{version}"
         unknown = [name for name in tables if name not in EXPECTED_TABLES_V1]
@@ -716,7 +743,14 @@ def _apply_write_migration(
             for statement in _DDL_V4_STATEMENTS:
                 _execute_statement(connection, statement)
             connection.execute("PRAGMA user_version = 4")
+            version = 4
             applied_versions.append(4)
+        if version == 4:
+            _require_expected_structure(connection, version=4)
+            for statement in _DDL_V5_STATEMENTS:
+                _execute_statement(connection, statement)
+            connection.execute("PRAGMA user_version = 5")
+            applied_versions.append(5)
     except sqlite3.OperationalError as exc:
         raise MigrationExecutionError(
             f"DDL execution failed and was rolled back: {exc}"
@@ -734,12 +768,13 @@ def _apply_write_migration(
 def migrate_database(
     db_path: Path, *, backup_hook: BackupHook | None = None
 ) -> MigrationReport:
-    """Create or validate the automation database at schema v4.
+    """Create or validate the automation database at schema v5.
 
-    A new file or empty v0 database applies v1 through v4 in one transaction. A
+    A new file or empty v0 database applies v1 through v5 in one transaction. A
     frozen, valid v1/v2/v3 database requires a successful explicit backup hook before
-    it is upgraded in one transaction. Existing v4 databases are validated
-    read-only.
+    it is upgraded in one transaction. The v4-to-v5 nullable binding column is
+    additive and atomic, so it needs no full database backup or human receipt.
+    Existing v5 databases are validated read-only.
     """
     db_path = _require_valid_path_object(db_path)
     _require_writable_target(db_path)
@@ -754,16 +789,16 @@ def migrate_database(
     else:
         classification = "new"
 
-    if classification == "v4":
+    if classification == "v5":
         return _validate_current_readonly(db_path)
 
-    from_version = {"v1": 1, "v2": 2, "v3": 3}.get(classification, 0)
+    from_version = {"v1": 1, "v2": 2, "v3": 3, "v4": 4}.get(classification, 0)
     if classification in {"v1", "v2", "v3"} and backup_hook is None:
-        raise BackupError(f"v{from_version} to v4 upgrade requires an explicit backup hook")
+        raise BackupError(f"v{from_version} to v5 upgrade requires an explicit backup hook")
     backup_path_str = _perform_backup(
         db_path,
         from_version=from_version,
-        pre_existing=(classification in {"v0_empty", "v1", "v2", "v3"}),
+        pre_existing=(classification in {"v0_empty", "v1", "v2", "v3", "v4"}),
         backup_hook=backup_hook,
     )
 
@@ -796,7 +831,7 @@ def validate_database(db_path: Path) -> SchemaReport:
                 f"user_version {version} is newer than supported {SCHEMA_VERSION}"
             )
         tables = _user_tables(connection)
-        if version in (1, 2, 3, 4):
+        if version in (1, 2, 3, 4, 5):
             _require_expected_structure(connection, version=version)
             fingerprint = _fingerprint(connection, version=version)
         else:  # uninitialized v0

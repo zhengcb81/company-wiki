@@ -1,8 +1,14 @@
-"""Full local read-policy fingerprint for path-independent v2 consumers.
+"""Versioned effective read identity for path-independent consumers.
 
-RootPolicy 2.x is an existing cross-project wire contract.  Its hash excludes
-some active admission fields, so a separate pin covers every config field and
-the runtime activation snapshot without changing that older contract.
+Schema 2 pins the current read location, selection and admission rules.
+Compatibility/privacy labels, discovery-only settings and write targets do
+not govern an already registered read and cannot invalidate it. RootPolicy
+remains a separate wire export; its broad diagnostic hash is not another
+permission inside this fingerprint.
+
+The schema change deliberately produces new pins. Existing runs carrying a
+schema 1 digest are refused by the reader's ordinary read_policy_mismatch;
+their persisted payloads, artifacts and usage are never silently re-signed.
 """
 
 from __future__ import annotations
@@ -11,49 +17,74 @@ import hashlib
 import json
 import re
 from collections.abc import Mapping
-from dataclasses import asdict
 from pathlib import Path
 from typing import Any
 
-from .models import CatalogConfig
+from .models import CatalogConfig, RootSpec
+from .policy import _effective_reusable
 from .runtime_policy import resolver_visibility_projection
 
 
-READ_POLICY_FINGERPRINT_SCHEMA_VERSION = "1.0"
+READ_POLICY_FINGERPRINT_SCHEMA_VERSION = "2.0"
 _SHA256 = re.compile(r"[0-9a-f]{64}\Z")
 
 
-def _plain(value: Any) -> Any:
-    if isinstance(value, Path):
-        return str(value.resolve(strict=False))
-    if isinstance(value, Mapping):
-        return {str(key): _plain(item) for key, item in value.items()}
-    if isinstance(value, (tuple, list)):
-        return [_plain(item) for item in value]
-    return value
+def _path_identity(value: Path) -> str:
+    return str(value.resolve(strict=False))
+
+
+def _root_read_policy(root: RootSpec, config: CatalogConfig) -> dict[str, Any]:
+    """Project rules used by the reader/resolver, not unexecuted declarations.
+
+    Path/ranking/kind/reusability select registered locations; kinds, status and
+    size are enforced again during open. Adapter/routes configure discovery,
+    not reads of an indexed version. Format/ownership declarations without
+    current reader consumers stay in config but do not manufacture permission.
+    Real path containment, byte SHA, source role/version, metadata and locator
+    validation remain enforced in their existing responsible layers.
+    """
+    return {
+        "root_id": root.root_id,
+        "path": _path_identity(root.path),
+        "kind": root.kind,
+        "priority": root.priority,
+        "reusable_for_filing": _effective_reusable(root, config),
+        "allowed_document_kinds": sorted(set(root.allowed_document_kinds)),
+        "allowed_statuses": sorted(set(root.allowed_statuses)),
+        "max_file_size": root.max_file_size,
+    }
+
+
+def _runtime_read_policy(snapshot: Mapping[str, Any] | None) -> dict[str, Any]:
+    if snapshot is None:
+        return {"reader": "steady", "current_epoch": None, "active_cohorts": (),
+                "legacy_bridge_allowed": True}
+    snapshot_digest = snapshot.get("snapshot_sha256")
+    if not isinstance(snapshot_digest, str) or not _SHA256.fullmatch(snapshot_digest):
+        raise ValueError("runtime snapshot must carry a valid SHA-256")
+    visibility = resolver_visibility_projection(dict(snapshot))
+    # Only the historical v2 reader filters assertions by epoch/cohort.
+    # The steady reader and v1 legacy reader do not use those rollout labels.
+    if visibility["reader"] != "v2":
+        visibility["current_epoch"] = None
+        visibility["active_cohorts"] = ()
+    else:
+        visibility["active_cohorts"] = tuple(sorted(set(visibility["active_cohorts"])))
+    return visibility
 
 
 def source_read_policy_sha256(
     config: CatalogConfig, runtime_snapshot: Mapping[str, Any] | None
 ) -> str:
-    """Hash root admission plus only runtime fields that affect source reads."""
+    """Hash effective read rules, excluding compatibility and write labels."""
     if not isinstance(config, CatalogConfig):
         raise TypeError("config must be CatalogConfig")
-    if runtime_snapshot is None:
-        activation = None
-    else:
-        snapshot_digest = runtime_snapshot.get("snapshot_sha256")
-        if not isinstance(snapshot_digest, str) or not _SHA256.fullmatch(snapshot_digest):
-            raise ValueError("runtime snapshot must carry a valid SHA-256")
-        activation = {
-            "schema_version": runtime_snapshot.get("schema_version"),
-            "policy_hash": runtime_snapshot.get("policy_hash"),
-            "resolver_visibility": resolver_visibility_projection(dict(runtime_snapshot)),
-        }
     payload = {
         "schema_version": READ_POLICY_FINGERPRINT_SCHEMA_VERSION,
-        "catalog_config": _plain(asdict(config)),
-        "runtime_read_activation": activation,
+        "catalog": _path_identity(config.database_path),
+        "roots": [_root_read_policy(root, config)
+                  for root in sorted(config.roots, key=lambda root: root.root_id)],
+        "runtime_read_visibility": _runtime_read_policy(runtime_snapshot),
     }
     canonical = json.dumps(
         payload, ensure_ascii=False, sort_keys=True, separators=(",", ":"),

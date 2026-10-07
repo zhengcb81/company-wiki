@@ -381,7 +381,7 @@ def test_s17_get_nonexistent_returns_none_no_creation(tmp_path):
     assert store.get_effect("nonexistent") is None
     # No data created — schema report shows empty tables.
     report = store.schema_report()
-    assert report.user_version == 4
+    assert report.user_version == 5
 
 
 # --------------------------------------------------------------------------- #

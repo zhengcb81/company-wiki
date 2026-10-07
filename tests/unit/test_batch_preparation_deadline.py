@@ -10,7 +10,8 @@ from company_wiki.source_contract import source_id_for_sha256
 
 
 @pytest.mark.parametrize('spent_in', ['configuration', 'catalog', 'metadata', 'language', 'verification'])
-def test_expired_preparation_never_starts_next_source_or_materializes_jobs(tmp_path, monkeypatch, spent_in):
+@pytest.mark.parametrize('existing_auto', [False, True])
+def test_expired_preparation_never_starts_next_source_or_materializes_jobs(tmp_path, monkeypatch, spent_in, existing_auto):
     module = _module()
     clock = SimpleNamespace(now=10.0)
     body = b'Full Conference Call Transcript\nCEO: We launched a new product.\n'
@@ -20,6 +21,11 @@ def test_expired_preparation_never_starts_next_source_or_materializes_jobs(tmp_p
     raw['sources'].append({**raw['sources'][0], 'document_id': 'doc-b'})
     request = type(_request()).from_dict(raw)
     observed = SimpleNamespace(queries=[], opens=[], created=False, closed=False)
+    auto_path = tmp_path / 'auto.db'
+    if existing_auto:
+        from company_wiki.automation.store import AutomationStore
+        AutomationStore(auto_path)
+    auto_before = auto_path.read_bytes() if auto_path.exists() else None
 
     class ExpiringReader(SparseMetadataReader):
         def query_ref(self, *args):
@@ -72,4 +78,5 @@ def test_expired_preparation_never_starts_next_source_or_materializes_jobs(tmp_p
     assert observed.opens == (['doc-a'] if spent_in in {'language','verification'} else [])
     assert not observed.created or observed.closed
     assert spent_in != 'configuration' or not observed.created
-    assert not (tmp_path/'auto.db').exists() and not (tmp_path/'work').exists()
+    assert (auto_path.read_bytes() if auto_path.exists() else None) == auto_before
+    assert not (tmp_path/'work').exists()

@@ -1,0 +1,57 @@
+{
+  "schema_version": "g2-current-code-live-reader/1",
+  "status": "passed_local_unpublished_code",
+  "source_ref": {
+    "document_id": "urn:company-wiki:document:sha256:221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+    "source_id": "urn:company-wiki:source:sha256:221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+    "content_sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+    "byte_size": 153851,
+    "mime_type": "application/pdf",
+    "schema_version": "2.0"
+  },
+  "read_policy_sha256": "072c80940630d52f0abe706d2f092c5f8ca1ed5c1b5ca3df9d94f5c0bdb5a270",
+  "source_description": {
+    "document_id": "urn:company-wiki:document:sha256:221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+    "source_id": "urn:company-wiki:source:sha256:221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+    "content_sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+    "byte_size": 153851,
+    "mime_type": "application/pdf",
+    "title": "万润股份：投资者关系活动记录表20260515",
+    "document_kind": "investor_relations",
+    "published_date": null,
+    "source_url": null,
+    "retrieved_at": null,
+    "collector_name": null,
+    "collector_version": null,
+    "canonical_entity_id": null,
+    "display_name": null,
+    "market": "CN",
+    "security_id": "万润股份",
+    "fiscal_year": null,
+    "fiscal_period": null,
+    "period_end": null,
+    "form_type": null,
+    "provider": null,
+    "provider_document_id": null,
+    "language": null
+  },
+  "database_fact_unchanged": {
+    "sha256": "0081ee5c3daf85abd71253e6069d08b1cdde46fe216326c10f0bf897a6a6bb62",
+    "size": 222408704,
+    "mtime_ns": 1791248158420833300
+  },
+  "S07_raw_fact_unchanged": {
+    "sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+    "size": 153851,
+    "mtime_ns": 1779228233262998600
+  },
+  "runtime_policy_fact_unchanged": {
+    "sha256": "722f8344ee3764609ff51fda6109334b873fb26846f000934d49437269ee96f6",
+    "size": 264,
+    "mtime_ns": 1791357126509879300
+  },
+  "catalog_store_constructed": false,
+  "paid_provider_posts": 0,
+  "production_write_statements": 0,
+  "scope": "S07 actual raw through new exact SourceReader; no metadata correction, extraction/model/final publication claim"
+}
