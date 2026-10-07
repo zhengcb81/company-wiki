@@ -1,6 +1,12 @@
 # Findings：当前事实与待验证项
 
-## 当前交接：审计收口与真实剩余（2026-10-07）
+## 最新：三个独立施工包（2026-10-07）
+
+目标服务实际active。按用户请求只读复核SW9f552a6/StockQA6a9ff138/RFe241389的工程工具、工作树与caller后，写出[并行总包](harness_lanes/g2_parallel_packages_2026-10-07.md)及三个完整单卡：SW日常检查、StockQA本地/CI/hook/workflow、RF可选工具。各独占worktree，ready可同时派发，未代用户启动或写外仓；MAIN继续G2-13→01b→12，共享PWF/生产/并线由MAIN负责。
+
+复核新增：SW默认workspace会落生产root，必须显式环境/--root并冻结CWP93ac5a5代码到自身scratch；StockQA security/release/docs有额外重复/指标门，真实import logger写logs需独立cwd；RF release_checklist只匹配FAILED不看返回2，旧质量工具读取coverage常量，scanner有实际caller需保留API。均已写入单卡和G2实施单，未添加额外人工审批。三卡各一集中节点，真实失败仍非零、低指标诊断、offline/raw/生产零写与临时根恢复；原owner资料保留。下方paused为之前时点，当前状态以此节/task_plan为准。
+
+## 上一轮交接：审计收口与真实剩余（历史时点，2026-10-07）
 
 八仓现行入口/配置/工程工具/两安装技能全面机制审计完成，14组G2漏项及01b范围问题均写入[G2详细实施单](gate_simplification_reaudit_2026-10-07.md)。当前核心代码93ac5a5正常推master，精确CI37590638806 attempt1/job112691017160全部步骤成功，job90秒；默认steady、有效字段pin、机器错误/有界IO、派生质量、版本化终态零writer/零model恢复已发布。首轮全Unit1873pass/4fail含一个真实deadline回归，TDD修复及实际恢复78pass、双语言/skip实际CLI2pass；最终远端全Unit/短合同绿，未删除真正失败反例。
 

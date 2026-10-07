@@ -1,6 +1,14 @@
 # Progress：激进简化实施
 
-## 当前交接：2026-10-07 G2审计与核心发布已收口
+## 最新：G2三个并行施工包已准备（2026-10-07）
+
+实读目标active，三仓当前基线/owner/caller已核。新增[并行总包](harness_lanes/g2_parallel_packages_2026-10-07.md)及SW/StockQA/RF三卡，独占根互不包含、各仓写集/接口/RED→GREEN/集中测试/清理/交接/提交要求完整，用户现在可分别交harness。未代用户启动，未创建外部worktree、未跑长测或付费、未写外仓/生产/raw；仅本仓planning文档变化，source_acquisition.yaml owner修改保持不stage。
+
+MAIN继续13轻初始化/显式深检分离TDD，再01b精确读pin和12 latest统一请求；卡准备不替代实施/验收/并线。G2实施单、总task_plan/README/并行与全部PWF导航同步，原已绿节点不重做、旧外包不重派、各大节点无额外人工签收。最新active覆盖下方历史paused记录。
+
+文档检查：11份本轮计划、104个本地链接、三工作树根互不包含及三分支基线均通过；git diff --check通过。owner配置SHA仍3609e707466eeb3e0f685e14f2637c6afa39ba900edef1be4814433a43300a01。本轮只提交计划文档，正常静态commit/短push执行，不重复源码CI或已绿测试。
+
+## 上一轮交接：G2审计与核心发布已收口（历史时点，2026-10-07）
 
 核心93ac5a534e24ecbf9e1fc873f88bd106278f2fd6已正常commit/push；精确CI37590638806 attempt1/job112691017160全步骤success，07:57:58Z→07:59:28Z共90秒。正常静态commit和短pre-push绿；最终远端全Unit和短合同绿。本轮全面机制审计八仓/14组及scoped pin，六主PWF/审计补充/核心/现场/精确CI收据已同步，不冒称whole G2A或whole G2完成。
 

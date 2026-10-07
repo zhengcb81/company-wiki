@@ -2,7 +2,9 @@
 
 **状态：审计完成；实施 in_progress。优先级：P0，先于 R2 生产来源准备、R3 摘要运行和 R4 可选去重。**
 
-这是 2026-10-07 用户“全面审查、查缺补漏、加到 PWF 并提高优先级”的实际施工入口。G1 的已发布成果继续有效，但其“约定范围完成”不能代表所有遗留机制已清空。本次按用户明确的审计补漏任务推进；目标服务实读为 paused，旧文档的 active 文字不代表已恢复。下一次恢复后的顺序仍为 G2→R2→R3→R4→R5，不增加角色、人工签收、授权文件或逐小节点检查。
+这是 2026-10-07 用户“全面审查、查缺补漏、加到 PWF 并提高优先级”的实际施工入口。G1 的已发布成果继续有效，但其“约定范围完成”不能代表所有遗留机制已清空。目标服务最新实读active，当前顺序仍为G2→R2→R3→R4→R5，不增加角色、人工签收、授权文件或逐小节点检查。
+
+用户现要求独立并行施工包，已拆出[G2三个新包](harness_lanes/g2_parallel_packages_2026-10-07.md)：SW06/StockQA10各P0-B，RF05为可并行P1。三卡ready，未代用户启动；独占工作树/写集/测试/交接各自完整，MAIN仍独占CWP13/01b/12和总PWF/生产/并线。不是重派旧完成卡。
 
 ## 1. 审计范围和证据
 
@@ -102,6 +104,8 @@ HEAD/文件 SHA/工作树/现场 policy 原文见[只读审计收据](harness_la
 
 完整同步写集还包括`.coveragerc`、`tools/final_ratchet.py`和`tools/session_checklist.md`：final_ratchet仍驱动全tests/900秒、84% overall和8模块40–80%以及固定mypy错误数69；checklist仍要求每会话全测/真实E2E/安装全MATCH并apply、CWPconfig等HEAD/checkout。全改为相关大节点和owner保护，不因旧文案恢复这些要求。现日常`quality.yml→pre_push_gate.py`单Python/11精选包已合理，保留。用户后续已放松缺hash闭环要求：缺hash仅诊断，提供hash而实际不符仍失败，本卡不能恢复早期强制所有路径有hash规则。
 
+**本次并行复核补漏：**`tools/release_checklist.py`还重复全测/mutation/registry/安装，固定EXPECTED_RED且只匹配FAILED文字，返回2可误绿；一并收敛真退出码。旧质量工具AST读取coverage常量，保留`fail_under=0/PER_MODULE_MINIMUM={}`兼容面；`scan_hardcode/scan_legacy/scan_encoding`有真实caller，不按名字删API。完整实现和集中责任包见[RF单卡](harness_lanes/g2_revenue_forecast_optional_tools.md)，此补漏不扩写assurance/业务或安装目录。
+
 ### G2-06 / P0-B：StockWiki 日常全套与数字门仍保留
 
 **现行CI脚本和AGENTS均生效；hook本身没有pytest。** `scripts/check_all.sh`仍被CI调用，全pytest+73% overall/40% ui硬门；AGENTS仍要求Before commit。hook的validate-framework间接执行600/1000行硬门，注释却称warning；`pyproject.toml`另有fail_under=73。必须统一清理，单删check_all参数会漏底层配置。上次外线只消除了重复pytest。
@@ -150,6 +154,8 @@ StockInfoDLSimple 的 provider host、include/exclude 是来源发现和过滤�
 
 **新增完整写集：**`run_ci.bat`、`.pre-commit-config.yaml`、`pyproject.toml`与dev工具版本必须同时收敛。现9个实际runner/8次准备，hook always_run pytest和联网pip-audit，Black24.10对CI26、mypy strict不一致、pylint≥9阻断对本地exit-zero虚称≥8；pytest默认生成XML/HTML/coverage，轻测试也增文件。一份Python短编排供sh/bat/CI共用，默认pytest无覆盖率、提交只便宜静态、网络审计显式大节点；真实失败返回码保留。现build smoke只import空src包，换真实公开CLI/module导入。离线models/config/basic_runner/main行为和quick_scan/Q07预算恢复反例保留，live/收费默认关闭。基线必须从最新6a9ff138再核，不覆盖7个untracked资料。
 
+**本次并行复核补漏：**实际包装路径是`scripts/run_ci.sh/bat`，另security/release/docs三个workflow重复每push巡检/固定70%和8分门/无关代码触发文档部署，必须同步，不能只改ci.yml。现有显式网络审计保留准确报告/真实异常，发布权限不变、本卡不发布tag/文档；真实CLI import因logger造logs，使用自己的TemporaryDirectory/PYTHONPATH隔离，不修改业务logger。完整写集和真退出码E2E见[StockQA单卡](harness_lanes/g2_stockqa_engineering_checks.md)。
+
 ### G2-11 / P0：摘要质量标记由模型重复维护并硬校验
 
 **审计前实际状态门；单处程序投影本次93ac5a5已发布，精确CI37590638806全部步骤绿90秒。** 原_validate_claim_review_status要求模型重复维护claim.needs_review/draft.status，矛盾可能丢有效内容。现在由project_summary_quality根据真实引用质量/角色/不确定性/局部恢复诊断推导；旧字段仅兼容，真实SHA/locator/language/未知引用/角色错误仍拒绝。148责任项与配置真实loopback/resume已绿，不重复付费模型。
@@ -197,8 +203,8 @@ MAIN 是唯一集成与生产变更负责人。此表是施工顺序，不是新
 | 1 | G2-00 steady现场迁移/默认新库收敛 | 当前policy、旧小snapshot、真实读和16断言 | 现场complete；默认核心93ac5a5已推，精确CI37590638806全部步骤绿90秒 |
 | 2 | G2-01 effective read pin + G2-02 AUTO机器错误/版本恢复 + G2-11派生质量状态 | 版本化读取语义、同AUTO单库恢复、单处质量诊断 | 核心责任/E2E已收口、93ac5a5已推，精确CI37590638806全部步骤绿90秒；不等于完整A |
 | 3 | G2-13日常Store轻初始化 → G2-01b精确来源scoped pin | 去除隐含整库检查/补种及无关root对精确批次的阻断 | pending/P0；先于R2，沿用同一G2A集中节点 |
-| 4 | G2-06 StockWiki/G2-10 StockQA日常工程门 + G2-12 CWP/FF统一latest单请求 | 各仓独占目录，MAIN接线；共享ensure事务/唯一intent、工具/CI/hook/默认配置同步 | pending/P0-B；本次外仓只读，后续隔离施工，不与owner目录重叠 |
-| 5 | G2-03/04/07 CWP旧家族/公开维护/检查清单、G2-05 RF可选工具、G2-08安装/v1、G2-09能力文案 | CLI/import/package/清单/安装及指导同步；不启用raw破坏入口 | pending/P1；在上述P0/P0-B后，不顺序恢复旧签收 |
+| 4 | G2-06 StockWiki/G2-10 StockQA日常工程门 + G2-12 CWP/FF统一latest单请求 | 各仓独占目录，MAIN接线；共享ensure事务/唯一intent、工具/CI/hook/默认配置同步 | P0-B；SW/StockQA新卡ready可同时开工，未代用户启动；MAIN独占12 |
+| 5 | G2-03/04/07 CWP旧家族/公开维护/检查清单、G2-05 RF可选工具、G2-08安装/v1、G2-09能力文案 | CLI/import/package/清单/安装及指导同步；不启用raw破坏入口 | P1；RF新卡ready可并行，其余由MAIN按P0/P0-B后续；不恢复旧签收 |
 | 大节点 A | CWP最终写集完成后的当前链集中责任/E2E | isolated真实IR PDF/英文TXT；read/有限登记/零模型skip/loopback；现场小对照 | pending；核心子集先收口发布，复用已绿202/历史节点，不等同整个A完成 |
 | 大节点 B | 三仓离线链 + 当前消费者 + 发布 | FF→ET→CWP、RF/SW 读取；每仓对应代码 CI；保护/临时根清理 | pending；不重复付费模型 |
 | 6 | 回 R2 metadata/有限登记 → R3 → R4 → R5 | 原目标全部待办继续；G2 非缩减目标 | pending |

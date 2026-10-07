@@ -1,8 +1,8 @@
 # 当前执行入口
 
-2026-10-07本次按用户要求全面补漏门禁、更新实施计划并收口当前责任代码；目标服务实读paused，未自动恢复。恢复后先G2（含SW/StockQA日常门P0-B），再生产落地；已完成的有界验收不等于整个计划完成。
+2026-10-07目标服务最新实读active。先G2（含SW/StockQA日常门P0-B），再生产落地；已完成的有界验收不等于整个计划完成。用户现可同时派出三个新独立施工包，MAIN继续来源核心。
 
-八仓/14组补漏及优先顺序已写细；核心93ac5a5已正常推送，精确CI37590638806全部步骤绿90秒。下一恢复首项G2-13 Store轻初始化TDD；其他G2/生产计划仍待完成。
+八仓/14组补漏及优先顺序已写细；核心93ac5a5已正常推送，精确CI37590638806全部步骤绿90秒。MAIN下一首项G2-13 Store轻初始化TDD；其他G2/生产计划仍待完成。
 
 1. [task_plan.md](task_plan.md)：唯一当前目标、G2→R2→R3→R4→R5顺序、owner、完成条件、下一步。
 2. [findings.md](findings.md)、[progress.md](progress.md)：当前事实、真实验收与错误记录。
@@ -11,7 +11,7 @@
 5. [最终空间收据](harness_lanes/results/gd_storage_final_cleanup_2026-10-03.md)和[46项历史审计](gate_permission_inventory_2026-10-03.md)：基线证据，不产生新的许可/签收。
 6. [G2全面补漏实施单](gate_simplification_reaudit_2026-10-07.md)：当前P0，八仓审计、14组和scoped pin漏项、完整同步写集/接口和仅两个大测试节点；隐含整库检查/补种列P0。
 7. [全部PWF落地细则](all_pwf_completion_implementation_2026-10-07.md)：G2完成后继续生产来源、正式运行、原文收益决策和最终收口。
-8. [并行实施总计划](parallel_execution_plan_2026-10-03.md)：历史已交付线的所有权/接口；不重新发已完成卡，IQS不重复派线。
+8. [并行实施总计划](parallel_execution_plan_2026-10-03.md)与[当前三个施工包](harness_lanes/g2_parallel_packages_2026-10-07.md)：StockWiki/StockQA/RF互不重叠、可同时开工，详细单卡和交接接口各自完整；旧已交付卡不重新派发，IQS不重复派线。
 
 其余W/G/worker/review/space和并行卡保留技术背景与已经完成的证据，执行顺序、权限/审批和测试频率均由task_plan覆盖。已交付harness不重复派发；未交付独立线由root给出独占范围后接入当前接口。所有原始资料继续保留。
 

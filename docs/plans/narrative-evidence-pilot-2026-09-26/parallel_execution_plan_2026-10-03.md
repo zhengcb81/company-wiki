@@ -1,6 +1,20 @@
 # 并行总计划：门禁先行，独立目录施工，MAIN统一打通
 
-> **2026-10-07当前：**先按[G2全面补漏](gate_simplification_reaudit_2026-10-07.md)处理实际门禁遗漏，再R2/R3/R4/R5；八仓归属与当前owner变更见G2收据。以下既有外包已交付，不重新派卡，本轮不启动新harness。MAIN独占现场/共享接口；跨仓改动仅各自隔离目录，Dayu/IQS零写。旧“待DOCSET验收”等不代表当前状态。
+> **2026-10-07当前：**目标active，先G2再R2/R3/R4/R5。新三卡ready，可现在同时交给三个外部harness；未代用户启动。MAIN独占CWP/FF共享接口、总PWF、生产与并线，继续13/01b。下方原卡/状态为历史，不重派；Dayu/IQS零写。
+
+## 当前可派发：三个互不重叠的新包
+
+完整目录/冻结依赖/共同交接见[G2并行总包](harness_lanes/g2_parallel_packages_2026-10-07.md)。各卡单独交付即可实施，不需要其他卡上下文。
+
+| 卡 | 实际独占目录 | 施工范围 | 当前状态 |
+|---|---|---|---|
+| [G2-SW-DAILY](harness_lanes/g2_stockwiki_daily_checks.md) | `Projects/_g2/sw/StockWiki` | 单检查入口、日常/集中分离、指标诊断、真实来源消费者回归 | ready；不是已完成旧工程卡重派 |
+| [G2-SQA-CHECKS](harness_lanes/g2_stockqa_engineering_checks.md) | `Projects/_g2/StockQAbyLLM` | sh/bat/CI/hook统一，真实退出码和关联security/release/docs workflow | ready；不写业务src或IQS |
+| [G2-RF-TOOLS](harness_lanes/g2_revenue_forecast_optional_tools.md) | `Projects/_g2/revenue-forecast` | 可选发布/覆盖率/会话清单及历史兼容 | ready；不写forecast/evidence或日常精选门 |
+
+每仓仅自己的计划、源码白名单、测试和交接写入；三根互不包含。StockWiki使用已发布CWP代码临时导出，不能读取MAIN正在变化的代码作为测试依赖。各线一个集中节点，MAIN合入复用责任证据，纳入既有G2B；不追加逐helper签收。交付本仓正常commit，MAIN统一接线；创建card不代表已经启动、交付或并线。
+
+## 以下为历史已交付线
 
 > **最新：N5-RAW-DUP已交付e40b4ec并经MAIN集中修正；51项/9.09秒、两CLI与Ruff绿，已合入master a41244a并推远端、精确CI37523080920/57秒绿。** [验收卡](harness_lanes/n5_raw_duplicate_main_acceptance_2026-10-06.md)；ET已验收，DOCSET交接2c3583e已到待MAIN验收，不重派。下方旧未交付叙述属历史。
 
@@ -18,7 +32,7 @@
 
 绝对目录、准备命令、精确写集、测试/清根及统一handoff字段见[P5总包](harness_lanes/p5_parallel_packages_2026-10-05.md)。三卡不再派发，本总表与CWP总PWF只由MAIN改。交付不等于已验收或已并入主线。
 
-## 现在能交给外部harness的包
+## 2026-10-04历史外线状态（不作为当前派发清单）
 
 | 线 | 状态 | 独占实际工作目录 | 内容/责任 | 独立施工卡 |
 |---|---|---|---|---|
