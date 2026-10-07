@@ -76,6 +76,14 @@ _MA_PLANNED = re.compile(
     r"|(?:收购|并购|参股).{0,20}(?:计划|草案|预案)",
     re.IGNORECASE,
 )
+_CONCRETE_MA_PLANNED = re.compile(
+    r"(?:拟|计划|将要)(?:通过|以|采用)?[^，。；]{0,65}?"
+    r"(?:收购|并购|参股|购买|受让)(?:\s*对)?[^，。；、]{1,40}?"
+    r"(?:公司|企业|控股权|股权|资产)"
+    r"|(?:收购|并购|参股)[^，。；、]{1,30}(?:公司|企业|控股权|股权|资产)"
+    r"[^，。；]{0,12}(?:草案|预案)",
+    re.IGNORECASE,
+)
 
 _INDUSTRY_CHANGE = re.compile(
     r"(?:进口|出口|对外依存度).{0,60}从\s*[\d.]+\s*%.{0,12}"
@@ -123,15 +131,52 @@ _PROJECT_TIMELINE = re.compile(
     re.IGNORECASE,
 )
 
+_ADOPTION_MILESTONE = re.compile(
+    rf"{_OBJECT}[^。；]{{0,32}}(?:已|已经)[^。；]{{0,12}}"
+    r"(?:应用于|应用在|批量销售|投入使用|交付使用|稳定运行)"
+    rf"|{_OBJECT}[^。；]{{0,32}}(?:实现了|实现|完成)(?:批量销售|交付使用)",
+    re.IGNORECASE,
+)
+_INDUSTRY_OUTLOOK = re.compile(
+    r"(?:行业|产业|市场|全球|国际)[^。；]{0,100}(?:规模|销售额|出货量|装机量)"
+    r"[^。；]{0,30}(?:预计|有望|将|预测)[^。；]{0,20}"
+    r"(?:达(?:到)?|提高至|增长至|增加至)[^。；]{0,10}\d",
+    re.IGNORECASE,
+)
+_QUANTIFIED_INDUSTRY_CHANGE = re.compile(
+    r"(?:进口|出口|对外依存度)[^。；]{0,60}从\s*[\d.]+\s*%[^。；]{0,12}"
+    r"(?:下降|降低|上升|提高|增长)至\s*[\d.]+\s*%",
+    re.IGNORECASE,
+)
+_CONCRETE_PROJECT_USE = re.compile(
+    r"(?:募集资金|募投项目|本次发行)[^。；]{0,100}"
+    r"(?:投资于|拟用于|用于|投向)[^。；]{0,70}"
+    r"[\u3400-\u9fffA-Za-z0-9]{2,30}"
+    r"(?:生产线|研发中心|建设项目|扩产升级项目|建设升级项目)",
+    re.IGNORECASE,
+)
+_INCREMENTAL_CAPACITY = re.compile(
+    r"(?:募投项目|建设项目|生产线项目)[^。；]{0,50}(?:达产|投产|建成)"
+    r"[^。；]{0,60}(?:新增|增加)[^。；]{0,65}\d[\d., ]*"
+    r"(?:万|千|亿)?(?:件|支|台|吨|套|片|立方米|千瓦)",
+    re.IGNORECASE,
+)
+
 _DETECTOR_SIGNALS: tuple[
     tuple[re.Pattern[str], tuple[str, ...], tuple[str, ...], int], ...
 ] = (
     (_PROJECT_TIMELINE, ("capacity_projects",), ("project_execution_timeline", "project_plan_or_status"), 4),
+    (_ADOPTION_MILESTONE, ("core_business",), ("applied_operating_milestone",), 3),
+    (_INDUSTRY_OUTLOOK, ("industry_dynamics",), ("quantified_industry_outlook", "current_industry_context"), 3),
+    (_QUANTIFIED_INDUSTRY_CHANGE, ("industry_dynamics",), ("quantified_industry_change", "current_industry_context"), 3),
+    (_CONCRETE_PROJECT_USE, ("capacity_projects",), ("concrete_fundraising_project", "project_plan_or_status"), 3),
+    (_INCREMENTAL_CAPACITY, ("capacity_projects",), ("incremental_project_capacity", "project_plan_or_status"), 3),
     (_APPLIED, ("core_business",), ("specific_business_event",), 3),
     (_PRODUCTION_STATUS, ("core_business",), ("quantified_operating_status",), 2),
     (_QUANTIFIED_STRUCTURE, ("core_business",), ("quantified_operating_status",), 2),
     (_GROWTH_DRIVER, ("new_business",), ("quantified_operating_status",), 3),
-    (_MA_DONE, ("new_business",), ("specific_business_event",), 3),
+    (_MA_DONE, ("new_business",), ("corporate_development", "specific_business_event"), 3),
+    (_CONCRETE_MA_PLANNED, ("new_business",), ("corporate_development", "project_plan_or_status"), 2),
     (_MA_PLANNED, ("new_business",), ("project_plan_or_status",), 2),
     (_INDUSTRY_CHANGE, ("industry_dynamics",), ("current_industry_context",), 2),
     (_FUNDRAISING_USE, ("capacity_projects",), ("project_plan_or_status",), 3),

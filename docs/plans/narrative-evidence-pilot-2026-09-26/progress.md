@@ -1123,3 +1123,13 @@ S08新增噪声实证来自一个orphan_answer_needs_review的pdf_table_qa_fragm
 ## 2026-10-07 发布已完成（覆盖前述等待状态）
 
 候选actual merge e8c645e7afa6e2e60ddfa532e612ba0580d15560已推master，交付f31cc0d为主线祖先。精确CI37547043642 attempt1全部job/step success，job112553429162用时53秒。正常commit/pre-push绿，0日常长测试新增；原件/用户配置/RF三owner/外线保护保持，8个本次tmp根恢复absent。最终nine-doc21/33、old-full零回退、重复3、764定位零失败；269责任项+11真实/兼容/升级节点绿。N6三线实施交付已接收发布，S7继续处理验收单明确的9个业务漏点与3噪声，不冒称整体质量已全达标。[完整收据](harness_lanes/results/n6_candidate_main_acceptance_2026-10-07.json)。
+
+## 2026-10-07 继续S7
+
+上轮分类为实质进展：N6实现/集中节点实际发布，主线3ffafed、RF6e6b817a与三owner dirty状态再次实读一致，本轮继续9个业务漏点及3噪声。已写s7_followup_quality_implementation_2026-10-07.md，先9点分层实证，再责任TDD；IR解析版本/旧final兼容须明确后实施。原件/配置/owner保护与96/160限额不变，生产代码当前未改。
+
+S7分层报告确认8个真实选取缺口、1个同原件page7 canonical新增产能（原page43标准miss继续保留）。新语义先7真实RED，再具体reason/类别修复；断句加接口后1产品RED/18通过，修跨身份/话轮屏障与8units/1600字符；量化行业两个RED后独立类别。现selector0.4.1待发布、parser0.1.0，290责任项3.23秒绿、Ruff全CI范围和4模块mypy绿。9点探针修正第一组后已有收购/半年报行业/采用/募投用途full，进口趋势断句完整但仍预算miss，按量化类别继续修。新增真实S01/S02/S06正式CLI→RF业务E2E7点，不新增日常长CI；集中E2E12项已启动，结果待实读。S04真实项目表在抽取序列中出现在法律段落之后，需视觉/表头联系设计，不能为了intro覆盖强拼。S08解析版本整改尚未施工。
+
+正式默认解析首轮1失败/11通过/149.92秒（G-S01-03），年报默认探针23.338秒指向泛并购策略/整合风险误占具体交易类别；新增3负例其中2RED后具体交易需对象，49相关项0.77秒绿、最终293项3.60秒及全Ruff/8模块mypy绿。仅新S7节点第二轮83.28秒已过购买quote但误用收购词面query失败，测试按原字购买修正并加source wording前置断言，不修改产品检索或golden。第三轮真实S01/S02/S06全部7点→正式Worker/outbox/RF/search/exact/resume1项97.74秒通过（0 vendor/下载/翻译，3本地POST）。原旧节点+冻结9+实际升级1通过保留，不逐helper重跑；最终全九集中report尚在跑。S08原cell实读219字符及4/5标记已调查，parser0.1.1传播/旧0.1.0兼容/真实QA责任包已补入细则，留下一节点，不在运行中改源码。
+
+最终完整九文档436.885秒：required27/33（原21/33），optional3/17（原5/17），764定位零失败，3噪声仍在、重复4（原3）、精选66215B（原66195B）、scratch60374B。收据生成首次拒绝两optional回退，实读原quote：S02海外销售主体静态职责、S05项目营收/利润测算；按业务动态优先目标记录具体取舍，不改golden/正式断言，不设所有optional永久保持硬门。required旧full无回退，剩余6正式required中3业务/context：S01应用句、S04项目intro、S06同原件canonical另页（page7全句已保留）。原33分母/所有结果继续保存。PWF当前恢复点/next已更新；下一parser0.1.1接口细则明确，S7尚未complete。正常发布准备。

@@ -1,0 +1,1123 @@
+{
+  "schema_version": "s7-followup-quality-node/1",
+  "status": "local_verified_ready_to_publish",
+  "base": "3ffafed4dc05dd3c397f8841fd3829a4e77d9244",
+  "code_sha": null,
+  "selector_version": "0.4.1",
+  "parser_version": "0.1.0",
+  "red": {
+    "operating_semantics": 7,
+    "unfinished_sentence_after_signature_added": 1,
+    "quantified_industry": 2,
+    "generic_merger_strategy_or_risk": 2,
+    "real_default_cli_failed_before_concrete_transaction_fix": 1,
+    "search_fixture_failed_before_original_word_correction": 1
+  },
+  "green": {
+    "responsibility_cases": 293,
+    "responsibility_seconds": 3.6,
+    "new_real_cli_cases": 1,
+    "new_real_cli_seconds": 97.74,
+    "real_affected_documents": [
+      "S01",
+      "S02",
+      "S06"
+    ],
+    "new_real_cli_goldens": [
+      "G-S01-02",
+      "G-S01-03",
+      "G-S01-05",
+      "G-S02-02",
+      "G-S02-03",
+      "G-S06-02",
+      "G-S06-04"
+    ],
+    "earlier_old_cli_frozen_upgrade_passed": 11,
+    "earlier_combined_attempt_seconds": 149.92,
+    "old_cli_rerun_after_final_concrete_merger_fix": false,
+    "reason_no_redundant_old_cli_rerun": "Only merger classification changed after old node passed; new formal node rechecks affected real annual/EPI. IR, TXT, parser and persisted-final reader unchanged."
+  },
+  "static": {
+    "ruff": "passed CI scope",
+    "mypy": "passed 8 modules",
+    "diff_check": "passed"
+  },
+  "quality": {
+    "before": {
+      "documents": 9,
+      "golden_points": 86,
+      "required_points": 33,
+      "required_matched": 21,
+      "optional_points": 17,
+      "optional_matched": 5,
+      "negative_points": 36,
+      "negative_points_hit": 3,
+      "selected_span_count": 764,
+      "selected_in_scope": 234,
+      "judged_in_scope": 40,
+      "noise_spans": 3,
+      "role_confusion": 0,
+      "modality_confusion": 0,
+      "duplicate_span_count": 3,
+      "selected_utf8_bytes": 66195,
+      "locator_roundtrip_verified": 764,
+      "locator_roundtrip_failed": 0,
+      "required_coverage_rate": 0.6364,
+      "optional_coverage_rate": 0.2941,
+      "selected_noise_rate": 0.075,
+      "duplicate_ratio": 0.0039
+    },
+    "after": {
+      "documents": 9,
+      "golden_points": 86,
+      "required_points": 33,
+      "required_matched": 27,
+      "optional_points": 17,
+      "optional_matched": 3,
+      "negative_points": 36,
+      "negative_points_hit": 3,
+      "selected_span_count": 764,
+      "selected_in_scope": 218,
+      "judged_in_scope": 50,
+      "noise_spans": 3,
+      "role_confusion": 0,
+      "modality_confusion": 0,
+      "duplicate_span_count": 4,
+      "selected_utf8_bytes": 66215,
+      "locator_roundtrip_verified": 764,
+      "locator_roundtrip_failed": 0,
+      "required_coverage_rate": 0.8182,
+      "optional_coverage_rate": 0.1765,
+      "selected_noise_rate": 0.06,
+      "duplicate_ratio": 0.0052
+    },
+    "old_full_regressions": [
+      "G-S02-06",
+      "G-S05-05"
+    ],
+    "required_full_regressions": [],
+    "optional_tradeoffs": {
+      "G-S02-06": "Static overseas-sales entity responsibility table; lower priority than new business adoption/industry dynamics.",
+      "G-S05-05": "Project-only forecast revenue and profit figures; financial projection outside primary business narrative objective."
+    },
+    "remaining_required": [
+      "G-S01-01",
+      "G-S04-03",
+      "G-S06-01",
+      "G-S06-03",
+      "G-S09-01",
+      "G-S09-03"
+    ],
+    "remaining_business_required": [
+      "G-S01-01",
+      "G-S04-03",
+      "G-S06-03"
+    ],
+    "golden_or_denominator_changed": false,
+    "point_comparison": [
+      {
+        "id": "G-S01-01",
+        "polarity": "positive",
+        "priority": "required",
+        "before": "miss",
+        "after": "miss",
+        "locator": {
+          "page_number": 32
+        }
+      },
+      {
+        "id": "G-S01-02",
+        "polarity": "positive",
+        "priority": "required",
+        "before": "full",
+        "after": "full",
+        "locator": {
+          "page_number": 40
+        }
+      },
+      {
+        "id": "G-S01-03",
+        "polarity": "positive",
+        "priority": "required",
+        "before": "miss",
+        "after": "full",
+        "locator": {
+          "page_number": 40
+        }
+      },
+      {
+        "id": "G-S01-04",
+        "polarity": "positive",
+        "priority": "required",
+        "before": "full",
+        "after": "full",
+        "locator": {
+          "page_number": 40
+        }
+      },
+      {
+        "id": "G-S01-05",
+        "polarity": "positive",
+        "priority": "required",
+        "before": "miss",
+        "after": "full",
+        "locator": {
+          "page_number": 75
+        }
+      },
+      {
+        "id": "G-S01-06",
+        "polarity": "positive",
+        "priority": "optional",
+        "before": "miss",
+        "after": "miss",
+        "locator": {
+          "page_number": 75
+        }
+      },
+      {
+        "id": "G-S01-07",
+        "polarity": "positive",
+        "priority": "optional",
+        "before": "miss",
+        "after": "miss",
+        "locator": {
+          "page_number": 64
+        }
+      },
+      {
+        "id": "G-S01-08",
+        "polarity": "negative",
+        "priority": "reference",
+        "before": "clean",
+        "after": "clean",
+        "locator": {
+          "page_number": 21
+        }
+      },
+      {
+        "id": "G-S01-09",
+        "polarity": "negative",
+        "priority": "reference",
+        "before": "clean",
+        "after": "clean",
+        "locator": {
+          "page_number": 25
+        }
+      },
+      {
+        "id": "G-S01-10",
+        "polarity": "negative",
+        "priority": "reference",
+        "before": "clean",
+        "after": "clean",
+        "locator": {
+          "page_number": 19
+        }
+      },
+      {
+        "id": "G-S01-11",
+        "polarity": "negative",
+        "priority": "reference",
+        "before": "noise",
+        "after": "noise",
+        "locator": {
+          "page_number": 101
+        }
+      },
+      {
+        "id": "G-S02-01",
+        "polarity": "positive",
+        "priority": "required",
+        "before": "full",
+        "after": "full",
+        "locator": {
+          "page_number": 21
+        }
+      },
+      {
+        "id": "G-S02-02",
+        "polarity": "positive",
+        "priority": "required",
+        "before": "miss",
+        "after": "full",
+        "locator": {
+          "page_number": 18
+        }
+      },
+      {
+        "id": "G-S02-03",
+        "polarity": "positive",
+        "priority": "required",
+        "before": "miss",
+        "after": "full",
+        "locator": {
+          "page_number": 18
+        }
+      },
+      {
+        "id": "G-S02-04",
+        "polarity": "positive",
+        "priority": "required",
+        "before": "full",
+        "after": "full",
+        "locator": {
+          "page_number": 31
+        }
+      },
+      {
+        "id": "G-S02-05",
+        "polarity": "positive",
+        "priority": "optional",
+        "before": "miss",
+        "after": "miss",
+        "locator": {
+          "page_number": 31
+        }
+      },
+      {
+        "id": "G-S02-06",
+        "polarity": "positive",
+        "priority": "optional",
+        "before": "full",
+        "after": "miss",
+        "locator": {
+          "page_number": 50
+        }
+      },
+      {
+        "id": "G-S02-07",
+        "polarity": "negative",
+        "priority": "reference",
+        "before": "clean",
+        "after": "clean",
+        "locator": {
+          "page_number": 11
+        }
+      },
+      {
+        "id": "G-S02-08",
+        "polarity": "negative",
+        "priority": "reference",
+        "before": "clean",
+        "after": "clean",
+        "locator": {
+          "page_number": 17
+        }
+      },
+      {
+        "id": "G-S02-09",
+        "polarity": "negative",
+        "priority": "reference",
+        "before": "clean",
+        "after": "clean",
+        "locator": {
+          "page_number": 56
+        }
+      },
+      {
+        "id": "G-S02-10",
+        "polarity": "negative",
+        "priority": "reference",
+        "before": "clean",
+        "after": "clean",
+        "locator": {
+          "page_number": 56
+        }
+      },
+      {
+        "id": "G-S03-01",
+        "polarity": "positive",
+        "priority": "required",
+        "before": "full",
+        "after": "full",
+        "locator": {
+          "page_number": 2
+        }
+      },
+      {
+        "id": "G-S03-02",
+        "polarity": "positive",
+        "priority": "required",
+        "before": "full",
+        "after": "full",
+        "locator": {
+          "page_number": 2
+        }
+      },
+      {
+        "id": "G-S03-03",
+        "polarity": "positive",
+        "priority": "required",
+        "before": "full",
+        "after": "full",
+        "locator": {
+          "page_number": 3
+        }
+      },
+      {
+        "id": "G-S03-04",
+        "polarity": "positive",
+        "priority": "required",
+        "before": "full",
+        "after": "full",
+        "locator": {
+          "page_number": 3
+        }
+      },
+      {
+        "id": "G-S03-05",
+        "polarity": "positive",
+        "priority": "optional",
+        "before": "full",
+        "after": "full",
+        "locator": {
+          "page_number": 3
+        }
+      },
+      {
+        "id": "G-S03-06",
+        "polarity": "negative",
+        "priority": "reference",
+        "before": "clean",
+        "after": "clean",
+        "locator": {
+          "page_number": 1
+        }
+      },
+      {
+        "id": "G-S03-07",
+        "polarity": "negative",
+        "priority": "reference",
+        "before": "clean",
+        "after": "clean",
+        "locator": {
+          "page_number": 2
+        }
+      },
+      {
+        "id": "G-S03-08",
+        "polarity": "negative",
+        "priority": "reference",
+        "before": "clean",
+        "after": "clean",
+        "locator": {
+          "page_number": 3
+        }
+      },
+      {
+        "id": "G-S04-01",
+        "polarity": "positive",
+        "priority": "required",
+        "before": "full",
+        "after": "full",
+        "locator": {
+          "page_number": 114
+        }
+      },
+      {
+        "id": "G-S04-02",
+        "polarity": "positive",
+        "priority": "optional",
+        "before": "miss",
+        "after": "miss",
+        "locator": {
+          "page_number": 114
+        }
+      },
+      {
+        "id": "G-S04-03",
+        "polarity": "positive",
+        "priority": "required",
+        "before": "miss",
+        "after": "miss",
+        "locator": {
+          "page_number": 34
+        }
+      },
+      {
+        "id": "G-S04-04",
+        "polarity": "positive",
+        "priority": "required",
+        "before": "full",
+        "after": "full",
+        "locator": {
+          "page_number": 49
+        }
+      },
+      {
+        "id": "G-S04-05",
+        "polarity": "positive",
+        "priority": "optional",
+        "before": "miss",
+        "after": "miss",
+        "locator": {
+          "page_number": 49
+        }
+      },
+      {
+        "id": "G-S04-06",
+        "polarity": "negative",
+        "priority": "reference",
+        "before": "clean",
+        "after": "clean",
+        "locator": {
+          "page_number": 13
+        }
+      },
+      {
+        "id": "G-S04-07",
+        "polarity": "negative",
+        "priority": "reference",
+        "before": "clean",
+        "after": "clean",
+        "locator": {
+          "page_number": 133
+        }
+      },
+      {
+        "id": "G-S04-08",
+        "polarity": "negative",
+        "priority": "reference",
+        "before": "clean",
+        "after": "clean",
+        "locator": {
+          "page_number": 34
+        }
+      },
+      {
+        "id": "G-S05-01",
+        "polarity": "positive",
+        "priority": "required",
+        "before": "full",
+        "after": "full",
+        "locator": {
+          "page_number": 3
+        }
+      },
+      {
+        "id": "G-S05-02",
+        "polarity": "positive",
+        "priority": "required",
+        "before": "full",
+        "after": "full",
+        "locator": {
+          "page_number": 3
+        }
+      },
+      {
+        "id": "G-S05-03",
+        "polarity": "positive",
+        "priority": "required",
+        "before": "full",
+        "after": "full",
+        "locator": {
+          "page_number": 101
+        }
+      },
+      {
+        "id": "G-S05-04",
+        "polarity": "positive",
+        "priority": "optional",
+        "before": "miss",
+        "after": "miss",
+        "locator": {
+          "page_number": 71
+        }
+      },
+      {
+        "id": "G-S05-05",
+        "polarity": "positive",
+        "priority": "optional",
+        "before": "full",
+        "after": "miss",
+        "locator": {
+          "page_number": 8
+        }
+      },
+      {
+        "id": "G-S05-06",
+        "polarity": "negative",
+        "priority": "reference",
+        "before": "clean",
+        "after": "clean",
+        "locator": {
+          "page_number": 16
+        }
+      },
+      {
+        "id": "G-S05-07",
+        "polarity": "negative",
+        "priority": "reference",
+        "before": "clean",
+        "after": "clean",
+        "locator": {
+          "page_number": 15
+        }
+      },
+      {
+        "id": "G-S05-08",
+        "polarity": "negative",
+        "priority": "reference",
+        "before": "clean",
+        "after": "clean",
+        "locator": {
+          "page_number": 169
+        }
+      },
+      {
+        "id": "G-S06-01",
+        "polarity": "positive",
+        "priority": "required",
+        "before": "miss",
+        "after": "miss",
+        "locator": {
+          "page_number": 4
+        }
+      },
+      {
+        "id": "G-S06-02",
+        "polarity": "positive",
+        "priority": "required",
+        "before": "miss",
+        "after": "full",
+        "locator": {
+          "page_number": 43
+        }
+      },
+      {
+        "id": "G-S06-03",
+        "polarity": "positive",
+        "priority": "required",
+        "before": "miss",
+        "after": "miss",
+        "locator": {
+          "page_number": 43
+        }
+      },
+      {
+        "id": "G-S06-04",
+        "polarity": "positive",
+        "priority": "required",
+        "before": "miss",
+        "after": "full",
+        "locator": {
+          "page_number": 87
+        }
+      },
+      {
+        "id": "G-S06-05",
+        "polarity": "positive",
+        "priority": "optional",
+        "before": "miss",
+        "after": "miss",
+        "locator": {
+          "page_number": 75
+        }
+      },
+      {
+        "id": "G-S06-06",
+        "polarity": "positive",
+        "priority": "optional",
+        "before": "miss",
+        "after": "miss",
+        "locator": {
+          "page_number": 75
+        }
+      },
+      {
+        "id": "G-S06-07",
+        "polarity": "negative",
+        "priority": "reference",
+        "before": "clean",
+        "after": "clean",
+        "locator": {
+          "page_number": 13
+        }
+      },
+      {
+        "id": "G-S06-08",
+        "polarity": "negative",
+        "priority": "reference",
+        "before": "clean",
+        "after": "clean",
+        "locator": {
+          "page_number": 39
+        }
+      },
+      {
+        "id": "G-S06-09",
+        "polarity": "negative",
+        "priority": "reference",
+        "before": "clean",
+        "after": "clean",
+        "locator": {
+          "page_number": 68
+        }
+      },
+      {
+        "id": "G-S06-10",
+        "polarity": "negative",
+        "priority": "reference",
+        "before": "clean",
+        "after": "clean",
+        "locator": {
+          "page_number": 8
+        }
+      },
+      {
+        "id": "G-S06-11",
+        "polarity": "negative",
+        "priority": "reference",
+        "before": "clean",
+        "after": "clean",
+        "locator": {
+          "page_number": 29
+        }
+      },
+      {
+        "id": "G-S07-01",
+        "polarity": "positive",
+        "priority": "required",
+        "before": "full",
+        "after": "full",
+        "locator": {
+          "page_number": 1
+        }
+      },
+      {
+        "id": "G-S07-02",
+        "polarity": "positive",
+        "priority": "required",
+        "before": "full",
+        "after": "full",
+        "locator": {
+          "page_number": 6
+        }
+      },
+      {
+        "id": "G-S07-03",
+        "polarity": "positive",
+        "priority": "required",
+        "before": "full",
+        "after": "full",
+        "locator": {
+          "page_number": 6
+        }
+      },
+      {
+        "id": "G-S07-04",
+        "polarity": "positive",
+        "priority": "required",
+        "before": "full",
+        "after": "full",
+        "locator": {
+          "page_number": 5
+        }
+      },
+      {
+        "id": "G-S07-05",
+        "polarity": "positive",
+        "priority": "optional",
+        "before": "miss",
+        "after": "miss",
+        "locator": {
+          "page_number": 2
+        }
+      },
+      {
+        "id": "G-S07-06",
+        "polarity": "positive",
+        "priority": "optional",
+        "before": "miss",
+        "after": "miss",
+        "locator": {
+          "page_number": 3
+        }
+      },
+      {
+        "id": "G-S07-07",
+        "polarity": "positive",
+        "priority": "optional",
+        "before": "full",
+        "after": "full",
+        "locator": {
+          "page_number": 2
+        }
+      },
+      {
+        "id": "G-S07-08",
+        "polarity": "negative",
+        "priority": "reference",
+        "before": "clean",
+        "after": "clean",
+        "locator": {
+          "page_number": 1
+        }
+      },
+      {
+        "id": "G-S07-09",
+        "polarity": "negative",
+        "priority": "reference",
+        "before": "clean",
+        "after": "clean",
+        "locator": {
+          "page_number": 4
+        }
+      },
+      {
+        "id": "G-S07-10",
+        "polarity": "negative",
+        "priority": "reference",
+        "before": "clean",
+        "after": "clean",
+        "locator": {
+          "page_number": 6
+        }
+      },
+      {
+        "id": "G-S08-01",
+        "polarity": "positive",
+        "priority": "required",
+        "before": "full",
+        "after": "full",
+        "locator": {
+          "page_number": 3
+        }
+      },
+      {
+        "id": "G-S08-02",
+        "polarity": "positive",
+        "priority": "optional",
+        "before": "miss",
+        "after": "miss",
+        "locator": {
+          "page_number": 2
+        }
+      },
+      {
+        "id": "G-S08-03",
+        "polarity": "negative",
+        "priority": "reference",
+        "before": "clean",
+        "after": "clean",
+        "locator": {
+          "page_number": 1
+        }
+      },
+      {
+        "id": "G-S08-04",
+        "polarity": "negative",
+        "priority": "reference",
+        "before": "clean",
+        "after": "clean",
+        "locator": {
+          "page_number": 1
+        }
+      },
+      {
+        "id": "G-S08-05",
+        "polarity": "negative",
+        "priority": "reference",
+        "before": "noise",
+        "after": "noise",
+        "locator": {
+          "page_number": 3
+        }
+      },
+      {
+        "id": "G-S08-06",
+        "polarity": "negative",
+        "priority": "reference",
+        "before": "noise",
+        "after": "noise",
+        "locator": {
+          "page_number": 3
+        }
+      },
+      {
+        "id": "G-S08-07",
+        "polarity": "negative",
+        "priority": "reference",
+        "before": "clean",
+        "after": "clean",
+        "locator": {
+          "page_number": 2
+        }
+      },
+      {
+        "id": "G-S08-08",
+        "polarity": "negative",
+        "priority": "reference",
+        "before": "clean",
+        "after": "clean",
+        "locator": {
+          "page_number": 3
+        }
+      },
+      {
+        "id": "G-S09-01",
+        "polarity": "positive",
+        "priority": "required",
+        "before": "miss",
+        "after": "miss",
+        "locator": {
+          "line_start": 30,
+          "line_end": 30,
+          "parser_region": "before_transcript_start",
+          "byte_start": 991,
+          "byte_end": 1118
+        }
+      },
+      {
+        "id": "G-S09-02",
+        "polarity": "positive",
+        "priority": "required",
+        "before": "full",
+        "after": "full",
+        "locator": {
+          "line_start": 138,
+          "line_end": 138,
+          "parser_region": "prepared_remarks",
+          "byte_start": 10913,
+          "byte_end": 11073
+        }
+      },
+      {
+        "id": "G-S09-03",
+        "polarity": "positive",
+        "priority": "required",
+        "before": "miss",
+        "after": "miss",
+        "locator": {
+          "line_start": 226,
+          "line_end": 226,
+          "parser_region": "parsed",
+          "byte_start": 41662,
+          "byte_end": 41751
+        }
+      },
+      {
+        "id": "G-S09-04",
+        "polarity": "positive",
+        "priority": "required",
+        "before": "full",
+        "after": "full",
+        "locator": {
+          "line_start": 222,
+          "line_end": 222,
+          "parser_region": "parsed",
+          "byte_start": 40209,
+          "byte_end": 40285
+        }
+      },
+      {
+        "id": "G-S09-05",
+        "polarity": "positive",
+        "priority": "required",
+        "before": "full",
+        "after": "full",
+        "locator": {
+          "line_start": 200,
+          "line_end": 200,
+          "parser_region": "parsed",
+          "byte_start": 32538,
+          "byte_end": 32593
+        }
+      },
+      {
+        "id": "G-S09-06",
+        "polarity": "positive",
+        "priority": "optional",
+        "before": "full",
+        "after": "full",
+        "locator": {
+          "line_start": 252,
+          "line_end": 252,
+          "parser_region": "parsed",
+          "byte_start": 47440,
+          "byte_end": 47490
+        }
+      },
+      {
+        "id": "G-S09-07",
+        "polarity": "positive",
+        "priority": "optional",
+        "before": "miss",
+        "after": "miss",
+        "locator": {
+          "line_start": 208,
+          "line_end": 208,
+          "parser_region": "parsed",
+          "byte_start": 36044,
+          "byte_end": 36139
+        }
+      },
+      {
+        "id": "G-S09-08",
+        "polarity": "negative",
+        "priority": "reference",
+        "before": "clean",
+        "after": "clean",
+        "locator": {
+          "line_start": 132,
+          "line_end": 132,
+          "parser_region": "parsed",
+          "byte_start": 9614,
+          "byte_end": 9754
+        }
+      },
+      {
+        "id": "G-S09-09",
+        "polarity": "negative",
+        "priority": "reference",
+        "before": "clean",
+        "after": "clean",
+        "locator": {
+          "line_start": 134,
+          "line_end": 134,
+          "parser_region": "parsed",
+          "byte_start": 9870,
+          "byte_end": 9971
+        }
+      },
+      {
+        "id": "G-S09-10",
+        "polarity": "negative",
+        "priority": "reference",
+        "before": "clean",
+        "after": "clean",
+        "locator": {
+          "line_start": 126,
+          "line_end": 126,
+          "parser_region": "parsed",
+          "byte_start": 7385,
+          "byte_end": 7482
+        }
+      },
+      {
+        "id": "G-S09-11",
+        "polarity": "negative",
+        "priority": "reference",
+        "before": "clean",
+        "after": "clean",
+        "locator": {
+          "line_start": 8,
+          "line_end": 8,
+          "parser_region": "before_transcript_start",
+          "byte_start": 293,
+          "byte_end": 328
+        }
+      },
+      {
+        "id": "G-S09-12",
+        "polarity": "negative",
+        "priority": "reference",
+        "before": "clean",
+        "after": "clean",
+        "locator": {
+          "line_start": 14,
+          "line_end": 14,
+          "parser_region": "before_transcript_start",
+          "byte_start": 467,
+          "byte_end": 484
+        }
+      }
+    ],
+    "report": "harness_lanes/results/s7_operating_quality_2026-10-07.json",
+    "elapsed_seconds": 436.885,
+    "temp_peak_bytes": 60374,
+    "s7_status": "in_progress",
+    "canonical_dedup_note": "G-S06-03 full quote retained in same raw at page7 p12-17; original page43 oracle remains miss. Not counted as a formal match.",
+    "optional_diagnostic": "harness_lanes/results/s7_optional_tradeoff_stages_2026-10-07.json"
+  },
+  "protected": {
+    "config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+    "config\\source_acquisition.yaml": "3609e707466eeb3e0f685e14f2637c6afa39ba900edef1be4814433a43300a01",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\daily_alert.jsonl": "0aee073f56c133786365ab96899edf4d91c0f9e1a0e13ab61b2a6bffd8316270",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_alert.jsonl": "b617b0b00ff1a758b5b46299e3e5db3115f56efd90d212154abe988e5ea9fee5",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_manifest.json": "0d55cb8c81f12b663e330819da3037bb69ce8564ac41a686b578a99f78f948bf"
+  },
+  "rf_head": "6e6b817a1a6e4567293a4dcb835815f3be508a03",
+  "runtime_source_sha256": {
+    "src/company_wiki/source_catalog/n6_candidate_completion.py": "71cd2996d3cc3a6fa9a4309a7246df2914511717178401d81d68dd00e02391cb",
+    "src/company_wiki/source_catalog/n6_candidate_operating_facts.py": "6aebb4c33e199e0844a5dae6647366a67e88e13f790c4ee937f4061f9274dadb",
+    "src/company_wiki/source_catalog/narrative_candidates.py": "b70e3a23a3f498953de6c0adc7fec88048610bef488acfd7c3f9a62bea654d54",
+    "src/company_wiki/source_catalog/narrative_context.py": "4f4749cd3df6c6a16d31e9ea5327beb5cee9d0895c6e25ef2df19404fde69e4e",
+    "src/company_wiki/source_catalog/narrative_group_candidates.py": "38d8fb00efe4a74e3a846d31b22c961f397df802b58ab54bdd74812d570bd197",
+    "src/company_wiki/source_catalog/narrative_neighbors.py": "3c6f735fd034caef8074b4f70673b0708be00e9bb6415043fd6cfd4b958a1ade",
+    "src/company_wiki/source_catalog/narrative_budget.py": "54f43180972196e3ba9ecdd80eee211fc4dcbfe98e75035cb6a4ca334418a5d7",
+    "src/company_wiki/source_catalog/narrative_evidence.py": "a60cb4174b857d65318bde793952a9ced1846b7c8cdc13fe97c66aef632bb5dc"
+  },
+  "originals": {
+    "S01": {
+      "sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "size": 9165875
+    },
+    "S02": {
+      "sha256": "91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+      "size": 6361468
+    },
+    "S03": {
+      "sha256": "ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+      "size": 217264
+    },
+    "S04": {
+      "sha256": "19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+      "size": 11211796
+    },
+    "S05": {
+      "sha256": "cd803fe9528f4646f8f29b518a450ae4bd5b5968c482eb49789f9786b523595b",
+      "size": 5595592
+    },
+    "S06": {
+      "sha256": "c6ed566631e123f159abf2697c157f1868f8e994ccf8e3352132046a6c5ca0a1",
+      "size": 4756322
+    },
+    "S07": {
+      "sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+      "size": 153851
+    },
+    "S08": {
+      "sha256": "f6d50d717efd5e84e400a28b51bb0c73e2e2a712e828cd3fb6d872469718fd2b",
+      "size": 414544
+    },
+    "S09": {
+      "sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+      "size": 66324
+    }
+  },
+  "providers": {
+    "vendor_calls": 0,
+    "downloads": 0,
+    "cost": 0,
+    "local_post_attempts": 12,
+    "local_posts_final_verified_new_node": 3,
+    "translation": false
+  },
+  "external_tree_writes": 0,
+  "raw_deleted": 0,
+  "daily_ci_long_tests_added": 0,
+  "scratch_restore": {
+    "status": "all_restored_absent",
+    "paths": [
+      "tmp/s7ut",
+      "tmp/s7u2",
+      "tmp/s7u3",
+      "tmp/s7e",
+      "tmp/s7e2",
+      "tmp/s7e3",
+      "tmp/s7q-input",
+      "tmp/s7q-scratch",
+      "tmp/s7q-report.json",
+      "tmp/s7-gap-probe.py",
+      "tmp/s7-default-probe.py",
+      "tmp/s7-node-benchmark.py",
+      "tmp/s7-node-receipt.py",
+      "tmp/s7-optional-probe.py"
+    ]
+  },
+  "ci": {
+    "status": "pending_publish"
+  }
+}

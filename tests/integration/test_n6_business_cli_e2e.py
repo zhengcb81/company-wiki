@@ -89,7 +89,7 @@ def _sources(real):
     return sources, originals, raw_by_sample
 
 
-def _exercise(tmp_path_factory, server, monkeypatch, capture, *, real):
+def _exercise(tmp_path_factory, server, monkeypatch, capture, *, real, probes=None, queries=None):
     rf_value = os.environ.get("CWP_RF_PROJECT_ROOT")
     if not rf_value:
         pytest.skip("requires explicit read-only committed RF checkout")
@@ -154,7 +154,8 @@ def _exercise(tmp_path_factory, server, monkeypatch, capture, *, real):
                 return call
 
             golden = json.loads((REPO / "benchmarks/narrative_document_types/golden.json").read_text(encoding="utf-8"))
-            probes = {"S01": {"G-S01-02"}, "S07": {"G-S07-01", "G-S07-02"}, "S09": {"G-S09-05"}}
+            if probes is None:
+                probes = {"S01": {"G-S01-02"}, "S07": {"G-S07-01", "G-S07-02"}, "S09": {"G-S09-05"}}
             for ref, language, kind in state.indexed.values():
                 name = next(source[1] for source in sources
                             if hashlib.sha256(source[4]).hexdigest() == ref.content_sha256)
@@ -205,9 +206,14 @@ def _exercise(tmp_path_factory, server, monkeypatch, capture, *, real):
                         assert match["result"] == "full", (point["golden_id"], match)
                 query = ("EPI" if kind == "annual_report" else "中试线" if kind == "investor_relations"
                          else "available capacity") if real else "new product" if kind != "investor_call_transcript" else "data centers"
+                if queries is not None:
+                    query = queries[sample_id]
+                    assert any(query.casefold() in (span.raw_text or '').casefold() for span in spans), (
+                        sample_id, query, 'quality probe must query actual source wording'
+                    )
                 searched = invoke(transport + ["--operation", "evidence-search", "--query", query], request)
                 view, receipt = json.loads(searched.stdout), json.loads(searched.stderr)
-                assert view["items"] and receipt["locator_count"] == len(spans)
+                assert view["items"] and receipt["locator_count"] == len(spans), (sample_id, query, view)
                 found = json.loads(invoke(transport + ["--operation", "evidence-lookup", "--span-id", spans[0].span_id], request).stdout)
                 assert found["items"] == [spans[0].to_dict()]
             again, resumed = cli_fixtures._invoke(

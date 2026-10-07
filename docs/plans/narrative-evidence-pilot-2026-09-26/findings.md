@@ -902,3 +902,13 @@ build_batch_events确用request中selector/parser/prompt hash划新身份；正�
 ## 2026-10-07 发布已完成（覆盖前述等待状态）
 
 候选actual merge e8c645e7afa6e2e60ddfa532e612ba0580d15560已推master，交付f31cc0d为主线祖先。精确CI37547043642 attempt1全部job/step success，job112553429162用时53秒。正常commit/pre-push绿，0日常长测试新增；原件/用户配置/RF三owner/外线保护保持，8个本次tmp根恢复absent。最终nine-doc21/33、old-full零回退、重复3、764定位零失败；269责任项+11真实/兼容/升级节点绿。N6三线实施交付已接收发布，S7继续处理验收单明确的9个业务漏点与3噪声，不冒称整体质量已全达标。[完整收据](harness_lanes/results/n6_candidate_main_acceptance_2026-10-07.json)。
+
+## S7剩余点分层诊断（2026-10-07）
+
+限定原golden表页、同原件全部PDF正文，初探62.298秒，追加contributors探针解释具体组/score/drop，未改变规则。9点中7点candidate/dedup完整但budget淘汰；S01 G05在candidate阶段缺失，S06 G03在dedup后原page43不匹配。后者的完整原句实际已在同原件另一locator精选summary组中存在，是合法canonical去重，不强行保留重复page43或改原33分母。S06 G04同一断句被两个独立operating fact窗口分开：page87 p11以“一定”结尾已选，p12未选，句子不完整。不是所有漏项都需要加关键词/扩额度。
+
+已写11个独立一般表达责任用例，夹具metadata漏项纠正后7个真实产品RED/4通过/0.67秒；正例区分应用/批量销售里程碑、并购（含计划词）、量化行业前景、具体募投生产线与物理产能，负例限制纯收入/募集金额与“投资以下项目”独立引导句。测试预算纯输入/固定16、输入逆序稳定。实施将保留新具体reason，即使旧generic progress已识别，也不能丢掉具体语义；不调公司/页码白名单。
+
+S7后续实证：G-S06-03完整达产quote已在同原件page7 p12—17入选且原情态保留；page43缺口为canonical去重，不为golden复刻重复。G-S06-04两片段一句分组先修为原子组，但泛industry预算仍会挤掉，于是只给量化事实独立类别。G-S01-05识别将达后candidate full，预算仍miss；不增加96/160，按量化行业类别修。S04page34 intro p14/15与具体募投表row1/2真实存在，但抽取顺序中法律段落p17—22插在正文intro与表之前：下一实现不能按索引近邻认定联系。完整报告s7_gap_stage_after_operating_rules_2026-10-07.json明确是声明表页诊断，不是default/full-table正式验收。
+
+本轮quality实测业务解释26/29、原required27/33，不能拿解释子集或canonical另页替代正式golden。两optional退步均有明确原句：主要负责公司海外的销售（静态主体表职责）及项目预计年营业收入/净利润（纯效益数值预测），低于已实现采用/订单/具体收购/量化行业动态的优先级。保留optional退步证据与原始资料，调整收据质量审查口径为required/business无退步+optional透明具体取舍，不修改原benchmark/evaluator/产品断言，也不为最大化所有optional扩大切片预算。

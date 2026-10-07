@@ -9,8 +9,10 @@ from types import MappingProxyType
 
 from .n6_candidate_completion import (
     BUSINESS_CHARACTER_WINDOW,
+    MAX_COMPLETION_UNITS,
     PROJECT_CHARACTER_WINDOW,
     completion_indices,
+    ends_sentence,
     members_linkable,
 )
 from .n6_candidate_operating_facts import (
@@ -444,14 +446,29 @@ def _add_coverage_windows(
 
 def _merge_fact_windows(
     windows: Sequence[tuple[int, int]],
+    *,
+    members: Sequence[NarrativeUnit] = (),
 ) -> tuple[tuple[int, int], ...]:
-    """Union overlapping minimal windows so one fact locus stays one group."""
+    """Union overlapping windows and bounded continuations of one sentence."""
     merged: list[tuple[int, int]] = []
     for start, end in sorted(windows):
-        if merged and start <= merged[-1][1]:
-            merged[-1] = (merged[-1][0], max(merged[-1][1], end))
-        else:
-            merged.append((start, end))
+        if merged:
+            previous_start, previous_end = merged[-1]
+            joined_end = max(previous_end, end)
+            overlapping = start <= previous_end
+            continuation = bool(members) and start == previous_end + 1 and not ends_sentence(
+                members[previous_end].raw_text
+            )
+            joined = members[previous_start : joined_end + 1]
+            bounded = not members or (
+                len(joined) <= MAX_COMPLETION_UNITS
+                and sum(len(unit.raw_text) for unit in joined) <= PROJECT_CHARACTER_WINDOW
+                and members_linkable(joined)
+            )
+            if (overlapping or continuation) and bounded:
+                merged[-1] = (previous_start, joined_end)
+                continue
+        merged.append((start, end))
     return tuple(merged)
 
 
@@ -464,7 +481,9 @@ def _add_operating_fact_windows(
 ) -> set[str]:
     """Select minimal unit windows whose joined text expresses one fact."""
     added: set[str] = set()
-    windows = _merge_fact_windows(rules.window_finder(members, OPERATING_FACT_JOIN))
+    windows = _merge_fact_windows(
+        rules.window_finder(members, OPERATING_FACT_JOIN), members=members
+    )
     for index, (start, end) in enumerate(windows):
         window_members = members[start : end + 1]
         window_text = "".join(unit.raw_text for unit in window_members)

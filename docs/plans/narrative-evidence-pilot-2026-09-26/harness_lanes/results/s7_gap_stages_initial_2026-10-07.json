@@ -1,0 +1,808 @@
+{
+  "schema_version": "s7-gap-stages/1",
+  "base": "3ffafed4dc05dd3c397f8841fd3829a4e77d9244",
+  "selector": "0.4.0",
+  "parser": "0.1.0",
+  "scope": "All PDF text, tables only on original golden declared read pages; diagnostic, not production or full-table benchmark. No rule/oracle mutation.",
+  "entries": [
+    {
+      "sample_id": "S01",
+      "golden_id": "G-S01-01",
+      "locator": {
+        "page_number": 32
+      },
+      "stages": {
+        "parsed": {
+          "result": "full",
+          "matched_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:14cd6d06120a5bb8d36857c196d98e4068bb06b3d9521bc396ecbaeed8c86117",
+            "urn:company-wiki:evidence-span:sha256:0de0c59ca341df425a12d80de3926a70d37426a3eb9a1b89cae64848a267eeb3",
+            "urn:company-wiki:evidence-span:sha256:f2d625b18a03092f1dfb0f63831bd0a477bf9c25e1998e49dfa41f09f8340163"
+          ],
+          "matched_roles": [
+            "company_filing"
+          ],
+          "coverage_ratio": 1.0
+        },
+        "candidate": {
+          "result": "full",
+          "matched_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:8b7ccc8e4bb373b26181c22353f5c3833015b7eb9b2fbac9c25118e1b09fe10f",
+            "urn:company-wiki:evidence-span:sha256:2c519e3213769b3811506e96e73594ce409aed48a6b2ba8e5af2b044f1866095",
+            "urn:company-wiki:evidence-span:sha256:472f8cb663f9d37709ce91dca5b4944d61d211cb7afd40caa6a7e3a25622f39d"
+          ],
+          "matched_roles": [
+            "company_filing"
+          ],
+          "coverage_ratio": 1.0
+        },
+        "dedup": {
+          "result": "full",
+          "matched_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:8b7ccc8e4bb373b26181c22353f5c3833015b7eb9b2fbac9c25118e1b09fe10f",
+            "urn:company-wiki:evidence-span:sha256:2c519e3213769b3811506e96e73594ce409aed48a6b2ba8e5af2b044f1866095",
+            "urn:company-wiki:evidence-span:sha256:472f8cb663f9d37709ce91dca5b4944d61d211cb7afd40caa6a7e3a25622f39d"
+          ],
+          "matched_roles": [
+            "company_filing"
+          ],
+          "coverage_ratio": 1.0
+        },
+        "selected": {
+          "result": "miss",
+          "matched_span_ids": [],
+          "matched_roles": [],
+          "coverage_ratio": 0.038
+        }
+      },
+      "candidate_count": 388,
+      "dedup_count": 385,
+      "selected_count": 96,
+      "table_scan_pages": [
+        19,
+        21,
+        25,
+        32,
+        40,
+        49,
+        64,
+        75,
+        101,
+        109,
+        118,
+        121,
+        122,
+        125
+      ],
+      "fragments": [
+        {
+          "locator": "loc:v1/page:32/paragraph:7",
+          "kind": "pdf_text_block",
+          "text": "公司刻蚀设备已应用于全球先进的3 纳米及以下集成电路加工制造生产线。",
+          "candidate": true,
+          "reasons": [
+            "business_narrative_signal",
+            "specific_business_event"
+          ],
+          "score": 7,
+          "group_cost": 1,
+          "budget_drop": "budget_full",
+          "category": "event"
+        },
+        {
+          "locator": "loc:v1/page:32/paragraph:8",
+          "kind": "pdf_text_block",
+          "text": "在海外先进的3 纳米",
+          "candidate": true,
+          "reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "specific_business_event"
+          ],
+          "score": 15,
+          "group_cost": 2,
+          "budget_drop": "budget_full",
+          "category": "event"
+        },
+        {
+          "locator": "loc:v1/page:32/paragraph:9",
+          "kind": "pdf_text_block",
+          "text": "芯片生产线及下一代更先进的生产线上，公司的CCP 刻蚀设备均实现了批量销售。",
+          "candidate": true,
+          "reasons": [
+            "business_narrative_signal",
+            "specific_business_event"
+          ],
+          "score": 7,
+          "group_cost": 2,
+          "budget_drop": "budget_full",
+          "category": "event"
+        }
+      ]
+    },
+    {
+      "sample_id": "S01",
+      "golden_id": "G-S01-03",
+      "locator": {
+        "page_number": 40
+      },
+      "stages": {
+        "parsed": {
+          "result": "full",
+          "matched_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:ac4e0e0d2bdcb5d85b7bc31b4fa96293b0229494e3ec4478383d611172c1b03b",
+            "urn:company-wiki:evidence-span:sha256:0c3cbe8050d38cd80a396368cb38f1c60515e76e298314b8bcffc42505be3ed0"
+          ],
+          "matched_roles": [
+            "company_filing"
+          ],
+          "coverage_ratio": 1.0
+        },
+        "candidate": {
+          "result": "full",
+          "matched_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:24f36b461c1c7a2754800a1b0fcc64adbc4812b978f6485370bfc8afa623e32e",
+            "urn:company-wiki:evidence-span:sha256:2b40a17e55c77f06e3569f3cced484d255b7564bcd1695b001669cb21469c4bb"
+          ],
+          "matched_roles": [
+            "company_filing"
+          ],
+          "coverage_ratio": 1.0
+        },
+        "dedup": {
+          "result": "full",
+          "matched_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:24f36b461c1c7a2754800a1b0fcc64adbc4812b978f6485370bfc8afa623e32e",
+            "urn:company-wiki:evidence-span:sha256:2b40a17e55c77f06e3569f3cced484d255b7564bcd1695b001669cb21469c4bb"
+          ],
+          "matched_roles": [
+            "company_filing"
+          ],
+          "coverage_ratio": 1.0
+        },
+        "selected": {
+          "result": "miss",
+          "matched_span_ids": [],
+          "matched_roles": [],
+          "coverage_ratio": 0.0282
+        }
+      },
+      "candidate_count": 388,
+      "dedup_count": 385,
+      "selected_count": 96,
+      "table_scan_pages": [
+        19,
+        21,
+        25,
+        32,
+        40,
+        49,
+        64,
+        75,
+        101,
+        109,
+        118,
+        121,
+        122,
+        125
+      ],
+      "fragments": []
+    },
+    {
+      "sample_id": "S01",
+      "golden_id": "G-S01-05",
+      "locator": {
+        "page_number": 75
+      },
+      "stages": {
+        "parsed": {
+          "result": "full",
+          "matched_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:59f038d683fcd9665f702128d82fb4b22abeb6aa03b847fdb110b0cca6b6c7c5",
+            "urn:company-wiki:evidence-span:sha256:c9f5a26d2c22b65175b11a229a9c1fc9cdd4c6e2021de935e566203976765fd7"
+          ],
+          "matched_roles": [
+            "company_filing"
+          ],
+          "coverage_ratio": 1.0
+        },
+        "candidate": {
+          "result": "miss",
+          "matched_span_ids": [],
+          "matched_roles": [],
+          "coverage_ratio": 0.0962
+        },
+        "dedup": {
+          "result": "miss",
+          "matched_span_ids": [],
+          "matched_roles": [],
+          "coverage_ratio": 0.0962
+        },
+        "selected": {
+          "result": "miss",
+          "matched_span_ids": [],
+          "matched_roles": [],
+          "coverage_ratio": 0.0962
+        }
+      },
+      "candidate_count": 388,
+      "dedup_count": 385,
+      "selected_count": 96,
+      "table_scan_pages": [
+        19,
+        21,
+        25,
+        32,
+        40,
+        49,
+        64,
+        75,
+        101,
+        109,
+        118,
+        121,
+        122,
+        125
+      ],
+      "fragments": []
+    },
+    {
+      "sample_id": "S02",
+      "golden_id": "G-S02-02",
+      "locator": {
+        "page_number": 18
+      },
+      "stages": {
+        "parsed": {
+          "result": "full",
+          "matched_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:83215ea6e0d1645f8818e84fd6c5c78b00c5c970e485df531900044ac005c467",
+            "urn:company-wiki:evidence-span:sha256:00cf498956fe70d012a4f3e4802373ed982075360cf90b2358a43a8326485502",
+            "urn:company-wiki:evidence-span:sha256:f0f7a1034285d4f305401ba1002099c27b2b6a3cfc6e39edfec4f8e03d3e4cd6"
+          ],
+          "matched_roles": [
+            "company_filing"
+          ],
+          "coverage_ratio": 1.0
+        },
+        "candidate": {
+          "result": "full",
+          "matched_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:fa5d6cf90d527b566ae0d613df63c4166f84bd22b2a8e443f9da24012bf9f5ee",
+            "urn:company-wiki:evidence-span:sha256:c334d802618a91c44f58dc60a8d4a84549a6d0c5477480e0cd5aaf1e75149377",
+            "urn:company-wiki:evidence-span:sha256:1327f5083bee8a4a8f5043b8266998c1b0fa2636dcc0cf2d1af10da2b996c887"
+          ],
+          "matched_roles": [
+            "company_filing"
+          ],
+          "coverage_ratio": 1.0
+        },
+        "dedup": {
+          "result": "full",
+          "matched_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:fa5d6cf90d527b566ae0d613df63c4166f84bd22b2a8e443f9da24012bf9f5ee",
+            "urn:company-wiki:evidence-span:sha256:c334d802618a91c44f58dc60a8d4a84549a6d0c5477480e0cd5aaf1e75149377",
+            "urn:company-wiki:evidence-span:sha256:1327f5083bee8a4a8f5043b8266998c1b0fa2636dcc0cf2d1af10da2b996c887"
+          ],
+          "matched_roles": [
+            "company_filing"
+          ],
+          "coverage_ratio": 1.0
+        },
+        "selected": {
+          "result": "miss",
+          "matched_span_ids": [],
+          "matched_roles": [],
+          "coverage_ratio": 0.0345
+        }
+      },
+      "candidate_count": 226,
+      "dedup_count": 218,
+      "selected_count": 96,
+      "table_scan_pages": [
+        11,
+        17,
+        18,
+        21,
+        31,
+        43,
+        50,
+        56,
+        65
+      ],
+      "fragments": [
+        {
+          "locator": "loc:v1/page:18/paragraph:14",
+          "kind": "pdf_text_block",
+          "text": "制造设备销售额有望进一步提高至1,300 亿美元，中国大陆、中国台湾和韩国仍将是设备支出的",
+          "candidate": true,
+          "reasons": [
+            "business_narrative_signal",
+            "current_industry_context"
+          ],
+          "score": 5,
+          "group_cost": 4,
+          "budget_drop": "budget_full",
+          "category": "industry"
+        },
+        {
+          "locator": "loc:v1/page:18/paragraph:15",
+          "kind": "pdf_text_block",
+          "text": "前三大区域。",
+          "candidate": true,
+          "reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "current_industry_context"
+          ],
+          "score": 11,
+          "group_cost": 4,
+          "budget_drop": "budget_full",
+          "category": "industry"
+        }
+      ]
+    },
+    {
+      "sample_id": "S02",
+      "golden_id": "G-S02-03",
+      "locator": {
+        "page_number": 18
+      },
+      "stages": {
+        "parsed": {
+          "result": "full",
+          "matched_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:7b197ae016156a2ce5f1406e19da37f6724d0c47d70a85462262a3307dd1a4d1",
+            "urn:company-wiki:evidence-span:sha256:ccd0c8ea1c5e3f014ebc93f63414bf08d861af0ccd57fdf6d9217b8758a5f8a8"
+          ],
+          "matched_roles": [
+            "company_filing"
+          ],
+          "coverage_ratio": 1.0
+        },
+        "candidate": {
+          "result": "full",
+          "matched_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:a444da8ed0bb1ee899dd3c991d4843607f2836f609c74bf249debce41af68aa8",
+            "urn:company-wiki:evidence-span:sha256:5cc3d0f7c1df110902c2e6f0b5661fe7eb5fe4c31a6cc0dbb710586a2d3f4147"
+          ],
+          "matched_roles": [
+            "company_filing"
+          ],
+          "coverage_ratio": 1.0
+        },
+        "dedup": {
+          "result": "full",
+          "matched_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:a444da8ed0bb1ee899dd3c991d4843607f2836f609c74bf249debce41af68aa8",
+            "urn:company-wiki:evidence-span:sha256:5cc3d0f7c1df110902c2e6f0b5661fe7eb5fe4c31a6cc0dbb710586a2d3f4147"
+          ],
+          "matched_roles": [
+            "company_filing"
+          ],
+          "coverage_ratio": 1.0
+        },
+        "selected": {
+          "result": "miss",
+          "matched_span_ids": [],
+          "matched_roles": [],
+          "coverage_ratio": 0.0556
+        }
+      },
+      "candidate_count": 226,
+      "dedup_count": 218,
+      "selected_count": 96,
+      "table_scan_pages": [
+        11,
+        17,
+        18,
+        21,
+        31,
+        43,
+        50,
+        56,
+        65
+      ],
+      "fragments": [
+        {
+          "locator": "loc:v1/page:18/paragraph:23",
+          "kind": "pdf_text_block",
+          "text": "公司的等离子体刻蚀设备已应用在国际一线客户从65至5 纳米及其他先进的集成电路加工制",
+          "candidate": true,
+          "reasons": [
+            "business_narrative_signal",
+            "specific_business_event"
+          ],
+          "score": 7,
+          "group_cost": 2,
+          "budget_drop": "budget_full",
+          "category": "event"
+        },
+        {
+          "locator": "loc:v1/page:18/paragraph:24",
+          "kind": "pdf_text_block",
+          "text": "造生产线及先进封装生产线。",
+          "candidate": true,
+          "reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "specific_business_event"
+          ],
+          "score": 12,
+          "group_cost": 2,
+          "budget_drop": "budget_full",
+          "category": "event"
+        }
+      ]
+    },
+    {
+      "sample_id": "S04",
+      "golden_id": "G-S04-03",
+      "locator": {
+        "page_number": 34
+      },
+      "stages": {
+        "parsed": {
+          "result": "full",
+          "matched_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:7a3f456ab9b4e60a09edd349c2dab810c0f01caa0f7a15e51a90ab1776e7e77a",
+            "urn:company-wiki:evidence-span:sha256:9c63ebff733cf24509a62b52c6a8d08115ba4981b95dde0eae5dc65b084946d4"
+          ],
+          "matched_roles": [
+            "company_filing"
+          ],
+          "coverage_ratio": 1.0
+        },
+        "candidate": {
+          "result": "full",
+          "matched_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:30a7e2ef9058195314e48f00268dd699daf549541bf23ef917a7e9a526e15d1f",
+            "urn:company-wiki:evidence-span:sha256:7b4af4b5eb7a9ae944312f079a655638309bacdb07a51f34c81d08e2e0f71a93"
+          ],
+          "matched_roles": [
+            "company_filing"
+          ],
+          "coverage_ratio": 1.0
+        },
+        "dedup": {
+          "result": "full",
+          "matched_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:30a7e2ef9058195314e48f00268dd699daf549541bf23ef917a7e9a526e15d1f",
+            "urn:company-wiki:evidence-span:sha256:7b4af4b5eb7a9ae944312f079a655638309bacdb07a51f34c81d08e2e0f71a93"
+          ],
+          "matched_roles": [
+            "company_filing"
+          ],
+          "coverage_ratio": 1.0
+        },
+        "selected": {
+          "result": "miss",
+          "matched_span_ids": [],
+          "matched_roles": [],
+          "coverage_ratio": 0.0
+        }
+      },
+      "candidate_count": 923,
+      "dedup_count": 888,
+      "selected_count": 160,
+      "table_scan_pages": [
+        13,
+        31,
+        34,
+        49,
+        114,
+        133
+      ],
+      "fragments": [
+        {
+          "locator": "loc:v1/page:34/paragraph:14",
+          "kind": "pdf_text_block",
+          "text": "本次向社会公众公开发行新股的募集资金扣除发行费用后将按轻重缓急顺",
+          "candidate": true,
+          "reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "project_plan_or_status"
+          ],
+          "score": 4,
+          "group_cost": 2,
+          "budget_drop": "budget_full",
+          "category": "project"
+        },
+        {
+          "locator": "loc:v1/page:34/paragraph:15",
+          "kind": "pdf_text_block",
+          "text": "序投资于以下项目：",
+          "candidate": true,
+          "reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "project_plan_or_status"
+          ],
+          "score": 4,
+          "group_cost": 2,
+          "budget_drop": "budget_full",
+          "category": "project"
+        }
+      ]
+    },
+    {
+      "sample_id": "S06",
+      "golden_id": "G-S06-02",
+      "locator": {
+        "page_number": 43
+      },
+      "stages": {
+        "parsed": {
+          "result": "full",
+          "matched_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:f2327bbfc6fb4b94c486b9d45369148b8b18826bb75b4506079827ecf3e19d18",
+            "urn:company-wiki:evidence-span:sha256:82890158dbc852ab2d0a9670dc48c72dcfb6d92701fb362c93ecbff82868147e"
+          ],
+          "matched_roles": [
+            "company_filing"
+          ],
+          "coverage_ratio": 1.0
+        },
+        "candidate": {
+          "result": "full",
+          "matched_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:b06de588b2f1edffe24f4928cd6090a66d37e5c779fede35d39ecdd7d86d9a01",
+            "urn:company-wiki:evidence-span:sha256:9fdf0bc475b8f3b3718b62b8834960ba69735ca4829319679c6fbecd03cb5547"
+          ],
+          "matched_roles": [
+            "company_filing"
+          ],
+          "coverage_ratio": 1.0
+        },
+        "dedup": {
+          "result": "full",
+          "matched_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:b06de588b2f1edffe24f4928cd6090a66d37e5c779fede35d39ecdd7d86d9a01",
+            "urn:company-wiki:evidence-span:sha256:9fdf0bc475b8f3b3718b62b8834960ba69735ca4829319679c6fbecd03cb5547"
+          ],
+          "matched_roles": [
+            "company_filing"
+          ],
+          "coverage_ratio": 1.0
+        },
+        "selected": {
+          "result": "miss",
+          "matched_span_ids": [],
+          "matched_roles": [],
+          "coverage_ratio": 0.0652
+        }
+      },
+      "candidate_count": 382,
+      "dedup_count": 357,
+      "selected_count": 160,
+      "table_scan_pages": [
+        4,
+        8,
+        13,
+        29,
+        39,
+        43,
+        52,
+        68,
+        75,
+        87
+      ],
+      "fragments": [
+        {
+          "locator": "loc:v1/page:43/paragraph:10",
+          "kind": "pdf_text_block",
+          "text": "本次募集资金除补充流动资金外，拟投资于精密数控刀体生产线建设项目",
+          "candidate": true,
+          "reasons": [
+            "business_narrative_signal",
+            "progress_or_change_language",
+            "project_plan_or_status"
+          ],
+          "score": 3,
+          "group_cost": 6,
+          "budget_drop": "budget_full",
+          "category": "event"
+        }
+      ]
+    },
+    {
+      "sample_id": "S06",
+      "golden_id": "G-S06-03",
+      "locator": {
+        "page_number": 43
+      },
+      "stages": {
+        "parsed": {
+          "result": "full",
+          "matched_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:bda0e22577421e285a9feff68518f94f4e33b5abd9fd0354ed9b75d7f84c5df3",
+            "urn:company-wiki:evidence-span:sha256:ff50ccb54683af2e0eb43d9fb27e536c8bf8a3d29fb089c723221089e0f8326b"
+          ],
+          "matched_roles": [
+            "company_filing"
+          ],
+          "coverage_ratio": 1.0
+        },
+        "candidate": {
+          "result": "full",
+          "matched_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:34f77571a43b9438cfc8bc252d82c8f09fb2006093b70bf5bf1ed62cbe66ca59",
+            "urn:company-wiki:evidence-span:sha256:8a6409b794a837b3cfd0c59523c2da55e54008cb5537ff10c7d884f3693875ec"
+          ],
+          "matched_roles": [
+            "company_filing"
+          ],
+          "coverage_ratio": 1.0
+        },
+        "dedup": {
+          "result": "miss",
+          "matched_span_ids": [],
+          "matched_roles": [],
+          "coverage_ratio": 0.2857
+        },
+        "selected": {
+          "result": "miss",
+          "matched_span_ids": [],
+          "matched_roles": [],
+          "coverage_ratio": 0.1429
+        }
+      },
+      "candidate_count": 382,
+      "dedup_count": 357,
+      "selected_count": 160,
+      "table_scan_pages": [
+        4,
+        8,
+        13,
+        29,
+        39,
+        43,
+        52,
+        68,
+        75,
+        87
+      ],
+      "fragments": [
+        {
+          "locator": "loc:v1/page:43/paragraph:25",
+          "kind": "pdf_text_block",
+          "text": "本次募投项目达产后，公司预计新增精密数控刀体产品50",
+          "candidate": true,
+          "reasons": [
+            "business_narrative_signal",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status"
+          ],
+          "score": 6,
+          "group_cost": null,
+          "budget_drop": null,
+          "category": null
+        }
+      ]
+    },
+    {
+      "sample_id": "S06",
+      "golden_id": "G-S06-04",
+      "locator": {
+        "page_number": 87
+      },
+      "stages": {
+        "parsed": {
+          "result": "full",
+          "matched_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:d58acf2f2714553f5b8a21529e84be7f1637036e5251c0a85c32e7e9a48c1185",
+            "urn:company-wiki:evidence-span:sha256:4a837e4944867ff4fb5b1940952a745101aef296d8cf2f660fe7012de1557d6a"
+          ],
+          "matched_roles": [
+            "company_filing"
+          ],
+          "coverage_ratio": 1.0
+        },
+        "candidate": {
+          "result": "full",
+          "matched_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:fbddbc0ef6d5cf0c4b9eb8370725e218c30987c549d3afb5bb11455dfab533a9",
+            "urn:company-wiki:evidence-span:sha256:01680a59953d5b829a2f0346ff62e30f0f610f54cc30466a65e96d0d06deb745"
+          ],
+          "matched_roles": [
+            "company_filing"
+          ],
+          "coverage_ratio": 1.0
+        },
+        "dedup": {
+          "result": "full",
+          "matched_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:fbddbc0ef6d5cf0c4b9eb8370725e218c30987c549d3afb5bb11455dfab533a9",
+            "urn:company-wiki:evidence-span:sha256:01680a59953d5b829a2f0346ff62e30f0f610f54cc30466a65e96d0d06deb745"
+          ],
+          "matched_roles": [
+            "company_filing"
+          ],
+          "coverage_ratio": 1.0
+        },
+        "selected": {
+          "result": "miss",
+          "matched_span_ids": [],
+          "matched_roles": [],
+          "coverage_ratio": 0.5714
+        }
+      },
+      "candidate_count": 382,
+      "dedup_count": 357,
+      "selected_count": 160,
+      "table_scan_pages": [
+        4,
+        8,
+        13,
+        29,
+        39,
+        43,
+        52,
+        68,
+        75,
+        87
+      ],
+      "fragments": [
+        {
+          "locator": "loc:v1/page:87/paragraph:11",
+          "kind": "pdf_text_block",
+          "text": "2016—2020 年进口刀具占总消费的比重从37.17%下降至31.12%，一定",
+          "candidate": true,
+          "reasons": [
+            "business_narrative_signal",
+            "current_industry_context"
+          ],
+          "score": 5,
+          "group_cost": 1,
+          "budget_drop": null,
+          "category": null
+        },
+        {
+          "locator": "loc:v1/page:87/paragraph:30",
+          "kind": "pdf_text_block",
+          "text": "31.12%",
+          "candidate": false,
+          "reasons": [],
+          "score": null,
+          "group_cost": null,
+          "budget_drop": null,
+          "category": null
+        }
+      ]
+    }
+  ],
+  "originals": {
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\中微公司\\raw\\financial_reports\\中微公司：2025年年度报告.pdf": {
+      "sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "size": 9165875,
+      "mtime_ns": 1775986949114724400
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\中微公司\\raw\\financial_reports\\中微公司：2025年半年度报告.pdf": {
+      "sha256": "91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+      "size": 6361468,
+      "mtime_ns": 1775986992765548800
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\中微公司\\raw\\prospectus\\中微公司：首次公开发行股票并在科创板上市招股说明书.pdf": {
+      "sha256": "19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+      "size": 11211796,
+      "mtime_ns": 1776287132568457600
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\华锐精密\\raw\\research\\华锐精密：向不特定对象发行可转换公司债券证券募集说明书.PDF": {
+      "sha256": "c6ed566631e123f159abf2697c157f1868f8e994ccf8e3352132046a6c5ca0a1",
+      "size": 4756322,
+      "mtime_ns": 1664747887000000000
+    }
+  },
+  "protected": {
+    "config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+    "config\\source_acquisition.yaml": "3609e707466eeb3e0f685e14f2637c6afa39ba900edef1be4814433a43300a01",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\daily_alert.jsonl": "0aee073f56c133786365ab96899edf4d91c0f9e1a0e13ab61b2a6bffd8316270",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_alert.jsonl": "b617b0b00ff1a758b5b46299e3e5db3115f56efd90d212154abe988e5ea9fee5",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_manifest.json": "0d55cb8c81f12b663e330819da3037bb69ce8564ac41a686b578a99f78f948bf"
+  },
+  "seconds": 62.298,
+  "vendor_calls": 0,
+  "downloads": 0
+}

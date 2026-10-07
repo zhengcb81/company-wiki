@@ -10,6 +10,8 @@
 
 ## 当前恢复点（2026-10-07）
 
+- **当前施工：S7经营语义集中节点已本地通过，准备正常提交推送。** 按[后续实施单](s7_followup_quality_implementation_2026-10-07.md)完成具体经营reason、量化行业独立类别和有界未完句合组；selector0.4.1、parser仍0.1.0。293责任项/3.60秒、真实S01/S02/S06正式链路7点/97.74秒及既有节点/旧final/generation11项通过。完整九文档27/33（原21/33），764定位全绿、必需旧full无退步；optional5/17→3/17的两项取舍完整保留，不能宣称所有旧full无回退。精选66215B（原66195B）、重复4（原3）。S04募投上下文与S08数字问答解析仍未施工，S7不complete。详见[s7节点收据](harness_lanes/results/s7_operating_main_acceptance_2026-10-07.json)。
+
 - **最新：N6三包全部实际并线/推送。** 候选merge e8c645e、精确CI37547043642全部步骤成功/job53秒；共享selector0.4.0。269短责任项+11真实/兼容/升级组合通过，完整九文档21/33、旧full无回退、重复48→3、764定位全通过。S7剩余9个业务点与IR混合cell/重复噪声，继续施工，不重派已交卡。最新验收/保护/发布证据见[n6集中验收](n6_candidate_main_acceptance_2026-10-07.md)。
 
 - DOCSET真实merge `58b74d07dd4f8b589c134ef9060a689864a8c089`已推master，精确CI37528050044一次成功/75秒；43不同责任case和真实9样本已接收，工具完成而质量required12/33仍待改。MAIN先行兼容/业务标准已发布`0947cea63140d515620f563daf2058f4520cd6a3`、精确CI37532408169一次成功/80秒，无运行代码变更。RAW-DUP a41244a/CI57秒、R6 eae2dd4/CI59秒等已完成证据不重跑。
@@ -86,16 +88,21 @@ TDD 框住具体公开行为。只在 N4 A/B/C、存储迁移等大节点集中�
 - [N4 实施与真实批次恢复细则](n4_production_batch_implementation.md)、[S5/S6 清理细则](s5_s6_legacy_storage_implementation.md)
 - [完成证据](main_completion_evidence_2026-10-06.md)、[并行总计划](parallel_execution_plan_2026-10-03.md)、[N5 三包](harness_lanes/n5_parallel_packages_2026-10-06.md)
 - [findings](findings.md)、[progress](progress.md)
+- [S7后续质量具体实施单](s7_followup_quality_implementation_2026-10-07.md)
 
 历史卡只解释已做工作，不能将“待测试/待并线/下一步”的旧文字恢复成当前门。
 
 ## Next Step
 
-**继续S7剩余质量整改；N6三线验收、实际并线和推送已完成。** 外线f31cc0d（实现9a4b815）已实际无冲突merge e8c645e并推master、精确CI37547043642全步骤绿53秒；MAIN补17个边界/组合反例与修正，selector0.4.0，269责任项/2.81秒与Ruff/mypy绿。真实年报/IR/TXT四个经营点经正式Worker→outbox→RF→search/exact→恢复已绿；最终旧final9、升级1和九样本结果以[集中验收](n6_candidate_main_acceptance_2026-10-07.md)及其收据为准。提交不跑长pytest，日常CI没有加入大基准或真实长E2E。
+**本轮先发布S7 selector0.4.1，再进入IR parser0.1.1节点。** N6三线验收、实际并线和推送已完成，不重派。新S7正式年报/半年报/可转债7业务点及原节点/旧final/升级已验证，完整九样本27/33；两处optional取舍保持可见。发布前收据中的code_sha/ci必须实际填实读结果，不能把local_verified状态误当已推。下一IR版本传播和责任测试包均在[S7细则](s7_followup_quality_implementation_2026-10-07.md)最后一节；修复数字问答混合cell与两条套话，不改原golden。提交不跑长pytest，日常CI没有加入大基准或真实长E2E。
 
 首次组合全表403.731秒实测18/33（旧12/33）、764定位零失败、重复3（旧48）。已保留初次报告；其中年报G04发生回退及EPI正式E2E失败，MAIN按句理由/组、忙页分类offer、完整fact reasons及工程时间表责任修正，最终集中复验已完成：21/33、可选5/17、764定位零失败、重复3、精选66195B、372.044秒，旧required/optional full均无回退。不用手推覆盖或旧CI替代。原golden/86点/33分母、parser0.1.0、原件与96/160限额不变。**N6实现合入与S7全部业务质量完成分别记录。**
 
 S7后续按最终逐点差距处理，不重派已交三包：
+
+**以最新0.4.1结果覆盖下面历史9点清单：** 必需remaining6：G-S01-01（海外批量销售已保留、全球应用前一句未全部选）、G-S04-03（募投引导句/项目表联系）、G-S06-03（page43 oracle miss、同原件page7完整产能已canonical保留）、纯融资金额G-S06-01、正文外provider G-S09-01、纯guidance G-S09-03。业务/项目解释子集26/29，不能替代正式27/33。下一先IR解析噪声，再按实际资料价值处理S01/募投上下文；不强行塞融资总额或guidance凑分。
+
+本项目不把“每个optional旧full必须永久保持”设为自动发布门：本轮G-S02-06静态海外销售主体职责、G-S05-05项目营收/利润测算退步，已查原句并按“业务动态优先、财务工具负责纯数值”明确记录。原标注、全部必需业务断言与定位真实性不变；以后optional退步仍逐项说明，不能用此项泛化为允许丢订单/产能/项目进展。
 
 1. 先修真实融资/招股项目与行业描述剩余候选或排序问题；按同原件parsed→candidate→selected定位责任，新增跨公司合成反例，修具体经营事实，不为纯财务/provider缺口扩大正文范围或切片配额。最终业务remaining9：S01 G01/G03/G05、S02 G02/G03、S04 G03（项目引导上下文）、S06 G02/G03/G04；原required剩余12另含3个纯金额/正文外scope点，仍按原33分母报告。
 2. 修IR数字编号问题/多问答混合cell：S08现有0.1.0 parser把“4：/5：”和两条套话留在一个219字orphan_answer单元。先测试数值口径、提问/答复角色、原始cell字符范围、负例和旧final回放；评估最小可回放片段与parser版本传播。不能删整条有价值占比或屏蔽noise/needs_review，不能跨仓改RF合同。

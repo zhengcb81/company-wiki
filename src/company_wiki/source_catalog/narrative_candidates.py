@@ -260,10 +260,9 @@ def assess_unit(unit: NarrativeUnit, rules: CandidateRules) -> CandidateAssessme
     baseline_eligible = _eligible(signals)
     if not (baseline_eligible or fact.eligible):
         return CandidateAssessment(None)
-    # Generic operating facts only contribute when the injected signal rules
-    # alone would not have selected the unit, so existing selections keep
-    # byte-identical topics, reasons and scores.
-    earned = fact if fact.eligible and not baseline_eligible else _EMPTY_FACT
+    # Specific operating meaning remains useful even when generic progress
+    # already made the unit eligible. Preserve both reasons for budget policy.
+    earned = fact if fact.eligible else _EMPTY_FACT
     topics = _fallback_topics(topics, signals, fact)
     if _match(rules.static_definition, text):
         return CandidateAssessment(None)

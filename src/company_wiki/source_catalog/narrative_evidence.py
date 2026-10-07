@@ -49,6 +49,7 @@ from .narrative_routing import (
 NARRATIVE_PARSER_NAME = "selective_narrative_parser"
 NARRATIVE_PARSER_VERSION = "0.1.0"
 NARRATIVE_SELECTOR_NAME = "select_narrative_evidence"
+# 0.4.1 preserves specific operating/industry meaning and atomic fact sentences.
 # 0.4.0 completes bounded business facts and preserves discourse boundaries.
 # 0.3.3 adds context-safe whole-group dedup and fixed-budget category fairness.
 # 0.3.2 adds concrete English operating actions and adoption, without brand rules.
@@ -57,7 +58,7 @@ NARRATIVE_SELECTOR_NAME = "select_narrative_evidence"
 # and keeps unrecognized business documents reviewable. The version also pins
 # batch generation identity, so old selection results cannot be silently reused.
 # Parsing, source bytes and locator construction remain unchanged.
-NARRATIVE_SELECTOR_VERSION = "0.4.0"
+NARRATIVE_SELECTOR_VERSION = "0.4.1"
 _FINANCIAL_TERMS = re.compile(
     r"资产负债表|利润表|现金流量表|每股收益|归母净利润|营业收入|营业成本|"
     r"货币资金|应收账款|存货|固定资产|加权平均|基本每股|稀释每股|"

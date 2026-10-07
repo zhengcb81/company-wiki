@@ -1,0 +1,1535 @@
+{
+  "schema_version": "s7-gap-stages/1",
+  "base": "3ffafed4dc05dd3c397f8841fd3829a4e77d9244",
+  "selector": "0.4.0",
+  "parser": "0.1.0",
+  "scope": "All PDF text, tables only on original golden declared read pages; diagnostic, not production or full-table benchmark. No rule/oracle mutation.",
+  "entries": [
+    {
+      "sample_id": "S01",
+      "golden_id": "G-S01-01",
+      "locator": {
+        "page_number": 32
+      },
+      "stages": {
+        "parsed": {
+          "result": "full",
+          "matched_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:14cd6d06120a5bb8d36857c196d98e4068bb06b3d9521bc396ecbaeed8c86117",
+            "urn:company-wiki:evidence-span:sha256:0de0c59ca341df425a12d80de3926a70d37426a3eb9a1b89cae64848a267eeb3",
+            "urn:company-wiki:evidence-span:sha256:f2d625b18a03092f1dfb0f63831bd0a477bf9c25e1998e49dfa41f09f8340163"
+          ],
+          "matched_roles": [
+            "company_filing"
+          ],
+          "coverage_ratio": 1.0
+        },
+        "candidate": {
+          "result": "full",
+          "matched_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:5160c63408dba67e3c3c87982eea1d3577479cd78f60c12574cec5fcb6bf03d1",
+            "urn:company-wiki:evidence-span:sha256:3790d5bd086868b4638fc30eaeb6a3eb60844c920bcdd5b1df83fa3edce5b490",
+            "urn:company-wiki:evidence-span:sha256:62750cb6928e025c2ab1920e057ee7f2c68da5c3d29fbec73abf35c019fa56aa"
+          ],
+          "matched_roles": [
+            "company_filing"
+          ],
+          "coverage_ratio": 1.0
+        },
+        "dedup": {
+          "result": "full",
+          "matched_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:5160c63408dba67e3c3c87982eea1d3577479cd78f60c12574cec5fcb6bf03d1",
+            "urn:company-wiki:evidence-span:sha256:3790d5bd086868b4638fc30eaeb6a3eb60844c920bcdd5b1df83fa3edce5b490",
+            "urn:company-wiki:evidence-span:sha256:62750cb6928e025c2ab1920e057ee7f2c68da5c3d29fbec73abf35c019fa56aa"
+          ],
+          "matched_roles": [
+            "company_filing"
+          ],
+          "coverage_ratio": 1.0
+        },
+        "selected": {
+          "result": "miss",
+          "matched_span_ids": [],
+          "matched_roles": [],
+          "coverage_ratio": 0.4684
+        }
+      },
+      "candidate_count": 391,
+      "dedup_count": 388,
+      "selected_count": 96,
+      "table_scan_pages": [
+        19,
+        21,
+        25,
+        32,
+        40,
+        49,
+        64,
+        75,
+        101,
+        109,
+        118,
+        121,
+        122,
+        125
+      ],
+      "fragments": [
+        {
+          "locator": "loc:v1/page:32/paragraph:7",
+          "kind": "pdf_text_block",
+          "text": "公司刻蚀设备已应用于全球先进的3 纳米及以下集成电路加工制造生产线。",
+          "candidate": true,
+          "reasons": [
+            "business_narrative_signal",
+            "applied_operating_milestone",
+            "specific_business_event"
+          ],
+          "score": 13,
+          "group_cost": 1,
+          "budget_drop": "budget_full",
+          "category": "operating_milestone"
+        },
+        {
+          "locator": "loc:v1/page:32/paragraph:8",
+          "kind": "pdf_text_block",
+          "text": "在海外先进的3 纳米",
+          "candidate": true,
+          "reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "applied_operating_milestone",
+            "specific_business_event"
+          ],
+          "score": 18,
+          "group_cost": 2,
+          "budget_drop": null,
+          "category": null
+        },
+        {
+          "locator": "loc:v1/page:32/paragraph:9",
+          "kind": "pdf_text_block",
+          "text": "芯片生产线及下一代更先进的生产线上，公司的CCP 刻蚀设备均实现了批量销售。",
+          "candidate": true,
+          "reasons": [
+            "business_narrative_signal",
+            "applied_operating_milestone",
+            "specific_business_event"
+          ],
+          "score": 16,
+          "group_cost": 2,
+          "budget_drop": null,
+          "category": null
+        }
+      ],
+      "candidate_contributors": [
+        {
+          "locator": "loc:v1/page:32/paragraph:7",
+          "text": "公司刻蚀设备已应用于全球先进的3 纳米及以下集成电路加工制造生产线。",
+          "reasons": [
+            "business_narrative_signal",
+            "applied_operating_milestone",
+            "specific_business_event"
+          ],
+          "score": 13,
+          "group_cost": 1,
+          "group_id": "urn:company-wiki:context-group:sha256:1580288b90c6eaed5b1f03b55bdc727151474f9e1515a3e384b08d6b7acfab6d:operating-fact:0",
+          "drop": [
+            {
+              "reason": "budget_full",
+              "category": "operating_milestone"
+            }
+          ]
+        },
+        {
+          "locator": "loc:v1/page:32/paragraph:9",
+          "text": "芯片生产线及下一代更先进的生产线上，公司的CCP 刻蚀设备均实现了批量销售。",
+          "reasons": [
+            "business_narrative_signal",
+            "applied_operating_milestone",
+            "specific_business_event"
+          ],
+          "score": 16,
+          "group_cost": 2,
+          "group_id": "urn:company-wiki:context-group:sha256:1580288b90c6eaed5b1f03b55bdc727151474f9e1515a3e384b08d6b7acfab6d:operating-fact:1",
+          "drop": []
+        },
+        {
+          "locator": "loc:v1/page:32/paragraph:8",
+          "text": "在海外先进的3 纳米",
+          "reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "applied_operating_milestone",
+            "specific_business_event"
+          ],
+          "score": 18,
+          "group_cost": 2,
+          "group_id": "urn:company-wiki:context-group:sha256:1580288b90c6eaed5b1f03b55bdc727151474f9e1515a3e384b08d6b7acfab6d:operating-fact:1",
+          "drop": []
+        }
+      ],
+      "selected_quote_groups": [],
+      "project_page_context": [],
+      "quote_same_original_any_locator": false
+    },
+    {
+      "sample_id": "S01",
+      "golden_id": "G-S01-03",
+      "locator": {
+        "page_number": 40
+      },
+      "stages": {
+        "parsed": {
+          "result": "full",
+          "matched_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:ac4e0e0d2bdcb5d85b7bc31b4fa96293b0229494e3ec4478383d611172c1b03b",
+            "urn:company-wiki:evidence-span:sha256:0c3cbe8050d38cd80a396368cb38f1c60515e76e298314b8bcffc42505be3ed0"
+          ],
+          "matched_roles": [
+            "company_filing"
+          ],
+          "coverage_ratio": 1.0
+        },
+        "candidate": {
+          "result": "full",
+          "matched_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:bed3a963fea19789fc0d5ded1c35e08ff712d931d5026f5ade0b7d271d56ce64",
+            "urn:company-wiki:evidence-span:sha256:501a39123505cda8a10d3443bd1c00901176fa3ab7158629d41e8521a2bcfea5"
+          ],
+          "matched_roles": [
+            "company_filing"
+          ],
+          "coverage_ratio": 1.0
+        },
+        "dedup": {
+          "result": "full",
+          "matched_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:bed3a963fea19789fc0d5ded1c35e08ff712d931d5026f5ade0b7d271d56ce64",
+            "urn:company-wiki:evidence-span:sha256:501a39123505cda8a10d3443bd1c00901176fa3ab7158629d41e8521a2bcfea5"
+          ],
+          "matched_roles": [
+            "company_filing"
+          ],
+          "coverage_ratio": 1.0
+        },
+        "selected": {
+          "result": "full",
+          "matched_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:5efcd28fa21cd0edd451def627b6cb68451aea4acc21c0bbdf473e1fc50ac0c3",
+            "urn:company-wiki:evidence-span:sha256:8a66042f5e3c4b7e98cff5e043c8f0417ed92fcec2545f3fb4f7706297ec9180"
+          ],
+          "matched_roles": [
+            "company_filing"
+          ],
+          "coverage_ratio": 1.0
+        }
+      },
+      "candidate_count": 391,
+      "dedup_count": 388,
+      "selected_count": 96,
+      "table_scan_pages": [
+        19,
+        21,
+        25,
+        32,
+        40,
+        49,
+        64,
+        75,
+        101,
+        109,
+        118,
+        121,
+        122,
+        125
+      ],
+      "fragments": [],
+      "candidate_contributors": [
+        {
+          "locator": "loc:v1/page:40/paragraph:12",
+          "text": "同时，公司拟通过发行股份及支付现金购买资产并募集配套资金的方式购买杭州众硅电子科",
+          "reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "corporate_development",
+            "project_plan_or_status"
+          ],
+          "score": 7,
+          "group_cost": 2,
+          "group_id": "urn:company-wiki:context-group:sha256:f5abcb586522f2e655330e6ea75cb1613da40b5599e0595e9f1b70706ad01d99:operating-fact:3",
+          "drop": []
+        },
+        {
+          "locator": "loc:v1/page:40/paragraph:13",
+          "text": "技有限公司控股权实现从“干法”向“干法+湿法”整体解决方案的关键跨越。",
+          "reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "corporate_development",
+            "project_plan_or_status"
+          ],
+          "score": 7,
+          "group_cost": 2,
+          "group_id": "urn:company-wiki:context-group:sha256:f5abcb586522f2e655330e6ea75cb1613da40b5599e0595e9f1b70706ad01d99:operating-fact:3",
+          "drop": []
+        }
+      ],
+      "selected_quote_groups": [
+        {
+          "evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:5efcd28fa21cd0edd451def627b6cb68451aea4acc21c0bbdf473e1fc50ac0c3",
+            "urn:company-wiki:evidence-span:sha256:8a66042f5e3c4b7e98cff5e043c8f0417ed92fcec2545f3fb4f7706297ec9180"
+          ],
+          "locators": [
+            "loc:v1/page:40/paragraph:12",
+            "loc:v1/page:40/paragraph:13"
+          ],
+          "source_role": "company_filing",
+          "topics": [
+            "capacity_projects",
+            "core_business",
+            "new_business",
+            "orders_customers",
+            "products_rd"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "corporate_development",
+            "pdf_visual_context_group",
+            "project_plan_or_status"
+          ],
+          "raw_text_sha256": "9854adbe80cf1a5fed7e543055e725ca24be291a33eb431934a5e6b812bd62ad",
+          "raw_text": "同时，公司拟通过发行股份及支付现金购买资产并募集配套资金的方式购买杭州众硅电子科技有限公司控股权实现从“干法”向“干法+湿法”整体解决方案的关键跨越。",
+          "quality_flags": [],
+          "parser_name": "selective_narrative_parser",
+          "parser_version": "0.1.0",
+          "context_group_id": "urn:company-wiki:context-group:sha256:f5abcb586522f2e655330e6ea75cb1613da40b5599e0595e9f1b70706ad01d99:operating-fact:3",
+          "context_member_count": 2
+        }
+      ],
+      "project_page_context": [],
+      "quote_same_original_any_locator": true
+    },
+    {
+      "sample_id": "S01",
+      "golden_id": "G-S01-05",
+      "locator": {
+        "page_number": 75
+      },
+      "stages": {
+        "parsed": {
+          "result": "full",
+          "matched_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:59f038d683fcd9665f702128d82fb4b22abeb6aa03b847fdb110b0cca6b6c7c5",
+            "urn:company-wiki:evidence-span:sha256:c9f5a26d2c22b65175b11a229a9c1fc9cdd4c6e2021de935e566203976765fd7"
+          ],
+          "matched_roles": [
+            "company_filing"
+          ],
+          "coverage_ratio": 1.0
+        },
+        "candidate": {
+          "result": "full",
+          "matched_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:1c0f6d00f261858002d18428e03edbde6ece7939673f5a6c8156635e49d51ea3",
+            "urn:company-wiki:evidence-span:sha256:8563309f891ee495bb01683f6f9496bf6de8be80f39a3a80568db86e02d55661"
+          ],
+          "matched_roles": [
+            "company_filing"
+          ],
+          "coverage_ratio": 1.0
+        },
+        "dedup": {
+          "result": "full",
+          "matched_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:1c0f6d00f261858002d18428e03edbde6ece7939673f5a6c8156635e49d51ea3",
+            "urn:company-wiki:evidence-span:sha256:8563309f891ee495bb01683f6f9496bf6de8be80f39a3a80568db86e02d55661"
+          ],
+          "matched_roles": [
+            "company_filing"
+          ],
+          "coverage_ratio": 1.0
+        },
+        "selected": {
+          "result": "miss",
+          "matched_span_ids": [],
+          "matched_roles": [],
+          "coverage_ratio": 0.0
+        }
+      },
+      "candidate_count": 391,
+      "dedup_count": 388,
+      "selected_count": 96,
+      "table_scan_pages": [
+        19,
+        21,
+        25,
+        32,
+        40,
+        49,
+        64,
+        75,
+        101,
+        109,
+        118,
+        121,
+        122,
+        125
+      ],
+      "fragments": [],
+      "candidate_contributors": [
+        {
+          "locator": "loc:v1/page:75/paragraph:21",
+          "text": "而波动，据国际半导体产业协会（SEMI）预测，全球半导体制造装备销售额今年将达1330 亿美",
+          "reasons": [
+            "business_narrative_signal",
+            "quantified_industry_outlook",
+            "current_industry_context"
+          ],
+          "score": 7,
+          "group_cost": 3,
+          "group_id": "urn:company-wiki:context-group:sha256:3a81262de24840235645343e3b1bf8f20518211bd7d8d2798fc874492e368bd1:operating-fact:3",
+          "drop": [
+            {
+              "reason": "budget_full",
+              "category": "industry"
+            }
+          ]
+        },
+        {
+          "locator": "loc:v1/page:75/paragraph:22",
+          "text": "元，同比增加13.7%；",
+          "reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "quantified_industry_outlook",
+            "current_industry_context"
+          ],
+          "score": 12,
+          "group_cost": 3,
+          "group_id": "urn:company-wiki:context-group:sha256:3a81262de24840235645343e3b1bf8f20518211bd7d8d2798fc874492e368bd1:operating-fact:3",
+          "drop": [
+            {
+              "reason": "budget_full",
+              "category": "industry"
+            }
+          ]
+        }
+      ],
+      "selected_quote_groups": [],
+      "project_page_context": [],
+      "quote_same_original_any_locator": false
+    },
+    {
+      "sample_id": "S02",
+      "golden_id": "G-S02-02",
+      "locator": {
+        "page_number": 18
+      },
+      "stages": {
+        "parsed": {
+          "result": "full",
+          "matched_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:83215ea6e0d1645f8818e84fd6c5c78b00c5c970e485df531900044ac005c467",
+            "urn:company-wiki:evidence-span:sha256:00cf498956fe70d012a4f3e4802373ed982075360cf90b2358a43a8326485502",
+            "urn:company-wiki:evidence-span:sha256:f0f7a1034285d4f305401ba1002099c27b2b6a3cfc6e39edfec4f8e03d3e4cd6"
+          ],
+          "matched_roles": [
+            "company_filing"
+          ],
+          "coverage_ratio": 1.0
+        },
+        "candidate": {
+          "result": "full",
+          "matched_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:ed2887bd780accdfea503eed5c3f00595d811a7e5bfa6760b7c0ff276829878f",
+            "urn:company-wiki:evidence-span:sha256:c334d802618a91c44f58dc60a8d4a84549a6d0c5477480e0cd5aaf1e75149377",
+            "urn:company-wiki:evidence-span:sha256:d27c2651a9108ee1263f47ca054841f22dfe0eec5d91cb717c99e7a3a25c10e1"
+          ],
+          "matched_roles": [
+            "company_filing"
+          ],
+          "coverage_ratio": 1.0
+        },
+        "dedup": {
+          "result": "full",
+          "matched_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:ed2887bd780accdfea503eed5c3f00595d811a7e5bfa6760b7c0ff276829878f",
+            "urn:company-wiki:evidence-span:sha256:c334d802618a91c44f58dc60a8d4a84549a6d0c5477480e0cd5aaf1e75149377",
+            "urn:company-wiki:evidence-span:sha256:d27c2651a9108ee1263f47ca054841f22dfe0eec5d91cb717c99e7a3a25c10e1"
+          ],
+          "matched_roles": [
+            "company_filing"
+          ],
+          "coverage_ratio": 1.0
+        },
+        "selected": {
+          "result": "full",
+          "matched_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:43f73f48b7768ee293266384eb3488d17086caf470d298708db3f127c4014e5a",
+            "urn:company-wiki:evidence-span:sha256:875285d5a35759e7aa885c695725cc781d75b4355f6ce908aa24232c64362354",
+            "urn:company-wiki:evidence-span:sha256:8e153648b5be28286ee80df04f0843fc163326f9e2d1ca99bb185a15aee6bd9c"
+          ],
+          "matched_roles": [
+            "company_filing"
+          ],
+          "coverage_ratio": 1.0
+        }
+      },
+      "candidate_count": 226,
+      "dedup_count": 218,
+      "selected_count": 96,
+      "table_scan_pages": [
+        11,
+        17,
+        18,
+        21,
+        31,
+        43,
+        50,
+        56,
+        65
+      ],
+      "fragments": [
+        {
+          "locator": "loc:v1/page:18/paragraph:14",
+          "kind": "pdf_text_block",
+          "text": "制造设备销售额有望进一步提高至1,300 亿美元，中国大陆、中国台湾和韩国仍将是设备支出的",
+          "candidate": true,
+          "reasons": [
+            "business_narrative_signal",
+            "current_industry_context"
+          ],
+          "score": 5,
+          "group_cost": 4,
+          "budget_drop": null,
+          "category": null
+        },
+        {
+          "locator": "loc:v1/page:18/paragraph:15",
+          "kind": "pdf_text_block",
+          "text": "前三大区域。",
+          "candidate": true,
+          "reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "quantified_industry_outlook",
+            "current_industry_context"
+          ],
+          "score": 14,
+          "group_cost": 4,
+          "budget_drop": null,
+          "category": null
+        }
+      ],
+      "candidate_contributors": [
+        {
+          "locator": "loc:v1/page:18/paragraph:14",
+          "text": "制造设备销售额有望进一步提高至1,300 亿美元，中国大陆、中国台湾和韩国仍将是设备支出的",
+          "reasons": [
+            "business_narrative_signal",
+            "current_industry_context"
+          ],
+          "score": 5,
+          "group_cost": 4,
+          "group_id": "urn:company-wiki:context-group:sha256:4f933d9cf2125b5ea43234d0c32c11f23be5ec1952c2371d43f0984af4be8eb3:operating-fact:1",
+          "drop": []
+        },
+        {
+          "locator": "loc:v1/page:18/paragraph:13",
+          "text": "产业协会（SEMI）最新的预测数据显示，在先进逻辑、存储和技术转型带动下，2026 年半导体",
+          "reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "quantified_industry_outlook",
+            "current_industry_context"
+          ],
+          "score": 14,
+          "group_cost": 4,
+          "group_id": "urn:company-wiki:context-group:sha256:4f933d9cf2125b5ea43234d0c32c11f23be5ec1952c2371d43f0984af4be8eb3:operating-fact:1",
+          "drop": []
+        },
+        {
+          "locator": "loc:v1/page:18/paragraph:15",
+          "text": "前三大区域。",
+          "reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "quantified_industry_outlook",
+            "current_industry_context"
+          ],
+          "score": 14,
+          "group_cost": 4,
+          "group_id": "urn:company-wiki:context-group:sha256:4f933d9cf2125b5ea43234d0c32c11f23be5ec1952c2371d43f0984af4be8eb3:operating-fact:1",
+          "drop": []
+        }
+      ],
+      "selected_quote_groups": [
+        {
+          "evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:c888112e5faccafdfea515e7e349c02266f57d1d511260aa4e0695e1c646da16",
+            "urn:company-wiki:evidence-span:sha256:43f73f48b7768ee293266384eb3488d17086caf470d298708db3f127c4014e5a",
+            "urn:company-wiki:evidence-span:sha256:875285d5a35759e7aa885c695725cc781d75b4355f6ce908aa24232c64362354",
+            "urn:company-wiki:evidence-span:sha256:8e153648b5be28286ee80df04f0843fc163326f9e2d1ca99bb185a15aee6bd9c"
+          ],
+          "locators": [
+            "loc:v1/page:18/paragraph:12",
+            "loc:v1/page:18/paragraph:13",
+            "loc:v1/page:18/paragraph:14",
+            "loc:v1/page:18/paragraph:15"
+          ],
+          "source_role": "company_filing",
+          "topics": [
+            "industry_dynamics"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "current_industry_context",
+            "pdf_visual_context_group",
+            "quantified_industry_outlook"
+          ],
+          "raw_text_sha256": "3db88188be1bf40bdece16b3f0cdbb29e63442757ab89e460b5e551fe72368be",
+          "raw_text": "根据国际半导体产业协会（SEMI）最新的预测数据显示，在先进逻辑、存储和技术转型带动下，2026 年半导体制造设备销售额有望进一步提高至1,300 亿美元，中国大陆、中国台湾和韩国仍将是设备支出的前三大区域。",
+          "quality_flags": [],
+          "parser_name": "selective_narrative_parser",
+          "parser_version": "0.1.0",
+          "context_group_id": "urn:company-wiki:context-group:sha256:4f933d9cf2125b5ea43234d0c32c11f23be5ec1952c2371d43f0984af4be8eb3:operating-fact:1",
+          "context_member_count": 4
+        }
+      ],
+      "project_page_context": [],
+      "quote_same_original_any_locator": true
+    },
+    {
+      "sample_id": "S02",
+      "golden_id": "G-S02-03",
+      "locator": {
+        "page_number": 18
+      },
+      "stages": {
+        "parsed": {
+          "result": "full",
+          "matched_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:7b197ae016156a2ce5f1406e19da37f6724d0c47d70a85462262a3307dd1a4d1",
+            "urn:company-wiki:evidence-span:sha256:ccd0c8ea1c5e3f014ebc93f63414bf08d861af0ccd57fdf6d9217b8758a5f8a8"
+          ],
+          "matched_roles": [
+            "company_filing"
+          ],
+          "coverage_ratio": 1.0
+        },
+        "candidate": {
+          "result": "full",
+          "matched_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:5efbc8eb311533b8585e9a1b97b9f921b9d57224e12d6caf4bdf7c89355879de",
+            "urn:company-wiki:evidence-span:sha256:61b6a0480216ae8c063a75a2eafe9b8fc3eace23a4eaee13a777cf1523338ef8"
+          ],
+          "matched_roles": [
+            "company_filing"
+          ],
+          "coverage_ratio": 1.0
+        },
+        "dedup": {
+          "result": "full",
+          "matched_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:5efbc8eb311533b8585e9a1b97b9f921b9d57224e12d6caf4bdf7c89355879de",
+            "urn:company-wiki:evidence-span:sha256:61b6a0480216ae8c063a75a2eafe9b8fc3eace23a4eaee13a777cf1523338ef8"
+          ],
+          "matched_roles": [
+            "company_filing"
+          ],
+          "coverage_ratio": 1.0
+        },
+        "selected": {
+          "result": "full",
+          "matched_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:1d402d876b8939b6ccd60b44c4345404d97c5f8eb40e2655d08bb13dae662135",
+            "urn:company-wiki:evidence-span:sha256:b4d7b04bd14842196a29bd3ceceb01ee26f510b15942e812c2e5c27f6fe973d4"
+          ],
+          "matched_roles": [
+            "company_filing"
+          ],
+          "coverage_ratio": 1.0
+        }
+      },
+      "candidate_count": 226,
+      "dedup_count": 218,
+      "selected_count": 96,
+      "table_scan_pages": [
+        11,
+        17,
+        18,
+        21,
+        31,
+        43,
+        50,
+        56,
+        65
+      ],
+      "fragments": [
+        {
+          "locator": "loc:v1/page:18/paragraph:23",
+          "kind": "pdf_text_block",
+          "text": "公司的等离子体刻蚀设备已应用在国际一线客户从65至5 纳米及其他先进的集成电路加工制",
+          "candidate": true,
+          "reasons": [
+            "business_narrative_signal",
+            "applied_operating_milestone",
+            "specific_business_event"
+          ],
+          "score": 13,
+          "group_cost": 2,
+          "budget_drop": null,
+          "category": null
+        },
+        {
+          "locator": "loc:v1/page:18/paragraph:24",
+          "kind": "pdf_text_block",
+          "text": "造生产线及先进封装生产线。",
+          "candidate": true,
+          "reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "applied_operating_milestone",
+            "specific_business_event"
+          ],
+          "score": 15,
+          "group_cost": 2,
+          "budget_drop": null,
+          "category": null
+        }
+      ],
+      "candidate_contributors": [
+        {
+          "locator": "loc:v1/page:18/paragraph:23",
+          "text": "公司的等离子体刻蚀设备已应用在国际一线客户从65至5 纳米及其他先进的集成电路加工制",
+          "reasons": [
+            "business_narrative_signal",
+            "applied_operating_milestone",
+            "specific_business_event"
+          ],
+          "score": 13,
+          "group_cost": 2,
+          "group_id": "urn:company-wiki:context-group:sha256:487364abac7d82422d4a7bcd7d4441bec0f8445ee8fc58c2b5215fc9bf4cbf07:operating-fact:0",
+          "drop": []
+        },
+        {
+          "locator": "loc:v1/page:18/paragraph:24",
+          "text": "造生产线及先进封装生产线。",
+          "reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "applied_operating_milestone",
+            "specific_business_event"
+          ],
+          "score": 15,
+          "group_cost": 2,
+          "group_id": "urn:company-wiki:context-group:sha256:487364abac7d82422d4a7bcd7d4441bec0f8445ee8fc58c2b5215fc9bf4cbf07:operating-fact:0",
+          "drop": []
+        }
+      ],
+      "selected_quote_groups": [
+        {
+          "evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:1d402d876b8939b6ccd60b44c4345404d97c5f8eb40e2655d08bb13dae662135",
+            "urn:company-wiki:evidence-span:sha256:b4d7b04bd14842196a29bd3ceceb01ee26f510b15942e812c2e5c27f6fe973d4"
+          ],
+          "locators": [
+            "loc:v1/page:18/paragraph:23",
+            "loc:v1/page:18/paragraph:24"
+          ],
+          "source_role": "company_filing",
+          "topics": [
+            "capacity_projects",
+            "core_business"
+          ],
+          "selection_reasons": [
+            "applied_operating_milestone",
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "specific_business_event"
+          ],
+          "raw_text_sha256": "9edd9d92f335cede33925737ac7d6930dee29d378725746ef427db7b1ab72546",
+          "raw_text": "公司的等离子体刻蚀设备已应用在国际一线客户从65至5 纳米及其他先进的集成电路加工制造生产线及先进封装生产线。",
+          "quality_flags": [],
+          "parser_name": "selective_narrative_parser",
+          "parser_version": "0.1.0",
+          "context_group_id": "urn:company-wiki:context-group:sha256:487364abac7d82422d4a7bcd7d4441bec0f8445ee8fc58c2b5215fc9bf4cbf07:operating-fact:0",
+          "context_member_count": 2
+        }
+      ],
+      "project_page_context": [],
+      "quote_same_original_any_locator": true
+    },
+    {
+      "sample_id": "S04",
+      "golden_id": "G-S04-03",
+      "locator": {
+        "page_number": 34
+      },
+      "stages": {
+        "parsed": {
+          "result": "full",
+          "matched_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:7a3f456ab9b4e60a09edd349c2dab810c0f01caa0f7a15e51a90ab1776e7e77a",
+            "urn:company-wiki:evidence-span:sha256:9c63ebff733cf24509a62b52c6a8d08115ba4981b95dde0eae5dc65b084946d4"
+          ],
+          "matched_roles": [
+            "company_filing"
+          ],
+          "coverage_ratio": 1.0
+        },
+        "candidate": {
+          "result": "full",
+          "matched_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:30a7e2ef9058195314e48f00268dd699daf549541bf23ef917a7e9a526e15d1f",
+            "urn:company-wiki:evidence-span:sha256:7b4af4b5eb7a9ae944312f079a655638309bacdb07a51f34c81d08e2e0f71a93"
+          ],
+          "matched_roles": [
+            "company_filing"
+          ],
+          "coverage_ratio": 1.0
+        },
+        "dedup": {
+          "result": "full",
+          "matched_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:30a7e2ef9058195314e48f00268dd699daf549541bf23ef917a7e9a526e15d1f",
+            "urn:company-wiki:evidence-span:sha256:7b4af4b5eb7a9ae944312f079a655638309bacdb07a51f34c81d08e2e0f71a93"
+          ],
+          "matched_roles": [
+            "company_filing"
+          ],
+          "coverage_ratio": 1.0
+        },
+        "selected": {
+          "result": "miss",
+          "matched_span_ids": [],
+          "matched_roles": [],
+          "coverage_ratio": 0.0
+        }
+      },
+      "candidate_count": 923,
+      "dedup_count": 888,
+      "selected_count": 160,
+      "table_scan_pages": [
+        13,
+        31,
+        34,
+        49,
+        114,
+        133
+      ],
+      "fragments": [
+        {
+          "locator": "loc:v1/page:34/paragraph:14",
+          "kind": "pdf_text_block",
+          "text": "本次向社会公众公开发行新股的募集资金扣除发行费用后将按轻重缓急顺",
+          "candidate": true,
+          "reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "project_plan_or_status"
+          ],
+          "score": 4,
+          "group_cost": 2,
+          "budget_drop": "budget_full",
+          "category": "project"
+        },
+        {
+          "locator": "loc:v1/page:34/paragraph:15",
+          "kind": "pdf_text_block",
+          "text": "序投资于以下项目：",
+          "candidate": true,
+          "reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "project_plan_or_status"
+          ],
+          "score": 4,
+          "group_cost": 2,
+          "budget_drop": "budget_full",
+          "category": "project"
+        }
+      ],
+      "candidate_contributors": [
+        {
+          "locator": "loc:v1/page:34/paragraph:14",
+          "text": "本次向社会公众公开发行新股的募集资金扣除发行费用后将按轻重缓急顺",
+          "reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "project_plan_or_status"
+          ],
+          "score": 4,
+          "group_cost": 2,
+          "group_id": "urn:company-wiki:context-group:sha256:6563f813201215383dbe03536a0d66c2a7b1275e4391e46b8212758f15b8c44f:operating-fact:0",
+          "drop": [
+            {
+              "reason": "budget_full",
+              "category": "project"
+            }
+          ]
+        },
+        {
+          "locator": "loc:v1/page:34/paragraph:15",
+          "text": "序投资于以下项目：",
+          "reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "project_plan_or_status"
+          ],
+          "score": 4,
+          "group_cost": 2,
+          "group_id": "urn:company-wiki:context-group:sha256:6563f813201215383dbe03536a0d66c2a7b1275e4391e46b8212758f15b8c44f:operating-fact:0",
+          "drop": [
+            {
+              "reason": "budget_full",
+              "category": "project"
+            }
+          ]
+        }
+      ],
+      "selected_quote_groups": [],
+      "project_page_context": [
+        {
+          "locator": "loc:v1/page:34/paragraph:0",
+          "kind": "pdf_text_block",
+          "text": "中微半导体设备（上海）股份有限公司 \n \n \n \n \n \n \n \n       招股说明书"
+        },
+        {
+          "locator": "loc:v1/page:34/paragraph:1",
+          "kind": "pdf_text_block",
+          "text": "1-1-34"
+        },
+        {
+          "locator": "loc:v1/page:34/paragraph:2",
+          "kind": "pdf_text_block",
+          "text": "流、性能创新的产品和优良的服务，努力提高市场份额，为股东实现持续增长的"
+        },
+        {
+          "locator": "loc:v1/page:34/paragraph:3",
+          "kind": "pdf_text_block",
+          "text": "投资回报，为员工提供更好的职业发展平台。"
+        },
+        {
+          "locator": "loc:v1/page:34/paragraph:4",
+          "kind": "pdf_text_block",
+          "text": "公司将紧紧抓住半导体产业发展的"
+        },
+        {
+          "locator": "loc:v1/page:34/paragraph:5",
+          "kind": "pdf_text_block",
+          "text": "机遇，不断提升技术水平和市场竞争力，引领国内半导体设备和技术的发展。"
+        },
+        {
+          "locator": "loc:v1/page:34/paragraph:6",
+          "kind": "pdf_text_block",
+          "text": "中微公司将围绕自身核心竞争力，通过自主创新、有机生长，结合适当的兼"
+        },
+        {
+          "locator": "loc:v1/page:34/paragraph:7",
+          "kind": "pdf_text_block",
+          "text": "并收购策略，不断推动企业健康发展，力争在未来十年发展成为国际一流的半导"
+        },
+        {
+          "locator": "loc:v1/page:34/paragraph:8",
+          "kind": "pdf_text_block",
+          "text": "体设备公司。"
+        },
+        {
+          "locator": "loc:v1/page:34/paragraph:9",
+          "kind": "pdf_text_block",
+          "text": "五、发行人选择的具体上市标准"
+        },
+        {
+          "locator": "loc:v1/page:34/paragraph:10",
+          "kind": "pdf_text_block",
+          "text": "发行人选择的上市标准为《上海证券交易所科创板股票上市规则》第二章"
+        },
+        {
+          "locator": "loc:v1/page:34/paragraph:11",
+          "kind": "pdf_text_block",
+          "text": "2.1.2 中规定的第（四）条：预计市值不低于人民币30 亿元，且最近一年营业收"
+        },
+        {
+          "locator": "loc:v1/page:34/paragraph:12",
+          "kind": "pdf_text_block",
+          "text": "入不低于人民币3 亿元。"
+        },
+        {
+          "locator": "loc:v1/page:34/paragraph:13",
+          "kind": "pdf_text_block",
+          "text": "六、募集资金用途"
+        },
+        {
+          "locator": "loc:v1/page:34/paragraph:14",
+          "kind": "pdf_text_block",
+          "text": "本次向社会公众公开发行新股的募集资金扣除发行费用后将按轻重缓急顺"
+        },
+        {
+          "locator": "loc:v1/page:34/paragraph:15",
+          "kind": "pdf_text_block",
+          "text": "序投资于以下项目："
+        },
+        {
+          "locator": "loc:v1/page:34/paragraph:16",
+          "kind": "pdf_text_block",
+          "text": "单位：万元"
+        },
+        {
+          "locator": "loc:v1/page:34/paragraph:17",
+          "kind": "pdf_text_block",
+          "text": "公司已按照《公司法》、《证券法》、《上海证券交易所科创板股票上市规则》"
+        },
+        {
+          "locator": "loc:v1/page:34/paragraph:18",
+          "kind": "pdf_text_block",
+          "text": "《上海证券交易所上市公司募集资金管理办法》等法律、法规、规范性文件及《公"
+        },
+        {
+          "locator": "loc:v1/page:34/paragraph:19",
+          "kind": "pdf_text_block",
+          "text": "司章程》的规定制定《募集资金管理办法》，对募集资金的专户存储、使用、投"
+        },
+        {
+          "locator": "loc:v1/page:34/paragraph:20",
+          "kind": "pdf_text_block",
+          "text": "向变更、管理和监督进行了明确的规定。"
+        },
+        {
+          "locator": "loc:v1/page:34/paragraph:21",
+          "kind": "pdf_text_block",
+          "text": "本次募集资金将严格按照规定存储在董"
+        },
+        {
+          "locator": "loc:v1/page:34/paragraph:22",
+          "kind": "pdf_text_block",
+          "text": "事会指定的专门账户集中管理，专款专用，规范使用募集资金。"
+        },
+        {
+          "locator": "loc:v1/page:34/paragraph:23",
+          "kind": "pdf_text_block",
+          "text": "序号 \n募集资金运用方向 \n项目总投资 \n拟投入募集资金"
+        },
+        {
+          "locator": "loc:v1/page:34/paragraph:24",
+          "kind": "pdf_text_block",
+          "text": "1 \n高端半导体设备扩产升级项目 \n40,058.96 \n40,000.00"
+        },
+        {
+          "locator": "loc:v1/page:34/paragraph:25",
+          "kind": "pdf_text_block",
+          "text": "2 \n技术研发中心建设升级项目 \n40,097.22 \n40,000.00"
+        },
+        {
+          "locator": "loc:v1/page:34/paragraph:26",
+          "kind": "pdf_text_block",
+          "text": "3 \n补充流动资金 \n20,000.00 \n20,000.00"
+        },
+        {
+          "locator": "loc:v1/page:34/paragraph:27",
+          "kind": "pdf_text_block",
+          "text": "合计 \n100,156.18 \n100,000.00"
+        },
+        {
+          "locator": "loc:v1/page:34/table:0/row:0",
+          "kind": "pdf_table_row",
+          "text": "序号 | 募集资金运用方向 | 项目总投资 | 拟投入募集资金"
+        },
+        {
+          "locator": "loc:v1/page:34/table:0/row:1",
+          "kind": "pdf_table_row",
+          "text": "1 | 高端半导体设备扩产升级项目 | 40,058.96 | 40,000.00"
+        },
+        {
+          "locator": "loc:v1/page:34/table:0/row:2",
+          "kind": "pdf_table_row",
+          "text": "2 | 技术研发中心建设升级项目 | 40,097.22 | 40,000.00"
+        },
+        {
+          "locator": "loc:v1/page:34/table:0/row:3",
+          "kind": "pdf_table_row",
+          "text": "3 | 补充流动资金 | 20,000.00 | 20,000.00"
+        },
+        {
+          "locator": "loc:v1/page:34/table:0/row:4",
+          "kind": "pdf_table_row",
+          "text": "合计 | 100,156.18 | 100,000.00"
+        }
+      ],
+      "quote_same_original_any_locator": false
+    },
+    {
+      "sample_id": "S06",
+      "golden_id": "G-S06-02",
+      "locator": {
+        "page_number": 43
+      },
+      "stages": {
+        "parsed": {
+          "result": "full",
+          "matched_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:f2327bbfc6fb4b94c486b9d45369148b8b18826bb75b4506079827ecf3e19d18",
+            "urn:company-wiki:evidence-span:sha256:82890158dbc852ab2d0a9670dc48c72dcfb6d92701fb362c93ecbff82868147e"
+          ],
+          "matched_roles": [
+            "company_filing"
+          ],
+          "coverage_ratio": 1.0
+        },
+        "candidate": {
+          "result": "full",
+          "matched_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:1e3feedf55afc52181f6df529962b157ecb4e89566eb44022b24db8b7427451b",
+            "urn:company-wiki:evidence-span:sha256:9fdf0bc475b8f3b3718b62b8834960ba69735ca4829319679c6fbecd03cb5547"
+          ],
+          "matched_roles": [
+            "company_filing"
+          ],
+          "coverage_ratio": 1.0
+        },
+        "dedup": {
+          "result": "full",
+          "matched_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:1e3feedf55afc52181f6df529962b157ecb4e89566eb44022b24db8b7427451b",
+            "urn:company-wiki:evidence-span:sha256:9fdf0bc475b8f3b3718b62b8834960ba69735ca4829319679c6fbecd03cb5547"
+          ],
+          "matched_roles": [
+            "company_filing"
+          ],
+          "coverage_ratio": 1.0
+        },
+        "selected": {
+          "result": "full",
+          "matched_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:9906850ee67d4f132b82bca9ee3d41b4aa08afc176d5540a8e04d03fc924737d",
+            "urn:company-wiki:evidence-span:sha256:7913b80bfdcb9c0fee911f5f477785909ac374ece42f9bf286dd56878d1e8e30"
+          ],
+          "matched_roles": [
+            "company_filing"
+          ],
+          "coverage_ratio": 1.0
+        }
+      },
+      "candidate_count": 382,
+      "dedup_count": 357,
+      "selected_count": 160,
+      "table_scan_pages": [
+        4,
+        8,
+        13,
+        29,
+        39,
+        43,
+        52,
+        68,
+        75,
+        87
+      ],
+      "fragments": [
+        {
+          "locator": "loc:v1/page:43/paragraph:10",
+          "kind": "pdf_text_block",
+          "text": "本次募集资金除补充流动资金外，拟投资于精密数控刀体生产线建设项目",
+          "candidate": true,
+          "reasons": [
+            "business_narrative_signal",
+            "concrete_fundraising_project",
+            "project_plan_or_status",
+            "progress_or_change_language"
+          ],
+          "score": 9,
+          "group_cost": 6,
+          "budget_drop": null,
+          "category": null
+        }
+      ],
+      "candidate_contributors": [
+        {
+          "locator": "loc:v1/page:43/paragraph:10",
+          "text": "本次募集资金除补充流动资金外，拟投资于精密数控刀体生产线建设项目",
+          "reasons": [
+            "business_narrative_signal",
+            "concrete_fundraising_project",
+            "project_plan_or_status",
+            "progress_or_change_language"
+          ],
+          "score": 9,
+          "group_cost": 6,
+          "group_id": "urn:company-wiki:context-group:sha256:f09a06913e239c38f1a4f8a57df37b545a32d09a79b8e297575d8577a59c140e",
+          "drop": []
+        },
+        {
+          "locator": "loc:v1/page:43/paragraph:11",
+          "text": "和高效钻削刀具生产线建设项目。",
+          "reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "score": 94,
+          "group_cost": 6,
+          "group_id": "urn:company-wiki:context-group:sha256:f09a06913e239c38f1a4f8a57df37b545a32d09a79b8e297575d8577a59c140e",
+          "drop": []
+        }
+      ],
+      "selected_quote_groups": [
+        {
+          "evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:9906850ee67d4f132b82bca9ee3d41b4aa08afc176d5540a8e04d03fc924737d",
+            "urn:company-wiki:evidence-span:sha256:7913b80bfdcb9c0fee911f5f477785909ac374ece42f9bf286dd56878d1e8e30",
+            "urn:company-wiki:evidence-span:sha256:131897c796d793aae1973c9c0751b891a585a663fee9e558255d95362c1a625d",
+            "urn:company-wiki:evidence-span:sha256:b269e9a364f3cd4d414b5cf71ea1add9b4fc7a1607064cae9b814d2462899b4a",
+            "urn:company-wiki:evidence-span:sha256:1fbf81b7480eeb1f88648899aa5f0f8adbf4941ca73b975302e3cc0eb40ba2f3",
+            "urn:company-wiki:evidence-span:sha256:56d6c5cbc6d326fdd2398be5eeb41f2416d4b992172633e340fba7364a5cfce1"
+          ],
+          "locators": [
+            "loc:v1/page:43/paragraph:10",
+            "loc:v1/page:43/paragraph:11",
+            "loc:v1/page:43/paragraph:12",
+            "loc:v1/page:43/paragraph:13",
+            "loc:v1/page:43/paragraph:14",
+            "loc:v1/page:43/paragraph:15"
+          ],
+          "source_role": "company_filing",
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "concrete_fundraising_project",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "project_plan_or_status",
+            "project_section_context",
+            "specific_business_event"
+          ],
+          "raw_text_sha256": "a91553b642192e29fd51b3b766bc4c541890e94dd4486c702eda500dde998d8b",
+          "raw_text": "本次募集资金除补充流动资金外，拟投资于精密数控刀体生产线建设项目和高效钻削刀具生产线建设项目。本次募投项目达产后，公司将每年新增折旧摊销2,661.54 万元，与报告期内计入成本的折旧摊销金额相比较大。尽管公司已基于对原材料价格、下游市场情况、技术发展趋势、公司发展战略等因素的",
+          "quality_flags": [],
+          "parser_name": "selective_narrative_parser",
+          "parser_version": "0.1.0",
+          "context_group_id": "urn:company-wiki:context-group:sha256:f09a06913e239c38f1a4f8a57df37b545a32d09a79b8e297575d8577a59c140e",
+          "context_member_count": 6
+        }
+      ],
+      "project_page_context": [],
+      "quote_same_original_any_locator": true
+    },
+    {
+      "sample_id": "S06",
+      "golden_id": "G-S06-03",
+      "locator": {
+        "page_number": 43
+      },
+      "stages": {
+        "parsed": {
+          "result": "full",
+          "matched_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:bda0e22577421e285a9feff68518f94f4e33b5abd9fd0354ed9b75d7f84c5df3",
+            "urn:company-wiki:evidence-span:sha256:ff50ccb54683af2e0eb43d9fb27e536c8bf8a3d29fb089c723221089e0f8326b"
+          ],
+          "matched_roles": [
+            "company_filing"
+          ],
+          "coverage_ratio": 1.0
+        },
+        "candidate": {
+          "result": "full",
+          "matched_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:f616be5e81e02b52586dcd5c4312dbdde7c7f6f479a8fc63695160370aa880cb",
+            "urn:company-wiki:evidence-span:sha256:8a6409b794a837b3cfd0c59523c2da55e54008cb5537ff10c7d884f3693875ec"
+          ],
+          "matched_roles": [
+            "company_filing"
+          ],
+          "coverage_ratio": 1.0
+        },
+        "dedup": {
+          "result": "miss",
+          "matched_span_ids": [],
+          "matched_roles": [],
+          "coverage_ratio": 0.2857
+        },
+        "selected": {
+          "result": "miss",
+          "matched_span_ids": [],
+          "matched_roles": [],
+          "coverage_ratio": 0.2857
+        }
+      },
+      "candidate_count": 382,
+      "dedup_count": 357,
+      "selected_count": 160,
+      "table_scan_pages": [
+        4,
+        8,
+        13,
+        29,
+        39,
+        43,
+        52,
+        68,
+        75,
+        87
+      ],
+      "fragments": [
+        {
+          "locator": "loc:v1/page:43/paragraph:25",
+          "kind": "pdf_text_block",
+          "text": "本次募投项目达产后，公司预计新增精密数控刀体产品50",
+          "candidate": true,
+          "reasons": [
+            "business_narrative_signal",
+            "project_plan_or_status",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "score": 9,
+          "group_cost": null,
+          "budget_drop": null,
+          "category": null
+        }
+      ],
+      "candidate_contributors": [
+        {
+          "locator": "loc:v1/page:43/paragraph:25",
+          "text": "本次募投项目达产后，公司预计新增精密数控刀体产品50",
+          "reasons": [
+            "business_narrative_signal",
+            "project_plan_or_status",
+            "progress_or_change_language",
+            "specific_business_event"
+          ],
+          "score": 9,
+          "group_cost": null,
+          "group_id": null,
+          "drop": []
+        },
+        {
+          "locator": "loc:v1/page:43/paragraph:26",
+          "text": "万件和各类高效钻削刀具140 万支。",
+          "reasons": [
+            "business_narrative_signal",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "specific_business_event",
+            "project_plan_or_status",
+            "project_section_context"
+          ],
+          "score": 94,
+          "group_cost": null,
+          "group_id": null,
+          "drop": []
+        }
+      ],
+      "selected_quote_groups": [
+        {
+          "evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:9b3e4622528c67d97008cd019691bd897fd9a3ed45488c100a7d975e5b5cdb74",
+            "urn:company-wiki:evidence-span:sha256:66e3701898d1c0fa4ceb5985fc36cf3020db9c7a30f7bab6c9854de2932227a6",
+            "urn:company-wiki:evidence-span:sha256:3e4858d83312406c1ecfb7ce56cf70fee09eb8cc2b604d1663764ff836811ebb",
+            "urn:company-wiki:evidence-span:sha256:6f3207314db0553f3a277c3d782422e024e374b013d9b8231cde5d3d84ad7341",
+            "urn:company-wiki:evidence-span:sha256:3ba5f296e2c86e131edf83c44530d232bd32cb0a06e5b5b5188bad2d44c6fea9",
+            "urn:company-wiki:evidence-span:sha256:6c1c85eed550cc3a70077fa91d5e138368f2d24761da42e08bed5edf678cfc19"
+          ],
+          "locators": [
+            "loc:v1/page:7/paragraph:12",
+            "loc:v1/page:7/paragraph:13",
+            "loc:v1/page:7/paragraph:14",
+            "loc:v1/page:7/paragraph:15",
+            "loc:v1/page:7/paragraph:16",
+            "loc:v1/page:7/paragraph:17"
+          ],
+          "source_role": "company_filing",
+          "topics": [
+            "capacity_projects"
+          ],
+          "selection_reasons": [
+            "business_narrative_signal",
+            "current_business_progress",
+            "pdf_visual_context_group",
+            "progress_or_change_language",
+            "project_plan_or_status",
+            "project_section_context",
+            "specific_business_event"
+          ],
+          "raw_text_sha256": "6d0b63b465b2f7d0cf1655bf9bb91b7e831acb7619a8fb80351a705d9bdd9268",
+          "raw_text": "公司现有主要产品硬质合金数控刀片2021 年的产能约为6,300 万片，通过本次募集资金投资项目，公司将在现有数控刀片产品的基础上，新增了与之相配套的包括刀杆、刀盘在内的刀体产品，同时新增高效钻削刀具产品进一步完善公司产品品类。本次募投项目达产后，公司预计新增精密数控刀体产品50万件和各类高效钻削刀具140 万支。",
+          "quality_flags": [],
+          "parser_name": "selective_narrative_parser",
+          "parser_version": "0.1.0",
+          "context_group_id": "urn:company-wiki:context-group:sha256:4c71ed9312009f6944e70a981306aebcb4e498121f9d2774674aec5dd9b53972",
+          "context_member_count": 6
+        }
+      ],
+      "project_page_context": [],
+      "quote_same_original_any_locator": true
+    },
+    {
+      "sample_id": "S06",
+      "golden_id": "G-S06-04",
+      "locator": {
+        "page_number": 87
+      },
+      "stages": {
+        "parsed": {
+          "result": "full",
+          "matched_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:d58acf2f2714553f5b8a21529e84be7f1637036e5251c0a85c32e7e9a48c1185",
+            "urn:company-wiki:evidence-span:sha256:4a837e4944867ff4fb5b1940952a745101aef296d8cf2f660fe7012de1557d6a"
+          ],
+          "matched_roles": [
+            "company_filing"
+          ],
+          "coverage_ratio": 1.0
+        },
+        "candidate": {
+          "result": "full",
+          "matched_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:fbddbc0ef6d5cf0c4b9eb8370725e218c30987c549d3afb5bb11455dfab533a9",
+            "urn:company-wiki:evidence-span:sha256:01680a59953d5b829a2f0346ff62e30f0f610f54cc30466a65e96d0d06deb745"
+          ],
+          "matched_roles": [
+            "company_filing"
+          ],
+          "coverage_ratio": 1.0
+        },
+        "dedup": {
+          "result": "full",
+          "matched_span_ids": [
+            "urn:company-wiki:evidence-span:sha256:fbddbc0ef6d5cf0c4b9eb8370725e218c30987c549d3afb5bb11455dfab533a9",
+            "urn:company-wiki:evidence-span:sha256:01680a59953d5b829a2f0346ff62e30f0f610f54cc30466a65e96d0d06deb745"
+          ],
+          "matched_roles": [
+            "company_filing"
+          ],
+          "coverage_ratio": 1.0
+        },
+        "selected": {
+          "result": "miss",
+          "matched_span_ids": [],
+          "matched_roles": [],
+          "coverage_ratio": 0.0429
+        }
+      },
+      "candidate_count": 382,
+      "dedup_count": 357,
+      "selected_count": 160,
+      "table_scan_pages": [
+        4,
+        8,
+        13,
+        29,
+        39,
+        43,
+        52,
+        68,
+        75,
+        87
+      ],
+      "fragments": [
+        {
+          "locator": "loc:v1/page:87/paragraph:11",
+          "kind": "pdf_text_block",
+          "text": "2016—2020 年进口刀具占总消费的比重从37.17%下降至31.12%，一定",
+          "candidate": true,
+          "reasons": [
+            "business_narrative_signal",
+            "current_industry_context"
+          ],
+          "score": 5,
+          "group_cost": 2,
+          "budget_drop": "budget_full",
+          "category": "industry"
+        },
+        {
+          "locator": "loc:v1/page:87/paragraph:30",
+          "kind": "pdf_text_block",
+          "text": "31.12%",
+          "candidate": false,
+          "reasons": [],
+          "score": null,
+          "group_cost": null,
+          "budget_drop": null,
+          "category": null
+        }
+      ],
+      "candidate_contributors": [
+        {
+          "locator": "loc:v1/page:87/paragraph:11",
+          "text": "2016—2020 年进口刀具占总消费的比重从37.17%下降至31.12%，一定",
+          "reasons": [
+            "business_narrative_signal",
+            "current_industry_context"
+          ],
+          "score": 5,
+          "group_cost": 2,
+          "group_id": "urn:company-wiki:context-group:sha256:999df62acef8bac6fd26ccff8d9501184b831a2b70c28ab107324f1e697bed99:operating-fact:2",
+          "drop": [
+            {
+              "reason": "budget_full",
+              "category": "industry"
+            }
+          ]
+        },
+        {
+          "locator": "loc:v1/page:87/paragraph:12",
+          "text": "程度上说明我国数控刀具的自给能力在逐步增强，进口替代速度加快。",
+          "reasons": [
+            "business_narrative_signal",
+            "current_industry_context"
+          ],
+          "score": 5,
+          "group_cost": 2,
+          "group_id": "urn:company-wiki:context-group:sha256:999df62acef8bac6fd26ccff8d9501184b831a2b70c28ab107324f1e697bed99:operating-fact:2",
+          "drop": [
+            {
+              "reason": "budget_full",
+              "category": "industry"
+            }
+          ]
+        }
+      ],
+      "selected_quote_groups": [],
+      "project_page_context": [],
+      "quote_same_original_any_locator": false
+    }
+  ],
+  "originals": {
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\中微公司\\raw\\financial_reports\\中微公司：2025年年度报告.pdf": {
+      "sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "size": 9165875,
+      "mtime_ns": 1775986949114724400
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\中微公司\\raw\\financial_reports\\中微公司：2025年半年度报告.pdf": {
+      "sha256": "91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+      "size": 6361468,
+      "mtime_ns": 1775986992765548800
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\中微公司\\raw\\prospectus\\中微公司：首次公开发行股票并在科创板上市招股说明书.pdf": {
+      "sha256": "19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+      "size": 11211796,
+      "mtime_ns": 1776287132568457600
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\华锐精密\\raw\\research\\华锐精密：向不特定对象发行可转换公司债券证券募集说明书.PDF": {
+      "sha256": "c6ed566631e123f159abf2697c157f1868f8e994ccf8e3352132046a6c5ca0a1",
+      "size": 4756322,
+      "mtime_ns": 1664747887000000000
+    }
+  },
+  "protected": {
+    "config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+    "config\\source_acquisition.yaml": "3609e707466eeb3e0f685e14f2637c6afa39ba900edef1be4814433a43300a01",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\daily_alert.jsonl": "0aee073f56c133786365ab96899edf4d91c0f9e1a0e13ab61b2a6bffd8316270",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_alert.jsonl": "b617b0b00ff1a758b5b46299e3e5db3115f56efd90d212154abe988e5ea9fee5",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_manifest.json": "0d55cb8c81f12b663e330819da3037bb69ce8564ac41a686b578a99f78f948bf"
+  },
+  "seconds": 67.016,
+  "vendor_calls": 0,
+  "downloads": 0
+}
