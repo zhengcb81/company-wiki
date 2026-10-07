@@ -1,0 +1,111 @@
+{
+ "schema_version": "g3-raw-space-decision/1",
+ "scope": "company_raw",
+ "command": "verify",
+ "actual_command": "python tools/raw_duplicate_audit/cli.py verify --config <lane scratch investigation_source_catalog.yaml> --project-root <live CWP root> --output <lane scratch rawdup_verify_report.json> --max-groups 20 --max-read-bytes 268435456 --deadline-seconds 120 --max-detail-rows 100",
+ "input_version": "raw-duplicate-assessment/1",
+ "input_report_sha256": "9fdcd53e44aa5000f92cdbd9c4bc98c88adddc0e96dec3b975b25e72bfe360ce",
+ "registered_bound_source": "catalog metadata aggregation (read-only, 0 file reads)",
+ "registered_bound_complete": true,
+ "report_status": "succeeded",
+ "limits": {
+  "deadline_seconds": 120.0,
+  "max_detail_rows": 100,
+  "max_groups": 20,
+  "max_read_bytes": 268435456,
+  "max_similar_groups": 100
+ },
+ "limits_hit": [
+  "detail_rows",
+  "max_groups"
+ ],
+ "read_bytes": 122369272,
+ "deadline_seconds": 120.0,
+ "candidate_groups": 52,
+ "listed_candidate_groups": 21,
+ "verified_groups": 17,
+ "incomplete_groups": 35,
+ "groups_not_attempted": 4,
+ "counted_groups": [
+  "grp:fb43f8a8c5a0927e",
+  "grp:ed484875ba8bfdb2",
+  "grp:fc41d51bd9059bf1",
+  "grp:c46a7ad4daf8f54c",
+  "grp:fa20c723167b608d",
+  "grp:6aa294e4490d4918",
+  "grp:5f8e8424c2258c53",
+  "grp:fb4ce8e34ba8fea2",
+  "grp:39cda23a5d4234bc",
+  "grp:ab519cad238bd8e7",
+  "grp:23b3a1257e77c2d8",
+  "grp:25d529c9855cdf6e",
+  "grp:c230cf28bd80c93a",
+  "grp:e4ee337651c17375",
+  "grp:6ccd41b3590a1113",
+  "grp:6ce125770948fa44",
+  "grp:5e068addd2931734",
+  "grp:3e2ffc6b9a9e345d",
+  "grp:a069eb9d38a21be6",
+  "grp:fea61da2dda6087c",
+  "grp:01a24c90ede253e1"
+ ],
+ "registered_upper_bound_bytes": 98845393,
+ "listed_groups_upper_bound_bytes": 39010073,
+ "verified_distinct_copy_bytes": 36191979,
+ "allocated_bytes": null,
+ "releasable_bytes": null,
+ "deleted_bytes": 0,
+ "coverage": {
+  "registered_groups": 52,
+  "groups_read": 17,
+  "registered_upper_bound_bytes": 98845393,
+  "verified_distinct_copy_bytes": 36191979,
+  "read_fraction_of_bound": 0.3661
+ },
+ "categories": {
+  "same_path_references": 0,
+  "shared_physical_file": 0,
+  "distinct_physical_copies": 26,
+  "uncertain_physical_identity": 0,
+  "similar_size_different_content": 0,
+  "unresolved": 0,
+  "missing": 0,
+  "cloud_placeholder": 0,
+  "status_unknown": 5,
+  "internal_groups": 21,
+  "outside_root_groups": 5
+ },
+ "metadata": {
+  "scope": "company_raw",
+  "source": "catalog metadata aggregation (read-only, 0 file reads)",
+  "database_schema_version": "1.2.0",
+  "total_changes": 0,
+  "location_status": {
+   "active": 15034,
+   "missing": 6,
+   "retired": 18052
+  },
+  "content_hashes_with_internal_copies": 52,
+  "registered_upper_bound_bytes": 98845393,
+  "mixed_with_other_roots_groups": 17,
+  "mixed_with_other_roots_upper_bound_bytes": 54827575,
+  "distinct_single_copy_hashes": 32988,
+  "note": "upper bound = sum((internal_copies - 1) * registered byte_size); it is a registered logical bound, not an allocated or releasable byte claim"
+ },
+ "global_registered_totals": {
+  "scope": "whole_database",
+  "registered_sources": 43112,
+  "registered_bytes": 35110881225,
+  "note": "diagnostic only; never a company_raw figure"
+ },
+ "unknowns": [
+  "limits_hit:detail_rows,max_groups",
+  "detail_row_cap_dropped_groups=3505 (report lists a subset; registered bound comes from catalog metadata)",
+  "registered_groups_not_fully_verified=35",
+  "allocated_bytes_unproven",
+  "releasable_bytes_unproven"
+ ],
+ "decision": "no_migration_recommended",
+ "reason": "the registered company_raw-internal logical upper bound (98845393 bytes) already stays below the 268435456-byte benefit threshold; 36191979 bytes were read-confirmed, allocation stays unproven on this platform and deleted_bytes is 0",
+ "followup": "company_raw only; no delete/move/hardlink/object migration proposed. If MAIN later re-opens the question, re-run the same bounded command after any catalog change and keep SourceRef/locations references intact (this card does not implement migration)."
+}
