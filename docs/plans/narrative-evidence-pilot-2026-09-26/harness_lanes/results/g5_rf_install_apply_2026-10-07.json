@@ -1,0 +1,79 @@
+{
+  "mode": "apply",
+  "schema": "rf-install-result/1",
+  "selected": [
+    ".gitignore",
+    "SKILL.md",
+    "agents/openai.yaml",
+    "references/extended-models.md",
+    "references/input-construction.md",
+    "references/model-library.md",
+    "references/schema-migration-3.6-to-3.7.md",
+    "scripts/revenue_forecast.py"
+  ],
+  "status": "completed",
+  "targets": [
+    {
+      "conflicts": [],
+      "destination": "C:\\Users\\郑曾波\\.agents\\skills",
+      "drifted": [],
+      "failed": [],
+      "remaining_selected_drift": 0,
+      "remaining_unselected_drift": 0,
+      "selected": [
+        ".gitignore",
+        "SKILL.md",
+        "agents/openai.yaml",
+        "references/extended-models.md",
+        "references/input-construction.md",
+        "references/model-library.md",
+        "references/schema-migration-3.6-to-3.7.md",
+        "scripts/revenue_forecast.py"
+      ],
+      "status": "completed",
+      "target": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast",
+      "unchanged": [],
+      "written": [
+        ".gitignore",
+        "SKILL.md",
+        "agents/openai.yaml",
+        "references/extended-models.md",
+        "references/input-construction.md",
+        "references/model-library.md",
+        "references/schema-migration-3.6-to-3.7.md",
+        "scripts/revenue_forecast.py"
+      ]
+    },
+    {
+      "conflicts": [],
+      "destination": "C:\\Users\\郑曾波\\.codex\\skills",
+      "drifted": [],
+      "failed": [],
+      "remaining_selected_drift": 0,
+      "remaining_unselected_drift": 0,
+      "selected": [
+        ".gitignore",
+        "SKILL.md",
+        "agents/openai.yaml",
+        "references/extended-models.md",
+        "references/input-construction.md",
+        "references/model-library.md",
+        "references/schema-migration-3.6-to-3.7.md",
+        "scripts/revenue_forecast.py"
+      ],
+      "status": "completed",
+      "target": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast",
+      "unchanged": [],
+      "written": [
+        ".gitignore",
+        "SKILL.md",
+        "agents/openai.yaml",
+        "references/extended-models.md",
+        "references/input-construction.md",
+        "references/model-library.md",
+        "references/schema-migration-3.6-to-3.7.md",
+        "scripts/revenue_forecast.py"
+      ]
+    }
+  ]
+}

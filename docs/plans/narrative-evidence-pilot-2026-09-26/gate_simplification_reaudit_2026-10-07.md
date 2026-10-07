@@ -1,6 +1,6 @@
 # G2：门禁与权限全面补漏及优先实施单
 
-**当前状态覆盖（2026-10-07最新验收）：**目标active，G2尚未全部完成。G3/G4已验收发布；G5工程壳/API运行时/定点安装三包已交付，MAIN开始合入后集中验收。MAIN12集中责任及实际FF→ET→CWP三案例链已passed，尚未发布；夹具字段/状态/用途错误已纠正而未修改生产验真。下方历史“联调failed/pending/paused/未创建”需以[总计划](task_plan.md)核对，不重复已绿施工。
+**当前状态覆盖（2026-10-07最新验收）：**目标active。G5三包已由MAIN验收、合入实际执行分支并推送：CWP master057f1cd、SID v2-clean-rewrite47e1059、RF main436fed68；配套FF main5001dcb也已发布。CWP2048责任项、SID163项、RF定点安装33项及兼容24项全部通过；FF391项通过/4项跳过，三个有workflow的仓库精确源码CI均success，SID无workflow。RF实际安装按8文件、3逻辑入口/2物理目录完成，重复写入0；18个owner/生产保护文件SHA全部不变。G2-12真实FF→ET→CWP链与获取实现已发布。G2仍需FF安装工具保留用户文件的系统修复、三文件定点同步及剩余A/B指导收口，之后R2→R3→R5；不能把三包完成等同全部PWF完成。见[G5正式验收](g5_main_acceptance_2026-10-07.md)。下方旧ready/未创建/待CI/paused文字为历史时点，不重派已交付卡。
 
 **最新G3验收（2026-10-07）：**三个包已接收并补齐MAIN接线，两个本地主线已并入。RF `ab7a7a44`已正常推远端main（107快测绿）；CWP接线代码`b2c9e66`随`4bde75a`已正常推master，115责任用例最终绿、1921单元绿；精确CI37665222739成功84秒，RF精确CI37664909065成功31秒。详情见[g3_main_acceptance](g3_main_acceptance_2026-10-07.md)。G3不再派发；G2-04旧维护退休已完成，R4依据现有注册重复上界决定不做对象化迁移（不是释放空间）。RF真实用户安装未同步；G2-12/其他G2、R2元数据生产应用、R3和R5仍未完成。目标服务保持paused，本次仅执行用户明确要求的G3验收，并未恢复总目标/付费/生产批次。
 
@@ -137,7 +137,9 @@ CWP `df7d7ba`已并入master/推远端；211责任用例绿，精确CI3767339382
 
 ### G2-08 / P1：FF v1 兼容与安装入口最终收敛
 
-**最新分工：**[G5-RF-INSTALL](harness_lanes/g5_rf_selective_installation.md)ready；RF现三安装各8runtime差异/config0，补现工具--file/只差异写/plan/partial幂等。外线只改RF工具/tests、只在tmp验收，不重做G3闭包；MAIN合入后定点24文件应用，真实安装仍MAIN。FF v1/统一获取/安装接线不在此卡，MAIN负责。
+**2026-10-07实际接线补漏：**统一单请求v1/v2及FF→ET→CWP实际链已绿，5001dcb已并入main并推；安装只需已发布SKILL.md、fetch_filing.py、filing_contracts.py三文件。只读核旧`tools/sync_installs_b3.py`发现`sync()`会遍历target删除所有manifest外文件（含用户配置/output/密钥的风险），因此禁止拿此工具做当前整套同步。MAIN按本节原定三文件定点同步并保护其他文件；旧installer的清理方式加入本节系统修复：TDD证明已有用户文件/配置/输出保持、按选择且只写差异/幂等、失败清理/准确结果、零自动安装，再升级正式工具。该发现不影响G5-RF已通过的独立定点installer，不改Dayu/IQS或扩大发包范围，不增加人工许可。
+
+**最新分工：**[G5-RF-INSTALL](harness_lanes/g5_rf_selective_installation.md)已正式验收并入RF main436fed68，精确CI绿；真实安装8文件/3逻辑入口/2物理目录已完成，重复写0，config/output未变。此前“24文件”是未识别.claude别名时的历史估计，实际16个物理文件写入。FF v1单意图实现已发布，三文件安装和FF正式installer系统修复仍归MAIN。
 
 **v2 正确；v1 残留需 caller 审计。** 旧 `--allow-download` 与 request authorization 兼容仍在，不能算到 v2 单意图上。两份安装技能已推荐 v2，但 legacy 附录和摘要会让较弱模型反复询问授权。
 
@@ -268,4 +270,4 @@ MAIN 是唯一集成与生产变更负责人。此表是施工顺序，不是新
 
 ## Next Step
 
-**目标paused；G5三卡可由用户现在启动，MAIN恢复后再继续。核心93ac5a5、Store13/b202d07、scoped pin01b/22dcc927均已发布且精确CI全绿。** 三外线已验收并入各主线；RF/SQA已推且精确CI全绿，SQA包含文档构建/部署，SW无remote。MAIN继续[G2-12具体实施](g2_latest_acquisition_implementation_2026-10-07.md)：新13反例绿，旧测试/CLI/FF/跨进程仍待完成，再P1旧家族/质量读取器/安装职责→G2A/B→R2/R3。没有新增小节点签收，不重复已绿长包，不自动启动付费批次，不把本子集冒称全面完成。
+**目标active，G5三包已验收并线发布。** MAIN下一步为G2-08 FF正式installer的用户文件保留/定点同步，再核剩余G2A/B和当前指导。核心93ac5a5、Store b202d07、scoped pin22dcc927、G2-12 a06a3bf与三包成果均复用已绿证据，不重复付费或长包，不新增小节点签收。

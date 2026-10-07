@@ -1,0 +1,48 @@
+{
+  "schema_version": "g5-real-install-acceptance/1",
+  "status": "passed",
+  "selected_files": [
+    ".gitignore",
+    "SKILL.md",
+    "agents/openai.yaml",
+    "references/extended-models.md",
+    "references/input-construction.md",
+    "references/model-library.md",
+    "references/schema-migration-3.6-to-3.7.md",
+    "scripts/revenue_forecast.py"
+  ],
+  "configured_surfaces": 3,
+  "physical_targets": 2,
+  "unselected_files_unchanged": true,
+  "unselected_proof": "size/mtime inventory; tool can only swap the 8 selected files; no directory deletion",
+  "entrypoints": [
+    {
+      "target": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast",
+      "argument": "--help",
+      "exit_code": 0,
+      "version": null
+    },
+    {
+      "target": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast",
+      "argument": "--version",
+      "exit_code": 0,
+      "version": "revenue-forecast 4.1.0 manifest_sha256=76b37ec851b558eb"
+    },
+    {
+      "target": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast",
+      "argument": "--help",
+      "exit_code": 0,
+      "version": null
+    },
+    {
+      "target": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast",
+      "argument": "--version",
+      "exit_code": 0,
+      "version": "revenue-forecast 4.1.0 manifest_sha256=76b37ec851b558eb"
+    }
+  ],
+  "repeat_written_files": 0,
+  "model_calls": 0,
+  "forecast_calls": 0,
+  "configuration_or_output_deletion": 0
+}

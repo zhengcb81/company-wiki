@@ -1,5 +1,17 @@
 # Progress：激进简化实施
 
+## G5三包正式验收、并线和发布（2026-10-07）
+
+目标active。G5三包已由MAIN验收、合入实际执行分支并推送：CWP master057f1cd、SID v2-clean-rewrite47e1059、RF main436fed68；配套FF main5001dcb也已发布。CWP2048责任项、SID163项、RF定点安装33项及兼容24项全部通过；FF391项通过/4项跳过，三个有workflow的仓库精确源码CI均success，SID无workflow。RF实际安装按8文件、3逻辑入口/2物理目录完成，重复写入0；18个owner/生产保护文件SHA全部不变。G2-12真实FF→ET→CWP链与获取实现已发布。G2仍需FF安装工具保留用户文件的系统修复、三文件定点同步及剩余A/B指导收口，之后R2→R3→R5；不能把三包完成等同全部PWF完成。见[G5正式验收](g5_main_acceptance_2026-10-07.md)。下方旧ready/未创建/待CI/paused文字为历史时点，不重派已交付卡。
+
+一次MAIN大节点完成CWP2048项/157.635秒、SID163项/44.369秒、RF新installer17项/19.267秒及既有installer16项/兼容24项共40项/11.106秒；FF391pass/4skip、78subtests/74.362秒。JUnit的FF计数473包含子测试，不当作473个pytest用例。没有给commit新增长pytest。SID原仓11个owner改动未进入测试：测试clean _g5/sid，Git HEAD与实际执行分支47e1059一致。
+
+真实RF定点安装8文件，经只读plan后应用到两个物理目录；三逻辑入口含.claude指向.agents别名。未选文件size/mtime清单保持，四次真实help/version成功，重复同步0writes。三仓正常push，CWP CI37692354260、FF CI37692509218、RF CI37692576850均success。保护检查发现RF weekly_manifest原始CRLF被pre-commit stash恢复为LF，内容完全相同；转回CRLF的SHA与预先保护SHA精确一致后才恢复，18文件全部原SHA通过，未用HEAD覆盖owner内容。
+
+已发现FF旧sync_installs_b3.sync会删除manifest外安装文件，明确加入G2-08系统修复；本轮未执行该旧installer。源码已发布，新的三文件实际FF安装尚未做。R2/R3/R5仍未完成，模型/翻译0、原件删除0、Dayu/IQS写0。
+
+G5测试根/重复JUnit/临时脚本已恢复absent，原始文件删除0；RF负例junction经owned根内目标核对后仅移除链接，再删tmp。首次CWP根大小未持久化，不报虚构空间数；其余实测5024834字节，交接树/历史五根保留。PWF更新还遇到两处同名分工段落，改为RF专属前缀后完成，不混改CWP分工。最终纯文档/收据发布复用源码CI绿色，正常commit/prepush，不再跑完整pytest。
+
 ## G2单请求实际链通过，开始G5三包MAIN验收
 
 用户报告三包完成；三个clean工作树/ready_for_main已确认，MAIN实读代码/反例/接线表并建立[g5_main_acceptance](g5_main_acceptance_2026-10-07.md)。四仓fetch正常，CWP/RF/SID当前执行分支与remote均0 ahead/behind，未覆盖owner文件。

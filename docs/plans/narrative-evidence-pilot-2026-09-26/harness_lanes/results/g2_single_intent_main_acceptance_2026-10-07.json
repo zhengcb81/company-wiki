@@ -1,6 +1,6 @@
 {
   "schema_version": "g2-single-intent-main/1",
-  "status": "local_verified_not_published",
+  "status": "verified_merged_published",
   "responsibility_suites": {
     "g2p-result.xml": [
       {
@@ -180,5 +180,35 @@
   "raw_deleted": 0,
   "paid_calls": 0,
   "translation_calls": 0,
-  "production_writes": 0
+  "production_writes": 0,
+  "implementation_commit": "a06a3bf",
+  "published_code_heads": {
+    "CWP": "057f1cdab3f92a7839b3a908c8c471597723b76c",
+    "SID": "47e10593ec1c152f1e613cc1f14813267c9b396b",
+    "RF": "436fed68d8ba334ae568de296636904c5cc3e6cf",
+    "FF": "5001dcbef1845a08e90cda6f2a86365610a662af"
+  },
+  "exact_ci": {
+    "company-wiki": {
+      "head": "057f1cdab3f92a7839b3a908c8c471597723b76c",
+      "receipt": "g5_cwp_exact_ci_2026-10-07.json",
+      "runs": [
+        37692354260
+      ]
+    },
+    "revenue-forecast": {
+      "head": "436fed68d8ba334ae568de296636904c5cc3e6cf",
+      "receipt": "g5_rf_exact_ci_2026-10-07.json",
+      "runs": [
+        37692576850
+      ]
+    },
+    "filing-fetch": {
+      "head": "5001dcbef1845a08e90cda6f2a86365610a662af",
+      "receipt": "g5_ff_exact_ci_2026-10-07.json",
+      "runs": [
+        37692509218
+      ]
+    }
+  }
 }

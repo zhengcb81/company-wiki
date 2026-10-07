@@ -1,15 +1,14 @@
 # 公司来源平台：当前总计划
 
-**当前进度（2026-10-07最新验收）：**目标active。G2-12本地109/41/85/最后39责任各自绿，实际FF→ET→CWP三案例及四次binary source reader验证已passed，原件/生产不变、tmp恢复absent；夹具字段/状态/用途错误已纠正，产品公开日期和SHA规则未放松。G2获取代码正在正常提交，尚未推送。G5三包全部ready_for_main，用户已要求查收；MAIN已核代码/反例/接线，开始合入后集中验收，尚不称完成。G3/G4已发布；G2剩余接线、R2生产metadata、R3正式生产final/消费、R5仍待做。下方旧“联调failed/未执行/施工中/未创建/paused”是历史时点。
+**当前进度（2026-10-07最新验收）：**目标active。G5三包已由MAIN验收、合入实际执行分支并推送：CWP master057f1cd、SID v2-clean-rewrite47e1059、RF main436fed68；配套FF main5001dcb也已发布。CWP2048责任项、SID163项、RF定点安装33项及兼容24项全部通过；FF391项通过/4项跳过，三个有workflow的仓库精确源码CI均success，SID无workflow。RF实际安装按8文件、3逻辑入口/2物理目录完成，重复写入0；18个owner/生产保护文件SHA全部不变。G2-12真实FF→ET→CWP链与获取实现已发布。G2仍需FF安装工具保留用户文件的系统修复、三文件定点同步及剩余A/B指导收口，之后R2→R3→R5；不能把三包完成等同全部PWF完成。见[G5正式验收](g5_main_acceptance_2026-10-07.md)。下方旧ready/未创建/待CI/paused文字为历史时点，不重派已交付卡。
 
-**新增G5独立包（2026-10-07）：**[三卡总包](harness_lanes/g5_parallel_packages_2026-10-07.md)ready，可现在分别交harness；CWP六旧工程/批处理壳退休、SID纯API解耦与身份查询预算、RF定点安装工具/三tmp验收，分别独占`Projects/_g5/cwp|sid|rf`不同项目工作树。当前目录尚未创建，未代用户启动。G3/G4已完成不重派；MAIN保留G2-12/FF/公共CLI/指纹/工程清单、真实安装与生产/总PWF/并线。目标继续paused，本次仅制卡和发布。
+**G5当前结论：**[三卡总包](harness_lanes/g5_parallel_packages_2026-10-07.md)已全部交付、验收、并线和发布，不再分派。三个交接工作树保留；MAIN实际安装和兼容pin接线已完成。详细commit/测试/CI/保护/未做范围见[G5正式验收](g5_main_acceptance_2026-10-07.md)。
 
-**最新G4验收（2026-10-07）：**两包已验收、并入实际执行分支并推远端。CWP `df7d7ba`：冻结Pipeline/Gate0–5整族退休及CN 1.3.0路由配套，211责任用例绿；精确CI37673393822所有步骤绿/74秒。SID `eb8495c`：latest分页矛盾TDD修复，127责任/真实CLI离线联调用例绿，已推`v2-clean-rewrite`；该仓无workflow，不声称远端CI。见[G4正式验收](g4_main_acceptance_2026-10-07.md)。G4不再派发。G2-03完成；完整G2-12 ensure/FF/ET/CWP入库与复用仍未提交，其他G2、R2生产应用/R3/R5未完成。总目标保持paused，本次没有恢复生产或付费批次。
+**G4验收（历史时点，当前结论见页首）：**两包已验收、并入实际执行分支并推远端。CWP `df7d7ba`：冻结Pipeline/Gate0–5整族退休及CN 1.3.0路由配套，211责任用例绿；精确CI37673393822所有步骤绿/74秒。SID `eb8495c`：latest分页矛盾TDD修复，127责任/真实CLI离线联调用例绿，已推`v2-clean-rewrite`；该仓无workflow，不声称远端CI。见[G4正式验收](g4_main_acceptance_2026-10-07.md)。G4不再派发。G2-03完成；完整G2-12 ensure/FF/ET/CWP入库与复用仍未提交，其他G2、R2生产应用/R3/R5未完成。总目标保持paused，本次没有恢复生产或付费批次。
 
 **上一批G3验收（历史记录）：**三个包已接收并补齐MAIN接线，两个本地主线已并入。RF `ab7a7a44`已正常推远端main（107快测绿）；CWP接线代码`b2c9e66`随`4bde75a`已正常推master，115责任用例最终绿、1921单元绿；精确CI37665222739成功84秒，RF精确CI37664909065成功31秒。详情见[g3_main_acceptance](g3_main_acceptance_2026-10-07.md)。G3不再派发；G2-04旧维护退休已完成，R4依据现有注册重复上界决定不做对象化迁移（不是释放空间）。RF真实用户安装未同步；G2-12/其他G2、R2元数据生产应用、R3和R5仍未完成。目标服务保持paused，本次仅执行用户明确要求的G3验收，并未恢复总目标/付费/生产批次。
 
-
-> **当前并行：**G2/G3/G4已发包均已接收，不重派；G5三卡可新派发，详见页首。恢复总目标后MAIN先收尾G2-12/FF与公共接线，避开G5三线白名单，再R2→R3→R4→R5；保留未提交代码及owner文件。
+> **当前并行：**G2/G3/G4/G5已发包均已验收，不重派。MAIN继续G2-08 FF installer与定点安装，然后核剩余G2A/B指导；G2收口后R2→R3→R5，R4不迁移决策已完成。
 
 > 本页是唯一当前施工入口。旧步骤、旧预算答复和已交付卡不产生新的任务或人工签收。历史细节保留在 [收敛前版本](https://github.com/zhengcb81/company-wiki/blob/659bcefc9d49a7e7f7fdc58e9c11d46e45da49ab/docs/plans/narrative-evidence-pilot-2026-09-26/task_plan.md)、findings/progress 和阶段收据中。
 
@@ -115,7 +114,7 @@ TDD 框住具体公开行为。只在 N4 A/B/C、存储迁移等大节点集中�
 
 历史卡只解释已做工作，不能将“待测试/待并线/下一步”的旧文字恢复成当前门。
 
-## 当前新增目标（2026-10-07；暂停状态见页首）
+## 当前新增目标（2026-10-07；目标active）
 
 用户明确要求完成全部PWF计划内容。上一轮S0–S7与日期合同的已发布验收保持，但整个目标仍未完成；此前恢复时目标服务active，当前保持paused。不能把有界试点等同全部计划落地。MAIN先盘点全部引用细则及交付，再按实际剩余步骤实施；不缩范围，不重跑已绿旧节点，不无限扩展初稿。
 
@@ -131,7 +130,7 @@ TDD 框住具体公开行为。只在 N4 A/B/C、存储迁移等大节点集中�
 
 | 阶段 | 状态 | 下一责任 |
 |---|---|---|
-| G2门禁全面补漏/P0 | in_progress；目标服务active | 已发布核心/13/01b及G2/G3/G4成果保持；MAIN12集中责任与实际三案例CLI链通过，获取源码正在提交；G5三包开始MAIN合入后集中验收及定点安装，尚未验收完成/发布 |
+| G2门禁全面补漏/P0 | in_progress；目标服务active | 核心/13/01b及G2–G5成果已发布；12实际链已通过并发布，RF真实定点安装完成。MAIN剩余FF installer/三文件安装与G2A/B指导收口 |
 | R0完整对账 | complete | 已确认真实生产metadata/分类/ET登记缺口；已完成核心不重做 |
 | R1融资文档正式分类 | complete | 66ce0467已发布，真实两PDF CLI与分类责任包绿，精确CI37578307854绿 |
 | R2真实生产来源/预算准备 | in_progress；生产步骤顺延G2后 | 全库发现/有限登记/AUTO范围代码2cad90d已推且精确CI绿；G2先清旧控制面，再核公开日/retired/ET，不猜metadata |
@@ -141,6 +140,6 @@ TDD 框住具体公开行为。只在 N4 A/B/C、存储迁移等大节点集中�
 
 ## Next Step
 
-MAIN正常提交已验证[G2-12](g2_latest_acquisition_implementation_2026-10-07.md)，按[G5 MAIN验收](g5_main_acceptance_2026-10-07.md)合入三包并集中验收、实际定点安装及FF兼容pin接线，随后正常推送/精确CI；不恢复退休签收、不重复付费或已绿长包。
+MAIN先按G2-08以TDD修复FF正式installer删除manifest外用户文件的问题，增加指定文件/只差异写/零写plan/准确恢复能力；再从已发布版本定点同步SKILL.md、fetch_filing.py、filing_contracts.py并验证实际安装入口。不要运行旧整套删除式installer。见[门禁实施单](gate_simplification_reaudit_2026-10-07.md)。
 
-G3/G4已验收并线，不重派。G5三包已全部交付，下一并线节点由MAIN验收/接线；其工作树/写集与MAIN获取服务无重叠。G2收口后按R2生产准备→R3正式运行→R5发布收口实施；R4决策已完成。保留原件、Dayu/IQS零写、现有模型配置及累计额度。
+G2/G3/G4/G5已验收并线发布，不重派。新任务沿用现有合同和累计预算，原件保留、Dayu/IQS零写。G2收口后R2生产准备→R3正式运行与消费者→R5发布收口；R4决策已完成，不重复已绿长包或付费。

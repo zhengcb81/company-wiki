@@ -1,21 +1,20 @@
 # 全部PWF内容：实际落地与最后收口（2026-10-07）
 
-**当前状态覆盖（2026-10-07最新验收）：**目标active。G3/G4已发布；G2 MAIN获取集中责任和真实FF/ET/CWP三CLI链已passed，正在正常提交。G5三包全部ready_for_main、用户已要求查收，MAIN开始合入后集中验收/安装/接线，尚未验收完成。下方旧“联调failed/未创建/paused”不代表当前状态。R2生产准备→R3正式运行→R5最终收口仍待完成；R4不迁移决策已完成。唯一当前状态入口是[task_plan](task_plan.md)。
+**当前状态覆盖（2026-10-07最新验收）：**目标active。G5三包已由MAIN验收、合入实际执行分支并推送：CWP master057f1cd、SID v2-clean-rewrite47e1059、RF main436fed68；配套FF main5001dcb也已发布。CWP2048责任项、SID163项、RF定点安装33项及兼容24项全部通过；FF391项通过/4项跳过，三个有workflow的仓库精确源码CI均success，SID无workflow。RF实际安装按8文件、3逻辑入口/2物理目录完成，重复写入0；18个owner/生产保护文件SHA全部不变。G2-12真实FF→ET→CWP链与获取实现已发布。G2仍需FF安装工具保留用户文件的系统修复、三文件定点同步及剩余A/B指导收口，之后R2→R3→R5；不能把三包完成等同全部PWF完成。见[G5正式验收](g5_main_acceptance_2026-10-07.md)。下方旧ready/未创建/待CI/paused文字为历史时点，不重派已交付卡。
 
-**新增G5独立包（2026-10-07）：**[三卡总包](harness_lanes/g5_parallel_packages_2026-10-07.md)ready，可现在分别交harness；CWP六旧工程/批处理壳退休、SID纯API解耦与身份查询预算、RF定点安装工具/三tmp验收，分别独占`Projects/_g5/cwp|sid|rf`不同项目工作树。当前目录尚未创建，未代用户启动。G3/G4已完成不重派；MAIN保留G2-12/FF/公共CLI/指纹/工程清单、真实安装与生产/总PWF/并线。目标继续paused，本次仅制卡和发布。
+**G5当前结论：**[三卡总包](harness_lanes/g5_parallel_packages_2026-10-07.md)已全部交付、验收、并线和发布，不再分派。三个交接工作树保留；MAIN实际安装和兼容pin接线已完成。详细commit/测试/CI/保护/未做范围见[G5正式验收](g5_main_acceptance_2026-10-07.md)。
 
-**最新G4验收（2026-10-07）：**两包已验收、并入实际执行分支并推远端。CWP `df7d7ba`：冻结Pipeline/Gate0–5整族退休及CN 1.3.0路由配套，211责任用例绿；精确CI37673393822所有步骤绿/74秒。SID `eb8495c`：latest分页矛盾TDD修复，127责任/真实CLI离线联调用例绿，已推`v2-clean-rewrite`；该仓无workflow，不声称远端CI。见[G4正式验收](g4_main_acceptance_2026-10-07.md)。G4不再派发。G2-03完成；完整G2-12 ensure/FF/ET/CWP入库与复用仍未提交，其他G2、R2生产应用/R3/R5未完成。总目标保持paused，本次没有恢复生产或付费批次。
+**G4验收（历史时点，当前结论见页首）：**两包已验收、并入实际执行分支并推远端。CWP `df7d7ba`：冻结Pipeline/Gate0–5整族退休及CN 1.3.0路由配套，211责任用例绿；精确CI37673393822所有步骤绿/74秒。SID `eb8495c`：latest分页矛盾TDD修复，127责任/真实CLI离线联调用例绿，已推`v2-clean-rewrite`；该仓无workflow，不声称远端CI。见[G4正式验收](g4_main_acceptance_2026-10-07.md)。G4不再派发。G2-03完成；完整G2-12 ensure/FF/ET/CWP入库与复用仍未提交，其他G2、R2生产应用/R3/R5未完成。总目标保持paused，本次没有恢复生产或付费批次。
 
 **上一批G3验收（历史记录）：**三个包已接收并补齐MAIN接线，两个本地主线已并入。RF `ab7a7a44`已正常推远端main（107快测绿）；CWP接线代码`b2c9e66`随`4bde75a`已正常推master，115责任用例最终绿、1921单元绿；精确CI37665222739成功84秒，RF精确CI37664909065成功31秒。详情见[g3_main_acceptance](g3_main_acceptance_2026-10-07.md)。G3不再派发；G2-04旧维护退休已完成，R4依据现有注册重复上界决定不做对象化迁移（不是释放空间）。RF真实用户安装未同步；G2-12/其他G2、R2元数据生产应用、R3和R5仍未完成。目标服务保持paused，本次仅执行用户明确要求的G3验收，并未恢复总目标/付费/生产批次。
 
-
-> **当前执行归属：**MAIN已完成G4代码接收/路由/并线；当前目标paused，不启动生产。历史ready/active不覆盖页首状态，G3/G4已交付卡不重派。
+> **当前执行归属：**目标active。MAIN已完成G5三包接收、兼容pin、真实RF安装和代码发布；当前先G2-08 FF installer与定点安装，随后剩余G2收口→R2→R3→R5。已交付包不重派；历史暂停文字不产生当前门。
 
 ## 用户目标与当前基线
 
-用户要求完成全部PWF计划内容并逐步实施。当前已发布CWP代码df7d7ba、SID执行分支eb8495c；RF mainab7a7a44、StockWiki master0b48919（无remote）、StockQA master0f8fbfa；后续纯文档HEAD见Git，不要求因导航提交更换源码基线。已发布代码的精确CI和本地责任见总task_plan/交接收据。先前16项有界验收继续有效。目标服务paused；明确恢复后继续下列次序。MAIN独占总计划/共享接口/生产/合入，各大节点一次，不增签收或小节点门。
+用户要求完成全部PWF计划内容并逐步实施。当前已发布CWP源码057f1cd、SID执行分支47e1059、RF main436fed68、FF main5001dcb。当前目标active，MAIN先G2-08→剩余G2收口→R2→R3→R5；源码精确CI与责任证明见G5正式验收，纯文档后续提交不要求循环重签源码pin。历史冻结baseline与owner文件保留。
 
-**当前并行：**G2/G3/G4已交付均已验收，不重派；新增G5三卡承担确实剩余的旧工程壳、SID依赖/身份预算、RF定点安装，不改阶段次序。G2-03/04旧Pipeline及维护家族已退休，SID latest元数据/路由已接入；MAIN未提交G2-12、FF完整联调、实际安装/生产仍为剩余。
+**当前并行：**G2/G3/G4/G5已交付均已验收，不重派；三个G5工作树保留交接。MAIN负责剩余FF安装/G2收口和生产阶段，其他仓owner文件保留。
 
 **2026-10-07优先级更新：**先[G2全面补漏](gate_simplification_reaudit_2026-10-07.md)，再R2/R3/R4/R5。现场steady迁移、核心93ac5a5、Store b202d07、scoped pin22dcc927均已发布/精确CI绿；SW/SQA日常工程门与RF可选工具已交付。MAIN当前CWP/FF latest统一请求G2-12尚未提交，13项新反例绿不等于旧责任/CLI/FF/跨进程联调完成。CWP公开旧维护与冻结家族已退休；RF历史质量读取器/仓内包装已发布，实际用户安装与FF安装/兼容仍需对账；G3/G4不再是待发任务。G2仍仅两个大节点。R2生产metadata/正式登记和R3 paid没有执行。
 

@@ -1,0 +1,146 @@
+{
+  "canonical": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\revenue-forecast",
+  "schema": "rf-install-plan/1",
+  "selected": [
+    ".gitignore",
+    "SKILL.md",
+    "agents/openai.yaml",
+    "references/extended-models.md",
+    "references/input-construction.md",
+    "references/model-library.md",
+    "references/schema-migration-3.6-to-3.7.md",
+    "scripts/revenue_forecast.py"
+  ],
+  "targets": [
+    {
+      "destination": "C:\\Users\\\u90d1\u66fe\u6ce2\\.agents\\skills",
+      "files": [
+        {
+          "before_sha256": "dd9e6baee90fa1e1efc50c570854679cde7202857d2d20957e0780f686f56cd7",
+          "operation": "replace",
+          "path": ".gitignore",
+          "size": 1840,
+          "source_sha256": "41763ff5da36b80321f8c4204494b24d5b4d2856e1c255f0cdcf1f5808775397"
+        },
+        {
+          "before_sha256": "cdd1064925fcb3d0e22a43588f28dfe360c2cfc8b4c14fa0b586505c8360986e",
+          "operation": "replace",
+          "path": "SKILL.md",
+          "size": 27599,
+          "source_sha256": "3e12e492715131aeaadd060b785017590c18b6fad97dc00720f9056fc51bb3cf"
+        },
+        {
+          "before_sha256": "5f8634d5182d2095ac88bf3b6ac6b1a51188b4396d6ac68427c80703a38692c6",
+          "operation": "replace",
+          "path": "agents/openai.yaml",
+          "size": 331,
+          "source_sha256": "41b5ba57fe21d94167281a786dad97c55396877b1669dfadabcfabd617600c8b"
+        },
+        {
+          "before_sha256": "424422b909b9e7c55742fa93fe72d4705f44d5f13ccc1615f782b8f4c466497e",
+          "operation": "replace",
+          "path": "references/extended-models.md",
+          "size": 16741,
+          "source_sha256": "831cf530a4d3260c25fe5d251f9621afe88b97708575f151bf922016e377c499"
+        },
+        {
+          "before_sha256": "19d14c0611d8afebe820b7c3513bbce0bc7cf2d39e5d9be0b912e86e7c30ddd8",
+          "operation": "replace",
+          "path": "references/input-construction.md",
+          "size": 11651,
+          "source_sha256": "c7ef79311c0be7f1bb63a1ff4213044d8a1f44024b53ade7b9688ebdbdab2d20"
+        },
+        {
+          "before_sha256": "be45db0758f38d788839716477b14ec9cdd238c6160327b44a23fe01188920fa",
+          "operation": "replace",
+          "path": "references/model-library.md",
+          "size": 14308,
+          "source_sha256": "9b335522a5e956424260cca379e640eb484d52d0688cf3d44486d06ff4f1e921"
+        },
+        {
+          "before_sha256": "c0fb8ca29db99ab7fd83a185aa2a26fa857cf48f686e05ff4ea005f128aa23a6",
+          "operation": "replace",
+          "path": "references/schema-migration-3.6-to-3.7.md",
+          "size": 2149,
+          "source_sha256": "a292acf48db79f96071a81f286fb56d0abad35752c222499d649a0baabd1ad1d"
+        },
+        {
+          "before_sha256": "2a2dfede7941b0fac972d802d25eb71f798c1ebdb83226bbf8528481b9669e36",
+          "operation": "replace",
+          "path": "scripts/revenue_forecast.py",
+          "size": 5324,
+          "source_sha256": "068dbac5e9f1002f5b01316ef06520274bbd455af3134895ce6440bd4bfbc196"
+        }
+      ],
+      "installed": true,
+      "selected_drift": 8,
+      "target": "C:\\Users\\\u90d1\u66fe\u6ce2\\.agents\\skills\\revenue-forecast",
+      "unselected_drift": 0
+    },
+    {
+      "destination": "C:\\Users\\\u90d1\u66fe\u6ce2\\.codex\\skills",
+      "files": [
+        {
+          "before_sha256": "dd9e6baee90fa1e1efc50c570854679cde7202857d2d20957e0780f686f56cd7",
+          "operation": "replace",
+          "path": ".gitignore",
+          "size": 1840,
+          "source_sha256": "41763ff5da36b80321f8c4204494b24d5b4d2856e1c255f0cdcf1f5808775397"
+        },
+        {
+          "before_sha256": "cdd1064925fcb3d0e22a43588f28dfe360c2cfc8b4c14fa0b586505c8360986e",
+          "operation": "replace",
+          "path": "SKILL.md",
+          "size": 27599,
+          "source_sha256": "3e12e492715131aeaadd060b785017590c18b6fad97dc00720f9056fc51bb3cf"
+        },
+        {
+          "before_sha256": "5f8634d5182d2095ac88bf3b6ac6b1a51188b4396d6ac68427c80703a38692c6",
+          "operation": "replace",
+          "path": "agents/openai.yaml",
+          "size": 331,
+          "source_sha256": "41b5ba57fe21d94167281a786dad97c55396877b1669dfadabcfabd617600c8b"
+        },
+        {
+          "before_sha256": "424422b909b9e7c55742fa93fe72d4705f44d5f13ccc1615f782b8f4c466497e",
+          "operation": "replace",
+          "path": "references/extended-models.md",
+          "size": 16741,
+          "source_sha256": "831cf530a4d3260c25fe5d251f9621afe88b97708575f151bf922016e377c499"
+        },
+        {
+          "before_sha256": "19d14c0611d8afebe820b7c3513bbce0bc7cf2d39e5d9be0b912e86e7c30ddd8",
+          "operation": "replace",
+          "path": "references/input-construction.md",
+          "size": 11651,
+          "source_sha256": "c7ef79311c0be7f1bb63a1ff4213044d8a1f44024b53ade7b9688ebdbdab2d20"
+        },
+        {
+          "before_sha256": "be45db0758f38d788839716477b14ec9cdd238c6160327b44a23fe01188920fa",
+          "operation": "replace",
+          "path": "references/model-library.md",
+          "size": 14308,
+          "source_sha256": "9b335522a5e956424260cca379e640eb484d52d0688cf3d44486d06ff4f1e921"
+        },
+        {
+          "before_sha256": "c0fb8ca29db99ab7fd83a185aa2a26fa857cf48f686e05ff4ea005f128aa23a6",
+          "operation": "replace",
+          "path": "references/schema-migration-3.6-to-3.7.md",
+          "size": 2149,
+          "source_sha256": "a292acf48db79f96071a81f286fb56d0abad35752c222499d649a0baabd1ad1d"
+        },
+        {
+          "before_sha256": "2a2dfede7941b0fac972d802d25eb71f798c1ebdb83226bbf8528481b9669e36",
+          "operation": "replace",
+          "path": "scripts/revenue_forecast.py",
+          "size": 5324,
+          "source_sha256": "068dbac5e9f1002f5b01316ef06520274bbd455af3134895ce6440bd4bfbc196"
+        }
+      ],
+      "installed": true,
+      "selected_drift": 8,
+      "target": "C:\\Users\\\u90d1\u66fe\u6ce2\\.codex\\skills\\revenue-forecast",
+      "unselected_drift": 0
+    }
+  ]
+}

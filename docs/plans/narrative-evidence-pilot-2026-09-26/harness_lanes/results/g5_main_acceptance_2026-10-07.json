@@ -1,0 +1,134 @@
+{
+  "schema_version": "g5-main-acceptance/1",
+  "status": "verified_merged_published",
+  "implementation_commits": {
+    "CWP": "b3e7f74bf5892f2d1acb766ab4b08f05d90e348e",
+    "SID": "7a4bf0d97dba197e4accf0bd47707f012a6a7413",
+    "RF": "a2116ca6d5280c140b42a0d8bd2d94521ee80ccd"
+  },
+  "published_heads": {
+    "CWP": "057f1cdab3f92a7839b3a908c8c471597723b76c",
+    "SID": "47e10593ec1c152f1e613cc1f14813267c9b396b",
+    "RF": "436fed68d8ba334ae568de296636904c5cc3e6cf",
+    "FF": "5001dcbef1845a08e90cda6f2a86365610a662af"
+  },
+  "responsibility_tests": {
+    "g5c": [
+      {
+        "tests": "2048",
+        "failures": "0",
+        "errors": "0",
+        "skipped": "0",
+        "time": "157.635"
+      }
+    ],
+    "g5s": [
+      {
+        "tests": "163",
+        "failures": "0",
+        "errors": "0",
+        "skipped": "0",
+        "time": "44.369"
+      }
+    ],
+    "g5r": [
+      {
+        "tests": "17",
+        "failures": "0",
+        "errors": "0",
+        "skipped": "0",
+        "time": "19.267"
+      }
+    ],
+    "g5p": [
+      {
+        "tests": "40",
+        "failures": "0",
+        "errors": "0",
+        "skipped": "0",
+        "time": "11.106"
+      }
+    ],
+    "g5f": [
+      {
+        "tests": "473",
+        "failures": "0",
+        "errors": "0",
+        "skipped": "4",
+        "time": "74.362"
+      }
+    ]
+  },
+  "ci": {
+    "company-wiki": {
+      "head": "057f1cdab3f92a7839b3a908c8c471597723b76c",
+      "receipt": "g5_cwp_exact_ci_2026-10-07.json",
+      "runs": [
+        37692354260
+      ]
+    },
+    "revenue-forecast": {
+      "head": "436fed68d8ba334ae568de296636904c5cc3e6cf",
+      "receipt": "g5_rf_exact_ci_2026-10-07.json",
+      "runs": [
+        37692576850
+      ]
+    },
+    "filing-fetch": {
+      "head": "5001dcbef1845a08e90cda6f2a86365610a662af",
+      "receipt": "g5_ff_exact_ci_2026-10-07.json",
+      "runs": [
+        37692509218
+      ]
+    }
+  },
+  "sid_ci": "not_applicable_no_workflow",
+  "sid_source_proof": "tested clean _g5/sid commit is identical to merged execution branch HEAD; original legacy owner WIP was not imported into tests",
+  "owner_and_production_sha256_before": {
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_acquisition.yaml": "04b0f8d0f0bba8020fa17eed0430d25473844c2c674001a0aa98fddf8a5bd019",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.source_catalog\\catalog.sqlite3": "0081ee5c3daf85abd71253e6069d08b1cdde46fe216326c10f0bf897a6a6bb62",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.source_catalog\\runtime_policy.json": "722f8344ee3764609ff51fda6109334b873fb26846f000934d49437269ee96f6",
+    "C:\\Users\\郑曾波\\Projects\\StockInfoDLSimple\\v2-clean-rewrite\\README.md": "974b9f2eec5a680206c9c18a9e6151c7dbd2946be6b1302fb13d9e5e218e1f89",
+    "C:\\Users\\郑曾波\\Projects\\StockInfoDLSimple\\v2-clean-rewrite\\config_template.json": "d35cf7c7b24e9fcf75eba3dc94d721cc05b2ae8438a673b512a40012e9d796fc",
+    "C:\\Users\\郑曾波\\Projects\\StockInfoDLSimple\\v2-clean-rewrite\\main.py": "3aa0cc8400126d575af9b088e4f6a29486f66a196bf19d38dd5e74d37df77d2c",
+    "C:\\Users\\郑曾波\\Projects\\StockInfoDLSimple\\v2-clean-rewrite\\src\\browser.py": "ac55d0a3ae84d6361423612ec0565dc46787907d1bb64ff3c057fc996f217ae1",
+    "C:\\Users\\郑曾波\\Projects\\StockInfoDLSimple\\v2-clean-rewrite\\src\\downloader.py": "14238f8ab5df830caad3a9011addcde089197297cf72ea52b353de3e100e6637",
+    "C:\\Users\\郑曾波\\Projects\\StockInfoDLSimple\\v2-clean-rewrite\\src\\logger.py": "72b22c63b48099cbf89836b7da4ee41c85ff9fc623c23c8fad0c97f507b63769",
+    "C:\\Users\\郑曾波\\Projects\\StockInfoDLSimple\\v2-clean-rewrite\\src\\mapping.py": "40d9114a2feb24800f5e665282bf1244212e72fc0773a9b7a6171a0b1b30482a",
+    "C:\\Users\\郑曾波\\Projects\\StockInfoDLSimple\\v2-clean-rewrite\\src\\models.py": "b280c14eddeee78ae7ab5d116d4e2be7145a5f3bdbdc742c7a0268f2e696395d",
+    "C:\\Users\\郑曾波\\Projects\\StockInfoDLSimple\\v2-clean-rewrite\\tests\\e2e\\official_e2e_test.py": "e56e1ef5cfcea9e89022f816d7ccfa923f0a039af60c2511ba9ed3c5fe4d3242",
+    "C:\\Users\\郑曾波\\Projects\\StockInfoDLSimple\\v2-clean-rewrite\\tests\\unit\\test_downloader.py": "8dbed9a7cfc55bbab3aeb755557307b2027bb820a6ad06ef3eed252f7ceef213",
+    "C:\\Users\\郑曾波\\Projects\\StockInfoDLSimple\\v2-clean-rewrite\\tests\\unit\\test_official_e2e_contract.py": "453eed3e3c177eb45ff5d02d0fbd555b43ea93cb2ed6f7b02384f1c20a59b2ae",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\daily_alert.jsonl": "f297e2b887a4dc279a1012c23fb50b77c25f6237e970b22278037d42f24869c8",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_alert.jsonl": "b617b0b00ff1a758b5b46299e3e5db3115f56efd90d212154abe988e5ea9fee5",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_manifest.json": "0d55cb8c81f12b663e330819da3037bb69ce8564ac41a686b578a99f78f948bf"
+  },
+  "owner_and_production_unchanged": true,
+  "real_rf_install_receipt": "g5_rf_real_install_acceptance_2026-10-07.json",
+  "real_cli_chain_receipt": "g2_chain_e2e_accepted_2026-10-07.json",
+  "models_or_translation": 0,
+  "raw_deleted": 0,
+  "dayu_iqs_writes": 0,
+  "remaining": [
+    "G2-08 FF installed three-file sync and legacy installer preservation fix",
+    "remaining G2 consolidated A/B and guidance checks",
+    "R2 real production metadata/ET registration",
+    "R3 real production final and consumers",
+    "R5 final PWF/Git closure"
+  ],
+  "ff_pytest_terminal_summary": {
+    "passed": 391,
+    "skipped": 4,
+    "subtests_passed": 78,
+    "junit_count_includes_subtests": true
+  },
+  "owner_byte_restoration": {
+    "path": "revenue-forecast/assurance/runs/weekly_manifest.json",
+    "cause": "pre-commit stash restoration normalized CRLF to LF",
+    "json_and_unstaged_patch_content_unchanged": true,
+    "repair": "restore CRLF only after reconstructed bytes exactly match saved pre-node SHA256",
+    "final_saved_sha256_matches": true
+  },
+  "owned_temp_cleanup_receipt": "g5_temp_cleanup_2026-10-07.json"
+}

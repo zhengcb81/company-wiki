@@ -1,5 +1,13 @@
 # Findings：当前事实与待验证项
 
+## 最新G5正式验收事实（2026-10-07）
+
+目标active。G5三包已由MAIN验收、合入实际执行分支并推送：CWP master057f1cd、SID v2-clean-rewrite47e1059、RF main436fed68；配套FF main5001dcb也已发布。CWP2048责任项、SID163项、RF定点安装33项及兼容24项全部通过；FF391项通过/4项跳过，三个有workflow的仓库精确源码CI均success，SID无workflow。RF实际安装按8文件、3逻辑入口/2物理目录完成，重复写入0；18个owner/生产保护文件SHA全部不变。G2-12真实FF→ET→CWP链与获取实现已发布。G2仍需FF安装工具保留用户文件的系统修复、三文件定点同步及剩余A/B指导收口，之后R2→R3→R5；不能把三包完成等同全部PWF完成。见[G5正式验收](g5_main_acceptance_2026-10-07.md)。下方旧ready/未创建/待CI/paused文字为历史时点，不重派已交付卡。
+
+RF三逻辑安装入口只有两个物理目录：.claude是.agents别名；原“24条差异”应作为历史估计，真实此次为8×2=16个物理文件。只同步选中文件的正式工具已通过失败/恢复/TDD，config/output和未选文件保持，重复写0。
+
+Git/pre-commit暂存恢复会改变owner换行字节：weekly_manifest的CRLF→LF导致SHA不同；JSON和Git unstaged patch内容相同，恢复CRLF的SHA等于预先保护值。仅恢复换行，没有恢复HEAD或丢owner内容；18保护文件最后全相同。FF旧installer全目标扫删manifest外文件是另一真实缺陷，已记G2-08；不要用它做实际安装。
+
 **最新G2验收纠正：**真实三CLI链已passed，见g2_chain_e2e_accepted；先前字段错误/状态期待/preview用途是夹具问题，不是生产者失败。FMP ET能解析quarter或period，但现行CWP生产者原文合同严格五字段；本轮模拟标准period，不新增额外quarter。publication始终unknown；实际下载状态与公开日资格是不同事实。完整读取必须使用公开调用者的实际用途；电话会原始预览不冒充filing_reuse或as-of预测可用。全链原件/生产不变、测试根absent。G5三包收到用户正式查收请求，MAIN开始验收并线，目标active。
 
 ## 最新状态纠正（2026-10-07整体进度询问）

@@ -80,7 +80,7 @@ source-only output before exposing any read-only compatibility entry.
 
 ### W1 — other legacy Wiki/state maintenance: keep frozen; retire by later caller class
 
-`graph.py`, `test_framework.py`
+`graph.py`
 
 These are not called by the canonical startup/control/console routes. They
 remain default-blocked. Later work units must split genuine read-only source
@@ -108,9 +108,18 @@ before argument/config/network/write initialization.
 
 `cross_verify.py` is excluded from R2 pending a source-quality migration audit:
 multi-source diagnostics may be an upstream responsibility, but the legacy
-implementation lacks stable source IDs/locators. `test_framework.py` is also
-excluded: it writes isolated test artifacts, and any nested R1 pipeline call is
-independently blocked by the target script's permanent-retirement policy.
+implementation lacks stable source IDs/locators.
+
+### G5 — retired engineering gates and batch shells
+
+`semantic_gate.py`, `architecture_gate.py`, `clean_env_gate.py`, `gold_gate.py`,
+`test_framework.py`, `batch_process.py` are now pure standard-library retirement
+shells. Direct invocation, legacy arguments, `--help`, `python -S` and `main()`
+return 78 with `LEGACY_ENGINEERING_TOOL_RETIRED`; imports construct no project
+client or Store and create no candidate copy or receipt. Environment values do
+not restore their former implementation. Current checks live in the normal
+hooks, `tools/pre_push_gate.py` and CI; source-quality counterexamples remain
+in the responsible tests. See `control/README.md`.
 
 ### R3 — destructive/reset maintenance: must retire
 

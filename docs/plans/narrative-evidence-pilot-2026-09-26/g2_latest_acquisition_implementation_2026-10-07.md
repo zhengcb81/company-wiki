@@ -1,6 +1,6 @@
 # G2-12：一次请求、一次发现、一个获取事务
 
-**当前验收（2026-10-07）：**实现与本地集中节点已通过，正在正常提交；不代表全部G2完成。CWP109/FF41/变动85/最后39项各自绿，计数有重叠；真实离线FF v1/v2、ET supervisor/worker、CWP canonical writer及binary reader三案例绿。CN一次metadata/一次fetch/一次入库，第二次metadata复核、fetch0；US真实HTML复用+一次ET HTTP fixture，电话会原始JSON入库、重复provider0。四份实际返回字节SHA核对，电话会preview用途仍明确publication未知，US最新因Dayu无真实读取预算返回诚实GAP/零Dayu执行。[本地验收](harness_lanes/results/g2_single_intent_main_acceptance_2026-10-07.json)、[实际CLI](harness_lanes/results/g2_chain_e2e_accepted_2026-10-07.json)、[临时清理](harness_lanes/results/g2_temp_cleanup_2026-10-07.json)。原件/生产不变，费用/翻译0。
+**当前验收（2026-10-07）：**目标active。G5三包已由MAIN验收、合入实际执行分支并推送：CWP master057f1cd、SID v2-clean-rewrite47e1059、RF main436fed68；配套FF main5001dcb也已发布。CWP2048责任项、SID163项、RF定点安装33项及兼容24项全部通过；FF391项通过/4项跳过，三个有workflow的仓库精确源码CI均success，SID无workflow。RF实际安装按8文件、3逻辑入口/2物理目录完成，重复写入0；18个owner/生产保护文件SHA全部不变。G2-12真实FF→ET→CWP链与获取实现已发布。G2仍需FF安装工具保留用户文件的系统修复、三文件定点同步及剩余A/B指导收口，之后R2→R3→R5；不能把三包完成等同全部PWF完成。见[G5正式验收](g5_main_acceptance_2026-10-07.md)。下方旧ready/未创建/待CI/paused文字为历史时点，不重派已交付卡。
 
 锁键不含TTL/hash/请求caps；同target互斥覆盖暂存到真实最终解析，不同target能并行。canonical短锁等待使用同一实际deadline，staged SHA只核一次；可恢复kill和已入库复用责任保持。CloseGap是公共ensure薄包装；FF旧scope随第一次ensure传递，临时scope文件finally删除，无二次发现/下载。内部gap诊断按实际交易终态投影，不再令已完成v2请求伪装GAP。Python3.10无add_note时保留原清理异常与失败journal，责任测试绿。以下旧“paused/尚未联调/自然年猜测”为历史施工记录。
 

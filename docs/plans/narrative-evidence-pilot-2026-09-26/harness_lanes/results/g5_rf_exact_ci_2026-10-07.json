@@ -1,0 +1,105 @@
+{
+  "schema_version": "g5-exact-ci/1",
+  "repo": "revenue-forecast",
+  "head": "436fed68d8ba334ae568de296636904c5cc3e6cf",
+  "runs": [
+    {
+      "id": 37692576850,
+      "name": "quality",
+      "head_sha": "436fed68d8ba334ae568de296636904c5cc3e6cf",
+      "status": "completed",
+      "conclusion": "success",
+      "run_attempt": 1,
+      "html_url": "https://github.com/zhengcb81/revenue-forecast/actions/runs/37692576850",
+      "created_at": "2026-10-07T21:53:53Z",
+      "updated_at": "2026-10-07T21:54:27Z",
+      "jobs": [
+        {
+          "id": 113036171912,
+          "name": "verify",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-10-07T21:53:56Z",
+          "completed_at": "2026-10-07T21:54:26Z",
+          "html_url": "https://github.com/zhengcb81/revenue-forecast/actions/runs/37692576850/job/113036171912",
+          "steps": [
+            {
+              "name": "Set up job",
+              "number": 1,
+              "status": "completed",
+              "conclusion": "success",
+              "started_at": "2026-10-07T21:53:57Z",
+              "completed_at": "2026-10-07T21:53:58Z"
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "number": 2,
+              "status": "completed",
+              "conclusion": "success",
+              "started_at": "2026-10-07T21:53:58Z",
+              "completed_at": "2026-10-07T21:53:59Z"
+            },
+            {
+              "name": "Run actions/setup-python@v5",
+              "number": 3,
+              "status": "completed",
+              "conclusion": "success",
+              "started_at": "2026-10-07T21:53:59Z",
+              "completed_at": "2026-10-07T21:53:59Z"
+            },
+            {
+              "name": "Install dependencies",
+              "number": 4,
+              "status": "completed",
+              "conclusion": "success",
+              "started_at": "2026-10-07T21:53:59Z",
+              "completed_at": "2026-10-07T21:54:07Z"
+            },
+            {
+              "name": "Fetch pinned source dependencies",
+              "number": 5,
+              "status": "completed",
+              "conclusion": "success",
+              "started_at": "2026-10-07T21:54:07Z",
+              "completed_at": "2026-10-07T21:54:12Z"
+            },
+            {
+              "name": "Shared local and CI checks",
+              "number": 6,
+              "status": "completed",
+              "conclusion": "success",
+              "started_at": "2026-10-07T21:54:12Z",
+              "completed_at": "2026-10-07T21:54:24Z"
+            },
+            {
+              "name": "Post Run actions/setup-python@v5",
+              "number": 11,
+              "status": "completed",
+              "conclusion": "success",
+              "started_at": "2026-10-07T21:54:24Z",
+              "completed_at": "2026-10-07T21:54:25Z"
+            },
+            {
+              "name": "Post Run actions/checkout@v4",
+              "number": 12,
+              "status": "completed",
+              "conclusion": "success",
+              "started_at": "2026-10-07T21:54:25Z",
+              "completed_at": "2026-10-07T21:54:25Z"
+            },
+            {
+              "name": "Complete job",
+              "number": 13,
+              "status": "completed",
+              "conclusion": "success",
+              "started_at": "2026-10-07T21:54:25Z",
+              "completed_at": "2026-10-07T21:54:25Z"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "all_completed": true,
+  "all_success": true
+}

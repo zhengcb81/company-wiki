@@ -1,0 +1,141 @@
+{
+  "original_owner_or_production_deleted": 0,
+  "schema_version": "g5-owned-temp-cleanup/1",
+  "status": "restored_absent",
+  "removed": [
+    {
+      "path": ".planning/g5r",
+      "files": 561,
+      "bytes": 3707047,
+      "status": "restored_absent"
+    },
+    {
+      "path": ".planning/g5p",
+      "files": 0,
+      "bytes": 0,
+      "status": "restored_absent"
+    },
+    {
+      "path": ".planning/g5f",
+      "files": 159,
+      "bytes": 870982,
+      "status": "restored_absent"
+    },
+    {
+      "path": ".planning/g5c-result.xml",
+      "files": 1,
+      "bytes": 311174,
+      "status": "restored_absent"
+    },
+    {
+      "path": ".planning/g5s-result.xml",
+      "files": 1,
+      "bytes": 23132,
+      "status": "restored_absent"
+    },
+    {
+      "path": ".planning/g5r-result.xml",
+      "files": 1,
+      "bytes": 2654,
+      "status": "restored_absent"
+    },
+    {
+      "path": ".planning/g5p-result.xml",
+      "files": 1,
+      "bytes": 5748,
+      "status": "restored_absent"
+    },
+    {
+      "path": ".planning/g5f-result.xml",
+      "files": 1,
+      "bytes": 54893,
+      "status": "restored_absent"
+    },
+    {
+      "path": ".planning/g2_g5_main_checkpoint.py",
+      "files": 1,
+      "bytes": 4642,
+      "status": "restored_absent"
+    },
+    {
+      "path": ".planning/g5_ci_poll.py",
+      "files": 1,
+      "bytes": 2475,
+      "status": "restored_absent"
+    },
+    {
+      "path": ".planning/g5_cwp_ci.json",
+      "files": 1,
+      "bytes": 5705,
+      "status": "restored_absent"
+    },
+    {
+      "path": ".planning/g5_ff_ci.json",
+      "files": 1,
+      "bytes": 5273,
+      "status": "restored_absent"
+    },
+    {
+      "path": ".planning/g5_rf_ci.json",
+      "files": 1,
+      "bytes": 3675,
+      "status": "restored_absent"
+    },
+    {
+      "path": ".planning/g5_finish_receipt.py",
+      "files": 1,
+      "bytes": 3613,
+      "status": "restored_absent"
+    },
+    {
+      "path": ".planning/g5_install_apply.py",
+      "files": 1,
+      "bytes": 3888,
+      "status": "restored_absent"
+    },
+    {
+      "path": ".planning/g5_main_before.json",
+      "files": 1,
+      "bytes": 3571,
+      "status": "restored_absent"
+    },
+    {
+      "path": ".planning/g5_update_pwf.py",
+      "files": 1,
+      "bytes": 9780,
+      "status": "restored_absent"
+    },
+    {
+      "path": ".planning/g5_report.md",
+      "files": 1,
+      "bytes": 6582,
+      "status": "restored_absent"
+    }
+  ],
+  "earlier_removed": {
+    "reason": "first guarded cleanup removed this root, then stopped on RF test junction before persisting aggregate",
+    "path": ".planning/g5c",
+    "bytes": null,
+    "status": "absent"
+  },
+  "safe_alias_removed": {
+    "path": ".planning/g5r/test_scope_rejects_a_link_that0/skills/revenue-forecast/references",
+    "target": ".planning/g5r/test_scope_rejects_a_link_that0/outside",
+    "target_preserved_during_alias_removal": true
+  },
+  "evidence_retained": "g5_main_acceptance_2026-10-07.json and exact CI/real installation receipts",
+  "delivery_worktrees_preserved": [
+    "_g5/cwp",
+    "_g5/sid",
+    "_g5/rf"
+  ],
+  "bytes_removed_measured": 5024834,
+  "raw_deleted": 0,
+  "historical_unclassified_roots_preserved": [
+    "g2-latest-red",
+    "g2cliR",
+    "g2g2",
+    "g2g3",
+    "g2r2"
+  ]
+}
