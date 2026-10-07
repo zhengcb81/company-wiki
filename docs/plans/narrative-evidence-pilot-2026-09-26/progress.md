@@ -1,5 +1,17 @@
 # Progress：激进简化实施
 
+## 2026-10-07 日期提案GREEN、保护/清理完成
+
+同六CLI独立副本6 passed/25.17秒，Ruff绿；未来公开仍拒绝、早/晚下载均能与CWP精选证据逐条相等，原语言与当前版本正常。RF六模块逐测试只读导出，StockWiki168个已提交Python共1717590B+已提交provider配置只在tmp；不读取本机密钥，不外发。首次测试在导出exec返回running session后提前启动且缺config/llm_providers.yaml，三StockWiki环境失败；等待真实导出terminal、补必要已提交配置后CLI help0再跑原六例GREEN。保存真实current/proposal分开的小JSON及可审查两diff，七自身根清回absent、RF三日志和StockWikiclean保持。PWF仍维持两仓owner只读，已异步询问是否隔离落地；两互斥卡仅prepared/not-dispatched。整体目标active，不冒称已修当前消费者。
+
+## 2026-10-07 消费者真实语义RED
+
+夹具修正后六正式CLI25.36秒：4pass/2fail，仅两消费者的late_download实际拒绝source_after_as_of；CWP相同原件/身份/期次/公开日正常实读SHA并replay verified。提前下载与未来公开反例四项均正确，parser0.1.1/selector0.4.2普通新包兼容。RF与StockWiki均有真实剩余重复时间门，不能宣布G1跨仓全闭合。下一仅在独立测试副本验证最小修正，不写owner。
+
+## 2026-10-07 消费者as-of只读反例准备
+
+发现当前StockWiki `_narrative_bundle` 和RF `company_wiki_narrative_contracts` 两者均仍拒绝retrieved_at晚于as-of，与已收口CWP公开日规则可能分歧。先写细则和六正式CLI反例；首轮6失败/12.05秒全发生fixture.read_request接收dict却要求.to_dict的测试构造错误，未进入消费者，不能当产品RED。已改公开request字典格式，并使用versions完整名称/版本字符串末尾检查。RF/StockWiki目录零写，fixture根finally恢复；下一同语义改夹具实测。
+
 ## 2026-10-07 deadline发布收口
 
 7aa88aec057ea392a343fa43bc6d1accaeb1f24e正常提交/短push门绿，真实远端一致；精确CI37557509249 attempt1全部job/step success，job112587036410/73秒，CI全Unit与短合同绿。发布收据含实际Git blob SHA、保护与十tmp仍absent。仅user source_acquisition.yaml dirty，不暂存不覆盖。RF6e6b817a、FF758e8f4、ET2b9fb84保持；StockWiki已推进3fe5008独立quick-scan变更，后续只读核来源接口。FF→ET→CWP手动正式脚本run_ff_et_cwp_offline_acceptance及FF MAIN_ACCEPTANCE实读确认真实三仓CLI/私有HTTP seam与重复0provider/语言SHA/timeoutcleanup覆盖，不复跑。总PWF下一完整需求表逐项闭合，不据一deadline宣称整体完成。

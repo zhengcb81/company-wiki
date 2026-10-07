@@ -1,5 +1,13 @@
 # Findings：当前事实与待验证项
 
+## 2026-10-07 下游日期缺口已实证
+
+六正式当前消费者CLI25.36秒4pass/2fail，仅late_download在RF/StockWiki真实返回source_after_as_of；同CWP verified原件可读。两个最小独立副本保留UTC合法性与未来公开拒绝，同六CLI25.17秒全绿、Ruff绿。当前外仓代码未改；G1/S3跨仓整体因此不complete。七隔离根已清，来源正文/DB/copy代码不留，正式小JSON+两diff/互斥卡保留。已请求用户确认外仓只读边界的落地方式，答复前不依赖授权推进。初次提案导出未terminal且缺CLI默认provider配置的三环境失败已明记，不当产品RED；采用完整副本后验证。
+
+## 2026-10-07 当前StockWiki跨仓读取核查
+
+RF6e6b817a和三owner日志、CWP用户配置保持；StockWiki3fe5008工作树clean。已实读StockWiki narrative_source/_narrative_bundle及service：显式CLI经配置的CWP transport，只消费版本化证据、不写研究状态。但_manifest仍以retrieved_at晚于as-of拒绝来源，可能重复已退出的capture时间门（CWP只看公开日）；先用隔离正式CLI反例验证，不改StockWiki或IQS owner目录。当前consumer接受parser_version文本、声明partial/needs_review与原语言，不能仅凭旧文档保证全部语义正确。
+
 deadline节点7aa88ae已推且精确CI37557509249全步骤成功/73秒；未增加日常长测试。跨仓实际HEAD：RF6e6b817a、FF758e8f4、ET2b9fb84、StockWiki3fe5008（独立quick-scan工作），本线零写外仓。FF正式离线脚本确实走FF companion→ET真实CLI/supervisor/worker/serializer→CWP import/query/open，仅替换provider HTTP；不能把fixture变成live FMP成功。RF source_preparation当前默认pathless v2，旧legacy仅历史helper；StockWiki叙述consumer文档为显式读取，不是自动全库投资研究同步，后续按当前代码接口核对应实际责任边界。
 
 ## 2026-10-07 完整核查的真实时间缺口修复

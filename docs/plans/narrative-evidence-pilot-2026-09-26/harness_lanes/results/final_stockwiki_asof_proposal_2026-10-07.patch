@@ -1,0 +1,12 @@
+--- a/stockwiki/_narrative_bundle.py
++++ b/stockwiki/_narrative_bundle.py
+@@ -63,7 +63,8 @@
+     if manifest["source_url"] is not None and not manifest["source_url"].startswith(("https://", "http://")):
+         raise NarrativeSourceError("manifest_source_url")
+     cutoff = iso_date(request["as_of_date"])
+-    if iso_date(manifest["published_date"]) > cutoff or utc_time(manifest["retrieved_at"]).date() > cutoff:
++    utc_time(manifest["retrieved_at"])  # Validate metadata; download time is not the public-information cutoff.
++    if iso_date(manifest["published_date"]) > cutoff:
+         raise NarrativeSourceError("source_after_as_of")
+     return manifest
+ 

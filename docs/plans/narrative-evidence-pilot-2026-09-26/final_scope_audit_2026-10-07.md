@@ -32,6 +32,10 @@
 
 ## 当前结论
 
+**本次核查已证明不符合：下游日期合同。** 当前StockWiki3fe5008与RF6e6b817a的真实CLI都仍用下载日拒绝历史公开资料；CWP同来源实读/回放通过。六反例4pass/2fail，日期最小隔离提案同六例6pass/25.17秒；当前消费者仍未修，不能用proposal绿或既有CI声称已完成G1跨仓收口。七隔离根恢复absent，两owner未写。详见[正式实证收据](harness_lanes/results/final_consumer_asof_audit_2026-10-07.json)，下一答复后在独立worktree落地或交owner。
+
+本表“RF/StockWiki抽象消费”和“多余门禁退出”两行现判**部分已证实、日期语义不符合**。已证实的普通当前parser0.1.1/selector0.4.2入口、原语言/evidence spans精确一致、future_publication拒绝和保护边界不需重做；数据层/资源/恢复/清理节点证据继续有效。其他行此前证据仍逐项对照，但该实际缺口已足以保持整体目标active，不为了宣布完成而改as-of或源元数据。
+
 **最新发布恢复点：**准备deadline7aa88ae已推主线、精确CI37557509249全部步骤73秒绿，下文“发布待CI”仅旧状态。当前源事实17表/九原件保护已实读全部一致；FF758e8f4、ET2b9fb84、RF6e6b817a与收据一致。已实读FF正式离线脚本（真实三仓CLI、仅HTTP seam）及FF MAIN_ACCEPTANCE、RF当前source_preparation默认v2、StockWiki当前叙述consumer文档。StockWiki HEAD3fe5008有独立项目新提交，下一只读核其当前SourceExport/Narrative公开接口/测试覆盖与交付祖先，再把本表各行写清结论，不能宣称整个跨仓投资预测计算或生产全部文档处理已完成。整体目标active。
 
 2026-10-07实际核查已发现并TDD修复准备deadline遗漏；本地57 Unit/五CLI绿，发布尚待精确CI。当前生产来源/原件核查已有实证：[17表/9原件只读收据](harness_lanes/results/final_current_source_facts_2026-10-07.json)，全部与S5/S7已发布基线一致，DB仍222408704B/0free，0生产写/完整备份。生产_final_documents实际调用终态压缩，Supervisor P1混合1/P2计算1+模型1/P4计算3+模型1；不是模型4并发。kill恢复测试实际杀正式协调器/子进程、unknown保留费用，既有14案例收据n4c_prompt_node已检查，未重跑。其余各行仍需把具体公开合同/当前外仓接口及旧正式联调证据逐项核实，不能依据本段宣称16项全complete。

@@ -10,6 +10,8 @@
 
 ## 当前恢复点（2026-10-07）
 
+- **完整核查发现两个真实下游日期门，尚未生产落地。** 当前RF6e6b817a/StockWiki3fe5008会拒绝“8月公开、9月下载、as-of9月1日”的有效叙述来源，CWP相同原件verified正常。六真实CLI4pass/2fail；最小隔离副本改用公开日截止后六例25.17秒全绿，未来公开仍拒绝。两仓owner零写；已提交可审查提案及[具体细则](final_consumer_asof_alignment_2026-10-07.md)，异步询问是否允许两仓隔离落地，两张互斥卡尚未派发。本缺口解决前不把G1/S3跨仓整体或整个目标标complete。
+
 - **完整核查发现的准备deadline缺口已修复并发布。** 代码7aa88ae，精确CI37557509249 attempt1全部job/step success/73秒。五功能反例RED后57责任项/12.58秒及五真实CLI/35.78秒绿，47源mypy与CI Ruff绿；到期后停止新的准备读取/任务/HTTP，旧付费账保留，正常配置与恢复保持。十自身测试路径absent，生产17表/九原件/用户配置/RF owner复核不变，DB222408704B。没有扩大供应商/权限/预算或日常长测；[正式收据](harness_lanes/results/final_batch_deadline_acceptance_2026-10-07.json)。整体目标active，下一完整核查剩余外仓公开接口和要求逐项闭合。
 
 - **N6-CANDIDATE最新查收复核通过。** f31cc0d/e8c645e均已在当前主线，远端master ed2dc51；实时精确CI37547043642全部步骤success。本次四文件短包47项/0.79秒绿，tmp/n6-rcheck恢复absent，11份相关源代码与已发布S7 Git blob一致。详见[N6验收单最新复核](n6_candidate_main_acceptance_2026-10-07.md)。本次不重合并、不重跑九样本；整体Next Step保持完整目标核查，准备阶段deadline未提交改动仍属该核查的独立未完成修复。
@@ -52,8 +54,8 @@ python -B tools/n4c_live_preflight.py --rf-root 'C:/Users/郑曾波/Projects/rev
 | S0 简化收口 | complete | gold/shadow/Work Unit 人工链退出；commit 无 pytest，config doctor 仅相关改动触发；`ff5396c`/CI 绿 |
 | S1 N4A | complete | scope 贯通 Store/Worker/Supervisor/outbox/prepared；空范围零修改，SQL 范围先于 LIMIT；节点 A 绿 |
 | S2 N4B | complete | 隔离子进程客户端、真实 HTTP/factory、有限 batch、持久预算、lease/generation/kill/ACK 恢复；节点 A/B 集中验收绿 |
-| G1 多余门禁/签收 | complete | 46 项已分类；private/public、prompt 人工复核阻断、签名/TTL、reviewer 必填、双授权及旧审批工具退出；CWP/FF/ET 责任测试绿 |
-| S3 来源虚拟化 | complete | SourceRef/SourceExport v2、FF→ET→CWP 正式 CLI 离线链、迁根/只读/去重/SHA/语言/超时清理验收；RF 默认 v2 已发布，StockWiki 现有只读消费者复用 |
+| G1 多余门禁/签收 | CWP/FF/ET complete；RF/StockWiki叙述日期残留待修 | 46 项分类/人工审批链已退出；本次真实CLI发现两消费者仍用下载日拒绝历史公开资料，独立提案六例绿、当前两仓未落地，不宣称跨仓全完成 |
+| S3 来源虚拟化 | 接口已发布；下游as-of对齐待修 | SourceRef/SourceExport v2、FF→ET→CWP离线链、迁根/只读/SHA/语言/清理已验收；RF/StockWiki新包正常消费，历史日期两例真实失败另按当前细则收口 |
 | S4 N4C与R6实际效果 | complete | 四类真实final/RF读取与run10业务复核完成；R6 TDD→184责任测试→正式离线E2E/RF→代码eae2dd4/CI59秒绿，保留好claim，坏片段不进入产物，不重跑真实模型 |
 | S5 逐 caller 与派生清理 | complete | 旧全文 writer/消费者退出；生产 7104 旧文件、8191 handle 退休；原件与来源事实保持 |
 | S6 DB 收缩与收尾 | complete | 1490530 旧 span 删除；DB 3055841280→222408704 B；说明/控制/短 smoke 已发布，精确 CI 绿 |
@@ -101,6 +103,8 @@ TDD 框住具体公开行为。只在 N4 A/B/C、存储迁移等大节点集中�
 历史卡只解释已做工作，不能将“待测试/待并线/下一步”的旧文字恢复成当前门。
 
 ## Next Step
+
+**当前唯一下一动作：收口两消费者已实证的下载日重复限制。** 见[日期合同实施单](final_consumer_asof_alignment_2026-10-07.md)和[当前RED/提案GREEN收据](harness_lanes/results/final_consumer_asof_audit_2026-10-07.json)。由于PWF此前约束外仓owner只读，已请求用户明确隔离worktree落地或交owner；答复前不写RF/StockWiki。七自身测试/提案根恢复absent，只留小收据/diff及两互斥施工卡。下方deadline及原业务节点已完成不再重复。
 
 准备时间预算缺口已收口：[窄幅实施单](final_batch_deadline_closeout_2026-10-07.md)，7aa88ae/精确CI73秒全绿。下一继续下述完整目标核查，重点逐项核当前跨仓公开接口和已交付合同覆盖；不重跑已绿业务全九、付费模型或本次deadline节点。StockWiki当前3fe5008另有独立项目推进，接口核查只读，不改IQS/owner树；RF6e6b817a、FF758e8f4、ET2b9fb84未变。
 

@@ -1,0 +1,242 @@
+{
+  "schema_version": "current-consumer-asof-audit/1",
+  "status": "current_consumers_red_isolated_proposal_green_not_merged",
+  "cwp_head": "848cacf7e93345bebf10e03483b01524a531da04",
+  "rf_head": "6e6b817a1a6e4567293a4dcb835815f3be508a03",
+  "stockwiki_head": "3fe5008c1ea18c363296121b8b0ee3a7b2db2212",
+  "red": {
+    "passed": 4,
+    "failed": 2,
+    "seconds": 25.36,
+    "cases": [
+      {
+        "consumer": "rf",
+        "case": "early_download",
+        "as_of": "2026-09-01",
+        "published_date": "2026-08-01",
+        "retrieved_at": "2026-08-02T00:00:00Z",
+        "producer_code": 0,
+        "consumer_code": 0,
+        "consumer_diagnostic": null,
+        "source_replay_status": "verified"
+      },
+      {
+        "consumer": "rf",
+        "case": "future_publication",
+        "as_of": "2026-09-01",
+        "published_date": null,
+        "retrieved_at": null,
+        "producer_code": 2,
+        "consumer_code": 2,
+        "consumer_diagnostic": {
+          "reason": "source_after_as_of",
+          "schema_version": "revenue-narrative-refusal/1",
+          "status": "blocked"
+        },
+        "source_replay_status": null
+      },
+      {
+        "consumer": "rf",
+        "case": "late_download",
+        "as_of": "2026-09-01",
+        "published_date": "2026-08-01",
+        "retrieved_at": "2026-09-02T00:00:00Z",
+        "producer_code": 0,
+        "consumer_code": 2,
+        "consumer_diagnostic": {
+          "reason": "source_after_as_of",
+          "schema_version": "revenue-narrative-refusal/1",
+          "status": "blocked"
+        },
+        "source_replay_status": "verified"
+      },
+      {
+        "consumer": "stockwiki",
+        "case": "early_download",
+        "as_of": "2026-09-01",
+        "published_date": "2026-08-01",
+        "retrieved_at": "2026-08-02T00:00:00Z",
+        "producer_code": 0,
+        "consumer_code": 0,
+        "consumer_diagnostic": null,
+        "source_replay_status": "verified"
+      },
+      {
+        "consumer": "stockwiki",
+        "case": "future_publication",
+        "as_of": "2026-09-01",
+        "published_date": null,
+        "retrieved_at": null,
+        "producer_code": 2,
+        "consumer_code": 2,
+        "consumer_diagnostic": {
+          "error_code": "producer_refused",
+          "reason": "source_after_as_of"
+        },
+        "source_replay_status": null
+      },
+      {
+        "consumer": "stockwiki",
+        "case": "late_download",
+        "as_of": "2026-09-01",
+        "published_date": "2026-08-01",
+        "retrieved_at": "2026-09-02T00:00:00Z",
+        "producer_code": 0,
+        "consumer_code": 2,
+        "consumer_diagnostic": {
+          "error_code": "source_after_as_of"
+        },
+        "source_replay_status": "verified"
+      }
+    ]
+  },
+  "proposal_green": {
+    "passed": 6,
+    "failed": 0,
+    "seconds": 25.17,
+    "cases": [
+      {
+        "consumer": "rf",
+        "case": "early_download",
+        "as_of": "2026-09-01",
+        "published_date": "2026-08-01",
+        "retrieved_at": "2026-08-02T00:00:00Z",
+        "producer_code": 0,
+        "consumer_code": 0,
+        "consumer_diagnostic": null,
+        "source_replay_status": "verified"
+      },
+      {
+        "consumer": "rf",
+        "case": "future_publication",
+        "as_of": "2026-09-01",
+        "published_date": null,
+        "retrieved_at": null,
+        "producer_code": 2,
+        "consumer_code": 2,
+        "consumer_diagnostic": {
+          "reason": "source_after_as_of",
+          "schema_version": "revenue-narrative-refusal/1",
+          "status": "blocked"
+        },
+        "source_replay_status": null
+      },
+      {
+        "consumer": "rf",
+        "case": "late_download",
+        "as_of": "2026-09-01",
+        "published_date": "2026-08-01",
+        "retrieved_at": "2026-09-02T00:00:00Z",
+        "producer_code": 0,
+        "consumer_code": 0,
+        "consumer_diagnostic": null,
+        "source_replay_status": "verified"
+      },
+      {
+        "consumer": "stockwiki",
+        "case": "early_download",
+        "as_of": "2026-09-01",
+        "published_date": "2026-08-01",
+        "retrieved_at": "2026-08-02T00:00:00Z",
+        "producer_code": 0,
+        "consumer_code": 0,
+        "consumer_diagnostic": null,
+        "source_replay_status": "verified"
+      },
+      {
+        "consumer": "stockwiki",
+        "case": "future_publication",
+        "as_of": "2026-09-01",
+        "published_date": null,
+        "retrieved_at": null,
+        "producer_code": 2,
+        "consumer_code": 2,
+        "consumer_diagnostic": {
+          "error_code": "producer_refused",
+          "reason": "source_after_as_of"
+        },
+        "source_replay_status": null
+      },
+      {
+        "consumer": "stockwiki",
+        "case": "late_download",
+        "as_of": "2026-09-01",
+        "published_date": "2026-08-01",
+        "retrieved_at": "2026-09-02T00:00:00Z",
+        "producer_code": 0,
+        "consumer_code": 0,
+        "consumer_diagnostic": null,
+        "source_replay_status": "verified"
+      }
+    ]
+  },
+  "patches": {
+    "stockwiki": {
+      "path": "stockwiki/_narrative_bundle.py",
+      "before": "    if iso_date(manifest[\"published_date\"]) > cutoff or utc_time(manifest[\"retrieved_at\"]).date() > cutoff:\n",
+      "after": "    utc_time(manifest[\"retrieved_at\"])  # Validate metadata; download time is not the public-information cutoff.\n    if iso_date(manifest[\"published_date\"]) > cutoff:\n",
+      "proposal_sha256": "e54d784cae6ca1902fa9e3c7217d5c85e4f61ee52f94df968aa8a707ab118e0c"
+    },
+    "rf": {
+      "path": "scripts/company_wiki_narrative_contracts.py",
+      "before": "    _require(_utc(manifest[\"retrieved_at\"]).date() <= cutoff, \"source_after_as_of\")\n",
+      "after": "    _utc(manifest[\"retrieved_at\"])  # Validate metadata, not local collection availability.\n",
+      "proposal_sha256": "7e074ed3334b8095ef1dfb6c40c670acc221e5757accd0df2522e90f41e27d9a"
+    }
+  },
+  "proof": "Same formal CWP publication and consumer CLIs, fixed dates; only independent copies changed. Not a live vendor or corpus-quality measurement.",
+  "protected": {
+    "config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+    "config\\source_acquisition.yaml": "3609e707466eeb3e0f685e14f2637c6afa39ba900edef1be4814433a43300a01",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\daily_alert.jsonl": "0aee073f56c133786365ab96899edf4d91c0f9e1a0e13ab61b2a6bffd8316270",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_alert.jsonl": "b617b0b00ff1a758b5b46299e3e5db3115f56efd90d212154abe988e5ea9fee5",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_manifest.json": "0d55cb8c81f12b663e330819da3037bb69ce8564ac41a686b578a99f78f948bf"
+  },
+  "protected_unchanged": true,
+  "owner_code_modified": false,
+  "raw_modified": false,
+  "supplier_calls": 0,
+  "errors": [
+    "Initial six fixture errors dict/to_dict were not product RED.",
+    "First isolated proposal started before export terminal; incomplete CLI resources also lacked committed provider config, yielding 3 environment failures. Waited for export completion, supplied committed config, then same six cases GREEN."
+  ],
+  "remaining": "Need authorized RF/StockWiki owner integration and responsibility tests; CWP cannot label this resolved until current consumers pass.",
+  "cleanup": [
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\fca-r1",
+      "deleted_bytes": 0,
+      "after_absent": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\fca-r2",
+      "deleted_bytes": 0,
+      "after_absent": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\fca-g1",
+      "deleted_bytes": 0,
+      "after_absent": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\fca-g2",
+      "deleted_bytes": 0,
+      "after_absent": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\fca-report",
+      "deleted_bytes": 10664,
+      "after_absent": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\fca-proposal-report",
+      "deleted_bytes": 10504,
+      "after_absent": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\fca-proposal",
+      "deleted_bytes": 1746008,
+      "after_absent": true
+    }
+  ],
+  "cleanup_bytes": 1767176
+}
