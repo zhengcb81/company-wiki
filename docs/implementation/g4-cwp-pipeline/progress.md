@@ -45,10 +45,19 @@
 
 ### 测试执行记录（汇总）
 
-| # | 命令 | exit | passed | failed | seconds |
-|---|------|------|--------|--------|---------|
-| 1 | `pytest tests/unit/test_g4_pipeline_retirement.py tests/unit/test_deployment.py`（RED） | 1 | 27 | 17 | 5 |
-| 2 | 集中责任命令（卡 §6） | 0 | 185 | 0 | 31 |
-| 3 | `pytest tests/unit` | 0 | 1916 | 0 | 127 |
-| 4 | `pytest tests/contract/test_legacy_caller_reachability.py` | 0 | 26 | 0 | 3 |
-| 5 | `pytest tests/integration/test_g4_pipeline_retirement_e2e.py` | 0 | 13 | 0 | 3 |
+| # | 命令 | exit | passed | failed | seconds | 收据 |
+|---|------|------|--------|--------|---------|------|
+| 1 | `pytest tests/unit/test_g4_pipeline_retirement.py tests/unit/test_deployment.py`（RED） | 1 | 27 | 17 | 5 | `.planning/g4-cwp-pipeline/red_receipt.txt` |
+| 2 | 集中责任命令（卡 §6） | 0 | 185 | 0 | 31 | `.planning/g4-cwp-pipeline/consolidated_receipt.txt` |
+| 3 | `pytest tests/unit` | 0 | 1916 | 0 | 127 | `.planning/g4-cwp-pipeline/unit_suite_receipt.txt` |
+| 4 | `pytest tests/contract/test_legacy_caller_reachability.py` | 0 | 26 | 0 | 3 | `.planning/g4-cwp-pipeline/green_misc_receipt.txt` |
+| 5 | `pytest tests/integration/test_g4_pipeline_retirement_e2e.py` | 0 | 13 | 0 | 4 | `.planning/g4-cwp-pipeline/green_misc_receipt.txt` |
+| 6 | ruff(CI scope)+compileall+config_doctor(--structure-only)+host_assumption_guard | 0 | — | 0 | — | `.planning/g4-cwp-pipeline/green_misc_receipt.txt` |
+
+### 提交记录
+
+| commit | 角色 | 说明 |
+|--------|------|------|
+| `306ecf9b2ef17da6952512226a9f623c107eff08` | implementation | Retire frozen pipeline gate family and stub full_pipeline entry |
+| `4797a601f4e28ae432f6a7c1bd6e990d25117552` | handoff 文档 | Document G4-CWP-PIPELINE retirement handoff |
+| （本文件与 handoff.json 所在提交） | 交接数据 | handoff.json 不写自身尚未生成的 SHA（按卡） |
