@@ -1,6 +1,6 @@
 {
   "schema_version": "g2-core-implementation-acceptance/1",
-  "status": "local_accepted_pending_commit_exact_ci",
+  "status": "published_exact_ci_passed_core_only",
   "observed_at_utc": "2026-10-07T08:55:13.092845+01:00",
   "scope": "current CWP core only; not whole G2A/G2, not production summaries",
   "implemented": [
@@ -134,6 +134,10 @@
     "auto_agent_absent": true,
     "final_fix_temp_absent": true,
     "raw_deleted": 0,
-    "accounting": "Temporary test copies only; not production space savings"
-  }
+    "accounting": "Temporary test copies only; not production space savings",
+    "final_publication_helper_absent": true
+  },
+  "published_code_head": "93ac5a534e24ecbf9e1fc873f88bd106278f2fd6",
+  "exact_ci_receipt": "g2_core_exact_ci_2026-10-07.json",
+  "published_at_utc": "2026-10-07T09:01:52.072205+01:00"
 }

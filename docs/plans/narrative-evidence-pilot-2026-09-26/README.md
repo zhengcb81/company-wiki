@@ -2,6 +2,8 @@
 
 2026-10-07本次按用户要求全面补漏门禁、更新实施计划并收口当前责任代码；目标服务实读paused，未自动恢复。恢复后先G2（含SW/StockQA日常门P0-B），再生产落地；已完成的有界验收不等于整个计划完成。
 
+八仓/14组补漏及优先顺序已写细；核心93ac5a5已正常推送，精确CI37590638806全部步骤绿90秒。下一恢复首项G2-13 Store轻初始化TDD；其他G2/生产计划仍待完成。
+
 1. [task_plan.md](task_plan.md)：唯一当前目标、G2→R2→R3→R4→R5顺序、owner、完成条件、下一步。
 2. [findings.md](findings.md)、[progress.md](progress.md)：当前事实、真实验收与错误记录。
 3. [n4_production_batch_implementation.md](n4_production_batch_implementation.md)：scope/预算/model/CLI/恢复/空间的详细接口；原三个节点已验收历史，不重新执行。

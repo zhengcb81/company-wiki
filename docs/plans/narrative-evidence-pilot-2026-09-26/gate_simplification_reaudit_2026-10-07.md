@@ -34,7 +34,7 @@ HEAD/文件 SHA/工作树/现场 policy 原文见[只读审计收据](harness_la
 
 ## 3. 漏项清单：按实际影响排序
 
-### G2-00 / P0：现场 canary 与默认读取路径（现场已迁移；默认代码待发布）
+### G2-00 / P0：现场 canary 与默认读取路径（现场已迁移；核心93ac5a5已推）
 
 **原审计确实生效；现已迁移。** `.source_catalog/runtime_policy.json` 原为2026-08 canary，六flag/epoch/cohort/关闭legacy bridge隐藏capture，是G1漏项。现在以已发布2cad90d代码、现有锁/CAS切为264B schema2 steady；16条有效断言保持、17张事实表/222408704B数据库/原件及owner配置不变，同payload重复CAS零写。[现场收据](harness_lanes/results/g2_steady_production_migration_2026-10-07.json)明确旧视图是迁移后用原小snapshot及同一只读DB重建，没有伪造迁移前采样或完整备份。
 
@@ -42,11 +42,11 @@ HEAD/文件 SHA/工作树/现场 policy 原文见[只读审计收据](harness_la
 
 **实施：**先核实际无活跃 writer/AUTO lease；用现有 `CatalogOperationLock` 和 `save_runtime_policy_cas`，比较旧 snapshot SHA/current root policy，再应用[已生成 steady payload](harness_lanes/results/r2_steady_runtime_policy_payload_2026-10-07.json)。旧小配置已在[预检](harness_lanes/results/r2_canary_retirement_preflight_2026-10-07.json)保存，不备份整个库。保留 activation journal，旧 schema 仅历史解码/迁移兼容；默认新库也应采用 steady，不能迁完旧库后新库又默认 canary/v1 控制面。
 
-**完成条件：**现场部分已满足上述小收据；S07 security_id仍是旧公司名标签，期间/公开日修正属于R2，不能声称metadata全部完备。另用新库真实读反例验证无snapshot默认steady：2个语义RED→89项责任GREEN；显式schema1兼容保留。默认实现及readpin尚未提交，须与G2A代码一同发布，不能迁完旧库后新库又默认v1。
+**完成条件：**现场部分已满足上述小收据；S07 security_id仍是旧公司名标签，期间/公开日修正属于R2，不能声称metadata全部完备。另用新库真实读反例验证无snapshot默认steady：2个语义RED→89项责任GREEN；显式schema1兼容保留。默认实现及有效readpin核心已在93ac5a5正常提交推送，精确CI37590638806全部步骤绿90秒；01b与13等pending不由本子集替代。
 
 ### G2-01 / P0：读取指纹仍绑定整个配置
 
-**正在生效，造成多余失效；不是目录权限。** `source_read_policy.py` 对 `asdict(CatalogConfig)` 全量 hash；`test_source_read_policy` 仍要求改变 `privacy_class` 就改变读取 pin。RootSpec 还保留 privacy/cohort 等兼容标签；取消权限后仍可使任务/引用失效，G1“只保留有效读取维度”并未彻底兑现。
+**审计前实际缺陷；有效字段投影本次已修，01b范围仍pending。** 原`source_read_policy.py`对`asdict(CatalogConfig)`全量hash，旧测试要求privacy_class改变pin；取消权限后兼容标签仍使任务失效。93ac5a5已实现schema2显式有效投影，不再要求模型或用户维持这些标签；全roots/DB位置范围仍在01b处理，不能把本次核心修复等同完全路径解耦。
 
 **实施：**先逐字段追踪 reader/resolver/adapter 的实际使用，形成 `effective_read_policy` 显式投影；只纳入会改变本次读取/来源准入的字段。检查外层 RootPolicy hash、export/read_request/批次 event hash，防止删一层仍间接绑定标签。privacy_class 不再当权限；steady 不再受 cohort 标签影响。旧 v1 下真实影响可见性的 cohort 仅留历史兼容，不能在 steady 内偷偷复活。
 
@@ -62,7 +62,7 @@ HEAD/文件 SHA/工作树/现场 policy 原文见[只读审计收据](harness_la
 
 ### G2-02 / P0：AUTO 普通故障仍转“人工阻塞”
 
-**当前 registry/worker/store 仍生效。** `registry.py` 的 `human_errors` 包括 PARSER_INCOMPLETE、SOURCE_UNAVAILABLE、MODEL_NOT_CONFIGURED、LOCATOR_REPLAY_FAILED，`retry.py` 可转 `BLOCKED_HUMAN`；这不是发现了审批收据要求，但错误语义继续误导接手者“要人工放行”。
+**审计前实际缺陷；本次93ac5a5已改机器结果/版本恢复，精确CI37590638806全部步骤绿90秒。** 原registry把PARSER_INCOMPLETE、SOURCE_UNAVAILABLE、MODEL_NOT_CONFIGURED、LOCATOR_REPLAY_FAILED归人工阻塞，普通故障被误导为需放行。新任务不产生BLOCKED_HUMAN，历史enum可读；机器终态/有界真实IO重试、失败父任务收敛、handler1.1.0/AUTO5小binding和终态零writer恢复已集中验证，不要求人工签收。G2-13初始化深检仍独立pending。
 
 **实施：**统一配置/输入缺失、可重试 I/O/限流、永久数据错误三类机器结果。配置/输入问题返回明确 reason 和需要修正的字段；修正后由正常事件/显式 retry 继续，不要求人工签收。可重试故障有界重试，坏 SHA/无效 locator 仍失败。新工作不产生 `blocked_human`；旧 enum/历史记录可读，不为改名字丢掉 usage、lease/outbox 或创建第二任务库。先查 handler 真实 outcome 和 Store 迁移，不能只改 UI 文案。
 
@@ -152,7 +152,7 @@ StockInfoDLSimple 的 provider host、include/exclude 是来源发现和过滤�
 
 ### G2-11 / P0：摘要质量标记由模型重复维护并硬校验
 
-**当前摘要校验生效，属于多余状态门，不是人工审批。** `narrative_evidence.validate_summary_claim` 调 `_validate_claim_review_status`：证据带 locator_unstable 时要求模型同时写 claim.needs_review=true 和 draft.status=needs_review；claim.needs_review 与草稿状态不一致也抛 SummaryValidationError。R6允许局部恢复，但这种标签矛盾仍会丢弃对应内容；只有一个相关claim时可能整稿失败。证据事实和质量标记是程序掌握的信息，不应要求模型重复正确抄写两份状态。
+**审计前实际状态门；单处程序投影本次93ac5a5已发布，精确CI37590638806全部步骤绿90秒。** 原_validate_claim_review_status要求模型重复维护claim.needs_review/draft.status，矛盾可能丢有效内容。现在由project_summary_quality根据真实引用质量/角色/不确定性/局部恢复诊断推导；旧字段仅兼容，真实SHA/locator/language/未知引用/角色错误仍拒绝。148责任项与配置真实loopback/resume已绿，不重复付费模型。
 
 **实施：**解析后统一根据当前 evidence quality/replay 与保留claims推导质量诊断/草稿状态，保留模型 uncertainty 作为内容诊断；不因可确定的标签不一致拒绝有效内容。schema/来源SHA/原语言/引用ID/发言角色/真实locator仍由自动反例严格验证；locator确实无法回放的内容仍剔除，不靠改成needs_review放过坏引用。质量状态需要对外展示时由单处投影生成，旧字段兼容读，不添加review receipt。
 
@@ -194,8 +194,8 @@ MAIN 是唯一集成与生产变更负责人。此表是施工顺序，不是新
 
 | 顺序 | 工作 | 输出/责任 | 状态 |
 |---|---|---|---|
-| 1 | G2-00 steady 现场迁移/默认新库收敛 | 当前policy、旧小snapshot、真实读和16断言 | 现场complete；默认路径TDD绿、待代码发布 |
-| 2 | G2-01 effective read pin + G2-02 AUTO 机器错误/版本恢复 + G2-11派生质量状态 | 版本化读取语义、同AUTO单库恢复、单处质量诊断 | in_progress；核心责任绿，批次恢复及集中发布待完成 |
+| 1 | G2-00 steady现场迁移/默认新库收敛 | 当前policy、旧小snapshot、真实读和16断言 | 现场complete；默认核心93ac5a5已推，精确CI37590638806全部步骤绿90秒 |
+| 2 | G2-01 effective read pin + G2-02 AUTO机器错误/版本恢复 + G2-11派生质量状态 | 版本化读取语义、同AUTO单库恢复、单处质量诊断 | 核心责任/E2E已收口、93ac5a5已推，精确CI37590638806全部步骤绿90秒；不等于完整A |
 | 3 | G2-13日常Store轻初始化 → G2-01b精确来源scoped pin | 去除隐含整库检查/补种及无关root对精确批次的阻断 | pending/P0；先于R2，沿用同一G2A集中节点 |
 | 4 | G2-06 StockWiki/G2-10 StockQA日常工程门 + G2-12 CWP/FF统一latest单请求 | 各仓独占目录，MAIN接线；共享ensure事务/唯一intent、工具/CI/hook/默认配置同步 | pending/P0-B；本次外仓只读，后续隔离施工，不与owner目录重叠 |
 | 5 | G2-03/04/07 CWP旧家族/公开维护/检查清单、G2-05 RF可选工具、G2-08安装/v1、G2-09能力文案 | CLI/import/package/清单/安装及指导同步；不启用raw破坏入口 | pending/P1；在上述P0/P0-B后，不顺序恢复旧签收 |
@@ -235,4 +235,4 @@ MAIN 是唯一集成与生产变更负责人。此表是施工顺序，不是新
 
 ## Next Step
 
-**收口当前核心代码：默认steady、有效pin、机器错误、程序质量及版本化终态恢复责任/E2E→正常提交推送→精确代码CI；更新PWF真实状态。** 全G2A还含Store轻初始化/scoped pin/旧家族清理，不能用核心子集代替。下一恢复时先G2-13/01b及P0-B两仓日常门、CWP/FF latest单请求，再P1家族/工程清单、集中G2A/B，之后回R2。目标服务paused，不自动恢复旧长跑或付费批次，不把审计/核心修复冒称全面完成。
+**本次审计与核心93ac5a5已正常推送、精确CI37590638806全部步骤绿90秒。** 全G2A还含Store轻初始化/scoped pin/旧家族清理，不能用核心子集代替。目标服务paused；明确恢复后先G2-13/P0轻初始化TDD→01b→P0-B两仓日常门和CWP/FF latest单请求→P1家族/工程清单→集中G2A/B→R2。不重跑已绿核心长包、不自动启动付费批次，不把审计/核心修复冒称全面完成。

@@ -1,6 +1,14 @@
 # Progress：激进简化实施
 
-## 最新审计补漏与当前责任施工（2026-10-07，覆盖下方旧状态）
+## 当前交接：2026-10-07 G2审计与核心发布已收口
+
+核心93ac5a534e24ecbf9e1fc873f88bd106278f2fd6已正常commit/push；精确CI37590638806 attempt1/job112691017160全步骤success，07:57:58Z→07:59:28Z共90秒。正常静态commit和短pre-push绿；最终远端全Unit和短合同绿。本轮全面机制审计八仓/14组及scoped pin，六主PWF/审计补充/核心/现场/精确CI收据已同步，不冒称whole G2A或whole G2完成。
+
+当前真实剩余顺序G2-13/P0轻初始化→01b精确读pin→06/10日常工程门和12 latest单请求/P0-B→P1旧家族/工程/安装→集中A/B→R2/R3/R4/R5。目标服务paused，明确恢复后的唯一首项是13的SQL trace/损坏反例TDD。原件九份、生产DB、五owner/config和steady小配置指纹保持，raw删除/paid/provider POST/外仓代码写均0；测试根恢复absent，未做完整备份恢复。CWP仅owner source_acquisition.yaml未提交，SHA3609…保留。
+
+以下是每阶段真实时点记录，旧“active/未迁移/待发布”不恢复为当前状态。最后一次源码提交前所有写者freeze；前序文档commit抢先stash的协调疏漏已记录并纠正。
+
+## 本轮审计补漏与责任施工过程（历史时点）
 
 8ffd3f0审计计划已正常commit/push。后续三内部子任务独占CWP有效pin、AUTO错误/版本恢复、摘要质量文件；外仓仅只读审查，MAIN独占总PWF/生产，未给用户另开harness。G2新增完整同步写集：SW pyproject fail_under73/hook间接600/1000/AGENTS；StockQA always_run联网pip-audit+pytest、默认coverage XML/HTML、Black/mypy/pylint异义及bat；RF final_ratchet/coveragerc/旧session_checklist；CWP公开archive/prune缺now、focus代码指纹、duplicates只读却construct Store/历史journal保留、旧部署writer说明。SW/StockQA日常门升P0-B，仍仅两个大节点。
 
@@ -12,7 +20,7 @@
 
 二次审计新增G2-12：真实CWP/FF latest分叉旧binding/snapshot/hash/expiry签收，exact已简化、latest仍不能自动补缺；新无snapshot稳态还被close-gap拒绝。完整service/CLI/FF/安装/预算与并发反例写入P0-B，不顺手扩AUTO下载。新增[G2补充审计收据](harness_lanes/results/g2_gate_reaudit_followup_2026-10-07.json)，原审计收据保持历史时点。来源pin仍catalog-wide的精确run过度失效列G2-01b pending。当前CI范围Ruff全绿、45源mypy绿（最终批次恢复后需核最终写集），0paid/外仓写/原件删除；未把本地subset冒称全部G2A或新提交远端CI。
 
-## 当前恢复点：2026-10-07 G2全面审查与计划提升
+## 首次审计恢复点：2026-10-07 G2全面审查（历史时点）
 
 按用户最新要求完成八仓当前门禁入口/配置/hook/CI与两FF安装技能只读复核，CodeGraph查结构、literal查实际错误/配置，保存[g2审计](harness_lanes/results/g2_gate_reaudit_2026-10-07.json)。12组结论进入[G2独立细则](gate_simplification_reaudit_2026-10-07.md)：P0现场steady、有效pin、AUTO机器错误、派生质量状态；P1旧Pipeline/公开维护、RF/StockWiki/StockQA工程工具、FF兼容安装；ET和其他provider保留能力边界，不强行制造改造。同步总task_plan/全部PWF/R2/G1旧收口/46项/README/findings导航，覆盖历史全面完成与过宽无caller结论。只两个大节点，先TDD，测试独立根恢复，没有新签收。
 
@@ -1288,3 +1296,5 @@ R2系统性节点：有限登记与全库发现分离，三adapter不重复算SH
 最终修复已freeze：4项有效RED4fail/46pass→四责任文件及实际版本恢复CLI78pass/25.82秒；补existing AUTO超时负例、原库字节保持、work不创建。先纯来源事实/实际SHA/receipt/deadline，之后访问AUTO；恢复复用同轮事实，不二次准备。schema5三旧fixture仍保留旧字段位置/旧owner未绑定/全部历史账/binding NULL反例。MAIN当前真实CLI双语言+零模型skip2pass/14.40秒，最终CI范围Ruff绿；测试未删、deadline未放宽，全Unit仅首轮一次，后续精确CI才证明整套最终绿。
 
 四主PWF只读交叉审查修正恢复顺序/paused与历史active冲突、R2重复施工文字，并补齐01b版本迁移、SW实际framework文件/CWP入口/CI/hook清单/两安装副本同步写集；commit仅静态，N4历史节点不复跑。本轮另有PowerShell rg路径通配符无效、默认沙箱读自身tmp拒绝、gh不在PATH、benchmark local.json未创建的检查失误，均未写生产；后续用-g目录匹配、实际OS账号和公开GitHub Actions API，不创建本机根配置。不将API/工具缺失当项目数据错误。
+
+源码所有写者freeze后正常commit 93ac5a534e24ecbf9e1fc873f88bd106278f2fd6，静态pre-commit全绿，owner配置stash恢复且SHA3609…保持。正常短pre-push绿并推origin/master（含前序审计文档294cacf），精确CI37590638806正在执行；不能拿2cad90d旧CI替代。九原件/DB完整bytes/五保护文件/steady264B现场指纹复核全保持。MAIN最后五自身tmp路径恢复absent、清70425437B，前九路径33984318B另计；AUTO18独占根与最后窄修根absent。这些只是临时测试副本，不计生产清理收益。源码/root only owner config dirty，paid POST0。

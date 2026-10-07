@@ -53,5 +53,7 @@
   "catalog_store_constructed": false,
   "paid_provider_posts": 0,
   "production_write_statements": 0,
-  "scope": "S07 actual raw through new exact SourceReader; no metadata correction, extraction/model/final publication claim"
+  "scope": "S07 actual raw through new exact SourceReader; no metadata correction, extraction/model/final publication claim",
+  "validated_reader_implementation_published_as": "93ac5a534e24ecbf9e1fc873f88bd106278f2fd6",
+  "exact_ci_receipt": "g2_core_exact_ci_2026-10-07.json"
 }

@@ -4,7 +4,7 @@
 
 用户要求完成全部PWF计划内容并逐步实施。代码2cad90d/CI37582474369是前一发布，审计计划8ffd3f0已推；RF e241389、StockWiki9f552a6、StockQA最新6a9ff138。先前16项有界验收继续有效。目标服务最新实读paused，本次按明确审计补漏任务收口，恢复后继续下列次序。MAIN独占总计划/共享接口/生产/合入，各大节点一次，不增签收或小节点门。
 
-**2026-10-07优先级更新：**先[G2全面补漏](gate_simplification_reaudit_2026-10-07.md)，再R2/R3/R4/R5。现场steady小配置迁移已完成；默认读取/有效pin/AUTO错误/摘要质量核心责任绿，版本恢复与发布待收口。SW/StockQA日常全测/联网hook/隐藏阈值升P0-B，RF可选发布/会话强制清单、CWP公开旧CLI/写Store库存与冻结gate家族有具体同步写集。G2只重排，不缩原目标，仍仅两个大节点。R2 metadata/正式生产登记和R3 paid没有执行。
+**2026-10-07优先级更新：**先[G2全面补漏](gate_simplification_reaudit_2026-10-07.md)，再R2/R3/R4/R5。现场steady小配置迁移已完成；默认读取/有效pin/AUTO错误/摘要质量/版本恢复核心93ac5a5已推，精确CI37590638806全部步骤绿90秒。Store轻初始化/scoped pin升P0，SW/StockQA日常全测/联网hook/隐藏阈值、CWP/FF latest统一请求升P0-B，RF可选发布/会话强制清单、CWP公开旧CLI/写Store库存与冻结gate家族有具体同步写集。G2只重排，不缩原目标，仍仅两个大节点。R2 metadata/正式生产登记和R3 paid没有执行。
 
 计划文件以[逐份目录及SHA](harness_lanes/results/all_pwf_inventory_2026-10-07.json)登记。旧执行卡W0–W7、F/D卡、各并行卡与其后继方案按下表对账；不能重复跑旧命令恢复已删除全文，不能将旧审批流程或唯一raw删除重新启用。当前用户原件不丢、Dayu零代码修改、IQS独立项目不动优先。
 

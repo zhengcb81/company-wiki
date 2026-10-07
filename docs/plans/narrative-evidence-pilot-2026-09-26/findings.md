@@ -1,6 +1,14 @@
 # Findings：当前事实与待验证项
 
-## 最新补漏与实际状态（覆盖下方同日旧恢复点）
+## 当前交接：审计收口与真实剩余（2026-10-07）
+
+八仓现行入口/配置/工程工具/两安装技能全面机制审计完成，14组G2漏项及01b范围问题均写入[G2详细实施单](gate_simplification_reaudit_2026-10-07.md)。当前核心代码93ac5a5正常推master，精确CI37590638806 attempt1/job112691017160全部步骤成功，job90秒；默认steady、有效字段pin、机器错误/有界IO、派生质量、版本化终态零writer/零model恢复已发布。首轮全Unit1873pass/4fail含一个真实deadline回归，TDD修复及实际恢复78pass、双语言/skip实际CLI2pass；最终远端全Unit/短合同绿，未删除真正失败反例。
+
+下一唯一施工是G2-13/P0轻量构造与显式深检分离，再01b精确读pin、SW/StockQA日常门及CWP/FF latest/P0-B，再其余P1/两个集中节点，之后R2/R3/R4/R5。隐含整库PRAGMA与seed、全root精确绑定、latest旧binding/hash/TTL和工程阈值均仍pending；此次核心发布不代表全G2完成。实际耗时未知的扫描只报告调用次数，不编造生产提速。
+
+现场只迁runtime policy到steady264B；16断言/17事实表/222408704B DB及九原件、五配置/owner指纹保持。S07旧证券名/NULL公开日、生产final0/R2/R3仍未落地。本次paid/provider POST0、外仓写0、raw删除0；模型/预算照既有配置。目标服务实读paused，明确恢复后继续，不自动付费。以下是逐阶段时点记录，旧active/未迁移/待发布文字不覆盖本节与task_plan。
+
+## 本轮补漏调查过程（时点记录）
 
 已在G2详细单补足代码→公开CLI→hook/CI→默认配置→AGENTS/会话文档的完整清理写集，而非仅搜gate关键字。SW/StockQA正在日常生效的全套/联网/隐藏阈值升P0-B，先于生产来源和摘要。RF可选工程工具仍P1，现日常11精选包不强行改。StockQA实读HEAD已到6a9ff138，staged/unstaged0、untracked7，原审计34493d5仅历史基线。
 
@@ -16,7 +24,7 @@ AUTO根因包括：普通错误落人工语义、catalog暂时不可用误判永
 
 新增G2-12是当前功能链漏项：CWP exact单intent可下载，latest即使allow_download仍只回GAP；公开close-gap强制binding+snapshot/hash/expiry，新steady无snapshot被拒；FF v2不调用该旧协议，latest自动补缺断开。旧receipt无签名不新增真实性，四次metadata discovery和TTL锁键浪费。已列P0-B统一ensure事务/预算与FF单入口的完整施工写集/离线反例，复用真资源、SHA、身份、公开日、幂等，不再保留签收文件。AUTO无该下载caller，Worker写集不随此扩张。仅观测字典授权词不是活跃门，凭证脱敏继续保留。
 
-## 当前事实：2026-10-07 G2全面补漏优先
+## 首次审计基线：2026-10-07 G2全面补漏（历史时点）
 
 八仓当前入口/运行配置/工程检查及两份安装FF技能只读复核完成，结论和实施细节见[G2](gate_simplification_reaudit_2026-10-07.md)/[固定收据](harness_lanes/results/g2_gate_reaudit_2026-10-07.json)。发现：live旧canary未迁移；CatalogConfig全字段pin仍绑定privacy/cohort兼容标签；AUTO普通解析/配置/来源/locator故障仍可转blocked_human；公开旧archive/prune/confirmation CLI与可选Dropbox平安review特例仍在；RF可选发布绑197场景/三HEAD/backup并有check写副作用；StockWiki要求commit前全套和73/40覆盖率；StockQA CI87与本地60不一致、tee无pipefail可能假绿；CWP旧Pipeline冻结但家族/清单未退休；摘要层因模型needs_review与draft状态矛盾拒绝claim，改为程序派生诊断的方案列P0。区别当前有效、可选和冻结历史，不把所有review字样当权限。
 

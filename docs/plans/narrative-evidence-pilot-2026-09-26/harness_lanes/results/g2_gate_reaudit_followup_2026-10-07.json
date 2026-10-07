@@ -15,7 +15,7 @@
     {
       "id": "G2-00",
       "priority": "P0",
-      "status": "production_steady_applied_default_code_local_green",
+      "status": "production_steady_applied_default_code_published",
       "scope": "CWP runtime policy and default public reader",
       "implementation": "Lock/CAS, 16 assertions retained, 17 fact tables/raw/owner hashes unchanged",
       "receipt": "g2_steady_production_migration_2026-10-07.json"
@@ -23,14 +23,14 @@
     {
       "id": "G2-01",
       "priority": "P0",
-      "status": "local_green_remaining_scoped_pin_pending",
+      "status": "core_published_scoped_pin_pending",
       "scope": "CWP effective read fingerprint + SourceReader",
       "remaining": "Global roots/physical DB location and legacy reuse selection still bind exact SourceRef batch identity. Distinguish query selection and scoped actual reads; no historical pin re-signing."
     },
     {
       "id": "G2-02",
       "priority": "P0",
-      "status": "local_accepted_pending_publication",
+      "status": "core_published_exact_ci_passed",
       "scope": "CWP existing AUTO errors and persistent runs",
       "remaining": "Core versioned terminal recovery and WAL fix accepted; G2-13 full-scan constructor split remains pending."
     },
@@ -123,7 +123,7 @@
     {
       "id": "G2-11",
       "priority": "P0",
-      "status": "local_green_not_yet_published",
+      "status": "core_published_exact_ci_passed",
       "scope": "CWP derived summary quality",
       "implementation": "Single program projection, model uncertainty retained; actual locator/SHA/role/language validation remains. Prompt1.6.0/request1.3/handlers1.1.0; no public canonical shape expansion."
     },
@@ -151,7 +151,7 @@
     "auto_error_semantics": "111passes30.43s; true zero-writer resume1pass20.10s; final deadline/fixtures78passes25.82s",
     "summary_quality": "148passes, actual configured loopback/resume1pass5.75s",
     "ci_scope_static": "Final Ruff current CI and new E2E scope green; exact CI mypy45 source modules green after deadline fix",
-    "scope_limit": "Core local green does not prove complete G2A, full G2, production summaries or exact new commit CI",
+    "scope_limit": "Core exact CI passed; complete G2A/G2, G2-13/01b, other repositories and production summaries remain pending",
     "final_core": {
       "initial_full_unit_checkpoint": {
         "tests": 1877,
@@ -200,5 +200,8 @@
   "unchanged_protections": "Original raw, actual SHA/identity/period/publication/locator, source-only scope, current paths/ownership, finite budgets/unknown usage, one AUTO lease/generation/outbox, actual schema/types/config/credential redaction",
   "latest_reviewed_at_utc": "2026-10-07T08:55:13.092845+01:00",
   "finding_groups": 14,
-  "core_receipt": "g2_core_implementation_acceptance_2026-10-07.json"
+  "core_receipt": "g2_core_implementation_acceptance_2026-10-07.json",
+  "published_code_head": "93ac5a534e24ecbf9e1fc873f88bd106278f2fd6",
+  "exact_ci_receipt": "g2_core_exact_ci_2026-10-07.json",
+  "published_at_utc": "2026-10-07T08:01:52.073773+00:00"
 }
